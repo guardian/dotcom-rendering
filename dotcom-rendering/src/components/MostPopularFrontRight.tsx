@@ -93,10 +93,13 @@ export const MostPopularFrontRight = ({ heading, trails }: Props) => {
 		.toLowerCase()
 		.replace(' ', '-')}-front-right-container`;
 
+	const dataComponent =
+		heading === 'Most viewed' ? 'most-viewed-right' : 'deeply-read-right';
+
 	return (
 		<section
 			id={containerId}
-			data-component="most-popular-front-right"
+			data-component={dataComponent}
 			css={[
 				containerStyles,
 				heading === 'Deeply read' && absolutePositionStyles,

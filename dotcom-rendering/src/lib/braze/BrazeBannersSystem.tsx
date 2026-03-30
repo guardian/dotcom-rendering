@@ -456,6 +456,9 @@ export const BrazeBannersSystemDisplay = ({
 	const authStatus = useAuthStatus();
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [showBanner, setShowBanner] = useState(true);
+	// Tracks whether banner:open has been dispatched so we only fire banner:close if the open event was sent first.
+	const hasDispatchedOpenRef = useRef(false);
+
 	const [minHeight, setMinHeight] = useState<string>('0px');
 	const [wrapperModeEnabled, setWrapperModeEnabled] =
 		useState<boolean>(false);
@@ -591,10 +594,23 @@ export const BrazeBannersSystemDisplay = ({
 
 	/**
 	 * Dismisses the banner by setting the showBanner state to false, which will remove it from the DOM.
+	 * Also dispatches a banner:close custom event if banner:open was previously dispatched, so that
+	 * commercial code can release the mobile sticky ad slot.
 	 */
 	const dismissBanner = useCallback(() => {
 		setShowBanner(false);
-	}, []);
+		meta.braze.logBannerClick(meta.banner, 'dismiss_button');
+		if (hasDispatchedOpenRef.current) {
+			document.dispatchEvent(
+				new CustomEvent('banner:close', {
+					detail: { bannerId: meta.id },
+				}),
+			);
+		}
+		meta.braze.logCustomEvent('braze_banner_dismissed', {
+			placementId: meta.banner.placementId,
+		});
+	}, [meta.id, meta.braze, meta.banner]);
 
 	/**
 	 * Sets the background and foreground colors for wrapper mode based on a given background color.
@@ -860,11 +876,7 @@ export const BrazeBannersSystemDisplay = ({
 					}
 					break;
 				case BrazeBannersSystemMessageType.DismissBanner:
-					meta.braze.logBannerClick(meta.banner, 'dismiss_button');
 					dismissBanner();
-					meta.braze.logCustomEvent('braze_banner_dismissed', {
-						placementId: meta.banner.placementId,
-					});
 					break;
 			}
 		};
@@ -897,6 +909,7 @@ export const BrazeBannersSystemDisplay = ({
 					detail: { bannerId: meta.id },
 				}),
 			);
+			hasDispatchedOpenRef.current = true;
 
 			// Log the impression with Braze
 			meta.braze.logBannerImpressions([meta.banner.placementId]);

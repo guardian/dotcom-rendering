@@ -46,9 +46,9 @@ export const doHydration = async (
 	const { endPerformanceMeasure: endImportPerformanceMeasure } =
 		startPerformanceMeasure('dotcom', name, 'import');
 	await import(
-		/* webpackInclude: /\.importable\.tsx$/ */
+		/* webpackInclude: /\.island\.tsx$/ */
 		/* webpackChunkName: "[request]" */
-		`../../components/${name}.importable`
+		`../../components/${name}.island`
 	)
 		.then((module) => {
 			/** The duration of importing the module for this island */
@@ -90,7 +90,7 @@ export const doHydration = async (
 			element.dataset.islandStatus = undefined; // remove any island status
 			if (name && error.message.includes(name)) {
 				console.error(
-					`🚨 Error importing ${name}. Components must live in the root of /components and follow the [MyComponent].importable.tsx naming convention 🚨`,
+					`🚨 Error importing ${name}. Components must live in the root of /components and follow the [MyComponent].island.tsx naming convention 🚨`,
 				);
 			}
 			throw error;

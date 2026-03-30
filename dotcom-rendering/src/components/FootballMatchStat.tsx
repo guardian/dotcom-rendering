@@ -85,6 +85,7 @@ const graphCss = css`
 	display: flex;
 	gap: 10px;
 	grid-area: graph;
+	height: ${space[2]}px;
 `;
 
 const barCss = css`
@@ -126,8 +127,10 @@ export const FootballMatchStat = ({
 }: MatchStatProps) => {
 	const Heading: React.ElementType = `h${headingLevel}`;
 	const compactLayout = layout === 'compact';
-	const homePercentage = (homeValue / (homeValue + awayValue)) * 100;
-	const awayPercentage = (awayValue / (homeValue + awayValue)) * 100;
+	const homePercentage =
+		homeValue === 0 ? 0 : (homeValue / (homeValue + awayValue)) * 100;
+	const awayPercentage =
+		awayValue === 0 ? 0 : (awayValue / (homeValue + awayValue)) * 100;
 
 	return (
 		<div
@@ -159,20 +162,24 @@ export const FootballMatchStat = ({
 				{formatValue(awayValue, isPercentage)}
 			</span>
 			<div aria-hidden="true" css={graphCss}>
-				<div
-					css={barCss}
-					style={{
-						'--match-stat-percentage': `${homePercentage}%`,
-						'--match-stat-team-colour': homeTeam.colour,
-					}}
-				></div>
-				<div
-					css={barCss}
-					style={{
-						'--match-stat-percentage': `${awayPercentage}%`,
-						'--match-stat-team-colour': awayTeam.colour,
-					}}
-				></div>
+				{homePercentage > 0 && (
+					<div
+						css={barCss}
+						style={{
+							'--match-stat-percentage': `${homePercentage}%`,
+							'--match-stat-team-colour': homeTeam.colour,
+						}}
+					></div>
+				)}
+				{awayPercentage > 0 && (
+					<div
+						css={barCss}
+						style={{
+							'--match-stat-percentage': `${awayPercentage}%`,
+							'--match-stat-team-colour': awayTeam.colour,
+						}}
+					></div>
+				)}
 			</div>
 		</div>
 	);

@@ -10,7 +10,7 @@ import {
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
-import { FollowWrapper } from './FollowWrapper.importable';
+import { FollowWrapper } from './FollowWrapper.island';
 import { Island } from './Island';
 
 type Props = {

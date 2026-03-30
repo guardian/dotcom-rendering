@@ -50,6 +50,18 @@ type ABTest = {
 	 * See DCR Metrics component for end usage
 	 */
 	shouldForceMetricsCollection?: boolean;
+	/**
+	 * Determines whether the test should be included in Ophan reporting. This function
+	 * will be evaluated on the client before the Ophan network request is made.
+	 *
+	 * For example, you could use this if you have a server-side test and would like to exclude certain
+	 * pageviews from reporting based on client-side information, such as users with smaller screens.
+	 *
+	 * @example: shouldReportToOphan: () => window.innerWidth >= 1300
+	 *
+	 * On by default: if not provided, the test will report to Ophan as usual.
+	 */
+	shouldReportToOphan?: () => boolean;
 };
 
 export type { ABTest, FastlyTestParams, AudienceSpace, AllSpace };

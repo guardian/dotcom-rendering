@@ -17,17 +17,6 @@ const FORBIDDEN_CONTAINERS = [
 	'qatar treat',
 ];
 
-export const BETA_CONTAINERS = [
-	'scrollable/highlights',
-	'flexible/special',
-	'flexible/general',
-	'scrollable/small',
-	'scrollable/medium',
-	'scrollable/feature',
-	'static/feature/2',
-	'static/medium/4',
-];
-
 const PALETTE_STYLES_URI =
 	'https://content.guardianapis.com/atom/interactive/interactives/2022/03/29/fronts-container-colours/default';
 

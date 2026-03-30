@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { RelativeTime } from './RelativeTime.importable';
+import { RelativeTime } from './RelativeTime.island';
 
 describe('RelativeTime', () => {
 	test.each([

@@ -1,5 +1,5 @@
 import { GroupedNewslettersList } from './GroupedNewsletterList';
-import { ManyNewsletterSignUp } from './ManyNewsletterSignUp.importable';
+import { ManyNewsletterSignUp } from './ManyNewsletterSignUp.island';
 
 export const Default = () => {
 	return (

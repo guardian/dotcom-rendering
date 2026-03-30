@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { AppsFooter as AppsFooterComponent } from './AppsFooter.importable';
+import { AppsFooter as AppsFooterComponent } from './AppsFooter.island';
 
 const meta = {
 	component: AppsFooterComponent,

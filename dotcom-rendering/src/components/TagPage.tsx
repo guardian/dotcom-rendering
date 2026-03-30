@@ -7,16 +7,16 @@ import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { TagPage as TagPageModel } from '../types/tagPage';
-import { AdmiralScript } from './AdmiralScript.importable';
-import { AlreadyVisited } from './AlreadyVisited.importable';
+import { AdmiralScript } from './AdmiralScript.island';
+import { AlreadyVisited } from './AlreadyVisited.island';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
-import { FocusStyles } from './FocusStyles.importable';
-import { GoogleOneTap, isGoogleOneTapEnabled } from './GoogleOneTap.importable';
+import { FocusStyles } from './FocusStyles.island';
+import { GoogleOneTap, isGoogleOneTapEnabled } from './GoogleOneTap.island';
 import { Island } from './Island';
-import { Metrics } from './Metrics.importable';
-import { SetABTests } from './SetABTests.importable';
-import { SetAdTargeting } from './SetAdTargeting.importable';
+import { Metrics } from './Metrics.island';
+import { SetABTests } from './SetABTests.island';
+import { SetAdTargeting } from './SetAdTargeting.island';
 import { SkipTo } from './SkipTo';
 
 type Props = {

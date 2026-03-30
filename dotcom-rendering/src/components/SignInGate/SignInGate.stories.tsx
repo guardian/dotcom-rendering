@@ -4,7 +4,7 @@ import {
 	mockAuxiaResponseNonDismissible,
 } from '../../../fixtures/manual/sign-in-gate';
 import { Section } from '../Section';
-import { SignInGateSelector } from '../SignInGateSelector.importable';
+import { SignInGateSelector } from '../SignInGateSelector.island';
 import { SignInGateCustomizableText } from './gateDesigns/SignInGateCustomizableText';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';

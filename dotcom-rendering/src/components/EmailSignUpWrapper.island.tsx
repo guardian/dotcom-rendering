@@ -6,7 +6,7 @@ import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Placeholder } from './Placeholder';
-import { SecureSignup } from './SecureSignup.importable';
+import { SecureSignup } from './SecureSignup.island';
 
 /**
  * Approximate heights of the EmailSignup component at different breakpoints.
@@ -30,7 +30,7 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 }
 
 /**
- * EmailSignUpWrapper as an importable island component.
+ * EmailSignUpWrapper as an island component.
  *
  * This component needs to be hydrated client-side because it uses
  * the useNewsletterSubscription hook which depends on auth status

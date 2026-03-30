@@ -85,13 +85,13 @@ const fullscreenStyles = (id: string) => css`
 	iframe#${id} {
 		position: fixed;
 		top: 0;
-		/* override vw and vh with vsw and vsh if supported */
+		/* override vw and vh with svw and svh if supported */
+		/* stylelint-disable declaration-block-no-duplicate-properties */
 		width: 100vw;
 		height: 100vh;
-		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 		width: 100svw;
-		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 		height: 100svh;
+		/* stylelint-enable declaration-block-no-duplicate-properties */
 		z-index: ${getZIndex('youTubeFullscreen')};
 	}
 `;

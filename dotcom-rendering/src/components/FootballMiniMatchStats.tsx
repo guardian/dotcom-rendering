@@ -59,11 +59,15 @@ type Props = {
 };
 
 export const FootballMiniMatchStats = (props: Props) => {
-	const { data } = useSWR<FootballMatchStatsSummary, string>(
+	const { data, error: swrError } = useSWR<FootballMatchStatsSummary, string>(
 		props.matchStatsUrl,
 		fetcher(props.getMatchStatsData),
 		swrOptions(props.refreshInterval),
 	);
+
+	if (swrError) {
+		return null;
+	}
 
 	if (data === undefined) {
 		return (

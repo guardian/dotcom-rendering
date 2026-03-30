@@ -6,6 +6,8 @@ import { getOphan } from '../client/ophan/ophan';
 import { useBetaAB } from '../lib/useAB';
 import { useConfig } from './ConfigContext';
 
+const testName = 'growth-admiral-adblock-detect';
+
 /**
  * Sends component events to Ophan with the componentType of `AD_BLOCK_RECOVERY`
  * as well as sending the AB test participation
@@ -37,7 +39,7 @@ const recordAdmiralOphanEvent = async (
 				...(value && { value }),
 				...(variantName && {
 					abTest: {
-						name: 'growth-admiral-adblock-recovery',
+						name: testName,
 						variant: variantName,
 					},
 				}),
@@ -204,8 +206,6 @@ const setUpAdmiralEventLogger = (
 		void handleCandidateDismissedEvent(variantName, event, renderingTarget);
 	});
 };
-
-const testName = 'growth-admiral-adblock-recovery';
 
 export const AdmiralScript = () => {
 	const { renderingTarget } = useConfig();

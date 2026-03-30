@@ -10,6 +10,7 @@ import {
 	textSansBold15,
 } from '@guardian/source/foundations';
 import { SvgCross, SvgGuardianLogo } from '@guardian/source/react-components';
+import { ensureValidCtaUrl } from '../../../lib/auxia';
 import { has } from '../../../lib/has-string';
 import { AuthProviderButtons } from '../../AuthProviderButtons/AuthProviderButtons';
 import { useConfig } from '../../ConfigContext';
@@ -45,8 +46,10 @@ export const SignInGateAuxiaV1 = ({
 		subtitle,
 		body,
 		first_cta_name: firstCtaName,
-		first_cta_link: firstCtaLink,
+		first_cta_link: rawCtaLink,
 	} = JSON.parse(userTreatment.treatmentContent) as TreatmentContentDecoded;
+
+	const firstCtaLink = ensureValidCtaUrl(rawCtaLink);
 
 	const isDismissible = userTreatment.treatmentType.startsWith(
 		'DISMISSABLE_SIGN_IN_GATE',

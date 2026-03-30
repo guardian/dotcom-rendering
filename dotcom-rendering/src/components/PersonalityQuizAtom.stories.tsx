@@ -12,7 +12,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '../lib/articleFormat';
-import { PersonalityQuizAtom } from './PersonalityQuizAtom.importable';
+import { PersonalityQuizAtom } from './PersonalityQuizAtom.island';
 
 const meta = {
 	title: 'Components/PersonalityQuizAtom',

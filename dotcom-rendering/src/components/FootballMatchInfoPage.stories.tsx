@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { SWRConfig } from 'swr';
 import { allModes } from '../../.storybook/modes';
 import { footballMatchResultV2 } from '../../fixtures/manual/footballData';
 import { table } from '../../fixtures/manual/footballTable';
@@ -8,6 +9,17 @@ import { FootballMatchInfoPage as FootballMatchInfoPageComponent } from './Footb
 const meta = {
 	title: 'Components/Football Match Info Page',
 	component: FootballMatchInfoPageComponent,
+	decorators: [
+		(Story) => (
+			<SWRConfig
+				value={{
+					isPaused: () => true, // Prevent SWR from making requests
+				}}
+			>
+				<Story />
+			</SWRConfig>
+		),
+	],
 	parameters: {
 		chromatic: {
 			modes: {

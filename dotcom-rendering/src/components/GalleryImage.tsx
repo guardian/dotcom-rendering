@@ -7,7 +7,7 @@ import { getImage } from '../lib/image';
 import { palette } from '../palette';
 import { type ImageBlockElement } from '../types/content';
 import { type RenderingTarget } from '../types/renderingTarget';
-import { AppsLightboxImage } from './AppsLightboxImage.importable';
+import { AppsLightboxImage } from './AppsLightboxImage.island';
 import { GalleryCaption } from './GalleryCaption';
 import { Island } from './Island';
 import { LightboxLink } from './LightboxLink';

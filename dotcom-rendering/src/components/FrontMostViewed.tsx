@@ -4,7 +4,7 @@ import type { TrailTabType, TrailType } from '../types/trails';
 import { Island } from './Island';
 import { localisedTitle } from './Localisation';
 import { MostPopularFooterGrid } from './MostPopularFooterGrid';
-import { MostViewedFooter } from './MostViewedFooter.importable';
+import { MostViewedFooter } from './MostViewedFooter.island';
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
 
 type Props = {

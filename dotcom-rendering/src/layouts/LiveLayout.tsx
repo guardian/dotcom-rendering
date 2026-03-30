@@ -8,9 +8,9 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
-import { AdPortals } from '../components/AdPortals.importable';
+import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -18,41 +18,38 @@ import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Carousel } from '../components/Carousel.importable';
+import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
-import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.importable';
-import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.importable';
+import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.island';
+import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
+import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
+import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.island';
 import { Footer } from '../components/Footer';
-import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
-import { GetMatchNav } from '../components/GetMatchNav.importable';
-import { GetMatchStats } from '../components/GetMatchStats.importable';
-import { GetMatchTabs } from '../components/GetMatchTabs.importable';
+import { GetCricketScoreboard } from '../components/GetCricketScoreboard.island';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
-import { LiveblogGutterAskWrapper } from '../components/LiveblogGutterAskWrapper.importable';
-import { Liveness } from '../components/Liveness.importable';
+import { KeyEventsCarousel } from '../components/KeyEventsCarousel.island';
+import { LiveblogGutterAskWrapper } from '../components/LiveblogGutterAskWrapper.island';
+import { Liveness } from '../components/Liveness.island';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
-import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Pagination } from '../components/Pagination';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
-import { SubNav } from '../components/SubNav.importable';
+import { SubNav } from '../components/SubNav.island';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
-import { useBetaAB } from '../lib/useAB';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -234,7 +231,7 @@ const bodyWrapper = css`
 	}
 `;
 
-const footballRedesignBodyWrapper = css`
+const footballMatchBodyWrapper = css`
 	padding-top: 0;
 	margin-top: 10px;
 	border-top: 1px solid ${themePalette('--article-border')};
@@ -310,17 +307,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const showComments = article.isCommentable && !isPaidContent;
 
-	const abTests = useBetaAB();
-	const isInFootballRedesignTest =
-		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
-		false;
-
-	const applyFootballRedesign = shouldApplyFootballRedesign(
-		!!footballMatchUrl,
-		isApps,
-		isInFootballRedesignTest,
-	);
-
 	return (
 		<>
 			{isWeb && (
@@ -385,8 +371,14 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</Island>
 				)}
 				{footballMatchUrl ? (
-					applyFootballRedesign ? (
-						footballMatchHeaderUrl && (
+					footballMatchHeaderUrl && (
+						<>
+							<noscript>
+								<FootballMatchHeaderFallback
+									format={format}
+									article={article}
+								/>
+							</noscript>
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
@@ -396,56 +388,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									edition={article.editionId}
 									matchHeaderURL={footballMatchHeaderUrl}
 									renderingTarget={renderingTarget}
+									article={article}
+									format={format}
 								/>
 							</Island>
-						)
-					) : (
-						<Section
-							showTopBorder={false}
-							backgroundColour={themePalette(
-								'--match-nav-background',
-							)}
-							borderColour={themePalette('--headline-border')}
-							leftContent={
-								<ArticleTitle
-									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
-									isMatch={true}
-								/>
-							}
-							leftColSize="wide"
-							padContent={false}
-							verticalMargins={false}
-						>
-							<Hide above="leftCol">
-								<ArticleTitle
-									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
-									isMatch={true}
-								/>
-							</Hide>
-
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<GetMatchNav
-									matchUrl={footballMatchUrl}
-									format={format}
-									headlineString={article.headline}
-									tags={article.tags}
-									webPublicationDateDeprecated={
-										article.webPublicationDateDeprecated
-									}
-								/>
-							</Island>
-						</Section>
+						</>
 					)
 				) : (
 					<Section
@@ -675,18 +622,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						<LiveGrid>
 							<GridItem area="media">
 								<div css={maxWidth}>
-									{!applyFootballRedesign &&
-										!!footballMatchUrl && (
-											<Island
-												priority="critical"
-												defer={{ until: 'visible' }}
-											>
-												<GetMatchTabs
-													matchUrl={footballMatchUrl}
-													format={format}
-												/>
-											</Island>
-										)}
 									{!!cricketMatchUrl && (
 										<Island
 											priority="critical"
@@ -777,38 +712,26 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								)}
 
 								{/* Match stats */}
-								{applyFootballRedesign
-									? !!footballMatchStatsUrl && (
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<FootballMiniMatchStatsWrapper
-													matchStatsUrl={
-														footballMatchStatsUrl
-													}
-												/>
-											</Island>
-									  )
-									: !!footballMatchUrl && (
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<GetMatchStats
-													matchUrl={footballMatchUrl}
-													format={format}
-												/>
-											</Island>
-									  )}
+								{!!footballMatchStatsUrl && (
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<FootballMiniMatchStatsWrapper
+											matchStatsUrl={
+												footballMatchStatsUrl
+											}
+										/>
+									</Island>
+								)}
 							</GridItem>
 							<GridItem area="body">
 								<div
 									id="maincontent"
 									css={[
 										bodyWrapper,
-										applyFootballRedesign &&
-											footballRedesignBodyWrapper,
+										!!footballMatchUrl &&
+											footballMatchBodyWrapper,
 									]}
 								>
 									{hasKeyEvents ? (
@@ -1230,18 +1153,4 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 		</>
 	);
-};
-
-const shouldApplyFootballRedesign = (
-	isFootballMatch: boolean,
-	isApps: boolean,
-	isInFootballVariantGroup: boolean,
-) => {
-	// Since the football blog page is not yet available in the app,
-	// the AB test can be ignored and we default to true
-	if (isFootballMatch) {
-		return isApps || isInFootballVariantGroup;
-	}
-
-	return false;
 };

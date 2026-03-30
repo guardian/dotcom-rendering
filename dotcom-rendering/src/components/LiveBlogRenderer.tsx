@@ -5,13 +5,13 @@ import type { Block } from '../types/blocks';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
-import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
-import { FilterKeyEventsToggle } from './FilterKeyEventsToggle.importable';
+import { EnhancePinnedPost } from './EnhancePinnedPost.island';
+import { FilterKeyEventsToggle } from './FilterKeyEventsToggle.island';
 import { Island } from './Island';
-import { KeyEventsCarousel } from './KeyEventsCarousel.importable';
+import { KeyEventsCarousel } from './KeyEventsCarousel.island';
 import { LiveBlock } from './LiveBlock';
 import { LiveBlogBlocksAndAdverts } from './LiveBlogBlocksAndAdverts';
-import { LiveBlogEpic } from './LiveBlogEpic.importable';
+import { LiveBlogEpic } from './LiveBlogEpic.island';
 import { PinnedPost } from './PinnedPost';
 
 type Props = {

@@ -15,7 +15,7 @@ import { HostedContentHeader } from '../components/HostedContentHeader';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
-import { ShareButton } from '../components/ShareButton.importable';
+import { ShareButton } from '../components/ShareButton.island';
 import { Standfirst } from '../components/Standfirst';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
@@ -41,21 +41,10 @@ interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
 
-const headerStyles = css`
-	${grid.container}
-	${grid.column.all}
-	grid-row: 1;
-`;
-
-const contentStyles = css`
-	${grid.container}
-	${grid.column.all}
-	grid-row: 2;
-`;
-
 const mainMediaStyles = css`
 	${grid.column.all}
-	grid-row: 1;
+	grid-row-start: 1;
+
 	overflow: hidden;
 	max-height: 400px;
 
@@ -67,7 +56,7 @@ const mainMediaStyles = css`
 
 const captionStyles = css`
 	${grid.column.centre}
-	grid-row: 2;
+	grid-row-start: 2;
 
 	${from.desktop} {
 		${grid.span(12, 2)}
@@ -78,35 +67,48 @@ const captionStyles = css`
 `;
 
 const headlineStyles = css`
-	margin-top: ${space[4]}px;
 	${grid.column.centre}
+	grid-row-start: 4;
+
+	margin-top: ${space[4]}px;
+
 	${from.desktop} {
 		${grid.span(4, 8)}
-		grid-row: 2;
+		grid-row-start: 2;
 	}
+
 	${from.leftCol} {
 		${grid.column.centre}
 	}
 `;
+
 const metaStyles = css`
-	margin-top: ${space[4]}px;
-	padding: ${space[1]}px;
 	${grid.column.centre}
-	grid-row: 3;
+	grid-row-start: 3;
+
 	${from.desktop} {
-		grid-row: 2;
+		grid-row-start: 2;
 	}
+
 	${from.leftCol} {
 		${grid.column.left}
 	}
 `;
 
+const shareButtonStyles = css`
+	margin-top: ${space[4]}px;
+	padding: ${space[1]}px;
+`;
+
 const standfirstStyles = css`
 	${grid.column.centre}
-	grid-row: 1;
+	grid-row-start: 5;
+
 	${from.desktop} {
 		${grid.between(4, 'right-column-end')}
+		grid-row-start: 3;
 	}
+
 	${from.leftCol} {
 		${grid.column.centre}
 	}
@@ -114,39 +116,39 @@ const standfirstStyles = css`
 
 const articleBodyStyles = css`
 	${grid.column.centre}
-	grid-row:auto;
+
+	padding-bottom: ${space[6]}px;
+
 	${from.desktop} {
 		${grid.between(4, 'right-column-end')}
-		grid-row: 2;
 	}
+
 	${from.leftCol} {
 		${grid.column.centre}
-		grid-row: 2;
 	}
-	padding-bottom: 24px;
 `;
 
 const onwardContentStyles = css`
+	${grid.column.centre}
+
 	height: 20px;
 	background-color: lightgrey;
-
-	${grid.column.centre}
-	grid-row:auto;
+	margin-bottom: ${space[6]}px;
 
 	${from.desktop} {
 		${grid.span(4, 8)}
-		grid-row: 3;
 	}
+
 	${from.leftCol} {
 		${grid.column.right}
-		grid-row: 1
+		grid-row-start: 3;
 	}
-	margin-bottom: 24px;
 `;
 
 const ctaStyles = css`
+	z-index: 1;
 	${grid.column.all}
-	grid-row:auto;
+
 	overflow: hidden;
 	max-height: 400px;
 	${from.wide} {
@@ -158,23 +160,38 @@ const ctaStyles = css`
 const sideBorders = css`
 	${from.desktop} {
 		position: relative;
-		::before {
+
+		&::before {
+			z-index: 1;
 			position: absolute;
 			top: 0;
 			bottom: 0;
 			content: '';
-			border-left: 1px solid ${themePalette('--article-border')};
-			border-right: 1px solid ${themePalette('--article-border')};
+			width: 1px;
+			background-color: ${themePalette('--article-border')};
+
 			left: -${grid.mobileColumnGap};
-			right: -${grid.mobileColumnGap};
 			${from.mobileLandscape} {
 				left: -${grid.columnGap};
+			}
+
+			grid-column-start: left-column-start;
+		}
+
+		&::after {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			content: '';
+			width: 1px;
+			background-color: ${themePalette('--article-border')};
+
+			right: -${grid.mobileColumnGap};
+			${from.mobileLandscape} {
 				right: -${grid.columnGap};
 			}
-			${grid.between('centre-column-start', 'right-column-end')}
-			${from.leftCol} {
-				${grid.between('left-column-start', 'right-column-end')}
-			}
+
+			grid-column-end: right-column-end;
 		}
 	}
 `;
@@ -220,49 +237,46 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						showTopBorder={false}
 						shouldCenter={false}
 						backgroundColour={sourcePalette.neutral[7]}
-						padSides={true}
+						padSides={false}
 						element="header"
 					>
-						<HostedContentHeader
-							branding={branding}
-							accentColor={branding.hostedCampaignColour}
-						/>
+						<HostedContentHeader branding={branding} />
 					</Section>
 				</Stuck>
 			) : null}
 
 			<main data-layout="HostedArticleLayout">
 				<article css={[grid.container, sideBorders]}>
-					<header css={headerStyles}>
-						<div css={mainMediaStyles}>
-							<MainMedia
-								format={format}
-								elements={frontendData.mainMediaElements}
-								host={frontendData.config.host}
-								pageId={frontendData.pageId}
-								webTitle={frontendData.webTitle}
-								ajaxUrl={frontendData.config.ajaxUrl}
-								abTests={frontendData.config.abTests}
-								switches={frontendData.config.switches}
-								isAdFreeUser={frontendData.isAdFreeUser}
-								isSensitive={frontendData.config.isSensitive}
-								editionId={frontendData.editionId}
-								hideCaption={true}
-								shouldHideAds={true}
-								contentType={frontendData.contentType}
-							/>
-						</div>
+					<div css={mainMediaStyles}>
+						<MainMedia
+							format={format}
+							elements={frontendData.mainMediaElements}
+							host={frontendData.config.host}
+							pageId={frontendData.pageId}
+							webTitle={frontendData.webTitle}
+							ajaxUrl={frontendData.config.ajaxUrl}
+							abTests={frontendData.config.abTests}
+							switches={frontendData.config.switches}
+							isAdFreeUser={frontendData.isAdFreeUser}
+							isSensitive={frontendData.config.isSensitive}
+							editionId={frontendData.editionId}
+							hideCaption={true}
+							shouldHideAds={true}
+							contentType={frontendData.contentType}
+						/>
+					</div>
 
-						<div css={captionStyles}>
-							<Caption
-								captionText={mainMediaCaptionText}
-								format={format}
-								isMainMedia={true}
-							/>
-						</div>
+					<div css={captionStyles}>
+						<Caption
+							captionText={mainMediaCaptionText}
+							format={format}
+							isMainMedia={true}
+						/>
+					</div>
 
+					<div data-print-layout="hide" css={metaStyles}>
 						{props.renderingTarget === 'Web' && (
-							<div data-print-layout="hide" css={metaStyles}>
+							<div css={shareButtonStyles}>
 								<Island
 									priority="feature"
 									defer={{ until: 'visible' }}
@@ -276,84 +290,80 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 								</Island>
 							</div>
 						)}
-
-						<div css={headlineStyles}>
-							<ArticleHeadline
-								format={format}
-								headlineString={frontendData.headline}
-								tags={frontendData.tags}
-								byline={frontendData.byline}
-								webPublicationDateDeprecated={
-									frontendData.webPublicationDateDeprecated
-								}
-							/>
-						</div>
-					</header>
-
-					<div css={contentStyles}>
-						<div css={standfirstStyles}>
-							<Standfirst
-								format={format}
-								standfirst={frontendData.standfirst}
-							/>
-						</div>
-						<div css={articleBodyStyles}>
-							<ArticleContainer format={format}>
-								<ArticleBody
-									format={format}
-									blocks={blocks}
-									editionId={frontendData.editionId}
-									host={frontendData.config.host}
-									pageId={frontendData.pageId}
-									webTitle={frontendData.webTitle}
-									ajaxUrl={frontendData.config.ajaxUrl}
-									isAdFreeUser={frontendData.isAdFreeUser}
-									switches={frontendData.config.switches}
-									sectionId={frontendData.config.section}
-									shouldHideReaderRevenue={
-										frontendData.shouldHideReaderRevenue
-									}
-									tags={frontendData.tags}
-									isPaidContent={
-										!!frontendData.config.isPaidContent
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									contentType={frontendData.contentType}
-									idUrl={frontendData.config.idUrl ?? ''}
-									isSensitive={
-										frontendData.config.isSensitive
-									}
-									isDev={!!frontendData.config.isDev}
-									keywordIds={frontendData.config.keywordIds}
-									abTests={frontendData.config.abTests}
-									shouldHideAds={frontendData.shouldHideAds}
-									lang={frontendData.lang}
-									isRightToLeftLang={
-										frontendData.isRightToLeftLang
-									}
-									accentColor={branding?.hostedCampaignColour}
-								/>
-								<HostedContentDisclaimer />
-							</ArticleContainer>
-						</div>
-
-						<div css={onwardContentStyles}>
-							{'Placeholder - onward content'}
-						</div>
-
-						{cta && (
-							<div css={ctaStyles}>
-								<CallToActionAtom
-									linkUrl={cta.url}
-									backgroundImage={cta.image}
-									text={cta.label}
-									buttonText={cta.btnText}
-								/>
-							</div>
-						)}
 					</div>
+
+					<div css={headlineStyles}>
+						<ArticleHeadline
+							format={format}
+							headlineString={frontendData.headline}
+							tags={frontendData.tags}
+							byline={frontendData.byline}
+							webPublicationDateDeprecated={
+								frontendData.webPublicationDateDeprecated
+							}
+						/>
+					</div>
+
+					<div css={standfirstStyles}>
+						<Standfirst
+							format={format}
+							standfirst={frontendData.standfirst}
+						/>
+					</div>
+					<div css={articleBodyStyles}>
+						<ArticleContainer format={format}>
+							<ArticleBody
+								format={format}
+								blocks={blocks}
+								editionId={frontendData.editionId}
+								host={frontendData.config.host}
+								pageId={frontendData.pageId}
+								webTitle={frontendData.webTitle}
+								ajaxUrl={frontendData.config.ajaxUrl}
+								isAdFreeUser={frontendData.isAdFreeUser}
+								switches={frontendData.config.switches}
+								sectionId={frontendData.config.section}
+								shouldHideReaderRevenue={
+									frontendData.shouldHideReaderRevenue
+								}
+								tags={frontendData.tags}
+								isPaidContent={
+									!!frontendData.config.isPaidContent
+								}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								contentType={frontendData.contentType}
+								idUrl={frontendData.config.idUrl ?? ''}
+								isSensitive={frontendData.config.isSensitive}
+								isDev={!!frontendData.config.isDev}
+								keywordIds={frontendData.config.keywordIds}
+								abTests={frontendData.config.abTests}
+								shouldHideAds={frontendData.shouldHideAds}
+								lang={frontendData.lang}
+								isRightToLeftLang={
+									frontendData.isRightToLeftLang
+								}
+								accentColor={branding?.hostedCampaignColour}
+							/>
+							<HostedContentDisclaimer />
+						</ArticleContainer>
+					</div>
+
+					<div css={onwardContentStyles}>
+						{'Placeholder - onward content'}
+					</div>
+
+					{cta && (
+						<div css={ctaStyles}>
+							<CallToActionAtom
+								linkUrl={cta.url}
+								backgroundImage={cta.image}
+								text={cta.label}
+								buttonText={cta.btnText}
+							/>
+						</div>
+					)}
 				</article>
 			</main>
 		</>
