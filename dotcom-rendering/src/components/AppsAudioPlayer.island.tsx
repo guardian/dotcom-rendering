@@ -20,7 +20,7 @@ export const AppsAudioPlayer = ({ audioDuration }: Props) => {
 	const checkIsPlaying = useCallback(() => {
 		getAudioClient()
 			.isPlaying()
-			.then((isPlaying) => {
+			.then((isPlaying: boolean) => {
 				setShowButton(!isPlaying);
 			})
 			.catch((error: Error) => {

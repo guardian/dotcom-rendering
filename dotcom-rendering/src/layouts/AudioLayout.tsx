@@ -336,14 +336,14 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 									/>
 								</Island>
 							)}
-							{isApps && (
+							{isApps && audioData && (
 								<Island
 									priority="critical"
 									defer={{ until: 'visible' }}
 								>
 									<AppsAudioPlayer
 										audioDuration={
-											typeof audioData?.durationSeconds ===
+											typeof audioData.durationSeconds ===
 											'number'
 												? formatAudioDuration(
 														audioData.durationSeconds,
