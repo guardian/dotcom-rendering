@@ -81,7 +81,13 @@ export const StackedProducts = ({
 				{products.map((product: ProductBlockElement, index) => (
 					<div
 						key={index}
-						data-component={`at-a-glance-stacked-card-${index + 1}`}
+						data-component={`at-a-glance-stacked-card-${
+							index + 1
+						}-${
+							isExpanded || showAllProducts
+								? 'expanded'
+								: 'collapsed'
+						}`}
 						style={{
 							display:
 								!isExpanded &&
