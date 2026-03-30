@@ -23,7 +23,7 @@ import { Dateline } from './Dateline';
 import { FollowWrapper } from './FollowWrapper.island';
 import { Island } from './Island';
 import { ListenToArticle } from './ListenToArticle.island';
-import { NotificationsToggle } from './NotificationsToggle.island';
+import { NotificationsToggleWrapper } from './NotificationsToggleWrapper.island';
 
 type Props = {
 	format: ArticleFormat;
@@ -397,7 +397,7 @@ const LiveblogNotifications = (props: {
 			data-gu-name="liveblog-notifications"
 		>
 			<Island priority="critical">
-				<NotificationsToggle
+				<NotificationsToggleWrapper
 					id={props.pageId}
 					displayName={props.headline}
 					notificationType="content"
