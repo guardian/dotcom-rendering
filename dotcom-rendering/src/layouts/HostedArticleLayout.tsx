@@ -12,6 +12,7 @@ import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
 import { HostedContentHeader } from '../components/HostedContentHeader';
+import { HostedContentOnwards } from '../components/HostedContentOnwards';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
@@ -140,7 +141,6 @@ const onwardContentStyles = css`
 	${grid.column.centre}
 
 	height: 20px;
-	background-color: lightgrey;
 	margin-bottom: ${space[6]}px;
 
 	${from.desktop} {
@@ -329,7 +329,9 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 					</div>
 
 					<div css={onwardContentStyles}>
-						{'Placeholder - onward content'}
+						<HostedContentOnwards
+							accentColor={branding?.hostedCampaignColour}
+						/>
 					</div>
 
 					{cta && (
