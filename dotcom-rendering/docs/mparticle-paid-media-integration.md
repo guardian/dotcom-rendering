@@ -110,7 +110,7 @@ flowchart TD
     BWID -- "No cookie" --> NOOP3["↩ return — no API call"]
     BWID -- "Has bwid" --> CONSENT["getConsentFor('mparticle', state)\n→ boolean"]
 
-    CONSENT --> API["mparticleConsentApi.ts\nPATCH mparticle-api.guardianapis.com\n/consents/{browserId}\n{ consented, pageViewId }\nAuthorization: Bearer …"]
+    CONSENT --> API["mparticleConsentApi.ts\nPATCH mparticle-api.support.guardianapis.com\n/consents/{browserId}\n{ consented, pageViewId }\nAuthorization: Bearer …"]
 
     API -- "ok" --> MARK["markMparticleConsentSynced()\nsets gu_mparticle_consent_synced\n(30-min TTL)"]
     API -- "!ok" --> ERR["throw Error\n→ surfaces in Sentry"]
@@ -199,7 +199,7 @@ The frontend does **not** write to mParticle directly. That is the backend's res
 ## API contract (Frontend → Backend)
 
 ```
-PATCH https://mparticle-api.guardianapis.com/consents/{browserId}
+PATCH https://mparticle-api.support.guardianapis.com/consents/{browserId}
 Authorization: Bearer <access-token>
 X-GU-IS-OAUTH: true
 Content-Type: application/json
@@ -422,15 +422,15 @@ The property is carried through `unknownConfig` in `createGuardian` (the same pa
 
 Expected values by environment:
 
-| Environment | Value                                             |
-| ----------- | ------------------------------------------------- |
-| PROD        | `https://mparticle-api.guardianapis.com`          |
-| CODE        | `https://mparticle-api.code.dev-guardianapis.com` |
+| Environment | Value                                                 |
+| ----------- | ----------------------------------------------------- |
+| PROD        | `https://mparticle-api.support.guardianapis.com`      |
+| CODE        | `https://mparticle-api-code.support.guardianapis.com` |
 
 For local development, the value is already set in [`fixtures/config.js`](../fixtures/config.js):
 
 ```js
-mparticleApiUrl: 'https://mparticle-api.guardianapis.com',
+mparticleApiUrl: 'https://mparticle-api.support.guardianapis.com',
 ```
 
 This fixture config is used by the local dev server and Storybook. It uses the PROD URL, consistent with all other API URLs in that file (`idapi.theguardian.com`, `discussion.theguardian.com`, etc.).
@@ -536,7 +536,7 @@ mparticleConsentSync: true,
 2. In the browser, open DevTools → Application → Cookies. **Delete** the `gu_mparticle_consent_synced` cookie if present (this resets the staleness gate).
 3. Sign in to theguardian.com (you must be signed in — the call is gated on auth status).
 4. Open any article page.
-5. In the **Network** tab, filter by `consents`. You should see a `PATCH` request to `https://mparticle-api.code.dev-guardianapis.com/consents/<your-bwid>` with:
+5. In the **Network** tab, filter by `consents`. You should see a `PATCH` request to `https://mparticle-api-code.support.guardianapis.com/consents/<your-bwid>` with:
     - Status `200` (or appropriate success code from the backend)
     - `Authorization: Bearer ...` header present
     - Body: `{ "consented": true/false, "pageViewId": "..." }`
@@ -551,7 +551,7 @@ After a successful call, ask a backend engineer or check the mParticle sandbox U
 
 ## Relationship to other work
 
--   **Backend:** Creates the `PATCH /consents/{browserId}` endpoint on `mparticle-api.guardianapis.com`, handles mParticle writes, user auth, and rate limiting concerns (SQS queue, secondary data store). Frontend only consumes it.
+-   **Backend:** Creates the `PATCH /consents/{browserId}` endpoint on `mparticle-api.support.guardianapis.com`, handles mParticle writes, user auth, and rate limiting concerns (SQS queue, secondary data store). Frontend only consumes it.
 -   **Connection mParticle → Meta/Google:** Configured entirely within mParticle and the ad-platform UIs. No DCR work needed.
 -   **Backfill (TBC):** A separate data-engineering concern. No DCR work needed.
 

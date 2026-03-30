@@ -148,7 +148,7 @@ module.exports = {
 		isLive: false,
 		host: 'https://www.theguardian.com',
 		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
-		mparticleApiUrl: 'https://mparticle-api.guardianapis.com',
+		mparticleApiUrl: 'https://mparticle-api.support.guardianapis.com',
 		contentType: 'Article',
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',

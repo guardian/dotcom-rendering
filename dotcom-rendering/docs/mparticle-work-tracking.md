@@ -31,7 +31,7 @@
 | Created  | [src/client/mparticle/mparticle-consent.test.ts](../src/client/mparticle/mparticle-consent.test.ts)                 |
 | Modified | [src/client/main.web.ts](../src/client/main.web.ts) - startup entry, switch-gated                                   |
 | Modified | [src/model/guardian.ts](../src/model/guardian.ts) - `mparticleApiUrl?: string` in `config.page`                     |
-| Modified | [fixtures/config.js](../fixtures/config.js) - `mparticleApiUrl: 'https://mparticle-api.guardianapis.com'`           |
+| Modified | [fixtures/config.js](../fixtures/config.js) - `mparticleApiUrl: 'https://mparticle-api.support.guardianapis.com'`   |
 
 **Why it's safe to merge before other tasks:** The feature is entirely gated behind `window.guardian.config.switches.mparticleConsentSync`. That switch is not currently sent by the backend, so the block in `main.web.ts` is never entered on any real environment. There is zero risk of the feature running before everything else is ready.
 
@@ -138,16 +138,16 @@ mparticleApiUrl?: string;
 
 **URLs by environment:**
 
-| Environment | URL                                               |
-| ----------- | ------------------------------------------------- |
-| PROD        | `https://mparticle-api.guardianapis.com`          |
-| CODE        | `https://mparticle-api.code.dev-guardianapis.com` |
+| Environment | URL                                                   |
+| ----------- | ----------------------------------------------------- |
+| PROD        | `https://mparticle-api.support.guardianapis.com`      |
+| CODE        | `https://mparticle-api-code.support.guardianapis.com` |
 
 The local dev fixture already has the PROD URL hardcoded for development purposes:
 
 ```js
 // fixtures/config.js
-mparticleApiUrl: 'https://mparticle-api.guardianapis.com',
+mparticleApiUrl: 'https://mparticle-api.support.guardianapis.com',
 ```
 
 ### 6. Deploy the backend endpoint to CODE
@@ -191,7 +191,7 @@ mparticleConsentSync: true,
 
 ```js
 // fixtures/config-overrides.js
-mparticleApiUrl: 'https://mparticle-api.code.dev-guardianapis.com',
+mparticleApiUrl: 'https://mparticle-api-code.support.guardianapis.com',
 ```
 
 3. Start the dev server, open a page, open DevTools → Network tab, filter by `consents`.
