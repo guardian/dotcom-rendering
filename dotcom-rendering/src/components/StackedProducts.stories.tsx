@@ -29,12 +29,12 @@ export const Default = {} satisfies Story;
 export const FourProducts = {
 	args: {
 		products: exampleAtAGlanceProductArray.slice(0, 4),
-		heading: 'At a glance',
-		format: {
-			design: ArticleDesign.Review,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Lifestyle,
-		},
-		showAllProducts: false,
+	},
+} satisfies Story;
+
+export const AllCardsExpanded = {
+	args: {
+		products: exampleAtAGlanceProductArray.slice(0, 7),
+		showAllProducts: true,
 	},
 } satisfies Story;
