@@ -164,6 +164,6 @@ export const DecideContainer = ({
 				/>
 			);
 		default:
-			return <p>{containerType} is not yet supported</p>;
+			return null;
 	}
 };

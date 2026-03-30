@@ -1,3 +1,4 @@
+import { defineMain } from '@storybook/react-webpack5/node';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import webpack from 'webpack';
@@ -19,7 +20,7 @@ const {
 // Generate dynamic Card and Layout stories
 saveStories();
 
-const config: StorybookConfig = {
+export default defineMain({
 	features: {
 		actions: true,
 		backgrounds: true,
@@ -92,7 +93,7 @@ const config: StorybookConfig = {
 	typescript: {
 		reactDocgen: 'react-docgen',
 	},
-};
+});
 
 /** the webpack.Configuration type from Storybook */
 type Configuration = Parameters<
@@ -162,5 +163,3 @@ const webpackConfig = (config: Configuration) => {
 
 	return config;
 };
-
-export default config;
