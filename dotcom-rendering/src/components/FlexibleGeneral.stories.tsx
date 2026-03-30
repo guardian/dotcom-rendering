@@ -778,6 +778,5 @@ export const StandardCardsWithSlideshow: Story = {
 			],
 		},
 		collectionId: 1,
-		containerLevel: 'Primary',
 	},
 };
