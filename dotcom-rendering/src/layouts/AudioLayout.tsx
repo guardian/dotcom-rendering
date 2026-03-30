@@ -9,7 +9,7 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
-import { AppsAudioPlayer } from '../components/AppsAudioPlayer.importable';
+import { AppsAudioPlayer } from '../components/AppsAudioPlayer.island';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
