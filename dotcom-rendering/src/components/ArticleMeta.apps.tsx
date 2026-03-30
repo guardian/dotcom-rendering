@@ -10,19 +10,19 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 } from '../lib/articleFormat';
-import { getAudioData } from '../lib/audio-data';
-import { getSoleContributor } from '../lib/byline';
-import { palette as themePalette } from '../palette';
-import type { Branding as BrandingType } from '../types/branding';
-import type { FEElement } from '../types/content';
-import type { TagType } from '../types/tag';
 import {
 	getPodcast,
 	getRssFeedUrl,
 	getSeriesTag,
 	shouldShowAvatar,
 	shouldShowContributor,
-} from './ArticleMeta.web';
+} from '../lib/articleMeta';
+import { getAudioData } from '../lib/audio-data';
+import { getSoleContributor } from '../lib/byline';
+import { palette as themePalette } from '../palette';
+import type { Branding as BrandingType } from '../types/branding';
+import type { FEElement } from '../types/content';
+import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.island';
 import { CommentCount } from './CommentCount.island';
