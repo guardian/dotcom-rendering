@@ -75,7 +75,8 @@ const buttonWrapperStyles = css`
 	left: 0;
 	right: 0;
 
-	button {
+	/* We want the CTA LinkButton to take full width on smaller screens and it uses an anchor element instead of a button */
+	a {
 		width: 100%;
 
 		${from.tablet} {
