@@ -295,6 +295,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			? article.matchStatsUrl
 			: undefined;
 
+	const footballMatchLeagueName = article.sectionLabel;
+	const footballMatchLeagueUrl = `${article.guardianBaseURL}/${article.sectionUrl}`;
+
 	const cricketMatchUrl =
 		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
 
@@ -385,8 +388,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							>
 								<FootballMatchHeaderWrapper
 									initialTab="live"
-									leagueName={article.sectionLabel}
-									leagueURL={`${article.guardianBaseURL}/${article.sectionUrl}`}
+									leagueName={footballMatchLeagueName}
+									leagueURL={footballMatchLeagueUrl}
 									edition={article.editionId}
 									matchHeaderURL={footballMatchHeaderUrl}
 									renderingTarget={renderingTarget}
