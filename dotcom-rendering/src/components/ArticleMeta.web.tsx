@@ -10,13 +10,20 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import {
+	getPodcast,
+	getRssFeedUrl,
+	getSeriesTag,
+	shouldShowAvatar,
+	shouldShowContributor,
+} from '../lib/articleMeta';
 import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import { hasPreferredSourceButton } from '../preferredSource';
 import type { Branding as BrandingType } from '../types/branding';
 import type { FEElement } from '../types/content';
-import type { Podcast, TagType } from '../types/tag';
+import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.island';
 import { CommentCount } from './CommentCount.island';
@@ -212,53 +219,6 @@ export const metaContainer = (format: ArticleFormat) => {
 	}
 };
 
-// used by ArticleMeta.apps.tsx
-export const shouldShowAvatar = (format: ArticleFormat) => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			return false;
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard: {
-			switch (format.design) {
-				case ArticleDesign.Feature:
-				case ArticleDesign.Review:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Interview:
-					return true;
-				default:
-					return false;
-			}
-		}
-		default:
-			return false;
-	}
-};
-
-// used by ArticleMeta.apps.tsx
-export const shouldShowContributor = (format: ArticleFormat) => {
-	switch (format.display) {
-		case ArticleDisplay.NumberedList:
-			return true;
-		case ArticleDisplay.Immersive:
-			return false;
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.Standard: {
-			switch (format.design) {
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Analysis:
-				case ArticleDesign.Crossword:
-					return false;
-				default:
-					return true;
-			}
-		}
-		default:
-			return false;
-	}
-};
-
 const MetaAvatarContainer = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -309,22 +269,6 @@ const metaNumbersExtrasLiveBlog = css`
 		margin-left: 0;
 	}
 `;
-
-export const getSeriesTag = (tags: TagType[]): TagType | undefined => {
-	return tags.find((tag) => tag.type === 'Series' && tag.podcast);
-};
-
-export const getPodcast = (tags: TagType[]): Podcast | undefined => {
-	const seriesTag = getSeriesTag(tags);
-
-	return seriesTag?.podcast;
-};
-
-export const getRssFeedUrl = (tags: TagType[]): string => {
-	const seriesTag = getSeriesTag(tags);
-
-	return `/${seriesTag?.id}/podcast.xml`;
-};
 
 export const ArticleMeta = ({
 	branding,
