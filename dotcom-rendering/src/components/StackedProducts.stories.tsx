@@ -26,9 +26,9 @@ export const FourProducts = meta.story({
 	args: {
 		products: exampleAtAGlanceProductArray.slice(0, 4),
 	},
-} satisfies Story;
+});
 
-export const AllCardsExpanded = {
+export const AllCardsExpanded = meta.story({
 	args: {
 		products: exampleAtAGlanceProductArray.slice(0, 7),
 		showAllProducts: true,
