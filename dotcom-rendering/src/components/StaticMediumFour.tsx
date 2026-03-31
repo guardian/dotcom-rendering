@@ -9,6 +9,7 @@ import type {
 import { LI } from './Card/components/LI';
 import type { MediaPositionType } from './Card/components/MediaWrapper';
 import { UL } from './Card/components/UL';
+import { defaultFontSizes } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
 
@@ -32,6 +33,7 @@ type Props = {
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 export const StaticMediumFour = ({
@@ -43,6 +45,7 @@ export const StaticMediumFour = ({
 	showImage = true,
 	aspectRatio,
 	containerLevel = 'Primary',
+	isInSlimHomepageAbTestVariant = false,
 }: Props) => {
 	const cards = trails.slice(0, 4);
 
@@ -70,6 +73,14 @@ export const StaticMediumFour = ({
 								!!card.isNewsletter,
 							)}
 							mediaPositionOnMobile="left"
+							headlineSizes={
+								isInSlimHomepageAbTestVariant
+									? {
+											...defaultFontSizes,
+											wide: defaultFontSizes.tablet,
+									  }
+									: defaultFontSizes
+							}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							mediaSize="medium"

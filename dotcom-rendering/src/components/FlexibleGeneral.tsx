@@ -17,7 +17,7 @@ import type {
 } from './Card/components/MediaWrapper';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
-import type { ResponsiveFontSize } from './CardHeadline';
+import { defaultFontSizes, type ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FeatureCard } from './FeatureCard';
 import { FrontCard } from './FrontCard';
@@ -35,6 +35,7 @@ type Props = {
 	collectionId: number;
 	/** Passed through to cards to enable tag page storyline section specific rendering */
 	isStorylines?: boolean;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -90,6 +91,7 @@ type ImmersiveCardLayoutProps = {
 	imageLoading: Loading;
 	collectionId: number;
 	isStorylines?: boolean;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 /**
@@ -105,6 +107,7 @@ const ImmersiveCardLayout = ({
 	imageLoading,
 	collectionId,
 	isStorylines,
+	isInSlimHomepageAbTestVariant,
 }: ImmersiveCardLayoutProps) => {
 	const headlineSizes = { desktop: 'medium', tablet: 'small' } as const;
 
@@ -139,7 +142,12 @@ const ImmersiveCardLayout = ({
 					aspectRatio="5:3"
 					mobileAspectRatio="4:5"
 					imageSize="feature-immersive"
-					headlineSizes={headlineSizes}
+					headlineSizes={{
+						...headlineSizes,
+						wide: isInSlimHomepageAbTestVariant
+							? headlineSizes.tablet
+							: headlineSizes.desktop,
+					}}
 					supportingContent={card.supportingContent}
 					isImmersive={true}
 					isStorylines={isStorylines}
@@ -174,13 +182,18 @@ const decideSplashCardProperties = (
 	useLargerHeadlineSizeDesktop: boolean,
 	avatarUrl: boolean,
 	isStorylines?: boolean,
+	isInSlimHomepageAbTestVariant?: boolean,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
 			return {
 				headlineSizes: {
-					desktop: useLargerHeadlineSizeDesktop ? 'large' : 'medium',
+					desktop:
+						useLargerHeadlineSizeDesktop &&
+						!isInSlimHomepageAbTestVariant
+							? 'large'
+							: 'medium',
 					tablet: 'medium',
 					mobile: 'medium',
 				},
@@ -196,6 +209,11 @@ const decideSplashCardProperties = (
 		case 'boost':
 			return {
 				headlineSizes: {
+					wide:
+						!isInSlimHomepageAbTestVariant &&
+						useLargerHeadlineSizeDesktop
+							? 'xlarge'
+							: 'large',
 					desktop: useLargerHeadlineSizeDesktop ? 'xlarge' : 'large',
 					tablet: 'large',
 					mobile: 'large',
@@ -214,6 +232,11 @@ const decideSplashCardProperties = (
 		case 'megaboost':
 			return {
 				headlineSizes: {
+					wide:
+						!isInSlimHomepageAbTestVariant &&
+						useLargerHeadlineSizeDesktop
+							? 'xxlarge'
+							: 'xlarge',
 					desktop: useLargerHeadlineSizeDesktop
 						? 'xxlarge'
 						: 'xlarge',
@@ -231,6 +254,11 @@ const decideSplashCardProperties = (
 		case 'gigaboost':
 			return {
 				headlineSizes: {
+					wide: isInSlimHomepageAbTestVariant
+						? 'xlarge'
+						: useLargerHeadlineSizeDesktop
+						? 'xxxlarge'
+						: 'xxlarge',
 					desktop: useLargerHeadlineSizeDesktop
 						? 'xxxlarge'
 						: 'xxlarge',
@@ -259,6 +287,7 @@ type SplashCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	isStorylines?: boolean;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -272,6 +301,7 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 	isStorylines,
+	isInSlimHomepageAbTestVariant,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -285,6 +315,7 @@ const SplashCardLayout = ({
 				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				isInSlimHomepageAbTestVariant={isInSlimHomepageAbTestVariant}
 			/>
 		);
 	}
@@ -311,6 +342,7 @@ const SplashCardLayout = ({
 		useLargerHeadlineSizeDesktop,
 		!!card.avatarUrl,
 		isStorylines,
+		isInSlimHomepageAbTestVariant,
 	);
 
 	return (
@@ -358,6 +390,9 @@ const SplashCardLayout = ({
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					isStorylines={isStorylines}
 					starRatingSize="medium"
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			</LI>
 		</UL>
@@ -370,6 +405,7 @@ type BoostedCardProperties = {
 	liveUpdatesPosition: Position;
 	supportingContentAlignment: Alignment;
 	subtitleSize: SubtitleSize;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 /**
@@ -380,11 +416,13 @@ const decideCardProperties = (
 	supportingContentLength: number,
 	boostLevel: Omit<BoostLevel, 'default' | 'gigaboost'> = 'boost',
 	avatarUrl?: string,
+	isInSlimHomepageAbTestVariant = false,
 ): BoostedCardProperties => {
 	switch (boostLevel) {
 		case 'megaboost':
 			return {
 				headlineSizes: {
+					wide: isInSlimHomepageAbTestVariant ? 'small' : 'medium',
 					desktop: 'medium',
 					tablet: 'small',
 					mobile: 'medium',
@@ -424,6 +462,7 @@ type FullWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	isStorylines?: boolean;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -438,6 +477,7 @@ const FullWidthCardLayout = ({
 	containerLevel,
 	collectionId,
 	isStorylines,
+	isInSlimHomepageAbTestVariant,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -452,6 +492,7 @@ const FullWidthCardLayout = ({
 		card.supportingContent?.length ?? 0,
 		card.boostLevel,
 		card.avatarUrl,
+		isInSlimHomepageAbTestVariant,
 	);
 
 	const shouldShowImmersive = card.isImmersive;
@@ -515,6 +556,9 @@ const FullWidthCardLayout = ({
 					subtitleSize={subtitleSize}
 					isStorylines={isStorylines}
 					starRatingSize="medium"
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			</LI>
 		</UL>
@@ -533,6 +577,7 @@ type HalfWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	isStorylines?: boolean;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 const HalfWidthCardLayout = ({
@@ -547,6 +592,7 @@ const HalfWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	isStorylines,
+	isInSlimHomepageAbTestVariant,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
@@ -599,8 +645,19 @@ const HalfWidthCardLayout = ({
 								(containerLevel !== 'Primary' && cardIndex > 0)
 							}
 							trailText={undefined}
+							headlineSizes={
+								isInSlimHomepageAbTestVariant
+									? {
+											...defaultFontSizes,
+											wide: defaultFontSizes.tablet,
+									  }
+									: defaultFontSizes
+							}
 							canPlayInline={false}
 							isStorylines={isStorylines}
+							isInSlimHomepageAbTestVariant={
+								isInSlimHomepageAbTestVariant
+							}
 						/>
 					</LI>
 				);
@@ -619,6 +676,7 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 	isStorylines = false,
+	isInSlimHomepageAbTestVariant = false,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -648,6 +706,9 @@ export const FlexibleGeneral = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					isStorylines={isStorylines}
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
@@ -667,6 +728,9 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								collectionId={collectionId}
 								isStorylines={isStorylines}
+								isInSlimHomepageAbTestVariant={
+									isInSlimHomepageAbTestVariant
+								}
 							/>
 						);
 
@@ -687,6 +751,9 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								isStorylines={isStorylines}
+								isInSlimHomepageAbTestVariant={
+									isInSlimHomepageAbTestVariant
+								}
 							/>
 						);
 				}

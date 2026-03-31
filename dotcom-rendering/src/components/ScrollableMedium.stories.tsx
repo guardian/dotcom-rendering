@@ -29,12 +29,16 @@ const meta = {
 		showAge: true,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
+		isInSlimHomepageAbTestVariant: false,
 	},
 	render: (args) => (
 		<FrontSection
 			title="Scrollable medium"
 			editionId="UK"
 			containerLevel="Secondary"
+			slimifySectionForSlimHomepageAbTest={
+				args.isInSlimHomepageAbTestVariant
+			}
 		>
 			<ScrollableMedium {...args} />
 		</FrontSection>
@@ -50,6 +54,13 @@ export const WithEightCards = {} satisfies Story;
 export const WithFourCards = {
 	args: {
 		trails: trails.slice(0, 4),
+	},
+} satisfies Story;
+
+export const WithFourCardsInSlimHomepageAbTest = {
+	args: {
+		...WithFourCards.args,
+		isInSlimHomepageAbTestVariant: true,
 	},
 } satisfies Story;
 

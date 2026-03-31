@@ -31,6 +31,7 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 export const DecideContainer = ({
@@ -46,6 +47,7 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
+	isInSlimHomepageAbTestVariant = false,
 }: Props) => {
 	switch (containerType) {
 		case 'nav/list':
@@ -68,6 +70,9 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			);
 		case 'flexible/general':
@@ -81,6 +86,9 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			);
 		case 'scrollable/small':
@@ -108,6 +116,9 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInSlimHomepageAbTestVariant={
+							isInSlimHomepageAbTestVariant
+						}
 					/>
 				</Island>
 			);
@@ -120,6 +131,9 @@ export const DecideContainer = ({
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			);
 		case 'scrollable/feature':
@@ -132,6 +146,9 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
+						isInSlimHomepageAbTestVariant={
+							isInSlimHomepageAbTestVariant
+						}
 					/>
 				</Island>
 			);

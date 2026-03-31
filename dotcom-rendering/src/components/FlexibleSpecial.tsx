@@ -16,7 +16,7 @@ import type {
 } from './Card/components/MediaWrapper';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
-import type { ResponsiveFontSize } from './CardHeadline';
+import { defaultFontSizes, type ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
 import type { SubtitleSize } from './SelfHostedVideoPlayer';
@@ -31,6 +31,7 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 type BoostProperties = {
@@ -54,6 +55,7 @@ const determineCardProperties = (
 	mediaCard: boolean,
 	imageSuppressed: boolean,
 	hasLiveUpdates: boolean,
+	isInSlimHomepageAbTestVariant: boolean,
 ): BoostProperties => {
 	const shouldDisplaySublinksHorizontally =
 		supportingContentLength >= 3 || hasLiveUpdates;
@@ -63,6 +65,11 @@ const determineCardProperties = (
 		case 'default':
 			return {
 				headlineSizes: {
+					wide: isInSlimHomepageAbTestVariant
+						? 'large'
+						: imageSuppressed
+						? 'xxlarge'
+						: 'xlarge',
 					desktop: imageSuppressed ? 'xxlarge' : 'xlarge',
 					tablet: 'large',
 					mobile: 'medium',
@@ -80,6 +87,11 @@ const determineCardProperties = (
 		case 'boost':
 			return {
 				headlineSizes: {
+					wide: isInSlimHomepageAbTestVariant
+						? 'xlarge'
+						: imageSuppressed
+						? 'xxxlarge'
+						: 'xxlarge',
 					desktop: imageSuppressed ? 'xxxlarge' : 'xxlarge',
 					tablet: 'xlarge',
 					mobile: 'large',
@@ -97,6 +109,11 @@ const determineCardProperties = (
 		case 'megaboost':
 			return {
 				headlineSizes: {
+					wide: isInSlimHomepageAbTestVariant
+						? 'xlarge'
+						: imageSuppressed
+						? 'xxxlarge'
+						: 'xxlarge',
 					desktop: imageSuppressed ? 'xxxlarge' : 'xxlarge',
 					tablet: 'xlarge',
 					mobile: 'xlarge',
@@ -112,6 +129,9 @@ const determineCardProperties = (
 		case 'gigaboost':
 			return {
 				headlineSizes: {
+					wide: isInSlimHomepageAbTestVariant
+						? 'xxlarge'
+						: 'xxxlarge',
 					desktop: 'xxxlarge',
 					tablet: 'xxlarge',
 					mobile: 'xxlarge',
@@ -138,6 +158,7 @@ type OneCardLayoutProps = {
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
 	isSplashCard?: boolean;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 export const OneCardLayout = ({
@@ -151,6 +172,7 @@ export const OneCardLayout = ({
 	isFirstRow,
 	containerLevel,
 	isSplashCard,
+	isInSlimHomepageAbTestVariant = false,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -170,6 +192,7 @@ export const OneCardLayout = ({
 		isMediaCard(card.format),
 		!card.image,
 		card.showLivePlayable,
+		isInSlimHomepageAbTestVariant,
 	);
 
 	return (
@@ -206,6 +229,9 @@ export const OneCardLayout = ({
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 					subtitleSize={subtitleSize}
 					starRatingSize="medium"
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			</LI>
 		</UL>
@@ -233,6 +259,7 @@ type TwoOrFourCardLayoutProps = {
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 const TwoOrFourCardLayout = ({
@@ -245,6 +272,7 @@ const TwoOrFourCardLayout = ({
 	aspectRatio,
 	isFirstRow,
 	containerLevel,
+	isInSlimHomepageAbTestVariant,
 }: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
@@ -273,6 +301,14 @@ const TwoOrFourCardLayout = ({
 								isMediaCard(card.format) || !!card.isNewsletter,
 							)}
 							mediaPositionOnMobile="left"
+							headlineSizes={
+								isInSlimHomepageAbTestVariant
+									? {
+											...defaultFontSizes,
+											wide: defaultFontSizes.tablet,
+									  }
+									: defaultFontSizes
+							}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							mediaSize="small"
@@ -286,6 +322,9 @@ const TwoOrFourCardLayout = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
+							isInSlimHomepageAbTestVariant={
+								isInSlimHomepageAbTestVariant
+							}
 						/>
 					</LI>
 				);
@@ -303,6 +342,7 @@ export const FlexibleSpecial = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
+	isInSlimHomepageAbTestVariant = false,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
 		...snap,
@@ -331,6 +371,9 @@ export const FlexibleSpecial = ({
 					isLastRow={splash.length === 0 && cards.length === 0}
 					containerLevel={containerLevel}
 					isSplashCard={false}
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			)}
 			{isNonEmptyArray(splash) && (
@@ -345,6 +388,9 @@ export const FlexibleSpecial = ({
 					isFirstRow={!isNonEmptyArray(snaps)}
 					containerLevel={containerLevel}
 					isSplashCard={true}
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			)}
 
@@ -357,6 +403,7 @@ export const FlexibleSpecial = ({
 				aspectRatio={aspectRatio}
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
+				isInSlimHomepageAbTestVariant={isInSlimHomepageAbTestVariant}
 			/>
 		</>
 	);
