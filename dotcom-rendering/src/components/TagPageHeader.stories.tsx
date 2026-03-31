@@ -1,30 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { TagPageHeader } from './TagPageHeader';
 
-const meta = {
+const meta = preview.meta({
 	component: TagPageHeader,
 	title: 'Components/TagPageHeader',
-} satisfies Meta<typeof TagPageHeader>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		title: 'Example title',
 		description: `<p>And a much longer description with lots of text, other thoughts and musings`,
 	},
-} satisfies Story;
+});
 
-export const WithLink = {
+export const WithLink = meta.story({
 	args: {
 		title: 'Example title',
 		description: `<p>And a much longer description with lots of text, other thoughts and musings <a href="#">and a link</a></p>`,
 	},
-} satisfies Story;
+});
 
-export const WithLinkAndImage = {
+export const WithLinkAndImage = meta.story({
 	args: {
 		title: 'Example title',
 		description: `<p>And a much longer description with lots of text, other thoughts and musings <a href="#">and a link</a></p>`,
@@ -33,9 +29,9 @@ export const WithLinkAndImage = {
 			url: 'https://uploads.guim.co.uk/2023/02/17/Josh_Halliday.jpg',
 		},
 	},
-} satisfies Story;
+});
 
-export const WithFootballCrest = {
+export const WithFootballCrest = meta.story({
 	args: {
 		title: 'Aston Villa',
 		description: `<p>And a much longer description with lots of text, other thoughts and musings <a href="#">and a link</a></p>`,
@@ -44,4 +40,4 @@ export const WithFootballCrest = {
 			teamId: '2',
 		},
 	},
-} satisfies Story;
+});

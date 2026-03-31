@@ -1,11 +1,11 @@
 import { palette as sourcePalette } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import type { Branding } from '../types/branding';
 import { HostedContentHeader } from './HostedContentHeader';
 import type { Props as HostedContentHeaderProps } from './HostedContentHeader';
 import { Section } from './Section';
 
-const meta = {
+const meta = preview.meta({
 	component: HostedContentHeader,
 	title: 'Components/HostedContentHeader',
 	args: {
@@ -39,10 +39,6 @@ const meta = {
 			<HostedContentHeader {...args} />
 		</Section>
 	),
-} satisfies Meta<typeof HostedContentHeader>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {} satisfies Story;
+export const Default = meta.story();

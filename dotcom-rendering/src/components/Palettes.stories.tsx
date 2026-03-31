@@ -1,16 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import type { ComponentProps } from 'react';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../types/front';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
-type PaletteType = {
-	frontSection: ComponentProps<typeof FrontSection>;
-	flexibleGeneral: ComponentProps<typeof FlexibleGeneral>;
-};
-const meta = {
+const meta = preview.meta({
 	title: 'Layouts/Palettes',
 	parameters: {
 		chromatic: {
@@ -24,11 +19,7 @@ const meta = {
 			<FlexibleGeneral {...args.flexibleGeneral} />
 		</FrontSection>
 	),
-} satisfies Meta<PaletteType>;
-
-type Story = StoryObj<typeof meta>;
-
-export default meta;
+});
 
 const groupedTrails = {
 	snap: [],
@@ -46,7 +37,7 @@ const groupedTrails = {
 	],
 } satisfies DCRGroupedTrails;
 
-export const EventPalette: Story = {
+export const EventPalette = meta.story({
 	args: {
 		frontSection: {
 			title: 'Event Palette',
@@ -64,130 +55,130 @@ export const EventPalette: Story = {
 			collectionId: 1234,
 		},
 	},
-};
+});
 
-export const EventAltPalette: Story = {
+export const EventAltPalette = meta.story({
 	args: {
 		frontSection: {
-			...EventPalette.args.frontSection,
+			...EventPalette.input.args.frontSection,
 			title: 'Event Alt Palette',
 			containerPalette: 'EventAltPalette',
 		},
 		flexibleGeneral: {
-			...EventPalette.args.flexibleGeneral,
+			...EventPalette.input.args.flexibleGeneral,
 			containerPalette: 'EventAltPalette',
 		},
 	},
-};
+});
 
-export const SombrePalette: Story = {
+export const SombrePalette = meta.story({
 	args: {
 		frontSection: {
-			...EventPalette.args.frontSection,
+			...EventPalette.input.args.frontSection,
 			title: 'Sombre Palette',
 			containerPalette: 'SombrePalette',
 		},
 		flexibleGeneral: {
-			...EventPalette.args.flexibleGeneral,
+			...EventPalette.input.args.flexibleGeneral,
 			containerPalette: 'SombrePalette',
 		},
 	},
-};
+});
 
-export const SombreAltPalette: Story = {
+export const SombreAltPalette = meta.story({
 	args: {
 		frontSection: {
-			...EventPalette.args.frontSection,
+			...EventPalette.input.args.frontSection,
 			title: 'Sombre Alt Palette',
 			containerPalette: 'SombreAltPalette',
 		},
 		flexibleGeneral: {
-			...EventPalette.args.flexibleGeneral,
+			...EventPalette.input.args.flexibleGeneral,
 			containerPalette: 'SombreAltPalette',
 		},
 	},
-};
-export const BreakingPalette: Story = {
+});
+export const BreakingPalette = meta.story({
 	args: {
 		frontSection: {
-			...EventPalette.args.frontSection,
+			...EventPalette.input.args.frontSection,
 			title: 'Breaking Palette',
 			containerPalette: 'BreakingPalette',
 		},
 		flexibleGeneral: {
-			...EventPalette.args.flexibleGeneral,
+			...EventPalette.input.args.flexibleGeneral,
 			containerPalette: 'BreakingPalette',
 		},
 	},
-};
+});
 
-export const LongRunningPalette: Story = {
+export const LongRunningPalette = meta.story({
 	args: {
 		frontSection: {
-			...EventPalette.args.frontSection,
+			...EventPalette.input.args.frontSection,
 			title: 'Long Running Palette',
 			containerPalette: 'LongRunningPalette',
 		},
 		flexibleGeneral: {
-			...EventPalette.args.flexibleGeneral,
+			...EventPalette.input.args.flexibleGeneral,
 			containerPalette: 'LongRunningPalette',
 		},
 	},
-};
+});
 
-export const LongRunningAltPalette: Story = {
+export const LongRunningAltPalette = meta.story({
 	args: {
 		frontSection: {
-			...EventPalette.args.frontSection,
+			...EventPalette.input.args.frontSection,
 			title: 'Long Running Alt Palette',
 			containerPalette: 'LongRunningAltPalette',
 		},
 		flexibleGeneral: {
-			...EventPalette.args.flexibleGeneral,
+			...EventPalette.input.args.flexibleGeneral,
 			containerPalette: 'LongRunningAltPalette',
 		},
 	},
-};
+});
 
-export const InvestigationPalette: Story = {
+export const InvestigationPalette = meta.story({
 	args: {
 		frontSection: {
-			...EventPalette.args.frontSection,
+			...EventPalette.input.args.frontSection,
 			title: 'Investigation Palette',
 			containerPalette: 'InvestigationPalette',
 		},
 		flexibleGeneral: {
-			...EventPalette.args.flexibleGeneral,
+			...EventPalette.input.args.flexibleGeneral,
 			containerPalette: 'InvestigationPalette',
 		},
 	},
-};
+});
 
-export const SpecialReportAltPalette: Story = {
+export const SpecialReportAltPalette = meta.story({
 	args: {
 		frontSection: {
-			...EventPalette.args.frontSection,
+			...EventPalette.input.args.frontSection,
 			title: 'Special Report Alt Palette',
 			containerPalette: 'SpecialReportAltPalette',
 		},
 		flexibleGeneral: {
-			...EventPalette.args.flexibleGeneral,
+			...EventPalette.input.args.flexibleGeneral,
 			containerPalette: 'SpecialReportAltPalette',
 		},
 	},
-};
+});
 
-export const BrandedPalette: Story = {
+export const BrandedPalette = meta.story({
 	args: {
 		frontSection: {
-			...EventPalette.args.frontSection,
+			...EventPalette.input.args.frontSection,
 			title: 'Branded Palette Redesign',
 			containerPalette: 'Branded',
 			isLabs: true,
 		},
 		flexibleGeneral: {
-			...EventPalette.args.flexibleGeneral,
+			...EventPalette.input.args.flexibleGeneral,
 			containerPalette: 'Branded',
 		},
 	},
-};
+});

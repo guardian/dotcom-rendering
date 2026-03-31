@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 
-const meta = {
+const meta = preview.meta({
 	component: VimeoBlockComponent,
 	title: 'Components/Vimeo Component',
 	decorators: [
@@ -31,13 +31,9 @@ const meta = {
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
-} satisfies Meta<typeof VimeoBlockComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const SmallAspectRatio = {
+export const SmallAspectRatio = meta.story({
 	args: {
 		embedUrl: 'https://player.vimeo.com/video/327310297?app_id=122963',
 		height: 250,
@@ -52,22 +48,22 @@ export const SmallAspectRatio = {
 		},
 		isMainMedia: false,
 	},
-} satisfies Story;
+});
 
-export const LargeAspectRatio = {
-	...SmallAspectRatio,
+export const LargeAspectRatio = meta.story({
+	...SmallAspectRatio.input,
 	args: {
-		...SmallAspectRatio.args,
+		...SmallAspectRatio.input.args,
 		height: 259,
 		width: 460,
 	},
-} satisfies Story;
+});
 
-export const VerticalAspectRatio = {
-	...SmallAspectRatio,
+export const VerticalAspectRatio = meta.story({
+	...SmallAspectRatio.input,
 	args: {
-		...SmallAspectRatio.args,
+		...SmallAspectRatio.input.args,
 		height: 818,
 		width: 460,
 	},
-} satisfies Story;
+});

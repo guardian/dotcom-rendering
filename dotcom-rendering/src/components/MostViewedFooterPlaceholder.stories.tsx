@@ -1,8 +1,8 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { MostViewedFooterPlaceholder as MostViewedFooterPlaceholderComponent } from './MostViewedFooterPlaceholder';
 
-const meta = {
+const meta = preview.meta({
 	component: MostViewedFooterPlaceholderComponent,
 	parameters: {
 		chromatic: {
@@ -13,10 +13,6 @@ const meta = {
 			],
 		},
 	},
-} satisfies Meta<typeof MostViewedFooterPlaceholderComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const MostViewedFooterPlaceholder = {} satisfies Story;
+export const MostViewedFooterPlaceholder = meta.story();
