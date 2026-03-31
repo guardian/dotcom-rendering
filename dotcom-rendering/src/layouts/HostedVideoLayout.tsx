@@ -156,40 +156,8 @@ const ctaStyles = css`
 
 const sideBorders = css`
 	${from.desktop} {
-		position: relative;
-		::before {
-			z-index: 0;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			content: '';
-			width: 1px;
-			background-color: ${themePalette('--article-border')};
-
-			left: -${grid.mobileColumnGap};
-			${from.mobileLandscape} {
-				left: -${grid.columnGap};
-			}
-
-			grid-column-start: 2;
-		}
-
-		::after {
-			z-index: -1;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			content: '';
-			width: 1px;
-			background-color: ${themePalette('--article-border')};
-
-			right: -${grid.mobileColumnGap};
-			${from.mobileLandscape} {
-				right: -${grid.columnGap};
-			}
-
-			grid-column-end: -2;
-		}
+		border-left: 1px solid ${themePalette('--article-border')};
+		border-right: 1px solid ${themePalette('--article-border')};
 	}
 `;
 
@@ -226,7 +194,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 			) : null}
 
 			<main data-layout="HostedVideoLayout">
-				<article css={[grid.container, sideBorders]}>
+				<article css={[grid.paddedContainer, sideBorders]}>
 					<header css={headerStyles}>
 						<div css={mainMediaStyles}>
 							<MainMedia
