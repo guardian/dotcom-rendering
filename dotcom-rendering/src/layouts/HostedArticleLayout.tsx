@@ -41,6 +41,14 @@ interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
 
+const containerStyles = css`
+	${grid.container}
+
+	${from.desktop} {
+		${grid.paddedContainer}
+	}
+`;
+
 const mainMediaStyles = css`
 	${grid.column.all}
 	grid-row-start: 1;
@@ -216,7 +224,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 			) : null}
 
 			<main data-layout="HostedArticleLayout">
-				<article css={[grid.paddedContainer, sideBorders]}>
+				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
 						<MainMedia
 							format={format}
