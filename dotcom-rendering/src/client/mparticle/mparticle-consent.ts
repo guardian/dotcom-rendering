@@ -7,9 +7,9 @@ import {
 } from './cookies/mparticleConsentSynced';
 import { syncConsentToMparticle } from './mparticleConsentApi';
 
-// TODO: confirm the exact key name with Data Privacy / MRR (currently using 'mparticle').
-// TODO: once the csnx PR adds mparticle: ['62470f577e1e3605d5bc0b8a'] to VendorIDs
-// and @guardian/libs is bumped here, remove the `as VendorName` cast.
+// TODO: bump @guardian/libs to the version that includes csnx PR #2347, then:
+// - remove the `as VendorName` cast below
+// - replace with: export const MPARTICLE_CONSENT_PURPOSE: VendorName = 'mparticle';
 export const MPARTICLE_CONSENT_PURPOSE = 'mparticle' as VendorName;
 
 export const syncMparticleConsent = (): void => {

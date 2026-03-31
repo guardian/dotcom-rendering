@@ -5,14 +5,14 @@
 > **Backend Asana task:** [Backend task](https://app.asana.com/0/0/1213430985786431)  
 > **Connection Asana task:** [Connection task](https://app.asana.com/0/0/1213430985786437)
 
-## Status snapshot (as of 2026-03-27)
+## Status snapshot (as of 2026-03-31)
 
-| Repo                           | Status                                                                                                  |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| `dotcom-rendering` (this repo) | ✅ [PR open](https://github.com/guardian/dotcom-rendering/pull/15581) - pending PR description + review |
-| `frontend` (Scala)             | ⏳ Needs switch + URL injection                                                                         |
-| `csnx` (`@guardian/libs`)      | ⏳ Needs `mparticle` added to `VendorIDs` — vendor ID now known, PR ready to open                       |
-| backend (`mparticle-api`)      | ⏳ Draft - needs deployment to CODE                                                                     |
+| Repo                           | Status                                                                                                         |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| `dotcom-rendering` (this repo) | ✅ [PR open](https://github.com/guardian/dotcom-rendering/pull/15581) - pending `@guardian/libs` bump + review |
+| `frontend` (Scala)             | ⏳ Needs switch + URL injection                                                                                |
+| `csnx` (`@guardian/libs`)      | ✅ [PR #2347 merged](https://github.com/guardian/csnx/pull/2347) — `@guardian/libs` bump pending in DCR        |
+| backend (`mparticle-api`)      | ⏳ Draft - needs deployment to CODE                                                                            |
 
 ## Tasks
 
@@ -39,14 +39,7 @@
 
 ### 2. Confirm Sourcepoint vendor ID with Data Privacy / MRR
 
--   [x] **Status:** Vendor ID confirmed — `62470f577e1e3605d5bc0b8a` (found in the Guardian's Sourcepoint privacy-manager-view API response, 2026-03-27)
--   [ ] **Remaining:** Confirm the exact GDPR purpose key name to use in `VendorIDs` (e.g. `'mparticle'`) with Data Privacy / MRR
-
-**mParticle Sourcepoint vendor ID:** `62470f577e1e3605d5bc0b8a` (CUSTOM type, confirmed from `https://sourcepoint.theguardian.com/consent/tcfv2/privacy-manager/privacy-manager-view?siteId=38161`)
-
-**Outstanding question for Data Privacy / MRR:**
-
-1. **What is the exact key name** to use in `VendorIDs`? The code currently uses `'mparticle'` — confirm this is correct or supply the agreed name.
+-   [x] **Status:** Done — vendor ID `62470f577e1e3605d5bc0b8a` confirmed from Sourcepoint API (2026-03-27); key name `'mparticle'` agreed and used in csnx PR #2347
 
 **Why this is critical — runtime throw, not just a TypeScript error:**
 
@@ -71,25 +64,30 @@ The current `'mparticle' as VendorName` cast only silences the TypeScript compil
 
 ### 3. Add the confirmed vendor to `VendorIDs` in `@guardian/libs` (`csnx` repo)
 
--   [ ] **Status:** Ready to open — vendor ID confirmed, pending agreement of key name with Data Privacy
+-   [x] **Status:** Done — [PR #2347 merged](https://github.com/guardian/csnx/pull/2347)
 
-**What:** Open a PR in the [`csnx` repository](https://github.com/guardian/csnx) to add the confirmed vendor name and its Sourcepoint ID to the `VendorIDs` registry. This is the map from vendor name string to IAB TCF ID that `@guardian/libs` exports. `VendorName` is a strict union type derived from the keys of this registry.
+`mparticle: ['62470f577e1e3605d5bc0b8a']` added to `TCFV2VendorIDs` in `vendors.ts`. `'mparticle'` is now a valid `VendorName`. Changeset is `minor`.
 
-The entry to add to `TCFV2VendorIDs` in `csnx` will look like:
+### 3a. Bump `@guardian/libs` in DCR and remove `as VendorName` cast
+
+-   [ ] **Status:** Not started — waiting for the `@guardian/libs` minor release to publish after csnx PR #2347 merge
+
+**What:**
+
+1. Run `pnpm update @guardian/libs` (or equivalent) in `dotcom-rendering/` to pick up the new minor version that includes `mparticle` in `VendorIDs`.
+2. Remove the `as VendorName` cast and both TODO comments from [src/client/mparticle/mparticle-consent.ts](../src/client/mparticle/mparticle-consent.ts):
 
 ```ts
-mparticle: ['62470f577e1e3605d5bc0b8a'],
-```
-
-Currently the code uses a temporary workaround that must be removed (see task 8):
-
-```ts
-// src/client/mparticle/mparticle-consent.ts
+// Change this:
 export const MPARTICLE_CONSENT_PURPOSE = 'mparticle' as VendorName;
+
+// To this:
+export const MPARTICLE_CONSENT_PURPOSE: VendorName = 'mparticle';
 ```
 
-**After the `csnx` PR lands and `@guardian/libs` is bumped in DCR:**
-Remove the `as VendorName` cast from [src/client/mparticle/mparticle-consent.ts](../src/client/mparticle/mparticle-consent.ts) and delete both TODO comments.
+3. Remove the `import type { VendorName }` line if it is no longer needed (it will still be needed for the type annotation above, so keep it).
+
+This unblocks the runtime safety of the feature — until this is done, `getConsentFor('mparticle', state)` will continue to throw at runtime.
 
 ### 4. Add the `mparticleConsentSync` switch in `frontend` (Scala)
 
