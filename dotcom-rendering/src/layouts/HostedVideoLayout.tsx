@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	breakpoints,
 	from,
+	palette,
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
@@ -42,18 +43,22 @@ interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
 
+const containerStyles = css`
+	${grid.container}
+
+	${from.desktop} {
+		${grid.paddedContainer}
+	}
+`;
+
 const mainMediaStyles = css`
 	${grid.column.all}
 	grid-row-start: 1;
+	background-color: ${palette.neutral[10]};
 
 	z-index: 1;
 	overflow: hidden;
-	max-height: 400px;
-
-	${from.wide} {
-		width: ${breakpoints.wide}px;
-		margin: auto;
-	}
+	max-height: 600px;
 `;
 
 const captionStyles = css`
@@ -214,7 +219,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 			) : null}
 
 			<main data-layout="HostedVideoLayout">
-				<article css={[grid.paddedContainer, sideBorders]}>
+				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
 						<MainMedia
 							format={format}
