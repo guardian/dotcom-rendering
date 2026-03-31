@@ -32,16 +32,17 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-enable-spacefinder-on-interactives",
-		description: "Enable spacefinder on interactive articles on mobile web",
+		name: "commercial-holdback-spacefinder-on-interactives",
+		description:
+			"Holdback proportion of the audience without new spacefinder logic on interactive pages",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-04-09",
+		expirationDate: "2026-04-30",
 		type: "client",
 		status: "ON",
-		audienceSize: 0 / 100,
+		audienceSize: 10 / 100,
 		audienceSpace: "A",
-		groups: ["true"],
-		shouldForceMetricsCollection: false,
+		groups: ["control", "holdback"],
+		shouldForceMetricsCollection: true,
 	},
 	{
 		name: "commercial-mobile-inline1-halfpage",
@@ -81,20 +82,6 @@ const ABTests: ABTest[] = [
 		audienceSpace: "A",
 		groups: ["variant-detect"],
 		shouldForceMetricsCollection: false,
-	},
-	{
-		name: "fronts-and-curation-slim-homepage",
-		description:
-			"Test slimming content and placing Most Popular components on the right-hand side on the UK front.",
-		owners: ["fronts.and.curation@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2026-04-28",
-		type: "server",
-		audienceSize: 15 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant-one", "variant-two"],
-		shouldForceMetricsCollection: false,
-		shouldReportToOphan: () => window.innerWidth >= 1300,
 	},
 	{
 		name: "growth-holdback-group",
@@ -139,7 +126,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Testing whether the asynchronous loading of userIds will alleviate any potential blocking of downstream functions",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-04-02",
+		expirationDate: "2026-04-30",
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,

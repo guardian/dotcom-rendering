@@ -21,7 +21,7 @@ import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { palette } from '../palette';
+import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
@@ -156,25 +156,10 @@ const ctaStyles = css`
 
 const sideBorders = css`
 	${from.desktop} {
-		position: relative;
-		::before {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			content: '';
-			border-left: 1px solid ${palette('--article-border')};
-			border-right: 1px solid ${palette('--article-border')};
-			left: -${grid.mobileColumnGap};
-			right: -${grid.mobileColumnGap};
-			${from.mobileLandscape} {
-				left: -${grid.columnGap};
-				right: -${grid.columnGap};
-			}
-			${grid.between('centre-column-start', 'right-column-end')}
-			${from.leftCol} {
-				${grid.between('left-column-start', 'right-column-end')}
-			}
-		}
+		/* box-sizing property needed to prevent the width of the grid taking into account the border width */
+		box-sizing: content-box;
+		border-left: 1px solid ${themePalette('--article-border')};
+		border-right: 1px solid ${themePalette('--article-border')};
 	}
 `;
 
@@ -211,7 +196,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 			) : null}
 
 			<main data-layout="HostedVideoLayout">
-				<article css={[grid.container, sideBorders]}>
+				<article css={[grid.paddedContainer, sideBorders]}>
 					<header css={headerStyles}>
 						<div css={mainMediaStyles}>
 							<MainMedia

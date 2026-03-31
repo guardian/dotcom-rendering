@@ -7,7 +7,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { FootballMatchGoalAttempts } from './FootballMatchStat';
 
 const meta = preview.meta({
-	title: 'Components/Football Match Goal Attempts',
+	title: 'Components/Football Match Goal attempts',
 	component: FootballMatchGoalAttempts,
 	render: (args) => (
 		<div css={{ padding: space[2] }}>

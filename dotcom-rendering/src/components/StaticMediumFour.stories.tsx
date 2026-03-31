@@ -28,16 +28,12 @@ const meta = {
 		showAge: true,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
-		isInSlimHomepageAbTestVariant: false,
 	},
 	render: (args) => (
 		<FrontSection
 			title="Static medium four"
 			editionId="UK"
 			containerLevel="Primary"
-			slimifySectionForSlimHomepageAbTest={
-				args.isInSlimHomepageAbTestVariant
-			}
 		>
 			<StaticMediumFour {...args} />
 		</FrontSection>
@@ -52,14 +48,6 @@ export const Four = {
 	name: 'With Four Cards',
 	args: {
 		trails: trails.slice(0, 4),
-	},
-};
-
-export const FourSlimHomepageAbTest = {
-	name: 'With Four Cards in Slim Homepage AB Test',
-	args: {
-		trails: trails.slice(0, 4),
-		isInSlimHomepageAbTestVariant: true,
 	},
 };
 

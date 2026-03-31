@@ -44,6 +44,7 @@ export const EventPalette = meta.story({
 			containerPalette: 'EventPalette',
 			showDateHeader: true,
 			editionId: 'UK',
+			showTopBorder: false,
 		},
 		flexibleGeneral: {
 			groupedTrails,

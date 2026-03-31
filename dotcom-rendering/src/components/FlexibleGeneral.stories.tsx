@@ -159,16 +159,12 @@ const meta = {
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		collectionId: 1,
-		isInSlimHomepageAbTestVariant: false,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
 			title={frontSectionTitle}
 			editionId="UK"
-			showTopBorder={true}
-			slimifySectionForSlimHomepageAbTest={
-				args.isInSlimHomepageAbTestVariant
-			}
+			showTopBorder={false}
 		>
 			<FlexibleGeneral {...args} />
 		</FrontSection>
@@ -195,14 +191,6 @@ export const SplashWithStandards: Story = {
 	},
 };
 
-export const SplashWithStandardsInSlimHomepageAbTest: Story = {
-	name: 'Splash with big and standard cards in the Slim Homepage AB Test',
-	args: {
-		...SplashWithStandards.args,
-		isInSlimHomepageAbTestVariant: true,
-	},
-};
-
 export const SplashWithSublinks: Story = {
 	name: 'Standard splash with sublinks',
 	args: {
@@ -219,7 +207,7 @@ export const SplashWithSublinks: Story = {
 			title: string;
 			supportingContent?: DCRSupportingContent[];
 		}) => (
-			<FrontSection title={title} editionId="UK" showTopBorder={true}>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -309,7 +297,7 @@ export const SplashBoostLevels: Story = {
 			title: string;
 			boostLevel?: BoostLevel;
 		}) => (
-			<FrontSection title={title} editionId="UK" showTopBorder={true}>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -353,7 +341,7 @@ export const SplashWithImageSupression: Story = {
 			title: string;
 			boostLevel?: BoostLevel;
 		}) => (
-			<FrontSection title={title} editionId="UK" showTopBorder={true}>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -388,7 +376,7 @@ export const SplashWithLiveUpdates: Story = {
 			title: string;
 			boostLevel?: BoostLevel;
 		}) => (
-			<FrontSection title={title} editionId="UK" showTopBorder={true}>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -421,7 +409,7 @@ export const StandardBoostedWithLiveUpdates: Story = {
 			title: string;
 			boostLevel: BoostLevel;
 		}) => (
-			<FrontSection title={title} editionId="UK" showTopBorder={true}>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -497,13 +485,13 @@ export const WithSpecialPaletteVariations = {
 	},
 	render: (args) => (
 		<>
-			{containerPalettes.map((containerPalette) => (
+			{containerPalettes.map((containerPalette, index) => (
 				<FrontSection
-					editionId="UK"
-					showTopBorder={true}
-					containerPalette={containerPalette}
 					key={containerPalette}
+					editionId="UK"
+					containerPalette={containerPalette}
 					title={containerPalette}
+					showTopBorder={index > 0}
 				>
 					<FlexibleGeneral
 						containerPalette={containerPalette}
@@ -553,7 +541,7 @@ export const SelfHostedVideoCardsInSplashSlots: Story = {
 			video: DCRFrontCard;
 			boostLevel?: BoostLevel;
 		}) => (
-			<FrontSection title={title} editionId="UK" showTopBorder={true}>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -651,7 +639,7 @@ export const SplashWithSlideshow: Story = {
 			mainMedia?: MainMedia;
 			articleMedia?: ArticleMedia;
 		}) => (
-			<FrontSection title={title} editionId="UK" showTopBorder={true}>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -778,6 +766,5 @@ export const StandardCardsWithSlideshow: Story = {
 			],
 		},
 		collectionId: 1,
-		containerLevel: 'Primary',
 	},
 };
