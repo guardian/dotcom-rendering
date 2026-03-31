@@ -126,7 +126,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Testing whether the asynchronous loading of userIds will alleviate any potential blocking of downstream functions",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-04-02",
+		expirationDate: "2026-04-30",
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
