@@ -1,6 +1,6 @@
 import { Topic } from '@guardian/bridget';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 import type { NotificationsClient } from '../lib/bridgetApi';
 import { NotificationsToggle as NotificationsToggleComponent } from './NotificationsToggle';
 
@@ -51,25 +51,31 @@ export const NotificationsToggle = {
 		await expect(button).toHaveTextContent('Notifications off');
 
 		await step('isFollowing is called', async () => {
-			await expect(
-				mockNotificationsClient.isFollowing,
-			).toHaveBeenCalledWith(expectedTopic);
+			await waitFor(() =>
+				expect(
+					mockNotificationsClient.isFollowing,
+				).toHaveBeenCalledWith(expectedTopic),
+			);
 		});
 
 		await step('follow is called when button is clicked', async () => {
 			await userEvent.click(button);
-			await expect(mockNotificationsClient.follow).toHaveBeenCalledWith(
-				expectedTopic,
-			);
-			await expect(button).toHaveTextContent('Notifications on');
+			await waitFor(async () => {
+				await expect(
+					mockNotificationsClient.follow,
+				).toHaveBeenCalledWith(expectedTopic);
+				await expect(button).toHaveTextContent('Notifications on');
+			});
 		});
 
 		await step('unfollow is called when button is clicked', async () => {
 			await userEvent.click(button);
-			await expect(mockNotificationsClient.unfollow).toHaveBeenCalledWith(
-				expectedTopic,
-			);
-			await expect(button).toHaveTextContent('Notifications off');
+			await waitFor(async () => {
+				await expect(
+					mockNotificationsClient.unfollow,
+				).toHaveBeenCalledWith(expectedTopic);
+				await expect(button).toHaveTextContent('Notifications off');
+			});
 		});
 	},
 } satisfies Story;
