@@ -159,6 +159,8 @@ const ctaStyles = css`
 
 const sideBorders = css`
 	${from.desktop} {
+		/* box-sizing property needed to prevent the width of the grid taking into account the border width */
+		box-sizing: content-box;
 		border-left: 1px solid ${themePalette('--article-border')};
 		border-right: 1px solid ${themePalette('--article-border')};
 	}
