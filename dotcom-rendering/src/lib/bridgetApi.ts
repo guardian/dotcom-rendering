@@ -2,6 +2,7 @@ import type { ThriftClient } from '@creditkarma/thrift-server-core';
 import * as AbTesting from '@guardian/bridget/AbTesting';
 import * as Acquisitions from '@guardian/bridget/Acquisitions';
 import * as Analytics from '@guardian/bridget/Analytics';
+import * as Audio from '@guardian/bridget/Audio';
 import * as Commercial from '@guardian/bridget/Commercial';
 import * as Discussion from '@guardian/bridget/Discussion';
 import * as Environment from '@guardian/bridget/Environment';
@@ -203,6 +204,18 @@ export const getInteractivesClient = (): Interactives.Client<void> => {
 		);
 	}
 	return interactivesClient;
+};
+
+let audioClient: Audio.Client<void> | undefined = undefined;
+export const getAudioClient = (): Audio.Client<void> => {
+	if (!audioClient) {
+		audioClient = createAppClient<Audio.Client<void>>(
+			Audio.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return audioClient;
 };
 
 let listenToArticleClient: ListenToArticle.Client<void> | undefined = undefined;

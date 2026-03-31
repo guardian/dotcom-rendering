@@ -80,16 +80,12 @@ const meta = {
 		imageLoading: 'eager',
 		aspectRatio: '4:5',
 		collectionId: 1,
-		isInSlimHomepageAbTestVariant: false,
 	},
 	render: (args) => (
 		<FrontSection
 			title="Scrollable feature"
 			editionId="UK"
 			containerLevel="Secondary"
-			slimifySectionForSlimHomepageAbTest={
-				args.isInSlimHomepageAbTestVariant
-			}
 		>
 			<ScrollableFeature {...args} />
 		</FrontSection>
@@ -101,12 +97,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {};
-
-export const WithSlimHomepageAbTest = {
-	args: {
-		isInSlimHomepageAbTestVariant: true,
-	},
-} satisfies Story;
 
 export const Media = {
 	args: {

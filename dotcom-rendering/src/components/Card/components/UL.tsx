@@ -81,7 +81,7 @@ type Props = {
 	showTopBar?: boolean;
 	/** Used to add a gap in the center of the top bar */
 	splitTopBar?: boolean;
-	/** Used to give beta containers additional space */
+	/** Used to give flexible containers additional space */
 	hasLargeSpacing?: boolean;
 	/** Overrides the vertical divider colour */
 	verticalDividerColour?: string;
