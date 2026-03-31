@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { from, height, space } from '@guardian/source/foundations';
-import type { ThemeIcon } from '@guardian/source/react-components';
+import { from, space } from '@guardian/source/foundations';
+import type { ThemeButton, ThemeIcon } from '@guardian/source/react-components';
 import {
 	Button,
 	SvgMediaControlsPlay,
@@ -10,27 +10,12 @@ import type { WaveFormTheme } from './WaveForm';
 import { WaveForm } from './WaveForm';
 
 const buttonCss = (audioDuration: string | undefined) => css`
-	display: flex;
-	align-items: center;
-	background-color: ${palette('--listen-to-article-button-fill')};
-	color: ${palette('--listen-to-article-button-background')};
-	&:active,
-	&:focus,
-	&:hover {
-		background-color: ${palette('--listen-to-article-button-fill')};
-	}
 	margin-bottom: ${space[4]}px;
 	margin-left: ${space[2]}px;
 	padding-left: ${space[3]}px;
 	padding-right: ${audioDuration === undefined ? space[4] : space[3]}px;
 	padding-bottom: 0px;
 	font-size: 15px;
-	height: ${height.ctaXsmall}px;
-	min-height: ${height.ctaXsmall}px;
-
-	.src-button-space {
-		width: 0px;
-	}
 `;
 
 const dividerCss = css`
@@ -45,7 +30,13 @@ const themeIcon: ThemeIcon = {
 	fill: palette('--follow-icon-background'),
 };
 
-export const waveFormContainerCss = css`
+const themeButton: Partial<ThemeButton> = {
+	textPrimary: palette('--listen-to-article-button-background'),
+	backgroundPrimary: palette('--listen-to-article-button-fill'),
+	backgroundPrimaryHover: palette('--listen-to-article-button-fill'),
+};
+
+const waveFormContainerCss = css`
 	height: ${space[12]}px;
 	border-top: 1px solid ${palette('--article-meta-lines')};
 	position: relative;
@@ -74,6 +65,7 @@ type Props = {
 	onClickHandler: () => void;
 	audioDuration?: string;
 	waveFormSeed?: string;
+	label?: string;
 };
 
 const waveTheme: WaveFormTheme = {
@@ -84,6 +76,7 @@ export const ListenToArticleButton = ({
 	onClickHandler,
 	audioDuration,
 	waveFormSeed,
+	label = 'Listen to this article',
 }: Props) => {
 	return (
 		<div css={waveFormContainerCss}>
@@ -97,10 +90,11 @@ export const ListenToArticleButton = ({
 			/>
 			<Button
 				onClick={onClickHandler}
-				size="default"
+				size="xsmall"
+				theme={themeButton}
 				cssOverrides={buttonCss(audioDuration)}
 			>
-				<span>Listen to this article</span>
+				<span>{label}</span>
 				{audioDuration === undefined || audioDuration === '' ? null : (
 					<>
 						<span css={dividerCss}></span>
