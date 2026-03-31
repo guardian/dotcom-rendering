@@ -39,8 +39,8 @@ importers:
         specifier: 3.995.0
         version: 3.995.0
       '@guardian/cdk':
-        specifier: 62.3.5
-        version: 62.3.5(aws-cdk-lib@2.240.0(constructs@10.5.1))(aws-cdk@2.1107.0)(constructs@10.5.1)
+        specifier: 62.6.1
+        version: 62.6.1(aws-cdk-lib@2.241.0(constructs@10.5.1))(aws-cdk@2.1110.0)(constructs@10.5.1)
       '@guardian/eslint-config':
         specifier: 12.0.1
         version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
@@ -51,11 +51,14 @@ importers:
         specifier: 22.17.0
         version: 22.17.0
       aws-cdk:
-        specifier: 2.1107.0
-        version: 2.1107.0
+        specifier: 2.1110.0
+        version: 2.1110.0
       aws-cdk-lib:
-        specifier: 2.240.0
-        version: 2.240.0(constructs@10.5.1)
+        specifier: 2.241.0
+        version: 2.241.0(constructs@10.5.1)
+      constructs:
+        specifier: 10.5.1
+        version: 10.5.1
       eslint:
         specifier: 9.39.1
         version: 9.39.1
@@ -6026,7 +6029,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   global-modules@2.0.0:
     resolution: {integrity: sha512-NGbfmJBp9x8IxyJSd1P+otYK8vonoJactOogrVfFRIAEY1ukil8RSKDz2Yo7wh1oihl51l/r6W4epkeKJHqL8A==}
