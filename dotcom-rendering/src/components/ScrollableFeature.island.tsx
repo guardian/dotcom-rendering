@@ -16,7 +16,6 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	collectionId: number;
-	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 /**
@@ -33,7 +32,6 @@ export const ScrollableFeature = ({
 	imageLoading,
 	aspectRatio,
 	collectionId,
-	isInSlimHomepageAbTestVariant,
 }: Props) => {
 	const isBelowTabletBreakpoint = useMatchMedia(
 		removeMediaRulePrefix(until.tablet),
@@ -85,12 +83,7 @@ export const ScrollableFeature = ({
 						imageLoading={imageLoading}
 						aspectRatio={aspectRatio}
 						imageSize="feature"
-						headlineSizes={{
-							...headlineSizes,
-							wide: isInSlimHomepageAbTestVariant
-								? headlineSizes.tablet
-								: headlineSizes.desktop,
-						}}
+						headlineSizes={headlineSizes}
 						trailText={undefined}
 						collectionId={collectionId}
 						uniqueId={`collection-${collectionId}-feature-${index}`}

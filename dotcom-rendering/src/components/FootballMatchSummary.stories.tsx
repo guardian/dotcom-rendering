@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { matchReport } from '../../fixtures/generated/match-report';
 import { FootballMatchSummary as FootballMatchSummaryComponent } from './FootballMatchSummary';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Football Match Summary',
 	component: FootballMatchSummaryComponent,
 	parameters: {
@@ -13,12 +13,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof FootballMatchSummaryComponent>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const FootballMatchSummary = {
+export const FootballMatchSummary = meta.story({
 	args: {
 		match: {
 			homeTeam: matchReport.homeTeam,
@@ -27,4 +24,4 @@ export const FootballMatchSummary = {
 			status: matchReport.status,
 		},
 	},
-} satisfies Story;
+});

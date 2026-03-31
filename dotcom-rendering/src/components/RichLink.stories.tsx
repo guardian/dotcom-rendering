@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -22,14 +22,10 @@ const someImageData = {
 	height: '900',
 };
 
-const meta = {
+const meta = preview.meta({
 	component: RichLink,
 	title: 'Components/RichLink',
-} satisfies Meta<typeof RichLink>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
+});
 
 const mockFormatNews = {
 	display: ArticleDisplay.Standard,
@@ -57,7 +53,7 @@ const mockFormatOpinion = {
 	theme: Pillar.Opinion,
 };
 
-export const Article = {
+export const Article = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'news',
@@ -92,9 +88,9 @@ export const Article = {
 			modes: { horizontal: allModes.splitHorizontal },
 		},
 	},
-} satisfies Story;
+});
 
-export const Network = {
+export const Network = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'special-report',
@@ -138,9 +134,9 @@ export const Network = {
 			isRotated: false,
 		},
 	},
-} satisfies Story;
+});
 
-export const Section = {
+export const Section = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'live',
@@ -173,9 +169,9 @@ export const Section = {
 	parameters: {
 		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
-} satisfies Story;
+});
 
-export const Inline = {
+export const Inline = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'external',
@@ -210,9 +206,9 @@ export const Inline = {
 			modes: { horizontal: allModes.splitHorizontal },
 		},
 	},
-} satisfies Story;
+});
 
-export const ImageContent = {
+export const ImageContent = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'dead',
@@ -256,9 +252,9 @@ export const ImageContent = {
 			isRotated: false,
 		},
 	},
-} satisfies Story;
+});
 
-export const Interactive = {
+export const Interactive = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'feature',
@@ -302,9 +298,9 @@ export const Interactive = {
 			isRotated: false,
 		},
 	},
-} satisfies Story;
+});
 
-export const Gallery = {
+export const Gallery = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'comment',
@@ -357,9 +353,9 @@ export const Gallery = {
 			isRotated: false,
 		},
 	},
-} satisfies Story;
+});
 
-export const Video = {
+export const Video = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'comment',
@@ -404,9 +400,9 @@ export const Video = {
 			isRotated: false,
 		},
 	},
-} satisfies Story;
+});
 
-export const Audio = {
+export const Audio = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'podcast',
@@ -439,9 +435,9 @@ export const Audio = {
 	parameters: {
 		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
-} satisfies Story;
+});
 
-export const LiveBlog = {
+export const LiveBlog = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'media',
@@ -497,9 +493,9 @@ export const LiveBlog = {
 			isRotated: false,
 		},
 	},
-} satisfies Story;
+});
 
-export const Tag = {
+export const Tag = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'analysis',
@@ -532,9 +528,9 @@ export const Tag = {
 	parameters: {
 		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
-} satisfies Story;
+});
 
-export const StarRating = {
+export const StarRating = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'review',
@@ -574,9 +570,9 @@ export const StarRating = {
 	parameters: {
 		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
-} satisfies Story;
+});
 
-export const SoleContributor = {
+export const SoleContributor = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'comment',
@@ -616,9 +612,9 @@ export const SoleContributor = {
 	parameters: {
 		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
-} satisfies Story;
+});
 
-export const DoubleTrouble = {
+export const DoubleTrouble = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'comment',
@@ -663,9 +659,9 @@ export const DoubleTrouble = {
 	parameters: {
 		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
-} satisfies Story;
+});
 
-export const Crossword = {
+export const Crossword = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'letters',
@@ -698,9 +694,9 @@ export const Crossword = {
 	parameters: {
 		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
-} satisfies Story;
+});
 
-export const Survey = {
+export const Survey = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'external',
@@ -733,9 +729,9 @@ export const Survey = {
 	parameters: {
 		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
-} satisfies Story;
+});
 
-export const Signup = {
+export const Signup = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'comment',
@@ -769,9 +765,9 @@ export const Signup = {
 	parameters: {
 		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
-} satisfies Story;
+});
 
-export const Userid = {
+export const Userid = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'editorial',
@@ -804,9 +800,9 @@ export const Userid = {
 	parameters: {
 		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
-} satisfies Story;
+});
 
-export const PaidFor = {
+export const PaidFor = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'news',
@@ -845,9 +841,9 @@ export const PaidFor = {
 	parameters: {
 		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
-} satisfies Story;
+});
 
-export const Analysis = {
+export const Analysis = meta.story({
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'news',
@@ -899,4 +895,4 @@ export const Analysis = {
 	parameters: {
 		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
-} satisfies Story;
+});

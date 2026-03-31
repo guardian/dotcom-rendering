@@ -159,16 +159,12 @@ const meta = {
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		collectionId: 1,
-		isInSlimHomepageAbTestVariant: false,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
 			title={frontSectionTitle}
 			editionId="UK"
 			showTopBorder={false}
-			slimifySectionForSlimHomepageAbTest={
-				args.isInSlimHomepageAbTestVariant
-			}
 		>
 			<FlexibleGeneral {...args} />
 		</FrontSection>
@@ -192,14 +188,6 @@ export const SplashWithStandards: Story = {
 				boostLevel: index === 0 ? 'boost' : 'default',
 			})),
 		},
-	},
-};
-
-export const SplashWithStandardsInSlimHomepageAbTest: Story = {
-	name: 'Splash with big and standard cards in the Slim Homepage AB Test',
-	args: {
-		...SplashWithStandards.args,
-		isInSlimHomepageAbTestVariant: true,
 	},
 };
 

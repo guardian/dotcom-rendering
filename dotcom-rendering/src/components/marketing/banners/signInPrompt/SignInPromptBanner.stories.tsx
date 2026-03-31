@@ -4,7 +4,7 @@
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/signInPrompt/SignInPromptBanner.stories.tsx
  */
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
-import type { Meta } from '@storybook/react-webpack5';
+import preview from '../../../../../.storybook/preview';
 import { props } from '../utils/storybook';
 import { SignInPromptBanner } from './SignInPromptBanner';
 
@@ -32,11 +32,11 @@ const baseArgs = {
 	},
 };
 
-export default {
+const meta = preview.meta({
 	component: SignInPromptBanner,
 	title: 'Components/marketing/SignInPromptBanner',
 	render: (args) => <SignInPromptBanner {...args} />,
 	args: baseArgs,
-} as Meta<typeof SignInPromptBanner>;
+});
 
-export const Default = {};
+export const Default = meta.story();

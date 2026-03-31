@@ -1,18 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { defaultFormats } from '../../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../../.storybook/modes';
+import preview from '../../../.storybook/preview';
 import { AudioAtom as AudioAtomComponent } from './AudioAtom';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Audio Atom',
 	component: AudioAtomComponent,
-} satisfies Meta<typeof AudioAtomComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const AudioAtom = {
+export const AudioAtom = meta.story({
 	args: {
 		id: 'd6d509cf-ca10-407f-8913-e16a3712f415',
 		trackUrl:
@@ -25,10 +21,10 @@ export const AudioAtom = {
 		// We only want to snapshot the `multipleFormats` version below.
 		chromatic: { disable: true },
 	},
-} satisfies Story;
+});
 
-export const MultipleFormats = {
-	args: AudioAtom.args,
+export const MultipleFormats = meta.story({
+	args: AudioAtom.input.args,
 	parameters: {
 		formats: defaultFormats,
 		chromatic: {
@@ -37,4 +33,4 @@ export const MultipleFormats = {
 			},
 		},
 	},
-} satisfies Story;
+});

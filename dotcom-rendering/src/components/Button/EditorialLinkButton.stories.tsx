@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryFn, StoryObj } from '@storybook/react-webpack5';
+import type { StoryFn } from '@storybook/react-webpack5';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
+import preview from '../../../.storybook/preview';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -10,14 +11,10 @@ import {
 import { EditorialLinkButton } from './EditorialLinkButton';
 import type { EditorialLinkButtonProps } from './EditorialLinkButton';
 
-const meta: Meta<typeof EditorialLinkButton> = {
+const meta = preview.meta({
 	title: 'Components/EditorialLinkButton',
 	component: EditorialLinkButton,
-} satisfies Meta<typeof EditorialLinkButton>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
+});
 
 const Template: StoryFn<typeof EditorialLinkButton> = (
 	args: EditorialLinkButtonProps,
@@ -50,47 +47,47 @@ const allThemeStandardVariations = pillars.map((theme) => ({
 	theme,
 }));
 
-export const WhenPrimary = {
+export const WhenPrimary = meta.story({
 	args: {
 		priority: 'primary',
 		size: 'small',
 	},
 	decorators: [lightDecorator(allThemeStandardVariations)],
 	render: Template,
-} satisfies Story;
+});
 // *****************************************************************************
 
-export const WhenSecondary = {
+export const WhenSecondary = meta.story({
 	args: {
 		priority: 'secondary',
 		size: 'small',
 	},
 	decorators: [lightDecorator(allThemeStandardVariations)],
 	render: Template,
-} satisfies Story;
+});
 // *****************************************************************************
 
-export const WhenTertiary = {
+export const WhenTertiary = meta.story({
 	args: {
 		priority: 'tertiary',
 		size: 'small',
 	},
 	decorators: [lightDecorator(allThemeStandardVariations)],
 	render: Template,
-} satisfies Story;
+});
 // *****************************************************************************
 
-export const WhenSubdued = {
+export const WhenSubdued = meta.story({
 	args: {
 		priority: 'subdued',
 		size: 'small',
 	},
 	decorators: [lightDecorator(allThemeStandardVariations)],
 	render: Template,
-} satisfies Story;
+});
 // *****************************************************************************
 
-export const WithOverrides = {
+export const WithOverrides = meta.story({
 	args: {
 		cssOverrides: css`
 			background-color: pink;
@@ -99,4 +96,4 @@ export const WithOverrides = {
 	},
 	decorators: [lightDecorator(allThemeStandardVariations)],
 	render: Template,
-} satisfies Story;
+});

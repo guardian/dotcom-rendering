@@ -23,8 +23,11 @@ import {
 import { palette as sourcePalette } from '@guardian/source/foundations';
 
 // Set up module mocking for auth and newsletter subscription hooks
+// @ts-ignore -- Storybook wants the file extension, TS does not.
 sb.mock(import('../src/lib/useNewsletterSubscription.ts'), { spy: true });
+// @ts-ignore -- Storybook wants the file extension, TS does not.
 sb.mock(import('../src/lib/useAuthStatus.ts'), { spy: true });
+// @ts-ignore -- Storybook wants the file extension, TS does not.
 sb.mock(import('../src/lib/fetchEmail.ts'), { spy: true });
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
@@ -52,7 +55,7 @@ setABTests({
 
 // Add base css for the site
 let css = `${rawFontsCss}${resets.resetCSS}`;
-let head = document.getElementsByTagName('head')[0];
+let head = document.head;
 let style = document.createElement('style');
 head.appendChild(style);
 style.type = 'text/css';

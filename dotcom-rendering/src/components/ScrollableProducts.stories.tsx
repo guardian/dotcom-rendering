@@ -1,11 +1,11 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import preview from '../../.storybook/preview';
 import { exampleProduct } from '../../fixtures/manual/productBlockElement';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { ScrollableProduct } from './ScrollableProduct.island';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Scrollable Products',
 	component: ScrollableProduct,
 	parameters: {
@@ -88,10 +88,6 @@ const meta = {
 			</div>
 		</>
 	),
-} satisfies Meta<typeof ScrollableProduct>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const With5Cards = {} satisfies Story;
+export const With5Cards = meta.story();

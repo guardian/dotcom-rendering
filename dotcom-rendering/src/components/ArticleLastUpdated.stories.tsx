@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { ArticleLastUpdated } from './ArticleLastUpdated';
 
-const meta = {
+const meta = preview.meta({
 	component: ArticleLastUpdated,
 	title: 'Components/Article Last Updated',
 	decorators: (Story) => (
@@ -24,13 +24,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof ArticleLastUpdated>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const LiveBlog = {
+export const LiveBlog = meta.story({
 	args: {
 		format: {
 			display: ArticleDisplay.Standard,
@@ -39,14 +35,14 @@ export const LiveBlog = {
 		},
 		lastUpdated: 1641038370000,
 	},
-} satisfies Story;
+});
 
-export const DeadBlog = {
+export const DeadBlog = meta.story({
 	args: {
-		...LiveBlog.args,
+		...LiveBlog.input.args,
 		format: {
-			...LiveBlog.args.format,
+			...LiveBlog.input.args.format,
 			design: ArticleDesign.DeadBlog,
 		},
 	},
-} satisfies Story;
+});

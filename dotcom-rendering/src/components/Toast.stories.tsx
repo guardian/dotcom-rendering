@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
+import preview from '../../.storybook/preview';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -10,14 +10,10 @@ import {
 } from '../lib/articleFormat';
 import { Toast } from './Toast';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Toast',
 	component: Toast,
-} satisfies Meta<typeof Toast>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
+});
 
 const pillars = [
 	Pillar.News,
@@ -35,7 +31,7 @@ const allThemeStandardVariations = pillars.map((theme) => ({
 	theme,
 }));
 
-export const Default = {
+export const Default = meta.story({
 	args: {
 		count: 3,
 		onClick: () => {},
@@ -51,17 +47,17 @@ export const Default = {
 			<Toast {...args} />
 		</div>
 	),
-} satisfies Story;
+});
 
 // *****************************************************************************
 
-export const Lots = {
+export const Lots = meta.story({
 	args: {
 		count: 239,
 		onClick: () => {},
 	},
 	decorators: [lightDecorator(allThemeStandardVariations)],
-	render: Default.render,
-} satisfies Story;
+	render: Default.input.render,
+});
 
 // *****************************************************************************

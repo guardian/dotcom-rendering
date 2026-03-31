@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import preview from '../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { Accessibility as AccessibilityComponent } from './Accessibility.island';
 
-const meta = {
+const meta = preview.meta({
 	component: AccessibilityComponent,
 	title: 'Components/Accessibility',
 	decorators: [
@@ -15,10 +15,6 @@ const meta = {
 			},
 		]),
 	],
-} satisfies Meta<typeof AccessibilityComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Accessibility = {} satisfies Story;
+export const Accessibility = meta.story();

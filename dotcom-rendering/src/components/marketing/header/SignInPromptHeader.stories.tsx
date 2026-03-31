@@ -3,7 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/4925ef1e0ced5d221f1122afe79f93bd7448e0e5/packages/modules/src/modules/headers/SignInPromptHeader.stories.tsx
  */
-import type { Meta } from '@storybook/react-webpack5';
+import preview from '../../../../.storybook/preview';
 import { HeaderDecorator } from './common/HeaderDecorator';
 import { SignInPromptHeaderUnvalidated as SignInPromptHeader } from './SignInPromptHeader';
 
@@ -33,12 +33,12 @@ const baseArgs = {
 	countryCode: 'GB',
 };
 
-export default {
+const meta = preview.meta({
 	component: SignInPromptHeader,
 	title: 'Components/marketing/SignInPromptHeader',
 	decorators: [HeaderDecorator],
 	render: (props) => <SignInPromptHeader {...props} />,
 	args: baseArgs,
-} as Meta<typeof SignInPromptHeader>;
+});
 
-export const DefaultHeader = {};
+export const DefaultHeader = meta.story();

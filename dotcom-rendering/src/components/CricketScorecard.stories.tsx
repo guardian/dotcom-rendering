@@ -1,8 +1,8 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { CricketScorecard as CricketScorecardComponent } from './CricketScorecard';
 
-const meta = {
+const meta = preview.meta({
 	component: CricketScorecardComponent,
 	title: 'Components/CricketScorecard',
 	decorators: [
@@ -20,13 +20,9 @@ const meta = {
 			viewports: [breakpoints.mobileLandscape],
 		},
 	},
-} satisfies Meta<typeof CricketScorecardComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const CricketScorecard = {
+export const CricketScorecard = meta.story({
 	name: 'Cricket Scorecard',
 	args: {
 		allInnings: [
@@ -284,4 +280,4 @@ export const CricketScorecard = {
 			],
 		},
 	},
-} satisfies Story;
+});
