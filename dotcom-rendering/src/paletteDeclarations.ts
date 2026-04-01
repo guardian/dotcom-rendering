@@ -6832,6 +6832,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--cricket-scorecard-innings-heading-background': {
+		light: () => '#071b3c',
+		dark: () => '#071b3c', // TODO: Update with dark mode colour
+	},
 	'--crossword-anagram-helper-background': {
 		light: crosswordAnagramHelperBackgroundLight,
 		dark: crosswordAnagramHelperBackgroundDark,
