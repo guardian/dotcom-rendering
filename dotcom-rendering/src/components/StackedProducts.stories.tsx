@@ -15,6 +15,7 @@ const meta = preview.meta({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
 		},
+		showAllProducts: false,
 	},
 	decorators: [centreColumnDecorator],
 });
@@ -24,11 +25,12 @@ export const Default = meta.story();
 export const FourProducts = meta.story({
 	args: {
 		products: exampleAtAGlanceProductArray.slice(0, 4),
-		heading: 'At a glance',
-		format: {
-			design: ArticleDesign.Review,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Lifestyle,
-		},
+	},
+});
+
+export const AllCardsExpanded = meta.story({
+	args: {
+		products: exampleAtAGlanceProductArray.slice(0, 7),
+		showAllProducts: true,
 	},
 });

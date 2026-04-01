@@ -58,16 +58,16 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "thefilter-at-a-glance-redesign",
+		name: "thefilter-at-a-glance-redesign-v2",
 		description:
 			"Testing redesigned at a glance component on The Filter articles",
 		owners: ["thefilter.dev@guardian.co.uk"],
-		expirationDate: "2026-04-06",
+		expirationDate: "2026-05-06",
 		type: "server",
 		status: "ON",
 		audienceSize: 0 / 100,
 		audienceSpace: "C",
-		groups: ["control", "stacked", "carousel"],
+		groups: ["control", "carousel", "stacked-default", "stacked-expanded"],
 		shouldForceMetricsCollection: false,
 	},
 	{
