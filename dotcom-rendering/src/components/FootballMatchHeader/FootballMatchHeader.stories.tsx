@@ -36,7 +36,6 @@ export const Fixture = meta.story({
 	args: {
 		initialTab: 'info',
 		initialData: {
-			leagueName: feHeaderData.competitionName,
 			match: {
 				kind: 'Fixture',
 				kickOff: new Date('2025-11-05T20:30:00Z'),
@@ -56,6 +55,7 @@ export const Fixture = meta.story({
 				matchKind: 'Fixture',
 			},
 		},
+		leagueName: 'Premier League',
 		edition: 'UK',
 		getHeaderData: () =>
 			getMockData({
@@ -102,6 +102,8 @@ export const Fixture = meta.story({
 export const Live = meta.story({
 	args: {
 		initialTab: 'live',
+		leagueName: 'Premier League',
+		leagueURL: 'https://www.theguardian.com/football/premierleague',
 		edition: 'EUR',
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
@@ -147,6 +149,8 @@ export const Live = meta.story({
 export const Result = meta.story({
 	args: {
 		initialTab: 'report',
+		leagueName: 'Premier League',
+		leagueURL: 'https://www.theguardian.com/football/premierleague',
 		edition: 'AU',
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
@@ -190,6 +194,8 @@ export const Result = meta.story({
 export const AppsResult = meta.story({
 	args: {
 		initialTab: 'report',
+		leagueName: 'Premier League',
+		leagueURL: 'https://www.theguardian.com/football/premierleague',
 		edition: 'AU',
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
