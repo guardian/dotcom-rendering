@@ -173,7 +173,11 @@ interface Props {
 
 export const Subheading = ({ id, format, topPadding, children }: Props) => {
 	return (
-		<h2 id={id} css={[subheadingStyles(format), paddingStyles(topPadding)]}>
+		<h2
+			id={id}
+			css={[subheadingStyles(format), paddingStyles(topPadding)]}
+			tabIndex={-1}
+		>
 			{children}
 		</h2>
 	);
