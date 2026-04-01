@@ -15,6 +15,7 @@ import { HostedContentHeader } from '../components/HostedContentHeader';
 import { HostedContentOnwards } from '../components/HostedContentOnwards';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
+import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.island';
 import { Standfirst } from '../components/Standfirst';
@@ -26,12 +27,14 @@ import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
 import type { RenderingTarget } from '../types/renderingTarget';
+import type { TrailType } from '../types/trails';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
 	content: Article;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends Props {
@@ -140,8 +143,7 @@ const articleBodyStyles = css`
 const onwardContentStyles = css`
 	${grid.column.centre}
 
-	height: 20px;
-	margin-bottom: ${space[6]}px;
+	margin-bottom: ${space[5]}px;
 
 	${from.desktop} {
 		${grid.span(4, 8)}
@@ -177,7 +179,9 @@ const sideBorders = css`
 export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	const {
 		content: { frontendData },
+		renderingTarget,
 		format,
+		serverTime,
 	} = props;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
@@ -204,6 +208,54 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 				'model.dotcomrendering.pageElements.CallToActionAtomBlockElement',
 		),
 	}));
+
+	// This is dummy data until we have the actual trails for hosted content onwards.
+	const trails: TrailType[] = [
+		{
+			url: 'https://www.theguardian.com/world/2024/jun/19/ukraine-war-russia-ukraine-live-updates-june-19',
+			headline:
+				'Russia-Ukraine war live updates: Zelenskiy says Ukraine has retaken 1,000 square kilometres of territory',
+			format: { design: 27, display: 1, theme: 6 },
+			dataLinkName: 'media | group-0 | card-@1',
+			image: {
+				src: 'https://media.guim.co.uk/1c9b8e7cbbacfa4a0a3c8c9d0e5f1b2e5b6c8d/0_0_3500_2100/500.jpg',
+				altText: 'Soldiers in a trench',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/world/2024/jun/19/ukraine-war-russia-ukraine-live-updates-june-19',
+			headline:
+				'Russia-Ukraine war live updates: Zelenskiy says Ukraine has retaken 1,000 square kilometres of territory',
+			format: { design: 27, display: 1, theme: 6 },
+			dataLinkName: 'media | group-0 | card-@1',
+			image: {
+				src: 'https://media.guim.co.uk/1c9b8e7cbbacfa4a0a3c8c9d0e5f1b2e5b6c8d/0_0_3500_2100/500.jpg',
+				altText: 'Soldiers in a trench',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/world/2024/jun/19/ukraine-war-russia-ukraine-live-updates-june-19',
+			headline:
+				'Russia-Ukraine war live updates: Zelenskiy says Ukraine has retaken 1,000 square kilometres of territory',
+			format: { design: 27, display: 1, theme: 6 },
+			dataLinkName: 'media | group-0 | card-@1',
+			image: {
+				src: 'https://media.guim.co.uk/1c9b8e7cbbacfa4a0a3c8c9d0e5f1b2e5b6c8d/0_0_3500_2100/500.jpg',
+				altText: 'Soldiers in a trench',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/world/2024/jun/19/ukraine-war-russia-ukraine-live-updates-june-19',
+			headline:
+				'Russia-Ukraine war live updates: Zelenskiy says Ukraine has retaken 1,000 square kilometres of territory',
+			format: { design: 27, display: 1, theme: 6 },
+			dataLinkName: 'media | group-0 | card-@1',
+			image: {
+				src: 'https://media.guim.co.uk/1c9b8e7cbbacfa4a0a3c8c9d0e5f1b2e5b6c8d/0_0_3500_2100/500.jpg',
+				altText: 'Soldiers in a trench',
+			},
+		},
+	];
 
 	return (
 		<>
@@ -253,7 +305,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 					</div>
 
 					<div data-print-layout="hide" css={metaStyles}>
-						{props.renderingTarget === 'Web' && (
+						{renderingTarget === 'Web' && (
 							<div css={shareButtonStyles}>
 								<Island
 									priority="feature"
@@ -330,7 +382,35 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 
 					<div css={onwardContentStyles}>
 						<HostedContentOnwards
+							trails={trails}
 							accentColor={branding?.hostedCampaignColour}
+							brandName="TrendAI"
+							discussionApiUrl={
+								frontendData.config.discussionApiUrl
+							}
+							format={format}
+						/>
+						<OnwardsUpper
+							ajaxUrl={frontendData.config.ajaxUrl}
+							hasRelated={true}
+							hasStoryPackage={true}
+							isAdFreeUser={frontendData.isAdFreeUser}
+							pageId={frontendData.pageId}
+							isPaidContent={!!frontendData.config.isPaidContent}
+							showRelatedContent={true}
+							keywordIds={frontendData.config.keywordIds}
+							contentType={frontendData.contentType}
+							tags={frontendData.tags}
+							format={format}
+							pillar={format.theme}
+							editionId={frontendData.editionId}
+							shortUrlId={frontendData.config.shortUrlId}
+							discussionApiUrl={
+								frontendData.config.discussionApiUrl
+							}
+							serverTime={serverTime}
+							renderingTarget={renderingTarget}
+							webURL={frontendData.webURL}
 						/>
 					</div>
 

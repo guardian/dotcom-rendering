@@ -25,11 +25,14 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	format: ArticleFormat;
 	headingUrl?: string;
+	isHostedContent?: boolean;
 };
 
 export const ScrollableSmallOnwards = (props: Props) => {
-	const trails = props.trails.slice(0, 4); // Limit to 4 cards
-	if (trails.length !== 4) return null;
+	const trails = props.isHostedContent
+		? props.trails.slice(0, 3)
+		: props.trails.slice(0, 4); // Limit to 4 cards
+	if (trails.length !== 3 && trails.length !== 4) return null;
 
 	const mobileBottomCards = [1, 3];
 	const desktopBottomCards = [2, 3];
