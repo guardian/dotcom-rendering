@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../../../.storybook/preview';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -7,14 +7,10 @@ import {
 } from '../../../lib/articleFormat';
 import { CardFooter as CardFooterComponent } from './CardFooter';
 
-const meta = {
+const meta = preview.meta({
 	component: CardFooterComponent,
 	title: 'Components/Card Footer',
-} satisfies Meta<typeof CardFooterComponent>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
+});
 
 const defaultFormat = {
 	display: ArticleDisplay.Standard,
@@ -22,14 +18,14 @@ const defaultFormat = {
 	theme: Pillar.Opinion,
 };
 
-export const WithAge = {
+export const WithAge = meta.story({
 	args: {
 		format: defaultFormat,
 		age: <p>19h ago</p>,
 	},
-} satisfies Story;
+});
 
-export const WithGallery = {
+export const WithGallery = meta.story({
 	args: {
 		format: defaultFormat,
 		media: {
@@ -37,9 +33,9 @@ export const WithGallery = {
 			count: '14',
 		},
 	},
-} satisfies Story;
+});
 
-export const WithAudio = {
+export const WithAudio = meta.story({
 	args: {
 		format: defaultFormat,
 		media: {
@@ -47,9 +43,9 @@ export const WithAudio = {
 			duration: '12:34',
 		},
 	},
-} satisfies Story;
+});
 
-export const WithYoutubeVideo = {
+export const WithYoutubeVideo = meta.story({
 	args: {
 		format: { ...defaultFormat, design: ArticleDesign.Video },
 		media: {
@@ -58,9 +54,9 @@ export const WithYoutubeVideo = {
 			isLive: false,
 		},
 	},
-} satisfies Story;
+});
 
-export const WithSelfHostedVideo = {
+export const WithSelfHostedVideo = meta.story({
 	args: {
 		format: { ...defaultFormat, design: ArticleDesign.Video },
 		media: {
@@ -68,16 +64,16 @@ export const WithSelfHostedVideo = {
 			duration: 254,
 		},
 	},
-} satisfies Story;
+});
 
-export const WithNewsletter = {
+export const WithNewsletter = meta.story({
 	args: {
 		format: defaultFormat,
 		isNewsletter: true,
 	},
-} satisfies Story;
+});
 
-export const WithBranding = {
+export const WithBranding = meta.story({
 	args: {
 		format: {
 			...defaultFormat,
@@ -85,4 +81,4 @@ export const WithBranding = {
 		},
 		cardBranding: <p>Card branding</p>,
 	},
-} satisfies Story;
+});

@@ -42,10 +42,10 @@ We use Islands when we want to load (P)react code on the client:
 </Island>
 ```
 
-To support this in the build system, we require that the files for components which are used in an island are suffixed with `.importable.tsx`.
-e.g `MyComponent.importable.tsx`. They also must always live in the `src/components` directory.
+To support this in the build system, we require that the files for components which are used in an island are suffixed with `.island.tsx`.
+e.g `MyComponent.island.tsx`. They also must always live in the `src/components` directory.
 
-When we have different islands depending on the rendering target, the `.importable` should always come last, e.g `MyComponent.apps.importable.ts`.
+When we have different islands depending on the rendering target, the `.island` should always come last, e.g `MyComponent.apps.island.ts`.
 
 ## Scripts
 

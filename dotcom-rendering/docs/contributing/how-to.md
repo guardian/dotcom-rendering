@@ -36,7 +36,7 @@ decision document.
 To add an island:
 
 1. Wrap your component on the server with an `<Island>` component.
-2. Add `.importable` to the component filename. Eg: `[MyThing].importable.tsx`
+2. Add `.island` to the component filename. Eg: `[MyThing].island.tsx`
 3. Specify what should trigger hydration (e.g. waiting until the component
    scrolls into view). See `Island.tsx` props for options.
 

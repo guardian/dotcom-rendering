@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { imageStory } from '../../fixtures/manual/qandaAtom';
 import { ConfigProvider } from './ConfigContext';
-import { QandaAtom } from './QandaAtom.importable';
+import { QandaAtom } from './QandaAtom.island';
 
 describe('QandaAtom', () => {
 	it('should render & expand works', () => {

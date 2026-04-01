@@ -11,10 +11,10 @@ import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
-import { ScrollableFeature } from './ScrollableFeature.importable';
-import { ScrollableHighlights } from './ScrollableHighlights.importable';
-import { ScrollableMedium } from './ScrollableMedium.importable';
-import { ScrollableSmall } from './ScrollableSmall.importable';
+import { ScrollableFeature } from './ScrollableFeature.island';
+import { ScrollableHighlights } from './ScrollableHighlights.island';
+import { ScrollableMedium } from './ScrollableMedium.island';
+import { ScrollableSmall } from './ScrollableSmall.island';
 import { StaticFeatureTwo } from './StaticFeatureTwo';
 import { StaticMediumFour } from './StaticMediumFour';
 
@@ -31,7 +31,6 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 export const DecideContainer = ({
@@ -47,7 +46,6 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	isInSlimHomepageAbTestVariant = false,
 }: Props) => {
 	switch (containerType) {
 		case 'nav/list':
@@ -70,9 +68,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
-					isInSlimHomepageAbTestVariant={
-						isInSlimHomepageAbTestVariant
-					}
 				/>
 			);
 		case 'flexible/general':
@@ -86,9 +81,6 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					isInSlimHomepageAbTestVariant={
-						isInSlimHomepageAbTestVariant
-					}
 				/>
 			);
 		case 'scrollable/small':
@@ -116,9 +108,6 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
-						isInSlimHomepageAbTestVariant={
-							isInSlimHomepageAbTestVariant
-						}
 					/>
 				</Island>
 			);
@@ -131,9 +120,6 @@ export const DecideContainer = ({
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
-					isInSlimHomepageAbTestVariant={
-						isInSlimHomepageAbTestVariant
-					}
 				/>
 			);
 		case 'scrollable/feature':
@@ -146,9 +132,6 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
-						isInSlimHomepageAbTestVariant={
-							isInSlimHomepageAbTestVariant
-						}
 					/>
 				</Island>
 			);
@@ -164,6 +147,6 @@ export const DecideContainer = ({
 				/>
 			);
 		default:
-			return <p>{containerType} is not yet supported</p>;
+			return null;
 	}
 };

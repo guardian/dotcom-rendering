@@ -1,14 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { StoryObj } from '@storybook/react-webpack5';
 import { mocked } from 'storybook/test';
+import preview from '../../.storybook/preview';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
-import { EmailSignUpWrapper } from './EmailSignUpWrapper.importable';
+import { EmailSignUpWrapper } from './EmailSignUpWrapper.island';
 
-const meta: Meta<typeof EmailSignUpWrapper> = {
+const meta = preview.meta({
 	title: 'Components/EmailSignUpWrapper',
 	component: EmailSignUpWrapper,
-};
+});
 
 type Story = StoryObj<typeof EmailSignUpWrapper>;
 
@@ -27,7 +28,7 @@ const defaultArgs = {
 
 // Loading state - shows placeholder while auth status is being determined
 // This prevents layout shift when subscription status is resolved
-export const Placeholder: Story = {
+export const Placeholder = meta.story({
 	args: {
 		hidePrivacyMessage: false,
 		...defaultArgs,
@@ -35,10 +36,10 @@ export const Placeholder: Story = {
 	async beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(undefined);
 	},
-};
+});
 
 // Default story - signed out user sees the signup form with email input
-export const DefaultStory: Story = {
+export const DefaultStory = meta.story({
 	args: {
 		hidePrivacyMessage: true,
 		...defaultArgs,
@@ -50,9 +51,9 @@ export const DefaultStory: Story = {
 			Promise.resolve(null),
 		);
 	},
-};
+});
 
-export const DefaultStoryWithPrivacy: Story = {
+export const DefaultStoryWithPrivacy = meta.story({
 	args: {
 		hidePrivacyMessage: false,
 		...defaultArgs,
@@ -64,10 +65,10 @@ export const DefaultStoryWithPrivacy: Story = {
 			Promise.resolve(null),
 		);
 	},
-};
+});
 
 // User is signed in but NOT subscribed - email field is hidden, only signup button shows
-export const SignedInNotSubscribed: Story = {
+export const SignedInNotSubscribed = meta.story({
 	args: {
 		hidePrivacyMessage: false,
 		...defaultArgs,
@@ -79,12 +80,12 @@ export const SignedInNotSubscribed: Story = {
 			Promise.resolve('test@example.com'),
 		);
 	},
-};
+});
 
 // User is signed in and IS subscribed - component returns null (hidden)
 // Note: This story will render nothing as the component returns null when subscribed
 // Requires hideNewsletterSignupComponentForSubscribers: true to enable the subscription check
-export const SignedInAlreadySubscribed: Story = {
+export const SignedInAlreadySubscribed = meta.story({
 	args: {
 		hidePrivacyMessage: false,
 		...defaultArgs,
@@ -93,11 +94,11 @@ export const SignedInAlreadySubscribed: Story = {
 	async beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(true);
 	},
-};
+});
 
 // Feature flag disabled - always shows signup form regardless of subscription status
 // When hideNewsletterSignupComponentForSubscribers is false, the subscription check is skipped
-export const FeatureFlagDisabled: Story = {
+export const FeatureFlagDisabled = meta.story({
 	args: {
 		hidePrivacyMessage: false,
 		...defaultArgs,
@@ -119,6 +120,4 @@ export const FeatureFlagDisabled: Story = {
 			},
 		},
 	},
-};
-
-export default meta;
+});

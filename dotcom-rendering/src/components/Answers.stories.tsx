@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { Radio, RadioGroup } from '@guardian/source/react-components';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import preview from '../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import {
 	CorrectSelectedAnswer,
@@ -11,7 +11,7 @@ import {
 	UnselectedAnswer,
 } from './Answers';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Answers',
 	decorators: [
 		splitTheme([
@@ -22,13 +22,9 @@ const meta = {
 			},
 		]),
 	],
-} satisfies Meta;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Answers = {
+export const Answers = meta.story({
 	render: () => (
 		<div
 			css={css`
@@ -73,4 +69,4 @@ export const Answers = {
 			</div>
 		</div>
 	),
-} satisfies Story;
+});

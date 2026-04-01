@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { EmailSignup } from './EmailSignup';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Section } from './Section';
-import { SecureSignup } from './SecureSignup.importable';
+import { SecureSignup } from './SecureSignup.island';
 
-const meta = {
+const meta = preview.meta({
 	component: EmailSignup,
 	title: 'Components/Email Signup',
 	parameters: {
@@ -34,13 +34,9 @@ const meta = {
 			</Section>
 		),
 	],
-} satisfies Meta<typeof EmailSignup>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		description:
 			'Reviewing the most important stories on feminism and sexism and those fighting for equality',
@@ -66,9 +62,9 @@ export const Default = {
 			},
 		],
 	},
-} satisfies Story;
+});
 
-export const NewsTheme = {
+export const NewsTheme = meta.story({
 	args: {
 		description:
 			'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
@@ -94,9 +90,9 @@ export const NewsTheme = {
 			},
 		],
 	},
-} satisfies Story;
+});
 
-export const IrregularFrequency = {
+export const IrregularFrequency = meta.story({
 	args: {
 		description:
 			'Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world',
@@ -113,5 +109,5 @@ export const IrregularFrequency = {
 			</>
 		),
 	},
-	parameters: Default.parameters,
-} satisfies Story;
+	parameters: Default.input.parameters,
+});

@@ -12,7 +12,7 @@ import {
 import { customMockFetch } from '../lib/mockRESTCalls';
 import { palette } from '../palette';
 import type { TrailType } from '../types/trails';
-import { Carousel } from './Carousel.importable';
+import { Carousel } from './Carousel.island';
 import { Section } from './Section';
 
 export default {

@@ -2,8 +2,8 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import type { ABTestVariant } from '../model/enhance-product-summary';
 import type { ProductBlockElement } from '../types/content';
 import { Island } from './Island';
-import { ScrollableProduct } from './ScrollableProduct.importable';
-import { StackedProducts } from './StackedProducts.importable';
+import { ScrollableProduct } from './ScrollableProduct.island';
+import { StackedProducts } from './StackedProducts.island';
 
 export const ProductSummary = ({
 	products,

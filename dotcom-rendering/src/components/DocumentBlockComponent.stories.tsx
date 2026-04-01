@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
+import preview from '../../.storybook/preview';
+import { DocumentBlockComponent } from './DocumentBlockComponent.island';
 
-const meta = {
+const meta = preview.meta({
 	component: DocumentBlockComponent,
 	title: 'Components/Document Block Component',
 	decorators: [
@@ -17,13 +17,9 @@ const meta = {
 			</div>
 		),
 	],
-} satisfies Meta<typeof DocumentBlockComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const ScribdDocument: Story = {
+export const ScribdDocument = meta.story({
 	args: {
 		embedUrl: 'https://www.scribd.com/embeds/431975393/content',
 		height: 613,
@@ -32,7 +28,7 @@ export const ScribdDocument: Story = {
 		isTracking: false,
 		isMainMedia: false,
 	},
-};
+});
 
 /**
  * Skipped (flaky).
@@ -43,7 +39,7 @@ export const ScribdDocument: Story = {
  *
  * Example: https://www.chromatic.com/test?appId=63e251470cfbe61776b0ef19&id=676405bf6014bfa8ccddc7be
  */
-export const DocumentCloudDocument: Story = {
+export const DocumentCloudDocument = meta.story({
 	args: {
 		embedUrl: 'https://embed.documentcloud.org/documents/20417938-test-pdf',
 		height: 700,
@@ -56,4 +52,4 @@ export const DocumentCloudDocument: Story = {
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
-};
+});

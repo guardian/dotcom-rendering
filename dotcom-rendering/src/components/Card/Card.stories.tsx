@@ -81,10 +81,11 @@ const mainSelfHostedVideo: MainMedia = {
 		{
 			src: 'https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4',
 			mimeType: 'video/mp4',
+			width: 1920,
+			height: 1080,
 		},
 	],
-	height: 1080,
-	width: 1920,
+	aspectRatio: 16 / 9,
 	image: `https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=1200&quality=45&dpr=2&s=none`,
 	duration: 100,
 };
@@ -320,9 +321,8 @@ export const WithExternalLink = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					mediaPositionOnDesktop="right"
+					mediaPositionOnDesktop="left"
 					kickerText="Instagram"
-					headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 					headlineText="Follow The Guardian now"
 					isExternalLink={true}
 				/>
@@ -1812,7 +1812,7 @@ export const WithAVerticalGapWhenScrollableSmallContainer = () => {
 	);
 };
 
-export const WithBetaContainerAndSublinks = () => {
+export const WithinFlexibleGeneralAndSublinks = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
@@ -1827,7 +1827,7 @@ export const WithBetaContainerAndSublinks = () => {
 	);
 };
 
-export const WithBetaContainerAndSublinksNoImage = () => {
+export const WithinFlexibleGeneralAndSublinksNoImage = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>

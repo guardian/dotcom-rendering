@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import preview from '../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { AppsEpic as AppsEpicComponent } from './AppsEpic.importable';
+import { AppsEpic as AppsEpicComponent } from './AppsEpic.island';
 
-const meta = {
+const meta = preview.meta({
 	component: AppsEpicComponent,
 	title: 'Components/AppsEpic',
 	decorators: [
@@ -15,10 +15,6 @@ const meta = {
 			},
 		]),
 	],
-} satisfies Meta<typeof AppsEpicComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const AppsEpic = {} satisfies Story;
+export const AppsEpic = meta.story();

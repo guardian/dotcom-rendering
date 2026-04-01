@@ -1,25 +1,22 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import preview from '../../.storybook/preview';
 import { footballTeams } from '../../fixtures/manual/footballTeams';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { FootballMatchGoalAttempts } from './FootballMatchStat';
 
-const meta = {
-	title: 'Components/Football Match Goal Attempts',
+const meta = preview.meta({
+	title: 'Components/Football Match Goal attempts',
 	component: FootballMatchGoalAttempts,
 	render: (args) => (
 		<div css={{ padding: space[2] }}>
 			<FootballMatchGoalAttempts {...args} />
 		</div>
 	),
-} satisfies Meta<typeof FootballMatchGoalAttempts>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		homeTeam: {
 			name: 'Manchester United',
@@ -38,9 +35,9 @@ export const Default = {
 			onTarget: 2,
 		},
 	},
-} satisfies Story;
+});
 
-export const TeamColours = {
+export const TeamColours = meta.story({
 	render: (args) => (
 		<div
 			css={css`
@@ -76,6 +73,6 @@ export const TeamColours = {
 		]),
 	],
 	args: {
-		...Default.args,
+		...Default.input.args,
 	},
-} satisfies Story;
+});

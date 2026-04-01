@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import preview from '../../.storybook/preview';
 import { exampleAtAGlanceProductArray } from '../../fixtures/manual/productBlockElement';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { StackedProducts } from './StackedProducts.importable';
+import { StackedProducts } from './StackedProducts.island';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Stacked Horizontal Summary Product Cards',
 	component: StackedProducts,
 	args: {
@@ -17,15 +17,11 @@ const meta = {
 		},
 	},
 	decorators: [centreColumnDecorator],
-} satisfies Meta<typeof StackedProducts>;
+});
 
-export default meta;
+export const Default = meta.story();
 
-type Story = StoryObj<typeof meta>;
-
-export const Default = {} satisfies Story;
-
-export const FourProducts = {
+export const FourProducts = meta.story({
 	args: {
 		products: exampleAtAGlanceProductArray.slice(0, 4),
 		heading: 'At a glance',
@@ -35,4 +31,4 @@ export const FourProducts = {
 			theme: Pillar.Lifestyle,
 		},
 	},
-} satisfies Story;
+});

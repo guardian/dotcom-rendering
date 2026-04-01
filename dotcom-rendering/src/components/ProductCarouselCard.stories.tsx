@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { exampleProduct } from '../../fixtures/manual/productBlockElement';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { extractHeadingText } from '../model/enhanceProductElement';
 import { ProductCarouselCard } from './ProductCarouselCard';
 
-const meta = {
+const meta = preview.meta({
 	component: ProductCarouselCard,
 	title: 'Components/ProductCarouselCard',
 	args: {
@@ -25,15 +25,11 @@ const meta = {
 			<ProductCarouselCard {...args} />
 		</div>
 	),
-} satisfies Meta<typeof ProductCarouselCard>;
+});
 
-export default meta;
+export const Default = meta.story();
 
-type Story = StoryObj<typeof meta>;
-
-export const Default = {} satisfies Story;
-
-export const WithLongHeadingProductNameAndCTA = {
+export const WithLongHeadingProductNameAndCTA = meta.story({
 	args: {
 		product: {
 			...exampleProduct,
@@ -54,4 +50,4 @@ export const WithLongHeadingProductNameAndCTA = {
 			],
 		},
 	},
-} satisfies Story;
+});

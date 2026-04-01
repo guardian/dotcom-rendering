@@ -71,8 +71,8 @@ export const CricketMatch = {
 			...Results.args.sportData,
 			kind: 'CricketMatch',
 			match: {
-				...CricketScorecard.args,
-				innings: CricketScorecard.args.allInnings,
+				...CricketScorecard.input.args,
+				innings: CricketScorecard.input.args.allInnings,
 				venueName: 'The Oval',
 				competitionName: 'World Cup',
 			},

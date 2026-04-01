@@ -9,7 +9,7 @@ import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
 import { Island } from './Island';
-import { LatestLinks } from './LatestLinks.importable';
+import { LatestLinks } from './LatestLinks.island';
 
 export default {
 	component: LatestLinks,

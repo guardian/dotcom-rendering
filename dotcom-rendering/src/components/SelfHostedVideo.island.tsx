@@ -9,8 +9,10 @@ import {
 	submitComponentEvent,
 } from '../client/ophan/ophan';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
+import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
@@ -237,9 +239,8 @@ type Props = {
 	sources: Source[];
 	atomId: string;
 	uniqueId: string;
-	height: number;
-	width: number;
 	videoStyle: VideoPlayerFormat;
+	aspectRatio: number;
 	posterImage: string;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
@@ -270,13 +271,52 @@ type Props = {
 	role?: RoleType;
 };
 
+const doesUserPermitAutoplayOnWeb = (): boolean => {
+	/**
+	 * The user indicates a preference for reduced motion: https://web.dev/articles/prefers-reduced-motion
+	 */
+	const userPrefersReducedMotion = window.matchMedia(
+		'(prefers-reduced-motion: reduce)',
+	).matches;
+
+	/**
+	 * The user can set this on their Accessibility Settings page.
+	 * Explicitly `false` when the user has said they don't want autoplay video.
+	 */
+	const autoplayPreference = storage.local.get(
+		'gu.prefs.accessibility.autoplay-video',
+	);
+
+	return !userPrefersReducedMotion && autoplayPreference !== false;
+};
+
+const doesUserPermitAutoplayOnApps = async (): Promise<boolean> => {
+	/* isAutoplayEnabled is available on the video client from 8.8.0 onwards */
+	const isBridgetCompatible = await hasMinimumBridgetVersion('8.8.0');
+
+	if (!isBridgetCompatible) return true;
+
+	try {
+		const videoClient = getVideoClient();
+		return await videoClient.isAutoplayEnabled();
+	} catch (error) {
+		if (error instanceof Error) {
+			window.guardian.modules.sentry.reportError(
+				error,
+				'self-hosted-video',
+			);
+		}
+		log('dotcom', 'Failed to set app autoplay user preference:', error);
+		return true;
+	}
+};
+
 export const SelfHostedVideo = ({
 	sources,
 	atomId,
 	uniqueId,
-	height: expectedHeight,
-	width: expectedWidth,
 	videoStyle,
+	aspectRatio,
 	posterImage,
 	fallbackImage,
 	fallbackImageSize,
@@ -312,12 +352,8 @@ export const SelfHostedVideo = ({
 	);
 	const [hasPageBecomeActive, setHasPageBecomeActive] = useState(false);
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
-	/**
-	 * The actual video is a better source of truth of its dimensions.
-	 * The width and height from props are useful to prevent CLS.
-	 */
-	const [width, setWidth] = useState(expectedWidth);
-	const [height, setHeight] = useState(expectedHeight);
+	const [width, setWidth] = useState<number | undefined>();
+	const [height, setHeight] = useState<number | undefined>();
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -411,25 +447,6 @@ export const SelfHostedVideo = ({
 		/>
 	);
 
-	const doesUserPermitAutoplay = (): boolean => {
-		/**
-		 * The user indicates a preference for reduced motion: https://web.dev/articles/prefers-reduced-motion
-		 */
-		const userPrefersReducedMotion = window.matchMedia(
-			'(prefers-reduced-motion: reduce)',
-		).matches;
-
-		/**
-		 * The user can set this on their Accessibility Settings page.
-		 * Explicitly `false` when the user has said they don't want autoplay video.
-		 */
-		const autoplayPreference = storage.local.get(
-			'gu.prefs.accessibility.autoplay-video',
-		);
-
-		return !userPrefersReducedMotion && autoplayPreference !== false;
-	};
-
 	/**
 	 * Setup.
 	 *
@@ -438,7 +455,11 @@ export const SelfHostedVideo = ({
 	 * 3. Creates event listeners to control playback when there are multiple videos.
 	 */
 	useEffect(() => {
-		setIsAutoplayAllowed(doesUserPermitAutoplay());
+		if (renderingTarget === 'Apps') {
+			void doesUserPermitAutoplayOnApps().then(setIsAutoplayAllowed);
+		} else {
+			setIsAutoplayAllowed(doesUserPermitAutoplayOnWeb());
+		}
 
 		/**
 		 * Initialise Ophan attention tracking
@@ -483,7 +504,13 @@ export const SelfHostedVideo = ({
 		 */
 		const handleRestoreFromCache = (event: PageTransitionEvent) => {
 			if (event.persisted) {
-				setIsAutoplayAllowed(doesUserPermitAutoplay());
+				if (renderingTarget === 'Apps') {
+					void doesUserPermitAutoplayOnApps().then(
+						setIsAutoplayAllowed,
+					);
+				} else {
+					setIsAutoplayAllowed(doesUserPermitAutoplayOnWeb());
+				}
 				setHasPageBecomeActive(true);
 			} else {
 				setHasPageBecomeActive(false);
@@ -803,8 +830,6 @@ export const SelfHostedVideo = ({
 		playerState === 'PAUSED_BY_BROWSER' ||
 		(playerState === 'NOT_STARTED' && !isAutoplayAllowed);
 
-	const aspectRatio = width / height;
-
 	/** The aspect ratio of the video will be clamped within the specified range */
 	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
 		aspectRatio,
@@ -868,6 +893,7 @@ export const SelfHostedVideo = ({
 						sources={sources}
 						atomId={atomId}
 						uniqueId={uniqueId}
+						aspectRatio={aspectRatio}
 						width={width}
 						height={height}
 						videoStyle={videoStyle}

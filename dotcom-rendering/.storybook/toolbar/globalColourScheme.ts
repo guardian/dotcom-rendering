@@ -1,4 +1,4 @@
-import type { Decorator } from '@storybook/react-webpack5';
+import type { Decorator, Preview } from '@storybook/react-webpack5';
 import { lightDecorator, darkDecorator } from '../decorators/themeDecorator';
 import { splitTheme } from '../decorators/splitThemeDecorator';
 import {
@@ -39,18 +39,22 @@ export const globalColourScheme = {
 		title: 'Colour Scheme',
 		icon: 'mirror',
 		items: [
-			{ value: 'light', left: '☀️', title: 'Light' },
-			{ value: 'dark', left: '🌙', title: 'Dark' },
+			{ value: 'light', icon: 'sun', title: 'Light' },
+			{ value: 'dark', icon: 'moon', title: 'Dark' },
 			{
 				value: 'horizontal',
-				left: '◨',
+				icon: 'sidebyside',
 				title: 'Horizontal Split',
 			},
-			{ value: 'vertical', left: '⬓', title: 'Vertical Split' },
+			{ value: 'vertical', icon: 'stacked', title: 'Vertical Split' },
 		],
 		dynamicTitle: true,
 	},
-} as const;
+} as const satisfies ToolbarArgType;
+
+type ToolbarArgType = NonNullable<
+	Preview['globalTypes']
+>[keyof Preview['globalTypes']];
 
 type ColourSchemeParameter =
 	(typeof globalColourScheme.toolbar.items)[number]['value'];

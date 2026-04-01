@@ -110,9 +110,7 @@ export const SetABTests = ({
 		const mvtId = isDev ? getLocalMvtId() ?? getMvtId() : getMvtId();
 
 		if (isUndefined(mvtId)) {
-			console.error(
-				'There is no MVT ID set, see SetABTests.importable.tsx',
-			);
+			console.error('There is no MVT ID set, see SetABTests.island.tsx');
 		}
 
 		const allForcedTestVariants = {

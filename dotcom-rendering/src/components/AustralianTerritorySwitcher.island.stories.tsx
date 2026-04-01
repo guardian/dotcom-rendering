@@ -1,23 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { userEvent, within } from 'storybook/test';
-import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
+import preview from '../../.storybook/preview';
+import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.island';
 
-const meta = {
+const meta = preview.meta({
 	component: AustralianTerritorySwitcher,
 	title: 'Components/Australian Territory Switcher',
-} satisfies Meta<typeof AustralianTerritorySwitcher>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Victoria = {
+export const Victoria = meta.story({
 	args: {
 		targetedTerritory: 'AU-VIC',
 	},
-} satisfies Story;
+});
 
-export const QueenslandExpanded = {
+export const QueenslandExpanded = meta.story({
 	args: {
 		targetedTerritory: 'AU-QLD',
 	},
@@ -30,4 +26,4 @@ export const QueenslandExpanded = {
 		await userEvent.click(canvas.getByRole('button'));
 	},
 	name: 'Queensland, expanded',
-} satisfies Story;
+});

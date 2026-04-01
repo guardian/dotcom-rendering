@@ -149,20 +149,9 @@ export const FrontSectionTitle = ({
 			}
 
 			return (
-				<>
-					<Hide until="leftCol">
-						<BrandingLabel branding={collectionBranding.branding} />
-					</Hide>
-					<div id={`${sectionId}-title`} css={titleStyle}>
-						<Hide from="leftCol">
-							<BrandingLabel
-								branding={collectionBranding.branding}
-								dataTestId="front-branding-logo"
-							/>
-						</Hide>
-						{title}
-					</div>
-				</>
+				<div id={`${sectionId}-title`} css={titleStyle}>
+					{title}
+				</div>
 			);
 		}
 		case 'sponsored': {

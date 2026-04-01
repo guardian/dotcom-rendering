@@ -102,13 +102,8 @@ const imageAdvertisingPartnerStyles = css`
 `;
 
 const hostedLogoImageStyles = css`
-	width: 80px;
+	width: 132px;
 	height: auto;
-
-	${from.desktop} {
-		width: 132px;
-		height: auto;
-	}
 `;
 
 /**
@@ -202,6 +197,9 @@ export const BrandingLabel = ({
 				href={logo.link}
 				data-link-name={ophanComponentLink}
 				data-component={ophanComponentName}
+				css={css`
+					display: flex;
+				`}
 			>
 				<img
 					css={hostedLogoImageStyles}

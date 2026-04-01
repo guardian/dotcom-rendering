@@ -1,4 +1,4 @@
-import type { DropdownLinkType } from '../components/Dropdown.importable';
+import type { DropdownLinkType } from '../components/Dropdown.island';
 
 export const linkNotificationCount = (links: DropdownLinkType[]): number => {
 	return links.reduce((runningCount, link) => {

@@ -3,7 +3,7 @@ import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorator
 import { allModes } from '../../.storybook/modes';
 import { calloutCampaign as calloutCampaignV2 } from '../../fixtures/manual/calloutCampaignV2';
 import { customMockFetch } from '../lib/mockRESTCalls';
-import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
+import { CalloutBlockComponent } from './CalloutBlockComponent.island';
 
 const tomorrow = new Date().setDate(new Date().getDate() + 1) / 1000;
 const yesterday = new Date().setDate(new Date().getDate() - 1) / 1000;

@@ -2,6 +2,9 @@ import type { VideoAssets } from '../types/content';
 
 export type CustomPlayEventDetail = { uniqueId: string };
 
+/** We expect all videos to include dimensions since the field was added to FEMediaAsset */
+export const DEFAULT_ASPECT_RATIO = 5 / 4;
+
 export const customSelfHostedVideoPlayAudioEventName =
 	'self-hosted-video:play-with-audio';
 export const customYoutubePlayEventName = 'youtube-video:play';
@@ -9,6 +12,9 @@ export const customYoutubePlayEventName = 'youtube-video:play';
 export type Source = {
 	src: string;
 	mimeType: SupportedVideoFileType;
+	height: number;
+	width: number;
+	aspectRatio?: string;
 };
 
 /**
@@ -39,25 +45,20 @@ const isSupportedMimeType = (
 export const convertAssetsToVideoSources = (assets: VideoAssets[]): Source[] =>
 	assets
 		.filter((asset) => isSupportedMimeType(asset.mimeType))
-		.sort(
-			(a, b) =>
-				supportedVideoFileTypes.indexOf(
-					a.mimeType as SupportedVideoFileType,
-				) -
-				supportedVideoFileTypes.indexOf(
-					b.mimeType as SupportedVideoFileType,
-				),
-		)
 		.map((asset) => ({
 			src: asset.url,
 			mimeType: asset.mimeType as Source['mimeType'],
-		}));
+			height: asset.dimensions?.height ?? 0,
+			width: asset.dimensions?.width ?? 0,
+			aspectRatio: asset.aspectRatio,
+		}))
+		.sort((a, b) => {
+			const typeOrder =
+				supportedVideoFileTypes.indexOf(a.mimeType) -
+				supportedVideoFileTypes.indexOf(b.mimeType);
+			/** Sort by type then by width */
+			return typeOrder || Number(b.width) - Number(a.width);
+		});
 
 export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>
 	assets.find((asset) => asset.mimeType === 'text/vtt')?.url;
-
-export const getFirstVideoAsset = (
-	assets: VideoAssets[],
-): VideoAssets | undefined => {
-	return assets.find((asset) => isSupportedMimeType(asset.mimeType));
-};

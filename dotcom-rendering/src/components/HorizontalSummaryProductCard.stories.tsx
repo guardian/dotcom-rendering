@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { exampleProduct } from '../../fixtures/manual/productBlockElement';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { HorizontalSummaryProductCard } from './HorizontalSummaryProductCard';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Horizontal Summary Product Card',
 	component: HorizontalSummaryProductCard,
 	args: {
@@ -25,10 +25,6 @@ const meta = {
 		},
 	},
 	decorators: [centreColumnDecorator],
-} satisfies Meta<typeof HorizontalSummaryProductCard>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {} satisfies Story;
+export const Default = meta.story();

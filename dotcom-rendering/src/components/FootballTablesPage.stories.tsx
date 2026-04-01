@@ -26,6 +26,6 @@ export const Default = {
 export const WithCompetitionNav = {
 	args: {
 		...Default.args,
-		pageId: WomensEuro2025.args.pageId,
+		pageId: WomensEuro2025.input.args.pageId,
 	},
 } satisfies Story;

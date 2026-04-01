@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, within } from 'storybook/test';
 import { SWRConfig } from 'swr';
+import preview from '../../../.storybook/preview';
 import {
 	matchDayLive,
 	matchFixture,
@@ -9,7 +9,7 @@ import {
 import type { FEFootballMatchHeader } from '../../frontend/feFootballMatchHeader';
 import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader';
 
-const meta = {
+const meta = preview.meta({
 	component: FootballMatchHeaderComponent,
 	decorators: [
 		(Story) => (
@@ -19,9 +19,7 @@ const meta = {
 			</SWRConfig>
 		),
 	],
-} satisfies Meta<typeof FootballMatchHeaderComponent>;
-
-export default meta;
+});
 
 const feHeaderData: FEFootballMatchHeader = {
 	footballMatch: matchFixture,
@@ -34,9 +32,7 @@ const feHeaderData: FEFootballMatchHeader = {
 		'https://www.theguardian.com/football/match/2025/nov/26/arsenal-v-bayernmunich',
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const Fixture = {
+export const Fixture = meta.story({
 	args: {
 		initialTab: 'info',
 		initialData: {
@@ -101,15 +97,15 @@ export const Fixture = {
 			void expect(updatedTabs[0]).toHaveTextContent('Match info');
 		});
 	},
-} satisfies Story;
+});
 
-export const Live = {
+export const Live = meta.story({
 	args: {
 		initialTab: 'live',
 		edition: 'EUR',
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
-		refreshInterval: Fixture.args.refreshInterval,
+		refreshInterval: Fixture.input.args.refreshInterval,
 		getHeaderData: () =>
 			getMockData({
 				...feHeaderData,
@@ -146,15 +142,15 @@ export const Live = {
 			void expect(tabs[1]).toHaveTextContent('Match info');
 		});
 	},
-} satisfies Story;
+});
 
-export const Result = {
+export const Result = meta.story({
 	args: {
 		initialTab: 'report',
 		edition: 'AU',
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
-		refreshInterval: Fixture.args.refreshInterval,
+		refreshInterval: Fixture.input.args.refreshInterval,
 		getHeaderData: () =>
 			getMockData({
 				...feHeaderData,
@@ -189,15 +185,15 @@ export const Result = {
 			void expect(tabs[2]).toHaveTextContent('Match info');
 		});
 	},
-} satisfies Story;
+});
 
-export const AppsResult = {
+export const AppsResult = meta.story({
 	args: {
 		initialTab: 'report',
 		edition: 'AU',
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
-		refreshInterval: Fixture.args.refreshInterval,
+		refreshInterval: Fixture.input.args.refreshInterval,
 		getHeaderData: () =>
 			getMockData({
 				...feHeaderData,
@@ -232,7 +228,7 @@ export const AppsResult = {
 			);
 		});
 	},
-} satisfies Story;
+});
 
 const getMockData = (data: FEFootballMatchHeader) =>
 	new Promise((resolve) => {

@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import preview from '../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { AppsFooter as AppsFooterComponent } from './AppsFooter.importable';
+import { AppsFooter as AppsFooterComponent } from './AppsFooter.island';
 
-const meta = {
+const meta = preview.meta({
 	component: AppsFooterComponent,
 	title: 'Components/AppsFooter',
 	decorators: [
@@ -15,10 +15,6 @@ const meta = {
 			},
 		]),
 	],
-} satisfies Meta<typeof AppsFooterComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const AppsFooter = {} satisfies Story;
+export const AppsFooter = meta.story();

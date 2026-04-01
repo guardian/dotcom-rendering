@@ -1,17 +1,13 @@
 import { space } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { CardCommentCount as CardCommentCountComponent } from './CardCommentCount.importable';
+import preview from '../../.storybook/preview';
+import { CardCommentCount as CardCommentCountComponent } from './CardCommentCount.island';
 
-const meta = {
+const meta = preview.meta({
 	component: CardCommentCountComponent,
 	title: 'Components/Card Comment Count',
-} satisfies Meta<typeof CardCommentCountComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const CardCommentCount = {
+export const CardCommentCount = meta.story({
 	args: {
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		discussionId: '/p/zemg8',
@@ -23,4 +19,4 @@ export const CardCommentCount = {
 			</div>
 		),
 	],
-} satisfies Story;
+});
