@@ -15,7 +15,9 @@ type Props =
 export const FootballMatchHeaderWrapper = (props: Props) => (
 	<FootballMatchHeader
 		initialTab={props.initialTab}
-		initialData={props.initialData}
+		initialData={
+			props.initialData ? fixHydration(props.initialData) : undefined
+		}
 		edition={props.edition}
 		matchHeaderURL={props.matchHeaderURL}
 		article={props.article}
@@ -25,6 +27,14 @@ export const FootballMatchHeaderWrapper = (props: Props) => (
 		renderingTarget={props.renderingTarget}
 	/>
 );
+
+const fixHydration = (initialData: HeaderData): HeaderData => ({
+	...initialData,
+	match: {
+		...initialData.match,
+		kickOff: new Date(initialData.match.kickOff),
+	},
+});
 
 const getHeaderData = (url: string): Promise<unknown> =>
 	fetch(url).then((res) => res.json());
