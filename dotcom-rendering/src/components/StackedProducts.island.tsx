@@ -82,12 +82,8 @@ export const StackedProducts = ({
 					<div
 						key={index}
 						data-component={`at-a-glance-stacked-card-${
-							isExpanded || showAllProducts
-								? 'expanded'
-								: 'collapsed'
-						}-${
-							index + 1
-						}`}
+							showAllProducts ? 'expanded' : 'default'
+						}-${index + 1}`}
 						style={{
 							display:
 								!isExpanded &&
