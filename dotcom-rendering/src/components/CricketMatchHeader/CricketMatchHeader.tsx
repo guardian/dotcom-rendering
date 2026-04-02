@@ -30,13 +30,12 @@ import {
 } from '../FootballMatchHeader/colours';
 
 type Inning = {
-	order: number;
 	battingTeam: string;
 	runsScored: number;
 	overs: string;
 	declared: boolean;
 	forfeited: boolean;
-	fallOfWicket: { order: number }[];
+	fallOfWicket: number;
 };
 
 type CricketMatch = {
@@ -296,7 +295,7 @@ const Team = (props: { team: string; match: CricketMatch }) => {
 												marginRight: space[1],
 											}}
 										>
-											{inning.fallOfWicket.length === 10
+											{inning.fallOfWicket === 10
 												? 'All out'
 												: ''}
 										</span>
@@ -389,9 +388,7 @@ const Crest = (props: { name: string; paID: string }) => (
  */
 const Score = (props: {
 	runs: number;
-	fallOfWicket?: {
-		order: number;
-	}[];
+	fallOfWicket: number;
 	matchKind: CricketMatch['kind'];
 }) => (
 	<span
@@ -416,7 +413,7 @@ const Score = (props: {
 		}}
 	>
 		<ScoreNumber score={props.runs} />
-		{props.fallOfWicket !== undefined ? (
+		{props.fallOfWicket > 0 ? (
 			<>
 				{/* TODO: Convert dash to SVG? */}
 				<span
@@ -428,7 +425,7 @@ const Score = (props: {
 						backgroundColor: palette(primaryText(props.matchKind)),
 					}}
 				></span>
-				<ScoreNumber score={props.fallOfWicket.length} />
+				<ScoreNumber score={props.fallOfWicket} />
 			</>
 		) : null}
 	</span>
