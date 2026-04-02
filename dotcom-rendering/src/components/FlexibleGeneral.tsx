@@ -1,5 +1,6 @@
 import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
+import { isWithinTwelveHours } from '../lib/formatTime';
 import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
 import type {
@@ -28,7 +29,7 @@ type Props = {
 	groupedTrails: DCRGroupedTrails;
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	hideAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
@@ -252,7 +253,7 @@ type SplashCardLayoutProps = {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	hideAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
@@ -327,7 +328,9 @@ const SplashCardLayout = ({
 					trail={card}
 					containerPalette={containerPalette}
 					containerType="flexible/general"
-					showAge={hideAge}
+					showAge={
+						!hideAge && isWithinTwelveHours(card.webPublicationDate)
+					}
 					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaPositionOnDesktop={mediaPositionOnDesktop}
@@ -416,7 +419,7 @@ type FullWidthCardLayoutProps = {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	hideAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
@@ -483,7 +486,9 @@ const FullWidthCardLayout = ({
 					trail={card}
 					containerPalette={containerPalette}
 					containerType="flexible/general"
-					showAge={hideAge}
+					showAge={
+						!hideAge && isWithinTwelveHours(card.webPublicationDate)
+					}
 					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaPositionOnDesktop="right"
@@ -527,7 +532,7 @@ type HalfWidthCardLayoutProps = {
 	isFirstRow?: boolean;
 	isFirstStandardRow?: boolean;
 	containerPalette?: DCRContainerPalette;
-	hideAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
@@ -575,7 +580,10 @@ const HalfWidthCardLayout = ({
 							trail={card}
 							containerPalette={containerPalette}
 							containerType="flexible/general"
-							showAge={hideAge}
+							showAge={
+								!hideAge &&
+								isWithinTwelveHours(card.webPublicationDate)
+							}
 							serverTime={serverTime}
 							image={card.image}
 							imageLoading={imageLoading}

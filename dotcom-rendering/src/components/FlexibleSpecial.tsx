@@ -1,5 +1,6 @@
 import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
+import { isWithinTwelveHours } from '../lib/formatTime';
 import { isNonEmptyArray } from '../lib/tuple';
 import type { BoostLevel } from '../types/content';
 import type {
@@ -26,7 +27,7 @@ type Props = {
 	groupedTrails: DCRGroupedTrails;
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	hideAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
@@ -131,7 +132,7 @@ type OneCardLayoutProps = {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	hideAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
@@ -179,7 +180,9 @@ export const OneCardLayout = ({
 					trail={card}
 					containerPalette={containerPalette}
 					containerType="flexible/special"
-					showAge={!hideAge}
+					showAge={
+						!hideAge && isWithinTwelveHours(card.webPublicationDate)
+					}
 					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaSize={mediaSize}
@@ -227,7 +230,7 @@ type TwoOrFourCardLayoutProps = {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	hideAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
@@ -264,7 +267,10 @@ const TwoOrFourCardLayout = ({
 							trail={card}
 							containerPalette={containerPalette}
 							containerType="flexible/special"
-							showAge={!hideAge}
+							showAge={
+								!hideAge &&
+								isWithinTwelveHours(card.webPublicationDate)
+							}
 							serverTime={serverTime}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}

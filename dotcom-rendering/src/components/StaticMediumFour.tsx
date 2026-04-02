@@ -1,5 +1,6 @@
 import type { ArticleFormat } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
+import { isWithinTwelveHours } from '../lib/formatTime';
 import type {
 	AspectRatio,
 	DCRContainerLevel,
@@ -27,7 +28,7 @@ type Props = {
 	trails: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	hideAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
@@ -61,7 +62,10 @@ export const StaticMediumFour = ({
 							trail={card}
 							containerPalette={containerPalette}
 							containerType="static/medium/4"
-							showAge={!hideAge}
+							showAge={
+								!hideAge &&
+								isWithinTwelveHours(card.webPublicationDate)
+							}
 							serverTime={serverTime}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}

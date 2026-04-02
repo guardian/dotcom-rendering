@@ -24,7 +24,7 @@ type Props = {
 	imageLoading: NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
-	hideAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	sectionId: string;
