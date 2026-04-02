@@ -10,7 +10,7 @@ import { palette } from '../palette';
 import { type OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
-import { getDefaultCardProps } from './ScrollableSmallOnwards';
+import type { Props as CardProps } from './Card/Card';
 
 type HostedContentOnwardsProps = {
 	trails: TrailType[];
@@ -82,9 +82,6 @@ export const HostedContentOnwards = ({
 										format,
 										serverTime,
 									)}
-									showTopBarDesktop={false}
-									showTopBarMobile={false}
-									aspectRatio="5:4"
 								/>
 							</div>
 						);
@@ -93,4 +90,38 @@ export const HostedContentOnwards = ({
 			</main>
 		</div>
 	);
+};
+
+const getDefaultCardProps = (
+	trail: TrailType,
+	discussionApiUrl: string,
+	onwardsSource: OnwardsSource,
+	format: ArticleFormat,
+	serverTime?: number,
+) => {
+	const defaultProps: CardProps = {
+		linkTo: trail.url,
+		imageLoading: 'lazy',
+		serverTime,
+		format: trail.format,
+		contextFormat: format,
+		containerType: 'scrollable/small',
+		headlineText: trail.headline,
+		image: trail.image,
+		dataLinkName: trail.dataLinkName,
+		discussionApiUrl,
+		mainMedia: trail.mainMedia,
+		isExternalLink: false,
+		aspectRatio: '5:4',
+		mediaSize: 'scrollable-small',
+		mediaPositionOnDesktop: 'left',
+		mediaPositionOnMobile: 'left',
+		supportingContent: undefined,
+		onwardsSource,
+		isOnwardContent: true,
+		showTopBarDesktop: false,
+		showTopBarMobile: false,
+	};
+
+	return defaultProps;
 };

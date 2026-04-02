@@ -184,7 +184,7 @@ const headerStyles = css`
 	}
 `;
 
-export const getDefaultCardProps = (
+const getDefaultCardProps = (
 	trail: TrailType,
 	discussionApiUrl: string,
 	onwardsSource: OnwardsSource,
