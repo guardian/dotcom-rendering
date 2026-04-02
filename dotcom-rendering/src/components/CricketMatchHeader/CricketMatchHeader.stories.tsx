@@ -18,8 +18,14 @@ export const Fixture = {
 			competition: 'Second Test Match',
 			venue: 'Brisbane Cricket Ground',
 			matchDate: new Date('2026-01-26'),
-			homeTeam: 'Australia',
-			awayTeam: 'England',
+			homeTeam: {
+				paID: 'f7f611a1-e667-2aa2-c3e0-6dbc6981cfa4',
+				name: 'Australia',
+			},
+			awayTeam: {
+				paID: 'a359844f-fc07-9cfa-d4cc-9a9ac0d5d075',
+				name: 'England',
+			},
 			innings: [],
 		},
 	},
@@ -36,7 +42,7 @@ export const Live = {
 				{
 					declared: false,
 					forfeited: false,
-					battingTeam: 'home',
+					battingTeam: 'Australia',
 					runsScored: 169,
 					overs: '20.0',
 					fallOfWicket: 0,
@@ -44,10 +50,10 @@ export const Live = {
 				{
 					declared: false,
 					forfeited: false,
-					battingTeam: 'away',
+					battingTeam: 'England',
 					runsScored: 173,
 					overs: '19.3',
-					fallOfWicket: 0,
+					fallOfWicket: 3,
 				},
 			],
 		},
