@@ -28,6 +28,7 @@ export const CricketScorecard = meta.story({
 		allInnings: [
 			{
 				description: 'India first innings',
+				battingTeam: 'India',
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',
@@ -49,6 +50,8 @@ export const CricketScorecard = meta.story({
 						fours: 7,
 						sixes: 3,
 						howOut: 'st Latham b Ravindra',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Shubman Gill',
@@ -57,6 +60,8 @@ export const CricketScorecard = meta.story({
 						fours: 0,
 						sixes: 1,
 						howOut: 'c Phillips b Santner',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Virat Kohli',
@@ -65,6 +70,8 @@ export const CricketScorecard = meta.story({
 						fours: 0,
 						sixes: 0,
 						howOut: 'lbw b Bracewell',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Shreyas Iyer',
@@ -73,6 +80,8 @@ export const CricketScorecard = meta.story({
 						fours: 2,
 						sixes: 2,
 						howOut: 'c Ravindra b Santner',
+						onStrike: false,
+						nonStrike: false,
 					},
 				],
 				bowlers: [
@@ -158,6 +167,7 @@ export const CricketScorecard = meta.story({
 					wides: 13,
 				},
 				description: 'New Zealand first innings',
+				battingTeam: 'New Zealand',
 				batters: [
 					{
 						name: 'Will Young',
@@ -166,6 +176,8 @@ export const CricketScorecard = meta.story({
 						fours: 2,
 						sixes: 0,
 						howOut: 'lbw b Vinod',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Rachin Ravindra',
@@ -174,6 +186,8 @@ export const CricketScorecard = meta.story({
 						fours: 4,
 						sixes: 1,
 						howOut: 'b Yadav',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Kane Williamson',
@@ -182,6 +196,8 @@ export const CricketScorecard = meta.story({
 						fours: 1,
 						sixes: 0,
 						howOut: 'c & b Yadav',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Daryl Mitchell',
@@ -190,6 +206,8 @@ export const CricketScorecard = meta.story({
 						fours: 3,
 						sixes: 0,
 						howOut: 'c Sharma b Ahmed',
+						onStrike: false,
+						nonStrike: false,
 					},
 				],
 				bowlers: [
