@@ -14,8 +14,11 @@ import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import { getLargestImageSize } from '../lib/image';
-import type { SupportedVideoFileType } from '../lib/video';
-import { DEFAULT_ASPECT_RATIO, supportedVideoFileTypes } from '../lib/video';
+import {
+	convertFEMediaAssetsToVideoAssets,
+	extractValidSourcesFromAssets,
+	getAspectRatioFromSources,
+} from '../lib/video';
 import type { Image } from '../types/content';
 import type {
 	DCRFrontCard,
@@ -222,48 +225,24 @@ export const getActiveMediaAtom = (
 		 * Therefore, we check the platform of the first asset and assume the rest are the same.
 		 */
 		if (firstVideoAsset.platform === 'Url') {
-			// Order the assets by largest width: for now, we only use the largest video, but there
-			// be a follow up PR to select the appropriate video source based on the users screen size.
-			const orderedSources = assets.sort(
-				(a, b) =>
-					Number(b.dimensions?.width ?? 0) -
-					Number(a.dimensions?.width ?? 0),
+			const selfHostedAssets = assets.filter(
+				({ platform }) => platform === 'Url',
 			);
-
-			/**
-			 * Take one source for each supported video file type.
-			 */
-			const sources = supportedVideoFileTypes.reduce<typeof assets>(
-				(acc, type) => {
-					const source = orderedSources.find(
-						({ mimeType }) => mimeType === type,
-					);
-					if (source) acc.push(source);
-					return acc;
-				},
-				[],
-			);
-			if (!sources.length) return undefined;
-
 			const subtitleAsset = assets.find(
 				({ assetType }) => assetType === 'Subtitles',
 			);
 
-			const aspectRatio = firstVideoAsset.dimensions
-				? firstVideoAsset.dimensions.width /
-				  firstVideoAsset.dimensions.height
-				: DEFAULT_ASPECT_RATIO;
+			const videoAssets =
+				convertFEMediaAssetsToVideoAssets(selfHostedAssets);
+			const sources = extractValidSourcesFromAssets(videoAssets);
+
+			const aspectRatio = getAspectRatioFromSources(sources);
 
 			return {
 				type: 'SelfHostedVideo',
 				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
 				atomId: mediaAtom.id,
-				sources: sources.map(({ id, mimeType, dimensions }) => ({
-					src: id,
-					mimeType: mimeType as SupportedVideoFileType,
-					height: dimensions?.height ?? 0,
-					width: dimensions?.width ?? 0,
-				})),
+				sources,
 				subtitleSource: subtitleAsset?.id,
 				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
@@ -288,7 +267,7 @@ export const getActiveMediaAtom = (
 				expired: !!mediaAtom.expired,
 				/**
 				 * We infer that a video is a livestream if the duration is set to 0. This is
-				 * a soft contract with Editorial who manual set the duration of videos
+				 * a soft contract with Editorial who manually set the duration of videos.
 				 */
 				isLive: mediaAtom.duration === 0,
 				image,
