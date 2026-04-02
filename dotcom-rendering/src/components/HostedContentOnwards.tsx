@@ -33,11 +33,9 @@ const headingStyles = css`
 	color: ${sourcePalette.neutral[7]};
 `;
 
-/* Stacked cards styles for hosted content */
 const stackedCardsStyles = css`
 	display: flex;
 	flex-direction: column;
-	gap: 0;
 `;
 
 const stackedCardWrapper = css`

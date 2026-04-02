@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { space, textSansBold15 } from '@guardian/source/foundations';
+import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import type { TrailType } from '../types/trails';
 
@@ -14,8 +15,37 @@ type CardPictureProps = {
 
 const imageStyles = css`
 	width: 120px;
-	margin-right: ${space[2]}px;
+`;
+
+const imageWrapperStyles = css`
+	position: relative;
 	order: 1;
+`;
+
+const mediaOverlayContainerStyles = css`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: ${getZIndex('mediaOverlay')};
+	cursor: pointer;
+`;
+
+const hoverStyles = css`
+	:hover .media-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: ${palette('--card-background-hover')};
+	}
+
+	:hover {
+		text-decoration: underline;
+		color: ${palette('--card-headline')};
+	}
 `;
 
 const linkStyles = css`
@@ -23,6 +53,10 @@ const linkStyles = css`
 	justify-content: flex-start;
 	align-items: flex-start;
 	text-decoration: none;
+	gap: ${space[2]}px;
+	position: relative;
+
+	${hoverStyles}
 `;
 
 const headingStyles = css`
@@ -33,9 +67,14 @@ const headingStyles = css`
 
 const CardPicture = ({ image, alt }: CardPictureProps) => {
 	return (
-		<picture>
-			<img alt={alt} src={image} css={imageStyles} />
-		</picture>
+		<div css={imageWrapperStyles}>
+			<picture>
+				<img alt={alt} src={image} css={imageStyles} />
+			</picture>
+			<div css={mediaOverlayContainerStyles}>
+				<div className="media-overlay" />
+			</div>
+		</div>
 	);
 };
 
