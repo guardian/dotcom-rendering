@@ -13,8 +13,10 @@ import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
 import { HostedContentHeader } from '../components/HostedContentHeader';
+import { HostedContentOnwards } from '../components/HostedContentOnwards';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
+import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.island';
 import { Standfirst } from '../components/Standfirst';
@@ -27,12 +29,14 @@ import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { trails } from './HostedArticleLayout';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
 	content: Article;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends Props {
@@ -138,12 +142,11 @@ const articleBodyStyles = css`
 const onwardContentStyles = css`
 	${grid.column.centre}
 
-	height: 20px;
-	background-color: lightgrey;
-	margin-bottom: ${space[6]}px;
+	margin-bottom: ${space[5]}px;
 
 	${from.desktop} {
 		${grid.span(4, 8)}
+		margin-bottom: ${space[10]}px;
 	}
 
 	${from.leftCol} {
@@ -177,6 +180,8 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 	const {
 		content: { frontendData },
 		format,
+		renderingTarget,
+		serverTime,
 	} = props;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
@@ -248,7 +253,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 					</div>
 
 					<div data-print-layout="hide" css={metaStyles}>
-						{props.renderingTarget === 'Web' && (
+						{renderingTarget === 'Web' && (
 							<div css={shareButtonStyles}>
 								<Island
 									priority="feature"
@@ -325,7 +330,40 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 					</div>
 
 					<div css={onwardContentStyles}>
-						{'Placeholder - onward content'}
+						<HostedContentOnwards
+							trails={trails} //Temporary trails dummy data which is exported from HostedArticleLayout
+							format={format}
+							discussionApiUrl={
+								frontendData.config.discussionApiUrl
+							}
+							onwardsSource="related-content"
+							serverTime={serverTime}
+							brandName="TrendAI"
+							accentColor={branding?.hostedCampaignColour}
+						/>
+						{/* This needs to be surrounded by an island later when we have the data as far as I understand */}
+						<OnwardsUpper
+							ajaxUrl={frontendData.config.ajaxUrl}
+							hasRelated={true}
+							hasStoryPackage={true}
+							isAdFreeUser={frontendData.isAdFreeUser}
+							pageId={frontendData.pageId}
+							isPaidContent={!!frontendData.config.isPaidContent}
+							showRelatedContent={true}
+							keywordIds={frontendData.config.keywordIds}
+							contentType={frontendData.contentType}
+							tags={frontendData.tags}
+							format={format}
+							pillar={format.theme}
+							editionId={frontendData.editionId}
+							shortUrlId={frontendData.config.shortUrlId}
+							discussionApiUrl={
+								frontendData.config.discussionApiUrl
+							}
+							serverTime={serverTime}
+							renderingTarget={renderingTarget}
+							webURL={frontendData.webURL}
+						/>
 					</div>
 
 					{cta && (
