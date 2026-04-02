@@ -44,13 +44,16 @@ const relativeTime = (
 						now: Date.now(),
 						precision: ONE_MINUTE,
 				  }),
+		daysUntilAbsolute: 7,
 	});
 
 	return isString(time) ? time : 'now';
 };
 
 /**
- * Shows a recent time as relative, such as “3h ago”
+ * Shows a recent time as relative, such as “3h ago”.
+ *
+ * A time older than 7 days will be shown as absolute, such as “23 Mar 2026”.
  *
  * ## Why does this need to be an Island?
  *
