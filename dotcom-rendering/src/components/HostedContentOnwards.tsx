@@ -6,13 +6,18 @@ import {
 	textSansBold20,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { palette } from '../palette';
+import { type OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
-import { ScrollableSmallOnwards } from './ScrollableSmallOnwards';
+import { Card } from './Card/Card';
+import { getDefaultCardProps } from './ScrollableSmallOnwards';
 
 type HostedContentOnwardsProps = {
 	trails: TrailType[];
 	format: ArticleFormat;
 	discussionApiUrl: string;
+	onwardsSource: OnwardsSource;
+	serverTime?: number;
 	brandName: string;
 	accentColor?: string;
 };
@@ -35,10 +40,24 @@ const headingStyles = css`
 	margin-bottom: ${space[1]}px;
 `;
 
+/* Stacked cards styles for hosted content */
+const stackedCardsStyles = css`
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+`;
+
+const stackedCardWrapper = css`
+	width: 100%;
+	border-top: 2px solid ${palette('--onward-content-border')};
+`;
+
 export const HostedContentOnwards = ({
 	trails,
 	format,
 	discussionApiUrl,
+	onwardsSource,
+	serverTime,
 	brandName,
 	accentColor,
 }: HostedContentOnwardsProps) => {
@@ -51,15 +70,25 @@ export const HostedContentOnwards = ({
 				</h2>
 			</header>
 			<main>
-				<div>
-					<ScrollableSmallOnwards
-						trails={trails}
-						discussionApiUrl={discussionApiUrl}
-						format={format}
-						heading={'More on this story'}
-						onwardsSource={'related-content'}
-						isHostedContent={true}
-					/>
+				<div css={stackedCardsStyles}>
+					{trails.map((trail) => {
+						return (
+							<div key={trail.url} css={stackedCardWrapper}>
+								<Card
+									{...getDefaultCardProps(
+										trail,
+										discussionApiUrl,
+										onwardsSource,
+										format,
+										serverTime,
+									)}
+									showTopBarDesktop={false}
+									showTopBarMobile={false}
+									aspectRatio="5:4"
+								/>
+							</div>
+						);
+					})}
 				</div>
 			</main>
 		</div>
