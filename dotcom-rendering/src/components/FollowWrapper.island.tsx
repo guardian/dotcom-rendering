@@ -1,17 +1,35 @@
 import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { isUndefined, log } from '@guardian/libs';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, textSans12 } from '@guardian/source/foundations';
+import {
+	SvgNotificationsOff,
+	SvgNotificationsOn,
+} from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { useIsMyGuardianEnabled } from '../lib/useIsMyGuardianEnabled';
-import { FollowNotificationsButton, FollowTagButton } from './FollowButtons';
+import { palette as schemedPalette } from '../palette';
+import { FollowTagButton } from './FollowButtons';
 
 type Props = {
 	id: string;
 	displayName: string;
 };
+
+const notificationTextStyles = css`
+	${textSans12}
+	color: ${schemedPalette('--follow-text')};
+	fill: currentColor;
+	display: flex;
+	align-items: center;
+	column-gap: ${space[1]}px;
+	min-height: ${space[6]}px;
+	padding: 0;
+`;
+
+const blockList = ['profile/anas-al-sharif'];
 
 export const FollowWrapper = ({ id, displayName }: Props) => {
 	const [isFollowingNotifications, setIsFollowingNotifications] = useState<
@@ -20,20 +38,11 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 	const [isFollowingTag, setIsFollowingTag] = useState<boolean | undefined>(
 		undefined,
 	);
-	const [showFollowTagButton, setShowFollowTagButton] =
-		useState<boolean>(false);
-
 	const isMyGuardianEnabled = useIsMyGuardianEnabled();
 	const isBridgetCompatible = useIsBridgetCompatible('2.5.0');
 
-	const isNotInBlockList = (tagId: string) => {
-		const blockList = ['profile/anas-al-sharif'];
-		return !blockList.includes(tagId);
-	};
-
-	if (isBridgetCompatible && isMyGuardianEnabled && isNotInBlockList(id)) {
-		setShowFollowTagButton(true);
-	}
+	const showFollowTagButton =
+		isBridgetCompatible && isMyGuardianEnabled && !blockList.includes(id);
 
 	useEffect(() => {
 		const topic = new Topic({
@@ -42,31 +51,62 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 			type: 'tag-contributor',
 		});
 
-		void getNotificationsClient()
-			.isFollowing(topic)
-			.then(setIsFollowingNotifications)
-			.catch((error) => {
-				window.guardian.modules.sentry.reportError(
-					error,
-					'bridget-getNotificationsClient-isFollowing-error',
-				);
-				log(
-					'dotcom',
-					'Bridget getNotificationsClient.isFollowing Error:',
-					error,
-				);
-			});
+		void Promise.all([
+			getNotificationsClient()
+				.isFollowing(topic)
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'bridget-getNotificationsClient-isFollowing-error',
+					);
+					log(
+						'dotcom',
+						'Bridget getNotificationsClient.isFollowing Error:',
+						error,
+					);
+					return undefined;
+				}),
+			getTagClient()
+				.isFollowing(topic)
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'bridget-getTagClient-isFollowing-error',
+					);
+					log(
+						'dotcom',
+						'Bridget getTagClient.isFollowing Error:',
+						error,
+					);
+					return undefined;
+				}),
+		]).then(([followingNotifications, followingTag]) => {
+			setIsFollowingNotifications(followingNotifications);
+			setIsFollowingTag(followingTag);
 
-		void getTagClient()
-			.isFollowing(topic)
-			.then(setIsFollowingTag)
-			.catch((error) => {
-				window.guardian.modules.sentry.reportError(
-					error,
-					'bridget-getTagClient-isFollowing-error',
-				);
-				log('dotcom', 'Bridget getTagClient.isFollowing Error:', error);
-			});
+			// Legacy: if user has notifications on but isn't following,
+			// auto-follow the tag to keep states consistent
+			if (followingNotifications && !followingTag) {
+				void getTagClient()
+					.follow(topic)
+					.then((success) => {
+						if (success) {
+							setIsFollowingTag(true);
+						}
+					})
+					.catch((error) => {
+						window.guardian.modules.sentry.reportError(
+							error,
+							'bridget-getTagClient-auto-follow-error',
+						);
+						log(
+							'dotcom',
+							'Bridget getTagClient.follow (auto) Error:',
+							error,
+						);
+					});
+			}
+		});
 	}, [id, displayName]);
 
 	const tagHandler = () => {
@@ -95,6 +135,26 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 						error,
 					);
 				});
+
+			// Turn off notifications when unfollowing
+			void getNotificationsClient()
+				.unfollow(topic)
+				.then((success) => {
+					if (success) {
+						setIsFollowingNotifications(false);
+					}
+				})
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'bridget-getNotificationsClient-unfollow-error',
+					);
+					log(
+						'dotcom',
+						'Bridget getNotificationsClient.unfollow Error:',
+						error,
+					);
+				});
 		} else {
 			void getTagClient()
 				.follow(topic)
@@ -110,36 +170,8 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 					);
 					log('dotcom', 'Bridget getTagClient.follow Error:', error);
 				});
-		}
-	};
 
-	const notificationsHandler = () => {
-		const topic = new Topic({
-			id,
-			displayName,
-			type: 'tag-contributor',
-		});
-
-		if (isFollowingNotifications) {
-			void getNotificationsClient()
-				.unfollow(topic)
-				.then((success) => {
-					if (success) {
-						setIsFollowingNotifications(false);
-					}
-				})
-				.catch((error) => {
-					window.guardian.modules.sentry.reportError(
-						error,
-						'briidget-getNotificationsClient-unfollow-error',
-					);
-					log(
-						'dotcom',
-						'Bridget getNotificationsClient.unfollow Error:',
-						error,
-					);
-				});
-		} else {
+			// Enable notifications when following
 			void getNotificationsClient()
 				.follow(topic)
 				.then((success) => {
@@ -189,14 +221,23 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 					withExtraBottomMargin={true}
 				/>
 			)}
-			<FollowNotificationsButton
-				isFollowing={isFollowingNotifications ?? false}
-				onClickHandler={
-					!isUndefined(isFollowingNotifications)
-						? notificationsHandler
-						: () => undefined
-				}
-			/>
+			{isFollowingTag && (
+				<span css={notificationTextStyles}>
+					{isFollowingNotifications ? (
+						<>
+							<SvgNotificationsOn size="small" />
+							Notifications turned on. Turn off anytime in
+							Settings.
+						</>
+					) : (
+						<>
+							<SvgNotificationsOff size="small" />
+							Notifications turned off. Turn on anytime in
+							Settings.
+						</>
+					)}
+				</span>
+			)}
 		</div>
 	);
 };
