@@ -234,6 +234,12 @@ export const AppsResult = meta.story({
 			);
 		});
 	},
+
+	parameters: {
+		config: {
+			renderingTarget: 'Apps',
+		},
+	},
 });
 
 const getMockData = (data: FEFootballMatchHeader) =>
