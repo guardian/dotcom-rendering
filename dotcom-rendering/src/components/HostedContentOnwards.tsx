@@ -23,6 +23,7 @@ type HostedContentOnwardsProps = {
 };
 
 const headerStyles = (accentColor?: string) => css`
+	margin-bottom: ${space[1]}px;
 	border-top: ${space[2]}px solid
 		${accentColor ? accentColor : sourcePalette.neutral[7]};
 
@@ -37,7 +38,6 @@ const headingStyles = css`
 	${textSans17}
 	padding-top: ${space[2]}px;
 	color: ${sourcePalette.neutral[7]};
-	margin-bottom: ${space[1]}px;
 `;
 
 /* Stacked cards styles for hosted content */

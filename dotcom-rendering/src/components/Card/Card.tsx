@@ -523,6 +523,11 @@ export const Card = ({
 
 	const isFrontContainer = containerType !== undefined && !onwardsSource;
 
+	const isHostedContent =
+		format.design === ArticleDesign.HostedArticle ||
+		format.design === ArticleDesign.HostedVideo ||
+		format.design === ArticleDesign.HostedGallery;
+
 	/**
 	 * Media cards have contrasting background colours. We add additional
 	 * padding to these cards to keep the text readable.
@@ -618,7 +623,7 @@ export const Card = ({
 				};
 			}
 
-			if (isMoreGalleriesOnwardContent) {
+			if (isMoreGalleriesOnwardContent || isHostedContent) {
 				return {
 					row: 'small',
 					column: 'small',
@@ -887,6 +892,7 @@ export const Card = ({
 				minWidthInPixels={minWidthInPixels}
 				mediaType={media?.type}
 				gapSizes={getGapSizes()}
+				isHostedContent={isHostedContent}
 			>
 				{/**
 				 * Waveform for podcasts is absolutely positioned at bottom of
