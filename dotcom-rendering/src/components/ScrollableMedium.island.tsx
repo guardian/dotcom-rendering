@@ -12,7 +12,7 @@ import { ScrollableCarousel } from './ScrollableCarousel';
 type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge?: boolean;
 	serverTime?: number;
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
@@ -31,7 +31,7 @@ export const ScrollableMedium = ({
 	containerPalette,
 	serverTime,
 	imageLoading,
-	showAge,
+	hideAge,
 	aspectRatio,
 	sectionId,
 }: Props) => {
@@ -68,7 +68,7 @@ export const ScrollableMedium = ({
 							serverTime={serverTime}
 							containerPalette={containerPalette}
 							containerType="scrollable/medium"
-							showAge={!!showAge}
+							showAge={!hideAge}
 							headlineSizes={headlineSizes}
 							mediaPositionOnDesktop={imagePosition}
 							mediaPositionOnMobile={imagePosition}

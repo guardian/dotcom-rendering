@@ -24,7 +24,7 @@ type Props = {
 	imageLoading: NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge?: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	sectionId: string;
@@ -38,7 +38,7 @@ export const DecideContainer = ({
 	groupedTrails,
 	containerType,
 	containerPalette,
-	showAge,
+	hideAge,
 	serverTime,
 	imageLoading,
 	aspectRatio,
@@ -63,7 +63,7 @@ export const DecideContainer = ({
 				<FlexibleSpecial
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
-					showAge={showAge}
+					hideAge={hideAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
@@ -75,7 +75,7 @@ export const DecideContainer = ({
 				<FlexibleGeneral
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
-					showAge={showAge}
+					hideAge={hideAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
@@ -90,7 +90,7 @@ export const DecideContainer = ({
 						trails={trails}
 						imageLoading={imageLoading}
 						containerPalette={containerPalette}
-						showAge={showAge}
+						hideAge={hideAge}
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
@@ -104,7 +104,7 @@ export const DecideContainer = ({
 						trails={trails}
 						imageLoading={imageLoading}
 						containerPalette={containerPalette}
-						showAge={showAge}
+						hideAge={hideAge}
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
@@ -116,7 +116,7 @@ export const DecideContainer = ({
 				<StaticMediumFour
 					trails={trails}
 					containerPalette={containerPalette}
-					showAge={showAge}
+					hideAge={hideAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
