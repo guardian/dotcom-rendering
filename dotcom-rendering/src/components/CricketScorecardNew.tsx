@@ -55,9 +55,10 @@ const sectionHeadingStyles = css`
 
 const inningsHeadingStyles = css`
 	display: flex;
-	padding: 6px ${space[3]}px 0;
+	padding: 6px ${space[3]}px;
 	flex-direction: column;
 	align-items: flex-start;
+	justify-content: center;
 	gap: ${space[1]}px;
 	background: ${palette('--cricket-scorecard-innings-heading-background')};
 	color: ${neutral[100]};
