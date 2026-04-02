@@ -21,6 +21,8 @@ export type Batter = {
 	fours: number;
 	sixes: number;
 	howOut: string;
+	onStrike: boolean;
+	nonStrike: boolean;
 };
 
 export type Extras = {
@@ -88,7 +90,16 @@ const feInningsToDCARInnings = (feInnings: FECricketInnings): Innings => {
 		inningsTotals,
 		extras,
 		fallOfWickets: feInnings.fallOfWicket,
-		batters: feInnings.batters,
+		batters: feInnings.batters.map((b) => ({
+			name: b.name,
+			ballsFaced: b.ballsFaced,
+			runs: b.runs,
+			fours: b.fours,
+			sixes: b.sixes,
+			howOut: b.howOut,
+			onStrike: b.onStrike,
+			nonStrike: b.nonStrike,
+		})),
 		bowlers: feInnings.bowlers,
 	};
 };

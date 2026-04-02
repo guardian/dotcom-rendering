@@ -60,9 +60,37 @@ const inningsHeadingStyles = css`
 	align-items: flex-start;
 	justify-content: center;
 	gap: ${space[1]}px;
-	background: ${palette('--cricket-scorecard-innings-heading-background')};
+	background: ${palette('--cricket-scorecard-first-team-color')};
 	color: ${neutral[100]};
 	${responsiveTextSansBold}
+`;
+
+const secondTeamInningsHeadingStyles = css`
+	background: ${palette('--cricket-scorecard-second-team-color')};
+`;
+
+const batIconWrapperStyles = css`
+	display: flex;
+	width: 24px;
+	height: 38px;
+	justify-content: center;
+	align-items: flex-end;
+	flex-shrink: 0;
+`;
+
+const batIconSvgStyles = css`
+	width: 28.3px;
+	height: 28.3px;
+	transform: rotate(-15deg);
+	flex-shrink: 0;
+`;
+
+const firstTeamBatFillStyles = css`
+	fill: ${palette('--cricket-scorecard-first-team-color')};
+`;
+
+const secondTeamBatFillStyles = css`
+	fill: ${palette('--cricket-scorecard-second-team-color')};
 `;
 
 const tableStyles = css`
@@ -99,8 +127,15 @@ const tableCellStyles = css`
 
 const tableRowHeaderStyles = css`
 	${cellBaseStyles}
+	display: flex;
+	align-items: center;
 	flex: 1;
 	${responsiveTextSans}
+`;
+
+const batterNameTextStyles = css`
+	display: flex;
+	flex-direction: column;
 `;
 
 const rowBaseStyles = css`
@@ -281,14 +316,34 @@ const SectionHeading = ({ children }: { children: ReactNode }) => (
 	<h3 css={sectionHeadingStyles}>{children}</h3>
 );
 
+const BatIcon = ({ inningsIndex }: { inningsIndex: number }) => (
+	<div css={batIconWrapperStyles}>
+		<svg
+			css={[
+				batIconSvgStyles,
+				inningsIndex % 2 === 0
+					? firstTeamBatFillStyles
+					: secondTeamBatFillStyles,
+			]}
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 23 33"
+			aria-hidden="true"
+		>
+			<path d="M19.495 0.693989C19.878 0.0306164 20.7267 -0.196713 21.39 0.186208C22.0535 0.56923 22.2808 1.41786 21.8978 2.08127L16.6861 11.1068L18.0007 14.466C18.2217 15.0318 18.1727 15.6676 17.8692 16.1937L8.84804 31.8188C8.29575 32.7753 7.07192 33.1033 6.11534 32.551L16.1373 15.1938L14.7607 11.6713L14.4876 11.7121L6.61506 25.3491C6.45714 25.6225 6.10745 25.7162 5.83402 25.5584C5.56074 25.4005 5.46698 25.0507 5.62474 24.7773L13.0401 11.9321L11.0216 12.2394L1.99977 27.8657L7.11523 30.8191L6.11534 32.551L0.999874 29.5976C0.0433324 29.0453 -0.28428 27.8224 0.267901 26.8658L9.28878 11.2398C9.5546 10.7796 9.99141 10.4473 10.4985 10.3101L10.7204 10.2627L14.2842 9.71931L19.495 0.693989Z" />
+		</svg>
+	</div>
+);
+
 const Batting = ({
 	batters,
 	extras,
 	inningsTotals,
+	inningsIndex,
 }: {
 	batters: Batter[];
 	extras: Extras;
 	inningsTotals: InningsTotals;
+	inningsIndex: number;
 }) => (
 	<div css={cardSectionStyles}>
 		<table css={tableStyles}>
@@ -338,9 +393,14 @@ const Batting = ({
 				{batters.map((batter) => (
 					<tr key={batter.name} css={tableRowStyles}>
 						<th scope="row" css={tableRowHeaderStyles}>
-							{batter.name}
-							<div css={[howOutStyles, hideFromTabletStyle]}>
-								{batter.howOut}
+							{(batter.onStrike || batter.nonStrike) && (
+								<BatIcon inningsIndex={inningsIndex} />
+							)}
+							<div css={batterNameTextStyles}>
+								{batter.name}
+								<div css={[howOutStyles, hideFromTabletStyle]}>
+									{batter.howOut}
+								</div>
 							</div>
 						</th>
 						<td
@@ -580,16 +640,24 @@ export const CricketScorecardNew = ({
 	awayTeam,
 }: Props) => (
 	<div css={overallContainerStyles}>
-		{allInnings.map((innings) => (
+		{allInnings.map((innings, index) => (
 			<Fragment key={innings.description}>
 				<section css={cardStyles}>
-					<h2 css={inningsHeadingStyles}>{innings.description}</h2>
+					<h2
+						css={[
+							inningsHeadingStyles,
+							index % 2 !== 0 && secondTeamInningsHeadingStyles,
+						]}
+					>
+						{innings.description}
+					</h2>
 				</section>
 				<section css={cardStyles}>
 					<Batting
 						batters={innings.batters}
 						extras={innings.extras}
 						inningsTotals={innings.inningsTotals}
+						inningsIndex={index}
 					/>
 				</section>
 				<section css={cardStyles}>

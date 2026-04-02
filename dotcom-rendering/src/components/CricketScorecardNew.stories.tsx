@@ -66,6 +66,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 7,
 						sixes: 3,
 						howOut: 'st Latham b Ravindra',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Shubman Gill',
@@ -74,6 +76,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 0,
 						sixes: 1,
 						howOut: 'c Phillips b Santner',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Virat Kohli',
@@ -82,6 +86,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 0,
 						sixes: 0,
 						howOut: 'lbw b Bracewell',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Shreyas Iyer',
@@ -90,6 +96,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 2,
 						sixes: 2,
 						howOut: 'c Ravindra b Santner',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Lokesh Rahul',
@@ -98,6 +106,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 3,
 						sixes: 0,
 						howOut: 'run out (Williamson)',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Hardik Pandya',
@@ -106,6 +116,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 2,
 						sixes: 1,
 						howOut: 'c Bracewell b Smith',
+						nonStrike: true,
+						onStrike: false,
 					},
 					{
 						name: 'Ravindra Jadeja',
@@ -114,6 +126,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 1,
 						sixes: 0,
 						howOut: 'not out',
+						onStrike: true,
+						nonStrike: false,
 					},
 				],
 				bowlers: [
@@ -207,6 +221,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 2,
 						sixes: 0,
 						howOut: 'lbw b Vinod',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Rachin Ravindra',
@@ -215,6 +231,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 4,
 						sixes: 1,
 						howOut: 'b Yadav',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Kane Williamson',
@@ -223,6 +241,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 1,
 						sixes: 0,
 						howOut: 'c & b Yadav',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Daryl Mitchell',
@@ -231,6 +251,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 3,
 						sixes: 0,
 						howOut: 'c Sharma b Ahmed',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Tom Latham',
@@ -239,6 +261,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 4,
 						sixes: 0,
 						howOut: 'c Kohli b Shami',
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Glenn Phillips',
@@ -247,6 +271,8 @@ export const CricketScorecardNew = meta.story({
 						fours: 3,
 						sixes: 3,
 						howOut: 'not out',
+						onStrike: true,
+						nonStrike: false,
 					},
 				],
 				bowlers: [
