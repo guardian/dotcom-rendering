@@ -240,10 +240,11 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 	const innings = props.match.innings.filter(
 		(inning) => inning.battingTeam === props.team.name,
 	);
+
 	{
 		/* TODO: Calculate if team won and margin/nature of victory */
 	}
-	const teamIsWinner = Math.random() < 0.5 && props.match.kind === 'Result';
+	const teamIsWinner = false;
 	const marginOfVictory: {
 		number: number;
 		unit: 'runs' | 'wickets';
