@@ -11,9 +11,7 @@ type TrailProps = {
 	trail: DCRFrontCard;
 	imageLoading: Loading;
 	serverTime?: number;
-	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
-	isTagPage?: boolean;
 	aspectRatio?: AspectRatio;
 };
 
@@ -51,20 +49,17 @@ type TrailProps = {
  */
 export const Card100Media50 = ({
 	trail,
-	showAge,
 	containerPalette,
 	imageLoading,
-	isTagPage,
 	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			imageLoading={imageLoading}
-			isTagPage={isTagPage}
 			trail={trail}
 			containerPalette={containerPalette}
-			showAge={showAge}
+			ageFormat="absolute"
 			serverTime={serverTime}
 			headlineSizes={{ desktop: 'medium', tablet: 'xxsmall' }}
 			image={trail.image}
@@ -105,10 +100,8 @@ export const Card100Media50 = ({
  */
 export const Card100Media75 = ({
 	trail,
-	showAge,
 	containerPalette,
 	imageLoading,
-	isTagPage,
 	serverTime,
 	aspectRatio,
 }: TrailProps) => {
@@ -116,7 +109,7 @@ export const Card100Media75 = ({
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
-			showAge={showAge}
+			ageFormat="absolute"
 			serverTime={serverTime}
 			headlineSizes={{ desktop: 'medium', tablet: 'xsmall' }}
 			image={trail.image}
@@ -124,7 +117,6 @@ export const Card100Media75 = ({
 			mediaPositionOnDesktop="right"
 			mediaPositionOnMobile="top"
 			imageLoading={imageLoading}
-			isTagPage={isTagPage}
 			trailText={
 				// Only show trail text if there is no supportContent
 				isUndefined(trail.supportingContent) ||
@@ -159,10 +151,8 @@ export const Card100Media75 = ({
  */
 export const Card25Media25 = ({
 	trail,
-	showAge,
 	containerPalette,
 	imageLoading,
-	isTagPage,
 	serverTime,
 	aspectRatio,
 }: TrailProps) => {
@@ -172,13 +162,12 @@ export const Card25Media25 = ({
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			supportingContentAlignment="vertical"
 			containerPalette={containerPalette}
-			showAge={showAge}
+			ageFormat="absolute"
 			serverTime={serverTime}
 			mediaPositionOnDesktop="top"
 			mediaPositionOnMobile="left"
 			mediaSize="small"
 			imageLoading={imageLoading}
-			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			canPlayInline={false}
 			aspectRatio={aspectRatio}
@@ -202,10 +191,8 @@ export const Card25Media25 = ({
  */
 export const Card50Media50 = ({
 	trail,
-	showAge,
 	containerPalette,
 	imageLoading,
-	isTagPage,
 	serverTime,
 	aspectRatio,
 }: TrailProps) => {
@@ -218,8 +205,7 @@ export const Card50Media50 = ({
 			mediaPositionOnDesktop="top"
 			mediaPositionOnMobile="top"
 			imageLoading={imageLoading}
-			isTagPage={isTagPage}
-			showAge={showAge}
+			ageFormat="absolute"
 			serverTime={serverTime}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment="horizontal"
@@ -244,10 +230,8 @@ export const Card50Media50 = ({
  */
 export const Card33Media33 = ({
 	trail,
-	showAge,
 	containerPalette,
 	imageLoading,
-	isTagPage,
 	serverTime,
 	aspectRatio,
 }: TrailProps) => {
@@ -255,14 +239,13 @@ export const Card33Media33 = ({
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
-			showAge={showAge}
+			ageFormat="absolute"
 			serverTime={serverTime}
 			trailText={trail.trailText}
 			mediaSize="medium"
 			mediaPositionOnDesktop="top"
 			mediaPositionOnMobile="left"
 			imageLoading={imageLoading}
-			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			aspectRatio={aspectRatio}
 		/>
@@ -283,24 +266,21 @@ export const Card33Media33 = ({
  */
 export const CardDefault = ({
 	trail,
-	showAge,
 	containerPalette,
 	serverTime,
-	isTagPage,
 	aspectRatio,
 }: Omit<TrailProps, 'imageLoading'>) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
-			showAge={showAge}
+			ageFormat="absolute"
 			serverTime={serverTime}
 			image={undefined}
 			imageLoading={'lazy'}
 			avatarUrl={undefined}
 			headlineSizes={{ desktop: 'xxsmall' }}
 			canPlayInline={false}
-			isTagPage={isTagPage}
 			aspectRatio={aspectRatio}
 		/>
 	);

@@ -1,5 +1,6 @@
 import { until } from '@guardian/source/foundations';
 import { isMediaCard } from '../lib/cardHelpers';
+import { isWithinTwelveHours } from '../lib/formatTime';
 import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import type {
 	AspectRatio,
@@ -12,7 +13,7 @@ import { ScrollableCarousel } from './ScrollableCarousel';
 type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
@@ -31,7 +32,7 @@ export const ScrollableMedium = ({
 	containerPalette,
 	serverTime,
 	imageLoading,
-	showAge,
+	hideAge,
 	aspectRatio,
 	sectionId,
 }: Props) => {
@@ -68,7 +69,10 @@ export const ScrollableMedium = ({
 							serverTime={serverTime}
 							containerPalette={containerPalette}
 							containerType="scrollable/medium"
-							showAge={!!showAge}
+							showAge={
+								!hideAge &&
+								isWithinTwelveHours(trail.webPublicationDate)
+							}
 							headlineSizes={headlineSizes}
 							mediaPositionOnDesktop={imagePosition}
 							mediaPositionOnMobile={imagePosition}
