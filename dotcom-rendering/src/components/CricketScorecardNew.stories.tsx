@@ -1,29 +1,46 @@
+import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
+import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
-import { CricketScorecard as CricketScorecardComponent } from './CricketScorecard';
+import { grid } from '../grid';
+import { palette } from '../palette';
+import { CricketScorecardNew as CricketScorecardNewComponent } from './CricketScorecardNew';
+
+const storyContainerStyles = css`
+	background-color: ${palette('--football-match-info-background')};
+	${grid.paddedContainer}
+`;
+
+const storyInnerStyles = css`
+	${grid.column.centre}
+	padding-top: 10px;
+	padding-bottom: 10px;
+`;
 
 const meta = preview.meta({
-	component: CricketScorecardComponent,
-	title: 'Components/CricketScorecard',
+	component: CricketScorecardNewComponent,
+	title: 'Components/CricketScorecardNew',
 	decorators: [
-		// To make the story not shoved in the corner.
 		(Story) => (
-			<>
-				<div css={{ padding: 16 }}>
+			<div css={storyContainerStyles}>
+				<div css={storyInnerStyles}>
 					<Story />
 				</div>
-			</>
+			</div>
 		),
 	],
 	parameters: {
 		chromatic: {
 			viewports: [breakpoints.mobileLandscape],
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
 		},
 	},
 });
 
-export const CricketScorecard = meta.story({
-	name: 'Cricket Scorecard',
+export const CricketScorecardNew = meta.story({
+	name: 'Cricket Scorecard (New)',
 	args: {
 		allInnings: [
 			{
@@ -81,6 +98,36 @@ export const CricketScorecard = meta.story({
 						sixes: 2,
 						howOut: 'c Ravindra b Santner',
 						onStrike: false,
+						nonStrike: false,
+					},
+					{
+						name: 'Lokesh Rahul',
+						ballsFaced: 45,
+						runs: 39,
+						fours: 3,
+						sixes: 0,
+						howOut: 'run out (Williamson)',
+						onStrike: false,
+						nonStrike: false,
+					},
+					{
+						name: 'Hardik Pandya',
+						ballsFaced: 18,
+						runs: 22,
+						fours: 2,
+						sixes: 1,
+						howOut: 'c Bracewell b Smith',
+						nonStrike: true,
+						onStrike: false,
+					},
+					{
+						name: 'Ravindra Jadeja',
+						ballsFaced: 24,
+						runs: 30,
+						fours: 1,
+						sixes: 0,
+						howOut: 'not out',
+						onStrike: true,
 						nonStrike: false,
 					},
 				],
@@ -153,6 +200,8 @@ export const CricketScorecard = meta.story({
 				],
 			},
 			{
+				description: 'New Zealand first innings',
+				battingTeam: 'New Zealand',
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',
@@ -166,8 +215,6 @@ export const CricketScorecard = meta.story({
 					penalties: 0,
 					wides: 13,
 				},
-				description: 'New Zealand first innings',
-				battingTeam: 'New Zealand',
 				batters: [
 					{
 						name: 'Will Young',
@@ -207,6 +254,26 @@ export const CricketScorecard = meta.story({
 						sixes: 0,
 						howOut: 'c Sharma b Ahmed',
 						onStrike: false,
+						nonStrike: false,
+					},
+					{
+						name: 'Tom Latham',
+						ballsFaced: 56,
+						runs: 44,
+						fours: 4,
+						sixes: 0,
+						howOut: 'c Kohli b Shami',
+						onStrike: false,
+						nonStrike: false,
+					},
+					{
+						name: 'Glenn Phillips',
+						ballsFaced: 34,
+						runs: 55,
+						fours: 3,
+						sixes: 3,
+						howOut: 'not out',
+						onStrike: true,
 						nonStrike: false,
 					},
 				],
