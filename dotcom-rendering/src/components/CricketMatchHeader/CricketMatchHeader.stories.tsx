@@ -59,3 +59,48 @@ export const Live = {
 		},
 	},
 } satisfies Story;
+
+export const Result = {
+	args: {
+		edition: 'UK',
+		match: {
+			...Fixture.args.match,
+			kind: 'Result',
+			day: 4,
+			innings: [
+				{
+					declared: false,
+					forfeited: false,
+					battingTeam: 'Australia',
+					runsScored: 511,
+					overs: '10.0',
+					fallOfWicket: 0,
+				},
+				{
+					declared: false,
+					forfeited: false,
+					battingTeam: 'England',
+					runsScored: 172,
+					overs: '69.2',
+					fallOfWicket: 0,
+				},
+				{
+					declared: false,
+					forfeited: false,
+					battingTeam: 'Australia',
+					runsScored: 334,
+					overs: '28.2',
+					fallOfWicket: 2,
+				},
+				{
+					declared: false,
+					forfeited: false,
+					battingTeam: 'England',
+					runsScored: 241,
+					overs: '75.2',
+					fallOfWicket: 0,
+				},
+			],
+		},
+	},
+} satisfies Story;
