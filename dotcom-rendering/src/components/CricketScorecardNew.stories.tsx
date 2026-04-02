@@ -45,6 +45,7 @@ export const CricketScorecardNew = meta.story({
 		allInnings: [
 			{
 				description: 'India first innings',
+				battingTeam: 'India',
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',
@@ -200,6 +201,7 @@ export const CricketScorecardNew = meta.story({
 			},
 			{
 				description: 'New Zealand first innings',
+				battingTeam: 'New Zealand',
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',

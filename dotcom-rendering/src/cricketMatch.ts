@@ -53,6 +53,7 @@ export type CricketTeam = {
 
 export type Innings = {
 	description: string;
+	battingTeam: string;
 	bowlers: Bowler[];
 	batters: Batter[];
 	extras: Extras;
@@ -87,6 +88,7 @@ const feInningsToDCARInnings = (feInnings: FECricketInnings): Innings => {
 
 	return {
 		description: feInnings.description,
+		battingTeam: feInnings.battingTeam,
 		inningsTotals,
 		extras,
 		fallOfWickets: feInnings.fallOfWicket,

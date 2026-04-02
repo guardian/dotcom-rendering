@@ -268,8 +268,15 @@ const awayTeamDividerStyles = css`
 
 const teamNameStyles = css`
 	${responsiveTextSansBold}
-	color: ${palette('--football-match-stat-text')};
 	margin: 0;
+`;
+
+const homeTeamNameStyles = css`
+	color: ${palette('--cricket-scorecard-first-team-color')};
+`;
+
+const awayTeamNameStyles = css`
+	color: ${palette('--cricket-scorecard-second-team-color')};
 `;
 
 const playerListStyles = css`
@@ -316,14 +323,12 @@ const SectionHeading = ({ children }: { children: ReactNode }) => (
 	<h3 css={sectionHeadingStyles}>{children}</h3>
 );
 
-const BatIcon = ({ inningsIndex }: { inningsIndex: number }) => (
+const BatIcon = ({ isHomeTeam }: { isHomeTeam: boolean }) => (
 	<div css={batIconWrapperStyles}>
 		<svg
 			css={[
 				batIconSvgStyles,
-				inningsIndex % 2 === 0
-					? firstTeamBatFillStyles
-					: secondTeamBatFillStyles,
+				isHomeTeam ? firstTeamBatFillStyles : secondTeamBatFillStyles,
 			]}
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 23 33"
@@ -338,12 +343,12 @@ const Batting = ({
 	batters,
 	extras,
 	inningsTotals,
-	inningsIndex,
+	isHomeTeam,
 }: {
 	batters: Batter[];
 	extras: Extras;
 	inningsTotals: InningsTotals;
-	inningsIndex: number;
+	isHomeTeam: boolean;
 }) => (
 	<div css={cardSectionStyles}>
 		<table css={tableStyles}>
@@ -394,7 +399,7 @@ const Batting = ({
 					<tr key={batter.name} css={tableRowStyles}>
 						<th scope="row" css={tableRowHeaderStyles}>
 							{(batter.onStrike || batter.nonStrike) && (
-								<BatIcon inningsIndex={inningsIndex} />
+								<BatIcon isHomeTeam={isHomeTeam} />
 							)}
 							<div css={batterNameTextStyles}>
 								{batter.name}
@@ -640,34 +645,37 @@ export const CricketScorecardNew = ({
 	awayTeam,
 }: Props) => (
 	<div css={overallContainerStyles}>
-		{allInnings.map((innings, index) => (
-			<Fragment key={innings.description}>
-				<section css={cardStyles}>
-					<h2
-						css={[
-							inningsHeadingStyles,
-							index % 2 !== 0 && secondTeamInningsHeadingStyles,
-						]}
-					>
-						{innings.description}
-					</h2>
-				</section>
-				<section css={cardStyles}>
-					<Batting
-						batters={innings.batters}
-						extras={innings.extras}
-						inningsTotals={innings.inningsTotals}
-						inningsIndex={index}
-					/>
-				</section>
-				<section css={cardStyles}>
-					<Bowling bowlers={innings.bowlers} />
-				</section>
-				<section css={cardStyles}>
-					<FallOfWickets fallOfWickets={innings.fallOfWickets} />
-				</section>
-			</Fragment>
-		))}
+		{allInnings.map((innings) => {
+			const isHomeTeam = innings.battingTeam === homeTeam.name;
+			return (
+				<Fragment key={innings.description}>
+					<section css={cardStyles}>
+						<h2
+							css={[
+								inningsHeadingStyles,
+								!isHomeTeam && secondTeamInningsHeadingStyles,
+							]}
+						>
+							{innings.description}
+						</h2>
+					</section>
+					<section css={cardStyles}>
+						<Batting
+							batters={innings.batters}
+							extras={innings.extras}
+							inningsTotals={innings.inningsTotals}
+							isHomeTeam={isHomeTeam}
+						/>
+					</section>
+					<section css={cardStyles}>
+						<Bowling bowlers={innings.bowlers} />
+					</section>
+					<section css={cardStyles}>
+						<FallOfWickets fallOfWickets={innings.fallOfWickets} />
+					</section>
+				</Fragment>
+			);
+		})}
 
 		<section css={cardStyles}>
 			<h2 css={lineupsHeadingStyles}>Lineups</h2>
@@ -681,7 +689,16 @@ export const CricketScorecardNew = ({
 							i === 1 ? awayTeamDividerStyles : undefined,
 						]}
 					>
-						<h3 css={teamNameStyles}>{team.name}</h3>
+						<h3
+							css={[
+								teamNameStyles,
+								i === 0
+									? homeTeamNameStyles
+									: awayTeamNameStyles,
+							]}
+						>
+							{team.name}
+						</h3>
 						<ul css={playerListStyles}>
 							{team.lineup.map((player) => (
 								<li key={player} css={playerItemStyles}>
