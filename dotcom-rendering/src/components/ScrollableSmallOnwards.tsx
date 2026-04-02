@@ -25,7 +25,6 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	format: ArticleFormat;
 	headingUrl?: string;
-	isHostedContent?: boolean;
 };
 
 export const ScrollableSmallOnwards = (props: Props) => {
