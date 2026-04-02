@@ -29,6 +29,11 @@ import {
 	secondaryText,
 } from '../FootballMatchHeader/colours';
 
+type CricketTeam = {
+	name: string;
+	paID: string;
+};
+
 type Inning = {
 	battingTeam: string;
 	runsScored: number;
@@ -45,8 +50,8 @@ type CricketMatch = {
 	venue: string;
 	day?: number;
 	matchDate: Date;
-	homeTeam: string;
-	awayTeam: string;
+	homeTeam: CricketTeam;
+	awayTeam: CricketTeam;
 	innings: Inning[];
 };
 
@@ -231,9 +236,9 @@ const Teams = (props: { match: CricketMatch }) => (
 	</div>
 );
 
-const Team = (props: { team: string; match: CricketMatch }) => {
+const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 	const innings = props.match.innings.filter(
-		(inning) => inning.battingTeam === props.team,
+		(inning) => inning.battingTeam === props.team.name,
 	);
 	{
 		/* TODO: Calculate if team won and margin/nature of victory */
@@ -267,7 +272,7 @@ const Team = (props: { team: string; match: CricketMatch }) => {
 				borderLeftColor: palette(border(props.match.kind)),
 			}}
 		>
-			<TeamName name={props.team} />
+			<TeamName name={props.team.name} />
 			<span
 				css={{
 					display: 'flex',
@@ -275,7 +280,7 @@ const Team = (props: { team: string; match: CricketMatch }) => {
 					isolation: 'isolate',
 				}}
 			>
-				<Crest name={props.team} paID={props.team} />
+				<Crest name={props.team.name} paID={props.team.paID} />
 			</span>
 			{props.match.kind !== 'Fixture' &&
 				(innings.length > 0 ? (
