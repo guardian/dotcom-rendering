@@ -44,6 +44,7 @@ export const decideAssetOrigin = (
 const isDev = process.env.NODE_ENV === 'development';
 
 export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE, isDev);
+export const ASSET_ORIGIN_APPS: AssetOrigin = isDev ? '/' : ASSET_ORIGIN;
 
 const isAssetHash = (manifest: unknown): manifest is AssetHash =>
 	isObject(manifest) &&
@@ -82,13 +83,14 @@ const getManifestPath = (build: Build): ManifestPath =>
 export const getPathFromManifest = (
 	build: Build,
 	filename: `${string}.js`,
+	assetOrigin: AssetOrigin = ASSET_ORIGIN,
 ): string => {
 	if (!filename.endsWith('.js')) {
 		throw new Error('Invalid filename: extension must be .js');
 	}
 
 	if (isDev) {
-		return `${ASSET_ORIGIN}assets/${filename.replace(
+		return `${assetOrigin}assets/${filename.replace(
 			'.js',
 			`.${build}.js`,
 		)}`;
@@ -101,7 +103,7 @@ export const getPathFromManifest = (
 		throw new Error(`Missing manifest for ${filename}`);
 	}
 
-	return `${ASSET_ORIGIN}assets/${filenameFromManifest}`;
+	return `${assetOrigin}assets/${filenameFromManifest}`;
 };
 
 /**
