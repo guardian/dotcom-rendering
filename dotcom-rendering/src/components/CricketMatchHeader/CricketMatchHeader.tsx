@@ -11,8 +11,6 @@ import {
 	textSansBold17Object,
 	until,
 } from '@guardian/source/foundations';
-import { SvgNotificationsOn } from '@guardian/source/react-components';
-import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 import { type ReactNode, useMemo } from 'react';
 import { grid } from '../../grid';
 import {
@@ -56,7 +54,6 @@ type CricketMatch = {
 type Props = {
 	edition: EditionId;
 	match: CricketMatch;
-	isApp?: boolean;
 };
 
 export const CricketMatchHeader = (props: Props) => {
@@ -87,46 +84,6 @@ export const CricketMatchHeader = (props: Props) => {
 				<Teams match={match} />
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 			</div>
-			{props.isApp && match.kind !== 'Result' && (
-				<div
-					css={{
-						paddingLeft: space[4],
-						paddingRight: space[4],
-						paddingTop: space[2],
-						paddingBottom: space[2],
-					}}
-				>
-					<div css={{ ...textSans14Object }}>
-						Be notified about start times, wickets, run outs, alien
-						invasions and final scores
-					</div>
-					<div
-						css={{
-							...textSans15Object,
-							display: 'flex',
-							alignItems: 'center',
-							gap: space[1],
-							paddingTop: space[2],
-							paddingBottom: space[2],
-						}}
-					>
-						<SvgNotificationsOn
-							theme={{
-								fill:
-									match.kind === 'Fixture'
-										? '#ffffff'
-										: '#000000',
-							}}
-							size="small"
-						/>{' '}
-						Get match notifications
-						<span css={{ marginLeft: 'auto' }}>
-							{/* TODO: Wire toggle up for app notifications */}
-							<ToggleSwitch />
-						</span>
-					</div>
-				</div>
-			)}
 		</section>
 	);
 };
