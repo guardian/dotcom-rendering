@@ -212,11 +212,23 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	// This is dummy data until we have the actual trails for hosted content onwards.
 	const trails: TrailType[] = [
 		{
+			url: 'https://www.theguardian.com/advertiser-content/thriving-together/a-school-trip-to-the-future-with-hugh-fearnley-whittingstall',
+			headline:
+				'A school trip to the future with Hugh Fearnley-Whittingstall',
+			format: { design: 27, display: 1, theme: 6 },
+			dataLinkName: 'media | group-0 | card-@1',
+			image: {
+				src: 'https://i.guim.co.uk/img/media/9a13f995abbd1d8a3fb3b3410d2dc2ee4ebb27d6/361_0_2700_2160/master/2700.jpg?width=300&quality=85&auto=format&fit=max&s=5a81d147746aa6fdcc9cb5f9b575f8c3',
+				altText:
+					'Next Page: A school trip to the future with Hugh Fearnley-Whittingstall',
+			},
+		},
+		{
 			url: 'https://www.theguardian.com/world/2024/jun/19/ukraine-war-russia-ukraine-live-updates-june-19',
 			headline:
 				'Russia-Ukraine war live updates: Zelenskiy says Ukraine has retaken 1,000 square kilometres of territory',
 			format: { design: 27, display: 1, theme: 6 },
-			dataLinkName: 'media | group-0 | card-@1',
+			dataLinkName: 'media | group-0 | card-@2',
 			image: {
 				src: 'https://media.guim.co.uk/1c9b8e7cbbacfa4a0a3c8c9d0e5f1b2e5b6c8d/0_0_3500_2100/500.jpg',
 				altText: 'Soldiers in a trench',
@@ -227,29 +239,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 			headline:
 				'Russia-Ukraine war live updates: Zelenskiy says Ukraine has retaken 1,000 square kilometres of territory',
 			format: { design: 27, display: 1, theme: 6 },
-			dataLinkName: 'media | group-0 | card-@1',
-			image: {
-				src: 'https://media.guim.co.uk/1c9b8e7cbbacfa4a0a3c8c9d0e5f1b2e5b6c8d/0_0_3500_2100/500.jpg',
-				altText: 'Soldiers in a trench',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/world/2024/jun/19/ukraine-war-russia-ukraine-live-updates-june-19',
-			headline:
-				'Russia-Ukraine war live updates: Zelenskiy says Ukraine has retaken 1,000 square kilometres of territory',
-			format: { design: 27, display: 1, theme: 6 },
-			dataLinkName: 'media | group-0 | card-@1',
-			image: {
-				src: 'https://media.guim.co.uk/1c9b8e7cbbacfa4a0a3c8c9d0e5f1b2e5b6c8d/0_0_3500_2100/500.jpg',
-				altText: 'Soldiers in a trench',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/world/2024/jun/19/ukraine-war-russia-ukraine-live-updates-june-19',
-			headline:
-				'Russia-Ukraine war live updates: Zelenskiy says Ukraine has retaken 1,000 square kilometres of territory',
-			format: { design: 27, display: 1, theme: 6 },
-			dataLinkName: 'media | group-0 | card-@1',
+			dataLinkName: 'media | group-0 | card-@3',
 			image: {
 				src: 'https://media.guim.co.uk/1c9b8e7cbbacfa4a0a3c8c9d0e5f1b2e5b6c8d/0_0_3500_2100/500.jpg',
 				altText: 'Soldiers in a trench',
@@ -383,12 +373,14 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 					<div css={onwardContentStyles}>
 						<HostedContentOnwards
 							trails={trails}
-							accentColor={branding?.hostedCampaignColour}
-							brandName="TrendAI"
+							format={format}
+							onwardsSource="related-content"
+							serverTime={serverTime}
 							discussionApiUrl={
 								frontendData.config.discussionApiUrl
 							}
-							format={format}
+							brandName="TrendAI"
+							accentColor={branding?.hostedCampaignColour}
 						/>
 						<OnwardsUpper
 							ajaxUrl={frontendData.config.ajaxUrl}
