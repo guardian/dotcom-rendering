@@ -383,11 +383,11 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						<HostedContentOnwards
 							trails={trails}
 							format={format}
-							onwardsSource="related-content"
-							serverTime={serverTime}
 							discussionApiUrl={
 								frontendData.config.discussionApiUrl
 							}
+							onwardsSource="related-content"
+							serverTime={serverTime}
 							brandName="TrendAI"
 							accentColor={branding?.hostedCampaignColour}
 						/>
