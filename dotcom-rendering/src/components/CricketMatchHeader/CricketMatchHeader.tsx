@@ -21,13 +21,13 @@ import {
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import { BigNumber } from '../BigNumber';
-import { FootballCrest } from '../FootballCrest';
 import {
 	background,
 	border,
 	primaryText,
 	secondaryText,
 } from '../FootballMatchHeader/colours';
+import { TeamCrest } from '../TeamCrest';
 
 type CricketTeam = {
 	name: string;
@@ -369,10 +369,10 @@ const Crest = (props: { name: string; paID: string }) => (
 			zIndex: 1,
 		}}
 	>
-		{/* TODO: Do we have cricket team crests? */}
-		<FootballCrest
+		<TeamCrest
 			teamId={props.paID}
-			altText={`${props.name} football crest`}
+			path="cricket"
+			altText={`${props.name} cricket crest`}
 			width={40}
 			css={{
 				maxWidth: 40,
