@@ -15,7 +15,6 @@ import { HostedContentHeader } from '../components/HostedContentHeader';
 import { HostedContentOnwards } from '../components/HostedContentOnwards';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
-import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.island';
 import { Standfirst } from '../components/Standfirst';
@@ -219,7 +218,6 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 		content: { frontendData },
 		renderingTarget,
 		format,
-		serverTime,
 	} = props;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
@@ -381,37 +379,8 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 					>
 						<HostedContentOnwards
 							trails={trails}
-							format={format}
-							discussionApiUrl={
-								frontendData.config.discussionApiUrl
-							}
-							onwardsSource="related-content"
-							serverTime={serverTime}
 							brandName="TrendAI"
 							accentColor={branding?.hostedCampaignColour}
-						/>
-						{/* This needs to be surrounded by an island later when we have the data as far as I understand */}
-						<OnwardsUpper
-							ajaxUrl={frontendData.config.ajaxUrl}
-							hasRelated={true}
-							hasStoryPackage={true}
-							isAdFreeUser={frontendData.isAdFreeUser}
-							pageId={frontendData.pageId}
-							isPaidContent={!!frontendData.config.isPaidContent}
-							showRelatedContent={true}
-							keywordIds={frontendData.config.keywordIds}
-							contentType={frontendData.contentType}
-							tags={frontendData.tags}
-							format={format}
-							pillar={format.theme}
-							editionId={frontendData.editionId}
-							shortUrlId={frontendData.config.shortUrlId}
-							discussionApiUrl={
-								frontendData.config.discussionApiUrl
-							}
-							serverTime={serverTime}
-							renderingTarget={renderingTarget}
-							webURL={frontendData.webURL}
 						/>
 					</div>
 

@@ -5,19 +5,12 @@ import {
 	textSans17,
 	textSansBold20,
 } from '@guardian/source/foundations';
-import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import { type OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
-import { Card } from './Card/Card';
-import type { Props as CardProps } from './Card/Card';
+import { HostedContentOnwardsCard } from './HostedContentOnwardsCard';
 
 type HostedContentOnwardsProps = {
 	trails: TrailType[];
-	format: ArticleFormat;
-	discussionApiUrl: string;
-	onwardsSource: OnwardsSource;
-	serverTime?: number;
 	brandName: string;
 	accentColor?: string;
 };
@@ -50,14 +43,16 @@ const stackedCardsStyles = css`
 const stackedCardWrapper = css`
 	width: 100%;
 	border-top: 2px solid ${palette('--onward-content-border')};
+	padding-top: ${space[2]}px;
+	padding-bottom: ${space[2]}px;
+
+	&:last-of-type {
+		padding-bottom: 0;
+	}
 `;
 
 export const HostedContentOnwards = ({
 	trails,
-	format,
-	discussionApiUrl,
-	onwardsSource,
-	serverTime,
 	brandName,
 	accentColor,
 }: HostedContentOnwardsProps) => {
@@ -74,15 +69,7 @@ export const HostedContentOnwards = ({
 					{trails.map((trail) => {
 						return (
 							<div key={trail.url} css={stackedCardWrapper}>
-								<Card
-									{...getDefaultCardProps(
-										trail,
-										discussionApiUrl,
-										onwardsSource,
-										format,
-										serverTime,
-									)}
-								/>
+								<HostedContentOnwardsCard trail={trail} />
 							</div>
 						);
 					})}
@@ -90,38 +77,4 @@ export const HostedContentOnwards = ({
 			</main>
 		</div>
 	);
-};
-
-const getDefaultCardProps = (
-	trail: TrailType,
-	discussionApiUrl: string,
-	onwardsSource: OnwardsSource,
-	format: ArticleFormat,
-	serverTime?: number,
-) => {
-	const defaultProps: CardProps = {
-		linkTo: trail.url,
-		imageLoading: 'lazy',
-		serverTime,
-		format: trail.format,
-		contextFormat: format,
-		containerType: 'scrollable/small',
-		headlineText: trail.headline,
-		image: trail.image,
-		dataLinkName: trail.dataLinkName,
-		discussionApiUrl,
-		mainMedia: trail.mainMedia,
-		isExternalLink: false,
-		aspectRatio: '5:4',
-		mediaSize: 'scrollable-small',
-		mediaPositionOnDesktop: 'left',
-		mediaPositionOnMobile: 'left',
-		supportingContent: undefined,
-		onwardsSource,
-		isOnwardContent: true,
-		showTopBarDesktop: false,
-		showTopBarMobile: false,
-	};
-
-	return defaultProps;
 };
