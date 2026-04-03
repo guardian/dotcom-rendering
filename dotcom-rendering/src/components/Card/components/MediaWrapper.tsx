@@ -8,7 +8,6 @@ import type { ArticleMedia } from '../../../types/mainMedia';
 const mediaFixedSize = {
 	tiny: 86,
 	small: 122.5,
-	medium: 125,
 };
 
 export type MediaPositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
@@ -175,7 +174,7 @@ const fixMobileMediaWidth = (
 	if (!isFrontContainerOrGallerySecondaryOnward) {
 		return css`
 			${until.tablet} {
-				${fixMediaWidthStyles(mediaFixedSize.medium)}
+				${fixMediaWidthStyles(mediaFixedSize.small)}
 			}
 		`;
 	}
