@@ -99,6 +99,7 @@ export const UL = ({
 	verticalDividerColour = palette('--section-border'),
 }: Props) => {
 	const spacingPx = getSpacingPx(hasLargeSpacing);
+
 	return (
 		<ul
 			css={[

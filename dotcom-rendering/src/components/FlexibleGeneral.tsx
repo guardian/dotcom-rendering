@@ -585,7 +585,6 @@ const HalfWidthCardLayout = ({
 								isWithinTwelveHours(card.webPublicationDate)
 							}
 							serverTime={serverTime}
-							image={card.image}
 							imageLoading={imageLoading}
 							mediaPositionOnDesktop="left"
 							mediaPositionOnMobile="left"

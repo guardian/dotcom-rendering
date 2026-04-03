@@ -23,110 +23,95 @@ export default {
 
 const ASPECT_RATIO = '5:4';
 
-export const OneCardFast = () => {
+export const OneCard = () => {
 	return (
-		<FrontSection title="Fast - One card" editionId="UK">
+		<FrontSection title="One card" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 1)}
-				speed="fast"
 				imageLoading="eager"
 				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
 };
-OneCardFast.storyName = 'Fast - One card';
 
-export const TwoCardFast = () => {
+export const TwoCards = () => {
 	return (
-		<FrontSection title="Fast - Two cards" editionId="UK">
+		<FrontSection title="Two cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 2)}
-				speed="fast"
 				imageLoading="eager"
 				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
 };
-TwoCardFast.storyName = 'Fast - Two cards';
 
-export const ThreeCardFast = () => {
+export const ThreeCards = () => {
 	return (
-		<FrontSection title="Fast - Three cards" editionId="UK">
+		<FrontSection title="Three cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 3)}
-				speed="fast"
 				imageLoading="eager"
 				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
 };
-ThreeCardFast.storyName = 'Fast - Three cards';
 
-export const FourCardFast = () => {
+export const FourCards = () => {
 	return (
-		<FrontSection title="Fast - Four cards" editionId="UK">
+		<FrontSection title="Four cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 4)}
-				speed="fast"
 				imageLoading="eager"
 				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
 };
-FourCardFast.storyName = 'Fast - Four cards';
 
-export const FiveCardFast = () => {
+export const FiveCards = () => {
 	return (
-		<FrontSection title="Fast - Five cards" editionId="UK">
+		<FrontSection title="Five cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 5)}
-				speed="fast"
 				imageLoading="eager"
 				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
 };
-FiveCardFast.storyName = 'Fast - Five cards';
 
-export const SixCardFast = () => {
+export const SixCards = () => {
 	return (
-		<FrontSection title="Fast - Six cards" editionId="UK">
+		<FrontSection title="Six cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 6)}
-				speed="fast"
 				imageLoading="eager"
 				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
 };
-SixCardFast.storyName = 'Fast - Six cards';
 
-export const SevenCardFast = () => {
+export const SevenCards = () => {
 	return (
-		<FrontSection title="Fast - Seven cards" editionId="UK">
+		<FrontSection title="Seven cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 7)}
-				speed="fast"
 				imageLoading="eager"
 				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
 };
-SevenCardFast.storyName = 'Fast - Seven cards';
 
-export const EightCardFast = () => {
+export const EightCards = () => {
 	return (
-		<FrontSection title="Fast - Eight cards" editionId="UK">
+		<FrontSection title="Eight cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 8)}
-				speed="fast"
 				imageLoading="eager"
 				aspectRatio={ASPECT_RATIO}
 			/>
@@ -134,126 +119,47 @@ export const EightCardFast = () => {
 	);
 };
 
-EightCardFast.storyName = 'Fast - Eight cards';
-
-export const TwelveCardFast = () => {
+export const NineCards = () => {
 	return (
-		<FrontSection title="Fast - Twelve cards" editionId="UK">
+		<FrontSection title="Nine cards" editionId="UK">
+			<DecideContainerByTrails
+				trails={trails.slice(0, 9)}
+				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
+			/>
+		</FrontSection>
+	);
+};
+
+export const TenCards = () => {
+	return (
+		<FrontSection title="Ten cards" editionId="UK">
+			<DecideContainerByTrails
+				trails={trails.slice(0, 10)}
+				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
+			/>
+		</FrontSection>
+	);
+};
+
+export const ElevenCards = () => {
+	return (
+		<FrontSection title="Eleven cards" editionId="UK">
+			<DecideContainerByTrails
+				trails={trails.slice(0, 11)}
+				imageLoading="eager"
+				aspectRatio={ASPECT_RATIO}
+			/>
+		</FrontSection>
+	);
+};
+
+export const TwelveCards = () => {
+	return (
+		<FrontSection title="Twelve cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 12)}
-				speed="fast"
-				imageLoading="eager"
-				aspectRatio={ASPECT_RATIO}
-			/>
-		</FrontSection>
-	);
-};
-TwelveCardFast.storyName = 'Fast - Twelve cards';
-
-export const OneCardSlow = () => {
-	return (
-		<FrontSection title="Slow - One card" editionId="UK">
-			<DecideContainerByTrails
-				trails={trails.slice(0, 1)}
-				speed="slow"
-				imageLoading="eager"
-				aspectRatio={ASPECT_RATIO}
-			/>
-		</FrontSection>
-	);
-};
-OneCardSlow.storyName = 'Slow - One card';
-
-export const TwoCardSlow = () => {
-	return (
-		<FrontSection title="Slow - Two cards" editionId="UK">
-			<DecideContainerByTrails
-				trails={trails.slice(0, 2)}
-				speed="slow"
-				imageLoading="eager"
-				aspectRatio={ASPECT_RATIO}
-			/>
-		</FrontSection>
-	);
-};
-TwoCardSlow.storyName = 'Slow - Two cards';
-
-export const ThreeCardSlow = () => {
-	return (
-		<FrontSection title="Slow - Three cards" editionId="UK">
-			<DecideContainerByTrails
-				trails={trails.slice(0, 3)}
-				speed="slow"
-				imageLoading="eager"
-				aspectRatio={ASPECT_RATIO}
-			/>
-		</FrontSection>
-	);
-};
-ThreeCardSlow.storyName = 'Slow - Three cards';
-
-export const FourCardSlow = () => {
-	return (
-		<FrontSection title="Slow - Four cards" editionId="UK">
-			<DecideContainerByTrails
-				trails={trails.slice(0, 4)}
-				speed="slow"
-				imageLoading="eager"
-				aspectRatio={ASPECT_RATIO}
-			/>
-		</FrontSection>
-	);
-};
-FourCardSlow.storyName = 'Slow - Four cards';
-
-export const FiveCardSlow = () => {
-	return (
-		<FrontSection title="Slow - Five cards" editionId="UK">
-			<DecideContainerByTrails
-				trails={trails.slice(0, 5)}
-				speed="slow"
-				imageLoading="eager"
-				aspectRatio={ASPECT_RATIO}
-			/>
-		</FrontSection>
-	);
-};
-FiveCardSlow.storyName = 'Slow - Five cards';
-
-export const SixCardSlow = () => {
-	return (
-		<FrontSection title="Slow - Six cards" editionId="UK">
-			<DecideContainerByTrails
-				trails={trails.slice(0, 6)}
-				speed="slow"
-				imageLoading="eager"
-				aspectRatio={ASPECT_RATIO}
-			/>
-		</FrontSection>
-	);
-};
-SixCardSlow.storyName = 'Slow - Six cards';
-
-export const SevenCardSlow = () => {
-	return (
-		<FrontSection title="Slow - Seven cards" editionId="UK">
-			<DecideContainerByTrails
-				trails={trails.slice(0, 7)}
-				speed="slow"
-				imageLoading="eager"
-				aspectRatio={ASPECT_RATIO}
-			/>
-		</FrontSection>
-	);
-};
-SevenCardSlow.storyName = 'Slow - Seven cards';
-
-export const EightCardSlow = () => {
-	return (
-		<FrontSection title="Slow - Eight cards" editionId="UK">
-			<DecideContainerByTrails
-				trails={trails.slice(0, 8)}
-				speed="slow"
 				imageLoading="eager"
 				aspectRatio={ASPECT_RATIO}
 			/>
@@ -261,23 +167,7 @@ export const EightCardSlow = () => {
 	);
 };
 
-EightCardSlow.storyName = 'Slow - Eight cards';
-
-export const TwelveCardSlow = () => {
-	return (
-		<FrontSection title="Slow - Twelve cards" editionId="UK">
-			<DecideContainerByTrails
-				trails={trails.slice(0, 12)}
-				speed="slow"
-				imageLoading="eager"
-				aspectRatio={ASPECT_RATIO}
-			/>
-		</FrontSection>
-	);
-};
-TwelveCardSlow.storyName = 'Slow - Twelve cards';
-
-export const FiveCardWithSingleBranding = () => {
+export const FiveCardsWithSingleBranding = () => {
 	return (
 		<FrontSection
 			title="Five cards with single branding"
@@ -308,25 +198,23 @@ export const FiveCardWithSingleBranding = () => {
 		>
 			<DecideContainerByTrails
 				trails={singleBrandedTrails}
-				speed="fast"
 				imageLoading="eager"
 				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
 };
-FiveCardWithSingleBranding.storyName = 'Five cards with single branding';
+FiveCardsWithSingleBranding.storyName = 'Five cards with single branding';
 
-export const FiveCardWithMultipleBranding = () => {
+export const FiveCardsWithMultipleBranding = () => {
 	return (
 		<FrontSection title="Five cards with multiple branding" editionId="UK">
 			<DecideContainerByTrails
 				trails={multipleBrandedTrails}
-				speed="fast"
 				imageLoading="eager"
 				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
 	);
 };
-FiveCardWithMultipleBranding.storyName = 'Five cards with multiple branding';
+FiveCardsWithMultipleBranding.storyName = 'Five cards with multiple branding';

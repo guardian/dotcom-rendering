@@ -1,21 +1,14 @@
-import {
-	Card100Media50,
-	Card100Media75,
-	Card25Media25,
-	Card33Media33,
-	Card50Media50,
-	CardDefault,
-} from '../lib/cardWrappers';
-import type { Tuple } from '../lib/tuple';
-import { takeFirst } from '../lib/tuple';
+import { isMediaCard } from '../lib/cardHelpers';
+import { takeFirst, type Tuple } from '../lib/tuple';
+import { palette } from '../palette';
 import type { AspectRatio, DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
+import { FrontCard } from './FrontCard';
 
 type Props = {
 	trails: DCRFrontCard[];
-	speed: 'fast' | 'slow';
 	imageLoading: Loading;
 	aspectRatio: AspectRatio;
 };
@@ -25,7 +18,7 @@ type CardProps = {
 	aspectRatio: AspectRatio;
 };
 
-export const OneCardFast = ({
+export const OneCard = ({
 	trail,
 	imageLoading,
 	aspectRatio,
@@ -33,32 +26,24 @@ export const OneCardFast = ({
 	trail: DCRFrontCard;
 } & CardProps) => {
 	return (
-		<UL direction="row">
-			<LI percentage="100%" padSides={true}>
-				<Card100Media50
+		<UL showTopBar={false} padBottom={true}>
+			<LI
+				padSides={true}
+				verticalDividerColour={palette('--card-border-supporting')}
+			>
+				<FrontCard
 					trail={trail}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
-				/>
-			</LI>
-		</UL>
-	);
-};
-
-export const OneCardSlow = ({
-	trail,
-	imageLoading,
-	aspectRatio,
-}: {
-	trail: DCRFrontCard;
-} & CardProps) => {
-	return (
-		<UL direction="row">
-			<LI percentage="100%" padSides={true}>
-				<Card100Media75
-					trail={trail}
-					imageLoading={imageLoading}
-					aspectRatio={aspectRatio}
+					mediaPositionOnDesktop="right"
+					mediaPositionOnMobile="top"
+					showTopBarDesktop={false}
+					showTopBarMobile={false}
+					mediaSize="medium"
+					trailText={trail.trailText}
+					showAge={true}
+					ageFormat="absolute"
+					avatarUrl={undefined}
 				/>
 			</LI>
 		</UL>
@@ -74,20 +59,30 @@ export const TwoCard = ({
 } & CardProps) => {
 	return (
 		<UL direction="row">
-			<LI percentage="50%" padSides={true}>
-				<Card50Media50
-					trail={trails[0]}
-					imageLoading={imageLoading}
-					aspectRatio={aspectRatio}
-				/>
-			</LI>
-			<LI percentage="50%" padSides={true} showDivider={true}>
-				<Card50Media50
-					trail={trails[1]}
-					imageLoading={imageLoading}
-					aspectRatio={aspectRatio}
-				/>
-			</LI>
+			{trails.map((trail, index) => (
+				<LI
+					key={trail.url}
+					percentage="50%"
+					padSides={true}
+					showDivider={index > 0}
+					verticalDividerColour={palette('--card-border-supporting')}
+				>
+					<FrontCard
+						trail={trail}
+						imageLoading={imageLoading}
+						aspectRatio={aspectRatio}
+						mediaPositionOnDesktop="left"
+						mediaPositionOnMobile="left"
+						showTopBarDesktop={false}
+						showTopBarMobile={false}
+						mediaSize="small"
+						containerType="flexible/general"
+						showAge={true}
+						ageFormat="absolute"
+						avatarUrl={undefined}
+					/>
+				</LI>
+			))}
 		</UL>
 	);
 };
@@ -100,23 +95,22 @@ export const ThreeCard = ({
 	trails: Tuple<DCRFrontCard, 3>;
 } & CardProps) => {
 	return (
-		<UL direction="row">
-			<LI percentage="33.333%" padSides={true}>
-				<Card33Media33
+		<UL showTopBar={false} padBottom={true} hasLargeSpacing={false}>
+			<LI
+				padSides={true}
+				verticalDividerColour={palette('--card-border-supporting')}
+			>
+				<FrontCard
 					trail={trails[0]}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 				/>
-			</LI>
-			<LI percentage="33.333%" padSides={true} showDivider={true}>
-				<Card33Media33
+				<FrontCard
 					trail={trails[1]}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 				/>
-			</LI>
-			<LI percentage="33.333%" padSides={true} showDivider={true}>
-				<Card33Media33
+				<FrontCard
 					trail={trails[2]}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
@@ -130,93 +124,57 @@ export const FourCard = ({
 	trails,
 	imageLoading,
 	aspectRatio,
+	showTopBarDesktop = false,
+	showImages = true,
 }: {
 	trails: Tuple<DCRFrontCard, 4>;
+	showTopBarDesktop?: boolean;
+	showImages?: boolean;
 } & CardProps) => {
+	const MyCard = ({ trail, i }: { trail: DCRFrontCard; i: number }) => (
+		<FrontCard
+			key={i}
+			trail={trail}
+			imageLoading={imageLoading}
+			containerType="scrollable/medium"
+			headlineSizes={{
+				desktop: 'xsmall',
+				tablet: 'xxsmall',
+			}}
+			mediaPositionOnDesktop={
+				// isMediaCard(trail.format) ? 'top' : 'bottom'
+				'top'
+			}
+			mediaPositionOnMobile={isMediaCard(trail.format) ? 'top' : 'bottom'}
+			mediaSize="scrollable-medium"
+			aspectRatio={aspectRatio}
+			kickerText={trail.kickerText}
+			showLivePlayable={false}
+			showTopBarDesktop={showTopBarDesktop}
+			showTopBarMobile={false}
+			canPlayInline={false}
+			image={showImages ? trail.image : undefined}
+		/>
+	);
+
 	return (
-		<UL direction="row">
-			<LI percentage="25%" padSides={true}>
-				<Card25Media25
-					trail={trails[0]}
-					imageLoading={imageLoading}
-					aspectRatio={aspectRatio}
-				/>
-			</LI>
-			<LI percentage="25%" padSides={true} showDivider={true}>
-				<Card25Media25
-					trail={trails[1]}
-					imageLoading={imageLoading}
-					aspectRatio={aspectRatio}
-				/>
-			</LI>
-			<LI percentage="25%" padSides={true} showDivider={true}>
-				<Card25Media25
-					trail={trails[2]}
-					imageLoading={imageLoading}
-					aspectRatio={aspectRatio}
-				/>
-			</LI>
-			<LI percentage="25%" padSides={true} showDivider={true}>
-				<Card25Media25
-					trail={trails[3]}
-					imageLoading={imageLoading}
-					aspectRatio={aspectRatio}
-				/>
-			</LI>
+		<UL direction="row" padBottom={true} hasLargeSpacing={true}>
+			{trails.map((trail, i) => (
+				<LI
+					stretch={false}
+					percentage="25%"
+					key={trail.url}
+					padSides={true}
+					showDivider={i > 0}
+				>
+					<MyCard key={trail.url} trail={trail} i={i} />
+				</LI>
+			))}
 		</UL>
 	);
 };
 
-export const FiveCardFast = ({
-	trails,
-	imageLoading,
-	aspectRatio,
-}: {
-	trails: Tuple<DCRFrontCard, 5>;
-} & CardProps) => {
-	return (
-		<UL direction="row">
-			<LI percentage="33.333%" padSides={true}>
-				<Card33Media33
-					trail={trails[0]}
-					imageLoading={imageLoading}
-					aspectRatio={aspectRatio}
-				/>
-			</LI>
-			<LI percentage="33.333%" padSides={true} showDivider={true}>
-				<Card33Media33
-					trail={trails[1]}
-					imageLoading={imageLoading}
-					aspectRatio={aspectRatio}
-				/>
-			</LI>
-			<LI percentage="33.333%">
-				<UL direction="column" showDivider={true}>
-					<LI padSides={true}>
-						<CardDefault
-							trail={trails[2]}
-							aspectRatio={aspectRatio}
-						/>
-					</LI>
-					<LI padSides={true}>
-						<CardDefault
-							trail={trails[3]}
-							aspectRatio={aspectRatio}
-						/>
-					</LI>
-					<LI padSides={true}>
-						<CardDefault
-							trail={trails[4]}
-							aspectRatio={aspectRatio}
-						/>
-					</LI>
-				</UL>
-			</LI>
-		</UL>
-	);
-};
-
-export const FiveCardSlow = ({
+export const FiveCard = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -225,50 +183,22 @@ export const FiveCardSlow = ({
 } & CardProps) => {
 	return (
 		<>
-			<UL direction="row" padBottom={true}>
-				<LI percentage="50%" padSides={true}>
-					<Card33Media33
-						trail={trails[0]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="50%" padSides={true} showDivider={true}>
-					<Card33Media33
-						trail={trails[1]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-			</UL>
-			<UL direction="row">
-				<LI percentage="33.333%" padSides={true}>
-					<Card33Media33
-						trail={trails[2]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33
-						trail={trails[3]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33
-						trail={trails[4]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-			</UL>
+			<OneCard
+				trail={trails[0]}
+				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
+			/>
+			<FourCard
+				trails={trails.slice(1, 5) as Tuple<DCRFrontCard, 4>}
+				showTopBarDesktop={true}
+				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
+			/>
 		</>
 	);
 };
 
-export const SixCardFast = ({
+export const SixCard = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -277,108 +207,22 @@ export const SixCardFast = ({
 } & CardProps) => {
 	return (
 		<>
-			<UL direction="row" padBottom={true}>
-				<LI percentage="25%" padSides={true}>
-					<Card25Media25
-						trail={trails[0]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[1]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[2]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[3]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-			</UL>
-			<UL direction="row">
-				<LI percentage="50%" padSides={true}>
-					<CardDefault trail={trails[4]} aspectRatio={aspectRatio} />
-				</LI>
-				<LI percentage="50%" padSides={true} showDivider={true}>
-					<CardDefault trail={trails[5]} aspectRatio={aspectRatio} />
-				</LI>
-			</UL>
+			<TwoCard
+				trails={trails.slice(0, 2) as Tuple<DCRFrontCard, 2>}
+				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
+			/>
+			<FourCard
+				trails={trails.slice(2, 6) as Tuple<DCRFrontCard, 4>}
+				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
+				showTopBarDesktop={true}
+			/>
 		</>
 	);
 };
 
-export const SixCardSlow = ({
-	trails,
-	imageLoading,
-	aspectRatio,
-}: {
-	trails: Tuple<DCRFrontCard, 6>;
-} & CardProps) => {
-	return (
-		<>
-			<UL direction="row" padBottom={true}>
-				<LI percentage="33.333%" padSides={true}>
-					<Card33Media33
-						trail={trails[0]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33
-						trail={trails[1]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33
-						trail={trails[2]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-			</UL>
-			<UL direction="row">
-				<LI percentage="33.333%" padSides={true}>
-					<Card33Media33
-						trail={trails[3]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33
-						trail={trails[4]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33
-						trail={trails[5]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-			</UL>
-		</>
-	);
-};
-
-export const SevenCardFast = ({
+export const SevenCard = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -387,434 +231,128 @@ export const SevenCardFast = ({
 } & CardProps) => {
 	return (
 		<>
-			<UL direction="row" padBottom={true}>
-				<LI percentage="25%" padSides={true}>
-					<Card25Media25
-						trail={trails[0]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[1]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[2]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[3]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-			</UL>
-			<UL direction="row">
-				<LI percentage="33.333%" padSides={true}>
-					<CardDefault trail={trails[4]} aspectRatio={aspectRatio} />
-				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<CardDefault trail={trails[5]} aspectRatio={aspectRatio} />
-				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<CardDefault trail={trails[6]} aspectRatio={aspectRatio} />
-				</LI>
-			</UL>
+			<ThreeCard
+				trails={trails.slice(0, 3) as Tuple<DCRFrontCard, 3>}
+				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
+			/>
+			<FourCard
+				trails={trails.slice(3, 7) as Tuple<DCRFrontCard, 4>}
+				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
+				showTopBarDesktop={true}
+			/>
 		</>
 	);
 };
 
-export const SevenCardSlow = ({
-	trails,
-	imageLoading,
-	aspectRatio,
-}: {
-	trails: Tuple<DCRFrontCard, 7>;
-} & CardProps) => {
-	return (
-		<>
-			<UL direction="row" padBottom={true}>
-				<LI percentage="33.333%" padSides={true}>
-					<Card33Media33
-						trail={trails[0]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33
-						trail={trails[1]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33
-						trail={trails[2]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-			</UL>
-			<UL direction="row">
-				<LI percentage="25%" padSides={true}>
-					<Card25Media25
-						trail={trails[3]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[4]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[5]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[6]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-			</UL>
-		</>
-	);
-};
-
-export const EightOrMoreFast = ({
+export const EightOrMore = ({
 	trails,
 	imageLoading,
 	aspectRatio,
 }: {
 	trails: [...Tuple<DCRFrontCard, 8>, ...DCRFrontCard[]];
 } & CardProps) => {
-	const afterEight = trails.slice(8);
+	const numContainers = Math.floor(trails.length / 4);
 
 	return (
 		<>
-			<UL direction="row" padBottom={true}>
-				<LI percentage="25%" padSides={true}>
-					<Card25Media25
-						trail={trails[0]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[1]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[2]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[3]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-			</UL>
-			<UL direction="row" padBottom={afterEight.length > 0}>
-				<LI percentage="25%" padSides={true}>
-					<CardDefault trail={trails[4]} aspectRatio={aspectRatio} />
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<CardDefault trail={trails[5]} aspectRatio={aspectRatio} />
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<CardDefault trail={trails[6]} aspectRatio={aspectRatio} />
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<CardDefault trail={trails[7]} aspectRatio={aspectRatio} />
-				</LI>
-			</UL>
-			{afterEight.length > 0 ? (
-				<UL wrapCards={true} direction="row">
-					{afterEight.map((trail, index) => (
-						<LI
-							key={trail.url}
-							percentage="33.333%"
-							padSides={true}
-							showDivider={index % 3 !== 0}
+			<FourCard
+				trails={trails.slice(0, 4) as Tuple<DCRFrontCard, 4>}
+				imageLoading={imageLoading}
+				aspectRatio={aspectRatio}
+			/>
+			{Array.from({ length: numContainers }).map((_, i) => (
+				<FourCard
+					key={i}
+					trails={
+						trails.slice(i * 4 + 4, i * 4 + 8) as Tuple<
+							DCRFrontCard,
+							4
 						>
-							<CardDefault
-								trail={trail}
-								aspectRatio={aspectRatio}
-							/>
-						</LI>
-					))}
-				</UL>
-			) : (
-				<></>
-			)}
-		</>
-	);
-};
-
-export const EightOrMoreSlow = ({
-	trails,
-	imageLoading,
-	aspectRatio,
-}: {
-	trails: [...Tuple<DCRFrontCard, 8>, ...DCRFrontCard[]];
-} & CardProps) => {
-	const afterEight = trails.slice(8);
-
-	return (
-		<>
-			<UL direction="row" padBottom={true}>
-				<LI percentage="25%" padSides={true}>
-					<Card25Media25
-						trail={trails[0]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[1]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[2]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[3]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-			</UL>
-			<UL direction="row" padBottom={afterEight.length > 0}>
-				<LI percentage="25%" padSides={true}>
-					<Card25Media25
-						trail={trails[4]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[5]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[6]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<Card25Media25
-						trail={trails[7]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				</LI>
-			</UL>
-			{afterEight.length > 0 ? (
-				<UL wrapCards={true} direction="row">
-					{afterEight.map((trail, index) => (
-						<LI
-							key={trail.url}
-							percentage="25%"
-							padSides={true}
-							showDivider={index % 4 !== 0}
-						>
-							<Card25Media25
-								trail={trail}
-								imageLoading={imageLoading}
-								aspectRatio={aspectRatio}
-							/>
-						</LI>
-					))}
-				</UL>
-			) : (
-				<></>
-			)}
+					}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+					showImages={false}
+					showTopBarDesktop={true}
+				/>
+			))}
 		</>
 	);
 };
 
 export const DecideContainerByTrails = ({
 	trails,
-	speed,
 	imageLoading,
 	aspectRatio,
 }: Props) => {
 	const initialTrails = takeFirst(trails, 8);
-	if (speed === 'fast') {
-		switch (initialTrails.length) {
-			case 0:
-				return <></>;
-			case 1:
-				return (
-					<OneCardFast
-						trail={initialTrails[0]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 2:
-				return (
-					<TwoCard
-						trails={initialTrails}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 3:
-				return (
-					<ThreeCard
-						trails={initialTrails}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 4:
-				return (
-					<FourCard
-						trails={initialTrails}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 5:
-				return (
-					<FiveCardFast
-						trails={initialTrails}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 6:
-				return (
-					<SixCardFast
-						trails={initialTrails}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 7:
-				return (
-					<SevenCardFast
-						trails={initialTrails}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 8:
-				return (
-					<EightOrMoreFast
-						trails={[...initialTrails, ...trails.slice(8)]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-		}
-	} else {
-		switch (initialTrails.length) {
-			case 0:
-				return <></>;
-			case 1:
-				return (
-					<OneCardSlow
-						trail={initialTrails[0]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 2:
-				return (
-					<TwoCard
-						trails={initialTrails}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 3:
-				return (
-					<ThreeCard
-						trails={initialTrails}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 4:
-				return (
-					<FourCard
-						trails={initialTrails}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 5:
-				return (
-					<FiveCardSlow
-						trails={initialTrails}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 6:
-				return (
-					<SixCardSlow
-						trails={initialTrails}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 7:
-				return (
-					<SevenCardSlow
-						trails={initialTrails}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-			case 8:
-				return (
-					<EightOrMoreSlow
-						trails={[...initialTrails, ...trails.slice(8)]}
-						imageLoading={imageLoading}
-						aspectRatio={aspectRatio}
-					/>
-				);
-		}
+	switch (initialTrails.length) {
+		case 0:
+			return <></>;
+		case 1:
+			return (
+				<OneCard
+					trail={initialTrails[0]}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+				/>
+			);
+		case 2:
+			return (
+				<TwoCard
+					trails={initialTrails}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+				/>
+			);
+		case 3:
+			return (
+				<ThreeCard
+					trails={initialTrails}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+				/>
+			);
+		case 4:
+			return (
+				<FourCard
+					trails={initialTrails}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+				/>
+			);
+		case 5:
+			return (
+				<FiveCard
+					trails={initialTrails}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+				/>
+			);
+		case 6:
+			return (
+				<SixCard
+					trails={initialTrails}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+				/>
+			);
+		case 7:
+			return (
+				<SevenCard
+					trails={initialTrails}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+				/>
+			);
+		case 8:
+			return (
+				<EightOrMore
+					trails={[...initialTrails, ...trails.slice(8)]}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+				/>
+			);
 	}
 };

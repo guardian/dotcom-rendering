@@ -197,7 +197,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							>
 								<DecideContainerByTrails
 									trails={groupedTrails.trails}
-									speed={tagPage.speed}
 									imageLoading={imageLoading}
 									aspectRatio="5:4"
 								/>
