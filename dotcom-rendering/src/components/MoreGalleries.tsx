@@ -261,7 +261,7 @@ export const MoreGalleries = (props: Props) => {
 									props.format,
 									props.serverTime,
 								)}
-								mediaSize="medium"
+								mediaSize="small"
 							/>
 						</li>
 					))}

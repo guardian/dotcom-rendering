@@ -914,9 +914,6 @@ export const Card = ({
 							isFrontContainer &&
 							!isGallerySecondaryOnward
 						}
-						isFrontContainerOrGallerySecondaryOnward={
-							isFrontContainer || isGallerySecondaryOnward
-						}
 						isSmallCard={isSmallCard}
 					>
 						{media.type === 'slideshow' && (
