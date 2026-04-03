@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from, space, until } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { getZIndex } from '../../../lib/getZIndex';
 import type { CardMediaType } from '../../../types/layout';
 import type { ArticleMedia } from '../../../types/mainMedia';
@@ -33,7 +33,6 @@ type Props = {
 	articleMedia?: ArticleMedia;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
-	isFrontContainerOrGallerySecondaryOnward: boolean;
 	isSmallCard: boolean;
 	padMedia?: boolean;
 };
@@ -78,41 +77,11 @@ const flexBasisStyles = ({
 	mediaSize,
 	mediaType,
 	isSmallCard,
-	isFrontContainerOrGallerySecondaryOnward,
 }: {
 	mediaSize: MediaSizeType;
 	mediaType: CardMediaType;
 	isSmallCard: boolean;
-	isFrontContainerOrGallerySecondaryOnward: boolean;
 }): SerializedStyles => {
-	if (!isFrontContainerOrGallerySecondaryOnward) {
-		switch (mediaSize) {
-			default:
-			case 'small':
-				return css`
-					flex-basis: 25%;
-					${between.tablet.and.desktop} {
-						flex-basis: 40%;
-					}
-					${from.desktop} {
-						flex-basis: 30%;
-					}
-				`;
-			case 'medium':
-				return css`
-					flex-basis: 50%;
-				`;
-			case 'large':
-				return css`
-					flex-basis: 66%;
-				`;
-			case 'jumbo':
-				return css`
-					flex-basis: 75%;
-				`;
-		}
-	}
-
 	if (mediaType === 'podcast' && !isSmallCard) {
 		return css`
 			flex-basis: 120px;
@@ -167,18 +136,7 @@ const fixMediaWidthStyles = (width: number) => css`
 	align-self: flex-start;
 `;
 
-const fixMobileMediaWidth = (
-	isFrontContainerOrGallerySecondaryOnward: boolean,
-	isSmallCard: boolean,
-) => {
-	if (!isFrontContainerOrGallerySecondaryOnward) {
-		return css`
-			${until.tablet} {
-				${fixMediaWidthStyles(mediaFixedSize.small)}
-			}
-		`;
-	}
-
+const fixMobileMediaWidth = (isSmallCard: boolean) => {
 	const size = isSmallCard ? mediaFixedSize.tiny : mediaFixedSize.small;
 
 	return css`
@@ -203,7 +161,6 @@ export const MediaWrapper = ({
 	articleMedia,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
-	isFrontContainerOrGallerySecondaryOnward,
 	isSmallCard,
 	padMedia,
 }: Props) => {
@@ -227,7 +184,6 @@ export const MediaWrapper = ({
 						mediaSize,
 						mediaType,
 						isSmallCard,
-						isFrontContainerOrGallerySecondaryOnward,
 					}),
 				mediaType === 'avatar' &&
 					css`
@@ -243,10 +199,7 @@ export const MediaWrapper = ({
 					`,
 				isHorizontalOnMobile &&
 					mediaType !== 'podcast' &&
-					fixMobileMediaWidth(
-						isFrontContainerOrGallerySecondaryOnward,
-						isSmallCard,
-					),
+					fixMobileMediaWidth(isSmallCard),
 				isSmallCard && fixDesktopMediaWidth(),
 				isHorizontalOnDesktop &&
 					css`

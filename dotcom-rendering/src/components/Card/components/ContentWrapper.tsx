@@ -54,6 +54,7 @@ const flexBasisStyles = ({
 						flex-basis: 34%;
 					}
 				`;
+			case 'xlarge':
 			case 'jumbo':
 				return css`
 					${from.tablet} {
