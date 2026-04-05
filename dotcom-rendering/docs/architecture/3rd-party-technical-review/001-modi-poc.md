@@ -11,7 +11,7 @@
 
 MoDI is an initiative from [NLA](https://www.nlamediaaccess.com/) to build a new revenue stream for publishers. It will do so by meeting demand of PR industry for engagement metrics in our content by providing analytics tools utilising anonymised first party data owned by publisher.
 
-The Proof of Concept scope consists of deploying the analytics capability on a single section on our primary publicatiom (The Guardian not our other brands).
+The Proof of Concept scope consists of deploying the analytics capability on a single section on our primary publication (The Guardian not our other brands).
 
 [MoDI documentation about AMP tracker](https://docs.projectmodi.com/articles/how-to-install-the-amp-tracker/)
 [MoDI documentation about Web tracker](https://docs.projectmodi.com/articles/how-to-install-the-javascript-tracker/)
