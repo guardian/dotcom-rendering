@@ -35,56 +35,66 @@ describe('decideAssetOrigin for stage', () => {
 
 describe('regular expression to match files', () => {
 	it('should handle CI environment', () => {
-		expect('/assets/ophan.client.web.eb74205c979f58659ed7.js').toMatch(WEB);
+		expect('/assets/index.client.web.DKLwwO4p.js').toMatch(WEB);
 	});
 
 	it('should handle DEV environment', () => {
-		expect('/assets/ophan.client.web.variant.js').toMatch(
+		expect('/assets/index.client.web.variant.js').toMatch(
 			WEB_VARIANT_SCRIPT,
 		);
 	});
 
 	it('should handle PROD environment', () => {
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.client.web.abcdefghijklmnopqrst.js',
+			'https://assets.guim.co.uk/assets/index.client.web.DKLwwO4p.js',
 		).toMatch(WEB);
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.client.web.variant.abcdefghijklmnopqrst.js',
+			'https://assets.guim.co.uk/assets/index.client.web.variant.abcdefgh.js',
 		).toMatch(WEB_VARIANT_SCRIPT);
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.client.apps.eb74205c979f58659ed7.js',
+			'https://assets.guim.co.uk/assets/index.client.apps.DKLwwO4p.js',
 		).toMatch(APPS_SCRIPT);
 	});
 
 	it('should handle http3 query param', () => {
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.client.web.eb74205c979f58659ed7.js?http3=true',
+			'https://assets.guim.co.uk/assets/index.client.web.DKLwwO4p.js?http3=true',
 		).toMatch(WEB);
 	});
 });
 
 describe('getPathFromManifest', () => {
 	beforeEach(() => {
-		const assetHash = `{
-			"7305.client.web.js": "7305.client.web.8cdc05567d98ebd9f67e.js",
-			"356.client.web.js": "356.client.web.0a1bbdf8c7a5e5826b7c.js"
-		}`;
-		(readFileSync as jest.Mock).mockReturnValue(assetHash);
+		// Vite manifest format: keyed by source path with nested entry objects
+		const viteManifest = JSON.stringify({
+			'src/client/main.web.ts': {
+				file: 'index.client.web.DKLwwO4p.js',
+				name: 'index',
+				src: 'src/client/main.web.ts',
+				isEntry: true,
+				imports: ['_frameworks.client.web.xyz78901.js'],
+			},
+			_frameworks: {
+				file: 'frameworks.client.web.xyz78901.js',
+				name: 'frameworks',
+			},
+		});
+		(readFileSync as jest.Mock).mockReturnValue(viteManifest);
 	});
 
 	afterEach(() => {
 		jest.resetAllMocks();
 	});
 
-	it('returns correct hashed asset (1)', () => {
-		expect(getPathFromManifest('client.web', '7305.client.web.js')).toBe(
-			'/assets/7305.client.web.8cdc05567d98ebd9f67e.js',
+	it('returns correct hashed asset for entry point', () => {
+		expect(getPathFromManifest('client.web', 'index.js')).toBe(
+			'/assets/index.client.web.DKLwwO4p.js',
 		);
 	});
 
-	it('returns correct hashed asset (2)', () => {
-		expect(getPathFromManifest('client.web', '356.client.web.js')).toBe(
-			'/assets/356.client.web.0a1bbdf8c7a5e5826b7c.js',
+	it('returns correct hashed asset for frameworks chunk', () => {
+		expect(getPathFromManifest('client.web', 'frameworks.js')).toBe(
+			'/assets/frameworks.client.web.xyz78901.js',
 		);
 	});
 
