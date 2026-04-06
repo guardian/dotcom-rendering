@@ -4,8 +4,24 @@ import { isObject, isString } from '@guardian/libs';
 import { BUILD_VARIANT } from '../../webpack/bundles';
 import { makeMemoizedFunction } from './memoize';
 
-interface AssetHash {
-	[key: string]: string;
+/**
+ * A single entry in a Vite manifest.
+ */
+interface ViteManifestEntry {
+	file: string;
+	name?: string;
+	src?: string;
+	isEntry?: boolean;
+	isDynamicEntry?: boolean;
+	imports?: string[];
+	dynamicImports?: string[];
+}
+
+/**
+ * The full Vite manifest: keys are source paths or internal chunk IDs.
+ */
+interface ViteManifest {
+	[key: string]: ViteManifestEntry;
 }
 
 export const BASE_URL_DEV = 'http://localhost:3030/';
@@ -44,22 +60,23 @@ const isDev = process.env.NODE_ENV === 'development';
 
 export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE, isDev);
 
-const isAssetHash = (manifest: unknown): manifest is AssetHash =>
+const isViteManifest = (manifest: unknown): manifest is ViteManifest =>
 	isObject(manifest) &&
-	Object.entries(manifest).every(
-		([key, value]) => isString(key) && isString(value),
+	Object.values(manifest).every(
+		(entry) =>
+			isObject(entry) && isString((entry as ViteManifestEntry).file),
 	);
 
-const getManifest = makeMemoizedFunction((path: string): AssetHash => {
+const getManifest = makeMemoizedFunction((path: string): ViteManifest => {
 	try {
-		const assetHash: unknown = JSON.parse(
+		const parsed: unknown = JSON.parse(
 			readFileSync(resolve(__dirname, path), { encoding: 'utf-8' }),
 		);
-		if (!isAssetHash(assetHash)) {
-			throw new Error('Not a valid AssetHash type');
+		if (!isViteManifest(parsed)) {
+			throw new Error('Not a valid Vite manifest');
 		}
 
-		return assetHash;
+		return parsed;
 	} catch (e) {
 		console.error('Could not load manifest in: ', path);
 		console.error('Some filename lookups will fail');
@@ -78,6 +95,26 @@ type ManifestPath = `./manifest.${Build}.json`;
 const getManifestPath = (build: Build): ManifestPath =>
 	`./manifest.${build}.json`;
 
+/**
+ * Maps each build to its entry point source path in the Vite manifest.
+ */
+const entrySourcePaths: Record<Build, string> = {
+	'client.web': 'src/client/main.web.ts',
+	'client.web.variant': 'src/client/main.web.ts',
+	'client.apps': 'src/client/main.apps.ts',
+	'client.editionsCrossword': 'src/client/main.editionsCrossword.tsx',
+};
+
+/**
+ * Finds a manifest entry by its `name` field.
+ * Used for chunks like "frameworks" that aren't keyed by source path.
+ */
+const findEntryByName = (
+	manifest: ViteManifest,
+	name: string,
+): ViteManifestEntry | undefined =>
+	Object.values(manifest).find((entry) => entry.name === name);
+
 export const getPathFromManifest = (
 	build: Build,
 	filename: `${string}.js`,
@@ -94,13 +131,26 @@ export const getPathFromManifest = (
 	}
 
 	const manifest = getManifest(getManifestPath(build));
-	const filenameFromManifest = manifest[filename];
 
-	if (!filenameFromManifest) {
+	// Strip .js extension to get the logical name (e.g. "index", "frameworks")
+	const logicalName = filename.replace(/\.js$/, '');
+
+	let entry: ViteManifestEntry | undefined;
+
+	if (logicalName === 'index') {
+		// Look up the entry point by its source path
+		const sourcePath = entrySourcePaths[build];
+		entry = manifest[sourcePath];
+	} else {
+		// For non-entry chunks (e.g. "frameworks"), find by name
+		entry = findEntryByName(manifest, logicalName);
+	}
+
+	if (!entry) {
 		throw new Error(`Missing manifest for ${filename}`);
 	}
 
-	return `${ASSET_ORIGIN}assets/${filenameFromManifest}`;
+	return `${ASSET_ORIGIN}assets/${entry.file}`;
 };
 
 /**
@@ -111,7 +161,7 @@ export const getPathFromManifest = (
  * and stripped query parameters.
  */
 const getScriptRegex = (build: Build) =>
-	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{20}\\.)?js(\\?.*)?$`);
+	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{8}\\.)?js(\\?.*)?$`);
 
 export const WEB = getScriptRegex('client.web');
 export const WEB_VARIANT_SCRIPT = getScriptRegex('client.web.variant');
