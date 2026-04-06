@@ -1,4 +1,4 @@
-.PHONY: install dev build clean-dist clear
+.PHONY: install dev build clean-dist clear vite-build vite-dev
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
@@ -28,6 +28,16 @@ cdk-diff:
 riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
 	@node ./scripts/deploy/build-riffraff-bundle.mjs
+
+# vite #########################################
+
+vite-build: clean-dist install
+	$(call log, "building production bundles with Vite")
+	@NODE_ENV=production node --import tsx vite/build.ts
+
+vite-dev: clear clean-dist install
+	$(call log, "starting Vite DEV server")
+	@NODE_ENV=development node --import tsx vite/dev-server.ts
 
 # prod #########################################
 
