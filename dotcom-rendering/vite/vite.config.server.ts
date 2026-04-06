@@ -35,7 +35,10 @@ export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 			output: {
 				format: 'cjs',
 				entryFileNames: '[name].js',
-				chunkFileNames: '[name].js',
+				// Produce a single server.js file (no code splitting),
+				// matching webpack's single-file output. This avoids
+				// server chunks colliding with client assets in dist/.
+				inlineDynamicImports: true,
 			},
 			// webpack/bundles.js is CJS with module.exports — Rollup can't
 			// resolve named exports from it. Externalize so it's required at runtime.
@@ -57,3 +60,7 @@ export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 		external: DEV ? [/@aws-sdk\/.*/] : [],
 	},
 } satisfies UserConfig);
+
+// Default export for `vite build --config` CLI usage
+// eslint-disable-next-line import/no-default-export -- required by Vite CLI
+export default serverConfig;
