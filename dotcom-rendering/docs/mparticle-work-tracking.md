@@ -7,12 +7,12 @@
 
 ## Status snapshot (as of 2026-03-31)
 
-| Repo                           | Status                                                                                                         |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| `dotcom-rendering` (this repo) | ✅ [PR open](https://github.com/guardian/dotcom-rendering/pull/15581) - pending `@guardian/libs` bump + review |
-| `frontend` (Scala)             | ⏳ Needs switch + URL injection                                                                                |
-| `csnx` (`@guardian/libs`)      | ✅ [PR #2347 merged](https://github.com/guardian/csnx/pull/2347) — `@guardian/libs` bump pending in DCR        |
-| backend (`mparticle-api`)      | ⏳ Draft - needs deployment to CODE                                                                            |
+| Repo                           | Status                                                                                                      |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| `dotcom-rendering` (this repo) | ✅ [PR open](https://github.com/guardian/dotcom-rendering/pull/15581) - pending review                      |
+| `frontend` (Scala)             | ⏳ Needs switch + URL injection                                                                             |
+| `csnx` (`@guardian/libs`)      | ✅ [PR #2347 merged](https://github.com/guardian/csnx/pull/2347) — `@guardian/libs` bumped to 31.0.0 in DCR |
+| backend (`mparticle-api`)      | ⏳ Draft - needs deployment to CODE                                                                         |
 
 ## Tasks
 
@@ -70,7 +70,7 @@ The current `'mparticle' as VendorName` cast only silences the TypeScript compil
 
 ### 3a. Bump `@guardian/libs` in DCR and remove `as VendorName` cast
 
--   [ ] **Status:** Not started — waiting for the `@guardian/libs` minor release to publish after csnx PR #2347 merge
+-   [x] **Status:** Done — bumped to `@guardian/libs@31.0.0`; `as VendorName` cast removed; `signalStatus: 'ready'` added to `YoutubeAtom.test.tsx`; all tests pass
 
 **What:**
 
@@ -223,7 +223,7 @@ Full manual testing guide also in the [main design doc](./mparticle-paid-media-i
 
 ### 9. (Follow-up) Remove `as VendorName` cast after `csnx` PR
 
--   [ ] **Status:** Blocked on task 3
+-   [x] **Status:** Done — completed as part of task 3a
 
 **What:** Once `mparticle` is in `VendorIDs` and `@guardian/libs` is bumped in DCR, remove the cast from [src/client/mparticle/mparticle-consent.ts](../src/client/mparticle/mparticle-consent.ts):
 
@@ -246,5 +246,5 @@ If you are resuming this work from scratch, here is the minimal context:
 -   **The code is complete and all tests pass.** The only thing preventing it from running in production is that `switches.mparticleConsentSync` is not yet emitted by the Scala frontend (tasks 3 and 4).
 -   **The main design doc is at:** [docs/mparticle-paid-media-integration.md](./mparticle-paid-media-integration.md) - it contains architecture diagrams, flow diagrams, the full test specification, VendorIDs explanation, and a manual testing guide.
 -   **Key files to read first:** [src/client/mparticle/mparticle-consent.ts](../src/client/mparticle/mparticle-consent.ts), [src/client/mparticle/mparticleConsentApi.ts](../src/client/mparticle/mparticleConsentApi.ts), [src/client/mparticle/cookies/mparticleConsentSynced.ts](../src/client/mparticle/cookies/mparticleConsentSynced.ts).
--   **Known temporary workaround:** `'mparticle' as VendorName` in `mparticle-consent.ts` — see tasks 2 and 3 above. **This is a runtime throw risk, not just a TypeScript error.** `getConsentFor` throws if the vendor key is not in `VendorIDs`. The switch must not be enabled until task 3 is complete.
+-   **Temporary workaround resolved:** The `as VendorName` cast has been removed. `@guardian/libs` is now at 31.0.0 with `mparticle` in `VendorIDs`. `getConsentFor('mparticle', state)` is now runtime-safe.
 -   **Known backend bug (not frontend):** `getNow().getMilliseconds()` should be `getNow().getTime()` in `consentsUpdateHandler.ts`.

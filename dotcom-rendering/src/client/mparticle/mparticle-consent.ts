@@ -7,10 +7,7 @@ import {
 } from './cookies/mparticleConsentSynced';
 import { syncConsentToMparticle } from './mparticleConsentApi';
 
-// TODO: bump @guardian/libs to the version that includes csnx PR #2347, then:
-// - remove the `as VendorName` cast below
-// - replace with: export const MPARTICLE_CONSENT_PURPOSE: VendorName = 'mparticle';
-export const MPARTICLE_CONSENT_PURPOSE = 'mparticle' as VendorName;
+export const MPARTICLE_CONSENT_PURPOSE: VendorName = 'mparticle';
 
 export const syncMparticleConsent = (): void => {
 	onConsentChange(async (state) => {
