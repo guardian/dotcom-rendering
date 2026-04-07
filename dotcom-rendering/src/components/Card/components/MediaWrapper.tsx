@@ -48,6 +48,17 @@ const mediaOverlayContainerStyles = css`
 	pointer-events: none;
 `;
 
+const hideMediaOnMobileStyles = css`
+	${until.tablet} {
+		display: none;
+	}
+`;
+
+const avatarStyles = css`
+	display: flex;
+	justify-content: flex-end;
+`;
+
 /**
  * There is zero padding on the side of the media where the text is.
  */
@@ -146,13 +157,11 @@ const fixMobileMediaWidth = (isSmallCard: boolean) => {
 	`;
 };
 
-const fixDesktopMediaWidth = () => {
-	return css`
-		${from.tablet} {
-			${fixMediaWidthStyles(mediaFixedSize.small)}
-		}
-	`;
-};
+const fixDesktopMediaWidth = css`
+	${from.tablet} {
+		${fixMediaWidthStyles(mediaFixedSize.small)}
+	}
+`;
 
 export const MediaWrapper = ({
 	children,
@@ -185,22 +194,12 @@ export const MediaWrapper = ({
 						mediaType,
 						isSmallCard,
 					}),
-				mediaType === 'avatar' &&
-					css`
-						display: flex;
-						justify-content: flex-end;
-					`,
-				/* If no media position for mobile is provided then hide the media */
-				mediaPositionOnMobile === 'none' &&
-					css`
-						${until.tablet} {
-							display: none;
-						}
-					`,
+				mediaType === 'avatar' && avatarStyles,
+				mediaPositionOnMobile === 'none' && hideMediaOnMobileStyles,
 				isHorizontalOnMobile &&
 					mediaType !== 'podcast' &&
 					fixMobileMediaWidth(isSmallCard),
-				isSmallCard && fixDesktopMediaWidth(),
+				isSmallCard && fixDesktopMediaWidth,
 				isHorizontalOnDesktop &&
 					css`
 						${from.tablet} {
