@@ -5,21 +5,21 @@
 > **Backend Asana task:** [Backend task](https://app.asana.com/0/0/1213430985786431)  
 > **Connection Asana task:** [Connection task](https://app.asana.com/0/0/1213430985786437)
 
-## Status snapshot (as of 2026-03-31)
+## Status snapshot (as of 2026-04-07)
 
-| Repo                           | Status                                                                                                      |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| `dotcom-rendering` (this repo) | ✅ [PR open](https://github.com/guardian/dotcom-rendering/pull/15581) - pending review                      |
-| `frontend` (Scala)             | ⏳ Needs switch + URL injection                                                                             |
-| `csnx` (`@guardian/libs`)      | ✅ [PR #2347 merged](https://github.com/guardian/csnx/pull/2347) — `@guardian/libs` bumped to 31.0.0 in DCR |
-| backend (`mparticle-api`)      | ⏳ Draft - needs deployment to CODE                                                                         |
+| Repo                           | Status                                                                                                         |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| `dotcom-rendering` (this repo) | ✅ [PR open](https://github.com/guardian/dotcom-rendering/pull/15581) - PR description written, pending review |
+| `frontend` (Scala)             | ⏳ Needs switch + URL injection                                                                                |
+| `csnx` (`@guardian/libs`)      | ✅ [PR #2347 merged](https://github.com/guardian/csnx/pull/2347) — `@guardian/libs` bumped to 31.0.0 in DCR    |
+| backend (`mparticle-api`)      | ⏳ Draft - needs deployment to CODE                                                                            |
 
 ## Tasks
 
 ### 1. Open the DCR pull request
 
 -   [x] **Status:** PR opened - https://github.com/guardian/dotcom-rendering/pull/15581
--   [ ] **PR description:** Not written yet - waiting for code to reach final state before writing it
+-   [x] **PR description:** Written — code is final, all tests pass, description includes flow diagrams and links to design + tracking docs
 
 **Files changed in this branch:**
 
