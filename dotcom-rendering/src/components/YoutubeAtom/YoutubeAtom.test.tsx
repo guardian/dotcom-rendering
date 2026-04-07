@@ -19,7 +19,6 @@ const consentStateCanTarget: ConsentState = {
 	},
 	canTarget: true,
 	framework: 'tcfv2',
-	signalStatus: 'ready',
 };
 
 describe('YoutubeAtom', () => {
