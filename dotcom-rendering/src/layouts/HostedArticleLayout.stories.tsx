@@ -92,3 +92,38 @@ export const WithoutAccentColour = meta.story({
 		},
 	},
 });
+
+export const WithoutMainMediaCaption = meta.story({
+	args: {
+		content: {
+			...webHostedArticle,
+			frontendData: {
+				...webHostedArticle.frontendData,
+				mainMediaElements:
+					webHostedArticle.frontendData.mainMediaElements[0]
+						?._type ===
+					'model.dotcomrendering.pageElements.ImageBlockElement'
+						? [
+								{
+									...webHostedArticle.frontendData
+										.mainMediaElements[0],
+									data: {
+										...webHostedArticle.frontendData
+											.mainMediaElements[0].data,
+										caption: undefined,
+										credit: undefined,
+									},
+								},
+						  ]
+						: webHostedArticle.frontendData.mainMediaElements,
+			},
+		},
+		format,
+		renderingTarget: 'Web',
+	},
+	parameters: {
+		config: {
+			renderingTarget: 'Web',
+		},
+	},
+});

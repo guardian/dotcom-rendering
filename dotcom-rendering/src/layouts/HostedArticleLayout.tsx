@@ -367,15 +367,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						</ArticleContainer>
 					</div>
 
-					<div
-						css={[
-							onwardContentStyles,
-							!mainMediaCaptionText &&
-								css`
-									margin-top: ${space[18]}px;
-								`,
-						]}
-					>
+					<div css={onwardContentStyles}>
 						<HostedContentOnwards
 							trails={trails}
 							brandName="TrendAI"
