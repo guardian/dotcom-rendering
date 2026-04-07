@@ -1,9 +1,9 @@
-import { getCookie, getConsentFor, onConsentChange } from '@guardian/libs';
+import { getConsentFor, getCookie, onConsentChange } from '@guardian/libs';
 import type { VendorName } from '@guardian/libs';
 import { getAuthStatus } from '../../lib/identity';
 import {
-	mparticleConsentNeedsSync,
 	markMparticleConsentSynced,
+	mparticleConsentNeedsSync,
 } from './cookies/mparticleConsentSynced';
 import { syncConsentToMparticle } from './mparticleConsentApi';
 

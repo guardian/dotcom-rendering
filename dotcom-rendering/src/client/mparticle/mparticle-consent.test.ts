@@ -2,14 +2,14 @@ import type { ConsentState } from '@guardian/libs';
 import type { AuthStatus } from '../../lib/identity';
 import { getAuthStatus as getAuthStatus_ } from '../../lib/identity';
 import {
-	mparticleConsentNeedsSync as mparticleConsentNeedsSync_,
 	markMparticleConsentSynced as markMparticleConsentSynced_,
+	mparticleConsentNeedsSync as mparticleConsentNeedsSync_,
 } from './cookies/mparticleConsentSynced';
-import { syncConsentToMparticle as syncConsentToMparticle_ } from './mparticleConsentApi';
 import {
 	MPARTICLE_CONSENT_PURPOSE,
 	syncMparticleConsent,
 } from './mparticle-consent';
+import { syncConsentToMparticle as syncConsentToMparticle_ } from './mparticleConsentApi';
 
 // Capture the callback registered by onConsentChange so tests can invoke it
 let capturedConsentCallback:
