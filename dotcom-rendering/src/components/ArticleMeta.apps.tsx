@@ -31,7 +31,7 @@ import { Dateline } from './Dateline';
 import { FollowWrapper } from './FollowWrapper.island';
 import { Island } from './Island';
 import { ListenToArticle } from './ListenToArticle.island';
-import { LiveblogNotifications } from './LiveblogNotifications.island';
+import { NotificationsToggleWrapper } from './NotificationsToggleWrapper.island';
 import { PodcastMeta } from './PodcastMeta';
 
 type Props = {
@@ -277,9 +277,6 @@ export const ArticleMetaApps = ({
 	const shouldShowFollowButtons = (layoutOrDesignType: boolean) =>
 		layoutOrDesignType && !!byline && !isUndefined(soleContributor);
 
-	const shouldShowLiveblogNotifications =
-		isLiveBlog && !!pageId && !!headline;
-
 	const isImmersiveOrAnalysisWithMultipleAuthors =
 		(isAnalysis || isImmersive) && !!byline && isUndefined(soleContributor);
 
@@ -352,14 +349,11 @@ export const ArticleMetaApps = ({
 								/>
 							</Island>
 						)}
-					{shouldShowLiveblogNotifications && (
-						<Island priority="critical">
-							<LiveblogNotifications
-								displayName={headline}
-								id={pageId}
-							/>
-						</Island>
-					)}
+					<LiveblogNotifications
+						isLiveBlog={isLiveBlog}
+						headline={headline}
+						pageId={pageId}
+					/>
 				</MetaGridByline>
 				{isCommentable && (
 					<MetaGridCommentCount
@@ -420,3 +414,35 @@ export const ArticleMetaApps = ({
 		</div>
 	);
 };
+
+const LiveblogNotifications = (props: {
+	isLiveBlog: boolean;
+	headline: string | undefined;
+	pageId: string | undefined;
+}) =>
+	props.isLiveBlog && !!props.pageId && !!props.headline ? (
+		<div
+			css={css`
+				margin-top: ${space[3]}px;
+				min-height: ${space[6]}px;
+
+				${from.phablet} {
+					display: inline-flex;
+					flex-direction: column;
+
+					button:first-of-type {
+						margin-right: ${space[5]}px;
+					}
+				}
+			`}
+			data-gu-name="liveblog-notifications"
+		>
+			<Island priority="critical">
+				<NotificationsToggleWrapper
+					id={props.pageId}
+					displayName={props.headline}
+					notificationType="content"
+				/>
+			</Island>
+		</div>
+	) : null;
