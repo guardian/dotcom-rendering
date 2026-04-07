@@ -13,6 +13,7 @@ import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
 import { HostedContentHeader } from '../components/HostedContentHeader';
+import { HostedContentOnwards } from '../components/HostedContentOnwards';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
@@ -27,6 +28,7 @@ import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { trails } from './HostedArticleLayout';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -138,12 +140,11 @@ const articleBodyStyles = css`
 const onwardContentStyles = css`
 	${grid.column.centre}
 
-	height: 20px;
-	background-color: lightgrey;
-	margin-bottom: ${space[6]}px;
+	margin-bottom: ${space[5]}px;
 
 	${from.desktop} {
 		${grid.span(4, 8)}
+		margin-bottom: ${space[10]}px;
 	}
 
 	${from.leftCol} {
@@ -177,6 +178,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 	const {
 		content: { frontendData },
 		format,
+		renderingTarget,
 	} = props;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
@@ -248,7 +250,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 					</div>
 
 					<div data-print-layout="hide" css={metaStyles}>
-						{props.renderingTarget === 'Web' && (
+						{renderingTarget === 'Web' && (
 							<div css={shareButtonStyles}>
 								<Island
 									priority="feature"
@@ -325,7 +327,11 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 					</div>
 
 					<div css={onwardContentStyles}>
-						{'Placeholder - onward content'}
+						<HostedContentOnwards
+							trails={trails} //Temporary trails dummy data which is exported from HostedArticleLayout
+							brandName="TrendAI"
+							accentColor={branding?.hostedCampaignColour}
+						/>
 					</div>
 
 					{cta && (
