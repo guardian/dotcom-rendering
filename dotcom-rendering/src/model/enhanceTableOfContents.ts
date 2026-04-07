@@ -1,4 +1,6 @@
-import { JSDOM } from 'jsdom';
+import jsdom from 'jsdom';
+
+const { JSDOM } = jsdom;
 import type { Block } from '../types/blocks';
 import type {
 	NumberedTitleBlockElement,
