@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -9,7 +9,7 @@ import {
 } from '../lib/articleFormat';
 import { Caption } from './Caption';
 
-const meta = {
+const meta = preview.meta({
 	component: Caption,
 	title: 'Components/Caption',
 	parameters: {
@@ -19,13 +19,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof Caption>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Standard = {
+export const Standard = meta.story({
 	args: {
 		captionText: 'This is how a Standard caption looks',
 		format: {
@@ -34,9 +30,9 @@ export const Standard = {
 			theme: Pillar.News,
 		},
 	},
-} satisfies Story;
+});
 
-export const Analysis = {
+export const Analysis = meta.story({
 	args: {
 		captionText: 'This is how an Analysis caption looks',
 		format: {
@@ -45,9 +41,9 @@ export const Analysis = {
 			theme: Pillar.News,
 		},
 	},
-} satisfies Story;
+});
 
-export const PhotoEssay = {
+export const PhotoEssay = meta.story({
 	args: {
 		captionText: '<ul><li>This is how a PhotoEssay caption looks</li></ul>',
 		format: {
@@ -56,9 +52,9 @@ export const PhotoEssay = {
 			theme: Pillar.News,
 		},
 	},
-} satisfies Story;
+});
 
-export const SpecialReport = {
+export const SpecialReport = meta.story({
 	args: {
 		captionText: 'This is how a SpecialReport caption looks',
 		format: {
@@ -67,11 +63,11 @@ export const SpecialReport = {
 			theme: ArticleSpecial.SpecialReport,
 		},
 	},
-} satisfies Story;
+});
 
-export const PhotoEssayWithWidthLimited = {
+export const PhotoEssayWithWidthLimited = meta.story({
 	args: {
-		...PhotoEssay.args,
+		...PhotoEssay.input.args,
 		shouldLimitWidth: true,
 	},
 	decorators: [
@@ -94,9 +90,9 @@ export const PhotoEssayWithWidthLimited = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const WithCredit = {
+export const WithCredit = meta.story({
 	args: {
 		captionText: 'This is how a Feature caption looks with credit showing',
 		format: {
@@ -107,33 +103,33 @@ export const WithCredit = {
 		credit: 'Credited to Able Jones',
 		displayCredit: true,
 	},
-} satisfies Story;
+});
 
-export const WithWidthLimited = {
+export const WithWidthLimited = meta.story({
 	args: {
 		captionText: 'This is how a caption looks with width limited',
-		format: Standard.args.format,
+		format: Standard.input.args.format,
 		shouldLimitWidth: true,
 	},
-	decorators: PhotoEssayWithWidthLimited.decorators,
+	decorators: PhotoEssayWithWidthLimited.input.decorators,
 	parameters: {
-		chromatic: PhotoEssayWithWidthLimited.parameters.chromatic,
+		chromatic: PhotoEssayWithWidthLimited.input.parameters.chromatic,
 	},
-} satisfies Story;
+});
 
-export const WhenPadded = {
+export const WhenPadded = meta.story({
 	args: {
 		captionText: 'This is how a caption looks when padded',
-		format: Standard.args.format,
+		format: Standard.input.args.format,
 		padCaption: true,
 	},
-} satisfies Story;
+});
 
-export const WhenOverlaid = {
+export const WhenOverlaid = meta.story({
 	args: {
 		isOverlaid: true,
 		captionText: "This is how a caption looks when it's overlaid",
-		format: Standard.args.format,
+		format: Standard.input.args.format,
 		padCaption: true,
 	},
 	decorators: (Story) => (
@@ -164,11 +160,11 @@ export const WhenOverlaid = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const ForVideos = {
+export const ForVideos = meta.story({
 	args: {
-		...Standard.args,
+		...Standard.input.args,
 		mediaType: 'YoutubeVideo',
 	},
 	parameters: {
@@ -182,13 +178,13 @@ export const ForVideos = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const WhenImmersive = {
+export const WhenImmersive = meta.story({
 	args: {
 		captionText:
 			'This is how a caption looks with immersive padding. Additional padding is added to the left and right of the caption to compensate for the negative margins applied to immersive images.',
-		format: Standard.args.format,
+		format: Standard.input.args.format,
 		isImmersive: true,
 	},
 	parameters: {
@@ -204,4 +200,4 @@ export const WhenImmersive = {
 			},
 		},
 	},
-} satisfies Story;
+});

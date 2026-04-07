@@ -24,8 +24,8 @@ export const FeatureCardCardAge = ({
 					isWithinTwelveHours: true,
 				}}
 				showClock={showClock}
+				isAbsolute={false}
 				serverTime={serverTime}
-				isTagPage={false}
 				colour={palette('--feature-card-footer-text')}
 			/>
 		);

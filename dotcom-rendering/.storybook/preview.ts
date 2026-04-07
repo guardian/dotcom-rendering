@@ -1,3 +1,5 @@
+import addonA11y from '@storybook/addon-a11y';
+import addonDocs from '@storybook/addon-docs';
 import { setCookie, storage } from '@guardian/libs';
 import { AB } from '@guardian/ab-core';
 
@@ -13,7 +15,7 @@ import { mockFetch } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
 import { sb } from 'storybook/test';
-import { Preview } from '@storybook/react-webpack5';
+import { definePreview } from '@storybook/react-webpack5';
 import {
 	globalColourScheme,
 	globalColourSchemeDecorator,
@@ -21,8 +23,11 @@ import {
 import { palette as sourcePalette } from '@guardian/source/foundations';
 
 // Set up module mocking for auth and newsletter subscription hooks
+// @ts-ignore -- Storybook wants the file extension, TS does not.
 sb.mock(import('../src/lib/useNewsletterSubscription.ts'), { spy: true });
+// @ts-ignore -- Storybook wants the file extension, TS does not.
 sb.mock(import('../src/lib/useAuthStatus.ts'), { spy: true });
+// @ts-ignore -- Storybook wants the file extension, TS does not.
 sb.mock(import('../src/lib/fetchEmail.ts'), { spy: true });
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
@@ -50,7 +55,7 @@ setABTests({
 
 // Add base css for the site
 let css = `${rawFontsCss}${resets.resetCSS}`;
-let head = document.getElementsByTagName('head')[0];
+let head = document.head;
 let style = document.createElement('style');
 head.appendChild(style);
 style.type = 'text/css';
@@ -149,7 +154,7 @@ const guardianViewports = {
 	},
 };
 
-export default {
+export default definePreview({
 	args: {
 		config: { renderingTarget: 'Web', darkModeAvailable: false },
 	},
@@ -189,4 +194,6 @@ export default {
 			isRotated: false,
 		},
 	},
-} satisfies Preview;
+
+	addons: [addonDocs(), addonA11y()],
+});

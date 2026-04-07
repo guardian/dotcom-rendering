@@ -15,7 +15,7 @@ import { HostedContentHeader } from '../components/HostedContentHeader';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
-import { ShareButton } from '../components/ShareButton.importable';
+import { ShareButton } from '../components/ShareButton.island';
 import { Standfirst } from '../components/Standfirst';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
@@ -40,6 +40,14 @@ interface WebProps extends Props {
 interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
+
+const containerStyles = css`
+	${grid.container}
+
+	${from.desktop} {
+		${grid.paddedContainer}
+	}
+`;
 
 const mainMediaStyles = css`
 	${grid.column.all}
@@ -159,40 +167,10 @@ const ctaStyles = css`
 
 const sideBorders = css`
 	${from.desktop} {
-		position: relative;
-
-		&::before {
-			z-index: 1;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			content: '';
-			width: 1px;
-			background-color: ${themePalette('--article-border')};
-
-			left: -${grid.mobileColumnGap};
-			${from.mobileLandscape} {
-				left: -${grid.columnGap};
-			}
-
-			grid-column-start: left-column-start;
-		}
-
-		&::after {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			content: '';
-			width: 1px;
-			background-color: ${themePalette('--article-border')};
-
-			right: -${grid.mobileColumnGap};
-			${from.mobileLandscape} {
-				right: -${grid.columnGap};
-			}
-
-			grid-column-end: right-column-end;
-		}
+		/* box-sizing property needed to prevent the width of the grid taking into account the border width */
+		box-sizing: content-box;
+		border-left: 1px solid ${themePalette('--article-border')};
+		border-right: 1px solid ${themePalette('--article-border')};
 	}
 `;
 
@@ -237,19 +215,16 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						showTopBorder={false}
 						shouldCenter={false}
 						backgroundColour={sourcePalette.neutral[7]}
-						padSides={true}
+						padSides={false}
 						element="header"
 					>
-						<HostedContentHeader
-							branding={branding}
-							accentColor={branding.hostedCampaignColour}
-						/>
+						<HostedContentHeader branding={branding} />
 					</Section>
 				</Stuck>
 			) : null}
 
 			<main data-layout="HostedArticleLayout">
-				<article css={[grid.container, sideBorders]}>
+				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
 						<MainMedia
 							format={format}
@@ -364,6 +339,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 								backgroundImage={cta.image}
 								text={cta.label}
 								buttonText={cta.btnText}
+								accentColor={branding?.hostedCampaignColour}
 							/>
 						</div>
 					)}

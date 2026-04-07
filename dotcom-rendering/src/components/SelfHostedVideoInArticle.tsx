@@ -1,14 +1,14 @@
 import type { FEAspectRatio } from '../frontend/feFront';
 import type { ArticleFormat } from '../lib/articleFormat';
 import {
-	convertAssetsToVideoSources,
-	getFirstVideoAsset,
+	extractValidSourcesFromAssets,
+	getAspectRatioFromSources,
 	getSubtitleAsset,
 } from '../lib/video';
 import type { MediaAtomBlockElement, RoleType } from '../types/content';
 import type { VideoPlayerFormat } from '../types/mainMedia';
 import { Island } from './Island';
-import { SelfHostedVideo } from './SelfHostedVideo.importable';
+import { SelfHostedVideo } from './SelfHostedVideo.island';
 
 type SelfHostedVideoInArticleProps = {
 	element: MediaAtomBlockElement;
@@ -27,7 +27,10 @@ export const SelfHostedVideoInArticle = ({
 }: SelfHostedVideoInArticleProps) => {
 	const posterImageUrl = element.posterImage?.[0]?.url;
 	const caption = element.title;
-	const firstVideoAsset = getFirstVideoAsset(element.assets);
+
+	const sources = extractValidSourcesFromAssets(element.assets);
+	const aspectRatio = getAspectRatioFromSources(sources);
+	const firstVideoSource = sources[0];
 
 	if (!posterImageUrl) {
 		return null;
@@ -40,19 +43,18 @@ export const SelfHostedVideoInArticle = ({
 				fallbackImage={posterImageUrl}
 				fallbackImageAlt={caption}
 				fallbackImageAspectRatio={
-					(firstVideoAsset?.aspectRatio ?? '5:4') as FEAspectRatio
+					(firstVideoSource?.aspectRatio ?? '5:4') as FEAspectRatio
 				}
 				fallbackImageLoading="lazy"
 				fallbackImageSize="small"
-				height={firstVideoAsset?.dimensions?.height ?? 400}
+				aspectRatio={aspectRatio}
 				linkTo="Article-embed-MediaAtomBlockElement"
 				posterImage={posterImageUrl}
-				sources={convertAssetsToVideoSources(element.assets)}
+				sources={sources}
 				subtitleSize="medium"
 				subtitleSource={getSubtitleAsset(element.assets)}
 				videoStyle={videoStyle}
 				uniqueId={element.id}
-				width={firstVideoAsset?.dimensions?.width ?? 500}
 				caption={caption}
 				format={format}
 				isMainMedia={isMainMedia}

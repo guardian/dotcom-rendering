@@ -1,7 +1,7 @@
 import { isUndefined, joinUrl } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
 import { Fragment } from 'react';
-import { Accessibility } from '../components/Accessibility.importable';
+import { Accessibility } from '../components/Accessibility.island';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { Footer } from '../components/Footer';
@@ -15,9 +15,9 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { StorylinesSectionContent } from '../components/StorylinesSectionContent.importable';
-import { SubNav } from '../components/SubNav.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
+import { StorylinesSectionContent } from '../components/StorylinesSectionContent.island';
+import { SubNav } from '../components/SubNav.island';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -199,7 +199,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									trails={groupedTrails.trails}
 									speed={tagPage.speed}
 									imageLoading={imageLoading}
-									isTagPage={true}
 									aspectRatio="5:4"
 								/>
 							</FrontSection>

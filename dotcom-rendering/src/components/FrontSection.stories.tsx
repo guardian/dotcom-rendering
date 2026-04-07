@@ -67,7 +67,6 @@ const PageSkinWrapper = ({ children }: { children: ReactNode }) => (
 export default {
 	component: FrontSection,
 	title: 'Components/FrontSection',
-
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -79,72 +78,43 @@ export default {
 			],
 		},
 	},
-
 	args: {
 		editionId: 'UK',
 		children: <Placeholder />,
 		url: '/',
 	},
-
 	render: (args) => <FrontSection {...args} />,
-
-	globals: {
-		viewport: {
-			// This has the effect of turning off the viewports addon by default
-			value: 'doesNotExist',
-			isRotated: false,
-		},
-	},
 } satisfies Meta<typeof FrontSection>;
 
-export const ContainerStory = {
-	name: 'default container',
+export const Default = {
 	args: { title: 'Default Container', showTopBorder: false },
 };
 
-export const PrimaryContainerStory = {
-	name: 'primary container',
+export const PrimaryContainer = {
 	args: {
 		title: 'Primary Container',
 		containerLevel: 'Primary',
 	},
 };
-export const SecondaryContainerStory = {
-	name: 'secondary container',
+export const SecondaryContainer = {
 	args: {
 		title: 'Secondary Container',
 		containerLevel: 'Secondary',
 	},
 };
 
-export const NoTitleStory = {
-	name: 'with no title',
+export const NoTopBorder = {
 	args: { showTopBorder: false },
 };
 
-export const TopBorderStory = {
-	name: 'with all borders',
-	args: { title: 'Borders' },
-};
-
-export const LeftContentStory = {
-	name: 'with an element passed into the left column',
+export const WithLeftContent = {
 	args: {
 		title: 'LeftContent',
 		leftContent: <LeftColPlaceholder text="LeftCol" heightInPixels={100} />,
 	},
 };
 
-export const LeftContentOpinionStory = {
-	name: 'with an element passed into the left column of opinion section',
-	args: {
-		title: 'Opinion',
-		leftContent: <LeftColPlaceholder text="LeftCol" heightInPixels={100} />,
-	},
-};
-
-export const ToggleableStory = {
-	name: 'toggleable container',
+export const Toggleable = {
 	args: {
 		title: 'Toggleable Container',
 		toggleable: true,
@@ -153,8 +123,7 @@ export const ToggleableStory = {
 	},
 };
 
-export const MultipleStory = {
-	name: 'with multiple FrontGrids',
+export const MultipleSections = {
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -182,10 +151,10 @@ export const MultipleStory = {
 			>
 				<Placeholder />
 			</FrontSection>
-			<FrontSection showTopBorder={false} editionId="UK">
+			<FrontSection editionId="UK">
 				<h2>Insert call to action here</h2>
 			</FrontSection>
-			<FrontSection title="Videos" showTopBorder={false} editionId="UK">
+			<FrontSection title="Videos" editionId="UK">
 				<Placeholder />
 			</FrontSection>
 			<FrontSection
@@ -199,8 +168,7 @@ export const MultipleStory = {
 	),
 };
 
-export const TreatsStory = {
-	name: 'with treats and date header',
+export const WithTreatsAndDateHeader = {
 	args: {
 		title: 'Treats and Date Header',
 		showTopBorder: false,
@@ -252,7 +220,6 @@ const logoForAdvertisingPartner = {
 };
 
 export const WithSponsoredBranding = {
-	name: 'with sponsored branding',
 	args: {
 		title: 'Section',
 		collectionBranding: {
@@ -274,7 +241,6 @@ export const WithSponsoredBranding = {
 };
 
 export const WithSponsoredBrandingAdvertisingPartner = {
-	name: 'with sponsored branding for Advertising partner',
 	args: {
 		title: 'Section',
 		collectionBranding: {
@@ -296,7 +262,6 @@ export const WithSponsoredBrandingAdvertisingPartner = {
 };
 
 export const WithSponsoredBrandingAdvertisingPartnerTagPages = {
-	name: 'with sponsored branding for Advertising partner TagPages',
 	args: {
 		title: 'Section',
 		isTagPage: true,
@@ -318,8 +283,7 @@ export const WithSponsoredBrandingAdvertisingPartnerTagPages = {
 	},
 };
 
-export const WithPaidBranding = {
-	name: 'with paid content branding',
+export const WithPaidContentBranding = {
 	args: {
 		title: 'Section',
 		collectionBranding: {
@@ -341,7 +305,6 @@ export const WithPaidBranding = {
 };
 
 export const WithPaidContentForWholeFront = {
-	name: 'with paid content for whole front',
 	args: {
 		title: 'First Section',
 		collectionBranding: {
@@ -363,7 +326,6 @@ export const WithPaidContentForWholeFront = {
 };
 
 export const GuardianLabs = {
-	name: 'guardian Labs',
 	args: {
 		title: 'Section',
 		collectionBranding: {
@@ -385,8 +347,7 @@ export const GuardianLabs = {
 	},
 };
 
-export const PageSkinStory = {
-	name: 'with page skin',
+export const WithPageSkin = {
 	args: {
 		title: 'Page Skin',
 		hasPageSkin: true,

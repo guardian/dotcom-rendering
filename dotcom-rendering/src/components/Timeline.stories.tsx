@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { images } from '../../fixtures/generated/images';
 import {
 	ArticleDesign,
@@ -18,7 +18,7 @@ const format: ArticleFormat = {
 	theme: Pillar.News,
 };
 
-const meta = {
+const meta = preview.meta({
 	component: Timeline,
 	title: 'Components/Timeline',
 	parameters: {
@@ -29,11 +29,7 @@ const meta = {
 		},
 	},
 	decorators: [centreColumnDecorator],
-} satisfies Meta<typeof Timeline>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
+});
 
 const testTextElement: TextBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -92,7 +88,7 @@ const ArticleElementComponent = getNestedArticleElement({
 	shouldHideAds: false,
 });
 
-export const FlatWithNoTitles = {
+export const FlatWithNoTitles = meta.story({
 	args: {
 		timeline: {
 			_type: 'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
@@ -137,70 +133,75 @@ export const FlatWithNoTitles = {
 		ArticleElementComponent,
 		format,
 	},
-} satisfies Story;
+});
 
-export const FlatWithSomeTitlesAndLabels = {
+export const FlatWithSomeTitlesAndLabels = meta.story({
 	args: {
-		...FlatWithNoTitles.args,
+		...FlatWithNoTitles.input.args,
 		timeline: {
 			_type: 'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
 			events: [
 				{
-					...FlatWithNoTitles.args.timeline.events[0],
+					...FlatWithNoTitles.input.args.timeline.events[0],
 					title: 'An Event Occurs',
 					label: 'Label 1',
 				},
 				{
-					...FlatWithNoTitles.args.timeline.events[1],
+					...FlatWithNoTitles.input.args.timeline.events[1],
 					title: 'Another Event Occurs',
 					label: 'Label 2',
 				},
-				FlatWithNoTitles.args.timeline.events[2],
+				FlatWithNoTitles.input.args.timeline.events[2],
 			],
 		},
 	},
-} satisfies Story;
+});
 
-export const SectionedWithNoTitles = {
+export const SectionedWithNoTitles = meta.story({
 	args: {
 		timeline: {
 			_type: 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
 			sections: [
 				{
 					title: 'January',
-					events: FlatWithNoTitles.args.timeline.events.slice(0, 2),
-				},
-				{
-					title: 'February',
-					events: FlatWithNoTitles.args.timeline.events.slice(2),
-				},
-			],
-		},
-		ArticleElementComponent,
-		format,
-	},
-} satisfies Story;
-
-export const SectionedWithSomeTitles = {
-	args: {
-		...SectionedWithNoTitles.args,
-		timeline: {
-			_type: 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
-			sections: [
-				{
-					title: 'January',
-					events: FlatWithSomeTitlesAndLabels.args.timeline.events.slice(
+					events: FlatWithNoTitles.input.args.timeline.events.slice(
 						0,
 						2,
 					),
 				},
 				{
 					title: 'February',
-					events: FlatWithSomeTitlesAndLabels.args.timeline.events.slice(
+					events: FlatWithNoTitles.input.args.timeline.events.slice(
+						2,
+					),
+				},
+			],
+		},
+		ArticleElementComponent,
+		format,
+	},
+});
+
+export const SectionedWithSomeTitles = meta.story({
+	args: {
+		...SectionedWithNoTitles.input.args,
+		timeline: {
+			_type: 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
+			sections: [
+				{
+					title: 'January',
+					events: FlatWithSomeTitlesAndLabels.input.args.timeline.events.slice(
+						0,
+						2,
+					),
+				},
+				{
+					title: 'February',
+					events: FlatWithSomeTitlesAndLabels.input.args.timeline.events.slice(
 						2,
 					),
 				},
 			],
 		},
 	},
-} satisfies Story;
+});

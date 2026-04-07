@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { GalleryLabs as GalleryLabsFixture } from '../../fixtures/generated/fe-articles/GalleryLabs';
 import type { ArticleFormat } from '../lib/articleFormat';
 import {
@@ -14,7 +14,7 @@ import { palette } from '../palette';
 import { enhanceArticleType } from '../types/article';
 import { ArticleMetaApps } from './ArticleMeta.apps';
 
-const meta = {
+const meta = preview.meta({
 	component: ArticleMetaApps,
 	title: 'Components/Article Meta (apps)',
 	parameters: {
@@ -26,13 +26,9 @@ const meta = {
 		},
 	},
 	decorators: [leftColumnDecorator],
-} satisfies Meta<typeof ArticleMetaApps>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const WithFollowStory = {
+export const WithFollowStory = meta.story({
 	args: {
 		format: {
 			display: ArticleDisplay.Standard,
@@ -66,59 +62,59 @@ export const WithFollowStory = {
 			(format: ArticleFormat) => format.design !== ArticleDesign.Gallery,
 		),
 	},
-} satisfies Story;
+});
 
-export const WithFollowStoryNoTitle = {
-	...WithFollowStory,
+export const WithFollowStoryNoTitle = meta.story({
+	...WithFollowStory.input,
 	args: {
-		...WithFollowStory.args,
+		...WithFollowStory.input.args,
 		byline: 'Lanre Bakare',
 	},
-} satisfies Story;
+});
 
-export const WithAvatarAndFollowStory = {
+export const WithAvatarAndFollowStory = meta.story({
 	args: {
-		...WithFollowStory.args,
+		...WithFollowStory.input.args,
 		isCommentable: true,
 	},
 	parameters: {
-		...WithFollowStory.parameters,
+		...WithFollowStory.input.parameters,
 		formats: getAllThemes({
-			...WithFollowStory.args.format,
+			...WithFollowStory.input.args.format,
 			design: ArticleDesign.Feature,
 		}),
 	},
-} satisfies Story;
+});
 
-export const WithAvatarNoTitleAndFollowStory = {
-	...WithAvatarAndFollowStory,
+export const WithAvatarNoTitleAndFollowStory = meta.story({
+	...WithAvatarAndFollowStory.input,
 	args: {
-		...WithAvatarAndFollowStory.args,
+		...WithAvatarAndFollowStory.input.args,
 		byline: 'Lanre Bakare',
 	},
-} satisfies Story;
+});
 
-export const ImmersiveAndFollowStory = {
+export const ImmersiveAndFollowStory = meta.story({
 	args: {
-		...WithFollowStoryNoTitle.args,
+		...WithFollowStoryNoTitle.input.args,
 		format: {
-			...WithFollowStoryNoTitle.args.format,
+			...WithFollowStoryNoTitle.input.args.format,
 			display: ArticleDisplay.Immersive,
 		},
 	},
 	parameters: {
-		...WithFollowStoryNoTitle.parameters,
+		...WithFollowStoryNoTitle.input.parameters,
 		formats: undefined,
 	},
-} satisfies Story;
+});
 
-export const ImmersiveWithMultipleContributorsStory = {
-	...ImmersiveAndFollowStory,
+export const ImmersiveWithMultipleContributorsStory = meta.story({
+	...ImmersiveAndFollowStory.input,
 	args: {
-		...ImmersiveAndFollowStory.args,
+		...ImmersiveAndFollowStory.input.args,
 		byline: 'Lanre Bakare in New York and Laura Banks in London',
 		tags: [
-			...ImmersiveAndFollowStory.args.tags,
+			...ImmersiveAndFollowStory.input.args.tags,
 			{
 				id: 'profile/laura-banks',
 				type: 'Contributor',
@@ -126,18 +122,18 @@ export const ImmersiveWithMultipleContributorsStory = {
 			},
 		],
 	},
-} satisfies Story;
+});
 
-export const WithMultipleContributors = {
-	...WithFollowStory,
+export const WithMultipleContributors = meta.story({
+	...WithFollowStory.input,
 	args: {
-		...ImmersiveWithMultipleContributorsStory.args,
+		...ImmersiveWithMultipleContributorsStory.input.args,
 	},
-} satisfies Story;
+});
 
-export const WithBrandingStory = {
+export const WithBrandingStory = meta.story({
 	args: {
-		...WithFollowStory.args,
+		...WithFollowStory.input.args,
 		isCommentable: true,
 		branding: {
 			brandingType: { name: 'sponsored' },
@@ -165,37 +161,37 @@ export const WithBrandingStory = {
 		},
 	},
 	parameters: {
-		...WithFollowStory.parameters,
+		...WithFollowStory.input.parameters,
 		formats: undefined,
 	},
-} satisfies Story;
+});
 
-export const WithBrandingStoryForAdvertisingPartner = {
+export const WithBrandingStoryForAdvertisingPartner = meta.story({
 	args: {
-		...WithBrandingStory.args,
+		...WithBrandingStory.input.args,
 		branding: {
-			...WithBrandingStory.args.branding,
+			...WithBrandingStory.input.args.branding,
 			logo: {
-				...WithBrandingStory.args.branding.logo,
+				...WithBrandingStory.input.args.branding.logo,
 				label: 'Advertising partner',
 			},
 			logoForDarkBackground: {
-				...WithBrandingStory.args.branding.logoForDarkBackground,
+				...WithBrandingStory.input.args.branding.logoForDarkBackground,
 				label: 'Advertising partner',
 			},
 		},
 	},
 	parameters: {
-		...WithBrandingStory.parameters,
+		...WithBrandingStory.input.parameters,
 		config: {
-			...WithBrandingStory.parameters.config,
+			...WithBrandingStory.input.parameters.config,
 		},
 	},
-} satisfies Story;
+});
 
-export const GalleryDesign = {
+export const GalleryDesign = meta.story({
 	args: {
-		...WithFollowStory.args,
+		...WithFollowStory.input.args,
 		isCommentable: true,
 	},
 	parameters: {
@@ -211,10 +207,10 @@ export const GalleryDesign = {
 			dark: palette('--article-inner-background'),
 		},
 	},
-} satisfies Story;
+});
 
 const appArticle = enhanceArticleType(GalleryLabsFixture, 'Web');
-export const GalleryLabsWithBranding = {
+export const GalleryLabsWithBranding = meta.story({
 	args: {
 		branding:
 			appArticle.frontendData.commercialProperties[
@@ -244,4 +240,4 @@ export const GalleryLabsWithBranding = {
 			dark: palette('--article-inner-background'),
 		},
 	},
-} satisfies Story;
+});

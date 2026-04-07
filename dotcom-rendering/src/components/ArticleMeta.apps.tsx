@@ -10,20 +10,29 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 } from '../lib/articleFormat';
+import {
+	getPodcast,
+	getRssFeedUrl,
+	getSeriesTag,
+	shouldShowAvatar,
+	shouldShowContributor,
+} from '../lib/articleMeta';
+import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
+import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
-import { shouldShowAvatar, shouldShowContributor } from './ArticleMeta.web';
 import { Avatar } from './Avatar';
-import { Branding } from './Branding.importable';
-import { CommentCount } from './CommentCount.importable';
+import { Branding } from './Branding.island';
+import { CommentCount } from './CommentCount.island';
 import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
-import { FollowWrapper } from './FollowWrapper.importable';
+import { FollowWrapper } from './FollowWrapper.island';
 import { Island } from './Island';
-import { ListenToArticle } from './ListenToArticle.importable';
-import { LiveblogNotifications } from './LiveblogNotifications.importable';
+import { ListenToArticle } from './ListenToArticle.island';
+import { NotificationsToggleWrapper } from './NotificationsToggleWrapper.island';
+import { PodcastMeta } from './PodcastMeta';
 
 type Props = {
 	format: ArticleFormat;
@@ -37,6 +46,7 @@ type Props = {
 	isCommentable: boolean;
 	pageId?: string;
 	headline?: string;
+	mainMediaElements?: FEElement[];
 };
 
 const metaGridContainer = css`
@@ -57,6 +67,17 @@ const metaGridContainer = css`
 
 	${from.phablet} {
 		grid-template-columns: 0px auto 1fr auto 0px;
+	}
+`;
+
+const podcastMetaPadding = css`
+	${until.phablet} {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	${until.mobileLandscape} {
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 `;
 
@@ -230,6 +251,7 @@ export const ArticleMetaApps = ({
 	isCommentable,
 	pageId,
 	headline,
+	mainMediaElements,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -245,12 +267,15 @@ export const ArticleMetaApps = ({
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 	const isGallery = format.design === ArticleDesign.Gallery;
 	const isVideo = format.design === ArticleDesign.Video;
+	const isAudio = format.design === ArticleDesign.Audio;
+
+	const seriesTag = getSeriesTag(tags);
+	const podcast = getPodcast(tags);
+	const audioData = getAudioData(mainMediaElements);
+	const rssFeedUrl = getRssFeedUrl(tags);
 
 	const shouldShowFollowButtons = (layoutOrDesignType: boolean) =>
 		layoutOrDesignType && !!byline && !isUndefined(soleContributor);
-
-	const shouldShowLiveblogNotifications =
-		isLiveBlog && !!pageId && !!headline;
 
 	const isImmersiveOrAnalysisWithMultipleAuthors =
 		(isAnalysis || isImmersive) && !!byline && isUndefined(soleContributor);
@@ -268,6 +293,19 @@ export const ArticleMetaApps = ({
 				isGallery ? galleryMetaContainer : undefined,
 			]}
 		>
+			{isAudio && podcast && seriesTag && (
+				<div css={podcastMetaPadding}>
+					<PodcastMeta
+						series={seriesTag}
+						format={format}
+						image={podcast.image}
+						spotifyUrl={podcast.spotifyUrl}
+						subscriptionUrl={podcast.subscriptionUrl}
+						audioDownloadUrl={audioData?.audioDownloadUrl}
+						rssFeedUrl={rssFeedUrl}
+					/>
+				</div>
+			)}
 			<div
 				css={[
 					metaGridContainer,
@@ -311,14 +349,11 @@ export const ArticleMetaApps = ({
 								/>
 							</Island>
 						)}
-					{shouldShowLiveblogNotifications && (
-						<Island priority="critical">
-							<LiveblogNotifications
-								displayName={headline}
-								id={pageId}
-							/>
-						</Island>
-					)}
+					<LiveblogNotifications
+						isLiveBlog={isLiveBlog}
+						headline={headline}
+						pageId={pageId}
+					/>
 				</MetaGridByline>
 				{isCommentable && (
 					<MetaGridCommentCount
@@ -379,3 +414,35 @@ export const ArticleMetaApps = ({
 		</div>
 	);
 };
+
+const LiveblogNotifications = (props: {
+	isLiveBlog: boolean;
+	headline: string | undefined;
+	pageId: string | undefined;
+}) =>
+	props.isLiveBlog && !!props.pageId && !!props.headline ? (
+		<div
+			css={css`
+				margin-top: ${space[3]}px;
+				min-height: ${space[6]}px;
+
+				${from.phablet} {
+					display: inline-flex;
+					flex-direction: column;
+
+					button:first-of-type {
+						margin-right: ${space[5]}px;
+					}
+				}
+			`}
+			data-gu-name="liveblog-notifications"
+		>
+			<Island priority="critical">
+				<NotificationsToggleWrapper
+					id={props.pageId}
+					displayName={props.headline}
+					notificationType="content"
+				/>
+			</Island>
+		</div>
+	) : null;

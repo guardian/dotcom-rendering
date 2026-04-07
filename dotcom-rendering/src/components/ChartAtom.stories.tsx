@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { barChartHtml, lineChartHtml } from '../../fixtures/manual/chartAtoms';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { ChartAtom } from './ChartAtom.importable';
+import { ChartAtom } from './ChartAtom.island';
 
 export default {
 	component: ChartAtom,

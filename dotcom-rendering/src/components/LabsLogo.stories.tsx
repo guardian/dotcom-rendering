@@ -1,11 +1,12 @@
+import preview from '../../.storybook/preview';
 import { LabsLogo } from './LabsLogo';
 
-export default {
+const meta = preview.meta({
 	title: 'Components/LabsLogo',
 	component: LabsLogo,
-};
+});
 
-export const Default = () => (
+export const Default = meta.story(() => (
 	<div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
 		<div>
 			<LabsLogo size={50} />
@@ -20,4 +21,4 @@ export const Default = () => (
 			<p>Large (200px)</p>
 		</div>
 	</div>
-);
+));

@@ -12,7 +12,7 @@ import {
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { FrontSection } from './FrontSection';
-import { ScrollableFeature } from './ScrollableFeature.importable';
+import { ScrollableFeature } from './ScrollableFeature.island';
 
 const imageUrls = [
 	'https://media.guim.co.uk/2d214bdf3ed8e014360e8fde41b471973e4bad44/948_2222_2703_3378/800.jpg',
@@ -80,16 +80,12 @@ const meta = {
 		imageLoading: 'eager',
 		aspectRatio: '4:5',
 		collectionId: 1,
-		isInSlimHomepageAbTestVariant: false,
 	},
 	render: (args) => (
 		<FrontSection
 			title="Scrollable feature"
 			editionId="UK"
 			containerLevel="Secondary"
-			slimifySectionForSlimHomepageAbTest={
-				args.isInSlimHomepageAbTestVariant
-			}
 		>
 			<ScrollableFeature {...args} />
 		</FrontSection>
@@ -101,12 +97,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {};
-
-export const WithSlimHomepageAbTest = {
-	args: {
-		isInSlimHomepageAbTestVariant: true,
-	},
-} satisfies Story;
 
 export const Media = {
 	args: {

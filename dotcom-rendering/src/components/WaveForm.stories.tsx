@@ -1,48 +1,44 @@
 import { palette } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { WaveForm as WaveFormComponent } from './WaveForm';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/WaveForm',
 	component: WaveFormComponent,
-} satisfies Meta<typeof WaveFormComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		seed: 'https://audio.guim.co.uk/2024/10/18-57753-USEE_181024.mp3',
 		height: 100,
 		bars: 175,
 	},
-} satisfies Story;
+});
 
-export const InProgress = {
+export const InProgress = meta.story({
 	args: {
-		...Default.args,
+		...Default.input.args,
 		progress: 40,
 		buffer: 50,
 	},
-} satisfies Story;
+});
 
-export const ShorterWithMoreBars = {
+export const ShorterWithMoreBars = meta.story({
 	args: {
-		...InProgress.args,
+		...InProgress.input.args,
 		height: 50,
 		bars: 200,
 		barWidth: 2,
 	},
-} satisfies Story;
+});
 
-export const WithTheme = {
+export const WithTheme = meta.story({
 	args: {
-		...InProgress.args,
+		...InProgress.input.args,
 		theme: {
 			progress: palette.neutral[73],
 			buffer: palette.neutral[60],
 			wave: palette.neutral[46],
 		},
 	},
-} satisfies Story;
+});

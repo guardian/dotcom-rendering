@@ -1,7 +1,7 @@
 import { render, waitFor } from '@testing-library/react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
 import { ConfigProvider } from './ConfigContext';
-import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.importable';
+import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.island';
 
 const shouldHideSupportMessaging: {
 	[key: string]: any;

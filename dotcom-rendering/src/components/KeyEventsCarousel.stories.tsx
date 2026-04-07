@@ -14,7 +14,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import { palette } from '../palette';
-import { KeyEventsCarousel } from './KeyEventsCarousel.importable';
+import { KeyEventsCarousel } from './KeyEventsCarousel.island';
 
 const standardFormat = {
 	display: ArticleDisplay.Standard,

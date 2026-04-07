@@ -9,7 +9,7 @@ import {
 } from '../../fixtures/manual/trails';
 import type { DCRContainerPalette } from '../types/front';
 import { FrontSection } from './FrontSection';
-import { ScrollableSmall } from './ScrollableSmall.importable';
+import { ScrollableSmall } from './ScrollableSmall.island';
 
 const meta = {
 	title: 'Front Containers/ScrollableSmall',
@@ -26,7 +26,7 @@ const meta = {
 	args: {
 		trails,
 		containerPalette: undefined,
-		showAge: true,
+		hideAge: false,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 	},

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { nav } from './Masthead/Titlepiece/Nav.mock';
-import { Titlepiece } from './Titlepiece.importable';
+import { Titlepiece } from './Titlepiece.island';
 
 const meta = {
 	title: 'Components/Masthead/Titlepiece',

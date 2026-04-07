@@ -213,10 +213,7 @@ export const WithLink = ({
 	return <>{children}</>;
 };
 
-/**
- * headline medium 20 on desktop and headline medium 17 on tablet and mobile
- */
-export const defaultFontSizes: ResponsiveFontSize = {
+const defaultFontSizes: ResponsiveFontSize = {
 	desktop: 'xsmall',
 	tablet: 'xxsmall',
 	mobile: 'xxsmall',

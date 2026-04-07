@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { html } from '../../fixtures/manual/chartAtoms';
-import { ChartAtom } from './ChartAtom.importable';
+import { ChartAtom } from './ChartAtom.island';
 
 describe('ChartAtom', () => {
 	it('should render', () => {

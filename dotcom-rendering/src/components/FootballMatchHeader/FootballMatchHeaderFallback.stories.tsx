@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type { ArticleDeprecated } from '../../types/article';
 import { FootballMatchHeaderFallback as FootballMatchHeaderFallbackComponent } from './FootballMatchHeaderFallback';
@@ -19,7 +19,7 @@ const article = {
 	],
 } as ArticleDeprecated;
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Football Match Header Fallback',
 	component: FootballMatchHeaderFallbackComponent,
 	args: {
@@ -30,9 +30,6 @@ const meta = {
 		},
 		article,
 	},
-} satisfies Meta<typeof FootballMatchHeaderFallbackComponent>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const FootballMatchHeaderFallback = {} satisfies Story;
+export const FootballMatchHeaderFallback = meta.story();

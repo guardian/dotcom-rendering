@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { images } from '../../fixtures/generated/images';
 import {
 	ArticleDesign,
@@ -13,14 +13,10 @@ import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
 import { QAndAExplainers } from './QAndAExplainers';
 
-const meta = {
+const meta = preview.meta({
 	component: QAndAExplainers,
 	title: 'Components/QAndAExplainers',
-} satisfies Meta<typeof QAndAExplainers>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
+});
 
 const testTextElement: TextBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -29,7 +25,7 @@ const testTextElement: TextBlockElement = {
 	dropCap: 'on', // this should be overruled by q&a which always sets forceDropCap="off"
 };
 
-export const AllThemes = {
+export const AllThemes = meta.story({
 	args: {
 		qAndAExplainers: [
 			{
@@ -77,10 +73,10 @@ export const AllThemes = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const OtherFormatVariations = {
-	args: AllThemes.args,
+export const OtherFormatVariations = meta.story({
+	args: AllThemes.input.args,
 	decorators: [centreColumnDecorator],
 	parameters: {
 		formats: [
@@ -116,11 +112,11 @@ export const OtherFormatVariations = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const Images = {
+export const Images = meta.story({
 	args: {
-		...AllThemes.args,
+		...AllThemes.input.args,
 		format: {
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
@@ -157,11 +153,11 @@ export const Images = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const WithSeparatorLine = {
+export const WithSeparatorLine = meta.story({
 	args: {
-		...AllThemes.args,
+		...AllThemes.input.args,
 		isLastElement: false,
 		format: {
 			design: ArticleDesign.Standard,
@@ -170,4 +166,4 @@ export const WithSeparatorLine = {
 		},
 	},
 	decorators: [centreColumnDecorator],
-} satisfies Story;
+});

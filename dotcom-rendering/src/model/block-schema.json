@@ -4256,7 +4256,8 @@
                 "variant": {
                     "enum": [
                         "carousel",
-                        "stacked"
+                        "stacked-default",
+                        "stacked-expanded"
                     ],
                     "type": "string"
                 }

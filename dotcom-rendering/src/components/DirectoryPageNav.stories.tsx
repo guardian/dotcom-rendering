@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { DirectoryPageNav } from './DirectoryPageNav';
 
-const meta = {
+const meta = preview.meta({
 	component: DirectoryPageNav,
 	title: 'Components/Directory Page Nav',
 	parameters: {
@@ -14,26 +14,22 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof DirectoryPageNav>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const WomensEuro2025 = {
+export const WomensEuro2025 = meta.story({
 	args: {
 		pageId: 'football/women-s-euro-2025/table',
 	},
-} satisfies Story;
+});
 
-export const OtherCompetition = {
+export const OtherCompetition = meta.story({
 	args: {
 		pageId: 'football/premierleague/table',
 	},
-} satisfies Story;
+});
 
-export const WinterOlympics = {
+export const WinterOlympics = meta.story({
 	args: {
 		pageId: 'sport/winter-olympics-2026',
 	},
-} satisfies Story;
+});

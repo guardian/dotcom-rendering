@@ -183,6 +183,15 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							renderingTarget={renderingTarget}
 						/>
 					);
+				case ArticleDesign.Audio:
+					return (
+						<AudioLayout
+							article={article.frontendData}
+							format={format}
+							renderingTarget={renderingTarget}
+							serverTime={serverTime}
+						/>
+					);
 				default:
 					return (
 						<StandardLayout

@@ -11,10 +11,10 @@ import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
-import { ScrollableFeature } from './ScrollableFeature.importable';
-import { ScrollableHighlights } from './ScrollableHighlights.importable';
-import { ScrollableMedium } from './ScrollableMedium.importable';
-import { ScrollableSmall } from './ScrollableSmall.importable';
+import { ScrollableFeature } from './ScrollableFeature.island';
+import { ScrollableHighlights } from './ScrollableHighlights.island';
+import { ScrollableMedium } from './ScrollableMedium.island';
+import { ScrollableSmall } from './ScrollableSmall.island';
 import { StaticFeatureTwo } from './StaticFeatureTwo';
 import { StaticMediumFour } from './StaticMediumFour';
 
@@ -24,14 +24,13 @@ type Props = {
 	imageLoading: NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	sectionId: string;
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 export const DecideContainer = ({
@@ -39,7 +38,7 @@ export const DecideContainer = ({
 	groupedTrails,
 	containerType,
 	containerPalette,
-	showAge,
+	hideAge,
 	serverTime,
 	imageLoading,
 	aspectRatio,
@@ -47,7 +46,6 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	isInSlimHomepageAbTestVariant = false,
 }: Props) => {
 	switch (containerType) {
 		case 'nav/list':
@@ -65,14 +63,11 @@ export const DecideContainer = ({
 				<FlexibleSpecial
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
-					showAge={showAge}
+					hideAge={hideAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
-					isInSlimHomepageAbTestVariant={
-						isInSlimHomepageAbTestVariant
-					}
 				/>
 			);
 		case 'flexible/general':
@@ -80,15 +75,12 @@ export const DecideContainer = ({
 				<FlexibleGeneral
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
-					showAge={showAge}
+					hideAge={hideAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					isInSlimHomepageAbTestVariant={
-						isInSlimHomepageAbTestVariant
-					}
 				/>
 			);
 		case 'scrollable/small':
@@ -98,7 +90,7 @@ export const DecideContainer = ({
 						trails={trails}
 						imageLoading={imageLoading}
 						containerPalette={containerPalette}
-						showAge={showAge}
+						hideAge={hideAge}
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
@@ -112,13 +104,10 @@ export const DecideContainer = ({
 						trails={trails}
 						imageLoading={imageLoading}
 						containerPalette={containerPalette}
-						showAge={showAge}
+						hideAge={hideAge}
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
-						isInSlimHomepageAbTestVariant={
-							isInSlimHomepageAbTestVariant
-						}
 					/>
 				</Island>
 			);
@@ -127,13 +116,10 @@ export const DecideContainer = ({
 				<StaticMediumFour
 					trails={trails}
 					containerPalette={containerPalette}
-					showAge={showAge}
+					hideAge={hideAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
-					isInSlimHomepageAbTestVariant={
-						isInSlimHomepageAbTestVariant
-					}
 				/>
 			);
 		case 'scrollable/feature':
@@ -146,9 +132,6 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
-						isInSlimHomepageAbTestVariant={
-							isInSlimHomepageAbTestVariant
-						}
 					/>
 				</Island>
 			);
@@ -164,6 +147,6 @@ export const DecideContainer = ({
 				/>
 			);
 		default:
-			return <p>{containerType} is not yet supported</p>;
+			return null;
 	}
 };

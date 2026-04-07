@@ -1,0 +1,48 @@
+import type { ArticleFormat } from '../lib/articleFormat';
+import type { ABTestVariant } from '../model/enhance-product-summary';
+import type { ProductBlockElement } from '../types/content';
+import { Island } from './Island';
+import { ScrollableProduct } from './ScrollableProduct.island';
+import { StackedProducts } from './StackedProducts.island';
+
+export const ProductSummary = ({
+	products,
+	format,
+	variant,
+}: {
+	products: ProductBlockElement[];
+	format: ArticleFormat;
+	variant: ABTestVariant;
+}) => {
+	if (variant === 'carousel') {
+		return (
+			<Island priority="feature" defer={{ until: 'idle' }}>
+				<ScrollableProduct products={products} format={format} />
+			</Island>
+		);
+	}
+
+	if (variant === 'stacked-default') {
+		return (
+			<Island priority="feature" defer={{ until: 'idle' }}>
+				<StackedProducts
+					products={products}
+					heading={'At a glance'}
+					format={format}
+					showAllProducts={false}
+				/>
+			</Island>
+		);
+	}
+
+	return (
+		<Island priority="feature" defer={{ until: 'idle' }}>
+			<StackedProducts
+				products={products}
+				heading={'At a glance'}
+				format={format}
+				showAllProducts={true}
+			/>
+		</Island>
+	);
+};

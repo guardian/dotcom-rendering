@@ -3,11 +3,11 @@ import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { getZIndex } from '../../../lib/getZIndex';
 import type { CardMediaType } from '../../../types/layout';
+import type { ArticleMedia } from '../../../types/mainMedia';
 
 const mediaFixedSize = {
 	tiny: 86,
 	small: 122.5,
-	medium: 125,
 };
 
 export type MediaPositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
@@ -30,9 +30,10 @@ type Props = {
 	children: React.ReactNode;
 	mediaSize: MediaSizeType;
 	mediaType?: CardMediaType;
+	articleMedia?: ArticleMedia;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
-	isBetaContainer: boolean;
+	isFrontContainerOrGallerySecondaryOnward: boolean;
 	isSmallCard: boolean;
 	padMedia?: boolean;
 };
@@ -77,14 +78,14 @@ const flexBasisStyles = ({
 	mediaSize,
 	mediaType,
 	isSmallCard,
-	isBetaContainer,
+	isFrontContainerOrGallerySecondaryOnward,
 }: {
 	mediaSize: MediaSizeType;
 	mediaType: CardMediaType;
 	isSmallCard: boolean;
-	isBetaContainer: boolean;
+	isFrontContainerOrGallerySecondaryOnward: boolean;
 }): SerializedStyles => {
-	if (!isBetaContainer) {
+	if (!isFrontContainerOrGallerySecondaryOnward) {
 		switch (mediaSize) {
 			default:
 			case 'small':
@@ -167,13 +168,13 @@ const fixMediaWidthStyles = (width: number) => css`
 `;
 
 const fixMobileMediaWidth = (
-	isBetaContainer: boolean,
+	isFrontContainerOrGallerySecondaryOnward: boolean,
 	isSmallCard: boolean,
 ) => {
-	if (!isBetaContainer) {
+	if (!isFrontContainerOrGallerySecondaryOnward) {
 		return css`
 			${until.tablet} {
-				${fixMediaWidthStyles(mediaFixedSize.medium)}
+				${fixMediaWidthStyles(mediaFixedSize.small)}
 			}
 		`;
 	}
@@ -199,9 +200,10 @@ export const MediaWrapper = ({
 	children,
 	mediaSize,
 	mediaType,
+	articleMedia,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
-	isBetaContainer,
+	isFrontContainerOrGallerySecondaryOnward,
 	isSmallCard,
 	padMedia,
 }: Props) => {
@@ -225,7 +227,7 @@ export const MediaWrapper = ({
 						mediaSize,
 						mediaType,
 						isSmallCard,
-						isBetaContainer,
+						isFrontContainerOrGallerySecondaryOnward,
 					}),
 				mediaType === 'avatar' &&
 					css`
@@ -241,7 +243,10 @@ export const MediaWrapper = ({
 					`,
 				isHorizontalOnMobile &&
 					mediaType !== 'podcast' &&
-					fixMobileMediaWidth(isBetaContainer, isSmallCard),
+					fixMobileMediaWidth(
+						isFrontContainerOrGallerySecondaryOnward,
+						isSmallCard,
+					),
 				isSmallCard && fixDesktopMediaWidth(),
 				isHorizontalOnDesktop &&
 					css`
@@ -262,6 +267,14 @@ export const MediaWrapper = ({
 						mediaPositionOnDesktop,
 						mediaPositionOnMobile,
 					),
+				// Edge case: The slideshow carousel buttons and the podcast waveform overlap
+				mediaType === 'slideshow' &&
+					articleMedia?.type === 'Audio' &&
+					css`
+						${from.tablet} {
+							padding-bottom: ${space[10]}px;
+						}
+					`,
 			]}
 		>
 			<>

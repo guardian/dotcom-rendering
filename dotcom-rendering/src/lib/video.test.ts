@@ -1,52 +1,266 @@
+import type { FEMediaAsset } from '../frontend/feFront';
 import type { VideoAssets } from '../types/content';
+import {
+	convertFEMediaAssetsToVideoAssets,
+	extractValidSourcesFromAssets,
+	findOptimisedSourcePerMimeType,
+	getAspectRatioFromSources,
+} from './video';
 import type { Source } from './video';
-import { convertAssetsToVideoSources } from './video';
 
-const mp4Asset: VideoAssets = {
-	url: 'https://guim-example.co.uk/atomID-1.mp4',
+const mp4Asset480w: VideoAssets = {
+	url: 'https://guim-example.co.uk/atomID-1_480w.mp4',
+	mimeType: 'video/mp4',
+	dimensions: {
+		height: 384,
+		width: 480,
+	},
+	aspectRatio: '5:4',
+};
+
+const mp4Asset720h: VideoAssets = {
+	url: 'https://guim-example.co.uk/atomID-1_720h.mp4',
 	mimeType: 'video/mp4',
 	dimensions: {
 		height: 720,
-		width: 1280,
+		width: 900,
 	},
+	aspectRatio: '5:4',
 };
-const m3u8Asset: VideoAssets = {
+
+const m3u8Asset720h: VideoAssets = {
 	url: 'https://guim-example.co.uk/atomID-1.m3u8',
 	mimeType: 'application/x-mpegURL',
 	dimensions: {
 		height: 720,
-		width: 1280,
+		width: 900,
 	},
+	aspectRatio: '5:4',
 };
 const unsupportedAsset: VideoAssets = {
 	url: 'https://guim-example.co.uk/atomID-1.mov',
 	mimeType: 'video/quicktime',
 	dimensions: {
 		height: 720,
-		width: 1280,
+		width: 900,
 	},
+	aspectRatio: '5:4',
 };
 
-const mp4Src: Source = {
-	src: 'https://guim-example.co.uk/atomID-1.mp4',
+const mp4Src480w: Source = {
+	src: 'https://guim-example.co.uk/atomID-1_480w.mp4',
 	mimeType: 'video/mp4',
+	height: 384,
+	width: 480,
+	aspectRatio: '5:4',
 };
-
-const m3u8Src: Source = {
+const mp4Src720h: Source = {
+	src: 'https://guim-example.co.uk/atomID-1_720h.mp4',
+	mimeType: 'video/mp4',
+	height: 720,
+	width: 900,
+	aspectRatio: '5:4',
+};
+const m3u8Src480w: Source = {
 	src: 'https://guim-example.co.uk/atomID-1.m3u8',
 	mimeType: 'application/x-mpegURL',
+	height: 384,
+	width: 480,
+	aspectRatio: '5:4',
+};
+const m3u8Src720h: Source = {
+	src: 'https://guim-example.co.uk/atomID-1.m3u8',
+	mimeType: 'application/x-mpegURL',
+	height: 720,
+	width: 900,
+	aspectRatio: '5:4',
 };
 
-describe('convertAssetsToVideoSources', () => {
-	it('should drop unsupported assets', () => {
-		const assets = [mp4Asset, m3u8Asset, unsupportedAsset];
-		const expected = [mp4Src, m3u8Src];
-		expect(convertAssetsToVideoSources(assets)).toEqual(expected);
+describe('video', () => {
+	describe('extractValidSourcesFromAssets', () => {
+		it('should drop unsupported assets', () => {
+			const assets = [mp4Asset480w, m3u8Asset720h, unsupportedAsset];
+			const expected = [mp4Src480w, m3u8Src720h];
+			expect(extractValidSourcesFromAssets(assets)).toEqual(expected);
+		});
+
+		it('should reorder sources by supportedVideoFileTypes order', () => {
+			const assets = [
+				m3u8Asset720h,
+				mp4Asset480w,
+				m3u8Asset720h,
+				mp4Asset720h,
+				m3u8Asset720h,
+			];
+			const expected = [
+				mp4Src480w,
+				mp4Src720h,
+				m3u8Src720h,
+				m3u8Src720h,
+				m3u8Src720h,
+			];
+			expect(extractValidSourcesFromAssets(assets)).toEqual(expected);
+		});
 	});
 
-	it('should reorder sources as per the supportedVideoFileTypes order', () => {
-		const assets = [m3u8Asset, m3u8Asset, mp4Asset, m3u8Asset];
-		const expected = [mp4Src, m3u8Src, m3u8Src, m3u8Src];
-		expect(convertAssetsToVideoSources(assets)).toEqual(expected);
+	describe('convertFEMediaAssetsToVideoAssets', () => {
+		const feMediaAsset480w: FEMediaAsset = {
+			id: 'https://guim-example.co.uk/atomID-1_480w.mp4',
+			version: 1,
+			platform: 'Url',
+			assetType: 'video',
+			mimeType: 'video/mp4',
+			dimensions: {
+				height: 384,
+				width: 480,
+			},
+		};
+		const feMediaAsset720h: FEMediaAsset = {
+			id: 'https://guim-example.co.uk/atomID-1_720h.mp4',
+			version: 1,
+			platform: 'Url',
+			assetType: 'video',
+			mimeType: 'video/mp4',
+			dimensions: {
+				height: 720,
+				width: 900,
+			},
+		};
+
+		it('should convert FE media assets to video assets', () => {
+			expect(
+				convertFEMediaAssetsToVideoAssets([
+					feMediaAsset480w,
+					feMediaAsset720h,
+				]),
+			).toEqual([
+				{
+					url: 'https://guim-example.co.uk/atomID-1_480w.mp4',
+					mimeType: 'video/mp4',
+					dimensions: {
+						height: 384,
+						width: 480,
+					},
+				},
+				{
+					url: 'https://guim-example.co.uk/atomID-1_720h.mp4',
+					mimeType: 'video/mp4',
+					dimensions: {
+						height: 720,
+						width: 900,
+					},
+				},
+			]);
+		});
+
+		it('should return an empty array when given an empty array', () => {
+			expect(convertFEMediaAssetsToVideoAssets([])).toEqual([]);
+		});
+	});
+
+	describe('getAspectRatioFromSources', () => {
+		it('should return the aspect ratio from the first source if it is defined', () => {
+			const testSource: Source = {
+				...mp4Src480w,
+				height: 720,
+				width: 480,
+				aspectRatio: '5:3',
+			};
+			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 3);
+		});
+
+		it('should calculate the aspect ratio from the width and height if aspect ratio is missing', () => {
+			const testSource: Source = {
+				...mp4Src480w,
+				height: 720,
+				width: 480,
+				aspectRatio: undefined,
+			};
+			expect(getAspectRatioFromSources([testSource])).toEqual(2 / 3);
+		});
+
+		it('should return the default aspect ratio if the aspect ratio is undefined and width is 0', () => {
+			const testSource: Source = {
+				...mp4Src480w,
+				height: 720,
+				width: 0,
+				aspectRatio: undefined,
+			};
+			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 4);
+		});
+
+		it('should return the default aspect ratio if the aspect ratio is undefined and height is 0', () => {
+			const testSource: Source = {
+				...mp4Src480w,
+				height: 0,
+				width: 480,
+				aspectRatio: undefined,
+			};
+			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 4);
+		});
+	});
+
+	describe('findOptimisedSourcePerMimeType', () => {
+		const testSources: Source[] = [
+			mp4Src480w,
+			mp4Src720h,
+			m3u8Src480w,
+			m3u8Src720h,
+		];
+
+		it('selects the smaller videos when there are multiple and all are larger than the screen width.', () => {
+			const screenWidth = 400;
+
+			const sources = findOptimisedSourcePerMimeType(
+				testSources,
+				screenWidth,
+			);
+
+			expect(sources).toEqual([mp4Src480w, m3u8Src480w]);
+		});
+
+		it('selects the larger videos when there are two and one is larger than the screen width and one is smaller.', () => {
+			const screenWidth = 600;
+
+			const sources = findOptimisedSourcePerMimeType(
+				testSources,
+				screenWidth,
+			);
+
+			expect(sources).toEqual([mp4Src720h, m3u8Src720h]);
+		});
+
+		it('selects the larger videos when there are multiple and all are smaller than the screen width.', () => {
+			const screenWidth = 800;
+
+			const sources = findOptimisedSourcePerMimeType(
+				testSources,
+				screenWidth,
+			);
+
+			expect(sources).toEqual([mp4Src720h, m3u8Src720h]);
+		});
+
+		it('selects the smaller videos when some are equal to the screen width and others are larger.', () => {
+			const screenWidth = 480;
+
+			const sources = findOptimisedSourcePerMimeType(
+				testSources,
+				screenWidth,
+			);
+
+			expect(sources).toEqual([mp4Src480w, m3u8Src480w]);
+		});
+
+		it('selects the larger videos when some are equal to the screen width and others are smaller.', () => {
+			const screenWidth = 720;
+
+			const sources = findOptimisedSourcePerMimeType(
+				testSources,
+				screenWidth,
+			);
+
+			expect(sources).toEqual([mp4Src720h, m3u8Src720h]);
+		});
 	});
 });
