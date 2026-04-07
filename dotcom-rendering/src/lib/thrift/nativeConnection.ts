@@ -7,13 +7,15 @@ import type {
 	TransportType,
 	TTransport,
 } from '@creditkarma/thrift-server-core';
-import {
+import thriftCore from '@creditkarma/thrift-server-core';
+
+const {
 	getProtocol,
 	getTransport,
 	TApplicationException,
 	TApplicationExceptionType,
 	ThriftConnection,
-} from '@creditkarma/thrift-server-core';
+} = thriftCore;
 import { TMultiplexedProtocol } from './protocols';
 
 declare global {

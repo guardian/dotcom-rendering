@@ -1,4 +1,6 @@
-import { JSDOM } from 'jsdom';
+import jsdom from 'jsdom';
+
+const { JSDOM } = jsdom;
 import type { FEElement } from '../types/content';
 
 export const enhanceEmbeds = (elements: FEElement[]): FEElement[] =>

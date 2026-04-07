@@ -64,7 +64,8 @@ const isViteManifest = (manifest: unknown): manifest is ViteManifest =>
 	isObject(manifest) &&
 	Object.values(manifest).every(
 		(entry) =>
-			isObject(entry) && isString((entry as ViteManifestEntry).file),
+			isObject(entry) &&
+			isString((entry as unknown as ViteManifestEntry).file),
 	);
 
 const getManifest = makeMemoizedFunction((path: string): ViteManifest => {
