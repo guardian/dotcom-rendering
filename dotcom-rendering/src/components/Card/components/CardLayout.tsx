@@ -16,17 +16,12 @@ type Props = {
 	mediaPositionOnMobile: MediaPositionType;
 	minWidthInPixels?: number;
 	gapSizes: GapSizes;
-	isHostedContent?: boolean;
 };
 
 const containerStyles = css`
 	display: flex;
 	position: relative;
 	flex-basis: 100%;
-`;
-
-const hostedContentOnwardsCard = css`
-	padding: ${space[2]}px 0;
 `;
 
 const minWidth = (minWidthInPixels?: number) => {
@@ -167,7 +162,6 @@ export const CardLayout = ({
 	minWidthInPixels,
 	mediaType,
 	gapSizes,
-	isHostedContent,
 }: Props) => {
 	return (
 		<div
@@ -180,7 +174,6 @@ export const CardLayout = ({
 					mediaType === 'avatar',
 				),
 				decideColumnGap(gapSizes.column),
-				isHostedContent ? hostedContentOnwardsCard : null,
 			]}
 			style={{
 				backgroundColor: cardBackgroundColour,

@@ -33,7 +33,6 @@ interface Props {
 	content: Article;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
-	serverTime?: number;
 }
 
 interface WebProps extends Props {

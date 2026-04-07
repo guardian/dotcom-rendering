@@ -33,7 +33,7 @@ const mediaOverlayContainerStyles = css`
 `;
 
 const hoverStyles = css`
-	:hover .media-overlay {
+	&:hover .media-overlay {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -42,7 +42,7 @@ const hoverStyles = css`
 		background-color: ${palette('--card-background-hover')};
 	}
 
-	:hover {
+	&:hover {
 		text-decoration: underline;
 		color: ${palette('--card-headline')};
 	}

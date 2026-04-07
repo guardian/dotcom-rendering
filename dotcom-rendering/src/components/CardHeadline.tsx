@@ -28,11 +28,7 @@ import {
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
 import React from 'react';
-import {
-	ArticleDesign,
-	type ArticleFormat,
-	ArticleSpecial,
-} from '../lib/articleFormat';
+import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import type { PodcastSeriesImage } from '../types/tag';
@@ -194,22 +190,6 @@ const getFontSize = (sizes: ResponsiveFontSize, family: FontFamily) => {
 
 const getFonts = (format: ArticleFormat, fontSizes: ResponsiveFontSize) => {
 	if (format.theme === ArticleSpecial.Labs) {
-		if (
-			format.design === ArticleDesign.HostedArticle ||
-			format.design === ArticleDesign.HostedVideo ||
-			format.design === ArticleDesign.HostedGallery
-		) {
-			return getFontSize(
-				{
-					wide: 'xxxsmall',
-					desktop: 'xxxsmall',
-					tablet: 'xxxsmall',
-					mobile: 'xxxsmall',
-					mobileMedium: 'xxxsmall',
-				},
-				FontFamily.TextSansBold,
-			);
-		}
 		return getFontSize(fontSizes, FontFamily.TextSansBold);
 	}
 

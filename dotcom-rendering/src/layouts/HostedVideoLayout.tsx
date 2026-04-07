@@ -16,7 +16,6 @@ import { HostedContentHeader } from '../components/HostedContentHeader';
 import { HostedContentOnwards } from '../components/HostedContentOnwards';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
-import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.island';
 import { Standfirst } from '../components/Standfirst';
@@ -36,7 +35,6 @@ interface Props {
 	content: Article;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
-	serverTime?: number;
 }
 
 interface WebProps extends Props {
@@ -181,7 +179,6 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 		content: { frontendData },
 		format,
 		renderingTarget,
-		serverTime,
 	} = props;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
@@ -332,37 +329,8 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 					<div css={onwardContentStyles}>
 						<HostedContentOnwards
 							trails={trails} //Temporary trails dummy data which is exported from HostedArticleLayout
-							format={format}
-							discussionApiUrl={
-								frontendData.config.discussionApiUrl
-							}
-							onwardsSource="related-content"
-							serverTime={serverTime}
 							brandName="TrendAI"
 							accentColor={branding?.hostedCampaignColour}
-						/>
-						{/* This needs to be surrounded by an island later when we have the data as far as I understand */}
-						<OnwardsUpper
-							ajaxUrl={frontendData.config.ajaxUrl}
-							hasRelated={true}
-							hasStoryPackage={true}
-							isAdFreeUser={frontendData.isAdFreeUser}
-							pageId={frontendData.pageId}
-							isPaidContent={!!frontendData.config.isPaidContent}
-							showRelatedContent={true}
-							keywordIds={frontendData.config.keywordIds}
-							contentType={frontendData.contentType}
-							tags={frontendData.tags}
-							format={format}
-							pillar={format.theme}
-							editionId={frontendData.editionId}
-							shortUrlId={frontendData.config.shortUrlId}
-							discussionApiUrl={
-								frontendData.config.discussionApiUrl
-							}
-							serverTime={serverTime}
-							renderingTarget={renderingTarget}
-							webURL={frontendData.webURL}
 						/>
 					</div>
 
