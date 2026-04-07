@@ -101,7 +101,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Testing the AI generated storylines component on tag pages",
 		owners: ["fronts.and.curation@guardian.co.uk"],
-		expirationDate: `2026-04-07`,
+		expirationDate: `2026-04-30`,
 		type: "server",
 		status: "ON",
 		audienceSize: 0 / 100,
