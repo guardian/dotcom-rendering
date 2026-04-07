@@ -30,7 +30,7 @@ export const ProductCardImage = ({
 			alt={image.alt}
 			height={image.height}
 			width={image.width}
-			loading={'eager'}
+			loading="lazy"
 		/>
 	);
 
