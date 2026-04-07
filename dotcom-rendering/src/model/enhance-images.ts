@@ -1,5 +1,7 @@
 import { isUndefined } from '@guardian/libs';
-import { JSDOM } from 'jsdom';
+import jsdom from 'jsdom';
+
+const { JSDOM } = jsdom;
 import {
 	ArticleDesign,
 	type ArticleFormat,

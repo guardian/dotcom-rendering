@@ -1,4 +1,6 @@
-import { JSDOM } from 'jsdom';
+import jsdom from 'jsdom';
+
+const { JSDOM } = jsdom;
 
 export const parseHtml = (html: string): DocumentFragment =>
 	JSDOM.fragment(html);
