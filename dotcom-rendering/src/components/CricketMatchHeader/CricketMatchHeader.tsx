@@ -292,39 +292,33 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 								fallOfWicket={inning.fallOfWicket}
 								matchKind={props.match.kind}
 							/>
-							{!!inning.overs &&
-								props.match.kind !== 'Result' && (
-									<>
-										<span
-											css={{
-												...textSans14Object,
-												marginRight: space[1],
-											}}
-										>
-											{inning.fallOfWicket === 10
-												? 'All out'
-												: ''}
-										</span>
-										<span
-											css={{
-												...textSans12Object,
-												display: 'inline-block',
-												marginTop: space[2],
-												padding: `0 ${space[1]}px 1px ${space[1]}px`,
-												border: '1px solid',
-												borderRadius: 30,
-											}}
-										>
-											{inning.overs} overs
-										</span>
-									</>
-								)}
+							{!!inning.overs && (
+								<>
+									<EndOfInningReason inning={inning} />
+									<span
+										css={{
+											...textSans12Object,
+											display: 'inline-block',
+											marginTop: space[2],
+											padding: `0 ${space[1]}px 1px ${space[1]}px`,
+											border: '1px solid',
+											borderRadius: 30,
+											color: palette(
+												secondaryText(props.match.kind),
+											),
+										}}
+									>
+										{inning.overs} overs
+									</span>
+								</>
+							)}
 						</>
 					))
 				) : (
 					<span
 						css={{
 							...textSans14Object,
+							display: 'inline-block',
 							paddingTop: space[2],
 							[from.leftCol]: textSans15Object,
 						}}
@@ -347,6 +341,24 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 			)}
 		</div>
 	);
+};
+
+const EndOfInningReason = (props: { inning: Inning }) => {
+	const styles = {
+		...textSans14Object,
+		marginRight: space[1],
+	};
+
+	if (props.inning.fallOfWicket === 10) {
+		return <span css={styles}>All out</span>;
+	}
+	if (props.inning.declared) {
+		return <span css={styles}>Declared</span>;
+	}
+	if (props.inning.forfeited) {
+		return <span css={styles}>Forfeited</span>;
+	}
+	return null;
 };
 
 const TeamName = (props: { name: string }) => (
