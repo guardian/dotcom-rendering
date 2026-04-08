@@ -443,7 +443,7 @@ const LiveblogNotifications = (props: {
 					displayName={props.headline}
 					notificationType="content"
 					colour="--follow-text"
-					backgroundColour="--standfirst-background"
+					backgroundColour="--follow-icon-background"
 					iconColour="--follow-icon-fill"
 				/>
 			</Island>
