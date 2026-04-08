@@ -60,6 +60,28 @@ export const Live = {
 	},
 } satisfies Story;
 
+export const LiveYetToBat = {
+	name: 'Live (Team yet to bat)',
+	args: {
+		edition: 'UK',
+		match: {
+			...Fixture.args.match,
+			kind: 'Live',
+			day: 2,
+			innings: [
+				{
+					declared: false,
+					forfeited: false,
+					battingTeam: 'Australia',
+					runsScored: 169,
+					overs: '20.0',
+					fallOfWicket: 10,
+				},
+			],
+		},
+	},
+} satisfies Story;
+
 export const Result = {
 	args: {
 		edition: 'UK',
