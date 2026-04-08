@@ -151,6 +151,8 @@ type Props = {
  *
  * NB: When DEVELOPING LOCALLY, use `https://r.thegulocal.com/` instead of `localhost`.
  * This is required because CORS restrictions prevent accessing the subtitles and video file from localhost.
+ * Alternatively, you can remove `crossOrigin="anonymous"` from the video element, which will not enable
+ * CORS. You can then develop using localhost, but note that subtitles will not work in this scenario.
  */
 export const SelfHostedVideoPlayer = forwardRef(
 	(
