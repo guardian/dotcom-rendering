@@ -7,6 +7,7 @@ import {
 	textSans15,
 	textSansBold14,
 	textSansBold15,
+	visuallyHidden,
 } from '@guardian/source/foundations';
 import { Fragment, type ReactNode } from 'react';
 import type {
@@ -19,6 +20,10 @@ import type {
 	InningsTotals,
 } from '../cricketMatch';
 import { palette } from '../palette';
+
+const visuallyHiddenStyles = css`
+	${visuallyHidden}
+`;
 
 const responsiveTextSans = css`
 	${textSans14}
@@ -72,9 +77,10 @@ const secondTeamInningsHeadingStyles = css`
 const batIconWrapperStyles = css`
 	display: flex;
 	width: 24px;
-	height: 38px;
 	justify-content: center;
-	align-items: flex-end;
+	align-items: center;
+	align-self: flex-start;
+	padding-top: 2px;
 	flex-shrink: 0;
 `;
 
@@ -97,27 +103,18 @@ const tableStyles = css`
 	width: 100%;
 	border-collapse: collapse;
 	${responsiveTextSans}
-
-	thead tr {
-		display: flex;
-		gap: ${space[3]}px;
-		align-items: center;
-	}
 `;
 
 const cellBaseStyles = css`
-	padding: ${space[2]}px ${space[1]}px ${space[1]}px 0;
+	padding: ${space[2]}px ${space[3]}px ${space[1]}px 0;
 	text-align: left;
+	vertical-align: middle;
 `;
 
 const tableHeadCellStyles = css`
 	${cellBaseStyles}
 	${responsiveTextSansBold}
 	color: ${palette('--football-match-stat-text')};
-
-	&:first-of-type {
-		flex: 1;
-	}
 `;
 
 const tableCellStyles = css`
@@ -129,7 +126,6 @@ const tableRowHeaderStyles = css`
 	${cellBaseStyles}
 	display: flex;
 	align-items: center;
-	flex: 1;
 	${responsiveTextSans}
 `;
 
@@ -138,13 +134,7 @@ const batterNameTextStyles = css`
 	flex-direction: column;
 `;
 
-const rowBaseStyles = css`
-	display: flex;
-	padding-top: 2px;
-	align-items: center;
-	gap: ${space[3]}px;
-	align-self: stretch;
-`;
+const rowBaseStyles = css``;
 
 const tableRowStyles = css`
 	${rowBaseStyles}
@@ -399,7 +389,14 @@ const Batting = ({
 					<tr key={batter.name} css={tableRowStyles}>
 						<th scope="row" css={tableRowHeaderStyles}>
 							{(batter.onStrike || batter.nonStrike) && (
-								<BatIcon isHomeTeam={isHomeTeam} />
+								<>
+									<BatIcon isHomeTeam={isHomeTeam} />
+									<span css={visuallyHiddenStyles}>
+										{batter.onStrike
+											? '(on strike)'
+											: '(at crease)'}
+									</span>
+								</>
 							)}
 							<div css={batterNameTextStyles}>
 								{batter.name}
@@ -457,7 +454,12 @@ const Batting = ({
 				))}
 				<tr css={extrasDashedRowStyles}>
 					<th scope="row" css={tableRowHeaderStyles}>
-						Extras
+						<div css={batterNameTextStyles}>
+							Extras
+							<div css={[howOutStyles, hideFromTabletStyle]}>
+								{getExtrasDescription(extras)}
+							</div>
+						</div>
 					</th>
 					<td
 						css={[
@@ -477,7 +479,12 @@ const Batting = ({
 			<tfoot>
 				<tr css={footerRowStyles}>
 					<th scope="row" css={[tableRowHeaderStyles]}>
-						Total
+						<div css={batterNameTextStyles}>
+							Total
+							<div css={[howOutStyles, hideFromTabletStyle]}>
+								for {inningsTotals.wickets}
+							</div>
+						</div>
 					</th>
 					<td
 						css={[
