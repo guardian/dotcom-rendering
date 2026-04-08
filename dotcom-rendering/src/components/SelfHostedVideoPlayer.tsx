@@ -25,18 +25,20 @@ import { VideoProgressBar } from './VideoProgressBar';
 export type SubtitleSize = 'small' | 'medium' | 'large';
 export type ControlsPosition = 'top' | 'bottom';
 
-const videoStyles = (aspectRatio: number, isCinemagraph: boolean) => css`
+const videoStyles = (aspectRatio: number) => css`
 	position: relative;
 	display: block;
 	height: auto;
 	width: 100%;
-	${!isCinemagraph &&
-	css`
-		cursor: pointer;
-	`}
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
 
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${aspectRatio};
+`;
+
+const cinemagraphStyles = css`
+	cursor: auto;
 `;
 
 const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
@@ -212,7 +214,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 				<video
 					id={videoId}
 					css={[
-						videoStyles(aspectRatio, isCinemagraph),
+						videoStyles(aspectRatio),
+						isCinemagraph && cinemagraphStyles,
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
 					crossOrigin="anonymous"
