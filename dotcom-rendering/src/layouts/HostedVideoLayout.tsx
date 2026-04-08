@@ -13,6 +13,7 @@ import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
 import { HostedContentHeader } from '../components/HostedContentHeader';
+import { HostedContentOnwards } from '../components/HostedContentOnwards';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
@@ -27,6 +28,7 @@ import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { trails } from './HostedArticleLayout';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -107,7 +109,7 @@ const shareButtonStyles = css`
 	padding: ${space[1]}px;
 `;
 
-const standfirstStyles = css`
+const standfirstAndArticleBodyStyles = css`
 	${grid.column.centre}
 	grid-row-start: 5;
 
@@ -122,28 +124,21 @@ const standfirstStyles = css`
 `;
 
 const articleBodyStyles = css`
-	${grid.column.centre}
-
-	padding-bottom: ${space[6]}px;
+	margin-bottom: ${space[6]}px;
 
 	${from.desktop} {
-		${grid.between(4, 'right-column-end')}
-	}
-
-	${from.leftCol} {
-		${grid.column.centre}
+		margin-bottom: ${space[10]}px;
 	}
 `;
 
 const onwardContentStyles = css`
 	${grid.column.centre}
 
-	height: 20px;
-	background-color: lightgrey;
-	margin-bottom: ${space[6]}px;
+	margin-bottom: ${space[5]}px;
 
 	${from.desktop} {
 		${grid.span(4, 8)}
+		margin-bottom: ${space[10]}px;
 	}
 
 	${from.leftCol} {
@@ -177,6 +172,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 	const {
 		content: { frontendData },
 		format,
+		renderingTarget,
 	} = props;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
@@ -248,7 +244,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 					</div>
 
 					<div data-print-layout="hide" css={metaStyles}>
-						{props.renderingTarget === 'Web' && (
+						{renderingTarget === 'Web' && (
 							<div css={shareButtonStyles}>
 								<Island
 									priority="feature"
@@ -277,55 +273,61 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 						/>
 					</div>
 
-					<div css={standfirstStyles}>
+					<div css={standfirstAndArticleBodyStyles}>
 						<Standfirst
 							format={format}
 							standfirst={frontendData.standfirst}
 						/>
-					</div>
 
-					<div css={articleBodyStyles}>
-						<ArticleContainer format={format}>
-							<ArticleBody
-								format={format}
-								blocks={blocks}
-								editionId={frontendData.editionId}
-								host={frontendData.config.host}
-								pageId={frontendData.pageId}
-								webTitle={frontendData.webTitle}
-								ajaxUrl={frontendData.config.ajaxUrl}
-								isAdFreeUser={frontendData.isAdFreeUser}
-								switches={frontendData.config.switches}
-								sectionId={frontendData.config.section}
-								shouldHideReaderRevenue={
-									frontendData.shouldHideReaderRevenue
-								}
-								tags={frontendData.tags}
-								isPaidContent={
-									!!frontendData.config.isPaidContent
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								contentType={frontendData.contentType}
-								idUrl={frontendData.config.idUrl ?? ''}
-								isSensitive={frontendData.config.isSensitive}
-								isDev={!!frontendData.config.isDev}
-								keywordIds={frontendData.config.keywordIds}
-								abTests={frontendData.config.abTests}
-								shouldHideAds={frontendData.shouldHideAds}
-								lang={frontendData.lang}
-								isRightToLeftLang={
-									frontendData.isRightToLeftLang
-								}
-								accentColor={branding?.hostedCampaignColour}
-							/>
-							<HostedContentDisclaimer />
-						</ArticleContainer>
+						<div css={articleBodyStyles}>
+							<ArticleContainer format={format}>
+								<ArticleBody
+									format={format}
+									blocks={blocks}
+									editionId={frontendData.editionId}
+									host={frontendData.config.host}
+									pageId={frontendData.pageId}
+									webTitle={frontendData.webTitle}
+									ajaxUrl={frontendData.config.ajaxUrl}
+									isAdFreeUser={frontendData.isAdFreeUser}
+									switches={frontendData.config.switches}
+									sectionId={frontendData.config.section}
+									shouldHideReaderRevenue={
+										frontendData.shouldHideReaderRevenue
+									}
+									tags={frontendData.tags}
+									isPaidContent={
+										!!frontendData.config.isPaidContent
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									contentType={frontendData.contentType}
+									idUrl={frontendData.config.idUrl ?? ''}
+									isSensitive={
+										frontendData.config.isSensitive
+									}
+									isDev={!!frontendData.config.isDev}
+									keywordIds={frontendData.config.keywordIds}
+									abTests={frontendData.config.abTests}
+									shouldHideAds={frontendData.shouldHideAds}
+									lang={frontendData.lang}
+									isRightToLeftLang={
+										frontendData.isRightToLeftLang
+									}
+									accentColor={branding?.hostedCampaignColour}
+								/>
+								<HostedContentDisclaimer />
+							</ArticleContainer>
+						</div>
 					</div>
 
 					<div css={onwardContentStyles}>
-						{'Placeholder - onward content'}
+						<HostedContentOnwards
+							trails={trails} //Temporary trails dummy data which is exported from HostedArticleLayout
+							brandName="TrendAI"
+							accentColor={branding?.hostedCampaignColour}
+						/>
 					</div>
 
 					{cta && (
