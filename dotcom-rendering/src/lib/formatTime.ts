@@ -26,6 +26,7 @@ export const secondsToDuration = (secs?: number): string => {
 	if (typeof secs === `undefined` || secs === 0) {
 		return ``;
 	}
+
 	const seconds = Number(secs);
 	const h = Math.floor(seconds / 3600);
 	const m = Math.floor((seconds % 3600) / 60);
@@ -35,6 +36,7 @@ export const secondsToDuration = (secs?: number): string => {
 	if (h > 0) {
 		duration.push(h);
 	}
+
 	if (h === 0 && m > 0 && s === 0) duration.push(`${m}:00`); // e.g 6:00
 	else if (h > 0 && m < 10) duration.push(`0${m}`); // e.g 1:01:11
 	else duration.push(m); // supports 0:59
@@ -42,13 +44,20 @@ export const secondsToDuration = (secs?: number): string => {
 		if (s < 10) duration.push(`0${s}`);
 		else duration.push(s);
 	}
+
 	return duration.join(':');
 };
 
-export const isWithinTwelveHours = (webPublicationDate: string): boolean => {
+export const isWithinTwelveHours = (webPublicationDate?: string): boolean => {
+	if (!webPublicationDate) {
+		return false;
+	}
+
 	const timeDiffMs = Math.abs(
 		new Date().getTime() - new Date(webPublicationDate).getTime(),
 	);
+
 	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
+
 	return timeDiffHours <= 12;
 };

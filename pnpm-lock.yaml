@@ -15,8 +15,8 @@ importers:
         specifier: 5.2.2
         version: 5.2.2
       chromatic:
-        specifier: 13.3.4
-        version: 13.3.4
+        specifier: 16.1.0
+        version: 16.1.0
       husky:
         specifier: 9.1.7
         version: 9.1.7
@@ -315,8 +315,8 @@ importers:
         specifier: 62.6.1
         version: 62.6.1(aws-cdk-lib@2.246.0(constructs@10.6.0))(aws-cdk@2.1115.1)(constructs@10.6.0)
       '@guardian/commercial-core':
-        specifier: 29.0.0
-        version: 29.0.0(@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))
+        specifier: 32.0.0
+        version: 32.0.0(@guardian/libs@31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))
       '@guardian/core-web-vitals':
         specifier: 7.0.0
         version: 7.0.0(@guardian/libs@31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
@@ -2418,11 +2418,10 @@ packages:
       aws-cdk-lib: ^2.241.0
       constructs: ^10.5.1
 
-  '@guardian/commercial-core@29.0.0':
-    resolution: {integrity: sha512-qBPxH7xp8JrJ2rDLaLqSFJ/mwHeV9iL9+z4Yr9bRdC97Xf4ri2D8WpKweFs2dabPxEBKWT9IHse1OZgLE1t03Q==}
+  '@guardian/commercial-core@32.0.0':
+    resolution: {integrity: sha512-Wz2aPR/P/NFUFeTxmWD4VnHZ3Xgj7kJ8LD+Z4crYFSiqUG207gJWqVw8QcXVqJnz3XpR0J9foJQyG8HD9RdCjg==}
     peerDependencies:
-      '@guardian/ab-core': ^8.0.1
-      '@guardian/libs': ^26.0.0
+      '@guardian/libs': ^30.1.0
 
   '@guardian/core-web-vitals@7.0.0':
     resolution: {integrity: sha512-1JLUQjkLY8SXYJqcy0TiE9/9hCcmyIlmMpRoW8Ygn/qGtyNxG+zzwkwsgtJIP+B0ZjtDqfukra2IV9l7wX5A0g==}
@@ -3693,9 +3692,6 @@ packages:
   '@types/express@5.0.6':
     resolution: {integrity: sha512-sKYVuV7Sv9fbPIt/442koC7+IIwK5olP1KWeD88e/idgoJqDm3JV/YUiPwkoKK92ylff2MGxSz1CSjsXelx0YA==}
 
-  '@types/googletag@3.3.0':
-    resolution: {integrity: sha512-9qQzN/lgjEbj+69S6uYSijZHxlSFA5K+t19x0qqwW13r0fD3xQsBJFrDWyIDOk0zlh7+IVkoIPAZYP9hk13d0w==}
-
   '@types/graceful-fs@4.1.9':
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
 
@@ -4688,8 +4684,8 @@ packages:
     resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
     engines: {node: '>= 14.16.0'}
 
-  chromatic@13.3.4:
-    resolution: {integrity: sha512-TR5rvyH0ESXobBB3bV8jc87AEAFQC7/n+Eb4XWhJz6hW3YNxIQPVjcbgLv+a4oKHEl1dUBueWSoIQsOVGTd+RQ==}
+  chromatic@16.1.0:
+    resolution: {integrity: sha512-7xyOUXe8jfY6c+g9S/U/cbvzVXMjdhh9cVZYvDp8dDGonjiKSbWO1dzWApdYHIiF2xj29pvWQB7N5LT6967IDw==}
     hasBin: true
     peerDependencies:
       '@chromatic-com/cypress': ^0.*.* || ^1.0.0
@@ -6897,8 +6893,8 @@ packages:
   lodash.truncate@4.4.2:
     resolution: {integrity: sha512-jttmRe7bRse52OsWIMDLaXxWqRAmtIUccAQ3garviCqJjafXOfNMO0yMfNpdD6zbGaTU0P5Nz7e7gAT6cKmJRw==}
 
-  lodash@4.17.23:
-    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
+  lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
   log-update@6.0.0:
     resolution: {integrity: sha512-niTvB4gqvtof056rRIrTZvjNYE4rCUzO6X/X+kYjd7WFxXeJ0NwEFnRxX6ehkvv3jTwrXnNdtAak5XYZuIyPFw==}
@@ -10968,7 +10964,7 @@ snapshots:
   '@creditkarma/thrift-server-core@1.0.4':
     dependencies:
       '@types/lodash': 4.14.202
-      lodash: 4.17.23
+      lodash: 4.18.1
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -11479,11 +11475,9 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@guardian/commercial-core@29.0.0(@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))':
+  '@guardian/commercial-core@32.0.0(@guardian/libs@31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))':
     dependencies:
-      '@guardian/ab-core': 8.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/libs': 31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3)
-      '@types/googletag': 3.3.0
 
   '@guardian/core-web-vitals@7.0.0(@guardian/libs@31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)':
     dependencies:
@@ -13076,8 +13070,6 @@ snapshots:
       '@types/express-serve-static-core': 5.1.1
       '@types/serve-static': 2.2.0
 
-  '@types/googletag@3.3.0': {}
-
   '@types/graceful-fs@4.1.9':
     dependencies:
       '@types/node': 22.17.0
@@ -14331,7 +14323,7 @@ snapshots:
     dependencies:
       readdirp: 4.1.2
 
-  chromatic@13.3.4: {}
+  chromatic@16.1.0: {}
 
   chrome-trace-event@1.0.4: {}
 
@@ -15418,7 +15410,7 @@ snapshots:
       indent-string: 4.0.0
       is-builtin-module: 3.2.1
       jsesc: 3.1.0
-      lodash: 4.17.23
+      lodash: 4.18.1
       pluralize: 8.0.0
       read-pkg-up: 7.0.1
       regexp-tree: 0.1.27
@@ -15444,7 +15436,7 @@ snapshots:
   eslint-stats@1.0.1:
     dependencies:
       chalk: 2.4.2
-      lodash: 4.17.23
+      lodash: 4.18.1
 
   eslint-utils@3.0.0(eslint@8.57.1):
     dependencies:
@@ -16259,7 +16251,7 @@ snapshots:
     dependencies:
       '@types/html-minifier-terser': 6.1.0
       html-minifier-terser: 6.1.0
-      lodash: 4.17.23
+      lodash: 4.18.1
       pretty-error: 4.0.0
       tapable: 2.3.0
     optionalDependencies:
@@ -17221,7 +17213,7 @@ snapshots:
 
   lodash.truncate@4.4.2: {}
 
-  lodash@4.17.23: {}
+  lodash@4.18.1: {}
 
   log-update@6.0.0:
     dependencies:
@@ -17961,7 +17953,7 @@ snapshots:
 
   pretty-error@4.0.0:
     dependencies:
-      lodash: 4.17.23
+      lodash: 4.18.1
       renderkid: 3.0.0
 
   pretty-format@27.5.1:
@@ -18271,7 +18263,7 @@ snapshots:
       css-select: 4.3.0
       dom-converter: 0.2.0
       htmlparser2: 6.1.0
-      lodash: 4.17.23
+      lodash: 4.18.1
       strip-ansi: 6.0.1
 
   require-directory@2.1.1: {}

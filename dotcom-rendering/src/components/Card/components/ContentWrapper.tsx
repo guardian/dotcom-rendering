@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from, space, until } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import type { MediaPositionType, MediaSizeType } from './MediaWrapper';
 
 const sizingStyles = css`
@@ -17,50 +17,14 @@ const sizingStyles = css`
 const flexBasisStyles = ({
 	mediaSize,
 	isAvatar,
-	isFrontContainer,
 }: {
 	mediaSize: MediaSizeType;
 	isAvatar: boolean;
-	isFrontContainer: boolean;
 }): SerializedStyles => {
 	if (isAvatar) {
 		return css`
 			flex-basis: 100%;
 		`;
-	}
-
-	if (!isFrontContainer) {
-		switch (mediaSize) {
-			default:
-			case 'small':
-				return css`
-					flex-basis: 75%;
-					${between.tablet.and.desktop} {
-						flex-basis: 60%;
-					}
-					${from.desktop} {
-						flex-basis: 70%;
-					}
-				`;
-			case 'medium':
-				return css`
-					${from.tablet} {
-						flex-basis: 50%;
-					}
-				`;
-			case 'large':
-				return css`
-					${from.tablet} {
-						flex-basis: 34%;
-					}
-				`;
-			case 'jumbo':
-				return css`
-					${from.tablet} {
-						flex-basis: 25%;
-					}
-				`;
-		}
 	}
 
 	switch (mediaSize) {
@@ -170,7 +134,6 @@ export const ContentWrapper = ({
 				mediaDirectionDesktop === 'horizontal' &&
 					flexBasisStyles({
 						mediaSize,
-						isFrontContainer,
 						isAvatar,
 					}),
 				padContent &&

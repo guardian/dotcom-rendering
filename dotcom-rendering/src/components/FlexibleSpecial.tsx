@@ -1,5 +1,6 @@
 import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
+import { isWithinTwelveHours } from '../lib/formatTime';
 import { isNonEmptyArray } from '../lib/tuple';
 import type { BoostLevel } from '../types/content';
 import type {
@@ -26,7 +27,7 @@ type Props = {
 	groupedTrails: DCRGroupedTrails;
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
@@ -131,7 +132,7 @@ type OneCardLayoutProps = {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
@@ -143,7 +144,7 @@ type OneCardLayoutProps = {
 export const OneCardLayout = ({
 	cards,
 	containerPalette,
-	showAge,
+	hideAge,
 	serverTime,
 	imageLoading,
 	aspectRatio,
@@ -179,7 +180,9 @@ export const OneCardLayout = ({
 					trail={card}
 					containerPalette={containerPalette}
 					containerType="flexible/special"
-					showAge={showAge}
+					showAge={
+						!hideAge && isWithinTwelveHours(card.webPublicationDate)
+					}
 					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaSize={mediaSize}
@@ -227,7 +230,7 @@ type TwoOrFourCardLayoutProps = {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
@@ -238,7 +241,7 @@ type TwoOrFourCardLayoutProps = {
 const TwoOrFourCardLayout = ({
 	cards,
 	containerPalette,
-	showAge,
+	hideAge,
 	serverTime,
 	showImage = true,
 	imageLoading,
@@ -264,7 +267,10 @@ const TwoOrFourCardLayout = ({
 							trail={card}
 							containerPalette={containerPalette}
 							containerType="flexible/special"
-							showAge={showAge}
+							showAge={
+								!hideAge &&
+								isWithinTwelveHours(card.webPublicationDate)
+							}
 							serverTime={serverTime}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
@@ -297,7 +303,7 @@ const TwoOrFourCardLayout = ({
 export const FlexibleSpecial = ({
 	groupedTrails,
 	containerPalette,
-	showAge,
+	hideAge,
 	serverTime,
 	imageLoading,
 	aspectRatio,
@@ -323,7 +329,7 @@ export const FlexibleSpecial = ({
 				<OneCardLayout
 					cards={snaps}
 					containerPalette={containerPalette}
-					showAge={showAge}
+					hideAge={hideAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
@@ -337,7 +343,7 @@ export const FlexibleSpecial = ({
 				<OneCardLayout
 					cards={splash}
 					containerPalette={containerPalette}
-					showAge={showAge}
+					hideAge={hideAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
@@ -351,7 +357,7 @@ export const FlexibleSpecial = ({
 			<TwoOrFourCardLayout
 				cards={cards}
 				containerPalette={containerPalette}
-				showAge={showAge}
+				hideAge={hideAge}
 				serverTime={serverTime}
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}

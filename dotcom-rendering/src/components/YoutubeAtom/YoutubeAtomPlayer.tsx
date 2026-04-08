@@ -1,5 +1,4 @@
 import { css, Global } from '@emotion/react';
-import type { Participations } from '@guardian/ab-core';
 import { buildImaAdTagUrl } from '@guardian/commercial-core';
 import type { ConsentState } from '@guardian/libs';
 import { log } from '@guardian/libs';
@@ -40,7 +39,7 @@ type Props = {
 	enableAds: boolean;
 	adTargeting: AdTargeting;
 	consentState: ConsentState;
-	abTestParticipations: Participations;
+	abTestParticipations: Record<string, string>;
 	renderingTarget: RenderingTarget;
 };
 
@@ -369,7 +368,7 @@ const createOnReadyListener =
 const createImaAdsRequestCallback = (
 	adTargeting: AdTargeting | undefined,
 	consentState: ConsentState,
-	abTestParticipations: Participations,
+	abTestParticipations: Record<string, string>,
 	isSignedIn: boolean,
 ) => {
 	const adTargetingEnabled = adTargeting && !adTargeting.disableAds;
@@ -385,7 +384,7 @@ const createImaAdsRequestCallback = (
 			adUnit,
 			customParams,
 			consentState,
-			clientSideParticipations: abTestParticipations,
+			abTestParticipations,
 			isSignedIn,
 		});
 		adsRenderingSettings.useStyledNonLinearAds = true;

@@ -155,7 +155,7 @@ const meta = {
 	args: {
 		frontSectionTitle: 'Flexible general',
 		groupedTrails: emptyGroupedTrails,
-		showAge: true,
+		hideAge: false,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		collectionId: 1,

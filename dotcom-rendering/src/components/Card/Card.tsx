@@ -130,6 +130,7 @@ export type Props = {
 	containerPalette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
 	showAge?: boolean;
+	ageFormat?: 'relative' | 'absolute';
 	discussionApiUrl: string;
 	discussionId?: string;
 	isExternalLink: boolean;
@@ -140,7 +141,6 @@ export type Props = {
 	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
 	showVideo?: boolean;
-	isTagPage?: boolean;
 	/** Allows the consumer to set the aspect ratio on the media */
 	aspectRatio?: AspectRatio;
 	/** The index of the card in a carousel */
@@ -401,6 +401,7 @@ export const Card = ({
 	containerPalette,
 	containerType,
 	showAge = true,
+	ageFormat = 'relative',
 	discussionApiUrl,
 	discussionId,
 	isCrossword,
@@ -414,7 +415,6 @@ export const Card = ({
 	onwardsSource,
 	showVideo = true,
 	serverTime,
-	isTagPage = false,
 	aspectRatio,
 	index = 0,
 	uniqueId = '',
@@ -454,26 +454,18 @@ export const Card = ({
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const decideAge = () => {
-		if (!webPublicationDate) return undefined;
-		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
-
-		const shouldShowAge =
-			isStorylines ||
-			isTagPage ||
-			!!onwardsSource ||
-			(showAge && withinTwelveHours);
-
-		if (!shouldShowAge) return undefined;
+		if (!webPublicationDate || !showAge) return undefined;
 
 		return (
 			<CardAge
 				webPublication={{
 					date: webPublicationDate,
-					isWithinTwelveHours: withinTwelveHours,
+					isWithinTwelveHours:
+						isWithinTwelveHours(webPublicationDate),
 				}}
+				isAbsolute={ageFormat === 'absolute'}
 				showClock={showClock}
 				serverTime={serverTime}
-				isTagPage={isTagPage}
 			/>
 		);
 	};
@@ -921,9 +913,6 @@ export const Card = ({
 							isMediaCardOrNewsletter &&
 							isFrontContainer &&
 							!isGallerySecondaryOnward
-						}
-						isFrontContainerOrGallerySecondaryOnward={
-							isFrontContainer || isGallerySecondaryOnward
 						}
 						isSmallCard={isSmallCard}
 					>

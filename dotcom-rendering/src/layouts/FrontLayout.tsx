@@ -172,7 +172,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						...highlightsCollection.backfill,
 					]}
 					groupedTrails={highlightsCollection.grouped}
-					showAge={false}
+					hideAge={true}
 					serverTime={serverTime}
 					imageLoading="eager"
 					aspectRatio={
@@ -505,11 +505,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerPalette={
 										collection.containerPalette
 									}
-									showAge={
-										!hideAge.includes(
-											collection.displayName,
-										)
-									}
+									hideAge={hideAge.includes(
+										collection.displayName,
+									)}
 									imageLoading={imageLoading}
 									serverTime={serverTime}
 									aspectRatio={

@@ -1,5 +1,6 @@
 import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
+import { isWithinTwelveHours } from '../lib/formatTime';
 import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
 import type {
@@ -28,7 +29,7 @@ type Props = {
 	groupedTrails: DCRGroupedTrails;
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
@@ -252,7 +253,7 @@ type SplashCardLayoutProps = {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
@@ -264,7 +265,7 @@ type SplashCardLayoutProps = {
 const SplashCardLayout = ({
 	cards,
 	containerPalette,
-	showAge,
+	hideAge,
 	serverTime,
 	imageLoading,
 	aspectRatio,
@@ -327,7 +328,9 @@ const SplashCardLayout = ({
 					trail={card}
 					containerPalette={containerPalette}
 					containerType="flexible/general"
-					showAge={showAge}
+					showAge={
+						!hideAge && isWithinTwelveHours(card.webPublicationDate)
+					}
 					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaPositionOnDesktop={mediaPositionOnDesktop}
@@ -416,7 +419,7 @@ type FullWidthCardLayoutProps = {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
@@ -429,7 +432,7 @@ type FullWidthCardLayoutProps = {
 const FullWidthCardLayout = ({
 	cards,
 	containerPalette,
-	showAge,
+	hideAge,
 	serverTime,
 	imageLoading,
 	aspectRatio,
@@ -483,7 +486,9 @@ const FullWidthCardLayout = ({
 					trail={card}
 					containerPalette={containerPalette}
 					containerType="flexible/general"
-					showAge={showAge}
+					showAge={
+						!hideAge && isWithinTwelveHours(card.webPublicationDate)
+					}
 					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaPositionOnDesktop="right"
@@ -527,7 +532,7 @@ type HalfWidthCardLayoutProps = {
 	isFirstRow?: boolean;
 	isFirstStandardRow?: boolean;
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
@@ -538,7 +543,7 @@ type HalfWidthCardLayoutProps = {
 const HalfWidthCardLayout = ({
 	cards,
 	containerPalette,
-	showAge,
+	hideAge,
 	serverTime,
 	imageLoading,
 	isFirstRow,
@@ -575,7 +580,10 @@ const HalfWidthCardLayout = ({
 							trail={card}
 							containerPalette={containerPalette}
 							containerType="flexible/general"
-							showAge={showAge}
+							showAge={
+								!hideAge &&
+								isWithinTwelveHours(card.webPublicationDate)
+							}
 							serverTime={serverTime}
 							image={card.image}
 							imageLoading={imageLoading}
@@ -612,7 +620,7 @@ const HalfWidthCardLayout = ({
 export const FlexibleGeneral = ({
 	groupedTrails,
 	containerPalette,
-	showAge,
+	hideAge,
 	serverTime,
 	imageLoading,
 	aspectRatio,
@@ -640,7 +648,7 @@ export const FlexibleGeneral = ({
 				<SplashCardLayout
 					cards={splash}
 					containerPalette={containerPalette}
-					showAge={showAge}
+					hideAge={hideAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
@@ -658,7 +666,7 @@ export const FlexibleGeneral = ({
 								key={row.cards[0]?.uniqueId}
 								cards={row.cards}
 								containerPalette={containerPalette}
-								showAge={showAge}
+								hideAge={hideAge}
 								serverTime={serverTime}
 								imageLoading={imageLoading}
 								aspectRatio={aspectRatio}
@@ -678,7 +686,7 @@ export const FlexibleGeneral = ({
 								key={row.cards[0]?.uniqueId}
 								cards={row.cards}
 								containerPalette={containerPalette}
-								showAge={showAge}
+								hideAge={hideAge}
 								serverTime={serverTime}
 								imageLoading={imageLoading}
 								isFirstRow={!splash.length && i === 0}

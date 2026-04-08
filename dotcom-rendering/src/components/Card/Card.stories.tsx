@@ -40,7 +40,6 @@ const basicCardProps: CardProps = {
 		altText: 'alt text',
 	},
 	mediaPositionOnDesktop: 'top',
-	showAge: true,
 	isExternalLink: false,
 	canPlayInline: true,
 	imageLoading: 'eager',
@@ -666,6 +665,14 @@ export const WithDifferentImageSizes = () => {
 				<Card
 					{...basicCardProps}
 					mediaPositionOnDesktop="left"
+					headlineText="xlarge"
+					mediaSize="xlarge"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					mediaPositionOnDesktop="bottom"
 					headlineText="jumbo"
 					mediaSize="jumbo"
 				/>
@@ -1106,7 +1113,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					mediaPositionOnDesktop="left"
+					mediaPositionOnDesktop="bottom"
 					mediaSize="jumbo"
 					showQuotedHeadline={true}
 				/>
@@ -1119,7 +1126,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					mediaPositionOnDesktop="left"
+					mediaPositionOnDesktop="bottom"
 					mediaSize="jumbo"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
