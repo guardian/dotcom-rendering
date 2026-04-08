@@ -49,7 +49,7 @@ export const EventPalette = meta.story({
 		flexibleGeneral: {
 			groupedTrails,
 			containerPalette: 'EventPalette',
-			showAge: true,
+			hideAge: true,
 			imageLoading: 'eager',
 			aspectRatio: '5:4',
 			collectionId: 1234,

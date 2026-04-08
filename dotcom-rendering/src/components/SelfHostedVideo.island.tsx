@@ -21,6 +21,7 @@ import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
+	findOptimisedSourcePerMimeType,
 } from '../lib/video';
 import { palette } from '../palette';
 import type { RoleType } from '../types/content';
@@ -354,6 +355,7 @@ export const SelfHostedVideo = ({
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
+	const [optimisedSources, setOptimisedSources] = useState<Source[]>(sources);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -451,6 +453,7 @@ export const SelfHostedVideo = ({
 	 * Setup.
 	 *
 	 * 1. Determine whether we can autoplay video.
+	 * 2. Use the best video size available for the user's screen size
 	 * 2. Initialise Ophan attention tracking.
 	 * 3. Creates event listeners to control playback when there are multiple videos.
 	 */
@@ -460,6 +463,13 @@ export const SelfHostedVideo = ({
 		} else {
 			setIsAutoplayAllowed(doesUserPermitAutoplayOnWeb());
 		}
+
+		const screenWidth = window.innerWidth;
+		const filteredSources = findOptimisedSourcePerMimeType(
+			sources,
+			screenWidth,
+		);
+		setOptimisedSources(filteredSources);
 
 		/**
 		 * Initialise Ophan attention tracking
@@ -559,7 +569,7 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [uniqueId, atomId, renderingTarget, ophanVideoStyle]);
+	}, [uniqueId, atomId, sources, renderingTarget, ophanVideoStyle]);
 
 	/**
 	 * Track the first time the video comes into view.
@@ -890,7 +900,7 @@ export const SelfHostedVideo = ({
 					)}
 				>
 					<SelfHostedVideoPlayer
-						sources={sources}
+						sources={optimisedSources}
 						atomId={atomId}
 						uniqueId={uniqueId}
 						aspectRatio={aspectRatio}

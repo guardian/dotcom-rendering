@@ -1,4 +1,3 @@
-import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/libs';
 import { useCallback, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
@@ -43,7 +42,7 @@ export type Props = {
 	format: ArticleFormat;
 	shouldStick?: boolean;
 	isMainMedia?: boolean;
-	abTestParticipations: Participations;
+	abTestParticipations: Record<string, string>;
 	kicker?: string;
 	shouldPauseOutOfView?: boolean;
 	iconSizeOnDesktop: PlayButtonSize;

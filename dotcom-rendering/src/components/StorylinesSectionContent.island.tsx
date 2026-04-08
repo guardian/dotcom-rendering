@@ -253,8 +253,9 @@ export const StorylinesSectionContent = ({
 						)}
 						<FlexibleGeneral
 							groupedTrails={category.groupedTrails}
-							imageLoading={'eager'}
-							aspectRatio={'5:4'}
+							imageLoading="eager"
+							aspectRatio="5:4"
+							hideAge={false}
 							collectionId={index}
 							containerLevel="Secondary"
 							isStorylines={true}

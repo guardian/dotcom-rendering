@@ -128,10 +128,11 @@ const backgroundFillDesktop = (isMedia: boolean) => css`
 	}
 `;
 
-/** In the storylines section on tag pages, the flex splash is used to display key stories. 
-   This is shown as a large image taken from the first article in the group, and the headlines of the first four key articles (include that of the first article).
-   Therefore, we don't display an article headline in the conventional sense, these are displayed as "supporting content". 
-*/
+/**
+ * In the storylines section on tag pages, the flex splash is used to display key stories.
+ * This is shown as a large image taken from the first article in the group, and the headlines of the first four key articles (include that of the first article).
+ * Therefore, we don't display an article headline in the conventional sense, these are displayed as "supporting content".
+ */
 export const SupportingKeyStoriesContent = ({
 	supportingContent,
 	alignment,
@@ -203,8 +204,7 @@ export const SupportingKeyStoriesContent = ({
 												'',
 											isWithinTwelveHours: false,
 										}}
-										isTagPage={true}
-										isStorylines={true}
+										isAbsolute={false}
 									/>
 								</div>
 							</ContainerOverrides>
