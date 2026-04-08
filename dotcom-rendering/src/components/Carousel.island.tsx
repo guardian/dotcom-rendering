@@ -510,9 +510,8 @@ const CarouselCard = ({
 				webPublicationDate={webPublicationDate}
 				kickerText={kickerText}
 				image={image}
-				mediaSize={'carousel'}
+				mediaSize="carousel"
 				showClock={!isOnwardContent && true}
-				showAge={true}
 				showQuotedHeadline={format.design === ArticleDesign.Comment}
 				dataLinkName={dataLinkName}
 				discussionId={discussionId}
@@ -533,7 +532,7 @@ const CarouselCard = ({
 				index={index}
 				showTopBarDesktop={!isOnwardContent}
 				showTopBarMobile={!isOnwardContent}
-				aspectRatio={'5:4'}
+				aspectRatio="5:4"
 			/>
 		</LI>
 	);

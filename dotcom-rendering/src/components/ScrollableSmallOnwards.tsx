@@ -218,7 +218,6 @@ const getDefaultCardProps = (
 		mainMedia: trail.mainMedia,
 		isExternalLink: false,
 		branding: trail.branding,
-		showAge: true,
 		aspectRatio: '5:4',
 		mediaSize: 'scrollable-small',
 		mediaPositionOnDesktop: 'left',

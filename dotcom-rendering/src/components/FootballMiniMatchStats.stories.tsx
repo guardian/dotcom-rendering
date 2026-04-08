@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints, from } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import type { FEFootballMatchStatsSummary } from '../frontend/feFootballMatchInfoPage';
 import { palette } from '../palette';
 import { FootballMiniMatchStats as FootballMiniMatchStatsComponent } from './FootballMiniMatchStats';
@@ -19,7 +19,7 @@ const gridCss = css`
 	}
 `;
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Football Mini Match Stats',
 	component: FootballMiniMatchStatsComponent,
 	decorators: [
@@ -38,10 +38,7 @@ const meta = {
 			],
 		},
 	},
-} satisfies Meta<typeof FootballMiniMatchStatsComponent>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
+});
 
 const feMatchStatsSummaryData: FEFootballMatchStatsSummary = {
 	id: '4540747',
@@ -73,11 +70,11 @@ const getMockData = (data: FEFootballMatchStatsSummary) =>
 		}, 1000);
 	});
 
-export const FootballMiniMatchStats = {
+export const FootballMiniMatchStats = meta.story({
 	args: {
 		matchStatsUrl:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-stats-summary/2026/02/17/49/91.json',
 		getMatchStatsData: () => getMockData(feMatchStatsSummaryData),
 		refreshInterval: 16_000,
 	},
-} satisfies Story;
+});

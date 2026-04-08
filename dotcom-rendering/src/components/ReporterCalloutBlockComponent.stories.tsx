@@ -1,17 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import preview from '../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { ReporterCalloutBlockElement } from '../types/content';
 import { ReporterCalloutBlockComponent } from './ReporterCalloutBlockComponent.island';
 
-const meta: Meta<typeof ReporterCalloutBlockComponent> = {
+const meta = preview.meta({
 	title: 'Components/Reporter Callout Block',
 	component: ReporterCalloutBlockComponent,
-};
-
-export default meta;
-
-type Story = StoryObj<typeof ReporterCalloutBlockComponent>;
+});
 
 const defaultFormat = {
 	display: ArticleDisplay.Standard,
@@ -40,21 +36,21 @@ const defaultCallout: ReporterCalloutBlockElement = {
 		'<p>Finally, our guide at <a href="https://www.theguardian.com/tips">theguardian.com/tips</a> lists several ways to contact us securely, and discusses the pros and cons of each.</p>',
 };
 
-export const Default: Story = {
+export const Default = meta.story({
 	args: {
 		callout: defaultCallout,
 	},
 	decorators: [splitTheme([defaultFormat])],
-};
+});
 
-export const DefaultSport: Story = {
+export const DefaultSport = meta.story({
 	args: {
 		callout: defaultCallout,
 	},
 	decorators: [splitTheme([{ ...defaultFormat, theme: Pillar.Sport }])],
-};
+});
 
-export const MinimalContacts: Story = {
+export const MinimalContacts = meta.story({
 	args: {
 		callout: {
 			...defaultCallout,
@@ -64,9 +60,9 @@ export const MinimalContacts: Story = {
 		},
 	},
 	decorators: [splitTheme([defaultFormat])],
-};
+});
 
-export const WithoutEndNote: Story = {
+export const WithoutEndNote = meta.story({
 	args: {
 		callout: {
 			...defaultCallout,
@@ -74,9 +70,9 @@ export const WithoutEndNote: Story = {
 		},
 	},
 	decorators: [splitTheme([defaultFormat])],
-};
+});
 
-export const ExpiredCallout: Story = {
+export const ExpiredCallout = meta.story({
 	args: {
 		callout: {
 			...defaultCallout,
@@ -85,4 +81,4 @@ export const ExpiredCallout: Story = {
 		},
 	},
 	decorators: [splitTheme([defaultFormat])],
-};
+});

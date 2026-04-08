@@ -1,6 +1,8 @@
+import type { ThriftClient } from '@creditkarma/thrift-server-core';
 import * as AbTesting from '@guardian/bridget/AbTesting';
 import * as Acquisitions from '@guardian/bridget/Acquisitions';
 import * as Analytics from '@guardian/bridget/Analytics';
+import * as Audio from '@guardian/bridget/Audio';
 import * as Commercial from '@guardian/bridget/Commercial';
 import * as Discussion from '@guardian/bridget/Discussion';
 import * as Environment from '@guardian/bridget/Environment';
@@ -17,6 +19,15 @@ import * as User from '@guardian/bridget/User';
 import * as Video from '@guardian/bridget/Videos';
 import { isUndefined } from '@guardian/libs';
 import { createAppClient } from './thrift/nativeConnection';
+
+type BridgetClient<Client extends ThriftClient> = Omit<
+	Client,
+	| '_serviceName'
+	| '_annotations'
+	| '_methodAnnotations'
+	| '_methodNames'
+	| '_methodParameters'
+>;
 
 let environmentClient: Environment.Client<void> | undefined = undefined;
 export const getEnvironmentClient = (): Environment.Client<void> => {
@@ -54,8 +65,9 @@ export const getAcquisitionsClient = (): Acquisitions.Client<void> => {
 	return acquisitionsClient;
 };
 
-let notificationsClient: Notifications.Client<void> | undefined = undefined;
-export const getNotificationsClient = (): Notifications.Client<void> => {
+export type NotificationsClient = BridgetClient<Notifications.Client>;
+let notificationsClient: NotificationsClient | undefined = undefined;
+export const getNotificationsClient = (): NotificationsClient => {
 	if (!notificationsClient) {
 		notificationsClient = createAppClient<Notifications.Client<void>>(
 			Notifications.Client,
@@ -192,6 +204,18 @@ export const getInteractivesClient = (): Interactives.Client<void> => {
 		);
 	}
 	return interactivesClient;
+};
+
+let audioClient: Audio.Client<void> | undefined = undefined;
+export const getAudioClient = (): Audio.Client<void> => {
+	if (!audioClient) {
+		audioClient = createAppClient<Audio.Client<void>>(
+			Audio.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return audioClient;
 };
 
 let listenToArticleClient: ListenToArticle.Client<void> | undefined = undefined;

@@ -5,10 +5,10 @@ import {
 	space,
 	textSans15,
 } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { GalleryLabs as GalleryLabsFixture } from '../../fixtures/generated/fe-articles/GalleryLabs';
 import {
 	ArticleDesign,
@@ -21,7 +21,7 @@ import { palette } from '../palette';
 import { enhanceArticleType } from '../types/article';
 import { ArticleMeta } from './ArticleMeta.web';
 
-const meta = {
+const meta = preview.meta({
 	component: ArticleMeta,
 	title: 'Components/Article Meta (web)',
 	parameters: {
@@ -31,13 +31,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof ArticleMeta>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		// This will be overwritten by `parameters.formats`
 		format: {
@@ -72,11 +68,11 @@ export const Default = {
 		),
 	},
 	decorators: [leftColumnDecorator],
-} satisfies Story;
+});
 
-export const WithBranding = {
+export const WithBranding = meta.story({
 	args: {
-		...Default.args,
+		...Default.input.args,
 		branding: {
 			brandingType: { name: 'sponsored' },
 			sponsorName: 'theguardian.org',
@@ -133,29 +129,29 @@ export const WithBranding = {
 			</>
 		),
 	],
-} satisfies Story;
+});
 
-export const WithBrandingForAdvertisingPartner = {
-	...WithBranding,
+export const WithBrandingForAdvertisingPartner = meta.story({
+	...WithBranding.input,
 	args: {
-		...WithBranding.args,
+		...WithBranding.input.args,
 		branding: {
-			...WithBranding.args.branding,
+			...WithBranding.input.args.branding,
 			logo: {
-				...WithBranding.args.branding.logo,
+				...WithBranding.input.args.branding.logo,
 				label: 'Advertising partner',
 			},
 			logoForDarkBackground: {
-				...WithBranding.args.branding.logoForDarkBackground,
+				...WithBranding.input.args.branding.logoForDarkBackground,
 				label: 'Advertising partner',
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const LiveBlogDesignWithBranding = {
+export const LiveBlogDesignWithBranding = meta.story({
 	args: {
-		...WithBranding.args,
+		...WithBranding.input.args,
 	},
 
 	parameters: {
@@ -199,27 +195,27 @@ export const LiveBlogDesignWithBranding = {
 			isRotated: false,
 		},
 	},
-} satisfies Story;
+});
 
-export const FeatureDesignWithABylineMismatchingTheContributorTag = {
-	...Default,
+export const FeatureDesignWithABylineMismatchingTheContributorTag = meta.story({
+	...Default.input,
 	args: {
-		...Default.args,
+		...Default.input.args,
 		byline: 'Gabriel Smith',
 	},
 	parameters: {
-		...Default.parameters,
+		...Default.input.parameters,
 		formats: getAllThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Feature,
 		}),
 	},
-} satisfies Story;
+});
 
-export const FeatureDesignWithSmallBylineImage = {
-	...Default,
+export const FeatureDesignWithSmallBylineImage = meta.story({
+	...Default.input,
 	args: {
-		...Default.args,
+		...Default.input.args,
 		byline: 'Nicola Slawson',
 		tags: [
 			{
@@ -232,51 +228,51 @@ export const FeatureDesignWithSmallBylineImage = {
 		],
 	},
 	parameters: {
-		...Default.parameters,
+		...Default.input.parameters,
 		formats: getAllThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Feature,
 		}),
 	},
-} satisfies Story;
+});
 
-export const CommentDesign = {
-	...Default,
+export const CommentDesign = meta.story({
+	...Default.input,
 	parameters: {
-		...Default.parameters,
+		...Default.input.parameters,
 		formats: getAllThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Comment,
 		}),
 	},
-} satisfies Story;
+});
 
-export const InterviewDesign = {
-	...Default,
+export const InterviewDesign = meta.story({
+	...Default.input,
 	parameters: {
-		...Default.parameters,
+		...Default.input.parameters,
 		formats: getAllThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Interview,
 		}),
 	},
-} satisfies Story;
+});
 
-export const ImmersiveDisplay = {
-	...Default,
+export const ImmersiveDisplay = meta.story({
+	...Default.input,
 	parameters: {
-		...Default.parameters,
+		...Default.input.parameters,
 		formats: getAllThemes({
 			display: ArticleDisplay.Immersive,
 			design: ArticleDesign.Standard,
 		}),
 	},
-} satisfies Story;
+});
 
-export const FeatureDesignWithTwoContributors = {
-	...Default,
+export const FeatureDesignWithTwoContributors = meta.story({
+	...Default.input,
 	args: {
-		...Default.args,
+		...Default.input.args,
 		byline: 'Lanre Bakare and Another Author',
 		tags: [
 			{
@@ -297,61 +293,61 @@ export const FeatureDesignWithTwoContributors = {
 		],
 	},
 	parameters: {
-		...Default.parameters,
+		...Default.input.parameters,
 		formats: getAllThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Feature,
 		}),
 	},
-} satisfies Story;
+});
 
-export const DeadBlogDesign = {
-	...Default,
+export const DeadBlogDesign = meta.story({
+	...Default.input,
 	parameters: {
-		...Default.parameters,
+		...Default.input.parameters,
 		formats: getAllThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.DeadBlog,
 		}),
 	},
-} satisfies Story;
+});
 
-export const WithNoSecondaryDateline = {
-	...Default,
+export const WithNoSecondaryDateline = meta.story({
+	...Default.input,
 	args: {
-		...Default.args,
+		...Default.input.args,
 		secondaryDateline: '',
 	},
-} satisfies Story;
+});
 
-export const VideoDesignWithSource = {
-	...Default,
+export const VideoDesignWithSource = meta.story({
+	...Default.input,
 	args: {
-		...Default.args,
+		...Default.input.args,
 		source: 'TMN',
 		byline: undefined,
 		tags: [],
 		secondaryDateline: '',
 	},
 	parameters: {
-		...Default.parameters,
+		...Default.input.parameters,
 		formats: getAllThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Video,
 		}),
 	},
-} satisfies Story;
+});
 
-export const GalleryDesign = {
+export const GalleryDesign = meta.story({
 	args: {
-		...Default.args,
+		...Default.input.args,
 		isCommentable: true,
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		shortUrlId: '/p/d8ex5',
 	},
 
 	parameters: {
-		...Default.parameters,
+		...Default.input.parameters,
 		formats: getAllThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Gallery,
@@ -362,11 +358,11 @@ export const GalleryDesign = {
 		},
 	},
 	decorators: [leftColumnDecorator],
-} satisfies Story;
+});
 
 const webArticle = enhanceArticleType(GalleryLabsFixture, 'Web');
 
-export const GalleryLabsWithBranding = {
+export const GalleryLabsWithBranding = meta.story({
 	args: {
 		branding:
 			webArticle.frontendData.commercialProperties[
@@ -396,4 +392,4 @@ export const GalleryLabsWithBranding = {
 		},
 	},
 	decorators: [leftColumnDecorator],
-} satisfies Story;
+});

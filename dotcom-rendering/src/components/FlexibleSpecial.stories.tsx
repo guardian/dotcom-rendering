@@ -81,20 +81,16 @@ const meta = {
 	},
 	args: {
 		groupedTrails: emptyGroupedTrails,
-		showAge: true,
+		hideAge: false,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		frontSectionTitle: 'Flexible special',
-		isInSlimHomepageAbTestVariant: false,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
 			title={frontSectionTitle}
 			editionId="UK"
-			showTopBorder={true}
-			slimifySectionForSlimHomepageAbTest={
-				args.isInSlimHomepageAbTestVariant
-			}
+			showTopBorder={false}
 		>
 			<FlexibleSpecial {...args} />
 		</FrontSection>
@@ -158,13 +154,6 @@ export const Five: Story = {
 			standard: trails.slice(0, 5),
 		},
 		collectionId: 1,
-	},
-};
-export const FiveSlimHomepageAbTest: Story = {
-	name: 'With one splash card and four standard cards in the Slim Homepage AB Test',
-	args: {
-		...Five.args,
-		isInSlimHomepageAbTestVariant: true,
 	},
 };
 
@@ -367,12 +356,12 @@ export const WithSpecialPaletteVariations = {
 	},
 	render: (args) => (
 		<>
-			{containerPalettes.map((containerPalette) => (
+			{containerPalettes.map((containerPalette, index) => (
 				<FrontSection
-					editionId="UK"
-					showTopBorder={true}
-					containerPalette={containerPalette}
 					key={containerPalette}
+					editionId="UK"
+					showTopBorder={index > 0}
+					containerPalette={containerPalette}
 					title={containerPalette}
 				>
 					<FlexibleSpecial

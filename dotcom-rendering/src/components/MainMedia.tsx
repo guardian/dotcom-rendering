@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, until } from '@guardian/source/foundations';
+import { breakpoints, space, until } from '@guardian/source/foundations';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -65,6 +65,12 @@ const chooseWrapper = (format: ArticleFormat) => {
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
 					return padBottom;
+				case ArticleDesign.HostedVideo:
+					return css`
+						margin: auto;
+						max-width: ${breakpoints.desktop}px;
+						height: 100%;
+					`;
 				default:
 					return noGutters;
 			}

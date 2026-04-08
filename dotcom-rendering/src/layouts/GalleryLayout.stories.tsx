@@ -35,7 +35,7 @@ const addBrandingAndAffiliateDisclaimer = (gallery: Gallery): Gallery => ({
 			...gallery.frontendData.commercialProperties,
 			UK: {
 				...gallery.frontendData.commercialProperties.UK,
-				branding: WithBranding.args.branding,
+				branding: WithBranding.input.args.branding,
 			},
 		},
 	},

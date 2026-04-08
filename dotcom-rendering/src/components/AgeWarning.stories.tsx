@@ -1,38 +1,34 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { AgeWarning } from './AgeWarning';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Age Warning',
 	component: AgeWarning,
-} satisfies Meta<typeof AgeWarning>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		age: '10 years old',
 	},
-} satisfies Story;
+});
 
-export const WithSizeSetToSmall = {
+export const WithSizeSetToSmall = meta.story({
 	args: {
 		age: '5 months old',
 		size: 'small',
 	},
-} satisfies Story;
+});
 
-export const ScreenReaderVersion = {
+export const ScreenReaderVersion = meta.story({
 	args: {
 		age: '20 million years old',
 		isScreenReader: true,
 	},
 	name: 'With Screen Reader True (invisible)',
-} satisfies Story;
+});
 
-export const WithOldTextMissingFromInput = {
+export const WithOldTextMissingFromInput = meta.story({
 	args: {
 		age: '5 years',
 	},
-} satisfies Story;
+});

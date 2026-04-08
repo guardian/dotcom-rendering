@@ -40,7 +40,6 @@ const basicCardProps: CardProps = {
 		altText: 'alt text',
 	},
 	mediaPositionOnDesktop: 'top',
-	showAge: true,
 	isExternalLink: false,
 	canPlayInline: true,
 	imageLoading: 'eager',

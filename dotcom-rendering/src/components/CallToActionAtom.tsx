@@ -6,7 +6,7 @@ import {
 	textSansBold24,
 	textSansBold28,
 } from '@guardian/source/foundations';
-import { Button, SvgExternal } from '@guardian/source/react-components';
+import { LinkButton, SvgExternal } from '@guardian/source/react-components';
 import { transparentColour } from '../lib/transparentColour';
 
 type CallToActionProps = {
@@ -14,6 +14,7 @@ type CallToActionProps = {
 	backgroundImage?: string;
 	text?: string;
 	buttonText?: string;
+	accentColor?: string;
 };
 
 const overlayMaskGradientStyles = (angle: string, startPosition: number) => {
@@ -74,7 +75,8 @@ const buttonWrapperStyles = css`
 	left: 0;
 	right: 0;
 
-	button {
+	/* We want the CTA LinkButton to take full width on smaller screens and it uses an anchor element instead of a button */
+	a {
 		width: 100%;
 
 		${from.tablet} {
@@ -116,52 +118,54 @@ export const CallToActionAtom = ({
 	backgroundImage,
 	text,
 	buttonText,
+	accentColor,
 }: CallToActionProps) => {
 	return (
-		<a
-			href={linkUrl}
+		<picture
 			css={css`
-				text-decoration: none;
+				position: relative;
+				display: flex;
 			`}
 		>
-			<picture
+			<img
+				src={backgroundImage}
+				alt={''}
 				css={css`
-					position: relative;
-					display: flex;
-				`}
-			>
-				<img
-					src={backgroundImage}
-					alt={''}
-					css={css`
-						height: 200px;
-						object-fit: cover;
-						flex-grow: 1;
+					height: 200px;
+					object-fit: cover;
+					flex-grow: 1;
 
-						${from.tablet} {
-							height: 250px;
-						}
-						${from.leftCol} {
-							height: 375px;
-						}
-					`}
-				/>
-				<div css={buttonWrapperStyles}>
-					{!!text && <h2 css={textStyles}>{text}</h2>}
-					<Button
-						iconSide="right"
-						size="small"
-						icon={<SvgExternal />}
-						theme={{
-							textPrimary: sourcePalette.neutral[7],
-							backgroundPrimary: sourcePalette.neutral[100],
-							backgroundPrimaryHover: sourcePalette.neutral[86],
-						}}
-					>
-						{buttonText}
-					</Button>
-				</div>
-			</picture>
-		</a>
+					${from.tablet} {
+						height: 250px;
+					}
+					${from.leftCol} {
+						height: 375px;
+					}
+				`}
+			/>
+			<div css={buttonWrapperStyles}>
+				{!!text && <h2 css={textStyles}>{text}</h2>}
+				<LinkButton
+					href={linkUrl}
+					iconSide="right"
+					size="small"
+					icon={<SvgExternal />}
+					theme={{
+						// We also still need to implement the dark mode based on the provided designs which should be the same as not providing an accent colour.
+						textPrimary: accentColor
+							? sourcePalette.neutral[100]
+							: sourcePalette.neutral[0],
+						backgroundPrimary:
+							accentColor ?? sourcePalette.neutral[100],
+						// This should be changed with `calculateHoverColour()` once we have the function available as DCR needs to upgrade Source to 12.1.0 to use it.
+						// Check https://github.com/guardian/csnx/blob/857116cf826dc700742f14c5a5f005bd6d39f1be/libs/%40guardian/source/CHANGELOG.md?plain=1#L20
+						backgroundPrimaryHover:
+							accentColor ?? sourcePalette.neutral[100],
+					}}
+				>
+					{buttonText ?? 'Learn more'}
+				</LinkButton>
+			</div>
+		</picture>
 	);
 };

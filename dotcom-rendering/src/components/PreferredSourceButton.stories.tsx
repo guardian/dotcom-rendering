@@ -1,18 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { PreferredSourceButton } from './PreferredSourceButton';
 
-const meta = {
+const meta = preview.meta({
 	component: PreferredSourceButton,
 	decorators: [leftColumnDecorator],
-} satisfies Meta<typeof PreferredSourceButton>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	parameters: {
 		chromatic: {
 			modes: {
@@ -20,4 +16,4 @@ export const Default = {
 			},
 		},
 	},
-} satisfies Story;
+});

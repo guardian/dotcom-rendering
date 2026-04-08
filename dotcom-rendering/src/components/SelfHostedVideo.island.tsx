@@ -9,8 +9,10 @@ import {
 	submitComponentEvent,
 } from '../client/ophan/ophan';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
+import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
@@ -19,6 +21,7 @@ import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
+	findOptimisedSourcePerMimeType,
 } from '../lib/video';
 import { palette } from '../palette';
 import type { RoleType } from '../types/content';
@@ -269,6 +272,46 @@ type Props = {
 	role?: RoleType;
 };
 
+const doesUserPermitAutoplayOnWeb = (): boolean => {
+	/**
+	 * The user indicates a preference for reduced motion: https://web.dev/articles/prefers-reduced-motion
+	 */
+	const userPrefersReducedMotion = window.matchMedia(
+		'(prefers-reduced-motion: reduce)',
+	).matches;
+
+	/**
+	 * The user can set this on their Accessibility Settings page.
+	 * Explicitly `false` when the user has said they don't want autoplay video.
+	 */
+	const autoplayPreference = storage.local.get(
+		'gu.prefs.accessibility.autoplay-video',
+	);
+
+	return !userPrefersReducedMotion && autoplayPreference !== false;
+};
+
+const doesUserPermitAutoplayOnApps = async (): Promise<boolean> => {
+	/* isAutoplayEnabled is available on the video client from 8.8.0 onwards */
+	const isBridgetCompatible = await hasMinimumBridgetVersion('8.8.0');
+
+	if (!isBridgetCompatible) return true;
+
+	try {
+		const videoClient = getVideoClient();
+		return await videoClient.isAutoplayEnabled();
+	} catch (error) {
+		if (error instanceof Error) {
+			window.guardian.modules.sentry.reportError(
+				error,
+				'self-hosted-video',
+			);
+		}
+		log('dotcom', 'Failed to set app autoplay user preference:', error);
+		return true;
+	}
+};
+
 export const SelfHostedVideo = ({
 	sources,
 	atomId,
@@ -312,6 +355,7 @@ export const SelfHostedVideo = ({
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
+	const [optimisedSources, setOptimisedSources] = useState<Source[]>(sources);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -405,34 +449,27 @@ export const SelfHostedVideo = ({
 		/>
 	);
 
-	const doesUserPermitAutoplay = (): boolean => {
-		/**
-		 * The user indicates a preference for reduced motion: https://web.dev/articles/prefers-reduced-motion
-		 */
-		const userPrefersReducedMotion = window.matchMedia(
-			'(prefers-reduced-motion: reduce)',
-		).matches;
-
-		/**
-		 * The user can set this on their Accessibility Settings page.
-		 * Explicitly `false` when the user has said they don't want autoplay video.
-		 */
-		const autoplayPreference = storage.local.get(
-			'gu.prefs.accessibility.autoplay-video',
-		);
-
-		return !userPrefersReducedMotion && autoplayPreference !== false;
-	};
-
 	/**
 	 * Setup.
 	 *
 	 * 1. Determine whether we can autoplay video.
+	 * 2. Use the best video size available for the user's screen size
 	 * 2. Initialise Ophan attention tracking.
 	 * 3. Creates event listeners to control playback when there are multiple videos.
 	 */
 	useEffect(() => {
-		setIsAutoplayAllowed(doesUserPermitAutoplay());
+		if (renderingTarget === 'Apps') {
+			void doesUserPermitAutoplayOnApps().then(setIsAutoplayAllowed);
+		} else {
+			setIsAutoplayAllowed(doesUserPermitAutoplayOnWeb());
+		}
+
+		const screenWidth = window.innerWidth;
+		const filteredSources = findOptimisedSourcePerMimeType(
+			sources,
+			screenWidth,
+		);
+		setOptimisedSources(filteredSources);
 
 		/**
 		 * Initialise Ophan attention tracking
@@ -477,7 +514,13 @@ export const SelfHostedVideo = ({
 		 */
 		const handleRestoreFromCache = (event: PageTransitionEvent) => {
 			if (event.persisted) {
-				setIsAutoplayAllowed(doesUserPermitAutoplay());
+				if (renderingTarget === 'Apps') {
+					void doesUserPermitAutoplayOnApps().then(
+						setIsAutoplayAllowed,
+					);
+				} else {
+					setIsAutoplayAllowed(doesUserPermitAutoplayOnWeb());
+				}
 				setHasPageBecomeActive(true);
 			} else {
 				setHasPageBecomeActive(false);
@@ -526,7 +569,7 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [uniqueId, atomId, renderingTarget, ophanVideoStyle]);
+	}, [uniqueId, atomId, sources, renderingTarget, ophanVideoStyle]);
 
 	/**
 	 * Track the first time the video comes into view.
@@ -857,7 +900,7 @@ export const SelfHostedVideo = ({
 					)}
 				>
 					<SelfHostedVideoPlayer
-						sources={sources}
+						sources={optimisedSources}
 						atomId={atomId}
 						uniqueId={uniqueId}
 						aspectRatio={aspectRatio}
