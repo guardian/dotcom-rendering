@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { breakpoints } from '@guardian/source/foundations';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { grid } from '../grid';
