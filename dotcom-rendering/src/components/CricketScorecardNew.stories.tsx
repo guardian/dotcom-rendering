@@ -31,7 +31,6 @@ const meta = preview.meta({
 	],
 	parameters: {
 		chromatic: {
-			viewports: [breakpoints.mobileLandscape],
 			modes: {
 				'light leftCol': allModes['light leftCol'],
 			},
