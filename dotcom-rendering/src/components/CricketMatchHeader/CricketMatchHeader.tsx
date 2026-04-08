@@ -431,7 +431,7 @@ const Score = (props: {
 		}}
 	>
 		<ScoreNumber score={props.runs} />
-		{props.fallOfWicket > 0 ? (
+		{props.fallOfWicket > 0 && props.fallOfWicket < 10 ? (
 			<>
 				{/* TODO: Convert dash to SVG? */}
 				<span
