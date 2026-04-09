@@ -241,17 +241,13 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 		(inning) => inning.battingTeam === props.team.name,
 	);
 
-	{
-		/* TODO: Calculate if team won and margin/nature of victory */
-	}
-	const teamIsWinner = false;
-	const marginOfVictory: {
-		number: number;
-		unit: 'runs' | 'wickets';
-	} = {
-		number: 4,
-		unit: 'runs',
-	};
+	/**
+	 * TODO: Determine if there is a match winner and the nature of the victory
+	 * (eg. won by x runs or x wickets). A match may have no overall winner due
+	 * to a draw or the match being abandoned.
+	 */
+	const isWinner = false;
+	const marginOfVictory = '';
 
 	return (
 		<div
@@ -326,7 +322,7 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 						Yet to bat
 					</span>
 				))}
-			{teamIsWinner && (
+			{isWinner && (
 				<div
 					css={{
 						...textSans14Object,
@@ -335,7 +331,7 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 				>
 					Won by{' '}
 					<span css={{ ...textSansBold14Object }}>
-						{marginOfVictory.number} {marginOfVictory.unit}
+						{marginOfVictory}
 					</span>
 				</div>
 			)}
