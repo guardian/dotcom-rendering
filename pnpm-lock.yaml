@@ -685,9 +685,6 @@ importers:
       dompurify:
         specifier: 3.4.17
         version: 3.4.17
-      dynamic-import-polyfill:
-        specifier: 0.1.1
-        version: 0.1.1
       eslint:
         specifier: 'catalog:'
         version: 9.39.1(supports-color@8.1.1)
@@ -4938,9 +4935,6 @@ packages:
 
   duplexer2@0.1.4:
     resolution: {integrity: sha512-asLFVfWWtJ90ZyOUHMqk7/S2w2guQKxUI2itj3d92ADHhxUSbCMGi1f1cBcJ7xM1To+pE/Khbwo1yuNbMEPKeA==}
-
-  dynamic-import-polyfill@0.1.1:
-    resolution: {integrity: sha512-m953zv0w5oDagTItWm6Auhmk/pY7EiejaqiVbnzSS3HIjh1FCUeK7WzuaVtWPNs58A+/xpIE+/dVk6pKsrua8g==}
 
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -12745,8 +12739,6 @@ snapshots:
   duplexer2@0.1.4:
     dependencies:
       readable-stream: 2.3.8
-
-  dynamic-import-polyfill@0.1.1: {}
 
   ee-first@1.1.1: {}
 
