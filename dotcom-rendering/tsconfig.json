@@ -9,6 +9,7 @@
 		"lib": ["esnext", "es2015", "dom"],
 		"moduleResolution": "bundler",
 		"noEmit": true,
+		"skipLibCheck": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedIndexedAccess": true,
 		"preserveConstEnums": true,
