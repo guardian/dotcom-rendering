@@ -355,7 +355,7 @@ export const SelfHostedVideo = ({
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
-	const [optimisedSources, setOptimisedSources] = useState<Source[]>(sources);
+	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';

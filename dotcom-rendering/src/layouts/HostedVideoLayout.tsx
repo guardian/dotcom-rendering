@@ -109,7 +109,7 @@ const shareButtonStyles = css`
 	padding: ${space[1]}px;
 `;
 
-const standfirstStyles = css`
+const standfirstAndArticleBodyStyles = css`
 	${grid.column.centre}
 	grid-row-start: 5;
 
@@ -124,16 +124,10 @@ const standfirstStyles = css`
 `;
 
 const articleBodyStyles = css`
-	${grid.column.centre}
-
-	padding-bottom: ${space[6]}px;
+	margin-bottom: ${space[6]}px;
 
 	${from.desktop} {
-		${grid.between(4, 'right-column-end')}
-	}
-
-	${from.leftCol} {
-		${grid.column.centre}
+		margin-bottom: ${space[10]}px;
 	}
 `;
 
@@ -279,51 +273,53 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 						/>
 					</div>
 
-					<div css={standfirstStyles}>
+					<div css={standfirstAndArticleBodyStyles}>
 						<Standfirst
 							format={format}
 							standfirst={frontendData.standfirst}
 						/>
-					</div>
 
-					<div css={articleBodyStyles}>
-						<ArticleContainer format={format}>
-							<ArticleBody
-								format={format}
-								blocks={blocks}
-								editionId={frontendData.editionId}
-								host={frontendData.config.host}
-								pageId={frontendData.pageId}
-								webTitle={frontendData.webTitle}
-								ajaxUrl={frontendData.config.ajaxUrl}
-								isAdFreeUser={frontendData.isAdFreeUser}
-								switches={frontendData.config.switches}
-								sectionId={frontendData.config.section}
-								shouldHideReaderRevenue={
-									frontendData.shouldHideReaderRevenue
-								}
-								tags={frontendData.tags}
-								isPaidContent={
-									!!frontendData.config.isPaidContent
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								contentType={frontendData.contentType}
-								idUrl={frontendData.config.idUrl ?? ''}
-								isSensitive={frontendData.config.isSensitive}
-								isDev={!!frontendData.config.isDev}
-								keywordIds={frontendData.config.keywordIds}
-								abTests={frontendData.config.abTests}
-								shouldHideAds={frontendData.shouldHideAds}
-								lang={frontendData.lang}
-								isRightToLeftLang={
-									frontendData.isRightToLeftLang
-								}
-								accentColor={branding?.hostedCampaignColour}
-							/>
-							<HostedContentDisclaimer />
-						</ArticleContainer>
+						<div css={articleBodyStyles}>
+							<ArticleContainer format={format}>
+								<ArticleBody
+									format={format}
+									blocks={blocks}
+									editionId={frontendData.editionId}
+									host={frontendData.config.host}
+									pageId={frontendData.pageId}
+									webTitle={frontendData.webTitle}
+									ajaxUrl={frontendData.config.ajaxUrl}
+									isAdFreeUser={frontendData.isAdFreeUser}
+									switches={frontendData.config.switches}
+									sectionId={frontendData.config.section}
+									shouldHideReaderRevenue={
+										frontendData.shouldHideReaderRevenue
+									}
+									tags={frontendData.tags}
+									isPaidContent={
+										!!frontendData.config.isPaidContent
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									contentType={frontendData.contentType}
+									idUrl={frontendData.config.idUrl ?? ''}
+									isSensitive={
+										frontendData.config.isSensitive
+									}
+									isDev={!!frontendData.config.isDev}
+									keywordIds={frontendData.config.keywordIds}
+									abTests={frontendData.config.abTests}
+									shouldHideAds={frontendData.shouldHideAds}
+									lang={frontendData.lang}
+									isRightToLeftLang={
+										frontendData.isRightToLeftLang
+									}
+									accentColor={branding?.hostedCampaignColour}
+								/>
+								<HostedContentDisclaimer />
+							</ArticleContainer>
+						</div>
 					</div>
 
 					<div css={onwardContentStyles}>
