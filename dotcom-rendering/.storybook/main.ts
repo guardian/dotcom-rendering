@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import process from 'node:process';
@@ -12,6 +13,17 @@ const {
 	transpileExclude,
 	getLoaders,
 } = require('../webpack/webpack.config.client.js');
+=======
+import { defineMain } from '@storybook/react-vite/node';
+import path from 'node:path';
+import process from 'node:process';
+import { saveStories } from '../scripts/gen-stories/get-stories.mjs';
+import type { StorybookConfig } from '@storybook/react-vite';
+import svgr from 'vite-plugin-svgr';
+
+// ESM equivalent of __dirname
+const __dirname = import.meta.dirname;
+>>>>>>> 1dfe0367f7 (Migrate Storybook to Vite, remove webpack config and dependencies)
 
 // Generate dynamic Card and Layout stories
 saveStories();
@@ -36,12 +48,9 @@ export default defineMain({
 		{ from: '../src/static', to: '/static/frontend/' },
 	],
 
-	addons: [
-		'@storybook/addon-webpack5-compiler-swc',
-		'@storybook/addon-docs',
-		'@storybook/addon-a11y',
-	],
+	addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],
 
+<<<<<<< HEAD
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
 		const newConfig = webpackConfig(config);
@@ -72,6 +81,49 @@ export default defineMain({
 			}),
 		);
 		return newConfig;
+=======
+	viteFinal: async (config) => {
+		config.plugins ??= [];
+		config.plugins.push(
+			svgr({
+				svgrOptions: { svgo: false },
+			}),
+		);
+
+		config.define ??= {};
+		config.define['process.env'] = JSON.stringify({
+			SDC_URL: process.env.SDC_URL,
+			HOSTNAME: process.env.HOSTNAME,
+		});
+
+		config.resolve ??= {};
+		config.resolve.alias = {
+			...config.resolve.alias,
+
+			Buffer: 'buffer',
+			react: 'react',
+			'react-dom': 'react-dom',
+
+			// Mock JSDOM for storybook - it relies on native node.js packages
+			jsdom$: path.resolve(__dirname, './mocks/jsdom.ts'),
+
+			// log4js tries to call "fs" in storybook -- we can ignore it
+			[`${path.resolve(__dirname, '../src/server/lib/logging')}$`]:
+				path.resolve(__dirname, './mocks/log4js.ts'),
+
+			// Mock BridgetApi for storybook
+			[`${path.resolve(__dirname, '../src/lib/bridgetApi')}$`]:
+				path.resolve(__dirname, './mocks/bridgetApi.ts'),
+
+			// Mock identity auth frontend to prevent Storybook components from hanging in Pending
+			'@guardian/identity-auth-frontend': path.resolve(
+				__dirname,
+				'./mocks/identityAuthFrontend.ts',
+			),
+		};
+
+		return config;
+>>>>>>> 1dfe0367f7 (Migrate Storybook to Vite, remove webpack config and dependencies)
 	},
 
 	env: (config) => ({
@@ -85,7 +137,7 @@ export default defineMain({
 	},
 
 	framework: {
-		name: '@storybook/react-webpack5',
+		name: '@storybook/react-vite',
 		options: {},
 	},
 
@@ -93,6 +145,7 @@ export default defineMain({
 		reactDocgen: 'react-docgen',
 	},
 });
+<<<<<<< HEAD
 
 /** the webpack.Configuration type from Storybook */
 type Configuration = Parameters<
@@ -158,3 +211,5 @@ const webpackConfig = (config: Configuration) => {
 
 	return config;
 };
+=======
+>>>>>>> 1dfe0367f7 (Migrate Storybook to Vite, remove webpack config and dependencies)
