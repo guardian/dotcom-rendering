@@ -5,21 +5,21 @@
 > **Backend Asana task:** [Backend task](https://app.asana.com/0/0/1213430985786431)  
 > **Connection Asana task:** [Connection task](https://app.asana.com/0/0/1213430985786437)
 
-## Status snapshot (as of 2026-04-07)
+## Status snapshot (as of 2026-04-09)
 
-| Repo                           | Status                                                                                                         |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| `dotcom-rendering` (this repo) | ✅ [PR open](https://github.com/guardian/dotcom-rendering/pull/15581) - PR description written, pending review |
-| `frontend` (Scala)             | ⏳ Needs switch + URL injection                                                                                |
-| `csnx` (`@guardian/libs`)      | ✅ [PR #2347 merged](https://github.com/guardian/csnx/pull/2347) — `@guardian/libs` bumped to 31.0.0 in DCR    |
-| backend (`mparticle-api`)      | ⏳ Draft - needs deployment to CODE                                                                            |
+| Repo                           | Status                                                                                                                                  |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `dotcom-rendering` (this repo) | ✅ [PR open](https://github.com/guardian/dotcom-rendering/pull/15581) — updated for all-users scope, fingerprint cookies, optional auth |
+| `frontend` (Scala)             | ⏳ Needs switch + URL injection (new hostname: `mparticle-consent.guardianapis.com`)                                                    |
+| `csnx` (`@guardian/libs`)      | ✅ [PR #2347 merged](https://github.com/guardian/csnx/pull/2347) — `@guardian/libs` bumped to 31.0.0 in DCR                             |
+| backend (`mparticle-api`)      | ⏳ Draft - needs deployment to CODE; dedicated lambda planned for `mparticle-consent.guardianapis.com`                                  |
 
 ## Tasks
 
 ### 1. Open the DCR pull request
 
 -   [x] **Status:** PR opened - https://github.com/guardian/dotcom-rendering/pull/15581
--   [x] **PR description:** Written — code is final, all tests pass, description includes flow diagrams and links to design + tracking docs
+-   [x] **PR description:** Written — code is final, all 12 tests pass, description includes flow diagrams and links to design + tracking docs
 
 **Files changed in this branch:**
 
@@ -31,7 +31,7 @@
 | Created  | [src/client/mparticle/mparticle-consent.test.ts](../src/client/mparticle/mparticle-consent.test.ts)                 |
 | Modified | [src/client/main.web.ts](../src/client/main.web.ts) - startup entry, switch-gated                                   |
 | Modified | [src/model/guardian.ts](../src/model/guardian.ts) - `mparticleApiUrl?: string` in `config.page`                     |
-| Modified | [fixtures/config.js](../fixtures/config.js) - `mparticleApiUrl: 'https://mparticle-api.support.guardianapis.com'`   |
+| Modified | [fixtures/config.js](../fixtures/config.js) - `mparticleApiUrl: 'https://mparticle-consent.guardianapis.com'`       |
 
 **Why it's safe to merge before other tasks:** The feature is entirely gated behind `window.guardian.config.switches.mparticleConsentSync`. That switch is not currently sent by the backend, so the block in `main.web.ts` is never entered on any real environment. There is zero risk of the feature running before everything else is ready.
 
@@ -136,16 +136,16 @@ mparticleApiUrl?: string;
 
 **URLs by environment:**
 
-| Environment | URL                                                   |
-| ----------- | ----------------------------------------------------- |
-| PROD        | `https://mparticle-api.support.guardianapis.com`      |
-| CODE        | `https://mparticle-api-code.support.guardianapis.com` |
+| Environment | URL                                               |
+| ----------- | ------------------------------------------------- |
+| PROD        | `https://mparticle-consent.guardianapis.com`      |
+| CODE        | `https://mparticle-consent-code.guardianapis.com` |
 
 The local dev fixture already has the PROD URL hardcoded for development purposes:
 
 ```js
 // fixtures/config.js
-mparticleApiUrl: 'https://mparticle-api.support.guardianapis.com',
+mparticleApiUrl: 'https://mparticle-consent.guardianapis.com',
 ```
 
 ### 6. Deploy the backend endpoint to CODE
@@ -185,28 +185,27 @@ mparticleApiUrl: 'https://mparticle-api.support.guardianapis.com',
 mparticleConsentSync: true,
 ```
 
-2. Override the URL to point at CODE (or leave as PROD if CODE isn't available):
+2. Override the URL to point at CODE:
 
 ```js
 // fixtures/config-overrides.js
-mparticleApiUrl: 'https://mparticle-api-code.support.guardianapis.com',
+mparticleApiUrl: 'https://mparticle-consent-code.guardianapis.com',
 ```
 
 3. Start the dev server, open a page, open DevTools → Network tab, filter by `consents`.
 
-4. Sign in with a Guardian account that has a `bwid` cookie.
+4. On first page load you should see a `PATCH /consents/<bwid>` request with:
 
-5. On first page load you should see a `PATCH /consents/<bwid>` request with:
+    - For anonymous users: no `Authorization` header, body `{ "consented": true/false, "pageViewId": "..." }`, response `200`
+    - For signed-in users: `Authorization: Bearer <token>` header, same body, response `200`
 
-    - `Authorization: Bearer <token>` header
-    - Body: `{ "consented": true/false, "pageViewId": "..." }`
-    - Response: `200`
+5. Reload the page — the request should **not** fire again (`gu_mparticle_last_synced` fingerprint matches).
 
-6. Reload the page within 30 minutes - the request should **not** fire again (staleness cookie `gu_mparticle_consent_synced` suppresses it).
+6. Delete the `gu_mparticle_last_synced` cookie and reload — the request **should** fire again.
 
-7. Delete the `gu_mparticle_consent_synced` cookie and reload - the request **should** fire again.
+7. Delete `gu_mparticle_last_synced`. Sign in (while consent is already set). On the next page load the fingerprint changes from `anonymous:…` to `signed-in:…` — the request fires again, this time with a Bearer token.
 
-8. Open the Sourcepoint privacy modal, change a consent setting, close - the request **should** fire again (cookie is renewed each sync).
+8. Open the Sourcepoint privacy modal, change a consent setting, close — the request **should** fire again (fingerprint changes).
 
 Full manual testing guide also in the [main design doc](./mparticle-paid-media-integration.md).
 
@@ -242,9 +241,11 @@ Also delete the two TODO comments above it.
 
 If you are resuming this work from scratch, here is the minimal context:
 
--   **What was built:** A new client-side module (`src/client/mparticle/`) that hooks into the existing `onConsentChange` pub/sub from `@guardian/libs`. When a signed-in user's GDPR consent state is read, it calls `PATCH <mparticleApiUrl>/consents/<browserId>` with a Bearer-authed fetch to notify the backend. A staleness cookie (`gu_mparticle_consent_synced`, 30 min TTL) prevents hammering.
--   **The code is complete and all tests pass.** The only thing preventing it from running in production is that `switches.mparticleConsentSync` is not yet emitted by the Scala frontend (tasks 3 and 4).
--   **The main design doc is at:** [docs/mparticle-paid-media-integration.md](./mparticle-paid-media-integration.md) - it contains architecture diagrams, flow diagrams, the full test specification, VendorIDs explanation, and a manual testing guide.
+-   **What was built:** A new client-side module (`src/client/mparticle/`) that hooks into the existing `onConsentChange` pub/sub from `@guardian/libs`. When any user's GDPR consent state is read (anonymous or signed-in), it calls `PATCH <mparticleApiUrl>/consents/<browserId>`. If the user is signed in, a Bearer token is also attached so the backend can immediately link the record to the user's `identity_id`. For anonymous users, the consent is recorded against `bwid` for overnight identity resolution in the data lake.
+-   **Rate-limiting approach:** Instead of a time-based TTL, a **fingerprint cookie** (`gu_mparticle_last_synced`, persistent 1 year) stores the last successfully PATCHed state as a string like `"anonymous:false"` or `"signed-in:true"`. A call is only made when the current state differs from the stored fingerprint. A second session-scoped cookie (`gu_mparticle_session_attempted`) caps retries to once per session on API failure.
+-   **The code is complete and all 12 tests pass.** The only thing preventing it from running in production is that `switches.mparticleConsentSync` is not yet emitted by the Scala frontend (tasks 4 and 5).
+-   **The main design doc is at:** [docs/mparticle-paid-media-integration.md](./mparticle-paid-media-integration.md) — it contains architecture diagrams, flow diagrams, the full test specification, VendorIDs explanation, and a manual testing guide.
 -   **Key files to read first:** [src/client/mparticle/mparticle-consent.ts](../src/client/mparticle/mparticle-consent.ts), [src/client/mparticle/mparticleConsentApi.ts](../src/client/mparticle/mparticleConsentApi.ts), [src/client/mparticle/cookies/mparticleConsentSynced.ts](../src/client/mparticle/cookies/mparticleConsentSynced.ts).
 -   **Temporary workaround resolved:** The `as VendorName` cast has been removed. `@guardian/libs` is now at 31.0.0 with `mparticle` in `VendorIDs`. `getConsentFor('mparticle', state)` is now runtime-safe.
 -   **Known backend bug (not frontend):** `getNow().getMilliseconds()` should be `getNow().getTime()` in `consentsUpdateHandler.ts`.
+-   **New hostname agreed:** `mparticle-consent.guardianapis.com` (dedicated lambda for consent writes, separate from other mparticle-api routes).

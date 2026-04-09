@@ -7,7 +7,7 @@
 
 MRR (Marketing Reader Revenue) want to connect mParticle to Meta (Facebook Ads) and Google Ads audiences. To legally send user data to those platforms, mParticle must hold a record of the user's current consent state under GDPR.
 
-The browser is the source of truth for consent (via Sourcepoint / our CMP). When a **signed-in user**'s consent state is relevant to the paid-media use-case (i.e. on sign-in, on new session, or when they change their consent), dotcom-rendering must call a new backend endpoint so that mParticle can be updated with the current browser-consent record.
+The browser is the source of truth for consent (via Sourcepoint / our CMP). When a user's consent state is relevant to the paid-media use-case (i.e. on a new session or when they change their consent), dotcom-rendering must call a new backend endpoint so that mParticle can be updated with the current browser-consent record. The call is made for **all users** (both anonymous and signed-in) so that mParticle can use the `bwid` browser ID for identity resolution in the data lake. When the user is signed in, a Bearer token is also included so the backend can immediately link the record to the user's `identity_id`.
 
 ## Why dotcom-rendering?
 
@@ -100,20 +100,25 @@ flowchart TD
 
     REG --> CB["callback(state) fires"]
 
-    CB --> STALE{"mparticleConsentNeedsSync()\nchecks gu_mparticle_consent_synced cookie\n(30-min TTL, value = expiry timestamp)"}
-    STALE -- "Cookie fresh → skip" --> NOOP["↩ return — no API call"]
-    STALE -- "Cookie absent/expired" --> AUTHCHECK["getAuthStatus()"]
+    CB --> BWID{"getCookie('bwid')\n(browser ID)"}
+    BWID -- "No cookie" --> NOOP["↩ return — no API call"]
+    BWID -- "Has bwid" --> AUTH["getAuthStatus()\n→ SignedIn | SignedOut"]
 
-    AUTHCHECK -- "SignedOut" --> NOOP2["↩ return — no API call"]
-    AUTHCHECK -- "SignedIn" --> BWID["getCookie('bwid')\n(browser ID from bwid cookie)"]
+    AUTH --> FP["buildFingerprint(consented, isSignedIn)\ne.g. 'signed-in:true' or 'anonymous:false'"]
 
-    BWID -- "No cookie" --> NOOP3["↩ return — no API call"]
-    BWID -- "Has bwid" --> CONSENT["getConsentFor('mparticle', state)\n→ boolean"]
+    FP --> STALE{"mparticleConsentNeedsSync()\nchecks gu_mparticle_last_synced\n(fingerprint of last successful PATCH)"}
+    STALE -- "Fingerprint matches → skip" --> NOOP2["↩ return — no API call"]
+    STALE -- "Fingerprint differs" --> SESSION{"sessionAttemptExists()\nchecks gu_mparticle_session_attempted"}
 
-    CONSENT --> API["mparticleConsentApi.ts\nPATCH mparticle-api.support.guardianapis.com\n/consents/{browserId}\n{ consented, pageViewId }\nAuthorization: Bearer …"]
+    SESSION -- "Already attempted this session → skip" --> NOOP3["↩ return — no API call"]
+    SESSION -- "No attempt yet" --> MARK_ATTEMPT["markSessionAttempt(fingerprint)\nsets gu_mparticle_session_attempted\n(session cookie)"]
 
-    API -- "ok" --> MARK["markMparticleConsentSynced()\nsets gu_mparticle_consent_synced\n(30-min TTL)"]
-    API -- "!ok" --> ERR["throw Error\n→ surfaces in Sentry"]
+    MARK_ATTEMPT --> CONSENT["getConsentFor('mparticle', state)\n→ boolean"]
+
+    CONSENT --> API["mparticleConsentApi.ts\nPATCH mparticle-consent.guardianapis.com\n/consents/{browserId}\n{ consented, pageViewId }\nAuthorization: Bearer … (signed-in only)"]
+
+    API -- "ok" --> MARK["markMparticleConsentSynced(consented, isSignedIn)\nsets gu_mparticle_last_synced\n(persistent, 1 year)"]
+    API -- "!ok" --> ERR["throw Error\n→ surfaces in Sentry\n(gu_mparticle_last_synced not updated\n→ will retry next session)"]
 ```
 
 ---
@@ -151,16 +156,16 @@ sequenceDiagram
     BAPI-->>UF: { benefits: […] }
     UF->>UF: set benefit cookies
 
-    MP->>MP: needsSync? signed in? has bwid?
-    MP->>MPAPI: PATCH /consents/{bwid} (Bearer token)
+    MP->>MP: has bwid? fingerprint changed? session attempt exists?
+    MP->>MPAPI: PATCH /consents/{bwid} (Bearer token if signed in)
     MPAPI-->>MP: 200 OK
-    MP->>MP: set gu_mparticle_consent_synced cookie
+    MP->>MP: set gu_mparticle_last_synced (fingerprint)
 
     Note over SP: Later: user opens privacy modal<br/>and changes consent
 
     SP-->>Libs: onConsentChange fires again
     Libs-->>MP: callback(newConsentState)
-    Note over MP: Staleness cookie cleared/expired?<br/>If yes → fires PATCH again
+    Note over MP: Fingerprint changed?<br/>If yes → fires PATCH again
 ```
 
 ---
@@ -189,19 +194,20 @@ The backend uses the **`identity_id` from the Bearer token JWT** (not the browse
 
 The frontend is **only** responsible for:
 
-1. Detecting the right moment to call the API (sign-in, new session, or consent change for a signed-in user).
+1. Detecting the right moment to call the API (new session, consent change, or auth-state change).
 2. Reading the current consent state for the specific purpose needed.
 3. Reading the `bwid` cookie (browser ID) and the `pageViewId`.
 4. Calling `PATCH /consents/{browserId}` on the new backend endpoint with the appropriate payload.
+5. Attaching the Bearer token when the user is signed in (but proceeding without it for anonymous users).
 
 The frontend does **not** write to mParticle directly. That is the backend's responsibility.
 
 ## API contract (Frontend → Backend)
 
 ```
-PATCH https://mparticle-api.support.guardianapis.com/consents/{browserId}
-Authorization: Bearer <access-token>
-X-GU-IS-OAUTH: true
+PATCH https://mparticle-consent.guardianapis.com/consents/{browserId}
+Authorization: Bearer <access-token>   ← only present for signed-in users
+X-GU-IS-OAUTH: true                    ← only present for signed-in users
 Content-Type: application/json
 
 {
@@ -214,33 +220,48 @@ Content-Type: application/json
 -   `consented` – boolean reflecting whether the user has consented to the relevant GDPR purpose.
 -   `pageViewId` – taken from `window.guardian.config.ophan.pageViewId`. Useful as an audit trail / evidence of the user's choice.
 
-Authentication follows the same pattern as `userBenefitsApi`: attach `Authorization: Bearer <access_token>` and `X-GU-IS-OAUTH: true` from `getOptionsHeaders(signedInAuthStatus)` in [`lib/identity.ts`](../src/lib/identity.ts).
+Authentication is **optional**. When the user is signed in, `Authorization: Bearer <access_token>` and `X-GU-IS-OAUTH: true` are attached (via `getOptionsHeaders` in [`lib/identity.ts`](../src/lib/identity.ts)), allowing the backend to immediately link the record to the user's `identity_id`. For anonymous users, the headers are omitted and the backend records the consent against the `bwid` alone for later identity resolution.
 
 ## When to call the API
 
-The spec says: **when a user signs in**, **when a signed-in user starts a new session**, or **when a signed-in user changes their consents**.
+The spec says: **when a user starts a new session**, **when they change their consent**, or **when their auth state changes** (e.g. they sign in while already having a consent value stored).
 
 Practically, the cleanest mapping onto the existing architecture is:
 
-| Trigger                     | Mechanism                                                                                                                      |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| User signs in / new session | Already handled by the `userFeatures` refresh gate. Mirror the same "needs refreshing?" staleness-cookie approach (see below). |
-| Consent changes             | `onConsentChange` callback from `@guardian/libs`, but _only_ when the user is signed in.                                       |
+| Trigger                            | Mechanism                                                                                                                                      |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| New session / first visit          | `gu_mparticle_last_synced` is absent or holds a different fingerprint → fires                                                                  |
+| Consent changes                    | `onConsentChange` fires again with new state → fingerprint changes → fires                                                                     |
+| User signs in (same consent value) | Auth state changes from anonymous → signed-in → fingerprint changes (e.g. `"anonymous:false"` → `"signed-in:false"`) → fires with Bearer token |
 
 ### Avoiding API hammering
 
 `onConsentChange` fires **every time** consent is read from the browser (i.e. on every page view), not only when the user actively changes something. Calling the mParticle API on every page view would overwhelm the endpoint.
 
-The solution (mirroring `userBenefitsApi`) is a **staleness cookie**:
+The solution is a **fingerprint-based dual-cookie approach** that fires only when the state has genuinely changed:
 
--   After a successful call, set a short-lived cookie (e.g. `gu_mparticle_consent_synced`, expiry ~30 minutes or per-session).
--   On `onConsentChange`, only make the API call if:
-    1. The user is signed in (`isUserLoggedIn()`), AND
-    2. The staleness cookie is absent (i.e. this is a new session / first visit since sign-in / consent update).
+#### `gu_mparticle_last_synced` (persistent, 1-year TTL)
 
-For genuine in-session consent _changes_ (user opens the privacy modal and toggles), the CMP emits a second `onConsentChange` call after the new choice is saved. We can distinguish this from the initial page-load read by comparing the consent state to what was stored at the last sync (or simply by clearing the staleness cookie when the CMP modal is dismissed with a new choice – the CMP already emits a different event for this, if needed).
+Stores the fingerprint of the last **successful** PATCH. The fingerprint encodes both the consent value and whether the user was signed in at the time:
 
-The simplest acceptable implementation: use the same cookie-expiry approach as `userBenefitsDataNeedsRefreshing()`, with a short TTL so it re-syncs at least once per session.
+```
+"signed-in:true"   // signed-in user who consented
+"signed-in:false"  // signed-in user who rejected
+"anonymous:true"   // anonymous user who consented
+"anonymous:false"  // anonymous user who rejected
+```
+
+On `onConsentChange`, the current fingerprint is computed and compared. If it matches the stored value, no call is made. This means:
+
+-   Reloading the same page with the same consent and same auth state → **skipped**
+-   Changing consent → new fingerprint → **fires**
+-   Signing in with the same consent value → auth state in fingerprint changes → **fires** (with Bearer token, allowing the backend to link the record to `identity_id` immediately)
+
+#### `gu_mparticle_session_attempted` (session cookie, no TTL)
+
+Stores the fingerprint of the most recent PATCH **attempt** in the current browser session. This exists solely to cap retries on failure: if a PATCH fails, `gu_mparticle_last_synced` is not updated (so the state looks "unsynced") but the session-attempt cookie prevents a retry on every subsequent page load. The retry happens on the next browser session.
+
+The attempt cookie is written **before** the network call so that a mid-flight page unload does not leave the next load unaware that a call was in progress.
 
 ## Which consent to send
 
@@ -290,10 +311,10 @@ This keeps TypeScript happy temporarily, but the cast must be removed once `mpar
 Create `src/client/mparticle/mparticleConsentApi.ts` (analogous to `userBenefitsApi.ts`):
 
 ```ts
-import { getOptionsHeaders, type SignedIn } from '../../lib/identity';
+import { getOptionsHeaders, type AuthStatus } from '../../lib/identity';
 
 export const syncConsentToMparticle = async (
-	signedInAuthStatus: SignedIn,
+	authStatus: AuthStatus,
 	browserId: string,
 	consented: boolean,
 	pageViewId: string,
@@ -302,12 +323,19 @@ export const syncConsentToMparticle = async (
 	if (!baseUrl) throw new Error('mparticleApiUrl is not defined');
 
 	const url = `${baseUrl}/consents/${encodeURIComponent(browserId)}`;
+
+	// Attach Bearer token when available; anonymous calls are permitted without auth
+	const authHeaders =
+		authStatus.kind === 'SignedIn'
+			? getOptionsHeaders(authStatus).headers
+			: {};
+
 	const response = await fetch(url, {
 		method: 'PATCH',
 		mode: 'cors',
 		headers: {
 			'Content-Type': 'application/json',
-			...getOptionsHeaders(signedInAuthStatus).headers,
+			...authHeaders,
 		},
 		body: JSON.stringify({ consented, pageViewId }),
 	});
@@ -320,73 +348,107 @@ export const syncConsentToMparticle = async (
 };
 ```
 
-### 2. Staleness cookie
+### 2. Fingerprint cookies
 
 Create `src/client/mparticle/cookies/mparticleConsentSynced.ts`:
 
 ```ts
 import { getCookie, setCookie } from '@guardian/libs';
 
-export const MPARTICLE_CONSENT_SYNCED_COOKIE = 'gu_mparticle_consent_synced';
+// Persistent cookie (1 year): stores the fingerprint of the last *successful* PATCH.
+// Format: "signed-in:{true|false}" or "anonymous:{true|false}"
+export const MPARTICLE_LAST_SYNCED_COOKIE = 'gu_mparticle_last_synced';
 
-// Re-sync at most once per 30 minutes
-const EXPIRY_MINUTES = 30;
-const EXPIRY_DAYS = EXPIRY_MINUTES / (60 * 24);
+// Session cookie (no TTL): records that we already attempted a PATCH for this fingerprint
+// in the current session, so failed calls are retried at most once per session.
+export const MPARTICLE_SESSION_ATTEMPTED_COOKIE =
+	'gu_mparticle_session_attempted';
 
-export const mparticleConsentNeedsSync = (): boolean => {
-	const cookieValue = getCookie({ name: MPARTICLE_CONSENT_SYNCED_COOKIE });
-	if (!cookieValue) return true;
-	const expiryTime = parseInt(cookieValue, 10);
-	return Date.now() >= expiryTime;
+export const buildFingerprint = (
+	consented: boolean,
+	isSignedIn: boolean,
+): string => `${isSignedIn ? 'signed-in' : 'anonymous'}:${consented}`;
+
+export const mparticleConsentNeedsSync = (
+	consented: boolean,
+	isSignedIn: boolean,
+): boolean => {
+	const lastSynced = getCookie({ name: MPARTICLE_LAST_SYNCED_COOKIE });
+	return lastSynced !== buildFingerprint(consented, isSignedIn);
 };
 
-export const markMparticleConsentSynced = (): void => {
-	const expiryMs = Date.now() + EXPIRY_MINUTES * 60 * 1000;
+export const sessionAttemptExists = (fingerprint: string): boolean =>
+	getCookie({ name: MPARTICLE_SESSION_ATTEMPTED_COOKIE }) === fingerprint;
+
+export const markSessionAttempt = (fingerprint: string): void => {
 	setCookie({
-		name: MPARTICLE_CONSENT_SYNCED_COOKIE,
-		value: String(expiryMs),
-		daysToLive: EXPIRY_DAYS,
+		name: MPARTICLE_SESSION_ATTEMPTED_COOKIE,
+		value: fingerprint,
+		// No daysToLive → session cookie; cleared when the browser tab closes
+	});
+};
+
+export const markMparticleConsentSynced = (
+	consented: boolean,
+	isSignedIn: boolean,
+): void => {
+	setCookie({
+		name: MPARTICLE_LAST_SYNCED_COOKIE,
+		value: buildFingerprint(consented, isSignedIn),
+		daysToLive: 365,
 	});
 };
 ```
-
-Note: the cookie stores the expiry timestamp as its value and checks `Date.now() >= expiryTime` rather than relying solely on cookie presence. This is consistent with the `userBenefitsExpiry` pattern and works correctly in environments where sub-day cookie expiry is unreliable (e.g. JSDOM in tests).
 
 ### 3. Orchestration module
 
 Create `src/client/mparticle/mparticle-consent.ts`:
 
 ```ts
-import { onConsentChange, getConsentFor, getCookie } from '@guardian/libs';
+import { getConsentFor, getCookie, onConsentChange } from '@guardian/libs';
+import type { VendorName } from '@guardian/libs';
 import { getAuthStatus } from '../../lib/identity';
-import { syncConsentToMparticle } from './mparticleConsentApi';
 import {
-	mparticleConsentNeedsSync,
+	buildFingerprint,
 	markMparticleConsentSynced,
+	markSessionAttempt,
+	mparticleConsentNeedsSync,
+	sessionAttemptExists,
 } from './cookies/mparticleConsentSynced';
+import { syncConsentToMparticle } from './mparticleConsentApi';
 
-const MPARTICLE_CONSENT_PURPOSE = 'TODO_CONFIRM_PURPOSE_NAME';
+export const MPARTICLE_CONSENT_PURPOSE: VendorName = 'mparticle';
 
 export const syncMparticleConsent = (): void => {
 	onConsentChange(async (state) => {
-		if (!mparticleConsentNeedsSync()) return;
-
-		const authStatus = await getAuthStatus();
-		if (authStatus.kind !== 'SignedIn') return;
-
+		// Fail fast: bwid is always required, available for all users
 		const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 		if (!browserId) return;
 
-		const pageViewId = window.guardian.config.ophan.pageViewId;
+		const authStatus = await getAuthStatus();
+		const isSignedIn = authStatus.kind === 'SignedIn';
 		const consented = getConsentFor(MPARTICLE_CONSENT_PURPOSE, state);
+		const fingerprint = buildFingerprint(consented, isSignedIn);
 
+		// Skip if the last successful PATCH recorded the same state
+		if (!mparticleConsentNeedsSync(consented, isSignedIn)) return;
+
+		// Skip if we already attempted this fingerprint in the current session
+		if (sessionAttemptExists(fingerprint)) return;
+
+		// Record the attempt before the network call
+		markSessionAttempt(fingerprint);
+
+		const pageViewId = window.guardian.config.ophan.pageViewId;
 		await syncConsentToMparticle(
 			authStatus,
 			browserId,
 			consented,
 			pageViewId,
 		);
-		markMparticleConsentSynced();
+
+		// Only written on success
+		markMparticleConsentSynced(consented, isSignedIn);
 	});
 };
 ```
@@ -422,15 +484,15 @@ The property is carried through `unknownConfig` in `createGuardian` (the same pa
 
 Expected values by environment:
 
-| Environment | Value                                                 |
-| ----------- | ----------------------------------------------------- |
-| PROD        | `https://mparticle-api.support.guardianapis.com`      |
-| CODE        | `https://mparticle-api-code.support.guardianapis.com` |
+| Environment | Value                                             |
+| ----------- | ------------------------------------------------- |
+| PROD        | `https://mparticle-consent.guardianapis.com`      |
+| CODE        | `https://mparticle-consent-code.guardianapis.com` |
 
 For local development, the value is already set in [`fixtures/config.js`](../fixtures/config.js):
 
 ```js
-mparticleApiUrl: 'https://mparticle-api.support.guardianapis.com',
+mparticleApiUrl: 'https://mparticle-consent.guardianapis.com',
 ```
 
 This fixture config is used by the local dev server and Storybook. It uses the PROD URL, consistent with all other API URLs in that file (`idapi.theguardian.com`, `discussion.theguardian.com`, etc.).
@@ -455,7 +517,7 @@ This allows the feature to be toggled via the existing switch infrastructure wit
 | **Create** | `src/client/mparticle/cookies/mparticleConsentSynced.ts`                                         |
 | **Create** | `src/client/mparticle/mparticle-consent.ts`                                                      |
 | **Create** | `src/client/mparticle/mparticle-consent.test.ts`                                                 |
-| **Modify** | `src/client/main.web.ts` – add startup entry                                                     |
+| **Modify** | `src/client/main.web.ts` – add startup entry, switch-gated                                       |
 | **Modify** | `src/model/guardian.ts` – add `mparticleApiUrl` to `config.page`                                 |
 | **Modify** | `src/types/config.ts` – add `mparticleConsentSync` switch (optional, or rely on index signature) |
 
@@ -468,20 +530,24 @@ Mock boundaries:
 -   `@guardian/libs` — `onConsentChange`, `getConsentFor`, `getCookie` all mocked individually. `onConsentChange` captures its callback so tests can invoke it directly.
 -   `../../lib/identity` — `getAuthStatus` mocked
 -   `./mparticleConsentApi` — `syncConsentToMparticle` mocked
--   `./cookies/mparticleConsentSynced` — `mparticleConsentNeedsSync`, `markMparticleConsentSynced` mocked
+-   `./cookies/mparticleConsentSynced` — `buildFingerprint`, `mparticleConsentNeedsSync`, `sessionAttemptExists`, `markSessionAttempt`, `markMparticleConsentSynced` all mocked
 
 Use `jest.clearAllMocks()` (not `jest.resetAllMocks()`) in `beforeEach`. `clearAllMocks` resets call history and per-test return values but preserves the mock factory implementations supplied to `jest.mock()` — which is required for the `onConsentChange` callback capture to keep working across tests.
 
 Test cases:
 
--   When user is signed out → `syncConsentToMparticle` not called
--   When `mparticleConsentNeedsSync()` returns false → `syncConsentToMparticle` not called
 -   When `bwid` cookie is absent → `syncConsentToMparticle` not called
--   When signed in, needs sync, bwid present → `syncConsentToMparticle` called with correct `SignedIn` auth status, `browserId`, `consented: true`, and `pageViewId`
+-   When `mparticleConsentNeedsSync()` returns false → `syncConsentToMparticle` not called
+-   When `sessionAttemptExists()` returns true → `syncConsentToMparticle` not called
+-   `markSessionAttempt` is called **before** `syncConsentToMparticle` (order verified)
+-   Signed-in user → `syncConsentToMparticle` called with `SignedIn` auth status, `browserId`, `consented: true`, and `pageViewId`
+-   Anonymous (signed-out) user → `syncConsentToMparticle` called with `SignedOut` auth status (no Bearer token attached)
 -   When consent is false → `syncConsentToMparticle` called with `consented: false`
 -   Correct consent purpose key is passed to `getConsentFor`
--   After successful sync → `markMparticleConsentSynced` called
+-   `markSessionAttempt` called with the computed fingerprint
+-   After successful sync → `markMparticleConsentSynced` called with `(consented, isSignedIn)`
 -   On API failure → `markMparticleConsentSynced` not called, error propagates (surfaces in Sentry)
+-   Anonymous → signed-in with same consent value → fingerprint changes → `syncConsentToMparticle` fires with `SignedIn` auth status
 
 ## Key architectural decisions and their rationale
 
@@ -489,9 +555,13 @@ Test cases:
 
 `onConsentChange` from `@guardian/libs` fires on every page load (not only when the user actively changes their consent). Calling the mParticle API on every page load would produce an enormous volume of requests, likely hitting rate limits and causing unnecessary load on the backend infrastructure. The staleness-cookie approach, already proven for `userBenefitsApi`, limits calls to once per session.
 
-### Why signed-in users only?
+### Why all users, not just signed-in?
 
-The mParticle profile that matters for paid-media audiences is the **main profile**, keyed on `identity_id`. Anonymous "dangling tentacle" profiles are eventually merged into the main profile by mParticle's IDSync. Writing consent to an anonymous profile is unreliable because the same browser ID may be associated with multiple mParticle profiles (see the identity resolution notes in the overview). The backend resolves this using the identity ID from the auth token, not the browser ID alone.
+The backend uses the `bwid` browser ID for identity resolution in the data lake. Anonymous browsers are recorded against their `bwid` and linked to a `identity_id` overnight once the user signs in or is resolved by the data lake. If we only called the API for signed-in users, we would miss the consent state for all anonymous sessions, leaving the mParticle records incomplete until identity resolution catches up.
+
+Sending the Bearer token when available (signed-in users) is a security addition: the backend can immediately verify the caller's `identity_id` and write consent to the corresponding main profile without waiting for overnight resolution. For anonymous users, the backend records the consent against the `bwid` alone.
+
+The backend confirmed: Bearer auth is optional. The only essential identifier is `browserId`.
 
 ### Why pass `browserId` in the URL path (not as a claim)?
 
@@ -501,9 +571,9 @@ The backend cannot derive the browser ID from the auth token – it only knows t
 
 The operation is idempotent – it is setting a known state, not appending an event. `PATCH` is the correct HTTP verb for a partial update to a resource, and the backend spec agrees.
 
-### Why reuse `getOptionsHeaders` / Bearer token auth?
+### Why attach auth only when signed in (not require it)?
 
-This is the same auth pattern used by `userBenefitsApi` and is the established standard for DCR → support-service-lambdas communication. It means the backend can verify the caller's identity_id from the JWT, which is essential for associating the consent record with the right mParticle profile.
+The call must work for anonymous users too (see rationale above). Using the same `getOptionsHeaders` helper as `userBenefitsApi` when the user is signed in keeps the pattern consistent and gives the backend the `identity_id` from the JWT when available. For anonymous callers, the headers are simply omitted — the backend accepts the call with `bwid` alone.
 
 ### Why add `mparticleApiUrl` to `window.guardian.config.page`?
 
@@ -511,39 +581,45 @@ The URL is environment-specific (different for CODE, PROD, and DEV). Injecting i
 
 ## Open questions (frontend-relevant)
 
-| Question                                                                    | Status                                                                |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Which exact GDPR purpose name should be used with `getConsentFor()`?        | **Needs confirmation from Data Privacy / MRR. Drives the `csnx` PR.** |
-| What should the staleness cookie TTL be? (session-length vs. fixed minutes) | To agree with backend/MRR                                             |
-| Should the call also be made on `apps` rendering target (`main.apps.ts`)?   | Likely no – scoped to web for now                                     |
-| Should failures be silently swallowed or surfaced to Sentry?                | Recommend surfacing via existing Sentry integration                   |
+| Question                                                                  | Status                                                                                |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Which exact GDPR purpose name should be used with `getConsentFor()`?      | ✅ Agreed: `'mparticle'` — `csnx` PR #2347 merged, `@guardian/libs` bumped to 31.0.0  |
+| Should the call be made for all users or signed-in only?                  | ✅ Agreed: all users — anonymous browsers use `bwid` for later identity resolution    |
+| What is the correct hostname for the new consent lambda?                  | ✅ Agreed: `mparticle-consent.guardianapis.com` (dedicated lambda for consent writes) |
+| Should the call also be made on `apps` rendering target (`main.apps.ts`)? | Likely no – scoped to web for now                                                     |
+| Should failures be silently swallowed or surfaced to Sentry?              | ✅ Surfacing via existing Sentry integration (error thrown, not caught)               |
 
 ## Manual testing (local)
 
 ### Prerequisites
 
-1. **Backend endpoint is deployed to CODE** — the frontend can't test end-to-end before the `PATCH /consents/{browserId}` endpoint is live.
-2. **mParticle `mparticle` vendor added to `@guardian/libs`** — until this is done, the consent lookup will not work correctly. For pre-check testing the cast is in place temporarily.
-3. **Feature switch enabled** — the startup entry is guarded by `window.guardian.config.switches.mparticleConsentSync`. Enable it in [`fixtures/switch-overrides.js`](../fixtures/switch-overrides.js) to ungate it locally:
+1. **Backend endpoint is deployed to CODE** — the frontend can't test end-to-end before the `PATCH /consents/{browserId}` endpoint is live on `mparticle-consent-code.guardianapis.com`.
+2. **Feature switch enabled** — the startup entry is guarded by `window.guardian.config.switches.mparticleConsentSync`. Enable it in [`fixtures/switch-overrides.js`](../fixtures/switch-overrides.js) to ungate it locally:
 
 ```js
 mparticleConsentSync: true,
 ```
 
+3. Optionally override the URL to CODE in [`fixtures/config-overrides.js`](../fixtures/config-overrides.js):
+
+```js
+mparticleApiUrl: 'https://mparticle-consent-code.guardianapis.com',
+```
+
 ### Steps
 
 1. Start the local dev server (`make dev` or `pnpm dev`).
-2. In the browser, open DevTools → Application → Cookies. **Delete** the `gu_mparticle_consent_synced` cookie if present (this resets the staleness gate).
-3. Sign in to theguardian.com (you must be signed in — the call is gated on auth status).
-4. Open any article page.
-5. In the **Network** tab, filter by `consents`. You should see a `PATCH` request to `https://mparticle-api-code.support.guardianapis.com/consents/<your-bwid>` with:
+2. In the browser, open DevTools → Application → Cookies. **Delete** `gu_mparticle_last_synced` and `gu_mparticle_session_attempted` if present (this resets the fingerprint gate).
+3. Open any article page — you do **not** need to be signed in; the call fires for all users.
+4. In the **Network** tab, filter by `consents`. You should see a `PATCH` request to `https://mparticle-consent-code.guardianapis.com/consents/<your-bwid>` with:
     - Status `200` (or appropriate success code from the backend)
-    - `Authorization: Bearer ...` header present
     - Body: `{ "consented": true/false, "pageViewId": "..." }`
-6. Reload the page. Because `gu_mparticle_consent_synced` is now set, **no second request** should fire.
-7. Delete `gu_mparticle_consent_synced` again. Reload. The request fires again.
-8. To test the consent-change path: open the CMP modal (via the Privacy Settings link in the footer), toggle consent, and save. A new request should fire (the CMP will trigger `onConsentChange` again, and the staleness cookie should have been cleared or will be overwritten).
-9. Sign out. Reload. No request should fire.
+    - For anonymous users: no `Authorization` header
+    - For signed-in users: `Authorization: Bearer ...` header present
+5. Reload the page. Because `gu_mparticle_last_synced` now matches the current fingerprint, **no second request** should fire.
+6. Delete `gu_mparticle_last_synced`. Reload. The request fires again.
+7. To test the consent-change path: open the CMP modal (Privacy Settings in the footer), toggle consent, and save. A new request should fire (fingerprint changes).
+8. To test the sign-in path: while signed out, note the `gu_mparticle_last_synced` value (e.g. `anonymous:false`). Sign in. On next page load the fingerprint becomes `signed-in:false` → request fires with Bearer token.
 
 ### Confirming the right mParticle profile was updated
 
