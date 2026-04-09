@@ -25,7 +25,6 @@ import {
 	getTimeZoneFromEdition,
 } from '../../lib/edition';
 import { palette } from '../../palette';
-import type { ColourName } from '../../paletteDeclarations';
 import type { ArticleDeprecated } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { BigNumber } from '../BigNumber';
@@ -34,6 +33,7 @@ import { Placeholder } from '../Placeholder';
 import { background, border, primaryText, secondaryText } from './colours';
 import { FootballMatchHeaderFallback } from './FootballMatchHeaderFallback';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
+import { Hr } from './Hr';
 import { Tabs } from './Tabs';
 
 export type FootballMatchHeaderProps = {
@@ -282,28 +282,6 @@ const kickOffFormatterForEdition = (edition: EditionId): Intl.DateTimeFormat =>
 		timeZoneName: 'short',
 		timeZone: getTimeZoneFromEdition(edition),
 	});
-
-const Hr = (props: {
-	borderStyle: 'dotted' | 'solid';
-	borderColour: ColourName;
-}) => (
-	<hr
-		css={{
-			'&': css(grid.column.all),
-			margin: 0,
-			width: '100%',
-			borderWidth: 0,
-			borderBottomWidth: 1,
-			[from.leftCol]: {
-				display: 'none',
-			},
-		}}
-		style={{
-			borderBottomColor: palette(props.borderColour),
-			borderBottomStyle: props.borderStyle,
-		}}
-	/>
-);
 
 const Teams = (props: { match: FootballMatch }) => (
 	<div

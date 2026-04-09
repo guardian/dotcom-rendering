@@ -38,6 +38,9 @@ export const NotificationsToggle = {
 		id: 'a-notification-id',
 		notificationType: 'content',
 		notificationsClient: mockNotificationsClient,
+		colour: '--article-text',
+		backgroundColour: '--article-background',
+		iconColour: '--article-text',
 	},
 	play: async ({ args, step, canvasElement }) => {
 		const canvas = within(canvasElement);
