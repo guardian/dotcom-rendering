@@ -74,7 +74,10 @@ export const doHydration = async (
 						{/* Child islands should not be hydrated separately */}
 						<IslandProvider value={{ isChild: true }}>
 							{/* The component to hydrate must be a single JSX Element */}
-							{createElement(module[name], data)}
+							{createElement(
+								module[name] as React.FunctionComponent,
+								data,
+							)}
 						</IslandProvider>
 					</CacheProvider>
 				</ConfigProvider>,
