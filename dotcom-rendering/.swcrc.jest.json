@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json.schemastore.org/swcrc",
+	"jsc": {
+		"parser": {
+			"syntax": "typescript",
+			"tsx": true,
+			"decorators": false,
+			"dynamicImport": true
+		},
+		"transform": {
+			"react": {
+				"runtime": "automatic",
+				"importSource": "@emotion/react"
+			}
+		}
+	},
+	"sourceMaps": true
+}
