@@ -18,6 +18,7 @@ import {
 	getLocaleFromEdition,
 	getTimeZoneFromEdition,
 } from '../../lib/edition';
+import { generateImageURL } from '../../lib/image';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import { BigNumber } from '../BigNumber';
@@ -27,7 +28,6 @@ import {
 	primaryText,
 	secondaryText,
 } from '../FootballMatchHeader/colours';
-import { TeamCrest } from '../TeamCrest';
 
 type CricketTeam = {
 	name: string;
@@ -384,7 +384,6 @@ const Crest = (props: { name: string; paID: string }) => (
 	>
 		<TeamCrest
 			teamId={props.paID}
-			path="cricket"
 			altText={`${props.name} cricket crest`}
 			width={40}
 			css={{
@@ -470,5 +469,58 @@ const ScoreNumber = (props: { score: number }) => {
 				<ScoreNumber score={props.score % 10} />
 			</>
 		);
+	}
+};
+
+type TeamCrestProps = {
+	teamId: string;
+	altText: string;
+	width: number;
+	className?: string;
+};
+
+/**
+ * This is a modified and inlined version of the `FootballCrest` component.
+ *
+ * TODO: as part of combining the cricket match header with the existing
+ * football match header we should refactor this into a single crest component
+ * that supports cricket and football, as well as other sports in the future.
+ */
+const TeamCrest = (props: TeamCrestProps) => {
+	const mainImage = crestUrl(props.teamId)?.toString();
+
+	if (mainImage === undefined) {
+		return null;
+	}
+
+	const lowRes = generateImageURL({
+		mainImage,
+		imageWidth: props.width,
+		resolution: 'low',
+	});
+	const highRes = generateImageURL({
+		mainImage,
+		imageWidth: props.width,
+		resolution: 'high',
+	});
+
+	return (
+		<img
+			srcSet={`${lowRes}, ${highRes} 2x`}
+			src={lowRes}
+			alt={props.altText}
+			className={props.className}
+		/>
+	);
+};
+
+const crestUrl = (teamId: string): URL | undefined => {
+	try {
+		return new URL(
+			`${teamId}.png`,
+			`https://sport.guim.co.uk/cricket/crests/`,
+		);
+	} catch (e) {
+		return undefined;
 	}
 };
