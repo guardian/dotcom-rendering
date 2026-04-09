@@ -53,9 +53,7 @@ export const getOphan = async (
 	}
 
 	// We've taken '@guardian/ophan-tracker-js' out of the apps client bundle (made it external in webpack) because we don't ever expect this method to be called. Tracking in apps is done natively.
-	const { default: ophan } = await import(
-		/* webpackMode: "eager" */ '@guardian/ophan-tracker-js'
-	);
+	const { default: ophan } = await import('@guardian/ophan-tracker-js');
 
 	ophan.init('ng');
 

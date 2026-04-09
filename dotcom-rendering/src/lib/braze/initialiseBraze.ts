@@ -16,7 +16,7 @@ const SDK_OPTIONS: braze.InitializationOptions = {
 
 const initialiseBraze = async (apiKey: string): Promise<typeof braze> => {
 	const importedBraze = (await import(
-		/* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk'
+		'@braze/web-sdk'
 	)) as unknown as typeof braze;
 
 	importedBraze.setLogger((message) => log('tx', message));
