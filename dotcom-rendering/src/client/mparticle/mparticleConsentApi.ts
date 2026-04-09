@@ -1,7 +1,7 @@
-import { getOptionsHeaders, type SignedIn } from '../../lib/identity';
+import { getOptionsHeaders, type AuthStatus } from '../../lib/identity';
 
 export const syncConsentToMparticle = async (
-	signedInAuthStatus: SignedIn,
+	authStatus: AuthStatus,
 	browserId: string,
 	consented: boolean,
 	pageViewId: string,
@@ -10,12 +10,19 @@ export const syncConsentToMparticle = async (
 	if (!baseUrl) throw new Error('mparticleApiUrl is not defined');
 
 	const url = `${baseUrl}/consents/${encodeURIComponent(browserId)}`;
+
+	// Attach Bearer token when available; anonymous calls are permitted without auth
+	const authHeaders =
+		authStatus.kind === 'SignedIn'
+			? getOptionsHeaders(authStatus).headers
+			: {};
+
 	const response = await fetch(url, {
 		method: 'PATCH',
 		mode: 'cors',
 		headers: {
 			'Content-Type': 'application/json',
-			...getOptionsHeaders(signedInAuthStatus).headers,
+			...authHeaders,
 		},
 		body: JSON.stringify({ consented, pageViewId }),
 	});

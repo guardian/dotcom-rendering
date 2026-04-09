@@ -1,23 +1,55 @@
 import { getCookie, setCookie } from '@guardian/libs';
 
-export const MPARTICLE_CONSENT_SYNCED_COOKIE = 'gu_mparticle_consent_synced';
+// Persistent cookie (1 year): stores the fingerprint of the last *successful* PATCH.
+// Format: "signed-in:{true|false}" or "anonymous:{true|false}"
+export const MPARTICLE_LAST_SYNCED_COOKIE = 'gu_mparticle_last_synced';
 
-// Re-sync at most once per 30 minutes
-const EXPIRY_MINUTES = 30;
-const EXPIRY_DAYS = EXPIRY_MINUTES / (60 * 24);
+// Session cookie (no TTL): records that we already attempted a PATCH for this fingerprint
+// in the current session, so failed calls are retried at most once per session.
+export const MPARTICLE_SESSION_ATTEMPTED_COOKIE =
+	'gu_mparticle_session_attempted';
 
-export const mparticleConsentNeedsSync = (): boolean => {
-	const cookieValue = getCookie({ name: MPARTICLE_CONSENT_SYNCED_COOKIE });
-	if (!cookieValue) return true;
-	const expiryTime = parseInt(cookieValue, 10);
-	return Date.now() >= expiryTime;
+export const buildFingerprint = (
+	consented: boolean,
+	isSignedIn: boolean,
+): string => `${isSignedIn ? 'signed-in' : 'anonymous'}:${consented}`;
+
+/**
+ * Returns true when the current consent + auth state differs from what was
+ * last successfully PATCHed, meaning a fresh sync is required.
+ */
+export const mparticleConsentNeedsSync = (
+	consented: boolean,
+	isSignedIn: boolean,
+): boolean => {
+	const lastSynced = getCookie({ name: MPARTICLE_LAST_SYNCED_COOKIE });
+	return lastSynced !== buildFingerprint(consented, isSignedIn);
 };
 
-export const markMparticleConsentSynced = (): void => {
-	const expiryMs = Date.now() + EXPIRY_MINUTES * 60 * 1000;
+/**
+ * Returns true when we already attempted a PATCH for this fingerprint in the
+ * current browser session (caps retries to once per session on failure).
+ */
+export const sessionAttemptExists = (fingerprint: string): boolean =>
+	getCookie({ name: MPARTICLE_SESSION_ATTEMPTED_COOKIE }) === fingerprint;
+
+/** Mark that we attempted a PATCH for this fingerprint in the current session. */
+export const markSessionAttempt = (fingerprint: string): void => {
 	setCookie({
-		name: MPARTICLE_CONSENT_SYNCED_COOKIE,
-		value: String(expiryMs),
-		daysToLive: EXPIRY_DAYS,
+		name: MPARTICLE_SESSION_ATTEMPTED_COOKIE,
+		value: fingerprint,
+		// No daysToLive → session cookie; cleared when the browser tab closes
+	});
+};
+
+/** Record a successful sync so future page loads in the same state are skipped. */
+export const markMparticleConsentSynced = (
+	consented: boolean,
+	isSignedIn: boolean,
+): void => {
+	setCookie({
+		name: MPARTICLE_LAST_SYNCED_COOKIE,
+		value: buildFingerprint(consented, isSignedIn),
+		daysToLive: 365,
 	});
 };
