@@ -1,4 +1,3 @@
-// @ts-expect-error: Cannot find module
 import debugCss from './debug.css?raw';
 
 const style = document.createElement('style');

@@ -57,7 +57,7 @@ export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 			'valibot',
 		],
 		// Explicitly external in dev (not needed in prod where they're deployed)
-		external: DEV ? [/@aws-sdk\/.*/] : [],
+		external: DEV ? ['@aws-sdk'] : [],
 	},
 } satisfies UserConfig);
 
