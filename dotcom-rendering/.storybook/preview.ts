@@ -14,6 +14,11 @@ import { mockFetch } from '../src/lib/mockRESTCalls';
 import { ABTests } from '../src/experiments/lib/ab-tests';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
+<<<<<<< HEAD
+=======
+import { sb } from 'storybook/test';
+import { definePreview } from '@storybook/react-vite';
+>>>>>>> 1dfe0367f7 (Migrate Storybook to Vite, remove webpack config and dependencies)
 import {
 	globalColourScheme,
 	globalColourSchemeDecorator,

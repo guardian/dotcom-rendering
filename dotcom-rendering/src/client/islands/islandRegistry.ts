@@ -2,16 +2,8 @@
  * Static registry of all island components, built at compile time
  * via Vite's import.meta.glob.
  *
- * Each matched file becomes a lazy chunk (eager: false), exactly
- * matching the previous webpack behaviour where each island was
- * a separate dynamically-loaded chunk.
- *
- * Replaces the webpack magic comments in doHydration.tsx:
- *   import(
- *     /* webpackInclude: /\.island\.tsx$/ *​/
- *     /* webpackChunkName: "[request]" *​/
- *     `../../components/${name}.island`
- *   )
+ * Each matched file becomes a lazy chunk (eager: false), so each
+ * island is a separate dynamically-loaded chunk.
  */
 const islandModules = import.meta.glob<Record<string, unknown>>(
 	'../../components/*.island.tsx',
