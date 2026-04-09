@@ -147,11 +147,11 @@ type Props = {
 	showSubtitles: boolean;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
+	/* used in custom subtitle overlays */
 	activeCue?: ActiveCue | null;
 	shouldLoop: boolean;
 	isInteractive: boolean;
 	controlsPosition: ControlsPosition;
-	/* used in custom subtitle overlays */
 };
 
 /**
