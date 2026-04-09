@@ -747,7 +747,6 @@ export const selfHostedLoopVideo53Card = {
 				height: 720,
 			},
 		],
-
 		aspectRatio: 5 / 3,
 	},
 } satisfies DCRFrontCard;
