@@ -99,7 +99,6 @@
 		"constructs": "catalog:",
 		"cpy": "11.0.0",
 		"dompurify": "3.4.17",
-		"dynamic-import-polyfill": "0.1.1",
 		"eslint": "catalog:",
 		"eslint-import-resolver-typescript": "4.4.5",
 		"eslint-plugin-custom-elements": "0.0.8",
