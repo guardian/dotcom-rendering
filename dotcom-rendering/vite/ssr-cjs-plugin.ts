@@ -42,6 +42,7 @@ export function ssrCjsPlugin(packages: string[]): Plugin {
 			if (shouldWrap(id)) {
 				return PREFIX + id;
 			}
+			return undefined;
 		},
 		load(id) {
 			if (!id.startsWith(PREFIX)) return;
