@@ -9,9 +9,7 @@ import type {
 	TTransport,
 	TType,
 } from '@creditkarma/thrift-server-core';
-import thriftCore from '@creditkarma/thrift-server-core';
-
-const { MessageType, TProtocol } = thriftCore;
+import { MessageType, TProtocol } from '@creditkarma/thrift-server-core';
 
 export abstract class TProtocolDecorator extends TProtocol {
 	private concreteProtocol: TProtocol;
