@@ -109,7 +109,6 @@ type Props = {
 	children: React.ReactNode;
 	mediaSize: MediaSizeType;
 	isAvatar: boolean;
-	isFrontContainer: boolean;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
 	padContent?: 'small' | 'large';
@@ -119,7 +118,6 @@ export const ContentWrapper = ({
 	children,
 	mediaSize,
 	isAvatar,
-	isFrontContainer,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
 	padContent,
@@ -137,12 +135,6 @@ export const ContentWrapper = ({
 						isAvatar,
 					}),
 				padContent &&
-					!isFrontContainer &&
-					css`
-						padding: ${space[paddingSpace]}px;
-					`,
-				padContent &&
-					isFrontContainer &&
 					paddingStyles(
 						mediaPositionOnMobile,
 						mediaPositionOnDesktop,

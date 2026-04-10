@@ -334,7 +334,11 @@ export const WithANewsletter = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
-				<Card {...basicCardProps} isNewsletter={true} />
+				<Card
+					{...basicCardProps}
+					isNewsletter={true}
+					contentSpacing="large"
+				/>
 			</CardWrapper>
 		</CardGroup>
 	);
@@ -355,6 +359,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 						articleMedia={youtubeMetaData}
 						headlineText="Video"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -371,6 +376,7 @@ export const WithMediaType = () => {
 							duration: 0,
 						}}
 						headlineText="Video without duration"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -392,6 +398,7 @@ export const WithMediaType = () => {
 							isLive: true,
 						}}
 						headlineText="Live video"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -405,6 +412,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainSelfHostedVideo }}
 						articleMedia={{ ...youtubeMetaData }}
 						headlineText="Video with self-hosted video main media"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -418,6 +426,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainSelfHostedVideo }}
 						articleMedia={{ ...selfHostedMetaData }}
 						headlineText="Self hosted video"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -433,6 +442,7 @@ export const WithMediaType = () => {
 						mainMedia={mainAudio}
 						articleMedia={audioMetaData}
 						headlineText="Audio"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -446,6 +456,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainSelfHostedVideo }}
 						articleMedia={audioMetaData}
 						headlineText="Audio with self-hosted video main media"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -461,6 +472,7 @@ export const WithMediaType = () => {
 						mainMedia={mainGallery}
 						articleMedia={galleryMetaData}
 						headlineText="Gallery"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -474,6 +486,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainSelfHostedVideo }}
 						articleMedia={galleryMetaData}
 						headlineText="Gallery with self-hosted video main media"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -496,6 +509,7 @@ export const WithMediaTypeAndSublinks = () => {
 					articleMedia={{ ...youtubeMetaData, duration: 30 }}
 					headlineText="Video"
 					supportingContent={twoSublinks}
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -510,6 +524,7 @@ export const WithMediaTypeAndSublinks = () => {
 					articleMedia={{ ...youtubeMetaData, duration: 0 }}
 					headlineText="Video without duration"
 					supportingContent={twoSublinks}
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -524,6 +539,7 @@ export const WithMediaTypeAndSublinks = () => {
 					articleMedia={audioMetaData}
 					headlineText="Audio"
 					supportingContent={twoSublinks}
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -538,6 +554,7 @@ export const WithMediaTypeAndSublinks = () => {
 					articleMedia={mainGallery}
 					headlineText="Gallery"
 					supportingContent={twoSublinks}
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -558,6 +575,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 					mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 					articleMedia={{ ...youtubeMetaData, duration: 30 }}
 					headlineText="Video"
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -571,6 +589,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 					mainMedia={mainAudio}
 					articleMedia={mainAudio}
 					headlineText="Audio"
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -584,6 +603,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 					mainMedia={mainGallery}
 					articleMedia={mainGallery}
 					headlineText="Gallery"
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -1212,6 +1232,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaPositionOnMobile="top"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
+						contentSpacing="large"
 					/>
 				</LI>
 			</UL>
@@ -1229,6 +1250,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaPositionOnMobile="top"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
+						contentSpacing="large"
 					/>
 				</LI>
 				<LI percentage={'25%'} padSides={true} showDivider={true}>
@@ -1243,6 +1265,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
 						canPlayInline={false}
+						contentSpacing="large"
 					/>
 				</LI>
 			</UL>
@@ -1260,6 +1283,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaPositionOnMobile="bottom"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
+						contentSpacing="large"
 					/>
 				</LI>
 				<LI percentage="50%">
@@ -1276,6 +1300,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 								mainMedia={mainYoutubeVideo}
 								articleMedia={youtubeMetaData}
 								canPlayInline={false}
+								contentSpacing="large"
 							/>
 						</LI>
 						<LI padSides={true}>
@@ -1290,6 +1315,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 								mainMedia={mainYoutubeVideo}
 								articleMedia={youtubeMetaData}
 								canPlayInline={false}
+								contentSpacing="large"
 							/>
 						</LI>
 
@@ -1305,6 +1331,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 								mainMedia={mainYoutubeVideo}
 								articleMedia={youtubeMetaData}
 								canPlayInline={false}
+								contentSpacing="large"
 							/>
 						</LI>
 					</UL>
@@ -1325,6 +1352,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaPositionOnMobile="top"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
+						contentSpacing="large"
 					/>
 				</LI>
 				<LI percentage={'33.333%'} padSides={true} showDivider={true}>
@@ -1340,12 +1368,14 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaSize="medium"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
+						contentSpacing="large"
 					/>
 				</LI>
 			</UL>
 		</Section>
 	);
 };
+
 export const WithLetterDesign = () => {
 	return (
 		<CardWrapper>
@@ -1362,8 +1392,6 @@ export const WithLetterDesign = () => {
 		</CardWrapper>
 	);
 };
-
-WithLetterDesign.storyName = 'WithLetterDesign';
 
 export const WithLetterDesignAndShowQuotedHeadline = () => {
 	return (
@@ -1382,9 +1410,6 @@ export const WithLetterDesignAndShowQuotedHeadline = () => {
 		</CardWrapper>
 	);
 };
-
-WithLetterDesignAndShowQuotedHeadline.storyName =
-	'WithLetterDesignAndShowQuotedHeadline';
 
 const containerPalettes = [
 	'InvestigationPalette',
@@ -1470,6 +1495,7 @@ export const WithBranding = () => {
 							articleMedia={mainGallery}
 							containerPalette={containerPalette}
 							branding={branding}
+							contentSpacing="large"
 						/>
 					</LI>
 					<LI percentage={'33.333%'} padSides={true}>
@@ -1553,10 +1579,12 @@ export const WithSpecialPaletteVariations = () => {
 					articleMedia={mainAudio}
 					containerPalette={containerPalette}
 					branding={branding}
+					contentSpacing="large"
 				/>
 			</LI>
 		</UL>
 	);
+
 	return (
 		<>
 			{containerPalettes.map((containerPalette) => (
