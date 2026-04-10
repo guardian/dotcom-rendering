@@ -205,9 +205,7 @@ export const SlotBodyEnd = ({
 		};
 		pickMessage(epicConfig, renderingTarget)
 			.then((result) => {
-				if (result.type === 'MessageSelected') {
-					setPickMessageResult(result);
-				}
+				setPickMessageResult(result);
 			})
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
