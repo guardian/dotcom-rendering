@@ -25,18 +25,20 @@ import { VideoProgressBar } from './VideoProgressBar';
 export type SubtitleSize = 'small' | 'medium' | 'large';
 export type ControlsPosition = 'top' | 'bottom';
 
-const videoStyles = (aspectRatio: number, isCinemagraph: boolean) => css`
+const videoStyles = (aspectRatio: number) => css`
 	position: relative;
 	display: block;
 	height: auto;
 	width: 100%;
-	${!isCinemagraph &&
-	css`
-		cursor: pointer;
-	`}
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
 
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${aspectRatio};
+`;
+
+const cinemagraphStyles = css`
+	cursor: auto;
 `;
 
 const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
@@ -149,6 +151,8 @@ type Props = {
  *
  * NB: When DEVELOPING LOCALLY, use `https://r.thegulocal.com/` instead of `localhost`.
  * This is required because CORS restrictions prevent accessing the subtitles and video file from localhost.
+ * Alternatively, you can remove `crossOrigin="anonymous"` from the video element, which will not enable
+ * CORS. You can then develop using localhost, but note that subtitles will not work in this scenario.
  */
 export const SelfHostedVideoPlayer = forwardRef(
 	(
@@ -212,7 +216,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 				<video
 					id={videoId}
 					css={[
-						videoStyles(aspectRatio, isCinemagraph),
+						videoStyles(aspectRatio),
+						isCinemagraph && cinemagraphStyles,
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
 					crossOrigin="anonymous"

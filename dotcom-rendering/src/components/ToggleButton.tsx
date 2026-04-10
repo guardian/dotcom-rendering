@@ -11,10 +11,15 @@ type Props = {
 	iconFill: ColourName;
 	iconBackground: ColourName | undefined;
 	iconBorder: ColourName;
+	className?: string;
 };
 
 export const ToggleButton = (props: Props) => (
-	<Button onClick={props.onClick} colour={props.colour}>
+	<Button
+		onClick={props.onClick}
+		colour={props.colour}
+		className={props.className}
+	>
 		<Icon
 			background={props.iconBackground}
 			border={props.iconBorder}
@@ -30,6 +35,7 @@ const Button = (props: {
 	onClick: ButtonHTMLAttributes<HTMLButtonElement>['onClick'];
 	children: ReactNode;
 	colour: ColourName;
+	className: string | undefined;
 }) => (
 	<button
 		type="button"
@@ -49,6 +55,7 @@ const Button = (props: {
 		style={{
 			color: palette(props.colour),
 		}}
+		className={props.className}
 	>
 		{props.children}
 	</button>
