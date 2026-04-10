@@ -162,6 +162,7 @@ export type Props = {
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	starRatingSize?: RatingSizeType;
+	contentSpacing?: 'small' | 'large';
 };
 
 const waveformWrapper = (
@@ -347,27 +348,6 @@ const decideSublinkPosition = (
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
-const determinePadContent = (
-	isMediaCardOrNewsletter: boolean,
-	isFrontContainer: boolean,
-	isOnwardContent: boolean,
-	isInGalleryContext: boolean,
-): 'large' | 'small' | undefined => {
-	if (isInGalleryContext) {
-		return undefined;
-	}
-
-	if (isMediaCardOrNewsletter) {
-		return isFrontContainer ? 'large' : 'small';
-	}
-
-	if (isOnwardContent) {
-		return 'small';
-	}
-
-	return undefined;
-};
-
 export const Card = ({
 	linkTo,
 	format,
@@ -428,6 +408,7 @@ export const Card = ({
 	subtitleSize = 'small',
 	starRatingSize = 'small',
 	articleMedia,
+	contentSpacing,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -449,6 +430,8 @@ export const Card = ({
 	 * It is treated as a media card in the design system.
 	 */
 	const isVideoArticle = format.design === ArticleDesign.Video;
+
+	const isOnwardsContent = onwardsSource !== undefined;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
@@ -627,23 +610,12 @@ export const Card = ({
 			}
 
 			return {
-				row: 'none',
-				column: 'none',
+				row: 'tiny',
+				column: 'tiny',
 			};
 		}
 
 		if (!isFrontContainer) {
-			/**
-			 * Media cards have 4px padding around the content so we have a
-			 * tiny (4px) gap to account for this and make it 8px total
-			 */
-			if (isMediaCardOrNewsletter) {
-				return {
-					row: 'tiny',
-					column: 'tiny',
-				};
-			}
-
 			return { row: 'small', column: 'small' };
 		}
 
@@ -895,11 +867,7 @@ export const Card = ({
 						articleMedia={articleMedia}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
-						padMedia={
-							isMediaCardOrNewsletter &&
-							isFrontContainer &&
-							!isGallerySecondaryOnward
-						}
+						padMedia={isMediaCardOrNewsletter && !isOnwardsContent}
 						isSmallCard={isSmallCard}
 					>
 						{media.type === 'slideshow' && (
@@ -1108,19 +1076,13 @@ export const Card = ({
 				<ContentWrapper
 					mediaSize={mediaSize}
 					isAvatar={media?.type === 'avatar'}
-					isFrontContainer={isFrontContainer}
 					mediaPositionOnDesktop={
 						media ? mediaPositionOnDesktop : 'none'
 					}
 					mediaPositionOnMobile={
 						media ? mediaPositionOnMobile : 'none'
 					}
-					padContent={determinePadContent(
-						isMediaCardOrNewsletter,
-						isFrontContainer,
-						isOnwardContent,
-						isInGalleryContext,
-					)}
+					padContent={contentSpacing}
 				>
 					{/* the div is needed to keep the headline and trail text justified at the start */}
 					<div
