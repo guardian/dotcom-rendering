@@ -1,3 +1,5 @@
+import { parse } from 'devalue';
+
 /**
  * getProps takes the given html element and returns its props attibute
  *
@@ -10,7 +12,7 @@ export const getProps = (marker: HTMLElement): { [key: string]: unknown } => {
 	const serialised = marker.getAttribute('props');
 	let props: { [key: string]: unknown };
 	try {
-		props = serialised && JSON.parse(serialised);
+		props = serialised && parse(serialised);
 	} catch (error: unknown) {
 		console.error(
 			`🚨 Error parsing props. Is this data serialisable? ${String(

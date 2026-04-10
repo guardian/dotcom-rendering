@@ -1,3 +1,4 @@
+import { stringify } from 'devalue';
 import { useContext } from 'react';
 import type { ScheduleOptions, SchedulePriority } from '../lib/scheduler';
 import { IslandContext, IslandProvider } from './IslandContext';
@@ -72,7 +73,7 @@ export const Island = ({ priority, defer, children, role }: IslandProps) => {
 					name={name}
 					priority={priority}
 					deferUntil={defer?.until}
-					props={JSON.stringify(children.props)}
+					props={stringify(children.props)}
 					rootMargin={rootMargin}
 					data-spacefinder-role={role}
 				>

@@ -2,6 +2,7 @@ const swcConfig = require('./webpack/.swcrc.json');
 
 const esModules = [
 	'@guardian/',
+	'devalue',
 	'screenfull',
 	'node-fetch',
 	'data-uri-to-buffer',
