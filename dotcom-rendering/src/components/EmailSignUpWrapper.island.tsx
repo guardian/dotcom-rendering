@@ -1,10 +1,12 @@
 import type { Breakpoint } from '@guardian/source/foundations';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
+import { useConfig } from './ConfigContext';
 import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
+import { NewsletterSignupCardContainer } from './NewsletterSignupCardContainer';
 import { Placeholder } from './Placeholder';
 import { SecureSignup } from './SecureSignup.island';
 
@@ -21,12 +23,16 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	index: number;
 	listId: number;
 	identityName: string;
+	category?: string;
 	successDescription: string;
 	idApiUrl: string;
+	renderUrl?: string;
 	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
 	hidePrivacyMessage?: boolean;
 	/** Feature flag to enable hiding newsletter signup for already subscribed users */
 	hideNewsletterSignupComponentForSubscribers?: boolean;
+	/** Feature flag to switch to the NewsletterSignupCard shell */
+	useNewsletterSignupCard?: boolean;
 }
 
 /**
@@ -42,15 +48,25 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 export const EmailSignUpWrapper = ({
 	index,
 	listId,
+	identityName,
+	category,
 	idApiUrl,
+	renderUrl,
+	name,
+	description,
+	frequency,
+	theme,
+	successDescription,
+	hidePrivacyMessage,
 	hideNewsletterSignupComponentForSubscribers = false,
-	...emailSignUpProps
+	useNewsletterSignupCard = false,
 }: EmailSignUpWrapperProps) => {
 	const isSubscribed = useNewsletterSubscription(
 		listId,
 		idApiUrl,
 		hideNewsletterSignupComponentForSubscribers,
 	);
+	const { renderingTarget } = useConfig();
 
 	// Show placeholder while subscription status is being determined
 	// This prevents layout shift in both subscribed and non-subscribed cases
@@ -68,17 +84,41 @@ export const EmailSignUpWrapper = ({
 			id={`EmailSignup-skip-link-${index}`}
 			blockDescription="newsletter promotion"
 		>
-			<EmailSignup {...emailSignUpProps}>
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<SecureSignup
-						newsletterId={emailSignUpProps.identityName}
-						successDescription={emailSignUpProps.description}
-					/>
-				</Island>
-				{!emailSignUpProps.hidePrivacyMessage && (
-					<NewsletterPrivacyMessage />
-				)}
-			</EmailSignup>
+			{useNewsletterSignupCard ? (
+				<NewsletterSignupCardContainer
+					name={name}
+					description={description}
+					frequency={frequency}
+					theme={theme}
+					identityName={identityName}
+					category={category}
+					renderUrl={renderUrl}
+					renderingTarget={renderingTarget}
+				>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<SecureSignup
+							newsletterId={identityName}
+							successDescription={successDescription}
+						/>
+					</Island>
+					{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
+				</NewsletterSignupCardContainer>
+			) : (
+				<EmailSignup
+					name={name}
+					description={description}
+					frequency={frequency}
+					theme={theme}
+				>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<SecureSignup
+							newsletterId={identityName}
+							successDescription={successDescription}
+						/>
+					</Island>
+					{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
+				</EmailSignup>
+			)}
 		</InlineSkipToWrapper>
 	);
 };
