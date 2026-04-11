@@ -37,14 +37,6 @@ async function start() {
 			}),
 			ssrCjsPlugin(cjsPackages),
 		],
-		resolve: {
-			alias: {
-				// Client-side Preact aliasing for browser modules
-				react: 'preact/compat',
-				'react-dom/test-utils': 'preact/test-utils',
-				'react-dom': 'preact/compat',
-			},
-		},
 		server: {
 			middlewareMode: true,
 			hmr: true,

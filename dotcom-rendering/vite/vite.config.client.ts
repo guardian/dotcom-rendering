@@ -99,7 +99,7 @@ const getManualChunks = (
 
 	return (id: string) => {
 		if (
-			/node_modules\/(preact|react-is|hoist-non-react-statistics|swr|@emotion|stylis)\//.test(
+			/node_modules\/(react|react-dom|react-is|hoist-non-react-statistics|swr|@emotion|stylis)\//.test(
 				id,
 			)
 		) {
@@ -140,15 +140,7 @@ export const createClientConfig = (build: Build): UserConfig => {
 				  ]
 				: []),
 		],
-		resolve: {
-			alias: {
-				// Client builds use Preact for smaller bundle size.
-				// Server builds use real React (not aliased).
-				react: 'preact/compat',
-				'react-dom/test-utils': 'preact/test-utils',
-				'react-dom': 'preact/compat',
-			},
-		},
+		resolve: {},
 		build: {
 			outDir: 'dist',
 			emptyOutDir: false,
