@@ -128,6 +128,7 @@ export const createClientConfig = (build: Build): UserConfig => {
 	const clientConfig: UserConfig = {
 		plugins: [
 			svgr({
+				include: '**/*.svg',
 				svgrOptions: { svgo: false },
 			}),
 			// Buffer polyfill for apps/crossword builds

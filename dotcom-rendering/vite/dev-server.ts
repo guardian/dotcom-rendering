@@ -33,6 +33,7 @@ async function start() {
 	const devConfig = mergeConfig(sharedConfig, {
 		plugins: [
 			svgr({
+				include: '**/*.svg',
 				svgrOptions: { svgo: false },
 			}),
 			ssrCjsPlugin(cjsPackages),
