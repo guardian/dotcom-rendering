@@ -10,6 +10,7 @@
  */
 
 import { readFileSync } from 'node:fs';
+import { createServer as createHttpServer } from 'node:http';
 import { resolve } from 'node:path';
 import express from 'express';
 import { createServer as createViteServer, mergeConfig } from 'vite';
@@ -22,6 +23,7 @@ const root = process.cwd();
 
 async function start() {
 	const app = express();
+	const httpServer = createHttpServer(app);
 
 	// CJS packages in noExternal that need ESM wrapping for Vite 6's
 	// SSR module runner. Only packages using require()/module.exports
@@ -40,7 +42,9 @@ async function start() {
 		],
 		server: {
 			middlewareMode: true,
-			hmr: true,
+			hmr: {
+				server: httpServer,
+			},
 		},
 		appType: 'custom',
 		// Serve client modules from /assets/ to match production asset paths
@@ -109,7 +113,7 @@ async function start() {
 		}
 	});
 
-	app.listen(port, () => {
+	httpServer.listen(port, () => {
 		console.log(
 			`\n  Vite DEV server running on http://localhost:${port}\n`,
 		);
