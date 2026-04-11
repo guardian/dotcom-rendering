@@ -18,6 +18,7 @@ const DEV = process.env.NODE_ENV === 'development';
 export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 	plugins: [
 		svgr({
+			include: '**/*.svg',
 			svgrOptions: { svgo: false },
 		}),
 	],
