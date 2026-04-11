@@ -106,16 +106,6 @@ const entrySourcePaths: Record<Build, string> = {
 	'client.editionsCrossword': 'src/client/main.editionsCrossword.tsx',
 };
 
-/**
- * Finds a manifest entry by its `name` field.
- * Used for chunks like "frameworks" that aren't keyed by source path.
- */
-const findEntryByName = (
-	manifest: ViteManifest,
-	name: string,
-): ViteManifestEntry | undefined =>
-	Object.values(manifest).find((entry) => entry.name === name);
-
 export const getPathFromManifest = (
 	build: Build,
 	filename: `${string}.js`,
@@ -125,27 +115,14 @@ export const getPathFromManifest = (
 	}
 
 	if (isDev) {
-		return `${ASSET_ORIGIN}assets/${filename.replace(
-			'.js',
-			`.${build}.js`,
-		)}`;
+		// In dev, Vite serves modules by source path, not built filenames
+		const sourcePath = entrySourcePaths[build];
+		return `${ASSET_ORIGIN}assets/${sourcePath}`;
 	}
 
 	const manifest = getManifest(getManifestPath(build));
-
-	// Strip .js extension to get the logical name (e.g. "index", "frameworks")
-	const logicalName = filename.replace(/\.js$/, '');
-
-	let entry: ViteManifestEntry | undefined;
-
-	if (logicalName === 'index') {
-		// Look up the entry point by its source path
-		const sourcePath = entrySourcePaths[build];
-		entry = manifest[sourcePath];
-	} else {
-		// For non-entry chunks (e.g. "frameworks"), find by name
-		entry = findEntryByName(manifest, logicalName);
-	}
+	const sourcePath = entrySourcePaths[build];
+	const entry = manifest[sourcePath];
 
 	if (!entry) {
 		throw new Error(`Missing manifest for ${filename}`);
@@ -155,14 +132,16 @@ export const getPathFromManifest = (
 };
 
 /**
- * To ensure this only applies to guardian scripts,
- * we check that it is served from an asset/ directory
- * and that it ends with the bundle type and extension,
- * with an optional hash for local development
- * and stripped query parameters.
+ * Matches Guardian script URLs in both dev and prod:
+ *   Prod: assets/index.client.web.DKLwwO4p.js
+ *   Dev:  assets/src/client/main.web.ts
  */
-const getScriptRegex = (build: Build) =>
-	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{8}\\.)?js(\\?.*)?$`);
+const getScriptRegex = (build: Build) => {
+	const prodPattern = `assets\\/\\w+\\.${build}\\.(\\w{8}\\.)?js(\\?.*)?$`;
+	const sourcePath = entrySourcePaths[build];
+	const devPattern = sourcePath.replace(/[/.]/g, '\\$&');
+	return new RegExp(`(${prodPattern})|(${devPattern})`);
+};
 
 export const WEB = getScriptRegex('client.web');
 export const WEB_VARIANT_SCRIPT = getScriptRegex('client.web.variant');
@@ -171,8 +150,8 @@ export const EDITIONS_CROSSWORD_SCRIPT = getScriptRegex(
 	'client.editionsCrossword',
 );
 
-export const generateScriptTags = (scripts: string[]): string[] =>
-	scripts.filter(isString).map((script) => {
+export const generateScriptTags = (scripts: string[]): string[] => {
+	const tags = scripts.filter(isString).map((script) => {
 		if (
 			script.match(WEB) ??
 			script.match(WEB_VARIANT_SCRIPT) ??
@@ -187,6 +166,15 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 			`<script defer src="${script}"></script>`,
 		].join('\n');
 	});
+
+	if (isDev) {
+		tags.unshift(
+			`<script type="module" src="${ASSET_ORIGIN}assets/@vite/client"></script>`,
+		);
+	}
+
+	return tags;
+};
 
 export const getModulesBuild = (): Extract<Build, `client.web${string}`> => {
 	if (BUILD_VARIANT) {
