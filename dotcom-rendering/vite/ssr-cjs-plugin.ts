@@ -38,8 +38,8 @@ export function ssrCjsPlugin(packages: string[]): Plugin {
 	return {
 		name: 'ssr-cjs-compat',
 		enforce: 'pre',
-		resolveId(id) {
-			if (shouldWrap(id)) {
+		resolveId(id, _importer, options) {
+			if (options?.ssr && shouldWrap(id)) {
 				return PREFIX + id;
 			}
 			return undefined;
