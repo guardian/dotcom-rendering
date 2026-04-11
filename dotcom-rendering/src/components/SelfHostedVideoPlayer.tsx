@@ -21,6 +21,7 @@ import type { VideoPlayerFormat } from '../types/mainMedia';
 import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
 import { SubtitleOverlay } from './SubtitleOverlay';
 import { VideoProgressBar } from './VideoProgressBar';
+import { VideoProgressBarInteractive } from './VideoProgressBarInteractive';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 export type ControlsPosition = 'top' | 'bottom';
@@ -93,6 +94,16 @@ const iconContainerStyles = css`
 	border: 1px solid ${palette('--video-icon-border')};
 `;
 
+// const showProgressBarOnHoverStyles = (videoId: string) => css`
+// 	&:hover {
+// 		color: blue;
+// 	}
+// 	:hover + .progress-bar-${videoId} {
+// 		color: red;
+// 		visibility: visible;
+// 	}
+// `;
+
 export const PLAYER_STATES = [
 	'NOT_STARTED',
 	'PLAYING',
@@ -136,6 +147,8 @@ type Props = {
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick?: (event: SyntheticEvent) => void;
+	handleProgressBarClick?: (event: React.MouseEvent<HTMLElement>) => void;
+	useLongFormProgressBar: boolean;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: ((iconProps: IconProps) => JSX.Element) | null;
 	posterImage?: string;
@@ -189,6 +202,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleKeyDown,
 			handlePause,
 			handleFullscreenClick,
+			handleProgressBarClick,
+			useLongFormProgressBar,
 			onError,
 			AudioIcon,
 			preloadPartialData,
@@ -227,8 +242,10 @@ export const SelfHostedVideoPlayer = forwardRef(
 						videoStyles(aspectRatio),
 						isInteractive && interactiveStyles,
 						showSubtitles && subtitleStyles(subtitleSize),
+						// useLongFormProgressBar &&
+						// 	showProgressBarOnHoverStyles(videoId),
 					]}
-					crossOrigin="anonymous"
+					// crossOrigin="anonymous"
 					ref={ref}
 					tabIndex={0}
 					data-testid="self-hosted-video-player"
@@ -256,12 +273,12 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onKeyDown={handleKeyDown}
 					onError={onError}
 				>
-					{sources.map((source) => (
+					{sources.map(({ src, mimeType }) => (
 						<source
-							key={source.mimeType}
-							/* The start time is set to 1ms so that Safari will autoplay the video */
-							src={`${source.src}#t=0.001`}
-							type={source.mimeType}
+							key={mimeType}
+							/* The start time is set to 1ms so that Safari can autoplay the video */
+							src={`${src}#t=0.001`}
+							type={mimeType}
 						/>
 					))}
 					{showSubtitles && (
@@ -293,59 +310,69 @@ export const SelfHostedVideoPlayer = forwardRef(
 						<PlayIcon iconWidth="narrow" />
 					</button>
 				)}
-				{showProgressBar && (
-					<VideoProgressBar
-						videoId={videoId}
-						currentTime={currentTime}
-						duration={ref.current!.duration}
-					/>
-				)}
+				{showProgressBar &&
+					(useLongFormProgressBar ? (
+						<VideoProgressBarInteractive
+							videoId={videoId}
+							currentTime={currentTime}
+							duration={ref.current!.duration}
+							handleClick={handleProgressBarClick}
+						/>
+					) : (
+						<VideoProgressBar
+							videoId={videoId}
+							currentTime={currentTime}
+							duration={ref.current!.duration}
+						/>
+					))}
 				{showIcons && (
 					<div css={controlContainerStyles(controlsPosition)}>
-						{AudioIcon && (
-							<button
-								type="button"
-								onClick={handleAudioClick}
-								css={buttonStyles}
-								data-link-name={`gu-video-loop-${
-									isMuted ? 'unmute' : 'mute'
-								}-${atomId}`}
-							>
-								<div
-									css={iconContainerStyles}
-									data-testid={`${
+						<div css={controlContainerStyles(controlsPosition)}>
+							{AudioIcon && (
+								<button
+									type="button"
+									onClick={handleAudioClick}
+									css={buttonStyles}
+									data-link-name={`gu-video-loop-${
 										isMuted ? 'unmute' : 'mute'
-									}-icon`}
+									}-${atomId}`}
 								>
-									<AudioIcon
-										size="xsmall"
-										theme={{
-											fill: palette('--video-icon'),
-										}}
-									/>
-								</div>
-							</button>
-						)}
-						{showFullscreenIcon && (
-							<button
-								type="button"
-								onClick={handleFullscreenClick}
-								css={buttonStyles}
-								data-link-name={`gu-video-loop-fullscreen-${atomId}`}
-							>
-								<div
-									css={iconContainerStyles}
-									data-testid="fullscreen-icon"
+									<div
+										css={iconContainerStyles}
+										data-testid={`${
+											isMuted ? 'unmute' : 'mute'
+										}-icon`}
+									>
+										<AudioIcon
+											size="xsmall"
+											theme={{
+												fill: palette('--video-icon'),
+											}}
+										/>
+									</div>
+								</button>
+							)}
+							{showFullscreenIcon && (
+								<button
+									type="button"
+									onClick={handleFullscreenClick}
+									css={buttonStyles}
+									data-link-name={`gu-video-loop-fullscreen-${atomId}`}
 								>
-									<SvgArrowExpand
-										size="xsmall"
-										theme={{
-											fill: palette('--video-icon'),
-										}}
-									/>
-								</div>
-							</button>
-						)}
+									<div
+										css={iconContainerStyles}
+										data-testid="fullscreen-icon"
+									>
+										<SvgArrowExpand
+											size="xsmall"
+											theme={{
+												fill: palette('--video-icon'),
+											}}
+										/>
+									</div>
+								</button>
+							)}
+						</div>
 					</div>
 				)}
 			</>

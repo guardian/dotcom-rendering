@@ -8381,9 +8381,21 @@ const paletteColours = {
 		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
 		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
 	},
+	'--video-progress-bar-background-default': {
+		light: () => transparentColour(sourcePalette.neutral[100], 0.5),
+		dark: () => transparentColour(sourcePalette.neutral[100], 0.5),
+	},
 	'--video-progress-bar-value': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[86],
+	},
+	'--video-progress-bar-value-default': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--video-progress-bar-value-hover': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[93],
 	},
 	'--video-subtitle-background': {
 		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
