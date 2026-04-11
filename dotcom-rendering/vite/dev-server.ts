@@ -45,6 +45,14 @@ async function start() {
 		appType: 'custom',
 		// Serve client modules from /assets/ to match production asset paths
 		base: '/assets/',
+		// Pre-bundle CJS packages for client-side use (the ssrCjsPlugin
+		// only wraps them for SSR; client needs Vite's built-in CJS→ESM).
+		optimizeDeps: {
+			include: [
+				'@guardian/bridget',
+				'@guardian/bridget/SignInScreenReason',
+			],
+		},
 	});
 	// SSR config must be set after mergeConfig to avoid being overwritten.
 	devConfig.ssr = {
