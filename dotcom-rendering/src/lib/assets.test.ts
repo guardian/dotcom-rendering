@@ -44,6 +44,15 @@ describe('regular expression to match files', () => {
 		);
 	});
 
+	it('should match dev source paths', () => {
+		expect('http://localhost:3030/assets/src/client/main.web.ts').toMatch(
+			WEB,
+		);
+		expect('http://localhost:3030/assets/src/client/main.apps.ts').toMatch(
+			APPS_SCRIPT,
+		);
+	});
+
 	it('should handle PROD environment', () => {
 		expect(
 			'https://assets.guim.co.uk/assets/index.client.web.DKLwwO4p.js',
@@ -72,11 +81,6 @@ describe('getPathFromManifest', () => {
 				name: 'index',
 				src: 'src/client/main.web.ts',
 				isEntry: true,
-				imports: ['_frameworks.client.web.xyz78901.js'],
-			},
-			_frameworks: {
-				file: 'frameworks.client.web.xyz78901.js',
-				name: 'frameworks',
 			},
 		});
 		(readFileSync as jest.Mock).mockReturnValue(viteManifest);
@@ -92,15 +96,11 @@ describe('getPathFromManifest', () => {
 		);
 	});
 
-	it('returns correct hashed asset for frameworks chunk', () => {
-		expect(getPathFromManifest('client.web', 'frameworks.js')).toBe(
-			'/assets/frameworks.client.web.xyz78901.js',
-		);
-	});
-
-	it('throws an error when the hashed asset cant be found', () => {
-		expect(() => getPathFromManifest('client.web', 'foo.bar.js')).toThrow(
-			'Missing manifest for foo.bar.js',
+	it('throws an error when the manifest entry is missing', () => {
+		// Use client.apps (not cached by previous test) with an empty manifest
+		(readFileSync as jest.Mock).mockReturnValue(JSON.stringify({}));
+		expect(() => getPathFromManifest('client.apps', 'index.js')).toThrow(
+			'Missing manifest for index.js',
 		);
 	});
 });
