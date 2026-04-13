@@ -59,12 +59,7 @@ const sectionHeadingStyles = css`
 `;
 
 const inningsHeadingStyles = css`
-	display: flex;
 	padding: 6px ${space[3]}px;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: center;
-	gap: ${space[1]}px;
 	background: ${palette('--cricket-scorecard-first-team-color')};
 	color: ${neutral[100]};
 	${responsiveTextSansBold}
@@ -134,10 +129,7 @@ const batterNameTextStyles = css`
 	flex-direction: column;
 `;
 
-const rowBaseStyles = css``;
-
 const tableRowStyles = css`
-	${rowBaseStyles}
 	border-top: 1px solid ${palette('--football-match-stat-border')};
 `;
 
@@ -151,7 +143,6 @@ const dimmedCellStyles = css`
 `;
 
 const footerRowStyles = css`
-	${rowBaseStyles}
 	border-top: 1px solid ${palette('--football-match-stat-border')};
 	td,
 	th {
@@ -173,7 +164,6 @@ const hideFromTabletStyle = css`
 `;
 
 const extrasDashedRowStyles = css`
-	${rowBaseStyles}
 	border-top: 1px dashed ${palette('--football-match-stat-border')};
 `;
 
@@ -240,12 +230,7 @@ const lineupsGridStyles = css`
 `;
 
 const teamContainerStyles = css`
-	display: flex;
 	padding: ${space[2]}px 0 2px 0;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: ${space[2]}px;
-	flex: 1 0 0;
 `;
 
 const awayTeamDividerStyles = css`
@@ -264,7 +249,7 @@ const awayTeamDividerStyles = css`
 
 const teamNameStyles = css`
 	${responsiveTextSansBold}
-	margin: 0;
+	margin: 0 0 ${space[2]}px;
 `;
 
 const homeTeamNameStyles = css`
@@ -279,9 +264,6 @@ const playerListStyles = css`
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	display: flex;
-	flex-direction: column;
-	gap: ${space[1]}px;
 `;
 
 const playerItemStyles = css`
@@ -293,10 +275,9 @@ const officialsListStyles = css`
 	list-style: none;
 	margin: 0;
 	padding: ${space[2]}px 0 2px 0;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: ${space[2]}px;
+	li + li {
+		margin-top: ${space[2]}px;
+	}
 `;
 
 const getExtrasDescription = ({
@@ -494,7 +475,7 @@ const Batting = ({
 			</tbody>
 			<tfoot>
 				<tr css={footerRowStyles}>
-					<th scope="row" css={[tableRowHeaderStyles]}>
+					<th scope="row" css={tableRowHeaderStyles}>
 						<div css={batterNameTextStyles}>
 							Total
 							<div css={[howOutStyles, hideFromTabletStyle]}>
