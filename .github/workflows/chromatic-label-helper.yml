@@ -10,6 +10,19 @@ on:
     types: [opened, ready_for_review]
     paths-ignore:
       - 'ab-testing/**'
+      - 'scripts/**'
+      - 'dotcom-rendering/cdk/**'
+      - 'dotcom-rendering/cypress/**'
+      - 'dotcom-rendering/docs/**'
+      - 'dotcom-rendering/fixtures/**'
+      - 'dotcom-rendering/logs/**'
+      - 'dotcom-rendering/playwright/**'
+      - 'dotcom-rendering/playwright-report/**'
+      - 'dotcom-rendering/scripts/**'
+      - 'dotcom-rendering/test-results/**'
+      - 'dotcom-rendering/__mocks__/**'
+      - '**.md'
+      - '**/*.d.ts'
 
 jobs:
   write_comment:
