@@ -17,6 +17,7 @@ export type NewsletterSignupCardProps = {
 };
 
 const containerStyles = css`
+	clear: left;
 	background-color: ${themePalette('--newsletter-card-background')};
 	margin-bottom: ${space[6]}px;
 	padding: ${space[2]}px ${space[2]}px ${space[4]}px ${space[2]}px;

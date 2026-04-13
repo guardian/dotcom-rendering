@@ -22,7 +22,6 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	index: number;
 	listId: number;
 	identityName: string;
-	successDescription: string;
 	/** Illustration image URL (square crop) for the NewsletterSignupCard variant */
 	illustrationSquare?: string;
 	idApiUrl: string;
@@ -32,6 +31,7 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	hideNewsletterSignupComponentForSubscribers?: boolean;
 	/** Feature flag to show the new NewsletterSignupCard design instead of EmailSignup */
 	showNewNewsletterSignupCard?: boolean;
+	successDescription: string;
 }
 
 /**
@@ -86,6 +86,28 @@ export const EmailSignUpWrapper = ({
 						<NewsletterPrivacyMessage />
 					)}
 				</NewsletterSignupCardContainer>
+			</InlineSkipToWrapper>
+		);
+	}
+
+	// When the new card design is enabled, always show it regardless of subscription status
+	if (showNewNewsletterSignupCard) {
+		return (
+			<InlineSkipToWrapper
+				id={`EmailSignup-skip-link-${index}`}
+				blockDescription="newsletter promotion"
+			>
+				<NewsletterSignupCard {...emailSignUpProps}>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<SecureSignup
+							newsletterId={emailSignUpProps.identityName}
+							successDescription={emailSignUpProps.description}
+						/>
+					</Island>
+					{!emailSignUpProps.hidePrivacyMessage && (
+						<NewsletterPrivacyMessage />
+					)}
+				</NewsletterSignupCard>
 			</InlineSkipToWrapper>
 		);
 	}
