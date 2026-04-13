@@ -1,4 +1,4 @@
-import { getOptionsHeaders, type AuthStatus } from '../../lib/identity';
+import { type AuthStatus, getOptionsHeaders } from '../../lib/identity';
 
 export const syncConsentToMparticle = async (
 	authStatus: AuthStatus,
