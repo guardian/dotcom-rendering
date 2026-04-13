@@ -7,7 +7,6 @@ import type { AdTargeting } from '../types/commercial';
 import type { AspectRatio } from '../types/front';
 import type { ArticleMedia } from '../types/mainMedia';
 import { Caption } from './Caption';
-import type { PlayButtonSize } from './Card/components/PlayIcon';
 import type { ResponsiveFontSize } from './CardHeadline';
 import { useConfig } from './ConfigContext';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
@@ -35,8 +34,6 @@ type Props = {
 	stickyVideos: boolean;
 	kickerText?: string;
 	pauseOffscreenVideo?: boolean;
-	iconSizeOnDesktop: PlayButtonSize;
-	iconSizeOnMobile: PlayButtonSize;
 	hidePillOnMobile: boolean;
 	enableAds: boolean;
 	aspectRatio?: AspectRatio;
@@ -78,8 +75,6 @@ export const YoutubeBlockComponent = ({
 	stickyVideos,
 	kickerText,
 	pauseOffscreenVideo = false,
-	iconSizeOnDesktop,
-	iconSizeOnMobile,
 	hidePillOnMobile,
 	enableAds,
 	aspectRatio,
@@ -209,8 +204,6 @@ export const YoutubeBlockComponent = ({
 				abTestParticipations={abTestParticipations}
 				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
-				iconSizeOnDesktop={iconSizeOnDesktop}
-				iconSizeOnMobile={iconSizeOnMobile}
 				hidePillOnMobile={hidePillOnMobile}
 				renderingTarget={renderingTarget}
 				aspectRatio={aspectRatio}
