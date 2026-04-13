@@ -30,15 +30,15 @@ const videoStyles = (aspectRatio: number) => css`
 	display: block;
 	height: auto;
 	width: 100%;
-	cursor: pointer;
+	cursor: auto;
 	-webkit-tap-highlight-color: transparent;
 
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${aspectRatio};
 `;
 
-const cinemagraphStyles = css`
-	cursor: auto;
+const interactiveStyles = css`
+	cursor: pointer;
 `;
 
 const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
@@ -63,6 +63,7 @@ const playIconStyles = css`
 	background: none;
 	padding: 0;
 `;
+
 const controlContainerStyles = (position: ControlsPosition) => css`
 	position: absolute;
 	display: flex;
@@ -95,6 +96,9 @@ const iconContainerStyles = css`
 export const PLAYER_STATES = [
 	'NOT_STARTED',
 	'PLAYING',
+	/**
+	 * A user action pauses the video.
+	 */
 	'PAUSED_BY_USER',
 	/**
 	 * The video is paused when the user scrolls away.
@@ -136,13 +140,18 @@ type Props = {
 	AudioIcon: ((iconProps: IconProps) => JSX.Element) | null;
 	posterImage?: string;
 	preloadPartialData: boolean;
-	showPlayIcon: boolean;
 	showProgressBar: boolean;
+	showPlayIcon: boolean;
+	showIcons: boolean;
+	showFullscreenIcon: boolean;
+	showSubtitles: boolean;
 	subtitleSource?: string;
-	subtitleSize?: SubtitleSize;
-	controlsPosition: ControlsPosition;
+	subtitleSize: SubtitleSize;
 	/* used in custom subtitle overlays */
 	activeCue?: ActiveCue | null;
+	shouldLoop: boolean;
+	isInteractive: boolean;
+	controlsPosition: ControlsPosition;
 };
 
 /**
@@ -183,28 +192,27 @@ export const SelfHostedVideoPlayer = forwardRef(
 			onError,
 			AudioIcon,
 			preloadPartialData,
+			showProgressBar: canShowProgressBar,
 			showPlayIcon,
-			showProgressBar,
+			showIcons: canShowIcons,
+			showFullscreenIcon,
+			showSubtitles: canShowSubtitles,
 			subtitleSource,
 			subtitleSize,
-			controlsPosition,
 			activeCue,
+			shouldLoop,
+			isInteractive,
+			controlsPosition,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
-		const isCinemagraph = videoStyle === 'Cinemagraph';
 		const videoId = `video-${uniqueId}`;
-		const showSubtitles =
-			!isCinemagraph && !!subtitleSource && !!subtitleSize;
 
-		const showControls =
-			!isCinemagraph &&
-			ref &&
-			'current' in ref &&
-			ref.current &&
-			isPlayable;
+		const currentRefExists = ref && 'current' in ref && !!ref.current;
 
-		const showFullscreenIcon = videoStyle === 'Default';
+		const showSubtitles = canShowSubtitles && !!subtitleSource;
+		const showProgressBar = canShowProgressBar && currentRefExists;
+		const showIcons = canShowIcons && currentRefExists && isPlayable;
 
 		const dataLinkName = `gu-video-${videoStyle}-${
 			showPlayIcon ? 'play' : 'pause'
@@ -217,7 +225,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					id={videoId}
 					css={[
 						videoStyles(aspectRatio),
-						isCinemagraph && cinemagraphStyles,
+						isInteractive && interactiveStyles,
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
 					crossOrigin="anonymous"
@@ -229,7 +237,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					data-link-name={dataLinkName}
 					data-chromatic="ignore"
 					preload={preloadPartialData ? 'metadata' : 'none'}
-					loop={true}
+					loop={shouldLoop}
 					muted={isMuted}
 					playsInline={true}
 					poster={posterImage}
@@ -239,13 +247,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onCanPlayThrough={handleCanPlay}
 					onPlaying={handlePlaying}
 					onTimeUpdate={() => {
-						if (
-							ref &&
-							'current' in ref &&
-							ref.current &&
-							playerState === 'PLAYING'
-						) {
-							setCurrentTime(ref.current.currentTime);
+						if (currentRefExists && playerState === 'PLAYING') {
+							setCurrentTime(ref.current!.currentTime);
 						}
 					}}
 					onPause={handlePause}
@@ -279,73 +282,71 @@ export const SelfHostedVideoPlayer = forwardRef(
 						position={controlsPosition}
 					/>
 				)}
-				{showControls && (
-					<>
-						{showPlayIcon && (
+				{showPlayIcon && (
+					<button
+						type="button"
+						onClick={handlePlayPauseClick}
+						css={playIconStyles}
+						data-link-name={`gu-video-loop-play-${atomId}`}
+						data-testid="play-icon"
+					>
+						<PlayIcon iconWidth="narrow" />
+					</button>
+				)}
+				{showProgressBar && (
+					<VideoProgressBar
+						videoId={videoId}
+						currentTime={currentTime}
+						duration={ref.current!.duration}
+					/>
+				)}
+				{showIcons && (
+					<div css={controlContainerStyles(controlsPosition)}>
+						{AudioIcon && (
 							<button
 								type="button"
-								onClick={handlePlayPauseClick}
-								css={playIconStyles}
-								data-link-name={`gu-video-loop-play-${atomId}`}
-								data-testid="play-icon"
+								onClick={handleAudioClick}
+								css={buttonStyles}
+								data-link-name={`gu-video-loop-${
+									isMuted ? 'unmute' : 'mute'
+								}-${atomId}`}
 							>
-								<PlayIcon iconWidth="narrow" />
+								<div
+									css={iconContainerStyles}
+									data-testid={`${
+										isMuted ? 'unmute' : 'mute'
+									}-icon`}
+								>
+									<AudioIcon
+										size="xsmall"
+										theme={{
+											fill: palette('--video-icon'),
+										}}
+									/>
+								</div>
 							</button>
 						)}
-						{showProgressBar && (
-							<VideoProgressBar
-								videoId={videoId}
-								currentTime={currentTime}
-								duration={ref.current!.duration}
-							/>
+						{showFullscreenIcon && (
+							<button
+								type="button"
+								onClick={handleFullscreenClick}
+								css={buttonStyles}
+								data-link-name={`gu-video-loop-fullscreen-${atomId}`}
+							>
+								<div
+									css={iconContainerStyles}
+									data-testid="fullscreen-icon"
+								>
+									<SvgArrowExpand
+										size="xsmall"
+										theme={{
+											fill: palette('--video-icon'),
+										}}
+									/>
+								</div>
+							</button>
 						)}
-						<div css={controlContainerStyles(controlsPosition)}>
-							{AudioIcon && (
-								<button
-									type="button"
-									onClick={handleAudioClick}
-									css={buttonStyles}
-									data-link-name={`gu-video-loop-${
-										isMuted ? 'unmute' : 'mute'
-									}-${atomId}`}
-								>
-									<div
-										css={iconContainerStyles}
-										data-testid={`${
-											isMuted ? 'unmute' : 'mute'
-										}-icon`}
-									>
-										<AudioIcon
-											size="xsmall"
-											theme={{
-												fill: palette('--video-icon'),
-											}}
-										/>
-									</div>
-								</button>
-							)}
-							{showFullscreenIcon && (
-								<button
-									type="button"
-									onClick={handleFullscreenClick}
-									css={buttonStyles}
-									data-link-name={`gu-video-loop-fullscreen-${atomId}`}
-								>
-									<div
-										css={iconContainerStyles}
-										data-testid="fullscreen-icon"
-									>
-										<SvgArrowExpand
-											size="xsmall"
-											theme={{
-												fill: palette('--video-icon'),
-											}}
-										/>
-									</div>
-								</button>
-							)}
-						</div>
-					</>
+					</div>
 				)}
 			</>
 		);
