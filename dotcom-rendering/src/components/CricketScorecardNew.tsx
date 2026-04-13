@@ -635,6 +635,39 @@ const FallOfWickets = ({
 	</div>
 );
 
+const LineupTeam = ({
+	team,
+	teamType,
+}: {
+	team: CricketTeam;
+	teamType: 'homeTeam' | 'awayTeam';
+}) => (
+	<div
+		css={[
+			teamContainerStyles,
+			teamType === 'awayTeam' ? awayTeamDividerStyles : undefined,
+		]}
+	>
+		<h3
+			css={[
+				teamNameStyles,
+				teamType === 'homeTeam'
+					? homeTeamNameStyles
+					: awayTeamNameStyles,
+			]}
+		>
+			{team.name}
+		</h3>
+		<ul css={playerListStyles}>
+			{team.lineup.map((player) => (
+				<li key={player} css={playerItemStyles}>
+					{player}
+				</li>
+			))}
+		</ul>
+	</div>
+);
+
 type Props = {
 	allInnings: Innings[];
 	officials: string[];
@@ -690,33 +723,8 @@ export const CricketScorecardNew = ({
 			<h2 css={lineupsHeadingStyles}>Lineups</h2>
 
 			<div css={lineupsGridStyles}>
-				{[homeTeam, awayTeam].map((team, i) => (
-					<div
-						key={team.name}
-						css={[
-							teamContainerStyles,
-							i === 1 ? awayTeamDividerStyles : undefined,
-						]}
-					>
-						<h3
-							css={[
-								teamNameStyles,
-								i === 0
-									? homeTeamNameStyles
-									: awayTeamNameStyles,
-							]}
-						>
-							{team.name}
-						</h3>
-						<ul css={playerListStyles}>
-							{team.lineup.map((player) => (
-								<li key={player} css={playerItemStyles}>
-									{player}
-								</li>
-							))}
-						</ul>
-					</div>
-				))}
+				<LineupTeam team={homeTeam} teamType="homeTeam" />
+				<LineupTeam team={awayTeam} teamType="awayTeam" />
 			</div>
 
 			<div css={cardSectionStyles}>
