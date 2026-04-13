@@ -131,6 +131,7 @@ const buildPayload = async ({
 	pageId,
 	inHoldbackGroup,
 	inAuxiaVariant,
+	isSensitive,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const getBrowserId = (): string | undefined => {
 		if (!inAuxiaVariant) return undefined;
@@ -170,6 +171,7 @@ const buildPayload = async ({
 			pageId,
 			inHoldbackGroup,
 			browserId: getBrowserId(),
+			isSensitive,
 		},
 	};
 };

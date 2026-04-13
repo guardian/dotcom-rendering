@@ -52,6 +52,7 @@ type Props = {
 	renderAds: boolean;
 	isLabs: boolean;
 	articleEndSlot: boolean;
+	isSensitive: boolean;
 };
 
 const slotStyles = css`
@@ -118,6 +119,7 @@ export const SlotBodyEnd = ({
 	renderAds,
 	isLabs,
 	articleEndSlot,
+	isSensitive,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const { brazeMessages, braze } = useBraze(idApiUrl, renderingTarget);
@@ -175,6 +177,7 @@ export const SlotBodyEnd = ({
 					'growth-holdback-group',
 					'control',
 				) ?? false,
+			isSensitive,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -230,6 +233,7 @@ export const SlotBodyEnd = ({
 		pageId,
 		braze,
 		abTests,
+		isSensitive,
 	]);
 
 	useEffect(() => {
