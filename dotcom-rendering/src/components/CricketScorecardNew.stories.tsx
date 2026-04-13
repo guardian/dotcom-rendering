@@ -1,33 +1,12 @@
-import { css } from '@emotion/react';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
-import { grid } from '../grid';
-import { palette } from '../palette';
 import { CricketScorecardNew as CricketScorecardNewComponent } from './CricketScorecardNew';
-
-const storyContainerStyles = css`
-	background-color: ${palette('--football-match-info-background')};
-	${grid.paddedContainer}
-`;
-
-const storyInnerStyles = css`
-	${grid.column.centre}
-	padding-top: 10px;
-	padding-bottom: 10px;
-`;
 
 const meta = preview.meta({
 	component: CricketScorecardNewComponent,
 	title: 'Components/CricketScorecardNew',
-	decorators: [
-		(Story) => (
-			<div css={storyContainerStyles}>
-				<div css={storyInnerStyles}>
-					<Story />
-				</div>
-			</div>
-		),
-	],
+	decorators: [centreColumnDecorator],
 	parameters: {
 		chromatic: {
 			modes: {

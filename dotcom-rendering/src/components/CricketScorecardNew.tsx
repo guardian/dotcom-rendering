@@ -9,7 +9,7 @@ import {
 	textSansBold15,
 	visuallyHidden,
 } from '@guardian/source/foundations';
-import { Fragment, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import type {
 	Batter,
 	Bowler,
@@ -85,8 +85,8 @@ const batIconWrapperStyles = css`
 `;
 
 const batIconSvgStyles = css`
-	width: 28.3px;
-	height: 28.3px;
+	width: 28px;
+	height: 28px;
 	transform: rotate(-15deg);
 	flex-shrink: 0;
 `;
@@ -216,6 +216,12 @@ const noFirstRowBorderStyles = css`
 `;
 
 const overallContainerStyles = css`
+	display: flex;
+	flex-direction: column;
+	gap: ${space[3]}px;
+`;
+
+const inningsContainerStyles = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${space[3]}px;
@@ -669,8 +675,8 @@ export const CricketScorecardNew = ({
 			const isCurrentInnings =
 				matchResult !== 'result' && index === allInnings.length - 1;
 			return (
-				<Fragment key={innings.description}>
-					<section css={cardStyles}>
+				<section key={innings.description} css={inningsContainerStyles}>
+					<div css={cardStyles}>
 						<h2
 							css={[
 								inningsHeadingStyles,
@@ -679,8 +685,8 @@ export const CricketScorecardNew = ({
 						>
 							{innings.description}
 						</h2>
-					</section>
-					<section css={cardStyles}>
+					</div>
+					<div css={cardStyles}>
 						<Batting
 							batters={innings.batters}
 							extras={innings.extras}
@@ -688,14 +694,14 @@ export const CricketScorecardNew = ({
 							isHomeTeam={isHomeTeam}
 							showBatIcons={isCurrentInnings}
 						/>
-					</section>
-					<section css={cardStyles}>
+					</div>
+					<div css={cardStyles}>
 						<Bowling bowlers={innings.bowlers} />
-					</section>
-					<section css={cardStyles}>
+					</div>
+					<div css={cardStyles}>
 						<FallOfWickets fallOfWickets={innings.fallOfWickets} />
-					</section>
-				</Fragment>
+					</div>
+				</section>
 			);
 		})}
 
