@@ -22,7 +22,7 @@ const nodeVersion = nvmrc.match(nodeVersionPattern)?.[0] ?? undefined;
 if (!nodeVersion) {
 	warn(
 		'Node version in .nvmrc has incorrect pattern:',
-		`\`${nvmrc}\` does not match \`x\``,
+		`Please specify a major version only (e.g. \`20\`). Full semantic versions (\`x.y.z\`) are not supported. You entered: \`${nvmrc}\``,
 	);
 	process.exit(1);
 } else {

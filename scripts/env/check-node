@@ -37,7 +37,7 @@ if [[ $nvmrc_contents =~ $nvmrc_version_pattern ]]; then
 	nvmrc_version=${BASH_REMATCH[0]}
 else
 	log_with_color "${red}The Node version in .nvmrc is invalid${reset}"
-	log_with_color "${dim}It should match the pattern 'x'.${reset}"
+	log_with_color "${dim}Use a major version only (e.g. '20').${reset}"
 	# exit with failure
     exit 1
 fi
