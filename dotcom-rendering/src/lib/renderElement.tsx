@@ -571,19 +571,22 @@ export const renderElement = ({
 					caption={element.caption}
 				/>
 			);
-		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement': {
 			const emailSignUpProps = {
 				index,
 				listId: element.newsletter.listId,
 				identityName: element.newsletter.identityName,
+				category: element.newsletter.category,
 				description: element.newsletter.description,
 				name: element.newsletter.name,
 				frequency: element.newsletter.frequency,
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
+				renderUrl: element.newsletter.renderUrl,
 				idApiUrl: idApiUrl ?? '',
 				hideNewsletterSignupComponentForSubscribers:
 					!!switches.hideNewsletterSignupComponentForSubscribers,
+				showNewsletterSignupCard: !!switches.showNewsletterSignupCard,
 			};
 			if (isListElement || isTimeline) return null;
 			return (
@@ -591,6 +594,7 @@ export const renderElement = ({
 					<EmailSignUpWrapper {...emailSignUpProps} />
 				</Island>
 			);
+		}
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return renderAds && <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':

@@ -2544,10 +2544,16 @@
                         "group": {
                             "type": "string"
                         },
+                        "category": {
+                            "type": "string"
+                        },
                         "regionFocus": {
                             "type": "string"
                         },
                         "illustrationCard": {
+                            "type": "string"
+                        },
+                        "renderUrl": {
                             "type": "string"
                         }
                     },
