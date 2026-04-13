@@ -287,6 +287,8 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								hasPageSkin={false}
 								hasPageSkinContentSelfConstrain={false}
 								pageId={article.pageId}
+								tagIds={article.tags.map((tag) => tag.id)}
+								sectionId={article.config.section}
 							/>
 						</div>
 					) : (
@@ -323,6 +325,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										hasPageSkin={false}
 										hasPageSkinContentSelfConstrain={false}
 										pageId={article.pageId}
+										tagIds={article.tags.map(
+											(tag) => tag.id,
+										)}
+										sectionId={article.config.section}
 									/>
 								</Stuck>
 							</div>
