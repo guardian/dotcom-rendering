@@ -21,6 +21,8 @@ export type Batter = {
 	fours: number;
 	sixes: number;
 	howOut: string;
+	onStrike: boolean;
+	nonStrike: boolean;
 };
 
 export type Extras = {
@@ -51,6 +53,7 @@ export type CricketTeam = {
 
 export type Innings = {
 	description: string;
+	battingTeam: string;
 	bowlers: Bowler[];
 	batters: Batter[];
 	extras: Extras;
@@ -85,10 +88,20 @@ const feInningsToDCARInnings = (feInnings: FECricketInnings): Innings => {
 
 	return {
 		description: feInnings.description,
+		battingTeam: feInnings.battingTeam,
 		inningsTotals,
 		extras,
 		fallOfWickets: feInnings.fallOfWicket,
-		batters: feInnings.batters,
+		batters: feInnings.batters.map((b) => ({
+			name: b.name,
+			ballsFaced: b.ballsFaced,
+			runs: b.runs,
+			fours: b.fours,
+			sixes: b.sixes,
+			howOut: b.howOut,
+			onStrike: b.onStrike,
+			nonStrike: b.nonStrike,
+		})),
 		bowlers: feInnings.bowlers,
 	};
 };
