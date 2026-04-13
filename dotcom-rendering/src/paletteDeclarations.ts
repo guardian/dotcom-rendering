@@ -7593,6 +7593,14 @@ const paletteColours = {
 		light: navSearchBarText,
 		dark: navSearchBarText,
 	},
+	'--newsletter-card-background': {
+		light: () => '#F3F7FF',
+		dark: () => '#F3F7FF',
+	},
+	'--newsletter-frequency-tag': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--numbered-list-heading': {
 		light: numberedListHeadingLight,
 		dark: numberedListHeadingDark,

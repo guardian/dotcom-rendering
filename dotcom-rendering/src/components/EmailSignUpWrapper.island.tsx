@@ -5,6 +5,7 @@ import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
+import { NewsletterSignupCard } from './NewsletterSignupCard';
 import { Placeholder } from './Placeholder';
 import { SecureSignup } from './SecureSignup.island';
 
@@ -21,12 +22,16 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	index: number;
 	listId: number;
 	identityName: string;
-	successDescription: string;
+	/** Illustration image URL 1x1 for the NewsletterSignupCard variant */
+	illustrationSquare?: string;
 	idApiUrl: string;
 	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
 	hidePrivacyMessage?: boolean;
 	/** Feature flag to enable hiding newsletter signup for already subscribed users */
 	hideNewsletterSignupComponentForSubscribers?: boolean;
+	/** Feature flag to show the new NewsletterSignupCard design instead of EmailSignup */
+	showNewNewsletterSignupCard?: boolean;
+	successDescription: string;
 }
 
 /**
@@ -44,6 +49,7 @@ export const EmailSignUpWrapper = ({
 	listId,
 	idApiUrl,
 	hideNewsletterSignupComponentForSubscribers = false,
+	showNewNewsletterSignupCard = false,
 	...emailSignUpProps
 }: EmailSignUpWrapperProps) => {
 	const isSubscribed = useNewsletterSubscription(
@@ -51,6 +57,28 @@ export const EmailSignUpWrapper = ({
 		idApiUrl,
 		hideNewsletterSignupComponentForSubscribers,
 	);
+
+	// When the new card design is enabled, always show it regardless of subscription status
+	if (showNewNewsletterSignupCard) {
+		return (
+			<InlineSkipToWrapper
+				id={`EmailSignup-skip-link-${index}`}
+				blockDescription="newsletter promotion"
+			>
+				<NewsletterSignupCard {...emailSignUpProps}>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<SecureSignup
+							newsletterId={emailSignUpProps.identityName}
+							successDescription={emailSignUpProps.description}
+						/>
+					</Island>
+					{!emailSignUpProps.hidePrivacyMessage && (
+						<NewsletterPrivacyMessage />
+					)}
+				</NewsletterSignupCard>
+			</InlineSkipToWrapper>
+		);
+	}
 
 	// Show placeholder while subscription status is being determined
 	// This prevents layout shift in both subscribed and non-subscribed cases

@@ -421,6 +421,9 @@
                 },
                 "illustrationCard": {
                     "type": "string"
+                },
+                "illustrationSquare": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -3066,6 +3069,9 @@
                             "type": "string"
                         },
                         "illustrationCard": {
+                            "type": "string"
+                        },
+                        "illustrationSquare": {
                             "type": "string"
                         }
                     },
