@@ -32,7 +32,7 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	/** Feature flag to enable hiding newsletter signup for already subscribed users */
 	hideNewsletterSignupComponentForSubscribers?: boolean;
 	/** Feature flag to switch to the NewsletterSignupCard shell */
-	useNewsletterSignupCard?: boolean;
+	showNewsletterSignupCard?: boolean;
 }
 
 /**
@@ -59,7 +59,7 @@ export const EmailSignUpWrapper = ({
 	successDescription,
 	hidePrivacyMessage,
 	hideNewsletterSignupComponentForSubscribers = false,
-	useNewsletterSignupCard = false,
+	showNewsletterSignupCard = false,
 }: EmailSignUpWrapperProps) => {
 	const isSubscribed = useNewsletterSubscription(
 		listId,
@@ -84,7 +84,7 @@ export const EmailSignUpWrapper = ({
 			id={`EmailSignup-skip-link-${index}`}
 			blockDescription="newsletter promotion"
 		>
-			{useNewsletterSignupCard ? (
+			{showNewsletterSignupCard ? (
 				<NewsletterSignupCardContainer
 					name={name}
 					description={description}

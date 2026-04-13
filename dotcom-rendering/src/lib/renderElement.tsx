@@ -586,7 +586,7 @@ export const renderElement = ({
 				idApiUrl: idApiUrl ?? '',
 				hideNewsletterSignupComponentForSubscribers:
 					!!switches.hideNewsletterSignupComponentForSubscribers,
-				useNewsletterSignupCard: !!switches.newsletterSignupCard,
+				showNewsletterSignupCard: !!switches.showNewsletterSignupCard,
 			};
 			if (isListElement || isTimeline) return null;
 			return (
