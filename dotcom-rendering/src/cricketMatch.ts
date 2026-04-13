@@ -21,6 +21,7 @@ export type Batter = {
 	fours: number;
 	sixes: number;
 	howOut: string;
+	out: boolean;
 	onStrike: boolean;
 	nonStrike: boolean;
 };
@@ -68,6 +69,7 @@ export type CricketMatch = {
 	innings: Innings[];
 	competitionName: string;
 	venueName: string;
+	result: string;
 };
 
 const feInningsToDCARInnings = (feInnings: FECricketInnings): Innings => {
@@ -99,6 +101,7 @@ const feInningsToDCARInnings = (feInnings: FECricketInnings): Innings => {
 			fours: b.fours,
 			sixes: b.sixes,
 			howOut: b.howOut,
+			out: b.out,
 			onStrike: b.onStrike,
 			nonStrike: b.nonStrike,
 		})),
@@ -137,5 +140,6 @@ export const parse = (
 		innings,
 		competitionName: feCricketMatch.competitionName,
 		venueName: feCricketMatch.venueName,
+		result: feCricketMatch.result,
 	});
 };

@@ -334,11 +334,13 @@ const Batting = ({
 	extras,
 	inningsTotals,
 	isHomeTeam,
+	showBatIcons,
 }: {
 	batters: Batter[];
 	extras: Extras;
 	inningsTotals: InningsTotals;
 	isHomeTeam: boolean;
+	showBatIcons: boolean;
 }) => (
 	<div css={cardSectionStyles}>
 		<table css={tableStyles}>
@@ -385,73 +387,81 @@ const Batting = ({
 				</tr>
 			</thead>
 			<tbody>
-				{batters.map((batter) => (
-					<tr key={batter.name} css={tableRowStyles}>
-						<th scope="row" css={tableRowHeaderStyles}>
-							{(batter.onStrike || batter.nonStrike) && (
-								<>
-									<BatIcon isHomeTeam={isHomeTeam} />
-									<span css={visuallyHiddenStyles}>
-										{batter.onStrike
-											? '(on strike)'
-											: '(at crease)'}
-									</span>
-								</>
-							)}
-							<div css={batterNameTextStyles}>
-								{batter.name}
-								<div css={[howOutStyles, hideFromTabletStyle]}>
-									{batter.howOut}
+				{batters.map((batter) => {
+					const isAtCrease = showBatIcons && !batter.out;
+					return (
+						<tr key={batter.name} css={tableRowStyles}>
+							<th scope="row" css={tableRowHeaderStyles}>
+								{isAtCrease && (
+									<>
+										<BatIcon isHomeTeam={isHomeTeam} />
+										<span css={visuallyHiddenStyles}>
+											{batter.onStrike
+												? '(on strike)'
+												: '(at crease)'}
+										</span>
+									</>
+								)}
+								<div css={batterNameTextStyles}>
+									{batter.name}
+									<div
+										css={[
+											howOutStyles,
+											hideFromTabletStyle,
+										]}
+									>
+										{batter.howOut}
+									</div>
 								</div>
-							</div>
-						</th>
-						<td
-							css={[
-								tableCellStyles,
-								howOutStyles,
-								hideUntilTabletStyle,
-							]}
-						>
-							{batter.howOut}
-						</td>
-						<td
-							css={[
-								tableCellStyles,
-								numericCellStyles,
-								batColWidthStyles,
-							]}
-						>
-							{batter.runs}
-						</td>
-						<td
-							css={[
-								tableCellStyles,
-								numericCellStyles,
-								batColWidthStyles,
-							]}
-						>
-							{batter.ballsFaced}
-						</td>
-						<td
-							css={[
-								tableCellStyles,
-								numericCellStyles,
-								hideUntilTabletStyle,
-							]}
-						>
-							{batter.fours}
-						</td>
-						<td
-							css={[
-								tableCellStyles,
-								numericCellStyles,
-								hideUntilTabletStyle,
-							]}
-						>
-							{batter.sixes}
-						</td>
-					</tr>
-				))}
+							</th>
+							<td
+								css={[
+									tableCellStyles,
+									howOutStyles,
+									hideUntilTabletStyle,
+								]}
+							>
+								{batter.howOut}
+							</td>
+							<td
+								css={[
+									tableCellStyles,
+									numericCellStyles,
+									batColWidthStyles,
+								]}
+							>
+								{batter.runs}
+							</td>
+							<td
+								css={[
+									tableCellStyles,
+									numericCellStyles,
+									batColWidthStyles,
+								]}
+							>
+								{batter.ballsFaced}
+							</td>
+							<td
+								css={[
+									tableCellStyles,
+									numericCellStyles,
+									hideUntilTabletStyle,
+								]}
+							>
+								{batter.fours}
+							</td>
+							<td
+								css={[
+									tableCellStyles,
+									numericCellStyles,
+									hideUntilTabletStyle,
+								]}
+							>
+								{batter.sixes}
+							</td>
+						</tr>
+					);
+				})}
 				<tr css={extrasDashedRowStyles}>
 					<th scope="row" css={tableRowHeaderStyles}>
 						<div css={batterNameTextStyles}>
@@ -643,6 +653,7 @@ type Props = {
 	officials: string[];
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
+	matchResult: string;
 };
 
 export const CricketScorecardNew = ({
@@ -650,10 +661,13 @@ export const CricketScorecardNew = ({
 	officials,
 	homeTeam,
 	awayTeam,
+	matchResult,
 }: Props) => (
 	<div css={overallContainerStyles}>
-		{allInnings.map((innings) => {
+		{allInnings.map((innings, index) => {
 			const isHomeTeam = innings.battingTeam === homeTeam.name;
+			const isCurrentInnings =
+				matchResult !== 'result' && index === allInnings.length - 1;
 			return (
 				<Fragment key={innings.description}>
 					<section css={cardStyles}>
@@ -672,6 +686,7 @@ export const CricketScorecardNew = ({
 							extras={innings.extras}
 							inningsTotals={innings.inningsTotals}
 							isHomeTeam={isHomeTeam}
+							showBatIcons={isCurrentInnings}
 						/>
 					</section>
 					<section css={cardStyles}>
