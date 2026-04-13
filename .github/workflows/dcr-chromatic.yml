@@ -5,30 +5,41 @@ on:
     branches: [main]
   pull_request:
     types: [opened, labeled, synchronize]
-    paths-ignore:
-      - 'ab-testing/**'
-      - 'scripts/**'
-      - 'dotcom-rendering/cdk/**'
-      - 'dotcom-rendering/cypress/**'
-      - 'dotcom-rendering/docs/**'
-      - 'dotcom-rendering/fixtures/**'
-      - 'dotcom-rendering/logs/**'
-      - 'dotcom-rendering/playwright/**'
-      - 'dotcom-rendering/playwright-report/**'
-      - 'dotcom-rendering/scripts/**'
-      - 'dotcom-rendering/test-results/**'
-      - 'dotcom-rendering/__mocks__/**'
-      - '**.md'
-      - '**.yml'
-      - '**/*.d.ts'
 
 jobs:
+  check-paths:
+    name: Check changed paths
+    runs-on: ubuntu-latest
+    outputs:
+      relevant: ${{ steps.filter.outputs.relevant }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          # Only run Chromatic if files that affect visual rendering have changed.
+          # Everything not listed here (docs, scripts, config, tests, etc.) is ignored.
+          filters: |
+            relevant:
+              - 'dotcom-rendering/src/**'
+              - 'dotcom-rendering/stories/**'
+              - 'dotcom-rendering/.storybook/**'
+              - 'dotcom-rendering/package.json'
+              - 'libs/**'
+              - 'pnpm-lock.yaml'
+
   chromatic:
     name: Chromatic
     runs-on: ubuntu-latest
-    # Run Chromatic only if `run_chromatic` label has been applied or we're
-    # pushing to `main`.
-    if: contains(github.event.pull_request.labels.*.name, 'run_chromatic')  ||  github.ref == 'refs/heads/main'
+    needs: check-paths
+    # Run Chromatic if:
+    # - pushing to main (always run), OR
+    # - on a PR with the `run_chromatic` label applied AND relevant files changed
+    if: |
+      github.ref == 'refs/heads/main' ||
+      (contains(github.event.pull_request.labels.*.name, 'run_chromatic') && needs.check-paths.outputs.relevant == 'true')
     steps:
       - name: Checkout - On Pull Request
         uses: actions/checkout@v6
