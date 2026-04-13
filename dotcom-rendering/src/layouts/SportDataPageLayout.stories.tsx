@@ -76,7 +76,6 @@ export const CricketMatch = {
 				venueName: 'The Oval',
 				competitionName: 'World Cup',
 				result: 'result',
-				result: 'result',
 			},
 		},
 	},
