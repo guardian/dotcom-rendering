@@ -330,6 +330,8 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
 						pageId={article.pageId}
+						tagIds={article.tags.map((tag) => tag.id)}
+						sectionId={article.config.section}
 					/>
 				</div>
 			)}

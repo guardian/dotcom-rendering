@@ -22,6 +22,8 @@ type Props = {
 	hasPageSkin?: boolean;
 	hasPageSkinContentSelfConstrain?: boolean;
 	pageId?: string;
+	tagIds?: string[];
+	sectionId?: string;
 };
 
 /**
@@ -56,6 +58,8 @@ export const Masthead = ({
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
 	pageId,
+	tagIds,
+	sectionId,
 }: Props) => (
 	<header data-component="header">
 		<Section
@@ -78,6 +82,8 @@ export const Masthead = ({
 						idApiUrl={idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
 						hasPageSkin={hasPageSkin}
+						tagIds={tagIds}
+						sectionId={sectionId}
 					/>
 				</Island>
 			</div>
