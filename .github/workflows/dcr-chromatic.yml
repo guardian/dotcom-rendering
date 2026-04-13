@@ -19,6 +19,7 @@ on:
       - 'dotcom-rendering/test-results/**'
       - 'dotcom-rendering/__mocks__/**'
       - '**.md'
+      - '**.yml'
       - '**/*.d.ts'
 
 jobs:
