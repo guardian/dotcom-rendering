@@ -1,6 +1,4 @@
-import jsdom from 'jsdom';
-
-const { JSDOM } = jsdom;
+import { JSDOM } from 'jsdom';
 import type { FEElement } from '../types/content';
 import { isLegacyTableOfContents } from './isLegacyTableOfContents';
 
