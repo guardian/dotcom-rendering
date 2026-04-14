@@ -616,7 +616,7 @@ export const SelfHostedVideo = ({
 	 */
 	useEffect(() => {
 		if (
-			!shouldAutoplay ||
+			shouldAutoplay === false ||
 			(isInView === false && playerState === 'NOT_STARTED')
 		) {
 			setShowPosterImage(true);
