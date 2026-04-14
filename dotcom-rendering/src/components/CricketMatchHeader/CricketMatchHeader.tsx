@@ -112,7 +112,7 @@ const StatusLine = (props: { match: CricketMatch; edition: EditionId }) => (
 			{props.match.series}
 		</SeriesName>
 		<span>
-			{props.match.competition}, {props.match.venue} •{' '}
+			{props.match.competition}, {props.match.venue}
 		</span>
 		<MatchStatus edition={props.edition} match={props.match} />
 	</p>
@@ -174,14 +174,22 @@ const MatchStatus = (props: { match: CricketMatch; edition: EditionId }) => {
 		[props.edition],
 	);
 
-	switch (props.match.kind) {
-		case 'Fixture':
-			return matchDateFormatter.format(props.match.matchDate);
-		default:
-			return (
-				<span css={textSansBold14Object}>Day {props.match.day}</span>
-			);
+	if (props.match.kind === 'Fixture') {
+		return (
+			<span> • {matchDateFormatter.format(props.match.matchDate)}</span>
+		);
 	}
+
+	if (props.match.day !== undefined) {
+		return (
+			<>
+				<span> • </span>
+				<span css={textSansBold14Object}>Day {props.match.day}</span>
+			</>
+		);
+	}
+
+	return null;
 };
 
 const MatchDateFormatterForEdition = (

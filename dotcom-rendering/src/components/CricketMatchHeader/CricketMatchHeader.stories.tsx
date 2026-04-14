@@ -133,7 +133,6 @@ export const ResultWinByWickets = {
 		match: {
 			...Fixture.args.match,
 			kind: 'Result',
-			day: 4,
 			innings: [
 				{
 					declared: false,
