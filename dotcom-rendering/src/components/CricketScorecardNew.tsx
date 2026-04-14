@@ -329,279 +329,270 @@ const Batting = ({
 	isHomeTeam: boolean;
 	showBatIcons: boolean;
 }) => (
-	<div css={cardSectionStyles}>
-		<table css={tableStyles}>
-			<thead>
-				<tr>
-					<th css={tableHeadCellStyles}>Batter</th>
-					<th css={[tableHeadCellStyles, hideUntilTabletStyle]}></th>
-					<th
-						css={[
-							tableHeadCellStyles,
-							numericCellStyles,
-							batColWidthStyles,
-						]}
-					>
-						Runs
-					</th>
-					<th
-						css={[
-							tableHeadCellStyles,
-							numericCellStyles,
-							batColWidthStyles,
-						]}
-					>
-						Balls
-					</th>
-					<th
-						css={[
-							tableHeadCellStyles,
-							numericCellStyles,
-							hideUntilTabletStyle,
-						]}
-					>
-						4s
-					</th>
-					<th
-						css={[
-							tableHeadCellStyles,
-							numericCellStyles,
-							hideUntilTabletStyle,
-						]}
-					>
-						6s
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				{batters.map((batter) => {
-					const isAtCrease = showBatIcons && !batter.out;
-					return (
-						<tr key={batter.name} css={tableRowStyles}>
-							<th scope="row" css={tableRowHeaderStyles}>
-								{isAtCrease && (
-									<>
-										<BatIcon isHomeTeam={isHomeTeam} />
-										<span css={visuallyHiddenStyles}>
-											{batter.onStrike
-												? '(on strike)'
-												: '(at crease)'}
-										</span>
-									</>
-								)}
-								<div css={batterNameTextStyles}>
-									{batter.name}
-									<div
-										css={[
-											howOutStyles,
-											hideFromTabletStyle,
-										]}
-									>
-										{batter.howOut}
-									</div>
-								</div>
-							</th>
-							<td
-								css={[
-									tableCellStyles,
-									howOutStyles,
-									hideUntilTabletStyle,
-								]}
-							>
-								{batter.howOut}
-							</td>
-							<td
-								css={[
-									tableCellStyles,
-									numericCellStyles,
-									batColWidthStyles,
-								]}
-							>
-								{batter.runs}
-							</td>
-							<td
-								css={[
-									tableCellStyles,
-									numericCellStyles,
-									batColWidthStyles,
-								]}
-							>
-								{batter.ballsFaced}
-							</td>
-							<td
-								css={[
-									tableCellStyles,
-									numericCellStyles,
-									hideUntilTabletStyle,
-								]}
-							>
-								{batter.fours}
-							</td>
-							<td
-								css={[
-									tableCellStyles,
-									numericCellStyles,
-									hideUntilTabletStyle,
-								]}
-							>
-								{batter.sixes}
-							</td>
-						</tr>
-					);
-				})}
-				<tr css={extrasDashedRowStyles}>
-					<th scope="row" css={tableRowHeaderStyles}>
-						<div css={batterNameTextStyles}>
-							Extras
-							<div css={[howOutStyles, hideFromTabletStyle]}>
-								{getExtrasDescription(extras)}
-							</div>
-						</div>
-					</th>
-					<td
-						css={[
-							tableCellStyles,
-							dimmedCellStyles,
-							hideUntilTabletStyle,
-						]}
-					>
-						{getExtrasDescription(extras)}
-					</td>
-					<td css={[tableCellStyles, batColWidthStyles]}>
-						{inningsTotals.extras}
-					</td>
-					<td css={[batColWidthStyles, hideFromTabletStyle]}></td>
-				</tr>
-			</tbody>
-			<tfoot>
-				<tr css={footerRowStyles}>
-					<th scope="row" css={tableRowHeaderStyles}>
-						<div css={batterNameTextStyles}>
-							Total
-							<div css={[howOutStyles, hideFromTabletStyle]}>
-								for {inningsTotals.wickets}
-							</div>
-						</div>
-					</th>
-					<td
-						css={[
-							tableCellStyles,
-							dimmedCellStyles,
-							hideUntilTabletStyle,
-						]}
-					>
-						for {inningsTotals.wickets}
-					</td>
-					<td css={[tableCellStyles, batColWidthStyles]}>
-						{inningsTotals.runs}
-					</td>
-					<td css={[batColWidthStyles, hideFromTabletStyle]}></td>
-					<td
-						css={[
-							tableCellStyles,
-							dimmedCellStyles,
-							hideUntilTabletStyle,
-						]}
-					>
-						{inningsTotals.overs} overs
-					</td>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
-);
-
-const Bowling = ({ bowlers }: { bowlers: Bowler[] }) => (
-	<div css={cardSectionStyles}>
-		<table css={tableStyles}>
-			<thead>
-				<tr>
-					<th css={tableHeadCellStyles}>Bowler</th>
-					<th
-						css={[
-							tableHeadCellStyles,
-							numericCellStyles,
-							bowlOColStyles,
-						]}
-					>
-						O
-					</th>
-					<th
-						css={[
-							tableHeadCellStyles,
-							numericCellStyles,
-							bowlStatColStyles,
-						]}
-					>
-						M
-					</th>
-					<th
-						css={[
-							tableHeadCellStyles,
-							numericCellStyles,
-							bowlStatColStyles,
-						]}
-					>
-						R
-					</th>
-					<th
-						css={[
-							tableHeadCellStyles,
-							numericCellStyles,
-							bowlStatColStyles,
-						]}
-					>
-						W
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				{bowlers.map((bowler) => (
-					<tr key={bowler.name} css={tableRowStyles}>
+	<table css={tableStyles}>
+		<thead>
+			<tr>
+				<th css={tableHeadCellStyles}>Batter</th>
+				<th css={[tableHeadCellStyles, hideUntilTabletStyle]}></th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						batColWidthStyles,
+					]}
+				>
+					Runs
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						batColWidthStyles,
+					]}
+				>
+					Balls
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						hideUntilTabletStyle,
+					]}
+				>
+					4s
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						hideUntilTabletStyle,
+					]}
+				>
+					6s
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{batters.map((batter) => {
+				const isAtCrease = showBatIcons && !batter.out;
+				return (
+					<tr key={batter.name} css={tableRowStyles}>
 						<th scope="row" css={tableRowHeaderStyles}>
-							{bowler.name}
+							{isAtCrease && (
+								<>
+									<BatIcon isHomeTeam={isHomeTeam} />
+									<span css={visuallyHiddenStyles}>
+										{batter.onStrike
+											? '(on strike)'
+											: '(at crease)'}
+									</span>
+								</>
+							)}
+							<div css={batterNameTextStyles}>
+								{batter.name}
+								<div css={[howOutStyles, hideFromTabletStyle]}>
+									{batter.howOut}
+								</div>
+							</div>
 						</th>
 						<td
 							css={[
 								tableCellStyles,
-								numericCellStyles,
-								bowlOColStyles,
+								howOutStyles,
+								hideUntilTabletStyle,
 							]}
 						>
-							{bowler.overs}.{bowler.balls % 6}
+							{batter.howOut}
 						</td>
 						<td
 							css={[
 								tableCellStyles,
 								numericCellStyles,
-								bowlStatColStyles,
+								batColWidthStyles,
 							]}
 						>
-							{bowler.maidens}
+							{batter.runs}
 						</td>
 						<td
 							css={[
 								tableCellStyles,
 								numericCellStyles,
-								bowlStatColStyles,
+								batColWidthStyles,
 							]}
 						>
-							{bowler.runs}
+							{batter.ballsFaced}
 						</td>
 						<td
 							css={[
 								tableCellStyles,
 								numericCellStyles,
-								bowlStatColStyles,
+								hideUntilTabletStyle,
 							]}
 						>
-							{bowler.wickets}
+							{batter.fours}
+						</td>
+						<td
+							css={[
+								tableCellStyles,
+								numericCellStyles,
+								hideUntilTabletStyle,
+							]}
+						>
+							{batter.sixes}
 						</td>
 					</tr>
-				))}
-			</tbody>
-		</table>
-	</div>
+				);
+			})}
+			<tr css={extrasDashedRowStyles}>
+				<th scope="row" css={tableRowHeaderStyles}>
+					<div css={batterNameTextStyles}>
+						Extras
+						<div css={[howOutStyles, hideFromTabletStyle]}>
+							{getExtrasDescription(extras)}
+						</div>
+					</div>
+				</th>
+				<td
+					css={[
+						tableCellStyles,
+						dimmedCellStyles,
+						hideUntilTabletStyle,
+					]}
+				>
+					{getExtrasDescription(extras)}
+				</td>
+				<td css={[tableCellStyles, batColWidthStyles]}>
+					{inningsTotals.extras}
+				</td>
+				<td css={[batColWidthStyles, hideFromTabletStyle]}></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr css={footerRowStyles}>
+				<th scope="row" css={tableRowHeaderStyles}>
+					<div css={batterNameTextStyles}>
+						Total
+						<div css={[howOutStyles, hideFromTabletStyle]}>
+							for {inningsTotals.wickets}
+						</div>
+					</div>
+				</th>
+				<td
+					css={[
+						tableCellStyles,
+						dimmedCellStyles,
+						hideUntilTabletStyle,
+					]}
+				>
+					for {inningsTotals.wickets}
+				</td>
+				<td css={[tableCellStyles, batColWidthStyles]}>
+					{inningsTotals.runs}
+				</td>
+				<td css={[batColWidthStyles, hideFromTabletStyle]}></td>
+				<td
+					css={[
+						tableCellStyles,
+						dimmedCellStyles,
+						hideUntilTabletStyle,
+					]}
+				>
+					{inningsTotals.overs} overs
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+);
+
+const Bowling = ({ bowlers }: { bowlers: Bowler[] }) => (
+	<table css={tableStyles}>
+		<thead>
+			<tr>
+				<th css={tableHeadCellStyles}>Bowler</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						bowlOColStyles,
+					]}
+				>
+					O
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						bowlStatColStyles,
+					]}
+				>
+					M
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						bowlStatColStyles,
+					]}
+				>
+					R
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						bowlStatColStyles,
+					]}
+				>
+					W
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{bowlers.map((bowler) => (
+				<tr key={bowler.name} css={tableRowStyles}>
+					<th scope="row" css={tableRowHeaderStyles}>
+						{bowler.name}
+					</th>
+					<td
+						css={[
+							tableCellStyles,
+							numericCellStyles,
+							bowlOColStyles,
+						]}
+					>
+						{bowler.overs}.{bowler.balls % 6}
+					</td>
+					<td
+						css={[
+							tableCellStyles,
+							numericCellStyles,
+							bowlStatColStyles,
+						]}
+					>
+						{bowler.maidens}
+					</td>
+					<td
+						css={[
+							tableCellStyles,
+							numericCellStyles,
+							bowlStatColStyles,
+						]}
+					>
+						{bowler.runs}
+					</td>
+					<td
+						css={[
+							tableCellStyles,
+							numericCellStyles,
+							bowlStatColStyles,
+						]}
+					>
+						{bowler.wickets}
+					</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
 );
 
 const FallOfWickets = ({
@@ -609,7 +600,7 @@ const FallOfWickets = ({
 }: {
 	fallOfWickets: FallOfWicket[];
 }) => (
-	<div css={cardSectionStyles}>
+	<>
 		<SectionHeading>Fall of wickets</SectionHeading>
 		<table css={[tableStyles, noFirstRowBorderStyles]}>
 			<tbody>
@@ -632,7 +623,7 @@ const FallOfWickets = ({
 				))}
 			</tbody>
 		</table>
-	</div>
+	</>
 );
 
 const LineupTeam = ({
@@ -700,7 +691,7 @@ export const CricketScorecardNew = ({
 							{innings.description}
 						</h2>
 					</div>
-					<div css={cardStyles}>
+					<div css={[cardStyles, cardSectionStyles]}>
 						<Batting
 							batters={innings.batters}
 							extras={innings.extras}
@@ -709,10 +700,10 @@ export const CricketScorecardNew = ({
 							showBatIcons={isCurrentInnings}
 						/>
 					</div>
-					<div css={cardStyles}>
+					<div css={[cardStyles, cardSectionStyles]}>
 						<Bowling bowlers={innings.bowlers} />
 					</div>
-					<div css={cardStyles}>
+					<div css={[cardStyles, cardSectionStyles]}>
 						<FallOfWickets fallOfWickets={innings.fallOfWickets} />
 					</div>
 				</section>
