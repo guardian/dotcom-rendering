@@ -11,7 +11,7 @@ import {
 	textSansBold17Object,
 	until,
 } from '@guardian/source/foundations';
-import { type ReactNode, useMemo } from 'react';
+import { Fragment, type ReactNode, useMemo } from 'react';
 import { grid } from '../../grid';
 import {
 	type EditionId,
@@ -281,8 +281,8 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 			</span>
 			{props.match.kind !== 'Fixture' &&
 				(innings.length > 0 ? (
-					innings.map((inning) => (
-						<>
+					innings.map((inning, index) => (
+						<Fragment key={index}>
 							<Score
 								runs={inning.runsScored}
 								fallOfWicket={inning.fallOfWicket}
@@ -308,7 +308,7 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 									</span>
 								</>
 							)}
-						</>
+						</Fragment>
 					))
 				) : (
 					<span
