@@ -1,3 +1,5 @@
 packages:
   - 'dotcom-rendering'
   - 'ab-testing/*'
+allowBuilds:
+  esbuild: true
