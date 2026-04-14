@@ -589,7 +589,7 @@ export const FeatureCard = ({
 												aspectRatio
 											}
 											linkTo={linkTo}
-											showProgressBar={false}
+											hideProgressBar={true}
 											subtitleSource={
 												media.mainMedia.subtitleSource
 											}

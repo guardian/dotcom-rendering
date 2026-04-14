@@ -184,7 +184,7 @@ const dispatchOphanAttentionEvent = (
 };
 
 const getOptimisedPosterImage = (mainImage: string): string => {
-	// We only run this on the client
+	// This only runs on the client
 	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
 
 	return generateImageURL({
@@ -290,7 +290,7 @@ type Props = {
 	fallbackImageAlt: CardPictureProps['alt'];
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 	linkTo: string;
-	showProgressBar?: boolean;
+	hideProgressBar?: boolean;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
 	/**
@@ -328,7 +328,7 @@ export const SelfHostedVideo = ({
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
 	linkTo,
-	showProgressBar = true,
+	hideProgressBar = false,
 	subtitleSource,
 	subtitleSize,
 	controlsPosition = 'bottom',
@@ -376,6 +376,8 @@ export const SelfHostedVideo = ({
 	const shouldAutoplay = canAutoplay && isAutoplayAllowed;
 
 	const shouldLoop = isLoop || isCinemagraph;
+
+	const showProgressBar = !hideProgressBar && !isCinemagraph;
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
 
