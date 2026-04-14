@@ -1,9 +1,7 @@
 import path from 'node:path';
 import { isObject } from '@guardian/libs';
 import type { Configuration, Layout, LoggingEvent } from 'log4js';
-import log4js from 'log4js';
-
-const { addLayout, configure, getLogger, shutdown } = log4js;
+import { addLayout, configure, getLogger, shutdown } from 'log4js';
 import { type DCRLoggingStore, loggingStore } from './logging-store';
 
 type LogFields = Partial<DCRLoggingStore> &

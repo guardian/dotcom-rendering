@@ -1,8 +1,6 @@
 import type { Config } from 'dompurify';
 import createDOMPurify from 'dompurify';
-import jsdom from 'jsdom';
-
-const { JSDOM } = jsdom;
+import { JSDOM } from 'jsdom';
 
 const { window } = new JSDOM('');
 const DOMPurify = createDOMPurify(window);
