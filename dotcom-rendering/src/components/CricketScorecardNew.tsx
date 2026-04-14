@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	neutral,
 	space,
 	textSans14,
 	textSans15,
@@ -61,7 +60,7 @@ const sectionHeadingStyles = css`
 const inningsHeadingStyles = css`
 	padding: 6px ${space[3]}px;
 	background: ${palette('--cricket-scorecard-first-team-color')};
-	color: ${neutral[100]};
+	color: ${palette('--cricket-scorecard-innings-heading-text')};
 	${responsiveTextSansBold}
 `;
 
