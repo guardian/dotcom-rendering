@@ -752,6 +752,36 @@ export const SelfHostedVideo = ({
 		pauseVideo('PAUSED_BY_BROWSER');
 	};
 
+	const handleProgressBarClick = (event: React.MouseEvent<HTMLElement>) => {
+		if (videoStyle !== 'Default') return;
+
+		if (vidRef.current) {
+			const rect = event.currentTarget.getBoundingClientRect();
+			const clickXPosition = event.clientX - rect.left;
+			const clickYPosition = event.clientY - rect.top;
+
+			/**
+			 * Don't allow clicks that are too close to the audio icon as
+			 * they may be intended for the icon rather than the progress bar.
+			 * The user may unintentionally skip to the end instead of unmuting.
+			 */
+			const spaceToLeaveOnTheRight = 48; // icon width (32px) + 8px padding on each side (16px)
+			const spaceBetweenProgressBarAndIcon = 6;
+			const isClickTooCloseToIcon =
+				rect.width - clickXPosition < spaceToLeaveOnTheRight &&
+				clickYPosition < spaceBetweenProgressBarAndIcon;
+			if (isClickTooCloseToIcon) {
+				return;
+			}
+
+			const newTime =
+				(clickXPosition / rect.width) * vidRef.current.duration;
+
+			vidRef.current.currentTime = newTime;
+			setCurrentTime(newTime);
+		}
+	};
+
 	/**
 	 * If the video could not be loaded due to an error, report to
 	 * Sentry and log in the console.
@@ -932,6 +962,8 @@ export const SelfHostedVideo = ({
 						handleKeyDown={handleKeyDown}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
+						handleProgressBarClick={handleProgressBarClick}
+						useLongFormProgressBar={isDefault}
 						onError={onError}
 						AudioIcon={hasAudio ? AudioIcon : null}
 						preloadPartialData={!!shouldAutoplay}
