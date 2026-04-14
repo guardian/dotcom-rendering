@@ -12,9 +12,7 @@ import {
 	textSansItalic28,
 	textSansItalic34,
 } from '@guardian/source/foundations';
-import sanitise from 'sanitize-html';
-
-const { defaults } = sanitise;
+import sanitise, { defaults } from 'sanitize-html';
 import {
 	ArticleDesign,
 	ArticleDisplay,
