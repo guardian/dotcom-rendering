@@ -15,6 +15,7 @@ import { resolve } from 'node:path';
 import express from 'express';
 import { createServer as createViteServer, mergeConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
+import { cjsPackages } from './cjs-packages';
 import { sharedConfig } from './vite.config.shared';
 import { ssrCjsPlugin } from './ssr-cjs-plugin';
 
@@ -25,11 +26,6 @@ async function start() {
 	const app = express();
 	const httpServer = createHttpServer(app);
 
-	// CJS packages in noExternal that need ESM wrapping for Vite 6's
-	// SSR module runner. Only packages using require()/module.exports
-	// that are matched by ssr.noExternal need to be listed here.
-	const cjsPackages = ['@guardian/bridget'];
-
 	// Create Vite server in middleware mode.
 	// Handles client-side module transforms, HMR, and SSR module loading.
 	const devConfig = mergeConfig(sharedConfig, {
@@ -38,7 +34,7 @@ async function start() {
 				include: '**/*.svg',
 				svgrOptions: { svgo: false },
 			}),
-			ssrCjsPlugin(cjsPackages),
+			ssrCjsPlugin([...cjsPackages]),
 		],
 		server: {
 			middlewareMode: true,
@@ -60,8 +56,10 @@ async function start() {
 	});
 	// SSR config must be set after mergeConfig to avoid being overwritten.
 	devConfig.ssr = {
-		// Bundle ESM-only packages that can't be require()'d by Node.
-		noExternal: [/@guardian\//, 'screenfull', 'valibot'],
+		// Bundle ESM-only packages that can't be require()'d by Node, plus
+		// CJS packages that we want to expose via ESM named imports
+		// (see cjs-packages.ts).
+		noExternal: [/@guardian\//, 'screenfull', 'valibot', ...cjsPackages],
 	};
 	const vite = await createViteServer(devConfig);
 

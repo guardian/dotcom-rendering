@@ -1,6 +1,8 @@
 import svgr from 'vite-plugin-svgr';
 import type { UserConfig } from 'vite';
 import { mergeConfig } from 'vite';
+import { cjsPackages } from './cjs-packages';
+import { ssrCjsPlugin } from './ssr-cjs-plugin';
 import { sharedConfig } from './vite.config.shared';
 
 const DEV = process.env.NODE_ENV === 'development';
@@ -21,6 +23,9 @@ export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 			include: '**/*.svg',
 			svgrOptions: { svgo: false },
 		}),
+		// Wrap CJS deps with ESM shims so `import { X } from 'pkg'` works
+		// under Vite's SSR pipeline. Only fires for ids in `ssr.noExternal`.
+		ssrCjsPlugin([...cjsPackages]),
 	],
 	build: {
 		outDir: 'dist',
@@ -56,6 +61,10 @@ export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 			'screenfull',
 			// Valibot is ESM and needs bundling
 			'valibot',
+			// CJS deps wrapped by ssrCjsPlugin so source code can use
+			// `import { X } from 'pkg'` instead of default-import +
+			// destructure (see vite/cjs-packages.ts).
+			...cjsPackages,
 		],
 		// Explicitly external in dev (not needed in prod where they're deployed)
 		external: DEV ? ['@aws-sdk'] : [],
