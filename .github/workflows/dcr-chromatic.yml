@@ -26,6 +26,7 @@ jobs:
               - 'dotcom-rendering/src/**'
               - 'dotcom-rendering/stories/**'
               - 'dotcom-rendering/.storybook/**'
+              - 'dotcom-rendering/fixtures/**'
               - 'dotcom-rendering/package.json'
               - 'libs/**'
               - 'pnpm-lock.yaml'
