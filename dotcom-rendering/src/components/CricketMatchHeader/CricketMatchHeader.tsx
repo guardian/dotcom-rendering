@@ -403,46 +403,55 @@ const Score = (props: {
 	runs: number;
 	fallOfWicket: number;
 	matchKind: CricketMatch['kind'];
-}) => (
-	<span
-		role="img"
-		// aria-label={`Score: ${props.score}`}
-		css={{
-			display: 'flex',
-			alignItems: 'center',
-			paddingTop: space[2],
-			svg: {
-				fill: 'var(--svg-fill)',
-				height: 30,
-			},
-			// Adjust kerning between adjacent digits
-			'& > * + *': {
-				marginLeft: -6,
-			},
-		}}
-		style={{
-			borderColor: palette(border(props.matchKind)),
-			'--svg-fill': palette(primaryText(props.matchKind)),
-		}}
-	>
-		<ScoreNumber score={props.runs} />
-		{props.fallOfWicket > 0 && props.fallOfWicket < 10 ? (
-			<>
-				{/* TODO: Convert dash to SVG? */}
-				<span
-					css={{
-						width: 12,
-						height: 2,
-						marginLeft: -2,
-						marginRight: 6,
-						backgroundColor: palette(primaryText(props.matchKind)),
-					}}
-				></span>
-				<ScoreNumber score={props.fallOfWicket} />
-			</>
-		) : null}
-	</span>
-);
+}) => {
+	const showFallenWickets = props.fallOfWicket > 0 && props.fallOfWicket < 10;
+	return (
+		<span
+			role="img"
+			aria-label={`${props.runs} runs${
+				showFallenWickets
+					? `, ${props.fallOfWicket} wickets fallen`
+					: ''
+			}`}
+			css={{
+				display: 'flex',
+				alignItems: 'center',
+				paddingTop: space[2],
+				svg: {
+					fill: 'var(--svg-fill)',
+					height: 30,
+				},
+				// Adjust kerning between adjacent digits
+				'& > * + *': {
+					marginLeft: -6,
+				},
+			}}
+			style={{
+				borderColor: palette(border(props.matchKind)),
+				'--svg-fill': palette(primaryText(props.matchKind)),
+			}}
+		>
+			<ScoreNumber score={props.runs} />
+			{showFallenWickets ? (
+				<>
+					{/* TODO: Convert dash to SVG? */}
+					<span
+						css={{
+							width: 12,
+							height: 2,
+							marginLeft: -2,
+							marginRight: 6,
+							backgroundColor: palette(
+								primaryText(props.matchKind),
+							),
+						}}
+					></span>
+					<ScoreNumber score={props.fallOfWicket} />
+				</>
+			) : null}
+		</span>
+	);
+};
 
 const circleStyles = {
 	borderRadius: '100%',
