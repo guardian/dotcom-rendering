@@ -43,6 +43,13 @@ const splashCard = {
 	kickerText: 'Kicker for splash card',
 };
 
+const boostLevels = [
+	'gigaboost',
+	'megaboost',
+	'boost',
+	'default',
+] as BoostLevel[];
+
 /**
  * This creates a list of 8 standard cards which contain:
  * - a card with sublinks
@@ -449,11 +456,6 @@ export const StandardCards: Story = {
 			],
 		},
 	},
-	parameters: {
-		chromatic: {
-			disableSnapshot: true,
-		},
-	},
 };
 
 const containerPalettes = [
@@ -552,13 +554,6 @@ export const SelfHostedVideoCardsInSplashSlots: Story = {
 			</FrontSection>
 		);
 
-		const boostLevels = [
-			'gigaboost',
-			'megaboost',
-			'boost',
-			'default',
-		] as BoostLevel[];
-
 		const videos = [
 			selfHostedLoopVideo54Card,
 			selfHostedLoopVideo45Card,
@@ -579,6 +574,74 @@ export const SelfHostedVideoCardsInSplashSlots: Story = {
 						/>
 					)),
 				)}
+			</>
+		);
+	},
+};
+
+export const YoutubeVideoCardInSplashSlot: Story = {
+	render: (args) => {
+		const Section = ({
+			title,
+			boostLevel,
+		}: {
+			title: string;
+			boostLevel?: BoostLevel;
+		}) => (
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						splash: [{ ...youtubeVideoTrails[0], boostLevel }],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				{boostLevels.map((boostLevel) => (
+					<Section
+						key={boostLevel}
+						title={boostLevel}
+						boostLevel={boostLevel}
+					/>
+				))}
+			</>
+		);
+	},
+};
+
+export const YoutubeVideoCardInStandardSlot: Story = {
+	render: (args) => {
+		const Section = ({
+			title,
+			boostLevel,
+		}: {
+			title: string;
+			boostLevel?: BoostLevel;
+		}) => (
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						standard: [{ ...youtubeVideoTrails[0], boostLevel }],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				{boostLevels.map((boostLevel) => (
+					<Section
+						key={boostLevel}
+						title={boostLevel}
+						boostLevel={boostLevel}
+					/>
+				))}
 			</>
 		);
 	},
