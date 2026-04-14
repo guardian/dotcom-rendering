@@ -633,12 +633,10 @@ export const FlexibleGeneral = ({
 		uniqueId: `collection-${collectionId}-splash-0`,
 	}));
 
-	const cards = [...groupedTrails.standard]
-		.slice(0, 19)
-		.map((standard, i) => ({
-			...standard,
-			uniqueId: `collection-${collectionId}-standard-${i}`,
-		}));
+	const cards = [...groupedTrails.standard].map((standard, i) => ({
+		...standard,
+		uniqueId: `collection-${collectionId}-standard-${i}`,
+	}));
 
 	const groupedCards = decideCardPositions(cards);
 

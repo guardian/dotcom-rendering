@@ -7226,19 +7226,19 @@ const paletteColours = {
 	},
 	'--football-pre-match-background': {
 		light: () => sourcePalette.sport[800],
-		dark: () => sourcePalette.sport[800], // TODO: Update with dark mode colour
+		dark: () => sourcePalette.neutral[10],
 	},
 	'--football-pre-match-button': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
 	'--football-pre-match-button-hover': {
 		light: () => '#c8e4f3', // replace with Source's `calculateHoverColour` when available
-		dark: () => '#c8e4f3',
+		dark: () => '#4d4d4d',
 	},
 	'--football-pre-match-kickoff': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
 	'--football-score-border': {
 		light: () => sourcePalette.neutral[7],

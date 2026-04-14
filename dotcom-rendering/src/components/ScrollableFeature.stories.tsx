@@ -100,13 +100,13 @@ export const Default = {};
 
 export const Media = {
 	args: {
-		trails: [galleryTrails[0], galleryTrails[1], audioTrails[0]],
+		trails: [galleryTrails[0], audioTrails[0], youtubeVideoTrails[0]],
 	},
 } satisfies Story;
 
 export const MoreMedia = {
 	args: {
-		trails: [audioTrails[1], youtubeVideoTrails[0], youtubeVideoTrails[1]],
+		trails: [galleryTrails[1], audioTrails[1], youtubeVideoTrails[1]],
 	},
 } satisfies Story;
 

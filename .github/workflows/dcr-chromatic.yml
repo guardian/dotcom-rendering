@@ -5,6 +5,8 @@ on:
     branches: [main]
   pull_request:
     types: [opened, labeled, synchronize]
+    paths-ignore:
+      - 'ab-testing/**'
 
 jobs:
   chromatic:
