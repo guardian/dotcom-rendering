@@ -236,6 +236,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						(tag) => tag.properties.id,
 					)}
 					sectionId={front.config.section}
+					contentType={front.config.contentType}
 				/>
 
 				{isPaidContent && (

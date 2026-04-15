@@ -410,6 +410,7 @@ const BannerAndMasthead = (props: {
 			pageId={props.pageId}
 			tagIds={props.tagIds}
 			sectionId={props.config.section}
+			contentType={props.config.contentType}
 		/>
 	</div>
 );

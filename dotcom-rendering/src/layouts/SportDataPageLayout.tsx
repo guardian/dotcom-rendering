@@ -131,6 +131,7 @@ export const SportDataPageLayout = (
 						hasPageSkin={sportData.config.hasPageSkin}
 						pageId={sportData.config.pageId}
 						sectionId={sportData.config.section}
+						contentType={sportData.config.contentType}
 					/>
 				</div>
 			)}
