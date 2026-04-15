@@ -19,17 +19,6 @@ import { useConfig } from './ConfigContext';
 import { defaultRoleStyles } from './Figure';
 import { Placeholder } from './Placeholder';
 
-type Props = {
-	url?: string;
-	scriptUrl?: string;
-	alt?: string;
-	role?: RoleType;
-	caption?: string;
-	format: ArticleFormat;
-	elementId?: string;
-	isMainMedia: boolean;
-};
-
 /*
 HISTORY
 
@@ -62,13 +51,33 @@ We use the curl AMD loader to load the boot script from the data-interactive att
 	}
 
 Pulling from Kibana, 99% of articles use the standard iframe-wrapper/1.0/boot.js
-A vast minority of pre interactive atom use a customised boot.js
+
+A small minority of pre interactive atom use a customised boot.js
 https://gist.github.com/gtrufitt/c8f08caef0ae810a42fde5a4c0549ad0
 
+Examples of non-standard boot.js references in scriptUrl:
+https://gdn-cdn.s3.amazonaws.com/quiz-builder/c65f1acf-eefd-4985-913d-74ae12eb1f35/boot.js
+https://gdn-cdn.s3.amazonaws.com/quiz-builder/2af99940-f255-452e-83b3-e1c897d6ad57/boot.js
+https://interactive.guim.co.uk/page-enhancers/super-lists/boot.js
+https://interactive.guim.co.uk/2017/01/the-promise-enhancer/boot.js
+https://gdn-cdn.s3.amazonaws.com/quiz-builder/05aa136e-b432-4203-bd72-52e82af6c63f/boot.js
+https://interactive.guim.co.uk/page-enhancers/nav/boot.js
+https://embed.actionbutton.co/widget/boot.js
+https://open-module.appspot.com/boot.js
+https://interactive.guim.co.uk/tools/page-enhancers/deluxe/mexico/boot.js
+https://interactive.guim.co.uk/2016/05/water/table/boot.js
+https://interactive.guim.co.uk/next-gen/news/2015/feb/moonfall/shell/boot.js
+https://gdn-cdn.s3.amazonaws.com/quiz-builder/736acee5-b76f-4722-95a6-0f699a9c61af/boot.js
+https://interactive.guim.co.uk/2016/08/vertical-slideshow/boot.js
+https://interactive.guim.co.uk/2016/10/mongolia-page-enhancer/boot.js
+https://interactive.guim.co.uk/2017/07/booklisted/boot.js
+https://interactive.guim.co.uk/next-gen/labs-boot/2020/aviva/boot.js
+https://uploads.guim.co.uk/2019/03/20/boot.js
+https://gdn-cdn.s3.amazonaws.com/next-gen/global/2014/dec/tax2/v4/boot.js
 
 THE STANDARD BOOT.js
 boot.js is defined from https://github.com/guardian/interactive-boot-scripts/blob/master/iframe-wrapper/boot.js
-and is sent with all interactive elements in the scriptUrl from CAPI to do a two simple things:
+and is sent with all interactive elements in the scriptUrl from CAPI to do two simple things:
 - Create an iframe using the href of the anchor and set the src
 - Add event listener to the window to listen for 'message' of the following types
 	- set-height
@@ -83,11 +92,22 @@ It has not been updated since 2016.
 MIGRATION FROM FRONTEND
 - For the standard boot.js, we have re-written the behavior in modern JS to avoid the requirement of an AMD loader
 and to avoid loading the boot.js file.
-- For all other files that do not load the standard boot.js, we'll add a AMD loader to the page
-
-For the remaining few we dynamically load and AMD loader and support the contract as defined with curl AMD loader
+- For all other files that do not load the standard boot.js, we dynamically add an AMD loader via `curl-with-js-and-domReady.js`
+to the page so legacy custom scripts can load themselves.
 
 */
+
+type Props = {
+	url?: string;
+	scriptUrl?: string;
+	alt?: string;
+	role?: RoleType;
+	caption?: string;
+	format: ArticleFormat;
+	elementId?: string;
+	isMainMedia: boolean;
+};
+
 const decideHeight = (role: RoleType) => {
 	switch (role) {
 		case 'supporting':

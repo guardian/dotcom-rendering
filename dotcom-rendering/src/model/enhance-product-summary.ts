@@ -53,6 +53,14 @@ export const allowedPageIds: string[] = [
 	'thefilter/2026/feb/20/best-drills-power-cordless-uk',
 	'thefilter/2026/feb/19/best-steam-irons-uk-tested',
 	'thefilter/2025/jul/22/best-electric-kettles-uk',
+	'thefilter/2026/apr/12/best-barefoot-shoes-tested-uk',
+	'thefilter/2026/apr/10/best-meal-delivery-service-food-recipe-kit-tested-uk',
+	'thefilter/2026/apr/08/best-carry-on-luggage-cabin-bags-uk',
+	'thefilter/2025/jun/03/best-water-flosser-uk',
+	'thefilter-us/2026/apr/09/sonos-portable-speaker-review',
+	'thefilter/2025/aug/31/best-mattress-toppers-uk',
+	'thefilter/2025/may/13/best-hot-brushes-uk',
+	'thefilter/2025/feb/06/best-mattress',
 ];
 
 const isEligibleForSummary = (pageId: string) => {

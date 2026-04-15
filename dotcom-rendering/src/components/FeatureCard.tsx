@@ -533,8 +533,6 @@ export const FeatureCard = ({
 										kickerText={kickerText}
 										trailText={trailText}
 										hidePillOnMobile={false}
-										iconSizeOnDesktop="large"
-										iconSizeOnMobile="large"
 										headlineSizes={headlineSizes}
 										webPublicationDate={webPublicationDate}
 										showClock={!!showClock}
@@ -591,7 +589,7 @@ export const FeatureCard = ({
 												aspectRatio
 											}
 											linkTo={linkTo}
-											showProgressBar={false}
+											hideProgressBar={true}
 											subtitleSource={
 												media.mainMedia.subtitleSource
 											}
