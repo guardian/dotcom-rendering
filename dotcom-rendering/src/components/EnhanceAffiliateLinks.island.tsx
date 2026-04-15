@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
-import { getSkimlinksAccountId, isSkimlink } from '../lib/affiliateLinksUtils';
+import {
+	addCustomAttributesToLink,
+	isSkimlink,
+} from '../lib/affiliateLinksUtils';
 import { useBetaAB } from '../lib/useAB';
 
 /**
@@ -45,15 +48,8 @@ const utmKeys = [
 export const EnhanceAffiliateLinks = () => {
 	const abTests = useBetaAB();
 
-	// Get users server/client-side AB test participations
+	// Get users server & client-side AB test participations
 	const abTestParticipations = abTests?.getParticipations();
-
-	// Reduce abTestParticipations to a comma-separated string
-	const abTestString = abTestParticipations
-		? Object.entries(abTestParticipations)
-				.map(([key, value]) => `${key}:${value}`)
-				.join(',')
-		: '';
 
 	useEffect(() => {
 		const allLinksOnPage = [...document.querySelectorAll('a')];
@@ -77,27 +73,19 @@ export const EnhanceAffiliateLinks = () => {
 				: utmParamsFromReferrer && utmParamsFromReferrer.trim() !== ''
 				? utmParamsFromReferrer
 				: '';
+		const referrerDomain =
+			document.referrer === ''
+				? 'none'
+				: new URL(document.referrer).hostname;
 
 		for (const link of allLinksOnPage) {
 			if (isSkimlink(link.href)) {
-				const referrerDomain =
-					document.referrer === ''
-						? 'none'
-						: new URL(document.referrer).hostname;
-
-				const skimlinksAccountId = getSkimlinksAccountId(link.href);
-				const xcustComponentId = link.getAttribute(
-					'data-x-cust-component-id',
-				);
-				// Skimlinks treats xcust as one long string, so we use | to separate values
-				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}${
-					abTestString ? `|abTestParticipations|${abTestString}` : ''
-				}${utmParamsString ? `|${utmParamsString}` : ''}${
-					xcustComponentId ? `|componentId|${xcustComponentId}` : ''
-				}`;
-				link.href = `${link.href}&xcust=${encodeURIComponent(
-					xcustValue,
-				)}`;
+				addCustomAttributesToLink({
+					link,
+					abTestParticipations,
+					utmParamsString,
+					referrerDomain,
+				});
 			}
 		}
 	});
