@@ -59,8 +59,6 @@ export const allowedPageIds: string[] = [
 	'thefilter/2025/jun/03/best-water-flosser-uk',
 	'thefilter-us/2026/apr/09/sonos-portable-speaker-review',
 	'thefilter/2025/aug/31/best-mattress-toppers-uk',
-	'thefilter/2025/aug/19/best-office-chairs-uk',
-	'thefilter-us/2026/apr/08/sweatpant-jeans-comfy-luxury',
 	'thefilter/2025/may/13/best-hot-brushes-uk',
 	'thefilter/2025/feb/06/best-mattress',
 ];
