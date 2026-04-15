@@ -37,6 +37,38 @@ interface DirectoryPageNavConfig {
 }
 
 const configs = [
+	// World Cup 2026
+	{
+		pageIds: [
+			'football/world-cup-2026',
+			'football/world-cup-2026/fixtures',
+			'football/world-cup-2026/overview',
+		],
+		tagIds: ['football/world-cup-2026'],
+		textColor: palette.neutral[100],
+		backgroundColor: palette.sport[400],
+		title: {
+			label: 'World Cup 2026',
+			id: 'football/world-cup-2026',
+		},
+		links: [
+			{
+				label: 'Fixtures',
+				id: 'football/world-cup-2026/fixtures',
+			},
+			{
+				label: 'Tables',
+				id: 'football/world-cup-2026/overview',
+			},
+			// TODO: add golden boot link once interactive page ID is known
+			// TODO: add team guide link once interactive page ID is known
+			{
+				label: 'Full coverage',
+				id: 'football/world-cup-2026',
+			},
+		],
+		// TODO: add backgroundImages once assets are available
+	},
 	// Winter Olympics 2026
 	{
 		pageIds: [

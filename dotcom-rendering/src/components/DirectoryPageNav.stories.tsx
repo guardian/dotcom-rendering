@@ -22,6 +22,18 @@ export const WomensEuro2025 = meta.story({
 	},
 });
 
+export const WorldCup2026 = meta.story({
+	args: {
+		pageId: 'football/world-cup-2026',
+	},
+});
+
+export const WorldCup2026Fixtures = meta.story({
+	args: {
+		pageId: 'football/world-cup-2026/fixtures',
+	},
+});
+
 export const OtherCompetition = meta.story({
 	args: {
 		pageId: 'football/premierleague/table',
