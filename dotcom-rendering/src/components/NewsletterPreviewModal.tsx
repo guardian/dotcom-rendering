@@ -96,17 +96,19 @@ const mobileCloseBarStyles = css`
 `;
 
 const mobileCloseButtonStyles = css`
-	width: 100%;
-	justify-content: center;
-	background: ${palette.neutral[100]} !important;
-	border: 1px solid ${palette.brand[400]} !important;
-	color: ${palette.brand[400]} !important;
+	&& {
+		width: 100%;
+		justify-content: center;
+		background: ${palette.neutral[100]};
+		border: 1px solid ${palette.brand[400]};
+		color: ${palette.brand[400]};
+	}
 
-	:hover,
-	:focus {
-		background: ${palette.neutral[100]} !important;
-		border-color: ${palette.brand[400]} !important;
-		color: ${palette.brand[400]} !important;
+	&&:hover,
+	&&:focus {
+		background: ${palette.neutral[100]};
+		border-color: ${palette.brand[400]};
+		color: ${palette.brand[400]};
 	}
 `;
 
