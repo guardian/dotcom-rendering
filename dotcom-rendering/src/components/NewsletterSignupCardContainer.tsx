@@ -60,7 +60,7 @@ const sendPreviewTracking = ({
 type Props = Omit<NewsletterSignupCardProps, 'illustration'> & {
 	identityName: string;
 	category?: string;
-	renderUrl?: string;
+	exampleUrl?: string;
 	renderingTarget: RenderingTarget;
 	theme: string;
 	children?: React.ReactNode;
@@ -75,7 +75,7 @@ const themeColorStyles = (theme: string) => css`
 export const NewsletterSignupCardContainer = ({
 	identityName,
 	category,
-	renderUrl,
+	exampleUrl,
 	renderingTarget,
 	theme,
 	name,
@@ -85,14 +85,14 @@ export const NewsletterSignupCardContainer = ({
 }: Props) => {
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
-	const resolvedRenderUrl = buildNewsletterPreviewUrl({
-		renderPath: renderUrl,
+	const renderUrl = buildNewsletterPreviewUrl({
+		exampleUrl,
 		category,
 	});
-	const hasPreviewUrl = Boolean(resolvedRenderUrl);
+	const hasPreviewUrl = Boolean(renderUrl);
 
 	const openPreview = useCallback(() => {
-		if (!resolvedRenderUrl) return;
+		if (!renderUrl) return;
 
 		setIsPreviewOpen((isOpen) => {
 			if (!isOpen) {
@@ -100,28 +100,28 @@ export const NewsletterSignupCardContainer = ({
 					identityName,
 					eventDescription: 'preview-open',
 					renderingTarget,
-					renderUrl: resolvedRenderUrl,
+					renderUrl,
 				});
 			}
 
 			return true;
 		});
-	}, [identityName, renderingTarget, resolvedRenderUrl]);
+	}, [identityName, renderingTarget, renderUrl]);
 
 	const closePreview = useCallback(() => {
 		setIsPreviewOpen((isOpen) => {
-			if (isOpen && resolvedRenderUrl) {
+			if (isOpen && renderUrl) {
 				sendPreviewTracking({
 					identityName,
 					eventDescription: 'preview-close',
 					renderingTarget,
-					renderUrl: resolvedRenderUrl,
+					renderUrl,
 				});
 			}
 
 			return false;
 		});
-	}, [identityName, renderingTarget, resolvedRenderUrl]);
+	}, [identityName, renderingTarget, renderUrl]);
 
 	useEffect(() => {
 		if (!isPreviewOpen) return;
@@ -157,7 +157,7 @@ export const NewsletterSignupCardContainer = ({
 					/>
 					<NewsletterPreviewModal
 						newsletterName={name}
-						renderUrl={resolvedRenderUrl ?? ''}
+						renderUrl={renderUrl ?? ''}
 						onClose={closePreview}
 					/>
 				</>

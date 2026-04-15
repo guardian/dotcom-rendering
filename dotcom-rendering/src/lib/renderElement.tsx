@@ -572,21 +572,29 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement': {
+			const newsletter = element.newsletter;
+			const newsletterExampleUrl =
+				typeof newsletter.exampleUrl === 'string'
+					? newsletter.exampleUrl
+					: 'renderUrl' in newsletter &&
+					  typeof newsletter.renderUrl === 'string'
+					? newsletter.renderUrl
+					: undefined;
 			const emailSignUpProps = {
 				index,
-				listId: element.newsletter.listId,
-				identityName: element.newsletter.identityName,
-				category: element.newsletter.category,
-				description: element.newsletter.description,
-				name: element.newsletter.name,
-				frequency: element.newsletter.frequency,
-				successDescription: element.newsletter.successDescription,
-				theme: element.newsletter.theme,
-				renderUrl: element.newsletter.renderUrl,
+				listId: newsletter.listId,
+				identityName: newsletter.identityName,
+				category: newsletter.category,
+				description: newsletter.description,
+				name: newsletter.name,
+				frequency: newsletter.frequency,
+				successDescription: newsletter.successDescription,
+				theme: newsletter.theme,
+				exampleUrl: newsletterExampleUrl,
 				idApiUrl: idApiUrl ?? '',
 				hideNewsletterSignupComponentForSubscribers:
 					!!switches.hideNewsletterSignupComponentForSubscribers,
-				showNewsletterSignupCard: !!switches.showNewsletterSignupCard,
+				showNewsletterSignupCard: true,
 			};
 			if (isListElement || isTimeline) return null;
 			return (

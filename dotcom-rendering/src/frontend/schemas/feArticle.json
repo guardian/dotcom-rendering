@@ -425,7 +425,7 @@
                 "illustrationCard": {
                     "type": "string"
                 },
-                "renderUrl": {
+                "exampleUrl": {
                     "type": "string"
                 }
             },
@@ -3077,7 +3077,7 @@
                         "illustrationCard": {
                             "type": "string"
                         },
-                        "renderUrl": {
+                        "exampleUrl": {
                             "type": "string"
                         }
                     },

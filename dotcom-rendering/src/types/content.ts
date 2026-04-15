@@ -1204,7 +1204,7 @@ export type Newsletter = {
 	category?: string;
 	regionFocus?: string;
 	illustrationCard?: string;
-	renderUrl?: string;
+	exampleUrl?: string;
 };
 
 export type NewsletterLayout = {

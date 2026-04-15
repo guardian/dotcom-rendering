@@ -26,7 +26,7 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	category?: string;
 	successDescription: string;
 	idApiUrl: string;
-	renderUrl?: string;
+	exampleUrl?: string;
 	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
 	hidePrivacyMessage?: boolean;
 	/** Feature flag to enable hiding newsletter signup for already subscribed users */
@@ -51,7 +51,7 @@ export const EmailSignUpWrapper = ({
 	identityName,
 	category,
 	idApiUrl,
-	renderUrl,
+	exampleUrl,
 	name,
 	description,
 	frequency,
@@ -92,7 +92,7 @@ export const EmailSignUpWrapper = ({
 					theme={theme}
 					identityName={identityName}
 					category={category}
-					renderUrl={renderUrl}
+					exampleUrl={exampleUrl}
 					renderingTarget={renderingTarget}
 				>
 					<Island priority="feature" defer={{ until: 'visible' }}>

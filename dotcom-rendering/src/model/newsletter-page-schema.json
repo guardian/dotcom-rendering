@@ -42,7 +42,7 @@
                     "illustrationCard": {
                         "type": "string"
                     },
-                    "renderUrl": {
+                    "exampleUrl": {
                         "type": "string"
                     }
                 },
