@@ -348,8 +348,8 @@ importers:
         specifier: 18.1.1
         version: 18.1.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
-        specifier: 8.5.1
-        version: 8.5.1(@guardian/libs@31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.8.0)(zod@4.1.12)
+        specifier: 8.5.2
+        version: 8.5.2(@guardian/libs@31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.8.0)(zod@4.1.12)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -2555,8 +2555,8 @@ packages:
       typescript:
         optional: true
 
-  '@guardian/support-dotcom-components@8.5.1':
-    resolution: {integrity: sha512-3rqhIJA+r4Bnr9/CLF7Ifn/mDAl/8ZuvQOc4D75gvSuF9U838Wcl8palPkbM9zTn55x9jTSsrdEhi3LsA4qIvA==}
+  '@guardian/support-dotcom-components@8.5.2':
+    resolution: {integrity: sha512-vqXAKA9vLiV2SYYC4C176fAMPFaJXeupurMHuJt4jkg9XpuF6iwSbctOI/sOfD+MjgGrU6zmhqdbjkv5VCvicg==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
       '@guardian/ophan-tracker-js': 2.8.0
@@ -11760,7 +11760,7 @@ snapshots:
       react: 18.3.1
       typescript: 5.5.3
 
-  '@guardian/support-dotcom-components@8.5.1(@guardian/libs@31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.8.0)(zod@4.1.12)':
+  '@guardian/support-dotcom-components@8.5.2(@guardian/libs@31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.8.0)(zod@4.1.12)':
     dependencies:
       '@aws-sdk/client-cloudwatch': 3.995.0
       '@aws-sdk/client-dynamodb': 3.996.0
