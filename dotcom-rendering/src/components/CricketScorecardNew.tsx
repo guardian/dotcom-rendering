@@ -332,7 +332,9 @@ const Batting = ({
 		<thead>
 			<tr>
 				<th css={tableHeadCellStyles}>Batter</th>
-				<th css={[tableHeadCellStyles, hideUntilTabletStyle]}></th>
+				<th css={[tableHeadCellStyles, hideUntilTabletStyle]}>
+					<span css={visuallyHiddenStyles}>How dismissed</span>
+				</th>
 				<th
 					css={[
 						tableHeadCellStyles,
