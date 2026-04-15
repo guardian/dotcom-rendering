@@ -58,7 +58,11 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { type Area, gridCss, type LayoutType } from './lib/furnitureLayouts';
+import {
+	type Area,
+	gridCss,
+	type LayoutType,
+} from './lib/furnitureArrangements';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const stretchLines = css`
