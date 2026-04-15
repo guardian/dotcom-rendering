@@ -2,4 +2,6 @@ packages:
   - 'dotcom-rendering'
   - 'ab-testing/*'
 allowBuilds:
+  '@swc/core': true
   esbuild: true
+  nice-napi: true
