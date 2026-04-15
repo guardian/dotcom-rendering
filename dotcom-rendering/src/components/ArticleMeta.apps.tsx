@@ -442,6 +442,9 @@ const LiveblogNotifications = (props: {
 					id={props.pageId}
 					displayName={props.headline}
 					notificationType="content"
+					colour="--follow-text"
+					backgroundColour="--follow-icon-background"
+					iconColour="--follow-icon-fill"
 				/>
 			</Island>
 		</div>

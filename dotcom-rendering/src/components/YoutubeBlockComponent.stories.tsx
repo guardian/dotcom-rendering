@@ -54,8 +54,6 @@ export const Default = () => {
 				expired={false}
 				stickyVideos={false}
 				enableAds={false}
-				iconSizeOnDesktop="large"
-				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
 			/>
 			<p>
@@ -93,8 +91,6 @@ export const Vertical = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				iconSizeOnDesktop="large"
-				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
 			/>
 			<p>
@@ -133,8 +129,6 @@ export const Expired = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				iconSizeOnDesktop="large"
-				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
 			/>
 			<p>
@@ -174,8 +168,6 @@ export const WithOverlayImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				iconSizeOnDesktop="large"
-				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
 			/>
 			<p>
@@ -215,8 +207,6 @@ export const Withimage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				iconSizeOnDesktop="large"
-				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
 			/>
 			<p>
@@ -259,8 +249,6 @@ export const WithPosterAndOverlayImage = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				iconSizeOnDesktop="large"
-				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
 			/>
 			<p>
@@ -304,8 +292,6 @@ export const WithShowMainVideoFlagOff = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				iconSizeOnDesktop="large"
-				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
 			/>
 			<p>
@@ -348,8 +334,6 @@ export const WithLiveStream = () => {
 				width={460}
 				stickyVideos={false}
 				enableAds={false}
-				iconSizeOnDesktop="large"
-				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
 				isLive={true}
 			/>

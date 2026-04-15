@@ -914,9 +914,6 @@ export const Card = ({
 							isFrontContainer &&
 							!isGallerySecondaryOnward
 						}
-						isFrontContainerOrGallerySecondaryOnward={
-							isFrontContainer || isGallerySecondaryOnward
-						}
 						isSmallCard={isSmallCard}
 					>
 						{media.type === 'slideshow' && (
@@ -1022,35 +1019,6 @@ export const Card = ({
 												hideCaption={true}
 												stickyVideos={false}
 												kickerText={kickerText}
-												/*
-												 * TODO: IMPROVE THIS MAPPING
-												 *
-												 * Image size defaults to small if not provided. However, if the
-												 * headline size is large or greater, we want to assume the image
-												 * is also large so that the play icon is correctly sized.
-												 */
-												iconSizeOnDesktop={
-													[
-														'small',
-														'medium',
-														'large',
-														'xlarge',
-														'xxlarge',
-													].includes(
-														headlineSizes?.desktop ??
-															'',
-													) || mediaSize !== 'small'
-														? 'large'
-														: 'small'
-												}
-												iconSizeOnMobile={
-													mediaPositionOnMobile ===
-														'left' ||
-													mediaPositionOnMobile ===
-														'right'
-														? 'small'
-														: 'large'
-												}
 												hidePillOnMobile={
 													mediaPositionOnMobile ===
 														'left' ||
