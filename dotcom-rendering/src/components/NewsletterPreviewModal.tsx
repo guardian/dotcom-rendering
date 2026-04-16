@@ -147,8 +147,16 @@ export const NewsletterPreviewModal = ({
 		const trapFocus = (event: KeyboardEvent) => {
 			if (event.key !== 'Tab') return;
 
-			const focusableElements =
-				dialogElement.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+			const focusableElements = Array.from(
+				dialogElement.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+			).filter((element) => {
+				const computedStyle = window.getComputedStyle(element);
+				return (
+					computedStyle.display !== 'none' &&
+					computedStyle.visibility !== 'hidden' &&
+					element.getAttribute('aria-hidden') !== 'true'
+				);
+			});
 			if (focusableElements.length === 0) {
 				event.preventDefault();
 				dialogElement.focus();
