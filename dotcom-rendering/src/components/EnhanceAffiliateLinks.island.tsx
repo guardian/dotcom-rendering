@@ -16,7 +16,7 @@ import { useBetaAB } from '../lib/useAB';
  *
  * ## Why does this need to be an Island?
  *
- * Code needs to be client side to get the referrer and AB test participation
+ * Code needs to be client side to get the referrer
  *
  * ---
  *
