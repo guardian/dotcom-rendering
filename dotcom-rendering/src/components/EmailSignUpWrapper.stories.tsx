@@ -1,5 +1,5 @@
 import type { StoryObj } from '@storybook/react-webpack5';
-import { mocked } from 'storybook/test';
+import { mocked, within } from 'storybook/test';
 import preview from '../../.storybook/preview';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { useIsSignedIn } from '../lib/useAuthStatus';
@@ -122,23 +122,28 @@ export const FeatureFlagDisabled = meta.story({
 	},
 });
 
-export const NewNewsletterSignupCard = meta.story({
+export const NewNewsletterSignupCardSignedInNotSubscribed = meta.story({
 	args: {
 		...defaultArgs,
 		showNewNewsletterSignupCard: true,
+		hideNewsletterSignupComponentForSubscribers: true,
 		illustrationSquare:
 			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
 	},
 	beforeEach() {
-		// The new card should still show even if the user is subscribed
-		mocked(useNewsletterSubscription).mockReturnValue(true);
+		mocked(useNewsletterSubscription).mockReturnValue(false);
+		mocked(useIsSignedIn).mockReturnValue(true);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve('test@example.com'),
+		);
 	},
 });
 
-export const NewNewsletterSignupCardSignedOut = meta.story({
+export const NewNewsletterSignupCardSignedOutNotSubscribed = meta.story({
 	args: {
 		...defaultArgs,
 		showNewNewsletterSignupCard: true,
+		hideNewsletterSignupComponentForSubscribers: true,
 		illustrationSquare:
 			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
 	},
@@ -148,5 +153,61 @@ export const NewNewsletterSignupCardSignedOut = meta.story({
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
 			Promise.resolve(null),
 		);
+	},
+});
+
+export const NewNewsletterSignupCardSignedInAlreadySubscribed = meta.story({
+	args: {
+		...defaultArgs,
+		showNewNewsletterSignupCard: true,
+		hideNewsletterSignupComponentForSubscribers: true,
+		illustrationSquare:
+			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
+	},
+	beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(true);
+		mocked(useIsSignedIn).mockReturnValue(true);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve('test@example.com'),
+		);
+	},
+});
+
+export const NewNewsletterSignupCardSignedOutAlreadySubscribed = meta.story({
+	args: {
+		...defaultArgs,
+		showNewNewsletterSignupCard: true,
+		hideNewsletterSignupComponentForSubscribers: true,
+		illustrationSquare:
+			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
+	},
+	beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(true);
+		mocked(useIsSignedIn).mockReturnValue(false);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve(null),
+		);
+	},
+});
+
+export const NewNewsletterSignupCardFocused = meta.story({
+	args: {
+		...defaultArgs,
+		showNewNewsletterSignupCard: true,
+		hideNewsletterSignupComponentForSubscribers: true,
+		illustrationSquare:
+			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
+	},
+	beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(false);
+		mocked(useIsSignedIn).mockReturnValue(false);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve(null),
+		);
+	},
+	async play({ canvasElement }) {
+		const canvas = within(canvasElement);
+		const emailInput = await canvas.findByLabelText('Enter your email');
+		emailInput.focus();
 	},
 });
