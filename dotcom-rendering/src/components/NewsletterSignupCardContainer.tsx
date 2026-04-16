@@ -1,11 +1,11 @@
-import { css, Global } from '@emotion/react';
+import { css } from '@emotion/react';
 import {
 	from,
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
 import { Button } from '@guardian/source/react-components';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { buildNewsletterPreviewUrl } from '../lib/newsletterPreviewUrl';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -120,44 +120,14 @@ export const NewsletterSignupCardContainer = ({
 		});
 	}, [identityName, renderingTarget, renderUrl]);
 
-	useEffect(() => {
-		if (!isPreviewOpen) return;
-
-		const closeOnEscape = (event: KeyboardEvent) => {
-			if (event.key === 'Escape') {
-				closePreview();
-			}
-		};
-
-		document.documentElement.classList.add('newsletter-preview-open');
-		document.addEventListener('keydown', closeOnEscape);
-
-		return () => {
-			document.documentElement.classList.remove(
-				'newsletter-preview-open',
-			);
-			document.removeEventListener('keydown', closeOnEscape);
-		};
-	}, [closePreview, isPreviewOpen]);
-
 	return (
 		<div css={themeColorStyles(theme)}>
 			{isPreviewOpen && hasPreviewUrl && (
-				<>
-					<Global
-						styles={css`
-							html.newsletter-preview-open,
-							html.newsletter-preview-open body {
-								overflow: hidden;
-							}
-						`}
-					/>
-					<NewsletterPreviewModal
-						newsletterName={name}
-						renderUrl={renderUrl ?? ''}
-						onClose={closePreview}
-					/>
-				</>
+				<NewsletterPreviewModal
+					newsletterName={name}
+					renderUrl={renderUrl ?? ''}
+					onClose={closePreview}
+				/>
 			)}
 			<NewsletterSignupCard
 				name={name}

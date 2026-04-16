@@ -133,6 +133,27 @@ export const NewsletterPreviewModal = ({
 	const dialogRef = useRef<HTMLDivElement>(null);
 	const titleId = useId();
 
+	const getVisibleFocusableElements = (dialog: HTMLElement): HTMLElement[] =>
+		Array.from(
+			dialog.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+		).filter((element) => {
+			const computedStyle = window.getComputedStyle(element);
+			return (
+				computedStyle.display !== 'none' &&
+				computedStyle.visibility !== 'hidden' &&
+				element.getAttribute('aria-hidden') !== 'true'
+			);
+		});
+
+	useEffect(() => {
+		const previousBodyOverflow = document.body.style.overflow;
+		document.body.style.overflow = 'hidden';
+
+		return () => {
+			document.body.style.overflow = previousBodyOverflow;
+		};
+	}, []);
+
 	useEffect(() => {
 		if (!dialogRef.current) return;
 
@@ -144,19 +165,33 @@ export const NewsletterPreviewModal = ({
 
 		dialogElement.focus();
 
-		const trapFocus = (event: KeyboardEvent) => {
+		return () => {
+			if (
+				previouslyFocusedElement &&
+				document.contains(previouslyFocusedElement)
+			) {
+				previouslyFocusedElement.focus();
+			}
+		};
+	}, []);
+
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent): void => {
+			if (!dialogRef.current) return;
+
+			const dialogElement = dialogRef.current;
+			if (!dialogElement.contains(document.activeElement)) return;
+
+			if (event.key === 'Escape') {
+				event.stopPropagation();
+				onClose();
+				return;
+			}
+
 			if (event.key !== 'Tab') return;
 
-			const focusableElements = Array.from(
-				dialogElement.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
-			).filter((element) => {
-				const computedStyle = window.getComputedStyle(element);
-				return (
-					computedStyle.display !== 'none' &&
-					computedStyle.visibility !== 'hidden' &&
-					element.getAttribute('aria-hidden') !== 'true'
-				);
-			});
+			const focusableElements =
+				getVisibleFocusableElements(dialogElement);
 			if (focusableElements.length === 0) {
 				event.preventDefault();
 				dialogElement.focus();
@@ -184,18 +219,12 @@ export const NewsletterPreviewModal = ({
 			}
 		};
 
-		document.addEventListener('keydown', trapFocus);
+		document.addEventListener('keydown', handleKeyDown);
 
 		return () => {
-			document.removeEventListener('keydown', trapFocus);
-			if (
-				previouslyFocusedElement &&
-				document.contains(previouslyFocusedElement)
-			) {
-				previouslyFocusedElement.focus();
-			}
+			document.removeEventListener('keydown', handleKeyDown);
 		};
-	}, []);
+	}, [onClose]);
 
 	useEffect(() => {
 		const closeOnClickAway = (event: MouseEvent) => {

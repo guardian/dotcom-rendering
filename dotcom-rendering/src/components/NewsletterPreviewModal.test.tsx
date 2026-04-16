@@ -47,7 +47,7 @@ describe('NewsletterPreviewModal', () => {
 		expect(lastFocusable).toBeDefined();
 
 		lastFocusable?.focus();
-		fireEvent.keyDown(document, { key: 'Tab' });
+		fireEvent.keyDown(dialog, { key: 'Tab' });
 
 		expect(firstFocusable).toHaveFocus();
 	});
@@ -64,7 +64,7 @@ describe('NewsletterPreviewModal', () => {
 		expect(lastFocusable).toBeDefined();
 
 		firstFocusable?.focus();
-		fireEvent.keyDown(document, { key: 'Tab', shiftKey: true });
+		fireEvent.keyDown(dialog, { key: 'Tab', shiftKey: true });
 
 		expect(lastFocusable).toHaveFocus();
 	});
@@ -93,11 +93,13 @@ describe('NewsletterPreviewModal', () => {
 		render(<NewsletterPreviewModal {...baseProps} onClose={onClose} />);
 
 		const dialog = screen.getByRole('dialog');
+		const overlay = dialog.parentElement;
+		expect(overlay).not.toBeNull();
 
 		fireEvent.mouseDown(dialog);
 		expect(onClose).not.toHaveBeenCalled();
 
-		fireEvent.mouseDown(document.body);
+		fireEvent.mouseDown(overlay as HTMLElement);
 		expect(onClose).toHaveBeenCalledTimes(1);
 	});
 });

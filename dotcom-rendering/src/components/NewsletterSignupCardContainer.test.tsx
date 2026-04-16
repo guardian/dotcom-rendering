@@ -25,9 +25,10 @@ describe('NewsletterSignupCardContainer', () => {
 			screen.getByRole('button', { name: 'Preview newsletter' }),
 		);
 
-		expect(screen.getByRole('dialog')).toBeInTheDocument();
+		const dialog = screen.getByRole('dialog');
+		expect(dialog).toBeInTheDocument();
 
-		fireEvent.keyDown(document, { key: 'Escape', code: 'Escape' });
+		fireEvent.keyDown(dialog, { key: 'Escape', code: 'Escape' });
 
 		await waitFor(() => {
 			expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
