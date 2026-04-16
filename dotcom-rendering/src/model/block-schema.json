@@ -1387,9 +1387,6 @@
                 },
                 "atomId": {
                     "type": "string"
-                },
-                "caption": {
-                    "type": "string"
                 }
             },
             "required": [
