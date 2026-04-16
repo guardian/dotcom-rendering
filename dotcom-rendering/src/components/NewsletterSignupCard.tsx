@@ -40,12 +40,13 @@ const titleAndMetaStyles = css`
 const titleStyles = css`
 	${headlineMedium20};
 	margin-bottom: ${space[2]}px;
+	color: ${themePalette('--newsletter-card-title')};
 `;
 
 const frequencyTagStyles = css`
 	display: flex;
 	align-items: center;
-	color: ${themePalette('--newsletter-frequency-tag')};
+	color: ${themePalette('--newsletter-card-frequency-tag')};
 	${textSans15};
 	margin-left: -1px;
 	margin-top: -1px;
@@ -63,6 +64,7 @@ const descriptionStyles = css`
 	line-height: 1.15;
 	margin-bottom: ${space[2]}px;
 	clear: both;
+	color: ${themePalette('--newsletter-card-description')};
 `;
 
 const illustrationStyles = css`
@@ -95,6 +97,8 @@ const NewsletterSignupHeader = (props: {
 				css={illustrationStyles}
 				src={props.illustrationSquare}
 				alt=""
+				loading="lazy"
+				decoding="async"
 			/>
 		)}
 	</div>
