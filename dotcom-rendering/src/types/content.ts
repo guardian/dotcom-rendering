@@ -213,6 +213,7 @@ export interface ContentAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ContentAtomBlockElement';
 	elementId: string;
 	atomId: string;
+	caption?: string;
 }
 
 interface DisclaimerBlockElement {
