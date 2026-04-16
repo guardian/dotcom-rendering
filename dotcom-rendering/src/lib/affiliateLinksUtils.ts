@@ -1,4 +1,8 @@
 import type { ABParticipations } from '../experiments/lib/beta-ab-tests';
+import { safeParseURL } from './parse';
+import { error, ok, type Result } from './result';
+
+type BuildXcustError = 'InvalidUrl' | 'NotSkimlink';
 
 /** A function to check if a URL represents an affiliate link */
 export const isSkimlink = (url?: string): boolean => {
@@ -121,26 +125,27 @@ export const buildXcustValueForAffiliateLink = ({
 	utmParamsString: string;
 	referrerDomain: string;
 	xcustComponentId: string | null;
-}): string | null => {
-	let parsedLinkUrl: URL;
-	try {
-		parsedLinkUrl = new URL(url);
-	} catch {
-		return null;
-	}
+}): Result<BuildXcustError, string> => {
+	const parsedLinkUrlResult = safeParseURL(url);
+	if (!parsedLinkUrlResult.ok) return error('InvalidUrl');
 
-	if (parsedLinkUrl.host !== 'go.skimresources.com') return null;
+	const parsedLinkUrl = parsedLinkUrlResult.value;
+	if (parsedLinkUrl.host !== 'go.skimresources.com') {
+		return error('NotSkimlink');
+	}
 
 	const abTestString = buildMergedAbTestString({
 		url: parsedLinkUrl.toString(),
 		abTestParticipations,
 	});
 	const skimlinksAccountId = getSkimlinksAccountId(parsedLinkUrl.toString());
-	return createXcustValue({
-		referrerDomain,
-		skimlinksAccountId,
-		abTestString,
-		utmParamsString,
-		xcustComponentId,
-	});
+	return ok(
+		createXcustValue({
+			referrerDomain,
+			skimlinksAccountId,
+			abTestString,
+			utmParamsString,
+			xcustComponentId,
+		}),
+	);
 };

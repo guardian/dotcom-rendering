@@ -76,7 +76,7 @@ export const EnhanceAffiliateLinks = () => {
 				: new URL(document.referrer).hostname;
 
 		for (const link of allLinksOnPage) {
-			const xcustValue = buildXcustValueForAffiliateLink({
+			const xcustResult = buildXcustValueForAffiliateLink({
 				url: link.href,
 				abTestParticipations,
 				utmParamsString,
@@ -84,10 +84,10 @@ export const EnhanceAffiliateLinks = () => {
 				xcustComponentId: link.getAttribute('data-x-cust-component-id'),
 			});
 
-			if (!xcustValue) continue;
+			if (!xcustResult.ok) continue;
 
 			const parsedLinkUrl = new URL(link.href);
-			parsedLinkUrl.searchParams.set('xcust', xcustValue);
+			parsedLinkUrl.searchParams.set('xcust', xcustResult.value);
 			link.href = parsedLinkUrl.toString();
 		}
 	});

@@ -1,6 +1,6 @@
 import {
-	buildXcustValueForAffiliateLink,
 	buildMergedAbTestString,
+	buildXcustValueForAffiliateLink,
 	extractAbTestParticipationFromUrl,
 } from './affiliateLinksUtils';
 
@@ -24,7 +24,7 @@ describe('extractAbTestParticipationFromUrl', () => {
 
 describe('buildXcustValueForAffiliateLink', () => {
 	it('returns xcust value for skimlinks URLs', () => {
-		const xcust = buildXcustValueForAffiliateLink({
+		const xcustResult = buildXcustValueForAffiliateLink({
 			url: 'https://go.skimresources.com/?id=1234X9876&url=https%3A%2F%2Fwww.theguardian.com%2Fuk',
 			abTestParticipations: {},
 			utmParamsString: '',
@@ -32,11 +32,15 @@ describe('buildXcustValueForAffiliateLink', () => {
 			xcustComponentId: null,
 		});
 
-		expect(xcust).toBe('referrer|www.theguardian.com|accountId|1234X9876');
+		expect(xcustResult.ok).toBe(true);
+		if (!xcustResult.ok) throw new Error('Expected Ok result');
+		expect(xcustResult.value).toBe(
+			'referrer|www.theguardian.com|accountId|1234X9876',
+		);
 	});
 
 	it('includes optional xcust values when provided', () => {
-		const xcust = buildXcustValueForAffiliateLink({
+		const xcustResult = buildXcustValueForAffiliateLink({
 			url: 'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news',
 			abTestParticipations: { abTest1: 'variantA' },
 			utmParamsString: 'utm_medium|cpc|utm_campaign|summer',
@@ -44,13 +48,15 @@ describe('buildXcustValueForAffiliateLink', () => {
 			xcustComponentId: 'related-content',
 		});
 
-		expect(xcust).toBe(
+		expect(xcustResult.ok).toBe(true);
+		if (!xcustResult.ok) throw new Error('Expected Ok result');
+		expect(xcustResult.value).toBe(
 			'referrer|www.theguardian.com|accountId|1111|abTestParticipations|abTest1:variantA|utm_medium|cpc|utm_campaign|summer|componentId|related-content',
 		);
 	});
 
-	it('returns null for non-skimlinks URLs', () => {
-		const xcust = buildXcustValueForAffiliateLink({
+	it('returns NotSkimlink error for non-skimlinks URLs', () => {
+		const xcustResult = buildXcustValueForAffiliateLink({
 			url: 'https://www.theguardian.com/world',
 			abTestParticipations: { abTest1: 'variantA' },
 			utmParamsString: 'utm_medium|cpc',
@@ -58,11 +64,13 @@ describe('buildXcustValueForAffiliateLink', () => {
 			xcustComponentId: null,
 		});
 
-		expect(xcust).toBeNull();
+		expect(xcustResult.ok).toBe(false);
+		if (xcustResult.ok) throw new Error('Expected Err result');
+		expect(xcustResult.error).toBe('NotSkimlink');
 	});
 
 	it('merges existing and incoming AB test participations', () => {
-		const xcust = buildXcustValueForAffiliateLink({
+		const xcustResult = buildXcustValueForAffiliateLink({
 			url: 'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news&xcust=referrer%7Cwww.theguardian.com%7CaccountId%7C1111%7CabTestParticipations%7CexistingTest%3Acontrol%2CabTest1%3AoldVariant',
 			abTestParticipations: { abTest1: 'variantA', newTest: 'variantB' },
 			utmParamsString: '',
@@ -70,15 +78,17 @@ describe('buildXcustValueForAffiliateLink', () => {
 			xcustComponentId: null,
 		});
 
-		expect(xcust).toContain('|abTestParticipations|');
-		expect(xcust).toContain('existingTest:control');
-		expect(xcust).toContain('newTest:variantB');
-		expect(xcust).toContain('abTest1:oldVariant');
-		expect(xcust).not.toContain('abTest1:variantA');
+		expect(xcustResult.ok).toBe(true);
+		if (!xcustResult.ok) throw new Error('Expected Ok result');
+		expect(xcustResult.value).toContain('|abTestParticipations|');
+		expect(xcustResult.value).toContain('existingTest:control');
+		expect(xcustResult.value).toContain('newTest:variantB');
+		expect(xcustResult.value).toContain('abTest1:oldVariant');
+		expect(xcustResult.value).not.toContain('abTest1:variantA');
 	});
 
 	it('preserves existing AB participations when url already has xcust', () => {
-		const xcust = buildXcustValueForAffiliateLink({
+		const xcustResult = buildXcustValueForAffiliateLink({
 			url: 'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news&xcust=referrer%7Cold.example%7CaccountId%7C1111%7CabTestParticipations%7ColdTest%3AoldVariant',
 			abTestParticipations: { newTest: 'newVariant' },
 			utmParamsString: '',
@@ -86,9 +96,27 @@ describe('buildXcustValueForAffiliateLink', () => {
 			xcustComponentId: null,
 		});
 
-		expect(xcust).toContain('referrer|www.theguardian.com|accountId|1111');
-		expect(xcust).toContain('newTest:newVariant');
-		expect(xcust).toContain('oldTest:oldVariant');
+		expect(xcustResult.ok).toBe(true);
+		if (!xcustResult.ok) throw new Error('Expected Ok result');
+		expect(xcustResult.value).toContain(
+			'referrer|www.theguardian.com|accountId|1111',
+		);
+		expect(xcustResult.value).toContain('newTest:newVariant');
+		expect(xcustResult.value).toContain('oldTest:oldVariant');
+	});
+
+	it('returns InvalidUrl error for malformed URLs', () => {
+		const xcustResult = buildXcustValueForAffiliateLink({
+			url: 'not a url',
+			abTestParticipations: {},
+			utmParamsString: '',
+			referrerDomain: 'www.theguardian.com',
+			xcustComponentId: null,
+		});
+
+		expect(xcustResult.ok).toBe(false);
+		if (xcustResult.ok) throw new Error('Expected Err result');
+		expect(xcustResult.error).toBe('InvalidUrl');
 	});
 });
 
