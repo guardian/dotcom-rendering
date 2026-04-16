@@ -29,7 +29,6 @@ type Props = {
 
 const formStyles = css`
 	display: grid;
-	align-items: center;
 	grid-template-columns: auto 160px;
 	grid-template-rows: 24px 48px;
 	gap: 0 ${space[3]}px;
@@ -99,10 +98,12 @@ const toggleContainerStyles = css`
 	grid-area: marketing;
 	display: flex;
 	align-items: flex-start;
+	label {
+		align-items: flex-start;
+	}
 	justify-content: space-between;
-
-	padding: ${space[1]}px;
-	border: 1px solid ${palette('--article-border')};
+	padding: ${space[2]}px;
+	border: 1px solid ${palette('--card-border-supporting')};
 	border-radius: 4px;
 	margin-top: ${space[3]}px;
 `;
