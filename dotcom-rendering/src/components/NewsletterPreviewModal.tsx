@@ -89,6 +89,9 @@ const mobileCloseBarStyles = css`
 	padding: ${space[3]}px ${space[3]}px ${space[6]}px;
 	border-top: 1px solid ${palette.neutral[86]};
 	background: ${palette.neutral[100]};
+	position: relative;
+	z-index: 1;
+	box-shadow: 0 0 14px rgba(0, 0, 0, 0.4);
 
 	${from.tablet} {
 		display: none;
