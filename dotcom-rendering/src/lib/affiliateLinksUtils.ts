@@ -39,7 +39,7 @@ export const extractAbTestParticipationFromUrl = (
 };
 
 /**  A function to fetch the Skimlinks account ID from the URL to then pass it into the xcust*/
-export const getSkimlinksAccountId = (url?: string): string => {
+const getSkimlinksAccountId = (url?: string): string => {
 	try {
 		if (!url) return '';
 		const parsedUrl = new URL(url);
@@ -53,7 +53,7 @@ export const getSkimlinksAccountId = (url?: string): string => {
  * Builds an AB test string by extracting existing participations from the URL set in Frontend,
  * merging them with incoming participations, then serializing as test:variant,test2:variant2.
  */
-export const createMergedAbTestString = ({
+export const buildMergedAbTestString = ({
 	url,
 	abTestParticipations,
 }: {
@@ -109,40 +109,38 @@ const createXcustValue = ({
 	return xcustSegments.join('|');
 };
 
-export const addCustomAttributesToLink = ({
-	link,
+export const buildXcustValueForAffiliateLink = ({
+	url,
 	abTestParticipations,
 	utmParamsString,
 	referrerDomain,
+	xcustComponentId,
 }: {
-	link: HTMLAnchorElement;
+	url: string;
 	abTestParticipations?: ABParticipations;
 	utmParamsString: string;
 	referrerDomain: string;
-}): HTMLAnchorElement => {
+	xcustComponentId: string | null;
+}): string | null => {
 	let parsedLinkUrl: URL;
 	try {
-		parsedLinkUrl = new URL(link.href);
+		parsedLinkUrl = new URL(url);
 	} catch {
-		return link;
+		return null;
 	}
 
-	if (parsedLinkUrl.host !== 'go.skimresources.com') return link;
+	if (parsedLinkUrl.host !== 'go.skimresources.com') return null;
 
-	const abTestString = createMergedAbTestString({
+	const abTestString = buildMergedAbTestString({
 		url: parsedLinkUrl.toString(),
 		abTestParticipations,
 	});
-	const skimlinksAccountId = parsedLinkUrl.searchParams.get('id') ?? '';
-	const xcustValue = createXcustValue({
+	const skimlinksAccountId = getSkimlinksAccountId(parsedLinkUrl.toString());
+	return createXcustValue({
 		referrerDomain,
 		skimlinksAccountId,
 		abTestString,
 		utmParamsString,
-		xcustComponentId: link.getAttribute('data-x-cust-component-id'),
+		xcustComponentId,
 	});
-	parsedLinkUrl.searchParams.set('xcust', xcustValue);
-	link.href = parsedLinkUrl.toString();
-
-	return link;
 };

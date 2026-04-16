@@ -1,8 +1,5 @@
 import { useEffect } from 'react';
-import {
-	addCustomAttributesToLink,
-	isSkimlink,
-} from '../lib/affiliateLinksUtils';
+import { buildXcustValueForAffiliateLink } from '../lib/affiliateLinksUtils';
 import { useBetaAB } from '../lib/useAB';
 
 /**
@@ -79,14 +76,19 @@ export const EnhanceAffiliateLinks = () => {
 				: new URL(document.referrer).hostname;
 
 		for (const link of allLinksOnPage) {
-			if (isSkimlink(link.href)) {
-				addCustomAttributesToLink({
-					link,
-					abTestParticipations,
-					utmParamsString,
-					referrerDomain,
-				});
-			}
+			const xcustValue = buildXcustValueForAffiliateLink({
+				url: link.href,
+				abTestParticipations,
+				utmParamsString,
+				referrerDomain,
+				xcustComponentId: link.getAttribute('data-x-cust-component-id'),
+			});
+
+			if (!xcustValue) continue;
+
+			const parsedLinkUrl = new URL(link.href);
+			parsedLinkUrl.searchParams.set('xcust', xcustValue);
+			link.href = parsedLinkUrl.toString();
 		}
 	});
 

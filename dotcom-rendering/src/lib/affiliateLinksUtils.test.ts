@@ -1,6 +1,6 @@
 import {
-	addCustomAttributesToLink,
-	createMergedAbTestString,
+	buildXcustValueForAffiliateLink,
+	buildMergedAbTestString,
 	extractAbTestParticipationFromUrl,
 } from './affiliateLinksUtils';
 
@@ -22,82 +22,54 @@ describe('extractAbTestParticipationFromUrl', () => {
 	});
 });
 
-describe('addCustomAttributesToLink', () => {
-	const createLink = (href: string): HTMLAnchorElement => {
-		const link = document.createElement('a');
-		link.href = href;
-		return link;
-	};
-
-	it('adds xcust attributes for skimlinks URLs', () => {
-		const link = createLink(
-			'https://go.skimresources.com/?id=1234X9876&url=https%3A%2F%2Fwww.theguardian.com%2Fuk',
-		);
-
-		const updated = addCustomAttributesToLink({
-			link,
+describe('buildXcustValueForAffiliateLink', () => {
+	it('returns xcust value for skimlinks URLs', () => {
+		const xcust = buildXcustValueForAffiliateLink({
+			url: 'https://go.skimresources.com/?id=1234X9876&url=https%3A%2F%2Fwww.theguardian.com%2Fuk',
 			abTestParticipations: {},
 			utmParamsString: '',
 			referrerDomain: 'www.theguardian.com',
+			xcustComponentId: null,
 		});
 
-		expect(updated).toBe(link);
-		const xcust = new URL(updated.href).searchParams.get('xcust');
-		expect(decodeURIComponent(xcust ?? '')).toBe(
-			'referrer|www.theguardian.com|accountId|1234X9876',
-		);
+		expect(xcust).toBe('referrer|www.theguardian.com|accountId|1234X9876');
 	});
 
 	it('includes optional xcust values when provided', () => {
-		const link = createLink(
-			'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news',
-		);
-		link.setAttribute('data-x-cust-component-id', 'related-content');
-
-		const updated = addCustomAttributesToLink({
-			link,
+		const xcust = buildXcustValueForAffiliateLink({
+			url: 'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news',
 			abTestParticipations: { abTest1: 'variantA' },
 			utmParamsString: 'utm_medium|cpc|utm_campaign|summer',
 			referrerDomain: 'www.theguardian.com',
+			xcustComponentId: 'related-content',
 		});
 
-		const xcust = decodeURIComponent(
-			new URL(updated.href).searchParams.get('xcust') ?? '',
-		);
 		expect(xcust).toBe(
 			'referrer|www.theguardian.com|accountId|1111|abTestParticipations|abTest1:variantA|utm_medium|cpc|utm_campaign|summer|componentId|related-content',
 		);
 	});
 
-	it('does not modify non-skimlinks URLs', () => {
-		const originalHref = 'https://www.theguardian.com/world';
-		const link = createLink(originalHref);
-
-		const updated = addCustomAttributesToLink({
-			link,
+	it('returns null for non-skimlinks URLs', () => {
+		const xcust = buildXcustValueForAffiliateLink({
+			url: 'https://www.theguardian.com/world',
 			abTestParticipations: { abTest1: 'variantA' },
 			utmParamsString: 'utm_medium|cpc',
 			referrerDomain: 'www.theguardian.com',
+			xcustComponentId: null,
 		});
 
-		expect(updated.href).toBe(originalHref);
+		expect(xcust).toBeNull();
 	});
 
 	it('merges existing and incoming AB test participations', () => {
-		const link = createLink(
-			'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news&xcust=referrer%7Cwww.theguardian.com%7CaccountId%7C1111%7CabTestParticipations%7CexistingTest%3Acontrol%2CabTest1%3AoldVariant',
-		);
-
-		const updated = addCustomAttributesToLink({
-			link,
+		const xcust = buildXcustValueForAffiliateLink({
+			url: 'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news&xcust=referrer%7Cwww.theguardian.com%7CaccountId%7C1111%7CabTestParticipations%7CexistingTest%3Acontrol%2CabTest1%3AoldVariant',
 			abTestParticipations: { abTest1: 'variantA', newTest: 'variantB' },
 			utmParamsString: '',
 			referrerDomain: 'www.theguardian.com',
+			xcustComponentId: null,
 		});
 
-		const xcust = decodeURIComponent(
-			new URL(updated.href).searchParams.get('xcust') ?? '',
-		);
 		expect(xcust).toContain('|abTestParticipations|');
 		expect(xcust).toContain('existingTest:control');
 		expect(xcust).toContain('newTest:variantB');
@@ -105,37 +77,28 @@ describe('addCustomAttributesToLink', () => {
 		expect(xcust).not.toContain('abTest1:variantA');
 	});
 
-	it('replaces existing xcust instead of adding a second xcust param', () => {
-		const link = createLink(
-			'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news&xcust=referrer%7Cold.example%7CaccountId%7C1111%7CabTestParticipations%7ColdTest%3AoldVariant',
-		);
-
-		const updated = addCustomAttributesToLink({
-			link,
+	it('preserves existing AB participations when url already has xcust', () => {
+		const xcust = buildXcustValueForAffiliateLink({
+			url: 'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news&xcust=referrer%7Cold.example%7CaccountId%7C1111%7CabTestParticipations%7ColdTest%3AoldVariant',
 			abTestParticipations: { newTest: 'newVariant' },
 			utmParamsString: '',
 			referrerDomain: 'www.theguardian.com',
+			xcustComponentId: null,
 		});
 
-		const updatedUrl = new URL(updated.href);
-		expect(updatedUrl.searchParams.getAll('xcust')).toHaveLength(1);
-
-		const xcust = decodeURIComponent(
-			updatedUrl.searchParams.get('xcust') ?? '',
-		);
 		expect(xcust).toContain('referrer|www.theguardian.com|accountId|1111');
 		expect(xcust).toContain('newTest:newVariant');
 		expect(xcust).toContain('oldTest:oldVariant');
 	});
 });
 
-describe('createMergedAbTestString', () => {
+describe('buildMergedAbTestString', () => {
 	it('returns incoming AB test string when URL has no existing participations', () => {
 		const url =
 			'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news';
 
 		expect(
-			createMergedAbTestString({
+			buildMergedAbTestString({
 				url,
 				abTestParticipations: {
 					abTest1: 'variantA',
@@ -150,7 +113,7 @@ describe('createMergedAbTestString', () => {
 			'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news&xcust=referrer%7Cwww.theguardian.com%7CaccountId%7C1111%7CabTestParticipations%7ColdTest%3AoldVariant';
 
 		expect(
-			createMergedAbTestString({
+			buildMergedAbTestString({
 				url,
 				abTestParticipations: {
 					newTest: 'newVariant',
