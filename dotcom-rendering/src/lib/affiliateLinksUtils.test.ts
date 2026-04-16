@@ -125,6 +125,7 @@ describe('addCustomAttributesToLink', () => {
 		);
 		expect(xcust).toContain('referrer|www.theguardian.com|accountId|1111');
 		expect(xcust).toContain('newTest:newVariant');
+		expect(xcust).toContain('oldTest:oldVariant');
 	});
 });
 
@@ -146,16 +147,15 @@ describe('createMergedAbTestString', () => {
 
 	it('keeps existing URL values when keys collide', () => {
 		const url =
-			'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news&xcust=referrer%7Cwww.theguardian.com%7CaccountId%7C1111%7CabTestParticipations%7CabTest1%3AoldVariant';
+			'https://go.skimresources.com/?id=1111&url=https%3A%2F%2Fwww.theguardian.com%2Fus-news&xcust=referrer%7Cwww.theguardian.com%7CaccountId%7C1111%7CabTestParticipations%7ColdTest%3AoldVariant';
 
 		expect(
 			createMergedAbTestString({
 				url,
 				abTestParticipations: {
-					abTest1: 'newVariant',
-					newTest: 'variantB',
+					newTest: 'newVariant',
 				},
 			}),
-		).toBe('abTest1:oldVariant,newTest:variantB');
+		).toBe('newTest:newVariant,oldTest:oldVariant');
 	});
 });
