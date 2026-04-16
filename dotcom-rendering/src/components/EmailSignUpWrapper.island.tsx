@@ -6,6 +6,7 @@ import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { NewsletterSignupCardContainer } from './NewsletterSignupCardContainer';
+import { NewsletterSignupForm } from './NewsletterSignupForm.island';
 import { Placeholder } from './Placeholder';
 import { SecureSignup } from './SecureSignup.island';
 
@@ -91,7 +92,7 @@ export const EmailSignUpWrapper = ({
 	}
 
 	// When the new card design is enabled, always show it regardless of subscription status
-	if (showNewNewsletterSignupCard) {
+	if (true) {
 		return (
 			<InlineSkipToWrapper
 				id={`EmailSignup-skip-link-${index}`}
@@ -99,7 +100,7 @@ export const EmailSignUpWrapper = ({
 			>
 				<NewsletterSignupCard {...emailSignUpProps}>
 					<Island priority="feature" defer={{ until: 'visible' }}>
-						<SecureSignup
+						<NewsletterSignupForm
 							newsletterId={emailSignUpProps.identityName}
 							successDescription={emailSignUpProps.description}
 						/>
