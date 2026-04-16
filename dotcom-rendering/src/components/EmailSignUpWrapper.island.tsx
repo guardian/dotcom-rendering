@@ -60,7 +60,7 @@ export const EmailSignUpWrapper = ({
 	);
 
 	// When the new card design is enabled, always show it regardless of subscription status
-	if (true) {
+	if (showNewNewsletterSignupCard) {
 		return (
 			<InlineSkipToWrapper
 				id={`EmailSignup-skip-link-${index}`}
@@ -73,9 +73,6 @@ export const EmailSignUpWrapper = ({
 							successDescription={emailSignUpProps.description}
 						/>
 					</Island>
-					{!emailSignUpProps.hidePrivacyMessage && (
-						<NewsletterPrivacyMessage />
-					)}
 				</NewsletterSignupCard>
 			</InlineSkipToWrapper>
 		);

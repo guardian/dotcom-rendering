@@ -21,6 +21,7 @@ import { useBrowserId } from '../lib/useBrowserId';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
+import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
 type Props = {
 	newsletterId: string;
@@ -36,7 +37,7 @@ const formStyles = css`
 	grid-template-areas:
 		'label label'
 		'input button'
-		'marketing .';
+		'marketing marketing';
 
 	label {
 		grid-area: label;
@@ -97,15 +98,17 @@ const errorContainerStyles = css`
 const toggleContainerStyles = css`
 	grid-area: marketing;
 	display: flex;
+	flex-direction: column;
 	align-items: flex-start;
-	label {
-		align-items: flex-start;
-	}
-	justify-content: space-between;
+	gap: ${space[3]}px;
+	margin-top: ${space[3]}px;
+`;
+
+const marketingBoxStyles = css`
+	width: 100%;
 	padding: ${space[2]}px;
 	border: 1px solid ${palette('--card-border-supporting')};
 	border-radius: 4px;
-	margin-top: ${space[3]}px;
 `;
 
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
@@ -265,6 +268,7 @@ export const NewsletterSignupForm = ({
 	const [marketingOptIn, setMarketingOptIn] = useState<boolean | undefined>(
 		undefined,
 	);
+	const [isInteracted, setIsInteracted] = useState<boolean>(false);
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
 
@@ -278,6 +282,9 @@ export const NewsletterSignupForm = ({
 		void resolveEmailIfSignedIn().then((email) => {
 			setUserEmail(email);
 			setHideEmailInput(isString(email));
+			if (isString(email)) {
+				setIsInteracted(true);
+			}
 		});
 	}, []);
 	const { renderingTarget } = useConfig();
@@ -343,6 +350,8 @@ export const NewsletterSignupForm = ({
 		});
 	};
 
+	const showAdditionalFields = isInteracted || !!userEmail;
+
 	return (
 		<>
 			<form
@@ -364,18 +373,29 @@ export const NewsletterSignupForm = ({
 					label="Enter your email"
 					type="email"
 					value={userEmail ?? ''}
-					onChange={(e) => setUserEmail(e.target.value)}
+					onFocus={() => setIsInteracted(true)}
+					onChange={(e) => {
+						setUserEmail(e.target.value);
+						setIsInteracted(true);
+					}}
 				/>
-				{isSignedIn === false && (
+				{showAdditionalFields && (
 					<div css={toggleContainerStyles}>
-						<ToggleSwitch
-							id={`marketing-opt-in-${newsletterId}`}
-							checked={marketingOptIn ?? false}
-							onClick={() => setMarketingOptIn(!marketingOptIn)}
-							label="Get updates about our journalism and ways to support and enjoy
-							our work. Toggle to opt out."
-							labelPosition="left"
-						/>
+						{isSignedIn === false && (
+							<div css={marketingBoxStyles}>
+								<ToggleSwitch
+									id={`marketing-opt-in-${newsletterId}`}
+									checked={marketingOptIn ?? false}
+									onClick={() =>
+										setMarketingOptIn(!marketingOptIn)
+									}
+									label="Get updates about our journalism and ways to support and enjoy
+								our work. Toggle to opt out."
+									labelPosition="left"
+								/>
+							</div>
+						)}
+						<NewsletterPrivacyMessage />
 					</div>
 				)}
 				<Button onClick={handleClick} type="submit">
