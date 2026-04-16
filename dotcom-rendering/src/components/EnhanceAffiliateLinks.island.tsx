@@ -84,7 +84,17 @@ export const EnhanceAffiliateLinks = () => {
 				xcustComponentId: link.getAttribute('data-x-cust-component-id'),
 			});
 
-			if (!xcustResult.ok) continue;
+			if (!xcustResult.ok) {
+				if (xcustResult.error === 'InvalidUrl') {
+					window.guardian.modules.sentry.reportError(
+						new Error(
+							`Invalid URL in affiliate link: ${link.href}`,
+						),
+						'enhance-affiliate-links',
+					);
+				}
+				continue;
+			}
 
 			const parsedLinkUrl = new URL(link.href);
 			parsedLinkUrl.searchParams.set('xcust', xcustResult.value);
