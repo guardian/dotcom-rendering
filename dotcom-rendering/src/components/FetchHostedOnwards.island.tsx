@@ -9,30 +9,19 @@ type Props = {
 };
 
 type OnwardsResponse = {
-	result: {
-		owner: string;
-		trails: Array<TrailType>;
-		// trails: Array<{
-		// 	/** URL of the article, used for the anchor tag */
-		// 	url: string;
-		// 	/** Headline of the article represented by trail */
-		// 	headline: string;
-		// 	/** Image thumbnail details for the article */
-		// 	image: {
-		// 		/** Trail image URL */
-		// 		src: string;
-		// 		/** Alt text for the trail image */
-		// 		alt: string;
-		// 	};
-		// 	format: FEFormat;
-		// }>;
-	};
+	trails: Array<TrailType>;
 };
 
 export const FetchHostedOnwards = ({ branding, url }: Props) => {
-	const { data } = useApi<OnwardsResponse>(url);
+	const { data, error } = useApi<OnwardsResponse>(url);
 
-	const { result: { trails = [] } = {} } = data ?? {};
+	if (error) {
+		// Send the error to Sentry and then prevent the element from rendering
+		window.guardian.modules.sentry.reportError(error, 'hosted-onwards');
+		return null;
+	}
+
+	const { trails = [] } = data ?? {};
 
 	if (!trails.length) {
 		return null;

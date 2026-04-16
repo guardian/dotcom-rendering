@@ -329,9 +329,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 					<div css={onwardContentStyles}>
 						<Island priority="feature" defer={{ until: 'idle' }}>
 							<FetchHostedOnwards
-								url={
-									'http://localhost:9000/advertiser-content/we-are-still-in/faces-of-we-are-still-in/onward.json'
-								}
+								url={`${frontendData.config.ajaxUrl}/${frontendData.config.pageId}/onward.json`}
 								branding={branding}
 							/>
 						</Island>

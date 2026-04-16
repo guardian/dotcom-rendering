@@ -323,7 +323,10 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 
 					<div css={onwardContentStyles}>
 						<Island priority="feature" defer={{ until: 'idle' }}>
-							<FetchHostedOnwards branding={branding} />
+							<FetchHostedOnwards
+								url={`${frontendData.config.ajaxUrl}/${frontendData.config.pageId}/onward.json`}
+								branding={branding}
+							/>
 						</Island>
 					</div>
 
