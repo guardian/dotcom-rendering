@@ -13,7 +13,6 @@ export type NewsletterSignupCardProps = {
 	name: string;
 	frequency: string;
 	description: string;
-	illustration: string;
 	children?: React.ReactNode;
 };
 
@@ -30,20 +29,10 @@ const containerStyles = css`
 `;
 
 const headerStyles = css`
-	display: grid;
-	grid-template-columns: 1fr 96px;
-	gap: ${space[3]}px;
-	margin-bottom: ${space[2]}px;
-
-	${from.tablet} {
-		grid-template-columns: 1fr 120px;
-	}
-`;
-
-const titleAndMetaStyles = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${space[1]}px;
+	margin-bottom: ${space[2]}px;
 `;
 
 const titleStyles = css`
@@ -66,36 +55,21 @@ const descriptionStyles = css`
 	max-width: ${335 + space[3] + 118}px;
 `;
 
-const illustrationStyles = css`
-	width: 100%;
-	height: auto;
-	border-radius: ${space[1]}px;
-	object-fit: cover;
-`;
-
 export const NewsletterSignupCard = ({
 	name,
 	frequency,
 	description,
-	illustration,
 	children,
 }: NewsletterSignupCardProps) => {
 	return (
 		<aside css={containerStyles} aria-label="newsletter promotion">
 			<div css={headerStyles}>
-				<div css={titleAndMetaStyles}>
-					<p css={titleStyles}>
-						Sign up to <span>{name}</span>
-					</p>
-					<div css={metaStyles}>
-						<NewsletterDetail text={buildDetailText(frequency)} />
-					</div>
+				<p css={titleStyles}>
+					Sign up to <span>{name}</span>
+				</p>
+				<div css={metaStyles}>
+					<NewsletterDetail text={buildDetailText(frequency)} />
 				</div>
-				<img
-					css={illustrationStyles}
-					src={illustration}
-					alt={`${name} newsletter illustration`}
-				/>
 			</div>
 			<p css={descriptionStyles}>{description}</p>
 			{children}

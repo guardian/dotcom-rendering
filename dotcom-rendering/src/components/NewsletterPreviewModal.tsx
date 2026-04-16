@@ -7,9 +7,12 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { getZIndex } from '../lib/getZIndex';
+
+const FOCUSABLE_SELECTOR =
+	'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
 
 const previewOverlayStyles = css`
 	position: fixed;
@@ -59,6 +62,7 @@ const previewTitleStyles = css`
 	${headlineBold20};
 	font-weight: 700;
 	color: ${palette.neutral[7]};
+	margin: 0;
 
 	${from.tablet} {
 		${headlineBold24};
@@ -127,6 +131,63 @@ export const NewsletterPreviewModal = ({
 	onClose,
 }: Props) => {
 	const dialogRef = useRef<HTMLDivElement>(null);
+	const titleId = useId();
+
+	useEffect(() => {
+		if (!dialogRef.current) return;
+
+		const dialogElement = dialogRef.current;
+		const previouslyFocusedElement =
+			document.activeElement instanceof HTMLElement
+				? document.activeElement
+				: null;
+
+		dialogElement.focus();
+
+		const trapFocus = (event: KeyboardEvent) => {
+			if (event.key !== 'Tab') return;
+
+			const focusableElements =
+				dialogElement.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+			if (focusableElements.length === 0) {
+				event.preventDefault();
+				dialogElement.focus();
+				return;
+			}
+
+			const firstFocusableElement = focusableElements[0]!;
+			const lastFocusableElement =
+				focusableElements[focusableElements.length - 1]!;
+
+			if (event.shiftKey) {
+				if (
+					document.activeElement === firstFocusableElement ||
+					document.activeElement === dialogElement
+				) {
+					event.preventDefault();
+					lastFocusableElement.focus();
+				}
+				return;
+			}
+
+			if (document.activeElement === lastFocusableElement) {
+				event.preventDefault();
+				firstFocusableElement.focus();
+			}
+		};
+
+		document.addEventListener('keydown', trapFocus);
+
+		return () => {
+			document.removeEventListener('keydown', trapFocus);
+			if (
+				previouslyFocusedElement &&
+				document.contains(previouslyFocusedElement)
+			) {
+				previouslyFocusedElement.focus();
+			}
+		};
+	}, []);
 
 	useEffect(() => {
 		const closeOnClickAway = (event: MouseEvent) => {
@@ -151,10 +212,14 @@ export const NewsletterPreviewModal = ({
 				ref={dialogRef}
 				role="dialog"
 				aria-modal="true"
+				aria-labelledby={titleId}
+				tabIndex={-1}
 				css={previewDialogStyles}
 			>
 				<div css={previewHeaderStyles}>
-					<p css={previewTitleStyles}>{newsletterName} preview</p>
+					<h2 id={titleId} css={previewTitleStyles}>
+						{newsletterName} preview
+					</h2>
 					<Button
 						size="small"
 						priority="tertiary"

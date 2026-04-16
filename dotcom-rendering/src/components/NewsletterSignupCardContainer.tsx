@@ -15,9 +15,6 @@ import {
 	type NewsletterSignupCardProps,
 } from './NewsletterSignupCard';
 
-const NEWSLETTER_ILLUSTRATION_PLACEHOLDER =
-	'https://placehold.co/240x180?text=Newsletter';
-
 const previewButtonStyles = css`
 	margin-bottom: ${space[2]}px;
 `;
@@ -57,7 +54,7 @@ const sendPreviewTracking = ({
 	);
 };
 
-type Props = Omit<NewsletterSignupCardProps, 'illustration'> & {
+type Props = NewsletterSignupCardProps & {
 	identityName: string;
 	category?: string;
 	exampleUrl?: string;
@@ -166,7 +163,6 @@ export const NewsletterSignupCardContainer = ({
 				name={name}
 				frequency={frequency}
 				description={description}
-				illustration={NEWSLETTER_ILLUSTRATION_PLACEHOLDER}
 			>
 				{hasPreviewUrl && (
 					<div
