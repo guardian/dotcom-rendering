@@ -412,7 +412,8 @@ const Score = (props: {
 	fallOfWicket: number;
 	matchKind: CricketMatch['kind'];
 }) => {
-	const showFallenWickets = props.fallOfWicket > 0 && props.fallOfWicket < 10;
+	const showFallenWickets =
+		props.fallOfWicket >= 0 && props.fallOfWicket < 10;
 	return (
 		<span
 			role="img"
