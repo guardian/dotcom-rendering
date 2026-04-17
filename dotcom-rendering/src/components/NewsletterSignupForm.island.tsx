@@ -11,7 +11,7 @@ import {
 	TextInput,
 } from '@guardian/source/react-components';
 import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
-import type { CSSProperties, FormEvent, ReactEventHandler } from 'react';
+import type { FormEvent, ReactEventHandler } from 'react';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
@@ -31,70 +31,66 @@ type Props = {
 
 const formStyles = css`
 	display: grid;
-	grid-template-columns: auto 160px;
-	grid-template-rows: 24px 48px;
-	gap: 0 ${space[3]}px;
+	column-gap: ${space[3]}px;
+	row-gap: ${space[3]}px;
+	align-items: end;
+`;
 
+const signedOutLayoutStyles = css`
+	grid-template-columns: minmax(0, 1fr) 160px;
 	grid-template-areas:
-		'label label'
-		'input button'
+		'email submit'
 		'marketing .'
 		'privacy privacy';
 
-	label {
-		grid-area: label;
-		div {
-			color: ${palette('--article-text')};
-		}
-	}
-	input {
-		grid-area: input;
-		margin-top: 0;
-		color: ${palette('--article-text')};
-		background-color: ${palette('--article-background')};
-	}
-	button {
-		grid-area: button;
-	}
-
 	${until.tablet} {
 		grid-template-columns: 1fr;
-		grid-template-rows: auto auto auto auto;
 		grid-template-areas:
-			'label'
-			'input'
-			'button'
-			'marketing';
+			'email'
+			'submit'
+			'marketing'
 			'privacy';
-		gap: ${space[3]}px 0;
-
-		button {
-			width: 100%;
-		}
 	}
 `;
 
-const formStylesWhenSignedIn = {
-	gridTemplateColumns: 'auto 1fr',
-	gridTemplateAreas: [
-		// this is easier to parse over multiple lines
-		'"label  label"',
-		'"button input"',
-	].join(' '),
-} satisfies CSSProperties;
+const signedInLayoutStyles = css`
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-areas:
+		'submit'
+		'marketing'
+		'privacy';
+`;
+
+const emailFieldStyles = css`
+	grid-area: email;
+	min-width: 0;
+
+	label div {
+		color: ${palette('--article-text')};
+	}
+
+	input {
+		color: ${palette('--article-text')};
+		background-color: ${palette('--article-background')};
+	}
+`;
+
+const submitButtonContainerStyles = css`
+	grid-area: submit;
+	width: 100%;
+
+	button {
+		width: 100%;
+	}
+`;
 
 const errorContainerStyles = css`
 	display: flex;
 	align-items: flex-start;
+	gap: ${space[2]}px;
+
 	${until.tablet} {
 		flex-wrap: wrap;
-	}
-	button {
-		margin-left: ${space[1]}px;
-		background-color: ${palette('--recaptcha-button')};
-		:hover {
-			background-color: ${palette('--recaptcha-button-hover')};
-		}
 	}
 `;
 
@@ -104,12 +100,11 @@ const toggleContainerStyles = css`
 	flex-direction: column;
 	align-items: flex-start;
 	gap: ${space[3]}px;
-	margin-top: ${space[3]}px;
+	min-width: 0;
 `;
 
 const privacyContainerStyles = css`
 	grid-area: privacy;
-	margin-top: ${space[3]}px;
 `;
 
 const marketingBoxStyles = css`
@@ -265,7 +260,7 @@ export const NewsletterSignupForm = ({
 	hidePrivacyMessage = false,
 }: Props) => {
 	const [userEmail, setUserEmail] = useState<string>();
-	const [hideEmailInput, setHideEmailInput] = useState<boolean>();
+	const [hideEmailInput, setHideEmailInput] = useState<boolean>(false);
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
@@ -301,11 +296,7 @@ export const NewsletterSignupForm = ({
 
 	const hasResponse = typeof responseOk === 'boolean';
 
-	const submitForm = async (): Promise<void> => {
-		const input: HTMLInputElement | null =
-			document.querySelector('input[type="email"]') ?? null;
-		const emailAddress: string = input?.value ?? '';
-
+	const submitForm = async (emailAddress: string): Promise<void> => {
 		sendTracking(newsletterId, 'form-submission', renderingTarget);
 
 		const formData = buildFormData(
@@ -348,9 +339,16 @@ export const NewsletterSignupForm = ({
 		if (isWaitingForResponse) {
 			return;
 		}
+
+		const emailAddress = userEmail?.trim() ?? '';
+		if (!emailAddress) {
+			setErrorMessage('Please enter a valid email address.');
+			return;
+		}
+
 		setErrorMessage(undefined);
 		setIsWaitingForResponse(true);
-		submitForm().catch((error) => {
+		submitForm(emailAddress).catch((error) => {
 			// eslint-disable-next-line no-console -- unexpected error
 			console.error(error);
 			sendTracking(newsletterId, 'form-submit-error', renderingTarget);
@@ -371,23 +369,31 @@ export const NewsletterSignupForm = ({
 						hasResponse || isWaitingForResponse
 							? 'none'
 							: undefined,
-					...(hideEmailInput ? formStylesWhenSignedIn : undefined),
 				}}
-				css={formStyles}
+				css={[
+					formStyles,
+					hideEmailInput
+						? signedInLayoutStyles
+						: signedOutLayoutStyles,
+				]}
 			>
-				<TextInput
-					hidden={hideEmailInput}
-					hideLabel={hideEmailInput}
-					name="email"
-					label="Enter your email"
-					type="email"
-					value={userEmail ?? ''}
-					onFocus={() => setIsInteracted(true)}
-					onChange={(e) => {
-						setUserEmail(e.target.value);
-						setIsInteracted(true);
-					}}
-				/>
+				{hideEmailInput ? (
+					<input type="hidden" name="email" value={userEmail ?? ''} />
+				) : (
+					<div css={emailFieldStyles}>
+						<TextInput
+							name="email"
+							label="Enter your email"
+							type="email"
+							value={userEmail ?? ''}
+							onFocus={() => setIsInteracted(true)}
+							onChange={(e) => {
+								setUserEmail(e.target.value);
+								setIsInteracted(true);
+							}}
+						/>
+					</div>
+				)}
 				{showAdditionalFields && (
 					<>
 						{isSignedIn === false && (
@@ -396,9 +402,11 @@ export const NewsletterSignupForm = ({
 									<ToggleSwitch
 										id={`marketing-opt-in-${newsletterId}`}
 										checked={marketingOptIn ?? false}
-										onClick={() =>
-											setMarketingOptIn(!marketingOptIn)
-										}
+										onClick={(event) => {
+											// ToggleSwitch renders a button; prevent accidental form submit.
+											event.preventDefault();
+											setMarketingOptIn(!marketingOptIn);
+										}}
 										label="Get updates about our journalism and ways to support and enjoy
 								our work. Toggle to opt out."
 										labelPosition="left"
@@ -413,9 +421,11 @@ export const NewsletterSignupForm = ({
 						)}
 					</>
 				)}
-				<Button onClick={handleClick} type="submit">
-					Sign up
-				</Button>
+				<div css={submitButtonContainerStyles}>
+					<Button onClick={handleClick} type="submit">
+						Sign up
+					</Button>
+				</div>
 			</form>
 			{isWaitingForResponse && (
 				<div role="status" aria-label="loading">
@@ -435,6 +445,7 @@ export const NewsletterSignupForm = ({
 						<ErrorMessageWithAdvice text={`Sign up failed.`} />
 						<Button
 							size="small"
+							priority="primary"
 							icon={<SvgReload />}
 							iconSide={'right'}
 							onClick={resetForm}
