@@ -146,6 +146,19 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "commercial-prebid-price-floor",
+		description:
+			"Measure the impact on bid response rate of enforcing a minimum $0.10 bid floor on all Prebid ad slots.",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-05-03",
+		type: "client",
+		status: "ON",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
