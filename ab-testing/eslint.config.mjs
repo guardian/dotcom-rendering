@@ -1,4 +1,4 @@
-import guardian from "@guardian/eslint-config";
+import guardian from "@guardian/eslint-config/index.js";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
