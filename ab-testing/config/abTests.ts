@@ -151,7 +151,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Measure the impact on bid response rate of enforcing a minimum $0.10 bid floor on all Prebid ad slots.",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-05-03",
+		expirationDate: "2026-05-07",
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
