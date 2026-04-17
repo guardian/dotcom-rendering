@@ -65,6 +65,7 @@ const previewTitleStyles = css`
 
 	${from.tablet} {
 		${headlineMedium24};
+		padding-right: ${space[3]}px;
 	}
 `;
 
