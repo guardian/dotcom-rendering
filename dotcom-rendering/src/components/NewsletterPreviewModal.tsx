@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold20,
-	headlineBold24,
+	headlineMedium20,
+	headlineMedium24,
 	palette,
 	space,
 } from '@guardian/source/foundations';
@@ -59,13 +59,12 @@ const previewHeaderStyles = css`
 `;
 
 const previewTitleStyles = css`
-	${headlineBold20};
-	font-weight: 700;
+	${headlineMedium20};
 	color: ${palette.neutral[7]};
 	margin: 0;
 
 	${from.tablet} {
-		${headlineBold24};
+		${headlineMedium24};
 	}
 `;
 
@@ -82,7 +81,20 @@ const desktopCloseButtonStyles = css`
 	padding: 0;
 	min-width: 32px;
 	min-height: 32px;
+	width: 32px;
+	height: 32px;
+	border: 0;
+	border-radius: 50%;
+	background: ${palette.neutral[93]};
+	color: ${palette.brand[400]};
 	display: none;
+
+	&&:hover,
+	&&:focus {
+		background: ${palette.neutral[86]};
+		border: 0;
+		color: ${palette.brand[400]};
+	}
 
 	${from.tablet} {
 		display: inline-flex;
@@ -275,7 +287,6 @@ export const NewsletterPreviewModal = ({
 				/>
 				<div css={mobileCloseBarStyles}>
 					<Button
-						size="small"
 						priority="tertiary"
 						onClick={onClose}
 						cssOverrides={mobileCloseButtonStyles}
