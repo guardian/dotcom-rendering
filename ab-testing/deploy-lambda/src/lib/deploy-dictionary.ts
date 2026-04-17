@@ -1,6 +1,6 @@
-import type { FastlyDictionary } from "@guardian/ab-testing-config/lib/fastly/dictionary.ts";
-import { calculateUpdates } from "@guardian/ab-testing-config/lib/fastly/utils.ts";
-import type { KeyValue } from "./fetch-artifact.ts";
+import type { FastlyDictionary } from '@guardian/ab-testing-config/lib/fastly/dictionary.ts';
+import { calculateUpdates } from '@guardian/ab-testing-config/lib/fastly/utils.ts';
+import type { KeyValue } from './fetch-artifact.ts';
 
 /**
  * Deploys key-value pairs to a Fastly edge dictionary.
@@ -32,7 +32,7 @@ export const deployDictionary = async (
 
 		const response = await dictionary.updateItems(updates);
 
-		if (response.status !== "ok") {
+		if (response.status !== 'ok') {
 			throw new Error(`Failed to update mvt groups dictionary`);
 		}
 	}

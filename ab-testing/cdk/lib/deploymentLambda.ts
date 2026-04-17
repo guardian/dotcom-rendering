@@ -1,12 +1,12 @@
-import type { GuStackProps } from "@guardian/cdk/lib/constructs/core/stack.js";
-import { GuStack } from "@guardian/cdk/lib/constructs/core/stack.js";
-import { GuLambdaFunction } from "@guardian/cdk/lib/constructs/lambda/index.js";
-import { GuS3Bucket } from "@guardian/cdk/lib/constructs/s3/index.js";
-import type { App } from "aws-cdk-lib";
-import { Runtime } from "aws-cdk-lib/aws-lambda";
-import { StringParameter } from "aws-cdk-lib/aws-ssm";
+import type { GuStackProps } from '@guardian/cdk/lib/constructs/core/stack.js';
+import { GuStack } from '@guardian/cdk/lib/constructs/core/stack.js';
+import { GuLambdaFunction } from '@guardian/cdk/lib/constructs/lambda/index.js';
+import { GuS3Bucket } from '@guardian/cdk/lib/constructs/s3/index.js';
+import type { App } from 'aws-cdk-lib';
+import { Runtime } from 'aws-cdk-lib/aws-lambda';
+import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 
-export const lambdaFunctionName = "ab-testing-deployment-lambda";
+export const lambdaFunctionName = 'ab-testing-deployment-lambda';
 
 export class AbTestingDeploymentLambda extends GuStack {
 	constructor(scope: App, id: string, props: GuStackProps) {
@@ -14,7 +14,7 @@ export class AbTestingDeploymentLambda extends GuStack {
 
 		const s3Bucket = GuS3Bucket.fromBucketName(
 			this,
-			"DictionaryDeployBucket",
+			'DictionaryDeployBucket',
 			StringParameter.valueForStringParameter(
 				this,
 				`/account/services/dotcom-store.bucket`,
@@ -24,7 +24,7 @@ export class AbTestingDeploymentLambda extends GuStack {
 		const fastlyApiKeyParameter =
 			StringParameter.fromSecureStringParameterAttributes(
 				this,
-				"FastlyApiKeyParameter",
+				'FastlyApiKeyParameter',
 				{
 					parameterName: `/ab-testing/${this.stage}/fastly-api-token`,
 				},
@@ -33,16 +33,16 @@ export class AbTestingDeploymentLambda extends GuStack {
 		const fastlyConfigParameter =
 			StringParameter.fromSecureStringParameterAttributes(
 				this,
-				"FastlyAbTestingConfigParameter",
+				'FastlyAbTestingConfigParameter',
 				{
 					parameterName: `/ab-testing/${this.stage}/fastly-config`,
 				},
 			);
 
-		const lambda = new GuLambdaFunction(this, "AbTestingDeploymentLambda", {
+		const lambda = new GuLambdaFunction(this, 'AbTestingDeploymentLambda', {
 			functionName: `${lambdaFunctionName}-${this.stage}`,
-			fileName: "lambda.zip",
-			handler: "index.handler",
+			fileName: 'lambda.zip',
+			handler: 'index.handler',
 			app: lambdaFunctionName,
 			runtime: Runtime.NODEJS_22_X,
 			memorySize: 256,

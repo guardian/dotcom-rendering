@@ -1,5 +1,5 @@
-import { RiffRaffYamlFile } from "@guardian/cdk/lib/riff-raff-yaml-file/index.js";
-import type { App } from "aws-cdk-lib";
+import { RiffRaffYamlFile } from '@guardian/cdk/lib/riff-raff-yaml-file/index.js';
+import type { App } from 'aws-cdk-lib';
 
 /**
  * Generates a RiffRaff YAML file configuration for deploying ab-testing artifacts and CloudFormation stacks.
@@ -25,30 +25,30 @@ export const riffRaffYamlFile = ({
 	} = riffRaff;
 
 	// The dictionary artifacts to be deployed to S3
-	deployments.set("config/ab-testing", {
-		app: "ab-testing-config-artifact",
-		contentDirectory: "ab-testing-config-artifacts",
-		type: "aws-s3",
+	deployments.set('config/ab-testing', {
+		app: 'ab-testing-config-artifact',
+		contentDirectory: 'ab-testing-config-artifacts',
+		type: 'aws-s3',
 		regions: new Set([region]),
 		stacks: new Set([stack]),
 		parameters: {
-			bucketSsmKey: "/account/services/dotcom-store.bucket",
-			cacheControl: "public, max-age=315360000",
+			bucketSsmKey: '/account/services/dotcom-store.bucket',
+			cacheControl: 'public, max-age=315360000',
 			prefixStack: false,
 			publicReadAcl: false,
 		},
 	});
 
 	// the admin UI artifacts to be deployed to S3
-	deployments.set("admin/ab-testing", {
-		app: "ab-testing-ui-artifact",
-		contentDirectory: "ab-testing-ui-artifact",
-		type: "aws-s3",
+	deployments.set('admin/ab-testing', {
+		app: 'ab-testing-ui-artifact',
+		contentDirectory: 'ab-testing-ui-artifact',
+		type: 'aws-s3',
 		regions: new Set([region]),
 		stacks: new Set([stack]),
 		parameters: {
-			bucketSsmKey: "/account/services/dotcom-store.bucket",
-			cacheControl: "public, max-age=315360000",
+			bucketSsmKey: '/account/services/dotcom-store.bucket',
+			cacheControl: 'public, max-age=315360000',
 			prefixStack: false,
 			publicReadAcl: false,
 		},
@@ -63,14 +63,14 @@ export const riffRaffYamlFile = ({
 		dependencies: [
 			...(configCloudformationDeployment.dependencies ?? []),
 			// We need the test artifacts in place before running the ab-testing-config CloudFormation deployment
-			"config/ab-testing",
+			'config/ab-testing',
 			// We need the lambda to be updated before running the ab-testing-config CloudFormation deployment
 			[
-				"lambda-update",
+				'lambda-update',
 				region,
 				stack,
-				"ab-testing-deployment-lambda",
-			].join("-"),
+				'ab-testing-deployment-lambda',
+			].join('-'),
 		],
 	});
 
