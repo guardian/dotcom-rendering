@@ -14,12 +14,16 @@ const getPathname = (urlOrPath: string): string => {
 	}
 };
 
+const normalizePathSegment = (pathSegment: string): string => {
+	try {
+		return encodeURIComponent(decodeURIComponent(pathSegment));
+	} catch {
+		return encodeURIComponent(pathSegment);
+	}
+};
+
 const normalizeNewsletterPath = (path: string): string =>
-	path
-		.split('/')
-		.filter(Boolean)
-		.map((pathSegment) => encodeURIComponent(pathSegment))
-		.join('/');
+	path.split('/').filter(Boolean).map(normalizePathSegment).join('/');
 
 const stripTrailingEmailSegment = (path: string): string =>
 	path.replace(/\/+$/, '').replace(/\/email$/, '');
