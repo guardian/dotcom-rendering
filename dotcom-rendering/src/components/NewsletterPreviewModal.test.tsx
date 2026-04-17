@@ -102,4 +102,21 @@ describe('NewsletterPreviewModal', () => {
 		fireEvent.mouseDown(overlay as HTMLElement);
 		expect(onClose).toHaveBeenCalledTimes(1);
 	});
+
+	it('locks page scrolling while open and restores it on unmount', () => {
+		document.documentElement.style.overflow = 'auto';
+		document.body.style.overflow = 'scroll';
+
+		const { unmount } = render(
+			<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />,
+		);
+
+		expect(document.documentElement.style.overflow).toBe('hidden');
+		expect(document.body.style.overflow).toBe('hidden');
+
+		unmount();
+
+		expect(document.documentElement.style.overflow).toBe('auto');
+		expect(document.body.style.overflow).toBe('scroll');
+	});
 });

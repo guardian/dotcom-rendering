@@ -159,10 +159,15 @@ export const NewsletterPreviewModal = ({
 		});
 
 	useEffect(() => {
+		const rootElement = document.documentElement;
+		const previousRootOverflow = rootElement.style.overflow;
 		const previousBodyOverflow = document.body.style.overflow;
+
+		rootElement.style.overflow = 'hidden';
 		document.body.style.overflow = 'hidden';
 
 		return () => {
+			rootElement.style.overflow = previousRootOverflow;
 			document.body.style.overflow = previousBodyOverflow;
 		};
 	}, []);
