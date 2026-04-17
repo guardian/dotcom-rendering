@@ -34,6 +34,7 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	/** Feature flag to show the new NewsletterSignupCard design instead of EmailSignup */
 	showNewNewsletterSignupCard?: boolean;
 	successDescription: string;
+	onPreviewClick?: () => void;
 }
 
 /**
@@ -52,6 +53,7 @@ export const EmailSignUpWrapper = ({
 	idApiUrl,
 	hideNewsletterSignupComponentForSubscribers = false,
 	showNewNewsletterSignupCard = false,
+	onPreviewClick,
 	...emailSignUpProps
 }: EmailSignUpWrapperProps) => {
 	const shouldCheckSubscription =
@@ -106,6 +108,7 @@ export const EmailSignUpWrapper = ({
 							newsletterId={emailSignUpProps.identityName}
 							successDescription={emailSignUpProps.description}
 							hidePrivacyMessage={isSignedIn === true}
+							onPreviewClick={onPreviewClick}
 						/>
 					</Island>
 				</NewsletterSignupCard>

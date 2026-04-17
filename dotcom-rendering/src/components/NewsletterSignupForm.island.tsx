@@ -7,6 +7,7 @@ import {
 	InlineSuccess,
 	Link,
 	Spinner,
+	SvgEye,
 	SvgReload,
 	TextInput,
 } from '@guardian/source/react-components';
@@ -27,12 +28,13 @@ type Props = {
 	newsletterId: string;
 	successDescription: string;
 	hidePrivacyMessage?: boolean;
+	onPreviewClick?: () => void;
 };
 
 const formStyles = css`
 	display: grid;
 	column-gap: ${space[3]}px;
-	row-gap: ${space[3]}px;
+	row-gap: ${space[2]}px;
 	align-items: end;
 `;
 
@@ -78,10 +80,24 @@ const emailFieldStyles = css`
 const submitButtonContainerStyles = css`
 	grid-area: submit;
 	width: 100%;
+	display: flex;
+	gap: ${space[2]}px;
+`;
 
+const signedOutSubmitButtonStyles = css`
+	flex: 1;
 	button {
 		width: 100%;
 	}
+`;
+
+const signedInSubmitButtonStyles = css`
+	width: 100%;
+	max-width: 220px;
+`;
+
+const previewButtonContainerStyles = css`
+	margin-bottom: ${space[3]}px;
 `;
 
 const errorContainerStyles = css`
@@ -258,6 +274,7 @@ export const NewsletterSignupForm = ({
 	newsletterId,
 	successDescription,
 	hidePrivacyMessage = false,
+	onPreviewClick,
 }: Props) => {
 	const [userEmail, setUserEmail] = useState<string>();
 	const [hideEmailInput, setHideEmailInput] = useState<boolean>(false);
@@ -361,6 +378,22 @@ export const NewsletterSignupForm = ({
 
 	return (
 		<>
+			{!hasResponse &&
+				!isWaitingForResponse &&
+				onPreviewClick &&
+				!hideEmailInput && (
+					<div css={previewButtonContainerStyles}>
+						<Button
+							priority="tertiary"
+							icon={<SvgEye />}
+							iconSide="left"
+							onClick={onPreviewClick}
+							type="button"
+						>
+							Preview latest
+						</Button>
+					</div>
+				)}
 			<form
 				onSubmit={handleSubmit}
 				id={`newsletter-signup-${newsletterId}`}
@@ -422,7 +455,26 @@ export const NewsletterSignupForm = ({
 					</>
 				)}
 				<div css={submitButtonContainerStyles}>
-					<Button onClick={handleClick} type="submit">
+					{hideEmailInput && onPreviewClick && (
+						<Button
+							priority="tertiary"
+							icon={<SvgEye />}
+							iconSide="left"
+							onClick={onPreviewClick}
+							type="button"
+						>
+							Preview latest
+						</Button>
+					)}
+					<Button
+						cssOverrides={
+							hideEmailInput
+								? signedInSubmitButtonStyles
+								: signedOutSubmitButtonStyles
+						}
+						onClick={handleClick}
+						type="submit"
+					>
 						Sign up
 					</Button>
 				</div>
