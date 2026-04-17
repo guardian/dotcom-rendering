@@ -26,6 +26,7 @@ import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 type Props = {
 	newsletterId: string;
 	successDescription: string;
+	hidePrivacyMessage?: boolean;
 };
 
 const formStyles = css`
@@ -37,7 +38,8 @@ const formStyles = css`
 	grid-template-areas:
 		'label label'
 		'input button'
-		'marketing marketing';
+		'marketing .'
+		'privacy privacy';
 
 	label {
 		grid-area: label;
@@ -63,6 +65,7 @@ const formStyles = css`
 			'input'
 			'button'
 			'marketing';
+			'privacy';
 		gap: ${space[3]}px 0;
 
 		button {
@@ -101,6 +104,11 @@ const toggleContainerStyles = css`
 	flex-direction: column;
 	align-items: flex-start;
 	gap: ${space[3]}px;
+	margin-top: ${space[3]}px;
+`;
+
+const privacyContainerStyles = css`
+	grid-area: privacy;
 	margin-top: ${space[3]}px;
 `;
 
@@ -180,7 +188,7 @@ const postFormData = async (
 	for (const [key, value] of formData.entries()) {
 		requestBodyStrings.push(
 			`${encodeURIComponent(key)}=${encodeURIComponent(
-				// eslint-disable-next-line @typescript-eslint/no-base-to-string
+				// eslint-disable-next-line @typescript-eslint/no-base-to-string -- value.toString() is safe here as we are dealing with FormData entries
 				value.toString(),
 			)}`,
 		);
@@ -254,6 +262,7 @@ const sendTracking = (
 export const NewsletterSignupForm = ({
 	newsletterId,
 	successDescription,
+	hidePrivacyMessage = false,
 }: Props) => {
 	const [userEmail, setUserEmail] = useState<string>();
 	const [hideEmailInput, setHideEmailInput] = useState<boolean>();
@@ -380,23 +389,29 @@ export const NewsletterSignupForm = ({
 					}}
 				/>
 				{showAdditionalFields && (
-					<div css={toggleContainerStyles}>
+					<>
 						{isSignedIn === false && (
-							<div css={marketingBoxStyles}>
-								<ToggleSwitch
-									id={`marketing-opt-in-${newsletterId}`}
-									checked={marketingOptIn ?? false}
-									onClick={() =>
-										setMarketingOptIn(!marketingOptIn)
-									}
-									label="Get updates about our journalism and ways to support and enjoy
+							<div css={toggleContainerStyles}>
+								<div css={marketingBoxStyles}>
+									<ToggleSwitch
+										id={`marketing-opt-in-${newsletterId}`}
+										checked={marketingOptIn ?? false}
+										onClick={() =>
+											setMarketingOptIn(!marketingOptIn)
+										}
+										label="Get updates about our journalism and ways to support and enjoy
 								our work. Toggle to opt out."
-									labelPosition="left"
-								/>
+										labelPosition="left"
+									/>
+								</div>
 							</div>
 						)}
-						<NewsletterPrivacyMessage />
-					</div>
+						{!hidePrivacyMessage && (
+							<div css={privacyContainerStyles}>
+								<NewsletterPrivacyMessage />
+							</div>
+						)}
+					</>
 				)}
 				<Button onClick={handleClick} type="submit">
 					Sign up

@@ -1,4 +1,5 @@
 import type { Breakpoint } from '@guardian/source/foundations';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
@@ -58,6 +59,7 @@ export const EmailSignUpWrapper = ({
 		idApiUrl,
 		hideNewsletterSignupComponentForSubscribers,
 	);
+	const isSignedIn = useIsSignedIn();
 
 	// When the new card design is enabled, always show it regardless of subscription status
 	if (showNewNewsletterSignupCard) {
@@ -71,9 +73,13 @@ export const EmailSignUpWrapper = ({
 						<NewsletterSignupForm
 							newsletterId={emailSignUpProps.identityName}
 							successDescription={emailSignUpProps.description}
+							hidePrivacyMessage={isSignedIn === true}
 						/>
 					</Island>
 				</NewsletterSignupCard>
+				{isSignedIn === true && (
+					<NewsletterPrivacyMessage textColor="regular" />
+				)}
 			</InlineSkipToWrapper>
 		);
 	}
