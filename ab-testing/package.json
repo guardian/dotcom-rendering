@@ -20,6 +20,5 @@
 		"test:ci": "jest --runInBand"
 	},
 	"author": "@guardian/commercial-dev",
-	"license": "Apache-2.0",
-	"prettier": "@guardian/prettier"
+	"license": "Apache-2.0"
 }
