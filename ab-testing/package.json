@@ -1,0 +1,25 @@
+{
+	"name": "ab-testing",
+	"version": "1.0.0",
+	"description": "Tools for managing AB testing",
+	"devDependencies": {
+		"@guardian/eslint-config": "14.0.1",
+		"@guardian/prettier": "10.0.0",
+		"eslint": "9.39.1",
+		"prettier": "3.0.3",
+		"typescript": "5.9.3"
+	},
+	"scripts": {
+		"lint": "eslint --quiet --cache .",
+		"lint:fix": "eslint --quiet --cache --fix .",
+		"prettier:check": "prettier --ignore-unknown --check --cache .",
+		"prettier:write": "prettier --ignore-unknown --write --cache .",
+		"tsc": "tsc",
+		"test": "jest --maxWorkers=50%",
+		"test:watch": "jest --watch --maxWorkers=25%",
+		"test:ci": "jest --runInBand"
+	},
+	"author": "@guardian/commercial-dev",
+	"license": "Apache-2.0",
+	"prettier": "@guardian/prettier"
+}

@@ -1,4 +1,4 @@
-import { assert, object, string } from "superstruct";
+import { assert, object, string } from 'superstruct';
 
 const getEnv = (key: string): string => {
 	const value = process.env[key];
@@ -18,13 +18,13 @@ const configStruct = object({
 });
 
 const getConfigFromEnv = () => {
-	const config = JSON.parse(getEnv("FASTLY_AB_TESTING_CONFIG")) as unknown;
+	const config = JSON.parse(getEnv('FASTLY_AB_TESTING_CONFIG')) as unknown;
 	assert(config, configStruct);
 
 	return config;
 };
 const getApiTokenFromEnv = () => {
-	const apiToken = getEnv("FASTLY_API_TOKEN");
+	const apiToken = getEnv('FASTLY_API_TOKEN');
 	return apiToken;
 };
 
