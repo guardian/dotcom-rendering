@@ -106,19 +106,19 @@ flowchart TD
 
     AUTH --> FP["buildFingerprint(consented, isSignedIn)\ne.g. 'signed-in:true' or 'anonymous:false'"]
 
-    FP --> STALE{"mparticleConsentNeedsSync()\nchecks gu_mparticle_last_synced\n(fingerprint of last successful PATCH)"}
+    FP --> STALE{"mparticleConsentNeedsSync()\nchecks gu.mparticle.lastSynced\n(localStorage — fingerprint of last successful PATCH)"}
     STALE -- "Fingerprint matches → skip" --> NOOP2["↩ return — no API call"]
-    STALE -- "Fingerprint differs" --> SESSION{"sessionAttemptExists()\nchecks gu_mparticle_session_attempted"}
+    STALE -- "Fingerprint differs" --> SESSION{"sessionAttemptExists()\nchecks gu.mparticle.sessionAttempted\n(sessionStorage)"}
 
     SESSION -- "Already attempted this session → skip" --> NOOP3["↩ return — no API call"]
-    SESSION -- "No attempt yet" --> MARK_ATTEMPT["markSessionAttempt(fingerprint)\nsets gu_mparticle_session_attempted\n(session cookie)"]
+    SESSION -- "No attempt yet" --> MARK_ATTEMPT["markSessionAttempt(fingerprint)\nsets gu.mparticle.sessionAttempted\n(sessionStorage — cleared on tab close)"]
 
     MARK_ATTEMPT --> CONSENT["getConsentFor('mparticle', state)\n→ boolean"]
 
     CONSENT --> API["mparticleConsentApi.ts\nPATCH mparticle-consent.guardianapis.com\n/consents/{browserId}\n{ consented, pageViewId }\nAuthorization: Bearer … (signed-in only)"]
 
-    API -- "ok" --> MARK["markMparticleConsentSynced(consented, isSignedIn)\nsets gu_mparticle_last_synced\n(persistent, 1 year)"]
-    API -- "!ok" --> ERR["throw Error\n→ surfaces in Sentry\n(gu_mparticle_last_synced not updated\n→ will retry next session)"]
+    API -- "ok" --> MARK["markMparticleConsentSynced(consented, isSignedIn)\nsets gu.mparticle.lastSynced\n(localStorage — persistent)"]
+    API -- "!ok" --> ERR["throw Error\n→ surfaces in Sentry\n(gu.mparticle.lastSynced not updated\n→ will retry next session)"]
 ```
 
 ---
@@ -159,7 +159,7 @@ sequenceDiagram
     MP->>MP: has bwid? fingerprint changed? session attempt exists?
     MP->>MPAPI: PATCH /consents/{bwid} (Bearer token if signed in)
     MPAPI-->>MP: 200 OK
-    MP->>MP: set gu_mparticle_last_synced (fingerprint)
+    MP->>MP: set gu.mparticle.lastSynced in localStorage (fingerprint)
 
     Note over SP: Later: user opens privacy modal<br/>and changes consent
 
@@ -230,7 +230,7 @@ Practically, the cleanest mapping onto the existing architecture is:
 
 | Trigger                            | Mechanism                                                                                                                                      |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| New session / first visit          | `gu_mparticle_last_synced` is absent or holds a different fingerprint → fires                                                                  |
+| New session / first visit          | `gu.mparticle.lastSynced` (localStorage) is absent or holds a different fingerprint → fires                                                    |
 | Consent changes                    | `onConsentChange` fires again with new state → fingerprint changes → fires                                                                     |
 | User signs in (same consent value) | Auth state changes from anonymous → signed-in → fingerprint changes (e.g. `"anonymous:false"` → `"signed-in:false"`) → fires with Bearer token |
 
@@ -238,9 +238,9 @@ Practically, the cleanest mapping onto the existing architecture is:
 
 `onConsentChange` fires **every time** consent is read from the browser (i.e. on every page view), not only when the user actively changes something. Calling the mParticle API on every page view would overwhelm the endpoint.
 
-The solution is a **fingerprint-based dual-cookie approach** that fires only when the state has genuinely changed:
+The solution is a **fingerprint-based dual-storage approach** that fires only when the state has genuinely changed:
 
-#### `gu_mparticle_last_synced` (persistent, 1-year TTL)
+#### `gu.mparticle.lastSynced` (localStorage — persistent)
 
 Stores the fingerprint of the last **successful** PATCH. The fingerprint encodes both the consent value and whether the user was signed in at the time:
 
@@ -257,11 +257,13 @@ On `onConsentChange`, the current fingerprint is computed and compared. If it ma
 -   Changing consent → new fingerprint → **fires**
 -   Signing in with the same consent value → auth state in fingerprint changes → **fires** (with Bearer token, allowing the backend to link the record to `identity_id` immediately)
 
-#### `gu_mparticle_session_attempted` (session cookie, no TTL)
+#### `gu.mparticle.sessionAttempted` (sessionStorage — cleared on tab close)
 
-Stores the fingerprint of the most recent PATCH **attempt** in the current browser session. This exists solely to cap retries on failure: if a PATCH fails, `gu_mparticle_last_synced` is not updated (so the state looks "unsynced") but the session-attempt cookie prevents a retry on every subsequent page load. The retry happens on the next browser session.
+Stores the fingerprint of the most recent PATCH **attempt** in the current browser session. This exists solely to cap retries on failure: if a PATCH fails, `gu.mparticle.lastSynced` is not updated (so the state looks "unsynced") but the session-attempt entry prevents a retry on every subsequent page load within the same tab. The retry happens on the next browser session.
 
-The attempt cookie is written **before** the network call so that a mid-flight page unload does not leave the next load unaware that a call was in progress.
+The attempt value is written **before** the network call so that a mid-flight page unload does not leave the next load unaware that a call was in progress.
+
+Using `localStorage`/`sessionStorage` (via `storage.local`/`storage.session` from `@guardian/libs`) rather than cookies means these values are never sent to the server on HTTP requests. The `@guardian/libs` storage utilities handle blocked storage gracefully — they return `null` rather than throwing, so the worst case when storage is unavailable is that a PATCH is attempted on every page load (same behaviour as blocked cookies).
 
 ## Which consent to send
 
@@ -348,21 +350,20 @@ export const syncConsentToMparticle = async (
 };
 ```
 
-### 2. Fingerprint cookies
+### 2. Fingerprint storage
 
 Create `src/client/mparticle/cookies/mparticleConsentSynced.ts`:
 
 ```ts
-import { getCookie, setCookie } from '@guardian/libs';
+import { storage } from '@guardian/libs';
 
-// Persistent cookie (1 year): stores the fingerprint of the last *successful* PATCH.
+// localStorage key: stores the fingerprint of the last *successful* PATCH.
 // Format: "signed-in:{true|false}" or "anonymous:{true|false}"
-export const MPARTICLE_LAST_SYNCED_COOKIE = 'gu_mparticle_last_synced';
+const MPARTICLE_LAST_SYNCED_KEY = 'gu.mparticle.lastSynced';
 
-// Session cookie (no TTL): records that we already attempted a PATCH for this fingerprint
+// sessionStorage key: records that we already attempted a PATCH for this fingerprint
 // in the current session, so failed calls are retried at most once per session.
-export const MPARTICLE_SESSION_ATTEMPTED_COOKIE =
-	'gu_mparticle_session_attempted';
+const MPARTICLE_SESSION_ATTEMPTED_KEY = 'gu.mparticle.sessionAttempted';
 
 export const buildFingerprint = (
 	consented: boolean,
@@ -373,30 +374,25 @@ export const mparticleConsentNeedsSync = (
 	consented: boolean,
 	isSignedIn: boolean,
 ): boolean => {
-	const lastSynced = getCookie({ name: MPARTICLE_LAST_SYNCED_COOKIE });
+	const lastSynced = storage.local.getRaw(MPARTICLE_LAST_SYNCED_KEY);
 	return lastSynced !== buildFingerprint(consented, isSignedIn);
 };
 
 export const sessionAttemptExists = (fingerprint: string): boolean =>
-	getCookie({ name: MPARTICLE_SESSION_ATTEMPTED_COOKIE }) === fingerprint;
+	storage.session.getRaw(MPARTICLE_SESSION_ATTEMPTED_KEY) === fingerprint;
 
 export const markSessionAttempt = (fingerprint: string): void => {
-	setCookie({
-		name: MPARTICLE_SESSION_ATTEMPTED_COOKIE,
-		value: fingerprint,
-		// No daysToLive → session cookie; cleared when the browser tab closes
-	});
+	storage.session.setRaw(MPARTICLE_SESSION_ATTEMPTED_KEY, fingerprint);
 };
 
 export const markMparticleConsentSynced = (
 	consented: boolean,
 	isSignedIn: boolean,
 ): void => {
-	setCookie({
-		name: MPARTICLE_LAST_SYNCED_COOKIE,
-		value: buildFingerprint(consented, isSignedIn),
-		daysToLive: 365,
-	});
+	storage.local.setRaw(
+		MPARTICLE_LAST_SYNCED_KEY,
+		buildFingerprint(consented, isSignedIn),
+	);
 };
 ```
 
@@ -609,17 +605,17 @@ mparticleApiUrl: 'https://mparticle-consent-code.guardianapis.com',
 ### Steps
 
 1. Start the local dev server (`make dev` or `pnpm dev`).
-2. In the browser, open DevTools → Application → Cookies. **Delete** `gu_mparticle_last_synced` and `gu_mparticle_session_attempted` if present (this resets the fingerprint gate).
+2. In the browser, open DevTools → Application → Local Storage. **Delete** `gu.mparticle.lastSynced` and the Session Storage entry `gu.mparticle.sessionAttempted` if present (this resets the fingerprint gate).
 3. Open any article page — you do **not** need to be signed in; the call fires for all users.
 4. In the **Network** tab, filter by `consents`. You should see a `PATCH` request to `https://mparticle-consent-code.guardianapis.com/consents/<your-bwid>` with:
     - Status `200` (or appropriate success code from the backend)
     - Body: `{ "consented": true/false, "pageViewId": "..." }`
     - For anonymous users: no `Authorization` header
     - For signed-in users: `Authorization: Bearer ...` header present
-5. Reload the page. Because `gu_mparticle_last_synced` now matches the current fingerprint, **no second request** should fire.
-6. Delete `gu_mparticle_last_synced`. Reload. The request fires again.
+5. Reload the page. Because `gu.mparticle.lastSynced` (localStorage) now matches the current fingerprint, **no second request** should fire.
+6. Delete `gu.mparticle.lastSynced` from Local Storage. Reload. The request fires again.
 7. To test the consent-change path: open the CMP modal (Privacy Settings in the footer), toggle consent, and save. A new request should fire (fingerprint changes).
-8. To test the sign-in path: while signed out, note the `gu_mparticle_last_synced` value (e.g. `anonymous:false`). Sign in. On next page load the fingerprint becomes `signed-in:false` → request fires with Bearer token.
+8. To test the sign-in path: while signed out, note the `gu.mparticle.lastSynced` value (e.g. `anonymous:false`). Sign in. On next page load the fingerprint becomes `signed-in:false` → request fires with Bearer token.
 
 ### Confirming the right mParticle profile was updated
 

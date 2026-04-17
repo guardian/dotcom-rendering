@@ -1,13 +1,12 @@
-import { getCookie, setCookie } from '@guardian/libs';
+import { storage } from '@guardian/libs';
 
-// Persistent cookie (1 year): stores the fingerprint of the last *successful* PATCH.
+// localStorage key: stores the fingerprint of the last *successful* PATCH.
 // Format: "signed-in:{true|false}" or "anonymous:{true|false}"
-export const MPARTICLE_LAST_SYNCED_COOKIE = 'gu_mparticle_last_synced';
+const MPARTICLE_LAST_SYNCED_KEY = 'gu.mparticle.lastSynced';
 
-// Session cookie (no TTL): records that we already attempted a PATCH for this fingerprint
+// sessionStorage key: records that we already attempted a PATCH for this fingerprint
 // in the current session, so failed calls are retried at most once per session.
-export const MPARTICLE_SESSION_ATTEMPTED_COOKIE =
-	'gu_mparticle_session_attempted';
+const MPARTICLE_SESSION_ATTEMPTED_KEY = 'gu.mparticle.sessionAttempted';
 
 export const buildFingerprint = (
 	consented: boolean,
@@ -22,7 +21,7 @@ export const mparticleConsentNeedsSync = (
 	consented: boolean,
 	isSignedIn: boolean,
 ): boolean => {
-	const lastSynced = getCookie({ name: MPARTICLE_LAST_SYNCED_COOKIE });
+	const lastSynced = storage.local.getRaw(MPARTICLE_LAST_SYNCED_KEY);
 	return lastSynced !== buildFingerprint(consented, isSignedIn);
 };
 
@@ -31,15 +30,11 @@ export const mparticleConsentNeedsSync = (
  * current browser session (caps retries to once per session on failure).
  */
 export const sessionAttemptExists = (fingerprint: string): boolean =>
-	getCookie({ name: MPARTICLE_SESSION_ATTEMPTED_COOKIE }) === fingerprint;
+	storage.session.getRaw(MPARTICLE_SESSION_ATTEMPTED_KEY) === fingerprint;
 
 /** Mark that we attempted a PATCH for this fingerprint in the current session. */
 export const markSessionAttempt = (fingerprint: string): void => {
-	setCookie({
-		name: MPARTICLE_SESSION_ATTEMPTED_COOKIE,
-		value: fingerprint,
-		// No daysToLive → session cookie; cleared when the browser tab closes
-	});
+	storage.session.setRaw(MPARTICLE_SESSION_ATTEMPTED_KEY, fingerprint);
 };
 
 /** Record a successful sync so future page loads in the same state are skipped. */
@@ -47,9 +42,8 @@ export const markMparticleConsentSynced = (
 	consented: boolean,
 	isSignedIn: boolean,
 ): void => {
-	setCookie({
-		name: MPARTICLE_LAST_SYNCED_COOKIE,
-		value: buildFingerprint(consented, isSignedIn),
-		daysToLive: 365,
-	});
+	storage.local.setRaw(
+		MPARTICLE_LAST_SYNCED_KEY,
+		buildFingerprint(consented, isSignedIn),
+	);
 };
