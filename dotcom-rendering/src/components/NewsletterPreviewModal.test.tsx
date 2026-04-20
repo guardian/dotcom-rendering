@@ -114,6 +114,19 @@ describe('NewsletterPreviewModal', () => {
 		expect(onClose).toHaveBeenCalledTimes(1);
 	});
 
+	it('calls onClose when Escape is pressed while focus is inside dialog', () => {
+		const onClose = jest.fn();
+
+		render(<NewsletterPreviewModal {...baseProps} onClose={onClose} />);
+
+		const dialog = screen.getByRole('dialog');
+		dialog.focus();
+
+		fireEvent.keyDown(document, { key: 'Escape' });
+
+		expect(onClose).toHaveBeenCalledTimes(1);
+	});
+
 	it('locks page scrolling while open and restores it on unmount', () => {
 		const previousRootOverflow = document.documentElement.style.overflow;
 		const previousBodyOverflow = document.body.style.overflow;
