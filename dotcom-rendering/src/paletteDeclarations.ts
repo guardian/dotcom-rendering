@@ -7613,6 +7613,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[20],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--newsletter-card-divider': {
+		light: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[46],
+	},
 	'--newsletter-card-frequency-tag': {
 		light: () => sourcePalette.neutral[38],
 		dark: () => sourcePalette.neutral[73],
