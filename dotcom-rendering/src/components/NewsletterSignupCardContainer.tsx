@@ -1,13 +1,9 @@
 import type { NewsletterSignupCardProps } from './NewsletterSignupCard';
 import { NewsletterSignupCard } from './NewsletterSignupCard';
 import { css } from '@emotion/react';
-import {
-	from,
-	palette as sourcePalette,
-	space,
-} from '@guardian/source/foundations';
+import { palette as sourcePalette, space } from '@guardian/source/foundations';
 
-import { Button } from '@guardian/source/react-components';
+import { Button, SvgEye } from '@guardian/source/react-components';
 import { useCallback, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { buildNewsletterPreviewUrl } from '../lib/newsletterPreviewUrl';
@@ -15,7 +11,8 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
 
 const previewButtonStyles = css`
-	margin-bottom: ${space[2]}px;
+	margin-top: ${space[1]}px;
+	margin-bottom: ${space[4]}px;
 `;
 
 type PreviewEventDescription = 'preview-open' | 'preview-close';
@@ -136,24 +133,16 @@ export const NewsletterSignupCardContainer = ({
 				illustrationSquare={illustrationSquare}
 			>
 				{hasPreviewUrl && (
-					<div
-						css={css`
-							display: flex;
-							justify-content: flex-end;
-							${from.tablet} {
-								justify-content: flex-start;
-							}
-						`}
+					<Button
+						size="small"
+						priority="tertiary"
+						icon={<SvgEye size="small" />}
+						iconSide="left"
+						onClick={openPreview}
+						cssOverrides={previewButtonStyles}
 					>
-						<Button
-							size="small"
-							priority="tertiary"
-							onClick={openPreview}
-							cssOverrides={previewButtonStyles}
-						>
-							Preview latest
-						</Button>
-					</div>
+						Preview latest
+					</Button>
 				)}
 				{children}
 			</NewsletterSignupCard>

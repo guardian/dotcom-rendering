@@ -21,9 +21,7 @@ describe('NewsletterSignupCardContainer', () => {
 			/>,
 		);
 
-		fireEvent.click(
-			screen.getByRole('button', { name: 'Preview newsletter' }),
-		);
+		fireEvent.click(screen.getByRole('button', { name: 'Preview latest' }));
 
 		const dialog = screen.getByRole('dialog');
 		expect(dialog).toBeInTheDocument();
