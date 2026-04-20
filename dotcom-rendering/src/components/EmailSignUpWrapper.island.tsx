@@ -84,6 +84,7 @@ export const EmailSignUpWrapper = ({
 				<NewsletterSignupCardContainer
 					name={name}
 					description={description}
+					illustrationSquare={illustrationSquare}
 					frequency={frequency}
 					theme={theme}
 					identityName={identityName}
