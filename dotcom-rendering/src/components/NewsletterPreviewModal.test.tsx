@@ -20,7 +20,7 @@ const getVisibleFocusableElements = (dialog: HTMLElement): HTMLElement[] =>
 const baseProps = {
 	newsletterName: 'Morning Briefing',
 	renderUrl:
-		'https://email-rendering.guardianapis.com/fronts/world/newsletters/morning-mail?variant=persephone&readonly=true',
+		'https://email-rendering.guardianapis.com/fronts/email/europe/daily?variant=persephone&readonly=true',
 };
 
 describe('NewsletterPreviewModal', () => {
