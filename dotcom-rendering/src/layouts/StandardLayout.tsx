@@ -414,6 +414,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						showSlimNav={false}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
+						tagIds={article.tags.map((tag) => tag.id)}
+						sectionId={article.config.section}
+						contentType={article.config.contentType}
 					/>
 				</div>
 			)}
