@@ -1,0 +1,22 @@
+{
+	"name": "@guardian/ab-testing",
+	"description": "AB testing framework for theguardian.com",
+	"private": true,
+	"version": "0.0.1",
+	"scripts": {
+		"lint": "eslint .",
+		"prettier:check": "prettier . --check --cache",
+		"prettier:fix": "prettier . --write --cache",
+		"lint-staged": "lint-staged"
+	},
+	"lint-staged": {
+		"*.ts": [
+			"pnpm lint --fix",
+			"pnpm prettier:fix"
+		]
+	},
+	"devDependencies": {
+		"@guardian/eslint-config": "12.0.1",
+		"eslint": "9.39.1"
+	}
+}

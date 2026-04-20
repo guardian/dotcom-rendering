@@ -62,12 +62,6 @@ importers:
       eslint:
         specifier: 9.39.1
         version: 9.39.1
-      prettier:
-        specifier: 3.0.3
-        version: 3.0.3
-      source-map-support:
-        specifier: 0.5.21
-        version: 0.5.21
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -84,9 +78,6 @@ importers:
       '@aws-sdk/client-ssm':
         specifier: 3.995.0
         version: 3.995.0
-      '@guardian/cdk':
-        specifier: 62.6.1
-        version: 62.6.1(aws-cdk-lib@2.246.0(constructs@10.6.0))(aws-cdk@2.1115.1)(constructs@10.6.0)
       '@guardian/eslint-config':
         specifier: 12.0.1
         version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
@@ -96,24 +87,9 @@ importers:
       '@types/node':
         specifier: 22.17.0
         version: 22.17.0
-      aws-cdk:
-        specifier: 2.1115.1
-        version: 2.1115.1
-      aws-cdk-lib:
-        specifier: 2.246.0
-        version: 2.246.0(constructs@10.6.0)
-      constructs:
-        specifier: 10.6.0
-        version: 10.6.0
       eslint:
         specifier: 9.39.1
         version: 9.39.1
-      prettier:
-        specifier: 3.0.3
-        version: 3.0.3
-      source-map-support:
-        specifier: 0.5.21
-        version: 0.5.21
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -133,9 +109,6 @@ importers:
         specifier: 2.0.2
         version: 2.0.2
     devDependencies:
-      '@guardian/cdk':
-        specifier: 62.6.1
-        version: 62.6.1(aws-cdk-lib@2.246.0(constructs@10.6.0))(aws-cdk@2.1115.1)(constructs@10.6.0)
       '@guardian/eslint-config':
         specifier: 12.0.1
         version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
@@ -157,24 +130,12 @@ importers:
       '@types/node':
         specifier: 22.17.0
         version: 22.17.0
-      aws-cdk:
-        specifier: 2.1115.1
-        version: 2.1115.1
-      aws-cdk-lib:
-        specifier: 2.246.0
-        version: 2.246.0(constructs@10.6.0)
-      constructs:
-        specifier: 10.6.0
-        version: 10.6.0
       esbuild:
         specifier: 0.27.0
         version: 0.27.0
       eslint:
         specifier: 9.39.1
         version: 9.39.1
-      prettier:
-        specifier: 3.0.3
-        version: 3.0.3
       rollup:
         specifier: 4.59.0
         version: 4.59.0
@@ -193,6 +154,9 @@ importers:
       '@guardian/ab-testing-config':
         specifier: workspace:ab-testing-config
         version: link:../config
+      '@guardian/eslint-config':
+        specifier: 12.0.1
+        version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
       '@sveltejs/adapter-auto':
         specifier: ^6.0.0
         version: 6.1.1(@sveltejs/kit@2.57.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.2(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.53.3)(typescript@5.9.3)(vite@6.4.2(@types/node@22.17.0)(terser@5.46.0)))
@@ -205,6 +169,9 @@ importers:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.0
         version: 5.1.1(svelte@5.53.3)(vite@6.4.2(@types/node@22.17.0)(terser@5.46.0))
+      eslint:
+        specifier: 9.39.1
+        version: 9.39.1
       svelte:
         specifier: ^5.53.3
         version: 5.53.3
@@ -257,9 +224,6 @@ importers:
       eslint:
         specifier: 9.39.1
         version: 9.39.1
-      prettier:
-        specifier: 3.0.3
-        version: 3.0.3
       rollup:
         specifier: 4.59.0
         version: 4.59.0
