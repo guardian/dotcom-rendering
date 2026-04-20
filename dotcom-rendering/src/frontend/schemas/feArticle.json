@@ -416,10 +416,19 @@
                 "group": {
                     "type": "string"
                 },
+                "category": {
+                    "type": "string"
+                },
                 "regionFocus": {
                     "type": "string"
                 },
                 "illustrationCard": {
+                    "type": "string"
+                },
+                "illustrationSquare": {
+                    "type": "string"
+                },
+				"exampleUrl": {
                     "type": "string"
                 }
             },
@@ -3062,10 +3071,19 @@
                         "group": {
                             "type": "string"
                         },
+                        "category": {
+                            "type": "string"
+                        },
                         "regionFocus": {
                             "type": "string"
                         },
                         "illustrationCard": {
+                            "type": "string"
+                        },
+                        "illustrationSquare": {
+                            "type": "string"
+                        },
+                        "exampleUrl": {
                             "type": "string"
                         }
                     },
