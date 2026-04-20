@@ -6,7 +6,6 @@ import {
 	textSans20,
 } from '@guardian/source/foundations';
 import type { IconProps } from '@guardian/source/react-components';
-import { SvgArrowExpand } from '@guardian/source/react-components';
 import type {
 	Dispatch,
 	ReactElement,
@@ -19,6 +18,10 @@ import type { Source } from '../lib/video';
 import { palette } from '../palette';
 import type { VideoPlayerFormat } from '../types/mainMedia';
 import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
+import {
+	AudioIcon as AudioIconComponent,
+	FullscreenIcon,
+} from './SelfHostedVideoPlayerIcons';
 import { SubtitleOverlay } from './SubtitleOverlay';
 import { VideoProgressBar } from './VideoProgressBar';
 
@@ -63,7 +66,7 @@ const playIconStyles = css`
 	padding: 0;
 `;
 
-const controlContainerStyles = (position: ControlsPosition) => css`
+const iconsContainerStyles = (position: ControlsPosition) => css`
 	position: absolute;
 	display: flex;
 	flex-direction: column;
@@ -72,24 +75,6 @@ const controlContainerStyles = (position: ControlsPosition) => css`
 	/* Take into account the progress bar height */
 	${position === 'bottom' && `bottom: ${space[3]}px;`}
 	${position === 'top' && `top: ${space[2]}px;`}
-`;
-
-const buttonStyles = css`
-	border: none;
-	background: none;
-	padding: 0;
-	cursor: pointer;
-`;
-
-const iconContainerStyles = css`
-	width: ${space[8]}px;
-	height: ${space[8]}px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: ${palette('--video-icon-background')};
-	border-radius: 50%;
-	border: 1px solid ${palette('--video-icon-border')};
 `;
 
 export const PLAYER_STATES = [
@@ -112,7 +97,7 @@ export const PLAYER_STATES = [
 
 export type PlayerStates = (typeof PLAYER_STATES)[number];
 
-type Props = {
+export type Props = {
 	sources: Source[];
 	atomId: string;
 	uniqueId: string;
@@ -137,6 +122,7 @@ type Props = {
 	handleFullscreenClick?: (event: SyntheticEvent) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: ((iconProps: IconProps) => JSX.Element) | null;
+	iconSize: 'small' | 'large';
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showProgressBar: boolean;
@@ -190,6 +176,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleFullscreenClick,
 			onError,
 			AudioIcon,
+			iconSize,
 			preloadPartialData,
 			showProgressBar: canShowProgressBar,
 			showPlayIcon,
@@ -300,50 +287,22 @@ export const SelfHostedVideoPlayer = forwardRef(
 					/>
 				)}
 				{showIcons && (
-					<div css={controlContainerStyles(controlsPosition)}>
-						{AudioIcon && (
-							<button
-								type="button"
-								onClick={handleAudioClick}
-								css={buttonStyles}
-								data-link-name={`gu-video-loop-${
-									isMuted ? 'unmute' : 'mute'
-								}-${atomId}`}
-							>
-								<div
-									css={iconContainerStyles}
-									data-testid={`${
-										isMuted ? 'unmute' : 'mute'
-									}-icon`}
-								>
-									<AudioIcon
-										size="xsmall"
-										theme={{
-											fill: palette('--video-icon'),
-										}}
-									/>
-								</div>
-							</button>
-						)}
+					<div css={iconsContainerStyles(controlsPosition)}>
 						{showFullscreenIcon && (
-							<button
-								type="button"
-								onClick={handleFullscreenClick}
-								css={buttonStyles}
-								data-link-name={`gu-video-loop-fullscreen-${atomId}`}
-							>
-								<div
-									css={iconContainerStyles}
-									data-testid="fullscreen-icon"
-								>
-									<SvgArrowExpand
-										size="xsmall"
-										theme={{
-											fill: palette('--video-icon'),
-										}}
-									/>
-								</div>
-							</button>
+							<FullscreenIcon
+								handleClick={handleFullscreenClick}
+								atomId={atomId}
+								size={iconSize}
+							/>
+						)}
+						{AudioIcon && (
+							<AudioIconComponent
+								Icon={AudioIcon}
+								handleClick={handleAudioClick}
+								isMuted={isMuted}
+								atomId={atomId}
+								size={iconSize}
+							/>
 						)}
 					</div>
 				)}

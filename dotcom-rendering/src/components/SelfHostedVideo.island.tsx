@@ -379,6 +379,8 @@ export const SelfHostedVideo = ({
 
 	const showProgressBar = !hideProgressBar && !isCinemagraph;
 
+	const iconSize = isDefault ? 'large' : 'small';
+
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
 
 	const [isInView, setNode] = useIsInView({
@@ -935,6 +937,7 @@ export const SelfHostedVideo = ({
 						onError={onError}
 						AudioIcon={hasAudio ? AudioIcon : null}
 						preloadPartialData={!!shouldAutoplay}
+						iconSize={iconSize}
 						showPlayIcon={showPlayIcon}
 						showProgressBar={showProgressBar}
 						showSubtitles={!isCinemagraph}
