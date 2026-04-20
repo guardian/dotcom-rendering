@@ -104,19 +104,32 @@ describe('NewsletterPreviewModal', () => {
 	});
 
 	it('locks page scrolling while open and restores it on unmount', () => {
+		const previousRootOverflow = document.documentElement.style.overflow;
+		const previousBodyOverflow = document.body.style.overflow;
+
 		document.documentElement.style.overflow = 'auto';
 		document.body.style.overflow = 'scroll';
 
 		const { unmount } = render(
 			<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />,
 		);
+		let isUnmounted = false;
 
-		expect(document.documentElement.style.overflow).toBe('hidden');
-		expect(document.body.style.overflow).toBe('hidden');
+		try {
+			expect(document.documentElement.style.overflow).toBe('hidden');
+			expect(document.body.style.overflow).toBe('hidden');
 
-		unmount();
+			unmount();
+			isUnmounted = true;
 
-		expect(document.documentElement.style.overflow).toBe('auto');
-		expect(document.body.style.overflow).toBe('scroll');
+			expect(document.documentElement.style.overflow).toBe('auto');
+			expect(document.body.style.overflow).toBe('scroll');
+		} finally {
+			if (!isUnmounted) {
+				unmount();
+			}
+			document.documentElement.style.overflow = previousRootOverflow;
+			document.body.style.overflow = previousBodyOverflow;
+		}
 	});
 });
