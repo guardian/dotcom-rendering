@@ -583,6 +583,7 @@ export const renderElement = ({
 				frequency: newsletter.frequency,
 				successDescription: newsletter.successDescription,
 				theme: newsletter.theme,
+				illustrationSquare: newsletter.illustrationSquare,
 				exampleUrl: newsletter.exampleUrl,
 				idApiUrl: idApiUrl ?? '',
 				hideNewsletterSignupComponentForSubscribers:

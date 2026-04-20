@@ -1,19 +1,18 @@
+import type { NewsletterSignupCardProps } from './NewsletterSignupCard';
+import { NewsletterSignupCard } from './NewsletterSignupCard';
 import { css } from '@emotion/react';
 import {
 	from,
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
+
 import { Button } from '@guardian/source/react-components';
 import { useCallback, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { buildNewsletterPreviewUrl } from '../lib/newsletterPreviewUrl';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
-import {
-	NewsletterSignupCard,
-	type NewsletterSignupCardProps,
-} from './NewsletterSignupCard';
 
 const previewButtonStyles = css`
 	margin-bottom: ${space[2]}px;
@@ -78,6 +77,7 @@ export const NewsletterSignupCardContainer = ({
 	name,
 	frequency,
 	description,
+	illustrationSquare,
 	children,
 }: Props) => {
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -133,6 +133,7 @@ export const NewsletterSignupCardContainer = ({
 				name={name}
 				frequency={frequency}
 				description={description}
+				illustrationSquare={illustrationSquare}
 			>
 				{hasPreviewUrl && (
 					<div
@@ -150,7 +151,7 @@ export const NewsletterSignupCardContainer = ({
 							onClick={openPreview}
 							cssOverrides={previewButtonStyles}
 						>
-							Preview newsletter
+							Preview latest
 						</Button>
 					</div>
 				)}

@@ -425,7 +425,10 @@
                 "illustrationCard": {
                     "type": "string"
                 },
-                "exampleUrl": {
+                "illustrationSquare": {
+                    "type": "string"
+                },
+				"exampleUrl": {
                     "type": "string"
                 }
             },
@@ -3075,6 +3078,9 @@
                             "type": "string"
                         },
                         "illustrationCard": {
+                            "type": "string"
+                        },
+                        "illustrationSquare": {
                             "type": "string"
                         },
                         "exampleUrl": {

@@ -25,14 +25,16 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	identityName: string;
 	category?: string;
 	successDescription: string;
+	/** Illustration image URL (square crop) for the NewsletterSignupCard variant */
+	illustrationSquare?: string;
 	idApiUrl: string;
 	exampleUrl?: string;
 	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
 	hidePrivacyMessage?: boolean;
 	/** Feature flag to enable hiding newsletter signup for already subscribed users */
 	hideNewsletterSignupComponentForSubscribers?: boolean;
-	/** Feature flag to switch to the NewsletterSignupCard shell */
-	showNewsletterSignupCard?: boolean;
+	/** Feature flag to show the new NewsletterSignupCard design instead of EmailSignup */
+	showNewNewsletterSignupCard?: boolean;
 }
 
 /**
@@ -54,37 +56,29 @@ export const EmailSignUpWrapper = ({
 	exampleUrl,
 	name,
 	description,
+	illustrationSquare,
 	frequency,
 	theme,
 	successDescription,
 	hidePrivacyMessage,
 	hideNewsletterSignupComponentForSubscribers = false,
-	showNewsletterSignupCard = false,
+	showNewNewsletterSignupCard = false,
+	...emailSignUpProps
 }: EmailSignUpWrapperProps) => {
+	const { renderingTarget } = useConfig();
 	const isSubscribed = useNewsletterSubscription(
 		listId,
 		idApiUrl,
 		hideNewsletterSignupComponentForSubscribers,
 	);
-	const { renderingTarget } = useConfig();
 
-	// Show placeholder while subscription status is being determined
-	// This prevents layout shift in both subscribed and non-subscribed cases
-	if (isSubscribed === undefined) {
-		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
-	}
-
-	// Don't render if user is signed in and already subscribed
-	if (isSubscribed) {
-		return null;
-	}
-
-	return (
-		<InlineSkipToWrapper
-			id={`EmailSignup-skip-link-${index}`}
-			blockDescription="newsletter promotion"
-		>
-			{showNewsletterSignupCard ? (
+	// When the new card design is enabled, always show it regardless of subscription status
+	if (showNewNewsletterSignupCard) {
+		return (
+			<InlineSkipToWrapper
+				id={`EmailSignup-skip-link-${index}`}
+				blockDescription="newsletter promotion"
+			>
 				<NewsletterSignupCardContainer
 					name={name}
 					description={description}
@@ -103,22 +97,40 @@ export const EmailSignUpWrapper = ({
 					</Island>
 					{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
 				</NewsletterSignupCardContainer>
-			) : (
-				<EmailSignup
-					name={name}
-					description={description}
-					frequency={frequency}
-					theme={theme}
-				>
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<SecureSignup
-							newsletterId={identityName}
-							successDescription={successDescription}
-						/>
-					</Island>
-					{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
-				</EmailSignup>
-			)}
+			</InlineSkipToWrapper>
+		);
+	}
+
+	// Show placeholder while subscription status is being determined
+	// This prevents layout shift in both subscribed and non-subscribed cases
+	if (isSubscribed === undefined) {
+		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
+	}
+
+	// Don't render if user is signed in and already subscribed
+	if (isSubscribed) {
+		return null;
+	}
+
+	return (
+		<InlineSkipToWrapper
+			id={`EmailSignup-skip-link-${index}`}
+			blockDescription="newsletter promotion"
+		>
+			<EmailSignup
+				name={name}
+				description={description}
+				frequency={frequency}
+				theme={theme}
+			>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<SecureSignup
+						newsletterId={identityName}
+						successDescription={successDescription}
+					/>
+				</Island>
+				{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
+			</EmailSignup>
 		</InlineSkipToWrapper>
 	);
 };

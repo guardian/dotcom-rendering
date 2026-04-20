@@ -1,78 +1,123 @@
 import { css } from '@emotion/react';
 import {
-	from,
-	headlineBold20,
+	headlineMedium20,
 	space,
 	textSans14,
+	textSans15,
 } from '@guardian/source/foundations';
-import { buildDetailText } from '../lib/buildNewsletterSignUpText';
+import { SvgNewsletterFilled } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
-import { NewsletterDetail } from './NewsletterDetail';
 
 export type NewsletterSignupCardProps = {
 	name: string;
 	frequency: string;
 	description: string;
+	illustrationSquare?: string;
 	children?: React.ReactNode;
 };
 
 const containerStyles = css`
 	clear: left;
-	border: ${themePalette('--recaptcha-border')} 3px dashed;
-	border-radius: 12px;
+	background-color: ${themePalette('--newsletter-card-background')};
 	margin-bottom: ${space[3]}px;
-	padding: ${space[2]}px;
-
-	${from.tablet} {
-		padding: ${space[2]}px ${space[3]}px;
-	}
+	padding: ${space[2]}px ${space[2]}px ${space[4]}px ${space[2]}px;
 `;
 
 const headerStyles = css`
 	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: ${space[2]}px;
+	margin-bottom: ${space[1]}px;
+`;
+
+const titleAndMetaStyles = css`
+	display: flex;
 	flex-direction: column;
-	gap: ${space[1]}px;
-	margin-bottom: ${space[2]}px;
 `;
 
 const titleStyles = css`
-	${headlineBold20};
-
-	span {
-		color: var(--newsletter-signup-title-color, inherit);
-	}
+	${headlineMedium20};
+	margin-bottom: ${space[2]}px;
+	color: ${themePalette('--newsletter-card-title')};
 `;
 
-const metaStyles = css`
-	max-height: 0;
-	overflow: visible;
+const frequencyTagStyles = css`
+	display: flex;
+	align-items: center;
+	color: ${themePalette('--newsletter-card-frequency-tag')};
+	${textSans15};
+	margin-left: -1px;
+	margin-top: -1px;
+	margin-bottom: ${space[1]}px;
+
+	svg {
+		fill: currentColor;
+		height: 20px;
+		width: 20px;
+	}
 `;
 
 const descriptionStyles = css`
 	${textSans14};
 	line-height: 1.15;
-	margin-bottom: ${space[2]}px;
-	max-width: ${335 + space[3] + 118}px;
+	margin-bottom: ${space[1]}px;
+	clear: both;
+	color: ${themePalette('--newsletter-card-description')};
 `;
+
+const illustrationStyles = css`
+	flex-shrink: 0;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	object-fit: cover;
+`;
+
+const NewsletterSignupHeader = (props: {
+	frequency: string;
+	name: string;
+	description: string;
+	illustrationSquare?: string;
+}) => (
+	<div css={headerStyles}>
+		<div css={titleAndMetaStyles}>
+			<div css={frequencyTagStyles}>
+				<SvgNewsletterFilled />
+				Newsletter | {props.frequency}
+			</div>
+			<p css={titleStyles}>
+				Sign up to <span>{props.name}</span>
+			</p>
+			<p css={descriptionStyles}>{props.description}</p>
+		</div>
+		{!!props.illustrationSquare && (
+			<img
+				css={illustrationStyles}
+				src={props.illustrationSquare}
+				alt=""
+				loading="lazy"
+				decoding="async"
+			/>
+		)}
+	</div>
+);
 
 export const NewsletterSignupCard = ({
 	name,
 	frequency,
 	description,
+	illustrationSquare,
 	children,
-}: NewsletterSignupCardProps) => {
-	return (
-		<aside css={containerStyles} aria-label="newsletter promotion">
-			<div css={headerStyles}>
-				<p css={titleStyles}>
-					Sign up to <span>{name}</span>
-				</p>
-				<div css={metaStyles}>
-					<NewsletterDetail text={buildDetailText(frequency)} />
-				</div>
-			</div>
-			<p css={descriptionStyles}>{description}</p>
-			{children}
-		</aside>
-	);
-};
+}: NewsletterSignupCardProps) => (
+	<aside css={containerStyles} aria-label="newsletter promotion">
+		<NewsletterSignupHeader
+			frequency={frequency}
+			name={name}
+			description={description}
+			illustrationSquare={illustrationSquare}
+		/>
+		{children}
+	</aside>
+);

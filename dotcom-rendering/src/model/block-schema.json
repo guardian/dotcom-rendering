@@ -2553,6 +2553,9 @@
                         "illustrationCard": {
                             "type": "string"
                         },
+                        "illustrationSquare": {
+                            "type": "string"
+                        },
                         "exampleUrl": {
                             "type": "string"
                         }

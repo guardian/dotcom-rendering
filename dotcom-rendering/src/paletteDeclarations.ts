@@ -7605,6 +7605,22 @@ const paletteColours = {
 		light: navSearchBarText,
 		dark: navSearchBarText,
 	},
+	'--newsletter-card-background': {
+		light: () => '#F3F7FF',
+		dark: () => sourcePalette.brand[100],
+	},
+	'--newsletter-card-description': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--newsletter-card-frequency-tag': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[73],
+	},
+	'--newsletter-card-title': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
 	'--numbered-list-heading': {
 		light: numberedListHeadingLight,
 		dark: numberedListHeadingDark,

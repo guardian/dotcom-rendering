@@ -1204,6 +1204,7 @@ export type Newsletter = {
 	category?: string;
 	regionFocus?: string;
 	illustrationCard?: string;
+	illustrationSquare?: string;
 	exampleUrl?: string;
 };
 
