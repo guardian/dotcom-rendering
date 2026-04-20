@@ -33,7 +33,7 @@ export const Placeholder = meta.story({
 		hidePrivacyMessage: false,
 		...defaultArgs,
 	},
-	async beforeEach() {
+	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(undefined);
 	},
 });
@@ -44,7 +44,7 @@ export const DefaultStory = meta.story({
 		hidePrivacyMessage: true,
 		...defaultArgs,
 	},
-	async beforeEach() {
+	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(false);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -58,7 +58,7 @@ export const DefaultStoryWithPrivacy = meta.story({
 		hidePrivacyMessage: false,
 		...defaultArgs,
 	},
-	async beforeEach() {
+	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(false);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -73,7 +73,7 @@ export const SignedInNotSubscribed = meta.story({
 		hidePrivacyMessage: false,
 		...defaultArgs,
 	},
-	async beforeEach() {
+	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(true);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -91,7 +91,7 @@ export const SignedInAlreadySubscribed = meta.story({
 		...defaultArgs,
 		hideNewsletterSignupComponentForSubscribers: true,
 	},
-	async beforeEach() {
+	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(true);
 	},
 });
@@ -104,7 +104,7 @@ export const FeatureFlagDisabled = meta.story({
 		...defaultArgs,
 		hideNewsletterSignupComponentForSubscribers: false,
 	},
-	async beforeEach() {
+	beforeEach() {
 		// Even though we mock this to return true (subscribed),
 		// the feature flag being disabled means it won't be checked
 		mocked(useNewsletterSubscription).mockReturnValue(false);
@@ -119,5 +119,34 @@ export const FeatureFlagDisabled = meta.story({
 				story: 'When the hideNewsletterSignupComponentForSubscribers feature flag is disabled, the signup form is always shown regardless of subscription status.',
 			},
 		},
+	},
+});
+
+export const NewNewsletterSignupCard = meta.story({
+	args: {
+		...defaultArgs,
+		showNewNewsletterSignupCard: true,
+		illustrationSquare:
+			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
+	},
+	beforeEach() {
+		// The new card should still show even if the user is subscribed
+		mocked(useNewsletterSubscription).mockReturnValue(true);
+	},
+});
+
+export const NewNewsletterSignupCardSignedOut = meta.story({
+	args: {
+		...defaultArgs,
+		showNewNewsletterSignupCard: true,
+		illustrationSquare:
+			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
+	},
+	beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(false);
+		mocked(useIsSignedIn).mockReturnValue(false);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve(null),
+		);
 	},
 });
