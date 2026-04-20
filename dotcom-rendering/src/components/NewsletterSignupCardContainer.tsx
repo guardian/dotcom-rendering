@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source/foundations';
 import { Button, SvgEye } from '@guardian/source/react-components';
 import { useCallback, useState } from 'react';
-
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { buildNewsletterPreviewUrl } from '../lib/newsletterPreviewUrl';
 import { palette } from '../palette';
