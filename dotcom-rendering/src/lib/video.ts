@@ -141,3 +141,23 @@ export const findOptimisedSourcePerMimeType = (
 		return acc;
 	}, []);
 };
+
+export const convertCurrentTimeToProgressPercentage = (
+	currentTime: number,
+	duration: number,
+): number | null => {
+	if (currentTime < 0 || duration <= 0) return null;
+
+	return Math.min((currentTime * 100) / duration, 100);
+};
+
+export const convertProgressPercentageToCurrentTime = (
+	progressPercentage: number,
+	duration: number,
+): number | null => {
+	if (duration <= 0) return null;
+
+	const clampedPercentage = Math.max(0, Math.min(progressPercentage, 100));
+
+	return (clampedPercentage / 100) * duration;
+};

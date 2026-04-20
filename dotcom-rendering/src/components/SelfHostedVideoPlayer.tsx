@@ -24,6 +24,7 @@ import {
 } from './SelfHostedVideoPlayerIcons';
 import { SubtitleOverlay } from './SubtitleOverlay';
 import { VideoProgressBar } from './VideoProgressBar';
+import { VideoProgressBarInteractive } from './VideoProgressBarInteractive';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 export type ControlsPosition = 'top' | 'bottom';
@@ -66,15 +67,22 @@ const playIconStyles = css`
 	padding: 0;
 `;
 
-const iconsContainerStyles = (position: ControlsPosition) => css`
+const iconsContainerStyles = css`
 	position: absolute;
 	display: flex;
 	flex-direction: column;
 	gap: ${space[2]}px;
 	right: ${space[2]}px;
-	/* Take into account the progress bar height */
-	${position === 'bottom' && `bottom: ${space[3]}px;`}
-	${position === 'top' && `top: ${space[2]}px;`}
+`;
+
+const smallIconsPositionStyles = (controlsPosition: ControlsPosition) => css`
+	${controlsPosition === 'bottom' && `bottom: ${space[3]}px;`}
+	${controlsPosition === 'top' && `top: ${space[2]}px;`}
+`;
+
+const largeIconsPositionStyles = (controlsPosition: ControlsPosition) => css`
+	${controlsPosition === 'bottom' && `bottom: ${space[12]}px;`}
+	${controlsPosition === 'top' && `top: ${space[2]}px;`}
 `;
 
 export const PLAYER_STATES = [
@@ -110,6 +118,7 @@ export type Props = {
 	playerState: PlayerStates;
 	currentTime: number;
 	setCurrentTime: Dispatch<SetStateAction<number>>;
+	updateCurrentTime: (time: number) => void;
 	isMuted: boolean;
 	handleLoadedMetadata: (event: SyntheticEvent) => void;
 	handleLoadedData: (event: SyntheticEvent) => void;
@@ -117,7 +126,11 @@ export type Props = {
 	handlePlaying: (event: SyntheticEvent) => void;
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
 	handleAudioClick: (event: SyntheticEvent) => void;
-	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
+	handleKeyDownVideo: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
+	handleKeyDownProgressBar: (
+		event: React.KeyboardEvent<HTMLInputElement>,
+	) => void;
+	useLongFormProgressBar: boolean;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick?: (event: SyntheticEvent) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
@@ -164,6 +177,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			playerState,
 			currentTime,
 			setCurrentTime,
+			updateCurrentTime,
 			isMuted,
 			handleLoadedMetadata,
 			handleLoadedData,
@@ -171,7 +185,9 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handlePlaying,
 			handlePlayPauseClick,
 			handleAudioClick,
-			handleKeyDown,
+			handleKeyDownVideo,
+			handleKeyDownProgressBar,
+			useLongFormProgressBar,
 			handlePause,
 			handleFullscreenClick,
 			onError,
@@ -239,15 +255,15 @@ export const SelfHostedVideoPlayer = forwardRef(
 					}}
 					onPause={handlePause}
 					onClick={handlePlayPauseClick}
-					onKeyDown={handleKeyDown}
+					onKeyDown={handleKeyDownVideo}
 					onError={onError}
 				>
-					{sources.map((source) => (
+					{sources.map(({ src, mimeType }) => (
 						<source
-							key={source.mimeType}
+							key={mimeType}
 							/* The start time is set to 1ms so that Safari will autoplay the video */
-							src={`${source.src}#t=0.001`}
-							type={source.mimeType}
+							src={`${src}#t=0.001`}
+							type={mimeType}
 						/>
 					))}
 					{showSubtitles && (
@@ -265,7 +281,11 @@ export const SelfHostedVideoPlayer = forwardRef(
 					<SubtitleOverlay
 						text={activeCue.text}
 						size={subtitleSize}
-						position={controlsPosition}
+						position={
+							useLongFormProgressBar
+								? 'raised-bottom'
+								: controlsPosition
+						}
 					/>
 				)}
 				{showPlayIcon && (
@@ -279,15 +299,32 @@ export const SelfHostedVideoPlayer = forwardRef(
 						<PlayIcon iconWidth="narrow" />
 					</button>
 				)}
-				{showProgressBar && (
-					<VideoProgressBar
-						videoId={videoId}
-						currentTime={currentTime}
-						duration={ref.current!.duration}
-					/>
-				)}
+				{showProgressBar &&
+					(useLongFormProgressBar ? (
+						<VideoProgressBarInteractive
+							videoId={videoId}
+							currentTime={currentTime}
+							updateCurrentTime={updateCurrentTime}
+							duration={ref.current!.duration}
+							handleKeyDown={handleKeyDownProgressBar}
+						/>
+					) : (
+						<VideoProgressBar
+							videoId={videoId}
+							currentTime={currentTime}
+							duration={ref.current!.duration}
+						/>
+					))}
 				{showIcons && (
-					<div css={iconsContainerStyles(controlsPosition)}>
+					<div
+						css={[
+							iconsContainerStyles,
+							iconSize === 'large' &&
+								largeIconsPositionStyles(controlsPosition),
+							iconSize === 'small' &&
+								smallIconsPositionStyles(controlsPosition),
+						]}
+					>
 						{showFullscreenIcon && (
 							<FullscreenIcon
 								handleClick={handleFullscreenClick}

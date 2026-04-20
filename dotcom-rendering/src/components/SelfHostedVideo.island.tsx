@@ -454,6 +454,13 @@ export const SelfHostedVideo = ({
 		}
 	};
 
+	const updateCurrentTime = (newTime: number) => {
+		if (vidRef.current) {
+			vidRef.current.currentTime = newTime;
+			setCurrentTime(newTime);
+		}
+	};
+
 	const FallbackImageComponent = (
 		<CardPicture
 			mainImage={fallbackImage}
@@ -635,6 +642,7 @@ export const SelfHostedVideo = ({
 
 		const track = video.textTracks[0];
 		if (!track?.cues) return;
+
 		const pxFromBottom = space[3];
 		const videoHeight = video.getBoundingClientRect().height;
 		const percentFromTop =
@@ -706,8 +714,8 @@ export const SelfHostedVideo = ({
 	const handleFullscreenClick = (event: React.SyntheticEvent) => {
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 		event.stopPropagation(); // Don't pause the video
-		const video = vidRef.current;
 
+		const video = vidRef.current;
 		if (!video) return;
 
 		if (shouldUseWebkitFullscreen(video)) {
@@ -772,31 +780,26 @@ export const SelfHostedVideo = ({
 	};
 
 	const seekForward = () => {
-		if (vidRef.current) {
-			const newTime = Math.min(
-				vidRef.current.currentTime + 1,
-				vidRef.current.duration,
-			);
+		const video = vidRef.current;
+		if (!video) return;
 
-			vidRef.current.currentTime = newTime;
-			setCurrentTime(newTime);
-		}
+		const increment = isDefault ? 10 : 2;
+		const newTime = Math.min(video.currentTime + increment, video.duration);
+
+		updateCurrentTime(newTime);
 	};
 
 	const seekBackward = () => {
-		if (vidRef.current) {
-			// Allow the user to cycle to the end of the video using the arrow keys
-			const newTime =
-				(((vidRef.current.currentTime - 1) % vidRef.current.duration) +
-					vidRef.current.duration) %
-				vidRef.current.duration;
+		const video = vidRef.current;
+		if (!video) return;
 
-			vidRef.current.currentTime = newTime;
-			setCurrentTime(newTime);
-		}
+		const increment = isDefault ? 10 : 2;
+		const newTime = Math.max(video.currentTime - increment, 0);
+
+		updateCurrentTime(newTime);
 	};
 
-	const handleKeyDown = (
+	const handleKeyDownVideo = (
 		event: React.KeyboardEvent<HTMLVideoElement>,
 	): void => {
 		if (isCinemagraph) return;
@@ -818,6 +821,24 @@ export const SelfHostedVideo = ({
 				break;
 			case 'm':
 				setIsMuted(!isMuted);
+				break;
+		}
+	};
+
+	const handleKeyDownProgressBar = (
+		event: React.KeyboardEvent<HTMLInputElement>,
+	): void => {
+		switch (event.key) {
+			case 'Enter':
+			case ' ':
+				event.preventDefault();
+				playPauseVideo();
+				break;
+			case 'ArrowRight':
+				seekForward();
+				break;
+			case 'ArrowLeft':
+				seekBackward();
 				break;
 		}
 	};
@@ -921,6 +942,7 @@ export const SelfHostedVideo = ({
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
 						setCurrentTime={setCurrentTime}
+						updateCurrentTime={updateCurrentTime}
 						ref={vidRef}
 						isPlayable={isPlayable}
 						playerState={playerState}
@@ -931,7 +953,9 @@ export const SelfHostedVideo = ({
 						handlePlaying={handlePlaying}
 						handlePlayPauseClick={handlePlayPauseClick}
 						handleAudioClick={handleAudioClick}
-						handleKeyDown={handleKeyDown}
+						handleKeyDownVideo={handleKeyDownVideo}
+						useLongFormProgressBar={isDefault}
+						handleKeyDownProgressBar={handleKeyDownProgressBar}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
 						onError={onError}
