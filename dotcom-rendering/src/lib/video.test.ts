@@ -1,7 +1,9 @@
 import type { FEMediaAsset } from '../frontend/feFront';
 import type { VideoAssets } from '../types/content';
 import {
+	convertCurrentTimeToProgressPercentage,
 	convertFEMediaAssetsToVideoAssets,
+	convertProgressPercentageToCurrentTime,
 	extractValidSourcesFromAssets,
 	findOptimisedSourcePerMimeType,
 	getAspectRatioFromSources,
@@ -262,5 +264,50 @@ describe('video', () => {
 
 			expect(sources).toEqual([mp4Src720h, m3u8Src720h]);
 		});
+	});
+
+	describe('convertCurrentTimeToProgressPercentage', () => {
+		it.each([
+			{ currentTime: 0, duration: 23, expectedPercentage: 0 },
+			{ currentTime: 24, duration: 32, expectedPercentage: 75 },
+			{ currentTime: 56, duration: 56, expectedPercentage: 100 },
+			{ currentTime: 12, duration: 11, expectedPercentage: 100 },
+			{ currentTime: -5, duration: 10, expectedPercentage: null },
+			{ currentTime: 5, duration: -10, expectedPercentage: null },
+		])(
+			'should return the correct progress percentage based on the current time and duration',
+			({ currentTime, duration, expectedPercentage }) => {
+				expect(
+					convertCurrentTimeToProgressPercentage(
+						currentTime,
+						duration,
+					),
+				).toEqual(expectedPercentage);
+			},
+		);
+	});
+
+	describe('convertProgressPercentageToCurrentTime', () => {
+		it.each([
+			{ progressPercentage: 0, duration: 23, expectedCurrentTime: 0 },
+			{ progressPercentage: 75, duration: 32, expectedCurrentTime: 24 },
+			{ progressPercentage: 100, duration: 56, expectedCurrentTime: 56 },
+			{ progressPercentage: 103, duration: 11, expectedCurrentTime: 11 },
+			{
+				progressPercentage: -0.1244235,
+				duration: 10,
+				expectedCurrentTime: 0,
+			},
+		])(
+			'should return the correct current time based on the progress percentage and duration',
+			({ progressPercentage, duration, expectedCurrentTime }) => {
+				expect(
+					convertProgressPercentageToCurrentTime(
+						progressPercentage,
+						duration,
+					),
+				).toEqual(expectedCurrentTime);
+			},
+		);
 	});
 });

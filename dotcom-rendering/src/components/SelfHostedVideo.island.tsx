@@ -786,7 +786,7 @@ export const SelfHostedVideo = ({
 		const video = vidRef.current;
 		if (!video) return;
 
-		const increment = 1;
+		const increment = isDefault ? 10 : 1;
 		const newTime = Math.min(video.currentTime + increment, video.duration);
 
 		updateCurrentTime(newTime);
@@ -796,7 +796,7 @@ export const SelfHostedVideo = ({
 		const video = vidRef.current;
 		if (!video) return;
 
-		const increment = 1;
+		const increment = isDefault ? 10 : 1;
 		const newTime = Math.max(video.currentTime - increment, 0);
 
 		updateCurrentTime(newTime);
@@ -811,7 +811,7 @@ export const SelfHostedVideo = ({
 		}
 	};
 
-	const handleKeyDown = (
+	const handleKeyDownVideo = (
 		event: React.KeyboardEvent<HTMLVideoElement>,
 	): void => {
 		if (isCinemagraph) return;
@@ -833,6 +833,24 @@ export const SelfHostedVideo = ({
 				break;
 			case 'm':
 				setIsMuted(!isMuted);
+				break;
+		}
+	};
+
+	const handleKeyDownProgressBar = (
+		event: React.KeyboardEvent<HTMLInputElement>,
+	): void => {
+		switch (event.key) {
+			case 'Enter':
+			case ' ':
+				event.preventDefault();
+				playPauseVideo();
+				break;
+			case 'ArrowRight':
+				seekForward();
+				break;
+			case 'ArrowLeft':
+				seekBackward();
 				break;
 		}
 	};
@@ -944,9 +962,12 @@ export const SelfHostedVideo = ({
 						handlePlayPauseClick={handlePlayPauseClick}
 						handleAudioClick={handleAudioClick}
 						handleTimeUpdate={handleTimeUpdate}
-						handleKeyDown={handleKeyDown}
+						handleKeyDownVideo={handleKeyDownVideo}
+						useLongFormProgressBar={isDefault}
+						handleKeyDownProgressBar={handleKeyDownProgressBar}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
+						updateCurrentTime={updateCurrentTime}
 						onError={onError}
 						AudioIcon={hasAudio ? AudioIcon : null}
 						preloadPartialData={!!shouldAutoplay}
