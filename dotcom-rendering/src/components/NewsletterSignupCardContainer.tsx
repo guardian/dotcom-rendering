@@ -1,15 +1,15 @@
-import type { NewsletterSignupCardProps } from './NewsletterSignupCard';
-import { NewsletterSignupCard } from './NewsletterSignupCard';
 import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source/foundations';
-
 import { Button, SvgEye } from '@guardian/source/react-components';
 import { useCallback, useState } from 'react';
+
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { buildNewsletterPreviewUrl } from '../lib/newsletterPreviewUrl';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
+import type { NewsletterSignupCardProps } from './NewsletterSignupCard';
+import { NewsletterSignupCard } from './NewsletterSignupCard';
 
 const previewButtonStyles = css`
 	margin-top: ${space[1]}px;
