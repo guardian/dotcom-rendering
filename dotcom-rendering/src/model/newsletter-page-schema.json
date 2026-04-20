@@ -38,6 +38,9 @@
                     },
                     "illustrationCard": {
                         "type": "string"
+                    },
+                    "illustrationSquare": {
+                        "type": "string"
                     }
                 },
                 "required": [
