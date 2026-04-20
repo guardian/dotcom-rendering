@@ -241,7 +241,6 @@ const podcastImageStyles = (
 		}
 
 		/** The image takes the full height on desktop, so that the waveform sticks to the bottom of the card. */
-
 		${from.desktop} {
 			width: ${isHorizontalOnDesktop ? 'unset' : '120px'};
 			height: ${isHorizontalOnDesktop ? 'unset' : '120px'};
