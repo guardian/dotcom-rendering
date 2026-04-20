@@ -1,30 +1,30 @@
-import { mkdir, writeFile } from "node:fs/promises";
-import { dirname } from "node:path";
-import { parseArgs } from "node:util";
-import { activeABtests } from "../../abTests.ts";
-import { getApiTokenFromEnv, getConfigFromEnv } from "../../lib/config.ts";
-import { FastlyClient } from "../../lib/fastly/client.ts";
-import { parseMVTValue, stringifyMVTValue } from "../../lib/fastly-subfield.ts";
-import { buildABTestGroupKeyValues } from "./build-ab-tests-dict.ts";
-import { calculateAllSpaceUpdates } from "./calculate-mvt-updates.ts";
+import { mkdir, writeFile } from 'node:fs/promises';
+import { dirname } from 'node:path';
+import { parseArgs } from 'node:util';
+import { activeABtests } from '../../abTests.ts';
+import { getApiTokenFromEnv, getConfigFromEnv } from '../../lib/config.ts';
+import { FastlyClient } from '../../lib/fastly/client.ts';
+import { parseMVTValue, stringifyMVTValue } from '../../lib/fastly-subfield.ts';
+import { buildABTestGroupKeyValues } from './build-ab-tests-dict.ts';
+import { calculateAllSpaceUpdates } from './calculate-mvt-updates.ts';
 
 const flags = parseArgs({
 	args: process.argv.slice(2),
 	options: {
 		mvts: {
-			type: "string",
-			short: "m",
+			type: 'string',
+			short: 'm',
 		},
-		"ab-tests": {
-			type: "string",
-			short: "a",
+		'ab-tests': {
+			type: 'string',
+			short: 'a',
 		},
 	},
 }).values;
 
-if (!flags["mvts"] || !flags["ab-tests"]) {
+if (!flags['mvts'] || !flags['ab-tests']) {
 	console.error(
-		"Please provide the path to the mvt and ab test groups dictionaries",
+		'Please provide the path to the mvt and ab test groups dictionaries',
 	);
 	process.exit(1);
 }
@@ -57,18 +57,18 @@ const mvtDictArray = Array.from(
 	})),
 );
 
-console.log(`Writing ${mvtDictArray.length} MVT groups to ${flags["mvts"]}`);
+console.log(`Writing ${mvtDictArray.length} MVT groups to ${flags['mvts']}`);
 
 // Ensure the build's destination folder path exists
-for (const path of [flags["mvts"], flags["ab-tests"]]) {
+for (const path of [flags['mvts'], flags['ab-tests']]) {
 	await mkdir(dirname(path), { recursive: true });
 }
 
 // write the abTestDictArray to a file
 await writeFile(
-	flags["ab-tests"],
+	flags['ab-tests'],
 	JSON.stringify(abTestGroupKeyValues, null, 2),
 );
 
 // write the mvtKVsArray to a file
-await writeFile(flags["mvts"], JSON.stringify(mvtDictArray, null, 2));
+await writeFile(flags['mvts'], JSON.stringify(mvtDictArray, null, 2));

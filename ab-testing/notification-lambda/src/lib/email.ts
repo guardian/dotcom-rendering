@@ -1,6 +1,6 @@
-import { SendEmailCommand } from "@aws-sdk/client-ses";
-import { type ABExpiryChecks } from "./checkExpiry.ts";
-import { sesClient } from "./sesClient.ts";
+import { SendEmailCommand } from '@aws-sdk/client-ses';
+import { type ABExpiryChecks } from './checkExpiry.ts';
+import { sesClient } from './sesClient.ts';
 
 const getEmailBodyHtml = (expiryChecks: ABExpiryChecks): string => {
 	const tableConfig: Record<
@@ -8,16 +8,16 @@ const getEmailBodyHtml = (expiryChecks: ABExpiryChecks): string => {
 		{ title: string; accentColour: string }
 	> = {
 		expired: {
-			title: "Expired",
-			accentColour: "firebrick",
+			title: 'Expired',
+			accentColour: 'firebrick',
 		},
 		within1Day: {
-			title: "Expiring today after 23:59",
-			accentColour: "chocolate",
+			title: 'Expiring today after 23:59',
+			accentColour: 'chocolate',
 		},
 		within2Days: {
-			title: "Expires tomorrow after 23:59",
-			accentColour: "peru",
+			title: 'Expires tomorrow after 23:59',
+			accentColour: 'peru',
 		},
 	};
 
@@ -42,11 +42,11 @@ const getEmailBodyHtml = (expiryChecks: ABExpiryChecks): string => {
 					<tr>
 						<td><strong>${test.name}</strong></td>
 						<td>${test.expirationDate}</td>
-						<td>${test.owners.join("<br/>")}</td>
+						<td>${test.owners.join('<br/>')}</td>
 						<td>${test.description}</td>
 					</tr>`;
 				})
-				.join("")}
+				.join('')}
 			</tbody>
 			</table>
 		`;
@@ -54,9 +54,9 @@ const getEmailBodyHtml = (expiryChecks: ABExpiryChecks): string => {
 
 	return `<div style="margin:auto; font-family: sans-serif;">
 		<h1 style="font-size: 1.4rem">AB Tests Expiry Reminder</h1>
-		${expiryChecks["expired"].length ? getTestsTableHtml("expired") : ""}
-		${expiryChecks["within1Day"].length ? getTestsTableHtml("within1Day") : ""}
-		${expiryChecks["within2Days"].length ? getTestsTableHtml("within2Days") : ""}
+		${expiryChecks['expired'].length ? getTestsTableHtml('expired') : ''}
+		${expiryChecks['within1Day'].length ? getTestsTableHtml('within1Day') : ''}
+		${expiryChecks['within2Days'].length ? getTestsTableHtml('within2Days') : ''}
 		<br>
 		<p>
 			If you are not ready to remove a test yet but are happy to leave it expired for now, please turn it <strong>OFF</strong>
@@ -73,48 +73,48 @@ const getEmailBodyPlainText = (expiryChecks: ABExpiryChecks): string => {
 	return [
 		`AB Tests Expiry Reminder\n`,
 
-		`${expiryChecks.expired.length ? "Expired:" : ""}`,
+		`${expiryChecks.expired.length ? 'Expired:' : ''}`,
 		`${expiryChecks.expired
 			.map(({ name, owners, description }) =>
 				[
 					`\tName: ${name}`,
 					`Description: ${description}`,
-					`Owners: ${owners.join(", ")}`,
-				].join("\n\t"),
+					`Owners: ${owners.join(', ')}`,
+				].join('\n\t'),
 			)
-			.join("\n\n")}`,
+			.join('\n\n')}`,
 
 		`${
-			expiryChecks.within1Day.length ? "Expiring today at midnight:" : ""
+			expiryChecks.within1Day.length ? 'Expiring today at midnight:' : ''
 		}`,
 		`${expiryChecks.within1Day
 			.map(({ name, owners, description }) =>
 				[
 					`\tName: ${name}`,
 					`Description: ${description}`,
-					`Owners: ${owners.join(", ")}`,
-				].join("\n\t"),
+					`Owners: ${owners.join(', ')}`,
+				].join('\n\t'),
 			)
-			.join("\n\n")}`,
+			.join('\n\n')}`,
 
 		`${
 			expiryChecks.within2Days.length
-				? "Expiring tomorrow at midnight:"
-				: ""
+				? 'Expiring tomorrow at midnight:'
+				: ''
 		}`,
 		`${expiryChecks.within2Days
 			.map(({ name, owners, description }) =>
 				[
 					`\tName: ${name}`,
 					`Description: ${description}`,
-					`Owners: ${owners.join(", ")}`,
-				].join("\n\t"),
+					`Owners: ${owners.join(', ')}`,
+				].join('\n\t'),
 			)
-			.join("\n\n")}`,
+			.join('\n\n')}`,
 
 		`If you are not ready to remove a test yet but are happy to leave it expired for now, please turn it OFF in the code (https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/abTests.ts)\n`,
 		`See https://frontend.gutools.co.uk/analytics/ab-testing for more details\n`,
-	].join("\n");
+	].join('\n');
 };
 
 export const sendEmail = async (
@@ -132,17 +132,17 @@ export const sendEmail = async (
 					},
 					Message: {
 						Subject: {
-							Data: "Expiring AB Tests",
-							Charset: "UTF-8",
+							Data: 'Expiring AB Tests',
+							Charset: 'UTF-8',
 						},
 						Body: {
 							Html: {
 								Data: getEmailBodyHtml(expiringAbTests),
-								Charset: "UTF-8",
+								Charset: 'UTF-8',
 							},
 							Text: {
 								Data: getEmailBodyPlainText(expiringAbTests),
-								Charset: "UTF-8",
+								Charset: 'UTF-8',
 							},
 						},
 					},
@@ -154,7 +154,7 @@ export const sendEmail = async (
 					${Object.values(expiringAbTests)
 						.flat()
 						.map((test) => test.name)
-						.join(", ")}`,
+						.join(', ')}`,
 				),
 			);
 	} catch (error) {

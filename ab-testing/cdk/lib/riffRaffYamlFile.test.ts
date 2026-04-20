@@ -1,29 +1,29 @@
-import { deepEqual, ok } from "node:assert";
-import test, { it } from "node:test";
-import { GuRoot } from "@guardian/cdk/lib/constructs/root.js";
-import { AbTestingConfig } from "./abTestingConfig.ts";
-import { AbTestingDeploymentLambda } from "./deploymentLambda.ts";
-import { riffRaffYamlFile } from "./riffRaffYamlFile.ts";
+import { deepEqual, ok } from 'node:assert';
+import test, { it } from 'node:test';
+import { GuRoot } from '@guardian/cdk/lib/constructs/root.js';
+import { AbTestingConfig } from './abTestingConfig.ts';
+import { AbTestingDeploymentLambda } from './deploymentLambda.ts';
+import { riffRaffYamlFile } from './riffRaffYamlFile.ts';
 
-test("riffRaffYamlFile", async () => {
-	await it("should have config deployments", () => {
+test('riffRaffYamlFile', async () => {
+	await it('should have config deployments', () => {
 		const app = new GuRoot();
-		const stack = "frontend";
-		const region = "eu-west-1";
+		const stack = 'frontend';
+		const region = 'eu-west-1';
 
-		new AbTestingConfig(app, "AbTestingConfig", {
-			stack: "frontend",
-			stage: "CODE",
+		new AbTestingConfig(app, 'AbTestingConfig', {
+			stack: 'frontend',
+			stage: 'CODE',
 			env: {
-				region: "eu-west-1",
+				region: 'eu-west-1',
 			},
 		});
 
-		new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambda", {
-			stack: "frontend",
-			stage: "CODE",
+		new AbTestingDeploymentLambda(app, 'AbTestingDeploymentLambda', {
+			stack: 'frontend',
+			stage: 'CODE',
 			env: {
-				region: "eu-west-1",
+				region: 'eu-west-1',
 			},
 		});
 
@@ -33,26 +33,26 @@ test("riffRaffYamlFile", async () => {
 			riffRaffYaml: { deployments },
 		} = riffRaff;
 
-		ok(deployments.get("config/ab-testing"));
-		ok(deployments.get("admin/ab-testing"));
+		ok(deployments.get('config/ab-testing'));
+		ok(deployments.get('admin/ab-testing'));
 	});
 
-	it("should have correct dependencies for config CloudFormation deployment", () => {
+	it('should have correct dependencies for config CloudFormation deployment', () => {
 		const app = new GuRoot();
-		const stack = "frontend";
-		const region = "eu-west-1";
+		const stack = 'frontend';
+		const region = 'eu-west-1';
 
-		new AbTestingConfig(app, "AbTestingConfig", {
+		new AbTestingConfig(app, 'AbTestingConfig', {
 			stack,
-			stage: "CODE",
+			stage: 'CODE',
 			env: {
 				region,
 			},
 		});
 
-		new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambda", {
+		new AbTestingDeploymentLambda(app, 'AbTestingDeploymentLambda', {
 			stack,
-			stage: "CODE",
+			stage: 'CODE',
 			env: {
 				region,
 			},
@@ -77,17 +77,17 @@ test("riffRaffYamlFile", async () => {
 
 		ok(
 			configCloudformationDeployment,
-			"Config CloudFormation deployment not found",
+			'Config CloudFormation deployment not found',
 		);
 
 		ok(
 			deploymentLambdaDeployment,
-			"Deployment Lambda deployment not found",
+			'Deployment Lambda deployment not found',
 		);
 
 		deepEqual(
 			configCloudformationDeployment.dependencies,
-			["config/ab-testing", deploymentLambdaDeploymentName].sort(),
+			['config/ab-testing', deploymentLambdaDeploymentName].sort(),
 		);
 	});
 });

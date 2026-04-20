@@ -17,5 +17,5 @@ This package provides centralized A/B test configuration, validation and build s
 Other packages can import active tests:
 
 ```typescript
-import { activeABtests, allABTests } from "@guardian/ab-testing-config";
+import { activeABtests, allABTests } from '@guardian/ab-testing-config';
 ```

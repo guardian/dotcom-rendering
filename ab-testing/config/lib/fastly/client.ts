@@ -8,8 +8,8 @@ import {
 	object,
 	string,
 	type,
-} from "superstruct";
-import { FastlyService } from "./service.ts";
+} from 'superstruct';
+import { FastlyService } from './service.ts';
 
 const fastlyDictionaryItemStruct = object({
 	service_id: string(),
@@ -27,11 +27,11 @@ export type UpdateDictionaryItemRequest =
 	| {
 			item_key: string;
 			item_value: string;
-			op: "create" | "update" | "upsert";
+			op: 'create' | 'update' | 'upsert';
 	  }
 	| {
 			item_key: string;
-			op: "delete";
+			op: 'delete';
 	  };
 
 export type ServiceConfig = {
@@ -42,7 +42,7 @@ export type ServiceConfig = {
 
 export class FastlyClient {
 	apiToken: string;
-	baseUrl: string = "https://api.fastly.com";
+	baseUrl: string = 'https://api.fastly.com';
 
 	constructor(apiToken: string, baseUrl?: string) {
 		this.apiToken = apiToken;
@@ -64,7 +64,7 @@ export class FastlyClient {
 			...options,
 			headers: {
 				...options.headers,
-				"Fastly-Key": this.apiToken,
+				'Fastly-Key': this.apiToken,
 			},
 		});
 		if (!response.ok) {
@@ -168,9 +168,9 @@ export class FastlyClient {
 		const dictionary = await this.fetch(
 			`service/${serviceId}/dictionary/${dictionaryId}/items`,
 			{
-				method: "PATCH",
+				method: 'PATCH',
 				headers: {
-					"Content-Type": "application/json",
+					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
 					service_id: serviceId,
@@ -181,7 +181,7 @@ export class FastlyClient {
 		);
 
 		assert(dictionary, object({ status: string() }));
-		if (dictionary.status !== "ok") {
+		if (dictionary.status !== 'ok') {
 			throw new Error(
 				`Failed to update dictionary: ${dictionary.status}`,
 			);

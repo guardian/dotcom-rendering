@@ -1,4 +1,4 @@
-import type { ABTest } from "../../types.ts";
+import type { ABTest } from '../../types.ts';
 
 export function allExpirationsValid(tests: ABTest[]): boolean {
 	tests.forEach((test) => {
@@ -22,7 +22,7 @@ export function allExpirationsValid(tests: ABTest[]): boolean {
 		 */
 		const interpretedExpirationDate = new Date(test.expirationDate)
 			.toISOString()
-			.split("T")[0];
+			.split('T')[0];
 
 		if (test.expirationDate !== interpretedExpirationDate) {
 			throw new Error(

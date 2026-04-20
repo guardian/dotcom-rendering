@@ -1,14 +1,14 @@
-import { AUDIENCE_SPACES, MVT_COUNT } from "../../lib/constants.ts";
+import { AUDIENCE_SPACES, MVT_COUNT } from '../../lib/constants.ts';
 import type {
 	AllSpace,
 	AudienceSpace,
 	FastlyTestParams,
-} from "../../lib/types.ts";
-import type { ABTest } from "../../types.ts";
-import { TestGroupMVTManager } from "./test-group-mvt-manager.ts";
+} from '../../lib/types.ts';
+import type { ABTest } from '../../types.ts';
+import { TestGroupMVTManager } from './test-group-mvt-manager.ts';
 
 const getTestGroupName = (
-	test: Pick<ABTest, "name"> & { group?: string },
+	test: Pick<ABTest, 'name'> & { group?: string },
 	group?: string,
 ) => `${test.name}:${group ?? test.group}`;
 
@@ -108,7 +108,7 @@ const calculateAllSpaceUpdates = (
 		(space, i) => {
 			console.log(`Calculating updates for space: ${space}`);
 			const spaceTests = tests.filter(
-				(test) => (test.audienceSpace ?? "A") === space, // 'A' is the default space
+				(test) => (test.audienceSpace ?? 'A') === space, // 'A' is the default space
 			);
 
 			if (spaceTests.length === 0) {
