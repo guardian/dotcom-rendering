@@ -7,6 +7,7 @@ import { Button, SvgEye } from '@guardian/source/react-components';
 import { useCallback, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { buildNewsletterPreviewUrl } from '../lib/newsletterPreviewUrl';
+import { palette as themePalette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
 
@@ -140,6 +141,17 @@ export const NewsletterSignupCardContainer = ({
 						iconSide="left"
 						onClick={openPreview}
 						cssOverrides={previewButtonStyles}
+						theme={{
+							textTertiary: themePalette(
+								'--newsletter-preview-button-text',
+							),
+							borderTertiary: themePalette(
+								'--newsletter-preview-button-border',
+							),
+							backgroundTertiaryHover: themePalette(
+								'--newsletter-preview-button-hover',
+							),
+						}}
 					>
 						Preview latest
 					</Button>

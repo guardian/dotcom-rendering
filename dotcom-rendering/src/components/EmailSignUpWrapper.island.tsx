@@ -63,7 +63,6 @@ export const EmailSignUpWrapper = ({
 	hidePrivacyMessage,
 	hideNewsletterSignupComponentForSubscribers = false,
 	showNewNewsletterSignupCard = false,
-	...emailSignUpProps
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
 	const isSubscribed = useNewsletterSubscription(
