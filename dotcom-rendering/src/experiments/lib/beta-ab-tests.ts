@@ -12,7 +12,7 @@ export interface BetaABTestAPI {
 	) => void;
 }
 
-type ABParticipations = {
+export type ABParticipations = {
 	[testId: string]: string;
 };
 
