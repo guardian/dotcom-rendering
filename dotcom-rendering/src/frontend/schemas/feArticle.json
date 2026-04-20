@@ -428,7 +428,7 @@
                 "illustrationSquare": {
                     "type": "string"
                 },
-				"exampleUrl": {
+                "exampleUrl": {
                     "type": "string"
                 }
             },
