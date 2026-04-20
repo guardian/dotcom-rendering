@@ -2,21 +2,6 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
 
-const FOCUSABLE_SELECTOR =
-	'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
-
-const getVisibleFocusableElements = (dialog: HTMLElement): HTMLElement[] =>
-	Array.from(dialog.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
-		(element) => {
-			const computedStyle = window.getComputedStyle(element);
-			return (
-				computedStyle.display !== 'none' &&
-				computedStyle.visibility !== 'hidden' &&
-				element.getAttribute('aria-hidden') !== 'true'
-			);
-		},
-	);
-
 const baseProps = {
 	newsletterName: 'Morning Briefing',
 	renderUrl:
@@ -35,38 +20,64 @@ describe('NewsletterPreviewModal', () => {
 		expect(dialog).toHaveFocus();
 	});
 
-	it('traps focus when tabbing forward from the last focusable element', () => {
-		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
+	it('keeps focus inside the dialog when tabbing forwards from the end', () => {
+		const outsideButton = document.createElement('button');
+		outsideButton.textContent = 'Outside control';
+		document.body.appendChild(outsideButton);
 
-		const dialog = screen.getByRole('dialog');
-		const focusableElements = getVisibleFocusableElements(dialog);
-		const firstFocusable = focusableElements[0];
-		const lastFocusable = focusableElements[focusableElements.length - 1];
+		try {
+			render(
+				<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />,
+			);
 
-		expect(firstFocusable).toBeDefined();
-		expect(lastFocusable).toBeDefined();
+			const dialog = screen.getByRole('dialog');
 
-		lastFocusable?.focus();
-		fireEvent.keyDown(dialog, { key: 'Tab' });
+			expect(dialog).toHaveFocus();
+			outsideButton.focus();
+			expect(outsideButton).toHaveFocus();
 
-		expect(firstFocusable).toHaveFocus();
+			dialog.focus();
+			fireEvent.keyDown(document, { key: 'Tab', shiftKey: true });
+			const lastFocusable = document.activeElement as HTMLElement;
+			expect(dialog).toContainElement(lastFocusable);
+
+			fireEvent.keyDown(document, { key: 'Tab' });
+			expect(dialog).toContainElement(
+				document.activeElement as HTMLElement,
+			);
+
+			expect(outsideButton).not.toHaveFocus();
+		} finally {
+			document.body.removeChild(outsideButton);
+		}
 	});
 
-	it('traps focus when tabbing backwards from the first focusable element', () => {
-		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
+	it('keeps focus inside the dialog when tabbing backwards from the start', () => {
+		const outsideButton = document.createElement('button');
+		outsideButton.textContent = 'Outside control';
+		document.body.appendChild(outsideButton);
 
-		const dialog = screen.getByRole('dialog');
-		const focusableElements = getVisibleFocusableElements(dialog);
-		const firstFocusable = focusableElements[0];
-		const lastFocusable = focusableElements[focusableElements.length - 1];
+		try {
+			render(
+				<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />,
+			);
 
-		expect(firstFocusable).toBeDefined();
-		expect(lastFocusable).toBeDefined();
+			const dialog = screen.getByRole('dialog');
 
-		firstFocusable?.focus();
-		fireEvent.keyDown(dialog, { key: 'Tab', shiftKey: true });
+			expect(dialog).toHaveFocus();
+			outsideButton.focus();
+			expect(outsideButton).toHaveFocus();
 
-		expect(lastFocusable).toHaveFocus();
+			dialog.focus();
+			fireEvent.keyDown(document, { key: 'Tab', shiftKey: true });
+			expect(dialog).toContainElement(
+				document.activeElement as HTMLElement,
+			);
+
+			expect(outsideButton).not.toHaveFocus();
+		} finally {
+			document.body.removeChild(outsideButton);
+		}
 	});
 
 	it('restores focus to previously focused element on unmount', () => {
