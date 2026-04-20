@@ -1203,6 +1203,7 @@ export type Newsletter = {
 	group: string;
 	regionFocus?: string;
 	illustrationCard?: string;
+	illustrationSquare?: string;
 };
 
 export type NewsletterLayout = {
