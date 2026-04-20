@@ -17,10 +17,16 @@ export type NewsletterSignupCardProps = {
 };
 
 const containerStyles = css`
-	clear: left;
 	background-color: ${themePalette('--newsletter-card-background')};
-	margin-bottom: ${space[3]}px;
+	margin-bottom: ${space[6]}px;
 	padding: ${space[2]}px ${space[2]}px ${space[4]}px ${space[2]}px;
+`;
+
+const dividerStyles = css`
+	clear: left;
+	border: none;
+	border-top: 1px solid ${themePalette('--newsletter-card-divider')};
+	margin: ${space[6]}px 0 ${space[2]}px;
 `;
 
 const headerStyles = css`
@@ -111,13 +117,16 @@ export const NewsletterSignupCard = ({
 	illustrationSquare,
 	children,
 }: NewsletterSignupCardProps) => (
-	<aside css={containerStyles} aria-label="newsletter promotion">
-		<NewsletterSignupHeader
-			frequency={frequency}
-			name={name}
-			description={description}
-			illustrationSquare={illustrationSquare}
-		/>
-		{children}
-	</aside>
+	<>
+		<hr css={dividerStyles} />
+		<aside css={containerStyles} aria-label="newsletter promotion">
+			<NewsletterSignupHeader
+				frequency={frequency}
+				name={name}
+				description={description}
+				illustrationSquare={illustrationSquare}
+			/>
+			{children}
+		</aside>
+	</>
 );

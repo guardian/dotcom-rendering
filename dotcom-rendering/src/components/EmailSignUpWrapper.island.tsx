@@ -65,10 +65,13 @@ export const EmailSignUpWrapper = ({
 	showNewNewsletterSignupCard = false,
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
+	const shouldCheckSubscription =
+		hideNewsletterSignupComponentForSubscribers &&
+		!showNewNewsletterSignupCard;
 	const isSubscribed = useNewsletterSubscription(
 		listId,
 		idApiUrl,
-		hideNewsletterSignupComponentForSubscribers,
+		shouldCheckSubscription,
 	);
 
 	// When the new card design is enabled, always show it regardless of subscription status
