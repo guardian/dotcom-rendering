@@ -8,9 +8,7 @@
 		"dev": "node src/run.ts",
 		"build": "rollup -c rollup.config.js",
 		"test": "node --test --experimental-test-module-mocks --test-reporter spec './**/*.test.ts'",
-		"lint": "eslint .",
-		"prettier:check": "prettier . --check --cache",
-		"prettier:fix": "prettier . --write --cache"
+		"lint": "eslint ."
 	},
 	"dependencies": {
 		"@aws-sdk/client-ses": "3.995.0",

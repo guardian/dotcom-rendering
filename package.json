@@ -14,8 +14,7 @@
 		"prettier:write": "prettier --ignore-unknown --write --cache ."
 	},
 	"lint-staged": {
-		"*": "prettier --ignore-unknown --write",
-		"ab-testing/**/*": "pnpm --filter @guardian/ab-testing-* lint-staged"
+		"*": "prettier --ignore-unknown --write"
 	},
 	"dependencies": {
 		"@guardian/prettier": "5.0.0",

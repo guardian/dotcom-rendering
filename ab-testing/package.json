@@ -4,16 +4,7 @@
 	"private": true,
 	"version": "0.0.1",
 	"scripts": {
-		"lint": "eslint .",
-		"prettier:check": "prettier . --check --cache",
-		"prettier:fix": "prettier . --write --cache",
-		"lint-staged": "lint-staged"
-	},
-	"lint-staged": {
-		"*.ts": [
-			"pnpm lint --fix",
-			"pnpm prettier:fix"
-		]
+		"lint": "eslint ."
 	},
 	"devDependencies": {
 		"@guardian/eslint-config": "12.0.1",
