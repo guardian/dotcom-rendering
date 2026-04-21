@@ -102,7 +102,7 @@ export const EmailSignUpWrapper = ({
 				id={`EmailSignup-skip-link-${index}`}
 				blockDescription="newsletter promotion"
 			>
-				<NewsletterSignupCard {...emailSignUpProps}>
+				<NewsletterSignupCardContainer {...emailSignUpProps}>
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<NewsletterSignupForm
 							newsletterId={emailSignUpProps.identityName}
@@ -111,7 +111,7 @@ export const EmailSignUpWrapper = ({
 							onPreviewClick={onPreviewClick}
 						/>
 					</Island>
-				</NewsletterSignupCard>
+				</NewsletterSignupCardContainer>
 				{isSignedIn === true && (
 					<NewsletterPrivacyMessage textColor="regular" />
 				)}
