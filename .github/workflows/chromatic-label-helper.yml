@@ -8,8 +8,6 @@ name: Chromatic Label Helper
 on:
   pull_request:
     types: [opened, ready_for_review]
-    paths-ignore:
-      - 'ab-testing/**'
 
 jobs:
   write_comment:
