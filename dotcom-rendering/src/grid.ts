@@ -192,12 +192,6 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
   ${fromBreakpoint.tablet} {
     position: relative;
 
-    --centre-transform: translateX(-${columnGap});
-
-    ${fromBreakpoint.leftCol} {
-      --centre-transform: translateX(calc(-${columnGap} / 2));
-    }
-
     &::before,
     &::after
     ${options.centre ? ', & > *:first-child::before' : ''} {
@@ -213,7 +207,6 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
     /* LEFT OUTER RULE */
     &::before {
       grid-column: centre-column-start;
-      justify-self: start;
       transform: translateX(-${columnGap});
 
       ${fromBreakpoint.leftCol} {
@@ -224,7 +217,6 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
     /* RIGHT OUTER RULE */
     &::after {
       grid-column: right-column-end;
-      justify-self: start;
       transform: translateX(-1px);
 
       ${betweenBreakpoint.tablet.and.desktop} {
