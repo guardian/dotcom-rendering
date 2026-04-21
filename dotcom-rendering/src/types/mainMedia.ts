@@ -16,6 +16,7 @@ export type YoutubeVideo = Media & {
 	height: number;
 	width: number;
 	origin: string;
+	// DEV NOTE: YouTube video typing here includes a `title` attribute, but no `caption` attribute
 	title: string;
 	duration: number;
 	expired: boolean;
@@ -23,6 +24,7 @@ export type YoutubeVideo = Media & {
 	isLive?: boolean;
 };
 
+// DEV NOTE: self-hosted videos typing here gives no indication of either `title` or `caption` attributes
 type SelfHostedVideo = Media & {
 	type: 'SelfHostedVideo';
 	videoStyle: VideoPlayerFormat;

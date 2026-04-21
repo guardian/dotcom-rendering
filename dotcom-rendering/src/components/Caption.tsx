@@ -1,3 +1,4 @@
+// DEV NOTE: at this point, we should be supplying the component with `captionText` - decisions about what that string should be should have taken place before this point
 import { css } from '@emotion/react';
 import {
 	between,

@@ -372,6 +372,7 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
+			// DEV NOTE: makes use of `credit` and `caption` attribute data
 			return (
 				<GuVideoBlockComponent
 					html={element.html}
@@ -514,6 +515,9 @@ export const renderElement = ({
 					/>
 				);
 			} else {
+				// DEV NOTE: It's at this point where `title` attribute content gets set to `caption` attribute
+				// - add in a check to override title with our new caption at this point
+				// - but we need to make sure that the `caption` attribute gets fed down the chain to this point
 				return (
 					<VideoAtom
 						format={format}
@@ -827,6 +831,7 @@ export const renderElement = ({
 			}
 			return <TweetBlockComponent element={element} />;
 		case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
+			// DEV NOTE: ignoring FaceBook video for now
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<VideoFacebookBlockComponent
@@ -846,6 +851,7 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
+			// DEV NOTE: ignoring Vimeo video for now
 			return (
 				<VimeoBlockComponent
 					format={format}
@@ -860,6 +866,7 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
 			return (
+				// DEV NOTE: the `caption`, `credit` and `title` attributes are being passed down to YoutubeEmbedBlockComponent
 				<YoutubeEmbedBlockComponent
 					format={format}
 					embedUrl={element.embedUrl}
@@ -910,6 +917,7 @@ export const renderElement = ({
 						youtubeHtml,
 						dateCreated,
 					} = element.witnessTypeData;
+					// DEV NOTE: ignoring Witness-related video for now
 					return (
 						<WitnessVideoBlockComponent
 							title={title}

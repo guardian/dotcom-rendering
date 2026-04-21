@@ -1,3 +1,5 @@
+// DEV NOTE: by this point, captions text should be settled - this component doesn't care about it
+
 import { css } from '@emotion/react';
 import {
 	space,
