@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isString } from '@guardian/libs';
 import { space, until } from '@guardian/source/foundations';
 import {
 	Button,
@@ -12,15 +11,8 @@ import {
 	TextInput,
 } from '@guardian/source/react-components';
 import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
-import type { FormEvent, ReactEventHandler } from 'react';
-import { useEffect, useState } from 'react';
-import { submitComponentEvent } from '../client/ophan/ophan';
-import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
-import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
-import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
-import { useBrowserId } from '../lib/useBrowserId';
+import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
 import { palette } from '../palette';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
@@ -155,121 +147,11 @@ const SuccessMessage = ({ text }: { text?: string }) => (
 	</InlineSuccess>
 );
 
-const buildFormData = (
-	emailAddress: string,
-	newsletterId: string,
-	marketingOptIn?: boolean,
-	browserId?: string,
-): FormData => {
-	const pageRef = window.location.origin + window.location.pathname;
-	const refViewId = window.guardian.ophan?.pageViewId ?? '';
-
-	const formData = new FormData();
-	formData.append('email', emailAddress);
-	formData.append('csrfToken', '');
-	formData.append('listName', newsletterId);
-	formData.append('ref', pageRef);
-	formData.append('refViewId', refViewId);
-	formData.append('name', '');
-
-	if (marketingOptIn !== undefined) {
-		formData.append('marketing', marketingOptIn ? 'true' : 'false');
-	}
-
-	if (browserId !== undefined) {
-		formData.append('browserId', browserId);
-	}
-
-	return formData;
-};
-
-const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
-	const { idApiUrl } = window.guardian.config.page;
-	if (!idApiUrl) return;
-	const fetchedEmail = await lazyFetchEmailWithTimeout()();
-	if (!fetchedEmail) return;
-	return fetchedEmail;
-};
-
-const postFormData = async (
-	endpoint: string,
-	formData: FormData,
-): Promise<Response> => {
-	const requestBodyStrings: string[] = [];
-
-	for (const [key, value] of formData.entries()) {
-		requestBodyStrings.push(
-			`${encodeURIComponent(key)}=${encodeURIComponent(
-				// eslint-disable-next-line @typescript-eslint/no-base-to-string -- value.toString() is safe here as we are dealing with FormData entries
-				value.toString(),
-			)}`,
-		);
-	}
-
-	return fetch(endpoint, {
-		method: 'POST',
-		body: requestBodyStrings.join('&'),
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
-	});
-};
-
-type EventDescription =
-	| 'click-button'
-	| 'form-submission'
-	| 'submission-confirmed'
-	| 'submission-failed'
-	| 'form-submit-error';
-
-const sendTracking = (
-	newsletterId: string,
-	eventDescription: EventDescription,
-	renderingTarget: RenderingTarget,
-): void => {
-	let action: 'CLICK' | 'ANSWER' | 'SUBSCRIBE' | 'CLOSE';
-
-	switch (eventDescription) {
-		case 'form-submission':
-			action = 'ANSWER';
-			break;
-		case 'submission-confirmed':
-			action = 'SUBSCRIBE';
-			break;
-		case 'form-submit-error':
-		case 'submission-failed':
-			action = 'CLOSE';
-			break;
-		case 'click-button':
-		default:
-			action = 'CLICK';
-			break;
-	}
-
-	const value = JSON.stringify({
-		eventDescription,
-		newsletterId,
-		timestamp: Date.now(),
-	});
-
-	void submitComponentEvent(
-		{
-			action,
-			value,
-			component: {
-				componentType: 'NEWSLETTER_SUBSCRIPTION',
-				id: `AR NewsletterSignupForm ${newsletterId}`,
-			},
-		},
-		renderingTarget,
-	);
-};
-
 /**
  * # Newsletter Signup Form
  *
  * A simplified version of SecureSignup without reCAPTCHA or A/B testing.
+ * All logic lives in {@link useNewsletterSignupForm}.
  */
 export const NewsletterSignupForm = ({
 	newsletterId,
@@ -277,104 +159,26 @@ export const NewsletterSignupForm = ({
 	hidePrivacyMessage = false,
 	onPreviewClick,
 }: Props) => {
-	const [userEmail, setUserEmail] = useState<string>();
-	const [hideEmailInput, setHideEmailInput] = useState<boolean>(false);
-	const [isWaitingForResponse, setIsWaitingForResponse] =
-		useState<boolean>(false);
-	const [responseOk, setResponseOk] = useState<boolean | undefined>(
-		undefined,
-	);
-	const [errorMessage, setErrorMessage] = useState<string | undefined>(
-		undefined,
-	);
-	const [marketingOptIn, setMarketingOptIn] = useState<boolean | undefined>(
-		undefined,
-	);
-	const [isInteracted, setIsInteracted] = useState<boolean>(false);
-	const isSignedIn = useIsSignedIn();
-	const authStatus = useAuthStatus();
-
-	useEffect(() => {
-		if (isSignedIn !== 'Pending' && !isSignedIn) {
-			setMarketingOptIn(true);
-		}
-	}, [isSignedIn]);
-
-	useEffect(() => {
-		void resolveEmailIfSignedIn().then((email) => {
-			setUserEmail(email);
-			setHideEmailInput(isString(email));
-			if (isString(email)) {
-				setIsInteracted(true);
-			}
-		});
-	}, []);
 	const { renderingTarget } = useConfig();
-	const browserId = useBrowserId();
+
+	const {
+		userEmail,
+		hideEmailInput,
+		isInteracted,
+		showMarketingToggle,
+		marketingOptIn,
+		isWaitingForResponse,
+		responseOk,
+		errorMessage,
+		handleEmailChange,
+		handleEmailFocus,
+		handleMarketingToggle,
+		handleSubmit,
+		handleSubmitButtonClick,
+		handleReset,
+	} = useNewsletterSignupForm(newsletterId, renderingTarget);
 
 	const hasResponse = typeof responseOk === 'boolean';
-
-	const submitForm = async (emailAddress: string): Promise<void> => {
-		sendTracking(newsletterId, 'form-submission', renderingTarget);
-
-		const formData = buildFormData(
-			emailAddress,
-			newsletterId,
-			marketingOptIn,
-			browserId,
-		);
-
-		const response = await postFormData(
-			window.guardian.config.page.ajaxUrl + '/email',
-			formData,
-		);
-
-		setIsWaitingForResponse(false);
-		setResponseOk(response.ok);
-
-		if (response.ok && authStatus.kind === 'SignedIn') {
-			clearSubscriptionCache();
-		}
-
-		sendTracking(
-			newsletterId,
-			response.ok ? 'submission-confirmed' : 'submission-failed',
-			renderingTarget,
-		);
-	};
-
-	const resetForm: ReactEventHandler<HTMLButtonElement> = () => {
-		setErrorMessage(undefined);
-		setResponseOk(undefined);
-	};
-
-	const handleClick = (): void => {
-		sendTracking(newsletterId, 'click-button', renderingTarget);
-	};
-
-	const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-		event.preventDefault();
-		if (isWaitingForResponse) {
-			return;
-		}
-
-		const emailAddress = userEmail?.trim() ?? '';
-		if (!emailAddress) {
-			setErrorMessage('Please enter a valid email address.');
-			return;
-		}
-
-		setErrorMessage(undefined);
-		setIsWaitingForResponse(true);
-		submitForm(emailAddress).catch((error) => {
-			// eslint-disable-next-line no-console -- unexpected error
-			console.error(error);
-			sendTracking(newsletterId, 'form-submit-error', renderingTarget);
-			setErrorMessage(`Sorry, there was an error signing you up.`);
-			setIsWaitingForResponse(false);
-		});
-	};
-
 	const showAdditionalFields = isInteracted || !!userEmail;
 
 	return (
@@ -420,27 +224,20 @@ export const NewsletterSignupForm = ({
 							label="Enter your email"
 							type="email"
 							value={userEmail ?? ''}
-							onFocus={() => setIsInteracted(true)}
-							onChange={(e) => {
-								setUserEmail(e.target.value);
-								setIsInteracted(true);
-							}}
+							onFocus={handleEmailFocus}
+							onChange={(e) => handleEmailChange(e.target.value)}
 						/>
 					</div>
 				)}
 				{showAdditionalFields && (
 					<>
-						{isSignedIn === false && (
+						{showMarketingToggle && (
 							<div css={toggleContainerStyles}>
 								<div css={marketingBoxStyles}>
 									<ToggleSwitch
 										id={`marketing-opt-in-${newsletterId}`}
 										checked={marketingOptIn ?? false}
-										onClick={(event) => {
-											// ToggleSwitch renders a button; prevent accidental form submit.
-											event.preventDefault();
-											setMarketingOptIn(!marketingOptIn);
-										}}
+										onClick={handleMarketingToggle}
 										label="Get updates about our journalism and ways to support and enjoy
 								our work. Toggle to opt out."
 										labelPosition="left"
@@ -473,7 +270,7 @@ export const NewsletterSignupForm = ({
 								? signedInSubmitButtonStyles
 								: signedOutSubmitButtonStyles
 						}
-						onClick={handleClick}
+						onClick={handleSubmitButtonClick}
 						type="submit"
 					>
 						Sign up
@@ -495,13 +292,13 @@ export const NewsletterSignupForm = ({
 					</div>
 				) : (
 					<div css={errorContainerStyles}>
-						<ErrorMessageWithAdvice text={`Sign up failed.`} />
+						<ErrorMessageWithAdvice text="Sign up failed." />
 						<Button
 							size="small"
 							priority="primary"
 							icon={<SvgReload />}
-							iconSide={'right'}
-							onClick={resetForm}
+							iconSide="right"
+							onClick={handleReset}
 						>
 							Try again
 						</Button>
