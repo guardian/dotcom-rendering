@@ -571,7 +571,7 @@ export const renderElement = ({
 					caption={element.caption}
 				/>
 			);
-		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement': {
 			const emailSignUpProps = {
 				index,
 				listId: element.newsletter.listId,
@@ -581,9 +581,12 @@ export const renderElement = ({
 				frequency: element.newsletter.frequency,
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
+				illustrationSquare: element.newsletter.illustrationSquare,
 				idApiUrl: idApiUrl ?? '',
 				hideNewsletterSignupComponentForSubscribers:
 					!!switches.hideNewsletterSignupComponentForSubscribers,
+				showNewNewsletterSignupCard:
+					!!switches.showNewNewsletterSignupCard,
 			};
 			if (isListElement || isTimeline) return null;
 			return (
@@ -591,6 +594,7 @@ export const renderElement = ({
 					<EmailSignUpWrapper {...emailSignUpProps} />
 				</Island>
 			);
+		}
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return renderAds && <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':

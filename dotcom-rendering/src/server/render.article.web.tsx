@@ -78,6 +78,15 @@ export const renderHtml = ({
 		.map((block) => block.elements)
 		.flat();
 
+	/**
+	 *
+	 * See InteractiveBlockComponent.island.tsx for the full reasoning behind this logic:
+	 * https://github.com/guardian/dotcom-rendering/blob/69688c53604d28017f52c420d23609c758c68088/dotcom-rendering/src/components/InteractiveBlockComponent.island.tsx#L33-L90
+	 *
+	 * For the few interactive elements that do not load the standard boot.js but instead load a custom script,
+	 * we set `pageHasNonBootInteractiveElements` to true to dynamically add an AMD require function to the window
+	 * via `curl-with-js-and-domReady.js` so custom scripts can load themselves.
+	 */
 	const pageHasNonBootInteractiveElements = elements.some(
 		(element) =>
 			element._type ===

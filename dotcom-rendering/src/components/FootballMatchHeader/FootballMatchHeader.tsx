@@ -19,6 +19,7 @@ import useSWR from 'swr';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import type { NotificationsClient } from '../../lib/bridgetApi';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -34,6 +35,7 @@ import { background, border, primaryText, secondaryText } from './colours';
 import { FootballMatchHeaderFallback } from './FootballMatchHeaderFallback';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
 import { Hr } from './Hr';
+import { Notifications } from './Notifications';
 import { Tabs } from './Tabs';
 
 export type FootballMatchHeaderProps = {
@@ -51,6 +53,7 @@ export type FootballMatchHeaderProps = {
 type Props = FootballMatchHeaderProps & {
 	getHeaderData: (url: string) => Promise<unknown>;
 	refreshInterval: number;
+	notificationsClient: NotificationsClient;
 };
 
 export const FootballMatchHeader = (props: Props) => {
@@ -122,6 +125,11 @@ export const FootballMatchHeader = (props: Props) => {
 				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
 				<Teams match={match} />
 				<Comment match={match} />
+				<Notifications
+					edition={props.edition}
+					match={match}
+					notificationsClient={props.notificationsClient}
+				/>
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 				<Tabs {...tabs} />
 			</div>

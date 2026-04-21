@@ -6832,6 +6832,18 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--cricket-scorecard-first-team-color': {
+		light: () => '#22721a',
+		dark: () => '#4aad42',
+	},
+	'--cricket-scorecard-innings-heading-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--cricket-scorecard-second-team-color': {
+		light: () => '#071b3c',
+		dark: () => '#4878c0',
+	},
 	'--crossword-anagram-helper-background': {
 		light: crosswordAnagramHelperBackgroundLight,
 		dark: crosswordAnagramHelperBackgroundDark,
@@ -7592,6 +7604,26 @@ const paletteColours = {
 	'--nav-search-bar-text': {
 		light: navSearchBarText,
 		dark: navSearchBarText,
+	},
+	'--newsletter-card-background': {
+		light: () => '#F3F7FF',
+		dark: () => sourcePalette.brand[100],
+	},
+	'--newsletter-card-description': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--newsletter-card-divider': {
+		light: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-card-frequency-tag': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[73],
+	},
+	'--newsletter-card-title': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--numbered-list-heading': {
 		light: numberedListHeadingLight,
@@ -8369,13 +8401,17 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
 	},
-	'--video-icon-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
 	'--video-icon-border': {
 		light: () => sourcePalette.neutral[60],
 		dark: () => sourcePalette.neutral[60],
+	},
+	'--video-icon-large-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.6),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.6),
+	},
+	'--video-icon-small-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
 	},
 	'--video-progress-bar-background': {
 		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
