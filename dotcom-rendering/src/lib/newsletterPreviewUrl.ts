@@ -28,6 +28,15 @@ const normalizeNewsletterPath = (path: string): string =>
 const stripTrailingEmailSegment = (path: string): string =>
 	path.replace(/\/+$/, '').replace(/\/email$/, '');
 
+const stripLeadingArticleSegment = (path: string): string =>
+	path.replace(/^\/+article\//, '/');
+
+const isEmailNamespacePath = (path: string): boolean =>
+	/^\/+email\//.test(path);
+
+const isArticleNamespacePath = (path: string): boolean =>
+	/^\/+article\//.test(path);
+
 const buildPreviewUrl = ({
 	path,
 	previewType,
@@ -61,6 +70,26 @@ export const buildNewsletterPreviewUrl = ({
 }): string | undefined => {
 	if (!exampleUrl) return undefined;
 	const pathname = getPathname(exampleUrl);
+
+	if (isEmailNamespacePath(pathname)) {
+		return buildPreviewUrl({
+			path: pathname,
+			previewType: FRONTS_EMAIL_PREVIEW_PATH,
+			variant: FRONTS_EMAIL_PREVIEW_VARIANT,
+		});
+	}
+
+	if (isArticleNamespacePath(pathname)) {
+		const articlePath = stripLeadingArticleSegment(
+			stripTrailingEmailSegment(pathname),
+		);
+
+		return buildPreviewUrl({
+			path: articlePath,
+			previewType: ARTICLE_EMAIL_PREVIEW_PATH,
+			variant: ARTICLE_EMAIL_PREVIEW_VARIANT,
+		});
+	}
 
 	if (category === 'fronts-based') {
 		return buildPreviewUrl({

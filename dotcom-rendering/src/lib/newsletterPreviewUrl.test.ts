@@ -63,6 +63,29 @@ describe('buildNewsletterPreviewUrl', () => {
 		);
 	});
 
+	it('routes /email paths to fronts preview even when category is article-based', () => {
+		expect(
+			buildNewsletterPreviewUrl({
+				exampleUrl: '/email/global-dispatch',
+				category: 'article-based',
+			}),
+		).toBe(
+			'https://email-rendering.guardianapis.com/fronts/email/global-dispatch?variant=persephone&readonly=true',
+		);
+	});
+
+	it('supports /article prefixed newsletter paths', () => {
+		expect(
+			buildNewsletterPreviewUrl({
+				exampleUrl:
+					'/article/sport/series/tokyo-2020-daily-briefing/latest/email',
+				category: 'other',
+			}),
+		).toBe(
+			'https://email-rendering.guardianapis.com/article/sport/series/tokyo-2020-daily-briefing/latest?variant=kronos&readonly=true',
+		);
+	});
+
 	it('encodes unsafe path segments', () => {
 		expect(
 			buildNewsletterPreviewUrl({
