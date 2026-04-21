@@ -104,8 +104,10 @@ type VerticalRuleOptions = {
 const optionalCentreRule = `/* CENTRE RULE */
     & > *:first-child::before {
       grid-column: centre-column-start;
-      justify-self: start;
-      transform: var(--centre-transform);
+      transform: translateX(-${columnGap});
+	  ${fromBreakpoint.leftCol} {
+		transform: translateX(calc(-${columnGap} / 2));
+	  }
     }`;
 
 const verticalRules = (options: VerticalRuleOptions = {}): string => `
@@ -138,14 +140,12 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
       bottom: 0;
       width: 1px;
       background-color: ${themePalette('--article-border')};
-      pointer-events: none;
       content: '';
     }
 
     /* LEFT OUTER RULE */
     &::before {
       grid-column: centre-column-start;
-      justify-self: start;
       transform: translateX(-${columnGap});
 
       ${fromBreakpoint.leftCol} {
@@ -156,7 +156,6 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
     /* RIGHT OUTER RULE */
     &::after {
       grid-column: right-column-end;
-      justify-self: start;
       transform: translateX(-1px);
 
       ${betweenBreakpoint.tablet.and.desktop} {
