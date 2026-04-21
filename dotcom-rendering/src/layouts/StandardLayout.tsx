@@ -91,10 +91,7 @@ const GridItem = ({
 	customCss,
 	children,
 }: GridItemProps) => (
-	<Element
-		data-gu-name={area}
-		css={css([gridCss(area, layoutType), customCss])}
-	>
+	<Element data-gu-name={area} css={[gridCss(area, layoutType), customCss]}>
 		{children}
 	</Element>
 );
@@ -248,7 +245,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					pageTags={article.tags}
 				/>
 				<article
-					css={css([
+					css={[
 						css`
 							background-color: ${themePalette(
 								'--article-background',
@@ -258,7 +255,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						grid.verticalRules({
 							centre: isLabs ? false : true,
 						}),
-					])}
+					]}
 				>
 					<GridItem area="main-media" layoutType={layoutType}>
 						<MainMedia
@@ -380,31 +377,27 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								</Hide>
 							</>
 						) : (
-							<>
-								<ArticleMeta
-									branding={branding}
-									format={format}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									byline={article.byline}
-									source={article.config.source}
-									tags={article.tags}
-									primaryDateline={
-										article.webPublicationDateDisplay
-									}
-									secondaryDateline={
-										article.webPublicationSecondaryDateDisplay
-									}
-									isCommentable={article.isCommentable}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									shortUrlId={article.config.shortUrlId}
-									mainMediaElements={
-										article.mainMediaElements
-									}
-								/>
-							</>
+							<ArticleMeta
+								branding={branding}
+								format={format}
+								pageId={article.pageId}
+								webTitle={article.webTitle}
+								byline={article.byline}
+								source={article.config.source}
+								tags={article.tags}
+								primaryDateline={
+									article.webPublicationDateDisplay
+								}
+								secondaryDateline={
+									article.webPublicationSecondaryDateDisplay
+								}
+								isCommentable={article.isCommentable}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
+								shortUrlId={article.config.shortUrlId}
+								mainMediaElements={article.mainMediaElements}
+							/>
 						)}
 					</GridItem>
 					<GridItem area="body" layoutType={layoutType}>
@@ -543,7 +536,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							padding-top: ${isMedia ? 0 : 6}px;
 							padding-bottom: ${isMedia ? 41 : 0}px;
 						`}
-						element="aside"
 					>
 						<Hide until="desktop">
 							<Island
