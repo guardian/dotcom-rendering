@@ -48,8 +48,7 @@ const previewDialogStyles = css`
 
 const previewHeaderStyles = css`
 	display: flex;
-	align-items: center;
-	justify-content: flex-start;
+	align-items: flex-start;
 	padding: ${space[4]}px ${space[3]}px;
 	border-bottom: 1px solid ${palette.neutral[86]};
 
