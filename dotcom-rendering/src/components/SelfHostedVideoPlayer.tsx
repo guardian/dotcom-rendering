@@ -6,12 +6,7 @@ import {
 	textSans20,
 } from '@guardian/source/foundations';
 import type { IconProps } from '@guardian/source/react-components';
-import type {
-	Dispatch,
-	ReactElement,
-	SetStateAction,
-	SyntheticEvent,
-} from 'react';
+import type { ReactElement, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
@@ -66,12 +61,15 @@ const playIconStyles = css`
 	padding: 0;
 `;
 
-const iconsContainerStyles = (position: ControlsPosition) => css`
+const iconsContainerStyles = css`
 	position: absolute;
 	display: flex;
 	flex-direction: column;
 	gap: ${space[2]}px;
 	right: ${space[2]}px;
+`;
+
+const iconsPositionStyles = (position: ControlsPosition) => css`
 	/* Take into account the progress bar height */
 	${position === 'bottom' && `bottom: ${space[3]}px;`}
 	${position === 'top' && `top: ${space[2]}px;`}
@@ -106,10 +104,7 @@ export type Props = {
 	aspectRatio: number;
 	videoStyle: VideoPlayerFormat;
 	FallbackImageComponent: ReactElement;
-	isPlayable: boolean;
-	playerState: PlayerStates;
 	currentTime: number;
-	setCurrentTime: Dispatch<SetStateAction<number>>;
 	isMuted: boolean;
 	handleLoadedMetadata: (event: SyntheticEvent) => void;
 	handleLoadedData: (event: SyntheticEvent) => void;
@@ -118,6 +113,7 @@ export type Props = {
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
+	handleTimeUpdate: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick?: (event: SyntheticEvent) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
@@ -160,10 +156,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			videoStyle,
 			FallbackImageComponent,
 			posterImage,
-			isPlayable,
-			playerState,
 			currentTime,
-			setCurrentTime,
 			isMuted,
 			handleLoadedMetadata,
 			handleLoadedData,
@@ -172,6 +165,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handlePlayPauseClick,
 			handleAudioClick,
 			handleKeyDown,
+			handleTimeUpdate,
 			handlePause,
 			handleFullscreenClick,
 			onError,
@@ -198,7 +192,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 
 		const showSubtitles = canShowSubtitles && !!subtitleSource;
 		const showProgressBar = canShowProgressBar && currentRefExists;
-		const showIcons = canShowIcons && currentRefExists && isPlayable;
+		const showIcons = canShowIcons && currentRefExists;
 
 		const dataLinkName = `gu-video-${videoStyle}-${
 			showPlayIcon ? 'play' : 'pause'
@@ -232,22 +226,18 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onCanPlay={handleCanPlay}
 					onCanPlayThrough={handleCanPlay}
 					onPlaying={handlePlaying}
-					onTimeUpdate={() => {
-						if (currentRefExists && playerState === 'PLAYING') {
-							setCurrentTime(ref.current!.currentTime);
-						}
-					}}
+					onTimeUpdate={handleTimeUpdate}
 					onPause={handlePause}
 					onClick={handlePlayPauseClick}
 					onKeyDown={handleKeyDown}
 					onError={onError}
 				>
-					{sources.map((source) => (
+					{sources.map(({ src, mimeType }) => (
 						<source
-							key={source.mimeType}
+							key={mimeType}
 							/* The start time is set to 1ms so that Safari will autoplay the video */
-							src={`${source.src}#t=0.001`}
-							type={source.mimeType}
+							src={`${src}#t=0.001`}
+							type={mimeType}
 						/>
 					))}
 					{showSubtitles && (
@@ -287,7 +277,12 @@ export const SelfHostedVideoPlayer = forwardRef(
 					/>
 				)}
 				{showIcons && (
-					<div css={iconsContainerStyles(controlsPosition)}>
+					<div
+						css={[
+							iconsContainerStyles,
+							iconsPositionStyles(controlsPosition),
+						]}
+					>
 						{showFullscreenIcon && (
 							<FullscreenIcon
 								handleClick={handleFullscreenClick}
