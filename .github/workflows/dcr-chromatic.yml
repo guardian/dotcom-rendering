@@ -9,27 +9,7 @@ on:
 jobs:
   check-paths:
     name: Check changed paths
-    runs-on: ubuntu-latest
-    outputs:
-      relevant: ${{ steps.filter.outputs.relevant }}
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-      - uses: dorny/paths-filter@v4
-        id: filter
-        with:
-          # Only run Chromatic if files that affect visual rendering have changed.
-          # Everything not listed here (docs, scripts, config, tests, etc.) is ignored.
-          filters: |
-            relevant:
-              - 'dotcom-rendering/src/**'
-              - 'dotcom-rendering/stories/**'
-              - 'dotcom-rendering/.storybook/**'
-              - 'dotcom-rendering/fixtures/**'
-              - 'dotcom-rendering/package.json'
-              - 'libs/**'
-              - 'pnpm-lock.yaml'
+    uses: ./.github/workflows/check-chromatic-paths.yml
 
   chromatic:
     name: Chromatic
