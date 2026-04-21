@@ -101,6 +101,7 @@ const previewButtonContainerStyles = css`
 `;
 
 const errorContainerStyles = css`
+	margin-top: ${space[6]}px;
 	display: flex;
 	align-items: flex-start;
 	gap: ${space[2]}px;
