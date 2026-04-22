@@ -73,7 +73,7 @@ export const Default: Story = {
 export const WithoutProgressBar: Story = {
 	args: {
 		...Loop.args,
-		hideProgressBar: false,
+		hideProgressBar: true,
 	},
 } satisfies Story;
 
