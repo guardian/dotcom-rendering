@@ -117,11 +117,8 @@ export type Props = {
 	handlePlaying: (event: SyntheticEvent) => void;
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
 	handleAudioClick: (event: SyntheticEvent) => void;
-	handleKeyDownVideo: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
+	handleKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
 	handleTimeUpdate: (event: SyntheticEvent<HTMLVideoElement>) => void;
-	handleKeyDownProgressBar: (
-		event: React.KeyboardEvent<HTMLInputElement>,
-	) => void;
 	useLongFormProgressBar: boolean;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick?: (event: SyntheticEvent) => void;
@@ -174,9 +171,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handlePlaying,
 			handlePlayPauseClick,
 			handleAudioClick,
-			handleKeyDownVideo,
+			handleKeyDown,
 			handleTimeUpdate,
-			handleKeyDownProgressBar,
 			useLongFormProgressBar,
 			handlePause,
 			handleFullscreenClick,
@@ -242,7 +238,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onTimeUpdate={handleTimeUpdate}
 					onPause={handlePause}
 					onClick={handlePlayPauseClick}
-					onKeyDown={handleKeyDownVideo}
+					onKeyDown={handleKeyDown}
 					onError={onError}
 				>
 					{sources.map(({ src, mimeType }) => (
@@ -293,7 +289,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 							currentTime={currentTime}
 							updateCurrentTime={updateCurrentTime}
 							duration={ref.current!.duration}
-							handleKeyDown={handleKeyDownProgressBar}
+							handleKeyDown={handleKeyDown}
 						/>
 					) : (
 						<VideoProgressBar

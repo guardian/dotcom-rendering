@@ -811,9 +811,7 @@ export const SelfHostedVideo = ({
 		}
 	};
 
-	const handleKeyDownVideo = (
-		event: React.KeyboardEvent<HTMLVideoElement>,
-	): void => {
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
 		if (isCinemagraph) return;
 
 		switch (event.key) {
@@ -833,24 +831,6 @@ export const SelfHostedVideo = ({
 				break;
 			case 'm':
 				setIsMuted(!isMuted);
-				break;
-		}
-	};
-
-	const handleKeyDownProgressBar = (
-		event: React.KeyboardEvent<HTMLInputElement>,
-	): void => {
-		switch (event.key) {
-			case 'Enter':
-			case ' ':
-				event.preventDefault();
-				playPauseVideo();
-				break;
-			case 'ArrowRight':
-				seekForward();
-				break;
-			case 'ArrowLeft':
-				seekBackward();
 				break;
 		}
 	};
@@ -962,9 +942,8 @@ export const SelfHostedVideo = ({
 						handlePlayPauseClick={handlePlayPauseClick}
 						handleAudioClick={handleAudioClick}
 						handleTimeUpdate={handleTimeUpdate}
-						handleKeyDownVideo={handleKeyDownVideo}
+						handleKeyDown={handleKeyDown}
 						useLongFormProgressBar={isDefault}
-						handleKeyDownProgressBar={handleKeyDownProgressBar}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
 						updateCurrentTime={updateCurrentTime}
