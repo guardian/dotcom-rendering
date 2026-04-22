@@ -377,7 +377,10 @@ export const SelfHostedVideo = ({
 
 	const shouldLoop = isLoop || isCinemagraph;
 
-	const showProgressBar = !hideProgressBar && !isCinemagraph;
+	const showProgressBar =
+		!hideProgressBar && !isCinemagraph && playerState !== 'NOT_STARTED';
+
+	const showIcons = !isCinemagraph && playerState !== 'NOT_STARTED';
 
 	const iconSize = isDefault ? 'large' : 'small';
 
@@ -451,6 +454,13 @@ export const SelfHostedVideo = ({
 			}
 		} else {
 			void playVideo();
+		}
+	};
+
+	const updateCurrentTime = (newTime: number) => {
+		if (vidRef.current) {
+			vidRef.current.currentTime = newTime;
+			setCurrentTime(newTime);
 		}
 	};
 
@@ -635,6 +645,7 @@ export const SelfHostedVideo = ({
 
 		const track = video.textTracks[0];
 		if (!track?.cues) return;
+
 		const pxFromBottom = space[3];
 		const videoHeight = video.getBoundingClientRect().height;
 		const percentFromTop =
@@ -706,8 +717,8 @@ export const SelfHostedVideo = ({
 	const handleFullscreenClick = (event: React.SyntheticEvent) => {
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 		event.stopPropagation(); // Don't pause the video
-		const video = vidRef.current;
 
+		const video = vidRef.current;
 		if (!video) return;
 
 		if (shouldUseWebkitFullscreen(video)) {
@@ -772,27 +783,31 @@ export const SelfHostedVideo = ({
 	};
 
 	const seekForward = () => {
-		if (vidRef.current) {
-			const newTime = Math.min(
-				vidRef.current.currentTime + 1,
-				vidRef.current.duration,
-			);
+		const video = vidRef.current;
+		if (!video) return;
 
-			vidRef.current.currentTime = newTime;
-			setCurrentTime(newTime);
-		}
+		const increment = 1;
+		const newTime = Math.min(video.currentTime + increment, video.duration);
+
+		updateCurrentTime(newTime);
 	};
 
 	const seekBackward = () => {
-		if (vidRef.current) {
-			// Allow the user to cycle to the end of the video using the arrow keys
-			const newTime =
-				(((vidRef.current.currentTime - 1) % vidRef.current.duration) +
-					vidRef.current.duration) %
-				vidRef.current.duration;
+		const video = vidRef.current;
+		if (!video) return;
 
-			vidRef.current.currentTime = newTime;
-			setCurrentTime(newTime);
+		const increment = 1;
+		const newTime = Math.max(video.currentTime - increment, 0);
+
+		updateCurrentTime(newTime);
+	};
+
+	const handleTimeUpdate = () => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		if (playerState === 'PLAYING') {
+			setCurrentTime(video.currentTime);
 		}
 	};
 
@@ -920,10 +935,7 @@ export const SelfHostedVideo = ({
 						posterImage={optimisedPosterImage}
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
-						setCurrentTime={setCurrentTime}
 						ref={vidRef}
-						isPlayable={isPlayable}
-						playerState={playerState}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
 						handleLoadedData={handleLoadedData}
@@ -931,6 +943,7 @@ export const SelfHostedVideo = ({
 						handlePlaying={handlePlaying}
 						handlePlayPauseClick={handlePlayPauseClick}
 						handleAudioClick={handleAudioClick}
+						handleTimeUpdate={handleTimeUpdate}
 						handleKeyDown={handleKeyDown}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
@@ -943,7 +956,7 @@ export const SelfHostedVideo = ({
 						showSubtitles={!isCinemagraph}
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}
-						showIcons={!isCinemagraph}
+						showIcons={showIcons}
 						controlsPosition={controlsPosition}
 						activeCue={activeCue}
 						shouldLoop={shouldLoop}

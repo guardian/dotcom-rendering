@@ -84,6 +84,9 @@ export default defineMain({
 		// See: https://storybook.js.org/docs/react/configure/environment-variables
 		CI: 'true',
 	}),
+	core: {
+		allowedHosts: ['storybook.thegulocal.com'],
+	},
 
 	framework: {
 		name: '@storybook/react-webpack5',

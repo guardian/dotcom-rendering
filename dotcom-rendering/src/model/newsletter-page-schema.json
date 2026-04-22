@@ -33,6 +33,9 @@
                     "group": {
                         "type": "string"
                     },
+                    "category": {
+                        "type": "string"
+                    },
                     "regionFocus": {
                         "type": "string"
                     },
@@ -40,6 +43,9 @@
                         "type": "string"
                     },
                     "illustrationSquare": {
+                        "type": "string"
+                    },
+                    "exampleUrl": {
                         "type": "string"
                     }
                 },
