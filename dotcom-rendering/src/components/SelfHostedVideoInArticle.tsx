@@ -26,6 +26,8 @@ export const SelfHostedVideoInArticle = ({
 	role = 'inline',
 }: SelfHostedVideoInArticleProps) => {
 	const posterImageUrl = element.posterImage?.[0]?.url;
+
+	// DEV NOTE: this is where we need to do work to determine whether the `caption` attribute text gets to override the `title` attribute text
 	const caption = element.title;
 
 	const sources = extractValidSourcesFromAssets(element.assets);
