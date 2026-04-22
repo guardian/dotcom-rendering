@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	space,
-	textSans15,
-	textSans17,
-	textSans20,
-} from '@guardian/source/foundations';
+import { space } from '@guardian/source/foundations';
 import type { IconProps } from '@guardian/source/react-components';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
@@ -40,15 +35,21 @@ const interactiveStyles = css`
 	cursor: pointer;
 `;
 
-const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
+const nativeSubtitleStyles = css`
 	::cue {
 		/* Hide the cue by default as we prefer custom overlay */
 		visibility: hidden;
-
 		color: ${palette('--video-subtitle-text')};
-		${subtitleSize === 'small' && textSans15};
-		${subtitleSize === 'medium' && textSans17};
-		${subtitleSize === 'large' && textSans20};
+	}
+
+	/* Display the native cues when in fullscreen */
+
+	&:fullscreen::cue {
+		visibility: visible;
+	}
+
+	&:-webkit-full-screen::cue {
+		visibility: visible;
 	}
 `;
 
@@ -218,7 +219,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					css={[
 						videoStyles(aspectRatio),
 						isInteractive && interactiveStyles,
-						showSubtitles && subtitleStyles(subtitleSize),
+						showSubtitles && nativeSubtitleStyles,
 					]}
 					crossOrigin="anonymous"
 					ref={ref}
