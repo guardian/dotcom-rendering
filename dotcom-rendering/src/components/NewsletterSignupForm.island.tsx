@@ -120,6 +120,7 @@ const privacyContainerStyles = css`
 
 const successTextStyles = css`
 	color: ${palette('--newsletter-card-description')};
+	font-size: 15px;
 	strong {
 		font-weight: bold;
 	}
@@ -130,6 +131,12 @@ const marketingSuccessBoxStyles = css`
 	padding: ${space[2]}px;
 	border: 1px solid ${palette('--card-border-supporting')};
 	border-radius: 4px;
+`;
+
+const browseMoreLinksStyles = css`
+	width: 350px;
+	max-width: 100%;
+	margin-top: ${space[1]}px;
 `;
 
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
@@ -156,7 +163,7 @@ const SuccessMessage = ({
 }) => {
 	return (
 		<div css={marketingSuccessBoxStyles}>
-			<InlineSuccess>
+			<InlineSuccess size="medium">
 				<span css={successTextStyles}>
 					<strong>You're signed up!</strong>
 					&nbsp;
@@ -165,7 +172,11 @@ const SuccessMessage = ({
 					</span>
 				</span>
 			</InlineSuccess>
-			<LinkButton href="/email-newsletters" priority="tertiary">
+			<LinkButton
+				href="/email-newsletters"
+				priority="tertiary"
+				cssOverrides={browseMoreLinksStyles}
+			>
 				Browse more newsletters
 			</LinkButton>
 		</div>
