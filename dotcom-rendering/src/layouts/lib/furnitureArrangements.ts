@@ -122,7 +122,27 @@ type BreakpointColumns = Partial<
 
 type ColumnArrangementMap = Partial<Record<Area, BreakpointColumns>>;
 
-// Guardian Grid CSS generation
+/**
+ * Converts the human-readable {@link furnitureRowArrangements} into a lookup table
+ * of CSS grid row positions ready for use in {@link gridItemCss}.
+ *
+ * Each area in the arrangement is assigned a `start` row number and, if it
+ * appears in multiple consecutive rows (e.g. a sidebar), a `span` count.
+ *
+ * @example
+ * // Given this arrangement for 'desktop':
+ * [
+ *   ['title', 'right-column'],   // row 1
+ *   ['body',  'right-column'],   // row 2
+ * ]
+ *
+ * // Produces:
+ * {
+ *   title:          { desktop: { start: 1 } },
+ *   body:           { desktop: { start: 2 } },
+ *   'right-column': { desktop: { start: 1, span: 2 } },
+ * }
+ */
 const buildRowMap = (
 	arrangement: ArrangementDefinition,
 ): CompiledArrangement => {
@@ -182,6 +202,25 @@ const breakpointQueries = {
 	desktop: from.desktop,
 } as const;
 
+/**
+ * Returns the Emotion CSS needed to position a single grid item — its
+ * default column, its row at each breakpoint, and any column overrides.
+ * The grid item _must_ be inside a {@link grid} module container.
+ *
+ * The output is built from three layers, applied in order (later wins):
+ * 1. **Default column** — all items start in the centre column.
+ * 2. **Row placement** — `grid-row` values per breakpoint, derived from
+ *    {@link furnitureRowArrangements} via the pre-computed {@link rowMaps}.
+ * 3. **Column placement** — column overrides per breakpoint from
+ *    {@link furnitureColumnArrangements} (e.g. `meta` shifts left on wide screens).
+ *
+ * @param area - The named piece of article furniture to position (e.g. `'headline'`, `'body'`).
+ * @param layoutType - Either `'standard'` or `'media'`.
+ *
+ * @example
+ * // In a React component:
+ * <div css={gridItemCss('headline', 'standard')} />
+ */
 export const gridItemCss = (
 	area: Area,
 	layoutType: LayoutType,
