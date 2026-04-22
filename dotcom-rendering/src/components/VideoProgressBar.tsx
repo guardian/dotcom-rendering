@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { getZIndex } from '../lib/getZIndex';
+import { convertCurrentTimeToProgressPercentage } from '../lib/video';
 import { palette } from '../palette';
 
 const styles = css`
@@ -49,11 +50,11 @@ export const VideoProgressBar = ({ videoId, currentTime, duration }: Props) => {
 	 */
 	const adjustedDuration = duration > 1 ? duration - 0.25 : duration;
 
-	const progressPercentage = Math.min(
-		(currentTime * 100) / adjustedDuration,
-		100,
+	const progressPercentage = convertCurrentTimeToProgressPercentage(
+		currentTime,
+		adjustedDuration,
 	);
-	if (Number.isNaN(progressPercentage)) {
+	if (progressPercentage === null) {
 		return null;
 	}
 

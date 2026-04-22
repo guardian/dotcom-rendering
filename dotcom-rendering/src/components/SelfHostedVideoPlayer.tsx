@@ -17,8 +17,10 @@ import {
 	AudioIcon as AudioIconComponent,
 	FullscreenIcon,
 } from './SelfHostedVideoPlayerIcons';
+import type { SubtitlesPosition } from './SubtitleOverlay';
 import { SubtitleOverlay } from './SubtitleOverlay';
 import { VideoProgressBar } from './VideoProgressBar';
+import { VideoProgressBarInteractive } from './VideoProgressBarInteractive';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 export type ControlsPosition = 'top' | 'bottom';
@@ -69,9 +71,13 @@ const iconsContainerStyles = css`
 	right: ${space[2]}px;
 `;
 
-const iconsPositionStyles = (position: ControlsPosition) => css`
-	/* Take into account the progress bar height */
+const smallIconsPositionStyles = (position: ControlsPosition) => css`
 	${position === 'bottom' && `bottom: ${space[3]}px;`}
+	${position === 'top' && `top: ${space[2]}px;`}
+`;
+
+const largeIconsPositionStyles = (position: ControlsPosition) => css`
+	${position === 'bottom' && `bottom: ${space[12]}px;`}
 	${position === 'top' && `top: ${space[2]}px;`}
 `;
 
@@ -112,10 +118,12 @@ export type Props = {
 	handlePlaying: (event: SyntheticEvent) => void;
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
 	handleAudioClick: (event: SyntheticEvent) => void;
-	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
+	handleKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
 	handleTimeUpdate: (event: SyntheticEvent<HTMLVideoElement>) => void;
+	useLongFormProgressBar: boolean;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick?: (event: SyntheticEvent) => void;
+	updateCurrentTime: (time: number) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: ((iconProps: IconProps) => JSX.Element) | null;
 	iconSize: 'small' | 'large';
@@ -133,6 +141,7 @@ export type Props = {
 	shouldLoop: boolean;
 	isInteractive: boolean;
 	controlsPosition: ControlsPosition;
+	subtitlesPosition: SubtitlesPosition;
 };
 
 /**
@@ -166,8 +175,10 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleAudioClick,
 			handleKeyDown,
 			handleTimeUpdate,
+			useLongFormProgressBar,
 			handlePause,
 			handleFullscreenClick,
+			updateCurrentTime,
 			onError,
 			AudioIcon,
 			iconSize,
@@ -183,6 +194,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			shouldLoop,
 			isInteractive,
 			controlsPosition,
+			subtitlesPosition,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -255,7 +267,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					<SubtitleOverlay
 						text={activeCue.text}
 						size={subtitleSize}
-						position={controlsPosition}
+						position={subtitlesPosition}
 					/>
 				)}
 				{showPlayIcon && (
@@ -269,18 +281,30 @@ export const SelfHostedVideoPlayer = forwardRef(
 						<PlayIcon iconWidth="narrow" />
 					</button>
 				)}
-				{showProgressBar && (
-					<VideoProgressBar
-						videoId={videoId}
-						currentTime={currentTime}
-						duration={ref.current!.duration}
-					/>
-				)}
+				{showProgressBar &&
+					(useLongFormProgressBar ? (
+						<VideoProgressBarInteractive
+							videoId={videoId}
+							currentTime={currentTime}
+							updateCurrentTime={updateCurrentTime}
+							duration={ref.current!.duration}
+							handleKeyDown={handleKeyDown}
+						/>
+					) : (
+						<VideoProgressBar
+							videoId={videoId}
+							currentTime={currentTime}
+							duration={ref.current!.duration}
+						/>
+					))}
 				{showIcons && (
 					<div
 						css={[
 							iconsContainerStyles,
-							iconsPositionStyles(controlsPosition),
+							iconSize === 'large' &&
+								largeIconsPositionStyles(controlsPosition),
+							iconSize === 'small' &&
+								smallIconsPositionStyles(controlsPosition),
 						]}
 					>
 						{showFullscreenIcon && (

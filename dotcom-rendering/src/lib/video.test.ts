@@ -1,9 +1,12 @@
 import type { FEMediaAsset } from '../frontend/feFront';
 import type { VideoAssets } from '../types/content';
 import {
+	convertCurrentTimeToProgressPercentage,
 	convertFEMediaAssetsToVideoAssets,
+	convertProgressPercentageToCurrentTime,
 	extractValidSourcesFromAssets,
 	findOptimisedSourcePerMimeType,
+	formatTimeForDisplay,
 	getAspectRatioFromSources,
 } from './video';
 import type { Source } from './video';
@@ -262,5 +265,72 @@ describe('video', () => {
 
 			expect(sources).toEqual([mp4Src720h, m3u8Src720h]);
 		});
+	});
+
+	describe('convertCurrentTimeToProgressPercentage', () => {
+		it.each([
+			{ currentTime: 0, duration: 23, expectedPercentage: 0 },
+			{ currentTime: 24, duration: 32, expectedPercentage: 75 },
+			{ currentTime: 56, duration: 56, expectedPercentage: 100 },
+			{ currentTime: 12, duration: 11, expectedPercentage: 100 },
+			{ currentTime: -5, duration: 10, expectedPercentage: null },
+			{ currentTime: 5, duration: -10, expectedPercentage: null },
+		])(
+			'should return the correct progress percentage based on the current time and duration',
+			({ currentTime, duration, expectedPercentage }) => {
+				expect(
+					convertCurrentTimeToProgressPercentage(
+						currentTime,
+						duration,
+					),
+				).toEqual(expectedPercentage);
+			},
+		);
+	});
+
+	describe('convertProgressPercentageToCurrentTime', () => {
+		it.each([
+			{ progressPercentage: 0, duration: 23, expectedCurrentTime: 0 },
+			{ progressPercentage: 75, duration: 32, expectedCurrentTime: 24 },
+			{ progressPercentage: 100, duration: 56, expectedCurrentTime: 56 },
+			{ progressPercentage: 103, duration: 11, expectedCurrentTime: 11 },
+			{ progressPercentage: 10, duration: 0, expectedCurrentTime: null },
+			{ progressPercentage: 8, duration: -10, expectedCurrentTime: null },
+			{
+				progressPercentage: -0.1244235,
+				duration: 10,
+				expectedCurrentTime: 0,
+			},
+		])(
+			'should return the correct current time based on the progress percentage and duration',
+			({ progressPercentage, duration, expectedCurrentTime }) => {
+				expect(
+					convertProgressPercentageToCurrentTime(
+						progressPercentage,
+						duration,
+					),
+				).toEqual(expectedCurrentTime);
+			},
+		);
+	});
+
+	describe('formatTimeForDisplay', () => {
+		it.each([
+			{ timeInSeconds: -1.24, expectedFormattedTime: '0:00' },
+			{ timeInSeconds: 0, expectedFormattedTime: '0:00' },
+			{ timeInSeconds: 59, expectedFormattedTime: '0:59' },
+			{ timeInSeconds: 60, expectedFormattedTime: '1:00' },
+			{ timeInSeconds: 61, expectedFormattedTime: '1:01' },
+			{ timeInSeconds: 92.5, expectedFormattedTime: '1:32' },
+			{ timeInSeconds: 1000, expectedFormattedTime: '16:40' },
+			{ timeInSeconds: 10000, expectedFormattedTime: '166:40' },
+		])(
+			'should return the correct formatted time based on the time in seconds',
+			({ timeInSeconds, expectedFormattedTime }) => {
+				expect(formatTimeForDisplay(timeInSeconds)).toEqual(
+					expectedFormattedTime,
+				);
+			},
+		);
 	});
 });
