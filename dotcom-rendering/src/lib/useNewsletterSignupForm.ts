@@ -134,7 +134,7 @@ export type NewsletterSignupFormState = {
 	 * When `true` the email `<input>` should be hidden (signed-in user whose
 	 * address was fetched automatically).
 	 */
-	hideEmailInput: boolean;
+	isSignedIn: boolean;
 	/**
 	 * `true` once the user has focused or typed in the email field, or when
 	 * the user's email was pre-filled. Reveals the marketing toggle and
@@ -265,7 +265,7 @@ export const useNewsletterSignupForm = (
 
 	return {
 		userEmail,
-		hideEmailInput,
+		isSignedIn: hideEmailInput,
 		isInteracted,
 		showMarketingToggle: isSignedIn === false,
 		marketingOptIn,

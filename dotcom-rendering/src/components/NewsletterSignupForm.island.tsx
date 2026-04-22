@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { space, until } from '@guardian/source/foundations';
+import type { Size } from '@guardian/source/react-components';
 import {
 	Button,
 	InlineError,
@@ -137,13 +138,20 @@ const feedbackButtonStyles = css`
 
 const browseMoreLinksStyles = feedbackButtonStyles;
 
-const PreviewButton = ({ onClick }: { onClick: () => void }) => (
+const PreviewButton = ({
+	onClick,
+	size = 'default',
+}: {
+	onClick: () => void;
+	size?: Size;
+}) => (
 	<Button
 		priority="tertiary"
 		icon={<SvgEye />}
 		iconSide="left"
 		onClick={onClick}
 		type="button"
+		size={size}
 	>
 		Preview latest
 	</Button>
@@ -210,7 +218,7 @@ export const NewsletterSignupForm = ({
 
 	const {
 		userEmail,
-		hideEmailInput,
+		isSignedIn,
 		isInteracted,
 		showMarketingToggle,
 		marketingOptIn,
@@ -233,9 +241,9 @@ export const NewsletterSignupForm = ({
 			{!hasResponse &&
 				!isWaitingForResponse &&
 				onPreviewClick &&
-				!hideEmailInput && (
+				!isSignedIn && (
 					<div css={previewButtonContainerStyles}>
-						<PreviewButton onClick={onPreviewClick} />
+						<PreviewButton onClick={onPreviewClick} size="small" />
 					</div>
 				)}
 			<form
@@ -249,12 +257,10 @@ export const NewsletterSignupForm = ({
 				}}
 				css={[
 					formStyles,
-					hideEmailInput
-						? signedInLayoutStyles
-						: signedOutLayoutStyles,
+					isSignedIn ? signedInLayoutStyles : signedOutLayoutStyles,
 				]}
 			>
-				{hideEmailInput ? (
+				{isSignedIn ? (
 					<input type="hidden" name="email" value={userEmail ?? ''} />
 				) : (
 					<div css={emailFieldStyles}>
@@ -292,12 +298,12 @@ export const NewsletterSignupForm = ({
 					</>
 				)}
 				<div css={submitButtonContainerStyles}>
-					{hideEmailInput && onPreviewClick && (
+					{isSignedIn && onPreviewClick && (
 						<PreviewButton onClick={onPreviewClick} />
 					)}
 					<Button
 						cssOverrides={
-							hideEmailInput
+							isSignedIn
 								? signedInSubmitButtonStyles
 								: signedOutSubmitButtonStyles
 						}

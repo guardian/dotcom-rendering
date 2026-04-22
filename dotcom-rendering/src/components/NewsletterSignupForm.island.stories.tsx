@@ -57,7 +57,7 @@ const noopHandlers: Pick<
 
 const mockForm = (state: Partial<NewsletterSignupFormState>) => ({
 	userEmail: undefined,
-	hideEmailInput: false,
+	isSignedIn: false,
 	isInteracted: false,
 	showMarketingToggle: false,
 	marketingOptIn: undefined,
@@ -124,7 +124,7 @@ export const SignedIn = meta.story({
 		mocked(useNewsletterSignupForm).mockReturnValue(
 			mockForm({
 				userEmail: 'reader@example.com',
-				hideEmailInput: true,
+				isSignedIn: true,
 				isInteracted: true,
 				showMarketingToggle: false,
 			}),
