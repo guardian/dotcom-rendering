@@ -2,7 +2,12 @@ import guardian from "@guardian/eslint-config";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
-	globalIgnores(["eslint.config.mjs", "**/dist/**"]),
+	globalIgnores([
+		"eslint.config.mjs",
+		"**/dist/**",
+		"**/.svelte-kit/*",
+		"**/svelte.config.js",
+	]),
 	...guardian.configs.recommended,
 	{
 		languageOptions: {

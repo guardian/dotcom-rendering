@@ -4,7 +4,8 @@
 	"private": true,
 	"version": "0.0.1",
 	"scripts": {
-		"lint": "eslint .",
+		"lint": "eslint --quiet --cache .",
+		"lint:fix": "eslint --quiet --cache --fix .",
 		"test": "pnpm --filter @guardian/ab-testing-* test"
 	},
 	"devDependencies": {
