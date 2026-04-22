@@ -60,7 +60,7 @@ import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import {
 	type Area,
-	gridCss,
+	gridItemCss,
 	type LayoutType,
 } from './lib/furnitureArrangements';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -91,7 +91,10 @@ const GridItem = ({
 	customCss,
 	children,
 }: GridItemProps) => (
-	<Element data-gu-name={area} css={[gridCss(area, layoutType), customCss]}>
+	<Element
+		data-gu-name={area}
+		css={[gridItemCss(area, layoutType), customCss]}
+	>
 		{children}
 	</Element>
 );
