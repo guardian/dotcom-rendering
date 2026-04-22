@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
+import { forwardRef, useImperativeHandle } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
@@ -27,6 +28,21 @@ jest.mock('../lib/useAuthStatus', () => ({
 
 jest.mock('../lib/useBrowserId', () => ({
 	useBrowserId: jest.fn(),
+}));
+
+// Mock reCAPTCHA: immediately call onChange with a fake token when execute() is called.
+jest.mock('react-google-recaptcha', () => ({
+	__esModule: true,
+	default: forwardRef<
+		{ execute: () => void; reset: () => void },
+		{ onChange?: (token: string) => void }
+	>(function MockRecaptcha({ onChange }, ref) {
+		useImperativeHandle(ref, () => ({
+			execute: () => onChange?.('test-recaptcha-token'),
+			reset: () => undefined,
+		}));
+		return null;
+	}),
 }));
 
 const renderForm = (hidePrivacyMessage = false) =>
@@ -80,6 +96,7 @@ describe('NewsletterSignupForm', () => {
 		.page as typeof window.guardian.config.page & {
 		ajaxUrl?: string;
 		idApiUrl?: string;
+		googleRecaptchaSiteKey?: string;
 	};
 
 	beforeEach(() => {
@@ -95,6 +112,7 @@ describe('NewsletterSignupForm', () => {
 
 		pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
 		pageConfig.idApiUrl = 'https://idapi.nextgen.guardianapps.co.uk';
+		pageConfig.googleRecaptchaSiteKey = 'test-site-key';
 		if (window.guardian.ophan) {
 			window.guardian.ophan.pageViewId = 'test-page-view-id';
 		}
@@ -138,6 +156,8 @@ describe('NewsletterSignupForm', () => {
 
 		expectTrackedEventDescriptions([
 			'click-button',
+			'open-captcha',
+			'captcha-passed',
 			'form-submission',
 			'submission-confirmed',
 		]);
@@ -271,6 +291,8 @@ describe('NewsletterSignupForm', () => {
 
 		expectTrackedEventDescriptions([
 			'click-button',
+			'open-captcha',
+			'captcha-passed',
 			'form-submission',
 			'submission-failed',
 		]);

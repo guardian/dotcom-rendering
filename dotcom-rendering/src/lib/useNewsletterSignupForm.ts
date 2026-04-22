@@ -1,6 +1,8 @@
 import { isString } from '@guardian/libs';
 import type { FormEvent, ReactEventHandler } from 'react';
-import { useEffect, useState } from 'react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { lazyFetchEmailWithTimeout } from './fetchEmail';
@@ -15,6 +17,7 @@ import { useBrowserId } from './useBrowserId';
 const buildFormData = (
 	emailAddress: string,
 	newsletterId: string,
+	token: string,
 	marketingOptIn?: boolean,
 	browserId?: string,
 ): FormData => {
@@ -28,7 +31,7 @@ const buildFormData = (
 	formData.append('ref', pageRef);
 	formData.append('refViewId', refViewId);
 	formData.append('name', '');
-	formData.append('g-recaptcha-response', '');
+	formData.append('g-recaptcha-response', token);
 
 	if (marketingOptIn !== undefined) {
 		formData.append('marketing', marketingOptIn ? 'true' : 'false');
@@ -79,7 +82,11 @@ type EventDescription =
 	| 'form-submission'
 	| 'submission-confirmed'
 	| 'submission-failed'
-	| 'form-submit-error';
+	| 'open-captcha'
+	| 'captcha-load-error'
+	| 'form-submit-error'
+	| 'captcha-not-passed'
+	| 'captcha-passed';
 
 const sendTracking = (
 	newsletterId: string,
@@ -90,14 +97,20 @@ const sendTracking = (
 
 	switch (eventDescription) {
 		case 'form-submission':
+		case 'captcha-not-passed':
+		case 'captcha-passed':
 			action = 'ANSWER';
 			break;
 		case 'submission-confirmed':
 			action = 'SUBSCRIBE';
 			break;
+		case 'captcha-load-error':
 		case 'form-submit-error':
 		case 'submission-failed':
 			action = 'CLOSE';
+			break;
+		case 'open-captcha':
+			action = 'EXPAND' as typeof action;
 			break;
 		case 'click-button':
 		default:
@@ -157,6 +170,15 @@ export type NewsletterSignupFormState = {
 	/** Inline validation / network error copy. */
 	errorMessage: string | undefined;
 
+	/** Ref to pass to the `<ReactGoogleRecaptcha>` widget. */
+	recaptchaRef: React.RefObject<ReactGoogleRecaptcha>;
+	/** Site key for the reCAPTCHA widget — `undefined` until resolved. */
+	captchaSiteKey: string | undefined;
+	/** Pass to `ReactGoogleRecaptcha`'s `onChange` prop. */
+	handleCaptchaComplete: (token: string | null) => void;
+	/** Pass to `ReactGoogleRecaptcha`'s `onError` prop. */
+	handleCaptchaLoadError: () => void;
+
 	// Event handlers
 	handleEmailChange: (value: string) => void;
 	handleEmailFocus: () => void;
@@ -180,6 +202,8 @@ export const useNewsletterSignupForm = (
 	newsletterId: string,
 	renderingTarget: RenderingTarget,
 ): NewsletterSignupFormState => {
+	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
+	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
 	const [userEmail, setUserEmail] = useState<string>();
 	const [hideEmailInput, setHideEmailInput] = useState(false);
 	const [isWaitingForResponse, setIsWaitingForResponse] = useState(false);
@@ -205,6 +229,7 @@ export const useNewsletterSignupForm = (
 	}, [isSignedIn]);
 
 	useEffect(() => {
+		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
 		void resolveEmailIfSignedIn().then((email) => {
 			setUserEmail(email);
 			setHideEmailInput(isString(email));
@@ -214,12 +239,16 @@ export const useNewsletterSignupForm = (
 		});
 	}, []);
 
-	const submitForm = async (emailAddress: string): Promise<void> => {
+	const submitForm = async (
+		emailAddress: string,
+		token: string,
+	): Promise<void> => {
 		sendTracking(newsletterId, 'form-submission', renderingTarget);
 
 		const formData = buildFormData(
 			emailAddress,
 			newsletterId,
+			token,
 			marketingOptIn,
 			browserId,
 		);
@@ -243,6 +272,30 @@ export const useNewsletterSignupForm = (
 		);
 	};
 
+	const handleCaptchaComplete = (token: string | null): void => {
+		if (!token) {
+			sendTracking(newsletterId, 'captcha-not-passed', renderingTarget);
+			setIsWaitingForResponse(false);
+			return;
+		}
+		sendTracking(newsletterId, 'captcha-passed', renderingTarget);
+		const emailAddress = userEmail?.trim() ?? '';
+		submitForm(emailAddress, token).catch((error) => {
+			// eslint-disable-next-line no-console -- unexpected error
+			console.error(error);
+			sendTracking(newsletterId, 'form-submit-error', renderingTarget);
+			setErrorMessage('Sorry, there was an error signing you up.');
+			setIsWaitingForResponse(false);
+			recaptchaRef.current?.reset();
+		});
+	};
+
+	const handleCaptchaLoadError = (): void => {
+		sendTracking(newsletterId, 'captcha-load-error', renderingTarget);
+		setErrorMessage('Sorry, the reCAPTCHA failed to load.');
+		recaptchaRef.current?.reset();
+	};
+
 	const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
 		if (isWaitingForResponse) return;
@@ -255,13 +308,8 @@ export const useNewsletterSignupForm = (
 
 		setErrorMessage(undefined);
 		setIsWaitingForResponse(true);
-		submitForm(emailAddress).catch((error) => {
-			// eslint-disable-next-line no-console -- unexpected error
-			console.error(error);
-			sendTracking(newsletterId, 'form-submit-error', renderingTarget);
-			setErrorMessage('Sorry, there was an error signing you up.');
-			setIsWaitingForResponse(false);
-		});
+		sendTracking(newsletterId, 'open-captcha', renderingTarget);
+		recaptchaRef.current?.execute();
 	};
 
 	return {
@@ -273,6 +321,10 @@ export const useNewsletterSignupForm = (
 		isWaitingForResponse,
 		responseOk,
 		errorMessage,
+		recaptchaRef,
+		captchaSiteKey,
+		handleCaptchaComplete,
+		handleCaptchaLoadError,
 		handleEmailChange: (value) => {
 			setUserEmail(value);
 			setIsInteracted(true);

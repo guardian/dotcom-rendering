@@ -1,3 +1,5 @@
+import { createRef } from 'react';
+import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { fn, mocked } from 'storybook/test';
 import preview from '../../.storybook/preview';
 import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
@@ -46,6 +48,8 @@ const noopHandlers: Pick<
 	| 'handleSubmit'
 	| 'handleSubmitButtonClick'
 	| 'handleReset'
+	| 'handleCaptchaComplete'
+	| 'handleCaptchaLoadError'
 > = {
 	handleEmailChange: fn(),
 	handleEmailFocus: fn(),
@@ -53,6 +57,8 @@ const noopHandlers: Pick<
 	handleSubmit: fn(),
 	handleSubmitButtonClick: fn(),
 	handleReset: fn(),
+	handleCaptchaComplete: fn(),
+	handleCaptchaLoadError: fn(),
 };
 
 const mockForm = (state: Partial<NewsletterSignupFormState>) => ({
@@ -64,6 +70,8 @@ const mockForm = (state: Partial<NewsletterSignupFormState>) => ({
 	isWaitingForResponse: false,
 	responseOk: undefined,
 	errorMessage: undefined,
+	recaptchaRef: createRef<ReactGoogleRecaptcha>(),
+	captchaSiteKey: undefined,
 	...noopHandlers,
 	...state,
 });

@@ -13,6 +13,10 @@ import {
 	TextInput,
 } from '@guardian/source/react-components';
 import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
+// Note - the package also exports a component as a named export "ReCAPTCHA",
+// that version will compile and render but is non-functional.
+// Use the default export instead.
+import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
@@ -225,6 +229,10 @@ export const NewsletterSignupForm = ({
 		isWaitingForResponse,
 		responseOk,
 		errorMessage,
+		recaptchaRef,
+		captchaSiteKey,
+		handleCaptchaComplete,
+		handleCaptchaLoadError,
 		handleEmailChange,
 		handleEmailFocus,
 		handleMarketingToggle,
@@ -345,6 +353,15 @@ export const NewsletterSignupForm = ({
 						</Button>
 					</div>
 				))}
+			{!!captchaSiteKey && (
+				<ReactGoogleRecaptcha
+					sitekey={captchaSiteKey}
+					ref={recaptchaRef}
+					onChange={handleCaptchaComplete}
+					onError={handleCaptchaLoadError}
+					size="invisible"
+				/>
+			)}
 		</>
 	);
 };
