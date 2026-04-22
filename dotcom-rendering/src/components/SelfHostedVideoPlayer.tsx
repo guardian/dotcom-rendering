@@ -16,6 +16,7 @@ import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
 import {
 	AudioIcon as AudioIconComponent,
 	FullscreenIcon,
+	ShareIcon,
 } from './SelfHostedVideoPlayerIcons';
 import type { SubtitlesPosition } from './SubtitleOverlay';
 import { SubtitleOverlay } from './SubtitleOverlay';
@@ -124,6 +125,14 @@ export type Props = {
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick?: (event: SyntheticEvent) => void;
 	updateCurrentTime: (time: number) => void;
+	handleProgressBarClick?: (event: React.MouseEvent<HTMLElement>) => void;
+	handleProgressBarKeyDown?: (
+		event: React.MouseEvent<HTMLDivElement>,
+	) => void;
+	handleProgressBarKeyUp?: (event: React.MouseEvent<HTMLDivElement>) => void;
+	handleProgressBarKeyMove?: (
+		event: React.MouseEvent<HTMLDivElement>,
+	) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: ((iconProps: IconProps) => JSX.Element) | null;
 	iconSize: 'small' | 'large';
@@ -179,6 +188,10 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handlePause,
 			handleFullscreenClick,
 			updateCurrentTime,
+			handleProgressBarClick,
+			handleProgressBarKeyDown,
+			handleProgressBarKeyUp,
+			handleProgressBarKeyMove,
 			onError,
 			AudioIcon,
 			iconSize,
@@ -219,8 +232,10 @@ export const SelfHostedVideoPlayer = forwardRef(
 						videoStyles(aspectRatio),
 						isInteractive && interactiveStyles,
 						showSubtitles && subtitleStyles(subtitleSize),
+						// useLongFormProgressBar &&
+						// 	showProgressBarOnHoverStyles(videoId),
 					]}
-					crossOrigin="anonymous"
+					// crossOrigin="anonymous"
 					ref={ref}
 					tabIndex={0}
 					data-testid="self-hosted-video-player"
@@ -289,6 +304,10 @@ export const SelfHostedVideoPlayer = forwardRef(
 							updateCurrentTime={updateCurrentTime}
 							duration={ref.current!.duration}
 							handleKeyDown={handleKeyDown}
+							handleClick={handleProgressBarClick}
+							handleMouseDown={handleProgressBarKeyDown}
+							handleMouseUp={handleProgressBarKeyUp}
+							handleMouseMove={handleProgressBarKeyMove}
 						/>
 					) : (
 						<VideoProgressBar
@@ -319,6 +338,13 @@ export const SelfHostedVideoPlayer = forwardRef(
 								Icon={AudioIcon}
 								handleClick={handleAudioClick}
 								isMuted={isMuted}
+								atomId={atomId}
+								size={iconSize}
+							/>
+						)}
+						{showFullscreenIcon && (
+							<ShareIcon
+								handleClick={() => {}}
 								atomId={atomId}
 								size={iconSize}
 							/>

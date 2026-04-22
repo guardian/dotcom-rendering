@@ -1,130 +1,79 @@
 import { css } from '@emotion/react';
 import {
-	focusHalo,
 	palette as sourcePalette,
 	textSans12,
 } from '@guardian/source/foundations';
 import { getZIndex } from '../lib/getZIndex';
-import {
-	convertCurrentTimeToProgressPercentage,
-	convertProgressPercentageToCurrentTime,
-	formatTimeForDisplay,
-} from '../lib/video';
+import { formatTimeForDisplay } from '../lib/video';
 import { palette } from '../palette';
 
 const containerStyles = css`
+	/* visibility: hidden; */
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	height: 44px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 	width: 100%;
 	z-index: ${getZIndex('video-progress-bar-background')};
+	transition: height 0.1s ease;
 	cursor: pointer;
-	padding: 0 12px;
-	background: linear-gradient(
-		to top,
-		${sourcePalette.neutral[0]} 0%,
-		transparent 100%
-	);
 `;
 
-const trackStyles = css`
-	-webkit-appearance: none;
-	appearance: none;
+const scrubbableAreaStyles = css`
+	display: flex;
+	align-items: center;
+	position: relative;
+	width: 100%;
+	height: 24px;
+`;
+
+const backgroundStyles = css`
+	position: relative;
+	width: 100%;
 	height: 5px;
+	margin-left: 12px;
+	margin-right: 12px;
+	margin-bottom: 6px;
+	background-color: ${palette('--video-progress-bar-background-default')};
 	border-radius: 5px;
 `;
 
-const thumbStyles = css`
-	-webkit-appearance: none;
-	appearance: none;
+const foregroundStyles = (progressPercentage: number) => css`
+	position: absolute;
+	height: 100%;
+	width: ${progressPercentage}%;
+	z-index: ${getZIndex('video-progress-bar-foreground')};
+	background-color: ${palette('--video-progress-bar-value-default')};
+	/**
+	 * Don't show a transition when the progress bar returns to the start.
+	 */
+	transition: ${progressPercentage < 1 ? 'none' : `width 0.25s linear`};
+	border-radius: 5px 0 0 5px;
+`;
+
+const knobStyles = (progressPercentage: number) => css`
+	position: absolute;
+	top: -4px;
+	left: calc(${progressPercentage} * (100% - 10px) / 100);
 	width: 14px;
 	height: 14px;
-	border: none;
 	border-radius: 50%;
-	background-color: ${palette('--video-progress-bar-interactive-value')};
+	background-color: ${palette('--video-progress-bar-value-default')};
 	z-index: ${getZIndex('video-progress-bar-foreground')};
-	cursor: pointer;
+	transform: translateX(-10%);
+	transition: left 0.25s linear;
 `;
-
-const progressBarStyles = (roundedProgressPercentage: number) => css`
-	width: 100%;
-	cursor: pointer;
-	height: 5px;
-	border-radius: 5px;
-	-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-	appearance: none;
-	/* The colour to the left of the thumb is different to the right to indicate progress */
-	background: ${`linear-gradient(
-		to right,
-		${palette('--video-progress-bar-interactive-value')} 0%,
-		${palette(
-			'--video-progress-bar-interactive-value',
-		)} ${roundedProgressPercentage}%,
-		${palette(
-			'--video-progress-bar-interactive-background',
-		)} ${roundedProgressPercentage}%,
-		${palette('--video-progress-bar-interactive-background')} 100%
-	)`};
-
-	/* We don't use the default focus ring as it includes the thumb, which looks odd. */
-	:focus-visible {
-		${focusHalo}
-	}
-
-	/** Extend the clickable area of the progress bar (only works on Chrome) */
-	::after {
-		content: '';
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		width: 100%;
-		height: 36px;
-	}
-
-	::-webkit-slider-runnable-track {
-		${trackStyles}
-	}
-	::-moz-range-track {
-		${trackStyles}
-	}
-	::-ms-track {
-		${trackStyles}
-		width: 100%;
-	}
-
-	::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		margin-top: -5px;
-		${thumbStyles}
-	}
-	::-moz-range-thumb {
-		${thumbStyles}
-	}
-	::-ms-thumb {
-		${thumbStyles}
-	}
-`;
-
-const handleChange = (
-	value: string,
-	duration: Props['duration'],
-	updateCurrentTime: Props['updateCurrentTime'],
-) => {
-	const percentage = Number(value);
-	const time = convertProgressPercentageToCurrentTime(percentage, duration);
-
-	if (time === null) return;
-
-	updateCurrentTime(time);
-};
 
 type Props = {
 	videoId: string;
 	currentTime: number;
-	updateCurrentTime: (time: number) => void;
-	handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 	duration: number;
+	handleClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+	handleMouseUp?: (event: React.MouseEvent<HTMLDivElement>) => void;
+	handleMouseDown?: (event: React.MouseEvent<HTMLDivElement>) => void;
+	handleMouseMove?: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
 /**
@@ -136,17 +85,29 @@ type Props = {
 export const VideoProgressBarInteractive = ({
 	videoId,
 	currentTime,
-	updateCurrentTime,
-	handleKeyDown,
 	duration,
+	handleClick,
+	handleMouseUp,
+	handleMouseDown,
+	handleMouseMove,
 }: Props) => {
 	if (duration <= 0) return null;
 
-	const progressPercentage = convertCurrentTimeToProgressPercentage(
-		currentTime,
-		duration,
+	/**
+	 * We achieve a smooth progress bar by using CSS transitions. Given that
+	 * onTimeUpdate fires every 250ms or so, this means that the time on the
+	 * progress bar is always about 0.25s behind and begins 0.25s late.
+	 * Therefore, when calculating the progress percentage, we take 0.25s off the duration.
+	 *
+	 * Videos less than a second in duration will have no adjustment.
+	 */
+	const adjustedDuration = duration > 1 ? duration - 0.25 : duration;
+
+	const progressPercentage = Math.min(
+		(currentTime * 100) / adjustedDuration,
+		100,
 	);
-	if (progressPercentage === null) {
+	if (Number.isNaN(progressPercentage)) {
 		return null;
 	}
 
@@ -155,26 +116,35 @@ export const VideoProgressBarInteractive = ({
 	return (
 		<div css={containerStyles}>
 			<Time current={currentTime} duration={duration} />
-			<input
-				type="range"
-				value={roundedProgressPercentage}
-				css={progressBarStyles(roundedProgressPercentage)}
+			<div
+				css={scrubbableAreaStyles}
 				className={`progress-bar-${videoId}`}
+				onClick={handleClick}
+				onMouseDown={handleMouseDown}
+				onMouseUp={handleMouseUp}
+				onMouseMove={handleMouseMove}
+				onKeyDown={() => {}}
 				role="progressbar"
 				aria-labelledby={videoId}
-				min={0}
-				max={100}
-				step={0.01}
+				aria-valuenow={roundedProgressPercentage}
+				aria-valuemin={0}
+				aria-valuemax={100}
 				tabIndex={0}
-				onChange={(event) =>
-					handleChange(
-						event.target.value,
-						duration,
-						updateCurrentTime,
-					)
-				}
-				onKeyDown={handleKeyDown}
-			/>
+			>
+				<div
+					className={`progress-bar-background-${videoId}`}
+					css={backgroundStyles}
+				>
+					<span
+						className={`progress-bar-foreground-${videoId}`}
+						css={foregroundStyles(progressPercentage)}
+					/>
+					<span
+						css={knobStyles(progressPercentage)}
+						aria-hidden="true"
+					/>
+				</div>
+			</div>
 		</div>
 	);
 };

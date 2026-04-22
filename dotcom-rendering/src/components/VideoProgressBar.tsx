@@ -63,6 +63,7 @@ export const VideoProgressBar = ({ videoId, currentTime, duration }: Props) => {
 	return (
 		<div
 			role="progressbar"
+			id={`VideoProgressBar-${videoId}`}
 			aria-labelledby={videoId}
 			aria-valuenow={roundedProgressPercentage}
 			aria-valuemin={0}

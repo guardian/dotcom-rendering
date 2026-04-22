@@ -360,6 +360,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
+	const [isProgressBarDragging, setIsProgressBarDragging] = useState(false);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -773,6 +774,36 @@ export const SelfHostedVideo = ({
 		pauseVideo('PAUSED_BY_BROWSER');
 	};
 
+	const handleProgressBarClick = (event: React.MouseEvent<HTMLElement>) => {
+		if (videoStyle !== 'Default') return;
+
+		// if (vidRef.current) {
+		// 	const rect = event.currentTarget.getBoundingClientRect();
+		// 	const clickXPosition = event.clientX - rect.left;
+		// 	const clickYPosition = event.clientY - rect.top;
+
+		// 	/**
+		// 	 * Don't allow clicks that are too close to the audio icon as
+		// 	 * they may be intended for the icon rather than the progress bar.
+		// 	 * The user may unintentionally skip to the end instead of unmuting.
+		// 	 */
+		// 	const spaceToLeaveOnTheRight = 48; // icon width (32px) + 8px padding on each side (16px)
+		// 	const spaceBetweenProgressBarAndIcon = 6;
+		// 	const isClickTooCloseToIcon =
+		// 		rect.width - clickXPosition < spaceToLeaveOnTheRight &&
+		// 		clickYPosition < spaceBetweenProgressBarAndIcon;
+		// 	if (isClickTooCloseToIcon) {
+		// 		return;
+		// 	}
+
+		// 	const newTime =
+		// 		(clickXPosition / rect.width) * vidRef.current.duration;
+
+		// 	vidRef.current.currentTime = newTime;
+		// 	setCurrentTime(newTime);
+		// }
+	};
+
 	/**
 	 * If the video could not be loaded due to an error, report to
 	 * Sentry and log in the console.
@@ -841,6 +872,86 @@ export const SelfHostedVideo = ({
 				setIsMuted(!isMuted);
 				break;
 		}
+	};
+
+	const handleProgressBarKeyDown = (
+		event: React.MouseEvent<HTMLDivElement>,
+	) => {
+		console.log('Progress bar: KEY DOWN', event.clientX);
+		setIsProgressBarDragging(true);
+
+		const video = vidRef.current;
+		if (!video) return;
+
+		const knobWidth = 14;
+		const halfOfKnobWidth = knobWidth / 2;
+		const progressBarXPadding = 12; // space on either side of the progress bar
+		const totalXPadding = progressBarXPadding * 2;
+
+		const videoXStart = video.getBoundingClientRect().left;
+		const videoXEnd = video.getBoundingClientRect().right;
+		const videoWidth = videoXEnd - videoXStart;
+		const progressBarWidth = videoWidth - totalXPadding;
+
+		const barClickXPosition =
+			event.clientX - videoXStart - progressBarXPadding - halfOfKnobWidth;
+
+		// If the click position is to the left/right of the progress bar, clamp it to the start/end of the bar respectively
+		const clampedBarClickXPosition = Math.max(
+			0,
+			Math.min(barClickXPosition, progressBarWidth),
+		);
+
+		const percentageAcrossVideo =
+			clampedBarClickXPosition / (progressBarWidth - halfOfKnobWidth); // To align the knob perfectly with the click
+		const timeWhereClicked = video.duration * percentageAcrossVideo;
+
+		video.currentTime = timeWhereClicked;
+		setCurrentTime(timeWhereClicked);
+	};
+
+	const handleProgressBarKeyUp = (
+		event: React.MouseEvent<HTMLDivElement>,
+	) => {
+		console.log('Progress bar: KEY UP', event);
+
+		setIsProgressBarDragging(false);
+
+		// play the video
+		// move the current time to where the user clicked
+	};
+
+	const handleProgressBarKeyMove = (
+		event: React.MouseEvent<HTMLDivElement>,
+	) => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		const videoLeft = video.getBoundingClientRect().left;
+		const videoRight = video.getBoundingClientRect().right;
+		const videoTop = video.getBoundingClientRect().top;
+		const videoBottom = video.getBoundingClientRect().bottom;
+
+		console.log('videoLeft', videoLeft);
+		console.log('videoRight', videoRight);
+		console.log('videoTop', videoTop);
+		console.log('videoBottom', videoBottom);
+
+		const cursorX = event.clientX;
+		const cursorY = event.clientY;
+
+		const isCursorWithinVideoBounds =
+			cursorX >= videoLeft &&
+			cursorX <= videoRight &&
+			cursorY >= videoTop &&
+			cursorY <= videoBottom;
+
+		console.log('cursorX', cursorX);
+		console.log('cursorY', cursorY);
+		console.log('isCursorWithinVideoBounds', isCursorWithinVideoBounds);
+
+		// console.log('Progress bar: MOUSE MOVE', event);
+		// Set current time to where the mouse is, but don't play the video
 	};
 
 	/**
@@ -955,6 +1066,10 @@ export const SelfHostedVideo = ({
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
 						updateCurrentTime={updateCurrentTime}
+						handleProgressBarClick={handleProgressBarClick}
+						handleProgressBarKeyDown={handleProgressBarKeyDown}
+						handleProgressBarKeyUp={handleProgressBarKeyUp}
+						handleProgressBarKeyMove={handleProgressBarKeyMove}
 						onError={onError}
 						AudioIcon={hasAudio ? AudioIcon : null}
 						preloadPartialData={!!shouldAutoplay}

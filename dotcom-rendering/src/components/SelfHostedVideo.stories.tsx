@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { breakpoints, textSans17Object } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, userEvent, within } from 'storybook/test';
@@ -284,3 +285,104 @@ export const FullscreenOpen: Story = {
 		await expect(requestFullscreenSpy).toHaveBeenCalled();
 	},
 } satisfies Story;
+
+export const TestingInputTypeRange: Story = {
+	...Loop,
+	name: 'hello',
+	render: () => (
+		<div
+			css={css`
+				margin: 20px;
+			`}
+		>
+			<input
+				css={css`
+					-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+					width: 100%; /* Specific width is required for Firefox. */
+					background: transparent; /* Otherwise white in Chrome */
+
+					::-webkit-slider-thumb {
+						-webkit-appearance: none;
+					}
+
+					:focus {
+						outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+					}
+
+					::-ms-track {
+						width: 100%;
+						cursor: pointer;
+
+						/* Hides the slider so custom styles can be added */
+						background: transparent;
+						border-color: transparent;
+						color: transparent;
+					}
+
+					::-webkit-slider-thumb {
+						-webkit-appearance: none;
+						height: 14px;
+						width: 14px;
+						border-radius: 50%;
+						border: 1px solid black;
+						cursor: pointer;
+						margin-top: -5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+						background-color: red;
+					}
+
+					::-moz-range-thumb {
+						height: 14px;
+						width: 14px;
+						border-radius: 50%;
+						border: 1px solid black;
+						cursor: pointer;
+						background-color: red;
+					}
+
+					::-ms-thumb {
+						height: 14px;
+						width: 14px;
+						border-radius: 50%;
+						border: 1px solid black;
+						cursor: pointer;
+						background-color: red;
+					}
+
+					::-webkit-slider-runnable-track {
+						cursor: pointer;
+						width: 100%;
+						height: 5px;
+						background-color: blue;
+						border-radius: 5px;
+					}
+
+					:focus::-webkit-slider-runnable-track {
+						background: green;
+					}
+
+					::-moz-range-track {
+						cursor: pointer;
+						width: 100%;
+						height: 5px;
+						background-color: blue;
+						border-radius: 5px;
+					}
+
+					::-ms-track {
+						width: 100%;
+						height: 8.4px;
+						cursor: pointer;
+						background: transparent;
+						border-color: transparent;
+						border-width: 16px 0;
+						color: transparent;
+					}
+				`}
+				type="range"
+				min={0}
+				max={100}
+				step={0.1}
+			/>
+		</div>
+	),
+};

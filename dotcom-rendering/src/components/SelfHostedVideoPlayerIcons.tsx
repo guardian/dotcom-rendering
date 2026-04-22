@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { SvgArrowExpand } from '@guardian/source/react-components';
+import { SvgArrowExpand, SvgShareWeb } from '@guardian/source/react-components';
 import { palette } from '../palette';
 import type { Props as SelfHostedVideoPlayerProps } from './SelfHostedVideoPlayer';
 
@@ -102,6 +102,37 @@ export const FullscreenIcon = ({
 			data-testid="fullscreen-icon"
 		>
 			<SvgArrowExpand
+				size="xsmall"
+				theme={{
+					fill: palette('--video-icon'),
+				}}
+			/>
+		</div>
+	</button>
+);
+
+type ShareIconProps = {
+	atomId: SelfHostedVideoPlayerProps['atomId'];
+	size: 'small' | 'large';
+	handleClick: SelfHostedVideoPlayerProps['handleFullscreenClick'];
+};
+
+export const ShareIcon = ({ atomId, size, handleClick }: ShareIconProps) => (
+	<button
+		type="button"
+		onClick={handleClick}
+		css={buttonStyles}
+		data-link-name={`gu-video-loop-share-${atomId}`}
+	>
+		<div
+			css={[
+				iconContainerStyles,
+				size === 'small' && smallIconContainerStyles,
+				size === 'large' && largeIconContainerStyles,
+			]}
+			data-testid="share-icon"
+		>
+			<SvgShareWeb
 				size="xsmall"
 				theme={{
 					fill: palette('--video-icon'),
