@@ -1,19 +1,12 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette, space } from '@guardian/source/foundations';
-import { Button, SvgEye } from '@guardian/source/react-components';
+import { palette as sourcePalette } from '@guardian/source/foundations';
 import { useCallback, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { buildNewsletterPreviewUrl } from '../lib/newsletterPreviewUrl';
-import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
 import type { NewsletterSignupCardProps } from './NewsletterSignupCard';
 import { NewsletterSignupCard } from './NewsletterSignupCard';
-
-const previewButtonStyles = css`
-	margin-top: ${space[1]}px;
-	margin-bottom: ${space[4]}px;
-`;
 
 type PreviewEventDescription = 'preview-open' | 'preview-close';
 
@@ -50,13 +43,13 @@ const sendPreviewTracking = ({
 	);
 };
 
-type Props = NewsletterSignupCardProps & {
+type Props = Omit<NewsletterSignupCardProps, 'children'> & {
 	identityName: string;
 	category?: string;
 	exampleUrl?: string;
 	renderingTarget: RenderingTarget;
 	theme: string;
-	children?: React.ReactNode;
+	children?: (openPreview: (() => void) | undefined) => React.ReactNode;
 };
 
 const themeColorStyles = (theme: string) => css`
@@ -132,30 +125,7 @@ export const NewsletterSignupCardContainer = ({
 				description={description}
 				illustrationSquare={illustrationSquare}
 			>
-				{hasPreviewUrl && (
-					<Button
-						size="small"
-						priority="tertiary"
-						icon={<SvgEye size="small" />}
-						iconSide="left"
-						onClick={openPreview}
-						cssOverrides={previewButtonStyles}
-						theme={{
-							textTertiary: palette(
-								'--newsletter-preview-button-text',
-							),
-							borderTertiary: palette(
-								'--newsletter-preview-button-border',
-							),
-							backgroundTertiaryHover: palette(
-								'--newsletter-preview-button-hover',
-							),
-						}}
-					>
-						Preview latest
-					</Button>
-				)}
-				{children}
+				{children?.(hasPreviewUrl ? openPreview : undefined)}
 			</NewsletterSignupCard>
 		</div>
 	);

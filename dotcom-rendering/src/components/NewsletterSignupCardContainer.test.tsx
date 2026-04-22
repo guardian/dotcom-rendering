@@ -18,7 +18,13 @@ describe('NewsletterSignupCardContainer', () => {
 				name="Morning Briefing"
 				frequency="Every weekday"
 				description="Start your day with top stories."
-			/>,
+			>
+				{(openPreview) => (
+					<button type="button" onClick={openPreview}>
+						Preview latest
+					</button>
+				)}
+			</NewsletterSignupCardContainer>,
 		);
 
 		fireEvent.click(screen.getByRole('button', { name: 'Preview latest' }));

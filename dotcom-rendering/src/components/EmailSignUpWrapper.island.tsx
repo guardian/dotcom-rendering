@@ -37,7 +37,6 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	hideNewsletterSignupComponentForSubscribers?: boolean;
 	/** Feature flag to show the new NewsletterSignupCard design instead of EmailSignup */
 	showNewNewsletterSignupCard?: boolean;
-	onPreviewClick?: () => void;
 }
 
 /**
@@ -66,7 +65,6 @@ export const EmailSignUpWrapper = ({
 	hidePrivacyMessage,
 	hideNewsletterSignupComponentForSubscribers = false,
 	showNewNewsletterSignupCard = false,
-	onPreviewClick,
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
 	const shouldCheckSubscription =
@@ -97,15 +95,17 @@ export const EmailSignUpWrapper = ({
 					exampleUrl={exampleUrl}
 					renderingTarget={renderingTarget}
 				>
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<NewsletterSignupForm
-							newsletterId={identityName}
-							newsletterName={name}
-							frequency={frequency}
-							hidePrivacyMessage={isSignedIn === true}
-							onPreviewClick={onPreviewClick}
-						/>
-					</Island>
+					{(openPreview) => (
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<NewsletterSignupForm
+								newsletterId={identityName}
+								newsletterName={name}
+								frequency={frequency}
+								hidePrivacyMessage={isSignedIn === true}
+								onPreviewClick={openPreview}
+							/>
+						</Island>
+					)}
 				</NewsletterSignupCardContainer>
 				{isSignedIn === true && (
 					<NewsletterPrivacyMessage textColor="regular" />

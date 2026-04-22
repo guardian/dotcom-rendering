@@ -139,6 +139,18 @@ const browseMoreLinksStyles = css`
 	margin-top: ${space[1]}px;
 `;
 
+const PreviewButton = ({ onClick }: { onClick: () => void }) => (
+	<Button
+		priority="tertiary"
+		icon={<SvgEye />}
+		iconSide="left"
+		onClick={onClick}
+		type="button"
+	>
+		Preview latest
+	</Button>
+);
+
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
 		<span>
@@ -225,15 +237,7 @@ export const NewsletterSignupForm = ({
 				onPreviewClick &&
 				!hideEmailInput && (
 					<div css={previewButtonContainerStyles}>
-						<Button
-							priority="tertiary"
-							icon={<SvgEye />}
-							iconSide="left"
-							onClick={onPreviewClick}
-							type="button"
-						>
-							Preview latest
-						</Button>
+						<PreviewButton onClick={onPreviewClick} />
 					</div>
 				)}
 			<form
@@ -291,15 +295,7 @@ export const NewsletterSignupForm = ({
 				)}
 				<div css={submitButtonContainerStyles}>
 					{hideEmailInput && onPreviewClick && (
-						<Button
-							priority="tertiary"
-							icon={<SvgEye />}
-							iconSide="left"
-							onClick={onPreviewClick}
-							type="button"
-						>
-							Preview latest
-						</Button>
+						<PreviewButton onClick={onPreviewClick} />
 					)}
 					<Button
 						cssOverrides={

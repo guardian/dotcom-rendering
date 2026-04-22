@@ -24,7 +24,6 @@ const defaultArgs = {
 	successDescription: "We'll send you The Recap every week",
 	theme: 'sport',
 	idApiUrl: 'https://idapi.theguardian.com',
-	onPreviewClick: () => alert('Preview latest clicked'),
 } satisfies Story['args'];
 
 // Loading state - shows placeholder while auth status is being determined
