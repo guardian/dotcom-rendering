@@ -7,8 +7,7 @@
 	"scripts": {
 		"dev": "node src/run.ts",
 		"build": "rollup -c rollup.config.js",
-		"test": "node --test --experimental-test-module-mocks --test-reporter spec './**/*.test.ts'",
-		"lint": "eslint ."
+		"test": "node --test --experimental-test-module-mocks --test-reporter spec './**/*.test.ts'"
 	},
 	"dependencies": {
 		"@aws-sdk/client-ses": "3.995.0",

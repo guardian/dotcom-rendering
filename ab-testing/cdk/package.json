@@ -7,8 +7,7 @@
 	"scripts": {
 		"test": "node --test --test-reporter spec ./**/*.test.ts",
 		"test-update": "node --test --test-reporter spec --test-update-snapshots ./**/*.test.ts",
-		"synth": "cdk synth --path-metadata false --version-reporting false",
-		"lint": "eslint ."
+		"synth": "cdk synth --path-metadata false --version-reporting false"
 	},
 	"devDependencies": {
 		"@aws-sdk/client-s3": "3.995.0",
