@@ -1,4 +1,5 @@
 import { isString } from '@guardian/libs';
+import type { TAction } from '@guardian/ophan-tracker-js';
 import type { FormEvent, ReactEventHandler } from 'react';
 import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
@@ -93,7 +94,7 @@ const sendTracking = (
 	eventDescription: EventDescription,
 	renderingTarget: RenderingTarget,
 ): void => {
-	let action: 'CLICK' | 'ANSWER' | 'SUBSCRIBE' | 'CLOSE';
+	let action: TAction = 'CLICK';
 
 	switch (eventDescription) {
 		case 'form-submission':
@@ -110,7 +111,7 @@ const sendTracking = (
 			action = 'CLOSE';
 			break;
 		case 'open-captcha':
-			action = 'EXPAND' as typeof action;
+			action = 'EXPAND';
 			break;
 		case 'click-button':
 		default:

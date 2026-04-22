@@ -140,6 +140,12 @@ const feedbackButtonStyles = css`
 	margin-top: ${space[1]}px;
 `;
 
+const recaptchaContainerStyles = css`
+	.grecaptcha-badge {
+		visibility: hidden;
+	}
+`;
+
 const browseMoreLinksStyles = feedbackButtonStyles;
 
 const PreviewButton = ({
@@ -354,13 +360,15 @@ export const NewsletterSignupForm = ({
 					</div>
 				))}
 			{!!captchaSiteKey && (
-				<ReactGoogleRecaptcha
-					sitekey={captchaSiteKey}
-					ref={recaptchaRef}
-					onChange={handleCaptchaComplete}
-					onError={handleCaptchaLoadError}
-					size="invisible"
-				/>
+				<div css={recaptchaContainerStyles}>
+					<ReactGoogleRecaptcha
+						sitekey={captchaSiteKey}
+						ref={recaptchaRef}
+						onChange={handleCaptchaComplete}
+						onError={handleCaptchaLoadError}
+						size="invisible"
+					/>
+				</div>
 			)}
 		</>
 	);
