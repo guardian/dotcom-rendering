@@ -362,7 +362,7 @@ export const hostedVideo: FEArticle = {
 		contentType: 'Article',
 		isDev: true,
 		isPaidContent: true,
-		ajaxUrl: 'http://localhost:9000',
+		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		keywords: '',
 		revisionNumber: 'a0f26041f01f9df1cc879cd484aff1837f998895',
 		mmaUrl: 'https://manage.theguardian.com',
