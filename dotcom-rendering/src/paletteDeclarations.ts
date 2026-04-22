@@ -7625,6 +7625,18 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[100],
 	},
+	'--newsletter-preview-button-border': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-preview-button-hover': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--newsletter-preview-button-text': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
 	'--numbered-list-heading': {
 		light: numberedListHeadingLight,
 		dark: numberedListHeadingDark,

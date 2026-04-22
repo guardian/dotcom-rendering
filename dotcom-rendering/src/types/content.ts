@@ -1201,9 +1201,11 @@ export type Newsletter = {
 	successDescription: string;
 	theme: string;
 	group: string;
+	category?: string;
 	regionFocus?: string;
 	illustrationCard?: string;
 	illustrationSquare?: string;
+	exampleUrl?: string;
 };
 
 export type NewsletterLayout = {
