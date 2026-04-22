@@ -95,14 +95,10 @@ const previewButtonContainerStyles = css`
 `;
 
 const errorContainerStyles = css`
-	margin-top: ${space[6]}px;
+	margin-top: ${space[2]}px;
 	display: flex;
-	align-items: flex-start;
+	flex-direction: column;
 	gap: ${space[2]}px;
-
-	${until.tablet} {
-		flex-wrap: wrap;
-	}
 `;
 
 const toggleContainerStyles = css`
@@ -133,11 +129,13 @@ const marketingSuccessBoxStyles = css`
 	border-radius: 4px;
 `;
 
-const browseMoreLinksStyles = css`
+const feedbackButtonStyles = css`
 	width: 350px;
 	max-width: 100%;
 	margin-top: ${space[1]}px;
 `;
+
+const browseMoreLinksStyles = feedbackButtonStyles;
 
 const PreviewButton = ({ onClick }: { onClick: () => void }) => (
 	<Button
@@ -325,7 +323,9 @@ export const NewsletterSignupForm = ({
 						frequency={frequency}
 					/>
 				) : (
-					<div css={errorContainerStyles}>
+					<div
+						css={[marketingSuccessBoxStyles, errorContainerStyles]}
+					>
 						<ErrorMessageWithAdvice text="Sign up failed." />
 						<Button
 							size="small"
@@ -333,6 +333,7 @@ export const NewsletterSignupForm = ({
 							icon={<SvgReload />}
 							iconSide="right"
 							onClick={handleReset}
+							cssOverrides={feedbackButtonStyles}
 						>
 							Try again
 						</Button>
