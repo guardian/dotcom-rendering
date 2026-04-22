@@ -1,4 +1,4 @@
-import type { UpdateDictionaryItemRequest } from "./client.ts";
+import type { UpdateDictionaryItemRequest } from './client.ts';
 
 /**
  * Calculate the bulk updates for a dictionary
@@ -38,7 +38,7 @@ export const calculateUpdates = (
 						...ops.deletes,
 						{
 							item_key: group.item_key,
-							op: "delete",
+							op: 'delete',
 						},
 					],
 				};
@@ -52,7 +52,7 @@ export const calculateUpdates = (
 						{
 							item_key: group.item_key,
 							item_value: updatedGroup.item_value,
-							op: "update",
+							op: 'update',
 						},
 					],
 				};
@@ -71,7 +71,7 @@ export const calculateUpdates = (
 		.map(({ item_key, item_value }) => ({
 			item_key,
 			item_value,
-			op: "create",
+			op: 'create',
 		}));
 
 	const bulkUpdates = [
@@ -86,4 +86,4 @@ export const calculateUpdates = (
 export const encodeObject = (obj: Record<string, unknown> | string[]) =>
 	Object.entries(obj)
 		.map(([key, value]) => `${key}=${String(value)}`)
-		.join(",");
+		.join(',');

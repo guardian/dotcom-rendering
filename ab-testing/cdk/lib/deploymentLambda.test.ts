@@ -1,9 +1,9 @@
-import { describe, it } from "node:test";
-import { snapshot } from "node:test";
-import { basename } from "path";
-import { GuRoot } from "@guardian/cdk/lib/constructs/root.js";
-import { Template } from "aws-cdk-lib/assertions";
-import { AbTestingDeploymentLambda } from "./deploymentLambda.ts";
+import { describe, it } from 'node:test';
+import { snapshot } from 'node:test';
+import { basename } from 'path';
+import { GuRoot } from '@guardian/cdk/lib/constructs/root.js';
+import { Template } from 'aws-cdk-lib/assertions';
+import { AbTestingDeploymentLambda } from './deploymentLambda.ts';
 
 snapshot.setResolveSnapshotPath(
 	() =>
@@ -12,17 +12,17 @@ snapshot.setResolveSnapshotPath(
 		)}.snap`,
 );
 
-void describe("The AB testing deployment lambda stack", () => {
-	void it("matches the CODE snapshot", ({ assert }) => {
+void describe('The AB testing deployment lambda stack', () => {
+	void it('matches the CODE snapshot', ({ assert }) => {
 		const app = new GuRoot();
 		const stack = new AbTestingDeploymentLambda(
 			app,
-			"AbTestingDeploymentLambda",
+			'AbTestingDeploymentLambda',
 			{
-				stack: "frontend",
-				stage: "CODE",
+				stack: 'frontend',
+				stage: 'CODE',
 				env: {
-					region: "eu-west-1",
+					region: 'eu-west-1',
 				},
 			},
 		);
@@ -30,16 +30,16 @@ void describe("The AB testing deployment lambda stack", () => {
 		assert.snapshot(template.toJSON());
 	});
 
-	void it("matches the PROD snapshot", ({ assert }) => {
+	void it('matches the PROD snapshot', ({ assert }) => {
 		const app = new GuRoot();
 		const stack = new AbTestingDeploymentLambda(
 			app,
-			"AbTestingDeploymentLambda",
+			'AbTestingDeploymentLambda',
 			{
-				stack: "frontend",
-				stage: "PROD",
+				stack: 'frontend',
+				stage: 'PROD',
 				env: {
-					region: "eu-west-1",
+					region: 'eu-west-1',
 				},
 			},
 		);

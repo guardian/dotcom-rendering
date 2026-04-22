@@ -1,58 +1,58 @@
-import "source-map-support/register.js";
-import { App } from "aws-cdk-lib";
-import { AbTestingConfig } from "../lib/abTestingConfig.ts";
-import { AbTestingDeploymentLambda } from "../lib/deploymentLambda.ts";
-import { AbTestingNotificationLambda } from "../lib/notificationLambda.ts";
-import { riffRaffYamlFile } from "../lib/riffRaffYamlFile.ts";
+import 'source-map-support/register.js';
+import { App } from 'aws-cdk-lib';
+import { AbTestingConfig } from '../lib/abTestingConfig.ts';
+import { AbTestingDeploymentLambda } from '../lib/deploymentLambda.ts';
+import { AbTestingNotificationLambda } from '../lib/notificationLambda.ts';
+import { riffRaffYamlFile } from '../lib/riffRaffYamlFile.ts';
 
 const app = new App();
 
-const region = "eu-west-1";
-const stack = "frontend";
+const region = 'eu-west-1';
+const stack = 'frontend';
 
-new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambdaCode", {
+new AbTestingDeploymentLambda(app, 'AbTestingDeploymentLambdaCode', {
 	stack,
-	stage: "CODE",
+	stage: 'CODE',
 	env: {
 		region,
 	},
 });
 
-new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambdaProd", {
+new AbTestingDeploymentLambda(app, 'AbTestingDeploymentLambdaProd', {
 	stack,
-	stage: "PROD",
+	stage: 'PROD',
 	env: {
 		region,
 	},
 });
 
-new AbTestingConfig(app, "AbTestingConfigCode", {
+new AbTestingConfig(app, 'AbTestingConfigCode', {
 	stack,
-	stage: "CODE",
+	stage: 'CODE',
 	env: {
 		region,
 	},
 });
 
-new AbTestingConfig(app, "AbTestingConfigProd", {
+new AbTestingConfig(app, 'AbTestingConfigProd', {
 	stack,
-	stage: "PROD",
+	stage: 'PROD',
 	env: {
 		region,
 	},
 });
 
-new AbTestingNotificationLambda(app, "AbTestingNotificationLambdaCode", {
+new AbTestingNotificationLambda(app, 'AbTestingNotificationLambdaCode', {
 	stack,
-	stage: "CODE",
+	stage: 'CODE',
 	env: {
 		region,
 	},
 });
 
-new AbTestingNotificationLambda(app, "AbTestingNotificationLambdaProd", {
+new AbTestingNotificationLambda(app, 'AbTestingNotificationLambdaProd', {
 	stack,
-	stage: "PROD",
+	stage: 'PROD',
 	env: {
 		region,
 	},

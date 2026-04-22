@@ -1,7 +1,7 @@
-import { GetParameterCommand, SSMClient } from "@aws-sdk/client-ssm";
-import { configStruct } from "@guardian/ab-testing-config/lib/config.ts";
-import { assert } from "superstruct";
-import { REGION } from "./constants.ts";
+import { GetParameterCommand, SSMClient } from '@aws-sdk/client-ssm';
+import { configStruct } from '@guardian/ab-testing-config/lib/config.ts';
+import { assert } from 'superstruct';
+import { REGION } from './constants.ts';
 
 const getSecureString = async (name: string) => {
 	const ssmClient = new SSMClient({ region: REGION });
@@ -21,7 +21,7 @@ export const getFastlyApiToken = async () => {
 	);
 
 	if (!apiToken) {
-		throw new Error("Fastly API token not found in SSM Parameter Store");
+		throw new Error('Fastly API token not found in SSM Parameter Store');
 	}
 
 	return apiToken;
@@ -32,7 +32,7 @@ export const getFastlyConfig = async () => {
 		`/ab-testing/${process.env.STAGE}/fastly-config`,
 	);
 	// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- empty string is invalid JSON too
-	const json = JSON.parse(stringParam || "{}") as unknown;
+	const json = JSON.parse(stringParam || '{}') as unknown;
 
 	assert(json, configStruct);
 

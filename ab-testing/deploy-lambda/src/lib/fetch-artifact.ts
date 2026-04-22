@@ -1,7 +1,7 @@
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import type { Infer } from "superstruct";
-import { array, create, object, string } from "superstruct";
-import { REGION } from "./constants.ts";
+import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import type { Infer } from 'superstruct';
+import { array, create, object, string } from 'superstruct';
+import { REGION } from './constants.ts';
 
 const fastlyKVStruct = object({
 	item_key: string(),
@@ -31,7 +31,7 @@ const fetchDictionaryArtifact = async (
 		const response = await s3Client.send(getObjectCommand);
 
 		if (!response.Body) {
-			throw new Error("No body found in S3 object response");
+			throw new Error('No body found in S3 object response');
 		}
 
 		const bodyString = await response.Body.transformToString();
@@ -44,7 +44,7 @@ const fetchDictionaryArtifact = async (
 		console.error(
 			`Failed to fetch artifact from Bucket: ${Bucket}, Key: ${Key}`,
 		);
-		console.error("Error fetching or parsing artifact:", error);
+		console.error('Error fetching or parsing artifact:', error);
 		throw error;
 	}
 };

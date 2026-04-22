@@ -1,5 +1,5 @@
-import type { UpdateDictionaryItemRequest } from "./client.ts";
-import type { FastlyService } from "./service.ts";
+import type { UpdateDictionaryItemRequest } from './client.ts';
+import type { FastlyService } from './service.ts';
 
 export class FastlyDictionary {
 	id: string;

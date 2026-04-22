@@ -1,5 +1,5 @@
-import { MVT_COUNT } from "../../lib/constants.ts";
-import type { AudienceSpace } from "../../lib/types.ts";
+import { MVT_COUNT } from '../../lib/constants.ts';
+import type { AudienceSpace } from '../../lib/types.ts';
 
 /**
  * A class to manage MVTs for test groups in a test space.
@@ -29,7 +29,7 @@ class TestGroupMVTManager {
 					.entries()
 					.reduce<Record<string, number[]>>(
 						(acc, [key, { name }]) => {
-							const mvt = parseInt(key.split(":")[1] ?? "", 10);
+							const mvt = parseInt(key.split(':')[1] ?? '', 10);
 							// Skip invalid MVT values (NaN)
 							if (!Number.isNaN(mvt)) {
 								if (!acc[name]) {

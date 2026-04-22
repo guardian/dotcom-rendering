@@ -1,9 +1,9 @@
-import type { ABTest } from "@guardian/ab-testing-config";
+import type { ABTest } from '@guardian/ab-testing-config';
 import {
 	type ABExpiryChecks,
 	checkExpiry,
 	expiresWithinDays,
-} from "./checkExpiry.ts";
+} from './checkExpiry.ts';
 
 /**
  * Returns an object containing AB test owners and a grouped version of

@@ -1,7 +1,7 @@
-import { getEnv } from "@guardian/ab-testing-config/lib/config.ts";
-import type { FastlyDictionary } from "@guardian/ab-testing-config/lib/fastly/dictionary.ts";
-import { deployDictionary } from "./deploy-dictionary.ts";
-import { fetchDictionaryArtifact } from "./fetch-artifact.ts";
+import { getEnv } from '@guardian/ab-testing-config/lib/config.ts';
+import type { FastlyDictionary } from '@guardian/ab-testing-config/lib/fastly/dictionary.ts';
+import { deployDictionary } from './deploy-dictionary.ts';
+import { fetchDictionaryArtifact } from './fetch-artifact.ts';
 
 type ArtifactInfo = {
 	artifact: string;
@@ -14,8 +14,8 @@ type ArtifactInfo = {
  * @param deployments An array of artifact deployment information.
  */
 export const fetchAndDeployArtifacts = async (deployments: ArtifactInfo[]) => {
-	const ARTIFACT_BUCKET_NAME = getEnv("ARTIFACT_BUCKET_NAME");
-	const STAGE = getEnv("STAGE");
+	const ARTIFACT_BUCKET_NAME = getEnv('ARTIFACT_BUCKET_NAME');
+	const STAGE = getEnv('STAGE');
 	const CONFIG_PREFIX = `${STAGE}/config/ab-testing`;
 
 	try {
@@ -47,7 +47,7 @@ export const fetchAndDeployArtifacts = async (deployments: ArtifactInfo[]) => {
 			}
 		}
 	} catch (error) {
-		console.error("Error in fetchAndDeployArtifacts:", error);
+		console.error('Error in fetchAndDeployArtifacts:', error);
 		throw error;
 	}
 };
