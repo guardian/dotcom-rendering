@@ -1,3 +1,5 @@
+// DEV NOTE: this component takes a `caption` attribute - the text of the caption should be settled upstream so we don't need to do any additional work here.
+
 import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
