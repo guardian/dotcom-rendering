@@ -12,7 +12,7 @@ snapshot.setResolveSnapshotPath(
 		)}.snap`,
 );
 
-void describe('The ID5 Baton Lambda stack', () => {
+void describe('The AB testing config stack', () => {
 	void it('matches the CODE snapshot', ({ assert }) => {
 		const app = new GuRoot();
 		const stack = new AbTestingConfig(app, 'AbTestingConfig', {

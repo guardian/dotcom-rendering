@@ -1,4 +1,4 @@
-exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
+exports[`The AB testing config stack > matches the CODE snapshot 1`] = `
 {
   "Metadata": {
     "gu:cdk:constructs": [],
@@ -42,7 +42,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
 }
 `;
 
-exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
+exports[`The AB testing config stack > matches the PROD snapshot 1`] = `
 {
   "Metadata": {
     "gu:cdk:constructs": [],
