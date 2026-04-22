@@ -5,6 +5,7 @@ import { AudioAtom } from './AudioAtom/AudioAtom';
 type Props = {
 	id: string;
 	trackUrl: string;
+	trackUrlWithAds: string;
 	kicker: string;
 	title?: string | undefined;
 	duration: number;
@@ -26,6 +27,7 @@ type Props = {
 export const AudioAtomWrapper = ({
 	id,
 	trackUrl,
+	trackUrlWithAds,
 	kicker,
 	title,
 	duration,
@@ -58,6 +60,7 @@ export const AudioAtomWrapper = ({
 		<AudioAtom
 			id={id}
 			trackUrl={trackUrl}
+			trackUrlWithAds={trackUrlWithAds}
 			kicker={kicker}
 			title={title}
 			duration={duration}

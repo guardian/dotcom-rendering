@@ -185,10 +185,12 @@ const PlaySVG = () => (
 	</svg>
 );
 
-const buildUrl = (basicUrl: string, shouldUseAcast?: boolean) => {
-	return shouldUseAcast
-		? basicUrl.replace('https://', 'https://flex.acast.com/')
-		: basicUrl;
+const buildUrl = (
+	basicUrl: string,
+	urlWithAds: string,
+	shouldUseAcast?: boolean,
+) => {
+	return shouldUseAcast ? urlWithAds : basicUrl;
 };
 
 type Props = {
@@ -197,12 +199,14 @@ type Props = {
 	kicker: string;
 	title?: string;
 	shouldUseAcast?: boolean;
+	trackUrlWithAds: string;
 	duration: number;
 };
 
 export const AudioAtom = ({
 	id,
 	trackUrl,
+	trackUrlWithAds,
 	kicker,
 	title,
 	shouldUseAcast,
@@ -216,7 +220,7 @@ export const AudioAtom = ({
 	const [percentPlayed, setPercentPlayed] = useState<number>(0);
 	// url
 	const [urlToUse, setUrlToUse] = useState<string>(
-		buildUrl(trackUrl, shouldUseAcast),
+		buildUrl(trackUrl, trackUrlWithAds, shouldUseAcast),
 	);
 
 	useEffect(() => {
@@ -303,8 +307,8 @@ export const AudioAtom = ({
 
 	// If Acast is enabled, replace the default url with an ad enabled one
 	useEffect(() => {
-		setUrlToUse(buildUrl(trackUrl, shouldUseAcast));
-	}, [shouldUseAcast, trackUrl]);
+		setUrlToUse(buildUrl(trackUrl, trackUrlWithAds, shouldUseAcast));
+	}, [shouldUseAcast, trackUrl, trackUrlWithAds]);
 
 	const playAudio = () => {
 		setIsPlaying(true);

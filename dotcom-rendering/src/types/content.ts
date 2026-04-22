@@ -40,6 +40,7 @@ export interface AudioAtomBlockElement {
 	kicker: string;
 	title?: string;
 	trackUrl: string;
+	trackUrlWithAds: string;
 	duration: number;
 	coverUrl: string;
 	role?: RoleType;
@@ -1004,6 +1005,7 @@ export interface VideoAssets {
 
 interface AudioAsset {
 	url: string;
+	urlWithAds: string;
 	mimeType?: string;
 	fields?: {
 		durationMinutes?: string;

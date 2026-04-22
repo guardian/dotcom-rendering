@@ -6,6 +6,7 @@ type Props = {
 	mediaId: string;
 	duration?: number;
 	src: string;
+	srcWithAds: string;
 	contentIsNotSensitive: boolean;
 	isAcastEnabled: boolean;
 };
@@ -23,6 +24,7 @@ type Props = {
 export const AudioPlayerWrapper = ({
 	duration,
 	src,
+	srcWithAds,
 	mediaId,
 	contentIsNotSensitive,
 	isAcastEnabled,
@@ -41,13 +43,11 @@ export const AudioPlayerWrapper = ({
 				const consentForAcast = getConsentFor('acast', consentState);
 
 				if (consentForAcast) {
-					setFinalSrc(
-						src.replace('https://', 'https://flex.acast.com/'),
-					);
+					setFinalSrc(srcWithAds);
 				}
 			});
 		}
-	}, [src, contentIsNotSensitive, isAcastEnabled]);
+	}, [src, srcWithAds, contentIsNotSensitive, isAcastEnabled]);
 
 	return <AudioPlayer src={finalSrc} mediaId={mediaId} duration={duration} />;
 };
