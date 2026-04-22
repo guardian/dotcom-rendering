@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ab-testing/frontend
+        working-directory: ab-testing/ui
     permissions:
       contents: read
     steps:
@@ -67,7 +67,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: ui-build
-          path: ab-testing/frontend/output/ab-tests.html
+          path: ab-testing/ui/output/ab-tests.html
           if-no-files-found: error
 
   deploy-lambda-ci:
@@ -160,7 +160,7 @@ jobs:
         uses: actions/download-artifact@v7.0.0
         with:
           name: ui-build
-          path: ab-testing/frontend/output/ab-tests.html
+          path: ab-testing/ui/output/ab-tests.html
 
       - name: Fetch Deploy Lambda build
         uses: actions/download-artifact@v7.0.0
@@ -195,6 +195,6 @@ jobs:
             ab-testing-notification-lambda:
               - ab-testing/notification-lambda/dist/lambda.zip
             ab-testing-ui-artifact:
-              - ab-testing/frontend/output/ab-tests.html
+              - ab-testing/ui/output/ab-tests.html
             cdk.out:
               - ab-testing/cdk/cdk.out
