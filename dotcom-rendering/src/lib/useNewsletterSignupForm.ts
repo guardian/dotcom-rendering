@@ -28,6 +28,7 @@ const buildFormData = (
 	formData.append('ref', pageRef);
 	formData.append('refViewId', refViewId);
 	formData.append('name', '');
+	formData.append('g-recaptcha-response', '');
 
 	if (marketingOptIn !== undefined) {
 		formData.append('marketing', marketingOptIn ? 'true' : 'false');
