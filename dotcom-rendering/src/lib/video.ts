@@ -161,3 +161,12 @@ export const convertProgressPercentageToCurrentTime = (
 
 	return (clampedPercentage / 100) * duration;
 };
+
+export const formatTimeForDisplay = (timeInSeconds: number) => {
+	const clampedTimeInSeconds = Math.max(0, timeInSeconds);
+
+	const minutes = Math.floor(clampedTimeInSeconds / 60);
+	const seconds = Math.floor(clampedTimeInSeconds % 60);
+
+	return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+};

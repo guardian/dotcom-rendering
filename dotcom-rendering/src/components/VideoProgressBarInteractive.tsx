@@ -8,6 +8,7 @@ import { getZIndex } from '../lib/getZIndex';
 import {
 	convertCurrentTimeToProgressPercentage,
 	convertProgressPercentageToCurrentTime,
+	formatTimeForDisplay,
 } from '../lib/video';
 import { palette } from '../palette';
 
@@ -184,26 +185,9 @@ const timeStyles = css`
 	margin-left: 1px; /* To make it _feel_ more aligned with the progress bar, which has a border radius. */
 `;
 
-const formatTime = (timeInSeconds: number) => {
-	const clampedTimeInSeconds = Math.max(0, timeInSeconds);
-
-	const minutes = Math.floor(clampedTimeInSeconds / 60);
-	const seconds = Math.floor(clampedTimeInSeconds % 60);
-
-	if (isNaN(minutes) || isNaN(seconds)) {
-		return null;
-	}
-
-	return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-};
-
 const Time = ({ current, duration }: { current: number; duration: number }) => {
-	const right = formatTime(duration);
-	const left = formatTime(Math.min(current, duration));
-
-	if (right === null || left === null) {
-		return null;
-	}
+	const right = formatTimeForDisplay(duration);
+	const left = formatTimeForDisplay(Math.min(current, duration));
 
 	return (
 		<time css={timeStyles}>

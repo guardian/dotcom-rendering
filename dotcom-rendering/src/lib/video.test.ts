@@ -6,6 +6,7 @@ import {
 	convertProgressPercentageToCurrentTime,
 	extractValidSourcesFromAssets,
 	findOptimisedSourcePerMimeType,
+	formatTimeForDisplay,
 	getAspectRatioFromSources,
 } from './video';
 import type { Source } from './video';
@@ -293,6 +294,8 @@ describe('video', () => {
 			{ progressPercentage: 75, duration: 32, expectedCurrentTime: 24 },
 			{ progressPercentage: 100, duration: 56, expectedCurrentTime: 56 },
 			{ progressPercentage: 103, duration: 11, expectedCurrentTime: 11 },
+			{ progressPercentage: 10, duration: 0, expectedCurrentTime: null },
+			{ progressPercentage: 8, duration: -10, expectedCurrentTime: null },
 			{
 				progressPercentage: -0.1244235,
 				duration: 10,
@@ -307,6 +310,26 @@ describe('video', () => {
 						duration,
 					),
 				).toEqual(expectedCurrentTime);
+			},
+		);
+	});
+
+	describe('formatTimeForDisplay', () => {
+		it.each([
+			{ timeInSeconds: -10, expectedFormattedTime: '0:00' },
+			{ timeInSeconds: 0, expectedFormattedTime: '0:00' },
+			{ timeInSeconds: 59, expectedFormattedTime: '0:59' },
+			{ timeInSeconds: 60, expectedFormattedTime: '1:00' },
+			{ timeInSeconds: 61, expectedFormattedTime: '1:01' },
+			{ timeInSeconds: 92.5, expectedFormattedTime: '1:32' },
+			{ timeInSeconds: 1000, expectedFormattedTime: '16:40' },
+			{ timeInSeconds: 10000, expectedFormattedTime: '166:40' },
+		])(
+			'should return the correct formatted time based on the time in seconds',
+			({ timeInSeconds, expectedFormattedTime }) => {
+				expect(formatTimeForDisplay(timeInSeconds)).toEqual(
+					expectedFormattedTime,
+				);
 			},
 		);
 	});
