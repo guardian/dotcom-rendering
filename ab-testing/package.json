@@ -1,0 +1,15 @@
+{
+	"name": "@guardian/ab-testing",
+	"description": "AB testing framework for theguardian.com",
+	"private": true,
+	"version": "0.0.1",
+	"scripts": {
+		"lint": "eslint ."
+	},
+	"devDependencies": {
+		"@guardian/eslint-config": "12.0.1",
+		"@guardian/tsconfig": "1.0.1",
+		"eslint": "9.39.1",
+		"typescript": "5.9.3"
+	}
+}

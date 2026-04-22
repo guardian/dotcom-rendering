@@ -32,9 +32,6 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-      - name: Prettier Check
-        run: pnpm prettier:check
-
       - name: Typecheck
         run: pnpm tsc
 
