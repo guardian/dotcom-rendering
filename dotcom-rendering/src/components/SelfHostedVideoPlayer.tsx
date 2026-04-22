@@ -17,6 +17,7 @@ import {
 	AudioIcon as AudioIconComponent,
 	FullscreenIcon,
 } from './SelfHostedVideoPlayerIcons';
+import type { SubtitlesPosition } from './SubtitleOverlay';
 import { SubtitleOverlay } from './SubtitleOverlay';
 import { VideoProgressBar } from './VideoProgressBar';
 import { VideoProgressBarInteractive } from './VideoProgressBarInteractive';
@@ -140,6 +141,7 @@ export type Props = {
 	shouldLoop: boolean;
 	isInteractive: boolean;
 	controlsPosition: ControlsPosition;
+	subtitlesPosition: SubtitlesPosition;
 };
 
 /**
@@ -192,6 +194,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			shouldLoop,
 			isInteractive,
 			controlsPosition,
+			subtitlesPosition,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -264,11 +267,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					<SubtitleOverlay
 						text={activeCue.text}
 						size={subtitleSize}
-						position={
-							useLongFormProgressBar
-								? 'raised-bottom'
-								: controlsPosition
-						}
+						position={subtitlesPosition}
 					/>
 				)}
 				{showPlayIcon && (

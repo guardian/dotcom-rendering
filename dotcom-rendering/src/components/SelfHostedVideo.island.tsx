@@ -36,6 +36,7 @@ import type {
 	SubtitleSize,
 } from './SelfHostedVideoPlayer';
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
+import type { SubtitlesPosition } from './SubtitleOverlay';
 import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
@@ -383,6 +384,13 @@ export const SelfHostedVideo = ({
 	const showIcons = !isCinemagraph && playerState !== 'NOT_STARTED';
 
 	const iconSize = isDefault ? 'large' : 'small';
+
+	const useLongFormProgressBar = isDefault;
+
+	const subtitlesPosition: SubtitlesPosition =
+		useLongFormProgressBar && controlsPosition === 'bottom'
+			? 'bottom-elevated'
+			: controlsPosition;
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
 
@@ -943,7 +951,7 @@ export const SelfHostedVideo = ({
 						handleAudioClick={handleAudioClick}
 						handleTimeUpdate={handleTimeUpdate}
 						handleKeyDown={handleKeyDown}
-						useLongFormProgressBar={isDefault}
+						useLongFormProgressBar={useLongFormProgressBar}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
 						updateCurrentTime={updateCurrentTime}
@@ -958,6 +966,7 @@ export const SelfHostedVideo = ({
 						subtitleSize={subtitleSize}
 						showIcons={showIcons}
 						controlsPosition={controlsPosition}
+						subtitlesPosition={subtitlesPosition}
 						activeCue={activeCue}
 						shouldLoop={shouldLoop}
 						showFullscreenIcon={isDefault}

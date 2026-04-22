@@ -14,7 +14,7 @@ export type SubtitlesPosition =
 	/**
 	 * Subtitles are anchored to the bottom, but leave enough room for a tall progress bar
 	 */
-	| 'raised-bottom';
+	| 'bottom-elevated';
 
 const subtitleOverlayStyles = css`
 	width: 100%;
@@ -27,7 +27,7 @@ const subtitleOverlayStyles = css`
 const subtitlePositionStyles = (position: SubtitlesPosition) => css`
 	${position === 'top' && `top: ${space[4]}px;`};
 	${position === 'bottom' && `bottom: ${space[4]}px;`};
-	${position === 'raised-bottom' && `bottom: ${space[12]}px;`};
+	${position === 'bottom-elevated' && `bottom: ${space[12]}px;`};
 `;
 
 const cueBoxStyles = css`

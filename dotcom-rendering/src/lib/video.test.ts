@@ -316,7 +316,7 @@ describe('video', () => {
 
 	describe('formatTimeForDisplay', () => {
 		it.each([
-			{ timeInSeconds: -10, expectedFormattedTime: '0:00' },
+			{ timeInSeconds: -1.24, expectedFormattedTime: '0:00' },
 			{ timeInSeconds: 0, expectedFormattedTime: '0:00' },
 			{ timeInSeconds: 59, expectedFormattedTime: '0:59' },
 			{ timeInSeconds: 60, expectedFormattedTime: '1:00' },
