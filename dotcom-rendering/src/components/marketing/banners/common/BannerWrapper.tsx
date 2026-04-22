@@ -3,6 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/common/BannerWrapper.tsx
  */
+import { getCookie } from '@guardian/libs';
 import {
 	bannerSchema,
 	containsNonArticleCountPlaceholder,
@@ -11,6 +12,7 @@ import {
 	SecondaryCtaType,
 } from '@guardian/support-dotcom-components';
 import type {
+	AuxiaTracking,
 	BannerContent,
 	BannerProps,
 	Cta,
@@ -68,6 +70,38 @@ export const getParagraphsOrMessageText = (
 	return bodyCopy;
 };
 
+type AuxiaInteractionType = 'VIEWED' | 'CLICKED' | 'SNOOZED' | 'DISMISSED';
+
+const sendAuxiaInteractionEvent = (
+	contributionsServiceUrl: string,
+	auxiaTracking: AuxiaTracking,
+	interactionType: AuxiaInteractionType,
+) => {
+	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
+	if (browserId) {
+		const params = {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				browserId,
+				interactionType,
+				treatmentTrackingId: auxiaTracking.treatmentTrackingId,
+				treatmentId: auxiaTracking.treatmentId,
+			}),
+		};
+		fetch(`${contributionsServiceUrl}/banner/interaction`, params).catch(
+			(error) => {
+				window.guardian.modules.sentry.reportError(
+					new Error(
+						`Error sending banner interaction: ${String(error)}`,
+					),
+					'rr-banner',
+				);
+			},
+		);
+	}
+};
+
 const withBannerData =
 	(
 		Banner: ReactComponent<BannerRenderProps>,
@@ -94,6 +128,7 @@ const withBannerData =
 			abandonedBasket,
 			promoCodes,
 			isCollapsible,
+			contributionsServiceUrl,
 		} = bannerProps;
 
 		const [hasBeenSeen, setNode] = useIsInView({
@@ -109,8 +144,21 @@ const withBannerData =
 						tracking.campaignCode,
 					),
 				);
+
+				if (tracking.auxia && contributionsServiceUrl) {
+					sendAuxiaInteractionEvent(
+						contributionsServiceUrl,
+						tracking.auxia,
+						'VIEWED',
+					);
+				}
 			}
-		}, [hasBeenSeen, submitComponentEvent, tracking]);
+		}, [
+			hasBeenSeen,
+			submitComponentEvent,
+			tracking,
+			contributionsServiceUrl,
+		]);
 
 		useEffect(() => {
 			if (hasBeenSeen) {
@@ -267,7 +315,11 @@ const withBannerData =
 			};
 		};
 
-		const clickHandlerFor = (componentId: string, close: boolean) => {
+		const clickHandlerFor = (
+			componentId: string,
+			close: boolean,
+			auxiaInteractionType?: AuxiaInteractionType,
+		) => {
 			return (): void => {
 				const componentClickEvent = createClickEventFromTracking(
 					tracking,
@@ -276,13 +328,24 @@ const withBannerData =
 				if (submitComponentEvent) {
 					void submitComponentEvent(componentClickEvent);
 				}
+				if (
+					auxiaInteractionType &&
+					tracking.auxia &&
+					contributionsServiceUrl
+				) {
+					sendAuxiaInteractionEvent(
+						contributionsServiceUrl,
+						tracking.auxia,
+						auxiaInteractionType,
+					);
+				}
 				if (close) {
 					onClose();
 				}
 			};
 		};
 
-		const onCtaClick = clickHandlerFor(componentIds.cta, true);
+		const onCtaClick = clickHandlerFor(componentIds.cta, true, 'CLICKED');
 		const onSecondaryCtaClick = clickHandlerFor(
 			componentIds.secondaryCta,
 			true,
@@ -299,10 +362,18 @@ const withBannerData =
 			componentIds.reminderClose,
 			false,
 		);
-		const onCloseClick = clickHandlerFor(componentIds.close, true);
+		const onCloseClick = clickHandlerFor(
+			componentIds.close,
+			true,
+			'DISMISSED',
+		);
 		const onNotNowClick = clickHandlerFor(componentIds.notNow, true);
 		const onSignInClick = clickHandlerFor(componentIds.signIn, false);
-		const onCollapseClick = clickHandlerFor(componentIds.collapse, false);
+		const onCollapseClick = clickHandlerFor(
+			componentIds.collapse,
+			false,
+			'SNOOZED',
+		);
 		const onExpandClick = clickHandlerFor(componentIds.expand, false);
 
 		try {
