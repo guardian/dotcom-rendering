@@ -16,7 +16,7 @@ export type Area =
 type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'leftCol';
 
 // Rows config
-const tabletVanillaRows: Rows = [
+const tabletStandardRows: Rows = [
 	['title'],
 	['headline'],
 	['standfirst'],
@@ -25,7 +25,7 @@ const tabletVanillaRows: Rows = [
 	['body'],
 ];
 
-const desktopVanillaRows: Rows = [
+const desktopStandardRows: Rows = [
 	['title', 'right-column'],
 	['headline', 'right-column'],
 	['standfirst', 'right-column'],
@@ -43,10 +43,10 @@ const mediaRowsUntilDesktop: Rows = [
 	['body'],
 ];
 
-const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
+const furnitureRowArrangements: Record<LayoutType, ArrangementDefinition> = {
 	standard: {
-		tablet: tabletVanillaRows,
-		desktop: desktopVanillaRows,
+		tablet: tabletStandardRows,
+		desktop: desktopStandardRows,
 		leftCol: [
 			['title', 'headline', 'right-column'],
 			['standfirst', 'right-column'],
@@ -75,13 +75,13 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 };
 
 // Columns config
-const furnitureColumnDefaults: ColumnLayoutMap = {
+const furnitureColumnDefaults: ColumnArrangementMap = {
 	title: { leftCol: 'left' },
 	meta: { leftCol: 'left' },
 	['right-column']: { desktop: 'right' },
 };
 
-const furnitureColumnLayouts: Record<LayoutType, ColumnLayoutMap> = {
+const furnitureColumnArrangements: Record<LayoutType, ColumnArrangementMap> = {
 	standard: furnitureColumnDefaults,
 	media: {
 		...furnitureColumnDefaults,
@@ -103,13 +103,13 @@ type RowPlacement = {
 	span?: number;
 };
 
-type CompiledLayout = Partial<
+type CompiledArrangement = Partial<
 	Record<Area, Partial<Record<Breakpoint, RowPlacement>>>
 >;
 
 type Rows = Area[][];
 
-type LayoutDefinition = {
+type ArrangementDefinition = {
 	mobile?: Rows;
 	tablet?: Rows;
 	desktop?: Rows;
@@ -120,19 +120,25 @@ type BreakpointColumns = Partial<
 	Record<Breakpoint, ColumnPreset | [Line | number, Line | number]>
 >;
 
-type ColumnLayoutMap = Partial<Record<Area, BreakpointColumns>>;
+type ColumnArrangementMap = Partial<Record<Area, BreakpointColumns>>;
 
 // Guardian Grid CSS generation
-const buildRowMap = (layout: LayoutDefinition): CompiledLayout => {
-	const map: CompiledLayout = {};
+const buildRowMap = (
+	arrangement: ArrangementDefinition,
+): CompiledArrangement => {
+	const map: CompiledArrangement = {};
 
-	const apply = (rows: Rows | undefined, breakpoint: Breakpoint) => {
+	const collectRowsForBreakpoint = (
+		rows: Rows | undefined,
+		breakpoint: Breakpoint,
+	) => {
 		if (!rows) return;
 
 		const areaRows: Record<string, number[]> = {};
 
 		for (const [index, areas] of rows.entries()) {
-			const row = index + 1;
+			const cssGridOffset = 1; // CSS grid is 1-indexed
+			const row = index + cssGridOffset;
 
 			for (const area of areas) {
 				areaRows[area] ??= [];
@@ -154,20 +160,20 @@ const buildRowMap = (layout: LayoutDefinition): CompiledLayout => {
 		}
 	};
 
-	apply(layout.mobile, 'mobile');
-	apply(layout.tablet, 'tablet');
-	apply(layout.desktop, 'desktop');
-	apply(layout.leftCol, 'leftCol');
+	collectRowsForBreakpoint(arrangement.mobile, 'mobile');
+	collectRowsForBreakpoint(arrangement.tablet, 'tablet');
+	collectRowsForBreakpoint(arrangement.desktop, 'desktop');
+	collectRowsForBreakpoint(arrangement.leftCol, 'leftCol');
 
 	return map;
 };
 
 const rowMaps = Object.fromEntries(
-	Object.entries(furnitureRowLayouts).map(([name, layout]) => [
+	Object.entries(furnitureRowArrangements).map(([name, arrangement]) => [
 		name,
-		buildRowMap(layout),
+		buildRowMap(arrangement),
 	]),
-) as Record<LayoutType, CompiledLayout>;
+) as Record<LayoutType, CompiledArrangement>;
 
 const breakpointQueries = {
 	mobile: until.tablet,
@@ -176,33 +182,28 @@ const breakpointQueries = {
 	desktop: from.desktop,
 } as const;
 
-type ColumnConfig = Partial<Record<Breakpoint, ColumnPreset>>;
-
-export const gridCss = (
+export const gridItemCss = (
 	area: Area,
 	layoutType: LayoutType,
-	columnsOverride?: ColumnConfig,
 ): SerializedStyles => {
-	const defaultColumn = grid.column.centre;
-
 	const rows = rowMaps[layoutType][area] ?? {};
-	const columns = furnitureColumnLayouts[layoutType][area] ?? {};
+	const columns = furnitureColumnArrangements[layoutType][area] ?? {};
 
-	return css([
-		defaultColumn,
-		Object.entries(rows).map(([bp, placement]) => {
-			const rowValue =
-				placement.span != null
-					? `${placement.start} / span ${placement.span}`
-					: placement.start;
+	const defaultColumnCss = grid.column.centre;
+	const rowPlacementCss = Object.entries(rows).map(([bp, placement]) => {
+		const rowValue =
+			placement.span != null
+				? `${placement.start} / span ${placement.span}`
+				: placement.start;
 
-			return css`
-				${breakpointQueries[bp as Breakpoint]} {
-					grid-row: ${rowValue};
-				}
-			`;
-		}),
-		Object.entries(columns).map(([bp, colOrSpan]) => {
+		return css`
+			${breakpointQueries[bp as Breakpoint]} {
+				grid-row: ${rowValue};
+			}
+		`;
+	});
+	const columnPlacementCss = Object.entries(columns).map(
+		([bp, colOrSpan]) => {
 			const colStyle = Array.isArray(colOrSpan)
 				? grid.between(colOrSpan[0], colOrSpan[1])
 				: grid.column[colOrSpan];
@@ -212,14 +213,8 @@ export const gridCss = (
 					${colStyle};
 				}
 			`;
-		}),
-		columnsOverride &&
-			Object.entries(columnsOverride).map(
-				([bp, col]) => css`
-					${from[bp as keyof typeof from]} {
-						${grid.column[col]};
-					}
-				`,
-			),
-	]);
+		},
+	);
+
+	return css([defaultColumnCss, rowPlacementCss, columnPlacementCss]);
 };
