@@ -73,40 +73,12 @@ export const EmailSignUpWrapper = ({
 				id={`EmailSignup-skip-link-${index}`}
 				blockDescription="newsletter promotion"
 			>
-				<NewsletterSignupCardContainer
-					name={emailSignUpProps.name}
-					frequency={emailSignUpProps.frequency}
-					description={emailSignUpProps.description}
-					illustrationSquare={emailSignUpProps.illustrationSquare}
-				>
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<SecureSignup
-							newsletterId={emailSignUpProps.identityName}
-							successDescription={
-								emailSignUpProps.successDescription
-							}
-						/>
-					</Island>
-					{!emailSignUpProps.hidePrivacyMessage && (
-						<NewsletterPrivacyMessage />
-					)}
-				</NewsletterSignupCardContainer>
-			</InlineSkipToWrapper>
-		);
-	}
-
-	// When the new card design is enabled, always show it regardless of subscription status
-	if (showNewNewsletterSignupCard) {
-		return (
-			<InlineSkipToWrapper
-				id={`EmailSignup-skip-link-${index}`}
-				blockDescription="newsletter promotion"
-			>
 				<NewsletterSignupCardContainer {...emailSignUpProps}>
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<NewsletterSignupForm
 							newsletterId={emailSignUpProps.identityName}
-							successDescription={emailSignUpProps.description}
+							newsletterName={emailSignUpProps.name}
+							frequency={emailSignUpProps.frequency}
 							hidePrivacyMessage={isSignedIn === true}
 							onPreviewClick={onPreviewClick}
 						/>

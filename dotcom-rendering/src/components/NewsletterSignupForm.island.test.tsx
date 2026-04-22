@@ -41,7 +41,8 @@ const renderForm = (hidePrivacyMessage = false) =>
 		>
 			<NewsletterSignupForm
 				newsletterId="morning-briefing"
-				successDescription="Thanks for subscribing"
+				newsletterName="Morning Briefing"
+				frequency="every day"
 				hidePrivacyMessage={hidePrivacyMessage}
 			/>
 		</ConfigProvider>,
@@ -109,8 +110,11 @@ describe('NewsletterSignupForm', () => {
 		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
 
 		await waitFor(() => {
+			expect(screen.getByText("You're signed up!")).toBeInTheDocument();
 			expect(
-				screen.getByText('Subscription Confirmed.'),
+				screen.getByText(
+					'You will receive Morning Briefing every day.',
+				),
 			).toBeInTheDocument();
 		});
 
@@ -203,8 +207,11 @@ describe('NewsletterSignupForm', () => {
 		await testUser.keyboard('{Enter}');
 
 		await waitFor(() => {
+			expect(screen.getByText("You're signed up!")).toBeInTheDocument();
 			expect(
-				screen.getByText('Subscription Confirmed.'),
+				screen.getByText(
+					'You will receive Morning Briefing every day.',
+				),
 			).toBeInTheDocument();
 		});
 
@@ -234,8 +241,11 @@ describe('NewsletterSignupForm', () => {
 		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
 
 		await waitFor(() => {
+			expect(screen.getByText("You're signed up!")).toBeInTheDocument();
 			expect(
-				screen.getByText('Subscription Confirmed.'),
+				screen.getByText(
+					'You will receive Morning Briefing every day.',
+				),
 			).toBeInTheDocument();
 		});
 

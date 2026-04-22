@@ -32,7 +32,8 @@ const meta = preview.meta({
 
 const defaultArgs = {
 	newsletterId: 'saturday-edition',
-	successDescription: "We'll send you Saturday Edition every week.",
+	newsletterName: 'Saturday Edition',
+	frequency: 'every Saturday',
 	onPreviewClick: fn(),
 };
 

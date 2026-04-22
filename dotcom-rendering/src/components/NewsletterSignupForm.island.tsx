@@ -5,6 +5,7 @@ import {
 	InlineError,
 	InlineSuccess,
 	Link,
+	LinkButton,
 	Spinner,
 	SvgEye,
 	SvgReload,
@@ -18,7 +19,8 @@ import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
 type Props = {
 	newsletterId: string;
-	successDescription: string;
+	newsletterName: string;
+	frequency: string;
 	hidePrivacyMessage?: boolean;
 	onPreviewClick?: () => void;
 };
@@ -116,7 +118,14 @@ const privacyContainerStyles = css`
 	grid-area: privacy;
 `;
 
-const marketingBoxStyles = css`
+const successTextStyles = css`
+	color: ${palette('--newsletter-card-description')};
+	strong {
+		font-weight: bold;
+	}
+`;
+
+const marketingSuccessBoxStyles = css`
 	width: 100%;
 	padding: ${space[2]}px;
 	border: 1px solid ${palette('--card-border-supporting')};
@@ -138,14 +147,30 @@ const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	</InlineError>
 );
 
-const SuccessMessage = ({ text }: { text?: string }) => (
-	<InlineSuccess>
-		<span>
-			<b>Subscription Confirmed.&nbsp;</b>
-			<span>{text}</span>
-		</span>
-	</InlineSuccess>
-);
+const SuccessMessage = ({
+	newsletterName,
+	frequency,
+}: {
+	newsletterName: string;
+	frequency: string;
+}) => {
+	return (
+		<div css={marketingSuccessBoxStyles}>
+			<InlineSuccess>
+				<span css={successTextStyles}>
+					<strong>You're signed up!</strong>
+					&nbsp;
+					<span>
+						You will receive {newsletterName} {frequency}.
+					</span>
+				</span>
+			</InlineSuccess>
+			<LinkButton href="/email-newsletters" priority="tertiary">
+				Browse more newsletters
+			</LinkButton>
+		</div>
+	);
+};
 
 /**
  * # Newsletter Signup Form
@@ -155,7 +180,8 @@ const SuccessMessage = ({ text }: { text?: string }) => (
  */
 export const NewsletterSignupForm = ({
 	newsletterId,
-	successDescription,
+	newsletterName,
+	frequency,
 	hidePrivacyMessage = false,
 	onPreviewClick,
 }: Props) => {
@@ -233,7 +259,7 @@ export const NewsletterSignupForm = ({
 					<>
 						{showMarketingToggle && (
 							<div css={toggleContainerStyles}>
-								<div css={marketingBoxStyles}>
+								<div css={marketingSuccessBoxStyles}>
 									<ToggleSwitch
 										id={`marketing-opt-in-${newsletterId}`}
 										checked={marketingOptIn ?? false}
@@ -287,9 +313,10 @@ export const NewsletterSignupForm = ({
 
 			{hasResponse &&
 				(responseOk ? (
-					<div>
-						<SuccessMessage text={successDescription} />
-					</div>
+					<SuccessMessage
+						newsletterName={newsletterName}
+						frequency={frequency}
+					/>
 				) : (
 					<div css={errorContainerStyles}>
 						<ErrorMessageWithAdvice text="Sign up failed." />
