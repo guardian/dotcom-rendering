@@ -206,7 +206,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const showProgressBar = canShowProgressBar && currentRefExists;
 		const showIcons = canShowIcons && currentRefExists;
 
-		const dataLinkName = `gu-video-${videoStyle}-${
+		const dataLinkName = `gu-video-${videoStyle.toLowerCase()}-${
 			showPlayIcon ? 'play' : 'pause'
 		}-${atomId}`;
 
