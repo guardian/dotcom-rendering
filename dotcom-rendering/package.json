@@ -16,6 +16,7 @@
 		"playwright:run": "playwright test",
 		"unused-exports": "pnpm ts-unused-exports ./tsconfig.json --ignoreFiles='(/(fixtures|__mocks__)/|.+\\.(stories|mocks))' --exitWithCount",
 		"storybook": "storybook dev -p 4002",
+		"storybook-proxy": "storybook dev -p 4002 --host storybook.thegulocal.com",
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
