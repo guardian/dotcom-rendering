@@ -1,4 +1,3 @@
-import "source-map-support/register.js";
 import { App } from "aws-cdk-lib";
 import { AbTestingConfig } from "../lib/abTestingConfig.ts";
 import { AbTestingDeploymentLambda } from "../lib/deploymentLambda.ts";
