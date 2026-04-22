@@ -8,5 +8,5 @@
 		"moduleResolution": "nodenext",
 		"module": "nodenext"
 	},
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules", "config/index.ts"]
 }
