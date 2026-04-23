@@ -7,6 +7,11 @@ type Media = {
 	type: 'YoutubeVideo' | 'SelfHostedVideo' | 'Audio' | 'Gallery';
 };
 
+export type AspectRatio = {
+	numberRepresentation: number;
+	stringRepresentation: string;
+};
+
 /** For displaying embedded, playable videos directly in cards */
 export type YoutubeVideo = Media & {
 	type: 'YoutubeVideo';
@@ -28,7 +33,7 @@ type SelfHostedVideo = Media & {
 	videoStyle: VideoPlayerFormat;
 	atomId: string;
 	sources: Source[];
-	aspectRatio: number;
+	aspectRatio: AspectRatio;
 	duration: number;
 	subtitleSource?: string;
 	image?: string;

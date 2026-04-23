@@ -3979,7 +3979,19 @@
                             }
                         },
                         "aspectRatio": {
-                            "type": "number"
+                            "type": "object",
+                            "properties": {
+                                "numberRepresentation": {
+                                    "type": "number"
+                                },
+                                "stringRepresentation": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "numberRepresentation",
+                                "stringRepresentation"
+                            ]
                         },
                         "duration": {
                             "type": "number"

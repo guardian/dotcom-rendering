@@ -87,7 +87,10 @@ describe('Enhance Cards', () => {
 			).toEqual({
 				atomId: 'atomID',
 				duration: 15,
-				aspectRatio: 5 / 4,
+				aspectRatio: {
+					numberRepresentation: 5 / 4,
+					stringRepresentation: '500:400',
+				},
 				image: '',
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
@@ -178,7 +181,10 @@ describe('Enhance Cards', () => {
 			).toEqual({
 				atomId: 'atomID',
 				duration: 15,
-				aspectRatio: 5 / 4,
+				aspectRatio: {
+					numberRepresentation: 5 / 4,
+					stringRepresentation: '500:400',
+				},
 				image: '',
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
@@ -225,7 +231,10 @@ describe('Enhance Cards', () => {
 			).toEqual({
 				atomId: 'atomID',
 				duration: 15,
-				aspectRatio: 5 / 4,
+				aspectRatio: {
+					numberRepresentation: 5 / 4,
+					stringRepresentation: '500:400',
+				},
 				image: '',
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
@@ -276,7 +285,10 @@ describe('Enhance Cards', () => {
 				videoStyle: 'Loop',
 				atomId: 'atomID',
 				sources: [],
-				aspectRatio: 5 / 4,
+				aspectRatio: {
+					numberRepresentation: 5 / 4,
+					stringRepresentation: '500:400',
+				},
 				duration: 151,
 			};
 
@@ -425,7 +437,10 @@ describe('Enhance Cards', () => {
 				type: 'SelfHostedVideo',
 				atomId: 'atomID',
 				duration: 15,
-				aspectRatio: 5 / 4,
+				aspectRatio: {
+					numberRepresentation: 5 / 4,
+					stringRepresentation: '500:400',
+				},
 				image: 'https://guim-example.co.uk/video-image',
 				sources: [
 					{
@@ -465,7 +480,10 @@ describe('Enhance Cards', () => {
 			).toEqual({
 				atomId: 'atomID',
 				duration: 15,
-				aspectRatio: 5 / 4,
+				aspectRatio: {
+					numberRepresentation: 5 / 4,
+					stringRepresentation: '500:400',
+				},
 				sources: [
 					{
 						mimeType: 'video/mp4',
@@ -490,7 +508,10 @@ describe('Enhance Cards', () => {
 				type: 'SelfHostedVideo',
 				atomId: 'atomID',
 				duration: 15,
-				aspectRatio: 5 / 4,
+				aspectRatio: {
+					numberRepresentation: 5 / 4,
+					stringRepresentation: '500:400',
+				},
 				image: undefined,
 				sources: [
 					{

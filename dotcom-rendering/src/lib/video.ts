@@ -4,7 +4,8 @@ import type { VideoAssets } from '../types/content';
 export type CustomPlayEventDetail = { uniqueId: string };
 
 /** We expect all videos to include dimensions since the field was added to FEMediaAsset */
-export const DEFAULT_ASPECT_RATIO = 5 / 4;
+const DEFAULT_ASPECT_RATIO_NUMBER = 5 / 4;
+const DEFAULT_ASPECT_RATIO_STRING = '5:4';
 
 export const customSelfHostedVideoPlayAudioEventName =
 	'self-hosted-video:play-with-audio';
@@ -77,7 +78,9 @@ export const convertFEMediaAssetsToVideoAssets = (
  * We use the first source to calculate aspect ratio, but we could use any of the sources.
  * We make an assumption that all sources will have the same aspect ratio.
  */
-export const getAspectRatioFromSources = (sources: Source[]): number => {
+export const getAspectRatioFromSources = (
+	sources: Source[],
+): { numberRepresentation: number; stringRepresentation: string } => {
 	const firstSource = sources[0];
 
 	if (firstSource?.aspectRatio !== undefined) {
@@ -88,15 +91,24 @@ export const getAspectRatioFromSources = (sources: Source[]): number => {
 			width > 0 &&
 			height > 0
 		) {
-			return width / height;
+			return {
+				numberRepresentation: width / height,
+				stringRepresentation: `${width}:${height}`,
+			};
 		}
 	}
 
 	if (!firstSource || firstSource.width === 0 || firstSource.height === 0) {
-		return DEFAULT_ASPECT_RATIO;
+		return {
+			numberRepresentation: DEFAULT_ASPECT_RATIO_NUMBER,
+			stringRepresentation: DEFAULT_ASPECT_RATIO_STRING,
+		};
 	}
 
-	return firstSource.width / firstSource.height;
+	return {
+		numberRepresentation: firstSource.width / firstSource.height,
+		stringRepresentation: `${firstSource.width}:${firstSource.height}`,
+	};
 };
 
 export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>
