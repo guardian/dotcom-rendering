@@ -108,8 +108,10 @@ const previewLoadingOverlayStyles = css`
 	inset: 0;
 	display: flex;
 	flex-direction: column;
+	justify-content: flex-start;
 	padding: ${space[4]}px ${space[3]}px;
 	background: ${palette.neutral[100]};
+	overflow-y: auto;
 
 	${from.tablet} {
 		padding: ${space[6]}px;
@@ -117,7 +119,8 @@ const previewLoadingOverlayStyles = css`
 `;
 
 const previewSkeletonBlockStyles = css`
-	height: 14px;
+	width: 100%;
+	flex-shrink: 0;
 	background: linear-gradient(
 		90deg,
 		${palette.neutral[93]} 25%,
@@ -139,36 +142,31 @@ const previewSkeletonBlockStyles = css`
 
 const previewSkeletonLongStyles = css`
 	${previewSkeletonBlockStyles};
-	width: 100%;
-	height: 64px;
+	height: 96px;
 `;
 
 const previewSkeletonLargeStyles = css`
 	${previewSkeletonBlockStyles};
-	width: 100%;
-	height: 272px;
-	margin-top: 12px;
+	height: 332px;
+	margin-top: 16px;
 `;
 
 const previewSkeletonThirdStyles = css`
 	${previewSkeletonBlockStyles};
-	width: 100%;
-	height: 36px;
-	margin-top: 30px;
+	height: 52px;
+	margin-top: 32px;
 `;
 
 const previewSkeletonFourthStyles = css`
 	${previewSkeletonBlockStyles};
-	width: 100%;
-	height: 36px;
-	margin-top: 12px;
+	height: 52px;
+	margin-top: 16px;
 `;
 
 const previewSkeletonFinalStyles = css`
 	${previewSkeletonBlockStyles};
-	width: 100%;
 	height: 272px;
-	margin-top: 12px;
+	margin-top: 16px;
 	background: linear-gradient(
 		90deg,
 		${palette.neutral[93]} 25%,
@@ -454,7 +452,7 @@ export const NewsletterPreviewModal = ({
 					</Button>
 				</div>
 				<div css={previewFrameContainerStyles}>
-					{isLoading && (
+					{true && (
 						<div
 							css={previewLoadingOverlayStyles}
 							aria-live="polite"
