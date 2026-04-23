@@ -67,13 +67,10 @@ export const EmailSignUpWrapper = ({
 	showNewNewsletterSignupCard = false,
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
-	const shouldCheckSubscription =
-		hideNewsletterSignupComponentForSubscribers &&
-		!showNewNewsletterSignupCard;
 	const isSubscribed = useNewsletterSubscription(
 		listId,
 		idApiUrl,
-		shouldCheckSubscription,
+		hideNewsletterSignupComponentForSubscribers,
 	);
 	const isSignedIn = useIsSignedIn();
 
@@ -104,6 +101,7 @@ export const EmailSignUpWrapper = ({
 								frequency={frequency}
 								hidePrivacyMessage={isSignedIn === true}
 								onPreviewClick={openPreview}
+								isAlreadySubscribed={isSubscribed === true}
 							/>
 						</Island>
 					)}

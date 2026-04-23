@@ -28,6 +28,8 @@ type Props = {
 	frequency: string;
 	hidePrivacyMessage?: boolean;
 	onPreviewClick?: () => void;
+	/** When `true`, the success message is shown immediately (user is already subscribed). */
+	isAlreadySubscribed?: boolean;
 };
 
 const formStyles = css`
@@ -99,13 +101,6 @@ const previewButtonContainerStyles = css`
 	margin-bottom: ${space[3]}px;
 `;
 
-const errorContainerStyles = css`
-	margin-top: ${space[2]}px;
-	display: flex;
-	flex-direction: column;
-	gap: ${space[2]}px;
-`;
-
 const toggleContainerStyles = css`
 	grid-area: marketing;
 	display: flex;
@@ -127,11 +122,25 @@ const successTextStyles = css`
 	}
 `;
 
-const marketingSuccessBoxStyles = css`
+const marketingToggleBoxStyles = css`
 	width: 100%;
 	padding: ${space[2]}px;
 	border: 1px solid ${palette('--card-border-supporting')};
 	border-radius: 4px;
+`;
+
+const responseBoxStyles = css`
+	width: 100%;
+	padding: ${space[2]}px;
+	border: 1px solid ${palette('--card-border-supporting')};
+	border-radius: 4px;
+	margin-top: ${space[4]}px;
+`;
+
+const errorContainerStyles = css`
+	display: flex;
+	flex-direction: column;
+	gap: ${space[2]}px;
 `;
 
 const feedbackButtonStyles = css`
@@ -190,7 +199,7 @@ const SuccessMessage = ({
 	frequency: string;
 }) => {
 	return (
-		<div css={marketingSuccessBoxStyles}>
+		<div css={responseBoxStyles}>
 			<InlineSuccess size="medium">
 				<span css={successTextStyles}>
 					<strong>You're signed up!</strong>
@@ -223,6 +232,7 @@ export const NewsletterSignupForm = ({
 	frequency,
 	hidePrivacyMessage = false,
 	onPreviewClick,
+	isAlreadySubscribed = false,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 
@@ -249,6 +259,8 @@ export const NewsletterSignupForm = ({
 	} = useNewsletterSignupForm(newsletterId, renderingTarget);
 
 	const hasResponse = typeof responseOk === 'boolean';
+	const showForm =
+		!isAlreadySubscribed && !hasResponse && !isWaitingForResponse;
 	const showAdditionalFields = isInteracted || !!userEmail;
 	// Validation errors (before submission) are shown inline on the input.
 	// Network/server errors (after a failed submission) use the standalone message.
@@ -256,7 +268,8 @@ export const NewsletterSignupForm = ({
 
 	return (
 		<>
-			{!hasResponse &&
+			{!isAlreadySubscribed &&
+				!hasResponse &&
 				!isWaitingForResponse &&
 				onPreviewClick &&
 				!isSignedIn && (
@@ -268,10 +281,7 @@ export const NewsletterSignupForm = ({
 				onSubmit={handleSubmit}
 				id={`newsletter-signup-${newsletterId}`}
 				style={{
-					display:
-						hasResponse || isWaitingForResponse
-							? 'none'
-							: undefined,
+					display: !showForm ? 'none' : undefined,
 				}}
 				css={[
 					formStyles,
@@ -298,7 +308,7 @@ export const NewsletterSignupForm = ({
 					<>
 						{showMarketingToggle && (
 							<div css={toggleContainerStyles}>
-								<div css={marketingSuccessBoxStyles}>
+								<div css={marketingToggleBoxStyles}>
 									<ToggleSwitch
 										id={`marketing-opt-in-${newsletterId}`}
 										checked={marketingOptIn ?? false}
@@ -344,16 +354,21 @@ export const NewsletterSignupForm = ({
 				<ErrorMessageWithAdvice text={errorMessage} />
 			)}
 
-			{hasResponse &&
+			{isAlreadySubscribed && (
+				<SuccessMessage
+					newsletterName={newsletterName}
+					frequency={frequency}
+				/>
+			)}
+			{!isAlreadySubscribed &&
+				hasResponse &&
 				(responseOk ? (
 					<SuccessMessage
 						newsletterName={newsletterName}
 						frequency={frequency}
 					/>
 				) : (
-					<div
-						css={[marketingSuccessBoxStyles, errorContainerStyles]}
-					>
+					<div css={[responseBoxStyles, errorContainerStyles]}>
 						<ErrorMessageWithAdvice text="Sign up failed." />
 						<Button
 							size="small"
