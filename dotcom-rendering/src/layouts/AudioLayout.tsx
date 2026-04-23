@@ -195,6 +195,9 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 						showSlimNav={false}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
+						sectionId={article.config.section}
+						tagIds={article.tags.map((tag) => tag.id)}
+						contentType={article.contentType}
 					/>
 				</div>
 			)}
