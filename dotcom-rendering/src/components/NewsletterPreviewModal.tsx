@@ -5,11 +5,14 @@ import {
 	headlineMedium24,
 	palette,
 	space,
+	textSans15,
 } from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
-import { useEffect, useId, useRef } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getZIndex } from '../lib/getZIndex';
+
+const PREVIEW_LOAD_TIMEOUT_MS = 10_000;
 
 const FOCUSABLE_SELECTOR =
 	'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
@@ -70,11 +73,141 @@ const previewTitleStyles = css`
 
 const previewFrameStyles = css`
 	flex: 1;
+	min-height: 0;
+	height: 100%;
 	width: 100%;
+	display: block;
+	border: 0;
+	background: ${palette.neutral[100]};
+	padding: 0;
+	min-width: 0;
+
+	${from.tablet} {
+		padding: 0;
+	}
+`;
+
+const previewFrameContainerStyles = css`
+	position: relative;
+	display: flex;
+	min-height: 0;
+	flex: 1;
+	background: ${palette.neutral[100]};
 
 	${from.tablet} {
 		padding: 0 ${space[6]}px;
 	}
+`;
+
+const previewIframeHiddenStyles = css`
+	visibility: hidden;
+`;
+
+const previewLoadingOverlayStyles = css`
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	padding: ${space[4]}px ${space[3]}px;
+	background: ${palette.neutral[100]};
+
+	${from.tablet} {
+		padding: ${space[6]}px;
+	}
+`;
+
+const previewSkeletonBlockStyles = css`
+	height: 14px;
+	background: linear-gradient(
+		90deg,
+		${palette.neutral[93]} 25%,
+		${palette.neutral[97]} 50%,
+		${palette.neutral[93]} 75%
+	);
+	background-size: 200% 100%;
+	animation: preview-skeleton-shimmer 1.2s linear infinite;
+
+	@keyframes preview-skeleton-shimmer {
+		from {
+			background-position: 200% 0;
+		}
+		to {
+			background-position: -200% 0;
+		}
+	}
+`;
+
+const previewSkeletonLongStyles = css`
+	${previewSkeletonBlockStyles};
+	width: 100%;
+	height: 64px;
+`;
+
+const previewSkeletonLargeStyles = css`
+	${previewSkeletonBlockStyles};
+	width: 100%;
+	height: 272px;
+	margin-top: 12px;
+`;
+
+const previewSkeletonThirdStyles = css`
+	${previewSkeletonBlockStyles};
+	width: 100%;
+	height: 36px;
+	margin-top: 30px;
+`;
+
+const previewSkeletonFourthStyles = css`
+	${previewSkeletonBlockStyles};
+	width: 100%;
+	height: 36px;
+	margin-top: 12px;
+`;
+
+const previewSkeletonFinalStyles = css`
+	${previewSkeletonBlockStyles};
+	width: 100%;
+	height: 272px;
+	margin-top: 12px;
+	background: linear-gradient(
+		90deg,
+		${palette.neutral[93]} 25%,
+		${palette.neutral[97]} 50%,
+		${palette.neutral[93]} 75%
+	);
+	background-size: 200% 100%;
+	animation: preview-skeleton-shimmer 1.2s linear infinite;
+`;
+
+const previewStatusStyles = css`
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: ${space[4]}px ${space[3]}px;
+	background: ${palette.neutral[100]};
+	text-align: center;
+
+	${from.tablet} {
+		padding: ${space[6]}px;
+	}
+`;
+
+const previewStatusInnerStyles = css`
+	max-width: 520px;
+`;
+
+const previewStatusTitleStyles = css`
+	${headlineMedium20};
+	margin: 0 0 ${space[2]}px;
+	color: ${palette.neutral[7]};
+`;
+
+const previewStatusBodyStyles = css`
+	${textSans15};
+	margin: 0 0 ${space[4]}px;
+	color: ${palette.neutral[20]};
 `;
 
 const desktopCloseButtonStyles = css`
@@ -144,6 +277,9 @@ export const NewsletterPreviewModal = ({
 }: Props) => {
 	const dialogRef = useRef<HTMLDivElement>(null);
 	const titleId = useId();
+	const [isLoading, setIsLoading] = useState(true);
+	const [hasLoadFailed, setHasLoadFailed] = useState(false);
+	const [iframeKey, setIframeKey] = useState(0);
 
 	const getVisibleFocusableElements = (dialog: HTMLElement): HTMLElement[] =>
 		Array.from(
@@ -258,6 +394,38 @@ export const NewsletterPreviewModal = ({
 		};
 	}, [onClose]);
 
+	useEffect(() => {
+		setIsLoading(true);
+		setHasLoadFailed(false);
+	}, [renderUrl, iframeKey]);
+
+	useEffect(() => {
+		if (!isLoading) return;
+
+		const timeoutId = window.setTimeout(() => {
+			setHasLoadFailed(true);
+			setIsLoading(false);
+		}, PREVIEW_LOAD_TIMEOUT_MS);
+
+		return () => {
+			window.clearTimeout(timeoutId);
+		};
+	}, [isLoading]);
+
+	const handleIframeLoad = () => {
+		setIsLoading(false);
+		setHasLoadFailed(false);
+	};
+
+	const handleIframeError = () => {
+		setHasLoadFailed(true);
+		setIsLoading(false);
+	};
+
+	const retryLoad = () => {
+		setIframeKey((currentKey) => currentKey + 1);
+	};
+
 	if (typeof document === 'undefined') return null;
 
 	return createPortal(
@@ -285,11 +453,57 @@ export const NewsletterPreviewModal = ({
 						Close preview
 					</Button>
 				</div>
-				<iframe
-					title={`${newsletterName} preview`}
-					src={renderUrl}
-					css={previewFrameStyles}
-				/>
+				<div css={previewFrameContainerStyles}>
+					{isLoading && (
+						<div
+							css={previewLoadingOverlayStyles}
+							aria-live="polite"
+							aria-label="Loading newsletter preview"
+						>
+							<div css={previewSkeletonLongStyles} />
+							<div css={previewSkeletonLargeStyles} />
+							<div css={previewSkeletonThirdStyles} />
+							<div css={previewSkeletonFourthStyles} />
+							<div css={previewSkeletonFinalStyles} />
+						</div>
+					)}
+					{hasLoadFailed && (
+						<div
+							css={previewStatusStyles}
+							role="status"
+							aria-live="polite"
+						>
+							<div css={previewStatusInnerStyles}>
+								<h3 css={previewStatusTitleStyles}>
+									Preview failed to load
+								</h3>
+								<p css={previewStatusBodyStyles}>
+									The preview is taking longer than expected.
+									You can retry loading it.
+								</p>
+								<Button
+									size="small"
+									priority="primary"
+									onClick={retryLoad}
+								>
+									Retry preview
+								</Button>
+							</div>
+						</div>
+					)}
+					<iframe
+						key={iframeKey}
+						title={`${newsletterName} preview`}
+						src={renderUrl}
+						onLoad={handleIframeLoad}
+						onError={handleIframeError}
+						css={[
+							previewFrameStyles,
+							(isLoading || hasLoadFailed) &&
+								previewIframeHiddenStyles,
+						]}
+					/>
+				</div>
 				<div css={mobileCloseBarStyles}>
 					<Button
 						priority="tertiary"

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
 
 const baseProps = {
@@ -154,6 +154,62 @@ describe('NewsletterPreviewModal', () => {
 			}
 			document.documentElement.style.overflow = previousRootOverflow;
 			document.body.style.overflow = previousBodyOverflow;
+		}
+	});
+
+	it('shows a skeleton while loading and hides it once iframe is loaded', () => {
+		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
+
+		expect(
+			screen.getByLabelText('Loading newsletter preview'),
+		).toBeInTheDocument();
+
+		const iframe = screen.getByTitle('Morning Briefing preview');
+		fireEvent.load(iframe);
+
+		expect(
+			screen.queryByLabelText('Loading newsletter preview'),
+		).not.toBeInTheDocument();
+		expect(
+			screen.queryByText('Preview failed to load'),
+		).not.toBeInTheDocument();
+	});
+
+	it('shows a timeout fallback and allows retrying the preview load', () => {
+		jest.useFakeTimers();
+
+		try {
+			render(
+				<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />,
+			);
+
+			act(() => {
+				jest.advanceTimersByTime(10_000);
+			});
+
+			expect(
+				screen.getByText('Preview failed to load'),
+			).toBeInTheDocument();
+			expect(
+				screen.getByRole('button', { name: 'Retry preview' }),
+			).toBeInTheDocument();
+
+			fireEvent.click(
+				screen.getByRole('button', { name: 'Retry preview' }),
+			);
+
+			expect(
+				screen.getByLabelText('Loading newsletter preview'),
+			).toBeInTheDocument();
+
+			const iframe = screen.getByTitle('Morning Briefing preview');
+			fireEvent.load(iframe);
+
+			expect(
+				screen.queryByText('Preview failed to load'),
+			).not.toBeInTheDocument();
+		} finally {
+			jest.useRealTimers();
 		}
 	});
 });
