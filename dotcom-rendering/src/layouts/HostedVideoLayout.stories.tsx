@@ -1,13 +1,24 @@
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { hostedVideo } from '../../fixtures/manual/hostedVideo';
+import { hostedOnwardsTrails } from '../../fixtures/manual/onwardsTrails';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { enhanceArticleType } from '../types/article';
 import { HostedVideoLayout } from './HostedVideoLayout';
+
+const mockOnwardsContentFetch = customMockFetch([
+	{
+		mockedMethod: 'GET',
+		mockedUrl: `${hostedVideo.config.ajaxUrl}/${hostedVideo.config.pageId}/onward.json`,
+		mockedStatus: 200,
+		mockedBody: { trails: hostedOnwardsTrails },
+	},
+]);
 
 const meta = preview.meta({
 	title: 'Layouts/HostedVideo',
@@ -18,6 +29,10 @@ const meta = preview.meta({
 				'light leftCol': allModes['light leftCol'],
 			},
 		},
+	},
+	render: (args) => {
+		global.fetch = mockOnwardsContentFetch;
+		return <HostedVideoLayout {...args} />;
 	},
 });
 

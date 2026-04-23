@@ -1,14 +1,25 @@
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { hostedArticle } from '../../fixtures/manual/hostedArticle';
+import { hostedOnwardsTrails } from '../../fixtures/manual/onwardsTrails';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { enhanceArticleType } from '../types/article';
 import type { Branding } from '../types/branding';
 import { HostedArticleLayout } from './HostedArticleLayout';
+
+const mockOnwardsContentFetch = customMockFetch([
+	{
+		mockedMethod: 'GET',
+		mockedUrl: `${hostedArticle.config.ajaxUrl}/${hostedArticle.config.pageId}/onward.json`,
+		mockedStatus: 200,
+		mockedBody: { trails: hostedOnwardsTrails },
+	},
+]);
 
 const meta = preview.meta({
 	title: 'Layouts/HostedArticle',
@@ -19,6 +30,10 @@ const meta = preview.meta({
 				'light leftCol': allModes['light leftCol'],
 			},
 		},
+	},
+	render: (args) => {
+		global.fetch = mockOnwardsContentFetch;
+		return <HostedArticleLayout {...args} />;
 	},
 });
 
