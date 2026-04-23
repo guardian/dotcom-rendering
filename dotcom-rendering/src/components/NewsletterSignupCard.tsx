@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	headlineMedium20,
 	space,
 	textSans14,
@@ -78,10 +79,15 @@ const descriptionStyles = css`
 
 const illustrationStyles = css`
 	flex-shrink: 0;
-	width: 100px;
-	height: 100px;
+	width: 90px;
+	height: 90px;
 	border-radius: 50%;
 	object-fit: cover;
+
+	${from.tablet} {
+		width: 100px;
+		height: 100px;
+	}
 `;
 
 const NewsletterSignupHeader = (props: {
