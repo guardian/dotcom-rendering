@@ -41,27 +41,20 @@ const formStyles = css`
 
 const signedOutLayoutStyles = css`
 	grid-template-columns: minmax(0, 1fr) 160px;
-	grid-template-areas:
-		'email submit'
-		'marketing .'
-		'privacy privacy';
+	grid-template-areas: 'email submit';
 
 	${until.tablet} {
 		grid-template-columns: 1fr;
 		grid-template-areas:
 			'email'
-			'submit'
-			'marketing'
-			'privacy';
+			'submit';
 	}
 `;
 
 const signedInLayoutStyles = css`
 	grid-template-columns: minmax(0, 1fr);
-	grid-template-areas:
-		'submit'
-		'marketing'
-		'privacy';
+	grid-template-areas: 'submit';
+	padding-bottom: ${space[2]}px;
 `;
 
 const emailFieldStyles = css`
@@ -102,7 +95,7 @@ const previewButtonContainerStyles = css`
 `;
 
 const toggleContainerStyles = css`
-	grid-area: marketing;
+	grid-column: 1;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -111,7 +104,7 @@ const toggleContainerStyles = css`
 `;
 
 const privacyContainerStyles = css`
-	grid-area: privacy;
+	grid-column: 1 / -1;
 `;
 
 const successTextStyles = css`
