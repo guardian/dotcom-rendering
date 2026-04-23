@@ -10,7 +10,6 @@ import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { CallToActionAtom } from '../components/CallToActionAtom';
-import { Caption } from '../components/Caption';
 import { FetchHostedOnwards } from '../components/FetchHostedOnwards.island';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
 import { HostedContentHeader } from '../components/HostedContentHeader';
@@ -22,7 +21,6 @@ import { Standfirst } from '../components/Standfirst';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideMainMediaCaption } from '../lib/decide-caption';
 import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
@@ -60,18 +58,6 @@ const mainMediaStyles = css`
 	z-index: 1;
 	overflow: hidden;
 	max-height: 600px;
-`;
-
-const captionStyles = css`
-	${grid.column.centre}
-	grid-row-start: 2;
-
-	${from.desktop} {
-		${grid.span(12, 2)}
-	}
-	${from.leftCol} {
-		${grid.column.right}
-	}
 `;
 
 const headlineStyles = css`
@@ -132,6 +118,7 @@ const articleBodyStyles = css`
 
 const onwardContentStyles = css`
 	${grid.column.centre}
+	grid-row-start: 6;
 
 	margin-bottom: ${space[5]}px;
 
@@ -141,17 +128,23 @@ const onwardContentStyles = css`
 	}
 
 	${from.leftCol} {
+		grid-row: 2 / 5;
+		margin-top: ${space[4]}px;
 		${grid.column.right}
-		grid-row-start: 3;
 	}
 `;
 
 const ctaStyles = css`
 	z-index: 1;
 	${grid.column.all}
+	grid-row-start: 7;
 
 	overflow: hidden;
 	max-height: 400px;
+
+	${from.leftCol} {
+		grid-row-start: unset;
+	}
 	${from.wide} {
 		width: ${breakpoints.wide}px;
 		margin: auto;
@@ -175,9 +168,6 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 	} = props;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
-
-	const mainMedia = frontendData.mainMediaElements[0];
-	const mainMediaCaptionText = decideMainMediaCaption(mainMedia);
 
 	const { branding } =
 		frontendData.commercialProperties[frontendData.editionId];
@@ -231,14 +221,6 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 							hideCaption={true}
 							shouldHideAds={true}
 							contentType={frontendData.contentType}
-						/>
-					</div>
-
-					<div css={captionStyles}>
-						<Caption
-							captionText={mainMediaCaptionText}
-							format={format}
-							isMainMedia={true}
 						/>
 					</div>
 
