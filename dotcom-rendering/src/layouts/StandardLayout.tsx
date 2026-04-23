@@ -416,7 +416,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						pageId={article.pageId}
 						tagIds={article.tags.map((tag) => tag.id)}
 						sectionId={article.config.section}
-						contentType={article.config.contentType}
+						contentType={article.contentType}
 					/>
 				</div>
 			)}

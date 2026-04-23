@@ -330,6 +330,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											(tag) => tag.id,
 										)}
 										sectionId={article.config.section}
+										contentType={article.contentType}
 									/>
 								</Stuck>
 							</div>
