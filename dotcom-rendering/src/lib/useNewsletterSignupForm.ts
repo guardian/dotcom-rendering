@@ -183,6 +183,7 @@ export type NewsletterSignupFormState = {
 	// Event handlers
 	handleEmailChange: (value: string) => void;
 	handleEmailFocus: () => void;
+	handleEmailInvalid: React.FormEventHandler<HTMLInputElement>;
 	handleMarketingToggle: ReactEventHandler<HTMLButtonElement>;
 	handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
 	handleSubmitButtonClick: () => void;
@@ -303,7 +304,7 @@ export const useNewsletterSignupForm = (
 
 		const emailAddress = userEmail?.trim() ?? '';
 		if (!emailAddress) {
-			setErrorMessage('Please enter a valid email address.');
+			setErrorMessage('Please enter your email address.');
 			return;
 		}
 
@@ -329,8 +330,13 @@ export const useNewsletterSignupForm = (
 		handleEmailChange: (value) => {
 			setUserEmail(value);
 			setIsInteracted(true);
+			setErrorMessage(undefined);
 		},
 		handleEmailFocus: () => setIsInteracted(true),
+		handleEmailInvalid: (event) => {
+			event.preventDefault();
+			setErrorMessage('Incorrect email format. Please check.');
+		},
 		handleMarketingToggle: (event) => {
 			event.preventDefault();
 			setMarketingOptIn((prev) => !prev);

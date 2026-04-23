@@ -44,6 +44,7 @@ const noopHandlers: Pick<
 	NewsletterSignupFormState,
 	| 'handleEmailChange'
 	| 'handleEmailFocus'
+	| 'handleEmailInvalid'
 	| 'handleMarketingToggle'
 	| 'handleSubmit'
 	| 'handleSubmitButtonClick'
@@ -53,6 +54,7 @@ const noopHandlers: Pick<
 > = {
 	handleEmailChange: fn(),
 	handleEmailFocus: fn(),
+	handleEmailInvalid: fn(),
 	handleMarketingToggle: fn(),
 	handleSubmit: fn(),
 	handleSubmitButtonClick: fn(),
@@ -170,12 +172,26 @@ export const SubmissionFailed = meta.story({
 	},
 });
 
-/** User submitted without entering an email — inline validation error. */
+/** User submitted without entering an email — inline validation error on the input. */
 export const ValidationError = meta.story({
 	args: defaultArgs,
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(
-			mockForm({ errorMessage: 'Please enter a valid email address.' }),
+			mockForm({ errorMessage: 'Please enter your email address.' }),
+		);
+	},
+});
+
+/** User submitted with a malformed email — browser fires `invalid`, shown inline on the input. */
+export const InvalidEmail = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({
+				userEmail: 'not-an-email',
+				isInteracted: true,
+				errorMessage: 'Incorrect email format. Please check.',
+			}),
 		);
 	},
 });

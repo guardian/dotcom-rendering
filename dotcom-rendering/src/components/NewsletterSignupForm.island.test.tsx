@@ -275,6 +275,56 @@ describe('NewsletterSignupForm', () => {
 		expect(decodedBody).toContain('email=signed.in@example.com');
 	});
 
+	it('shows an inline validation error when submitting with an empty email', async () => {
+		const testUser = user.setup();
+
+		renderForm();
+
+		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+
+		expect(
+			screen.getByText('Please enter your email address.'),
+		).toBeInTheDocument();
+		expect(global.fetch).not.toHaveBeenCalled();
+	});
+
+	it('shows an inline validation error when submitting with an invalid email format', async () => {
+		const testUser = user.setup();
+
+		renderForm();
+
+		await typeEmailAddress(testUser, 'not-an-email');
+		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+
+		expect(
+			screen.getByText('Incorrect email format. Please check.'),
+		).toBeInTheDocument();
+		expect(global.fetch).not.toHaveBeenCalled();
+	});
+
+	it('clears the validation error as the user corrects their email', async () => {
+		const testUser = user.setup();
+
+		renderForm();
+
+		await typeEmailAddress(testUser, 'not-an-email');
+		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+
+		expect(
+			screen.getByText('Incorrect email format. Please check.'),
+		).toBeInTheDocument();
+
+		// Typing clears the error immediately
+		await testUser.type(
+			screen.getByLabelText('Enter your email'),
+			'{Backspace}',
+		);
+
+		expect(
+			screen.queryByText('Incorrect email format. Please check.'),
+		).not.toBeInTheDocument();
+	});
+
 	it('shows failure UI with retry and supports hiding the privacy message', async () => {
 		const testUser = user.setup();
 		global.fetch = jest.fn().mockResolvedValue({ ok: false } as Response);

@@ -241,6 +241,7 @@ export const NewsletterSignupForm = ({
 		handleCaptchaLoadError,
 		handleEmailChange,
 		handleEmailFocus,
+		handleEmailInvalid,
 		handleMarketingToggle,
 		handleSubmit,
 		handleSubmitButtonClick,
@@ -249,6 +250,9 @@ export const NewsletterSignupForm = ({
 
 	const hasResponse = typeof responseOk === 'boolean';
 	const showAdditionalFields = isInteracted || !!userEmail;
+	// Validation errors (before submission) are shown inline on the input.
+	// Network/server errors (after a failed submission) use the standalone message.
+	const isValidationError = !!errorMessage && !hasResponse;
 
 	return (
 		<>
@@ -283,8 +287,10 @@ export const NewsletterSignupForm = ({
 							label="Enter your email"
 							type="email"
 							value={userEmail ?? ''}
+							error={isValidationError ? errorMessage : undefined}
 							onFocus={handleEmailFocus}
 							onChange={(e) => handleEmailChange(e.target.value)}
+							onInvalid={handleEmailInvalid}
 						/>
 					</div>
 				)}
@@ -334,7 +340,9 @@ export const NewsletterSignupForm = ({
 				</div>
 			)}
 
-			{!!errorMessage && <ErrorMessageWithAdvice text={errorMessage} />}
+			{!!errorMessage && !isValidationError && (
+				<ErrorMessageWithAdvice text={errorMessage} />
+			)}
 
 			{hasResponse &&
 				(responseOk ? (
