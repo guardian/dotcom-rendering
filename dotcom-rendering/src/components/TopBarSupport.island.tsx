@@ -33,6 +33,7 @@ type Props = {
 	pageUrl: string;
 	tagIds?: string[];
 	sectionId?: string;
+	contentType?: string;
 };
 
 const headerStyles = css`
@@ -49,6 +50,7 @@ type ReaderRevenueLinksRemoteProps = {
 	pageUrl: string;
 	tagIds?: string[];
 	sectionId?: string;
+	contentType?: string;
 };
 
 const ReaderRevenueLinksRemote = ({
@@ -58,6 +60,7 @@ const ReaderRevenueLinksRemote = ({
 	pageUrl,
 	tagIds,
 	sectionId,
+	contentType,
 }: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData<HeaderProps> | null>(null);
@@ -97,6 +100,7 @@ const ReaderRevenueLinksRemote = ({
 					) ?? false,
 				tagIds,
 				sectionId,
+				contentType,
 			},
 		};
 
@@ -145,6 +149,7 @@ const ReaderRevenueLinksRemote = ({
 		abTests,
 		tagIds,
 		sectionId,
+		contentType,
 	]);
 
 	if (SupportHeader !== null && supportHeaderResponse) {
@@ -192,6 +197,7 @@ export const TopBarSupport = ({
 	pageUrl,
 	tagIds,
 	sectionId,
+	contentType,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode('support-the-Guardian');
@@ -207,6 +213,7 @@ export const TopBarSupport = ({
 			pageUrl={pageUrl}
 			tagIds={tagIds}
 			sectionId={sectionId}
+			contentType={contentType}
 		/>
 	);
 };

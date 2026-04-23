@@ -344,6 +344,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						pageId={article.pageId}
 						tagIds={article.tags.map((tag) => tag.id)}
 						sectionId={article.config.section}
+						contentType={article.contentType}
 					/>
 				</div>
 			)}

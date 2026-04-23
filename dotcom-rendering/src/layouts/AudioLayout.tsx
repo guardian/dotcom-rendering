@@ -197,6 +197,7 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 						pageId={article.pageId}
 						sectionId={article.config.section}
 						tagIds={article.tags.map((tag) => tag.id)}
+						contentType={article.contentType}
 					/>
 				</div>
 			)}

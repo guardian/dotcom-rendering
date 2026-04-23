@@ -24,6 +24,7 @@ type Props = {
 	pageId?: string;
 	tagIds?: string[];
 	sectionId?: string;
+	contentType?: string;
 };
 
 /**
@@ -60,6 +61,7 @@ export const Masthead = ({
 	pageId,
 	tagIds,
 	sectionId,
+	contentType,
 }: Props) => (
 	<header data-component="header">
 		<Section
@@ -84,6 +86,7 @@ export const Masthead = ({
 						hasPageSkin={hasPageSkin}
 						tagIds={tagIds}
 						sectionId={sectionId}
+						contentType={contentType}
 					/>
 				</Island>
 			</div>
