@@ -15,7 +15,6 @@ export type NewsletterSignupCardProps = {
 	description: string;
 	illustrationSquare?: string;
 	children?: React.ReactNode;
-	/** Override bottom margin of the card container (default: space[6] = 24px) */
 	marginBottom?: number;
 };
 
@@ -23,7 +22,7 @@ const containerStyles = (marginBottom: number) => css`
 	clear: left;
 	background-color: ${themePalette('--newsletter-card-background')};
 	margin-bottom: ${marginBottom}px;
-	padding: ${space[2]}px ${space[2]}px ${space[4]}px ${space[2]}px;
+	padding: ${space[3]}px ${space[3]}px ${space[4]}px ${space[3]}px;
 `;
 
 const dividerStyles = css`
@@ -49,7 +48,7 @@ const titleAndMetaStyles = css`
 
 const titleStyles = css`
 	${headlineMedium20};
-	margin-bottom: ${space[2]}px;
+	margin-bottom: ${space[1]}px;
 	color: ${themePalette('--newsletter-card-title')};
 `;
 
@@ -72,7 +71,7 @@ const frequencyTagStyles = css`
 const descriptionStyles = css`
 	${textSans14};
 	line-height: 1.15;
-	margin-bottom: ${space[1]}px;
+	margin-bottom: ${space[2]}px;
 	clear: both;
 	color: ${themePalette('--newsletter-card-description')};
 `;

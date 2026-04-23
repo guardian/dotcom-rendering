@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, until } from '@guardian/source/foundations';
+import { space, textSans15, until } from '@guardian/source/foundations';
 import type { Size } from '@guardian/source/react-components';
 import {
 	Button,
@@ -37,6 +37,10 @@ const formStyles = css`
 	column-gap: ${space[3]}px;
 	row-gap: ${space[2]}px;
 	align-items: end;
+
+	${until.tablet} {
+		row-gap: ${space[3]}px;
+	}
 `;
 
 const signedOutLayoutStyles = css`
@@ -86,12 +90,14 @@ const signedOutSubmitButtonStyles = css`
 `;
 
 const signedInSubmitButtonStyles = css`
-	width: 100%;
-	max-width: 220px;
+	flex: 1;
+	button {
+		width: 100%;
+	}
 `;
 
 const previewButtonContainerStyles = css`
-	margin-bottom: ${space[3]}px;
+	margin-bottom: ${space[2]}px;
 `;
 
 const toggleContainerStyles = css`
@@ -109,7 +115,7 @@ const privacyContainerStyles = css`
 
 const successTextStyles = css`
 	color: ${palette('--newsletter-card-description')};
-	font-size: 15px;
+	${textSans15};
 	strong {
 		font-weight: bold;
 	}
@@ -127,7 +133,7 @@ const responseBoxStyles = css`
 	padding: ${space[2]}px;
 	border: 1px solid ${palette('--card-border-supporting')};
 	border-radius: 4px;
-	margin-top: ${space[4]}px;
+	margin-top: ${space[2]}px;
 `;
 
 const errorContainerStyles = css`
@@ -137,9 +143,8 @@ const errorContainerStyles = css`
 `;
 
 const feedbackButtonStyles = css`
-	width: 350px;
-	max-width: 100%;
-	margin-top: ${space[1]}px;
+	width: 100%;
+	margin-top: ${space[2]}px;
 `;
 
 const recaptchaContainerStyles = css`
