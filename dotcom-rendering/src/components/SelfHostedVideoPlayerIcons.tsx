@@ -4,9 +4,6 @@ import { SvgArrowExpand } from '@guardian/source/react-components';
 import { palette } from '../palette';
 import type { Props as SelfHostedVideoPlayerProps } from './SelfHostedVideoPlayer';
 
-export type SubtitleSize = 'small' | 'medium' | 'large';
-export type ControlsPosition = 'top' | 'bottom';
-
 const buttonStyles = css`
 	border: none;
 	background: none;
