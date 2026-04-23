@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette } from '@guardian/source/foundations';
+import { palette as sourcePalette, space } from '@guardian/source/foundations';
 import { useCallback, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { buildNewsletterPreviewUrl } from '../lib/newsletterPreviewUrl';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
+import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import type { NewsletterSignupCardProps } from './NewsletterSignupCard';
 import { NewsletterSignupCard } from './NewsletterSignupCard';
 
@@ -43,12 +44,17 @@ const sendPreviewTracking = ({
 	);
 };
 
-type Props = Omit<NewsletterSignupCardProps, 'children'> & {
+type Props = Omit<NewsletterSignupCardProps, 'children' | 'marginBottom'> & {
 	identityName: string;
 	category?: string;
 	exampleUrl?: string;
 	renderingTarget: RenderingTarget;
 	theme: string;
+	/**
+	 * Pass the signed-in status so the container can render the privacy message
+	 * below the card (rather than inside the form) when the user is signed in.
+	 */
+	isSignedIn?: boolean | 'Pending';
 	children?: (openPreview: (() => void) | undefined) => React.ReactNode;
 };
 
@@ -69,7 +75,9 @@ export const NewsletterSignupCardContainer = ({
 	description,
 	illustrationSquare,
 	children,
+	isSignedIn,
 }: Props) => {
+	const showPrivacyMessageOutside = isSignedIn === true;
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
 	const renderUrl = buildNewsletterPreviewUrl({
@@ -124,9 +132,19 @@ export const NewsletterSignupCardContainer = ({
 				frequency={frequency}
 				description={description}
 				illustrationSquare={illustrationSquare}
+				marginBottom={showPrivacyMessageOutside ? space[2] : undefined}
 			>
 				{children?.(hasPreviewUrl ? openPreview : undefined)}
 			</NewsletterSignupCard>
+			{showPrivacyMessageOutside && (
+				<div
+					css={css`
+						margin-bottom: ${space[6]}px;
+					`}
+				>
+					<NewsletterPrivacyMessage textColor="regular" />
+				</div>
+			)}
 		</div>
 	);
 };

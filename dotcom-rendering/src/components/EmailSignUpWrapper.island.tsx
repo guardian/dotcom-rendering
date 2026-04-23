@@ -94,6 +94,7 @@ export const EmailSignUpWrapper = ({
 					category={category}
 					exampleUrl={exampleUrl}
 					renderingTarget={renderingTarget}
+					isSignedIn={isSignedIn}
 				>
 					{(openPreview) => (
 						<Island priority="feature" defer={{ until: 'visible' }}>
@@ -107,9 +108,6 @@ export const EmailSignUpWrapper = ({
 						</Island>
 					)}
 				</NewsletterSignupCardContainer>
-				{isSignedIn === true && (
-					<NewsletterPrivacyMessage textColor="regular" />
-				)}
 			</InlineSkipToWrapper>
 		);
 	}

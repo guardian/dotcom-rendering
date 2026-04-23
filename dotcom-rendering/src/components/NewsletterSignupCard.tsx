@@ -14,12 +14,14 @@ export type NewsletterSignupCardProps = {
 	description: string;
 	illustrationSquare?: string;
 	children?: React.ReactNode;
+	/** Override bottom margin of the card container (default: space[6] = 24px) */
+	marginBottom?: number;
 };
 
-const containerStyles = css`
+const containerStyles = (marginBottom: number) => css`
 	clear: left;
 	background-color: ${themePalette('--newsletter-card-background')};
-	margin-bottom: ${space[6]}px;
+	margin-bottom: ${marginBottom}px;
 	padding: ${space[2]}px ${space[2]}px ${space[4]}px ${space[2]}px;
 `;
 
@@ -117,10 +119,14 @@ export const NewsletterSignupCard = ({
 	description,
 	illustrationSquare,
 	children,
+	marginBottom = space[6],
 }: NewsletterSignupCardProps) => (
 	<>
 		<hr css={dividerStyles} />
-		<aside css={containerStyles} aria-label="newsletter promotion">
+		<aside
+			css={containerStyles(marginBottom)}
+			aria-label="newsletter promotion"
+		>
 			<NewsletterSignupHeader
 				frequency={frequency}
 				name={name}
