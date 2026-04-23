@@ -647,10 +647,7 @@ export const SelfHostedVideo = ({
 		return FallbackImageComponent;
 	}
 
-	const handleLoadedMetadata = () => {
-		const video = vidRef.current;
-		if (!video) return;
-
+	const positionCues = (video: HTMLVideoElement) => {
 		const track = video.textTracks[0];
 		if (!track?.cues) return;
 
@@ -665,6 +662,12 @@ export const SelfHostedVideo = ({
 				cue.line = percentFromTop;
 			}
 		}
+	};
+
+	const handleLoadedMetadata = () => {
+		const video = vidRef.current;
+		if (!video) return;
+		positionCues(video);
 	};
 
 	const handleLoadedData = () => {
@@ -753,6 +756,21 @@ export const SelfHostedVideo = ({
 			void document.exitFullscreen();
 		}
 		void video.requestFullscreen();
+
+		/* Reposition cues after fullscreen transition settles */
+		video.addEventListener('fullscreenchange', () => positionCues(video), {
+			once: true,
+		});
+		video.addEventListener(
+			'webkitbeginfullscreen',
+			() => positionCues(video),
+			{ once: true },
+		);
+		video.addEventListener(
+			'webkitendfullscreen',
+			() => positionCues(video),
+			{ once: true },
+		);
 	};
 
 	/**
