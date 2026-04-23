@@ -83,17 +83,7 @@ const submitButtonContainerStyles = css`
 	gap: ${space[2]}px;
 `;
 
-const signedOutSubmitButtonStyles = css`
-	flex: 1;
-	button {
-		width: 100%;
-	}
-	${from.tablet} {
-		max-width: 220px;
-	}
-`;
-
-const signedInSubmitButtonStyles = css`
+const submitButtonStyles = css`
 	flex: 1;
 	button {
 		width: 100%;
@@ -232,20 +222,57 @@ const SuccessMessage = ({
 	);
 };
 
+const FailureMessage = ({
+	onRetry,
+}: {
+	onRetry: React.MouseEventHandler<HTMLButtonElement>;
+}) => (
+	<div css={[responseBoxStyles, errorContainerStyles]}>
+		<ErrorMessageWithAdvice text="Sign up failed." />
+		<Button
+			size="small"
+			priority="primary"
+			icon={<SvgReload />}
+			iconSide="right"
+			onClick={onRetry}
+			cssOverrides={tryAgainButtonStyles}
+		>
+			Try again
+		</Button>
+	</div>
+);
+
 /**
  * # Newsletter Signup Form
  *
  * A simplified version of SecureSignup without reCAPTCHA or A/B testing.
  * All logic lives in {@link useNewsletterSignupForm}.
+ *
+ * When the user is already subscribed, the success message is shown immediately
+ * without invoking the form hook (no Identity fetch, reCAPTCHA, etc.).
  */
 export const NewsletterSignupForm = ({
+	isAlreadySubscribed,
+	...rest
+}: Props) => {
+	if (isAlreadySubscribed) {
+		return (
+			<SuccessMessage
+				newsletterName={rest.newsletterName}
+				frequency={rest.frequency}
+			/>
+		);
+	}
+	return <NewsletterSignupFormActive {...rest} />;
+};
+
+const NewsletterSignupFormActive = ({
 	newsletterId,
 	newsletterName,
 	frequency,
 	hidePrivacyMessage = false,
 	onPreviewClick,
-	isAlreadySubscribed = false,
-}: Props) => {
+}: Omit<Props, 'isAlreadySubscribed'>) => {
 	const { renderingTarget } = useConfig();
 
 	const {
@@ -271,8 +298,9 @@ export const NewsletterSignupForm = ({
 	} = useNewsletterSignupForm(newsletterId, renderingTarget);
 
 	const hasResponse = typeof responseOk === 'boolean';
-	const showForm =
-		!isAlreadySubscribed && !hasResponse && !isWaitingForResponse;
+	const showForm = !hasResponse && !isWaitingForResponse;
+	const showSuccess = hasResponse && !!responseOk;
+	const showFailure = hasResponse && !responseOk;
 	const showAdditionalFields = isInteracted || !!userEmail;
 	// Validation errors (before submission) are shown inline on the input.
 	// Network/server errors (after a failed submission) use the standalone message.
@@ -280,15 +308,11 @@ export const NewsletterSignupForm = ({
 
 	return (
 		<>
-			{!isAlreadySubscribed &&
-				!hasResponse &&
-				!isWaitingForResponse &&
-				onPreviewClick &&
-				!isSignedIn && (
-					<div css={previewButtonContainerStyles}>
-						<PreviewButton onClick={onPreviewClick} size="small" />
-					</div>
-				)}
+			{showForm && onPreviewClick && !isSignedIn && (
+				<div css={previewButtonContainerStyles}>
+					<PreviewButton onClick={onPreviewClick} size="small" />
+				</div>
+			)}
 			<form
 				onSubmit={handleSubmit}
 				id={`newsletter-signup-${newsletterId}`}
@@ -344,11 +368,7 @@ export const NewsletterSignupForm = ({
 						<PreviewButton onClick={onPreviewClick} />
 					)}
 					<Button
-						cssOverrides={
-							isSignedIn
-								? signedInSubmitButtonStyles
-								: signedOutSubmitButtonStyles
-						}
+						cssOverrides={submitButtonStyles}
 						onClick={handleSubmitButtonClick}
 						type="submit"
 					>
@@ -366,34 +386,13 @@ export const NewsletterSignupForm = ({
 				<ErrorMessageWithAdvice text={errorMessage} />
 			)}
 
-			{isAlreadySubscribed && (
+			{showSuccess && (
 				<SuccessMessage
 					newsletterName={newsletterName}
 					frequency={frequency}
 				/>
 			)}
-			{!isAlreadySubscribed &&
-				hasResponse &&
-				(responseOk ? (
-					<SuccessMessage
-						newsletterName={newsletterName}
-						frequency={frequency}
-					/>
-				) : (
-					<div css={[responseBoxStyles, errorContainerStyles]}>
-						<ErrorMessageWithAdvice text="Sign up failed." />
-						<Button
-							size="small"
-							priority="primary"
-							icon={<SvgReload />}
-							iconSide="right"
-							onClick={handleReset}
-							cssOverrides={tryAgainButtonStyles}
-						>
-							Try again
-						</Button>
-					</div>
-				))}
+			{showFailure && <FailureMessage onRetry={handleReset} />}
 			{!!captchaSiteKey && (
 				<div css={recaptchaContainerStyles}>
 					<ReactGoogleRecaptcha

@@ -44,7 +44,7 @@ const sendPreviewTracking = ({
 	);
 };
 
-type Props = Omit<NewsletterSignupCardProps, 'children' | 'marginBottom'> & {
+type Props = Omit<NewsletterSignupCardProps, 'children'> & {
 	identityName: string;
 	category?: string;
 	exampleUrl?: string;
@@ -127,24 +127,26 @@ export const NewsletterSignupCardContainer = ({
 					onClose={closePreview}
 				/>
 			)}
-			<NewsletterSignupCard
-				name={name}
-				frequency={frequency}
-				description={description}
-				illustrationSquare={illustrationSquare}
-				marginBottom={showPrivacyMessageOutside ? space[2] : undefined}
+			<div
+				css={css`
+					display: flex;
+					flex-direction: column;
+					gap: ${space[2]}px;
+					margin-bottom: ${space[6]}px;
+				`}
 			>
-				{children?.(hasPreviewUrl ? openPreview : undefined)}
-			</NewsletterSignupCard>
-			{showPrivacyMessageOutside && (
-				<div
-					css={css`
-						margin-bottom: ${space[6]}px;
-					`}
+				<NewsletterSignupCard
+					name={name}
+					frequency={frequency}
+					description={description}
+					illustrationSquare={illustrationSquare}
 				>
+					{children?.(hasPreviewUrl ? openPreview : undefined)}
+				</NewsletterSignupCard>
+				{showPrivacyMessageOutside && (
 					<NewsletterPrivacyMessage textColor="regular" />
-				</div>
-			)}
+				)}
+			</div>
 		</div>
 	);
 };

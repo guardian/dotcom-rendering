@@ -27,6 +27,14 @@ const defaultArgs = {
 	exampleUrl: 'https://www.theguardian.com/email/the-recap',
 } satisfies Story['args'];
 
+const newCardArgs = {
+	...defaultArgs,
+	showNewNewsletterSignupCard: true,
+	hideNewsletterSignupComponentForSubscribers: true,
+	illustrationSquare:
+		'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
+} satisfies Story['args'];
+
 // Loading state - shows placeholder while auth status is being determined
 // This prevents layout shift when subscription status is resolved
 export const Placeholder = meta.story({
@@ -123,14 +131,8 @@ export const FeatureFlagDisabled = meta.story({
 	},
 });
 
-export const NewNewsletterSignupCardSignedInNotSubscribed = meta.story({
-	args: {
-		...defaultArgs,
-		showNewNewsletterSignupCard: true,
-		hideNewsletterSignupComponentForSubscribers: true,
-		illustrationSquare:
-			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
-	},
+export const NewsletterSignupCardSignedInNotSubscribed = meta.story({
+	args: newCardArgs,
 	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(true);
@@ -140,14 +142,8 @@ export const NewNewsletterSignupCardSignedInNotSubscribed = meta.story({
 	},
 });
 
-export const NewNewsletterSignupCardSignedOutNotSubscribed = meta.story({
-	args: {
-		...defaultArgs,
-		showNewNewsletterSignupCard: true,
-		hideNewsletterSignupComponentForSubscribers: true,
-		illustrationSquare:
-			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
-	},
+export const NewsletterSignupCardSignedOutNotSubscribed = meta.story({
+	args: newCardArgs,
 	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(false);
@@ -157,14 +153,8 @@ export const NewNewsletterSignupCardSignedOutNotSubscribed = meta.story({
 	},
 });
 
-export const NewNewsletterSignupCardSignedInAlreadySubscribed = meta.story({
-	args: {
-		...defaultArgs,
-		showNewNewsletterSignupCard: true,
-		hideNewsletterSignupComponentForSubscribers: true,
-		illustrationSquare:
-			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
-	},
+export const NewsletterSignupCardSignedInAlreadySubscribed = meta.story({
+	args: newCardArgs,
 	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(true);
 		mocked(useIsSignedIn).mockReturnValue(true);
@@ -174,14 +164,8 @@ export const NewNewsletterSignupCardSignedInAlreadySubscribed = meta.story({
 	},
 });
 
-export const NewNewsletterSignupCardSignedOutAlreadySubscribed = meta.story({
-	args: {
-		...defaultArgs,
-		showNewNewsletterSignupCard: true,
-		hideNewsletterSignupComponentForSubscribers: true,
-		illustrationSquare:
-			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
-	},
+export const NewsletterSignupCardSignedOutAlreadySubscribed = meta.story({
+	args: newCardArgs,
 	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(true);
 		mocked(useIsSignedIn).mockReturnValue(false);
@@ -191,14 +175,8 @@ export const NewNewsletterSignupCardSignedOutAlreadySubscribed = meta.story({
 	},
 });
 
-export const NewNewsletterSignupCardFocused = meta.story({
-	args: {
-		...defaultArgs,
-		showNewNewsletterSignupCard: true,
-		hideNewsletterSignupComponentForSubscribers: true,
-		illustrationSquare:
-			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
-	},
+export const NewsletterSignupCardFocused = meta.story({
+	args: newCardArgs,
 	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(false);

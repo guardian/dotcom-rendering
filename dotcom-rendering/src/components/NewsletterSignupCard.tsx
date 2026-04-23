@@ -15,13 +15,11 @@ export type NewsletterSignupCardProps = {
 	description: string;
 	illustrationSquare?: string;
 	children?: React.ReactNode;
-	marginBottom?: number;
 };
 
-const containerStyles = (marginBottom: number) => css`
+const containerStyles = css`
 	clear: left;
 	background-color: ${themePalette('--newsletter-card-background')};
-	margin-bottom: ${marginBottom}px;
 	padding: ${space[3]}px ${space[3]}px ${space[4]}px ${space[3]}px;
 `;
 
@@ -124,14 +122,10 @@ export const NewsletterSignupCard = ({
 	description,
 	illustrationSquare,
 	children,
-	marginBottom = space[6],
 }: NewsletterSignupCardProps) => (
 	<>
 		<hr css={dividerStyles} />
-		<aside
-			css={containerStyles(marginBottom)}
-			aria-label="newsletter promotion"
-		>
+		<aside css={containerStyles} aria-label="newsletter promotion">
 			<NewsletterSignupHeader
 				frequency={frequency}
 				name={name}

@@ -70,11 +70,11 @@ const getTrackedEventDescription = (call: unknown[]): string => {
 	return value.eventDescription;
 };
 
-const getDecodedRequestBody = (callIndex = 0): string => {
+const getRequestBodyParams = (callIndex = 0): URLSearchParams => {
 	const [, requestInit] = (global.fetch as jest.Mock).mock.calls[
 		callIndex
 	] as [string, RequestInit];
-	return decodeURIComponent(requestInit.body?.toString() ?? '');
+	return new URLSearchParams(requestInit.body?.toString() ?? '');
 };
 
 const expectTrackedEventDescriptions = (expected: string[]): void => {
@@ -147,12 +147,12 @@ describe('NewsletterSignupForm', () => {
 			}),
 		);
 
-		const decodedBody = getDecodedRequestBody();
+		const params = getRequestBodyParams();
 
-		expect(decodedBody).toContain('email=reader@example.com');
-		expect(decodedBody).toContain('listName=morning-briefing');
-		expect(decodedBody).toContain('marketing=true');
-		expect(decodedBody).toContain('browserId=test-browser-id');
+		expect(params.get('email')).toBe('reader@example.com');
+		expect(params.get('listName')).toBe('morning-briefing');
+		expect(params.get('marketing')).toBe('true');
+		expect(params.get('browserId')).toBe('test-browser-id');
 
 		expectTrackedEventDescriptions([
 			'click-button',
@@ -191,17 +191,14 @@ describe('NewsletterSignupForm', () => {
 		await testUser.click(marketingSwitch);
 		expect(marketingSwitch).toHaveAttribute('aria-checked', 'false');
 
-		const signUpButton = screen.queryByRole('button', { name: 'Sign up' });
-		if (signUpButton) {
-			await testUser.click(signUpButton);
-		}
+		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
 
 		await waitFor(() => {
 			expect(global.fetch).toHaveBeenCalled();
 		});
 
-		const decodedBody = getDecodedRequestBody();
-		expect(decodedBody).toContain('marketing=false');
+		const params = getRequestBodyParams();
+		expect(params.get('marketing')).toBe('false');
 	});
 
 	it('supports keyboard interaction for marketing toggle and submit button', async () => {
@@ -235,8 +232,8 @@ describe('NewsletterSignupForm', () => {
 			).toBeInTheDocument();
 		});
 
-		const decodedBody = getDecodedRequestBody();
-		expect(decodedBody).toContain('marketing=false');
+		const params = getRequestBodyParams();
+		expect(params.get('marketing')).toBe('false');
 	});
 
 	it('uses prefilled email for signed-in users and clears cached subscriptions on success', async () => {
@@ -271,8 +268,8 @@ describe('NewsletterSignupForm', () => {
 
 		expect(clearSubscriptionCache).toHaveBeenCalledTimes(1);
 
-		const decodedBody = getDecodedRequestBody();
-		expect(decodedBody).toContain('email=signed.in@example.com');
+		const params = getRequestBodyParams();
+		expect(params.get('email')).toBe('signed.in@example.com');
 	});
 
 	it('shows an inline validation error when submitting with an empty email', async () => {
@@ -316,7 +313,7 @@ describe('NewsletterSignupForm', () => {
 
 		// Typing clears the error immediately
 		await testUser.type(
-			screen.getByLabelText('Enter your email'),
+			screen.getByLabelText('Enter your email', { exact: false }),
 			'{Backspace}',
 		);
 
