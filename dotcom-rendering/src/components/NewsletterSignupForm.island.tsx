@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans15, until } from '@guardian/source/foundations';
+import { from, space, textSans15, until } from '@guardian/source/foundations';
 import type { Size } from '@guardian/source/react-components';
 import {
 	Button,
@@ -88,12 +88,18 @@ const signedOutSubmitButtonStyles = css`
 	button {
 		width: 100%;
 	}
+	${from.tablet} {
+		max-width: 220px;
+	}
 `;
 
 const signedInSubmitButtonStyles = css`
 	flex: 1;
 	button {
 		width: 100%;
+	}
+	${from.tablet} {
+		max-width: 220px;
 	}
 `;
 
@@ -143,7 +149,7 @@ const errorContainerStyles = css`
 	gap: ${space[2]}px;
 `;
 
-const feedbackButtonStyles = css`
+const tryAgainButtonStyles = css`
 	width: 100%;
 	margin-top: ${space[2]}px;
 `;
@@ -154,7 +160,12 @@ const recaptchaContainerStyles = css`
 	}
 `;
 
-const browseMoreLinksStyles = feedbackButtonStyles;
+const browseMoreLinksStyles = css`
+	${tryAgainButtonStyles};
+	${from.tablet} {
+		max-width: 350px;
+	}
+`;
 
 const PreviewButton = ({
 	onClick,
@@ -377,7 +388,7 @@ export const NewsletterSignupForm = ({
 							icon={<SvgReload />}
 							iconSide="right"
 							onClick={handleReset}
-							cssOverrides={feedbackButtonStyles}
+							cssOverrides={tryAgainButtonStyles}
 						>
 							Try again
 						</Button>
