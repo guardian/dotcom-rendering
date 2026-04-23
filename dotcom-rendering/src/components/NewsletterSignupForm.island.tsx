@@ -205,7 +205,8 @@ const SuccessMessage = ({
 					<strong>You're signed up!</strong>
 					&nbsp;
 					<span>
-						You will receive {newsletterName} {frequency}.
+						You will receive {newsletterName}{' '}
+						{frequency.toLowerCase()}.
 					</span>
 				</span>
 			</InlineSuccess>
