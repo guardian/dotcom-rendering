@@ -30,6 +30,21 @@ importers:
         specifier: 2.6.2
         version: 2.6.2
 
+  ab-testing:
+    devDependencies:
+      '@guardian/eslint-config':
+        specifier: 12.0.1
+        version: 12.0.1(eslint-plugin-import@2.29.1(@typescript-eslint/parser@8.22.0(eslint@9.39.1)(typescript@5.9.3))(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
+      '@guardian/tsconfig':
+        specifier: 1.0.1
+        version: 1.0.1
+      eslint:
+        specifier: 9.39.1
+        version: 9.39.1
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+
   ab-testing/cdk:
     devDependencies:
       '@aws-sdk/client-s3':
@@ -41,9 +56,6 @@ importers:
       '@guardian/cdk':
         specifier: 62.6.1
         version: 62.6.1(aws-cdk-lib@2.246.0(constructs@10.6.0))(aws-cdk@2.1115.1)(constructs@10.6.0)
-      '@guardian/eslint-config':
-        specifier: 12.0.1
-        version: 12.0.1(eslint-plugin-import@2.29.1(@typescript-eslint/parser@8.22.0(eslint@9.39.1)(typescript@5.9.3))(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
       '@guardian/tsconfig':
         specifier: 1.0.1
         version: 1.0.1
@@ -59,15 +71,6 @@ importers:
       constructs:
         specifier: 10.6.0
         version: 10.6.0
-      eslint:
-        specifier: 9.39.1
-        version: 9.39.1
-      prettier:
-        specifier: 3.0.3
-        version: 3.0.3
-      source-map-support:
-        specifier: 0.5.21
-        version: 0.5.21
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -84,36 +87,12 @@ importers:
       '@aws-sdk/client-ssm':
         specifier: 3.995.0
         version: 3.995.0
-      '@guardian/cdk':
-        specifier: 62.6.1
-        version: 62.6.1(aws-cdk-lib@2.246.0(constructs@10.6.0))(aws-cdk@2.1115.1)(constructs@10.6.0)
-      '@guardian/eslint-config':
-        specifier: 12.0.1
-        version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
       '@guardian/tsconfig':
         specifier: 1.0.1
         version: 1.0.1
       '@types/node':
         specifier: 22.17.0
         version: 22.17.0
-      aws-cdk:
-        specifier: 2.1115.1
-        version: 2.1115.1
-      aws-cdk-lib:
-        specifier: 2.246.0
-        version: 2.246.0(constructs@10.6.0)
-      constructs:
-        specifier: 10.6.0
-        version: 10.6.0
-      eslint:
-        specifier: 9.39.1
-        version: 9.39.1
-      prettier:
-        specifier: 3.0.3
-        version: 3.0.3
-      source-map-support:
-        specifier: 0.5.21
-        version: 0.5.21
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -133,12 +112,6 @@ importers:
         specifier: 2.0.2
         version: 2.0.2
     devDependencies:
-      '@guardian/cdk':
-        specifier: 62.6.1
-        version: 62.6.1(aws-cdk-lib@2.246.0(constructs@10.6.0))(aws-cdk@2.1115.1)(constructs@10.6.0)
-      '@guardian/eslint-config':
-        specifier: 12.0.1
-        version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
       '@guardian/tsconfig':
         specifier: 1.0.1
         version: 1.0.1
@@ -157,24 +130,9 @@ importers:
       '@types/node':
         specifier: 22.17.0
         version: 22.17.0
-      aws-cdk:
-        specifier: 2.1115.1
-        version: 2.1115.1
-      aws-cdk-lib:
-        specifier: 2.246.0
-        version: 2.246.0(constructs@10.6.0)
-      constructs:
-        specifier: 10.6.0
-        version: 10.6.0
       esbuild:
         specifier: 0.27.0
         version: 0.27.0
-      eslint:
-        specifier: 9.39.1
-        version: 9.39.1
-      prettier:
-        specifier: 3.0.3
-        version: 3.0.3
       rollup:
         specifier: 4.59.0
         version: 4.59.0
@@ -230,9 +188,6 @@ importers:
         specifier: workspace:ab-testing-config
         version: link:../config
     devDependencies:
-      '@guardian/eslint-config':
-        specifier: 12.0.1
-        version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
       '@guardian/tsconfig':
         specifier: 1.0.1
         version: 1.0.1
@@ -254,12 +209,6 @@ importers:
       esbuild:
         specifier: 0.27.0
         version: 0.27.0
-      eslint:
-        specifier: 9.39.1
-        version: 9.39.1
-      prettier:
-        specifier: 3.0.3
-        version: 3.0.3
       rollup:
         specifier: 4.59.0
         version: 4.59.0
@@ -2349,8 +2298,8 @@ packages:
     resolution: {integrity: sha512-CCZCDJuduB9OUkFkY2IgppNZMi2lBQgD2qzwXkEia16cge2pijY/aXi96CJMquDMn3nJdlPV1A5KrJEXwfLNzQ==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
 
-  '@eslint/config-array@0.21.1':
-    resolution: {integrity: sha512-aw1gNayWpdI/jSYVgzN5pL0cfzU02GT3NBpeT/DXbx1/1x7ZKxFPd9bwrzygx/qiwIQiJ1sw/zD8qY/kRvlGHA==}
+  '@eslint/config-array@0.21.2':
+    resolution: {integrity: sha512-nJl2KGTlrf9GjLimgIru+V/mzgSK0ABCDQRvxw5BjURL7WfH5uoWmizbH7QB6MmnMBd8cIC9uceWnezL1VZWWw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/config-helpers@0.4.2':
@@ -2365,8 +2314,8 @@ packages:
     resolution: {integrity: sha512-269Z39MS6wVJtsoUl10L60WdkhJVdPG24Q4eZTH3nnF6lpvSShEK3wQjDX9JRWAUPvPh7COouPpU9IrqaZFvtQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  '@eslint/eslintrc@3.3.1':
-    resolution: {integrity: sha512-gtF186CXhIl1p4pJNGZw8Yc6RlshoePRvE0X91oPGb3vZ8pM3qOS9W9NGPat9LziaBV7XrJWGylNQXkGcnM3IQ==}
+  '@eslint/eslintrc@3.3.5':
+    resolution: {integrity: sha512-4IlJx0X0qftVsN5E+/vGujTRIFtwuLbNsVUe7TO6zYPDR1O6nFwvwhIKEKSrl6dZchmYBITazxKoUYOjdtjlRg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/js@8.57.1':
@@ -2568,12 +2517,16 @@ packages:
   '@guardian/tsconfig@1.0.1':
     resolution: {integrity: sha512-PB24nZ6WTBB8aZ9EyxJw1vC5FYkGqwMQ/O5Oogp6P5HCQU5MN0JpUXvpYci7kwV2oXD1Az06UBnLyyVXOVMadQ==}
 
-  '@humanfs/core@0.19.1':
-    resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
+  '@humanfs/core@0.19.2':
+    resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
     engines: {node: '>=18.18.0'}
 
-  '@humanfs/node@0.16.7':
-    resolution: {integrity: sha512-/zUx+yOsIrG4Y43Eh2peDeKCxlRt/gET6aHfaKpuq267qXdYDFViVHfMaLyygZOnl0kGWxFIgsBy8QFuTLUXEQ==}
+  '@humanfs/node@0.16.8':
+    resolution: {integrity: sha512-gE1eQNZ3R++kTzFUpdGlpmy8kDZD/MLyHqDwqjkVQI0JMdI1D51sy1H958PNXYkM2rAac7e5/CnIKZrHtPh3BQ==}
+    engines: {node: '>=18.18.0'}
+
+  '@humanfs/types@0.15.0':
+    resolution: {integrity: sha512-ZZ1w0aoQkwuUuC7Yf+7sdeaNfqQiiLcSRbfI08oAxqLtpXQr9AIVX7Ay7HLDuiLYAaFPu8oBYNq/QIi9URHJ3Q==}
     engines: {node: '>=18.18.0'}
 
   '@humanwhocodes/config-array@0.13.0':
@@ -11564,7 +11517,7 @@ snapshots:
 
   '@eslint-community/regexpp@4.12.1': {}
 
-  '@eslint/config-array@0.21.1':
+  '@eslint/config-array@0.21.2':
     dependencies:
       '@eslint/object-schema': 2.1.7
       debug: 4.4.3
@@ -11594,7 +11547,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@eslint/eslintrc@3.3.1':
+  '@eslint/eslintrc@3.3.5':
     dependencies:
       ajv: 6.14.0
       debug: 4.4.3
@@ -11694,27 +11647,6 @@ snapshots:
       eslint: 9.39.1
       eslint-config-prettier: 9.1.0(eslint@9.39.1)
       eslint-import-resolver-typescript: 3.7.0(eslint-plugin-import-x@4.6.1(eslint@9.39.1)(typescript@5.9.3))(eslint-plugin-import@2.29.1(@typescript-eslint/parser@8.22.0(eslint@9.39.1)(typescript@5.9.3))(eslint@9.39.1))(eslint@9.39.1)
-      eslint-plugin-import-x: 4.6.1(eslint@9.39.1)(typescript@5.9.3)
-      eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.1)
-      eslint-plugin-react: 7.37.2(eslint@9.39.1)
-      eslint-plugin-react-hooks: 5.1.0(eslint@9.39.1)
-      eslint-plugin-storybook: 0.11.1(eslint@9.39.1)(typescript@5.9.3)
-      globals: 15.14.0
-      read-package-up: 11.0.0
-      typescript-eslint: 8.22.0(eslint@9.39.1)(typescript@5.9.3)
-    transitivePeerDependencies:
-      - eslint-plugin-import
-      - supports-color
-      - typescript
-
-  '@guardian/eslint-config@12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)':
-    dependencies:
-      '@eslint-community/eslint-plugin-eslint-comments': 4.4.1(eslint@9.39.1)
-      '@eslint/js': 9.19.0
-      '@stylistic/eslint-plugin': 2.11.0(eslint@9.39.1)(typescript@5.9.3)
-      eslint: 9.39.1
-      eslint-config-prettier: 9.1.0(eslint@9.39.1)
-      eslint-import-resolver-typescript: 3.7.0(eslint-plugin-import-x@4.6.1(eslint@9.39.1)(typescript@5.9.3))(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)
       eslint-plugin-import-x: 4.6.1(eslint@9.39.1)(typescript@5.9.3)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.1)
       eslint-plugin-react: 7.37.2(eslint@9.39.1)
@@ -11841,12 +11773,17 @@ snapshots:
 
   '@guardian/tsconfig@1.0.1': {}
 
-  '@humanfs/core@0.19.1': {}
-
-  '@humanfs/node@0.16.7':
+  '@humanfs/core@0.19.2':
     dependencies:
-      '@humanfs/core': 0.19.1
+      '@humanfs/types': 0.15.0
+
+  '@humanfs/node@0.16.8':
+    dependencies:
+      '@humanfs/core': 0.19.2
+      '@humanfs/types': 0.15.0
       '@humanwhocodes/retry': 0.4.3
+
+  '@humanfs/types@0.15.0': {}
 
   '@humanwhocodes/config-array@0.13.0':
     dependencies:
@@ -15469,23 +15406,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@3.7.0(eslint-plugin-import-x@4.6.1(eslint@9.39.1)(typescript@5.9.3))(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1):
-    dependencies:
-      '@nolyfill/is-core-module': 1.0.39
-      debug: 4.4.3
-      enhanced-resolve: 5.19.0
-      eslint: 9.39.1
-      fast-glob: 3.3.3
-      get-tsconfig: 4.13.0
-      is-bun-module: 1.3.0
-      is-glob: 4.0.3
-      stable-hash: 0.0.4
-    optionalDependencies:
-      eslint-plugin-import: 2.29.1(eslint@9.39.1)
-      eslint-plugin-import-x: 4.6.1(eslint@9.39.1)(typescript@5.9.3)
-    transitivePeerDependencies:
-      - supports-color
-
   eslint-module-utils@2.12.1(@typescript-eslint/parser@8.1.0(eslint@8.57.1)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.1):
     dependencies:
       debug: 3.2.7
@@ -15614,32 +15534,6 @@ snapshots:
       tsconfig-paths: 3.15.0
     optionalDependencies:
       '@typescript-eslint/parser': 8.22.0(eslint@9.39.1)(typescript@5.9.3)
-    transitivePeerDependencies:
-      - eslint-import-resolver-typescript
-      - eslint-import-resolver-webpack
-      - supports-color
-    optional: true
-
-  eslint-plugin-import@2.29.1(eslint@9.39.1):
-    dependencies:
-      array-includes: 3.1.9
-      array.prototype.findlastindex: 1.2.6
-      array.prototype.flat: 1.3.3
-      array.prototype.flatmap: 1.3.3
-      debug: 3.2.7
-      doctrine: 2.1.0
-      eslint: 9.39.1
-      eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.22.0(eslint@9.39.1)(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.39.1)
-      hasown: 2.0.2
-      is-core-module: 2.16.1
-      is-glob: 4.0.3
-      minimatch: 3.1.5
-      object.fromentries: 2.0.8
-      object.groupby: 1.0.3
-      object.values: 1.2.1
-      semver: 6.3.1
-      tsconfig-paths: 3.15.0
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -15875,13 +15769,13 @@ snapshots:
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.1)
       '@eslint-community/regexpp': 4.12.1
-      '@eslint/config-array': 0.21.1
+      '@eslint/config-array': 0.21.2
       '@eslint/config-helpers': 0.4.2
       '@eslint/core': 0.17.0
-      '@eslint/eslintrc': 3.3.1
+      '@eslint/eslintrc': 3.3.5
       '@eslint/js': 9.39.1
       '@eslint/plugin-kit': 0.4.1
-      '@humanfs/node': 0.16.7
+      '@humanfs/node': 0.16.8
       '@humanwhocodes/module-importer': 1.0.1
       '@humanwhocodes/retry': 0.4.3
       '@types/estree': 1.0.8
