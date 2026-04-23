@@ -11,6 +11,7 @@ import {
 	SvgEye,
 	SvgReload,
 	TextInput,
+	themeButton,
 } from '@guardian/source/react-components';
 import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
@@ -211,6 +212,7 @@ const SuccessMessage = ({
 			<LinkButton
 				href="/email-newsletters"
 				priority="tertiary"
+				theme={themeButton}
 				cssOverrides={browseMoreLinksStyles}
 			>
 				Browse more newsletters
