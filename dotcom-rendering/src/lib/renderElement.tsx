@@ -571,19 +571,24 @@ export const renderElement = ({
 					caption={element.caption}
 				/>
 			);
-		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement': {
+			const newsletter = element.newsletter;
 			const emailSignUpProps = {
 				index,
-				listId: element.newsletter.listId,
-				identityName: element.newsletter.identityName,
-				description: element.newsletter.description,
-				name: element.newsletter.name,
-				frequency: element.newsletter.frequency,
-				successDescription: element.newsletter.successDescription,
-				theme: element.newsletter.theme,
+				listId: newsletter.listId,
+				identityName: newsletter.identityName,
+				category: newsletter.category,
+				description: newsletter.description,
+				name: newsletter.name,
+				frequency: newsletter.frequency,
+				successDescription: newsletter.successDescription,
+				theme: newsletter.theme,
+				illustrationSquare: newsletter.illustrationSquare,
+				exampleUrl: newsletter.exampleUrl,
 				idApiUrl: idApiUrl ?? '',
 				hideNewsletterSignupComponentForSubscribers:
 					!!switches.hideNewsletterSignupComponentForSubscribers,
+				showNewsletterSignupCard: !!switches.showNewsletterSignupCard,
 			};
 			if (isListElement || isTimeline) return null;
 			return (
@@ -591,6 +596,7 @@ export const renderElement = ({
 					<EmailSignUpWrapper {...emailSignUpProps} />
 				</Island>
 			);
+		}
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return renderAds && <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':

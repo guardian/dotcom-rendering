@@ -48,7 +48,6 @@ export const Loop: Story = {
 		sources: loop54Card.mainMedia.sources,
 		aspectRatio: loop54Card.mainMedia.aspectRatio,
 		uniqueId: 'test-video-1',
-		atomId: 'test-atom-1',
 		videoStyle: 'Loop',
 		posterImage:
 			'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
@@ -74,7 +73,7 @@ export const Default: Story = {
 export const WithoutProgressBar: Story = {
 	args: {
 		...Loop.args,
-		hideProgressBar: false,
+		hideProgressBar: true,
 	},
 } satisfies Story;
 

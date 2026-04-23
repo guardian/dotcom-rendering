@@ -31,11 +31,13 @@ import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import type {
+	ControlsPosition,
 	PLAYER_STATES,
 	PlayerStates,
 	SubtitleSize,
 } from './SelfHostedVideoPlayer';
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
+import type { SubtitlesPosition } from './SubtitleOverlay';
 import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
@@ -296,7 +298,7 @@ type Props = {
 	/**
 	 * The position of subtitles and the audio icon.
 	 */
-	controlsPosition?: 'top' | 'bottom';
+	controlsPosition?: ControlsPosition;
 	/**
 	 * The minimum/maximum aspect ratio the video will have. The video will be cropped if this
 	 * value is defined and the video aspect ratio is less/greater than this value.
@@ -377,7 +379,19 @@ export const SelfHostedVideo = ({
 
 	const shouldLoop = isLoop || isCinemagraph;
 
-	const showProgressBar = !hideProgressBar && !isCinemagraph;
+	const showProgressBar =
+		!hideProgressBar && !isCinemagraph && playerState !== 'NOT_STARTED';
+
+	const showIcons = !isCinemagraph && playerState !== 'NOT_STARTED';
+
+	const iconSize = isDefault ? 'large' : 'small';
+
+	const useLongFormProgressBar = isDefault;
+
+	const subtitlesPosition: SubtitlesPosition =
+		useLongFormProgressBar && controlsPosition === 'bottom'
+			? 'bottom-elevated'
+			: controlsPosition;
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
 
@@ -449,6 +463,13 @@ export const SelfHostedVideo = ({
 			}
 		} else {
 			void playVideo();
+		}
+	};
+
+	const updateCurrentTime = (newTime: number) => {
+		if (vidRef.current) {
+			vidRef.current.currentTime = newTime;
+			setCurrentTime(newTime);
 		}
 	};
 
@@ -633,6 +654,7 @@ export const SelfHostedVideo = ({
 
 		const track = video.textTracks[0];
 		if (!track?.cues) return;
+
 		const pxFromBottom = space[3];
 		const videoHeight = video.getBoundingClientRect().height;
 		const percentFromTop =
@@ -704,8 +726,8 @@ export const SelfHostedVideo = ({
 	const handleFullscreenClick = (event: React.SyntheticEvent) => {
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 		event.stopPropagation(); // Don't pause the video
-		const video = vidRef.current;
 
+		const video = vidRef.current;
 		if (!video) return;
 
 		if (shouldUseWebkitFullscreen(video)) {
@@ -770,33 +792,35 @@ export const SelfHostedVideo = ({
 	};
 
 	const seekForward = () => {
-		if (vidRef.current) {
-			const newTime = Math.min(
-				vidRef.current.currentTime + 1,
-				vidRef.current.duration,
-			);
+		const video = vidRef.current;
+		if (!video) return;
 
-			vidRef.current.currentTime = newTime;
-			setCurrentTime(newTime);
-		}
+		const increment = isDefault ? 10 : 1;
+		const newTime = Math.min(video.currentTime + increment, video.duration);
+
+		updateCurrentTime(newTime);
 	};
 
 	const seekBackward = () => {
-		if (vidRef.current) {
-			// Allow the user to cycle to the end of the video using the arrow keys
-			const newTime =
-				(((vidRef.current.currentTime - 1) % vidRef.current.duration) +
-					vidRef.current.duration) %
-				vidRef.current.duration;
+		const video = vidRef.current;
+		if (!video) return;
 
-			vidRef.current.currentTime = newTime;
-			setCurrentTime(newTime);
+		const increment = isDefault ? 10 : 1;
+		const newTime = Math.max(video.currentTime - increment, 0);
+
+		updateCurrentTime(newTime);
+	};
+
+	const handleTimeUpdate = () => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		if (playerState === 'PLAYING') {
+			setCurrentTime(video.currentTime);
 		}
 	};
 
-	const handleKeyDown = (
-		event: React.KeyboardEvent<HTMLVideoElement>,
-	): void => {
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
 		if (isCinemagraph) return;
 
 		switch (event.key) {
@@ -918,10 +942,7 @@ export const SelfHostedVideo = ({
 						posterImage={optimisedPosterImage}
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
-						setCurrentTime={setCurrentTime}
 						ref={vidRef}
-						isPlayable={isPlayable}
-						playerState={playerState}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
 						handleLoadedData={handleLoadedData}
@@ -929,19 +950,24 @@ export const SelfHostedVideo = ({
 						handlePlaying={handlePlaying}
 						handlePlayPauseClick={handlePlayPauseClick}
 						handleAudioClick={handleAudioClick}
+						handleTimeUpdate={handleTimeUpdate}
 						handleKeyDown={handleKeyDown}
+						useLongFormProgressBar={useLongFormProgressBar}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
+						updateCurrentTime={updateCurrentTime}
 						onError={onError}
 						AudioIcon={hasAudio ? AudioIcon : null}
 						preloadPartialData={!!shouldAutoplay}
+						iconSize={iconSize}
 						showPlayIcon={showPlayIcon}
 						showProgressBar={showProgressBar}
 						showSubtitles={!isCinemagraph}
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}
-						showIcons={!isCinemagraph}
-						controlsPosition={controlsPosition}
+						showIcons={showIcons}
+						iconsPosition={controlsPosition}
+						subtitlesPosition={subtitlesPosition}
 						activeCue={activeCue}
 						shouldLoop={shouldLoop}
 						showFullscreenIcon={isDefault}

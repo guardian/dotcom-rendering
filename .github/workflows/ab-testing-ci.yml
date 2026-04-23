@@ -10,16 +10,12 @@ on:
       - '.github/workflows/ab-testing-ci.yml'
 
 jobs:
-  config-ci:
+  ab-testing-checks:
     runs-on: ubuntu-latest
-    name: Config CI
+    name: AB testing checks
     defaults:
       run:
-        working-directory: ab-testing/config
-    env:
-      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}
-      FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
-
+        working-directory: ab-testing
     steps:
       - uses: actions/checkout@v5
 
@@ -32,11 +28,21 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-      - name: Prettier Check
-        run: pnpm prettier:check
+  config-ci:
+    runs-on: ubuntu-latest
+    name: Config CI
+    defaults:
+      run:
+        working-directory: ab-testing/config
+    env:
+      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}
+      FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
+    needs: [ab-testing-checks]
+    steps:
+      - uses: actions/checkout@v5
 
-      - name: Typecheck
-        run: pnpm tsc
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
 
       - name: Validate
         run: pnpm validate
@@ -57,6 +63,7 @@ jobs:
         working-directory: ab-testing/frontend
     permissions:
       contents: read
+    needs: [ab-testing-checks]
     steps:
       - uses: actions/checkout@v5
 
@@ -81,6 +88,7 @@ jobs:
         working-directory: ab-testing/deploy-lambda
     permissions:
       contents: read
+    needs: [ab-testing-checks]
     steps:
       - uses: actions/checkout@v5
 
@@ -110,6 +118,7 @@ jobs:
         working-directory: ab-testing/notification-lambda
     permissions:
       contents: read
+    needs: [ab-testing-checks]
     steps:
       - uses: actions/checkout@v5
 

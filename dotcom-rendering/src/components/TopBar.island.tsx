@@ -29,6 +29,9 @@ interface Props {
 	idApiUrl: string;
 	contributionsServiceUrl: string;
 	hasPageSkin?: boolean;
+	tagIds?: string[];
+	sectionId?: string;
+	contentType?: string;
 }
 
 const topBarStyles = css`
@@ -114,6 +117,9 @@ export const TopBar = ({
 	idApiUrl,
 	contributionsServiceUrl,
 	hasPageSkin = false,
+	tagIds,
+	sectionId,
+	contentType,
 }: Props) => {
 	const authStatus = useAuthStatus();
 	const { renderingTarget } = useConfig();
@@ -151,6 +157,9 @@ export const TopBar = ({
 					<TopBarSupport
 						contributionsServiceUrl={contributionsServiceUrl}
 						pageUrl={referrerUrl}
+						tagIds={tagIds}
+						sectionId={sectionId}
+						contentType={contentType}
 					/>
 				</TopBarLinkContainer>
 

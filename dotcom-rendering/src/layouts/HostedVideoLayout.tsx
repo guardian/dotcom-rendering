@@ -11,9 +11,9 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
+import { FetchHostedOnwards } from '../components/FetchHostedOnwards.island';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
 import { HostedContentHeader } from '../components/HostedContentHeader';
-import { HostedContentOnwards } from '../components/HostedContentOnwards';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
@@ -28,7 +28,6 @@ import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { trails } from './HostedArticleLayout';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -323,11 +322,12 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 					</div>
 
 					<div css={onwardContentStyles}>
-						<HostedContentOnwards
-							trails={trails} //Temporary trails dummy data which is exported from HostedArticleLayout
-							brandName="TrendAI"
-							accentColor={branding?.hostedCampaignColour}
-						/>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<FetchHostedOnwards
+								url={`${frontendData.config.ajaxUrl}/${frontendData.config.pageId}/onward.json`}
+								branding={branding}
+							/>
+						</Island>
 					</div>
 
 					{cta && (

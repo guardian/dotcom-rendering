@@ -1,4 +1,4 @@
-import { trails } from '../layouts/HostedArticleLayout';
+import { hostedOnwardsTrails } from '../../fixtures/manual/onwardsTrails';
 import { HostedContentOnwards } from './HostedContentOnwards';
 
 export default {
@@ -7,7 +7,12 @@ export default {
 };
 
 export const Default = () => {
-	return <HostedContentOnwards trails={trails} brandName="TrendAI" />;
+	return (
+		<HostedContentOnwards
+			trails={hostedOnwardsTrails}
+			brandName="TrendAI"
+		/>
+	);
 };
 
 Default.storyName = 'default';
@@ -15,7 +20,7 @@ Default.storyName = 'default';
 export const WithAccentColour = () => {
 	return (
 		<HostedContentOnwards
-			trails={trails}
+			trails={hostedOnwardsTrails}
 			brandName="TrendAI"
 			accentColor="#FF0000"
 		/>

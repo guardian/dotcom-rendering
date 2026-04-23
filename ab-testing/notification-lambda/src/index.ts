@@ -10,7 +10,7 @@ export const handler = async (): Promise<void> => {
 	// Early return if there are no results
 	if (!Object.keys(expiringAbTestsByOwner).length) {
 		console.log("No owners found with expiring tests");
-		Promise.resolve();
+		return Promise.resolve();
 	}
 
 	// Sending emails to owners with expiring tests
