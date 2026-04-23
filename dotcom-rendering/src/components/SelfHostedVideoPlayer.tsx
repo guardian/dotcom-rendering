@@ -140,7 +140,7 @@ export type Props = {
 	activeCue?: ActiveCue | null;
 	shouldLoop: boolean;
 	isInteractive: boolean;
-	controlsPosition: ControlsPosition;
+	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
 };
 
@@ -193,7 +193,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			activeCue,
 			shouldLoop,
 			isInteractive,
-			controlsPosition,
+			iconsPosition,
 			subtitlesPosition,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
@@ -206,7 +206,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const showProgressBar = canShowProgressBar && currentRefExists;
 		const showIcons = canShowIcons && currentRefExists;
 
-		const dataLinkName = `gu-video-${videoStyle}-${
+		const dataLinkName = `gu-video-${videoStyle.toLowerCase()}-${
 			showPlayIcon ? 'play' : 'pause'
 		}-${atomId}`;
 
@@ -302,9 +302,9 @@ export const SelfHostedVideoPlayer = forwardRef(
 						css={[
 							iconsContainerStyles,
 							iconSize === 'large' &&
-								largeIconsPositionStyles(controlsPosition),
+								largeIconsPositionStyles(iconsPosition),
 							iconSize === 'small' &&
-								smallIconsPositionStyles(controlsPosition),
+								smallIconsPositionStyles(iconsPosition),
 						]}
 					>
 						{showFullscreenIcon && (

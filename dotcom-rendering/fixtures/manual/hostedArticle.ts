@@ -720,7 +720,7 @@ export const hostedArticle: FEArticle = {
 		contentType: 'Article',
 		isDev: true,
 		isPaidContent: true,
-		ajaxUrl: 'http://localhost:9000',
+		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		keywords: '',
 		revisionNumber: '92184802ad2f64c03a3b23978c48d6fcec1e42ae',
 		mmaUrl: 'https://manage.theguardian.com',

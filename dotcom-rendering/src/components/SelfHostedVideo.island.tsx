@@ -31,6 +31,7 @@ import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import type {
+	ControlsPosition,
 	PLAYER_STATES,
 	PlayerStates,
 	SubtitleSize,
@@ -297,7 +298,7 @@ type Props = {
 	/**
 	 * The position of subtitles and the audio icon.
 	 */
-	controlsPosition?: 'top' | 'bottom';
+	controlsPosition?: ControlsPosition;
 	/**
 	 * The minimum/maximum aspect ratio the video will have. The video will be cropped if this
 	 * value is defined and the video aspect ratio is less/greater than this value.
@@ -965,7 +966,7 @@ export const SelfHostedVideo = ({
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}
 						showIcons={showIcons}
-						controlsPosition={controlsPosition}
+						iconsPosition={controlsPosition}
 						subtitlesPosition={subtitlesPosition}
 						activeCue={activeCue}
 						shouldLoop={shouldLoop}
