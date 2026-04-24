@@ -1,10 +1,17 @@
 import { css } from '@emotion/react';
+import { Fragment } from 'react';
 import { useConfig } from '../components/ConfigContext';
 import { FeastContextualNudgeIsland } from '../components/FeastContextualNudge.island';
+import { FeastRecipeNudgeIsland } from '../components/FeastRecipeNudge.island';
+import {
+	recipeContentContainerStyles,
+	recipeLeftColContainerStyles,
+	stripHtmlTags,
+} from '../components/FeastRecipeNudge';
 import { Island } from '../components/Island';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { FEElement } from '../types/content';
+import type { FEElement, SubheadingBlockElement } from '../types/content';
 import type { TagType } from '../types/tag';
 import { spacefinderAdStyles } from './adStyles';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
@@ -104,39 +111,100 @@ export const ArticleRenderer = ({
 	const { renderingTarget } = useConfig();
 
 	/**
-	 * For recipe articles, inject the Feast contextual nudge after every
-	 * SubheadingBlockElement — each one marks the start of a recipe section,
-	 * immediately above the ingredient list for that recipe.
+	 * For recipe articles, group elements into per-recipe sections separated
+	 * by SubheadingBlockElements.  Each section gets:
+	 *
+	 *   1. The subheading rendered outside the relative container (matches the
+	 *      ProductElement pattern from "The Filter").
+	 *   2. A `position: relative` content wrapper containing:
+	 *        a. An absolutely-positioned left-col container (left: -240px,
+	 *           height: 100%) holding the sticky FeastRecipeNudge card — visible
+	 *           only at `from.wide`, tracks the viewport as the reader scrolls.
+	 *        b. The inline FeastContextualNudge (all screen sizes).
+	 *        c. The rest of the section's article elements.
+	 *
+	 * Elements that precede the first subheading are rendered as-is.
 	 */
 	const augmentedElements = (() => {
 		if (format.design !== ArticleDesign.Recipe) {
 			return renderedElements;
 		}
 
-		const result: (JSX.Element | null | undefined)[] = [];
-		let nudgeCount = 0;
+		type RecipeSection = {
+			subheadingEl: JSX.Element;
+			recipeName: string;
+			contentEls: JSX.Element[];
+			index: number;
+		};
+
+		const preSection: JSX.Element[] = [];
+		const sections: RecipeSection[] = [];
+		let current: RecipeSection | null = null;
 
 		renderedElements.forEach((el, i) => {
-			result.push(el);
+			const data = elements[i];
 			if (
-				elements[i]?._type ===
+				data?._type ===
 				'model.dotcomrendering.pageElements.SubheadingBlockElement'
 			) {
-				result.push(
-					<Island
-						key={`feast-contextual-nudge-${nudgeCount}`}
-						priority="feature"
-						defer={{ until: 'visible' }}
-					>
-						<FeastContextualNudgeIsland
-							pageId={pageId}
-							editionId={editionId}
-							compact={nudgeCount > 0}
-						/>
-					</Island>,
+				const recipeName = stripHtmlTags(
+					(data as SubheadingBlockElement).html,
 				);
-				nudgeCount++;
+				current = {
+					subheadingEl: el,
+					recipeName,
+					contentEls: [],
+					index: sections.length,
+				};
+				sections.push(current);
+			} else if (current) {
+				current.contentEls.push(el);
+			} else {
+				preSection.push(el);
 			}
+		});
+
+		const result: (JSX.Element | null | undefined)[] = [...preSection];
+
+		sections.forEach((section) => {
+			result.push(
+				<Fragment key={`recipe-section-${section.index}`}>
+					{/* Subheading sits outside the relative container, just like
+					    ProductSubheading in ProductElement */}
+					{section.subheadingEl}
+
+					<div css={recipeContentContainerStyles}>
+						{/* Sticky left-col card — only visible at from.wide */}
+						<div css={recipeLeftColContainerStyles}>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<FeastRecipeNudgeIsland
+									recipeName={section.recipeName}
+									pageId={pageId}
+									editionId={editionId}
+								/>
+							</Island>
+						</div>
+
+						{/* Inline nudge — all screen sizes */}
+						<Island
+							key={`feast-contextual-nudge-${section.index}`}
+							priority="feature"
+							defer={{ until: 'visible' }}
+						>
+							<FeastContextualNudgeIsland
+								pageId={pageId}
+								editionId={editionId}
+								compact={section.index > 0}
+							/>
+						</Island>
+
+						{section.contentEls}
+					</div>
+				</Fragment>,
+			);
 		});
 
 		return result;
