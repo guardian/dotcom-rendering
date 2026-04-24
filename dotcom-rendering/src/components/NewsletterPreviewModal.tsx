@@ -13,6 +13,65 @@ import { createPortal } from 'react-dom';
 import { getZIndex } from '../lib/getZIndex';
 
 const PREVIEW_LOAD_TIMEOUT_MS = 10_000;
+const TIMEOUT_FAILURE_MESSAGE =
+	'The preview is taking longer than expected. You can retry loading it.';
+const UNAVAILABLE_FAILURE_MESSAGE =
+	'This preview is currently unavailable. Please try again shortly.';
+
+type EmbedStatusMessage = {
+	type: 'embed-status';
+	ok: boolean;
+};
+
+const parseEmbedStatusMessage = (
+	data: unknown,
+): EmbedStatusMessage | undefined => {
+	let payload: unknown = data;
+
+	if (typeof payload === 'string') {
+		try {
+			payload = JSON.parse(payload);
+		} catch {
+			return undefined;
+		}
+	}
+
+	if (!payload || typeof payload !== 'object') return undefined;
+
+	const { type, ok } = payload as {
+		type?: unknown;
+		ok?: unknown;
+	};
+
+	if (type !== 'embed-status' || typeof ok !== 'boolean') return undefined;
+
+	return {
+		type: 'embed-status',
+		ok,
+	};
+};
+
+const isTrustedIframeMessage = ({
+	event,
+	trustedOrigin,
+	iframeWindow,
+}: {
+	event: MessageEvent;
+	trustedOrigin: string;
+	iframeWindow: Window | null;
+}): boolean => {
+	const isTrustedOrigin = event.origin === trustedOrigin;
+	const isUnexpectedSource =
+		iframeWindow !== null &&
+		event.source !== null &&
+		event.source !== iframeWindow;
+
+	if (!isTrustedOrigin || isUnexpectedSource) {
+		return false;
+	}
+
+	return true;
+};
 
 const FOCUSABLE_SELECTOR =
 	'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
@@ -249,10 +308,28 @@ export const NewsletterPreviewModal = ({
 	onClose,
 }: Props) => {
 	const dialogRef = useRef<HTMLDivElement>(null);
+	const iframeRef = useRef<HTMLIFrameElement>(null);
+	const hasEmbedStatusFailureRef = useRef(false);
 	const titleId = useId();
 	const [isLoading, setIsLoading] = useState(true);
 	const [hasLoadFailed, setHasLoadFailed] = useState(false);
+	const [failureMessage, setFailureMessage] = useState(
+		UNAVAILABLE_FAILURE_MESSAGE,
+	);
 	const [iframeKey, setIframeKey] = useState(0);
+
+	const trustedIframeOrigin = new URL(renderUrl).origin;
+
+	const applyEmbedStatus = (ok: boolean) => {
+		hasEmbedStatusFailureRef.current = !ok;
+
+		if (!ok) {
+			setFailureMessage(UNAVAILABLE_FAILURE_MESSAGE);
+		}
+
+		setIsLoading(false);
+		setHasLoadFailed(!ok);
+	};
 
 	const getVisibleFocusableElements = (dialog: HTMLElement): HTMLElement[] =>
 		Array.from(
@@ -368,14 +445,17 @@ export const NewsletterPreviewModal = ({
 	}, [onClose]);
 
 	useEffect(() => {
+		hasEmbedStatusFailureRef.current = false;
 		setIsLoading(true);
 		setHasLoadFailed(false);
+		setFailureMessage(UNAVAILABLE_FAILURE_MESSAGE);
 	}, [renderUrl, iframeKey]);
 
 	useEffect(() => {
 		if (!isLoading) return;
 
 		const timeoutId = window.setTimeout(() => {
+			setFailureMessage(TIMEOUT_FAILURE_MESSAGE);
 			setHasLoadFailed(true);
 			setIsLoading(false);
 		}, PREVIEW_LOAD_TIMEOUT_MS);
@@ -385,12 +465,42 @@ export const NewsletterPreviewModal = ({
 		};
 	}, [isLoading]);
 
+	useEffect(() => {
+		const handleMessage = (event: MessageEvent) => {
+			if (!iframeRef.current) return;
+
+			const iframeWindow = iframeRef.current.contentWindow;
+			if (
+				!isTrustedIframeMessage({
+					event,
+					trustedOrigin: trustedIframeOrigin,
+					iframeWindow,
+				})
+			) {
+				return;
+			}
+
+			const embedStatusMessage = parseEmbedStatusMessage(event.data);
+			if (!embedStatusMessage) return;
+
+			applyEmbedStatus(embedStatusMessage.ok);
+		};
+
+		window.addEventListener('message', handleMessage);
+
+		return () => {
+			window.removeEventListener('message', handleMessage);
+		};
+	}, [trustedIframeOrigin]);
+
 	const handleIframeLoad = () => {
+		if (hasEmbedStatusFailureRef.current) return;
 		setIsLoading(false);
 		setHasLoadFailed(false);
 	};
 
 	const handleIframeError = () => {
+		setFailureMessage(UNAVAILABLE_FAILURE_MESSAGE);
 		setHasLoadFailed(true);
 		setIsLoading(false);
 	};
@@ -451,8 +561,7 @@ export const NewsletterPreviewModal = ({
 									Preview failed to load
 								</h3>
 								<p css={previewStatusBodyStyles}>
-									The preview is taking longer than expected.
-									You can retry loading it.
+									{failureMessage}
 								</p>
 								<Button
 									size="small"
@@ -465,6 +574,7 @@ export const NewsletterPreviewModal = ({
 						</div>
 					)}
 					<iframe
+						ref={iframeRef}
 						key={iframeKey}
 						title={`${newsletterName} preview`}
 						src={renderUrl}

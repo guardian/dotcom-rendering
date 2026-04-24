@@ -5,10 +5,14 @@ import { NewsletterPreviewModal } from './NewsletterPreviewModal';
 const baseProps = {
 	newsletterName: 'Morning Briefing',
 	renderUrl:
-		'https://email-rendering.guardianapis.com/fronts/email/europe/daily?variant=persephone&readonly=true',
+		'https://email-rendering.guardianapis.com/fronts/email/europe/daily?variant=persephone&readonly=true&embed=true',
 };
 
 describe('NewsletterPreviewModal', () => {
+	afterEach(() => {
+		jest.restoreAllMocks();
+	});
+
 	it('renders a labelled dialog and focuses it on mount', () => {
 		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
 
@@ -191,6 +195,11 @@ describe('NewsletterPreviewModal', () => {
 				screen.getByText('Preview failed to load'),
 			).toBeInTheDocument();
 			expect(
+				screen.getByText(
+					'The preview is taking longer than expected. You can retry loading it.',
+				),
+			).toBeInTheDocument();
+			expect(
 				screen.getByRole('button', { name: 'Retry preview' }),
 			).toBeInTheDocument();
 
@@ -211,5 +220,73 @@ describe('NewsletterPreviewModal', () => {
 		} finally {
 			jest.useRealTimers();
 		}
+	});
+
+	it('shows failure state when iframe posts embed-status with ok=false', () => {
+		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
+
+		act(() => {
+			window.dispatchEvent(
+				new MessageEvent('message', {
+					origin: 'https://email-rendering.guardianapis.com',
+					data: { type: 'embed-status', ok: false, code: 500 },
+				}),
+			);
+		});
+
+		expect(screen.getByText('Preview failed to load')).toBeInTheDocument();
+		expect(
+			screen.getByText(
+				'This preview is currently unavailable. Please try again shortly.',
+			),
+		).toBeInTheDocument();
+	});
+
+	it('keeps failure state when embed-status reports failure before iframe load event', () => {
+		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
+
+		const iframe = screen.getByTitle('Morning Briefing preview');
+
+		act(() => {
+			window.dispatchEvent(
+				new MessageEvent('message', {
+					origin: 'https://email-rendering.guardianapis.com',
+					data: { type: 'embed-status', ok: false },
+				}),
+			);
+		});
+
+		fireEvent.load(iframe);
+
+		expect(screen.getByText('Preview failed to load')).toBeInTheDocument();
+		expect(
+			screen.getByText(
+				'This preview is currently unavailable. Please try again shortly.',
+			),
+		).toBeInTheDocument();
+	});
+
+	it('hides skeleton when iframe posts embed-status with ok=true', () => {
+		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
+
+		expect(
+			screen.getByLabelText('Loading newsletter preview'),
+		).toBeInTheDocument();
+
+		act(() => {
+			window.dispatchEvent(
+				new MessageEvent('message', {
+					origin: 'https://email-rendering.guardianapis.com',
+					data: { type: 'embed-status', ok: true },
+				}),
+			);
+		});
+
+		expect(
+			screen.queryByLabelText('Loading newsletter preview'),
+		).not.toBeInTheDocument();
+		expect(
+			screen.queryByText('Preview failed to load'),
+		).not.toBeInTheDocument();
 	});
 });
