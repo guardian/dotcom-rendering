@@ -1,5 +1,6 @@
 packages:
   - 'dotcom-rendering'
+  - 'ab-testing'
   - 'ab-testing/*'
 allowBuilds:
   '@swc/core': true
