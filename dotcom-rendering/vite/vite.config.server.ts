@@ -1,6 +1,6 @@
-import svgr from 'vite-plugin-svgr';
 import type { UserConfig } from 'vite';
 import { mergeConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
 import { cjsPackages } from './cjs-packages';
 import { ssrCjsPlugin } from './ssr-cjs-plugin';
 import { sharedConfig } from './vite.config.shared';
@@ -46,26 +46,11 @@ export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 				// server chunks colliding with client assets in dist/.
 				inlineDynamicImports: true,
 			},
-			// webpack/bundles.js is CJS with module.exports — Rollup can't
-			// resolve named exports from it. Externalize so it's required at runtime.
-			external: [/webpack\/bundles/],
 		},
 	},
 	ssr: {
-		// Bundle these packages (they are ESM-only or need to be included).
-		// Mirrors webpack-node-externals allowlist.
-		noExternal: [
-			// All @guardian scoped packages should be bundled
-			/@guardian\//,
-			// ESM-only package that throws when not bundled
-			'screenfull',
-			// Valibot is ESM and needs bundling
-			'valibot',
-			// CJS deps wrapped by ssrCjsPlugin so source code can use
-			// `import { X } from 'pkg'` instead of default-import +
-			// destructure (see vite/cjs-packages.ts).
-			...cjsPackages,
-		],
+		// Bundle all node_modules by default to create a single server.js file with no external dependencies.
+		noExternal: true,
 		// Explicitly external in dev (not needed in prod where they're deployed)
 		external: DEV ? ['@aws-sdk'] : [],
 	},
