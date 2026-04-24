@@ -38,7 +38,7 @@ Two complementary components work together. They are **mutually exclusive by scr
 
 ```mermaid
 graph LR
-    subgraph "Mobile and Tablet  under 1300px"
+    subgraph "Mobile and Tablet  under 1300px wide"
         A["📱 FeastContextualNudge\n────────────────────\nInline card in the article body\nDismissable\nShows heading + body + CTAs"]
     end
     subgraph "Wide desktop  1300px and above"
@@ -48,26 +48,26 @@ graph LR
 
 ### On mobile and tablet - `FeastContextualNudge`
 
-The card is injected **inline in the article**, directly after the recipe title (subheading). It has a dismiss button so readers who don't want it can permanently close it.
+The card is injected **inline in the article**, directly after the recipe title (subheading). It has a dismiss button so readers who don't want it can close it permanently.
 
 | Feature               | Detail                                                                                                                  |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | Position              | Inline, in the article flow                                                                                             |
 | Dismissal             | One tap hides it for **30 days** (stored locally in the browser)                                                        |
 | Multi-recipe articles | First recipe: full heading + body + buttons. Second recipe onwards: buttons only (avoids repeating the marketing pitch) |
-| Hides at              | 1300px and above (the sticky left-col card takes over)                                                                  |
+| Hides at              | 1300px and above - the sticky left-col card takes over                                                                  |
 
 ### On wide desktop - `FeastRecipeNudge`
 
-The card lives in the **220px gutter to the left of the article body**. It is sticky - it follows the reader as they scroll down through the recipe, and silently disappears when they scroll past the end of that recipe section. There is no dismiss button; the card is ambient, not intrusive.
+The card lives in the **220 px gutter to the left of the article body**. It is sticky - it follows the reader as they scroll down through the recipe, and silently disappears when they scroll past the end of that recipe section. There is no dismiss button; the card is ambient, not intrusive.
 
-This pattern is directly borrowed from **The Filter** (the Guardian's product-review section), where a product card sticks alongside each reviewed product as the reader scrolls past it.
+This pattern is directly borrowed from **[The Filter](https://www.theguardian.com/thefilter)** (the Guardian's product-review section), where a product card sticks alongside each reviewed product as the reader scrolls past it.
 
 ---
 
 ## How the page layout works
 
-### Mobile and tablet view
+### Mobile and tablet
 
 ```
 ┌─────────────────────────────────┐
@@ -89,11 +89,11 @@ This pattern is directly borrowed from **The Filter** (the Guardian's product-re
 └─────────────────────────────────┘
 ```
 
-### Wide desktop view
+### Wide desktop
 
 ```
   Left gutter (220px)   │   Article body (620px)
-  ────────────────────  │  ─────────────────────────────────
+  ────────────────────  │  ──────────────────────────────────
                         │   Article header / hero image
                         │   Article intro text …
                         │
@@ -109,7 +109,7 @@ This pattern is directly borrowed from **The Filter** (the Guardian's product-re
   │                  │  │   2. Fold in the spring …
   └──────────────────┘  │   3. Heat a pan over …
   ↑ card sticks here    │
-    while scrolling     │   (card disappears here)
+    while scrolling     │     (card disappears here)
     through this recipe │
                         │   ## Sesame dipping sauce
   ┌──────────────────┐  │
@@ -135,16 +135,16 @@ When a reader taps a button, where they end up depends on whether they have the 
 sequenceDiagram
     participant Reader
     participant Adjust as Adjust Link<br/>(guardian-feast.go.link)
-    participant App as Feast App<br/>(installed)
+    participant App as Feast App<br/>(if installed)
     participant Store as App Store or Play Store
-    participant Web as Feast website<br/>(fallback)
+    participant Web as Feast website<br/>(desktop fallback)
 
     Reader->>Adjust: Taps CTA button
     Adjust->>Adjust: Detects device and app status
 
     alt App is installed on mobile
         Adjust->>App: Opens app directly
-        App->>App: ⚠️ Currently opens home screen<br/>see What still needs doing below
+        App->>App: ⚠️ Currently lands on home screen<br/>see item 3 in What still needs doing
     else No app installed, mobile device
         Adjust->>Store: Redirects to App Store or Play Store
         Store->>Reader: Download page for Feast
@@ -155,7 +155,7 @@ sequenceDiagram
 
 ### UTM tracking parameters
 
-Every link includes UTM parameters so we can measure performance in analytics:
+Every link carries UTM parameters so we can measure performance in analytics:
 
 | Parameter      | Value                              | Purpose                 |
 | -------------- | ---------------------------------- | ----------------------- |
@@ -174,12 +174,10 @@ The nudges are not shown to everyone. They are gated behind an A/B test so we ca
 flowchart LR
     A[Reader visits recipe article] --> B{In A/B test?}
     B -- "50% control group" --> C[Normal article\nNo nudge shown]
-    B -- "50% variant group" --> D{Has user dismissed\nthe nudge before?}
+    B -- "50% variant group" --> D{Has user dismissed\nthe nudge recently?}
     D -- "Yes, within 30 days" --> C
-    D -- "No" --> E[Nudge is shown]
+    D -- "No" --> E[Nudge is shown 🎉]
 ```
-
-**Test details:**
 
 | Field           | Value                                                                 |
 | --------------- | --------------------------------------------------------------------- |
@@ -191,17 +189,17 @@ flowchart LR
 
 ---
 
-## Component architecture
+## Component architecture (for engineers)
 
 ```mermaid
 graph TD
     subgraph "Server - runs at page render time"
-        AR["ArticleRenderer.tsx\n────────────────────────────────\nGroups article elements by recipe section.\nInjects both nudge islands after each\nrecipe subheading."]
+        AR["ArticleRenderer.tsx\n────────────────────────────────\nGroups article elements by recipe section.\nInjects both nudge islands after\neach recipe subheading."]
     end
 
     subgraph "Browser - runs after page load"
         CI["FeastContextualNudge.island.tsx\n────────────────────────────────\nChecks A/B test bucket\nChecks dismiss state in localStorage\nDetects subscriber status\nPasses darkModeAvailable flag"]
-        RI["FeastRecipeNudge.island.tsx\n────────────────────────────────\nChecks A/B test bucket\nPasses recipe name extracted from subheading\nPasses darkModeAvailable flag"]
+        RI["FeastRecipeNudge.island.tsx\n────────────────────────────────\nChecks A/B test bucket\nPasses recipe name from subheading\nPasses darkModeAvailable flag"]
     end
 
     subgraph "Pure render - no side effects, testable in Storybook"
@@ -215,20 +213,20 @@ graph TD
     RI --> R
 ```
 
-The **Island pattern** is how DCR defers interactive components. The island wrapper runs only in the browser (never on the server), which keeps the initial page load fast. The pure render component is a plain React component - easy to test and preview in Storybook independently of any A/B test.
+The **Island pattern** is how DCR defers interactive components. The island wrapper runs only in the browser (never during server-side rendering), which keeps the initial page load fast. The pure render component is a plain React component with no side effects - easy to test and preview in Storybook independently of any A/B test.
 
 ---
 
 ## Dark mode
 
-Both components fully support dark mode. On recipe articles the dark background matches the style of the support banner at the bottom of the article.
+Both components support dark mode. On recipe articles the dark background matches the style of the support banner at the bottom of the article.
 
-| Scenario                                         | Mechanism                                                                                        |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| **Production** - reader's OS is set to dark mode | `@media (prefers-color-scheme: dark)` CSS rule. Only active if the page type supports dark mode. |
-| **Storybook** - explicit dark decorator applied  | `[data-color-scheme='dark']` CSS attribute selector.                                             |
+| Scenario                                        | Mechanism                                                                                                |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Production** - reader's OS is in dark mode    | `@media (prefers-color-scheme: dark)` CSS rule. Only applied if the page type has opted in to dark mode. |
+| **Storybook** - explicit dark decorator applied | `[data-color-scheme='dark']` CSS attribute selector.                                                     |
 
-Pages that do not support dark mode (e.g. Guardian Labs commercial content) are never accidentally darkened - the media query is only injected when the page explicitly opts in.
+Pages that do not support dark mode (e.g. Guardian Labs commercial content) are never accidentally darkened - the media query rule is only injected when the page explicitly opts in.
 
 ---
 
@@ -236,27 +234,27 @@ Pages that do not support dark mode (e.g. Guardian Labs commercial content) are 
 
 ```mermaid
 graph LR
-    subgraph "Must do before launch"
-        A["1  Revert dev flag\nuseState false in both islands"]
+    subgraph "🔴 Must do before launch"
+        A["1  Revert dev flag\nuseState to false in both islands"]
         B["2  Verify Adjust link token\nConfirm go.link token with Feast team"]
     end
-    subgraph "High priority - user experience"
-        C["3  Per-recipe deep links\nPass recipe ID into CTA URL so\nreader lands on correct recipe in app"]
+    subgraph "🟠 High priority - impacts user experience"
+        C["3  Per-recipe deep links\nPass recipe ID so reader lands\non correct recipe in the app"]
         D["4  Deferred deep linking\nEnable on Adjust dashboard so\nnew installs also land on the recipe"]
     end
-    subgraph "Important - measurement and quality"
+    subgraph "🟡 Important - measurement and quality"
         E["5  Ophan analytics\nImpression and click events"]
-        F["6  Accessibility audit\nKeyboard nav, focus management, contrast"]
+        F["6  Accessibility audit\nKeyboard nav, focus, contrast"]
     end
-    subgraph "Nice to have"
+    subgraph "🟢 Nice to have"
         G["7  Cross-device dismiss\nPersist via Guardian identity"]
-        H["8  FeastRecipeNudge compact variant\nSmaller card for multi-recipe articles"]
+        H["8  FeastRecipeNudge compact\nSmaller card for multi-recipe articles"]
     end
 ```
 
 ### 1. Revert the dev-only flag _(must do before merging to production)_
 
-Both island files contain a temporary shortcut so the component is visible during development without being placed in the A/B test variant:
+Both island files contain a temporary shortcut that makes the component visible during development without needing to be placed in the A/B test variant:
 
 ```ts
 // Change this in BOTH island files before merging:
@@ -264,10 +262,6 @@ const [shouldRender, setShouldRender] = useState(true);
 //                                               ^^^^
 //                                        change to false
 ```
-
-When set to `false`, the `useEffect` will correctly gate rendering on the A/B test check.
-
----
 
 ### 2. Verify the Adjust link token
 
@@ -277,15 +271,11 @@ The link currently hardcodes `p0nQT` as the Adjust token:
 https://guardian-feast.go.link/p0nQT?...
 ```
 
-This needs to be confirmed with the Feast or Growth engineering team as the correct production token. If the token differs between staging and production, it should be read from a config value rather than hardcoded.
-
----
+This needs to be confirmed with the Feast or Growth engineering team as the correct production token. If it differs between staging and production, it should be read from a config value rather than hardcoded.
 
 ### 3. Per-recipe deep link values _(highest product impact)_
 
-**The problem today:**
-
-Every CTA currently sends the user to the Feast app's home screen - not to the specific recipe the reader was just reading.
+**The problem today:** Every CTA sends the user to the Feast app's home screen - not to the specific recipe the reader was just reading.
 
 **What a deep link enables:**
 
@@ -298,21 +288,16 @@ sequenceDiagram
     Note over Reader: Reading "Spring onion pancakes"
     Reader->>Adjust: Taps "Open in Cook Mode"
     Adjust->>App: Opens with deep_link_value=spring-onion-pancakes
-    App->>Reader: Opens directly to that recipe in Cook Mode
+    App->>Reader: Opens directly to that recipe in Cook Mode 🎯
 ```
 
-Adjust supports a `deep_link_value` URL parameter that routes the user to a specific piece of content. The DCR code already has a placeholder comment in `buildAppLink` marking exactly where to add it. What is needed:
+Adjust supports a `deep_link_value` URL parameter that routes the user to a specific piece of content. The DCR code already has a placeholder comment in `buildAppLink` marking exactly where to add it.
 
--   **Feast team:** Expose a recipe identifier from the `frontend` backend, attached to each recipe subheading element.
--   **DCR:** Pass that ID through `ArticleRenderer` → island → component → `buildAppLink`.
-
----
+**What is needed from the Feast team:** Expose a recipe identifier from the `frontend` backend, attached to each recipe subheading element. DCR will then pass that ID through `ArticleRenderer` → island → component → the link builder.
 
 ### 4. Deferred deep linking for new installs
 
-**The problem today:**
-
-When a reader taps a CTA and does _not_ have Feast installed, they go to the App Store. After downloading and opening the app for the first time, they land on the home screen - not the recipe that sent them there.
+**The problem today:** When a reader taps a CTA and does not have Feast installed, they go to the App Store. After downloading and opening the app for the first time, they land on the home screen - not the recipe that sent them there.
 
 **The fix - Adjust deferred deep linking:**
 
@@ -324,29 +309,25 @@ sequenceDiagram
     participant App as Feast App on first launch
 
     Reader->>Adjust: Taps CTA, app not installed
-    Adjust->>Adjust: Remembers deep_link_value=spring-onion-pancakes
+    Adjust->>Adjust: 💾 Stores deep_link_value=spring-onion-pancakes
     Adjust->>Store: Redirects to App Store
     Reader->>Store: Downloads Feast
     Reader->>App: Opens app for first time
     App->>Adjust: Requests deferred deep link
     Adjust->>App: Returns deep_link_value=spring-onion-pancakes
-    App->>Reader: Opens directly to that recipe
+    App->>Reader: Opens directly to that recipe 🎯
 ```
 
-**No code changes needed in DCR.** This is entirely an Adjust dashboard configuration and Feast app SDK concern.
-
----
+**No code changes needed in DCR.** This is entirely an Adjust dashboard configuration and Feast app SDK concern. See [Adjust deferred deep linking docs](https://help.adjust.com/en/article/deep-links#deferred-deep-linking).
 
 ### 5. Ophan analytics events
 
-The nudges currently fire no analytics events. To measure the A/B test properly, both components should call `submitComponentEvent` for:
+The nudges currently fire no analytics events. To measure the A/B test properly, both components should emit Ophan `componentEvent` calls for:
 
 -   **Impression** - when the nudge enters the viewport
 -   **Click** - when any CTA button is tapped
 
-This uses the same Ophan integration already present in the Reader Revenue banner and other acquisition components in DCR.
-
----
+This uses the same `submitComponentEvent` integration already present in the Reader Revenue banner and other acquisition components in DCR.
 
 ### 6. Accessibility audit
 
@@ -357,19 +338,15 @@ Before full rollout, the components need a formal review covering:
 -   Screen reader announcement of the dismiss action
 -   Colour contrast ratios in dark mode verified against WCAG 2.1 AA
 
----
-
 ### 7. Cross-device dismiss persistence
 
-The 30-day dismiss is stored in the browser's `localStorage`. A reader who dismisses on their phone will see the nudge again on their laptop. For a seamless experience, dismissal could be persisted server-side against the reader's Guardian identity (for signed-in users), using the same mechanism as other acquisition messaging in DCR.
-
----
+The 30-day dismiss is stored in the browser's `localStorage`. A reader who dismisses on their phone will see the nudge again on their laptop. For a seamless experience across devices, dismissal could be persisted server-side against the reader's Guardian identity (for signed-in users), using the same mechanism as other acquisition messaging in DCR.
 
 ### 8. `FeastRecipeNudge` compact variant
 
-The inline `FeastContextualNudge` has a `compact` mode that shows only the CTA buttons - no heading or body copy - on the 2nd, 3rd, … recipe sections of a multi-recipe article, avoiding repetitive copy.
+The inline `FeastContextualNudge` has a `compact` mode that shows only the CTA buttons on the 2nd, 3rd, … recipe sections of a multi-recipe article, avoiding repetitive marketing copy.
 
-The sticky `FeastRecipeNudge` does not yet have an equivalent. Every instance shows the full card. This is fine for most articles (each card shows a different recipe name), but a slimmer variant may be worth exploring.
+The sticky `FeastRecipeNudge` does not yet have an equivalent - every instance shows the full card. This is acceptable for most articles (each card shows a different recipe name), but a slimmer variant may be worth exploring for articles with many recipes.
 
 ---
 
