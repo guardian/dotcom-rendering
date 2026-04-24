@@ -32,7 +32,9 @@ const buildFormData = (
 	formData.append('ref', pageRef);
 	formData.append('refViewId', refViewId);
 	formData.append('name', '');
-	formData.append('g-recaptcha-response', token);
+	if (window.guardian.config.switches.emailSignupRecaptcha) {
+		formData.append('g-recaptcha-response', token);
+	}
 
 	if (marketingOptIn !== undefined) {
 		formData.append('marketing', marketingOptIn ? 'true' : 'false');
@@ -434,6 +436,7 @@ export const useNewsletterSignupForm = (
 		setErrorMessage(undefined);
 		setResponseOk(undefined);
 		hasAttemptedSubmitRef.current = false;
+		recaptchaRef.current?.reset();
 	}, []);
 
 	return {
