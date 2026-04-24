@@ -146,7 +146,14 @@ const tryAgainButtonStyles = css`
 	}
 `;
 
-const browseMoreLinksStyles = tryAgainButtonStyles;
+/** Prevent article-level link styles (e.g. red for Opinion) from bleeding in */
+const browseMoreLinksStyles = css`
+	color: ${palette('--newsletter-preview-button-text')};
+	border-color: ${palette('--newsletter-preview-button-border')};
+	&:hover {
+		color: ${palette('--newsletter-preview-button-text')};
+	}
+`;
 
 const recaptchaContainerStyles = css`
 	.grecaptcha-badge {
@@ -211,7 +218,7 @@ const SuccessMessage = ({
 				href="/email-newsletters"
 				priority="tertiary"
 				theme={themeButton}
-				cssOverrides={browseMoreLinksStyles}
+				cssOverrides={[tryAgainButtonStyles, browseMoreLinksStyles]}
 			>
 				Browse more newsletters
 			</LinkButton>
