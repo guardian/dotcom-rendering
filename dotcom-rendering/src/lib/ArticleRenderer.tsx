@@ -104,13 +104,9 @@ export const ArticleRenderer = ({
 	const { renderingTarget } = useConfig();
 
 	/**
-	 * For recipe articles, inject the Feast contextual nudge after the first
-	 * SubheadingBlockElement — the recipe title — which sits immediately above
-	 * the ingredient list.  This matches Andy's suggestion to "render it where
-	 * the structured data sits".  For articles with multiple recipes, each
-	 * recipe section starts with a subheading, so future iterations can extend
-	 * this to inject after *every* subheading; for now we target just the first
-	 * to avoid over-nudging.
+	 * For recipe articles, inject the Feast contextual nudge after every
+	 * SubheadingBlockElement — each one marks the start of a recipe section,
+	 * immediately above the ingredient list for that recipe.
 	 */
 	const elementsWithFeastNudge = (() => {
 		if (
@@ -120,28 +116,31 @@ export const ArticleRenderer = ({
 			return renderedElements;
 		}
 
-		const firstSubheadingIdx = elements.findIndex(
-			(el) =>
-				el._type ===
-				'model.dotcomrendering.pageElements.SubheadingBlockElement',
-		);
+		const result: (JSX.Element | null | undefined)[] = [];
+		let nudgeCount = 0;
 
-		if (firstSubheadingIdx === -1) return renderedElements;
+		renderedElements.forEach((el, i) => {
+			result.push(el);
+			if (
+				elements[i]?._type ===
+				'model.dotcomrendering.pageElements.SubheadingBlockElement'
+			) {
+				result.push(
+					<Island
+						key={`feast-contextual-nudge-${nudgeCount++}`}
+						priority="feature"
+						defer={{ until: 'visible' }}
+					>
+						<FeastContextualNudgeIsland
+							pageId={pageId}
+							editionId={editionId}
+						/>
+					</Island>,
+				);
+			}
+		});
 
-		return [
-			...renderedElements.slice(0, firstSubheadingIdx + 1),
-			<Island
-				key="feast-contextual-nudge"
-				priority="feature"
-				defer={{ until: 'visible' }}
-			>
-				<FeastContextualNudgeIsland
-					pageId={pageId}
-					editionId={editionId}
-				/>
-			</Island>,
-			...renderedElements.slice(firstSubheadingIdx + 1),
-		];
+		return result;
 	})();
 
 	// const cleanedElements = elements.map(element =>
