@@ -10,7 +10,7 @@ import {
 	type Decorator,
 	type StoryContext,
 	type StrictArgs,
-} from '@storybook/react-webpack5';
+} from '@storybook/react-vite';
 import type { CSSProperties } from 'react';
 import type { ArticleFormat } from '../../src/lib/articleFormat';
 import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';

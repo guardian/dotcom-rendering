@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { allModes } from '../../.storybook/modes';
 import { Audio as AudioFixture } from '../../fixtures/generated/fe-articles/Audio';
 import { ArticleDesign } from '../lib/articleFormat';

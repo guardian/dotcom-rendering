@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { space, textSans15 } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { EditionId } from '../lib/edition';
 import { ConfigProvider } from './ConfigContext';
 import { DateTime } from './DateTime';
