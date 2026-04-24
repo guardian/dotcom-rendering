@@ -141,18 +141,16 @@ const errorContainerStyles = css`
 const tryAgainButtonStyles = css`
 	width: 100%;
 	margin-top: ${space[2]}px;
+	${from.tablet} {
+		max-width: 350px;
+	}
 `;
+
+const browseMoreLinksStyles = tryAgainButtonStyles;
 
 const recaptchaContainerStyles = css`
 	.grecaptcha-badge {
 		visibility: hidden;
-	}
-`;
-
-const browseMoreLinksStyles = css`
-	${tryAgainButtonStyles};
-	${from.tablet} {
-		max-width: 350px;
 	}
 `;
 
