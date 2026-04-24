@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import { useConfig } from '../components/ConfigContext';
+import { FeastContextualNudgeIsland } from '../components/FeastContextualNudge.island';
+import { Island } from '../components/Island';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
@@ -101,6 +103,47 @@ export const ArticleRenderer = ({
 	 */
 	const { renderingTarget } = useConfig();
 
+	/**
+	 * For recipe articles, inject the Feast contextual nudge after the first
+	 * SubheadingBlockElement — the recipe title — which sits immediately above
+	 * the ingredient list.  This matches Andy's suggestion to "render it where
+	 * the structured data sits".  For articles with multiple recipes, each
+	 * recipe section starts with a subheading, so future iterations can extend
+	 * this to inject after *every* subheading; for now we target just the first
+	 * to avoid over-nudging.
+	 */
+	const elementsWithFeastNudge = (() => {
+		if (
+			renderingTarget === 'Apps' ||
+			format.design !== ArticleDesign.Recipe
+		) {
+			return renderedElements;
+		}
+
+		const firstSubheadingIdx = elements.findIndex(
+			(el) =>
+				el._type ===
+				'model.dotcomrendering.pageElements.SubheadingBlockElement',
+		);
+
+		if (firstSubheadingIdx === -1) return renderedElements;
+
+		return [
+			...renderedElements.slice(0, firstSubheadingIdx + 1),
+			<Island
+				key="feast-contextual-nudge"
+				priority="feature"
+				defer={{ until: 'visible' }}
+			>
+				<FeastContextualNudgeIsland
+					pageId={pageId}
+					editionId={editionId}
+				/>
+			</Island>,
+			...renderedElements.slice(firstSubheadingIdx + 1),
+		];
+	})();
+
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -125,7 +168,7 @@ export const ArticleRenderer = ({
 				? renderedElements
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
 				  withSignInGateSlot({
-						renderedElements,
+						renderedElements: elementsWithFeastNudge,
 						contentType,
 						sectionId,
 						tags,
