@@ -108,7 +108,7 @@ export const ArticleRenderer = ({
 	 * SubheadingBlockElement — each one marks the start of a recipe section,
 	 * immediately above the ingredient list for that recipe.
 	 */
-	const elementsWithFeastNudge = (() => {
+	const augmentedElements = (() => {
 		if (
 			renderingTarget === 'Apps' ||
 			format.design !== ArticleDesign.Recipe
@@ -167,7 +167,7 @@ export const ArticleRenderer = ({
 				? renderedElements
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
 				  withSignInGateSlot({
-						renderedElements: elementsWithFeastNudge,
+						renderedElements: augmentedElements,
 						contentType,
 						sectionId,
 						tags,
