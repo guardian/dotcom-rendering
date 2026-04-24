@@ -109,10 +109,7 @@ export const ArticleRenderer = ({
 	 * immediately above the ingredient list for that recipe.
 	 */
 	const augmentedElements = (() => {
-		if (
-			renderingTarget === 'Apps' ||
-			format.design !== ArticleDesign.Recipe
-		) {
+		if (format.design !== ArticleDesign.Recipe) {
 			return renderedElements;
 		}
 
@@ -166,7 +163,7 @@ export const ArticleRenderer = ({
 			css={[commercialPosition, spacefinderAdStyles]}
 		>
 			{renderingTarget === 'Apps'
-				? renderedElements
+				? augmentedElements
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
 				  withSignInGateSlot({
 						renderedElements: augmentedElements,
