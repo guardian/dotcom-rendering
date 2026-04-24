@@ -6,7 +6,7 @@
  *   NODE_ENV=development node --import tsx vite/dev-server.ts
  *
  * Or via makefile:
- *   make vite-dev
+ *   make dev
  */
 
 import { readFileSync } from 'node:fs';
@@ -16,8 +16,8 @@ import express from 'express';
 import { createServer as createViteServer, mergeConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import { cjsPackages } from './cjs-packages';
-import { sharedConfig } from './vite.config.shared';
 import { ssrCjsPlugin } from './ssr-cjs-plugin';
+import { sharedConfig } from './vite.config.shared';
 
 const port = 3030;
 const root = process.cwd();
