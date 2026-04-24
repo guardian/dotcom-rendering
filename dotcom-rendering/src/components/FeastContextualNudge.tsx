@@ -123,6 +123,11 @@ const containerStyles = css`
 		gap: ${space[5]}px;
 	}
 
+	/* At wide the sticky left-col FeastRecipeNudge takes over */
+	${from.wide} {
+		display: none;
+	}
+
 	/* Storybook colour-scheme: light before dark so dark wins the cascade */
 	[data-color-scheme='light'] & {
 		background-color: ${FEAST_BG};
