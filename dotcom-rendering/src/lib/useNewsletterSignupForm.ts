@@ -267,7 +267,7 @@ export const useNewsletterSignupForm = (
 	useEffect(() => {
 		if (marketingDefaultAppliedRef.current) return;
 		if (isSignedIn === 'Pending') return;
-		if (isSignedIn === false) {
+		if (!isSignedIn) {
 			setMarketingOptIn(true);
 		}
 		marketingDefaultAppliedRef.current = true;
