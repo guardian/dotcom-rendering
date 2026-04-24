@@ -6,7 +6,6 @@ import {
 	palette as sourcePalette,
 	space,
 	textSans12,
-	textSans14,
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
