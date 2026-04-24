@@ -80,11 +80,6 @@ const previewFrameStyles = css`
 	border: 0;
 	background: ${palette.neutral[100]};
 	padding: 0;
-	min-width: 0;
-
-	${from.tablet} {
-		padding: 0;
-	}
 `;
 
 const previewFrameContainerStyles = css`
@@ -111,10 +106,10 @@ const previewLoadingOverlayStyles = css`
 	justify-content: flex-start;
 	padding: 0 ${space[3]}px ${space[4]}px;
 	background: ${palette.neutral[100]};
-	overflow-y: auto;
+	overflow-y: hidden;
 
 	${from.tablet} {
-		padding: 0 ${space[6]}px ${space[6]}px;
+		padding: 0 ${space[9]}px ${space[9]}px;
 	}
 `;
 
@@ -140,7 +135,7 @@ const previewSkeletonBlockStyles = css`
 	}
 `;
 
-const previewSkeletonLongStyles = css`
+const previewSkeletonBannerStyles = css`
 	${previewSkeletonBlockStyles};
 	height: 96px;
 `;
@@ -148,24 +143,12 @@ const previewSkeletonLongStyles = css`
 const previewSkeletonLargeStyles = css`
 	${previewSkeletonBlockStyles};
 	height: 332px;
-	margin-top: 16px;
+	margin: 16px 0;
 `;
 
-const previewSkeletonThirdStyles = css`
+const previewSkeletonSmallStyles = css`
 	${previewSkeletonBlockStyles};
 	height: 52px;
-	margin-top: 32px;
-`;
-
-const previewSkeletonFourthStyles = css`
-	${previewSkeletonBlockStyles};
-	height: 52px;
-	margin-top: 16px;
-`;
-
-const previewSkeletonFinalStyles = css`
-	${previewSkeletonBlockStyles};
-	height: 272px;
 	margin-top: 16px;
 `;
 
@@ -444,17 +427,17 @@ export const NewsletterPreviewModal = ({
 					</Button>
 				</div>
 				<div css={previewFrameContainerStyles}>
-					{true && (
+					{isLoading && (
 						<div
 							css={previewLoadingOverlayStyles}
 							aria-live="polite"
 							aria-label="Loading newsletter preview"
 						>
-							<div css={previewSkeletonLongStyles} />
+							<div css={previewSkeletonBannerStyles} />
 							<div css={previewSkeletonLargeStyles} />
-							<div css={previewSkeletonThirdStyles} />
-							<div css={previewSkeletonFourthStyles} />
-							<div css={previewSkeletonFinalStyles} />
+							<div css={previewSkeletonSmallStyles} />
+							<div css={previewSkeletonSmallStyles} />
+							<div css={previewSkeletonLargeStyles} />
 						</div>
 					)}
 					{hasLoadFailed && (
