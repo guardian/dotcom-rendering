@@ -2,7 +2,7 @@ import { isString } from '@guardian/libs';
 import type { TAction } from '@guardian/ophan-tracker-js';
 import type { FormEvent, ReactEventHandler, RefObject } from 'react';
 import type React from 'react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -436,50 +436,25 @@ export const useNewsletterSignupForm = (
 		hasAttemptedSubmitRef.current = false;
 	}, []);
 
-	// Memoise the returned object so referential equality holds across renders
-	// when none of the fields have changed — important for any memoised
-	// children the consumer renders.
-	return useMemo<NewsletterSignupFormState>(
-		() => ({
-			userEmail,
-			isSignedIn: hasPrefilledEmail,
-			isInteracted,
-			showMarketingToggle: isSignedIn === false,
-			marketingOptIn,
-			isWaitingForResponse,
-			responseOk,
-			errorMessage,
-			recaptchaRef,
-			captchaSiteKey,
-			handleCaptchaComplete,
-			handleCaptchaLoadError,
-			handleEmailChange,
-			handleEmailFocus,
-			handleEmailInvalid,
-			handleMarketingToggle,
-			handleSubmit,
-			handleSubmitButtonClick,
-			handleReset,
-		}),
-		[
-			userEmail,
-			hasPrefilledEmail,
-			isInteracted,
-			isSignedIn,
-			marketingOptIn,
-			isWaitingForResponse,
-			responseOk,
-			errorMessage,
-			captchaSiteKey,
-			handleCaptchaComplete,
-			handleCaptchaLoadError,
-			handleEmailChange,
-			handleEmailFocus,
-			handleEmailInvalid,
-			handleMarketingToggle,
-			handleSubmit,
-			handleSubmitButtonClick,
-			handleReset,
-		],
-	);
+	return {
+		userEmail,
+		isSignedIn: hasPrefilledEmail,
+		isInteracted,
+		showMarketingToggle: isSignedIn === false,
+		marketingOptIn,
+		isWaitingForResponse,
+		responseOk,
+		errorMessage,
+		recaptchaRef,
+		captchaSiteKey,
+		handleCaptchaComplete,
+		handleCaptchaLoadError,
+		handleEmailChange,
+		handleEmailFocus,
+		handleEmailInvalid,
+		handleMarketingToggle,
+		handleSubmit,
+		handleSubmitButtonClick,
+		handleReset,
+	};
 };
