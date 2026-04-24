@@ -109,12 +109,12 @@ const previewLoadingOverlayStyles = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	padding: ${space[4]}px ${space[3]}px;
+	padding: 0 ${space[3]}px ${space[4]}px;
 	background: ${palette.neutral[100]};
 	overflow-y: auto;
 
 	${from.tablet} {
-		padding: ${space[6]}px;
+		padding: 0 ${space[6]}px ${space[6]}px;
 	}
 `;
 
@@ -123,9 +123,9 @@ const previewSkeletonBlockStyles = css`
 	flex-shrink: 0;
 	background: linear-gradient(
 		90deg,
-		${palette.neutral[93]} 25%,
+		${palette.neutral[86]} 25%,
 		${palette.neutral[97]} 50%,
-		${palette.neutral[93]} 75%
+		${palette.neutral[86]} 75%
 	);
 	background-size: 200% 100%;
 	animation: preview-skeleton-shimmer 1.2s linear infinite;
@@ -167,14 +167,6 @@ const previewSkeletonFinalStyles = css`
 	${previewSkeletonBlockStyles};
 	height: 272px;
 	margin-top: 16px;
-	background: linear-gradient(
-		90deg,
-		${palette.neutral[93]} 25%,
-		${palette.neutral[97]} 50%,
-		${palette.neutral[93]} 75%
-	);
-	background-size: 200% 100%;
-	animation: preview-skeleton-shimmer 1.2s linear infinite;
 `;
 
 const previewStatusStyles = css`
