@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	headlineMedium20,
 	space,
 	textSans14,
@@ -17,9 +18,9 @@ export type NewsletterSignupCardProps = {
 };
 
 const containerStyles = css`
+	clear: left;
 	background-color: ${themePalette('--newsletter-card-background')};
-	margin-bottom: ${space[6]}px;
-	padding: ${space[2]}px ${space[2]}px ${space[4]}px ${space[2]}px;
+	padding: ${space[3]}px ${space[3]}px ${space[4]}px ${space[3]}px;
 `;
 
 const dividerStyles = css`
@@ -45,7 +46,7 @@ const titleAndMetaStyles = css`
 
 const titleStyles = css`
 	${headlineMedium20};
-	margin-bottom: ${space[2]}px;
+	margin-bottom: ${space[1]}px;
 	color: ${themePalette('--newsletter-card-title')};
 `;
 
@@ -68,17 +69,22 @@ const frequencyTagStyles = css`
 const descriptionStyles = css`
 	${textSans14};
 	line-height: 1.15;
-	margin-bottom: ${space[1]}px;
+	margin-bottom: ${space[2]}px;
 	clear: both;
 	color: ${themePalette('--newsletter-card-description')};
 `;
 
 const illustrationStyles = css`
 	flex-shrink: 0;
-	width: 100px;
-	height: 100px;
+	width: 90px;
+	height: 90px;
 	border-radius: 50%;
 	object-fit: cover;
+
+	${from.tablet} {
+		width: 100px;
+		height: 100px;
+	}
 `;
 
 const NewsletterSignupHeader = (props: {

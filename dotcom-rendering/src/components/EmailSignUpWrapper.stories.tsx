@@ -1,5 +1,5 @@
 import type { StoryObj } from '@storybook/react-webpack5';
-import { mocked } from 'storybook/test';
+import { mocked, within } from 'storybook/test';
 import preview from '../../.storybook/preview';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { useIsSignedIn } from '../lib/useAuthStatus';
@@ -24,6 +24,15 @@ const defaultArgs = {
 	successDescription: "We'll send you The Recap every week",
 	theme: 'sport',
 	idApiUrl: 'https://idapi.theguardian.com',
+	exampleUrl: 'https://www.theguardian.com/email/the-recap',
+} satisfies Story['args'];
+
+const newCardArgs = {
+	...defaultArgs,
+	showNewNewsletterSignupCard: true,
+	hideNewsletterSignupComponentForSubscribers: true,
+	illustrationSquare:
+		'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
 } satisfies Story['args'];
 
 // Loading state - shows placeholder while auth status is being determined
@@ -33,7 +42,7 @@ export const Placeholder = meta.story({
 		hidePrivacyMessage: false,
 		...defaultArgs,
 	},
-	async beforeEach() {
+	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(undefined);
 	},
 });
@@ -44,7 +53,7 @@ export const DefaultStory = meta.story({
 		hidePrivacyMessage: true,
 		...defaultArgs,
 	},
-	async beforeEach() {
+	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(false);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -58,7 +67,7 @@ export const DefaultStoryWithPrivacy = meta.story({
 		hidePrivacyMessage: false,
 		...defaultArgs,
 	},
-	async beforeEach() {
+	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(false);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -73,7 +82,7 @@ export const SignedInNotSubscribed = meta.story({
 		hidePrivacyMessage: false,
 		...defaultArgs,
 	},
-	async beforeEach() {
+	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(true);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -91,7 +100,7 @@ export const SignedInAlreadySubscribed = meta.story({
 		...defaultArgs,
 		hideNewsletterSignupComponentForSubscribers: true,
 	},
-	async beforeEach() {
+	beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(true);
 	},
 });
@@ -104,7 +113,7 @@ export const FeatureFlagDisabled = meta.story({
 		...defaultArgs,
 		hideNewsletterSignupComponentForSubscribers: false,
 	},
-	async beforeEach() {
+	beforeEach() {
 		// Even though we mock this to return true (subscribed),
 		// the feature flag being disabled means it won't be checked
 		mocked(useNewsletterSubscription).mockReturnValue(false);
@@ -119,5 +128,65 @@ export const FeatureFlagDisabled = meta.story({
 				story: 'When the hideNewsletterSignupComponentForSubscribers feature flag is disabled, the signup form is always shown regardless of subscription status.',
 			},
 		},
+	},
+});
+
+export const NewsletterSignupCardSignedInNotSubscribed = meta.story({
+	args: newCardArgs,
+	beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(false);
+		mocked(useIsSignedIn).mockReturnValue(true);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve('test@example.com'),
+		);
+	},
+});
+
+export const NewsletterSignupCardSignedOutNotSubscribed = meta.story({
+	args: newCardArgs,
+	beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(false);
+		mocked(useIsSignedIn).mockReturnValue(false);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve(null),
+		);
+	},
+});
+
+export const NewsletterSignupCardSignedInAlreadySubscribed = meta.story({
+	args: newCardArgs,
+	beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(true);
+		mocked(useIsSignedIn).mockReturnValue(true);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve('test@example.com'),
+		);
+	},
+});
+
+export const NewsletterSignupCardSignedOutAlreadySubscribed = meta.story({
+	args: newCardArgs,
+	beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(true);
+		mocked(useIsSignedIn).mockReturnValue(false);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve(null),
+		);
+	},
+});
+
+export const NewsletterSignupCardFocused = meta.story({
+	args: newCardArgs,
+	beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(false);
+		mocked(useIsSignedIn).mockReturnValue(false);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve(null),
+		);
+	},
+	async play({ canvasElement }) {
+		const canvas = within(canvasElement);
+		const emailInput = await canvas.findByLabelText('Enter your email');
+		emailInput.focus();
 	},
 });
