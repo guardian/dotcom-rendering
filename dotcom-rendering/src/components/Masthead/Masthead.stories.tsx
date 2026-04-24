@@ -1,5 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta } from '@storybook/react-webpack5';
+import type { Meta } from '@storybook/react-vite';
 import { Masthead } from './Masthead';
 import { nav } from './Titlepiece/Nav.mock';
 
