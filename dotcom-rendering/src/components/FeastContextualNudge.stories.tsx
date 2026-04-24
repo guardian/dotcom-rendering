@@ -31,3 +31,8 @@ export const USNonSubscriber: Story = {
 export const HVSSubscriber: Story = {
 	args: { subscriberVariant: 'hvsSubscriber' },
 };
+
+/** Compact — shown for 2nd, 3rd… recipes in a multi-recipe article: actions only */
+export const CompactSubsequentRecipe: Story = {
+	args: { subscriberVariant: 'default', compact: true },
+};

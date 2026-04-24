@@ -221,12 +221,18 @@ type Props = {
 	subscriberVariant: 'hvsSubscriber' | 'usNonSubscriber' | 'default';
 	/** Called when the user dismisses the nudge */
 	onDismiss: () => void;
+	/**
+	 * When true, hides the heading and body copy — used for subsequent recipes
+	 * in a multi-recipe article so the marketing message is only shown once.
+	 */
+	compact?: boolean;
 };
 
 export const FeastContextualNudge = ({
 	pageId,
 	subscriberVariant,
 	onDismiss,
+	compact = false,
 }: Props) => {
 	const [isVisible, setIsVisible] = useState(true);
 
@@ -247,8 +253,12 @@ export const FeastContextualNudge = ({
 			</div>
 
 			<div css={contentStyles}>
-				<h2 css={headingStyles}>{variant.heading}</h2>
-				<p css={bodyStyles}>{variant.body}</p>
+				{!compact && (
+					<>
+						<h2 css={headingStyles}>{variant.heading}</h2>
+						<p css={bodyStyles}>{variant.body}</p>
+					</>
+				)}
 
 				<div css={actionsRowStyles}>
 					{/* Primary CTA */}

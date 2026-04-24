@@ -127,16 +127,18 @@ export const ArticleRenderer = ({
 			) {
 				result.push(
 					<Island
-						key={`feast-contextual-nudge-${nudgeCount++}`}
+						key={`feast-contextual-nudge-${nudgeCount}`}
 						priority="feature"
 						defer={{ until: 'visible' }}
 					>
 						<FeastContextualNudgeIsland
 							pageId={pageId}
 							editionId={editionId}
+							compact={nudgeCount > 0}
 						/>
 					</Island>,
 				);
+				nudgeCount++;
 			}
 		});
 

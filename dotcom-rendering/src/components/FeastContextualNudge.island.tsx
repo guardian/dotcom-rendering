@@ -21,9 +21,14 @@ const recordDismissal = (): void => {
 type Props = {
 	pageId: string;
 	editionId: EditionId;
+	compact?: boolean;
 };
 
-export const FeastContextualNudgeIsland = ({ pageId, editionId }: Props) => {
+export const FeastContextualNudgeIsland = ({
+	pageId,
+	editionId,
+	compact = false,
+}: Props) => {
 	const [shouldRender, setShouldRender] = useState(false);
 	const abTestAPI = useAB()?.api;
 
@@ -48,6 +53,7 @@ export const FeastContextualNudgeIsland = ({ pageId, editionId }: Props) => {
 			editionId={editionId}
 			subscriberVariant={subscriberVariant}
 			onDismiss={recordDismissal}
+			compact={compact}
 		/>
 	);
 };
