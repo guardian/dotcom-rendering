@@ -1,5 +1,5 @@
 import { Topic } from '@guardian/bridget';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 import type { NotificationsClient } from '../lib/bridgetApi';
 import { NotificationsToggle as NotificationsToggleComponent } from './NotificationsToggle';
