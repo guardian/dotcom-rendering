@@ -11,6 +11,7 @@ import { rmSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { build } from 'vite';
 import type { Build } from '../src/lib/assets';
+import { BUILD_VARIANT as BUILD_VARIANT_SWITCH } from '../webpack/bundles.mjs';
 import { createClientConfig } from './vite.config.client';
 import { serverConfig } from './vite.config.server';
 
@@ -18,12 +19,6 @@ const PROD = process.env.NODE_ENV === 'production';
 const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
 
 function getClientBuilds(): Build[] {
-	// Controls whether the variant bundle is built.
-	// In production, also checks the static BUILD_VARIANT flag from bundles.js.
-	// eslint-disable-next-line @typescript-eslint/no-var-requires -- CJS module
-	const { BUILD_VARIANT: BUILD_VARIANT_SWITCH } =
-		require('../webpack/bundles') as { BUILD_VARIANT: boolean };
-
 	return [
 		'client.web',
 		...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
