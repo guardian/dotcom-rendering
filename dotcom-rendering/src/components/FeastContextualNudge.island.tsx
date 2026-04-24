@@ -1,6 +1,7 @@
 import { storage } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { hideSupportMessaging } from '../client/userFeatures/cookies/hideSupportMessaging';
+import { useConfig } from './ConfigContext';
 import type { EditionId } from '../lib/edition';
 import { useAB } from '../lib/useAB';
 import { FeastContextualNudge } from './FeastContextualNudge';
@@ -29,7 +30,8 @@ export const FeastContextualNudgeIsland = ({
 	editionId,
 	compact = false,
 }: Props) => {
-	const [shouldRender, setShouldRender] = useState(false);
+	const [shouldRender, setShouldRender] = useState(true); // DEV ONLY // DEV ONLY // DEV ONLY : Change it to false before merging
+	const { darkModeAvailable } = useConfig();
 	const abTestAPI = useAB()?.api;
 
 	useEffect(() => {
@@ -54,6 +56,7 @@ export const FeastContextualNudgeIsland = ({
 			subscriberVariant={subscriberVariant}
 			onDismiss={recordDismissal}
 			compact={compact}
+			darkModeAvailable={darkModeAvailable}
 		/>
 	);
 };

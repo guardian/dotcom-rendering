@@ -19,9 +19,13 @@ import type { EditionId } from '../lib/edition';
 
 /** Feast brand palette — matches FeastThrasher */
 const FEAST_BG = '#f7efe9';
+const FEAST_BG_DARK = '#1a1a0a'; // deep dark olive — matches brand warmth
+const FEAST_TEXT_DARK = sourcePalette.neutral[93];
+const FEAST_SUBTEXT_DARK = sourcePalette.neutral[60];
 const FEAST_GREEN = '#68773c';
 const FEAST_GREEN_HOVER = '#4d5c2b';
 const FEAST_BORDER = 'rgba(104, 119, 60, 0.3)'; // FEAST_GREEN at 30% opacity
+const FEAST_BORDER_DARK = 'rgba(104, 119, 60, 0.5)';
 
 /**
  * Builds an Adjust go.link deep link.
@@ -118,6 +122,23 @@ const containerStyles = css`
 		padding: ${space[5]}px;
 		gap: ${space[5]}px;
 	}
+
+	/* Storybook colour-scheme: light before dark so dark wins the cascade */
+	[data-color-scheme='light'] & {
+		background-color: ${FEAST_BG};
+		border-color: ${FEAST_BORDER};
+	}
+	[data-color-scheme='dark'] & {
+		background-color: ${FEAST_BG_DARK};
+		border-color: ${FEAST_BORDER_DARK};
+	}
+`;
+
+const containerDarkMedia = css`
+	@media (prefers-color-scheme: dark) {
+		background-color: ${FEAST_BG_DARK};
+		border-color: ${FEAST_BORDER_DARK};
+	}
 `;
 
 const logoWrapStyles = css`
@@ -166,6 +187,19 @@ const headingStyles = css`
 	}
 	color: ${sourcePalette.neutral[0]};
 	margin: 0 0 ${space[1]}px;
+
+	[data-color-scheme='light'] & {
+		color: ${sourcePalette.neutral[0]};
+	}
+	[data-color-scheme='dark'] & {
+		color: ${FEAST_TEXT_DARK};
+	}
+`;
+
+const headingDarkMedia = css`
+	@media (prefers-color-scheme: dark) {
+		color: ${FEAST_TEXT_DARK};
+	}
 `;
 
 const bodyStyles = css`
@@ -175,6 +209,19 @@ const bodyStyles = css`
 	}
 	color: ${sourcePalette.neutral[20]};
 	margin: 0 0 ${space[4]}px;
+
+	[data-color-scheme='light'] & {
+		color: ${sourcePalette.neutral[20]};
+	}
+	[data-color-scheme='dark'] & {
+		color: ${FEAST_SUBTEXT_DARK};
+	}
+`;
+
+const bodyDarkMedia = css`
+	@media (prefers-color-scheme: dark) {
+		color: ${FEAST_SUBTEXT_DARK};
+	}
 `;
 
 const actionsRowStyles = css`
@@ -183,23 +230,19 @@ const actionsRowStyles = css`
 	gap: ${space[2]}px;
 `;
 
-const primaryCtaStyles = css`
-	background-color: ${FEAST_GREEN};
-	color: ${sourcePalette.neutral[100]};
+/* Theme overrides for Source buttons — bypasses article pillar color inheritance */
+const primaryCtaTheme = {
+	backgroundPrimary: FEAST_GREEN,
+	backgroundPrimaryHover: FEAST_GREEN_HOVER,
+	textPrimary: sourcePalette.neutral[100],
+} as const;
 
-	:hover {
-		background-color: ${FEAST_GREEN_HOVER};
-	}
-`;
-
-const secondaryCtaStyles = css`
-	color: ${FEAST_GREEN};
-	border-color: ${FEAST_GREEN};
-
-	:hover {
-		background-color: rgba(104, 119, 60, 0.08);
-	}
-`;
+const secondaryCtaTheme = {
+	textSecondary: FEAST_GREEN,
+	borderSecondary: 'transparent',
+	backgroundSecondary: 'transparent',
+	backgroundSecondaryHover: 'rgba(104, 119, 60, 0.1)',
+} as const;
 
 /* On mobile, secondary actions collapse so the card stays compact */
 const secondaryCtaMobileHide = css`
@@ -210,6 +253,27 @@ const secondaryCtaMobileHide = css`
 
 const dismissWrapStyles = css`
 	flex-shrink: 0;
+`;
+
+/**
+ * Source's tertiary button inherits the article pillar color by default.
+ * We override only the icon/text color so it stays neutral.
+ */
+const dismissButtonStyles = css`
+	color: ${sourcePalette.neutral[46]};
+
+	[data-color-scheme='light'] & {
+		color: ${sourcePalette.neutral[46]};
+	}
+	[data-color-scheme='dark'] & {
+		color: ${sourcePalette.neutral[60]};
+	}
+`;
+
+const dismissDarkMedia = css`
+	@media (prefers-color-scheme: dark) {
+		color: ${sourcePalette.neutral[60]};
+	}
 `;
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -226,6 +290,12 @@ type Props = {
 	 * in a multi-recipe article so the marketing message is only shown once.
 	 */
 	compact?: boolean;
+	/**
+	 * Whether the page supports dark mode. Controls whether
+	 * `@media (prefers-color-scheme: dark)` styles are applied.
+	 * Pages that do not support dark mode (e.g. Labs) should pass `false`.
+	 */
+	darkModeAvailable?: boolean;
 };
 
 export const FeastContextualNudge = ({
@@ -233,6 +303,7 @@ export const FeastContextualNudge = ({
 	subscriberVariant,
 	onDismiss,
 	compact = false,
+	darkModeAvailable = false,
 }: Props) => {
 	const [isVisible, setIsVisible] = useState(true);
 
@@ -247,7 +318,10 @@ export const FeastContextualNudge = ({
 	};
 
 	return (
-		<aside aria-label="Get the Feast app" css={containerStyles}>
+		<aside
+			aria-label="Get the Feast app"
+			css={[containerStyles, darkModeAvailable && containerDarkMedia]}
+		>
 			<div css={logoWrapStyles} aria-hidden="true">
 				<FeastLogo />
 			</div>
@@ -255,8 +329,22 @@ export const FeastContextualNudge = ({
 			<div css={contentStyles}>
 				{!compact && (
 					<>
-						<h2 css={headingStyles}>{variant.heading}</h2>
-						<p css={bodyStyles}>{variant.body}</p>
+						<h2
+							css={[
+								headingStyles,
+								darkModeAvailable && headingDarkMedia,
+							]}
+						>
+							{variant.heading}
+						</h2>
+						<p
+							css={[
+								bodyStyles,
+								darkModeAvailable && bodyDarkMedia,
+							]}
+						>
+							{variant.body}
+						</p>
 					</>
 				)}
 
@@ -266,7 +354,8 @@ export const FeastContextualNudge = ({
 						priority="primary"
 						size="small"
 						href={buildAppLink(pageId, primaryAction.campaign)}
-						cssOverrides={primaryCtaStyles}
+						theme={primaryCtaTheme}
+						data-ignore="global-link-styling"
 					>
 						{primaryAction.label}
 					</LinkButton>
@@ -278,8 +367,10 @@ export const FeastContextualNudge = ({
 							priority="secondary"
 							size="small"
 							href={buildAppLink(pageId, action.campaign)}
+							theme={secondaryCtaTheme}
+							data-ignore="global-link-styling"
 							cssOverrides={css`
-								${secondaryCtaStyles}
+								background-color: transparent;
 								${secondaryCtaMobileHide}
 							`}
 						>
@@ -297,6 +388,14 @@ export const FeastContextualNudge = ({
 					icon={<SvgCross />}
 					hideLabel
 					onClick={handleDismiss}
+					cssOverrides={
+						darkModeAvailable
+							? css`
+									${dismissButtonStyles}
+									${dismissDarkMedia}
+							  `
+							: dismissButtonStyles
+					}
 				>
 					Dismiss
 				</Button>
