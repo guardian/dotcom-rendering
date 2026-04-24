@@ -1,7 +1,7 @@
 import inject from '@rollup/plugin-inject';
-import svgr from 'vite-plugin-svgr';
-import type { UserConfig } from 'vite';
+import type { PluginOption, UserConfig } from 'vite';
 import { mergeConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
 import type { Build } from '../src/lib/assets';
 import { getBrowserTargets } from './browser-targets';
 import { sharedConfig } from './vite.config.shared';
@@ -137,7 +137,7 @@ export const createClientConfig = (build: Build): UserConfig => {
 				? [
 						inject({
 							Buffer: ['buffer', 'Buffer'],
-						}),
+						}) as PluginOption,
 				  ]
 				: []),
 		],
