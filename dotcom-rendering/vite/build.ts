@@ -11,7 +11,7 @@ import { rmSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { build } from 'vite';
 import type { Build } from '../src/lib/assets';
-import { BUILD_VARIANT as BUILD_VARIANT_SWITCH } from '../webpack/bundles.mjs';
+import { BUILD_VARIANT as BUILD_VARIANT_SWITCH } from '../webpack/bundles';
 import { createClientConfig } from './vite.config.client';
 import { serverConfig } from './vite.config.server';
 
