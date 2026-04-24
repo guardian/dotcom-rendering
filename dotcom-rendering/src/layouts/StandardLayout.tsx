@@ -13,7 +13,6 @@ import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsEpic } from '../components/AppsEpic.island';
 import { AppsFooter } from '../components/AppsFooter.island';
-import { FeastContextualNudgeIsland } from '../components/FeastContextualNudge.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -757,20 +756,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										/>
 									</Island>
 								)}
-								{isWeb &&
-									format.design === ArticleDesign.Recipe && (
-										<Island
-											priority="feature"
-											defer={{
-												until: 'visible',
-											}}
-										>
-											<FeastContextualNudgeIsland
-												pageId={article.pageId}
-												editionId={article.editionId}
-											/>
-										</Island>
-									)}
 								<StraightLines
 									data-print-layout="hide"
 									count={4}
