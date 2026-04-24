@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints, from } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { liveBlock } from '../../fixtures/manual/liveBlock';
 import {
 	ArticleDesign,

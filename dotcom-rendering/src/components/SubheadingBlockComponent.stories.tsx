@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Decorator } from '@storybook/react-webpack5';
+import type { Decorator } from '@storybook/react-vite';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import preview from '../../.storybook/preview';
 import {

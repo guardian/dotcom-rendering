@@ -6,7 +6,8 @@ import {
 	textSans17,
 	textSansBold20,
 } from '@guardian/source/foundations';
-import type { Decorator } from '@storybook/react-webpack5';
+import { Decorator } from '@storybook/react-vite';
+import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
 import type { ReactNode } from 'react';
 import {
 	ArticleDesign,
@@ -15,7 +16,6 @@ import {
 	Pillar,
 } from '../../src/lib/articleFormat';
 import type { ArticleFormat } from '../../src/lib/articleFormat';
-import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
 
 interface Orientation {
 	orientation?: 'horizontal' | 'vertical';

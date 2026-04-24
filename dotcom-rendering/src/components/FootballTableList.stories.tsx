@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FootballTable as TableDefault } from './FootballTable.stories';
 import { FootballTableList as FootballTableListComponent } from './FootballTableList';
 

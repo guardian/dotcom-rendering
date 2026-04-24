@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ReactNode } from 'react';
 import { expect, within } from 'storybook/test';
 import { allModes } from '../../.storybook/modes';
