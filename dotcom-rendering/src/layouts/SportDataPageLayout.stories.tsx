@@ -1,4 +1,4 @@
-import type { StoryObj } from '@storybook/react-webpack5';
+import type { StoryObj } from '@storybook/react-vite';
 import { footballData } from '../../fixtures/generated/football-live';
 import { initialDays, regions } from '../../fixtures/manual/footballData';
 import { CricketScorecard } from '../components/CricketScorecard.stories';

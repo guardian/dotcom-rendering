@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ComponentProps } from 'react';
 import { expect, waitFor, within } from 'storybook/test';
 import type { FECricketMatchHeader } from '../../frontend/feCricketMatchHeader';

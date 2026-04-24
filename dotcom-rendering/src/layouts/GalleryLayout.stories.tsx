@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { allModes } from '../../.storybook/modes';
 import { Gallery as GalleryFixture } from '../../fixtures/generated/fe-articles/Gallery';
 import { storyPackage } from '../../fixtures/generated/story-package';
