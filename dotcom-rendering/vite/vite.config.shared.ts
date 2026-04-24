@@ -1,4 +1,3 @@
-import { resolve } from 'node:path';
 import type { UserConfig } from 'vite';
 
 const DEV = process.env.NODE_ENV === 'development';
@@ -20,17 +19,5 @@ export const sharedConfig: UserConfig = {
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx'],
-		alias: {
-			// webpack/bundles.js is CJS (module.exports) which Rollup can't
-			// resolve named exports from. Redirect to an ESM wrapper.
-			'../../webpack/bundles': resolve(
-				__dirname,
-				'../webpack/bundles.mjs',
-			),
-			'../../../webpack/bundles': resolve(
-				__dirname,
-				'../webpack/bundles.mjs',
-			),
-		},
 	},
 };
