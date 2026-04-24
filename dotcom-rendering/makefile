@@ -1,4 +1,4 @@
-.PHONY: install dev build clean-dist clear vite-build vite-dev
+.PHONY: install dev build clean-dist clear build dev
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
@@ -29,21 +29,11 @@ riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
 	@node ./scripts/deploy/build-riffraff-bundle.mjs
 
-# vite #########################################
-
-vite-build: clean-dist install
-	$(call log, "building production bundles with Vite")
-	@NODE_ENV=production node --import tsx vite/build.ts
-
-vite-dev: clear clean-dist install
-	$(call log, "starting Vite DEV server")
-	@NODE_ENV=development node --import tsx vite/dev-server.ts
-
 # prod #########################################
 
 build: clean-dist install
-	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./webpack/webpack.config.js --progress
+	$(call log, "building production bundles with Vite")
+	@NODE_ENV=production node --import tsx vite/build.ts
 	$(call log, "generating Islands report card")
 	@node ./scripts/islands/island-descriptions.mjs
 
@@ -58,17 +48,17 @@ prod-local: prod
 # dev #########################################
 
 dev: clear clean-dist install
-	$(call log, "starting DEV server")
-	@NODE_ENV=development webpack serve --config ./webpack/webpack.config.js
+	$(call log, "starting Vite DEV server")
+	@NODE_ENV=development node --import tsx vite/dev-server.ts
 
 dev-variant: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development BUILD_VARIANT=true webpack serve --config ./webpack/webpack.config.js
+	@NODE_ENV=development BUILD_VARIANT=true node --import tsx vite/dev-server.ts
 
 dev-debug: clear clean-dist install
 	$(call log, "starting DEV server and debugger")
 	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
-	@NODE_ENV=development NODE_OPTIONS="--inspect" webpack serve --config ./webpack/webpack.config.js
+	@NODE_ENV=development NODE_OPTIONS="--inspect" node --import tsx vite/dev-server.ts
 
 # storybook #########################################
 
