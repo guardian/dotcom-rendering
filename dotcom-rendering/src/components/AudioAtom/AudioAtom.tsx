@@ -185,31 +185,19 @@ const PlaySVG = () => (
 	</svg>
 );
 
-const buildUrl = (
-	basicUrl: string,
-	urlWithAds: string,
-	shouldUseAcast?: boolean,
-) => {
-	return shouldUseAcast ? urlWithAds : basicUrl;
-};
-
 type Props = {
 	id: string;
 	trackUrl: string;
 	kicker: string;
 	title?: string;
-	shouldUseAcast?: boolean;
-	trackUrlWithAds: string;
 	duration: number;
 };
 
 export const AudioAtom = ({
 	id,
 	trackUrl,
-	trackUrlWithAds,
 	kicker,
 	title,
-	shouldUseAcast,
 	duration,
 }: Props): JSX.Element => {
 	const audioEl = useRef<HTMLAudioElement>(null);
@@ -218,10 +206,6 @@ export const AudioAtom = ({
 	// update current time and progress bar position
 	const [currentTime, setCurrentTime] = useState<number>(0);
 	const [percentPlayed, setPercentPlayed] = useState<number>(0);
-	// url
-	const [urlToUse, setUrlToUse] = useState<string>(
-		buildUrl(trackUrl, trackUrlWithAds, shouldUseAcast),
-	);
 
 	useEffect(() => {
 		const audioElCurrent = audioEl.current;
@@ -249,7 +233,7 @@ export const AudioAtom = ({
 						updateCurrentTimeAndPosition,
 				  )
 				: undefined;
-	}, [audioEl, setCurrentTime, shouldUseAcast]);
+	}, [audioEl, setCurrentTime]);
 
 	// update duration time
 	const [durationTime, setDurationTime] = useState<number>(duration);
@@ -305,11 +289,6 @@ export const AudioAtom = ({
 		return () => document.removeEventListener('keydown', keyListener);
 	}, [audioEl, progressBarEl]);
 
-	// If Acast is enabled, replace the default url with an ad enabled one
-	useEffect(() => {
-		setUrlToUse(buildUrl(trackUrl, trackUrlWithAds, shouldUseAcast));
-	}, [shouldUseAcast, trackUrl, trackUrlWithAds]);
-
 	const playAudio = () => {
 		setIsPlaying(true);
 		void audioEl.current?.play();
@@ -334,7 +313,7 @@ export const AudioAtom = ({
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- TODO */}
 				<audio
 					css={audioElementStyle}
-					src={urlToUse}
+					src={trackUrl}
 					ref={audioEl}
 					preload="none"
 					data-component="inarticle audio"
@@ -344,7 +323,7 @@ export const AudioAtom = ({
 				>
 					<p>
 						Sorry your browser does not support audio - but you can
-						download here and listen ${urlToUse}
+						download here and listen ${trackUrl}
 					</p>
 				</audio>
 				<div css={audioControlsStyle}>

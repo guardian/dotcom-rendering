@@ -39,6 +39,7 @@ export const AudioAtomWrapper = ({
 	// *     ACast     *
 	// *****************
 	const [shouldUseAcast, setShouldUseAcast] = useState<boolean>(false);
+
 	useEffect(() => {
 		onConsentChange((state) => {
 			// Should we use ad enabled audio? If so, then set the shouldUseAcast
@@ -59,12 +60,10 @@ export const AudioAtomWrapper = ({
 	return (
 		<AudioAtom
 			id={id}
-			trackUrl={trackUrl}
-			trackUrlWithAds={trackUrlWithAds}
+			trackUrl={shouldUseAcast ? trackUrlWithAds : trackUrl}
 			kicker={kicker}
 			title={title}
 			duration={duration}
-			shouldUseAcast={shouldUseAcast}
 		/>
 	);
 };
