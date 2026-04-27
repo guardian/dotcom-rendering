@@ -1,7 +1,11 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
-import { SvgArrowExpand } from '@guardian/source/react-components';
+import { palette as sourcePalette, space } from '@guardian/source/foundations';
+import {
+	SvgArrowExpand,
+	SvgMediaControlsPause,
+} from '@guardian/source/react-components';
 import { palette } from '../palette';
+import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
 import type { Props as SelfHostedVideoPlayerProps } from './SelfHostedVideoPlayer';
 
 const buttonStyles = css`
@@ -104,6 +108,56 @@ export const FullscreenIcon = ({
 					fill: palette('--video-icon'),
 				}}
 			/>
+		</div>
+	</button>
+);
+
+const playPauseButtonStyles = css`
+	position: absolute;
+	/* Center the icon */
+	top: calc(50% - ${narrowPlayIconDiameter / 2}px);
+	left: calc(50% - ${narrowPlayIconDiameter / 2}px);
+	cursor: pointer;
+	border: none;
+	background: none;
+	padding: 0;
+`;
+
+const playPauseIconStyles = css`
+	width: 56px;
+	height: 56px;
+	background-color: ${palette('--narrow-play-icon-background')};
+	border-radius: 50%;
+	border: 1px solid ${palette('--narrow-play-icon-border')};
+	fill: ${palette('--narrow-play-icon-fill')};
+`;
+
+type PlayPauseIconProps = {
+	type: 'play' | 'pause';
+	atomId: SelfHostedVideoPlayerProps['atomId'];
+	handleClick: SelfHostedVideoPlayerProps['handlePlayPauseClick'];
+};
+
+export const PlayPauseIcon = ({
+	type,
+	atomId,
+	handleClick,
+}: PlayPauseIconProps) => (
+	<button
+		type="button"
+		onClick={handleClick}
+		css={playPauseButtonStyles}
+		data-link-name={`gu-video-loop-pause-${atomId}`}
+		data-testid={`${type}-icon`}
+	>
+		<div css={[iconContainerStyles, playPauseIconStyles]}>
+			{type === 'play' ? (
+				<PlayIcon iconWidth="narrow" />
+			) : (
+				<SvgMediaControlsPause
+					theme={{ fill: sourcePalette.neutral[100] }}
+				/>
+			)}
 		</div>
 	</button>
 );
