@@ -60,10 +60,12 @@ const videoContainerStyles = (
 	 * Use the aspect ratio of the video, unless the aspect-ratio of the container is fixed
 	 */
 	aspect-ratio: ${aspectRatioOfVisibleVideo};
+
 	${until.tablet} {
 		${!isUndefined(containerAspectRatioMobile) &&
 		`aspect-ratio: ${containerAspectRatioMobile};`}
 	}
+
 	${from.tablet} {
 		${!isUndefined(containerAspectRatioDesktop) &&
 		`aspect-ratio: ${containerAspectRatioDesktop};`}
@@ -196,17 +198,6 @@ const getOptimisedPosterImage = (mainImage: string): string => {
 		aspectRatio: '5:4',
 	});
 };
-
-/**
- * Runs a series of browser-specific checks to determine if the video has audio.
- * We have run a test to check that all supported browsers are covered by these checks.
- */
-const doesVideoHaveAudio = (video: HTMLVideoElement): boolean =>
-	('mozHasAudio' in video && Boolean(video.mozHasAudio)) ||
-	('webkitAudioDecodedByteCount' in video &&
-		Boolean(video.webkitAudioDecodedByteCount)) ||
-	('audioTracks' in video &&
-		Boolean((video.audioTracks as { length: number }).length));
 
 /**
  * 	The Fullscreen api is not supported by Safari mobile,
@@ -348,7 +339,6 @@ export const SelfHostedVideo = ({
 	const vidRef = useRef<HTMLVideoElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
-	const [hasAudio, setHasAudio] = useState(true);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
@@ -394,6 +384,9 @@ export const SelfHostedVideo = ({
 			: controlsPosition;
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
+
+	const supportsAudio =
+		sources.some((source) => source.hasAudio) && !isCinemagraph;
 
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
@@ -671,8 +664,6 @@ export const SelfHostedVideo = ({
 	const handleLoadedData = () => {
 		const video = vidRef.current;
 		if (!video) return;
-
-		setHasAudio(doesVideoHaveAudio(video));
 
 		if (video.videoWidth > 0 && video.videoHeight > 0) {
 			setWidth(video.videoWidth);
@@ -957,7 +948,7 @@ export const SelfHostedVideo = ({
 						handleFullscreenClick={handleFullscreenClick}
 						updateCurrentTime={updateCurrentTime}
 						onError={onError}
-						AudioIcon={hasAudio ? AudioIcon : null}
+						AudioIcon={supportsAudio ? AudioIcon : null}
 						preloadPartialData={!!shouldAutoplay}
 						iconSize={iconSize}
 						showPlayIcon={showPlayIcon}
