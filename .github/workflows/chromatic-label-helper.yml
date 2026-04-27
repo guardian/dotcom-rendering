@@ -10,13 +10,18 @@ on:
     types: [opened, ready_for_review]
 
 jobs:
+  check-paths:
+    name: Check changed paths
+    uses: ./.github/workflows/check-chromatic-paths.yml
+
   write_comment:
     runs-on: ubuntu-latest
+    needs: check-paths
     permissions:
       pull-requests: write
 
-    # We only comment on pull requests that have been marked as ready for review
-    if: ${{ github.event.pull_request.draft == false}}
+    # Only comment when the PR touches files relevant to Chromatic and isn't a draft
+    if: ${{ github.event.pull_request.draft == false && needs.check-paths.outputs.relevant == 'true' }}
 
     steps:
       - uses: actions/github-script@v8
