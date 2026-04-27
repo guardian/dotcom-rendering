@@ -1,10 +1,14 @@
-const EMAIL_PREVIEW_BASE_URL = 'https://email-rendering.guardianapis.com';
+export const EMAIL_PREVIEW_BASE_URL =
+	'https://email-rendering.guardianapis.com';
+export const EMAIL_PREVIEW_ORIGIN = new URL(EMAIL_PREVIEW_BASE_URL).origin;
 const FRONTS_EMAIL_PREVIEW_PATH = 'fronts';
 const ARTICLE_EMAIL_PREVIEW_PATH = 'article';
 const FRONTS_EMAIL_PREVIEW_VARIANT = 'persephone';
 const ARTICLE_EMAIL_PREVIEW_VARIANT = 'kronos';
 const READ_ONLY_PARAM_KEY = 'readonly';
 const READ_ONLY_PARAM_VALUE = 'true';
+const EMBED_PARAM_KEY = 'embed';
+const EMBED_PARAM_VALUE = 'true';
 
 const getPathname = (urlOrPath: string): string => {
 	try {
@@ -56,6 +60,7 @@ const buildPreviewUrl = ({
 	previewUrl.search = new URLSearchParams({
 		variant,
 		[READ_ONLY_PARAM_KEY]: READ_ONLY_PARAM_VALUE,
+		[EMBED_PARAM_KEY]: EMBED_PARAM_VALUE,
 	}).toString();
 
 	return previewUrl.toString();

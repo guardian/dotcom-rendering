@@ -5,11 +5,81 @@ import {
 	headlineMedium24,
 	palette,
 	space,
+	textSans15,
 } from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
-import { useEffect, useId, useRef } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getZIndex } from '../lib/getZIndex';
+import { EMAIL_PREVIEW_ORIGIN } from '../lib/newsletterPreviewUrl';
+
+const PREVIEW_LOAD_TIMEOUT_MS = 10_000;
+const TIMEOUT_FAILURE_MESSAGE =
+	'The preview is taking longer than expected. You can retry loading it.';
+const UNAVAILABLE_FAILURE_MESSAGE =
+	'This preview is currently unavailable. Please try again shortly.';
+
+type EmbedStatusMessage = {
+	type: 'embed-status';
+	ok: boolean;
+};
+
+const parseEmbedStatusMessage = (
+	data: unknown,
+): EmbedStatusMessage | undefined => {
+	let payload: unknown = data;
+
+	if (typeof payload === 'string') {
+		try {
+			payload = JSON.parse(payload);
+		} catch {
+			return undefined;
+		}
+	}
+
+	if (!payload || typeof payload !== 'object') return undefined;
+
+	const { type, ok } = payload as {
+		type?: unknown;
+		ok?: unknown;
+	};
+
+	if (type !== 'embed-status' || typeof ok !== 'boolean') return undefined;
+
+	return {
+		type: 'embed-status',
+		ok,
+	};
+};
+
+const getTrustedIframeOrigin = (url: string): string | undefined => {
+	try {
+		const origin = new URL(url).origin;
+		return origin === EMAIL_PREVIEW_ORIGIN ? origin : undefined;
+	} catch {
+		return undefined;
+	}
+};
+
+const isTrustedIframeMessage = ({
+	event,
+	trustedOrigin,
+	iframeWindow,
+}: {
+	event: MessageEvent;
+	trustedOrigin: string;
+	iframeWindow: Window | null;
+}): boolean => {
+	const isTrustedOrigin = event.origin === trustedOrigin;
+	const isExpectedSource =
+		iframeWindow !== null && event.source === iframeWindow;
+
+	if (!isTrustedOrigin || !isExpectedSource) {
+		return false;
+	}
+
+	return true;
+};
 
 const FOCUSABLE_SELECTOR =
 	'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
@@ -70,11 +140,114 @@ const previewTitleStyles = css`
 
 const previewFrameStyles = css`
 	flex: 1;
+	min-height: 0;
+	height: 100%;
 	width: 100%;
+	display: block;
+	border: 0;
+	background: ${palette.neutral[100]};
+	padding: 0;
+`;
+
+const previewFrameContainerStyles = css`
+	position: relative;
+	display: flex;
+	min-height: 0;
+	flex: 1;
+	background: ${palette.neutral[100]};
 
 	${from.tablet} {
 		padding: 0 ${space[6]}px;
 	}
+`;
+
+const previewIframeHiddenStyles = css`
+	visibility: hidden;
+`;
+
+const previewLoadingOverlayStyles = css`
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding: 0 ${space[3]}px ${space[4]}px;
+	background: ${palette.neutral[100]};
+	overflow-y: hidden;
+
+	${from.tablet} {
+		padding: 0 ${space[9]}px ${space[9]}px;
+	}
+`;
+
+const previewSkeletonBlockStyles = css`
+	width: 100%;
+	flex-shrink: 0;
+	background: linear-gradient(
+		90deg,
+		${palette.neutral[86]} 25%,
+		${palette.neutral[97]} 50%,
+		${palette.neutral[86]} 75%
+	);
+	background-size: 200% 100%;
+	animation: preview-skeleton-shimmer 1.2s linear infinite;
+
+	@keyframes preview-skeleton-shimmer {
+		from {
+			background-position: 200% 0;
+		}
+		to {
+			background-position: -200% 0;
+		}
+	}
+`;
+
+const previewSkeletonBannerStyles = css`
+	${previewSkeletonBlockStyles};
+	height: 96px;
+`;
+
+const previewSkeletonLargeStyles = css`
+	${previewSkeletonBlockStyles};
+	height: 332px;
+	margin: 16px 0;
+`;
+
+const previewSkeletonSmallStyles = css`
+	${previewSkeletonBlockStyles};
+	height: 52px;
+	margin-top: 16px;
+`;
+
+const previewStatusStyles = css`
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: ${space[4]}px ${space[3]}px;
+	background: ${palette.neutral[100]};
+	text-align: center;
+
+	${from.tablet} {
+		padding: ${space[6]}px;
+	}
+`;
+
+const previewStatusInnerStyles = css`
+	max-width: 520px;
+`;
+
+const previewStatusTitleStyles = css`
+	${headlineMedium20};
+	margin: 0 0 ${space[2]}px;
+	color: ${palette.neutral[7]};
+`;
+
+const previewStatusBodyStyles = css`
+	${textSans15};
+	margin: 0 0 ${space[4]}px;
+	color: ${palette.neutral[20]};
 `;
 
 const desktopCloseButtonStyles = css`
@@ -143,7 +316,28 @@ export const NewsletterPreviewModal = ({
 	onClose,
 }: Props) => {
 	const dialogRef = useRef<HTMLDivElement>(null);
+	const iframeRef = useRef<HTMLIFrameElement>(null);
+	const hasEmbedStatusFailureRef = useRef(false);
 	const titleId = useId();
+	const [isLoading, setIsLoading] = useState(true);
+	const [hasLoadFailed, setHasLoadFailed] = useState(false);
+	const [failureMessage, setFailureMessage] = useState(
+		UNAVAILABLE_FAILURE_MESSAGE,
+	);
+	const [iframeKey, setIframeKey] = useState(0);
+
+	const trustedIframeOrigin = getTrustedIframeOrigin(renderUrl);
+
+	const applyEmbedStatus = (ok: boolean) => {
+		hasEmbedStatusFailureRef.current = !ok;
+
+		if (!ok) {
+			setFailureMessage(UNAVAILABLE_FAILURE_MESSAGE);
+		}
+
+		setIsLoading(false);
+		setHasLoadFailed(!ok);
+	};
 
 	const getVisibleFocusableElements = (dialog: HTMLElement): HTMLElement[] =>
 		Array.from(
@@ -258,6 +452,73 @@ export const NewsletterPreviewModal = ({
 		};
 	}, [onClose]);
 
+	useEffect(() => {
+		hasEmbedStatusFailureRef.current = false;
+		setIsLoading(true);
+		setHasLoadFailed(false);
+		setFailureMessage(UNAVAILABLE_FAILURE_MESSAGE);
+	}, [renderUrl, iframeKey]);
+
+	useEffect(() => {
+		if (!isLoading) return;
+
+		const timeoutId = window.setTimeout(() => {
+			setFailureMessage(TIMEOUT_FAILURE_MESSAGE);
+			setHasLoadFailed(true);
+			setIsLoading(false);
+		}, PREVIEW_LOAD_TIMEOUT_MS);
+
+		return () => {
+			window.clearTimeout(timeoutId);
+		};
+	}, [isLoading]);
+
+	useEffect(() => {
+		if (!trustedIframeOrigin) return;
+
+		const handleMessage = (event: MessageEvent) => {
+			if (!iframeRef.current) return;
+
+			const iframeWindow = iframeRef.current.contentWindow;
+			if (
+				!isTrustedIframeMessage({
+					event,
+					trustedOrigin: trustedIframeOrigin,
+					iframeWindow,
+				})
+			) {
+				return;
+			}
+
+			const embedStatusMessage = parseEmbedStatusMessage(event.data);
+			if (!embedStatusMessage) return;
+
+			applyEmbedStatus(embedStatusMessage.ok);
+		};
+
+		window.addEventListener('message', handleMessage);
+
+		return () => {
+			window.removeEventListener('message', handleMessage);
+		};
+	}, [trustedIframeOrigin]);
+
+	const handleIframeLoad = () => {
+		if (hasEmbedStatusFailureRef.current) return;
+		setIsLoading(false);
+		setHasLoadFailed(false);
+	};
+
+	const handleIframeError = () => {
+		setFailureMessage(UNAVAILABLE_FAILURE_MESSAGE);
+		setHasLoadFailed(true);
+		setIsLoading(false);
+	};
+
+	const retryLoad = () => {
+		setIframeKey((currentKey) => currentKey + 1);
+	};
+
 	if (typeof document === 'undefined') return null;
 
 	return createPortal(
@@ -285,11 +546,57 @@ export const NewsletterPreviewModal = ({
 						Close preview
 					</Button>
 				</div>
-				<iframe
-					title={`${newsletterName} preview`}
-					src={renderUrl}
-					css={previewFrameStyles}
-				/>
+				<div css={previewFrameContainerStyles}>
+					{isLoading && (
+						<div
+							css={previewLoadingOverlayStyles}
+							aria-live="polite"
+							aria-label="Loading newsletter preview"
+						>
+							<div css={previewSkeletonBannerStyles} />
+							<div css={previewSkeletonLargeStyles} />
+							<div css={previewSkeletonSmallStyles} />
+							<div css={previewSkeletonSmallStyles} />
+							<div css={previewSkeletonLargeStyles} />
+						</div>
+					)}
+					{hasLoadFailed && (
+						<div
+							css={previewStatusStyles}
+							role="status"
+							aria-live="polite"
+						>
+							<div css={previewStatusInnerStyles}>
+								<h3 css={previewStatusTitleStyles}>
+									Preview failed to load
+								</h3>
+								<p css={previewStatusBodyStyles}>
+									{failureMessage}
+								</p>
+								<Button
+									size="small"
+									priority="primary"
+									onClick={retryLoad}
+								>
+									Retry preview
+								</Button>
+							</div>
+						</div>
+					)}
+					<iframe
+						ref={iframeRef}
+						key={iframeKey}
+						title={`${newsletterName} preview`}
+						src={renderUrl}
+						onLoad={handleIframeLoad}
+						onError={handleIframeError}
+						css={[
+							previewFrameStyles,
+							(isLoading || hasLoadFailed) &&
+								previewIframeHiddenStyles,
+						]}
+					/>
+				</div>
 				<div css={mobileCloseBarStyles}>
 					<Button
 						priority="tertiary"
