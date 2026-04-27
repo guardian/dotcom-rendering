@@ -76,7 +76,6 @@ export const WithoutProgressBar: Story = {
 		hideProgressBar: true,
 	},
 } satisfies Story;
-//TODO: FIX SOURCES
 
 export const WithoutMuteUnmute: Story = {
 	args: {
