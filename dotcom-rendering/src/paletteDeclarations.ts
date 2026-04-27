@@ -5164,7 +5164,7 @@ const privacyTextSupportingLight: PaletteFunction = () =>
 const privacyTextSupportingSubduedLight: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 const privacyTextSupportingSubduedDark: PaletteFunction = () =>
-	sourcePalette.neutral[60];
+	sourcePalette.neutral[73];
 
 const productCarouselCardBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
@@ -7631,11 +7631,40 @@ const paletteColours = {
 	},
 	'--newsletter-preview-button-hover': {
 		light: () => sourcePalette.neutral[97],
-		dark: () => sourcePalette.neutral[20],
+		dark: () =>
+			themeButtonBrand.backgroundTertiaryHover ??
+			sourcePalette.brand[300],
 	},
 	'--newsletter-preview-button-text': {
 		light: () => sourcePalette.brand[400],
 		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-input-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[300],
+	},
+	'--newsletter-signup-input-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-submit-background': {
+		light: () => themeButton.backgroundPrimary,
+		dark: () => themeButtonBrand.backgroundPrimary,
+	},
+	'--newsletter-signup-submit-background-hover': {
+		light: () =>
+			themeButton.backgroundPrimaryHover ?? themeButton.backgroundPrimary,
+		dark: () =>
+			themeButtonBrand.backgroundPrimaryHover ??
+			themeButtonBrand.backgroundPrimary,
+	},
+	'--newsletter-signup-submit-text': {
+		light: () => themeButton.textPrimary,
+		dark: () => themeButtonBrand.textPrimary,
+	},
+	'--newsletter-signup-toggle-text': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--numbered-list-heading': {
 		light: numberedListHeadingLight,
