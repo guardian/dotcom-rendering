@@ -224,9 +224,10 @@ describe('NewsletterPreviewModal', () => {
 
 	it('shows failure state when iframe posts embed-status with ok=false', () => {
 		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
-		const iframe = screen.getByTitle(
-			'Morning Briefing preview',
-		) as HTMLIFrameElement;
+		const iframe = screen.getByTitle('Morning Briefing preview');
+		if (!(iframe instanceof HTMLIFrameElement)) {
+			throw new Error('Expected preview element to be an iframe');
+		}
 		const iframeSource = iframe.contentWindow;
 		if (!iframeSource) {
 			throw new Error('Expected iframe contentWindow to be available');
@@ -253,9 +254,10 @@ describe('NewsletterPreviewModal', () => {
 	it('keeps failure state when embed-status reports failure before iframe load event', () => {
 		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
 
-		const iframe = screen.getByTitle(
-			'Morning Briefing preview',
-		) as HTMLIFrameElement;
+		const iframe = screen.getByTitle('Morning Briefing preview');
+		if (!(iframe instanceof HTMLIFrameElement)) {
+			throw new Error('Expected preview element to be an iframe');
+		}
 		const iframeSource = iframe.contentWindow;
 		if (!iframeSource) {
 			throw new Error('Expected iframe contentWindow to be available');
@@ -283,9 +285,10 @@ describe('NewsletterPreviewModal', () => {
 
 	it('hides skeleton when iframe posts embed-status with ok=true', () => {
 		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
-		const iframe = screen.getByTitle(
-			'Morning Briefing preview',
-		) as HTMLIFrameElement;
+		const iframe = screen.getByTitle('Morning Briefing preview');
+		if (!(iframe instanceof HTMLIFrameElement)) {
+			throw new Error('Expected preview element to be an iframe');
+		}
 		const iframeSource = iframe.contentWindow;
 		if (!iframeSource) {
 			throw new Error('Expected iframe contentWindow to be available');
