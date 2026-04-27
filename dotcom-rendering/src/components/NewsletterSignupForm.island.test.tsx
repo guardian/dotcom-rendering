@@ -30,19 +30,42 @@ jest.mock('../lib/useBrowserId', () => ({
 	useBrowserId: jest.fn(),
 }));
 
-// Mock reCAPTCHA: immediately call onChange with a fake token when execute() is called.
+type RecaptchaProps = {
+	onChange?: (token: string | null) => void;
+	onError?: () => void;
+};
+
+type RecaptchaHandle = { execute: () => void; reset: () => void };
+
+// The default mock resolves the captcha immediately with a valid token.
+// Individual tests can override this via mockRecaptcha().
+let recaptchaBehaviour: (
+	handle: RecaptchaHandle,
+	props: RecaptchaProps,
+) => void = (_handle, props) => props.onChange?.('test-recaptcha-token');
+
+/** Override what happens when reCAPTCHA's execute() is called in a single test. */
+const mockRecaptcha = (
+	behaviour: (handle: RecaptchaHandle, props: RecaptchaProps) => void,
+) => {
+	recaptchaBehaviour = behaviour;
+};
+
 jest.mock('react-google-recaptcha', () => ({
 	__esModule: true,
-	default: forwardRef<
-		{ execute: () => void; reset: () => void },
-		{ onChange?: (token: string) => void }
-	>(function MockRecaptcha({ onChange }, ref) {
-		useImperativeHandle(ref, () => ({
-			execute: () => onChange?.('test-recaptcha-token'),
-			reset: () => undefined,
-		}));
-		return null;
-	}),
+	default: forwardRef<RecaptchaHandle, RecaptchaProps>(
+		function MockRecaptcha(props, ref) {
+			useImperativeHandle(ref, () => ({
+				execute: () =>
+					recaptchaBehaviour(
+						{ execute: () => undefined, reset: () => undefined },
+						props,
+					),
+				reset: () => undefined,
+			}));
+			return null;
+		},
+	),
 }));
 
 const renderForm = (hidePrivacyMessage = false) =>
@@ -101,6 +124,11 @@ describe('NewsletterSignupForm', () => {
 
 	beforeEach(() => {
 		jest.clearAllMocks();
+
+		// Reset reCAPTCHA to the default happy-path behaviour.
+		mockRecaptcha(
+			(_handle, props) => props.onChange?.('test-recaptcha-token'),
+		);
 
 		(useIsSignedIn as jest.Mock).mockReturnValue(false);
 		(useAuthStatus as jest.Mock).mockReturnValue({ kind: 'SignedOut' });
@@ -342,6 +370,69 @@ describe('NewsletterSignupForm', () => {
 			'captcha-passed',
 			'form-submission',
 			'submission-failed',
+		]);
+
+		await testUser.click(screen.getByRole('button', { name: 'Try again' }));
+
+		expect(
+			screen.getByRole('button', { name: 'Sign up' }),
+		).toBeInTheDocument();
+	});
+
+	it('shows failure UI when reCAPTCHA returns a null token (expired/dismissed)', async () => {
+		const testUser = user.setup();
+		mockRecaptcha((_handle, props) => props.onChange?.(null));
+
+		renderForm();
+
+		await typeEmailAddress(testUser);
+		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+
+		await waitFor(() => {
+			expect(
+				screen.getByText(/The reCAPTCHA check did not complete\./),
+			).toBeInTheDocument();
+		});
+
+		// Form is replaced by the failure box — the email input is not visible.
+		expect(screen.queryByLabelText('Enter your email')).not.toBeVisible();
+		expect(global.fetch).not.toHaveBeenCalled();
+
+		expectTrackedEventDescriptions([
+			'click-button',
+			'open-captcha',
+			'captcha-not-passed',
+		]);
+
+		// "Try again" resets back to the form.
+		await testUser.click(screen.getByRole('button', { name: 'Try again' }));
+		expect(
+			screen.getByRole('button', { name: 'Sign up' }),
+		).toBeInTheDocument();
+	});
+
+	it('shows failure UI when reCAPTCHA fires its onError callback', async () => {
+		const testUser = user.setup();
+		mockRecaptcha((_handle, props) => props.onError?.());
+
+		renderForm();
+
+		await typeEmailAddress(testUser);
+		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+
+		await waitFor(() => {
+			expect(
+				screen.getByText(/the reCAPTCHA failed to load\./),
+			).toBeInTheDocument();
+		});
+
+		expect(screen.queryByLabelText('Enter your email')).not.toBeVisible();
+		expect(global.fetch).not.toHaveBeenCalled();
+
+		expectTrackedEventDescriptions([
+			'click-button',
+			'open-captcha',
+			'captcha-load-error',
 		]);
 
 		await testUser.click(screen.getByRole('button', { name: 'Try again' }));

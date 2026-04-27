@@ -72,6 +72,7 @@ const mockForm = (state: Partial<NewsletterSignupFormState>) => ({
 	isWaitingForResponse: false,
 	responseOk: undefined,
 	errorMessage: undefined,
+	isValidationError: false,
 	recaptchaRef: createRef<ReactGoogleRecaptcha>(),
 	captchaSiteKey: undefined,
 	...noopHandlers,
@@ -177,7 +178,10 @@ export const ValidationError = meta.story({
 	args: defaultArgs,
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(
-			mockForm({ errorMessage: 'Please enter your email address.' }),
+			mockForm({
+				errorMessage: 'Please enter your email address.',
+				isValidationError: true,
+			}),
 		);
 	},
 });
@@ -191,6 +195,33 @@ export const InvalidEmail = meta.story({
 				userEmail: 'not-an-email',
 				isInteracted: true,
 				errorMessage: 'Incorrect email format. Please check.',
+				isValidationError: true,
+			}),
+		);
+	},
+});
+
+/** reCAPTCHA widget failed to load — form replaced by bordered error box. */
+export const CaptchaLoadError = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({
+				errorMessage: 'Sorry, the reCAPTCHA failed to load.',
+				isValidationError: false,
+			}),
+		);
+	},
+});
+
+/** reCAPTCHA check expired or was dismissed — form replaced by bordered error box. */
+export const CaptchaNotPassed = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({
+				errorMessage: 'The reCAPTCHA check did not complete.',
+				isValidationError: false,
 			}),
 		);
 	},

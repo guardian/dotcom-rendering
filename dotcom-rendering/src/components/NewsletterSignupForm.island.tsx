@@ -243,11 +243,13 @@ const SuccessMessage = ({
 
 const FailureMessage = ({
 	onRetry,
+	text,
 }: {
 	onRetry: React.MouseEventHandler<HTMLButtonElement>;
+	text: string;
 }) => (
 	<div css={[responseBoxStyles, errorContainerStyles]}>
-		<ErrorMessageWithAdvice text="Sign up failed." />
+		<ErrorMessageWithAdvice text={text} />
 		<Button
 			size="small"
 			priority="primary"
@@ -265,7 +267,8 @@ const FailureMessage = ({
 /**
  * # Newsletter Signup Form
  *
- * A simplified version of SecureSignup without reCAPTCHA or A/B testing.
+ * Renders a newsletter signup form with email input, optional marketing opt-in
+ * toggle, privacy message, reCAPTCHA, and success/failure feedback states.
  * All logic lives in {@link useNewsletterSignupForm}.
  *
  * When the user is already subscribed, the success message is shown immediately
@@ -304,6 +307,7 @@ const NewsletterSignupFormActive = ({
 		isWaitingForResponse,
 		responseOk,
 		errorMessage,
+		isValidationError,
 		recaptchaRef,
 		captchaSiteKey,
 		handleCaptchaComplete,
@@ -318,13 +322,18 @@ const NewsletterSignupFormActive = ({
 	} = useNewsletterSignupForm(newsletterId, renderingTarget);
 
 	const hasResponse = typeof responseOk === 'boolean';
-	const showForm = !hasResponse;
+	const hasNonValidationError = !!errorMessage && !isValidationError;
+	const showForm = !hasResponse && !hasNonValidationError;
 	const showSuccess = hasResponse && !!responseOk;
-	const showFailure = hasResponse && !responseOk;
+	// Show the failure box for server errors (responseOk === false) and for
+	// reCAPTCHA / network errors that occur before a response is received.
+	const showFailure = (hasResponse && !responseOk) || hasNonValidationError;
+	const failureMessage = hasNonValidationError
+		? errorMessage
+		: 'Sign up failed.';
 	const showAdditionalFields = isInteracted || !!userEmail;
-	// Validation errors (before submission) are shown inline on the input.
-	// Network/server errors (after a failed submission) use the standalone message.
-	const isValidationError = !!errorMessage && !hasResponse;
+	// isValidationError comes from the hook — true only for inline field
+	// errors (empty / bad format), false for reCAPTCHA / network errors.
 
 	return (
 		<>
@@ -401,17 +410,15 @@ const NewsletterSignupFormActive = ({
 				</div>
 			</form>
 
-			{!!errorMessage && !isValidationError && (
-				<ErrorMessageWithAdvice text={errorMessage} />
-			)}
-
 			{showSuccess && (
 				<SuccessMessage
 					newsletterName={newsletterName}
 					frequency={frequency}
 				/>
 			)}
-			{showFailure && <FailureMessage onRetry={handleReset} />}
+			{showFailure && (
+				<FailureMessage text={failureMessage} onRetry={handleReset} />
+			)}
 			{!!captchaSiteKey && (
 				<div css={recaptchaContainerStyles}>
 					<ReactGoogleRecaptcha

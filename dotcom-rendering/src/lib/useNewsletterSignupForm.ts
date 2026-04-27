@@ -181,6 +181,12 @@ export type NewsletterSignupFormState = {
 	responseOk: boolean | undefined;
 	/** Inline validation / network error copy. */
 	errorMessage: string | undefined;
+	/**
+	 * `true` when the error should be shown inline on the email input
+	 * (e.g. empty field, bad format).  `false` for reCAPTCHA / network
+	 * errors, which are shown as a standalone message below the form.
+	 */
+	isValidationError: boolean;
 
 	/** Ref to pass to the `<ReactGoogleRecaptcha>` widget. */
 	recaptchaRef: RefObject<ReactGoogleRecaptcha>;
@@ -226,6 +232,7 @@ export const useNewsletterSignupForm = (
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
+	const [isValidationError, setIsValidationError] = useState(false);
 	const [marketingOptIn, setMarketingOptIn] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -341,7 +348,10 @@ export const useNewsletterSignupForm = (
 					'captcha-not-passed',
 					renderingTarget,
 				);
+				setIsValidationError(false);
+				setErrorMessage('The reCAPTCHA check did not complete.');
 				setIsWaitingForResponse(false);
+				recaptchaRef.current?.reset();
 				return;
 			}
 			sendTracking(newsletterId, 'captcha-passed', renderingTarget);
@@ -357,6 +367,7 @@ export const useNewsletterSignupForm = (
 						'form-submit-error',
 						renderingTarget,
 					);
+					setIsValidationError(false);
 					setErrorMessage(
 						'Sorry, there was an error signing you up.',
 					);
@@ -371,7 +382,9 @@ export const useNewsletterSignupForm = (
 
 	const handleCaptchaLoadError = useCallback((): void => {
 		sendTracking(newsletterId, 'captcha-load-error', renderingTarget);
+		setIsValidationError(false);
 		setErrorMessage('Sorry, the reCAPTCHA failed to load.');
+		setIsWaitingForResponse(false);
 		recaptchaRef.current?.reset();
 	}, [newsletterId, renderingTarget]);
 
@@ -382,11 +395,13 @@ export const useNewsletterSignupForm = (
 
 			const emailAddress = userEmail?.trim() ?? '';
 			if (!emailAddress) {
+				setIsValidationError(true);
 				setErrorMessage('Please enter your email address.');
 				return;
 			}
 
 			pendingEmailRef.current = emailAddress;
+			setIsValidationError(false);
 			setErrorMessage(undefined);
 			setIsWaitingForResponse(true);
 			sendTracking(newsletterId, 'open-captcha', renderingTarget);
@@ -398,6 +413,7 @@ export const useNewsletterSignupForm = (
 	const handleEmailChange = useCallback((value: string): void => {
 		setUserEmail(value);
 		setIsInteracted(true);
+		setIsValidationError(false);
 		setErrorMessage(undefined);
 	}, []);
 
@@ -411,6 +427,7 @@ export const useNewsletterSignupForm = (
 		event.preventDefault();
 		if (!hasAttemptedSubmitRef.current) return;
 		const { validity } = event.currentTarget;
+		setIsValidationError(true);
 		setErrorMessage(
 			validity.valueMissing
 				? 'Please enter your email address.'
@@ -433,6 +450,7 @@ export const useNewsletterSignupForm = (
 	const handleReset = useCallback<
 		ReactEventHandler<HTMLButtonElement>
 	>(() => {
+		setIsValidationError(false);
 		setErrorMessage(undefined);
 		setResponseOk(undefined);
 		hasAttemptedSubmitRef.current = false;
@@ -448,6 +466,7 @@ export const useNewsletterSignupForm = (
 		isWaitingForResponse,
 		responseOk,
 		errorMessage,
+		isValidationError,
 		recaptchaRef,
 		captchaSiteKey,
 		handleCaptchaComplete,
