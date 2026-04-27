@@ -76,6 +76,22 @@ export const WithoutProgressBar: Story = {
 		hideProgressBar: true,
 	},
 } satisfies Story;
+//TODO: FIX SOURCES
+
+export const WithoutMuteUnmute: Story = {
+	args: {
+		...Loop.args,
+		sources: [
+			{
+				mimeType: 'video/mp4',
+				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+				width: 500,
+				height: 400,
+				hasAudio: false,
+			},
+		],
+	},
+} satisfies Story;
 
 export const WithControlsAtTop: Story = {
 	args: {
