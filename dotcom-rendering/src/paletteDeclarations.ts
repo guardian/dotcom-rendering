@@ -7630,10 +7630,8 @@ const paletteColours = {
 		dark: () => sourcePalette.neutral[46],
 	},
 	'--newsletter-preview-button-hover': {
-		light: () => sourcePalette.neutral[97],
-		dark: () =>
-			themeButtonBrand.backgroundTertiaryHover ??
-			sourcePalette.brand[300],
+		light: () => sourcePalette.brand[800],
+		dark: () => sourcePalette.brand[300],
 	},
 	'--newsletter-preview-button-text': {
 		light: () => sourcePalette.brand[400],
@@ -7648,23 +7646,20 @@ const paletteColours = {
 		dark: () => sourcePalette.neutral[100],
 	},
 	'--newsletter-signup-submit-background': {
-		light: () => themeButton.backgroundPrimary,
-		dark: () => themeButtonBrand.backgroundPrimary,
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--newsletter-signup-submit-background-hover': {
-		light: () =>
-			themeButton.backgroundPrimaryHover ?? themeButton.backgroundPrimary,
-		dark: () =>
-			themeButtonBrand.backgroundPrimaryHover ??
-			themeButtonBrand.backgroundPrimary,
+		light: () => sourcePalette.brand[600],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--newsletter-signup-submit-text': {
-		light: () => themeButton.textPrimary,
-		dark: () => themeButtonBrand.textPrimary,
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[400],
 	},
 	'--newsletter-signup-toggle-text': {
 		light: () => sourcePalette.neutral[20],
-		dark: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[73],
 	},
 	'--numbered-list-heading': {
 		light: numberedListHeadingLight,

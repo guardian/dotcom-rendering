@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, textSans15, until } from '@guardian/source/foundations';
-import type { Size } from '@guardian/source/react-components';
+import type { Size, ThemeButton } from '@guardian/source/react-components';
 import {
 	Button,
 	InlineError,
@@ -10,7 +10,6 @@ import {
 	SvgEye,
 	SvgReload,
 	TextInput,
-	themeButton,
 } from '@guardian/source/react-components';
 import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
@@ -66,12 +65,12 @@ const emailFieldStyles = css`
 	min-width: 0;
 
 	label div {
-		color: ${palette('--article-text')};
+		color: ${palette('--newsletter-signup-input-text')};
 	}
 
 	input {
-		color: ${palette('--article-text')};
-		background-color: ${palette('--article-background')};
+		color: ${palette('--newsletter-signup-input-text')};
+		background-color: ${palette('--newsletter-signup-input-background')};
 	}
 `;
 
@@ -84,9 +83,7 @@ const submitButtonContainerStyles = css`
 
 const submitButtonStyles = css`
 	flex: 1;
-	button {
-		width: 100%;
-	}
+	width: 100%;
 	${from.tablet} {
 		max-width: 220px;
 	}
@@ -122,6 +119,9 @@ const marketingToggleBoxStyles = css`
 	padding: ${space[2]}px;
 	border: 1px solid ${palette('--card-border-supporting')};
 	border-radius: 4px;
+	label {
+		color: ${palette('--newsletter-signup-toggle-text')};
+	}
 `;
 
 const responseBoxStyles = css`
@@ -146,20 +146,34 @@ const tryAgainButtonStyles = css`
 	}
 `;
 
-/** Prevent article-level link styles (e.g. red for Opinion) from bleeding in */
-const browseMoreLinksStyles = css`
-	color: ${palette('--newsletter-preview-button-text')};
-	border-color: ${palette('--newsletter-preview-button-border')};
-	&:hover {
-		color: ${palette('--newsletter-preview-button-text')};
-	}
-`;
-
 const recaptchaContainerStyles = css`
 	.grecaptcha-badge {
 		visibility: hidden;
 	}
 `;
+
+/**
+ * Colour overrides for primary buttons so that article-level themes
+ * (e.g. Opinion red) don't bleed in. Uses CSS custom properties from
+ * the palette so the colours work in both light and dark mode.
+ */
+const primaryButtonTheme: Partial<ThemeButton> = {
+	backgroundPrimary: palette('--newsletter-signup-submit-background'),
+	backgroundPrimaryHover: palette(
+		'--newsletter-signup-submit-background-hover',
+	),
+	textPrimary: palette('--newsletter-signup-submit-text'),
+};
+
+/**
+ * Colour overrides for tertiary buttons so that they are visible
+ * in both light and dark mode, independent of the article theme.
+ */
+const tertiaryButtonTheme: Partial<ThemeButton> = {
+	textTertiary: palette('--newsletter-preview-button-text'),
+	borderTertiary: palette('--newsletter-preview-button-border'),
+	backgroundTertiaryHover: palette('--newsletter-preview-button-hover'),
+};
 
 const PreviewButton = ({
 	onClick,
@@ -175,6 +189,7 @@ const PreviewButton = ({
 		onClick={onClick}
 		type="button"
 		size={size}
+		theme={tertiaryButtonTheme}
 	>
 		Preview latest
 	</Button>
@@ -217,8 +232,8 @@ const SuccessMessage = ({
 			<LinkButton
 				href="/email-newsletters"
 				priority="tertiary"
-				theme={themeButton}
-				cssOverrides={[tryAgainButtonStyles, browseMoreLinksStyles]}
+				theme={tertiaryButtonTheme}
+				cssOverrides={tryAgainButtonStyles}
 			>
 				Browse more newsletters
 			</LinkButton>
@@ -239,6 +254,7 @@ const FailureMessage = ({
 			icon={<SvgReload />}
 			iconSide="right"
 			onClick={onRetry}
+			theme={primaryButtonTheme}
 			cssOverrides={tryAgainButtonStyles}
 		>
 			Try again
@@ -375,6 +391,7 @@ const NewsletterSignupFormActive = ({
 						cssOverrides={submitButtonStyles}
 						onClick={handleSubmitButtonClick}
 						type="submit"
+						theme={primaryButtonTheme}
 						isLoading={isWaitingForResponse}
 						loadingAnnouncement="Signing you up…"
 						disabled={isWaitingForResponse}
