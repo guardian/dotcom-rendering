@@ -224,11 +224,19 @@ describe('NewsletterPreviewModal', () => {
 
 	it('shows failure state when iframe posts embed-status with ok=false', () => {
 		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
+		const iframe = screen.getByTitle(
+			'Morning Briefing preview',
+		) as HTMLIFrameElement;
+		const iframeSource = iframe.contentWindow;
+		if (!iframeSource) {
+			throw new Error('Expected iframe contentWindow to be available');
+		}
 
 		act(() => {
 			window.dispatchEvent(
 				new MessageEvent('message', {
 					origin: 'https://email-rendering.guardianapis.com',
+					source: iframeSource,
 					data: { type: 'embed-status', ok: false, code: 500 },
 				}),
 			);
@@ -245,12 +253,19 @@ describe('NewsletterPreviewModal', () => {
 	it('keeps failure state when embed-status reports failure before iframe load event', () => {
 		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
 
-		const iframe = screen.getByTitle('Morning Briefing preview');
+		const iframe = screen.getByTitle(
+			'Morning Briefing preview',
+		) as HTMLIFrameElement;
+		const iframeSource = iframe.contentWindow;
+		if (!iframeSource) {
+			throw new Error('Expected iframe contentWindow to be available');
+		}
 
 		act(() => {
 			window.dispatchEvent(
 				new MessageEvent('message', {
 					origin: 'https://email-rendering.guardianapis.com',
+					source: iframeSource,
 					data: { type: 'embed-status', ok: false },
 				}),
 			);
@@ -268,6 +283,13 @@ describe('NewsletterPreviewModal', () => {
 
 	it('hides skeleton when iframe posts embed-status with ok=true', () => {
 		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
+		const iframe = screen.getByTitle(
+			'Morning Briefing preview',
+		) as HTMLIFrameElement;
+		const iframeSource = iframe.contentWindow;
+		if (!iframeSource) {
+			throw new Error('Expected iframe contentWindow to be available');
+		}
 
 		expect(
 			screen.getByLabelText('Loading newsletter preview'),
@@ -277,6 +299,7 @@ describe('NewsletterPreviewModal', () => {
 			window.dispatchEvent(
 				new MessageEvent('message', {
 					origin: 'https://email-rendering.guardianapis.com',
+					source: iframeSource,
 					data: { type: 'embed-status', ok: true },
 				}),
 			);
@@ -285,6 +308,26 @@ describe('NewsletterPreviewModal', () => {
 		expect(
 			screen.queryByLabelText('Loading newsletter preview'),
 		).not.toBeInTheDocument();
+		expect(
+			screen.queryByText('Preview failed to load'),
+		).not.toBeInTheDocument();
+	});
+
+	it('ignores embed-status messages without a matching iframe source', () => {
+		render(<NewsletterPreviewModal {...baseProps} onClose={jest.fn()} />);
+
+		act(() => {
+			window.dispatchEvent(
+				new MessageEvent('message', {
+					origin: 'https://email-rendering.guardianapis.com',
+					data: { type: 'embed-status', ok: false },
+				}),
+			);
+		});
+
+		expect(
+			screen.getByLabelText('Loading newsletter preview'),
+		).toBeInTheDocument();
 		expect(
 			screen.queryByText('Preview failed to load'),
 		).not.toBeInTheDocument();

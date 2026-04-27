@@ -1,4 +1,6 @@
-const EMAIL_PREVIEW_BASE_URL = 'https://email-rendering.guardianapis.com';
+export const EMAIL_PREVIEW_BASE_URL =
+	'https://email-rendering.guardianapis.com';
+export const EMAIL_PREVIEW_ORIGIN = new URL(EMAIL_PREVIEW_BASE_URL).origin;
 const FRONTS_EMAIL_PREVIEW_PATH = 'fronts';
 const ARTICLE_EMAIL_PREVIEW_PATH = 'article';
 const FRONTS_EMAIL_PREVIEW_VARIANT = 'persephone';

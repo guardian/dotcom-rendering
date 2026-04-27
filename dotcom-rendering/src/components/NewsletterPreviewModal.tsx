@@ -11,6 +11,7 @@ import { Button, SvgCross } from '@guardian/source/react-components';
 import { useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getZIndex } from '../lib/getZIndex';
+import { EMAIL_PREVIEW_ORIGIN } from '../lib/newsletterPreviewUrl';
 
 const PREVIEW_LOAD_TIMEOUT_MS = 10_000;
 const TIMEOUT_FAILURE_MESSAGE =
@@ -51,6 +52,15 @@ const parseEmbedStatusMessage = (
 	};
 };
 
+const getTrustedIframeOrigin = (url: string): string | undefined => {
+	try {
+		const origin = new URL(url).origin;
+		return origin === EMAIL_PREVIEW_ORIGIN ? origin : undefined;
+	} catch {
+		return undefined;
+	}
+};
+
 const isTrustedIframeMessage = ({
 	event,
 	trustedOrigin,
@@ -61,12 +71,10 @@ const isTrustedIframeMessage = ({
 	iframeWindow: Window | null;
 }): boolean => {
 	const isTrustedOrigin = event.origin === trustedOrigin;
-	const isUnexpectedSource =
-		iframeWindow !== null &&
-		event.source !== null &&
-		event.source !== iframeWindow;
+	const isExpectedSource =
+		iframeWindow !== null && event.source === iframeWindow;
 
-	if (!isTrustedOrigin || isUnexpectedSource) {
+	if (!isTrustedOrigin || !isExpectedSource) {
 		return false;
 	}
 
@@ -318,7 +326,7 @@ export const NewsletterPreviewModal = ({
 	);
 	const [iframeKey, setIframeKey] = useState(0);
 
-	const trustedIframeOrigin = new URL(renderUrl).origin;
+	const trustedIframeOrigin = getTrustedIframeOrigin(renderUrl);
 
 	const applyEmbedStatus = (ok: boolean) => {
 		hasEmbedStatusFailureRef.current = !ok;
@@ -466,6 +474,8 @@ export const NewsletterPreviewModal = ({
 	}, [isLoading]);
 
 	useEffect(() => {
+		if (!trustedIframeOrigin) return;
+
 		const handleMessage = (event: MessageEvent) => {
 			if (!iframeRef.current) return;
 
