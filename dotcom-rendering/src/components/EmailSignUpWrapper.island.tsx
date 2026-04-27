@@ -1,4 +1,5 @@
 import type { Breakpoint } from '@guardian/source/foundations';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { useConfig } from './ConfigContext';
 import type { EmailSignUpProps } from './EmailSignup';
@@ -7,6 +8,7 @@ import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { NewsletterSignupCardContainer } from './NewsletterSignupCardContainer';
+import { NewsletterSignupForm } from './NewsletterSignupForm.island';
 import { Placeholder } from './Placeholder';
 import { SecureSignup } from './SecureSignup.island';
 
@@ -65,14 +67,12 @@ export const EmailSignUpWrapper = ({
 	showNewNewsletterSignupCard = false,
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
-	const shouldCheckSubscription =
-		hideNewsletterSignupComponentForSubscribers &&
-		!showNewNewsletterSignupCard;
 	const isSubscribed = useNewsletterSubscription(
 		listId,
 		idApiUrl,
-		shouldCheckSubscription,
+		hideNewsletterSignupComponentForSubscribers,
 	);
+	const isSignedIn = useIsSignedIn();
 
 	// When the new card design is enabled, always show it regardless of subscription status
 	if (showNewNewsletterSignupCard) {
@@ -91,14 +91,20 @@ export const EmailSignUpWrapper = ({
 					category={category}
 					exampleUrl={exampleUrl}
 					renderingTarget={renderingTarget}
+					isSignedIn={isSignedIn}
 				>
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<SecureSignup
-							newsletterId={identityName}
-							successDescription={successDescription}
-						/>
-					</Island>
-					{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
+					{(openPreview) => (
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<NewsletterSignupForm
+								newsletterId={identityName}
+								newsletterName={name}
+								frequency={frequency}
+								hidePrivacyMessage={isSignedIn === true}
+								onPreviewClick={openPreview}
+								isAlreadySubscribed={isSubscribed === true}
+							/>
+						</Island>
+					)}
 				</NewsletterSignupCardContainer>
 			</InlineSkipToWrapper>
 		);
