@@ -181,7 +181,7 @@ describe('EmailSignUpWrapper', () => {
 	});
 
 	describe('VIEW tracking', () => {
-		it('fires a VIEW event with the control component id, ab metadata, and isAlreadySubscribed for the control group', () => {
+		it('fires a VIEW event with the correct control component id and ab metadata', () => {
 			mockAbTests(false);
 			renderWrapper({ showNewNewsletterSignupCard: true });
 
@@ -194,17 +194,13 @@ describe('EmailSignUpWrapper', () => {
 						),
 					},
 					action: 'VIEW',
-					// AB test data lives in the top-level abTest field, not value
 					abTest: { name: AB_TEST_NAME, variant: 'control' },
-					value: expect.stringContaining(
-						'"isAlreadySubscribed":false',
-					),
 				}),
 				'Web',
 			);
 		});
 
-		it('fires a VIEW event with the variant component id, ab metadata, and isAlreadySubscribed for the variant group', () => {
+		it('fires a VIEW event with the correct variant component id and ab metadata', () => {
 			mockAbTests(true);
 			renderWrapper({ showNewNewsletterSignupCard: true });
 
@@ -218,9 +214,6 @@ describe('EmailSignUpWrapper', () => {
 					},
 					action: 'VIEW',
 					abTest: { name: AB_TEST_NAME, variant: 'variant' },
-					value: expect.stringContaining(
-						'"isAlreadySubscribed":false',
-					),
 				}),
 				'Web',
 			);
@@ -250,7 +243,7 @@ describe('EmailSignUpWrapper', () => {
 			expect(submitComponentEvent).toHaveBeenCalledTimes(1);
 		});
 
-		it('does not fire a VIEW event for control users while subscription status is loading', () => {
+		it('does not fire a VIEW event while subscription status is loading', () => {
 			mockAbTests(false);
 			(useNewsletterSubscription as jest.Mock).mockReturnValue(undefined);
 			renderWrapper({ showNewNewsletterSignupCard: true });
@@ -258,7 +251,14 @@ describe('EmailSignUpWrapper', () => {
 			expect(submitComponentEvent).not.toHaveBeenCalled();
 		});
 
-		it('fires a VIEW event with isAlreadySubscribed: true for control users who are already subscribed', () => {
+		it('does not fire a VIEW event while the AB client has not hydrated', () => {
+			// useBetaAB returns undefined — default set in beforeEach
+			renderWrapper({ showNewNewsletterSignupCard: true });
+
+			expect(submitComponentEvent).not.toHaveBeenCalled();
+		});
+
+		it('does not fire a VIEW event for control users who are already subscribed', () => {
 			mockAbTests(false);
 			(useNewsletterSubscription as jest.Mock).mockReturnValue(true);
 			renderWrapper({
@@ -266,23 +266,10 @@ describe('EmailSignUpWrapper', () => {
 				hideNewsletterSignupComponentForSubscribers: true,
 			});
 
-			expect(submitComponentEvent).toHaveBeenCalledWith(
-				expect.objectContaining({
-					action: 'VIEW',
-					component: expect.objectContaining({
-						id: NEWSLETTER_SIGNUP_COMPONENT_ID.control(
-							defaultProps.identityName,
-						),
-					}),
-					value: expect.stringContaining(
-						'"isAlreadySubscribed":true',
-					),
-				}),
-				'Web',
-			);
+			expect(submitComponentEvent).not.toHaveBeenCalled();
 		});
 
-		it('fires a VIEW event for variant users even when already subscribed', () => {
+		it('does not fire a VIEW event for variant users who are already subscribed', () => {
 			mockAbTests(true);
 			(useNewsletterSubscription as jest.Mock).mockReturnValue(true);
 			renderWrapper({
@@ -290,20 +277,7 @@ describe('EmailSignUpWrapper', () => {
 				hideNewsletterSignupComponentForSubscribers: true,
 			});
 
-			expect(submitComponentEvent).toHaveBeenCalledWith(
-				expect.objectContaining({
-					action: 'VIEW',
-					component: expect.objectContaining({
-						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
-							defaultProps.identityName,
-						),
-					}),
-					value: expect.stringContaining(
-						'"isAlreadySubscribed":true',
-					),
-				}),
-				'Web',
-			);
+			expect(submitComponentEvent).not.toHaveBeenCalled();
 		});
 	});
 });

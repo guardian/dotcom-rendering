@@ -1,5 +1,5 @@
 import type { Breakpoint } from '@guardian/source/foundations';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {
 	AB_TEST_NAME,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
@@ -92,11 +92,19 @@ export const EmailSignUpWrapper = ({
 
 	const abVariant = isVariant ? 'variant' : 'control';
 
+	const viewFiredRef = useRef(false);
+
 	useEffect(() => {
 		if (!abResolved) return;
-		// For the control path, don't fire while subscription status is still
-		// loading — we'd be tracking a view of the placeholder, not the form.
-		if (!isVariant && isSubscribed === undefined) return;
+		// Wait for subscription status in both branches — we only want to track
+		// a view of the actual signup form, not a loading state or success message.
+		if (isSubscribed === undefined) return;
+		// Don't fire if the user is already subscribed: in both branches they
+		// will see a success/already-subscribed message, not the signup form.
+		if (isSubscribed) return;
+		// Guard against double-firing (e.g. if deps change after the first fire)
+		if (viewFiredRef.current) return;
+		viewFiredRef.current = true;
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName,
@@ -106,10 +114,6 @@ export const EmailSignUpWrapper = ({
 			renderingTarget,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
-				// Included so analysts can normalise conversion rates between
-				// branches: the variant always renders regardless of subscription
-				// status, whereas the control hides for subscribed users.
-				isAlreadySubscribed: isSubscribed === true,
 			},
 			// Use the standard Ophan abTest field so Ophan can join events
 			// to the A/B test — not strings encoded inside value.
