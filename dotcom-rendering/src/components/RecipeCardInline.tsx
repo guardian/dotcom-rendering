@@ -49,17 +49,6 @@ const buildAppLink = (
 const slugToLabel = (s: string): string =>
 	s.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
 
-const formatMeta = (recipe?: RecipeBlockElement): string => {
-	const parts: string[] = [];
-	if (recipe?.difficultyLevel)
-		parts.push(slugToLabel(recipe.difficultyLevel));
-	const timing = recipe?.timings?.[0]?.text;
-	if (timing) parts.push(timing);
-	const serving = recipe?.serves?.[0]?.text;
-	if (serving) parts.push(`Serves ${serving}`);
-	return parts.join(' · ');
-};
-
 // ── Button themes ─────────────────────────────────────────────────────────────
 
 const primaryCtaTheme = {
@@ -75,29 +64,18 @@ const secondaryCtaTheme = {
 	backgroundSecondaryHover: 'rgba(104, 119, 60, 0.1)',
 } as const;
 
-// ── Grid templates — mirror ProductCardInline ─────────────────────────────────
+// ── Grid template ─────────────────────────────────────────────────────────────
 
-const defaultGrid = css`
+const cardGrid = css`
 	grid-template:
 		'image info'
 		'buttons buttons'
-		'custom-attributes custom-attributes' / 1fr 1fr;
+		'details details' / 1fr 1fr;
 	${from.mobileLandscape} {
 		grid-template:
 			'image info' auto
 			'image buttons' 1fr
-			'custom-attributes custom-attributes' / 1fr 1fr;
-	}
-`;
-
-const noCustomAttributesGrid = css`
-	grid-template:
-		'image info'
-		'buttons buttons' / 1fr 1fr;
-	${from.mobileLandscape} {
-		grid-template:
-			'image info' auto
-			'image buttons' 1fr / 1fr 1fr;
+			'details details' / 1fr 1fr;
 	}
 `;
 
@@ -211,24 +189,29 @@ const buttonWrapper = css`
 	gap: ${space[1]}px;
 `;
 
-const customAttributesContainer = css`
-	grid-area: custom-attributes;
+const detailsArea = css`
+	grid-area: details;
 	border-top: 1px solid ${FEAST_BORDER};
-	padding-top: ${space[2]}px;
+	padding-top: ${space[3]}px;
 	display: flex;
-	flex-wrap: wrap;
-	gap: 4px;
-	margin-top: ${space[2]}px;
+	flex-direction: column;
+	gap: ${space[2]}px;
 
 	[data-color-scheme='dark'] & {
 		border-top-color: ${FEAST_BORDER_DARK};
 	}
 `;
 
-const customAttributesDarkMedia = css`
+const detailsAreaDarkMedia = css`
 	@media (prefers-color-scheme: dark) {
 		border-top-color: ${FEAST_BORDER_DARK};
 	}
+`;
+
+const tagRowStyles = css`
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
 `;
 
 const tagStyles = css`
@@ -242,6 +225,113 @@ const tagStyles = css`
 	[data-color-scheme='dark'] & {
 		background-color: rgba(104, 119, 60, 0.25);
 	}
+`;
+
+const appReadyBadgeStyles = css`
+	${textSans15};
+	display: inline-block;
+	border-radius: 2px;
+	padding: 2px 8px;
+	font-weight: 700;
+`;
+
+const appReadyOnStyles = css`
+	background-color: ${FEAST_GREEN};
+	color: ${sourcePalette.neutral[100]};
+`;
+
+const appReadyOffStyles = css`
+	background-color: ${sourcePalette.neutral[60]};
+	color: ${sourcePalette.neutral[100]};
+`;
+
+const metaRowStyles = css`
+	${textSans17};
+	color: ${sourcePalette.neutral[46]};
+	display: flex;
+	gap: 4px;
+	margin: 0;
+
+	[data-color-scheme='dark'] & {
+		color: ${FEAST_SUBTEXT_DARK};
+	}
+`;
+
+const metaLabelStyles = css`
+	font-weight: 700;
+	flex-shrink: 0;
+`;
+
+const descriptionStyles = css`
+	${textSans17};
+	color: ${sourcePalette.neutral[46]};
+	font-style: italic;
+	margin: 0;
+
+	[data-color-scheme='dark'] & {
+		color: ${FEAST_SUBTEXT_DARK};
+	}
+`;
+
+const sectionTitleStyles = css`
+	${textSans15};
+	font-weight: 700;
+	color: ${FEAST_GREEN};
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	margin: 0;
+`;
+
+const ingredientGroupStyles = css`
+	margin-bottom: ${space[1]}px;
+`;
+
+const ingredientGroupLabelStyles = css`
+	${textSans15};
+	color: ${sourcePalette.neutral[46]};
+	font-style: italic;
+	margin: 0 0 2px;
+
+	[data-color-scheme='dark'] & {
+		color: ${FEAST_SUBTEXT_DARK};
+	}
+`;
+
+const ingredientListStyles = css`
+	${textSans17};
+	color: ${sourcePalette.neutral[46]};
+	margin: 0;
+	padding-left: ${space[4]}px;
+
+	li {
+		margin-bottom: 2px;
+	}
+
+	[data-color-scheme='dark'] & {
+		color: ${FEAST_SUBTEXT_DARK};
+	}
+`;
+
+const instructionListStyles = css`
+	${textSans17};
+	color: ${sourcePalette.neutral[46]};
+	margin: 0;
+	padding-left: ${space[5]}px;
+
+	li {
+		margin-bottom: ${space[2]}px;
+	}
+
+	[data-color-scheme='dark'] & {
+		color: ${FEAST_SUBTEXT_DARK};
+	}
+`;
+
+const commerceCtaLinkStyles = css`
+	${textSans17};
+	display: block;
+	color: ${FEAST_GREEN};
+	text-decoration: underline;
 `;
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -269,15 +359,21 @@ export const RecipeCardInline = ({
 }: RecipeCardInlineProps) => {
 	const title = recipe?.title ?? recipeName;
 	const byline = recipe?.byline ?? [];
-	const meta = formatMeta(recipe);
 	const feastId = recipe?.id;
 	const image = recipe?.featuredImage;
-	const tags = [
+	const timings = recipe?.timings ?? [];
+	const serves = recipe?.serves ?? [];
+	const allTags = [
 		...(recipe?.cuisineIds ?? []),
 		...(recipe?.mealTypeIds ?? []),
 		...(recipe?.suitableForDietIds ?? []),
+		...(recipe?.celebrationIds ?? []),
+		...(recipe?.techniquesUsedIds ?? []),
+		...(recipe?.utensilsAndApplianceIds ?? []),
 	];
-	const hasTags = tags.length > 0;
+	const ingredients = recipe?.ingredients ?? [];
+	const instructions = recipe?.instructions ?? [];
+	const commerceCtas = recipe?.commerceCtas ?? [];
 
 	return (
 		<div
@@ -286,15 +382,19 @@ export const RecipeCardInline = ({
 				showcaseCard,
 				darkModeAvailable && showcaseCardDarkMedia,
 				shouldShowLeftColCard && hideFromWide,
-				hasTags ? defaultGrid : noCustomAttributesGrid,
+				cardGrid,
 			]}
 		>
+			{/* image */}
 			{image && (
 				<div css={imageGridArea}>
 					<img src={image.url} alt={image.caption ?? title} />
 				</div>
 			)}
+
+			{/* info: title · byline · isAppReady · date · difficulty · timings · serves */}
 			<div css={productInfoContainer}>
+				{/* title */}
 				{title && (
 					<div
 						css={[
@@ -305,6 +405,8 @@ export const RecipeCardInline = ({
 						{title}
 					</div>
 				)}
+
+				{/* byline */}
 				{byline.length > 0 && (
 					<div
 						css={[
@@ -315,17 +417,80 @@ export const RecipeCardInline = ({
 						By {byline.join(', ')}
 					</div>
 				)}
-				{meta && (
+
+				{/* isAppReady */}
+				{recipe && (
+					<span
+						css={[
+							appReadyBadgeStyles,
+							recipe.isAppReady
+								? appReadyOnStyles
+								: appReadyOffStyles,
+						]}
+					>
+						{recipe.isAppReady
+							? '✓ Live in Feast'
+							: '○ Not in Feast'}
+					</span>
+				)}
+
+				{/* webPublicationDate */}
+				{recipe?.webPublicationDate && (
 					<div
 						css={[
 							productNameStyle,
 							darkModeAvailable && productNameDarkMedia,
 						]}
 					>
-						{meta}
+						{new Date(recipe.webPublicationDate).toLocaleDateString(
+							'en-GB',
+							{
+								day: 'numeric',
+								month: 'long',
+								year: 'numeric',
+							},
+						)}
 					</div>
 				)}
+
+				{/* difficultyLevel */}
+				{recipe?.difficultyLevel && (
+					<p css={metaRowStyles}>
+						<span css={metaLabelStyles}>Difficulty</span>
+						{slugToLabel(recipe.difficultyLevel)}
+					</p>
+				)}
+
+				{/* timings — each entry */}
+				{timings.map((t, i) => (
+					<p key={i} css={metaRowStyles}>
+						<span css={metaLabelStyles}>
+							{t.qualifier ? slugToLabel(t.qualifier) : 'Time'}
+						</span>
+						{t.text ??
+							(t.durationInMins
+								? `${t.durationInMins.min ?? '?'}–${
+										t.durationInMins.max ?? '?'
+								  } min`
+								: '')}
+					</p>
+				))}
+
+				{/* serves — each entry */}
+				{serves.map((s, i) => (
+					<p key={i} css={metaRowStyles}>
+						<span css={metaLabelStyles}>Serves</span>
+						{s.text ??
+							(s.amount
+								? `${s.amount.min ?? '?'}–${
+										s.amount.max ?? '?'
+								  }${s.unit ? ` ${s.unit}` : ''}`
+								: '')}
+					</p>
+				))}
 			</div>
+
+			{/* buttons */}
 			<div css={buttonWrapper}>
 				{recipe?.isAppReady && feastId && (
 					<LinkButton
@@ -362,18 +527,105 @@ export const RecipeCardInline = ({
 					Save to My Feast
 				</LinkButton>
 			</div>
-			{hasTags && (
+
+			{/* details: description · bookCredit · all tags · ingredients · instructions · commerceCtas */}
+			{recipe && (
 				<div
 					css={[
-						customAttributesContainer,
-						darkModeAvailable && customAttributesDarkMedia,
+						detailsArea,
+						darkModeAvailable && detailsAreaDarkMedia,
 					]}
 				>
-					{tags.map((tag) => (
-						<span key={tag} css={tagStyles}>
-							{slugToLabel(tag)}
-						</span>
-					))}
+					{/* description */}
+					{recipe.description && (
+						<p css={descriptionStyles}>{recipe.description}</p>
+					)}
+
+					{/* bookCredit */}
+					{recipe.bookCredit && (
+						<p
+							css={[
+								productNameStyle,
+								darkModeAvailable && productNameDarkMedia,
+							]}
+						>
+							From: {recipe.bookCredit}
+						</p>
+					)}
+
+					{/* cuisineIds · mealTypeIds · suitableForDietIds · celebrationIds · techniquesUsedIds · utensilsAndApplianceIds */}
+					{allTags.length > 0 && (
+						<div css={tagRowStyles}>
+							{allTags.map((tag) => (
+								<span key={tag} css={tagStyles}>
+									{slugToLabel(tag)}
+								</span>
+							))}
+						</div>
+					)}
+
+					{/* ingredients */}
+					{ingredients.length > 0 && (
+						<div>
+							<p css={sectionTitleStyles}>Ingredients</p>
+							{ingredients.map((group, gi) => (
+								<div key={gi} css={ingredientGroupStyles}>
+									{group.recipeSection && (
+										<p css={ingredientGroupLabelStyles}>
+											{group.recipeSection}
+										</p>
+									)}
+									<ul css={ingredientListStyles}>
+										{(group.ingredientsList ?? []).map(
+											(ing, ii) => (
+												<li
+													key={
+														ing.ingredientId ??
+														`${gi}-${ii}`
+													}
+												>
+													{ing.text}
+												</li>
+											),
+										)}
+									</ul>
+								</div>
+							))}
+						</div>
+					)}
+
+					{/* instructions */}
+					{instructions.length > 0 && (
+						<div>
+							<p css={sectionTitleStyles}>Method</p>
+							<ol css={instructionListStyles}>
+								{instructions.map((step, i) => (
+									<li key={step.stepNumber ?? i}>
+										{step.description}
+									</li>
+								))}
+							</ol>
+						</div>
+					)}
+
+					{/* commerceCtas */}
+					{commerceCtas.length > 0 && (
+						<div>
+							<p css={sectionTitleStyles}>Buy ingredients</p>
+							{commerceCtas.map((cta) => (
+								<a
+									key={cta.url}
+									href={cta.url}
+									css={commerceCtaLinkStyles}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{cta.sponsorName}
+									{cta.territory ? ` (${cta.territory})` : ''}
+								</a>
+							))}
+						</div>
+					)}
 				</div>
 			)}
 		</div>
