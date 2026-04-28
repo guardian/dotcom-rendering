@@ -16,6 +16,7 @@ export type Source = {
 	height: number;
 	width: number;
 	aspectRatio?: string;
+	hasAudio?: boolean;
 };
 
 /**
@@ -54,6 +55,8 @@ export const extractValidSourcesFromAssets = (
 					height: asset.dimensions?.height ?? 0,
 					width: asset.dimensions?.width ?? 0,
 					aspectRatio: asset.aspectRatio,
+					/* we default to true for videos that were transcoded prior to audio detection */
+					hasAudio: asset.hasAudio ?? true,
 				})),
 			);
 		}
@@ -63,10 +66,11 @@ export const extractValidSourcesFromAssets = (
 export const convertFEMediaAssetsToVideoAssets = (
 	assets: FEMediaAsset[],
 ): VideoAssets[] =>
-	assets.map(({ id, mimeType, dimensions }) => ({
+	assets.map(({ id, mimeType, dimensions, hasAudio }) => ({
 		url: id,
 		mimeType,
 		dimensions,
+		hasAudio,
 	}));
 
 /**

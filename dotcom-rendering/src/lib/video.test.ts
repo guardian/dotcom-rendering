@@ -1,5 +1,6 @@
 import type { FEMediaAsset } from '../frontend/feFront';
 import type { VideoAssets } from '../types/content';
+import type { Source } from './video';
 import {
 	convertCurrentTimeToProgressPercentage,
 	convertFEMediaAssetsToVideoAssets,
@@ -9,7 +10,6 @@ import {
 	formatTimeForDisplay,
 	getAspectRatioFromSources,
 } from './video';
-import type { Source } from './video';
 
 const mp4Asset480w: VideoAssets = {
 	url: 'https://guim-example.co.uk/atomID-1_480w.mp4',
@@ -19,6 +19,7 @@ const mp4Asset480w: VideoAssets = {
 		width: 480,
 	},
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 
 const mp4Asset720h: VideoAssets = {
@@ -29,6 +30,7 @@ const mp4Asset720h: VideoAssets = {
 		width: 900,
 	},
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 
 const m3u8Asset720h: VideoAssets = {
@@ -39,6 +41,7 @@ const m3u8Asset720h: VideoAssets = {
 		width: 900,
 	},
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 const unsupportedAsset: VideoAssets = {
 	url: 'https://guim-example.co.uk/atomID-1.mov',
@@ -48,6 +51,7 @@ const unsupportedAsset: VideoAssets = {
 		width: 900,
 	},
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 
 const mp4Src480w: Source = {
@@ -56,6 +60,7 @@ const mp4Src480w: Source = {
 	height: 384,
 	width: 480,
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 const mp4Src720h: Source = {
 	src: 'https://guim-example.co.uk/atomID-1_720h.mp4',
@@ -63,6 +68,7 @@ const mp4Src720h: Source = {
 	height: 720,
 	width: 900,
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 const m3u8Src480w: Source = {
 	src: 'https://guim-example.co.uk/atomID-1.m3u8',
@@ -70,6 +76,7 @@ const m3u8Src480w: Source = {
 	height: 384,
 	width: 480,
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 const m3u8Src720h: Source = {
 	src: 'https://guim-example.co.uk/atomID-1.m3u8',
@@ -77,6 +84,7 @@ const m3u8Src720h: Source = {
 	height: 720,
 	width: 900,
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 
 describe('video', () => {
@@ -117,6 +125,7 @@ describe('video', () => {
 				height: 384,
 				width: 480,
 			},
+			hasAudio: true,
 		};
 		const feMediaAsset720h: FEMediaAsset = {
 			id: 'https://guim-example.co.uk/atomID-1_720h.mp4',
@@ -128,6 +137,7 @@ describe('video', () => {
 				height: 720,
 				width: 900,
 			},
+			hasAudio: true,
 		};
 
 		it('should convert FE media assets to video assets', () => {
@@ -144,6 +154,7 @@ describe('video', () => {
 						height: 384,
 						width: 480,
 					},
+					hasAudio: true,
 				},
 				{
 					url: 'https://guim-example.co.uk/atomID-1_720h.mp4',
@@ -152,6 +163,7 @@ describe('video', () => {
 						height: 720,
 						width: 900,
 					},
+					hasAudio: true,
 				},
 			]);
 		});
@@ -168,6 +180,7 @@ describe('video', () => {
 				height: 720,
 				width: 480,
 				aspectRatio: '5:3',
+				hasAudio: true,
 			};
 			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 3);
 		});
@@ -178,6 +191,7 @@ describe('video', () => {
 				height: 720,
 				width: 480,
 				aspectRatio: undefined,
+				hasAudio: true,
 			};
 			expect(getAspectRatioFromSources([testSource])).toEqual(2 / 3);
 		});
@@ -188,6 +202,7 @@ describe('video', () => {
 				height: 720,
 				width: 0,
 				aspectRatio: undefined,
+				hasAudio: true,
 			};
 			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 4);
 		});
@@ -198,6 +213,7 @@ describe('video', () => {
 				height: 0,
 				width: 480,
 				aspectRatio: undefined,
+				hasAudio: true,
 			};
 			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 4);
 		});

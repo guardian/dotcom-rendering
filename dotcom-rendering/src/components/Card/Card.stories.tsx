@@ -82,6 +82,7 @@ const mainSelfHostedVideo: MainMedia = {
 			mimeType: 'video/mp4',
 			width: 1920,
 			height: 1080,
+			hasAudio: true,
 		},
 	],
 	aspectRatio: 16 / 9,
