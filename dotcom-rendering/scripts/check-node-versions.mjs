@@ -15,14 +15,14 @@ const nvmrc = (await readFile('../.nvmrc', 'utf-8'))
 	// We don’t care about leading or trailing whitespace
 	.trim();
 
-/** Matches `x.y.z` pattern */
-const nodeVersionPattern = /^\d+\.\d+\.\d+$/;
+/** Matches `x` pattern */
+const nodeVersionPattern = /^\d+$/;
 const nodeVersion = nvmrc.match(nodeVersionPattern)?.[0] ?? undefined;
 
 if (!nodeVersion) {
 	warn(
 		'Node version in .nvmrc has incorrect pattern:',
-		`\`${nvmrc}\` does not match \`x.y.z\``,
+		`Please specify a major version only (e.g. \`20\`). Full semantic versions (\`x.y.z\`) are not supported. You entered: \`${nvmrc}\``,
 	);
 	process.exit(1);
 } else {
@@ -36,13 +36,13 @@ const requiredNodeVersionMatches =
 	/** @type {const} @satisfies {ReadonlyArray<{filepath: string, pattern: RegExp, matchLevel: MatchLevel}>}*/ ([
 		{
 			filepath: 'Containerfile',
-			pattern: /^FROM node:(.+)-alpine$/m,
-			matchLevel: 'patch',
+			pattern: /^FROM node:(\d+)/m,
+			matchLevel: 'major',
 		},
 		{
 			filepath: 'scripts/deploy/riff-raff.yaml',
-			pattern: /^ +Recipe: dotcom-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
-			matchLevel: 'patch',
+			pattern: /^ +Recipe: dotcom-rendering.*-node-(\d+).*?$/m,
+			matchLevel: 'major',
 		},
 		{
 			filepath: 'package.json',
@@ -68,15 +68,22 @@ const requiredNodeVersionMatches =
  * @returns boolean
  */
 const versionMatches = (a, b, matchLevel) => {
-	const semverA = semverParse(a);
+	const semverA = semverParse(a) ?? semverParse(`${a}.0.0`);
+	const semverB = semverParse(b) ?? semverParse(`${b}.0.0`);
 
 	switch (matchLevel) {
 		case 'major':
-			return semverSatisfies(b, `${semverA?.major}.x.x`);
+			return semverA?.major === semverB?.major;
 		case 'minor':
-			return semverSatisfies(b, `${semverA?.major}.${semverA?.minor}.x`);
+			return semverSatisfies(
+				semverB?.version ?? b,
+				`${semverA?.major}.${semverA?.minor}.x`,
+			);
 		case 'patch':
-			return semverSatisfies(b, a);
+			return semverSatisfies(
+				semverB?.version ?? b,
+				semverA?.version ?? a,
+			);
 	}
 };
 

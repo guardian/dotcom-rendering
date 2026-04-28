@@ -265,26 +265,30 @@ const getMedia = ({
 	mainMedia?: MainMedia;
 	showVideo?: boolean;
 }) => {
-	if (mainMedia?.type === 'SelfHostedVideo' && showVideo) {
-		let type: CardMediaType;
+	if (
+		showVideo &&
+		mainMedia?.type === 'SelfHostedVideo' &&
+		(mainMedia.videoStyle === 'Loop' ||
+			mainMedia.videoStyle === 'Cinemagraph')
+	) {
+		let style: CardMediaType;
 		switch (mainMedia.videoStyle) {
 			case 'Loop':
-				type = 'loop-video';
+				style = 'loop-video';
 				break;
 			case 'Cinemagraph':
-				type = 'cinemagraph';
+				style = 'cinemagraph';
 				break;
-			default:
-				type = 'default-video';
 		}
 
 		return {
-			type,
+			type: 'self-hosted-video',
+			style,
 			mainMedia,
 		} as const;
 	}
 
-	if (mainMedia?.type === 'YoutubeVideo' && showVideo) {
+	if (showVideo && mainMedia?.type === 'YoutubeVideo') {
 		return {
 			type: 'youtube-video',
 			mainMedia,
@@ -455,13 +459,9 @@ export const FeatureCard = ({
 
 	const isYoutubeVideo = media.type === 'youtube-video';
 
-	const isSelfHostedVideo =
-		media.type === 'loop-video' ||
-		media.type === 'default-video' ||
-		media.type === 'cinemagraph';
+	const isSelfHostedVideo = media.type === 'self-hosted-video';
 
-	const isSelfHostedVideoWithControls =
-		media.type === 'loop-video' || media.type === 'default-video';
+	const isSelfHostedVideoWithControls = media.style === 'loop-video';
 
 	const labsDataAttributes = branding
 		? getOphanComponents({
@@ -476,7 +476,7 @@ export const FeatureCard = ({
 
 	/* The whole card is clickable on cinemagraphs and pictures */
 	const allowLinkThroughOverlay =
-		media.type === 'cinemagraph' || media.type === 'picture';
+		media.style === 'cinemagraph' || media.type === 'picture';
 
 	return (
 		<FormatBoundary format={format}>
@@ -533,8 +533,6 @@ export const FeatureCard = ({
 										kickerText={kickerText}
 										trailText={trailText}
 										hidePillOnMobile={false}
-										iconSizeOnDesktop="large"
-										iconSizeOnMobile="large"
 										headlineSizes={headlineSizes}
 										webPublicationDate={webPublicationDate}
 										showClock={!!showClock}
@@ -591,7 +589,7 @@ export const FeatureCard = ({
 												aspectRatio
 											}
 											linkTo={linkTo}
-											showProgressBar={false}
+											hideProgressBar={true}
 											subtitleSource={
 												media.mainMedia.subtitleSource
 											}

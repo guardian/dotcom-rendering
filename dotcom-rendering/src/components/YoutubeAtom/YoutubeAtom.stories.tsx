@@ -146,8 +146,6 @@ const baseConfiguration = {
 	isMainMedia: false,
 	abTestParticipations: {},
 	adTargeting: disableAds,
-	iconSizeOnDesktop: 'large',
-	iconSizeOnMobile: 'large',
 	hidePillOnMobile: false,
 	consentState: consentGiven,
 	renderingTarget: 'Web',

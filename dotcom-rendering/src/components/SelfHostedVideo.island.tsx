@@ -31,11 +31,13 @@ import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import type {
+	ControlsPosition,
 	PLAYER_STATES,
 	PlayerStates,
 	SubtitleSize,
 } from './SelfHostedVideoPlayer';
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
+import type { SubtitlesPosition } from './SubtitleOverlay';
 import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
@@ -58,10 +60,12 @@ const videoContainerStyles = (
 	 * Use the aspect ratio of the video, unless the aspect-ratio of the container is fixed
 	 */
 	aspect-ratio: ${aspectRatioOfVisibleVideo};
+
 	${until.tablet} {
 		${!isUndefined(containerAspectRatioMobile) &&
 		`aspect-ratio: ${containerAspectRatioMobile};`}
 	}
+
 	${from.tablet} {
 		${!isUndefined(containerAspectRatioDesktop) &&
 		`aspect-ratio: ${containerAspectRatioDesktop};`}
@@ -184,6 +188,7 @@ const dispatchOphanAttentionEvent = (
 };
 
 const getOptimisedPosterImage = (mainImage: string): string => {
+	// This only runs on the client
 	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
 
 	return generateImageURL({
@@ -193,17 +198,6 @@ const getOptimisedPosterImage = (mainImage: string): string => {
 		aspectRatio: '5:4',
 	});
 };
-
-/**
- * Runs a series of browser-specific checks to determine if the video has audio.
- * We have run a test to check that all supported browsers are covered by these checks.
- */
-const doesVideoHaveAudio = (video: HTMLVideoElement): boolean =>
-	('mozHasAudio' in video && Boolean(video.mozHasAudio)) ||
-	('webkitAudioDecodedByteCount' in video &&
-		Boolean(video.webkitAudioDecodedByteCount)) ||
-	('audioTracks' in video &&
-		Boolean((video.audioTracks as { length: number }).length));
 
 /**
  * 	The Fullscreen api is not supported by Safari mobile,
@@ -218,8 +212,9 @@ const shouldUseWebkitFullscreen = (video: HTMLVideoElement): boolean => {
 };
 
 /**
- * Ensure the aspect ratio of the video is within the boundary, if specified.
- * For example, we may not want to render a square video inside a 4:5 feature card.
+ * Ensures the aspect ratio falls between the minimum and maximum allowed aspect ratios, if specified.
+ * For example, we may not want to render a square video inside a 4:5 feature card. In this case, the
+ * minimum & maximum aspect ratio would be 4:5, so that the video fits the fixed-aspect ratio feature card
  */
 const getAspectRatioOfVisibleVideo = (
 	aspectRatio: number,
@@ -234,42 +229,6 @@ const getAspectRatioOfVisibleVideo = (
 	}
 
 	return aspectRatio;
-};
-
-type Props = {
-	sources: Source[];
-	atomId: string;
-	uniqueId: string;
-	videoStyle: VideoPlayerFormat;
-	aspectRatio: number;
-	posterImage: string;
-	fallbackImage: CardPictureProps['mainImage'];
-	fallbackImageSize: CardPictureProps['imageSize'];
-	fallbackImageLoading: CardPictureProps['loading'];
-	fallbackImageAlt: CardPictureProps['alt'];
-	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
-	linkTo: string;
-	showProgressBar?: boolean;
-	subtitleSource?: string;
-	subtitleSize: SubtitleSize;
-	/** The position of subtitles and the audio icon. Usually at the bottom, with the exception of Feature Cards. */
-	controlsPosition?: 'top' | 'bottom';
-	/**
-	 * The minimum/maximum aspect ratio the video will have. The video will be cropped if this
-	 * value is defined and the video aspect ratio is less/greater than this value.
-	 */
-	minAspectRatio?: number;
-	maxAspectRatio?: number;
-	/**
-	 * Specify this value to enforce the size of the video container on mobile/desktop.
-	 * Grey bars will appear if this value is defined and differs from the video aspect ratio.
-	 */
-	containerAspectRatioMobile?: number;
-	containerAspectRatioDesktop?: number;
-	caption?: string;
-	format?: ArticleFormat;
-	isMainMedia?: boolean;
-	role?: RoleType;
 };
 
 const doesUserPermitAutoplayOnWeb = (): boolean => {
@@ -294,7 +253,6 @@ const doesUserPermitAutoplayOnWeb = (): boolean => {
 const doesUserPermitAutoplayOnApps = async (): Promise<boolean> => {
 	/* isAutoplayEnabled is available on the video client from 8.8.0 onwards */
 	const isBridgetCompatible = await hasMinimumBridgetVersion('8.8.0');
-
 	if (!isBridgetCompatible) return true;
 
 	try {
@@ -312,6 +270,44 @@ const doesUserPermitAutoplayOnApps = async (): Promise<boolean> => {
 	}
 };
 
+type Props = {
+	sources: Source[];
+	atomId: string;
+	uniqueId: string;
+	videoStyle: VideoPlayerFormat;
+	aspectRatio: number;
+	posterImage: string;
+	fallbackImage: CardPictureProps['mainImage'];
+	fallbackImageSize: CardPictureProps['imageSize'];
+	fallbackImageLoading: CardPictureProps['loading'];
+	fallbackImageAlt: CardPictureProps['alt'];
+	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
+	linkTo: string;
+	hideProgressBar?: boolean;
+	subtitleSource?: string;
+	subtitleSize: SubtitleSize;
+	/**
+	 * The position of subtitles and the audio icon.
+	 */
+	controlsPosition?: ControlsPosition;
+	/**
+	 * The minimum/maximum aspect ratio the video will have. The video will be cropped if this
+	 * value is defined and the video aspect ratio is less/greater than this value.
+	 */
+	minAspectRatio?: number;
+	maxAspectRatio?: number;
+	/**
+	 * Specify this value to enforce the size of the video container on mobile/desktop.
+	 * Grey bars will appear if this value is defined and differs from the video aspect ratio.
+	 */
+	containerAspectRatioMobile?: number;
+	containerAspectRatioDesktop?: number;
+	caption?: string;
+	format?: ArticleFormat;
+	isMainMedia?: boolean;
+	role?: RoleType;
+};
+
 export const SelfHostedVideo = ({
 	sources,
 	atomId,
@@ -325,7 +321,7 @@ export const SelfHostedVideo = ({
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
 	linkTo,
-	showProgressBar = true,
+	hideProgressBar = false,
 	subtitleSource,
 	subtitleSize,
 	controlsPosition = 'bottom',
@@ -343,7 +339,6 @@ export const SelfHostedVideo = ({
 	const vidRef = useRef<HTMLVideoElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
-	const [hasAudio, setHasAudio] = useState(true);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
@@ -361,12 +356,37 @@ export const SelfHostedVideo = ({
 	const isApps = renderingTarget === 'Apps';
 
 	/**
-	 * All controls on the video are hidden: the video looks like a GIF.
+	 * In a cinemagraph, all controls are hidden: the video looks like a GIF.
 	 * This includes but may not be limited to: audio icon, play/pause icon, subtitles, progress bar.
 	 */
 	const isCinemagraph = videoStyle === 'Cinemagraph';
+	const isLoop = videoStyle === 'Loop';
+	const isDefault = videoStyle === 'Default';
+
+	const canAutoplay = isLoop || isCinemagraph;
+
+	const shouldAutoplay = canAutoplay && isAutoplayAllowed;
+
+	const shouldLoop = isLoop || isCinemagraph;
+
+	const showProgressBar =
+		!hideProgressBar && !isCinemagraph && playerState !== 'NOT_STARTED';
+
+	const showIcons = !isCinemagraph && playerState !== 'NOT_STARTED';
+
+	const iconSize = isDefault ? 'large' : 'small';
+
+	const useLongFormProgressBar = isDefault;
+
+	const subtitlesPosition: SubtitlesPosition =
+		useLongFormProgressBar && controlsPosition === 'bottom'
+			? 'bottom-elevated'
+			: controlsPosition;
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
+
+	const supportsAudio =
+		sources.some((source) => source.hasAudio) && !isCinemagraph;
 
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
@@ -436,6 +456,13 @@ export const SelfHostedVideo = ({
 			}
 		} else {
 			void playVideo();
+		}
+	};
+
+	const updateCurrentTime = (newTime: number) => {
+		if (vidRef.current) {
+			vidRef.current.currentTime = newTime;
+			setCurrentTime(newTime);
 		}
 	};
 
@@ -603,12 +630,12 @@ export const SelfHostedVideo = ({
 	 */
 	useEffect(() => {
 		if (
-			isAutoplayAllowed === false ||
+			shouldAutoplay === false ||
 			(isInView === false && playerState === 'NOT_STARTED')
 		) {
 			setShowPosterImage(true);
 		}
-	}, [isAutoplayAllowed, isInView, playerState]);
+	}, [shouldAutoplay, isInView, playerState]);
 
 	if (adapted) {
 		return FallbackImageComponent;
@@ -620,6 +647,7 @@ export const SelfHostedVideo = ({
 
 		const track = video.textTracks[0];
 		if (!track?.cues) return;
+
 		const pxFromBottom = space[3];
 		const videoHeight = video.getBoundingClientRect().height;
 		const percentFromTop =
@@ -636,8 +664,6 @@ export const SelfHostedVideo = ({
 	const handleLoadedData = () => {
 		const video = vidRef.current;
 		if (!video) return;
-
-		setHasAudio(doesVideoHaveAudio(video));
 
 		if (video.videoWidth > 0 && video.videoHeight > 0) {
 			setWidth(video.videoWidth);
@@ -691,8 +717,8 @@ export const SelfHostedVideo = ({
 	const handleFullscreenClick = (event: React.SyntheticEvent) => {
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 		event.stopPropagation(); // Don't pause the video
-		const video = vidRef.current;
 
+		const video = vidRef.current;
 		if (!video) return;
 
 		if (shouldUseWebkitFullscreen(video)) {
@@ -757,33 +783,35 @@ export const SelfHostedVideo = ({
 	};
 
 	const seekForward = () => {
-		if (vidRef.current) {
-			const newTime = Math.min(
-				vidRef.current.currentTime + 1,
-				vidRef.current.duration,
-			);
+		const video = vidRef.current;
+		if (!video) return;
 
-			vidRef.current.currentTime = newTime;
-			setCurrentTime(newTime);
-		}
+		const increment = isDefault ? 10 : 1;
+		const newTime = Math.min(video.currentTime + increment, video.duration);
+
+		updateCurrentTime(newTime);
 	};
 
 	const seekBackward = () => {
-		if (vidRef.current) {
-			// Allow the user to cycle to the end of the video using the arrow keys
-			const newTime =
-				(((vidRef.current.currentTime - 1) % vidRef.current.duration) +
-					vidRef.current.duration) %
-				vidRef.current.duration;
+		const video = vidRef.current;
+		if (!video) return;
 
-			vidRef.current.currentTime = newTime;
-			setCurrentTime(newTime);
+		const increment = isDefault ? 10 : 1;
+		const newTime = Math.max(video.currentTime - increment, 0);
+
+		updateCurrentTime(newTime);
+	};
+
+	const handleTimeUpdate = () => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		if (playerState === 'PLAYING') {
+			setCurrentTime(video.currentTime);
 		}
 	};
 
-	const handleKeyDown = (
-		event: React.KeyboardEvent<HTMLVideoElement>,
-	): void => {
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
 		if (isCinemagraph) return;
 
 		switch (event.key) {
@@ -813,9 +841,9 @@ export const SelfHostedVideo = ({
 	 *
 	 * Stops playback when the video is scrolled out of view.
 	 */
-	if (vidRef.current && isPlayable) {
+	if (isPlayable) {
 		if (
-			isAutoplayAllowed &&
+			shouldAutoplay &&
 			isInView &&
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
@@ -831,14 +859,15 @@ export const SelfHostedVideo = ({
 	}
 
 	/**
-	 * Show the play icon when the video is not playing, except for when it is scrolled
-	 * out of view. In this case, the intersection observer will resume playback and
-	 * having a play icon would falsely indicate a user action is required to resume playback.
+	 * Show the play icon when the video is not playing, except for when it is scrolled out of view,
+	 * i.e. paused by intersection observer. In this case, the intersection observer will resume playback
+	 * and having a play icon would falsely indicate a user action is required to resume playback.
 	 */
 	const showPlayIcon =
-		playerState === 'PAUSED_BY_USER' ||
-		playerState === 'PAUSED_BY_BROWSER' ||
-		(playerState === 'NOT_STARTED' && !isAutoplayAllowed);
+		!isCinemagraph &&
+		(playerState === 'PAUSED_BY_USER' ||
+			playerState === 'PAUSED_BY_BROWSER' ||
+			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
 
 	/** The aspect ratio of the video will be clamped within the specified range */
 	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
@@ -863,12 +892,6 @@ export const SelfHostedVideo = ({
 	const optimisedPosterImage = showPosterImage
 		? getOptimisedPosterImage(posterImage)
 		: undefined;
-
-	/**
-	 * We almost always want to preload some of the video data. The exception
-	 * is when autoplay is off and the video is only partially in view.
-	 */
-	const preloadPartialData = !!isAutoplayAllowed || !!isInView;
 
 	return (
 		<figure
@@ -910,10 +933,7 @@ export const SelfHostedVideo = ({
 						posterImage={optimisedPosterImage}
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
-						setCurrentTime={setCurrentTime}
 						ref={vidRef}
-						isPlayable={isPlayable}
-						playerState={playerState}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
 						handleLoadedData={handleLoadedData}
@@ -921,18 +941,28 @@ export const SelfHostedVideo = ({
 						handlePlaying={handlePlaying}
 						handlePlayPauseClick={handlePlayPauseClick}
 						handleAudioClick={handleAudioClick}
+						handleTimeUpdate={handleTimeUpdate}
 						handleKeyDown={handleKeyDown}
+						useLongFormProgressBar={useLongFormProgressBar}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
+						updateCurrentTime={updateCurrentTime}
 						onError={onError}
-						AudioIcon={hasAudio ? AudioIcon : null}
-						preloadPartialData={preloadPartialData}
+						AudioIcon={supportsAudio ? AudioIcon : null}
+						preloadPartialData={!!shouldAutoplay}
+						iconSize={iconSize}
 						showPlayIcon={showPlayIcon}
 						showProgressBar={showProgressBar}
+						showSubtitles={!isCinemagraph}
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}
-						controlsPosition={controlsPosition}
+						showIcons={showIcons}
+						iconsPosition={controlsPosition}
+						subtitlesPosition={subtitlesPosition}
 						activeCue={activeCue}
+						shouldLoop={shouldLoop}
+						showFullscreenIcon={isDefault}
+						isInteractive={!isCinemagraph}
 					/>
 				</div>
 			</div>

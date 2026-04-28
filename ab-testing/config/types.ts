@@ -10,6 +10,7 @@ type Team =
 	| "webex"
 	| "webx"
 	| "thefilter"
+	| "newsletters"
 	| "fronts-and-curation"
 	| "growth";
 

@@ -1,8 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	textSans12,
-} from '@guardian/source/foundations';
+import { textSans12 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 
@@ -65,7 +62,7 @@ const textStyles = (textColor: 'supporting' | 'regular') => {
 			`;
 		case 'regular':
 			return css`
-				color: ${sourcePalette.neutral[20]};
+				color: ${themePalette('--privacy-text-regular')};
 				a,
 				strong {
 					color: ${themePalette('--privacy-text-regular')};

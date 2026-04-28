@@ -5164,7 +5164,7 @@ const privacyTextSupportingLight: PaletteFunction = () =>
 const privacyTextSupportingSubduedLight: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 const privacyTextSupportingSubduedDark: PaletteFunction = () =>
-	sourcePalette.neutral[60];
+	sourcePalette.neutral[73];
 
 const productCarouselCardBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
@@ -6832,6 +6832,18 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--cricket-scorecard-first-team-color': {
+		light: () => '#22721a',
+		dark: () => '#4aad42',
+	},
+	'--cricket-scorecard-innings-heading-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--cricket-scorecard-second-team-color': {
+		light: () => '#071b3c',
+		dark: () => '#4878c0',
+	},
 	'--crossword-anagram-helper-background': {
 		light: crosswordAnagramHelperBackgroundLight,
 		dark: crosswordAnagramHelperBackgroundDark,
@@ -7218,19 +7230,19 @@ const paletteColours = {
 	},
 	'--football-pre-match-background': {
 		light: () => sourcePalette.sport[800],
-		dark: () => sourcePalette.sport[800], // TODO: Update with dark mode colour
+		dark: () => sourcePalette.neutral[10],
 	},
 	'--football-pre-match-button': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
 	'--football-pre-match-button-hover': {
 		light: () => '#c8e4f3', // replace with Source's `calculateHoverColour` when available
-		dark: () => '#c8e4f3',
+		dark: () => '#4d4d4d',
 	},
 	'--football-pre-match-kickoff': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
 	'--football-score-border': {
 		light: () => sourcePalette.neutral[7],
@@ -7592,6 +7604,62 @@ const paletteColours = {
 	'--nav-search-bar-text': {
 		light: navSearchBarText,
 		dark: navSearchBarText,
+	},
+	'--newsletter-card-background': {
+		light: () => '#F3F7FF',
+		dark: () => sourcePalette.brand[100],
+	},
+	'--newsletter-card-description': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--newsletter-card-divider': {
+		light: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-card-frequency-tag': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[73],
+	},
+	'--newsletter-card-title': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-preview-button-border': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-preview-button-hover': {
+		light: () => sourcePalette.brand[800],
+		dark: () => sourcePalette.brand[300],
+	},
+	'--newsletter-preview-button-text': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-input-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[300],
+	},
+	'--newsletter-signup-input-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-submit-background': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-submit-background-hover': {
+		light: () => sourcePalette.brand[600],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--newsletter-signup-submit-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[400],
+	},
+	'--newsletter-signup-toggle-text': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[73],
 	},
 	'--numbered-list-heading': {
 		light: numberedListHeadingLight,
@@ -8369,17 +8437,29 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
 	},
-	'--video-icon-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
 	'--video-icon-border': {
 		light: () => sourcePalette.neutral[60],
 		dark: () => sourcePalette.neutral[60],
 	},
+	'--video-icon-large-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.6),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.6),
+	},
+	'--video-icon-small-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
 	'--video-progress-bar-background': {
 		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
 		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-progress-bar-interactive-background': {
+		light: () => transparentColour(sourcePalette.neutral[100], 0.5),
+		dark: () => transparentColour(sourcePalette.neutral[100], 0.5),
+	},
+	'--video-progress-bar-interactive-value': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--video-progress-bar-value': {
 		light: () => sourcePalette.neutral[86],
