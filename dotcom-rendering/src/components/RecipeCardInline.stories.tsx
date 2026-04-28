@@ -23,7 +23,7 @@ const mockRecipe: RecipeBlockElement = {
 	bookCredit: 'East: 120 Easy and Delicious Vegetarian Recipes',
 	difficultyLevel: 'easy',
 	featuredImage: {
-		url: 'https://media.guim.co.uk/a4a7c9d0d6a5b2e0f0c0d1e2f3a4b5c6d7e8f9a0/0_0_5000_3000/500.jpg',
+		url: 'https://i.guim.co.uk/img/media/9dcb491db0315d5598fc47aa51d049e12eedcbbc/0_18_2831_3539/master/2831.jpg?width=620&dpr=2&s=none&crop=none',
 		mediaId: 'a4a7c9d0d6a5b2e0f0c0d1e2f3a4b5c6d7e8f9a0',
 		cropId: '0_0_5000_3000',
 		caption: 'Spring onion pancakes with chilli oil',
