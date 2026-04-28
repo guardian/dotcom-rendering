@@ -1,14 +1,13 @@
 import { css } from '@emotion/react';
 import { Fragment } from 'react';
 import { useConfig } from '../components/ConfigContext';
-import { RecipeCardInlineIsland } from '../components/RecipeCardInline.island';
+import { RecipeCardInline } from '../components/RecipeCardInline';
 import { RecipeCardLeftCol } from '../components/RecipeCardLeftCol';
 import {
 	recipeContentContainerStyles,
 	recipeLeftColContainerStyles,
 	stripHtmlTags,
 } from '../components/RecipeCardLeftCol';
-import { Island } from '../components/Island';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type {
@@ -197,19 +196,14 @@ export const ArticleRenderer = ({
 							/>
 						</div>
 
-						{/* Inline card — hidden at from.wide, deferred Island */}
-						<Island
-							key={`recipe-card-inline-${section.index}`}
-							priority="feature"
-							defer={{ until: 'visible' }}
-						>
-							<RecipeCardInlineIsland
-								pageId={pageId}
-								editionId={editionId}
-								recipe={section.recipe}
-								recipeName={section.recipeName}
-							/>
-						</Island>
+						{/* Inline card — hidden at from.wide, pure render, no Island */}
+						<RecipeCardInline
+							pageId={pageId}
+							recipe={section.recipe}
+							recipeName={section.recipeName}
+							shouldShowLeftColCard={true}
+							darkModeAvailable={darkModeAvailable}
+						/>
 
 						{section.contentEls}
 					</div>
