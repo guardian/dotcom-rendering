@@ -147,6 +147,20 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
+		name: "newsletters-newsletter-signup-card",
+		description:
+			"Compare the existing SecureSignup (control) against the new NewsletterSignupCard design (variant)",
+		owners: ["newsletters.dev@guardian.co.uk"],
+		expirationDate: "2026-07-01",
+		type: "client",
+		status: "ON",
+		// Intentionally 0% — will be ramped up incrementally
+		audienceSize: 0 / 100,
+		audienceSpace: "C",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "commercial-prebid-price-floor",
 		description:
 			"Measure the impact on bid response rate of enforcing a minimum $0.10 bid floor on all Prebid ad slots.",

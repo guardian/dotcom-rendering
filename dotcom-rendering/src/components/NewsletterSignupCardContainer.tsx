@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source/foundations';
 import { useCallback, useState } from 'react';
-import { submitComponentEvent } from '../client/ophan/ophan';
 import { buildNewsletterPreviewUrl } from '../lib/newsletterPreviewUrl';
+import {
+	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	sendNewsletterSignupEvent,
+} from '../lib/newsletterSignupTracking';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
@@ -22,26 +25,13 @@ const sendPreviewTracking = ({
 	renderingTarget: RenderingTarget;
 	renderUrl: string;
 }) => {
-	const action = eventDescription === 'preview-open' ? 'EXPAND' : 'CLOSE';
-
-	const value = JSON.stringify({
-		eventDescription,
-		newsletterId: identityName,
-		renderUrl,
-		timestamp: Date.now(),
-	});
-
-	void submitComponentEvent(
-		{
-			action,
-			value,
-			component: {
-				componentType: 'NEWSLETTER_SUBSCRIPTION',
-				id: `DCR NewsletterPreview ${identityName}`,
-			},
-		},
+	sendNewsletterSignupEvent({
+		action: eventDescription === 'preview-open' ? 'EXPAND' : 'CLOSE',
+		identityName,
+		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName),
 		renderingTarget,
-	);
+		value: { eventDescription, renderUrl },
+	});
 };
 
 type Props = Omit<NewsletterSignupCardProps, 'children'> & {

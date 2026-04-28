@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { AbTest } from '@guardian/ophan-tracker-js';
 import { from, space, textSans15, until } from '@guardian/source/foundations';
 import type { Size, ThemeButton } from '@guardian/source/react-components';
 import {
@@ -29,6 +30,8 @@ type Props = {
 	onPreviewClick?: () => void;
 	/** When `true`, the success message is shown immediately (user is already subscribed). */
 	isAlreadySubscribed?: boolean;
+	/** Ophan A/B test metadata — forwarded to tracking events. */
+	abTest?: AbTest;
 };
 
 const formStyles = css`
@@ -295,6 +298,7 @@ const NewsletterSignupFormActive = ({
 	frequency,
 	hidePrivacyMessage = false,
 	onPreviewClick,
+	abTest,
 }: Omit<Props, 'isAlreadySubscribed'>) => {
 	const { renderingTarget } = useConfig();
 
@@ -319,7 +323,7 @@ const NewsletterSignupFormActive = ({
 		handleSubmit,
 		handleSubmitButtonClick,
 		handleReset,
-	} = useNewsletterSignupForm(newsletterId, renderingTarget);
+	} = useNewsletterSignupForm(newsletterId, renderingTarget, abTest);
 
 	const hasResponse = typeof responseOk === 'boolean';
 	const hasNonValidationError = !!errorMessage && !isValidationError;
