@@ -96,7 +96,6 @@ describe('Enhance Cards', () => {
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: undefined,
-				hasAudio: true,
 				sources: [
 					{
 						mimeType: 'video/mp4',
@@ -189,7 +188,6 @@ describe('Enhance Cards', () => {
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: undefined,
-				hasAudio: true,
 				sources: [
 					{
 						mimeType: 'video/mp4',
@@ -241,7 +239,6 @@ describe('Enhance Cards', () => {
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: 'https://guim-example.co.uk/atomID-1.vtt',
-				hasAudio: true,
 				sources: [
 					{
 						mimeType: 'video/mp4',
