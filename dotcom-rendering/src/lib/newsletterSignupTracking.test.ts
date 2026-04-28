@@ -22,7 +22,7 @@ describe('NEWSLETTER_SIGNUP_COMPONENT_ID', () => {
 
 	it('returns the correct variant component id', () => {
 		expect(NEWSLETTER_SIGNUP_COMPONENT_ID.variant(IDENTITY_NAME)).toBe(
-			`AR NewsletterSignupCard ${IDENTITY_NAME}`,
+			`AR NewsletterSignupForm ${IDENTITY_NAME}`,
 		);
 	});
 });
@@ -79,7 +79,7 @@ describe('sendNewsletterSignupEvent', () => {
 			{
 				component: {
 					componentType: 'NEWSLETTER_SUBSCRIPTION',
-					id: `AR NewsletterSignupCard ${IDENTITY_NAME}`,
+					id: `AR NewsletterSignupForm ${IDENTITY_NAME}`,
 				},
 				action: 'EXPAND',
 				value: JSON.stringify({
