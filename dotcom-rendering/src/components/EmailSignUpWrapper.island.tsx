@@ -128,6 +128,15 @@ export const EmailSignUpWrapper = ({
 		renderingTarget,
 	]);
 
+	// Show placeholder while AB tests or subscription status is loading.
+	// Keeping this before the isVariant branch ensures SSR and the first client
+	// render always match (both see the placeholder), avoiding a hydration
+	// mismatch that would leave the placeholder visible behind the card.
+	// It also prevents a jump from form → success state on subscription resolve.
+	if (!abResolved || isSubscribed === undefined) {
+		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
+	}
+
 	if (isVariant) {
 		return (
 			<InlineSkipToWrapper
@@ -154,7 +163,7 @@ export const EmailSignUpWrapper = ({
 								frequency={frequency}
 								hidePrivacyMessage={isSignedIn === true}
 								onPreviewClick={openPreview}
-								isAlreadySubscribed={isSubscribed === true}
+								isAlreadySubscribed={isSubscribed}
 								abTest={{
 									name: AB_TEST_NAME,
 									variant: abVariant,
@@ -167,13 +176,7 @@ export const EmailSignUpWrapper = ({
 		);
 	}
 
-	// Show placeholder while subscription status is being determined
-	// This prevents layout shift in both subscribed and non-subscribed cases
-	if (isSubscribed === undefined) {
-		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
-	}
-
-	// Don't render if user is signed in and already subscribed
+	// Don't render control if user is already subscribed
 	if (isSubscribed) {
 		return null;
 	}

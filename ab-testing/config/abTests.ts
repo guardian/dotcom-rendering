@@ -149,10 +149,10 @@ const ABTests: ABTest[] = [
 	{
 		name: "newsletters-newsletter-signup-card",
 		description:
-			"Server-side A/B test comparing the existing SecureSignup (control) against the new NewsletterSignupCard design (variant)",
+			"Compare the existing SecureSignup (control) against the new NewsletterSignupCard design (variant)",
 		owners: ["newsletters.dev@guardian.co.uk"],
 		expirationDate: "2026-07-01",
-		type: "server",
+		type: "client",
 		status: "ON",
 		// Intentionally 0% — will be ramped up incrementally
 		audienceSize: 0 / 100,

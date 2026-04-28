@@ -116,6 +116,7 @@ describe('EmailSignUpWrapper', () => {
 		});
 
 		it('renders nothing when the user is already subscribed', () => {
+			mockAbTests(false);
 			(useNewsletterSubscription as jest.Mock).mockReturnValue(true);
 			const { container } = renderWrapper({
 				hideNewsletterSignupComponentForSubscribers: true,
@@ -124,6 +125,7 @@ describe('EmailSignUpWrapper', () => {
 		});
 
 		it('renders the legacy EmailSignup when the user is not subscribed', () => {
+			mockAbTests(false);
 			renderWrapper();
 			expect(screen.getByTestId('email-signup')).toBeInTheDocument();
 			expect(screen.getByTestId('secure-signup')).toBeInTheDocument();
@@ -134,11 +136,14 @@ describe('EmailSignUpWrapper', () => {
 	});
 
 	describe('flag on (showNewNewsletterSignupCard = true)', () => {
-		it('renders the legacy EmailSignup when AB API has not hydrated yet (default to control)', () => {
-			// useBetaAB returns undefined before hydration → isInVariantGroup = false
+		it('shows a placeholder when AB API has not hydrated yet', () => {
+			// useBetaAB returns undefined before hydration — component shows
+			// Placeholder rather than committing to control or variant early.
 			// (default set in outer beforeEach, no override needed)
 			renderWrapper({ showNewNewsletterSignupCard: true });
-			expect(screen.getByTestId('email-signup')).toBeInTheDocument();
+			expect(
+				screen.queryByTestId('email-signup'),
+			).not.toBeInTheDocument();
 			expect(
 				screen.queryByTestId('newsletter-signup-card-container'),
 			).not.toBeInTheDocument();
