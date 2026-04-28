@@ -1,4 +1,11 @@
 import type { Breakpoint } from '@guardian/source/foundations';
+import { useEffect } from 'react';
+import {
+	AB_TEST_NAME,
+	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	sendNewsletterSignupEvent,
+} from '../lib/newsletterSignupTracking';
+import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { useConfig } from './ConfigContext';
@@ -67,6 +74,9 @@ export const EmailSignUpWrapper = ({
 	showNewNewsletterSignupCard = false,
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
+	const abTests = useBetaAB();
+	const isInVariantGroup =
+		abTests?.isUserInTestGroup(AB_TEST_NAME, 'variant') ?? false;
 	const isSubscribed = useNewsletterSubscription(
 		listId,
 		idApiUrl,
@@ -74,8 +84,26 @@ export const EmailSignUpWrapper = ({
 	);
 	const isSignedIn = useIsSignedIn();
 
-	// When the new card design is enabled, always show it regardless of subscription status
-	if (showNewNewsletterSignupCard) {
+	const isVariant = showNewNewsletterSignupCard && isInVariantGroup;
+
+	useEffect(() => {
+		if (abTests === undefined) return;
+		sendNewsletterSignupEvent({
+			action: 'VIEW',
+			identityName,
+			componentId: isVariant
+				? NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName)
+				: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
+			renderingTarget,
+			value: {
+				eventDescription: 'newsletter-signup-viewed',
+				abTest: AB_TEST_NAME,
+				abVariant: isVariant ? 'variant' : 'control',
+			},
+		});
+	}, [abTests, identityName, isVariant, renderingTarget]);
+
+	if (isVariant) {
 		return (
 			<InlineSkipToWrapper
 				id={`EmailSignup-skip-link-${index}`}
