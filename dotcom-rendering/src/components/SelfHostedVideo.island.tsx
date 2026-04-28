@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
 	getOphan,
 	submitClickComponentEvent,
@@ -22,6 +22,7 @@ import {
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 	findOptimisedSourcePerMimeType,
+	getAspectRatioFromSources,
 } from '../lib/video';
 import { palette } from '../palette';
 import type { RoleType } from '../types/content';
@@ -284,7 +285,6 @@ type Props = {
 	atomId: string;
 	uniqueId: string;
 	videoStyle: VideoPlayerFormat;
-	aspectRatio: number;
 	posterImage: string;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
@@ -322,7 +322,6 @@ export const SelfHostedVideo = ({
 	atomId,
 	uniqueId,
 	videoStyle,
-	aspectRatio,
 	posterImage,
 	fallbackImage,
 	fallbackImageSize,
@@ -394,6 +393,11 @@ export const SelfHostedVideo = ({
 			: controlsPosition;
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
+
+	const aspectRatio = useMemo(
+		() => getAspectRatioFromSources(sources),
+		[sources],
+	);
 
 	const [isInView, setNode] = useIsInView({
 		repeat: true,

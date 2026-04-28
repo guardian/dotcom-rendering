@@ -3978,9 +3978,6 @@
                                 ]
                             }
                         },
-                        "aspectRatio": {
-                            "type": "number"
-                        },
                         "duration": {
                             "type": "number"
                         },
@@ -3992,7 +3989,6 @@
                         }
                     },
                     "required": [
-                        "aspectRatio",
                         "atomId",
                         "duration",
                         "sources",

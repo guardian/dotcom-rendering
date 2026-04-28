@@ -956,7 +956,6 @@ export const Card = ({
 									sources={media.mainMedia.sources}
 									atomId={media.mainMedia.atomId}
 									uniqueId={uniqueId}
-									aspectRatio={media.mainMedia.aspectRatio}
 									videoStyle={media.mainMedia.videoStyle}
 									posterImage={media.mainMedia.image ?? ''}
 									fallbackImage={media.mainMedia.image ?? ''}

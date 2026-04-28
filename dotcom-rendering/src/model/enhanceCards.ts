@@ -17,7 +17,6 @@ import { getLargestImageSize } from '../lib/image';
 import {
 	convertFEMediaAssetsToVideoAssets,
 	extractValidSourcesFromAssets,
-	getAspectRatioFromSources,
 } from '../lib/video';
 import type { Image } from '../types/content';
 import type {
@@ -236,15 +235,12 @@ export const getActiveMediaAtom = (
 				convertFEMediaAssetsToVideoAssets(selfHostedAssets);
 			const sources = extractValidSourcesFromAssets(videoAssets);
 
-			const aspectRatio = getAspectRatioFromSources(sources);
-
 			return {
 				type: 'SelfHostedVideo',
 				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
 				atomId: mediaAtom.id,
 				sources,
 				subtitleSource: subtitleAsset?.id,
-				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
 				image,
 			};

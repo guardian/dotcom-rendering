@@ -46,7 +46,6 @@ type Story = StoryObj<typeof SelfHostedVideo>;
 export const Loop: Story = {
 	args: {
 		sources: loop54Card.mainMedia.sources,
-		aspectRatio: loop54Card.mainMedia.aspectRatio,
 		uniqueId: 'test-video-1',
 		videoStyle: 'Loop',
 		posterImage:
@@ -142,7 +141,6 @@ export const WithDifferentAspectRatios = {
 							{...args}
 							{...Loop.args}
 							sources={mainMedia.sources}
-							aspectRatio={mainMedia.aspectRatio}
 						/>
 					</div>
 				</div>
@@ -165,7 +163,6 @@ export const WithDifferentAspectRatiosAnd54Container = {
 							{...args}
 							{...Loop.args}
 							sources={mainMedia.sources}
-							aspectRatio={mainMedia.aspectRatio}
 							containerAspectRatioDesktop={5 / 4}
 						/>
 					</div>
