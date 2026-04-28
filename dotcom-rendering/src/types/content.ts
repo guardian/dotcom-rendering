@@ -529,6 +529,87 @@ export interface ProductSummaryElement {
 	variant: 'carousel' | 'stacked-default' | 'stacked-expanded';
 }
 
+export interface RecipeFeaturedImage {
+	url: string;
+	mediaId: string;
+	caption: string;
+	photographer: string;
+	source: string;
+	width: number;
+	height: number;
+	cropId: string;
+	mediaApiUri: string;
+	imageType: string;
+}
+
+export type RecipeTimingQualifier =
+	| 'prep-time'
+	| 'cook-time'
+	| 'marinate-time'
+	| 'total-time';
+
+export interface RecipeTiming {
+	qualifier: RecipeTimingQualifier;
+	durationInMins: { min: number; max: number };
+	text: string;
+}
+
+export interface RecipeServes {
+	amount: { min: number; max: number };
+	unit: string;
+	text: string;
+}
+
+export interface RecipeIngredient {
+	name: string;
+	text: string;
+	unit: string;
+	ingredientID: string;
+	prefix: string | null;
+	suffix: string | null;
+	amount: { min: number; max: number };
+}
+
+export interface RecipeIngredientSection {
+	recipeSection: string;
+	ingredientsList: RecipeIngredient[];
+}
+
+export interface RecipeInstruction {
+	description: string;
+}
+
+export interface RecipeContributor {
+	type: string;
+	tagId: string;
+}
+
+export interface RecipeBlockElement {
+	_type: 'model.dotcomrendering.pageElements.RecipeBlockElement';
+	/** Stable 32-char hex Feast recipe identifier. Use for deep-link: feast://recipes/{id} */
+	id: string;
+	title: string;
+	description: string;
+	/** Whether this recipe is live in the Feast app. Only show the Feast CTA when true */
+	isAppReady: boolean;
+	bookCredit: string;
+	canonicalArticle: string;
+	composerId: string;
+	difficultyLevel: 'easy' | 'medium' | 'hard' | string;
+	featuredImage?: RecipeFeaturedImage;
+	contributors: RecipeContributor[];
+	cuisineIds: string[];
+	mealTypeIds: string[];
+	suitableForDietIds: string[];
+	celebrationIds: string[];
+	techniquesUsedIds: string[];
+	utensilsAndApplianceIds: string[];
+	timings: RecipeTiming[];
+	serves: RecipeServes[];
+	ingredients: RecipeIngredientSection[];
+	instructions: RecipeInstruction[];
+}
+
 interface ProfileAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ProfileAtomBlockElement';
 	elementId: string;
@@ -897,7 +978,8 @@ export type FEElement =
 	| WitnessTypeBlockElement
 	| CrosswordElement
 	| ProductBlockElement
-	| ProductSummaryElement;
+	| ProductSummaryElement
+	| RecipeBlockElement;
 
 // -------------------------------------
 // Misc
