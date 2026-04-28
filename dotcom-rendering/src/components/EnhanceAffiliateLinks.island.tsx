@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { buildXcustValueForAffiliateLink } from '../lib/affiliateLinksUtils';
+import { buildXcustParamForAffiliateLink } from '../lib/affiliateLinksUtils';
+import { safeParseURL } from '../lib/parse';
 import { useBetaAB } from '../lib/useAB';
 
 /**
@@ -76,28 +77,29 @@ export const EnhanceAffiliateLinks = () => {
 				: new URL(document.referrer).hostname;
 
 		for (const link of allLinksOnPage) {
-			const xcustResult = buildXcustValueForAffiliateLink({
-				url: link.href,
+			const parsedLinkUrlResult = safeParseURL(link.href);
+			if (!parsedLinkUrlResult.ok) {
+				window.guardian.modules.sentry.reportError(
+					new Error(`Invalid URL in affiliate link: ${link.href}`),
+					'enhance-affiliate-links',
+				);
+				continue;
+			}
+
+			const parsedLinkUrl = parsedLinkUrlResult.value;
+			if (parsedLinkUrl.host !== 'go.skimresources.com') {
+				continue;
+			}
+
+			const xcustParam = buildXcustParamForAffiliateLink({
+				url: parsedLinkUrl,
 				abTestParticipations,
 				utmParamsString,
 				referrerDomain,
 				xcustComponentId: link.getAttribute('data-x-cust-component-id'),
 			});
 
-			if (!xcustResult.ok) {
-				if (xcustResult.error === 'InvalidUrl') {
-					window.guardian.modules.sentry.reportError(
-						new Error(
-							`Invalid URL in affiliate link: ${link.href}`,
-						),
-						'enhance-affiliate-links',
-					);
-				}
-				continue;
-			}
-
-			const parsedLinkUrl = new URL(link.href);
-			parsedLinkUrl.searchParams.set('xcust', xcustResult.value);
+			parsedLinkUrl.searchParams.set('xcust', xcustParam);
 			link.href = parsedLinkUrl.toString();
 		}
 	});
