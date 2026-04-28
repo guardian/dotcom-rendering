@@ -1749,6 +1749,9 @@
                             "type": "string"
                         }
                     }
+                },
+                "hasAudio": {
+                    "type": "boolean"
                 }
             },
             "required": [

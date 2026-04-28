@@ -3292,6 +3292,9 @@
                         "height",
                         "width"
                     ]
+                },
+                "hasAudio": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -3968,6 +3971,9 @@
                                     },
                                     "aspectRatio": {
                                         "type": "string"
+                                    },
+                                    "hasAudio": {
+                                        "type": "boolean"
                                     }
                                 },
                                 "required": [
