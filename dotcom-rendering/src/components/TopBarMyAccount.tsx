@@ -146,7 +146,7 @@ export const buildIdentityLinks = (
 const SignIn = ({ idUrl }: { idUrl: string }) => (
 	<a
 		css={myAccountLinkStyles}
-		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
+		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&clientId=web&${createAuthenticationEventParams(
 			'guardian_signin_header',
 		)}`}
 		data-link-name={nestedOphanComponents('header', 'topbar', 'signin')}
