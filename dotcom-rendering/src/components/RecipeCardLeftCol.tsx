@@ -367,6 +367,18 @@ export const RecipeCardLeftCol = ({
 					{title}
 				</div>
 
+				{/* id */}
+				{feastId && (
+					<div
+						css={[
+							productNameFont,
+							darkModeAvailable && productNameDarkMedia,
+						]}
+					>
+						ID: {feastId}
+					</div>
+				)}
+
 				{/* byline */}
 				{byline.length > 0 && (
 					<div

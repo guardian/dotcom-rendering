@@ -406,6 +406,18 @@ export const RecipeCardInline = ({
 					</div>
 				)}
 
+				{/* id */}
+				{feastId && (
+					<div
+						css={[
+							productNameStyle,
+							darkModeAvailable && productNameDarkMedia,
+						]}
+					>
+						ID: {feastId}
+					</div>
+				)}
+
 				{/* byline */}
 				{byline.length > 0 && (
 					<div
