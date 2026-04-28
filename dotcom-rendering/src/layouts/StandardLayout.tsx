@@ -247,6 +247,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					pageId={article.pageId}
 					pageTags={article.tags}
 				/>
+				{/* GridItem order matters — mobile layout relies on DOM order for grid placement.
+    See furnitureArrangements.ts if reordering. */}
 				<article
 					css={[
 						css`
