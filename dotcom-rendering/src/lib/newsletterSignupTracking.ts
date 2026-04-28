@@ -1,3 +1,4 @@
+import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -18,14 +19,13 @@ export const NEWSLETTER_SIGNUP_COMPONENT_ID = {
 		`AR NewsletterSignupCard ${identityName}`,
 } as const;
 
-type NewsletterSignupAction = 'VIEW' | 'EXPAND' | 'CLOSE';
-
 /**
  * Sends a newsletter signup tracking event to Ophan.
  *
  * Used by both branches of the A/B test so that all events share a consistent
  * component shape. Import this wherever you need to track an interaction with
- * the email signup — e.g. VIEW on mount, EXPAND/CLOSE on preview open/close.
+ * the email signup — e.g. VIEW on mount, EXPAND/CLOSE on preview open/close,
+ * CLICK/ANSWER/SUBSCRIBE on form interactions.
  */
 export const sendNewsletterSignupEvent = ({
 	action,
@@ -33,12 +33,14 @@ export const sendNewsletterSignupEvent = ({
 	componentId,
 	renderingTarget,
 	value,
+	abTest,
 }: {
-	action: NewsletterSignupAction;
+	action: TAction;
 	identityName: string;
 	componentId: string;
 	renderingTarget: RenderingTarget;
 	value: Record<string, unknown>;
+	abTest?: ComponentEvent['abTest'];
 }): void => {
 	void submitComponentEvent(
 		{
@@ -50,7 +52,9 @@ export const sendNewsletterSignupEvent = ({
 			value: JSON.stringify({
 				...value,
 				newsletterId: identityName,
+				timestamp: Date.now(),
 			}),
+			abTest,
 		},
 		renderingTarget,
 	);

@@ -11,6 +11,7 @@ jest.mock('../client/ophan/ophan', () => ({
 
 const IDENTITY_NAME = 'morning-briefing';
 const RENDERING_TARGET = 'Web';
+const MOCK_TIMESTAMP = 1_000_000_000_000;
 
 describe('NEWSLETTER_SIGNUP_COMPONENT_ID', () => {
 	it('returns the correct control component id', () => {
@@ -29,6 +30,11 @@ describe('NEWSLETTER_SIGNUP_COMPONENT_ID', () => {
 describe('sendNewsletterSignupEvent', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
+		jest.spyOn(Date, 'now').mockReturnValue(MOCK_TIMESTAMP);
+	});
+
+	afterEach(() => {
+		jest.restoreAllMocks();
 	});
 
 	it('calls submitComponentEvent with the correct shape for a VIEW event', () => {
@@ -50,7 +56,9 @@ describe('sendNewsletterSignupEvent', () => {
 				value: JSON.stringify({
 					eventDescription: 'newsletter-signup-viewed',
 					newsletterId: IDENTITY_NAME,
+					timestamp: MOCK_TIMESTAMP,
 				}),
+				abTest: undefined,
 			},
 			RENDERING_TARGET,
 		);
@@ -78,13 +86,15 @@ describe('sendNewsletterSignupEvent', () => {
 					eventDescription: 'preview-open',
 					renderUrl,
 					newsletterId: IDENTITY_NAME,
+					timestamp: MOCK_TIMESTAMP,
 				}),
+				abTest: undefined,
 			},
 			RENDERING_TARGET,
 		);
 	});
 
-	it('always merges newsletterId into the value payload', () => {
+	it('always merges newsletterId and timestamp into the value payload', () => {
 		sendNewsletterSignupEvent({
 			action: 'CLOSE',
 			identityName: IDENTITY_NAME,
@@ -96,16 +106,17 @@ describe('sendNewsletterSignupEvent', () => {
 			},
 		});
 
-		const call = (submitComponentEvent as jest.Mock).mock.calls[0][0];
-		const parsedValue = JSON.parse(call.value as string) as Record<
-			string,
-			unknown
-		>;
-
-		expect(parsedValue).toMatchObject({
-			newsletterId: IDENTITY_NAME,
-		});
-		expect(parsedValue).not.toHaveProperty('timestamp');
+		expect(submitComponentEvent).toHaveBeenCalledWith(
+			expect.objectContaining({
+				value: JSON.stringify({
+					eventDescription: 'preview-close',
+					renderUrl: '/some-url',
+					newsletterId: IDENTITY_NAME,
+					timestamp: MOCK_TIMESTAMP,
+				}),
+			}),
+			RENDERING_TARGET,
+		);
 	});
 
 	it('uses the AB_TEST_NAME constant for the abTest field in view events', () => {
@@ -121,13 +132,17 @@ describe('sendNewsletterSignupEvent', () => {
 			},
 		});
 
-		const call = (submitComponentEvent as jest.Mock).mock.calls[0][0];
-		const parsedValue = JSON.parse(call.value as string) as Record<
-			string,
-			unknown
-		>;
-
-		expect(parsedValue.abTest).toBe('newsletters-newsletter-signup-card');
-		expect(parsedValue.abVariant).toBe('control');
+		expect(submitComponentEvent).toHaveBeenCalledWith(
+			expect.objectContaining({
+				value: JSON.stringify({
+					eventDescription: 'newsletter-signup-viewed',
+					abTest: AB_TEST_NAME,
+					abVariant: 'control',
+					newsletterId: IDENTITY_NAME,
+					timestamp: MOCK_TIMESTAMP,
+				}),
+			}),
+			RENDERING_TARGET,
+		);
 	});
 });

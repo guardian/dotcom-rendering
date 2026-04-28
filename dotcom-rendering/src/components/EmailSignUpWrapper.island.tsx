@@ -88,6 +88,9 @@ export const EmailSignUpWrapper = ({
 
 	useEffect(() => {
 		if (abTests === undefined) return;
+		// For the control path, don't fire while subscription status is still
+		// loading — we'd be tracking a view of the placeholder, not the form.
+		if (!isVariant && isSubscribed === undefined) return;
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName,
@@ -99,9 +102,13 @@ export const EmailSignUpWrapper = ({
 				eventDescription: 'newsletter-signup-viewed',
 				abTest: AB_TEST_NAME,
 				abVariant: isVariant ? 'variant' : 'control',
+				// Included so analysts can normalise conversion rates between
+				// branches: the variant always renders regardless of subscription
+				// status, whereas the control hides for subscribed users.
+				isAlreadySubscribed: isSubscribed === true,
 			},
 		});
-	}, [abTests, identityName, isVariant, renderingTarget]);
+	}, [abTests, identityName, isSubscribed, isVariant, renderingTarget]);
 
 	if (isVariant) {
 		return (

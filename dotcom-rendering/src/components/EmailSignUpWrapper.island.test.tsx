@@ -136,7 +136,7 @@ describe('EmailSignUpWrapper', () => {
 	describe('flag on (showNewNewsletterSignupCard = true)', () => {
 		it('renders the legacy EmailSignup when AB API has not hydrated yet (default to control)', () => {
 			// useBetaAB returns undefined before hydration → isInVariantGroup = false
-			(useBetaAB as jest.Mock).mockReturnValue(undefined);
+			// (default set in outer beforeEach, no override needed)
 			renderWrapper({ showNewNewsletterSignupCard: true });
 			expect(screen.getByTestId('email-signup')).toBeInTheDocument();
 			expect(
@@ -181,13 +181,7 @@ describe('EmailSignUpWrapper', () => {
 	});
 
 	describe('VIEW tracking', () => {
-		beforeEach(() => {
-			jest.clearAllMocks();
-			(useIsSignedIn as jest.Mock).mockReturnValue(false);
-			(useNewsletterSubscription as jest.Mock).mockReturnValue(false);
-		});
-
-		it('fires a VIEW event with the control component id for the control group', () => {
+		it('fires a VIEW event with the control component id, ab metadata, and isAlreadySubscribed for the control group', () => {
 			mockAbTests(false);
 			renderWrapper({ showNewNewsletterSignupCard: true });
 
@@ -204,9 +198,25 @@ describe('EmailSignUpWrapper', () => {
 				}),
 				'Web',
 			);
+			expect(submitComponentEvent).toHaveBeenCalledWith(
+				expect.objectContaining({
+					value: expect.stringContaining(
+						`"abTest":"${AB_TEST_NAME}"`,
+					),
+				}),
+				'Web',
+			);
+			expect(submitComponentEvent).toHaveBeenCalledWith(
+				expect.objectContaining({
+					value: expect.stringContaining(
+						'"isAlreadySubscribed":false',
+					),
+				}),
+				'Web',
+			);
 		});
 
-		it('fires a VIEW event with the variant component id for the variant group', () => {
+		it('fires a VIEW event with the variant component id, ab metadata, and isAlreadySubscribed for the variant group', () => {
 			mockAbTests(true);
 			renderWrapper({ showNewNewsletterSignupCard: true });
 
@@ -223,16 +233,10 @@ describe('EmailSignUpWrapper', () => {
 				}),
 				'Web',
 			);
-		});
-
-		it('includes the AB test name in the VIEW event value', () => {
-			mockAbTests(false);
-			renderWrapper({ showNewNewsletterSignupCard: true });
-
 			expect(submitComponentEvent).toHaveBeenCalledWith(
 				expect.objectContaining({
 					value: expect.stringContaining(
-						`"abTest":"${AB_TEST_NAME}"`,
+						'"isAlreadySubscribed":false',
 					),
 				}),
 				'Web',
@@ -261,6 +265,62 @@ describe('EmailSignUpWrapper', () => {
 			renderWrapper({ showNewNewsletterSignupCard: true });
 
 			expect(submitComponentEvent).toHaveBeenCalledTimes(1);
+		});
+
+		it('does not fire a VIEW event for control users while subscription status is loading', () => {
+			mockAbTests(false);
+			(useNewsletterSubscription as jest.Mock).mockReturnValue(undefined);
+			renderWrapper({ showNewNewsletterSignupCard: true });
+
+			expect(submitComponentEvent).not.toHaveBeenCalled();
+		});
+
+		it('fires a VIEW event with isAlreadySubscribed: true for control users who are already subscribed', () => {
+			mockAbTests(false);
+			(useNewsletterSubscription as jest.Mock).mockReturnValue(true);
+			renderWrapper({
+				showNewNewsletterSignupCard: true,
+				hideNewsletterSignupComponentForSubscribers: true,
+			});
+
+			expect(submitComponentEvent).toHaveBeenCalledWith(
+				expect.objectContaining({
+					action: 'VIEW',
+					component: expect.objectContaining({
+						id: NEWSLETTER_SIGNUP_COMPONENT_ID.control(
+							defaultProps.identityName,
+						),
+					}),
+					value: expect.stringContaining(
+						'"isAlreadySubscribed":true',
+					),
+				}),
+				'Web',
+			);
+		});
+
+		it('fires a VIEW event for variant users even when already subscribed', () => {
+			mockAbTests(true);
+			(useNewsletterSubscription as jest.Mock).mockReturnValue(true);
+			renderWrapper({
+				showNewNewsletterSignupCard: true,
+				hideNewsletterSignupComponentForSubscribers: true,
+			});
+
+			expect(submitComponentEvent).toHaveBeenCalledWith(
+				expect.objectContaining({
+					action: 'VIEW',
+					component: expect.objectContaining({
+						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+							defaultProps.identityName,
+						),
+					}),
+					value: expect.stringContaining(
+						'"isAlreadySubscribed":true',
+					),
+				}),
+				'Web',
+			);
 		});
 	});
 });
