@@ -11,7 +11,11 @@ import {
 import { Island } from '../components/Island';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { FEElement, SubheadingBlockElement } from '../types/content';
+import type {
+	FEElement,
+	SubheadingBlockElement,
+	RecipeBlockElement,
+} from '../types/content';
 import type { TagType } from '../types/tag';
 import { spacefinderAdStyles } from './adStyles';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
@@ -133,6 +137,7 @@ export const ArticleRenderer = ({
 		type RecipeSection = {
 			subheadingEl: JSX.Element;
 			recipeName: string;
+			recipe?: RecipeBlockElement;
 			contentEls: JSX.Element[];
 			index: number;
 		};
@@ -158,7 +163,15 @@ export const ArticleRenderer = ({
 				};
 				sections.push(current);
 			} else if (current) {
-				current.contentEls.push(el);
+				if (
+					data?._type ===
+					'model.dotcomrendering.pageElements.RecipeBlockElement'
+				) {
+					// Store structured recipe data for the nudge; don't render as a body element.
+					current.recipe = data as RecipeBlockElement;
+				} else {
+					current.contentEls.push(el);
+				}
 			} else {
 				preSection.push(el);
 			}
@@ -182,6 +195,7 @@ export const ArticleRenderer = ({
 							>
 								<FeastRecipeNudgeIsland
 									recipeName={section.recipeName}
+									recipe={section.recipe}
 									pageId={pageId}
 									editionId={editionId}
 								/>
@@ -197,6 +211,7 @@ export const ArticleRenderer = ({
 							<FeastContextualNudgeIsland
 								pageId={pageId}
 								editionId={editionId}
+								recipe={section.recipe}
 								compact={section.index > 0}
 							/>
 						</Island>

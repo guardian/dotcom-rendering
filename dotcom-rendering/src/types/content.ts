@@ -529,85 +529,95 @@ export interface ProductSummaryElement {
 	variant: 'carousel' | 'stacked-default' | 'stacked-expanded';
 }
 
+export interface RecipeRange {
+	min: number | null;
+	max: number | null;
+}
+
+export interface RecipeCommerceCta {
+	sponsorName: string;
+	territory: string;
+	url: string;
+}
+
 export interface RecipeFeaturedImage {
 	url: string;
 	mediaId: string;
-	caption: string;
-	photographer: string;
-	source: string;
-	width: number;
-	height: number;
 	cropId: string;
-	mediaApiUri: string;
-	imageType: string;
+	source?: string;
+	photographer?: string;
+	imageType?: string;
+	caption?: string;
+	mediaApiUrl?: string;
 }
-
-export type RecipeTimingQualifier =
-	| 'prep-time'
-	| 'cook-time'
-	| 'marinate-time'
-	| 'total-time';
 
 export interface RecipeTiming {
-	qualifier: RecipeTimingQualifier;
-	durationInMins: { min: number; max: number };
-	text: string;
+	qualifier?: string;
+	durationInMins?: RecipeRange;
+	text?: string;
 }
 
-export interface RecipeServes {
-	amount: { min: number; max: number };
-	unit: string;
-	text: string;
+export interface RecipeServing {
+	amount?: RecipeRange | null;
+	unit?: string;
+	text?: string;
 }
 
 export interface RecipeIngredient {
-	name: string;
-	text: string;
-	unit: string;
-	ingredientID: string;
-	prefix: string | null;
-	suffix: string | null;
-	amount: { min: number; max: number };
+	name?: string;
+	text?: string;
+	unit?: string;
+	ingredientId?: string;
+	template?: string;
+	prefix?: string;
+	suffix?: string;
+	amount?: RecipeRange;
+	optional?: boolean;
 }
 
-export interface RecipeIngredientSection {
-	recipeSection: string;
-	ingredientsList: RecipeIngredient[];
+export interface RecipeIngredientGroup {
+	recipeSection?: string;
+	ingredientsList?: RecipeIngredient[];
 }
 
 export interface RecipeInstruction {
 	description: string;
-}
-
-export interface RecipeContributor {
-	type: string;
-	tagId: string;
+	descriptionTemplate?: string;
+	stepNumber?: number;
+	images?: string[];
 }
 
 export interface RecipeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.RecipeBlockElement';
-	/** Stable 32-char hex Feast recipe identifier. Use for deep-link: feast://recipes/{id} */
+	elementId: string;
+	/** Stable 32-char hex Feast recipe identifier. Deep-link: feast://recipes/{id} */
 	id: string;
-	title: string;
-	description: string;
-	/** Whether this recipe is live in the Feast app. Only show the Feast CTA when true */
-	isAppReady: boolean;
-	bookCredit: string;
-	canonicalArticle: string;
-	composerId: string;
-	difficultyLevel: 'easy' | 'medium' | 'hard' | string;
+	/** Only show feast://recipes/{id} CTA when true */
+	isAppReady?: boolean;
+	canonicalArticle?: string;
+	composerId?: string;
+	webPublicationDate?: string;
+	title?: string;
+	description?: string;
+	bookCredit?: string;
+	difficultyLevel?: string;
 	featuredImage?: RecipeFeaturedImage;
-	contributors: RecipeContributor[];
-	cuisineIds: string[];
-	mealTypeIds: string[];
-	suitableForDietIds: string[];
-	celebrationIds: string[];
-	techniquesUsedIds: string[];
-	utensilsAndApplianceIds: string[];
-	timings: RecipeTiming[];
-	serves: RecipeServes[];
-	ingredients: RecipeIngredientSection[];
-	instructions: RecipeInstruction[];
+	/** Guardian tag paths e.g. "profile/yotamottolenghi" — use byline for display */
+	contributors?: string[];
+	/** Human-readable author names for display */
+	byline?: string[];
+	serves?: RecipeServing[];
+	timings?: RecipeTiming[];
+	ingredients?: RecipeIngredientGroup[];
+	instructions?: RecipeInstruction[];
+	/** Always present but may be empty */
+	commerceCtas?: RecipeCommerceCta[];
+	cuisineIds?: string[];
+	mealTypeIds?: string[];
+	suitableForDietIds?: string[];
+	celebrationIds?: string[];
+	techniquesUsedIds?: string[];
+	utensilsAndApplianceIds?: string[];
 }
 
 interface ProfileAtomBlockElement {

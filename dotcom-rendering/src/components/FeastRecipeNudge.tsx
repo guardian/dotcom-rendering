@@ -9,6 +9,11 @@ import {
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
+import type {
+	RecipeBlockElement,
+	RecipeServing,
+	RecipeTiming,
+} from '../types/content';
 
 // ─── Feast brand palette (shared with FeastContextualNudge) ───────────────────
 
@@ -22,12 +27,19 @@ const FEAST_BORDER_DARK = 'rgba(104, 119, 60, 0.5)';
 
 // ─── Deep link builder (identical to FeastContextualNudge) ───────────────────
 
-const buildAppLink = (pageId: string, campaign: string): string => {
+const buildFeastDeepLink = (id: string): string => `feast://recipes/${id}`;
+
+const buildAppLink = (
+	pageId: string,
+	campaign: string,
+	feastId?: string,
+): string => {
 	const params = new URLSearchParams({
 		utm_medium: 'ACQUISITIONS_NUDGE',
 		utm_campaign: campaign,
 		utm_content: pageId,
 		utm_source: 'GUARDIAN_WEB',
+		...(feastId ? { deep_link_value: buildFeastDeepLink(feastId) } : {}),
 	});
 	return `https://guardian-feast.go.link/p0nQT?${params.toString()}`;
 };
@@ -53,7 +65,7 @@ const cardStyles = css`
 		width: 220px;
 		background-color: ${FEAST_BG};
 		border-top: 2px solid ${FEAST_GREEN};
-		padding: ${space[3]}px;
+		overflow: hidden;
 	}
 
 	/* Storybook colour-scheme overrides — light before dark so dark wins */
@@ -72,6 +84,17 @@ const cardDarkMedia = css`
 			background-color: ${FEAST_BG_DARK};
 		}
 	}
+`;
+
+const featuredImageStyles = css`
+	width: 100%;
+	height: 150px;
+	object-fit: cover;
+	display: block;
+`;
+
+const cardBodyStyles = css`
+	padding: ${space[3]}px;
 `;
 
 const logoRowStyles = css`
@@ -149,6 +172,74 @@ const fullWidthButton = css`
 	justify-content: center;
 `;
 
+const metaRowStyles = css`
+	${textSans12};
+	color: ${sourcePalette.neutral[20]};
+	margin: ${space[1]}px 0;
+	display: flex;
+	align-items: flex-start;
+	gap: 4px;
+
+	[data-color-scheme='dark'] & {
+		color: ${sourcePalette.neutral[60]};
+	}
+`;
+
+const metaLabelStyles = css`
+	font-weight: 700;
+	flex-shrink: 0;
+`;
+
+const chipRowStyles = css`
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin: ${space[2]}px 0;
+`;
+
+const chipStyles = css`
+	${textSans12};
+	background-color: rgba(104, 119, 60, 0.12);
+	color: ${FEAST_GREEN};
+	border-radius: 2px;
+	padding: 2px 6px;
+	font-weight: 600;
+	text-transform: capitalize;
+
+	[data-color-scheme='dark'] & {
+		background-color: rgba(104, 119, 60, 0.25);
+	}
+`;
+
+const contributorStyles = css`
+	${textSans12};
+	color: ${sourcePalette.neutral[46]};
+	margin: ${space[1]}px 0 ${space[2]}px;
+
+	[data-color-scheme='dark'] & {
+		color: ${sourcePalette.neutral[60]};
+	}
+`;
+
+const appReadyBadgeStyles = css`
+	${textSans12};
+	display: inline-block;
+	border-radius: 2px;
+	padding: 2px 6px;
+	font-weight: 700;
+	margin-bottom: ${space[2]}px;
+`;
+
+const appReadyStyles = css`
+	background-color: ${FEAST_GREEN};
+	color: ${sourcePalette.neutral[100]};
+`;
+
+const appNotReadyStyles = css`
+	background-color: ${sourcePalette.neutral[60]};
+	color: ${sourcePalette.neutral[100]};
+`;
+
 /** Source's tertiary/secondary buttons need global-link-styling opted out */
 const primaryCtaTheme = {
 	backgroundPrimary: FEAST_GREEN,
@@ -187,7 +278,22 @@ const FeastMiniLogo = () => (
 	</svg>
 );
 
-// ─── Helper ───────────────────────────────────────────────────────────────────
+// ─── Formatting helpers ──────────────────────────────────────────────────────
+
+const formatTimings = (timings: RecipeTiming[]): string =>
+	timings
+		.map((t) => t.text ?? '')
+		.filter(Boolean)
+		.join(' · ');
+
+const formatServes = (serves: RecipeServing[]): string =>
+	serves
+		.map((s) => s.text ?? '')
+		.filter(Boolean)
+		.join(', ');
+
+const slugToLabel = (s: string): string =>
+	s.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
 
 /**
  * Strip HTML tags from a subheading element's `.html` property so we can
@@ -199,8 +305,10 @@ export const stripHtmlTags = (html: string): string =>
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export type Props = {
-	/** Plain-text recipe name, stripped from the SubheadingBlockElement html. */
+	/** Plain-text recipe name fallback, stripped from the SubheadingBlockElement html. */
 	recipeName: string;
+	/** Full structured recipe data from the RecipeBlockElement, when available. */
+	recipe?: RecipeBlockElement;
 	/** Article page ID, used for building Feast deep links. */
 	pageId: string;
 	/** Edition, kept for future per-edition copy variants. */
@@ -236,56 +344,170 @@ export type Props = {
  */
 export const FeastRecipeNudge = ({
 	recipeName,
+	recipe,
 	pageId,
 	darkModeAvailable = false,
-}: Props) => (
-	<aside
-		aria-label={`Open ${recipeName} in the Feast app`}
-		css={[cardStyles, darkModeAvailable && cardDarkMedia]}
-	>
-		{/* Feast logo + app label */}
-		<div css={logoRowStyles}>
-			<div css={logoIconStyles} aria-hidden="true">
-				<FeastMiniLogo />
+}: Props) => {
+	const displayName = recipe?.title ?? recipeName;
+	const feastId = recipe?.id;
+	const image = recipe?.featuredImage;
+	const timings = recipe?.timings ?? [];
+	const serves = recipe?.serves ?? [];
+	const allTags = [
+		...(recipe?.cuisineIds ?? []),
+		...(recipe?.mealTypeIds ?? []),
+		...(recipe?.suitableForDietIds ?? []),
+	];
+	const byline = recipe?.byline ?? [];
+
+	return (
+		<aside
+			aria-label={`Open ${displayName} in the Feast app`}
+			css={[cardStyles, darkModeAvailable && cardDarkMedia]}
+		>
+			{/* Featured image */}
+			{image && (
+				<img
+					src={image.url}
+					alt={image.caption}
+					css={featuredImageStyles}
+				/>
+			)}
+
+			<div css={cardBodyStyles}>
+				{/* Feast logo + app label */}
+				<div css={logoRowStyles}>
+					<div css={logoIconStyles} aria-hidden="true">
+						<FeastMiniLogo />
+					</div>
+					<span css={appLabelStyles}>Feast</span>
+				</div>
+
+				{/* Recipe name */}
+				<p
+					css={[
+						recipeNameStyles,
+						darkModeAvailable && recipeNameDarkMedia,
+					]}
+				>
+					{displayName}
+				</p>
+
+				{/* Difficulty */}
+				{recipe?.difficultyLevel && (
+					<div css={metaRowStyles}>
+						<span css={metaLabelStyles}>Difficulty</span>
+						{slugToLabel(recipe.difficultyLevel)}
+					</div>
+				)}
+
+				{/* Timings */}
+				{timings.length > 0 && (
+					<div css={metaRowStyles}>
+						<span css={metaLabelStyles}>Time</span>
+						{formatTimings(timings)}
+					</div>
+				)}
+
+				{/* Serves */}
+				{serves.length > 0 && (
+					<div css={metaRowStyles}>
+						<span css={metaLabelStyles}>Serves</span>
+						{formatServes(serves)}
+					</div>
+				)}
+
+				{/* Tags: cuisine, meal type, dietary */}
+				{allTags.length > 0 && (
+					<div css={chipRowStyles}>
+						{allTags.map((tag) => (
+							<span key={tag} css={chipStyles}>
+								{slugToLabel(tag)}
+							</span>
+						))}
+					</div>
+				)}
+
+				{/* Contributor */}
+				{byline.length > 0 && (
+					<p css={contributorStyles}>By {byline.join(', ')}</p>
+				)}
+
+				{/* Feast app-ready badge */}
+				{recipe && (
+					<span
+						css={[
+							appReadyBadgeStyles,
+							recipe.isAppReady
+								? appReadyStyles
+								: appNotReadyStyles,
+						]}
+					>
+						{recipe.isAppReady
+							? '✓ Live in Feast'
+							: '○ Not in Feast'}
+					</span>
+				)}
+
+				<hr
+					css={[dividerStyles, darkModeAvailable && dividerDarkMedia]}
+				/>
+
+				{/* CTAs */}
+				<div css={buttonContainerStyles}>
+					{/* Direct deep-link — only when the recipe is live in Feast */}
+					{recipe?.isAppReady && feastId && (
+						<LinkButton
+							priority="primary"
+							size="small"
+							href={buildFeastDeepLink(feastId)}
+							theme={primaryCtaTheme}
+							data-ignore="global-link-styling"
+							cssOverrides={fullWidthButton}
+						>
+							Open in Feast
+						</LinkButton>
+					)}
+					<LinkButton
+						priority={recipe?.isAppReady ? 'secondary' : 'primary'}
+						size="small"
+						href={buildAppLink(
+							pageId,
+							'FeastRecipeNudge_CookMode',
+							feastId,
+						)}
+						theme={
+							recipe?.isAppReady
+								? secondaryCtaTheme
+								: primaryCtaTheme
+						}
+						data-ignore="global-link-styling"
+						cssOverrides={fullWidthButton}
+					>
+						Open in Cook Mode
+					</LinkButton>
+					<LinkButton
+						priority="secondary"
+						size="small"
+						href={buildAppLink(
+							pageId,
+							'FeastRecipeNudge_Save',
+							feastId,
+						)}
+						theme={secondaryCtaTheme}
+						data-ignore="global-link-styling"
+						cssOverrides={css`
+							${fullWidthButton};
+							background-color: transparent;
+						`}
+					>
+						Save to My Feast
+					</LinkButton>
+				</div>
 			</div>
-			<span css={appLabelStyles}>Feast</span>
-		</div>
-
-		{/* Recipe name */}
-		<p css={[recipeNameStyles, darkModeAvailable && recipeNameDarkMedia]}>
-			{recipeName}
-		</p>
-
-		<hr css={[dividerStyles, darkModeAvailable && dividerDarkMedia]} />
-
-		{/* CTAs */}
-		<div css={buttonContainerStyles}>
-			<LinkButton
-				priority="primary"
-				size="small"
-				href={buildAppLink(pageId, 'FeastRecipeNudge_CookMode')}
-				theme={primaryCtaTheme}
-				data-ignore="global-link-styling"
-				cssOverrides={fullWidthButton}
-			>
-				Open in Cook Mode
-			</LinkButton>
-			<LinkButton
-				priority="secondary"
-				size="small"
-				href={buildAppLink(pageId, 'FeastRecipeNudge_Save')}
-				theme={secondaryCtaTheme}
-				data-ignore="global-link-styling"
-				cssOverrides={css`
-					${fullWidthButton};
-					background-color: transparent;
-				`}
-			>
-				Save to My Feast
-			</LinkButton>
-		</div>
-	</aside>
-);
+		</aside>
+	);
+};
 
 // ─── Subheading section wrapper styles (used in ArticleRenderer) ──────────────
 

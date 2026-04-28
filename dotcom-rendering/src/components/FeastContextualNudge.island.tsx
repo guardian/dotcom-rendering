@@ -4,6 +4,7 @@ import { hideSupportMessaging } from '../client/userFeatures/cookies/hideSupport
 import { useConfig } from './ConfigContext';
 import type { EditionId } from '../lib/edition';
 import { useAB } from '../lib/useAB';
+import type { RecipeBlockElement } from '../types/content';
 import { FeastContextualNudge } from './FeastContextualNudge';
 
 const DISMISSED_KEY = 'gu.feast-nudge.dismissed';
@@ -22,12 +23,14 @@ const recordDismissal = (): void => {
 type Props = {
 	pageId: string;
 	editionId: EditionId;
+	recipe?: RecipeBlockElement;
 	compact?: boolean;
 };
 
 export const FeastContextualNudgeIsland = ({
 	pageId,
 	editionId,
+	recipe,
 	compact = false,
 }: Props) => {
 	const [shouldRender, setShouldRender] = useState(true); // DEV ONLY // DEV ONLY // DEV ONLY : Change it to false before merging
@@ -53,6 +56,7 @@ export const FeastContextualNudgeIsland = ({
 		<FeastContextualNudge
 			pageId={pageId}
 			editionId={editionId}
+			recipe={recipe}
 			subscriberVariant={subscriberVariant}
 			onDismiss={recordDismissal}
 			compact={compact}

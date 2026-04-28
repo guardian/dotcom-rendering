@@ -16,6 +16,7 @@ import {
 } from '@guardian/source/react-components';
 import { useState } from 'react';
 import type { EditionId } from '../lib/edition';
+import type { RecipeBlockElement } from '../types/content';
 
 /** Feast brand palette — matches FeastThrasher */
 const FEAST_BG = '#f7efe9';
@@ -38,12 +39,19 @@ const FEAST_BORDER_DARK = 'rgba(104, 119, 60, 0.5)';
  *
  * @see https://help.adjust.com/en/article/deep-linking
  */
-const buildAppLink = (pageId: string, campaign: string): string => {
+const buildFeastDeepLink = (id: string): string => `feast://recipes/${id}`;
+
+const buildAppLink = (
+	pageId: string,
+	campaign: string,
+	feastId?: string,
+): string => {
 	const params = new URLSearchParams({
 		utm_medium: 'ACQUISITIONS_NUDGE',
 		utm_campaign: campaign,
 		utm_content: pageId,
 		utm_source: 'GUARDIAN_WEB',
+		...(feastId ? { deep_link_value: buildFeastDeepLink(feastId) } : {}),
 	});
 	return `https://guardian-feast.go.link/p0nQT?${params.toString()}`;
 };
@@ -281,6 +289,185 @@ const dismissDarkMedia = css`
 	}
 `;
 
+// ─── Recipe data styles ─────────────────────────────────────────────────────
+
+const recipeImageStyles = css`
+	width: 100%;
+	max-height: 280px;
+	object-fit: cover;
+	display: block;
+	border-radius: 3px 3px 0 0;
+	margin-bottom: ${space[3]}px;
+`;
+
+const recipeSectionTitleStyles = css`
+	${textEgyptian14};
+	font-weight: 700;
+	color: ${FEAST_GREEN};
+	margin: ${space[3]}px 0 ${space[1]}px;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+
+	[data-color-scheme='dark'] & {
+		color: ${FEAST_GREEN};
+	}
+`;
+
+const recipeMetaRowStyles = css`
+	${textEgyptian14};
+	color: ${sourcePalette.neutral[20]};
+	display: flex;
+	flex-wrap: wrap;
+	gap: ${space[2]}px ${space[4]}px;
+	margin: ${space[2]}px 0;
+
+	[data-color-scheme='dark'] & {
+		color: ${sourcePalette.neutral[60]};
+	}
+`;
+
+const recipeMetaDarkMedia = css`
+	@media (prefers-color-scheme: dark) {
+		color: ${sourcePalette.neutral[60]};
+	}
+`;
+
+const recipeMetaItemStyles = css`
+	display: flex;
+	align-items: baseline;
+	gap: 4px;
+`;
+
+const recipeMetaLabelStyles = css`
+	font-weight: 700;
+	flex-shrink: 0;
+`;
+
+const chipRowStyles = css`
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin: ${space[2]}px 0;
+`;
+
+const chipStyles = css`
+	${textEgyptian14};
+	background-color: rgba(104, 119, 60, 0.12);
+	color: ${FEAST_GREEN};
+	border-radius: 2px;
+	padding: 2px 8px;
+	font-weight: 600;
+	text-transform: capitalize;
+
+	[data-color-scheme='dark'] & {
+		background-color: rgba(104, 119, 60, 0.25);
+	}
+`;
+
+const contributorStyles = css`
+	${textEgyptian14};
+	color: ${sourcePalette.neutral[46]};
+	margin: ${space[1]}px 0 ${space[2]}px;
+
+	[data-color-scheme='dark'] & {
+		color: ${sourcePalette.neutral[60]};
+	}
+`;
+
+const recipeDescriptionStyles = css`
+	${textEgyptian14};
+	color: ${sourcePalette.neutral[20]};
+	margin: ${space[2]}px 0;
+	font-style: italic;
+
+	[data-color-scheme='dark'] & {
+		color: ${sourcePalette.neutral[60]};
+	}
+`;
+
+const appReadyBadgeStyles = css`
+	${textEgyptian14};
+	display: inline-block;
+	border-radius: 2px;
+	padding: 2px 8px;
+	font-weight: 700;
+	margin-bottom: ${space[2]}px;
+`;
+
+const appReadyOnStyles = css`
+	background-color: ${FEAST_GREEN};
+	color: ${sourcePalette.neutral[100]};
+`;
+
+const appReadyOffStyles = css`
+	background-color: ${sourcePalette.neutral[60]};
+	color: ${sourcePalette.neutral[100]};
+`;
+
+const ingredientsSectionStyles = css`
+	margin: ${space[2]}px 0 0;
+`;
+
+const ingredientSectionLabelStyles = css`
+	${textEgyptian14};
+	color: ${sourcePalette.neutral[46]};
+	font-style: italic;
+	margin: ${space[2]}px 0 4px;
+
+	[data-color-scheme='dark'] & {
+		color: ${sourcePalette.neutral[60]};
+	}
+`;
+
+const ingredientListStyles = css`
+	${textEgyptian14};
+	color: ${sourcePalette.neutral[20]};
+	margin: 0;
+	padding: 0 0 0 ${space[4]}px;
+
+	li {
+		margin-bottom: 2px;
+	}
+
+	[data-color-scheme='dark'] & {
+		color: ${sourcePalette.neutral[60]};
+	}
+`;
+
+const instructionListStyles = css`
+	${textEgyptian14};
+	color: ${sourcePalette.neutral[20]};
+	margin: 0;
+	padding: 0 0 0 ${space[5]}px;
+
+	li {
+		margin-bottom: ${space[2]}px;
+	}
+
+	[data-color-scheme='dark'] & {
+		color: ${sourcePalette.neutral[60]};
+	}
+`;
+
+const dividerStyles = css`
+	border: none;
+	border-top: 1px solid ${FEAST_BORDER};
+	margin: ${space[3]}px 0;
+
+	[data-color-scheme='dark'] & {
+		border-top-color: ${FEAST_BORDER_DARK};
+	}
+`;
+
+const dividerDarkMedia = css`
+	@media (prefers-color-scheme: dark) {
+		border-top-color: ${FEAST_BORDER_DARK};
+	}
+`;
+
+const slugToLabel = (s: string): string =>
+	s.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 type Props = {
@@ -290,15 +477,15 @@ type Props = {
 	subscriberVariant: 'hvsSubscriber' | 'usNonSubscriber' | 'default';
 	/** Called when the user dismisses the nudge */
 	onDismiss: () => void;
+	/** Full structured recipe data from the RecipeBlockElement, when available. */
+	recipe?: RecipeBlockElement;
 	/**
 	 * When true, hides the heading and body copy — used for subsequent recipes
 	 * in a multi-recipe article so the marketing message is only shown once.
 	 */
 	compact?: boolean;
 	/**
-	 * Whether the page supports dark mode. Controls whether
-	 * `@media (prefers-color-scheme: dark)` styles are applied.
-	 * Pages that do not support dark mode (e.g. Labs) should pass `false`.
+	 * Whether the page supports dark mode.
 	 */
 	darkModeAvailable?: boolean;
 };
@@ -307,6 +494,7 @@ export const FeastContextualNudge = ({
 	pageId,
 	subscriberVariant,
 	onDismiss,
+	recipe,
 	compact = false,
 	darkModeAvailable = false,
 }: Props) => {
@@ -314,6 +502,16 @@ export const FeastContextualNudge = ({
 
 	const variant = getNudgeVariant(subscriberVariant);
 	const [primaryAction, ...secondaryActions] = variant.actions;
+	const feastId = recipe?.id;
+	const image = recipe?.featuredImage;
+	const timings = recipe?.timings ?? [];
+	const serves = recipe?.serves ?? [];
+	const allTags = [
+		...(recipe?.cuisineIds ?? []),
+		...(recipe?.mealTypeIds ?? []),
+		...(recipe?.suitableForDietIds ?? []),
+	];
+	const byline = recipe?.byline ?? [];
 
 	if (!isVisible || !primaryAction) return null;
 
@@ -327,12 +525,109 @@ export const FeastContextualNudge = ({
 			aria-label="Get the Feast app"
 			css={[containerStyles, darkModeAvailable && containerDarkMedia]}
 		>
+			{/* Featured image — spans the full card width */}
+			{image && (
+				<img
+					src={image.url}
+					alt={image.caption}
+					css={recipeImageStyles}
+				/>
+			)}
+
 			<div css={logoWrapStyles} aria-hidden="true">
 				<FeastLogo />
 			</div>
 
 			<div css={contentStyles}>
-				{!compact && (
+				{/* Recipe name (when we have structured data) */}
+				{recipe?.title && (
+					<h2
+						css={[
+							headingStyles,
+							darkModeAvailable && headingDarkMedia,
+						]}
+					>
+						{recipe.title}
+					</h2>
+				)}
+
+				{/* Metadata row: difficulty · timings · serves */}
+				{recipe && (
+					<div
+						css={[
+							recipeMetaRowStyles,
+							darkModeAvailable && recipeMetaDarkMedia,
+						]}
+					>
+						{recipe.difficultyLevel && (
+							<span css={recipeMetaItemStyles}>
+								<span css={recipeMetaLabelStyles}>
+									Difficulty
+								</span>
+								{slugToLabel(recipe.difficultyLevel)}
+							</span>
+						)}
+						{timings.map((t) => (
+							<span
+								key={t.qualifier ?? t.text}
+								css={recipeMetaItemStyles}
+							>
+								{t.qualifier && (
+									<span css={recipeMetaLabelStyles}>
+										{slugToLabel(t.qualifier)}
+									</span>
+								)}
+								{t.text}
+							</span>
+						))}
+						{serves.map((s, i) => (
+							<span key={i} css={recipeMetaItemStyles}>
+								<span css={recipeMetaLabelStyles}>Serves</span>
+								{s.text}
+							</span>
+						))}
+					</div>
+				)}
+
+				{/* Description */}
+				{recipe?.description && !compact && (
+					<p css={recipeDescriptionStyles}>{recipe.description}</p>
+				)}
+
+				{/* Tags: cuisine, meal type, dietary */}
+				{allTags.length > 0 && (
+					<div css={chipRowStyles}>
+						{allTags.map((tag) => (
+							<span key={tag} css={chipStyles}>
+								{slugToLabel(tag)}
+							</span>
+						))}
+					</div>
+				)}
+
+				{/* Contributor */}
+				{byline.length > 0 && (
+					<p css={contributorStyles}>By {byline.join(', ')}</p>
+				)}
+
+				{/* Feast app-ready badge */}
+				{recipe && (
+					<span
+						css={[
+							appReadyBadgeStyles,
+							recipe.isAppReady
+								? appReadyOnStyles
+								: appReadyOffStyles,
+						]}
+					>
+						{recipe.isAppReady
+							? '✓ Live in Feast'
+							: '○ Not in Feast'}
+					</span>
+				)}
+
+				{/* Fallback heading/body when no structured recipe data (or not compact) */}
+				{!recipe && !compact && (
 					<>
 						<h2
 							css={[
@@ -353,25 +648,109 @@ export const FeastContextualNudge = ({
 					</>
 				)}
 
+				{/* Ingredients */}
+				{(recipe?.ingredients ?? []).length > 0 && (
+					<>
+						<hr
+							css={[
+								dividerStyles,
+								darkModeAvailable && dividerDarkMedia,
+							]}
+						/>
+						<p css={recipeSectionTitleStyles}>Ingredients</p>
+						{recipe?.ingredients?.map((section, si) => (
+							<div key={si} css={ingredientsSectionStyles}>
+								{section.recipeSection && (
+									<p css={ingredientSectionLabelStyles}>
+										{section.recipeSection}
+									</p>
+								)}
+								<ul css={ingredientListStyles}>
+									{(section.ingredientsList ?? []).map(
+										(ing, ii) => (
+											<li
+												key={
+													ing.ingredientId ??
+													`${si}-${ii}`
+												}
+											>
+												{ing.text}
+											</li>
+										),
+									)}
+								</ul>
+							</div>
+						))}
+					</>
+				)}
+
+				{/* Instructions */}
+				{(recipe?.instructions ?? []).length > 0 && (
+					<>
+						<hr
+							css={[
+								dividerStyles,
+								darkModeAvailable && dividerDarkMedia,
+							]}
+						/>
+						<p css={recipeSectionTitleStyles}>Method</p>
+						<ol css={instructionListStyles}>
+							{recipe?.instructions?.map((step, i) => (
+								<li key={step.stepNumber ?? i}>
+									{step.description}
+								</li>
+							))}
+						</ol>
+					</>
+				)}
+
+				{/* CTAs */}
+				<hr
+					css={[dividerStyles, darkModeAvailable && dividerDarkMedia]}
+				/>
 				<div css={actionsRowStyles}>
+					{/* Direct Feast deep-link when recipe is live */}
+					{recipe?.isAppReady && feastId && (
+						<LinkButton
+							priority="primary"
+							size="small"
+							href={buildFeastDeepLink(feastId)}
+							theme={primaryCtaTheme}
+							data-ignore="global-link-styling"
+						>
+							Open in Feast
+						</LinkButton>
+					)}
 					{/* Primary CTA */}
 					<LinkButton
-						priority="primary"
+						priority={recipe?.isAppReady ? 'secondary' : 'primary'}
 						size="small"
-						href={buildAppLink(pageId, primaryAction.campaign)}
-						theme={primaryCtaTheme}
+						href={buildAppLink(
+							pageId,
+							primaryAction.campaign,
+							feastId,
+						)}
+						theme={
+							recipe?.isAppReady
+								? secondaryCtaTheme
+								: primaryCtaTheme
+						}
 						data-ignore="global-link-styling"
 					>
 						{primaryAction.label}
 					</LinkButton>
 
-					{/* Secondary CTAs — same deep link until per-recipe IDs are available */}
+					{/* Secondary CTAs */}
 					{secondaryActions.map((action) => (
 						<LinkButton
 							key={action.campaign}
 							priority="secondary"
 							size="small"
-							href={buildAppLink(pageId, action.campaign)}
+							href={buildAppLink(
+								pageId,
+								action.campaign,
+								feastId,
+							)}
 							theme={secondaryCtaTheme}
 							data-ignore="global-link-styling"
 							cssOverrides={css`

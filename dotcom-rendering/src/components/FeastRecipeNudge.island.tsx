@@ -2,16 +2,19 @@ import { useEffect, useState } from 'react';
 import { useConfig } from './ConfigContext';
 import type { EditionId } from '../lib/edition';
 import { useAB } from '../lib/useAB';
+import type { RecipeBlockElement } from '../types/content';
 import { FeastRecipeNudge } from './FeastRecipeNudge';
 
 type Props = {
 	recipeName: string;
+	recipe?: RecipeBlockElement;
 	pageId: string;
 	editionId: EditionId;
 };
 
 export const FeastRecipeNudgeIsland = ({
 	recipeName,
+	recipe,
 	pageId,
 	editionId,
 }: Props) => {
@@ -30,6 +33,7 @@ export const FeastRecipeNudgeIsland = ({
 	return (
 		<FeastRecipeNudge
 			recipeName={recipeName}
+			recipe={recipe}
 			pageId={pageId}
 			editionId={editionId}
 			darkModeAvailable={darkModeAvailable}
