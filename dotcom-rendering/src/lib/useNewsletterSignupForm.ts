@@ -7,7 +7,9 @@ import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { lazyFetchEmailWithTimeout } from './fetchEmail';
 import {
+	EVENT_DESCRIPTION_TO_ACTION,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	type NewsletterEventDescription,
 	sendNewsletterSignupEvent,
 } from './newsletterSignupTracking';
 import { clearSubscriptionCache } from './newsletterSubscriptionCache';
@@ -92,32 +94,9 @@ const postFormData = async (
 	});
 };
 
-type EventDescription =
-	| 'click-button'
-	| 'form-submission'
-	| 'submission-confirmed'
-	| 'submission-failed'
-	| 'open-captcha'
-	| 'captcha-load-error'
-	| 'form-submit-error'
-	| 'captcha-not-passed'
-	| 'captcha-passed';
-
-const EVENT_DESCRIPTION_TO_ACTION = {
-	'click-button': 'CLICK',
-	'form-submission': 'ANSWER',
-	'captcha-not-passed': 'ANSWER',
-	'captcha-passed': 'ANSWER',
-	'submission-confirmed': 'SUBSCRIBE',
-	'captcha-load-error': 'CLOSE',
-	'form-submit-error': 'CLOSE',
-	'submission-failed': 'CLOSE',
-	'open-captcha': 'EXPAND',
-} as const satisfies Record<EventDescription, string>;
-
 const sendTracking = (
 	newsletterId: string,
-	eventDescription: EventDescription,
+	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
 	abTest?: AbTest,
 ): void => {

@@ -75,6 +75,10 @@ export const EmailSignUpWrapper = ({
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
 	const abTests = useBetaAB();
+	// `abTests` is undefined before the AB client has hydrated — treat that as
+	// "not yet resolved" rather than "in control", so we don't fire premature
+	// tracking events.
+	const abResolved = abTests !== undefined;
 	const isInVariantGroup =
 		abTests?.isUserInTestGroup(AB_TEST_NAME, 'variant') ?? false;
 	const isSubscribed = useNewsletterSubscription(
@@ -89,7 +93,7 @@ export const EmailSignUpWrapper = ({
 	const abVariant = isVariant ? 'variant' : 'control';
 
 	useEffect(() => {
-		if (abTests === undefined) return;
+		if (!abResolved) return;
 		// For the control path, don't fire while subscription status is still
 		// loading — we'd be tracking a view of the placeholder, not the form.
 		if (!isVariant && isSubscribed === undefined) return;
@@ -112,7 +116,7 @@ export const EmailSignUpWrapper = ({
 			abTest: { name: AB_TEST_NAME, variant: abVariant },
 		});
 	}, [
-		abTests,
+		abResolved,
 		abVariant,
 		identityName,
 		isSubscribed,

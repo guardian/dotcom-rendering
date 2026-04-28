@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
-import type { ComponentEvent } from '@guardian/ophan-tracker-js';
+import type { AbTest } from '@guardian/ophan-tracker-js';
 import { space, textSans14, until } from '@guardian/source/foundations';
 import {
 	Button,
@@ -21,7 +21,9 @@ import { useEffect, useRef, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import {
+	EVENT_DESCRIPTION_TO_ACTION,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	type NewsletterEventDescription,
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
@@ -39,12 +41,10 @@ import { useConfig } from './ConfigContext';
 // be accurately predicated for every breakpoint).
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
-type OphanABTest = ComponentEvent['abTest'];
-
 type Props = {
 	newsletterId: string;
 	successDescription: string;
-	abTest?: OphanABTest;
+	abTest?: AbTest;
 };
 
 const formStyles = css`
@@ -200,34 +200,11 @@ const postFormData = async (
 	});
 };
 
-type EventDescription =
-	| 'click-button'
-	| 'form-submission'
-	| 'submission-confirmed'
-	| 'submission-failed'
-	| 'open-captcha'
-	| 'captcha-load-error'
-	| 'form-submit-error'
-	| 'captcha-not-passed'
-	| 'captcha-passed';
-
-const EVENT_DESCRIPTION_TO_ACTION = {
-	'click-button': 'CLICK',
-	'form-submission': 'ANSWER',
-	'captcha-not-passed': 'ANSWER',
-	'captcha-passed': 'ANSWER',
-	'submission-confirmed': 'SUBSCRIBE',
-	'captcha-load-error': 'CLOSE',
-	'form-submit-error': 'CLOSE',
-	'submission-failed': 'CLOSE',
-	'open-captcha': 'EXPAND',
-} as const satisfies Record<EventDescription, string>;
-
 const sendTracking = (
 	newsletterId: string,
-	eventDescription: EventDescription,
+	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
-	abTest?: OphanABTest,
+	abTest?: AbTest,
 ): void => {
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],

@@ -1,8 +1,31 @@
-import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
+import type { AbTest, TAction } from '@guardian/ophan-tracker-js';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
 export const AB_TEST_NAME = 'newsletters-newsletter-signup-card';
+
+export type NewsletterEventDescription =
+	| 'click-button'
+	| 'form-submission'
+	| 'submission-confirmed'
+	| 'submission-failed'
+	| 'open-captcha'
+	| 'captcha-load-error'
+	| 'form-submit-error'
+	| 'captcha-not-passed'
+	| 'captcha-passed';
+
+export const EVENT_DESCRIPTION_TO_ACTION = {
+	'click-button': 'CLICK',
+	'form-submission': 'ANSWER',
+	'captcha-not-passed': 'ANSWER',
+	'captcha-passed': 'ANSWER',
+	'submission-confirmed': 'SUBSCRIBE',
+	'captcha-load-error': 'CLOSE',
+	'form-submit-error': 'CLOSE',
+	'submission-failed': 'CLOSE',
+	'open-captcha': 'EXPAND',
+} as const satisfies Record<NewsletterEventDescription, string>;
 
 /**
  * The component ids used by each branch of the newsletter signup A/B test.
@@ -40,7 +63,7 @@ export const sendNewsletterSignupEvent = ({
 	componentId: string;
 	renderingTarget: RenderingTarget;
 	value: Record<string, unknown>;
-	abTest?: ComponentEvent['abTest'];
+	abTest?: AbTest;
 }): void => {
 	void submitComponentEvent(
 		{
