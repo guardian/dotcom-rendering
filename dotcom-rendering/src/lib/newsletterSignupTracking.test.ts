@@ -119,7 +119,7 @@ describe('sendNewsletterSignupEvent', () => {
 		);
 	});
 
-	it('uses the AB_TEST_NAME constant for the abTest field in view events', () => {
+	it('passes the abTest object to the top-level abTest field (not encoded in value)', () => {
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName: IDENTITY_NAME,
@@ -127,17 +127,17 @@ describe('sendNewsletterSignupEvent', () => {
 			renderingTarget: RENDERING_TARGET,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
-				abTest: AB_TEST_NAME,
-				abVariant: 'control',
+				isAlreadySubscribed: false,
 			},
+			abTest: { name: AB_TEST_NAME, variant: 'control' },
 		});
 
 		expect(submitComponentEvent).toHaveBeenCalledWith(
 			expect.objectContaining({
+				abTest: { name: AB_TEST_NAME, variant: 'control' },
 				value: JSON.stringify({
 					eventDescription: 'newsletter-signup-viewed',
-					abTest: AB_TEST_NAME,
-					abVariant: 'control',
+					isAlreadySubscribed: false,
 					newsletterId: IDENTITY_NAME,
 					timestamp: MOCK_TIMESTAMP,
 				}),

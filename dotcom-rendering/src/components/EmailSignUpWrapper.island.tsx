@@ -86,6 +86,8 @@ export const EmailSignUpWrapper = ({
 
 	const isVariant = showNewNewsletterSignupCard && isInVariantGroup;
 
+	const abVariant = isVariant ? 'variant' : 'control';
+
 	useEffect(() => {
 		if (abTests === undefined) return;
 		// For the control path, don't fire while subscription status is still
@@ -100,15 +102,23 @@ export const EmailSignUpWrapper = ({
 			renderingTarget,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
-				abTest: AB_TEST_NAME,
-				abVariant: isVariant ? 'variant' : 'control',
 				// Included so analysts can normalise conversion rates between
 				// branches: the variant always renders regardless of subscription
 				// status, whereas the control hides for subscribed users.
 				isAlreadySubscribed: isSubscribed === true,
 			},
+			// Use the standard Ophan abTest field so Ophan can join events
+			// to the A/B test — not strings encoded inside value.
+			abTest: { name: AB_TEST_NAME, variant: abVariant },
 		});
-	}, [abTests, identityName, isSubscribed, isVariant, renderingTarget]);
+	}, [
+		abTests,
+		abVariant,
+		identityName,
+		isSubscribed,
+		isVariant,
+		renderingTarget,
+	]);
 
 	if (isVariant) {
 		return (
@@ -137,6 +147,10 @@ export const EmailSignUpWrapper = ({
 								hidePrivacyMessage={isSignedIn === true}
 								onPreviewClick={openPreview}
 								isAlreadySubscribed={isSubscribed === true}
+								abTest={{
+									name: AB_TEST_NAME,
+									variant: abVariant,
+								}}
 							/>
 						</Island>
 					)}
@@ -171,6 +185,7 @@ export const EmailSignUpWrapper = ({
 					<SecureSignup
 						newsletterId={identityName}
 						successDescription={successDescription}
+						abTest={{ name: AB_TEST_NAME, variant: abVariant }}
 					/>
 				</Island>
 				{!hidePrivacyMessage && <NewsletterPrivacyMessage />}

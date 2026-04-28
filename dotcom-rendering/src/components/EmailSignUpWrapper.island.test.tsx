@@ -194,20 +194,8 @@ describe('EmailSignUpWrapper', () => {
 						),
 					},
 					action: 'VIEW',
-					value: expect.stringContaining('"abVariant":"control"'),
-				}),
-				'Web',
-			);
-			expect(submitComponentEvent).toHaveBeenCalledWith(
-				expect.objectContaining({
-					value: expect.stringContaining(
-						`"abTest":"${AB_TEST_NAME}"`,
-					),
-				}),
-				'Web',
-			);
-			expect(submitComponentEvent).toHaveBeenCalledWith(
-				expect.objectContaining({
+					// AB test data lives in the top-level abTest field, not value
+					abTest: { name: AB_TEST_NAME, variant: 'control' },
 					value: expect.stringContaining(
 						'"isAlreadySubscribed":false',
 					),
@@ -229,12 +217,7 @@ describe('EmailSignUpWrapper', () => {
 						),
 					},
 					action: 'VIEW',
-					value: expect.stringContaining('"abVariant":"variant"'),
-				}),
-				'Web',
-			);
-			expect(submitComponentEvent).toHaveBeenCalledWith(
-				expect.objectContaining({
+					abTest: { name: AB_TEST_NAME, variant: 'variant' },
 					value: expect.stringContaining(
 						'"isAlreadySubscribed":false',
 					),

@@ -1,12 +1,15 @@
 import { isString } from '@guardian/libs';
-import type { TAction } from '@guardian/ophan-tracker-js';
+import type { AbTest } from '@guardian/ophan-tracker-js';
 import type { FormEvent, ReactEventHandler, RefObject } from 'react';
 import type React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
-import { submitComponentEvent } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { lazyFetchEmailWithTimeout } from './fetchEmail';
+import {
+	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	sendNewsletterSignupEvent,
+} from './newsletterSignupTracking';
 import { clearSubscriptionCache } from './newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from './useAuthStatus';
 import { useBrowserId } from './useBrowserId';
@@ -100,49 +103,32 @@ type EventDescription =
 	| 'captcha-not-passed'
 	| 'captcha-passed';
 
-const actionForEventDescription = (
-	eventDescription: EventDescription,
-): TAction => {
-	switch (eventDescription) {
-		case 'form-submission':
-		case 'captcha-not-passed':
-		case 'captcha-passed':
-			return 'ANSWER';
-		case 'submission-confirmed':
-			return 'SUBSCRIBE';
-		case 'captcha-load-error':
-		case 'form-submit-error':
-		case 'submission-failed':
-			return 'CLOSE';
-		case 'open-captcha':
-			return 'EXPAND';
-		case 'click-button':
-			return 'CLICK';
-	}
-};
+const EVENT_DESCRIPTION_TO_ACTION = {
+	'click-button': 'CLICK',
+	'form-submission': 'ANSWER',
+	'captcha-not-passed': 'ANSWER',
+	'captcha-passed': 'ANSWER',
+	'submission-confirmed': 'SUBSCRIBE',
+	'captcha-load-error': 'CLOSE',
+	'form-submit-error': 'CLOSE',
+	'submission-failed': 'CLOSE',
+	'open-captcha': 'EXPAND',
+} as const satisfies Record<EventDescription, string>;
 
 const sendTracking = (
 	newsletterId: string,
 	eventDescription: EventDescription,
 	renderingTarget: RenderingTarget,
+	abTest?: AbTest,
 ): void => {
-	const value = JSON.stringify({
-		eventDescription,
-		newsletterId,
-		timestamp: Date.now(),
-	});
-
-	void submitComponentEvent(
-		{
-			action: actionForEventDescription(eventDescription),
-			value,
-			component: {
-				componentType: 'NEWSLETTER_SUBSCRIPTION',
-				id: `AR NewsletterSignupForm ${newsletterId}`,
-			},
-		},
+	sendNewsletterSignupEvent({
+		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
+		identityName: newsletterId,
+		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(newsletterId),
 		renderingTarget,
-	);
+		value: { eventDescription },
+		abTest,
+	});
 };
 
 // ---------------------------------------------------------------------------
@@ -220,6 +206,7 @@ export type NewsletterSignupFormState = {
 export const useNewsletterSignupForm = (
 	newsletterId: string,
 	renderingTarget: RenderingTarget,
+	abTest?: AbTest,
 ): NewsletterSignupFormState => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
@@ -304,7 +291,12 @@ export const useNewsletterSignupForm = (
 
 	const submitForm = useCallback(
 		async (emailAddress: string, token: string): Promise<void> => {
-			sendTracking(newsletterId, 'form-submission', renderingTarget);
+			sendTracking(
+				newsletterId,
+				'form-submission',
+				renderingTarget,
+				abTest,
+			);
 
 			const formData = buildFormData(
 				emailAddress,
@@ -335,9 +327,10 @@ export const useNewsletterSignupForm = (
 				newsletterId,
 				response.ok ? 'submission-confirmed' : 'submission-failed',
 				renderingTarget,
+				abTest,
 			);
 		},
-		[newsletterId, renderingTarget],
+		[abTest, newsletterId, renderingTarget],
 	);
 
 	const handleCaptchaComplete = useCallback(
@@ -347,6 +340,7 @@ export const useNewsletterSignupForm = (
 					newsletterId,
 					'captcha-not-passed',
 					renderingTarget,
+					abTest,
 				);
 				setIsValidationError(false);
 				setErrorMessage('The reCAPTCHA check did not complete.');
@@ -354,7 +348,12 @@ export const useNewsletterSignupForm = (
 				recaptchaRef.current?.reset();
 				return;
 			}
-			sendTracking(newsletterId, 'captcha-passed', renderingTarget);
+			sendTracking(
+				newsletterId,
+				'captcha-passed',
+				renderingTarget,
+				abTest,
+			);
 			// Read the email that was validated at submit-time — not the
 			// current value, which may have been edited since.
 			const emailAddress = pendingEmailRef.current ?? '';
@@ -366,6 +365,7 @@ export const useNewsletterSignupForm = (
 						newsletterId,
 						'form-submit-error',
 						renderingTarget,
+						abTest,
 					);
 					setIsValidationError(false);
 					setErrorMessage(
@@ -377,16 +377,21 @@ export const useNewsletterSignupForm = (
 					setIsWaitingForResponse(false);
 				});
 		},
-		[newsletterId, renderingTarget, submitForm],
+		[abTest, newsletterId, renderingTarget, submitForm],
 	);
 
 	const handleCaptchaLoadError = useCallback((): void => {
-		sendTracking(newsletterId, 'captcha-load-error', renderingTarget);
+		sendTracking(
+			newsletterId,
+			'captcha-load-error',
+			renderingTarget,
+			abTest,
+		);
 		setIsValidationError(false);
 		setErrorMessage('Sorry, the reCAPTCHA failed to load.');
 		setIsWaitingForResponse(false);
 		recaptchaRef.current?.reset();
-	}, [newsletterId, renderingTarget]);
+	}, [abTest, newsletterId, renderingTarget]);
 
 	const handleSubmit = useCallback(
 		(event: FormEvent<HTMLFormElement>): void => {
@@ -404,10 +409,16 @@ export const useNewsletterSignupForm = (
 			setIsValidationError(false);
 			setErrorMessage(undefined);
 			setIsWaitingForResponse(true);
-			sendTracking(newsletterId, 'open-captcha', renderingTarget);
+			sendTracking(newsletterId, 'open-captcha', renderingTarget, abTest);
 			recaptchaRef.current?.execute();
 		},
-		[isWaitingForResponse, newsletterId, renderingTarget, userEmail],
+		[
+			abTest,
+			isWaitingForResponse,
+			newsletterId,
+			renderingTarget,
+			userEmail,
+		],
 	);
 
 	const handleEmailChange = useCallback((value: string): void => {
@@ -444,8 +455,8 @@ export const useNewsletterSignupForm = (
 
 	const handleSubmitButtonClick = useCallback((): void => {
 		hasAttemptedSubmitRef.current = true;
-		sendTracking(newsletterId, 'click-button', renderingTarget);
-	}, [newsletterId, renderingTarget]);
+		sendTracking(newsletterId, 'click-button', renderingTarget, abTest);
+	}, [abTest, newsletterId, renderingTarget]);
 
 	const handleReset = useCallback<
 		ReactEventHandler<HTMLButtonElement>
