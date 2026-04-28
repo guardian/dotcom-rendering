@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { Fragment } from 'react';
 import { useConfig } from '../components/ConfigContext';
-import { FeastContextualNudgeIsland } from '../components/FeastContextualNudge.island';
-import { FeastRecipeNudgeIsland } from '../components/FeastRecipeNudge.island';
+import { RecipeCardInlineIsland } from '../components/RecipeCardInline.island';
+import { RecipeCardLeftCol } from '../components/RecipeCardLeftCol';
 import {
 	recipeContentContainerStyles,
 	recipeLeftColContainerStyles,
 	stripHtmlTags,
-} from '../components/FeastRecipeNudge';
+} from '../components/RecipeCardLeftCol';
 import { Island } from '../components/Island';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
@@ -112,7 +112,7 @@ export const ArticleRenderer = ({
 	 * Where is this coming from?
 	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
 	 */
-	const { renderingTarget } = useConfig();
+	const { renderingTarget, darkModeAvailable } = useConfig();
 
 	/**
 	 * For recipe articles, group elements into per-recipe sections separated
@@ -122,9 +122,9 @@ export const ArticleRenderer = ({
 	 *      ProductElement pattern from "The Filter").
 	 *   2. A `position: relative` content wrapper containing:
 	 *        a. An absolutely-positioned left-col container (left: -240px,
-	 *           height: 100%) holding the sticky FeastRecipeNudge card — visible
+	 *           height: 100%) holding the sticky RecipeCardLeftCol — visible
 	 *           only at `from.wide`, tracks the viewport as the reader scrolls.
-	 *        b. The inline FeastContextualNudge (all screen sizes).
+	 *        b. The inline RecipeCardInline (all screen sizes, hidden at from.wide).
 	 *        c. The rest of the section's article elements.
 	 *
 	 * Elements that precede the first subheading are rendered as-is.
@@ -187,32 +187,27 @@ export const ArticleRenderer = ({
 					{section.subheadingEl}
 
 					<div css={recipeContentContainerStyles}>
-						{/* Sticky left-col card — only visible at from.wide */}
+						{/* Sticky left-col card — only visible at from.wide, pure render, no Island */}
 						<div css={recipeLeftColContainerStyles}>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<FeastRecipeNudgeIsland
-									recipeName={section.recipeName}
-									recipe={section.recipe}
-									pageId={pageId}
-									editionId={editionId}
-								/>
-							</Island>
+							<RecipeCardLeftCol
+								recipeName={section.recipeName}
+								recipe={section.recipe}
+								pageId={pageId}
+								darkModeAvailable={darkModeAvailable}
+							/>
 						</div>
 
-						{/* Inline nudge — all screen sizes */}
+						{/* Inline card — hidden at from.wide, deferred Island */}
 						<Island
-							key={`feast-contextual-nudge-${section.index}`}
+							key={`recipe-card-inline-${section.index}`}
 							priority="feature"
 							defer={{ until: 'visible' }}
 						>
-							<FeastContextualNudgeIsland
+							<RecipeCardInlineIsland
 								pageId={pageId}
 								editionId={editionId}
 								recipe={section.recipe}
-								compact={section.index > 0}
+								recipeName={section.recipeName}
 							/>
 						</Island>
 

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { darkDecorator } from '../../.storybook/decorators/themeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { FeastRecipeNudge } from './FeastRecipeNudge';
+import { RecipeCardLeftCol } from './RecipeCardLeftCol';
 
 const recipeFormat = {
 	design: ArticleDesign.Recipe,
@@ -11,17 +11,16 @@ const recipeFormat = {
 };
 
 const meta = {
-	title: 'Components/FeastRecipeNudge',
-	component: FeastRecipeNudge,
+	title: 'Components/RecipeCardLeftCol',
+	component: RecipeCardLeftCol,
 	args: {
 		pageId: 'food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-		editionId: 'UK',
 		recipeName: "Meera Sodha's spring onion pancakes",
 	},
 	parameters: {
 		chromatic: { viewports: [1300] }, // only meaningful at `from.wide`
 	},
-} satisfies Meta<typeof FeastRecipeNudge>;
+} satisfies Meta<typeof RecipeCardLeftCol>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -41,10 +40,6 @@ export const LongRecipeName: Story = {
 
 export const ShortRecipeName: Story = {
 	args: { recipeName: 'Pasta e fagioli' },
-};
-
-export const USEdition: Story = {
-	args: { editionId: 'US', recipeName: 'Buttermilk fried chicken' },
 };
 
 /**
@@ -86,7 +81,7 @@ export const InSectionContext: Story = {
 	],
 };
 
-/** Dark mode — card on a dark background */
+/** Dark mode */
 export const DefaultDark: Story = {
 	decorators: [darkDecorator([recipeFormat])],
 	args: { darkModeAvailable: true },
