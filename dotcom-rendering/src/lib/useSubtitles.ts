@@ -34,11 +34,12 @@ export const useSubtitles = ({
 			/* We currently only support one text track per video, so we are OK to access [0] here. */
 			if (!track) return;
 
-			/* Keep track in 'showing' mode for iOS reliability.
-			 * We'll hide the native subtitles with CSS instead
+			/* Use 'hidden' mode so cuechange events fire and activeCues are populated,
+			 * but native rendering is suppressed. The track mode is switched to
+			 * 'showing' only during fullscreen (managed in SelfHostedVideoPlayer).
 			 */
-			if (track.mode !== 'showing') {
-				track.mode = 'showing';
+			if (track.mode === 'disabled') {
+				track.mode = 'hidden';
 			}
 
 			setActiveTrack(track);
@@ -69,14 +70,6 @@ export const useSubtitles = ({
 			return;
 		}
 
-		/* Keep track in 'showing' mode.
-		 * this makes iOS more reliable with cuechange events and activeCues
-		 */
-		if (track.mode !== 'showing') {
-			track.mode = 'showing';
-		}
-
-		/* listen to cuechange and set the active cue */
 		const onCueChange = () => {
 			const list = track.activeCues;
 			if (!list || list.length === 0) {
@@ -98,8 +91,6 @@ export const useSubtitles = ({
 
 		return () => {
 			track.removeEventListener('cuechange', onCueChange);
-			/* Keep it showing even on cleanup for consistency */
-			track.mode = 'showing';
 		};
 	}, [activeTrack, shouldShow, currentTime]);
 

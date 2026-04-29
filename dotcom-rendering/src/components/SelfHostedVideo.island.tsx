@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
-import { from, space, until } from '@guardian/source/foundations';
+import { from, until } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -406,51 +406,20 @@ export const SelfHostedVideo = ({
 		currentTime,
 	});
 
-	const positionCues = useCallback((video: HTMLVideoElement) => {
-		const track = video.textTracks[0];
-		if (!track?.cues) return;
-
-		const isFullScreen =
-			document.fullscreenElement === video ||
-			('webkitDisplayingFullscreen' in video &&
-				video.webkitDisplayingFullscreen);
-
-		/**
-		 * In fullscreen, push cues above the native controls.
-		 * In normal view, use SubtitleOverlay instead (cues hidden via CSS).
-		 */
-		const pxFromBottom = isFullScreen ? space[18] : space[3];
-		const videoHeight = video.getBoundingClientRect().height;
-		if (videoHeight === 0) return;
-
-		const percentFromTop =
-			((videoHeight - pxFromBottom) / videoHeight) * 100;
-
-		for (const cue of Array.from(track.cues)) {
-			if (cue instanceof VTTCue) {
-				cue.snapToLines = false;
-				cue.line = percentFromTop;
-			}
-		}
-	}, []);
-
 	/**
-	 * On Safari mobile, webkit fullscreen is a native layer separate from the DOM.
-	 * The custom SubtitleOverlay div won't appear there, but native VTT cue rendering
-	 * will work if cues have their default (snap-to-lines) positioning.
-	 * positionCues() uses getBoundingClientRect() which returns 0 in the native layer,
-	 * so we must reset cues to defaults before entering webkit fullscreen.
+	 * Switch the native text track mode based on fullscreen state.
+	 * - 'showing' in fullscreen: native browser rendering handles captions inside the
+	 *   native fullscreen layer (required for iOS webkit fullscreen where the DOM is inaccessible).
+	 * - 'hidden' outside fullscreen: cuechange events still fire so useSubtitles can
+	 *   populate activeCue, but native rendering is suppressed in favour of SubtitleOverlay.
 	 */
-	const resetCuesToDefault = useCallback((video: HTMLVideoElement) => {
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
 		const track = video.textTracks[0];
-		if (!track?.cues) return;
-		for (const cue of Array.from(track.cues)) {
-			if (cue instanceof VTTCue) {
-				cue.snapToLines = true;
-				cue.line = -1;
-			}
-		}
-	}, []);
+		if (!track) return;
+		track.mode = isFullscreen ? 'showing' : 'hidden';
+	}, [isFullscreen]);
 
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
@@ -695,22 +664,12 @@ export const SelfHostedVideo = ({
 
 		const handleFullscreenChange = () => {
 			setIsFullscreen(!!document.fullscreenElement);
-			if (video) positionCues(video);
 		};
 		const handleWebkitEnter = () => {
-			/**
-			 * Add the class here (alongside setIsFullscreen) so that native cues become
-			 * visible at the exact same render cycle that hides the custom SubtitleOverlay.
-			 * Adding the class earlier (in handleFullscreenClick) causes a brief window where
-			 * both native cues and the custom overlay are visible simultaneously.
-			 */
-			video?.classList.add('ios-fullscreen-subtitles');
 			setIsFullscreen(true);
 		};
 		const handleWebkitExit = () => {
 			setIsFullscreen(false);
-			video?.classList.remove('ios-fullscreen-subtitles');
-			if (video) positionCues(video);
 		};
 
 		document.addEventListener('fullscreenchange', handleFullscreenChange);
@@ -744,16 +703,14 @@ export const SelfHostedVideo = ({
 			);
 			video?.removeEventListener('webkitendfullscreen', handleWebkitExit);
 		};
-	}, [positionCues]);
+	}, []);
 
 	if (adapted) {
 		return FallbackImageComponent;
 	}
 
 	const handleLoadedMetadata = () => {
-		const video = vidRef.current;
-		if (!video) return;
-		positionCues(video);
+		// metadata loaded; no action needed for subtitle positioning
 	};
 
 	const handleLoadedData = () => {
@@ -828,8 +785,6 @@ export const SelfHostedVideo = ({
 			if (webkitVideo.webkitDisplayingFullscreen) {
 				return webkitVideo.webkitExitFullscreen();
 			} else {
-				resetCuesToDefault(video);
-				video.classList.add('ios-fullscreen-subtitles'); // ← ADD THIS
 				return webkitVideo.webkitEnterFullscreen();
 			}
 		}

@@ -5,7 +5,6 @@ import type { ReactElement, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
-import { palette } from '../palette';
 import type { VideoPlayerFormat } from '../types/mainMedia';
 import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
 import {
@@ -33,34 +32,6 @@ const videoStyles = (aspectRatio: number) => css`
 
 const interactiveStyles = css`
 	cursor: pointer;
-`;
-
-const nativeSubtitleStyles = css`
-	::cue {
-		/* Hide the cue by default as we prefer the custom SubtitleOverlay */
-		visibility: hidden;
-		color: ${palette('--video-subtitle-text')};
-	}
-
-	/**
-	 * When entering iOS webkit fullscreen (webkitEnterFullscreen), the CSS
-	 * pseudo-classes :fullscreen and :-webkit-full-screen are NOT triggered —
-	 * they only apply to the standard requestFullscreen / webkitRequestFullscreen APIs.
-	 * Instead we add this class via JS immediately before calling webkitEnterFullscreen()
-	 * so that native cues are visible in the iOS native fullscreen player.
-	 */
-	&.ios-fullscreen-subtitles::cue {
-		visibility: visible;
-	}
-
-	/* Standard fullscreen API (desktop browsers) */
-	&:fullscreen::cue {
-		visibility: visible;
-	}
-
-	&:-webkit-full-screen::cue {
-		visibility: visible;
-	}
 `;
 
 const playIconStyles = css`
@@ -218,13 +189,10 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const showSubtitles = canShowSubtitles && !!subtitleSource;
 		const showProgressBar = canShowProgressBar && currentRefExists;
 		const showIcons = canShowIcons && currentRefExists;
-
+		console.log(showFullscreenIcon);
 		const dataLinkName = `gu-video-${videoStyle.toLowerCase()}-${
 			showPlayIcon ? 'play' : 'pause'
 		}-${atomId}`;
-
-		/* TODO:: remove after testing */
-		console.log(showFullscreenIcon);
 
 		return (
 			<>
@@ -234,7 +202,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 					css={[
 						videoStyles(aspectRatio),
 						isInteractive && interactiveStyles,
-						showSubtitles && nativeSubtitleStyles,
 					]}
 					controls={isFullscreen}
 					crossOrigin="anonymous"
@@ -269,10 +236,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 							type={mimeType}
 						/>
 					))}
-					{showSubtitles && (
+					{!!subtitleSource && (
 						<track
-							// Don't use default - it forces native rendering on iOS
-							default={false}
 							kind="subtitles"
 							src={subtitleSource}
 							srcLang="en"
