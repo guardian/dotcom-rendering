@@ -102,33 +102,56 @@ describe('NewsletterPreviewModal', () => {
 		document.body.removeChild(trigger);
 	});
 
-	it('calls onClose when clicking away from the dialog', () => {
-		const onClose = jest.fn();
+	it('calls onClose after the close animation when clicking away from the dialog', () => {
+		jest.useFakeTimers();
 
-		render(<NewsletterPreviewModal {...baseProps} onClose={onClose} />);
+		try {
+			const onClose = jest.fn();
 
-		const dialog = screen.getByRole('dialog');
-		const overlay = dialog.parentElement;
-		expect(overlay).not.toBeNull();
+			render(<NewsletterPreviewModal {...baseProps} onClose={onClose} />);
 
-		fireEvent.mouseDown(dialog);
-		expect(onClose).not.toHaveBeenCalled();
+			const dialog = screen.getByRole('dialog');
+			const overlay = dialog.parentElement;
+			expect(overlay).not.toBeNull();
 
-		fireEvent.mouseDown(overlay as HTMLElement);
-		expect(onClose).toHaveBeenCalledTimes(1);
+			fireEvent.mouseDown(dialog);
+			expect(onClose).not.toHaveBeenCalled();
+
+			fireEvent.mouseDown(overlay as HTMLElement);
+			expect(onClose).not.toHaveBeenCalled();
+
+			act(() => {
+				jest.advanceTimersByTime(225);
+			});
+
+			expect(onClose).toHaveBeenCalledTimes(1);
+		} finally {
+			jest.useRealTimers();
+		}
 	});
 
-	it('calls onClose when Escape is pressed while focus is inside dialog', () => {
-		const onClose = jest.fn();
+	it('calls onClose after the close animation when Escape is pressed inside the dialog', () => {
+		jest.useFakeTimers();
 
-		render(<NewsletterPreviewModal {...baseProps} onClose={onClose} />);
+		try {
+			const onClose = jest.fn();
 
-		const dialog = screen.getByRole('dialog');
-		dialog.focus();
+			render(<NewsletterPreviewModal {...baseProps} onClose={onClose} />);
 
-		fireEvent.keyDown(document, { key: 'Escape' });
+			const dialog = screen.getByRole('dialog');
+			dialog.focus();
 
-		expect(onClose).toHaveBeenCalledTimes(1);
+			fireEvent.keyDown(document, { key: 'Escape' });
+			expect(onClose).not.toHaveBeenCalled();
+
+			act(() => {
+				jest.advanceTimersByTime(225);
+			});
+
+			expect(onClose).toHaveBeenCalledTimes(1);
+		} finally {
+			jest.useRealTimers();
+		}
 	});
 
 	it('locks page scrolling while open and restores it on unmount', () => {
