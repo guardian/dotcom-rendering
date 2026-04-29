@@ -434,6 +434,24 @@ export const SelfHostedVideo = ({
 		}
 	}, []);
 
+	/**
+	 * On Safari mobile, webkit fullscreen is a native layer separate from the DOM.
+	 * The custom SubtitleOverlay div won't appear there, but native VTT cue rendering
+	 * will work if cues have their default (snap-to-lines) positioning.
+	 * positionCues() uses getBoundingClientRect() which returns 0 in the native layer,
+	 * so we must reset cues to defaults before entering webkit fullscreen.
+	 */
+	const resetCuesToDefault = useCallback((video: HTMLVideoElement) => {
+		const track = video.textTracks[0];
+		if (!track?.cues) return;
+		for (const cue of Array.from(track.cues)) {
+			if (cue instanceof VTTCue) {
+				cue.snapToLines = true;
+				cue.line = -1;
+			}
+		}
+	}, []);
+
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
 		if (!video) return;
@@ -679,7 +697,9 @@ export const SelfHostedVideo = ({
 			setIsFullscreen(!!document.fullscreenElement);
 			if (video) positionCues(video);
 		};
-		const handleWebkitEnter = () => setIsFullscreen(true);
+		const handleWebkitEnter = () => {
+			setIsFullscreen(true);
+		};
 		const handleWebkitExit = () => {
 			setIsFullscreen(false);
 			if (video) positionCues(video);
@@ -806,6 +826,14 @@ export const SelfHostedVideo = ({
 			if (webkitVideo.webkitDisplayingFullscreen) {
 				return webkitVideo.webkitExitFullscreen();
 			} else {
+				/**
+				 * Reset cue positioning BEFORE entering webkit fullscreen.
+				 * The native iOS fullscreen player captures VTT cue data (snapToLines, line)
+				 * when webkitEnterFullscreen() is called. If we wait for the webkitbeginfullscreen
+				 * event it is too late — the native layer has already read the cue properties
+				 * modified by positionCues(), which can place subtitles off-screen.
+				 */
+				resetCuesToDefault(video);
 				return webkitVideo.webkitEnterFullscreen();
 			}
 		}
@@ -1028,7 +1056,7 @@ export const SelfHostedVideo = ({
 						showIcons={showIcons}
 						controlsPosition={controlsPosition}
 						subtitlesPosition={subtitlesPosition}
-						activeCue={activeCue}
+						activeCue={isFullscreen ? null : activeCue}
 						shouldLoop={shouldLoop}
 						showFullscreenIcon={isDefault}
 						isInteractive={!isCinemagraph}
