@@ -289,15 +289,11 @@ export const Recipe: FEArticle = {
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RecipeBlockElement',
-					elementId: 'feast-recipe-spring-onion-pancakes',
 					id: 'e5a2cb2a63b788eae68ff654f739eff53a0cee28',
 					isAppReady: true,
-					webPublicationDate: '2021-02-06T10:30:38Z',
 					title: 'Spring onion pancakes with sesame sauce',
-					byline: ['Meera Sodha'],
 					description:
 						"The world of pancakes is so vast, it is hard to think that on Pancake Day, there could be only one type proffered across the world. This offering is for cong you bing, a flaky, coiled, spring onion pancake ubiquitous across China. It's as enjoyable to make as it is to eat and, happily, there's no whiff of abstinence about it.",
-					difficultyLevel: 'easy',
 					featuredImage: {
 						url: 'https://i.guim.co.uk/img/media/9dcb491db0315d5598fc47aa51d049e12eedcbbc/0_18_2831_3539/master/2831.jpg?width=620&dpr=2&s=none&crop=none',
 						mediaId: 'e5a2cb2a63b788eae68ff654f739eff53a0cee28',
@@ -305,123 +301,6 @@ export const Recipe: FEArticle = {
 						caption:
 							"Meera Sodha's spring onion pancakes with sesame sauce",
 					},
-					timings: [
-						{
-							qualifier: 'prep',
-							durationInMins: { min: 5, max: 5 },
-							text: '5 min',
-						},
-						{
-							qualifier: 'rest',
-							durationInMins: { min: 30, max: 30 },
-							text: '30 min',
-						},
-						{
-							qualifier: 'cooking',
-							durationInMins: { min: 60, max: 60 },
-							text: '1 hr',
-						},
-					],
-					serves: [
-						{
-							amount: { min: 4, max: 4 },
-							unit: 'pancakes',
-							text: '4 pancakes',
-						},
-						{
-							amount: { min: 2, max: 2 },
-							unit: 'people',
-							text: '2 for lunch',
-						},
-					],
-					cuisineIds: ['chinese'],
-					mealTypeIds: ['lunch'],
-					suitableForDietIds: ['vegan', 'dairy-free'],
-					celebrationIds: [],
-					techniquesUsedIds: ['frying', 'rolling'],
-					utensilsAndApplianceIds: ['rolling-pin', 'frying-pan'],
-					ingredients: [
-						{
-							recipeSection: 'For the pancakes',
-							ingredientsList: [
-								{
-									ingredientId: 'p1',
-									text: '275g plain flour, plus 2 tbsp extra',
-								},
-								{ ingredientId: 'p2', text: 'Fine sea salt' },
-								{ ingredientId: 'p3', text: 'Coconut oil' },
-								{
-									ingredientId: 'p4',
-									text: '½ tsp Chinese five spice powder',
-								},
-								{
-									ingredientId: 'p5',
-									text: '6 spring onions, trimmed and finely sliced',
-								},
-							],
-						},
-						{
-							recipeSection: 'For the sesame sauce',
-							ingredientsList: [
-								{ ingredientId: 's1', text: '30g tahini' },
-								{
-									ingredientId: 's2',
-									text: '75g sweet white miso',
-								},
-								{
-									ingredientId: 's3',
-									text: '1 tbsp toasted sesame oil',
-								},
-								{
-									ingredientId: 's4',
-									text: '2 tbsp white-wine vinegar',
-								},
-								{
-									ingredientId: 's5',
-									text: '½ tsp chilli oil sediment plus 1 tbsp oil',
-								},
-							],
-						},
-					],
-					instructions: [
-						{
-							stepNumber: 1,
-							description:
-								'Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough. Knead for five minutes, then cover and set aside to rest for 30 minutes.',
-						},
-						{
-							stepNumber: 2,
-							description:
-								'While the dough is resting, melt two tablespoons of coconut oil in a nonstick pan, then pour into a heatproof bowl. Add the five spice, the extra flour and a quarter-teaspoon of salt to the melted oil, stir and set aside.',
-						},
-						{
-							stepNumber: 3,
-							description:
-								'Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen, and set aside.',
-						},
-						{
-							stepNumber: 4,
-							description:
-								'Roll the rested dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix over the top and sprinkle over the spring onions. Roll up tightly into a cigar, cut into four slices, then press each slice into a round pancake about 13cm across.',
-						},
-						{
-							stepNumber: 5,
-							description:
-								'Fry each pancake in coconut oil for three to four minutes per side until golden brown. Keep warm while you cook the rest.',
-						},
-						{
-							stepNumber: 6,
-							description:
-								'Serve the pancakes hot with the sesame sauce for dipping or drizzling over the top.',
-						},
-					],
-					commerceCtas: [
-						{
-							sponsorName: 'Ocado',
-							territory: 'GB',
-							url: 'https://www.ocado.com/webshop/recipe/Spring-Onion-Pancakes/123456',
-						},
-					],
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',

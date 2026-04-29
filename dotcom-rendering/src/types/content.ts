@@ -529,17 +529,6 @@ export interface ProductSummaryElement {
 	variant: 'carousel' | 'stacked-default' | 'stacked-expanded';
 }
 
-export interface RecipeRange {
-	min: number | null;
-	max: number | null;
-}
-
-export interface RecipeCommerceCta {
-	sponsorName: string;
-	territory: string;
-	url: string;
-}
-
 export interface RecipeFeaturedImage {
 	url: string;
 	mediaId: string;
@@ -548,76 +537,18 @@ export interface RecipeFeaturedImage {
 	photographer?: string;
 	imageType?: string;
 	caption?: string;
-	mediaApiUrl?: string;
-}
-
-export interface RecipeTiming {
-	qualifier?: string;
-	durationInMins?: RecipeRange;
-	text?: string;
-}
-
-export interface RecipeServing {
-	amount?: RecipeRange | null;
-	unit?: string;
-	text?: string;
-}
-
-export interface RecipeIngredient {
-	name?: string;
-	text?: string;
-	unit?: string;
-	ingredientId?: string;
-	template?: string;
-	prefix?: string;
-	suffix?: string;
-	amount?: RecipeRange;
-	optional?: boolean;
-}
-
-export interface RecipeIngredientGroup {
-	recipeSection?: string;
-	ingredientsList?: RecipeIngredient[];
-}
-
-export interface RecipeInstruction {
-	description: string;
-	descriptionTemplate?: string;
-	stepNumber?: number;
-	images?: string[];
+	width?: number;
+	height?: number;
+	mediaApiUri?: string;
 }
 
 export interface RecipeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.RecipeBlockElement';
-	elementId: string;
-	/** Stable 32-char hex Feast recipe identifier. Deep-link: feast://recipes/{id} */
 	id: string;
-	/** Only show feast://recipes/{id} CTA when true */
-	isAppReady?: boolean;
-	canonicalArticle?: string;
-	composerId?: string;
-	webPublicationDate?: string;
 	title?: string;
 	description?: string;
-	bookCredit?: string;
-	difficultyLevel?: string;
+	isAppReady?: boolean;
 	featuredImage?: RecipeFeaturedImage;
-	/** Guardian tag paths e.g. "profile/yotamottolenghi" — use byline for display */
-	contributors?: string[];
-	/** Human-readable author names for display */
-	byline?: string[];
-	serves?: RecipeServing[];
-	timings?: RecipeTiming[];
-	ingredients?: RecipeIngredientGroup[];
-	instructions?: RecipeInstruction[];
-	/** Always present but may be empty */
-	commerceCtas?: RecipeCommerceCta[];
-	cuisineIds?: string[];
-	mealTypeIds?: string[];
-	suitableForDietIds?: string[];
-	celebrationIds?: string[];
-	techniquesUsedIds?: string[];
-	utensilsAndApplianceIds?: string[];
 }
 
 interface ProfileAtomBlockElement {

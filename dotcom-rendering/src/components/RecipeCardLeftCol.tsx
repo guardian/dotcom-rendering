@@ -17,7 +17,6 @@ const FEAST_BG = '#f7efe9';
 const FEAST_BG_DARK = '#1a1a0a';
 const FEAST_GREEN = '#68773c';
 const FEAST_GREEN_HOVER = '#4d5c2b';
-const FEAST_BORDER = 'rgba(104, 119, 60, 0.3)';
 
 // ── Deep-link helpers ─────────────────────────────────────────────────────────
 
@@ -46,9 +45,6 @@ const buildAppLink = (
  */
 export const stripHtmlTags = (html: string): string =>
 	html.replace(/<[^>]+>/g, '').trim();
-
-const slugToLabel = (s: string): string =>
-	s.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
 
 // ── Button themes ─────────────────────────────────────────────────────────────
 
@@ -144,31 +140,6 @@ const fullWidthButton = css`
 	justify-content: center;
 `;
 
-const dividerStyles = css`
-	border: none;
-	border-top: 1px solid ${FEAST_BORDER};
-	margin: ${space[2]}px 0;
-
-	[data-color-scheme='dark'] & {
-		border-top-color: rgba(104, 119, 60, 0.5);
-	}
-`;
-
-const dividerDarkMedia = css`
-	@media (prefers-color-scheme: dark) {
-		border-top-color: rgba(104, 119, 60, 0.5);
-	}
-`;
-
-const sectionTitleStyles = css`
-	${textSans12};
-	font-weight: 700;
-	color: ${FEAST_GREEN};
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-	margin: 0 0 ${space[1]}px;
-`;
-
 const appReadyBadgeStyles = css`
 	${textSans12};
 	display: inline-block;
@@ -187,23 +158,6 @@ const appReadyOffStyles = css`
 	color: ${sourcePalette.neutral[100]};
 `;
 
-const metaRowStyles = css`
-	${textSans15};
-	color: ${sourcePalette.neutral[46]};
-	display: flex;
-	gap: 4px;
-	margin: 0;
-
-	[data-color-scheme='dark'] & {
-		color: ${sourcePalette.neutral[60]};
-	}
-`;
-
-const metaLabelStyles = css`
-	font-weight: 700;
-	flex-shrink: 0;
-`;
-
 const descriptionStyles = css`
 	${textSans15};
 	color: ${sourcePalette.neutral[46]};
@@ -213,78 +167,6 @@ const descriptionStyles = css`
 	[data-color-scheme='dark'] & {
 		color: ${sourcePalette.neutral[60]};
 	}
-`;
-
-const customAttributesContainer = css`
-	display: flex;
-	flex-wrap: wrap;
-	gap: 4px;
-`;
-
-const tagStyles = css`
-	${textSans15};
-	background-color: rgba(104, 119, 60, 0.12);
-	color: ${FEAST_GREEN};
-	border-radius: 2px;
-	padding: 2px 6px;
-	text-transform: capitalize;
-
-	[data-color-scheme='dark'] & {
-		background-color: rgba(104, 119, 60, 0.25);
-	}
-`;
-
-const ingredientGroupStyles = css`
-	margin-bottom: ${space[1]}px;
-`;
-
-const ingredientGroupLabelStyles = css`
-	${textSans12};
-	color: ${sourcePalette.neutral[46]};
-	font-style: italic;
-	margin: 0 0 2px;
-
-	[data-color-scheme='dark'] & {
-		color: ${sourcePalette.neutral[60]};
-	}
-`;
-
-const ingredientListStyles = css`
-	${textSans15};
-	color: ${sourcePalette.neutral[46]};
-	margin: 0;
-	padding-left: ${space[4]}px;
-
-	li {
-		margin-bottom: 2px;
-	}
-
-	[data-color-scheme='dark'] & {
-		color: ${sourcePalette.neutral[60]};
-	}
-`;
-
-const instructionListStyles = css`
-	${textSans15};
-	color: ${sourcePalette.neutral[46]};
-	margin: 0;
-	padding-left: ${space[5]}px;
-
-	li {
-		margin-bottom: ${space[2]}px;
-	}
-
-	[data-color-scheme='dark'] & {
-		color: ${sourcePalette.neutral[60]};
-	}
-`;
-
-const commerceCtaLinkStyles = css`
-	${textSans15};
-	display: block;
-	color: ${FEAST_GREEN};
-	text-decoration: underline;
-	margin-bottom: ${space[1]}px;
 `;
 
 // ── Layout styles exported to ArticleRenderer ─────────────────────────────────
@@ -331,22 +213,8 @@ export const RecipeCardLeftCol = ({
 	darkModeAvailable = false,
 }: RecipeCardLeftColProps) => {
 	const title = recipe?.title ?? recipeName;
-	const byline = recipe?.byline ?? [];
 	const feastId = recipe?.id;
 	const image = recipe?.featuredImage;
-	const timings = recipe?.timings ?? [];
-	const serves = recipe?.serves ?? [];
-	const allTags = [
-		...(recipe?.cuisineIds ?? []),
-		...(recipe?.mealTypeIds ?? []),
-		...(recipe?.suitableForDietIds ?? []),
-		...(recipe?.celebrationIds ?? []),
-		...(recipe?.techniquesUsedIds ?? []),
-		...(recipe?.utensilsAndApplianceIds ?? []),
-	];
-	const ingredients = recipe?.ingredients ?? [];
-	const instructions = recipe?.instructions ?? [];
-	const commerceCtas = recipe?.commerceCtas ?? [];
 
 	return (
 		<div
@@ -379,18 +247,6 @@ export const RecipeCardLeftCol = ({
 					</div>
 				)}
 
-				{/* byline */}
-				{byline.length > 0 && (
-					<div
-						css={[
-							productNameFont,
-							darkModeAvailable && productNameDarkMedia,
-						]}
-					>
-						By {byline.join(', ')}
-					</div>
-				)}
-
 				{/* isAppReady */}
 				{recipe && (
 					<span
@@ -407,76 +263,9 @@ export const RecipeCardLeftCol = ({
 					</span>
 				)}
 
-				{/* webPublicationDate */}
-				{recipe?.webPublicationDate && (
-					<div
-						css={[
-							productNameFont,
-							darkModeAvailable && productNameDarkMedia,
-						]}
-					>
-						{new Date(recipe.webPublicationDate).toLocaleDateString(
-							'en-GB',
-							{
-								day: 'numeric',
-								month: 'long',
-								year: 'numeric',
-							},
-						)}
-					</div>
-				)}
-
-				{/* difficultyLevel */}
-				{recipe?.difficultyLevel && (
-					<p css={metaRowStyles}>
-						<span css={metaLabelStyles}>Difficulty</span>
-						{slugToLabel(recipe.difficultyLevel)}
-					</p>
-				)}
-
-				{/* timings — each entry */}
-				{timings.map((t, i) => (
-					<p key={i} css={metaRowStyles}>
-						<span css={metaLabelStyles}>
-							{t.qualifier ? slugToLabel(t.qualifier) : 'Time'}
-						</span>
-						{t.text ??
-							(t.durationInMins
-								? `${t.durationInMins.min ?? '?'}–${
-										t.durationInMins.max ?? '?'
-								  } min`
-								: '')}
-					</p>
-				))}
-
-				{/* serves — each entry */}
-				{serves.map((s, i) => (
-					<p key={i} css={metaRowStyles}>
-						<span css={metaLabelStyles}>Serves</span>
-						{s.text ??
-							(s.amount
-								? `${s.amount.min ?? '?'}–${
-										s.amount.max ?? '?'
-								  }${s.unit ? ` ${s.unit}` : ''}`
-								: '')}
-					</p>
-				))}
-
 				{/* description */}
 				{recipe?.description && (
 					<p css={descriptionStyles}>{recipe.description}</p>
-				)}
-
-				{/* bookCredit */}
-				{recipe?.bookCredit && (
-					<div
-						css={[
-							productNameFont,
-							darkModeAvailable && productNameDarkMedia,
-						]}
-					>
-						From: {recipe.bookCredit}
-					</div>
 				)}
 			</div>
 
@@ -520,106 +309,6 @@ export const RecipeCardLeftCol = ({
 					Save to My Feast
 				</LinkButton>
 			</div>
-
-			{/* cuisineIds · mealTypeIds · suitableForDietIds · celebrationIds · techniquesUsedIds · utensilsAndApplianceIds */}
-			{allTags.length > 0 && (
-				<>
-					<hr
-						css={[
-							dividerStyles,
-							darkModeAvailable && dividerDarkMedia,
-						]}
-					/>
-					<div css={customAttributesContainer}>
-						{allTags.map((tag) => (
-							<span key={tag} css={tagStyles}>
-								{slugToLabel(tag)}
-							</span>
-						))}
-					</div>
-				</>
-			)}
-
-			{/* ingredients */}
-			{ingredients.length > 0 && (
-				<>
-					<hr
-						css={[
-							dividerStyles,
-							darkModeAvailable && dividerDarkMedia,
-						]}
-					/>
-					<p css={sectionTitleStyles}>Ingredients</p>
-					{ingredients.map((group, gi) => (
-						<div key={gi} css={ingredientGroupStyles}>
-							{group.recipeSection && (
-								<p css={ingredientGroupLabelStyles}>
-									{group.recipeSection}
-								</p>
-							)}
-							<ul css={ingredientListStyles}>
-								{(group.ingredientsList ?? []).map(
-									(ing, ii) => (
-										<li
-											key={
-												ing.ingredientId ??
-												`${gi}-${ii}`
-											}
-										>
-											{ing.text}
-										</li>
-									),
-								)}
-							</ul>
-						</div>
-					))}
-				</>
-			)}
-
-			{/* instructions */}
-			{instructions.length > 0 && (
-				<>
-					<hr
-						css={[
-							dividerStyles,
-							darkModeAvailable && dividerDarkMedia,
-						]}
-					/>
-					<p css={sectionTitleStyles}>Method</p>
-					<ol css={instructionListStyles}>
-						{instructions.map((step, i) => (
-							<li key={step.stepNumber ?? i}>
-								{step.description}
-							</li>
-						))}
-					</ol>
-				</>
-			)}
-
-			{/* commerceCtas */}
-			{commerceCtas.length > 0 && (
-				<>
-					<hr
-						css={[
-							dividerStyles,
-							darkModeAvailable && dividerDarkMedia,
-						]}
-					/>
-					<p css={sectionTitleStyles}>Buy ingredients</p>
-					{commerceCtas.map((cta) => (
-						<a
-							key={cta.url}
-							href={cta.url}
-							css={commerceCtaLinkStyles}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{cta.sponsorName}
-							{cta.territory ? ` (${cta.territory})` : ''}
-						</a>
-					))}
-				</>
-			)}
 		</div>
 	);
 };
