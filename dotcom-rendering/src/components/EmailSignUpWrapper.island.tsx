@@ -155,14 +155,14 @@ export const EmailSignUpWrapper = ({
 					renderingTarget={renderingTarget}
 					isSignedIn={isSignedIn}
 				>
-					{(openPreview) => (
+					{(previewAction) => (
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<NewsletterSignupForm
 								newsletterId={identityName}
 								newsletterName={name}
 								frequency={frequency}
 								hidePrivacyMessage={isSignedIn === true}
-								onPreviewClick={openPreview}
+								previewAction={previewAction}
 								isAlreadySubscribed={isSubscribed}
 								abTest={{
 									name: AB_TEST_NAME,
