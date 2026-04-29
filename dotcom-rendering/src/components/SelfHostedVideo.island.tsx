@@ -813,18 +813,12 @@ export const SelfHostedVideo = ({
 
 	const handleFullscreenClick = (event: React.SyntheticEvent) => {
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
-		event.stopPropagation(); // Don't pause the video
+		event.stopPropagation();
 
 		const video = vidRef.current;
 		if (!video) return;
 
 		if (shouldUseWebkitFullscreen(video)) {
-			/***
-			 * webkit fullscreen methods are not part of the standard HTMLVideoElement
-			 * type definition as they are iOS only.
-			 * We need to extend the type expect these handlers when we're on iOS to keep TS happy.
-			 * @see https://developer.apple.com/documentation/webkitjs/htmlvideoelement/1633500-webkitenterfullscreen
-			 */
 			const webkitVideo = video as HTMLVideoElement & {
 				webkitDisplayingFullscreen: boolean;
 				webkitEnterFullscreen: () => void;
@@ -834,17 +828,8 @@ export const SelfHostedVideo = ({
 			if (webkitVideo.webkitDisplayingFullscreen) {
 				return webkitVideo.webkitExitFullscreen();
 			} else {
-				/**
-				 * Reset cue positioning BEFORE entering webkit fullscreen so the native iOS
-				 * player doesn't render cues at the custom overlay positions (which can be off-screen).
-				 *
-				 * Also add the ios-fullscreen-subtitles class BEFORE calling webkitEnterFullscreen().
-				 * The CSS pseudo-classes :fullscreen and :-webkit-full-screen are NOT triggered by
-				 * webkitEnterFullscreen() on iOS — they only apply to the standard requestFullscreen
-				 * API. Without this class, ::cue { visibility: hidden } stays active in the native
-				 * fullscreen player and subtitles are never shown.
-				 */
 				resetCuesToDefault(video);
+				video.classList.add('ios-fullscreen-subtitles'); // ← ADD THIS
 				return webkitVideo.webkitEnterFullscreen();
 			}
 		}
@@ -854,7 +839,6 @@ export const SelfHostedVideo = ({
 		}
 		void video.requestFullscreen();
 	};
-
 	/**
 	 * If the video was paused and we know that it wasn't paused by the user
 	 * or the intersection observer, we can deduce that it was paused by the
