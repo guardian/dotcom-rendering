@@ -180,17 +180,6 @@ const tertiaryButtonTheme: Partial<ThemeButton> = {
 	backgroundTertiaryHover: palette('--newsletter-preview-button-hover'),
 };
 
-const previewLinkButtonStyles = css`
-	&&,
-	&&:hover,
-	&&:focus,
-	&&:visited {
-		color: ${palette('--newsletter-preview-button-text')};
-		text-decoration: none;
-		border-color: ${palette('--newsletter-preview-button-border')};
-	}
-`;
-
 const PreviewButton = ({
 	previewAction,
 	size = 'default',
@@ -200,6 +189,7 @@ const PreviewButton = ({
 }) =>
 	previewAction.behaviour === 'link' ? (
 		<LinkButton
+			data-ignore="global-link-styling"
 			priority="tertiary"
 			icon={<SvgEye />}
 			iconSide="left"
@@ -209,7 +199,6 @@ const PreviewButton = ({
 			onClick={previewAction.onClick}
 			size={size}
 			theme={tertiaryButtonTheme}
-			cssOverrides={previewLinkButtonStyles}
 		>
 			Preview latest
 		</LinkButton>
