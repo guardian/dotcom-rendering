@@ -149,4 +149,25 @@ describe('EnhanceAffiliateLinks', () => {
 		);
 		expect(link?.href).not.toContain('refgrow');
 	});
+
+	it('replaces an existing xcust search param instead of appending another', () => {
+		Object.defineProperty(document, 'referrer', {
+			value: 'https://foo.com',
+			configurable: true,
+		});
+
+		document.body.innerHTML = `
+			<a href="https://go.skimresources.com/?id=12345&xcust=referrer%7Cold.example%7CaccountId%7C12345">Skimlink</a>
+		`;
+
+		render(<EnhanceAffiliateLinks />);
+
+		const link = document.querySelector('a');
+		const updatedUrl = new URL(link?.href ?? '');
+
+		expect(updatedUrl.searchParams.getAll('xcust')).toHaveLength(1);
+		expect(updatedUrl.searchParams.get('xcust')).toContain(
+			'referrer|foo.com|accountId|12345',
+		);
+	});
 });
