@@ -5218,6 +5218,9 @@
                 "googleRecaptchaSiteKeyVisible": {
                     "type": "string"
                 },
+                "hasPageSkin": {
+                    "type": "boolean"
+                },
                 "pageId": {
                     "type": "string"
                 },
@@ -5250,6 +5253,372 @@
                 },
                 "hasSurveyAd": {
                     "type": "boolean"
+                },
+                "tones": {
+                    "type": "string"
+                },
+                "avatarApiUrl": {
+                    "type": "string"
+                },
+                "isSplash": {
+                    "type": "boolean"
+                },
+                "isColumn": {
+                    "type": "boolean"
+                },
+                "membershipUrl": {
+                    "type": "string"
+                },
+                "isImmersive": {
+                    "type": "boolean"
+                },
+                "isProd": {
+                    "type": "boolean"
+                },
+                "membershipAccess": {
+                    "type": "string"
+                },
+                "allowUserGeneratedContent": {
+                    "type": "boolean"
+                },
+                "commissioningDesks": {
+                    "type": "string"
+                },
+                "forecastsapiurl": {
+                    "type": "string"
+                },
+                "supportUrl": {
+                    "type": "string"
+                },
+                "isNumberedList": {
+                    "type": "boolean"
+                },
+                "idOAuthUrl": {
+                    "type": "string"
+                },
+                "webTitle": {
+                    "type": "string"
+                },
+                "idWebAppUrl": {
+                    "type": "string"
+                },
+                "a9PublisherId": {
+                    "type": "string"
+                },
+                "isFront": {
+                    "type": "boolean"
+                },
+                "inBodyInternalLinkCount": {
+                    "type": "number"
+                },
+                "googleSearchUrl": {
+                    "type": "string"
+                },
+                "inBodyExternalLinkCount": {
+                    "type": "number"
+                },
+                "lightboxImages": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "headline": {
+                            "type": "string"
+                        },
+                        "shouldHideAdverts": {
+                            "type": "boolean"
+                        },
+                        "standfirst": {
+                            "type": "string"
+                        },
+                        "images": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "caption": {
+                                        "type": "string"
+                                    },
+                                    "credit": {
+                                        "type": "string"
+                                    },
+                                    "displayCredit": {
+                                        "type": "boolean"
+                                    },
+                                    "src": {
+                                        "type": "string"
+                                    },
+                                    "srcsets": {
+                                        "type": "string"
+                                    },
+                                    "sizes": {
+                                        "type": "string"
+                                    },
+                                    "ratio": {
+                                        "type": "number"
+                                    },
+                                    "role": {
+                                        "type": "string"
+                                    },
+                                    "parentContentId": {
+                                        "type": "string"
+                                    },
+                                    "id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "googleSearchId": {
+                    "type": "string"
+                },
+                "omnitureAmpAccount": {
+                    "type": "string"
+                },
+                "dfpAdUnitRoot": {
+                    "type": "string"
+                },
+                "blogIds": {
+                    "type": "string"
+                },
+                "sectionName": {
+                    "type": "string"
+                },
+                "hasMultipleVideosInPage": {
+                    "type": "boolean"
+                },
+                "hasShowcaseMainElement": {
+                    "type": "boolean"
+                },
+                "fbAppId": {
+                    "type": "string"
+                },
+                "isContent": {
+                    "type": "boolean"
+                },
+                "plistaPublicApiKey": {
+                    "type": "string"
+                },
+                "wordCount": {
+                    "type": "number"
+                },
+                "cardStyle": {
+                    "type": "string"
+                },
+                "ophanEmbedJsUrl": {
+                    "type": "string"
+                },
+                "frontendSentryDsn": {
+                    "type": "string"
+                },
+                "blogs": {
+                    "type": "string"
+                },
+                "userAttributesApiUrl": {
+                    "type": "string"
+                },
+                "disableStickyTopBanner": {
+                    "type": "boolean"
+                },
+                "dfpHost": {
+                    "type": "string"
+                },
+                "weatherapiurl": {
+                    "type": "string"
+                },
+                "shortUrl": {
+                    "type": "string"
+                },
+                "thumbnail": {
+                    "type": "string"
+                },
+                "pillar": {
+                    "type": "string"
+                },
+                "beaconUrl": {
+                    "type": "string"
+                },
+                "commentable": {
+                    "type": "boolean"
+                },
+                "ophanJsUrl": {
+                    "type": "string"
+                },
+                "contributorBio": {
+                    "type": "string"
+                },
+                "isHosted": {
+                    "type": "boolean"
+                },
+                "facebookIaAdUnitRoot": {
+                    "type": "string"
+                },
+                "sponsorshipType": {
+                    "type": "string"
+                },
+                "isAdFree": {
+                    "type": "boolean"
+                },
+                "stripePublicToken": {
+                    "type": "string"
+                },
+                "omnitureAccount": {
+                    "type": "string"
+                },
+                "locationapiurl": {
+                    "type": "string"
+                },
+                "authorIds": {
+                    "type": "string"
+                },
+                "hasYouTubeAtom": {
+                    "type": "boolean"
+                },
+                "externalEmbedHost": {
+                    "type": "string"
+                },
+                "thirdPartyAppsAccount": {
+                    "type": "string"
+                },
+                "byline": {
+                    "type": "string"
+                },
+                "contentId": {
+                    "type": "string"
+                },
+                "nonKeywordTagIds": {
+                    "type": "string"
+                },
+                "mobileAppsAdUnitRoot": {
+                    "type": "string"
+                },
+                "requiresMembershipAccess": {
+                    "type": "boolean"
+                },
+                "optimizeEpicUrl": {
+                    "type": "string"
+                },
+                "assetsPath": {
+                    "type": "string"
+                },
+                "richLink": {
+                    "type": "string"
+                },
+                "campaigns": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "rules": {
+                                "type": "array",
+                                "items": {}
+                            },
+                            "priority": {
+                                "type": "number"
+                            },
+                            "displayOnSensitive": {
+                                "type": "boolean"
+                            },
+                            "fields": {
+                                "type": "object",
+                                "properties": {
+                                    "campaignId": {
+                                        "type": "string"
+                                    },
+                                    "_type": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "pageCode": {
+                    "type": "string"
+                },
+                "avatarImagesUrl": {
+                    "type": "string"
+                },
+                "publication": {
+                    "type": "string"
+                },
+                "buildNumber": {
+                    "type": "string"
+                },
+                "atomTypes": {
+                    "type": "object",
+                    "properties": {
+                        "review": {
+                            "type": "boolean"
+                        },
+                        "guide": {
+                            "type": "boolean"
+                        },
+                        "audio": {
+                            "type": "boolean"
+                        },
+                        "explainer": {
+                            "type": "boolean"
+                        },
+                        "interactive": {
+                            "type": "boolean"
+                        },
+                        "profile": {
+                            "type": "boolean"
+                        },
+                        "chart": {
+                            "type": "boolean"
+                        },
+                        "quizz": {
+                            "type": "boolean"
+                        },
+                        "callToAction": {
+                            "type": "boolean"
+                        },
+                        "commonsdivision": {
+                            "type": "boolean"
+                        },
+                        "timeline": {
+                            "type": "boolean"
+                        },
+                        "media": {
+                            "type": "boolean"
+                        },
+                        "qanda": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "onwardWebSocket": {
+                    "type": "string"
+                },
+                "productionOffice": {
+                    "type": "string"
+                },
+                "shouldHideAdverts": {
+                    "type": "boolean"
+                },
+                "pbIndexSites": {},
+                "googletagJsUrl": {
+                    "type": "string"
+                },
+                "atoms": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "calloutsUrl": {
+                    "type": "string"
                 }
             },
             "required": [

@@ -43,7 +43,7 @@ export interface Switches {
  * constructed in frontend and passed to dotcom-rendering
  * this data could eventually be defined in dotcom-rendering
  */
-export interface ConfigType extends CommercialConfigType {
+export interface ConfigType extends CommercialConfigType, LegacyConfig {
 	dcrCouldRender?: boolean;
 	ajaxUrl: string;
 	sentryPublicApiKey: string;
@@ -88,4 +88,130 @@ export interface ConfigType extends CommercialConfigType {
 	isPreview?: boolean;
 	googleRecaptchaSiteKey?: string;
 	googleRecaptchaSiteKeyVisible?: string;
+	hasPageSkin?: boolean;
+}
+
+/** Legacy fields seemingly not used in DCR */
+interface LegacyConfig {
+	tones?: string;
+	avatarApiUrl?: string;
+	isSplash?: boolean;
+	isColumn?: boolean;
+	membershipUrl?: string;
+	isImmersive?: boolean;
+	isProd?: boolean;
+	membershipAccess?: string;
+	allowUserGeneratedContent?: boolean;
+	commissioningDesks?: string;
+	forecastsapiurl?: string;
+	supportUrl?: string;
+	isNumberedList?: boolean;
+	idOAuthUrl?: string;
+	webTitle?: string;
+	idWebAppUrl?: string;
+	a9PublisherId?: string;
+	isFront?: boolean;
+	inBodyInternalLinkCount?: number;
+	googleSearchUrl?: string;
+	inBodyExternalLinkCount?: number;
+	lightboxImages?: {
+		id?: string;
+		headline?: string;
+		shouldHideAdverts?: boolean;
+		standfirst?: string;
+		images?: Array<{
+			caption?: string;
+			credit?: string;
+			displayCredit?: boolean;
+			src?: string;
+			srcsets?: string;
+			sizes?: string;
+			ratio?: number;
+			role?: string;
+			parentContentId?: string;
+			id?: string;
+		}>;
+	};
+	googleSearchId?: string;
+	omnitureAmpAccount?: string;
+	dfpAdUnitRoot?: string;
+	blogIds?: string;
+	sectionName?: string;
+	hasMultipleVideosInPage?: boolean;
+	hasShowcaseMainElement?: boolean;
+	fbAppId?: string;
+	isContent?: boolean;
+	plistaPublicApiKey?: string;
+	wordCount?: number;
+	cardStyle?: string;
+	ophanEmbedJsUrl?: string;
+	frontendSentryDsn?: string;
+	blogs?: string;
+	userAttributesApiUrl?: string;
+	disableStickyTopBanner?: boolean;
+	dfpHost?: string;
+	weatherapiurl?: string;
+	shortUrl?: string;
+	thumbnail?: string;
+	pillar?: string;
+	beaconUrl?: string;
+	commentable?: boolean;
+	ophanJsUrl?: string;
+	contributorBio?: string;
+	isHosted?: boolean;
+	facebookIaAdUnitRoot?: string;
+	sponsorshipType?: string;
+	isAdFree?: boolean;
+	stripePublicToken?: string;
+	omnitureAccount?: string;
+	locationapiurl?: string;
+	authorIds?: string;
+	hasYouTubeAtom?: boolean;
+	externalEmbedHost?: string;
+	thirdPartyAppsAccount?: string;
+	byline?: string;
+	contentId?: string;
+	nonKeywordTagIds?: string;
+	mobileAppsAdUnitRoot?: string;
+	requiresMembershipAccess?: boolean;
+	optimizeEpicUrl?: string;
+	assetsPath?: string;
+	richLink?: string;
+	campaigns?: Array<{
+		id?: string;
+		name?: string;
+		rules?: Array<unknown>;
+		priority?: number;
+		displayOnSensitive?: boolean;
+		fields?: {
+			campaignId?: string;
+			_type?: string;
+		};
+	}>;
+	pageCode?: string;
+	avatarImagesUrl?: string;
+	publication?: string;
+	buildNumber?: string;
+	atomTypes?: {
+		review?: boolean;
+		guide?: boolean;
+		audio?: boolean;
+		explainer?: boolean;
+		interactive?: boolean;
+		profile?: boolean;
+		chart?: boolean;
+		quizz?: boolean;
+		callToAction?: boolean;
+		commonsdivision?: boolean;
+		timeline?: boolean;
+		media?: boolean;
+		qanda?: boolean;
+	};
+	onwardWebSocket?: string;
+	productionOffice?: string;
+	shouldHideAdverts?: boolean;
+	pbIndexSites?: unknown;
+	googletagJsUrl?: string;
+	atoms?: Array<string>;
+	calloutsUrl?: string;
 }
