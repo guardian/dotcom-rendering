@@ -171,7 +171,9 @@ describe('NewsletterSignupCardContainer', () => {
 			expect.objectContaining({
 				action: 'EXPAND',
 				component: expect.objectContaining({
-					id: 'DCR NewsletterPreview morning-briefing',
+					id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+						defaultProps.identityName,
+					),
 				}),
 			}),
 			'Apps',
