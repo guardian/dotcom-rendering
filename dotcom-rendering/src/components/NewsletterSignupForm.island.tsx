@@ -237,6 +237,7 @@ const SuccessMessage = ({
 				priority="tertiary"
 				theme={tertiaryButtonTheme}
 				cssOverrides={tryAgainButtonStyles}
+				data-ignore="global-link-styling"
 			>
 				Browse more newsletters
 			</LinkButton>
