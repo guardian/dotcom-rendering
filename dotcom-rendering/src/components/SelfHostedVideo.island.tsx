@@ -698,6 +698,13 @@ export const SelfHostedVideo = ({
 			if (video) positionCues(video);
 		};
 		const handleWebkitEnter = () => {
+			/**
+			 * Add the class here (alongside setIsFullscreen) so that native cues become
+			 * visible at the exact same render cycle that hides the custom SubtitleOverlay.
+			 * Adding the class earlier (in handleFullscreenClick) causes a brief window where
+			 * both native cues and the custom overlay are visible simultaneously.
+			 */
+			video?.classList.add('ios-fullscreen-subtitles');
 			setIsFullscreen(true);
 		};
 		const handleWebkitExit = () => {
@@ -838,7 +845,6 @@ export const SelfHostedVideo = ({
 				 * fullscreen player and subtitles are never shown.
 				 */
 				resetCuesToDefault(video);
-				video.classList.add('ios-fullscreen-subtitles');
 				return webkitVideo.webkitEnterFullscreen();
 			}
 		}
