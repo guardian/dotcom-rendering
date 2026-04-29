@@ -143,6 +143,7 @@ export type Props = {
 	isInteractive: boolean;
 	controlsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
+	isFullscreen: boolean;
 };
 
 /**
@@ -196,6 +197,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			controlsPosition,
 			subtitlesPosition,
+			isFullscreen,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -211,6 +213,9 @@ export const SelfHostedVideoPlayer = forwardRef(
 			showPlayIcon ? 'play' : 'pause'
 		}-${atomId}`;
 
+		/* TODO:: remove after testing */
+		console.log(showFullscreenIcon);
+
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
@@ -221,6 +226,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						isInteractive && interactiveStyles,
 						showSubtitles && nativeSubtitleStyles,
 					]}
+					controls={isFullscreen}
 					crossOrigin="anonymous"
 					ref={ref}
 					tabIndex={0}
@@ -308,7 +314,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 								smallIconsPositionStyles(controlsPosition),
 						]}
 					>
-						{showFullscreenIcon && (
+						{true && (
 							<FullscreenIcon
 								handleClick={handleFullscreenClick}
 								atomId={atomId}

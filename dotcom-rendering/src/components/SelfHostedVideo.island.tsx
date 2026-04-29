@@ -360,6 +360,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
+	const [isFullscreen, setIsFullscreen] = useState(false);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -404,6 +405,34 @@ export const SelfHostedVideo = ({
 		playerState,
 		currentTime,
 	});
+
+	const positionCues = useCallback((video: HTMLVideoElement) => {
+		const track = video.textTracks[0];
+		if (!track?.cues) return;
+
+		const isFullScreen =
+			document.fullscreenElement === video ||
+			('webkitDisplayingFullscreen' in video &&
+				video.webkitDisplayingFullscreen);
+
+		/**
+		 * In fullscreen, push cues above the native controls.
+		 * In normal view, use SubtitleOverlay instead (cues hidden via CSS).
+		 */
+		const pxFromBottom = isFullScreen ? space[18] : space[3];
+		const videoHeight = video.getBoundingClientRect().height;
+		if (videoHeight === 0) return;
+
+		const percentFromTop =
+			((videoHeight - pxFromBottom) / videoHeight) * 100;
+
+		for (const cue of Array.from(track.cues)) {
+			if (cue instanceof VTTCue) {
+				cue.snapToLines = false;
+				cue.line = percentFromTop;
+			}
+		}
+	}, []);
 
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
@@ -643,26 +672,55 @@ export const SelfHostedVideo = ({
 		}
 	}, [shouldAutoplay, isInView, playerState]);
 
+	useEffect(() => {
+		const video = vidRef.current;
+
+		const handleFullscreenChange = () => {
+			setIsFullscreen(!!document.fullscreenElement);
+			if (video) positionCues(video);
+		};
+		const handleWebkitEnter = () => setIsFullscreen(true);
+		const handleWebkitExit = () => {
+			setIsFullscreen(false);
+			if (video) positionCues(video);
+		};
+
+		document.addEventListener('fullscreenchange', handleFullscreenChange);
+		document.addEventListener(
+			'webkitfullscreenchange',
+			handleFullscreenChange,
+		);
+		document.addEventListener(
+			'mozfullscreenchange',
+			handleFullscreenChange,
+		);
+		video?.addEventListener('webkitbeginfullscreen', handleWebkitEnter);
+		video?.addEventListener('webkitendfullscreen', handleWebkitExit);
+
+		return () => {
+			document.removeEventListener(
+				'fullscreenchange',
+				handleFullscreenChange,
+			);
+			document.removeEventListener(
+				'webkitfullscreenchange',
+				handleFullscreenChange,
+			);
+			document.removeEventListener(
+				'mozfullscreenchange',
+				handleFullscreenChange,
+			);
+			video?.removeEventListener(
+				'webkitbeginfullscreen',
+				handleWebkitEnter,
+			);
+			video?.removeEventListener('webkitendfullscreen', handleWebkitExit);
+		};
+	}, [positionCues]);
+
 	if (adapted) {
 		return FallbackImageComponent;
 	}
-
-	const positionCues = (video: HTMLVideoElement) => {
-		const track = video.textTracks[0];
-		if (!track?.cues) return;
-
-		const pxFromBottom = space[3];
-		const videoHeight = video.getBoundingClientRect().height;
-		const percentFromTop =
-			((videoHeight - pxFromBottom) / videoHeight) * 100;
-
-		for (const cue of Array.from(track.cues)) {
-			if (cue instanceof VTTCue) {
-				cue.snapToLines = false;
-				cue.line = percentFromTop;
-			}
-		}
-	};
 
 	const handleLoadedMetadata = () => {
 		const video = vidRef.current;
@@ -756,21 +814,6 @@ export const SelfHostedVideo = ({
 			void document.exitFullscreen();
 		}
 		void video.requestFullscreen();
-
-		/* Reposition cues after fullscreen transition settles */
-		video.addEventListener('fullscreenchange', () => positionCues(video), {
-			once: true,
-		});
-		video.addEventListener(
-			'webkitbeginfullscreen',
-			() => positionCues(video),
-			{ once: true },
-		);
-		video.addEventListener(
-			'webkitendfullscreen',
-			() => positionCues(video),
-			{ once: true },
-		);
 	};
 
 	/**
@@ -989,6 +1032,7 @@ export const SelfHostedVideo = ({
 						shouldLoop={shouldLoop}
 						showFullscreenIcon={isDefault}
 						isInteractive={!isCinemagraph}
+						isFullscreen={isFullscreen}
 					/>
 				</div>
 			</div>
