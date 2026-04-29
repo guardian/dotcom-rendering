@@ -738,6 +738,9 @@
                     "$ref": "#/definitions/QuizAtomBlockElement"
                 },
                 {
+                    "$ref": "#/definitions/RecipeBlockElement"
+                },
+                {
                     "$ref": "#/definitions/RichLinkBlockElement"
                 },
                 {
@@ -3388,6 +3391,37 @@
                 "resultBuckets",
                 "resultGroups"
             ]
+        },
+        "RecipeFeaturedImage": {
+            "type": "object",
+            "properties": {
+                "url": { "type": "string" },
+                "mediaId": { "type": "string" },
+                "cropId": { "type": "string" },
+                "source": { "type": "string" },
+                "photographer": { "type": "string" },
+                "caption": { "type": "string" },
+                "imageType": { "type": "string" },
+                "width": { "type": "number" },
+                "height": { "type": "number" },
+                "mediaApiUri": { "type": "string" }
+            },
+            "required": ["url", "mediaId", "cropId"]
+        },
+        "RecipeBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.RecipeBlockElement"
+                },
+                "elementId": { "type": "string" },
+                "id": { "type": "string" },
+                "title": { "type": "string" },
+                "description": { "type": "string" },
+                "featuredImage": { "$ref": "#/definitions/RecipeFeaturedImage" }
+            },
+            "required": ["_type", "id"]
         },
         "RichLinkBlockElement": {
             "type": "object",

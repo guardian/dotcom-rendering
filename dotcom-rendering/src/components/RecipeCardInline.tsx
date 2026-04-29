@@ -5,7 +5,6 @@ import {
 	headlineMedium24,
 	palette as sourcePalette,
 	space,
-	textSans15,
 	textSans17,
 	textSans20,
 	textSansBold17,
@@ -205,24 +204,6 @@ const detailsAreaDarkMedia = css`
 	}
 `;
 
-const appReadyBadgeStyles = css`
-	${textSans15};
-	display: inline-block;
-	border-radius: 2px;
-	padding: 2px 8px;
-	font-weight: 700;
-`;
-
-const appReadyOnStyles = css`
-	background-color: ${FEAST_GREEN};
-	color: ${sourcePalette.neutral[100]};
-`;
-
-const appReadyOffStyles = css`
-	background-color: ${sourcePalette.neutral[60]};
-	color: ${sourcePalette.neutral[100]};
-`;
-
 const descriptionStyles = css`
 	${textSans17};
 	color: ${sourcePalette.neutral[46]};
@@ -278,7 +259,7 @@ export const RecipeCardInline = ({
 				</div>
 			)}
 
-			{/* info: title · id · isAppReady */}
+			{/* info: title · id */}
 			<div css={productInfoContainer}>
 				{/* title */}
 				{title && (
@@ -303,27 +284,11 @@ export const RecipeCardInline = ({
 						ID: {feastId}
 					</div>
 				)}
-
-				{/* isAppReady */}
-				{recipe && (
-					<span
-						css={[
-							appReadyBadgeStyles,
-							recipe.isAppReady
-								? appReadyOnStyles
-								: appReadyOffStyles,
-						]}
-					>
-						{recipe.isAppReady
-							? '✓ Live in Feast'
-							: '○ Not in Feast'}
-					</span>
-				)}
 			</div>
 
 			{/* buttons */}
 			<div css={buttonWrapper}>
-				{recipe?.isAppReady && feastId && (
+				{feastId && (
 					<LinkButton
 						priority="primary"
 						size="small"
@@ -335,12 +300,10 @@ export const RecipeCardInline = ({
 					</LinkButton>
 				)}
 				<LinkButton
-					priority={recipe?.isAppReady ? 'secondary' : 'primary'}
+					priority="secondary"
 					size="small"
 					href={buildAppLink(pageId, 'RecipeNudge_CookMode', feastId)}
-					theme={
-						recipe?.isAppReady ? secondaryCtaTheme : primaryCtaTheme
-					}
+					theme={secondaryCtaTheme}
 					data-ignore="global-link-styling"
 				>
 					Open in Cook Mode

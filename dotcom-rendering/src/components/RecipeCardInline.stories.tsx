@@ -13,7 +13,6 @@ const recipeFormat = {
 const mockRecipe: RecipeBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.RecipeBlockElement',
 	id: 'a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4',
-	isAppReady: true,
 	title: "Meera Sodha's spring onion pancakes",
 	description:
 		'Crisp and savoury, these spring onion pancakes are a perfect weekend brunch or a quick weeknight snack. Serve with the chilli oil for a serious kick.',

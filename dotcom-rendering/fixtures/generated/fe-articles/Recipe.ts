@@ -290,7 +290,6 @@ export const Recipe: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.RecipeBlockElement',
 					id: 'e5a2cb2a63b788eae68ff654f739eff53a0cee28',
-					isAppReady: true,
 					title: 'Spring onion pancakes with sesame sauce',
 					description:
 						"The world of pancakes is so vast, it is hard to think that on Pancake Day, there could be only one type proffered across the world. This offering is for cong you bing, a flaky, coiled, spring onion pancake ubiquitous across China. It's as enjoyable to make as it is to eat and, happily, there's no whiff of abstinence about it.",

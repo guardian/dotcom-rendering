@@ -4,7 +4,6 @@ import {
 	headlineMedium17,
 	palette as sourcePalette,
 	space,
-	textSans12,
 	textSans15,
 	textSans17,
 } from '@guardian/source/foundations';
@@ -140,24 +139,6 @@ const fullWidthButton = css`
 	justify-content: center;
 `;
 
-const appReadyBadgeStyles = css`
-	${textSans12};
-	display: inline-block;
-	border-radius: 2px;
-	padding: 2px 6px;
-	font-weight: 700;
-`;
-
-const appReadyOnStyles = css`
-	background-color: ${FEAST_GREEN};
-	color: ${sourcePalette.neutral[100]};
-`;
-
-const appReadyOffStyles = css`
-	background-color: ${sourcePalette.neutral[60]};
-	color: ${sourcePalette.neutral[100]};
-`;
-
 const descriptionStyles = css`
 	${textSans15};
 	color: ${sourcePalette.neutral[46]};
@@ -247,22 +228,6 @@ export const RecipeCardLeftCol = ({
 					</div>
 				)}
 
-				{/* isAppReady */}
-				{recipe && (
-					<span
-						css={[
-							appReadyBadgeStyles,
-							recipe.isAppReady
-								? appReadyOnStyles
-								: appReadyOffStyles,
-						]}
-					>
-						{recipe.isAppReady
-							? '✓ Live in Feast'
-							: '○ Not in Feast'}
-					</span>
-				)}
-
 				{/* description */}
 				{recipe?.description && (
 					<p css={descriptionStyles}>{recipe.description}</p>
@@ -271,7 +236,7 @@ export const RecipeCardLeftCol = ({
 
 			{/* CTA buttons */}
 			<div css={buttonContainer}>
-				{recipe?.isAppReady && feastId && (
+				{feastId && (
 					<LinkButton
 						priority="primary"
 						size="small"
@@ -284,12 +249,10 @@ export const RecipeCardLeftCol = ({
 					</LinkButton>
 				)}
 				<LinkButton
-					priority={recipe?.isAppReady ? 'secondary' : 'primary'}
+					priority="secondary"
 					size="small"
 					href={buildAppLink(pageId, 'RecipeNudge_CookMode', feastId)}
-					theme={
-						recipe?.isAppReady ? secondaryCtaTheme : primaryCtaTheme
-					}
+					theme={secondaryCtaTheme}
 					data-ignore="global-link-styling"
 					cssOverrides={fullWidthButton}
 				>

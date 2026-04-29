@@ -544,10 +544,10 @@ export interface RecipeFeaturedImage {
 
 export interface RecipeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.RecipeBlockElement';
+	elementId?: string;
 	id: string;
 	title?: string;
 	description?: string;
-	isAppReady?: boolean;
 	featuredImage?: RecipeFeaturedImage;
 }
 
