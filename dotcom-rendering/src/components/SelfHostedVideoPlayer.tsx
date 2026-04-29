@@ -37,13 +37,23 @@ const interactiveStyles = css`
 
 const nativeSubtitleStyles = css`
 	::cue {
-		/* Hide the cue by default as we prefer custom overlay */
+		/* Hide the cue by default as we prefer the custom SubtitleOverlay */
 		visibility: hidden;
 		color: ${palette('--video-subtitle-text')};
 	}
 
-	/* Display the native cues when in fullscreen */
+	/**
+	 * When entering iOS webkit fullscreen (webkitEnterFullscreen), the CSS
+	 * pseudo-classes :fullscreen and :-webkit-full-screen are NOT triggered —
+	 * they only apply to the standard requestFullscreen / webkitRequestFullscreen APIs.
+	 * Instead we add this class via JS immediately before calling webkitEnterFullscreen()
+	 * so that native cues are visible in the iOS native fullscreen player.
+	 */
+	&.ios-fullscreen-subtitles::cue {
+		visibility: visible;
+	}
 
+	/* Standard fullscreen API (desktop browsers) */
 	&:fullscreen::cue {
 		visibility: visible;
 	}

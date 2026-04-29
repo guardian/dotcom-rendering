@@ -702,6 +702,7 @@ export const SelfHostedVideo = ({
 		};
 		const handleWebkitExit = () => {
 			setIsFullscreen(false);
+			video?.classList.remove('ios-fullscreen-subtitles');
 			if (video) positionCues(video);
 		};
 
@@ -827,13 +828,17 @@ export const SelfHostedVideo = ({
 				return webkitVideo.webkitExitFullscreen();
 			} else {
 				/**
-				 * Reset cue positioning BEFORE entering webkit fullscreen.
-				 * The native iOS fullscreen player captures VTT cue data (snapToLines, line)
-				 * when webkitEnterFullscreen() is called. If we wait for the webkitbeginfullscreen
-				 * event it is too late — the native layer has already read the cue properties
-				 * modified by positionCues(), which can place subtitles off-screen.
+				 * Reset cue positioning BEFORE entering webkit fullscreen so the native iOS
+				 * player doesn't render cues at the custom overlay positions (which can be off-screen).
+				 *
+				 * Also add the ios-fullscreen-subtitles class BEFORE calling webkitEnterFullscreen().
+				 * The CSS pseudo-classes :fullscreen and :-webkit-full-screen are NOT triggered by
+				 * webkitEnterFullscreen() on iOS — they only apply to the standard requestFullscreen
+				 * API. Without this class, ::cue { visibility: hidden } stays active in the native
+				 * fullscreen player and subtitles are never shown.
 				 */
 				resetCuesToDefault(video);
+				video.classList.add('ios-fullscreen-subtitles');
 				return webkitVideo.webkitEnterFullscreen();
 			}
 		}
