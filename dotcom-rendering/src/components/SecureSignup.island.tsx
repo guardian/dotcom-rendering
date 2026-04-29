@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
-import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
+import type { AbTest } from '@guardian/ophan-tracker-js';
 import { space, textSans14, until } from '@guardian/source/foundations';
 import {
 	Button,
@@ -19,8 +19,13 @@ import { useEffect, useRef, useState } from 'react';
 // that version will compile and render but is non-functional.
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
-import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
+import {
+	EVENT_DESCRIPTION_TO_ACTION,
+	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	type NewsletterEventDescription,
+	sendNewsletterSignupEvent,
+} from '../lib/newsletterSignupTracking';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
@@ -36,12 +41,10 @@ import { useConfig } from './ConfigContext';
 // be accurately predicated for every breakpoint).
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
-type OphanABTest = ComponentEvent['abTest'];
-
 type Props = {
 	newsletterId: string;
 	successDescription: string;
-	abTest?: OphanABTest;
+	abTest?: AbTest;
 };
 
 const formStyles = css`
@@ -197,71 +200,20 @@ const postFormData = async (
 	});
 };
 
-type EventDescription =
-	| 'click-button'
-	| 'form-submission'
-	| 'submission-confirmed'
-	| 'submission-failed'
-	| 'open-captcha'
-	| 'captcha-load-error'
-	| 'form-submit-error'
-	| 'captcha-not-passed'
-	| 'captcha-passed';
-
 const sendTracking = (
 	newsletterId: string,
-	eventDescription: EventDescription,
+	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
-	abTest?: OphanABTest,
+	abTest?: AbTest,
 ): void => {
-	let action: TAction = 'CLICK';
-
-	switch (eventDescription) {
-		case 'form-submission':
-		case 'captcha-not-passed':
-		case 'captcha-passed':
-			action = 'ANSWER';
-			break;
-		case 'submission-confirmed':
-			action = 'SUBSCRIBE';
-			break;
-		case 'captcha-load-error':
-		case 'form-submit-error':
-		case 'submission-failed':
-			action = 'CLOSE';
-			break;
-		case 'open-captcha':
-			action = 'EXPAND';
-			break;
-		case 'click-button':
-		default:
-			action = 'CLICK';
-			break;
-	}
-
-	// The data team use a custom date format for timestamps,
-	// (yyy-MM-dd hh:mm:ss.ssssss UTC)
-	// and will cast the integer value  to this
-	// format at their end
-	const value = JSON.stringify({
-		eventDescription,
-		newsletterId,
-		timestamp: Date.now(),
-	});
-
-	void submitComponentEvent(
-		{
-			action,
-			value,
-			//check if this can be used or needs to be added
-			component: {
-				componentType: 'NEWSLETTER_SUBSCRIPTION',
-				id: `AR SecureSignup ${newsletterId}`,
-			},
-			abTest,
-		},
+	sendNewsletterSignupEvent({
+		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
+		identityName: newsletterId,
+		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.control(newsletterId),
 		renderingTarget,
-	);
+		value: { eventDescription },
+		abTest,
+	});
 };
 
 /**
