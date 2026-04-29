@@ -15,18 +15,20 @@ import { ToggleSwitch } from '@guardian/source-development-kitchen/react-compone
 // Note - the package also exports a component as a named export "ReCAPTCHA",
 // that version will compile and render but is non-functional.
 // Use the default export instead.
+import type { ChangeEvent } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
+import type { NewsletterPreviewAction } from './NewsletterSignupCardContainer';
 
 type Props = {
 	newsletterId: string;
 	newsletterName: string;
 	frequency: string;
 	hidePrivacyMessage?: boolean;
-	onPreviewClick?: () => void;
+	previewAction?: NewsletterPreviewAction;
 	/** When `true`, the success message is shown immediately (user is already subscribed). */
 	isAlreadySubscribed?: boolean;
 };
@@ -176,24 +178,39 @@ const tertiaryButtonTheme: Partial<ThemeButton> = {
 };
 
 const PreviewButton = ({
-	onClick,
+	previewAction,
 	size = 'default',
 }: {
-	onClick: () => void;
+	previewAction: NewsletterPreviewAction;
 	size?: Size;
-}) => (
-	<Button
-		priority="tertiary"
-		icon={<SvgEye />}
-		iconSide="left"
-		onClick={onClick}
-		type="button"
-		size={size}
-		theme={tertiaryButtonTheme}
-	>
-		Preview latest
-	</Button>
-);
+}) =>
+	previewAction.behaviour === 'link' ? (
+		<LinkButton
+			priority="tertiary"
+			icon={<SvgEye />}
+			iconSide="left"
+			href={previewAction.href}
+			target="_blank"
+			rel="noreferrer"
+			onClick={previewAction.onClick}
+			size={size}
+			theme={tertiaryButtonTheme}
+		>
+			Preview latest
+		</LinkButton>
+	) : (
+		<Button
+			priority="tertiary"
+			icon={<SvgEye />}
+			iconSide="left"
+			onClick={previewAction.onClick}
+			type="button"
+			size={size}
+			theme={tertiaryButtonTheme}
+		>
+			Preview latest
+		</Button>
+	);
 
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
@@ -294,7 +311,7 @@ const NewsletterSignupFormActive = ({
 	newsletterName,
 	frequency,
 	hidePrivacyMessage = false,
-	onPreviewClick,
+	previewAction,
 }: Omit<Props, 'isAlreadySubscribed'>) => {
 	const { renderingTarget } = useConfig();
 
@@ -337,9 +354,9 @@ const NewsletterSignupFormActive = ({
 
 	return (
 		<>
-			{showForm && onPreviewClick && !isSignedIn && (
+			{showForm && previewAction && !isSignedIn && (
 				<div css={previewButtonContainerStyles}>
-					<PreviewButton onClick={onPreviewClick} size="small" />
+					<PreviewButton previewAction={previewAction} size="small" />
 				</div>
 			)}
 			<form
@@ -364,7 +381,9 @@ const NewsletterSignupFormActive = ({
 							value={userEmail ?? ''}
 							error={isValidationError ? errorMessage : undefined}
 							onFocus={handleEmailFocus}
-							onChange={(e) => handleEmailChange(e.target.value)}
+							onChange={(e: ChangeEvent<HTMLInputElement>) =>
+								handleEmailChange(e.target.value)
+							}
 							onInvalid={handleEmailInvalid}
 						/>
 					</div>
@@ -393,8 +412,8 @@ const NewsletterSignupFormActive = ({
 					</>
 				)}
 				<div css={submitButtonContainerStyles}>
-					{isSignedIn && onPreviewClick && (
-						<PreviewButton onClick={onPreviewClick} />
+					{isSignedIn && previewAction && (
+						<PreviewButton previewAction={previewAction} />
 					)}
 					<Button
 						cssOverrides={submitButtonStyles}

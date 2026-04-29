@@ -9,6 +9,17 @@ import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import type { NewsletterSignupCardProps } from './NewsletterSignupCard';
 import { NewsletterSignupCard } from './NewsletterSignupCard';
 
+export type NewsletterPreviewAction =
+	| {
+			behaviour: 'modal';
+			onClick: () => void;
+	  }
+	| {
+			behaviour: 'link';
+			href: string;
+			onClick: () => void;
+	  };
+
 type PreviewEventDescription = 'preview-open' | 'preview-close';
 
 const sendPreviewTracking = ({
@@ -55,7 +66,9 @@ type Props = Omit<NewsletterSignupCardProps, 'children'> & {
 	 * below the card (rather than inside the form) when the user is signed in.
 	 */
 	isSignedIn?: boolean | 'Pending';
-	children?: (openPreview: (() => void) | undefined) => React.ReactNode;
+	children?: (
+		previewAction: NewsletterPreviewAction | undefined,
+	) => React.ReactNode;
 };
 
 const themeColorStyles = (theme: string) => css`
@@ -103,6 +116,17 @@ export const NewsletterSignupCardContainer = ({
 		});
 	}, [identityName, renderingTarget, renderUrl]);
 
+	const trackPreviewLinkOpen = useCallback(() => {
+		if (!renderUrl) return;
+
+		sendPreviewTracking({
+			identityName,
+			eventDescription: 'preview-open',
+			renderingTarget,
+			renderUrl,
+		});
+	}, [identityName, renderingTarget, renderUrl]);
+
 	const closePreview = useCallback(() => {
 		setIsPreviewOpen((isOpen) => {
 			if (isOpen && renderUrl) {
@@ -117,6 +141,19 @@ export const NewsletterSignupCardContainer = ({
 			return false;
 		});
 	}, [identityName, renderingTarget, renderUrl]);
+
+	const previewAction = hasPreviewUrl
+		? renderingTarget === 'Apps'
+			? {
+					behaviour: 'link' as const,
+					href: renderUrl ?? '',
+					onClick: trackPreviewLinkOpen,
+			  }
+			: {
+					behaviour: 'modal' as const,
+					onClick: openPreview,
+			  }
+		: undefined;
 
 	return (
 		<div css={themeColorStyles(theme)}>
@@ -141,7 +178,7 @@ export const NewsletterSignupCardContainer = ({
 					description={description}
 					illustrationSquare={illustrationSquare}
 				>
-					{children?.(hasPreviewUrl ? openPreview : undefined)}
+					{children?.(previewAction)}
 				</NewsletterSignupCard>
 				{showPrivacyMessageOutside && (
 					<NewsletterPrivacyMessage textColor="regular" />
