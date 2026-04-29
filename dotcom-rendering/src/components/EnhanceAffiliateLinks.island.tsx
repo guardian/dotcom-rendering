@@ -80,7 +80,9 @@ export const EnhanceAffiliateLinks = () => {
 			const parsedLinkUrlResult = safeParseURL(link.href);
 			if (!parsedLinkUrlResult.ok) {
 				window.guardian.modules.sentry.reportError(
-					new Error(`Invalid URL in affiliate link: ${link.href}`),
+					new Error(
+						`Invalid URL in enhance affiliate link island: ${link.href}`,
+					),
 					'enhance-affiliate-links',
 				);
 				continue;
