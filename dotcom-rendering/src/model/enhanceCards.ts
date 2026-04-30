@@ -177,13 +177,10 @@ const getLargestImageUrl = (images?: Image[]) => {
  */
 const decideMediaAtomImage = (
 	videoReplace: boolean,
-	mediaAtom: FEMediaAtom,
+	mediaAtomImages?: Image[],
 	cardTrailImage?: string,
-	isSelfHostedVideo?: boolean,
 ) => {
-	const largestMediaAtomImage = isSelfHostedVideo
-		? getLargestImageUrl(mediaAtom.posterImage?.allImages)
-		: getLargestImageUrl(mediaAtom.trailImage?.allImages);
+	const largestMediaAtomImage = getLargestImageUrl(mediaAtomImages);
 
 	if (videoReplace) {
 		return largestMediaAtomImage ?? cardTrailImage;
@@ -213,13 +210,6 @@ export const getActiveMediaAtom = (
 		)[0];
 		if (!firstVideoAsset) return undefined;
 
-		const image = decideMediaAtomImage(
-			videoReplace,
-			mediaAtom,
-			cardTrailImage,
-			firstVideoAsset.platform === 'Url',
-		);
-
 		/**
 		 * Each version of a media atom will contain assets for self-hosted OR YouTube, but not both.
 		 * Therefore, we check the platform of the first asset and assume the rest are the same.
@@ -232,11 +222,23 @@ export const getActiveMediaAtom = (
 				({ assetType }) => assetType === 'Subtitles',
 			);
 
+			const image = decideMediaAtomImage(
+				videoReplace,
+				mediaAtom.posterImage?.allImages,
+				cardTrailImage,
+			);
+
 			const videoAssets =
 				convertFEMediaAssetsToVideoAssets(selfHostedAssets);
 			const sources = extractValidSourcesFromAssets(videoAssets);
 
 			const aspectRatio = getAspectRatioFromSources(sources);
+
+			// const imageAspectRatio = getImageAspectRatio(mediaAtom)
+
+			const imageAspectRatio =
+				mediaAtom.posterImage?.allImages[0]?.fields.aspectRatio ??
+				'5:4';
 
 			return {
 				type: 'SelfHostedVideo',
@@ -247,6 +249,7 @@ export const getActiveMediaAtom = (
 				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
 				image,
+				imageAspectRatio,
 			};
 		}
 
@@ -254,6 +257,12 @@ export const getActiveMediaAtom = (
 		 * There should only be one asset for Youtube atoms, so we use the first one.
 		 */
 		if (firstVideoAsset.platform === 'Youtube') {
+			const image = decideMediaAtomImage(
+				videoReplace,
+				mediaAtom.trailImage?.allImages,
+				cardTrailImage,
+			);
+
 			return {
 				type: 'YoutubeVideo',
 				id: mediaAtom.id,

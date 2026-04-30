@@ -103,6 +103,32 @@ export const getAspectRatioFromSources = (sources: Source[]): number => {
 	return firstSource.width / firstSource.height;
 };
 
+//
+// export const getImageAspectRatio = (mediaAtom: FEMediaAtom): AspectRatio => {
+// 	const posterImageAspectRatio = mediaAtom.posterImage?.allImages[0]?.fields.aspectRatio
+// 	if (!posterImageAspectRatio) return "5:4"
+//
+// 	switch (posterImageAspectRatio) {
+// 	    case "4:5":
+// 		 return "4:5"
+//
+// 		case "2:3":
+// 		case "3:4":
+// 		case "3:5":
+// 		case "9:16":
+// 			return "3:4"
+// 		case "3:2":
+// 		case "4:3":
+// 		case "5:4":
+// 		case "16:9":
+// 			return "5:4"
+// 		default:
+// 			return "5:4"
+// 	}
+//
+//
+// }
+
 export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>
 	assets.find((asset) => asset.mimeType === 'text/vtt')?.url;
 

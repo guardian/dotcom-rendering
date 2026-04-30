@@ -309,6 +309,7 @@ type Props = {
 	format?: ArticleFormat;
 	isMainMedia?: boolean;
 	role?: RoleType;
+	posterImageAspectRatio: string;
 };
 
 export const SelfHostedVideo = ({
@@ -336,6 +337,7 @@ export const SelfHostedVideo = ({
 	format,
 	isMainMedia,
 	role,
+	posterImageAspectRatio,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -893,7 +895,7 @@ export const SelfHostedVideo = ({
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(posterImage, '5:4')
+		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
 		: undefined;
 
 	return (

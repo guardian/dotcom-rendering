@@ -971,6 +971,9 @@ export const Card = ({
 									subtitleSize={subtitleSize}
 									minAspectRatio={4 / 5}
 									containerAspectRatioDesktop={5 / 4}
+									posterImageAspectRatio={
+										media.mainMedia.imageAspectRatio
+									}
 								/>
 							</Island>
 						)}
