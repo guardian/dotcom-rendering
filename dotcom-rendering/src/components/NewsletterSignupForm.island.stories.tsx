@@ -36,7 +36,7 @@ const defaultArgs = {
 	newsletterId: 'saturday-edition',
 	newsletterName: 'Saturday Edition',
 	frequency: 'every Saturday',
-	onPreviewClick: fn(),
+	previewAction: { behaviour: 'modal' as const, onClick: fn() },
 };
 
 /** Shared no-op handlers — stories that focus on visual state don't need real callbacks. */
@@ -227,9 +227,9 @@ export const CaptchaNotPassed = meta.story({
 	},
 });
 
-/** Form without a preview button (no `onPreviewClick` prop). */
+/** Form without a preview button (no `previewAction` prop). */
 export const WithoutPreview = meta.story({
-	args: { ...defaultArgs, onPreviewClick: undefined },
+	args: { ...defaultArgs, previewAction: undefined },
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(mockForm({}));
 	},

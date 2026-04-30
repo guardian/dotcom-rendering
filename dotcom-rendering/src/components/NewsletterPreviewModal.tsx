@@ -8,12 +8,14 @@ import {
 	textSans15,
 } from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
-import { useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getZIndex } from '../lib/getZIndex';
 import { EMAIL_PREVIEW_ORIGIN } from '../lib/newsletterPreviewUrl';
 
 const PREVIEW_LOAD_TIMEOUT_MS = 10_000;
+const OPEN_ANIMATION_DURATION_MS = 300;
+const CLOSE_ANIMATION_DURATION_MS = 225;
 const TIMEOUT_FAILURE_MESSAGE =
 	'The preview is taking longer than expected. You can retry loading it.';
 const UNAVAILABLE_FAILURE_MESSAGE =
@@ -84,7 +86,7 @@ const isTrustedIframeMessage = ({
 const FOCUSABLE_SELECTOR =
 	'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
 
-const previewOverlayStyles = css`
+const previewOverlayStyles = (isVisible: boolean) => css`
 	position: fixed;
 	inset: 0;
 	display: flex;
@@ -92,15 +94,26 @@ const previewOverlayStyles = css`
 	justify-content: center;
 	padding: ${space[3]}px 0 0;
 	background: rgba(0, 0, 0, 0.75);
+	opacity: ${isVisible ? 1 : 0};
+	transition: opacity
+		${isVisible
+			? OPEN_ANIMATION_DURATION_MS
+			: CLOSE_ANIMATION_DURATION_MS}ms
+		ease;
 	z-index: ${getZIndex('lightbox')};
+	will-change: opacity;
 
 	${from.tablet} {
 		align-items: center;
 		padding: ${space[3]}px;
 	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
 `;
 
-const previewDialogStyles = css`
+const previewDialogStyles = (isVisible: boolean) => css`
 	display: flex;
 	flex-direction: column;
 	background: ${palette.neutral[100]};
@@ -108,11 +121,28 @@ const previewDialogStyles = css`
 	height: min(82vh, 760px);
 	border-radius: ${space[3]}px ${space[3]}px 0 0;
 	overflow: hidden;
+	transform: translateY(${isVisible ? '0' : '100%'});
+	transition: transform
+		${isVisible
+			? OPEN_ANIMATION_DURATION_MS
+			: CLOSE_ANIMATION_DURATION_MS}ms
+		ease;
+	will-change: transform;
 
 	${from.tablet} {
 		width: min(652px, 100%);
 		height: min(90vh, 900px);
 		border-radius: ${space[2]}px;
+		transform: none;
+		opacity: ${isVisible ? 1 : 0};
+		transition: opacity ${isVisible ? 225 : 175}ms ease;
+		will-change: opacity;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+		transform: none;
+		opacity: 1;
 	}
 `;
 
@@ -161,11 +191,17 @@ const previewFrameContainerStyles = css`
 	}
 `;
 
-const previewIframeHiddenStyles = css`
-	visibility: hidden;
+const previewIframeVisibilityStyles = (isVisible: boolean) => css`
+	opacity: ${isVisible ? 1 : 0};
+	visibility: ${isVisible ? 'visible' : 'hidden'};
+	transition: opacity 180ms ease;
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
 `;
 
-const previewLoadingOverlayStyles = css`
+const previewLoadingOverlayStyles = (isVisible: boolean) => css`
 	position: absolute;
 	inset: 0;
 	display: flex;
@@ -174,9 +210,17 @@ const previewLoadingOverlayStyles = css`
 	padding: 0 ${space[3]}px ${space[4]}px;
 	background: ${palette.neutral[100]};
 	overflow-y: hidden;
+	opacity: ${isVisible ? 1 : 0};
+	pointer-events: ${isVisible ? 'auto' : 'none'};
+	transition: opacity 180ms ease;
+	will-change: opacity;
 
 	${from.tablet} {
 		padding: 0 ${space[9]}px ${space[9]}px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
 	}
 `;
 
@@ -318,7 +362,9 @@ export const NewsletterPreviewModal = ({
 	const dialogRef = useRef<HTMLDivElement>(null);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 	const hasEmbedStatusFailureRef = useRef(false);
+	const closeTimeoutRef = useRef<number | null>(null);
 	const titleId = useId();
+	const [isVisible, setIsVisible] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [hasLoadFailed, setHasLoadFailed] = useState(false);
 	const [failureMessage, setFailureMessage] = useState(
@@ -351,6 +397,26 @@ export const NewsletterPreviewModal = ({
 			);
 		});
 
+	const requestClose = useCallback(() => {
+		if (closeTimeoutRef.current !== null) return;
+
+		setIsVisible(false);
+		closeTimeoutRef.current = window.setTimeout(() => {
+			closeTimeoutRef.current = null;
+			onClose();
+		}, CLOSE_ANIMATION_DURATION_MS);
+	}, [onClose]);
+
+	useEffect(() => {
+		const animationFrameId = window.requestAnimationFrame(() => {
+			setIsVisible(true);
+		});
+
+		return () => {
+			window.cancelAnimationFrame(animationFrameId);
+		};
+	}, []);
+
 	useEffect(() => {
 		const rootElement = document.documentElement;
 		const previousRootOverflow = rootElement.style.overflow;
@@ -360,6 +426,10 @@ export const NewsletterPreviewModal = ({
 		document.body.style.overflow = 'hidden';
 
 		return () => {
+			if (closeTimeoutRef.current !== null) {
+				window.clearTimeout(closeTimeoutRef.current);
+				closeTimeoutRef.current = null;
+			}
 			rootElement.style.overflow = previousRootOverflow;
 			document.body.style.overflow = previousBodyOverflow;
 		};
@@ -395,7 +465,7 @@ export const NewsletterPreviewModal = ({
 
 			if (event.key === 'Escape') {
 				event.stopPropagation();
-				onClose();
+				requestClose();
 				return;
 			}
 
@@ -435,13 +505,13 @@ export const NewsletterPreviewModal = ({
 		return () => {
 			document.removeEventListener('keydown', handleKeyDown);
 		};
-	}, [onClose]);
+	}, [requestClose]);
 
 	useEffect(() => {
 		const closeOnClickAway = (event: MouseEvent) => {
 			if (!dialogRef.current) return;
 			if (!dialogRef.current.contains(event.target as Node)) {
-				onClose();
+				requestClose();
 			}
 		};
 
@@ -450,7 +520,7 @@ export const NewsletterPreviewModal = ({
 		return () => {
 			document.removeEventListener('mousedown', closeOnClickAway);
 		};
-	}, [onClose]);
+	}, [requestClose]);
 
 	useEffect(() => {
 		hasEmbedStatusFailureRef.current = false;
@@ -522,14 +592,14 @@ export const NewsletterPreviewModal = ({
 	if (typeof document === 'undefined') return null;
 
 	return createPortal(
-		<div css={previewOverlayStyles}>
+		<div css={previewOverlayStyles(isVisible)}>
 			<div
 				ref={dialogRef}
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby={titleId}
 				tabIndex={-1}
-				css={previewDialogStyles}
+				css={previewDialogStyles(isVisible)}
 			>
 				<div css={previewHeaderStyles}>
 					<h2 id={titleId} css={previewTitleStyles}>
@@ -538,7 +608,7 @@ export const NewsletterPreviewModal = ({
 					<Button
 						size="small"
 						priority="tertiary"
-						onClick={onClose}
+						onClick={requestClose}
 						icon={<SvgCross size="small" />}
 						hideLabel={true}
 						cssOverrides={desktopCloseButtonStyles}
@@ -547,19 +617,20 @@ export const NewsletterPreviewModal = ({
 					</Button>
 				</div>
 				<div css={previewFrameContainerStyles}>
-					{isLoading && (
-						<div
-							css={previewLoadingOverlayStyles}
-							aria-live="polite"
-							aria-label="Loading newsletter preview"
-						>
-							<div css={previewSkeletonBannerStyles} />
-							<div css={previewSkeletonLargeStyles} />
-							<div css={previewSkeletonSmallStyles} />
-							<div css={previewSkeletonSmallStyles} />
-							<div css={previewSkeletonLargeStyles} />
-						</div>
-					)}
+					<div
+						css={previewLoadingOverlayStyles(isLoading)}
+						aria-live={isLoading ? 'polite' : undefined}
+						aria-hidden={isLoading ? undefined : true}
+						aria-label={
+							isLoading ? 'Loading newsletter preview' : undefined
+						}
+					>
+						<div css={previewSkeletonBannerStyles} />
+						<div css={previewSkeletonLargeStyles} />
+						<div css={previewSkeletonSmallStyles} />
+						<div css={previewSkeletonSmallStyles} />
+						<div css={previewSkeletonLargeStyles} />
+					</div>
 					{hasLoadFailed && (
 						<div
 							css={previewStatusStyles}
@@ -592,15 +663,16 @@ export const NewsletterPreviewModal = ({
 						onError={handleIframeError}
 						css={[
 							previewFrameStyles,
-							(isLoading || hasLoadFailed) &&
-								previewIframeHiddenStyles,
+							previewIframeVisibilityStyles(
+								!isLoading && !hasLoadFailed,
+							),
 						]}
 					/>
 				</div>
 				<div css={mobileCloseBarStyles}>
 					<Button
 						priority="tertiary"
-						onClick={onClose}
+						onClick={requestClose}
 						cssOverrides={mobileCloseButtonStyles}
 					>
 						Close

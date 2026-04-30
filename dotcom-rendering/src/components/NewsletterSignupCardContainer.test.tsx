@@ -22,8 +22,15 @@ const defaultProps = {
 const renderContainer = (props = {}) =>
 	render(
 		<NewsletterSignupCardContainer {...defaultProps} {...props}>
-			{(openPreview) => (
-				<button type="button" onClick={openPreview}>
+			{(previewAction) => (
+				<button
+					type="button"
+					onClick={
+						previewAction?.behaviour === 'modal'
+							? previewAction.onClick
+							: undefined
+					}
+				>
 					Preview latest
 				</button>
 			)}
@@ -122,5 +129,55 @@ describe('NewsletterSignupCardContainer', () => {
 				firstCallCount,
 			);
 		});
+	});
+
+	it('renders a preview link for apps and tracks the open event', () => {
+		render(
+			<NewsletterSignupCardContainer
+				identityName="morning-briefing"
+				category="fronts-based"
+				exampleUrl="/world/newsletters/morning-mail"
+				renderingTarget="Apps"
+				theme="news"
+				name="Morning Briefing"
+				frequency="Every weekday"
+				description="Start your day with top stories."
+			>
+				{(previewAction) =>
+					previewAction?.behaviour === 'link' ? (
+						<a
+							href={previewAction.href}
+							onClick={previewAction.onClick}
+						>
+							Preview latest
+						</a>
+					) : null
+				}
+			</NewsletterSignupCardContainer>,
+		);
+
+		const previewLink = screen.getByRole('link', {
+			name: 'Preview latest',
+		});
+
+		expect(previewLink).toHaveAttribute(
+			'href',
+			'https://email-rendering.guardianapis.com/fronts/world/newsletters/morning-mail?variant=persephone&readonly=true&embed=true',
+		);
+
+		fireEvent.click(previewLink);
+
+		expect(submitComponentEvent).toHaveBeenCalledWith(
+			expect.objectContaining({
+				action: 'EXPAND',
+				component: expect.objectContaining({
+					id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+						defaultProps.identityName,
+					),
+				}),
+			}),
+			'Apps',
+		);
+		expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 	});
 });
