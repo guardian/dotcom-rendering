@@ -23,17 +23,13 @@ type Props = {
 
 const styles = css`
 	${grid.paddedContainer}
+	${grid.verticalRules()}
 	grid-auto-flow: row dense;
 	background-color: ${palette('--article-inner-background')};
 
 	${until.tablet} {
 		border-top: 1px solid ${palette('--article-border')};
 		padding-top: ${space[1]}px;
-	}
-
-	${from.tablet} {
-		border-left: 1px solid ${palette('--article-border')};
-		border-right: 1px solid ${palette('--article-border')};
 	}
 
 	${from.desktop} {
