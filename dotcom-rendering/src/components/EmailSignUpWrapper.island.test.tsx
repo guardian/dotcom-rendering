@@ -72,11 +72,11 @@ const defaultProps = {
 	idApiUrl: 'https://idapi.theguardian.com',
 };
 
-const renderWrapper = (props = {}) =>
+const renderWrapper = (props = {}, renderingTarget: 'Web' | 'Apps' = 'Web') =>
 	render(
 		<ConfigProvider
 			value={{
-				renderingTarget: 'Web',
+				renderingTarget,
 				darkModeAvailable: false,
 				assetOrigin: '/',
 				editionId: 'UK',
@@ -182,6 +182,29 @@ describe('EmailSignUpWrapper', () => {
 			expect(
 				screen.getByTestId('newsletter-signup-card-container'),
 			).toBeInTheDocument();
+		});
+	});
+
+	describe('Apps rendering target', () => {
+		it('renders the legacy EmailSignup without waiting for AB to resolve', () => {
+			// useBetaAB remains undefined (AB framework never initialises on Apps)
+			// but the component should not block on it
+			renderWrapper({ showNewNewsletterSignupCard: true }, 'Apps');
+			expect(screen.getByTestId('email-signup')).toBeInTheDocument();
+			expect(
+				screen.queryByTestId('newsletter-signup-card-container'),
+			).not.toBeInTheDocument();
+		});
+
+		it('fires a VIEW tracking event without waiting for AB to resolve', () => {
+			renderWrapper({ showNewNewsletterSignupCard: true }, 'Apps');
+			expect(submitComponentEvent).toHaveBeenCalledWith(
+				expect.objectContaining({
+					action: 'VIEW',
+					abTest: { name: AB_TEST_NAME, variant: 'control' },
+				}),
+				'Apps',
+			);
 		});
 	});
 

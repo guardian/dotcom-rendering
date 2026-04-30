@@ -74,13 +74,19 @@ export const EmailSignUpWrapper = ({
 	showNewNewsletterSignupCard = false,
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
+
+	const abTestEnabled =
+		showNewNewsletterSignupCard && renderingTarget === 'Web';
+
 	const abTests = useBetaAB();
-	// `abTests` is undefined before the AB client has hydrated — treat that as
-	// "not yet resolved" rather than "in control", so we don't fire premature
-	// tracking events.
 	const abResolved = abTests !== undefined;
-	const isInVariantGroup =
-		abTests?.isUserInTestGroup(AB_TEST_NAME, 'variant') ?? false;
+
+	const isVariant =
+		abTestEnabled &&
+		(abTests?.isUserInTestGroup(AB_TEST_NAME, 'variant') ?? false);
+
+	const abVariant = isVariant ? 'variant' : 'control';
+
 	const isSubscribed = useNewsletterSubscription(
 		listId,
 		idApiUrl,
@@ -88,14 +94,10 @@ export const EmailSignUpWrapper = ({
 	);
 	const isSignedIn = useIsSignedIn();
 
-	const isVariant = showNewNewsletterSignupCard && isInVariantGroup;
-
-	const abVariant = isVariant ? 'variant' : 'control';
-
 	const viewFiredRef = useRef(false);
 
 	useEffect(() => {
-		if (!abResolved) return;
+		if (abTestEnabled && !abResolved) return;
 		// Wait for subscription status in both branches — we only want to track
 		// a view of the actual signup form, not a loading state or success message.
 		if (isSubscribed === undefined) return;
@@ -125,15 +127,11 @@ export const EmailSignUpWrapper = ({
 		identityName,
 		isSubscribed,
 		isVariant,
+		abTestEnabled,
 		renderingTarget,
 	]);
 
-	// Show placeholder while AB tests or subscription status is loading.
-	// Keeping this before the isVariant branch ensures SSR and the first client
-	// render always match (both see the placeholder), avoiding a hydration
-	// mismatch that would leave the placeholder visible behind the card.
-	// It also prevents a jump from form → success state on subscription resolve.
-	if (!abResolved || isSubscribed === undefined) {
+	if ((abTestEnabled && !abResolved) || isSubscribed === undefined) {
 		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
 	}
 
