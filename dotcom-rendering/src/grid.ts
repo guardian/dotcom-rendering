@@ -1,9 +1,11 @@
 // ----- Imports ----- //
 
 import {
+	between as betweenBreakpoint,
 	breakpoints,
 	from as fromBreakpoint,
 } from '@guardian/source/foundations';
+import { palette } from './palette';
 
 // ----- Columns & Lines ----- //
 
@@ -81,6 +83,69 @@ const paddedContainer = `
     ${fromBreakpoint.wide} {
 		width: ${breakpoints.wide}px;
     }
+`;
+
+// ----- Vertical Rules ----- //
+
+type VerticalRuleOptions = {
+	centre?: boolean;
+};
+
+/**
+ * Render Guardian grid vertical rules.
+ *
+ * Left and right rules are always present.
+ * A centre rule can optionally be enabled.
+ *
+ * Usage:
+ * css([grid.container, grid.verticalRules()])
+ * css([grid.container, grid.verticalRules({ centre: true })])
+ */
+const optionalCentreRule = `/* CENTRE RULE */
+    & > *:first-child::before {
+      grid-column: centre-column-start;
+      transform: translateX(-${columnGap});
+	  ${fromBreakpoint.leftCol} {
+		transform: translateX(calc(-${columnGap} / 2));
+	  }
+    }`;
+
+const verticalRules = (options: VerticalRuleOptions = {}): string => `
+  ${fromBreakpoint.tablet} {
+    position: relative;
+
+    &::before,
+    &::after
+    ${options.centre ? ', & > *:first-child::before' : ''} {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background-color: ${palette('--article-border')};
+      content: '';
+    }
+
+    /* LEFT OUTER RULE */
+    &::before {
+      grid-column: centre-column-start;
+      transform: translateX(-${columnGap});
+
+      ${fromBreakpoint.leftCol} {
+        grid-column: left-column-start;
+      }
+    }
+
+    /* RIGHT OUTER RULE */
+    &::after {
+      grid-column: right-column-end;
+      transform: translateX(-1px);
+
+      ${betweenBreakpoint.tablet.and.desktop} {
+        grid-column: centre-column-end;
+      }
+    }
+
+    ${options.centre ? optionalCentreRule : ''}
 `;
 
 // ----- API ----- //
@@ -182,6 +247,8 @@ const grid = {
 	 * breakpoint.
 	 */
 	mobileColumnGap,
+
+	verticalRules,
 } as const;
 
 // ----- Exports ----- //
