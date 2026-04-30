@@ -34,8 +34,6 @@ const generateAbTestArray = (
 	abTestName: string,
 	abTestVariant: string,
 	targetingAbTest?: TargetingAbTest,
-	amountsAbTestName?: string,
-	amountsAbTestVariant?: string,
 ): AbTestObject[] => {
 	const abTests: AbTestObject[] = [
 		{
@@ -47,13 +45,6 @@ const generateAbTestArray = (
 		abTests.push({
 			name: targetingAbTest.testName,
 			variant: targetingAbTest.variantName,
-		});
-	}
-	if (amountsAbTestName && amountsAbTestVariant) {
-		abTests.push({
-			name: amountsAbTestName,
-			variant: amountsAbTestVariant,
-			testType: 'AMOUNTS_TEST',
 		});
 	}
 	return abTests;
@@ -95,18 +86,11 @@ const generateQueryString = (
 	return queryString.join('&');
 };
 
-const addTrackingParams = (
-	baseUrl: string,
-	params: Tracking,
-	amountsAbTestName?: string,
-	amountsAbTestVariant?: string,
-): string => {
+const addTrackingParams = (baseUrl: string, params: Tracking): string => {
 	const abTests = generateAbTestArray(
 		params.abTestName,
 		params.abTestVariant,
 		params.targetingAbTest,
-		amountsAbTestName,
-		amountsAbTestVariant,
 	);
 	const acquisitionData = encodeAcquisitionsData(params, abTests);
 	const queryString = generateQueryString(params, acquisitionData);
@@ -166,8 +150,6 @@ interface SupportUrlData {
 	tracking: Tracking; // tracking data to be added to the querystring
 	promoCodes: string[]; // any promo codes, to be added in the promoCodes parameter
 	countryCode?: string; // browser's country code
-	amountsAbTestName?: string; // amounts test name if applicable
-	amountsAbTestVariant?: string; // amounts test variant name if applicable
 }
 
 export const enrichSupportUrl = ({
@@ -175,20 +157,13 @@ export const enrichSupportUrl = ({
 	tracking,
 	promoCodes,
 	countryCode,
-	amountsAbTestName,
-	amountsAbTestVariant,
 }: SupportUrlData): string => {
 	if (!isSupportUrl(baseUrl)) {
 		return baseUrl;
 	}
 	const urlWithRegion = addRegionIdToSupportUrl(baseUrl, countryCode);
 
-	const withTracking = addTrackingParams(
-		urlWithRegion,
-		tracking,
-		amountsAbTestName,
-		amountsAbTestVariant,
-	);
+	const withTracking = addTrackingParams(urlWithRegion, tracking);
 
 	return addPromoCodesToUrl(withTracking, promoCodes);
 };

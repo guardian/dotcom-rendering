@@ -270,8 +270,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	openCmp,
 	hasConsentForArticleCount,
 }: EpicProps) => {
-	const { image, tickerSettings, choiceCardAmounts, newsletterSignup } =
-		variant;
+	const { image, tickerSettings, newsletterSignup } = variant;
 
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
@@ -448,8 +447,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					articleCounts={articleCounts}
 					fetchEmail={fetchEmail}
 					submitComponentEvent={submitComponentEvent}
-					amountsTestName={choiceCardAmounts?.testName}
-					amountsVariantName={choiceCardAmounts?.variantName}
 				/>
 			)}
 
