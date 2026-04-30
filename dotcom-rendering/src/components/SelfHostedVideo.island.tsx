@@ -892,20 +892,8 @@ export const SelfHostedVideo = ({
 
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
-	const isVertical =
-		fallbackImageSize === 'feature' ||
-		fallbackImageSize === 'feature-large' ||
-		isGreyBarsAtSidesOnDesktop;
-
-	/* This is a hot fix for cards where the video is a different aspect ratio and will be replaced by https://github.com/guardian/dotcom-rendering/pull/15746 */
-	const posterImageAspectRatio = isVertical
-		? '4:5'
-		: isGreyBarsAtTopAndBottomOnDesktop
-		? '16:9'
-		: '5:4';
-
 	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
+		? getOptimisedPosterImage(posterImage, '5:4')
 		: undefined;
 
 	return (
