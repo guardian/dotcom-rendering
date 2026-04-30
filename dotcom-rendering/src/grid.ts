@@ -139,7 +139,7 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
       top: 0;
       bottom: 0;
       width: 1px;
-      background-color: ${themePalette('--article-border')};
+      background-color: ${palette('--article-border')};
       content: '';
     }
 
@@ -168,6 +168,23 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
 
 // ----- API ----- //
 
+/**
+ * Ask the element to span all grid columns between two grid lines. The lines
+ * can be specified either by `Line` name or by number.
+ * @param from The grid line to start from, either a `Line` name or a number.
+ * @param to The grid line to end at, either a `Line` name or a number.
+ * @returns {string} CSS to place the element on the grid.
+ *
+ * @example <caption>Will place the element in the centre column.</caption>
+ * const styles = css`
+ *   ${grid.between('centre-column-start', 'centre-column-end')}
+ * `;
+ *
+ * @example <caption>Will place the element between lines 3 and 5.</caption>
+ * const styles = css`
+ *   ${grid.between(3, 5)}
+ * `;
+ */
 const between = (from: Line | number, to: Line | number): string => `
     grid-column: ${from} / ${to};
 `;
