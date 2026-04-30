@@ -114,24 +114,6 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
   ${fromBreakpoint.tablet} {
     position: relative;
 
-    --centre-transform: translateX(-${columnGap});
-
-    .grid-rule {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		width: 1px;
-		background-color: ${palette('--article-border')};
-		pointer-events: none;
-	}
-
-    /* LEFT OUTER RULE — where the left column starts */
-    .rule-left {
-      grid-column: left-column-start;
-      justify-self: start;
-	  transform: translateX(-${columnGap});
-    }
-
     &::before,
     &::after
     ${options.centre ? ', & > *:first-child::before' : ''} {
