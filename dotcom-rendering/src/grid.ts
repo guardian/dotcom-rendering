@@ -110,18 +110,6 @@ const optionalCentreRule = `/* CENTRE RULE */
 	  }
     }`;
 
-// ----- API ----- //
-
-/**
- * Render Guardian grid vertical rules.
- *
- * Left and right rules are always present.
- * A centre rule can optionally be enabled.
- *
- * Usage:
- * css([grid.container, grid.verticalRules()])
- * css([grid.container, grid.verticalRules({ centre: true })])
- */
 const verticalRules = (options: VerticalRuleOptions = {}): string => `
   ${fromBreakpoint.tablet} {
     position: relative;
@@ -134,7 +122,6 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
       bottom: 0;
       width: 1px;
       background-color: ${palette('--article-border')};
-      pointer-events: none;
       content: '';
     }
 
@@ -163,6 +150,23 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
 
 // ----- API ----- //
 
+/**
+ * Ask the element to span all grid columns between two grid lines. The lines
+ * can be specified either by `Line` name or by number.
+ * @param from The grid line to start from, either a `Line` name or a number.
+ * @param to The grid line to end at, either a `Line` name or a number.
+ * @returns {string} CSS to place the element on the grid.
+ *
+ * @example <caption>Will place the element in the centre column.</caption>
+ * const styles = css`
+ *   ${grid.between('centre-column-start', 'centre-column-end')}
+ * `;
+ *
+ * @example <caption>Will place the element between lines 3 and 5.</caption>
+ * const styles = css`
+ *   ${grid.between(3, 5)}
+ * `;
+ */
 const between = (from: Line | number, to: Line | number): string => `
     grid-column: ${from} / ${to};
 `;
