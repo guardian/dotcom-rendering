@@ -1,6 +1,8 @@
 import { gridContainerDecorator } from '../../../.storybook/decorators/gridDecorators';
 import preview from '../../../.storybook/preview';
 import { palette } from '../../palette';
+import { fn, mocked } from 'storybook/test';
+import { getMatchNotificationsClient } from '../../lib/bridgetApi';
 import { NotificationsToggle } from '../NotificationsToggle.stories';
 import { background } from './colours';
 import { FixtureWeb } from './FootballMatchHeader.stories';
@@ -17,6 +19,11 @@ export const Fixture = meta.story({
 		notificationsClient: NotificationsToggle.args.notificationsClient,
 	},
 	decorators: [gridContainerDecorator],
+	beforeEach() {
+		mocked(getMatchNotificationsClient).mockReturnValue({
+			isAvailable: fn(() => Promise.resolve({ isAvailable: true })),
+		} as ReturnType<typeof getMatchNotificationsClient>);
+	},
 	parameters: {
 		colourSchemeBackground: {
 			light: palette(background('Fixture')),
@@ -67,5 +74,23 @@ export const Result = Live.extend({
 			...Live.input.args.match,
 			kind: 'Result',
 		},
+	},
+});
+
+/**
+ * When the user already has team notifications for one of the teams, the app
+ * returns `isAvailable: false` so we show a message instead of the toggle.
+ */
+export const Unavailable = Fixture.extend({
+	beforeEach() {
+		mocked(getMatchNotificationsClient).mockReturnValue({
+			isAvailable: fn(() =>
+				Promise.resolve({
+					isAvailable: false,
+					unavailableReason:
+						'You have already signed up for Arsenal notifications',
+				}),
+			),
+		} as ReturnType<typeof getMatchNotificationsClient>);
 	},
 });
