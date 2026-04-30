@@ -85,7 +85,7 @@ const mainSelfHostedVideo: MainMedia = {
 			hasAudio: true,
 		},
 	],
-	aspectRatio: 16 / 9,
+	aspectRatio: { numberRepresentation: 16 / 9, stringRepresentation: '16:9' },
 	image: `https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=1200&quality=45&dpr=2&s=none`,
 	duration: 100,
 };

@@ -707,7 +707,10 @@ export const selfHostedLoopVideo54Card = {
 				hasAudio: true,
 			},
 		],
-		aspectRatio: 5 / 4,
+		aspectRatio: {
+			numberRepresentation: 5 / 4,
+			stringRepresentation: '5:4',
+		},
 		duration: 30,
 		image: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
 	},
@@ -732,7 +735,10 @@ export const selfHostedLoopVideo45Card = {
 				hasAudio: true,
 			},
 		],
-		aspectRatio: 4 / 5,
+		aspectRatio: {
+			numberRepresentation: 4 / 5,
+			stringRepresentation: '4:5',
+		},
 	},
 } satisfies DCRFrontCard;
 
@@ -750,7 +756,10 @@ export const selfHostedLoopVideo53Card = {
 				hasAudio: true,
 			},
 		],
-		aspectRatio: 5 / 3,
+		aspectRatio: {
+			numberRepresentation: 5 / 3,
+			stringRepresentation: '5:3',
+		},
 	},
 } satisfies DCRFrontCard;
 
@@ -768,7 +777,10 @@ export const selfHostedLoopVideo916Card = {
 				hasAudio: true,
 			},
 		],
-		aspectRatio: 9 / 16,
+		aspectRatio: {
+			numberRepresentation: 9 / 16,
+			stringRepresentation: '9:16',
+		},
 	},
 } satisfies DCRFrontCard;
 
@@ -786,7 +798,10 @@ export const selfHostedLoopVideo169Card = {
 				hasAudio: true,
 			},
 		],
-		aspectRatio: 16 / 9,
+		aspectRatio: {
+			numberRepresentation: 16 / 9,
+			stringRepresentation: '16:9',
+		},
 	},
 } satisfies DCRFrontCard;
 

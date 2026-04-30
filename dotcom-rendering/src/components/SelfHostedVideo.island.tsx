@@ -25,7 +25,7 @@ import {
 } from '../lib/video';
 import { palette } from '../palette';
 import type { RoleType } from '../types/content';
-import type { VideoPlayerFormat } from '../types/mainMedia';
+import type { AspectRatio, VideoPlayerFormat } from '../types/mainMedia';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
@@ -187,7 +187,10 @@ const dispatchOphanAttentionEvent = (
 	document.dispatchEvent(event);
 };
 
-const getOptimisedPosterImage = (mainImage: string): string => {
+const getOptimisedPosterImage = (
+	mainImage: string,
+	aspectRatio: string,
+): string => {
 	// This only runs on the client
 	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
 
@@ -195,7 +198,7 @@ const getOptimisedPosterImage = (mainImage: string): string => {
 		mainImage,
 		imageWidth: 940, // The widest a video can be: flexible special container, giga-boosted slot
 		resolution,
-		aspectRatio: '5:4',
+		aspectRatio,
 	});
 };
 
@@ -275,7 +278,7 @@ type Props = {
 	atomId: string;
 	uniqueId: string;
 	videoStyle: VideoPlayerFormat;
-	aspectRatio: number;
+	aspectRatio: AspectRatio;
 	posterImage: string;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
@@ -871,13 +874,15 @@ export const SelfHostedVideo = ({
 
 	/** The aspect ratio of the video will be clamped within the specified range */
 	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
-		aspectRatio,
+		aspectRatio.numberRepresentation,
 		minAspectRatio,
 		maxAspectRatio,
 	);
 
-	const isVideoCroppedAtTopBottom = aspectRatio < aspectRatioOfVisibleVideo;
-	const isVideoCroppedAtLeftRight = aspectRatio > aspectRatioOfVisibleVideo;
+	const isVideoCroppedAtTopBottom =
+		aspectRatio.numberRepresentation < aspectRatioOfVisibleVideo;
+	const isVideoCroppedAtLeftRight =
+		aspectRatio.numberRepresentation > aspectRatioOfVisibleVideo;
 
 	const isGreyBarsAtSidesOnDesktop =
 		containerAspectRatioDesktop !== undefined &&
@@ -890,7 +895,7 @@ export const SelfHostedVideo = ({
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(posterImage)
+		? getOptimisedPosterImage(posterImage, aspectRatio.stringRepresentation)
 		: undefined;
 
 	return (
@@ -913,7 +918,7 @@ export const SelfHostedVideo = ({
 			>
 				<div
 					css={figureStyles(
-						aspectRatio,
+						aspectRatio.numberRepresentation,
 						aspectRatioOfVisibleVideo,
 						isGreyBarsAtSidesOnDesktop,
 						isGreyBarsAtTopAndBottomOnDesktop,
@@ -926,7 +931,7 @@ export const SelfHostedVideo = ({
 						sources={optimisedSources}
 						atomId={atomId}
 						uniqueId={uniqueId}
-						aspectRatio={aspectRatio}
+						aspectRatio={aspectRatio.numberRepresentation}
 						width={width}
 						height={height}
 						videoStyle={videoStyle}
