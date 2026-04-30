@@ -187,7 +187,10 @@ const dispatchOphanAttentionEvent = (
 	document.dispatchEvent(event);
 };
 
-const getOptimisedPosterImage = (mainImage: string): string => {
+const getOptimisedPosterImage = (
+	mainImage: string,
+	aspectRatio: string,
+): string => {
 	// This only runs on the client
 	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
 
@@ -195,7 +198,7 @@ const getOptimisedPosterImage = (mainImage: string): string => {
 		mainImage,
 		imageWidth: 940, // The widest a video can be: flexible special container, giga-boosted slot
 		resolution,
-		aspectRatio: '5:4',
+		aspectRatio,
 	});
 };
 
@@ -890,7 +893,7 @@ export const SelfHostedVideo = ({
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(posterImage)
+		? getOptimisedPosterImage(posterImage, '5:4')
 		: undefined;
 
 	return (
