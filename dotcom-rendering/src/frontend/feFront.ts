@@ -270,7 +270,7 @@ export type FESnap = {
 	embedJs?: string;
 };
 
-export type FEAspectRatio = '5:3' | '5:4' | '4:5' | '1:1';
+export type FEAspectRatio = '5:3' | '5:4' | '4:5' | '1:1' | '3:4';
 
 type FECollectionConfig = {
 	displayName: string;
