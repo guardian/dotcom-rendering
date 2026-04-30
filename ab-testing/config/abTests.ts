@@ -32,19 +32,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-holdback-spacefinder-on-interactives",
-		description:
-			"Holdback proportion of the audience without new spacefinder logic on interactive pages",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-04-30",
-		type: "client",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "holdback"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-mobile-inline1-halfpage",
 		description:
 			"To measure impact (RPM) and CLS of adding halfPage as an additional size option to mobile inline1 ad slot",
@@ -120,19 +107,6 @@ const ABTests: ABTest[] = [
 		audienceSpace: "A",
 		groups: ["preview"],
 		shouldForceMetricsCollection: false,
-	},
-	{
-		name: "commercial-loading-userids-async",
-		description:
-			"Testing whether the asynchronous loading of userIds will alleviate any potential blocking of downstream functions",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-04-30",
-		type: "client",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
 	},
 	{
 		name: "growth-auxia-banner",
