@@ -22,7 +22,7 @@ export const Fixture = meta.story({
 	beforeEach() {
 		mocked(getMatchNotificationsClient).mockReturnValue({
 			isAvailable: fn(() => Promise.resolve({ isAvailable: true })),
-		} as ReturnType<typeof getMatchNotificationsClient>);
+		} as unknown as ReturnType<typeof getMatchNotificationsClient>);
 	},
 	parameters: {
 		colourSchemeBackground: {
@@ -91,6 +91,6 @@ export const Unavailable = Fixture.extend({
 						'You have already signed up for Arsenal notifications',
 				}),
 			),
-		} as ReturnType<typeof getMatchNotificationsClient>);
+		} as unknown as ReturnType<typeof getMatchNotificationsClient>);
 	},
 });
