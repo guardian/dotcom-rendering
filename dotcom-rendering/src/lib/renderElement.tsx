@@ -189,6 +189,7 @@ export const renderElement = ({
 					<AudioAtomWrapper
 						id={element.id}
 						trackUrl={element.trackUrl}
+						trackUrlWithAds={element.trackUrlWithAds}
 						kicker={element.kicker}
 						title={element.title}
 						duration={element.duration}

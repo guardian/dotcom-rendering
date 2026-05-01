@@ -335,6 +335,9 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 											!!article.config.switches.acast
 										}
 										src={audioData.audioDownloadUrl}
+										srcWithAds={
+											audioData.audioDownloadUrlWithAds
+										}
 										mediaId={audioData.mediaId}
 									/>
 								</Island>

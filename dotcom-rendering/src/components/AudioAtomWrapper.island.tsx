@@ -5,6 +5,7 @@ import { AudioAtom } from './AudioAtom/AudioAtom';
 type Props = {
 	id: string;
 	trackUrl: string;
+	trackUrlWithAds: string;
 	kicker: string;
 	title?: string | undefined;
 	duration: number;
@@ -26,6 +27,7 @@ type Props = {
 export const AudioAtomWrapper = ({
 	id,
 	trackUrl,
+	trackUrlWithAds,
 	kicker,
 	title,
 	duration,
@@ -37,6 +39,7 @@ export const AudioAtomWrapper = ({
 	// *     ACast     *
 	// *****************
 	const [shouldUseAcast, setShouldUseAcast] = useState<boolean>(false);
+
 	useEffect(() => {
 		onConsentChange((state) => {
 			// Should we use ad enabled audio? If so, then set the shouldUseAcast
@@ -57,11 +60,10 @@ export const AudioAtomWrapper = ({
 	return (
 		<AudioAtom
 			id={id}
-			trackUrl={trackUrl}
+			trackUrl={shouldUseAcast ? trackUrlWithAds : trackUrl}
 			kicker={kicker}
 			title={title}
 			duration={duration}
-			shouldUseAcast={shouldUseAcast}
 		/>
 	);
 };

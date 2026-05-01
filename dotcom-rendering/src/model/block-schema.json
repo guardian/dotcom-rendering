@@ -411,6 +411,9 @@
                 "trackUrl": {
                     "type": "string"
                 },
+                "trackUrlWithAds": {
+                    "type": "string"
+                },
                 "duration": {
                     "type": "number"
                 },
@@ -428,7 +431,8 @@
                 "elementId",
                 "id",
                 "kicker",
-                "trackUrl"
+                "trackUrl",
+                "trackUrlWithAds"
             ]
         },
         "RoleType": {
@@ -475,6 +479,9 @@
                 "url": {
                     "type": "string"
                 },
+                "urlWithAds": {
+                    "type": "string"
+                },
                 "mimeType": {
                     "type": "string"
                 },
@@ -497,7 +504,8 @@
                 }
             },
             "required": [
-                "url"
+                "url",
+                "urlWithAds"
             ]
         },
         "BlockquoteBlockElement": {

@@ -3,7 +3,12 @@ import type { FEElement } from '../types/content';
 export const getAudioData = (
 	mainMediaElements: FEElement[] | undefined,
 ):
-	| { audioDownloadUrl: string; mediaId: string; durationSeconds?: number }
+	| {
+			audioDownloadUrl: string;
+			audioDownloadUrlWithAds: string;
+			mediaId: string;
+			durationSeconds?: number;
+	  }
 	| undefined => {
 	const audioBlockElement = mainMediaElements?.find(
 		(element) =>
@@ -17,6 +22,7 @@ export const getAudioData = (
 		const total = (isNaN(mins) ? 0 : mins) * 60 + (isNaN(secs) ? 0 : secs);
 		return {
 			audioDownloadUrl: audioBlockElement.assets[0].url,
+			audioDownloadUrlWithAds: audioBlockElement.assets[0].urlWithAds,
 			mediaId: audioBlockElement.id,
 			durationSeconds: total > 0 ? total : undefined,
 		};

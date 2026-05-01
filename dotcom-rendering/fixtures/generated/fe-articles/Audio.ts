@@ -32,6 +32,8 @@ export const Audio: FEArticle = {
 						source: 'The Guardian',
 					},
 					url: 'https://audio.guim.co.uk/2026/02/27-42462-gdn.alr.060326.NA_GAVIN_FRANCIS_MENTALILLNESS.mp3',
+					urlWithAds:
+						'https://flex.acast.com/audio.guim.co.uk/2026/02/27-42462-gdn.alr.060326.NA_GAVIN_FRANCIS_MENTALILLNESS.mp3',
 					mimeType: 'audio/mpeg',
 				},
 			],
