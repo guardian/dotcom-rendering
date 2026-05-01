@@ -131,6 +131,16 @@ const figureStyles = (
 	`}
 `;
 
+const showControlsStyles = css`
+	:hover .controls-container {
+		visibility: visible;
+		opacity: 1;
+		transition:
+			visibility 0.2s,
+			opacity 0.2s ease-in-out;
+	}
+`;
+
 /**
  * Dispatches a custom play audio event so that other videos listening
  * for this event will be muted.
@@ -376,6 +386,9 @@ export const SelfHostedVideo = ({
 		!hideProgressBar && !isCinemagraph && playerState !== 'NOT_STARTED';
 
 	const showIcons = !isCinemagraph && playerState !== 'NOT_STARTED';
+
+	// Controls are temporarily hidden so the full video can be displayed to the user without distractions.
+	const hideControls = isDefault && playerState === 'PLAYING';
 
 	const iconSize = isDefault ? 'large' : 'small';
 
@@ -872,6 +885,15 @@ export const SelfHostedVideo = ({
 			playerState === 'PAUSED_BY_BROWSER' ||
 			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
 
+	const showPauseIcon = hideControls;
+
+	let showPlayPauseIcon: 'play' | 'pause' | null = null;
+	if (showPlayIcon) {
+		showPlayPauseIcon = 'play';
+	} else if (showPauseIcon) {
+		showPlayPauseIcon = 'pause';
+	}
+
 	/** The aspect ratio of the video will be clamped within the specified range */
 	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
 		aspectRatio,
@@ -927,15 +949,18 @@ export const SelfHostedVideo = ({
 				]}
 			>
 				<div
-					css={figureStyles(
-						aspectRatio,
-						aspectRatioOfVisibleVideo,
-						isGreyBarsAtSidesOnDesktop,
-						isGreyBarsAtTopAndBottomOnDesktop,
-						isVideoCroppedAtTopBottom,
-						isVideoCroppedAtLeftRight,
-						containerAspectRatioDesktop,
-					)}
+					css={[
+						figureStyles(
+							aspectRatio,
+							aspectRatioOfVisibleVideo,
+							isGreyBarsAtSidesOnDesktop,
+							isGreyBarsAtTopAndBottomOnDesktop,
+							isVideoCroppedAtTopBottom,
+							isVideoCroppedAtLeftRight,
+							containerAspectRatioDesktop,
+						),
+						hideControls && showControlsStyles,
+					]}
 				>
 					<SelfHostedVideoPlayer
 						sources={optimisedSources}
@@ -966,7 +991,7 @@ export const SelfHostedVideo = ({
 						AudioIcon={supportsAudio ? AudioIcon : null}
 						preloadPartialData={!!shouldAutoplay}
 						iconSize={iconSize}
-						showPlayIcon={showPlayIcon}
+						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
 						showSubtitles={!isCinemagraph}
 						subtitleSource={subtitleSource}
@@ -978,6 +1003,7 @@ export const SelfHostedVideo = ({
 						shouldLoop={shouldLoop}
 						showFullscreenIcon={isDefault}
 						isInteractive={!isCinemagraph}
+						hideControls={hideControls}
 					/>
 				</div>
 			</div>
