@@ -102,7 +102,7 @@
 		"constructs": "10.6.0",
 		"cpy": "11.0.0",
 		"css-loader": "7.1.2",
-		"dompurify": "3.2.4",
+		"dompurify": "3.4.0",
 		"dynamic-import-polyfill": "0.1.1",
 		"eslint": "8.57.1",
 		"eslint-plugin-custom-elements": "0.0.8",
