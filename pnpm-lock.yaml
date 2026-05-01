@@ -255,8 +255,8 @@ importers:
         specifier: 22.2.0
         version: 22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@31.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(react@18.3.1)
       '@guardian/bridget':
-        specifier: 8.9.0
-        version: 8.9.0
+        specifier: 8.9.1-2026-04-28
+        version: 8.9.1-2026-04-28
       '@guardian/browserslist-config':
         specifier: 6.1.0
         version: 6.1.0(browserslist@4.24.4)(tslib@2.6.2)
@@ -2356,8 +2356,8 @@ packages:
       '@guardian/source': ^9.0.0
       react: 17.0.2 || 18.2.0
 
-  '@guardian/bridget@8.9.0':
-    resolution: {integrity: sha512-OAo45mzxGJeCVhfsle9r0J0tqOWcDL6EyL63324ovAwREC2Joj7zOnuhPPtFLx7pjvUl6qMQzuyIiWppZkFbiA==}
+  '@guardian/bridget@8.9.1-2026-04-28':
+    resolution: {integrity: sha512-cBugAJi7uW00M5KuFnjQ/xqxG+6YydPQA6o2fHGosiRlmLADKLvMVesY7PovEOYqIU0J6bPpcvi6HsS4VNJvhg==}
 
   '@guardian/browserslist-config@6.1.0':
     resolution: {integrity: sha512-qM0QxAv6E5IHXny5Okli6AZXEio0mpXzzEzz38qrb4IwO91R6eWVKyihdj0qW2k7TVxMFVOSfNmBZ1H5EiJhgw==}
@@ -11587,7 +11587,7 @@ snapshots:
       '@guardian/source': 11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       react: 18.3.1
 
-  '@guardian/bridget@8.9.0': {}
+  '@guardian/bridget@8.9.1-2026-04-28': {}
 
   '@guardian/browserslist-config@6.1.0(browserslist@4.24.4)(tslib@2.6.2)':
     dependencies:

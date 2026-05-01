@@ -33,6 +33,8 @@ sb.mock(import('../src/lib/fetchEmail.ts'), { spy: true });
 sb.mock(import('../src/lib/useNewsletterSignupForm.ts'), { spy: true });
 // @ts-ignore -- Storybook wants the file extension, TS does not.
 sb.mock(import('../src/lib/useAB.ts'), { spy: true });
+// @ts-ignore -- Storybook wants the file extension, TS does not.
+sb.mock(import('../src/lib/bridgetApi.ts'), { spy: true });
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();

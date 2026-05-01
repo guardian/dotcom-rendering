@@ -115,6 +115,12 @@ export const getNativeABTestingClient: BridgetApi<
 		new Map(Object.entries({ 'test-id': 'variant' })),
 });
 
+export const getMatchNotificationsClient: BridgetApi<
+	'getMatchNotificationsClient'
+> = () => ({
+	isAvailable: async () => ({ isAvailable: true }),
+});
+
 export const ensure_all_exports_are_present = {
 	getUserClient,
 	getAcquisitionsClient,
@@ -134,6 +140,7 @@ export const ensure_all_exports_are_present = {
 	getListenToArticleClient,
 	getAudioClient,
 	getNativeABTestingClient,
+	getMatchNotificationsClient,
 } satisfies {
 	[Method in keyof BridgeModule]: BridgetApi<Method>;
 };

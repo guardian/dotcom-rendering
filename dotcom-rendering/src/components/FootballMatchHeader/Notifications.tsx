@@ -1,9 +1,15 @@
 import { css } from '@emotion/react';
-import { space, textSans14Object } from '@guardian/source/foundations';
-import { useMemo } from 'react';
+import { log } from '@guardian/libs';
+import {
+	space,
+	textSans14,
+	textSans14Object,
+} from '@guardian/source/foundations';
+import { useEffect, useMemo, useState } from 'react';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import type { NotificationsClient } from '../../lib/bridgetApi';
+import { getMatchNotificationsClient } from '../../lib/bridgetApi';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -23,11 +29,44 @@ type Props = {
 
 export const Notifications = (props: Props) => {
 	const { renderingTarget } = useConfig();
+	const [isAvailable, setIsAvailable] = useState<boolean | undefined>(
+		undefined,
+	);
+	const [unavailableReason, setUnavailableReason] = useState<
+		string | undefined
+	>(undefined);
+
 	// useMemo to limit constructions of `Intl.DateTimeFormat`
 	const displayName = useMemo(
 		() => notificationDisplayName(props.edition),
 		[props.edition],
 	);
+
+	useEffect(() => {
+		if (renderingTarget !== 'Apps' || props.match.kind === 'Result') {
+			return;
+		}
+
+		void getMatchNotificationsClient()
+			.isAvailable()
+			.then((availability) => {
+				setIsAvailable(availability.isAvailable);
+				setUnavailableReason(availability.unavailableReason);
+			})
+			.catch((error: unknown) => {
+				window.guardian.modules.sentry.reportError(
+					error instanceof Error ? error : new Error(String(error)),
+					'bridget-getMatchNotificationsClient-isAvailable-error',
+				);
+				log(
+					'dotcom',
+					'Bridget getMatchNotificationsClient.isAvailable Error:',
+					error,
+				);
+				// Treat errors as available to avoid silently hiding the button
+				setIsAvailable(true);
+			});
+	}, [renderingTarget, props.match.kind]);
 
 	if (renderingTarget !== 'Apps' || props.match.kind === 'Result') {
 		return null;
@@ -36,37 +75,62 @@ export const Notifications = (props: Props) => {
 	return (
 		<>
 			<Hr borderStyle="solid" borderColour={border(props.match.kind)} />
-			<p
-				css={{
-					...textSans14Object,
-					'&': css(grid.column.centre),
-					paddingTop: space[2],
-					paddingBottom: space[3],
-					paddingLeft: 6,
-					paddingRight: 6,
-				}}
-				style={{
-					color: palette(primaryText(props.match.kind)),
-				}}
-			>
-				Be notified about the lineup, kick-off time, goals, half-time
-				and full time scores
-			</p>
-			<NotificationsToggle
-				displayName={displayName(props.match)}
-				id={props.match.paId}
-				notificationType="football-match"
-				notificationsClient={props.notificationsClient}
-				colour={primaryText(props.match.kind)}
-				backgroundColour={background(props.match.kind)}
-				iconColour={primaryText(props.match.kind)}
-				css={{
-					'&': css(grid.column.centre),
-					paddingLeft: 6,
-					paddingRight: 6,
-					paddingBottom: space[4],
-				}}
-			/>
+			{isAvailable === false ? (
+				<p
+					css={[
+						textSans14,
+						css({
+							'&': css(grid.column.centre),
+							paddingTop: space[2],
+							paddingBottom: space[3],
+							paddingLeft: 6,
+							paddingRight: 6,
+						}),
+					]}
+					style={{
+						color: palette(primaryText(props.match.kind)),
+					}}
+				>
+					{unavailableReason ??
+						'You have already signed up for team notifications'}
+				</p>
+			) : (
+				<>
+					<p
+						css={{
+							...textSans14Object,
+							'&': css(grid.column.centre),
+							paddingTop: space[2],
+							paddingBottom: space[3],
+							paddingLeft: 6,
+							paddingRight: 6,
+						}}
+						style={{
+							color: palette(primaryText(props.match.kind)),
+						}}
+					>
+						Be notified about the lineup, kick-off time, goals,
+						half-time and full time scores
+					</p>
+					{isAvailable === true && (
+						<NotificationsToggle
+							displayName={displayName(props.match)}
+							id={props.match.paId}
+							notificationType="football-match"
+							notificationsClient={props.notificationsClient}
+							colour={primaryText(props.match.kind)}
+							backgroundColour={background(props.match.kind)}
+							iconColour={primaryText(props.match.kind)}
+							css={{
+								'&': css(grid.column.centre),
+								paddingLeft: 6,
+								paddingRight: 6,
+								paddingBottom: space[4],
+							}}
+						/>
+					)}
+				</>
+			)}
 		</>
 	);
 };
