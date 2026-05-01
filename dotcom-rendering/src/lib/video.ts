@@ -1,3 +1,5 @@
+// DEV NOTE - there's nothing in this file which seems to interact with `title` or `caption` attribute data
+
 import type { FEMediaAsset } from '../frontend/feFront';
 import type { VideoAssets } from '../types/content';
 
