@@ -33,9 +33,9 @@ riffraff-bundle: clean-dist build cdk-synth
 
 build: clean-dist install
 	$(call log, "building production bundles with Vite")
-	@NODE_ENV=production node --import tsx vite/build.ts
-	$(call log, "generating Islands report card")
-	@node ./scripts/islands/island-descriptions.mjs
+	@NODE_ENV=production node vite/build.mts
+#	$(call log, "generating Islands report card")
+#	@node ./scripts/islands/island-descriptions.mjs
 
 prod:
 	@echo 'starting PROD server...'
@@ -49,16 +49,16 @@ prod-local: prod
 
 dev: clear clean-dist install
 	$(call log, "starting Vite DEV server")
-	@NODE_ENV=development node --import tsx vite/dev-server.ts
+	@NODE_ENV=development node vite/dev-server.mts
 
 dev-variant: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development BUILD_VARIANT=true node --import tsx vite/dev-server.ts
+	@NODE_ENV=development BUILD_VARIANT=true node vite/dev-server.mts
 
 dev-debug: clear clean-dist install
 	$(call log, "starting DEV server and debugger")
 	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
-	@NODE_ENV=development NODE_OPTIONS="--inspect" node --import tsx vite/dev-server.ts
+	@NODE_ENV=development NODE_OPTIONS="--inspect" node vite/dev-server.ts
 
 # storybook #########################################
 
