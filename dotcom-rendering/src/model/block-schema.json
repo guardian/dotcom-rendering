@@ -4181,7 +4181,10 @@
                 },
                 "lowestPrice": {
                     "type": "string"
-                }
+                },
+				"id": {
+					"type": "string"
+				}
             },
             "required": [
                 "_type",
