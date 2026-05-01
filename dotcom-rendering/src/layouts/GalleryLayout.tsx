@@ -452,11 +452,16 @@ const Meta = ({
 				'&::before': {
 					content: '""',
 					position: 'absolute',
-					left: -10,
+					left: -20,
 					top: 0,
 					bottom: 0,
 					width: 1,
 					backgroundColor: palette('--article-border'),
+				},
+			},
+			[from.leftCol]: {
+				'&::before': {
+					left: -10,
 				},
 			},
 		}}
