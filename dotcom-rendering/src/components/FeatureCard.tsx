@@ -395,7 +395,6 @@ export type Props = {
 	 * all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
 	 */
 	isImmersive?: boolean;
-	isStorylines?: boolean;
 	starRatingSize: RatingSizeType;
 };
 
@@ -433,7 +432,6 @@ export const FeatureCard = ({
 	uniqueId,
 	isNewsletter = false,
 	isImmersive = false,
-	isStorylines = false,
 	starRatingSize,
 	articleMedia,
 }: Props) => {
@@ -789,9 +787,6 @@ export const FeatureCard = ({
 														}
 														showClock={!!showClock}
 														serverTime={serverTime}
-														isStorylines={
-															isStorylines
-														}
 													/>
 												) : undefined
 											}
