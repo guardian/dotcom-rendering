@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
-import { from, space, until } from '@guardian/source/foundations';
+import { from, until } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -354,6 +354,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
+	const [isFullscreen, setIsFullscreen] = useState(false);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -401,6 +402,21 @@ export const SelfHostedVideo = ({
 		playerState,
 		currentTime,
 	});
+
+	/**
+	 * Switch the native text track mode based on fullscreen state.
+	 * - 'showing' in fullscreen: native browser rendering handles captions inside the
+	 *   native fullscreen layer (required for iOS webkit fullscreen where the DOM is inaccessible).
+	 * - 'hidden' outside fullscreen: cuechange events still fire so useSubtitles can
+	 *   populate activeCue, but native rendering is suppressed in favour of SubtitleOverlay.
+	 */
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
+		const track = video.textTracks[0];
+		if (!track) return;
+		track.mode = isFullscreen ? 'showing' : 'hidden';
+	}, [isFullscreen]);
 
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
@@ -640,28 +656,58 @@ export const SelfHostedVideo = ({
 		}
 	}, [shouldAutoplay, isInView, playerState]);
 
+	useEffect(() => {
+		const video = vidRef.current;
+
+		const handleFullscreenChange = () => {
+			setIsFullscreen(!!document.fullscreenElement);
+		};
+		const handleWebkitEnter = () => {
+			setIsFullscreen(true);
+		};
+		const handleWebkitExit = () => {
+			setIsFullscreen(false);
+		};
+
+		document.addEventListener('fullscreenchange', handleFullscreenChange);
+		document.addEventListener(
+			'webkitfullscreenchange',
+			handleFullscreenChange,
+		);
+		document.addEventListener(
+			'mozfullscreenchange',
+			handleFullscreenChange,
+		);
+		video?.addEventListener('webkitbeginfullscreen', handleWebkitEnter);
+		video?.addEventListener('webkitendfullscreen', handleWebkitExit);
+
+		return () => {
+			document.removeEventListener(
+				'fullscreenchange',
+				handleFullscreenChange,
+			);
+			document.removeEventListener(
+				'webkitfullscreenchange',
+				handleFullscreenChange,
+			);
+			document.removeEventListener(
+				'mozfullscreenchange',
+				handleFullscreenChange,
+			);
+			video?.removeEventListener(
+				'webkitbeginfullscreen',
+				handleWebkitEnter,
+			);
+			video?.removeEventListener('webkitendfullscreen', handleWebkitExit);
+		};
+	}, []);
+
 	if (adapted) {
 		return FallbackImageComponent;
 	}
 
 	const handleLoadedMetadata = () => {
-		const video = vidRef.current;
-		if (!video) return;
-
-		const track = video.textTracks[0];
-		if (!track?.cues) return;
-
-		const pxFromBottom = space[3];
-		const videoHeight = video.getBoundingClientRect().height;
-		const percentFromTop =
-			((videoHeight - pxFromBottom) / videoHeight) * 100;
-
-		for (const cue of Array.from(track.cues)) {
-			if (cue instanceof VTTCue) {
-				cue.snapToLines = false;
-				cue.line = percentFromTop;
-			}
-		}
+		// metadata loaded; no action needed for subtitle positioning
 	};
 
 	const handleLoadedData = () => {
@@ -719,18 +765,12 @@ export const SelfHostedVideo = ({
 
 	const handleFullscreenClick = (event: React.SyntheticEvent) => {
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
-		event.stopPropagation(); // Don't pause the video
+		event.stopPropagation();
 
 		const video = vidRef.current;
 		if (!video) return;
 
 		if (shouldUseWebkitFullscreen(video)) {
-			/***
-			 * webkit fullscreen methods are not part of the standard HTMLVideoElement
-			 * type definition as they are iOS only.
-			 * We need to extend the type expect these handlers when we're on iOS to keep TS happy.
-			 * @see https://developer.apple.com/documentation/webkitjs/htmlvideoelement/1633500-webkitenterfullscreen
-			 */
 			const webkitVideo = video as HTMLVideoElement & {
 				webkitDisplayingFullscreen: boolean;
 				webkitEnterFullscreen: () => void;
@@ -749,7 +789,6 @@ export const SelfHostedVideo = ({
 		}
 		void video.requestFullscreen();
 	};
-
 	/**
 	 * If the video was paused and we know that it wasn't paused by the user
 	 * or the intersection observer, we can deduce that it was paused by the
@@ -974,10 +1013,11 @@ export const SelfHostedVideo = ({
 						showIcons={showIcons}
 						iconsPosition={controlsPosition}
 						subtitlesPosition={subtitlesPosition}
-						activeCue={activeCue}
+						activeCue={isFullscreen ? null : activeCue}
 						shouldLoop={shouldLoop}
 						showFullscreenIcon={isDefault}
 						isInteractive={!isCinemagraph}
+						isFullscreen={isFullscreen}
 					/>
 				</div>
 			</div>

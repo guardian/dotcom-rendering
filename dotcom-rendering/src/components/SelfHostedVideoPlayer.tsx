@@ -1,16 +1,10 @@
 import { css } from '@emotion/react';
-import {
-	space,
-	textSans15,
-	textSans17,
-	textSans20,
-} from '@guardian/source/foundations';
+import { space } from '@guardian/source/foundations';
 import type { IconProps } from '@guardian/source/react-components';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
-import { palette } from '../palette';
 import type { VideoPlayerFormat } from '../types/mainMedia';
 import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
 import {
@@ -38,18 +32,6 @@ const videoStyles = (aspectRatio: number) => css`
 
 const interactiveStyles = css`
 	cursor: pointer;
-`;
-
-const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
-	::cue {
-		/* Hide the cue by default as we prefer custom overlay */
-		visibility: hidden;
-
-		color: ${palette('--video-subtitle-text')};
-		${subtitleSize === 'small' && textSans15};
-		${subtitleSize === 'medium' && textSans17};
-		${subtitleSize === 'large' && textSans20};
-	}
 `;
 
 const playIconStyles = css`
@@ -142,6 +124,7 @@ export type Props = {
 	isInteractive: boolean;
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
+	isFullscreen: boolean;
 };
 
 /**
@@ -195,6 +178,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			iconsPosition,
 			subtitlesPosition,
+			isFullscreen,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -205,7 +189,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const showSubtitles = canShowSubtitles && !!subtitleSource;
 		const showProgressBar = canShowProgressBar && currentRefExists;
 		const showIcons = canShowIcons && currentRefExists;
-
+		console.log(showFullscreenIcon);
 		const dataLinkName = `gu-video-${videoStyle.toLowerCase()}-${
 			showPlayIcon ? 'play' : 'pause'
 		}-${atomId}`;
@@ -218,8 +202,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 					css={[
 						videoStyles(aspectRatio),
 						isInteractive && interactiveStyles,
-						showSubtitles && subtitleStyles(subtitleSize),
 					]}
+					controls={isFullscreen}
 					crossOrigin="anonymous"
 					ref={ref}
 					tabIndex={0}
@@ -252,10 +236,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 							type={mimeType}
 						/>
 					))}
-					{showSubtitles && (
+					{!!subtitleSource && (
 						<track
-							// Don't use default - it forces native rendering on iOS
-							default={false}
 							kind="subtitles"
 							src={subtitleSource}
 							srcLang="en"
@@ -307,7 +289,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 								smallIconsPositionStyles(iconsPosition),
 						]}
 					>
-						{showFullscreenIcon && (
+						{true && (
 							<FullscreenIcon
 								handleClick={handleFullscreenClick}
 								atomId={atomId}
