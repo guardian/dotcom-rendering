@@ -55,7 +55,7 @@ jobs:
 
       # All rendering apps deployment
       - name: Upload rendering apps to RiffRaff
-        uses: guardian/actions-riff-raff@ve06bfc4e4ebe68724772cd8e749e52488b6cb9f5
+        uses: guardian/actions-riff-raff@e06bfc4e4ebe68724772cd8e749e52488b6cb9f5
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
