@@ -147,6 +147,18 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "commercial-passback-refactor",
+		description: "Test the refactored commercial passback process",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-05-14",
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["variant"],
+		shouldForceMetricsCollection: true,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
