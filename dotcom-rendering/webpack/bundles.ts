@@ -1,4 +1,9 @@
-import type { ServerSideTestNames } from '../src/types/config';
+type ServerSideTests = {
+	[key: `${string}Variant`]: 'variant';
+	[key: `${string}Control`]: 'control';
+};
+
+type ServerSideTestNames = keyof ServerSideTests;
 
 /**
  * Controls whether we should build the variant bundle.
