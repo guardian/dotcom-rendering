@@ -1,9 +1,9 @@
 import type { UserConfig } from 'vite';
 import { mergeConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
-import { cjsPackages } from './cjs-packages';
-import { ssrCjsPlugin } from './ssr-cjs-plugin';
-import { sharedConfig } from './vite.config.shared';
+import { cjsPackages } from './cjs-packages.mts';
+import { ssrCjsPlugin } from './ssr-cjs-plugin.mts';
+import { sharedConfig } from './vite.config.shared.mts';
 
 const DEV = process.env.NODE_ENV === 'development';
 
