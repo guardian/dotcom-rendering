@@ -43,49 +43,180 @@ export interface Switches {
  * constructed in frontend and passed to dotcom-rendering
  * this data could eventually be defined in dotcom-rendering
  */
-export interface ConfigType extends CommercialConfigType {
-	dcrCouldRender?: boolean;
-	ajaxUrl: string;
-	sentryPublicApiKey: string;
-	sentryHost: string;
-	dcrSentryDsn: string;
-	switches: Switches;
+export interface ConfigType extends CommercialConfigType, LegacyConfig {
 	abTests: ServerSideTests;
-	serverSideABTests: Record<string, string>;
-	dfpAccountId: string;
-	commercialBundleUrl: string;
-	revisionNumber: string;
-	shortUrlId: string;
-	isDev?: boolean;
-	googletagUrl: string;
-	stage: StageType;
-	frontendAssetsFullURL: string;
 	adUnit: string;
-	isSensitive: boolean;
-	videoDuration?: number;
-	edition: EditionId;
-	section: string;
-	source?: string;
-
-	sharedAdTargeting: SharedAdTargeting;
-	isPaidContent?: boolean;
-	keywordIds: string;
-	showRelatedContent: boolean;
-	shouldHideReaderRevenue?: boolean;
-	idApiUrl: string;
+	ajaxUrl: string;
+	brazeApiKey?: string;
+	commercialBundleUrl: string;
+	dcrCouldRender?: boolean;
+	dcrSentryDsn: string;
+	dfpAccountId: string;
+	discussionApiClientHeader: string;
 	discussionApiUrl: string;
 	discussionD2Uid: string;
-	discussionApiClientHeader: string;
-	isPhotoEssay?: boolean;
-	references?: { [key: string]: string }[];
-	host?: string;
-	idUrl?: string;
-	mmaUrl?: string;
-	brazeApiKey?: string;
-	ipsosTag?: string;
-	isLiveBlog?: boolean;
-	isLive?: boolean;
-	isPreview?: boolean;
+	edition: EditionId;
+	frontendAssetsFullURL: string;
 	googleRecaptchaSiteKey?: string;
 	googleRecaptchaSiteKeyVisible?: string;
+	googletagUrl: string;
+	hasPageSkin?: boolean;
+	host?: string;
+	idApiUrl: string;
+	idUrl?: string;
+	ipsosTag?: string;
+	isDev?: boolean;
+	isLive?: boolean;
+	isLiveBlog?: boolean;
+	isPaidContent?: boolean;
+	isPhotoEssay?: boolean;
+	isPreview?: boolean;
+	isSensitive: boolean;
+	keywordIds: string;
+	mmaUrl?: string;
+	references?: { [key: string]: string }[];
+	revisionNumber: string;
+	section: string;
+	sentryHost: string;
+	sentryPublicApiKey: string;
+	serverSideABTests: Record<string, string>;
+	sharedAdTargeting: SharedAdTargeting;
+	shortUrlId: string;
+	shouldHideReaderRevenue?: boolean;
+	showRelatedContent: boolean;
+	source?: string;
+	stage: StageType;
+	switches: Switches;
+	userBenefitsApiUrl?: string;
+	videoDuration?: number;
+}
+
+/**
+ * Config fields that are present in the payload from frontend but are not used in DCR
+ * Here to satisfy types when adding new fixtures based on the JSON output from Frontend
+ *
+ * If not used we should remove these properties from the Frontend model
+ */
+interface LegacyConfig {
+	a9PublisherId?: string;
+	allowUserGeneratedContent?: boolean;
+	assetsPath?: string;
+	atoms?: Array<string>;
+	atomTypes?: {
+		audio?: boolean;
+		callToAction?: boolean;
+		chart?: boolean;
+		commonsdivision?: boolean;
+		explainer?: boolean;
+		guide?: boolean;
+		interactive?: boolean;
+		media?: boolean;
+		profile?: boolean;
+		qanda?: boolean;
+		quizz?: boolean;
+		review?: boolean;
+		timeline?: boolean;
+	};
+	authorIds?: string;
+	avatarApiUrl?: string;
+	avatarImagesUrl?: string;
+	beaconUrl?: string;
+	blogIds?: string;
+	blogs?: string;
+	buildNumber?: string;
+	byline?: string;
+	calloutsUrl?: string;
+	campaigns?: Array<{
+		id?: string;
+		name?: string;
+		rules?: Array<unknown>;
+		priority?: number;
+		displayOnSensitive?: boolean;
+		fields?: {
+			campaignId?: string;
+			_type?: string;
+		};
+	}>;
+	cardStyle?: string;
+	commentable?: boolean;
+	commissioningDesks?: string;
+	contentId?: string;
+	contributorBio?: string;
+	dfpAdUnitRoot?: string;
+	dfpHost?: string;
+	disableStickyTopBanner?: boolean;
+	externalEmbedHost?: string;
+	facebookIaAdUnitRoot?: string;
+	fbAppId?: string;
+	forecastsapiurl?: string;
+	frontendSentryDsn?: string;
+	googleSearchId?: string;
+	googleSearchUrl?: string;
+	googletagJsUrl?: string;
+	hasMultipleVideosInPage?: boolean;
+	hasShowcaseMainElement?: boolean;
+	hasYouTubeAtom?: boolean;
+	idOAuthUrl?: string;
+	idWebAppUrl?: string;
+	inBodyExternalLinkCount?: number;
+	inBodyInternalLinkCount?: number;
+	isAdFree?: boolean;
+	isColumn?: boolean;
+	isContent?: boolean;
+	isFront?: boolean;
+	isHosted?: boolean;
+	isImmersive?: boolean;
+	isNumberedList?: boolean;
+	isProd?: boolean;
+	isSplash?: boolean;
+	lightboxImages?: {
+		id?: string;
+		headline?: string;
+		shouldHideAdverts?: boolean;
+		standfirst?: string;
+		images?: Array<{
+			caption?: string;
+			credit?: string;
+			displayCredit?: boolean;
+			src?: string;
+			srcsets?: string;
+			sizes?: string;
+			ratio?: number;
+			role?: string;
+			parentContentId?: string;
+			id?: string;
+		}>;
+	};
+	locationapiurl?: string;
+	membershipAccess?: string;
+	membershipUrl?: string;
+	mobileAppsAdUnitRoot?: string;
+	nonKeywordTagIds?: string;
+	omnitureAccount?: string;
+	omnitureAmpAccount?: string;
+	onwardWebSocket?: string;
+	ophanEmbedJsUrl?: string;
+	ophanJsUrl?: string;
+	optimizeEpicUrl?: string;
+	pageCode?: string;
+	pbIndexSites?: unknown;
+	pillar?: string;
+	plistaPublicApiKey?: string;
+	productionOffice?: string;
+	publication?: string;
+	requiresMembershipAccess?: boolean;
+	richLink?: string;
+	sectionName?: string;
+	shortUrl?: string;
+	shouldHideAdverts?: boolean;
+	sponsorshipType?: string;
+	stripePublicToken?: string;
+	supportUrl?: string;
+	thirdPartyAppsAccount?: string;
+	thumbnail?: string;
+	tones?: string;
+	userAttributesApiUrl?: string;
+	weatherapiurl?: string;
+	webTitle?: string;
+	wordCount?: number;
 }
