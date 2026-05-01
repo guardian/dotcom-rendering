@@ -4,19 +4,20 @@
  *
  * Runs the server build first, then all client builds in parallel.
  *
- * Usage:
- *   NODE_ENV=production node --import tsx vite/build.ts
  */
 import { rmSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { build } from 'vite';
-import type { Build } from '../src/lib/assets';
-import { BUILD_VARIANT as BUILD_VARIANT_SWITCH } from '../webpack/bundles';
-import { createClientConfig } from './vite.config.client';
-import { serverConfig } from './vite.config.server';
+import type { Build } from '../src/lib/assets.ts';
+import { BUILD_VARIANT as BUILD_VARIANT_SWITCH } from '../webpack/bundles.ts';
+import { createClientConfig } from './vite.config.client.mts';
+import { serverConfig } from './vite.config.server.mts';
 
 const PROD = process.env.NODE_ENV === 'production';
 const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 function getClientBuilds(): Build[] {
 	return [

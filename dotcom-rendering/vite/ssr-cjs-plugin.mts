@@ -10,10 +10,9 @@
  * hooks for external packages).
  */
 import { createRequire } from 'node:module';
-import { pathToFileURL } from 'node:url';
 import type { Plugin } from 'vite';
 
-const nodeRequire = createRequire(pathToFileURL(__filename).href);
+const nodeRequire = createRequire(import.meta.url);
 
 /**
  * Creates a Vite plugin that wraps specified CJS packages
