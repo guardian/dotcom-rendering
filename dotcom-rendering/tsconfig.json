@@ -1,6 +1,7 @@
 {
 	"extends": "@guardian/tsconfig/tsconfig.json",
 	"compilerOptions": {
+		"allowImportingTsExtensions": true,
 		"allowJs": true,
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true,
