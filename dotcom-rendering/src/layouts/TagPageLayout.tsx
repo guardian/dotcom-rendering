@@ -189,7 +189,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								collectionBranding={
 									index === 0 ? tagPage.branding : undefined
 								}
-								showTopBorder={true}
 								ophanComponentLink={`container-${index} | ${containerId}`}
 								ophanComponentName={containerId}
 								sectionId={containerId}
@@ -200,7 +199,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							>
 								<DecideContainerByTrails
 									trails={groupedTrails.trails}
-									speed={tagPage.speed}
 									imageLoading={imageLoading}
 									aspectRatio="5:4"
 								/>
