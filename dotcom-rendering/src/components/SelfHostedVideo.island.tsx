@@ -187,7 +187,10 @@ const dispatchOphanAttentionEvent = (
 	document.dispatchEvent(event);
 };
 
-const getOptimisedPosterImage = (mainImage: string): string => {
+const getOptimisedPosterImage = (
+	mainImage: string,
+	aspectRatio: string,
+): string => {
 	// This only runs on the client
 	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
 
@@ -195,7 +198,7 @@ const getOptimisedPosterImage = (mainImage: string): string => {
 		mainImage,
 		imageWidth: 940, // The widest a video can be: flexible special container, giga-boosted slot
 		resolution,
-		aspectRatio: '5:4',
+		aspectRatio,
 	});
 };
 
@@ -889,8 +892,20 @@ export const SelfHostedVideo = ({
 
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
+	const isVertical =
+		fallbackImageSize === 'feature' ||
+		fallbackImageSize === 'feature-large' ||
+		isGreyBarsAtSidesOnDesktop;
+
+	/* This is a hot fix for cards where the video is a different aspect ratio and will be replaced by https://github.com/guardian/dotcom-rendering/pull/15746 */
+	const posterImageAspectRatio = isVertical
+		? '4:5'
+		: isGreyBarsAtTopAndBottomOnDesktop
+		? '16:9'
+		: '5:4';
+
 	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(posterImage)
+		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
 		: undefined;
 
 	return (
