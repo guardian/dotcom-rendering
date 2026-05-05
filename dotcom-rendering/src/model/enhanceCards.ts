@@ -13,9 +13,10 @@ import { getSoleContributor } from '../lib/byline';
 import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
-import { getLargestImageSize } from '../lib/image';
+import { getLargestImage } from '../lib/image';
 import {
 	convertFEMediaAssetsToVideoAssets,
+	DEFAULT_IMAGE_ASPECT_RATIO,
 	extractValidSourcesFromAssets,
 	getAspectRatioFromSources,
 } from '../lib/video';
@@ -162,31 +163,34 @@ const decideSlideshowImages = (
 	return undefined;
 };
 
-const getLargestImageUrl = (images?: Image[]) => {
-	return getLargestImageSize(
-		images?.map(({ url, fields: { width } }) => ({
-			url,
-			width: Number(width),
-		})) ?? [],
-	)?.url;
-};
-
 /**
- * If we have a replacement video, we should prioritise the largest available trail image from the media atom.
- * For all other videos, we should prioritise the card's trail image.
+ * If we have a replacement video, we prioritise the largest available trail image from the media atom.
+ * For all other videos, we prioritise the card's trail image.
  */
 const decideMediaAtomImage = (
 	videoReplace: boolean,
 	mediaAtomImages?: Image[],
 	cardTrailImage?: string,
-) => {
-	const largestMediaAtomImage = getLargestImageUrl(mediaAtomImages);
+): { src?: string; imageAspectRatio?: string } => {
+	const largestMediaAtomImage = getLargestImage(mediaAtomImages);
 
-	if (videoReplace) {
-		return largestMediaAtomImage ?? cardTrailImage;
+	if (isUndefined(largestMediaAtomImage)) {
+		return { src: cardTrailImage };
 	}
 
-	return cardTrailImage ?? largestMediaAtomImage;
+	if (isUndefined(cardTrailImage)) {
+		return {
+			src: largestMediaAtomImage.url,
+			imageAspectRatio: largestMediaAtomImage.fields.aspectRatio,
+		};
+	}
+
+	return videoReplace
+		? {
+				src: largestMediaAtomImage.url,
+				imageAspectRatio: largestMediaAtomImage.fields.aspectRatio,
+		  }
+		: { src: cardTrailImage };
 };
 
 /**
@@ -234,10 +238,6 @@ export const getActiveMediaAtom = (
 
 			const aspectRatio = getAspectRatioFromSources(sources);
 
-			const imageAspectRatio =
-				mediaAtom.posterImage?.allImages[0]?.fields.aspectRatio ??
-				'5:4';
-
 			return {
 				type: 'SelfHostedVideo',
 				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
@@ -246,8 +246,9 @@ export const getActiveMediaAtom = (
 				subtitleSource: subtitleAsset?.id,
 				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
-				image,
-				imageAspectRatio,
+				image: image.src,
+				imageAspectRatio:
+					image.imageAspectRatio ?? DEFAULT_IMAGE_ASPECT_RATIO,
 			};
 		}
 
@@ -277,7 +278,7 @@ export const getActiveMediaAtom = (
 				 * a soft contract with Editorial who manually set the duration of videos.
 				 */
 				isLive: mediaAtom.duration === 0,
-				image,
+				image: image.src,
 			};
 		}
 	}
