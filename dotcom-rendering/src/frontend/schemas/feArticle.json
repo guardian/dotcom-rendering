@@ -5082,89 +5082,32 @@
             "description": "the config model will contain useful app/site\nlevel data. Although currently derived from the config model\nconstructed in frontend and passed to dotcom-rendering\nthis data could eventually be defined in dotcom-rendering",
             "type": "object",
             "properties": {
-                "dcrCouldRender": {
-                    "type": "boolean"
-                },
-                "ajaxUrl": {
-                    "type": "string"
-                },
-                "sentryPublicApiKey": {
-                    "type": "string"
-                },
-                "sentryHost": {
-                    "type": "string"
-                },
-                "dcrSentryDsn": {
-                    "type": "string"
-                },
-                "switches": {
-                    "$ref": "#/definitions/Switches"
-                },
                 "abTests": {
                     "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
                     "type": "object"
                 },
-                "serverSideABTests": {
-                    "$ref": "#/definitions/Record<string,string>"
+                "adUnit": {
+                    "type": "string"
                 },
-                "dfpAccountId": {
+                "ajaxUrl": {
+                    "type": "string"
+                },
+                "brazeApiKey": {
                     "type": "string"
                 },
                 "commercialBundleUrl": {
                     "type": "string"
                 },
-                "revisionNumber": {
-                    "type": "string"
-                },
-                "shortUrlId": {
-                    "type": "string"
-                },
-                "isDev": {
+                "dcrCouldRender": {
                     "type": "boolean"
                 },
-                "googletagUrl": {
+                "dcrSentryDsn": {
                     "type": "string"
                 },
-                "stage": {
-                    "$ref": "#/definitions/StageType"
-                },
-                "frontendAssetsFullURL": {
+                "dfpAccountId": {
                     "type": "string"
                 },
-                "adUnit": {
-                    "type": "string"
-                },
-                "isSensitive": {
-                    "type": "boolean"
-                },
-                "videoDuration": {
-                    "type": "number"
-                },
-                "edition": {
-                    "$ref": "#/definitions/EditionId"
-                },
-                "section": {
-                    "type": "string"
-                },
-                "source": {
-                    "type": "string"
-                },
-                "sharedAdTargeting": {
-                    "$ref": "#/definitions/SharedAdTargeting"
-                },
-                "isPaidContent": {
-                    "type": "boolean"
-                },
-                "keywordIds": {
-                    "type": "string"
-                },
-                "showRelatedContent": {
-                    "type": "boolean"
-                },
-                "shouldHideReaderRevenue": {
-                    "type": "boolean"
-                },
-                "idApiUrl": {
+                "discussionApiClientHeader": {
                     "type": "string"
                 },
                 "discussionApiUrl": {
@@ -5173,11 +5116,62 @@
                 "discussionD2Uid": {
                     "type": "string"
                 },
-                "discussionApiClientHeader": {
+                "edition": {
+                    "$ref": "#/definitions/EditionId"
+                },
+                "frontendAssetsFullURL": {
                     "type": "string"
+                },
+                "googleRecaptchaSiteKey": {
+                    "type": "string"
+                },
+                "googleRecaptchaSiteKeyVisible": {
+                    "type": "string"
+                },
+                "googletagUrl": {
+                    "type": "string"
+                },
+                "hasPageSkin": {
+                    "type": "boolean"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "idApiUrl": {
+                    "type": "string"
+                },
+                "idUrl": {
+                    "type": "string"
+                },
+                "ipsosTag": {
+                    "type": "string"
+                },
+                "isDev": {
+                    "type": "boolean"
+                },
+                "isLive": {
+                    "type": "boolean"
+                },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
+                "isPaidContent": {
+                    "type": "boolean"
                 },
                 "isPhotoEssay": {
                     "type": "boolean"
+                },
+                "isPreview": {
+                    "type": "boolean"
+                },
+                "isSensitive": {
+                    "type": "boolean"
+                },
+                "keywordIds": {
+                    "type": "string"
+                },
+                "mmaUrl": {
+                    "type": "string"
                 },
                 "references": {
                     "type": "array",
@@ -5188,35 +5182,47 @@
                         }
                     }
                 },
-                "host": {
+                "revisionNumber": {
                     "type": "string"
                 },
-                "idUrl": {
+                "section": {
                     "type": "string"
                 },
-                "mmaUrl": {
+                "sentryHost": {
                     "type": "string"
                 },
-                "brazeApiKey": {
+                "sentryPublicApiKey": {
                     "type": "string"
                 },
-                "ipsosTag": {
+                "serverSideABTests": {
+                    "$ref": "#/definitions/Record<string,string>"
+                },
+                "sharedAdTargeting": {
+                    "$ref": "#/definitions/SharedAdTargeting"
+                },
+                "shortUrlId": {
                     "type": "string"
                 },
-                "isLiveBlog": {
+                "shouldHideReaderRevenue": {
                     "type": "boolean"
                 },
-                "isLive": {
+                "showRelatedContent": {
                     "type": "boolean"
                 },
-                "isPreview": {
-                    "type": "boolean"
-                },
-                "googleRecaptchaSiteKey": {
+                "source": {
                     "type": "string"
                 },
-                "googleRecaptchaSiteKeyVisible": {
+                "stage": {
+                    "$ref": "#/definitions/StageType"
+                },
+                "switches": {
+                    "$ref": "#/definitions/Switches"
+                },
+                "userBenefitsApiUrl": {
                     "type": "string"
+                },
+                "videoDuration": {
+                    "type": "number"
                 },
                 "pageId": {
                     "type": "string"
@@ -5250,6 +5256,372 @@
                 },
                 "hasSurveyAd": {
                     "type": "boolean"
+                },
+                "a9PublisherId": {
+                    "type": "string"
+                },
+                "allowUserGeneratedContent": {
+                    "type": "boolean"
+                },
+                "assetsPath": {
+                    "type": "string"
+                },
+                "atoms": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "atomTypes": {
+                    "type": "object",
+                    "properties": {
+                        "audio": {
+                            "type": "boolean"
+                        },
+                        "callToAction": {
+                            "type": "boolean"
+                        },
+                        "chart": {
+                            "type": "boolean"
+                        },
+                        "commonsdivision": {
+                            "type": "boolean"
+                        },
+                        "explainer": {
+                            "type": "boolean"
+                        },
+                        "guide": {
+                            "type": "boolean"
+                        },
+                        "interactive": {
+                            "type": "boolean"
+                        },
+                        "media": {
+                            "type": "boolean"
+                        },
+                        "profile": {
+                            "type": "boolean"
+                        },
+                        "qanda": {
+                            "type": "boolean"
+                        },
+                        "quizz": {
+                            "type": "boolean"
+                        },
+                        "review": {
+                            "type": "boolean"
+                        },
+                        "timeline": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "authorIds": {
+                    "type": "string"
+                },
+                "avatarApiUrl": {
+                    "type": "string"
+                },
+                "avatarImagesUrl": {
+                    "type": "string"
+                },
+                "beaconUrl": {
+                    "type": "string"
+                },
+                "blogIds": {
+                    "type": "string"
+                },
+                "blogs": {
+                    "type": "string"
+                },
+                "buildNumber": {
+                    "type": "string"
+                },
+                "byline": {
+                    "type": "string"
+                },
+                "calloutsUrl": {
+                    "type": "string"
+                },
+                "campaigns": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "rules": {
+                                "type": "array",
+                                "items": {}
+                            },
+                            "priority": {
+                                "type": "number"
+                            },
+                            "displayOnSensitive": {
+                                "type": "boolean"
+                            },
+                            "fields": {
+                                "type": "object",
+                                "properties": {
+                                    "campaignId": {
+                                        "type": "string"
+                                    },
+                                    "_type": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "cardStyle": {
+                    "type": "string"
+                },
+                "commentable": {
+                    "type": "boolean"
+                },
+                "commissioningDesks": {
+                    "type": "string"
+                },
+                "contentId": {
+                    "type": "string"
+                },
+                "contributorBio": {
+                    "type": "string"
+                },
+                "dfpAdUnitRoot": {
+                    "type": "string"
+                },
+                "dfpHost": {
+                    "type": "string"
+                },
+                "disableStickyTopBanner": {
+                    "type": "boolean"
+                },
+                "externalEmbedHost": {
+                    "type": "string"
+                },
+                "facebookIaAdUnitRoot": {
+                    "type": "string"
+                },
+                "fbAppId": {
+                    "type": "string"
+                },
+                "forecastsapiurl": {
+                    "type": "string"
+                },
+                "frontendSentryDsn": {
+                    "type": "string"
+                },
+                "googleSearchId": {
+                    "type": "string"
+                },
+                "googleSearchUrl": {
+                    "type": "string"
+                },
+                "googletagJsUrl": {
+                    "type": "string"
+                },
+                "hasMultipleVideosInPage": {
+                    "type": "boolean"
+                },
+                "hasShowcaseMainElement": {
+                    "type": "boolean"
+                },
+                "hasYouTubeAtom": {
+                    "type": "boolean"
+                },
+                "idOAuthUrl": {
+                    "type": "string"
+                },
+                "idWebAppUrl": {
+                    "type": "string"
+                },
+                "inBodyExternalLinkCount": {
+                    "type": "number"
+                },
+                "inBodyInternalLinkCount": {
+                    "type": "number"
+                },
+                "isAdFree": {
+                    "type": "boolean"
+                },
+                "isColumn": {
+                    "type": "boolean"
+                },
+                "isContent": {
+                    "type": "boolean"
+                },
+                "isFront": {
+                    "type": "boolean"
+                },
+                "isHosted": {
+                    "type": "boolean"
+                },
+                "isImmersive": {
+                    "type": "boolean"
+                },
+                "isNumberedList": {
+                    "type": "boolean"
+                },
+                "isProd": {
+                    "type": "boolean"
+                },
+                "isSplash": {
+                    "type": "boolean"
+                },
+                "lightboxImages": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "headline": {
+                            "type": "string"
+                        },
+                        "shouldHideAdverts": {
+                            "type": "boolean"
+                        },
+                        "standfirst": {
+                            "type": "string"
+                        },
+                        "images": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "caption": {
+                                        "type": "string"
+                                    },
+                                    "credit": {
+                                        "type": "string"
+                                    },
+                                    "displayCredit": {
+                                        "type": "boolean"
+                                    },
+                                    "src": {
+                                        "type": "string"
+                                    },
+                                    "srcsets": {
+                                        "type": "string"
+                                    },
+                                    "sizes": {
+                                        "type": "string"
+                                    },
+                                    "ratio": {
+                                        "type": "number"
+                                    },
+                                    "role": {
+                                        "type": "string"
+                                    },
+                                    "parentContentId": {
+                                        "type": "string"
+                                    },
+                                    "id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "locationapiurl": {
+                    "type": "string"
+                },
+                "membershipAccess": {
+                    "type": "string"
+                },
+                "membershipUrl": {
+                    "type": "string"
+                },
+                "mobileAppsAdUnitRoot": {
+                    "type": "string"
+                },
+                "nonKeywordTagIds": {
+                    "type": "string"
+                },
+                "omnitureAccount": {
+                    "type": "string"
+                },
+                "omnitureAmpAccount": {
+                    "type": "string"
+                },
+                "onwardWebSocket": {
+                    "type": "string"
+                },
+                "ophanEmbedJsUrl": {
+                    "type": "string"
+                },
+                "ophanJsUrl": {
+                    "type": "string"
+                },
+                "optimizeEpicUrl": {
+                    "type": "string"
+                },
+                "pageCode": {
+                    "type": "string"
+                },
+                "pbIndexSites": {},
+                "pillar": {
+                    "type": "string"
+                },
+                "plistaPublicApiKey": {
+                    "type": "string"
+                },
+                "productionOffice": {
+                    "type": "string"
+                },
+                "publication": {
+                    "type": "string"
+                },
+                "requiresMembershipAccess": {
+                    "type": "boolean"
+                },
+                "richLink": {
+                    "type": "string"
+                },
+                "sectionName": {
+                    "type": "string"
+                },
+                "shortUrl": {
+                    "type": "string"
+                },
+                "shouldHideAdverts": {
+                    "type": "boolean"
+                },
+                "sponsorshipType": {
+                    "type": "string"
+                },
+                "stripePublicToken": {
+                    "type": "string"
+                },
+                "supportUrl": {
+                    "type": "string"
+                },
+                "thirdPartyAppsAccount": {
+                    "type": "string"
+                },
+                "thumbnail": {
+                    "type": "string"
+                },
+                "tones": {
+                    "type": "string"
+                },
+                "userAttributesApiUrl": {
+                    "type": "string"
+                },
+                "weatherapiurl": {
+                    "type": "string"
+                },
+                "webTitle": {
+                    "type": "string"
+                },
+                "wordCount": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -5283,13 +5655,10 @@
                 "switches"
             ]
         },
-        "Switches": {
-            "type": "object",
-            "additionalProperties": {
-                "type": "boolean"
-            }
-        },
         "Record<string,string>": {
+            "type": "object"
+        },
+        "SharedAdTargeting": {
             "type": "object"
         },
         "StageType": {
@@ -5300,8 +5669,11 @@
             ],
             "type": "string"
         },
-        "SharedAdTargeting": {
-            "type": "object"
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
         },
         "FETrailType": {
             "type": "object",
