@@ -50,6 +50,7 @@ export const SelfHostedVideoInArticle = ({
 				aspectRatio={aspectRatio}
 				linkTo="Article-embed-MediaAtomBlockElement"
 				posterImage={posterImageUrl}
+				posterImageAspectRatio={firstVideoSource?.aspectRatio ?? '5:4'}
 				sources={sources}
 				subtitleSize="medium"
 				subtitleSource={getSubtitleAsset(element.assets)}

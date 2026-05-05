@@ -959,6 +959,9 @@ export const Card = ({
 									aspectRatio={media.mainMedia.aspectRatio}
 									videoStyle={media.mainMedia.videoStyle}
 									posterImage={media.mainMedia.image ?? ''}
+									posterImageAspectRatio={
+										media.mainMedia.imageAspectRatio
+									}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={mediaSize}
 									fallbackImageLoading={imageLoading}
@@ -971,9 +974,6 @@ export const Card = ({
 									subtitleSize={subtitleSize}
 									minAspectRatio={4 / 5}
 									containerAspectRatioDesktop={5 / 4}
-									posterImageAspectRatio={
-										media.mainMedia.imageAspectRatio
-									}
 								/>
 							</Island>
 						)}

@@ -577,6 +577,9 @@ export const FeatureCard = ({
 											posterImage={
 												media.mainMedia.image ?? ''
 											}
+											posterImageAspectRatio={
+												media.mainMedia.imageAspectRatio
+											}
 											fallbackImage={
 												media.mainMedia.image ?? ''
 											}
