@@ -5743,12 +5743,16 @@
                         },
                         "image": {
                             "type": "string"
+                        },
+                        "imageAspectRatio": {
+                            "type": "string"
                         }
                     },
                     "required": [
                         "aspectRatio",
                         "atomId",
                         "duration",
+                        "imageAspectRatio",
                         "sources",
                         "type",
                         "videoStyle"
