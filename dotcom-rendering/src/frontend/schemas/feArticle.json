@@ -3395,7 +3395,7 @@
         "RecipeFeaturedImage": {
             "type": "object",
             "properties": {
-                "url": { "type": "string" },
+                "url": { "type": "string", "format": "uri", "pattern": "^https://" },
                 "mediaId": { "type": "string" },
                 "cropId": { "type": "string" },
                 "source": { "type": "string" },
@@ -3404,7 +3404,7 @@
                 "imageType": { "type": "string" },
                 "width": { "type": "number" },
                 "height": { "type": "number" },
-                "mediaApiUri": { "type": "string" }
+                "mediaApiUri": { "type": "string", "format": "uri", "pattern": "^https://" }
             },
             "required": ["url", "mediaId", "cropId"]
         },
