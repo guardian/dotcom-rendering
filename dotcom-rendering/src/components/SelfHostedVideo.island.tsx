@@ -40,6 +40,7 @@ import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
 import type { SubtitlesPosition } from './SubtitleOverlay';
 import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
+import type { VideoEventKey } from './YoutubeAtom/YoutubeAtom';
 
 const VISIBILITY_THRESHOLD = 0.5;
 
@@ -393,6 +394,18 @@ export const SelfHostedVideo = ({
 	const supportsAudio =
 		sources.some((source) => source.hasAudio) && !isCinemagraph;
 
+	const sendOphanTrackingEvent = useCallback(
+		(event: VideoEventKey) => {
+			if (isWeb) {
+				ophanTrackerWeb(atomId, ophanVideoStyle)(event);
+			}
+			if (isApps) {
+				ophanTrackerApps(atomId, ophanVideoStyle)(event);
+			}
+		},
+		[isWeb, isApps, atomId, ophanVideoStyle],
+	);
+
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
 		threshold: VISIBILITY_THRESHOLD,
@@ -687,12 +700,7 @@ export const SelfHostedVideo = ({
 	 */
 	const handlePlaying = () => {
 		if (hasTrackedPlay) return;
-		if (isWeb) {
-			ophanTrackerWeb(atomId, ophanVideoStyle)('play');
-		}
-		if (isApps) {
-			ophanTrackerApps(atomId, ophanVideoStyle)('play');
-		}
+		sendOphanTrackingEvent('play');
 		setHasTrackedPlay(true);
 	};
 
