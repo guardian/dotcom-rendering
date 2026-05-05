@@ -710,6 +710,38 @@ export const SelfHostedVideo = ({
 		}
 	}, [shouldAutoplay, isInView, playerState]);
 
+	useEffect(() => {
+		const video = vidRef.current;
+
+		if (!video) {
+			return;
+		}
+
+		const reportFullscreenEvent = () => {
+			sendOphanTrackingEvent(
+				document.fullscreenElement
+					? 'enter_fullscreen'
+					: 'exit_fullscreen',
+			);
+		};
+
+		video.addEventListener('fullscreenchange', reportFullscreenEvent);
+
+		video.addEventListener('webkitfullscreenchange', reportFullscreenEvent);
+
+		return () => {
+			video.removeEventListener(
+				'fullscreenchange',
+				reportFullscreenEvent,
+			);
+
+			video.removeEventListener(
+				'webkitfullscreenchange',
+				reportFullscreenEvent,
+			);
+		};
+	}, [sendOphanTrackingEvent]);
+
 	if (adapted) {
 		return FallbackImageComponent;
 	}
