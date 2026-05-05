@@ -645,6 +645,9 @@ export const SelfHostedVideo = ({
 	}
 
 	const handleLoadedMetadata = () => {
+		/* default selfhosted videos use browser subtitles */
+		if (isDefault) return;
+
 		const video = vidRef.current;
 		if (!video) return;
 
