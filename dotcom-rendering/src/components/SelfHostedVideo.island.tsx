@@ -397,7 +397,7 @@ export const SelfHostedVideo = ({
 	});
 
 	const activeCue = useSubtitles({
-		video: vidRef.current,
+		video: isDefault ? null : vidRef.current,
 		playerState,
 		currentTime,
 	});
