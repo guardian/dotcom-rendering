@@ -1,4 +1,4 @@
-import { onConsent } from '@guardian/libs';
+import { onConsent } from '@guardian/consent-manager';
 import { storage } from '@guardian/libs';
 
 /**

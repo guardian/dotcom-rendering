@@ -1,6 +1,7 @@
 import { isInUsa } from '@guardian/commercial-core/geo/geo-utils';
 import type { Admiral, AdmiralEvent } from '@guardian/commercial-core/types';
-import { cmp, getCookie, log } from '@guardian/libs';
+import { cmp } from '@guardian/consent-manager';
+import { getCookie, log } from '@guardian/libs';
 import { useEffect } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import { useBetaAB } from '../lib/useAB';

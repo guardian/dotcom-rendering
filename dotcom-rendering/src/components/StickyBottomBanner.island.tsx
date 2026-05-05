@@ -2,8 +2,9 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
+import { cmp } from '@guardian/consent-manager';
 import type { CountryCode } from '@guardian/libs';
-import { cmp, isString, isUndefined, storage } from '@guardian/libs';
+import { isString, isUndefined, storage } from '@guardian/libs';
 import type { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
