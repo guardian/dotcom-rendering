@@ -289,6 +289,7 @@ describe('Enhance Cards', () => {
 				sources: [],
 				aspectRatio: 5 / 4,
 				duration: 151,
+				imageAspectRatio: '5:4',
 			};
 
 			expect(getMediaMetadata(testSelfHostedMainMedia)).toEqual({

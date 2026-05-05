@@ -710,6 +710,7 @@ export const selfHostedLoopVideo54Card = {
 		aspectRatio: 5 / 4,
 		duration: 30,
 		image: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+		imageAspectRatio: '5:4',
 	},
 	image: {
 		src: 'https://media.guim.co.uk/966bf085fb982b1103aaba42a812b09726cc0a3c/1417_104_1378_1104/master/1378.jpg',
@@ -733,6 +734,7 @@ export const selfHostedLoopVideo45Card = {
 			},
 		],
 		aspectRatio: 4 / 5,
+		imageAspectRatio: '4:5',
 	},
 } satisfies DCRFrontCard;
 
@@ -751,6 +753,7 @@ export const selfHostedLoopVideo53Card = {
 			},
 		],
 		aspectRatio: 5 / 3,
+		imageAspectRatio: '5:3',
 	},
 } satisfies DCRFrontCard;
 
@@ -769,6 +772,7 @@ export const selfHostedLoopVideo916Card = {
 			},
 		],
 		aspectRatio: 9 / 16,
+		imageAspectRatio: '9:16',
 	},
 } satisfies DCRFrontCard;
 
@@ -787,6 +791,7 @@ export const selfHostedLoopVideo169Card = {
 			},
 		],
 		aspectRatio: 16 / 9,
+		imageAspectRatio: '16:9',
 	},
 } satisfies DCRFrontCard;
 
