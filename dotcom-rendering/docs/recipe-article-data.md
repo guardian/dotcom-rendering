@@ -263,7 +263,7 @@ frontend (Scala) fetches from CAPI and builds FEArticle
 DCR receives FEArticle
   - ArticleRenderer.tsx groups elements by SubheadingBlockElement
   - Recipe name extracted from subheading HTML
-  - FeastContextualNudge + FeastRecipeNudge islands injected per section
+  - FeastRecipeNudge + FeastContextualNudge islands injected per section
   - linkedData injected into <head> as JSON-LD for SEO
          |
          v

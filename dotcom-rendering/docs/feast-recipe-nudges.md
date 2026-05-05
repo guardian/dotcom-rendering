@@ -166,29 +166,6 @@ Every link carries UTM parameters so we can measure performance in analytics:
 
 ---
 
-## A/B test
-
-The nudges are not shown to everyone. They are gated behind an A/B test so we can measure their impact before a full rollout.
-
-```mermaid
-flowchart LR
-    A[Reader visits recipe article] --> B{In A/B test?}
-    B -- "50% control group" --> C[Normal article\nNo nudge shown]
-    B -- "50% variant group" --> D{Has user dismissed\nthe nudge recently?}
-    D -- "Yes, within 30 days" --> C
-    D -- "No" --> E[Nudge is shown 🎉]
-```
-
-| Field           | Value                                                                 |
-| --------------- | --------------------------------------------------------------------- |
-| Test ID         | `FeastContextualNudge`                                                |
-| Split           | 50% control / 50% variant                                             |
-| Start           | 2026-04-24                                                            |
-| Expiry          | 2027-01-01                                                            |
-| Success metrics | CTA click-through rate, Feast app installs, Supporter Plus activation |
-
----
-
 ## Component architecture (for engineers)
 
 ```mermaid
@@ -198,8 +175,8 @@ graph TD
     end
 
     subgraph "Browser - runs after page load"
-        CI["FeastContextualNudge.island.tsx\n────────────────────────────────\nChecks A/B test bucket\nChecks dismiss state in localStorage\nDetects subscriber status\nPasses darkModeAvailable flag"]
-        RI["FeastRecipeNudge.island.tsx\n────────────────────────────────\nChecks A/B test bucket\nPasses recipe name from subheading\nPasses darkModeAvailable flag"]
+        CI["FeastContextualNudge.island.tsx\n────────────────────────────────\nChecks dismiss state in localStorage\nDetects subscriber status\nPasses darkModeAvailable flag"]
+        RI["FeastRecipeNudge.island.tsx\n────────────────────────────────\nPasses recipe name from subheading\nPasses darkModeAvailable flag"]
     end
 
     subgraph "Pure render - no side effects, testable in Storybook"
@@ -213,7 +190,7 @@ graph TD
     RI --> R
 ```
 
-The **Island pattern** is how DCR defers interactive components. The island wrapper runs only in the browser (never during server-side rendering), which keeps the initial page load fast. The pure render component is a plain React component with no side effects - easy to test and preview in Storybook independently of any A/B test.
+The **Island pattern** is how DCR defers interactive components. The island wrapper runs only in the browser (never during server-side rendering), which keeps the initial page load fast. The pure render component is a plain React component with no side effects - easy to test and preview in Storybook.
 
 ---
 
@@ -235,35 +212,23 @@ Pages that do not support dark mode (e.g. Guardian Labs commercial content) are 
 ```mermaid
 graph LR
     subgraph "🔴 Must do before launch"
-        A["1  Revert dev flag\nuseState to false in both islands"]
-        B["2  Verify Adjust link token\nConfirm go.link token with Feast team"]
+        A["1  Verify Adjust link token\nConfirm go.link token with Feast team"]
     end
     subgraph "🟠 High priority - impacts user experience"
-        C["3  Per-recipe deep links\nPass recipe ID so reader lands\non correct recipe in the app"]
-        D["4  Deferred deep linking\nEnable on Adjust dashboard so\nnew installs also land on the recipe"]
+        B["2  Per-recipe deep links\nPass recipe ID so reader lands\non correct recipe in the app"]
+        C["3  Deferred deep linking\nEnable on Adjust dashboard so\nnew installs also land on the recipe"]
     end
     subgraph "🟡 Important - measurement and quality"
-        E["5  Ophan analytics\nImpression and click events"]
-        F["6  Accessibility audit\nKeyboard nav, focus, contrast"]
+        D["4  Ophan analytics\nImpression and click events"]
+        E["5  Accessibility audit\nKeyboard nav, focus, contrast"]
     end
     subgraph "🟢 Nice to have"
-        G["7  Cross-device dismiss\nPersist via Guardian identity"]
-        H["8  FeastRecipeNudge compact\nSmaller card for multi-recipe articles"]
+        F["6  Cross-device dismiss\nPersist via Guardian identity"]
+        G["7  FeastRecipeNudge compact\nSmaller card for multi-recipe articles"]
     end
 ```
 
-### 1. Revert the dev-only flag _(must do before merging to production)_
-
-Both island files contain a temporary shortcut that makes the component visible during development without needing to be placed in the A/B test variant:
-
-```ts
-// Change this in BOTH island files before merging:
-const [shouldRender, setShouldRender] = useState(true);
-//                                               ^^^^
-//                                        change to false
-```
-
-### 2. Verify the Adjust link token
+### 1. Verify the Adjust link token
 
 The link currently hardcodes `p0nQT` as the Adjust token:
 
@@ -273,7 +238,7 @@ https://guardian-feast.go.link/p0nQT?...
 
 This needs to be confirmed with the Feast or Growth engineering team as the correct production token. If it differs between staging and production, it should be read from a config value rather than hardcoded.
 
-### 3. Per-recipe deep link values _(highest product impact)_
+### 2. Per-recipe deep link values _(highest product impact)_
 
 **The problem today:** Every CTA sends the user to the Feast app's home screen - not to the specific recipe the reader was just reading.
 
@@ -295,7 +260,7 @@ Adjust supports a `deep_link_value` URL parameter that routes the user to a spec
 
 **What is needed from the Feast team:** Expose a recipe identifier from the `frontend` backend, attached to each recipe subheading element. DCR will then pass that ID through `ArticleRenderer` → island → component → the link builder.
 
-### 4. Deferred deep linking for new installs
+### 3. Deferred deep linking for new installs
 
 **The problem today:** When a reader taps a CTA and does not have Feast installed, they go to the App Store. After downloading and opening the app for the first time, they land on the home screen - not the recipe that sent them there.
 
@@ -320,16 +285,16 @@ sequenceDiagram
 
 **No code changes needed in DCR.** This is entirely an Adjust dashboard configuration and Feast app SDK concern. See [Adjust deferred deep linking docs](https://help.adjust.com/en/article/deep-links#deferred-deep-linking).
 
-### 5. Ophan analytics events
+### 4. Ophan analytics events
 
-The nudges currently fire no analytics events. To measure the A/B test properly, both components should emit Ophan `componentEvent` calls for:
+The nudges currently fire no analytics events. Both components should emit Ophan `componentEvent` calls for:
 
 -   **Impression** - when the nudge enters the viewport
 -   **Click** - when any CTA button is tapped
 
 This uses the same `submitComponentEvent` integration already present in the Reader Revenue banner and other acquisition components in DCR.
 
-### 6. Accessibility audit
+### 5. Accessibility audit
 
 Before full rollout, the components need a formal review covering:
 
@@ -338,11 +303,11 @@ Before full rollout, the components need a formal review covering:
 -   Screen reader announcement of the dismiss action
 -   Colour contrast ratios in dark mode verified against WCAG 2.1 AA
 
-### 7. Cross-device dismiss persistence
+### 6. Cross-device dismiss persistence
 
 The 30-day dismiss is stored in the browser's `localStorage`. A reader who dismisses on their phone will see the nudge again on their laptop. For a seamless experience across devices, dismissal could be persisted server-side against the reader's Guardian identity (for signed-in users), using the same mechanism as other acquisition messaging in DCR.
 
-### 8. `FeastRecipeNudge` compact variant
+### 7. `FeastRecipeNudge` compact variant
 
 The inline `FeastContextualNudge` has a `compact` mode that shows only the CTA buttons on the 2nd, 3rd, … recipe sections of a multi-recipe article, avoiding repetitive marketing copy.
 
@@ -355,7 +320,7 @@ The sticky `FeastRecipeNudge` does not yet have an equivalent - every instance s
 ```
 src/components/
   FeastContextualNudge.tsx          Pure render - inline dismissable card
-  FeastContextualNudge.island.tsx   A/B gate · dismiss logic · subscriber detection
+  FeastContextualNudge.island.tsx   Dismiss logic · subscriber detection
   FeastContextualNudge.stories.tsx  Storybook (light + dark, all copy variants)
 
   FeastRecipeNudge.tsx              Pure render - sticky left-col card
@@ -363,14 +328,8 @@ src/components/
                                       recipeContentContainerStyles
                                       recipeLeftColContainerStyles
                                       stripHtmlTags
-  FeastRecipeNudge.island.tsx       A/B gate wrapper
+  FeastRecipeNudge.island.tsx       Passes recipe name and flags to the component
   FeastRecipeNudge.stories.tsx      Storybook (light + dark, in-section context)
-
-src/experiments/tests/
-  feast-contextual-nudge.ts         A/B test definition (id, split, expiry)
-
-src/experiments/
-  ab-tests.ts                       feastContextualNudge registered here
 
 src/lib/
   ArticleRenderer.tsx               Groups recipe elements by subheading section;
