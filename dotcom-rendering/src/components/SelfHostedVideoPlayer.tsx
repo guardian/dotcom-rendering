@@ -52,7 +52,7 @@ const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
 const customSubtitleStyles = css`
 	::cue {
 		/* Hide the cue by default as we prefer custom overlay */
-		visibility: hidden;
+		opacity: 0;
 	}
 `;
 
