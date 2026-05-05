@@ -21,6 +21,18 @@ const getAppsMediaEvent = (
 			return MediaEvent.percent75;
 		case 'end':
 			return MediaEvent.end;
+		case 'pause':
+			return MediaEvent.pause;
+		case 'mute':
+			return MediaEvent.mute;
+		case 'unmute':
+			return MediaEvent.unmute;
+		case 'enter_fullscreen':
+			return MediaEvent.enter_fullscreen;
+		case 'exit_fullscreen':
+			return MediaEvent.exit_fullscreen;
+		case 'view':
+			return MediaEvent.view;
 		default:
 			return undefined;
 	}
