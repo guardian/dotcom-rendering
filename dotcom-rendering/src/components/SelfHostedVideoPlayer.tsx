@@ -52,7 +52,7 @@ const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
 const customSubtitleStyles = css`
 	::cue {
 		/* Hide the cue by default as we prefer custom overlay */
-		opacity: 0;
+		visibility: hidden;
 	}
 `;
 
@@ -204,6 +204,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
+		console.log('showFullScreen', showFullscreenIcon);
 		const videoId = `video-${uniqueId}`;
 
 		const currentRefExists = ref && 'current' in ref && !!ref.current;
@@ -321,7 +322,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 								smallIconsPositionStyles(iconsPosition),
 						]}
 					>
-						{showFullscreenIcon && (
+						{true && (
 							<FullscreenIcon
 								handleClick={handleFullscreenClick}
 								atomId={atomId}

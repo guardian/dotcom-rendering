@@ -76,32 +76,15 @@ export const SubtitleOverlay = ({
 	position: SubtitlesPosition;
 }) => {
 	return (
-		<>
-			{/* Visual subtitles (no ARIA here) */}
-			<div
-				css={[subtitleOverlayStyles, subtitlePositionStyles(position)]}
-			>
-				<div css={cueBoxStyles}>
-					<div css={[cueStyles, cueTextStyles(size)]}>{text}</div>
-				</div>
+		<div
+			role="status"
+			aria-live="polite"
+			aria-atomic="true"
+			css={[subtitleOverlayStyles, subtitlePositionStyles(position)]}
+		>
+			<div css={cueBoxStyles}>
+				<div css={[cueStyles, cueTextStyles(size)]}>{text}</div>
 			</div>
-
-			{/* Accessibility layer (screen reader only) */}
-			<div
-				role="status"
-				aria-live="polite"
-				aria-atomic="true"
-				style={{
-					position: 'absolute',
-					width: '1px',
-					height: '1px',
-					overflow: 'hidden',
-					clip: 'rect(0 0 0 0)',
-					whiteSpace: 'nowrap',
-				}}
-			>
-				{text}
-			</div>
-		</>
+		</div>
 	);
 };
