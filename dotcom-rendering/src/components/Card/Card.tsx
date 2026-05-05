@@ -957,7 +957,9 @@ export const Card = ({
 									atomId={media.mainMedia.atomId}
 									uniqueId={uniqueId}
 									aspectRatio={media.mainMedia.aspectRatio}
-									videoStyle={media.mainMedia.videoStyle}
+									// TODO:: undo before merging. this is required for testing only
+									videoStyle={'Default'}
+									// videoStyle={media.mainMedia.videoStyle}
 									posterImage={media.mainMedia.image ?? ''}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={mediaSize}
