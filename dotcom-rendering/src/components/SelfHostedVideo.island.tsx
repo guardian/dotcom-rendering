@@ -895,7 +895,10 @@ export const SelfHostedVideo = ({
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(posterImage, posterImageAspectRatio ?? '5:4')
+		? getOptimisedPosterImage(
+				posterImage,
+				posterImageAspectRatio ?? fallbackImageAspectRatio ?? '5:4',
+		  )
 		: undefined;
 
 	return (
