@@ -234,6 +234,10 @@ export const getActiveMediaAtom = (
 
 			const aspectRatio = getAspectRatioFromSources(sources);
 
+			const imageAspectRatio =
+				mediaAtom.posterImage?.allImages[0]?.fields.aspectRatio ??
+				'5:4';
+
 			return {
 				type: 'SelfHostedVideo',
 				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
@@ -243,6 +247,7 @@ export const getActiveMediaAtom = (
 				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
 				image,
+				imageAspectRatio,
 			};
 		}
 
