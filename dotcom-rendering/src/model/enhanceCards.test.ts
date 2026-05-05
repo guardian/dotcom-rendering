@@ -105,6 +105,7 @@ describe('Enhance Cards', () => {
 						hasAudio: true,
 					},
 				],
+				imageAspectRatio: '5:4',
 			});
 		});
 
@@ -449,6 +450,7 @@ describe('Enhance Cards', () => {
 					},
 				],
 				videoStyle: 'Loop',
+				imageAspectRatio: '5:4',
 			});
 		});
 	});
@@ -490,6 +492,7 @@ describe('Enhance Cards', () => {
 				],
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
+				imageAspectRatio: '5:4',
 			});
 		});
 
@@ -517,6 +520,7 @@ describe('Enhance Cards', () => {
 				],
 				subtitleSource: undefined,
 				videoStyle: 'Loop',
+				imageAspectRatio: '5:4',
 			});
 		});
 	});
