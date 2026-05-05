@@ -189,6 +189,7 @@ describe('Enhance Cards', () => {
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: undefined,
+				imageAspectRatio: '5:4',
 				sources: [
 					{
 						mimeType: 'video/mp4',
@@ -240,6 +241,7 @@ describe('Enhance Cards', () => {
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: 'https://guim-example.co.uk/atomID-1.vtt',
+				imageAspectRatio: '5:4',
 				sources: [
 					{
 						mimeType: 'video/mp4',
