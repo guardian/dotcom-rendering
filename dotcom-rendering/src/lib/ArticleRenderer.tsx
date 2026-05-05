@@ -12,8 +12,8 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 import type { ServerSideTests, Switches } from '../types/config';
 import type {
 	FEElement,
-	SubheadingBlockElement,
 	RecipeBlockElement,
+	SubheadingBlockElement,
 } from '../types/content';
 import type { TagType } from '../types/tag';
 import { spacefinderAdStyles } from './adStyles';
