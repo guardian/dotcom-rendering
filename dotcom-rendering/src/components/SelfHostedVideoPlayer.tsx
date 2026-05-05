@@ -42,13 +42,17 @@ const interactiveStyles = css`
 
 const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
 	::cue {
-		/* Hide the cue by default as we prefer custom overlay */
-		visibility: hidden;
-
 		color: ${palette('--video-subtitle-text')};
 		${subtitleSize === 'small' && textSans15};
 		${subtitleSize === 'medium' && textSans17};
 		${subtitleSize === 'large' && textSans20};
+	}
+`;
+
+const customSubtitleStyles = css`
+	::cue {
+		/* Hide the cue by default as we prefer custom overlay */
+		visibility: hidden;
 	}
 `;
 
@@ -142,6 +146,7 @@ export type Props = {
 	isInteractive: boolean;
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
+	showCustomSubtitles: boolean;
 };
 
 /**
@@ -195,6 +200,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			iconsPosition,
 			subtitlesPosition,
+			showCustomSubtitles,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -210,6 +216,13 @@ export const SelfHostedVideoPlayer = forwardRef(
 			showPlayIcon ? 'play' : 'pause'
 		}-${atomId}`;
 
+		console.log(
+			{
+				subtitleSource,
+			},
+			sources,
+		);
+
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
@@ -219,6 +232,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						videoStyles(aspectRatio),
 						isInteractive && interactiveStyles,
 						showSubtitles && subtitleStyles(subtitleSize),
+						showCustomSubtitles && customSubtitleStyles,
 					]}
 					crossOrigin="anonymous"
 					ref={ref}
@@ -263,7 +277,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					)}
 					{FallbackImageComponent}
 				</video>
-				{showSubtitles && !!activeCue?.text && (
+				{showCustomSubtitles && !!activeCue?.text && (
 					<SubtitleOverlay
 						text={activeCue.text}
 						size={subtitleSize}
