@@ -334,7 +334,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 							&::before {
 								content: '';
 								position: absolute;
-								left: -20px;
+								left: -10px;
 								top: 0;
 								bottom: 0;
 								width: 1px;
@@ -346,12 +346,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 
 						${from.desktop} {
 							${grid.span('centre-column-start', 6)}
-						}
-
-						${from.leftCol} {
-							&::before {
-								left: -10px;
-							}
 						}
 					`;
 				default:

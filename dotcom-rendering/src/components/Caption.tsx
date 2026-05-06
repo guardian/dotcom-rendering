@@ -242,16 +242,11 @@ const galleryStyles = css`
 		&::before {
 			content: '';
 			position: absolute;
-			left: -20px;
+			left: -10px;
 			top: 0;
 			bottom: 0;
 			width: 1px;
 			background-color: ${palette('--article-border')};
-		}
-	}
-	${from.leftCol} {
-		&::before {
-			left: -10px;
 		}
 	}
 `;
