@@ -40,15 +40,19 @@ const interactiveStyles = css`
 	cursor: pointer;
 `;
 
-const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
+const subtitleFontStyles = (subtitleSize: SubtitleSize | undefined) => css`
 	::cue {
-		/* Hide the cue by default as we prefer custom overlay */
-		visibility: hidden;
-
 		color: ${palette('--video-subtitle-text')};
 		${subtitleSize === 'small' && textSans15};
 		${subtitleSize === 'medium' && textSans17};
 		${subtitleSize === 'large' && textSans20};
+	}
+`;
+
+const hideNativeSubtitles = css`
+	::cue {
+		/* Hide the cue by default as we prefer custom overlay */
+		visibility: hidden;
 	}
 `;
 
@@ -142,6 +146,7 @@ export type Props = {
 	isInteractive: boolean;
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
+	showCustomSubtitles: boolean;
 };
 
 /**
@@ -195,6 +200,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			iconsPosition,
 			subtitlesPosition,
+			showCustomSubtitles: canShowCustomSubtitles,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -203,6 +209,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const currentRefExists = ref && 'current' in ref && !!ref.current;
 
 		const showSubtitles = canShowSubtitles && !!subtitleSource;
+		const showCustomSubtitles = showSubtitles && canShowCustomSubtitles;
 		const showProgressBar = canShowProgressBar && currentRefExists;
 		const showIcons = canShowIcons && currentRefExists;
 
@@ -218,7 +225,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 					css={[
 						videoStyles(aspectRatio),
 						isInteractive && interactiveStyles,
-						showSubtitles && subtitleStyles(subtitleSize),
+						showSubtitles && subtitleFontStyles(subtitleSize),
+						showCustomSubtitles && hideNativeSubtitles,
 					]}
 					crossOrigin="anonymous"
 					ref={ref}
@@ -263,7 +271,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					)}
 					{FallbackImageComponent}
 				</video>
-				{showSubtitles && !!activeCue?.text && (
+				{showCustomSubtitles && !!activeCue?.text && (
 					<SubtitleOverlay
 						text={activeCue.text}
 						size={subtitleSize}

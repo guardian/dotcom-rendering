@@ -968,6 +968,7 @@ export const SelfHostedVideo = ({
 						shouldLoop={shouldLoop}
 						showFullscreenIcon={isDefault}
 						isInteractive={!isCinemagraph}
+						showCustomSubtitles={!isDefault}
 					/>
 				</div>
 			</div>
