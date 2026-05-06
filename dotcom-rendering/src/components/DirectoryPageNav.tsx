@@ -46,28 +46,43 @@ const configs = [
 		],
 		tagIds: ['football/world-cup-2026'],
 		textColor: palette.neutral[100],
-		backgroundColor: palette.sport[400],
+		backgroundColor: palette.brand[400],
 		title: {
-			label: 'World Cup 2026',
+			label: 'World Cup',
 			id: 'football/world-cup-2026',
 		},
 		links: [
 			{
-				label: 'Fixtures',
-				id: 'football/world-cup-2026/fixtures',
-			},
-			{
-				label: 'Tables',
+				label: 'Match centre',
 				id: 'football/world-cup-2026/overview',
 			},
-			// TODO: add golden boot link once interactive page ID is known
-			// TODO: add team guide link once interactive page ID is known
 			{
-				label: 'Full coverage',
-				id: 'football/world-cup-2026',
+				label: 'Player guide',
+				id: '',
+			},
+			{
+				label: 'Bracketology',
+				id: '',
+			},
+			{
+				label: 'Golden boot',
+				id: '',
+			},
+			{
+				label: 'More football',
+				id: 'football',
 			},
 		],
-		// TODO: add backgroundImages once assets are available
+		// backgroundImages: {
+		// 	mobile: '',
+		// 	mobileLandscape:
+		// 		'',
+		// 	phablet:
+		// 		'',
+		// 	tablet: '',
+		// 	desktop:
+		// 		'',
+		// },
 	},
 	// Winter Olympics 2026
 	{
