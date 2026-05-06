@@ -381,6 +381,7 @@ export const NewsletterPreviewModal = ({
 	renderUrl,
 	onClose,
 }: Props) => {
+	const overlayRef = useRef<HTMLDivElement>(null);
 	const dialogRef = useRef<HTMLDivElement>(null);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 	const hasEmbedStatusFailureRef = useRef(false);
@@ -529,13 +530,25 @@ export const NewsletterPreviewModal = ({
 		};
 	}, [requestClose]);
 
-	const handleOverlayMouseDown = (
-		event: React.MouseEvent<HTMLDivElement>,
-	) => {
-		if (event.target === event.currentTarget) {
-			requestClose();
-		}
-	};
+	useEffect(() => {
+		const overlayElement = overlayRef.current;
+		if (!overlayElement) return;
+
+		const handleOverlayMouseDown = (event: MouseEvent) => {
+			if (event.target === overlayElement) {
+				requestClose();
+			}
+		};
+
+		overlayElement.addEventListener('mousedown', handleOverlayMouseDown);
+
+		return () => {
+			overlayElement.removeEventListener(
+				'mousedown',
+				handleOverlayMouseDown,
+			);
+		};
+	}, [requestClose]);
 
 	useEffect(() => {
 		hasEmbedStatusFailureRef.current = false;
@@ -607,10 +620,7 @@ export const NewsletterPreviewModal = ({
 	if (typeof document === 'undefined') return null;
 
 	return createPortal(
-		<div
-			css={previewOverlayStyles(isVisible)}
-			onMouseDown={handleOverlayMouseDown}
-		>
+		<div ref={overlayRef} css={previewOverlayStyles(isVisible)}>
 			<div
 				ref={dialogRef}
 				role="dialog"
