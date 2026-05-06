@@ -76,7 +76,10 @@ export const SubtitleOverlay = ({
 	position: SubtitlesPosition;
 }) => {
 	return (
-		<div css={[subtitleOverlayStyles, subtitlePositionStyles(position)]}>
+		<div
+			role="status"
+			css={[subtitleOverlayStyles, subtitlePositionStyles(position)]}
+		>
 			<div css={cueBoxStyles}>
 				<div css={[cueStyles, cueTextStyles(size)]}>{text}</div>
 			</div>
