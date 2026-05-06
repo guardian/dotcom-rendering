@@ -94,15 +94,20 @@ const previewOverlayStyles = (isVisible: boolean) => css`
 	align-items: flex-end;
 	justify-content: center;
 	padding: ${space[3]}px 0 0;
-	background: rgba(0, 0, 0, 0.75);
-	opacity: ${isVisible ? 1 : 0};
-	transition: opacity
+	height: 100vh;
+	height: 100svh;
+	background-color: rgba(0, 0, 0, ${isVisible ? 0.75 : 0});
+	transition: background-color
 		${isVisible
 			? OPEN_ANIMATION_DURATION_MS
 			: CLOSE_ANIMATION_DURATION_MS}ms
 		ease;
 	z-index: ${getZIndex('lightbox')};
-	will-change: opacity;
+	will-change: background-color;
+
+	@supports (height: 100dvh) {
+		height: 100dvh;
+	}
 
 	${from.tablet} {
 		align-items: center;
@@ -120,6 +125,7 @@ const previewDialogStyles = (isVisible: boolean) => css`
 	background: ${palette.neutral[100]};
 	width: 100%;
 	height: min(82vh, 760px);
+	height: min(82svh, 760px);
 	border-radius: ${space[3]}px ${space[3]}px 0 0;
 	overflow: hidden;
 	transform: translateY(${isVisible ? '0' : '100%'});
@@ -129,6 +135,10 @@ const previewDialogStyles = (isVisible: boolean) => css`
 			: CLOSE_ANIMATION_DURATION_MS}ms
 		ease;
 	will-change: transform;
+
+	@supports (height: 100dvh) {
+		height: min(82dvh, 760px);
+	}
 
 	${from.tablet} {
 		width: min(652px, 100%);
