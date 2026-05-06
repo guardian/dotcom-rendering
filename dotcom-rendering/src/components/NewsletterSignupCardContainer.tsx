@@ -156,9 +156,6 @@ export const NewsletterSignupCardContainer = ({
 			)}
 			<div
 				css={css`
-					display: flex;
-					flex-direction: column;
-					gap: ${space[2]}px;
 					margin-bottom: ${space[6]}px;
 				`}
 			>
@@ -171,7 +168,13 @@ export const NewsletterSignupCardContainer = ({
 					{children?.(previewAction)}
 				</NewsletterSignupCard>
 				{showPrivacyMessageOutside && (
-					<NewsletterPrivacyMessage textColor="regular" />
+					<NewsletterPrivacyMessage
+						textColor="regular"
+						cssOverrides={css`
+							display: block;
+							margin-top: ${space[2]}px;
+						`}
+					/>
 				)}
 			</div>
 		</div>

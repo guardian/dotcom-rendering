@@ -5,6 +5,7 @@ import { palette as themePalette } from '../palette';
 
 interface Props {
 	textColor?: 'supporting' | 'regular';
+	cssOverrides?: ReturnType<typeof css>;
 }
 
 const GUARDIAN_HOMEPAGE = 'https://www.theguardian.com';
@@ -76,8 +77,9 @@ const textStyles = (textColor: 'supporting' | 'regular') => {
 
 export const NewsletterPrivacyMessage = ({
 	textColor = 'supporting',
+	cssOverrides,
 }: Props) => (
-	<span css={[termsStyle, textStyles(textColor)]}>
+	<span css={[termsStyle, textStyles(textColor), cssOverrides]}>
 		<strong>Privacy Notice: </strong>
 		Newsletters may contain information about charities, online ads, and
 		content funded by outside parties. If you do not have an account, we
