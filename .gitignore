@@ -60,3 +60,7 @@ playwright/.cache/
 
 # svelte output
 ab-testing/frontend/output
+
+.scala-build/
+dotcom-rendering/scripts/test/check-newsletter-preview-urls.ts
+dotcom-rendering/tmp/

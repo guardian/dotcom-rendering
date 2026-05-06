@@ -16,6 +16,7 @@ import { EMAIL_PREVIEW_ORIGIN } from '../lib/newsletterPreviewUrl';
 const PREVIEW_LOAD_TIMEOUT_MS = 10_000;
 const OPEN_ANIMATION_DURATION_MS = 300;
 const CLOSE_ANIMATION_DURATION_MS = 225;
+const MOBILE_PREVIEW_IFRAME_HEIGHT_PX = 10000;
 const TIMEOUT_FAILURE_MESSAGE =
 	'The preview is taking longer than expected. You can retry loading it.';
 const UNAVAILABLE_FAILURE_MESSAGE =
@@ -169,14 +170,19 @@ const previewTitleStyles = css`
 `;
 
 const previewFrameStyles = css`
-	flex: 1;
-	min-height: 0;
-	height: 100%;
+	height: ${MOBILE_PREVIEW_IFRAME_HEIGHT_PX}px;
 	width: 100%;
+	min-height: 100%;
+	min-width: 100%;
 	display: block;
 	border: 0;
 	background: ${palette.neutral[100]};
 	padding: 0;
+
+	${from.tablet} {
+		height: 1px;
+		width: 1px;
+	}
 `;
 
 const previewFrameContainerStyles = css`
@@ -185,8 +191,13 @@ const previewFrameContainerStyles = css`
 	min-height: 0;
 	flex: 1;
 	background: ${palette.neutral[100]};
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	-webkit-overflow-scrolling: touch;
+	touch-action: pan-y;
 
 	${from.tablet} {
+		overflow: hidden;
 		padding: 0 ${space[6]}px;
 	}
 `;
@@ -319,7 +330,8 @@ const desktopCloseButtonStyles = css`
 `;
 
 const mobileCloseBarStyles = css`
-	padding: ${space[3]}px ${space[3]}px ${space[6]}px;
+	padding: ${space[3]}px ${space[3]}px
+		calc(${space[6]}px + env(safe-area-inset-bottom));
 	border-top: 1px solid ${palette.neutral[86]};
 	background: ${palette.neutral[100]};
 	position: relative;
@@ -507,20 +519,13 @@ export const NewsletterPreviewModal = ({
 		};
 	}, [requestClose]);
 
-	useEffect(() => {
-		const closeOnClickAway = (event: MouseEvent) => {
-			if (!dialogRef.current) return;
-			if (!dialogRef.current.contains(event.target as Node)) {
-				requestClose();
-			}
-		};
-
-		document.addEventListener('mousedown', closeOnClickAway);
-
-		return () => {
-			document.removeEventListener('mousedown', closeOnClickAway);
-		};
-	}, [requestClose]);
+	const handleOverlayMouseDown = (
+		event: React.MouseEvent<HTMLDivElement>,
+	) => {
+		if (event.target === event.currentTarget) {
+			requestClose();
+		}
+	};
 
 	useEffect(() => {
 		hasEmbedStatusFailureRef.current = false;
@@ -592,7 +597,10 @@ export const NewsletterPreviewModal = ({
 	if (typeof document === 'undefined') return null;
 
 	return createPortal(
-		<div css={previewOverlayStyles(isVisible)}>
+		<div
+			css={previewOverlayStyles(isVisible)}
+			onMouseDown={handleOverlayMouseDown}
+		>
 			<div
 				ref={dialogRef}
 				role="dialog"
