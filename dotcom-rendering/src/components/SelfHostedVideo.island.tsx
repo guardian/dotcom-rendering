@@ -354,6 +354,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
+	const [showNativeControls, setShowNativeControls] = useState(false);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -640,10 +641,44 @@ export const SelfHostedVideo = ({
 		}
 	}, [shouldAutoplay, isInView, playerState]);
 
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		const onFullscreenChange = () => {
+			const isFullscreen = !!document.fullscreenElement;
+			setShowNativeControls(isFullscreen);
+		};
+
+		const onWebkitBeginFullscreen = () => setShowNativeControls(true);
+		const onWebkitEndFullscreen = () => setShowNativeControls(false);
+
+		document.addEventListener('fullscreenchange', onFullscreenChange);
+		video.addEventListener(
+			'webkitbeginfullscreen',
+			onWebkitBeginFullscreen,
+		);
+		video.addEventListener('webkitendfullscreen', onWebkitEndFullscreen);
+
+		return () => {
+			document.removeEventListener(
+				'fullscreenchange',
+				onFullscreenChange,
+			);
+			video.removeEventListener(
+				'webkitbeginfullscreen',
+				onWebkitBeginFullscreen,
+			);
+			video.removeEventListener(
+				'webkitendfullscreen',
+				onWebkitEndFullscreen,
+			);
+		};
+	}, [vidRef]);
+
 	if (adapted) {
 		return FallbackImageComponent;
 	}
-
 	const handleLoadedMetadata = () => {
 		const video = vidRef.current;
 		if (!video) return;
@@ -978,6 +1013,7 @@ export const SelfHostedVideo = ({
 						shouldLoop={shouldLoop}
 						showFullscreenIcon={isDefault}
 						isInteractive={!isCinemagraph}
+						showNativeControls={showNativeControls}
 					/>
 				</div>
 			</div>

@@ -142,6 +142,7 @@ export type Props = {
 	isInteractive: boolean;
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
+	showNativeControls: boolean;
 };
 
 /**
@@ -195,6 +196,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			iconsPosition,
 			subtitlesPosition,
+			showNativeControls,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -220,6 +222,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						isInteractive && interactiveStyles,
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
+					controls={showNativeControls}
 					crossOrigin="anonymous"
 					ref={ref}
 					tabIndex={0}
