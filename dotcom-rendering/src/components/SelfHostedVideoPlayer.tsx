@@ -329,7 +329,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 							{showFullscreenIcon && (
 								<FullscreenIcon
 									handleClick={handleFullscreenClick}
-									atomId={atomId}
 								/>
 							)}
 							{hasAudio && (

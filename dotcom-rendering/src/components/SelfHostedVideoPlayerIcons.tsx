@@ -53,19 +53,16 @@ export const AudioIcon = ({ isMuted, handleClick }: AudioIconProps) => {
 };
 
 type FullscreenIconProps = {
-	atomId: SelfHostedVideoPlayerProps['atomId'];
 	handleClick: SelfHostedVideoPlayerProps['handleFullscreenClick'];
 };
 
 export const FullscreenIcon = ({
-	atomId,
 	handleClick,
 }: FullscreenIconProps) => (
 	<button
 		type="button"
 		onClick={handleClick}
 		css={[buttonStyles, iconContainerStyles]}
-		data-link-name={`gu-video-loop-fullscreen-${atomId}`}
 		data-testid="fullscreen-icon"
 	>
 		<SvgArrowExpand
