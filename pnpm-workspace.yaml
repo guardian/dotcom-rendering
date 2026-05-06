@@ -7,3 +7,5 @@ allowBuilds:
   esbuild: true
   nice-napi: true
 minimumReleaseAge: 2880 # 2 day minimum package version age
+minimumReleaseAgeExclude:
+  - '@guardian/*'
