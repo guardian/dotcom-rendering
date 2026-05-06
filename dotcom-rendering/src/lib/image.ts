@@ -15,6 +15,17 @@ export const getLargest = (images: Image[]): Image | undefined => {
 /**
  * Finds the largest image by width in an array of images
  */
+export const getLargestImage = (images?: Image[]): Image | undefined => {
+	if (!images || images.length === 0) return undefined;
+
+	return [...images]
+		.sort((a, b) => Number(a.fields.width) - Number(b.fields.width))
+		.pop();
+};
+
+/**
+ * Finds the largest image by width in an array of images
+ */
 export const getLargestImageSize = (
 	images: {
 		url: string;
