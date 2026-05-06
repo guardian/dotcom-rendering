@@ -3994,17 +3994,25 @@
                             "type": "string"
                         },
                         "image": {
-                            "type": "string"
-                        },
-                        "imageAspectRatio": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "src": {
+                                    "type": "string"
+                                },
+                                "aspectRatio": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "aspectRatio"
+                            ]
                         }
                     },
                     "required": [
                         "aspectRatio",
                         "atomId",
                         "duration",
-                        "imageAspectRatio",
+                        "image",
                         "sources",
                         "type",
                         "videoStyle"

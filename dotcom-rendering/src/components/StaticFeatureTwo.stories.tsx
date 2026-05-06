@@ -112,7 +112,11 @@ export const SelfHostedVideo = {
 							mainMedia: {
 								...selfHostedLoopVideo45Card.mainMedia,
 								videoStyle: 'Cinemagraph',
-								imageAspectRatio: '4:5',
+								image: {
+									...selfHostedLoopVideo45Card.mainMedia
+										.image,
+									aspectRatio: '4:5',
+								},
 							},
 						},
 					]}
@@ -127,7 +131,11 @@ export const SelfHostedVideo = {
 							mainMedia: {
 								...selfHostedLoopVideo916Card.mainMedia,
 								videoStyle: 'Cinemagraph',
-								imageAspectRatio: '9:16',
+								image: {
+									...selfHostedLoopVideo916Card.mainMedia
+										.image,
+									aspectRatio: '9:16',
+								},
 							},
 						},
 					]}
@@ -142,7 +150,11 @@ export const SelfHostedVideo = {
 							mainMedia: {
 								...selfHostedLoopVideo53Card.mainMedia,
 								videoStyle: 'Cinemagraph',
-								imageAspectRatio: '5:3',
+								image: {
+									...selfHostedLoopVideo53Card.mainMedia
+										.image,
+									aspectRatio: '5:3',
+								},
 							},
 						},
 					]}

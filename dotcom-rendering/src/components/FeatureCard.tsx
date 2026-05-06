@@ -575,13 +575,14 @@ export const FeatureCard = ({
 												media.mainMedia.videoStyle
 											}
 											posterImage={
-												media.mainMedia.image ?? ''
+												media.mainMedia.image.src ?? ''
 											}
 											posterImageAspectRatio={
-												media.mainMedia.imageAspectRatio
+												media.mainMedia.image
+													.aspectRatio
 											}
 											fallbackImage={
-												media.mainMedia.image ?? ''
+												media.mainMedia.image.src ?? ''
 											}
 											fallbackImageSize={imageSize}
 											fallbackImageLoading={imageLoading}

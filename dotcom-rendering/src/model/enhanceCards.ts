@@ -246,9 +246,11 @@ export const getActiveMediaAtom = (
 				subtitleSource: subtitleAsset?.id,
 				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
-				image: image.src,
-				imageAspectRatio:
-					image.imageAspectRatio ?? DEFAULT_IMAGE_ASPECT_RATIO,
+				image: {
+					src: image.src,
+					aspectRatio:
+						image.imageAspectRatio ?? DEFAULT_IMAGE_ASPECT_RATIO,
+				},
 			};
 		}
 

@@ -31,8 +31,10 @@ type SelfHostedVideo = Media & {
 	aspectRatio: number;
 	duration: number;
 	subtitleSource?: string;
-	image?: string;
-	imageAspectRatio: string;
+	image: {
+		src?: string;
+		aspectRatio: string;
+	};
 };
 
 type Audio = Media & {
