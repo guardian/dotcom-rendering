@@ -43,6 +43,7 @@ const interactiveStyles = css`
 const subtitleFontStyles = (subtitleSize: SubtitleSize | undefined) => css`
 	::cue {
 		color: ${palette('--video-subtitle-text')};
+		background-color: rgba(0, 0, 0, 0.7);
 		${subtitleSize === 'small' && textSans15};
 		${subtitleSize === 'medium' && textSans17};
 		${subtitleSize === 'large' && textSans20};
@@ -147,6 +148,8 @@ export type Props = {
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
 	showCustomSubtitles: boolean;
+	isNativeFullscreen: boolean;
+	playerContainerRef: React.RefObject<HTMLDivElement>;
 };
 
 /**
@@ -201,6 +204,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 			iconsPosition,
 			subtitlesPosition,
 			showCustomSubtitles: canShowCustomSubtitles,
+			isNativeFullscreen,
+			playerContainerRef,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -209,7 +214,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const currentRefExists = ref && 'current' in ref && !!ref.current;
 
 		const showSubtitles = canShowSubtitles && !!subtitleSource;
-		const showCustomSubtitles = showSubtitles && canShowCustomSubtitles;
+		const showCustomSubtitles =
+			showSubtitles && canShowCustomSubtitles && !isNativeFullscreen;
 		const showProgressBar = canShowProgressBar && currentRefExists;
 		const showIcons = canShowIcons && currentRefExists;
 
@@ -218,7 +224,15 @@ export const SelfHostedVideoPlayer = forwardRef(
 		}-${atomId}`;
 
 		return (
-			<>
+			<div
+				ref={playerContainerRef}
+				css={css`
+					position: relative;
+					width: 100%;
+					height: 100%;
+					background-color: black;
+				`}
+			>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
 				<video
 					id={videoId}
@@ -333,7 +347,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						)}
 					</div>
 				)}
-			</>
+			</div>
 		);
 	},
 );

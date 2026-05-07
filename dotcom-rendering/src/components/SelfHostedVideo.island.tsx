@@ -342,6 +342,7 @@ export const SelfHostedVideo = ({
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
 	const vidRef = useRef<HTMLVideoElement>(null);
+	const playerContainerRef = useRef<HTMLDivElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
@@ -356,7 +357,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
-
+	const [isNativeFullscreen, setIsNativeFullscreen] = useState(false);
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
@@ -399,7 +400,7 @@ export const SelfHostedVideo = ({
 	});
 
 	const activeCue = useSubtitles({
-		video: isDefault ? null : vidRef.current,
+		video: vidRef.current,
 		playerState,
 		currentTime,
 	});
@@ -603,6 +604,19 @@ export const SelfHostedVideo = ({
 		};
 	}, [uniqueId, atomId, sources, renderingTarget, ophanVideoStyle]);
 
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		const handleEndFullscreen = () => setIsNativeFullscreen(false);
+		video.addEventListener('webkitendfullscreen', handleEndFullscreen);
+		return () =>
+			video.removeEventListener(
+				'webkitendfullscreen',
+				handleEndFullscreen,
+			);
+	}, []);
+
 	/**
 	 * Track the first time the video comes into view.
 	 */
@@ -664,10 +678,6 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleLoadedMetadata = () => {
-		/* Default videos don't use custom subtitles,
-		so they don't need to be positioned.*/
-		if (!isDefault) return;
-
 		/* Cinemagraphs do not have subtitles*/
 		if (!isCinemagraph) return;
 
@@ -751,16 +761,19 @@ export const SelfHostedVideo = ({
 			};
 
 			if (webkitVideo.webkitDisplayingFullscreen) {
+				setIsNativeFullscreen(false);
 				return webkitVideo.webkitExitFullscreen();
 			} else {
+				setIsNativeFullscreen(true);
 				return webkitVideo.webkitEnterFullscreen();
 			}
 		}
 
 		if (document.fullscreenElement) {
 			void document.exitFullscreen();
+		} else if (playerContainerRef.current) {
+			void playerContainerRef.current.requestFullscreen();
 		}
-		void video.requestFullscreen();
 	};
 
 	/**
@@ -950,6 +963,7 @@ export const SelfHostedVideo = ({
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
 						ref={vidRef}
+						playerContainerRef={playerContainerRef}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
 						handleLoadedData={handleLoadedData}
@@ -979,7 +993,8 @@ export const SelfHostedVideo = ({
 						shouldLoop={shouldLoop}
 						showFullscreenIcon={isDefault}
 						isInteractive={!isCinemagraph}
-						showCustomSubtitles={!isDefault && !isCinemagraph}
+						showCustomSubtitles={!isCinemagraph}
+						isNativeFullscreen={isNativeFullscreen}
 					/>
 				</div>
 			</div>

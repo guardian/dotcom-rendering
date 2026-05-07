@@ -957,7 +957,8 @@ export const Card = ({
 									atomId={media.mainMedia.atomId}
 									uniqueId={uniqueId}
 									aspectRatio={media.mainMedia.aspectRatio}
-									videoStyle={media.mainMedia.videoStyle}
+									videoStyle={'Default'}
+									// videoStyle={media.mainMedia.videoStyle}
 									posterImage={
 										media.mainMedia.image.src ?? ''
 									}
