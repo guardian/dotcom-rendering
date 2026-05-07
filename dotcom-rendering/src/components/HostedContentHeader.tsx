@@ -18,6 +18,10 @@ import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { Branding } from '../types/branding';
 import { BrandingLabel } from './BrandingLabel';
 import { useEffect, useState } from 'react';
+import {
+	customYoutubePauseEventName,
+	customYoutubePlayEventName,
+} from 'src/lib/video';
 
 export type Props = {
 	branding: Branding;
@@ -161,17 +165,21 @@ export const HostedContentHeader = ({ branding }: Props) => {
 		branding.hostedCampaignColour ?? sourcePalette.neutral[38];
 	const [shouldFadeLogo, setShouldFadeLogo] = useState<boolean>(false);
 
-	useEffect(() => {
-		const fadeLogoOnVideoPlay = () => {
-			setShouldFadeLogo(true);
-		};
+	const toggleLogoVisibility = (shouldFade: boolean) => () =>
+		setShouldFadeLogo(shouldFade);
 
-		document.addEventListener('youtube-video:play', fadeLogoOnVideoPlay);
+	const fadeLogo = toggleLogoVisibility(true);
+	const unfadeLogo = toggleLogoVisibility(false);
+
+	useEffect(() => {
+		document.addEventListener(customYoutubePlayEventName, fadeLogo);
+		document.addEventListener(customYoutubePauseEventName, unfadeLogo);
 
 		return () => {
+			document.removeEventListener(customYoutubePlayEventName, fadeLogo);
 			document.removeEventListener(
-				'youtube-video:play',
-				fadeLogoOnVideoPlay,
+				customYoutubePauseEventName,
+				unfadeLogo,
 			);
 		};
 	});

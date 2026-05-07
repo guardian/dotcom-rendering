@@ -11,6 +11,7 @@ export const DEFAULT_IMAGE_ASPECT_RATIO = '5:4';
 export const customSelfHostedVideoPlayAudioEventName =
 	'self-hosted-video:play-with-audio';
 export const customYoutubePlayEventName = 'youtube-video:play';
+export const customYoutubePauseEventName = 'youtube-video:pause';
 
 export type Source = {
 	src: string;

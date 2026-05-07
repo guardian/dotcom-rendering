@@ -15,6 +15,7 @@ import { getAuthStatus } from '../../lib/identity';
 import type { CustomPlayEventDetail } from '../../lib/video';
 import {
 	customSelfHostedVideoPlayAudioEventName,
+	customYoutubePauseEventName,
 	customYoutubePlayEventName,
 } from '../../lib/video';
 import type { AdTargeting } from '../../types/commercial';
@@ -169,6 +170,14 @@ const dispatchCustomPlayEvent = (uniqueId: string) => {
 	);
 };
 
+const dispatchCustomPauseEvent = (uniqueId: string) => {
+	document.dispatchEvent(
+		new CustomEvent(customYoutubePauseEventName, {
+			detail: { uniqueId },
+		}),
+	);
+};
+
 /**
  * Create an onStateChange listener that will invoke all eventEmitters
  * on the following events:
@@ -299,6 +308,8 @@ const createOnStateChangeListener =
 		}
 
 		if (event.data === YT.PlayerState.PAUSED) {
+			dispatchCustomPauseEvent(uniqueId);
+
 			log('dotcom', {
 				from: loggerFrom,
 				videoId,
