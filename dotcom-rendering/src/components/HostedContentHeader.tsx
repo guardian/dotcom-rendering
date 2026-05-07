@@ -17,6 +17,7 @@ import {
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { Branding } from '../types/branding';
 import { BrandingLabel } from './BrandingLabel';
+import { useEffect, useState } from 'react';
 
 export type Props = {
 	branding: Branding;
@@ -124,6 +125,12 @@ const badgeWrapperStyles = css`
 	text-align: center;
 	z-index: 1;
 	background-color: ${sourcePalette.neutral[100]};
+	opacity: 1;
+	transition: opacity 2s ease-in-out;
+`;
+
+const badgeWrapperFadeStyles = css`
+	opacity: 0;
 `;
 
 /**
@@ -152,6 +159,23 @@ const GuardianLogo = () => (
 export const HostedContentHeader = ({ branding }: Props) => {
 	const accentColor =
 		branding.hostedCampaignColour ?? sourcePalette.neutral[38];
+	const [shouldFadeLogo, setShouldFadeLogo] = useState<boolean>(false);
+
+	useEffect(() => {
+		const fadeLogoOnVideoPlay = () => {
+			setShouldFadeLogo(true);
+		};
+
+		document.addEventListener('youtube-video:play', fadeLogoOnVideoPlay);
+
+		return () => {
+			document.removeEventListener(
+				'youtube-video:play',
+				fadeLogoOnVideoPlay,
+			);
+		};
+	});
+
 	return (
 		<div css={headerWrapperStyles}>
 			<div css={brandingStyles}>
@@ -172,7 +196,13 @@ export const HostedContentHeader = ({ branding }: Props) => {
 					/>
 				</div>
 
-				<div css={badgeWrapperStyles}>
+				<div
+					css={
+						shouldFadeLogo
+							? [badgeWrapperStyles, badgeWrapperFadeStyles]
+							: badgeWrapperStyles
+					}
+				>
 					<BrandingLabel branding={branding} isHosted={true} />
 				</div>
 			</div>
