@@ -10,6 +10,7 @@ import * as Gallery from '@guardian/bridget/Gallery';
 import * as Interaction from '@guardian/bridget/Interaction';
 import * as Interactives from '@guardian/bridget/Interactives';
 import * as ListenToArticle from '@guardian/bridget/ListenToArticle';
+import * as MatchNotifications from '@guardian/bridget/MatchNotifications';
 import * as Metrics from '@guardian/bridget/Metrics';
 import * as Navigation from '@guardian/bridget/Navigation';
 import * as Newsletters from '@guardian/bridget/Newsletters';
@@ -241,3 +242,15 @@ export const getNativeABTestingClient = (): AbTesting.Client<void> => {
 	}
 	return nativeAbTestingClient;
 };
+
+let matchNotificationsClient: MatchNotifications.Client<void> | undefined =
+	undefined;
+export const getMatchNotificationsClient =
+	(): MatchNotifications.Client<void> => {
+		if (!matchNotificationsClient) {
+			matchNotificationsClient = createAppClient<
+				MatchNotifications.Client<void>
+			>(MatchNotifications.Client, 'buffered', 'compact');
+		}
+		return matchNotificationsClient;
+	};
