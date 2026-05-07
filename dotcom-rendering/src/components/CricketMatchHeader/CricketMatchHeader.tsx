@@ -275,14 +275,6 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 		(inning) => inning.battingTeam === props.team.name,
 	);
 
-	/**
-	 * TODO: Determine if there is a match winner and the nature of the victory
-	 * (eg. won by x runs or x wickets). A match may have no overall winner due
-	 * to a draw or the match being abandoned.
-	 */
-	const isWinner = false;
-	const marginOfVictory = '';
-
 	return (
 		<div
 			css={{
@@ -356,19 +348,6 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 						Yet to bat
 					</span>
 				))}
-			{isWinner && (
-				<div
-					css={{
-						...textSans14Object,
-						paddingTop: space[2],
-					}}
-				>
-					Won by{' '}
-					<span css={{ ...textSansBold14Object }}>
-						{marginOfVictory}
-					</span>
-				</div>
-			)}
 		</div>
 	);
 };
