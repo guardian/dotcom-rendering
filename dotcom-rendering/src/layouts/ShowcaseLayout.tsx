@@ -250,6 +250,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const isWorldCup2026 = article.tags.some(
+		(tag) => tag.id === 'football/world-cup-2026',
+	);
+
 	return (
 		<>
 			{isWeb && (
@@ -282,7 +286,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
-								showSubNav={true}
+								showSubNav={!isWorldCup2026}
 								showSlimNav={false}
 								hasPageSkin={false}
 								hasPageSkinContentSelfConstrain={false}
@@ -321,7 +325,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										contributionsServiceUrl={
 											contributionsServiceUrl
 										}
-										showSubNav={true}
+										showSubNav={!isWorldCup2026}
 										showSlimNav={true}
 										hasPageSkin={false}
 										hasPageSkinContentSelfConstrain={false}

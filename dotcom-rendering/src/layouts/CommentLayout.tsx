@@ -300,6 +300,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const isWorldCup2026 = article.tags.some(
+		(tag) => tag.id === 'football/world-cup-2026',
+	);
+
 	return (
 		<>
 			{isWeb && (
@@ -325,7 +329,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
+						showSubNav={!isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}

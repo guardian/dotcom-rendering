@@ -383,6 +383,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const isWorldCup2026 = article.tags.some(
+		(tag) => tag.id === 'football/world-cup-2026',
+	);
+
 	const renderAds = canRenderAds(article);
 
 	return (
@@ -410,7 +414,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={!isLabs}
+						showSubNav={!isLabs && !isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}

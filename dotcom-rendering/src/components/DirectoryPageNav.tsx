@@ -10,9 +10,13 @@ import {
 	headlineMedium15Object,
 	headlineMedium17Object,
 	palette,
+	space,
+	textSans14Object,
+	textSansBold14Object,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
 import { generateImageURL } from '../lib/image';
+import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 
 type Props = {
@@ -23,6 +27,7 @@ type Props = {
 interface DirectoryPageNavConfig {
 	pageIds: string[];
 	tagIds: string[];
+	variant?: 'subnav';
 	textColor: string;
 	backgroundColor: string;
 	title: { label: string; id: string };
@@ -120,6 +125,40 @@ const configs = [
 				'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-980px.jpg',
 		},
 	},
+	// World Cup 2026
+	{
+		pageIds: [] as string[],
+		tagIds: ['football/world-cup-2026'],
+		variant: 'subnav',
+		textColor: palette.neutral[7],
+		backgroundColor: palette.brand[400],
+		title: {
+			label: 'World Cup 2026',
+			id: 'football/world-cup-2026',
+		},
+		links: [
+			{
+				label: 'Match centre',
+				id: 'football/world-cup-2026/overview',
+			},
+			{
+				label: 'Player guide',
+				id: '',
+			},
+			{
+				label: 'Bracketology',
+				id: '',
+			},
+			{
+				label: 'Golden boot',
+				id: '',
+			},
+			{
+				label: 'More football',
+				id: 'football',
+			},
+		],
+	},
 ] satisfies DirectoryPageNavConfig[];
 
 export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
@@ -133,6 +172,80 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	if (!config) {
 		return null;
+	}
+
+	if (config.variant === 'subnav') {
+		const subnavWrapperStyles = css({
+			backgroundColor: config.backgroundColor,
+		});
+
+		const subnavListStyles = css({
+			...textSans14Object,
+			display: 'flex',
+			columnGap: space[2],
+			color: 'inherit',
+			minHeight: 28,
+			width: '100%',
+			paddingTop: space[2],
+			[from.mobileMedium]: {
+				paddingTop: space[3],
+			},
+			[from.tablet]: {
+				minHeight: 30,
+			},
+			[from.leftCol]: {
+				paddingTop: 14,
+			},
+			overflowX: 'scroll',
+			scrollbarWidth: 'none',
+			'&::-webkit-scrollbar': {
+				display: 'none',
+			},
+			listStyle: 'none',
+			padding: 0,
+		});
+
+		const subnavListItemStyles = css({
+			whiteSpace: 'nowrap',
+		});
+
+		const subnavLinkStyles = css({
+			color: themePalette('--masthead-nav-link-text'),
+			textDecoration: 'none',
+			paddingRight: space[1],
+			'&:hover': {
+				textDecoration: 'underline',
+				color: themePalette('--masthead-nav-link-text-hover'),
+			},
+		});
+
+		const subnavSelectedLinkStyles = css({
+			...textSansBold14Object,
+		});
+
+		return (
+			<nav css={subnavWrapperStyles}>
+				{/* eslint-disable jsx-a11y/no-redundant-roles -- A11y fix for Safari */}
+				<ul css={subnavListStyles} role="list">
+					{/* eslint-enable jsx-a11y/no-redundant-roles */}
+					{config.links.map((link) => (
+						<li key={link.label} css={subnavListItemStyles}>
+							<a
+								href={`/${link.id}`}
+								css={[
+									subnavLinkStyles,
+									pageId === link.id
+										? subnavSelectedLinkStyles
+										: undefined,
+								]}
+							>
+								{link.label}
+							</a>
+						</li>
+					))}
+				</ul>
+			</nav>
+		);
 	}
 
 	const { textColor, backgroundColor } = config;

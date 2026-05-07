@@ -273,6 +273,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const isWorldCup2026 = article.tags.some(
+		(tag) => tag.id === 'football/world-cup-2026',
+	);
+
 	const avatarUrl = getSoleContributor(article.tags, article.byline)
 		?.bylineLargeImageUrl;
 
@@ -303,7 +307,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
+						showSubNav={!isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
