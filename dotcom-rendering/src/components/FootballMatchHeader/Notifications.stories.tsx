@@ -1,8 +1,8 @@
+import { fn, mocked } from 'storybook/test';
 import { gridContainerDecorator } from '../../../.storybook/decorators/gridDecorators';
 import preview from '../../../.storybook/preview';
-import { palette } from '../../palette';
-import { fn, mocked } from 'storybook/test';
 import { getMatchNotificationsClient } from '../../lib/bridgetApi';
+import { palette } from '../../palette';
 import { NotificationsToggle } from '../NotificationsToggle.stories';
 import { background } from './colours';
 import { FixtureWeb } from './FootballMatchHeader.stories';
