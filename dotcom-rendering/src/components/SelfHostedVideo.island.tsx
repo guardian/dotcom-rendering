@@ -399,7 +399,7 @@ export const SelfHostedVideo = ({
 	});
 
 	const activeCue = useSubtitles({
-		video: vidRef.current,
+		video: isDefault ? null : vidRef.current,
 		playerState,
 		currentTime,
 	});
@@ -664,6 +664,13 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleLoadedMetadata = () => {
+		/* Default videos don't use custom subtitles,
+		so they don't need to be positioned.*/
+		if (!isDefault) return;
+
+		/* Cinemagraphs do not have subtitles*/
+		if (!isCinemagraph) return;
+
 		const video = vidRef.current;
 		if (!video) return;
 
@@ -972,7 +979,7 @@ export const SelfHostedVideo = ({
 						shouldLoop={shouldLoop}
 						showFullscreenIcon={isDefault}
 						isInteractive={!isCinemagraph}
-						showCustomSubtitles={!isDefault}
+						showCustomSubtitles={!isDefault && !isCinemagraph}
 					/>
 				</div>
 			</div>

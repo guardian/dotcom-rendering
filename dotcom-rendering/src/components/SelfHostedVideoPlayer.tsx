@@ -262,8 +262,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 					))}
 					{showSubtitles && (
 						<track
-							// Don't use default - it forces native rendering on iOS
-							default={false}
+							/** Only use default native subtitles when we are not displaying custom subtitles */
+							default={!showCustomSubtitles}
 							kind="subtitles"
 							src={subtitleSource}
 							srcLang="en"
