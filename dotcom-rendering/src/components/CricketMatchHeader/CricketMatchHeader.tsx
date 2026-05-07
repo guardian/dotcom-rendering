@@ -10,7 +10,6 @@ import {
 	textSansBold14Object,
 	textSansBold17Object,
 	until,
-	type Breakpoint,
 } from '@guardian/source/foundations';
 import { Fragment, type ReactNode, useMemo } from 'react';
 import { grid } from '../../grid';
@@ -122,10 +121,7 @@ export const CricketMatchHeader = (props: Props) => {
 							borderStyle="dotted"
 							borderColour={border(match.kind)}
 						/>
-						<ResultLine
-							result={match.result}
-							matchKind={match.kind}
-						/>
+						<ResultLine result={match.result} />
 					</>
 				)}
 			</div>
@@ -252,7 +248,7 @@ const MatchDateFormatterForEdition = (
 const Hr = (props: {
 	borderStyle: 'dotted' | 'solid';
 	borderColour: ColourName;
-	hide?: Breakpoint;
+	hide?: string;
 }) => (
 	<hr
 		css={{
@@ -261,9 +257,13 @@ const Hr = (props: {
 			width: '100%',
 			borderWidth: 0,
 			borderBottomWidth: 1,
-			[props.hide]: {
-				display: 'none',
-			},
+			...(props.hide
+				? {
+						[props.hide]: {
+							display: 'none',
+						},
+				  }
+				: {}),
 		}}
 		style={{
 			borderBottomColor: palette(props.borderColour),
@@ -579,7 +579,7 @@ const resultDescription = (result: Result): string => {
 		case 'home-win':
 		case 'away-win':
 			return `${result.winner.team} won by ${
-				result.winner.margin || result.winner.type
+				result.winner.margin ?? result.winner.type
 			}`;
 		// none is usually accompanied by a description, but if it's not, "No result" seems like a reasonable default
 		case 'none':
@@ -595,10 +595,7 @@ const resultDescription = (result: Result): string => {
 	}
 };
 
-const ResultLine = (props: {
-	result: Result;
-	matchKind: CricketMatch['kind'];
-}) => {
+const ResultLine = (props: { result: Result }) => {
 	const description = resultDescription(props.result);
 	return (
 		<p
