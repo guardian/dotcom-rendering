@@ -138,6 +138,10 @@ const configs = [
 		},
 		links: [
 			{
+				label: 'World Cup',
+				id: 'football/world-cup-2026',
+			},
+			{
 				label: 'Match centre',
 				id: 'football/world-cup-2026/overview',
 			},
@@ -161,6 +165,32 @@ const configs = [
 	},
 ] satisfies DirectoryPageNavConfig[];
 
+/**
+ * Mirrors the centering of the Masthead Titlepiece's content area at each
+ * breakpoint (matching Section/ElementContainer's margin-auto + max-width
+ * pattern), with side padding matching ElementContainer's sidePadding.
+ */
+const subnavInnerStyles = css({
+	position: 'relative',
+	margin: 'auto',
+	padding: '0 10px',
+	[from.mobileLandscape]: {
+		padding: '0 20px',
+	},
+	[from.tablet]: {
+		maxWidth: 740,
+	},
+	[from.desktop]: {
+		maxWidth: 980,
+	},
+	[from.leftCol]: {
+		maxWidth: 1140,
+	},
+	[from.wide]: {
+		maxWidth: 1300,
+	},
+});
+
 export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	const config = configs.find(
 		(cfg) =>
@@ -177,24 +207,18 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	if (config.variant === 'subnav') {
 		const subnavWrapperStyles = css({
 			backgroundColor: config.backgroundColor,
+			// paddingBottom: space[1],
 		});
 
 		const subnavListStyles = css({
 			...textSans14Object,
 			display: 'flex',
+			alignItems: 'center',
 			columnGap: space[2],
-			color: 'inherit',
 			minHeight: 28,
 			width: '100%',
-			paddingTop: space[2],
-			[from.mobileMedium]: {
-				paddingTop: space[3],
-			},
 			[from.tablet]: {
 				minHeight: 30,
-			},
-			[from.leftCol]: {
-				paddingTop: 14,
 			},
 			overflowX: 'scroll',
 			scrollbarWidth: 'none',
@@ -207,6 +231,8 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 		const subnavListItemStyles = css({
 			whiteSpace: 'nowrap',
+			display: 'flex',
+			alignItems: 'center',
 		});
 
 		const subnavLinkStyles = css({
@@ -223,27 +249,45 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 			...textSansBold14Object,
 		});
 
+		const subnavInnerWithBorderStyles = css(subnavInnerStyles, {
+			paddingTop: space[2],
+			[from.tablet]: {
+				'&::before': {
+					content: '""',
+					borderLeft: `1px solid ${themePalette(
+						'--masthead-nav-lines',
+					)}`,
+					position: 'absolute',
+					left: 0,
+					top: 0,
+					bottom: 0,
+				},
+			},
+		});
+
 		return (
 			<nav css={subnavWrapperStyles}>
-				{/* eslint-disable jsx-a11y/no-redundant-roles -- A11y fix for Safari */}
-				<ul css={subnavListStyles} role="list">
-					{/* eslint-enable jsx-a11y/no-redundant-roles */}
-					{config.links.map((link) => (
-						<li key={link.label} css={subnavListItemStyles}>
-							<a
-								href={`/${link.id}`}
-								css={[
-									subnavLinkStyles,
-									pageId === link.id
-										? subnavSelectedLinkStyles
-										: undefined,
-								]}
-							>
-								{link.label}
-							</a>
-						</li>
-					))}
-				</ul>
+				<div css={subnavInnerWithBorderStyles}>
+					{/* eslint-disable jsx-a11y/no-redundant-roles -- A11y fix for Safari */}
+					<ul css={subnavListStyles} role="list">
+						{/* eslint-enable jsx-a11y/no-redundant-roles */}
+						{config.links.map((link) => (
+							<li key={link.label} css={subnavListItemStyles}>
+								<a
+									href={`/${link.id}`}
+									css={[
+										subnavLinkStyles,
+										pageId === link.id
+											? subnavSelectedLinkStyles
+											: undefined,
+									]}
+								>
+									{link.label}
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
 			</nav>
 		);
 	}
