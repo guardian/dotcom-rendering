@@ -45,7 +45,6 @@ type Props = Pick<
 	renderingTarget: RenderingTarget;
 	theme: string;
 	isSignedIn?: boolean | 'Pending';
-	isAlreadySubscribed?: boolean;
 	children?: (
 		previewAction: NewsletterPreviewAction | undefined,
 	) => React.ReactNode;
@@ -69,7 +68,6 @@ export const NewsletterSignupCardContainer = ({
 	illustrationSquare,
 	children,
 	isSignedIn,
-	isAlreadySubscribed,
 }: Props) => {
 	const showPrivacyMessageOutside = isSignedIn === true;
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -136,12 +134,6 @@ export const NewsletterSignupCardContainer = ({
 			  }
 		: undefined;
 
-	// Suppress the preview action when the user is already subscribed — the
-	// card header and children both receive the same value so they stay in sync.
-	const effectivePreviewAction = isAlreadySubscribed
-		? undefined
-		: previewAction;
-
 	return (
 		<div css={themeColorStyles(theme)}>
 			{isPreviewOpen && hasPreviewUrl && (
@@ -161,10 +153,10 @@ export const NewsletterSignupCardContainer = ({
 					frequency={frequency}
 					description={description}
 					illustrationSquare={illustrationSquare}
-					previewAction={effectivePreviewAction}
+					previewAction={previewAction}
 					isSignedIn={isSignedIn}
 				>
-					{children?.(effectivePreviewAction)}
+					{children?.(previewAction)}
 				</NewsletterSignupCard>
 				{showPrivacyMessageOutside && (
 					<NewsletterPrivacyMessage

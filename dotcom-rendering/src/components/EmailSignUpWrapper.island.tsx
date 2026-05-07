@@ -152,7 +152,6 @@ export const EmailSignUpWrapper = ({
 					exampleUrl={exampleUrl}
 					renderingTarget={renderingTarget}
 					isSignedIn={isSignedIn}
-					isAlreadySubscribed={isSubscribed}
 				>
 					{(previewAction) => (
 						<Island priority="feature" defer={{ until: 'visible' }}>

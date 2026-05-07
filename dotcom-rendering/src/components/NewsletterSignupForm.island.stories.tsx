@@ -154,7 +154,7 @@ export const Loading = meta.story({
 
 /** Subscription confirmed. */
 export const Success = meta.story({
-	args: defaultArgs,
+	args: { ...defaultArgs, previewAction: undefined },
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(
 			mockForm({ responseOk: true }),
@@ -164,7 +164,7 @@ export const Success = meta.story({
 
 /** Server returned a non-2xx response — error message and "Try again" button. */
 export const SubmissionFailed = meta.story({
-	args: defaultArgs,
+	args: { ...defaultArgs, previewAction: undefined },
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(
 			mockForm({ responseOk: false }),
@@ -232,5 +232,14 @@ export const HidePrivacyMessage = meta.story({
 				marketingOptIn: true,
 			}),
 		);
+	},
+});
+
+/** User is already subscribed — success message shown immediately. */
+export const AlreadySubscribed = meta.story({
+	args: { ...defaultArgs, isAlreadySubscribed: true },
+	parameters: { isSignedIn: true },
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(mockForm({}));
 	},
 });
