@@ -9,6 +9,8 @@ import {
 	textSans15Object,
 	textSansBold14Object,
 	textSansBold17Object,
+	textSansItalic14Object,
+	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
 import { Fragment, type ReactNode, useMemo } from 'react';
@@ -108,28 +110,12 @@ export const CricketMatchHeader = (props: Props) => {
 				}}
 			>
 				<StatusLine match={match} edition={props.edition} />
-				<Hr
-					borderStyle="dotted"
-					borderColour={border(match.kind)}
-					hide={from.leftCol}
-				/>
+				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
 				<Teams match={match} />
 
-				{match.result && (
-					<>
-						<Hr
-							borderStyle="dotted"
-							borderColour={border(match.kind)}
-						/>
-						<ResultLine result={match.result} />
-					</>
-				)}
+				{match.result && <ResultLine result={match.result} />}
 			</div>
-			<Hr
-				borderStyle="solid"
-				borderColour={border(match.kind)}
-				hide={from.leftCol}
-			/>
+			<Hr borderStyle="solid" borderColour={border(match.kind)} />
 		</section>
 	);
 };
@@ -248,7 +234,6 @@ const MatchDateFormatterForEdition = (
 const Hr = (props: {
 	borderStyle: 'dotted' | 'solid';
 	borderColour: ColourName;
-	hide?: string;
 }) => (
 	<hr
 		css={{
@@ -257,13 +242,9 @@ const Hr = (props: {
 			width: '100%',
 			borderWidth: 0,
 			borderBottomWidth: 1,
-			...(props.hide
-				? {
-						[props.hide]: {
-							display: 'none',
-						},
-				  }
-				: {}),
+			[from.leftCol]: {
+				display: 'none',
+			},
 		}}
 		style={{
 			borderBottomColor: palette(props.borderColour),
@@ -278,11 +259,11 @@ const Teams = (props: { match: CricketMatch }) => (
 			'&': css(grid.column.centre),
 			display: 'flex',
 			paddingTop: space[2],
-			paddingBottom: props.match.result ? space[2] : space[3],
+			paddingBottom: space[3],
 			[from.leftCol]: {
 				'&': css(grid.column.centre),
 				paddingTop: 0,
-				paddingBottom: props.match.result ? space[2] : space[5],
+				paddingBottom: space[5],
 			},
 		}}
 	>
@@ -598,21 +579,24 @@ const resultDescription = (result: Result): string => {
 const ResultLine = (props: { result: Result }) => {
 	const description = resultDescription(props.result);
 	return (
-		<p
+		<div
 			css={{
-				...textSans14Object,
-				'&': css(grid.column.all),
-				paddingTop: space[2],
-				paddingBottom: space[2],
-				paddingLeft: grid.columnGap,
-				paddingRight: grid.columnGap,
-				textAlign: 'center',
-				[from.desktop]: {
-					textAlign: 'left',
+				'&': css(grid.column.centre),
+				paddingBottom: space[3],
+				[from.leftCol]: {
+					paddingLeft: 10,
+					paddingBottom: space[5],
 				},
 			}}
 		>
-			{description}
-		</p>
+			<p
+				css={{
+					...textSansItalic14Object,
+					[from.leftCol]: textSansItalic15Object,
+				}}
+			>
+				{description}
+			</p>
+		</div>
 	);
 };
