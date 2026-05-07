@@ -112,10 +112,9 @@ export const CricketMatchHeader = (props: Props) => {
 				<StatusLine match={match} edition={props.edition} />
 				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
 				<Teams match={match} />
-
 				{match.result && <ResultLine result={match.result} />}
+				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 			</div>
-			<Hr borderStyle="solid" borderColour={border(match.kind)} />
 		</section>
 	);
 };
