@@ -3,11 +3,12 @@ import { isUndefined, log } from '@guardian/libs';
 import type { EventPayload, VideoEvent } from '@guardian/ophan-tracker-js';
 import { getOphan } from '../../client/ophan/ophan';
 import { getVideoClient } from '../../lib/bridgetApi';
+import { hasMinimumBridgetVersion } from '../../lib/useIsBridgetCompatible';
 import type { VideoEventKey } from './YoutubeAtom';
 
-const getAppsMediaEvent = (
+const getAppsMediaEvent = async (
 	trackingEvent: VideoEventKey,
-): MediaEvent | undefined => {
+): Promise<MediaEvent | undefined> => {
 	switch (trackingEvent) {
 		case 'cued':
 			return MediaEvent.ready;
@@ -21,21 +22,28 @@ const getAppsMediaEvent = (
 			return MediaEvent.percent75;
 		case 'end':
 			return MediaEvent.end;
-		case 'pause':
-			return MediaEvent.pause;
-		case 'mute':
-			return MediaEvent.mute;
-		case 'unmute':
-			return MediaEvent.unmute;
-		case 'enter_fullscreen':
-			return MediaEvent.enter_fullscreen;
-		case 'exit_fullscreen':
-			return MediaEvent.exit_fullscreen;
-		case 'view':
-			return MediaEvent.view;
 		default:
-			return undefined;
 	}
+
+	if (await hasMinimumBridgetVersion('8.9.2')) {
+		switch (trackingEvent) {
+			case 'pause':
+				return MediaEvent.pause;
+			case 'mute':
+				return MediaEvent.mute;
+			case 'unmute':
+				return MediaEvent.unmute;
+			case 'enter_fullscreen':
+				return MediaEvent.enter_fullscreen;
+			case 'exit_fullscreen':
+				return MediaEvent.exit_fullscreen;
+			case 'view':
+				return MediaEvent.view;
+			default:
+		}
+	}
+
+	return undefined;
 };
 
 export type OphanVideoStyle = 'youtube' | 'loop' | 'cinemagraph' | 'default';
@@ -61,19 +69,20 @@ const ophanTrackerWeb = (id: string, videoStyle: OphanVideoStyle) => {
 
 const ophanTrackerApps = (id: string, videoStyle: OphanVideoStyle) => {
 	return (trackingEvent: VideoEventKey): void => {
-		const appsMediaEvent = getAppsMediaEvent(trackingEvent);
-		if (!isUndefined(appsMediaEvent)) {
-			const event = {
-				videoId: id,
-				event: appsMediaEvent,
-			};
-			log('dotcom', {
-				from: `${videoStyle}Atom event emitter apps`,
-				id,
-				event,
-			});
-			void getVideoClient().sendVideoEvent(event);
-		}
+		void getAppsMediaEvent(trackingEvent).then((appsMediaEvent) => {
+			if (!isUndefined(appsMediaEvent)) {
+				const event = {
+					videoId: id,
+					event: appsMediaEvent,
+				};
+				log('dotcom', {
+					from: `${videoStyle}Atom event emitter apps`,
+					id,
+					event,
+				});
+				void getVideoClient().sendVideoEvent(event);
+			}
+		});
 	};
 };
 
