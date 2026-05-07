@@ -123,6 +123,15 @@ export const Result = {
 					fallOfWicket: 10,
 				},
 			],
+			result: {
+				type: 'home-win',
+				description: 'Australia win by an innings and 47 runs',
+				winner: {
+					type: 'runs',
+					team: 'Australia',
+					margin: '47',
+				},
+			},
 		},
 	},
 } satisfies Story;
@@ -151,6 +160,15 @@ export const ResultWinByWickets = {
 					fallOfWicket: 8,
 				},
 			],
+			result: {
+				type: 'home-win',
+				description: 'Australia win by 2 wickets',
+				winner: {
+					type: 'wickets',
+					team: 'Australia',
+					margin: '2',
+				},
+			},
 		},
 	},
 } satisfies Story;
@@ -196,6 +214,9 @@ export const ResultDrawn = {
 					fallOfWicket: 7,
 				},
 			],
+			result: {
+				type: 'draw',
+			},
 		},
 	},
 } satisfies Story;
