@@ -280,6 +280,7 @@ type Props = {
 	videoStyle: VideoPlayerFormat;
 	aspectRatio: number;
 	posterImage: string;
+	posterImageAspectRatio: string;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
 	fallbackImageLoading: CardPictureProps['loading'];
@@ -336,6 +337,7 @@ export const SelfHostedVideo = ({
 	format,
 	isMainMedia,
 	role,
+	posterImageAspectRatio,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -891,18 +893,6 @@ export const SelfHostedVideo = ({
 		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
 
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
-
-	const isVertical =
-		fallbackImageSize === 'feature' ||
-		fallbackImageSize === 'feature-large' ||
-		isGreyBarsAtSidesOnDesktop;
-
-	/* This is a hot fix for cards where the video is a different aspect ratio and will be replaced by https://github.com/guardian/dotcom-rendering/pull/15746 */
-	const posterImageAspectRatio = isVertical
-		? '4:5'
-		: isGreyBarsAtTopAndBottomOnDesktop
-		? '16:9'
-		: '5:4';
 
 	const optimisedPosterImage = showPosterImage
 		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)

@@ -193,7 +193,7 @@ jobs:
         run: pnpm  --filter @guardian/ab-testing-cdk synth
 
       - name: Riff-Raff Upload
-        uses: guardian/actions-riff-raff@v4.2.6
+        uses: guardian/actions-riff-raff@v4.3.1
         with:
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}

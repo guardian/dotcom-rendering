@@ -5742,13 +5742,25 @@
                             "type": "string"
                         },
                         "image": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "src": {
+                                    "type": "string"
+                                },
+                                "aspectRatio": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "aspectRatio"
+                            ]
                         }
                     },
                     "required": [
                         "aspectRatio",
                         "atomId",
                         "duration",
+                        "image",
                         "sources",
                         "type",
                         "videoStyle"

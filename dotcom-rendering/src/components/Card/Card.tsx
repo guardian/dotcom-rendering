@@ -958,8 +958,15 @@ export const Card = ({
 									uniqueId={uniqueId}
 									aspectRatio={media.mainMedia.aspectRatio}
 									videoStyle={media.mainMedia.videoStyle}
-									posterImage={media.mainMedia.image ?? ''}
-									fallbackImage={media.mainMedia.image ?? ''}
+									posterImage={
+										media.mainMedia.image.src ?? ''
+									}
+									posterImageAspectRatio={
+										media.mainMedia.image.aspectRatio
+									}
+									fallbackImage={
+										media.mainMedia.image.src ?? ''
+									}
 									fallbackImageSize={mediaSize}
 									fallbackImageLoading={imageLoading}
 									fallbackImageAlt={media.imageAltText}
