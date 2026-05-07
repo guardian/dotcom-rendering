@@ -49,9 +49,9 @@ type WinnerResult = {
 	type: 'home-win' | 'away-win';
 	description?: string;
 	winner: {
-		type: 'runs' | 'wickets' | 'innings' | 'forefeit' | 'run-rate';
+		type: 'runs' | 'wickets' | 'innings' | 'forfeit' | 'run-rate';
 		team: string;
-		margin?: string;
+		margin?: number;
 	};
 };
 
@@ -558,20 +558,31 @@ const resultDescription = (result: Result): string => {
 	switch (result.type) {
 		case 'home-win':
 		case 'away-win':
-			return `${result.winner.team} won by ${
-				result.winner.margin ?? result.winner.type
-			}`;
+			if (result.winner.type === 'forfeit') {
+				return `${result.winner.team} win by forfeit`;
+			}
+			if (
+				['runs', 'wickets', 'innings'].includes(result.winner.type) &&
+				typeof result.winner.margin === 'number'
+			) {
+				return `${result.winner.team} win by ${result.winner.margin} ${result.winner.type}`;
+			}
+			if (result.winner.type === 'run-rate') {
+				// Run-rate is an old method of deciding a winner in rain-affected matches before DLS
+				return `${result.winner.team} win by run rate`;
+			}
+			return `${result.winner.team} win`;
 		// none is usually accompanied by a description, but if it's not, "No result" seems like a reasonable default
 		case 'none':
 		case 'no-result':
-			return 'No Result';
+			return 'No result';
 		case 'draw':
 		case 'level-scores-draw':
-			return 'Match Drawn';
+			return 'Match drawn';
 		case 'abandoned':
-			return 'Match Abandoned';
+			return 'Match abandoned';
 		case 'tied':
-			return 'Match Tied';
+			return 'Match tied';
 	}
 };
 

@@ -129,7 +129,7 @@ export const Result = {
 				winner: {
 					type: 'runs',
 					team: 'Australia',
-					margin: '47',
+					margin: 47,
 				},
 			},
 		},
@@ -162,11 +162,10 @@ export const ResultWinByWickets = {
 			],
 			result: {
 				type: 'home-win',
-				description: 'Australia win by 2 wickets',
 				winner: {
 					type: 'wickets',
 					team: 'Australia',
-					margin: '2',
+					margin: 2,
 				},
 			},
 		},
