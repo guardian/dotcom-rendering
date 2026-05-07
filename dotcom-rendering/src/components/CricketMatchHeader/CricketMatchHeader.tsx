@@ -43,6 +43,31 @@ type Inning = {
 	fallOfWicket: number;
 };
 
+type WinnerResult = {
+	type: 'home-win' | 'away-win';
+	description?: string;
+	winner: {
+		type: 'runs' | 'wickets' | 'innings' | 'forefeit' | 'run-rate';
+		team: {
+			name: string;
+		};
+		margin?: string;
+	};
+};
+
+type OtherResult = {
+	type:
+		| 'no-result'
+		| 'draw'
+		| 'abandoned'
+		| 'tied'
+		| 'level-scores-draw'
+		| 'none';
+	description?: string;
+};
+
+type Result = WinnerResult | OtherResult;
+
 type CricketMatch = {
 	kind: 'Fixture' | 'Live' | 'Result';
 	series: string;
@@ -53,6 +78,7 @@ type CricketMatch = {
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
 	innings: Inning[];
+	result?: Result;
 };
 
 type Props = {
