@@ -49,9 +49,7 @@ type WinnerResult = {
 	description?: string;
 	winner: {
 		type: 'runs' | 'wickets' | 'innings' | 'forefeit' | 'run-rate';
-		team: {
-			name: string;
-		};
+		team: string;
 		margin?: string;
 	};
 };
@@ -117,7 +115,19 @@ export const CricketMatchHeader = (props: Props) => {
 					hide={from.leftCol}
 				/>
 				<Teams match={match} />
-				<Hr borderStyle="solid" borderColour={border(match.kind)} />
+
+				{match.result && (
+					<>
+						<Hr
+							borderStyle="dotted"
+							borderColour={border(match.kind)}
+						/>
+						<ResultLine
+							result={match.result}
+							matchKind={match.kind}
+						/>
+					</>
+				)}
 			</div>
 			<Hr
 				borderStyle="solid"
@@ -268,11 +278,11 @@ const Teams = (props: { match: CricketMatch }) => (
 			'&': css(grid.column.centre),
 			display: 'flex',
 			paddingTop: space[2],
-			paddingBottom: space[3],
+			paddingBottom: props.match.result ? space[2] : space[3],
 			[from.leftCol]: {
 				'&': css(grid.column.centre),
 				paddingTop: 0,
-				paddingBottom: space[5],
+				paddingBottom: props.match.result ? space[2] : space[5],
 			},
 		}}
 	>
@@ -553,4 +563,59 @@ const crestUrl = (teamId: string): URL | undefined => {
 	} catch (e) {
 		return undefined;
 	}
+};
+
+/**
+ * In most cases, the result will come with a description that we can use directly.
+ * But in some cases, we just get the data about the result and need to generate
+ * a description from that.
+ */
+const resultDescription = (result: Result): string => {
+	if (result.description) {
+		return result.description;
+	}
+
+	switch (result.type) {
+		case 'home-win':
+		case 'away-win':
+			return `${result.winner.team} won by ${
+				result.winner.margin || result.winner.type
+			}`;
+		// none is usually accompanied by a description, but if it's not, "No result" seems like a reasonable default
+		case 'none':
+		case 'no-result':
+			return 'No Result';
+		case 'draw':
+		case 'level-scores-draw':
+			return 'Match Drawn';
+		case 'abandoned':
+			return 'Match Abandoned';
+		case 'tied':
+			return 'Match Tied';
+	}
+};
+
+const ResultLine = (props: {
+	result: Result;
+	matchKind: CricketMatch['kind'];
+}) => {
+	const description = resultDescription(props.result);
+	return (
+		<p
+			css={{
+				...textSans14Object,
+				'&': css(grid.column.all),
+				paddingTop: space[2],
+				paddingBottom: space[2],
+				paddingLeft: grid.columnGap,
+				paddingRight: grid.columnGap,
+				textAlign: 'center',
+				[from.desktop]: {
+					textAlign: 'left',
+				},
+			}}
+		>
+			{description}
+		</p>
+	);
 };
