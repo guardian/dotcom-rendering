@@ -317,7 +317,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 									Icon={AudioIcon}
 									handleClick={handleAudioClick}
 									isMuted={isMuted}
-									atomId={atomId}
 									size={iconSize}
 								/>
 							)}
