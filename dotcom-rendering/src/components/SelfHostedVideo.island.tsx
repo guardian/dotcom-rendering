@@ -646,10 +646,7 @@ export const SelfHostedVideo = ({
 		return FallbackImageComponent;
 	}
 
-	const handleLoadedMetadata = () => {
-		const video = vidRef.current;
-		if (!video) return;
-
+	const positionCues = (video: HTMLVideoElement) => {
 		const track = video.textTracks[0];
 		if (!track?.cues) return;
 
@@ -664,6 +661,13 @@ export const SelfHostedVideo = ({
 				cue.line = percentFromTop;
 			}
 		}
+	};
+
+	const handleLoadedMetadata = () => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		positionCues(video);
 	};
 
 	const handleLoadedData = () => {
