@@ -10,6 +10,7 @@ import {
 	textSansBold14Object,
 	textSansBold17Object,
 	until,
+	type Breakpoint,
 } from '@guardian/source/foundations';
 import { Fragment, type ReactNode, useMemo } from 'react';
 import { grid } from '../../grid';
@@ -110,10 +111,19 @@ export const CricketMatchHeader = (props: Props) => {
 				}}
 			>
 				<StatusLine match={match} edition={props.edition} />
-				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
+				<Hr
+					borderStyle="dotted"
+					borderColour={border(match.kind)}
+					hide={from.leftCol}
+				/>
 				<Teams match={match} />
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 			</div>
+			<Hr
+				borderStyle="solid"
+				borderColour={border(match.kind)}
+				hide={from.leftCol}
+			/>
 		</section>
 	);
 };
@@ -232,6 +242,7 @@ const MatchDateFormatterForEdition = (
 const Hr = (props: {
 	borderStyle: 'dotted' | 'solid';
 	borderColour: ColourName;
+	hide?: Breakpoint;
 }) => (
 	<hr
 		css={{
@@ -240,7 +251,7 @@ const Hr = (props: {
 			width: '100%',
 			borderWidth: 0,
 			borderBottomWidth: 1,
-			[from.leftCol]: {
+			[props.hide]: {
 				display: 'none',
 			},
 		}}
