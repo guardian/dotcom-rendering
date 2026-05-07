@@ -439,6 +439,16 @@ export const SelfHostedVideo = ({
 		[isWeb, isApps, atomId, ophanVideoStyle],
 	);
 
+	const mutePlayer = useCallback(
+		(value: boolean, track: boolean = true) => {
+			setIsMuted(value);
+			if (track && playerState === 'PLAYING' && isMuted !== value) {
+				sendOphanTrackingEvent(value ? 'mute' : 'unmute');
+			}
+		},
+		[playerState, isMuted, sendOphanTrackingEvent],
+	);
+
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
 		threshold: VISIBILITY_THRESHOLD,
@@ -488,7 +498,7 @@ export const SelfHostedVideo = ({
 		if (!video) return;
 
 		if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
-			setIsMuted(true);
+			mutePlayer(true, false);
 		}
 
 		setPlayerState(pauseReason);
@@ -573,7 +583,7 @@ export const SelfHostedVideo = ({
 				const thisVideoId = uniqueId;
 
 				if (playedVideoId !== thisVideoId) {
-					setIsMuted(true);
+					mutePlayer(true);
 				}
 			}
 		};
@@ -583,7 +593,7 @@ export const SelfHostedVideo = ({
 		 * Triggered by the CustomEvent in YoutubeAtomPlayer.
 		 */
 		const handleCustomPlayYoutubeEvent = () => {
-			setIsMuted(true);
+			mutePlayer(true);
 		};
 
 		/**
@@ -647,7 +657,14 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [uniqueId, atomId, sources, renderingTarget, ophanVideoStyle]);
+	}, [
+		mutePlayer,
+		uniqueId,
+		atomId,
+		sources,
+		renderingTarget,
+		ophanVideoStyle,
+	]);
 
 	/**
 	 * Track the first time the video comes into view.
@@ -754,9 +771,9 @@ export const SelfHostedVideo = ({
 		if (isMuted) {
 			// Emit video play audio event so other components are aware when a video is played with sound
 			dispatchCustomPlayAudioEvent(uniqueId);
-			setIsMuted(false);
+			mutePlayer(false);
 		} else {
-			setIsMuted(true);
+			mutePlayer(true);
 		}
 	};
 
@@ -876,7 +893,7 @@ export const SelfHostedVideo = ({
 				seekBackward();
 				break;
 			case 'm':
-				setIsMuted(!isMuted);
+				mutePlayer(!isMuted);
 				break;
 		}
 	};
