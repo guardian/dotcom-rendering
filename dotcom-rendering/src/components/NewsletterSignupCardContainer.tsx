@@ -7,21 +7,11 @@ import {
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
 import type { RenderingTarget } from '../types/renderingTarget';
+import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import type { NewsletterSignupCardProps } from './NewsletterSignupCard';
 import { NewsletterSignupCard } from './NewsletterSignupCard';
-
-export type NewsletterPreviewAction =
-	| {
-			behaviour: 'modal';
-			onClick: () => void;
-	  }
-	| {
-			behaviour: 'link';
-			href: string;
-			onClick: () => void;
-	  };
 
 type PreviewEventDescription = 'preview-open' | 'preview-close';
 
@@ -45,17 +35,17 @@ const sendPreviewTracking = ({
 	});
 };
 
-type Props = Omit<NewsletterSignupCardProps, 'children'> & {
+type Props = Pick<
+	NewsletterSignupCardProps,
+	'name' | 'frequency' | 'description' | 'illustrationSquare'
+> & {
 	identityName: string;
 	category?: string;
 	exampleUrl?: string;
 	renderingTarget: RenderingTarget;
 	theme: string;
-	/**
-	 * Pass the signed-in status so the container can render the privacy message
-	 * below the card (rather than inside the form) when the user is signed in.
-	 */
 	isSignedIn?: boolean | 'Pending';
+	isAlreadySubscribed?: boolean;
 	children?: (
 		previewAction: NewsletterPreviewAction | undefined,
 	) => React.ReactNode;
@@ -79,6 +69,7 @@ export const NewsletterSignupCardContainer = ({
 	illustrationSquare,
 	children,
 	isSignedIn,
+	isAlreadySubscribed,
 }: Props) => {
 	const showPrivacyMessageOutside = isSignedIn === true;
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -145,6 +136,12 @@ export const NewsletterSignupCardContainer = ({
 			  }
 		: undefined;
 
+	// Suppress the preview action when the user is already subscribed — the
+	// card header and children both receive the same value so they stay in sync.
+	const effectivePreviewAction = isAlreadySubscribed
+		? undefined
+		: previewAction;
+
 	return (
 		<div css={themeColorStyles(theme)}>
 			{isPreviewOpen && hasPreviewUrl && (
@@ -164,8 +161,10 @@ export const NewsletterSignupCardContainer = ({
 					frequency={frequency}
 					description={description}
 					illustrationSquare={illustrationSquare}
+					previewAction={effectivePreviewAction}
+					isSignedIn={isSignedIn}
 				>
-					{children?.(previewAction)}
+					{children?.(effectivePreviewAction)}
 				</NewsletterSignupCard>
 				{showPrivacyMessageOutside && (
 					<NewsletterPrivacyMessage
