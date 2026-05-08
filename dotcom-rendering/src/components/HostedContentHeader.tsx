@@ -7,6 +7,7 @@ import {
 	textSans12,
 	textSansBold12,
 	textSansBold14,
+	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import {
@@ -134,7 +135,9 @@ const badgeWrapperStyles = css`
 `;
 
 const badgeWrapperFadeStyles = css`
-	opacity: 0;
+	${until.wide} {
+		opacity: 0;
+	}
 `;
 
 /**
@@ -165,11 +168,10 @@ export const HostedContentHeader = ({ branding }: Props) => {
 		branding.hostedCampaignColour ?? sourcePalette.neutral[38];
 	const [shouldFadeLogo, setShouldFadeLogo] = useState<boolean>(false);
 
-	const toggleLogoVisibility = (shouldFade: boolean) => () =>
-		setShouldFadeLogo(shouldFade);
-
-	const fadeLogo = toggleLogoVisibility(true);
-	const unfadeLogo = toggleLogoVisibility(false);
+	// Logo fading is an exclusive feature for hosted video pages at certain breakpoints
+	// This component only needs rehydration on the video layout
+	const fadeLogo = () => setShouldFadeLogo(true);
+	const unfadeLogo = () => setShouldFadeLogo(false);
 
 	useEffect(() => {
 		document.addEventListener(customYoutubePlayEventName, fadeLogo);

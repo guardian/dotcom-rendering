@@ -159,8 +159,8 @@ const setAppsConfiguration = async (
 };
 
 /**
- * Dispatches a custom play event so that other players listening
- * for this event will stop playing
+ * Dispatch a custom play and pause event so that other components listening
+ * for this event can handle the video state
  */
 const dispatchCustomPlayEvent = (uniqueId: string) => {
 	document.dispatchEvent(
