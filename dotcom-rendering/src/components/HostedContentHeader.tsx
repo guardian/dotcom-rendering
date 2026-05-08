@@ -14,14 +14,14 @@ import {
 	SvgGuardianLogo,
 	SvgInfoRound,
 } from '@guardian/source/react-components';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import type { Branding } from '../types/branding';
-import { BrandingLabel } from './BrandingLabel';
 import { useEffect, useState } from 'react';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import {
 	customYoutubePauseEventName,
 	customYoutubePlayEventName,
-} from 'src/lib/video';
+} from '../lib/video';
+import type { Branding } from '../types/branding';
+import { BrandingLabel } from './BrandingLabel';
 
 export type Props = {
 	branding: Branding;
