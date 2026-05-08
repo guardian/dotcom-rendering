@@ -159,7 +159,7 @@
 	"devDependencies": {
 		"@rollup/plugin-inject": "5.0.5",
 		"rollup-plugin-visualizer": "7.0.1",
-		"vite": "npm:rolldown-vite@7.3.1",
+		"vite": "8.0.11",
 		"vite-plugin-svgr": "5.2.0"
 	}
 }
