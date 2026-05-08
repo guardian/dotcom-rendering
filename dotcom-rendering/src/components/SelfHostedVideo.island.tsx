@@ -132,12 +132,29 @@ const figureStyles = (
 `;
 
 const showControlsStyles = css`
-	:hover .controls-container {
+	.controls-container {
 		visibility: visible;
 		opacity: 1;
 		transition:
 			visibility 0.2s,
 			opacity 0.2s ease-in-out;
+	}
+`;
+
+const hideControlsStyles = css`
+	.controls-container {
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			visibility 0.3s,
+			opacity 0.3s ease-in-out;
+		transition-delay: 2.7s;
+	}
+
+	@media (hover: hover) {
+		:hover {
+			${showControlsStyles}
+		}
 	}
 `;
 
@@ -389,8 +406,11 @@ export const SelfHostedVideo = ({
 
 	const showIcons = !isCinemagraph && playerState !== 'NOT_STARTED';
 
-	// Controls are temporarily hidden so the full video can be displayed to the user without distractions.
-	const hideControls = isDefault && playerState === 'PLAYING';
+	/**
+	 * Functionality to hide controls when the video is not interacted with
+	 * so the full unobscured video can be displayed to the user without distractions.
+	 */
+	const isHideControlsEnabled = isDefault;
 
 	const iconSize = isDefault ? 'large' : 'small';
 
@@ -887,8 +907,7 @@ export const SelfHostedVideo = ({
 			playerState === 'PAUSED_BY_BROWSER' ||
 			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
 
-	const showPauseIcon = hideControls;
-
+	const showPauseIcon = isHideControlsEnabled && playerState === 'PLAYING';
 	let showPlayPauseIcon: 'play' | 'pause' | null = null;
 	if (showPlayIcon) {
 		showPlayPauseIcon = 'play';
@@ -949,7 +968,10 @@ export const SelfHostedVideo = ({
 							isVideoCroppedAtLeftRight,
 							containerAspectRatioDesktop,
 						),
-						hideControls && showControlsStyles,
+						isHideControlsEnabled &&
+							(playerState === 'PLAYING'
+								? hideControlsStyles
+								: showControlsStyles),
 					]}
 				>
 					<SelfHostedVideoPlayer
@@ -993,7 +1015,6 @@ export const SelfHostedVideo = ({
 						shouldLoop={shouldLoop}
 						showFullscreenIcon={isDefault}
 						isInteractive={!isCinemagraph}
-						hideControls={hideControls}
 					/>
 				</div>
 			</div>

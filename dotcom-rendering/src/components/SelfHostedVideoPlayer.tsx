@@ -48,15 +48,6 @@ const videoControlsStyles = css`
 	}
 `;
 
-const hideControlsStyles = css`
-	visibility: hidden;
-	opacity: 0;
-	transition:
-		visibility 0.3s,
-		opacity 0.3s ease-in-out;
-	transition-delay: 1s;
-`;
-
 const interactiveStyles = css`
 	cursor: pointer;
 `;
@@ -152,7 +143,6 @@ export type Props = {
 	isInteractive: boolean;
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
-	hideControls: boolean;
 };
 
 /**
@@ -206,7 +196,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			iconsPosition,
 			subtitlesPosition,
-			hideControls,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -282,13 +271,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						position={subtitlesPosition}
 					/>
 				)}
-				<div
-					className="controls-container"
-					css={[
-						videoControlsStyles,
-						hideControls && hideControlsStyles,
-					]}
-				>
+				<div className="controls-container" css={videoControlsStyles}>
 					{showPlayPauseIcon !== null && (
 						<PlayPauseIcon
 							type={showPlayPauseIcon}
