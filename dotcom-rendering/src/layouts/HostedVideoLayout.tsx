@@ -198,7 +198,10 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 						padSides={true}
 						element="header"
 					>
-						<Island priority="feature" defer={{ until: 'visible' }}>
+						<Island
+							priority="enhancement"
+							defer={{ until: 'idle' }}
+						>
 							<HostedContentHeader branding={branding} />
 						</Island>
 					</Section>

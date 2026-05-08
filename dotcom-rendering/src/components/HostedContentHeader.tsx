@@ -184,7 +184,7 @@ export const HostedContentHeader = ({ branding }: Props) => {
 				unfadeLogo,
 			);
 		};
-	});
+	}, []);
 
 	return (
 		<div css={headerWrapperStyles}>
