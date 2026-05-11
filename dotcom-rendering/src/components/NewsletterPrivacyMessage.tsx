@@ -11,14 +11,8 @@ interface Props {
 const GUARDIAN_HOMEPAGE = 'https://www.theguardian.com';
 const GUARDIAN_PRIVACY_POLICY =
 	'https://www.theguardian.com/help/privacy-policy';
-const GOOGLE_PRIVACY_POLICY = 'https://policies.google.com/privacy';
-const GOOGLE_TERMS_OF_SERVICE = 'https://policies.google.com/terms';
 
-type PolicyUrl =
-	| typeof GUARDIAN_HOMEPAGE
-	| typeof GUARDIAN_PRIVACY_POLICY
-	| typeof GOOGLE_PRIVACY_POLICY
-	| typeof GOOGLE_TERMS_OF_SERVICE;
+type PolicyUrl = typeof GUARDIAN_HOMEPAGE | typeof GUARDIAN_PRIVACY_POLICY;
 
 type LegalLinkProps = { href: PolicyUrl; children: string };
 
@@ -87,10 +81,6 @@ export const NewsletterPrivacyMessage = ({
 		<LegalLink href={GUARDIAN_HOMEPAGE}>theguardian.com</LegalLink> to send
 		you this newsletter. You can complete full registration at any time. For
 		more information about how we use your data see our{' '}
-		<LegalLink href={GUARDIAN_PRIVACY_POLICY}>Privacy Policy</LegalLink>. We
-		use Google reCaptcha to protect our website and the Google{' '}
-		<LegalLink href={GOOGLE_PRIVACY_POLICY}>Privacy Policy</LegalLink> and{' '}
-		<LegalLink href={GOOGLE_TERMS_OF_SERVICE}>Terms of Service</LegalLink>{' '}
-		apply.
+		<LegalLink href={GUARDIAN_PRIVACY_POLICY}>Privacy Policy</LegalLink>.
 	</span>
 );
