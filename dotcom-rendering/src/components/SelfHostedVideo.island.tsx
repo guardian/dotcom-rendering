@@ -687,6 +687,8 @@ export const SelfHostedVideo = ({
 			},
 			'Web',
 		);
+
+		sendOphanTrackingEvent('view');
 	}, [isInView ? true : undefined]);
 
 	/**
