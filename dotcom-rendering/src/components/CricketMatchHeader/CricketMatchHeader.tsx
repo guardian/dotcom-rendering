@@ -12,6 +12,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Fragment, type ReactNode, useMemo } from 'react';
+import type { CricketMatch, CricketTeam, Innings } from '../../cricketMatchV2';
 import { grid } from '../../grid';
 import {
 	type EditionId,
@@ -28,7 +29,6 @@ import {
 	primaryText,
 	secondaryText,
 } from '../FootballMatchHeader/colours';
-import { CricketMatch, CricketTeam, Innings } from 'src/cricketMatchV2';
 
 type Props = {
 	edition: EditionId;
