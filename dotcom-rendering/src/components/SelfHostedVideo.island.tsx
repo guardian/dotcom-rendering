@@ -439,7 +439,7 @@ export const SelfHostedVideo = ({
 		[isWeb, isApps, atomId, ophanVideoStyle],
 	);
 
-	const mutePlayer = useCallback(
+	const setMutedState = useCallback(
 		(value: boolean, track: boolean = true) => {
 			setIsMuted(value);
 			if (track && playerState === 'PLAYING' && isMuted !== value) {
@@ -498,7 +498,7 @@ export const SelfHostedVideo = ({
 		if (!video) return;
 
 		if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
-			mutePlayer(true, false);
+			setMutedState(true, false);
 		}
 
 		setPlayerState(pauseReason);
@@ -583,7 +583,7 @@ export const SelfHostedVideo = ({
 				const thisVideoId = uniqueId;
 
 				if (playedVideoId !== thisVideoId) {
-					mutePlayer(true);
+					setMutedState(true);
 				}
 			}
 		};
@@ -593,7 +593,7 @@ export const SelfHostedVideo = ({
 		 * Triggered by the CustomEvent in YoutubeAtomPlayer.
 		 */
 		const handleCustomPlayYoutubeEvent = () => {
-			mutePlayer(true);
+			setMutedState(true);
 		};
 
 		/**
@@ -658,7 +658,7 @@ export const SelfHostedVideo = ({
 			});
 		};
 	}, [
-		mutePlayer,
+		setMutedState,
 		uniqueId,
 		atomId,
 		sources,
@@ -771,9 +771,9 @@ export const SelfHostedVideo = ({
 		if (isMuted) {
 			// Emit video play audio event so other components are aware when a video is played with sound
 			dispatchCustomPlayAudioEvent(uniqueId);
-			mutePlayer(false);
+			setMutedState(false);
 		} else {
-			mutePlayer(true);
+			setMutedState(true);
 		}
 	};
 
@@ -893,7 +893,7 @@ export const SelfHostedVideo = ({
 				seekBackward();
 				break;
 			case 'm':
-				mutePlayer(!isMuted);
+				setMutedState(!isMuted);
 				break;
 		}
 	};
