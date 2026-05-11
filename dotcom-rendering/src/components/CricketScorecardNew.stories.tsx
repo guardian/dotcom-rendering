@@ -334,6 +334,7 @@ export const CricketScorecardNew = meta.story({
 			'R S Madugalle',
 		],
 		homeTeam: {
+			paID: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
 			name: 'India',
 			lineup: [
 				'Rohit Sharma',
@@ -350,6 +351,7 @@ export const CricketScorecardNew = meta.story({
 			],
 		},
 		awayTeam: {
+			paID: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
 			name: 'New Zealand',
 			lineup: [
 				'Rachin Ravindra',
