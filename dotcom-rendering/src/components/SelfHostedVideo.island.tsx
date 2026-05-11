@@ -442,11 +442,11 @@ export const SelfHostedVideo = ({
 	const setMutedState = useCallback(
 		({ value, track = true }: { value: boolean; track?: boolean }) => {
 			setIsMuted(value);
-			if (track && playerState === 'PLAYING' && isMuted !== value) {
+			if (track && isMuted !== value) {
 				sendOphanTrackingEvent(value ? 'mute' : 'unmute');
 			}
 		},
-		[playerState, isMuted, sendOphanTrackingEvent],
+		[isMuted, sendOphanTrackingEvent],
 	);
 
 	const [isInView, setNode] = useIsInView({
