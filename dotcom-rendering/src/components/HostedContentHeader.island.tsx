@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	breakpoints,
+	calculateHoverColour,
 	from,
 	palette as sourcePalette,
 	space,
@@ -11,9 +12,12 @@ import {
 } from '@guardian/source/foundations';
 import {
 	Button,
+	LinkButton,
 	SvgGuardianLogo,
 	SvgInfoRound,
 } from '@guardian/source/react-components';
+import { Popover } from '@guardian/source-development-kitchen/react-components';
+import { useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { Branding } from '../types/branding';
 import { BrandingLabel } from './BrandingLabel';
@@ -152,6 +156,9 @@ const GuardianLogo = () => (
 export const HostedContentHeader = ({ branding }: Props) => {
 	const accentColor =
 		branding.hostedCampaignColour ?? sourcePalette.neutral[38];
+
+	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
 	return (
 		<div css={headerWrapperStyles}>
 			<div css={brandingStyles}>
@@ -160,16 +167,57 @@ export const HostedContentHeader = ({ branding }: Props) => {
 					style={{ backgroundColor: accentColor }}
 				>
 					<p>Advertiser content</p>
-					{/** TODO - add button action ie on click/on hover handlers */}
-					<Button
-						size="xsmall"
-						icon={<SvgInfoRound />}
-						hideLabel={true}
-						priority="subdued"
-						theme={{
-							textSubdued: sourcePalette.neutral[97],
-						}}
-					/>
+					<Popover
+						anchorElement={
+							<Button
+								size="xsmall"
+								icon={<SvgInfoRound />}
+								hideLabel={true}
+								priority="subdued"
+								theme={{
+									textSubdued: sourcePalette.neutral[97],
+								}}
+								onClick={() => setIsPopoverOpen(!isPopoverOpen)}
+							>
+								More information
+							</Button>
+						}
+						isOpen={isPopoverOpen}
+						handleClose={() => setIsPopoverOpen(false)}
+						title="Advertiser content"
+						position="bottom"
+						showPointer={true}
+						theme="dark"
+						width="260px"
+					>
+						<span>
+							This content is paid for and produced by an
+							advertiser and is regulated by the Advertising
+							Standards Authority. Guardian staff had no
+							involvement in its creation.
+						</span>
+						<br />
+						<LinkButton
+							priority="primary"
+							size="xsmall"
+							theme={{
+								textPrimary: sourcePalette.brand[400],
+								backgroundPrimary: sourcePalette.brand[800],
+								backgroundPrimaryHover: calculateHoverColour(
+									sourcePalette.brand[800],
+								) as string,
+							}}
+							href="https://www.theguardian.com/info/2016/jan/25/content-funding"
+							data-link-name={
+								'hostedNav : header : advertiser content'
+							}
+							cssOverrides={css`
+								margin-top: ${space[4]}px;
+							`}
+						>
+							Learn more
+						</LinkButton>
+					</Popover>
 				</div>
 
 				<div css={badgeWrapperStyles}>

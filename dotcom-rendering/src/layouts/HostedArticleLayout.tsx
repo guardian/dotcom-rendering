@@ -12,7 +12,7 @@ import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
 import { FetchHostedOnwards } from '../components/FetchHostedOnwards.island';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
-import { HostedContentHeader } from '../components/HostedContentHeader';
+import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
@@ -213,7 +213,12 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						element="header"
 					>
-						<HostedContentHeader branding={branding} />
+						<Island
+							priority="enhancement"
+							defer={{ until: 'visible' }}
+						>
+							<HostedContentHeader branding={branding} />
+						</Island>
 					</Section>
 				</Stuck>
 			) : null}
