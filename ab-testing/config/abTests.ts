@@ -49,7 +49,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Testing redesigned at a glance component on The Filter articles",
 		owners: ["thefilter.dev@guardian.co.uk"],
-		expirationDate: "2026-05-13",
+		expirationDate: "2026-05-15",
 		type: "server",
 		status: "ON",
 		audienceSize: 80 / 100,
