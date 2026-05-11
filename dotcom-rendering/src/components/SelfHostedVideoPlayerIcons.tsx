@@ -38,7 +38,6 @@ const largeIconContainerStyles = css`
 
 type AudioIconProps = {
 	Icon: Exclude<SelfHostedVideoPlayerProps['AudioIcon'], null>;
-	atomId: SelfHostedVideoPlayerProps['atomId'];
 	size: 'small' | 'large';
 	isMuted: SelfHostedVideoPlayerProps['isMuted'];
 	handleClick: SelfHostedVideoPlayerProps['handleAudioClick'];
@@ -46,19 +45,11 @@ type AudioIconProps = {
 
 export const AudioIcon = ({
 	Icon,
-	atomId,
 	size,
 	isMuted,
 	handleClick,
 }: AudioIconProps) => (
-	<button
-		type="button"
-		onClick={handleClick}
-		css={buttonStyles}
-		data-link-name={`gu-video-loop-${
-			isMuted ? 'unmute' : 'mute'
-		}-${atomId}`}
-	>
+	<button type="button" onClick={handleClick} css={buttonStyles}>
 		<div
 			css={[
 				iconContainerStyles,

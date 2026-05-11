@@ -439,6 +439,16 @@ export const SelfHostedVideo = ({
 		[isWeb, isApps, atomId, ophanVideoStyle],
 	);
 
+	const setMutedState = useCallback(
+		({ value, track = true }: { value: boolean; track?: boolean }) => {
+			setIsMuted(value);
+			if (track && isMuted !== value) {
+				sendOphanTrackingEvent(value ? 'mute' : 'unmute');
+			}
+		},
+		[isMuted, sendOphanTrackingEvent],
+	);
+
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
 		threshold: VISIBILITY_THRESHOLD,
@@ -488,7 +498,7 @@ export const SelfHostedVideo = ({
 		if (!video) return;
 
 		if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
-			setIsMuted(true);
+			setMutedState({ value: true, track: false });
 		}
 
 		setPlayerState(pauseReason);
@@ -573,7 +583,7 @@ export const SelfHostedVideo = ({
 				const thisVideoId = uniqueId;
 
 				if (playedVideoId !== thisVideoId) {
-					setIsMuted(true);
+					setMutedState({ value: true });
 				}
 			}
 		};
@@ -583,7 +593,7 @@ export const SelfHostedVideo = ({
 		 * Triggered by the CustomEvent in YoutubeAtomPlayer.
 		 */
 		const handleCustomPlayYoutubeEvent = () => {
-			setIsMuted(true);
+			setMutedState({ value: true });
 		};
 
 		/**
@@ -647,7 +657,14 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [uniqueId, atomId, sources, renderingTarget, ophanVideoStyle]);
+	}, [
+		setMutedState,
+		uniqueId,
+		atomId,
+		sources,
+		renderingTarget,
+		ophanVideoStyle,
+	]);
 
 	/**
 	 * Track the first time the video comes into view.
@@ -754,9 +771,9 @@ export const SelfHostedVideo = ({
 		if (isMuted) {
 			// Emit video play audio event so other components are aware when a video is played with sound
 			dispatchCustomPlayAudioEvent(uniqueId);
-			setIsMuted(false);
+			setMutedState({ value: false });
 		} else {
-			setIsMuted(true);
+			setMutedState({ value: true });
 		}
 	};
 
@@ -876,7 +893,7 @@ export const SelfHostedVideo = ({
 				seekBackward();
 				break;
 			case 'm':
-				setIsMuted(!isMuted);
+				setMutedState({ value: !isMuted });
 				break;
 		}
 	};
