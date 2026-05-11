@@ -7,21 +7,11 @@ import {
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
 import type { RenderingTarget } from '../types/renderingTarget';
+import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import type { NewsletterSignupCardProps } from './NewsletterSignupCard';
 import { NewsletterSignupCard } from './NewsletterSignupCard';
-
-export type NewsletterPreviewAction =
-	| {
-			behaviour: 'modal';
-			onClick: () => void;
-	  }
-	| {
-			behaviour: 'link';
-			href: string;
-			onClick: () => void;
-	  };
 
 type PreviewEventDescription = 'preview-open' | 'preview-close';
 
@@ -45,16 +35,15 @@ const sendPreviewTracking = ({
 	});
 };
 
-type Props = Omit<NewsletterSignupCardProps, 'children'> & {
+type Props = Pick<
+	NewsletterSignupCardProps,
+	'name' | 'frequency' | 'description' | 'illustrationSquare'
+> & {
 	identityName: string;
 	category?: string;
 	exampleUrl?: string;
 	renderingTarget: RenderingTarget;
 	theme: string;
-	/**
-	 * Pass the signed-in status so the container can render the privacy message
-	 * below the card (rather than inside the form) when the user is signed in.
-	 */
 	isSignedIn?: boolean | 'Pending';
 	children?: (
 		previewAction: NewsletterPreviewAction | undefined,
@@ -164,6 +153,8 @@ export const NewsletterSignupCardContainer = ({
 					frequency={frequency}
 					description={description}
 					illustrationSquare={illustrationSquare}
+					previewAction={previewAction}
+					isSignedIn={isSignedIn}
 				>
 					{children?.(previewAction)}
 				</NewsletterSignupCard>
