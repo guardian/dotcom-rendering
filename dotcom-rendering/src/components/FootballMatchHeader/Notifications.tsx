@@ -79,7 +79,9 @@ export const Notifications = (props: Props) => {
 		renderingTarget,
 		props.match.kind,
 		props.match.homeTeam.paID,
+		props.match.homeTeam.name,
 		props.match.awayTeam.paID,
+		props.match.awayTeam.name,
 	]);
 
 	if (renderingTarget !== 'Apps' || props.match.kind === 'Result') {
