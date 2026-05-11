@@ -132,6 +132,33 @@ const figureStyles = (
 	`}
 `;
 
+const showControlsStyles = css`
+	.controls-container {
+		visibility: visible;
+		opacity: 1;
+		transition:
+			visibility 0.2s,
+			opacity 0.2s ease-in-out;
+	}
+`;
+
+const hideControlsStyles = css`
+	.controls-container {
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			visibility 0.3s,
+			opacity 0.3s ease-in-out;
+		transition-delay: 2.7s;
+	}
+
+	@media (hover: hover) {
+		:hover {
+			${showControlsStyles}
+		}
+	}
+`;
+
 /**
  * Dispatches a custom play audio event so that other videos listening
  * for this event will be muted.
@@ -379,6 +406,12 @@ export const SelfHostedVideo = ({
 		!hideProgressBar && !isCinemagraph && playerState !== 'NOT_STARTED';
 
 	const showIcons = !isCinemagraph && playerState !== 'NOT_STARTED';
+
+	/**
+	 * Functionality to hide controls when the video is not interacted with
+	 * so the full unobscured video can be displayed to the user without distractions.
+	 */
+	const isHideControlsEnabled = isDefault;
 
 	const iconSize = isDefault ? 'large' : 'small';
 
@@ -882,6 +915,14 @@ export const SelfHostedVideo = ({
 			playerState === 'PAUSED_BY_BROWSER' ||
 			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
 
+	const showPauseIcon = isHideControlsEnabled && playerState === 'PLAYING';
+	let showPlayPauseIcon: 'play' | 'pause' | null = null;
+	if (showPlayIcon) {
+		showPlayPauseIcon = 'play';
+	} else if (showPauseIcon) {
+		showPlayPauseIcon = 'pause';
+	}
+
 	/** The aspect ratio of the video will be clamped within the specified range */
 	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
 		aspectRatio,
@@ -925,15 +966,21 @@ export const SelfHostedVideo = ({
 				]}
 			>
 				<div
-					css={figureStyles(
-						aspectRatio,
-						aspectRatioOfVisibleVideo,
-						isGreyBarsAtSidesOnDesktop,
-						isGreyBarsAtTopAndBottomOnDesktop,
-						isVideoCroppedAtTopBottom,
-						isVideoCroppedAtLeftRight,
-						containerAspectRatioDesktop,
-					)}
+					css={[
+						figureStyles(
+							aspectRatio,
+							aspectRatioOfVisibleVideo,
+							isGreyBarsAtSidesOnDesktop,
+							isGreyBarsAtTopAndBottomOnDesktop,
+							isVideoCroppedAtTopBottom,
+							isVideoCroppedAtLeftRight,
+							containerAspectRatioDesktop,
+						),
+						isHideControlsEnabled &&
+							(playerState === 'PLAYING'
+								? hideControlsStyles
+								: showControlsStyles),
+					]}
 				>
 					<SelfHostedVideoPlayer
 						sources={optimisedSources}
@@ -964,7 +1011,7 @@ export const SelfHostedVideo = ({
 						AudioIcon={supportsAudio ? AudioIcon : null}
 						preloadPartialData={!!shouldAutoplay}
 						iconSize={iconSize}
-						showPlayIcon={showPlayIcon}
+						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
 						showSubtitles={!isCinemagraph}
 						subtitleSource={subtitleSource}
