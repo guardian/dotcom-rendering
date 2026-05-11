@@ -976,7 +976,7 @@ export const Card = ({
 										media.mainMedia.subtitleSource
 									}
 									subtitleSize={subtitleSize}
-									minAspectRatio={4 / 5}
+									minAspectRatio={3 / 4}
 									containerAspectRatioDesktop={5 / 4}
 								/>
 							</Island>
