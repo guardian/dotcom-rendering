@@ -244,6 +244,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onClick={handlePlayPauseClick}
 					onKeyDown={handleKeyDown}
 					onError={onError}
+					disablePictureInPicture={true}
 				>
 					{sources.map(({ src, mimeType }) => (
 						<source
