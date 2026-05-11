@@ -34,6 +34,7 @@ const videoStyles = (aspectRatio: number) => css`
 
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${aspectRatio};
+	background-color: black;
 `;
 
 const videoControlsStyles = css`
@@ -143,6 +144,7 @@ export type Props = {
 	isInteractive: boolean;
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
+	playerContainerRef: React.RefObject<HTMLDivElement>;
 };
 
 /**
@@ -196,6 +198,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			iconsPosition,
 			subtitlesPosition,
+			playerContainerRef,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -212,7 +215,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 		}-${atomId}`;
 
 		return (
-			<>
+			<div ref={playerContainerRef}>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
 				<video
 					id={videoId}
@@ -324,7 +327,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						</div>
 					)}
 				</div>
-			</>
+			</div>
 		);
 	},
 );
