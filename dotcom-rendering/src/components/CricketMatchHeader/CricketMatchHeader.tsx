@@ -31,57 +31,7 @@ import {
 	primaryText,
 	secondaryText,
 } from '../FootballMatchHeader/colours';
-import { Tabs } from '../FootballMatchHeader/Tabs';
-
-type CricketTeam = {
-	name: string;
-	paID: string;
-};
-
-type Inning = {
-	battingTeam: string;
-	runsScored: number;
-	overs: string;
-	declared: boolean;
-	forfeited: boolean;
-	fallOfWicket: number;
-};
-
-type WinnerResult = {
-	type: 'home-win' | 'away-win';
-	description?: string;
-	winner: {
-		type: 'runs' | 'wickets' | 'innings' | 'forfeit' | 'run-rate';
-		team: string;
-		margin?: number;
-	};
-};
-
-type OtherResult = {
-	type:
-		| 'no-result'
-		| 'draw'
-		| 'abandoned'
-		| 'tied'
-		| 'level-scores-draw'
-		| 'none';
-	description?: string;
-};
-
-type Result = WinnerResult | OtherResult;
-
-type CricketMatch = {
-	kind: 'Fixture' | 'Live' | 'Result';
-	series: string;
-	competition: string;
-	venue: string;
-	day?: number;
-	matchDate: Date;
-	homeTeam: CricketTeam;
-	awayTeam: CricketTeam;
-	innings: Inning[];
-	result?: Result;
-};
+import { CricketMatch, CricketTeam, Innings } from 'src/cricketMatchV2';
 
 type Props = {
 	edition: EditionId;
@@ -315,11 +265,11 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 					innings.map((inning, index) => (
 						<Fragment key={index}>
 							<Score
-								runs={inning.runsScored}
-								fallOfWicket={inning.fallOfWicket}
+								runs={inning.inningsTotals.runs}
+								fallOfWickets={inning.fallOfWickets.length}
 								matchKind={props.match.kind}
 							/>
-							{!!inning.overs && (
+							{!!inning.inningsTotals.overs && (
 								<>
 									<EndOfInningReason inning={inning} />
 									<span
@@ -335,7 +285,7 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 											),
 										}}
 									>
-										{inning.overs} overs
+										{inning.inningsTotals.overs} overs
 									</span>
 								</>
 							)}
@@ -357,13 +307,13 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 	);
 };
 
-const EndOfInningReason = (props: { inning: Inning }) => {
+const EndOfInningReason = (props: { inning: Innings }) => {
 	const styles = {
 		...textSans14Object,
 		marginRight: space[1],
 	};
 
-	if (props.inning.fallOfWicket === 10) {
+	if (props.inning.fallOfWickets.length === 10) {
 		return <span css={styles}>All out</span>;
 	}
 	if (props.inning.declared) {
@@ -419,17 +369,17 @@ const Crest = (props: { name: string; paID: string }) => (
  */
 const Score = (props: {
 	runs: number;
-	fallOfWicket: number;
+	fallOfWickets: number;
 	matchKind: CricketMatch['kind'];
 }) => {
 	const showFallenWickets =
-		props.fallOfWicket >= 0 && props.fallOfWicket < 10;
+		props.fallOfWickets >= 0 && props.fallOfWickets < 10;
 	return (
 		<span
 			role="img"
 			aria-label={`${props.runs} runs${
 				showFallenWickets
-					? `, ${props.fallOfWicket} wickets fallen`
+					? `, ${props.fallOfWickets} wickets fallen`
 					: ''
 			}`}
 			css={{
@@ -465,7 +415,7 @@ const Score = (props: {
 							),
 						}}
 					></span>
-					<ScoreNumber score={props.fallOfWicket} />
+					<ScoreNumber score={props.fallOfWickets} />
 				</>
 			) : null}
 		</span>
