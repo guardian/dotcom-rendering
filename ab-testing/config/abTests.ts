@@ -45,19 +45,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "thefilter-at-a-glance-redesign-v2",
-		description:
-			"Testing redesigned at a glance component on The Filter articles",
-		owners: ["thefilter.dev@guardian.co.uk"],
-		expirationDate: "2026-05-13",
-		type: "server",
-		status: "ON",
-		audienceSize: 100 / 100,
-		audienceSpace: "B",
-		groups: ["control", "carousel", "stacked-default", "stacked-expanded"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "growth-admiral-adblock-detect",
 		description:
 			"Control group for Admiral ad blocker - runs the detection script but does not show the modal",
