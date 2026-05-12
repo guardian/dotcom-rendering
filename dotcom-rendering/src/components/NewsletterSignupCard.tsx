@@ -8,6 +8,8 @@ import {
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
+import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
+import { NewsletterPreviewButton } from './NewsletterPreviewButton';
 
 export type NewsletterSignupCardProps = {
 	name: string;
@@ -15,6 +17,8 @@ export type NewsletterSignupCardProps = {
 	description: string;
 	illustrationSquare?: string;
 	children?: React.ReactNode;
+	previewAction?: NewsletterPreviewAction;
+	isSignedIn?: boolean | 'Pending';
 };
 
 const containerStyles = css`
@@ -87,12 +91,13 @@ const illustrationStyles = css`
 	}
 `;
 
-const NewsletterSignupHeader = (props: {
-	frequency: string;
-	name: string;
-	description: string;
-	illustrationSquare?: string;
-}) => (
+const previewButtonWrapperStyles = css`
+	margin-bottom: ${space[4]}px;
+`;
+
+const NewsletterSignupHeader = (
+	props: Omit<NewsletterSignupCardProps, 'children'>,
+) => (
 	<div css={headerStyles}>
 		<div css={titleAndMetaStyles}>
 			<div css={frequencyTagStyles}>
@@ -103,6 +108,14 @@ const NewsletterSignupHeader = (props: {
 				Sign up to <span>{props.name}</span>
 			</p>
 			<p css={descriptionStyles}>{props.description}</p>
+			{props.previewAction !== undefined && props.isSignedIn !== true && (
+				<div css={previewButtonWrapperStyles}>
+					<NewsletterPreviewButton
+						previewAction={props.previewAction}
+						size="small"
+					/>
+				</div>
+			)}
 		</div>
 		{!!props.illustrationSquare && (
 			<img
@@ -122,6 +135,8 @@ export const NewsletterSignupCard = ({
 	description,
 	illustrationSquare,
 	children,
+	previewAction,
+	isSignedIn,
 }: NewsletterSignupCardProps) => (
 	<>
 		<hr css={dividerStyles} />
@@ -131,6 +146,8 @@ export const NewsletterSignupCard = ({
 				name={name}
 				description={description}
 				illustrationSquare={illustrationSquare}
+				previewAction={previewAction}
+				isSignedIn={isSignedIn}
 			/>
 			{children}
 		</aside>

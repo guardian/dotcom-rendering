@@ -49,7 +49,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Testing redesigned at a glance component on The Filter articles",
 		owners: ["thefilter.dev@guardian.co.uk"],
-		expirationDate: "2026-05-13",
+		expirationDate: "2026-05-15",
 		type: "server",
 		status: "ON",
 		audienceSize: 100 / 100,
@@ -126,10 +126,23 @@ const ABTests: ABTest[] = [
 		description:
 			"Measure the impact on bid response rate of enforcing a minimum $0.10 bid floor on all Prebid ad slots.",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-05-07",
+		expirationDate: "2026-05-15",
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-user-module-intentIq",
+		description:
+			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module.",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-05-14",
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,

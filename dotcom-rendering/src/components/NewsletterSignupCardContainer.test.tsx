@@ -21,7 +21,11 @@ const defaultProps = {
 
 const renderContainer = (props = {}) =>
 	render(
-		<NewsletterSignupCardContainer {...defaultProps} {...props}>
+		<NewsletterSignupCardContainer
+			{...defaultProps}
+			isSignedIn={true}
+			{...props}
+		>
 			{(previewAction) => (
 				<button
 					type="button"
@@ -142,6 +146,7 @@ describe('NewsletterSignupCardContainer', () => {
 				name="Morning Briefing"
 				frequency="Every weekday"
 				description="Start your day with top stories."
+				isSignedIn={true}
 			>
 				{(previewAction) =>
 					previewAction?.behaviour === 'link' ? (

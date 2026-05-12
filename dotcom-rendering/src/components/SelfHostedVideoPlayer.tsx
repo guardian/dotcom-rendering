@@ -12,10 +12,10 @@ import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
 import type { VideoPlayerFormat } from '../types/mainMedia';
-import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
 import {
 	AudioIcon as AudioIconComponent,
 	FullscreenIcon,
+	PlayPauseIcon,
 } from './SelfHostedVideoPlayerIcons';
 import type { SubtitlesPosition } from './SubtitleOverlay';
 import { SubtitleOverlay } from './SubtitleOverlay';
@@ -36,6 +36,18 @@ const videoStyles = (aspectRatio: number) => css`
 	aspect-ratio: ${aspectRatio};
 `;
 
+const videoControlsStyles = css`
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	& > * {
+		pointer-events: auto;
+	}
+`;
+
 const interactiveStyles = css`
 	cursor: pointer;
 `;
@@ -50,17 +62,6 @@ const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
 		${subtitleSize === 'medium' && textSans17};
 		${subtitleSize === 'large' && textSans20};
 	}
-`;
-
-const playIconStyles = css`
-	position: absolute;
-	/* Center the icon */
-	top: calc(50% - ${narrowPlayIconDiameter / 2}px);
-	left: calc(50% - ${narrowPlayIconDiameter / 2}px);
-	cursor: pointer;
-	border: none;
-	background: none;
-	padding: 0;
 `;
 
 const iconsContainerStyles = css`
@@ -130,7 +131,7 @@ export type Props = {
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showProgressBar: boolean;
-	showPlayIcon: boolean;
+	showPlayPauseIcon: 'play' | 'pause' | null;
 	showIcons: boolean;
 	showFullscreenIcon: boolean;
 	showSubtitles: boolean;
@@ -184,7 +185,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			iconSize,
 			preloadPartialData,
 			showProgressBar: canShowProgressBar,
-			showPlayIcon,
+			showPlayPauseIcon,
 			showIcons: canShowIcons,
 			showFullscreenIcon,
 			showSubtitles: canShowSubtitles,
@@ -207,7 +208,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const showIcons = canShowIcons && currentRefExists;
 
 		const dataLinkName = `gu-video-${videoStyle.toLowerCase()}-${
-			showPlayIcon ? 'play' : 'pause'
+			showPlayPauseIcon === 'play' ? 'play' : 'pause'
 		}-${atomId}`;
 
 		return (
@@ -243,6 +244,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onClick={handlePlayPauseClick}
 					onKeyDown={handleKeyDown}
 					onError={onError}
+					disablePictureInPicture={true}
 				>
 					{sources.map(({ src, mimeType }) => (
 						<source
@@ -270,61 +272,58 @@ export const SelfHostedVideoPlayer = forwardRef(
 						position={subtitlesPosition}
 					/>
 				)}
-				{showPlayIcon && (
-					<button
-						type="button"
-						onClick={handlePlayPauseClick}
-						css={playIconStyles}
-						data-link-name={`gu-video-loop-play-${atomId}`}
-						data-testid="play-icon"
-					>
-						<PlayIcon iconWidth="narrow" />
-					</button>
-				)}
-				{showProgressBar &&
-					(useLongFormProgressBar ? (
-						<VideoProgressBarInteractive
-							videoId={videoId}
-							currentTime={currentTime}
-							updateCurrentTime={updateCurrentTime}
-							duration={ref.current!.duration}
-							handleKeyDown={handleKeyDown}
+				<div className="controls-container" css={videoControlsStyles}>
+					{showPlayPauseIcon !== null && (
+						<PlayPauseIcon
+							type={showPlayPauseIcon}
+							atomId={atomId}
+							handleClick={handlePlayPauseClick}
 						/>
-					) : (
-						<VideoProgressBar
-							videoId={videoId}
-							currentTime={currentTime}
-							duration={ref.current!.duration}
-						/>
-					))}
-				{showIcons && (
-					<div
-						css={[
-							iconsContainerStyles,
-							iconSize === 'large' &&
-								largeIconsPositionStyles(iconsPosition),
-							iconSize === 'small' &&
-								smallIconsPositionStyles(iconsPosition),
-						]}
-					>
-						{showFullscreenIcon && (
-							<FullscreenIcon
-								handleClick={handleFullscreenClick}
-								atomId={atomId}
-								size={iconSize}
+					)}
+					{showProgressBar &&
+						(useLongFormProgressBar ? (
+							<VideoProgressBarInteractive
+								videoId={videoId}
+								currentTime={currentTime}
+								updateCurrentTime={updateCurrentTime}
+								duration={ref.current!.duration}
+								handleKeyDown={handleKeyDown}
 							/>
-						)}
-						{AudioIcon && (
-							<AudioIconComponent
-								Icon={AudioIcon}
-								handleClick={handleAudioClick}
-								isMuted={isMuted}
-								atomId={atomId}
-								size={iconSize}
+						) : (
+							<VideoProgressBar
+								videoId={videoId}
+								currentTime={currentTime}
+								duration={ref.current!.duration}
 							/>
-						)}
-					</div>
-				)}
+						))}
+					{showIcons && (
+						<div
+							css={[
+								iconsContainerStyles,
+								iconSize === 'large' &&
+									largeIconsPositionStyles(iconsPosition),
+								iconSize === 'small' &&
+									smallIconsPositionStyles(iconsPosition),
+							]}
+						>
+							{showFullscreenIcon && (
+								<FullscreenIcon
+									handleClick={handleFullscreenClick}
+									atomId={atomId}
+									size={iconSize}
+								/>
+							)}
+							{AudioIcon && (
+								<AudioIconComponent
+									Icon={AudioIcon}
+									handleClick={handleAudioClick}
+									isMuted={isMuted}
+									size={iconSize}
+								/>
+							)}
+						</div>
+					)}
+				</div>
 			</>
 		);
 	},
