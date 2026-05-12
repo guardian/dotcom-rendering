@@ -334,6 +334,8 @@ const createOnStateChangeListener =
 			event.data === YT.PlayerState.ENDED &&
 			!progressEvents.hasSentEndEvent
 		) {
+			dispatchCustomPauseEvent(uniqueId);
+
 			log('dotcom', {
 				from: loggerFrom,
 				videoId,
