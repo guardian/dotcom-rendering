@@ -5,7 +5,6 @@ import {
 	textSans17,
 	textSans20,
 } from '@guardian/source/foundations';
-import type { IconProps } from '@guardian/source/react-components';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
 import type { ActiveCue } from '../lib/useSubtitles';
@@ -78,7 +77,6 @@ const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
 	::cue {
 		/* Hide the cue by default as we prefer custom overlay */
 		visibility: hidden;
-
 		color: ${palette('--video-subtitle-text')};
 		${subtitleSize === 'small' && textSans15};
 		${subtitleSize === 'medium' && textSans17};
@@ -94,14 +92,12 @@ const iconsContainerStyles = css`
 	right: ${space[2]}px;
 `;
 
-const smallIconsPositionStyles = (position: ControlsPosition) => css`
-	${position === 'bottom' && `bottom: ${space[3]}px;`}
-	${position === 'top' && `top: ${space[2]}px;`}
+const iconsBottomPositionStyles = (useLongFormProgressBar: boolean) => css`
+	bottom: ${useLongFormProgressBar ? space[12] : space[3]}px;
 `;
 
-const largeIconsPositionStyles = (position: ControlsPosition) => css`
-	${position === 'bottom' && `bottom: ${space[12]}px;`}
-	${position === 'top' && `top: ${space[2]}px;`}
+const iconsTopPositionStyles = css`
+	top: ${space[2]}px;
 `;
 
 export const PLAYER_STATES = [
@@ -134,6 +130,7 @@ export type Props = {
 	videoStyle: VideoPlayerFormat;
 	FallbackImageComponent: ReactElement;
 	currentTime: number;
+	hasAudio: boolean;
 	isMuted: boolean;
 	handleLoadedMetadata: (event: SyntheticEvent) => void;
 	handleLoadedData: (event: SyntheticEvent) => void;
@@ -148,8 +145,6 @@ export type Props = {
 	handleFullscreenClick?: (event: SyntheticEvent) => void;
 	updateCurrentTime: (time: number) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
-	AudioIcon: ((iconProps: IconProps) => JSX.Element) | null;
-	iconSize: 'small' | 'large';
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showProgressBar: boolean;
@@ -190,6 +185,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			FallbackImageComponent,
 			posterImage,
 			currentTime,
+			hasAudio,
 			isMuted,
 			handleLoadedMetadata,
 			handleLoadedData,
@@ -204,8 +200,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleFullscreenClick,
 			updateCurrentTime,
 			onError,
-			AudioIcon,
-			iconSize,
 			preloadPartialData,
 			showProgressBar: canShowProgressBar,
 			showPlayPauseIcon,
@@ -324,25 +318,24 @@ export const SelfHostedVideoPlayer = forwardRef(
 						<div
 							css={[
 								iconsContainerStyles,
-								iconSize === 'large' &&
-									largeIconsPositionStyles(iconsPosition),
-								iconSize === 'small' &&
-									smallIconsPositionStyles(iconsPosition),
+								iconsPosition === 'bottom' &&
+									iconsBottomPositionStyles(
+										useLongFormProgressBar,
+									),
+								iconsPosition === 'top' &&
+									iconsTopPositionStyles,
 							]}
 						>
 							{showFullscreenIcon && (
 								<FullscreenIcon
 									handleClick={handleFullscreenClick}
 									atomId={atomId}
-									size={iconSize}
 								/>
 							)}
-							{AudioIcon && (
+							{hasAudio && (
 								<AudioIconComponent
-									Icon={AudioIcon}
 									handleClick={handleAudioClick}
 									isMuted={isMuted}
-									size={iconSize}
 								/>
 							)}
 						</div>

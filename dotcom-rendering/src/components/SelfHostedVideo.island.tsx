@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
-import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	getOphan,
@@ -160,8 +159,7 @@ const hideControlsStyles = css`
 `;
 
 /**
- * Dispatches a custom play audio event so that other videos listening
- * for this event will be muted.
+ * Dispatches a custom play audio event so that other videos listening for this event will be muted.
  */
 export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 	document.dispatchEvent(
@@ -413,8 +411,6 @@ export const SelfHostedVideo = ({
 	 * so the full unobscured video can be displayed to the user without distractions.
 	 */
 	const isHideControlsEnabled = isDefault;
-
-	const iconSize = isDefault ? 'large' : 'small';
 
 	const useLongFormProgressBar = isDefault;
 
@@ -962,8 +958,6 @@ export const SelfHostedVideo = ({
 		containerAspectRatioDesktop !== undefined &&
 		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
 
-	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
-
 	const optimisedPosterImage = showPosterImage
 		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
 		: undefined;
@@ -1016,6 +1010,7 @@ export const SelfHostedVideo = ({
 						currentTime={currentTime}
 						ref={vidRef}
 						playerContainerRef={playerContainerRef}
+						hasAudio={supportsAudio}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
 						handleLoadedData={handleLoadedData}
@@ -1030,9 +1025,7 @@ export const SelfHostedVideo = ({
 						handleFullscreenClick={handleFullscreenClick}
 						updateCurrentTime={updateCurrentTime}
 						onError={onError}
-						AudioIcon={supportsAudio ? AudioIcon : null}
 						preloadPartialData={!!shouldAutoplay}
-						iconSize={iconSize}
 						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
 						showSubtitles={!isCinemagraph}
