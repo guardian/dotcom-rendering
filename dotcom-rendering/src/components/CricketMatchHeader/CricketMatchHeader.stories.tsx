@@ -28,6 +28,10 @@ export const Fixture = {
 			},
 			innings: [],
 		},
+		tabs: {
+			selected: 'info',
+			matchKind: 'Fixture',
+		},
 	},
 } satisfies Story;
 
@@ -57,6 +61,13 @@ export const Live = {
 				},
 			],
 		},
+		tabs: {
+			selected: 'info',
+			matchKind: 'Live',
+			liveURL: new URL(
+				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+			),
+		},
 	},
 } satisfies Story;
 
@@ -78,6 +89,13 @@ export const LiveYetToBat = {
 					fallOfWicket: 10,
 				},
 			],
+		},
+		tabs: {
+			selected: 'info',
+			matchKind: 'Live',
+			liveURL: new URL(
+				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+			),
 		},
 	},
 } satisfies Story;
@@ -124,6 +142,13 @@ export const Result = {
 				},
 			],
 		},
+		tabs: {
+			selected: 'info',
+			matchKind: 'Result',
+			liveURL: new URL(
+				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+			),
+		},
 	},
 } satisfies Story;
 
@@ -151,6 +176,13 @@ export const ResultWinByWickets = {
 					fallOfWicket: 8,
 				},
 			],
+		},
+		tabs: {
+			selected: 'info',
+			matchKind: 'Result',
+			liveURL: new URL(
+				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+			),
 		},
 	},
 } satisfies Story;
@@ -196,6 +228,13 @@ export const ResultDrawn = {
 					fallOfWicket: 7,
 				},
 			],
+		},
+		tabs: {
+			selected: 'info',
+			matchKind: 'Result',
+			liveURL: new URL(
+				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+			),
 		},
 	},
 } satisfies Story;
