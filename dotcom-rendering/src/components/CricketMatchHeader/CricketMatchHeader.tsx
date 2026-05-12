@@ -9,10 +9,17 @@ import {
 	textSans15Object,
 	textSansBold14Object,
 	textSansBold17Object,
+	textSansItalic14Object,
+	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
 import { Fragment, type ReactNode, useMemo } from 'react';
-import type { CricketMatch, CricketTeam, Innings } from '../../cricketMatchV2';
+import type {
+	CricketMatch,
+	CricketTeam,
+	Innings,
+	Result,
+} from '../../cricketMatchV2';
 import { grid } from '../../grid';
 import {
 	type EditionId,
@@ -61,6 +68,7 @@ export const CricketMatchHeader = (props: Props) => {
 				<StatusLine match={match} edition={props.edition} />
 				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
 				<Teams match={match} />
+				{match.result && <ResultLine result={match.result} />}
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 			</div>
 		</section>
@@ -224,14 +232,6 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 		(inning) => inning.battingTeam === props.team.name,
 	);
 
-	/**
-	 * TODO: Determine if there is a match winner and the nature of the victory
-	 * (eg. won by x runs or x wickets). A match may have no overall winner due
-	 * to a draw or the match being abandoned.
-	 */
-	const isWinner = false;
-	const marginOfVictory = '';
-
 	return (
 		<div
 			css={{
@@ -305,19 +305,6 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 						Yet to bat
 					</span>
 				))}
-			{isWinner && (
-				<div
-					css={{
-						...textSans14Object,
-						paddingTop: space[2],
-					}}
-				>
-					Won by{' '}
-					<span css={{ ...textSansBold14Object }}>
-						{marginOfVictory}
-					</span>
-				</div>
-			)}
 		</div>
 	);
 };
@@ -512,4 +499,70 @@ const crestUrl = (teamId: string): URL | undefined => {
 	} catch (e) {
 		return undefined;
 	}
+};
+
+/**
+ * In most cases, the result will come with a description that we can use directly.
+ * But in some cases, we just get the data about the result and need to generate
+ * a description from that.
+ */
+const resultDescription = (result: Result): string => {
+	if (result.description) {
+		return result.description;
+	}
+
+	switch (result.type) {
+		case 'home-win':
+		case 'away-win':
+			if (result.winner.type === 'forfeit') {
+				return `${result.winner.team} win by forfeit`;
+			}
+			if (
+				['runs', 'wickets', 'innings'].includes(result.winner.type) &&
+				typeof result.winner.margin === 'number'
+			) {
+				return `${result.winner.team} win by ${result.winner.margin} ${result.winner.type}`;
+			}
+			if (result.winner.type === 'run-rate') {
+				// Run-rate is an old method of deciding a winner in rain-affected matches before DLS
+				return `${result.winner.team} win by run rate`;
+			}
+			return `${result.winner.team} win`;
+		// none is usually accompanied by a description, but if it's not, "No result" seems like a reasonable default
+		case 'none':
+		case 'no-result':
+			return 'No result';
+		case 'draw':
+		case 'level-scores-draw':
+			return 'Match drawn';
+		case 'abandoned':
+			return 'Match abandoned';
+		case 'tied':
+			return 'Match tied';
+	}
+};
+
+const ResultLine = (props: { result: Result }) => {
+	const description = resultDescription(props.result);
+	return (
+		<div
+			css={{
+				'&': css(grid.column.centre),
+				paddingBottom: space[3],
+				[from.leftCol]: {
+					paddingLeft: 10,
+					paddingBottom: space[5],
+				},
+			}}
+		>
+			<p
+				css={{
+					...textSansItalic14Object,
+					[from.leftCol]: textSansItalic15Object,
+				}}
+			>
+				{description}
+			</p>
+		</div>
+	);
 };

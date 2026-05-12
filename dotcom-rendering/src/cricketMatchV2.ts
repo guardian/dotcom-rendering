@@ -58,6 +58,29 @@ export type Innings = {
 	fallOfWickets: FallOfWicket[];
 };
 
+type WinnerResult = {
+	type: 'home-win' | 'away-win';
+	description?: string;
+	winner: {
+		type: 'runs' | 'wickets' | 'innings' | 'forfeit' | 'run-rate';
+		team: string;
+		margin?: number;
+	};
+};
+
+type OtherResult = {
+	type:
+		| 'no-result'
+		| 'draw'
+		| 'abandoned'
+		| 'tied'
+		| 'level-scores-draw'
+		| 'none';
+	description?: string;
+};
+
+export type Result = WinnerResult | OtherResult;
+
 export type CricketMatch = {
 	kind: 'Fixture' | 'Live' | 'Result';
 	series: string;
@@ -68,4 +91,5 @@ export type CricketMatch = {
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
 	innings: Innings[];
+	result: Result;
 };

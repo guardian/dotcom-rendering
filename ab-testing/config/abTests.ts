@@ -49,7 +49,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Testing redesigned at a glance component on The Filter articles",
 		owners: ["thefilter.dev@guardian.co.uk"],
-		expirationDate: "2026-05-13",
+		expirationDate: "2026-05-15",
 		type: "server",
 		status: "ON",
 		audienceSize: 100 / 100,
@@ -152,7 +152,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module.",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-05-14",
+		expirationDate: "2026-05-21",
 		type: "client",
 		status: "ON",
 		audienceSize: 0 / 100,
