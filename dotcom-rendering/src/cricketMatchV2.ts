@@ -91,5 +91,5 @@ export type CricketMatch = {
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
 	innings: Innings[];
-	result: Result;
+	result?: Result;
 };
