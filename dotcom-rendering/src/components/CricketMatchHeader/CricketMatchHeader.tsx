@@ -11,7 +11,8 @@ import {
 	textSansBold17Object,
 	until,
 } from '@guardian/source/foundations';
-import { ComponentProps, Fragment, type ReactNode, useMemo } from 'react';
+import type { ComponentProps } from 'react';
+import { Fragment, type ReactNode, useMemo } from 'react';
 import { grid } from '../../grid';
 import {
 	type EditionId,
