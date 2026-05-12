@@ -387,6 +387,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
+	const [isNativeFullscreen, setIsNativeFullscreen] = useState(false);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -746,16 +747,24 @@ export const SelfHostedVideo = ({
 		}
 	}, [shouldAutoplay, isInView, playerState]);
 
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		const handleEndFullscreen = () => setIsNativeFullscreen(false);
+		video.addEventListener('webkitendfullscreen', handleEndFullscreen);
+		return () =>
+			video.removeEventListener(
+				'webkitendfullscreen',
+				handleEndFullscreen,
+			);
+	}, []);
+
 	if (adapted) {
 		return FallbackImageComponent;
 	}
 
-	const handleLoadedMetadata = () => {
-		const video = vidRef.current;
-		if (!video) {
-			return;
-		}
-
+	const positionCues = (video: HTMLVideoElement) => {
 		const track = video.textTracks[0];
 		if (!track?.cues) {
 			return;
@@ -772,6 +781,15 @@ export const SelfHostedVideo = ({
 				cue.line = percentFromTop;
 			}
 		}
+	};
+
+	const handleLoadedMetadata = () => {
+		const video = vidRef.current;
+		if (!video) {
+			return;
+		}
+
+		positionCues(video);
 	};
 
 	const handleLoadedData = () => {
@@ -853,8 +871,10 @@ export const SelfHostedVideo = ({
 			};
 
 			if (webkitVideo.webkitDisplayingFullscreen) {
+				setIsNativeFullscreen(false);
 				return webkitVideo.webkitExitFullscreen();
 			} else {
+				setIsNativeFullscreen(true);
 				return webkitVideo.webkitEnterFullscreen();
 			}
 		}
@@ -1071,6 +1091,7 @@ export const SelfHostedVideo = ({
 							videoStyleSettings.showFullscreenIcon
 						}
 						isInteractive={videoStyleSettings.isInteractive}
+						isNativeFullscreen={isNativeFullscreen}
 					/>
 				</div>
 			</div>
