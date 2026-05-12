@@ -41,7 +41,7 @@ const playerContainerStyles = css`
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-color: black;
+		background-color: ${palette('--video-fullscreen-background')};
 		width: 100vw;
 		height: 100vh;
 
