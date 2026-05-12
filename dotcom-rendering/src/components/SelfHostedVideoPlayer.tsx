@@ -34,7 +34,28 @@ const videoStyles = (aspectRatio: number) => css`
 
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${aspectRatio};
-	background-color: black;
+`;
+
+const playerContainerStyles = css`
+	&:fullscreen {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: black;
+		width: 100vw;
+		height: 100vh;
+
+		/* Override the fixed aspect-ratio + width:100% on the video so it
+		   fits within the screen while preserving its aspect ratio. */
+		video {
+			width: 100%;
+			height: 100%;
+			max-width: 100vw;
+			max-height: 100vh;
+			aspect-ratio: auto;
+			object-fit: contain;
+		}
+	}
 `;
 
 const videoControlsStyles = css`
@@ -215,7 +236,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 		}-${atomId}`;
 
 		return (
-			<div ref={playerContainerRef}>
+			<div ref={playerContainerRef} css={playerContainerStyles}>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
 				<video
 					id={videoId}
