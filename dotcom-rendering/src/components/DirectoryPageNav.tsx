@@ -262,6 +262,16 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 					top: 0,
 					bottom: 0,
 				},
+				'&::after': {
+					content: '""',
+					borderRight: `1px solid ${themePalette(
+						'--masthead-nav-lines',
+					)}`,
+					position: 'absolute',
+					right: 0,
+					top: 0,
+					bottom: 0,
+				},
 			},
 		});
 
