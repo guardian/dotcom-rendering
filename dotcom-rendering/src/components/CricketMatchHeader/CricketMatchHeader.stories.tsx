@@ -94,6 +94,7 @@ export const LiveYetToBat = {
 		},
 		tabs: {
 			selected: 'info',
+			sportKind: 'cricket',
 			matchKind: 'Live',
 			liveURL: new URL(
 				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
@@ -182,6 +183,7 @@ export const ResultWinByWickets = {
 		},
 		tabs: {
 			selected: 'info',
+			sportKind: 'cricket',
 			matchKind: 'Result',
 			liveURL: new URL(
 				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
