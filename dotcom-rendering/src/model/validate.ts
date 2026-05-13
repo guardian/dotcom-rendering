@@ -19,6 +19,7 @@ import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 import type { FENewslettersPageType } from '../types/newslettersPage';
+import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
@@ -113,6 +114,55 @@ export const validateAsAllEditorialNewslettersPageType = (
 		`Unable to validate request body for newsletters page.\n
 		${JSON.stringify(validateAllEditorialNewslettersPage.errors, null, 2)}`,
 	);
+};
+
+const isPuzzleItem = (data: unknown): boolean =>
+	isObject(data) &&
+	isString(data.title) &&
+	isString(data.type) &&
+	isString(data.set);
+
+const isPuzzleContainer = (data: unknown): boolean => {
+	if (!isObject(data) || !isString(data.title) || !isObject(data.content)) {
+		return false;
+	}
+
+	const { content } = data;
+	const itemsValid =
+		Array.isArray(content.items) &&
+		content.items.every(
+			(row) =>
+				Array.isArray(row) && row.every((item) => isPuzzleItem(item)),
+		);
+
+	const nestedValid =
+		Array.isArray(content.nestedContainers) &&
+		content.nestedContainers.every((container) =>
+			isPuzzleContainer(container),
+		);
+
+	return itemsValid && nestedValid;
+};
+
+export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
+	if (
+		isObject(data) &&
+		isString(data.id) &&
+		isString(data.webTitle) &&
+		isString(data.editionId) &&
+		isObject(data.config) &&
+		isObject(data.nav) &&
+		isObject(data.pageFooter) &&
+		isObject(data.layout) &&
+		Array.isArray(data.layout.containers) &&
+		data.layout.containers.every((container) =>
+			isPuzzleContainer(container),
+		)
+	) {
+		return data as unknown as FEPuzzlesPageType;
+	}
+
+	throw new TypeError('Unable to validate request body for puzzles page.');
 };
 
 export const validateAsBlock = (data: unknown): Block[] => {
