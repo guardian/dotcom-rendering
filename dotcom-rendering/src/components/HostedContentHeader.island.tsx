@@ -207,11 +207,10 @@ export const HostedContentHeader = ({ branding }: Props) => {
 				</div>
 
 				<div
-					css={
-						shouldFadeLogo
-							? [badgeWrapperStyles, badgeWrapperFadeStyles]
-							: badgeWrapperStyles
-					}
+					css={[
+						badgeWrapperStyles,
+						shouldFadeLogo && badgeWrapperFadeStyles,
+					]}
 				>
 					<BrandingLabel branding={branding} isHosted={true} />
 				</div>
