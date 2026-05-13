@@ -17,6 +17,7 @@ import type {
 	FallOfWicket,
 	Innings,
 	InningsTotals,
+	Result,
 } from '../cricketMatchV2';
 import { palette } from '../palette';
 
@@ -665,7 +666,7 @@ type Props = {
 	officials: string[];
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
-	matchResult: string;
+	matchResult?: Result;
 };
 
 export const CricketScorecardNew = ({
@@ -679,7 +680,7 @@ export const CricketScorecardNew = ({
 		{allInnings.map((innings, index) => {
 			const isHomeTeam = innings.battingTeam === homeTeam.name;
 			const isCurrentInnings =
-				matchResult !== 'result' && index === allInnings.length - 1;
+				!matchResult && index === allInnings.length - 1;
 			return (
 				<section key={innings.description} css={inningsContainerStyles}>
 					<div css={cardStyles}>

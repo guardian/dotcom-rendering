@@ -367,6 +367,5 @@ export const CricketScorecardNew = meta.story({
 				"Will O'Rourke",
 			],
 		},
-		matchResult: 'in progress',
 	},
 });
