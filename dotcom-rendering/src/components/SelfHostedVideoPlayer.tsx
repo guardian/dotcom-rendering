@@ -166,7 +166,7 @@ export type Props = {
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
 	playerContainerRef: React.RefObject<HTMLDivElement>;
-	isNativeFullscreen: boolean;
+	isWebKitFullscreen: boolean;
 };
 
 /**
@@ -220,7 +220,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			iconsPosition,
 			subtitlesPosition,
 			playerContainerRef,
-			isNativeFullscreen,
+			isWebKitFullscreen,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -229,7 +229,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const currentRefExists = ref && 'current' in ref && !!ref.current;
 
 		const showSubtitles = canShowSubtitles && !!subtitleSource;
-		const showCustomSubtitles = showSubtitles && !isNativeFullscreen;
+		const showCustomSubtitles = showSubtitles && !isWebKitFullscreen;
 		const showProgressBar = canShowProgressBar && currentRefExists;
 		const showIcons = canShowIcons && currentRefExists;
 

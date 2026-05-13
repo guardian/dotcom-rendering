@@ -387,7 +387,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
-	const [isNativeFullscreen, setIsNativeFullscreen] = useState(false);
+	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -751,7 +751,7 @@ export const SelfHostedVideo = ({
 		const video = vidRef.current;
 		if (!video) return;
 
-		const handleEndFullscreen = () => setIsNativeFullscreen(false);
+		const handleEndFullscreen = () => setIsWebKitFullscreen(false);
 		video.addEventListener('webkitendfullscreen', handleEndFullscreen);
 		return () =>
 			video.removeEventListener(
@@ -871,10 +871,10 @@ export const SelfHostedVideo = ({
 			};
 
 			if (webkitVideo.webkitDisplayingFullscreen) {
-				setIsNativeFullscreen(false);
+				setIsWebKitFullscreen(false);
 				return webkitVideo.webkitExitFullscreen();
 			} else {
-				setIsNativeFullscreen(true);
+				setIsWebKitFullscreen(true);
 				return webkitVideo.webkitEnterFullscreen();
 			}
 		}
@@ -1091,7 +1091,7 @@ export const SelfHostedVideo = ({
 							videoStyleSettings.showFullscreenIcon
 						}
 						isInteractive={videoStyleSettings.isInteractive}
-						isNativeFullscreen={isNativeFullscreen}
+						isWebKitFullscreen={isWebKitFullscreen}
 					/>
 				</div>
 			</div>
