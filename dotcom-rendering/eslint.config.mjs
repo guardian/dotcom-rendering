@@ -74,7 +74,6 @@ export default defineConfig([
 			react: react,
 			'react-hooks': hooks,
 			'jsx-a11y': jsxA11y,
-			'jsx-expressions': jsxExpressions,
 			'custom-elements': customElements,
 			unicorn,
 			'ssr-friendly': ssrFriendly,
@@ -90,7 +89,6 @@ export default defineConfig([
 			'react/no-danger': 'off',
 			'react/prop-types': 'off',
 			'react/no-unused-prop-types': 'error',
-			'jsx-expressions/strict-logical-expressions': 'error',
 
 			'jsx-a11y/aria-role': [
 				'error',
