@@ -32,10 +32,9 @@ const narrowStyles = css`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: ${palette('--narrow-play-icon-background')};
+	background-color: ${palette('--video-icon-background')};
+	fill: ${palette('--video-icon')};
 	border-radius: 50%;
-	border: 1px solid ${palette('--narrow-play-icon-border')};
-	fill: ${palette('--narrow-play-icon-fill')};
 `;
 
 const theme = {
