@@ -4,15 +4,24 @@ import { grid } from '../grid';
 import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
 import { CricketMatchHeader } from './CricketMatchHeader/CricketMatchHeader';
-import { CricketMatch } from '../cricketMatchV2';
+import { CricketMatch, Innings } from '../cricketMatchV2';
 import { CricketScorecardNew } from './CricketScorecardNew';
 
 export const CricketScorecardPageNew = ({
 	match,
+	allInnings,
 	edition,
+	lineups,
+	officials,
 }: {
 	match: CricketMatch;
+	allInnings: Innings[];
 	edition: EditionId;
+	lineups: {
+		homeTeam: string[];
+		awayTeam: string[];
+	};
+	officials: string[];
 }) => {
 	return (
 		<main id="maincontent">
@@ -24,8 +33,9 @@ export const CricketScorecardPageNew = ({
 					`}
 				>
 					<CricketScorecardNew
-						allInnings={match.innings}
-						officials={match.officials}
+						allInnings={allInnings}
+						lineups={lineups}
+						officials={officials}
 						homeTeam={match.homeTeam}
 						awayTeam={match.awayTeam}
 						matchResult={match.result}

@@ -18,13 +18,6 @@ export const Fixture = {
 			competition: 'Second Test Match',
 			venue: 'Brisbane Cricket Ground',
 			matchDate: new Date('2026-01-26'),
-			officials: [
-				'P R Reiffel',
-				'R K Illingworth',
-				'J S Wilson',
-				'H D P K Dharmasena',
-				'R S Madugalle',
-			],
 			homeTeam: {
 				paID: 'f7f611a1-e667-2aa2-c3e0-6dbc6981cfa4',
 				name: 'Australia',

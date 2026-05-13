@@ -99,6 +99,5 @@ export type CricketMatch = {
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
 	innings: InningsOverview[];
-	officials: string[];
 	result?: Result;
 };
