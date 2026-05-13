@@ -414,6 +414,50 @@ export const SelfHostedVideo = ({
 			? 'bottom-elevated'
 			: controlsPosition;
 
+	/**
+	 * Show the play icon when the video is not playing, except for when it is scrolled out of view,
+	 * i.e. paused by intersection observer. In this case, the intersection observer will resume playback
+	 * and having a play icon would falsely indicate a user action is required to resume playback.
+	 */
+	const showPlayIcon =
+		videoStyleSettings.canShowPlayIcon &&
+		(playerState === 'PAUSED_BY_USER' ||
+			playerState === 'PAUSED_BY_BROWSER' ||
+			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
+
+	const showPauseIcon =
+		videoStyleSettings.hideControlsWhenNotInteractedWith &&
+		playerState === 'PLAYING';
+
+	let showPlayPauseIcon: 'play' | 'pause' | null = null;
+	if (showPlayIcon) {
+		showPlayPauseIcon = 'play';
+	} else if (showPauseIcon) {
+		showPlayPauseIcon = 'pause';
+	}
+
+	/** The aspect ratio of the video will be clamped within the specified range */
+	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
+		aspectRatio,
+		minAspectRatio,
+		maxAspectRatio,
+	);
+
+	const isVideoCroppedAtTopBottom = aspectRatio < aspectRatioOfVisibleVideo;
+	const isVideoCroppedAtLeftRight = aspectRatio > aspectRatioOfVisibleVideo;
+
+	const isGreyBarsAtSidesOnDesktop =
+		containerAspectRatioDesktop !== undefined &&
+		containerAspectRatioDesktop > aspectRatioOfVisibleVideo;
+
+	const isGreyBarsAtTopAndBottomOnDesktop =
+		containerAspectRatioDesktop !== undefined &&
+		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
+
+	const optimisedPosterImage = showPosterImage
+		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
+		: undefined;
+
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
 
 	const sendOphanTrackingEvent = useCallback(
@@ -940,50 +984,6 @@ export const SelfHostedVideo = ({
 			void pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
 		}
 	}
-
-	/**
-	 * Show the play icon when the video is not playing, except for when it is scrolled out of view,
-	 * i.e. paused by intersection observer. In this case, the intersection observer will resume playback
-	 * and having a play icon would falsely indicate a user action is required to resume playback.
-	 */
-	const showPlayIcon =
-		videoStyleSettings.canShowPlayIcon &&
-		(playerState === 'PAUSED_BY_USER' ||
-			playerState === 'PAUSED_BY_BROWSER' ||
-			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
-
-	const showPauseIcon =
-		videoStyleSettings.hideControlsWhenNotInteractedWith &&
-		playerState === 'PLAYING';
-
-	let showPlayPauseIcon: 'play' | 'pause' | null = null;
-	if (showPlayIcon) {
-		showPlayPauseIcon = 'play';
-	} else if (showPauseIcon) {
-		showPlayPauseIcon = 'pause';
-	}
-
-	/** The aspect ratio of the video will be clamped within the specified range */
-	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
-		aspectRatio,
-		minAspectRatio,
-		maxAspectRatio,
-	);
-
-	const isVideoCroppedAtTopBottom = aspectRatio < aspectRatioOfVisibleVideo;
-	const isVideoCroppedAtLeftRight = aspectRatio > aspectRatioOfVisibleVideo;
-
-	const isGreyBarsAtSidesOnDesktop =
-		containerAspectRatioDesktop !== undefined &&
-		containerAspectRatioDesktop > aspectRatioOfVisibleVideo;
-
-	const isGreyBarsAtTopAndBottomOnDesktop =
-		containerAspectRatioDesktop !== undefined &&
-		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
-
-	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
-		: undefined;
 
 	return (
 		<figure
