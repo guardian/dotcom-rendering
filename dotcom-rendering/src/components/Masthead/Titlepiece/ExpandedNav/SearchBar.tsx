@@ -88,8 +88,7 @@ const searchSubmit = css`
 	}
 `;
 
-export const SearchBar = () => {
-	const searchId = 'gu-search';
+export const SearchBar = ({ searchId = 'gu-search' }: { searchId: string }) => {
 	return (
 		<form css={searchBar} action="https://www.google.co.uk/search">
 			<TextInput
