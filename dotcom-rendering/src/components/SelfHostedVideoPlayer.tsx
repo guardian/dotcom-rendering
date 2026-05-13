@@ -82,7 +82,7 @@ const subtitleFontStyles = (subtitleSize: SubtitleSize | undefined) => css`
 	}
 `;
 
-const hideNativeSubtitles = css`
+const hideNativeSubtitlesStyles = css`
 	::cue {
 		/* Hide the cue as we prefer custom overlay */
 		visibility: hidden;
@@ -246,7 +246,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						videoStyles(aspectRatio),
 						isInteractive && interactiveStyles,
 						showSubtitles && subtitleFontStyles(subtitleSize),
-						showCustomSubtitles && hideNativeSubtitles,
+						showCustomSubtitles && hideNativeSubtitlesStyles,
 					]}
 					crossOrigin="anonymous"
 					ref={ref}
