@@ -336,7 +336,13 @@ export const CricketScorecardNew = meta.story({
 		homeTeam: {
 			paID: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
 			name: 'India',
-			lineup: [
+		},
+		awayTeam: {
+			paID: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+			name: 'New Zealand',
+		},
+		lineups: {
+			homeTeam: [
 				'Rohit Sharma',
 				'Shubman Gill',
 				'Virat Kohli',
@@ -349,11 +355,7 @@ export const CricketScorecardNew = meta.story({
 				'Kuldeep Yadav',
 				'Varun Chakaravarthy',
 			],
-		},
-		awayTeam: {
-			paID: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
-			name: 'New Zealand',
-			lineup: [
+			awayTeam: [
 				'Rachin Ravindra',
 				'Will Young',
 				'Kane Williamson',

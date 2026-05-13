@@ -17,7 +17,7 @@ import { Fragment, type ReactNode, useMemo } from 'react';
 import type {
 	CricketMatch,
 	CricketTeam,
-	Innings,
+	InningsOverview,
 	Result,
 } from '../../cricketMatchV2';
 import { grid } from '../../grid';
@@ -267,11 +267,11 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 					innings.map((inning, index) => (
 						<Fragment key={index}>
 							<Score
-								runs={inning.inningsTotals.runs}
-								fallOfWickets={inning.fallOfWickets.length}
+								runs={inning.runs}
+								fallOfWickets={inning.fallOfWickets}
 								matchKind={props.match.kind}
 							/>
-							{!!inning.inningsTotals.overs && (
+							{!!inning.overs && (
 								<>
 									<EndOfInningReason inning={inning} />
 									<span
@@ -287,7 +287,7 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 											),
 										}}
 									>
-										{inning.inningsTotals.overs} overs
+										{inning.overs} overs
 									</span>
 								</>
 							)}
@@ -309,13 +309,13 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 	);
 };
 
-const EndOfInningReason = (props: { inning: Innings }) => {
+const EndOfInningReason = (props: { inning: InningsOverview }) => {
 	const styles = {
 		...textSans14Object,
 		marginRight: space[1],
 	};
 
-	if (props.inning.fallOfWickets.length === 10) {
+	if (props.inning.fallOfWickets === 10) {
 		return <span css={styles}>All out</span>;
 	}
 	if (props.inning.declared) {

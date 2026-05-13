@@ -42,7 +42,6 @@ export type FallOfWicket = {
 
 export type CricketTeam = {
 	name: string;
-	lineup: string[];
 	paID: string;
 };
 
@@ -56,6 +55,15 @@ export type Innings = {
 	forfeited?: boolean;
 	inningsTotals: InningsTotals;
 	fallOfWickets: FallOfWicket[];
+};
+
+export type InningsOverview = {
+	battingTeam: string;
+	runs: number;
+	overs: string;
+	declared: boolean;
+	forfeited: boolean;
+	fallOfWickets: number;
 };
 
 type WinnerResult = {
@@ -90,6 +98,6 @@ export type CricketMatch = {
 	matchDate: Date;
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
-	innings: Innings[];
+	innings: InningsOverview[];
 	result?: Result;
 };
