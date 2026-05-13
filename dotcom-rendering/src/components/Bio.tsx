@@ -65,7 +65,9 @@ const containsText = (html: string) => {
 };
 
 export const Bio = ({ html }: { html?: string }) => {
-	if (!html || !containsText(html)) return null;
+	if (!html || !containsText(html)) {
+		return null;
+	}
 	const sanitizedHtml = sanitise(html, {});
 	return (
 		<>

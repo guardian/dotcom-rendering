@@ -297,7 +297,9 @@ const getMedia = ({
 		return { type: 'slideshow', slideshowImages } as const;
 	}
 
-	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
+	if (avatarUrl) {
+		return { type: 'avatar', avatarUrl } as const;
+	}
 
 	if (
 		mainMedia?.type === 'Audio' &&
@@ -451,7 +453,9 @@ export const Card = ({
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const decideAge = () => {
-		if (!webPublicationDate || !showAge) return undefined;
+		if (!webPublicationDate || !showAge) {
+			return undefined;
+		}
 
 		return (
 			<CardAge
@@ -676,8 +680,12 @@ export const Card = ({
 	 * - If `sublinkPosition` is `inner`, hides `SupportingContent` from tablet but displays it on smaller breakpoints.
 	 */
 	const decideOuterSublinks = () => {
-		if (!hasSublinks) return null;
-		if (sublinkPosition === 'none') return null;
+		if (!hasSublinks) {
+			return null;
+		}
+		if (sublinkPosition === 'none') {
+			return null;
+		}
 
 		const Sublinks = () => {
 			return (
@@ -712,8 +720,12 @@ export const Card = ({
 	};
 
 	const decideInnerSublinks = () => {
-		if (!hasSublinks) return null;
-		if (sublinkPosition !== 'inner') return null;
+		if (!hasSublinks) {
+			return null;
+		}
+		if (sublinkPosition !== 'inner') {
+			return null;
+		}
 
 		const Sublinks = () => (
 			<Hide until={isFlexSplash ? 'desktop' : 'tablet'}>
@@ -736,7 +748,9 @@ export const Card = ({
 	 * Results in a clickable brand logo and sponsorship label
 	 */
 	const LabsBranding = () => {
-		if (!branding) return;
+		if (!branding) {
+			return;
+		}
 		const getLocationPrefix = () => {
 			if (!onwardsSource) {
 				return 'front-card';

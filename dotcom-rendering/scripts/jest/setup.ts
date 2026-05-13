@@ -1,4 +1,3 @@
-/* eslint-disable ssr-friendly/no-dom-globals-in-module-scope -- this runs in JSDOM */
 // add some helpful assertions
 import '@testing-library/jest-dom';
 import { TextDecoder, TextEncoder } from 'node:util';

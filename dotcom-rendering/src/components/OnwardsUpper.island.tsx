@@ -225,7 +225,9 @@ export const OnwardsUpper = ({
 	webURL,
 }: Props) => {
 	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
-	if (!isHorizontalScrollingSupported) return null;
+	if (!isHorizontalScrollingSupported) {
+		return null;
+	}
 
 	// Related content can be a collection of articles based on
 	// two things, 1: A popular tag, or 2: A generic text match

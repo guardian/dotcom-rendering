@@ -1,21 +1,21 @@
 // ----- Imports ----- //
 import { css } from '@emotion/react';
 import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleFormat,
-	ArticleSpecial,
-	Pillar,
-} from '../../src/lib/articleFormat';
-import {
 	palette as sourcePalette,
 	space,
 	textSans17,
 	textSansBold20,
 } from '@guardian/source/foundations';
-import { Decorator } from '@storybook/react-webpack5';
-import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
+import type { Decorator } from '@storybook/react-webpack5';
 import type { ReactNode } from 'react';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '../../src/lib/articleFormat';
+import type { ArticleFormat } from '../../src/lib/articleFormat';
+import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
 
 interface Orientation {
 	orientation?: 'horizontal' | 'vertical';

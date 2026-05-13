@@ -231,7 +231,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 
 		return (
 			<div ref={playerContainerRef} css={playerContainerStyles}>
-				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
+				{}
 				<video
 					id={videoId}
 					css={[

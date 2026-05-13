@@ -113,7 +113,9 @@ const handleChange = (
 	const percentage = Number(value);
 	const time = convertProgressPercentageToCurrentTime(percentage, duration);
 
-	if (time === null) return;
+	if (time === null) {
+		return;
+	}
 
 	updateCurrentTime(time);
 };
@@ -139,7 +141,9 @@ export const VideoProgressBarInteractive = ({
 	handleKeyDown,
 	duration,
 }: Props) => {
-	if (duration <= 0) return null;
+	if (duration <= 0) {
+		return null;
+	}
 
 	const progressPercentage = convertCurrentTimeToProgressPercentage(
 		currentTime,

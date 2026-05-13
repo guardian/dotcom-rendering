@@ -32,19 +32,19 @@ export function DesignableBannerCtas({
 		<>
 			{primaryCta && (
 				<LinkButton
-					href={primaryCta?.ctaUrl}
+					href={primaryCta.ctaUrl}
 					onClick={onPrimaryCtaClick}
 					size="small"
 					priority="primary"
 					cssOverrides={buttonStyles(primaryCtaSettings)}
 					theme={buttonThemes(primaryCtaSettings, 'primary')}
 				>
-					{primaryCta?.ctaText}
+					{primaryCta.ctaText}
 				</LinkButton>
 			)}
 			{secondaryCta?.type === SecondaryCtaType.Custom && (
 				<LinkButton
-					href={secondaryCta?.cta.ctaUrl}
+					href={secondaryCta.cta.ctaUrl}
 					onClick={onSecondaryCtaClick}
 					size="small"
 					priority="secondary"

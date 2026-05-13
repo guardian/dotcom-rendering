@@ -282,7 +282,9 @@ const doesUserPermitAutoplayOnWeb = (): boolean => {
 const doesUserPermitAutoplayOnApps = async (): Promise<boolean> => {
 	/* isAutoplayEnabled is available on the video client from 8.8.0 onwards */
 	const isBridgetCompatible = await hasMinimumBridgetVersion('8.8.0');
-	if (!isBridgetCompatible) return true;
+	if (!isBridgetCompatible) {
+		return true;
+	}
 
 	try {
 		const videoClient = getVideoClient();
@@ -459,7 +461,9 @@ export const SelfHostedVideo = ({
 
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
-		if (!video) return;
+		if (!video) {
+			return;
+		}
 
 		/** https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay#example_handling_play_failures */
 		const startPlayPromise = video.play();
@@ -492,7 +496,9 @@ export const SelfHostedVideo = ({
 		>,
 	) => {
 		const video = vidRef.current;
-		if (!video) return;
+		if (!video) {
+			return;
+		}
 
 		if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
 			setMutedState({ value: true, track: false });
@@ -710,10 +716,14 @@ export const SelfHostedVideo = ({
 
 	const handleLoadedMetadata = () => {
 		const video = vidRef.current;
-		if (!video) return;
+		if (!video) {
+			return;
+		}
 
 		const track = video.textTracks[0];
-		if (!track?.cues) return;
+		if (!track?.cues) {
+			return;
+		}
 
 		const pxFromBottom = space[3];
 		const videoHeight = video.getBoundingClientRect().height;
@@ -730,7 +740,9 @@ export const SelfHostedVideo = ({
 
 	const handleLoadedData = () => {
 		const video = vidRef.current;
-		if (!video) return;
+		if (!video) {
+			return;
+		}
 
 		if (video.videoWidth > 0 && video.videoHeight > 0) {
 			setWidth(video.videoWidth);
@@ -748,20 +760,26 @@ export const SelfHostedVideo = ({
 	 * Track the first successful video play in Ophan.
 	 */
 	const handlePlaying = () => {
-		if (hasTrackedPlay) return;
+		if (hasTrackedPlay) {
+			return;
+		}
 		sendOphanTrackingEvent('play');
 		setHasTrackedPlay(true);
 	};
 
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
-		if (isCinemagraph) return;
+		if (isCinemagraph) {
+			return;
+		}
 
 		event.preventDefault();
 		playPauseVideo();
 	};
 
 	const handleAudioClick = (event: React.SyntheticEvent) => {
-		if (isCinemagraph) return;
+		if (isCinemagraph) {
+			return;
+		}
 
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 
@@ -781,7 +799,9 @@ export const SelfHostedVideo = ({
 		event.stopPropagation(); // Don't pause the video
 
 		const video = vidRef.current;
-		if (!video) return;
+		if (!video) {
+			return;
+		}
 
 		if (shouldUseWebkitFullscreen(video)) {
 			/***
@@ -816,7 +836,9 @@ export const SelfHostedVideo = ({
 	 * browser. Therefore we need to apply the pause state to the video.
 	 */
 	const handlePause = () => {
-		if (isCinemagraph) return;
+		if (isCinemagraph) {
+			return;
+		}
 
 		if (
 			playerState === 'PAUSED_BY_USER' ||
@@ -847,7 +869,9 @@ export const SelfHostedVideo = ({
 
 	const seekForward = () => {
 		const video = vidRef.current;
-		if (!video) return;
+		if (!video) {
+			return;
+		}
 
 		const increment = isDefault ? 10 : 1;
 		const newTime = Math.min(video.currentTime + increment, video.duration);
@@ -857,7 +881,9 @@ export const SelfHostedVideo = ({
 
 	const seekBackward = () => {
 		const video = vidRef.current;
-		if (!video) return;
+		if (!video) {
+			return;
+		}
 
 		const increment = isDefault ? 10 : 1;
 		const newTime = Math.max(video.currentTime - increment, 0);
@@ -867,7 +893,9 @@ export const SelfHostedVideo = ({
 
 	const handleTimeUpdate = () => {
 		const video = vidRef.current;
-		if (!video) return;
+		if (!video) {
+			return;
+		}
 
 		if (playerState === 'PLAYING') {
 			setCurrentTime(video.currentTime);
@@ -875,7 +903,9 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
-		if (isCinemagraph) return;
+		if (isCinemagraph) {
+			return;
+		}
 
 		switch (event.key) {
 			case 'Enter':

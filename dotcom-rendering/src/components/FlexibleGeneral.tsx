@@ -265,7 +265,9 @@ const SplashCardLayout = ({
 	collectionId,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
-	if (!card) return null;
+	if (!card) {
+		return null;
+	}
 
 	const shouldShowImmersive = card.isImmersive;
 	if (shouldShowImmersive) {
@@ -429,7 +431,9 @@ const FullWidthCardLayout = ({
 	collectionId,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
-	if (!card) return null;
+	if (!card) {
+		return null;
+	}
 
 	const {
 		headlineSizes,
@@ -535,7 +539,9 @@ const HalfWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 }: HalfWidthCardLayoutProps) => {
-	if (cards.length === 0) return null;
+	if (cards.length === 0) {
+		return null;
+	}
 
 	return (
 		<UL

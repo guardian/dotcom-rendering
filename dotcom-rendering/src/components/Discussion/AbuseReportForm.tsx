@@ -112,7 +112,9 @@ export const AbuseReportForm = ({
 	let firstElement: HTMLSelectElement | null = null;
 	let lastElement: HTMLButtonElement | null = null;
 	useEffect(() => {
-		if (!modalRef.current) return;
+		if (!modalRef.current) {
+			return;
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps -- https://github.com/guardian/discussion-rendering/pull/56 for where this was first introduced
 		firstElement = modalRef.current.querySelector(
 			'select[name="category"]',
@@ -147,7 +149,9 @@ export const AbuseReportForm = ({
 				toggleSetShowForm();
 			} else if (e.code === 'Tab') {
 				// If firstElement or lastElement are not defined, do not continue
-				if (!firstElement || !lastElement) return;
+				if (!firstElement || !lastElement) {
+					return;
+				}
 
 				// we use `e.shiftKey` internally to determine the direction of the highlighting
 				// using document.activeElement and e.shiftKey we can check what should be the next element to be highlighted

@@ -40,14 +40,18 @@ const parseEmbedStatusMessage = (
 		}
 	}
 
-	if (!payload || typeof payload !== 'object') return undefined;
+	if (!payload || typeof payload !== 'object') {
+		return undefined;
+	}
 
 	const { type, ok } = payload as {
 		type?: unknown;
 		ok?: unknown;
 	};
 
-	if (type !== 'embed-status' || typeof ok !== 'boolean') return undefined;
+	if (type !== 'embed-status' || typeof ok !== 'boolean') {
+		return undefined;
+	}
 
 	return {
 		type: 'embed-status',
@@ -421,7 +425,9 @@ export const NewsletterPreviewModal = ({
 		});
 
 	const requestClose = useCallback(() => {
-		if (closeTimeoutRef.current !== null) return;
+		if (closeTimeoutRef.current !== null) {
+			return;
+		}
 
 		setIsVisible(false);
 		closeTimeoutRef.current = window.setTimeout(() => {
@@ -459,7 +465,9 @@ export const NewsletterPreviewModal = ({
 	}, []);
 
 	useEffect(() => {
-		if (!dialogRef.current) return;
+		if (!dialogRef.current) {
+			return;
+		}
 
 		const dialogElement = dialogRef.current;
 		const previouslyFocusedElement =
@@ -481,10 +489,14 @@ export const NewsletterPreviewModal = ({
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent): void => {
-			if (!dialogRef.current) return;
+			if (!dialogRef.current) {
+				return;
+			}
 
 			const dialogElement = dialogRef.current;
-			if (!dialogElement.contains(document.activeElement)) return;
+			if (!dialogElement.contains(document.activeElement)) {
+				return;
+			}
 
 			if (event.key === 'Escape') {
 				event.stopPropagation();
@@ -492,7 +504,9 @@ export const NewsletterPreviewModal = ({
 				return;
 			}
 
-			if (event.key !== 'Tab') return;
+			if (event.key !== 'Tab') {
+				return;
+			}
 
 			const focusableElements =
 				getVisibleFocusableElements(dialogElement);
@@ -532,7 +546,9 @@ export const NewsletterPreviewModal = ({
 
 	useEffect(() => {
 		const overlayElement = overlayRef.current;
-		if (!overlayElement) return;
+		if (!overlayElement) {
+			return;
+		}
 
 		const handleOverlayMouseDown = (event: MouseEvent) => {
 			if (event.target === overlayElement) {
@@ -558,7 +574,9 @@ export const NewsletterPreviewModal = ({
 	}, [renderUrl, iframeKey]);
 
 	useEffect(() => {
-		if (!isLoading) return;
+		if (!isLoading) {
+			return;
+		}
 
 		const timeoutId = window.setTimeout(() => {
 			setFailureMessage(TIMEOUT_FAILURE_MESSAGE);
@@ -572,10 +590,14 @@ export const NewsletterPreviewModal = ({
 	}, [isLoading]);
 
 	useEffect(() => {
-		if (!trustedIframeOrigin) return;
+		if (!trustedIframeOrigin) {
+			return;
+		}
 
 		const handleMessage = (event: MessageEvent) => {
-			if (!iframeRef.current) return;
+			if (!iframeRef.current) {
+				return;
+			}
 
 			const iframeWindow = iframeRef.current.contentWindow;
 			if (
@@ -589,7 +611,9 @@ export const NewsletterPreviewModal = ({
 			}
 
 			const embedStatusMessage = parseEmbedStatusMessage(event.data);
-			if (!embedStatusMessage) return;
+			if (!embedStatusMessage) {
+				return;
+			}
 
 			applyEmbedStatus(embedStatusMessage.ok);
 		};
@@ -602,7 +626,9 @@ export const NewsletterPreviewModal = ({
 	}, [trustedIframeOrigin]);
 
 	const handleIframeLoad = () => {
-		if (hasEmbedStatusFailureRef.current) return;
+		if (hasEmbedStatusFailureRef.current) {
+			return;
+		}
 		setIsLoading(false);
 		setHasLoadFailed(false);
 	};
@@ -617,7 +643,9 @@ export const NewsletterPreviewModal = ({
 		setIframeKey((currentKey) => currentKey + 1);
 	};
 
-	if (typeof document === 'undefined') return null;
+	if (typeof document === 'undefined') {
+		return null;
+	}
 
 	return createPortal(
 		<div ref={overlayRef} css={previewOverlayStyles(isVisible)}>

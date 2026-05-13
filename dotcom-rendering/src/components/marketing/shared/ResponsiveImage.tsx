@@ -15,7 +15,7 @@ export type ImageAttrs = {
 };
 
 type ResponsiveImageProps = {
-	images: Array<ImageAttrs>;
+	images: ImageAttrs[];
 	baseImage: ImageAttrs;
 	bannerId?: BannerId;
 	cssOverrides?: SerializedStyles;

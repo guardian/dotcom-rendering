@@ -35,7 +35,7 @@ const formFieldWrapperStyles = css`
 	flex-direction: column;
 `;
 
-type FormDataType = { [key in string]: any };
+type FormDataType = Record<string, any>;
 
 type FormFieldProp = {
 	formField: CampaignFieldType;
@@ -114,7 +114,7 @@ type FormProps = {
 
 export const Form = ({ onSubmit, formFields, error }: FormProps) => {
 	const [twitterHandle, setTwitterHandle] = useState('');
-	const [formData, setFormData] = useState<{ [key in string]: any }>({});
+	const [formData, setFormData] = useState<Record<string, any>>({});
 
 	return (
 		<form

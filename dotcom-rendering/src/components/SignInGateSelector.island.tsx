@@ -335,7 +335,6 @@ const SignInGateSelectorAuxia = ({
 					<ShowSignInGateAuxia
 						host={host}
 						queryParams={queryParams}
-						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
 						abTest={buildAbTestTrackingAuxiaVariant(
 							auxiaGateDisplayData.auxiaData.userTreatment

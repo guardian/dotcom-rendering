@@ -24,7 +24,7 @@ const wrapperMargins = css`
 const COMPONENT_TYPE = 'RETENTION_EPIC';
 
 type Meta = {
-	dataFromBraze: { [key: string]: string };
+	dataFromBraze: Record<string, string>;
 	logImpressionWithBraze: () => void;
 	logButtonClickWithBraze: (id: number) => void;
 };
@@ -151,7 +151,9 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	}, [hasBeenSeen, meta, renderingTarget]);
 
 	const componentName = meta.dataFromBraze.componentName;
-	if (!componentName) return null;
+	if (!componentName) {
+		return null;
+	}
 
 	const subscribeToNewsletter = async (newsletterId: string) => {
 		if (authStatus.kind == 'SignedIn') {

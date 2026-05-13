@@ -40,7 +40,9 @@ const fileExists = async (glob) => {
 (async () => {
 	// Check that the manifest files exist
 	await fileExists('manifest.client.web.json');
-	if (BUILD_VARIANT) await fileExists('manifest.client.web.variant.json');
+	if (BUILD_VARIANT) {
+		await fileExists('manifest.client.web.variant.json');
+	}
 
 	// Check that the manifest files return values for all the chunks
 	const manifests = [await loadJsonFile('./dist/manifest.client.web.json')];

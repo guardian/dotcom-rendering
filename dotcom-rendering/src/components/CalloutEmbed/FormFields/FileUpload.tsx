@@ -19,8 +19,8 @@ const errorMessagesStyles = css`
 
 type Props = {
 	formField: CampaignFieldFile;
-	formData: { [key in string]: any };
-	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
+	formData: Record<string, any>;
+	setFormData: React.Dispatch<React.SetStateAction<Record<string, any>>>;
 };
 
 export const FileUpload = ({ formField, formData, setFormData }: Props) => {

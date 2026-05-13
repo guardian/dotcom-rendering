@@ -110,7 +110,9 @@ const getPageRange = (currentPage: number, lastPage: number) => {
 };
 
 const getLink = (pageId: string, pageNo: number) => {
-	if (pageNo === 1) return `/${pageId}`;
+	if (pageNo === 1) {
+		return `/${pageId}`;
+	}
 	return `/${pageId}?page=${pageNo}`;
 };
 

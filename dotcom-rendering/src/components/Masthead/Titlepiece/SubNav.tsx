@@ -80,8 +80,7 @@ export const SubNav = ({
 }: Props) => {
 	return (
 		<>
-			{/* eslint-disable jsx-a11y/no-redundant-roles -- A11y fix for Safari
-			{@see https://github.com/guardian/dotcom-rendering/pull/5041} */}
+			{}
 			<ul
 				css={[
 					subNavStyles,
@@ -93,7 +92,7 @@ export const SubNav = ({
 					'--sub-nav-link': themePalette('--sub-nav-link-header'),
 				}}
 			>
-				{/* eslint-enable jsx-a11y/no-redundant-roles */}
+				{}
 				{subNavSections.parent && (
 					<li
 						key={subNavSections.parent.url}

@@ -591,7 +591,9 @@ export const renderElement = ({
 				showNewNewsletterSignupCard:
 					!!switches.showNewNewsletterSignupCard,
 			};
-			if (isListElement || isTimeline) return null;
+			if (isListElement || isTimeline) {
+				return null;
+			}
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<EmailSignUpWrapper {...emailSignUpProps} />
