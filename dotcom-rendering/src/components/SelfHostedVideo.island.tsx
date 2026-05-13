@@ -370,6 +370,7 @@ export const SelfHostedVideo = ({
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
 	const vidRef = useRef<HTMLVideoElement>(null);
+	const playerContainerRef = useRef<HTMLDivElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
@@ -808,8 +809,9 @@ export const SelfHostedVideo = ({
 
 		if (document.fullscreenElement) {
 			void document.exitFullscreen();
+		} else if (playerContainerRef.current) {
+			void playerContainerRef.current.requestFullscreen();
 		}
-		void video.requestFullscreen();
 	};
 
 	/**
@@ -1013,6 +1015,7 @@ export const SelfHostedVideo = ({
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
 						ref={vidRef}
+						playerContainerRef={playerContainerRef}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
 						handleLoadedData={handleLoadedData}
