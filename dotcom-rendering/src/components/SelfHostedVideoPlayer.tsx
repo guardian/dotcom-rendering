@@ -314,7 +314,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 								duration={ref.current!.duration}
 							/>
 						))}
-					{showIcons && (
+					{showIcons && (showFullscreenIcon || hasAudio) && (
 						<div
 							css={[
 								iconsContainerStyles,
