@@ -631,9 +631,11 @@ const FallOfWickets = ({
 const LineupTeam = ({
 	team,
 	teamType,
+	lineup,
 }: {
 	team: CricketTeam;
 	teamType: 'homeTeam' | 'awayTeam';
+	lineup: string[];
 }) => (
 	<div
 		css={[
@@ -652,7 +654,7 @@ const LineupTeam = ({
 			{team.name}
 		</h3>
 		<ul css={playerListStyles}>
-			{team.lineup.map((player) => (
+			{lineup.map((player) => (
 				<li key={player} css={playerItemStyles}>
 					{player}
 				</li>
@@ -667,6 +669,10 @@ type Props = {
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
 	matchResult?: Result;
+	lineups: {
+		homeTeam: string[];
+		awayTeam: string[];
+	};
 };
 
 export const CricketScorecardNew = ({
@@ -675,6 +681,7 @@ export const CricketScorecardNew = ({
 	homeTeam,
 	awayTeam,
 	matchResult,
+	lineups,
 }: Props) => (
 	<div css={overallContainerStyles}>
 		{allInnings.map((innings, index) => {
@@ -716,8 +723,16 @@ export const CricketScorecardNew = ({
 			<h2 css={lineupsHeadingStyles}>Lineups</h2>
 
 			<div css={lineupsGridStyles}>
-				<LineupTeam team={homeTeam} teamType="homeTeam" />
-				<LineupTeam team={awayTeam} teamType="awayTeam" />
+				<LineupTeam
+					team={homeTeam}
+					teamType="homeTeam"
+					lineup={lineups['homeTeam']}
+				/>
+				<LineupTeam
+					team={awayTeam}
+					teamType="awayTeam"
+					lineup={lineups['awayTeam']}
+				/>
 			</div>
 
 			<div css={cardSectionStyles}>

@@ -42,7 +42,6 @@ export type FallOfWicket = {
 
 export type CricketTeam = {
 	name: string;
-	lineup: string[];
 	paID: string;
 };
 
@@ -58,6 +57,38 @@ export type Innings = {
 	fallOfWickets: FallOfWicket[];
 };
 
+export type InningsOverview = {
+	battingTeam: string;
+	runs: number;
+	overs: string;
+	declared: boolean;
+	forfeited: boolean;
+	fallOfWickets: number;
+};
+
+type WinnerResult = {
+	type: 'home-win' | 'away-win';
+	description?: string;
+	winner: {
+		type: 'runs' | 'wickets' | 'innings' | 'forfeit' | 'run-rate';
+		team: string;
+		margin?: number;
+	};
+};
+
+type OtherResult = {
+	type:
+		| 'no-result'
+		| 'draw'
+		| 'abandoned'
+		| 'tied'
+		| 'level-scores-draw'
+		| 'none';
+	description?: string;
+};
+
+export type Result = WinnerResult | OtherResult;
+
 export type CricketMatch = {
 	kind: 'Fixture' | 'Live' | 'Result';
 	series: string;
@@ -67,6 +98,6 @@ export type CricketMatch = {
 	matchDate: Date;
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
-	innings: Innings[];
+	innings: InningsOverview[];
 	result?: Result;
 };
