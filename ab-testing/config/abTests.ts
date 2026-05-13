@@ -52,7 +52,7 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-05-15",
 		type: "server",
 		status: "ON",
-		audienceSize: 80 / 100,
+		audienceSize: 0 / 100,
 		audienceSpace: "B",
 		groups: ["control", "carousel", "stacked-default", "stacked-expanded"],
 		shouldForceMetricsCollection: false,
