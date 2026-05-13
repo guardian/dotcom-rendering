@@ -302,6 +302,7 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 					ref={carouselRef}
 					css={carouselStyles}
 					data-heatphan-type="carousel"
+					id="at-a-glance-carousel"
 				>
 					{products.map(
 						(product: ProductBlockElement, index: number) => (

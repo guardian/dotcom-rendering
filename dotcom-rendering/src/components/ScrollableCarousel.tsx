@@ -393,6 +393,7 @@ export const ScrollableCarousel = ({
 					),
 					stackedCardRowsStyles(shouldStackCards),
 				]}
+				id={`${sectionId}-carousel`}
 				data-heatphan-type="carousel"
 				onFocus={scrollToCardOnFocus}
 				{...(isBelowTabletBreakpoint && {
