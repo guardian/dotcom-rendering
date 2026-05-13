@@ -56,9 +56,7 @@ type FullscreenIconProps = {
 	handleClick: SelfHostedVideoPlayerProps['handleFullscreenClick'];
 };
 
-export const FullscreenIcon = ({
-	handleClick,
-}: FullscreenIconProps) => (
+export const FullscreenIcon = ({ handleClick }: FullscreenIconProps) => (
 	<button
 		type="button"
 		onClick={handleClick}

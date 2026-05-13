@@ -241,6 +241,16 @@ const shouldUseWebkitFullscreen = (video: HTMLVideoElement): boolean => {
 };
 
 /**
+ * 	The events we need to respond to for fullscreen tracking
+ * */
+const fullscreenChangeEvents = [
+	'fullscreenchange',
+	'webkitfullscreenchange',
+	'webkitbeginfullscreen',
+	'webkitendfullscreen',
+];
+
+/**
  * Ensures the aspect ratio falls between the minimum and maximum allowed aspect ratios, if specified.
  * For example, we may not want to render a square video inside a 4:5 feature card. In this case, the
  * minimum & maximum aspect ratio would be 4:5, so that the video fits the fixed-aspect ratio feature card
@@ -718,27 +728,24 @@ export const SelfHostedVideo = ({
 		}
 
 		const reportFullscreenEvent = () => {
-			sendOphanTrackingEvent(
-				document.fullscreenElement
+			const event =
+				document.fullscreenElement ||
+				('webkitDisplayingFullscreen' in video &&
+					video.webkitDisplayingFullscreen)
 					? 'enter_fullscreen'
-					: 'exit_fullscreen',
-			);
+					: 'exit_fullscreen';
+
+			sendOphanTrackingEvent(event);
 		};
 
-		video.addEventListener('fullscreenchange', reportFullscreenEvent);
-
-		video.addEventListener('webkitfullscreenchange', reportFullscreenEvent);
+		for (const event of fullscreenChangeEvents) {
+			video.addEventListener(event, reportFullscreenEvent);
+		}
 
 		return () => {
-			video.removeEventListener(
-				'fullscreenchange',
-				reportFullscreenEvent,
-			);
-
-			video.removeEventListener(
-				'webkitfullscreenchange',
-				reportFullscreenEvent,
-			);
+			for (const event of fullscreenChangeEvents) {
+				video.removeEventListener(event, reportFullscreenEvent);
+			}
 		};
 	}, [sendOphanTrackingEvent]);
 
