@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	calculateHoverColour,
 	from,
 	palette as sourcePalette,
 	space,
@@ -108,6 +109,8 @@ export const CallToActionAtom = ({
 	buttonText,
 	accentColor,
 }: CallToActionProps) => {
+	const buttonBgColour = accentColor ?? sourcePalette.neutral[100];
+
 	return (
 		<picture
 			css={css`
@@ -143,12 +146,11 @@ export const CallToActionAtom = ({
 						textPrimary: accentColor
 							? sourcePalette.neutral[100]
 							: sourcePalette.neutral[0],
-						backgroundPrimary:
-							accentColor ?? sourcePalette.neutral[100],
+						backgroundPrimary: buttonBgColour,
 						// This should be changed with `calculateHoverColour()` once we have the function available as DCR needs to upgrade Source to 12.1.0 to use it.
 						// Check https://github.com/guardian/csnx/blob/857116cf826dc700742f14c5a5f005bd6d39f1be/libs/%40guardian/source/CHANGELOG.md?plain=1#L20
 						backgroundPrimaryHover:
-							accentColor ?? sourcePalette.neutral[100],
+							calculateHoverColour(buttonBgColour),
 					}}
 				>
 					{buttonText ?? 'Learn more'}
