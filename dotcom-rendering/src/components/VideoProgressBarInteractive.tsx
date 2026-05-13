@@ -32,7 +32,6 @@ const trackStyles = css`
 	-webkit-appearance: none;
 	appearance: none;
 	height: 5px;
-	border-radius: 5px;
 `;
 
 const thumbStyles = css`
@@ -51,7 +50,7 @@ const progressBarStyles = (roundedProgressPercentage: number) => css`
 	width: 100%;
 	cursor: pointer;
 	height: 5px;
-	border-radius: 5px;
+	margin: 0;
 	-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
 	appearance: none;
 	/* The colour to the left of the thumb is different to the right to indicate progress */
@@ -182,7 +181,6 @@ export const VideoProgressBarInteractive = ({
 const timeStyles = css`
 	${textSans12};
 	color: ${sourcePalette.neutral[100]};
-	margin-left: 1px; /* To make it _feel_ more aligned with the progress bar, which has a border radius. */
 `;
 
 const Time = ({ current, duration }: { current: number; duration: number }) => {
