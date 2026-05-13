@@ -50,11 +50,11 @@ export const Notifications = (props: Props) => {
 		void getMatchNotificationsClient()
 			.isAvailable({
 				homeTeam: {
-					id: props.match.homeTeam.paID,
+					paId: props.match.homeTeam.paID,
 					name: props.match.homeTeam.name,
 				},
 				awayTeam: {
-					id: props.match.awayTeam.paID,
+					paId: props.match.awayTeam.paID,
 					name: props.match.awayTeam.name,
 				},
 			})
