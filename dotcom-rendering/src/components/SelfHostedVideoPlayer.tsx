@@ -36,6 +36,28 @@ const videoStyles = (aspectRatio: number) => css`
 	aspect-ratio: ${aspectRatio};
 `;
 
+const playerContainerStyles = css`
+	&:fullscreen {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: ${palette('--video-fullscreen-background')};
+		width: 100vw;
+		height: 100vh;
+
+		/* Override the fixed aspect-ratio + width:100% on the video so it
+		   fits within the screen while preserving its aspect ratio. */
+		video {
+			width: 100%;
+			height: 100%;
+			max-width: 100vw;
+			max-height: 100vh;
+			aspect-ratio: auto;
+			object-fit: contain;
+		}
+	}
+`;
+
 const videoControlsStyles = css`
 	height: 100%;
 	width: 100%;
@@ -143,6 +165,7 @@ export type Props = {
 	isInteractive: boolean;
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
+	playerContainerRef: React.RefObject<HTMLDivElement>;
 };
 
 /**
@@ -196,6 +219,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			iconsPosition,
 			subtitlesPosition,
+			playerContainerRef,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -212,7 +236,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 		}-${atomId}`;
 
 		return (
-			<>
+			<div ref={playerContainerRef} css={playerContainerStyles}>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
 				<video
 					id={videoId}
@@ -324,7 +348,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						</div>
 					)}
 				</div>
-			</>
+			</div>
 		);
 	},
 );
