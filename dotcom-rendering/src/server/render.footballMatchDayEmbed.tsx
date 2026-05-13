@@ -1,3 +1,4 @@
+import { FootballMatchDay } from '../components/FootballMatchDay';
 import { renderToStringWithEmotion } from '../lib/emotion';
 
 const template = (html: string, css: string): string => {
@@ -15,9 +16,9 @@ const template = (html: string, css: string): string => {
 		</html>`;
 };
 
-export const renderFootballMatchEmbed = (): { html: string } => {
+export const renderFootballMatchDayEmbed = (): { html: string } => {
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<h1>Football Match Embed</h1>,
+		<FootballMatchDay />,
 	);
 
 	const pageHtml = template(html, extractedCss);

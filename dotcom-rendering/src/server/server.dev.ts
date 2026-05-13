@@ -16,7 +16,7 @@ import {
 } from './handler.article.web';
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
-import { handleFootballMatchEmbed } from './handler.footballMatchEmbed';
+import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
 import {
 	handleAppsFootballMatchPage,
@@ -123,7 +123,7 @@ renderer.get('/AppsFootballMatchSummaryPage/*url', handleAppsFootballMatchPage);
 renderer.get('/HostedContent/*url', handleHostedContent);
 renderer.get('/AppsHostedContent/*url', handleAppsHostedContent);
 renderer.get('/AppsComponent/thrasher/:name', handleAppsThrasher);
-renderer.get('/FootballMatchEmbed/*url', handleFootballMatchEmbed);
+renderer.get('/FootballMatchDayEmbed/*url', handleFootballMatchDayEmbed);
 
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
@@ -144,7 +144,7 @@ renderer.post('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 renderer.post('/HostedContent', handleHostedContent);
 renderer.post('/AppsHostedContent', handleAppsHostedContent);
 renderer.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
-renderer.post('/FootballMatchEmbed/*url', handleFootballMatchEmbed);
+renderer.post('/FootballMatchDayEmbed/*url', handleFootballMatchDayEmbed);
 
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);
 
