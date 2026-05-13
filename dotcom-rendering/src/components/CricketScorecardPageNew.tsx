@@ -7,7 +7,7 @@ import { CricketMatchHeader } from './CricketMatchHeader/CricketMatchHeader';
 import { CricketMatch } from '../cricketMatchV2';
 import { CricketScorecardNew } from './CricketScorecardNew';
 
-export const FootballMatchInfoPage = ({
+export const CricketScorecardPageNew = ({
 	match,
 	edition,
 }: {
