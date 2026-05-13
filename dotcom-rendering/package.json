@@ -42,7 +42,7 @@
 		"@guardian/ophan-tracker-js": "3.0.0",
 		"@guardian/react-crossword": "17.1.0",
 		"@guardian/shimport": "1.0.2",
-		"@guardian/source": "11.3.0",
+		"@guardian/source": "12.2.1",
 		"@guardian/source-development-kitchen": "18.1.1",
 		"@guardian/support-dotcom-components": "9.0.1",
 		"@guardian/tsconfig": "0.2.0",
