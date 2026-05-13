@@ -24,17 +24,6 @@ import { VideoProgressBarInteractive } from './VideoProgressBarInteractive';
 export type SubtitleSize = 'small' | 'medium' | 'large';
 export type ControlsPosition = 'top' | 'bottom';
 
-const videoStyles = (aspectRatio: number) => css`
-	position: relative;
-	display: block;
-	height: auto;
-	width: 100%;
-	-webkit-tap-highlight-color: transparent;
-
-	/* Prevents CLS by letting the browser know the space the video will take up. */
-	aspect-ratio: ${aspectRatio};
-`;
-
 const playerContainerStyles = css`
 	&:fullscreen {
 		display: flex;
@@ -55,6 +44,17 @@ const playerContainerStyles = css`
 			object-fit: contain;
 		}
 	}
+`;
+
+const videoStyles = (aspectRatio: number) => css`
+	position: relative;
+	display: block;
+	height: auto;
+	width: 100%;
+	-webkit-tap-highlight-color: transparent;
+
+	/* Prevents CLS by letting the browser know the space the video will take up. */
+	aspect-ratio: ${aspectRatio};
 `;
 
 const videoControlsStyles = css`
@@ -93,7 +93,7 @@ const iconsContainerStyles = css`
 `;
 
 const iconsBottomPositionStyles = (useLongFormProgressBar: boolean) => css`
-	bottom: ${useLongFormProgressBar ? space[12] : space[3]}px;
+	bottom: ${useLongFormProgressBar ? '46px' : `${space[3]}px`};
 `;
 
 const iconsTopPositionStyles = css`
