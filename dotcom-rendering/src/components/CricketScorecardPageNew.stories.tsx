@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { CricketScorecardPageNew as CricketScorecardPageNewComponent } from './CricketScorecardPageNew';
