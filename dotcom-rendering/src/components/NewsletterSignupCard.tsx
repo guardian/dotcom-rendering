@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	headlineMedium20,
 	space,
 	textSans14,
@@ -7,6 +8,8 @@ import {
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
+import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
+import { NewsletterPreviewButton } from './NewsletterPreviewButton';
 
 export type NewsletterSignupCardProps = {
 	name: string;
@@ -14,12 +17,14 @@ export type NewsletterSignupCardProps = {
 	description: string;
 	illustrationSquare?: string;
 	children?: React.ReactNode;
+	previewAction?: NewsletterPreviewAction;
+	isSignedIn?: boolean | 'Pending';
 };
 
 const containerStyles = css`
+	clear: left;
 	background-color: ${themePalette('--newsletter-card-background')};
-	margin-bottom: ${space[6]}px;
-	padding: ${space[2]}px ${space[2]}px ${space[4]}px ${space[2]}px;
+	padding: ${space[3]}px ${space[3]}px ${space[4]}px ${space[3]}px;
 `;
 
 const dividerStyles = css`
@@ -45,7 +50,7 @@ const titleAndMetaStyles = css`
 
 const titleStyles = css`
 	${headlineMedium20};
-	margin-bottom: ${space[2]}px;
+	margin-bottom: ${space[1]}px;
 	color: ${themePalette('--newsletter-card-title')};
 `;
 
@@ -68,25 +73,31 @@ const frequencyTagStyles = css`
 const descriptionStyles = css`
 	${textSans14};
 	line-height: 1.15;
-	margin-bottom: ${space[1]}px;
+	margin-bottom: ${space[2]}px;
 	clear: both;
 	color: ${themePalette('--newsletter-card-description')};
 `;
 
 const illustrationStyles = css`
 	flex-shrink: 0;
-	width: 100px;
-	height: 100px;
+	width: 90px;
+	height: 90px;
 	border-radius: 50%;
 	object-fit: cover;
+
+	${from.tablet} {
+		width: 100px;
+		height: 100px;
+	}
 `;
 
-const NewsletterSignupHeader = (props: {
-	frequency: string;
-	name: string;
-	description: string;
-	illustrationSquare?: string;
-}) => (
+const previewButtonWrapperStyles = css`
+	margin-bottom: ${space[4]}px;
+`;
+
+const NewsletterSignupHeader = (
+	props: Omit<NewsletterSignupCardProps, 'children'>,
+) => (
 	<div css={headerStyles}>
 		<div css={titleAndMetaStyles}>
 			<div css={frequencyTagStyles}>
@@ -97,6 +108,14 @@ const NewsletterSignupHeader = (props: {
 				Sign up to <span>{props.name}</span>
 			</p>
 			<p css={descriptionStyles}>{props.description}</p>
+			{props.previewAction !== undefined && props.isSignedIn !== true && (
+				<div css={previewButtonWrapperStyles}>
+					<NewsletterPreviewButton
+						previewAction={props.previewAction}
+						size="small"
+					/>
+				</div>
+			)}
 		</div>
 		{!!props.illustrationSquare && (
 			<img
@@ -116,6 +135,8 @@ export const NewsletterSignupCard = ({
 	description,
 	illustrationSquare,
 	children,
+	previewAction,
+	isSignedIn,
 }: NewsletterSignupCardProps) => (
 	<>
 		<hr css={dividerStyles} />
@@ -125,6 +146,8 @@ export const NewsletterSignupCard = ({
 				name={name}
 				description={description}
 				illustrationSquare={illustrationSquare}
+				previewAction={previewAction}
+				isSignedIn={isSignedIn}
 			/>
 			{children}
 		</aside>

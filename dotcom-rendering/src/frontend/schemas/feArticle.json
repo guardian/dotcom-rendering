@@ -2279,6 +2279,9 @@
                             "type": "string"
                         }
                     }
+                },
+                "hasAudio": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -5750,6 +5753,9 @@
                                     },
                                     "aspectRatio": {
                                         "type": "string"
+                                    },
+                                    "hasAudio": {
+                                        "type": "boolean"
                                     }
                                 },
                                 "required": [
@@ -5770,13 +5776,25 @@
                             "type": "string"
                         },
                         "image": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "src": {
+                                    "type": "string"
+                                },
+                                "aspectRatio": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "aspectRatio"
+                            ]
                         }
                     },
                     "required": [
                         "aspectRatio",
                         "atomId",
                         "duration",
+                        "image",
                         "sources",
                         "type",
                         "videoStyle"

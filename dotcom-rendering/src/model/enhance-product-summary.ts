@@ -61,6 +61,10 @@ export const allowedPageIds: string[] = [
 	'thefilter/2025/aug/31/best-mattress-toppers-uk',
 	'thefilter/2025/may/13/best-hot-brushes-uk',
 	'thefilter/2025/feb/06/best-mattress',
+	'thefilter/2025/may/28/best-fake-tan-uk',
+	'thefilter/2025/apr/18/best-pressure-washers-cleaners-uk',
+	'thefilter/2025/may/18/best-suitcases-luggage-uk',
+	'thefilter/2025/may/21/best-eye-creams-serums-uk',
 ];
 
 const isEligibleForSummary = (pageId: string) => {

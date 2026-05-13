@@ -1,19 +1,17 @@
 import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source/foundations';
-import { Button, SvgEye } from '@guardian/source/react-components';
 import { useCallback, useState } from 'react';
-import { submitComponentEvent } from '../client/ophan/ophan';
 import { buildNewsletterPreviewUrl } from '../lib/newsletterPreviewUrl';
-import { palette } from '../palette';
+import {
+	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	sendNewsletterSignupEvent,
+} from '../lib/newsletterSignupTracking';
 import type { RenderingTarget } from '../types/renderingTarget';
+import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
+import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import type { NewsletterSignupCardProps } from './NewsletterSignupCard';
 import { NewsletterSignupCard } from './NewsletterSignupCard';
-
-const previewButtonStyles = css`
-	margin-top: ${space[1]}px;
-	margin-bottom: ${space[4]}px;
-`;
 
 type PreviewEventDescription = 'preview-open' | 'preview-close';
 
@@ -28,35 +26,28 @@ const sendPreviewTracking = ({
 	renderingTarget: RenderingTarget;
 	renderUrl: string;
 }) => {
-	const action = eventDescription === 'preview-open' ? 'EXPAND' : 'CLOSE';
-
-	const value = JSON.stringify({
-		eventDescription,
-		newsletterId: identityName,
-		renderUrl,
-		timestamp: Date.now(),
-	});
-
-	void submitComponentEvent(
-		{
-			action,
-			value,
-			component: {
-				componentType: 'NEWSLETTER_SUBSCRIPTION',
-				id: `DCR NewsletterPreview ${identityName}`,
-			},
-		},
+	sendNewsletterSignupEvent({
+		action: eventDescription === 'preview-open' ? 'EXPAND' : 'CLOSE',
+		identityName,
+		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName),
 		renderingTarget,
-	);
+		value: { eventDescription, renderUrl },
+	});
 };
 
-type Props = NewsletterSignupCardProps & {
+type Props = Pick<
+	NewsletterSignupCardProps,
+	'name' | 'frequency' | 'description' | 'illustrationSquare'
+> & {
 	identityName: string;
 	category?: string;
 	exampleUrl?: string;
 	renderingTarget: RenderingTarget;
 	theme: string;
-	children?: React.ReactNode;
+	isSignedIn?: boolean | 'Pending';
+	children?: (
+		previewAction: NewsletterPreviewAction | undefined,
+	) => React.ReactNode;
 };
 
 const themeColorStyles = (theme: string) => css`
@@ -76,7 +67,9 @@ export const NewsletterSignupCardContainer = ({
 	description,
 	illustrationSquare,
 	children,
+	isSignedIn,
 }: Props) => {
+	const showPrivacyMessageOutside = isSignedIn === true;
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
 	const renderUrl = buildNewsletterPreviewUrl({
@@ -102,6 +95,17 @@ export const NewsletterSignupCardContainer = ({
 		});
 	}, [identityName, renderingTarget, renderUrl]);
 
+	const trackPreviewLinkOpen = useCallback(() => {
+		if (!renderUrl) return;
+
+		sendPreviewTracking({
+			identityName,
+			eventDescription: 'preview-open',
+			renderingTarget,
+			renderUrl,
+		});
+	}, [identityName, renderingTarget, renderUrl]);
+
 	const closePreview = useCallback(() => {
 		setIsPreviewOpen((isOpen) => {
 			if (isOpen && renderUrl) {
@@ -117,6 +121,19 @@ export const NewsletterSignupCardContainer = ({
 		});
 	}, [identityName, renderingTarget, renderUrl]);
 
+	const previewAction = hasPreviewUrl
+		? renderingTarget === 'Apps'
+			? {
+					behaviour: 'link' as const,
+					href: renderUrl ?? '',
+					onClick: trackPreviewLinkOpen,
+			  }
+			: {
+					behaviour: 'modal' as const,
+					onClick: openPreview,
+			  }
+		: undefined;
+
 	return (
 		<div css={themeColorStyles(theme)}>
 			{isPreviewOpen && hasPreviewUrl && (
@@ -126,37 +143,31 @@ export const NewsletterSignupCardContainer = ({
 					onClose={closePreview}
 				/>
 			)}
-			<NewsletterSignupCard
-				name={name}
-				frequency={frequency}
-				description={description}
-				illustrationSquare={illustrationSquare}
+			<div
+				css={css`
+					margin-bottom: ${space[6]}px;
+				`}
 			>
-				{hasPreviewUrl && (
-					<Button
-						size="small"
-						priority="tertiary"
-						icon={<SvgEye size="small" />}
-						iconSide="left"
-						onClick={openPreview}
-						cssOverrides={previewButtonStyles}
-						theme={{
-							textTertiary: palette(
-								'--newsletter-preview-button-text',
-							),
-							borderTertiary: palette(
-								'--newsletter-preview-button-border',
-							),
-							backgroundTertiaryHover: palette(
-								'--newsletter-preview-button-hover',
-							),
-						}}
-					>
-						Preview latest
-					</Button>
+				<NewsletterSignupCard
+					name={name}
+					frequency={frequency}
+					description={description}
+					illustrationSquare={illustrationSquare}
+					previewAction={previewAction}
+					isSignedIn={isSignedIn}
+				>
+					{children?.(previewAction)}
+				</NewsletterSignupCard>
+				{showPrivacyMessageOutside && (
+					<NewsletterPrivacyMessage
+						textColor="regular"
+						cssOverrides={css`
+							display: block;
+							margin-top: ${space[2]}px;
+						`}
+					/>
 				)}
-				{children}
-			</NewsletterSignupCard>
+			</div>
 		</div>
 	);
 };

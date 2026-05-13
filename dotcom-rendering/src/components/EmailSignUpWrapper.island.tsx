@@ -1,4 +1,12 @@
 import type { Breakpoint } from '@guardian/source/foundations';
+import { useEffect, useRef } from 'react';
+import {
+	AB_TEST_NAME,
+	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	sendNewsletterSignupEvent,
+} from '../lib/newsletterSignupTracking';
+import { useBetaAB } from '../lib/useAB';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { useConfig } from './ConfigContext';
 import type { EmailSignUpProps } from './EmailSignup';
@@ -7,6 +15,7 @@ import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { NewsletterSignupCardContainer } from './NewsletterSignupCardContainer';
+import { NewsletterSignupForm } from './NewsletterSignupForm.island';
 import { Placeholder } from './Placeholder';
 import { SecureSignup } from './SecureSignup.island';
 
@@ -65,17 +74,68 @@ export const EmailSignUpWrapper = ({
 	showNewNewsletterSignupCard = false,
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
-	const shouldCheckSubscription =
-		hideNewsletterSignupComponentForSubscribers &&
-		!showNewNewsletterSignupCard;
+
+	const abTestEnabled =
+		showNewNewsletterSignupCard && renderingTarget === 'Web';
+
+	const abTests = useBetaAB();
+	const abResolved = abTests !== undefined;
+
+	const isVariant =
+		abTestEnabled &&
+		(abTests?.isUserInTestGroup(AB_TEST_NAME, 'variant') ?? false);
+
+	const abVariant = isVariant ? 'variant' : 'control';
+
 	const isSubscribed = useNewsletterSubscription(
 		listId,
 		idApiUrl,
-		shouldCheckSubscription,
+		hideNewsletterSignupComponentForSubscribers,
 	);
+	const isSignedIn = useIsSignedIn();
 
-	// When the new card design is enabled, always show it regardless of subscription status
-	if (showNewNewsletterSignupCard) {
+	const viewFiredRef = useRef(false);
+
+	useEffect(() => {
+		if (abTestEnabled && !abResolved) return;
+		// Wait for subscription status in both branches — we only want to track
+		// a view of the actual signup form, not a loading state or success message.
+		if (isSubscribed === undefined) return;
+		// Don't fire if the user is already subscribed: in both branches they
+		// will see a success/already-subscribed message, not the signup form.
+		if (isSubscribed) return;
+		// Guard against double-firing (e.g. if deps change after the first fire)
+		if (viewFiredRef.current) return;
+		viewFiredRef.current = true;
+		sendNewsletterSignupEvent({
+			action: 'VIEW',
+			identityName,
+			componentId: isVariant
+				? NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName)
+				: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
+			renderingTarget,
+			value: {
+				eventDescription: 'newsletter-signup-viewed',
+			},
+			// Use the standard Ophan abTest field so Ophan can join events
+			// to the A/B test — not strings encoded inside value.
+			abTest: { name: AB_TEST_NAME, variant: abVariant },
+		});
+	}, [
+		abResolved,
+		abVariant,
+		identityName,
+		isSubscribed,
+		isVariant,
+		abTestEnabled,
+		renderingTarget,
+	]);
+
+	if ((abTestEnabled && !abResolved) || isSubscribed === undefined) {
+		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
+	}
+
+	if (isVariant) {
 		return (
 			<InlineSkipToWrapper
 				id={`EmailSignup-skip-link-${index}`}
@@ -91,26 +151,30 @@ export const EmailSignUpWrapper = ({
 					category={category}
 					exampleUrl={exampleUrl}
 					renderingTarget={renderingTarget}
+					isSignedIn={isSignedIn}
 				>
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<SecureSignup
-							newsletterId={identityName}
-							successDescription={successDescription}
-						/>
-					</Island>
-					{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
+					{(previewAction) => (
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<NewsletterSignupForm
+								newsletterId={identityName}
+								newsletterName={name}
+								frequency={frequency}
+								hidePrivacyMessage={isSignedIn === true}
+								previewAction={previewAction}
+								isAlreadySubscribed={isSubscribed}
+								abTest={{
+									name: AB_TEST_NAME,
+									variant: abVariant,
+								}}
+							/>
+						</Island>
+					)}
 				</NewsletterSignupCardContainer>
 			</InlineSkipToWrapper>
 		);
 	}
 
-	// Show placeholder while subscription status is being determined
-	// This prevents layout shift in both subscribed and non-subscribed cases
-	if (isSubscribed === undefined) {
-		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
-	}
-
-	// Don't render if user is signed in and already subscribed
+	// Don't render control if user is already subscribed
 	if (isSubscribed) {
 		return null;
 	}
@@ -130,6 +194,7 @@ export const EmailSignUpWrapper = ({
 					<SecureSignup
 						newsletterId={identityName}
 						successDescription={successDescription}
+						abTest={{ name: AB_TEST_NAME, variant: abVariant }}
 					/>
 				</Island>
 				{!hidePrivacyMessage && <NewsletterPrivacyMessage />}

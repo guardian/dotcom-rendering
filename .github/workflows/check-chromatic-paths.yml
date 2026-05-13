@@ -1,0 +1,37 @@
+# Determines whether changed files are relevant to Chromatic.
+# Both dcr-chromatic.yml and chromatic-label-helper.yml call this so the filter
+# list stays in one place and can't drift between the two workflows.
+
+name: Check Chromatic paths
+
+on:
+  workflow_call:
+    outputs:
+      relevant:
+        description: "'true' if any files relevant to visual rendering have changed"
+        value: ${{ jobs.filter.outputs.relevant }}
+
+jobs:
+  filter:
+    name: Check changed paths
+    runs-on: ubuntu-latest
+    outputs:
+      relevant: ${{ steps.filter.outputs.relevant }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0
+      - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4
+        id: filter
+        with:
+          # Only run Chromatic if files that affect visual rendering have changed.
+          # Everything not listed here (docs, scripts, config, tests, etc.) is ignored.
+          filters: |
+            relevant:
+              - 'dotcom-rendering/src/**'
+              - 'dotcom-rendering/stories/**'
+              - 'dotcom-rendering/.storybook/**'
+              - 'dotcom-rendering/fixtures/**'
+              - 'dotcom-rendering/package.json'
+              - 'libs/**'
+              - 'pnpm-lock.yaml'

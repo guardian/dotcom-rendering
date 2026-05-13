@@ -837,6 +837,7 @@ export interface WitnessAssetType {
 		name?: string;
 	};
 }
+
 interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.WitnessBlockElement';
 	elementId: string;
@@ -1023,6 +1024,7 @@ export interface VideoAssets {
 		width?: string;
 		caption?: string;
 	};
+	hasAudio?: boolean;
 }
 
 interface AudioAsset {

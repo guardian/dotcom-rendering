@@ -60,7 +60,9 @@ updates:
         exclude-patterns:
           - '@storybook/*'
   - package-ecosystem: 'github-actions'
-    directory: '/'
+    directories:
+      - '/.github/workflows'
+      - '/.github/actions/setup-node-env'
     schedule:
       interval: 'daily'
     rebase-strategy: 'disabled'

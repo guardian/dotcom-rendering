@@ -25,7 +25,7 @@ describe('buildNewsletterPreviewUrl', () => {
 				category: 'fronts-based',
 			}),
 		).toBe(
-			'https://email-rendering.guardianapis.com/fronts/uk/newsletters/morning-mail?variant=persephone&readonly=true',
+			'https://email-rendering.guardianapis.com/fronts/uk/newsletters/morning-mail?variant=persephone&readonly=true&embed=true',
 		);
 	});
 
@@ -37,7 +37,7 @@ describe('buildNewsletterPreviewUrl', () => {
 				category: 'fronts-based',
 			}),
 		).toBe(
-			'https://email-rendering.guardianapis.com/fronts/world/newsletters/morning-mail?variant=persephone&readonly=true',
+			'https://email-rendering.guardianapis.com/fronts/world/newsletters/morning-mail?variant=persephone&readonly=true&embed=true',
 		);
 	});
 
@@ -48,7 +48,7 @@ describe('buildNewsletterPreviewUrl', () => {
 				category: 'article-based',
 			}),
 		).toBe(
-			'https://email-rendering.guardianapis.com/article/world/series/first-edition?variant=kronos&readonly=true',
+			'https://email-rendering.guardianapis.com/article/world/series/first-edition?variant=kronos&readonly=true&embed=true',
 		);
 	});
 
@@ -59,7 +59,7 @@ describe('buildNewsletterPreviewUrl', () => {
 				category: 'article-based-legacy',
 			}),
 		).toBe(
-			'https://email-rendering.guardianapis.com/article/world/series/first-edition?variant=kronos&readonly=true',
+			'https://email-rendering.guardianapis.com/article/world/series/first-edition?variant=kronos&readonly=true&embed=true',
 		);
 	});
 
@@ -70,7 +70,7 @@ describe('buildNewsletterPreviewUrl', () => {
 				category: 'article-based',
 			}),
 		).toBe(
-			'https://email-rendering.guardianapis.com/fronts/email/global-dispatch?variant=persephone&readonly=true',
+			'https://email-rendering.guardianapis.com/fronts/email/global-dispatch?variant=persephone&readonly=true&embed=true',
 		);
 	});
 
@@ -82,7 +82,7 @@ describe('buildNewsletterPreviewUrl', () => {
 				category: 'other',
 			}),
 		).toBe(
-			'https://email-rendering.guardianapis.com/article/sport/series/tokyo-2020-daily-briefing/latest?variant=kronos&readonly=true',
+			'https://email-rendering.guardianapis.com/article/sport/series/tokyo-2020-daily-briefing/latest?variant=kronos&readonly=true&embed=true',
 		);
 	});
 
@@ -93,7 +93,7 @@ describe('buildNewsletterPreviewUrl', () => {
 				category: 'fronts-based',
 			}),
 		).toBe(
-			'https://email-rendering.guardianapis.com/fronts/world/newsletters/briefing%20with%20spaces?variant=persephone&readonly=true',
+			'https://email-rendering.guardianapis.com/fronts/world/newsletters/briefing%20with%20spaces?variant=persephone&readonly=true&embed=true',
 		);
 	});
 });

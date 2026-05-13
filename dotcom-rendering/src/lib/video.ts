@@ -6,6 +6,8 @@ export type CustomPlayEventDetail = { uniqueId: string };
 /** We expect all videos to include dimensions since the field was added to FEMediaAsset */
 export const DEFAULT_ASPECT_RATIO = 5 / 4;
 
+export const DEFAULT_IMAGE_ASPECT_RATIO = '5:4';
+
 export const customSelfHostedVideoPlayAudioEventName =
 	'self-hosted-video:play-with-audio';
 export const customYoutubePlayEventName = 'youtube-video:play';
@@ -16,6 +18,7 @@ export type Source = {
 	height: number;
 	width: number;
 	aspectRatio?: string;
+	hasAudio?: boolean;
 };
 
 /**
@@ -54,6 +57,8 @@ export const extractValidSourcesFromAssets = (
 					height: asset.dimensions?.height ?? 0,
 					width: asset.dimensions?.width ?? 0,
 					aspectRatio: asset.aspectRatio,
+					/* we default to true for videos that were transcoded prior to audio detection */
+					hasAudio: asset.hasAudio ?? true,
 				})),
 			);
 		}
@@ -63,10 +68,11 @@ export const extractValidSourcesFromAssets = (
 export const convertFEMediaAssetsToVideoAssets = (
 	assets: FEMediaAsset[],
 ): VideoAssets[] =>
-	assets.map(({ id, mimeType, dimensions }) => ({
+	assets.map(({ id, mimeType, dimensions, hasAudio }) => ({
 		url: id,
 		mimeType,
 		dimensions,
+		hasAudio,
 	}));
 
 /**
