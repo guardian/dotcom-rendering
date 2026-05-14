@@ -19,7 +19,7 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { useAB, useBetaAB } from '../lib/useAB';
+import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -278,12 +278,7 @@ export const StickyBottomBanner = ({
 	const countryCode = useCountryCode('sticky-bottom-banner');
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
-	const abTestAPI = useAB()?.api;
 	const abTests = useBetaAB();
-	const isInAuxiaControlGroup = !!abTestAPI?.isUserInVariant(
-		'NoAuxiaSignInGate',
-		'control',
-	);
 	const inAuxiaVariant =
 		abTests?.isUserInTestGroup('growth-auxia-banner', 'variant') ?? false;
 
@@ -369,7 +364,6 @@ export const StickyBottomBanner = ({
 				pageId,
 				contributionsServiceUrl,
 				editionId,
-				isInAuxiaControlGroup,
 			},
 			host,
 		);
@@ -436,7 +430,6 @@ export const StickyBottomBanner = ({
 		ophanPageViewId,
 		pageId,
 		host,
-		isInAuxiaControlGroup,
 		braze,
 		abTests,
 		inAuxiaVariant,
