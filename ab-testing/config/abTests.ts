@@ -49,10 +49,10 @@ const ABTests: ABTest[] = [
 		description:
 			"Testing redesigned at a glance component on The Filter articles",
 		owners: ["thefilter.dev@guardian.co.uk"],
-		expirationDate: "2026-05-13",
+		expirationDate: "2026-05-15",
 		type: "server",
 		status: "ON",
-		audienceSize: 100 / 100,
+		audienceSize: 0 / 100,
 		audienceSpace: "B",
 		groups: ["control", "carousel", "stacked-default", "stacked-expanded"],
 		shouldForceMetricsCollection: false,
@@ -81,19 +81,6 @@ const ABTests: ABTest[] = [
 		audienceSize: 5 / 100,
 		audienceSpace: "A",
 		groups: ["control"],
-		shouldForceMetricsCollection: false,
-	},
-	{
-		name: "fronts-and-curation-tag-page-storylines",
-		description:
-			"Testing the AI generated storylines component on tag pages",
-		owners: ["fronts.and.curation@guardian.co.uk"],
-		expirationDate: `2026-04-30`,
-		type: "server",
-		status: "ON",
-		audienceSize: 0 / 100,
-		audienceSpace: "B",
-		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
 	{
@@ -152,7 +139,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module.",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-05-14",
+		expirationDate: "2026-05-21",
 		type: "client",
 		status: "ON",
 		audienceSize: 0 / 100,
