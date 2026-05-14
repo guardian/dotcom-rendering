@@ -49,6 +49,11 @@ const rulesToReview = {
 	'@typescript-eslint/prefer-nullish-coalescing': 'warn',
 	'@typescript-eslint/strict-boolean-expressions': 'warn',
 	'react/display-name': 'warn',
+	'react-hooks/set-state-in-effect': 'warn',
+	'react-hooks/refs': 'warn',
+	'react-hooks/static-components': 'warn',
+	'react-hooks/immutability': 'warn',
+	'react-hooks/purity': 'warn',
 };
 
 const rulesToEnforce = {
@@ -68,21 +73,19 @@ export default defineConfig([
 	{
 		settings: {
 			'import-x/resolver-next': [
-				createTypeScriptImportResolver(/* Your override options go here */),
-				createNodeResolver(/* Your override options go here */),
+				createTypeScriptImportResolver(),
+				createNodeResolver(),
 			],
 		},
 	},
 	{
 		files: ['**/*.ts', '**/*.tsx'],
 
-		languageOptions: {
-			parserOptions: {
-				project: true,
-				tsconfigRootDir: import.meta.dirname,
-			},
-		},
-
+		/**
+		 * Plugins need to be in the same config block for some rules to work, so need to be re-declared even if they are already included in the extended configs. See https://eslint.org/docs/latest/use/configure/configuration-files#use-configurations-from-plugins for more details.
+		 *
+		 * They also must be the exact same version as the one used in the extended configs.
+		 */
 		plugins: {
 			'@typescript-eslint': ts,
 			react: react,

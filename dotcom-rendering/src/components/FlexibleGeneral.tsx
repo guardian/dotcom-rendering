@@ -72,7 +72,7 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 
 		// If the current row has one card, we can add one more standard card to it
 		// We change the row layout to 'twoCard' to indicate that it is now full
-		if (row && row.layout === 'oneCardHalfWidth') {
+		if (row?.layout === 'oneCardHalfWidth') {
 			return [...acc.slice(0, acc.length - 1), addCardToRow(row, card)];
 		}
 		// Otherwise we consider the row to be 'full' and start a new row
