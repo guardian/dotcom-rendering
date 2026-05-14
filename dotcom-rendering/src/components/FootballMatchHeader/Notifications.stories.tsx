@@ -1,14 +1,15 @@
-import { fn, mocked, sb } from 'storybook/test';
 import { gridContainerDecorator } from '../../../.storybook/decorators/gridDecorators';
 import preview from '../../../.storybook/preview';
-import { getMatchNotificationsClient } from '../../lib/bridgetApi';
-// @ts-ignore -- Storybook wants the file extension, TS does not.
-sb.mock(import('../../lib/bridgetApi.ts'), { spy: true });
+import type { MatchNotificationsClient } from '../../lib/bridgetApi';
 import { palette } from '../../palette';
 import { NotificationsToggle } from '../NotificationsToggle.stories';
 import { background } from './colours';
 import { FixtureWeb } from './FootballMatchHeader.stories';
 import { Notifications } from './Notifications';
+
+const mockMatchNotificationsClient = {
+	isAvailable: () => Promise.resolve({ isAvailable: true }),
+} as unknown as MatchNotificationsClient;
 
 const meta = preview.meta({
 	component: Notifications,
@@ -19,13 +20,9 @@ export const Fixture = meta.story({
 		match: FixtureWeb.input.args.initialData.match,
 		edition: 'UK',
 		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 	decorators: [gridContainerDecorator],
-	beforeEach() {
-		mocked(getMatchNotificationsClient).mockReturnValue({
-			isAvailable: fn(() => Promise.resolve({ isAvailable: true })),
-		} as unknown as ReturnType<typeof getMatchNotificationsClient>);
-	},
 	parameters: {
 		colourSchemeBackground: {
 			light: palette(background('Fixture')),
@@ -84,15 +81,14 @@ export const Result = Live.extend({
  * returns `isAvailable: false` so we show a message instead of the toggle.
  */
 export const Unavailable = Fixture.extend({
-	beforeEach() {
-		mocked(getMatchNotificationsClient).mockReturnValue({
-			isAvailable: fn(() =>
+	args: {
+		matchNotificationsClient: {
+			isAvailable: () =>
 				Promise.resolve({
 					isAvailable: false,
 					unavailableReason:
 						'Notifications for this match are on because you follow Arsenal. Turn off anytime in Settings > Notifications',
 				}),
-			),
-		} as unknown as ReturnType<typeof getMatchNotificationsClient>);
+		} as unknown as MatchNotificationsClient,
 	},
 });

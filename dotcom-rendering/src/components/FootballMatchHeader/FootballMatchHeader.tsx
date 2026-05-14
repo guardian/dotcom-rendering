@@ -19,7 +19,10 @@ import useSWR from 'swr';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
-import type { NotificationsClient } from '../../lib/bridgetApi';
+import type {
+	MatchNotificationsClient,
+	NotificationsClient,
+} from '../../lib/bridgetApi';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -54,6 +57,7 @@ type Props = FootballMatchHeaderProps & {
 	getHeaderData: (url: string) => Promise<unknown>;
 	refreshInterval: number;
 	notificationsClient: NotificationsClient;
+	matchNotificationsClient: MatchNotificationsClient;
 };
 
 export const FootballMatchHeader = (props: Props) => {
@@ -129,6 +133,7 @@ export const FootballMatchHeader = (props: Props) => {
 					edition={props.edition}
 					match={match}
 					notificationsClient={props.notificationsClient}
+					matchNotificationsClient={props.matchNotificationsClient}
 				/>
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 				<Tabs {...tabs} />

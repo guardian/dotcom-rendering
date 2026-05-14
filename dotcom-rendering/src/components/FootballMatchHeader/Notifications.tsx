@@ -8,8 +8,10 @@ import {
 import { useEffect, useMemo, useState } from 'react';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
-import type { NotificationsClient } from '../../lib/bridgetApi';
-import { getMatchNotificationsClient } from '../../lib/bridgetApi';
+import type {
+	MatchNotificationsClient,
+	NotificationsClient,
+} from '../../lib/bridgetApi';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -25,6 +27,7 @@ type Props = {
 	match: FootballMatch;
 	edition: EditionId;
 	notificationsClient: NotificationsClient;
+	matchNotificationsClient: MatchNotificationsClient;
 };
 
 export const Notifications = (props: Props) => {
@@ -47,7 +50,7 @@ export const Notifications = (props: Props) => {
 			return;
 		}
 
-		void getMatchNotificationsClient()
+		void props.matchNotificationsClient
 			.isAvailable({
 				homeTeam: {
 					paId: props.match.homeTeam.paID,
@@ -82,6 +85,7 @@ export const Notifications = (props: Props) => {
 		props.match.homeTeam.name,
 		props.match.awayTeam.paID,
 		props.match.awayTeam.name,
+		props.matchNotificationsClient,
 	]);
 
 	if (renderingTarget !== 'Apps' || props.match.kind === 'Result') {

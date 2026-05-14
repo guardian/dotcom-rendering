@@ -243,14 +243,14 @@ export const getNativeABTestingClient = (): AbTesting.Client<void> => {
 	return nativeAbTestingClient;
 };
 
-let matchNotificationsClient: MatchNotifications.Client<void> | undefined =
-	undefined;
-export const getMatchNotificationsClient =
-	(): MatchNotifications.Client<void> => {
-		if (!matchNotificationsClient) {
-			matchNotificationsClient = createAppClient<
-				MatchNotifications.Client<void>
-			>(MatchNotifications.Client, 'buffered', 'compact');
-		}
-		return matchNotificationsClient;
-	};
+export type MatchNotificationsClient = BridgetClient<MatchNotifications.Client>;
+
+let matchNotificationsClient: MatchNotificationsClient | undefined = undefined;
+export const getMatchNotificationsClient = (): MatchNotificationsClient => {
+	if (!matchNotificationsClient) {
+		matchNotificationsClient = createAppClient<
+			MatchNotifications.Client<void>
+		>(MatchNotifications.Client, 'buffered', 'compact');
+	}
+	return matchNotificationsClient;
+};
