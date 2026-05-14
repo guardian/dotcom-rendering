@@ -147,7 +147,7 @@ export const createClientConfig = (build: Build): UserConfig => {
 			emptyOutDir: false,
 			target: getBuildTarget(build),
 			manifest: `manifest.${build}.json`,
-			rollupOptions: {
+			rolldownOptions: {
 				input: isSingleChunk
 					? // Single-chunk builds can only have one entry
 					  // (inlineDynamicImports is incompatible with multiple inputs)
