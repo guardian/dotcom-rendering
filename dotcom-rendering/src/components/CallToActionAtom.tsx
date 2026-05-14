@@ -30,10 +30,9 @@ const blurStyles = css`
 	}
 	mask-image: linear-gradient(
 		to top,
-		${transparentColour(sourcePalette.neutral[10], 0.95)},
-		${transparentColour(sourcePalette.neutral[10], 0.9)},
-		${transparentColour(sourcePalette.neutral[10], 0.8)},
-		${transparentColour(sourcePalette.neutral[10], 0.7)},
+		${transparentColour(sourcePalette.neutral[10], 0.99)},
+		${transparentColour(sourcePalette.neutral[10], 0.96)},
+		${transparentColour(sourcePalette.neutral[10], 0.89)},
 		transparent
 	);
 `;
