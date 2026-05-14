@@ -23,28 +23,6 @@ import { VideoProgressBarInteractive } from './VideoProgressBarInteractive';
 export type SubtitleSize = 'small' | 'medium' | 'large';
 export type ControlsPosition = 'top' | 'bottom';
 
-const playerContainerStyles = css`
-	&:fullscreen {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background-color: ${palette('--video-fullscreen-background')};
-		width: 100vw;
-		height: 100vh;
-
-		/* Override the fixed aspect-ratio + width:100% on the video so it
-		   fits within the screen while preserving its aspect ratio. */
-		video {
-			width: 100%;
-			height: 100%;
-			max-width: 100vw;
-			max-height: 100vh;
-			aspect-ratio: auto;
-			object-fit: contain;
-		}
-	}
-`;
-
 const videoStyles = (aspectRatio: number) => css`
 	position: relative;
 	display: block;
@@ -163,7 +141,6 @@ export type Props = {
 	isInteractive: boolean;
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
-	playerContainerRef: React.RefObject<HTMLDivElement>;
 	isWebKitFullscreen: boolean;
 };
 
@@ -216,7 +193,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			iconsPosition,
 			subtitlesPosition,
-			playerContainerRef,
 			isWebKitFullscreen,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
@@ -231,8 +207,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const showIcons = canShowIcons && currentRefExists;
 
 		return (
-			<div ref={playerContainerRef} css={playerContainerStyles}>
-				{}
+			<>
 				<video
 					id={videoId}
 					css={[
@@ -345,7 +320,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						</div>
 					)}
 				</div>
-			</div>
+			</>
 		);
 	},
 );
