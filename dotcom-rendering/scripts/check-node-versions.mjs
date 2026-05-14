@@ -46,7 +46,7 @@ const requiredNodeVersionMatches =
 		},
 		{
 			filepath: 'package.json',
-			pattern: /^\t+"@types\/node"\: "(.+)",$/m,
+			pattern: /^\t+"@types\/node": "(.+)",$/m,
 			/*
 			Definitely Typed packages only match the major and minor
 			versions of the corresponding library/node release.

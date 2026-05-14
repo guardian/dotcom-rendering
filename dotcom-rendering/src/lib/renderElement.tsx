@@ -1114,6 +1114,7 @@ type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
 type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
 
 export const getNestedArticleElement =
+	// eslint-disable-next-line react/display-name -- this is not a React component, but a function that returns one
 	(articleProps: ArticleLevelProps) => (elementProps: ElementLevelProps) => (
 		<RenderArticleElement {...articleProps} {...elementProps} />
 	);

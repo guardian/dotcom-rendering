@@ -1,9 +1,11 @@
 import guardian from '@guardian/eslint-config';
 import ts from '@typescript-eslint/eslint-plugin';
 import { defineConfig, globalIgnores } from 'eslint/config';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import customElements from 'eslint-plugin-custom-elements';
+import { createNodeResolver } from 'eslint-plugin-import-x';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
-import jsxExpressions from 'eslint-plugin-jsx-expressions';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import react from 'eslint-plugin-react';
 import hooks from 'eslint-plugin-react-hooks';
 import ssrFriendly from 'eslint-plugin-ssr-friendly';
@@ -44,6 +46,9 @@ const rulesToReview = {
 	'no-redeclare': 'warn',
 	'react/no-unescaped-entities': 'warn',
 	'@typescript-eslint/no-unsafe-member-access': 'warn',
+	'@typescript-eslint/prefer-nullish-coalescing': 'warn',
+	'@typescript-eslint/strict-boolean-expressions': 'warn',
+	'react/display-name': 'warn',
 };
 
 const rulesToEnforce = {
@@ -59,6 +64,15 @@ export default defineConfig([
 	...guardian.configs.jest,
 	...guardian.configs.react,
 	...guardian.configs.storybook,
+	eslintPluginPrettierRecommended,
+	{
+		settings: {
+			'import-x/resolver-next': [
+				createTypeScriptImportResolver(/* Your override options go here */),
+				createNodeResolver(/* Your override options go here */),
+			],
+		},
+	},
 	{
 		files: ['**/*.ts', '**/*.tsx'],
 
@@ -238,16 +252,6 @@ export default defineConfig([
 
 		rules: {
 			'@typescript-eslint/no-restricted-types': [
-				'warn',
-				{
-					types: {
-						'JSX.Element': 'Prefer type inference',
-						'EmotionJSX.Element': 'Prefer type inference',
-					},
-				},
-			],
-
-			'@typescript-eslint/no-restricted-types': [
 				'error',
 				{
 					types: {
@@ -265,17 +269,24 @@ export default defineConfig([
 		},
 	},
 	{
-		files: ['**/**.stories.tsx'],
+		files: ['**/**.stories.tsx', '**/**.stories.jsx'],
 
 		rules: {
 			'import/prefer-default-export': 'off',
+			'import/no-default-export': 'off',
 		},
 	},
 	{
-		files: ['**/**.config.ts', '**/webpack.config.*', '**/webpack/**/*.*'],
+		files: [
+			'**/**.config.ts',
+			'**/webpack.config.*',
+			'**/webpack/**/*.*',
+			'**/stylelint.config.mjs',
+		],
 
 		rules: {
 			'import/prefer-default-export': 'off',
+			'import/no-default-export': 'off',
 		},
 	},
 	{
@@ -289,9 +300,11 @@ export default defineConfig([
 		'**/node_modules',
 		'**/.eslintrc.js',
 		'**/storybook-static/',
+		'**/.storybook/',
 		'**/dist',
 		'**/test-results/',
 		'**/playwright-report/',
 		'playwright/.cache/',
+		'webpack/.swcrc.json',
 	]),
 ]);

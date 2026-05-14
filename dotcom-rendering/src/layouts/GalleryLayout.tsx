@@ -545,6 +545,8 @@ const Body = (props: {
 								key={element.adPosition}
 							/>
 						);
+					default:
+						return null;
 				}
 			})}
 	</>

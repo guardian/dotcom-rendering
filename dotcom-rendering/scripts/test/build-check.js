@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 // This file contains some checks that the building and bundling
 // is working correctly
 // It checks the following:

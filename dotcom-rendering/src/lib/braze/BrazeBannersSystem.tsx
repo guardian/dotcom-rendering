@@ -1198,6 +1198,7 @@ export const BrazeBannersSystemDisplay = ({
 										<path
 											d="m1 7.224 10.498 10.498h1.004L23 7.224l-.98-.954L12 14.708 1.98 6.27z"
 											transform="scale(1 -1) translate(0 -3)"
+											// eslint-disable-next-line react/no-unknown-property -- it's a valid SVG attribute
 											transform-origin="center"
 											css={css`
 												fill: ${wrapperModeForegroundColor};

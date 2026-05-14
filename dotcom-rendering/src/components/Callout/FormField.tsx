@@ -121,6 +121,7 @@ export const FormField = ({
 					onChange={(e): void =>
 						setFieldInFormData(formField.id, e.target.value)
 					}
+					// eslint-disable-next-line react/no-children-prop -- the Select component requires options to be passed as children
 					children={[
 						{
 							value: 'default',

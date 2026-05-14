@@ -28,6 +28,7 @@ export const Select = ({
 			})
 		}
 		optional={!formField.required}
+		// eslint-disable-next-line react/no-children-prop -- the Select component requires options to be passed as children
 		children={formField.options.map((option, index) => (
 			<option key={index} value={option.value}>
 				{option.value}

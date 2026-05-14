@@ -132,6 +132,7 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
 					// we use custom-guardian to find 1st field for accessibility
 					// ideally we should useRef but need to wait for Source to
 					// support React references
+					// eslint-disable-next-line react/no-unknown-property -- see above comment
 					custom-guardian="callout-form-field"
 					key={index}
 				>

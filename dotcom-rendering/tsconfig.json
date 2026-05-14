@@ -4,6 +4,7 @@
 		"allowJs": true,
 		"baseUrl": "./",
 		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true,
 		"jsx": "react-jsx",
 		"jsxImportSource": "@emotion/react",
 		"lib": ["esnext", "es2015", "dom"],

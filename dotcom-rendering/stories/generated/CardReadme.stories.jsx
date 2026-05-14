@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import preview from '../../.storybook/preview';
+import preview from '../../.storybook/preview.ts';
 
 const ReadMe = () => (
 	<section

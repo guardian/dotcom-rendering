@@ -83,6 +83,7 @@ style.appendChild(document.createTextNode(css));
 		serverSideABTests: {},
 	},
 	ophan: {
+		// eslint-disable-next-line no-empty-pattern -- just a mock
 		record: ({}) => {},
 		pageViewId: 'storybook-does-not-have-a-page-view-id',
 	},
