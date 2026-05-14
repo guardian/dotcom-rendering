@@ -254,7 +254,7 @@ export const RecipeCardInline = ({
 			{/* info: title · id */}
 			<div css={productInfoContainer}>
 				{/* title */}
-				{title && (
+				{!!title && (
 					<div
 						css={[
 							primaryHeading,
@@ -266,7 +266,7 @@ export const RecipeCardInline = ({
 				)}
 
 				{/* id */}
-				{feastId && (
+				{!!feastId && (
 					<div
 						css={[
 							productNameStyle,
@@ -280,7 +280,7 @@ export const RecipeCardInline = ({
 
 			{/* buttons */}
 			<div css={buttonWrapper}>
-				{feastId && (
+				{!!feastId && (
 					<LinkButton
 						priority="primary"
 						size="small"
@@ -323,7 +323,7 @@ export const RecipeCardInline = ({
 					]}
 				>
 					{/* description */}
-					{recipe.description && (
+					{!!recipe.description && (
 						<p css={descriptionStyles}>{recipe.description}</p>
 					)}
 				</div>

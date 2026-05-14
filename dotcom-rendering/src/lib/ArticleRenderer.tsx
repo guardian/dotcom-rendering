@@ -7,11 +7,7 @@ import {
 } from '../components/RecipeCardInline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
-import type {
-	FEElement,
-	RecipeBlockElement,
-	SubheadingBlockElement,
-} from '../types/content';
+import type { FEElement, RecipeBlockElement } from '../types/content';
 import type { TagType } from '../types/tag';
 import { spacefinderAdStyles } from './adStyles';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
@@ -135,15 +131,13 @@ export const ArticleRenderer = ({
 		const sections: RecipeSection[] = [];
 		let current: RecipeSection | null = null;
 
-		renderedElements.forEach((el, i) => {
+		for (const [i, el] of renderedElements.entries()) {
 			const data = elements[i];
 			if (
 				data?._type ===
 				'model.dotcomrendering.pageElements.SubheadingBlockElement'
 			) {
-				const recipeName = stripHtmlTags(
-					(data as SubheadingBlockElement).html,
-				);
+				const recipeName = stripHtmlTags(data.html);
 				current = {
 					subheadingEl: el,
 					recipeName,
@@ -157,18 +151,18 @@ export const ArticleRenderer = ({
 					'model.dotcomrendering.pageElements.RecipeBlockElement'
 				) {
 					// Store structured recipe data for the nudge; don't render as a body element.
-					current.recipe = data as RecipeBlockElement;
+					current.recipe = data;
 				} else {
 					current.contentEls.push(el);
 				}
 			} else {
 				preSection.push(el);
 			}
-		});
+		}
 
 		const result: (JSX.Element | null | undefined)[] = [...preSection];
 
-		sections.forEach((section) => {
+		for (const section of sections) {
 			result.push(
 				<Fragment key={`recipe-section-${section.index}`}>
 					{section.subheadingEl}
@@ -181,7 +175,7 @@ export const ArticleRenderer = ({
 					{section.contentEls}
 				</Fragment>,
 			);
-		});
+		}
 
 		return result;
 	})();
