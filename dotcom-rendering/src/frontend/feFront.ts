@@ -99,6 +99,7 @@ export interface FEMediaAsset {
 		width: number;
 		height: number;
 	};
+	hasAudio?: boolean;
 }
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L158-L169 */

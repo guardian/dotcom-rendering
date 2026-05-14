@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { getSkimlinksAccountId, isSkimlink } from '../lib/affiliateLinksUtils';
+import { buildXcustParamForAffiliateLink } from '../lib/affiliateLinksUtils';
+import { safeParseURL } from '../lib/parse';
 import { useBetaAB } from '../lib/useAB';
 
 /**
@@ -16,7 +17,7 @@ import { useBetaAB } from '../lib/useAB';
  *
  * ## Why does this need to be an Island?
  *
- * Code needs to be client side to get the referrer and AB test participation
+ * Code needs to be client side to get the referrer
  *
  * ---
  *
@@ -45,15 +46,8 @@ const utmKeys = [
 export const EnhanceAffiliateLinks = () => {
 	const abTests = useBetaAB();
 
-	// Get users server/client-side AB test participations
+	// Get users server & client-side AB test participations
 	const abTestParticipations = abTests?.getParticipations();
-
-	// Reduce abTestParticipations to a comma-separated string
-	const abTestString = abTestParticipations
-		? Object.entries(abTestParticipations)
-				.map(([key, value]) => `${key}:${value}`)
-				.join(',')
-		: '';
 
 	useEffect(() => {
 		const allLinksOnPage = [...document.querySelectorAll('a')];
@@ -77,28 +71,38 @@ export const EnhanceAffiliateLinks = () => {
 				: utmParamsFromReferrer && utmParamsFromReferrer.trim() !== ''
 				? utmParamsFromReferrer
 				: '';
+		const referrerDomain =
+			document.referrer === ''
+				? 'none'
+				: new URL(document.referrer).hostname;
 
 		for (const link of allLinksOnPage) {
-			if (isSkimlink(link.href)) {
-				const referrerDomain =
-					document.referrer === ''
-						? 'none'
-						: new URL(document.referrer).hostname;
-
-				const skimlinksAccountId = getSkimlinksAccountId(link.href);
-				const xcustComponentId = link.getAttribute(
-					'data-x-cust-component-id',
+			const parsedLinkUrlResult = safeParseURL(link.href);
+			if (!parsedLinkUrlResult.ok) {
+				window.guardian.modules.sentry.reportError(
+					new Error(
+						`Invalid URL in enhance affiliate link island: ${link.href}`,
+					),
+					'enhance-affiliate-links',
 				);
-				// Skimlinks treats xcust as one long string, so we use | to separate values
-				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}${
-					abTestString ? `|abTestParticipations|${abTestString}` : ''
-				}${utmParamsString ? `|${utmParamsString}` : ''}${
-					xcustComponentId ? `|componentId|${xcustComponentId}` : ''
-				}`;
-				link.href = `${link.href}&xcust=${encodeURIComponent(
-					xcustValue,
-				)}`;
+				continue;
 			}
+
+			const parsedLinkUrl = parsedLinkUrlResult.value;
+			if (parsedLinkUrl.host !== 'go.skimresources.com') {
+				continue;
+			}
+
+			const xcustParam = buildXcustParamForAffiliateLink({
+				url: parsedLinkUrl,
+				abTestParticipations,
+				utmParamsString,
+				referrerDomain,
+				xcustComponentId: link.getAttribute('data-x-cust-component-id'),
+			});
+
+			parsedLinkUrl.searchParams.set('xcust', xcustParam);
+			link.href = parsedLinkUrl.toString();
 		}
 	});
 

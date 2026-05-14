@@ -3,6 +3,7 @@ import preview from '../../../.storybook/preview';
 import { palette } from '../../palette';
 import { NotificationsToggle } from '../NotificationsToggle.stories';
 import { background } from './colours';
+import { FixtureWeb } from './FootballMatchHeader.stories';
 import { Notifications } from './Notifications';
 
 const meta = preview.meta({
@@ -11,9 +12,8 @@ const meta = preview.meta({
 
 export const Fixture = meta.story({
 	args: {
-		matchKind: 'Fixture',
-		displayName: 'Wolverhampton Wanderers vs Belgium (2026-03-20 GMT)',
-		id: 'match-id',
+		match: FixtureWeb.input.args.initialData.match,
+		edition: 'UK',
 		notificationsClient: NotificationsToggle.args.notificationsClient,
 	},
 	decorators: [gridContainerDecorator],
@@ -30,7 +30,23 @@ export const Fixture = meta.story({
 
 export const Live = Fixture.extend({
 	args: {
-		matchKind: 'Live',
+		edition: 'AU',
+		match: {
+			...Fixture.input.args.match,
+			kind: 'Live',
+			status: 'HT',
+			homeTeam: {
+				...Fixture.input.args.match.homeTeam,
+				score: 1,
+				scorers: [],
+			},
+			awayTeam: {
+				...Fixture.input.args.match.awayTeam,
+				score: 0,
+				scorers: [],
+			},
+			comment: undefined,
+		},
 	},
 	parameters: {
 		colourSchemeBackground: {
@@ -44,8 +60,12 @@ export const Live = Fixture.extend({
  * This should be blank. You can't sign up for notifications once a match is
  * over.
  */
-export const Result = Fixture.extend({
+export const Result = Live.extend({
 	args: {
-		matchKind: 'Result',
+		edition: 'US',
+		match: {
+			...Live.input.args.match,
+			kind: 'Result',
+		},
 	},
 });

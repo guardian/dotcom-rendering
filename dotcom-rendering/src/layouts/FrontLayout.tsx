@@ -232,6 +232,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}
 					pageId={pageId}
+					tagIds={front.trendingTopics?.map(
+						(tag) => tag.properties.id,
+					)}
+					sectionId={front.config.section}
+					contentType={front.config.contentType}
 				/>
 
 				{isPaidContent && (

@@ -5164,7 +5164,7 @@ const privacyTextSupportingLight: PaletteFunction = () =>
 const privacyTextSupportingSubduedLight: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 const privacyTextSupportingSubduedDark: PaletteFunction = () =>
-	sourcePalette.neutral[60];
+	sourcePalette.neutral[73];
 
 const productCarouselCardBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
@@ -6300,12 +6300,6 @@ const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
-
-const storylinesBackground: PaletteFunction = () => sourcePalette.neutral[93];
-const storylinesBorder: PaletteFunction = () => sourcePalette.neutral[86];
-const storylinesTitles: PaletteFunction = () => sourcePalette.brand[400];
-const storylinesActiveTab: PaletteFunction = () => sourcePalette.neutral[60];
-const storylinesInactiveTab: PaletteFunction = () => sourcePalette.neutral[38];
 
 // ----- Palette ----- //
 
@@ -7577,18 +7571,6 @@ const paletteColours = {
 		light: multiBylineNonLinkedTextLight,
 		dark: multiBylineNonLinkedTextDark,
 	},
-	'--narrow-play-icon-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--narrow-play-icon-border': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
-	'--narrow-play-icon-fill': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
-	},
 	'--nav-reader-revenue-link-text': {
 		light: navReaderRevenueLinkText,
 		dark: navReaderRevenueLinkText,
@@ -7604,6 +7586,62 @@ const paletteColours = {
 	'--nav-search-bar-text': {
 		light: navSearchBarText,
 		dark: navSearchBarText,
+	},
+	'--newsletter-card-background': {
+		light: () => '#F3F7FF',
+		dark: () => sourcePalette.brand[100],
+	},
+	'--newsletter-card-description': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--newsletter-card-divider': {
+		light: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-card-frequency-tag': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[73],
+	},
+	'--newsletter-card-title': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-preview-button-border': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-preview-button-hover': {
+		light: () => sourcePalette.brand[800],
+		dark: () => sourcePalette.brand[300],
+	},
+	'--newsletter-preview-button-text': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-input-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[300],
+	},
+	'--newsletter-signup-input-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-submit-background': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-submit-background-hover': {
+		light: () => sourcePalette.brand[600],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--newsletter-signup-submit-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[400],
+	},
+	'--newsletter-signup-toggle-text': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[73],
 	},
 	'--numbered-list-heading': {
 		light: numberedListHeadingLight,
@@ -8097,26 +8135,6 @@ const paletteColours = {
 		light: starRatingFillColourLight,
 		dark: starRatingFillColourDark,
 	},
-	'--storylines-active-tab': {
-		light: storylinesActiveTab,
-		dark: storylinesActiveTab,
-	},
-	'--storylines-background': {
-		light: storylinesBackground,
-		dark: storylinesBackground,
-	},
-	'--storylines-border': {
-		light: storylinesBorder,
-		dark: storylinesBorder,
-	},
-	'--storylines-inactive-tab': {
-		light: storylinesInactiveTab,
-		dark: storylinesInactiveTab,
-	},
-	'--storylines-titles': {
-		light: storylinesTitles,
-		dark: storylinesTitles,
-	},
 	'--straight-lines': {
 		light: straightLinesLight,
 		dark: straightLinesDark,
@@ -8377,6 +8395,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[93],
 	},
+	'--video-fullscreen-background': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[0],
+	},
 	'--video-icon': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
@@ -8392,6 +8414,14 @@ const paletteColours = {
 	'--video-progress-bar-background': {
 		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
 		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-progress-bar-interactive-background': {
+		light: () => transparentColour(sourcePalette.neutral[100], 0.5),
+		dark: () => transparentColour(sourcePalette.neutral[100], 0.5),
+	},
+	'--video-progress-bar-interactive-value': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--video-progress-bar-value': {
 		light: () => sourcePalette.neutral[86],

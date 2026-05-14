@@ -1,12 +1,15 @@
 import type { FEMediaAsset } from '../frontend/feFront';
 import type { VideoAssets } from '../types/content';
+import type { Source } from './video';
 import {
+	convertCurrentTimeToProgressPercentage,
 	convertFEMediaAssetsToVideoAssets,
+	convertProgressPercentageToCurrentTime,
 	extractValidSourcesFromAssets,
 	findOptimisedSourcePerMimeType,
+	formatTimeForDisplay,
 	getAspectRatioFromSources,
 } from './video';
-import type { Source } from './video';
 
 const mp4Asset480w: VideoAssets = {
 	url: 'https://guim-example.co.uk/atomID-1_480w.mp4',
@@ -16,6 +19,7 @@ const mp4Asset480w: VideoAssets = {
 		width: 480,
 	},
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 
 const mp4Asset720h: VideoAssets = {
@@ -26,6 +30,7 @@ const mp4Asset720h: VideoAssets = {
 		width: 900,
 	},
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 
 const m3u8Asset720h: VideoAssets = {
@@ -36,6 +41,7 @@ const m3u8Asset720h: VideoAssets = {
 		width: 900,
 	},
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 const unsupportedAsset: VideoAssets = {
 	url: 'https://guim-example.co.uk/atomID-1.mov',
@@ -45,6 +51,7 @@ const unsupportedAsset: VideoAssets = {
 		width: 900,
 	},
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 
 const mp4Src480w: Source = {
@@ -53,6 +60,7 @@ const mp4Src480w: Source = {
 	height: 384,
 	width: 480,
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 const mp4Src720h: Source = {
 	src: 'https://guim-example.co.uk/atomID-1_720h.mp4',
@@ -60,6 +68,7 @@ const mp4Src720h: Source = {
 	height: 720,
 	width: 900,
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 const m3u8Src480w: Source = {
 	src: 'https://guim-example.co.uk/atomID-1.m3u8',
@@ -67,6 +76,7 @@ const m3u8Src480w: Source = {
 	height: 384,
 	width: 480,
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 const m3u8Src720h: Source = {
 	src: 'https://guim-example.co.uk/atomID-1.m3u8',
@@ -74,6 +84,7 @@ const m3u8Src720h: Source = {
 	height: 720,
 	width: 900,
 	aspectRatio: '5:4',
+	hasAudio: true,
 };
 
 describe('video', () => {
@@ -114,6 +125,7 @@ describe('video', () => {
 				height: 384,
 				width: 480,
 			},
+			hasAudio: true,
 		};
 		const feMediaAsset720h: FEMediaAsset = {
 			id: 'https://guim-example.co.uk/atomID-1_720h.mp4',
@@ -125,6 +137,7 @@ describe('video', () => {
 				height: 720,
 				width: 900,
 			},
+			hasAudio: true,
 		};
 
 		it('should convert FE media assets to video assets', () => {
@@ -141,6 +154,7 @@ describe('video', () => {
 						height: 384,
 						width: 480,
 					},
+					hasAudio: true,
 				},
 				{
 					url: 'https://guim-example.co.uk/atomID-1_720h.mp4',
@@ -149,6 +163,7 @@ describe('video', () => {
 						height: 720,
 						width: 900,
 					},
+					hasAudio: true,
 				},
 			]);
 		});
@@ -165,6 +180,7 @@ describe('video', () => {
 				height: 720,
 				width: 480,
 				aspectRatio: '5:3',
+				hasAudio: true,
 			};
 			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 3);
 		});
@@ -175,6 +191,7 @@ describe('video', () => {
 				height: 720,
 				width: 480,
 				aspectRatio: undefined,
+				hasAudio: true,
 			};
 			expect(getAspectRatioFromSources([testSource])).toEqual(2 / 3);
 		});
@@ -185,6 +202,7 @@ describe('video', () => {
 				height: 720,
 				width: 0,
 				aspectRatio: undefined,
+				hasAudio: true,
 			};
 			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 4);
 		});
@@ -195,6 +213,7 @@ describe('video', () => {
 				height: 0,
 				width: 480,
 				aspectRatio: undefined,
+				hasAudio: true,
 			};
 			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 4);
 		});
@@ -262,5 +281,72 @@ describe('video', () => {
 
 			expect(sources).toEqual([mp4Src720h, m3u8Src720h]);
 		});
+	});
+
+	describe('convertCurrentTimeToProgressPercentage', () => {
+		it.each([
+			{ currentTime: 0, duration: 23, expectedPercentage: 0 },
+			{ currentTime: 24, duration: 32, expectedPercentage: 75 },
+			{ currentTime: 56, duration: 56, expectedPercentage: 100 },
+			{ currentTime: 12, duration: 11, expectedPercentage: 100 },
+			{ currentTime: -5, duration: 10, expectedPercentage: null },
+			{ currentTime: 5, duration: -10, expectedPercentage: null },
+		])(
+			'should return the correct progress percentage based on the current time and duration',
+			({ currentTime, duration, expectedPercentage }) => {
+				expect(
+					convertCurrentTimeToProgressPercentage(
+						currentTime,
+						duration,
+					),
+				).toEqual(expectedPercentage);
+			},
+		);
+	});
+
+	describe('convertProgressPercentageToCurrentTime', () => {
+		it.each([
+			{ progressPercentage: 0, duration: 23, expectedCurrentTime: 0 },
+			{ progressPercentage: 75, duration: 32, expectedCurrentTime: 24 },
+			{ progressPercentage: 100, duration: 56, expectedCurrentTime: 56 },
+			{ progressPercentage: 103, duration: 11, expectedCurrentTime: 11 },
+			{ progressPercentage: 10, duration: 0, expectedCurrentTime: null },
+			{ progressPercentage: 8, duration: -10, expectedCurrentTime: null },
+			{
+				progressPercentage: -0.1244235,
+				duration: 10,
+				expectedCurrentTime: 0,
+			},
+		])(
+			'should return the correct current time based on the progress percentage and duration',
+			({ progressPercentage, duration, expectedCurrentTime }) => {
+				expect(
+					convertProgressPercentageToCurrentTime(
+						progressPercentage,
+						duration,
+					),
+				).toEqual(expectedCurrentTime);
+			},
+		);
+	});
+
+	describe('formatTimeForDisplay', () => {
+		it.each([
+			{ timeInSeconds: -1.24, expectedFormattedTime: '0:00' },
+			{ timeInSeconds: 0, expectedFormattedTime: '0:00' },
+			{ timeInSeconds: 59, expectedFormattedTime: '0:59' },
+			{ timeInSeconds: 60, expectedFormattedTime: '1:00' },
+			{ timeInSeconds: 61, expectedFormattedTime: '1:01' },
+			{ timeInSeconds: 92.5, expectedFormattedTime: '1:32' },
+			{ timeInSeconds: 1000, expectedFormattedTime: '16:40' },
+			{ timeInSeconds: 10000, expectedFormattedTime: '166:40' },
+		])(
+			'should return the correct formatted time based on the time in seconds',
+			({ timeInSeconds, expectedFormattedTime }) => {
+				expect(formatTimeForDisplay(timeInSeconds)).toEqual(
+					expectedFormattedTime,
+				);
+			},
+		);
 	});
 });

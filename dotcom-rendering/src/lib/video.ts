@@ -6,9 +6,12 @@ export type CustomPlayEventDetail = { uniqueId: string };
 /** We expect all videos to include dimensions since the field was added to FEMediaAsset */
 export const DEFAULT_ASPECT_RATIO = 5 / 4;
 
+export const DEFAULT_IMAGE_ASPECT_RATIO = '5:4';
+
 export const customSelfHostedVideoPlayAudioEventName =
 	'self-hosted-video:play-with-audio';
 export const customYoutubePlayEventName = 'youtube-video:play';
+export const customYoutubePauseEventName = 'youtube-video:pause';
 
 export type Source = {
 	src: string;
@@ -16,6 +19,7 @@ export type Source = {
 	height: number;
 	width: number;
 	aspectRatio?: string;
+	hasAudio?: boolean;
 };
 
 /**
@@ -54,6 +58,8 @@ export const extractValidSourcesFromAssets = (
 					height: asset.dimensions?.height ?? 0,
 					width: asset.dimensions?.width ?? 0,
 					aspectRatio: asset.aspectRatio,
+					/* we default to true for videos that were transcoded prior to audio detection */
+					hasAudio: asset.hasAudio ?? true,
 				})),
 			);
 		}
@@ -63,10 +69,11 @@ export const extractValidSourcesFromAssets = (
 export const convertFEMediaAssetsToVideoAssets = (
 	assets: FEMediaAsset[],
 ): VideoAssets[] =>
-	assets.map(({ id, mimeType, dimensions }) => ({
+	assets.map(({ id, mimeType, dimensions, hasAudio }) => ({
 		url: id,
 		mimeType,
 		dimensions,
+		hasAudio,
 	}));
 
 /**
@@ -140,4 +147,33 @@ export const findOptimisedSourcePerMimeType = (
 		if (optimisedSource) acc.push(optimisedSource);
 		return acc;
 	}, []);
+};
+
+export const convertCurrentTimeToProgressPercentage = (
+	currentTime: number,
+	duration: number,
+): number | null => {
+	if (currentTime < 0 || duration <= 0) return null;
+
+	return Math.min((currentTime * 100) / duration, 100);
+};
+
+export const convertProgressPercentageToCurrentTime = (
+	progressPercentage: number,
+	duration: number,
+): number | null => {
+	if (duration <= 0) return null;
+
+	const clampedPercentage = Math.max(0, Math.min(progressPercentage, 100));
+
+	return (clampedPercentage / 100) * duration;
+};
+
+export const formatTimeForDisplay = (timeInSeconds: number): string => {
+	const clampedTimeInSeconds = Math.max(0, timeInSeconds);
+
+	const minutes = Math.floor(clampedTimeInSeconds / 60);
+	const seconds = Math.floor(clampedTimeInSeconds % 60);
+
+	return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 };

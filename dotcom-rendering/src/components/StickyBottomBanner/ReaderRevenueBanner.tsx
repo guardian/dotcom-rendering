@@ -299,6 +299,7 @@ export const canShowRRBanner: CanShowFunctionType<
 		fetchEmail,
 		submitComponentEvent: (componentEvent: ComponentEvent) =>
 			submitComponentEvent(componentEvent, renderingTarget),
+		contributionsServiceUrl,
 	};
 
 	return {

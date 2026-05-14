@@ -130,6 +130,8 @@ export const SportDataPageLayout = (
 						showSlimNav={false}
 						hasPageSkin={sportData.config.hasPageSkin}
 						pageId={sportData.config.pageId}
+						sectionId={sportData.config.section}
+						contentType={sportData.config.contentType}
 					/>
 				</div>
 			)}

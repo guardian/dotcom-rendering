@@ -11,7 +11,6 @@ import type {
 	ArticleCountType,
 	BannerChannel,
 	ConfigurableDesign,
-	SelectedAmountsVariant,
 	SeparateArticleCount,
 	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types';
@@ -77,7 +76,6 @@ export interface BannerRenderProps {
 	countType?: ArticleCountType;
 	separateArticleCount?: boolean;
 	separateArticleCountSettings?: SeparateArticleCount;
-	choiceCardAmounts?: SelectedAmountsVariant;
 	choiceCardsSettings?: ChoiceCardsSettings;
 	tracking: Tracking;
 	submitComponentEvent?: (componentEvent: ComponentEvent) => Promise<void>;

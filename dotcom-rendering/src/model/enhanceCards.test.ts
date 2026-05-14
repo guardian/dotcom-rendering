@@ -19,6 +19,7 @@ describe('Enhance Cards', () => {
 			height: 400,
 			width: 500,
 		},
+		hasAudio: true,
 	};
 	const largeMp4Asset: FEMediaAsset = {
 		...testMp4Asset,
@@ -27,6 +28,7 @@ describe('Enhance Cards', () => {
 			height: 900,
 			width: 720,
 		},
+		hasAudio: true,
 	};
 	const testM3u8Asset: FEMediaAsset = {
 		id: 'https://guim-example.co.uk/atomID-1.m3u8',
@@ -38,6 +40,7 @@ describe('Enhance Cards', () => {
 			height: 400,
 			width: 500,
 		},
+		hasAudio: true,
 	};
 	const largeM3u8Asset: FEMediaAsset = {
 		...testM3u8Asset,
@@ -46,6 +49,7 @@ describe('Enhance Cards', () => {
 			height: 900,
 			width: 720,
 		},
+		hasAudio: true,
 	};
 	const testSubtitleAsset: FEMediaAsset = {
 		id: 'https://guim-example.co.uk/atomID-1.vtt',
@@ -88,7 +92,10 @@ describe('Enhance Cards', () => {
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: '',
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: undefined,
@@ -98,6 +105,7 @@ describe('Enhance Cards', () => {
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 				],
 			});
@@ -179,34 +187,41 @@ describe('Enhance Cards', () => {
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: '',
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: undefined,
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
 				sources: [
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-2.mp4',
 						height: 900,
 						width: 720,
+						hasAudio: true,
 					},
 					{
 						mimeType: 'application/x-mpegURL',
 						src: 'https://guim-example.co.uk/atomID-1.m3u8',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 					{
 						mimeType: 'application/x-mpegURL',
 						src: 'https://guim-example.co.uk/atomID-2.m3u8',
 						height: 900,
 						width: 720,
+						hasAudio: true,
 					},
 				],
 			});
@@ -226,7 +241,10 @@ describe('Enhance Cards', () => {
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: '',
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: 'https://guim-example.co.uk/atomID-1.vtt',
@@ -236,12 +254,14 @@ describe('Enhance Cards', () => {
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 					{
 						mimeType: 'application/x-mpegURL',
 						src: 'https://guim-example.co.uk/atomID-1.m3u8',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 				],
 			});
@@ -278,6 +298,10 @@ describe('Enhance Cards', () => {
 				sources: [],
 				aspectRatio: 5 / 4,
 				duration: 151,
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
 			};
 
 			expect(getMediaMetadata(testSelfHostedMainMedia)).toEqual({
@@ -426,13 +450,17 @@ describe('Enhance Cards', () => {
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: 'https://guim-example.co.uk/video-image',
+				image: {
+					src: 'https://guim-example.co.uk/video-image',
+					aspectRatio: '5:4',
+				},
 				sources: [
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 				],
 				videoStyle: 'Loop',
@@ -472,10 +500,15 @@ describe('Enhance Cards', () => {
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 				],
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
+				image: {
+					src: undefined,
+					aspectRatio: '5:4',
+				},
 			});
 		});
 
@@ -491,13 +524,17 @@ describe('Enhance Cards', () => {
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: undefined,
+				image: {
+					src: undefined,
+					aspectRatio: '5:4',
+				},
 				sources: [
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 				],
 				subtitleSource: undefined,
