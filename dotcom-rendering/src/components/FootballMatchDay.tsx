@@ -4,6 +4,7 @@ import {
 	from,
 	headlineMedium14,
 	neutral,
+	space,
 	sport,
 	textSans12,
 	textSans15,
@@ -75,7 +76,7 @@ const fixtureLinkCss = css`
 	display: inline-flex;
 	align-items: center;
 	float: right;
-	margin-top: 12px;
+	margin-top: ${space[3]}px;
 	color: inherit;
 	text-decoration: none;
 	&:hover {
@@ -149,7 +150,7 @@ const wrapperCss = css`
 		'home    score   away'
 		'comment comment comment';
 	align-items: center;
-	padding: 6px;
+	padding: 6px ${space[2]}px;
 	color: inherit;
 	text-decoration: none;
 
@@ -211,7 +212,7 @@ const statusCss = css`
 	grid-area: status;
 	display: flex;
 	align-items: center;
-	gap: 4px;
+	gap: ${space[1]}px;
 	${from.phablet} {
 		grid-area: home;
 	}
@@ -253,14 +254,14 @@ const teamCss = css`
 	justify-self: end;
 	display: flex;
 	align-items: center;
-	gap: 4px;
+	gap: ${space[1]}px;
 `;
 
 const awayTeamCss = css`
 	grid-area: away;
 	flex-direction: row-reverse;
 	justify-self: start;
-	padding-right: 16px;
+	padding-right: ${space[4]}px;
 `;
 
 const Score = ({ match }: { match: FootballMatch }) => {
@@ -283,9 +284,9 @@ const Score = ({ match }: { match: FootballMatch }) => {
 
 const scoreCss = css`
 	grid-area: score;
-	min-width: 36px;
+	min-width: ${space[9]}px;
 	text-align: center;
-	padding: 4px;
+	padding: ${space[1]}px;
 `;
 
 const Crest = ({ teamId }: { teamId: string }) => (
@@ -295,8 +296,8 @@ const Crest = ({ teamId }: { teamId: string }) => (
 			align-items: center;
 			justify-content: center;
 			flex-shrink: 0;
-			width: 24px;
-			height: 24px;
+			width: ${space[6]}px;
+			height: ${space[6]}px;
 			padding: 2px;
 			border-radius: 100%;
 			background-color: ${neutral[100]};
