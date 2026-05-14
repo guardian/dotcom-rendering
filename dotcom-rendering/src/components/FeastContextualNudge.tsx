@@ -11,6 +11,8 @@ import {
 	textSansBold20,
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
+import { useEffect, useState } from 'react';
+import { useConfig } from './ConfigContext';
 import type { RecipeBlockElement } from '../types/content';
 
 // ── Utility helpers ───────────────────────────────────────────────────────────
@@ -22,12 +24,30 @@ export const stripHtmlTags = (html: string): string =>
 
 const FEAST_BG = '#f7efe9';
 const FEAST_BG_DARK = '#1a1a0a';
+const FEAST_TEXT = sourcePalette.neutral[0];
 const FEAST_TEXT_DARK = sourcePalette.neutral[93];
+const FEAST_SUBTEXT = sourcePalette.neutral[46];
 const FEAST_SUBTEXT_DARK = sourcePalette.neutral[60];
 const FEAST_GREEN = '#68773c';
 const FEAST_GREEN_HOVER = '#4d5c2b';
 const FEAST_BORDER = 'rgba(104, 119, 60, 0.3)';
 const FEAST_BORDER_DARK = 'rgba(104, 119, 60, 0.5)';
+
+// ── CSS custom properties ─────────────────────────────────────────────────────
+
+const lightVars = css`
+	--feast-nudge-bg: ${FEAST_BG};
+	--feast-nudge-heading: ${FEAST_TEXT};
+	--feast-nudge-subtext: ${FEAST_SUBTEXT};
+	--feast-nudge-border: ${FEAST_BORDER};
+`;
+
+const darkVars = css`
+	--feast-nudge-bg: ${FEAST_BG_DARK};
+	--feast-nudge-heading: ${FEAST_TEXT_DARK};
+	--feast-nudge-subtext: ${FEAST_SUBTEXT_DARK};
+	--feast-nudge-border: ${FEAST_BORDER_DARK};
+`;
 
 // ── Deep-link helpers ─────────────────────────────────────────────────────────
 
@@ -47,8 +67,6 @@ const buildAppLink = (
 	});
 	return `https://guardian-feast.go.link/p0nQT?${params.toString()}`;
 };
-
-// ── Utility helpers ───────────────────────────────────────────────────────────
 
 // ── Button themes ─────────────────────────────────────────────────────────────
 
@@ -80,37 +98,24 @@ const cardGrid = css`
 	}
 `;
 
-// ── Card styles — mirror ProductCardInline ────────────────────────────────────
+// ── Card styles ───────────────────────────────────────────────────────────────
 
-const baseCard = css`
+const showcaseCard = css`
+	${lightVars};
 	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
 	display: grid;
 	column-gap: 10px;
 	row-gap: ${space[4]}px;
 	max-width: 100%;
+	background-color: var(--feast-nudge-bg);
+	border-top: 2px solid ${FEAST_GREEN};
 	${from.mobileLandscape} {
 		column-gap: 20px;
 		row-gap: ${space[2]}px;
 	}
 `;
 
-const showcaseCard = css`
-	${baseCard};
-	background-color: ${FEAST_BG};
-	border-top: 2px solid ${FEAST_GREEN};
-
-	[data-color-scheme='dark'] & {
-		background-color: ${FEAST_BG_DARK};
-	}
-`;
-
-const showcaseCardDarkMedia = css`
-	@media (prefers-color-scheme: dark) {
-		background-color: ${FEAST_BG_DARK};
-	}
-`;
-
-// ── Grid area styles — mirror ProductCardInline ───────────────────────────────
+// ── Grid area styles ──────────────────────────────────────────────────────────
 
 const imageGridArea = css`
 	grid-area: image;
@@ -138,17 +143,7 @@ const primaryHeading = css`
 	${from.mobileLandscape} {
 		${headlineMedium24};
 	}
-	color: ${sourcePalette.neutral[0]};
-
-	[data-color-scheme='dark'] & {
-		color: ${FEAST_TEXT_DARK};
-	}
-`;
-
-const primaryHeadingDarkMedia = css`
-	@media (prefers-color-scheme: dark) {
-		color: ${FEAST_TEXT_DARK};
-	}
+	color: var(--feast-nudge-heading);
 `;
 
 const productNameStyle = css`
@@ -163,17 +158,7 @@ const productNameStyle = css`
 			${textSansBold20};
 		}
 	}
-	color: ${sourcePalette.neutral[46]};
-
-	[data-color-scheme='dark'] & {
-		color: ${FEAST_SUBTEXT_DARK};
-	}
-`;
-
-const productNameDarkMedia = css`
-	@media (prefers-color-scheme: dark) {
-		color: ${FEAST_SUBTEXT_DARK};
-	}
+	color: var(--feast-nudge-subtext);
 `;
 
 const buttonWrapper = css`
@@ -186,32 +171,18 @@ const buttonWrapper = css`
 
 const detailsArea = css`
 	grid-area: details;
-	border-top: 1px solid ${FEAST_BORDER};
+	border-top: 1px solid var(--feast-nudge-border);
 	padding-top: ${space[3]}px;
 	display: flex;
 	flex-direction: column;
 	gap: ${space[2]}px;
-
-	[data-color-scheme='dark'] & {
-		border-top-color: ${FEAST_BORDER_DARK};
-	}
-`;
-
-const detailsAreaDarkMedia = css`
-	@media (prefers-color-scheme: dark) {
-		border-top-color: ${FEAST_BORDER_DARK};
-	}
 `;
 
 const descriptionStyles = css`
 	${textSans17};
-	color: ${sourcePalette.neutral[46]};
+	color: var(--feast-nudge-subtext);
 	font-style: italic;
 	margin: 0;
-
-	[data-color-scheme='dark'] & {
-		color: ${FEAST_SUBTEXT_DARK};
-	}
 `;
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -220,28 +191,48 @@ type FeastContextualNudgeProps = {
 	recipe?: RecipeBlockElement;
 	recipeName: string;
 	pageId: string;
-	darkModeAvailable?: boolean;
 };
 
-// ── Component — mirrors ProductCardInline ─────────────────────────────────────
+// ── Component ─────────────────────────────────────────────────────────────────
 
 export const FeastContextualNudge = ({
 	recipe,
 	recipeName,
 	pageId,
-	darkModeAvailable = false,
 }: FeastContextualNudgeProps) => {
+	const { darkModeAvailable } = useConfig();
+
+	const [isStorybook, setIsStorybook] = useState(false);
+	useEffect(() => {
+		if (!('STORIES' in window)) return;
+		setIsStorybook(true);
+	}, []);
+
 	const title = recipe?.title ?? recipeName;
 	const feastId = recipe?.id;
 	const image = recipe?.featuredImage;
 
 	return (
 		<div
-			data-component="recipe-card-inline"
+			data-component="feast-contextual-nudge"
 			css={[
 				showcaseCard,
-				darkModeAvailable && showcaseCardDarkMedia,
 				cardGrid,
+				darkModeAvailable &&
+					css`
+						@media (prefers-color-scheme: dark) {
+							${darkVars}
+						}
+					`,
+				isStorybook &&
+					css`
+						[data-color-scheme='light'] & {
+							${lightVars}
+						}
+						[data-color-scheme='dark'] & {
+							${darkVars}
+						}
+					`,
 			]}
 		>
 			{/* image */}
@@ -254,28 +245,10 @@ export const FeastContextualNudge = ({
 			{/* info: title · id */}
 			<div css={productInfoContainer}>
 				{/* title */}
-				{!!title && (
-					<div
-						css={[
-							primaryHeading,
-							darkModeAvailable && primaryHeadingDarkMedia,
-						]}
-					>
-						{title}
-					</div>
-				)}
+				{!!title && <div css={primaryHeading}>{title}</div>}
 
 				{/* id */}
-				{!!feastId && (
-					<div
-						css={[
-							productNameStyle,
-							darkModeAvailable && productNameDarkMedia,
-						]}
-					>
-						ID: {feastId}
-					</div>
-				)}
+				{!!feastId && <div css={productNameStyle}>ID: {feastId}</div>}
 			</div>
 
 			{/* buttons */}
@@ -316,12 +289,7 @@ export const FeastContextualNudge = ({
 
 			{/* details: description */}
 			{recipe && (
-				<div
-					css={[
-						detailsArea,
-						darkModeAvailable && detailsAreaDarkMedia,
-					]}
-				>
+				<div css={detailsArea}>
 					{/* description */}
 					{!!recipe.description && (
 						<p css={descriptionStyles}>{recipe.description}</p>

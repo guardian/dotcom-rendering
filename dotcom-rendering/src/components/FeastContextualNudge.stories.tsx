@@ -60,5 +60,4 @@ export const NoFeaturedImage: Story = {
 /** Dark mode */
 export const DefaultDark: Story = {
 	decorators: [darkDecorator([recipeFormat])],
-	args: { darkModeAvailable: true },
 };

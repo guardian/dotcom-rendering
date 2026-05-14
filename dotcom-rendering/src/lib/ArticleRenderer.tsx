@@ -104,7 +104,7 @@ export const ArticleRenderer = ({
 	 * Where is this coming from?
 	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
 	 */
-	const { renderingTarget, darkModeAvailable } = useConfig();
+	const { renderingTarget } = useConfig();
 
 	/**
 	 * For recipe articles, group elements into per-recipe sections separated
@@ -170,9 +170,6 @@ export const ArticleRenderer = ({
 						pageId={pageId}
 						recipe={section.recipe}
 						recipeName={section.recipeName}
-						darkModeAvailable={
-							darkModeAvailable && renderingTarget === 'Web'
-						}
 					/>
 					{section.contentEls}
 				</Fragment>,
