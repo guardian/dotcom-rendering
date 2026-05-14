@@ -28,17 +28,17 @@ const blurStyles = css`
 			0
 		);
 	}
-	/* This might need adjusting a little! */
 	mask-image: linear-gradient(
 		to top,
 		${transparentColour(sourcePalette.neutral[10], 0.95)},
 		${transparentColour(sourcePalette.neutral[10], 0.9)},
-		${transparentColour(sourcePalette.neutral[10], 0.85)},
+		${transparentColour(sourcePalette.neutral[10], 0.8)},
+		${transparentColour(sourcePalette.neutral[10], 0.7)},
 		transparent
 	);
 `;
 
-const buttonWrapperStyles = css`
+const blurAndTextWrapperStyles = css`
 	display: flex;
 	position: absolute;
 	bottom: 0;
@@ -112,7 +112,7 @@ export const CallToActionAtom = ({
 					}
 				`}
 			/>
-			<div css={buttonWrapperStyles}>
+			<div css={blurAndTextWrapperStyles}>
 				<div css={textAndButtonWrapperStyles}>
 					{!!text && <h2 css={textStyles}>{text}</h2>}
 					<LinkButton
