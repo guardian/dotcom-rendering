@@ -22,48 +22,53 @@ import { FootballCrest } from './FootballCrest';
 
 type Props = {
 	matches: FootballMatches;
-	competitionId: string;
 	guardianBaseUrl: string;
 	edition: EditionId;
 };
 
 export const FootballMatchDay = ({
 	matches,
-	competitionId,
 	guardianBaseUrl,
 	edition,
-}: Props) => (
-	<section
-		css={css`
-			${textSans12}
-		`}
-	>
-		<ul
+}: Props) => {
+	const competitionTag = matches[0]?.competitions[0]?.tag;
+	const competitionFixturesUrl = competitionTag
+		? `${competitionTag}/overview`
+		: `/football`;
+
+	return (
+		<section
 			css={css`
-				list-style: none;
-				margin: 0;
-				padding: 0;
+				${textSans12}
 			`}
 		>
-			{matches.map(
-				(day) =>
-					day.competitions[0]?.matches.map((match) => (
-						<Match
-							key={match.paId}
-							match={match}
-							edition={edition}
-						/>
-					)),
-			)}
-		</ul>
-		<a
-			href={`${guardianBaseUrl}football/${competitionId}/overview`}
-			css={fixtureLinkCss}
-		>
-			See all fixtures <SvgChevronRightSingleSmall size="xsmall" />
-		</a>
-	</section>
-);
+			<ul
+				css={css`
+					list-style: none;
+					margin: 0;
+					padding: 0;
+				`}
+			>
+				{matches.map(
+					(day) =>
+						day.competitions[0]?.matches.map((match) => (
+							<Match
+								key={match.paId}
+								match={match}
+								edition={edition}
+							/>
+						)),
+				)}
+			</ul>
+			<a
+				href={`${guardianBaseUrl}${competitionFixturesUrl}`}
+				css={fixtureLinkCss}
+			>
+				See all fixtures <SvgChevronRightSingleSmall size="xsmall" />
+			</a>
+		</section>
+	);
+};
 
 const fixtureLinkCss = css`
 	${textSans15}
@@ -90,23 +95,19 @@ const Match = ({
 			href={`https://football.theguardian.com/match-redirect/${match.paId}`}
 			css={wrapperCss}
 		>
-			<span css={statusCss}>
-				<MatchStatus match={match} edition={edition} />
-			</span>
-			<span css={teamCss}>
-				{match.homeTeam.name}
-				<Crest teamId={match.homeTeam.id} />
-			</span>
+			<MatchStatus match={match} edition={edition} />
+			<Team name={match.homeTeam.name} id={match.homeTeam.id} />
 			<Score match={match} />
-			<span css={[teamCss, awayTeamCss]}>
-				<Crest teamId={match.awayTeam.id} />
-				{match.awayTeam.name}
-			</span>
-			<SvgChevronRightSingleSmall size="xsmall" />
-			{(match.kind === 'Live' || match.kind === 'Result') &&
-				!!match.comment && (
-					<span css={commentCss(match.kind)}>{match.comment}</span>
-				)}
+			<Team
+				name={match.awayTeam.name}
+				id={match.awayTeam.id}
+				location="away"
+			/>
+			<SvgChevronRightSingleSmall
+				size="xsmall"
+				theme={{ fill: 'currentColor' }}
+			/>
+			<Comment match={match} />
 		</a>
 	</li>
 );
@@ -158,38 +159,6 @@ const wrapperCss = css`
 	}
 `;
 
-const statusCss = css`
-	grid-area: status;
-	display: flex;
-	align-items: center;
-	gap: 4px;
-	${from.phablet} {
-		grid-area: home;
-	}
-`;
-
-const teamCss = css`
-	${headlineMedium14}
-	grid-area: home;
-	justify-self: end;
-	display: flex;
-	align-items: center;
-	gap: 4px;
-`;
-
-const awayTeamCss = css`
-	grid-area: away;
-	justify-self: start;
-	padding-right: 16px;
-`;
-
-const commentCss = (matchKind: FootballMatch['kind']) => css`
-	${textSansItalic12}
-	grid-area: comment;
-	text-align: center;
-	color: ${matchKind === 'Live' ? neutral[10] : neutral[86]};
-`;
-
 const kickOffFormatterForEdition = (edition: EditionId): Intl.DateTimeFormat =>
 	new Intl.DateTimeFormat(getLocaleFromEdition(edition), {
 		hour: '2-digit',
@@ -208,20 +177,45 @@ const MatchStatus = ({
 }) => {
 	switch (match.kind) {
 		case 'Fixture':
-			return kickOffFormatterForEdition(edition).format(
-				new Date(match.dateTimeISOString),
+			return (
+				<time css={statusCss} dateTime={match.dateTimeISOString}>
+					{kickOffFormatterForEdition(edition).format(
+						new Date(match.dateTimeISOString),
+					)}
+				</time>
 			);
 		case 'Live':
 			return (
-				<>
+				<span css={statusCss}>
 					<span css={liveCss}>Live</span>
 					{match.status}
-				</>
+				</span>
 			);
 		case 'Result':
-			return 'FT';
+			return (
+				<span
+					css={[
+						statusCss,
+						css`
+							${textSansBold12}
+						`,
+					]}
+				>
+					FT
+				</span>
+			);
 	}
 };
+
+const statusCss = css`
+	grid-area: status;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	${from.phablet} {
+		grid-area: home;
+	}
+`;
 
 const liveCss = css`
 	${textSansBold14}
@@ -236,6 +230,37 @@ const liveCss = css`
 		border-radius: 100%;
 		background-color: currentColor;
 	}
+`;
+
+const Team = ({
+	name,
+	id,
+	location = 'home',
+}: {
+	name: string;
+	id: string;
+	location?: 'home' | 'away';
+}) => (
+	<span css={[teamCss, location === 'away' && awayTeamCss]}>
+		{name}
+		<Crest teamId={id} />
+	</span>
+);
+
+const teamCss = css`
+	${headlineMedium14}
+	grid-area: home;
+	justify-self: end;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+`;
+
+const awayTeamCss = css`
+	grid-area: away;
+	flex-direction: row-reverse;
+	justify-self: start;
+	padding-right: 16px;
 `;
 
 const Score = ({ match }: { match: FootballMatch }) => {
@@ -289,3 +314,18 @@ const Crest = ({ teamId }: { teamId: string }) => (
 		/>
 	</picture>
 );
+
+const Comment = ({ match }: { match: FootballMatch }) => {
+	if (match.kind === 'Fixture' || !match.comment) {
+		return null;
+	}
+
+	return <small css={commentCss(match.kind)}>{match.comment}</small>;
+};
+
+const commentCss = (matchKind: FootballMatch['kind']) => css`
+	${textSansItalic12}
+	grid-area: comment;
+	text-align: center;
+	color: ${matchKind === 'Live' ? neutral[10] : neutral[86]};
+`;
