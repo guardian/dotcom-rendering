@@ -12,56 +12,55 @@ import ssrFriendly from 'eslint-plugin-ssr-friendly';
 import unicorn from 'eslint-plugin-unicorn';
 
 const rulesToOverrideGuardianConfig = {
+	// use `string[]` for simple arrays, `Array<string>` for complex ones
+	// https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/array-type.md#array-simple
 	'@typescript-eslint/array-type': [
 		'off',
 		{
 			default: 'array',
 		},
 	],
-
+	// use `Record<string, unknown>` instead of `{ [key: string]: unknown }`
 	'@typescript-eslint/consistent-indexed-object-style': [
 		'off',
 		'index-signature',
 	],
-	'@typescript-eslint/no-unnecessary-condition': 'warn',
 };
 
+/** @TODO Review these */
 const rulesToReview = {
-	'react/no-array-index-key': 'warn',
-	'react/button-has-type': 'warn',
-	'@typescript-eslint/require-await': 'warn',
-	'react/jsx-curly-newline': 'warn',
-	'no-case-declarations': 'warn',
-	'@typescript-eslint/no-explicit-any': 'warn',
-	'@typescript-eslint/no-unsafe-argument': 'warn',
-	'@typescript-eslint/default-param-last': 'warn',
-	'@typescript-eslint/no-misused-promises': 'warn',
-	'react/jsx-indent-props': 'off',
-	'react/jsx-indent': 'off',
-	'@eslint-community/eslint-comments/require-description': 'warn',
-	'@eslint-community/eslint-comments/no-unused-disable': 'warn',
-	'@eslint-community/eslint-comments/disable-enable-pair': 'warn',
+	'@typescript-eslint/strict-boolean-expressions': 'warn', // 900 warnings
+	'@typescript-eslint/switch-exhaustiveness-check': 'warn', // 350 warnings
+	'react/no-array-index-key': 'warn', // 33 problems
+	'@typescript-eslint/require-await': 'warn', // 17 problems
+	'no-case-declarations': 'warn', // 9 problems
+	'@typescript-eslint/no-explicit-any': 'warn', // 58 warnings
+	'@eslint-community/eslint-comments/require-description': 'warn', // 11 warnings
 	'@typescript-eslint/naming-convention': 'warn',
-	'@typescript-eslint/switch-exhaustiveness-check': 'warn',
-	'no-redeclare': 'warn',
-	'react/no-unescaped-entities': 'warn',
-	'@typescript-eslint/no-unsafe-member-access': 'warn',
-	'@typescript-eslint/prefer-nullish-coalescing': 'warn',
-	'@typescript-eslint/strict-boolean-expressions': 'warn',
-	'react/display-name': 'warn',
-	'react-hooks/set-state-in-effect': 'warn',
-	'react-hooks/refs': 'warn',
-	'react-hooks/static-components': 'warn',
-	'react-hooks/immutability': 'warn',
-	'react-hooks/purity': 'warn',
+	'no-redeclare': 'warn', // 100 warnings
+	'react/no-unescaped-entities': 'warn', // 45 warnings
+
+	// New react rules that we haven’t investigated if we want to apply yet
+	'react/display-name': 'warn', // 13 warnings
+	'react-hooks/set-state-in-effect': 'warn', // 47 warnings
+	'react-hooks/refs': 'warn', // 15 warnings
+	'react-hooks/static-components': 'warn', // 7 warnings
+	'react-hooks/immutability': 'warn', // 11 warnings
+	'react-hooks/purity': 'warn', // 5 warnings
 };
 
+/** @TODO Enforce and fix these */
 const rulesToEnforce = {
-	'@typescript-eslint/no-empty-function': 'warn',
-	'@typescript-eslint/no-unsafe-call': 'warn',
-	'@typescript-eslint/no-unsafe-assignment': 'warn',
-	'@typescript-eslint/no-unsafe-return': 'warn',
-	'@typescript-eslint/ban-ts-comment': 'warn',
+	'@typescript-eslint/no-empty-function': 'warn', // 120 warnings
+	'@typescript-eslint/no-unsafe-call': 'warn', // 14 warnings
+	'@typescript-eslint/no-unsafe-assignment': 'warn', // 42 warnings
+	'@typescript-eslint/no-unsafe-return': 'warn', // 8 warnings
+	'@typescript-eslint/prefer-nullish-coalescing': 'warn', // 30 warnings
+	// This is not safe to remove whilst we have noUncheckedIndexedAccess
+	'@typescript-eslint/no-unnecessary-condition': 'warn', // 19 warnings
+	'@typescript-eslint/no-unsafe-argument': 'warn', // 30 warnings
+	'@typescript-eslint/default-param-last': 'warn', // 6 warnings
+	'@typescript-eslint/no-misused-promises': 'warn', // 20 warnings
 };
 
 export default defineConfig([
@@ -97,32 +96,45 @@ export default defineConfig([
 		},
 
 		rules: {
+			// React, Hooks & JSX
 			'react-hooks/exhaustive-deps': 'error',
 			'react-hooks/rules-of-hooks': 'error',
 			'react/jsx-boolean-value': ['error', 'always'],
 			'react/jsx-key': 'error',
 			'react/jsx-no-target-blank': 'error',
 			'react/jsx-one-expression-per-line': 'off',
-			'react/no-danger': 'off',
+			'react/no-danger': 'off', // We use `dangerouslySetInnerHTML` in several components
 			'react/prop-types': 'off',
 			'react/no-unused-prop-types': 'error',
+			// We use prettier to format code. Some eslint rules conflict with prettier
+			'react/jsx-indent-props': 'off',
+			'react/jsx-indent': 'off',
+			'react/jsx-curly-newline': 'off',
 
 			'jsx-a11y/aria-role': [
 				'error',
 				{
+					/**
+					 * As we use the `role` prop for editorial weighting,
+					 * we do not want to check developer-created components’
+					 * use of the `role` attribute.
+					 *
+					 * @see RoleType
+					 * @see https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/aria-role.md#rule-details
+					 */
 					ignoreNonDOM: true,
 				},
 			],
-
+			// We want to be careful with context and certainly avoid unnecessary re-renders
 			'react/jsx-no-constructed-context-values': 'error',
 			'@typescript-eslint/switch-exhaustiveness-check': 'error',
 			'array-callback-return': 'error',
 			'global-require': 'error',
 			'no-console': 'warn',
 			'no-empty-pattern': 'error',
-			'no-fallthrough': 'off',
+			'no-fallthrough': 'off', // We use 'noFallthroughCasesInSwitch' in tsconfig.json as this respects types
 			'no-param-reassign': 'error',
-			'no-shadow': 'off',
+			'no-shadow': 'off', // We use the typescript-eslint version as eslint false positives on enums
 			'@typescript-eslint/no-shadow': ['error'],
 
 			'no-underscore-dangle': [
@@ -136,12 +148,17 @@ export default defineConfig([
 			'no-redeclare': 'error',
 			'custom-elements/file-name-matches-element': 'error',
 			'object-shorthand': ['error', 'always'],
+
+			// need to be explicitely added because it is disabled by extending `prettier`
 			curly: ['error', 'multi-line', 'consistent'],
+
+			/** @see https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-array-for-each.md */
 			'unicorn/no-array-for-each': 'error',
 
 			'import/no-extraneous-dependencies': [
 				'error',
 				{
+					// https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options
 					packageDir: ['..', '.'],
 				},
 			],
@@ -164,6 +181,8 @@ export default defineConfig([
 			'@typescript-eslint/strict-boolean-expressions': [
 				'error',
 				{
+					// This rule also errors on any ambiguous type comparisons (e.g !! on a type `null | undefined | ""`)
+					// https://typescript-eslint.io/rules/strict-boolean-expressions/
 					allowString: true,
 					allowNumber: true,
 					allowNullableObject: true,
@@ -208,6 +227,7 @@ export default defineConfig([
 			'import/resolver': 'typescript',
 
 			react: {
+				// Tells eslint-plugin-react to automatically detect the version of React to use
 				version: 'detect',
 			},
 		},
@@ -234,7 +254,7 @@ export default defineConfig([
 		files: ['**/**.test.ts', 'playwright/**/*.ts'],
 
 		rules: {
-			'no-restricted-syntax': 'off',
+			'no-restricted-syntax': 'off', // we allow native localStorage access in tests
 		},
 	},
 	{
@@ -245,6 +265,7 @@ export default defineConfig([
 				'error',
 				{
 					prefer: 'type-imports',
+					// that’s the way declaration files do it!
 					disallowTypeAnnotations: false,
 				},
 			],
@@ -257,6 +278,8 @@ export default defineConfig([
 			'@typescript-eslint/no-restricted-types': [
 				'error',
 				{
+					// Why? See this: https://github.com/facebook/create-react-app/pull/8177
+					// pr: https://github.com/guardian/dotcom-rendering/pull/5622
 					types: {
 						'React.StatelessComponent':
 							'Please use const MyThing = ({foo, bar}: Props) instead',
@@ -296,6 +319,7 @@ export default defineConfig([
 		files: ['src/client/**/*.ts'],
 
 		rules: {
+			// the modules in the src/client/ directory are meant to run in a browser
 			'ssr-friendly/no-dom-globals-in-module-scope': 'off',
 		},
 	},
