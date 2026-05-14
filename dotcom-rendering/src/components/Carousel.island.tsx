@@ -927,9 +927,6 @@ export const Carousel = ({
 					]}
 					data-component={onwardsSource}
 					data-link={formatAttrString(heading)}
-					role="region"
-					aria-roledescription="carousel"
-					aria-label={heading}
 				>
 					<Header
 						heading={heading}
@@ -947,6 +944,9 @@ export const Carousel = ({
 					<ul
 						css={carouselStyle}
 						ref={carouselRef}
+						aria-label={heading}
+						role="region"
+						aria-roledescription="carousel"
 						data-component={`carousel-small | maxIndex-${maxIndex}`}
 						data-heatphan-type="carousel"
 						onTouchStart={isApps ? onTouchStart : undefined}
