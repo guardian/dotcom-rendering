@@ -170,7 +170,9 @@ export const ArticleRenderer = ({
 						pageId={pageId}
 						recipe={section.recipe}
 						recipeName={section.recipeName}
-						darkModeAvailable={darkModeAvailable}
+						darkModeAvailable={
+							darkModeAvailable && renderingTarget === 'Web'
+						}
 					/>
 					{section.contentEls}
 				</Fragment>,
