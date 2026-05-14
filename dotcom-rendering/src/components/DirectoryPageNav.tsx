@@ -173,9 +173,11 @@ const configs = [
 const subnavInnerStyles = css({
 	position: 'relative',
 	margin: 'auto',
-	padding: '0 10px',
+	paddingLeft: 10,
+	paddingRight: 10,
 	[from.mobileLandscape]: {
-		padding: '0 20px',
+		paddingLeft: 20,
+		paddingRight: 20,
 	},
 	[from.tablet]: {
 		maxWidth: 740,
@@ -251,6 +253,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 		const subnavInnerWithBorderStyles = css(subnavInnerStyles, {
 			paddingTop: space[2],
+			paddingBottom: space[2],
 			[from.tablet]: {
 				'&::before': {
 					content: '""',
