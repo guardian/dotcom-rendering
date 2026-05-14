@@ -47,9 +47,14 @@ export const NoRecipeData: Story = {
 	args: { recipe: undefined },
 };
 
-/** With left-col card active — hides at from.wide */
-export const WithLeftColCard: Story = {
-	args: { shouldShowLeftColCard: true },
+/** Recipe present but no featured image — image slot omitted */
+export const NoFeaturedImage: Story = {
+	args: {
+		recipe: {
+			...mockRecipe,
+			featuredImage: undefined,
+		},
+	},
 };
 
 /** Dark mode */

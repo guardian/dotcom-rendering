@@ -13,6 +13,11 @@ import {
 import { LinkButton } from '@guardian/source/react-components';
 import type { RecipeBlockElement } from '../types/content';
 
+// ── Utility helpers ───────────────────────────────────────────────────────────
+
+export const stripHtmlTags = (html: string): string =>
+	html.replace(/<[^>]+>/g, '').trim();
+
 // ── Feast brand colours ───────────────────────────────────────────────────────
 
 const FEAST_BG = '#f7efe9';
@@ -86,12 +91,6 @@ const baseCard = css`
 	${from.mobileLandscape} {
 		column-gap: 20px;
 		row-gap: ${space[2]}px;
-	}
-`;
-
-const hideFromWide = css`
-	${from.wide} {
-		display: none;
 	}
 `;
 
@@ -221,11 +220,6 @@ type RecipeCardInlineProps = {
 	recipe?: RecipeBlockElement;
 	recipeName: string;
 	pageId: string;
-	/**
-	 * When true, hides the card at `from.wide` because the sticky left-col card
-	 * takes over — mirrors the `shouldShowLeftColCard` behaviour in ProductCardInline.
-	 */
-	shouldShowLeftColCard?: boolean;
 	darkModeAvailable?: boolean;
 };
 
@@ -235,7 +229,6 @@ export const RecipeCardInline = ({
 	recipe,
 	recipeName,
 	pageId,
-	shouldShowLeftColCard = false,
 	darkModeAvailable = false,
 }: RecipeCardInlineProps) => {
 	const title = recipe?.title ?? recipeName;
@@ -248,7 +241,6 @@ export const RecipeCardInline = ({
 			css={[
 				showcaseCard,
 				darkModeAvailable && showcaseCardDarkMedia,
-				shouldShowLeftColCard && hideFromWide,
 				cardGrid,
 			]}
 		>

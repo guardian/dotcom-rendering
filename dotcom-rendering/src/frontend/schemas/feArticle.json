@@ -3407,7 +3407,7 @@
                 "imageType": { "type": "string" },
                 "width": { "type": "number" },
                 "height": { "type": "number" },
-                "mediaApiUri": { "type": "string", "format": "uri", "pattern": "^https://" }
+                "mediaApiUri": { "type": "string" }
             },
             "required": ["url", "mediaId", "cropId"]
         },

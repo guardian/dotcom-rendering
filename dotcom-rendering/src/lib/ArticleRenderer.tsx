@@ -1,13 +1,10 @@
 import { css } from '@emotion/react';
 import { Fragment } from 'react';
 import { useConfig } from '../components/ConfigContext';
-import { RecipeCardInline } from '../components/RecipeCardInline';
-import { RecipeCardLeftCol } from '../components/RecipeCardLeftCol';
 import {
-	recipeContentContainerStyles,
-	recipeLeftColContainerStyles,
+	RecipeCardInline,
 	stripHtmlTags,
-} from '../components/RecipeCardLeftCol';
+} from '../components/RecipeCardInline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type {
@@ -115,16 +112,9 @@ export const ArticleRenderer = ({
 
 	/**
 	 * For recipe articles, group elements into per-recipe sections separated
-	 * by SubheadingBlockElements.  Each section gets:
-	 *
-	 *   1. The subheading rendered outside the relative container (matches the
-	 *      ProductElement pattern from "The Filter").
-	 *   2. A `position: relative` content wrapper containing:
-	 *        a. An absolutely-positioned left-col container (left: -240px,
-	 *           height: 100%) holding the sticky RecipeCardLeftCol — visible
-	 *           only at `from.wide`, tracks the viewport as the reader scrolls.
-	 *        b. The inline RecipeCardInline (all screen sizes, hidden at from.wide).
-	 *        c. The rest of the section's article elements.
+	 * by SubheadingBlockElements. Each section gets the subheading followed by
+	 * a RecipeCardInline (populated from the RecipeBlockElement if present, or
+	 * showing a fallback using the recipe name), then the remaining body elements.
 	 *
 	 * Elements that precede the first subheading are rendered as-is.
 	 */
@@ -181,32 +171,14 @@ export const ArticleRenderer = ({
 		sections.forEach((section) => {
 			result.push(
 				<Fragment key={`recipe-section-${section.index}`}>
-					{/* Subheading sits outside the relative container, just like
-					    ProductSubheading in ProductElement */}
 					{section.subheadingEl}
-
-					<div css={recipeContentContainerStyles}>
-						{/* Sticky left-col card — only visible at from.wide, pure render, no Island */}
-						<div css={recipeLeftColContainerStyles}>
-							<RecipeCardLeftCol
-								recipeName={section.recipeName}
-								recipe={section.recipe}
-								pageId={pageId}
-								darkModeAvailable={darkModeAvailable}
-							/>
-						</div>
-
-						{/* Inline card — hidden at from.wide, pure render, no Island */}
-						<RecipeCardInline
-							pageId={pageId}
-							recipe={section.recipe}
-							recipeName={section.recipeName}
-							shouldShowLeftColCard={true}
-							darkModeAvailable={darkModeAvailable}
-						/>
-
-						{section.contentEls}
-					</div>
+					<RecipeCardInline
+						pageId={pageId}
+						recipe={section.recipe}
+						recipeName={section.recipeName}
+						darkModeAvailable={darkModeAvailable}
+					/>
+					{section.contentEls}
 				</Fragment>,
 			);
 		});
