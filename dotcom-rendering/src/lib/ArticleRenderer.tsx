@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import { Fragment } from 'react';
 import { useConfig } from '../components/ConfigContext';
 import {
-	RecipeCardInline,
+	FeastContextualNudge,
 	stripHtmlTags,
-} from '../components/RecipeCardInline';
+} from '../components/FeastContextualNudge';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RecipeBlockElement } from '../types/content';
@@ -109,7 +109,7 @@ export const ArticleRenderer = ({
 	/**
 	 * For recipe articles, group elements into per-recipe sections separated
 	 * by SubheadingBlockElements. Each section gets the subheading followed by
-	 * a RecipeCardInline (populated from the RecipeBlockElement if present, or
+	 * a FeastContextualNudge (populated from the RecipeBlockElement if present, or
 	 * showing a fallback using the recipe name), then the remaining body elements.
 	 *
 	 * Elements that precede the first subheading are rendered as-is.
@@ -166,7 +166,7 @@ export const ArticleRenderer = ({
 			result.push(
 				<Fragment key={`recipe-section-${section.index}`}>
 					{section.subheadingEl}
-					<RecipeCardInline
+					<FeastContextualNudge
 						pageId={pageId}
 						recipe={section.recipe}
 						recipeName={section.recipeName}
