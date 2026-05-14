@@ -34,7 +34,7 @@ export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 		target: `node${process.versions.node}`,
 		minify: !DEV,
 		sourcemap: true,
-		rollupOptions: {
+		rolldownOptions: {
 			input: {
 				server: './src/server/server.ts',
 			},
