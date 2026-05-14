@@ -103,6 +103,7 @@ export const matchDayWorldCup: FootballMatches = [
 							score: 0,
 						},
 						status: '1st',
+						comment: 'Match delayed due to weather conditions',
 					},
 					{
 						kind: 'Fixture',
@@ -119,6 +120,19 @@ export const matchDayWorldCup: FootballMatches = [
 							id: '8109',
 						},
 					},
+				],
+			},
+		],
+	},
+	{
+		dateISOString: new Date('2026-06-12T00:00:00Z').toISOString(),
+		competitions: [
+			{
+				id: '700',
+				tag: '/football/world-cup-2026',
+				name: 'World Cup 2026',
+				nation: 'International',
+				matches: [
 					{
 						kind: 'Fixture',
 						dateTimeISOString: new Date(
