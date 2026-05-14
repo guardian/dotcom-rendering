@@ -20,7 +20,10 @@ type CallToActionProps = {
 
 const blurStyles = css`
 	position: absolute;
-	inset: 0;
+	top: -${space[2]}px;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	backdrop-filter: blur(12px) brightness(0.5);
 	@supports not (backdrop-filter: blur(12px)) {
 		background-color: linear-gradient(
@@ -29,11 +32,15 @@ const blurStyles = css`
 		);
 	}
 	mask-image: linear-gradient(
-		to top,
-		${transparentColour(sourcePalette.neutral[10], 0.99)},
-		${transparentColour(sourcePalette.neutral[10], 0.96)},
-		${transparentColour(sourcePalette.neutral[10], 0.89)},
-		transparent
+		transparent 0px,
+		rgba(0, 0, 0, 0.0381) 8px,
+		rgba(0, 0, 0, 0.1464) 16px,
+		rgba(0, 0, 0, 0.3087) 24px,
+		rgba(0, 0, 0, 0.5) 32px,
+		rgba(0, 0, 0, 0.6913) 40px,
+		rgba(0, 0, 0, 0.8536) 48px,
+		rgba(0, 0, 0, 0.9619) 56px,
+		rgb(0, 0, 0) 64px
 	);
 `;
 
@@ -50,7 +57,7 @@ const textAndButtonWrapperStyles = css`
 	flex-direction: column;
 	justify-content: end;
 	align-items: start;
-	padding: 0 ${space[2]}px ${space[6]}px;
+	padding: ${space[2]}px ${space[2]}px ${space[6]}px;
 	z-index: 1;
 
 	${from.tablet} {
