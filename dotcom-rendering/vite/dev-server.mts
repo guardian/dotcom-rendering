@@ -1,6 +1,5 @@
 /**
  * Vite development server with SSR middleware.
- * Replaces webpack-dev-server + webpack-hot-server-middleware.
  *
  * Usage:
  *   NODE_ENV=development node --import tsx vite/dev-server.ts
@@ -26,8 +25,8 @@ async function start() {
 	const app = express();
 	const httpServer = createHttpServer(app);
 
-	// Create Vite server in middleware mode.
-	// Handles client-side module transforms, HMR, and SSR module loading.
+	// Create Vite server in middleware mode
+	// Handles client-side module transforms, HMR and SSR module loading
 	const devConfig = mergeConfig(sharedConfig, {
 		plugins: [
 			svgr({
@@ -43,41 +42,22 @@ async function start() {
 			},
 		},
 		appType: 'custom',
-		// Serve client modules from /assets/ to match production asset paths
+		// Serve client modules from /assets/
 		base: '/assets/',
-		// Pre-bundle CJS packages for client-side use (the ssrCjsPlugin
-		// only wraps them for SSR; client needs Vite's built-in CJS→ESM).
+		// Optimize dependencies for faster dev server startup and HMR updates
 		optimizeDeps: {
 			include: [
-				'@guardian/bridget',
-				'@guardian/bridget/SignInScreenReason',
-				'@guardian/libs',
-				'@guardian/ophan-tracker-js',
-				'@emotion/cache',
-				'@emotion/react/jsx-dev-runtime',
-				'@emotion/react',
-				'react',
-				'react-dom/client',
-				'@guardian/identity-auth-frontend',
-				'@guardian/commercial-core',
-				'@guardian/source/foundations',
-				'@guardian/core-web-vitals',
-				'@guardian/ab-core',
-				'@guardian/source/react-components',
-				'swr',
-				'swr/immutable',
-				'@guardian/braze-components/logic',
-				'lodash.debounce',
-				'@guardian/commercial-core/geo/geo-utils',
-				'@guardian/support-dotcom-components',
-				'react-dom',
-				'@guardian/braze-components/banner',
 				'@braze/web-sdk',
-				'@guardian/source-development-kitchen/react-components',
-				'sanitize-html',
+				'@creditkarma/thrift-server-core',
+				'@emotion/cache',
+				'@emotion/react',
+				'@emotion/react/jsx-runtime',
+				'@emotion/react/jsx-dev-runtime',
+				'@guardian/ab-core',
+				'@guardian/braze-components/banner',
 				'@guardian/braze-components/end-of-article',
-				'react-google-recaptcha',
-				'compare-versions',
+				'@guardian/braze-components/logic',
+				'@guardian/bridget',
 				'@guardian/bridget/AbTesting',
 				'@guardian/bridget/Acquisitions',
 				'@guardian/bridget/Analytics',
@@ -93,36 +73,58 @@ async function start() {
 				'@guardian/bridget/Navigation',
 				'@guardian/bridget/Newsletters',
 				'@guardian/bridget/Notifications',
+				'@guardian/bridget/SignInScreenReason',
+				'@guardian/bridget/SignInScreenReferrer',
 				'@guardian/bridget/Tag',
 				'@guardian/bridget/User',
 				'@guardian/bridget/Videos',
-				'@creditkarma/thrift-server-core',
+				'@guardian/commercial-core',
+				'@guardian/commercial-core/geo/geo-utils',
+				'@guardian/core-web-vitals',
+				'@guardian/identity-auth-frontend',
+				'@guardian/libs',
+				'@guardian/ophan-tracker-js',
+				'@guardian/source-development-kitchen/react-components',
+				'@guardian/source/foundations',
+				'@guardian/source/react-components',
+				'@guardian/support-dotcom-components',
+				'compare-versions',
 				'is-mobile',
-				'@guardian/bridget/SignInScreenReferrer',
+				'lodash.debounce',
+				'react',
+				'react-dom',
+				'react-dom/client',
+				'react-google-recaptcha',
+				'sanitize-html',
+				'swr',
+				'swr/immutable',
 				'valibot',
 			],
 		},
+		ssr: {
+			noExternal: [
+				/@guardian\//,
+				'screenfull',
+				'valibot',
+				...cjsPackages,
+			],
+		},
 	});
-	// SSR config must be set after mergeConfig to avoid being overwritten.
-	devConfig.ssr = {
-		// Bundle ESM-only packages that can't be require()'d by Node, plus
-		// CJS packages that we want to expose via ESM named imports
-		// (see cjs-packages.ts).
-		noExternal: [/@guardian\//, 'screenfull', 'valibot', ...cjsPackages],
-	};
+
+	// Create Vite dev server instance
 	const vite = await createViteServer(devConfig);
 
-	// Vite's connect middleware handles HMR websocket, module transforms,
-	// and serves client-side files from /assets/
+	// Vite's connect middleware handles HMR websocket, module transforms
+	// and serves files from /assets/
 	app.use(vite.middlewares);
 
-	// Parse JSON request bodies (used by POST routes for rendering)
+	// Parse JSON request bodies
 	app.use(express.json({ limit: '10mb' }));
 
-	// Serve static files (favicons, etc.)
+	// Serve static files
 	app.use('/static/frontend', express.static(resolve(root, 'src', 'static')));
 
-	// Dev landing page with links to test content
+	// Dev index page
 	const devIndexHtml = readFileSync(
 		resolve(root, 'src', 'server', 'dev-index.html'),
 		'utf-8',
@@ -140,23 +142,22 @@ async function start() {
 		next();
 	});
 
-	// SSR: load server module on each request via Vite's ssrLoadModule.
-	// This re-evaluates the module when files change, providing instant
-	// server-side hot reload without a full restart.
+	// SSR HMR: reload server module graph on each request via Vite's ssrLoadModule
 	app.use(async (req, res, next) => {
 		try {
 			const { devServer } = (await vite.ssrLoadModule(
 				'./src/server/server.ts',
 			)) as {
-				devServer: () => express.Handler;
+				devServer: () => express.RequestHandler;
 			};
-			devServer()(req, res, next);
+
+			return devServer()(req, res, next);
 		} catch (e) {
 			// Let Vite fix the stack trace for SSR errors
 			if (e instanceof Error) {
 				vite.ssrFixStacktrace(e);
 			}
-			next(e);
+			return next(e);
 		}
 	});
 
