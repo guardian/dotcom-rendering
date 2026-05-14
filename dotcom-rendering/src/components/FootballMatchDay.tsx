@@ -1,11 +1,14 @@
 import { css } from '@emotion/react';
 import {
+	brandAlt,
 	from,
 	headlineMedium14,
 	neutral,
 	sport,
 	textSans12,
 	textSans15,
+	textSansBold12,
+	textSansBold14,
 	textSansItalic12,
 } from '@guardian/source/foundations';
 import { SvgChevronRightSingleSmall } from '@guardian/source/react-components';
@@ -82,8 +85,11 @@ const Match = ({
 	match: FootballMatch;
 	edition: EditionId;
 }) => (
-	<li css={matchCss}>
-		<a href="/" css={wrapperCss}>
+	<li css={matchCss(match.kind)}>
+		<a
+			href={`https://football.theguardian.com/match-redirect/${match.paId}`}
+			css={wrapperCss}
+		>
 			<span css={statusCss}>
 				<MatchStatus match={match} edition={edition} />
 			</span>
@@ -91,7 +97,7 @@ const Match = ({
 				{match.homeTeam.name}
 				<Crest teamId={match.homeTeam.id} />
 			</span>
-			<span css={scoreCss}>v</span>
+			<Score match={match} />
 			<span css={[teamCss, awayTeamCss]}>
 				<Crest teamId={match.awayTeam.id} />
 				{match.awayTeam.name}
@@ -99,28 +105,40 @@ const Match = ({
 			<SvgChevronRightSingleSmall size="xsmall" />
 			{(match.kind === 'Live' || match.kind === 'Result') &&
 				!!match.comment && (
-					<span css={commentCss}>{match.comment}</span>
+					<span css={commentCss(match.kind)}>{match.comment}</span>
 				)}
 		</a>
 	</li>
 );
 
-const matchCss = css`
-	color: ${neutral[7]};
-	background-color: ${sport[800]};
+const matchTextColour = (matchKind: FootballMatch['kind']): string => {
+	switch (matchKind) {
+		case 'Fixture':
+		case 'Live':
+			return neutral[7];
+		case 'Result':
+			return neutral[97];
+	}
+};
+
+const matchBackgroundColour = (matchKind: FootballMatch['kind']): string => {
+	switch (matchKind) {
+		case 'Fixture':
+			return sport[800];
+		case 'Live':
+			return brandAlt[400];
+		case 'Result':
+			return sport[300];
+	}
+};
+
+const matchCss = (matchKind: FootballMatch['kind']) => css`
+	color: ${matchTextColour(matchKind)};
+	background-color: ${matchBackgroundColour(matchKind)};
 	& + & {
 		border-top: 1px dashed ${neutral[86]};
 	}
 `;
-
-// const matchLiveCss = css`
-// 	background-color: ${sport[800]};
-// `;
-
-// const matchResultCss = css`
-// 	color: ${neutral[97]};
-// 	background-color: ${sport[300]};
-// `;
 
 const wrapperCss = css`
 	display: grid;
@@ -165,33 +183,11 @@ const awayTeamCss = css`
 	padding-right: 16px;
 `;
 
-const scoreCss = css`
-	grid-area: score;
-	min-width: 36px;
-	text-align: center;
-	padding: 4px;
-`;
-
-// const liveCss = css`
-// 	${textSansBold14}
-// 	position: relative;
-// 	color: ${sport[300]};
-// 	&::before {
-// 		display: inline-block;
-// 		content: '';
-// 		width: 11px;
-// 		height: 11px;
-// 		margin-right: 2px;
-// 		border-radius: 100%;
-// 		background-color: currentColor;
-// 	}
-// `;
-
-const commentCss = css`
+const commentCss = (matchKind: FootballMatch['kind']) => css`
 	${textSansItalic12}
 	grid-area: comment;
 	text-align: center;
-	color: ${neutral[86]};
+	color: ${matchKind === 'Live' ? neutral[10] : neutral[86]};
 `;
 
 const kickOffFormatterForEdition = (edition: EditionId): Intl.DateTimeFormat =>
@@ -216,11 +212,56 @@ const MatchStatus = ({
 				new Date(match.dateTimeISOString),
 			);
 		case 'Live':
-			return match.status;
+			return (
+				<>
+					<span css={liveCss}>Live</span>
+					{match.status}
+				</>
+			);
 		case 'Result':
 			return 'FT';
 	}
 };
+
+const liveCss = css`
+	${textSansBold14}
+	position: relative;
+	color: ${sport[300]};
+	&::before {
+		display: inline-block;
+		content: '';
+		width: 11px;
+		height: 11px;
+		margin-right: 2px;
+		border-radius: 100%;
+		background-color: currentColor;
+	}
+`;
+
+const Score = ({ match }: { match: FootballMatch }) => {
+	if (match.kind === 'Live' || match.kind === 'Result') {
+		return (
+			<span
+				css={[
+					scoreCss,
+					css`
+						${textSansBold12}
+					`,
+				]}
+			>
+				{match.homeTeam.score} - {match.awayTeam.score}
+			</span>
+		);
+	}
+	return <span css={scoreCss}>v</span>;
+};
+
+const scoreCss = css`
+	grid-area: score;
+	min-width: 36px;
+	text-align: center;
+	padding: 4px;
+`;
 
 const Crest = ({ teamId }: { teamId: string }) => (
 	<picture
