@@ -5,17 +5,16 @@ import {
 	textSans17,
 	textSans20,
 } from '@guardian/source/foundations';
-import type { IconProps } from '@guardian/source/react-components';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
 import type { VideoPlayerFormat } from '../types/mainMedia';
-import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
 import {
 	AudioIcon as AudioIconComponent,
 	FullscreenIcon,
+	PlayPauseIcon,
 } from './SelfHostedVideoPlayerIcons';
 import type { SubtitlesPosition } from './SubtitleOverlay';
 import { SubtitleOverlay } from './SubtitleOverlay';
@@ -24,6 +23,28 @@ import { VideoProgressBarInteractive } from './VideoProgressBarInteractive';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 export type ControlsPosition = 'top' | 'bottom';
+
+const playerContainerStyles = css`
+	&:fullscreen {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: ${palette('--video-fullscreen-background')};
+		width: 100vw;
+		height: 100vh;
+
+		/* Override the fixed aspect-ratio + width:100% on the video so it
+		   fits within the screen while preserving its aspect ratio. */
+		video {
+			width: 100%;
+			height: 100%;
+			max-width: 100vw;
+			max-height: 100vh;
+			aspect-ratio: auto;
+			object-fit: contain;
+		}
+	}
+`;
 
 const videoStyles = (aspectRatio: number) => css`
 	position: relative;
@@ -36,6 +57,18 @@ const videoStyles = (aspectRatio: number) => css`
 	aspect-ratio: ${aspectRatio};
 `;
 
+const videoControlsStyles = css`
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	& > * {
+		pointer-events: auto;
+	}
+`;
+
 const interactiveStyles = css`
 	cursor: pointer;
 `;
@@ -44,23 +77,11 @@ const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
 	::cue {
 		/* Hide the cue by default as we prefer custom overlay */
 		visibility: hidden;
-
 		color: ${palette('--video-subtitle-text')};
 		${subtitleSize === 'small' && textSans15};
 		${subtitleSize === 'medium' && textSans17};
 		${subtitleSize === 'large' && textSans20};
 	}
-`;
-
-const playIconStyles = css`
-	position: absolute;
-	/* Center the icon */
-	top: calc(50% - ${narrowPlayIconDiameter / 2}px);
-	left: calc(50% - ${narrowPlayIconDiameter / 2}px);
-	cursor: pointer;
-	border: none;
-	background: none;
-	padding: 0;
 `;
 
 const iconsContainerStyles = css`
@@ -71,14 +92,12 @@ const iconsContainerStyles = css`
 	right: ${space[2]}px;
 `;
 
-const smallIconsPositionStyles = (position: ControlsPosition) => css`
-	${position === 'bottom' && `bottom: ${space[3]}px;`}
-	${position === 'top' && `top: ${space[2]}px;`}
+const iconsBottomPositionStyles = (useLongFormProgressBar: boolean) => css`
+	bottom: ${useLongFormProgressBar ? '46px' : `${space[3]}px`};
 `;
 
-const largeIconsPositionStyles = (position: ControlsPosition) => css`
-	${position === 'bottom' && `bottom: ${space[12]}px;`}
-	${position === 'top' && `top: ${space[2]}px;`}
+const iconsTopPositionStyles = css`
+	top: ${space[2]}px;
 `;
 
 export const PLAYER_STATES = [
@@ -111,6 +130,7 @@ export type Props = {
 	videoStyle: VideoPlayerFormat;
 	FallbackImageComponent: ReactElement;
 	currentTime: number;
+	hasAudio: boolean;
 	isMuted: boolean;
 	handleLoadedMetadata: (event: SyntheticEvent) => void;
 	handleLoadedData: (event: SyntheticEvent) => void;
@@ -125,12 +145,10 @@ export type Props = {
 	handleFullscreenClick?: (event: SyntheticEvent) => void;
 	updateCurrentTime: (time: number) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
-	AudioIcon: ((iconProps: IconProps) => JSX.Element) | null;
-	iconSize: 'small' | 'large';
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showProgressBar: boolean;
-	showPlayIcon: boolean;
+	showPlayPauseIcon: 'play' | 'pause' | null;
 	showIcons: boolean;
 	showFullscreenIcon: boolean;
 	showSubtitles: boolean;
@@ -142,6 +160,7 @@ export type Props = {
 	isInteractive: boolean;
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
+	playerContainerRef: React.RefObject<HTMLDivElement>;
 };
 
 /**
@@ -166,6 +185,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			FallbackImageComponent,
 			posterImage,
 			currentTime,
+			hasAudio,
 			isMuted,
 			handleLoadedMetadata,
 			handleLoadedData,
@@ -180,11 +200,9 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleFullscreenClick,
 			updateCurrentTime,
 			onError,
-			AudioIcon,
-			iconSize,
 			preloadPartialData,
 			showProgressBar: canShowProgressBar,
-			showPlayIcon,
+			showPlayPauseIcon,
 			showIcons: canShowIcons,
 			showFullscreenIcon,
 			showSubtitles: canShowSubtitles,
@@ -195,6 +213,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			iconsPosition,
 			subtitlesPosition,
+			playerContainerRef,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -207,11 +226,11 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const showIcons = canShowIcons && currentRefExists;
 
 		const dataLinkName = `gu-video-${videoStyle.toLowerCase()}-${
-			showPlayIcon ? 'play' : 'pause'
+			showPlayPauseIcon === 'play' ? 'play' : 'pause'
 		}-${atomId}`;
 
 		return (
-			<>
+			<div ref={playerContainerRef} css={playerContainerStyles}>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
 				<video
 					id={videoId}
@@ -243,6 +262,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onClick={handlePlayPauseClick}
 					onKeyDown={handleKeyDown}
 					onError={onError}
+					disablePictureInPicture={true}
 				>
 					{sources.map(({ src, mimeType }) => (
 						<source
@@ -270,62 +290,58 @@ export const SelfHostedVideoPlayer = forwardRef(
 						position={subtitlesPosition}
 					/>
 				)}
-				{showPlayIcon && (
-					<button
-						type="button"
-						onClick={handlePlayPauseClick}
-						css={playIconStyles}
-						data-link-name={`gu-video-loop-play-${atomId}`}
-						data-testid="play-icon"
-					>
-						<PlayIcon iconWidth="narrow" />
-					</button>
-				)}
-				{showProgressBar &&
-					(useLongFormProgressBar ? (
-						<VideoProgressBarInteractive
-							videoId={videoId}
-							currentTime={currentTime}
-							updateCurrentTime={updateCurrentTime}
-							duration={ref.current!.duration}
-							handleKeyDown={handleKeyDown}
+				<div className="controls-container" css={videoControlsStyles}>
+					{showPlayPauseIcon !== null && (
+						<PlayPauseIcon
+							type={showPlayPauseIcon}
+							atomId={atomId}
+							handleClick={handlePlayPauseClick}
 						/>
-					) : (
-						<VideoProgressBar
-							videoId={videoId}
-							currentTime={currentTime}
-							duration={ref.current!.duration}
-						/>
-					))}
-				{showIcons && (
-					<div
-						css={[
-							iconsContainerStyles,
-							iconSize === 'large' &&
-								largeIconsPositionStyles(iconsPosition),
-							iconSize === 'small' &&
-								smallIconsPositionStyles(iconsPosition),
-						]}
-					>
-						{showFullscreenIcon && (
-							<FullscreenIcon
-								handleClick={handleFullscreenClick}
-								atomId={atomId}
-								size={iconSize}
+					)}
+					{showProgressBar &&
+						(useLongFormProgressBar ? (
+							<VideoProgressBarInteractive
+								videoId={videoId}
+								currentTime={currentTime}
+								updateCurrentTime={updateCurrentTime}
+								duration={ref.current!.duration}
+								handleKeyDown={handleKeyDown}
 							/>
-						)}
-						{AudioIcon && (
-							<AudioIconComponent
-								Icon={AudioIcon}
-								handleClick={handleAudioClick}
-								isMuted={isMuted}
-								atomId={atomId}
-								size={iconSize}
+						) : (
+							<VideoProgressBar
+								videoId={videoId}
+								currentTime={currentTime}
+								duration={ref.current!.duration}
 							/>
-						)}
-					</div>
-				)}
-			</>
+						))}
+					{showIcons && (
+						<div
+							css={[
+								iconsContainerStyles,
+								iconsPosition === 'bottom' &&
+									iconsBottomPositionStyles(
+										useLongFormProgressBar,
+									),
+								iconsPosition === 'top' &&
+									iconsTopPositionStyles,
+							]}
+						>
+							{showFullscreenIcon && (
+								<FullscreenIcon
+									handleClick={handleFullscreenClick}
+									atomId={atomId}
+								/>
+							)}
+							{hasAudio && (
+								<AudioIconComponent
+									handleClick={handleAudioClick}
+									isMuted={isMuted}
+								/>
+							)}
+						</div>
+					)}
+				</div>
+			</div>
 		);
 	},
 );

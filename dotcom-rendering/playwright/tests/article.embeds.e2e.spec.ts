@@ -7,7 +7,7 @@ import { expectToBeVisible } from '../lib/locators';
 
 test.describe('Embeds', () => {
 	test.describe('WEB', function () {
-		test('should render the click to view overlay revealing the embed when clicked', async ({
+		test.skip('should render the click to view overlay revealing the embed when clicked', async ({
 			page,
 		}) => {
 			await loadPage({

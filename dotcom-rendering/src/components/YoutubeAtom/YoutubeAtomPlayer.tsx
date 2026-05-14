@@ -15,6 +15,7 @@ import { getAuthStatus } from '../../lib/identity';
 import type { CustomPlayEventDetail } from '../../lib/video';
 import {
 	customSelfHostedVideoPlayAudioEventName,
+	customYoutubePauseEventName,
 	customYoutubePlayEventName,
 } from '../../lib/video';
 import type { AdTargeting } from '../../types/commercial';
@@ -158,12 +159,20 @@ const setAppsConfiguration = async (
 };
 
 /**
- * Dispatches a custom play event so that other players listening
- * for this event will stop playing
+ * Dispatch a custom play and pause event so that other components listening
+ * for this event can handle the video state
  */
 const dispatchCustomPlayEvent = (uniqueId: string) => {
 	document.dispatchEvent(
 		new CustomEvent(customYoutubePlayEventName, {
+			detail: { uniqueId },
+		}),
+	);
+};
+
+const dispatchCustomPauseEvent = (uniqueId: string) => {
+	document.dispatchEvent(
+		new CustomEvent(customYoutubePauseEventName, {
 			detail: { uniqueId },
 		}),
 	);
@@ -299,6 +308,8 @@ const createOnStateChangeListener =
 		}
 
 		if (event.data === YT.PlayerState.PAUSED) {
+			dispatchCustomPauseEvent(uniqueId);
+
 			log('dotcom', {
 				from: loggerFrom,
 				videoId,
@@ -323,6 +334,8 @@ const createOnStateChangeListener =
 			event.data === YT.PlayerState.ENDED &&
 			!progressEvents.hasSentEndEvent
 		) {
+			dispatchCustomPauseEvent(uniqueId);
+
 			log('dotcom', {
 				from: loggerFrom,
 				videoId,

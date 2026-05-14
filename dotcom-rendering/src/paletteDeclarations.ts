@@ -6301,12 +6301,6 @@ const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
-const storylinesBackground: PaletteFunction = () => sourcePalette.neutral[93];
-const storylinesBorder: PaletteFunction = () => sourcePalette.neutral[86];
-const storylinesTitles: PaletteFunction = () => sourcePalette.brand[400];
-const storylinesActiveTab: PaletteFunction = () => sourcePalette.neutral[60];
-const storylinesInactiveTab: PaletteFunction = () => sourcePalette.neutral[38];
-
 // ----- Palette ----- //
 
 /**
@@ -7577,18 +7571,6 @@ const paletteColours = {
 		light: multiBylineNonLinkedTextLight,
 		dark: multiBylineNonLinkedTextDark,
 	},
-	'--narrow-play-icon-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--narrow-play-icon-border': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
-	'--narrow-play-icon-fill': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
-	},
 	'--nav-reader-revenue-link-text': {
 		light: navReaderRevenueLinkText,
 		dark: navReaderRevenueLinkText,
@@ -8153,26 +8135,6 @@ const paletteColours = {
 		light: starRatingFillColourLight,
 		dark: starRatingFillColourDark,
 	},
-	'--storylines-active-tab': {
-		light: storylinesActiveTab,
-		dark: storylinesActiveTab,
-	},
-	'--storylines-background': {
-		light: storylinesBackground,
-		dark: storylinesBackground,
-	},
-	'--storylines-border': {
-		light: storylinesBorder,
-		dark: storylinesBorder,
-	},
-	'--storylines-inactive-tab': {
-		light: storylinesInactiveTab,
-		dark: storylinesInactiveTab,
-	},
-	'--storylines-titles': {
-		light: storylinesTitles,
-		dark: storylinesTitles,
-	},
 	'--straight-lines': {
 		light: straightLinesLight,
 		dark: straightLinesDark,
@@ -8433,21 +8395,21 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[93],
 	},
+	'--video-fullscreen-background': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[0],
+	},
 	'--video-icon': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
 	},
+	'--video-icon-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
 	'--video-icon-border': {
 		light: () => sourcePalette.neutral[60],
 		dark: () => sourcePalette.neutral[60],
-	},
-	'--video-icon-large-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.6),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.6),
-	},
-	'--video-icon-small-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
 	},
 	'--video-progress-bar-background': {
 		light: () => transparentColour(sourcePalette.neutral[7], 0.7),

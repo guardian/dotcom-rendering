@@ -1,8 +1,8 @@
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import preview from '../../.storybook/preview';
 import type { Branding } from '../types/branding';
-import { HostedContentHeader } from './HostedContentHeader';
-import type { Props as HostedContentHeaderProps } from './HostedContentHeader';
+import { HostedContentHeader } from './HostedContentHeader.island';
+import type { Props as HostedContentHeaderProps } from './HostedContentHeader.island';
 import { Section } from './Section';
 
 const meta = preview.meta({

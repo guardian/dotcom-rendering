@@ -92,7 +92,10 @@ describe('Enhance Cards', () => {
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: '',
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: undefined,
@@ -184,10 +187,13 @@ describe('Enhance Cards', () => {
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: '',
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: undefined,
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
 				sources: [
 					{
 						mimeType: 'video/mp4',
@@ -235,7 +241,10 @@ describe('Enhance Cards', () => {
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: '',
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: 'https://guim-example.co.uk/atomID-1.vtt',
@@ -289,6 +298,10 @@ describe('Enhance Cards', () => {
 				sources: [],
 				aspectRatio: 5 / 4,
 				duration: 151,
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
 			};
 
 			expect(getMediaMetadata(testSelfHostedMainMedia)).toEqual({
@@ -437,7 +450,10 @@ describe('Enhance Cards', () => {
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: 'https://guim-example.co.uk/video-image',
+				image: {
+					src: 'https://guim-example.co.uk/video-image',
+					aspectRatio: '5:4',
+				},
 				sources: [
 					{
 						mimeType: 'video/mp4',
@@ -489,6 +505,10 @@ describe('Enhance Cards', () => {
 				],
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
+				image: {
+					src: undefined,
+					aspectRatio: '5:4',
+				},
 			});
 		});
 
@@ -504,7 +524,10 @@ describe('Enhance Cards', () => {
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: undefined,
+				image: {
+					src: undefined,
+					aspectRatio: '5:4',
+				},
 				sources: [
 					{
 						mimeType: 'video/mp4',

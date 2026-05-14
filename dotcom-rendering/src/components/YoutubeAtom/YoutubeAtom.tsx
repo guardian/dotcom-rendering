@@ -22,7 +22,12 @@ export type VideoEventKey =
 	| 'skip'
 	| 'cued'
 	| 'resume'
-	| 'pause';
+	| 'pause'
+	| 'mute'
+	| 'unmute'
+	| 'enter_fullscreen'
+	| 'exit_fullscreen'
+	| 'view';
 
 export type Props = {
 	atomId: string;

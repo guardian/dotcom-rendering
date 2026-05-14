@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
-import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	getOphan,
@@ -40,6 +39,7 @@ import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
 import type { SubtitlesPosition } from './SubtitleOverlay';
 import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
+import type { VideoEventKey } from './YoutubeAtom/YoutubeAtom';
 
 const VISIBILITY_THRESHOLD = 0.5;
 
@@ -131,9 +131,35 @@ const figureStyles = (
 	`}
 `;
 
+const showControlsStyles = css`
+	.controls-container {
+		visibility: visible;
+		opacity: 1;
+		transition:
+			visibility 0.2s,
+			opacity 0.2s ease-in-out;
+	}
+`;
+
+const hideControlsStyles = css`
+	.controls-container {
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			visibility 0.3s,
+			opacity 0.3s ease-in-out;
+		transition-delay: 2.7s;
+	}
+
+	@media (hover: hover) {
+		:hover {
+			${showControlsStyles}
+		}
+	}
+`;
+
 /**
- * Dispatches a custom play audio event so that other videos listening
- * for this event will be muted.
+ * Dispatches a custom play audio event so that other videos listening for this event will be muted.
  */
 export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 	document.dispatchEvent(
@@ -280,6 +306,7 @@ type Props = {
 	videoStyle: VideoPlayerFormat;
 	aspectRatio: number;
 	posterImage: string;
+	posterImageAspectRatio: string;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
 	fallbackImageLoading: CardPictureProps['loading'];
@@ -336,10 +363,12 @@ export const SelfHostedVideo = ({
 	format,
 	isMainMedia,
 	role,
+	posterImageAspectRatio,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
 	const vidRef = useRef<HTMLVideoElement>(null);
+	const playerContainerRef = useRef<HTMLDivElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
@@ -377,7 +406,11 @@ export const SelfHostedVideo = ({
 
 	const showIcons = !isCinemagraph && playerState !== 'NOT_STARTED';
 
-	const iconSize = isDefault ? 'large' : 'small';
+	/**
+	 * Functionality to hide controls when the video is not interacted with
+	 * so the full unobscured video can be displayed to the user without distractions.
+	 */
+	const isHideControlsEnabled = isDefault;
 
 	const useLongFormProgressBar = isDefault;
 
@@ -390,6 +423,28 @@ export const SelfHostedVideo = ({
 
 	const supportsAudio =
 		sources.some((source) => source.hasAudio) && !isCinemagraph;
+
+	const sendOphanTrackingEvent = useCallback(
+		(event: VideoEventKey) => {
+			if (isWeb) {
+				ophanTrackerWeb(atomId, ophanVideoStyle)(event);
+			}
+			if (isApps) {
+				ophanTrackerApps(atomId, ophanVideoStyle)(event);
+			}
+		},
+		[isWeb, isApps, atomId, ophanVideoStyle],
+	);
+
+	const setMutedState = useCallback(
+		({ value, track = true }: { value: boolean; track?: boolean }) => {
+			setIsMuted(value);
+			if (track && isMuted !== value) {
+				sendOphanTrackingEvent(value ? 'mute' : 'unmute');
+			}
+		},
+		[isMuted, sendOphanTrackingEvent],
+	);
 
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
@@ -440,7 +495,7 @@ export const SelfHostedVideo = ({
 		if (!video) return;
 
 		if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
-			setIsMuted(true);
+			setMutedState({ value: true, track: false });
 		}
 
 		setPlayerState(pauseReason);
@@ -525,7 +580,7 @@ export const SelfHostedVideo = ({
 				const thisVideoId = uniqueId;
 
 				if (playedVideoId !== thisVideoId) {
-					setIsMuted(true);
+					setMutedState({ value: true });
 				}
 			}
 		};
@@ -535,7 +590,7 @@ export const SelfHostedVideo = ({
 		 * Triggered by the CustomEvent in YoutubeAtomPlayer.
 		 */
 		const handleCustomPlayYoutubeEvent = () => {
-			setIsMuted(true);
+			setMutedState({ value: true });
 		};
 
 		/**
@@ -599,7 +654,14 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [uniqueId, atomId, sources, renderingTarget, ophanVideoStyle]);
+	}, [
+		setMutedState,
+		uniqueId,
+		atomId,
+		sources,
+		renderingTarget,
+		ophanVideoStyle,
+	]);
 
 	/**
 	 * Track the first time the video comes into view.
@@ -622,6 +684,8 @@ export const SelfHostedVideo = ({
 			},
 			'Web',
 		);
+
+		sendOphanTrackingEvent('view');
 	}, [isInView ? true : undefined]);
 
 	/**
@@ -685,12 +749,7 @@ export const SelfHostedVideo = ({
 	 */
 	const handlePlaying = () => {
 		if (hasTrackedPlay) return;
-		if (isWeb) {
-			ophanTrackerWeb(atomId, ophanVideoStyle)('play');
-		}
-		if (isApps) {
-			ophanTrackerApps(atomId, ophanVideoStyle)('play');
-		}
+		sendOphanTrackingEvent('play');
 		setHasTrackedPlay(true);
 	};
 
@@ -711,9 +770,9 @@ export const SelfHostedVideo = ({
 		if (isMuted) {
 			// Emit video play audio event so other components are aware when a video is played with sound
 			dispatchCustomPlayAudioEvent(uniqueId);
-			setIsMuted(false);
+			setMutedState({ value: false });
 		} else {
-			setIsMuted(true);
+			setMutedState({ value: true });
 		}
 	};
 
@@ -746,8 +805,9 @@ export const SelfHostedVideo = ({
 
 		if (document.fullscreenElement) {
 			void document.exitFullscreen();
+		} else if (playerContainerRef.current) {
+			void playerContainerRef.current.requestFullscreen();
 		}
-		void video.requestFullscreen();
 	};
 
 	/**
@@ -833,7 +893,7 @@ export const SelfHostedVideo = ({
 				seekBackward();
 				break;
 			case 'm':
-				setIsMuted(!isMuted);
+				setMutedState({ value: !isMuted });
 				break;
 		}
 	};
@@ -872,6 +932,14 @@ export const SelfHostedVideo = ({
 			playerState === 'PAUSED_BY_BROWSER' ||
 			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
 
+	const showPauseIcon = isHideControlsEnabled && playerState === 'PLAYING';
+	let showPlayPauseIcon: 'play' | 'pause' | null = null;
+	if (showPlayIcon) {
+		showPlayPauseIcon = 'play';
+	} else if (showPauseIcon) {
+		showPlayPauseIcon = 'pause';
+	}
+
 	/** The aspect ratio of the video will be clamped within the specified range */
 	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
 		aspectRatio,
@@ -889,20 +957,6 @@ export const SelfHostedVideo = ({
 	const isGreyBarsAtTopAndBottomOnDesktop =
 		containerAspectRatioDesktop !== undefined &&
 		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
-
-	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
-
-	const isVertical =
-		fallbackImageSize === 'feature' ||
-		fallbackImageSize === 'feature-large' ||
-		isGreyBarsAtSidesOnDesktop;
-
-	/* This is a hot fix for cards where the video is a different aspect ratio and will be replaced by https://github.com/guardian/dotcom-rendering/pull/15746 */
-	const posterImageAspectRatio = isVertical
-		? '4:5'
-		: isGreyBarsAtTopAndBottomOnDesktop
-		? '16:9'
-		: '5:4';
 
 	const optimisedPosterImage = showPosterImage
 		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
@@ -927,15 +981,21 @@ export const SelfHostedVideo = ({
 				]}
 			>
 				<div
-					css={figureStyles(
-						aspectRatio,
-						aspectRatioOfVisibleVideo,
-						isGreyBarsAtSidesOnDesktop,
-						isGreyBarsAtTopAndBottomOnDesktop,
-						isVideoCroppedAtTopBottom,
-						isVideoCroppedAtLeftRight,
-						containerAspectRatioDesktop,
-					)}
+					css={[
+						figureStyles(
+							aspectRatio,
+							aspectRatioOfVisibleVideo,
+							isGreyBarsAtSidesOnDesktop,
+							isGreyBarsAtTopAndBottomOnDesktop,
+							isVideoCroppedAtTopBottom,
+							isVideoCroppedAtLeftRight,
+							containerAspectRatioDesktop,
+						),
+						isHideControlsEnabled &&
+							(playerState === 'PLAYING'
+								? hideControlsStyles
+								: showControlsStyles),
+					]}
 				>
 					<SelfHostedVideoPlayer
 						sources={optimisedSources}
@@ -949,6 +1009,8 @@ export const SelfHostedVideo = ({
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
 						ref={vidRef}
+						playerContainerRef={playerContainerRef}
+						hasAudio={supportsAudio}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
 						handleLoadedData={handleLoadedData}
@@ -963,10 +1025,8 @@ export const SelfHostedVideo = ({
 						handleFullscreenClick={handleFullscreenClick}
 						updateCurrentTime={updateCurrentTime}
 						onError={onError}
-						AudioIcon={supportsAudio ? AudioIcon : null}
 						preloadPartialData={!!shouldAutoplay}
-						iconSize={iconSize}
-						showPlayIcon={showPlayIcon}
+						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
 						showSubtitles={!isCinemagraph}
 						subtitleSource={subtitleSource}
