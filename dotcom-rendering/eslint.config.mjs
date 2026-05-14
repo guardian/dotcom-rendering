@@ -304,6 +304,7 @@ export default defineConfig([
 		'**/.eslintrc.js',
 		'**/storybook-static/',
 		'**/.storybook/',
+		'**/stories/generated/',
 		'**/dist',
 		'**/test-results/',
 		'**/playwright-report/',
