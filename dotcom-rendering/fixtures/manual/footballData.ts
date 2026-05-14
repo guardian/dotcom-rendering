@@ -41,6 +41,105 @@ export const footballMatchResultV2: FootballMatchV2 = {
 	comment: undefined,
 };
 
+export const matchDayWorldCup: FootballMatches = [
+	{
+		dateISOString: new Date('2026-06-11T00:00:00Z').toISOString(),
+		competitions: [
+			{
+				id: '700',
+				tag: '/football/world-cup-2026',
+				name: 'World Cup 2026',
+				nation: 'International',
+				matches: [
+					{
+						kind: 'Result',
+						dateTimeISOString: new Date(
+							'2026-06-11T19:00:00Z',
+						).toISOString(),
+						paId: '4532490',
+						homeTeam: {
+							name: 'Mexico',
+							id: '5837',
+							score: 2,
+						},
+						awayTeam: {
+							name: 'South Africa',
+							id: '7724',
+							score: 0,
+						},
+					},
+					{
+						kind: 'Result',
+						dateTimeISOString: new Date(
+							'2026-06-11T19:00:00Z',
+						).toISOString(),
+						paId: '23120',
+						homeTeam: {
+							name: 'South Korea',
+							id: '23120',
+							score: 1,
+						},
+						awayTeam: {
+							name: 'Czech Republic',
+							id: '6318',
+							score: 1,
+						},
+						comment: 'Czech Republic won 4-3 on penalties',
+					},
+					{
+						kind: 'Live',
+						dateTimeISOString: new Date(
+							'2026-06-11T20:00:00Z',
+						).toISOString(),
+						paId: '4548910',
+						homeTeam: {
+							name: 'Canada',
+							id: '31901',
+							score: 0,
+						},
+						awayTeam: {
+							name: 'Bosnia-Herzegovina',
+							id: '7531',
+							score: 0,
+						},
+						status: '1st',
+					},
+					{
+						kind: 'Fixture',
+						dateTimeISOString: new Date(
+							'2026-06-11T21:00:00Z',
+						).toISOString(),
+						paId: '4532493',
+						homeTeam: {
+							name: 'USA',
+							id: '7356',
+						},
+						awayTeam: {
+							name: 'Paraguay',
+							id: '8109',
+						},
+					},
+					{
+						kind: 'Fixture',
+						dateTimeISOString: new Date(
+							'2026-06-12T01:00:00Z',
+						).toISOString(),
+						paId: '4532494',
+						homeTeam: {
+							name: 'Qatar',
+							id: '37314',
+						},
+						awayTeam: {
+							name: 'Switzerland',
+							id: '1660',
+						},
+					},
+				],
+			},
+		],
+	},
+];
+
 export const initialDays: FootballMatches = [
 	{
 		dateISOString: new Date('2022-01-01T00:00:00Z').toISOString(),

@@ -1,5 +1,5 @@
 import preview from '../../.storybook/preview';
-import { initialDays } from '../../fixtures/manual/footballData';
+import { matchDayWorldCup } from '../../fixtures/manual/footballData';
 import { FootballMatchDay as FootballMatchDayComponent } from './FootballMatchDay';
 
 const meta = preview.meta({
@@ -9,7 +9,7 @@ const meta = preview.meta({
 
 export const FootballMatchDay = meta.story({
 	args: {
-		matches: initialDays,
+		matches: matchDayWorldCup,
 		competitionId: 'world-cup-2026',
 		guardianBaseUrl: 'https://www.theguardian.com',
 		edition: 'UK',
