@@ -1,7 +1,9 @@
-import { fn, mocked } from 'storybook/test';
+import { fn, mocked, sb } from 'storybook/test';
 import { gridContainerDecorator } from '../../../.storybook/decorators/gridDecorators';
 import preview from '../../../.storybook/preview';
 import { getMatchNotificationsClient } from '../../lib/bridgetApi';
+// @ts-ignore -- Storybook wants the file extension, TS does not.
+sb.mock(import('../../lib/bridgetApi.ts'), { spy: true });
 import { palette } from '../../palette';
 import { NotificationsToggle } from '../NotificationsToggle.stories';
 import { background } from './colours';
