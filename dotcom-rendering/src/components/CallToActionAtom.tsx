@@ -69,20 +69,11 @@ const buttonWrapperStyles = css`
 	position: absolute;
 	flex-direction: column;
 	justify-content: end;
-	align-items: center;
+	align-items: start;
 	padding: 0 ${space[2]}px ${space[6]}px;
 	bottom: 0;
 	left: 0;
 	right: 0;
-
-	/* We want the CTA LinkButton to take full width on smaller screens and it uses an anchor element instead of a button */
-	a {
-		width: 100%;
-
-		${from.tablet} {
-			width: auto;
-		}
-	}
 
 	${from.tablet} {
 		flex-direction: row;
@@ -104,12 +95,9 @@ const textStyles = css`
 
 	${from.tablet} {
 		${textSansBold28}
+		width: auto;
 		margin: 0;
 		margin-right: ${space[5]}px;
-	}
-
-	${from.desktop} {
-		width: auto;
 	}
 `;
 

@@ -7,6 +7,7 @@ import {
 	textSans12,
 	textSansBold12,
 	textSansBold14,
+	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import {
@@ -14,7 +15,12 @@ import {
 	SvgGuardianLogo,
 	SvgInfoRound,
 } from '@guardian/source/react-components';
+import { useEffect, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
+import {
+	customYoutubePauseEventName,
+	customYoutubePlayEventName,
+} from '../lib/video';
 import type { Branding } from '../types/branding';
 import { BrandingLabel } from './BrandingLabel';
 
@@ -124,6 +130,14 @@ const badgeWrapperStyles = css`
 	text-align: center;
 	z-index: 1;
 	background-color: ${sourcePalette.neutral[100]};
+	opacity: 1;
+	transition: opacity 2s ease-in-out;
+`;
+
+const badgeWrapperFadeStyles = css`
+	${until.wide} {
+		opacity: 0;
+	}
 `;
 
 /**
@@ -152,6 +166,26 @@ const GuardianLogo = () => (
 export const HostedContentHeader = ({ branding }: Props) => {
 	const accentColor =
 		branding.hostedCampaignColour ?? sourcePalette.neutral[38];
+	const [shouldFadeLogo, setShouldFadeLogo] = useState<boolean>(false);
+
+	// Logo fading is an exclusive feature for hosted video pages at certain breakpoints
+	// This component only needs rehydration on the video layout
+	const fadeLogo = () => setShouldFadeLogo(true);
+	const unfadeLogo = () => setShouldFadeLogo(false);
+
+	useEffect(() => {
+		document.addEventListener(customYoutubePlayEventName, fadeLogo);
+		document.addEventListener(customYoutubePauseEventName, unfadeLogo);
+
+		return () => {
+			document.removeEventListener(customYoutubePlayEventName, fadeLogo);
+			document.removeEventListener(
+				customYoutubePauseEventName,
+				unfadeLogo,
+			);
+		};
+	}, []);
+
 	return (
 		<div css={headerWrapperStyles}>
 			<div css={brandingStyles}>
@@ -172,7 +206,12 @@ export const HostedContentHeader = ({ branding }: Props) => {
 					/>
 				</div>
 
-				<div css={badgeWrapperStyles}>
+				<div
+					css={[
+						badgeWrapperStyles,
+						shouldFadeLogo && badgeWrapperFadeStyles,
+					]}
+				>
 					<BrandingLabel branding={branding} isHosted={true} />
 				</div>
 			</div>
