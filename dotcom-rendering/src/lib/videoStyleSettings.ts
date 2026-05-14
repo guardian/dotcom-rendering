@@ -78,7 +78,7 @@ const cinemagraphSettings: VideoStyleSettings = {
  * This style is used for videos that are typically longer in length and should not loop.
  */
 const defaultSettings: VideoStyleSettings = {
-	autoplay: false,
+	autoplay: true,
 	loop: false,
 	supportsAudio: true,
 	showFullscreenIcon: true,

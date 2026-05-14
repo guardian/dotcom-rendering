@@ -1015,9 +1015,13 @@ export const SelfHostedVideo = ({
 							containerAspectRatioDesktop,
 						),
 						videoStyleSettings.hideControlsWhenNotInteractedWith &&
-							(playerState === 'PLAYING'
-								? hideControlsStyles
-								: showControlsStyles),
+							(playerState === 'NOT_STARTED' ||
+								playerState === 'PLAYING') &&
+							hideControlsStyles,
+						videoStyleSettings.hideControlsWhenNotInteractedWith &&
+							(playerState === 'PAUSED_BY_USER' ||
+								playerState === 'PAUSED_BY_BROWSER') &&
+							showControlsStyles,
 					]}
 				>
 					<SelfHostedVideoPlayer
