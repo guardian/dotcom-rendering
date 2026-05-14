@@ -20,7 +20,7 @@ type CallToActionProps = {
 
 const blurStyles = css`
 	position: absolute;
-	top: -${space[2]}px;
+	top: -${space[10]}px;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -42,6 +42,10 @@ const blurStyles = css`
 		rgba(0, 0, 0, 0.9619) 56px,
 		rgb(0, 0, 0) 64px
 	);
+
+	${from.tablet} {
+		top: -${space[8]}px;
+	}
 `;
 
 const blurAndTextWrapperStyles = css`
@@ -57,7 +61,7 @@ const textAndButtonWrapperStyles = css`
 	flex-direction: column;
 	justify-content: end;
 	align-items: start;
-	padding: ${space[2]}px ${space[2]}px ${space[6]}px;
+	padding: ${space[3]}px ${space[2]}px ${space[6]}px;
 	z-index: 1;
 
 	${from.tablet} {
