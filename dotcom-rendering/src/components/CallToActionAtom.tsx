@@ -20,11 +20,6 @@ type CallToActionProps = {
 
 const blurStyles = css`
 	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-
 	inset: 0;
 	backdrop-filter: blur(12px) brightness(0.5);
 	@supports not (backdrop-filter: blur(12px)) {
@@ -46,13 +41,18 @@ const blurStyles = css`
 const buttonWrapperStyles = css`
 	display: flex;
 	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+`;
+
+const textAndButtonWrapperStyles = css`
+	display: flex;
 	flex-direction: column;
 	justify-content: end;
 	align-items: start;
 	padding: 0 ${space[2]}px ${space[6]}px;
-	bottom: 0;
-	left: 0;
-	right: 0;
+	z-index: 1;
 
 	${from.tablet} {
 		flex-direction: row;
@@ -113,11 +113,7 @@ export const CallToActionAtom = ({
 				`}
 			/>
 			<div css={buttonWrapperStyles}>
-				<div
-					css={css`
-						z-index: 1;
-					`}
-				>
+				<div css={textAndButtonWrapperStyles}>
 					{!!text && <h2 css={textStyles}>{text}</h2>}
 					<LinkButton
 						href={linkUrl}
