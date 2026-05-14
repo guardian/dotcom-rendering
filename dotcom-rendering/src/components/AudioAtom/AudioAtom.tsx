@@ -331,7 +331,6 @@ export const AudioAtom = ({
 				<h4 css={titleStyle}>{title}</h4>
 			</div>
 			<div css={audioBodyStyle}>
-				{}
 				<audio
 					css={audioElementStyle}
 					src={urlToUse}

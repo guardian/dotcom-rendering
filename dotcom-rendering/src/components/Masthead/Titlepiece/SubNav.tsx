@@ -80,7 +80,6 @@ export const SubNav = ({
 }: Props) => {
 	return (
 		<>
-			{}
 			<ul
 				css={[
 					subNavStyles,
@@ -92,7 +91,6 @@ export const SubNav = ({
 					'--sub-nav-link': themePalette('--sub-nav-link-header'),
 				}}
 			>
-				{}
 				{subNavSections.parent && (
 					<li
 						key={subNavSections.parent.url}
