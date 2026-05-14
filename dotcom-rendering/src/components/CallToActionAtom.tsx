@@ -147,8 +147,6 @@ export const CallToActionAtom = ({
 							? sourcePalette.neutral[100]
 							: sourcePalette.neutral[0],
 						backgroundPrimary: buttonBgColour,
-						// This should be changed with `calculateHoverColour()` once we have the function available as DCR needs to upgrade Source to 12.1.0 to use it.
-						// Check https://github.com/guardian/csnx/blob/857116cf826dc700742f14c5a5f005bd6d39f1be/libs/%40guardian/source/CHANGELOG.md?plain=1#L20
 						backgroundPrimaryHover:
 							calculateHoverColour(buttonBgColour),
 					}}
