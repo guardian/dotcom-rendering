@@ -120,10 +120,16 @@ const isPuzzleItem = (data: unknown): boolean =>
 	isObject(data) &&
 	isString(data.title) &&
 	isString(data.type) &&
-	isString(data.set);
+	isString(data.set) &&
+	(data.variant === undefined || isString(data.variant));
 
 const isPuzzleContainer = (data: unknown): boolean => {
-	if (!isObject(data) || !isString(data.title) || !isObject(data.content)) {
+	if (
+		!isObject(data) ||
+		!isString(data.title) ||
+		(data.variant !== undefined && !isString(data.variant)) ||
+		!isObject(data.content)
+	) {
 		return false;
 	}
 

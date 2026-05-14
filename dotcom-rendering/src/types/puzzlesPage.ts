@@ -9,6 +9,7 @@ export type PuzzleItem = {
 	set: string;
 	url?: string;
 	index?: number;
+	variant?: string;
 };
 
 export type PuzzleContent = {
@@ -18,6 +19,7 @@ export type PuzzleContent = {
 
 export type PuzzleContainer = {
 	title: string;
+	variant?: string;
 	content: PuzzleContent;
 };
 
