@@ -720,17 +720,24 @@ export const SelfHostedVideo = ({
 		}
 	}, [shouldAutoplay, isInView, playerState]);
 
+	/**
+	 * Capture fullscreen tracking events across browsers and devices
+	 * We need to support events across:
+	 * 	- Browsers with fullscreen API support
+	 * 	- OSX Safari
+	 * 	- iOS Safari
+	 */
 	useEffect(() => {
 		const video = vidRef.current;
+		const playerContainer = playerContainerRef.current;
 
-		if (!video) {
-			return;
-		}
+		if (!playerContainer && !video) return;
 
 		const reportFullscreenEvent = () => {
 			const event =
 				document.fullscreenElement ||
-				('webkitDisplayingFullscreen' in video &&
+				(video &&
+					'webkitDisplayingFullscreen' in video &&
 					video.webkitDisplayingFullscreen)
 					? 'enter_fullscreen'
 					: 'exit_fullscreen';
@@ -739,12 +746,27 @@ export const SelfHostedVideo = ({
 		};
 
 		for (const event of fullscreenChangeEvents) {
-			video.addEventListener(event, reportFullscreenEvent);
+			if (video) {
+				video.addEventListener(event, reportFullscreenEvent);
+			}
+
+			if (playerContainer) {
+				playerContainer.addEventListener(event, reportFullscreenEvent);
+			}
 		}
 
 		return () => {
 			for (const event of fullscreenChangeEvents) {
-				video.removeEventListener(event, reportFullscreenEvent);
+				if (video) {
+					video.removeEventListener(event, reportFullscreenEvent);
+				}
+
+				if (playerContainer) {
+					playerContainer.removeEventListener(
+						event,
+						reportFullscreenEvent,
+					);
+				}
 			}
 		};
 	}, [sendOphanTrackingEvent]);
