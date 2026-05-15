@@ -205,6 +205,7 @@ export const ArticleRenderer = ({
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}
+			// TODO: Conditionally apply grid for interactives?
 			css={[commercialPosition, spacefinderAdStyles]}
 		>
 			{renderingTarget === 'Apps'
