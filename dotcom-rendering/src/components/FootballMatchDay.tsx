@@ -34,7 +34,7 @@ export const FootballMatchDay = ({
 }: Props) => {
 	const competitionTag = matches[0]?.competitions[0]?.tag;
 	const competitionFixturesUrl = competitionTag
-		? `${competitionTag}/overview`
+		? `/${competitionTag}/overview`
 		: `/football`;
 
 	return (

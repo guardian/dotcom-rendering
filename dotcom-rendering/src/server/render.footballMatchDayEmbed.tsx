@@ -1,6 +1,7 @@
 import CleanCSS from 'clean-css';
 import { FootballMatchDay } from '../components/FootballMatchDay';
 import type { FootballMatches } from '../footballMatches';
+import type { EditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { rawFontsCss } from '../lib/fonts-css';
 
@@ -24,12 +25,14 @@ const template = (html: string, css: string): string => {
 
 export const renderFootballMatchDayEmbed = (
 	matches: FootballMatches,
+	guardianBaseUrl: string,
+	edition: EditionId,
 ): { html: string } => {
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<FootballMatchDay
 			matches={matches}
-			guardianBaseUrl="https://www.theguardian.com"
-			edition="UK"
+			guardianBaseUrl={guardianBaseUrl}
+			edition={edition}
 		/>,
 	);
 

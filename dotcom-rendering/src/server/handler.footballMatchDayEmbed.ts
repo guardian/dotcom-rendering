@@ -15,6 +15,8 @@ export const handleFootballMatchDayEmbed: RequestHandler = ({ body }, res) => {
 
 	const { html } = renderFootballMatchDayEmbed(
 		parsedFootballData.matchesList,
+		parsedFootballData.guardianBaseURL,
+		parsedFootballData.editionId,
 	);
 	res.status(200).send(html);
 };
