@@ -27,20 +27,21 @@ const blurStyles = css`
 	backdrop-filter: blur(12px) brightness(0.5);
 	@supports not (backdrop-filter: blur(12px)) {
 		background-color: linear-gradient(
-			${transparentColour(sourcePalette.neutral[10], 0.7)},
-			0
+			to top,
+			${transparentColour(sourcePalette.neutral[10], 0.99)},
+			${transparentColour(sourcePalette.neutral[10], 0.95)},
+			${transparentColour(sourcePalette.neutral[10], 0.85)},
+			${transparentColour(sourcePalette.neutral[10], 0.75)},
+			transparent
 		);
 	}
 	mask-image: linear-gradient(
-		transparent 0px,
-		rgba(0, 0, 0, 0.0381) 8px,
-		rgba(0, 0, 0, 0.1464) 16px,
-		rgba(0, 0, 0, 0.3087) 24px,
-		rgba(0, 0, 0, 0.5) 32px,
-		rgba(0, 0, 0, 0.6913) 40px,
-		rgba(0, 0, 0, 0.8536) 48px,
-		rgba(0, 0, 0, 0.9619) 56px,
-		rgb(0, 0, 0) 64px
+		to top,
+		${transparentColour(sourcePalette.neutral[10], 0.99)},
+		${transparentColour(sourcePalette.neutral[10], 0.95)},
+		${transparentColour(sourcePalette.neutral[10], 0.85)},
+		${transparentColour(sourcePalette.neutral[10], 0.75)},
+		transparent
 	);
 
 	${from.tablet} {
@@ -131,7 +132,6 @@ export const CallToActionAtom = ({
 						size="small"
 						icon={<SvgExternal />}
 						theme={{
-							// We also still need to implement the dark mode based on the provided designs which should be the same as not providing an accent colour.
 							textPrimary: accentColor
 								? sourcePalette.neutral[100]
 								: sourcePalette.neutral[0],
