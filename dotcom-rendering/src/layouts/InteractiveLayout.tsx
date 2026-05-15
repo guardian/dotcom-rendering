@@ -54,7 +54,13 @@ import {
 } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
-const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
+const InteractiveGrid = ({
+	children,
+	topHat,
+}: {
+	children: React.ReactNode;
+	topHat: 'regular' | 'fullWidth';
+}) => (
 	<div
 		className={interactiveLegacyClasses.contentInteractiveGrid}
 		css={css`
@@ -78,84 +84,104 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
-				/*
-					Explanation of each unit of grid-template-columns
-
-					Left Column (220 - 1px border)
-					Vertical grey border
-					Main content
-				*/
 				${from.wide} {
 					grid-template-columns: 219px 1px 1020px;
-
-					grid-template-areas:
-						'title  border  headline'
-						'.      border  standfirst'
-						'.      border  media'
-						'.      border  media'
-						'.      border  lines'
-						'.      border  meta'
-						'body   body    body'
-						'.      .       .';
+					grid-template-areas: ${topHat === 'fullWidth'
+						? `'media  media   media'
+						   'title  border  headline'
+						   '.      border  standfirst'
+						   '.      border  lines'
+						   '.      border  meta'
+						   'body   body    body'
+						   '.      .       .'`
+						: `'title  border  headline'
+						   '.      border  standfirst'
+						   '.      border  media'
+						   '.      border  media'
+						   '.      border  lines'
+						   '.      border  meta'
+						   'body   body    body'
+						   '.      .       .'`};
 				}
 
-				/*
-					Explanation of each unit of grid-template-columns
-
-					Left Column (220 - 1px border)
-					Vertical grey border
-					Main content
-				*/
 				${until.wide} {
 					grid-template-columns: 140px 1px 940px;
-
-					grid-template-areas:
-						'title  border  headline'
-						'.      border  standfirst'
-						'.      border  media'
-						'.      border  media'
-						'.      border  lines'
-						'.      border  meta'
-						'body   body    body'
-						'.      .       .';
+					grid-template-areas: ${topHat === 'fullWidth'
+						? `'media  media   media'
+						   'title  border  headline'
+						   '.      border  standfirst'
+						   '.      border  lines'
+						   '.      border  meta'
+						   'body   body    body'
+						   '.      .       .'`
+						: `'title  border  headline'
+						   '.      border  standfirst'
+						   '.      border  media'
+						   '.      border  media'
+						   '.      border  lines'
+						   '.      border  meta'
+						   'body   body    body'
+						   '.      .       .'`};
 				}
 
 				${until.leftCol} {
-					grid-template-columns: 100%; /* Main content */
-					grid-template-areas:
-						'title'
-						'headline'
-						'standfirst'
-						'media'
-						'lines'
-						'meta'
-						'body'
-						'.';
+					grid-template-columns: 100%;
+					grid-template-areas: ${topHat === 'fullWidth'
+						? `'media'
+						   'title'
+						   'headline'
+						   'standfirst'
+						   'lines'
+						   'meta'
+						   'body'
+						   '.'`
+						: `'title'
+						   'headline'
+						   'standfirst'
+						   'media'
+						   'lines'
+						   'meta'
+						   'body'
+						   '.'`};
 				}
 
 				${until.desktop} {
-					grid-template-columns: 100%; /* Main content */
-					grid-template-areas:
-						'title'
-						'headline'
-						'standfirst'
-						'media'
-						'lines'
-						'meta'
-						'body';
+					grid-template-columns: 100%;
+					grid-template-areas: ${topHat === 'fullWidth'
+						? `'media'
+						   'title'
+						   'headline'
+						   'standfirst'
+						   'lines'
+						   'meta'
+						   'body'`
+						: `'title'
+						   'headline'
+						   'standfirst'
+						   'media'
+						   'lines'
+						   'meta'
+						   'body'`};
 				}
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-					grid-template-columns: 100%; /* Main content */
-					grid-template-areas:
-						'media'
-						'title'
-						'headline'
-						'standfirst'
-						'lines'
-						'meta'
-						'body';
+					grid-template-columns: 100%;
+					grid-template-areas: ${topHat === 'fullWidth'
+						? `'media'
+						   'title'
+						   'headline'
+						   'standfirst'
+						   'lines'
+						   'meta'
+						   'body'`
+						: `'media'
+						   'title'
+						   'headline'
+						   'standfirst'
+						   'lines'
+						   'meta'
+						   'body'`};
 				}
 			}
 		`}
@@ -231,6 +257,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 			return role === 'fullWidth';
 		}),
 	);
+
+	const topHat: 'regular' | 'fullWidth' = 'fullWidth';
 
 	return (
 		<>
@@ -326,24 +354,39 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					<div
 						className={interactiveLegacyClasses.contentInteractive}
 					>
-						<InteractiveGrid>
-							<GridItem area="media">
-								<div css={maxWidth}>
-									<MainMedia
-										format={format}
-										elements={article.mainMediaElements}
-										host={host}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										ajaxUrl={article.config.ajaxUrl}
-										abTests={article.config.abTests}
-										switches={article.config.switches}
-										isAdFreeUser={article.isAdFreeUser}
-										isSensitive={article.config.isSensitive}
-										editionId={article.editionId}
-										shouldHideAds={article.shouldHideAds}
-									/>
-								</div>
+						<InteractiveGrid topHat={topHat}>
+							<GridItem
+								area="media"
+								customCss={
+									topHat === 'fullWidth'
+										? css`
+												width: calc(100vw);
+												position: relative;
+												left: 50%;
+												right: 50%;
+												margin-left: -50vw;
+												margin-right: -50vw;
+												aspect-ratio: 16 / 9;
+												object-fit: cover;
+												overflow: hidden;
+										  `
+										: undefined
+								}
+							>
+								<MainMedia
+									format={format}
+									elements={article.mainMediaElements}
+									host={host}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
+									ajaxUrl={article.config.ajaxUrl}
+									abTests={article.config.abTests}
+									switches={article.config.switches}
+									isAdFreeUser={article.isAdFreeUser}
+									isSensitive={article.config.isSensitive}
+									editionId={article.editionId}
+									shouldHideAds={article.shouldHideAds}
+								/>
 							</GridItem>
 							<GridItem area="title" element="aside">
 								<div

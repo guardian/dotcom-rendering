@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, type SerializedStyles } from '@emotion/react';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
@@ -8,6 +8,7 @@ type Props = {
 	 * The element type to use.
 	 */
 	element?: 'div' | 'article' | 'main' | 'aside' | 'section';
+	customCss?: SerializedStyles;
 };
 
 const rightColumnStyles = css`
@@ -36,12 +37,14 @@ export const GridItem = ({
 	children,
 	area,
 	element: Element = 'div',
+	customCss,
 }: Props) => (
 	<Element
 		css={[
 			area === 'body' && bodyStyles,
 			area === 'right-column' && rightColumnStyles,
 			gridArea,
+			customCss,
 		]}
 		style={{
 			'--grid-area': area,
