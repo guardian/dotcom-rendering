@@ -2,6 +2,7 @@ import { palette } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { CricketScorecardPage } from '../components/CricketScorecardPage';
+import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.island';
 import { FootballMatchInfoPage } from '../components/FootballMatchInfoPage';
 import { FootballTablesPage } from '../components/FootballTablesPage';
@@ -100,6 +101,12 @@ export const SportDataPageLayout = (
 
 	const contributionsServiceUrl = getContributionsServiceUrl(sportData);
 
+	const isWorldCup2026 = [
+		'football/world-cup-2026',
+		'football/world-cup-2026/fixtures',
+		'football/world-cup-2026/overview',
+	].includes(sportData.config.pageId);
+
 	return (
 		<>
 			{isWeb && (
@@ -126,7 +133,7 @@ export const SportDataPageLayout = (
 						discussionApiUrl={sportData.config.discussionApiUrl}
 						idApiUrl={sportData.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
+						showSubNav={!isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkin={sportData.config.hasPageSkin}
 						pageId={sportData.config.pageId}

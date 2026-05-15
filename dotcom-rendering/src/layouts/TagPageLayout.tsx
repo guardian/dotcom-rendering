@@ -66,6 +66,12 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
 
+	const isWorldCup2026 = [
+		'football/world-cup-2026',
+		'football/world-cup-2026/fixtures',
+		'football/world-cup-2026/overview',
+	].includes(pageId);
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -91,7 +97,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					discussionApiUrl={tagPage.config.discussionApiUrl}
 					idApiUrl={tagPage.config.idApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
-					showSubNav={true}
+					showSubNav={!isWorldCup2026}
 					showSlimNav={false}
 					hasPageSkin={hasPageSkin}
 					pageId={pageId}
