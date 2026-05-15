@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { useConfig } from '../components/ConfigContext';
+import { grid } from '../grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
@@ -9,7 +10,6 @@ import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
 import { RenderArticleElement } from './renderElement';
 import { withSignInGateSlot } from './withSignInGateSlot';
-import { grid } from '../grid';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -93,7 +93,6 @@ export const ArticleRenderer = ({
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
 				shouldHideAds={shouldHideAds}
 				idApiUrl={idApiUrl}
-				isShinyNewInteractiveLayout={isShinyNewInteractiveLayout}
 			/>
 		);
 	});
