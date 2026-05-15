@@ -122,6 +122,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
+	const isWorldCup2026 = [
+		'football/world-cup-2026',
+		'football/world-cup-2026/fixtures',
+		'football/world-cup-2026/overview',
+	].includes(pageId);
+
 	const filteredCollections = front.pressedPage.collections.filter(
 		(collection) => !isHighlights(collection),
 	);
@@ -227,7 +233,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					discussionApiUrl={front.config.discussionApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
 					idApiUrl={front.config.idApiUrl}
-					showSubNav={!isPaidContent}
+					showSubNav={!isPaidContent && !isWorldCup2026}
 					showSlimNav={false}
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}

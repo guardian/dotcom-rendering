@@ -44,7 +44,7 @@ const configs = [
 			'football/world-cup-2026/fixtures',
 			'football/world-cup-2026/overview',
 		],
-		tagIds: ['football/world-cup-2026'],
+		tagIds: [],
 		textColor: palette.neutral[100],
 		backgroundColor: palette.brand[400],
 		title: {
