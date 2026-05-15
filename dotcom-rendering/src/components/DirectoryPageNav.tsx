@@ -31,7 +31,7 @@ interface DirectoryPageNavConfig {
 		phablet: string;
 		tablet: string;
 		desktop: string;
-		wide?: string;
+		wide: string;
 	};
 }
 
@@ -129,6 +129,7 @@ const configs = [
 			tablet: 'https://uploads.guim.co.uk/2026/02/03/winter-olympics-740px-thin.jpg',
 			desktop:
 				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-980px.jpg',
+			wide: 'https://uploads.guim.co.uk/2026/02/03/winter-olympics-980px.jpg',
 		},
 	},
 	// Winter Paralympics 2026
@@ -169,6 +170,7 @@ const configs = [
 			tablet: 'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-740px-thin.jpg',
 			desktop:
 				'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-980px.jpg',
+			wide: 'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-980px.jpg',
 		},
 	},
 ] satisfies DirectoryPageNavConfig[];
