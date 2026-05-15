@@ -6,6 +6,8 @@ import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
 import { CricketMatchHeader } from './CricketMatchHeader/CricketMatchHeader';
 import { CricketScorecardNew } from './CricketScorecardNew';
+import { ComponentProps } from 'react';
+import { Tabs } from './FootballMatchHeader/Tabs';
 
 export const CricketScorecardPageNew = ({
 	match,
@@ -13,6 +15,7 @@ export const CricketScorecardPageNew = ({
 	edition,
 	lineups,
 	officials,
+	tabs,
 }: {
 	match: CricketMatch;
 	allInnings: Innings[];
@@ -22,10 +25,11 @@ export const CricketScorecardPageNew = ({
 		awayTeam: string[];
 	};
 	officials: string[];
+	tabs: ComponentProps<typeof Tabs>;
 }) => {
 	return (
 		<main id="maincontent">
-			<CricketMatchHeader match={match} edition={edition} />
+			<CricketMatchHeader match={match} edition={edition} tabs={tabs} />
 			<div css={bodyGridStyles}>
 				<div
 					css={css`
