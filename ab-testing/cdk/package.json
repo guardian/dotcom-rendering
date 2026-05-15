@@ -12,7 +12,7 @@
 	"devDependencies": {
 		"@aws-sdk/client-s3": "3.995.0",
 		"@aws-sdk/client-ssm": "3.995.0",
-		"@guardian/cdk": "62.6.1",
+		"@guardian/cdk": "63.3.0",
 		"@guardian/tsconfig": "1.0.1",
 		"@types/node": "22.17.0",
 		"aws-cdk": "2.1115.1",
