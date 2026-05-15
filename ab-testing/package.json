@@ -9,9 +9,9 @@
 		"test": "pnpm --filter @guardian/ab-testing-* test"
 	},
 	"devDependencies": {
-		"@guardian/eslint-config": "12.0.1",
+		"@guardian/eslint-config": "14.0.1",
 		"@guardian/tsconfig": "1.0.1",
-		"eslint": "9.39.1",
+		"eslint": "10.3.0",
 		"typescript": "5.9.3"
 	}
 }
