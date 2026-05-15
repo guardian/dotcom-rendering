@@ -2,7 +2,6 @@
 	"extends": "@guardian/tsconfig/tsconfig.json",
 	"compilerOptions": {
 		"allowJs": true,
-		"baseUrl": "./",
 		"forceConsistentCasingInFileNames": true,
 		"jsx": "react-jsx",
 		"jsxImportSource": "@emotion/react",
@@ -11,10 +10,6 @@
 		"noEmit": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedIndexedAccess": true,
-		"paths": {
-			/* Aliases should also be added to the webpack and jest configurations */
-			"*": ["node_modules/@types/*", "*"] // Make sure that package linking doesn't confuse things https://github.com/microsoft/TypeScript/issues/11916#issuecomment-257130001
-		},
 		"preserveConstEnums": true,
 		"types": [
 			"node",
@@ -31,7 +26,6 @@
 			"chai"
 		]
 	},
-	"include": ["**/*", ".storybook/mocks/bridgetApi.ts"],
 	"exclude": [
 		"storybook-static",
 		"target",
