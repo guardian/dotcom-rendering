@@ -142,10 +142,10 @@ const badgeWrapperFadeStyles = css`
 const POPOVER_WIDTH = '280px';
 const popoverOverrides = css`
 	${until.tablet} {
-		left: calc(-${POPOVER_WIDTH} + ${space[5]}px);
+		left: calc(-${POPOVER_WIDTH} + ${space[8]}px);
 		transform: translateX(50%);
 		::after {
-			left: calc(50% - ${space[6]}px);
+			left: calc(50% - ${space[8]}px);
 		}
 	}
 `;
