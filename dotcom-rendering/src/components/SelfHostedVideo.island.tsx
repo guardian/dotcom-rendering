@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
-import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	getOphan,
@@ -160,8 +159,7 @@ const hideControlsStyles = css`
 `;
 
 /**
- * Dispatches a custom play audio event so that other videos listening
- * for this event will be muted.
+ * Dispatches a custom play audio event so that other videos listening for this event will be muted.
  */
 export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 	document.dispatchEvent(
@@ -370,6 +368,7 @@ export const SelfHostedVideo = ({
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
 	const vidRef = useRef<HTMLVideoElement>(null);
+	const playerContainerRef = useRef<HTMLDivElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
@@ -412,8 +411,6 @@ export const SelfHostedVideo = ({
 	 * so the full unobscured video can be displayed to the user without distractions.
 	 */
 	const isHideControlsEnabled = isDefault;
-
-	const iconSize = isDefault ? 'large' : 'small';
 
 	const useLongFormProgressBar = isDefault;
 
@@ -808,8 +805,9 @@ export const SelfHostedVideo = ({
 
 		if (document.fullscreenElement) {
 			void document.exitFullscreen();
+		} else if (playerContainerRef.current) {
+			void playerContainerRef.current.requestFullscreen();
 		}
-		void video.requestFullscreen();
 	};
 
 	/**
@@ -960,8 +958,6 @@ export const SelfHostedVideo = ({
 		containerAspectRatioDesktop !== undefined &&
 		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
 
-	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
-
 	const optimisedPosterImage = showPosterImage
 		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
 		: undefined;
@@ -1013,6 +1009,8 @@ export const SelfHostedVideo = ({
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
 						ref={vidRef}
+						playerContainerRef={playerContainerRef}
+						hasAudio={supportsAudio}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
 						handleLoadedData={handleLoadedData}
@@ -1027,9 +1025,7 @@ export const SelfHostedVideo = ({
 						handleFullscreenClick={handleFullscreenClick}
 						updateCurrentTime={updateCurrentTime}
 						onError={onError}
-						AudioIcon={supportsAudio ? AudioIcon : null}
 						preloadPartialData={!!shouldAutoplay}
-						iconSize={iconSize}
 						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
 						showSubtitles={!isCinemagraph}

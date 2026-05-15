@@ -45,19 +45,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "thefilter-at-a-glance-redesign-v2",
-		description:
-			"Testing redesigned at a glance component on The Filter articles",
-		owners: ["thefilter.dev@guardian.co.uk"],
-		expirationDate: "2026-05-15",
-		type: "server",
-		status: "ON",
-		audienceSize: 100 / 100,
-		audienceSpace: "B",
-		groups: ["control", "carousel", "stacked-default", "stacked-expanded"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "growth-admiral-adblock-detect",
 		description:
 			"Control group for Admiral ad blocker - runs the detection script but does not show the modal",
@@ -81,19 +68,6 @@ const ABTests: ABTest[] = [
 		audienceSize: 5 / 100,
 		audienceSpace: "A",
 		groups: ["control"],
-		shouldForceMetricsCollection: false,
-	},
-	{
-		name: "fronts-and-curation-tag-page-storylines",
-		description:
-			"Testing the AI generated storylines component on tag pages",
-		owners: ["fronts.and.curation@guardian.co.uk"],
-		expirationDate: `2026-04-30`,
-		type: "server",
-		status: "ON",
-		audienceSize: 0 / 100,
-		audienceSpace: "B",
-		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
 	{

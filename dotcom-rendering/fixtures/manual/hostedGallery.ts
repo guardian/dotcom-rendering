@@ -2841,7 +2841,6 @@ export const hostedGallery: FEArticle = {
 			enableHlsWeb: false,
 			ampArticleSwitch: true,
 			remarketing: true,
-			tagPageStorylines: false,
 			articleEndSlot: true,
 			keyEventsCarousel: false,
 			registerWithPhone: true,
