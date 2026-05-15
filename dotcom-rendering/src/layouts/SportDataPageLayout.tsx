@@ -145,6 +145,8 @@ export const SportDataPageLayout = (
 
 			{isWeb && renderAds && hasSurveyAd && <AdSlot position="survey" />}
 
+			{isWeb && <DirectoryPageNav pageId={sportData.config.pageId} />}
+
 			<SportsPage
 				sportData={sportData}
 				renderAds={renderAds}
