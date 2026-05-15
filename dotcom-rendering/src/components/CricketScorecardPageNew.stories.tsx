@@ -23,11 +23,11 @@ const baseArgs = {
 		venue: 'Bengaluru Cricket Ground',
 		matchDate: new Date('2026-01-26'),
 		homeTeam: {
-			paID: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+			paID: 'f822b9f9-9fdc-399f-54f9-e621edaf0a28',
 			name: 'India',
 		},
 		awayTeam: {
-			paID: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+			paID: '110c70b5-c05f-3be7-6670-baecd50a8c6b',
 			name: 'New Zealand',
 		},
 		innings: [],
