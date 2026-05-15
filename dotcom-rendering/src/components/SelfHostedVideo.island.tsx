@@ -706,6 +706,22 @@ export const SelfHostedVideo = ({
 		ophanVideoStyle,
 	]);
 
+	/* Creates video-specific event listeners to handle fullscreen behaviour */
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		const handleEndFullscreen = () => setIsWebKitFullscreen(false);
+
+		video.addEventListener('webkitendfullscreen', handleEndFullscreen);
+
+		return () =>
+			video.removeEventListener(
+				'webkitendfullscreen',
+				handleEndFullscreen,
+			);
+	}, []);
+
 	/**
 	 * Track the first time the video comes into view.
 	 */
@@ -746,19 +762,6 @@ export const SelfHostedVideo = ({
 			setShowPosterImage(true);
 		}
 	}, [shouldAutoplay, isInView, playerState]);
-
-	useEffect(() => {
-		const video = vidRef.current;
-		if (!video) return;
-
-		const handleEndFullscreen = () => setIsWebKitFullscreen(false);
-		video.addEventListener('webkitendfullscreen', handleEndFullscreen);
-		return () =>
-			video.removeEventListener(
-				'webkitendfullscreen',
-				handleEndFullscreen,
-			);
-	}, []);
 
 	if (adapted) {
 		return FallbackImageComponent;
