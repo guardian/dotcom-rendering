@@ -121,7 +121,6 @@ export const SignInGateAuxiaV2 = ({
 	};
 
 	return (
-		// eslint-disable-next-line jsx-a11y/no-static-element-interactions -- div needs click and keyup handlers for modal backdrop dismiss functionality
 		<div
 			css={modalOverlay}
 			className={dismissStatusLabel}

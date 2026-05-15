@@ -60,7 +60,7 @@ type Props = {
 };
 
 type BrazeMeta = {
-	dataFromBraze: { [key: string]: string };
+	dataFromBraze: Record<string, string>;
 	logImpressionWithBraze: () => void;
 	logButtonClickWithBraze: (id: number) => void;
 };

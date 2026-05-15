@@ -131,7 +131,6 @@ const baseConfiguration = {
 	uniqueId: '-ZCvZmYlQD8-1',
 	alt: '',
 	eventEmitters: [
-		// eslint-disable-next-line no-console -- check event emitters are called
 		(e: unknown) => console.log(`event emitter ${String(e)} called`),
 	],
 	duration: 252,

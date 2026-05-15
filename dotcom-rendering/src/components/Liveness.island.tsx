@@ -45,7 +45,9 @@ function insert(
 	// Remove duplicates
 	// -----------------
 	for (const article of fragment.querySelectorAll('article')) {
-		if (document.getElementById(article.id)) article.remove();
+		if (document.getElementById(article.id)) {
+			article.remove();
+		}
 	}
 
 	// Hydrate
@@ -61,7 +63,9 @@ function insert(
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
 	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
-	if (!blogBody) return;
+	if (!blogBody) {
+		return;
+	}
 	// nextSibling? See: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore#example_2
 	blogBody.insertBefore(fragment, topOfBlog.nextSibling);
 
@@ -242,10 +246,14 @@ export const Liveness = ({
 	}, [numHiddenBlocks, webTitle]);
 
 	useEffect(() => {
-		if (!topOfBlog) return;
+		if (!topOfBlog) {
+			return;
+		}
 
 		const observer = new window.IntersectionObserver(([entry]) => {
-			if (!entry) return;
+			if (!entry) {
+				return;
+			}
 
 			setTopOfBlogVisible(entry.isIntersecting);
 

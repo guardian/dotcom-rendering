@@ -31,7 +31,9 @@ jest.mock('../lib/useBrowserId', () => ({
 }));
 
 type RecaptchaProps = {
+	// eslint-disable-next-line react/no-unused-prop-types -- false positive
 	onChange?: (token: string | null) => void;
+	// eslint-disable-next-line react/no-unused-prop-types -- false positive
 	onError?: () => void;
 };
 
@@ -97,6 +99,7 @@ const getRequestBodyParams = (callIndex = 0): URLSearchParams => {
 	const [, requestInit] = (global.fetch as jest.Mock).mock.calls[
 		callIndex
 	] as [string, RequestInit];
+	// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a test
 	return new URLSearchParams(requestInit.body?.toString() ?? '');
 };
 

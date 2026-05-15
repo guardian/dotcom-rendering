@@ -51,7 +51,7 @@ export const renderHtml = ({
 	const linkedData = frontendData.linkedData;
 
 	const darkModeAvailable =
-		frontendData.config.serverSideABTests?.['webx-dark-mode-web'] ===
+		frontendData.config.serverSideABTests['webx-dark-mode-web'] ===
 		'enable';
 
 	const renderingTarget = 'Web';

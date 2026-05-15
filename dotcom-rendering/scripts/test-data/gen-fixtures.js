@@ -1,6 +1,3 @@
-/* eslint-disable no-console -- script */
-/* eslint-disable @typescript-eslint/unbound-method -- path.resolve */
-
 const { execFileSync } = require('node:child_process');
 const fs = require('node:fs/promises');
 const { resolve } = require('node:path');

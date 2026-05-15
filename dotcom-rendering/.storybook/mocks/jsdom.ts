@@ -12,16 +12,17 @@ export class JSDOM {
 	constructor() {}
 	window = window;
 
-	static fragment(html) {
+	static fragment(html: string): DocumentFragment | undefined {
 		try {
 			const docNodes = new DOMParser().parseFromString(html, 'text/html')
 				.body.childNodes;
 
 			const frag = new DocumentFragment();
-			Array.from(docNodes).forEach((node) => frag.appendChild(node));
+			for (const node of Array.from(docNodes)) frag.appendChild(node);
 			return frag;
 		} catch (e) {
 			console.error(e);
+			return undefined;
 		}
 	}
 }

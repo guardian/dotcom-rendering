@@ -69,10 +69,14 @@ const rememberFilters = ({ threads, pageSize, orderBy }: FilterOptions) => {
 
 const commentIdFromUrl = () => {
 	const { hash } = window.location;
-	if (!hash.includes('comment')) return;
+	if (!hash.includes('comment')) {
+		return;
+	}
 
 	const [, commentId] = hash.split('-');
-	if (!commentId) return;
+	if (!commentId) {
+		return;
+	}
 
 	return commentId;
 };
@@ -87,8 +91,12 @@ const remapToValidFilters = (
 ) => {
 	const permalinkBeingUsed = !!hashCommentId;
 
-	if (!permalinkBeingUsed) return filters;
-	if (filters.threads !== 'collapsed') return filters;
+	if (!permalinkBeingUsed) {
+		return filters;
+	}
+	if (filters.threads !== 'collapsed') {
+		return filters;
+	}
 	return {
 		...filters,
 		threads: 'expanded',

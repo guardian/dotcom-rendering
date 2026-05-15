@@ -56,17 +56,25 @@ const getDropCappedSentence = (
 ): { dropCap: string; restOfSentence: string } | undefined => {
 	// The node is at the root of the document avoiding nodes like <a>
 	// tags embedded in <p> tags dropping their cap
-	if (node.parentNode?.parentNode?.nodeName !== '#document-fragment') return;
+	if (node.parentNode?.parentNode?.nodeName !== '#document-fragment') {
+		return;
+	}
 
 	// The node has to be the first grand-child
-	if (node.previousSibling !== null) return;
+	if (node.previousSibling !== null) {
+		return;
+	}
 
 	// The node’s parent has to be the first child
-	if (node.parentNode.previousSibling !== null) return;
+	if (node.parentNode.previousSibling !== null) {
+		return;
+	}
 
 	const text = node.textContent;
 
-	if (!text) return;
+	if (!text) {
+		return;
+	}
 
 	const first = text.substring(0, 1);
 
@@ -94,8 +102,12 @@ const getDropCappedSentence = (
 };
 
 const isValidFormatForDropCap = (format: ArticleFormat) => {
-	if (format.theme === ArticleSpecial.Labs) return false;
-	if (format.display === ArticleDisplay.Immersive) return true;
+	if (format.theme === ArticleSpecial.Labs) {
+		return false;
+	}
+	if (format.display === ArticleDisplay.Immersive) {
+		return true;
+	}
 	switch (format.design) {
 		case ArticleDesign.Feature:
 		case ArticleDesign.Comment:
@@ -115,7 +127,9 @@ const shouldShowDropCaps = (
 	isFirstParagraph: boolean,
 	forceDropCap?: 'on' | 'off',
 ) => {
-	if (forceDropCap === 'off') return false;
+	if (forceDropCap === 'off') {
+		return false;
+	}
 	const validDropCapFormat = isValidFormatForDropCap(format);
 	// We need to strip any markup from our html string so that we accurately measure
 	// the length that the reader will see. Eg. remove link tag html.
@@ -123,12 +137,16 @@ const shouldShowDropCaps = (
 
 	if (validDropCapFormat && isLongEnough) {
 		// When dropcaps are allowed, we always mark the first paragraph as a drop cap
-		if (isFirstParagraph) return true;
+		if (isFirstParagraph) {
+			return true;
+		}
 
 		// For subsequent blocks of text, we only add a dropcap if a dinkus was inserted
 		// prior to it in the article body (Eg: * * *), causing the forceDropCap flag to
 		// be set
-		if (forceDropCap === 'on') return true;
+		if (forceDropCap === 'on') {
+			return true;
+		}
 	}
 
 	return false;
@@ -144,7 +162,9 @@ const sanitiserOptions: IOptions = {
 	allowedAttributes: false, // Leave attributes from CAPI alone
 	transformTags: {
 		a: (tagName, attribs) => {
-			if (!attribs.href) return { tagName, attribs };
+			if (!attribs.href) {
+				return { tagName, attribs };
+			}
 
 			const mailto = attribs.href.startsWith('mailto:')
 				? ` | ${attribs.href}`

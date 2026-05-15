@@ -75,7 +75,6 @@ export const Summary = ({
 	const [hasBeenExpanded, setHasBeenExpanded] = useState(false);
 	const [expandEventSent, setExpandEventFired] = useState(false);
 	return (
-		//eslint-disable-next-line -- expected from atoms rendering
 		<summary
 			onClick={() => {
 				if (!expandEventSent) {
