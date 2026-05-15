@@ -77,9 +77,9 @@ const configs = [
 		backgroundImages: {
 			mobile: 'https://media.guim.co.uk/4ba0caac6d18c1fe6a5a3267b270d8c21ae6f940/0_0_750_376/750.jpg',
 			mobileLandscape:
-				'https://media.guim.co.uk/4ba0caac6d18c1fe6a5a3267b270d8c21ae6f940/0_0_750_376/750.jpg',
+				'https://media.guim.co.uk/8e1356cc926c6bbfcdb3da5908252ba0b4cbd3bb/0_0_960_376/960.jpg',
 			phablet:
-				'https://media.guim.co.uk/4ba0caac6d18c1fe6a5a3267b270d8c21ae6f940/0_0_750_376/750.jpg',
+				'https://media.guim.co.uk/ed4fe540c6a114db35c1f73fc41ee802c3fea7d3/0_0_1320_282/1320.jpg',
 			tablet: 'https://media.guim.co.uk/861646115875f3f246313036f754b2f5f1480b1a/0_0_1480_276/1480.jpg',
 			desktop:
 				'https://media.guim.co.uk/167bec4a208bfc7fdc6b2127186b9bb183932259/0_0_1960_276/1960.jpg',
@@ -270,9 +270,6 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 				color: 'var(--masthead-nav-link-text-hover)',
 			},
 		},
-		[from.leftCol]: {
-			flexBasis: 160,
-		},
 	});
 
 	const smallLink = css({
@@ -283,9 +280,6 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		color: textColor,
 		textDecoration: 'none',
 		whiteSpace: 'nowrap',
-		[from.leftCol]: {
-			padding: '9px 10px 10px',
-		},
 	});
 
 	return (
@@ -333,10 +327,15 @@ const TitleIconImage = (props: { src: string }) => {
 			src={props.src}
 			alt=""
 			css={{
-				height: 40,
 				width: 'auto',
+				height: 46,
+				marginTop: 5,
 				marginRight: 8,
 				objectFit: 'cover',
+				[from.tablet]: {
+					height: 79,
+					marginTop: 10,
+				},
 			}}
 		/>
 	);
@@ -376,7 +375,8 @@ const BackgroundImage = (props: {
 				alt="Winter Olympics background graphic"
 				css={{
 					width: '100%',
-					height: '100%',
+					height: 'auto',
+					display: 'block',
 					objectFit: 'cover',
 					objectPosition: 'top',
 				}}
