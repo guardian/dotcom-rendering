@@ -305,6 +305,7 @@ const ArticleGrid = ({
 					editionId={article.editionId}
 					shouldHideAds={article.shouldHideAds}
 					idApiUrl={article.config.idApiUrl}
+					isShinyNewInteractiveLayout={true}
 				/>
 
 				{isApps && (
@@ -336,25 +337,38 @@ const ArticleGrid = ({
 						/>
 					</Island>
 				)}
-				<StraightLines
-					data-print-layout="hide"
-					count={4}
-					cssOverrides={css`
-						display: block;
+				<div
+					css={css`
+						${grid.container}
 					`}
-					color={themePalette('--straight-lines')}
-				/>
-				<SubMeta
-					format={format}
-					subMetaKeywordLinks={article.subMetaKeywordLinks}
-					subMetaSectionLinks={article.subMetaSectionLinks}
-					pageId={article.pageId}
-					webUrl={article.webURL}
-					webTitle={article.webTitle}
-					showBottomSocialButtons={
-						article.showBottomSocialButtons && isWeb
-					}
-				/>
+				>
+					<div
+						css={css`
+							${grid.column.centre}
+						`}
+					>
+						<StraightLines
+							data-print-layout="hide"
+							count={4}
+							cssOverrides={css`
+								display: block;
+								${grid.column.centre}
+							`}
+							color={themePalette('--straight-lines')}
+						/>
+						<SubMeta
+							format={format}
+							subMetaKeywordLinks={article.subMetaKeywordLinks}
+							subMetaSectionLinks={article.subMetaSectionLinks}
+							pageId={article.pageId}
+							webUrl={article.webURL}
+							webTitle={article.webTitle}
+							showBottomSocialButtons={
+								article.showBottomSocialButtons && isWeb
+							}
+						/>
+					</div>
+				</div>
 			</ArticleContainer>
 		</GridItem>
 		<GridItem
