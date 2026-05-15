@@ -7,9 +7,9 @@ import { background } from './colours';
 import { FixtureWeb } from './FootballMatchHeader.stories';
 import { Notifications } from './Notifications';
 
-const mockMatchNotificationsClient = {
+const mockMatchNotificationsClient: MatchNotificationsClient = {
 	isAvailable: () => Promise.resolve({ isAvailable: true }),
-} as unknown as MatchNotificationsClient;
+};
 
 const meta = preview.meta({
 	component: Notifications,
@@ -89,6 +89,6 @@ export const Unavailable = Fixture.extend({
 					unavailableReason:
 						'Notifications for this match are on because you follow Arsenal. Turn off anytime in Settings > Notifications',
 				}),
-		} as unknown as MatchNotificationsClient,
+		} satisfies MatchNotificationsClient,
 	},
 });

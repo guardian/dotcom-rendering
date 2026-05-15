@@ -11,9 +11,9 @@ import type { MatchNotificationsClient } from '../../lib/bridgetApi';
 import { NotificationsToggle } from '../NotificationsToggle.stories';
 import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader';
 
-const mockMatchNotificationsClient = {
+const mockMatchNotificationsClient: MatchNotificationsClient = {
 	isAvailable: () => Promise.resolve({ isAvailable: true }),
-} as unknown as MatchNotificationsClient;
+};
 
 const meta = preview.meta({
 	component: FootballMatchHeaderComponent,

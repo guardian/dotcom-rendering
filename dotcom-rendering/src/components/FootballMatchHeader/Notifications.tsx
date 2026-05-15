@@ -1,10 +1,6 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import {
-	space,
-	textSans14,
-	textSans14Object,
-} from '@guardian/source/foundations';
+import { space, textSans14Object } from '@guardian/source/foundations';
 import { useEffect, useMemo, useState } from 'react';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
@@ -75,8 +71,9 @@ export const Notifications = (props: Props) => {
 					'Bridget getMatchNotificationsClient.isAvailable Error:',
 					error,
 				);
-				// Treat errors as available to avoid silently hiding the button
-				setIsAvailable(true);
+				// Hide the button on error as we can't confirm notifications
+				// are available and the button may not work
+				setIsAvailable(false);
 			});
 	}, [
 		renderingTarget,
@@ -92,67 +89,78 @@ export const Notifications = (props: Props) => {
 		return null;
 	}
 
-	return (
-		<>
-			<Hr borderStyle="solid" borderColour={border(props.match.kind)} />
-			{isAvailable === false ? (
-				<p
-					css={[
-						textSans14,
-						css({
-							'&': css(grid.column.centre),
-							paddingTop: space[2],
-							paddingBottom: space[3],
-							paddingLeft: 6,
-							paddingRight: 6,
-						}),
-					]}
-					style={{
-						color: palette(primaryText(props.match.kind)),
-					}}
-				>
-					{unavailableReason ??
-						'Notifications for this match are on because you are following a team. Turn off anytime in Settings > Notifications'}
-				</p>
-			) : (
+	const Description = ({ children }: { children: string | undefined }) =>
+		children === undefined ? null : (
+			<p
+				css={{
+					...textSans14Object,
+					'&': css(grid.column.centre),
+					paddingTop: space[2],
+					paddingBottom: space[3],
+					paddingLeft: 6,
+					paddingRight: 6,
+				}}
+				style={{
+					color: palette(primaryText(props.match.kind)),
+				}}
+			>
+				{children}
+			</p>
+		);
+
+	switch (isAvailable) {
+		case false:
+			return (
 				<>
-					<p
-						css={{
-							...textSans14Object,
-							'&': css(grid.column.centre),
-							paddingTop: space[2],
-							paddingBottom: space[3],
-							paddingLeft: 6,
-							paddingRight: 6,
-						}}
-						style={{
-							color: palette(primaryText(props.match.kind)),
-						}}
-					>
+					<Hr
+						borderStyle="solid"
+						borderColour={border(props.match.kind)}
+					/>
+					<Description>{unavailableReason}</Description>
+				</>
+			);
+		case true:
+			return (
+				<>
+					<Hr
+						borderStyle="solid"
+						borderColour={border(props.match.kind)}
+					/>
+					<Description>
 						Be notified about the lineup, kick-off time, goals,
 						half-time and full time scores
-					</p>
-					{isAvailable === true && (
-						<NotificationsToggle
-							displayName={displayName(props.match)}
-							id={props.match.paId}
-							notificationType="football-match"
-							notificationsClient={props.notificationsClient}
-							colour={primaryText(props.match.kind)}
-							backgroundColour={background(props.match.kind)}
-							iconColour={primaryText(props.match.kind)}
-							css={{
-								'&': css(grid.column.centre),
-								paddingLeft: 6,
-								paddingRight: 6,
-								paddingBottom: space[4],
-							}}
-						/>
-					)}
+					</Description>
+					<NotificationsToggle
+						displayName={displayName(props.match)}
+						id={props.match.paId}
+						notificationType="football-match"
+						notificationsClient={props.notificationsClient}
+						colour={primaryText(props.match.kind)}
+						backgroundColour={background(props.match.kind)}
+						iconColour={primaryText(props.match.kind)}
+						css={{
+							'&': css(grid.column.centre),
+							paddingLeft: 6,
+							paddingRight: 6,
+							paddingBottom: space[4],
+						}}
+					/>
 				</>
-			)}
-		</>
-	);
+			);
+		case undefined:
+			return (
+				<>
+					<Hr
+						borderStyle="solid"
+						borderColour={border(props.match.kind)}
+					/>
+					<Description>
+						Be notified about the lineup, kick-off time, goals,
+						half-time and full time scores
+					</Description>
+				</>
+			);
+	}
 };
 
 /**
