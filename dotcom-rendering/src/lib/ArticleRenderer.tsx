@@ -12,6 +12,7 @@ import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
 import { RenderArticleElement } from './renderElement';
 import { withSignInGateSlot } from './withSignInGateSlot';
+import { grid } from '../grid';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -40,6 +41,7 @@ type Props = {
 	contributionsServiceUrl: string;
 	shouldHideAds: boolean;
 	idApiUrl?: string;
+	isShinyNewInteractiveLayout?: boolean;
 };
 
 export const ArticleRenderer = ({
@@ -64,6 +66,7 @@ export const ArticleRenderer = ({
 	contributionsServiceUrl,
 	shouldHideAds,
 	idApiUrl,
+	isShinyNewInteractiveLayout = false,
 }: Props) => {
 	const isSectionedMiniProfilesArticle =
 		elements.filter(
@@ -93,6 +96,7 @@ export const ArticleRenderer = ({
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
 				shouldHideAds={shouldHideAds}
 				idApiUrl={idApiUrl}
+				isShinyNewInteractiveLayout={isShinyNewInteractiveLayout}
 			/>
 		);
 	});
@@ -193,6 +197,13 @@ export const ArticleRenderer = ({
 	// ^^ Until we decide where to do the "isomorphism split" in this this code is not safe here.
 	//    But should be soon.
 
+	const interactiveLayoutCSS = css`
+		${grid.container}
+		> * {
+			${grid.column.centre}
+		}
+	`;
+
 	return (
 		<div
 			className={[
@@ -206,7 +217,11 @@ export const ArticleRenderer = ({
 					: '',
 			].join(' ')}
 			// TODO: Conditionally apply grid for interactives?
-			css={[commercialPosition, spacefinderAdStyles]}
+			css={[
+				commercialPosition,
+				spacefinderAdStyles,
+				isShinyNewInteractiveLayout && interactiveLayoutCSS,
+			]}
 		>
 			{renderingTarget === 'Apps'
 				? augmentedElements
