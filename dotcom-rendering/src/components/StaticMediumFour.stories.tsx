@@ -1,6 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	audioTrails,
 	galleryTrails,
@@ -26,14 +25,13 @@ const meta = {
 	},
 	args: {
 		trails,
-		showAge: true,
+		hideAge: false,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 	},
 	render: (args) => (
 		<FrontSection
 			title="Static medium four"
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			containerLevel="Primary"
 		>
@@ -109,7 +107,6 @@ export const WithSpecialPaletteVariations = {
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
 					title={containerPalette}
-					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
 					key={containerPalette}
 					containerPalette={containerPalette}

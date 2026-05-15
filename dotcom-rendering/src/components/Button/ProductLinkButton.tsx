@@ -18,6 +18,7 @@ type ProductLinkButtonProps = {
 	priority?: ButtonPriority;
 	minimisePadding?: boolean;
 	dataComponent?: string;
+	xCustComponentId?: string;
 };
 
 const fullWidthStyle = css`
@@ -53,6 +54,7 @@ export const ProductLinkButton = ({
 	fullWidthText = false,
 	priority = 'primary',
 	dataComponent,
+	xCustComponentId,
 }: ProductLinkButtonProps) => {
 	const cssOverrides: SerializedStyles[] = [
 		heightAutoStyle,
@@ -73,6 +75,7 @@ export const ProductLinkButton = ({
 			data-spacefinder-role="inline"
 			size={size}
 			cssOverrides={cssOverrides}
+			data-x-cust-component-id={xCustComponentId}
 		>
 			<span
 				style={fullWidthText ? { width: '100%' } : {}}

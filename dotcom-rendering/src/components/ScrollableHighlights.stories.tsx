@@ -1,10 +1,10 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { defaultCard, trails } from '../../fixtures/manual/highlights-trails';
-import { ScrollableHighlights } from './ScrollableHighlights.importable';
+import { ScrollableHighlights } from './ScrollableHighlights.island';
 import { Section } from './Section';
 
-const meta: Meta<typeof ScrollableHighlights> = {
+const meta = preview.meta({
 	title: 'Front Containers/ScrollableHighlights',
 	component: ScrollableHighlights,
 	parameters: {
@@ -30,26 +30,23 @@ const meta: Meta<typeof ScrollableHighlights> = {
 			<ScrollableHighlights {...args} />
 		</Section>
 	),
-};
+});
 
-export default meta;
-type Story = StoryObj<typeof ScrollableHighlights>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		trails: trails.slice(0, 6),
 	},
-};
+});
 
-export const withEightCards = {
+export const withEightCards = meta.story({
 	name: 'With Eight Cards',
 	args: {
 		trails: trails.slice(0, 8),
 	},
-};
+});
 
-export const withTwoLineKicker: Story = {
-	...Default,
+export const withTwoLineKicker = meta.story({
+	...Default.input,
 	name: 'With Two Line Kicker',
 	args: {
 		trails: [
@@ -57,13 +54,13 @@ export const withTwoLineKicker: Story = {
 				...defaultCard,
 				kickerText: 'UK Housing and Mortgages',
 			},
-			...Default.args.trails,
+			...Default.input.args.trails,
 		],
 	},
-};
+});
 
-export const withLiveKicker: Story = {
-	...Default,
+export const withLiveKicker = meta.story({
+	...Default.input,
 	name: 'With Live Kicker',
 	args: {
 		trails: [
@@ -72,13 +69,13 @@ export const withLiveKicker: Story = {
 				kickerText: 'Live',
 				format: { display: 0, theme: 3, design: 11 },
 			},
-			...Default.args.trails,
+			...Default.input.args.trails,
 		],
 	},
-};
+});
 
-export const withFourLineHeadline: Story = {
-	...Default,
+export const withFourLineHeadline = meta.story({
+	...Default.input,
 	name: 'With Four Line Headline',
 	args: {
 		trails: [
@@ -87,13 +84,13 @@ export const withFourLineHeadline: Story = {
 				headline:
 					'Really long headline to show what happens when it is long',
 			},
-			...Default.args.trails,
+			...Default.input.args.trails,
 		],
 	},
-};
+});
 
-export const withExcessivleyLongHeadline: Story = {
-	...Default,
+export const withExcessivleyLongHeadline = meta.story({
+	...Default.input,
 	name: 'With Excessively Long Headline',
 	args: {
 		trails: [
@@ -102,7 +99,7 @@ export const withExcessivleyLongHeadline: Story = {
 				headline:
 					'Really long headline to show what happens when there is a really long headline that we will never ever have but we should check how it looks anyway',
 			},
-			...Default.args.trails,
+			...Default.input.args.trails,
 		],
 	},
-};
+});

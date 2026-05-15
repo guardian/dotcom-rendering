@@ -7,7 +7,7 @@ import {
 import type { CustomIdTokenClaims } from '../lib/identity';
 import { customMockFetch } from '../lib/mockRESTCalls';
 import { palette as themePalette } from '../palette';
-import { TopBar } from './TopBar.importable';
+import { TopBar } from './TopBar.island';
 import { TopBarMyAccount } from './TopBarMyAccount';
 
 const mockContributionsRequestFetch = (

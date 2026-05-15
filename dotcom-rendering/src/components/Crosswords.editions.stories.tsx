@@ -1,21 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, waitFor, within } from 'storybook/test';
+import preview from '../../.storybook/preview';
 import {
 	crypticCrossword,
 	quickCrossword,
 } from '../../fixtures/manual/editionsCrossword';
 import { Crosswords } from './Crosswords.editions';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Crosswords (Editions)',
 	component: Crosswords,
-} satisfies Meta<typeof Crosswords>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const UKTimezone = {
+export const UKTimezone = meta.story({
 	args: {
 		crosswords: [
 			quickCrossword,
@@ -56,12 +52,12 @@ export const UKTimezone = {
 			},
 		);
 	},
-} satisfies Story;
+});
 
-export const AnotherTimezone = {
-	...UKTimezone,
+export const AnotherTimezone = meta.story({
+	...UKTimezone.input,
 	args: {
-		...UKTimezone.args,
+		...UKTimezone.input.args,
 		timeZone: 'Australia/Sydney',
 	},
-};
+});

@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { palette } from '../palette';
 import { BigNumber as BigNumberComponent } from './BigNumber';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/BigNumber',
 	component: BigNumberComponent,
 	parameters: {
@@ -15,13 +15,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof BigNumberComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const BigNumber = {
+export const BigNumber = meta.story({
 	args: { index: 0 },
 	render: () => (
 		<div
@@ -54,4 +50,4 @@ export const BigNumber = {
 			<BigNumberComponent index={10} />
 		</div>
 	),
-} satisfies Story;
+});

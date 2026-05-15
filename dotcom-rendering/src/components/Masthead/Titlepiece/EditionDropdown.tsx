@@ -12,8 +12,8 @@ import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { EditionLinkType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
-import type { DropdownLinkType } from '../../Dropdown.importable';
-import { Dropdown } from '../../Dropdown.importable';
+import type { DropdownLinkType } from '../../Dropdown.island';
+import { Dropdown } from '../../Dropdown.island';
 
 interface EditionDropdownProps {
 	editionId: EditionId;

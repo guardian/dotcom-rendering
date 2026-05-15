@@ -18,11 +18,12 @@ import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
 import {
+	handleAppsFootballMatchPage,
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
-} from './handler.sportDataPage.web';
+} from './handler.sportDataPage';
 import { handleAppsThrasher } from './handler.thrasher.apps';
 import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
@@ -117,6 +118,7 @@ renderer.get('/FootballMatchListPage/*url', handleFootballMatchListPage);
 renderer.get('/FootballTablesPage/*url', handleFootballTablesPage);
 renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
+renderer.get('/AppsFootballMatchSummaryPage/*url', handleAppsFootballMatchPage);
 renderer.get('/HostedContent/*url', handleHostedContent);
 renderer.get('/AppsHostedContent/*url', handleAppsHostedContent);
 renderer.get('/AppsComponent/thrasher/:name', handleAppsThrasher);
@@ -136,6 +138,7 @@ renderer.post('/FootballMatchListPage', handleFootballMatchListPage);
 renderer.post('/FootballTablesPage', handleFootballTablesPage);
 renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
+renderer.post('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 renderer.post('/HostedContent', handleHostedContent);
 renderer.post('/AppsHostedContent', handleAppsHostedContent);
 renderer.post('/AppsComponent/thrasher/:name', handleAppsThrasher);

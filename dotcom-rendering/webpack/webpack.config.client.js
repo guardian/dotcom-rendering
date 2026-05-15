@@ -103,7 +103,9 @@ module.exports = ({ build }) => ({
 	output: {
 		filename: (data) => {
 			// We don't want to hash the debug script so it can be used in bookmarklets
-			if (data.chunk.name === 'debug') return `[name].js`;
+			if (data.chunk.name === 'debug') {
+				return `[name].js`;
+			}
 			return generateName(build);
 		},
 		chunkFilename: generateName(build),

@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { VideoAtom } from './VideoAtom';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/VideoAtom',
 	component: VideoAtom,
 	parameters: {
@@ -11,13 +11,9 @@ const meta = {
 		// https://www.chromatic.com/docs/ignoring-elements
 		chromatic: { disable: true },
 	},
-} satisfies Meta<typeof VideoAtom>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		poster: 'https://media.guim.co.uk/29638c3179baea589b10fbd4dbbc223ea77027ae/0_0_3589_2018/master/3589.jpg',
 		assets: [
@@ -46,21 +42,21 @@ export const Default = {
 			</div>
 		),
 	],
-} satisfies Story;
+});
 
-export const Large = {
-	...Default,
+export const Large = meta.story({
+	...Default.input,
 	args: {
-		...Default.args,
+		...Default.input.args,
 		height: 500,
 		width: 880,
 	},
-} satisfies Story;
+});
 
-export const NoPoster = {
-	...Default,
+export const NoPoster = meta.story({
+	...Default.input,
 	args: {
-		...Default.args,
+		...Default.input.args,
 		poster: undefined,
 	},
-} satisfies Story;
+});

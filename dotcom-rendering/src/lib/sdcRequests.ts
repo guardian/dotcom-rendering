@@ -112,5 +112,6 @@ export const getGutterLiveblog = (
 export const getHeader = (
 	baseUrl: string,
 	payload: HeaderPayload,
+	headers?: HeadersInit,
 ): Promise<ModuleDataResponse<HeaderProps>> =>
-	getModuleData('header', baseUrl, payload);
+	getModuleData('header', baseUrl, payload, headers);

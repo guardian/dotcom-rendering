@@ -26,325 +26,7 @@
             "type": "string"
         },
         "config": {
-            "type": "object",
-            "properties": {
-                "avatarApiUrl": {
-                    "type": "string"
-                },
-                "externalEmbedHost": {
-                    "type": "string"
-                },
-                "ajaxUrl": {
-                    "type": "string"
-                },
-                "keywords": {
-                    "type": "string"
-                },
-                "revisionNumber": {
-                    "type": "string"
-                },
-                "isProd": {
-                    "type": "boolean"
-                },
-                "switches": {
-                    "$ref": "#/definitions/Switches"
-                },
-                "section": {
-                    "type": "string"
-                },
-                "keywordIds": {
-                    "type": "string"
-                },
-                "locationapiurl": {
-                    "type": "string"
-                },
-                "sharedAdTargeting": {
-                    "$ref": "#/definitions/SharedAdTargeting"
-                },
-                "buildNumber": {
-                    "type": "string"
-                },
-                "abTests": {
-                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
-                    "type": "object"
-                },
-                "serverSideABTests": {
-                    "$ref": "#/definitions/Record<string,string>"
-                },
-                "pbIndexSites": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "additionalProperties": {}
-                    }
-                },
-                "ampIframeUrl": {
-                    "type": "string"
-                },
-                "beaconUrl": {
-                    "type": "string"
-                },
-                "host": {
-                    "type": "string"
-                },
-                "brazeApiKey": {
-                    "type": "string"
-                },
-                "calloutsUrl": {
-                    "type": "string"
-                },
-                "requiresMembershipAccess": {
-                    "type": "boolean"
-                },
-                "onwardWebSocket": {
-                    "type": "string"
-                },
-                "a9PublisherId": {
-                    "type": "string"
-                },
-                "contentType": {
-                    "type": "string"
-                },
-                "facebookIaAdUnitRoot": {
-                    "type": "string"
-                },
-                "ophanEmbedJsUrl": {
-                    "type": "string"
-                },
-                "idUrl": {
-                    "type": "string"
-                },
-                "dcrSentryDsn": {
-                    "type": "string"
-                },
-                "isFront": {
-                    "type": "boolean",
-                    "const": true
-                },
-                "idWebAppUrl": {
-                    "type": "string"
-                },
-                "discussionApiUrl": {
-                    "type": "string"
-                },
-                "sentryPublicApiKey": {
-                    "type": "string"
-                },
-                "omnitureAccount": {
-                    "type": "string"
-                },
-                "dfpAccountId": {
-                    "type": "string"
-                },
-                "pageId": {
-                    "type": "string"
-                },
-                "forecastsapiurl": {
-                    "type": "string"
-                },
-                "assetsPath": {
-                    "type": "string"
-                },
-                "pillar": {
-                    "type": "string"
-                },
-                "commercialBundleUrl": {
-                    "type": "string"
-                },
-                "discussionApiClientHeader": {
-                    "type": "string"
-                },
-                "membershipUrl": {
-                    "type": "string"
-                },
-                "dfpHost": {
-                    "type": "string"
-                },
-                "cardStyle": {
-                    "type": "string"
-                },
-                "googletagUrl": {
-                    "type": "string"
-                },
-                "sentryHost": {
-                    "type": "string"
-                },
-                "shouldHideAdverts": {
-                    "type": "boolean"
-                },
-                "mmaUrl": {
-                    "type": "string"
-                },
-                "membershipAccess": {
-                    "type": "string"
-                },
-                "isPreview": {
-                    "type": "boolean"
-                },
-                "googletagJsUrl": {
-                    "type": "string"
-                },
-                "supportUrl": {
-                    "type": "string"
-                },
-                "edition": {
-                    "type": "string"
-                },
-                "ipsosTag": {
-                    "type": "string"
-                },
-                "ophanJsUrl": {
-                    "type": "string"
-                },
-                "isPaidContent": {
-                    "type": "boolean"
-                },
-                "mobileAppsAdUnitRoot": {
-                    "type": "string"
-                },
-                "plistaPublicApiKey": {
-                    "type": "string"
-                },
-                "frontendAssetsFullURL": {
-                    "type": "string"
-                },
-                "googleSearchId": {
-                    "type": "string"
-                },
-                "allowUserGeneratedContent": {
-                    "type": "boolean"
-                },
-                "dfpAdUnitRoot": {
-                    "type": "string"
-                },
-                "idApiUrl": {
-                    "type": "string"
-                },
-                "omnitureAmpAccount": {
-                    "type": "string"
-                },
-                "adUnit": {
-                    "type": "string"
-                },
-                "hasPageSkin": {
-                    "type": "boolean"
-                },
-                "webTitle": {
-                    "type": "string"
-                },
-                "stripePublicToken": {
-                    "type": "string"
-                },
-                "googleRecaptchaSiteKey": {
-                    "type": "string"
-                },
-                "discussionD2Uid": {
-                    "type": "string"
-                },
-                "googleSearchUrl": {
-                    "type": "string"
-                },
-                "optimizeEpicUrl": {
-                    "type": "string"
-                },
-                "stage": {
-                    "$ref": "#/definitions/StageType"
-                },
-                "idOAuthUrl": {
-                    "type": "string"
-                },
-                "isSensitive": {
-                    "type": "boolean"
-                },
-                "isDev": {
-                    "type": "boolean"
-                },
-                "thirdPartyAppsAccount": {
-                    "type": "string"
-                },
-                "avatarImagesUrl": {
-                    "type": "string"
-                },
-                "fbAppId": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "a9PublisherId",
-                "abTests",
-                "adUnit",
-                "ajaxUrl",
-                "allowUserGeneratedContent",
-                "ampIframeUrl",
-                "assetsPath",
-                "avatarApiUrl",
-                "avatarImagesUrl",
-                "beaconUrl",
-                "buildNumber",
-                "calloutsUrl",
-                "commercialBundleUrl",
-                "contentType",
-                "dcrSentryDsn",
-                "dfpAccountId",
-                "dfpAdUnitRoot",
-                "dfpHost",
-                "discussionApiClientHeader",
-                "discussionApiUrl",
-                "discussionD2Uid",
-                "edition",
-                "externalEmbedHost",
-                "facebookIaAdUnitRoot",
-                "fbAppId",
-                "forecastsapiurl",
-                "frontendAssetsFullURL",
-                "googleRecaptchaSiteKey",
-                "googleSearchId",
-                "googleSearchUrl",
-                "googletagJsUrl",
-                "googletagUrl",
-                "hasPageSkin",
-                "host",
-                "idApiUrl",
-                "idOAuthUrl",
-                "idUrl",
-                "idWebAppUrl",
-                "ipsosTag",
-                "isDev",
-                "isFront",
-                "isPreview",
-                "isProd",
-                "isSensitive",
-                "keywordIds",
-                "keywords",
-                "locationapiurl",
-                "membershipAccess",
-                "membershipUrl",
-                "mmaUrl",
-                "mobileAppsAdUnitRoot",
-                "omnitureAccount",
-                "omnitureAmpAccount",
-                "onwardWebSocket",
-                "ophanEmbedJsUrl",
-                "ophanJsUrl",
-                "optimizeEpicUrl",
-                "pageId",
-                "pbIndexSites",
-                "pillar",
-                "plistaPublicApiKey",
-                "requiresMembershipAccess",
-                "revisionNumber",
-                "section",
-                "sentryHost",
-                "sentryPublicApiKey",
-                "serverSideABTests",
-                "sharedAdTargeting",
-                "shouldHideAdverts",
-                "stage",
-                "stripePublicToken",
-                "supportUrl",
-                "switches",
-                "webTitle"
-            ]
+            "$ref": "#/definitions/FEFrontConfig"
         },
         "commercialProperties": {
             "$ref": "#/definitions/Record<string,unknown>"
@@ -2926,7 +2608,6 @@
                                     "displayName",
                                     "excludeFromRss",
                                     "hideKickers",
-                                    "hideShowMore",
                                     "platform",
                                     "showDateHeader",
                                     "showLatestUpdate",
@@ -2941,787 +2622,6 @@
                             },
                             "targetedTerritory": {
                                 "$ref": "#/definitions/Territory"
-                            },
-                            "bucket": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "properties": {
-                                            "type": "object",
-                                            "properties": {
-                                                "isBreaking": {
-                                                    "type": "boolean"
-                                                },
-                                                "showMainVideo": {
-                                                    "description": "Legacy fields retained for backward compatibility:\n`showMainVideo` and `imageSlideshowReplace` have been moved into `mediaSelect`,\nbut must remain at the top level to support unrepressed or older front data.",
-                                                    "type": "boolean"
-                                                },
-                                                "imageSlideshowReplace": {
-                                                    "type": "boolean"
-                                                },
-                                                "mediaSelect": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "showMainVideo": {
-                                                            "type": "boolean"
-                                                        },
-                                                        "imageSlideshowReplace": {
-                                                            "type": "boolean"
-                                                        },
-                                                        "videoReplace": {
-                                                            "type": "boolean"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "imageSlideshowReplace",
-                                                        "showMainVideo",
-                                                        "videoReplace"
-                                                    ]
-                                                },
-                                                "showKickerTag": {
-                                                    "type": "boolean"
-                                                },
-                                                "showByline": {
-                                                    "type": "boolean"
-                                                },
-                                                "maybeContent": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "trail": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "trailPicture": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "allImages": {
-                                                                            "type": "array",
-                                                                            "items": {
-                                                                                "type": "object",
-                                                                                "properties": {
-                                                                                    "index": {
-                                                                                        "type": "number"
-                                                                                    },
-                                                                                    "fields": {
-                                                                                        "type": "object",
-                                                                                        "properties": {
-                                                                                            "displayCredit": {
-                                                                                                "type": "string"
-                                                                                            },
-                                                                                            "source": {
-                                                                                                "type": "string"
-                                                                                            },
-                                                                                            "photographer": {
-                                                                                                "type": "string"
-                                                                                            },
-                                                                                            "isMaster": {
-                                                                                                "type": "string"
-                                                                                            },
-                                                                                            "altText": {
-                                                                                                "type": "string"
-                                                                                            },
-                                                                                            "height": {
-                                                                                                "type": "string"
-                                                                                            },
-                                                                                            "credit": {
-                                                                                                "type": "string"
-                                                                                            },
-                                                                                            "mediaId": {
-                                                                                                "type": "string"
-                                                                                            },
-                                                                                            "width": {
-                                                                                                "type": "string"
-                                                                                            }
-                                                                                        },
-                                                                                        "required": [
-                                                                                            "height",
-                                                                                            "width"
-                                                                                        ]
-                                                                                    },
-                                                                                    "mediaType": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "url": {
-                                                                                        "type": "string"
-                                                                                    }
-                                                                                },
-                                                                                "required": [
-                                                                                    "fields",
-                                                                                    "index",
-                                                                                    "mediaType",
-                                                                                    "url"
-                                                                                ]
-                                                                            }
-                                                                        }
-                                                                    },
-                                                                    "required": [
-                                                                        "allImages"
-                                                                    ]
-                                                                },
-                                                                "byline": {
-                                                                    "type": "string"
-                                                                },
-                                                                "thumbnailPath": {
-                                                                    "type": "string"
-                                                                },
-                                                                "webPublicationDate": {
-                                                                    "type": "number"
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "webPublicationDate"
-                                                            ]
-                                                        },
-                                                        "metadata": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "id": {
-                                                                    "type": "string"
-                                                                },
-                                                                "webTitle": {
-                                                                    "type": "string"
-                                                                },
-                                                                "webUrl": {
-                                                                    "type": "string"
-                                                                },
-                                                                "type": {
-                                                                    "type": "string"
-                                                                },
-                                                                "sectionId": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "value": {
-                                                                            "type": "string"
-                                                                        }
-                                                                    },
-                                                                    "required": [
-                                                                        "value"
-                                                                    ]
-                                                                },
-                                                                "format": {
-                                                                    "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "design": {
-                                                                            "$ref": "#/definitions/FEDesign"
-                                                                        },
-                                                                        "theme": {
-                                                                            "$ref": "#/definitions/FETheme"
-                                                                        },
-                                                                        "display": {
-                                                                            "$ref": "#/definitions/FEDisplay"
-                                                                        }
-                                                                    },
-                                                                    "required": [
-                                                                        "design",
-                                                                        "display",
-                                                                        "theme"
-                                                                    ]
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "format",
-                                                                "id",
-                                                                "type",
-                                                                "webTitle",
-                                                                "webUrl"
-                                                            ]
-                                                        },
-                                                        "fields": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "main": {
-                                                                    "type": "string"
-                                                                },
-                                                                "body": {
-                                                                    "type": "string"
-                                                                },
-                                                                "standfirst": {
-                                                                    "type": "string"
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "body",
-                                                                "main"
-                                                            ]
-                                                        },
-                                                        "elements": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "mainVideo": {},
-                                                                "mediaAtoms": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "$ref": "#/definitions/FEMediaAtom"
-                                                                    }
-                                                                },
-                                                                "mainMediaAtom": {
-                                                                    "$ref": "#/definitions/FEMediaAtom"
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "mediaAtoms"
-                                                            ]
-                                                        },
-                                                        "tags": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "tags": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "properties": {
-                                                                                "type": "object",
-                                                                                "properties": {
-                                                                                    "id": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "tagType": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "webTitle": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "bio": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "description": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "bylineImageUrl": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "bylineLargeImageUrl": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "contributorLargeImagePath": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "paidContentType": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "sectionId": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "sectionName": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "twitterHandle": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "url": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "webUrl": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "references": {
-                                                                                        "type": "array",
-                                                                                        "items": {
-                                                                                            "description": "This type comes from `frontend`, hence the FE prefix.",
-                                                                                            "type": "object",
-                                                                                            "properties": {
-                                                                                                "id": {
-                                                                                                    "type": "string"
-                                                                                                },
-                                                                                                "type": {
-                                                                                                    "type": "string"
-                                                                                                }
-                                                                                            },
-                                                                                            "required": [
-                                                                                                "id",
-                                                                                                "type"
-                                                                                            ]
-                                                                                        }
-                                                                                    },
-                                                                                    "podcast": {
-                                                                                        "type": "object",
-                                                                                        "properties": {
-                                                                                            "subscriptionUrl": {
-                                                                                                "type": "string"
-                                                                                            },
-                                                                                            "spotifyUrl": {
-                                                                                                "type": "string"
-                                                                                            },
-                                                                                            "image": {
-                                                                                                "type": "string"
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                },
-                                                                                "required": [
-                                                                                    "id",
-                                                                                    "tagType",
-                                                                                    "webTitle"
-                                                                                ]
-                                                                            },
-                                                                            "pagination": {
-                                                                                "type": "object",
-                                                                                "properties": {
-                                                                                    "currentPage": {
-                                                                                        "type": "number"
-                                                                                    },
-                                                                                    "lastPage": {
-                                                                                        "type": "number"
-                                                                                    },
-                                                                                    "totalContent": {
-                                                                                        "type": "number"
-                                                                                    }
-                                                                                },
-                                                                                "required": [
-                                                                                    "currentPage",
-                                                                                    "lastPage",
-                                                                                    "totalContent"
-                                                                                ]
-                                                                            }
-                                                                        },
-                                                                        "required": [
-                                                                            "properties"
-                                                                        ]
-                                                                    }
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "tags"
-                                                            ]
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "elements",
-                                                        "fields",
-                                                        "metadata",
-                                                        "tags",
-                                                        "trail"
-                                                    ]
-                                                },
-                                                "maybeContentId": {
-                                                    "type": "string"
-                                                },
-                                                "isLiveBlog": {
-                                                    "type": "boolean"
-                                                },
-                                                "isCrossword": {
-                                                    "type": "boolean"
-                                                },
-                                                "byline": {
-                                                    "type": "string"
-                                                },
-                                                "image": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "type": {
-                                                            "type": "string"
-                                                        },
-                                                        "item": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "imageSrc": {
-                                                                    "type": "string"
-                                                                },
-                                                                "assets": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "imageSrc": {
-                                                                                "type": "string"
-                                                                            },
-                                                                            "imageCaption": {
-                                                                                "type": "string"
-                                                                            }
-                                                                        },
-                                                                        "required": [
-                                                                            "imageSrc"
-                                                                        ]
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "item",
-                                                        "type"
-                                                    ]
-                                                },
-                                                "webTitle": {
-                                                    "type": "string"
-                                                },
-                                                "linkText": {
-                                                    "type": "string"
-                                                },
-                                                "webUrl": {
-                                                    "type": "string"
-                                                },
-                                                "editionBrandings": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "$ref": "#/definitions/EditionBranding"
-                                                    }
-                                                },
-                                                "href": {
-                                                    "type": "string"
-                                                },
-                                                "embedUri": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "required": [
-                                                "editionBrandings",
-                                                "isBreaking",
-                                                "isCrossword",
-                                                "isLiveBlog",
-                                                "showByline",
-                                                "showKickerTag",
-                                                "webTitle"
-                                            ]
-                                        },
-                                        "header": {
-                                            "type": "object",
-                                            "properties": {
-                                                "isVideo": {
-                                                    "type": "boolean"
-                                                },
-                                                "isComment": {
-                                                    "type": "boolean"
-                                                },
-                                                "isGallery": {
-                                                    "type": "boolean"
-                                                },
-                                                "isAudio": {
-                                                    "type": "boolean"
-                                                },
-                                                "kicker": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "type": {
-                                                            "type": "string"
-                                                        },
-                                                        "item": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "properties": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "kickerText": {
-                                                                            "type": "string"
-                                                                        }
-                                                                    },
-                                                                    "required": [
-                                                                        "kickerText"
-                                                                    ]
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "properties"
-                                                            ]
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "type"
-                                                    ]
-                                                },
-                                                "seriesOrBlogKicker": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "properties": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "kickerText": {
-                                                                    "type": "string"
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "kickerText"
-                                                            ]
-                                                        },
-                                                        "name": {
-                                                            "type": "string"
-                                                        },
-                                                        "url": {
-                                                            "type": "string"
-                                                        },
-                                                        "id": {
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "id",
-                                                        "name",
-                                                        "properties",
-                                                        "url"
-                                                    ]
-                                                },
-                                                "headline": {
-                                                    "type": "string"
-                                                },
-                                                "url": {
-                                                    "type": "string"
-                                                },
-                                                "hasMainVideoElement": {
-                                                    "type": "boolean"
-                                                }
-                                            },
-                                            "required": [
-                                                "hasMainVideoElement",
-                                                "headline",
-                                                "isAudio",
-                                                "isComment",
-                                                "isGallery",
-                                                "isVideo",
-                                                "url"
-                                            ]
-                                        },
-                                        "card": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string"
-                                                },
-                                                "cardStyle": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "type": {
-                                                            "$ref": "#/definitions/FEFrontCardStyle"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "type"
-                                                    ]
-                                                },
-                                                "webPublicationDateOption": {
-                                                    "type": "number"
-                                                },
-                                                "lastModifiedOption": {
-                                                    "type": "number"
-                                                },
-                                                "trailText": {
-                                                    "type": "string"
-                                                },
-                                                "starRating": {
-                                                    "$ref": "#/definitions/StarRating"
-                                                },
-                                                "shortUrlPath": {
-                                                    "type": "string"
-                                                },
-                                                "shortUrl": {
-                                                    "type": "string"
-                                                },
-                                                "group": {
-                                                    "type": "string"
-                                                },
-                                                "isLive": {
-                                                    "type": "boolean"
-                                                },
-                                                "galleryCount": {
-                                                    "type": "number"
-                                                },
-                                                "audioDuration": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "required": [
-                                                "cardStyle",
-                                                "group",
-                                                "id",
-                                                "isLive",
-                                                "shortUrl"
-                                            ]
-                                        },
-                                        "discussion": {
-                                            "type": "object",
-                                            "properties": {
-                                                "isCommentable": {
-                                                    "type": "boolean"
-                                                },
-                                                "isClosedForComments": {
-                                                    "type": "boolean"
-                                                },
-                                                "discussionId": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "required": [
-                                                "isClosedForComments",
-                                                "isCommentable"
-                                            ]
-                                        },
-                                        "display": {
-                                            "type": "object",
-                                            "properties": {
-                                                "isBoosted": {
-                                                    "type": "boolean"
-                                                },
-                                                "boostLevel": {
-                                                    "$ref": "#/definitions/BoostLevel"
-                                                },
-                                                "isImmersive": {
-                                                    "type": "boolean"
-                                                },
-                                                "showBoostedHeadline": {
-                                                    "type": "boolean"
-                                                },
-                                                "showQuotedHeadline": {
-                                                    "type": "boolean"
-                                                },
-                                                "imageHide": {
-                                                    "type": "boolean"
-                                                },
-                                                "showLivePlayable": {
-                                                    "type": "boolean"
-                                                }
-                                            },
-                                            "required": [
-                                                "imageHide",
-                                                "isBoosted",
-                                                "showBoostedHeadline",
-                                                "showLivePlayable",
-                                                "showQuotedHeadline"
-                                            ]
-                                        },
-                                        "format": {
-                                            "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
-                                            "type": "object",
-                                            "properties": {
-                                                "design": {
-                                                    "$ref": "#/definitions/FEDesign"
-                                                },
-                                                "theme": {
-                                                    "$ref": "#/definitions/FETheme"
-                                                },
-                                                "display": {
-                                                    "$ref": "#/definitions/FEDisplay"
-                                                }
-                                            },
-                                            "required": [
-                                                "design",
-                                                "display",
-                                                "theme"
-                                            ]
-                                        },
-                                        "enriched": {
-                                            "type": "object",
-                                            "properties": {
-                                                "embedHtml": {
-                                                    "type": "string"
-                                                },
-                                                "embedCss": {
-                                                    "type": "string"
-                                                },
-                                                "embedJs": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        },
-                                        "mediaAtom": {
-                                            "$ref": "#/definitions/FEMediaAtom"
-                                        },
-                                        "supportingContent": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "properties": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "href": {
-                                                                "type": "string"
-                                                            },
-                                                            "webUrl": {
-                                                                "type": "string"
-                                                            }
-                                                        }
-                                                    },
-                                                    "header": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "kicker": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "item": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "properties": {
-                                                                                "type": "object",
-                                                                                "properties": {
-                                                                                    "kickerText": {
-                                                                                        "type": "string"
-                                                                                    }
-                                                                                },
-                                                                                "required": [
-                                                                                    "kickerText"
-                                                                                ]
-                                                                            }
-                                                                        },
-                                                                        "required": [
-                                                                            "properties"
-                                                                        ]
-                                                                    }
-                                                                }
-                                                            },
-                                                            "headline": {
-                                                                "type": "string"
-                                                            },
-                                                            "url": {
-                                                                "type": "string"
-                                                            }
-                                                        },
-                                                        "required": [
-                                                            "headline",
-                                                            "url"
-                                                        ]
-                                                    },
-                                                    "format": {
-                                                        "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "design": {
-                                                                "$ref": "#/definitions/FEDesign"
-                                                            },
-                                                            "theme": {
-                                                                "$ref": "#/definitions/FETheme"
-                                                            },
-                                                            "display": {
-                                                                "$ref": "#/definitions/FEDisplay"
-                                                            }
-                                                        },
-                                                        "required": [
-                                                            "design",
-                                                            "display",
-                                                            "theme"
-                                                        ]
-                                                    }
-                                                },
-                                                "required": [
-                                                    "header",
-                                                    "properties"
-                                                ]
-                                            }
-                                        },
-                                        "cardStyle": {
-                                            "type": "object",
-                                            "properties": {
-                                                "type": {
-                                                    "$ref": "#/definitions/FEFrontCardStyle"
-                                                }
-                                            },
-                                            "required": [
-                                                "type"
-                                            ]
-                                        },
-                                        "type": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "card",
-                                        "discussion",
-                                        "display",
-                                        "header",
-                                        "properties",
-                                        "type"
-                                    ]
-                                }
                             }
                         },
                         "required": [
@@ -3730,7 +2630,6 @@
                             "config",
                             "curated",
                             "displayName",
-                            "hasMore",
                             "hideKickers",
                             "id",
                             "showDateHeader",
@@ -4075,6 +2974,9 @@
                         "height",
                         "width"
                     ]
+                },
+                "hasAudio": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -4174,22 +3076,6 @@
         },
         "FEContainer": {
             "enum": [
-                "dynamic/fast",
-                "dynamic/package",
-                "dynamic/slow",
-                "fixed/large/slow-XIV",
-                "fixed/medium/fast-XI",
-                "fixed/medium/fast-XII",
-                "fixed/medium/slow-VI",
-                "fixed/medium/slow-VII",
-                "fixed/medium/slow-XII-mpu",
-                "fixed/small/fast-VIII",
-                "fixed/small/slow-I",
-                "fixed/small/slow-III",
-                "fixed/small/slow-IV",
-                "fixed/small/slow-V-half",
-                "fixed/small/slow-V-mpu",
-                "fixed/small/slow-V-third",
                 "fixed/thrasher",
                 "flexible/general",
                 "flexible/special",
@@ -4211,7 +3097,6 @@
                 "Breaking",
                 "BreakingPalette",
                 "Canonical",
-                "Dynamo",
                 "DynamoLike",
                 "EventAltPalette",
                 "EventPalette",
@@ -4423,16 +3308,343 @@
                 "supporter"
             ]
         },
-        "Switches": {
-            "type": "object",
-            "additionalProperties": {
-                "type": "boolean"
-            }
-        },
-        "SharedAdTargeting": {
-            "type": "object"
+        "FEFrontConfig": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "abTests": {
+                            "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
+                            "type": "object"
+                        },
+                        "adUnit": {
+                            "type": "string"
+                        },
+                        "ajaxUrl": {
+                            "type": "string"
+                        },
+                        "brazeApiKey": {
+                            "type": "string"
+                        },
+                        "commercialBundleUrl": {
+                            "type": "string"
+                        },
+                        "dcrSentryDsn": {
+                            "type": "string"
+                        },
+                        "dfpAccountId": {
+                            "type": "string"
+                        },
+                        "discussionApiClientHeader": {
+                            "type": "string"
+                        },
+                        "discussionApiUrl": {
+                            "type": "string"
+                        },
+                        "discussionD2Uid": {
+                            "type": "string"
+                        },
+                        "edition": {
+                            "type": "string"
+                        },
+                        "frontendAssetsFullURL": {
+                            "type": "string"
+                        },
+                        "googleRecaptchaSiteKey": {
+                            "type": "string"
+                        },
+                        "googletagUrl": {
+                            "type": "string"
+                        },
+                        "hasPageSkin": {
+                            "type": "boolean"
+                        },
+                        "host": {
+                            "type": "string"
+                        },
+                        "idApiUrl": {
+                            "type": "string"
+                        },
+                        "idUrl": {
+                            "type": "string"
+                        },
+                        "ipsosTag": {
+                            "type": "string"
+                        },
+                        "isDev": {
+                            "type": "boolean"
+                        },
+                        "isFront": {
+                            "type": "boolean",
+                            "const": true
+                        },
+                        "isPaidContent": {
+                            "type": "boolean"
+                        },
+                        "isPreview": {
+                            "type": "boolean"
+                        },
+                        "isProd": {
+                            "type": "boolean"
+                        },
+                        "isSensitive": {
+                            "type": "boolean"
+                        },
+                        "keywordIds": {
+                            "type": "string"
+                        },
+                        "mmaUrl": {
+                            "type": "string"
+                        },
+                        "pageId": {
+                            "type": "string"
+                        },
+                        "section": {
+                            "type": "string"
+                        },
+                        "sentryHost": {
+                            "type": "string"
+                        },
+                        "sentryPublicApiKey": {
+                            "type": "string"
+                        },
+                        "serverSideABTests": {
+                            "$ref": "#/definitions/Record<string,string>"
+                        },
+                        "sharedAdTargeting": {
+                            "$ref": "#/definitions/SharedAdTargeting"
+                        },
+                        "stage": {
+                            "$ref": "#/definitions/StageType"
+                        },
+                        "supportUrl": {
+                            "type": "string"
+                        },
+                        "switches": {
+                            "$ref": "#/definitions/Switches"
+                        },
+                        "webTitle": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "abTests",
+                        "adUnit",
+                        "ajaxUrl",
+                        "commercialBundleUrl",
+                        "dcrSentryDsn",
+                        "dfpAccountId",
+                        "discussionApiClientHeader",
+                        "discussionApiUrl",
+                        "discussionD2Uid",
+                        "edition",
+                        "frontendAssetsFullURL",
+                        "googleRecaptchaSiteKey",
+                        "googletagUrl",
+                        "hasPageSkin",
+                        "host",
+                        "idApiUrl",
+                        "idUrl",
+                        "ipsosTag",
+                        "isDev",
+                        "isFront",
+                        "isPreview",
+                        "isProd",
+                        "isSensitive",
+                        "keywordIds",
+                        "mmaUrl",
+                        "pageId",
+                        "section",
+                        "sentryHost",
+                        "sentryPublicApiKey",
+                        "serverSideABTests",
+                        "sharedAdTargeting",
+                        "stage",
+                        "supportUrl",
+                        "switches",
+                        "webTitle"
+                    ]
+                },
+                {
+                    "description": "Config sent in the payload from frontend to DCR but seems to be not used here\n\nIf not used we should remove these properties from the Frontend model",
+                    "type": "object",
+                    "properties": {
+                        "a9PublisherId": {
+                            "type": "string"
+                        },
+                        "allowUserGeneratedContent": {
+                            "type": "boolean"
+                        },
+                        "ampIframeUrl": {
+                            "type": "string"
+                        },
+                        "assetsPath": {
+                            "type": "string"
+                        },
+                        "avatarApiUrl": {
+                            "type": "string"
+                        },
+                        "avatarImagesUrl": {
+                            "type": "string"
+                        },
+                        "beaconUrl": {
+                            "type": "string"
+                        },
+                        "buildNumber": {
+                            "type": "string"
+                        },
+                        "calloutsUrl": {
+                            "type": "string"
+                        },
+                        "cardStyle": {
+                            "type": "string"
+                        },
+                        "contentType": {
+                            "type": "string"
+                        },
+                        "dfpAdUnitRoot": {
+                            "type": "string"
+                        },
+                        "dfpHost": {
+                            "type": "string"
+                        },
+                        "externalEmbedHost": {
+                            "type": "string"
+                        },
+                        "facebookIaAdUnitRoot": {
+                            "type": "string"
+                        },
+                        "fbAppId": {
+                            "type": "string"
+                        },
+                        "forecastsapiurl": {
+                            "type": "string"
+                        },
+                        "googleSearchId": {
+                            "type": "string"
+                        },
+                        "googleSearchUrl": {
+                            "type": "string"
+                        },
+                        "googletagJsUrl": {
+                            "type": "string"
+                        },
+                        "idOAuthUrl": {
+                            "type": "string"
+                        },
+                        "idWebAppUrl": {
+                            "type": "string"
+                        },
+                        "keywords": {
+                            "type": "string"
+                        },
+                        "locationapiurl": {
+                            "type": "string"
+                        },
+                        "membershipAccess": {
+                            "type": "string"
+                        },
+                        "membershipUrl": {
+                            "type": "string"
+                        },
+                        "mobileAppsAdUnitRoot": {
+                            "type": "string"
+                        },
+                        "omnitureAccount": {
+                            "type": "string"
+                        },
+                        "omnitureAmpAccount": {
+                            "type": "string"
+                        },
+                        "onwardWebSocket": {
+                            "type": "string"
+                        },
+                        "ophanEmbedJsUrl": {
+                            "type": "string"
+                        },
+                        "ophanJsUrl": {
+                            "type": "string"
+                        },
+                        "optimizeEpicUrl": {
+                            "type": "string"
+                        },
+                        "pbIndexSites": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": {}
+                            }
+                        },
+                        "pillar": {
+                            "type": "string"
+                        },
+                        "plistaPublicApiKey": {
+                            "type": "string"
+                        },
+                        "requiresMembershipAccess": {
+                            "type": "boolean"
+                        },
+                        "revisionNumber": {
+                            "type": "string"
+                        },
+                        "shouldHideAdverts": {
+                            "type": "boolean"
+                        },
+                        "stripePublicToken": {
+                            "type": "string"
+                        },
+                        "thirdPartyAppsAccount": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "a9PublisherId",
+                        "allowUserGeneratedContent",
+                        "ampIframeUrl",
+                        "assetsPath",
+                        "avatarApiUrl",
+                        "avatarImagesUrl",
+                        "beaconUrl",
+                        "buildNumber",
+                        "calloutsUrl",
+                        "contentType",
+                        "dfpAdUnitRoot",
+                        "dfpHost",
+                        "externalEmbedHost",
+                        "facebookIaAdUnitRoot",
+                        "fbAppId",
+                        "forecastsapiurl",
+                        "googleSearchId",
+                        "googleSearchUrl",
+                        "googletagJsUrl",
+                        "idOAuthUrl",
+                        "idWebAppUrl",
+                        "keywords",
+                        "locationapiurl",
+                        "membershipAccess",
+                        "membershipUrl",
+                        "mobileAppsAdUnitRoot",
+                        "omnitureAccount",
+                        "omnitureAmpAccount",
+                        "onwardWebSocket",
+                        "ophanEmbedJsUrl",
+                        "ophanJsUrl",
+                        "optimizeEpicUrl",
+                        "pbIndexSites",
+                        "pillar",
+                        "plistaPublicApiKey",
+                        "requiresMembershipAccess",
+                        "revisionNumber",
+                        "shouldHideAdverts",
+                        "stripePublicToken"
+                    ]
+                }
+            ]
         },
         "Record<string,string>": {
+            "type": "object"
+        },
+        "SharedAdTargeting": {
             "type": "object"
         },
         "StageType": {
@@ -4442,6 +3654,12 @@
                 "PROD"
             ],
             "type": "string"
+        },
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
         },
         "Record<string,unknown>": {
             "type": "object"
@@ -4759,18 +3977,29 @@
                                     },
                                     "mimeType": {
                                         "$ref": "#/definitions/SupportedVideoFileType"
+                                    },
+                                    "height": {
+                                        "type": "number"
+                                    },
+                                    "width": {
+                                        "type": "number"
+                                    },
+                                    "aspectRatio": {
+                                        "type": "string"
+                                    },
+                                    "hasAudio": {
+                                        "type": "boolean"
                                     }
                                 },
                                 "required": [
+                                    "height",
                                     "mimeType",
-                                    "src"
+                                    "src",
+                                    "width"
                                 ]
                             }
                         },
-                        "height": {
-                            "type": "number"
-                        },
-                        "width": {
+                        "aspectRatio": {
                             "type": "number"
                         },
                         "duration": {
@@ -4780,17 +4009,28 @@
                             "type": "string"
                         },
                         "image": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "src": {
+                                    "type": "string"
+                                },
+                                "aspectRatio": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "aspectRatio"
+                            ]
                         }
                     },
                     "required": [
+                        "aspectRatio",
                         "atomId",
                         "duration",
-                        "height",
+                        "image",
                         "sources",
                         "type",
-                        "videoStyle",
-                        "width"
+                        "videoStyle"
                     ]
                 }
             ]

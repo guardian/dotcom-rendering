@@ -297,7 +297,9 @@ export const Caption = ({
 	const noCaption = !captionText?.trim();
 	const noCredit = !credit;
 	const hideCredit = !displayCredit;
-	if (noCaption && (noCredit || hideCredit)) return null;
+	if (noCaption && (noCredit || hideCredit)) {
+		return null;
+	}
 
 	const isGallery = format.design === ArticleDesign.Gallery;
 

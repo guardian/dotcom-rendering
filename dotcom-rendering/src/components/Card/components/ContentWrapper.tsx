@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from, space, until } from '@guardian/source/foundations';
-import type { CardMediaType } from '../../../types/layout';
+import { from, space, until } from '@guardian/source/foundations';
 import type { MediaPositionType, MediaSizeType } from './MediaWrapper';
 
 const sizingStyles = css`
@@ -17,51 +16,15 @@ const sizingStyles = css`
  */
 const flexBasisStyles = ({
 	mediaSize,
-	mediaType,
-	isBetaContainer,
+	isAvatar,
 }: {
 	mediaSize: MediaSizeType;
-	mediaType?: CardMediaType;
-	isBetaContainer: boolean;
+	isAvatar: boolean;
 }): SerializedStyles => {
-	if (mediaType === 'avatar') {
+	if (isAvatar) {
 		return css`
 			flex-basis: 100%;
 		`;
-	}
-
-	if (!isBetaContainer) {
-		switch (mediaSize) {
-			default:
-			case 'small':
-				return css`
-					flex-basis: 75%;
-					${between.tablet.and.desktop} {
-						flex-basis: 60%;
-					}
-					${from.desktop} {
-						flex-basis: 70%;
-					}
-				`;
-			case 'medium':
-				return css`
-					${from.tablet} {
-						flex-basis: 50%;
-					}
-				`;
-			case 'large':
-				return css`
-					${from.tablet} {
-						flex-basis: 34%;
-					}
-				`;
-			case 'jumbo':
-				return css`
-					${from.tablet} {
-						flex-basis: 25%;
-					}
-				`;
-		}
 	}
 
 	switch (mediaSize) {
@@ -101,7 +64,7 @@ const flexBasisStyles = ({
 /**
  * There is no padding on the side of the media where the text is.
  */
-const paddingBetaContainerStyles = (
+const paddingStyles = (
 	mediaPositionMobile: MediaPositionType,
 	mediaPositionDesktop: MediaPositionType,
 	padding: 1 | 2,
@@ -144,9 +107,9 @@ const getMediaDirection = (
 
 type Props = {
 	children: React.ReactNode;
-	mediaType?: CardMediaType;
 	mediaSize: MediaSizeType;
-	isBetaContainer: boolean;
+	isAvatar: boolean;
+	isFrontContainer: boolean;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
 	padContent?: 'small' | 'large';
@@ -154,9 +117,9 @@ type Props = {
 
 export const ContentWrapper = ({
 	children,
-	mediaType,
 	mediaSize,
-	isBetaContainer,
+	isAvatar,
+	isFrontContainer,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
 	padContent,
@@ -171,17 +134,16 @@ export const ContentWrapper = ({
 				mediaDirectionDesktop === 'horizontal' &&
 					flexBasisStyles({
 						mediaSize,
-						mediaType,
-						isBetaContainer,
+						isAvatar,
 					}),
 				padContent &&
-					!isBetaContainer &&
+					!isFrontContainer &&
 					css`
 						padding: ${space[paddingSpace]}px;
 					`,
 				padContent &&
-					isBetaContainer &&
-					paddingBetaContainerStyles(
+					isFrontContainer &&
+					paddingStyles(
 						mediaPositionOnMobile,
 						mediaPositionOnDesktop,
 						paddingSpace,

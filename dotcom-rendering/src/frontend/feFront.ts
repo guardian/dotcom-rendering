@@ -40,22 +40,6 @@ interface FEPressedPage {
 /* This list of containers supported in DCR must be kept up to date with frontend **manually**.
  * @see https://github.com/guardian/frontend/blob/167dce23a8453ed13a97fbd23c7fc45ecb06e3fe/facia/app/services/dotcomrendering/FaciaPicker.scala#L21-L45 */
 export type FEContainer =
-	| 'dynamic/fast'
-	| 'dynamic/package'
-	| 'dynamic/slow'
-	| 'fixed/large/slow-XIV'
-	| 'fixed/medium/fast-XI'
-	| 'fixed/medium/fast-XII'
-	| 'fixed/medium/slow-VI'
-	| 'fixed/medium/slow-VII'
-	| 'fixed/medium/slow-XII-mpu'
-	| 'fixed/small/fast-VIII'
-	| 'fixed/small/slow-I'
-	| 'fixed/small/slow-III'
-	| 'fixed/small/slow-IV'
-	| 'fixed/small/slow-V-half'
-	| 'fixed/small/slow-V-mpu'
-	| 'fixed/small/slow-V-third'
 	| 'fixed/thrasher'
 	| 'nav/list'
 	| 'nav/media-list'
@@ -80,7 +64,6 @@ export type FEContainerMetadata =
 	| 'LongRunningPalette'
 	| 'SombrePalette'
 	| 'Canonical'
-	| 'Dynamo'
 	| 'Special'
 	| 'DynamoLike'
 	| 'Breaking'
@@ -116,6 +99,7 @@ export interface FEMediaAsset {
 		width: number;
 		height: number;
 	};
+	hasAudio?: boolean;
 }
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L158-L169 */
@@ -303,7 +287,7 @@ type FECollectionConfig = {
 	showLatestUpdate: boolean;
 	excludeFromRss: boolean;
 	showTimestamps: boolean;
-	hideShowMore: boolean;
+	hideShowMore?: boolean; // deprecated. Collections no longer show more content.
 	platform: string;
 	aspectRatio?: FEAspectRatio;
 };
@@ -326,90 +310,97 @@ export type FECollection = {
 	showDateHeader: boolean;
 	showLatestUpdate: boolean;
 	config: FECollectionConfig;
-	hasMore: boolean;
+	hasMore?: boolean; // deprecated. Collections no longer show more content.
 	targetedTerritory?: Territory;
-	bucket?: FEFrontCard[];
 };
 
 export type FEFrontConfig = {
-	avatarApiUrl: string;
-	externalEmbedHost: string;
-	ajaxUrl: string;
-	keywords: string;
-	revisionNumber: string;
-	isProd: boolean;
-	switches: Switches;
-	section: string;
-	keywordIds: string;
-	locationapiurl: string;
-	sharedAdTargeting: SharedAdTargeting;
-	buildNumber: string;
 	abTests: ServerSideTests;
-	serverSideABTests: Record<string, string>;
-	pbIndexSites: { [key: string]: unknown }[];
-	ampIframeUrl: string;
-	beaconUrl: string;
-	host: string;
-	brazeApiKey?: string;
-	calloutsUrl: string;
-	requiresMembershipAccess: boolean;
-	onwardWebSocket: string;
-	a9PublisherId: string;
-	contentType: string;
-	facebookIaAdUnitRoot: string;
-	ophanEmbedJsUrl: string;
-	idUrl: string;
-	dcrSentryDsn: string;
-	isFront: true;
-	idWebAppUrl: string;
-	discussionApiUrl: string;
-	sentryPublicApiKey: string;
-	omnitureAccount: string;
-	dfpAccountId: string;
-	pageId: string;
-	forecastsapiurl: string;
-	assetsPath: string;
-	pillar: string;
-	commercialBundleUrl: string;
-	discussionApiClientHeader: string;
-	membershipUrl: string;
-	dfpHost: string;
-	cardStyle?: string;
-	googletagUrl: string;
-	sentryHost: string;
-	shouldHideAdverts: boolean;
-	mmaUrl: string;
-	membershipAccess: string;
-	isPreview: boolean;
-	googletagJsUrl: string;
-	supportUrl: string;
-	edition: string;
-	ipsosTag: string;
-	ophanJsUrl: string;
-	isPaidContent?: boolean;
-	mobileAppsAdUnitRoot: string;
-	plistaPublicApiKey: string;
-	frontendAssetsFullURL: string;
-	googleSearchId: string;
-	allowUserGeneratedContent: boolean;
-	dfpAdUnitRoot: string;
-	idApiUrl: string;
-	omnitureAmpAccount: string;
 	adUnit: string;
-	hasPageSkin: boolean;
-	webTitle: string;
-	stripePublicToken: string;
-	googleRecaptchaSiteKey: string;
+	ajaxUrl: string;
+	brazeApiKey?: string;
+	commercialBundleUrl: string;
+	dcrSentryDsn: string;
+	dfpAccountId: string;
+	discussionApiClientHeader: string;
+	discussionApiUrl: string;
 	discussionD2Uid: string;
-	googleSearchUrl: string;
-	optimizeEpicUrl: string;
-	stage: StageType;
-	idOAuthUrl: string;
-	isSensitive: boolean;
+	edition: string;
+	frontendAssetsFullURL: string;
+	googleRecaptchaSiteKey: string;
+	googletagUrl: string;
+	hasPageSkin: boolean;
+	host: string;
+	idApiUrl: string;
+	idUrl: string;
+	ipsosTag: string;
 	isDev: boolean;
-	thirdPartyAppsAccount?: string;
+	isFront: true;
+	isPaidContent?: boolean;
+	isPreview: boolean;
+	isProd: boolean;
+	isSensitive: boolean;
+	keywordIds: string;
+	mmaUrl: string;
+	pageId: string;
+	section: string;
+	sentryHost: string;
+	sentryPublicApiKey: string;
+	serverSideABTests: Record<string, string>;
+	sharedAdTargeting: SharedAdTargeting;
+	stage: StageType;
+	supportUrl: string;
+	switches: Switches;
+	webTitle: string;
+} & FELegacyConfig;
+
+/**
+ * Config sent in the payload from frontend to DCR but seems to be not used here
+ *
+ * If not used we should remove these properties from the Frontend model
+ */
+type FELegacyConfig = {
+	a9PublisherId: string;
+	allowUserGeneratedContent: boolean;
+	ampIframeUrl: string;
+	assetsPath: string;
+	avatarApiUrl: string;
 	avatarImagesUrl: string;
+	beaconUrl: string;
+	buildNumber: string;
+	calloutsUrl: string;
+	cardStyle?: string;
+	contentType: string;
+	dfpAdUnitRoot: string;
+	dfpHost: string;
+	externalEmbedHost: string;
+	facebookIaAdUnitRoot: string;
 	fbAppId: string;
+	forecastsapiurl: string;
+	googleSearchId: string;
+	googleSearchUrl: string;
+	googletagJsUrl: string;
+	idOAuthUrl: string;
+	idWebAppUrl: string;
+	keywords: string;
+	locationapiurl: string;
+	membershipAccess: string;
+	membershipUrl: string;
+	mobileAppsAdUnitRoot: string;
+	omnitureAccount: string;
+	omnitureAmpAccount: string;
+	onwardWebSocket: string;
+	ophanEmbedJsUrl: string;
+	ophanJsUrl: string;
+	optimizeEpicUrl: string;
+	pbIndexSites: { [key: string]: unknown }[];
+	pillar: string;
+	plistaPublicApiKey: string;
+	requiresMembershipAccess: boolean;
+	revisionNumber: string;
+	shouldHideAdverts: boolean;
+	stripePublicToken: string;
+	thirdPartyAppsAccount?: string;
 };
 
 export type FESeoData = {

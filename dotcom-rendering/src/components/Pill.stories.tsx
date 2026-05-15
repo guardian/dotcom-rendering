@@ -1,48 +1,44 @@
 import { SvgCamera } from '@guardian/source/react-components';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { Pill } from './Pill';
 import { SvgMediaControlsPlay } from './SvgMediaControlsPlay';
 
-const meta: Meta<typeof Pill> = {
+const meta = preview.meta({
 	title: 'Components/Pill',
 	component: Pill,
 	args: {
 		content: 'Pill',
 	},
-} satisfies Meta<typeof Pill>;
+});
 
-export default meta;
+export const Default = meta.story();
 
-type Story = StoryObj<typeof Pill>;
-
-export const Default = {} satisfies Story;
-
-export const WithVideoIcon = {
+export const WithVideoIcon = meta.story({
 	args: {
 		content: <time>3:35</time>,
 		icon: <SvgMediaControlsPlay width={18} />,
 	},
-} satisfies Story;
+});
 
-export const WithGalleryIcon = {
+export const WithGalleryIcon = meta.story({
 	args: {
 		content: '10',
 		icon: <SvgCamera />,
 		iconSide: 'right',
 	},
-} satisfies Story;
+});
 
-export const WithVideoIconAndPrefix = {
+export const WithVideoIconAndPrefix = meta.story({
 	args: {
-		...WithVideoIcon.args,
+		...WithVideoIcon.input.args,
 		prefix: 'Video',
 	},
-} satisfies Story;
+});
 
-export const WithGalleryIconAndPrefix = {
+export const WithGalleryIconAndPrefix = meta.story({
 	args: {
-		...WithGalleryIcon.args,
+		...WithGalleryIcon.input.args,
 		prefix: 'Gallery',
 		iconSide: 'left',
 	},
-} satisfies Story;
+});

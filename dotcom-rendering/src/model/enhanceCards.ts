@@ -13,9 +13,13 @@ import { getSoleContributor } from '../lib/byline';
 import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
-import { getLargestImageSize } from '../lib/image';
-import type { SupportedVideoFileType } from '../lib/video';
-import { supportedVideoFileTypes } from '../lib/video';
+import { getLargestImage } from '../lib/image';
+import {
+	convertFEMediaAssetsToVideoAssets,
+	DEFAULT_IMAGE_ASPECT_RATIO,
+	extractValidSourcesFromAssets,
+	getAspectRatioFromSources,
+} from '../lib/video';
 import type { Image } from '../types/content';
 import type {
 	DCRFrontCard,
@@ -159,34 +163,34 @@ const decideSlideshowImages = (
 	return undefined;
 };
 
-const getLargestImageUrl = (images?: Image[]) => {
-	return getLargestImageSize(
-		images?.map(({ url, fields: { width } }) => ({
-			url,
-			width: Number(width),
-		})) ?? [],
-	)?.url;
-};
-
 /**
- * If we have a replacement video, we should prioritise the largest available trail image from the media atom.
- * For all other videos, we should prioritise the card's trail image.
+ * If we have a replacement video, we prioritise the largest available trail image from the media atom.
+ * For all other videos, we prioritise the card's trail image.
  */
 const decideMediaAtomImage = (
 	videoReplace: boolean,
-	mediaAtom: FEMediaAtom,
+	mediaAtomImages?: Image[],
 	cardTrailImage?: string,
-	isSelfHostedVideo?: boolean,
-) => {
-	const largestMediaAtomImage = isSelfHostedVideo
-		? getLargestImageUrl(mediaAtom.posterImage?.allImages)
-		: getLargestImageUrl(mediaAtom.trailImage?.allImages);
+): { src?: string; imageAspectRatio?: string } => {
+	const largestMediaAtomImage = getLargestImage(mediaAtomImages);
 
-	if (videoReplace) {
-		return largestMediaAtomImage ?? cardTrailImage;
+	if (isUndefined(largestMediaAtomImage)) {
+		return { src: cardTrailImage };
 	}
 
-	return cardTrailImage ?? largestMediaAtomImage;
+	if (isUndefined(cardTrailImage)) {
+		return {
+			src: largestMediaAtomImage.url,
+			imageAspectRatio: largestMediaAtomImage.fields.aspectRatio,
+		};
+	}
+
+	return videoReplace
+		? {
+				src: largestMediaAtomImage.url,
+				imageAspectRatio: largestMediaAtomImage.fields.aspectRatio,
+		  }
+		: { src: cardTrailImage };
 };
 
 /**
@@ -210,57 +214,56 @@ export const getActiveMediaAtom = (
 		)[0];
 		if (!firstVideoAsset) return undefined;
 
-		const image = decideMediaAtomImage(
-			videoReplace,
-			mediaAtom,
-			cardTrailImage,
-			firstVideoAsset.platform === 'Url',
-		);
-
 		/**
 		 * Each version of a media atom will contain assets for self-hosted OR YouTube, but not both.
 		 * Therefore, we check the platform of the first asset and assume the rest are the same.
 		 */
 		if (firstVideoAsset.platform === 'Url') {
-			/**
-			 * Take one source for each supported video file type.
-			 */
-			const sources = supportedVideoFileTypes.reduce<typeof assets>(
-				(acc, type) => {
-					const source = assets.find(
-						({ mimeType }) => mimeType === type,
-					);
-					if (source) acc.push(source);
-					return acc;
-				},
-				[],
+			const selfHostedAssets = assets.filter(
+				({ platform }) => platform === 'Url',
 			);
-			if (!sources.length) return undefined;
-
 			const subtitleAsset = assets.find(
 				({ assetType }) => assetType === 'Subtitles',
 			);
+
+			const image = decideMediaAtomImage(
+				videoReplace,
+				mediaAtom.posterImage?.allImages,
+				cardTrailImage,
+			);
+
+			const videoAssets =
+				convertFEMediaAssetsToVideoAssets(selfHostedAssets);
+			const sources = extractValidSourcesFromAssets(videoAssets);
+
+			const aspectRatio = getAspectRatioFromSources(sources);
 
 			return {
 				type: 'SelfHostedVideo',
 				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
 				atomId: mediaAtom.id,
-				sources: sources.map((source) => ({
-					src: source.id,
-					mimeType: source.mimeType as SupportedVideoFileType,
-				})),
+				sources,
 				subtitleSource: subtitleAsset?.id,
+				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
-				width: firstVideoAsset.dimensions?.width ?? 500,
-				height: firstVideoAsset.dimensions?.height ?? 400,
-				image,
+				image: {
+					src: image.src,
+					aspectRatio:
+						image.imageAspectRatio ?? DEFAULT_IMAGE_ASPECT_RATIO,
+				},
 			};
 		}
 
 		/**
-		 * There should only be one asset for Youtube atoms.
+		 * There should only be one asset for Youtube atoms, so we use the first one.
 		 */
 		if (firstVideoAsset.platform === 'Youtube') {
+			const image = decideMediaAtomImage(
+				videoReplace,
+				mediaAtom.trailImage?.allImages,
+				cardTrailImage,
+			);
+
 			return {
 				type: 'YoutubeVideo',
 				id: mediaAtom.id,
@@ -274,10 +277,10 @@ export const getActiveMediaAtom = (
 				expired: !!mediaAtom.expired,
 				/**
 				 * We infer that a video is a livestream if the duration is set to 0. This is
-				 * a soft contract with Editorial who manual set the duration of videos
+				 * a soft contract with Editorial who manually set the duration of videos.
 				 */
 				isLive: mediaAtom.duration === 0,
-				image,
+				image: image.src,
 			};
 		}
 	}
@@ -285,7 +288,7 @@ export const getActiveMediaAtom = (
 	return undefined;
 };
 
-const decideArticleMedia = (
+export const decideArticleMedia = (
 	format: ArticleFormat,
 	mediaAtom?: FEMediaAtom,
 	galleryCount: number = 0,
@@ -314,7 +317,7 @@ const decideArticleMedia = (
 	}
 };
 
-const decideReplacementMedia = (
+export const decideReplacementMedia = (
 	showMainVideo?: boolean,
 	mediaAtom?: FEMediaAtom,
 	videoReplace?: boolean,
@@ -327,7 +330,7 @@ const decideReplacementMedia = (
 	return undefined;
 };
 
-const getMediaMetadata = (
+export const getMediaMetadata = (
 	articleMainMedia: MainMedia,
 ): ArticleMedia | undefined => {
 	switch (articleMainMedia.type) {

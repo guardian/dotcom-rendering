@@ -33,22 +33,25 @@ declare global {
  */
 export const doHydration = async (
 	name: string,
-	data: { [key: string]: unknown } | null,
+	data: Record<string, unknown> | null,
 	element: HTMLElement,
 	emotionCache: EmotionCache,
 	config: Config,
 ): Promise<void> => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
-	if (!isUndefined(element.dataset.islandStatus)) return;
-	else element.dataset.islandStatus = 'identified';
+	if (!isUndefined(element.dataset.islandStatus)) {
+		return;
+	} else {
+		element.dataset.islandStatus = 'identified';
+	}
 
 	const { endPerformanceMeasure: endImportPerformanceMeasure } =
 		startPerformanceMeasure('dotcom', name, 'import');
 	await import(
-		/* webpackInclude: /\.importable\.tsx$/ */
+		/* webpackInclude: /\.island\.tsx$/ */
 		/* webpackChunkName: "[request]" */
-		`../../components/${name}.importable`
+		`../../components/${name}.island`
 	)
 		.then((module) => {
 			/** The duration of importing the module for this island */
@@ -77,7 +80,9 @@ export const doHydration = async (
 			return { importDuration, islandDuration };
 		})
 		.then(({ importDuration, islandDuration }) => {
-			if (!('getEntriesByType' in window.performance)) return;
+			if (!('getEntriesByType' in window.performance)) {
+				return;
+			}
 
 			element.dataset.islandStatus = 'hydrated';
 
@@ -90,7 +95,7 @@ export const doHydration = async (
 			element.dataset.islandStatus = undefined; // remove any island status
 			if (name && error.message.includes(name)) {
 				console.error(
-					`🚨 Error importing ${name}. Components must live in the root of /components and follow the [MyComponent].importable.tsx naming convention 🚨`,
+					`🚨 Error importing ${name}. Components must live in the root of /components and follow the [MyComponent].island.tsx naming convention 🚨`,
 				);
 			}
 			throw error;

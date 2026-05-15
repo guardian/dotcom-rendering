@@ -26,7 +26,9 @@ export const FootballTableList = {
 			{
 				name: 'Premier League',
 				url: '/football/premierleague',
-				tables: [{ ...TableDefault.args.table, groupName: 'League' }],
+				tables: [
+					{ ...TableDefault.input.args.table, groupName: 'League' },
+				],
 				dividers: [1],
 				hasGroups: false,
 			},
@@ -34,8 +36,8 @@ export const FootballTableList = {
 				name: 'Champions League',
 				url: '/football/championsleague',
 				tables: [
-					{ ...TableDefault.args.table, groupName: 'Group A' },
-					{ ...TableDefault.args.table, groupName: 'Group B' },
+					{ ...TableDefault.input.args.table, groupName: 'Group A' },
+					{ ...TableDefault.input.args.table, groupName: 'Group B' },
 				],
 				dividers: [1],
 				hasGroups: true,

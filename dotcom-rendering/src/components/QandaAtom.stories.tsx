@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import preview from '../../.storybook/preview';
 import {
 	imageStoryExpanded,
 	imageStoryWithCreditExpanded,
@@ -11,14 +11,12 @@ import {
 	getAllThemes,
 	Pillar,
 } from '../lib/articleFormat';
-import { QandaAtom as QandaAtomComponent } from './QandaAtom.importable';
+import { QandaAtom as QandaAtomComponent } from './QandaAtom.island';
 
-const meta: Meta<typeof QandaAtomComponent> = {
+const meta = preview.meta({
 	title: 'Components/Q and A Atom',
 	component: QandaAtomComponent,
-};
-
-type Story = StoryObj<typeof QandaAtomComponent>;
+});
 
 const defaultFormat = {
 	display: ArticleDisplay.Standard,
@@ -27,7 +25,7 @@ const defaultFormat = {
 };
 
 // Based on https://www.theguardian.com/technology/2018/sep/19/time-to-regulate-bitcoin-says-treasury-committee-report
-export const DefaultStoryExpanded: Story = {
+export const DefaultStoryExpanded = meta.story({
 	args: { ...imageStoryExpanded },
 	decorators: [
 		splitTheme(
@@ -37,18 +35,16 @@ export const DefaultStoryExpanded: Story = {
 			}),
 		),
 	],
-};
+});
 
 // Based on https://www.theguardian.com/world/2020/mar/17/israel-to-track-mobile-phones-of-suspected-coronavirus-cases
-export const ListStoryExpanded: Story = {
+export const ListStoryExpanded = meta.story({
 	args: { ...listStoryExpanded },
 	decorators: [splitTheme([defaultFormat])],
-};
+});
 
 // Based on https://www.theguardian.com/world/2020/aug/06/coronavirus-global-report-germany-and-france-record-biggest-rise-in-cases-since-may
-export const ImageStoryWithCreditExpanded: Story = {
+export const ImageStoryWithCreditExpanded = meta.story({
 	args: { ...imageStoryWithCreditExpanded },
 	decorators: [splitTheme([defaultFormat])],
-};
-
-export default meta;
+});

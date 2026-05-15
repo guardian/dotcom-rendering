@@ -41,7 +41,10 @@ const headerStyles = css`
 `;
 
 const primaryTitleStyles = css`
-	${headlineBold28};
+	${headlineBold24};
+	${from.tablet} {
+		${headlineBold28};
+	}
 `;
 const secondaryTitleStyles = css`
 	${textSansBold17};
@@ -119,7 +122,9 @@ export const ContainerTitle = ({
 	containerLevel,
 	isLabs = false,
 }: Props) => {
-	if (!title) return null;
+	if (!title) {
+		return null;
+	}
 
 	const now = new Date();
 

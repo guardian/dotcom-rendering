@@ -126,7 +126,7 @@ export const LinkHeadline = ({
 	byline,
 }: Props) => {
 	return (
-		<h4 css={[fontStyles(size)]}>
+		<h4 css={fontStyles(size)}>
 			{!!kickerText && (
 				<Kicker
 					text={kickerText}

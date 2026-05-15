@@ -31,6 +31,7 @@ import type { CanShowResult } from '../../lib/messagePicker';
 import { getEpic } from '../../lib/sdcRequests';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
+import { hasRequiredConsents } from '../SignInGate/displayRules';
 
 const wrapperMargins = css`
 	margin: 18px 0;
@@ -52,6 +53,9 @@ export type CanShowData = {
 	renderingTarget: RenderingTarget;
 	ophanPageViewId: string;
 	pageId?: string;
+	inHoldbackGroup?: boolean;
+	isSensitive: boolean;
+	browserId?: string;
 };
 
 const buildPayload = async (
@@ -73,6 +77,9 @@ const buildPayload = async (
 		url: window.location.origin + window.location.pathname,
 		isSignedIn: data.isSignedIn,
 		pageId: data.pageId,
+		inHoldbackGroup: data.inHoldbackGroup,
+		isSensitive: data.isSensitive,
+		browserId: data.browserId,
 	},
 });
 
@@ -104,8 +111,19 @@ export const canShowReaderRevenueEpic = async (
 		'contributions-epic-data',
 	);
 
+	//Send user consent status to the epic API
+	const userConsent = await hasRequiredConsents();
+
+	const getBrowserId = (): string | undefined => {
+		if (!userConsent) {
+			return undefined;
+		}
+		return getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
+	};
+
 	const contributionsPayload = await buildPayload({
 		...data,
+		browserId: getBrowserId(),
 		hideSupportMessagingForUser,
 	});
 
@@ -189,7 +207,7 @@ export const ReaderRevenueEpic = ({ props }: ModuleData<EpicProps>) => {
 					'rr-epic',
 				);
 			});
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps -- Only import epic once on mount
+	}, []);
 
 	if (Epic !== null) {
 		return (

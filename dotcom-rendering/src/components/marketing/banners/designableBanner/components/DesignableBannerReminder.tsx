@@ -5,7 +5,7 @@
  */
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import React from 'react';
+import type React from 'react';
 import { useContributionsReminderSignup } from '../../../hooks/useContributionsReminderSignup';
 import type { BannerEnrichedReminderCta } from '../../common/types';
 import type { CtaSettings } from '../settings';

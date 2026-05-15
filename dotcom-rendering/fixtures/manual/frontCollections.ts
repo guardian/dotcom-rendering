@@ -4,15 +4,12 @@ import { trails } from './trails';
 const defaultGrouped = {
 	snap: [],
 	splash: [],
-	huge: [],
-	veryBig: [],
-	big: [],
 	standard: [],
 };
 
 const defaultValues = {
 	backfill: [],
-	collectionType: 'fixed/small/slow-IV',
+	collectionType: 'static/medium/4',
 	config: {
 		showDateHeader: false,
 	},
@@ -26,30 +23,30 @@ const defaultValues = {
 export const testCollectionsUk = [
 	{
 		...defaultValues,
-		collectionType: 'dynamic/package',
+		collectionType: 'static/medium/4',
 		containerPalette: 'EventPalette',
 		displayName: 'Israel-Hamas war',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 		grouped: defaultGrouped,
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'LongRunningAltPalette',
 		displayName: 'Ukraine invasion',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-V-mpu',
+		collectionType: 'static/medium/4',
 		displayName: 'News extra',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/slow',
+		collectionType: 'scrollable/feature',
 		displayName: 'Spotlight',
 	},
 	{
@@ -59,12 +56,12 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/slow',
+		collectionType: 'scrollable/feature',
 		displayName: 'Sport',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/slow',
+		collectionType: 'scrollable/feature',
 		displayName: 'Opinion',
 	},
 	{
@@ -74,12 +71,12 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'Lifestyle',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VII',
+		collectionType: 'flexible/general',
 		displayName: 'Culture',
 	},
 	{
@@ -89,17 +86,17 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Across the country',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		displayName: 'The rural network',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Around the world',
 	},
 	{
@@ -114,23 +111,23 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'Multimedia',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-XII-mpu',
+		collectionType: 'flexible/general',
 		displayName: 'Explore',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-I',
+		collectionType: 'flexible/general',
 		displayName: 'The big picture',
 	},
 	{
@@ -148,45 +145,45 @@ export const testCollectionsWithSecondaryLevel = [
 export const testCollectionsUs = [
 	{
 		...defaultValues,
-		collectionType: 'dynamic/package',
+		collectionType: 'static/medium/4',
 		containerPalette: 'EventPalette',
 		displayName: 'Israel-Hamas war',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/package',
+		collectionType: 'static/medium/4',
 		containerPalette: 'EventPalette',
 		displayName: 'Israel-Hamas war',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		displayName: 'In depth',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/slow',
+		collectionType: 'scrollable/feature',
 		displayName: 'Spotlight',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'LongRunningAltPalette',
 		displayName: 'Ukraine invasion',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'Opinion',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/slow',
+		collectionType: 'scrollable/feature',
 		displayName: 'Sports',
 	},
 	{
@@ -196,21 +193,22 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		displayName: 'Climate crisis',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Across the country',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'flexible/special',
 		displayName: 'Around the world',
 		grouped: {
 			...defaultGrouped,
-			veryBig: [trails[0]],
+			splash: [trails[0]],
+			standard: [trails[1]],
 		},
 	},
 	{
@@ -220,7 +218,7 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VII',
+		collectionType: 'flexible/general',
 		displayName: 'Podcasts',
 	},
 	{
@@ -230,28 +228,28 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'Culture',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Business briefs',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'Lifestyle',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		displayName: 'Take part',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'Explore',
 	},
 	{
@@ -261,7 +259,7 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'In pictures',
 	},
 	{
@@ -279,40 +277,40 @@ export const testCollectionsUs = [
 export const brandedTestCollections = [
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 ] satisfies DCRCollectionType[];
@@ -323,8 +321,6 @@ export const largeFlexibleGeneralCollection = [
 		grouped: {
 			...defaultGrouped,
 			splash: [trails[0]],
-			veryBig: [trails[1]],
-			big: [trails[2]],
 			standard: [trails[3], trails[4], trails[5], trails[6]],
 		},
 		collectionType: 'flexible/general',

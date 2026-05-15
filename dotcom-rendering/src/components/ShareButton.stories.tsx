@@ -10,7 +10,7 @@ import {
 	CopyNativeShareButton,
 	EmailLink,
 	ShareButton,
-} from './ShareButton.importable';
+} from './ShareButton.island';
 
 export default {
 	component: ShareButton,

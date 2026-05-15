@@ -48,6 +48,8 @@ type BaseProps = {
 	signInBannerLastClosedAt?: string;
 	abandonedBasketBannerLastClosedAt?: string;
 	pageId?: string;
+	inHoldbackGroup?: boolean;
+	inAuxiaVariant?: boolean;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -89,7 +91,9 @@ const getArticleCountToday = (
 function parseAbandonedBasket(
 	cookie: string | null,
 ): AbandonedBasket | undefined {
-	if (!cookie) return;
+	if (!cookie) {
+		return;
+	}
 
 	const parsedResult = abandonedBasketSchema.safeParse(JSON.parse(cookie));
 	if (!parsedResult.success) {
@@ -127,7 +131,20 @@ const buildPayload = async ({
 	userConsent,
 	hideSupportMessagingForUser,
 	pageId,
+	inHoldbackGroup,
+	inAuxiaVariant,
+	isSensitive,
 }: BuildPayloadProps): Promise<BannerPayload> => {
+	const getBrowserId = (): string | undefined => {
+		if (!inAuxiaVariant) {
+			return undefined;
+		}
+		if (!userConsent) {
+			return undefined;
+		}
+		return getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
+	};
+
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
 	const articleCountToday = getArticleCountToday(articleCounts);
@@ -158,6 +175,9 @@ const buildPayload = async ({
 				getCookie({ name: 'GU_CO_INCOMPLETE', shouldMemoize: true }),
 			),
 			pageId,
+			inHoldbackGroup,
+			browserId: getBrowserId(),
+			isSensitive,
 		},
 	};
 };
@@ -185,8 +205,12 @@ export const canShowRRBanner: CanShowFunctionType<
 	asyncArticleCounts,
 	ophanPageViewId,
 	pageId,
+	inHoldbackGroup,
+	inAuxiaVariant,
 }) => {
-	if (!remoteBannerConfig) return { show: false };
+	if (!remoteBannerConfig) {
+		return { show: false };
+	}
 
 	if (shouldHideReaderRevenue || isPaidContent || isPreview) {
 		// We never serve Reader Revenue banners in this case
@@ -247,6 +271,8 @@ export const canShowRRBanner: CanShowFunctionType<
 		userConsent,
 		hideSupportMessagingForUser,
 		pageId,
+		inHoldbackGroup,
+		inAuxiaVariant,
 	});
 
 	const headers = await getAuthHeaders();
@@ -281,6 +307,7 @@ export const canShowRRBanner: CanShowFunctionType<
 		fetchEmail,
 		submitComponentEvent: (componentEvent: ComponentEvent) =>
 			submitComponentEvent(componentEvent, renderingTarget),
+		contributionsServiceUrl,
 	};
 
 	return {
@@ -302,10 +329,10 @@ export const ReaderRevenueBanner = ({
 		(name === 'SignInPromptBanner'
 			? /* webpackChunkName: "sign-in-prompt-banner" */
 			  import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
-			: /* webpackChunkName: "designable-banner" */
-			  import(`../marketing/banners/designableBanner/DesignableBanner`)
+			: /* webpackChunkName: "designable-banner-v2" */
+			  import(`../marketing/banners/designableBanner/v2/Banner`)
 		)
-			.then((bannerModule: { [key: string]: React.ElementType }) => {
+			.then((bannerModule: Record<string, React.ElementType>) => {
 				setBanner(() => bannerModule[name] ?? null);
 			})
 			.catch((error) => {

@@ -8,7 +8,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
-import { TableOfContents } from './TableOfContents.importable';
+import { TableOfContents } from './TableOfContents.island';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (

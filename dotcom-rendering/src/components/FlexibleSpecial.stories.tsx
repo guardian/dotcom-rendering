@@ -4,10 +4,12 @@ import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	getSublinks,
 	opinionTrails,
+	selfHostedLoopVideo45Card,
 	selfHostedLoopVideo54Card,
 	slideshowCard,
 	snapLink,
 	trails,
+	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type {
@@ -23,9 +25,6 @@ type FlexibleSpecialArgsAndCustomArgs = React.ComponentProps<
 > & { frontSectionTitle: string };
 
 const emptyGroupedTrails: DCRGroupedTrails = {
-	huge: [],
-	veryBig: [],
-	big: [],
 	standard: [],
 	snap: [],
 	splash: [],
@@ -84,7 +83,7 @@ const meta = {
 	},
 	args: {
 		groupedTrails: emptyGroupedTrails,
-		showAge: true,
+		hideAge: false,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		frontSectionTitle: 'Flexible special',
@@ -92,9 +91,8 @@ const meta = {
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
 			title={frontSectionTitle}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-			showTopBorder={true}
+			editionId="UK"
+			showTopBorder={false}
 		>
 			<FlexibleSpecial {...args} />
 		</FrontSection>
@@ -298,13 +296,24 @@ export const SplashWithLiveUpdatesAndTwoSublinks: Story = {
 };
 
 export const SelfHostedVideoCard: Story = {
-	name: 'Self-hosted video cards',
 	args: {
 		frontSectionTitle: 'Self-hosted video',
 		groupedTrails: {
 			...emptyGroupedTrails,
 			snap: [],
-			standard: [selfHostedLoopVideo54Card],
+			standard: [selfHostedLoopVideo54Card, selfHostedLoopVideo45Card],
+		},
+		collectionId: 1,
+	},
+};
+
+export const YoutubeVideoCard: Story = {
+	args: {
+		frontSectionTitle: 'YouTube video',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			snap: [],
+			standard: [youtubeVideoTrails[0], youtubeVideoTrails[1]],
 		},
 		collectionId: 1,
 	},
@@ -360,13 +369,12 @@ export const WithSpecialPaletteVariations = {
 	},
 	render: (args) => (
 		<>
-			{containerPalettes.map((containerPalette) => (
+			{containerPalettes.map((containerPalette, index) => (
 				<FrontSection
-					discussionApiUrl={discussionApiUrl}
-					editionId={'UK'}
-					showTopBorder={true}
-					containerPalette={containerPalette}
 					key={containerPalette}
+					editionId="UK"
+					showTopBorder={index > 0}
+					containerPalette={containerPalette}
 					title={containerPalette}
 				>
 					<FlexibleSpecial

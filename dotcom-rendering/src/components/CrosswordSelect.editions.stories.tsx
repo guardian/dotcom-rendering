@@ -1,17 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
+import preview from '../../.storybook/preview';
 import { CrosswordSelect } from './CrosswordSelect.editions';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Crossword Select (Editions)',
 	component: CrosswordSelect,
-} satisfies Meta<typeof CrosswordSelect>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const NoCrosswords = {
+export const NoCrosswords = meta.story({
 	args: {
 		crosswordsByDate: {},
 		date: 'Monday',
@@ -19,11 +15,11 @@ export const NoCrosswords = {
 		onDateChange: fn(),
 		onCrosswordIndexChange: fn(),
 	},
-} satisfies Story;
+});
 
-export const SomeCrosswords = {
+export const SomeCrosswords = meta.story({
 	args: {
-		...NoCrosswords.args,
+		...NoCrosswords.input.args,
 		crosswordsByDate: {
 			Monday: [
 				{ name: 'A Monday Crossword' },
@@ -68,4 +64,4 @@ export const SomeCrosswords = {
 			);
 		});
 	},
-} satisfies Story;
+});

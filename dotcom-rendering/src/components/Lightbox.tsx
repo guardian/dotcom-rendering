@@ -3,10 +3,10 @@ import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { Switches } from '../types/config';
 import type { ImageForLightbox } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { AppsLightboxImageStore } from './AppsLightboxImageStore.importable';
+import { AppsLightboxImageStore } from './AppsLightboxImageStore.island';
 import { Island } from './Island';
-import { LightboxHash } from './LightboxHash.importable';
-import { LightboxLayout } from './LightboxLayout.importable';
+import { LightboxHash } from './LightboxHash.island';
+import { LightboxLayout } from './LightboxLayout.island';
 
 interface BaseProps {
 	format: ArticleFormat;

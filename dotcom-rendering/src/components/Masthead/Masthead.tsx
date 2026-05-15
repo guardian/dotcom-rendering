@@ -4,8 +4,8 @@ import type { NavType } from '../../model/extract-nav';
 import { palette as themePalette } from '../../palette';
 import { Island } from '../Island';
 import { Section } from '../Section';
-import { Titlepiece } from '../Titlepiece.importable';
-import { TopBar } from '../TopBar.importable';
+import { Titlepiece } from '../Titlepiece.island';
+import { TopBar } from '../TopBar.island';
 
 type Props = {
 	nav: NavType;
@@ -22,6 +22,9 @@ type Props = {
 	hasPageSkin?: boolean;
 	hasPageSkinContentSelfConstrain?: boolean;
 	pageId?: string;
+	tagIds?: string[];
+	sectionId?: string;
+	contentType?: string;
 };
 
 /**
@@ -56,6 +59,9 @@ export const Masthead = ({
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
 	pageId,
+	tagIds,
+	sectionId,
+	contentType,
 }: Props) => (
 	<header data-component="header">
 		<Section
@@ -78,6 +84,9 @@ export const Masthead = ({
 						idApiUrl={idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
 						hasPageSkin={hasPageSkin}
+						tagIds={tagIds}
+						sectionId={sectionId}
+						contentType={contentType}
 					/>
 				</Island>
 			</div>

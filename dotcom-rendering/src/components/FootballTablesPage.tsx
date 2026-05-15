@@ -12,7 +12,7 @@ import type { Region } from '../sportDataPage';
 import { AdSlot } from './AdSlot.web';
 import { DirectoryPageNav } from './DirectoryPageNav';
 import { FootballTableList } from './FootballTableList';
-import { FootballTablesCompetitionSelect } from './FootballTablesCompetitionSelect.importable';
+import { FootballTablesCompetitionSelect } from './FootballTablesCompetitionSelect.island';
 import { Island } from './Island';
 
 type Props = {

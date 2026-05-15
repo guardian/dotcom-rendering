@@ -22,7 +22,9 @@ export const CarouselCount = ({
 		setPortalNode(node);
 	}, [sectionId]);
 
-	if (!portalNode) return null;
+	if (!portalNode) {
+		return null;
+	}
 
 	return createPortal(
 		<div>

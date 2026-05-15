@@ -4,7 +4,7 @@ import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { ArticleContainer } from './ArticleContainer';
 import { Flex } from './Flex';
-import { InteractiveBlockComponent } from './InteractiveBlockComponent.importable';
+import { InteractiveBlockComponent } from './InteractiveBlockComponent.island';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
 import { Section } from './Section';

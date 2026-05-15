@@ -1,11 +1,10 @@
 import { render, waitFor } from '@testing-library/react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
 import { ConfigProvider } from './ConfigContext';
-import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.importable';
+import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.island';
 
-const shouldHideSupportMessaging: {
-	[key: string]: any;
-} = shouldHideSupportMessaging_;
+const shouldHideSupportMessaging: Record<string, any> =
+	shouldHideSupportMessaging_;
 
 // @swc/jest does not seem to handle dynamic import of ophan.ng.js
 // We get a “define is not defined” in Jest, but it seems to work in browsers

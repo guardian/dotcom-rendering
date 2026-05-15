@@ -1,6 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/highlights-trails';
 import {
 	audioTrails,
@@ -10,7 +9,7 @@ import {
 } from '../../fixtures/manual/trails';
 import type { DCRContainerPalette } from '../types/front';
 import { FrontSection } from './FrontSection';
-import { ScrollableMedium } from './ScrollableMedium.importable';
+import { ScrollableMedium } from './ScrollableMedium.island';
 
 const meta = {
 	title: 'Front Containers/ScrollableMedium',
@@ -27,14 +26,13 @@ const meta = {
 	args: {
 		trails,
 		containerPalette: undefined,
-		showAge: true,
+		hideAge: false,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 	},
 	render: (args) => (
 		<FrontSection
 			title="Scrollable medium"
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			containerLevel="Secondary"
 		>
@@ -89,7 +87,6 @@ export const WithPrimaryContainer = {
 	render: (args) => (
 		<FrontSection
 			title="Scrollable medium"
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			containerLevel="Primary"
 		>
@@ -121,7 +118,6 @@ export const WithSpecialPaletteVariations = {
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
 					title={containerPalette}
-					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
 					key={containerPalette}
 					containerPalette={containerPalette}

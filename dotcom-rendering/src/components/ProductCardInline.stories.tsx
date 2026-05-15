@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { productImage } from '../../fixtures/manual/productImage';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { ProductCardInline } from './ProductCardInline';
 
-const meta = {
+const meta = preview.meta({
 	component: ProductCardInline,
 	title: 'Components/ProductCardInline',
 	parameters: {
@@ -52,32 +52,28 @@ const meta = {
 		isCardOnly: false,
 	},
 	decorators: [centreColumnDecorator],
-} satisfies Meta<typeof ProductCardInline>;
+});
 
-export default meta;
+export const Default = meta.story();
 
-type Story = StoryObj<typeof meta>;
-
-export const Default = {} satisfies Story;
-
-export const ProductCardNoCustomAttributes = {
+export const ProductCardNoCustomAttributes = meta.story({
 	args: {
-		...meta.args,
+		...meta.input.args,
 		customAttributes: [],
 	},
-} satisfies Story;
+});
 
-export const ProductCardOnly = {
+export const ProductCardOnly = meta.story({
 	args: {
-		...meta.args,
+		...meta.input.args,
 		isCardOnly: true,
 	},
-} satisfies Story;
+});
 
-export const ProductCardOnlyDisplayCredit = {
+export const ProductCardOnlyDisplayCredit = meta.story({
 	args: {
-		...meta.args,
+		...meta.input.args,
 		isCardOnly: true,
 		image: { ...productImage, displayCredit: true },
 	},
-} satisfies Story;
+});

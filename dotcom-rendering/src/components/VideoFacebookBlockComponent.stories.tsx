@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { VideoFacebookBlockComponent } from './VideoFacebookBlockComponent.importable';
+import { VideoFacebookBlockComponent } from './VideoFacebookBlockComponent.island';
 
 export default {
 	component: VideoFacebookBlockComponent,

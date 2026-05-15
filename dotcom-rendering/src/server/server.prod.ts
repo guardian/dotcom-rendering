@@ -19,11 +19,12 @@ import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
 import {
+	handleAppsFootballMatchPage,
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
-} from './handler.sportDataPage.web';
+} from './handler.sportDataPage';
 import { handleAppsThrasher } from './handler.thrasher.apps';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { logger } from './lib/logging';
@@ -68,6 +69,7 @@ export const prodServer = (): void => {
 	app.post('/EditionsCrossword', handleEditionsCrossword);
 	app.post('/AppsHostedContent', handleAppsHostedContent);
 	app.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
+	app.use('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 
 	app.get('/assets/rendered-items-assets', handleAppsAssets);
 

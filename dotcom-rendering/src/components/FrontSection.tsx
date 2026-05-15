@@ -3,7 +3,6 @@ import { isString } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { type EditionId, isNetworkFront } from '../lib/edition';
-import { hideAge } from '../lib/hideAge';
 import { getOphanComponents } from '../lib/labs';
 import { palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
@@ -14,7 +13,7 @@ import type {
 } from '../types/front';
 import type { TagPagePagination } from '../types/tagPage';
 import { isAustralianTerritory, type Territory } from '../types/territory';
-import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
+import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.island';
 import { BrandingLabel } from './BrandingLabel';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
@@ -23,7 +22,6 @@ import { FrontSectionTitle } from './FrontSectionTitle';
 import { Island } from './Island';
 import { LabsSectionHeader } from './LabsSectionHeader';
 import { ShowHideButton } from './ShowHideButton';
-import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
 
 type Props = {
@@ -35,7 +33,6 @@ type Props = {
 	url?: string;
 	/** The html `id` property of the element */
 	sectionId?: string;
-	collectionId?: string;
 	pageId?: string;
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
@@ -72,9 +69,6 @@ type Props = {
 	editionId: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
-	/** Enable the "Show More" button on this container to allow readers to load more cards */
-	canShowMore?: boolean;
-	ajaxUrl?: string;
 	/** Puts pagination at the bottom of the container allowing the user to navigate to other pages,
 	 * usually used on the last container on a page */
 	pagination?: TagPagePagination;
@@ -90,7 +84,6 @@ type Props = {
 	 *   the page skin background showing through the containers
 	 */
 	hasPageSkin?: boolean;
-	discussionApiUrl: string;
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
 	hasNavigationButtons?: boolean;
@@ -118,7 +111,6 @@ const borderColourStyles = (
 			return schemePalette('--section-border-opinion');
 		case 'Sport':
 		case 'Sports':
-		case 'Winter Olympics 2026':
 			return schemePalette('--section-border-sport');
 		case 'Lifestyle':
 			return schemePalette('--section-border-lifestyle');
@@ -144,7 +136,6 @@ const articleSectionTitleStyles = (
 			return schemePalette('--article-section-title-opinion');
 		case 'Sport':
 		case 'Sports':
-		case 'Winter Olympics 2026':
 			return schemePalette('--article-section-title-sport');
 		case 'Lifestyle':
 			return schemePalette('--article-section-title-lifestyle');
@@ -316,22 +307,6 @@ const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
 	}
 `;
 
-const sectionHeadlineFromLeftCol = (borderColour: string) => css`
-	${from.leftCol} {
-		position: relative;
-		::after {
-			content: '';
-			display: block;
-			width: 1px;
-			top: 0;
-			height: 1.875rem;
-			right: -10px;
-			position: absolute;
-			background-color: ${borderColour};
-		}
-	}
-`;
-
 const topPadding = css`
 	padding-top: ${space[2]}px;
 `;
@@ -356,12 +331,11 @@ const sectionControls = css`
 
 const sectionContent = css`
 	margin: 0;
+	grid-column: content;
 
 	.hidden > & {
 		display: none;
 	}
-
-	grid-column: content;
 `;
 
 const sectionContentRow = (toggleable: boolean) => css`
@@ -385,7 +359,7 @@ const sectionContentBorderFromLeftCol = css`
 			bottom: 0;
 			border-left: 1px solid ${schemePalette('--section-border')};
 			transform: translateX(-50%);
-			/** Keeps the vertical divider ontop of carousel item dividers */
+			/** Keeps the vertical divider on top of carousel item dividers */
 			z-index: 1;
 		}
 	}
@@ -434,15 +408,7 @@ const sideBorders = css`
 	}
 `;
 
-const topBorder = css`
-	border-top-style: solid;
-`;
-
-const bottomPadding = css`
-	padding-bottom: ${space[9]}px;
-`;
-
-const bottomPaddingBetaContainer = (
+const bottomPadding = (
 	useLargeSpacingMobile: boolean,
 	useLargeSpacingDesktop: boolean,
 ) => css`
@@ -521,8 +487,6 @@ const sponsoredContentLabelWrapper = css`
  * in the centre. Extra elements can be passed to `leftContent`, which will
  * automatically fall into the left column on larger breakpoints.
  *
- * Defaults to an HTML `section`, but the specific tag can be set.
- *
  * @example
  *
  * from `mobile` (320) to `phablet` (660)
@@ -532,9 +496,6 @@ const sponsoredContentLabelWrapper = css`
  * ├───────┤
  * │▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒│
- * ├───────┤
- * │Show   │
- * |More   │
  * └───────┘
  *
  * from `tablet` (740) to `desktop` (980)
@@ -546,8 +507,6 @@ const sponsoredContentLabelWrapper = css`
  * ├───────────────────────┤
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * ├───────────────────────┤
- * │Show More              │
  * └───────────────────────┘
  *
  * on `leftCol` (1140) if component is toggleable
@@ -560,8 +519,6 @@ const sponsoredContentLabelWrapper = css`
  * │   │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │Tre│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │ats│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * ├───┼─────────────────────┤
- * │   │Show More            │
  * └───┴─────────────────────┘
  *
  * on `leftCol` (1140) if component is not toggleable
@@ -574,8 +531,6 @@ const sponsoredContentLabelWrapper = css`
  * │   │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │Tre│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │ats│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * ├───┼──────────────────────┤
- * │   │Show More             │
  * └───┴──────────────────────┘
  *
  * on `wide` (1300)
@@ -588,8 +543,6 @@ const sponsoredContentLabelWrapper = css`
  * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
  * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
  * │Treat│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
- * ├─────┼─────────────────────────┤
- * │     │Show More                │
  * └─────┴─────────────────────────┘
  *
  */
@@ -606,20 +559,16 @@ export const FrontSection = ({
 	ophanComponentLink,
 	ophanComponentName,
 	sectionId = '',
-	collectionId,
 	pageId,
 	showDateHeader = false,
 	showTopBorder = true,
 	toggleable = false,
 	treats,
 	url,
-	canShowMore,
-	ajaxUrl,
 	pagination,
 	isOnPaidContentFront,
 	targetedTerritory,
 	hasPageSkin = false,
-	discussionApiUrl,
 	collectionBranding,
 	isTagPage = false,
 	hasNavigationButtons = false,
@@ -629,17 +578,7 @@ export const FrontSection = ({
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showVerticalRule = !hasPageSkin;
-	const isBetaContainer = !!containerLevel;
-	const showMore =
-		canShowMore &&
-		!!title &&
-		!!sectionId &&
-		!!collectionId &&
-		!!pageId &&
-		!!ajaxUrl &&
-		!isBetaContainer;
 
-	// These are for beta containers only
 	const useLargeSpacingMobile = !!isNextCollectionPrimary || isAboveMobileAd;
 	const useLargeSpacingDesktop =
 		!!isNextCollectionPrimary || isAboveDesktopAd;
@@ -653,10 +592,6 @@ export const FrontSection = ({
 		  })
 		: undefined;
 
-	/**
-	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
-	 * this id pre-existed showMore so is probably also being used for something else.
-	 */
 	return (
 		<ContainerOverrides containerPalette={containerPalette}>
 			<section
@@ -681,26 +616,20 @@ export const FrontSection = ({
 					),
 				}}
 			>
-				{isBetaContainer && showTopBorder && (
+				{showTopBorder && (
 					<div
-						css={[
-							containerLevel === 'Secondary'
-								? secondaryLevelTopBorder
-								: primaryLevelTopBorder(
+						css={
+							containerLevel === 'Primary'
+								? primaryLevelTopBorder(
 										title,
 										showSectionColours,
-								  ),
-						]}
+								  )
+								: secondaryLevelTopBorder
+						}
 					/>
 				)}
 
-				<div
-					css={[
-						decoration,
-						sideBorders,
-						showTopBorder && !isBetaContainer && topBorder,
-					]}
-				/>
+				<div css={[decoration, sideBorders]} />
 
 				{isLabs ? (
 					<div
@@ -725,11 +654,6 @@ export const FrontSection = ({
 								// only ever having <CPScott> as the leftContent
 								title?.toLowerCase() === 'opinion',
 							),
-							showVerticalRule &&
-								!isBetaContainer &&
-								sectionHeadlineFromLeftCol(
-									schemePalette('--section-border'),
-								),
 						]}
 					>
 						<FrontSectionTitle
@@ -787,9 +711,7 @@ export const FrontSection = ({
 						sectionContentHorizontalMargins,
 						sectionContentRow(toggleable),
 						topPadding,
-						showVerticalRule &&
-							isBetaContainer &&
-							sectionContentBorderFromLeftCol,
+						showVerticalRule && sectionContentBorderFromLeftCol,
 					]}
 					id={`container-${sectionId}`}
 				>
@@ -800,12 +722,10 @@ export const FrontSection = ({
 					css={[
 						sectionContentHorizontalMargins,
 						sectionBottomContent,
-						isBetaContainer
-							? bottomPaddingBetaContainer(
-									useLargeSpacingMobile,
-									useLargeSpacingDesktop,
-							  )
-							: bottomPadding,
+						bottomPadding(
+							useLargeSpacingMobile,
+							useLargeSpacingDesktop,
+						),
 					]}
 				>
 					{isString(targetedTerritory) &&
@@ -813,23 +733,6 @@ export const FrontSection = ({
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<AustralianTerritorySwitcher
 								targetedTerritory={targetedTerritory}
-							/>
-						</Island>
-					) : showMore ? (
-						<Island
-							priority="feature"
-							defer={{ until: 'interaction' }}
-						>
-							<ShowMore
-								title={title}
-								sectionId={sectionId}
-								collectionId={collectionId}
-								pageId={pageId}
-								ajaxUrl={ajaxUrl}
-								editionId={editionId}
-								containerPalette={containerPalette}
-								showAge={!hideAge.includes(title)}
-								discussionApiUrl={discussionApiUrl}
 							/>
 						</Island>
 					) : null}

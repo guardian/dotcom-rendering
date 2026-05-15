@@ -18,7 +18,7 @@ import {
 } from '@guardian/source/react-components';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { Carousel } from '../components/Carousel.importable';
+import { Carousel } from '../components/Carousel.island';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -28,10 +28,10 @@ import { NewsletterBadge } from '../components/NewsletterBadge';
 import { NewsletterDetail } from '../components/NewsletterDetail';
 import { NewsletterFrequency } from '../components/NewsletterFrequency';
 import { NewsletterPrivacyMessage } from '../components/NewsletterPrivacyMessage';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
-import { SecureSignup } from '../components/SecureSignup.importable';
-import { ShareButton } from '../components/ShareButton.importable';
+import { SecureSignup } from '../components/SecureSignup.island';
+import { ShareButton } from '../components/ShareButton.island';
 import { Standfirst } from '../components/Standfirst';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -179,7 +179,7 @@ const regionalFocusDivStyle = css`
 
 const getMainMediaCaptions = (
 	article: ArticleDeprecated,
-): (string | undefined)[] =>
+): Array<string | undefined> =>
 	article.mainMediaElements.map((el) =>
 		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 			? el.data.caption
@@ -245,6 +245,9 @@ export const NewsletterSignupLayout = ({
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
 					pageId={article.pageId}
+					tagIds={article.tags.map((tag) => tag.id)}
+					sectionId={article.config.section}
+					contentType={article.contentType}
 				/>
 			</div>
 

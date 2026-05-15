@@ -9,7 +9,7 @@ import { AdSlot } from '../components/AdSlot.web';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import { DirectoryPageNav } from '../components/DirectoryPageNav';
-import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.importable';
+import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.island';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import {
@@ -26,8 +26,8 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
 import { SnapCssSandbox } from '../components/SnapCssSandbox';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { SubNav } from '../components/SubNav.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
+import { SubNav } from '../components/SubNav.island';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -67,6 +67,9 @@ const isNavList = (collection: DCRCollectionType) => {
 const isHighlights = ({ collectionType }: DCRCollectionType) =>
 	collectionType === 'scrollable/highlights';
 
+const isMostPopular = ({ collectionType }: DCRCollectionType) =>
+	collectionType === 'news/most-popular';
+
 const isLabs = ({ containerPalette }: DCRCollectionType) =>
 	containerPalette === 'Branded';
 
@@ -84,7 +87,7 @@ const isToggleable = (
 		);
 	}
 
-	return index != 0 && !isNavList(collection) && !isLabs(collection);
+	return index !== 0 && !isNavList(collection) && !isLabs(collection);
 };
 
 const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
@@ -126,7 +129,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const merchHighAdPosition = getMerchHighPosition(filteredCollections);
 
 	const mobileAdPositions = renderAds
-		? getMobileAdPositions(filteredCollections)
+		? getMobileAdPositions(filteredCollections, pageId)
 		: [];
 
 	const desktopAdPositions = renderAds
@@ -169,7 +172,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						...highlightsCollection.backfill,
 					]}
 					groupedTrails={highlightsCollection.grouped}
-					showAge={false}
+					hideAge={true}
 					serverTime={serverTime}
 					imageLoading="eager"
 					aspectRatio={
@@ -229,6 +232,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}
 					pageId={pageId}
+					tagIds={front.trendingTopics?.map(
+						(tag) => tag.properties.id,
+					)}
+					sectionId={front.config.section}
+					contentType={front.config.contentType}
 				/>
 
 				{isPaidContent && (
@@ -268,7 +276,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					const [trail] = trails;
 
 					// There are some containers that have zero trails. We don't want to render these
-					if (!trail) return null;
+					if (!trail) {
+						return null;
+					}
 
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
@@ -277,6 +287,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						index + 1
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
+
+					/**
+					 * We only shrink the content of certain sections to place the Most Popular
+					 * content on the right-hand side. Other sections remain full-width.
+					 */
 
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
@@ -352,7 +367,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					}
 
 					if (
-						collection.collectionType === 'news/most-popular' &&
+						isMostPopular(collection) &&
 						!isPaidContent &&
 						switches.mostViewedFronts
 					) {
@@ -399,9 +414,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									treats={collection.treats}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
-									discussionApiUrl={
-										front.config.discussionApiUrl
-									}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -463,19 +475,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection,
 								)}
 								sectionId={ophanName}
-								collectionId={collection.id}
 								pageId={front.pressedPage.id}
 								showDateHeader={
 									collection.config.showDateHeader
 								}
 								editionId={front.editionId}
 								treats={collection.treats}
-								canShowMore={collection.canShowMore}
-								ajaxUrl={front.config.ajaxUrl}
 								isOnPaidContentFront={isPaidContent}
 								targetedTerritory={collection.targetedTerritory}
 								hasPageSkin={hasPageSkin}
-								discussionApiUrl={front.config.discussionApiUrl}
 								collectionBranding={
 									collection.collectionBranding
 								}
@@ -504,11 +512,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerPalette={
 										collection.containerPalette
 									}
-									showAge={
-										!hideAge.includes(
-											collection.displayName,
-										)
-									}
+									hideAge={hideAge.includes(
+										collection.displayName,
+									)}
 									imageLoading={imageLoading}
 									serverTime={serverTime}
 									aspectRatio={
@@ -520,7 +526,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									pillarBuckets={collection.bucket}
 								/>
 							</FrontSection>
 

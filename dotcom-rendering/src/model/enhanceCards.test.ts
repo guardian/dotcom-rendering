@@ -1,137 +1,545 @@
 import type { FEMediaAsset, FEMediaAtom } from '../frontend/feFront';
-import { getActiveMediaAtom } from './enhanceCards';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import type { MainMedia } from '../types/mainMedia';
+import {
+	decideArticleMedia,
+	decideReplacementMedia,
+	getActiveMediaAtom,
+	getMediaMetadata,
+} from './enhanceCards';
 
 describe('Enhance Cards', () => {
-	it('prioritises MP4 assets over m3u8 assets', () => {
-		const videoReplace = true;
-		const assets: FEMediaAsset[] = [
-			{
-				id: 'https://guim-example.co.uk/atomID-1.mp4',
-				version: 1,
-				platform: 'Url',
-				mimeType: 'video/mp4',
-				assetType: 'Video',
-				dimensions: {
-					height: 400,
-					width: 500,
-				},
-			},
-			{
-				id: 'https://guim-example.co.uk/atomID-1.m3u8',
-				version: 1,
-				platform: 'Url',
-				mimeType: 'application/x-mpegURL',
-				assetType: 'Video',
-				dimensions: {
-					height: 400,
-					width: 500,
-				},
-			},
-		];
-		const mediaAtom: FEMediaAtom = {
-			id: 'atomID',
-			assets,
-			title: 'Example video',
-			duration: 15,
-			source: '',
-			posterImage: { allImages: [] },
-			trailImage: { allImages: [] },
-			expired: false,
-			activeVersion: 1,
-		};
-		const cardTrailImage = '';
-
-		expect(
-			getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
-		).toEqual({
-			atomId: 'atomID',
-			duration: 15,
+	const testMp4Asset: FEMediaAsset = {
+		id: 'https://guim-example.co.uk/atomID-1.mp4',
+		version: 1,
+		platform: 'Url',
+		mimeType: 'video/mp4',
+		assetType: 'Video',
+		dimensions: {
 			height: 400,
-			image: '',
-			type: 'SelfHostedVideo',
-			videoStyle: 'Loop',
-			subtitleSource: undefined,
-			sources: [
-				{
-					mimeType: 'video/mp4',
-					src: 'https://guim-example.co.uk/atomID-1.mp4',
-				},
-				{
-					mimeType: 'application/x-mpegURL',
-					src: 'https://guim-example.co.uk/atomID-1.m3u8',
-				},
-			],
 			width: 500,
+		},
+		hasAudio: true,
+	};
+	const largeMp4Asset: FEMediaAsset = {
+		...testMp4Asset,
+		id: 'https://guim-example.co.uk/atomID-2.mp4',
+		dimensions: {
+			height: 900,
+			width: 720,
+		},
+		hasAudio: true,
+	};
+	const testM3u8Asset: FEMediaAsset = {
+		id: 'https://guim-example.co.uk/atomID-1.m3u8',
+		version: 1,
+		platform: 'Url',
+		mimeType: 'application/x-mpegURL',
+		assetType: 'Video',
+		dimensions: {
+			height: 400,
+			width: 500,
+		},
+		hasAudio: true,
+	};
+	const largeM3u8Asset: FEMediaAsset = {
+		...testM3u8Asset,
+		id: 'https://guim-example.co.uk/atomID-2.m3u8',
+		dimensions: {
+			height: 900,
+			width: 720,
+		},
+		hasAudio: true,
+	};
+	const testSubtitleAsset: FEMediaAsset = {
+		id: 'https://guim-example.co.uk/atomID-1.vtt',
+		version: 1,
+		platform: 'Url',
+		mimeType: 'text/vtt',
+		assetType: 'Subtitles',
+	};
+	const testYoutubeAsset: FEMediaAsset = {
+		id: 'test-youtube-id',
+		version: 1,
+		platform: 'Youtube',
+		assetType: 'Video',
+	};
+
+	const testMediaAtom: FEMediaAtom = {
+		id: 'atomID',
+		assets: [testMp4Asset, largeMp4Asset, testM3u8Asset, largeM3u8Asset],
+		title: 'Example video',
+		duration: 15,
+		source: '',
+		posterImage: { allImages: [] },
+		trailImage: { allImages: [] },
+		expired: false,
+		activeVersion: 1,
+	};
+
+	describe('getActiveMediaAtom', () => {
+		it('returns only SelfHostedVideo if the first asset is a self-hosted video', () => {
+			const videoReplace = true;
+			const mediaAtom = {
+				...testMediaAtom,
+				assets: [testMp4Asset, testYoutubeAsset],
+			};
+			const cardTrailImage = '';
+
+			expect(
+				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
+			).toEqual({
+				atomId: 'atomID',
+				duration: 15,
+				aspectRatio: 5 / 4,
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
+				type: 'SelfHostedVideo',
+				videoStyle: 'Loop',
+				subtitleSource: undefined,
+				sources: [
+					{
+						mimeType: 'video/mp4',
+						src: 'https://guim-example.co.uk/atomID-1.mp4',
+						height: 400,
+						width: 500,
+						hasAudio: true,
+					},
+				],
+			});
+		});
+
+		it('returns only YoutubeVideo if the first asset is a YouTube video', () => {
+			const videoReplace = true;
+			const mediaAtom = {
+				...testMediaAtom,
+				assets: [testYoutubeAsset, testMp4Asset],
+			};
+			const cardTrailImage = '';
+
+			expect(
+				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
+			).toEqual({
+				type: 'YoutubeVideo',
+				id: 'atomID',
+				videoId: 'test-youtube-id',
+				duration: 15,
+				title: 'Example video',
+				width: 500,
+				height: 300,
+				origin: '',
+				expired: false,
+				isLive: false,
+				image: '',
+			});
+		});
+
+		it('returns only one YoutubeVideo if there are multiple YouTube assets', () => {
+			const videoReplace = true;
+			const mediaAtom = {
+				...testMediaAtom,
+				assets: [
+					testYoutubeAsset,
+					{
+						...testYoutubeAsset,
+						id: 'test-youtube-id-2',
+					},
+					testMp4Asset,
+				],
+			};
+			const cardTrailImage = '';
+
+			expect(
+				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
+			).toEqual({
+				type: 'YoutubeVideo',
+				id: 'atomID',
+				videoId: 'test-youtube-id',
+				duration: 15,
+				title: 'Example video',
+				width: 500,
+				height: 300,
+				origin: '',
+				expired: false,
+				isLive: false,
+				image: '',
+			});
+		});
+
+		it('prioritises MP4 assets over m3u8 assets', () => {
+			const videoReplace = true;
+			const mediaAtom = {
+				...testMediaAtom,
+				assets: [
+					testM3u8Asset,
+					testMp4Asset,
+					largeM3u8Asset,
+					largeMp4Asset,
+				],
+			};
+			const cardTrailImage = '';
+
+			expect(
+				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
+			).toEqual({
+				atomId: 'atomID',
+				duration: 15,
+				aspectRatio: 5 / 4,
+				type: 'SelfHostedVideo',
+				videoStyle: 'Loop',
+				subtitleSource: undefined,
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
+				sources: [
+					{
+						mimeType: 'video/mp4',
+						src: 'https://guim-example.co.uk/atomID-1.mp4',
+						height: 400,
+						width: 500,
+						hasAudio: true,
+					},
+					{
+						mimeType: 'video/mp4',
+						src: 'https://guim-example.co.uk/atomID-2.mp4',
+						height: 900,
+						width: 720,
+						hasAudio: true,
+					},
+					{
+						mimeType: 'application/x-mpegURL',
+						src: 'https://guim-example.co.uk/atomID-1.m3u8',
+						height: 400,
+						width: 500,
+						hasAudio: true,
+					},
+					{
+						mimeType: 'application/x-mpegURL',
+						src: 'https://guim-example.co.uk/atomID-2.m3u8',
+						height: 900,
+						width: 720,
+						hasAudio: true,
+					},
+				],
+			});
+		});
+
+		it('filters out non-video assets', () => {
+			const videoReplace = true;
+			const mediaAtom: FEMediaAtom = {
+				...testMediaAtom,
+				assets: [testSubtitleAsset, testM3u8Asset, testMp4Asset],
+			};
+			const cardTrailImage = '';
+
+			expect(
+				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
+			).toEqual({
+				atomId: 'atomID',
+				duration: 15,
+				aspectRatio: 5 / 4,
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
+				type: 'SelfHostedVideo',
+				videoStyle: 'Loop',
+				subtitleSource: 'https://guim-example.co.uk/atomID-1.vtt',
+				sources: [
+					{
+						mimeType: 'video/mp4',
+						src: 'https://guim-example.co.uk/atomID-1.mp4',
+						height: 400,
+						width: 500,
+						hasAudio: true,
+					},
+					{
+						mimeType: 'application/x-mpegURL',
+						src: 'https://guim-example.co.uk/atomID-1.m3u8',
+						height: 400,
+						width: 500,
+						hasAudio: true,
+					},
+				],
+			});
 		});
 	});
 
-	it('filters out non-video assets', () => {
-		const videoReplace = true;
-		const assets: FEMediaAsset[] = [
-			{
-				id: 'https://guim-example.co.uk/atomID-1.vtt',
-				version: 1,
-				platform: 'Url',
-				mimeType: 'text/vtt',
-				assetType: 'Subtitles',
-			},
-			{
-				id: 'https://guim-example.co.uk/atomID-1.m3u8',
-				version: 1,
-				platform: 'Url',
-				mimeType: 'application/x-mpegURL',
-				assetType: 'Video',
-				dimensions: {
-					height: 400,
-					width: 500,
-				},
-			},
-			{
-				id: 'https://guim-example.co.uk/atomID-1.mp4',
-				version: 1,
-				platform: 'Url',
-				mimeType: 'video/mp4',
-				assetType: 'Video',
-				dimensions: {
-					height: 400,
-					width: 500,
-				},
-			},
-		];
-		const mediaAtom: FEMediaAtom = {
-			id: 'atomID',
-			assets,
-			title: 'Example video',
-			duration: 15,
-			source: '',
-			posterImage: { allImages: [] },
-			trailImage: { allImages: [] },
-			expired: false,
-			activeVersion: 1,
-		};
-		const cardTrailImage = '';
+	describe('getMediaMetadata', () => {
+		it('extracts type, duration, and live status from a YouTube video media object', () => {
+			const testYoutubeMainMedia: MainMedia = {
+				type: 'YoutubeVideo',
+				id: 'atomID',
+				videoId: 'videoID',
+				height: 400,
+				width: 500,
+				origin: 'https://guim-example.co.uk/',
+				title: 'Example video',
+				duration: 151,
+				expired: false,
+				isLive: false,
+			};
 
-		expect(
-			getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
-		).toEqual({
-			atomId: 'atomID',
-			duration: 15,
-			height: 400,
-			image: '',
-			type: 'SelfHostedVideo',
-			videoStyle: 'Loop',
-			subtitleSource: 'https://guim-example.co.uk/atomID-1.vtt',
-			sources: [
-				{
-					mimeType: 'video/mp4',
-					src: 'https://guim-example.co.uk/atomID-1.mp4',
+			expect(getMediaMetadata(testYoutubeMainMedia)).toEqual({
+				type: 'YoutubeVideo',
+				duration: 151,
+				isLive: false,
+			});
+		});
+
+		it('extracts type and duration from a self-hosted video media object', () => {
+			const testSelfHostedMainMedia: MainMedia = {
+				type: 'SelfHostedVideo',
+				videoStyle: 'Loop',
+				atomId: 'atomID',
+				sources: [],
+				aspectRatio: 5 / 4,
+				duration: 151,
+				image: {
+					src: '',
+					aspectRatio: '5:4',
 				},
-				{
-					mimeType: 'application/x-mpegURL',
-					src: 'https://guim-example.co.uk/atomID-1.m3u8',
+			};
+
+			expect(getMediaMetadata(testSelfHostedMainMedia)).toEqual({
+				type: 'SelfHostedVideo',
+				duration: 151,
+			});
+		});
+
+		it('returns type and duration for an audio media object', () => {
+			const media: MainMedia = {
+				type: 'Audio',
+				duration: '12:45',
+			};
+
+			expect(getMediaMetadata(media)).toEqual({
+				type: 'Audio',
+				duration: '12:45',
+			});
+		});
+
+		it('returns type and image count for a gallery media object', () => {
+			const media: MainMedia = {
+				type: 'Gallery',
+				count: '12',
+			};
+
+			expect(getMediaMetadata(media)).toEqual({
+				type: 'Gallery',
+				count: '12',
+			});
+		});
+	});
+
+	describe('decideArticleMedia', () => {
+		it('returns undefined when the article design is not Gallery, Audio, or Video', () => {
+			const format = {
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: Pillar.News,
+			};
+
+			expect(decideArticleMedia(format)).toEqual(undefined);
+		});
+
+		it('returns a Gallery main media object with the provided image count when the article design is Gallery', () => {
+			const format = {
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Gallery,
+				theme: Pillar.News,
+			};
+			const galleryCount = 12;
+
+			expect(decideArticleMedia(format, undefined, galleryCount)).toEqual(
+				{ type: 'Gallery', count: '12' },
+			);
+		});
+
+		it('returns a Gallery main media object with a fallback count of "0" when no gallery count is provided', () => {
+			const format = {
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Gallery,
+				theme: Pillar.News,
+			};
+
+			expect(decideArticleMedia(format)).toEqual({
+				type: 'Gallery',
+				count: '0',
+			});
+		});
+
+		it('returns an Audio main media object with the provided duration and image when the article design is Audio', () => {
+			const format = {
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Audio,
+				theme: Pillar.News,
+			};
+			const audioDuration = '12:45';
+			const podcastImage = {
+				src: 'https://guim-example.co.uk/',
+				altText: 'Podcast Image',
+			};
+
+			expect(
+				decideArticleMedia(
+					format,
+					undefined,
+					undefined,
+					audioDuration,
+					podcastImage,
+				),
+			).toEqual({
+				type: 'Audio',
+				duration: '12:45',
+				podcastImage: {
+					src: 'https://guim-example.co.uk/',
+					altText: 'Podcast Image',
 				},
-			],
-			width: 500,
+			});
+		});
+
+		it('returns an Audio main media object without the provided image when the imageHide is set to true', () => {
+			const format = {
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Audio,
+				theme: Pillar.News,
+			};
+			const audioDuration = '12:45';
+			const podcastImage = {
+				src: 'https://guim-example.co.uk/',
+				altText: 'Podcast Image',
+			};
+			const imageHide = true;
+
+			expect(
+				decideArticleMedia(
+					format,
+					undefined,
+					undefined,
+					audioDuration,
+					podcastImage,
+					imageHide,
+				),
+			).toEqual({ type: 'Audio', duration: '12:45' });
+		});
+
+		it('returns an Video main media object when a mediaAtom is provided when the article design is Video', () => {
+			const format = {
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Video,
+				theme: Pillar.News,
+			};
+			const mediaAtom = { ...testMediaAtom, assets: [testMp4Asset] };
+
+			expect(
+				decideArticleMedia(
+					format,
+					mediaAtom,
+					undefined,
+					undefined,
+					undefined,
+					undefined,
+					'https://guim-example.co.uk/video-image',
+				),
+			).toEqual({
+				type: 'SelfHostedVideo',
+				atomId: 'atomID',
+				duration: 15,
+				aspectRatio: 5 / 4,
+				image: {
+					src: 'https://guim-example.co.uk/video-image',
+					aspectRatio: '5:4',
+				},
+				sources: [
+					{
+						mimeType: 'video/mp4',
+						src: 'https://guim-example.co.uk/atomID-1.mp4',
+						height: 400,
+						width: 500,
+						hasAudio: true,
+					},
+				],
+				videoStyle: 'Loop',
+			});
+		});
+	});
+
+	describe('decideReplacementMedia', () => {
+		it('returns undefined if a mediaAtom is not provided', () => {
+			expect(decideReplacementMedia()).toEqual(undefined);
+		});
+
+		it('returns undefined if a mediaAtom is provided but showMainVideo and videoReplace are both false', () => {
+			const mediaAtom = { ...testMediaAtom, assets: [testMp4Asset] };
+			const showMainVideo = false;
+			const videoReplace = false;
+
+			expect(
+				decideReplacementMedia(showMainVideo, mediaAtom, videoReplace),
+			).toEqual(undefined);
+		});
+
+		it('returns a video main media if a mediaAtom is provided and showMainVideo is set to true', () => {
+			const mediaAtom = { ...testMediaAtom, assets: [testMp4Asset] };
+			const showMainVideo = true;
+			const videoReplace = false;
+
+			expect(
+				decideReplacementMedia(showMainVideo, mediaAtom, videoReplace),
+			).toEqual({
+				atomId: 'atomID',
+				duration: 15,
+				aspectRatio: 5 / 4,
+				sources: [
+					{
+						mimeType: 'video/mp4',
+						src: 'https://guim-example.co.uk/atomID-1.mp4',
+						height: 400,
+						width: 500,
+						hasAudio: true,
+					},
+				],
+				type: 'SelfHostedVideo',
+				videoStyle: 'Loop',
+				image: {
+					src: undefined,
+					aspectRatio: '5:4',
+				},
+			});
+		});
+
+		it('returns a video main media if a mediaAtom is provided and videoReplace is set to true', () => {
+			const mediaAtom = { ...testMediaAtom, assets: [testMp4Asset] };
+			const showMainVideo = false;
+			const videoReplace = true;
+
+			expect(
+				decideReplacementMedia(showMainVideo, mediaAtom, videoReplace),
+			).toEqual({
+				type: 'SelfHostedVideo',
+				atomId: 'atomID',
+				duration: 15,
+				aspectRatio: 5 / 4,
+				image: {
+					src: undefined,
+					aspectRatio: '5:4',
+				},
+				sources: [
+					{
+						mimeType: 'video/mp4',
+						src: 'https://guim-example.co.uk/atomID-1.mp4',
+						height: 400,
+						width: 500,
+						hasAudio: true,
+					},
+				],
+				subtitleSource: undefined,
+				videoStyle: 'Loop',
+			});
 		});
 	});
 });

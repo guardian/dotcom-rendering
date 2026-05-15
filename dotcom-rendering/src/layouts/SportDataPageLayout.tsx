@@ -1,39 +1,37 @@
 import { palette } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
+import { AppsFooter } from '../components/AppsFooter.island';
 import { CricketScorecardPage } from '../components/CricketScorecardPage';
-import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
+import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.island';
 import { FootballMatchInfoPage } from '../components/FootballMatchInfoPage';
-import { FootballMatchSummary } from '../components/FootballMatchSummary';
 import { FootballTablesPage } from '../components/FootballTablesPage';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { SubNav } from '../components/SubNav.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
+import { SubNav } from '../components/SubNav.island';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { useBetaAB } from '../lib/useAB';
-import type { SportDataPage } from '../sportDataPage';
+import { palette as themePalette } from '../palette';
+import type {
+	AppSportDataPage,
+	SportDataPage,
+	WebSportDataPage,
+} from '../sportDataPage';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-
-interface Props {
-	sportData: SportDataPage;
-}
 
 const SportsPage = ({
 	sportData,
 	renderAds,
+	renderingTarget,
 }: {
 	sportData: SportDataPage;
 	renderAds: boolean;
+	renderingTarget: RenderingTarget;
 }) => {
-	const abTests = useBetaAB();
-	const isInVariantGroup =
-		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
-		false;
-
 	switch (sportData.kind) {
 		case 'FootballFixtures':
 		case 'FootballLiveScores':
@@ -73,30 +71,30 @@ const SportsPage = ({
 					guardianBaseUrl={sportData.guardianBaseURL}
 				/>
 			);
-		case 'FootballMatchSummary': {
-			if (isInVariantGroup) {
-				return (
-					<FootballMatchInfoPage
-						matchStats={sportData.matchStats}
-						matchInfo={sportData.matchInfo}
-						competitionName={sportData.competitionName}
-						edition={sportData.editionId}
-						matchHeaderUrl={sportData.matchHeaderUrl}
-						table={sportData.group}
-					/>
-				);
-			}
-
-			return <FootballMatchSummary match={sportData.match} />;
-		}
+		case 'FootballMatchSummary':
+			return (
+				<FootballMatchInfoPage
+					matchStats={sportData.matchStats}
+					matchInfo={sportData.matchInfo}
+					competitionName={sportData.competitionName}
+					edition={sportData.editionId}
+					matchHeaderUrl={sportData.matchHeaderUrl}
+					table={sportData.group}
+					renderingTarget={renderingTarget}
+				/>
+			);
 	}
 };
 
-export const SportDataPageLayout = ({ sportData }: Props) => {
+export const SportDataPageLayout = (
+	props: AppSportDataPage | WebSportDataPage,
+) => {
+	const sportData = props.sportData;
 	const {
-		nav,
 		config: { hasSurveyAd },
 	} = sportData;
+	const isWeb = props.renderingTarget === 'Web';
+	const isApps = props.renderingTarget === 'Apps';
 	const pageFooter = sportData.pageFooter;
 	const renderAds = canRenderAds(sportData);
 
@@ -104,94 +102,127 @@ export const SportDataPageLayout = ({ sportData }: Props) => {
 
 	return (
 		<>
-			<div data-print-layout="hide" id="bannerandheader">
-				{renderAds && (
-					<Stuck>
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot />
-						</Section>
-					</Stuck>
-				)}
+			{isWeb && (
+				<div data-print-layout="hide" id="bannerandheader">
+					{renderAds && (
+						<Stuck>
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot />
+							</Section>
+						</Stuck>
+					)}
 
-				<Masthead
-					nav={nav}
-					editionId={sportData.editionId}
-					idUrl={sportData.config.idUrl}
-					mmaUrl={sportData.config.mmaUrl}
-					discussionApiUrl={sportData.config.discussionApiUrl}
-					idApiUrl={sportData.config.idApiUrl}
-					contributionsServiceUrl={contributionsServiceUrl}
-					showSubNav={true}
-					showSlimNav={false}
-					hasPageSkin={sportData.config.hasPageSkin}
-					pageId={sportData.config.pageId}
-				/>
-			</div>
-
-			{renderAds && hasSurveyAd && <AdSlot position="survey" />}
-
-			<SportsPage sportData={sportData} renderAds={renderAds} />
-
-			{nav.subNavSections && (
-				<Section
-					fullWidth={true}
-					showTopBorder={true}
-					padSides={false}
-					element="aside"
-				>
-					<Island priority="enhancement" defer={{ until: 'visible' }}>
-						<SubNav
-							subNavSections={nav.subNavSections}
-							currentNavLink={nav.currentNavLink}
-							position="footer"
-						/>
-					</Island>
-				</Section>
-			)}
-
-			<Section
-				fullWidth={true}
-				padSides={false}
-				backgroundColour={palette.brand[400]}
-				borderColour={palette.brand[600]}
-				showSideBorders={false}
-				showTopBorder={false}
-				element="footer"
-			>
-				<Footer
-					pageFooter={pageFooter}
-					selectedPillar={nav.selectedPillar}
-					pillars={nav.pillars}
-					urls={nav.readerRevenueLinks.footer}
-					editionId={sportData.editionId}
-				/>
-			</Section>
-			<BannerWrapper data-print-layout="hide">
-				<Island priority="feature" defer={{ until: 'idle' }}>
-					<StickyBottomBanner
-						contentType={sportData.config.contentType}
-						contributionsServiceUrl={contributionsServiceUrl}
+					<Masthead
+						nav={props.nav}
+						editionId={sportData.editionId}
+						idUrl={sportData.config.idUrl}
+						mmaUrl={sportData.config.mmaUrl}
+						discussionApiUrl={sportData.config.discussionApiUrl}
 						idApiUrl={sportData.config.idApiUrl}
-						isMinuteArticle={false}
-						isPaidContent={!!sportData.config.isPaidContent}
-						isPreview={sportData.config.isPreview}
-						isSensitive={sportData.config.isSensitive}
+						contributionsServiceUrl={contributionsServiceUrl}
+						showSubNav={true}
+						showSlimNav={false}
+						hasPageSkin={sportData.config.hasPageSkin}
 						pageId={sportData.config.pageId}
 						sectionId={sportData.config.section}
-						shouldHideReaderRevenue={false}
-						remoteBannerSwitch={
-							!!sportData.config.switches.remoteBanner
-						}
-						tags={[]}
+						contentType={sportData.config.contentType}
 					/>
-				</Island>
-			</BannerWrapper>
+				</div>
+			)}
+
+			{isWeb && renderAds && hasSurveyAd && <AdSlot position="survey" />}
+
+			<SportsPage
+				sportData={sportData}
+				renderAds={renderAds}
+				renderingTarget={props.renderingTarget}
+			/>
+
+			{isWeb && (
+				<>
+					{props.nav.subNavSections && (
+						<Section
+							fullWidth={true}
+							showTopBorder={true}
+							padSides={false}
+							element="aside"
+						>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<SubNav
+									subNavSections={props.nav.subNavSections}
+									currentNavLink={props.nav.currentNavLink}
+									position="footer"
+								/>
+							</Island>
+						</Section>
+					)}
+
+					<Section
+						fullWidth={true}
+						padSides={false}
+						backgroundColour={palette.brand[400]}
+						borderColour={palette.brand[600]}
+						showSideBorders={false}
+						showTopBorder={false}
+						element="footer"
+					>
+						<Footer
+							pageFooter={pageFooter}
+							selectedPillar={props.nav.selectedPillar}
+							pillars={props.nav.pillars}
+							urls={props.nav.readerRevenueLinks.footer}
+							editionId={sportData.editionId}
+						/>
+					</Section>
+					<BannerWrapper data-print-layout="hide">
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<StickyBottomBanner
+								contentType={sportData.config.contentType}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={sportData.config.idApiUrl}
+								isMinuteArticle={false}
+								isPaidContent={!!sportData.config.isPaidContent}
+								isPreview={sportData.config.isPreview}
+								isSensitive={sportData.config.isSensitive}
+								pageId={sportData.config.pageId}
+								sectionId={sportData.config.section}
+								shouldHideReaderRevenue={false}
+								remoteBannerSwitch={
+									!!sportData.config.switches.remoteBanner
+								}
+								tags={[]}
+							/>
+						</Island>
+					</BannerWrapper>
+				</>
+			)}
+			{isApps && (
+				<>
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette('--ad-background')}
+						borderColour={themePalette('--article-border')}
+						padSides={false}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Island priority="critical">
+							<AppsFooter />
+						</Island>
+					</Section>
+				</>
+			)}
 		</>
 	);
 };

@@ -2,9 +2,10 @@ import type { FEArticle } from '../../src/frontend/feArticle';
 
 export const hostedArticle: FEArticle = {
 	version: 3,
-	headline: 'Fortnite 101',
-	standfirst: '<p>Everything A Parent Needs To Know</p>',
-	webTitle: 'Fortnite 101',
+	headline: 'Why scroll it when you can feel it',
+	standfirst:
+		'<p>In a world of artificially created experiences, Croatia invites you to reconnect with the real – smells, tastes, views and moments you can only live first-hand</p>',
+	webTitle: 'Why scroll it when you can feel it',
 	mainMediaElements: [
 		{
 			displayCredit: true,
@@ -14,253 +15,257 @@ export const hostedArticle: FEArticle = {
 				allImages: [
 					{
 						index: 0,
-						fields: { height: '600', width: '1000' },
+						fields: {
+							height: '250',
+							width: '1000',
+						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/1000.jpg',
+						url: 'https://media.guim.co.uk/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/1000.jpg',
 					},
 					{
 						index: 1,
-						fields: { height: '300', width: '500' },
+						fields: {
+							height: '125',
+							width: '500',
+						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/500.jpg',
+						url: 'https://media.guim.co.uk/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/500.jpg',
 					},
 					{
 						index: 2,
-						fields: { height: '84', width: '140' },
+						fields: {
+							height: '35',
+							width: '140',
+						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/140.jpg',
+						url: 'https://media.guim.co.uk/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/140.jpg',
 					},
 					{
 						index: 3,
-						fields: { height: '1152', width: '1920' },
+						fields: {
+							height: '325',
+							width: '1300',
+						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/1920.jpg',
+						url: 'https://media.guim.co.uk/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/1300.jpg',
 					},
 					{
 						index: 4,
 						fields: {
 							isMaster: 'true',
-							height: '1152',
-							width: '1920',
+							height: '325',
+							width: '1300',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg',
+						url: 'https://media.guim.co.uk/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg',
 					},
 				],
 			},
-			elementId: '9f94d811-3ca2-46ea-8850-30118c36697c',
+			elementId: '66872b21-c7f2-478b-bfef-5b2deaf0ea61',
 			imageSources: [
 				{
 					weighting: 'inline',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=c86353ff7952d8c07345b6877776b487',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=620&quality=85&auto=format&fit=max&s=f6f131a0b9ea9ef098a48ff73b45c44a',
 							width: 620,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b34210406a86bfd06f7684c563abdf15',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=949e386fd1a66f1c60baf3e5ef76b61b',
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=700&quality=85&auto=format&fit=max&s=76b82c07ca099b1009dc65112b6ca164',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=700&quality=85&auto=format&fit=max&s=45f259ee7124141becc146a423634dc7',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=1bdc26f4ed1b54dfdcd6fa96b5f77f84',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=de45cd578286b38745170bf348d7fe64',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=c86353ff7952d8c07345b6877776b487',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=620&quality=85&auto=format&fit=max&s=f6f131a0b9ea9ef098a48ff73b45c44a',
 							width: 620,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b34210406a86bfd06f7684c563abdf15',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=949e386fd1a66f1c60baf3e5ef76b61b',
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=645&quality=85&auto=format&fit=max&s=73f19e48b6425bdb174d4c59a672b016',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=645&quality=85&auto=format&fit=max&s=ea7a8c9eb21c3ef7d04ed025cfa905c8',
 							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=6dec6f8a2b9c9946e77b073cbdff962f',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=b13ca927b8357ac4677e033e790e577e',
 							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=465&quality=85&auto=format&fit=max&s=66a9c6dfe8d5a9e13818173d23a50721',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=465&quality=85&auto=format&fit=max&s=24c807ab3ffd923df983c2c05d3b246c',
 							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=37936d7f6945b0a6229890e5638a500e',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=1e58bd80598131ca45707cd7bd6ca510',
 							width: 930,
 						},
 					],
 				},
-				{ weighting: 'thumbnail', srcSet: [] },
-				{ weighting: 'supporting', srcSet: [] },
+				{
+					weighting: 'thumbnail',
+					srcSet: [],
+				},
+				{
+					weighting: 'supporting',
+					srcSet: [],
+				},
 				{
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=1020&quality=85&auto=format&fit=max&s=0d3202a935f564e8dacb2cd59dd14fe9',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=1020&quality=85&auto=format&fit=max&s=09f0bb743adeea8c435720b72590df12',
 							width: 1020,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=fc7a97e7efd2bbbe81cc5e2112b462ff',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=0e6ff46d9ae67074eaae8f18d33fd21f',
 							width: 2040,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=940&quality=85&auto=format&fit=max&s=4544b7a74a4a48df3ac500a1ff13ee13',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=940&quality=85&auto=format&fit=max&s=14ac5adb9f67de849dfdf4f2c7b33798',
 							width: 940,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=93aacd685c611d67bc95bd80abca5657',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=5aed0abd061c8f19cb58193b1fcc1f01',
 							width: 1880,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=700&quality=85&auto=format&fit=max&s=76b82c07ca099b1009dc65112b6ca164',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=700&quality=85&auto=format&fit=max&s=45f259ee7124141becc146a423634dc7',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=1bdc26f4ed1b54dfdcd6fa96b5f77f84',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=de45cd578286b38745170bf348d7fe64',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=700&quality=85&auto=format&fit=max&s=76b82c07ca099b1009dc65112b6ca164',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=700&quality=85&auto=format&fit=max&s=45f259ee7124141becc146a423634dc7',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=1bdc26f4ed1b54dfdcd6fa96b5f77f84',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=de45cd578286b38745170bf348d7fe64',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=660&quality=85&auto=format&fit=max&s=76d29f4c2a709b8eeb09df6ac718a900',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=660&quality=85&auto=format&fit=max&s=42e72a8d546fe43dc00369c39056a4bc',
 							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ec41e5a57d2b318640f3d52eff1255da',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=9116f5239df7e2037f9d3e76176e4568',
 							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=645&quality=85&auto=format&fit=max&s=73f19e48b6425bdb174d4c59a672b016',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=645&quality=85&auto=format&fit=max&s=ea7a8c9eb21c3ef7d04ed025cfa905c8',
 							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=6dec6f8a2b9c9946e77b073cbdff962f',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=b13ca927b8357ac4677e033e790e577e',
 							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=465&quality=85&auto=format&fit=max&s=66a9c6dfe8d5a9e13818173d23a50721',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=465&quality=85&auto=format&fit=max&s=24c807ab3ffd923df983c2c05d3b246c',
 							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=37936d7f6945b0a6229890e5638a500e',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=1e58bd80598131ca45707cd7bd6ca510',
 							width: 930,
 						},
 					],
 				},
-				{ weighting: 'halfwidth', srcSet: [] },
+				{
+					weighting: 'halfwidth',
+					srcSet: [],
+				},
 				{
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=1900&quality=85&auto=format&fit=max&s=917b6b2bfd7267531f0cfb11dda1a9b1',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=1900&quality=85&auto=format&fit=max&s=9889ecaeb7799f2cd5f928bbe6e13529',
 							width: 1900,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=12ffadc5478ee95d0a54c3b3484dc1fa',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=3761d1ce2dd56475094bda1393747542',
 							width: 3800,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=1300&quality=85&auto=format&fit=max&s=c30ea0359d6c9c473989bc9ec1096f34',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=1300&quality=85&auto=format&fit=max&s=329719b95496418104e0a7d730503011',
 							width: 1300,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=2ea4bf973357d0da5bb602083ce35f3d',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=d75f7d11d100bdf8d945a930a700c700',
 							width: 2600,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=1140&quality=85&auto=format&fit=max&s=6e7ad0a2f7064e33cb6c2880681a4426',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=1140&quality=85&auto=format&fit=max&s=2f1f60bc30e335ae3fea0bbed85dbac4',
 							width: 1140,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=9a6a87c837f81fb5dc64c790d72bc37d',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=4f7c9543d71f6d30c8d0b4933f0b84ce',
 							width: 2280,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=980&quality=85&auto=format&fit=max&s=56458451bd344fe12776d32b0984bf6f',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=980&quality=85&auto=format&fit=max&s=a50433152da651710e215f6ae2393910',
 							width: 980,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=565aa1df8f271c92318f86668f84e554',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=1289be87e098af641dd25e8ec4371d31',
 							width: 1960,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=740&quality=85&auto=format&fit=max&s=268a360d02bb04bf6aeeff77cc17295d',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=740&quality=85&auto=format&fit=max&s=0e63c3fa1b69025f999072fcb6fda3b2',
 							width: 740,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=cb23ffe28d3459f978d98682b08f438e',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=2df7f7c3a7178c523e16fd2d45f31081',
 							width: 1480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=660&quality=85&auto=format&fit=max&s=76d29f4c2a709b8eeb09df6ac718a900',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=660&quality=85&auto=format&fit=max&s=42e72a8d546fe43dc00369c39056a4bc',
 							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ec41e5a57d2b318640f3d52eff1255da',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=9116f5239df7e2037f9d3e76176e4568',
 							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=480&quality=85&auto=format&fit=max&s=93e6b98c03a5547b414b0b0c21bbe8e7',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=480&quality=85&auto=format&fit=max&s=cefc437049a78fa832e27bb9636464d6',
 							width: 480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=79dbf10cf96e21dd8122b1625ae2408a',
+							src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=bcbe794100365cbc2b5de3afecc97c63',
 							width: 960,
 						},
 					],
 				},
 			],
 			data: {
-				alt: 'Fortnite convergence art with 4 characters in a purple swirl of color',
-				credit: 'Composite: Fortnite',
+				alt: 'Vis, Croatia.',
+				caption: 'Vis, Croatia. Photograph: Julien Duval',
+				credit: 'Photograph: Julien Duval',
 			},
 		},
 	],
-	main: '<figure class="element element-image" data-media-id="4bcf63ebab3bfeda5701f957f6a7b13f2597c976"> \n <img src="https://media.guim.co.uk/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/1000.jpg" alt="Fortnite convergence art with 4 characters in a purple swirl of color" width="1000" height="600" class="gu-image"> \n</figure>',
+	main: '<figure class="element element-image" data-media-id="e544821d1505fe27bc83e8cfbd014aa4a230cbb7"> \n <img src="https://media.guim.co.uk/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/1000.jpg" alt="Vis, Croatia." width="1000" height="250" class="gu-image"> \n <figcaption> <span class="element-image__caption">Vis, Croatia. Photograph: Julien Duval</span> <span class="element-image__credit">Photograph: Julien Duval</span> \n </figcaption> \n</figure>',
 	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{
-			id: '682f81588f08990e36516836',
+			id: '69c521848f089a55d361b2af',
 			elements: [
 				{
-					_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement',
-					isMandatory: false,
-					scriptUrl:
-						'https://s3-us-west-1.amazonaws.com/labs.theguardian.com/2020/us-test/hosted/boot.js',
-					alt: 'Making the header image larger',
-					elementId: '87e41340-ffc7-4db9-ab54-b6ad8adcbc4e',
-				},
-				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Parents of children who play Fortnite may have questions about the video game. For example, how do age ratings work, how can they set up parental controls, what type of experiences can children play, and what are the safety features available? Epic Games, the creators of Fortnite created the following guide to help parents better understand Fortnite, its safety features and parental controls.</p>',
-					elementId: '58acb4d4-2fa9-4d1f-bcab-57fa7db21869',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>What is Fortnite?</h2>',
-					elementId: '59436bf0-c577-456a-8698-cba4d923f593',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Fortnite is a hub with more than 260,000 games and experiences where players can find almost every type of game. This includes <a href="https://www.fortnite.com/@epic/battle-royale?lang=en-US" rel="nofollow">Battle Royale</a>, where players battle it out to be the last-person standing, Fortnite Festival in which players can play in a band with friends or perform solo on stage with hit music by their favorite artists and <a href="https://www.fortnite.com/@epic/lego-fortnite-brick-life?lang=en-US" rel="nofollow">LEGO Fortnite Brick Life</a>, a social roleplaying game where players can create, explore and play in a virtual brick-built city.</p>',
-					elementId: 'cf99c949-c607-48fd-8d44-3356895c2f94',
+					html: '<p>While algorithms and filters try to manufacture perfection, here it’s lived: the way sunlight hits limestone cliffs, the scent of pine mingling with salt on the air, the feel of cool sea around your ankles. Screens can show an image of a cove – but only in <a href="https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt" rel="nofollow">Croatia</a> can you hear its silence, taste its seafood, and feel it against your skin.</p>',
+					elementId: '98dbd446-b995-4815-92b0-724f4cc7f007',
 				},
 				{
 					displayCredit: true,
@@ -270,72 +275,94 @@ export const hostedArticle: FEArticle = {
 						allImages: [
 							{
 								index: 0,
-								fields: { height: '1080', width: '1920' },
+								fields: {
+									height: '3300',
+									width: '4954',
+								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/1920.jpg',
+								url: 'https://media.guim.co.uk/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/4954.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '1080',
-									width: '1920',
+									height: '3300',
+									width: '4954',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg',
+								url: 'https://media.guim.co.uk/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg',
 							},
 							{
 								index: 2,
-								fields: { height: '563', width: '1000' },
+								fields: {
+									height: '1332',
+									width: '2000',
+								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/1000.jpg',
+								url: 'https://media.guim.co.uk/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/2000.jpg',
 							},
 							{
 								index: 3,
-								fields: { height: '281', width: '500' },
+								fields: {
+									height: '666',
+									width: '1000',
+								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/500.jpg',
+								url: 'https://media.guim.co.uk/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/1000.jpg',
 							},
 							{
 								index: 4,
-								fields: { height: '79', width: '140' },
+								fields: {
+									height: '333',
+									width: '500',
+								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/140.jpg',
+								url: 'https://media.guim.co.uk/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '93',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/140.jpg',
 							},
 						],
 					},
-					elementId: '1fc8311e-35d7-4db9-9617-547fc40d013c',
+					elementId: '5661385a-643d-4bd1-8a1d-2a19ba289bf8',
 					imageSources: [
 						{
 							weighting: 'inline',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=fa69cf7641e0668861074757e5931d09',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=620&quality=85&auto=format&fit=max&s=24e0db61fc3d2a3013cdb9b6f0952bad',
 									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=f79a93ab7dea65a6d0e6f89f6f047bcb',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=489e1ce8e669d30ccc49464ec0d97cba',
 									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=605&quality=85&auto=format&fit=max&s=85612130cb2cf0cfe2fea58496fc3fbb',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=605&quality=85&auto=format&fit=max&s=25f50d23cbeec0faedce563521c694d0',
 									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=2ba53a98ed6b0265c6d20d6d5c4f9ca2',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=fc496b7e07dd6a2750924cef60e650f7',
 									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=445&quality=85&auto=format&fit=max&s=a2daadb540793531f6a51fe437c4e618',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=445&quality=85&auto=format&fit=max&s=6d062390bbd37771f4d28a6567f70ca6',
 									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cdbf13dde1b020038b2a4bcb4d46cf08',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=fbeeef6ac70ae2e3def90dba89e0a323',
 									width: 890,
 								},
 							],
@@ -344,19 +371,19 @@ export const hostedArticle: FEArticle = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=140&quality=85&auto=format&fit=max&s=cb09bbae1dd64dbc39521c82d4bd857c',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=140&quality=85&auto=format&fit=max&s=9ddd96d9d926fa391a840f54aa866e75',
 									width: 140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=a43656b62cffa0c9810b8eafff82efed',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=ce84942832bb5664fbb3c7a8ead1b8db',
 									width: 280,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=120&quality=85&auto=format&fit=max&s=cab1bb332b0ab22362cdcc0161165a49',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=120&quality=85&auto=format&fit=max&s=2910c684352d4c0a133f6b38aa9b4771',
 									width: 120,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=e2a8ccf7a10a751e0ae17e7c0fac3e8b',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=707e8ee2629f83cc40ef109587de07e5',
 									width: 240,
 								},
 							],
@@ -365,43 +392,43 @@ export const hostedArticle: FEArticle = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=380&quality=85&auto=format&fit=max&s=a857f024a2f28b2d09e89c06784953f2',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=380&quality=85&auto=format&fit=max&s=017dbf0b6385bd27a5ded5ff836d283e',
 									width: 380,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=6609b1011050609b4c06a7ddcd5a4cf0',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=d80a26e4a7c7fe72defd0452060028b3',
 									width: 760,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=300&quality=85&auto=format&fit=max&s=2dcdca288a959d4ca9bd6ba8c64d6fbb',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=300&quality=85&auto=format&fit=max&s=3edd2e8105ba04545686d1f724ede31b',
 									width: 300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=0904fa46d17cd208d3c10ff72f983e14',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=534f4dc7bd4bd30f7c15605b5f5e726f',
 									width: 600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=fa69cf7641e0668861074757e5931d09',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=620&quality=85&auto=format&fit=max&s=24e0db61fc3d2a3013cdb9b6f0952bad',
 									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=f79a93ab7dea65a6d0e6f89f6f047bcb',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=489e1ce8e669d30ccc49464ec0d97cba',
 									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=605&quality=85&auto=format&fit=max&s=85612130cb2cf0cfe2fea58496fc3fbb',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=605&quality=85&auto=format&fit=max&s=25f50d23cbeec0faedce563521c694d0',
 									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=2ba53a98ed6b0265c6d20d6d5c4f9ca2',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=fc496b7e07dd6a2750924cef60e650f7',
 									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=445&quality=85&auto=format&fit=max&s=a2daadb540793531f6a51fe437c4e618',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=445&quality=85&auto=format&fit=max&s=6d062390bbd37771f4d28a6567f70ca6',
 									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cdbf13dde1b020038b2a4bcb4d46cf08',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=fbeeef6ac70ae2e3def90dba89e0a323',
 									width: 890,
 								},
 							],
@@ -410,43 +437,43 @@ export const hostedArticle: FEArticle = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=860&quality=85&auto=format&fit=max&s=7418f7de3a7d6fedb59878e0d866da20',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=860&quality=85&auto=format&fit=max&s=fc0cec55d4d38e63e8e788d03876e714',
 									width: 860,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=14ee90a503059958f95af51930a08e16',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=c6d278545aa4fe494c717bc556751c7f',
 									width: 1720,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=780&quality=85&auto=format&fit=max&s=dc453504b401e3ae5fe284831b4c6834',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=780&quality=85&auto=format&fit=max&s=ff7705052733ddfa7e4a9652bd97d3e7',
 									width: 780,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=566ff74bb6be4f829db946cfe27f00a5',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=c3a441e3d6bd1b18b9e0db2b44f4852d',
 									width: 1560,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=fa69cf7641e0668861074757e5931d09',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=620&quality=85&auto=format&fit=max&s=24e0db61fc3d2a3013cdb9b6f0952bad',
 									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=f79a93ab7dea65a6d0e6f89f6f047bcb',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=489e1ce8e669d30ccc49464ec0d97cba',
 									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=605&quality=85&auto=format&fit=max&s=85612130cb2cf0cfe2fea58496fc3fbb',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=605&quality=85&auto=format&fit=max&s=25f50d23cbeec0faedce563521c694d0',
 									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=2ba53a98ed6b0265c6d20d6d5c4f9ca2',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=fc496b7e07dd6a2750924cef60e650f7',
 									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=445&quality=85&auto=format&fit=max&s=a2daadb540793531f6a51fe437c4e618',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=445&quality=85&auto=format&fit=max&s=6d062390bbd37771f4d28a6567f70ca6',
 									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cdbf13dde1b020038b2a4bcb4d46cf08',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=fbeeef6ac70ae2e3def90dba89e0a323',
 									width: 890,
 								},
 							],
@@ -455,27 +482,27 @@ export const hostedArticle: FEArticle = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=fa69cf7641e0668861074757e5931d09',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=620&quality=85&auto=format&fit=max&s=24e0db61fc3d2a3013cdb9b6f0952bad',
 									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=f79a93ab7dea65a6d0e6f89f6f047bcb',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=489e1ce8e669d30ccc49464ec0d97cba',
 									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=605&quality=85&auto=format&fit=max&s=85612130cb2cf0cfe2fea58496fc3fbb',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=605&quality=85&auto=format&fit=max&s=25f50d23cbeec0faedce563521c694d0',
 									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=2ba53a98ed6b0265c6d20d6d5c4f9ca2',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=fc496b7e07dd6a2750924cef60e650f7',
 									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=445&quality=85&auto=format&fit=max&s=a2daadb540793531f6a51fe437c4e618',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=445&quality=85&auto=format&fit=max&s=6d062390bbd37771f4d28a6567f70ca6',
 									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cdbf13dde1b020038b2a4bcb4d46cf08',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=fbeeef6ac70ae2e3def90dba89e0a323',
 									width: 890,
 								},
 							],
@@ -484,93 +511,85 @@ export const hostedArticle: FEArticle = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=1900&quality=85&auto=format&fit=max&s=1088f5fcbc5e2e8bc04e41c1de33df06',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=1900&quality=85&auto=format&fit=max&s=15aa8011b9bb6845ba16fa9e5935b147',
 									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=cf2c17edc90005742cfd02700f5b5595',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=c8e236ecdf197b5c57ce086947d73cb7',
 									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=1300&quality=85&auto=format&fit=max&s=5caf999b13db6edb8f578bc460fcd408',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=1300&quality=85&auto=format&fit=max&s=36e187c6ec11b33b4d9ec3f4994ccadc',
 									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=f5abcc2e1f6e513cb425ae6b7c459848',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=cd869ee1650e8c93ed418b8ade013e87',
 									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=1140&quality=85&auto=format&fit=max&s=7a1d1b4c7ee99714fb3cad08053f9fa2',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=1140&quality=85&auto=format&fit=max&s=7be2d7534024783a6947bb9082d6575c',
 									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=d5e8234dadead27c5097fedc3b41f166',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=f6cf0f6bab2f07b63200967b7f0d3fae',
 									width: 2280,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=980&quality=85&auto=format&fit=max&s=00bbc2defb90605cb7821544d69efe95',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=980&quality=85&auto=format&fit=max&s=32f65c1c7ddc47d286a2811146ec0570',
 									width: 980,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=99b6f058f987c4c5021174c2ec51bb27',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=250064866f4db03ca007b838efe2be4d',
 									width: 1960,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=740&quality=85&auto=format&fit=max&s=309f5efe60093a9ef92173632815e6d1',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=740&quality=85&auto=format&fit=max&s=c00a46a8faa99dfc7bcad94d66a573c2',
 									width: 740,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=7799ceda623acc31c97b8a81b0570a51',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=4d3c1b4340ddd06313c0bc44a357c786',
 									width: 1480,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=660&quality=85&auto=format&fit=max&s=9790f90caa598ab6b3ebc1d73c2b9c96',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=660&quality=85&auto=format&fit=max&s=0bc5b4e16b693d6bcb5194e8b580cc1e',
 									width: 660,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cbc884901859cac779de01cc496f42d1',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=935705e5e5c85f197c391f6a2c9553de',
 									width: 1320,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=480&quality=85&auto=format&fit=max&s=bda1cdee0687b6b068af0e00eb00e820',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=480&quality=85&auto=format&fit=max&s=0f1f5d62596b522ae0b116f23390a905',
 									width: 480,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6a4e9ddb07e679a58ba1361ffca738f078ee2587/0_0_1920_1080/master/1920.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=b278a2dcda1a580217a28a3e0972daa6',
+									src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=39be537512849bf82af8d35bcee17bc0',
 									width: 960,
 								},
 							],
 						},
 					],
 					data: {
-						alt: 'Characters flying into scene by clocktower',
-						credit: 'Photograph: Fortnite',
+						alt: 'Aerial view of Paklinski Islands in Hvar, Croatia. Turquise water bays with luxury yachts and sailing boats.',
+						caption:
+							'The Paklinski Islands, a serene Adriatic archipelago, offer a secluded retreat for travellers seeking calm and beauty.',
+						credit: 'Photograph: Ajan Alen/Shutterstock',
 					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>All games and experiences in Fortnite feature an age and content rating. In the UK, experiences have a<a href="https://pegi.info/page/pegi-age-ratings" rel="nofollow"> PEGI </a>rating ranging from 3+ (suitable for all ages) to 12 (suitable for children aged 12 and up). Ratings are clearly displayed in Fortnite so parents and players can find experiences that are right for them.</p>',
-					elementId: '2e334b5f-fc13-404e-b7b1-97b2be341b9d',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>Tailored accounts and default settings for younger players:</h2>',
-					elementId: '453cb8c7-b03b-4f05-8e54-0d8ab81e5815',
+					html: '<p>The Dalmatian coast is a playground for the senses. Step aboard a boat in Split and sail toward the Paklinski Islands, where secluded coves hide between jagged cliffs. Swim in water so clear you can see the pebbles beneath, or anchor under pine-shaded shores for a picnic of fresh figs, olives, and Dalmatian cheese. Every turn of the boat offers a new panorama – an unedited view no feed could ever capture.</p>',
+					elementId: '364fd1ef-500a-4ca1-8535-a4ce6dcad30a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Fortnite aims to be a welcoming and fun place where younger players have the ability to meaningfully participate without compromising their safety or privacy.</p>',
-					elementId: '1acb7681-f9ee-4ab2-8d33-95363f01868e',
+					html: '<p>Farther out, Vis waits with its Blue Cave on Biševo. At dawn, the sunlight transforms the water inside into an electric turquoise glow. Cameras can mimic the colour, but they cannot replicate the astonishment of stepping inside and seeing the light dance on your own reflection. From Stiniva Cove’s narrow opening to the open stretch of Bobovišća on Brač, Croatia’s islands reward those who swap notifications for navigation.</p>',
+					elementId: 'e58d7bbb-0d74-4c74-97d2-087c38d46b94',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In the UK, if a player indicates they are under 13 their account is a <a href="https://safety.epicgames.com/en-US/cabined-accounts" rel="nofollow">Cabined Account</a>. They can still play Fortnite but will require parental consent to access certain features including voice and text chat or making real money purchases. To gain parental consent the child will need to share their parent’s email address. The parent will receive an email and, after verifying that they are an adult, can provide consent for these features and review and set up parental controls.</p>',
-					elementId: 'f4c9d88a-cd38-4c1d-bd18-ade263afba63',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>If a player is under the age of 18, there are a number of high-privacy default settings applied to their account. For example, voice and text chat are turned off and player profile details are hidden. Epic also offers additional protections for younger players who have text chat turned on. The mature language filter removes various kinds of mature language and toxicity and the personal information filter removes certain types of information like email addresses and credit card numbers. For players under 13, these filters are always on.</p>',
-					elementId: 'bf8b6237-226c-4461-8bfe-3ce88f6b88d5',
+					html: '<p>But <a href="https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt" rel="nofollow">the Adriatic</a> isn’t only for adventurers. Families will find calm in sheltered bays like Dubovica on Hvar or Stomorska on Šolta, where shallow waters and gentle waves create safe havens. Parents can relax while children paddle, snorkel, and discover hidden beaches that no influencer has yet posted. For those chasing a slower rhythm, the islands’ car-free villages invite quiet strolls along cobbled streets, a breakfast of fresh pastries overlooking the sea, and the simple luxury of listening to nothing but the waves.</p>',
+					elementId: '5f05fbce-914b-4385-9d18-1cac727deca0',
 				},
 				{
 					displayCredit: true,
@@ -580,72 +599,94 @@ export const hostedArticle: FEArticle = {
 						allImages: [
 							{
 								index: 0,
-								fields: { height: '1080', width: '1920' },
+								fields: {
+									height: '5792',
+									width: '8688',
+								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/1920.jpg',
+								url: 'https://media.guim.co.uk/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/8688.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '1080',
-									width: '1920',
+									height: '5792',
+									width: '8688',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg',
+								url: 'https://media.guim.co.uk/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg',
 							},
 							{
 								index: 2,
-								fields: { height: '563', width: '1000' },
+								fields: {
+									height: '1333',
+									width: '2000',
+								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/1000.jpg',
+								url: 'https://media.guim.co.uk/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/2000.jpg',
 							},
 							{
 								index: 3,
-								fields: { height: '281', width: '500' },
+								fields: {
+									height: '667',
+									width: '1000',
+								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/500.jpg',
+								url: 'https://media.guim.co.uk/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/1000.jpg',
 							},
 							{
 								index: 4,
-								fields: { height: '79', width: '140' },
+								fields: {
+									height: '333',
+									width: '500',
+								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/140.jpg',
+								url: 'https://media.guim.co.uk/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '93',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/140.jpg',
 							},
 						],
 					},
-					elementId: '3184e3c2-d4f2-4d22-913c-7e2da94bd4c7',
+					elementId: '442ac43a-decb-47c8-af13-ba9106e1fcf1',
 					imageSources: [
 						{
 							weighting: 'inline',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=3c1aa83098bfd07e2b9e4ebdca408c9a',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=620&quality=85&auto=format&fit=max&s=d84609f522547c13834928615f4b76a6',
 									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a3ba4cc5e37ac5448f47d319e15ac64c',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=df0c4401eff406953707962a1c0306a7',
 									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=605&quality=85&auto=format&fit=max&s=16c147e430c81e8a55a09bcfa9331a5d',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=605&quality=85&auto=format&fit=max&s=963ee4d62c0bcd6b8390157f513a2447',
 									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=53ebe5b8ff0b5c882036e3696075f3db',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=5966d9096725b235cc9c9f31236481a1',
 									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=445&quality=85&auto=format&fit=max&s=99f15643d3be240c82f88079f90ba9de',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=445&quality=85&auto=format&fit=max&s=7eaa8a7d712be427ca55298027828938',
 									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=8ecda3af0b4802f9904d31c9228d8366',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=25c38fdea8fc268875c4aee00f9d1a29',
 									width: 890,
 								},
 							],
@@ -654,19 +695,19 @@ export const hostedArticle: FEArticle = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=140&quality=85&auto=format&fit=max&s=afc82cf43abe636cfcf98cf137bb107f',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=140&quality=85&auto=format&fit=max&s=a32a957140649b0e1ae0e0c4c379f585',
 									width: 140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=f795963833577a62e7131424a368f6d4',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=21155822a361ab8606df9d0da5140d16',
 									width: 280,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=120&quality=85&auto=format&fit=max&s=6233120c2d472586f328596b34d2a2e2',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=120&quality=85&auto=format&fit=max&s=08b3f684d5275ee28907da7be7e10954',
 									width: 120,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=64c388246333233587fca58f7b1ff451',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=b31250c9a3a36b76f920bd692e19e957',
 									width: 240,
 								},
 							],
@@ -675,43 +716,43 @@ export const hostedArticle: FEArticle = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=380&quality=85&auto=format&fit=max&s=3637e48879335353a138b87ceb28343a',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=380&quality=85&auto=format&fit=max&s=c8d37214043379109f3988131c070f5e',
 									width: 380,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=c0f86431da3ea0fea052e09630ed7d0f',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=bb5cb893adc9d526a1bb43057a8b5ba9',
 									width: 760,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=300&quality=85&auto=format&fit=max&s=515bbdc7161e31c398732435c696665c',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=300&quality=85&auto=format&fit=max&s=c141579461415072e1fab8289f34191c',
 									width: 300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=8582013d5b9ce1b141c44bbd060cc2db',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=e8004b208bf93d5c6eb15998451921a9',
 									width: 600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=3c1aa83098bfd07e2b9e4ebdca408c9a',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=620&quality=85&auto=format&fit=max&s=d84609f522547c13834928615f4b76a6',
 									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a3ba4cc5e37ac5448f47d319e15ac64c',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=df0c4401eff406953707962a1c0306a7',
 									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=605&quality=85&auto=format&fit=max&s=16c147e430c81e8a55a09bcfa9331a5d',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=605&quality=85&auto=format&fit=max&s=963ee4d62c0bcd6b8390157f513a2447',
 									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=53ebe5b8ff0b5c882036e3696075f3db',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=5966d9096725b235cc9c9f31236481a1',
 									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=445&quality=85&auto=format&fit=max&s=99f15643d3be240c82f88079f90ba9de',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=445&quality=85&auto=format&fit=max&s=7eaa8a7d712be427ca55298027828938',
 									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=8ecda3af0b4802f9904d31c9228d8366',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=25c38fdea8fc268875c4aee00f9d1a29',
 									width: 890,
 								},
 							],
@@ -720,43 +761,43 @@ export const hostedArticle: FEArticle = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=860&quality=85&auto=format&fit=max&s=df8d7cc38ef67ba790de2b41043da5f6',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=860&quality=85&auto=format&fit=max&s=8e9d0605256cdd0fe4b207b9b5f423e6',
 									width: 860,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=36064b7fc50bff79f181f2d4998b04d8',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=c2a01d4bebb9cf32dc2218747bba3d8f',
 									width: 1720,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=780&quality=85&auto=format&fit=max&s=5510339bb8ced8182dccec689ab9bdc7',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=780&quality=85&auto=format&fit=max&s=9150b9786841b9a2fe0471ad08d973da',
 									width: 780,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=81adb123c241c7355339b8c5e94de610',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=cd4a3a1f4cf43289b9e2da5ccc87cd12',
 									width: 1560,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=3c1aa83098bfd07e2b9e4ebdca408c9a',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=620&quality=85&auto=format&fit=max&s=d84609f522547c13834928615f4b76a6',
 									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a3ba4cc5e37ac5448f47d319e15ac64c',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=df0c4401eff406953707962a1c0306a7',
 									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=605&quality=85&auto=format&fit=max&s=16c147e430c81e8a55a09bcfa9331a5d',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=605&quality=85&auto=format&fit=max&s=963ee4d62c0bcd6b8390157f513a2447',
 									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=53ebe5b8ff0b5c882036e3696075f3db',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=5966d9096725b235cc9c9f31236481a1',
 									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=445&quality=85&auto=format&fit=max&s=99f15643d3be240c82f88079f90ba9de',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=445&quality=85&auto=format&fit=max&s=7eaa8a7d712be427ca55298027828938',
 									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=8ecda3af0b4802f9904d31c9228d8366',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=25c38fdea8fc268875c4aee00f9d1a29',
 									width: 890,
 								},
 							],
@@ -765,27 +806,27 @@ export const hostedArticle: FEArticle = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=3c1aa83098bfd07e2b9e4ebdca408c9a',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=620&quality=85&auto=format&fit=max&s=d84609f522547c13834928615f4b76a6',
 									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a3ba4cc5e37ac5448f47d319e15ac64c',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=df0c4401eff406953707962a1c0306a7',
 									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=605&quality=85&auto=format&fit=max&s=16c147e430c81e8a55a09bcfa9331a5d',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=605&quality=85&auto=format&fit=max&s=963ee4d62c0bcd6b8390157f513a2447',
 									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=53ebe5b8ff0b5c882036e3696075f3db',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=5966d9096725b235cc9c9f31236481a1',
 									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=445&quality=85&auto=format&fit=max&s=99f15643d3be240c82f88079f90ba9de',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=445&quality=85&auto=format&fit=max&s=7eaa8a7d712be427ca55298027828938',
 									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=8ecda3af0b4802f9904d31c9228d8366',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=25c38fdea8fc268875c4aee00f9d1a29',
 									width: 890,
 								},
 							],
@@ -794,108 +835,85 @@ export const hostedArticle: FEArticle = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=1900&quality=85&auto=format&fit=max&s=6115018ee6172bedbd79a9e285dc24a7',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=1900&quality=85&auto=format&fit=max&s=ad74faea76d961c7b00d39d50f22bd37',
 									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=405d729aa2516b76452160319dc66937',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=72f84505884febab7817bb3c5cf6e325',
 									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=1300&quality=85&auto=format&fit=max&s=e931b0e8e8f7630d8f30bd80b8db2c9b',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=1300&quality=85&auto=format&fit=max&s=e805fad06072997d6e3db93136cbc9b3',
 									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=bfe6e5cb4c006698935e6227bfed4214',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=c60a6a07caed01347a79f2cd5c9d24c4',
 									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=1140&quality=85&auto=format&fit=max&s=1659e734caf1d88d0bea8aae698545ca',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=1140&quality=85&auto=format&fit=max&s=752a32363abdca1c379891a468962d3c',
 									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=682da0e171020c9082a67c6d71c6de9b',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=7cbdf89127e9f37ecbc83b64cc2c71fa',
 									width: 2280,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=980&quality=85&auto=format&fit=max&s=456ee6a0f0f2975187f46a86e3e2bef4',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=980&quality=85&auto=format&fit=max&s=4e8e5b21d72f737e679d323c65d4879b',
 									width: 980,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=cf6b3467fa82b946362ff14782a70754',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=5bb5d269c53a83f1ebf306d0c7836698',
 									width: 1960,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=740&quality=85&auto=format&fit=max&s=96a5c7f3e0916700d8be1946c3dcf82f',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=740&quality=85&auto=format&fit=max&s=94b936dfcb7d0c243dcc8fb096687013',
 									width: 740,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=505b27e211009e7a6cbcc899deb34902',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=b2701fd0f343d8572712e1e00b8bb767',
 									width: 1480,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=660&quality=85&auto=format&fit=max&s=e4d71377ce88c6d6481ab403fd61dd1e',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=660&quality=85&auto=format&fit=max&s=853472da93552c5a0150903cf60d443c',
 									width: 660,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=b840f592f476de5082df5fde916d8ed2',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=5e0869d4357a1d372eceaa88df68ea4a',
 									width: 1320,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=480&quality=85&auto=format&fit=max&s=619f8106df9d9962cca4b3b31035e373',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=480&quality=85&auto=format&fit=max&s=d727038a75e8d9f5f8756d0b89e9c062',
 									width: 480,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d77868f4dce533ac2e9232f678a81588dc5f67a/0_0_1920_1080/master/1920.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=9eadfe997749e6bc41a0c907669c918b',
+									src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=0ed02bf540e0f3e6a9209601d0467a71',
 									width: 960,
 								},
 							],
 						},
 					],
 					data: {
-						alt: 'Lego characters chatting in Fortnite',
-						credit: 'Illustration: Epic Games',
+						alt: 'Soparnik',
+						caption:
+							'Soparnik prepared with fresh herbs, Croatia’s centuries-old culinary tradition.',
+						credit: 'Photograph: Maja Danica Pečanić',
 					},
 				},
 				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>Setting up Parental Controls</h2>',
-					elementId: 'dbb58309-85a3-40d2-8abf-a7cc1668c87a',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Croatia’s nautical heritage runs deep. Sailors and locals have shaped this coast for centuries, blending life with the sea. From olive groves and vineyards that meet the shoreline to family-run tavernas serving the freshest catch of the day, the Mediterranean lifestyle is not simulated – it is lived. The Unesco Mediterranean diet here is not a trend; it’s a daily ritual of taste, texture, and aroma. In these moments, food, wine, and sea become inseparable, grounding travellers in the richness of place.</p>',
+					elementId: '6af24f66-4afd-406f-ba6a-0d8f3ac5bac4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Parents can use Epic’s <a href="https://safety.epicgames.com/en-US/parental-controls" rel="nofollow">Parental Controls</a> to manage their child’s permissions and there are more than a dozen settings available for parents to customize.</p>',
-					elementId: 'a5d17980-8369-4d23-a260-3587fb43ffdc',
+					html: '<p>For those seeking a sensory thrill, the Dalmatian winds offer ideal conditions for sailing, from novice to seasoned sailors. Glide along the coast with the wind at your back, watch the sun dip behind Biokovo, and feel the rhythm of the waves rather than the pulse of a timeline. Less screen, more sea. Less curated, more real.</p>',
+					elementId: '5aded8f5-2f95-4aa2-adae-cc0e657f862a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Parents can set up and manage their settings in two places - from the Fortnite main menu on their child’s device or through the <a href="https://www.epicgames.com/login" rel="nofollow">Epic account portal</a> online. If it’s the first time setting up parental controls, parents will need to sign into their child’s Epic Games account and create a six-digit Parental Controls PIN.</p>',
-					elementId: 'b054c4c1-5e1b-4aa1-bb83-29a1aacf4692',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>Here are some examples of settings parents will find in Parental Controls:</h2>',
-					elementId: '6b92e735-419b-4cc8-a16f-250e76a7dbc5',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><strong>Social Settings: </strong>Many players come to Fortnite to play and connect with their friends. Parents can choose who their child can interact with through Fortnite’s text or voice chat. They can allow their child to speak with “everybody, “friends and teammates,” or “friends only.” They can also disable voice and text chat altogether.</p>',
-					elementId: 'f94ed9ef-df5b-45ed-a9ce-e11aa5b4479c',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Parents can also require their PIN to send or accept new friend requests.</p>',
-					elementId: '423d4429-1b05-4e7a-966d-6dddca59e27e',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><strong>Purchasing Permissions: </strong>While Fortnite is free to download and start playing, inside Fortnite players can purchase V-Bucks, a virtual currency that they can then use to buy optional cosmetic items such as outfits, emotes (special dances or movements) and other accessories. Purchasing in-game cosmetics doesn’t give players a competitive advantage.</p>',
-					elementId: '169d83b5-7732-42a3-a4f2-40249719bf2c',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Parents can set purchasing permissions to approve real-money purchases using Epic Games payment. Additionally, there are a number of features in place to prevent unwanted or accidental purchases including an explicit yes/no option to save credit card information and a <a href="https://www.fortnite.com/news/updates-to-fortnite-purchase-cancellation-and-social-settings" rel="nofollow">hold-to-purchase mechanic</a>. Epic Games also makes cancellations and refunds<a href="https://www.fortnite.com/news/updates-to-fortnite-purchase-cancellation-and-social-settings" rel="nofollow"> simple</a>.</p>',
-					elementId: '28312f5d-3a5a-48dd-824d-9841be97d52d',
+					html: '<p>Evenings on the islands have their own cadence. A sunset from Zlatni Rat’s golden tip or a quiet terrace in Maslinica Bay is proof that Croatia is not a destination to capture for others – it is one to experience for yourself. The luxury is not in exclusivity, but in the authenticity of a moment fully lived.</p>',
+					elementId: '06d6c780-3984-4a00-8beb-cd6f4bc9d1e9',
 				},
 				{
 					displayCredit: true,
@@ -905,72 +923,94 @@ export const hostedArticle: FEArticle = {
 						allImages: [
 							{
 								index: 0,
-								fields: { height: '1080', width: '1920' },
+								fields: {
+									height: '4000',
+									width: '6000',
+								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/1920.jpg',
+								url: 'https://media.guim.co.uk/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/6000.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '1080',
-									width: '1920',
+									height: '4000',
+									width: '6000',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg',
+								url: 'https://media.guim.co.uk/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg',
 							},
 							{
 								index: 2,
-								fields: { height: '563', width: '1000' },
+								fields: {
+									height: '1333',
+									width: '2000',
+								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/1000.jpg',
+								url: 'https://media.guim.co.uk/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/2000.jpg',
 							},
 							{
 								index: 3,
-								fields: { height: '281', width: '500' },
+								fields: {
+									height: '667',
+									width: '1000',
+								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/500.jpg',
+								url: 'https://media.guim.co.uk/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/1000.jpg',
 							},
 							{
 								index: 4,
-								fields: { height: '79', width: '140' },
+								fields: {
+									height: '333',
+									width: '500',
+								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/140.jpg',
+								url: 'https://media.guim.co.uk/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '93',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/140.jpg',
 							},
 						],
 					},
-					elementId: 'e8afaafa-c1fa-408b-a1a8-1dcdcd2aa0f7',
+					elementId: '13d6b734-99c4-4590-bd43-b51d247b21ad',
 					imageSources: [
 						{
 							weighting: 'inline',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=eccecb5a3d7544983c984da2c27877f0',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=620&quality=85&auto=format&fit=max&s=13c0ae01b907ab1c81fd8ab94795f279',
 									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=6d7a4cc10262d0474278432c209d8b54',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=16e86e79d79f89c2a2818d7d3c484fdc',
 									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=605&quality=85&auto=format&fit=max&s=32cb3fe56af1afc13455e81245af09c5',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=605&quality=85&auto=format&fit=max&s=516b065442975f4ccb383048077f2964',
 									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d56fafb7b1c428983ab64616e948b93f',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=de5141a81b653f6583763cc5b83f6ab0',
 									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=445&quality=85&auto=format&fit=max&s=5a75705fb2add89abd6ffcb15be5c509',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=445&quality=85&auto=format&fit=max&s=af4c308be967f71773e0022f732d80ae',
 									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ec7659bf9ad74bf83a7ebdd0242fa4e6',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=759a1c7ec469a775a7725f88b3cd6427',
 									width: 890,
 								},
 							],
@@ -979,19 +1019,19 @@ export const hostedArticle: FEArticle = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=140&quality=85&auto=format&fit=max&s=4315eb99c00d3be5d723373efa742f22',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=140&quality=85&auto=format&fit=max&s=586d51e7bdc09761a6bc5b909afd5142',
 									width: 140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=e8d8c4f8ca97a779f743cfeacd7a8b7d',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=510ac6bf12be2026972cc6ea03c21b45',
 									width: 280,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=120&quality=85&auto=format&fit=max&s=8a99720b9bfb1610e34056effa7b64bf',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=120&quality=85&auto=format&fit=max&s=e7c8ed9af40c9769666c2e6c8c157404',
 									width: 120,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=ddae4c32e3648fe8888d699055513085',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=6fa1324da2d3f98c183ce0f72251d404',
 									width: 240,
 								},
 							],
@@ -1000,43 +1040,43 @@ export const hostedArticle: FEArticle = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=380&quality=85&auto=format&fit=max&s=3246ea8cf3342ebaf889e7a385f02d02',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=380&quality=85&auto=format&fit=max&s=9dfc6ca3beec2c25fbe8e4b939319efb',
 									width: 380,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=ee16c377065634ee424e4a0c15c64dd7',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=80f08b8e8ac53204fc30f3ebc73c61d9',
 									width: 760,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=300&quality=85&auto=format&fit=max&s=bd62ccb3ccbe5e27cc060fdcf626a71c',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=efa406c8fd1a7d6f0f29c3f8de1eb577',
 									width: 300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=ab4868c285f7ca7ceb06a36c204a5d0f',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=1c242c3deba2d478520dbb643b5176d0',
 									width: 600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=eccecb5a3d7544983c984da2c27877f0',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=620&quality=85&auto=format&fit=max&s=13c0ae01b907ab1c81fd8ab94795f279',
 									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=6d7a4cc10262d0474278432c209d8b54',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=16e86e79d79f89c2a2818d7d3c484fdc',
 									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=605&quality=85&auto=format&fit=max&s=32cb3fe56af1afc13455e81245af09c5',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=605&quality=85&auto=format&fit=max&s=516b065442975f4ccb383048077f2964',
 									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d56fafb7b1c428983ab64616e948b93f',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=de5141a81b653f6583763cc5b83f6ab0',
 									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=445&quality=85&auto=format&fit=max&s=5a75705fb2add89abd6ffcb15be5c509',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=445&quality=85&auto=format&fit=max&s=af4c308be967f71773e0022f732d80ae',
 									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ec7659bf9ad74bf83a7ebdd0242fa4e6',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=759a1c7ec469a775a7725f88b3cd6427',
 									width: 890,
 								},
 							],
@@ -1045,43 +1085,43 @@ export const hostedArticle: FEArticle = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=860&quality=85&auto=format&fit=max&s=6be86e97700dacf59d3068b082aa50ea',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=860&quality=85&auto=format&fit=max&s=a9a4186d2210be50f1ba8b3ffbdffd48',
 									width: 860,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=e8c652e909d9b986514eef58762eccbc',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=0c0e27d49832de867e2400c52889d0de',
 									width: 1720,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=780&quality=85&auto=format&fit=max&s=50c6f3a57da5f7afd7e27c78751a97a2',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=780&quality=85&auto=format&fit=max&s=7715946d6b5fa7bf997e582875a87c22',
 									width: 780,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=6234b292fa3408354c03d39c1c17b87f',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=16b4414ae7976e56e8e3899a05bed70f',
 									width: 1560,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=eccecb5a3d7544983c984da2c27877f0',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=620&quality=85&auto=format&fit=max&s=13c0ae01b907ab1c81fd8ab94795f279',
 									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=6d7a4cc10262d0474278432c209d8b54',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=16e86e79d79f89c2a2818d7d3c484fdc',
 									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=605&quality=85&auto=format&fit=max&s=32cb3fe56af1afc13455e81245af09c5',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=605&quality=85&auto=format&fit=max&s=516b065442975f4ccb383048077f2964',
 									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d56fafb7b1c428983ab64616e948b93f',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=de5141a81b653f6583763cc5b83f6ab0',
 									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=445&quality=85&auto=format&fit=max&s=5a75705fb2add89abd6ffcb15be5c509',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=445&quality=85&auto=format&fit=max&s=af4c308be967f71773e0022f732d80ae',
 									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ec7659bf9ad74bf83a7ebdd0242fa4e6',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=759a1c7ec469a775a7725f88b3cd6427',
 									width: 890,
 								},
 							],
@@ -1090,27 +1130,27 @@ export const hostedArticle: FEArticle = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=620&quality=85&auto=format&fit=max&s=eccecb5a3d7544983c984da2c27877f0',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=620&quality=85&auto=format&fit=max&s=13c0ae01b907ab1c81fd8ab94795f279',
 									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=6d7a4cc10262d0474278432c209d8b54',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=16e86e79d79f89c2a2818d7d3c484fdc',
 									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=605&quality=85&auto=format&fit=max&s=32cb3fe56af1afc13455e81245af09c5',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=605&quality=85&auto=format&fit=max&s=516b065442975f4ccb383048077f2964',
 									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d56fafb7b1c428983ab64616e948b93f',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=de5141a81b653f6583763cc5b83f6ab0',
 									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=445&quality=85&auto=format&fit=max&s=5a75705fb2add89abd6ffcb15be5c509',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=445&quality=85&auto=format&fit=max&s=af4c308be967f71773e0022f732d80ae',
 									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ec7659bf9ad74bf83a7ebdd0242fa4e6',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=759a1c7ec469a775a7725f88b3cd6427',
 									width: 890,
 								},
 							],
@@ -1119,116 +1159,118 @@ export const hostedArticle: FEArticle = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=1900&quality=85&auto=format&fit=max&s=244206189a14879140e1511e76b4fae1',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=1900&quality=85&auto=format&fit=max&s=54e200ca1ca5f679e40a7289fef5bc2a',
 									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=21e3ec31f3a2f40e1667ed9df74ad863',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=07c456a7911d599367ace5c7d414e556',
 									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=1300&quality=85&auto=format&fit=max&s=00f8cdc5ec592b724dd0336b6968ab36',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=1300&quality=85&auto=format&fit=max&s=69c021b6ef5e2260f956246a6369a115',
 									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=6581767a09782f6311754843329024f9',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=c0e06e8092f4c310052aaabf9999af15',
 									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=1140&quality=85&auto=format&fit=max&s=b92407be04215b8010b85aadde44a070',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=1140&quality=85&auto=format&fit=max&s=1e823162c4a1e726b739cfa5caab77a6',
 									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=662ae16764cb536125fd17392fed0f1e',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=4a0a99e76adf889457e5d21864a13715',
 									width: 2280,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=980&quality=85&auto=format&fit=max&s=579c66098b8f2ed2c9c151471b965dd1',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=980&quality=85&auto=format&fit=max&s=790640b21feea3f5aa624ac3db44b6d8',
 									width: 980,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=47ea98b1cd2fb32caddc742cbc966b4b',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=a030bc2f78007b430383c40dafb54c9b',
 									width: 1960,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=740&quality=85&auto=format&fit=max&s=3e0e5976567f9220fecb4a3dc096a0e0',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=740&quality=85&auto=format&fit=max&s=7e0c0081a79192ee28cedbcc3b06d7af',
 									width: 740,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=fbdb25a2fcdc6a3a379c1edfc9748fe6',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=6ce7d22c6a70f297fa6d7a60f73efc1b',
 									width: 1480,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=660&quality=85&auto=format&fit=max&s=0a4898c4755ea414e8e95bbfa0d617e8',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=660&quality=85&auto=format&fit=max&s=78f1508edef7112a59229f173c01b65a',
 									width: 660,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=fce21d0e400302715eeea2ca941699af',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=7c53cdaf832a26f7d28011e37ecb7f10',
 									width: 1320,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=480&quality=85&auto=format&fit=max&s=9cca59766398f0ec18daed761dfada6a',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=480&quality=85&auto=format&fit=max&s=bd61f8e3c08bf258a87d6982923984c5',
 									width: 480,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/9a3636367da480d6268c82a5873c8937a1c9ef6d/0_0_1920_1080/master/1920.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=de64b2ba565571c871b56443289bf4f9',
+									src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=b317f81325011db82dba4b2e75afa64d',
 									width: 960,
 								},
 							],
 						},
 					],
 					data: {
-						alt: 'Lego characters in Fortnite next to Time settings and reports interface',
-						credit: 'Photograph: Fortnite',
+						alt: 'Dubovica Hvar',
+						caption:
+							'The calm and timeless charm of Dubovica on Hvar island.',
+						credit: 'Photograph: Zoran Jelača',
 					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><strong>Time Limits and Time Reports:</strong></p>',
-					elementId: '145b9ab2-73c2-42ed-af78-1ea08d90b5c1',
+					html: '<p>In Croatia, every cove, village, and vineyard invites you to slow down, breathe, and sense the world beyond pixels. AI can generate an image of crystal waters, wind in your hair, or sun on stone steps – but <a href="https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt" rel="nofollow">Croatia can give you the feeling</a>. Here, experience replaces images. Here, being present is the most precious souvenir.</p>',
+					elementId: '51d624b8-ace3-4d86-98d3-01d45e5c3e53',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Parents can use <a href="https://www.epicgames.com/site/en-US/news/introducing-time-limit-controls-and-time-reports-for-fortnite-and-uefn" rel="nofollow">Time Limit Controls</a> to either set specific windows for game play or set the number of hours their child can play each day. Parents can also turn on Time Reports to see a summary of the total time their child has spent in Fortnite each week.</p>',
-					elementId: '18d30fcf-021f-4819-adf4-5be352bb28ba',
+					html: '<p>Full of life.</p>',
+					elementId: 'b2b5b551-a225-4c7b-8229-9e8786d2604c',
 				},
 				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><strong>Age Rating Restrictions:</strong></p>',
-					elementId: '5a3ccb9e-e827-455b-ae0c-993e948ec1bb',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Parents can set age-rating restrictions to block their children from playing games and experiences above a certain rating.</p>',
-					elementId: 'c8f5bb8b-d2c3-489d-8993-abfefb3523f6',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>These are some of the Parental Controls parents can find in Fortnite. To learn more about Cabined Accounts, Epic’s approach to safety and these parental tools, visit the <a href="https://safety.epicgames.com/en-US" rel="nofollow">Safety and Security center</a>.</p>',
-					elementId: '005f789e-5728-4663-b4bb-f3dcdc242d3f',
+					_type: 'model.dotcomrendering.pageElements.CallToActionAtomBlockElement',
+					trackingCode: 'croatia-feeling-of-spring-cta-banner',
+					url: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
+					image: 'https://media.guim.co.uk/387e08b038e4740de831433730da6289d252d4f4/0_0_1300_375/1300.jpg',
+					label: 'A nearby getaway where safety meets spring beauty',
+					elementId: 'a9d993fa-aa40-4f50-8ecf-973f0f659c99',
+					title: 'Croatia - Feeling of spring',
+					btnText: 'Find out more',
+					id: 'e51560aa-1a12-4e96-86ae-fbdc5fae7e01',
 				},
 			],
-			attributes: { pinned: false, keyEvent: false, summary: false },
-			blockCreatedOn: 1760017525000,
-			blockCreatedOnDisplay: '14.45 BST',
-			blockLastUpdated: 1759955522000,
-			blockLastUpdatedDisplay: '21.32 BST',
+			attributes: {
+				pinned: false,
+				keyEvent: false,
+				summary: false,
+			},
+			blockCreatedOn: 1776070843000,
+			blockCreatedOnDisplay: '10.00 BST',
+			blockLastUpdated: 1774609189000,
+			blockLastUpdatedDisplay: '10.59 GMT',
 			contributors: [],
-			primaryDateLine: 'Thu 9 Oct 2025 14.45 BST',
-			secondaryDateLine: 'Last modified on Thu 9 Oct 2025 14.45 BST',
+			primaryDateLine: 'Mon 13 Apr 2026 10.00 BST',
+			secondaryDateLine: 'Last modified on Mon 13 Apr 2026 10.00 BST',
 		},
 	],
 	author: {},
-	webPublicationDate: '2025-10-10T00:45:25.000+11:00',
-	webPublicationDateDeprecated: '2025-10-10T00:45:25.000+11:00',
-	webPublicationDateDisplay: 'Thu 9 Oct 2025 14.45 BST',
+	webPublicationDate: '2026-04-13T09:00:43.000Z',
+	webPublicationDateDeprecated: '2026-04-13T09:00:43.000Z',
+	webPublicationDateDisplay: 'Mon 13 Apr 2026 10.00 BST',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Thu 9 Oct 2025 14.45 BST',
+		'Last modified on Mon 13 Apr 2026 10.00 BST',
 	editionLongForm: 'UK edition',
 	editionId: 'UK',
-	pageId: 'advertiser-content/epic-games-safety/fortnite-101',
+	pageId: 'advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 	canonicalUrl:
-		'https://www.theguardian.com/advertiser-content/epic-games-safety/fortnite-101',
+		'https://www.theguardian.com/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 	format: {
 		design: 'HostedArticleDesign',
 		theme: 'Labs',
@@ -1237,11 +1279,15 @@ export const hostedArticle: FEArticle = {
 	designType: 'AdvertisementFeature',
 	tags: [
 		{
-			id: 'advertiser-content/epic-games-safety/epic-games-safety',
+			id: 'advertiser-content/feeling-of-spring/feeling-of-spring',
 			type: 'PaidContent',
-			title: 'Epic Games Safety',
+			title: 'Feeling of spring',
 		},
-		{ id: 'type/article', type: 'Type', title: 'Article' },
+		{
+			id: 'type/article',
+			type: 'Type',
+			title: 'Article',
+		},
 		{
 			id: 'tone/advertisement-features',
 			type: 'Tone',
@@ -1251,13 +1297,13 @@ export const hostedArticle: FEArticle = {
 	pillar: 'news',
 	isLegacyInteractive: false,
 	isImmersive: false,
-	sectionLabel: 'Epic Games Safety',
-	sectionUrl: 'advertiser-content/epic-games-safety',
-	sectionName: 'advertiser-content/epic-games-safety',
+	sectionLabel: 'Feeling of spring',
+	sectionUrl: 'advertiser-content/feeling-of-spring',
+	sectionName: 'advertiser-content/feeling-of-spring',
 	subMetaSectionLinks: [
 		{
-			url: '/advertiser-content/epic-games-safety',
-			title: 'Epic Games Safety',
+			url: '/advertiser-content/feeling-of-spring',
+			title: 'Feeling of spring',
 		},
 	],
 	subMetaKeywordLinks: [
@@ -1268,12 +1314,12 @@ export const hostedArticle: FEArticle = {
 	],
 	shouldHideAds: false,
 	isAdFreeUser: false,
-	webURL: 'https://www.theguardian.com/advertiser-content/epic-games-safety/fortnite-101',
+	webURL: 'https://www.theguardian.com/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 	linkedData: [
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/advertiser-content/epic-games-safety/fortnite-101',
+			'@id': 'https://www.theguardian.com/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1299,47 +1345,53 @@ export const hostedArticle: FEArticle = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/240_0_1440_1152/master/1440.jpg?width=700&quality=85&auto=format&fit=max&s=aac767ccaa436da6d5ef579e25223ee6',
-				'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/240_0_1440_1152/master/1440.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=4439c494bb7dbe6862bd78b5e7a544e5',
-				'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/240_0_1440_1152/master/1440.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=686a34e5736fea951e89ab75208937c1',
-				'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/240_0_1440_1152/master/1440.jpg?width=1200&quality=85&auto=format&fit=max&s=db58a8e3d5f1ca210b0fc3a2811b32ac',
+				'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=700&quality=85&auto=format&fit=max&s=45f259ee7124141becc146a423634dc7',
+				'https://assets-code.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
+				'https://assets-code.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
+				'https://assets-code.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
 			],
-			author: [{ '@type': 'Person', name: 'Guardian staff reporter' }],
-			datePublished: '2025-10-10T00:45:25.000+11:00',
-			headline: 'Fortnite 101',
-			dateModified: '2025-10-10T00:45:25.000+11:00',
+			author: [
+				{
+					'@type': 'Person',
+					name: 'Guardian staff reporter',
+				},
+			],
+			datePublished: '2026-04-13T09:00:43.000Z',
+			headline: 'Why scroll it when you can feel it',
+			dateModified: '2026-04-13T09:00:43.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/advertiser-content/epic-games-safety/fortnite-101',
+				'https://www.theguardian.com/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/advertiser-content/epic-games-safety/fortnite-101',
+			'@id': 'https://www.theguardian.com/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/advertiser-content/epic-games-safety/fortnite-101',
+				target: 'android-app://com.guardian/https/www.theguardian.com/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 			},
 		},
 	],
 	openGraphData: {
 		'og:url':
-			'https://www.theguardian.com/advertiser-content/epic-games-safety/fortnite-101',
+			'https://www.theguardian.com/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 		'article:author': 'Guardian Staff',
 		'og:image:width': '700',
 		'og:image':
-			'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/240_0_1440_1152/master/1440.jpg?width=700&quality=85&auto=format&fit=max&s=aac767ccaa436da6d5ef579e25223ee6',
+			'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=700&quality=85&auto=format&fit=max&s=45f259ee7124141becc146a423634dc7',
 		'al:ios:url':
-			'gnmguardian://advertiser-content/epic-games-safety/fortnite-101?contenttype=Article&source=applinks',
+			'gnmguardian://advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
-		'og:title': 'Fortnite 101',
-		'fb:app_id': '202314643182694',
-		'article:modified_time': '2025-10-10T00:45:25.000+11:00',
-		'og:image:height': '560',
-		'og:description': 'Everything A Parent Needs To Know',
+		'og:title': 'Why scroll it when you can feel it',
+		'fb:app_id': '157221981065719',
+		'article:modified_time': '2026-04-13T09:00:43.000Z',
+		'og:image:height': '175',
+		'og:description':
+			'In a world of artificially created experiences, Croatia invites you to reconnect with the real – smells, tastes, views and moments you can only live first-hand',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
-		'article:section': 'Epic Games Safety',
-		'article:published_time': '2025-10-10T00:45:25.000+11:00',
+		'article:section': 'Feeling of spring',
+		'article:published_time': '2026-04-13T09:00:43.000Z',
 		'article:tag': '',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
@@ -1353,22 +1405,21 @@ export const hostedArticle: FEArticle = {
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/advertiser-content/epic-games-safety/fortnite-101',
+			'guardian://www.theguardian.com/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 		'twitter:app:url:iphone':
-			'gnmguardian://advertiser-content/epic-games-safety/fortnite-101?contenttype=Article&source=twitter',
+			'gnmguardian://advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/240_0_1440_1152/master/1440.jpg?width=700&quality=85&auto=format&fit=max&s=aac767ccaa436da6d5ef579e25223ee6',
+			'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=700&quality=85&auto=format&fit=max&s=45f259ee7124141becc146a423634dc7',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://advertiser-content/epic-games-safety/fortnite-101?contenttype=Article&source=twitter',
+			'gnmguardian://advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it?contenttype=Article&source=twitter',
 	},
 	config: {
 		switches: {
 			prebidCriteo: true,
 			externalVideoEmbeds: false,
 			lightbox: true,
-			googleOneTapSwitch: false,
-			googleOneTap: false,
+			googleOneTapSwitch: true,
 			hideNewsletterSignupComponentForSubscribers: true,
 			prebidAppnexusUkRow: true,
 			prebidMagnite: true,
@@ -1381,17 +1432,15 @@ export const hostedArticle: FEArticle = {
 			manyNewsletterVisibleRecaptcha: false,
 			enableSentryReporting: true,
 			lazyLoadContainers: true,
-			enableHlsWeb: false,
-			ampArticleSwitch: true,
+			filterAtAGlance: true,
+			ampArticleSwitch: false,
 			remarketing: true,
-			tagPageStorylines: false,
 			articleEndSlot: true,
 			keyEventsCarousel: false,
 			registerWithPhone: true,
-			darkModeWeb: true,
 			targeting: true,
 			remoteHeader: true,
-			ampPrebidOzone: true,
+			ampPrebidOzone: false,
 			slotBodyEnd: true,
 			emailInlineInFooter: true,
 			showNewPrivacyWordingOnEmailSignupEmbeds: true,
@@ -1401,16 +1450,16 @@ export const hostedArticle: FEArticle = {
 			imrWorldwide: true,
 			acast: true,
 			twitterUwt: true,
-			abNoAuxiaSignInGate: false,
+			abNoAuxiaSignInGate: true,
 			prebidAppnexusInvcode: true,
-			ampPrebidPubmatic: true,
+			ampPrebidPubmatic: false,
 			a9HeaderBidding: true,
 			prebidAppnexus: true,
 			enableDiscussionSwitch: true,
 			prebidXaxis: true,
-			starRatingRedesign: false,
 			stickyVideos: true,
 			discussionAllPageSize: true,
+			showNewNewsletterSignupCard: true,
 			prebidUserSync: true,
 			audioOnwardJourneySwitch: false,
 			brazeTaylorReport: false,
@@ -1421,25 +1470,26 @@ export const hostedArticle: FEArticle = {
 			relatedContent: true,
 			thirdPartyEmbedTracking: false,
 			prebidOzone: true,
-			ampLiveblogSwitch: true,
+			ampLiveblogSwitch: false,
 			ampAmazon: true,
 			mostViewedFronts: true,
 			optOutAdvertising: true,
 			googleSearch: true,
 			brazeSwitch: true,
-			signInGate: false,
+			signInGate: true,
 			prebidKargo: true,
-			disableChildDirected: false,
-			abAdmiralAdblockRecovery: true,
+			disableChildDirected: true,
+			abAdmiralAdblockRecovery: false,
 			consentManagement: true,
-			productLeftColCards: false,
+			productLeftColCards: true,
 			personaliseSignInGateAfterCheckout: true,
 			idProfileNavigation: true,
 			confiantAdVerification: true,
 			discussionAllowAnonymousRecommendsSwitch: false,
 			permutive: true,
 			comscore: true,
-			ampPrebidCriteo: true,
+			ampPrebidCriteo: false,
+			prebidLiveramp: false,
 			prebidTheTradeDesk: true,
 			newsletterOnwards: false,
 			youtubeIma: true,
@@ -1462,77 +1512,265 @@ export const hostedArticle: FEArticle = {
 			historyTags: true,
 			brazeContentCards: true,
 			remoteBanner: true,
-			emailSignupRecaptcha: true,
+			emailSignupRecaptcha: false,
 			prebidSmart: true,
 			shouldLoadGoogletag: true,
 			inizio: true,
 		},
 		abTests: {},
-		serverSideABTests: {},
+		serverSideABTests: {
+			'thefilter-at-a-glance-redesign-v2': 'stacked-default',
+		},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
-		stage: 'DEV',
-		frontendAssetsFullURL: 'http://localhost:9000/assets/',
+		stage: 'CODE',
+		frontendAssetsFullURL: 'https://assets-code.guim.co.uk/',
 		ampIframeUrl:
-			'http://localhost:9000/assets/data/vendor/amp-iframe.html',
-		headline: 'Fortnite 101',
+			'https://assets-code.guim.co.uk/data/vendor/2533d5cb94302889e6a8f1b24b5329e7/amp-iframe.html',
+		tones: 'Advertisement features',
+		avatarApiUrl: 'https://avatar.code.dev-theguardian.com',
+		isSplash: false,
+		isColumn: false,
+		membershipUrl: 'https://membership.theguardian.com',
+		headline: 'Why scroll it when you can feel it',
+		isImmersive: false,
 		author: '',
 		toneIds: 'tone/advertisement-features',
 		ipsosTag: 'guardian',
-		webPublicationDate: 1760017525000,
+		isProd: false,
+		membershipAccess: '',
+		allowUserGeneratedContent: false,
+		commissioningDesks: '',
+		webPublicationDate: 1776070843000,
+		forecastsapiurl: '/weatherapi/forecast',
+		supportUrl: 'https://support.theguardian.com',
+		isNumberedList: false,
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/commercial/415d35be5f9cf7fdabe5/graun.standalone.commercial.js',
+			'https://assets-code.guim.co.uk/commercial/604f3dcff4a78f511bc7/graun.standalone.commercial.js',
+		idOAuthUrl: 'https://oauth.code.dev-theguardian.com',
+		webTitle: 'Why scroll it when you can feel it',
 		isPhotoEssay: false,
+		idWebAppUrl: 'https://oauth.code.dev-theguardian.com',
+		a9PublisherId: '3722',
+		isFront: false,
+		inBodyInternalLinkCount: 0,
+		googleSearchUrl: '//www.google.co.uk/cse/cse.js',
+		inBodyExternalLinkCount: 3,
 		showRelatedContent: false,
+		lightboxImages: {
+			id: 'advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
+			headline: 'Why scroll it when you can feel it',
+			shouldHideAdverts: false,
+			standfirst:
+				'<p>In a world of artificially created experiences, Croatia invites you to reconnect with the real – smells, tastes, views and moments you can only live first-hand</p>',
+			images: [
+				{
+					caption: 'Vis, Croatia. Photograph: Julien Duval',
+					credit: 'Photograph: Julien Duval',
+					displayCredit: true,
+					src: 'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=700&quality=85&auto=format&fit=max&s=45f259ee7124141becc146a423634dc7',
+					srcsets:
+						'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=1920&quality=85&auto=format&fit=max&s=86a64fbfc3ee2d8bf77a2779fdeea7db 1920w, https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=1225&quality=85&auto=format&fit=max&s=29af8a1b05129baa16f2ebc3f186cea5 1225w, https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=1065&quality=85&auto=format&fit=max&s=f27763174ab8a54ec7e7510b30d3623e 1065w, https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=965&quality=85&auto=format&fit=max&s=ad9c10df03b4abf9a34225dbb71eb5eb 965w, https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=725&quality=85&auto=format&fit=max&s=f5ce00a5a9b9ee1d97ff16d644344d17 725w, https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=645&quality=85&auto=format&fit=max&s=ea7a8c9eb21c3ef7d04ed025cfa905c8 645w, https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/master/1300.jpg?width=465&quality=85&auto=format&fit=max&s=24c807ab3ffd923df983c2c05d3b246c 465w',
+					sizes: '(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px',
+					ratio: 4,
+					role: 'None',
+					parentContentId:
+						'advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
+					id: 'advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
+				},
+				{
+					caption:
+						'The Paklinski Islands, a serene Adriatic archipelago, offer a secluded retreat for travellers seeking calm and beauty.',
+					credit: 'Photograph: Ajan Alen/Shutterstock',
+					displayCredit: true,
+					src: 'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=700&quality=85&auto=format&fit=max&s=8e534448cd2c62e577b9987d9141f520',
+					srcsets:
+						'https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=1920&quality=85&auto=format&fit=max&s=049ef478f24733cf1b73a84fac92e6f2 1920w, https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=1225&quality=85&auto=format&fit=max&s=1e0b712f73cf00a0c07e51e6a9b5841c 1225w, https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=1065&quality=85&auto=format&fit=max&s=d6a5b23b0c317ee8158ec1eadd25647f 1065w, https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=965&quality=85&auto=format&fit=max&s=92e7189aaf9deb7375b9dad939ee4359 965w, https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=725&quality=85&auto=format&fit=max&s=17c225bba9e04ed71487cddca7630662 725w, https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=645&quality=85&auto=format&fit=max&s=04cf14aec2b347c56f9d5173ce5948a2 645w, https://i.guim.co.uk/img/media/a89c07667b8288180758f59d1c2519f4eea13be1/0_0_4954_3300/master/4954.jpg?width=465&quality=85&auto=format&fit=max&s=c18fb19d698f5ac142fb596beb1b195a 465w',
+					sizes: '(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px',
+					ratio: 1.5012121212121212,
+					role: 'None',
+					parentContentId:
+						'advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
+					id: 'advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
+				},
+				{
+					caption:
+						'Soparnik prepared with fresh herbs, Croatia’s centuries-old culinary tradition.',
+					credit: 'Photograph: Maja Danica Pečanić',
+					displayCredit: true,
+					src: 'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=700&quality=85&auto=format&fit=max&s=6da7c1a679a811b0cf1b578e7bb66208',
+					srcsets:
+						'https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=1920&quality=85&auto=format&fit=max&s=7674a6d6a4f13e07d47b42dd44d989e6 1920w, https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=1225&quality=85&auto=format&fit=max&s=9e818d3c071a4c55a0d61af03bba1f33 1225w, https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=1065&quality=85&auto=format&fit=max&s=dba386589116fcb054ef393843b89d5b 1065w, https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=965&quality=85&auto=format&fit=max&s=94e198d96e2a3fce63d15d0f64c71f08 965w, https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=725&quality=85&auto=format&fit=max&s=4ccecbba6a3333ae15bcd2dcca58dcf4 725w, https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=645&quality=85&auto=format&fit=max&s=58cf0557fcae0215e0a34d4abf9fd3e8 645w, https://i.guim.co.uk/img/media/6a183be6328887af88cac6f750e558c473df8e5f/0_0_8688_5792/master/8688.jpg?width=465&quality=85&auto=format&fit=max&s=353ebfaf477465840e62fe00064541ea 465w',
+					sizes: '(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px',
+					ratio: 1.5,
+					role: 'None',
+					parentContentId:
+						'advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
+					id: 'advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
+				},
+				{
+					caption:
+						'The calm and timeless charm of Dubovica on Hvar island.',
+					credit: 'Photograph: Zoran Jelača',
+					displayCredit: true,
+					src: 'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=700&quality=85&auto=format&fit=max&s=94ac93d9f269a780ba81946eb5f6a03f',
+					srcsets:
+						'https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=1920&quality=85&auto=format&fit=max&s=359405f11c3e747c3b2a9c4dceaa4cc3 1920w, https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=1225&quality=85&auto=format&fit=max&s=b6873098431b828e0fb340dff89fd961 1225w, https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=1065&quality=85&auto=format&fit=max&s=d20d889d031504276cb357c438653327 1065w, https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=965&quality=85&auto=format&fit=max&s=ab8a0c874113b1b24f0517d5b9b8e235 965w, https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=725&quality=85&auto=format&fit=max&s=38ba67dad2ae6cfa8e780ff0bb99f00e 725w, https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=645&quality=85&auto=format&fit=max&s=9f9638f4af7f89357477f4b439762941 645w, https://i.guim.co.uk/img/media/7fd15ed5b105c636dec392def15fb1f07274be4d/0_0_6000_4000/master/6000.jpg?width=465&quality=85&auto=format&fit=max&s=3d938c47b5e78495a9b4bdf0ceb2af1c 465w',
+					sizes: '(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px',
+					ratio: 1.5,
+					role: 'None',
+					parentContentId:
+						'advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
+					id: 'advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
+				},
+			],
+		},
+		googleSearchId: '007466294097402385199:m2ealvuxh1i',
 		shouldHideReaderRevenue: true,
-		idUrl: 'https://profile.thegulocal.com',
+		idUrl: 'https://profile.code.dev-theguardian.com',
 		hasSurveyAd: false,
-		host: 'http://localhost:9000',
-		googleRecaptchaSiteKey: '6LcsAAodAAAAAC_HOsVfbpMF1tLcxyG1atxbtxIa',
-		shortUrlId: '/p/x2b33v',
+		omnitureAmpAccount: 'guardiangudev-code',
+		dfpAdUnitRoot: 'theguardian.com',
+		host: 'https://m.code.dev-theguardian.com',
+		blogIds: '',
+		sectionName: 'Feeling of spring',
+		hasMultipleVideosInPage: false,
+		hasShowcaseMainElement: false,
+		googleRecaptchaSiteKey: '6Lcdc18rAAAAADq2amatYZ6f1f5nVD07_VvSyPiN',
+		fbAppId: '157221981065719',
+		isContent: true,
+		shortUrlId: '/p/x4khga',
 		dfpAccountId: '59666047',
+		plistaPublicApiKey: '462925f4f131001fd974bebe',
+		wordCount: 586,
 		hasLiveBlogTopAd: false,
 		dcrSentryDsn:
 			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-		adUnit: '/59666047/theguardian.com/advertiser-content/epic-games-safety/article/ng',
+		cardStyle: 'news',
+		adUnit: '/59666047/theguardian.com/advertiser-content/feeling-of-spring/article/ng',
 		discussionApiUrl:
 			'https://discussion.code.dev-theguardian.com/discussion-api',
 		isSensitive: false,
+		ophanEmbedJsUrl: '//j.ophan.co.uk/ophan.embed',
 		edition: 'UK',
+		frontendSentryDsn:
+			'https://344003a8d11c41d8800fbad8383fdc50@o14302.ingest.us.sentry.io/35463',
 		brazeApiKey: '9d722c47-c889-49e7-b5d6-17e0a5956185',
+		blogs: '',
 		discussionApiClientHeader: 'nextgen-dev',
-		section: 'advertiser-content/epic-games-safety',
+		section: 'advertiser-content/feeling-of-spring',
+		userAttributesApiUrl:
+			'https://members-data-api.code.dev-theguardian.com/user-attributes',
 		videoDuration: 0,
+		disableStickyTopBanner: true,
+		dfpHost: 'pubads.g.doubleclick.net',
+		weatherapiurl: '/weatherapi/city',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
-		pageId: 'advertiser-content/epic-games-safety/fortnite-101',
+		shortUrl: 'https://www.theguardian.com/p/x4khga',
+		thumbnail:
+			'https://i.guim.co.uk/img/media/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/280_0_406_325/master/406.jpg?quality=85&auto=format&fit=max&s=a8c25c0932ba4b81c4a1e9342a4be96a',
+		pillar: '',
+		pageId: 'advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 		references: [],
+		beaconUrl: '//phar.gu-web.net',
+		commentable: false,
 		discussionD2Uid: 'zHoBy6HNKsk',
+		ophanJsUrl: '//j.ophan.co.uk/ophan.ng',
+		contributorBio: '',
 		keywordIds: '',
 		googleRecaptchaSiteKeyVisible:
 			'6LfZin8rAAAAAAvMlIx_dupDQKcBJ9hQVLclYd09',
 		contentType: 'Article',
 		isDev: true,
+		isHosted: true,
+		facebookIaAdUnitRoot: 'facebook-instant-articles',
+		sponsorshipType: 'paid-content',
+		isAdFree: false,
+		stripePublicToken: 'pk_test_Qm3CGRdrV4WfGYCpm0sftR0f',
+		omnitureAccount: 'guardiangudev-code',
+		locationapiurl: '/weatherapi/locations?query=',
+		authorIds: '',
 		isPaidContent: true,
-		ajaxUrl: 'http://localhost:9000',
+		hasYouTubeAtom: false,
+		externalEmbedHost: 'http://code.api.nextgen.guardianapps.co.uk/',
+		ajaxUrl: 'https://code.api.nextgen.guardianapps.co.uk',
+		byline: '',
 		keywords: '',
-		revisionNumber: 'a0f26041f01f9df1cc879cd484aff1837f998895',
-		mmaUrl: 'https://manage.theguardian.com',
+		contentId:
+			'advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
+		nonKeywordTagIds:
+			'advertiser-content/feeling-of-spring/feeling-of-spring,type/article,tone/advertisement-features',
+		mobileAppsAdUnitRoot: 'beta-guardian-app',
+		hasPageSkin: false,
+		requiresMembershipAccess: false,
+		revisionNumber: 'DEV',
+		optimizeEpicUrl:
+			'https://support.theguardian.com/epic/control/index.html',
+		assetsPath: 'https://assets-code.guim.co.uk/',
+		mmaUrl: 'https://manage.code.dev-theguardian.com',
 		isLive: false,
+		richLink: '',
+		campaigns: [],
 		isLiveBlog: false,
+		pageCode: '16881166',
+		avatarImagesUrl: 'https://avatar.guimcode.co.uk',
+		publication: 'theguardian.com',
 		sentryHost: 'app.getsentry.com/35463',
+		buildNumber: 'DEV',
+		atomTypes: {
+			review: false,
+			guide: false,
+			audio: false,
+			explainer: false,
+			interactive: false,
+			profile: false,
+			chart: false,
+			quizz: false,
+			callToAction: true,
+			commonsdivision: false,
+			timeline: false,
+			media: false,
+			qanda: false,
+		},
+		userBenefitsApiUrl:
+			'https://user-benefits.code.dev-guardianapis.com/benefits/me',
 		sharedAdTargeting: {
-			ct: 'article',
-			url: '/advertiser-content/epic-games-safety/fortnite-101',
+			sens: 'f',
+			url: '/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 			br: 'p',
 			su: ['0'],
 			edition: 'uk',
 			tn: ['advertisement-features'],
 			p: 'ng',
-			sh: 'https://www.theguardian.com/p/x2b33v',
+			sh: 'https://www.theguardian.com/p/x4khga',
+			ct: 'article',
+			s: 'advertiser-content/feeling-of-spring',
 		},
-		idApiUrl: 'https://id.code.dev-guardianapis.com',
+		onwardWebSocket:
+			'ws://code.api.nextgen.guardianapps.co.uk/recently-published',
+		productionOffice: 'Uk',
+		shouldHideAdverts: false,
+		idApiUrl: 'https://idapi.code.dev-theguardian.com',
+		pbIndexSites: [
+			{
+				bp: 'D',
+				id: 208283,
+			},
+			{
+				bp: 'M',
+				id: 213553,
+			},
+			{
+				bp: 'T',
+				id: 215488,
+			},
+		],
+		googletagJsUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
+		atoms: ['e51560aa-1a12-4e96-86ae-fbdc5fae7e01'],
+		calloutsUrl:
+			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
 		isPreview: false,
 	},
-	guardianBaseURL: 'http://localhost:9000',
+	guardianBaseURL: 'https://m.code.dev-theguardian.com',
 	contentType: 'Article',
 	hasRelated: false,
 	hasStoryPackage: false,
@@ -1541,142 +1779,357 @@ export const hostedArticle: FEArticle = {
 	commercialProperties: {
 		US: {
 			branding: {
-				brandingType: { name: 'paid-content' },
-				sponsorName: 'Epic Games',
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'Croatia NTB',
 				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/23/Sep/2025/ea4011f6-13e6-48a5-8e9a-07f6c8f68b58-epic-280-wide-logo.jpg',
-					dimensions: { width: 280, height: 328 },
-					link: 'https://safety.epicgames.com/en-US?lang=en-US',
+					src: 'https://static.theguardian.com/commercial/sponsor/27/Mar/2026/2bd1de6c-47ce-4152-9031-66ce0b1bd96f-croatia_pos_140.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
+					label: 'Paid for by',
+				},
+				logoForDarkBackground: {
+					src: 'https://static.theguardian.com/commercial/sponsor/27/Mar/2026/6f3bc0bd-41ef-4970-9cd7-c75fd1e8a0ce-croatia_pos_140.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
 					label: 'Paid for by',
 				},
 				aboutThisLink:
 					'https://www.theguardian.com/info/2016/jan/25/content-funding',
-				hostedCampaignColour: '#000000',
+				hostedCampaignColour: '#00428c',
 			},
 			adTargeting: [
-				{ name: 'su', value: ['0'] },
-				{ name: 'br', value: 'p' },
-				{ name: 'edition', value: 'us' },
-				{ name: 'ct', value: 'article' },
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'edition',
+					value: 'us',
+				},
 				{
 					name: 'url',
-					value: '/advertiser-content/epic-games-safety/fortnite-101',
+					value: '/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 				},
-				{ name: 'tn', value: ['advertisement-features'] },
-				{ name: 'p', value: 'ng' },
-				{ name: 'sh', value: 'https://www.theguardian.com/p/x2b33v' },
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/x4khga',
+				},
+				{
+					name: 'tn',
+					value: ['advertisement-features'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 's',
+					value: 'advertiser-content/feeling-of-spring',
+				},
+				{
+					name: 'br',
+					value: 'p',
+				},
+				{
+					name: 'sens',
+					value: 'f',
+				},
 			],
 		},
 		AU: {
 			branding: {
-				brandingType: { name: 'paid-content' },
-				sponsorName: 'Epic Games',
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'Croatia NTB',
 				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/23/Sep/2025/ea4011f6-13e6-48a5-8e9a-07f6c8f68b58-epic-280-wide-logo.jpg',
-					dimensions: { width: 280, height: 328 },
-					link: 'https://safety.epicgames.com/en-US?lang=en-US',
+					src: 'https://static.theguardian.com/commercial/sponsor/27/Mar/2026/2bd1de6c-47ce-4152-9031-66ce0b1bd96f-croatia_pos_140.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
+					label: 'Paid for by',
+				},
+				logoForDarkBackground: {
+					src: 'https://static.theguardian.com/commercial/sponsor/27/Mar/2026/6f3bc0bd-41ef-4970-9cd7-c75fd1e8a0ce-croatia_pos_140.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
 					label: 'Paid for by',
 				},
 				aboutThisLink:
 					'https://www.theguardian.com/info/2016/jan/25/content-funding',
-				hostedCampaignColour: '#000000',
+				hostedCampaignColour: '#00428c',
 			},
 			adTargeting: [
-				{ name: 'su', value: ['0'] },
-				{ name: 'br', value: 'p' },
-				{ name: 'edition', value: 'au' },
-				{ name: 'ct', value: 'article' },
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'edition',
+					value: 'au',
+				},
 				{
 					name: 'url',
-					value: '/advertiser-content/epic-games-safety/fortnite-101',
+					value: '/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 				},
-				{ name: 'tn', value: ['advertisement-features'] },
-				{ name: 'p', value: 'ng' },
-				{ name: 'sh', value: 'https://www.theguardian.com/p/x2b33v' },
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/x4khga',
+				},
+				{
+					name: 'tn',
+					value: ['advertisement-features'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 's',
+					value: 'advertiser-content/feeling-of-spring',
+				},
+				{
+					name: 'br',
+					value: 'p',
+				},
+				{
+					name: 'sens',
+					value: 'f',
+				},
 			],
 		},
 		UK: {
 			branding: {
-				brandingType: { name: 'paid-content' },
-				sponsorName: 'Epic Games',
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'Croatia NTB',
 				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/23/Sep/2025/ea4011f6-13e6-48a5-8e9a-07f6c8f68b58-epic-280-wide-logo.jpg',
-					dimensions: { width: 280, height: 328 },
-					link: 'https://safety.epicgames.com/en-US?lang=en-US',
+					src: 'https://static.theguardian.com/commercial/sponsor/27/Mar/2026/2bd1de6c-47ce-4152-9031-66ce0b1bd96f-croatia_pos_140.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
+					label: 'Paid for by',
+				},
+				logoForDarkBackground: {
+					src: 'https://static.theguardian.com/commercial/sponsor/27/Mar/2026/6f3bc0bd-41ef-4970-9cd7-c75fd1e8a0ce-croatia_pos_140.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
 					label: 'Paid for by',
 				},
 				aboutThisLink:
 					'https://www.theguardian.com/info/2016/jan/25/content-funding',
-				hostedCampaignColour: '#000000',
+				hostedCampaignColour: '#00428c',
 			},
 			adTargeting: [
-				{ name: 'su', value: ['0'] },
-				{ name: 'br', value: 'p' },
-				{ name: 'edition', value: 'uk' },
-				{ name: 'ct', value: 'article' },
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/x4khga',
+				},
+				{
+					name: 'tn',
+					value: ['advertisement-features'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 's',
+					value: 'advertiser-content/feeling-of-spring',
+				},
+				{
+					name: 'br',
+					value: 'p',
+				},
+				{
+					name: 'sens',
+					value: 'f',
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
 				{
 					name: 'url',
-					value: '/advertiser-content/epic-games-safety/fortnite-101',
+					value: '/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 				},
-				{ name: 'tn', value: ['advertisement-features'] },
-				{ name: 'p', value: 'ng' },
-				{ name: 'sh', value: 'https://www.theguardian.com/p/x2b33v' },
 			],
 		},
 		INT: {
 			branding: {
-				brandingType: { name: 'paid-content' },
-				sponsorName: 'Epic Games',
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'Croatia NTB',
 				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/23/Sep/2025/ea4011f6-13e6-48a5-8e9a-07f6c8f68b58-epic-280-wide-logo.jpg',
-					dimensions: { width: 280, height: 328 },
-					link: 'https://safety.epicgames.com/en-US?lang=en-US',
+					src: 'https://static.theguardian.com/commercial/sponsor/27/Mar/2026/2bd1de6c-47ce-4152-9031-66ce0b1bd96f-croatia_pos_140.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
+					label: 'Paid for by',
+				},
+				logoForDarkBackground: {
+					src: 'https://static.theguardian.com/commercial/sponsor/27/Mar/2026/6f3bc0bd-41ef-4970-9cd7-c75fd1e8a0ce-croatia_pos_140.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
 					label: 'Paid for by',
 				},
 				aboutThisLink:
 					'https://www.theguardian.com/info/2016/jan/25/content-funding',
-				hostedCampaignColour: '#000000',
+				hostedCampaignColour: '#00428c',
 			},
 			adTargeting: [
-				{ name: 'su', value: ['0'] },
-				{ name: 'br', value: 'p' },
-				{ name: 'ct', value: 'article' },
+				{
+					name: 'su',
+					value: ['0'],
+				},
 				{
 					name: 'url',
-					value: '/advertiser-content/epic-games-safety/fortnite-101',
+					value: '/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 				},
-				{ name: 'tn', value: ['advertisement-features'] },
-				{ name: 'edition', value: 'int' },
-				{ name: 'p', value: 'ng' },
-				{ name: 'sh', value: 'https://www.theguardian.com/p/x2b33v' },
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/x4khga',
+				},
+				{
+					name: 'tn',
+					value: ['advertisement-features'],
+				},
+				{
+					name: 'edition',
+					value: 'int',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 's',
+					value: 'advertiser-content/feeling-of-spring',
+				},
+				{
+					name: 'br',
+					value: 'p',
+				},
+				{
+					name: 'sens',
+					value: 'f',
+				},
 			],
 		},
 		EUR: {
 			branding: {
-				brandingType: { name: 'paid-content' },
-				sponsorName: 'Epic Games',
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'Croatia NTB',
 				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/23/Sep/2025/ea4011f6-13e6-48a5-8e9a-07f6c8f68b58-epic-280-wide-logo.jpg',
-					dimensions: { width: 280, height: 328 },
-					link: 'https://safety.epicgames.com/en-US?lang=en-US',
+					src: 'https://static.theguardian.com/commercial/sponsor/27/Mar/2026/2bd1de6c-47ce-4152-9031-66ce0b1bd96f-croatia_pos_140.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
+					label: 'Paid for by',
+				},
+				logoForDarkBackground: {
+					src: 'https://static.theguardian.com/commercial/sponsor/27/Mar/2026/6f3bc0bd-41ef-4970-9cd7-c75fd1e8a0ce-croatia_pos_140.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
 					label: 'Paid for by',
 				},
 				aboutThisLink:
 					'https://www.theguardian.com/info/2016/jan/25/content-funding',
-				hostedCampaignColour: '#000000',
+				hostedCampaignColour: '#00428c',
 			},
 			adTargeting: [
-				{ name: 'su', value: ['0'] },
-				{ name: 'br', value: 'p' },
-				{ name: 'ct', value: 'article' },
+				{
+					name: 'su',
+					value: ['0'],
+				},
 				{
 					name: 'url',
-					value: '/advertiser-content/epic-games-safety/fortnite-101',
+					value: '/advertiser-content/feeling-of-spring/why-scroll-it-when-you-can-feel-it',
 				},
-				{ name: 'edition', value: 'eur' },
-				{ name: 'tn', value: ['advertisement-features'] },
-				{ name: 'p', value: 'ng' },
-				{ name: 'sh', value: 'https://www.theguardian.com/p/x2b33v' },
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'edition',
+					value: 'eur',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/x4khga',
+				},
+				{
+					name: 'tn',
+					value: ['advertisement-features'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 's',
+					value: 'advertiser-content/feeling-of-spring',
+				},
+				{
+					name: 'br',
+					value: 'p',
+				},
+				{
+					name: 'sens',
+					value: 'f',
+				},
 			],
 		},
 	},
@@ -1689,9 +2142,10 @@ export const hostedArticle: FEArticle = {
 		isPreview: false,
 		isSensitive: false,
 	},
-	trailText: 'Everything A Parent Needs To Know',
+	trailText:
+		'In a world of artificially created experiences, Croatia invites you to reconnect with the real – smells, tastes, views and moments you can only live first-hand',
 	nav: {
-		currentUrl: '/advertiser-content/epic-games-safety',
+		currentUrl: '/advertiser-content/feeling-of-spring',
 		pillars: [
 			{
 				title: 'News',
@@ -1704,7 +2158,10 @@ export const hostedArticle: FEArticle = {
 						url: '/uk-news',
 						longTitle: 'UK news',
 						children: [
-							{ title: 'UK politics', url: '/politics' },
+							{
+								title: 'UK politics',
+								url: '/politics',
+							},
 							{
 								title: 'Education',
 								url: '/education',
@@ -1727,39 +2184,75 @@ export const hostedArticle: FEArticle = {
 									},
 								],
 							},
-							{ title: 'Media', url: '/media' },
-							{ title: 'Society', url: '/society' },
-							{ title: 'Law', url: '/law' },
-							{ title: 'Scotland', url: '/uk/scotland' },
-							{ title: 'Wales', url: '/uk/wales' },
+							{
+								title: 'Media',
+								url: '/media',
+							},
+							{
+								title: 'Society',
+								url: '/society',
+							},
+							{
+								title: 'Law',
+								url: '/law',
+							},
+							{
+								title: 'Scotland',
+								url: '/uk/scotland',
+							},
+							{
+								title: 'Wales',
+								url: '/uk/wales',
+							},
 							{
 								title: 'Northern Ireland',
 								url: '/uk/northernireland',
 							},
 						],
 					},
-					{ title: 'US politics', url: '/us-news/us-politics' },
+					{
+						title: 'US politics',
+						url: '/us-news/us-politics',
+					},
 					{
 						title: 'World',
 						url: '/world',
 						longTitle: 'World news',
 						children: [
-							{ title: 'Europe', url: '/world/europe-news' },
+							{
+								title: 'Europe',
+								url: '/world/europe-news',
+							},
 							{
 								title: 'US news',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
-							{ title: 'Americas', url: '/world/americas' },
-							{ title: 'Asia', url: '/world/asia' },
+							{
+								title: 'Americas',
+								url: '/world/americas',
+							},
+							{
+								title: 'Asia',
+								url: '/world/asia',
+							},
 							{
 								title: 'Australia',
 								url: '/australia-news',
 								longTitle: 'Australia news',
 							},
-							{ title: 'Middle East', url: '/world/middleeast' },
-							{ title: 'Africa', url: '/world/africa' },
-							{ title: 'Inequality', url: '/inequality' },
+							{
+								title: 'Middle East',
+								url: '/world/middleeast',
+							},
+							{
+								title: 'Africa',
+								url: '/world/africa',
+							},
+							{
+								title: 'Inequality',
+								url: '/inequality',
+							},
 							{
 								title: 'Global development',
 								url: '/global-development',
@@ -1770,8 +2263,14 @@ export const hostedArticle: FEArticle = {
 						title: 'Climate crisis',
 						url: '/environment/climate-crisis',
 					},
-					{ title: 'Middle East', url: '/world/middleeast' },
-					{ title: 'Ukraine', url: '/world/ukraine' },
+					{
+						title: 'Middle East',
+						url: '/world/middleeast',
+					},
+					{
+						title: 'Ukraine',
+						url: '/world/ukraine',
+					},
 					{
 						title: 'Football',
 						url: '/football',
@@ -1808,13 +2307,22 @@ export const hostedArticle: FEArticle = {
 							},
 						],
 					},
-					{ title: 'Newsletters', url: '/email-newsletters' },
+					{
+						title: 'Newsletters',
+						url: '/email-newsletters',
+					},
 					{
 						title: 'Business',
 						url: '/business',
 						children: [
-							{ title: 'Economics', url: '/business/economics' },
-							{ title: 'Banking', url: '/business/banking' },
+							{
+								title: 'Economics',
+								url: '/business/economics',
+							},
+							{
+								title: 'Banking',
+								url: '/business/banking',
+							},
 							{
 								title: 'Money',
 								url: '/money',
@@ -1827,8 +2335,14 @@ export const hostedArticle: FEArticle = {
 										title: 'Pensions',
 										url: '/money/pensions',
 									},
-									{ title: 'Savings', url: '/money/savings' },
-									{ title: 'Borrowing', url: '/money/debt' },
+									{
+										title: 'Savings',
+										url: '/money/savings',
+									},
+									{
+										title: 'Borrowing',
+										url: '/money/debt',
+									},
 									{
 										title: 'Careers',
 										url: '/money/work-and-careers',
@@ -1843,8 +2357,14 @@ export const hostedArticle: FEArticle = {
 								title: 'Project Syndicate',
 								url: '/business/series/project-syndicate-economists',
 							},
-							{ title: 'B2B', url: '/business-to-business' },
-							{ title: 'Retail', url: '/business/retail' },
+							{
+								title: 'B2B',
+								url: '/business-to-business',
+							},
+							{
+								title: 'Retail',
+								url: '/business/retail',
+							},
 						],
 					},
 					{
@@ -1855,19 +2375,40 @@ export const hostedArticle: FEArticle = {
 								title: 'Climate crisis',
 								url: '/environment/climate-crisis',
 							},
-							{ title: 'Wildlife', url: '/environment/wildlife' },
-							{ title: 'Energy', url: '/environment/energy' },
+							{
+								title: 'Wildlife',
+								url: '/environment/wildlife',
+							},
+							{
+								title: 'Energy',
+								url: '/environment/energy',
+							},
 							{
 								title: 'Pollution',
 								url: '/environment/pollution',
 							},
 						],
 					},
-					{ title: 'UK politics', url: '/politics' },
-					{ title: 'Science', url: '/science' },
-					{ title: 'Tech', url: '/technology' },
-					{ title: 'Global development', url: '/global-development' },
-					{ title: 'Obituaries', url: '/obituaries' },
+					{
+						title: 'UK politics',
+						url: '/politics',
+					},
+					{
+						title: 'Science',
+						url: '/science',
+					},
+					{
+						title: 'Tech',
+						url: '/technology',
+					},
+					{
+						title: 'Global development',
+						url: '/global-development',
+					},
+					{
+						title: 'Obituaries',
+						url: '/obituaries',
+					},
 				],
 			},
 			{
@@ -1876,14 +2417,26 @@ export const hostedArticle: FEArticle = {
 				longTitle: 'Opinion home',
 				iconName: 'home',
 				children: [
-					{ title: 'The Guardian view', url: '/profile/editorial' },
-					{ title: 'Columnists', url: '/index/contributors' },
-					{ title: 'Cartoons', url: '/tone/cartoons' },
+					{
+						title: 'The Guardian view',
+						url: '/profile/editorial',
+					},
+					{
+						title: 'Columnists',
+						url: '/uk/columnists',
+					},
+					{
+						title: 'Cartoons',
+						url: '/tone/cartoons',
+					},
 					{
 						title: 'Opinion videos',
 						url: '/type/video+tone/comment',
 					},
-					{ title: 'Letters', url: '/tone/letters' },
+					{
+						title: 'Letters',
+						url: '/tone/letters',
+					},
 				],
 			},
 			{
@@ -1928,16 +2481,46 @@ export const hostedArticle: FEArticle = {
 							},
 						],
 					},
-					{ title: 'Cricket', url: '/sport/cricket' },
-					{ title: 'Rugby union', url: '/sport/rugby-union' },
-					{ title: 'Tennis', url: '/sport/tennis' },
-					{ title: 'Cycling', url: '/sport/cycling' },
-					{ title: 'F1', url: '/sport/formulaone' },
-					{ title: 'Golf', url: '/sport/golf' },
-					{ title: 'Boxing', url: '/sport/boxing' },
-					{ title: 'Rugby league', url: '/sport/rugbyleague' },
-					{ title: 'Racing', url: '/sport/horse-racing' },
-					{ title: 'US sports', url: '/sport/us-sport' },
+					{
+						title: 'Cricket',
+						url: '/sport/cricket',
+					},
+					{
+						title: 'Rugby union',
+						url: '/sport/rugby-union',
+					},
+					{
+						title: 'Tennis',
+						url: '/sport/tennis',
+					},
+					{
+						title: 'Cycling',
+						url: '/sport/cycling',
+					},
+					{
+						title: 'F1',
+						url: '/sport/formulaone',
+					},
+					{
+						title: 'Golf',
+						url: '/sport/golf',
+					},
+					{
+						title: 'Boxing',
+						url: '/sport/boxing',
+					},
+					{
+						title: 'Rugby league',
+						url: '/sport/rugbyleague',
+					},
+					{
+						title: 'Racing',
+						url: '/sport/horse-racing',
+					},
+					{
+						title: 'US sports',
+						url: '/sport/us-sport',
+					},
 				],
 			},
 			{
@@ -1946,13 +2529,34 @@ export const hostedArticle: FEArticle = {
 				longTitle: 'Culture home',
 				iconName: 'home',
 				children: [
-					{ title: 'Film', url: '/film' },
-					{ title: 'Music', url: '/music' },
-					{ title: 'TV & radio', url: '/tv-and-radio' },
-					{ title: 'Books', url: '/books' },
-					{ title: 'Art & design', url: '/artanddesign' },
-					{ title: 'Stage', url: '/stage' },
-					{ title: 'Games', url: '/games' },
+					{
+						title: 'Film',
+						url: '/film',
+					},
+					{
+						title: 'Music',
+						url: '/music',
+					},
+					{
+						title: 'TV & radio',
+						url: '/tv-and-radio',
+					},
+					{
+						title: 'Books',
+						url: '/books',
+					},
+					{
+						title: 'Art & design',
+						url: '/artanddesign',
+					},
+					{
+						title: 'Stage',
+						url: '/stage',
+					},
+					{
+						title: 'Games',
+						url: '/games',
+					},
 					{
 						title: 'Classical',
 						url: '/music/classicalmusicandopera',
@@ -1965,27 +2569,60 @@ export const hostedArticle: FEArticle = {
 				longTitle: 'Lifestyle home',
 				iconName: 'home',
 				children: [
-					{ title: 'The Filter', url: '/uk/thefilter' },
-					{ title: 'Fashion', url: '/fashion' },
-					{ title: 'Food', url: '/food' },
-					{ title: 'Recipes', url: '/tone/recipes' },
+					{
+						title: 'The Filter',
+						url: '/uk/thefilter',
+					},
+					{
+						title: 'Fashion',
+						url: '/fashion',
+					},
+					{
+						title: 'Food',
+						url: '/food',
+					},
+					{
+						title: 'Recipes',
+						url: '/tone/recipes',
+					},
 					{
 						title: 'Travel',
 						url: '/travel',
 						children: [
-							{ title: 'UK', url: '/travel/uk' },
-							{ title: 'Europe', url: '/travel/europe' },
-							{ title: 'US', url: '/travel/usa' },
+							{
+								title: 'UK',
+								url: '/travel/uk',
+							},
+							{
+								title: 'Europe',
+								url: '/travel/europe',
+							},
+							{
+								title: 'US',
+								url: '/travel/usa',
+							},
 						],
 					},
 					{
 						title: 'Health & fitness',
 						url: '/lifeandstyle/health-and-wellbeing',
 					},
-					{ title: 'Women', url: '/lifeandstyle/women' },
-					{ title: 'Men', url: '/lifeandstyle/men' },
-					{ title: 'Love & sex', url: '/lifeandstyle/love-and-sex' },
-					{ title: 'Beauty', url: '/fashion/beauty' },
+					{
+						title: 'Women',
+						url: '/lifeandstyle/women',
+					},
+					{
+						title: 'Men',
+						url: '/lifeandstyle/men',
+					},
+					{
+						title: 'Love & sex',
+						url: '/lifeandstyle/love-and-sex',
+					},
+					{
+						title: 'Beauty',
+						url: '/fashion/beauty',
+					},
 					{
 						title: 'Home & garden',
 						url: '/lifeandstyle/home-and-garden',
@@ -1994,17 +2631,32 @@ export const hostedArticle: FEArticle = {
 						title: 'Money',
 						url: '/money',
 						children: [
-							{ title: 'Property', url: '/money/property' },
-							{ title: 'Pensions', url: '/money/pensions' },
-							{ title: 'Savings', url: '/money/savings' },
-							{ title: 'Borrowing', url: '/money/debt' },
+							{
+								title: 'Property',
+								url: '/money/property',
+							},
+							{
+								title: 'Pensions',
+								url: '/money/pensions',
+							},
+							{
+								title: 'Savings',
+								url: '/money/savings',
+							},
+							{
+								title: 'Borrowing',
+								url: '/money/debt',
+							},
 							{
 								title: 'Careers',
 								url: '/money/work-and-careers',
 							},
 						],
 					},
-					{ title: 'Cars', url: '/technology/motoring' },
+					{
+						title: 'Cars',
+						url: '/technology/motoring',
+					},
 				],
 			},
 		],
@@ -2013,18 +2665,42 @@ export const hostedArticle: FEArticle = {
 				title: 'The Guardian app',
 				url: 'https://app.adjust.com/16xt6hai',
 			},
-			{ title: 'Video', url: '/video' },
-			{ title: 'Podcasts', url: '/podcasts' },
-			{ title: 'Pictures', url: '/inpictures' },
-			{ title: 'Newsletters', url: '/email-newsletters' },
+			{
+				title: 'Video',
+				url: '/video',
+			},
+			{
+				title: 'Podcasts',
+				url: '/podcasts',
+			},
+			{
+				title: 'Pictures',
+				url: '/inpictures',
+			},
+			{
+				title: 'Newsletters',
+				url: '/email-newsletters',
+			},
 			{
 				title: "Today's paper",
 				url: '/theguardian',
 				children: [
-					{ title: 'Obituaries', url: '/obituaries' },
-					{ title: 'G2', url: '/theguardian/g2' },
-					{ title: 'Journal', url: '/theguardian/journal' },
-					{ title: 'Saturday', url: '/theguardian/saturday' },
+					{
+						title: 'Obituaries',
+						url: '/obituaries',
+					},
+					{
+						title: 'G2',
+						url: '/theguardian/g2',
+					},
+					{
+						title: 'Journal',
+						url: '/theguardian/journal',
+					},
+					{
+						title: 'Saturday',
+						url: '/theguardian/saturday',
+					},
 				],
 			},
 			{
@@ -2039,37 +2715,70 @@ export const hostedArticle: FEArticle = {
 				title: 'Crosswords',
 				url: '/crosswords',
 				children: [
-					{ title: 'Blog', url: '/crosswords/crossword-blog' },
-					{ title: 'Quick', url: '/crosswords/series/quick' },
+					{
+						title: 'Blog',
+						url: '/crosswords/crossword-blog',
+					},
+					{
+						title: 'Quick',
+						url: '/crosswords/series/quick',
+					},
 					{
 						title: 'Sunday quick',
 						url: '/crosswords/series/sunday-quick',
 					},
-					{ title: 'Mini', url: '/crosswords/series/mini-crossword' },
+					{
+						title: 'Mini',
+						url: '/crosswords/series/mini-crossword',
+					},
 					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
 					},
-					{ title: 'Quiptic', url: '/crosswords/series/quiptic' },
-					{ title: 'Cryptic', url: '/crosswords/series/cryptic' },
-					{ title: 'Prize', url: '/crosswords/series/prize' },
-					{ title: 'Genius', url: '/crosswords/series/genius' },
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
+					},
+					{
+						title: 'Cryptic',
+						url: '/crosswords/series/cryptic',
+					},
+					{
+						title: 'Prize',
+						url: '/crosswords/series/prize',
+					},
+					{
+						title: 'Genius',
+						url: '/crosswords/series/genius',
+					},
 					{
 						title: 'Weekend',
 						url: '/crosswords/series/weekend-crossword',
 					},
-					{ title: 'Special', url: '/crosswords/series/special' },
+					{
+						title: 'Special',
+						url: '/crosswords/series/special',
+					},
 				],
 			},
-			{ title: 'Wordiply', url: 'https://www.wordiply.com' },
+			{
+				title: 'Wordiply',
+				url: 'https://www.wordiply.com',
+			},
 			{
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
 			},
-			{ title: 'Tips', url: 'https://www.theguardian.com/tips' },
+			{
+				title: 'Tips',
+				url: 'https://www.theguardian.com/tips',
+			},
 		],
 		brandExtensions: [
-			{ title: 'Search jobs', url: 'https://jobs.theguardian.com' },
+			{
+				title: 'Search jobs',
+				url: 'https://jobs.theguardian.com',
+			},
 			{
 				title: 'Hire with Guardian Jobs',
 				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
@@ -2082,7 +2791,10 @@ export const hostedArticle: FEArticle = {
 				title: 'Live events',
 				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
 			},
-			{ title: 'About Us', url: '/about' },
+			{
+				title: 'About Us',
+				url: '/about',
+			},
 			{
 				title: 'Digital Archive',
 				url: 'https://theguardian.newspapers.com',

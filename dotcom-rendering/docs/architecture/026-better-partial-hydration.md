@@ -32,6 +32,6 @@ PRs #[3629](https://github.com/guardian/dotcom-rendering/pull/3629) & [#3784](ht
 To create a new island you now:
 
 1. Wrap you component on the server with `Island`.
-2. Add `.importable` to the component filename. Eg: `[MyThing].importable.tsx`
+2. Add `.island` to the component filename. Eg: `[MyThing].island.tsx`
 
 This is simpler to use, harder to make mistakes with and is certain to only ever send the data to the client that is required.

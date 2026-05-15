@@ -244,7 +244,9 @@ export const ScrollableCarousel = ({
 	const showNavigation = carouselLength > visibleCarouselSlidesOnTablet;
 
 	const scrollTo = (direction: 'left' | 'right') => {
-		if (!carouselRef.current) return;
+		if (!carouselRef.current) {
+			return;
+		}
 
 		const cardWidth =
 			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
@@ -268,7 +270,9 @@ export const ScrollableCarousel = ({
 	 */
 	const updateButtonVisibilityOnScroll = () => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
@@ -306,7 +310,9 @@ export const ScrollableCarousel = ({
 	 */
 	const scrollToCardOnFocus = () => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		/**
 		 * We know the carousel has focus,
@@ -325,7 +331,9 @@ export const ScrollableCarousel = ({
 		/**
 		 * If none of the cards in the carousel have focus, we don't change the carousel scroll position.
 		 */
-		if (focusedCarouselPosition === null) return;
+		if (focusedCarouselPosition === null) {
+			return;
+		}
 
 		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
 
@@ -354,7 +362,9 @@ export const ScrollableCarousel = ({
 
 	useEffect(() => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		carouselElement.addEventListener(
 			'scroll',

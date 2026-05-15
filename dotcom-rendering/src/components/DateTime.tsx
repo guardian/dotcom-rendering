@@ -2,7 +2,7 @@ import { isString, isUndefined } from '@guardian/libs';
 import { getEditionFromId } from '../lib/edition';
 import { useConfig } from './ConfigContext';
 import { Island } from './Island';
-import { RelativeTime } from './RelativeTime.importable';
+import { RelativeTime } from './RelativeTime.island';
 
 type Props = {
 	date: Date;

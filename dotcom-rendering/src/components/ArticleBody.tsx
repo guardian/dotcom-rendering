@@ -4,6 +4,7 @@ import {
 	headlineBold24,
 	remSpace,
 	textEgyptian17,
+	textSansBold20,
 } from '@guardian/source/foundations';
 import {
 	ArticleDesign,
@@ -21,7 +22,7 @@ import type { ServerSideTests, Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
-import { TableOfContents } from './TableOfContents.importable';
+import { TableOfContents } from './TableOfContents.island';
 import { textBlockStyles } from './TextBlockComponent';
 
 type Props = {
@@ -56,6 +57,7 @@ type Props = {
 	shouldHideAds: boolean;
 	serverTime?: number;
 	idApiUrl?: string;
+	accentColor?: string;
 };
 
 const globalOlStyles = () => css`
@@ -70,6 +72,13 @@ const globalOlStyles = () => css`
 			margin-right: ${remSpace[1]};
 			float: left;
 		}
+	}
+`;
+
+const hostedContentH2Styles = css`
+	h2 {
+		${textSansBold20};
+		margin-bottom: ${remSpace[2]};
 	}
 `;
 
@@ -92,6 +101,20 @@ const globalStrongStyles = css`
 const bodyPadding = css`
 	${between.tablet.and.desktop} {
 		padding-right: 80px;
+	}
+`;
+
+const hostedContentLinkStyles = (accentColor?: string) => css`
+	a:not([data-ignore='global-link-styling']) {
+		text-decoration: none;
+		border-bottom: 1px solid ${themePalette('--article-link-border')};
+		color: ${accentColor ?? themePalette('--article-link-text')};
+
+		:hover {
+			color: ${accentColor ?? themePalette('--article-link-text-hover')};
+			border-bottom: 1px solid
+				${accentColor ?? themePalette('--article-link-border-hover')};
+		}
 	}
 `;
 
@@ -141,10 +164,15 @@ export const ArticleBody = ({
 	shouldHideAds,
 	serverTime,
 	idApiUrl,
+	accentColor,
 }: Props) => {
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
 		format.design === ArticleDesign.Crossword;
+	const isHostedContent =
+		format.design === ArticleDesign.HostedArticle ||
+		format.design === ArticleDesign.HostedVideo ||
+		format.design === ArticleDesign.HostedGallery;
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 	const hasObserverPublicationTag = tags.find(
@@ -234,6 +262,10 @@ export const ArticleBody = ({
 					globalOlStyles(),
 					globalStrongStyles,
 					globalLinkStyles(),
+					isHostedContent && [
+						hostedContentH2Styles,
+						hostedContentLinkStyles(accentColor),
+					],
 				]}
 				lang={language}
 				dir={languageDirection}

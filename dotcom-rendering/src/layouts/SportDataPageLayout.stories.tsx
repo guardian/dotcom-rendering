@@ -24,16 +24,18 @@ export const Results = {
 			guardianBaseURL: 'https://www.theguardian.com',
 			editionId: 'UK',
 			config: footballData.config,
-			nav: extractNAV(footballData.nav),
 			pageFooter: footballData.pageFooter,
 			contributionsServiceUrl: 'https://contributions.guardianapis.com',
 			isAdFreeUser: false,
 		},
+		renderingTarget: 'Web',
+		nav: extractNAV(footballData.nav),
 	},
 } satisfies Story;
 
 export const Live = {
 	args: {
+		...Results.args,
 		sportData: {
 			...Results.args.sportData,
 			kind: 'FootballLiveScores',
@@ -43,6 +45,7 @@ export const Live = {
 
 export const Fixtures = {
 	args: {
+		...Results.args,
 		sportData: {
 			...Results.args.sportData,
 			kind: 'FootballFixtures',
@@ -52,6 +55,7 @@ export const Fixtures = {
 
 export const Tables = {
 	args: {
+		...Results.args,
 		sportData: {
 			...Results.args.sportData,
 			kind: 'FootballTables',
@@ -62,14 +66,16 @@ export const Tables = {
 
 export const CricketMatch = {
 	args: {
+		...Results.args,
 		sportData: {
 			...Results.args.sportData,
 			kind: 'CricketMatch',
 			match: {
-				...CricketScorecard.args,
-				innings: CricketScorecard.args.allInnings,
+				...CricketScorecard.input.args,
+				innings: CricketScorecard.input.args.allInnings,
 				venueName: 'The Oval',
 				competitionName: 'World Cup',
+				result: 'result',
 			},
 		},
 	},

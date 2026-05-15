@@ -9,8 +9,8 @@ import type { ReminderFields } from '@guardian/support-dotcom-components/dist/sh
 import type {
 	ArticleCounts,
 	ArticleCountType,
+	BannerChannel,
 	ConfigurableDesign,
-	SelectedAmountsVariant,
 	SeparateArticleCount,
 	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types';
@@ -46,7 +46,7 @@ export interface ContributionsReminderTracking {
 
 export interface BannerRenderedContent {
 	heading: JSX.Element | JSX.Element[] | null;
-	paragraphs: (JSX.Element | JSX.Element[])[];
+	paragraphs: Array<JSX.Element | JSX.Element[]>;
 	highlightedText?: JSX.Element | JSX.Element[] | null;
 	primaryCta: BannerEnrichedCta | null;
 	secondaryCta: BannerEnrichedSecondaryCta | null;
@@ -65,6 +65,7 @@ export interface BannerRenderProps {
 	onSignInClick?: () => void;
 	onCollapseClick: () => void;
 	onExpandClick: () => void;
+	bannerChannel: BannerChannel;
 	reminderTracking: ContributionsReminderTracking;
 	content: BannerTextContent;
 	countryCode?: string;
@@ -75,10 +76,9 @@ export interface BannerRenderProps {
 	countType?: ArticleCountType;
 	separateArticleCount?: boolean;
 	separateArticleCountSettings?: SeparateArticleCount;
-	choiceCardAmounts?: SelectedAmountsVariant;
 	choiceCardsSettings?: ChoiceCardsSettings;
 	tracking: Tracking;
-	submitComponentEvent?: (componentEvent: ComponentEvent) => void;
+	submitComponentEvent?: (componentEvent: ComponentEvent) => Promise<void>;
 	design?: ConfigurableDesign;
 	promoCodes?: string[];
 	isCollapsible?: boolean;

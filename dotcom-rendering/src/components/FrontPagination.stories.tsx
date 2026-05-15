@@ -1,11 +1,12 @@
+import preview from '../../.storybook/preview';
 import { FrontPagination } from './FrontPagination';
 
-export default {
+const meta = preview.meta({
 	component: FrontPagination,
 	title: 'Components/FrontPagination',
-};
+});
 
-export const tagPageHeader = () => {
+export const tagPageHeader = meta.story(() => {
 	return (
 		<>
 			<p>1st page, 10 total pages</p>
@@ -82,4 +83,4 @@ export const tagPageHeader = () => {
 			/>
 		</>
 	);
-};
+});

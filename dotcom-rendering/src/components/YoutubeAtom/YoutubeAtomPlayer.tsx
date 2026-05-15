@@ -1,5 +1,4 @@
 import { css, Global } from '@emotion/react';
-import type { Participations } from '@guardian/ab-core';
 import { buildImaAdTagUrl } from '@guardian/commercial-core';
 import type { ConsentState } from '@guardian/libs';
 import { log } from '@guardian/libs';
@@ -16,6 +15,7 @@ import { getAuthStatus } from '../../lib/identity';
 import type { CustomPlayEventDetail } from '../../lib/video';
 import {
 	customSelfHostedVideoPlayAudioEventName,
+	customYoutubePauseEventName,
 	customYoutubePlayEventName,
 } from '../../lib/video';
 import type { AdTargeting } from '../../types/commercial';
@@ -40,7 +40,7 @@ type Props = {
 	enableAds: boolean;
 	adTargeting: AdTargeting;
 	consentState: ConsentState;
-	abTestParticipations: Participations;
+	abTestParticipations: Record<string, string>;
 	renderingTarget: RenderingTarget;
 };
 
@@ -85,13 +85,13 @@ const fullscreenStyles = (id: string) => css`
 	iframe#${id} {
 		position: fixed;
 		top: 0;
-		/* override vw and vh with vsw and vsh if supported */
+		/* override vw and vh with svw and svh if supported */
+		/* stylelint-disable declaration-block-no-duplicate-properties */
 		width: 100vw;
 		height: 100vh;
-		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 		width: 100svw;
-		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 		height: 100svh;
+		/* stylelint-enable declaration-block-no-duplicate-properties */
 		z-index: ${getZIndex('youTubeFullscreen')};
 	}
 `;
@@ -159,12 +159,20 @@ const setAppsConfiguration = async (
 };
 
 /**
- * Dispatches a custom play event so that other players listening
- * for this event will stop playing
+ * Dispatch a custom play and pause event so that other components listening
+ * for this event can handle the video state
  */
 const dispatchCustomPlayEvent = (uniqueId: string) => {
 	document.dispatchEvent(
 		new CustomEvent(customYoutubePlayEventName, {
+			detail: { uniqueId },
+		}),
+	);
+};
+
+const dispatchCustomPauseEvent = (uniqueId: string) => {
+	document.dispatchEvent(
+		new CustomEvent(customYoutubePauseEventName, {
 			detail: { uniqueId },
 		}),
 	);
@@ -218,7 +226,9 @@ const createOnStateChangeListener =
 					msg: 'start play',
 					event,
 				});
-				for (const eventEmitter of eventEmitters) eventEmitter('play');
+				for (const eventEmitter of eventEmitters) {
+					eventEmitter('play');
+				}
 				progressEvents.hasSentPlayEvent = true;
 
 				/**
@@ -243,7 +253,9 @@ const createOnStateChangeListener =
 				const currentTime = player.getCurrentTime();
 				const duration = player.getDuration();
 
-				if (!duration || !currentTime) return;
+				if (!duration || !currentTime) {
+					return;
+				}
 
 				const percentPlayed = (currentTime / duration) * 100;
 
@@ -300,13 +312,17 @@ const createOnStateChangeListener =
 		}
 
 		if (event.data === YT.PlayerState.PAUSED) {
+			dispatchCustomPauseEvent(uniqueId);
+
 			log('dotcom', {
 				from: loggerFrom,
 				videoId,
 				msg: 'pause',
 				event,
 			});
-			for (const eventEmitter of eventEmitters) eventEmitter('pause');
+			for (const eventEmitter of eventEmitters) {
+				eventEmitter('pause');
+			}
 		}
 
 		if (event.data === YT.PlayerState.CUED) {
@@ -316,7 +332,9 @@ const createOnStateChangeListener =
 				msg: 'cued',
 				event,
 			});
-			for (const eventEmitter of eventEmitters) eventEmitter('cued');
+			for (const eventEmitter of eventEmitters) {
+				eventEmitter('cued');
+			}
 			progressEvents.hasSentPlayEvent = false;
 		}
 
@@ -324,13 +342,17 @@ const createOnStateChangeListener =
 			event.data === YT.PlayerState.ENDED &&
 			!progressEvents.hasSentEndEvent
 		) {
+			dispatchCustomPauseEvent(uniqueId);
+
 			log('dotcom', {
 				from: loggerFrom,
 				videoId,
 				msg: 'ended',
 				event,
 			});
-			for (const eventEmitter of eventEmitters) eventEmitter('end');
+			for (const eventEmitter of eventEmitters) {
+				eventEmitter('end');
+			}
 			progressEvents.hasSentEndEvent = true;
 			progressEvents.hasSentPlayEvent = false;
 		}
@@ -369,7 +391,7 @@ const createOnReadyListener =
 const createImaAdsRequestCallback = (
 	adTargeting: AdTargeting | undefined,
 	consentState: ConsentState,
-	abTestParticipations: Participations,
+	abTestParticipations: Record<string, string>,
 	isSignedIn: boolean,
 ) => {
 	const adTargetingEnabled = adTargeting && !adTargeting.disableAds;
@@ -385,7 +407,7 @@ const createImaAdsRequestCallback = (
 			adUnit,
 			customParams,
 			consentState,
-			clientSideParticipations: abTestParticipations,
+			abTestParticipations,
 			isSignedIn,
 		});
 		adsRenderingSettings.useStyledNonLinearAds = true;

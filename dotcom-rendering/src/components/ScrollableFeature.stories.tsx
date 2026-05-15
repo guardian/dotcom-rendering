@@ -1,6 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	audioTrails,
 	galleryTrails,
@@ -13,7 +12,7 @@ import {
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { FrontSection } from './FrontSection';
-import { ScrollableFeature } from './ScrollableFeature.importable';
+import { ScrollableFeature } from './ScrollableFeature.island';
 
 const imageUrls = [
 	'https://media.guim.co.uk/2d214bdf3ed8e014360e8fde41b471973e4bad44/948_2222_2703_3378/800.jpg',
@@ -85,7 +84,6 @@ const meta = {
 	render: (args) => (
 		<FrontSection
 			title="Scrollable feature"
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			containerLevel="Secondary"
 		>
@@ -102,13 +100,13 @@ export const Default = {};
 
 export const Media = {
 	args: {
-		trails: [galleryTrails[0], galleryTrails[1], audioTrails[0]],
+		trails: [galleryTrails[0], audioTrails[0], youtubeVideoTrails[0]],
 	},
 } satisfies Story;
 
 export const MoreMedia = {
 	args: {
-		trails: [audioTrails[1], youtubeVideoTrails[0], youtubeVideoTrails[1]],
+		trails: [galleryTrails[1], audioTrails[1], youtubeVideoTrails[1]],
 	},
 } satisfies Story;
 
@@ -121,12 +119,7 @@ export const SelfHostedVideo = {
 			title: string;
 			videos: DCRFrontCard[];
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={true}>
 				<ScrollableFeature {...args} trails={videos} />
 			</FrontSection>
 		);
@@ -143,6 +136,11 @@ export const SelfHostedVideo = {
 							mainMedia: {
 								...selfHostedLoopVideo45Card.mainMedia,
 								videoStyle: 'Cinemagraph',
+								image: {
+									...selfHostedLoopVideo45Card.mainMedia
+										.image,
+									aspectRatio: '4:5',
+								},
 							},
 						},
 					]}
@@ -157,6 +155,11 @@ export const SelfHostedVideo = {
 							mainMedia: {
 								...selfHostedLoopVideo916Card.mainMedia,
 								videoStyle: 'Cinemagraph',
+								image: {
+									...selfHostedLoopVideo916Card.mainMedia
+										.image,
+									aspectRatio: '9:16',
+								},
 							},
 						},
 					]}
@@ -171,6 +174,11 @@ export const SelfHostedVideo = {
 							mainMedia: {
 								...selfHostedLoopVideo53Card.mainMedia,
 								videoStyle: 'Cinemagraph',
+								image: {
+									...selfHostedLoopVideo53Card.mainMedia
+										.image,
+									aspectRatio: '5:3',
+								},
 							},
 						},
 					]}
@@ -193,7 +201,6 @@ export const WithPrimaryContainer = {
 	render: (args) => (
 		<FrontSection
 			title="Scrollable feature"
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			containerLevel="Primary"
 		>
@@ -225,7 +232,6 @@ export const WithSpecialPaletteVariations = {
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
 					title={containerPalette}
-					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
 					key={containerPalette}
 					containerPalette={containerPalette}

@@ -702,12 +702,17 @@ export const selfHostedLoopVideo54Card = {
 			{
 				mimeType: 'video/mp4',
 				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+				width: 500,
+				height: 400,
+				hasAudio: true,
 			},
 		],
+		aspectRatio: 5 / 4,
 		duration: 30,
-		width: 500,
-		height: 400,
-		image: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+		image: {
+			src: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+			aspectRatio: '5:4',
+		},
 	},
 	image: {
 		src: 'https://media.guim.co.uk/966bf085fb982b1103aaba42a812b09726cc0a3c/1417_104_1378_1104/master/1378.jpg',
@@ -725,10 +730,16 @@ export const selfHostedLoopVideo45Card = {
 			{
 				mimeType: 'video/mp4',
 				src: 'https://uploads.guim.co.uk/2025/11/27/4_5_Test--1d34df3e-8c92-4090-8bb6-d79fc7fb9467-1.0.mp4',
+				width: 576,
+				height: 720,
+				hasAudio: true,
 			},
 		],
-		width: 576,
-		height: 720,
+		aspectRatio: 4 / 5,
+		image: {
+			...selfHostedLoopVideo54Card.mainMedia.image,
+			aspectRatio: '4:5',
+		},
 	},
 } satisfies DCRFrontCard;
 
@@ -741,10 +752,16 @@ export const selfHostedLoopVideo53Card = {
 			{
 				mimeType: 'video/mp4',
 				src: 'https://uploads.guim.co.uk/2025/11/27/5_3_Test--26763e61-c16b-4c10-8c16-3f11882da154-1.0.mp4',
+				width: 1200,
+				height: 720,
+				hasAudio: true,
 			},
 		],
-		width: 1200,
-		height: 720,
+		aspectRatio: 5 / 3,
+		image: {
+			...selfHostedLoopVideo54Card.mainMedia.image,
+			aspectRatio: '5:3',
+		},
 	},
 } satisfies DCRFrontCard;
 
@@ -757,10 +774,16 @@ export const selfHostedLoopVideo916Card = {
 			{
 				mimeType: 'video/mp4',
 				src: 'https://uploads.guimcode.co.uk/2025/11/12/5x4_test--ee49513c-bf16-4321-a444-09c9a037d584-4.0.mp4',
+				width: 406,
+				height: 720,
+				hasAudio: true,
 			},
 		],
-		width: 406,
-		height: 720,
+		aspectRatio: 9 / 16,
+		image: {
+			...selfHostedLoopVideo54Card.mainMedia.image,
+			aspectRatio: '9:16',
+		},
 	},
 } satisfies DCRFrontCard;
 
@@ -773,10 +796,16 @@ export const selfHostedLoopVideo169Card = {
 			{
 				mimeType: 'video/mp4',
 				src: 'https://uploads.guim.co.uk/2026/01/02/Social_media_footage_shows_person_trying_to_put_out_flames_in_Crans-Montana_bar___video--77ec00d2-7e58-4698-898c-08174f65a94b-1.0.mp4',
+				width: 1280,
+				height: 720,
+				hasAudio: true,
 			},
 		],
-		width: 1280,
-		height: 720,
+		aspectRatio: 16 / 9,
+		image: {
+			...selfHostedLoopVideo54Card.mainMedia.image,
+			aspectRatio: '16:9',
+		},
 	},
 } satisfies DCRFrontCard;
 

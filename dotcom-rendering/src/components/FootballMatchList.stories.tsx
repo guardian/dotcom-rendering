@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, userEvent, within } from 'storybook/test';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import {
 	initialDays,
 	moreDays,
@@ -9,7 +9,7 @@ import {
 import { error, ok } from '../lib/result';
 import { FootballMatchList } from './FootballMatchList';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Football Match List',
 	component: FootballMatchList,
 	decorators: [
@@ -30,13 +30,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof FootballMatchList>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		now: '2025-03-24T15:53:12.604Z',
 		edition: 'US',
@@ -69,11 +65,11 @@ export const Default = {
 			void expect(newDays.length).toBeGreaterThan(initialDays.length);
 		}
 	},
-} satisfies Story;
+});
 
-export const ErrorGettingMore = {
+export const ErrorGettingMore = meta.story({
 	args: {
-		...Default.args,
+		...Default.input.args,
 		getMoreDays: () => Promise.resolve(error('failed')),
 	},
 	play: async ({ canvasElement }) => {
@@ -95,11 +91,11 @@ export const ErrorGettingMore = {
 			);
 		}
 	},
-} satisfies Story;
+});
 
-export const NoMoreDays = {
+export const NoMoreDays = meta.story({
 	args: {
-		...Default.args,
+		...Default.input.args,
 		getMoreDays: undefined,
 	},
-} satisfies Story;
+});

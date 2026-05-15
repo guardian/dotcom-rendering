@@ -66,7 +66,13 @@ storybook-dev: clear clean-dist install
 	$(call log, "starting Storybook DEV server")
 	@pnpm storybook
 
+storybook-dev-proxy: clear clean-dist install
+	$(call log, "starting Storybook DEV reverse proxy server")
+	@pnpm storybook-proxy
+
 storybook: storybook-dev
+
+storybook-proxy: storybook-dev-proxy
 
 # tests #####################################
 

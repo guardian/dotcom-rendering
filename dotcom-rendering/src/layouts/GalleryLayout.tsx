@@ -7,17 +7,17 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
-import { AdPortals } from '../components/AdPortals.importable';
+import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot } from '../components/AdSlot.web';
 import { AffiliateDisclaimerGallery } from '../components/AffiliateDisclaimer';
-import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { FetchMoreGalleriesData } from '../components/FetchMoreGalleriesData.importable';
+import { FetchMoreGalleriesData } from '../components/FetchMoreGalleriesData.island';
 import { Footer } from '../components/Footer';
 import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
@@ -26,13 +26,13 @@ import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
-import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { ScrollableSmallOnwards } from '../components/ScrollableSmallOnwards';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
 import {
@@ -123,6 +123,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					config={frontendData.config}
 					contributionsServiceUrl={contributionsServiceUrl}
 					pageId={frontendData.pageId}
+					tagIds={frontendData.tags.map((tag) => tag.id)}
 				/>
 			) : null}
 			<GalleryLabsHeader
@@ -378,6 +379,7 @@ const BannerAndMasthead = (props: {
 	config: ConfigType;
 	contributionsServiceUrl: string;
 	pageId: string | undefined;
+	tagIds?: string[];
 }) => (
 	<div data-print-layout="hide" id="bannerandheader">
 		{props.renderAds ? (
@@ -406,6 +408,9 @@ const BannerAndMasthead = (props: {
 			hasPageSkin={false}
 			hasPageSkinContentSelfConstrain={false}
 			pageId={props.pageId}
+			tagIds={props.tagIds}
+			sectionId={props.config.section}
+			contentType={props.config.contentType}
 		/>
 	</div>
 );
@@ -518,10 +523,7 @@ const Body = (props: {
 					element._type !==
 						'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
 			)
-			/* eslint-disable-next-line array-callback-return -- ESLint bug,
-			 * this function does contain `return` statements. TypeScript will
-			 * confirm the switch is exhaustive, but it's possible ESLint does
-			 * not know this. */
+
 			.map((element) => {
 				switch (element._type) {
 					case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -543,6 +545,8 @@ const Body = (props: {
 								key={element.adPosition}
 							/>
 						);
+					default:
+						return null;
 				}
 			})}
 	</>

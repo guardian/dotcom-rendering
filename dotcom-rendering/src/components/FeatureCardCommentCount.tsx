@@ -3,7 +3,7 @@ import { Link } from '@guardian/source/react-components';
 import { getZIndex } from '../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../lib/useCommentCount';
 import { palette } from '../palette';
-import { CardCommentCount } from './CardCommentCount.importable';
+import { CardCommentCount } from './CardCommentCount.island';
 import { Island } from './Island';
 
 type Props = {

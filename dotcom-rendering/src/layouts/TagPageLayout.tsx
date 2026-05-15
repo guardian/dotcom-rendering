@@ -1,7 +1,7 @@
 import { isUndefined, joinUrl } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
 import { Fragment } from 'react';
-import { Accessibility } from '../components/Accessibility.importable';
+import { Accessibility } from '../components/Accessibility.island';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { Footer } from '../components/Footer';
@@ -15,9 +15,8 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { StorylinesSectionContent } from '../components/StorylinesSectionContent.importable';
-import { SubNav } from '../components/SubNav.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
+import { SubNav } from '../components/SubNav.island';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -96,6 +95,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					showSlimNav={false}
 					hasPageSkin={hasPageSkin}
 					pageId={pageId}
+					tagIds={tagPage.tags.map((tag) => tag.properties.id)}
+					sectionId={tagPage.config.section}
+					contentType={contentType}
 				/>
 			</div>
 
@@ -137,12 +139,21 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						  )
 						: undefined;
 
-					// AIStorylines logic to determine where to insert the section
-					const insertStorylinesSection =
-						tagPage.storylinesContent &&
-						(!tagPage.pagination ||
-							tagPage.pagination.currentPage === 1) && // Only on the first page
-						(index === 1 || tagPage.groupedTrails.length === 1); // After the first section or if there's only one section on the page
+					/**
+					 * The pagination should appear at the bottom of the page; this is done by passing to FrontSection.
+					 */
+					const isLastGroup =
+						index === tagPage.groupedTrails.length - 1;
+					const hasPagination = !!tagPage.pagination;
+					const isSingleGroup = tagPage.groupedTrails.length === 1;
+					const shouldSuppressPagination = isSingleGroup;
+
+					const tagPagePagination =
+						isLastGroup &&
+						hasPagination &&
+						!shouldSuppressPagination
+							? tagPage.pagination
+							: undefined;
 
 					return (
 						<Fragment key={containerId}>
@@ -155,22 +166,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									)}
 								/>
 							)}
-							{insertStorylinesSection &&
-								tagPage.storylinesContent && (
-									<Island priority="critical">
-										<StorylinesSectionContent
-											index={1}
-											editionId={tagPage.editionId}
-											storylinesContent={
-												tagPage.storylinesContent
-											}
-											containerId="storylines"
-											pillar={
-												tagPage.nav.currentPillarTitle
-											}
-										/>
-									</Island>
-								)}
+
 							<FrontSection
 								title={title}
 								url={url}
@@ -185,23 +181,13 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								toggleable={false}
 								pageId={tagPage.pageId}
 								editionId={tagPage.editionId}
-								canShowMore={false}
-								ajaxUrl={tagPage.config.ajaxUrl}
-								pagination={
-									index === tagPage.groupedTrails.length - 1
-										? tagPage.pagination
-										: undefined
-								}
-								discussionApiUrl={
-									tagPage.config.discussionApiUrl
-								}
+								pagination={tagPagePagination}
 							>
 								<DecideContainerByTrails
 									trails={groupedTrails.trails}
 									speed={tagPage.speed}
 									imageLoading={imageLoading}
-									isTagPage={true}
-									aspectRatio={'5:4'}
+									aspectRatio="5:4"
 								/>
 							</FrontSection>
 							{mobileAdPositions.includes(index) && (

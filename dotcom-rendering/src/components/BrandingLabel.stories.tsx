@@ -1,7 +1,7 @@
-import type { Meta } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { BrandingLabel } from './BrandingLabel';
 
-const meta: Meta<typeof BrandingLabel> = {
+const meta = preview.meta({
 	component: BrandingLabel,
 	title: 'Components/BrandingLabel',
 	parameters: {
@@ -34,34 +34,32 @@ const meta: Meta<typeof BrandingLabel> = {
 			aboutThisLink: '#about',
 		},
 	},
-};
+});
 
-export default meta;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		isLabs: false,
 	},
-};
+});
 
-export const LabsHorizontalOrientation = {
+export const LabsHorizontalOrientation = meta.story({
 	args: {
 		isLabs: true,
 		orientation: 'horizontal',
 	},
-};
+});
 
-export const LabsVerticalOrientation = {
+export const LabsVerticalOrientation = meta.story({
 	args: {
 		isLabs: true,
 		orientation: 'vertical',
 	},
-};
+});
 
-export const LabsVerticalRightAlignment = {
+export const LabsVerticalRightAlignment = meta.story({
 	args: {
 		isLabs: true,
 		orientation: 'vertical',
 		alignment: 'end',
 	},
-};
+});

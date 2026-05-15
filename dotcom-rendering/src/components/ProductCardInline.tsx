@@ -196,6 +196,7 @@ export const ProductCardInline = ({
 					format={format}
 					image={image}
 					url={productCtas[0]?.url}
+					xCustComponentId={'inline-image'}
 				/>
 			</div>
 			<div css={productInfoContainer}>
@@ -214,7 +215,10 @@ export const ProductCardInline = ({
 				)}
 			</div>
 			<div css={buttonWrapper}>
-				<ProductCardButtons productCtas={productCtas} />
+				<ProductCardButtons
+					xCustComponentId={'inline'}
+					productCtas={productCtas}
+				/>
 			</div>
 			{hasCustomAttributes && (
 				<div css={customAttributesContainer}>

@@ -100,6 +100,9 @@
                     "$ref": "#/definitions/CalloutBlockElementV2"
                 },
                 {
+                    "$ref": "#/definitions/CallToActionAtomBlockElement"
+                },
+                {
                     "$ref": "#/definitions/ReporterCalloutBlockElement"
                 },
                 {
@@ -1041,6 +1044,46 @@
                 "value"
             ]
         },
+        "CallToActionAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.CallToActionAtomBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "trackingCode": {
+                    "type": "string"
+                },
+                "btnText": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "id",
+                "title",
+                "url"
+            ]
+        },
         "ReporterCalloutBlockElement": {
             "type": "object",
             "properties": {
@@ -1706,6 +1749,9 @@
                             "type": "string"
                         }
                     }
+                },
+                "hasAudio": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -2297,6 +2343,9 @@
                 },
                 "videoPlayerFormat": {
                     "$ref": "#/definitions/VideoPlayerFormat"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -2498,10 +2547,19 @@
                         "group": {
                             "type": "string"
                         },
+                        "category": {
+                            "type": "string"
+                        },
                         "regionFocus": {
                             "type": "string"
                         },
                         "illustrationCard": {
+                            "type": "string"
+                        },
+                        "illustrationSquare": {
+                            "type": "string"
+                        },
+                        "exampleUrl": {
                             "type": "string"
                         }
                     },
@@ -4210,7 +4268,8 @@
                 "variant": {
                     "enum": [
                         "carousel",
-                        "stacked"
+                        "stacked-default",
+                        "stacked-expanded"
                     ],
                     "type": "string"
                 }

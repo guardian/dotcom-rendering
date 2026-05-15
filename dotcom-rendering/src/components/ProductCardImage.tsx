@@ -9,12 +9,14 @@ interface ProductCardImageProps extends HTMLAttributes<HTMLDivElement> {
 	format: ArticleFormat;
 	image?: ProductImage;
 	url?: string;
+	xCustComponentId?: string;
 }
 
 export const ProductCardImage = ({
 	format,
 	image,
 	url,
+	xCustComponentId,
 }: ProductCardImageProps) => {
 	if (!image) {
 		return null;
@@ -40,6 +42,7 @@ export const ProductCardImage = ({
 					target="_blank"
 					rel="noopener noreferrer"
 					data-link-name="product image link"
+					data-x-cust-component-id={xCustComponentId}
 					// this is needed to override global style
 					// html:not(.src-focus-disabled) *:focus
 					// it has specificity(0, 2, 1) so we need (0, 3, 0)

@@ -34,8 +34,6 @@ const generateAbTestArray = (
 	abTestName: string,
 	abTestVariant: string,
 	targetingAbTest?: TargetingAbTest,
-	amountsAbTestName?: string,
-	amountsAbTestVariant?: string,
 ): AbTestObject[] => {
 	const abTests: AbTestObject[] = [
 		{
@@ -47,13 +45,6 @@ const generateAbTestArray = (
 		abTests.push({
 			name: targetingAbTest.testName,
 			variant: targetingAbTest.variantName,
-		});
-	}
-	if (amountsAbTestName && amountsAbTestVariant) {
-		abTests.push({
-			name: amountsAbTestName,
-			variant: amountsAbTestVariant,
-			testType: 'AMOUNTS_TEST',
 		});
 	}
 	return abTests;
@@ -95,18 +86,11 @@ const generateQueryString = (
 	return queryString.join('&');
 };
 
-const addTrackingParams = (
-	baseUrl: string,
-	params: Tracking,
-	amountsAbTestName?: string,
-	amountsAbTestVariant?: string,
-): string => {
+const addTrackingParams = (baseUrl: string, params: Tracking): string => {
 	const abTests = generateAbTestArray(
 		params.abTestName,
 		params.abTestVariant,
 		params.targetingAbTest,
-		amountsAbTestName,
-		amountsAbTestVariant,
 	);
 	const acquisitionData = encodeAcquisitionsData(params, abTests);
 	const queryString = generateQueryString(params, acquisitionData);
@@ -166,8 +150,6 @@ interface SupportUrlData {
 	tracking: Tracking; // tracking data to be added to the querystring
 	promoCodes: string[]; // any promo codes, to be added in the promoCodes parameter
 	countryCode?: string; // browser's country code
-	amountsAbTestName?: string; // amounts test name if applicable
-	amountsAbTestVariant?: string; // amounts test variant name if applicable
 }
 
 export const enrichSupportUrl = ({
@@ -175,20 +157,13 @@ export const enrichSupportUrl = ({
 	tracking,
 	promoCodes,
 	countryCode,
-	amountsAbTestName,
-	amountsAbTestVariant,
 }: SupportUrlData): string => {
 	if (!isSupportUrl(baseUrl)) {
 		return baseUrl;
 	}
 	const urlWithRegion = addRegionIdToSupportUrl(baseUrl, countryCode);
 
-	const withTracking = addTrackingParams(
-		urlWithRegion,
-		tracking,
-		amountsAbTestName,
-		amountsAbTestVariant,
-	);
+	const withTracking = addTrackingParams(urlWithRegion, tracking);
 
 	return addPromoCodesToUrl(withTracking, promoCodes);
 };
@@ -282,6 +257,33 @@ export const addChoiceCardsProductParams = (
 	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParams}`;
 };
 
+const addChoiceCardDestinationTestParam = (
+	url: string,
+	destination: ChoiceCard['destination'],
+	destinationTest: ChoiceCard['destinationTest'],
+): string => {
+	if (!destinationTest || typeof destinationTest !== 'object') {
+		return url;
+	}
+	const parsedDestinationTest = destinationTest as Record<string, unknown>;
+	if (
+		typeof parsedDestinationTest.testName !== 'string' ||
+		typeof parsedDestinationTest.variantName !== 'string'
+	) {
+		return url;
+	}
+
+	const { testName, variantName } = parsedDestinationTest;
+	const paramKey =
+		destination === 'LandingPage'
+			? 'force-landing-page'
+			: 'force-one-time-checkout';
+	const newParam = `${paramKey}=${testName}:${variantName}`;
+	const alreadyHasQueryString = url.includes('?');
+
+	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParam}`;
+};
+
 export const isProfileUrl = (baseUrl: string): boolean =>
 	/\bprofile\./.test(baseUrl);
 export const addTrackingParamsToProfileUrl = (
@@ -298,19 +300,32 @@ const SupportUrl = 'https://support.theguardian.com';
 export const getChoiceCardUrl = (choiceCard: ChoiceCard): string => {
 	const { product } = choiceCard;
 	const destination = choiceCard.destination ?? 'LandingPage';
+	const { destinationTest } = choiceCard;
 
 	if (product.supportTier === 'OneOff') {
 		if (destination === 'LandingPage') {
-			return addChoiceCardsOneTimeParams(`${SupportUrl}/contribute`);
+			return addChoiceCardDestinationTestParam(
+				addChoiceCardsOneTimeParams(`${SupportUrl}/contribute`),
+				destination,
+				destinationTest,
+			);
 		} else {
-			return `${SupportUrl}/one-time-checkout`;
+			return addChoiceCardDestinationTestParam(
+				`${SupportUrl}/one-time-checkout`,
+				destination,
+				destinationTest,
+			);
 		}
 	} else {
 		const path = destination === 'LandingPage' ? 'contribute' : 'checkout';
-		return addChoiceCardsProductParams(
-			`${SupportUrl}/${path}`,
-			product.supportTier,
-			product.ratePlan,
+		return addChoiceCardDestinationTestParam(
+			addChoiceCardsProductParams(
+				`${SupportUrl}/${path}`,
+				product.supportTier,
+				product.ratePlan,
+			),
+			destination,
+			destinationTest,
 		);
 	}
 };

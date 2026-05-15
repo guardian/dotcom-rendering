@@ -2696,7 +2696,11 @@ const captionTextLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleSpecial.Labs:
 			switch (design) {
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					return sourcePalette.neutral[86];
+				case ArticleDesign.HostedArticle:
+				case ArticleDesign.HostedVideo:
+					return sourcePalette.neutral[46];
 				default:
 					return sourcePalette.neutral[20];
 			}
@@ -3431,7 +3435,13 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return transparentColour(sourcePalette.neutral[60], 0.3);
 		case ArticleSpecial.Labs:
-			return sourcePalette.neutral[60];
+			switch (design) {
+				case ArticleDesign.HostedArticle:
+				case ArticleDesign.HostedVideo:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[60];
+			}
 		default:
 			switch (design) {
 				case ArticleDesign.Picture:
@@ -3480,7 +3490,15 @@ const straightLinesLight: PaletteFunction = (format) => {
 	) {
 		return transparentColour(sourcePalette.neutral[60], 0.5);
 	}
-	if (format.theme === ArticleSpecial.Labs) return sourcePalette.neutral[60];
+	if (format.theme === ArticleSpecial.Labs) {
+		if (
+			format.design === ArticleDesign.HostedArticle ||
+			format.design === ArticleDesign.HostedVideo
+		) {
+			return sourcePalette.neutral[86];
+		}
+		return sourcePalette.neutral[60];
+	}
 	return sourcePalette.neutral[86];
 };
 
@@ -5146,7 +5164,7 @@ const privacyTextSupportingLight: PaletteFunction = () =>
 const privacyTextSupportingSubduedLight: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 const privacyTextSupportingSubduedDark: PaletteFunction = () =>
-	sourcePalette.neutral[60];
+	sourcePalette.neutral[73];
 
 const productCarouselCardBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
@@ -6808,6 +6826,18 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--cricket-scorecard-first-team-color': {
+		light: () => '#22721a',
+		dark: () => '#4aad42',
+	},
+	'--cricket-scorecard-innings-heading-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--cricket-scorecard-second-team-color': {
+		light: () => '#071b3c',
+		dark: () => '#4878c0',
+	},
 	'--crossword-anagram-helper-background': {
 		light: crosswordAnagramHelperBackgroundLight,
 		dark: crosswordAnagramHelperBackgroundDark,
@@ -7194,19 +7224,19 @@ const paletteColours = {
 	},
 	'--football-pre-match-background': {
 		light: () => sourcePalette.sport[800],
-		dark: () => sourcePalette.sport[800], // TODO: Update with dark mode colour
+		dark: () => sourcePalette.neutral[10],
 	},
 	'--football-pre-match-button': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
 	'--football-pre-match-button-hover': {
 		light: () => '#c8e4f3', // replace with Source's `calculateHoverColour` when available
-		dark: () => '#c8e4f3',
+		dark: () => '#4d4d4d',
 	},
 	'--football-pre-match-kickoff': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
 	'--football-score-border': {
 		light: () => sourcePalette.neutral[7],
@@ -7397,22 +7427,6 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[0],
 		dark: () => sourcePalette.neutral[100],
 	},
-	'--labs-legacy-article-section-title': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[97],
-	},
-	'--labs-legacy-section-background': {
-		light: () => sourcePalette.neutral[93],
-		dark: () => sourcePalette.neutral[20],
-	},
-	'--labs-legacy-section-background-left': {
-		light: () => sourcePalette.labs[400],
-		dark: () => sourcePalette.labs[200],
-	},
-	'--labs-legacy-treat-text': {
-		light: () => sourcePalette.neutral[46],
-		dark: () => sourcePalette.neutral[38],
-	},
 	'--labs-logo-background': {
 		light: () => sourcePalette.labs[100],
 		dark: () => sourcePalette.labs[200],
@@ -7557,18 +7571,6 @@ const paletteColours = {
 		light: multiBylineNonLinkedTextLight,
 		dark: multiBylineNonLinkedTextDark,
 	},
-	'--narrow-play-icon-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--narrow-play-icon-border': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
-	'--narrow-play-icon-fill': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
-	},
 	'--nav-reader-revenue-link-text': {
 		light: navReaderRevenueLinkText,
 		dark: navReaderRevenueLinkText,
@@ -7584,6 +7586,62 @@ const paletteColours = {
 	'--nav-search-bar-text': {
 		light: navSearchBarText,
 		dark: navSearchBarText,
+	},
+	'--newsletter-card-background': {
+		light: () => '#F3F7FF',
+		dark: () => sourcePalette.brand[100],
+	},
+	'--newsletter-card-description': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--newsletter-card-divider': {
+		light: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-card-frequency-tag': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[73],
+	},
+	'--newsletter-card-title': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-preview-button-border': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-preview-button-hover': {
+		light: () => sourcePalette.brand[800],
+		dark: () => sourcePalette.brand[300],
+	},
+	'--newsletter-preview-button-text': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-input-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[300],
+	},
+	'--newsletter-signup-input-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-submit-background': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-submit-background-hover': {
+		light: () => sourcePalette.brand[600],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--newsletter-signup-submit-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[400],
+	},
+	'--newsletter-signup-toggle-text': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[73],
 	},
 	'--numbered-list-heading': {
 		light: numberedListHeadingLight,
@@ -8333,25 +8391,37 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[60],
 	},
-	'--video-audio-icon': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
-	},
-	'--video-audio-icon-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--video-audio-icon-border': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
 	'--video-background': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[93],
 	},
+	'--video-fullscreen-background': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[0],
+	},
+	'--video-icon': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--video-icon-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-icon-border': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
 	'--video-progress-bar-background': {
 		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
 		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-progress-bar-interactive-background': {
+		light: () => transparentColour(sourcePalette.neutral[100], 0.5),
+		dark: () => transparentColour(sourcePalette.neutral[100], 0.5),
+	},
+	'--video-progress-bar-interactive-value': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--video-progress-bar-value': {
 		light: () => sourcePalette.neutral[86],

@@ -9,7 +9,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import {
 	findMostReferredToBucketId,
 	PersonalityQuizAtom,
-} from './PersonalityQuizAtom.importable';
+} from './PersonalityQuizAtom.island';
 
 jest.mock('../lib/useMatchMedia', () => ({
 	useMatchMedia: jest.fn(() => true),

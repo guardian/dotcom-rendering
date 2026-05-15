@@ -6,33 +6,15 @@ import type {
 	DCRContainerType,
 	DCRFrontCard,
 	DCRGroupedTrails,
-	PillarBucket,
 } from '../types/front';
-import { DynamicFast } from './DynamicFast';
-import { DynamicPackage } from './DynamicPackage';
-import { DynamicSlow } from './DynamicSlow';
-import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
-import { FixedMediumFastXI } from './FixedMediumFastXI';
-import { FixedMediumFastXII } from './FixedMediumFastXII';
-import { FixedMediumSlowVI } from './FixedMediumSlowVI';
-import { FixedMediumSlowVII } from './FixedMediumSlowVII';
-import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
-import { FixedSmallFastVIII } from './FixedSmallFastVIII';
-import { FixedSmallSlowI } from './FixedSmallSlowI';
-import { FixedSmallSlowIII } from './FixedSmallSlowIII';
-import { FixedSmallSlowIV } from './FixedSmallSlowIV';
-import { FixedSmallSlowVHalf } from './FixedSmallSlowVHalf';
-import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
-import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
-import { PersonalisedMediumFour } from './PersonalisedMediumFour.importable';
-import { ScrollableFeature } from './ScrollableFeature.importable';
-import { ScrollableHighlights } from './ScrollableHighlights.importable';
-import { ScrollableMedium } from './ScrollableMedium.importable';
-import { ScrollableSmall } from './ScrollableSmall.importable';
+import { ScrollableFeature } from './ScrollableFeature.island';
+import { ScrollableHighlights } from './ScrollableHighlights.island';
+import { ScrollableMedium } from './ScrollableMedium.island';
+import { ScrollableSmall } from './ScrollableSmall.island';
 import { StaticFeatureTwo } from './StaticFeatureTwo';
 import { StaticMediumFour } from './StaticMediumFour';
 
@@ -42,14 +24,13 @@ type Props = {
 	imageLoading: NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	sectionId: string;
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	pillarBuckets?: PillarBucket;
 };
 
 export const DecideContainer = ({
@@ -57,7 +38,7 @@ export const DecideContainer = ({
 	groupedTrails,
 	containerType,
 	containerPalette,
-	showAge,
+	hideAge,
 	serverTime,
 	imageLoading,
 	aspectRatio,
@@ -65,169 +46,8 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	pillarBuckets,
 }: Props) => {
 	switch (containerType) {
-		case 'dynamic/fast':
-			return (
-				<DynamicFast
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'dynamic/slow':
-			return (
-				<DynamicSlow
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'dynamic/package':
-			return (
-				<DynamicPackage
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/large/slow-XIV':
-			return (
-				<FixedLargeSlowXIV
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/slow-IV':
-			return (
-				<FixedSmallSlowIV
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/slow-V-mpu':
-			return (
-				<FixedSmallSlowVMPU
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/slow-III':
-			return (
-				<FixedSmallSlowIII
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/slow-I':
-			return (
-				<FixedSmallSlowI
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/slow-V-third':
-			return (
-				<FixedSmallSlowVThird
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/slow-V-half':
-			return (
-				<FixedSmallSlowVHalf
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/medium/slow-VI':
-			return (
-				<FixedMediumSlowVI
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/medium/slow-VII':
-			return (
-				<FixedMediumSlowVII
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/medium/slow-XII-mpu':
-			return (
-				<FixedMediumSlowXIIMPU
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/medium/fast-XII':
-			return (
-				<FixedMediumFastXII
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/medium/fast-XI':
-			return (
-				<FixedMediumFastXI
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/fast-VIII':
-			return (
-				<FixedSmallFastVIII
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
 		case 'nav/list':
 			return <NavList trails={trails} showImage={false} />;
 		case 'nav/media-list':
@@ -243,7 +63,7 @@ export const DecideContainer = ({
 				<FlexibleSpecial
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
-					showAge={showAge}
+					hideAge={hideAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
@@ -255,7 +75,7 @@ export const DecideContainer = ({
 				<FlexibleGeneral
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
-					showAge={showAge}
+					hideAge={hideAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
@@ -270,7 +90,7 @@ export const DecideContainer = ({
 						trails={trails}
 						imageLoading={imageLoading}
 						containerPalette={containerPalette}
-						showAge={showAge}
+						hideAge={hideAge}
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
@@ -284,7 +104,7 @@ export const DecideContainer = ({
 						trails={trails}
 						imageLoading={imageLoading}
 						containerPalette={containerPalette}
-						showAge={showAge}
+						hideAge={hideAge}
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
@@ -292,26 +112,11 @@ export const DecideContainer = ({
 				</Island>
 			);
 		case 'static/medium/4':
-			if (pillarBuckets) {
-				return (
-					<Island priority="critical" defer={{ until: 'visible' }}>
-						<PersonalisedMediumFour
-							trails={trails}
-							containerPalette={containerPalette}
-							showAge={showAge}
-							serverTime={serverTime}
-							imageLoading={imageLoading}
-							aspectRatio={aspectRatio}
-							pillarBuckets={pillarBuckets}
-						/>
-					</Island>
-				);
-			}
 			return (
 				<StaticMediumFour
 					trails={trails}
 					containerPalette={containerPalette}
-					showAge={showAge}
+					hideAge={hideAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
@@ -342,6 +147,6 @@ export const DecideContainer = ({
 				/>
 			);
 		default:
-			return <p>{containerType} is not yet supported</p>;
+			return null;
 	}
 };

@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { log } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -7,11 +8,11 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import { AdPortals } from '../components/AdPortals.importable';
+import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
-import { AppsEpic } from '../components/AppsEpic.importable';
-import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsEpic } from '../components/AppsEpic.island';
+import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -19,33 +20,32 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
-import { Carousel } from '../components/Carousel.importable';
+import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
+import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
 import { Footer } from '../components/Footer';
-import { GetMatchNav } from '../components/GetMatchNav.importable';
-import { GetMatchStats } from '../components/GetMatchStats.importable';
-import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import { ListenToArticle } from '../components/ListenToArticle.importable';
+import { ListenToArticle } from '../components/ListenToArticle.island';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
-import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.island';
+import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.island';
 import { Standfirst } from '../components/Standfirst';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
-import { SubNav } from '../components/SubNav.importable';
+import { SubNav } from '../components/SubNav.island';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -54,6 +54,8 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
+import type { EditionId } from '../lib/edition';
+import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -105,8 +107,6 @@ const StandardGrid = ({
 					${isMatchReport
 						? css`
 								grid-template-areas:
-									'title  border  matchNav   . right-column'
-									'title  border  matchtabs  . right-column'
 									'title  border  headline   . right-column'
 									'.      border  standfirst . right-column'
 									'meta   border  media      . right-column'
@@ -148,8 +148,6 @@ const StandardGrid = ({
 				${isMatchReport
 					? css`
 							grid-template-areas:
-								'title  border  matchNav     right-column'
-								'title  border  matchtabs    right-column'
 								'title  border  headline     right-column'
 								'.      border  standfirst   right-column'
 								'meta   border  media        right-column'
@@ -188,8 +186,6 @@ const StandardGrid = ({
 				${isMatchReport
 					? css`
 							grid-template-areas:
-								'matchNav      right-column'
-								'matchtabs	   right-column'
 								'title         right-column'
 								'headline      right-column'
 								'standfirst    right-column'
@@ -228,8 +224,6 @@ const StandardGrid = ({
 				${isMatchReport
 					? css`
 							grid-template-areas:
-								'matchNav'
-								'matchtabs'
 								'title'
 								'headline'
 								'standfirst'
@@ -267,8 +261,6 @@ const StandardGrid = ({
 				${isMatchReport
 					? css`
 							grid-template-areas:
-								'matchNav'
-								'matchtabs'
 								'media'
 								'title'
 								'headline'
@@ -361,6 +353,19 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			? article.matchUrl
 			: undefined;
 
+	const footballMatchStatsUrl =
+		article.matchType === 'FootballMatchType'
+			? article.matchStatsUrl
+			: undefined;
+
+	const footballMatchHeaderUrl =
+		article.matchType === 'FootballMatchType'
+			? article.matchHeaderUrl
+			: undefined;
+
+	const footballMatchLeagueName = article.sectionLabel;
+	const footballMatchLeagueUrl = `${article.guardianBaseURL}/${article.sectionUrl}`;
+
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
@@ -409,6 +414,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						showSlimNav={false}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
+						tagIds={article.tags.map((tag) => tag.id)}
+						sectionId={article.config.section}
+						contentType={article.contentType}
 					/>
 				</div>
 			)}
@@ -427,6 +435,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					</Section>
 				</Stuck>
 			)}
+
+			<MatchHeaderContainer
+				isMatchReport={isMatchReport}
+				footballMatchHeaderUrl={footballMatchHeaderUrl}
+				leagueName={footballMatchLeagueName}
+				leagueUrl={footballMatchLeagueUrl}
+				editionId={editionId}
+				renderingTarget={renderingTarget}
+			/>
 
 			{isWeb && renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
@@ -456,41 +473,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						isMatchReport={isMatchReport}
 						isMedia={isMedia}
 					>
-						<GridItem area="matchNav" element="aside">
-							<div css={maxWidth}>
-								{isMatchReport && (
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<GetMatchNav
-											matchUrl={footballMatchUrl}
-											format={format}
-											headlineString={article.headline}
-											tags={article.tags}
-											webPublicationDateDeprecated={
-												article.webPublicationDateDeprecated
-											}
-										/>
-									</Island>
-								)}
-							</div>
-						</GridItem>
-						<GridItem area="matchtabs" element="aside">
-							<div css={maxWidth}>
-								{isMatchReport && (
-									<Island
-										priority="critical"
-										defer={{ until: 'visible' }}
-									>
-										<GetMatchTabs
-											matchUrl={footballMatchUrl}
-											format={format}
-										/>
-									</Island>
-								)}
-							</div>
-						</GridItem>
 						<GridItem area="media">
 							<div css={!isMedia && maxWidth}>
 								<MainMedia
@@ -522,6 +504,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								isMatch={!!footballMatchUrl}
 							/>
 						</GridItem>
+
 						<GridItem area="border">
 							{format.theme === ArticleSpecial.Labs ? (
 								<></>
@@ -722,18 +705,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									shouldHideAds={article.shouldHideAds}
 									idApiUrl={article.config.idApiUrl}
 								/>
-								{format.design === ArticleDesign.MatchReport &&
-									!!footballMatchUrl && (
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<GetMatchStats
-												matchUrl={footballMatchUrl}
-												format={format}
-											/>
-										</Island>
-									)}
+								<MatchInfoContainer
+									isMatchReport={isMatchReport}
+									footballMatchStatsUrl={
+										footballMatchStatsUrl
+									}
+								/>
 
 								{isApps && (
 									<Island
@@ -772,6 +749,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											articleEndSlot={
 												!!article.config.switches
 													.articleEndSlot
+											}
+											isSensitive={
+												article.config.isSensitive
 											}
 										/>
 									</Island>
@@ -1078,4 +1058,79 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			)}
 		</>
 	);
+};
+
+const MatchHeaderContainer = ({
+	isMatchReport,
+	footballMatchHeaderUrl,
+	leagueName,
+	leagueUrl,
+	editionId,
+	renderingTarget,
+}: {
+	isMatchReport: boolean;
+	footballMatchHeaderUrl: string | undefined;
+	leagueName: string;
+	leagueUrl: string;
+	editionId: EditionId;
+	renderingTarget: RenderingTarget;
+}) => {
+	if (isMatchReport && !!footballMatchHeaderUrl) {
+		const parsedUrl = safeParseURL(footballMatchHeaderUrl);
+		if (!parsedUrl.ok) {
+			log(
+				'dotcom',
+				new Error(
+					`Failed to parse match header URL: ${footballMatchHeaderUrl}`,
+				),
+			);
+
+			return null;
+		}
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMatchHeaderWrapper
+					initialTab="report"
+					leagueName={leagueName}
+					leagueURL={leagueUrl}
+					edition={editionId}
+					matchHeaderURL={footballMatchHeaderUrl}
+					renderingTarget={renderingTarget}
+				/>
+			</Island>
+		);
+	}
+
+	return null;
+};
+
+const MatchInfoContainer = ({
+	isMatchReport,
+	footballMatchStatsUrl,
+}: {
+	isMatchReport: boolean;
+	footballMatchStatsUrl: string | undefined;
+}) => {
+	if (isMatchReport && !!footballMatchStatsUrl) {
+		const parsedUrl = safeParseURL(footballMatchStatsUrl);
+		if (!parsedUrl.ok) {
+			log(
+				'dotcom',
+				new Error(
+					`Failed to parse match stats URL: ${footballMatchStatsUrl}`,
+				),
+			);
+
+			return null;
+		}
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMatchInfoWrapper
+					matchStatsUrl={footballMatchStatsUrl}
+				/>
+			</Island>
+		);
+	}
+
+	return null;
 };

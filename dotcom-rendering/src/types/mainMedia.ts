@@ -28,11 +28,13 @@ type SelfHostedVideo = Media & {
 	videoStyle: VideoPlayerFormat;
 	atomId: string;
 	sources: Source[];
-	height: number;
-	width: number;
+	aspectRatio: number;
 	duration: number;
 	subtitleSource?: string;
-	image?: string;
+	image: {
+		src?: string;
+		aspectRatio: string;
+	};
 };
 
 type Audio = Media & {

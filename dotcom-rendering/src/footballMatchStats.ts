@@ -3,9 +3,11 @@ import { listParse } from './footballMatches';
 import type { FootballTeam } from './footballTeam';
 import type {
 	FEFootballMatchStats,
+	FEFootballMatchStatsSummary,
 	FEFootballPlayer,
 	FEFootballPlayerEvent,
 	FEFootballTeam,
+	FEFootballTeamSummary,
 } from './frontend/feFootballMatchInfoPage';
 import { parseIntResult } from './lib/parse';
 import type { Result } from './lib/result';
@@ -18,6 +20,16 @@ import { cleanTeamName } from './sportDataPage';
 export type FootballMatchStats = {
 	homeTeam: FootballMatchTeamWithStats;
 	awayTeam: FootballMatchTeamWithStats;
+};
+
+/**
+ * The summary stats for each team in a given football match.
+ */
+export type FootballMatchStatsSummary = {
+	homeTeam: FootballMatchTeamWithStatsSummary;
+	awayTeam: FootballMatchTeamWithStatsSummary;
+	status: string;
+	infoURL: string;
 };
 
 /**
@@ -36,11 +48,21 @@ export type FootballMatchTeamWithStats = FootballTeam & {
 };
 
 /**
+ * Summary stats information about a given team in a football match
+ */
+export type FootballMatchTeamWithStatsSummary = FootballTeam & {
+	possession: number;
+	shotsTotal: number;
+	statsColour: string;
+};
+
+/**
  * Information about a player's participation in a given football match.
  */
 type FootballPlayer = {
 	paID: string;
 	name: string;
+	lastName: string;
 	substitute: boolean;
 	shirtNumber: number;
 	events: PlayerEvent[];
@@ -116,6 +138,7 @@ const parseFootballPlayer = (
 			.map((shirtNumber) => ({
 				paID: feFootballMatchPlayer.id,
 				name: feFootballMatchPlayer.name,
+				lastName: feFootballMatchPlayer.lastName,
 				substitute: feFootballMatchPlayer.substitute,
 				shirtNumber,
 				events,
@@ -148,4 +171,30 @@ export const parseMatchStats = (
 			homeTeam,
 			awayTeam,
 		})),
+	);
+
+const parseTeamWithStatsSummary = (
+	feFootballMatchTeam: FEFootballTeamSummary,
+): Result<ParserError, FootballMatchTeamWithStatsSummary> =>
+	ok({
+		paID: feFootballMatchTeam.id,
+		name: cleanTeamName(feFootballMatchTeam.name),
+		possession: feFootballMatchTeam.possession,
+		shotsTotal: feFootballMatchTeam.shotsOn + feFootballMatchTeam.shotsOff,
+		statsColour: feFootballMatchTeam.colours,
+	});
+
+export const parseMatchStatsSummary = (
+	feFootballMatchStatsSummary: FEFootballMatchStatsSummary,
+): Result<ParserError, FootballMatchStatsSummary> =>
+	parseTeamWithStatsSummary(feFootballMatchStatsSummary.homeTeam).flatMap(
+		(homeTeam) =>
+			parseTeamWithStatsSummary(feFootballMatchStatsSummary.awayTeam).map(
+				(awayTeam) => ({
+					homeTeam,
+					awayTeam,
+					status: feFootballMatchStatsSummary.status,
+					infoURL: feFootballMatchStatsSummary.infoURL,
+				}),
+			),
 	);

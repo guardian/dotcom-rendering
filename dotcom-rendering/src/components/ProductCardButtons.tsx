@@ -8,14 +8,17 @@ const getLabel = (cta: ProductCta): string => {
 
 export const ProductCardButtons = ({
 	productCtas,
+	xCustComponentId,
 }: {
 	productCtas: ProductCta[];
+	xCustComponentId?: string;
 }) => (
 	<>
 		{productCtas.map((productCta, index) => {
 			const label = getLabel(productCta);
 			return (
 				<ProductLinkButton
+					xCustComponentId={xCustComponentId}
 					key={label}
 					label={label}
 					url={productCta.url}

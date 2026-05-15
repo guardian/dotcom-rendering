@@ -15,7 +15,7 @@ import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
 import { Island } from './Island';
-import { ShareButton } from './ShareButton.importable';
+import { ShareButton } from './ShareButton.island';
 
 const labelStyles = (design: ArticleDesign): SerializedStyles => css`
 	${design === ArticleDesign.Gallery ? grid.column.centre : undefined};
@@ -207,8 +207,12 @@ export const SubMeta = ({
 }: Props) => {
 	const createLinks = () => {
 		const links: BaseLinkType[] = [];
-		if (subMetaSectionLinks.length > 0) links.push(...subMetaSectionLinks);
-		if (subMetaKeywordLinks.length > 0) links.push(...subMetaKeywordLinks);
+		if (subMetaSectionLinks.length > 0) {
+			links.push(...subMetaSectionLinks);
+		}
+		if (subMetaKeywordLinks.length > 0) {
+			links.push(...subMetaKeywordLinks);
+		}
 		return {
 			links,
 			hasLinks: links.length > 0,

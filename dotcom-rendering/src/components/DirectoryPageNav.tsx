@@ -26,7 +26,7 @@ interface DirectoryPageNavConfig {
 	textColor: string;
 	backgroundColor: string;
 	title: { label: string; id: string };
-	links: { label: string; id: string }[];
+	links: Array<{ label: string; id: string }>;
 	backgroundImages?: {
 		mobile: string;
 		mobileLandscape: string;
@@ -37,6 +37,7 @@ interface DirectoryPageNavConfig {
 }
 
 const configs = [
+	// Winter Olympics 2026
 	{
 		pageIds: [
 			'sport/winter-olympics-2026',
@@ -80,6 +81,45 @@ const configs = [
 				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-980px.jpg',
 		},
 	},
+	// Winter Paralympics 2026
+	{
+		pageIds: [
+			'sport/winter-paralympics-2026',
+			'sport/ng-interactive/2026/mar/05/winter-paralympics-results-from-milano-cortina-2026',
+			'sport/ng-interactive/2026/mar/05/winter-paralympics-2026-latest-medal-table-for-milano-cortina',
+		],
+		tagIds: [],
+		textColor: palette.neutral[7],
+		backgroundColor: '#22B24B',
+		title: {
+			label: 'Winter Paralympics 2026',
+			id: 'sport/winter-paralympics-2026',
+		},
+		links: [
+			{
+				label: 'Results',
+				id: 'sport/ng-interactive/2026/mar/05/winter-paralympics-results-from-milano-cortina-2026',
+			},
+			{
+				label: 'Medal table',
+				id: 'sport/ng-interactive/2026/mar/05/winter-paralympics-2026-latest-medal-table-for-milano-cortina',
+			},
+			{
+				label: 'Full coverage',
+				id: 'sport/winter-paralympics-2026',
+			},
+		],
+		backgroundImages: {
+			mobile: 'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-414px.jpg',
+			mobileLandscape:
+				'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-480px.jpg',
+			phablet:
+				'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-740px.jpg',
+			tablet: 'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-740px-thin.jpg',
+			desktop:
+				'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-980px.jpg',
+		},
+	},
 ] satisfies DirectoryPageNavConfig[];
 
 export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
@@ -87,7 +127,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		(cfg) =>
 			cfg.pageIds.includes(pageId) ||
 			cfg.tagIds.some(
-				(tagId) => pageTags?.some((tag) => tag.id === tagId),
+				(tagId) => pageTags?.some((tag) => tag.id === tagId) ?? false,
 			),
 	);
 

@@ -5,7 +5,7 @@ import { type ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { CaptionText } from './CaptionText';
 import { Island } from './Island';
-import { ShareButton } from './ShareButton.importable';
+import { ShareButton } from './ShareButton.island';
 
 type Props = {
 	captionHtml?: string;

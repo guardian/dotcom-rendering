@@ -88,6 +88,24 @@ describe('getChoiceCardUrl', () => {
 			'https://support.theguardian.com/one-time-checkout',
 		);
 	});
+	it('adds destination test param for one-time checkout choice', () => {
+		const url = getChoiceCardUrl({
+			benefits: [],
+			isDefault: false,
+			label: 'label',
+			product: {
+				supportTier: 'OneOff',
+			},
+			destination: 'Checkout',
+			destinationTest: {
+				testName: 'destination-test',
+				variantName: 'variant-a',
+			},
+		});
+		expect(url).toEqual(
+			'https://support.theguardian.com/one-time-checkout?force-one-time-checkout=destination-test:variant-a',
+		);
+	});
 
 	// Recurring contribution
 	it('builds landing page url for recurring contribution choice', () => {
@@ -103,6 +121,25 @@ describe('getChoiceCardUrl', () => {
 		});
 		expect(url).toEqual(
 			'https://support.theguardian.com/contribute?product=Contribution&ratePlan=Monthly',
+		);
+	});
+	it('adds destination test param for recurring landing page choice', () => {
+		const url = getChoiceCardUrl({
+			benefits: [],
+			isDefault: false,
+			label: 'label',
+			product: {
+				supportTier: 'Contribution',
+				ratePlan: 'Monthly',
+			},
+			destination: 'LandingPage',
+			destinationTest: {
+				testName: 'destination-test',
+				variantName: 'variant-b',
+			},
+		});
+		expect(url).toEqual(
+			'https://support.theguardian.com/contribute?product=Contribution&ratePlan=Monthly&force-landing-page=destination-test:variant-b',
 		);
 	});
 	it('builds checkout page url for recurring contribution choice', () => {

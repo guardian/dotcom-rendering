@@ -119,10 +119,6 @@ export type DCRSnapType = {
 
 export type AspectRatio = FEAspectRatio;
 
-type BucketPillar = 'opinion' | 'sport' | 'culture' | 'lifestyle';
-
-export type PillarBucket = Partial<Record<BucketPillar, DCRFrontCard[]>>;
-
 export type DCRCollectionType = {
 	id: string;
 	displayName: string;
@@ -139,24 +135,13 @@ export type DCRCollectionType = {
 	config: {
 		showDateHeader: boolean;
 	};
-	/**
-	 * @property {?boolean} canShowMore - Whether the 'show more' button should be shown.
-	 * nb. the value of this will typically reflect the `FECollectionType.hasMore` value we get from Frontend,
-	 * except when `FECollectionType.config.hideShowMore` is set to `true`, in which case `DCRCollectionType.canShowMore`
-	 * will always be `false`.
-	 **/
-	canShowMore?: boolean;
 	collectionBranding?: CollectionBranding;
 	targetedTerritory?: Territory;
 	aspectRatio?: AspectRatio;
-	bucket?: PillarBucket;
 };
 
 export type DCRGroupedTrails = {
 	snap: DCRFrontCard[];
-	huge: DCRFrontCard[];
-	veryBig: DCRFrontCard[];
-	big: DCRFrontCard[];
 	standard: DCRFrontCard[];
 	splash: DCRFrontCard[];
 };
@@ -166,8 +151,6 @@ export type DCRSupportingContent = {
 	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
-	/** // AIStorylines: The date is shown in the supporting content for the key stories container in a tag page */
-	webPublicationDate?: string;
 };
 
 export type TreatType = {

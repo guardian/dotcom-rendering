@@ -112,6 +112,18 @@ export interface CalloutBlockElementV2 {
 	contacts?: CalloutContactType[];
 }
 
+export interface CallToActionAtomBlockElement {
+	_type: 'model.dotcomrendering.pageElements.CallToActionAtomBlockElement';
+	elementId: string;
+	id: string;
+	title: string;
+	url: string;
+	image?: string;
+	label?: string;
+	trackingCode?: string;
+	btnText?: string;
+}
+
 export interface ReporterCalloutBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ReporterCalloutBlockElement';
 	elementId: string;
@@ -456,6 +468,7 @@ export interface MediaAtomBlockElement {
 	title?: string;
 	duration?: number;
 	videoPlayerFormat?: VideoPlayerFormat;
+	role?: RoleType;
 }
 
 export interface MultiImageBlockElement {
@@ -513,7 +526,7 @@ export interface ProductBlockElement {
 export interface ProductSummaryElement {
 	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
 	matchedProducts: ProductBlockElement[];
-	variant: 'carousel' | 'stacked';
+	variant: 'carousel' | 'stacked-default' | 'stacked-expanded';
 }
 
 interface ProfileAtomBlockElement {
@@ -802,6 +815,7 @@ export interface WitnessAssetType {
 		name?: string;
 	};
 }
+
 interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.WitnessBlockElement';
 	elementId: string;
@@ -826,6 +840,7 @@ export type FEElement =
 	| CaptionBlockElement
 	| CalloutBlockElement
 	| CalloutBlockElementV2
+	| CallToActionAtomBlockElement
 	| ReporterCalloutBlockElement
 	| CartoonBlockElement
 	| ChartAtomBlockElement
@@ -986,6 +1001,7 @@ export interface VideoAssets {
 		width?: string;
 		caption?: string;
 	};
+	hasAudio?: boolean;
 }
 
 interface AudioAsset {
@@ -1187,8 +1203,11 @@ export type Newsletter = {
 	successDescription: string;
 	theme: string;
 	group: string;
+	category?: string;
 	regionFocus?: string;
 	illustrationCard?: string;
+	illustrationSquare?: string;
+	exampleUrl?: string;
 };
 
 export type NewsletterLayout = {

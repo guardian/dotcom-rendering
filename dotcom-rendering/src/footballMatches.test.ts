@@ -116,7 +116,11 @@ describe('footballMatches', () => {
 		const uncleanToCleanNames: Record<string, string> = {
 			Ladies: '',
 			Holland: 'The Netherlands',
+			'Ivory Coast': 'Côte d’Ivoire',
 			'Union Saint Gilloise': 'Union Saint-Gilloise',
+			'Bosnia-Herzegovina': 'Bosnia and Herzegovina',
+			'Congo DR': 'DR Congo',
+			Curacao: 'Curaçao',
 		};
 
 		for (const [uncleanName, cleanName] of Object.entries(

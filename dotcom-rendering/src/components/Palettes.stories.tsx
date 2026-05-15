@@ -1,12 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
-import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
+import preview from '../../.storybook/preview';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../types/front';
-import { DynamicFast } from './DynamicFast';
+import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Layouts/Palettes',
 	parameters: {
 		chromatic: {
@@ -15,18 +14,20 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta;
-type Story = StoryObj<typeof meta>;
-
-export default meta;
+	render: (args) => (
+		<FrontSection {...args.frontSection}>
+			<FlexibleGeneral {...args.flexibleGeneral} />
+		</FrontSection>
+	),
+});
 
 const groupedTrails = {
 	snap: [],
-	splash: [],
-	huge: [],
-	veryBig: [{ isBoosted: true, ...trails[0] }, trails[1]],
-	big: [trails[2], trails[3]],
+	splash: [trails[0]],
 	standard: [
+		trails[1],
+		trails[2],
+		trails[3],
 		trails[4],
 		trails[5],
 		trails[6],
@@ -36,193 +37,148 @@ const groupedTrails = {
 	],
 } satisfies DCRGroupedTrails;
 
-export const EventPalette = {
-	render: () => (
-		<FrontSection
-			title="Event Palette"
-			containerPalette="EventPalette"
-			showDateHeader={true}
-			editionId={'UK'}
-			discussionApiUrl={discussionApiUrl}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
-				containerPalette="EventPalette"
-				showAge={true}
-				imageLoading="eager"
-			/>
-		</FrontSection>
-	),
-} satisfies Story;
+export const EventPalette = meta.story({
+	args: {
+		frontSection: {
+			title: 'Event Palette',
+			containerPalette: 'EventPalette',
+			showDateHeader: true,
+			editionId: 'UK',
+			showTopBorder: false,
+		},
+		flexibleGeneral: {
+			groupedTrails,
+			containerPalette: 'EventPalette',
+			hideAge: true,
+			imageLoading: 'eager',
+			aspectRatio: '5:4',
+			collectionId: 1234,
+		},
+	},
+});
 
-export const EventAltPalette = {
-	render: () => (
-		<FrontSection
-			title="Event Alt Palette"
-			containerPalette="EventAltPalette"
-			showDateHeader={true}
-			editionId={'UK'}
-			discussionApiUrl={discussionApiUrl}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
-				containerPalette="EventAltPalette"
-				showAge={true}
-				imageLoading="eager"
-			/>
-		</FrontSection>
-	),
-} satisfies Story;
+export const EventAltPalette = meta.story({
+	args: {
+		frontSection: {
+			...EventPalette.input.args.frontSection,
+			title: 'Event Alt Palette',
+			containerPalette: 'EventAltPalette',
+		},
+		flexibleGeneral: {
+			...EventPalette.input.args.flexibleGeneral,
+			containerPalette: 'EventAltPalette',
+		},
+	},
+});
 
-export const SombrePalette = {
-	render: () => (
-		<FrontSection
-			title="Sombre Palette"
-			containerPalette="SombrePalette"
-			showDateHeader={true}
-			editionId={'UK'}
-			discussionApiUrl={discussionApiUrl}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
-				containerPalette="SombrePalette"
-				showAge={true}
-				imageLoading="eager"
-			/>
-		</FrontSection>
-	),
-};
+export const SombrePalette = meta.story({
+	args: {
+		frontSection: {
+			...EventPalette.input.args.frontSection,
+			title: 'Sombre Palette',
+			containerPalette: 'SombrePalette',
+		},
+		flexibleGeneral: {
+			...EventPalette.input.args.flexibleGeneral,
+			containerPalette: 'SombrePalette',
+		},
+	},
+});
 
-export const SombreAltPalette = {
-	render: () => (
-		<FrontSection
-			title="Sombre Alt Palette"
-			containerPalette="SombreAltPalette"
-			showDateHeader={true}
-			editionId={'UK'}
-			discussionApiUrl={discussionApiUrl}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
-				containerPalette="SombreAltPalette"
-				showAge={true}
-				imageLoading="eager"
-			/>
-		</FrontSection>
-	),
-};
+export const SombreAltPalette = meta.story({
+	args: {
+		frontSection: {
+			...EventPalette.input.args.frontSection,
+			title: 'Sombre Alt Palette',
+			containerPalette: 'SombreAltPalette',
+		},
+		flexibleGeneral: {
+			...EventPalette.input.args.flexibleGeneral,
+			containerPalette: 'SombreAltPalette',
+		},
+	},
+});
+export const BreakingPalette = meta.story({
+	args: {
+		frontSection: {
+			...EventPalette.input.args.frontSection,
+			title: 'Breaking Palette',
+			containerPalette: 'BreakingPalette',
+		},
+		flexibleGeneral: {
+			...EventPalette.input.args.flexibleGeneral,
+			containerPalette: 'BreakingPalette',
+		},
+	},
+});
 
-export const BreakingPalette = {
-	render: () => (
-		<FrontSection
-			title="Breaking Palette"
-			containerPalette="BreakingPalette"
-			showDateHeader={true}
-			editionId={'UK'}
-			discussionApiUrl={discussionApiUrl}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
-				containerPalette="BreakingPalette"
-				showAge={true}
-				imageLoading="eager"
-			/>
-		</FrontSection>
-	),
-};
+export const LongRunningPalette = meta.story({
+	args: {
+		frontSection: {
+			...EventPalette.input.args.frontSection,
+			title: 'Long Running Palette',
+			containerPalette: 'LongRunningPalette',
+		},
+		flexibleGeneral: {
+			...EventPalette.input.args.flexibleGeneral,
+			containerPalette: 'LongRunningPalette',
+		},
+	},
+});
 
-export const LongRunningPalette = {
-	render: () => (
-		<FrontSection
-			title="Long Running Palette"
-			containerPalette="LongRunningPalette"
-			showDateHeader={true}
-			editionId={'UK'}
-			discussionApiUrl={discussionApiUrl}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
-				containerPalette="LongRunningPalette"
-				showAge={true}
-				imageLoading="eager"
-			/>
-		</FrontSection>
-	),
-} satisfies Story;
+export const LongRunningAltPalette = meta.story({
+	args: {
+		frontSection: {
+			...EventPalette.input.args.frontSection,
+			title: 'Long Running Alt Palette',
+			containerPalette: 'LongRunningAltPalette',
+		},
+		flexibleGeneral: {
+			...EventPalette.input.args.flexibleGeneral,
+			containerPalette: 'LongRunningAltPalette',
+		},
+	},
+});
 
-export const LongRunningAltPalette = {
-	render: () => (
-		<FrontSection
-			title="Long Running Alt Palette"
-			containerPalette="LongRunningAltPalette"
-			showDateHeader={true}
-			editionId={'UK'}
-			discussionApiUrl={discussionApiUrl}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
-				containerPalette="LongRunningAltPalette"
-				showAge={true}
-				imageLoading="eager"
-			/>
-		</FrontSection>
-	),
-} satisfies Story;
+export const InvestigationPalette = meta.story({
+	args: {
+		frontSection: {
+			...EventPalette.input.args.frontSection,
+			title: 'Investigation Palette',
+			containerPalette: 'InvestigationPalette',
+		},
+		flexibleGeneral: {
+			...EventPalette.input.args.flexibleGeneral,
+			containerPalette: 'InvestigationPalette',
+		},
+	},
+});
 
-export const InvestigationPalette = {
-	render: () => (
-		<FrontSection
-			title="Investigation Palette"
-			containerPalette="InvestigationPalette"
-			showDateHeader={true}
-			editionId={'UK'}
-			discussionApiUrl={discussionApiUrl}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
-				containerPalette="InvestigationPalette"
-				showAge={true}
-				imageLoading="eager"
-			/>
-		</FrontSection>
-	),
-} satisfies Story;
+export const SpecialReportAltPalette = meta.story({
+	args: {
+		frontSection: {
+			...EventPalette.input.args.frontSection,
+			title: 'Special Report Alt Palette',
+			containerPalette: 'SpecialReportAltPalette',
+		},
+		flexibleGeneral: {
+			...EventPalette.input.args.flexibleGeneral,
+			containerPalette: 'SpecialReportAltPalette',
+		},
+	},
+});
 
-export const SpecialReportAltPalette = {
-	render: () => (
-		<FrontSection
-			title="Special Report Alt Palette"
-			containerPalette="SpecialReportAltPalette"
-			showDateHeader={true}
-			editionId={'UK'}
-			discussionApiUrl={discussionApiUrl}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
-				containerPalette="SpecialReportAltPalette"
-				showAge={true}
-				imageLoading="eager"
-			/>
-		</FrontSection>
-	),
-} satisfies Story;
-
-export const BrandedPalette = {
-	render: () => (
-		<FrontSection
-			title="Branded Palette Redesign"
-			containerPalette="Branded"
-			showDateHeader={true}
-			editionId={'UK'}
-			discussionApiUrl={discussionApiUrl}
-			isLabs={true}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
-				containerPalette="Branded"
-				showAge={true}
-				imageLoading="eager"
-			/>
-		</FrontSection>
-	),
-};
+export const BrandedPalette = meta.story({
+	args: {
+		frontSection: {
+			...EventPalette.input.args.frontSection,
+			title: 'Branded Palette Redesign',
+			containerPalette: 'Branded',
+			isLabs: true,
+		},
+		flexibleGeneral: {
+			...EventPalette.input.args.flexibleGeneral,
+			containerPalette: 'Branded',
+		},
+	},
+});

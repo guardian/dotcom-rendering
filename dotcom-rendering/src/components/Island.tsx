@@ -44,8 +44,8 @@ type IslandProps = {
 /**
  * Adds interactivity to the client by either hydrating or inserting content.
  *
- * Note. The component passed as children must follow the [MyComponent].importable.tsx
- * namimg convention
+ * Note. The component passed as children must follow the [MyComponent].island.tsx
+ * naming convention
  *
  * @param {IslandProps} props - JSX Props
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element

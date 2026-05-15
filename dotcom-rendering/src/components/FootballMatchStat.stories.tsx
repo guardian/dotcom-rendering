@@ -62,6 +62,22 @@ export const ShownAsPercentage = {
 	},
 } satisfies Story;
 
+export const OneStatZero = {
+	args: {
+		...Default.args,
+		homeValue: 4,
+		awayValue: 0,
+	},
+} satisfies Story;
+
+export const BothStatsZero = {
+	args: {
+		...Default.args,
+		homeValue: 0,
+		awayValue: 0,
+	},
+} satisfies Story;
+
 export const CompactLayout = {
 	args: {
 		...Default.args,

@@ -23,11 +23,11 @@ import type { PillarLinkType } from '../model/extract-nav';
 import type { ReaderRevenueCategories } from '../types/commercial';
 import type { FooterType } from '../types/footer';
 import { BackToTop } from './BackToTop';
-import { FooterLabel } from './FooterLabel.importable';
-import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.importable';
+import { FooterLabel } from './FooterLabel.island';
+import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.island';
 import { Island } from './Island';
 import { Pillars } from './Masthead/Titlepiece/Pillars';
-import { PrivacySettingsLink } from './PrivacySettingsLink.importable';
+import { PrivacySettingsLink } from './PrivacySettingsLink.island';
 
 // CSS vars
 const footerBorders = `1px solid ${palette.brand[600]}`;

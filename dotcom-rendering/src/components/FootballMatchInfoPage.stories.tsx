@@ -1,13 +1,25 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { SWRConfig } from 'swr';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { footballMatchResultV2 } from '../../fixtures/manual/footballData';
 import { table } from '../../fixtures/manual/footballTable';
 import { matchStats } from '../../fixtures/manual/matchStats';
 import { FootballMatchInfoPage as FootballMatchInfoPageComponent } from './FootballMatchInfoPage';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Football Match Info Page',
 	component: FootballMatchInfoPageComponent,
+	decorators: [
+		(Story) => (
+			<SWRConfig
+				value={{
+					isPaused: () => true, // Prevent SWR from making requests
+				}}
+			>
+				<Story />
+			</SWRConfig>
+		),
+	],
 	parameters: {
 		chromatic: {
 			modes: {
@@ -15,12 +27,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof FootballMatchInfoPageComponent>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const FootballMatchInfoPage = {
+export const FootballMatchInfoPage = meta.story({
 	args: {
 		matchStats,
 		matchInfo: footballMatchResultV2,
@@ -30,5 +39,6 @@ export const FootballMatchInfoPage = {
 		matchHeaderUrl: new URL(
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
 		),
+		renderingTarget: 'Web',
 	},
-} satisfies Story;
+});

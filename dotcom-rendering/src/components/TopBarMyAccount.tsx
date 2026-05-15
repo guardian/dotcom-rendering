@@ -27,8 +27,8 @@ import { palette as themePalette } from '../palette';
 import ProfileIcon from '../static/icons/profile.svg';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
-import type { DropdownLinkType } from './Dropdown.importable';
-import { Dropdown } from './Dropdown.importable';
+import type { DropdownLinkType } from './Dropdown.island';
+import { Dropdown } from './Dropdown.island';
 
 interface MyAccountProps {
 	mmaUrl: string;
@@ -200,7 +200,9 @@ const SignedInWithNotifications = ({
 }: SignedInWithNotificationsProps) => {
 	const userId = authStatus.idToken.claims.legacy_identity_id;
 
-	if (!userId) return <SignIn idUrl={idUrl} />;
+	if (!userId) {
+		return <SignIn idUrl={idUrl} />;
+	}
 
 	const identityLinks = buildIdentityLinks(mmaUrl, idUrl, userId);
 

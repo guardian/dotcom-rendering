@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import type { Decorator, Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Decorator } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import preview from '../../.storybook/preview';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -47,7 +48,7 @@ const subheadingHtmlStrings = [
 	'Subheading text only (no HTML)',
 ];
 
-const meta = {
+const meta = preview.meta({
 	component: SubheadingBlockComponent,
 	title: 'Components/SubheadingBlockComponent',
 	render: (args) => {
@@ -55,7 +56,6 @@ const meta = {
 			<StoryWrapper>
 				{subheadingHtmlStrings.map((html, index) => (
 					<SubheadingBlockComponent
-						// eslint-disable-next-line react/no-array-index-key -- ignore for Story only
 						key={index}
 						format={args.format}
 						html={html}
@@ -74,12 +74,9 @@ const meta = {
 			theme: Pillar.News,
 		},
 	},
-} satisfies Meta<typeof SubheadingBlockComponent>;
+});
 
-type Story = StoryObj<typeof meta>;
-export default meta;
-
-export const StandardDisplayThemeVariation = {
+export const StandardDisplayThemeVariation = meta.story({
 	decorators: [
 		GlobalStylesDecorator,
 		splitTheme(
@@ -90,9 +87,9 @@ export const StandardDisplayThemeVariation = {
 			}),
 		),
 	],
-} satisfies Story;
+});
 
-export const StandardDisplayDesignVariation = {
+export const StandardDisplayDesignVariation = meta.story({
 	decorators: [
 		GlobalStylesDecorator,
 		splitTheme(
@@ -102,9 +99,9 @@ export const StandardDisplayDesignVariation = {
 			}),
 		),
 	],
-} satisfies Story;
+});
 
-export const ImmersiveDisplayThemeVariation = {
+export const ImmersiveDisplayThemeVariation = meta.story({
 	decorators: [
 		GlobalStylesDecorator,
 		splitTheme(
@@ -121,9 +118,9 @@ export const ImmersiveDisplayThemeVariation = {
 			),
 		),
 	],
-} satisfies Story;
+});
 
-export const ImmersiveDisplayDesignVariation = {
+export const ImmersiveDisplayDesignVariation = meta.story({
 	decorators: [
 		GlobalStylesDecorator,
 		splitTheme(
@@ -133,4 +130,4 @@ export const ImmersiveDisplayDesignVariation = {
 			}),
 		),
 	],
-} satisfies Story;
+});

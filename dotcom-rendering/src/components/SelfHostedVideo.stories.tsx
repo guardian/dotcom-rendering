@@ -1,14 +1,37 @@
-import { breakpoints } from '@guardian/source/foundations';
+import { breakpoints, textSans17Object } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, userEvent, within } from 'storybook/test';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
-import { SelfHostedVideo } from './SelfHostedVideo.importable';
+import {
+	selfHostedLoopVideo169Card as loop169Card,
+	selfHostedLoopVideo45Card as loop45Card,
+	selfHostedLoopVideo53Card as loop53Card,
+	selfHostedLoopVideo54Card as loop54Card,
+	selfHostedLoopVideo916Card as loop916Card,
+} from '../../fixtures/manual/trails';
+import { SelfHostedVideo } from './SelfHostedVideo.island';
 
 const meta = {
 	component: SelfHostedVideo,
 	title: 'Components/SelfHostedVideo',
 	decorators: [centreColumnDecorator],
-	render: (args) => <SelfHostedVideo {...args} />,
+	render: (args) => (
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				gap: '20px',
+				marginTop: '20px',
+			}}
+		>
+			<p style={{ ...textSans17Object }}>
+				Note: If the video is not playing, you may need to visit
+				https://storybook.thegulocal.com/ instead of localhost, as CORS
+				is enabled for self-hosted video.
+			</p>
+			<SelfHostedVideo {...args} />
+		</div>
+	),
 	parameters: {
 		chromatic: {
 			viewports: [breakpoints.mobile, breakpoints.wide],
@@ -20,67 +43,156 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof SelfHostedVideo>;
 
-export const Loop5to4: Story = {
-	name: 'Looping video in 5:4 aspect ratio',
+export const Loop: Story = {
 	args: {
-		sources: [
-			{
-				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
-				mimeType: 'video/mp4',
-			},
-		],
+		sources: loop54Card.mainMedia.sources,
+		aspectRatio: loop54Card.mainMedia.aspectRatio,
 		uniqueId: 'test-video-1',
 		atomId: 'test-atom-1',
 		videoStyle: 'Loop',
-		height: 720,
-		width: 900,
 		posterImage:
 			'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
 		fallbackImage: '',
 	},
 } satisfies Story;
 
-export const WithM3U8File = {
-	name: 'With M3U8 file',
+export const Cinemagraph: Story = {
 	args: {
-		...Loop5to4.args,
-		sources: [
-			{
-				src: 'https://uploads.guimcode.co.uk/2025/09/01/Loop__Japan_fireball--ace3fcf6-1378-41db-9d21-f3fc07072ab2-1.10.m3u8',
-				mimeType: 'application/x-mpegURL',
-			},
-			{
-				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
-				mimeType: 'video/mp4',
-			},
-		],
-	},
-} satisfies Story;
-
-export const Loop16to9 = {
-	name: 'Looping video in 16:9 aspect ratio',
-	args: {
-		...Loop5to4.args,
-		sources: [
-			{
-				src: 'https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4',
-				mimeType: 'video/mp4',
-			},
-		],
-		height: 1080,
-		width: 1920,
-	},
-} satisfies Story;
-
-export const WithCinemagraph = {
-	args: {
-		...Loop5to4.args,
+		...Loop.args,
 		videoStyle: 'Cinemagraph',
 	},
 } satisfies Story;
 
+export const Default: Story = {
+	name: 'Default (aka non-Youtube)',
+	args: {
+		...Loop.args,
+		videoStyle: 'Default',
+	},
+} satisfies Story;
+
+export const WithoutProgressBar: Story = {
+	args: {
+		...Loop.args,
+		hideProgressBar: true,
+	},
+} satisfies Story;
+
+export const WithoutMuteUnmute: Story = {
+	args: {
+		...Loop.args,
+		sources: [
+			{
+				mimeType: 'video/mp4',
+				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+				width: 500,
+				height: 400,
+				hasAudio: false,
+			},
+		],
+	},
+} satisfies Story;
+
+export const WithControlsAtTop: Story = {
+	args: {
+		...Loop.args,
+		controlsPosition: 'top',
+	},
+} satisfies Story;
+
+export const WithM3U8File = {
+	name: 'With M3U8 file',
+	args: {
+		...Loop.args,
+		sources: [
+			{
+				src: 'https://uploads.guimcode.co.uk/2025/09/01/Loop__Japan_fireball--ace3fcf6-1378-41db-9d21-f3fc07072ab2-1.10.m3u8',
+				mimeType: 'application/x-mpegURL',
+				width: 900,
+				height: 720,
+			},
+			{
+				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+				mimeType: 'video/mp4',
+				width: 900,
+				height: 720,
+			},
+		],
+	},
+} satisfies Story;
+
+const videos = [
+	{
+		video: loop54Card,
+		aspectRatio: '5:4',
+	},
+	{
+		video: loop45Card,
+		aspectRatio: '4:5',
+	},
+	{
+		video: loop53Card,
+		aspectRatio: '5:3',
+	},
+	{
+		video: loop916Card,
+		aspectRatio: '9:16',
+	},
+	{
+		video: loop169Card,
+		aspectRatio: '16:9',
+	},
+] as const;
+
+export const WithDifferentAspectRatios = {
+	name: 'With different aspect ratios',
+	render: (args) => (
+		<>
+			{videos.map(({ video: { mainMedia }, aspectRatio }) => (
+				<div key={mainMedia.atomId}>
+					<div style={{ marginBottom: '40px' }}>
+						<p style={{ ...textSans17Object }}>
+							Aspect Ratio: {aspectRatio}
+						</p>
+						<SelfHostedVideo
+							{...args}
+							{...Loop.args}
+							sources={mainMedia.sources}
+							aspectRatio={mainMedia.aspectRatio}
+						/>
+					</div>
+				</div>
+			))}
+		</>
+	),
+} satisfies Story;
+
+export const WithDifferentAspectRatiosAnd54Container = {
+	name: 'With different aspect ratios in a 5:4 container',
+	render: (args) => (
+		<>
+			{videos.map(({ video: { mainMedia }, aspectRatio }) => (
+				<div key={mainMedia.atomId}>
+					<div style={{ marginBottom: '40px' }}>
+						<p style={{ ...textSans17Object }}>
+							Aspect Ratio: {aspectRatio}
+						</p>
+						<SelfHostedVideo
+							{...args}
+							{...Loop.args}
+							sources={mainMedia.sources}
+							aspectRatio={mainMedia.aspectRatio}
+							containerAspectRatioDesktop={5 / 4}
+						/>
+					</div>
+				</div>
+			))}
+		</>
+	),
+} satisfies Story;
+
 export const PausePlay: Story = {
-	...Loop5to4,
+	...Loop,
 	name: 'Pause and play interaction',
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
@@ -101,7 +213,7 @@ export const PausePlay: Story = {
 } satisfies Story;
 
 export const UnmuteMute: Story = {
-	...Loop5to4,
+	...Loop,
 	name: 'Unmute and mute interaction',
 	parameters: {
 		test: {
@@ -128,7 +240,7 @@ function sleep(ms: number) {
 }
 
 export const InteractionObserver: Story = {
-	...Loop5to4,
+	...Loop,
 	name: 'Interaction observer',
 	render: (args) => (
 		<div data-testid="test-container">
@@ -149,5 +261,42 @@ export const InteractionObserver: Story = {
 		await sleep(500); // Allow enough time to be confident that the video is paused.
 		await expect(Number(progressBar.ariaValueNow)).toEqual(progress);
 		await expect(canvas.queryByTestId('play-icon')).not.toBeInTheDocument();
+	},
+} satisfies Story;
+
+export const FullscreenOpen: Story = {
+	...Loop,
+	name: 'Open fullscreen',
+	args: {
+		...Loop.args,
+		videoStyle: 'Default',
+	},
+	parameters: {
+		test: {
+			// The following error is received without this flag: "TypeError: ophan.trackClickComponentEvent is not a function"
+			dangerouslyIgnoreUnhandledErrors: true,
+		},
+	},
+	play: async ({ canvasElement }) => {
+		/**
+		 * Ideally, this interaction test would open and close fullscreen.
+		 * However, the Fullscreen API is not implemented in jsdom, so
+		 * document.fullscreenElement will always be null regardless of what the
+		 * component does. Instead, we spy on requestFullscreen to ensure
+		 * that the correct handler is invoked when the fullscreen button is clicked.
+		 */
+
+		const canvas = within(canvasElement);
+
+		const requestFullscreenSpy = spyOn(
+			HTMLElement.prototype,
+			'requestFullscreen',
+		);
+
+		await canvas.findByTestId('fullscreen-icon');
+
+		await userEvent.click(canvas.getByTestId('fullscreen-icon'));
+
+		await expect(requestFullscreenSpy).toHaveBeenCalled();
 	},
 } satisfies Story;

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints, from } from '@guardian/source/foundations';
-import React from 'react';
+import type React from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
@@ -40,7 +40,6 @@ const basicCardProps: CardProps = {
 		altText: 'alt text',
 	},
 	mediaPositionOnDesktop: 'top',
-	showAge: true,
 	isExternalLink: false,
 	canPlayInline: true,
 	imageLoading: 'eager',
@@ -81,11 +80,16 @@ const mainSelfHostedVideo: MainMedia = {
 		{
 			src: 'https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4',
 			mimeType: 'video/mp4',
+			width: 1920,
+			height: 1080,
+			hasAudio: true,
 		},
 	],
-	height: 1080,
-	width: 1920,
-	image: `https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=1200&quality=45&dpr=2&s=none`,
+	aspectRatio: 16 / 9,
+	image: {
+		src: 'https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=1200&quality=45&dpr=2&s=none',
+		aspectRatio: '16:9',
+	},
 	duration: 100,
 };
 
@@ -320,9 +324,8 @@ export const WithExternalLink = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					mediaPositionOnDesktop="right"
+					mediaPositionOnDesktop="left"
 					kickerText="Instagram"
-					headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 					headlineText="Follow The Guardian now"
 					isExternalLink={true}
 				/>
@@ -356,6 +359,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 						articleMedia={youtubeMetaData}
 						headlineText="Video"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -372,6 +376,7 @@ export const WithMediaType = () => {
 							duration: 0,
 						}}
 						headlineText="Video without duration"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -393,8 +398,11 @@ export const WithMediaType = () => {
 							isLive: true,
 						}}
 						headlineText="Live video"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
+			</CardGroup>
+			<CardGroup>
 				<CardWrapper>
 					<Card
 						{...basicCardProps}
@@ -405,7 +413,8 @@ export const WithMediaType = () => {
 						}}
 						mainMedia={{ ...mainSelfHostedVideo }}
 						articleMedia={{ ...youtubeMetaData }}
-						headlineText="Video with self-hosted video main media"
+						headlineText="Self hosted video with Youtube article media"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -419,6 +428,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainSelfHostedVideo }}
 						articleMedia={{ ...selfHostedMetaData }}
 						headlineText="Self hosted video"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -434,6 +444,7 @@ export const WithMediaType = () => {
 						mainMedia={mainAudio}
 						articleMedia={audioMetaData}
 						headlineText="Audio"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -447,6 +458,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainSelfHostedVideo }}
 						articleMedia={audioMetaData}
 						headlineText="Audio with self-hosted video main media"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -462,6 +474,7 @@ export const WithMediaType = () => {
 						mainMedia={mainGallery}
 						articleMedia={galleryMetaData}
 						headlineText="Gallery"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -475,6 +488,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainSelfHostedVideo }}
 						articleMedia={galleryMetaData}
 						headlineText="Gallery with self-hosted video main media"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -497,6 +511,7 @@ export const WithMediaTypeAndSublinks = () => {
 					articleMedia={{ ...youtubeMetaData, duration: 30 }}
 					headlineText="Video"
 					supportingContent={twoSublinks}
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -511,6 +526,7 @@ export const WithMediaTypeAndSublinks = () => {
 					articleMedia={{ ...youtubeMetaData, duration: 0 }}
 					headlineText="Video without duration"
 					supportingContent={twoSublinks}
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -525,6 +541,7 @@ export const WithMediaTypeAndSublinks = () => {
 					articleMedia={audioMetaData}
 					headlineText="Audio"
 					supportingContent={twoSublinks}
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -539,6 +556,7 @@ export const WithMediaTypeAndSublinks = () => {
 					articleMedia={mainGallery}
 					headlineText="Gallery"
 					supportingContent={twoSublinks}
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -559,6 +577,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 					mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 					articleMedia={{ ...youtubeMetaData, duration: 30 }}
 					headlineText="Video"
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -572,6 +591,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 					mainMedia={mainAudio}
 					articleMedia={mainAudio}
 					headlineText="Audio"
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -585,6 +605,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 					mainMedia={mainGallery}
 					articleMedia={mainGallery}
 					headlineText="Gallery"
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -666,6 +687,14 @@ export const WithDifferentImageSizes = () => {
 				<Card
 					{...basicCardProps}
 					mediaPositionOnDesktop="left"
+					headlineText="xlarge"
+					mediaSize="xlarge"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					mediaPositionOnDesktop="bottom"
 					headlineText="jumbo"
 					mediaSize="jumbo"
 				/>
@@ -1106,7 +1135,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					mediaPositionOnDesktop="left"
+					mediaPositionOnDesktop="bottom"
 					mediaSize="jumbo"
 					showQuotedHeadline={true}
 				/>
@@ -1119,7 +1148,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					mediaPositionOnDesktop="left"
+					mediaPositionOnDesktop="bottom"
 					mediaSize="jumbo"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
@@ -1200,8 +1229,8 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						mediaPositionOnDesktop="top"
 						mediaSize="jumbo"
+						mediaPositionOnDesktop="top"
 						mediaPositionOnMobile="top"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
@@ -1329,7 +1358,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 							theme: Pillar.News,
 						}}
 						mediaPositionOnDesktop="top"
-						mediaPositionOnMobile="left"
+						mediaPositionOnMobile="top"
 						mediaSize="medium"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
@@ -1555,8 +1584,7 @@ export const WithSpecialPaletteVariations = () => {
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
 					title={containerPalette}
-					discussionApiUrl=""
-					editionId={'UK'}
+					editionId="UK"
 					containerPalette={containerPalette}
 					key={containerPalette}
 					isLabs={containerPalette === 'Branded'}
@@ -1573,101 +1601,6 @@ export const WithSpecialPaletteVariations = () => {
 					}
 				>
 					<Cards containerPalette={containerPalette} />
-				</FrontSection>
-			))}
-		</>
-	);
-};
-
-export const DynamoWithSpecialPaletteVariations = () => {
-	const DynamoCard = ({
-		containerPalette,
-		isLabs = false,
-	}: {
-		containerPalette: DCRContainerPalette;
-		isLabs?: boolean;
-	}) => (
-		<CardWrapper>
-			<Card
-				{...basicCardProps}
-				format={
-					isLabs
-						? {
-								...basicCardProps.format,
-								theme: ArticleSpecial.Labs,
-						  }
-						: basicCardProps.format
-				}
-				containerPalette={containerPalette}
-				containerType="dynamic/package"
-				isDynamo={true}
-				kickerText="Main kicker"
-				headlineSizes={{ desktop: 'medium', tablet: 'small' }}
-				mediaPositionOnDesktop="bottom"
-				mediaPositionOnMobile="bottom"
-				mediaSize="large"
-				supportingContent={[
-					{
-						...aBasicLink,
-						headline: 'Headline 1',
-						kickerText: `${isLabs ? 'Labs' : 'News'} kicker`,
-						format: isLabs
-							? {
-									...basicCardProps.format,
-									theme: ArticleSpecial.Labs,
-							  }
-							: basicCardProps.format,
-					},
-					{
-						...aBasicLink,
-						headline: 'Headline 2',
-						kickerText: `${isLabs ? 'Labs' : 'Sport'} kicker`,
-						format: {
-							theme: isLabs ? ArticleSpecial.Labs : Pillar.Sport,
-							design: ArticleDesign.Gallery,
-							display: ArticleDisplay.Standard,
-						},
-					},
-					{
-						...aBasicLink,
-						headline: 'Headline 3',
-						kickerText: `${isLabs ? 'Labs' : 'Culture'} kicker`,
-						format: {
-							theme: isLabs
-								? ArticleSpecial.Labs
-								: Pillar.Culture,
-							design: ArticleDesign.Standard,
-							display: ArticleDisplay.Standard,
-						},
-					},
-				]}
-			/>
-		</CardWrapper>
-	);
-
-	return (
-		<>
-			{containerPalettes.map((containerPalette) => (
-				<FrontSection
-					title={containerPalette}
-					discussionApiUrl=""
-					editionId={'UK'}
-					containerPalette={containerPalette}
-					key={containerPalette}
-					isLabs={containerPalette === 'Branded'}
-					collectionBranding={
-						containerPalette === 'Branded'
-							? {
-									kind: 'paid-content',
-									branding,
-									isContainerBranding: true,
-									hasMultipleBranding: false,
-									isFrontBranding: false,
-							  }
-							: undefined
-					}
-				>
-					<DynamoCard containerPalette={containerPalette} />
 				</FrontSection>
 			))}
 		</>
@@ -1856,33 +1789,7 @@ export const WithNoVerticalGap = () => {
 	);
 };
 
-export const WithAVerticalGapWhenLegacyContainer = () => {
-	return (
-		<>
-			<CardWrapper>
-				<div
-					css={css`
-						width: 280px;
-					`}
-				>
-					<Card
-						{...basicCardProps}
-						containerType={'dynamic/fast'}
-						mediaPositionOnDesktop="bottom"
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Standard,
-							theme: Pillar.Opinion,
-						}}
-						discussionId={'p/d8ex5'}
-					/>
-				</div>
-			</CardWrapper>
-		</>
-	);
-};
-
-export const WithAVerticalGapWhenBetaContainer = () => {
+export const WithAVerticalGap = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -1934,7 +1841,7 @@ export const WithAVerticalGapWhenScrollableSmallContainer = () => {
 	);
 };
 
-export const WithBetaContainerAndSublinks = () => {
+export const WithinFlexibleGeneralAndSublinks = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
@@ -1949,7 +1856,7 @@ export const WithBetaContainerAndSublinks = () => {
 	);
 };
 
-export const WithBetaContainerAndSublinksNoImage = () => {
+export const WithinFlexibleGeneralAndSublinksNoImage = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>

@@ -5,7 +5,7 @@ import {
 	resultGroups,
 } from '../../fixtures/manual/knowledgeQuizAtom';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { KnowledgeQuizAtom } from './KnowledgeQuizAtom.importable';
+import { KnowledgeQuizAtom } from './KnowledgeQuizAtom.island';
 
 jest.mock('../lib/useMatchMedia', () => ({
 	useMatchMedia: jest.fn(() => true),

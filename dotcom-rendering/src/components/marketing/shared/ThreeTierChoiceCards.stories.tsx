@@ -13,17 +13,21 @@ const meta: Meta<typeof ThreeTierChoiceCards> = {
 	title: 'Components/marketing/ThreeTierChoiceCards',
 	decorators: [
 		(Story, context) => {
+			const storyChoices =
+				(context.args.choices as ChoiceCard[]) ??
+				choiceCardsSettings.choiceCards;
+			const initialDefaultCard = storyChoices.find(
+				(card) => card.isDefault,
+			);
 			const [selectedChoiceCard, setSelectedChoiceCard] = useState<
 				ChoiceCard | undefined
-			>(choiceCardsSettings.choiceCards.find((card) => card.isDefault));
+			>(initialDefaultCard);
 
 			return (
 				<Story
 					args={{
 						...context.args,
-						selectedChoiceCard:
-							selectedChoiceCard ??
-							choiceCardsSettings.choiceCards[0],
+						selectedChoiceCard,
 						setSelectedChoiceCard,
 					}}
 				/>
@@ -76,5 +80,17 @@ export const WithCustomButtonColours: Story = {
 			pillTextColour: '#FFFFFF',
 			pillBackgroundColour: '#007ABC',
 		},
+	},
+};
+
+export const WithDefaultExpanded: Story = {
+	name: 'No default check but expanded state',
+	args: {
+		id: 'banner',
+		choices: choiceCardsSettings.choiceCards.map((c) =>
+			c.product.supportTier === 'SupporterPlus'
+				? { ...c, isDefault: false, defaultExpanded: true }
+				: { ...c, isDefault: false },
+		),
 	},
 };

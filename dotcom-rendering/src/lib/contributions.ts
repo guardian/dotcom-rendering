@@ -227,10 +227,14 @@ export const getPurchaseInfo = (): PurchaseInfo => {
 	return purchaseInfo;
 };
 
-const hasCanTargetConsent = (): Promise<boolean> =>
-	onConsent()
+const hasCanTargetConsent = (): Promise<boolean> => {
+	if (getCookie({ name: 'gu-cmp-disabled', shouldMemoize: true })) {
+		return Promise.resolve(true);
+	}
+	return onConsent()
 		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);
+};
 
 // Returns Auth headers only if user has targeting consent and is signed in
 export const getAuthHeaders = async (): Promise<HeadersInit | undefined> => {

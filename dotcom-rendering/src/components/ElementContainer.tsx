@@ -103,10 +103,6 @@ export const ElementContainer = ({
 		className,
 		children: (
 			<div
-				/**
-				 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
-				 * this id pre-existed showMore so is probably also being used for something else.
-				 */
 				id={sectionId}
 				style={{
 					borderColor: borderColour,

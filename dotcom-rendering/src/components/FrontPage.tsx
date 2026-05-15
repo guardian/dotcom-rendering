@@ -7,19 +7,19 @@ import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { Front } from '../types/front';
-import { AdmiralScript } from './AdmiralScript.importable';
-import { AlreadyVisited } from './AlreadyVisited.importable';
-import { BrazeMessaging } from './BrazeMessaging.importable';
+import { AdmiralScript } from './AdmiralScript.island';
+import { AlreadyVisited } from './AlreadyVisited.island';
+import { BrazeMessaging } from './BrazeMessaging.island';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
-import { FocusStyles } from './FocusStyles.importable';
-import { GoogleOneTap, isGoogleOneTapEnabled } from './GoogleOneTap.importable';
+import { FocusStyles } from './FocusStyles.island';
+import { GoogleOneTap, isGoogleOneTapEnabled } from './GoogleOneTap.island';
 import { Island } from './Island';
-import { Metrics } from './Metrics.importable';
-import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
-import { SetABTests } from './SetABTests.importable';
-import { SetAdTargeting } from './SetAdTargeting.importable';
-import { ShowHideContainers } from './ShowHideContainers.importable';
+import { Metrics } from './Metrics.island';
+import { ReaderRevenueDev } from './ReaderRevenueDev.island';
+import { SetABTests } from './SetABTests.island';
+import { SetAdTargeting } from './SetAdTargeting.island';
+import { ShowHideContainers } from './ShowHideContainers.island';
 import { SkipTo } from './SkipTo';
 
 type Props = {
@@ -112,7 +112,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 					You can{' '}
 					<a
 						style={{ color: 'inherit' }}
-						href="/opt/out/dark-mode-web"
+						href="/ab-tests/opt-out/webx-dark-mode-web"
 					>
 						opt out anytime
 					</a>{' '}

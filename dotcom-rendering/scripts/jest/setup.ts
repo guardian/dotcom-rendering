@@ -1,4 +1,3 @@
-/* eslint-disable ssr-friendly/no-dom-globals-in-module-scope -- this runs in JSDOM */
 // add some helpful assertions
 import '@testing-library/jest-dom';
 import { TextDecoder, TextEncoder } from 'node:util';
@@ -61,7 +60,7 @@ const windowGuardian = {
 // We should never be able to directly set things to the global window object.
 // But in this case we want to stub things for testing, so it's ok to ignore this rule
 if (!isServer) {
-	// @ts-expect-error
+	// @ts-expect-error -- we want to stub the global window.guardian object for testing purposes
 	window.guardian = windowGuardian;
 }
 

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { unifyPageContent } from '../lib/unifyPageContent';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
-import { InteractiveAtomMessenger } from './InteractiveAtomMessenger.importable';
+import { InteractiveAtomMessenger } from './InteractiveAtomMessenger.island';
 import { Island } from './Island';
 
 const containerStyles = css`

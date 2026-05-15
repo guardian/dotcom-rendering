@@ -5,7 +5,6 @@ import type { ArticleFormat } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
-import type { PlayButtonSize } from '../Card/components/PlayIcon';
 import { PlayIcon } from '../Card/components/PlayIcon';
 import { FormatBoundary } from '../FormatBoundary';
 import { Pill } from '../Pill';
@@ -63,8 +62,6 @@ type Props = {
 	format: ArticleFormat;
 	alt: string;
 	hidePillOnMobile: boolean;
-	iconSizeOnDesktop: PlayButtonSize;
-	iconSizeOnMobile: PlayButtonSize;
 	title?: string;
 	image?: string;
 	duration?: number; // in seconds
@@ -80,8 +77,6 @@ export const YoutubeAtomOverlay = ({
 	format,
 	alt,
 	hidePillOnMobile,
-	iconSizeOnDesktop,
-	iconSizeOnMobile,
 	title,
 	image,
 	duration,
@@ -140,11 +135,7 @@ export const YoutubeAtomOverlay = ({
 						/>
 					</div>
 				) : null}
-				<PlayIcon
-					iconWidth="wide"
-					iconSizeOnDesktop={iconSizeOnDesktop}
-					iconSizeOnMobile={iconSizeOnMobile}
-				/>
+				<PlayIcon iconWidth="wide" />
 			</button>
 		</FormatBoundary>
 	);

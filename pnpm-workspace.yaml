@@ -1,3 +1,12 @@
 packages:
   - 'dotcom-rendering'
+  - 'ab-testing'
   - 'ab-testing/*'
+allowBuilds:
+  '@swc/core': true
+  esbuild: true
+  nice-napi: true
+minimumReleaseAge: 2880 # 2 day minimum package version age
+minimumReleaseAgeExclude:
+  - '@guardian/*'
+blockExoticSubdeps: true

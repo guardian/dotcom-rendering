@@ -1,14 +1,11 @@
-import path from 'node:path';
 import { createRequire } from 'node:module';
+import path from 'node:path';
+import process from 'node:process';
+import type { StorybookConfig } from '@storybook/react-webpack5';
+import { defineMain } from '@storybook/react-webpack5/node';
 import webpack from 'webpack';
 import { saveStories } from '../scripts/gen-stories/get-stories.mjs';
-import type { StorybookConfig } from '@storybook/react-webpack5';
 import { svgr } from '../webpack/svg.cjs';
-import process from 'node:process';
-
-// ESM equivalent of __dirname
-const __dirname = import.meta.dirname;
-
 // Import CommonJS webpack config in ESM context
 const require = createRequire(import.meta.url);
 const {
@@ -19,7 +16,7 @@ const {
 // Generate dynamic Card and Layout stories
 saveStories();
 
-const config: StorybookConfig = {
+export default defineMain({
 	features: {
 		actions: true,
 		backgrounds: true,
@@ -47,22 +44,22 @@ const config: StorybookConfig = {
 
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
-		config = webpackConfig(config);
+		const newConfig = webpackConfig(config);
 
-		config.resolve ??= {};
+		newConfig.resolve ??= {};
 
 		// Global options for webpack
-		config.resolve.extensions?.push('.ts', '.tsx');
+		newConfig.resolve.extensions?.push('.ts', '.tsx');
 
-		config.resolve.fallback ??= {};
+		newConfig.resolve.fallback ??= {};
 		// clean-css will try to import these packages
-		config.resolve.fallback['http'] = false;
-		config.resolve.fallback['https'] = false;
-		config.resolve.fallback['os'] = false;
+		newConfig.resolve.fallback['http'] = false;
+		newConfig.resolve.fallback['https'] = false;
+		newConfig.resolve.fallback['os'] = false;
 
 		// Required as otherwise 'process' will not be defined when included on its own (without .env)
 		// e.g process?.env?.SOME_VAR
-		config.plugins?.push(
+		newConfig.plugins?.push(
 			new webpack.DefinePlugin({
 				'process.env': JSON.stringify({
 					SDC_URL: process.env.SDC_URL,
@@ -74,7 +71,7 @@ const config: StorybookConfig = {
 				Buffer: ['buffer', 'Buffer'],
 			}),
 		);
-		return config;
+		return newConfig;
 	},
 
 	env: (config) => ({
@@ -83,6 +80,9 @@ const config: StorybookConfig = {
 		// See: https://storybook.js.org/docs/react/configure/environment-variables
 		CI: 'true',
 	}),
+	core: {
+		allowedHosts: ['storybook.thegulocal.com'],
+	},
 
 	framework: {
 		name: '@storybook/react-webpack5',
@@ -92,7 +92,7 @@ const config: StorybookConfig = {
 	typescript: {
 		reactDocgen: 'react-docgen',
 	},
-};
+});
 
 /** the webpack.Configuration type from Storybook */
 type Configuration = Parameters<
@@ -103,24 +103,32 @@ const webpackConfig = (config: Configuration) => {
 	const rules = config.module?.rules ?? [];
 
 	config.resolve ??= {};
-	config.resolve.alias ??= {};
 
-	// Mock JSDOM for storybook - it relies on native node.js packages
-	// Allows us to use enhancers in stories for better testing of components & full articles
-	config.resolve.alias['jsdom$'] = path.resolve(
-		__dirname,
-		'./mocks/jsdom.ts',
-	);
+	config.resolve.alias = {
+		...config.resolve.alias,
 
-	// log4js tries to call "fs" in storybook -- we can ignore it
-	config.resolve.alias[
-		`${path.resolve(__dirname, '../src/server/lib/logging')}$`
-	] = path.resolve(__dirname, './mocks/log4js.ts');
+		Buffer: 'buffer',
+		react: 'react',
+		'react-dom': 'react-dom',
 
-	// Mock BridgetApi for storybook
-	config.resolve.alias[
-		`${path.resolve(__dirname, '../src/lib/bridgetApi')}$`
-	] = path.resolve(__dirname, './mocks/bridgetApi.ts');
+		// Mock JSDOM for storybook - it relies on native node.js packages
+		// Allows us to use enhancers in stories for better testing of components & full articles
+		jsdom$: path.resolve(import.meta.dirname, './mocks/jsdom.ts'),
+
+		// log4js tries to call "fs" in storybook -- we can ignore it
+		[`${path.resolve(import.meta.dirname, '../src/server/lib/logging')}$`]:
+			path.resolve(import.meta.dirname, './mocks/log4js.ts'),
+
+		// Mock BridgetApi for storybook
+		[`${path.resolve(import.meta.dirname, '../src/lib/bridgetApi')}$`]:
+			path.resolve(import.meta.dirname, './mocks/bridgetApi.ts'),
+
+		// Mock identity auth frontend to prevent Storybook components from hanging in Pending
+		'@guardian/identity-auth-frontend': path.resolve(
+			import.meta.dirname,
+			'./mocks/identityAuthFrontend.ts',
+		),
+	};
 
 	const webpackLoaders = getLoaders('client.web');
 
@@ -133,7 +141,7 @@ const webpackConfig = (config: Configuration) => {
 	// https://storybook.js.org/docs/configurations/typescript-config/
 	rules.push({
 		test: /\.[jt]sx?|mjs$/,
-		include: [path.resolve(__dirname, '../')],
+		include: [path.resolve(import.meta.dirname, '../')],
 		exclude: transpileExclude,
 		use: webpackLoaders,
 	});
@@ -142,20 +150,11 @@ const webpackConfig = (config: Configuration) => {
 	const fileLoaderRule = rules.find((rule) => {
 		return String(rule?.test).includes('svg');
 	});
-	fileLoaderRule &&
-		typeof fileLoaderRule !== 'string' &&
-		(fileLoaderRule.exclude = /\.svg$/);
+	if (fileLoaderRule && typeof fileLoaderRule !== 'string') {
+		fileLoaderRule.exclude = /\.svg$/;
+	}
 	rules.push(svgr);
-	config.resolve.modules = [
-		...((config && config.resolve && config.resolve.modules) || []),
-	];
-	config.resolve.alias = {
-		...config.resolve.alias,
-		Buffer: 'buffer',
-		react: 'react',
-		'react-dom': 'react-dom',
-	};
+	config.resolve.modules = [...(config.resolve.modules || [])];
+
 	return config;
 };
-
-export default config;

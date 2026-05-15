@@ -1,25 +1,21 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { ListenToArticleButton as ListenToArticleButtonComponent } from './ListenToArticleButton';
 
-const meta = {
+const meta = preview.meta({
 	component: ListenToArticleButtonComponent,
 	title: 'Components/Listen To Article Button',
-} satisfies Meta<typeof ListenToArticleButtonComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const ListenToArticleWithDurationButton = {
+export const ListenToArticleWithDurationButton = meta.story({
 	args: {
 		onClickHandler: () => undefined,
 		audioDuration: '5:14',
 	},
-} satisfies Story;
+});
 
-export const ListenToArticleNoDurationButton = {
+export const ListenToArticleNoDurationButton = meta.story({
 	args: {
 		onClickHandler: () => undefined,
 		audioDuration: undefined,
 	},
-} satisfies Story;
+});

@@ -102,6 +102,7 @@ export const ProductCardLeftCol = ({
 				format={format}
 				image={image}
 				url={productCtas[0]?.url}
+				xCustComponentId={'left-col-image'}
 			/>
 			<div css={productInfoContainer}>
 				<div css={brandNameFont}>{brandName}</div>
@@ -119,7 +120,10 @@ export const ProductCardLeftCol = ({
 				)}
 			</div>
 			<div css={buttonContainer}>
-				<ProductCardButtons productCtas={productCtas} />
+				<ProductCardButtons
+					xCustComponentId={'left-col'}
+					productCtas={productCtas}
+				/>
 			</div>
 			{customAttributes.length > 0 && (
 				<div css={customAttributesContainer}>

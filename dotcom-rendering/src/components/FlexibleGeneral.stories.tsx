@@ -15,6 +15,7 @@ import {
 	trails,
 	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { customMockFetch } from '../lib/mockRESTCalls';
 import type { BoostLevel } from '../types/content';
@@ -24,13 +25,11 @@ import type {
 	DCRGroupedTrails,
 	DCRSupportingContent,
 } from '../types/front';
+import type { ArticleMedia, MainMedia } from '../types/mainMedia';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
 const emptyGroupedTrails: DCRGroupedTrails = {
-	huge: [],
-	veryBig: [],
-	big: [],
 	standard: [],
 	snap: [],
 	splash: [],
@@ -43,6 +42,13 @@ const splashCard = {
 	trailText: 'Trail text for splash card',
 	kickerText: 'Kicker for splash card',
 };
+
+const boostLevels = [
+	'gigaboost',
+	'megaboost',
+	'boost',
+	'default',
+] as BoostLevel[];
 
 /**
  * This creates a list of 8 standard cards which contain:
@@ -156,7 +162,7 @@ const meta = {
 	args: {
 		frontSectionTitle: 'Flexible general',
 		groupedTrails: emptyGroupedTrails,
-		showAge: true,
+		hideAge: false,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		collectionId: 1,
@@ -164,9 +170,8 @@ const meta = {
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
 			title={frontSectionTitle}
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
-			showTopBorder={true}
+			showTopBorder={false}
 		>
 			<FlexibleGeneral {...args} />
 		</FrontSection>
@@ -209,12 +214,7 @@ export const SplashWithSublinks: Story = {
 			title: string;
 			supportingContent?: DCRSupportingContent[];
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -304,12 +304,7 @@ export const SplashBoostLevels: Story = {
 			title: string;
 			boostLevel?: BoostLevel;
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -353,12 +348,7 @@ export const SplashWithImageSupression: Story = {
 			title: string;
 			boostLevel?: BoostLevel;
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -393,12 +383,7 @@ export const SplashWithLiveUpdates: Story = {
 			title: string;
 			boostLevel?: BoostLevel;
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -431,12 +416,7 @@ export const StandardBoostedWithLiveUpdates: Story = {
 			title: string;
 			boostLevel: BoostLevel;
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -476,11 +456,6 @@ export const StandardCards: Story = {
 			],
 		},
 	},
-	parameters: {
-		chromatic: {
-			disableSnapshot: true,
-		},
-	},
 };
 
 const containerPalettes = [
@@ -512,14 +487,13 @@ export const WithSpecialPaletteVariations = {
 	},
 	render: (args) => (
 		<>
-			{containerPalettes.map((containerPalette) => (
+			{containerPalettes.map((containerPalette, index) => (
 				<FrontSection
-					discussionApiUrl={discussionApiUrl}
-					editionId={'UK'}
-					showTopBorder={true}
-					containerPalette={containerPalette}
 					key={containerPalette}
+					editionId="UK"
+					containerPalette={containerPalette}
 					title={containerPalette}
+					showTopBorder={index > 0}
 				>
 					<FlexibleGeneral
 						containerPalette={containerPalette}
@@ -569,12 +543,7 @@ export const SelfHostedVideoCardsInSplashSlots: Story = {
 			video: DCRFrontCard;
 			boostLevel?: BoostLevel;
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -584,13 +553,6 @@ export const SelfHostedVideoCardsInSplashSlots: Story = {
 				/>
 			</FrontSection>
 		);
-
-		const boostLevels = [
-			'gigaboost',
-			'megaboost',
-			'boost',
-			'default',
-		] as BoostLevel[];
 
 		const videos = [
 			selfHostedLoopVideo54Card,
@@ -612,6 +574,74 @@ export const SelfHostedVideoCardsInSplashSlots: Story = {
 						/>
 					)),
 				)}
+			</>
+		);
+	},
+};
+
+export const YoutubeVideoCardInSplashSlot: Story = {
+	render: (args) => {
+		const Section = ({
+			title,
+			boostLevel,
+		}: {
+			title: string;
+			boostLevel?: BoostLevel;
+		}) => (
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						splash: [{ ...youtubeVideoTrails[0], boostLevel }],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				{boostLevels.map((boostLevel) => (
+					<Section
+						key={boostLevel}
+						title={boostLevel}
+						boostLevel={boostLevel}
+					/>
+				))}
+			</>
+		);
+	},
+};
+
+export const YoutubeVideoCardInStandardSlot: Story = {
+	render: (args) => {
+		const Section = ({
+			title,
+			boostLevel,
+		}: {
+			title: string;
+			boostLevel?: BoostLevel;
+		}) => (
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						standard: [{ ...youtubeVideoTrails[0], boostLevel }],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				{boostLevels.map((boostLevel) => (
+					<Section
+						key={boostLevel}
+						title={boostLevel}
+						boostLevel={boostLevel}
+					/>
+				))}
 			</>
 		);
 	},
@@ -648,7 +678,6 @@ export const StandardBoostedMediaCardWithSublinks: Story = {
 export const SplashWithSlideshow: Story = {
 	name: 'Splash with a slideshow',
 	args: {
-		frontSectionTitle: 'Flexible General Splash card with a slideshow',
 		groupedTrails: {
 			...emptyGroupedTrails,
 			splash: [
@@ -661,13 +690,79 @@ export const SplashWithSlideshow: Story = {
 		},
 		collectionId: 1,
 	},
+	render: (args) => {
+		const Section = ({
+			title,
+			format,
+			mainMedia,
+			articleMedia,
+		}: {
+			title: string;
+			format: ArticleFormat;
+			mainMedia?: MainMedia;
+			articleMedia?: ArticleMedia;
+		}) => (
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						splash: [
+							{
+								...slideshowCard,
+								boostLevel: 'default',
+								headline:
+									'Default splash card with a slideshow',
+								format,
+								mainMedia,
+								articleMedia,
+							},
+						],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				<Section
+					title="Slideshow"
+					format={{
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+						theme: Pillar.News,
+					}}
+				/>
+				<Section
+					title="Slideshow podcast"
+					format={{
+						design: ArticleDesign.Audio,
+						display: ArticleDisplay.Standard,
+						theme: Pillar.Sport,
+					}}
+					mainMedia={{
+						type: 'Audio',
+						duration: '46:12',
+						podcastImage: {
+							src: 'https://uploads.guim.co.uk/2021/01/22/AudioLongReadJan2021.jpg',
+							altText: 'The Audio Long Read',
+						},
+					}}
+					articleMedia={{
+						type: 'Audio',
+						duration: '46:12',
+					}}
+				/>
+			</>
+		);
+	},
 };
 
-export const StandardCardWithSlideshow: Story = {
-	name: 'Standard card with a slideshow',
+export const StandardCardsWithSlideshow: Story = {
+	name: 'Standard cards with a slideshow',
 	args: {
 		frontSectionTitle:
-			'Flexible General standard card with a slideshow at each boost level',
+			'Standard cards with a slideshow at each boost level',
 		groupedTrails: {
 			...emptyGroupedTrails,
 			standard: [
@@ -684,8 +779,52 @@ export const StandardCardWithSlideshow: Story = {
 				},
 				{
 					...slideshowCard,
+					boostLevel: 'boost',
+					headline: 'Boosted card with an audio slideshow',
+					mainMedia: {
+						type: 'Audio',
+						duration: '46:12',
+						podcastImage: {
+							src: 'https://uploads.guim.co.uk/2021/01/22/AudioLongReadJan2021.jpg',
+							altText: 'The Audio Long Read',
+						},
+					},
+					articleMedia: {
+						type: 'Audio',
+						duration: '46:12',
+					},
+					format: {
+						design: ArticleDesign.Audio,
+						display: ArticleDisplay.Standard,
+						theme: Pillar.Sport,
+					},
+				},
+				{
+					...slideshowCard,
 					boostLevel: 'megaboost',
 					headline: 'MegaBoosted card with a slideshow',
+				},
+				{
+					...slideshowCard,
+					boostLevel: 'megaboost',
+					headline: 'MegaBoosted card with an audio slideshow',
+					mainMedia: {
+						type: 'Audio',
+						duration: '46:12',
+						podcastImage: {
+							src: 'https://uploads.guim.co.uk/2021/01/22/AudioLongReadJan2021.jpg',
+							altText: 'The Audio Long Read',
+						},
+					},
+					articleMedia: {
+						type: 'Audio',
+						duration: '46:12',
+					},
+					format: {
+						design: ArticleDesign.Audio,
+						display: ArticleDisplay.Standard,
+						theme: Pillar.Sport,
+					},
 				},
 			],
 		},

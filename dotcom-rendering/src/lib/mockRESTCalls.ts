@@ -202,15 +202,14 @@ export const mockFetch: typeof global.fetch = (
 			url,
 		):
 			return createMockResponse(200, discussion);
-		case /.*contributions\.(code\.dev-)?guardianapis\.com\/header/.test(
-			url,
-		) && requestInit?.method === 'POST':
+		// Get contributions header or local Storybook header fetches
+		case /.*\/header/.test(url):
 			return createMockResponse(200, contributionsHeaderResponse);
-		// Get contributions header
-		case /.*contributions\.(code\.dev-)?guardianapis\.com\/header/.test(
-			url,
-		):
-			return createMockResponse(200, contributionsHeaderResponse);
+		// Catch local Storybook epic fetches
+		case /.*\/epic/.test(url):
+			return createMockResponse(200, {
+				data: { module: { url: '', name: 'Epic', props: {} } },
+			});
 		// Get Ophan
 		case /.*ophan\.theguardian\.com\/img\/.*/.test(url):
 			return createMockResponse(200);
@@ -252,7 +251,8 @@ export const mockFetch: typeof global.fetch = (
 			url,
 		) && requestInit?.method === 'POST':
 			const decodedBody = decodeURIComponent(
-				requestInit?.body?.toString() ?? '',
+				// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a mock
+				requestInit.body?.toString() ?? '',
 			);
 			const exampleDomainRegex = /\bexample\.com\b/;
 			return exampleDomainRegex.test(decodedBody)
@@ -263,6 +263,7 @@ export const mockFetch: typeof global.fetch = (
 		) && requestInit?.method === 'POST':
 			return createMockResponse(
 				200,
+				// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a mock
 				getAuxiaMock(requestInit.body?.toString() ?? ''),
 			);
 		case /.*contributions\.(code\.dev-)?guardianapis\.com\/auxia\/log-treatment-interaction/.test(

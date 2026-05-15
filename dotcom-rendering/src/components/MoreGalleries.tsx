@@ -204,7 +204,9 @@ const getDefaultCardProps = (
 
 export const MoreGalleries = (props: Props) => {
 	const [firstTrail, ...standardCards] = props.trails;
-	if (!firstTrail) return null;
+	if (!firstTrail) {
+		return null;
+	}
 
 	return (
 		<div

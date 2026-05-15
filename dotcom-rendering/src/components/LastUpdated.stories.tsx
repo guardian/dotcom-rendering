@@ -1,15 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { LastUpdated } from './LastUpdated';
 
-const meta: Meta = {
+const meta = preview.meta({
 	component: LastUpdated,
 	title: 'Components/LastUpdated',
-};
+});
 
-type Story = StoryObj<typeof LastUpdated>;
-
-export const Default: Story = {
+export const Default = meta.story({
 	args: { lastUpdated: 1613763519000 },
-};
-
-export default meta;
+});

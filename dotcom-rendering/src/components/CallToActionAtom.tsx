@@ -1,83 +1,151 @@
 import { css } from '@emotion/react';
 import {
+	calculateHoverColour,
 	from,
 	palette as sourcePalette,
-	textSansBold20,
+	space,
+	textSansBold24,
+	textSansBold28,
 } from '@guardian/source/foundations';
-import { Button, SvgExternal } from '@guardian/source/react-components';
+import { LinkButton, SvgExternal } from '@guardian/source/react-components';
+import { transparentColour } from '../lib/transparentColour';
 
-type Props = {
+type CallToActionProps = {
 	linkUrl: string;
-	backgroundImage: string;
-	text: string;
-	buttonText: string;
+	backgroundImage?: string;
+	text?: string;
+	buttonText?: string;
+	accentColor?: string;
 };
+
+const blurStyles = css`
+	position: absolute;
+	top: -${space[10]}px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	backdrop-filter: blur(12px) brightness(0.5);
+	@supports not (backdrop-filter: blur(12px)) {
+		background-color: linear-gradient(
+			to top,
+			${transparentColour(sourcePalette.neutral[10], 0.99)},
+			${transparentColour(sourcePalette.neutral[10], 0.95)},
+			${transparentColour(sourcePalette.neutral[10], 0.85)},
+			${transparentColour(sourcePalette.neutral[10], 0.75)},
+			transparent
+		);
+	}
+	mask-image: linear-gradient(
+		to top,
+		${transparentColour(sourcePalette.neutral[10], 0.99)},
+		${transparentColour(sourcePalette.neutral[10], 0.95)},
+		${transparentColour(sourcePalette.neutral[10], 0.85)},
+		${transparentColour(sourcePalette.neutral[10], 0.75)},
+		transparent
+	);
+
+	${from.tablet} {
+		top: -${space[8]}px;
+	}
+`;
+
+const blurAndTextWrapperStyles = css`
+	display: flex;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+`;
+
+const textAndButtonWrapperStyles = css`
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: start;
+	padding: ${space[3]}px ${space[2]}px ${space[6]}px;
+	z-index: 1;
+
+	${from.tablet} {
+		flex-direction: row;
+		justify-content: start;
+		align-items: flex-end;
+		padding: ${space[5]}px;
+	}
+
+	${from.desktop} {
+		padding: ${space[6]}px;
+	}
+`;
+
+const textStyles = css`
+	${textSansBold24}
+	width: 100%;
+	margin-bottom: ${space[5]}px;
+	color: ${sourcePalette.neutral[100]};
+
+	${from.tablet} {
+		${textSansBold28}
+		width: auto;
+		margin: 0;
+		margin-right: ${space[5]}px;
+	}
+`;
 
 export const CallToActionAtom = ({
 	linkUrl,
 	backgroundImage,
 	text,
 	buttonText,
-}: Props) => {
+	accentColor,
+}: CallToActionProps) => {
+	const buttonBgColour = accentColor ?? sourcePalette.neutral[100];
+
 	return (
-		<a
-			href={linkUrl}
+		<picture
 			css={css`
-				text-decoration: none;
+				position: relative;
+				display: flex;
 			`}
 		>
-			<picture
+			<img
+				src={backgroundImage}
+				alt={''}
 				css={css`
-					position: relative;
-					display: flex;
-				`}
-			>
-				<img
-					src={backgroundImage}
-					alt={''}
-					css={css`
-						height: 200px;
-						object-fit: cover;
+					height: 200px;
+					object-fit: cover;
+					flex-grow: 1;
 
-						${from.tablet} {
-							height: 250px;
-						}
-						${from.leftCol} {
-							height: 375px;
-						}
-					`}
-				/>
-				<div
-					css={css`
-						position: absolute;
-						bottom: 10%;
-						left: 10%;
-						transform: translate(-10%, -10%);
-					`}
-				>
-					<h2
-						css={css`
-							${textSansBold20}
-							margin-bottom: 8px;
-							color: white;
-						`}
-					>
-						{text}
-					</h2>
-					<Button
+					${from.tablet} {
+						height: 250px;
+					}
+					${from.leftCol} {
+						height: 375px;
+					}
+				`}
+			/>
+			<div css={blurAndTextWrapperStyles}>
+				<div css={textAndButtonWrapperStyles}>
+					{!!text && <h2 css={textStyles}>{text}</h2>}
+					<LinkButton
+						href={linkUrl}
 						iconSide="right"
 						size="small"
 						icon={<SvgExternal />}
 						theme={{
-							textPrimary: sourcePalette.neutral[7],
-							backgroundPrimary: sourcePalette.neutral[97],
-							backgroundPrimaryHover: sourcePalette.neutral[73],
+							textPrimary: accentColor
+								? sourcePalette.neutral[100]
+								: sourcePalette.neutral[0],
+							backgroundPrimary: buttonBgColour,
+							backgroundPrimaryHover:
+								calculateHoverColour(buttonBgColour),
 						}}
 					>
-						{buttonText}
-					</Button>
+						{buttonText ?? 'Learn more'}
+					</LinkButton>
 				</div>
-			</picture>
-		</a>
+				{/* blur overlay */}
+				<div aria-hidden="true" css={blurStyles} />
+			</div>
+		</picture>
 	);
 };

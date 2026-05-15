@@ -22,24 +22,22 @@ const ageStyles = (colour: string) => {
 };
 
 type Props = {
-	serverTime?: number;
 	webPublication: {
 		date: string;
 		isWithinTwelveHours: boolean;
 	};
-	isTagPage: boolean;
+	isAbsolute: boolean;
+	serverTime?: number;
 	showClock?: boolean;
 	colour?: string;
-	isStorylines?: boolean;
 };
 
 export const CardAge = ({
-	serverTime,
 	webPublication,
-	isTagPage,
+	isAbsolute,
+	serverTime,
 	showClock,
 	colour = palette('--card-footer-text'),
-	isStorylines,
 }: Props) => {
 	if (timeAgo(new Date(webPublication.date).getTime()) === false) {
 		return null;
@@ -48,10 +46,10 @@ export const CardAge = ({
 	return (
 		<span css={ageStyles(colour)}>
 			{showClock && <ClockIcon />}
-			{isTagPage && !isStorylines ? (
+			{isAbsolute ? (
 				<DateTime
 					date={new Date(webPublication.date)}
-					display={'absolute'}
+					display="absolute"
 					showWeekday={false}
 					showDate={!webPublication.isWithinTwelveHours}
 					showTime={true}
@@ -59,7 +57,7 @@ export const CardAge = ({
 			) : (
 				<DateTime
 					date={new Date(webPublication.date)}
-					display={'relative'}
+					display="relative"
 					serverTime={serverTime}
 					showWeekday={false}
 					showDate={true}

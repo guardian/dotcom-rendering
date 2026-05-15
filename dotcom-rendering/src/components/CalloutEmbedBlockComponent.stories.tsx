@@ -3,7 +3,7 @@ import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorator
 import { allModes } from '../../.storybook/modes';
 import { calloutCampaign } from '../../fixtures/manual/calloutCampaign';
 import { customMockFetch } from '../lib/mockRESTCalls';
-import { CalloutEmbedBlockComponent as CalloutEmbedBlock } from './CalloutEmbedBlockComponent.importable';
+import { CalloutEmbedBlockComponent as CalloutEmbedBlock } from './CalloutEmbedBlockComponent.island';
 
 const meta = {
 	component: CalloutEmbedBlock,

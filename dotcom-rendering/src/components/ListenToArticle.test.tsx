@@ -1,4 +1,4 @@
-import { formatAudioDuration } from './ListenToArticle.importable';
+import { formatAudioDuration } from './ListenToArticle.island';
 
 describe('format Audio Duration correctly', () => {
 	const testCases = [

@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 import { ConfigProvider } from './ConfigContext';
-import { ProfileAtom } from './ProfileAtom.importable';
+import { ProfileAtom } from './ProfileAtom.island';
 
 describe('ProfileAtom', () => {
 	it('should render', () => {

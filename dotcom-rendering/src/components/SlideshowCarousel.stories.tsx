@@ -5,7 +5,7 @@ import type { ReactNode } from 'react';
 import { palette } from '../palette';
 import type { DCRContainerPalette, DCRSlideshowImage } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
-import { SlideshowCarousel } from './SlideshowCarousel.importable';
+import { SlideshowCarousel } from './SlideshowCarousel.island';
 
 const images = [
 	{

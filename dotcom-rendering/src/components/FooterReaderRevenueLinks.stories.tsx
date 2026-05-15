@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brandBackground } from '@guardian/source/foundations';
-import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.importable';
+import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.island';
 
 export default {
 	component: FooterReaderRevenueLinks,

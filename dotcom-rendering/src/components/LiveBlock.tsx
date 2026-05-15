@@ -8,7 +8,7 @@ import type { ServerSideTests, Switches } from '../types/config';
 import { Island } from './Island';
 import { LastUpdated } from './LastUpdated';
 import { LiveBlockContainer } from './LiveBlockContainer';
-import { ShareButton } from './ShareButton.importable';
+import { ShareButton } from './ShareButton.island';
 
 type Props = {
 	format: ArticleFormat;
@@ -49,7 +49,9 @@ export const LiveBlock = ({
 	serverTime,
 	idApiUrl,
 }: Props) => {
-	if (block.elements.length === 0) return null;
+	if (block.elements.length === 0) {
+		return null;
+	}
 
 	// Decide if the block has been updated or not
 	const lastUpdated =
@@ -76,7 +78,6 @@ export const LiveBlock = ({
 		>
 			{block.elements.map((element, index) => (
 				<RenderArticleElement
-					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
 					key={index}
 					format={format}
 					element={element}

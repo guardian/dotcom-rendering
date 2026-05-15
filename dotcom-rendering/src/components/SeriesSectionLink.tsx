@@ -23,7 +23,7 @@ import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { Hide } from './Hide';
 import { Island } from './Island';
-import { PulsingDot } from './PulsingDot.importable';
+import { PulsingDot } from './PulsingDot.island';
 
 type Props = {
 	format: ArticleFormat;
@@ -231,7 +231,7 @@ export const SeriesSectionLink = ({
 	// the publication tag over the commentisfree tag.
 	const tag = observerTag && isCommentIsFree ? observerTag : seriesTag;
 
-	const hasSeriesTag = tag && tag.type === 'Series';
+	const hasSeriesTag = tag?.type === 'Series';
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 

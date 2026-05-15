@@ -1,4 +1,4 @@
-import type { DropdownLinkType } from '../components/Dropdown.importable';
+import type { DropdownLinkType } from '../components/Dropdown.island';
 import { linkNotificationCount } from './linkNotificationCount';
 
 describe('linksNotificationCount', () => {
