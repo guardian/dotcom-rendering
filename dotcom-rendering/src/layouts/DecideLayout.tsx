@@ -12,7 +12,6 @@ import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { HostedVideoLayout } from './HostedVideoLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
-import { InteractiveLayoutDeprecated } from './InteractiveLayoutDeprecated';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { PictureLayout } from './PictureLayout';
@@ -120,24 +119,17 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 		default: {
 			switch (article.design) {
 				case ArticleDesign.Interactive:
-					if (publicationDate < interactiveLayoutSwitchoverDate) {
-						return (
-							<InteractiveLayoutDeprecated
-								article={article.frontendData}
-								format={format}
-								renderingTarget={renderingTarget}
-								serverTime={serverTime}
-							/>
-						);
-					} else {
-						return (
-							<InteractiveLayout
-								article={article.frontendData}
-								format={format}
-								renderingTarget={renderingTarget}
-							/>
-						);
-					}
+					return (
+						<InteractiveLayout
+							article={article.frontendData}
+							format={format}
+							renderingTarget={renderingTarget}
+							useDeprecatedGrid={
+								publicationDate <
+								interactiveLayoutSwitchoverDate
+							}
+						/>
+					);
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
@@ -314,26 +306,18 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 		default: {
 			switch (article.design) {
 				case ArticleDesign.Interactive:
-					if (publicationDate < interactiveLayoutSwitchoverDate) {
-						return (
-							<InteractiveLayoutDeprecated
-								article={article.frontendData}
-								NAV={NAV}
-								format={format}
-								renderingTarget={renderingTarget}
-								serverTime={serverTime}
-							/>
-						);
-					} else {
-						return (
-							<InteractiveLayout
-								article={article.frontendData}
-								NAV={NAV}
-								format={format}
-								renderingTarget={renderingTarget}
-							/>
-						);
-					}
+					return (
+						<InteractiveLayout
+							article={article.frontendData}
+							NAV={NAV}
+							format={format}
+							renderingTarget={renderingTarget}
+							useDeprecatedGrid={
+								publicationDate <
+								interactiveLayoutSwitchoverDate
+							}
+						/>
+					);
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
