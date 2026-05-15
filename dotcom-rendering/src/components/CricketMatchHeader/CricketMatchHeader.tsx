@@ -13,6 +13,7 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
+import type { ComponentProps } from 'react';
 import { Fragment, type ReactNode, useMemo } from 'react';
 import { grid } from '../../grid';
 import {
@@ -30,6 +31,7 @@ import {
 	primaryText,
 	secondaryText,
 } from '../FootballMatchHeader/colours';
+import { Tabs } from '../FootballMatchHeader/Tabs';
 
 type CricketTeam = {
 	name: string;
@@ -84,6 +86,7 @@ type CricketMatch = {
 type Props = {
 	edition: EditionId;
 	match: CricketMatch;
+	tabs: ComponentProps<typeof Tabs>;
 };
 
 export const CricketMatchHeader = (props: Props) => {
@@ -114,6 +117,7 @@ export const CricketMatchHeader = (props: Props) => {
 				<Teams match={match} />
 				{match.result && <ResultLine result={match.result} />}
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
+				<Tabs {...props.tabs} />
 			</div>
 		</section>
 	);
