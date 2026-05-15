@@ -213,7 +213,9 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						element="header"
 					>
-						<HostedContentHeader branding={branding} />
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<HostedContentHeader branding={branding} />
+						</Island>
 					</Section>
 				</Stuck>
 			) : null}
