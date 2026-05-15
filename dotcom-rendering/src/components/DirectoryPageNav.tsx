@@ -291,7 +291,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 			<BackgroundImage images={config.backgroundImages} />
 
 			<ul css={list}>
-				{config.links.map((link, i) => (
+				{config.links.map((link) => (
 					<li
 						key={link.label}
 						css={listItem}
