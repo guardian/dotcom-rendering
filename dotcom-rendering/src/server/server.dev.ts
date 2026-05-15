@@ -144,7 +144,7 @@ renderer.post('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 renderer.post('/HostedContent', handleHostedContent);
 renderer.post('/AppsHostedContent', handleAppsHostedContent);
 renderer.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
-renderer.post('/FootballMatchDayEmbed/*url', handleFootballMatchDayEmbed);
+renderer.post('/FootballMatchDayEmbed', handleFootballMatchDayEmbed);
 
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);
 
