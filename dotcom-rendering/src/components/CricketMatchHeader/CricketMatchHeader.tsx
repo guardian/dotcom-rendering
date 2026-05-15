@@ -37,6 +37,7 @@ import {
 	primaryText,
 	secondaryText,
 } from '../FootballMatchHeader/colours';
+import { Tabs } from '../FootballMatchHeader/Tabs';
 
 type Props = {
 	edition: EditionId;
