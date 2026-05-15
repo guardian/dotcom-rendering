@@ -1,6 +1,8 @@
+import { mocked } from 'storybook/test';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { useCountryCode } from '../lib/useCountryCode';
 import { EmailSignup } from './EmailSignup';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Section } from './Section';
@@ -110,4 +112,44 @@ export const IrregularFrequency = meta.story({
 		),
 	},
 	parameters: Default.input.parameters,
+});
+
+/**
+ * US user with `usNewsletterHideMarketingToggle` switch enabled — the marketing opt-in
+ * checkbox is hidden and the user is silently enrolled.
+ */
+export const USHideMarketingToggle = meta.story({
+	args: {
+		description:
+			'Reviewing the most important stories on feminism and sexism and those fighting for equality',
+		name: 'The Week in Patriarchy',
+		frequency: 'Weekly',
+		theme: 'opinion',
+		children: (
+			<>
+				<SecureSignup
+					newsletterId="patriarchy"
+					successDescription="Reviewing the most important stories on feminism and sexism and those fighting for equality"
+				/>
+				<NewsletterPrivacyMessage />
+			</>
+		),
+	},
+	parameters: {
+		formats: [
+			{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: Pillar.Culture,
+			},
+		],
+	},
+	beforeEach() {
+		mocked(useCountryCode).mockReturnValue('US');
+		window.guardian.config.switches.usNewsletterHideMarketingToggle = true;
+	},
+	afterEach() {
+		mocked(useCountryCode).mockReset();
+		window.guardian.config.switches.usNewsletterHideMarketingToggle = false;
+	},
 });

@@ -19,6 +19,7 @@ import {
 } from '../lib/newsletter-sign-up-requests';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
+import { useUSNewsletterHideMarketingToggle } from '../lib/useUSNewsletterHideMarketingToggle';
 import { useConfig } from './ConfigContext';
 import { Flex } from './Flex';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
@@ -137,6 +138,8 @@ export const ManyNewsletterSignUp = ({
 }: Props) => {
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
+	const { usHideMarketingToggle, countryCode } =
+		useUSNewsletterHideMarketingToggle();
 
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		Array<{
@@ -152,6 +155,22 @@ export const ManyNewsletterSignUp = ({
 		undefined,
 	);
 	const reCaptchaRef = useRef<ReactGoogleRecaptcha>(null);
+
+	// Mirror async-read values in refs so sendRequest always sees the latest
+	// values even if state updates between the user pressing submit and the
+	// captcha resolving.
+	const usHideMarketingToggleRef = useRef(usHideMarketingToggle);
+	const countryCodeRef = useRef(countryCode);
+	const marketingOptInRef = useRef(marketingOptIn);
+	useEffect(() => {
+		usHideMarketingToggleRef.current = usHideMarketingToggle;
+	}, [usHideMarketingToggle]);
+	useEffect(() => {
+		countryCodeRef.current = countryCode;
+	}, [countryCode]);
+	useEffect(() => {
+		marketingOptInRef.current = marketingOptIn;
+	}, [marketingOptIn]);
 
 	const userCanInteract = status !== 'Success' && status !== 'Loading';
 	const { renderingTarget } = useConfig();
@@ -249,6 +268,22 @@ export const ManyNewsletterSignUp = ({
 			(newsletter) => newsletter.listId,
 		);
 
+		// Read from refs so we always have the latest values regardless of
+		// when the captcha resolves relative to state updates.
+		const hideToggle = usHideMarketingToggleRef.current;
+		const cc = countryCodeRef.current;
+		const optIn = marketingOptInRef.current;
+		// The value that is actually sent to the backend — used for tracking too
+		// so the tracking accurately reflects what was submitted.
+		const effectiveMarketingOptIn = hideToggle ? true : optIn;
+
+		const getMarketingOptInType = () => {
+			if (hideToggle) return 'similar-guardian-products-hidden-optin-us';
+			if (effectiveMarketingOptIn)
+				return 'similar-guardian-products-optin';
+			return 'similar-guardian-products-optout';
+		};
+
 		void reportTrackingEvent(
 			'ManyNewsletterSignUp',
 			'form-submit',
@@ -258,18 +293,18 @@ export const ManyNewsletterSignUp = ({
 			},
 		);
 
-		const response = await requestMultipleSignUps(
-			email,
-			identityNames,
-			reCaptchaToken,
-			marketingOptIn,
-		).catch(() => {
+		const response = await requestMultipleSignUps({
+			emailAddress: email,
+			newsletterIds: identityNames,
+			recaptchaToken: reCaptchaToken,
+			marketingOptIn: effectiveMarketingOptIn,
+			marketingOptInHidden: hideToggle ? true : undefined,
+			countryCode: hideToggle ? cc : undefined,
+		}).catch(() => {
 			return undefined;
 		});
 
-		const marketingOptInType = marketingOptIn
-			? 'similar-guardian-products-optin'
-			: 'similar-guardian-products-optout';
+		const marketingOptInType = getMarketingOptInType();
 
 		if (!response?.ok) {
 			const responseText = response
@@ -281,7 +316,9 @@ export const ManyNewsletterSignUp = ({
 				renderingTarget,
 				{
 					listIds,
-					...(marketingOptIn !== undefined && { marketingOptInType }),
+					...(effectiveMarketingOptIn !== undefined && {
+						marketingOptInType,
+					}),
 					// If the backend handles the failure and responds with an informative
 					// error message (E.G. "Service unavailable", "Invalid email" etc) this
 					// should be included in the event data.
@@ -300,7 +337,9 @@ export const ManyNewsletterSignUp = ({
 			renderingTarget,
 			{
 				listIds,
-				...(marketingOptIn !== undefined && { marketingOptInType }),
+				...(effectiveMarketingOptIn !== undefined && {
+					marketingOptInType,
+				}),
 			},
 		);
 
@@ -418,7 +457,11 @@ export const ManyNewsletterSignUp = ({
 								status,
 							}}
 							newsletterCount={newslettersToSignUpFor.length}
-							marketingOptIn={marketingOptIn}
+							marketingOptIn={
+								usHideMarketingToggle
+									? undefined
+									: marketingOptIn
+							}
 							setMarketingOptIn={setMarketingOptIn}
 							useReCaptcha={useReCaptcha}
 							captchaSiteKey={captchaSiteKey}

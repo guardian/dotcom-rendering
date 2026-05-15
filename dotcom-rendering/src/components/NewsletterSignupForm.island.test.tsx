@@ -6,6 +6,7 @@ import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
+import { useCountryCode } from '../lib/useCountryCode';
 import { ConfigProvider } from './ConfigContext';
 import { NewsletterSignupForm } from './NewsletterSignupForm.island';
 
@@ -28,6 +29,10 @@ jest.mock('../lib/useAuthStatus', () => ({
 
 jest.mock('../lib/useBrowserId', () => ({
 	useBrowserId: jest.fn(),
+}));
+
+jest.mock('../lib/useCountryCode', () => ({
+	useCountryCode: jest.fn(),
 }));
 
 type RecaptchaProps = {
@@ -89,11 +94,25 @@ const renderForm = (hidePrivacyMessage = false) =>
 		</ConfigProvider>,
 	);
 
-const getTrackedEventDescription = (call: unknown[]): string => {
-	const payload = call[0] as { value: string };
-	const value = JSON.parse(payload.value) as { eventDescription: string };
-	return value.eventDescription;
+type TrackedEventValue = {
+	eventDescription: string;
+	marketingOptInType?: string;
 };
+
+const parseTrackedEventValue = (call: unknown[]): TrackedEventValue => {
+	const payload = call[0] as { value: string };
+	return JSON.parse(payload.value) as TrackedEventValue;
+};
+
+const getTrackedEventDescription = (call: unknown[]): string =>
+	parseTrackedEventValue(call).eventDescription;
+
+const getTrackedEventValueByDescription = (
+	eventDescription: string,
+): TrackedEventValue | undefined =>
+	(submitComponentEvent as jest.Mock).mock.calls
+		.map(parseTrackedEventValue)
+		.find((v) => v.eventDescription === eventDescription);
 
 const getRequestBodyParams = (callIndex = 0): URLSearchParams => {
 	const [, requestInit] = (global.fetch as jest.Mock).mock.calls[
@@ -136,6 +155,7 @@ describe('NewsletterSignupForm', () => {
 		(useIsSignedIn as jest.Mock).mockReturnValue(false);
 		(useAuthStatus as jest.Mock).mockReturnValue({ kind: 'SignedOut' });
 		(useBrowserId as jest.Mock).mockReturnValue('test-browser-id');
+		(useCountryCode as jest.Mock).mockReturnValue(undefined);
 		(lazyFetchEmailWithTimeout as jest.Mock).mockReturnValue(() =>
 			Promise.resolve(null),
 		);
@@ -144,6 +164,7 @@ describe('NewsletterSignupForm', () => {
 		pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
 		pageConfig.idApiUrl = 'https://idapi.nextgen.guardianapps.co.uk';
 		pageConfig.googleRecaptchaSiteKey = 'test-site-key';
+		window.guardian.config.switches.usNewsletterHideMarketingToggle = false;
 		if (window.guardian.ophan) {
 			window.guardian.ophan.pageViewId = 'test-page-view-id';
 		}
@@ -443,5 +464,130 @@ describe('NewsletterSignupForm', () => {
 		expect(
 			screen.getByRole('button', { name: 'Sign up' }),
 		).toBeInTheDocument();
+	});
+
+	describe('US hide marketing toggle (usNewsletterHideMarketingToggle switch)', () => {
+		beforeEach(() => {
+			window.guardian.config.switches.usNewsletterHideMarketingToggle =
+				true;
+		});
+
+		it('hides marketing toggle and sends marketingOptIn=true for US users', async () => {
+			const testUser = user.setup();
+			(useCountryCode as jest.Mock).mockReturnValue('US');
+
+			renderForm();
+
+			await typeEmailAddress(testUser);
+
+			// Marketing toggle should NOT be present
+			expect(screen.queryByRole('switch')).not.toBeInTheDocument();
+
+			await testUser.click(
+				screen.getByRole('button', { name: 'Sign up' }),
+			);
+
+			await waitFor(() => {
+				expect(
+					screen.getByText("You're signed up!"),
+				).toBeInTheDocument();
+			});
+
+			const params = getRequestBodyParams();
+			expect(params.get('marketing')).toBe('true');
+			expect(params.get('marketingOptInHidden')).toBe('true');
+
+			expect(
+				getTrackedEventValueByDescription('submission-confirmed')
+					?.marketingOptInType,
+			).toBe('similar-guardian-products-hidden-optin-us');
+		});
+
+		it('shows marketing toggle and respects user choice (opt-out) for non-US users', async () => {
+			const testUser = user.setup();
+			(useCountryCode as jest.Mock).mockReturnValue('GB');
+
+			renderForm();
+
+			await typeEmailAddress(testUser);
+
+			// Marketing toggle SHOULD be present
+			const marketingSwitch = screen.getByRole('switch');
+			expect(marketingSwitch).toBeInTheDocument();
+
+			// Toggle it off to prove the user's choice is respected
+			expect(marketingSwitch).toHaveAttribute('aria-checked', 'true');
+			await testUser.click(marketingSwitch);
+			expect(marketingSwitch).toHaveAttribute('aria-checked', 'false');
+
+			await testUser.click(
+				screen.getByRole('button', { name: 'Sign up' }),
+			);
+
+			await waitFor(() => {
+				expect(
+					screen.getByText("You're signed up!"),
+				).toBeInTheDocument();
+			});
+
+			const params = getRequestBodyParams();
+			expect(params.get('marketing')).toBe('false');
+			expect(params.get('marketingOptInHidden')).toBeNull();
+
+			expect(
+				getTrackedEventValueByDescription('submission-confirmed')
+					?.marketingOptInType,
+			).toBe('similar-guardian-products-optout');
+		});
+
+		it('tracks similar-guardian-products-optin when non-US user leaves toggle on', async () => {
+			const testUser = user.setup();
+			(useCountryCode as jest.Mock).mockReturnValue('GB');
+
+			renderForm();
+
+			await typeEmailAddress(testUser);
+
+			// Leave the marketing toggle checked (default)
+			expect(screen.getByRole('switch')).toHaveAttribute(
+				'aria-checked',
+				'true',
+			);
+
+			await testUser.click(
+				screen.getByRole('button', { name: 'Sign up' }),
+			);
+
+			await waitFor(() => {
+				expect(
+					screen.getByText("You're signed up!"),
+				).toBeInTheDocument();
+			});
+
+			expect(
+				getTrackedEventValueByDescription('submission-confirmed')
+					?.marketingOptInType,
+			).toBe('similar-guardian-products-optin');
+		});
+
+		it('shows marketing toggle while country code is still resolving (undefined)', async () => {
+			const testUser = user.setup();
+			(useCountryCode as jest.Mock).mockReturnValue(undefined);
+
+			renderForm();
+
+			await typeEmailAddress(testUser);
+
+			// While pending, show toggle as normal
+			expect(screen.getByRole('switch')).toBeInTheDocument();
+
+			await testUser.click(
+				screen.getByRole('button', { name: 'Sign up' }),
+			);
+
+			await waitFor(() => {
+				expect(global.fetch).toHaveBeenCalled();
+			});
+		});
 	});
 });

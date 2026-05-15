@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { lazyFetchEmailWithTimeout } from './fetchEmail';
+import { requestSingleSignUp } from './newsletter-sign-up-requests';
 import {
 	EVENT_DESCRIPTION_TO_ACTION,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
@@ -15,42 +16,6 @@ import {
 import { clearSubscriptionCache } from './newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from './useAuthStatus';
 import { useBrowserId } from './useBrowserId';
-
-// ---------------------------------------------------------------------------
-// Helpers (kept local — not part of the public API)
-// ---------------------------------------------------------------------------
-
-const buildFormData = (
-	emailAddress: string,
-	newsletterId: string,
-	token: string,
-	marketingOptIn?: boolean,
-	browserId?: string,
-): FormData => {
-	const pageRef = window.location.origin + window.location.pathname;
-	const refViewId = window.guardian.ophan?.pageViewId ?? '';
-
-	const formData = new FormData();
-	formData.append('email', emailAddress);
-	formData.append('csrfToken', '');
-	formData.append('listName', newsletterId);
-	formData.append('ref', pageRef);
-	formData.append('refViewId', refViewId);
-	formData.append('name', '');
-	if (window.guardian.config.switches.emailSignupRecaptcha) {
-		formData.append('g-recaptcha-response', token);
-	}
-
-	if (marketingOptIn !== undefined) {
-		formData.append('marketing', marketingOptIn ? 'true' : 'false');
-	}
-
-	if (browserId !== undefined) {
-		formData.append('browserId', browserId);
-	}
-
-	return formData;
-};
 
 /**
  * Fetch the user's email from Identity if they are signed in.
@@ -69,43 +34,22 @@ const resolveUserEmail = async (
 	return fetchedEmail ?? undefined;
 };
 
-const postFormData = async (
-	endpoint: string,
-	formData: FormData,
-): Promise<Response> => {
-	const requestBodyStrings: string[] = [];
-
-	for (const [key, value] of formData.entries()) {
-		requestBodyStrings.push(
-			`${encodeURIComponent(key)}=${encodeURIComponent(
-				// eslint-disable-next-line @typescript-eslint/no-base-to-string -- value.toString() is safe here as we are dealing with FormData entries
-				value.toString(),
-			)}`,
-		);
-	}
-
-	return fetch(endpoint, {
-		method: 'POST',
-		body: requestBodyStrings.join('&'),
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
-	});
-};
-
 const sendTracking = (
 	newsletterId: string,
 	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
 	abTest?: AbTest,
+	marketingOptInType?: string,
 ): void => {
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
 		identityName: newsletterId,
 		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(newsletterId),
 		renderingTarget,
-		value: { eventDescription },
+		value: {
+			eventDescription,
+			...(marketingOptInType !== undefined && { marketingOptInType }),
+		},
 		abTest,
 	});
 };
@@ -186,6 +130,8 @@ export const useNewsletterSignupForm = (
 	newsletterId: string,
 	renderingTarget: RenderingTarget,
 	abTest?: AbTest,
+	usHideMarketingToggle = false,
+	countryCode?: string,
 ): NewsletterSignupFormState => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
@@ -215,6 +161,8 @@ export const useNewsletterSignupForm = (
 	const marketingOptInRef = useRef(marketingOptIn);
 	const browserIdRef = useRef(browserId);
 	const authStatusRef = useRef(authStatus);
+	const usHideMarketingToggleRef = useRef(usHideMarketingToggle);
+	const countryCodeRef = useRef(countryCode);
 	useEffect(() => {
 		marketingOptInRef.current = marketingOptIn;
 	}, [marketingOptIn]);
@@ -224,6 +172,12 @@ export const useNewsletterSignupForm = (
 	useEffect(() => {
 		authStatusRef.current = authStatus;
 	}, [authStatus]);
+	useEffect(() => {
+		usHideMarketingToggleRef.current = usHideMarketingToggle;
+	}, [usHideMarketingToggle]);
+	useEffect(() => {
+		countryCodeRef.current = countryCode;
+	}, [countryCode]);
 
 	// The email address that was validated at submit-time. We stash it in a
 	// ref and read it back when the captcha resolves, so it can't change out
@@ -277,18 +231,29 @@ export const useNewsletterSignupForm = (
 				abTest,
 			);
 
-			const formData = buildFormData(
+			const hideToggle = usHideMarketingToggleRef.current;
+
+			const getMarketingOptInType = (): string | undefined => {
+				if (hideToggle) {
+					return 'similar-guardian-products-hidden-optin-us';
+				}
+				if (marketingOptInRef.current === undefined) {
+					return undefined;
+				}
+				return marketingOptInRef.current
+					? 'similar-guardian-products-optin'
+					: 'similar-guardian-products-optout';
+			};
+
+			const response = await requestSingleSignUp({
 				emailAddress,
 				newsletterId,
-				token,
-				marketingOptInRef.current,
-				browserIdRef.current,
-			);
-
-			const response = await postFormData(
-				window.guardian.config.page.ajaxUrl + '/email',
-				formData,
-			);
+				recaptchaToken: token,
+				marketingOptIn: hideToggle ? true : marketingOptInRef.current,
+				browserId: browserIdRef.current,
+				marketingOptInHidden: hideToggle ? true : undefined,
+				countryCode: hideToggle ? countryCodeRef.current : undefined,
+			});
 
 			try {
 				if (response.ok && authStatusRef.current.kind === 'SignedIn') {
@@ -307,6 +272,7 @@ export const useNewsletterSignupForm = (
 				response.ok ? 'submission-confirmed' : 'submission-failed',
 				renderingTarget,
 				abTest,
+				getMarketingOptInType(),
 			);
 		},
 		[abTest, newsletterId, renderingTarget],
@@ -451,7 +417,7 @@ export const useNewsletterSignupForm = (
 		userEmail,
 		isSignedIn: hasPrefilledEmail,
 		isInteracted,
-		showMarketingToggle: isSignedIn === false,
+		showMarketingToggle: isSignedIn === false && !usHideMarketingToggle,
 		marketingOptIn,
 		isWaitingForResponse,
 		responseOk,

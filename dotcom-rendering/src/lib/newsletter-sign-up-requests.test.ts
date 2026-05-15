@@ -59,12 +59,12 @@ describe('requestMultipleSignUps', () => {
 
 	it('makes a form-urlencoded POST request to /email/many', async () => {
 		setWindow(FAKE_WINDOW);
-		await requestMultipleSignUps(
-			TEST_EMAIL,
-			TEST_NEWSLETTER_IDS,
-			TEST_RECAPTCHA_TOKEN,
-			true,
-		);
+		await requestMultipleSignUps({
+			emailAddress: TEST_EMAIL,
+			newsletterIds: TEST_NEWSLETTER_IDS,
+			recaptchaToken: TEST_RECAPTCHA_TOKEN,
+			marketingOptIn: true,
+		});
 		const [url, requestInit]: [string, RequestInit | undefined] = (
 			global.fetch as jest.Mock
 		).mock.calls[0];
@@ -85,12 +85,12 @@ describe('requestMultipleSignUps', () => {
 	it('encodes its arguments with the refViewId and page reference in the body', async () => {
 		setWindow(FAKE_WINDOW);
 
-		await requestMultipleSignUps(
-			TEST_EMAIL,
-			TEST_NEWSLETTER_IDS,
-			TEST_RECAPTCHA_TOKEN,
-			true,
-		);
+		await requestMultipleSignUps({
+			emailAddress: TEST_EMAIL,
+			newsletterIds: TEST_NEWSLETTER_IDS,
+			recaptchaToken: TEST_RECAPTCHA_TOKEN,
+			marketingOptIn: true,
+		});
 
 		const [, requestInit]: [string, RequestInit | undefined] = (
 			global.fetch as jest.Mock
@@ -122,11 +122,11 @@ describe('requestMultipleSignUps', () => {
 	it('will omit the recaptchaToken if the emailSignupRecaptcha is false', async () => {
 		setWindow(FAKE_WINDOW_NO_RECAPTCHA);
 
-		await requestMultipleSignUps(
-			TEST_EMAIL,
-			TEST_NEWSLETTER_IDS,
-			TEST_RECAPTCHA_TOKEN,
-		);
+		await requestMultipleSignUps({
+			emailAddress: TEST_EMAIL,
+			newsletterIds: TEST_NEWSLETTER_IDS,
+			recaptchaToken: TEST_RECAPTCHA_TOKEN,
+		});
 		const [, requestInit]: [string, RequestInit | undefined] = (
 			global.fetch as jest.Mock
 		).mock.calls[0];
@@ -138,6 +138,54 @@ describe('requestMultipleSignUps', () => {
 
 		expect(decodedBody.includes(TEST_EMAIL)).toBe(true);
 		expect(decodedBody.includes(TEST_RECAPTCHA_TOKEN)).toBe(false);
+	});
+
+	it('includes marketingOptInHidden and countryCode when provided', async () => {
+		setWindow(FAKE_WINDOW);
+
+		await requestMultipleSignUps({
+			emailAddress: TEST_EMAIL,
+			newsletterIds: TEST_NEWSLETTER_IDS,
+			recaptchaToken: TEST_RECAPTCHA_TOKEN,
+			marketingOptIn: true,
+			marketingOptInHidden: true,
+			countryCode: 'US',
+		});
+
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
+
+		const decodedEntries = decodeURIComponent(
+			// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a test
+			requestInit?.body?.toString() ?? '',
+		).split('&');
+
+		expect(decodedEntries).toContainEqual('marketingOptInHidden=true');
+		expect(decodedEntries).toContainEqual('countryCode=US');
+	});
+
+	it('omits marketingOptInHidden and countryCode when not provided', async () => {
+		setWindow(FAKE_WINDOW);
+
+		await requestMultipleSignUps({
+			emailAddress: TEST_EMAIL,
+			newsletterIds: TEST_NEWSLETTER_IDS,
+			recaptchaToken: TEST_RECAPTCHA_TOKEN,
+			marketingOptIn: true,
+		});
+
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
+
+		const decodedBody = decodeURIComponent(
+			// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a test
+			requestInit?.body?.toString() ?? '',
+		);
+
+		expect(decodedBody.includes('marketingOptInHidden')).toBe(false);
+		expect(decodedBody.includes('countryCode')).toBe(false);
 	});
 });
 
@@ -158,11 +206,11 @@ describe('requestSingleSignUp', () => {
 
 	it('makes a form-urlencoded POST request to /email', async () => {
 		setWindow(FAKE_WINDOW);
-		await requestSingleSignUp(
-			TEST_EMAIL,
-			TEST_NEWSLETTER_IDS[0],
-			TEST_RECAPTCHA_TOKEN,
-		);
+		await requestSingleSignUp({
+			emailAddress: TEST_EMAIL,
+			newsletterId: TEST_NEWSLETTER_IDS[0],
+			recaptchaToken: TEST_RECAPTCHA_TOKEN,
+		});
 		const [url, requestInit]: [string, RequestInit | undefined] = (
 			global.fetch as jest.Mock
 		).mock.calls[0];
@@ -180,11 +228,11 @@ describe('requestSingleSignUp', () => {
 	it('encodes its arguments with the refViewId and page reference in the body', async () => {
 		setWindow(FAKE_WINDOW);
 
-		await requestSingleSignUp(
-			TEST_EMAIL,
-			TEST_NEWSLETTER_IDS[0],
-			TEST_RECAPTCHA_TOKEN,
-		);
+		await requestSingleSignUp({
+			emailAddress: TEST_EMAIL,
+			newsletterId: TEST_NEWSLETTER_IDS[0],
+			recaptchaToken: TEST_RECAPTCHA_TOKEN,
+		});
 
 		const [, requestInit]: [string, RequestInit | undefined] = (
 			global.fetch as jest.Mock
@@ -213,11 +261,11 @@ describe('requestSingleSignUp', () => {
 	it('will omit the recaptchaToken if the emailSignupRecaptcha is false', async () => {
 		setWindow(FAKE_WINDOW_NO_RECAPTCHA);
 
-		await requestSingleSignUp(
-			TEST_EMAIL,
-			TEST_NEWSLETTER_IDS[0],
-			TEST_RECAPTCHA_TOKEN,
-		);
+		await requestSingleSignUp({
+			emailAddress: TEST_EMAIL,
+			newsletterId: TEST_NEWSLETTER_IDS[0],
+			recaptchaToken: TEST_RECAPTCHA_TOKEN,
+		});
 		const [, requestInit]: [string, RequestInit | undefined] = (
 			global.fetch as jest.Mock
 		).mock.calls[0];
@@ -229,5 +277,52 @@ describe('requestSingleSignUp', () => {
 
 		expect(decodedBody.includes(TEST_EMAIL)).toBe(true);
 		expect(decodedBody.includes(TEST_RECAPTCHA_TOKEN)).toBe(false);
+	});
+
+	it('includes marketingOptInHidden and countryCode when provided', async () => {
+		setWindow(FAKE_WINDOW);
+
+		await requestSingleSignUp({
+			emailAddress: TEST_EMAIL,
+			newsletterId: TEST_NEWSLETTER_IDS[0],
+			recaptchaToken: TEST_RECAPTCHA_TOKEN,
+			marketingOptIn: true,
+			marketingOptInHidden: true,
+			countryCode: 'US',
+		});
+
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
+
+		const decodedEntries = decodeURIComponent(
+			// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a test
+			requestInit?.body?.toString() ?? '',
+		).split('&');
+
+		expect(decodedEntries).toContainEqual('marketingOptInHidden=true');
+		expect(decodedEntries).toContainEqual('countryCode=US');
+	});
+
+	it('omits marketingOptInHidden and countryCode when not provided', async () => {
+		setWindow(FAKE_WINDOW);
+
+		await requestSingleSignUp({
+			emailAddress: TEST_EMAIL,
+			newsletterId: TEST_NEWSLETTER_IDS[0],
+			recaptchaToken: TEST_RECAPTCHA_TOKEN,
+		});
+
+		const [, requestInit]: [string, RequestInit | undefined] = (
+			global.fetch as jest.Mock
+		).mock.calls[0];
+
+		const decodedBody = decodeURIComponent(
+			// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a test
+			requestInit?.body?.toString() ?? '',
+		);
+
+		expect(decodedBody.includes('marketingOptInHidden')).toBe(false);
+		expect(decodedBody.includes('countryCode')).toBe(false);
 	});
 });

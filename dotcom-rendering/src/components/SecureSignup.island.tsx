@@ -29,6 +29,7 @@ import {
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
+import { useUSNewsletterHideMarketingToggle } from '../lib/useUSNewsletterHideMarketingToggle';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -141,6 +142,8 @@ const buildFormData = (
 	token: string,
 	marketingOptIn?: boolean,
 	browserId?: string,
+	marketingOptInHidden?: boolean,
+	countryCode?: string,
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -162,6 +165,14 @@ const buildFormData = (
 
 	if (browserId !== undefined) {
 		formData.append('browserId', browserId);
+	}
+
+	if (marketingOptInHidden !== undefined) {
+		formData.append('marketingOptInHidden', 'true');
+	}
+
+	if (countryCode !== undefined) {
+		formData.append('countryCode', countryCode);
 	}
 
 	return formData;
@@ -209,13 +220,17 @@ const sendTracking = (
 	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
 	abTest?: AbTest,
+	marketingOptInType?: string,
 ): void => {
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
 		identityName: newsletterId,
 		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.control(newsletterId),
 		renderingTarget,
-		value: { eventDescription },
+		value: {
+			eventDescription,
+			...(marketingOptInType !== undefined && { marketingOptInType }),
+		},
 		abTest,
 	});
 };
@@ -251,6 +266,8 @@ export const SecureSignup = ({
 	);
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
+	const { usHideMarketingToggle, countryCode } =
+		useUSNewsletterHideMarketingToggle();
 
 	useEffect(() => {
 		if (isSignedIn !== 'Pending' && !isSignedIn) {
@@ -277,12 +294,24 @@ export const SecureSignup = ({
 
 		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
 
+		const getMarketingOptInType = (): string | undefined => {
+			if (usHideMarketingToggle) {
+				return 'similar-guardian-products-hidden-optin-us';
+			}
+			if (marketingOptIn === undefined) return undefined;
+			return marketingOptIn
+				? 'similar-guardian-products-optin'
+				: 'similar-guardian-products-optout';
+		};
+
 		const formData = buildFormData(
 			emailAddress,
 			newsletterId,
 			token,
-			marketingOptIn,
+			usHideMarketingToggle ? true : marketingOptIn,
 			browserId,
+			usHideMarketingToggle ? true : undefined,
+			usHideMarketingToggle ? countryCode : undefined,
 		);
 
 		const response = await postFormData(
@@ -306,6 +335,7 @@ export const SecureSignup = ({
 			response.ok ? 'submission-confirmed' : 'submission-failed',
 			renderingTarget,
 			abTest,
+			getMarketingOptInType(),
 		);
 	};
 
@@ -388,7 +418,7 @@ export const SecureSignup = ({
 					value={userEmail ?? ''}
 					onChange={(e) => setUserEmail(e.target.value)}
 				/>
-				{isSignedIn === false && (
+				{isSignedIn === false && !usHideMarketingToggle && (
 					<CheckboxGroup
 						name="marketing-preferences"
 						label="Marketing preferences"
