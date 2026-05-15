@@ -16,6 +16,7 @@ import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
 import { Island } from './Island';
 import { ShareButton } from './ShareButton.island';
+import { interactiveLayoutSwitchoverDate } from '../layouts/DecideLayout';
 
 const labelStyles = (design: ArticleDesign): SerializedStyles => css`
 	${design === ArticleDesign.Gallery ? grid.column.centre : undefined};
@@ -224,13 +225,15 @@ export const SubMeta = ({
 		format.design !== ArticleDesign.Interactive &&
 		format.design !== ArticleDesign.Gallery;
 
+	const usesDeprecatedInteractiveLayout =
+		format.design === ArticleDesign.Interactive &&
+		interactiveLayoutSwitchoverDate > new Date();
+
 	return (
 		<div
 			data-print-layout="hide"
 			css={[
-				format.design === ArticleDesign.Interactive
-					? setMetaWidth
-					: undefined,
+				usesDeprecatedInteractiveLayout ? setMetaWidth : undefined,
 				format.design === ArticleDesign.Gallery
 					? galleryStyles
 					: bottomPadding,
