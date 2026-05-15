@@ -7,6 +7,11 @@ import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { lazyFetchEmailWithTimeout } from './fetchEmail';
 import {
+	getEffectiveMarketingOptIn,
+	getMarketingOptInType,
+} from './newsletter-marketing-opt-in';
+import { requestSingleSignUp } from './newsletter-sign-up-requests';
+import {
 	EVENT_DESCRIPTION_TO_ACTION,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	type NewsletterEventDescription,
@@ -15,42 +20,7 @@ import {
 import { clearSubscriptionCache } from './newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from './useAuthStatus';
 import { useBrowserId } from './useBrowserId';
-
-// ---------------------------------------------------------------------------
-// Helpers (kept local — not part of the public API)
-// ---------------------------------------------------------------------------
-
-const buildFormData = (
-	emailAddress: string,
-	newsletterId: string,
-	token: string,
-	marketingOptIn?: boolean,
-	browserId?: string,
-): FormData => {
-	const pageRef = window.location.origin + window.location.pathname;
-	const refViewId = window.guardian.ophan?.pageViewId ?? '';
-
-	const formData = new FormData();
-	formData.append('email', emailAddress);
-	formData.append('csrfToken', '');
-	formData.append('listName', newsletterId);
-	formData.append('ref', pageRef);
-	formData.append('refViewId', refViewId);
-	formData.append('name', '');
-	if (window.guardian.config.switches.emailSignupRecaptcha) {
-		formData.append('g-recaptcha-response', token);
-	}
-
-	if (marketingOptIn !== undefined) {
-		formData.append('marketing', marketingOptIn ? 'true' : 'false');
-	}
-
-	if (browserId !== undefined) {
-		formData.append('browserId', browserId);
-	}
-
-	return formData;
-};
+import { useNewsletterShowMarketingToggle } from './useNewsletterShowMarketingToggle';
 
 /**
  * Fetch the user's email from Identity if they are signed in.
@@ -69,43 +39,22 @@ const resolveUserEmail = async (
 	return fetchedEmail ?? undefined;
 };
 
-const postFormData = async (
-	endpoint: string,
-	formData: FormData,
-): Promise<Response> => {
-	const requestBodyStrings: string[] = [];
-
-	for (const [key, value] of formData.entries()) {
-		requestBodyStrings.push(
-			`${encodeURIComponent(key)}=${encodeURIComponent(
-				// eslint-disable-next-line @typescript-eslint/no-base-to-string -- value.toString() is safe here as we are dealing with FormData entries
-				value.toString(),
-			)}`,
-		);
-	}
-
-	return fetch(endpoint, {
-		method: 'POST',
-		body: requestBodyStrings.join('&'),
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
-	});
-};
-
 const sendTracking = (
 	newsletterId: string,
 	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
 	abTest?: AbTest,
+	marketingOptInType?: string,
 ): void => {
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
 		identityName: newsletterId,
 		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(newsletterId),
 		renderingTarget,
-		value: { eventDescription },
+		value: {
+			eventDescription,
+			...(marketingOptInType !== undefined && { marketingOptInType }),
+		},
 		abTest,
 	});
 };
@@ -132,7 +81,7 @@ export type NewsletterSignupFormState = {
 	 * privacy message.
 	 */
 	isInteracted: boolean;
-	/** `true` for signed-out users — shows the marketing opt-in toggle. */
+	/** `true` when the marketing toggle should be shown. */
 	showMarketingToggle: boolean;
 	marketingOptIn: boolean | undefined;
 
@@ -188,7 +137,11 @@ export const useNewsletterSignupForm = (
 	abTest?: AbTest,
 ): NewsletterSignupFormState => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
-	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
+	const [captchaSiteKey] = useState<string | undefined>(
+		typeof window !== 'undefined'
+			? window.guardian.config.page.googleRecaptchaSiteKey
+			: undefined,
+	);
 	const [userEmail, setUserEmail] = useState<string>();
 	const [hasPrefilledEmail, setHasPrefilledEmail] = useState(false);
 	const [isWaitingForResponse, setIsWaitingForResponse] = useState(false);
@@ -207,17 +160,24 @@ export const useNewsletterSignupForm = (
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
 	const browserId = useBrowserId();
+	const { showMarketingToggle, countryCode } =
+		useNewsletterShowMarketingToggle();
+	const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
+		showMarketingToggle,
+		isSignedIn,
+		marketingOptIn,
+	});
 
 	// Refs that mirror state — read inside submit handlers so we always see the
 	// latest value rather than whatever was captured when the handler was
 	// created. This avoids the stale-closure bug where a user could toggle
 	// marketing opt-in between pressing Sign Up and the captcha resolving.
-	const marketingOptInRef = useRef(marketingOptIn);
+	const marketingOptInRef = useRef(effectiveMarketingOptIn);
 	const browserIdRef = useRef(browserId);
 	const authStatusRef = useRef(authStatus);
 	useEffect(() => {
-		marketingOptInRef.current = marketingOptIn;
-	}, [marketingOptIn]);
+		marketingOptInRef.current = effectiveMarketingOptIn;
+	}, [effectiveMarketingOptIn]);
 	useEffect(() => {
 		browserIdRef.current = browserId;
 	}, [browserId]);
@@ -235,26 +195,10 @@ export const useNewsletterSignupForm = (
 	// not on focus/blur or other browser-triggered validity checks.
 	const hasAttemptedSubmitRef = useRef(false);
 
-	// Default marketing opt-in to `true` for signed-out users, but only once —
-	// guard with a ref so flipping `isSignedIn` later (e.g. token expiry)
-	// doesn't overwrite the user's choice.
-	const marketingDefaultAppliedRef = useRef(false);
-	useEffect(() => {
-		if (marketingDefaultAppliedRef.current) return;
-		if (isSignedIn === 'Pending') return;
-		if (!isSignedIn) {
-			setMarketingOptIn(true);
-		}
-		marketingDefaultAppliedRef.current = true;
-	}, [isSignedIn]);
-
 	// Pre-fill the email from Identity once sign-in status is known.
 	// Guarded with a ref so we don't re-fetch if the hook re-mounts or
 	// `isSignedIn` briefly flips.
 	const emailFetchStartedRef = useRef(false);
-	useEffect(() => {
-		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
-	}, []);
 	useEffect(() => {
 		if (emailFetchStartedRef.current) return;
 		if (isSignedIn === 'Pending') return;
@@ -277,18 +221,17 @@ export const useNewsletterSignupForm = (
 				abTest,
 			);
 
-			const formData = buildFormData(
+			const response = await requestSingleSignUp({
 				emailAddress,
 				newsletterId,
-				token,
-				marketingOptInRef.current,
-				browserIdRef.current,
-			);
-
-			const response = await postFormData(
-				window.guardian.config.page.ajaxUrl + '/email',
-				formData,
-			);
+				recaptchaToken: token,
+				marketingOptIn: showMarketingToggle
+					? marketingOptInRef.current
+					: true,
+				browserId: browserIdRef.current,
+				marketingOptInHidden: showMarketingToggle ? undefined : true,
+				countryCode: showMarketingToggle ? undefined : countryCode,
+			});
 
 			try {
 				if (response.ok && authStatusRef.current.kind === 'SignedIn') {
@@ -307,9 +250,19 @@ export const useNewsletterSignupForm = (
 				response.ok ? 'submission-confirmed' : 'submission-failed',
 				renderingTarget,
 				abTest,
+				getMarketingOptInType(
+					showMarketingToggle,
+					marketingOptInRef.current,
+				),
 			);
 		},
-		[abTest, newsletterId, renderingTarget],
+		[
+			abTest,
+			countryCode,
+			newsletterId,
+			renderingTarget,
+			showMarketingToggle,
+		],
 	);
 
 	const handleCaptchaComplete = useCallback(
@@ -429,7 +382,7 @@ export const useNewsletterSignupForm = (
 		ReactEventHandler<HTMLButtonElement>
 	>((event) => {
 		event.preventDefault();
-		setMarketingOptIn((prev) => !prev);
+		setMarketingOptIn((prev) => !(prev ?? true));
 	}, []);
 
 	const handleSubmitButtonClick = useCallback((): void => {
@@ -447,12 +400,15 @@ export const useNewsletterSignupForm = (
 		recaptchaRef.current?.reset();
 	}, []);
 
+	const effectiveShowMarketingToggle =
+		showMarketingToggle && isSignedIn !== true;
+
 	return {
 		userEmail,
 		isSignedIn: hasPrefilledEmail,
 		isInteracted,
-		showMarketingToggle: isSignedIn === false,
-		marketingOptIn,
+		showMarketingToggle: effectiveShowMarketingToggle,
+		marketingOptIn: effectiveMarketingOptIn,
 		isWaitingForResponse,
 		responseOk,
 		errorMessage,

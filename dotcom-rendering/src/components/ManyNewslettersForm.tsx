@@ -22,8 +22,10 @@ export interface FormProps {
 	handleTextInput: ChangeEventHandler<HTMLInputElement>;
 	handleSubmitButton: { (): Promise<void> | void };
 	newsletterCount: number;
-	marketingOptIn?: boolean;
+	marketingOptIn: boolean;
 	setMarketingOptIn: (value: boolean) => void;
+	/** When `true`, the marketing toggle is shown in the UI. Default: `true`. */
+	showMarketingToggle?: boolean;
 	// Captcha props
 	useReCaptcha?: boolean;
 	captchaSiteKey?: string;
@@ -125,6 +127,7 @@ export const ManyNewslettersForm = ({
 	newsletterCount,
 	marketingOptIn,
 	setMarketingOptIn,
+	showMarketingToggle = true,
 	useReCaptcha = false,
 	captchaSiteKey,
 	visibleRecaptcha = false,
@@ -172,6 +175,7 @@ export const ManyNewslettersForm = ({
 							handleTextInput={handleTextInput}
 							marketingOptIn={marketingOptIn}
 							setMarketingOptIn={setMarketingOptIn}
+							showMarketingToggle={showMarketingToggle}
 							useReCaptcha={useReCaptcha}
 							captchaSiteKey={captchaSiteKey}
 							visibleRecaptcha={visibleRecaptcha}

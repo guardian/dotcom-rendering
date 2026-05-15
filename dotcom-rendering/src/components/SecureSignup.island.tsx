@@ -21,6 +21,10 @@ import { useEffect, useRef, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import {
+	getEffectiveMarketingOptIn,
+	getMarketingOptInType,
+} from '../lib/newsletter-marketing-opt-in';
+import {
 	EVENT_DESCRIPTION_TO_ACTION,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	type NewsletterEventDescription,
@@ -29,6 +33,7 @@ import {
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
+import { useNewsletterShowMarketingToggle } from '../lib/useNewsletterShowMarketingToggle';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -141,6 +146,8 @@ const buildFormData = (
 	token: string,
 	marketingOptIn?: boolean,
 	browserId?: string,
+	marketingOptInHidden?: true,
+	countryCode?: string,
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -152,7 +159,7 @@ const buildFormData = (
 	formData.append('ref', pageRef);
 	formData.append('refViewId', refViewId);
 	formData.append('name', '');
-	if (window.guardian.config.switches.emailSignupRecaptcha) {
+	if (window.guardian.config.switches.emailSignupRecaptcha === true) {
 		formData.append('g-recaptcha-response', token); // TO DO - PR on form handlers - is the token verified?
 	}
 
@@ -164,16 +171,24 @@ const buildFormData = (
 		formData.append('browserId', browserId);
 	}
 
+	if (marketingOptInHidden) {
+		formData.append('marketingOptInHidden', 'true');
+	}
+
+	if (countryCode !== undefined) {
+		formData.append('countryCode', countryCode);
+	}
+
 	return formData;
 };
 
 const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
 	const { idApiUrl } = window.guardian.config.page;
-	if (!idApiUrl) {
+	if (idApiUrl === undefined || idApiUrl === '') {
 		return;
 	}
 	const fetchedEmail = await lazyFetchEmailWithTimeout()();
-	if (!fetchedEmail) {
+	if (fetchedEmail === null || fetchedEmail === '') {
 		return;
 	}
 	return fetchedEmail;
@@ -209,13 +224,17 @@ const sendTracking = (
 	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
 	abTest?: AbTest,
+	marketingOptInType?: string,
 ): void => {
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
 		identityName: newsletterId,
 		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.control(newsletterId),
 		renderingTarget,
-		value: { eventDescription },
+		value: {
+			eventDescription,
+			...(marketingOptInType !== undefined && { marketingOptInType }),
+		},
 		abTest,
 	});
 };
@@ -235,9 +254,13 @@ export const SecureSignup = ({
 	abTest,
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
-	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
+	const [captchaSiteKey] = useState<string | undefined>(
+		typeof window !== 'undefined'
+			? window.guardian.config.page.googleRecaptchaSiteKey
+			: undefined,
+	);
 	const [userEmail, setUserEmail] = useState<string>();
-	const [hideEmailInput, setHideEmailInput] = useState<boolean>();
+	const [hideEmailInput, setHideEmailInput] = useState(false);
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
@@ -246,20 +269,15 @@ export const SecureSignup = ({
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
+	const isSignedIn = useIsSignedIn();
+	const authStatus = useAuthStatus();
 	const [marketingOptIn, setMarketingOptIn] = useState<boolean | undefined>(
 		undefined,
 	);
-	const isSignedIn = useIsSignedIn();
-	const authStatus = useAuthStatus();
+	const { showMarketingToggle, countryCode } =
+		useNewsletterShowMarketingToggle();
 
 	useEffect(() => {
-		if (isSignedIn !== 'Pending' && !isSignedIn) {
-			setMarketingOptIn(true);
-		}
-	}, [isSignedIn]);
-
-	useEffect(() => {
-		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
 		void resolveEmailIfSignedIn().then((email) => {
 			setUserEmail(email);
 			setHideEmailInput(isString(email));
@@ -277,12 +295,20 @@ export const SecureSignup = ({
 
 		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
 
+		const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
+			showMarketingToggle,
+			isSignedIn,
+			marketingOptIn,
+		});
+
 		const formData = buildFormData(
 			emailAddress,
 			newsletterId,
 			token,
-			marketingOptIn,
+			effectiveMarketingOptIn,
 			browserId,
+			showMarketingToggle ? undefined : true,
+			showMarketingToggle ? undefined : countryCode,
 		);
 
 		const response = await postFormData(
@@ -306,6 +332,7 @@ export const SecureSignup = ({
 			response.ok ? 'submission-confirmed' : 'submission-failed',
 			renderingTarget,
 			abTest,
+			getMarketingOptInType(showMarketingToggle, effectiveMarketingOptIn),
 		);
 	};
 
@@ -339,6 +366,7 @@ export const SecureSignup = ({
 		sendTracking(newsletterId, 'captcha-passed', renderingTarget, abTest);
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
+			// eslint-disable-next-line no-console -- unexpected submit failure
 			console.error(error);
 			sendTracking(
 				newsletterId,
@@ -388,7 +416,7 @@ export const SecureSignup = ({
 					value={userEmail ?? ''}
 					onChange={(e) => setUserEmail(e.target.value)}
 				/>
-				{isSignedIn === false && (
+				{isSignedIn !== true && showMarketingToggle && (
 					<CheckboxGroup
 						name="marketing-preferences"
 						label="Marketing preferences"
@@ -398,7 +426,7 @@ export const SecureSignup = ({
 						<Checkbox
 							label="Get updates about our journalism and ways to support and enjoy our work."
 							value="marketing-opt-in"
-							checked={marketingOptIn ?? false}
+							checked={marketingOptIn ?? true}
 							onChange={(e) =>
 								setMarketingOptIn(e.target.checked)
 							}
@@ -415,7 +443,9 @@ export const SecureSignup = ({
 				</div>
 			)}
 
-			{!!errorMessage && <ErrorMessageWithAdvice text={errorMessage} />}
+			{errorMessage !== undefined && (
+				<ErrorMessageWithAdvice text={errorMessage} />
+			)}
 
 			{hasResponse &&
 				(responseOk ? (

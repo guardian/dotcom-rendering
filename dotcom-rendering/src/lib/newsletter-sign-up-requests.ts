@@ -2,12 +2,29 @@ import type { TAction } from '@guardian/ophan-tracker-js';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
+type NewsletterSignUpParams = {
+	emailAddress: string;
+	recaptchaToken: string;
+	marketingOptIn?: boolean;
+	marketingOptInHidden?: true;
+	countryCode?: string;
+};
+
 const buildNewsletterSignUpFormData = (
-	emailAddress: string,
-	newsletterIdOrList: string | string[],
-	recaptchaToken: string,
-	marketingOptIn?: boolean,
+	params: NewsletterSignUpParams & {
+		newsletterIdOrList: string | string[];
+		browserId?: string;
+	},
 ): FormData => {
+	const {
+		emailAddress,
+		newsletterIdOrList,
+		recaptchaToken,
+		marketingOptIn,
+		marketingOptInHidden,
+		countryCode,
+		browserId,
+	} = params;
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
 
@@ -34,7 +51,28 @@ const buildNewsletterSignUpFormData = (
 		formData.append('marketing', marketingOptIn ? 'true' : 'false');
 	}
 
+	if (browserId !== undefined) {
+		formData.append('browserId', browserId);
+	}
+
+	if (marketingOptInHidden) {
+		formData.append('marketingOptInHidden', 'true');
+	}
+
+	if (countryCode !== undefined) {
+		formData.append('countryCode', countryCode);
+	}
+
 	return formData;
+};
+
+export type MultipleSignUpParams = NewsletterSignUpParams & {
+	newsletterIds: string[];
+};
+
+export type SingleSignUpParams = NewsletterSignUpParams & {
+	newsletterId: string;
+	browserId?: string;
 };
 
 const postFormData = async (
@@ -62,18 +100,22 @@ const postFormData = async (
 	});
 };
 
-export const requestMultipleSignUps = async (
-	emailAddress: string,
-	newsletterIds: string[],
-	recaptchaToken: string,
-	marketingOptIn?: boolean,
-): Promise<Response> => {
-	const data = buildNewsletterSignUpFormData(
+export const requestMultipleSignUps = async ({
+	emailAddress,
+	newsletterIds,
+	recaptchaToken,
+	marketingOptIn,
+	marketingOptInHidden,
+	countryCode,
+}: MultipleSignUpParams): Promise<Response> => {
+	const data = buildNewsletterSignUpFormData({
 		emailAddress,
-		newsletterIds,
+		newsletterIdOrList: newsletterIds,
 		recaptchaToken,
 		marketingOptIn,
-	);
+		marketingOptInHidden,
+		countryCode,
+	});
 
 	return await postFormData(
 		window.guardian.config.page.ajaxUrl + '/email/many',
@@ -81,18 +123,24 @@ export const requestMultipleSignUps = async (
 	);
 };
 
-export const requestSingleSignUp = async (
-	emailAddress: string,
-	newsletterId: string,
-	recaptchaToken: string,
-	marketingOptIn?: boolean,
-): Promise<Response> => {
-	const data = buildNewsletterSignUpFormData(
+export const requestSingleSignUp = async ({
+	emailAddress,
+	newsletterId,
+	recaptchaToken,
+	marketingOptIn,
+	marketingOptInHidden,
+	countryCode,
+	browserId,
+}: SingleSignUpParams): Promise<Response> => {
+	const data = buildNewsletterSignUpFormData({
 		emailAddress,
-		newsletterId,
+		newsletterIdOrList: newsletterId,
 		recaptchaToken,
 		marketingOptIn,
-	);
+		marketingOptInHidden,
+		countryCode,
+		browserId,
+	});
 
 	return await postFormData(
 		window.guardian.config.page.ajaxUrl + '/email',

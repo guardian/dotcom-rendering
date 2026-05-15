@@ -14,11 +14,16 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 // Use the default export instead.
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import {
+	getEffectiveMarketingOptIn,
+	getMarketingOptInType,
+} from '../lib/newsletter-marketing-opt-in';
+import {
 	reportTrackingEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
+import { useNewsletterShowMarketingToggle } from '../lib/useNewsletterShowMarketingToggle';
 import { useConfig } from './ConfigContext';
 import { Flex } from './Flex';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
@@ -114,7 +119,7 @@ const attributeToNumber = (
 	attributeName: string,
 ): number | undefined => {
 	const value = element.getAttribute(attributeName);
-	if (!value) {
+	if (value === null || value === '') {
 		return undefined;
 	}
 	const numericValue = Number(value);
@@ -137,6 +142,8 @@ export const ManyNewsletterSignUp = ({
 }: Props) => {
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
+	const { showMarketingToggle, countryCode } =
+		useNewsletterShowMarketingToggle();
 
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		Array<{
@@ -167,7 +174,7 @@ export const ManyNewsletterSignUp = ({
 			}
 			const { identityName } = button.dataset;
 			const listId = attributeToNumber(button, 'data-list-id');
-			if (!identityName || typeof listId === 'undefined') {
+			if (!identityName || listId === undefined) {
 				return;
 			}
 			const index = newslettersToSignUpFor.findIndex(
@@ -222,12 +229,6 @@ export const ManyNewsletterSignUp = ({
 	}, [status]);
 
 	useEffect(() => {
-		if (isSignedIn !== 'Pending' && !isSignedIn) {
-			setMarketingOptIn(true);
-		}
-	}, [isSignedIn]);
-
-	useEffect(() => {
 		const signUpButtons = [
 			...document.querySelectorAll(`[data-role=${BUTTON_ROLE}]`),
 		];
@@ -249,6 +250,12 @@ export const ManyNewsletterSignUp = ({
 			(newsletter) => newsletter.listId,
 		);
 
+		const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
+			showMarketingToggle,
+			isSignedIn,
+			marketingOptIn,
+		});
+
 		void reportTrackingEvent(
 			'ManyNewsletterSignUp',
 			'form-submit',
@@ -258,20 +265,23 @@ export const ManyNewsletterSignUp = ({
 			},
 		);
 
-		const response = await requestMultipleSignUps(
-			email,
-			identityNames,
-			reCaptchaToken,
-			marketingOptIn,
-		).catch(() => {
+		const response = await requestMultipleSignUps({
+			emailAddress: email,
+			newsletterIds: identityNames,
+			recaptchaToken: reCaptchaToken,
+			marketingOptIn: effectiveMarketingOptIn,
+			marketingOptInHidden: showMarketingToggle ? undefined : true,
+			countryCode: showMarketingToggle ? undefined : countryCode,
+		}).catch(() => {
 			return undefined;
 		});
 
-		const marketingOptInType = marketingOptIn
-			? 'similar-guardian-products-optin'
-			: 'similar-guardian-products-optout';
+		const marketingType = getMarketingOptInType(
+			showMarketingToggle,
+			effectiveMarketingOptIn,
+		);
 
-		if (!response?.ok) {
+		if (response?.ok !== true) {
 			const responseText = response
 				? await response.text()
 				: '[fetch failure - no response]';
@@ -281,12 +291,9 @@ export const ManyNewsletterSignUp = ({
 				renderingTarget,
 				{
 					listIds,
-					...(marketingOptIn !== undefined && { marketingOptInType }),
-					// If the backend handles the failure and responds with an informative
-					// error message (E.G. "Service unavailable", "Invalid email" etc) this
-					// should be included in the event data.
-					// If not, the response text will be the HTML for the default error page
-					// which would not be helpful to include it in the tracking data.
+					...(marketingType !== undefined && {
+						marketingOptInType: marketingType,
+					}),
 					responseText: responseText.substring(0, 100),
 				},
 			);
@@ -300,7 +307,9 @@ export const ManyNewsletterSignUp = ({
 			renderingTarget,
 			{
 				listIds,
-				...(marketingOptIn !== undefined && { marketingOptInType }),
+				...(marketingType !== undefined && {
+					marketingOptInType: marketingType,
+				}),
 			},
 		);
 
@@ -388,6 +397,9 @@ export const ManyNewsletterSignUp = ({
 		setEmail(ev.target.value);
 	};
 
+	const effectiveShowMarketingToggle =
+		showMarketingToggle && isSignedIn !== true;
+
 	return (
 		<div css={sectionWrapperStyle(newslettersToSignUpFor.length === 0)}>
 			<Section
@@ -418,7 +430,8 @@ export const ManyNewsletterSignUp = ({
 								status,
 							}}
 							newsletterCount={newslettersToSignUpFor.length}
-							marketingOptIn={marketingOptIn}
+							showMarketingToggle={effectiveShowMarketingToggle}
+							marketingOptIn={marketingOptIn ?? true}
 							setMarketingOptIn={setMarketingOptIn}
 							useReCaptcha={useReCaptcha}
 							captchaSiteKey={captchaSiteKey}

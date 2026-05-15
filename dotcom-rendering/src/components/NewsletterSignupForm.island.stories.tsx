@@ -243,3 +243,21 @@ export const AlreadySubscribed = meta.story({
 		mocked(useNewsletterSignupForm).mockReturnValue(mockForm({}));
 	},
 });
+
+/**
+ * US user — marketing toggle is hidden and the user is silently enrolled in
+ * similar_guardian_products.
+ */
+export const USHideMarketingToggle = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({
+				userEmail: 'reader@example.com',
+				isInteracted: true,
+				showMarketingToggle: false,
+				marketingOptIn: true,
+			}),
+		);
+	},
+});
