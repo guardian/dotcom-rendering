@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import { useConfig } from '../components/ConfigContext';
 import { FeastContextualNudge } from '../components/FeastContextualNudge.island';
 import { Island } from '../components/Island';
+import { grid } from '../grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RecipeBlockElement } from '../types/content';
@@ -12,7 +13,6 @@ import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
 import { RenderArticleElement } from './renderElement';
 import { withSignInGateSlot } from './withSignInGateSlot';
-import { grid } from '../grid';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -96,7 +96,6 @@ export const ArticleRenderer = ({
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
 				shouldHideAds={shouldHideAds}
 				idApiUrl={idApiUrl}
-				isShinyNewInteractiveLayout={isShinyNewInteractiveLayout}
 			/>
 		);
 	});
