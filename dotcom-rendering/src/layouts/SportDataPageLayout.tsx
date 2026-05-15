@@ -2,7 +2,6 @@ import { palette } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { CricketScorecardPage } from '../components/CricketScorecardPage';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.island';
 import { FootballMatchInfoPage } from '../components/FootballMatchInfoPage';
 import { FootballTablesPage } from '../components/FootballTablesPage';
@@ -144,8 +143,6 @@ export const SportDataPageLayout = (
 			)}
 
 			{isWeb && renderAds && hasSurveyAd && <AdSlot position="survey" />}
-
-			{isWeb && <DirectoryPageNav pageId={sportData.config.pageId} />}
 
 			<SportsPage
 				sportData={sportData}
