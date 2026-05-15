@@ -1,5 +1,6 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
+import { grid } from '../../grid';
 
 export type LayoutType = 'standard';
 
@@ -52,7 +53,8 @@ const standardCss: LayoutCssMap = {
 			'grid-row: 3 / span 2; grid-column: left-column-start / left-column-end;',
 	},
 	body: {
-		tablet: 'grid-row: 6;',
+		mobile: grid.column.all,
+		tablet: `grid-row: 6; ${grid.column.all}`,
 		leftCol: 'grid-row: 4;',
 	},
 	'right-column': {
