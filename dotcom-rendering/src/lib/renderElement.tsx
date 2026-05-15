@@ -109,6 +109,7 @@ type Props = {
 	contentLayout?: string;
 	articleArrangement?: LayoutType;
 	idApiUrl?: string;
+	isShinyNewInteractiveLayout?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -181,6 +182,7 @@ export const renderElement = ({
 	contentLayout,
 	articleArrangement,
 	idApiUrl,
+	isShinyNewInteractiveLayout = false,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -1054,6 +1056,7 @@ export const RenderArticleElement = ({
 	contentLayout,
 	articleArrangement,
 	idApiUrl,
+	isShinyNewInteractiveLayout = false,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
