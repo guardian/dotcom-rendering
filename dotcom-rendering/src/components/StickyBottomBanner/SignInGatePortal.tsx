@@ -146,7 +146,6 @@ export interface CanShowSignInGateProps {
 	isPreview: boolean;
 	pageId: string;
 	contributionsServiceUrl: string;
-	isInAuxiaControlGroup: boolean;
 	editionId?: EditionId;
 	contentType?: string;
 	sectionId?: string;
@@ -158,7 +157,6 @@ export const canShowSignInGatePortal = async ({
 	isPreview,
 	pageId,
 	contributionsServiceUrl,
-	isInAuxiaControlGroup,
 	editionId,
 	contentType,
 	sectionId,
@@ -203,7 +201,6 @@ export const canShowSignInGatePortal = async ({
 			sectionId,
 			tags,
 			retrieveLastGateDismissedCount('AuxiaSignInGate'),
-			isInAuxiaControlGroup,
 		);
 
 		return {
