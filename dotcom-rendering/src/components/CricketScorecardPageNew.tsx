@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
+import type { ComponentProps } from 'react';
 import type { CricketMatch, Innings } from '../cricketMatchV2';
 import { grid } from '../grid';
 import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
 import { CricketMatchHeader } from './CricketMatchHeader/CricketMatchHeader';
 import { CricketScorecardNew } from './CricketScorecardNew';
-import { ComponentProps } from 'react';
-import { Tabs } from './FootballMatchHeader/Tabs';
+import type { Tabs } from './FootballMatchHeader/Tabs';
 
 export const CricketScorecardPageNew = ({
 	match,
