@@ -45,8 +45,8 @@ const requiredNodeVersionMatches =
 			matchLevel: 'major',
 		},
 		{
-			filepath: 'package.json',
-			pattern: /^\t+"@types\/node": "(.+)",$/m,
+			filepath: '../pnpm-workspace.yaml',
+			pattern: /^\s+'@types\/node': (.+)$/m,
 			/*
 			Definitely Typed packages only match the major and minor
 			versions of the corresponding library/node release.
