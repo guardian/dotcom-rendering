@@ -9,21 +9,36 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { createServer as createHttpServer } from 'node:http';
 import { resolve } from 'node:path';
 import express from 'express';
+import type { Plugin } from 'vite';
 import { createServer as createViteServer, mergeConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import { cjsPackages } from './cjs-packages.mts';
 import { ssrCjsPlugin } from './ssr-cjs-plugin.mts';
 import { sharedConfig } from './vite.config.shared.mts';
 
+/**
+ * Plugin that triggers a browser full-reload when SSR-only modules change.
+ * Vite's SSR environment invalidates its module graph on file changes but
+ * doesn't notify the browser. This invokes a reload via Vite's HMR websocket API.
+ */
+function ssrReloadPlugin(): Plugin {
+	return {
+		name: 'ssr-full-reload',
+		hotUpdate({ modules, server }) {
+			if (this.environment.name === 'ssr' && modules.length > 0) {
+				server.hot.send({ type: 'full-reload' });
+			}
+		},
+	};
+}
+
 const port = 3030;
 const root = process.cwd();
 
 async function start() {
 	const app = express();
-	const httpServer = createHttpServer(app);
 
 	// Create Vite server in middleware mode
 	// Handles client-side module transforms, HMR and SSR module loading
@@ -34,12 +49,11 @@ async function start() {
 				svgrOptions: { svgo: false },
 			}),
 			ssrCjsPlugin([...cjsPackages]),
+			ssrReloadPlugin(),
 		],
 		server: {
 			middlewareMode: true,
-			hmr: {
-				server: httpServer,
-			},
+			hmr: true,
 		},
 		appType: 'custom',
 		// Serve client modules from /assets/
@@ -59,6 +73,7 @@ async function start() {
 				'@guardian/braze-components/logic',
 				'@guardian/bridget',
 				'@guardian/bridget/AbTesting',
+				'@guardian/bridget/AdSlot',
 				'@guardian/bridget/Acquisitions',
 				'@guardian/bridget/Analytics',
 				'@guardian/bridget/Audio',
@@ -66,6 +81,7 @@ async function start() {
 				'@guardian/bridget/Discussion',
 				'@guardian/bridget/Environment',
 				'@guardian/bridget/Gallery',
+				'@guardian/bridget/Image',
 				'@guardian/bridget/Interaction',
 				'@guardian/bridget/Interactives',
 				'@guardian/bridget/ListenToArticle',
@@ -76,6 +92,7 @@ async function start() {
 				'@guardian/bridget/SignInScreenReason',
 				'@guardian/bridget/SignInScreenReferrer',
 				'@guardian/bridget/Tag',
+				'@guardian/bridget/Topic',
 				'@guardian/bridget/User',
 				'@guardian/bridget/Videos',
 				'@guardian/commercial-core',
@@ -96,6 +113,7 @@ async function start() {
 				'react-dom/client',
 				'react-google-recaptcha',
 				'sanitize-html',
+				'screenfull',
 				'swr',
 				'swr/immutable',
 				'valibot',
@@ -142,7 +160,7 @@ async function start() {
 		next();
 	});
 
-	// SSR HMR: reload server module graph on each request via Vite's ssrLoadModule
+	// SSR: reload server module graph on each request via Vite's ssrLoadModule
 	app.use(async (req, res, next) => {
 		try {
 			const { devServer } = (await vite.ssrLoadModule(
@@ -161,7 +179,7 @@ async function start() {
 		}
 	});
 
-	httpServer.listen(port, () => {
+	app.listen(port, () => {
 		console.log(
 			`\n  Vite DEV server running on http://localhost:${port}\n`,
 		);
