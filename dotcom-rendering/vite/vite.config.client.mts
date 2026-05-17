@@ -86,30 +86,6 @@ const getGlobals = (build: Build): Record<string, string> => {
 };
 
 /**
- * Generates manual chunk assignments for web builds.
- * Mirrors the webpack splitChunks.cacheGroups.frameworks config.
- */
-const getManualChunks = (
-	build: Build,
-): ((id: string) => string | undefined) | undefined => {
-	// Apps and crossword builds use inlineDynamicImports (single chunk)
-	if (build === 'client.apps' || build === 'client.editionsCrossword') {
-		return undefined;
-	}
-
-	return (id: string) => {
-		if (
-			/node_modules\/(react|react-dom|react-is|hoist-non-react-statistics|swr|@emotion|stylis)\//.test(
-				id,
-			)
-		) {
-			return 'frameworks';
-		}
-		return undefined;
-	};
-};
-
-/**
  * Whether this build should inline all dynamic imports into a single chunk.
  * Apps and crossword builds produce a single file (no code splitting).
  */
@@ -150,7 +126,6 @@ export const createClientConfig = (build: Build): UserConfig => {
 			rolldownOptions: {
 				input: isSingleChunk
 					? // Single-chunk builds can only have one entry
-					  // (inlineDynamicImports is incompatible with multiple inputs)
 					  { index: getEntryIndex(build) }
 					: {
 							index: getEntryIndex(build),
@@ -168,9 +143,26 @@ export const createClientConfig = (build: Build): UserConfig => {
 					chunkFileNames: DEV
 						? `[name].${build}.js`
 						: `[name].${build}.[hash].js`,
+					codeSplitting: isSingleChunk
+						? false
+						: {
+								groups: [
+									{
+										name: 'vendor',
+										test: /node_modules/,
+										priority: 1,
+										minSize: 0,
+									},
+									{
+										name: 'common',
+										test: (id) => !id.includes('.island.'),
+										priority: 0,
+										minSize: 0,
+										maxSize: 500000,
+									},
+								],
+						  },
 					globals: getGlobals(build),
-					manualChunks: getManualChunks(build),
-					...(isSingleChunk ? { inlineDynamicImports: true } : {}),
 				},
 			},
 		},
