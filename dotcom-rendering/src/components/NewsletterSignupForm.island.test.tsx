@@ -164,7 +164,8 @@ describe('NewsletterSignupForm', () => {
 		pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
 		pageConfig.idApiUrl = 'https://idapi.nextgen.guardianapps.co.uk';
 		pageConfig.googleRecaptchaSiteKey = 'test-site-key';
-		window.guardian.config.switches.usNewsletterHideMarketingToggle = false;
+		window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
+			false;
 		if (window.guardian.ophan) {
 			window.guardian.ophan.pageViewId = 'test-page-view-id';
 		}
@@ -466,9 +467,9 @@ describe('NewsletterSignupForm', () => {
 		).toBeInTheDocument();
 	});
 
-	describe('US hide marketing toggle (usNewsletterHideMarketingToggle switch)', () => {
+	describe('US hide marketing toggle (us-signup-hide-marketing-toggle switch)', () => {
 		beforeEach(() => {
-			window.guardian.config.switches.usNewsletterHideMarketingToggle =
+			window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
 				true;
 		});
 
