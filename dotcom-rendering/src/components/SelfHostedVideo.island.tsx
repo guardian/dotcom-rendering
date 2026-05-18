@@ -553,9 +553,15 @@ export const SelfHostedVideo = ({
 		if (playerState === 'PLAYING') {
 			if (isInView) {
 				void pauseVideo('PAUSED_BY_USER');
+				sendOphanTrackingEvent('pause');
 			}
 		} else {
 			void playVideo();
+			if (hasTrackedPlay) {
+				sendOphanTrackingEvent('resume');
+			} else {
+				sendOphanTrackingEvent('play');
+			}
 		}
 	};
 
@@ -806,12 +812,6 @@ export const SelfHostedVideo = ({
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
 		if (!videoStyleSettings.isInteractive) {
 			return;
-		}
-
-		if (playerState === 'PLAYING') {
-			sendOphanTrackingEvent('pause');
-		} else if (hasTrackedPlay) {
-			sendOphanTrackingEvent('resume');
 		}
 
 		event.preventDefault();
