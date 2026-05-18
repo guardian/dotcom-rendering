@@ -140,7 +140,6 @@ export type Props = {
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
 	handleTimeUpdate: (event: SyntheticEvent<HTMLVideoElement>) => void;
-	useLongFormProgressBar: boolean;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick?: (event: SyntheticEvent) => void;
 	updateCurrentTime: (time: number) => void;
@@ -148,6 +147,7 @@ export type Props = {
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showProgressBar: boolean;
+	useLongFormProgressBar: boolean;
 	showPlayPauseIcon: 'play' | 'pause' | null;
 	showIcons: boolean;
 	showFullscreenIcon: boolean;
@@ -195,13 +195,13 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleAudioClick,
 			handleKeyDown,
 			handleTimeUpdate,
-			useLongFormProgressBar,
 			handlePause,
 			handleFullscreenClick,
 			updateCurrentTime,
 			onError,
 			preloadPartialData,
 			showProgressBar: canShowProgressBar,
+			useLongFormProgressBar,
 			showPlayPauseIcon,
 			showIcons: canShowIcons,
 			showFullscreenIcon,
