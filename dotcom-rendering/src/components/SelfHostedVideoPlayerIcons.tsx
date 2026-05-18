@@ -15,6 +15,7 @@ const buttonStyles = css`
 	background: none;
 	padding: 0;
 	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
 `;
 
 const iconContainerStyles = css`

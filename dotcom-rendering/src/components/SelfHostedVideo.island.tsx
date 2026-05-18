@@ -45,7 +45,7 @@ import type { VideoEventKey } from './YoutubeAtom/YoutubeAtom';
 
 const VISIBILITY_THRESHOLD = 0.5;
 
-const videoContainerStyles = (
+const cardStyles = (
 	isInteractive: boolean,
 	aspectRatioOfVisibleVideo: number,
 	containerAspectRatioMobile?: number,
@@ -74,7 +74,7 @@ const videoContainerStyles = (
 	}
 `;
 
-const figureStyles = (
+const videoContainerStyles = (
 	aspectRatio: number,
 	aspectRatioOfVisibleVideo: number,
 	greyBarsAtSidesOnDesktop: boolean,
@@ -437,10 +437,12 @@ export const SelfHostedVideo = ({
 	}
 
 	/** The aspect ratio of the video will be clamped within the specified range */
-	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
-		aspectRatio,
-		minAspectRatio,
-		maxAspectRatio,
+	const aspectRatioOfVisibleVideo = Number(
+		getAspectRatioOfVisibleVideo(
+			aspectRatio,
+			minAspectRatio,
+			maxAspectRatio,
+		).toFixed(3),
 	);
 
 	const isVideoCroppedAtTopBottom = aspectRatio < aspectRatioOfVisibleVideo;
@@ -995,7 +997,7 @@ export const SelfHostedVideo = ({
 			<div
 				ref={setNode}
 				css={[
-					videoContainerStyles(
+					cardStyles(
 						videoStyleSettings.isInteractive,
 						aspectRatioOfVisibleVideo,
 						containerAspectRatioMobile,
@@ -1005,7 +1007,7 @@ export const SelfHostedVideo = ({
 			>
 				<div
 					css={[
-						figureStyles(
+						videoContainerStyles(
 							aspectRatio,
 							aspectRatioOfVisibleVideo,
 							isGreyBarsAtSidesOnDesktop,

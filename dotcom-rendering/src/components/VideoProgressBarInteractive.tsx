@@ -26,6 +26,7 @@ const containerStyles = css`
 		${sourcePalette.neutral[0]} 0%,
 		transparent 100%
 	);
+	-webkit-tap-highlight-color: transparent;
 `;
 
 const trackStyles = css`
