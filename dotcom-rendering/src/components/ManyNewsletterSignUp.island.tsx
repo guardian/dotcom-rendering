@@ -125,6 +125,24 @@ const attributeToNumber = (
 	return numericValue;
 };
 
+const getEffectiveMarketingOptIn = ({
+	locationHidesToggle,
+	isSignedIn,
+	marketingOptIn,
+}: {
+	locationHidesToggle: boolean;
+	isSignedIn: boolean | 'Pending';
+	marketingOptIn: boolean | undefined;
+}): boolean | undefined => {
+	if (locationHidesToggle) {
+		return true;
+	}
+	if (isSignedIn === true) {
+		return undefined;
+	}
+	return marketingOptIn ?? true;
+};
+
 type Props = {
 	useReCaptcha: boolean;
 	captchaSiteKey?: string;
@@ -186,11 +204,7 @@ export const ManyNewsletterSignUp = ({
 			}
 			const { identityName } = button.dataset;
 			const listId = attributeToNumber(button, 'data-list-id');
-			if (
-				identityName === undefined ||
-				identityName === '' ||
-				listId === undefined
-			) {
+			if (!identityName || listId === undefined) {
 				return;
 			}
 			const index = newslettersToSignUpFor.findIndex(
@@ -270,14 +284,21 @@ export const ManyNewsletterSignUp = ({
 		// when the captcha resolves relative to state updates.
 		const locationHidesToggle = !showMarketingToggleRef.current;
 		const currentCountryCodeRef = countryCodeRef.current;
-		const optIn = marketingOptInRef.current ?? true;
+		const optIn = marketingOptInRef.current;
 		// The value that is actually sent to the backend — used for tracking too
 		// so the tracking accurately reflects what was submitted.
-		const effectiveMarketingOptIn = locationHidesToggle ? true : optIn;
+		const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
+			locationHidesToggle,
+			isSignedIn,
+			marketingOptIn: optIn,
+		});
 
-		const getMarketingOptInType = () => {
+		const getMarketingOptInType = (): string | undefined => {
 			if (locationHidesToggle) {
 				return 'similar-guardian-products-hidden-optin-us';
+			}
+			if (effectiveMarketingOptIn === undefined) {
+				return undefined;
 			}
 			if (effectiveMarketingOptIn) {
 				return 'similar-guardian-products-optin';
@@ -319,7 +340,9 @@ export const ManyNewsletterSignUp = ({
 				renderingTarget,
 				{
 					listIds,
-					marketingOptInType,
+					...(marketingOptInType !== undefined && {
+						marketingOptInType,
+					}),
 					// If the backend handles the failure and responds with an informative
 					// error message (E.G. "Service unavailable", "Invalid email" etc) this
 					// should be included in the event data.
@@ -338,7 +361,9 @@ export const ManyNewsletterSignUp = ({
 			renderingTarget,
 			{
 				listIds,
-				marketingOptInType,
+				...(marketingOptInType !== undefined && {
+					marketingOptInType,
+				}),
 			},
 		);
 

@@ -233,6 +233,7 @@ describe('SecureSignup', () => {
 		});
 
 		const params = getRequestBodyParams();
+		expect(params.get('marketing')).toBeNull();
 		expect(params.get('marketingOptInHidden')).toBeNull();
 		expect(params.get('countryCode')).toBeNull();
 	});

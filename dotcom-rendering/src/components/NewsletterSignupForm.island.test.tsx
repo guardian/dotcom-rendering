@@ -323,6 +323,7 @@ describe('NewsletterSignupForm', () => {
 
 		const params = getRequestBodyParams();
 		expect(params.get('email')).toBe('signed.in@example.com');
+		expect(params.get('marketing')).toBeNull();
 	});
 
 	it('does not send marketingOptInHidden for signed-in users when country logic would show the toggle', async () => {
@@ -354,6 +355,7 @@ describe('NewsletterSignupForm', () => {
 		});
 
 		const params = getRequestBodyParams();
+		expect(params.get('marketing')).toBeNull();
 		expect(params.get('marketingOptInHidden')).toBeNull();
 		expect(params.get('countryCode')).toBeNull();
 	});

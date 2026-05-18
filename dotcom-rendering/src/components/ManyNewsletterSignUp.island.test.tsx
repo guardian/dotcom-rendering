@@ -339,6 +339,7 @@ describe('ManyNewsletterSignUp', () => {
 			await waitFor(() => {
 				expect(requestMultipleSignUps).toHaveBeenCalledWith(
 					expect.objectContaining({
+						marketingOptIn: undefined,
 						marketingOptInHidden: undefined,
 						countryCode: undefined,
 					}),

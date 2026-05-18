@@ -190,6 +190,24 @@ const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
 	return fetchedEmail;
 };
 
+const getEffectiveMarketingOptIn = ({
+	locationHidesToggle,
+	isSignedIn,
+	marketingOptIn,
+}: {
+	locationHidesToggle: boolean;
+	isSignedIn: boolean | 'Pending';
+	marketingOptIn: boolean | undefined;
+}): boolean | undefined => {
+	if (locationHidesToggle) {
+		return true;
+	}
+	if (isSignedIn === true) {
+		return undefined;
+	}
+	return marketingOptIn ?? true;
+};
+
 const postFormData = async (
 	endpoint: string,
 	formData: FormData,
@@ -289,11 +307,20 @@ export const SecureSignup = ({
 
 		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
 
+		const locationHidesToggle = !showMarketingToggle;
+		const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
+			locationHidesToggle,
+			isSignedIn,
+			marketingOptIn,
+		});
+
 		const getMarketingOptInType = (): string | undefined => {
 			if (!showMarketingToggle) {
 				return 'similar-guardian-products-hidden-optin-us';
 			}
-			const effectiveMarketingOptIn = marketingOptIn ?? true;
+			if (effectiveMarketingOptIn === undefined) {
+				return undefined;
+			}
 			return effectiveMarketingOptIn
 				? 'similar-guardian-products-optin'
 				: 'similar-guardian-products-optout';
@@ -303,10 +330,10 @@ export const SecureSignup = ({
 			emailAddress,
 			newsletterId,
 			token,
-			!showMarketingToggle ? true : marketingOptIn ?? true,
+			effectiveMarketingOptIn,
 			browserId,
-			!showMarketingToggle ? true : undefined,
-			!showMarketingToggle ? countryCode : undefined,
+			locationHidesToggle ? true : undefined,
+			locationHidesToggle ? countryCode : undefined,
 		);
 
 		const response = await postFormData(
