@@ -22,6 +22,8 @@ import {
 	customYoutubePlayEventName,
 	findOptimisedSourcePerMimeType,
 } from '../lib/video';
+import type { VideoStyleSettings } from '../lib/videoStyleSettings';
+import { videoSettingsMap } from '../lib/videoStyleSettings';
 import { palette } from '../palette';
 import type { RoleType } from '../types/content';
 import type { VideoPlayerFormat } from '../types/mainMedia';
@@ -44,7 +46,7 @@ import type { VideoEventKey } from './YoutubeAtom/YoutubeAtom';
 const VISIBILITY_THRESHOLD = 0.5;
 
 const videoContainerStyles = (
-	isCinemagraph: boolean,
+	isInteractive: boolean,
 	aspectRatioOfVisibleVideo: number,
 	containerAspectRatioMobile?: number,
 	containerAspectRatioDesktop?: number,
@@ -54,7 +56,7 @@ const videoContainerStyles = (
 	background-color: ${palette('--video-background')};
 	align-items: center;
 	justify-content: space-around;
-	${!isCinemagraph && `z-index: ${getZIndex('video-container')}`};
+	${isInteractive && `z-index: ${getZIndex('video-container')}`};
 
 	/**
 	 * Use the aspect ratio of the video, unless the aspect-ratio of the container is fixed
@@ -389,42 +391,74 @@ export const SelfHostedVideo = ({
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
-	/**
-	 * In a cinemagraph, all controls are hidden: the video looks like a GIF.
-	 * This includes but may not be limited to: audio icon, play/pause icon, subtitles, progress bar.
-	 */
-	const isCinemagraph = videoStyle === 'Cinemagraph';
-	const isLoop = videoStyle === 'Loop';
-	const isDefault = videoStyle === 'Default';
+	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
-	const canAutoplay = isLoop || isCinemagraph;
-
-	const shouldAutoplay = canAutoplay && isAutoplayAllowed;
-
-	const shouldLoop = isLoop || isCinemagraph;
+	const shouldAutoplay = videoStyleSettings.autoplay && isAutoplayAllowed;
 
 	const showProgressBar =
-		!hideProgressBar && !isCinemagraph && playerState !== 'NOT_STARTED';
+		!hideProgressBar &&
+		videoStyleSettings.showProgressBar &&
+		playerState !== 'NOT_STARTED';
 
-	const showIcons = !isCinemagraph && playerState !== 'NOT_STARTED';
+	const hasAudio =
+		videoStyleSettings.supportsAudio &&
+		sources.some((source) => source.hasAudio);
 
-	/**
-	 * Functionality to hide controls when the video is not interacted with
-	 * so the full unobscured video can be displayed to the user without distractions.
-	 */
-	const isHideControlsEnabled = isDefault;
-
-	const useLongFormProgressBar = isDefault;
+	const showIcons =
+		(hasAudio || videoStyleSettings.showFullscreenIcon) &&
+		playerState !== 'NOT_STARTED';
 
 	const subtitlesPosition: SubtitlesPosition =
-		useLongFormProgressBar && controlsPosition === 'bottom'
+		videoStyleSettings.useInteractiveProgressBar &&
+		controlsPosition === 'bottom'
 			? 'bottom-elevated'
 			: controlsPosition;
 
-	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
+	/**
+	 * Show the play icon when the video is not playing, except for when it is scrolled out of view,
+	 * i.e. paused by intersection observer. In this case, the intersection observer will resume playback
+	 * and having a play icon would falsely indicate a user action is required to resume playback.
+	 */
+	const showPlayIcon =
+		videoStyleSettings.canShowPlayIcon &&
+		(playerState === 'PAUSED_BY_USER' ||
+			playerState === 'PAUSED_BY_BROWSER' ||
+			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
 
-	const supportsAudio =
-		sources.some((source) => source.hasAudio) && !isCinemagraph;
+	const showPauseIcon =
+		videoStyleSettings.hideControlsWhenNotInteractedWith &&
+		playerState === 'PLAYING';
+
+	let showPlayPauseIcon: 'play' | 'pause' | null = null;
+	if (showPlayIcon) {
+		showPlayPauseIcon = 'play';
+	} else if (showPauseIcon) {
+		showPlayPauseIcon = 'pause';
+	}
+
+	/** The aspect ratio of the video will be clamped within the specified range */
+	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
+		aspectRatio,
+		minAspectRatio,
+		maxAspectRatio,
+	);
+
+	const isVideoCroppedAtTopBottom = aspectRatio < aspectRatioOfVisibleVideo;
+	const isVideoCroppedAtLeftRight = aspectRatio > aspectRatioOfVisibleVideo;
+
+	const isGreyBarsAtSidesOnDesktop =
+		containerAspectRatioDesktop !== undefined &&
+		containerAspectRatioDesktop > aspectRatioOfVisibleVideo;
+
+	const isGreyBarsAtTopAndBottomOnDesktop =
+		containerAspectRatioDesktop !== undefined &&
+		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
+
+	const optimisedPosterImage = showPosterImage
+		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
+		: undefined;
+
+	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
 
 	const sendOphanTrackingEvent = useCallback(
 		(event: VideoEventKey) => {
@@ -768,7 +802,7 @@ export const SelfHostedVideo = ({
 	};
 
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
-		if (isCinemagraph) {
+		if (!videoStyleSettings.isInteractive) {
 			return;
 		}
 
@@ -777,7 +811,7 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleAudioClick = (event: React.SyntheticEvent) => {
-		if (isCinemagraph) {
+		if (!videoStyleSettings.isInteractive) {
 			return;
 		}
 
@@ -836,7 +870,7 @@ export const SelfHostedVideo = ({
 	 * browser. Therefore we need to apply the pause state to the video.
 	 */
 	const handlePause = () => {
-		if (isCinemagraph) {
+		if (!videoStyleSettings.isInteractive) {
 			return;
 		}
 
@@ -873,7 +907,7 @@ export const SelfHostedVideo = ({
 			return;
 		}
 
-		const increment = isDefault ? 10 : 1;
+		const increment = videoStyleSettings.seekIncrement ?? 0;
 		const newTime = Math.min(video.currentTime + increment, video.duration);
 
 		updateCurrentTime(newTime);
@@ -885,7 +919,7 @@ export const SelfHostedVideo = ({
 			return;
 		}
 
-		const increment = isDefault ? 10 : 1;
+		const increment = videoStyleSettings.seekIncrement ?? 0;
 		const newTime = Math.max(video.currentTime - increment, 0);
 
 		updateCurrentTime(newTime);
@@ -903,7 +937,7 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
-		if (isCinemagraph) {
+		if (!videoStyleSettings.isInteractive) {
 			return;
 		}
 
@@ -951,47 +985,6 @@ export const SelfHostedVideo = ({
 		}
 	}
 
-	/**
-	 * Show the play icon when the video is not playing, except for when it is scrolled out of view,
-	 * i.e. paused by intersection observer. In this case, the intersection observer will resume playback
-	 * and having a play icon would falsely indicate a user action is required to resume playback.
-	 */
-	const showPlayIcon =
-		!isCinemagraph &&
-		(playerState === 'PAUSED_BY_USER' ||
-			playerState === 'PAUSED_BY_BROWSER' ||
-			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
-
-	const showPauseIcon = isHideControlsEnabled && playerState === 'PLAYING';
-	let showPlayPauseIcon: 'play' | 'pause' | null = null;
-	if (showPlayIcon) {
-		showPlayPauseIcon = 'play';
-	} else if (showPauseIcon) {
-		showPlayPauseIcon = 'pause';
-	}
-
-	/** The aspect ratio of the video will be clamped within the specified range */
-	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
-		aspectRatio,
-		minAspectRatio,
-		maxAspectRatio,
-	);
-
-	const isVideoCroppedAtTopBottom = aspectRatio < aspectRatioOfVisibleVideo;
-	const isVideoCroppedAtLeftRight = aspectRatio > aspectRatioOfVisibleVideo;
-
-	const isGreyBarsAtSidesOnDesktop =
-		containerAspectRatioDesktop !== undefined &&
-		containerAspectRatioDesktop > aspectRatioOfVisibleVideo;
-
-	const isGreyBarsAtTopAndBottomOnDesktop =
-		containerAspectRatioDesktop !== undefined &&
-		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
-
-	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
-		: undefined;
-
 	return (
 		<figure
 			className={`video-container ${videoStyle.toLocaleLowerCase()} ${
@@ -1003,7 +996,7 @@ export const SelfHostedVideo = ({
 				ref={setNode}
 				css={[
 					videoContainerStyles(
-						isCinemagraph,
+						videoStyleSettings.isInteractive,
 						aspectRatioOfVisibleVideo,
 						containerAspectRatioMobile,
 						containerAspectRatioDesktop,
@@ -1021,7 +1014,7 @@ export const SelfHostedVideo = ({
 							isVideoCroppedAtLeftRight,
 							containerAspectRatioDesktop,
 						),
-						isHideControlsEnabled &&
+						videoStyleSettings.hideControlsWhenNotInteractedWith &&
 							(playerState === 'PLAYING'
 								? hideControlsStyles
 								: showControlsStyles),
@@ -1040,7 +1033,7 @@ export const SelfHostedVideo = ({
 						currentTime={currentTime}
 						ref={vidRef}
 						playerContainerRef={playerContainerRef}
-						hasAudio={supportsAudio}
+						hasAudio={hasAudio}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
 						handleLoadedData={handleLoadedData}
@@ -1050,7 +1043,9 @@ export const SelfHostedVideo = ({
 						handleAudioClick={handleAudioClick}
 						handleTimeUpdate={handleTimeUpdate}
 						handleKeyDown={handleKeyDown}
-						useLongFormProgressBar={useLongFormProgressBar}
+						useLongFormProgressBar={
+							!!videoStyleSettings.useInteractiveProgressBar
+						}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
 						updateCurrentTime={updateCurrentTime}
@@ -1058,16 +1053,18 @@ export const SelfHostedVideo = ({
 						preloadPartialData={!!shouldAutoplay}
 						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
-						showSubtitles={!isCinemagraph}
+						showSubtitles={videoStyleSettings.canShowSubtitles}
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}
 						showIcons={showIcons}
 						iconsPosition={controlsPosition}
 						subtitlesPosition={subtitlesPosition}
 						activeCue={activeCue}
-						shouldLoop={shouldLoop}
-						showFullscreenIcon={isDefault}
-						isInteractive={!isCinemagraph}
+						shouldLoop={videoStyleSettings.loop}
+						showFullscreenIcon={
+							videoStyleSettings.showFullscreenIcon
+						}
+						isInteractive={videoStyleSettings.isInteractive}
 					/>
 				</div>
 			</div>
