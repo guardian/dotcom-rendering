@@ -6,7 +6,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { lazyFetchEmailWithTimeout } from './fetchEmail';
-import { getEffectiveMarketingOptIn } from './newsletter-marketing-opt-in';
+import {
+	getEffectiveMarketingOptIn,
+	getMarketingOptInType,
+} from './newsletter-marketing-opt-in';
 import { requestSingleSignUp } from './newsletter-sign-up-requests';
 import {
 	EVENT_DESCRIPTION_TO_ACTION,
@@ -30,7 +33,7 @@ const resolveUserEmail = async (
 ): Promise<string | undefined> => {
 	if (isSignedIn !== true) return;
 	const { idApiUrl } = window.guardian.config.page;
-	if (idApiUrl === undefined || idApiUrl === '') return;
+	if (!idApiUrl) return;
 	const fetchedEmail = await lazyFetchEmailWithTimeout()();
 	return fetchedEmail ?? undefined;
 };
@@ -157,7 +160,7 @@ export const useNewsletterSignupForm = (
 	const authStatus = useAuthStatus();
 	const browserId = useBrowserId();
 	const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
-		locationHidesToggle: !showMarketingToggle,
+		showMarketingToggle,
 		isSignedIn,
 		marketingOptIn,
 	});
@@ -169,8 +172,6 @@ export const useNewsletterSignupForm = (
 	const marketingOptInRef = useRef(effectiveMarketingOptIn);
 	const browserIdRef = useRef(browserId);
 	const authStatusRef = useRef(authStatus);
-	const showMarketingToggleRef = useRef(showMarketingToggle);
-	const countryCodeRef = useRef(countryCode);
 	useEffect(() => {
 		marketingOptInRef.current = effectiveMarketingOptIn;
 	}, [effectiveMarketingOptIn]);
@@ -180,12 +181,6 @@ export const useNewsletterSignupForm = (
 	useEffect(() => {
 		authStatusRef.current = authStatus;
 	}, [authStatus]);
-	useEffect(() => {
-		showMarketingToggleRef.current = showMarketingToggle;
-	}, [showMarketingToggle]);
-	useEffect(() => {
-		countryCodeRef.current = countryCode;
-	}, [countryCode]);
 
 	// The email address that was validated at submit-time. We stash it in a
 	// ref and read it back when the captcha resolves, so it can't change out
@@ -223,30 +218,16 @@ export const useNewsletterSignupForm = (
 				abTest,
 			);
 
-			const locationHidesToggle = !showMarketingToggleRef.current;
-
-			const getMarketingOptInType = (): string | undefined => {
-				if (locationHidesToggle) {
-					return 'similar-guardian-products-hidden-optin-us';
-				}
-				const currentMarketingOptIn = marketingOptInRef.current ?? true;
-				return currentMarketingOptIn
-					? 'similar-guardian-products-optin'
-					: 'similar-guardian-products-optout';
-			};
-
 			const response = await requestSingleSignUp({
 				emailAddress,
 				newsletterId,
 				recaptchaToken: token,
-				marketingOptIn: locationHidesToggle
-					? true
-					: marketingOptInRef.current,
+				marketingOptIn: showMarketingToggle
+					? marketingOptInRef.current
+					: true,
 				browserId: browserIdRef.current,
-				marketingOptInHidden: locationHidesToggle ? true : undefined,
-				countryCode: locationHidesToggle
-					? countryCodeRef.current
-					: undefined,
+				marketingOptInHidden: showMarketingToggle ? undefined : true,
+				countryCode: showMarketingToggle ? undefined : countryCode,
 			});
 
 			try {
@@ -266,15 +247,24 @@ export const useNewsletterSignupForm = (
 				response.ok ? 'submission-confirmed' : 'submission-failed',
 				renderingTarget,
 				abTest,
-				getMarketingOptInType(),
+				getMarketingOptInType(
+					showMarketingToggle,
+					marketingOptInRef.current,
+				),
 			);
 		},
-		[abTest, newsletterId, renderingTarget],
+		[
+			abTest,
+			countryCode,
+			newsletterId,
+			renderingTarget,
+			showMarketingToggle,
+		],
 	);
 
 	const handleCaptchaComplete = useCallback(
 		(token: string | null): void => {
-			if (token === null || token === '') {
+			if (!token) {
 				sendTracking(
 					newsletterId,
 					'captcha-not-passed',

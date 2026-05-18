@@ -14,10 +14,13 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 // Use the default export instead.
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import {
+	getEffectiveMarketingOptIn,
+	getMarketingOptInType,
+} from '../lib/newsletter-marketing-opt-in';
+import {
 	reportTrackingEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
-import { getEffectiveMarketingOptIn } from '../lib/newsletter-marketing-opt-in';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterShowMarketingToggle } from '../lib/useNewsletterShowMarketingToggle';
@@ -153,25 +156,9 @@ export const ManyNewsletterSignUp = ({
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
 	const [marketingOptIn, setMarketingOptIn] = useState<boolean | undefined>(
-		isSignedIn !== true ? true : undefined,
+		undefined,
 	);
 	const reCaptchaRef = useRef<ReactGoogleRecaptcha>(null);
-
-	// Mirror async-read values in refs so sendRequest always sees the latest
-	// values even if state updates between the user pressing submit and the
-	// captcha resolving.
-	const showMarketingToggleRef = useRef(showMarketingToggle);
-	const countryCodeRef = useRef(countryCode);
-	const marketingOptInRef = useRef(marketingOptIn);
-	useEffect(() => {
-		showMarketingToggleRef.current = showMarketingToggle;
-	}, [showMarketingToggle]);
-	useEffect(() => {
-		countryCodeRef.current = countryCode;
-	}, [countryCode]);
-	useEffect(() => {
-		marketingOptInRef.current = marketingOptIn;
-	}, [marketingOptIn]);
 
 	const userCanInteract = status !== 'Success' && status !== 'Loading';
 	const { renderingTarget } = useConfig();
@@ -263,31 +250,11 @@ export const ManyNewsletterSignUp = ({
 			(newsletter) => newsletter.listId,
 		);
 
-		// Read from refs so we always have the latest values regardless of
-		// when the captcha resolves relative to state updates.
-		const locationHidesToggle = !showMarketingToggleRef.current;
-		const currentCountryCodeRef = countryCodeRef.current;
-		const optIn = marketingOptInRef.current;
-		// The value that is actually sent to the backend — used for tracking too
-		// so the tracking accurately reflects what was submitted.
 		const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
-			locationHidesToggle,
+			showMarketingToggle,
 			isSignedIn,
-			marketingOptIn: optIn,
+			marketingOptIn,
 		});
-
-		const getMarketingOptInType = (): string | undefined => {
-			if (locationHidesToggle) {
-				return 'similar-guardian-products-hidden-optin-us';
-			}
-			if (effectiveMarketingOptIn === undefined) {
-				return undefined;
-			}
-			if (effectiveMarketingOptIn) {
-				return 'similar-guardian-products-optin';
-			}
-			return 'similar-guardian-products-optout';
-		};
 
 		void reportTrackingEvent(
 			'ManyNewsletterSignUp',
@@ -303,15 +270,16 @@ export const ManyNewsletterSignUp = ({
 			newsletterIds: identityNames,
 			recaptchaToken: reCaptchaToken,
 			marketingOptIn: effectiveMarketingOptIn,
-			marketingOptInHidden: locationHidesToggle ? true : undefined,
-			countryCode: locationHidesToggle
-				? currentCountryCodeRef
-				: undefined,
+			marketingOptInHidden: showMarketingToggle ? undefined : true,
+			countryCode: showMarketingToggle ? undefined : countryCode,
 		}).catch(() => {
 			return undefined;
 		});
 
-		const marketingOptInType = getMarketingOptInType();
+		const marketingType = getMarketingOptInType(
+			showMarketingToggle,
+			effectiveMarketingOptIn,
+		);
 
 		if (response?.ok !== true) {
 			const responseText = response
@@ -323,14 +291,9 @@ export const ManyNewsletterSignUp = ({
 				renderingTarget,
 				{
 					listIds,
-					...(marketingOptInType !== undefined && {
-						marketingOptInType,
+					...(marketingType !== undefined && {
+						marketingOptInType: marketingType,
 					}),
-					// If the backend handles the failure and responds with an informative
-					// error message (E.G. "Service unavailable", "Invalid email" etc) this
-					// should be included in the event data.
-					// If not, the response text will be the HTML for the default error page
-					// which would not be helpful to include it in the tracking data.
 					responseText: responseText.substring(0, 100),
 				},
 			);
@@ -344,8 +307,8 @@ export const ManyNewsletterSignUp = ({
 			renderingTarget,
 			{
 				listIds,
-				...(marketingOptInType !== undefined && {
-					marketingOptInType,
+				...(marketingType !== undefined && {
+					marketingOptInType: marketingType,
 				}),
 			},
 		);
@@ -393,7 +356,7 @@ export const ManyNewsletterSignUp = ({
 			? reCaptchaRef.current.getValue()
 			: await reCaptchaRef.current.executeAsync();
 
-		if (result === null || result === '') {
+		if (!result) {
 			void reportTrackingEvent(
 				'ManyNewsletterSignUp',
 				'captcha-failure',

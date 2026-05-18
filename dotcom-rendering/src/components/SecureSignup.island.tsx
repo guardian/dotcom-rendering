@@ -21,6 +21,10 @@ import { useEffect, useRef, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import {
+	getEffectiveMarketingOptIn,
+	getMarketingOptInType,
+} from '../lib/newsletter-marketing-opt-in';
+import {
 	EVENT_DESCRIPTION_TO_ACTION,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	type NewsletterEventDescription,
@@ -29,7 +33,6 @@ import {
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
-import { getEffectiveMarketingOptIn } from '../lib/newsletter-marketing-opt-in';
 import { useNewsletterShowMarketingToggle } from '../lib/useNewsletterShowMarketingToggle';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -290,24 +293,11 @@ export const SecureSignup = ({
 
 		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
 
-		const locationHidesToggle = !showMarketingToggle;
 		const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
-			locationHidesToggle,
+			showMarketingToggle,
 			isSignedIn,
 			marketingOptIn,
 		});
-
-		const getMarketingOptInType = (): string | undefined => {
-			if (!showMarketingToggle) {
-				return 'similar-guardian-products-hidden-optin-us';
-			}
-			if (effectiveMarketingOptIn === undefined) {
-				return undefined;
-			}
-			return effectiveMarketingOptIn
-				? 'similar-guardian-products-optin'
-				: 'similar-guardian-products-optout';
-		};
 
 		const formData = buildFormData(
 			emailAddress,
@@ -315,8 +305,8 @@ export const SecureSignup = ({
 			token,
 			effectiveMarketingOptIn,
 			browserId,
-			locationHidesToggle ? true : undefined,
-			locationHidesToggle ? countryCode : undefined,
+			showMarketingToggle ? undefined : true,
+			showMarketingToggle ? undefined : countryCode,
 		);
 
 		const response = await postFormData(
@@ -340,7 +330,7 @@ export const SecureSignup = ({
 			response.ok ? 'submission-confirmed' : 'submission-failed',
 			renderingTarget,
 			abTest,
-			getMarketingOptInType(),
+			getMarketingOptInType(showMarketingToggle, effectiveMarketingOptIn),
 		);
 	};
 
@@ -362,7 +352,7 @@ export const SecureSignup = ({
 	};
 
 	const handleCaptchaComplete = (token: string | null) => {
-		if (token === null || token === '') {
+		if (!token) {
 			sendTracking(
 				newsletterId,
 				'captcha-not-passed',
@@ -474,7 +464,7 @@ export const SecureSignup = ({
 					</div>
 				))}
 
-			{captchaSiteKey !== undefined && captchaSiteKey !== '' && (
+			{!!captchaSiteKey && (
 				<div
 					css={css`
 						.grecaptcha-badge {

@@ -1,5 +1,6 @@
 export type EffectiveMarketingOptInParams = {
-	locationHidesToggle: boolean;
+	/** `true` when the US soft opt-in switch is on and country is US */
+	showMarketingToggle: boolean;
 	isSignedIn: boolean | 'Pending';
 	marketingOptIn: boolean | undefined;
 };
@@ -14,11 +15,11 @@ export type EffectiveMarketingOptInParams = {
  * - While sign-in state is pending and untouched, omit marketing.
  */
 export const getEffectiveMarketingOptIn = ({
-	locationHidesToggle,
+	showMarketingToggle,
 	isSignedIn,
 	marketingOptIn,
 }: EffectiveMarketingOptInParams): boolean | undefined => {
-	if (locationHidesToggle) {
+	if (!showMarketingToggle) {
 		return true;
 	}
 
@@ -35,4 +36,23 @@ export const getEffectiveMarketingOptIn = ({
 	}
 
 	return undefined;
+};
+
+/**
+ * Returns the tracking string for the marketing opt-in type,
+ * or `undefined` if none should be tracked (e.g. signed-in users).
+ */
+export const getMarketingOptInType = (
+	showMarketingToggle: boolean,
+	effectiveMarketingOptIn: boolean | undefined,
+): string | undefined => {
+	if (!showMarketingToggle) {
+		return 'similar-guardian-products-hidden-optin-us';
+	}
+	if (effectiveMarketingOptIn === undefined) {
+		return undefined;
+	}
+	return effectiveMarketingOptIn
+		? 'similar-guardian-products-optin'
+		: 'similar-guardian-products-optout';
 };
