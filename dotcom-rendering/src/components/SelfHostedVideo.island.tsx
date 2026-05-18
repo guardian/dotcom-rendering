@@ -405,7 +405,7 @@ export const SelfHostedVideo = ({
 		sources.some((source) => source.hasAudio);
 
 	const showIcons =
-		(hasAudio || videoStyleSettings.showFullscreenIcon) &&
+		(hasAudio || videoStyleSettings.supportsFullscreen) &&
 		playerState !== 'NOT_STARTED';
 
 	const subtitlesPosition: SubtitlesPosition =
@@ -1068,7 +1068,7 @@ export const SelfHostedVideo = ({
 						activeCue={activeCue}
 						shouldLoop={videoStyleSettings.loop}
 						showFullscreenIcon={
-							videoStyleSettings.showFullscreenIcon
+							videoStyleSettings.supportsFullscreen
 						}
 						isInteractive={videoStyleSettings.isInteractive}
 					/>

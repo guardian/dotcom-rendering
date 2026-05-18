@@ -23,7 +23,7 @@ export type VideoStyleSettings = ProgessBarStyles & {
 	autoplay: boolean;
 	loop: boolean;
 	supportsAudio: boolean;
-	showFullscreenIcon: boolean;
+	supportsFullscreen: boolean;
 	/**
 	 * A play icon can be shown when the video is not playing
 	 */
@@ -45,7 +45,7 @@ const loopSettings: VideoStyleSettings = {
 	autoplay: true,
 	loop: true,
 	supportsAudio: true,
-	showFullscreenIcon: true,
+	supportsFullscreen: false,
 	showProgressBar: true,
 	useInteractiveProgressBar: false,
 	canShowPlayIcon: true,
@@ -63,7 +63,7 @@ const cinemagraphSettings: VideoStyleSettings = {
 	autoplay: true,
 	loop: true,
 	supportsAudio: false,
-	showFullscreenIcon: false,
+	supportsFullscreen: false,
 	showProgressBar: false,
 	useInteractiveProgressBar: false,
 	canShowPlayIcon: false,
@@ -81,7 +81,7 @@ const defaultSettings: VideoStyleSettings = {
 	autoplay: true,
 	loop: false,
 	supportsAudio: true,
-	showFullscreenIcon: true,
+	supportsFullscreen: true,
 	showProgressBar: true,
 	useInteractiveProgressBar: true,
 	canShowPlayIcon: true,
