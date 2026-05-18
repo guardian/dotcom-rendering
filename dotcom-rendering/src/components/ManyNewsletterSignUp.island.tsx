@@ -459,9 +459,13 @@ export const ManyNewsletterSignUp = ({
 							}}
 							newsletterCount={newslettersToSignUpFor.length}
 							hideMarketingToggle={
-								hideMarketingToggle && isSignedIn === false
+								// Hide the toggle for signed-in/pending users, or while
+								// marketingOptIn hasn't resolved for the signed-out user.
+								hideMarketingToggle ||
+								isSignedIn !== false ||
+								marketingOptIn === undefined
 							}
-							marketingOptIn={marketingOptIn ?? false}
+							marketingOptIn={marketingOptIn === true}
 							setMarketingOptIn={setMarketingOptIn}
 							useReCaptcha={useReCaptcha}
 							captchaSiteKey={captchaSiteKey}

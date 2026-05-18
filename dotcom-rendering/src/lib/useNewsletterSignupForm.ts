@@ -76,7 +76,7 @@ export type NewsletterSignupFormState = {
 	 * privacy message.
 	 */
 	isInteracted: boolean;
-	/** `true` for signed-out users when the marketing toggle should be hidden (US soft opt-in). */
+	/** `true` when the marketing toggle should be hidden — including signed-in users, pending auth states, and signed-out US users with the soft opt-in switch enabled. */
 	hideMarketingToggle: boolean;
 	marketingOptIn: boolean | undefined;
 

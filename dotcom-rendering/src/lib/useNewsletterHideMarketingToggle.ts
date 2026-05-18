@@ -17,12 +17,14 @@ export const useNewsletterHideMarketingToggle = (): {
 	// Initialise synchronously from the config so there is no render where
 	// switchEnabled is false before the effect runs (avoiding a one-frame
 	// flash of the marketing toggle for US users).
-	const [switchEnabled] = useState(
-		() =>
+	const [switchEnabled] = useState(() => {
+		if (typeof window === 'undefined') return false;
+		return (
 			window.guardian.config.switches[
 				'us-signup-hide-marketing-toggle'
-			] === true,
-	);
+			] === true
+		);
+	});
 
 	return {
 		hideMarketingToggle: switchEnabled && countryCode === 'US',

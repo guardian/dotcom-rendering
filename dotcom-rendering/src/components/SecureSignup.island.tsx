@@ -142,7 +142,7 @@ const buildFormData = (
 	token: string,
 	marketingOptIn?: boolean,
 	browserId?: string,
-	marketingOptInHidden?: boolean,
+	marketingOptInHidden?: true,
 	countryCode?: string,
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
@@ -167,7 +167,7 @@ const buildFormData = (
 		formData.append('browserId', browserId);
 	}
 
-	if (marketingOptInHidden !== undefined) {
+	if (marketingOptInHidden) {
 		formData.append('marketingOptInHidden', 'true');
 	}
 
