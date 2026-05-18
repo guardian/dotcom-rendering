@@ -711,7 +711,10 @@ export const SelfHostedVideo = ({
 		const video = vidRef.current;
 		if (!video) return;
 
-		const handleEndFullscreen = () => setIsWebKitFullscreen(false);
+		const handleEndFullscreen = () => {
+			setIsWebKitFullscreen(false);
+			positionCues(video);
+		};
 
 		video.addEventListener('webkitendfullscreen', handleEndFullscreen);
 
