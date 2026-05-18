@@ -577,6 +577,35 @@ export const SelfHostedVideo = ({
 		/>
 	);
 
+	const positionCues = useCallback(
+		(video: HTMLVideoElement) => {
+			if (
+				!videoStyleSettings.canShowSubtitles ||
+				!videoStyleSettings.supportsAudio
+			) {
+				return;
+			}
+
+			const track = video.textTracks[0];
+			if (!track?.cues) {
+				return;
+			}
+
+			const pxFromBottom = space[3];
+			const videoHeight = video.getBoundingClientRect().height;
+			const percentFromTop =
+				((videoHeight - pxFromBottom) / videoHeight) * 100;
+
+			for (const cue of Array.from(track.cues)) {
+				if (cue instanceof VTTCue) {
+					cue.snapToLines = false;
+					cue.line = percentFromTop;
+				}
+			}
+		},
+		[videoStyleSettings.canShowSubtitles, videoStyleSettings.supportsAudio],
+	);
+
 	/**
 	 * Setup.
 	 *
@@ -723,7 +752,7 @@ export const SelfHostedVideo = ({
 				'webkitendfullscreen',
 				handleEndFullscreen,
 			);
-	}, []);
+	}, [positionCues]);
 
 	/**
 	 * Track the first time the video comes into view.
@@ -769,32 +798,6 @@ export const SelfHostedVideo = ({
 	if (adapted) {
 		return FallbackImageComponent;
 	}
-
-	const positionCues = (video: HTMLVideoElement) => {
-		if (
-			!videoStyleSettings.canShowSubtitles ||
-			!videoStyleSettings.supportsAudio
-		) {
-			return;
-		}
-
-		const track = video.textTracks[0];
-		if (!track?.cues) {
-			return;
-		}
-
-		const pxFromBottom = space[3];
-		const videoHeight = video.getBoundingClientRect().height;
-		const percentFromTop =
-			((videoHeight - pxFromBottom) / videoHeight) * 100;
-
-		for (const cue of Array.from(track.cues)) {
-			if (cue instanceof VTTCue) {
-				cue.snapToLines = false;
-				cue.line = percentFromTop;
-			}
-		}
-	};
 
 	const handleLoadedMetadata = () => {
 		const video = vidRef.current;
