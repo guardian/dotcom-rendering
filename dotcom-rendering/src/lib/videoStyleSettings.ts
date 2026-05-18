@@ -1,21 +1,29 @@
 import type { VideoPlayerFormat } from '../types/mainMedia';
 
+type ProgessBarStyles =
+	| {
+			showProgressBar: boolean;
+			/**
+			 * A progress bar that includes seeking. Taller than the default progress bar
+			 */
+			useInteractiveProgressBar: boolean | null;
+	  }
+	| {
+			showProgressBar: false;
+			useInteractiveProgressBar?: never;
+	  };
+
 /**
  * Self-hosted video style (Cinemagraph, Loop, Default) settings.
  *
  * Defines the settings for each video style which are used to determine how the
  * video player should behave and which controls should be shown for each style.
  */
-export type VideoStyleSettings = {
+export type VideoStyleSettings = ProgessBarStyles & {
 	autoplay: boolean;
 	loop: boolean;
 	supportsAudio: boolean;
 	showFullscreenIcon: boolean;
-	showProgressBar: boolean;
-	/**
-	 * A progress bar that includes seeking. Taller than the default progress bar
-	 */
-	useInteractiveProgressBar: boolean | null;
 	/**
 	 * A play icon can be shown when the video is not playing
 	 */
@@ -52,14 +60,17 @@ const loopSettings: VideoStyleSettings = {
  * This includes but may not be limited to: audio icon, play/pause icon, subtitles, progress bar.
  */
 const cinemagraphSettings: VideoStyleSettings = {
-	...loopSettings,
+	autoplay: true,
+	loop: true,
 	supportsAudio: false,
 	showFullscreenIcon: false,
 	showProgressBar: false,
+	useInteractiveProgressBar: false,
 	canShowPlayIcon: false,
 	canShowSubtitles: false,
 	seekIncrement: null,
 	isInteractive: false,
+	hideControlsWhenNotInteractedWith: false,
 };
 
 /**
@@ -67,11 +78,16 @@ const cinemagraphSettings: VideoStyleSettings = {
  * This style is used for videos that are typically longer in length and should not loop.
  */
 const defaultSettings: VideoStyleSettings = {
-	...loopSettings,
 	autoplay: false,
 	loop: false,
+	supportsAudio: true,
+	showFullscreenIcon: true,
+	showProgressBar: true,
 	useInteractiveProgressBar: true,
+	canShowPlayIcon: true,
+	canShowSubtitles: true,
 	seekIncrement: 10,
+	isInteractive: true,
 	hideControlsWhenNotInteractedWith: true,
 };
 
