@@ -417,7 +417,7 @@ export const useNewsletterSignupForm = (
 		userEmail,
 		isSignedIn: hasPrefilledEmail,
 		isInteracted,
-		hideMarketingToggle: !(isSignedIn === false && !hideMarketingToggle),
+		hideMarketingToggle: hideMarketingToggle || isSignedIn !== false,
 		marketingOptIn,
 		isWaitingForResponse,
 		responseOk,
