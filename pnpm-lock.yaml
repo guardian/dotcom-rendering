@@ -264,8 +264,8 @@ importers:
         specifier: 62.6.1
         version: 62.6.1(aws-cdk-lib@2.246.0(constructs@10.6.0))(aws-cdk@2.1115.1)(constructs@10.6.0)
       '@guardian/commercial-core':
-        specifier: 0.0.0-beta-20260518074451
-        version: 0.0.0-beta-20260518074451(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.5.3))
+        specifier: 34.0.0
+        version: 34.0.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.5.3))
       '@guardian/consent-manager':
         specifier: 1.0.0
         version: 1.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.5.3)
@@ -2417,8 +2417,8 @@ packages:
       aws-cdk-lib: ^2.241.0
       constructs: ^10.5.1
 
-  '@guardian/commercial-core@0.0.0-beta-20260518074451':
-    resolution: {integrity: sha512-cw9b/KsIKQODhzr1cxg59EHyFaDGHgow5/iMaljYzifxnb97rouah2Z8BT3xJxbO+G7I5p6zpvJmFMLB0Ji8Iw==}
+  '@guardian/commercial-core@34.0.0':
+    resolution: {integrity: sha512-Uq1fIk6jaHPNfk5Y1E2hgwYTNegOH1iILeOG3oRY6aVJ2LDCZtiXwVqClaXaZLD+xdRFQJYCOZse+xKOnUQvBA==}
     peerDependencies:
       '@guardian/consent-manager': ^1.0.0
       '@guardian/libs': ^32.0.0
@@ -11821,7 +11821,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@guardian/commercial-core@0.0.0-beta-20260518074451(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.5.3))':
+  '@guardian/commercial-core@34.0.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.5.3))':
     dependencies:
       '@guardian/consent-manager': 1.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.5.3)
