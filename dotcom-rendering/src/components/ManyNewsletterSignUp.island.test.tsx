@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen as rtlScreen, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import {
 	reportTrackingEvent,
@@ -110,29 +110,29 @@ describe('ManyNewsletterSignUp', () => {
 			renderComponent();
 
 			// Simulate the user selecting a newsletter via the toggle button
-			newsletterButton.click();
+			await testUser.click(newsletterButton);
 
 			// Wait for the form to become visible (count > 0 unhides it)
 			await waitFor(() => {
 				expect(
-					screen.getByLabelText('Enter your email'),
+					rtlScreen.getByLabelText('Enter your email'),
 				).toBeInTheDocument();
 			});
 
 			// Marketing checkbox should NOT be present for US hide marketing toggle
 			expect(
-				screen.queryByLabelText(/Get updates about our journalism/),
+				rtlScreen.queryByLabelText(/Get updates about our journalism/),
 			).not.toBeInTheDocument();
 
 			// Type email and submit
 			await testUser.type(
-				screen.getByLabelText('Enter your email'),
+				rtlScreen.getByLabelText('Enter your email'),
 				'reader@example.com',
 			);
 
 			// Use the specific aria-label the component sets on the sign-up button
 			await testUser.click(
-				screen.getByRole('button', {
+				rtlScreen.getByRole('button', {
 					name: 'Sign up for the newsletter you selected',
 				}),
 			);
@@ -159,16 +159,16 @@ describe('ManyNewsletterSignUp', () => {
 			);
 			renderComponent();
 
-			newsletterButton.click();
+			await testUser.click(newsletterButton);
 
 			await waitFor(() => {
 				expect(
-					screen.getByLabelText('Enter your email'),
+					rtlScreen.getByLabelText('Enter your email'),
 				).toBeInTheDocument();
 			});
 
 			// Marketing checkbox SHOULD be visible for non-US users
-			const marketingCheckbox = await screen.findByLabelText(
+			const marketingCheckbox = await rtlScreen.findByLabelText(
 				/Get updates about our journalism/,
 			);
 			expect(marketingCheckbox).toBeInTheDocument();
@@ -179,12 +179,12 @@ describe('ManyNewsletterSignUp', () => {
 			expect(marketingCheckbox).not.toBeChecked();
 
 			await testUser.type(
-				screen.getByLabelText('Enter your email'),
+				rtlScreen.getByLabelText('Enter your email'),
 				'reader@example.com',
 			);
 
 			await testUser.click(
-				screen.getByRole('button', {
+				rtlScreen.getByRole('button', {
 					name: 'Sign up for the newsletter you selected',
 				}),
 			);
@@ -210,20 +210,20 @@ describe('ManyNewsletterSignUp', () => {
 				1234,
 			);
 			renderComponent();
-			newsletterButton.click();
+			await testUser.click(newsletterButton);
 
 			await waitFor(() => {
 				expect(
-					screen.getByLabelText('Enter your email'),
+					rtlScreen.getByLabelText('Enter your email'),
 				).toBeInTheDocument();
 			});
 
 			await testUser.type(
-				screen.getByLabelText('Enter your email'),
+				rtlScreen.getByLabelText('Enter your email'),
 				'reader@example.com',
 			);
 			await testUser.click(
-				screen.getByRole('button', {
+				rtlScreen.getByRole('button', {
 					name: 'Sign up for the newsletter you selected',
 				}),
 			);
@@ -250,20 +250,20 @@ describe('ManyNewsletterSignUp', () => {
 				1234,
 			);
 			renderComponent();
-			newsletterButton.click();
+			await testUser.click(newsletterButton);
 
 			await waitFor(() => {
 				expect(
-					screen.getByLabelText('Enter your email'),
+					rtlScreen.getByLabelText('Enter your email'),
 				).toBeInTheDocument();
 			});
 
 			await testUser.type(
-				screen.getByLabelText('Enter your email'),
+				rtlScreen.getByLabelText('Enter your email'),
 				'reader@example.com',
 			);
 			await testUser.click(
-				screen.getByRole('button', {
+				rtlScreen.getByRole('button', {
 					name: 'Sign up for the newsletter you selected',
 				}),
 			);

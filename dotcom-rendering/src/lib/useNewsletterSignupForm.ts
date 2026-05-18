@@ -29,7 +29,7 @@ const resolveUserEmail = async (
 ): Promise<string | undefined> => {
 	if (isSignedIn !== true) return;
 	const { idApiUrl } = window.guardian.config.page;
-	if (!idApiUrl) return;
+	if (idApiUrl === undefined || idApiUrl === '') return;
 	const fetchedEmail = await lazyFetchEmailWithTimeout()();
 	return fetchedEmail ?? undefined;
 };
@@ -134,7 +134,9 @@ export const useNewsletterSignupForm = (
 	countryCode?: string,
 ): NewsletterSignupFormState => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
-	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
+	const [captchaSiteKey] = useState<string | undefined>(
+		window.guardian.config.page.googleRecaptchaSiteKey,
+	);
 	const [userEmail, setUserEmail] = useState<string>();
 	const [hasPrefilledEmail, setHasPrefilledEmail] = useState(false);
 	const [isWaitingForResponse, setIsWaitingForResponse] = useState(false);
@@ -153,19 +155,21 @@ export const useNewsletterSignupForm = (
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
 	const browserId = useBrowserId();
+	const effectiveMarketingOptIn =
+		marketingOptIn ?? (isSignedIn === false ? true : undefined);
 
 	// Refs that mirror state — read inside submit handlers so we always see the
 	// latest value rather than whatever was captured when the handler was
 	// created. This avoids the stale-closure bug where a user could toggle
 	// marketing opt-in between pressing Sign Up and the captcha resolving.
-	const marketingOptInRef = useRef(marketingOptIn);
+	const marketingOptInRef = useRef(effectiveMarketingOptIn);
 	const browserIdRef = useRef(browserId);
 	const authStatusRef = useRef(authStatus);
 	const hideMarketingToggleRef = useRef(hideMarketingToggle);
 	const countryCodeRef = useRef(countryCode);
 	useEffect(() => {
-		marketingOptInRef.current = marketingOptIn;
-	}, [marketingOptIn]);
+		marketingOptInRef.current = effectiveMarketingOptIn;
+	}, [effectiveMarketingOptIn]);
 	useEffect(() => {
 		browserIdRef.current = browserId;
 	}, [browserId]);
@@ -189,26 +193,10 @@ export const useNewsletterSignupForm = (
 	// not on focus/blur or other browser-triggered validity checks.
 	const hasAttemptedSubmitRef = useRef(false);
 
-	// Default marketing opt-in to `true` for signed-out users, but only once —
-	// guard with a ref so flipping `isSignedIn` later (e.g. token expiry)
-	// doesn't overwrite the user's choice.
-	const marketingDefaultAppliedRef = useRef(false);
-	useEffect(() => {
-		if (marketingDefaultAppliedRef.current) return;
-		if (isSignedIn === 'Pending') return;
-		if (!isSignedIn) {
-			setMarketingOptIn(true);
-		}
-		marketingDefaultAppliedRef.current = true;
-	}, [isSignedIn]);
-
 	// Pre-fill the email from Identity once sign-in status is known.
 	// Guarded with a ref so we don't re-fetch if the hook re-mounts or
 	// `isSignedIn` briefly flips.
 	const emailFetchStartedRef = useRef(false);
-	useEffect(() => {
-		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
-	}, []);
 	useEffect(() => {
 		if (emailFetchStartedRef.current) return;
 		if (isSignedIn === 'Pending') return;
@@ -237,10 +225,8 @@ export const useNewsletterSignupForm = (
 				if (hideToggle) {
 					return 'similar-guardian-products-hidden-optin-us';
 				}
-				if (marketingOptInRef.current === undefined) {
-					return undefined;
-				}
-				return marketingOptInRef.current
+				const currentMarketingOptIn = marketingOptInRef.current ?? true;
+				return currentMarketingOptIn
 					? 'similar-guardian-products-optin'
 					: 'similar-guardian-products-optout';
 			};
@@ -280,7 +266,7 @@ export const useNewsletterSignupForm = (
 
 	const handleCaptchaComplete = useCallback(
 		(token: string | null): void => {
-			if (!token) {
+			if (token === null || token === '') {
 				sendTracking(
 					newsletterId,
 					'captcha-not-passed',
@@ -395,7 +381,7 @@ export const useNewsletterSignupForm = (
 		ReactEventHandler<HTMLButtonElement>
 	>((event) => {
 		event.preventDefault();
-		setMarketingOptIn((prev) => !prev);
+		setMarketingOptIn((prev) => !(prev ?? true));
 	}, []);
 
 	const handleSubmitButtonClick = useCallback((): void => {
@@ -418,7 +404,7 @@ export const useNewsletterSignupForm = (
 		isSignedIn: hasPrefilledEmail,
 		isInteracted,
 		hideMarketingToggle: hideMarketingToggle || isSignedIn !== false,
-		marketingOptIn,
+		marketingOptIn: effectiveMarketingOptIn,
 		isWaitingForResponse,
 		responseOk,
 		errorMessage,

@@ -115,7 +115,7 @@ const attributeToNumber = (
 	attributeName: string,
 ): number | undefined => {
 	const value = element.getAttribute(attributeName);
-	if (!value) {
+	if (value === null || value === '') {
 		return undefined;
 	}
 	const numericValue = Number(value);
@@ -152,7 +152,7 @@ export const ManyNewsletterSignUp = ({
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
 	const [marketingOptIn, setMarketingOptIn] = useState<boolean | undefined>(
-		undefined,
+		isSignedIn === false ? true : undefined,
 	);
 	const reCaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 
@@ -186,7 +186,11 @@ export const ManyNewsletterSignUp = ({
 			}
 			const { identityName } = button.dataset;
 			const listId = attributeToNumber(button, 'data-list-id');
-			if (!identityName || typeof listId === 'undefined') {
+			if (
+				identityName === undefined ||
+				identityName === '' ||
+				listId === undefined
+			) {
 				return;
 			}
 			const index = newslettersToSignUpFor.findIndex(
@@ -241,12 +245,6 @@ export const ManyNewsletterSignUp = ({
 	}, [status]);
 
 	useEffect(() => {
-		if (isSignedIn !== 'Pending' && !isSignedIn) {
-			setMarketingOptIn(true);
-		}
-	}, [isSignedIn]);
-
-	useEffect(() => {
 		const signUpButtons = [
 			...document.querySelectorAll(`[data-role=${BUTTON_ROLE}]`),
 		];
@@ -272,7 +270,7 @@ export const ManyNewsletterSignUp = ({
 		// when the captcha resolves relative to state updates.
 		const hideToggle = hideMarketingToggleRef.current;
 		const currentCountryCodeRef = countryCodeRef.current;
-		const optIn = marketingOptInRef.current;
+		const optIn = marketingOptInRef.current ?? true;
 		// The value that is actually sent to the backend — used for tracking too
 		// so the tracking accurately reflects what was submitted.
 		const effectiveMarketingOptIn = hideToggle ? true : optIn;
@@ -307,7 +305,7 @@ export const ManyNewsletterSignUp = ({
 
 		const marketingOptInType = getMarketingOptInType();
 
-		if (!response?.ok) {
+		if (response?.ok !== true) {
 			const responseText = response
 				? await response.text()
 				: '[fetch failure - no response]';
@@ -317,9 +315,7 @@ export const ManyNewsletterSignUp = ({
 				renderingTarget,
 				{
 					listIds,
-					...(effectiveMarketingOptIn !== undefined && {
-						marketingOptInType,
-					}),
+					marketingOptInType,
 					// If the backend handles the failure and responds with an informative
 					// error message (E.G. "Service unavailable", "Invalid email" etc) this
 					// should be included in the event data.
@@ -338,9 +334,7 @@ export const ManyNewsletterSignUp = ({
 			renderingTarget,
 			{
 				listIds,
-				...(effectiveMarketingOptIn !== undefined && {
-					marketingOptInType,
-				}),
+				marketingOptInType,
 			},
 		);
 
@@ -387,7 +381,7 @@ export const ManyNewsletterSignUp = ({
 			? reCaptchaRef.current.getValue()
 			: await reCaptchaRef.current.executeAsync();
 
-		if (!result) {
+		if (result === null || result === '') {
 			void reportTrackingEvent(
 				'ManyNewsletterSignUp',
 				'captcha-failure',
@@ -459,13 +453,10 @@ export const ManyNewsletterSignUp = ({
 							}}
 							newsletterCount={newslettersToSignUpFor.length}
 							hideMarketingToggle={
-								// Hide the toggle for signed-in/pending users, or while
-								// marketingOptIn hasn't resolved for the signed-out user.
-								hideMarketingToggle ||
-								isSignedIn !== false ||
-								marketingOptIn === undefined
+								// Hide the toggle for signed-in/pending users.
+								hideMarketingToggle || isSignedIn !== false
 							}
-							marketingOptIn={marketingOptIn === true}
+							marketingOptIn={marketingOptIn ?? true}
 							setMarketingOptIn={setMarketingOptIn}
 							useReCaptcha={useReCaptcha}
 							captchaSiteKey={captchaSiteKey}

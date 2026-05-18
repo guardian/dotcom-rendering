@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useCountryCode } from './useCountryCode';
 
 /**
@@ -14,17 +13,10 @@ export const useNewsletterHideMarketingToggle = (): {
 	countryCode: string | undefined;
 } => {
 	const countryCode = useCountryCode('newsletter-marketing-opt-in');
-	// Initialise synchronously from the config so there is no render where
-	// switchEnabled is false before the effect runs (avoiding a one-frame
-	// flash of the marketing toggle for US users).
-	const [switchEnabled] = useState(() => {
-		if (typeof window === 'undefined') return false;
-		return (
-			window.guardian.config.switches[
-				'us-signup-hide-marketing-toggle'
-			] === true
-		);
-	});
+	const switchEnabled =
+		typeof window !== 'undefined' &&
+		window.guardian.config.switches['us-signup-hide-marketing-toggle'] ===
+			true;
 
 	return {
 		hideMarketingToggle: switchEnabled && countryCode === 'US',

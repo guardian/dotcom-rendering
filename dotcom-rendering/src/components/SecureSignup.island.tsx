@@ -155,7 +155,7 @@ const buildFormData = (
 	formData.append('ref', pageRef);
 	formData.append('refViewId', refViewId);
 	formData.append('name', '');
-	if (window.guardian.config.switches.emailSignupRecaptcha) {
+	if (window.guardian.config.switches.emailSignupRecaptcha === true) {
 		formData.append('g-recaptcha-response', token); // TO DO - PR on form handlers - is the token verified?
 	}
 
@@ -180,11 +180,11 @@ const buildFormData = (
 
 const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
 	const { idApiUrl } = window.guardian.config.page;
-	if (!idApiUrl) {
+	if (idApiUrl === undefined || idApiUrl === '') {
 		return;
 	}
 	const fetchedEmail = await lazyFetchEmailWithTimeout()();
-	if (!fetchedEmail) {
+	if (fetchedEmail === null || fetchedEmail === '') {
 		return;
 	}
 	return fetchedEmail;
@@ -250,9 +250,11 @@ export const SecureSignup = ({
 	abTest,
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
-	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
+	const [captchaSiteKey] = useState<string | undefined>(
+		window.guardian.config.page.googleRecaptchaSiteKey,
+	);
 	const [userEmail, setUserEmail] = useState<string>();
-	const [hideEmailInput, setHideEmailInput] = useState<boolean>();
+	const [hideEmailInput, setHideEmailInput] = useState(false);
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
@@ -261,22 +263,15 @@ export const SecureSignup = ({
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
+	const isSignedIn = useIsSignedIn();
+	const authStatus = useAuthStatus();
 	const [marketingOptIn, setMarketingOptIn] = useState<boolean | undefined>(
 		undefined,
 	);
-	const isSignedIn = useIsSignedIn();
-	const authStatus = useAuthStatus();
 	const { hideMarketingToggle, countryCode } =
 		useNewsletterHideMarketingToggle();
 
 	useEffect(() => {
-		if (isSignedIn !== 'Pending' && !isSignedIn) {
-			setMarketingOptIn(true);
-		}
-	}, [isSignedIn]);
-
-	useEffect(() => {
-		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
 		void resolveEmailIfSignedIn().then((email) => {
 			setUserEmail(email);
 			setHideEmailInput(isString(email));
@@ -298,8 +293,8 @@ export const SecureSignup = ({
 			if (hideMarketingToggle) {
 				return 'similar-guardian-products-hidden-optin-us';
 			}
-			if (marketingOptIn === undefined) return undefined;
-			return marketingOptIn
+			const effectiveMarketingOptIn = marketingOptIn ?? true;
+			return effectiveMarketingOptIn
 				? 'similar-guardian-products-optin'
 				: 'similar-guardian-products-optout';
 		};
@@ -308,7 +303,7 @@ export const SecureSignup = ({
 			emailAddress,
 			newsletterId,
 			token,
-			hideMarketingToggle ? true : marketingOptIn,
+			hideMarketingToggle ? true : marketingOptIn ?? true,
 			browserId,
 			hideMarketingToggle ? true : undefined,
 			hideMarketingToggle ? countryCode : undefined,
@@ -357,7 +352,7 @@ export const SecureSignup = ({
 	};
 
 	const handleCaptchaComplete = (token: string | null) => {
-		if (!token) {
+		if (token === null || token === '') {
 			sendTracking(
 				newsletterId,
 				'captcha-not-passed',
@@ -369,6 +364,7 @@ export const SecureSignup = ({
 		sendTracking(newsletterId, 'captcha-passed', renderingTarget, abTest);
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
+			// eslint-disable-next-line no-console -- unexpected submit failure
 			console.error(error);
 			sendTracking(
 				newsletterId,
@@ -428,7 +424,7 @@ export const SecureSignup = ({
 						<Checkbox
 							label="Get updates about our journalism and ways to support and enjoy our work."
 							value="marketing-opt-in"
-							checked={marketingOptIn ?? false}
+							checked={marketingOptIn ?? true}
 							onChange={(e) =>
 								setMarketingOptIn(e.target.checked)
 							}
@@ -445,7 +441,9 @@ export const SecureSignup = ({
 				</div>
 			)}
 
-			{!!errorMessage && <ErrorMessageWithAdvice text={errorMessage} />}
+			{errorMessage !== undefined && (
+				<ErrorMessageWithAdvice text={errorMessage} />
+			)}
 
 			{hasResponse &&
 				(responseOk ? (
@@ -466,7 +464,7 @@ export const SecureSignup = ({
 					</div>
 				))}
 
-			{!!captchaSiteKey && (
+			{captchaSiteKey !== undefined && captchaSiteKey !== '' && (
 				<div
 					css={css`
 						.grecaptcha-badge {
