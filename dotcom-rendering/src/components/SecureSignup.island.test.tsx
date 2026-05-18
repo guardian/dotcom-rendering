@@ -4,7 +4,7 @@ import { forwardRef, useImperativeHandle } from 'react';
 import { sendNewsletterSignupEvent } from '../lib/newsletterSignupTracking';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
-import { useNewsletterHideMarketingToggle } from '../lib/useNewsletterHideMarketingToggle';
+import { useNewsletterShowMarketingToggle } from '../lib/useNewsletterShowMarketingToggle';
 import { ConfigProvider } from './ConfigContext';
 import { SecureSignup } from './SecureSignup.island';
 
@@ -35,8 +35,8 @@ jest.mock('../lib/useBrowserId', () => ({
 	useBrowserId: jest.fn(),
 }));
 
-jest.mock('../lib/useNewsletterHideMarketingToggle', () => ({
-	useNewsletterHideMarketingToggle: jest.fn(),
+jest.mock('../lib/useNewsletterShowMarketingToggle', () => ({
+	useNewsletterShowMarketingToggle: jest.fn(),
 }));
 
 jest.mock('../lib/fetchEmail', () => ({
@@ -114,8 +114,8 @@ describe('SecureSignup', () => {
 		(useIsSignedIn as jest.Mock).mockReturnValue(false);
 		(useAuthStatus as jest.Mock).mockReturnValue({ kind: 'SignedOut' });
 		(useBrowserId as jest.Mock).mockReturnValue('test-browser-id');
-		(useNewsletterHideMarketingToggle as jest.Mock).mockReturnValue({
-			hideMarketingToggle: false,
+		(useNewsletterShowMarketingToggle as jest.Mock).mockReturnValue({
+			showMarketingToggle: true,
 			countryCode: undefined,
 		});
 
@@ -129,8 +129,8 @@ describe('SecureSignup', () => {
 
 	it('hides marketing checkbox and submits hidden-opt-in payload for US soft opt-in', async () => {
 		const testUser = user.setup();
-		(useNewsletterHideMarketingToggle as jest.Mock).mockReturnValue({
-			hideMarketingToggle: true,
+		(useNewsletterShowMarketingToggle as jest.Mock).mockReturnValue({
+			showMarketingToggle: false,
 			countryCode: 'US',
 		});
 
@@ -167,8 +167,8 @@ describe('SecureSignup', () => {
 
 	it('shows marketing checkbox and honours user opt-out for non-US users', async () => {
 		const testUser = user.setup();
-		(useNewsletterHideMarketingToggle as jest.Mock).mockReturnValue({
-			hideMarketingToggle: false,
+		(useNewsletterShowMarketingToggle as jest.Mock).mockReturnValue({
+			showMarketingToggle: true,
 			countryCode: 'GB',
 		});
 

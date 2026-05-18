@@ -504,6 +504,18 @@ describe('NewsletterSignupForm', () => {
 			).toBe('similar-guardian-products-hidden-optin-us');
 		});
 
+		it('shows marketing toggle for US users when the switch is off', async () => {
+			const testUser = user.setup();
+			window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
+				false;
+			(useCountryCode as jest.Mock).mockReturnValue('US');
+
+			renderForm();
+			await typeEmailAddress(testUser);
+
+			expect(screen.getByRole('switch')).toBeInTheDocument();
+		});
+
 		it('shows marketing toggle and respects user choice (opt-out) for non-US users', async () => {
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue('GB');

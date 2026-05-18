@@ -29,7 +29,7 @@ import {
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
-import { useNewsletterHideMarketingToggle } from '../lib/useNewsletterHideMarketingToggle';
+import { useNewsletterShowMarketingToggle } from '../lib/useNewsletterShowMarketingToggle';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -268,8 +268,8 @@ export const SecureSignup = ({
 	const [marketingOptIn, setMarketingOptIn] = useState<boolean | undefined>(
 		undefined,
 	);
-	const { hideMarketingToggle, countryCode } =
-		useNewsletterHideMarketingToggle();
+	const { showMarketingToggle, countryCode } =
+		useNewsletterShowMarketingToggle();
 
 	useEffect(() => {
 		void resolveEmailIfSignedIn().then((email) => {
@@ -290,7 +290,7 @@ export const SecureSignup = ({
 		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
 
 		const getMarketingOptInType = (): string | undefined => {
-			if (hideMarketingToggle) {
+			if (!showMarketingToggle) {
 				return 'similar-guardian-products-hidden-optin-us';
 			}
 			const effectiveMarketingOptIn = marketingOptIn ?? true;
@@ -303,10 +303,10 @@ export const SecureSignup = ({
 			emailAddress,
 			newsletterId,
 			token,
-			hideMarketingToggle ? true : marketingOptIn ?? true,
+			!showMarketingToggle ? true : marketingOptIn ?? true,
 			browserId,
-			hideMarketingToggle ? true : undefined,
-			hideMarketingToggle ? countryCode : undefined,
+			!showMarketingToggle ? true : undefined,
+			!showMarketingToggle ? countryCode : undefined,
 		);
 
 		const response = await postFormData(
@@ -414,7 +414,7 @@ export const SecureSignup = ({
 					value={userEmail ?? ''}
 					onChange={(e) => setUserEmail(e.target.value)}
 				/>
-				{isSignedIn === false && !hideMarketingToggle && (
+				{isSignedIn !== true && showMarketingToggle && (
 					<CheckboxGroup
 						name="marketing-preferences"
 						label="Marketing preferences"

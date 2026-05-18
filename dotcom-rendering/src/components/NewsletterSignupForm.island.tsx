@@ -17,7 +17,7 @@ import { ToggleSwitch } from '@guardian/source-development-kitchen/react-compone
 // Use the default export instead.
 import type { ChangeEvent } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
-import { useNewsletterHideMarketingToggle } from '../lib/useNewsletterHideMarketingToggle';
+import { useNewsletterShowMarketingToggle } from '../lib/useNewsletterShowMarketingToggle';
 import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
@@ -274,14 +274,16 @@ const NewsletterSignupFormActive = ({
 	abTest,
 }: Omit<Props, 'isAlreadySubscribed'>) => {
 	const { renderingTarget } = useConfig();
-	const { hideMarketingToggle: switchHideMarketingToggle, countryCode } =
-		useNewsletterHideMarketingToggle();
+	const {
+		showMarketingToggle: showMarketingToggleForSignedOutUsers,
+		countryCode,
+	} = useNewsletterShowMarketingToggle();
 
 	const {
 		userEmail,
 		isSignedIn,
 		isInteracted,
-		hideMarketingToggle,
+		showMarketingToggle,
 		marketingOptIn,
 		isWaitingForResponse,
 		responseOk,
@@ -302,7 +304,7 @@ const NewsletterSignupFormActive = ({
 		newsletterId,
 		renderingTarget,
 		abTest,
-		switchHideMarketingToggle,
+		showMarketingToggleForSignedOutUsers,
 		countryCode,
 	);
 
@@ -353,7 +355,7 @@ const NewsletterSignupFormActive = ({
 				)}
 				{showAdditionalFields && (
 					<>
-						{!hideMarketingToggle && (
+						{showMarketingToggle && (
 							<div css={toggleContainerStyles}>
 								<div css={marketingToggleBoxStyles}>
 									<ToggleSwitch

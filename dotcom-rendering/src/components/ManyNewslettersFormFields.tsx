@@ -56,7 +56,7 @@ export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 	handleTextInput,
 	marketingOptIn,
 	setMarketingOptIn,
-	hideMarketingToggle = false,
+	showMarketingToggle = true,
 	useReCaptcha,
 	captchaSiteKey,
 	visibleRecaptcha = false,
@@ -65,8 +65,6 @@ export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 }) => {
 	const [firstInteractionOccurred, setFirstInteractionOccurred] =
 		useState(false);
-
-	const isMarketingOptInVisible = !hideMarketingToggle;
 
 	const errorMessage =
 		status === 'Failed'
@@ -87,7 +85,7 @@ export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 					onFocus={() => setFirstInteractionOccurred(true)}
 				/>
 			</span>
-			{isMarketingOptInVisible && (
+			{showMarketingToggle && (
 				<div>
 					<CheckboxGroup
 						name="marketing-preferences"

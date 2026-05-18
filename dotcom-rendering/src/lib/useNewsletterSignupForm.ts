@@ -76,8 +76,8 @@ export type NewsletterSignupFormState = {
 	 * privacy message.
 	 */
 	isInteracted: boolean;
-	/** `true` when the marketing toggle should be hidden — including signed-in users, pending auth states, and signed-out US users with the soft opt-in switch enabled. */
-	hideMarketingToggle: boolean;
+	/** `true` when the marketing toggle should be shown. */
+	showMarketingToggle: boolean;
 	marketingOptIn: boolean | undefined;
 
 	/** `true` while the POST request is in-flight. */
@@ -130,7 +130,7 @@ export const useNewsletterSignupForm = (
 	newsletterId: string,
 	renderingTarget: RenderingTarget,
 	abTest?: AbTest,
-	hideMarketingToggle = false,
+	showMarketingToggle = true,
 	countryCode?: string,
 ): NewsletterSignupFormState => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
@@ -156,7 +156,7 @@ export const useNewsletterSignupForm = (
 	const authStatus = useAuthStatus();
 	const browserId = useBrowserId();
 	const effectiveMarketingOptIn =
-		marketingOptIn ?? (isSignedIn === false ? true : undefined);
+		marketingOptIn ?? (isSignedIn !== true ? true : undefined);
 
 	// Refs that mirror state — read inside submit handlers so we always see the
 	// latest value rather than whatever was captured when the handler was
@@ -165,7 +165,7 @@ export const useNewsletterSignupForm = (
 	const marketingOptInRef = useRef(effectiveMarketingOptIn);
 	const browserIdRef = useRef(browserId);
 	const authStatusRef = useRef(authStatus);
-	const hideMarketingToggleRef = useRef(hideMarketingToggle);
+	const showMarketingToggleRef = useRef(showMarketingToggle);
 	const countryCodeRef = useRef(countryCode);
 	useEffect(() => {
 		marketingOptInRef.current = effectiveMarketingOptIn;
@@ -177,8 +177,8 @@ export const useNewsletterSignupForm = (
 		authStatusRef.current = authStatus;
 	}, [authStatus]);
 	useEffect(() => {
-		hideMarketingToggleRef.current = hideMarketingToggle;
-	}, [hideMarketingToggle]);
+		showMarketingToggleRef.current = showMarketingToggle;
+	}, [showMarketingToggle]);
 	useEffect(() => {
 		countryCodeRef.current = countryCode;
 	}, [countryCode]);
@@ -219,10 +219,10 @@ export const useNewsletterSignupForm = (
 				abTest,
 			);
 
-			const hideToggle = hideMarketingToggleRef.current;
+			const locationHidesToggle = !showMarketingToggleRef.current;
 
 			const getMarketingOptInType = (): string | undefined => {
-				if (hideToggle) {
+				if (locationHidesToggle) {
 					return 'similar-guardian-products-hidden-optin-us';
 				}
 				const currentMarketingOptIn = marketingOptInRef.current ?? true;
@@ -235,10 +235,14 @@ export const useNewsletterSignupForm = (
 				emailAddress,
 				newsletterId,
 				recaptchaToken: token,
-				marketingOptIn: hideToggle ? true : marketingOptInRef.current,
+				marketingOptIn: locationHidesToggle
+					? true
+					: marketingOptInRef.current,
 				browserId: browserIdRef.current,
-				marketingOptInHidden: hideToggle ? true : undefined,
-				countryCode: hideToggle ? countryCodeRef.current : undefined,
+				marketingOptInHidden: locationHidesToggle ? true : undefined,
+				countryCode: locationHidesToggle
+					? countryCodeRef.current
+					: undefined,
 			});
 
 			try {
@@ -399,11 +403,14 @@ export const useNewsletterSignupForm = (
 		recaptchaRef.current?.reset();
 	}, []);
 
+	const effectiveShowMarketingToggle =
+		showMarketingToggle && isSignedIn !== true;
+
 	return {
 		userEmail,
 		isSignedIn: hasPrefilledEmail,
 		isInteracted,
-		hideMarketingToggle: hideMarketingToggle || isSignedIn !== false,
+		showMarketingToggle: effectiveShowMarketingToggle,
 		marketingOptIn: effectiveMarketingOptIn,
 		isWaitingForResponse,
 		responseOk,

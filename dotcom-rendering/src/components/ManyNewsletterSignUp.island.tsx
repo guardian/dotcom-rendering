@@ -19,7 +19,7 @@ import {
 } from '../lib/newsletter-sign-up-requests';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
-import { useNewsletterHideMarketingToggle } from '../lib/useNewsletterHideMarketingToggle';
+import { useNewsletterShowMarketingToggle } from '../lib/useNewsletterShowMarketingToggle';
 import { useConfig } from './ConfigContext';
 import { Flex } from './Flex';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
@@ -138,8 +138,8 @@ export const ManyNewsletterSignUp = ({
 }: Props) => {
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
-	const { hideMarketingToggle, countryCode } =
-		useNewsletterHideMarketingToggle();
+	const { showMarketingToggle, countryCode } =
+		useNewsletterShowMarketingToggle();
 
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		Array<{
@@ -152,19 +152,19 @@ export const ManyNewsletterSignUp = ({
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
 	const [marketingOptIn, setMarketingOptIn] = useState<boolean | undefined>(
-		isSignedIn === false ? true : undefined,
+		isSignedIn !== true ? true : undefined,
 	);
 	const reCaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 
 	// Mirror async-read values in refs so sendRequest always sees the latest
 	// values even if state updates between the user pressing submit and the
 	// captcha resolving.
-	const hideMarketingToggleRef = useRef(hideMarketingToggle);
+	const showMarketingToggleRef = useRef(showMarketingToggle);
 	const countryCodeRef = useRef(countryCode);
 	const marketingOptInRef = useRef(marketingOptIn);
 	useEffect(() => {
-		hideMarketingToggleRef.current = hideMarketingToggle;
-	}, [hideMarketingToggle]);
+		showMarketingToggleRef.current = showMarketingToggle;
+	}, [showMarketingToggle]);
 	useEffect(() => {
 		countryCodeRef.current = countryCode;
 	}, [countryCode]);
@@ -268,15 +268,17 @@ export const ManyNewsletterSignUp = ({
 
 		// Read from refs so we always have the latest values regardless of
 		// when the captcha resolves relative to state updates.
-		const hideToggle = hideMarketingToggleRef.current;
+		const locationHidesToggle = !showMarketingToggleRef.current;
 		const currentCountryCodeRef = countryCodeRef.current;
 		const optIn = marketingOptInRef.current ?? true;
 		// The value that is actually sent to the backend — used for tracking too
 		// so the tracking accurately reflects what was submitted.
-		const effectiveMarketingOptIn = hideToggle ? true : optIn;
+		const effectiveMarketingOptIn = locationHidesToggle ? true : optIn;
 
 		const getMarketingOptInType = () => {
-			if (hideToggle) return 'similar-guardian-products-hidden-optin-us';
+			if (locationHidesToggle) {
+				return 'similar-guardian-products-hidden-optin-us';
+			}
 			if (effectiveMarketingOptIn) {
 				return 'similar-guardian-products-optin';
 			}
@@ -297,8 +299,10 @@ export const ManyNewsletterSignUp = ({
 			newsletterIds: identityNames,
 			recaptchaToken: reCaptchaToken,
 			marketingOptIn: effectiveMarketingOptIn,
-			marketingOptInHidden: hideToggle ? true : undefined,
-			countryCode: hideToggle ? currentCountryCodeRef : undefined,
+			marketingOptInHidden: locationHidesToggle ? true : undefined,
+			countryCode: locationHidesToggle
+				? currentCountryCodeRef
+				: undefined,
 		}).catch(() => {
 			return undefined;
 		});
@@ -422,6 +426,9 @@ export const ManyNewsletterSignUp = ({
 		setEmail(ev.target.value);
 	};
 
+	const effectiveShowMarketingToggle =
+		showMarketingToggle && isSignedIn !== true;
+
 	return (
 		<div css={sectionWrapperStyle(newslettersToSignUpFor.length === 0)}>
 			<Section
@@ -452,10 +459,7 @@ export const ManyNewsletterSignUp = ({
 								status,
 							}}
 							newsletterCount={newslettersToSignUpFor.length}
-							hideMarketingToggle={
-								// Hide the toggle for signed-in/pending users.
-								hideMarketingToggle || isSignedIn !== false
-							}
+							showMarketingToggle={effectiveShowMarketingToggle}
 							marketingOptIn={marketingOptIn ?? true}
 							setMarketingOptIn={setMarketingOptIn}
 							useReCaptcha={useReCaptcha}

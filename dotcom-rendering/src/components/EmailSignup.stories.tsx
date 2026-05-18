@@ -115,8 +115,8 @@ export const IrregularFrequency = meta.story({
 });
 
 /**
- * US user with `us-signup-hide-marketing-toggle` switch enabled — the marketing opt-in
- * checkbox is hidden and the user is silently enrolled.
+ * US user with `us-signup-hide-marketing-toggle` switch enabled — the
+ * marketing opt-in checkbox is hidden and the user is silently enrolled.
  */
 export const USHideMarketingToggle = meta.story({
 	args: {

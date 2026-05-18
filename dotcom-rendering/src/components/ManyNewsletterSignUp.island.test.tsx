@@ -149,6 +149,30 @@ describe('ManyNewsletterSignUp', () => {
 			});
 		});
 
+		it('shows the marketing checkbox for US users when the switch is off', async () => {
+			const testUser = user.setup();
+			window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
+				false;
+			(useCountryCode as jest.Mock).mockReturnValue('US');
+
+			const newsletterButton = addNewsletterButton(
+				'morning-briefing',
+				1234,
+			);
+			renderComponent();
+			await testUser.click(newsletterButton);
+
+			await waitFor(() => {
+				expect(
+					rtlScreen.getByLabelText('Enter your email'),
+				).toBeInTheDocument();
+			});
+
+			expect(
+				rtlScreen.getByLabelText(/Get updates about our journalism/),
+			).toBeInTheDocument();
+		});
+
 		it('shows the marketing checkbox and respects opt-out for non-US users', async () => {
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue('GB');

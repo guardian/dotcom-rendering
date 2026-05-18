@@ -54,8 +54,9 @@ export const Default = () => {
 };
 
 /**
- * US user with `us-signup-hide-marketing-toggle` switch enabled — the marketing opt-in
- * toggle is hidden from the sign-up bar and the user is silently enrolled.
+ * US user with `us-signup-hide-marketing-toggle` switch enabled — the
+ * marketing opt-in toggle is hidden from the sign-up bar and the user is
+ * silently enrolled.
  */
 export const USHideMarketingToggle = {
 	render: () => (
