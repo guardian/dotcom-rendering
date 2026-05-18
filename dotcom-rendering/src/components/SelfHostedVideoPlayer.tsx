@@ -140,7 +140,6 @@ export type Props = {
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
 	handleTimeUpdate: (event: SyntheticEvent<HTMLVideoElement>) => void;
-	useLongFormProgressBar: boolean;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick?: (event: SyntheticEvent) => void;
 	updateCurrentTime: (time: number) => void;
@@ -148,6 +147,7 @@ export type Props = {
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showProgressBar: boolean;
+	useLongFormProgressBar: boolean;
 	showPlayPauseIcon: 'play' | 'pause' | null;
 	showIcons: boolean;
 	showFullscreenIcon: boolean;
@@ -195,13 +195,13 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleAudioClick,
 			handleKeyDown,
 			handleTimeUpdate,
-			useLongFormProgressBar,
 			handlePause,
 			handleFullscreenClick,
 			updateCurrentTime,
 			onError,
 			preloadPartialData,
 			showProgressBar: canShowProgressBar,
+			useLongFormProgressBar,
 			showPlayPauseIcon,
 			showIcons: canShowIcons,
 			showFullscreenIcon,
@@ -231,7 +231,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 
 		return (
 			<div ref={playerContainerRef} css={playerContainerStyles}>
-				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
+				{}
 				<video
 					id={videoId}
 					css={[
@@ -314,7 +314,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 								duration={ref.current!.duration}
 							/>
 						))}
-					{showIcons && (
+					{showIcons && (showFullscreenIcon || hasAudio) && (
 						<div
 							css={[
 								iconsContainerStyles,

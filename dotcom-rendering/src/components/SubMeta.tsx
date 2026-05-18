@@ -207,8 +207,12 @@ export const SubMeta = ({
 }: Props) => {
 	const createLinks = () => {
 		const links: BaseLinkType[] = [];
-		if (subMetaSectionLinks.length > 0) links.push(...subMetaSectionLinks);
-		if (subMetaKeywordLinks.length > 0) links.push(...subMetaKeywordLinks);
+		if (subMetaSectionLinks.length > 0) {
+			links.push(...subMetaSectionLinks);
+		}
+		if (subMetaKeywordLinks.length > 0) {
+			links.push(...subMetaKeywordLinks);
+		}
 		return {
 			links,
 			hasLinks: links.length > 0,

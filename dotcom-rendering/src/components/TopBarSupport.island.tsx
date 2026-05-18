@@ -123,9 +123,12 @@ const ReaderRevenueLinksRemote = ({
 						: /* webpackChunkName: "header" */
 						  import('./marketing/header/Header')
 				).then(
-					(headerModule: {
-						[key: string]: React.ElementType<HeaderProps>;
-					}) => {
+					(
+						headerModule: Record<
+							string,
+							React.ElementType<HeaderProps>
+						>,
+					) => {
 						setSupportHeader(
 							() => headerModule[module.name] ?? null,
 						);
@@ -203,7 +206,9 @@ export const TopBarSupport = ({
 	const countryCode = useCountryCode('support-the-Guardian');
 	const pageViewId = usePageViewId(renderingTarget);
 
-	if (isUndefined(countryCode) || isUndefined(pageViewId)) return null;
+	if (isUndefined(countryCode) || isUndefined(pageViewId)) {
+		return null;
+	}
 
 	return (
 		<ReaderRevenueLinksRemote

@@ -523,10 +523,7 @@ const Body = (props: {
 					element._type !==
 						'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
 			)
-			/* eslint-disable-next-line array-callback-return -- ESLint bug,
-			 * this function does contain `return` statements. TypeScript will
-			 * confirm the switch is exhaustive, but it's possible ESLint does
-			 * not know this. */
+
 			.map((element) => {
 				switch (element._type) {
 					case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -548,6 +545,8 @@ const Body = (props: {
 								key={element.adPosition}
 							/>
 						);
+					default:
+						return null;
 				}
 			})}
 	</>

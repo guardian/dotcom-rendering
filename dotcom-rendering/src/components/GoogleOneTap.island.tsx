@@ -64,7 +64,9 @@ export const extractEmailFromToken = (
 	token: string,
 ): Result<'ParsingError', string> => {
 	const payload = token.split('.')[1];
-	if (!payload) return error('ParsingError');
+	if (!payload) {
+		return error('ParsingError');
+	}
 	try {
 		const decoded = atob(payload);
 		const parsed = JSON.parse(decoded) as unknown;
@@ -149,8 +151,12 @@ export const initializeFedCM = async ({
 	);
 
 	// TODO: Expand Google One Tap to outside Ireland
-	if (!countryCode || !ENABLED_COUNTRIES.includes(countryCode)) return;
-	if (isSignedIn) return;
+	if (!countryCode || !ENABLED_COUNTRIES.includes(countryCode)) {
+		return;
+	}
+	if (isSignedIn) {
+		return;
+	}
 
 	/**
 	 * Firefox does not support the FedCM API at the time of writting,

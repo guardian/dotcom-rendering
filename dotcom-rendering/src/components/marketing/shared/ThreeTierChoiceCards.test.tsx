@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ThreeTierChoiceCards } from './ThreeTierChoiceCards';
 
 // Mock choice cards for testing
-const mockChoiceCards: (ChoiceCard & { defaultExpanded?: boolean })[] = [
+const mockChoiceCards: Array<ChoiceCard & { defaultExpanded?: boolean }> = [
 	{
 		product: {
 			supportTier: 'Contribution',

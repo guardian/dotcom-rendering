@@ -9,7 +9,7 @@ type Props = {
 };
 
 type OnwardsResponse = {
-	trails: Array<TrailType>;
+	trails: TrailType[];
 };
 
 export const FetchHostedOnwards = ({ branding, url }: Props) => {

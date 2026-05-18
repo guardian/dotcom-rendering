@@ -505,7 +505,9 @@ export const generateSources = (
  */
 export const getFallbackSource = (sources: ImageSource[]): ImageSource => {
 	const [fallback] = sources.slice(-1);
-	if (!fallback) throw new Error('No fallback images found');
+	if (!fallback) {
+		throw new Error('No fallback images found');
+	}
 	return fallback;
 };
 
@@ -560,7 +562,9 @@ export const Picture = ({
 }: Props) => {
 	const [loaded, setLoaded] = useState(false);
 	const ref = useCallback((node: HTMLImageElement | null) => {
-		if (!node) return;
+		if (!node) {
+			return;
+		}
 		if (node.complete) {
 			setLoaded(true);
 		} else {
@@ -569,7 +573,9 @@ export const Picture = ({
 	}, []);
 
 	useEffect(() => {
-		if (loaded && onLoad) onLoad();
+		if (loaded && onLoad) {
+			onLoad();
+		}
 	}, [loaded, onLoad]);
 
 	const sources = generateSources(

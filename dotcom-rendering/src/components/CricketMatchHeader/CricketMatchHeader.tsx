@@ -13,7 +13,14 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
+import type { ComponentProps } from 'react';
 import { Fragment, type ReactNode, useMemo } from 'react';
+import type {
+	CricketMatch,
+	CricketTeam,
+	InningsOverview,
+	Result,
+} from '../../cricketMatchV2';
 import { grid } from '../../grid';
 import {
 	type EditionId,
@@ -30,60 +37,12 @@ import {
 	primaryText,
 	secondaryText,
 } from '../FootballMatchHeader/colours';
-
-type CricketTeam = {
-	name: string;
-	paID: string;
-};
-
-type Inning = {
-	battingTeam: string;
-	runsScored: number;
-	overs: string;
-	declared: boolean;
-	forfeited: boolean;
-	fallOfWicket: number;
-};
-
-type WinnerResult = {
-	type: 'home-win' | 'away-win';
-	description?: string;
-	winner: {
-		type: 'runs' | 'wickets' | 'innings' | 'forfeit' | 'run-rate';
-		team: string;
-		margin?: number;
-	};
-};
-
-type OtherResult = {
-	type:
-		| 'no-result'
-		| 'draw'
-		| 'abandoned'
-		| 'tied'
-		| 'level-scores-draw'
-		| 'none';
-	description?: string;
-};
-
-type Result = WinnerResult | OtherResult;
-
-type CricketMatch = {
-	kind: 'Fixture' | 'Live' | 'Result';
-	series: string;
-	competition: string;
-	venue: string;
-	day?: number;
-	matchDate: Date;
-	homeTeam: CricketTeam;
-	awayTeam: CricketTeam;
-	innings: Inning[];
-	result?: Result;
-};
+import { Tabs } from '../FootballMatchHeader/Tabs';
 
 type Props = {
 	edition: EditionId;
 	match: CricketMatch;
+	tabs: ComponentProps<typeof Tabs>;
 };
 
 export const CricketMatchHeader = (props: Props) => {
@@ -114,6 +73,7 @@ export const CricketMatchHeader = (props: Props) => {
 				<Teams match={match} />
 				{match.result && <ResultLine result={match.result} />}
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
+				<Tabs {...props.tabs} />
 			</div>
 		</section>
 	);
@@ -311,8 +271,8 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 					innings.map((inning, index) => (
 						<Fragment key={index}>
 							<Score
-								runs={inning.runsScored}
-								fallOfWicket={inning.fallOfWicket}
+								runs={inning.runs}
+								fallOfWickets={inning.fallOfWickets}
 								matchKind={props.match.kind}
 							/>
 							{!!inning.overs && (
@@ -353,13 +313,13 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 	);
 };
 
-const EndOfInningReason = (props: { inning: Inning }) => {
+const EndOfInningReason = (props: { inning: InningsOverview }) => {
 	const styles = {
 		...textSans14Object,
 		marginRight: space[1],
 	};
 
-	if (props.inning.fallOfWicket === 10) {
+	if (props.inning.fallOfWickets === 10) {
 		return <span css={styles}>All out</span>;
 	}
 	if (props.inning.declared) {
@@ -415,17 +375,17 @@ const Crest = (props: { name: string; paID: string }) => (
  */
 const Score = (props: {
 	runs: number;
-	fallOfWicket: number;
+	fallOfWickets: number;
 	matchKind: CricketMatch['kind'];
 }) => {
 	const showFallenWickets =
-		props.fallOfWicket >= 0 && props.fallOfWicket < 10;
+		props.fallOfWickets >= 0 && props.fallOfWickets < 10;
 	return (
 		<span
 			role="img"
 			aria-label={`${props.runs} runs${
 				showFallenWickets
-					? `, ${props.fallOfWicket} wickets fallen`
+					? `, ${props.fallOfWickets} wickets fallen`
 					: ''
 			}`}
 			css={{
@@ -461,7 +421,7 @@ const Score = (props: {
 							),
 						}}
 					></span>
-					<ScoreNumber score={props.fallOfWicket} />
+					<ScoreNumber score={props.fallOfWickets} />
 				</>
 			) : null}
 		</span>

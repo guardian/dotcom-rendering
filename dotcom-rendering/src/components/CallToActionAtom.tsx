@@ -18,63 +18,52 @@ type CallToActionProps = {
 	accentColor?: string;
 };
 
-const overlayMaskGradientStyles = (angle: string, startPosition: number) => {
-	const positions = [0, 8, 16, 24, 32, 40, 48, 56, 64].map(
-		(offset) => startPosition + offset,
-	);
-	return css`
-		mask-image: linear-gradient(
-			${angle},
-			transparent ${positions[0]}px,
-			rgba(0, 0, 0, 0.0381) ${positions[1]}px,
-			rgba(0, 0, 0, 0.1464) ${positions[2]}px,
-			rgba(0, 0, 0, 0.3087) ${positions[3]}px,
-			rgba(0, 0, 0, 0.5) ${positions[4]}px,
-			rgba(0, 0, 0, 0.6913) ${positions[5]}px,
-			rgba(0, 0, 0, 0.8536) ${positions[6]}px,
-			rgba(0, 0, 0, 0.9619) ${positions[7]}px,
-			rgb(0, 0, 0) ${positions[8]}px
-		);
-	`;
-};
-
 const blurStyles = css`
 	position: absolute;
-	inset: 0;
-	backdrop-filter: blur(12px) brightness(0.5);
-	@supports not (backdrop-filter: blur(12px)) {
-		background-color: ${transparentColour(sourcePalette.neutral[10], 0.7)};
-	}
-	${overlayMaskGradientStyles('180deg', 0)};
-
-	${from.mobileLandscape} {
-		${overlayMaskGradientStyles('180deg', 20)};
-	}
-
-	${from.tablet} {
-		${overlayMaskGradientStyles('180deg', 80)};
-	}
-
-	${from.desktop} {
-		${overlayMaskGradientStyles('180deg', 100)};
-	}
-
-	${from.leftCol} {
-		${overlayMaskGradientStyles('180deg', 210)};
-	}
-`;
-
-const buttonWrapperStyles = css`
-	${blurStyles}
-	display: flex;
-	position: absolute;
-	flex-direction: column;
-	justify-content: end;
-	align-items: start;
-	padding: 0 ${space[2]}px ${space[6]}px;
+	top: -${space[10]}px;
 	bottom: 0;
 	left: 0;
 	right: 0;
+	backdrop-filter: blur(12px) brightness(0.5);
+	@supports not (backdrop-filter: blur(12px)) {
+		background-color: linear-gradient(
+			to top,
+			${transparentColour(sourcePalette.neutral[10], 0.99)},
+			${transparentColour(sourcePalette.neutral[10], 0.95)},
+			${transparentColour(sourcePalette.neutral[10], 0.85)},
+			${transparentColour(sourcePalette.neutral[10], 0.75)},
+			transparent
+		);
+	}
+	mask-image: linear-gradient(
+		to top,
+		${transparentColour(sourcePalette.neutral[10], 0.99)},
+		${transparentColour(sourcePalette.neutral[10], 0.95)},
+		${transparentColour(sourcePalette.neutral[10], 0.85)},
+		${transparentColour(sourcePalette.neutral[10], 0.75)},
+		transparent
+	);
+
+	${from.tablet} {
+		top: -${space[8]}px;
+	}
+`;
+
+const blurAndTextWrapperStyles = css`
+	display: flex;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+`;
+
+const textAndButtonWrapperStyles = css`
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: start;
+	padding: ${space[3]}px ${space[2]}px ${space[6]}px;
+	z-index: 1;
 
 	${from.tablet} {
 		flex-direction: row;
@@ -134,25 +123,28 @@ export const CallToActionAtom = ({
 					}
 				`}
 			/>
-			<div css={buttonWrapperStyles}>
-				{!!text && <h2 css={textStyles}>{text}</h2>}
-				<LinkButton
-					href={linkUrl}
-					iconSide="right"
-					size="small"
-					icon={<SvgExternal />}
-					theme={{
-						// We also still need to implement the dark mode based on the provided designs which should be the same as not providing an accent colour.
-						textPrimary: accentColor
-							? sourcePalette.neutral[100]
-							: sourcePalette.neutral[0],
-						backgroundPrimary: buttonBgColour,
-						backgroundPrimaryHover:
-							calculateHoverColour(buttonBgColour),
-					}}
-				>
-					{buttonText ?? 'Learn more'}
-				</LinkButton>
+			<div css={blurAndTextWrapperStyles}>
+				<div css={textAndButtonWrapperStyles}>
+					{!!text && <h2 css={textStyles}>{text}</h2>}
+					<LinkButton
+						href={linkUrl}
+						iconSide="right"
+						size="small"
+						icon={<SvgExternal />}
+						theme={{
+							textPrimary: accentColor
+								? sourcePalette.neutral[100]
+								: sourcePalette.neutral[0],
+							backgroundPrimary: buttonBgColour,
+							backgroundPrimaryHover:
+								calculateHoverColour(buttonBgColour),
+						}}
+					>
+						{buttonText ?? 'Learn more'}
+					</LinkButton>
+				</div>
+				{/* blur overlay */}
+				<div aria-hidden="true" css={blurStyles} />
 			</div>
 		</picture>
 	);

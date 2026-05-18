@@ -33,7 +33,6 @@ const InternalLink = ({
 	dataLinkName?: string;
 }) => {
 	return (
-		// eslint-disable-next-line jsx-a11y/anchor-has-content -- we have an aria-label attribute describing the content
 		<a
 			href={linkTo}
 			css={fauxLinkStyles}
@@ -53,7 +52,6 @@ const ExternalLink = ({
 	dataLinkName?: string;
 }) => {
 	return (
-		// eslint-disable-next-line jsx-a11y/anchor-has-content -- we have an aria-label attribute describing the content
 		<a
 			href={linkTo}
 			css={fauxLinkStyles}

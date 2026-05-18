@@ -179,7 +179,7 @@ const regionalFocusDivStyle = css`
 
 const getMainMediaCaptions = (
 	article: ArticleDeprecated,
-): (string | undefined)[] =>
+): Array<string | undefined> =>
 	article.mainMediaElements.map((el) =>
 		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 			? el.data.caption

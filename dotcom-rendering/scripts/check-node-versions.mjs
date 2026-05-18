@@ -3,9 +3,9 @@
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { log, warn } from '../../scripts/log.js';
 import semverParse from 'semver/functions/parse.js';
 import semverSatisfies from 'semver/functions/satisfies.js';
+import { log, warn } from '../../scripts/log.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -46,7 +46,7 @@ const requiredNodeVersionMatches =
 		},
 		{
 			filepath: 'package.json',
-			pattern: /^\t+"@types\/node"\: "(.+)",$/m,
+			pattern: /^\t+"@types\/node": "(.+)",$/m,
 			/*
 			Definitely Typed packages only match the major and minor
 			versions of the corresponding library/node release.

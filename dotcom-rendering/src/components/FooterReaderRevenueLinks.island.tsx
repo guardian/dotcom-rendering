@@ -101,7 +101,9 @@ const ReaderRevenueLinksNative = ({
 }: ReaderRevenueLinksNativeProps) => {
 	const isSignedIn = useIsSignedIn();
 
-	if (isSignedIn === 'Pending') return null;
+	if (isSignedIn === 'Pending') {
+		return null;
+	}
 
 	const hideSupportMessaging = shouldHideSupportMessaging(isSignedIn);
 	const url = urls.support;

@@ -226,7 +226,9 @@ const createOnStateChangeListener =
 					msg: 'start play',
 					event,
 				});
-				for (const eventEmitter of eventEmitters) eventEmitter('play');
+				for (const eventEmitter of eventEmitters) {
+					eventEmitter('play');
+				}
 				progressEvents.hasSentPlayEvent = true;
 
 				/**
@@ -251,7 +253,9 @@ const createOnStateChangeListener =
 				const currentTime = player.getCurrentTime();
 				const duration = player.getDuration();
 
-				if (!duration || !currentTime) return;
+				if (!duration || !currentTime) {
+					return;
+				}
 
 				const percentPlayed = (currentTime / duration) * 100;
 
@@ -316,7 +320,9 @@ const createOnStateChangeListener =
 				msg: 'pause',
 				event,
 			});
-			for (const eventEmitter of eventEmitters) eventEmitter('pause');
+			for (const eventEmitter of eventEmitters) {
+				eventEmitter('pause');
+			}
 		}
 
 		if (event.data === YT.PlayerState.CUED) {
@@ -326,7 +332,9 @@ const createOnStateChangeListener =
 				msg: 'cued',
 				event,
 			});
-			for (const eventEmitter of eventEmitters) eventEmitter('cued');
+			for (const eventEmitter of eventEmitters) {
+				eventEmitter('cued');
+			}
 			progressEvents.hasSentPlayEvent = false;
 		}
 
@@ -342,7 +350,9 @@ const createOnStateChangeListener =
 				msg: 'ended',
 				event,
 			});
-			for (const eventEmitter of eventEmitters) eventEmitter('end');
+			for (const eventEmitter of eventEmitters) {
+				eventEmitter('end');
+			}
 			progressEvents.hasSentEndEvent = true;
 			progressEvents.hasSentPlayEvent = false;
 		}

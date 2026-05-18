@@ -52,9 +52,14 @@ const quotedBlockquoteStyles = css`
  */
 const isFirstSiblingOfType = (name: string, node: Node): boolean => {
 	const prevSibling = node.previousSibling;
-	if (!prevSibling) return true;
-	if (prevSibling.nodeName === name) return false;
-	else return isFirstSiblingOfType(name, prevSibling);
+	if (!prevSibling) {
+		return true;
+	}
+	if (prevSibling.nodeName === name) {
+		return false;
+	} else {
+		return isFirstSiblingOfType(name, prevSibling);
+	}
 };
 
 const textElement =

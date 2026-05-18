@@ -31,7 +31,9 @@ const isValidString = (str?: string): boolean =>
 	!isUndefined(str) && str.trim() !== '';
 
 const hasShowcaseRole = (element?: FEElement): boolean => {
-	if (isUndefined(element)) return false;
+	if (isUndefined(element)) {
+		return false;
+	}
 	return 'role' in element && element.role === 'showcase';
 };
 
@@ -237,7 +239,6 @@ const TimelineEvent = ({
 				/>
 				{event.body.map((element, index) => (
 					<ArticleElementComponent
-						// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
 						key={index}
 						index={index}
 						element={element}

@@ -130,7 +130,7 @@ const buttonWrapperStyles = css`
 // after it was opened
 let hasFormBeenOpened = true;
 
-type FormDataType = { [key in string]: unknown };
+type FormDataType = Record<string, unknown>;
 
 /**
  * A callout to readers to share their stories.
@@ -235,7 +235,9 @@ export const CalloutEmbedBlockComponent = ({
 			// keyCode 9 is tab key
 			if (e.keyCode === 9) {
 				// If firstElement or lastElement are not defined, do not continue
-				if (!firstFieldElementRef || !lastElementRef) return;
+				if (!firstFieldElementRef || !lastElementRef) {
+					return;
+				}
 
 				// we use `e.shiftKey` internally to determin the direction of the highlighting
 				// using document.activeElement and e.shiftKey we can check what should be the next element to be highlighted

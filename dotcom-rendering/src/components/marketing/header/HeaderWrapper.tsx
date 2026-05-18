@@ -177,6 +177,7 @@ const validate = (props: unknown): props is HeaderProps => {
 export const validatedHeaderWrapper = (
 	Header: ReactComponent<HeaderRenderProps>,
 ): ReactComponent<HeaderProps> => {
+	// eslint-disable-next-line react/display-name -- this is not a React component, but a function that returns one
 	return (props: HeaderProps) => {
 		if (validate(props)) {
 			const Module = headerWrapper(Header);

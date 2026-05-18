@@ -106,7 +106,6 @@ const Content = ({
 				{product.content.map((element, index) => (
 					<ArticleElementComponent
 						element={element}
-						// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
 						key={index}
 						index={index}
 						format={format}

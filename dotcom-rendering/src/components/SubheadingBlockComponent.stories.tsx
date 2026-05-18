@@ -56,7 +56,6 @@ const meta = preview.meta({
 			<StoryWrapper>
 				{subheadingHtmlStrings.map((html, index) => (
 					<SubheadingBlockComponent
-						// eslint-disable-next-line react/no-array-index-key -- ignore for Story only
 						key={index}
 						format={args.format}
 						html={html}

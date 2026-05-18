@@ -115,7 +115,9 @@ export const canShowReaderRevenueEpic = async (
 	const userConsent = await hasRequiredConsents();
 
 	const getBrowserId = (): string | undefined => {
-		if (!userConsent) return undefined;
+		if (!userConsent) {
+			return undefined;
+		}
 		return getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
 	};
 

@@ -142,7 +142,9 @@ describe('Discussion', () => {
 			});
 
 			expect(result.status).toBe('ok');
-			if (result.status !== 'ok') return;
+			if (result.status !== 'ok') {
+				return;
+			}
 
 			expect(result.discussion.comments.length).toBe(4);
 		});
@@ -175,13 +177,15 @@ describe('Discussion', () => {
 			});
 
 			expect(result.status).toBe('ok');
-			if (result.status !== 'ok') return;
+			if (result.status !== 'ok') {
+				return;
+			}
 
 			const comments = result.discussion.comments.filter(
-				({ responses }) => responses,
+				({ responses }) => !!responses,
 			);
 			const replies = result.discussion.comments.filter(
-				({ responseTo }) => responseTo,
+				({ responseTo }) => !!responseTo,
 			);
 			expect(comments.length).toBe(2);
 			expect(replies.length).toBe(3);

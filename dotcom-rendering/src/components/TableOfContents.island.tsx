@@ -145,7 +145,9 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	useEffect(() => {
 		const tocElement = tocRef.current;
 
-		if (!tocElement) return;
+		if (!tocElement) {
+			return;
+		}
 
 		const observer = new IntersectionObserver(
 			([e]) => {

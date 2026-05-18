@@ -251,7 +251,8 @@ export const mockFetch: typeof global.fetch = (
 			url,
 		) && requestInit?.method === 'POST':
 			const decodedBody = decodeURIComponent(
-				requestInit?.body?.toString() ?? '',
+				// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a mock
+				requestInit.body?.toString() ?? '',
 			);
 			const exampleDomainRegex = /\bexample\.com\b/;
 			return exampleDomainRegex.test(decodedBody)
@@ -262,6 +263,7 @@ export const mockFetch: typeof global.fetch = (
 		) && requestInit?.method === 'POST':
 			return createMockResponse(
 				200,
+				// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a mock
 				getAuxiaMock(requestInit.body?.toString() ?? ''),
 			);
 		case /.*contributions\.(code\.dev-)?guardianapis\.com\/auxia\/log-treatment-interaction/.test(
