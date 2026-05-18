@@ -1,9 +1,8 @@
 import CleanCSS from 'clean-css';
 import { FootballMatchDay } from '../components/FootballMatchDay';
-import type { FootballMatches } from '../footballMatches';
-import type { EditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { rawFontsCss } from '../lib/fonts-css';
+import type { MatchDayData } from './handler.footballMatchDayEmbed';
 
 const template = (html: string, css: string): string => {
 	const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
@@ -24,15 +23,13 @@ const template = (html: string, css: string): string => {
 };
 
 export const renderFootballMatchDayEmbed = (
-	matches: FootballMatches,
-	guardianBaseUrl: string,
-	edition: EditionId,
+	matchDay: MatchDayData,
 ): { html: string } => {
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<FootballMatchDay
-			matches={matches}
-			guardianBaseUrl={guardianBaseUrl}
-			edition={edition}
+			matches={matchDay.matchesList}
+			guardianBaseUrl={matchDay.guardianBaseURL}
+			edition={matchDay.editionId}
 		/>,
 	);
 

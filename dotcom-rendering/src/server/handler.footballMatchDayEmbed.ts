@@ -1,69 +1,48 @@
 import type { RequestHandler } from 'express';
-import { getParserErrorMessage, parse } from '../footballMatches';
-import type { FEFootballCompetition } from '../frontend/feFootballDataPage';
-import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
-import { validateAsFootballMatchListPage } from '../model/validate';
-import type { FootballMatchListPage, Region } from '../sportDataPage';
-import { sortRegionsFunction } from './handler.sportDataPage';
+import { safeParse } from 'valibot';
+import type { FootballMatches } from '../footballMatches';
+import { parse as parseFootballMatches } from '../footballMatches';
+import { feFootballMatchDaySchema } from '../frontend/feFootballMatchDay';
+import type { EditionId } from '../lib/edition';
+import type { Result } from '../lib/result';
+import { error, fromValibot, ok } from '../lib/result';
 import { renderFootballMatchDayEmbed } from './render.footballMatchDayEmbed';
 
 export const handleFootballMatchDayEmbed: RequestHandler = ({ body }, res) => {
-	const footballDataValidated: FEFootballMatchListPage =
-		validateAsFootballMatchListPage(body);
+	const matchDayData = parseFEFootballMatchDay(body);
+	if (!matchDayData.ok) {
+		throw new Error(matchDayData.error);
+	}
 
-	const parsedFootballData = parseFEFootballMatchList(footballDataValidated);
+	const { html } = renderFootballMatchDayEmbed(matchDayData.value);
 
-	const { html } = renderFootballMatchDayEmbed(
-		parsedFootballData.matchesList,
-		parsedFootballData.guardianBaseURL,
-		parsedFootballData.editionId,
-	);
 	res.status(200).send(html);
 };
 
-const parseFEFootballMatchList = (
-	data: FEFootballMatchListPage,
-): FootballMatchListPage => {
-	const parsedMatchesList = parse(data.matchesList);
-
-	if (!parsedMatchesList.ok) {
-		throw new Error(
-			`Failed to parse matches: ${getParserErrorMessage(
-				parsedMatchesList.error,
-			)}`,
-		);
-	}
-
-	return {
-		matchesList: parsedMatchesList.value,
-		now: new Date().toISOString(),
-		kind: 'FootballLiveScores',
-		nextPage: data.nextPage,
-		nextPageNoJsUrl: undefined,
-		previousPage: data.previousPage,
-		regions: parseFEFootballCompetitionRegions(data.filters),
-		editionId: data.editionId,
-		guardianBaseURL: data.guardianBaseURL,
-		config: data.config,
-		pageFooter: data.pageFooter,
-		isAdFreeUser: data.isAdFreeUser,
-		canonicalUrl: data.canonicalUrl,
-		contributionsServiceUrl: data.contributionsServiceUrl,
-	};
+export type MatchDayData = {
+	matchesList: FootballMatches;
+	guardianBaseURL: string;
+	editionId: EditionId;
 };
 
-const parseFEFootballCompetitionRegions = (
-	competitionRegions: Record<string, FEFootballCompetition[]>,
-): Region[] => {
-	return Object.entries(competitionRegions)
-		.map(([key, competition]) => {
-			return {
-				name: key,
-				competitions: competition.map((comp) => ({
-					url: comp.url,
-					name: comp.name,
-				})),
-			};
-		})
-		.sort(sortRegionsFunction);
+const parseFEFootballMatchDay = (
+	json: unknown,
+): Result<string, MatchDayData> => {
+	const feData = fromValibot(safeParse(feFootballMatchDaySchema, json));
+
+	if (!feData.ok) {
+		return error('Failed to validate Match Day data');
+	}
+
+	const parsedMatches = parseFootballMatches(feData.value.matchesList);
+
+	if (!parsedMatches.ok) {
+		return error('Failed to parse Match Day match list');
+	}
+
+	return ok({
+		matchesList: parsedMatches.value,
+		guardianBaseURL: feData.value.guardianBaseURL,
+		editionId: feData.value.editionId,
+	});
 };
