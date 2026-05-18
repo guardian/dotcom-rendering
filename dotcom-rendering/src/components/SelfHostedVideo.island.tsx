@@ -808,6 +808,12 @@ export const SelfHostedVideo = ({
 			return;
 		}
 
+		if (playerState === 'PLAYING') {
+			sendOphanTrackingEvent('pause');
+		} else if (hasTrackedPlay) {
+			sendOphanTrackingEvent('resume');
+		}
+
 		event.preventDefault();
 		playPauseVideo();
 	};
@@ -1033,7 +1039,6 @@ export const SelfHostedVideo = ({
 						aspectRatio={aspectRatio}
 						width={width}
 						height={height}
-						videoStyle={videoStyle}
 						posterImage={optimisedPosterImage}
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}

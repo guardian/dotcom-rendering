@@ -39,6 +39,8 @@ const getAppsMediaEvent = async (
 				return MediaEvent.exit_fullscreen;
 			case 'view':
 				return MediaEvent.view;
+			case 'resume':
+				return MediaEvent.pause;
 			default:
 		}
 	}
