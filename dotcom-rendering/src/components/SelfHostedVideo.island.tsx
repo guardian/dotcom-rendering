@@ -771,6 +771,13 @@ export const SelfHostedVideo = ({
 	}
 
 	const positionCues = (video: HTMLVideoElement) => {
+		if (
+			!videoStyleSettings.canShowSubtitles ||
+			!videoStyleSettings.supportsAudio
+		) {
+			return;
+		}
+
 		const track = video.textTracks[0];
 		if (!track?.cues) {
 			return;
