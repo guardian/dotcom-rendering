@@ -325,6 +325,39 @@ describe('NewsletterSignupForm', () => {
 		expect(params.get('email')).toBe('signed.in@example.com');
 	});
 
+	it('does not send marketingOptInHidden for signed-in users when country logic would show the toggle', async () => {
+		const testUser = user.setup();
+		window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
+			true;
+		(useCountryCode as jest.Mock).mockReturnValue('GB');
+		(useIsSignedIn as jest.Mock).mockReturnValue(true);
+		(useAuthStatus as jest.Mock).mockReturnValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'token' },
+			idToken: { claims: { email: 'signed.in@example.com' } },
+		});
+		(lazyFetchEmailWithTimeout as jest.Mock).mockReturnValue(() =>
+			Promise.resolve('signed.in@example.com'),
+		);
+
+		renderForm();
+
+		await waitFor(() => {
+			expect(
+				screen.getByRole('button', { name: 'Sign up' }),
+			).toBeInTheDocument();
+		});
+		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+
+		await waitFor(() => {
+			expect(global.fetch).toHaveBeenCalled();
+		});
+
+		const params = getRequestBodyParams();
+		expect(params.get('marketingOptInHidden')).toBeNull();
+		expect(params.get('countryCode')).toBeNull();
+	});
+
 	it('shows an inline validation error when submitting with an empty email', async () => {
 		const testUser = user.setup();
 

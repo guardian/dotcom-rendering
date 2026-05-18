@@ -303,5 +303,47 @@ describe('ManyNewsletterSignUp', () => {
 				);
 			});
 		});
+
+		it('does not mark marketingOptInHidden when the toggle is hidden only because the user is signed in', async () => {
+			const testUser = user.setup();
+			(useCountryCode as jest.Mock).mockReturnValue('GB');
+			(useIsSignedIn as jest.Mock).mockReturnValue(true);
+
+			const newsletterButton = addNewsletterButton(
+				'morning-briefing',
+				1234,
+			);
+			renderComponent();
+			await testUser.click(newsletterButton);
+
+			await waitFor(() => {
+				expect(
+					rtlScreen.getByLabelText('Enter your email'),
+				).toBeInTheDocument();
+			});
+
+			expect(
+				rtlScreen.queryByLabelText(/Get updates about our journalism/),
+			).not.toBeInTheDocument();
+
+			await testUser.type(
+				rtlScreen.getByLabelText('Enter your email'),
+				'reader@example.com',
+			);
+			await testUser.click(
+				rtlScreen.getByRole('button', {
+					name: 'Sign up for the newsletter you selected',
+				}),
+			);
+
+			await waitFor(() => {
+				expect(requestMultipleSignUps).toHaveBeenCalledWith(
+					expect.objectContaining({
+						marketingOptInHidden: undefined,
+						countryCode: undefined,
+					}),
+				);
+			});
+		});
 	});
 });

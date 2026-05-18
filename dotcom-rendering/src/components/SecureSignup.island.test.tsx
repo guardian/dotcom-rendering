@@ -204,4 +204,36 @@ describe('SecureSignup', () => {
 				?.marketingOptInType,
 		).toBe('similar-guardian-products-optout');
 	});
+
+	it('does not send marketingOptInHidden when the toggle is hidden only because the user is signed in', async () => {
+		const testUser = user.setup();
+		(useIsSignedIn as jest.Mock).mockReturnValue(true);
+		(useNewsletterShowMarketingToggle as jest.Mock).mockReturnValue({
+			showMarketingToggle: true,
+			countryCode: 'GB',
+		});
+
+		renderComponent();
+
+		await testUser.type(
+			rtlScreen.getByLabelText('Enter your email address'),
+			'reader@example.com',
+		);
+
+		expect(
+			rtlScreen.queryByLabelText(/Get updates about our journalism/),
+		).not.toBeInTheDocument();
+
+		await testUser.click(
+			rtlScreen.getByRole('button', { name: 'Sign up' }),
+		);
+
+		await waitFor(() => {
+			expect(global.fetch).toHaveBeenCalled();
+		});
+
+		const params = getRequestBodyParams();
+		expect(params.get('marketingOptInHidden')).toBeNull();
+		expect(params.get('countryCode')).toBeNull();
+	});
 });
