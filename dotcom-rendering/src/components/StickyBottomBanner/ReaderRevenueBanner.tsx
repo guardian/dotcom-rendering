@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
-import type { ConsentState, CountryCode } from '@guardian/libs';
-import { getCookie, onConsent } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
+import { onConsent } from '@guardian/consent-manager';
+import type { CountryCode } from '@guardian/libs';
+import { getCookie } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { abandonedBasketSchema } from '@guardian/support-dotcom-components';
 import type {

@@ -1,11 +1,9 @@
 import {
 	type ConsentState,
-	getCookie,
-	isUndefined,
 	onConsent,
 	onConsentChange,
-	storage,
-} from '@guardian/libs';
+} from '@guardian/consent-manager';
+import { getCookie, isUndefined, storage } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import { useEffect, useState } from 'react';
 import { hideSupportMessaging } from '../client/userFeatures/cookies/hideSupportMessaging';
