@@ -10,7 +10,6 @@ import { forwardRef } from 'react';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
-import type { VideoPlayerFormat } from '../types/mainMedia';
 import {
 	AudioIcon as AudioIconComponent,
 	FullscreenIcon,
@@ -127,7 +126,6 @@ export type Props = {
 	height?: number;
 	width?: number;
 	aspectRatio: number;
-	videoStyle: VideoPlayerFormat;
 	FallbackImageComponent: ReactElement;
 	currentTime: number;
 	hasAudio: boolean;
@@ -181,7 +179,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 			height,
 			width,
 			aspectRatio,
-			videoStyle,
 			FallbackImageComponent,
 			posterImage,
 			currentTime,
@@ -225,10 +222,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const showProgressBar = canShowProgressBar && currentRefExists;
 		const showIcons = canShowIcons && currentRefExists;
 
-		const dataLinkName = `gu-video-${videoStyle.toLowerCase()}-${
-			showPlayPauseIcon === 'play' ? 'play' : 'pause'
-		}-${atomId}`;
-
 		return (
 			<div ref={playerContainerRef} css={playerContainerStyles}>
 				{}
@@ -245,7 +238,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 					data-testid="self-hosted-video-player"
 					height={height}
 					width={width}
-					data-link-name={dataLinkName}
 					data-chromatic="ignore"
 					preload={preloadPartialData ? 'metadata' : 'none'}
 					loop={shouldLoop}
