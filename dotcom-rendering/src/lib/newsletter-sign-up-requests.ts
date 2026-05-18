@@ -130,6 +130,7 @@ export const requestSingleSignUp = async ({
 	marketingOptIn,
 	marketingOptInHidden,
 	countryCode,
+	browserId,
 }: SingleSignUpParams): Promise<Response> => {
 	const data = buildNewsletterSignUpFormData({
 		emailAddress,
@@ -138,6 +139,7 @@ export const requestSingleSignUp = async ({
 		marketingOptIn,
 		marketingOptInHidden,
 		countryCode,
+		browserId,
 	});
 
 	return await postFormData(

@@ -271,7 +271,7 @@ export const ManyNewsletterSignUp = ({
 		// Read from refs so we always have the latest values regardless of
 		// when the captcha resolves relative to state updates.
 		const hideToggle = usHideMarketingToggleRef.current;
-		const cc = countryCodeRef.current;
+		const currentCountryCodeRef = countryCodeRef.current;
 		const optIn = marketingOptInRef.current;
 		// The value that is actually sent to the backend — used for tracking too
 		// so the tracking accurately reflects what was submitted.
@@ -279,8 +279,9 @@ export const ManyNewsletterSignUp = ({
 
 		const getMarketingOptInType = () => {
 			if (hideToggle) return 'similar-guardian-products-hidden-optin-us';
-			if (effectiveMarketingOptIn)
+			if (effectiveMarketingOptIn) {
 				return 'similar-guardian-products-optin';
+			}
 			return 'similar-guardian-products-optout';
 		};
 
@@ -299,7 +300,7 @@ export const ManyNewsletterSignUp = ({
 			recaptchaToken: reCaptchaToken,
 			marketingOptIn: effectiveMarketingOptIn,
 			marketingOptInHidden: hideToggle ? true : undefined,
-			countryCode: hideToggle ? cc : undefined,
+			countryCode: hideToggle ? currentCountryCodeRef : undefined,
 		}).catch(() => {
 			return undefined;
 		});
