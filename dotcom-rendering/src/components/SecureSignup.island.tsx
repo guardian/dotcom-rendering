@@ -29,7 +29,7 @@ import {
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
-import { useUSNewsletterHideMarketingToggle } from '../lib/useUSNewsletterHideMarketingToggle';
+import { useNewsletterHideMarketingToggle } from '../lib/useNewsletterHideMarketingToggle';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -266,8 +266,8 @@ export const SecureSignup = ({
 	);
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
-	const { usHideMarketingToggle, countryCode } =
-		useUSNewsletterHideMarketingToggle();
+	const { hideMarketingToggle, countryCode } =
+		useNewsletterHideMarketingToggle();
 
 	useEffect(() => {
 		if (isSignedIn !== 'Pending' && !isSignedIn) {
@@ -295,7 +295,7 @@ export const SecureSignup = ({
 		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
 
 		const getMarketingOptInType = (): string | undefined => {
-			if (usHideMarketingToggle) {
+			if (hideMarketingToggle) {
 				return 'similar-guardian-products-hidden-optin-us';
 			}
 			if (marketingOptIn === undefined) return undefined;
@@ -308,10 +308,10 @@ export const SecureSignup = ({
 			emailAddress,
 			newsletterId,
 			token,
-			usHideMarketingToggle ? true : marketingOptIn,
+			hideMarketingToggle ? true : marketingOptIn,
 			browserId,
-			usHideMarketingToggle ? true : undefined,
-			usHideMarketingToggle ? countryCode : undefined,
+			hideMarketingToggle ? true : undefined,
+			hideMarketingToggle ? countryCode : undefined,
 		);
 
 		const response = await postFormData(
@@ -418,7 +418,7 @@ export const SecureSignup = ({
 					value={userEmail ?? ''}
 					onChange={(e) => setUserEmail(e.target.value)}
 				/>
-				{isSignedIn === false && !usHideMarketingToggle && (
+				{isSignedIn === false && !hideMarketingToggle && (
 					<CheckboxGroup
 						name="marketing-preferences"
 						label="Marketing preferences"

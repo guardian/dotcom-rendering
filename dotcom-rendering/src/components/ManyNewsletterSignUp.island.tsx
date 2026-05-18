@@ -19,7 +19,7 @@ import {
 } from '../lib/newsletter-sign-up-requests';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
-import { useUSNewsletterHideMarketingToggle } from '../lib/useUSNewsletterHideMarketingToggle';
+import { useNewsletterHideMarketingToggle } from '../lib/useNewsletterHideMarketingToggle';
 import { useConfig } from './ConfigContext';
 import { Flex } from './Flex';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
@@ -138,8 +138,8 @@ export const ManyNewsletterSignUp = ({
 }: Props) => {
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
-	const { usHideMarketingToggle, countryCode } =
-		useUSNewsletterHideMarketingToggle();
+	const { hideMarketingToggle, countryCode } =
+		useNewsletterHideMarketingToggle();
 
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		Array<{
@@ -159,12 +159,12 @@ export const ManyNewsletterSignUp = ({
 	// Mirror async-read values in refs so sendRequest always sees the latest
 	// values even if state updates between the user pressing submit and the
 	// captcha resolving.
-	const usHideMarketingToggleRef = useRef(usHideMarketingToggle);
+	const hideMarketingToggleRef = useRef(hideMarketingToggle);
 	const countryCodeRef = useRef(countryCode);
 	const marketingOptInRef = useRef(marketingOptIn);
 	useEffect(() => {
-		usHideMarketingToggleRef.current = usHideMarketingToggle;
-	}, [usHideMarketingToggle]);
+		hideMarketingToggleRef.current = hideMarketingToggle;
+	}, [hideMarketingToggle]);
 	useEffect(() => {
 		countryCodeRef.current = countryCode;
 	}, [countryCode]);
@@ -270,7 +270,7 @@ export const ManyNewsletterSignUp = ({
 
 		// Read from refs so we always have the latest values regardless of
 		// when the captcha resolves relative to state updates.
-		const hideToggle = usHideMarketingToggleRef.current;
+		const hideToggle = hideMarketingToggleRef.current;
 		const currentCountryCodeRef = countryCodeRef.current;
 		const optIn = marketingOptInRef.current;
 		// The value that is actually sent to the backend — used for tracking too
@@ -459,9 +459,7 @@ export const ManyNewsletterSignUp = ({
 							}}
 							newsletterCount={newslettersToSignUpFor.length}
 							marketingOptIn={
-								usHideMarketingToggle
-									? undefined
-									: marketingOptIn
+								hideMarketingToggle ? undefined : marketingOptIn
 							}
 							setMarketingOptIn={setMarketingOptIn}
 							useReCaptcha={useReCaptcha}

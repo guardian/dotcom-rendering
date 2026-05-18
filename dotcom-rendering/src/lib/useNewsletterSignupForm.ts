@@ -130,7 +130,7 @@ export const useNewsletterSignupForm = (
 	newsletterId: string,
 	renderingTarget: RenderingTarget,
 	abTest?: AbTest,
-	usHideMarketingToggle = false,
+	hideMarketingToggle = false,
 	countryCode?: string,
 ): NewsletterSignupFormState => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
@@ -161,7 +161,7 @@ export const useNewsletterSignupForm = (
 	const marketingOptInRef = useRef(marketingOptIn);
 	const browserIdRef = useRef(browserId);
 	const authStatusRef = useRef(authStatus);
-	const usHideMarketingToggleRef = useRef(usHideMarketingToggle);
+	const hideMarketingToggleRef = useRef(hideMarketingToggle);
 	const countryCodeRef = useRef(countryCode);
 	useEffect(() => {
 		marketingOptInRef.current = marketingOptIn;
@@ -173,8 +173,8 @@ export const useNewsletterSignupForm = (
 		authStatusRef.current = authStatus;
 	}, [authStatus]);
 	useEffect(() => {
-		usHideMarketingToggleRef.current = usHideMarketingToggle;
-	}, [usHideMarketingToggle]);
+		hideMarketingToggleRef.current = hideMarketingToggle;
+	}, [hideMarketingToggle]);
 	useEffect(() => {
 		countryCodeRef.current = countryCode;
 	}, [countryCode]);
@@ -231,7 +231,7 @@ export const useNewsletterSignupForm = (
 				abTest,
 			);
 
-			const hideToggle = usHideMarketingToggleRef.current;
+			const hideToggle = hideMarketingToggleRef.current;
 
 			const getMarketingOptInType = (): string | undefined => {
 				if (hideToggle) {
@@ -417,7 +417,7 @@ export const useNewsletterSignupForm = (
 		userEmail,
 		isSignedIn: hasPrefilledEmail,
 		isInteracted,
-		showMarketingToggle: isSignedIn === false && !usHideMarketingToggle,
+		showMarketingToggle: isSignedIn === false && !hideMarketingToggle,
 		marketingOptIn,
 		isWaitingForResponse,
 		responseOk,
