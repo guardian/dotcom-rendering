@@ -30,7 +30,7 @@
 		"@guardian/ab-core": "8.0.0",
 		"@guardian/ab-testing-config": "workspace:ab-testing-config",
 		"@guardian/braze-components": "22.2.0",
-		"@guardian/bridget": "8.9.2",
+		"@guardian/bridget": "8.11.0",
 		"@guardian/browserslist-config": "6.1.0",
 		"@guardian/cdk": "62.6.1",
 		"@guardian/consent-manager": "1.0.0",

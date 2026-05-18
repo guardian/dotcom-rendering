@@ -25,7 +25,7 @@ const getAppsMediaEvent = async (
 		default:
 	}
 
-	if (await hasMinimumBridgetVersion('8.9.2')) {
+	if (await hasMinimumBridgetVersion('8.11.0')) {
 		switch (trackingEvent) {
 			case 'pause':
 				return MediaEvent.pause;
@@ -40,7 +40,7 @@ const getAppsMediaEvent = async (
 			case 'view':
 				return MediaEvent.view;
 			case 'resume':
-				return MediaEvent.pause;
+				return MediaEvent.resume;
 			default:
 		}
 	}
