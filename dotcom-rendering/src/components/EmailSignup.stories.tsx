@@ -146,10 +146,12 @@ export const USHideMarketingToggle = meta.story({
 	},
 	beforeEach() {
 		mocked(useCountryCode).mockReturnValue('US');
-		window.guardian.config.switches.usNewsletterHideMarketingToggle = true;
+		window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
+			true;
 	},
 	afterEach() {
 		mocked(useCountryCode).mockReset();
-		window.guardian.config.switches.usNewsletterHideMarketingToggle = false;
+		window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
+			false;
 	},
 });

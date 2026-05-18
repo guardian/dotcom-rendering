@@ -76,8 +76,8 @@ export type NewsletterSignupFormState = {
 	 * privacy message.
 	 */
 	isInteracted: boolean;
-	/** `true` for signed-out users — shows the marketing opt-in toggle. */
-	showMarketingToggle: boolean;
+	/** `true` for signed-out users when the marketing toggle should be hidden (US soft opt-in). */
+	hideMarketingToggle: boolean;
 	marketingOptIn: boolean | undefined;
 
 	/** `true` while the POST request is in-flight. */
@@ -417,7 +417,7 @@ export const useNewsletterSignupForm = (
 		userEmail,
 		isSignedIn: hasPrefilledEmail,
 		isInteracted,
-		showMarketingToggle: isSignedIn === false && !hideMarketingToggle,
+		hideMarketingToggle: !(isSignedIn === false && !hideMarketingToggle),
 		marketingOptIn,
 		isWaitingForResponse,
 		responseOk,

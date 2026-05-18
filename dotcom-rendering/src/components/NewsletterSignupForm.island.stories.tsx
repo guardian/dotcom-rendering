@@ -79,7 +79,7 @@ const mockForm = (state: Partial<NewsletterSignupFormState>) => ({
 	userEmail: undefined,
 	isSignedIn: false,
 	isInteracted: false,
-	showMarketingToggle: false,
+	hideMarketingToggle: true,
 	marketingOptIn: undefined,
 	isWaitingForResponse: false,
 	responseOk: undefined,
@@ -100,7 +100,7 @@ export const SignedOut = meta.story({
 	args: defaultArgs,
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(
-			mockForm({ showMarketingToggle: false }),
+			mockForm({ hideMarketingToggle: true }),
 		);
 	},
 });
@@ -116,7 +116,7 @@ export const SignedOutWithEmail = meta.story({
 			mockForm({
 				userEmail: 'reader@example.com',
 				isInteracted: true,
-				showMarketingToggle: true,
+				hideMarketingToggle: false,
 				marketingOptIn: true,
 			}),
 		);
@@ -136,7 +136,7 @@ export const SignedIn = meta.story({
 				userEmail: 'reader@example.com',
 				isSignedIn: true,
 				isInteracted: true,
-				showMarketingToggle: false,
+				hideMarketingToggle: true,
 			}),
 		);
 	},
@@ -228,7 +228,7 @@ export const HidePrivacyMessage = meta.story({
 		mocked(useNewsletterSignupForm).mockReturnValue(
 			mockForm({
 				isInteracted: true,
-				showMarketingToggle: true,
+				hideMarketingToggle: false,
 				marketingOptIn: true,
 			}),
 		);
@@ -245,7 +245,7 @@ export const AlreadySubscribed = meta.story({
 });
 
 /**
- * US user with `usNewsletterHideMarketingToggle` switch enabled — marketing toggle is
+ * US user with `us-signup-hide-marketing-toggle` switch enabled — marketing toggle is
  * hidden and the user is silently enrolled in similar_guardian_products.
  */
 export const USHideMarketingToggle = meta.story({
@@ -255,7 +255,7 @@ export const USHideMarketingToggle = meta.story({
 			mockForm({
 				userEmail: 'reader@example.com',
 				isInteracted: true,
-				showMarketingToggle: false,
+				hideMarketingToggle: true,
 				marketingOptIn: true,
 			}),
 		);

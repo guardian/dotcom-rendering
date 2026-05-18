@@ -458,9 +458,10 @@ export const ManyNewsletterSignUp = ({
 								status,
 							}}
 							newsletterCount={newslettersToSignUpFor.length}
-							marketingOptIn={
-								hideMarketingToggle ? undefined : marketingOptIn
+							hideMarketingToggle={
+								hideMarketingToggle && isSignedIn === false
 							}
+							marketingOptIn={marketingOptIn ?? false}
 							setMarketingOptIn={setMarketingOptIn}
 							useReCaptcha={useReCaptcha}
 							captchaSiteKey={captchaSiteKey}

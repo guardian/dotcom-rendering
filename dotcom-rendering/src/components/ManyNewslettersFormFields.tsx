@@ -56,6 +56,7 @@ export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 	handleTextInput,
 	marketingOptIn,
 	setMarketingOptIn,
+	hideMarketingToggle = false,
 	useReCaptcha,
 	captchaSiteKey,
 	visibleRecaptcha = false,
@@ -65,7 +66,7 @@ export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 	const [firstInteractionOccurred, setFirstInteractionOccurred] =
 		useState(false);
 
-	const isMarketingOptInVisible = marketingOptIn !== undefined;
+	const isMarketingOptInVisible = !hideMarketingToggle;
 
 	const errorMessage =
 		status === 'Failed'
