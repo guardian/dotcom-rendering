@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { lazyFetchEmailWithTimeout } from './fetchEmail';
+import { getEffectiveMarketingOptIn } from './newsletter-marketing-opt-in';
 import { requestSingleSignUp } from './newsletter-sign-up-requests';
 import {
 	EVENT_DESCRIPTION_TO_ACTION,
@@ -155,8 +156,11 @@ export const useNewsletterSignupForm = (
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
 	const browserId = useBrowserId();
-	const effectiveMarketingOptIn =
-		marketingOptIn ?? (isSignedIn !== true ? true : undefined);
+	const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
+		locationHidesToggle: !showMarketingToggle,
+		isSignedIn,
+		marketingOptIn,
+	});
 
 	// Refs that mirror state — read inside submit handlers so we always see the
 	// latest value rather than whatever was captured when the handler was

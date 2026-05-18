@@ -29,6 +29,7 @@ import {
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
+import { getEffectiveMarketingOptIn } from '../lib/newsletter-marketing-opt-in';
 import { useNewsletterShowMarketingToggle } from '../lib/useNewsletterShowMarketingToggle';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -188,24 +189,6 @@ const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
 		return;
 	}
 	return fetchedEmail;
-};
-
-const getEffectiveMarketingOptIn = ({
-	locationHidesToggle,
-	isSignedIn,
-	marketingOptIn,
-}: {
-	locationHidesToggle: boolean;
-	isSignedIn: boolean | 'Pending';
-	marketingOptIn: boolean | undefined;
-}): boolean | undefined => {
-	if (locationHidesToggle) {
-		return true;
-	}
-	if (isSignedIn === true) {
-		return undefined;
-	}
-	return marketingOptIn ?? true;
 };
 
 const postFormData = async (

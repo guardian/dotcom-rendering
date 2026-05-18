@@ -17,6 +17,7 @@ import {
 	reportTrackingEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
+import { getEffectiveMarketingOptIn } from '../lib/newsletter-marketing-opt-in';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterShowMarketingToggle } from '../lib/useNewsletterShowMarketingToggle';
@@ -123,24 +124,6 @@ const attributeToNumber = (
 		return undefined;
 	}
 	return numericValue;
-};
-
-const getEffectiveMarketingOptIn = ({
-	locationHidesToggle,
-	isSignedIn,
-	marketingOptIn,
-}: {
-	locationHidesToggle: boolean;
-	isSignedIn: boolean | 'Pending';
-	marketingOptIn: boolean | undefined;
-}): boolean | undefined => {
-	if (locationHidesToggle) {
-		return true;
-	}
-	if (isSignedIn === true) {
-		return undefined;
-	}
-	return marketingOptIn ?? true;
 };
 
 type Props = {

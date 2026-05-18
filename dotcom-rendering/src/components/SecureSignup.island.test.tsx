@@ -8,6 +8,9 @@ import { useNewsletterShowMarketingToggle } from '../lib/useNewsletterShowMarket
 import { ConfigProvider } from './ConfigContext';
 import { SecureSignup } from './SecureSignup.island';
 
+const TEST_EMAIL = 'reader@example.com';
+const SIGN_UP_BUTTON_NAME = 'Sign up';
+
 jest.mock('../lib/newsletterSignupTracking', () => ({
 	sendNewsletterSignupEvent: jest.fn(),
 	EVENT_DESCRIPTION_TO_ACTION: {
@@ -64,7 +67,7 @@ jest.mock('react-google-recaptcha', () => ({
 	),
 }));
 
-const renderComponent = () =>
+const renderSignupForm = () =>
 	render(
 		<ConfigProvider
 			value={{
@@ -101,6 +104,36 @@ const getTrackedEventValueByDescription = (
 		.map((call) => call[0].value)
 		.find((value) => value?.eventDescription === eventDescription);
 
+const mockLocationToggle = ({
+	showMarketingToggle,
+	countryCode,
+}: {
+	showMarketingToggle: boolean;
+	countryCode: string | undefined;
+}): void => {
+	(useNewsletterShowMarketingToggle as jest.Mock).mockReturnValue({
+		showMarketingToggle,
+		countryCode,
+	});
+};
+
+const submitSignup = async (
+	testUser: ReturnType<typeof user.setup>,
+	email = TEST_EMAIL,
+): Promise<void> => {
+	await testUser.type(
+		rtlScreen.getByLabelText('Enter your email address'),
+		email,
+	);
+	await testUser.click(
+		rtlScreen.getByRole('button', { name: SIGN_UP_BUTTON_NAME }),
+	);
+
+	await waitFor(() => {
+		expect(global.fetch).toHaveBeenCalled();
+	});
+};
+
 describe('SecureSignup', () => {
 	const pageConfig = window.guardian.config
 		.page as typeof window.guardian.config.page & {
@@ -114,7 +147,7 @@ describe('SecureSignup', () => {
 		(useIsSignedIn as jest.Mock).mockReturnValue(false);
 		(useAuthStatus as jest.Mock).mockReturnValue({ kind: 'SignedOut' });
 		(useBrowserId as jest.Mock).mockReturnValue('test-browser-id');
-		(useNewsletterShowMarketingToggle as jest.Mock).mockReturnValue({
+		mockLocationToggle({
 			showMarketingToggle: true,
 			countryCode: undefined,
 		});
@@ -129,29 +162,14 @@ describe('SecureSignup', () => {
 
 	it('hides marketing checkbox and submits hidden-opt-in payload for US soft opt-in', async () => {
 		const testUser = user.setup();
-		(useNewsletterShowMarketingToggle as jest.Mock).mockReturnValue({
-			showMarketingToggle: false,
-			countryCode: 'US',
-		});
+		mockLocationToggle({ showMarketingToggle: false, countryCode: 'US' });
 
-		renderComponent();
-
-		await testUser.type(
-			rtlScreen.getByLabelText('Enter your email address'),
-			'reader@example.com',
-		);
+		renderSignupForm();
 
 		expect(
 			rtlScreen.queryByLabelText(/Get updates about our journalism/),
 		).not.toBeInTheDocument();
-
-		await testUser.click(
-			rtlScreen.getByRole('button', { name: 'Sign up' }),
-		);
-
-		await waitFor(() => {
-			expect(global.fetch).toHaveBeenCalled();
-		});
+		await submitSignup(testUser);
 
 		const params = getRequestBodyParams();
 		expect(params.get('marketing')).toBe('true');
@@ -167,17 +185,9 @@ describe('SecureSignup', () => {
 
 	it('shows marketing checkbox and honours user opt-out for non-US users', async () => {
 		const testUser = user.setup();
-		(useNewsletterShowMarketingToggle as jest.Mock).mockReturnValue({
-			showMarketingToggle: true,
-			countryCode: 'GB',
-		});
+		mockLocationToggle({ showMarketingToggle: true, countryCode: 'GB' });
 
-		renderComponent();
-
-		await testUser.type(
-			rtlScreen.getByLabelText('Enter your email address'),
-			'reader@example.com',
-		);
+		renderSignupForm();
 
 		const marketingCheckbox = rtlScreen.getByLabelText(
 			/Get updates about our journalism/,
@@ -185,14 +195,7 @@ describe('SecureSignup', () => {
 		expect(marketingCheckbox).toBeChecked();
 		await testUser.click(marketingCheckbox);
 		expect(marketingCheckbox).not.toBeChecked();
-
-		await testUser.click(
-			rtlScreen.getByRole('button', { name: 'Sign up' }),
-		);
-
-		await waitFor(() => {
-			expect(global.fetch).toHaveBeenCalled();
-		});
+		await submitSignup(testUser);
 
 		const params = getRequestBodyParams();
 		expect(params.get('marketing')).toBe('false');
@@ -208,29 +211,14 @@ describe('SecureSignup', () => {
 	it('does not send marketingOptInHidden when the toggle is hidden only because the user is signed in', async () => {
 		const testUser = user.setup();
 		(useIsSignedIn as jest.Mock).mockReturnValue(true);
-		(useNewsletterShowMarketingToggle as jest.Mock).mockReturnValue({
-			showMarketingToggle: true,
-			countryCode: 'GB',
-		});
+		mockLocationToggle({ showMarketingToggle: true, countryCode: 'GB' });
 
-		renderComponent();
-
-		await testUser.type(
-			rtlScreen.getByLabelText('Enter your email address'),
-			'reader@example.com',
-		);
+		renderSignupForm();
 
 		expect(
 			rtlScreen.queryByLabelText(/Get updates about our journalism/),
 		).not.toBeInTheDocument();
-
-		await testUser.click(
-			rtlScreen.getByRole('button', { name: 'Sign up' }),
-		);
-
-		await waitFor(() => {
-			expect(global.fetch).toHaveBeenCalled();
-		});
+		await submitSignup(testUser);
 
 		const params = getRequestBodyParams();
 		expect(params.get('marketing')).toBeNull();

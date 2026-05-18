@@ -10,6 +10,9 @@ import { useCountryCode } from '../lib/useCountryCode';
 import { ConfigProvider } from './ConfigContext';
 import { NewsletterSignupForm } from './NewsletterSignupForm.island';
 
+const TEST_EMAIL = 'reader@example.com';
+const SIGN_UP_BUTTON_NAME = 'Sign up';
+
 jest.mock('../client/ophan/ophan', () => ({
 	submitComponentEvent: jest.fn(),
 }));
@@ -75,7 +78,7 @@ jest.mock('react-google-recaptcha', () => ({
 	),
 }));
 
-const renderForm = (hidePrivacyMessage = false) =>
+const renderSignupForm = (hidePrivacyMessage = false) =>
 	render(
 		<ConfigProvider
 			value={{
@@ -131,9 +134,38 @@ const expectTrackedEventDescriptions = (expected: string[]): void => {
 
 const typeEmailAddress = async (
 	testUser: ReturnType<typeof user.setup>,
-	email = 'reader@example.com',
+	email = TEST_EMAIL,
 ): Promise<void> => {
 	await testUser.type(screen.getByLabelText('Enter your email'), email);
+};
+
+const submitSignup = async (
+	testUser: ReturnType<typeof user.setup>,
+): Promise<void> => {
+	await testUser.click(
+		screen.getByRole('button', { name: SIGN_UP_BUTTON_NAME }),
+	);
+};
+
+const expectSuccessMessage = async (): Promise<void> => {
+	await waitFor(() => {
+		expect(screen.getByText("You're signed up!")).toBeInTheDocument();
+		expect(
+			screen.getByText('You will receive Morning Briefing every day.'),
+		).toBeInTheDocument();
+	});
+};
+
+const mockSignedInUser = (email = 'signed.in@example.com'): void => {
+	(useIsSignedIn as jest.Mock).mockReturnValue(true);
+	(useAuthStatus as jest.Mock).mockReturnValue({
+		kind: 'SignedIn',
+		accessToken: { accessToken: 'token' },
+		idToken: { claims: { email } },
+	});
+	(lazyFetchEmailWithTimeout as jest.Mock).mockReturnValue(() =>
+		Promise.resolve(email),
+	);
 };
 
 describe('NewsletterSignupForm', () => {
@@ -175,19 +207,11 @@ describe('NewsletterSignupForm', () => {
 	it('submits for a signed-out user and includes marketing/browser fields', async () => {
 		const testUser = user.setup();
 
-		renderForm();
+		renderSignupForm();
 
 		await typeEmailAddress(testUser);
-		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
-
-		await waitFor(() => {
-			expect(screen.getByText("You're signed up!")).toBeInTheDocument();
-			expect(
-				screen.getByText(
-					'You will receive Morning Briefing every day.',
-				),
-			).toBeInTheDocument();
-		});
+		await submitSignup(testUser);
+		await expectSuccessMessage();
 
 		expect(global.fetch).toHaveBeenCalledWith(
 			'https://api.nextgen.guardianapps.co.uk/email',
@@ -219,7 +243,7 @@ describe('NewsletterSignupForm', () => {
 	it('supports tab order from email input to marketing toggle to sign up', async () => {
 		const testUser = user.setup();
 
-		renderForm(true);
+		renderSignupForm(true);
 
 		await testUser.tab();
 		expect(screen.getByLabelText('Enter your email')).toHaveFocus();
@@ -235,7 +259,7 @@ describe('NewsletterSignupForm', () => {
 	it('allows signed-out users to opt out of marketing before submit', async () => {
 		const testUser = user.setup();
 
-		renderForm();
+		renderSignupForm();
 
 		await typeEmailAddress(testUser);
 		const marketingSwitch = screen.getByRole('switch');
@@ -244,7 +268,7 @@ describe('NewsletterSignupForm', () => {
 		await testUser.click(marketingSwitch);
 		expect(marketingSwitch).toHaveAttribute('aria-checked', 'false');
 
-		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+		await submitSignup(testUser);
 
 		await waitFor(() => {
 			expect(global.fetch).toHaveBeenCalled();
@@ -257,7 +281,7 @@ describe('NewsletterSignupForm', () => {
 	it('supports keyboard interaction for marketing toggle and submit button', async () => {
 		const testUser = user.setup();
 
-		renderForm(true);
+		renderSignupForm(true);
 
 		await testUser.tab();
 		const emailInput = screen.getByLabelText('Enter your email');
@@ -275,15 +299,7 @@ describe('NewsletterSignupForm', () => {
 		const signUpButton = screen.getByRole('button', { name: 'Sign up' });
 		expect(signUpButton).toHaveFocus();
 		await testUser.keyboard('{Enter}');
-
-		await waitFor(() => {
-			expect(screen.getByText("You're signed up!")).toBeInTheDocument();
-			expect(
-				screen.getByText(
-					'You will receive Morning Briefing every day.',
-				),
-			).toBeInTheDocument();
-		});
+		await expectSuccessMessage();
 
 		const params = getRequestBodyParams();
 		expect(params.get('marketing')).toBe('false');
@@ -291,33 +307,17 @@ describe('NewsletterSignupForm', () => {
 
 	it('uses prefilled email for signed-in users and clears cached subscriptions on success', async () => {
 		const testUser = user.setup();
-		(useIsSignedIn as jest.Mock).mockReturnValue(true);
-		(useAuthStatus as jest.Mock).mockReturnValue({
-			kind: 'SignedIn',
-			accessToken: { accessToken: 'token' },
-			idToken: { claims: { email: 'signed.in@example.com' } },
-		});
-		(lazyFetchEmailWithTimeout as jest.Mock).mockReturnValue(() =>
-			Promise.resolve('signed.in@example.com'),
-		);
+		mockSignedInUser();
 
-		renderForm();
+		renderSignupForm();
 
 		await waitFor(() => {
 			expect(
 				screen.getByRole('button', { name: 'Sign up' }),
 			).toBeInTheDocument();
 		});
-		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
-
-		await waitFor(() => {
-			expect(screen.getByText("You're signed up!")).toBeInTheDocument();
-			expect(
-				screen.getByText(
-					'You will receive Morning Briefing every day.',
-				),
-			).toBeInTheDocument();
-		});
+		await submitSignup(testUser);
+		await expectSuccessMessage();
 
 		expect(clearSubscriptionCache).toHaveBeenCalledTimes(1);
 
@@ -331,24 +331,16 @@ describe('NewsletterSignupForm', () => {
 		window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
 			true;
 		(useCountryCode as jest.Mock).mockReturnValue('GB');
-		(useIsSignedIn as jest.Mock).mockReturnValue(true);
-		(useAuthStatus as jest.Mock).mockReturnValue({
-			kind: 'SignedIn',
-			accessToken: { accessToken: 'token' },
-			idToken: { claims: { email: 'signed.in@example.com' } },
-		});
-		(lazyFetchEmailWithTimeout as jest.Mock).mockReturnValue(() =>
-			Promise.resolve('signed.in@example.com'),
-		);
+		mockSignedInUser();
 
-		renderForm();
+		renderSignupForm();
 
 		await waitFor(() => {
 			expect(
 				screen.getByRole('button', { name: 'Sign up' }),
 			).toBeInTheDocument();
 		});
-		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+		await submitSignup(testUser);
 
 		await waitFor(() => {
 			expect(global.fetch).toHaveBeenCalled();
@@ -363,7 +355,7 @@ describe('NewsletterSignupForm', () => {
 	it('shows an inline validation error when submitting with an empty email', async () => {
 		const testUser = user.setup();
 
-		renderForm();
+		renderSignupForm();
 
 		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
 
@@ -376,10 +368,10 @@ describe('NewsletterSignupForm', () => {
 	it('shows an inline validation error when submitting with an invalid email format', async () => {
 		const testUser = user.setup();
 
-		renderForm();
+		renderSignupForm();
 
 		await typeEmailAddress(testUser, 'not-an-email');
-		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+		await submitSignup(testUser);
 
 		expect(
 			screen.getByText('Incorrect email format. Please check.'),
@@ -390,10 +382,10 @@ describe('NewsletterSignupForm', () => {
 	it('clears the validation error as the user corrects their email', async () => {
 		const testUser = user.setup();
 
-		renderForm();
+		renderSignupForm();
 
 		await typeEmailAddress(testUser, 'not-an-email');
-		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+		await submitSignup(testUser);
 
 		expect(
 			screen.getByText('Incorrect email format. Please check.'),
@@ -414,11 +406,11 @@ describe('NewsletterSignupForm', () => {
 		const testUser = user.setup();
 		global.fetch = jest.fn().mockResolvedValue({ ok: false } as Response);
 
-		renderForm(true);
+		renderSignupForm(true);
 
 		expect(screen.queryByText('Privacy Notice:')).not.toBeInTheDocument();
 		await typeEmailAddress(testUser);
-		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+		await submitSignup(testUser);
 
 		await waitFor(() => {
 			expect(screen.getByText(/Sign up failed\./)).toBeInTheDocument();
@@ -443,10 +435,10 @@ describe('NewsletterSignupForm', () => {
 		const testUser = user.setup();
 		mockRecaptcha((_handle, props) => props.onChange?.(null));
 
-		renderForm();
+		renderSignupForm();
 
 		await typeEmailAddress(testUser);
-		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+		await submitSignup(testUser);
 
 		await waitFor(() => {
 			expect(
@@ -475,10 +467,10 @@ describe('NewsletterSignupForm', () => {
 		const testUser = user.setup();
 		mockRecaptcha((_handle, props) => props.onError?.());
 
-		renderForm();
+		renderSignupForm();
 
 		await typeEmailAddress(testUser);
-		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+		await submitSignup(testUser);
 
 		await waitFor(() => {
 			expect(
@@ -512,22 +504,15 @@ describe('NewsletterSignupForm', () => {
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue('US');
 
-			renderForm();
+			renderSignupForm();
 
 			await typeEmailAddress(testUser);
 
 			// Marketing toggle should NOT be present
 			expect(screen.queryByRole('switch')).not.toBeInTheDocument();
 
-			await testUser.click(
-				screen.getByRole('button', { name: 'Sign up' }),
-			);
-
-			await waitFor(() => {
-				expect(
-					screen.getByText("You're signed up!"),
-				).toBeInTheDocument();
-			});
+			await submitSignup(testUser);
+			await expectSuccessMessage();
 
 			const params = getRequestBodyParams();
 			expect(params.get('marketing')).toBe('true');
@@ -545,7 +530,7 @@ describe('NewsletterSignupForm', () => {
 				false;
 			(useCountryCode as jest.Mock).mockReturnValue('US');
 
-			renderForm();
+			renderSignupForm();
 			await typeEmailAddress(testUser);
 
 			expect(screen.getByRole('switch')).toBeInTheDocument();
@@ -555,7 +540,7 @@ describe('NewsletterSignupForm', () => {
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue('GB');
 
-			renderForm();
+			renderSignupForm();
 
 			await typeEmailAddress(testUser);
 
@@ -568,15 +553,8 @@ describe('NewsletterSignupForm', () => {
 			await testUser.click(marketingSwitch);
 			expect(marketingSwitch).toHaveAttribute('aria-checked', 'false');
 
-			await testUser.click(
-				screen.getByRole('button', { name: 'Sign up' }),
-			);
-
-			await waitFor(() => {
-				expect(
-					screen.getByText("You're signed up!"),
-				).toBeInTheDocument();
-			});
+			await submitSignup(testUser);
+			await expectSuccessMessage();
 
 			const params = getRequestBodyParams();
 			expect(params.get('marketing')).toBe('false');
@@ -592,7 +570,7 @@ describe('NewsletterSignupForm', () => {
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue('GB');
 
-			renderForm();
+			renderSignupForm();
 
 			await typeEmailAddress(testUser);
 
@@ -602,15 +580,8 @@ describe('NewsletterSignupForm', () => {
 				'true',
 			);
 
-			await testUser.click(
-				screen.getByRole('button', { name: 'Sign up' }),
-			);
-
-			await waitFor(() => {
-				expect(
-					screen.getByText("You're signed up!"),
-				).toBeInTheDocument();
-			});
+			await submitSignup(testUser);
+			await expectSuccessMessage();
 
 			expect(
 				getTrackedEventValueByDescription('submission-confirmed')
@@ -622,16 +593,14 @@ describe('NewsletterSignupForm', () => {
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue(undefined);
 
-			renderForm();
+			renderSignupForm();
 
 			await typeEmailAddress(testUser);
 
 			// While pending, show toggle as normal
 			expect(screen.getByRole('switch')).toBeInTheDocument();
 
-			await testUser.click(
-				screen.getByRole('button', { name: 'Sign up' }),
-			);
+			await submitSignup(testUser);
 
 			await waitFor(() => {
 				expect(global.fetch).toHaveBeenCalled();

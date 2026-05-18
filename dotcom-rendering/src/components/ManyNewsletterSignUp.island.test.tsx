@@ -10,6 +10,11 @@ import { ConfigProvider } from './ConfigContext';
 import { ManyNewsletterSignUp } from './ManyNewsletterSignUp.island';
 import { BUTTON_ROLE } from './NewsletterCard';
 
+const NEWSLETTER_IDENTITY_NAME = 'morning-briefing';
+const NEWSLETTER_LIST_ID = 1234;
+const TEST_EMAIL = 'reader@example.com';
+const SIGN_UP_BUTTON_NAME = 'Sign up for the newsletter you selected';
+
 jest.mock('../lib/useAuthStatus', () => ({
 	useAuthStatus: jest.fn().mockReturnValue({ kind: 'SignedOut' }),
 	useIsSignedIn: jest.fn(),
@@ -33,7 +38,7 @@ jest.mock('react-google-recaptcha', () => ({
 	default: jest.fn().mockImplementation(() => null),
 }));
 
-const renderComponent = () =>
+const renderSignupForm = () =>
 	render(
 		<ConfigProvider
 			value={{
@@ -50,7 +55,7 @@ const renderComponent = () =>
 /**
  * Adds a fake newsletter toggle button to the document body so that
  * ManyNewsletterSignUp can discover it via its DOM event listeners.
- * Must be added before renderComponent() so the useEffect attaches listeners.
+ * Must be added before renderSignupForm() so the useEffect attaches listeners.
  */
 const addNewsletterButton = (
 	identityName: string,
@@ -62,6 +67,35 @@ const addNewsletterButton = (
 	button.setAttribute('data-list-id', String(listId));
 	document.body.appendChild(button);
 	return button;
+};
+
+const openSignupForm = async (
+	testUser: ReturnType<typeof user.setup>,
+): Promise<void> => {
+	const newsletterButton = addNewsletterButton(
+		NEWSLETTER_IDENTITY_NAME,
+		NEWSLETTER_LIST_ID,
+	);
+	renderSignupForm();
+	await testUser.click(newsletterButton);
+
+	await waitFor(() => {
+		expect(
+			rtlScreen.getByLabelText('Enter your email'),
+		).toBeInTheDocument();
+	});
+};
+
+const submitForm = async (
+	testUser: ReturnType<typeof user.setup>,
+	email = TEST_EMAIL,
+): Promise<void> => {
+	await testUser.type(rtlScreen.getByLabelText('Enter your email'), email);
+	await testUser.click(
+		rtlScreen.getByRole('button', {
+			name: SIGN_UP_BUTTON_NAME,
+		}),
+	);
 };
 
 describe('ManyNewsletterSignUp', () => {
@@ -101,46 +135,19 @@ describe('ManyNewsletterSignUp', () => {
 		it('hides the marketing checkbox and passes marketing=true for US users', async () => {
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue('US');
-
-			// Add button before render so the useEffect attaches the click listener
-			const newsletterButton = addNewsletterButton(
-				'morning-briefing',
-				1234,
-			);
-			renderComponent();
-
-			// Simulate the user selecting a newsletter via the toggle button
-			await testUser.click(newsletterButton);
-
-			// Wait for the form to become visible (count > 0 unhides it)
-			await waitFor(() => {
-				expect(
-					rtlScreen.getByLabelText('Enter your email'),
-				).toBeInTheDocument();
-			});
+			await openSignupForm(testUser);
 
 			// Marketing checkbox should NOT be present for US hide marketing toggle
 			expect(
 				rtlScreen.queryByLabelText(/Get updates about our journalism/),
 			).not.toBeInTheDocument();
 
-			// Type email and submit
-			await testUser.type(
-				rtlScreen.getByLabelText('Enter your email'),
-				'reader@example.com',
-			);
-
-			// Use the specific aria-label the component sets on the sign-up button
-			await testUser.click(
-				rtlScreen.getByRole('button', {
-					name: 'Sign up for the newsletter you selected',
-				}),
-			);
+			await submitForm(testUser);
 
 			await waitFor(() => {
 				expect(requestMultipleSignUps).toHaveBeenCalledWith({
-					emailAddress: 'reader@example.com',
-					newsletterIds: ['morning-briefing'],
+					emailAddress: TEST_EMAIL,
+					newsletterIds: [NEWSLETTER_IDENTITY_NAME],
 					recaptchaToken: '',
 					marketingOptIn: true, // hide marketing toggle forces marketing=true for US
 					marketingOptInHidden: true,
@@ -154,19 +161,7 @@ describe('ManyNewsletterSignUp', () => {
 			window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
 				false;
 			(useCountryCode as jest.Mock).mockReturnValue('US');
-
-			const newsletterButton = addNewsletterButton(
-				'morning-briefing',
-				1234,
-			);
-			renderComponent();
-			await testUser.click(newsletterButton);
-
-			await waitFor(() => {
-				expect(
-					rtlScreen.getByLabelText('Enter your email'),
-				).toBeInTheDocument();
-			});
+			await openSignupForm(testUser);
 
 			expect(
 				rtlScreen.getByLabelText(/Get updates about our journalism/),
@@ -176,20 +171,7 @@ describe('ManyNewsletterSignUp', () => {
 		it('shows the marketing checkbox and respects opt-out for non-US users', async () => {
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue('GB');
-
-			const newsletterButton = addNewsletterButton(
-				'morning-briefing',
-				1234,
-			);
-			renderComponent();
-
-			await testUser.click(newsletterButton);
-
-			await waitFor(() => {
-				expect(
-					rtlScreen.getByLabelText('Enter your email'),
-				).toBeInTheDocument();
-			});
+			await openSignupForm(testUser);
 
 			// Marketing checkbox SHOULD be visible for non-US users
 			const marketingCheckbox = await rtlScreen.findByLabelText(
@@ -202,21 +184,12 @@ describe('ManyNewsletterSignUp', () => {
 			await testUser.click(marketingCheckbox);
 			expect(marketingCheckbox).not.toBeChecked();
 
-			await testUser.type(
-				rtlScreen.getByLabelText('Enter your email'),
-				'reader@example.com',
-			);
-
-			await testUser.click(
-				rtlScreen.getByRole('button', {
-					name: 'Sign up for the newsletter you selected',
-				}),
-			);
+			await submitForm(testUser);
 
 			await waitFor(() => {
 				expect(requestMultipleSignUps).toHaveBeenCalledWith({
-					emailAddress: 'reader@example.com',
-					newsletterIds: ['morning-briefing'],
+					emailAddress: TEST_EMAIL,
+					newsletterIds: [NEWSLETTER_IDENTITY_NAME],
 					recaptchaToken: '',
 					marketingOptIn: false, // user opted out
 					marketingOptInHidden: undefined,
@@ -228,29 +201,8 @@ describe('ManyNewsletterSignUp', () => {
 		it('sends similar-guardian-products-hidden-optin-us tracking for US users', async () => {
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue('US');
-
-			const newsletterButton = addNewsletterButton(
-				'morning-briefing',
-				1234,
-			);
-			renderComponent();
-			await testUser.click(newsletterButton);
-
-			await waitFor(() => {
-				expect(
-					rtlScreen.getByLabelText('Enter your email'),
-				).toBeInTheDocument();
-			});
-
-			await testUser.type(
-				rtlScreen.getByLabelText('Enter your email'),
-				'reader@example.com',
-			);
-			await testUser.click(
-				rtlScreen.getByRole('button', {
-					name: 'Sign up for the newsletter you selected',
-				}),
-			);
+			await openSignupForm(testUser);
+			await submitForm(testUser);
 
 			await waitFor(() => {
 				expect(reportTrackingEvent).toHaveBeenCalledWith(
@@ -268,29 +220,8 @@ describe('ManyNewsletterSignUp', () => {
 		it('sends similar-guardian-products-optin tracking for non-US users who leave the toggle on', async () => {
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue('GB');
-
-			const newsletterButton = addNewsletterButton(
-				'morning-briefing',
-				1234,
-			);
-			renderComponent();
-			await testUser.click(newsletterButton);
-
-			await waitFor(() => {
-				expect(
-					rtlScreen.getByLabelText('Enter your email'),
-				).toBeInTheDocument();
-			});
-
-			await testUser.type(
-				rtlScreen.getByLabelText('Enter your email'),
-				'reader@example.com',
-			);
-			await testUser.click(
-				rtlScreen.getByRole('button', {
-					name: 'Sign up for the newsletter you selected',
-				}),
-			);
+			await openSignupForm(testUser);
+			await submitForm(testUser);
 
 			await waitFor(() => {
 				expect(reportTrackingEvent).toHaveBeenCalledWith(
@@ -308,33 +239,13 @@ describe('ManyNewsletterSignUp', () => {
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue('GB');
 			(useIsSignedIn as jest.Mock).mockReturnValue(true);
-
-			const newsletterButton = addNewsletterButton(
-				'morning-briefing',
-				1234,
-			);
-			renderComponent();
-			await testUser.click(newsletterButton);
-
-			await waitFor(() => {
-				expect(
-					rtlScreen.getByLabelText('Enter your email'),
-				).toBeInTheDocument();
-			});
+			await openSignupForm(testUser);
 
 			expect(
 				rtlScreen.queryByLabelText(/Get updates about our journalism/),
 			).not.toBeInTheDocument();
 
-			await testUser.type(
-				rtlScreen.getByLabelText('Enter your email'),
-				'reader@example.com',
-			);
-			await testUser.click(
-				rtlScreen.getByRole('button', {
-					name: 'Sign up for the newsletter you selected',
-				}),
-			);
+			await submitForm(testUser);
 
 			await waitFor(() => {
 				expect(requestMultipleSignUps).toHaveBeenCalledWith(
