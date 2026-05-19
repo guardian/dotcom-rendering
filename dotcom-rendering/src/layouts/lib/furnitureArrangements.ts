@@ -8,7 +8,7 @@ export type Area =
 	| 'title'
 	| 'headline'
 	| 'standfirst'
-	| 'main-media'
+	| 'media'
 	| 'meta'
 	| 'body'
 	| 'right-column';
@@ -24,7 +24,7 @@ const breakpointQueries: Record<Breakpoint, string> = {
 
 // Raw CSS overrides per area per breakpoint. Entries are only needed when an area
 // deviates from the default: centre column, single-column mobile layout with areas
-// in DOM order (main-media → title → headline → standfirst → meta → body → right-column).
+// in DOM order (media → title → headline → standfirst → meta → body → right-column).
 
 type AreaCss = Partial<Record<Breakpoint, string>>;
 type LayoutCssMap = Partial<Record<Area, AreaCss>>;
@@ -43,7 +43,7 @@ const standardCss: LayoutCssMap = {
 		tablet: 'grid-row: 3;',
 		leftCol: 'grid-row: 2;',
 	},
-	'main-media': {
+	media: {
 		tablet: 'grid-row: 4;',
 		leftCol: 'grid-row: 3;',
 	},
