@@ -77,6 +77,19 @@ export const convertFEMediaAssetsToVideoAssets = (
 	}));
 
 /**
+ * Clamps an aspect ratio value to 3 decimal places.
+ *
+ * This helps avoid floating point precision issues and ensures
+ * consistent aspect ratio values for rendering and comparisons.
+ *
+ * @param aspectRatio - The raw aspect ratio value to clamp.
+ * @returns The aspect ratio rounded to 3 decimal places.
+ * */
+export const clampAspectRatio = (aspectRatio: number): number => {
+	return Number(aspectRatio.toFixed(3));
+};
+
+/**
  * Aspect ratio is needed for self-hosted video so that the browser knows how much
  * space the video will take up: width and height are unknown when the page first
  * renders, as there can be multiple sources available with different dimensions.
@@ -95,7 +108,7 @@ export const getAspectRatioFromSources = (sources: Source[]): number => {
 			width > 0 &&
 			height > 0
 		) {
-			return width / height;
+			return clampAspectRatio(width / height);
 		}
 	}
 
@@ -103,7 +116,7 @@ export const getAspectRatioFromSources = (sources: Source[]): number => {
 		return DEFAULT_ASPECT_RATIO;
 	}
 
-	return firstSource.width / firstSource.height;
+	return clampAspectRatio(firstSource.width / firstSource.height);
 };
 
 export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>

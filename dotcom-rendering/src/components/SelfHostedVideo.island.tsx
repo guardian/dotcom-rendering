@@ -18,6 +18,7 @@ import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
+	clampAspectRatio,
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 	findOptimisedSourcePerMimeType,
@@ -437,12 +438,12 @@ export const SelfHostedVideo = ({
 	}
 
 	/** The aspect ratio of the video will be clamped within the specified range */
-	const aspectRatioOfVisibleVideo = Number(
+	const aspectRatioOfVisibleVideo = clampAspectRatio(
 		getAspectRatioOfVisibleVideo(
 			aspectRatio,
 			minAspectRatio,
 			maxAspectRatio,
-		).toFixed(3),
+		),
 	);
 
 	const isVideoCroppedAtTopBottom = aspectRatio < aspectRatioOfVisibleVideo;
