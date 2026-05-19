@@ -76,17 +76,27 @@ const cardStyles = (
 `;
 
 /**
- * Prevent the video from being greater in height than the viewport height,
- * which can cause issues in article when the video is allowed to grow to an unlimited size.
- * The width will adjust accordingly to maintain the aspect ratio.
+ * Constrain the video height so it never becomes excessively tall relative
+ * to the viewport, which can happen for portrait or narrow aspect-ratio videos
+ * rendered inside article layouts.
+ *
+ * The video height is capped to the smaller of:
+ * - the provided pixel height
+ * - 70% of the small viewport height (`70svh`)
+ *
+ * The width is then derived from the constrained height, so the visible video
+ * maintains its aspect ratio without distortion.
  */
 
 const maxHeightStyles = (
 	height: number,
 	aspectRatioOfVisibleVideo: number,
 ) => css`
-	max-height: ${height}px;
-	width: min(100%, calc(${height}px * ${aspectRatioOfVisibleVideo}));
+	max-height: min(${height}px, 70svh);
+	width: min(
+		100%,
+		calc(min(${height}px, 70svh) * ${aspectRatioOfVisibleVideo})
+	);
 `;
 const videoContainerStyles = (
 	aspectRatio: number,
