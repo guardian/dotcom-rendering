@@ -213,7 +213,6 @@ export interface ContentAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ContentAtomBlockElement';
 	elementId: string;
 	atomId: string;
-	caption?: string;
 }
 
 interface DisclaimerBlockElement {
@@ -474,6 +473,7 @@ export interface MediaAtomBlockElement {
 	duration?: number;
 	videoPlayerFormat?: VideoPlayerFormat;
 	role?: RoleType;
+	caption?: string;
 }
 
 export interface MultiImageBlockElement {

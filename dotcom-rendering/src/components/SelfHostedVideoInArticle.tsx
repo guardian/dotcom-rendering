@@ -16,6 +16,7 @@ type SelfHostedVideoInArticleProps = {
 	isMainMedia: boolean;
 	videoStyle: VideoPlayerFormat;
 	role?: RoleType;
+	caption?: string;
 };
 
 export const SelfHostedVideoInArticle = ({
@@ -24,12 +25,9 @@ export const SelfHostedVideoInArticle = ({
 	isMainMedia,
 	videoStyle,
 	role = 'inline',
+	caption,
 }: SelfHostedVideoInArticleProps) => {
 	const posterImageUrl = element.posterImage?.[0]?.url;
-
-	// DEV NOTE: this is where we need to do work to determine whether the `caption` attribute text gets to override the `title` attribute text
-	const caption = element.title;
-
 	const sources = extractValidSourcesFromAssets(element.assets);
 	const aspectRatio = getAspectRatioFromSources(sources);
 	const firstVideoSource = sources[0];

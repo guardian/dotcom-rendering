@@ -512,6 +512,7 @@ export const renderElement = ({
 						isMainMedia={isMainMedia}
 						videoStyle={element.videoPlayerFormat}
 						role={element.role}
+						caption={element.caption ?? element.title}
 					/>
 				);
 			} else {
@@ -523,7 +524,7 @@ export const renderElement = ({
 						format={format}
 						assets={element.assets}
 						poster={element.posterImage?.[0]?.url}
-						caption={element.title}
+						caption={element.caption ?? element.title}
 						isMainMedia={isMainMedia}
 					/>
 				);
