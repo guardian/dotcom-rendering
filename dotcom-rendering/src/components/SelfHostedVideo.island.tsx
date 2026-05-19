@@ -75,6 +75,19 @@ const cardStyles = (
 	}
 `;
 
+/**
+ * Prevent the video from being greater in height than the viewport height,
+ * which can cause issues in article when the video is allowed to grow to an unlimited size.
+ * The width will adjust accordingly to maintain the aspect ratio.
+ */
+
+const maxHeightStyles = (
+	height: number,
+	aspectRatioOfVisibleVideo: number,
+) => css`
+	max-height: ${height}px;
+	width: min(100%, calc(${height}px * ${aspectRatioOfVisibleVideo}));
+`;
 const videoContainerStyles = (
 	aspectRatio: number,
 	aspectRatioOfVisibleVideo: number,
@@ -341,6 +354,7 @@ type Props = {
 	format?: ArticleFormat;
 	isMainMedia?: boolean;
 	role?: RoleType;
+	maxHeight?: number;
 };
 
 export const SelfHostedVideo = ({
@@ -369,6 +383,7 @@ export const SelfHostedVideo = ({
 	isMainMedia,
 	role,
 	posterImageAspectRatio,
+	maxHeight,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -1010,6 +1025,8 @@ export const SelfHostedVideo = ({
 						containerAspectRatioMobile,
 						containerAspectRatioDesktop,
 					),
+					!isUndefined(maxHeight) &&
+						maxHeightStyles(maxHeight, aspectRatioOfVisibleVideo),
 				]}
 			>
 				<div
