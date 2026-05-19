@@ -43,6 +43,9 @@ import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import type { VideoEventKey } from './YoutubeAtom/YoutubeAtom';
 
+/**
+ * The fraction of the video required to be visible in the viewport to be considered "in view".
+ */
 const VISIBILITY_THRESHOLD = 0.5;
 
 const cardStyles = (
@@ -874,15 +877,7 @@ export const SelfHostedVideo = ({
 		playPauseVideo();
 	};
 
-	const handleAudioClick = (event: React.SyntheticEvent) => {
-		if (!videoStyleSettings.isInteractive) {
-			return;
-		}
-
-		void submitClickComponentEvent(event.currentTarget, renderingTarget);
-
-		event.stopPropagation(); // Don't pause the video
-
+	const toggleAudio = () => {
 		if (isMuted) {
 			// Emit video play audio event so other components are aware when a video is played with sound
 			dispatchCustomPlayAudioEvent(uniqueId);
@@ -892,10 +887,24 @@ export const SelfHostedVideo = ({
 		}
 	};
 
-	const handleFullscreenClick = (event: React.SyntheticEvent) => {
+	const handleAudioClick = (event: React.SyntheticEvent) => {
+		if (!videoStyleSettings.isInteractive) {
+			return;
+		}
+
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 		event.stopPropagation(); // Don't pause the video
 
+		toggleAudio();
+	};
+
+	const handleAudioKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+		if (event.key === 'Enter' || event.key === ' ') {
+			toggleAudio();
+		}
+	};
+
+	const toggleFullscreen = () => {
 		const video = vidRef.current;
 		if (!video) {
 			return;
@@ -927,6 +936,21 @@ export const SelfHostedVideo = ({
 			void document.exitFullscreen();
 		} else if (playerContainerRef.current) {
 			void playerContainerRef.current.requestFullscreen();
+		}
+	};
+
+	const handleFullscreenClick = (event: React.SyntheticEvent) => {
+		void submitClickComponentEvent(event.currentTarget, renderingTarget);
+		event.stopPropagation(); // Don't pause the video
+
+		toggleFullscreen();
+	};
+
+	const handleFullscreenKeyDown = (
+		event: React.KeyboardEvent<HTMLElement>,
+	) => {
+		if (event.key === 'Enter' || event.key === ' ') {
+			toggleFullscreen();
 		}
 	};
 
@@ -1111,18 +1135,20 @@ export const SelfHostedVideo = ({
 						handlePlaying={handlePlaying}
 						handlePlayPauseClick={handlePlayPauseClick}
 						handleAudioClick={handleAudioClick}
+						handleAudioKeyDown={handleAudioKeyDown}
 						handleTimeUpdate={handleTimeUpdate}
 						handleKeyDown={handleKeyDown}
-						useLongFormProgressBar={
-							!!videoStyleSettings.useInteractiveProgressBar
-						}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
+						handleFullscreenKeyDown={handleFullscreenKeyDown}
 						updateCurrentTime={updateCurrentTime}
 						onError={onError}
 						preloadPartialData={!!shouldAutoplay}
 						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
+						useLongFormProgressBar={
+							!!videoStyleSettings.useInteractiveProgressBar
+						}
 						showSubtitles={videoStyleSettings.canShowSubtitles}
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}

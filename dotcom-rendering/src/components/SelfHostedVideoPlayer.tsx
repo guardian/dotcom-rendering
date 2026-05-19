@@ -119,10 +119,12 @@ export type Props = {
 	handlePlaying: (event: SyntheticEvent) => void;
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
 	handleAudioClick: (event: SyntheticEvent) => void;
+	handleAudioKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
 	handleTimeUpdate: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	handlePause: (event: SyntheticEvent) => void;
-	handleFullscreenClick?: (event: SyntheticEvent) => void;
+	handleFullscreenClick: (event: SyntheticEvent) => void;
+	handleFullscreenKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
 	updateCurrentTime: (time: number) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	posterImage?: string;
@@ -173,10 +175,12 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handlePlaying,
 			handlePlayPauseClick,
 			handleAudioClick,
+			handleAudioKeyDown,
 			handleKeyDown,
 			handleTimeUpdate,
 			handlePause,
 			handleFullscreenClick,
+			handleFullscreenKeyDown,
 			updateCurrentTime,
 			onError,
 			preloadPartialData,
@@ -275,6 +279,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 							type={showPlayPauseIcon}
 							atomId={atomId}
 							handleClick={handlePlayPauseClick}
+							handleKeyDown={handleKeyDown}
 						/>
 					)}
 					{showProgressBar &&
@@ -282,8 +287,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 							<VideoProgressBarInteractive
 								videoId={videoId}
 								currentTime={currentTime}
-								updateCurrentTime={updateCurrentTime}
 								duration={ref.current!.duration}
+								updateCurrentTime={updateCurrentTime}
 								handleKeyDown={handleKeyDown}
 							/>
 						) : (
@@ -307,14 +312,16 @@ export const SelfHostedVideoPlayer = forwardRef(
 						>
 							{showFullscreenIcon && (
 								<FullscreenIcon
-									handleClick={handleFullscreenClick}
 									atomId={atomId}
+									handleClick={handleFullscreenClick}
+									handleKeyDown={handleFullscreenKeyDown}
 								/>
 							)}
 							{hasAudio && (
 								<AudioIconComponent
-									handleClick={handleAudioClick}
 									isMuted={isMuted}
+									handleClick={handleAudioClick}
+									handleKeyDown={handleAudioKeyDown}
 								/>
 							)}
 						</div>

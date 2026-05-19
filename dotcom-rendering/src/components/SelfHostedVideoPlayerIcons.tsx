@@ -31,15 +31,21 @@ const iconContainerStyles = css`
 type AudioIconProps = {
 	isMuted: SelfHostedVideoPlayerProps['isMuted'];
 	handleClick: SelfHostedVideoPlayerProps['handleAudioClick'];
+	handleKeyDown: SelfHostedVideoPlayerProps['handleAudioKeyDown'];
 };
 
-export const AudioIcon = ({ isMuted, handleClick }: AudioIconProps) => {
+export const AudioIcon = ({
+	isMuted,
+	handleClick,
+	handleKeyDown,
+}: AudioIconProps) => {
 	const IconComponent = isMuted ? SvgAudioMute : SvgAudio;
 
 	return (
 		<button
 			type="button"
 			onClick={handleClick}
+			onKeyDown={handleKeyDown}
 			css={[buttonStyles, iconContainerStyles]}
 			data-testid={`${isMuted ? 'unmute' : 'mute'}-icon`}
 		>
@@ -56,15 +62,18 @@ export const AudioIcon = ({ isMuted, handleClick }: AudioIconProps) => {
 type FullscreenIconProps = {
 	atomId: SelfHostedVideoPlayerProps['atomId'];
 	handleClick: SelfHostedVideoPlayerProps['handleFullscreenClick'];
+	handleKeyDown: SelfHostedVideoPlayerProps['handleFullscreenKeyDown'];
 };
 
 export const FullscreenIcon = ({
 	atomId,
 	handleClick,
+	handleKeyDown,
 }: FullscreenIconProps) => (
 	<button
 		type="button"
 		onClick={handleClick}
+		onKeyDown={handleKeyDown}
 		css={[buttonStyles, iconContainerStyles]}
 		data-link-name={`gu-video-loop-fullscreen-${atomId}`}
 		data-testid="fullscreen-icon"
@@ -95,12 +104,14 @@ type PlayPauseIconProps = {
 	type: 'play' | 'pause';
 	atomId: SelfHostedVideoPlayerProps['atomId'];
 	handleClick: SelfHostedVideoPlayerProps['handlePlayPauseClick'];
+	handleKeyDown: SelfHostedVideoPlayerProps['handleKeyDown'];
 };
 
 export const PlayPauseIcon = ({
 	type,
 	atomId,
 	handleClick,
+	handleKeyDown,
 }: PlayPauseIconProps) => {
 	const IconComponent =
 		type === 'play' ? SvgMediaControlsPlay : SvgMediaControlsPause;
@@ -109,6 +120,7 @@ export const PlayPauseIcon = ({
 		<button
 			type="button"
 			onClick={handleClick}
+			onKeyDown={handleKeyDown}
 			css={[buttonStyles, playPauseButtonStyles]}
 			data-link-name={`gu-video-loop-${type}-${atomId}`}
 			data-testid={`${type}-icon`}
