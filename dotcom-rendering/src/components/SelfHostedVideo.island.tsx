@@ -22,6 +22,7 @@ import {
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 	findOptimisedSourcePerMimeType,
+	getVideoFormat,
 	roundAspectRatio,
 } from '../lib/video';
 import type { VideoStyleSettings } from '../lib/videoStyleSettings';
@@ -206,12 +207,12 @@ const hideTransitionStyles = css`
 
 const hideControlsStyles = css`
 	.controls-container {
-		${hideTransitionStyles}
+		${hideTransitionStyles};
 		transition-delay: ${CONTROLS_FADE_DELAY}ms;
 	}
 
 	.play-pause-icon {
-		${hideTransitionStyles}
+		${hideTransitionStyles};
 		transition-delay: ${PLAY_BUTTON_FADE_DELAY}ms;
 	}
 
@@ -690,10 +691,13 @@ export const SelfHostedVideo = ({
 		}
 
 		const screenWidth = window.innerWidth;
+		const vidFormat = getVideoFormat();
+		console.log(vidFormat);
 		const filteredSources = findOptimisedSourcePerMimeType(
 			sources,
 			screenWidth,
-		);
+		).filter((source) => source.mimeType === vidFormat);
+
 		setOptimisedSources(filteredSources);
 
 		/**
