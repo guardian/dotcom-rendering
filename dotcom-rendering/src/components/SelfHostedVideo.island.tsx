@@ -33,6 +33,7 @@ import type { VideoPlayerFormat } from '../types/mainMedia';
 import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
+import { SelfHostedVideoDebugOverlay } from './SelfHostedVideoDebugOverlay';
 import type {
 	ControlsPosition,
 	PLAYER_STATES,
@@ -1298,6 +1299,10 @@ export const SelfHostedVideo = ({
 						isLoopClickThroughTestVariant={
 							isLoopClickThroughTestVariant
 						}
+					/>
+					<SelfHostedVideoDebugOverlay
+						videoRef={vidRef}
+						atomId={atomId}
 					/>
 				</div>
 			</div>
