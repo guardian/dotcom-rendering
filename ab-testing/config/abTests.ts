@@ -102,9 +102,8 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-07-01",
 		type: "client",
 		status: "ON",
-		// Intentionally 0% — will be ramped up incrementally
-		audienceSize: 0 / 100,
-		audienceSpace: "C",
+		audienceSize: 25 / 100,
+		audienceSpace: "B",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
