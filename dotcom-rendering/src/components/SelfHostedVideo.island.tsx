@@ -21,6 +21,7 @@ import {
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 	findOptimisedSourcePerMimeType,
+	roundAspectRatio,
 } from '../lib/video';
 import type { VideoStyleSettings } from '../lib/videoStyleSettings';
 import { videoSettingsMap } from '../lib/videoStyleSettings';
@@ -74,6 +75,18 @@ const cardStyles = (
 	}
 `;
 
+/**
+ * Constrain the video height so it never becomes excessively tall relative
+ * to the viewport, which can happen for portrait or narrow aspect-ratio videos
+ * rendered inside article layouts.
+ *
+ * The video height is capped to 80% of the small viewport height (`80svh`) on tablet and above.
+ */
+const maxHeightStyles = css`
+	${from.tablet} {
+		max-height: 80svh;
+	}
+`;
 const videoContainerStyles = (
 	aspectRatio: number,
 	aspectRatioOfVisibleVideo: number,
@@ -372,6 +385,7 @@ type Props = {
 	format?: ArticleFormat;
 	isMainMedia?: boolean;
 	role?: RoleType;
+	maxHeightDesktop?: number;
 };
 
 export const SelfHostedVideo = ({
@@ -400,6 +414,7 @@ export const SelfHostedVideo = ({
 	isMainMedia,
 	role,
 	posterImageAspectRatio,
+	maxHeightDesktop,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -470,12 +485,12 @@ export const SelfHostedVideo = ({
 	}
 
 	/** The aspect ratio of the video will be clamped within the specified range */
-	const aspectRatioOfVisibleVideo = Number(
+	const aspectRatioOfVisibleVideo = roundAspectRatio(
 		getAspectRatioOfVisibleVideo(
 			aspectRatio,
 			minAspectRatio,
 			maxAspectRatio,
-		).toFixed(3),
+		),
 	);
 
 	const isVideoCroppedAtTopBottom = aspectRatio < aspectRatioOfVisibleVideo;
@@ -1128,6 +1143,7 @@ export const SelfHostedVideo = ({
 						containerAspectRatioMobile,
 						containerAspectRatioDesktop,
 					),
+					!isUndefined(maxHeightDesktop) && maxHeightStyles,
 				]}
 			>
 				<div

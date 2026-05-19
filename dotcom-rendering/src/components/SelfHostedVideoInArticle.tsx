@@ -60,6 +60,7 @@ export const SelfHostedVideoInArticle = ({
 				format={format}
 				isMainMedia={isMainMedia}
 				role={role}
+				maxHeightDesktop={firstVideoSource?.height}
 			/>
 		</Island>
 	);

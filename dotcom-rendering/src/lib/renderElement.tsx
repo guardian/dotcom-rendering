@@ -503,10 +503,7 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			if (
-				element.videoPlayerFormat &&
-				['Loop', 'Cinemagraph'].includes(element.videoPlayerFormat)
-			) {
+			if (element.videoPlayerFormat) {
 				return (
 					<SelfHostedVideoInArticle
 						element={element}
