@@ -287,8 +287,6 @@ export interface GuVideoBlockElement {
 	_type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
 	elementId: string;
 	assets: VideoAssets[];
-	// DEV NOTE: the `caption` field appears in the VideoAssets object, and again here - Q: are they the same data?
-	// - `model/block-schema.json` marks this `caption` attribute as required, but the VideoAssets version is optional
 	caption: string;
 	html: string;
 	source: string;
@@ -467,8 +465,6 @@ export interface MediaAtomBlockElement {
 		url: string;
 		width: number;
 	}[];
-	// DEV NOTE: the `caption` field appears in the VideoAssets object. MediaAtomBlockElement also supplies a `title` attribute, which possibly comes from MAM?
-	// - `model/block-schema.json` marks this `title` attribute as optional; the VideoAssets `caption` attribute is also optional
 	title?: string;
 	duration?: number;
 	videoPlayerFormat?: VideoPlayerFormat;
@@ -708,7 +704,6 @@ export interface VideoFacebookBlockElement extends ThirdPartyEmbeddedContent {
 	url: string;
 	height: number;
 	width: number;
-	// DEV NOTE - ignoring this for now, think FaceBook is legacy only
 	caption?: string;
 	embedUrl?: string;
 	role?: RoleType;
@@ -721,7 +716,6 @@ export interface VideoVimeoBlockElement extends ThirdPartyEmbeddedContent {
 	url: string;
 	height: number;
 	width: number;
-	// DEV NOTE - ignoring this for now, think Vimeo is legacy only - interesting that it comes with both `title`, `caption` and `credit` attributes!
 	caption?: string;
 	credit?: string;
 	title?: string;
@@ -737,7 +731,6 @@ export interface VideoYoutubeBlockElement extends ThirdPartyEmbeddedContent {
 	originalUrl: string;
 	height: number;
 	width: number;
-	// DEV NOTE - ignoring this for now - given we also have a YoutubeBlockElement, which is the preferred method for embedding YT videos in articles? - interesting that it comes with both `title`, `caption` and `credit` attributes!
 	caption?: string;
 	credit?: string;
 	title?: string;
@@ -747,7 +740,6 @@ export interface VideoYoutubeBlockElement extends ThirdPartyEmbeddedContent {
 export interface YoutubeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
 	assetId: string;
-	// DEV NOTE - the element comes with `mediaTitle` (?) and `altText` attributes - pretty sure altText is for the poster image
 	mediaTitle: string;
 	id: string;
 	elementId: string;
@@ -797,7 +789,6 @@ interface WitnessTypeDataVideo extends WitnessTypeDataBase {
 	youtubeSource: string;
 	youtubeAuthorName: string;
 	height: number;
-	// DEV NOTE - ignoring for now, as I think "witness" is deep legacy stuff. Includes `youtubeDescription` and `youtubeTitle` attributes
 	youtubeTitle: string;
 }
 
@@ -1009,7 +1000,6 @@ export interface VideoAssets {
 		embeddable?: string;
 		height?: string;
 		width?: string;
-		// DEV NOTE: the `caption` field appears in the VideoAssets object
 		caption?: string;
 	};
 	hasAudio?: boolean;
