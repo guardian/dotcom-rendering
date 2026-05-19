@@ -13,6 +13,7 @@ import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
 import { RenderArticleElement } from './renderElement';
 import { withSignInGateSlot } from './withSignInGateSlot';
+import { interactiveLayoutSwitchoverDate } from '../layouts/DecideLayout';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -208,7 +209,8 @@ export const ArticleRenderer = ({
 
 				// Note, this class MUST be on the *direct parent* of the
 				// elements for some legacy interactive styling to work.
-				format.design === ArticleDesign.Interactive
+				format.design === ArticleDesign.Interactive &&
+				interactiveLayoutSwitchoverDate > new Date()
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}

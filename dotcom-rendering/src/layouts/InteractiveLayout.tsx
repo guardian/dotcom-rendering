@@ -25,7 +25,6 @@ import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';
 import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.island';
-import { InteractivesScrollbarWidth } from '../components/InteractivesScrollbarWidth.island';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { ListenToArticle } from '../components/ListenToArticle.island';
@@ -54,7 +53,6 @@ import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
-import type { RoleType } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import {
 	type Area,
@@ -140,23 +138,8 @@ export const InteractiveLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const includesFullWidthElement = article.blocks.some((block) =>
-		block.elements.some((element) => {
-			const role =
-				'role' in element
-					? (element.role as RoleType | 'fullWidth' | undefined)
-					: undefined;
-			return role === 'fullWidth';
-		}),
-	);
-
 	return (
 		<>
-			{includesFullWidthElement && (
-				<Island priority="critical">
-					<InteractivesScrollbarWidth />
-				</Island>
-			)}
 			{isApps && (
 				<>
 					<Island priority="critical">
@@ -240,7 +223,7 @@ export const InteractiveLayout = (props: WebProps | AppProps) => {
 						}),
 					]}
 				>
-					<GridItem area="main-media" layoutType="standard">
+					<GridItem area="media" layoutType="standard">
 						<MainMedia
 							format={format}
 							elements={article.mainMediaElements}
