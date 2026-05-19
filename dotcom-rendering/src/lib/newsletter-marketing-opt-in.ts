@@ -1,5 +1,5 @@
 export type EffectiveMarketingOptInParams = {
-	/** `true` when the US soft opt-in switch is on and country is US */
+	/** `true` when the marketing toggle should be shown; `false` for US soft opt-in / hidden toggle */
 	showMarketingToggle: boolean;
 	isSignedIn: boolean | 'Pending';
 	marketingOptIn: boolean | undefined;

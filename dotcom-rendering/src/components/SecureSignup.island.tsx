@@ -255,7 +255,9 @@ export const SecureSignup = ({
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey] = useState<string | undefined>(
-		window.guardian.config.page.googleRecaptchaSiteKey,
+		typeof window !== 'undefined'
+			? window.guardian.config.page.googleRecaptchaSiteKey
+			: undefined,
 	);
 	const [userEmail, setUserEmail] = useState<string>();
 	const [hideEmailInput, setHideEmailInput] = useState(false);
