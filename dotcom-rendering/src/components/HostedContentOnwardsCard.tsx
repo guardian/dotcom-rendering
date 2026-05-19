@@ -17,11 +17,6 @@ const imageStyles = css`
 	width: 120px;
 `;
 
-const imageWrapperStyles = css`
-	position: relative;
-	order: 1;
-`;
-
 const mediaOverlayContainerStyles = css`
 	position: absolute;
 	top: 0;
@@ -50,6 +45,7 @@ const hoverStyles = css`
 
 const linkStyles = css`
 	display: flex;
+	flex-direction: row-reverse;
 	justify-content: flex-start;
 	align-items: flex-start;
 	text-decoration: none;
@@ -62,19 +58,18 @@ const linkStyles = css`
 const headingStyles = css`
 	${textSansBold15}
 	color: ${palette('--card-headline')};
-	order: 2;
 `;
 
 const CardPicture = ({ image, alt }: CardPictureProps) => {
 	return (
-		<div css={imageWrapperStyles}>
+		<>
 			<picture>
 				<img alt={alt} src={image} css={imageStyles} />
 			</picture>
 			<div css={mediaOverlayContainerStyles}>
 				<div className="media-overlay" />
 			</div>
-		</div>
+		</>
 	);
 };
 
@@ -85,7 +80,7 @@ export const HostedContentOnwardsCard = ({ trail }: Props) => {
 			{!!trail.image && (
 				<CardPicture
 					image={trail.image.src}
-					alt={trail.image.altText || trail.headline}
+					alt={trail.image.altText || ''}
 				/>
 			)}
 		</a>
