@@ -296,9 +296,9 @@ const Crest = ({ teamId }: { teamId: string }) => (
 			align-items: center;
 			justify-content: center;
 			flex-shrink: 0;
-			width: ${space[6]}px;
-			height: ${space[6]}px;
-			padding: 2px;
+			width: ${space[5]}px;
+			height: ${space[5]}px;
+			padding: ${space[1]}px;
 			border-radius: 100%;
 			background-color: ${neutral[100]};
 		`}
