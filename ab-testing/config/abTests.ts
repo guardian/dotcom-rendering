@@ -126,7 +126,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module.",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-05-21",
+		expirationDate: "2026-06-18",
 		type: "client",
 		status: "ON",
 		audienceSize: 0 / 100,
