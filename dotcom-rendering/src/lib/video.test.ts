@@ -9,6 +9,7 @@ import {
 	findOptimisedSourcePerMimeType,
 	formatTimeForDisplay,
 	getAspectRatioFromSources,
+	roundAspectRatio,
 } from './video';
 
 const mp4Asset480w: VideoAssets = {
@@ -355,6 +356,21 @@ describe('video', () => {
 			({ timeInSeconds, expectedFormattedTime }) => {
 				expect(formatTimeForDisplay(timeInSeconds)).toEqual(
 					expectedFormattedTime,
+				);
+			},
+		);
+	});
+	describe('roundAspectRatio', () => {
+		it.each([
+			{ aspectRatio: 0.56938445, expectedRoundedAspectRatio: 0.569 },
+			{ aspectRatio: 1.277777, expectedRoundedAspectRatio: 1.278 },
+			{ aspectRatio: 1.25, expectedRoundedAspectRatio: 1.25 },
+			{ aspectRatio: 0.8, expectedRoundedAspectRatio: 0.8 },
+		])(
+			'should return the correct aspect ratio rounded to 3 decimal places',
+			({ aspectRatio, expectedRoundedAspectRatio }) => {
+				expect(roundAspectRatio(aspectRatio)).toEqual(
+					expectedRoundedAspectRatio,
 				);
 			},
 		);
