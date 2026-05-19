@@ -77,15 +77,15 @@ export const convertFEMediaAssetsToVideoAssets = (
 	}));
 
 /**
- * Clamps an aspect ratio value to 3 decimal places.
+ * Round an aspect ratio value to 3 decimal places.
  *
  * This helps avoid floating point precision issues and ensures
  * consistent aspect ratio values for rendering and comparisons.
  *
- * @param aspectRatio - The raw aspect ratio value to clamp.
+ * @param aspectRatio - The raw aspect ratio value to round up.
  * @returns The aspect ratio rounded to 3 decimal places.
  * */
-export const clampAspectRatio = (aspectRatio: number): number => {
+export const roundAspectRatio = (aspectRatio: number): number => {
 	return Number(aspectRatio.toFixed(3));
 };
 
@@ -108,7 +108,7 @@ export const getAspectRatioFromSources = (sources: Source[]): number => {
 			width > 0 &&
 			height > 0
 		) {
-			return clampAspectRatio(width / height);
+			return roundAspectRatio(width / height);
 		}
 	}
 
@@ -116,7 +116,7 @@ export const getAspectRatioFromSources = (sources: Source[]): number => {
 		return DEFAULT_ASPECT_RATIO;
 	}
 
-	return clampAspectRatio(firstSource.width / firstSource.height);
+	return roundAspectRatio(firstSource.width / firstSource.height);
 };
 
 export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>

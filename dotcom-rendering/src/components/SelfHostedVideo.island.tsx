@@ -18,10 +18,10 @@ import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
-	clampAspectRatio,
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 	findOptimisedSourcePerMimeType,
+	roundAspectRatio,
 } from '../lib/video';
 import type { VideoStyleSettings } from '../lib/videoStyleSettings';
 import { videoSettingsMap } from '../lib/videoStyleSettings';
@@ -463,7 +463,7 @@ export const SelfHostedVideo = ({
 	}
 
 	/** The aspect ratio of the video will be clamped within the specified range */
-	const aspectRatioOfVisibleVideo = clampAspectRatio(
+	const aspectRatioOfVisibleVideo = roundAspectRatio(
 		getAspectRatioOfVisibleVideo(
 			aspectRatio,
 			minAspectRatio,
