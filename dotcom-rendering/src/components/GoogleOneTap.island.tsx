@@ -123,7 +123,38 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 	}
 };
 
-const ENABLED_COUNTRIES: CountryCode[] = ['IE', 'NZ', 'AU'];
+const ENABLED_COUNTRIES: CountryCode[] = [
+	'NZ', // New Zealand
+	'AU', // Australia
+	// EU27 Countries
+	'AT', // Austria
+	'BE', // Belgium
+	'BG', // Bulgaria
+	'CY', // Cyprus
+	'CZ', // Czechia
+	'DE', // Germany
+	'DK', // Denmark
+	'EE', // Estonia
+	'ES', // Spain
+	'FI', // Finland
+	'FR', // France
+	'GR', // Greece
+	'HR', // Croatia
+	'HU', // Hungary
+	'IE', // Ireland
+	'IT', // Italy
+	'LT', // Lithuania
+	'LU', // Luxembourg
+	'LV', // Latvia
+	'MT', // Malta
+	'NL', // Netherlands
+	'PL', // Poland
+	'PT', // Portugal
+	'RO', // Romania
+	'SE', // Sweden
+	'SI', // Slovenia
+	'SK', // Slovakia
+];
 
 export const initializeFedCM = async ({
 	isSignedIn,
