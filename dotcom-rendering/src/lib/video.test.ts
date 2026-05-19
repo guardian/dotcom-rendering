@@ -182,7 +182,12 @@ describe('video', () => {
 				aspectRatio: '5:3',
 				hasAudio: true,
 			};
-			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 3);
+
+			const fiveThreeAspectRatio = 1.667;
+
+			expect(getAspectRatioFromSources([testSource])).toEqual(
+				fiveThreeAspectRatio,
+			);
 		});
 
 		it('should calculate the aspect ratio from the width and height if aspect ratio is missing', () => {
@@ -193,7 +198,12 @@ describe('video', () => {
 				aspectRatio: undefined,
 				hasAudio: true,
 			};
-			expect(getAspectRatioFromSources([testSource])).toEqual(2 / 3);
+
+			const twoThreeAspectRatio = 0.667;
+
+			expect(getAspectRatioFromSources([testSource])).toEqual(
+				twoThreeAspectRatio,
+			);
 		});
 
 		it('should return the default aspect ratio if the aspect ratio is undefined and width is 0', () => {
