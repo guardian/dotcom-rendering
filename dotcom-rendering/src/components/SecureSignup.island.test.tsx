@@ -180,7 +180,7 @@ describe('SecureSignup', () => {
 		expect(
 			getTrackedEventValueByDescription('submission-confirmed')
 				?.marketingOptInType,
-		).toBe('similar-guardian-products-hidden-optin-us');
+		).toBe('similar-guardian-products-optin-hidden-us');
 	});
 
 	it('shows marketing checkbox and honours user opt-out for non-US users', async () => {

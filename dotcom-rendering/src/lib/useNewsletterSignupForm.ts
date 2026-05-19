@@ -20,6 +20,7 @@ import {
 import { clearSubscriptionCache } from './newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from './useAuthStatus';
 import { useBrowserId } from './useBrowserId';
+import { useNewsletterShowMarketingToggle } from './useNewsletterShowMarketingToggle';
 
 /**
  * Fetch the user's email from Identity if they are signed in.
@@ -134,8 +135,6 @@ export const useNewsletterSignupForm = (
 	newsletterId: string,
 	renderingTarget: RenderingTarget,
 	abTest?: AbTest,
-	showMarketingToggle = true,
-	countryCode?: string,
 ): NewsletterSignupFormState => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey] = useState<string | undefined>(
@@ -159,6 +158,8 @@ export const useNewsletterSignupForm = (
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
 	const browserId = useBrowserId();
+	const { showMarketingToggle, countryCode } =
+		useNewsletterShowMarketingToggle();
 	const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
 		showMarketingToggle,
 		isSignedIn,

@@ -47,7 +47,7 @@ export const getMarketingOptInType = (
 	effectiveMarketingOptIn: boolean | undefined,
 ): string | undefined => {
 	if (!showMarketingToggle) {
-		return 'similar-guardian-products-hidden-optin-us';
+		return 'similar-guardian-products-optin-hidden-us';
 	}
 	if (effectiveMarketingOptIn === undefined) {
 		return undefined;

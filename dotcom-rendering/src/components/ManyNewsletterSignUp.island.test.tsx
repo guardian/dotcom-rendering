@@ -198,7 +198,7 @@ describe('ManyNewsletterSignUp', () => {
 			});
 		});
 
-		it('sends similar-guardian-products-hidden-optin-us tracking for US users', async () => {
+		it('sends similar-guardian-products-optin-hidden-us tracking for US users', async () => {
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue('US');
 			await openSignupForm(testUser);
@@ -211,7 +211,7 @@ describe('ManyNewsletterSignUp', () => {
 					expect.anything(),
 					expect.objectContaining({
 						marketingOptInType:
-							'similar-guardian-products-hidden-optin-us',
+							'similar-guardian-products-optin-hidden-us',
 					}),
 				);
 			});

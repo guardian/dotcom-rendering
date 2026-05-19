@@ -521,7 +521,7 @@ describe('NewsletterSignupForm', () => {
 			expect(
 				getTrackedEventValueByDescription('submission-confirmed')
 					?.marketingOptInType,
-			).toBe('similar-guardian-products-hidden-optin-us');
+			).toBe('similar-guardian-products-optin-hidden-us');
 		});
 
 		it('shows marketing toggle for US users when the switch is off', async () => {
