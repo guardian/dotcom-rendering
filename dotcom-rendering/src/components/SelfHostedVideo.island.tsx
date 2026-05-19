@@ -80,23 +80,17 @@ const cardStyles = (
  * to the viewport, which can happen for portrait or narrow aspect-ratio videos
  * rendered inside article layouts.
  *
- * The video height is capped to the smaller of:
- * - the provided pixel height
- * - 70% of the small viewport height (`70svh`)
+ * The video height is capped to 80% of the small viewport height (`80svh`) on tablet and above.
  *
  * The width is then derived from the constrained height, so the visible video
  * maintains its aspect ratio without distortion.
  */
 
-const maxHeightStyles = (
-	height: number,
-	aspectRatioOfVisibleVideo: number,
-) => css`
-	max-height: min(${height}px, 70svh);
-	width: min(
-		100%,
-		calc(min(${height}px, 70svh) * ${aspectRatioOfVisibleVideo})
-	);
+const maxHeightStyles = (aspectRatioOfVisibleVideo: number) => css`
+	${from.tablet} {
+		max-height: 80svh;
+		width: min(100%, calc(80svh * ${aspectRatioOfVisibleVideo}));
+	}
 `;
 const videoContainerStyles = (
 	aspectRatio: number,
@@ -1036,7 +1030,7 @@ export const SelfHostedVideo = ({
 						containerAspectRatioDesktop,
 					),
 					!isUndefined(maxHeight) &&
-						maxHeightStyles(maxHeight, aspectRatioOfVisibleVideo),
+						maxHeightStyles(aspectRatioOfVisibleVideo),
 				]}
 			>
 				<div
