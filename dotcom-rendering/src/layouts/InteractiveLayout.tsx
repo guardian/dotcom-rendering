@@ -11,8 +11,6 @@ import type React from 'react';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.island';
-import { ArticleBody } from '../components/ArticleBody';
-import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
@@ -502,47 +500,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									/>
 								</GridItem>
 							)}
-							<GridItem area="body" element="article">
-								<ArticleContainer format={format}>
-									<ArticleBody
-										format={format}
-										blocks={article.blocks}
-										host={host}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										ajaxUrl={article.config.ajaxUrl}
-										switches={article.config.switches}
-										isSensitive={article.config.isSensitive}
-										isAdFreeUser={article.isAdFreeUser}
-										sectionId={article.config.section}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
-										tags={article.tags}
-										isPaidContent={
-											!!article.config.isPaidContent
-										}
-										contributionsServiceUrl={
-											contributionsServiceUrl
-										}
-										contentType={article.contentType}
-										isPreview={article.config.isPreview}
-										idUrl={article.config.idUrl ?? ''}
-										isDev={!!article.config.isDev}
-										keywordIds={article.config.keywordIds}
-										tableOfContents={
-											article.tableOfContents
-										}
-										lang={article.lang}
-										isRightToLeftLang={
-											article.isRightToLeftLang
-										}
-										editionId={article.editionId}
-										shouldHideAds={article.shouldHideAds}
-										idApiUrl={article.config.idApiUrl}
-									/>
-								</ArticleContainer>
-							</GridItem>
 						</InteractiveGrid>
 					</div>
 				</Section>
