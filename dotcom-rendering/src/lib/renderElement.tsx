@@ -953,7 +953,7 @@ export const renderElement = ({
 							getLargestImageSize(element.posterImage ?? [])?.url
 						}
 						duration={element.duration}
-						mediaTitle={element.mediaTitle}
+						mediaTitle={element.caption ?? element.mediaTitle}
 						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}

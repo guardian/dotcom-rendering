@@ -753,6 +753,7 @@ export interface YoutubeBlockElement {
 	overrideImage?: string;
 	altText?: string;
 	role?: RoleType;
+	caption?: string;
 }
 
 interface WitnessTypeDataBase {
