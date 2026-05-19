@@ -42,21 +42,6 @@ type Story = StoryObj<typeof meta>;
 /** Default — recipe name + CTAs */
 export const Default: Story = {};
 
-/** Without a recipe object — falls back to recipeName */
-export const NoRecipeData: Story = {
-	args: { recipe: undefined },
-};
-
-/** Recipe present but no featured image — image slot omitted */
-export const NoFeaturedImage: Story = {
-	args: {
-		recipe: {
-			...mockRecipe,
-			featuredImage: undefined,
-		},
-	},
-};
-
 /** Dark mode */
 export const DefaultDark: Story = {
 	decorators: [darkDecorator([recipeFormat])],
