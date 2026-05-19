@@ -16,6 +16,7 @@ import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
+import { useVideoMilestoneTracking } from '../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
 	customSelfHostedVideoPlayAudioEventName,
@@ -542,6 +543,8 @@ export const SelfHostedVideo = ({
 		playerState,
 		currentTime,
 	});
+
+	const trackMilestones = useVideoMilestoneTracking(sendOphanTrackingEvent);
 
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
@@ -1075,6 +1078,10 @@ export const SelfHostedVideo = ({
 
 		if (playerState === 'PLAYING') {
 			setCurrentTime(video.currentTime);
+
+			if (videoStyle === 'Default') {
+				trackMilestones(video.currentTime, video.duration);
+			}
 		}
 	};
 
