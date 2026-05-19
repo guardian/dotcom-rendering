@@ -265,6 +265,16 @@ const shouldUseWebkitFullscreen = (video: HTMLVideoElement): boolean => {
 };
 
 /**
+ * 	The events we need to respond to for fullscreen tracking
+ * */
+const fullscreenChangeEvents = [
+	'fullscreenchange',
+	'webkitfullscreenchange',
+	'webkitbeginfullscreen',
+	'webkitendfullscreen',
+];
+
+/**
  * Ensures the aspect ratio falls between the minimum and maximum allowed aspect ratios, if specified.
  * For example, we may not want to render a square video inside a 4:5 feature card. In this case, the
  * minimum & maximum aspect ratio would be 4:5, so that the video fits the fixed-aspect ratio feature card
@@ -822,6 +832,57 @@ export const SelfHostedVideo = ({
 			setShowPosterImage(true);
 		}
 	}, [shouldAutoplay, isInView, playerState]);
+
+	/**
+	 * Capture fullscreen tracking events across browsers and devices
+	 * We need to support events across:
+	 * 	- Browsers with fullscreen API support
+	 * 	- OSX Safari
+	 * 	- iOS Safari
+	 */
+	useEffect(() => {
+		const video = vidRef.current;
+		const playerContainer = playerContainerRef.current;
+
+		if (!playerContainer && !video) return;
+
+		const reportFullscreenEvent = () => {
+			const event =
+				document.fullscreenElement ||
+				(video &&
+					'webkitDisplayingFullscreen' in video &&
+					video.webkitDisplayingFullscreen)
+					? 'enter_fullscreen'
+					: 'exit_fullscreen';
+
+			sendOphanTrackingEvent(event);
+		};
+
+		for (const event of fullscreenChangeEvents) {
+			if (video) {
+				video.addEventListener(event, reportFullscreenEvent);
+			}
+
+			if (playerContainer) {
+				playerContainer.addEventListener(event, reportFullscreenEvent);
+			}
+		}
+
+		return () => {
+			for (const event of fullscreenChangeEvents) {
+				if (video) {
+					video.removeEventListener(event, reportFullscreenEvent);
+				}
+
+				if (playerContainer) {
+					playerContainer.removeEventListener(
+						event,
+						reportFullscreenEvent,
+					);
+				}
+			}
+		};
+	}, [sendOphanTrackingEvent]);
 
 	if (adapted) {
 		return FallbackImageComponent;
