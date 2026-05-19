@@ -203,6 +203,7 @@ export const HostedContentHeader = ({ branding }: Props) => {
 						theme={{
 							textSubdued: sourcePalette.neutral[97],
 						}}
+						aria-label="More information about advertiser content"
 					/>
 				</div>
 
