@@ -175,7 +175,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const layoutType: LayoutType = isMedia ? 'media' : 'standard';
+	// TODO: Determine layout type based on article properties
+	const layoutType: LayoutType = 'portrait';
 
 	return (
 		<>
@@ -327,18 +328,20 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						layoutType={layoutType}
 						element="aside"
 					>
-						<div css={stretchLines}>
-							{isWeb &&
-							format.theme === ArticleSpecial.Labs &&
-							format.design !== ArticleDesign.Video ? (
-								<GuardianLabsLines />
-							) : (
-								<DecideLines
-									format={format}
-									color={themePalette('--article-border')}
-								/>
-							)}
-						</div>
+						{layoutType !== 'portrait' && (
+							<div css={stretchLines}>
+								{isWeb &&
+								format.theme === ArticleSpecial.Labs &&
+								format.design !== ArticleDesign.Video ? (
+									<GuardianLabsLines />
+								) : (
+									<DecideLines
+										format={format}
+										color={themePalette('--article-border')}
+									/>
+								)}
+							</div>
+						)}
 						{isApps ? (
 							<>
 								<Hide from="leftCol">

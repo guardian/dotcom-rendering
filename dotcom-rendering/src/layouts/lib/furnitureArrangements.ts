@@ -2,7 +2,7 @@ import { css, type SerializedStyles } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
 import { grid } from '../../grid';
 
-export type LayoutType = 'standard' | 'media';
+export type LayoutType = 'standard' | 'media' | 'portrait';
 
 export type Area =
 	| 'title'
@@ -116,9 +116,37 @@ const mediaCss: LayoutCssMap = {
 	},
 };
 
+const portraitCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 1;',
+		leftCol: 'grid-row: 1; grid-column: left-column-start / 9;',
+	},
+	headline: {
+		mobile: 'grid-row: 2;',
+		leftCol: 'grid-row: 2; grid-column: left-column-start / 9;',
+	},
+	'main-media': {
+		mobile: 'grid-row: 3;',
+		leftCol: 'grid-row: 1 / span 3; grid-column: 10 / right-column-end;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		leftCol: 'grid-row: 3; grid-column: centre-column-start / 9;',
+	},
+	meta: {
+		mobile: 'grid-row: 5;',
+		leftCol:
+			'grid-row: 3; grid-column: left-column-start / left-column-end;',
+	},
+	body: {
+		mobile: 'grid-row: 6;',
+	},
+};
+
 const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	standard: standardCss,
 	media: mediaCss,
+	portrait: portraitCss,
 };
 
 /**
