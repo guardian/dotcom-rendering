@@ -387,6 +387,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
+	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -582,6 +583,35 @@ export const SelfHostedVideo = ({
 		/>
 	);
 
+	const positionCues = useCallback(
+		(video: HTMLVideoElement) => {
+			if (
+				!videoStyleSettings.canShowSubtitles ||
+				!videoStyleSettings.supportsAudio
+			) {
+				return;
+			}
+
+			const track = video.textTracks[0];
+			if (!track?.cues) {
+				return;
+			}
+
+			const pxFromBottom = space[3];
+			const videoHeight = video.getBoundingClientRect().height;
+			const percentFromTop =
+				((videoHeight - pxFromBottom) / videoHeight) * 100;
+
+			for (const cue of Array.from(track.cues)) {
+				if (cue instanceof VTTCue) {
+					cue.snapToLines = false;
+					cue.line = percentFromTop;
+				}
+			}
+		},
+		[videoStyleSettings.canShowSubtitles, videoStyleSettings.supportsAudio],
+	);
+
 	/**
 	 * Setup.
 	 *
@@ -711,6 +741,25 @@ export const SelfHostedVideo = ({
 		ophanVideoStyle,
 	]);
 
+	/* Creates video-specific event listeners to handle fullscreen behaviour */
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		const handleEndFullscreen = () => {
+			setIsWebKitFullscreen(false);
+			positionCues(video);
+		};
+
+		video.addEventListener('webkitendfullscreen', handleEndFullscreen);
+
+		return () =>
+			video.removeEventListener(
+				'webkitendfullscreen',
+				handleEndFullscreen,
+			);
+	}, [positionCues]);
+
 	/**
 	 * Track the first time the video comes into view.
 	 */
@@ -762,22 +811,7 @@ export const SelfHostedVideo = ({
 			return;
 		}
 
-		const track = video.textTracks[0];
-		if (!track?.cues) {
-			return;
-		}
-
-		const pxFromBottom = space[3];
-		const videoHeight = video.getBoundingClientRect().height;
-		const percentFromTop =
-			((videoHeight - pxFromBottom) / videoHeight) * 100;
-
-		for (const cue of Array.from(track.cues)) {
-			if (cue instanceof VTTCue) {
-				cue.snapToLines = false;
-				cue.line = percentFromTop;
-			}
-		}
+		positionCues(video);
 	};
 
 	const handleLoadedData = () => {
@@ -859,8 +893,10 @@ export const SelfHostedVideo = ({
 			};
 
 			if (webkitVideo.webkitDisplayingFullscreen) {
+				setIsWebKitFullscreen(false);
 				return webkitVideo.webkitExitFullscreen();
 			} else {
+				setIsWebKitFullscreen(true);
 				return webkitVideo.webkitEnterFullscreen();
 			}
 		}
@@ -1076,6 +1112,7 @@ export const SelfHostedVideo = ({
 							videoStyleSettings.supportsFullscreen
 						}
 						isInteractive={videoStyleSettings.isInteractive}
+						isWebKitFullscreen={isWebKitFullscreen}
 					/>
 				</div>
 			</div>

@@ -72,14 +72,19 @@ const interactiveStyles = css`
 	cursor: pointer;
 `;
 
-const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
+const subtitleFontStyles = (subtitleSize: SubtitleSize | undefined) => css`
 	::cue {
-		/* Hide the cue by default as we prefer custom overlay */
-		visibility: hidden;
 		color: ${palette('--video-subtitle-text')};
 		${subtitleSize === 'small' && textSans15};
 		${subtitleSize === 'medium' && textSans17};
 		${subtitleSize === 'large' && textSans20};
+	}
+`;
+
+const hideNativeSubtitlesStyles = css`
+	::cue {
+		/* Hide the cue as we prefer custom overlay */
+		visibility: hidden;
 	}
 `;
 
@@ -159,6 +164,7 @@ export type Props = {
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
 	playerContainerRef: React.RefObject<HTMLDivElement>;
+	isWebKitFullscreen: boolean;
 };
 
 /**
@@ -211,6 +217,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			iconsPosition,
 			subtitlesPosition,
 			playerContainerRef,
+			isWebKitFullscreen,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -219,6 +226,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const currentRefExists = ref && 'current' in ref && !!ref.current;
 
 		const showSubtitles = canShowSubtitles && !!subtitleSource;
+		const showCustomSubtitles = showSubtitles && !isWebKitFullscreen;
 		const showProgressBar = canShowProgressBar && currentRefExists;
 		const showIcons = canShowIcons && currentRefExists;
 
@@ -230,7 +238,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 					css={[
 						videoStyles(aspectRatio),
 						isInteractive && interactiveStyles,
-						showSubtitles && subtitleStyles(subtitleSize),
+						showSubtitles && subtitleFontStyles(subtitleSize),
+						showCustomSubtitles && hideNativeSubtitlesStyles,
 					]}
 					crossOrigin="anonymous"
 					ref={ref}
@@ -266,8 +275,11 @@ export const SelfHostedVideoPlayer = forwardRef(
 					))}
 					{showSubtitles && (
 						<track
-							// Don't use default - it forces native rendering on iOS
-							default={false}
+							/**
+							 * On iOS/WebKit, `default` forces native subtitle rendering.
+							 * Disable it when custom subtitles are enabled.
+							 */
+							default={!showCustomSubtitles}
 							kind="subtitles"
 							src={subtitleSource}
 							srcLang="en"
@@ -275,7 +287,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					)}
 					{FallbackImageComponent}
 				</video>
-				{showSubtitles && !!activeCue?.text && (
+				{showCustomSubtitles && !!activeCue?.text && (
 					<SubtitleOverlay
 						text={activeCue.text}
 						size={subtitleSize}
