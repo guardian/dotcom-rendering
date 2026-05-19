@@ -133,6 +133,28 @@ const videoContainerStyles = (
 	`}
 `;
 
+const fullscreenStyles = css`
+	&:fullscreen {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: ${palette('--video-fullscreen-background')};
+		width: 100vw;
+		height: 100vh;
+
+		/* Override the fixed aspect-ratio + width:100% on the video so it
+		   fits within the screen while preserving its aspect ratio. */
+		video {
+			width: 100%;
+			height: 100%;
+			max-width: 100vw;
+			max-height: 100vh;
+			aspect-ratio: auto;
+			object-fit: contain;
+		}
+	}
+`;
+
 const showControlsStyles = css`
 	.controls-container {
 		visibility: visible;
@@ -1048,6 +1070,7 @@ export const SelfHostedVideo = ({
 				]}
 			>
 				<div
+					ref={playerContainerRef}
 					css={[
 						videoContainerStyles(
 							aspectRatio,
@@ -1058,6 +1081,7 @@ export const SelfHostedVideo = ({
 							isVideoCroppedAtLeftRight,
 							containerAspectRatioDesktop,
 						),
+						fullscreenStyles,
 						videoStyleSettings.hideControlsWhenNotInteractedWith &&
 							(playerState === 'NOT_STARTED' ||
 								playerState === 'PLAYING') &&
@@ -1079,7 +1103,6 @@ export const SelfHostedVideo = ({
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
 						ref={vidRef}
-						playerContainerRef={playerContainerRef}
 						hasAudio={hasAudio}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
