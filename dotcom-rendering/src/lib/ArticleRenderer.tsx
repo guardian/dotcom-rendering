@@ -166,11 +166,13 @@ export const ArticleRenderer = ({
 			result.push(
 				<Fragment key={`recipe-section-${section.index}`}>
 					{section.subheadingEl}
-					<FeastContextualNudge
-						pageId={pageId}
-						recipe={section.recipe}
-						recipeName={section.recipeName}
-					/>
+					{section.recipe && (
+						<FeastContextualNudge
+							pageId={pageId}
+							recipe={section.recipe}
+							recipeName={section.recipeName}
+						/>
+					)}
 					{section.contentEls}
 				</Fragment>,
 			);
