@@ -81,9 +81,7 @@ const cardStyles = (
  * rendered inside article layouts.
  *
  * The video height is capped to 80% of the small viewport height (`80svh`) on tablet and above.
- *
  */
-
 const maxHeightStyles = css`
 	${from.tablet} {
 		max-height: 80svh;
