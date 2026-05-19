@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import type { VideoEventKey } from '../components/YoutubeAtom/YoutubeAtom';
 
 type Milestones = {
@@ -21,24 +21,27 @@ export const useVideoMilestoneTracking = (
 		hasSent75: false,
 	});
 
-	return (currentTime: number, duration: number) => {
-		if (duration <= 0) return;
+	return useCallback(
+		(currentTime: number, duration: number) => {
+			if (duration <= 0) return;
 
-		const percent = (currentTime / duration) * 100;
+			const percent = (currentTime / duration) * 100;
 
-		if (!milestones.current.hasSent25 && percent >= 25) {
-			onMilestone('25');
-			milestones.current.hasSent25 = true;
-		}
+			if (!milestones.current.hasSent25 && percent >= 25) {
+				onMilestone('25');
+				milestones.current.hasSent25 = true;
+			}
 
-		if (!milestones.current.hasSent50 && percent >= 50) {
-			onMilestone('50');
-			milestones.current.hasSent50 = true;
-		}
+			if (!milestones.current.hasSent50 && percent >= 50) {
+				onMilestone('50');
+				milestones.current.hasSent50 = true;
+			}
 
-		if (!milestones.current.hasSent75 && percent >= 75) {
-			onMilestone('75');
-			milestones.current.hasSent75 = true;
-		}
-	};
+			if (!milestones.current.hasSent75 && percent >= 75) {
+				onMilestone('75');
+				milestones.current.hasSent75 = true;
+			}
+		},
+		[onMilestone],
+	);
 };
