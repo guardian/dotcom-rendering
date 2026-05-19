@@ -13,6 +13,7 @@ import { getVideoClient } from '../../lib/bridgetApi';
 import { getZIndex } from '../../lib/getZIndex';
 import { getAuthStatus } from '../../lib/identity';
 import type { CustomPlayEventDetail } from '../../lib/video';
+import { useVideoMilestoneTracking } from '../../lib/useVideoMilestoneTracking';
 import {
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePauseEventName,
@@ -46,9 +47,6 @@ type Props = {
 
 type ProgressEvents = {
 	hasSentPlayEvent: boolean;
-	hasSent25Event: boolean;
-	hasSent50Event: boolean;
-	hasSent75Event: boolean;
 	hasSentEndEvent: boolean;
 };
 
@@ -198,6 +196,7 @@ const createOnStateChangeListener =
 		uniqueId: string,
 		progressEvents: ProgressEvents,
 		eventEmitters: Props['eventEmitters'],
+		trackMilestones: (currentTime: number, duration: number) => void,
 	): YT.PlayerEventHandler<YT.OnStateChangeEvent> =>
 	(event) => {
 		const loggerFrom = 'YoutubeAtomPlayer onStateChange';
@@ -257,46 +256,7 @@ const createOnStateChangeListener =
 					return;
 				}
 
-				const percentPlayed = (currentTime / duration) * 100;
-
-				if (!progressEvents.hasSent25Event && 25 < percentPlayed) {
-					log('dotcom', {
-						from: loggerFrom,
-						videoId,
-						msg: 'played 25%',
-						event,
-					});
-					for (const eventEmitter of eventEmitters) {
-						eventEmitter('25');
-					}
-					progressEvents.hasSent25Event = true;
-				}
-
-				if (!progressEvents.hasSent50Event && 50 < percentPlayed) {
-					log('dotcom', {
-						from: loggerFrom,
-						videoId,
-						msg: 'played 50%',
-						event,
-					});
-					for (const eventEmitter of eventEmitters) {
-						eventEmitter('50');
-					}
-					progressEvents.hasSent50Event = true;
-				}
-
-				if (!progressEvents.hasSent75Event && 75 < percentPlayed) {
-					log('dotcom', {
-						from: loggerFrom,
-						videoId,
-						msg: 'played 75%',
-						event,
-					});
-					for (const eventEmitter of eventEmitters) {
-						eventEmitter('75');
-					}
-					progressEvents.hasSent75Event = true;
-				}
+				trackMilestones(currentTime, duration);
 
 				const currentPlayerState = player.getPlayerState();
 
@@ -492,11 +452,14 @@ export const YoutubeAtomPlayer = ({
 	 * Does not cause re-renders on update
 	 */
 	const player = useRef<YouTubePlayer>();
+	const trackMilestones = useVideoMilestoneTracking((event) => {
+		for (const eventEmitter of eventEmitters) {
+			eventEmitter(event);
+		}
+	});
+
 	const progressEvents = useRef<ProgressEvents>({
 		hasSentPlayEvent: false,
-		hasSent25Event: false,
-		hasSent50Event: false,
-		hasSent75Event: false,
 		hasSentEndEvent: false,
 	});
 
@@ -539,6 +502,7 @@ export const YoutubeAtomPlayer = ({
 					uniqueId,
 					progressEvents.current,
 					eventEmitters,
+					trackMilestones,
 				);
 
 				/**
