@@ -22,7 +22,7 @@ interface DirectoryPageNavConfig {
 	tagIds: string[];
 	textColor: string;
 	backgroundColor: string;
-	titleIconImage: string;
+	titleIcon?: React.ReactElement;
 	title: { label: string; id: string };
 	links: { label: string; id: string }[];
 	backgroundImages?: {
@@ -34,6 +34,27 @@ interface DirectoryPageNavConfig {
 		wide: string;
 	};
 }
+
+const WorldCup2026Icon = () => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="40"
+		height="46"
+		viewBox="0 0 40 46"
+		fill="none"
+	>
+		<rect width="12.3697" height="32.4706" fill="#D71921" />
+		<rect
+			x="13.5294"
+			y="13.5295"
+			width="12.3697"
+			height="32.4706"
+			fill="white"
+		/>
+		<rect x="27.059" width="12.3697" height="32.4706" fill="#007E46" />
+		<circle cx="19.7142" cy="6.18487" r="6.18487" fill="white" />
+	</svg>
+);
 
 const configs = [
 	// World Cup 2026
@@ -50,8 +71,7 @@ const configs = [
 			label: 'World Cup',
 			id: 'football/world-cup-2026',
 		},
-		titleIconImage:
-			'data:image/svg+xml,%3Csvg%20width%3D%2240%22%20height%3D%2246%22%20viewBox%3D%220%200%2040%2046%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Crect%20width%3D%2212.3697%22%20height%3D%2232.4706%22%20fill%3D%22%23D71921%22/%3E%3Crect%20x%3D%2213.5294%22%20y%3D%2213.5295%22%20width%3D%2212.3697%22%20height%3D%2232.4706%22%20fill%3D%22white%22/%3E%3Crect%20x%3D%2227.059%22%20width%3D%2212.3697%22%20height%3D%2232.4706%22%20fill%3D%22%23007E46%22/%3E%3Ccircle%20cx%3D%2219.7142%22%20cy%3D%226.18487%22%20r%3D%226.18487%22%20fill%3D%22white%22/%3E%3C/svg%3E',
+		titleIcon: <WorldCup2026Icon />,
 		links: [
 			{
 				label: 'Match centre',
@@ -101,7 +121,6 @@ const configs = [
 			label: 'Winter Olympics 2026',
 			id: 'sport/winter-olympics-2026',
 		},
-		titleIconImage: '',
 		links: [
 			{
 				label: 'Schedule',
@@ -146,7 +165,6 @@ const configs = [
 			label: 'Winter Paralympics 2026',
 			id: 'sport/winter-paralympics-2026',
 		},
-		titleIconImage: '',
 		links: [
 			{
 				label: 'Results',
@@ -285,7 +303,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	return (
 		<nav css={[nav, heightStyles]}>
 			<a href={`/${config.title.id}`} css={largeLinkStyles}>
-				<TitleIconImage src={config.titleIconImage} />
+				{config.titleIcon && config.titleIcon}
 				{config.title.label}
 			</a>
 			<BackgroundImage images={config.backgroundImages} />
@@ -316,30 +334,6 @@ const heightStyles = css({
 		height: '',
 	},
 });
-
-const TitleIconImage = (props: { src: string }) => {
-	if (!props.src) {
-		return null;
-	}
-
-	return (
-		<img
-			src={props.src}
-			alt=""
-			css={{
-				width: 'auto',
-				height: 46,
-				marginTop: 5,
-				marginRight: 8,
-				objectFit: 'cover',
-				[from.tablet]: {
-					height: 79,
-					marginTop: 10,
-				},
-			}}
-		/>
-	);
-};
 
 const BackgroundImage = (props: {
 	images: DirectoryPageNavConfig['backgroundImages'];
