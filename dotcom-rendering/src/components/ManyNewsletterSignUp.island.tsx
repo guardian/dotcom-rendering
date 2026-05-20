@@ -145,7 +145,7 @@ export const ManyNewsletterSignUp = ({
 	const hideMarketingToggle = useHideMarketingToggleForCountry();
 	/** True when the marketing toggle is hidden for this user due to country policy. */
 	const marketingOptInHiddenForCountry =
-		hideMarketingToggle && isSignedIn !== true;
+		hideMarketingToggle && isSignedIn === false;
 
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		Array<{
@@ -231,7 +231,7 @@ export const ManyNewsletterSignUp = ({
 	}, [status]);
 
 	useEffect(() => {
-		if (isSignedIn !== true) {
+		if (isSignedIn === false) {
 			setMarketingOptIn(true);
 		}
 	}, [isSignedIn]);

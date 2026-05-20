@@ -272,7 +272,7 @@ export const SecureSignup = ({
 	const authStatus = useAuthStatus();
 	const hideMarketingToggle = useHideMarketingToggleForCountry();
 	const marketingOptInHiddenForCountry =
-		hideMarketingToggle && isSignedIn !== true;
+		hideMarketingToggle && isSignedIn === false;
 
 	useEffect(() => {
 		if (isSignedIn !== 'Pending' && !isSignedIn) {

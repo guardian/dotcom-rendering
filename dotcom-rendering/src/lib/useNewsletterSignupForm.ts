@@ -300,7 +300,7 @@ export const useNewsletterSignupForm = (
 		async (emailAddress: string, token: string): Promise<void> => {
 			const marketingOptInHiddenForCountry =
 				hideMarketingToggleRef.current &&
-				isSignedInRef.current !== true;
+				isSignedInRef.current === false;
 			const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
 				marketingOptInHiddenForCountry,
 				isSignedIn: isSignedInRef.current,
@@ -499,7 +499,7 @@ export const useNewsletterSignupForm = (
 		showMarketingToggle: isSignedIn !== true && !hideMarketingToggle,
 		marketingOptIn,
 		marketingOptInHiddenForCountry:
-			hideMarketingToggle && isSignedIn !== true,
+			hideMarketingToggle && isSignedIn === false,
 		isWaitingForResponse,
 		responseOk,
 		errorMessage,

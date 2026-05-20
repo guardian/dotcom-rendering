@@ -6,7 +6,8 @@ type MarketingOptInType =
 /**
  * Returns the marketing opt-in value that should be submitted with the form.
  *
- * - If the toggle is hidden due to country (US soft opt-in), always submit `true`.
+ * - If the toggle is hidden due to country (US soft opt-in) and the user is
+ *   confirmed signed out, always submit `true`.
  * - If the user is signed in, omit marketing from the payload (`undefined`).
  * - If the user has made an explicit choice, use that.
  * - Otherwise (signed out or pending with no choice yet), default to `true`.
@@ -20,7 +21,8 @@ export const getEffectiveMarketingOptIn = ({
 	isSignedIn: boolean | 'Pending';
 	marketingOptIn: boolean | undefined;
 }): boolean | undefined => {
-	if (marketingOptInHiddenForCountry) {
+	// Only apply the US soft opt-in when we know the user is signed out
+	if (marketingOptInHiddenForCountry && isSignedIn === false) {
 		return true;
 	}
 	if (isSignedIn === true) {
@@ -46,7 +48,8 @@ export const getMarketingOptInType = ({
 	if (isSignedIn === true) {
 		return undefined;
 	}
-	if (marketingOptInHiddenForCountry) {
+	// Only report the US hidden opt-in when we know the user is signed out
+	if (marketingOptInHiddenForCountry && isSignedIn === false) {
 		return 'similar-guardian-products-optin-hidden-us';
 	}
 	if (effectiveMarketingOptIn === undefined) {
