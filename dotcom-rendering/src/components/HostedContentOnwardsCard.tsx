@@ -46,7 +46,8 @@ const hoverStyles = css`
 const linkStyles = css`
 	display: flex;
 	flex-direction: row-reverse;
-	justify-content: flex-start;
+	/* Needed due to row-reverse direction */
+	justify-content: flex-end;
 	align-items: flex-start;
 	text-decoration: none;
 	gap: ${space[2]}px;
