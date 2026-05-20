@@ -8,6 +8,7 @@ export type PuzzleItem = {
 	type: string;
 	set: string;
 	url?: string;
+	image?: string;
 	index?: number;
 	variant?: string;
 };

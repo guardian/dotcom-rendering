@@ -121,6 +121,7 @@ const isPuzzleItem = (data: unknown): boolean =>
 	isString(data.title) &&
 	isString(data.type) &&
 	isString(data.set) &&
+	(data.image === undefined || isString(data.image)) &&
 	(data.variant === undefined || isString(data.variant));
 
 const isPuzzleContainer = (data: unknown): boolean => {

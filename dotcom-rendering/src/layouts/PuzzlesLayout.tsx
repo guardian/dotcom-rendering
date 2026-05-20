@@ -4,6 +4,7 @@ import {
 	headlineBold20,
 	headlineBold24,
 	headlineMedium20,
+	palette as sourcePalette,
 	palette,
 	space,
 	textSans14,
@@ -62,9 +63,7 @@ const rowStyles = css`
 const cardStyles = css`
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: ${space[1]}px;
+	gap: ${space[3]}px;
 	min-height: 132px;
 	padding: ${space[4]}px;
 	border: 2px solid ${palette.neutral[46]};
@@ -72,16 +71,21 @@ const cardStyles = css`
 	text-decoration: none;
 	background: white;
 	color: inherit;
-	text-align: center;
 	box-sizing: border-box;
 	transition:
 		border-color 120ms ease,
 		box-shadow 120ms ease;
+	overflow: hidden;
 
 	:hover {
 		border-color: ${palette.brand[500]};
 		box-shadow: 0 0 0 3px rgba(5, 52, 255, 0.08);
 	}
+`;
+
+const editorialCardStyles = css`
+	padding: ${space[3]}px;
+	min-height: 100%;
 `;
 
 const archiveCardStyles = css`
@@ -93,6 +97,42 @@ const iframeCardStyles = css`
 	min-height: 180px;
 	padding: ${space[6]}px;
 	text-align: left;
+`;
+
+const cardArtStyles = css`
+	height: 132px;
+	width: 100%;
+	border-radius: 14px;
+	overflow: hidden;
+	background: ${palette.neutral[93]};
+`;
+
+const editorialImageStyles = css`
+	width: 100%;
+	height: 120px;
+	display: block;
+	background: ${palette.neutral[97]};
+	border-radius: 12px;
+	object-fit: cover;
+`;
+
+const cardBodyStyles = css`
+	display: flex;
+	flex-direction: column;
+	gap: ${space[1]}px;
+`;
+
+const labelStyles = css`
+	color: ${palette.neutral[20]};
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	${textSans14};
+`;
+
+const editorialLabelStyles = css`
+	color: #c7005a;
+	text-transform: none;
+	${textSans17};
 `;
 
 const storePanelStyles = css`
@@ -130,6 +170,10 @@ const storeButtonAndroidStyles = css`
 `;
 
 const cardTitleStyles = css`
+	${headlineBold20};
+`;
+
+const editorialTitleStyles = css`
 	${headlineBold20};
 `;
 
@@ -175,11 +219,245 @@ const getItemUrl = (item: PuzzleItem): string => {
 	return '#';
 };
 
+const getTypeLabel = (item: PuzzleItem): string => {
+	if (item.variant === 'archive') return 'Archive';
+
+	switch (item.type) {
+		case 'crossword':
+			return 'Crossword';
+		case 'sudoku':
+			return 'Sudoku';
+		case 'wordiply':
+			return 'Word game';
+		case 'store':
+			return 'Mobile app';
+		default:
+			return item.type;
+	}
+};
+
+const getSetLabel = (set: string): string => {
+	switch (set) {
+		case 'quick':
+			return 'Quick';
+		case 'mini':
+			return 'Mini';
+		case 'cryptic':
+			return 'Cryptic';
+		case 'easy':
+			return 'Easy';
+		case 'medium':
+			return 'Medium';
+		case 'hard':
+			return 'Hard';
+		default:
+			return set.charAt(0).toUpperCase() + set.slice(1);
+	}
+};
+
+const PuzzleArtwork = ({ item }: { item: PuzzleItem }) => {
+	const isArchive = item.variant === 'archive';
+
+	if (item.type === 'crossword') {
+		return (
+			<svg
+				aria-hidden="true"
+				css={cardArtStyles}
+				viewBox="0 0 320 180"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					width="320"
+					height="180"
+					fill={sourcePalette.neutral[97]}
+				/>
+				<g transform="translate(24 20)">
+					{Array.from({ length: 5 }).map((_, row) =>
+						Array.from({ length: 7 }).map((__, col) => {
+							const x = col * 38;
+							const y = row * 28;
+							const fill =
+								(row + col) % 3 === 0
+									? sourcePalette.brand[500]
+									: sourcePalette.neutral[100];
+							return (
+								<rect
+									fill={fill}
+									height="24"
+									key={`${row}-${col}`}
+									rx="4"
+									stroke={sourcePalette.neutral[86]}
+									width="34"
+									x={x}
+									y={y}
+								/>
+							);
+						}),
+					)}
+				</g>
+				<text
+					fill={sourcePalette.neutral[7]}
+					fontFamily="Guardian Text Sans Web, Arial, sans-serif"
+					fontSize="18"
+					fontWeight="700"
+					x="24"
+					y="165"
+				>
+					{isArchive ? 'Browse the archive' : `Today's ${item.set}`}
+				</text>
+			</svg>
+		);
+	}
+
+	if (item.type === 'sudoku') {
+		return (
+			<svg
+				aria-hidden="true"
+				css={cardArtStyles}
+				viewBox="0 0 320 180"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					width="320"
+					height="180"
+					fill={sourcePalette.neutral[100]}
+				/>
+				<g transform="translate(70 20)">
+					{Array.from({ length: 3 }).map((_, row) =>
+						Array.from({ length: 3 }).map((__, col) => {
+							const x = col * 60;
+							const y = row * 44;
+							const highlighted =
+								row === col || (row === 0 && col === 2);
+							return (
+								<rect
+									fill={
+										highlighted
+											? sourcePalette.brand[500]
+											: sourcePalette.neutral[97]
+									}
+									height="40"
+									key={`${row}-${col}`}
+									rx="6"
+									stroke={sourcePalette.neutral[46]}
+									strokeWidth={row === 1 && col === 1 ? 3 : 2}
+									width="56"
+									x={x}
+									y={y}
+								/>
+							);
+						}),
+					)}
+				</g>
+				<text
+					fill={sourcePalette.neutral[7]}
+					fontFamily="Guardian Text Sans Web, Arial, sans-serif"
+					fontSize="18"
+					fontWeight="700"
+					x="24"
+					y="165"
+				>
+					{isArchive ? 'Sudoku archive' : `${item.set} grid`}
+				</text>
+			</svg>
+		);
+	}
+
+	if (item.type === 'wordiply') {
+		return (
+			<svg
+				aria-hidden="true"
+				css={cardArtStyles}
+				viewBox="0 0 320 180"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<defs>
+					<linearGradient
+						id="wordiply-gradient"
+						x1="0"
+						x2="1"
+						y1="0"
+						y2="1"
+					>
+						<stop
+							offset="0%"
+							stopColor={sourcePalette.brand[400]}
+						/>
+						<stop
+							offset="100%"
+							stopColor={sourcePalette.culture[400]}
+						/>
+					</linearGradient>
+				</defs>
+				<rect fill="url(#wordiply-gradient)" height="180" width="320" />
+				<g fill={sourcePalette.neutral[100]} opacity="0.22">
+					<circle cx="72" cy="56" r="30" />
+					<circle cx="256" cy="48" r="22" />
+					<circle cx="236" cy="130" r="42" />
+				</g>
+				<text
+					fill={sourcePalette.neutral[100]}
+					fontFamily="Guardian Headline, Georgia, serif"
+					fontSize="42"
+					fontWeight="700"
+					x="24"
+					y="94"
+				>
+					WORD
+				</text>
+				<text
+					fill={sourcePalette.neutral[100]}
+					fontFamily="Guardian Headline, Georgia, serif"
+					fontSize="42"
+					fontWeight="700"
+					x="138"
+					y="94"
+				>
+					IPLY
+				</text>
+				<text
+					fill={sourcePalette.neutral[100]}
+					fontFamily="Guardian Text Sans Web, Arial, sans-serif"
+					fontSize="18"
+					fontWeight="700"
+					x="24"
+					y="156"
+				>
+					External puzzle
+				</text>
+			</svg>
+		);
+	}
+
+	return (
+		<div css={cardArtStyles}>
+			<div
+				css={css`
+					display: flex;
+					height: 100%;
+					align-items: center;
+					justify-content: center;
+					background: linear-gradient(
+						135deg,
+						${palette.brand[400]} 0%,
+						${palette.brand[500]} 100%
+					);
+					color: white;
+					${headlineBold20};
+				`}
+			>
+				{item.title}
+			</div>
+		</div>
+	);
+};
+
 const PuzzleCard = ({ item }: { item: PuzzleItem }) => {
 	const href = getItemUrl(item);
 	const external = /^https?:\/\//.test(href);
 	const isArchive = item.variant === 'archive';
 	const isIframe = item.type === 'wordiply';
+	const isEditorial = Boolean(item.image) && !isArchive;
 
 	return (
 		<a
@@ -187,23 +465,42 @@ const PuzzleCard = ({ item }: { item: PuzzleItem }) => {
 				cardStyles,
 				isArchive && archiveCardStyles,
 				isIframe && iframeCardStyles,
+				isEditorial && editorialCardStyles,
 			]}
 			href={href}
 			target={external ? '_blank' : undefined}
 			rel={external ? 'noreferrer noopener' : undefined}
 		>
-			<span css={cardTitleStyles}>{item.title}</span>
-			{isIframe ? (
-				<span css={iframeCopyStyles}>
-					External puzzle for now. This block can later become an
-					embedded iframe experience.
-				</span>
+			{item.image ? (
+				<img
+					alt=""
+					css={editorialImageStyles}
+					loading="lazy"
+					src={item.image}
+				/>
 			) : (
-				<span css={cardMetaStyles}>
-					{item.type}
-					{item.set ? ` • ${item.set}` : ''}
-				</span>
+				<PuzzleArtwork item={item} />
 			)}
+			<div css={cardBodyStyles}>
+				<span css={isEditorial ? editorialLabelStyles : labelStyles}>
+					{isEditorial ? getSetLabel(item.set) : getTypeLabel(item)}
+				</span>
+				<span
+					css={isEditorial ? editorialTitleStyles : cardTitleStyles}
+				>
+					{item.title}
+				</span>
+				{isIframe ? (
+					<span css={iframeCopyStyles}>
+						External puzzle for now. This block can later become an
+						embedded iframe experience.
+					</span>
+				) : (
+					<span css={cardMetaStyles}>
+						{item.set ? item.set : item.type}
+					</span>
+				)}
+			</div>
 		</a>
 	);
 };
@@ -240,12 +537,22 @@ const PuzzleContainerBlock = ({
 	container: PuzzleContainer;
 }) => {
 	const isStoreLinks = container.variant === 'store-links';
-
+	const isCardGrid = container.variant === 'card-grid';
+	const flattenedItems = container.content.items.flat();
 	return (
 		<section>
 			<h2 css={containerTitleStyles}>{container.title}</h2>
 			{isStoreLinks ? (
 				<StoreLinksBlock items={container.content.items.flat()} />
+			) : isCardGrid ? (
+				<div css={rowStyles}>
+					{flattenedItems.map((item) => (
+						<PuzzleCard
+							item={item}
+							key={`${item.type}-${item.set}-${item.title}`}
+						/>
+					))}
+				</div>
 			) : (
 				<div css={rowsStyles}>
 					{container.content.items.map((row, index) => (
