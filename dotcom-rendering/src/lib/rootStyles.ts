@@ -5,7 +5,20 @@ import {
 } from '@guardian/source/foundations';
 import { paletteDeclarations } from '../paletteDeclarations';
 import { rootAdStyles } from './adStyles';
-import type { ArticleFormat } from './articleFormat';
+import { isHostedContentDesign, type ArticleFormat } from './articleFormat';
+
+const hostedHeaderOffset = (format: ArticleFormat) => {
+	console.log(format.design);
+
+	if (isHostedContentDesign(format.design)) {
+		return css`
+			html {
+				scroll-margin-top: 100px;
+			}
+		`;
+	}
+	return '';
+};
 
 /**
  * Global styles for pages:
@@ -39,6 +52,7 @@ export const rootStyles = (
 					}
 			  `
 			: ''}
+		${hostedHeaderOffset(format)}
 	}
 	/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
 	/* The not(.src...) selector is to work with Source's FocusStyleManager. */
