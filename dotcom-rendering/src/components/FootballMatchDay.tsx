@@ -21,6 +21,12 @@ import {
 } from '../lib/edition';
 import { FootballCrest } from './FootballCrest';
 
+/**
+ * Note: this component does not use the global colour palette declarations as
+ * it is currently rendered in isolation via a dedicated endpoint where these
+ * are unavailable. (And it would be undesirable to output the full palette.)
+ */
+
 type Props = {
 	matches: FootballMatches;
 	guardianBaseUrl: string;
