@@ -1,7 +1,9 @@
 import { css } from '@emotion/react';
 import {
 	breakpoints,
+	calculateHoverColour,
 	from,
+	palette,
 	palette as sourcePalette,
 	space,
 	textSans12,
@@ -12,9 +14,11 @@ import {
 } from '@guardian/source/foundations';
 import {
 	Button,
+	LinkButton,
 	SvgGuardianLogo,
 	SvgInfoRound,
 } from '@guardian/source/react-components';
+import { Popover } from '@guardian/source-development-kitchen/react-components';
 import { useEffect, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import {
@@ -77,12 +81,7 @@ const advertiserContentStyles = css`
 	justify-content: space-around;
 	align-items: center;
 	${textSans12};
-	padding: 0 2px;
-
-	button {
-		width: 16px;
-		height: 16px;
-	}
+	padding-left: ${space[1]}px;
 `;
 
 const logoStyles = css`
@@ -140,6 +139,17 @@ const badgeWrapperFadeStyles = css`
 	}
 `;
 
+const POPOVER_WIDTH = '280px';
+const popoverOverrides = css`
+	${until.tablet} {
+		left: calc(-${POPOVER_WIDTH} + ${space[8]}px);
+		transform: translateX(50%);
+		::after {
+			left: calc(50% - ${space[8]}px);
+		}
+	}
+`;
+
 /**
  * Can't reuse general Logo.tsx until we add a new palette to work with hosted.
  * The color doesn't work with palette --masthead-nav-link-text
@@ -166,10 +176,10 @@ const GuardianLogo = () => (
 export const HostedContentHeader = ({ branding }: Props) => {
 	const accentColor =
 		branding.hostedCampaignColour ?? sourcePalette.neutral[38];
+	const [isPopoverExpanded, setIsPopoverExpanded] = useState<boolean>(false);
 	const [shouldFadeLogo, setShouldFadeLogo] = useState<boolean>(false);
 
-	// Logo fading is an exclusive feature for hosted video pages at certain breakpoints
-	// This component only needs rehydration on the video layout
+	const handleButtonClick = () => setIsPopoverExpanded(!isPopoverExpanded);
 	const fadeLogo = () => setShouldFadeLogo(true);
 	const unfadeLogo = () => setShouldFadeLogo(false);
 
@@ -194,16 +204,69 @@ export const HostedContentHeader = ({ branding }: Props) => {
 					style={{ backgroundColor: accentColor }}
 				>
 					<p>Advertiser content</p>
-					{/** TODO - add button action ie on click/on hover handlers */}
-					<Button
-						size="xsmall"
-						icon={<SvgInfoRound />}
-						hideLabel={true}
-						priority="subdued"
+					<Popover
+						title="Advertiser content"
+						content={
+							<>
+								<span>
+									This content is paid for and produced by the
+									advertiser. It is regulated by the
+									Advertising Standards Authority. Guardian
+									staff had no involvement in its creation.
+								</span>
+								<div
+									css={css`
+										margin-top: ${space[3]}px;
+									`}
+								>
+									<LinkButton
+										priority="primary"
+										size="xsmall"
+										href="https://www.theguardian.com/info/2016/jan/25/content-funding"
+										theme={{
+											textPrimary: palette.brand[100],
+											backgroundPrimary:
+												palette.brand[800],
+											backgroundPrimaryHover:
+												calculateHoverColour(
+													palette.brand[800],
+												),
+										}}
+										aria-label="Learn more about advertiser content"
+									>
+										Learn more
+									</LinkButton>
+								</div>
+							</>
+						}
+						position="bottom"
+						showPointer={true}
 						theme={{
-							textSubdued: sourcePalette.neutral[97],
+							text: palette.neutral[97],
+							background: palette.neutral[10],
+							dismissButtonText: palette.neutral[100],
+							dismissButtonBackground: palette.neutral[20],
+							dismissButtonBackgroundHover: palette.neutral[38],
 						}}
-						aria-label="More information about advertiser content"
+						width={POPOVER_WIDTH}
+						trigger={
+							<Button
+								id="info-icon"
+								icon={<SvgInfoRound />}
+								size="xsmall"
+								priority="subdued"
+								theme={{
+									textSubdued: sourcePalette.neutral[97],
+								}}
+								hideLabel={true}
+								onClick={handleButtonClick}
+								aria-label="Information about advertiser content"
+								aria-haspopup="dialog"
+							/>
+						}
+						isOpen={isPopoverExpanded}
+						handleClose={() => setIsPopoverExpanded(false)}
+						cssOverrides={popoverOverrides}
 					/>
 				</div>
 
