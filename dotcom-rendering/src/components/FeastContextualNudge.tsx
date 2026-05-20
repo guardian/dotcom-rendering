@@ -3,14 +3,9 @@ import {
 	article15,
 	from,
 	headlineBold17,
-	headlineMedium20,
 	headlineMedium24,
 	palette as sourcePalette,
 	space,
-	textSans17,
-	textSans20,
-	textSansBold17,
-	textSansBold20,
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
