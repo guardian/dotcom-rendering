@@ -62,22 +62,23 @@ jest.mock('react-google-recaptcha', () => ({
 	),
 }));
 
-const renderSecureSignup = () =>
-	render(
-		<ConfigProvider
-			value={{
-				renderingTarget: 'Web',
-				darkModeAvailable: false,
-				assetOrigin: '/',
-				editionId: 'UK',
-			}}
-		>
-			<SecureSignup
-				newsletterId="morning-briefing"
-				successDescription="You'll receive Morning Briefing every weekday."
-			/>
-		</ConfigProvider>,
-	);
+const secureSignupElement = () => (
+	<ConfigProvider
+		value={{
+			renderingTarget: 'Web',
+			darkModeAvailable: false,
+			assetOrigin: '/',
+			editionId: 'UK',
+		}}
+	>
+		<SecureSignup
+			newsletterId="morning-briefing"
+			successDescription="You'll receive Morning Briefing every weekday."
+		/>
+	</ConfigProvider>
+);
+
+const renderSecureSignup = () => render(secureSignupElement());
 
 const getRequestBodyParams = (callIndex = 0): URLSearchParams => {
 	const [, requestInit] = (global.fetch as jest.Mock).mock.calls[

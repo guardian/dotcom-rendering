@@ -305,16 +305,12 @@ export const SecureSignup = ({
 	}, []);
 
 	useEffect(() => {
-		if (isSignedIn !== true) {
-			setUserEmail(undefined);
-			setHideEmailInput(false);
-			return;
+		if (isSignedIn === true) {
+			void resolveEmailForSignedInUser(isSignedIn).then((email) => {
+				setUserEmail(email);
+				setHideEmailInput(isString(email));
+			});
 		}
-
-		void resolveEmailForSignedInUser(isSignedIn).then((email) => {
-			setUserEmail(email);
-			setHideEmailInput(isString(email));
-		});
 	}, [isSignedIn]);
 	const { renderingTarget } = useConfig();
 	const browserId = useBrowserId();
