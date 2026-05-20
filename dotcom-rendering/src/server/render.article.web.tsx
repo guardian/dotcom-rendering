@@ -1,6 +1,7 @@
 import { isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
+import { HostedContentPage } from '../components/HostedContentPage';
 import { LiveBlogRenderer } from '../components/LiveBlogRenderer';
 import {
 	ArticleDesign,
@@ -38,7 +39,7 @@ const decideTitle = ({ theme, frontendData }: Article): string => {
 	return `${frontendData.headline} | ${frontendData.sectionLabel} | The Guardian`;
 };
 
-export const renderHtml = ({
+export const renderArticle = ({
 	article,
 }: Props): { html: string; prefetchScripts: string[] } => {
 	const { design, frontendData, theme } = article;
@@ -293,4 +294,161 @@ export const renderBlocks = ({
 	);
 
 	return `${extractedCss}${html}`;
+};
+
+export const renderHostedContent = ({
+	article,
+}: Props): { html: string; prefetchScripts: string[] } => {
+	const { frontendData } = article;
+
+	const title = decideTitle(article);
+	const linkedData = frontendData.linkedData;
+
+	const darkModeAvailable =
+		frontendData.config.serverSideABTests['webx-dark-mode-web'] ===
+		'enable';
+
+	const renderingTarget = 'Web';
+	const config: Config = {
+		renderingTarget,
+		darkModeAvailable,
+		assetOrigin: ASSET_ORIGIN,
+		editionId: frontendData.editionId,
+	};
+
+	const { html, extractedCss } = renderToStringWithEmotion(
+		<ConfigProvider value={config}>
+			<HostedContentPage
+				article={article}
+				renderingTarget={renderingTarget}
+			/>
+		</ConfigProvider>,
+	);
+
+	// We want to only insert script tags for the elements or main media elements on this page view
+	// so we need to check what elements we have and use the mapping to the the chunk name
+	const elements: FEElement[] = frontendData.blocks
+		.map((block) => block.elements)
+		.flat();
+
+	/**
+	 *
+	 * See InteractiveBlockComponent.island.tsx for the full reasoning behind this logic:
+	 * https://github.com/guardian/dotcom-rendering/blob/69688c53604d28017f52c420d23609c758c68088/dotcom-rendering/src/components/InteractiveBlockComponent.island.tsx#L33-L90
+	 *
+	 * For the few interactive elements that do not load the standard boot.js but instead load a custom script,
+	 * we set `pageHasNonBootInteractiveElements` to true to dynamically add an AMD require function to the window
+	 * via `curl-with-js-and-domReady.js` so custom scripts can load themselves.
+	 */
+	const pageHasNonBootInteractiveElements = elements.some(
+		(element) =>
+			element._type ===
+				'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
+			element.scriptUrl !==
+				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js', // We have rewritten this standard behaviour into Dotcom Rendering
+	);
+
+	const pageHasTweetElements = elements.some(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.TweetBlockElement',
+	);
+
+	const build = getModulesBuild({
+		tests: frontendData.config.abTests,
+		switches: frontendData.config.switches,
+	});
+
+	/**
+	 * The highest priority scripts.
+	 * These scripts have a considerable impact on site performance.
+	 * Only scripts critical to application execution may go in here.
+	 * Please talk to the dotcom platform team before adding more.
+	 * Scripts will be executed in the order they appear in this array
+	 */
+	const prefetchScripts = [
+		polyfillIO,
+		getPathFromManifest(build, 'frameworks.js'),
+		getPathFromManifest(build, 'index.js'),
+		process.env.COMMERCIAL_BUNDLE_URL ??
+			frontendData.config.commercialBundleUrl,
+		pageHasNonBootInteractiveElements &&
+			`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
+	].filter(isString);
+
+	const scriptTags = generateScriptTags(prefetchScripts);
+
+	/**
+	 * We escape windowGuardian here to prevent errors when the data
+	 * is placed in a script tag on the page
+	 */
+	const guardian = createWindowGuardian({
+		editionId: frontendData.editionId,
+		stage: frontendData.config.stage,
+		frontendAssetsFullURL: frontendData.config.frontendAssetsFullURL,
+		revisionNumber: frontendData.config.revisionNumber,
+		sentryPublicApiKey: frontendData.config.sentryPublicApiKey,
+		sentryHost: frontendData.config.sentryHost,
+		keywordIds: frontendData.config.keywordIds,
+		dfpAccountId: frontendData.config.dfpAccountId,
+		adUnit: frontendData.config.adUnit,
+		ajaxUrl: frontendData.config.ajaxUrl,
+		googletagUrl: frontendData.config.googletagUrl,
+		switches: frontendData.config.switches,
+		abTests: frontendData.config.abTests,
+		serverSideABTests: frontendData.config.serverSideABTests,
+		brazeApiKey: frontendData.config.brazeApiKey,
+		isPaidContent: frontendData.pageType.isPaidContent,
+		contentType: frontendData.contentType,
+		shouldHideReaderRevenue: frontendData.shouldHideReaderRevenue,
+		googleRecaptchaSiteKey: frontendData.config.googleRecaptchaSiteKey,
+		// Until we understand exactly what config we need to make available client-side,
+		// add everything we haven't explicitly typed as unknown config
+		unknownConfig: frontendData.config,
+	});
+
+	const { openGraphData, twitterData } = frontendData;
+	const section = frontendData.config.section;
+	const initTwitter = `
+<script>
+// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/set-up-twitter-for-websites
+window.twttr = (function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0],
+	t = window.twttr || {};
+	if (d.getElementById(id)) return t;
+	js = d.createElement(s);
+	js.id = id;
+	js.src = "https://platform.twitter.com/widgets.js";
+	fjs.parentNode.insertBefore(js, fjs);
+
+	t._e = [];
+	t.ready = function(f) {
+	t._e.push(f);
+	};
+
+	return t;
+}(document, "script", "twitter-wjs"));
+</script>`;
+
+	const pageHtml = htmlPageTemplate({
+		linkedData,
+		scriptTags,
+		css: extractedCss,
+		html,
+		title,
+		description: frontendData.trailText,
+		guardian,
+		openGraphData,
+		twitterData,
+		section,
+		initTwitter: pageHasTweetElements ? initTwitter : undefined,
+		canonicalUrl: frontendData.canonicalUrl,
+		renderingTarget: 'Web',
+		weAreHiring: !!frontendData.config.switches.weAreHiring,
+		config,
+		hasLiveBlogTopAd: !!frontendData.config.hasLiveBlogTopAd,
+		hasSurveyAd: !!frontendData.config.hasSurveyAd,
+	});
+
+	return { html: pageHtml, prefetchScripts };
 };
