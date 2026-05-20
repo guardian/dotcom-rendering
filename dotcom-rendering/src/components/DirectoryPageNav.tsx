@@ -308,7 +308,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	});
 
 	return (
-		<nav css={[nav, heightStyles]}>
+		<nav css={[nav]}>
 			<a href={`/${config.title.id}`} css={largeLinkStyles}>
 				{config.titleIcon && config.titleIcon}
 				{config.title.label}
@@ -332,16 +332,6 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	);
 };
 
-const heightStyles = css({
-	height: '',
-	[from.tablet]: {
-		height: '',
-	},
-	[from.desktop]: {
-		height: '',
-	},
-});
-
 const BackgroundImage = (props: {
 	images: DirectoryPageNavConfig['backgroundImages'];
 }) => {
@@ -356,7 +346,6 @@ const BackgroundImage = (props: {
 					'&': css(grid.column.all),
 					gridRow: '1/3',
 				},
-				heightStyles,
 			]}
 		>
 			<Source images={props.images} breakpoint="wide" />
