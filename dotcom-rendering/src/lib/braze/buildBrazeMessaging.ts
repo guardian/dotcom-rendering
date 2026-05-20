@@ -150,6 +150,40 @@ export const buildBrazeMessaging = async (
 
 		braze.openSession();
 
+		/**
+		 * Re-request banner eligibility whenever the user returns to this tab.
+		 *
+		 * After the initial requestBannersRefresh above, the Braze SDK manages
+		 * subsequent session starts silently: once the user has been inactive for
+		 * sessionTimeoutInSeconds (1800s / 30 minutes), the SDK internally starts a
+		 * new session and fires a "Start Session" event to the Braze backend. This
+		 * can trigger Canvas re-entry and make a banner available again, but the SDK
+		 * does not expose a session lifecycle hook (there is no subscribeToSessionUpdates
+		 * in SDK v6.5.0). This means even if the Canvas has re-entered the user and a
+		 * new banner is ready, the SDK keeps serving its locally cached null because it
+		 * was never instructed to fetch new data.
+		 *
+		 * We use the document visibilitychange event as a proxy for "user has returned
+		 * after a potentially session-creating absence". This is the same signal the
+		 * SDK itself uses internally to detect inactivity and start new sessions, so it
+		 * is the correct moment to ask Braze for updated eligibility.
+		 *
+		 * The Braze SDK's built-in token bucket rate limiting (5 tokens per session,
+		 * 1 refill every 3 minutes) ensures that rapid or accidental tab switches
+		 * do not trigger unnecessary network requests. If no tokens are available, the
+		 * SDK fires the error callback in refreshBanners, which resolves gracefully
+		 * without blocking the page or throwing.
+		 *
+		 * This fix was validated with Braze support, who confirmed that
+		 * requestBannersRefresh must be called at the start of each new session for
+		 * Canvas re-eligibility to work as expected.
+		 */
+		document.addEventListener('visibilitychange', () => {
+			if (document.visibilityState === 'visible') {
+				void refreshBanners(braze);
+			}
+		});
+
 		const brazeCards = window.guardian.config.switches.brazeContentCards
 			? new BrazeCards(braze, errorHandler)
 			: new NullBrazeCards();
