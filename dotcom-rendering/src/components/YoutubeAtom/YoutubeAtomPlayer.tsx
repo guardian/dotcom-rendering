@@ -189,7 +189,10 @@ const createOnStateChangeListener =
 	(
 		videoId: string,
 		uniqueId: string,
-		playerState: { paused: boolean },
+		playerState: {
+			paused: boolean;
+			progressIntervalId: ReturnType<typeof setInterval> | undefined;
+		},
 		sendOphanTrackingEvent: (event: VideoEventKey) => void,
 		trackMilestones: ReturnType<typeof useVideoMilestoneTracking>[0],
 		resetMilestones: () => void,
@@ -221,28 +224,17 @@ const createOnStateChangeListener =
 
 			playerState.paused = false;
 
-			/**
-			 * Set a timeout to check progress in the future
-			 */
-			setTimeout(() => {
-				checkProgress();
-			}, 3000);
-
-			const checkProgress = () => {
+			clearInterval(playerState.progressIntervalId);
+			playerState.progressIntervalId = setInterval(() => {
 				trackMilestones({
 					currentTime: player.getCurrentTime(),
 					duration: player.getDuration(),
 				});
 
-				if (player.getPlayerState() !== YT.PlayerState.ENDED) {
-					/**
-					 * Set a timeout to check progress again in the future
-					 */
-					setTimeout(() => checkProgress(), 3000);
+				if (player.getPlayerState() === YT.PlayerState.ENDED) {
+					clearInterval(playerState.progressIntervalId);
 				}
-
-				return null;
-			};
+			}, 3000);
 		}
 
 		if (event.data === YT.PlayerState.PAUSED) {
@@ -256,6 +248,7 @@ const createOnStateChangeListener =
 			});
 			sendOphanTrackingEvent('pause');
 			playerState.paused = true;
+			clearInterval(playerState.progressIntervalId);
 		}
 
 		if (event.data === YT.PlayerState.CUED) {
@@ -270,6 +263,7 @@ const createOnStateChangeListener =
 
 		if (event.data === YT.PlayerState.ENDED) {
 			dispatchCustomPauseEvent(uniqueId);
+			clearInterval(playerState.progressIntervalId);
 			trackMilestones({ ended: true });
 			resetMilestones();
 		}
@@ -422,7 +416,8 @@ export const YoutubeAtomPlayer = ({
 	);
 	const playerPauseState = useRef<{
 		paused: boolean;
-	}>({ paused: false });
+		progressIntervalId: ReturnType<typeof setInterval> | undefined;
+	}>({ paused: false, progressIntervalId: undefined });
 
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
 	const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
