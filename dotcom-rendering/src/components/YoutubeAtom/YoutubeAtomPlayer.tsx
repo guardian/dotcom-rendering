@@ -267,7 +267,7 @@ const createOnStateChangeListener =
 				msg: 'pause',
 				event,
 			});
-			sendOphanTrackingEvent('resume');
+			sendOphanTrackingEvent('pause');
 		}
 
 		if (event.data === YT.PlayerState.CUED) {
