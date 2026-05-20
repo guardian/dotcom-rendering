@@ -112,8 +112,8 @@ const sendTracking = (
 		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(newsletterId),
 		renderingTarget,
 		value: {
-			eventDescription,
 			...extraDetails,
+			eventDescription,
 		},
 		abTest,
 	});
@@ -298,6 +298,9 @@ export const useNewsletterSignupForm = (
 				hideMarketingToggleRef.current &&
 				isSignedInRef.current === false;
 			const effectiveMarketingOptIn = marketingOptInHidden
+				? true
+				: isSignedInRef.current === false &&
+				  marketingOptInRef.current === undefined
 				? true
 				: marketingOptInRef.current;
 			const marketingOptInType =

@@ -253,8 +253,8 @@ const sendTracking = (
 		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.control(newsletterId),
 		renderingTarget,
 		value: {
-			eventDescription,
 			...extraDetails,
+			eventDescription,
 		},
 		abTest,
 	});
@@ -326,6 +326,8 @@ export const SecureSignup = ({
 			document.querySelector('input[type="email"]') ?? null;
 		const emailAddress: string = input?.value ?? '';
 		const effectiveMarketingOptIn = marketingOptInHidden
+			? true
+			: isSignedIn === false && marketingOptIn === undefined
 			? true
 			: marketingOptIn;
 		const marketingOptInType = getMarketingOptInType({
