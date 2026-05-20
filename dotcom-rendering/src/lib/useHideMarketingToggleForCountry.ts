@@ -15,8 +15,9 @@ import { useCountryCode } from './useCountryCode';
 export const useHideMarketingToggleForCountry = (): boolean => {
 	const countryCode = useCountryCode('useHideMarketingToggleForCountry');
 	const switchEnabled =
+		typeof window !== 'undefined' &&
 		window.guardian.config.switches['us-signup-hide-marketing-toggle'] ===
-		true;
+			true;
 
 	return switchEnabled && countryCode === 'US';
 };
