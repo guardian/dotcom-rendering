@@ -237,6 +237,11 @@ export const useNewsletterSignupForm = (
 	const authStatusRef = useRef(authStatus);
 	const isSignedInRef = useRef(isSignedIn);
 	const hideMarketingToggleRef = useRef(hideMarketingToggle);
+	// Single source of truth for the submit handler — derived from the same
+	// inputs as the UI value so they can never diverge due to a timing race.
+	const marketingOptInHiddenForCountryRef = useRef(
+		hideMarketingToggle && isSignedIn === false,
+	);
 	useEffect(() => {
 		marketingOptInRef.current = marketingOptIn;
 	}, [marketingOptIn]);
@@ -252,6 +257,10 @@ export const useNewsletterSignupForm = (
 	useEffect(() => {
 		hideMarketingToggleRef.current = hideMarketingToggle;
 	}, [hideMarketingToggle]);
+	useEffect(() => {
+		marketingOptInHiddenForCountryRef.current =
+			hideMarketingToggle && isSignedIn === false;
+	}, [hideMarketingToggle, isSignedIn]);
 
 	// The email address that was validated at submit-time. We stash it in a
 	// ref and read it back when the captcha resolves, so it can't change out
@@ -299,8 +308,7 @@ export const useNewsletterSignupForm = (
 	const submitForm = useCallback(
 		async (emailAddress: string, token: string): Promise<void> => {
 			const marketingOptInHiddenForCountry =
-				hideMarketingToggleRef.current &&
-				isSignedInRef.current === false;
+				marketingOptInHiddenForCountryRef.current;
 			const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
 				marketingOptInHiddenForCountry,
 				isSignedIn: isSignedInRef.current,

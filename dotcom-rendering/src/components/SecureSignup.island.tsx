@@ -275,7 +275,7 @@ export const SecureSignup = ({
 		hideMarketingToggle && isSignedIn === false;
 
 	useEffect(() => {
-		if (isSignedIn !== 'Pending' && !isSignedIn) {
+		if (isSignedIn !== true) {
 			setMarketingOptIn(true);
 		}
 	}, [isSignedIn]);

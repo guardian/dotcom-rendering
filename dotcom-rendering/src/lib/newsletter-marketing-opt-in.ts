@@ -11,6 +11,8 @@ type MarketingOptInType =
  * - If the user is signed in, omit marketing from the payload (`undefined`).
  * - Otherwise (signed out or auth still pending), use the user's explicit
  *   choice if set, defaulting to `true` (opted-in).
+ * - If auth is `'Pending'`, defer by returning `undefined` — wait until we
+ *   know the user's auth state before submitting a marketing preference.
  */
 export const getEffectiveMarketingOptIn = ({
 	marketingOptInHiddenForCountry,
@@ -28,7 +30,11 @@ export const getEffectiveMarketingOptIn = ({
 	if (isSignedIn === true) {
 		return undefined;
 	}
-	// Signed out or pending — show as opted-in by default, or use explicit choice
+	// Pending — don't submit marketing until we know auth state
+	if (isSignedIn === 'Pending') {
+		return undefined;
+	}
+	// Signed out — use explicit choice or default to opted-in
 	return marketingOptIn ?? true;
 };
 
