@@ -511,6 +511,7 @@ export const renderElement = ({
 						isMainMedia={isMainMedia}
 						videoStyle={element.videoPlayerFormat}
 						role={element.role}
+						caption={element.caption ?? element.title}
 					/>
 				);
 			} else {
@@ -519,7 +520,7 @@ export const renderElement = ({
 						format={format}
 						assets={element.assets}
 						poster={element.posterImage?.[0]?.url}
-						caption={element.title}
+						caption={element.caption ?? element.title}
 						isMainMedia={isMainMedia}
 					/>
 				);
@@ -952,7 +953,7 @@ export const renderElement = ({
 							getLargestImageSize(element.posterImage ?? [])?.url
 						}
 						duration={element.duration}
-						mediaTitle={element.mediaTitle}
+						mediaTitle={element.caption ?? element.mediaTitle}
 						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
