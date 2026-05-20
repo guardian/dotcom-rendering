@@ -81,7 +81,7 @@ const advertiserContentStyles = css`
 	justify-content: space-around;
 	align-items: center;
 	${textSans12};
-	padding: 0 2px;
+	padding-left: ${space[1]}px;
 `;
 
 const logoStyles = css`
