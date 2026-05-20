@@ -218,28 +218,28 @@ importers:
         specifier: workspace:ab-testing-config
         version: link:../config
       '@sveltejs/adapter-auto':
-        specifier: ^6.0.0
+        specifier: 6.1.1
         version: 6.1.1(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))
       '@sveltejs/adapter-static':
-        specifier: ^3.0.8
+        specifier: 3.0.10
         version: 3.0.10(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))
       '@sveltejs/kit':
-        specifier: ^2.59.1
+        specifier: 2.59.1
         version: 2.59.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0))
       '@sveltejs/vite-plugin-svelte':
-        specifier: ^5.0.0
+        specifier: 5.1.1
         version: 5.1.1(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0))
       svelte:
-        specifier: ^5.55.5
+        specifier: 5.55.5
         version: 5.55.5(@typescript-eslint/types@8.59.2)
       svelte-check:
-        specifier: ^4.0.0
+        specifier: 4.3.3
         version: 4.3.3(picomatch@4.0.4)(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@5.9.3)
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
       vite:
-        specifier: ^6.4.2
+        specifier: 6.4.2
         version: 6.4.2(@types/node@24.12.4)(terser@5.46.0)(tsx@4.6.2)
 
   ab-testing/notification-lambda:
