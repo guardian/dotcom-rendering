@@ -57,7 +57,7 @@ type Props = {
 	serverTime?: number;
 	idApiUrl?: string;
 	accentColor?: string;
-	isShinyNewInteractiveLayout?: boolean;
+	isOldInteractive?: boolean;
 };
 
 const globalOlStyles = () => css`
@@ -150,7 +150,7 @@ export const ArticleBody = ({
 	serverTime,
 	idApiUrl,
 	accentColor,
-	isShinyNewInteractiveLayout = false,
+	isOldInteractive = false,
 }: Props) => {
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
@@ -274,7 +274,7 @@ export const ArticleBody = ({
 					contributionsServiceUrl={contributionsServiceUrl}
 					shouldHideAds={shouldHideAds}
 					idApiUrl={idApiUrl}
-					isShinyNewInteractiveLayout={isShinyNewInteractiveLayout}
+					isOldInteractive={isOldInteractive}
 				/>
 			</div>
 			{hasObserverPublicationTag && <ObserverFooter />}
