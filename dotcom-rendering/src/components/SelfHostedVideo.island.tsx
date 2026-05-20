@@ -557,7 +557,7 @@ export const SelfHostedVideo = ({
 		currentTime,
 	});
 
-	const trackMilestones = useVideoMilestoneTracking(sendOphanTrackingEvent);
+	const [trackMilestones] = useVideoMilestoneTracking(sendOphanTrackingEvent);
 
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
@@ -1158,7 +1158,10 @@ export const SelfHostedVideo = ({
 			 * videos, not loops or cinemagraphs.
 			 */
 			if (videoStyle === 'Default') {
-				trackMilestones(video.currentTime, video.duration);
+				trackMilestones({
+					currentTime: video.currentTime,
+					duration: video.duration,
+				});
 			}
 		}
 	};

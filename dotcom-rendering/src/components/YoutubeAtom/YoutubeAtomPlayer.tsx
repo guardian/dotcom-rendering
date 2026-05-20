@@ -47,7 +47,6 @@ type Props = {
 
 type ProgressEvents = {
 	hasSentPlayEvent: boolean;
-	hasSentEndEvent: boolean;
 };
 
 /**
@@ -196,7 +195,7 @@ const createOnStateChangeListener =
 		uniqueId: string,
 		progressEvents: ProgressEvents,
 		sendOphanTrackingEvent: (event: VideoEventKey) => void,
-		trackMilestones: (currentTime: number, duration: number) => void,
+		trackMilestones: ReturnType<typeof useVideoMilestoneTracking>[0],
 	): YT.PlayerEventHandler<YT.OnStateChangeEvent> =>
 	(event) => {
 		const loggerFrom = 'YoutubeAtomPlayer onStateChange';
@@ -245,7 +244,10 @@ const createOnStateChangeListener =
 			}
 
 			const checkProgress = () => {
-				trackMilestones(player.getCurrentTime(), player.getDuration());
+				trackMilestones({
+					currentTime: player.getCurrentTime(),
+					duration: player.getDuration(),
+				});
 
 				if (player.getPlayerState() !== YT.PlayerState.ENDED) {
 					/**
@@ -281,20 +283,9 @@ const createOnStateChangeListener =
 			progressEvents.hasSentPlayEvent = false;
 		}
 
-		if (
-			event.data === YT.PlayerState.ENDED &&
-			!progressEvents.hasSentEndEvent
-		) {
+		if (event.data === YT.PlayerState.ENDED) {
 			dispatchCustomPauseEvent(uniqueId);
-
-			log('dotcom', {
-				from: loggerFrom,
-				videoId,
-				msg: 'ended',
-				event,
-			});
-			sendOphanTrackingEvent('end');
-			progressEvents.hasSentEndEvent = true;
+			trackMilestones({ ended: true });
 			progressEvents.hasSentPlayEvent = false;
 		}
 	};
@@ -441,11 +432,10 @@ export const YoutubeAtomPlayer = ({
 		},
 		[eventEmitters],
 	);
-	const trackMilestones = useVideoMilestoneTracking(sendOphanTrackingEvent);
+	const [trackMilestones] = useVideoMilestoneTracking(sendOphanTrackingEvent);
 
 	const progressEvents = useRef<ProgressEvents>({
 		hasSentPlayEvent: false,
-		hasSentEndEvent: false,
 	});
 
 	const [playerReady, setPlayerReady] = useState<boolean>(false);

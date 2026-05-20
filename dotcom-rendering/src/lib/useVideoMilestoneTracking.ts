@@ -5,6 +5,7 @@ type Milestones = {
 	hasSent25: boolean;
 	hasSent50: boolean;
 	hasSent75: boolean;
+	hasSentEnd: boolean;
 };
 
 /**
@@ -14,18 +15,34 @@ type Milestones = {
  */
 export const useVideoMilestoneTracking = (
 	onMilestone: (event: VideoEventKey) => void,
-): ((currentTime: number, duration: number) => void) => {
-	const milestones = useRef<Milestones>({
+): [
+	(
+		progress: { currentTime: number; duration: number } | { ended: true },
+	) => void,
+	() => void,
+] => {
+	const clearMilestones = () => ({
 		hasSent25: false,
 		hasSent50: false,
 		hasSent75: false,
+		hasSentEnd: false,
 	});
 
-	return useCallback(
-		(currentTime: number, duration: number) => {
-			if (duration <= 0) return;
+	const milestones = useRef<Milestones>(clearMilestones());
 
-			const percent = (currentTime / duration) * 100;
+	const trackMilestone = useCallback(
+		(
+			progress:
+				| { currentTime: number; duration: number }
+				| { ended: true },
+		) => {
+			let percent = 0;
+
+			if ('ended' in progress) {
+				percent = 100;
+			} else if ('duration' in progress && progress.duration > 0) {
+				percent = (progress.currentTime / progress.duration) * 100;
+			}
 
 			if (!milestones.current.hasSent25 && percent >= 25) {
 				onMilestone('25');
@@ -41,7 +58,18 @@ export const useVideoMilestoneTracking = (
 				onMilestone('75');
 				milestones.current.hasSent75 = true;
 			}
+
+			if (!milestones.current.hasSentEnd && percent >= 100) {
+				onMilestone('end');
+				milestones.current.hasSentEnd = true;
+			}
 		},
 		[onMilestone],
 	);
+
+	const resetMilestones = () => {
+		milestones.current = clearMilestones();
+	};
+
+	return [trackMilestone, resetMilestones];
 };
