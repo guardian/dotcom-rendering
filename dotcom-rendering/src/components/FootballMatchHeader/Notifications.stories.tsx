@@ -1,10 +1,15 @@
 import { gridContainerDecorator } from '../../../.storybook/decorators/gridDecorators';
 import preview from '../../../.storybook/preview';
+import type { MatchNotificationsClient } from '../../lib/bridgetApi';
 import { palette } from '../../palette';
 import { NotificationsToggle } from '../NotificationsToggle.stories';
 import { background } from './colours';
 import { FixtureWeb } from './FootballMatchHeader.stories';
 import { Notifications } from './Notifications';
+
+const mockMatchNotificationsClient: MatchNotificationsClient = {
+	isAvailable: () => Promise.resolve({ isAvailable: true }),
+};
 
 const meta = preview.meta({
 	component: Notifications,
@@ -15,6 +20,7 @@ export const Fixture = meta.story({
 		match: FixtureWeb.input.args.initialData.match,
 		edition: 'UK',
 		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 	decorators: [gridContainerDecorator],
 	parameters: {
@@ -67,5 +73,22 @@ export const Result = Live.extend({
 			...Live.input.args.match,
 			kind: 'Result',
 		},
+	},
+});
+
+/**
+ * When the user already has team notifications for one of the teams, the app
+ * returns `isAvailable: false` so we show a message instead of the toggle.
+ */
+export const Unavailable = Fixture.extend({
+	args: {
+		matchNotificationsClient: {
+			isAvailable: () =>
+				Promise.resolve({
+					isAvailable: false,
+					unavailableReason:
+						'Notifications for this match are on because you follow Arsenal. Turn off anytime in Settings > Notifications',
+				}),
+		} satisfies MatchNotificationsClient,
 	},
 });

@@ -7,8 +7,13 @@ import {
 	matchResult,
 } from '../../../fixtures/manual/footballMatches';
 import type { FEFootballMatchHeader } from '../../frontend/feFootballMatchHeader';
+import type { MatchNotificationsClient } from '../../lib/bridgetApi';
 import { NotificationsToggle } from '../NotificationsToggle.stories';
 import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader';
+
+const mockMatchNotificationsClient: MatchNotificationsClient = {
+	isAvailable: () => Promise.resolve({ isAvailable: true }),
+};
 
 const meta = preview.meta({
 	component: FootballMatchHeaderComponent,
@@ -69,6 +74,7 @@ export const FixtureWeb = meta.story({
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
 		renderingTarget: 'Web',
 		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		const nav = canvas.getByRole('navigation');
@@ -118,6 +124,7 @@ export const LiveApps = meta.story({
 			}),
 		renderingTarget: 'Apps',
 		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		await step(
@@ -170,6 +177,7 @@ export const ResultWeb = meta.story({
 			}),
 		renderingTarget: 'Web',
 		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 
 	play: async ({ canvas, canvasElement, step }) => {
@@ -216,6 +224,7 @@ export const ResultApps = meta.story({
 			}),
 		renderingTarget: 'Apps',
 		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 
 	play: async ({ canvas, canvasElement, step }) => {
