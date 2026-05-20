@@ -9,8 +9,8 @@ type MarketingOptInType =
  * - If the toggle is hidden due to country (US soft opt-in) and the user is
  *   confirmed signed out, always submit `true`.
  * - If the user is signed in, omit marketing from the payload (`undefined`).
- * - If the user has made an explicit choice, use that.
- * - Otherwise (signed out or pending with no choice yet), default to `true`.
+ * - Otherwise (signed out or auth still pending), use the user's explicit
+ *   choice if set, defaulting to `true` (opted-in).
  */
 export const getEffectiveMarketingOptIn = ({
 	marketingOptInHiddenForCountry,
@@ -28,7 +28,7 @@ export const getEffectiveMarketingOptIn = ({
 	if (isSignedIn === true) {
 		return undefined;
 	}
-	// Signed out or pending — use explicit choice, or default to true
+	// Signed out or pending — show as opted-in by default, or use explicit choice
 	return marketingOptIn ?? true;
 };
 

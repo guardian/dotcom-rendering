@@ -231,7 +231,7 @@ export const ManyNewsletterSignUp = ({
 	}, [status]);
 
 	useEffect(() => {
-		if (isSignedIn === false) {
+		if (isSignedIn !== true) {
 			setMarketingOptIn(true);
 		}
 	}, [isSignedIn]);
