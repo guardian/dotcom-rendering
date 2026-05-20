@@ -208,6 +208,39 @@ export const HostedContentHeader = ({ branding }: Props) => {
 					<p>Advertiser content</p>
 					<Popover
 						title="Advertiser content"
+						content={
+							<>
+								<span>
+									This content is paid for and produced by the
+									advertiser. It is regulated by the
+									Advertising Standards Authority. Guardian
+									staff had no involvement in its creation.
+								</span>
+								<div
+									css={css`
+										margin-top: ${space[3]}px;
+									`}
+								>
+									<LinkButton
+										priority="primary"
+										size="xsmall"
+										href="https://www.theguardian.com/info/2016/jan/25/content-funding"
+										theme={{
+											textPrimary: palette.brand[100],
+											backgroundPrimary:
+												palette.brand[800],
+											backgroundPrimaryHover:
+												calculateHoverColour(
+													palette.brand[800],
+												),
+										}}
+										aria-label="Learn more about advertiser content"
+									>
+										Learn more
+									</LinkButton>
+								</div>
+							</>
+						}
 						position="bottom"
 						showPointer={true}
 						theme={{
@@ -218,7 +251,7 @@ export const HostedContentHeader = ({ branding }: Props) => {
 							dismissButtonBackgroundHover: palette.neutral[38],
 						}}
 						width={POPOVER_WIDTH}
-						anchorElement={
+						trigger={
 							<Button
 								id="info-icon"
 								icon={<SvgInfoRound />}
@@ -230,43 +263,13 @@ export const HostedContentHeader = ({ branding }: Props) => {
 								hideLabel={true}
 								onClick={handleButtonClick}
 								aria-label="More information about advertiser content"
-							>
-								More information
-							</Button>
+								aria-haspopup="dialog"
+							/>
 						}
 						isOpen={isPopoverExpanded}
 						handleClose={() => setIsPopoverExpanded(false)}
 						cssOverrides={popoverOverrides}
-					>
-						<span>
-							This content is paid for and produced by the
-							advertiser. It is regulated by the Advertising
-							Standards Authority. Guardian staff had no
-							involvement in its creation.
-						</span>
-						<div
-							css={css`
-								margin-top: ${space[3]}px;
-							`}
-						>
-							<LinkButton
-								priority="primary"
-								size="xsmall"
-								href="https://www.theguardian.com/info/2016/jan/25/content-funding"
-								theme={{
-									textPrimary: palette.brand[100],
-									backgroundPrimary: palette.brand[800],
-									backgroundPrimaryHover:
-										calculateHoverColour(
-											palette.brand[800],
-										),
-								}}
-								aria-label="Learn more about advertiser content"
-							>
-								Learn more
-							</LinkButton>
-						</div>
-					</Popover>
+					/>
 				</div>
 
 				<div
