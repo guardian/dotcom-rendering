@@ -180,8 +180,6 @@ export const HostedContentHeader = ({ branding }: Props) => {
 	const [shouldFadeLogo, setShouldFadeLogo] = useState<boolean>(false);
 
 	const handleButtonClick = () => setIsPopoverExpanded(!isPopoverExpanded);
-	// Logo fading is an exclusive feature for hosted video pages at certain breakpoints
-	// This component only needs rehydration on the video layout
 	const fadeLogo = () => setShouldFadeLogo(true);
 	const unfadeLogo = () => setShouldFadeLogo(false);
 
@@ -262,7 +260,7 @@ export const HostedContentHeader = ({ branding }: Props) => {
 								}}
 								hideLabel={true}
 								onClick={handleButtonClick}
-								aria-label="More information about advertiser content"
+								aria-label="Information about advertiser content"
 								aria-haspopup="dialog"
 							/>
 						}
