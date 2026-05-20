@@ -121,8 +121,8 @@ export const ArticleRenderer = ({
 
 		type RecipeSection = {
 			subheadingEl: JSX.Element;
-			recipeName: string;
 			recipe?: RecipeBlockElement;
+			recipeArticleTitle: string;
 			contentEls: JSX.Element[];
 			index: number;
 		};
@@ -137,10 +137,10 @@ export const ArticleRenderer = ({
 				data?._type ===
 				'model.dotcomrendering.pageElements.SubheadingBlockElement'
 			) {
-				const recipeName = stripHtmlTags(data.html);
+				const recipeArticleTitle = stripHtmlTags(data.html);
 				current = {
 					subheadingEl: el,
-					recipeName,
+					recipeArticleTitle,
 					contentEls: [],
 					index: sections.length,
 				};
@@ -168,9 +168,10 @@ export const ArticleRenderer = ({
 					{section.subheadingEl}
 					{section.recipe && (
 						<FeastContextualNudge
+							brazeBannersSystemPlacementIdIndex={0}
 							pageId={pageId}
 							recipe={section.recipe}
-							recipeName={section.recipeName}
+							recipeArticleTitle={section.recipeArticleTitle}
 						/>
 					)}
 					{section.contentEls}

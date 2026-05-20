@@ -24,8 +24,8 @@ export const stripHtmlTags = (html: string): string =>
 
 // ── Feast brand colours ───────────────────────────────────────────────────────
 
-const FEAST_BG = '#F9F9F5';
-const FEAST_BG_DARK = '#1A1A17';
+const FEAST_BG = '#F3F3E9';
+const FEAST_BG_DARK = '#2B2B26';
 const FEAST_TEXT = sourcePalette.neutral[10];
 const FEAST_TEXT_DARK = sourcePalette.neutral[100];
 const FEAST_SUBTEXT = sourcePalette.neutral[20];
@@ -97,10 +97,10 @@ const cardGridStyles = css`
 
 const showcaseCardStyles = css`
 	${lightVars};
-	padding: 0 ${space[2]}px ${space[2]}px ${space[2]}px;
+	padding: 5px ${space[2]}px 10px ${space[2]}px;
 	max-width: 100%;
 	background-color: var(--feast-nudge-bg);
-	border-top: 2px solid ${FEAST_GREEN};
+	border-top: 1px solid ${FEAST_GREEN};
 	display: flex;
 	flex-direction: column;
 	gap: ${space[2]}px;
@@ -108,6 +108,7 @@ const showcaseCardStyles = css`
 		column-gap: 20px;
 		row-gap: ${space[2]}px;
 	} */
+	margin: ${space[2]}px 0;
 `;
 
 // ── Grid area styles ──────────────────────────────────────────────────────────
@@ -143,16 +144,18 @@ const descriptionStyles = css`
 // ── Props ─────────────────────────────────────────────────────────────────────
 
 type FeastContextualNudgeProps = {
+	brazeBannersSystemPlacementIdIndex?: number;
 	recipe?: RecipeBlockElement;
-	recipeName: string;
+	recipeArticleTitle: string;
 	pageId: string;
 };
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export const FeastContextualNudge = ({
+	brazeBannersSystemPlacementIdIndex,
 	recipe,
-	recipeName,
+	recipeArticleTitle,
 	pageId,
 }: FeastContextualNudgeProps) => {
 	const { darkModeAvailable } = useConfig();
@@ -163,7 +166,7 @@ export const FeastContextualNudge = ({
 		setIsStorybook(true);
 	}, []);
 
-	const title = recipe?.title ?? recipeName;
+	const title = recipe?.title ?? recipeArticleTitle;
 	const feastId = recipe?.id;
 
 	return (
@@ -209,7 +212,7 @@ export const FeastContextualNudge = ({
 			<div css={buttonWrapperStyles}>
 				<LinkButton
 					priority="primary"
-					size="small"
+					size="xsmall"
 					// href={buildFeastDeepLink(feastId)}
 					theme={primaryCtaTheme}
 					data-ignore="global-link-styling"
