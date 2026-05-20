@@ -1153,7 +1153,6 @@ export const SelfHostedVideo = ({
 
 		if (playerState === 'PLAYING') {
 			setCurrentTime(video.currentTime);
-
 			/**
 			 * We only want to track milestone events for "long-form"
 			 * videos, not loops or cinemagraphs.
@@ -1162,6 +1161,10 @@ export const SelfHostedVideo = ({
 				currentTime: video.currentTime,
 				duration: video.duration,
 			});
+
+			if (video.currentTime < 1) {
+				resetMilestones();
+			}
 		}
 	};
 

@@ -11,8 +11,8 @@ type Milestones = {
 
 /**
  * Returns a function that should be called on each time update.
- * It tracks when a video crosses the 25%, 50% and 75% milestones and
- * calls the provided callback for each.
+ * It tracks when a video begins, ends or crosses the 25%, 50% and 75%
+ * milestones. On each milestone the provided callback is triggered.
  */
 export const useVideoMilestoneTracking = (
 	onMilestone: (event: VideoEventKey) => void,
@@ -35,6 +35,12 @@ export const useVideoMilestoneTracking = (
 
 	const milestones = useRef<Milestones>(clearMilestones());
 
+	/**
+	 * Sends tracking events when video milestones are hit.
+	 * Uses hook state to prevent duplicate tracking events from being fired.
+	 * Can be called on start, end or timestamp update events using the
+	 * appropriate parameters.
+	 */
 	const trackMilestone = useCallback(
 		(
 			progress:
@@ -78,8 +84,14 @@ export const useVideoMilestoneTracking = (
 		[onMilestone],
 	);
 
+	/**
+	 * Resets the milestones, allowing further tracking events to be triggered.
+	 * Will not reset if the video has not reached the end.
+	 */
 	const resetMilestones = () => {
-		milestones.current = clearMilestones();
+		if (milestones.current.hasSentEnd) {
+			milestones.current = clearMilestones();
+		}
 	};
 
 	return [trackMilestone, resetMilestones];
