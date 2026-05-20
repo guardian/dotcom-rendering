@@ -363,8 +363,8 @@ importers:
         specifier: 12.2.1
         version: 12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/source-development-kitchen':
-        specifier: 0.0.0-canary-20260515144636
-        version: 0.0.0-canary-20260515144636(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)
+        specifier: 28.1.0
+        version: 28.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/support-dotcom-components':
         specifier: 9.0.1
         version: 9.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.9.3))(@guardian/ophan-tracker-js@3.0.0)(zod@4.1.12)
@@ -2568,8 +2568,8 @@ packages:
   '@guardian/shimport@1.0.2':
     resolution: {integrity: sha512-o35TxvMFfpQTGL6flW0ggIfU4tPlXp0PqY9vPL2Fx+68qy+s+uX4T0+dN3+JeoBad9QrRZoHfZPALvZlrRWfHw==}
 
-  '@guardian/source-development-kitchen@0.0.0-canary-20260515144636':
-    resolution: {integrity: sha512-XJMnRFjKpg12Y999xiCTKWggY4EMqEZ71ZASmhHw7Z+lQqz1Hq8n+Gdkwl9+gXXlizF9S7m8mh1Sw1IdcCjriA==}
+  '@guardian/source-development-kitchen@28.1.0':
+    resolution: {integrity: sha512-Rh8xDIvQXNVD3j71wn3D4tYgUf0bIAD+K9n2WYsMUA5x2sXzYMimZ29NcFbq0tket+5CNM4Hae3cBN7MpmEZpQ==}
     peerDependencies:
       '@emotion/react': ^11.11.4
       '@guardian/libs': ^32.0.0
@@ -11828,7 +11828,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@guardian/source-development-kitchen@0.0.0-canary-20260515144636(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)':
+  '@guardian/source-development-kitchen@28.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)':
     dependencies:
       '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/source': 12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)
