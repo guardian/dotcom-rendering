@@ -19,6 +19,7 @@ import {
 } from '../lib/newsletter-sign-up-requests';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
+import { useHideMarketingToggleForCountry } from '../lib/useHideMarketingToggleForCountry';
 import { useConfig } from './ConfigContext';
 import { Flex } from './Flex';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
@@ -137,6 +138,9 @@ export const ManyNewsletterSignUp = ({
 }: Props) => {
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
+	const hideMarketingToggle = useHideMarketingToggleForCountry();
+	/** True when the marketing toggle is hidden for this user due to country policy. */
+	const marketingOptInHidden = hideMarketingToggle && isSignedIn === false;
 
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		Array<{
@@ -248,6 +252,11 @@ export const ManyNewsletterSignUp = ({
 		const listIds = newslettersToSignUpFor.map(
 			(newsletter) => newsletter.listId,
 		);
+		const effectiveMarketingOptIn = marketingOptInHidden
+			? true
+			: marketingOptIn;
+		const shouldTrackMarketingOptInType =
+			marketingOptInHidden || marketingOptIn !== undefined;
 
 		void reportTrackingEvent(
 			'ManyNewsletterSignUp',
@@ -262,12 +271,15 @@ export const ManyNewsletterSignUp = ({
 			email,
 			identityNames,
 			reCaptchaToken,
-			marketingOptIn,
+			effectiveMarketingOptIn,
+			marketingOptInHidden ? true : undefined,
 		).catch(() => {
 			return undefined;
 		});
 
-		const marketingOptInType = marketingOptIn
+		const marketingOptInType = marketingOptInHidden
+			? 'similar-guardian-products-optin-hidden-us'
+			: effectiveMarketingOptIn
 			? 'similar-guardian-products-optin'
 			: 'similar-guardian-products-optout';
 
@@ -281,7 +293,9 @@ export const ManyNewsletterSignUp = ({
 				renderingTarget,
 				{
 					listIds,
-					...(marketingOptIn !== undefined && { marketingOptInType }),
+					...(shouldTrackMarketingOptInType && {
+						marketingOptInType,
+					}),
 					// If the backend handles the failure and responds with an informative
 					// error message (E.G. "Service unavailable", "Invalid email" etc) this
 					// should be included in the event data.
@@ -300,7 +314,7 @@ export const ManyNewsletterSignUp = ({
 			renderingTarget,
 			{
 				listIds,
-				...(marketingOptIn !== undefined && { marketingOptInType }),
+				...(shouldTrackMarketingOptInType && { marketingOptInType }),
 			},
 		);
 
@@ -418,7 +432,11 @@ export const ManyNewsletterSignUp = ({
 								status,
 							}}
 							newsletterCount={newslettersToSignUpFor.length}
-							marketingOptIn={marketingOptIn}
+							marketingOptIn={
+								marketingOptInHidden
+									? undefined
+									: marketingOptIn
+							}
 							setMarketingOptIn={setMarketingOptIn}
 							useReCaptcha={useReCaptcha}
 							captchaSiteKey={captchaSiteKey}

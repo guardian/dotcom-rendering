@@ -26,6 +26,7 @@ const buildFormData = (
 	token: string,
 	marketingOptIn?: boolean,
 	browserId?: string,
+	marketingOptInHidden?: boolean,
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -43,6 +44,10 @@ const buildFormData = (
 
 	if (marketingOptIn !== undefined) {
 		formData.append('marketing', marketingOptIn ? 'true' : 'false');
+	}
+
+	if (marketingOptInHidden === true) {
+		formData.append('marketingOptInHidden', 'true');
 	}
 
 	if (browserId !== undefined) {
@@ -99,13 +104,17 @@ const sendTracking = (
 	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
 	abTest?: AbTest,
+	extraDetails?: Record<string, unknown>,
 ): void => {
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
 		identityName: newsletterId,
 		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(newsletterId),
 		renderingTarget,
-		value: { eventDescription },
+		value: {
+			eventDescription,
+			...extraDetails,
+		},
 		abTest,
 	});
 };
@@ -135,6 +144,12 @@ export type NewsletterSignupFormState = {
 	/** `true` for signed-out users — shows the marketing opt-in toggle. */
 	showMarketingToggle: boolean;
 	marketingOptIn: boolean | undefined;
+	/**
+	 * `true` when the marketing toggle is hidden by country policy (switch on,
+	 * US, signed out). Included in the sign-up payload so the backend knows
+	 * the opt-in was implicit.
+	 */
+	marketingOptInHidden: boolean;
 
 	/** `true` while the POST request is in-flight. */
 	isWaitingForResponse: boolean;
@@ -186,6 +201,7 @@ export const useNewsletterSignupForm = (
 	newsletterId: string,
 	renderingTarget: RenderingTarget,
 	abTest?: AbTest,
+	hideMarketingToggle = false,
 ): NewsletterSignupFormState => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
@@ -215,6 +231,8 @@ export const useNewsletterSignupForm = (
 	const marketingOptInRef = useRef(marketingOptIn);
 	const browserIdRef = useRef(browserId);
 	const authStatusRef = useRef(authStatus);
+	const isSignedInRef = useRef(isSignedIn);
+	const hideMarketingToggleRef = useRef(hideMarketingToggle);
 	useEffect(() => {
 		marketingOptInRef.current = marketingOptIn;
 	}, [marketingOptIn]);
@@ -224,6 +242,12 @@ export const useNewsletterSignupForm = (
 	useEffect(() => {
 		authStatusRef.current = authStatus;
 	}, [authStatus]);
+	useEffect(() => {
+		isSignedInRef.current = isSignedIn;
+	}, [isSignedIn]);
+	useEffect(() => {
+		hideMarketingToggleRef.current = hideMarketingToggle;
+	}, [hideMarketingToggle]);
 
 	// The email address that was validated at submit-time. We stash it in a
 	// ref and read it back when the captcha resolves, so it can't change out
@@ -270,19 +294,36 @@ export const useNewsletterSignupForm = (
 
 	const submitForm = useCallback(
 		async (emailAddress: string, token: string): Promise<void> => {
+			const marketingOptInHidden =
+				hideMarketingToggleRef.current &&
+				isSignedInRef.current === false;
+			const effectiveMarketingOptIn = marketingOptInHidden
+				? true
+				: marketingOptInRef.current;
+			const marketingOptInType =
+				isSignedInRef.current === false
+					? marketingOptInHidden
+						? 'similar-guardian-products-optin-hidden-us'
+						: effectiveMarketingOptIn
+						? 'similar-guardian-products-optin'
+						: 'similar-guardian-products-optout'
+					: undefined;
+
 			sendTracking(
 				newsletterId,
 				'form-submission',
 				renderingTarget,
 				abTest,
+				marketingOptInType ? { marketingOptInType } : undefined,
 			);
 
 			const formData = buildFormData(
 				emailAddress,
 				newsletterId,
 				token,
-				marketingOptInRef.current,
+				effectiveMarketingOptIn,
 				browserIdRef.current,
+				marketingOptInHidden ? true : undefined,
 			);
 
 			const response = await postFormData(
@@ -307,6 +348,7 @@ export const useNewsletterSignupForm = (
 				response.ok ? 'submission-confirmed' : 'submission-failed',
 				renderingTarget,
 				abTest,
+				marketingOptInType ? { marketingOptInType } : undefined,
 			);
 		},
 		[abTest, newsletterId, renderingTarget],
@@ -451,8 +493,9 @@ export const useNewsletterSignupForm = (
 		userEmail,
 		isSignedIn: hasPrefilledEmail,
 		isInteracted,
-		showMarketingToggle: isSignedIn === false,
+		showMarketingToggle: isSignedIn === false && !hideMarketingToggle,
 		marketingOptIn,
+		marketingOptInHidden: hideMarketingToggle && isSignedIn === false,
 		isWaitingForResponse,
 		responseOk,
 		errorMessage,
