@@ -2,6 +2,7 @@ import { useCallback, useRef } from 'react';
 import type { VideoEventKey } from '../components/YoutubeAtom/YoutubeAtom';
 
 type Milestones = {
+	hasSentPlay: boolean;
 	hasSent25: boolean;
 	hasSent50: boolean;
 	hasSent75: boolean;
@@ -17,11 +18,15 @@ export const useVideoMilestoneTracking = (
 	onMilestone: (event: VideoEventKey) => void,
 ): [
 	(
-		progress: { currentTime: number; duration: number } | { ended: true },
+		progress:
+			| { currentTime: number; duration: number }
+			| { started: true }
+			| { ended: true },
 	) => void,
 	() => void,
 ] => {
 	const clearMilestones = () => ({
+		hasSentPlay: false,
 		hasSent25: false,
 		hasSent50: false,
 		hasSent75: false,
@@ -34,6 +39,7 @@ export const useVideoMilestoneTracking = (
 		(
 			progress:
 				| { currentTime: number; duration: number }
+				| { started: true }
 				| { ended: true },
 		) => {
 			let percent = 0;
@@ -42,6 +48,11 @@ export const useVideoMilestoneTracking = (
 				percent = 100;
 			} else if ('duration' in progress && progress.duration > 0) {
 				percent = (progress.currentTime / progress.duration) * 100;
+			}
+
+			if (!milestones.current.hasSentPlay && percent >= 0) {
+				onMilestone('play');
+				milestones.current.hasSentPlay = true;
 			}
 
 			if (!milestones.current.hasSent25 && percent >= 25) {
