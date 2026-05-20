@@ -15,6 +15,7 @@ const buttonStyles = css`
 	background: none;
 	padding: 0;
 	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
 `;
 
 const iconContainerStyles = css`
@@ -53,19 +54,14 @@ export const AudioIcon = ({ isMuted, handleClick }: AudioIconProps) => {
 };
 
 type FullscreenIconProps = {
-	atomId: SelfHostedVideoPlayerProps['atomId'];
 	handleClick: SelfHostedVideoPlayerProps['handleFullscreenClick'];
 };
 
-export const FullscreenIcon = ({
-	atomId,
-	handleClick,
-}: FullscreenIconProps) => (
+export const FullscreenIcon = ({ handleClick }: FullscreenIconProps) => (
 	<button
 		type="button"
 		onClick={handleClick}
 		css={[buttonStyles, iconContainerStyles]}
-		data-link-name={`gu-video-loop-fullscreen-${atomId}`}
 		data-testid="fullscreen-icon"
 	>
 		<SvgArrowExpand

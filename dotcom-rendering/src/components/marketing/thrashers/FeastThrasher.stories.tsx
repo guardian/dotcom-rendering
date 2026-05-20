@@ -6,4 +6,14 @@ const meta = preview.meta({
 	component: FeastThrasherComponent,
 });
 
-export const FeastThrasher = meta.story();
+export const FeastThrasher = meta.story({
+	args: {
+		renderingTarget: 'Web',
+	},
+});
+
+export const FeastThrasherApps = meta.story({
+	args: {
+		renderingTarget: 'Apps',
+	},
+});

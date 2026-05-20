@@ -1,4 +1,7 @@
-import { getNotificationsClient } from '../lib/bridgetApi';
+import {
+	getMatchNotificationsClient,
+	getNotificationsClient,
+} from '../lib/bridgetApi';
 import type { FootballMatchHeaderProps } from './FootballMatchHeader/FootballMatchHeader';
 import { FootballMatchHeader } from './FootballMatchHeader/FootballMatchHeader';
 import type { HeaderData } from './FootballMatchHeader/headerData';
@@ -29,6 +32,7 @@ export const FootballMatchHeaderWrapper = (props: Props) => (
 		refreshInterval={16_000}
 		renderingTarget={props.renderingTarget}
 		notificationsClient={getNotificationsClient()}
+		matchNotificationsClient={getMatchNotificationsClient()}
 	/>
 );
 

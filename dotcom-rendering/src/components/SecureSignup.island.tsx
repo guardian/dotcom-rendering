@@ -169,9 +169,13 @@ const buildFormData = (
 
 const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
 	const { idApiUrl } = window.guardian.config.page;
-	if (!idApiUrl) return;
+	if (!idApiUrl) {
+		return;
+	}
 	const fetchedEmail = await lazyFetchEmailWithTimeout()();
-	if (!fetchedEmail) return;
+	if (!fetchedEmail) {
+		return;
+	}
 	return fetchedEmail;
 };
 
@@ -335,7 +339,6 @@ export const SecureSignup = ({
 		sendTracking(newsletterId, 'captcha-passed', renderingTarget, abTest);
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
-			// eslint-disable-next-line no-console -- unexpected error
 			console.error(error);
 			sendTracking(
 				newsletterId,

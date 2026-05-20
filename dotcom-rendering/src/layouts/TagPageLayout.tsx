@@ -148,16 +148,13 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					/**
 					 * The pagination should appear at the bottom of the page; this is done by passing to FrontSection.
 					 */
+
 					const isLastGroup =
 						index === tagPage.groupedTrails.length - 1;
 					const hasPagination = !!tagPage.pagination;
-					const isSingleGroup = tagPage.groupedTrails.length === 1;
-					const shouldSuppressPagination = isSingleGroup;
 
 					const tagPagePagination =
-						isLastGroup &&
-						hasPagination &&
-						!shouldSuppressPagination
+						isLastGroup && hasPagination
 							? tagPage.pagination
 							: undefined;
 

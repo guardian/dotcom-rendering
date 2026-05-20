@@ -10,12 +10,6 @@ export default defineConfig([
 	]),
 	...guardian.configs.recommended,
 	{
-		languageOptions: {
-			parserOptions: {
-				project: ["./tsconfig.json"],
-				tsconfigRootDir: "./",
-			},
-		},
 		rules: {
 			curly: ["error", "multi-line"],
 			"no-use-before-define": [

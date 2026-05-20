@@ -503,10 +503,7 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			if (
-				element.videoPlayerFormat &&
-				['Loop', 'Cinemagraph'].includes(element.videoPlayerFormat)
-			) {
+			if (element.videoPlayerFormat) {
 				return (
 					<SelfHostedVideoInArticle
 						element={element}
@@ -591,7 +588,9 @@ export const renderElement = ({
 				showNewNewsletterSignupCard:
 					!!switches.showNewNewsletterSignupCard,
 			};
-			if (isListElement || isTimeline) return null;
+			if (isListElement || isTimeline) {
+				return null;
+			}
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<EmailSignUpWrapper {...emailSignUpProps} />
@@ -1112,6 +1111,7 @@ type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
 type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
 
 export const getNestedArticleElement =
+	// eslint-disable-next-line react/display-name -- this is not a React component, but a function that returns one
 	(articleProps: ArticleLevelProps) => (elementProps: ElementLevelProps) => (
 		<RenderArticleElement {...articleProps} {...elementProps} />
 	);

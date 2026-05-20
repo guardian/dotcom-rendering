@@ -264,7 +264,9 @@ export const ShareButton = ({
 	}, [shareData, isLiveBlogBlockDesktop]);
 
 	useEffect(() => {
-		if (!isCopied) return;
+		if (!isCopied) {
+			return;
+		}
 		const timer = setTimeout(() => {
 			setIsCopied(false);
 		}, 3000);

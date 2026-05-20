@@ -26,7 +26,7 @@ interface DirectoryPageNavConfig {
 	backgroundColor: string;
 	titleIcon?: React.ReactElement;
 	title: { label: string; id: string };
-	links: { label: string; id: string }[];
+	links: Array<{ label: string; id: string }>;
 	backgroundImages?: {
 		mobile: string;
 		mobileLandscape: string;
@@ -196,7 +196,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		(cfg) =>
 			cfg.pageIds.includes(pageId) ||
 			cfg.tagIds.some(
-				(tagId) => pageTags?.some((tag) => tag.id === tagId),
+				(tagId) => pageTags?.some((tag) => tag.id === tagId) ?? false,
 			),
 	);
 

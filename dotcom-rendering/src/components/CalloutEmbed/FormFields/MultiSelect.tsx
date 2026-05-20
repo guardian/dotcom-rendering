@@ -6,10 +6,10 @@ import { CheckboxSelect } from './CheckboxSelect';
 import { RadioSelect } from './RadioSelect';
 
 type Props = {
-	validationErrors?: { [key in string]: string };
+	validationErrors?: Record<string, string>;
 	formField: CampaignFieldCheckbox | CampaignFieldRadio;
-	formData: { [key in string]: any };
-	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
+	formData: Record<string, any>;
+	setFormData: React.Dispatch<React.SetStateAction<Record<string, any>>>;
 	multiple: boolean;
 };
 

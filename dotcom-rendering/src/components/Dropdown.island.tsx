@@ -524,7 +524,7 @@ export const Dropdown = ({
 						)}
 					</button>
 					<div css={isExpanded ? displayBlock : displayNone}>
-						{/* eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Children types are awkward but this should work */}
+						{}
 						{children ? (
 							<>{children}</>
 						) : (

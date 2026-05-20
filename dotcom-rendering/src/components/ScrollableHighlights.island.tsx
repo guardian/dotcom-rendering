@@ -215,7 +215,9 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const [showNextButton, setShowNextButton] = useState(true);
 
 	const scrollTo = (direction: 'left' | 'right') => {
-		if (!carouselRef.current) return;
+		if (!carouselRef.current) {
+			return;
+		}
 
 		const cardWidth =
 			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
@@ -237,7 +239,9 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	 */
 	const updateButtonVisibilityOnScroll = () => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
@@ -249,7 +253,9 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 
 	useEffect(() => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		carouselElement.addEventListener(
 			'scroll',

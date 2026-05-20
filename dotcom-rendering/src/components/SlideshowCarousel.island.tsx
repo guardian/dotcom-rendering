@@ -141,7 +141,9 @@ export const SlideshowCarousel = ({
 	const [currentPage, setCurrentPage] = useState(0);
 
 	const scrollTo = (direction: 'left' | 'right') => {
-		if (!carouselRef.current) return;
+		if (!carouselRef.current) {
+			return;
+		}
 
 		const cardWidth =
 			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
@@ -162,7 +164,9 @@ export const SlideshowCarousel = ({
 	 */
 	const updatePaginationStateOnScroll = () => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
@@ -190,7 +194,9 @@ export const SlideshowCarousel = ({
 
 	useEffect(() => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		carouselElement.addEventListener(
 			'scroll',

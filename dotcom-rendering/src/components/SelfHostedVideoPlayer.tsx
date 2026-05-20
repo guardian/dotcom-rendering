@@ -10,7 +10,6 @@ import { forwardRef } from 'react';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
-import type { VideoPlayerFormat } from '../types/mainMedia';
 import {
 	AudioIcon as AudioIconComponent,
 	FullscreenIcon,
@@ -23,28 +22,6 @@ import { VideoProgressBarInteractive } from './VideoProgressBarInteractive';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 export type ControlsPosition = 'top' | 'bottom';
-
-const playerContainerStyles = css`
-	&:fullscreen {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background-color: ${palette('--video-fullscreen-background')};
-		width: 100vw;
-		height: 100vh;
-
-		/* Override the fixed aspect-ratio + width:100% on the video so it
-		   fits within the screen while preserving its aspect ratio. */
-		video {
-			width: 100%;
-			height: 100%;
-			max-width: 100vw;
-			max-height: 100vh;
-			aspect-ratio: auto;
-			object-fit: contain;
-		}
-	}
-`;
 
 const videoStyles = (aspectRatio: number) => css`
 	position: relative;
@@ -73,14 +50,19 @@ const interactiveStyles = css`
 	cursor: pointer;
 `;
 
-const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
+const subtitleFontStyles = (subtitleSize: SubtitleSize | undefined) => css`
 	::cue {
-		/* Hide the cue by default as we prefer custom overlay */
-		visibility: hidden;
 		color: ${palette('--video-subtitle-text')};
 		${subtitleSize === 'small' && textSans15};
 		${subtitleSize === 'medium' && textSans17};
 		${subtitleSize === 'large' && textSans20};
+	}
+`;
+
+const hideNativeSubtitlesStyles = css`
+	::cue {
+		/* Hide the cue as we prefer custom overlay */
+		visibility: hidden;
 	}
 `;
 
@@ -127,7 +109,6 @@ export type Props = {
 	height?: number;
 	width?: number;
 	aspectRatio: number;
-	videoStyle: VideoPlayerFormat;
 	FallbackImageComponent: ReactElement;
 	currentTime: number;
 	hasAudio: boolean;
@@ -140,7 +121,6 @@ export type Props = {
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
 	handleTimeUpdate: (event: SyntheticEvent<HTMLVideoElement>) => void;
-	useLongFormProgressBar: boolean;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick?: (event: SyntheticEvent) => void;
 	updateCurrentTime: (time: number) => void;
@@ -148,6 +128,7 @@ export type Props = {
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showProgressBar: boolean;
+	useLongFormProgressBar: boolean;
 	showPlayPauseIcon: 'play' | 'pause' | null;
 	showIcons: boolean;
 	showFullscreenIcon: boolean;
@@ -160,7 +141,7 @@ export type Props = {
 	isInteractive: boolean;
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
-	playerContainerRef: React.RefObject<HTMLDivElement>;
+	isWebKitFullscreen: boolean;
 };
 
 /**
@@ -181,7 +162,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 			height,
 			width,
 			aspectRatio,
-			videoStyle,
 			FallbackImageComponent,
 			posterImage,
 			currentTime,
@@ -195,13 +175,13 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleAudioClick,
 			handleKeyDown,
 			handleTimeUpdate,
-			useLongFormProgressBar,
 			handlePause,
 			handleFullscreenClick,
 			updateCurrentTime,
 			onError,
 			preloadPartialData,
 			showProgressBar: canShowProgressBar,
+			useLongFormProgressBar,
 			showPlayPauseIcon,
 			showIcons: canShowIcons,
 			showFullscreenIcon,
@@ -213,7 +193,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			iconsPosition,
 			subtitlesPosition,
-			playerContainerRef,
+			isWebKitFullscreen,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -222,22 +202,19 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const currentRefExists = ref && 'current' in ref && !!ref.current;
 
 		const showSubtitles = canShowSubtitles && !!subtitleSource;
+		const showCustomSubtitles = showSubtitles && !isWebKitFullscreen;
 		const showProgressBar = canShowProgressBar && currentRefExists;
 		const showIcons = canShowIcons && currentRefExists;
 
-		const dataLinkName = `gu-video-${videoStyle.toLowerCase()}-${
-			showPlayPauseIcon === 'play' ? 'play' : 'pause'
-		}-${atomId}`;
-
 		return (
-			<div ref={playerContainerRef} css={playerContainerStyles}>
-				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
+			<>
 				<video
 					id={videoId}
 					css={[
 						videoStyles(aspectRatio),
 						isInteractive && interactiveStyles,
-						showSubtitles && subtitleStyles(subtitleSize),
+						showSubtitles && subtitleFontStyles(subtitleSize),
+						showCustomSubtitles && hideNativeSubtitlesStyles,
 					]}
 					crossOrigin="anonymous"
 					ref={ref}
@@ -245,7 +222,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 					data-testid="self-hosted-video-player"
 					height={height}
 					width={width}
-					data-link-name={dataLinkName}
 					data-chromatic="ignore"
 					preload={preloadPartialData ? 'metadata' : 'none'}
 					loop={shouldLoop}
@@ -274,8 +250,11 @@ export const SelfHostedVideoPlayer = forwardRef(
 					))}
 					{showSubtitles && (
 						<track
-							// Don't use default - it forces native rendering on iOS
-							default={false}
+							/**
+							 * On iOS/WebKit, `default` forces native subtitle rendering.
+							 * Disable it when custom subtitles are enabled.
+							 */
+							default={!showCustomSubtitles}
 							kind="subtitles"
 							src={subtitleSource}
 							srcLang="en"
@@ -283,7 +262,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					)}
 					{FallbackImageComponent}
 				</video>
-				{showSubtitles && !!activeCue?.text && (
+				{showCustomSubtitles && !!activeCue?.text && (
 					<SubtitleOverlay
 						text={activeCue.text}
 						size={subtitleSize}
@@ -314,7 +293,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 								duration={ref.current!.duration}
 							/>
 						))}
-					{showIcons && (
+					{showIcons && (showFullscreenIcon || hasAudio) && (
 						<div
 							css={[
 								iconsContainerStyles,
@@ -329,7 +308,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 							{showFullscreenIcon && (
 								<FullscreenIcon
 									handleClick={handleFullscreenClick}
-									atomId={atomId}
 								/>
 							)}
 							{hasAudio && (
@@ -341,7 +319,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						</div>
 					)}
 				</div>
-			</div>
+			</>
 		);
 	},
 );

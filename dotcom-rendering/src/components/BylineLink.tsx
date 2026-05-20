@@ -76,7 +76,9 @@ export const bylineAsTokens = (
 	byline: string | undefined,
 	tags: TagType[],
 ): string[] => {
-	if (!byline) return [];
+	if (!byline) {
+		return [];
+	}
 	// Replace special regex characters with their escaped version.
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_string_as_the_replacement
 	const titles = tags
@@ -85,7 +87,9 @@ export const bylineAsTokens = (
 	// The contributor tag title should exist inside the byline for the regex
 	// below to work. If it doesn't, we return the whole byline to prevent the
 	// regex splitting the string into an array of single charaters
-	if (titles.length === 0) return [byline];
+	if (titles.length === 0) {
+		return [byline];
+	}
 
 	const regex = new RegExp(
 		`(${applyCleverOrderingForMatching(titles).join('|')})`,

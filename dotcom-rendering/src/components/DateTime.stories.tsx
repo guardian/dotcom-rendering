@@ -12,7 +12,7 @@ const meta: Meta<typeof DateTime> = {
 	title: 'Components/DateTime',
 	component: DateTime,
 	decorators: (Story, { parameters }: { parameters: Parameters }) => {
-		const editionId = parameters?.config?.editionId ?? 'UK';
+		const editionId = parameters.config?.editionId ?? 'UK';
 		return (
 			<div
 				css={css`

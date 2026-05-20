@@ -67,7 +67,9 @@ export const RelativeTime = ({ then, now, editionId }: Props) => {
 		const updateDisplay = () =>
 			setDisplay(relativeTime(then, now, 'client'));
 		updateDisplay();
-		if (!inView) return;
+		if (!inView) {
+			return;
+		}
 		const interval = setInterval(updateDisplay, ONE_MINUTE);
 		return () => clearInterval(interval);
 	}, [inView, now, then]);

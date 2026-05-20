@@ -107,7 +107,7 @@ export const renderSportPage = ({ sportData, nav }: Props) => {
 	const renderingTarget = 'Web';
 
 	const darkModeAvailable =
-		sportData.config.serverSideABTests?.['webx-dark-mode-web'] === 'enable';
+		sportData.config.serverSideABTests['webx-dark-mode-web'] === 'enable';
 	const config: Config = {
 		renderingTarget,
 		darkModeAvailable,

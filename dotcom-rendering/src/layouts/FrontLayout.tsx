@@ -282,7 +282,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					const [trail] = trails;
 
 					// There are some containers that have zero trails. We don't want to render these
-					if (!trail) return null;
+					if (!trail) {
+						return null;
+					}
 
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 

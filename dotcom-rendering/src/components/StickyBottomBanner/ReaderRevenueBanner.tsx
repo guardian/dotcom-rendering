@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
-import type { ConsentState, CountryCode } from '@guardian/libs';
-import { getCookie, onConsent } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
+import { onConsent } from '@guardian/consent-manager';
+import type { CountryCode } from '@guardian/libs';
+import { getCookie } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { abandonedBasketSchema } from '@guardian/support-dotcom-components';
 import type {
@@ -91,7 +93,9 @@ const getArticleCountToday = (
 function parseAbandonedBasket(
 	cookie: string | null,
 ): AbandonedBasket | undefined {
-	if (!cookie) return;
+	if (!cookie) {
+		return;
+	}
 
 	const parsedResult = abandonedBasketSchema.safeParse(JSON.parse(cookie));
 	if (!parsedResult.success) {
@@ -134,8 +138,12 @@ const buildPayload = async ({
 	isSensitive,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const getBrowserId = (): string | undefined => {
-		if (!inAuxiaVariant) return undefined;
-		if (!userConsent) return undefined;
+		if (!inAuxiaVariant) {
+			return undefined;
+		}
+		if (!userConsent) {
+			return undefined;
+		}
 		return getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
 	};
 
@@ -202,7 +210,9 @@ export const canShowRRBanner: CanShowFunctionType<
 	inHoldbackGroup,
 	inAuxiaVariant,
 }) => {
-	if (!remoteBannerConfig) return { show: false };
+	if (!remoteBannerConfig) {
+		return { show: false };
+	}
 
 	if (shouldHideReaderRevenue || isPaidContent || isPreview) {
 		// We never serve Reader Revenue banners in this case
@@ -324,7 +334,7 @@ export const ReaderRevenueBanner = ({
 			: /* webpackChunkName: "designable-banner-v2" */
 			  import(`../marketing/banners/designableBanner/v2/Banner`)
 		)
-			.then((bannerModule: { [key: string]: React.ElementType }) => {
+			.then((bannerModule: Record<string, React.ElementType>) => {
 				setBanner(() => bannerModule[name] ?? null);
 			})
 			.catch((error) => {

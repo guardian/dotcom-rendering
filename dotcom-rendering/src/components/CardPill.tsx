@@ -24,8 +24,12 @@ type CardPillProps = {
 };
 
 export const CardPill = ({ format, media, isNewsletter }: CardPillProps) => {
-	if (isNewsletter) return <Pill content="Newsletter" />;
-	if (!media) return null;
+	if (isNewsletter) {
+		return <Pill content="Newsletter" />;
+	}
+	if (!media) {
+		return null;
+	}
 
 	switch (media.type) {
 		case 'Gallery':
@@ -45,7 +49,9 @@ export const CardPill = ({ format, media, isNewsletter }: CardPillProps) => {
 				/>
 			);
 		case 'YoutubeVideo':
-			if (format.design !== ArticleDesign.Video) return null;
+			if (format.design !== ArticleDesign.Video) {
+				return null;
+			}
 			if (media.isLive) {
 				return (
 					<Pill
@@ -62,7 +68,9 @@ export const CardPill = ({ format, media, isNewsletter }: CardPillProps) => {
 				/>
 			);
 		case 'SelfHostedVideo':
-			if (format.design !== ArticleDesign.Video) return null;
+			if (format.design !== ArticleDesign.Video) {
+				return null;
+			}
 			return (
 				<Pill
 					content={secondsToDuration(media.duration)}
