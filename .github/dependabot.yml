@@ -47,6 +47,11 @@ updates:
       storybook:
         patterns:
           - '*storybook*'
+      svelte:
+        patterns:
+          - '@sveltejs/*'
+          - 'svelte'
+          - 'svelte-check'
       swc:
         patterns:
           - '@swc/*'
