@@ -422,7 +422,6 @@ export const InteractiveLayout = (props: WebProps | AppProps) => {
 								editionId={article.editionId}
 								shouldHideAds={article.shouldHideAds}
 								idApiUrl={article.config.idApiUrl}
-								isShinyNewInteractiveLayout={true}
 							/>
 
 							{isApps && (
