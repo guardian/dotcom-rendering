@@ -40,7 +40,7 @@ type Props = {
 	contributionsServiceUrl: string;
 	shouldHideAds: boolean;
 	idApiUrl?: string;
-	isShinyNewInteractiveLayout?: boolean;
+	isOldInteractive?: boolean;
 };
 
 export const ArticleRenderer = ({
@@ -64,7 +64,7 @@ export const ArticleRenderer = ({
 	contributionsServiceUrl,
 	shouldHideAds,
 	idApiUrl,
-	isShinyNewInteractiveLayout = false,
+	isOldInteractive = false,
 }: Props) => {
 	const isSectionedMiniProfilesArticle =
 		elements.filter(
@@ -208,8 +208,7 @@ export const ArticleRenderer = ({
 
 				// Note, this class MUST be on the *direct parent* of the
 				// elements for some legacy interactive styling to work.
-				format.design === ArticleDesign.Interactive &&
-				!isShinyNewInteractiveLayout
+				format.design === ArticleDesign.Interactive && isOldInteractive
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}
@@ -217,7 +216,7 @@ export const ArticleRenderer = ({
 			css={[
 				commercialPosition,
 				spacefinderAdStyles,
-				isShinyNewInteractiveLayout && interactiveLayoutCSS,
+				!isOldInteractive && interactiveLayoutCSS,
 			]}
 		>
 			{renderingTarget === 'Apps'
