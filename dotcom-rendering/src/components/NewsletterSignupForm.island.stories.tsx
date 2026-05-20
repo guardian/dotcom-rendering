@@ -82,7 +82,7 @@ const mockForm = (state: Partial<NewsletterSignupFormState>) => ({
 	isInteracted: false,
 	showMarketingToggle: false,
 	marketingOptIn: undefined,
-	marketingOptInHidden: false,
+	marketingOptInHiddenForCountry: false,
 	isWaitingForResponse: false,
 	responseOk: undefined,
 	errorMessage: undefined,

@@ -7,6 +7,10 @@ import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { lazyFetchEmailWithTimeout } from './fetchEmail';
 import {
+	getEffectiveMarketingOptIn,
+	getMarketingOptInType,
+} from './newsletter-marketing-opt-in';
+import {
 	EVENT_DESCRIPTION_TO_ACTION,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	type NewsletterEventDescription,
@@ -26,7 +30,7 @@ const buildFormData = (
 	token: string,
 	marketingOptIn?: boolean,
 	browserId?: string,
-	marketingOptInHidden?: boolean,
+	marketingOptInHiddenForCountry?: boolean,
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -46,7 +50,7 @@ const buildFormData = (
 		formData.append('marketing', marketingOptIn ? 'true' : 'false');
 	}
 
-	if (marketingOptInHidden === true) {
+	if (marketingOptInHiddenForCountry === true) {
 		formData.append('marketingOptInHidden', 'true');
 	}
 
@@ -149,7 +153,7 @@ export type NewsletterSignupFormState = {
 	 * US, signed out). Included in the sign-up payload so the backend knows
 	 * the opt-in was implicit.
 	 */
-	marketingOptInHidden: boolean;
+	marketingOptInHiddenForCountry: boolean;
 
 	/** `true` while the POST request is in-flight. */
 	isWaitingForResponse: boolean;
@@ -294,23 +298,19 @@ export const useNewsletterSignupForm = (
 
 	const submitForm = useCallback(
 		async (emailAddress: string, token: string): Promise<void> => {
-			const marketingOptInHidden =
+			const marketingOptInHiddenForCountry =
 				hideMarketingToggleRef.current &&
 				isSignedInRef.current !== true;
-			const effectiveMarketingOptIn = marketingOptInHidden
-				? true
-				: isSignedInRef.current !== true &&
-				  marketingOptInRef.current === undefined
-				? true
-				: marketingOptInRef.current;
-			const marketingOptInType =
-				isSignedInRef.current === false
-					? marketingOptInHidden
-						? 'similar-guardian-products-optin-hidden-us'
-						: effectiveMarketingOptIn
-						? 'similar-guardian-products-optin'
-						: 'similar-guardian-products-optout'
-					: undefined;
+			const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
+				marketingOptInHiddenForCountry,
+				isSignedIn: isSignedInRef.current,
+				marketingOptIn: marketingOptInRef.current,
+			});
+			const marketingOptInType = getMarketingOptInType({
+				marketingOptInHiddenForCountry,
+				isSignedIn: isSignedInRef.current,
+				effectiveMarketingOptIn,
+			});
 
 			sendTracking(
 				newsletterId,
@@ -326,7 +326,7 @@ export const useNewsletterSignupForm = (
 				token,
 				effectiveMarketingOptIn,
 				browserIdRef.current,
-				marketingOptInHidden ? true : undefined,
+				marketingOptInHiddenForCountry ? true : undefined,
 			);
 
 			const response = await postFormData(
@@ -498,7 +498,8 @@ export const useNewsletterSignupForm = (
 		isInteracted,
 		showMarketingToggle: isSignedIn !== true && !hideMarketingToggle,
 		marketingOptIn,
-		marketingOptInHidden: hideMarketingToggle && isSignedIn !== true,
+		marketingOptInHiddenForCountry:
+			hideMarketingToggle && isSignedIn !== true,
 		isWaitingForResponse,
 		responseOk,
 		errorMessage,
