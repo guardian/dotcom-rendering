@@ -98,6 +98,7 @@ export const PLAYER_STATES = [
 	 * For example, iOS devices in low power mode will suspend playback on autoplaying videos.
 	 */
 	'PAUSED_BY_BROWSER',
+	'ENDED',
 ] as const;
 
 export type PlayerStates = (typeof PLAYER_STATES)[number];
@@ -124,6 +125,7 @@ export type Props = {
 	handleTimeUpdate: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick: (event: SyntheticEvent) => void;
+	handleEnded?: (event: SyntheticEvent) => void;
 	updateCurrentTime: (time: number) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	posterImage?: string;
@@ -179,6 +181,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleTimeUpdate,
 			handlePause,
 			handleFullscreenClick,
+			handleEnded,
 			updateCurrentTime,
 			onError,
 			preloadPartialData,
@@ -240,6 +243,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onClick={handlePlayPauseClick}
 					onKeyDown={handleKeyDown}
 					onError={onError}
+					onEnded={handleEnded}
 					disablePictureInPicture={true}
 				>
 					{sources.map(({ src, mimeType }) => (

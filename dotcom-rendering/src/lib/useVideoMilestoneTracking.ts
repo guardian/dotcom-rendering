@@ -70,7 +70,7 @@ export const useVideoMilestoneTracking = (
 				milestones.current.hasSent75 = true;
 			}
 
-			if (!milestones.current.hasSentEnd && percent >= 100) {
+			if (!milestones.current.hasSentEnd && percent >= 99) {
 				onMilestone('end');
 				milestones.current.hasSentEnd = true;
 			}
