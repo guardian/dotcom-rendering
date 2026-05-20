@@ -6,6 +6,8 @@ import {
 	headlineBold24Object,
 	headlineBold42Object,
 	palette,
+	remSpace,
+	space,
 	textSans14Object,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
@@ -224,7 +226,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const largeLinkStyles = css({
 		position: 'absolute',
-		top: '4px',
+		top: `${space[1]}px`,
 		left: 0,
 		...headlineBold24Object,
 		color: textColor,
@@ -244,29 +246,29 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		'&': css(grid.column.all),
 		alignSelf: 'end',
 		position: 'relative',
-		'--top-border-gap': '1.55rem',
+		'--top-border-gap': `${remSpace[6]}rem`,
 		overflowX: 'scroll',
 		scrollbarWidth: 'none',
-		padding: '10px 10px',
+		padding: `${space[3]}px`,
 		borderTop: '1px solid',
 		borderColor: palette.brand[600],
 		height: '100%',
 		[from.mobileLandscape]: {
-			padding: '10px 20px',
+			padding: `${space[4]}px ${space[5]}px`,
 		},
 		[from.tablet]: {
-			'--top-border-gap': '3rem',
+			'--top-border-gap': `${remSpace[12]}rem`,
 		},
 		'&:after': {
 			content: '""',
 			position: 'sticky',
-			right: '-10px',
-			top: '-10px',
+			right: `-${space[3]}px`,
+			top: `-${space[3]}px`,
 			height: '100%',
 			minWidth: 40,
 			background: `linear-gradient(to left, ${backgroundColor}, transparent)`,
 			[from.mobileLandscape]: {
-				right: '-20px',
+				right: `-${space[5]}px`,
 			},
 		},
 	});
@@ -299,7 +301,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const smallLink = css({
 		...textSans14Object,
-		padding: '4px 12px 6px 0',
+		paddingRight: `${space[3]}px`,
 		display: 'block',
 		lineHeight: 1,
 		color: textColor,
