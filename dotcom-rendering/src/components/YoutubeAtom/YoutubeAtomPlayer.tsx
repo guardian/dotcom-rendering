@@ -625,6 +625,7 @@ export const YoutubeAtomPlayer = ({
 			origin,
 			playerReadyCallback,
 			renderingTarget,
+			resetMilestones,
 			trackMilestones,
 			uniqueId,
 			videoId,

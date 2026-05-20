@@ -16,6 +16,7 @@ type Milestones = {
  */
 export const useVideoMilestoneTracking = (
 	onMilestone: (event: VideoEventKey) => void,
+	trackPercentageMilestones: boolean = true,
 ): [
 	(
 		progress:
@@ -61,19 +62,21 @@ export const useVideoMilestoneTracking = (
 				milestones.current.hasSentPlay = true;
 			}
 
-			if (!milestones.current.hasSent25 && percent >= 25) {
-				onMilestone('25');
-				milestones.current.hasSent25 = true;
-			}
+			if (trackPercentageMilestones) {
+				if (!milestones.current.hasSent25 && percent >= 25) {
+					onMilestone('25');
+					milestones.current.hasSent25 = true;
+				}
 
-			if (!milestones.current.hasSent50 && percent >= 50) {
-				onMilestone('50');
-				milestones.current.hasSent50 = true;
-			}
+				if (!milestones.current.hasSent50 && percent >= 50) {
+					onMilestone('50');
+					milestones.current.hasSent50 = true;
+				}
 
-			if (!milestones.current.hasSent75 && percent >= 75) {
-				onMilestone('75');
-				milestones.current.hasSent75 = true;
+				if (!milestones.current.hasSent75 && percent >= 75) {
+					onMilestone('75');
+					milestones.current.hasSent75 = true;
+				}
 			}
 
 			if (!milestones.current.hasSentEnd && percent >= 99) {
@@ -81,7 +84,7 @@ export const useVideoMilestoneTracking = (
 				milestones.current.hasSentEnd = true;
 			}
 		},
-		[onMilestone],
+		[onMilestone, trackPercentageMilestones],
 	);
 
 	/**

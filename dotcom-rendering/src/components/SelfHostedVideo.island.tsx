@@ -558,6 +558,7 @@ export const SelfHostedVideo = ({
 
 	const [trackMilestones, resetMilestones] = useVideoMilestoneTracking(
 		sendOphanTrackingEvent,
+		videoStyle === 'Default',
 	);
 
 	const playVideo = useCallback(async () => {
