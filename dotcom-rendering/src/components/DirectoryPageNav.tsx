@@ -210,7 +210,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	if (
 		config.title.id === 'football/world-cup-2026' &&
-		ab?.isUserInTest('webx-world-cup-2026-subnav') === true
+		ab?.isUserInTest('webx-world-cup-2026-subnav') !== true
 	) {
 		return null;
 	}
@@ -226,7 +226,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const largeLinkStyles = css({
 		position: 'absolute',
-		top: `${space[1]}px`,
+		top: `${space[3]}px`,
 		left: 0,
 		...headlineBold24Object,
 		color: textColor,
@@ -259,6 +259,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		[from.tablet]: {
 			'--top-border-gap': `${remSpace[12]}rem`,
 		},
+		// This creates a gradient fade on the right side to indicate that there's more to scroll for.
 		'&:after': {
 			content: '""',
 			position: 'sticky',
