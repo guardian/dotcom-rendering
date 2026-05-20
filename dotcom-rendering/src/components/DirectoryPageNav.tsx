@@ -28,6 +28,7 @@ interface DirectoryPageNavConfig {
 	pageIds: string[];
 	tagIds: string[];
 	variant?: 'subnav';
+	subLinkBadge?: string;
 	textColor: string;
 	backgroundColor: string;
 	title: { label: string; id: string };
@@ -136,6 +137,8 @@ const configs = [
 			label: 'World Cup 2026',
 			id: 'football/world-cup-2026',
 		},
+		subLinkBadge:
+			'data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2217%22%20viewBox%3D%220%200%2016%2017%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Crect%20width%3D%224.39184%22%20height%3D%2211.5286%22%20fill%3D%22%2390DCFF%22/%3E%3Crect%20x%3D%225.80347%22%20y%3D%225%22%20width%3D%224.39184%22%20height%3D%2211.5286%22%20fill%3D%22%2390DCFF%22/%3E%3Crect%20x%3D%2211.6084%22%20width%3D%224.39184%22%20height%3D%2211.5286%22%20fill%3D%22%2390DCFF%22/%3E%3Ccircle%20cx%3D%227.99939%22%20cy%3D%222.19592%22%20r%3D%222.19592%22%20fill%3D%22%2390DCFF%22/%3E%3C/svg%3E',
 		links: [
 			{
 				label: 'World Cup',
@@ -235,16 +238,34 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 			whiteSpace: 'nowrap',
 			display: 'flex',
 			alignItems: 'center',
+			'&:first-of-type': {
+				borderRight: `1px solid ${themePalette(
+					'--masthead-nav-lines',
+				)}`,
+				paddingRight: space[1],
+				'a:not(:hover)': {
+					color: palette.sport[600],
+				},
+			},
 		});
 
 		const subnavLinkStyles = css({
 			color: themePalette('--masthead-nav-link-text'),
 			textDecoration: 'none',
+			display: 'inline-flex',
+			alignItems: 'center',
+			columnGap: space[1],
 			paddingRight: space[1],
 			'&:hover': {
 				textDecoration: 'underline',
 				color: themePalette('--masthead-nav-link-text-hover'),
 			},
+		});
+
+		const subLinkBadgeStyles = css({
+			width: 16,
+			height: 17,
+			flexShrink: 0,
 		});
 
 		const subnavSelectedLinkStyles = css({
@@ -295,6 +316,15 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 											: undefined,
 									]}
 								>
+									{config.subLinkBadge &&
+									link.label === 'World Cup' ? (
+										<img
+											src={config.subLinkBadge}
+											alt=""
+											aria-hidden="true"
+											css={subLinkBadgeStyles}
+										/>
+									) : null}
 									{link.label}
 								</a>
 							</li>
