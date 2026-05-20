@@ -88,6 +88,40 @@ export const SelfHostedVideoDebugOverlay = ({ videoRef, atomId }: Props) => {
 
 		const rerender = () => force((n) => n + 1);
 
+		// iOS Safari often fires `loadstart` before this effect attaches its
+		// listener (the overlay mounts after the <video> element). In that
+		// case, seed loadStartRef from the resource timing entry's startTime
+		// so STARTUP can still be computed when `playing` / `timeupdate`
+		// eventually fires. Fall back to "now" if no entry is available.
+		const seedLoadStartFromResourceTiming = () => {
+			if (loadStartRef.current !== null) return;
+			const src = video.currentSrc;
+			if (src && typeof performance !== 'undefined') {
+				const entries = performance.getEntriesByName(
+					src,
+				) as PerformanceResourceTiming[];
+				const entry = entries[entries.length - 1];
+				if (entry) {
+					loadStartRef.current = entry.startTime;
+					return;
+				}
+			}
+			loadStartRef.current = performance.now();
+		};
+
+		const computeStartup = () => {
+			if (startupRef.current !== null) return;
+			if (loadStartRef.current === null) {
+				seedLoadStartFromResourceTiming();
+			}
+			if (loadStartRef.current !== null) {
+				startupRef.current = Math.max(
+					0,
+					Math.round(performance.now() - loadStartRef.current),
+				);
+			}
+		};
+
 		const onLoadStart = () => {
 			loadStartRef.current = performance.now();
 			startupRef.current = null;
@@ -95,22 +129,27 @@ export const SelfHostedVideoDebugOverlay = ({ videoRef, atomId }: Props) => {
 			rerender();
 		};
 		const onPlaying = () => {
-			if (
-				!hasPlayedRef.current &&
-				loadStartRef.current !== null &&
-				startupRef.current === null
-			) {
-				startupRef.current = Math.round(
-					performance.now() - loadStartRef.current,
-				);
+			if (!hasPlayedRef.current) {
+				computeStartup();
 			}
 			hasPlayedRef.current = true;
 			rerender();
 		};
+		// iOS Safari is unreliable about firing `playing`; the first
+		// `timeupdate` with currentTime > 0 is a robust fallback.
+		const onTimeUpdate = () => {
+			if (!hasPlayedRef.current && video.currentTime > 0) {
+				computeStartup();
+				hasPlayedRef.current = true;
+				rerender();
+			}
+		};
+
 		const passthrough = () => rerender();
 
 		video.addEventListener('loadstart', onLoadStart);
 		video.addEventListener('playing', onPlaying);
+		video.addEventListener('timeupdate', onTimeUpdate);
 		video.addEventListener('loadedmetadata', passthrough);
 		video.addEventListener('canplay', passthrough);
 		video.addEventListener('pause', passthrough);
@@ -118,12 +157,23 @@ export const SelfHostedVideoDebugOverlay = ({ videoRef, atomId }: Props) => {
 		video.addEventListener('ratechange', passthrough);
 		video.addEventListener('volumechange', passthrough);
 
+		// If the video already started loading (or is already playing) before
+		// we attached listeners (common on iOS Safari), backfill state now.
+		if (video.currentSrc || video.readyState > 0) {
+			seedLoadStartFromResourceTiming();
+		}
+		if (!video.paused && video.currentTime > 0) {
+			computeStartup();
+			hasPlayedRef.current = true;
+		}
+
 		// Re-render every second so connection / cache snapshots stay fresh
 		const interval = window.setInterval(rerender, 1000);
 
 		return () => {
 			video.removeEventListener('loadstart', onLoadStart);
 			video.removeEventListener('playing', onPlaying);
+			video.removeEventListener('timeupdate', onTimeUpdate);
 			video.removeEventListener('loadedmetadata', passthrough);
 			video.removeEventListener('canplay', passthrough);
 			video.removeEventListener('pause', passthrough);
