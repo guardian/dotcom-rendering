@@ -623,7 +623,7 @@ export const SelfHostedVideo = ({
 			}
 		} else {
 			void playVideo();
-			if (playerState !== 'ENDED') {
+			if (playerState !== 'NOT_STARTED' && playerState !== 'ENDED') {
 				sendOphanTrackingEvent('resume');
 			}
 		}

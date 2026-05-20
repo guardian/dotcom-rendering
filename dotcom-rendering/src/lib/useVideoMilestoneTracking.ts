@@ -10,9 +10,11 @@ type Milestones = {
 };
 
 /**
- * Returns a function that should be called on each time update.
+ * Returns two functions, the first of which should be called on each time update.
  * It tracks when a video begins, ends or crosses the 25%, 50% and 75%
  * milestones. On each milestone the provided callback is triggered.
+ * The second function can be used to reset the internal state of the hook,
+ * allowing milestones to be again if a video is played multiple times.
  */
 export const useVideoMilestoneTracking = (
 	onMilestone: (event: VideoEventKey) => void,
