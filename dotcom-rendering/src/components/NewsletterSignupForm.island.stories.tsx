@@ -254,8 +254,7 @@ export const USHideMarketingToggle = meta.story({
 	args: defaultArgs,
 	beforeEach() {
 		mocked(useCountryCode).mockReturnValue('US');
-		window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
-			true;
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = true;
 		mocked(useNewsletterSignupForm).mockReturnValue(
 			mockForm({
 				userEmail: 'reader@example.com',
@@ -267,7 +266,6 @@ export const USHideMarketingToggle = meta.story({
 	},
 	afterEach() {
 		mocked(useCountryCode).mockReset();
-		window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
-			false;
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = false;
 	},
 });

@@ -296,10 +296,10 @@ export const useNewsletterSignupForm = (
 		async (emailAddress: string, token: string): Promise<void> => {
 			const marketingOptInHidden =
 				hideMarketingToggleRef.current &&
-				isSignedInRef.current === false;
+				isSignedInRef.current !== true;
 			const effectiveMarketingOptIn = marketingOptInHidden
 				? true
-				: isSignedInRef.current === false &&
+				: isSignedInRef.current !== true &&
 				  marketingOptInRef.current === undefined
 				? true
 				: marketingOptInRef.current;
@@ -496,9 +496,9 @@ export const useNewsletterSignupForm = (
 		userEmail,
 		isSignedIn: hasPrefilledEmail,
 		isInteracted,
-		showMarketingToggle: isSignedIn === false && !hideMarketingToggle,
+		showMarketingToggle: isSignedIn !== true && !hideMarketingToggle,
 		marketingOptIn,
-		marketingOptInHidden: hideMarketingToggle && isSignedIn === false,
+		marketingOptInHidden: hideMarketingToggle && isSignedIn !== true,
 		isWaitingForResponse,
 		responseOk,
 		errorMessage,

@@ -132,8 +132,7 @@ describe('SecureSignup — US marketing toggle hiding', () => {
 		pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
 		pageConfig.idApiUrl = 'https://idapi.nextgen.guardianapps.co.uk';
 		pageConfig.googleRecaptchaSiteKey = 'test-site-key';
-		window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
-			false;
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = false;
 		if (window.guardian.ophan) {
 			window.guardian.ophan.pageViewId = 'test-page-view-id';
 		}
@@ -157,9 +156,9 @@ describe('SecureSignup — US marketing toggle hiding', () => {
 		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
 	};
 
-	describe('US hide marketing toggle (us-signup-hide-marketing-toggle switch)', () => {
+	describe('US hide marketing toggle (usSignupHideMarketingToggle switch)', () => {
 		beforeEach(() => {
-			window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
+			window.guardian.config.switches['usSignupHideMarketingToggle'] =
 				true;
 		});
 
@@ -259,7 +258,7 @@ describe('SecureSignup — US marketing toggle hiding', () => {
 		});
 
 		it('switch off + US + signed out: shows marketing checkbox', () => {
-			window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
+			window.guardian.config.switches['usSignupHideMarketingToggle'] =
 				false;
 			(useCountryCode as jest.Mock).mockReturnValue('US');
 			renderSecureSignup();

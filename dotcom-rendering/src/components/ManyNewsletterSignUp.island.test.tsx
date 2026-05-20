@@ -108,8 +108,7 @@ describe('ManyNewsletterSignUp', () => {
 		(useCountryCode as jest.Mock).mockReturnValue(undefined);
 
 		pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
-		window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
-			false;
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = false;
 
 		(requestMultipleSignUps as jest.Mock).mockResolvedValue({ ok: true });
 	});
@@ -122,9 +121,9 @@ describe('ManyNewsletterSignUp', () => {
 		}
 	});
 
-	describe('US hide marketing toggle (us-signup-hide-marketing-toggle switch)', () => {
+	describe('US hide marketing toggle (usSignupHideMarketingToggle switch)', () => {
 		beforeEach(() => {
-			window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
+			window.guardian.config.switches['usSignupHideMarketingToggle'] =
 				true;
 		});
 
@@ -230,7 +229,7 @@ describe('ManyNewsletterSignUp', () => {
 		});
 
 		it('switch off + US + signed out: shows checkbox', async () => {
-			window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
+			window.guardian.config.switches['usSignupHideMarketingToggle'] =
 				false;
 			const testUser = user.setup();
 			(useCountryCode as jest.Mock).mockReturnValue('US');

@@ -5,7 +5,7 @@ import { useCountryCode } from './useCountryCode';
  * user's country.
  *
  * Currently implements US-only hiding, gated behind the
- * `us-signup-hide-marketing-toggle` switch. The hook name is country-agnostic
+ * `usSignupHideMarketingToggle` switch. The hook name is country-agnostic
  * so future countries can be added without renaming.
  *
  * - Returns `false` while the country code is still being resolved (`undefined`).
@@ -16,8 +16,7 @@ export const useHideMarketingToggleForCountry = (): boolean => {
 	const countryCode = useCountryCode('useHideMarketingToggleForCountry');
 	const switchEnabled =
 		typeof window !== 'undefined' &&
-		window.guardian.config.switches['us-signup-hide-marketing-toggle'] ===
-			true;
+		window.guardian.config.switches['usSignupHideMarketingToggle'] === true;
 
 	return switchEnabled && countryCode === 'US';
 };

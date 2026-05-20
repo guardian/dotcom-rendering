@@ -292,7 +292,7 @@ export const SecureSignup = ({
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
 	const hideMarketingToggle = useHideMarketingToggleForCountry();
-	const marketingOptInHidden = hideMarketingToggle && isSignedIn === false;
+	const marketingOptInHidden = hideMarketingToggle && isSignedIn !== true;
 
 	useEffect(() => {
 		if (isSignedIn !== 'Pending' && !isSignedIn) {
@@ -323,7 +323,7 @@ export const SecureSignup = ({
 		const emailAddress: string = input?.value ?? '';
 		const effectiveMarketingOptIn = marketingOptInHidden
 			? true
-			: isSignedIn === false && marketingOptIn === undefined
+			: isSignedIn !== true && marketingOptIn === undefined
 			? true
 			: marketingOptIn;
 		const marketingOptInType = getMarketingOptInType({
@@ -453,7 +453,7 @@ export const SecureSignup = ({
 					value={userEmail ?? ''}
 					onChange={(e) => setUserEmail(e.target.value)}
 				/>
-				{isSignedIn === false && !marketingOptInHidden && (
+				{isSignedIn !== true && !marketingOptInHidden && (
 					<CheckboxGroup
 						name="marketing-preferences"
 						label="Marketing preferences"
