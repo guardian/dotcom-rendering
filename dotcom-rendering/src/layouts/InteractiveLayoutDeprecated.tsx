@@ -525,6 +525,7 @@ export const InteractiveLayoutDeprecated = (props: WebProps | AppsProps) => {
 										editionId={article.editionId}
 										shouldHideAds={article.shouldHideAds}
 										idApiUrl={article.config.idApiUrl}
+										isOldInteractive={true}
 									/>
 								</ArticleContainer>
 							</GridItem>
