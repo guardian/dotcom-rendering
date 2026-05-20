@@ -14,6 +14,8 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubNav } from '../components/SubNav.island';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { useBetaAB } from '../lib/useAB';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 import { palette as themePalette } from '../palette';
 import type {
 	AppSportDataPage,
@@ -22,8 +24,6 @@ import type {
 } from '../sportDataPage';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { useBetaAB } from '../lib/useAB';
-import { worldCup2026PageIds } from '../lib/worldCup2026';
 
 const SportsPage = ({
 	sportData,
@@ -99,12 +99,13 @@ export const SportDataPageLayout = (
 	const isApps = props.renderingTarget === 'Apps';
 	const pageFooter = sportData.pageFooter;
 	const renderAds = canRenderAds(sportData);
+	const ab = useBetaAB();
 
 	const contributionsServiceUrl = getContributionsServiceUrl(sportData);
 
 	const isWorldCup2026 =
 		worldCup2026PageIds.includes(sportData.config.pageId) &&
-		useBetaAB()?.isUserInTest('webx-world-cup-2026-subnav');
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
 
 	return (
 		<>

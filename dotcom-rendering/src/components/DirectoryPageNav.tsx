@@ -10,9 +10,9 @@ import {
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
 import { generateImageURL } from '../lib/image';
-import type { TagType } from '../types/tag';
 import { useBetaAB } from '../lib/useAB';
 import { worldCup2026PageIds } from '../lib/worldCup2026';
+import type { TagType } from '../types/tag';
 
 type Props = {
 	pageId: string;
@@ -192,6 +192,8 @@ const configs = [
 ] satisfies DirectoryPageNavConfig[];
 
 export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
+	const ab = useBetaAB();
+
 	const config = configs.find(
 		(cfg) =>
 			cfg.pageIds.includes(pageId) ||
@@ -206,7 +208,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	if (
 		config.title.id === 'football/world-cup-2026' &&
-		!useBetaAB()?.isUserInTest('webx-world-cup-2026-subnav')
+		ab?.isUserInTest('webx-world-cup-2026-subnav') === true
 	) {
 		return null;
 	}

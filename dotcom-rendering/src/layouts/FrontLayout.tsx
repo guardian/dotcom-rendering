@@ -40,6 +40,8 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import { ophanComponentId } from '../lib/ophan-helpers';
+import { useBetaAB } from '../lib/useAB';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
 import type {
@@ -49,8 +51,6 @@ import type {
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { useBetaAB } from '../lib/useAB';
-import { worldCup2026PageIds } from '../lib/worldCup2026';
 
 interface Props {
 	front: Front;
@@ -124,9 +124,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
+	const ab = useBetaAB();
+
 	const isWorldCup2026 =
 		worldCup2026PageIds.includes(pageId) &&
-		useBetaAB()?.isUserInTest('webx-world-cup-2026-subnav');
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
 
 	const filteredCollections = front.pressedPage.collections.filter(
 		(collection) => !isHighlights(collection),
