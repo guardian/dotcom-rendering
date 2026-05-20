@@ -45,10 +45,6 @@ type Props = {
 	renderingTarget: RenderingTarget;
 };
 
-type ProgressEvents = {
-	hasSentPlayEvent: boolean;
-};
-
 /**
  *  Player listeners e.g.
  *  name: onReady, onStateChange, etc...
@@ -193,9 +189,10 @@ const createOnStateChangeListener =
 	(
 		videoId: string,
 		uniqueId: string,
-		progressEvents: ProgressEvents,
+		playerState: { paused: boolean },
 		sendOphanTrackingEvent: (event: VideoEventKey) => void,
 		trackMilestones: ReturnType<typeof useVideoMilestoneTracking>[0],
+		resetMilestones: () => void,
 	): YT.PlayerEventHandler<YT.OnStateChangeEvent> =>
 	(event) => {
 		const loggerFrom = 'YoutubeAtomPlayer onStateChange';
@@ -217,31 +214,19 @@ const createOnStateChangeListener =
 			 */
 			dispatchCustomPlayEvent(uniqueId);
 
-			if (!progressEvents.hasSentPlayEvent) {
-				log('dotcom', {
-					from: loggerFrom,
-					videoId,
-					msg: 'start play',
-					event,
-				});
-				sendOphanTrackingEvent('play');
-				progressEvents.hasSentPlayEvent = true;
-
-				/**
-				 * Set a timeout to check progress again in the future
-				 */
-				setTimeout(() => {
-					checkProgress();
-				}, 3000);
-			} else {
-				log('dotcom', {
-					from: loggerFrom,
-					videoId,
-					msg: 'resume',
-					event,
-				});
+			trackMilestones({ started: true });
+			if (playerState.paused) {
 				sendOphanTrackingEvent('resume');
 			}
+
+			playerState.paused = false;
+
+			/**
+			 * Set a timeout to check progress in the future
+			 */
+			setTimeout(() => {
+				checkProgress();
+			}, 3000);
 
 			const checkProgress = () => {
 				trackMilestones({
@@ -270,6 +255,7 @@ const createOnStateChangeListener =
 				event,
 			});
 			sendOphanTrackingEvent('pause');
+			playerState.paused = true;
 		}
 
 		if (event.data === YT.PlayerState.CUED) {
@@ -280,13 +266,12 @@ const createOnStateChangeListener =
 				event,
 			});
 			sendOphanTrackingEvent('cued');
-			progressEvents.hasSentPlayEvent = false;
 		}
 
 		if (event.data === YT.PlayerState.ENDED) {
 			dispatchCustomPauseEvent(uniqueId);
 			trackMilestones({ ended: true });
-			progressEvents.hasSentPlayEvent = false;
+			resetMilestones();
 		}
 	};
 
@@ -432,11 +417,12 @@ export const YoutubeAtomPlayer = ({
 		},
 		[eventEmitters],
 	);
-	const [trackMilestones] = useVideoMilestoneTracking(sendOphanTrackingEvent);
-
-	const progressEvents = useRef<ProgressEvents>({
-		hasSentPlayEvent: false,
-	});
+	const [trackMilestones, resetMilestones] = useVideoMilestoneTracking(
+		sendOphanTrackingEvent,
+	);
+	const playerPauseState = useRef<{
+		paused: boolean;
+	}>({ paused: false });
 
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
 	const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
@@ -475,9 +461,10 @@ export const YoutubeAtomPlayer = ({
 				const onStateChangeListener = createOnStateChangeListener(
 					videoId,
 					uniqueId,
-					progressEvents.current,
+					playerPauseState.current,
 					sendOphanTrackingEvent,
 					trackMilestones,
+					resetMilestones,
 				);
 
 				/**
