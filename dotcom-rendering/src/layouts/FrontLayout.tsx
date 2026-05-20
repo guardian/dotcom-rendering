@@ -49,6 +49,8 @@ import type {
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { useBetaAB } from '../lib/useAB';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 
 interface Props {
 	front: Front;
@@ -122,11 +124,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
-	const isWorldCup2026 = [
-		'football/world-cup-2026',
-		'football/world-cup-2026/fixtures',
-		'football/world-cup-2026/overview',
-	].includes(pageId);
+	const isWorldCup2026 =
+		worldCup2026PageIds.includes(pageId) &&
+		useBetaAB()?.isUserInTest('webx-world-cup-2026-subnav');
 
 	const filteredCollections = front.pressedPage.collections.filter(
 		(collection) => !isHighlights(collection),

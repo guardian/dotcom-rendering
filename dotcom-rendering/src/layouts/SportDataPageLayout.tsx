@@ -22,6 +22,8 @@ import type {
 } from '../sportDataPage';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { useBetaAB } from '../lib/useAB';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 
 const SportsPage = ({
 	sportData,
@@ -100,11 +102,9 @@ export const SportDataPageLayout = (
 
 	const contributionsServiceUrl = getContributionsServiceUrl(sportData);
 
-	const isWorldCup2026 = [
-		'football/world-cup-2026',
-		'football/world-cup-2026/fixtures',
-		'football/world-cup-2026/overview',
-	].includes(sportData.config.pageId);
+	const isWorldCup2026 =
+		worldCup2026PageIds.includes(sportData.config.pageId) &&
+		useBetaAB()?.isUserInTest('webx-world-cup-2026-subnav');
 
 	return (
 		<>

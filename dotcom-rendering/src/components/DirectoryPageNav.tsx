@@ -11,6 +11,8 @@ import {
 import { grid } from '../grid';
 import { generateImageURL } from '../lib/image';
 import type { TagType } from '../types/tag';
+import { useBetaAB } from '../lib/useAB';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 
 type Props = {
 	pageId: string;
@@ -59,11 +61,7 @@ const WorldCup2026Icon = () => (
 const configs = [
 	// World Cup 2026
 	{
-		pageIds: [
-			'football/world-cup-2026',
-			'football/world-cup-2026/fixtures',
-			'football/world-cup-2026/overview',
-		],
+		pageIds: worldCup2026PageIds,
 		tagIds: [],
 		textColor: palette.neutral[100],
 		backgroundColor: palette.brand[400],
@@ -203,6 +201,13 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	);
 
 	if (!config) {
+		return null;
+	}
+
+	if (
+		config.title.id === 'football/world-cup-2026' &&
+		!useBetaAB()?.isUserInTest('webx-world-cup-2026-subnav')
+	) {
 		return null;
 	}
 
