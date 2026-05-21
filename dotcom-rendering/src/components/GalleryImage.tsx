@@ -22,8 +22,9 @@ type Props = {
 };
 
 const styles = css`
+	overflow: hidden;
 	${grid.paddedContainer}
-	${grid.verticalRules()}
+	${grid.verticalRules({ plusChild: 1 })}
 	grid-auto-flow: row dense;
 	background-color: ${palette('--article-inner-background')};
 
@@ -34,7 +35,9 @@ const styles = css`
 
 	${from.desktop} {
 		&:first-of-type {
-			padding-top: ${space[3]}px;
+			& > * {
+				padding-top: ${space[3]}px;
+			}
 		}
 	}
 `;

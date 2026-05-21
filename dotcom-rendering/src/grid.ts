@@ -88,36 +88,58 @@ const paddedContainer = `
 // ----- Vertical Rules ----- //
 
 type VerticalRuleOptions = {
-	centre?: boolean;
 	color?: string;
+	plusChild?: number;
 };
 
 /**
  * Render Guardian grid vertical rules.
  *
  * Left and right rules are always present.
- * A centre rule can optionally be enabled.
+ * A centre rule can optionally be enabled, anchored to the nth
+ * child of the grid container as specified by the `plusChild` option
  *
  * Usage:
  * css([grid.container, grid.verticalRules()])
- * css([grid.container, grid.verticalRules({ centre: true })])
+ * css([grid.container, grid.verticalRules({ plusChild: 3 })])
  */
-const optionalCentreRule = `/* CENTRE RULE */
-    & > *:first-child::before {
-      grid-column: centre-column-start;
-      transform: translateX(-${columnGap});
-	  ${fromBreakpoint.leftCol} {
-		transform: translateX(calc(-${columnGap} / 2));
-	  }
+
+// The centre rule is self-contained on the nth child element rather than on
+// the grid container, so that `top: 0` aligns to that element's top edge.
+// `bottom` uses a large negative value to extend the rule down to the
+// container's bottom; ensure `overflow: hidden` is set on the container
+const optionalCentreRule = (
+	nth: number,
+	color?: string,
+): string => `/* CENTRE RULE */
+    & > *:nth-child(${nth}) {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        bottom: -9999px;
+        width: 1px;
+        background-color: ${color ?? palette('--article-border')};
+        content: '';
+        grid-column: centre-column-start;
+        transform: translateX(-${columnGap});
+
+        ${fromBreakpoint.leftCol} {
+          transform: translateX(calc(-${columnGap} / 2));
+        }
+      }
     }`;
 
-const verticalRules = (options: VerticalRuleOptions = {}): string => `
+const verticalRules = (options: VerticalRuleOptions = {}): string => {
+	const { plusChild, color } = options;
+
+	return `
   ${fromBreakpoint.tablet} {
     position: relative;
 
     &::before,
-    &::after
-    ${options.centre ? ', & > *:first-child::before' : ''} {
+    &::after {
       position: absolute;
       top: 0;
       bottom: 0;
@@ -146,8 +168,9 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
       }
     }
 
-    ${options.centre ? optionalCentreRule : ''}
-`;
+    ${plusChild !== undefined ? optionalCentreRule(plusChild, color) : ''}
+  }`;
+};
 
 // ----- API ----- //
 
