@@ -249,7 +249,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 						showSubtitles && subtitleFontStyles(subtitleSize),
 						showCustomSubtitles && hideNativeSubtitlesStyles,
 					]}
-					crossOrigin="anonymous"
 					ref={ref}
 					tabIndex={0}
 					data-testid="self-hosted-video-player"
@@ -282,22 +281,10 @@ export const SelfHostedVideoPlayer = forwardRef(
 						<source
 							key={mimeType}
 							/* The start time is set to 1ms so that Safari will autoplay the video */
-							src={`${src}#t=0.001`}
+							src={`${src}?cache=break#t=0.001`}
 							type={mimeType}
 						/>
 					))}
-					{showSubtitles && (
-						<track
-							/**
-							 * On iOS/WebKit, `default` forces native subtitle rendering.
-							 * Disable it when custom subtitles are enabled.
-							 */
-							default={!showCustomSubtitles}
-							kind="subtitles"
-							src={subtitleSource}
-							srcLang="en"
-						/>
-					)}
 					{FallbackImageComponent}
 				</video>
 				{showCustomSubtitles && !!activeCue?.text && (

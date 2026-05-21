@@ -14,7 +14,7 @@ import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
-import { useSubtitles } from '../lib/useSubtitles';
+// import { useSubtitles } from '../lib/useSubtitles';
 import { useVideoAttentionTracking } from '../lib/useVideoAttentionTracking';
 import { useVideoMilestoneTracking } from '../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
@@ -552,11 +552,13 @@ export const SelfHostedVideo = ({
 		threshold: VISIBILITY_THRESHOLD,
 	});
 
-	const activeCue = useSubtitles({
-		video: vidRef.current,
-		playerState,
-		currentTime,
-	});
+	/*cues disabled for testing to avoid cors*/
+	const activeCue = null;
+	// const activeCue = useSubtitles({
+	// 	video: vidRef.current,
+	// 	playerState,
+	// 	currentTime,
+	// });
 
 	const [trackMilestones, resetMilestones] = useVideoMilestoneTracking(
 		sendOphanTrackingEvent,
@@ -693,7 +695,6 @@ export const SelfHostedVideo = ({
 
 		const screenWidth = window.innerWidth;
 		const vidFormat = getVideoFormat();
-		console.log(vidFormat);
 		const filteredSources = findOptimisedSourcePerMimeType(
 			sources,
 			screenWidth,
