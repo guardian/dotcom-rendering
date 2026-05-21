@@ -17,6 +17,7 @@ import {
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
+import { handlePuzzleIframePage } from './handler.puzzleIframePage.web';
 import { handlePuzzlesPage } from './handler.puzzlesPage.web';
 import {
 	handleAppsFootballMatchPage,
@@ -124,7 +125,7 @@ renderer.get('/HostedContent/*url', handleHostedContent);
 renderer.get('/AppsHostedContent/*url', handleAppsHostedContent);
 renderer.get('/AppsComponent/thrasher/:name', handleAppsThrasher);
 renderer.get('/PuzzlesPage/*url', handlePuzzlesPage);
-
+renderer.get('/PuzzleIframePage/*url', handlePuzzleIframePage);
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
 renderer.post('/Interactive', handleInteractive);
@@ -145,7 +146,7 @@ renderer.post('/HostedContent', handleHostedContent);
 renderer.post('/AppsHostedContent', handleAppsHostedContent);
 renderer.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
 renderer.post('/PuzzlesPage', handlePuzzlesPage);
-
+renderer.post('/PuzzleIframePage', handlePuzzleIframePage);
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);
 
 const router = Router();

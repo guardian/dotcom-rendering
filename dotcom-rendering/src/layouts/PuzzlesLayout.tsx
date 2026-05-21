@@ -214,6 +214,8 @@ const crosswordSetToUrl = (set: string): string => {
 };
 
 const getItemUrl = (item: PuzzleItem): string => {
+	if (item.variant === 'iframe-page' && item.slug)
+		return `/puzzles/${item.slug}`;
 	if (item.url) return item.url;
 	if (item.type === 'crossword') return crosswordSetToUrl(item.set);
 	return '#';

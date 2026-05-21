@@ -19,6 +19,7 @@ import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 import type { FENewslettersPageType } from '../types/newslettersPage';
+import type { FEPuzzleIframePageType } from '../types/puzzleIframePage';
 import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
@@ -122,6 +123,7 @@ const isPuzzleItem = (data: unknown): boolean =>
 	isString(data.type) &&
 	isString(data.set) &&
 	(data.image === undefined || isString(data.image)) &&
+	(data.slug === undefined || isString(data.slug)) &&
 	(data.variant === undefined || isString(data.variant));
 
 const isPuzzleContainer = (data: unknown): boolean => {
@@ -170,6 +172,28 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 	}
 
 	throw new TypeError('Unable to validate request body for puzzles page.');
+};
+
+export const validateAsPuzzleIframePageType = (
+	data: unknown,
+): FEPuzzleIframePageType => {
+	if (
+		isObject(data) &&
+		isString(data.id) &&
+		isString(data.webTitle) &&
+		isString(data.editionId) &&
+		isObject(data.config) &&
+		isObject(data.nav) &&
+		isObject(data.pageFooter) &&
+		isObject(data.puzzle) &&
+		isPuzzleItem(data.puzzle)
+	) {
+		return data as unknown as FEPuzzleIframePageType;
+	}
+
+	throw new TypeError(
+		'Unable to validate request body for puzzle iframe page.',
+	);
 };
 
 export const validateAsBlock = (data: unknown): Block[] => {
