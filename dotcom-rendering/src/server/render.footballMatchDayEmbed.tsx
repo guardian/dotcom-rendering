@@ -14,6 +14,7 @@ export const renderFootballMatchDayEmbed = (
 ): { html: string } => {
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<FootballMatchDay
+			competitionTag={matchDay.competitionTag}
 			matches={matchDay.matchesList}
 			guardianBaseUrl={matchDay.guardianBaseURL}
 			edition={matchDay.editionId}

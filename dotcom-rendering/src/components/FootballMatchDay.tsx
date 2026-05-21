@@ -28,54 +28,49 @@ import { FootballCrest } from './FootballCrest';
  */
 
 type Props = {
+	competitionTag: string;
 	matches: FootballMatches;
 	guardianBaseUrl: string;
 	edition: EditionId;
 };
 
 export const FootballMatchDay = ({
+	competitionTag,
 	matches,
 	guardianBaseUrl,
 	edition,
-}: Props) => {
-	const competitionTag = matches[0]?.competitions[0]?.tag;
-	const competitionFixturesUrl = competitionTag
-		? `/${competitionTag}/overview`
-		: `/football`;
-
-	return (
-		<section
+}: Props) => (
+	<section
+		css={css`
+			${textSans12}
+		`}
+	>
+		<ul
 			css={css`
-				${textSans12}
+				list-style: none;
+				margin: 0;
+				padding: 0;
 			`}
 		>
-			<ul
-				css={css`
-					list-style: none;
-					margin: 0;
-					padding: 0;
-				`}
-			>
-				{matches.map(
-					(day) =>
-						day.competitions[0]?.matches.map((match) => (
-							<Match
-								key={match.paId}
-								match={match}
-								edition={edition}
-							/>
-						)),
-				)}
-			</ul>
-			<a
-				href={`${guardianBaseUrl}${competitionFixturesUrl}`}
-				css={fixtureLinkCss}
-			>
-				See all fixtures <SvgChevronRightSingleSmall size="xsmall" />
-			</a>
-		</section>
-	);
-};
+			{matches.map(
+				(day) =>
+					day.competitions[0]?.matches.map((match) => (
+						<Match
+							key={match.paId}
+							match={match}
+							edition={edition}
+						/>
+					)),
+			)}
+		</ul>
+		<a
+			href={`${guardianBaseUrl}/football/${competitionTag}/overview`}
+			css={fixtureLinkCss}
+		>
+			See all fixtures <SvgChevronRightSingleSmall size="xsmall" />
+		</a>
+	</section>
+);
 
 const fixtureLinkCss = css`
 	${textSans15}

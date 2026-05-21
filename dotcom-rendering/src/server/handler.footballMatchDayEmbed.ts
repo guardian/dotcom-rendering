@@ -20,6 +20,7 @@ export const handleFootballMatchDayEmbed: RequestHandler = ({ body }, res) => {
 };
 
 export type MatchDayData = {
+	competitionTag: string;
 	matchesList: FootballMatches;
 	guardianBaseURL: string;
 	editionId: EditionId;
@@ -41,6 +42,7 @@ const parseFEFootballMatchDay = (
 	}
 
 	return ok({
+		competitionTag: feData.value.competitionTag,
 		matchesList: parsedMatches.value,
 		guardianBaseURL: feData.value.guardianBaseURL,
 		editionId: feData.value.editionId,

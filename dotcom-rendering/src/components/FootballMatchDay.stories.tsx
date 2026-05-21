@@ -9,8 +9,8 @@ const meta = preview.meta({
 
 export const FootballMatchDay = meta.story({
 	args: {
+		competitionTag: 'world-cup-2026',
 		matches: matchDayWorldCup,
-		competitionId: 'world-cup-2026',
 		guardianBaseUrl: 'https://www.theguardian.com',
 		edition: 'UK',
 	},

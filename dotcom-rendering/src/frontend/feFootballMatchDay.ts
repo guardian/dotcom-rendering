@@ -36,6 +36,7 @@ const feMatchByDateAndCompetitionSchema = object({
 });
 
 export const feFootballMatchDaySchema = object({
+	competitionTag: string(),
 	matchesList: array(feMatchByDateAndCompetitionSchema),
 	editionId: EditionIdSchema,
 	guardianBaseURL: string(),
