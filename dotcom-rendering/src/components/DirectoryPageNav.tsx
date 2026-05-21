@@ -239,6 +239,14 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		[from.leftCol]: css(
 			grid.between('left-column-start', 'right-column-end'),
 		),
+		svg: {
+			marginRight: space[2],
+			width: space[10],
+			height: 'auto',
+			[from.tablet]: {
+				width: space[14],
+			},
+		},
 	});
 
 	const list = css({
