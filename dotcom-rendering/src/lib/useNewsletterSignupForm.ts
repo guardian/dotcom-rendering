@@ -24,14 +24,21 @@ import { useBrowserId } from './useBrowserId';
 // Helpers (kept local — not part of the public API)
 // ---------------------------------------------------------------------------
 
-const buildFormData = (
-	emailAddress: string,
-	newsletterId: string,
-	token: string,
-	marketingOptIn?: boolean,
-	browserId?: string,
-	marketingOptInHiddenForCountry?: boolean,
-): FormData => {
+const buildFormData = ({
+	emailAddress,
+	newsletterId,
+	token,
+	marketingOptIn,
+	browserId,
+	marketingOptInHiddenForCountry,
+}: {
+	emailAddress: string;
+	newsletterId: string;
+	token: string;
+	marketingOptIn?: boolean;
+	browserId?: string;
+	marketingOptInHiddenForCountry?: boolean;
+}): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
 
@@ -328,14 +335,16 @@ export const useNewsletterSignupForm = (
 				marketingOptInType ? { marketingOptInType } : undefined,
 			);
 
-			const formData = buildFormData(
+			const formData = buildFormData({
 				emailAddress,
 				newsletterId,
 				token,
-				effectiveMarketingOptIn,
-				browserIdRef.current,
-				marketingOptInHiddenForCountry ? true : undefined,
-			);
+				marketingOptIn: effectiveMarketingOptIn,
+				browserId: browserIdRef.current,
+				marketingOptInHiddenForCountry: marketingOptInHiddenForCountry
+					? true
+					: undefined,
+			});
 
 			const response = await postFormData(
 				window.guardian.config.page.ajaxUrl + '/email',

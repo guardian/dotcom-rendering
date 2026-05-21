@@ -23,7 +23,7 @@ export const getEffectiveMarketingOptIn = ({
 	isSignedIn: boolean | 'Pending';
 	marketingOptIn: boolean | undefined;
 }): boolean | undefined => {
-	// Only apply the US soft opt-in when we know the user is signed out
+	// Only apply the hide opt-in when we know the user is signed out
 	if (marketingOptInHiddenForCountry && isSignedIn === false) {
 		return true;
 	}
