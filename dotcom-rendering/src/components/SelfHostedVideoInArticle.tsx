@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import type { FEAspectRatio } from '../frontend/feFront';
+import { isInteractive } from '../layouts/lib/interactiveLegacyStyling';
 import type { ArticleFormat } from '../lib/articleFormat';
 import {
 	extractValidSourcesFromAssets,
@@ -70,7 +71,9 @@ export const SelfHostedVideoInArticle = ({
 					format={format}
 					isMainMedia={isMainMedia}
 					role={role}
-					maxHeightDesktop={firstVideoSource?.height}
+					restrictHeightOnDesktop={
+						!isMainMedia && !isInteractive(format.design)
+					}
 				/>
 			</Island>
 		</div>
