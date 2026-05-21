@@ -40,29 +40,30 @@ export const FootballMatchDay = ({
 	guardianBaseUrl,
 	edition,
 }: Props) => (
-	<section
-		css={css`
-			${textSans12}
-		`}
-	>
-		<ul
-			css={css`
-				list-style: none;
-				margin: 0;
-				padding: 0;
-			`}
-		>
-			{matches.map(
-				(day) =>
-					day.competitions[0]?.matches.map((match) => (
-						<Match
-							key={match.paId}
-							match={match}
-							edition={edition}
-						/>
-					)),
-			)}
-		</ul>
+	<section>
+		{matches.length > 0 ? (
+			<ul
+				css={css`
+					${textSans12}
+					list-style: none;
+					margin: 0;
+					padding: 0;
+				`}
+			>
+				{matches.map(
+					(day) =>
+						day.competitions[0]?.matches.map((match) => (
+							<Match
+								key={match.paId}
+								match={match}
+								edition={edition}
+							/>
+						)),
+				)}
+			</ul>
+		) : (
+			<p css={noMatchesCss}>No matches today</p>
+		)}
 		<a
 			href={`${guardianBaseUrl}/football/${competitionTag}/overview`}
 			css={fixtureLinkCss}
@@ -71,6 +72,15 @@ export const FootballMatchDay = ({
 		</a>
 	</section>
 );
+
+const noMatchesCss = css`
+	${headlineMedium14}
+	margin: 0;
+	padding: 11px ${space[2]}px;
+	text-align: center;
+	color: ${neutral[7]};
+	background-color: ${sport[800]};
+`;
 
 const fixtureLinkCss = css`
 	${textSans15}
