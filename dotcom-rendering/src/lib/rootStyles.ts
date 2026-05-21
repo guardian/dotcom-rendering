@@ -6,13 +6,14 @@ import {
 } from '@guardian/source/foundations';
 import { paletteDeclarations } from '../paletteDeclarations';
 import { rootAdStyles } from './adStyles';
-import { isHostedContentDesign, type ArticleFormat } from './articleFormat';
+import { type ArticleFormat, isHostedContentDesign } from './articleFormat';
 
 const hostedHeaderOffset = (format: ArticleFormat) => {
 	if (isHostedContentDesign(format.design)) {
 		return css`
+			/* Brute force fix for the fixed hosted header causing odd behaviour on skip to main content */
 			${from.tablet} {
-				scroll-padding-top: 200px;
+				scroll-padding-top: 250px;
 			}
 		`;
 	}
