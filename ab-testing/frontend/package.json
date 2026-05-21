@@ -15,7 +15,7 @@
 		"@guardian/ab-testing-config": "workspace:ab-testing-config",
 		"@sveltejs/adapter-auto": "6.1.1",
 		"@sveltejs/adapter-static": "3.0.10",
-		"@sveltejs/kit": "2.59.1",
+		"@sveltejs/kit": "2.60.1",
 		"@sveltejs/vite-plugin-svelte": "5.1.1",
 		"svelte": "5.55.7",
 		"svelte-check": "4.3.3",
