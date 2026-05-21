@@ -202,13 +202,24 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 
 	const overridePaletteDeclarationsToUseAccentColor = (
 		accentColor?: string,
-	) => css`
-		@media (prefers-color-scheme: light) {
-			--article-link-text: ${accentColor ?? 'inherit'};
-			--article-link-text-hover: ${accentColor ?? 'inherit'};
-			--article-link-border-hover: ${accentColor ?? 'inherit'};
-		}
-	`;
+	) => {
+		return css`
+			@media (prefers-color-scheme: light) {
+				--article-link-text: ${accentColor ?? 'inherit'};
+				--article-link-text-hover: ${accentColor ?? 'inherit'};
+				--article-link-border-hover: ${accentColor ?? 'inherit'};
+				--accent-colour: ${accentColor ??
+				`${sourcePalette.neutral[38]}`};
+			}
+
+			[data-color-scheme='dark'] & {
+				--article-link-text: inherit;
+				--article-link-text-hover: inherit;
+				--article-link-border-hover: inherit;
+				--accent-colour: ${sourcePalette.neutral[86]};
+			}
+		`;
+	};
 
 	return (
 		<>

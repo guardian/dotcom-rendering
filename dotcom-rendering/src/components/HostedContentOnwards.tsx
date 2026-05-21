@@ -12,18 +12,26 @@ import { HostedContentOnwardsCard } from './HostedContentOnwardsCard';
 type HostedContentOnwardsProps = {
 	trails: TrailType[];
 	brandName: string;
-	accentColor?: string;
 };
 
 const headerStyles = css`
 	margin-bottom: ${space[1]}px;
-	border-top: ${space[2]}px solid var(--accent-colour);
+	border-top: ${space[2]}px solid
+		var(--accent-colour, ${sourcePalette.neutral[86]});
 `;
 
 const headingStyles = css`
 	${textSans17}
 	padding-top: ${space[2]}px;
 	color: ${sourcePalette.neutral[7]};
+
+	@media (prefers-color-scheme: dark) {
+		color: ${sourcePalette.neutral[86]};
+	}
+
+	[data-color-scheme='dark'] & {
+		color: ${sourcePalette.neutral[86]};
+	}
 
 	span {
 		${textSansBold20}
@@ -51,14 +59,9 @@ const stackedCardWrapper = css`
 export const HostedContentOnwards = ({
 	trails,
 	brandName,
-	accentColor,
 }: HostedContentOnwardsProps) => {
 	return (
-		<div
-			css={css`
-				--accent-colour: ${accentColor ?? sourcePalette.neutral[7]};
-			`}
-		>
+		<>
 			<header css={headerStyles}>
 				<h2 css={headingStyles}>
 					More from
@@ -75,6 +78,6 @@ export const HostedContentOnwards = ({
 					);
 				})}
 			</ul>
-		</div>
+		</>
 	);
 };
