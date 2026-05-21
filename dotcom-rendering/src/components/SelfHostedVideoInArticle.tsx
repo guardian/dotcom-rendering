@@ -7,6 +7,7 @@ import {
 	extractValidSourcesFromAssets,
 	getAspectRatioFromSources,
 	getSubtitleAsset,
+	isAspectRatio,
 } from '../lib/video';
 import type { MediaAtomBlockElement, RoleType } from '../types/content';
 import type { VideoPlayerFormat } from '../types/mainMedia';
@@ -72,7 +73,9 @@ export const SelfHostedVideoInArticle = ({
 					isMainMedia={isMainMedia}
 					role={role}
 					restrictHeightOnDesktop={
-						!isMainMedia && !isInteractive(format.design)
+						!isMainMedia &&
+						!isInteractive(format.design) &&
+						isAspectRatio('9:16', aspectRatio)
 					}
 				/>
 			</Island>

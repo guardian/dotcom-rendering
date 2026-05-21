@@ -190,3 +190,18 @@ export const formatTimeForDisplay = (timeInSeconds: number): string => {
 
 	return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 };
+
+const KnownAspectRatioMap: Record<string, number> = {
+	'9:16': 0.562,
+	'3:4': 0.75,
+	'4:5': 0.8,
+	'5:4': 1.25,
+	'16:9': 1.778,
+};
+
+export const isAspectRatio = (
+	stringAspectRatio: string,
+	numericAspectRatio: number,
+): boolean => {
+	return KnownAspectRatioMap[stringAspectRatio] === numericAspectRatio;
+};
