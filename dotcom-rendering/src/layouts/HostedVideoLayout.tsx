@@ -185,6 +185,16 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 		elements: block.elements.filter((element) => !isCtaElement(element)),
 	}));
 
+	const overridePaletteDeclarationsToUseAccentColor = (
+		accentColor?: string,
+	) => css`
+		@media (prefers-color-scheme: light) {
+			--article-link-text: ${accentColor ?? 'inherit'};
+			--article-link-text-hover: ${accentColor ?? 'inherit'};
+			--article-link-border-hover: ${accentColor ?? 'inherit'};
+		}
+	`;
+
 	return (
 		<>
 			{branding ? (
@@ -205,7 +215,12 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			) : null}
 
-			<main data-layout="HostedVideoLayout">
+			<main
+				data-layout="HostedVideoLayout"
+				css={overridePaletteDeclarationsToUseAccentColor(
+					branding?.hostedCampaignColour,
+				)}
+			>
 				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
 						<MainMedia
@@ -298,7 +313,6 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										frontendData.isRightToLeftLang
 									}
-									accentColor={branding?.hostedCampaignColour}
 								/>
 								<HostedContentDisclaimer />
 							</ArticleContainer>
