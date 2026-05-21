@@ -99,11 +99,6 @@ const submitForm = async (
 };
 
 describe('ManyNewsletterSignUp', () => {
-	const pageConfig = window.guardian.config
-		.page as typeof window.guardian.config.page & {
-		ajaxUrl?: string;
-	};
-
 	beforeEach(() => {
 		jest.clearAllMocks();
 
@@ -111,7 +106,6 @@ describe('ManyNewsletterSignUp', () => {
 		(useAuthStatus as jest.Mock).mockReturnValue({ kind: 'SignedOut' });
 		(useCountryCode as jest.Mock).mockReturnValue(undefined);
 
-		pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
 		window.guardian.config.switches['us-signup-hide-marketing-toggle'] =
 			false;
 
