@@ -113,8 +113,6 @@ const getTrackingPayloadForEvent = (eventDescription: string) => {
 describe('SecureSignup — US marketing toggle hiding', () => {
 	const pageConfig = window.guardian.config
 		.page as typeof window.guardian.config.page & {
-		ajaxUrl?: string;
-		idApiUrl?: string;
 		googleRecaptchaSiteKey?: string;
 	};
 
@@ -129,8 +127,6 @@ describe('SecureSignup — US marketing toggle hiding', () => {
 		(useBrowserId as jest.Mock).mockReturnValue('test-browser-id');
 		(useCountryCode as jest.Mock).mockReturnValue(undefined);
 
-		pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
-		pageConfig.idApiUrl = 'https://idapi.nextgen.guardianapps.co.uk';
 		pageConfig.googleRecaptchaSiteKey = 'test-site-key';
 		window.guardian.config.switches['usSignupHideMarketingToggle'] = false;
 		if (window.guardian.ophan) {
@@ -156,118 +152,108 @@ describe('SecureSignup — US marketing toggle hiding', () => {
 		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
 	};
 
-	describe('US hide marketing toggle (usSignupHideMarketingToggle switch)', () => {
-		beforeEach(() => {
-			window.guardian.config.switches['usSignupHideMarketingToggle'] =
-				true;
+	beforeEach(() => {
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = true;
+	});
+
+	it('switch on + US + signed out: hides marketing checkbox, sends marketing=true and marketingOptInHidden=true', async () => {
+		(useCountryCode as jest.Mock).mockReturnValue('US');
+		const testUser = user.setup();
+
+		renderSecureSignup();
+
+		expect(
+			screen.queryByLabelText(
+				'Get updates about our journalism and ways to support and enjoy our work.',
+			),
+		).not.toBeInTheDocument();
+
+		await typeEmailAndSubmit(testUser);
+		await waitFor(() => {
+			expect(global.fetch).toHaveBeenCalled();
 		});
 
-		it('switch on + US + signed out: hides marketing checkbox, sends marketing=true and marketingOptInHidden=true', async () => {
-			(useCountryCode as jest.Mock).mockReturnValue('US');
-			const testUser = user.setup();
+		const params = getRequestBodyParams();
+		expect(params.get('marketing')).toBe('true');
+		expect(params.get('marketingOptInHidden')).toBe('true');
+		expect(
+			getTrackingPayloadForEvent('form-submission')?.marketingOptInType,
+		).toBe('similar-guardian-products-optin-hidden-us');
+		expect(
+			getTrackingPayloadForEvent('submission-confirmed')
+				?.marketingOptInType,
+		).toBe('similar-guardian-products-optin-hidden-us');
+	});
 
-			renderSecureSignup();
+	it('switch on + non-US + signed out: shows marketing checkbox, no marketingOptInHidden', async () => {
+		(useCountryCode as jest.Mock).mockReturnValue('GB');
+		const testUser = user.setup();
 
-			expect(
-				screen.queryByLabelText(
-					'Get updates about our journalism and ways to support and enjoy our work.',
-				),
-			).not.toBeInTheDocument();
+		renderSecureSignup();
 
-			await typeEmailAndSubmit(testUser);
-			await waitFor(() => {
-				expect(global.fetch).toHaveBeenCalled();
-			});
+		expect(
+			screen.getByLabelText(
+				'Get updates about our journalism and ways to support and enjoy our work.',
+			),
+		).toBeInTheDocument();
 
-			const params = getRequestBodyParams();
-			expect(params.get('marketing')).toBe('true');
-			expect(params.get('marketingOptInHidden')).toBe('true');
-			expect(
-				getTrackingPayloadForEvent('form-submission')
-					?.marketingOptInType,
-			).toBe('similar-guardian-products-optin-hidden-us');
-			expect(
-				getTrackingPayloadForEvent('submission-confirmed')
-					?.marketingOptInType,
-			).toBe('similar-guardian-products-optin-hidden-us');
+		await typeEmailAndSubmit(testUser);
+		await waitFor(() => {
+			expect(global.fetch).toHaveBeenCalled();
 		});
 
-		it('switch on + non-US + signed out: shows marketing checkbox, no marketingOptInHidden', async () => {
-			(useCountryCode as jest.Mock).mockReturnValue('GB');
-			const testUser = user.setup();
+		expect(getRequestBodyParams().get('marketingOptInHidden')).toBeNull();
+	});
 
-			renderSecureSignup();
+	it('switch on + pending country (undefined) + signed out: shows marketing checkbox', () => {
+		(useCountryCode as jest.Mock).mockReturnValue(undefined);
+		renderSecureSignup();
 
-			expect(
-				screen.getByLabelText(
-					'Get updates about our journalism and ways to support and enjoy our work.',
-				),
-			).toBeInTheDocument();
+		expect(
+			screen.getByLabelText(
+				'Get updates about our journalism and ways to support and enjoy our work.',
+			),
+		).toBeInTheDocument();
+	});
 
-			await typeEmailAndSubmit(testUser);
-			await waitFor(() => {
-				expect(global.fetch).toHaveBeenCalled();
-			});
+	it('switch on + US + signed in: checkbox hidden by signed-in, no marketingOptInHidden', async () => {
+		(useCountryCode as jest.Mock).mockReturnValue('US');
+		(useIsSignedIn as jest.Mock).mockReturnValue(true);
+		(useAuthStatus as jest.Mock).mockReturnValue({ kind: 'SignedIn' });
+		const testUser = user.setup();
 
-			expect(
-				getRequestBodyParams().get('marketingOptInHidden'),
-			).toBeNull();
+		renderSecureSignup();
+
+		expect(
+			screen.queryByLabelText(
+				'Get updates about our journalism and ways to support and enjoy our work.',
+			),
+		).not.toBeInTheDocument();
+
+		await typeEmailAndSubmit(testUser);
+		await waitFor(() => {
+			expect(global.fetch).toHaveBeenCalled();
 		});
 
-		it('switch on + pending country (undefined) + signed out: shows marketing checkbox', () => {
-			(useCountryCode as jest.Mock).mockReturnValue(undefined);
-			renderSecureSignup();
+		expect(getRequestBodyParams().get('marketingOptInHidden')).toBeNull();
+		expect(
+			getTrackingPayloadForEvent('form-submission')?.marketingOptInType,
+		).toBeUndefined();
+		expect(
+			getTrackingPayloadForEvent('submission-confirmed')
+				?.marketingOptInType,
+		).toBeUndefined();
+	});
 
-			expect(
-				screen.getByLabelText(
-					'Get updates about our journalism and ways to support and enjoy our work.',
-				),
-			).toBeInTheDocument();
-		});
+	it('switch off + US + signed out: shows marketing checkbox', () => {
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = false;
+		(useCountryCode as jest.Mock).mockReturnValue('US');
+		renderSecureSignup();
 
-		it('switch on + US + signed in: checkbox hidden by signed-in, no marketingOptInHidden', async () => {
-			(useCountryCode as jest.Mock).mockReturnValue('US');
-			(useIsSignedIn as jest.Mock).mockReturnValue(true);
-			(useAuthStatus as jest.Mock).mockReturnValue({ kind: 'SignedIn' });
-			const testUser = user.setup();
-
-			renderSecureSignup();
-
-			expect(
-				screen.queryByLabelText(
-					'Get updates about our journalism and ways to support and enjoy our work.',
-				),
-			).not.toBeInTheDocument();
-
-			await typeEmailAndSubmit(testUser);
-			await waitFor(() => {
-				expect(global.fetch).toHaveBeenCalled();
-			});
-
-			expect(
-				getRequestBodyParams().get('marketingOptInHidden'),
-			).toBeNull();
-			expect(
-				getTrackingPayloadForEvent('form-submission')
-					?.marketingOptInType,
-			).toBeUndefined();
-			expect(
-				getTrackingPayloadForEvent('submission-confirmed')
-					?.marketingOptInType,
-			).toBeUndefined();
-		});
-
-		it('switch off + US + signed out: shows marketing checkbox', () => {
-			window.guardian.config.switches['usSignupHideMarketingToggle'] =
-				false;
-			(useCountryCode as jest.Mock).mockReturnValue('US');
-			renderSecureSignup();
-
-			expect(
-				screen.getByLabelText(
-					'Get updates about our journalism and ways to support and enjoy our work.',
-				),
-			).toBeInTheDocument();
-		});
+		expect(
+			screen.getByLabelText(
+				'Get updates about our journalism and ways to support and enjoy our work.',
+			),
+		).toBeInTheDocument();
 	});
 });
