@@ -57,7 +57,6 @@ type Props = {
 	shouldHideAds: boolean;
 	serverTime?: number;
 	idApiUrl?: string;
-	accentColor?: string;
 };
 
 const globalOlStyles = () => css`
@@ -101,20 +100,6 @@ const globalStrongStyles = css`
 const bodyPadding = css`
 	${between.tablet.and.desktop} {
 		padding-right: 80px;
-	}
-`;
-
-const hostedContentLinkStyles = (accentColor?: string) => css`
-	a:not([data-ignore='global-link-styling']) {
-		text-decoration: none;
-		border-bottom: 1px solid ${themePalette('--article-link-border')};
-		color: ${accentColor ?? themePalette('--article-link-text')};
-
-		:hover {
-			color: ${accentColor ?? themePalette('--article-link-text-hover')};
-			border-bottom: 1px solid
-				${accentColor ?? themePalette('--article-link-border-hover')};
-		}
 	}
 `;
 
@@ -164,7 +149,6 @@ export const ArticleBody = ({
 	shouldHideAds,
 	serverTime,
 	idApiUrl,
-	accentColor,
 }: Props) => {
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
@@ -262,10 +246,7 @@ export const ArticleBody = ({
 					globalOlStyles(),
 					globalStrongStyles,
 					globalLinkStyles(),
-					isHostedContent && [
-						hostedContentH2Styles,
-						hostedContentLinkStyles(accentColor),
-					],
+					isHostedContent && [hostedContentH2Styles],
 				]}
 				lang={language}
 				dir={languageDirection}

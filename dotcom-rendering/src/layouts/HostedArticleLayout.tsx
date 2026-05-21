@@ -200,6 +200,16 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 		),
 	}));
 
+	const overridePaletteDeclarationsToUseAccentColor = (
+		accentColor?: string,
+	) => css`
+		@media (prefers-color-scheme: light) {
+			--article-link-text: ${accentColor ?? 'inherit'};
+			--article-link-text-hover: ${accentColor ?? 'inherit'};
+			--article-link-border-hover: ${accentColor ?? 'inherit'};
+		}
+	`;
+
 	return (
 		<>
 			{branding ? (
@@ -220,7 +230,12 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			) : null}
 
-			<main data-layout="HostedArticleLayout">
+			<main
+				data-layout="HostedArticleLayout"
+				css={overridePaletteDeclarationsToUseAccentColor(
+					branding?.hostedCampaignColour,
+				)}
+			>
 				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
 						<MainMedia
@@ -321,7 +336,6 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										frontendData.isRightToLeftLang
 									}
-									accentColor={branding?.hostedCampaignColour}
 								/>
 								<HostedContentDisclaimer />
 							</ArticleContainer>
