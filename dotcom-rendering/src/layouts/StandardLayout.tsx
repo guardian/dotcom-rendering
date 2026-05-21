@@ -317,6 +317,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						grid.container,
 						grid.outerRules(),
 						!isLabs &&
+							layoutType !== 'portrait' &&
 							css`
 								${from.leftCol} {
 									${grid.centreRule(
@@ -339,6 +340,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											? '130px'
 											: '90px'};
 								}
+							`,
+						layoutType === 'portrait' &&
+							css`
+								grid-template-rows: 0.25fr 1fr auto;
 							`,
 					]}
 				>

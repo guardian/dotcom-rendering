@@ -13,13 +13,14 @@ export type Area =
 	| 'body'
 	| 'right-column';
 
-type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'leftCol';
+type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'leftCol' | 'wide';
 
 const breakpointQueries: Record<Breakpoint, string> = {
 	mobile: until.tablet,
 	tablet: from.tablet,
 	desktop: from.desktop,
 	leftCol: from.leftCol,
+	wide: from.wide,
 };
 
 // Raw CSS overrides per area per breakpoint. Entries are only needed when an area
@@ -152,27 +153,45 @@ const mediaCss: LayoutCssMap = {
 const portraitCss: LayoutCssMap = {
 	title: {
 		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		desktop: 'grid-row: 1; grid-column: centre-column-start / 8;',
 		leftCol: 'grid-row: 1; grid-column: left-column-start / 9;',
 	},
 	headline: {
 		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		desktop: 'grid-row: 2; grid-column: centre-column-start / 8;',
 		leftCol: 'grid-row: 2; grid-column: left-column-start / 9;',
+		wide: 'grid-row: 2; grid-column: left-column-start / 10;',
 	},
 	media: {
 		mobile: 'grid-row: 3;',
-		leftCol: 'grid-row: 1 / span 3; grid-column: 10 / right-column-end;',
+		tablet: 'grid-row: 3;',
+		desktop: 'grid-row: 1 / span 4; grid-column: 8 / right-column-end;',
+		leftCol: 'grid-row: 1 / span 3; grid-column: 9 / right-column-end;',
+		wide: 'grid-row: 1 / span 3; grid-column: 10 / right-column-end;',
 	},
 	standfirst: {
 		mobile: 'grid-row: 4;',
-		leftCol: 'grid-row: 3; grid-column: centre-column-start / 9;',
+		tablet: 'grid-row: 4;',
+		desktop: 'grid-row: 3; grid-column: centre-column-start / 7;',
+		leftCol: 'grid-row: 3; grid-column: centre-column-start / 8;',
 	},
 	meta: {
 		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		desktop: 'grid-row: 4; grid-column: centre-column-start / 8;',
 		leftCol:
 			'grid-row: 3; grid-column: left-column-start / left-column-end;',
 	},
 	body: {
 		mobile: 'grid-row: 6;',
+	},
+	'right-column': {
+		desktop:
+			'grid-row: 5; grid-column: right-column-start / right-column-end;',
+		leftCol:
+			'grid-row: 4; grid-column: right-column-start / right-column-end;',
 	},
 };
 
