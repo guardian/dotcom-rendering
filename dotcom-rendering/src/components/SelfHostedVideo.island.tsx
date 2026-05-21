@@ -386,7 +386,7 @@ type Props = {
 	format?: ArticleFormat;
 	isMainMedia?: boolean;
 	role?: RoleType;
-	maxHeightDesktop?: number;
+	restrictHeightOnDesktop?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -415,7 +415,7 @@ export const SelfHostedVideo = ({
 	isMainMedia,
 	role,
 	posterImageAspectRatio,
-	maxHeightDesktop,
+	restrictHeightOnDesktop = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -1154,7 +1154,7 @@ export const SelfHostedVideo = ({
 						containerAspectRatioMobile,
 						containerAspectRatioDesktop,
 					),
-					!isUndefined(maxHeightDesktop) && maxHeightStyles,
+					restrictHeightOnDesktop && maxHeightStyles,
 				]}
 			>
 				<div
