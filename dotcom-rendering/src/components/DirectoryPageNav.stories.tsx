@@ -38,9 +38,9 @@ export const WorldCup2026 = meta.story({
 	},
 });
 
-export const WorldCup2026Fixtures = meta.story({
+export const WorldCup2026MatchCenter = meta.story({
 	args: {
-		pageId: 'football/world-cup-2026/fixtures',
+		pageId: 'football/world-cup-2026/overview',
 	},
 });
 

@@ -6,9 +6,9 @@ import {
 	headlineBold24Object,
 	headlineBold42Object,
 	palette,
-	remSpace,
 	space,
 	textSans14Object,
+	textSansBold14Object,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
 import { generateImageURL } from '../lib/image';
@@ -226,7 +226,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const largeLinkStyles = css({
 		position: 'absolute',
-		top: `${space[3]}px`,
+		top: space[3],
 		left: 0,
 		...headlineBold24Object,
 		color: textColor,
@@ -242,29 +242,26 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	});
 
 	const list = css({
-		display: 'flex',
 		'&': css(grid.column.all),
-		alignSelf: 'end',
+		display: 'flex',
+		alignItems: 'center',
 		position: 'relative',
-		'--top-border-gap': `${remSpace[6]}rem`,
 		overflowX: 'scroll',
 		scrollbarWidth: 'none',
-		padding: `${space[3]}px`,
 		borderTop: '1px solid',
 		borderColor: palette.brand[600],
-		height: '100%',
+		padding: `0 ${space[3]}px`,
+		height: space[10],
 		[from.mobileLandscape]: {
-			padding: `${space[4]}px ${space[5]}px`,
-		},
-		[from.tablet]: {
-			'--top-border-gap': `${remSpace[12]}rem`,
+			padding: `0 ${space[5]}px`,
+			height: space[12],
 		},
 		// This creates a gradient fade on the right side to indicate that there's more to scroll for.
 		'&:after': {
 			content: '""',
 			position: 'sticky',
 			right: `-${space[3]}px`,
-			top: `-${space[3]}px`,
+			top: 0,
 			height: '100%',
 			minWidth: 40,
 			background: `linear-gradient(to left, ${backgroundColor}, transparent)`,
@@ -273,10 +270,6 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 			},
 		},
 	});
-
-	const selectedStyles = {
-		fontWeight: 'bold',
-	};
 
 	const listItem = css({
 		position: 'relative',
@@ -302,12 +295,16 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const smallLink = css({
 		...textSans14Object,
-		paddingRight: `${space[3]}px`,
+		paddingRight: space[3],
 		display: 'block',
 		lineHeight: 1,
 		color: textColor,
 		textDecoration: 'none',
 		whiteSpace: 'nowrap',
+	});
+
+	const boldSmallLink = css({
+		...textSansBold14Object,
 	});
 
 	return (
@@ -320,12 +317,14 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 			<ul css={list}>
 				{config.links.map((link) => (
-					<li
-						key={link.label}
-						css={listItem}
-						style={pageId === link.id ? selectedStyles : {}}
-					>
-						<a href={`/${link.id}`} css={smallLink}>
+					<li key={link.label} css={listItem}>
+						<a
+							href={`/${link.id}`}
+							css={[
+								smallLink,
+								pageId === link.id && boldSmallLink,
+							]}
+						>
 							{link.label}
 						</a>
 					</li>
