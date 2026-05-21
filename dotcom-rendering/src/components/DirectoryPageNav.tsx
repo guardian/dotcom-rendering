@@ -14,6 +14,7 @@ import { grid } from '../grid';
 import { generateImageURL } from '../lib/image';
 import { useBetaAB } from '../lib/useAB';
 import { worldCup2026PageIds } from '../lib/worldCup2026';
+import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 
 type Props = {
@@ -25,10 +26,12 @@ interface DirectoryPageNavConfig {
 	pageIds: string[];
 	tagIds: string[];
 	textColor: string;
+	textHoverColor?: string;
 	backgroundColor: string;
 	titleIcon?: React.ReactElement;
 	title: { label: string; id: string };
 	links: Array<{ label: string; id: string }>;
+	showHeader: boolean;
 	backgroundImages?: {
 		mobile: string;
 		mobileLandscape: string;
@@ -60,8 +63,53 @@ const WorldCup2026Icon = () => (
 	</svg>
 );
 
+// Smaller version has slightly different proportions to better fit in the nav when the header isn't shown.
+const WorldCup2026IconSmall = () => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="16"
+		height="17"
+		viewBox="0 0 16 17"
+		fill="none"
+	>
+		<rect width="4.39184" height="11.5286" fill="#90DCFF" />
+		<rect
+			x="5.80347"
+			y="5"
+			width="4.39184"
+			height="11.5286"
+			fill="#90DCFF"
+		/>
+		<rect x="11.6084" width="4.39184" height="11.5286" fill="#90DCFF" />
+		<circle cx="7.99939" cy="2.19592" r="2.19592" fill="#90DCFF" />
+	</svg>
+);
+
+const worldCup2026Links = [
+	{
+		label: 'Match centre',
+		id: 'football/world-cup-2026/overview',
+	},
+	{
+		label: 'Player guide',
+		id: '',
+	},
+	{
+		label: 'Bracketology',
+		id: '',
+	},
+	{
+		label: 'Golden boot',
+		id: '',
+	},
+	{
+		label: 'More football',
+		id: 'football',
+	},
+];
+
 const configs = [
-	// World Cup 2026
+	// World Cup 2026 Fronts
 	{
 		pageIds: worldCup2026PageIds,
 		tagIds: [],
@@ -72,28 +120,8 @@ const configs = [
 			id: 'football/world-cup-2026',
 		},
 		titleIcon: <WorldCup2026Icon />,
-		links: [
-			{
-				label: 'Match centre',
-				id: 'football/world-cup-2026/overview',
-			},
-			{
-				label: 'Player guide',
-				id: '',
-			},
-			{
-				label: 'Bracketology',
-				id: '',
-			},
-			{
-				label: 'Golden boot',
-				id: '',
-			},
-			{
-				label: 'More football',
-				id: 'football',
-			},
-		],
+		showHeader: true,
+		links: worldCup2026Links,
 		backgroundImages: {
 			mobile: 'https://media.guim.co.uk/4ba0caac6d18c1fe6a5a3267b270d8c21ae6f940/0_0_750_376/750.jpg',
 			mobileLandscape:
@@ -105,6 +133,21 @@ const configs = [
 				'https://media.guim.co.uk/167bec4a208bfc7fdc6b2127186b9bb183932259/0_0_1960_276/1960.jpg',
 			wide: 'https://media.guim.co.uk/4e44f9a88fcc9a3b1b5294f7e581644baa75c904/0_0_2600_276/2600.jpg',
 		},
+	},
+	// World Cup 2026 Articles
+	{
+		pageIds: [] as string[],
+		tagIds: ['football/world-cup-2026'],
+		textColor: themePalette('--masthead-nav-link-text'),
+		textHoverColor: themePalette('--masthead-nav-link-text-hover'),
+		backgroundColor: palette.brand[400],
+		title: {
+			label: 'World Cup 2026',
+			id: 'football/world-cup-2026',
+		},
+		showHeader: false,
+		titleIcon: <WorldCup2026IconSmall />,
+		links: worldCup2026Links,
 	},
 	// Winter Olympics 2026
 	{
@@ -121,6 +164,7 @@ const configs = [
 			label: 'Winter Olympics 2026',
 			id: 'sport/winter-olympics-2026',
 		},
+		showHeader: true,
 		links: [
 			{
 				label: 'Schedule',
@@ -165,6 +209,7 @@ const configs = [
 			label: 'Winter Paralympics 2026',
 			id: 'sport/winter-paralympics-2026',
 		},
+		showHeader: true,
 		links: [
 			{
 				label: 'Results',
@@ -257,7 +302,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		overflowX: 'scroll',
 		scrollbarWidth: 'none',
 		borderTop: '1px solid',
-		borderColor: palette.brand[600],
+		borderColor: themePalette('--masthead-nav-lines'),
 		padding: `0 ${space[3]}px`,
 		height: space[10],
 		[from.mobileLandscape]: {
@@ -268,7 +313,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		'&:after': {
 			content: '""',
 			position: 'sticky',
-			right: `-${space[3]}px`,
+			right: -space[3],
 			top: 0,
 			height: '100%',
 			minWidth: 40,
@@ -301,6 +346,30 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		},
 	});
 
+	const primaryLinkStyles = css({
+		display: 'flex',
+		alignItems: 'center',
+		paddingRight: space[6],
+		'&:not(:hover)': {
+			color: palette.sport[600],
+		},
+		svg: {
+			marginRight: space[2],
+		},
+		// small right border
+		'&::after': {
+			content: '""',
+			display: 'block',
+			position: 'absolute',
+			right: space[3],
+			top: '50%',
+			transform: 'translateY(-50%)',
+			width: 1,
+			height: space[3],
+			backgroundColor: themePalette('--masthead-nav-lines'),
+		},
+	});
+
 	const smallLink = css({
 		...textSans14Object,
 		paddingRight: space[3],
@@ -309,6 +378,13 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		color: textColor,
 		textDecoration: 'none',
 		whiteSpace: 'nowrap',
+		'&:hover': {
+			textDecoration: 'underline',
+			color: config.textHoverColor,
+			'svg rect, svg circle': {
+				fill: config.textHoverColor,
+			},
+		},
 	});
 
 	const boldSmallLink = css({
@@ -317,13 +393,32 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	return (
 		<nav css={[nav]}>
-			<a href={`/${config.title.id}`} css={largeLinkStyles}>
-				{config.titleIcon && config.titleIcon}
-				{config.title.label}
-			</a>
-			<BackgroundImage images={config.backgroundImages} />
+			{config.showHeader && (
+				<>
+					<a href={`/${config.title.id}`} css={largeLinkStyles}>
+						{config.titleIcon && config.titleIcon}
+						{config.title.label}
+					</a>
+					<BackgroundImage images={config.backgroundImages} />
+				</>
+			)}
 
 			<ul css={list}>
+				{!config.showHeader && (
+					<li css={listItem}>
+						<a
+							href={`/${config.title.id}`}
+							css={[
+								smallLink,
+								primaryLinkStyles,
+								pageId === config.title.id && boldSmallLink,
+							]}
+						>
+							{config.titleIcon}
+							{config.title.label}
+						</a>
+					</li>
+				)}
 				{config.links.map((link) => (
 					<li key={link.label} css={listItem}>
 						<a

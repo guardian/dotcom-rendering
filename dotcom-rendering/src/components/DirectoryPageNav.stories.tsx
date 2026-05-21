@@ -44,6 +44,19 @@ export const WorldCup2026MatchCenter = meta.story({
 	},
 });
 
+export const WorldCup2026Article = meta.story({
+	args: {
+		pageId: 'football/2026/may/19/brazils-world-cup-squad-offers-a-hint-of-the-magical-pragmatism-of-1994',
+		pageTags: [
+			{
+				id: 'football/world-cup-2026',
+				type: 'Topic',
+				title: 'World Cup 2026',
+			},
+		],
+	},
+});
+
 export const OtherCompetition = meta.story({
 	args: {
 		pageId: 'football/premierleague/table',
