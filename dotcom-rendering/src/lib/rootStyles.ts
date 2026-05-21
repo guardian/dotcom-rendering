@@ -1,6 +1,7 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import {
 	focusHalo,
+	from,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
 import { paletteDeclarations } from '../paletteDeclarations';
@@ -8,12 +9,10 @@ import { rootAdStyles } from './adStyles';
 import { isHostedContentDesign, type ArticleFormat } from './articleFormat';
 
 const hostedHeaderOffset = (format: ArticleFormat) => {
-	console.log(format.design);
-
 	if (isHostedContentDesign(format.design)) {
 		return css`
-			html {
-				scroll-margin-top: 100px;
+			${from.tablet} {
+				scroll-padding-top: 200px;
 			}
 		`;
 	}

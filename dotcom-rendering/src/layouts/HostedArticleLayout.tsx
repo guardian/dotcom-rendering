@@ -220,7 +220,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			) : null}
 
-			<main data-layout="HostedArticleLayout">
+			<main id="maincontent" data-layout="HostedArticleLayout">
 				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
 						<MainMedia
