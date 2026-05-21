@@ -168,6 +168,26 @@ const sideBorders = css`
 	}
 `;
 
+export const overridePaletteDeclarationsToUseAccentColor = (
+	accentColor?: string,
+) => {
+	return css`
+		@media (prefers-color-scheme: light) {
+			--article-link-text: ${accentColor ?? 'inherit'};
+			--article-link-text-hover: ${accentColor ?? 'inherit'};
+			--article-link-border-hover: ${accentColor ?? 'inherit'};
+			--accent-colour: ${accentColor ?? `${sourcePalette.neutral[38]}`};
+		}
+		/* The following styles are to reflect the current accentColor behaviour in storybook as well so we maintain consistency */
+		[data-color-scheme='dark'] & {
+			--article-link-text: inherit;
+			--article-link-text-hover: inherit;
+			--article-link-border-hover: inherit;
+			--accent-colour: ${sourcePalette.neutral[86]};
+		}
+	`;
+};
+
 export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	const {
 		content: { frontendData },
@@ -199,27 +219,6 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 				'model.dotcomrendering.pageElements.CallToActionAtomBlockElement',
 		),
 	}));
-
-	const overridePaletteDeclarationsToUseAccentColor = (
-		accentColor?: string,
-	) => {
-		return css`
-			@media (prefers-color-scheme: light) {
-				--article-link-text: ${accentColor ?? 'inherit'};
-				--article-link-text-hover: ${accentColor ?? 'inherit'};
-				--article-link-border-hover: ${accentColor ?? 'inherit'};
-				--accent-colour: ${accentColor ??
-				`${sourcePalette.neutral[38]}`};
-			}
-
-			[data-color-scheme='dark'] & {
-				--article-link-text: inherit;
-				--article-link-text-hover: inherit;
-				--article-link-border-hover: inherit;
-				--accent-colour: ${sourcePalette.neutral[86]};
-			}
-		`;
-	};
 
 	return (
 		<>

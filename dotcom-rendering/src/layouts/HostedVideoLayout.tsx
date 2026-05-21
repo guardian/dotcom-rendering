@@ -26,6 +26,7 @@ import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { overridePaletteDeclarationsToUseAccentColor } from './HostedArticleLayout';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -185,16 +186,6 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 		elements: block.elements.filter((element) => !isCtaElement(element)),
 	}));
 
-	const overridePaletteDeclarationsToUseAccentColor = (
-		accentColor?: string,
-	) => css`
-		@media (prefers-color-scheme: light) {
-			--article-link-text: ${accentColor ?? 'inherit'};
-			--article-link-text-hover: ${accentColor ?? 'inherit'};
-			--article-link-border-hover: ${accentColor ?? 'inherit'};
-		}
-	`;
-
 	return (
 		<>
 			{branding ? (
@@ -335,6 +326,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 								backgroundImage={cta.image}
 								text={cta.label}
 								buttonText={cta.btnText}
+								accentColor={branding?.hostedCampaignColour}
 							/>
 						</div>
 					)}
