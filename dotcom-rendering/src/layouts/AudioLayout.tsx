@@ -20,6 +20,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { AudioPlayerWrapper } from '../components/AudioPlayerWrapper.island';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.island';
+import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -45,14 +46,13 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
+import { useBetaAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { worldCupTagId } from '../lib/worldCup2026';
-import { useBetaAB } from '../lib/useAB';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
 
 const AudioGrid = ({ children }: { children: React.ReactNode }) => (
 	<div

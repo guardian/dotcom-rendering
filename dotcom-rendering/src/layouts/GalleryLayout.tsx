@@ -16,6 +16,7 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
+import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FetchMoreGalleriesData } from '../components/FetchMoreGalleriesData.island';
 import { Footer } from '../components/Footer';
@@ -45,16 +46,14 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
 import type { EditionId } from '../lib/edition';
+import { useBetaAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette } from '../palette';
 import type { ArticleDeprecated, Gallery } from '../types/article';
 import type { ConfigType } from '../types/config';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
-import { useBetaAB } from '../lib/useAB';
-import { worldCupTagId } from '../lib/worldCup2026';
-import { TagType } from '../types/tag';
 
 interface Props {
 	gallery: Gallery;

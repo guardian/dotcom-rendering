@@ -19,9 +19,9 @@ import {
 	worldCup2026PageIds,
 } from '../lib/worldCup2026';
 import { palette as themePalette } from '../palette';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
-import { RenderingTarget } from '../types/renderingTarget';
 
 type Props = {
 	pageId: string;

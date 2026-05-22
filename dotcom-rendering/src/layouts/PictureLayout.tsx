@@ -18,6 +18,7 @@ import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.island';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
+import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -39,14 +40,13 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
+import { useBetaAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
-import { useBetaAB } from '../lib/useAB';
-import { worldCupTagId } from '../lib/worldCup2026';
 
 const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 	<div

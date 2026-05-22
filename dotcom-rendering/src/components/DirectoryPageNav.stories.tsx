@@ -2,10 +2,8 @@ import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { BetaABTests } from '../experiments/lib/beta-ab-tests';
 import { setBetaABTests } from '../lib/useAB';
-import { DirectoryPageNav } from './DirectoryPageNav';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { ConfigProvider } from './ConfigContext';
+import { DirectoryPageNav } from './DirectoryPageNav';
 
 const mockAB = new BetaABTests({
 	isServer: true,

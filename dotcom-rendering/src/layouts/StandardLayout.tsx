@@ -57,13 +57,13 @@ import { decideStoryPackageTrails } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
+import { useBetaAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { worldCupTagId } from '../lib/worldCup2026';
-import { useBetaAB } from '../lib/useAB';
 
 const StandardGrid = ({
 	children,
