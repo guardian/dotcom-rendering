@@ -13,7 +13,11 @@ import {
 import { grid } from '../grid';
 import { generateImageURL } from '../lib/image';
 import { useBetaAB } from '../lib/useAB';
-import { worldCup2026PageIds } from '../lib/worldCup2026';
+import {
+	WorldCup2026Icon,
+	WorldCup2026IconSmall,
+	worldCup2026PageIds,
+} from '../lib/worldCup2026';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 
@@ -41,49 +45,6 @@ interface DirectoryPageNavConfig {
 		wide: string;
 	};
 }
-
-const WorldCup2026Icon = () => (
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		width="40"
-		height="46"
-		viewBox="0 0 40 46"
-		fill="none"
-	>
-		<rect width="12.3697" height="32.4706" fill="#D71921" />
-		<rect
-			x="13.5294"
-			y="13.5295"
-			width="12.3697"
-			height="32.4706"
-			fill="white"
-		/>
-		<rect x="27.059" width="12.3697" height="32.4706" fill="#007E46" />
-		<circle cx="19.7142" cy="6.18487" r="6.18487" fill="white" />
-	</svg>
-);
-
-// Smaller version has slightly different proportions to better fit in the nav when the header isn't shown.
-const WorldCup2026IconSmall = () => (
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		width="16"
-		height="17"
-		viewBox="0 0 16 17"
-		fill="none"
-	>
-		<rect width="4.39184" height="11.5286" fill="#90DCFF" />
-		<rect
-			x="5.80347"
-			y="5"
-			width="4.39184"
-			height="11.5286"
-			fill="#90DCFF"
-		/>
-		<rect x="11.6084" width="4.39184" height="11.5286" fill="#90DCFF" />
-		<circle cx="7.99939" cy="2.19592" r="2.19592" fill="#90DCFF" />
-	</svg>
-);
 
 const worldCup2026Links = [
 	{
