@@ -22,7 +22,7 @@
 		"chromatic": "16.1.0",
 		"husky": "9.1.7",
 		"lint-staged": "15.2.0",
-		"prettier": "3.0.3",
+		"prettier": "3.8.3",
 		"tslib": "catalog:"
 	},
 	"packageManager": "pnpm@11.3.0"
