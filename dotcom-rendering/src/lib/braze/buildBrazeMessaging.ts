@@ -141,14 +141,10 @@ export const buildBrazeMessaging = async (
 			);
 		}
 
-		// Trigger the Braze Banners System refresh (Ask Braze to fetch data)
-		// (Requests banners by a list of placement IDs from the Braze backend.)
-		// (Note that this method can only be called once per session.)
-		// Since we want to suppress In-App Messages if a banner exists, we must
-		// call requestBannersRefresh before openSession.
-		await refreshBanners(braze);
+		// braze.openSession();
 
-		braze.openSession();
+		// Trigger the Braze Banners System refresh (fetch banner content for all placement IDs).
+		await refreshBanners(braze);
 
 		/**
 		 * Re-request banner eligibility whenever the user returns to this tab.
