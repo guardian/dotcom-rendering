@@ -141,7 +141,8 @@ export const buildBrazeMessaging = async (
 			);
 		}
 
-		// braze.openSession();
+		// Open the Braze session
+		braze.openSession();
 
 		// Trigger the Braze Banners System refresh (fetch banner content for all placement IDs).
 		await refreshBanners(braze);
