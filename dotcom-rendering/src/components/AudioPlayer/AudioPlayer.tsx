@@ -15,12 +15,10 @@ type AudioEvents = TAudioEventType extends `audio:content:${infer E}`
 	: never;
 
 // possible progress events for audio in ophan
-type AudioProgressEvents = Extract<
-	AudioEvents,
-	`${number}`
-> extends `${infer N extends number}`
-	? N
-	: never;
+type AudioProgressEvents =
+	Extract<AudioEvents, `${number}`> extends `${infer N extends number}`
+		? N
+		: never;
 
 const reportAudioEvent = (mediaId: string, eventName: AudioEvents) => {
 	const audioEvent: AudioEvent = {

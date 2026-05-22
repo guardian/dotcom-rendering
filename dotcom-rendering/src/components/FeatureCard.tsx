@@ -467,7 +467,7 @@ export const FeatureCard = ({
 		? getOphanComponents({
 				branding,
 				locationPrefix: 'front-card',
-		  })
+			})
 		: undefined;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;

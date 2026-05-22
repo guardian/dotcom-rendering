@@ -101,7 +101,7 @@ const StandardGrid = ({
 									'meta       border  media      media      media'
 									'meta       border  body       .          right-column'
 									'.          border  .          .          right-column';
-						  `
+							`
 						: css`
 								grid-template-areas:
 									'title      border  headline   . right-column'
@@ -110,7 +110,7 @@ const StandardGrid = ({
 									'meta       border  media      . right-column'
 									'meta       border  body       . right-column'
 									'.          border  .          . right-column';
-						  `}
+							`}
 				}
 
 				/*
@@ -133,7 +133,7 @@ const StandardGrid = ({
 									'meta       border  media       media'
 									'meta       border  body        right-column'
 									'.          border  .           right-column';
-						  `
+							`
 						: css`
 								grid-template-areas:
 									'title      border  headline    right-column'
@@ -142,7 +142,7 @@ const StandardGrid = ({
 									'meta       border  media       right-column'
 									'meta       border  body        right-column'
 									'.          border  .           right-column';
-						  `}
+							`}
 				}
 
 				/*
@@ -294,8 +294,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const showComments = article.isCommentable && !isPaidContent;
 
-	const avatarUrl = getSoleContributor(article.tags, article.byline)
-		?.bylineLargeImageUrl;
+	const avatarUrl = getSoleContributor(
+		article.tags,
+		article.byline,
+	)?.bylineLargeImageUrl;
 
 	const { branding } = article.commercialProperties[article.editionId];
 

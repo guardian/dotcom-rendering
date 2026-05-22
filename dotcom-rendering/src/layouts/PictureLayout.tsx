@@ -177,7 +177,7 @@ const mainMediaWrapper = (displayAvatarUrl: boolean) => css`
 	${displayAvatarUrl
 		? css`
 				margin-top: 8px;
-		  `
+			`
 		: ``}
 `;
 
@@ -234,7 +234,7 @@ const LeftColLines = (displayAvatarUrl: boolean) => css`
 	${displayAvatarUrl
 		? css`
 				margin-top: -29px;
-		  `
+			`
 		: ''}
 `;
 
@@ -282,8 +282,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 		article.tags.some((tag) => tag.id === worldCupTagId) &&
 		ab?.isUserInTest('webx-world-cup-2026-subnav');
 
-	const avatarUrl = getSoleContributor(article.tags, article.byline)
-		?.bylineLargeImageUrl;
+	const avatarUrl = getSoleContributor(
+		article.tags,
+		article.byline,
+	)?.bylineLargeImageUrl;
 
 	const displayAvatarUrl = avatarUrl ? true : false;
 

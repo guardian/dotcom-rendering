@@ -114,25 +114,25 @@ const StandardGrid = ({
 									'meta   border  media      . right-column'
 									'meta   border  body       . right-column'
 									'.      border  .          . right-column';
-						  `
+							`
 						: isMedia
-						? css`
-								grid-template-areas:
-									'title  border  headline   headline   .'
-									'.      border  disclaimer disclaimer right-column'
-									'meta   border  media      media      right-column'
-									'meta   border  standfirst standfirst right-column'
-									'.      border  body       body       right-column'
-									'.      border  .          .          right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline   . right-column'
-									'.      border  standfirst . right-column'
-									'meta   border  media      . right-column'
-									'meta   border  body       . right-column'
-									'.      border  .          . right-column';
-						  `}
+							? css`
+									grid-template-areas:
+										'title  border  headline   headline   .'
+										'.      border  disclaimer disclaimer right-column'
+										'meta   border  media      media      right-column'
+										'meta   border  standfirst standfirst right-column'
+										'.      border  body       body       right-column'
+										'.      border  .          .          right-column';
+								`
+							: css`
+									grid-template-areas:
+										'title  border  headline   . right-column'
+										'.      border  standfirst . right-column'
+										'meta   border  media      . right-column'
+										'meta   border  body       . right-column'
+										'.      border  .          . right-column';
+								`}
 				}
 			}
 
@@ -155,26 +155,26 @@ const StandardGrid = ({
 								'meta   border  media        right-column'
 								'meta   border  body         right-column'
 								'.      border  .            right-column';
-					  `
+						`
 					: isMedia
-					? css`
-							grid-template-areas:
-								'title  border  headline     .'
-								'.      border  disclaimer   right-column'
-								'meta   border  media        right-column'
-								'meta   border  standfirst   right-column'
-								'meta   border  body         right-column'
-								'.      border  .            right-column';
-					  `
-					: css`
-							grid-template-areas:
-								'title  border  headline     right-column'
-								'.      border  standfirst   right-column'
-								'.      border  disclaimer   right-column'
-								'meta   border  media        right-column'
-								'meta   border  body         right-column'
-								'.      border  .            right-column';
-					  `}
+						? css`
+								grid-template-areas:
+									'title  border  headline     .'
+									'.      border  disclaimer   right-column'
+									'meta   border  media        right-column'
+									'meta   border  standfirst   right-column'
+									'meta   border  body         right-column'
+									'.      border  .            right-column';
+							`
+						: css`
+								grid-template-areas:
+									'title  border  headline     right-column'
+									'.      border  standfirst   right-column'
+									'.      border  disclaimer   right-column'
+									'meta   border  media        right-column'
+									'meta   border  body         right-column'
+									'.      border  .            right-column';
+							`}
 			}
 
 			/*
@@ -195,30 +195,30 @@ const StandardGrid = ({
 								'meta          right-column'
 								'body          right-column'
 								'.             right-column';
-					  `
+						`
 					: isMedia
-					? css`
-							grid-template-areas:
-								'title         .'
-								'headline      .'
-								'disclaimer    right-column'
-								'media         right-column'
-								'standfirst    right-column'
-								'meta          right-column'
-								'body          right-column'
-								'.             right-column';
-					  `
-					: css`
-							grid-template-areas:
-								'title         right-column'
-								'headline      right-column'
-								'standfirst    right-column'
-								'disclaimer    right-column'
-								'media         right-column'
-								'meta          right-column'
-								'body          right-column'
-								'.             right-column';
-					  `}
+						? css`
+								grid-template-areas:
+									'title         .'
+									'headline      .'
+									'disclaimer    right-column'
+									'media         right-column'
+									'standfirst    right-column'
+									'meta          right-column'
+									'body          right-column'
+									'.             right-column';
+							`
+						: css`
+								grid-template-areas:
+									'title         right-column'
+									'headline      right-column'
+									'standfirst    right-column'
+									'disclaimer    right-column'
+									'media         right-column'
+									'meta          right-column'
+									'body          right-column'
+									'.             right-column';
+							`}
 			}
 
 			${until.desktop} {
@@ -232,28 +232,28 @@ const StandardGrid = ({
 								'media'
 								'meta'
 								'body';
-					  `
+						`
 					: isMedia
-					? css`
-							grid-template-areas:
-								'title'
-								'headline'
-								'disclaimer'
-								'media'
-								'standfirst'
-								'meta'
-								'body';
-					  `
-					: css`
-							grid-template-areas:
-								'title'
-								'headline'
-								'standfirst'
-								'disclaimer'
-								'media'
-								'meta'
-								'body';
-					  `}
+						? css`
+								grid-template-areas:
+									'title'
+									'headline'
+									'disclaimer'
+									'media'
+									'standfirst'
+									'meta'
+									'body';
+							`
+						: css`
+								grid-template-areas:
+									'title'
+									'headline'
+									'standfirst'
+									'disclaimer'
+									'media'
+									'meta'
+									'body';
+							`}
 			}
 
 			${until.tablet} {
@@ -269,28 +269,28 @@ const StandardGrid = ({
 								'standfirst'
 								'meta'
 								'body';
-					  `
+						`
 					: isMedia
-					? css`
-							grid-template-areas:
-								'title'
-								'headline'
-								'disclaimer'
-								'media'
-								'standfirst'
-								'meta'
-								'body';
-					  `
-					: css`
-							grid-template-areas:
-								'media'
-								'title'
-								'headline'
-								'standfirst'
-								'disclaimer'
-								'meta'
-								'body';
-					  `}
+						? css`
+								grid-template-areas:
+									'title'
+									'headline'
+									'disclaimer'
+									'media'
+									'standfirst'
+									'meta'
+									'body';
+							`
+						: css`
+								grid-template-areas:
+									'media'
+									'title'
+									'headline'
+									'standfirst'
+									'disclaimer'
+									'meta'
+									'body';
+							`}
 			}
 		`}
 	>

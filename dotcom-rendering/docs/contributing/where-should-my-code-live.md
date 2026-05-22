@@ -4,15 +4,15 @@
 
 Code for DCR lives in the `src` directory. Inside this directory we have a series of key sub-directories:
 
--   `server` - Home for server code related the request flow outside of the (p)react content, e.g handlers, html templates, data construction.
--   `client` - Home for client code outside of (p)react context, e.g islands setup, ophan, sentry, etc.
--   `components` - The home of all\* (P)react components, both server & client rendered
--   `lib` - Home for most helper code, anything shared, etc (Note: there is some TSX code in here, but mostly it's just typescript)
--   `layouts` - Home for 'layouts' of full pages including articles & fronts, along with code for deciding which are picked
--   `model` - Home of all 'transformation' code - anything that's taking one type and turning it into another, or 'enhancing' a type, generally called from the server directory.
--   `types` - Home of most type definitions, generally used for types that exist outside the context of any one file or piece of logic
--   `static` - Home for static content which is uploaded directly to S3 in the build process
--   `experiments` - Lib to store code directly related to experiments & a/b tests which are running
+- `server` - Home for server code related the request flow outside of the (p)react content, e.g handlers, html templates, data construction.
+- `client` - Home for client code outside of (p)react context, e.g islands setup, ophan, sentry, etc.
+- `components` - The home of all\* (P)react components, both server & client rendered
+- `lib` - Home for most helper code, anything shared, etc (Note: there is some TSX code in here, but mostly it's just typescript)
+- `layouts` - Home for 'layouts' of full pages including articles & fronts, along with code for deciding which are picked
+- `model` - Home of all 'transformation' code - anything that's taking one type and turning it into another, or 'enhancing' a type, generally called from the server directory.
+- `types` - Home of most type definitions, generally used for types that exist outside the context of any one file or piece of logic
+- `static` - Home for static content which is uploaded directly to S3 in the build process
+- `experiments` - Lib to store code directly related to experiments & a/b tests which are running
 
 \*Excluding layouts & some libs
 

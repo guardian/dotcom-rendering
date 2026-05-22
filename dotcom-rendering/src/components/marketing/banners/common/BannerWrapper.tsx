@@ -298,7 +298,7 @@ const withBannerData =
 						cleanHighlightedText,
 						numArticles,
 						'banner',
-				  )
+					)
 				: null;
 
 			if (copyHasPlaceholder) {

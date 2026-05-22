@@ -962,7 +962,7 @@ export const BrazeBannersSystemDisplay = ({
 							overflow-y: auto;
 							overflow-x: hidden;
 							overscroll-behavior: none;
-					  `
+						`
 					: undefined
 			}
 		>
@@ -1010,7 +1010,7 @@ export const BrazeBannersSystemDisplay = ({
 										'. .'
 										'copy-container close-button' / 100% 0px;
 								}
-						  `
+							`
 						: undefined
 				}
 			>
@@ -1072,7 +1072,7 @@ export const BrazeBannersSystemDisplay = ({
 									${until.desktop} {
 										padding-top: 12px;
 									}
-							  `
+								`
 							: undefined
 					}
 				/>

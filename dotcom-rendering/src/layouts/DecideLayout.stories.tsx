@@ -62,7 +62,7 @@ const HydratedLayout: Decorator<
 			? {
 					...context.args,
 					renderingTarget: 'Apps',
-			  }
+				}
 			: {
 					...context.args,
 					renderingTarget: 'Web',
@@ -70,7 +70,7 @@ const HydratedLayout: Decorator<
 						...extractNAV(article.frontendData.nav),
 						selectedPillar: getCurrentPillar(article.frontendData),
 					},
-			  };
+				};
 
 	useEffect(() => {
 		embedIframe().catch((e) =>

@@ -68,7 +68,6 @@ export default defineConfig([
 	...guardian.configs.jest,
 	...guardian.configs.react,
 	...guardian.configs.storybook,
-	eslintPluginPrettierRecommended,
 	{
 		settings: {
 			'import-x/resolver-next': [
@@ -93,6 +92,7 @@ export default defineConfig([
 			'custom-elements': customElements,
 			unicorn,
 			'ssr-friendly': ssrFriendly,
+			prettier: eslintPluginPrettierRecommended,
 		},
 
 		rules: {
