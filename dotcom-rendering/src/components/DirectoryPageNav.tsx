@@ -20,23 +20,31 @@ import {
 } from '../lib/worldCup2026';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
+import { RenderingTarget } from '../types/renderingTarget';
 
 type Props = {
 	pageId: string;
 	pageTags?: TagType[];
 };
 
+type Color =
+	| string
+	| {
+			web: string;
+			app: string;
+	  };
+
 interface DirectoryPageNavConfig {
 	pageIds: string[];
 	tagIds: string[];
-	textColor: string;
-	textHoverColor?: string;
-	backgroundColor: string;
-	containerBackgroundColor?: string;
+	textColor: Color;
+	textHoverColor?: Color;
+	backgroundColor: Color;
 	titleIcon?: React.ReactElement;
 	title: { label: string; id: string };
 	links: Array<{ label: string; id: string }>;
-	showHeader: boolean;
+	slimNav?: boolean;
 	backgroundImages?: {
 		mobile: string;
 		mobileLandscape: string;
@@ -82,7 +90,6 @@ const configs = [
 			id: 'football/world-cup-2026',
 		},
 		titleIcon: <WorldCup2026Icon />,
-		showHeader: true,
 		links: worldCup2026Links,
 		backgroundImages: {
 			mobile: 'https://media.guim.co.uk/4ba0caac6d18c1fe6a5a3267b270d8c21ae6f940/0_0_750_376/750.jpg',
@@ -100,15 +107,20 @@ const configs = [
 	{
 		pageIds: [] as string[],
 		tagIds: ['football/world-cup-2026'],
-		textColor: themePalette('--masthead-nav-link-text'),
+		textColor: {
+			web: themePalette('--masthead-nav-link-text'),
+			app: themePalette('--article-text'),
+		},
 		textHoverColor: themePalette('--masthead-nav-link-text-hover'),
-		backgroundColor: palette.brand[400],
-		containerBackgroundColor: palette.brand[400],
+		backgroundColor: {
+			web: themePalette('--masthead-nav-background'),
+			app: themePalette('--article-background'),
+		},
 		title: {
 			label: 'World Cup 2026',
 			id: 'football/world-cup-2026',
 		},
-		showHeader: false,
+		slimNav: true,
 		titleIcon: <WorldCup2026IconSmall />,
 		links: worldCup2026Links,
 	},
@@ -127,7 +139,6 @@ const configs = [
 			label: 'Winter Olympics 2026',
 			id: 'sport/winter-olympics-2026',
 		},
-		showHeader: true,
 		links: [
 			{
 				label: 'Schedule',
@@ -172,7 +183,6 @@ const configs = [
 			label: 'Winter Paralympics 2026',
 			id: 'sport/winter-paralympics-2026',
 		},
-		showHeader: true,
 		links: [
 			{
 				label: 'Results',
@@ -201,7 +211,20 @@ const configs = [
 	},
 ] satisfies DirectoryPageNavConfig[];
 
+const getColour = (color: Color, renderingTarget: RenderingTarget): string => {
+	if (typeof color === 'string') {
+		return color;
+	}
+
+	return renderingTarget === 'Web' ? color.web : color.app;
+};
+
 export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
+	const { renderingTarget } = useConfig();
+
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+
 	const ab = useBetaAB();
 
 	const config = configs.find(
@@ -223,23 +246,34 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		return null;
 	}
 
-	const { textColor, backgroundColor } = config;
+	const {
+		textColor: configTextColor,
+		backgroundColor: configBackgroundColour,
+		slimNav,
+	} = config;
 
-	const container = (backgroundColor: string) =>
-		css({
-			backgroundColor,
-		});
+	const backgroundColor = getColour(configBackgroundColour, renderingTarget);
+
+	const textColor = getColour(configTextColor, renderingTarget);
+
+	const container = css({
+		backgroundColor: slimNav ? backgroundColor : 'transparent',
+	});
 
 	const nav = css({
 		backgroundColor,
+		'&': css(grid.paddedContainer),
+		alignContent: 'space-between',
+		position: 'relative',
+	});
+
+	const navWeb = css({
 		'&': css(
 			grid.paddedContainer,
 			grid.verticalRules({
 				color: themePalette('--masthead-nav-lines'),
 			}),
 		),
-		alignContent: 'space-between',
-		position: 'relative',
 	});
 
 	const largeLinkStyles = css({
@@ -267,37 +301,38 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		},
 	});
 
-	const list = (hasHeader = true) =>
-		css({
-			'&': css(grid.column.all),
-			display: 'flex',
-			alignItems: 'center',
-			position: 'relative',
-			overflowX: 'scroll',
-			scrollbarWidth: 'none',
-			borderTop: hasHeader ? '1px solid' : undefined,
-			borderBottom: '1px solid',
-			borderColor: themePalette('--masthead-nav-lines'),
-			padding: `0 ${space[3]}px`,
-			height: space[10],
+	const list = css({
+		'&': css(grid.column.all),
+		display: 'flex',
+		alignItems: 'center',
+		position: 'relative',
+		overflowX: 'scroll',
+		scrollbarWidth: 'none',
+		borderTop: slimNav ? undefined : '1px solid',
+		borderBottom: '1px solid',
+		borderColor: isWeb
+			? themePalette('--masthead-nav-lines')
+			: themePalette('--article-border'),
+		padding: `0 ${space[3]}px`,
+		height: space[10],
+		[from.mobileLandscape]: {
+			padding: `0 ${space[5]}px`,
+			height: slimNav ? space[10] : space[12],
+		},
+		// This creates a gradient fade on the right side to indicate that there's more to scroll for.
+		'&:after': {
+			content: '""',
+			position: 'sticky',
+			right: -space[3],
+			top: 0,
+			height: '100%',
+			minWidth: 40,
+			background: `linear-gradient(to left, ${backgroundColor}, transparent)`,
 			[from.mobileLandscape]: {
-				padding: `0 ${space[5]}px`,
-				height: hasHeader ? space[12] : space[10],
+				right: `-${space[5]}px`,
 			},
-			// This creates a gradient fade on the right side to indicate that there's more to scroll for.
-			'&:after': {
-				content: '""',
-				position: 'sticky',
-				right: -space[3],
-				top: 0,
-				height: '100%',
-				minWidth: 40,
-				background: `linear-gradient(to left, ${backgroundColor}, transparent)`,
-				[from.mobileLandscape]: {
-					right: `-${space[5]}px`,
-				},
-			},
-		});
+		},
+	});
 
 	const listItem = css({
 		position: 'relative',
@@ -313,21 +348,12 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 			backgroundColor: textColor,
 			transition: 'height 0.3s ease-in-out, opacity 0.05s 0.1s linear',
 		},
-		[from.desktop]: {
-			'&:hover a': {
-				textDecoration: 'underline',
-				color: 'var(--masthead-nav-link-text-hover)',
-			},
-		},
 	});
 
 	const primaryLinkStyles = css({
 		display: 'flex',
 		alignItems: 'center',
 		paddingRight: space[6],
-		'&:not(:hover)': {
-			color: palette.sport[600],
-		},
 		svg: {
 			marginRight: space[2],
 		},
@@ -345,6 +371,30 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		},
 	});
 
+	const primaryLinkHoverStylesWeb = css({
+		'&:not(:hover)': {
+			color: palette.sport[600],
+			'svg rect, svg circle': {
+				fill: palette.sport[600],
+			},
+		},
+		[from.desktop]: {
+			'&:hover': {
+				textDecoration: 'underline',
+				color: themePalette('--masthead-nav-link-text-hover'),
+			},
+		},
+	});
+
+	const primaryLinkHoverStylesApp = css({
+		'&:not(:hover)': {
+			color: palette.sport[400],
+			'svg rect, svg circle': {
+				fill: palette.sport[400],
+			},
+		},
+	});
+
 	const smallLink = css({
 		...textSans14Object,
 		paddingRight: space[3],
@@ -353,6 +403,9 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		color: textColor,
 		textDecoration: 'none',
 		whiteSpace: 'nowrap',
+	});
+
+	const smallLinkWeb = css({
 		'&:hover': {
 			textDecoration: 'underline',
 			color: config.textHoverColor,
@@ -367,9 +420,9 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	});
 
 	return (
-		<div css={container(config.containerBackgroundColor ?? 'transparent')}>
-			<nav css={[nav]}>
-				{config.showHeader && (
+		<div css={container}>
+			<nav css={[nav, isWeb && navWeb]}>
+				{!config.slimNav && (
 					<>
 						<a href={`/${config.title.id}`} css={largeLinkStyles}>
 							{config.titleIcon && config.titleIcon}
@@ -379,14 +432,16 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 					</>
 				)}
 
-				<ul css={list(config.showHeader)}>
-					{!config.showHeader && (
+				<ul css={list}>
+					{config.slimNav && (
 						<li css={listItem}>
 							<a
 								href={`/${config.title.id}`}
 								css={[
 									smallLink,
 									primaryLinkStyles,
+									isWeb && primaryLinkHoverStylesWeb,
+									isApps && primaryLinkHoverStylesApp,
 									pageId === config.title.id && boldSmallLink,
 								]}
 							>
@@ -401,6 +456,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 								href={`/${link.id}`}
 								css={[
 									smallLink,
+									isWeb && smallLinkWeb,
 									pageId === link.id && boldSmallLink,
 								]}
 							>

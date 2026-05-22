@@ -3,6 +3,9 @@ import preview from '../../.storybook/preview';
 import { BetaABTests } from '../experiments/lib/beta-ab-tests';
 import { setBetaABTests } from '../lib/useAB';
 import { DirectoryPageNav } from './DirectoryPageNav';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { ConfigProvider } from './ConfigContext';
 
 const mockAB = new BetaABTests({
 	isServer: true,
@@ -44,7 +47,7 @@ export const WorldCup2026MatchCenter = meta.story({
 	},
 });
 
-export const WorldCup2026Article = meta.story({
+export const WorldCup2026ArticleWeb = meta.story({
 	args: {
 		pageId: 'football/2026/may/19/brazils-world-cup-squad-offers-a-hint-of-the-magical-pragmatism-of-1994',
 		pageTags: [
@@ -54,6 +57,39 @@ export const WorldCup2026Article = meta.story({
 				title: 'World Cup 2026',
 			},
 		],
+	},
+});
+
+export const WorldCup2026ArticleApp = meta.story({
+	render: (args) => (
+		<ConfigProvider
+			value={{
+				renderingTarget: 'Apps',
+				darkModeAvailable: true,
+				assetOrigin: '/',
+				editionId: 'UK',
+			}}
+		>
+			<DirectoryPageNav {...args} />
+		</ConfigProvider>
+	),
+	args: {
+		pageId: 'football/2026/may/19/brazils-world-cup-squad-offers-a-hint-of-the-magical-pragmatism-of-1994',
+		pageTags: [
+			{
+				id: 'football/world-cup-2026',
+				type: 'Topic',
+				title: 'World Cup 2026',
+			},
+		],
+	},
+	parameters: {
+		chromatic: {
+			modes: {
+				'apps light': allModes['light'],
+				'apps dark': allModes['dark'],
+			},
+		},
 	},
 });
 
