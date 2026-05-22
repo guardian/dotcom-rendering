@@ -51,6 +51,10 @@ import type { ArticleDeprecated, Gallery } from '../types/article';
 import type { ConfigType } from '../types/config';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { useBetaAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
+import { TagType } from '../types/tag';
 
 interface Props {
 	gallery: Gallery;
@@ -105,6 +109,12 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const ab = useBetaAB();
+
+	const isWorldCup2026 =
+		frontendData.tags.some((tag) => tag.id === worldCupTagId) &&
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
+
 	const renderAds = canRenderAds(frontendData);
 	const showMerchandisingHigh = isWeb && renderAds && !isLabs;
 
@@ -124,6 +134,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					contributionsServiceUrl={contributionsServiceUrl}
 					pageId={frontendData.pageId}
 					tagIds={frontendData.tags.map((tag) => tag.id)}
+					showSlimNav={!isWorldCup2026}
 				/>
 			) : null}
 			<GalleryLabsHeader
@@ -141,6 +152,10 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						<AdPortals />
 					</Island>
 				)}
+				<DirectoryPageNav
+					pageTags={frontendData.tags}
+					pageId={frontendData.pageId}
+				/>
 				<header css={headerStyles}>
 					<MainMediaGallery
 						mainMedia={gallery.mainMedia}
@@ -380,6 +395,7 @@ const BannerAndMasthead = (props: {
 	contributionsServiceUrl: string;
 	pageId: string | undefined;
 	tagIds?: string[];
+	showSlimNav?: boolean;
 }) => (
 	<div data-print-layout="hide" id="bannerandheader">
 		{props.renderAds ? (
@@ -404,7 +420,7 @@ const BannerAndMasthead = (props: {
 			idApiUrl={props.config.idApiUrl}
 			contributionsServiceUrl={props.contributionsServiceUrl}
 			showSubNav={false}
-			showSlimNav={true}
+			showSlimNav={props.showSlimNav ?? true}
 			hasPageSkin={false}
 			hasPageSkinContentSelfConstrain={false}
 			pageId={props.pageId}

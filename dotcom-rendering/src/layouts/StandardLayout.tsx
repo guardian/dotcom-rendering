@@ -62,6 +62,8 @@ import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { worldCupTagId } from '../lib/worldCup2026';
+import { useBetaAB } from '../lib/useAB';
 
 const StandardGrid = ({
 	children,
@@ -383,6 +385,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const ab = useBetaAB();
+
+	const isWorldCup2026 =
+		article.tags.some((tag) => tag.id === worldCupTagId) &&
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
+
 	const renderAds = canRenderAds(article);
 
 	return (
@@ -410,7 +418,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={!isLabs}
+						showSubNav={!isLabs && !isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}

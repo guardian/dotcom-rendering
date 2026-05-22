@@ -48,6 +48,9 @@ import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { useBetaAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
 
 const StandardGrid = ({
 	children,
@@ -298,6 +301,12 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
+	const ab = useBetaAB();
+
+	const isWorldCup2026 =
+		article.tags.some((tag) => tag.id === worldCupTagId) &&
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
+
 	const renderAds = canRenderAds(article);
 
 	return (
@@ -325,7 +334,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
+						showSubNav={!isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
@@ -343,6 +352,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						<AdPortals />
 					</Island>
 				)}
+				<DirectoryPageNav
+					pageTags={article.tags}
+					pageId={article.pageId}
+				/>
 				<Section
 					fullWidth={true}
 					showTopBorder={false}

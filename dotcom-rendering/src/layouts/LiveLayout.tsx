@@ -56,6 +56,9 @@ import type { ArticleDeprecated } from '../types/article';
 import type { PaginationType } from '../types/liveBlog';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { useBetaAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -305,6 +308,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const ab = useBetaAB();
+
+	const isWorldCup2026 =
+		article.tags.some((tag) => tag.id === worldCupTagId) &&
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
+
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
@@ -337,7 +346,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
+						showSubNav={!isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
@@ -354,6 +363,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 
 			<main data-layout="LiveLayout">
+				<DirectoryPageNav
+					pageTags={article.tags}
+					pageId={article.pageId}
+				/>
 				{isWeb && renderAds && hasLiveBlogTopAd && (
 					<Hide from="tablet">
 						<Section
