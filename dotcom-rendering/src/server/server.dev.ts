@@ -19,6 +19,7 @@ import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
 import { handlePuzzleIframePage } from './handler.puzzleIframePage.web';
 import { handlePuzzlesPage } from './handler.puzzlesPage.web';
+import { handleCrosswordArchivePage } from './handler.crosswordArchivePage.web';
 import {
 	handleAppsFootballMatchPage,
 	handleCricketMatchPage,
@@ -114,6 +115,7 @@ renderer.get('/TagPage/*url', handleTagPage);
 renderer.get('/EmailNewsletters/*url', handleAllEditorialNewslettersPage);
 renderer.get('/AppsArticle/*url', handleAppsArticle);
 renderer.get('/AppsInteractive/*url', handleAppsInteractive);
+renderer.get('/CrosswordArchivePage/*url', handleCrosswordArchivePage);
 renderer.get('/AppsBlocks/*url', handleAppsBlocks);
 renderer.get('/EditionsCrossword/*url', handleEditionsCrossword);
 renderer.get('/FootballMatchListPage/*url', handleFootballMatchListPage);
@@ -147,6 +149,7 @@ renderer.post('/AppsHostedContent', handleAppsHostedContent);
 renderer.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
 renderer.post('/PuzzlesPage', handlePuzzlesPage);
 renderer.post('/PuzzleIframePage', handlePuzzleIframePage);
+renderer.post('/CrosswordArchivePage', handleCrosswordArchivePage);
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);
 
 const router = Router();

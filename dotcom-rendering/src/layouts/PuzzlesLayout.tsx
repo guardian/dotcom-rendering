@@ -197,19 +197,19 @@ const nestedStyles = css`
 const crosswordSetToUrl = (set: string): string => {
 	switch (set) {
 		case 'quick':
-			return '/crosswords/series/quick';
+			return '/puzzles/crosswords/series/quick';
 		case 'mini':
-			return '/crosswords/series/mini-crossword';
+			return '/puzzles/crosswords/series/mini-crossword';
 		case 'cryptic':
-			return '/crosswords/series/cryptic';
+			return '/puzzles/crosswords/series/cryptic';
 		case 'quickcryptic':
-			return '/crosswords/series/quick-cryptic';
+			return '/puzzles/crosswords/series/quick-cryptic';
 		case 'weekend':
-			return '/crosswords/series/weekend-crossword';
+			return '/puzzles/crosswords/series/weekend-crossword';
 		case 'all':
-			return '/crosswords';
+			return '/puzzles/crosswords';
 		default:
-			return '/crosswords';
+			return '/puzzles/crosswords';
 	}
 };
 

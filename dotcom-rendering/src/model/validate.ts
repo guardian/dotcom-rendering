@@ -9,6 +9,7 @@ import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPag
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
+import { FECrosswordArchivePageType } from '../types/crosswordArchivePage';
 import articleSchema from '../frontend/schemas/feArticle.json';
 import cricketMatchPageSchema from '../frontend/schemas/feCricketMatchPage.json';
 import footballMatchInfoPageSchema from '../frontend/schemas/feFootballMatchInfoPage.json';
@@ -193,6 +194,44 @@ export const validateAsPuzzleIframePageType = (
 
 	throw new TypeError(
 		'Unable to validate request body for puzzle iframe page.',
+	);
+};
+
+export const validateAsCrosswordArchivePageType = (
+	data: unknown,
+): FECrosswordArchivePageType => {
+	if (
+		isObject(data) &&
+		isString(data.id) &&
+		isString(data.webTitle) &&
+		isString(data.editionId) &&
+		isString(data.selectedType) &&
+		isObject(data.config) &&
+		isObject(data.nav) &&
+		isObject(data.pageFooter) &&
+		Array.isArray(data.tabs) &&
+		data.tabs.every(
+			(tab) =>
+				isObject(tab) &&
+				isString(tab.label) &&
+				isString(tab.crosswordType) &&
+				isString(tab.url) &&
+				typeof tab.isSelected === 'boolean',
+		) &&
+		Array.isArray(data.entries) &&
+		data.entries.every(
+			(entry) =>
+				isObject(entry) &&
+				isString(entry.title) &&
+				isString(entry.url) &&
+				typeof entry.isLocked === 'boolean',
+		)
+	) {
+		return data as unknown as FECrosswordArchivePageType;
+	}
+
+	throw new TypeError(
+		'Unable to validate request body for crossword archive page.',
 	);
 };
 

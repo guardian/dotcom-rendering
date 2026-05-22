@@ -20,6 +20,7 @@ import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
 import { handlePuzzleIframePage } from './handler.puzzleIframePage.web';
 import { handlePuzzlesPage } from './handler.puzzlesPage.web';
+import { handleCrosswordArchivePage } from './handler.crosswordArchivePage.web';
 import {
 	handleAppsFootballMatchPage,
 	handleCricketMatchPage,
@@ -65,6 +66,7 @@ export const prodServer = (): void => {
 	app.post('/HostedContent', handleHostedContent);
 	app.post('/PuzzlesPage', handlePuzzlesPage);
 	app.post('/PuzzleIframePage', handlePuzzleIframePage);
+	app.post('/CrosswordArchivePage', handleCrosswordArchivePage);
 	app.post('/EmailNewsletters', handleAllEditorialNewslettersPage);
 	app.post('/AppsArticle', handleAppsArticle);
 	app.post('/AppsInteractive', handleAppsInteractive);
