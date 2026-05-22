@@ -17,7 +17,7 @@
 		"*": "prettier --ignore-unknown --write"
 	},
 	"dependencies": {
-		"@guardian/prettier": "5.0.0",
+		"@guardian/prettier": "10.0.0",
 		"@types/chai": "5.2.2",
 		"chromatic": "16.1.0",
 		"husky": "9.1.7",
