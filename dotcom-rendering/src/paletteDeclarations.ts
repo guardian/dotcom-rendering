@@ -3864,6 +3864,9 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 const shareButtonDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedArticle:
+		case ArticleDesign.HostedGallery:
+		case ArticleDesign.HostedVideo:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -7330,6 +7333,10 @@ const paletteColours = {
 	'--highlights-container-start-fade': {
 		light: highlightContainerStartLight,
 		dark: highlightContainerStartDark,
+	},
+	'--hosted-content-onwards-heading': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--image-title-background': {
 		light: imageTitleBackground,
