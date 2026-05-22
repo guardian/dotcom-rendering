@@ -68,6 +68,9 @@ export default defineConfig([
 	...guardian.configs.jest,
 	...guardian.configs.react,
 	...guardian.configs.storybook,
+	// eslint-plugin-prettier/recommended should be the last item in the configuration array so that eslint-config-prettier has the opportunity to override other configs
+	// https://github.com/prettier/eslint-plugin-prettier#configuration-new-eslintconfigjs
+	eslintPluginPrettierRecommended,
 	{
 		settings: {
 			'import-x/resolver-next': [
@@ -92,7 +95,6 @@ export default defineConfig([
 			'custom-elements': customElements,
 			unicorn,
 			'ssr-friendly': ssrFriendly,
-			prettier: eslintPluginPrettierRecommended,
 		},
 
 		rules: {
