@@ -1,4 +1,4 @@
-import type { ConsentState } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
 import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
@@ -49,8 +49,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -89,8 +87,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -138,8 +134,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -180,8 +174,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -220,8 +212,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -261,8 +251,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -300,8 +288,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -345,8 +331,6 @@ describe('YoutubeAtom', () => {
 						shouldStick={false}
 						isMainMedia={false}
 						abTestParticipations={{}}
-						iconSizeOnDesktop="small"
-						iconSizeOnMobile="small"
 						hidePillOnMobile={false}
 						renderingTarget="Web"
 					/>
@@ -367,8 +351,6 @@ describe('YoutubeAtom', () => {
 						shouldStick={false}
 						isMainMedia={false}
 						abTestParticipations={{}}
-						iconSizeOnDesktop="small"
-						iconSizeOnMobile="small"
 						hidePillOnMobile={false}
 						renderingTarget="Web"
 					/>

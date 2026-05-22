@@ -151,7 +151,9 @@ export const CalloutShare = ({
 			)
 		) {
 			let shareTitle = `Share your experience`;
-			if (title) shareTitle += `: ${title}`;
+			if (title) {
+				shareTitle += `: ${title}`;
+			}
 
 			const shareText = `
 			I saw this callout in an article: ${url}#${urlAnchor}

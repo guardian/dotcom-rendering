@@ -125,7 +125,9 @@ export const RichLinkComponent = ({
 		window.guardian.modules.sentry.reportError(error, 'rich-link');
 	}
 
-	if (!data) return null;
+	if (!data) {
+		return null;
+	}
 
 	const richLinkImageData = {
 		thumbnailUrl: data.thumbnailUrl,

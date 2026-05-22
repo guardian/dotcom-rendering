@@ -38,7 +38,7 @@ const pullQuoteStoryVariations = [
 	ArticleDesign.Obituary,
 	ArticleDesign.Comment,
 	ArticleDesign.Editorial,
-] as const satisfies ReadonlyArray<ArticleDesign>;
+] as const satisfies readonly ArticleDesign[];
 
 const allSportsVariations = pullQuoteStoryVariations.map((design) => ({
 	design,

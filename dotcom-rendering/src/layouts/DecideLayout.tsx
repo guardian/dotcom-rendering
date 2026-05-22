@@ -167,9 +167,16 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 						/>
 					);
 				case ArticleDesign.HostedArticle:
-				case ArticleDesign.HostedVideo:
 					return (
 						<HostedArticleLayout
+							content={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.HostedVideo:
+					return (
+						<HostedVideoLayout
 							content={article}
 							format={format}
 							renderingTarget={renderingTarget}

@@ -17,7 +17,7 @@ declare module 'dynamic-import-polyfill' {
 // SVG handling
 declare module '*.svg' {
 	const content: any;
-	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
+
 	export default content;
 }
 

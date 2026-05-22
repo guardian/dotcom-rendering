@@ -123,6 +123,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					config={frontendData.config}
 					contributionsServiceUrl={contributionsServiceUrl}
 					pageId={frontendData.pageId}
+					tagIds={frontendData.tags.map((tag) => tag.id)}
 				/>
 			) : null}
 			<GalleryLabsHeader
@@ -378,6 +379,7 @@ const BannerAndMasthead = (props: {
 	config: ConfigType;
 	contributionsServiceUrl: string;
 	pageId: string | undefined;
+	tagIds?: string[];
 }) => (
 	<div data-print-layout="hide" id="bannerandheader">
 		{props.renderAds ? (
@@ -406,6 +408,9 @@ const BannerAndMasthead = (props: {
 			hasPageSkin={false}
 			hasPageSkinContentSelfConstrain={false}
 			pageId={props.pageId}
+			tagIds={props.tagIds}
+			sectionId={props.config.section}
+			contentType={props.config.contentType}
 		/>
 	</div>
 );
@@ -518,10 +523,7 @@ const Body = (props: {
 					element._type !==
 						'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
 			)
-			/* eslint-disable-next-line array-callback-return -- ESLint bug,
-			 * this function does contain `return` statements. TypeScript will
-			 * confirm the switch is exhaustive, but it's possible ESLint does
-			 * not know this. */
+
 			.map((element) => {
 				switch (element._type) {
 					case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -543,6 +545,8 @@ const Body = (props: {
 								key={element.adPosition}
 							/>
 						);
+					default:
+						return null;
 				}
 			})}
 	</>
@@ -563,16 +567,9 @@ const BodyAdSlot = (props: {
 const WebAdSlot = (props: { adIndex: number }) => (
 	<div
 		css={{
-			'&': css(grid.paddedContainer),
+			'&': css([grid.paddedContainer, grid.verticalRules()]),
 			gridAutoFlow: 'row dense',
 			backgroundColor: palette('--article-inner-background'),
-
-			[from.tablet]: {
-				borderColor: palette('--article-border'),
-				borderStyle: 'solid',
-				borderLeftWidth: 1,
-				borderRightWidth: 1,
-			},
 		}}
 	>
 		<div
@@ -624,7 +621,7 @@ const AdSlotBorders = () => (
 				'&::after': {
 					content: '""',
 					position: 'absolute',
-					right: -10,
+					right: -11,
 					top: 0,
 					bottom: 0,
 					width: 1,

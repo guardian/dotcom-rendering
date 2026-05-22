@@ -123,22 +123,31 @@ export const EnhancePinnedPost = () => {
 		useRef<ReturnType<typeof startPerformanceMeasure>>();
 
 	const checkContentHeight = useCallback(() => {
-		if (!pinnedPostContent) return;
-		if (!pinnedPostCheckBox) return;
+		if (!pinnedPostContent) {
+			return;
+		}
+		if (!pinnedPostCheckBox) {
+			return;
+		}
 
 		const { checked } = pinnedPostCheckBox;
 
 		const contentFitsContainer =
 			pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
-		if (contentFitsContainer) toggleShowMore(false, checked);
-		else toggleShowMore(true, checked);
+		if (contentFitsContainer) {
+			toggleShowMore(false, checked);
+		} else {
+			toggleShowMore(true, checked);
+		}
 	}, [pinnedPostCheckBox, pinnedPostContent]);
 
 	/**
 	 * Checks for dom updates (embeds loading etc) and updates content height
 	 */
 	useEffect(() => {
-		if (!pinnedPost) return;
+		if (!pinnedPost) {
+			return;
+		}
 
 		checkContentHeight();
 
@@ -154,8 +163,12 @@ export const EnhancePinnedPost = () => {
 	}, [checkContentHeight, pinnedPost]);
 
 	useEffect(() => {
-		if (!pinnedPost) return;
-		if (!pinnedPostCheckBox) return;
+		if (!pinnedPost) {
+			return;
+		}
+		if (!pinnedPostCheckBox) {
+			return;
+		}
 
 		const listener = () => {
 			checkContentHeight();
@@ -174,7 +187,9 @@ export const EnhancePinnedPost = () => {
 	// calculate duration when user is viewing pinned post
 	// and emit ophan events when the pinned post goes out of view
 	useEffect(() => {
-		if (!pinnedPost) return;
+		if (!pinnedPost) {
+			return;
+		}
 
 		if (isInView) {
 			setHasBeenSeen(true);

@@ -7,7 +7,13 @@ import {
 	matchResult,
 } from '../../../fixtures/manual/footballMatches';
 import type { FEFootballMatchHeader } from '../../frontend/feFootballMatchHeader';
+import type { MatchNotificationsClient } from '../../lib/bridgetApi';
+import { NotificationsToggle } from '../NotificationsToggle.stories';
 import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader';
+
+const mockMatchNotificationsClient: MatchNotificationsClient = {
+	isAvailable: () => Promise.resolve({ isAvailable: true }),
+};
 
 const meta = preview.meta({
 	component: FootballMatchHeaderComponent,
@@ -32,7 +38,7 @@ const feHeaderData: FEFootballMatchHeader = {
 		'https://www.theguardian.com/football/match/2025/nov/26/arsenal-v-bayernmunich',
 };
 
-export const Fixture = meta.story({
+export const FixtureWeb = meta.story({
 	args: {
 		initialTab: 'info',
 		initialData: {
@@ -67,6 +73,8 @@ export const Fixture = meta.story({
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
 		renderingTarget: 'Web',
+		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		const nav = canvas.getByRole('navigation');
@@ -99,7 +107,7 @@ export const Fixture = meta.story({
 	},
 });
 
-export const Live = meta.story({
+export const LiveApps = meta.story({
 	args: {
 		initialTab: 'live',
 		leagueName: 'Premier League',
@@ -107,14 +115,16 @@ export const Live = meta.story({
 		edition: 'EUR',
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
-		refreshInterval: Fixture.input.args.refreshInterval,
+		refreshInterval: FixtureWeb.input.args.refreshInterval,
 		getHeaderData: () =>
 			getMockData({
 				...feHeaderData,
 				footballMatch: matchDayLive,
 				reportURL: undefined,
 			}),
-		renderingTarget: 'Web',
+		renderingTarget: 'Apps',
+		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		await step(
@@ -144,9 +154,14 @@ export const Live = meta.story({
 			void expect(tabs[1]).toHaveTextContent('Match info');
 		});
 	},
+	parameters: {
+		config: {
+			renderingTarget: 'Apps',
+		},
+	},
 });
 
-export const Result = meta.story({
+export const ResultWeb = meta.story({
 	args: {
 		initialTab: 'report',
 		leagueName: 'Premier League',
@@ -154,13 +169,15 @@ export const Result = meta.story({
 		edition: 'AU',
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
-		refreshInterval: Fixture.input.args.refreshInterval,
+		refreshInterval: FixtureWeb.input.args.refreshInterval,
 		getHeaderData: () =>
 			getMockData({
 				...feHeaderData,
 				footballMatch: matchResult,
 			}),
 		renderingTarget: 'Web',
+		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 
 	play: async ({ canvas, canvasElement, step }) => {
@@ -191,7 +208,7 @@ export const Result = meta.story({
 	},
 });
 
-export const AppsResult = meta.story({
+export const ResultApps = meta.story({
 	args: {
 		initialTab: 'report',
 		leagueName: 'Premier League',
@@ -199,13 +216,15 @@ export const AppsResult = meta.story({
 		edition: 'AU',
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
-		refreshInterval: Fixture.input.args.refreshInterval,
+		refreshInterval: FixtureWeb.input.args.refreshInterval,
 		getHeaderData: () =>
 			getMockData({
 				...feHeaderData,
 				footballMatch: matchResult,
 			}),
 		renderingTarget: 'Apps',
+		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 
 	play: async ({ canvas, canvasElement, step }) => {
@@ -233,6 +252,12 @@ export const AppsResult = meta.story({
 				expect.stringContaining('/football/match/1'),
 			);
 		});
+	},
+
+	parameters: {
+		config: {
+			renderingTarget: 'Apps',
+		},
 	},
 });
 

@@ -48,7 +48,7 @@ const maybeWipeUserData = async (
 			clearHasCurrentBrazeUser();
 		} catch (error) {
 			window.guardian.modules.sentry.reportError(
-				// @ts-expect-error
+				// @ts-expect-error -- todo type this properly
 				error,
 				'braze-maybeWipeUserData',
 			);

@@ -17,6 +17,9 @@ import type { Loading } from './CardPicture';
 
 export type Orientation = 'portrait' | 'landscape';
 
+// Hosted content main media images require a 'banner' style aspect ratio
+type HostedAspectRatio = '13:4';
+
 type PictureRoleType =
 	| RoleType
 	// Custom image role types that are used but do not come from CAPI / FE
@@ -40,7 +43,7 @@ type Props = {
 export type ImageWidthType = {
 	breakpoint: number;
 	width: number;
-	aspectRatio?: AspectRatio;
+	aspectRatio?: AspectRatio | HostedAspectRatio;
 	cropOffset?: { x: number; y: number };
 };
 
@@ -199,12 +202,18 @@ const decideImageWidths = ({
 				{
 					breakpoint: breakpoints.desktop,
 					width: breakpoints.leftCol,
+					aspectRatio: '13:4',
 				},
 				{
 					breakpoint: breakpoints.leftCol,
 					width: breakpoints.wide,
+					aspectRatio: '13:4',
 				},
-				{ breakpoint: breakpoints.wide, width: breakpoints.wide },
+				{
+					breakpoint: breakpoints.wide,
+					width: breakpoints.wide,
+					aspectRatio: '13:4',
+				},
 			];
 		}
 		switch (format.display) {
@@ -505,7 +514,9 @@ export const generateSources = (
  */
 export const getFallbackSource = (sources: ImageSource[]): ImageSource => {
 	const [fallback] = sources.slice(-1);
-	if (!fallback) throw new Error('No fallback images found');
+	if (!fallback) {
+		throw new Error('No fallback images found');
+	}
 	return fallback;
 };
 
@@ -560,7 +571,9 @@ export const Picture = ({
 }: Props) => {
 	const [loaded, setLoaded] = useState(false);
 	const ref = useCallback((node: HTMLImageElement | null) => {
-		if (!node) return;
+		if (!node) {
+			return;
+		}
 		if (node.complete) {
 			setLoaded(true);
 		} else {
@@ -569,7 +582,9 @@ export const Picture = ({
 	}, []);
 
 	useEffect(() => {
-		if (loaded && onLoad) onLoad();
+		if (loaded && onLoad) {
+			onLoad();
+		}
 	}, [loaded, onLoad]);
 
 	const sources = generateSources(

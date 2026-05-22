@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints, from } from '@guardian/source/foundations';
-import React from 'react';
+import type React from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
@@ -82,10 +82,14 @@ const mainSelfHostedVideo: MainMedia = {
 			mimeType: 'video/mp4',
 			width: 1920,
 			height: 1080,
+			hasAudio: true,
 		},
 	],
 	aspectRatio: 16 / 9,
-	image: `https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=1200&quality=45&dpr=2&s=none`,
+	image: {
+		src: 'https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=1200&quality=45&dpr=2&s=none',
+		aspectRatio: '16:9',
+	},
 	duration: 100,
 };
 
@@ -355,6 +359,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 						articleMedia={youtubeMetaData}
 						headlineText="Video"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -371,6 +376,7 @@ export const WithMediaType = () => {
 							duration: 0,
 						}}
 						headlineText="Video without duration"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -392,8 +398,11 @@ export const WithMediaType = () => {
 							isLive: true,
 						}}
 						headlineText="Live video"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
+			</CardGroup>
+			<CardGroup>
 				<CardWrapper>
 					<Card
 						{...basicCardProps}
@@ -404,7 +413,8 @@ export const WithMediaType = () => {
 						}}
 						mainMedia={{ ...mainSelfHostedVideo }}
 						articleMedia={{ ...youtubeMetaData }}
-						headlineText="Video with self-hosted video main media"
+						headlineText="Self hosted video with Youtube article media"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -418,6 +428,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainSelfHostedVideo }}
 						articleMedia={{ ...selfHostedMetaData }}
 						headlineText="Self hosted video"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -433,6 +444,7 @@ export const WithMediaType = () => {
 						mainMedia={mainAudio}
 						articleMedia={audioMetaData}
 						headlineText="Audio"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -446,6 +458,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainSelfHostedVideo }}
 						articleMedia={audioMetaData}
 						headlineText="Audio with self-hosted video main media"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -461,6 +474,7 @@ export const WithMediaType = () => {
 						mainMedia={mainGallery}
 						articleMedia={galleryMetaData}
 						headlineText="Gallery"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -474,6 +488,7 @@ export const WithMediaType = () => {
 						mainMedia={{ ...mainSelfHostedVideo }}
 						articleMedia={galleryMetaData}
 						headlineText="Gallery with self-hosted video main media"
+						mediaPositionOnMobile="top"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -496,6 +511,7 @@ export const WithMediaTypeAndSublinks = () => {
 					articleMedia={{ ...youtubeMetaData, duration: 30 }}
 					headlineText="Video"
 					supportingContent={twoSublinks}
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -510,6 +526,7 @@ export const WithMediaTypeAndSublinks = () => {
 					articleMedia={{ ...youtubeMetaData, duration: 0 }}
 					headlineText="Video without duration"
 					supportingContent={twoSublinks}
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -524,6 +541,7 @@ export const WithMediaTypeAndSublinks = () => {
 					articleMedia={audioMetaData}
 					headlineText="Audio"
 					supportingContent={twoSublinks}
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -538,6 +556,7 @@ export const WithMediaTypeAndSublinks = () => {
 					articleMedia={mainGallery}
 					headlineText="Gallery"
 					supportingContent={twoSublinks}
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -558,6 +577,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 					mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 					articleMedia={{ ...youtubeMetaData, duration: 30 }}
 					headlineText="Video"
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -571,6 +591,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 					mainMedia={mainAudio}
 					articleMedia={mainAudio}
 					headlineText="Audio"
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -584,6 +605,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 					mainMedia={mainGallery}
 					articleMedia={mainGallery}
 					headlineText="Gallery"
+					mediaPositionOnMobile="top"
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -1207,8 +1229,8 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						mediaPositionOnDesktop="top"
 						mediaSize="jumbo"
+						mediaPositionOnDesktop="top"
 						mediaPositionOnMobile="top"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
@@ -1336,7 +1358,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 							theme: Pillar.News,
 						}}
 						mediaPositionOnDesktop="top"
-						mediaPositionOnMobile="left"
+						mediaPositionOnMobile="top"
 						mediaSize="medium"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}

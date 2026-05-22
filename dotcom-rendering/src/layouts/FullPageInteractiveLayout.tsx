@@ -181,6 +181,9 @@ const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 				hasPageSkin={false}
 				hasPageSkinContentSelfConstrain={false}
 				pageId={article.pageId}
+				tagIds={article.tags.map((tag) => tag.id)}
+				sectionId={article.config.section}
+				contentType={article.contentType}
 			/>
 		</section>
 	);

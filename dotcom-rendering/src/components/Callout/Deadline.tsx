@@ -30,23 +30,35 @@ function getDaysBetween(first: Date, second: Date): number {
 const getDeadlineText = (date1: Date, date2: Date): string | undefined => {
 	const maxDays = 7;
 	const daysBetween = getDaysBetween(date1, date2);
-	if (daysBetween <= 0 || daysBetween > maxDays) return;
-	if (daysBetween <= 1) return 'Closing today';
-	if (Math.round(daysBetween) === 1) return 'Open for 1 more day';
+	if (daysBetween <= 0 || daysBetween > maxDays) {
+		return;
+	}
+	if (daysBetween <= 1) {
+		return 'Closing today';
+	}
+	if (Math.round(daysBetween) === 1) {
+		return 'Open for 1 more day';
+	}
 	return `Open for ${Math.round(daysBetween)} more days`;
 };
 
 function formatOptionalDate(date: number | undefined): Date | undefined {
-	if (isUndefined(date)) return undefined;
+	if (isUndefined(date)) {
+		return undefined;
+	}
 	return new Date(date * 1000);
 }
 
 export const Deadline = ({ until }: Props) => {
 	const untilDate = formatOptionalDate(until);
-	if (!untilDate) return null;
+	if (!untilDate) {
+		return null;
+	}
 	const now = new Date();
 	const deadlineText = getDeadlineText(now, untilDate);
-	if (!deadlineText) return null;
+	if (!deadlineText) {
+		return null;
+	}
 
 	return (
 		<span css={deadlineStyles}>

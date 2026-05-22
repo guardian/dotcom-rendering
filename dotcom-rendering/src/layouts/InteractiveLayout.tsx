@@ -6,7 +6,7 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import React from 'react';
+import type React from 'react';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
@@ -285,6 +285,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
 							pageId={article.pageId}
+							tagIds={article.tags.map((tag) => tag.id)}
+							sectionId={article.config.section}
+							contentType={article.contentType}
 						/>
 					</div>
 
@@ -565,6 +568,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								articleEndSlot={
 									!!article.config.switches.articleEndSlot
 								}
+								isSensitive={article.config.isSensitive}
 							/>
 						</Island>
 					</div>

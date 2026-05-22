@@ -114,9 +114,13 @@ const attributeToNumber = (
 	attributeName: string,
 ): number | undefined => {
 	const value = element.getAttribute(attributeName);
-	if (!value) return undefined;
+	if (!value) {
+		return undefined;
+	}
 	const numericValue = Number(value);
-	if (isNaN(numericValue)) return undefined;
+	if (isNaN(numericValue)) {
+		return undefined;
+	}
 	return numericValue;
 };
 
@@ -135,12 +139,12 @@ export const ManyNewsletterSignUp = ({
 	const authStatus = useAuthStatus();
 
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
-		{
+		Array<{
 			/** unique identifier for the newsletter in kebab-case format */
 			identityName: string;
 			/** unique id number for the newsletter */
 			listId: number;
-		}[]
+		}>
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');

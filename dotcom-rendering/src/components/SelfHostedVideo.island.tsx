@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
-import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	getOphan,
@@ -17,12 +16,16 @@ import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
+import { useVideoMilestoneTracking } from '../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 	findOptimisedSourcePerMimeType,
+	roundAspectRatio,
 } from '../lib/video';
+import type { VideoStyleSettings } from '../lib/videoStyleSettings';
+import { videoSettingsMap } from '../lib/videoStyleSettings';
 import { palette } from '../palette';
 import type { RoleType } from '../types/content';
 import type { VideoPlayerFormat } from '../types/mainMedia';
@@ -31,18 +34,21 @@ import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import type {
+	ControlsPosition,
 	PLAYER_STATES,
 	PlayerStates,
 	SubtitleSize,
 } from './SelfHostedVideoPlayer';
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
+import type { SubtitlesPosition } from './SubtitleOverlay';
 import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
+import type { VideoEventKey } from './YoutubeAtom/YoutubeAtom';
 
 const VISIBILITY_THRESHOLD = 0.5;
 
-const videoContainerStyles = (
-	isCinemagraph: boolean,
+const cardStyles = (
+	isInteractive: boolean,
 	aspectRatioOfVisibleVideo: number,
 	containerAspectRatioMobile?: number,
 	containerAspectRatioDesktop?: number,
@@ -52,23 +58,37 @@ const videoContainerStyles = (
 	background-color: ${palette('--video-background')};
 	align-items: center;
 	justify-content: space-around;
-	${!isCinemagraph && `z-index: ${getZIndex('video-container')}`};
+	${isInteractive && `z-index: ${getZIndex('video-container')}`};
 
 	/**
 	 * Use the aspect ratio of the video, unless the aspect-ratio of the container is fixed
 	 */
 	aspect-ratio: ${aspectRatioOfVisibleVideo};
+
 	${until.tablet} {
 		${!isUndefined(containerAspectRatioMobile) &&
 		`aspect-ratio: ${containerAspectRatioMobile};`}
 	}
+
 	${from.tablet} {
 		${!isUndefined(containerAspectRatioDesktop) &&
 		`aspect-ratio: ${containerAspectRatioDesktop};`}
 	}
 `;
 
-const figureStyles = (
+/**
+ * Constrain the video height so it never becomes excessively tall relative
+ * to the viewport, which can happen for portrait or narrow aspect-ratio videos
+ * rendered inside article layouts.
+ *
+ * The video height is capped to 80% of the small viewport height (`80svh`) on tablet and above.
+ */
+const maxHeightStyles = css`
+	${from.tablet} {
+		max-height: 80svh;
+	}
+`;
+const videoContainerStyles = (
 	aspectRatio: number,
 	aspectRatioOfVisibleVideo: number,
 	greyBarsAtSidesOnDesktop: boolean,
@@ -127,9 +147,57 @@ const figureStyles = (
 	`}
 `;
 
+const fullscreenStyles = css`
+	&:fullscreen {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: ${palette('--video-fullscreen-background')};
+		width: 100vw;
+		height: 100vh;
+
+		/* Override the fixed aspect-ratio + width:100% on the video so it
+		   fits within the screen while preserving its aspect ratio. */
+		video {
+			width: 100%;
+			height: 100%;
+			max-width: 100vw;
+			max-height: 100vh;
+			aspect-ratio: auto;
+			object-fit: contain;
+		}
+	}
+`;
+
+const showControlsStyles = css`
+	.controls-container {
+		visibility: visible;
+		opacity: 1;
+		transition:
+			visibility 0.2s,
+			opacity 0.2s ease-in-out;
+	}
+`;
+
+const hideControlsStyles = css`
+	.controls-container {
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			visibility 0.3s,
+			opacity 0.3s ease-in-out;
+		transition-delay: 2.7s;
+	}
+
+	@media (hover: hover) {
+		:hover {
+			${showControlsStyles}
+		}
+	}
+`;
+
 /**
- * Dispatches a custom play audio event so that other videos listening
- * for this event will be muted.
+ * Dispatches a custom play audio event so that other videos listening for this event will be muted.
  */
 export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 	document.dispatchEvent(
@@ -183,27 +251,20 @@ const dispatchOphanAttentionEvent = (
 	document.dispatchEvent(event);
 };
 
-const getOptimisedPosterImage = (mainImage: string): string => {
+const getOptimisedPosterImage = (
+	mainImage: string,
+	aspectRatio: string,
+): string => {
+	// This only runs on the client
 	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
 
 	return generateImageURL({
 		mainImage,
 		imageWidth: 940, // The widest a video can be: flexible special container, giga-boosted slot
 		resolution,
-		aspectRatio: '5:4',
+		aspectRatio,
 	});
 };
-
-/**
- * Runs a series of browser-specific checks to determine if the video has audio.
- * We have run a test to check that all supported browsers are covered by these checks.
- */
-const doesVideoHaveAudio = (video: HTMLVideoElement): boolean =>
-	('mozHasAudio' in video && Boolean(video.mozHasAudio)) ||
-	('webkitAudioDecodedByteCount' in video &&
-		Boolean(video.webkitAudioDecodedByteCount)) ||
-	('audioTracks' in video &&
-		Boolean((video.audioTracks as { length: number }).length));
 
 /**
  * 	The Fullscreen api is not supported by Safari mobile,
@@ -218,8 +279,19 @@ const shouldUseWebkitFullscreen = (video: HTMLVideoElement): boolean => {
 };
 
 /**
- * Ensure the aspect ratio of the video is within the boundary, if specified.
- * For example, we may not want to render a square video inside a 4:5 feature card.
+ * 	The events we need to respond to for fullscreen tracking
+ * */
+const fullscreenChangeEvents = [
+	'fullscreenchange',
+	'webkitfullscreenchange',
+	'webkitbeginfullscreen',
+	'webkitendfullscreen',
+];
+
+/**
+ * Ensures the aspect ratio falls between the minimum and maximum allowed aspect ratios, if specified.
+ * For example, we may not want to render a square video inside a 4:5 feature card. In this case, the
+ * minimum & maximum aspect ratio would be 4:5, so that the video fits the fixed-aspect ratio feature card
  */
 const getAspectRatioOfVisibleVideo = (
 	aspectRatio: number,
@@ -234,42 +306,6 @@ const getAspectRatioOfVisibleVideo = (
 	}
 
 	return aspectRatio;
-};
-
-type Props = {
-	sources: Source[];
-	atomId: string;
-	uniqueId: string;
-	videoStyle: VideoPlayerFormat;
-	aspectRatio: number;
-	posterImage: string;
-	fallbackImage: CardPictureProps['mainImage'];
-	fallbackImageSize: CardPictureProps['imageSize'];
-	fallbackImageLoading: CardPictureProps['loading'];
-	fallbackImageAlt: CardPictureProps['alt'];
-	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
-	linkTo: string;
-	showProgressBar?: boolean;
-	subtitleSource?: string;
-	subtitleSize: SubtitleSize;
-	/** The position of subtitles and the audio icon. Usually at the bottom, with the exception of Feature Cards. */
-	controlsPosition?: 'top' | 'bottom';
-	/**
-	 * The minimum/maximum aspect ratio the video will have. The video will be cropped if this
-	 * value is defined and the video aspect ratio is less/greater than this value.
-	 */
-	minAspectRatio?: number;
-	maxAspectRatio?: number;
-	/**
-	 * Specify this value to enforce the size of the video container on mobile/desktop.
-	 * Grey bars will appear if this value is defined and differs from the video aspect ratio.
-	 */
-	containerAspectRatioMobile?: number;
-	containerAspectRatioDesktop?: number;
-	caption?: string;
-	format?: ArticleFormat;
-	isMainMedia?: boolean;
-	role?: RoleType;
 };
 
 const doesUserPermitAutoplayOnWeb = (): boolean => {
@@ -294,8 +330,9 @@ const doesUserPermitAutoplayOnWeb = (): boolean => {
 const doesUserPermitAutoplayOnApps = async (): Promise<boolean> => {
 	/* isAutoplayEnabled is available on the video client from 8.8.0 onwards */
 	const isBridgetCompatible = await hasMinimumBridgetVersion('8.8.0');
-
-	if (!isBridgetCompatible) return true;
+	if (!isBridgetCompatible) {
+		return true;
+	}
 
 	try {
 		const videoClient = getVideoClient();
@@ -312,6 +349,46 @@ const doesUserPermitAutoplayOnApps = async (): Promise<boolean> => {
 	}
 };
 
+type Props = {
+	sources: Source[];
+	atomId: string;
+	uniqueId: string;
+	videoStyle: VideoPlayerFormat;
+	aspectRatio: number;
+	posterImage: string;
+	posterImageAspectRatio: string;
+	fallbackImage: CardPictureProps['mainImage'];
+	fallbackImageSize: CardPictureProps['imageSize'];
+	fallbackImageLoading: CardPictureProps['loading'];
+	fallbackImageAlt: CardPictureProps['alt'];
+	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
+	linkTo: string;
+	hideProgressBar?: boolean;
+	subtitleSource?: string;
+	subtitleSize: SubtitleSize;
+	/**
+	 * The position of subtitles and the audio icon.
+	 */
+	controlsPosition?: ControlsPosition;
+	/**
+	 * The minimum/maximum aspect ratio the video will have. The video will be cropped if this
+	 * value is defined and the video aspect ratio is less/greater than this value.
+	 */
+	minAspectRatio?: number;
+	maxAspectRatio?: number;
+	/**
+	 * Specify this value to enforce the size of the video container on mobile/desktop.
+	 * Grey bars will appear if this value is defined and differs from the video aspect ratio.
+	 */
+	containerAspectRatioMobile?: number;
+	containerAspectRatioDesktop?: number;
+	caption?: string;
+	format?: ArticleFormat;
+	isMainMedia?: boolean;
+	role?: RoleType;
+	restrictHeightOnDesktop?: boolean;
+};
+
 export const SelfHostedVideo = ({
 	sources,
 	atomId,
@@ -325,7 +402,7 @@ export const SelfHostedVideo = ({
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
 	linkTo,
-	showProgressBar = true,
+	hideProgressBar = false,
 	subtitleSource,
 	subtitleSize,
 	controlsPosition = 'bottom',
@@ -337,13 +414,15 @@ export const SelfHostedVideo = ({
 	format,
 	isMainMedia,
 	role,
+	posterImageAspectRatio,
+	restrictHeightOnDesktop = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
 	const vidRef = useRef<HTMLVideoElement>(null);
+	const playerContainerRef = useRef<HTMLDivElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
-	const [hasAudio, setHasAudio] = useState(true);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
@@ -356,17 +435,103 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
+	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
+	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
+
+	const shouldAutoplay = videoStyleSettings.autoplay && isAutoplayAllowed;
+
+	const showProgressBar =
+		!hideProgressBar &&
+		videoStyleSettings.showProgressBar &&
+		playerState !== 'NOT_STARTED';
+
+	const hasAudio =
+		videoStyleSettings.supportsAudio &&
+		sources.some((source) => source.hasAudio);
+
+	const showIcons =
+		(hasAudio || videoStyleSettings.supportsFullscreen) &&
+		playerState !== 'NOT_STARTED';
+
+	const subtitlesPosition: SubtitlesPosition =
+		videoStyleSettings.useInteractiveProgressBar &&
+		controlsPosition === 'bottom'
+			? 'bottom-elevated'
+			: controlsPosition;
+
 	/**
-	 * All controls on the video are hidden: the video looks like a GIF.
-	 * This includes but may not be limited to: audio icon, play/pause icon, subtitles, progress bar.
+	 * Show the play icon when the video is not playing, except for when it is scrolled out of view,
+	 * i.e. paused by intersection observer. In this case, the intersection observer will resume playback
+	 * and having a play icon would falsely indicate a user action is required to resume playback.
 	 */
-	const isCinemagraph = videoStyle === 'Cinemagraph';
+	const showPlayIcon =
+		videoStyleSettings.canShowPlayIcon &&
+		(playerState === 'PAUSED_BY_USER' ||
+			playerState === 'PAUSED_BY_BROWSER' ||
+			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
+
+	const showPauseIcon =
+		videoStyleSettings.hideControlsWhenNotInteractedWith &&
+		playerState === 'PLAYING';
+
+	let showPlayPauseIcon: 'play' | 'pause' | null = null;
+	if (showPlayIcon) {
+		showPlayPauseIcon = 'play';
+	} else if (showPauseIcon) {
+		showPlayPauseIcon = 'pause';
+	}
+
+	/** The aspect ratio of the video will be clamped within the specified range */
+	const aspectRatioOfVisibleVideo = roundAspectRatio(
+		getAspectRatioOfVisibleVideo(
+			aspectRatio,
+			minAspectRatio,
+			maxAspectRatio,
+		),
+	);
+
+	const isVideoCroppedAtTopBottom = aspectRatio < aspectRatioOfVisibleVideo;
+	const isVideoCroppedAtLeftRight = aspectRatio > aspectRatioOfVisibleVideo;
+
+	const isGreyBarsAtSidesOnDesktop =
+		containerAspectRatioDesktop !== undefined &&
+		containerAspectRatioDesktop > aspectRatioOfVisibleVideo;
+
+	const isGreyBarsAtTopAndBottomOnDesktop =
+		containerAspectRatioDesktop !== undefined &&
+		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
+
+	const optimisedPosterImage = showPosterImage
+		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
+		: undefined;
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
+
+	const sendOphanTrackingEvent = useCallback(
+		(event: VideoEventKey) => {
+			if (isWeb) {
+				ophanTrackerWeb(atomId, ophanVideoStyle)(event);
+			}
+			if (isApps) {
+				ophanTrackerApps(atomId, ophanVideoStyle)(event);
+			}
+		},
+		[isWeb, isApps, atomId, ophanVideoStyle],
+	);
+
+	const setMutedState = useCallback(
+		({ value, track = true }: { value: boolean; track?: boolean }) => {
+			setIsMuted(value);
+			if (track && isMuted !== value) {
+				sendOphanTrackingEvent(value ? 'mute' : 'unmute');
+			}
+		},
+		[isMuted, sendOphanTrackingEvent],
+	);
 
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
@@ -379,9 +544,13 @@ export const SelfHostedVideo = ({
 		currentTime,
 	});
 
+	const trackMilestones = useVideoMilestoneTracking(sendOphanTrackingEvent);
+
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
-		if (!video) return;
+		if (!video) {
+			return;
+		}
 
 		/** https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay#example_handling_play_failures */
 		const startPlayPromise = video.play();
@@ -414,10 +583,12 @@ export const SelfHostedVideo = ({
 		>,
 	) => {
 		const video = vidRef.current;
-		if (!video) return;
+		if (!video) {
+			return;
+		}
 
 		if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
-			setIsMuted(true);
+			setMutedState({ value: true, track: false });
 		}
 
 		setPlayerState(pauseReason);
@@ -433,9 +604,22 @@ export const SelfHostedVideo = ({
 		if (playerState === 'PLAYING') {
 			if (isInView) {
 				void pauseVideo('PAUSED_BY_USER');
+				sendOphanTrackingEvent('pause');
 			}
 		} else {
 			void playVideo();
+			if (hasTrackedPlay) {
+				sendOphanTrackingEvent('resume');
+			} else {
+				sendOphanTrackingEvent('play');
+			}
+		}
+	};
+
+	const updateCurrentTime = (newTime: number) => {
+		if (vidRef.current) {
+			vidRef.current.currentTime = newTime;
+			setCurrentTime(newTime);
 		}
 	};
 
@@ -447,6 +631,35 @@ export const SelfHostedVideo = ({
 			aspectRatio={fallbackImageAspectRatio}
 			alt={fallbackImageAlt}
 		/>
+	);
+
+	const positionCues = useCallback(
+		(video: HTMLVideoElement) => {
+			if (
+				!videoStyleSettings.canShowSubtitles ||
+				!videoStyleSettings.supportsAudio
+			) {
+				return;
+			}
+
+			const track = video.textTracks[0];
+			if (!track?.cues) {
+				return;
+			}
+
+			const pxFromBottom = space[3];
+			const videoHeight = video.getBoundingClientRect().height;
+			const percentFromTop =
+				((videoHeight - pxFromBottom) / videoHeight) * 100;
+
+			for (const cue of Array.from(track.cues)) {
+				if (cue instanceof VTTCue) {
+					cue.snapToLines = false;
+					cue.line = percentFromTop;
+				}
+			}
+		},
+		[videoStyleSettings.canShowSubtitles, videoStyleSettings.supportsAudio],
 	);
 
 	/**
@@ -495,7 +708,7 @@ export const SelfHostedVideo = ({
 				const thisVideoId = uniqueId;
 
 				if (playedVideoId !== thisVideoId) {
-					setIsMuted(true);
+					setMutedState({ value: true });
 				}
 			}
 		};
@@ -505,7 +718,7 @@ export const SelfHostedVideo = ({
 		 * Triggered by the CustomEvent in YoutubeAtomPlayer.
 		 */
 		const handleCustomPlayYoutubeEvent = () => {
-			setIsMuted(true);
+			setMutedState({ value: true });
 		};
 
 		/**
@@ -569,7 +782,33 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [uniqueId, atomId, sources, renderingTarget, ophanVideoStyle]);
+	}, [
+		setMutedState,
+		uniqueId,
+		atomId,
+		sources,
+		renderingTarget,
+		ophanVideoStyle,
+	]);
+
+	/* Creates video-specific event listeners to handle fullscreen behaviour */
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		const handleEndFullscreen = () => {
+			setIsWebKitFullscreen(false);
+			positionCues(video);
+		};
+
+		video.addEventListener('webkitendfullscreen', handleEndFullscreen);
+
+		return () =>
+			video.removeEventListener(
+				'webkitendfullscreen',
+				handleEndFullscreen,
+			);
+	}, [positionCues]);
 
 	/**
 	 * Track the first time the video comes into view.
@@ -592,6 +831,8 @@ export const SelfHostedVideo = ({
 			},
 			'Web',
 		);
+
+		sendOphanTrackingEvent('view');
 	}, [isInView ? true : undefined]);
 
 	/**
@@ -603,12 +844,63 @@ export const SelfHostedVideo = ({
 	 */
 	useEffect(() => {
 		if (
-			isAutoplayAllowed === false ||
+			shouldAutoplay === false ||
 			(isInView === false && playerState === 'NOT_STARTED')
 		) {
 			setShowPosterImage(true);
 		}
-	}, [isAutoplayAllowed, isInView, playerState]);
+	}, [shouldAutoplay, isInView, playerState]);
+
+	/**
+	 * Capture fullscreen tracking events across browsers and devices
+	 * We need to support events across:
+	 * 	- Browsers with fullscreen API support
+	 * 	- OSX Safari
+	 * 	- iOS Safari
+	 */
+	useEffect(() => {
+		const video = vidRef.current;
+		const playerContainer = playerContainerRef.current;
+
+		if (!playerContainer && !video) return;
+
+		const reportFullscreenEvent = () => {
+			const event =
+				document.fullscreenElement ||
+				(video &&
+					'webkitDisplayingFullscreen' in video &&
+					video.webkitDisplayingFullscreen)
+					? 'enter_fullscreen'
+					: 'exit_fullscreen';
+
+			sendOphanTrackingEvent(event);
+		};
+
+		for (const event of fullscreenChangeEvents) {
+			if (video) {
+				video.addEventListener(event, reportFullscreenEvent);
+			}
+
+			if (playerContainer) {
+				playerContainer.addEventListener(event, reportFullscreenEvent);
+			}
+		}
+
+		return () => {
+			for (const event of fullscreenChangeEvents) {
+				if (video) {
+					video.removeEventListener(event, reportFullscreenEvent);
+				}
+
+				if (playerContainer) {
+					playerContainer.removeEventListener(
+						event,
+						reportFullscreenEvent,
+					);
+				}
+			}
+		};
+	}, [sendOphanTrackingEvent]);
 
 	if (adapted) {
 		return FallbackImageComponent;
@@ -616,28 +908,18 @@ export const SelfHostedVideo = ({
 
 	const handleLoadedMetadata = () => {
 		const video = vidRef.current;
-		if (!video) return;
-
-		const track = video.textTracks[0];
-		if (!track?.cues) return;
-		const pxFromBottom = space[3];
-		const videoHeight = video.getBoundingClientRect().height;
-		const percentFromTop =
-			((videoHeight - pxFromBottom) / videoHeight) * 100;
-
-		for (const cue of Array.from(track.cues)) {
-			if (cue instanceof VTTCue) {
-				cue.snapToLines = false;
-				cue.line = percentFromTop;
-			}
+		if (!video) {
+			return;
 		}
+
+		positionCues(video);
 	};
 
 	const handleLoadedData = () => {
 		const video = vidRef.current;
-		if (!video) return;
-
-		setHasAudio(doesVideoHaveAudio(video));
+		if (!video) {
+			return;
+		}
 
 		if (video.videoWidth > 0 && video.videoHeight > 0) {
 			setWidth(video.videoWidth);
@@ -655,25 +937,26 @@ export const SelfHostedVideo = ({
 	 * Track the first successful video play in Ophan.
 	 */
 	const handlePlaying = () => {
-		if (hasTrackedPlay) return;
-		if (isWeb) {
-			ophanTrackerWeb(atomId, ophanVideoStyle)('play');
+		if (hasTrackedPlay) {
+			return;
 		}
-		if (isApps) {
-			ophanTrackerApps(atomId, ophanVideoStyle)('play');
-		}
+		sendOphanTrackingEvent('play');
 		setHasTrackedPlay(true);
 	};
 
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
-		if (isCinemagraph) return;
+		if (!videoStyleSettings.isInteractive) {
+			return;
+		}
 
 		event.preventDefault();
 		playPauseVideo();
 	};
 
 	const handleAudioClick = (event: React.SyntheticEvent) => {
-		if (isCinemagraph) return;
+		if (!videoStyleSettings.isInteractive) {
+			return;
+		}
 
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 
@@ -682,18 +965,20 @@ export const SelfHostedVideo = ({
 		if (isMuted) {
 			// Emit video play audio event so other components are aware when a video is played with sound
 			dispatchCustomPlayAudioEvent(uniqueId);
-			setIsMuted(false);
+			setMutedState({ value: false });
 		} else {
-			setIsMuted(true);
+			setMutedState({ value: true });
 		}
 	};
 
 	const handleFullscreenClick = (event: React.SyntheticEvent) => {
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 		event.stopPropagation(); // Don't pause the video
-		const video = vidRef.current;
 
-		if (!video) return;
+		const video = vidRef.current;
+		if (!video) {
+			return;
+		}
 
 		if (shouldUseWebkitFullscreen(video)) {
 			/***
@@ -709,16 +994,19 @@ export const SelfHostedVideo = ({
 			};
 
 			if (webkitVideo.webkitDisplayingFullscreen) {
+				setIsWebKitFullscreen(false);
 				return webkitVideo.webkitExitFullscreen();
 			} else {
+				setIsWebKitFullscreen(true);
 				return webkitVideo.webkitEnterFullscreen();
 			}
 		}
 
 		if (document.fullscreenElement) {
 			void document.exitFullscreen();
+		} else if (playerContainerRef.current) {
+			void playerContainerRef.current.requestFullscreen();
 		}
-		void video.requestFullscreen();
 	};
 
 	/**
@@ -727,7 +1015,9 @@ export const SelfHostedVideo = ({
 	 * browser. Therefore we need to apply the pause state to the video.
 	 */
 	const handlePause = () => {
-		if (isCinemagraph) return;
+		if (!videoStyleSettings.isInteractive) {
+			return;
+		}
 
 		if (
 			playerState === 'PAUSED_BY_USER' ||
@@ -757,34 +1047,52 @@ export const SelfHostedVideo = ({
 	};
 
 	const seekForward = () => {
-		if (vidRef.current) {
-			const newTime = Math.min(
-				vidRef.current.currentTime + 1,
-				vidRef.current.duration,
-			);
-
-			vidRef.current.currentTime = newTime;
-			setCurrentTime(newTime);
+		const video = vidRef.current;
+		if (!video) {
+			return;
 		}
+
+		const increment = videoStyleSettings.seekIncrement ?? 0;
+		const newTime = Math.min(video.currentTime + increment, video.duration);
+
+		updateCurrentTime(newTime);
 	};
 
 	const seekBackward = () => {
-		if (vidRef.current) {
-			// Allow the user to cycle to the end of the video using the arrow keys
-			const newTime =
-				(((vidRef.current.currentTime - 1) % vidRef.current.duration) +
-					vidRef.current.duration) %
-				vidRef.current.duration;
+		const video = vidRef.current;
+		if (!video) {
+			return;
+		}
 
-			vidRef.current.currentTime = newTime;
-			setCurrentTime(newTime);
+		const increment = videoStyleSettings.seekIncrement ?? 0;
+		const newTime = Math.max(video.currentTime - increment, 0);
+
+		updateCurrentTime(newTime);
+	};
+
+	const handleTimeUpdate = () => {
+		const video = vidRef.current;
+		if (!video) {
+			return;
+		}
+
+		if (playerState === 'PLAYING') {
+			setCurrentTime(video.currentTime);
+
+			/**
+			 * We only want to track milestone events for "long-form"
+			 * videos, not loops or cinemagraphs.
+			 */
+			if (videoStyle === 'Default') {
+				trackMilestones(video.currentTime, video.duration);
+			}
 		}
 	};
 
-	const handleKeyDown = (
-		event: React.KeyboardEvent<HTMLVideoElement>,
-	): void => {
-		if (isCinemagraph) return;
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
+		if (!videoStyleSettings.isInteractive) {
+			return;
+		}
 
 		switch (event.key) {
 			case 'Enter':
@@ -802,7 +1110,7 @@ export const SelfHostedVideo = ({
 				seekBackward();
 				break;
 			case 'm':
-				setIsMuted(!isMuted);
+				setMutedState({ value: !isMuted });
 				break;
 		}
 	};
@@ -813,9 +1121,9 @@ export const SelfHostedVideo = ({
 	 *
 	 * Stops playback when the video is scrolled out of view.
 	 */
-	if (vidRef.current && isPlayable) {
+	if (isPlayable) {
 		if (
-			isAutoplayAllowed &&
+			shouldAutoplay &&
 			isInView &&
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
@@ -830,46 +1138,6 @@ export const SelfHostedVideo = ({
 		}
 	}
 
-	/**
-	 * Show the play icon when the video is not playing, except for when it is scrolled
-	 * out of view. In this case, the intersection observer will resume playback and
-	 * having a play icon would falsely indicate a user action is required to resume playback.
-	 */
-	const showPlayIcon =
-		playerState === 'PAUSED_BY_USER' ||
-		playerState === 'PAUSED_BY_BROWSER' ||
-		(playerState === 'NOT_STARTED' && !isAutoplayAllowed);
-
-	/** The aspect ratio of the video will be clamped within the specified range */
-	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
-		aspectRatio,
-		minAspectRatio,
-		maxAspectRatio,
-	);
-
-	const isVideoCroppedAtTopBottom = aspectRatio < aspectRatioOfVisibleVideo;
-	const isVideoCroppedAtLeftRight = aspectRatio > aspectRatioOfVisibleVideo;
-
-	const isGreyBarsAtSidesOnDesktop =
-		containerAspectRatioDesktop !== undefined &&
-		containerAspectRatioDesktop > aspectRatioOfVisibleVideo;
-
-	const isGreyBarsAtTopAndBottomOnDesktop =
-		containerAspectRatioDesktop !== undefined &&
-		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
-
-	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
-
-	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(posterImage)
-		: undefined;
-
-	/**
-	 * We almost always want to preload some of the video data. The exception
-	 * is when autoplay is off and the video is only partially in view.
-	 */
-	const preloadPartialData = !!isAutoplayAllowed || !!isInView;
-
 	return (
 		<figure
 			className={`video-container ${videoStyle.toLocaleLowerCase()} ${
@@ -880,24 +1148,37 @@ export const SelfHostedVideo = ({
 			<div
 				ref={setNode}
 				css={[
-					videoContainerStyles(
-						isCinemagraph,
+					cardStyles(
+						videoStyleSettings.isInteractive,
 						aspectRatioOfVisibleVideo,
 						containerAspectRatioMobile,
 						containerAspectRatioDesktop,
 					),
+					restrictHeightOnDesktop && maxHeightStyles,
 				]}
 			>
 				<div
-					css={figureStyles(
-						aspectRatio,
-						aspectRatioOfVisibleVideo,
-						isGreyBarsAtSidesOnDesktop,
-						isGreyBarsAtTopAndBottomOnDesktop,
-						isVideoCroppedAtTopBottom,
-						isVideoCroppedAtLeftRight,
-						containerAspectRatioDesktop,
-					)}
+					ref={playerContainerRef}
+					css={[
+						videoContainerStyles(
+							aspectRatio,
+							aspectRatioOfVisibleVideo,
+							isGreyBarsAtSidesOnDesktop,
+							isGreyBarsAtTopAndBottomOnDesktop,
+							isVideoCroppedAtTopBottom,
+							isVideoCroppedAtLeftRight,
+							containerAspectRatioDesktop,
+						),
+						fullscreenStyles,
+						videoStyleSettings.hideControlsWhenNotInteractedWith &&
+							(playerState === 'NOT_STARTED' ||
+								playerState === 'PLAYING') &&
+							hideControlsStyles,
+						videoStyleSettings.hideControlsWhenNotInteractedWith &&
+							(playerState === 'PAUSED_BY_USER' ||
+								playerState === 'PAUSED_BY_BROWSER') &&
+							showControlsStyles,
+					]}
 				>
 					<SelfHostedVideoPlayer
 						sources={optimisedSources}
@@ -906,14 +1187,11 @@ export const SelfHostedVideo = ({
 						aspectRatio={aspectRatio}
 						width={width}
 						height={height}
-						videoStyle={videoStyle}
 						posterImage={optimisedPosterImage}
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
-						setCurrentTime={setCurrentTime}
 						ref={vidRef}
-						isPlayable={isPlayable}
-						playerState={playerState}
+						hasAudio={hasAudio}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
 						handleLoadedData={handleLoadedData}
@@ -921,18 +1199,31 @@ export const SelfHostedVideo = ({
 						handlePlaying={handlePlaying}
 						handlePlayPauseClick={handlePlayPauseClick}
 						handleAudioClick={handleAudioClick}
+						handleTimeUpdate={handleTimeUpdate}
 						handleKeyDown={handleKeyDown}
+						useLongFormProgressBar={
+							!!videoStyleSettings.useInteractiveProgressBar
+						}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
+						updateCurrentTime={updateCurrentTime}
 						onError={onError}
-						AudioIcon={hasAudio ? AudioIcon : null}
-						preloadPartialData={preloadPartialData}
-						showPlayIcon={showPlayIcon}
+						preloadPartialData={!!shouldAutoplay}
+						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
+						showSubtitles={videoStyleSettings.canShowSubtitles}
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}
-						controlsPosition={controlsPosition}
+						showIcons={showIcons}
+						iconsPosition={controlsPosition}
+						subtitlesPosition={subtitlesPosition}
 						activeCue={activeCue}
+						shouldLoop={videoStyleSettings.loop}
+						showFullscreenIcon={
+							videoStyleSettings.supportsFullscreen
+						}
+						isInteractive={videoStyleSettings.isInteractive}
+						isWebKitFullscreen={isWebKitFullscreen}
 					/>
 				</div>
 			</div>

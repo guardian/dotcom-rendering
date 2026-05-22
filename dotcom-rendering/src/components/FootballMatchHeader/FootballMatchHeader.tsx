@@ -19,13 +19,16 @@ import useSWR from 'swr';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import type {
+	MatchNotificationsClient,
+	NotificationsClient,
+} from '../../lib/bridgetApi';
 import {
 	type EditionId,
 	getLocaleFromEdition,
 	getTimeZoneFromEdition,
 } from '../../lib/edition';
 import { palette } from '../../palette';
-import type { ColourName } from '../../paletteDeclarations';
 import type { ArticleDeprecated } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { BigNumber } from '../BigNumber';
@@ -34,6 +37,8 @@ import { Placeholder } from '../Placeholder';
 import { background, border, primaryText, secondaryText } from './colours';
 import { FootballMatchHeaderFallback } from './FootballMatchHeaderFallback';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
+import { Hr } from './Hr';
+import { Notifications } from './Notifications';
 import { Tabs } from './Tabs';
 
 export type FootballMatchHeaderProps = {
@@ -51,6 +56,8 @@ export type FootballMatchHeaderProps = {
 type Props = FootballMatchHeaderProps & {
 	getHeaderData: (url: string) => Promise<unknown>;
 	refreshInterval: number;
+	notificationsClient: NotificationsClient;
+	matchNotificationsClient: MatchNotificationsClient;
 };
 
 export const FootballMatchHeader = (props: Props) => {
@@ -122,6 +129,12 @@ export const FootballMatchHeader = (props: Props) => {
 				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
 				<Teams match={match} />
 				<Comment match={match} />
+				<Notifications
+					edition={props.edition}
+					match={match}
+					notificationsClient={props.notificationsClient}
+					matchNotificationsClient={props.matchNotificationsClient}
+				/>
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 				<Tabs {...tabs} />
 			</div>
@@ -282,28 +295,6 @@ const kickOffFormatterForEdition = (edition: EditionId): Intl.DateTimeFormat =>
 		timeZoneName: 'short',
 		timeZone: getTimeZoneFromEdition(edition),
 	});
-
-const Hr = (props: {
-	borderStyle: 'dotted' | 'solid';
-	borderColour: ColourName;
-}) => (
-	<hr
-		css={{
-			'&': css(grid.column.all),
-			margin: 0,
-			width: '100%',
-			borderWidth: 0,
-			borderBottomWidth: 1,
-			[from.leftCol]: {
-				display: 'none',
-			},
-		}}
-		style={{
-			borderBottomColor: palette(props.borderColour),
-			borderBottomStyle: props.borderStyle,
-		}}
-	/>
-);
 
 const Teams = (props: { match: FootballMatch }) => (
 	<div

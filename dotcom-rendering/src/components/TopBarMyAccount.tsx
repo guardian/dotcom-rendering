@@ -200,7 +200,9 @@ const SignedInWithNotifications = ({
 }: SignedInWithNotificationsProps) => {
 	const userId = authStatus.idToken.claims.legacy_identity_id;
 
-	if (!userId) return <SignIn idUrl={idUrl} />;
+	if (!userId) {
+		return <SignIn idUrl={idUrl} />;
+	}
 
 	const identityLinks = buildIdentityLinks(mmaUrl, idUrl, userId);
 

@@ -11,7 +11,6 @@ import type {
 	ArticleCountType,
 	BannerChannel,
 	ConfigurableDesign,
-	SelectedAmountsVariant,
 	SeparateArticleCount,
 	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types';
@@ -47,7 +46,7 @@ export interface ContributionsReminderTracking {
 
 export interface BannerRenderedContent {
 	heading: JSX.Element | JSX.Element[] | null;
-	paragraphs: (JSX.Element | JSX.Element[])[];
+	paragraphs: Array<JSX.Element | JSX.Element[]>;
 	highlightedText?: JSX.Element | JSX.Element[] | null;
 	primaryCta: BannerEnrichedCta | null;
 	secondaryCta: BannerEnrichedSecondaryCta | null;
@@ -77,7 +76,6 @@ export interface BannerRenderProps {
 	countType?: ArticleCountType;
 	separateArticleCount?: boolean;
 	separateArticleCountSettings?: SeparateArticleCount;
-	choiceCardAmounts?: SelectedAmountsVariant;
 	choiceCardsSettings?: ChoiceCardsSettings;
 	tracking: Tracking;
 	submitComponentEvent?: (componentEvent: ComponentEvent) => Promise<void>;

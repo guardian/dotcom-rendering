@@ -52,7 +52,9 @@ export const formatContactNumbers = (
 
 	// Group each contact by its value, so we can display multiple names for the same number.
 	for (const { name, value } of contacts) {
-		if (!contactNumbers.has(value)) contactNumbers.set(value, []);
+		if (!contactNumbers.has(value)) {
+			contactNumbers.set(value, []);
+		}
 		contactNumbers.get(value)?.push(name);
 	}
 

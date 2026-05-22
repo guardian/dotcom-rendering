@@ -4,10 +4,12 @@ import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	getSublinks,
 	opinionTrails,
+	selfHostedLoopVideo45Card,
 	selfHostedLoopVideo54Card,
 	slideshowCard,
 	snapLink,
 	trails,
+	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type {
@@ -294,13 +296,24 @@ export const SplashWithLiveUpdatesAndTwoSublinks: Story = {
 };
 
 export const SelfHostedVideoCard: Story = {
-	name: 'Self-hosted video cards',
 	args: {
 		frontSectionTitle: 'Self-hosted video',
 		groupedTrails: {
 			...emptyGroupedTrails,
 			snap: [],
-			standard: [selfHostedLoopVideo54Card],
+			standard: [selfHostedLoopVideo54Card, selfHostedLoopVideo45Card],
+		},
+		collectionId: 1,
+	},
+};
+
+export const YoutubeVideoCard: Story = {
+	args: {
+		frontSectionTitle: 'YouTube video',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			snap: [],
+			standard: [youtubeVideoTrails[0], youtubeVideoTrails[1]],
 		},
 		collectionId: 1,
 	},

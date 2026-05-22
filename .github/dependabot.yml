@@ -47,6 +47,11 @@ updates:
       storybook:
         patterns:
           - '*storybook*'
+      svelte:
+        patterns:
+          - '@sveltejs/*'
+          - 'svelte'
+          - 'svelte-check'
       swc:
         patterns:
           - '@swc/*'
@@ -60,7 +65,9 @@ updates:
         exclude-patterns:
           - '@storybook/*'
   - package-ecosystem: 'github-actions'
-    directory: '/'
+    directories:
+      - '/.github/workflows'
+      - '/.github/actions/setup-node-env'
     schedule:
       interval: 'daily'
     rebase-strategy: 'disabled'

@@ -1,4 +1,4 @@
-import type { ConsentState } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { useBetaAB } from '../lib/useAB';
@@ -7,7 +7,6 @@ import type { AdTargeting } from '../types/commercial';
 import type { AspectRatio } from '../types/front';
 import type { ArticleMedia } from '../types/mainMedia';
 import { Caption } from './Caption';
-import type { PlayButtonSize } from './Card/components/PlayIcon';
 import type { ResponsiveFontSize } from './CardHeadline';
 import { useConfig } from './ConfigContext';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
@@ -35,8 +34,6 @@ type Props = {
 	stickyVideos: boolean;
 	kickerText?: string;
 	pauseOffscreenVideo?: boolean;
-	iconSizeOnDesktop: PlayButtonSize;
-	iconSizeOnMobile: PlayButtonSize;
 	hidePillOnMobile: boolean;
 	enableAds: boolean;
 	aspectRatio?: AspectRatio;
@@ -78,8 +75,6 @@ export const YoutubeBlockComponent = ({
 	stickyVideos,
 	kickerText,
 	pauseOffscreenVideo = false,
-	iconSizeOnDesktop,
-	iconSizeOnMobile,
 	hidePillOnMobile,
 	enableAds,
 	aspectRatio,
@@ -143,7 +138,9 @@ export const YoutubeBlockComponent = ({
 	useEffect(() => {
 		if (renderingTarget === 'Web') {
 			const defineConsentState = async () => {
-				const { onConsentChange } = await import('@guardian/libs');
+				const { onConsentChange } = await import(
+					'@guardian/consent-manager'
+				);
 				onConsentChange((newConsent: ConsentState) => {
 					setConsentState(newConsent);
 				});
@@ -209,8 +206,6 @@ export const YoutubeBlockComponent = ({
 				abTestParticipations={abTestParticipations}
 				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
-				iconSizeOnDesktop={iconSizeOnDesktop}
-				iconSizeOnMobile={iconSizeOnMobile}
 				hidePillOnMobile={hidePillOnMobile}
 				renderingTarget={renderingTarget}
 				aspectRatio={aspectRatio}

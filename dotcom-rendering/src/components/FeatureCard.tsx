@@ -265,26 +265,30 @@ const getMedia = ({
 	mainMedia?: MainMedia;
 	showVideo?: boolean;
 }) => {
-	if (mainMedia?.type === 'SelfHostedVideo' && showVideo) {
-		let type: CardMediaType;
+	if (
+		showVideo &&
+		mainMedia?.type === 'SelfHostedVideo' &&
+		(mainMedia.videoStyle === 'Loop' ||
+			mainMedia.videoStyle === 'Cinemagraph')
+	) {
+		let style: CardMediaType;
 		switch (mainMedia.videoStyle) {
 			case 'Loop':
-				type = 'loop-video';
+				style = 'loop-video';
 				break;
 			case 'Cinemagraph':
-				type = 'cinemagraph';
+				style = 'cinemagraph';
 				break;
-			default:
-				type = 'default-video';
 		}
 
 		return {
-			type,
+			type: 'self-hosted-video',
+			style,
 			mainMedia,
 		} as const;
 	}
 
-	if (mainMedia?.type === 'YoutubeVideo' && showVideo) {
+	if (showVideo && mainMedia?.type === 'YoutubeVideo') {
 		return {
 			type: 'youtube-video',
 			mainMedia,
@@ -391,7 +395,6 @@ export type Props = {
 	 * all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
 	 */
 	isImmersive?: boolean;
-	isStorylines?: boolean;
 	starRatingSize: RatingSizeType;
 };
 
@@ -429,7 +432,6 @@ export const FeatureCard = ({
 	uniqueId,
 	isNewsletter = false,
 	isImmersive = false,
-	isStorylines = false,
 	starRatingSize,
 	articleMedia,
 }: Props) => {
@@ -446,7 +448,9 @@ export const FeatureCard = ({
 		showVideo: showVideo && canPlayInline,
 	});
 
-	if (!media) return null;
+	if (!media) {
+		return null;
+	}
 
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
@@ -455,13 +459,9 @@ export const FeatureCard = ({
 
 	const isYoutubeVideo = media.type === 'youtube-video';
 
-	const isSelfHostedVideo =
-		media.type === 'loop-video' ||
-		media.type === 'default-video' ||
-		media.type === 'cinemagraph';
+	const isSelfHostedVideo = media.type === 'self-hosted-video';
 
-	const isSelfHostedVideoWithControls =
-		media.type === 'loop-video' || media.type === 'default-video';
+	const isSelfHostedVideoWithControls = media.style === 'loop-video';
 
 	const labsDataAttributes = branding
 		? getOphanComponents({
@@ -476,7 +476,7 @@ export const FeatureCard = ({
 
 	/* The whole card is clickable on cinemagraphs and pictures */
 	const allowLinkThroughOverlay =
-		media.type === 'cinemagraph' || media.type === 'picture';
+		media.style === 'cinemagraph' || media.type === 'picture';
 
 	return (
 		<FormatBoundary format={format}>
@@ -533,8 +533,6 @@ export const FeatureCard = ({
 										kickerText={kickerText}
 										trailText={trailText}
 										hidePillOnMobile={false}
-										iconSizeOnDesktop="large"
-										iconSizeOnMobile="large"
 										headlineSizes={headlineSizes}
 										webPublicationDate={webPublicationDate}
 										showClock={!!showClock}
@@ -577,10 +575,14 @@ export const FeatureCard = ({
 												media.mainMedia.videoStyle
 											}
 											posterImage={
-												media.mainMedia.image ?? ''
+												media.mainMedia.image.src ?? ''
+											}
+											posterImageAspectRatio={
+												media.mainMedia.image
+													.aspectRatio
 											}
 											fallbackImage={
-												media.mainMedia.image ?? ''
+												media.mainMedia.image.src ?? ''
 											}
 											fallbackImageSize={imageSize}
 											fallbackImageLoading={imageLoading}
@@ -591,7 +593,7 @@ export const FeatureCard = ({
 												aspectRatio
 											}
 											linkTo={linkTo}
-											showProgressBar={false}
+											hideProgressBar={true}
 											subtitleSource={
 												media.mainMedia.subtitleSource
 											}
@@ -791,9 +793,6 @@ export const FeatureCard = ({
 														}
 														showClock={!!showClock}
 														serverTime={serverTime}
-														isStorylines={
-															isStorylines
-														}
 													/>
 												) : undefined
 											}

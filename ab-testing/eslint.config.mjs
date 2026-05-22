@@ -3,19 +3,13 @@ import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
 	globalIgnores([
-		"frontend",
 		"eslint.config.mjs",
-		"config/index.ts",
 		"**/dist/**",
+		"**/.svelte-kit/*",
+		"**/svelte.config.js",
 	]),
 	...guardian.configs.recommended,
 	{
-		languageOptions: {
-			parserOptions: {
-				project: ["./tsconfig.json"],
-				tsconfigRootDir: "./",
-			},
-		},
 		rules: {
 			curly: ["error", "multi-line"],
 			"no-use-before-define": [
