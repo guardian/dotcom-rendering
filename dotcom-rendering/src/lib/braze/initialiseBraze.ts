@@ -43,7 +43,7 @@ const SDK_OPTIONS: braze.InitializationOptions = {
 	enableLogging: true,
 	noCookies: true,
 	baseUrl: 'https://sdk.fra-01.braze.eu/api/v3',
-	sessionTimeoutInSeconds: 1800, // 30 minutes, the Braze SDK default. See JSDoc above for rationale.
+	sessionTimeoutInSeconds: 1,
 	minimumIntervalBetweenTriggerActionsInSeconds: 0,
 	devicePropertyAllowlist: [],
 	allowUserSuppliedJavascript: true, // Supplied javascript is required for Braze Banners System integration
