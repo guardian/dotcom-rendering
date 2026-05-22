@@ -23,14 +23,14 @@ const headerStyles = css`
 const headingStyles = css`
 	${textSans17}
 	padding-top: ${space[2]}px;
-	color: ${sourcePalette.neutral[7]};
+	color: ${palette('--hosted-content-onwards-heading')};
 
 	@media (prefers-color-scheme: dark) {
-		color: ${sourcePalette.neutral[86]};
+		color: ${palette('--hosted-content-onwards-heading')};
 	}
 
 	[data-color-scheme='dark'] & {
-		color: ${sourcePalette.neutral[86]};
+		color: ${palette('--hosted-content-onwards-heading')};
 	}
 
 	span {

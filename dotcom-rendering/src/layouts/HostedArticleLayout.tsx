@@ -168,9 +168,12 @@ const sideBorders = css`
 	}
 `;
 
-export const overridePaletteDeclarationsToUseAccentColor = (
-	accentColor?: string,
-) => {
+/**
+ * Overrides palette declarations in light mode to use the accent color for the hosted content.
+ * @param accentColor - The accentColor to use for the hosted content in light mode.
+ * @returns A CSS string with the overridden palette declarations.
+ */
+export const overridePaletteColours = (accentColor?: string) => {
 	return css`
 		@media (prefers-color-scheme: light) {
 			--article-link-text: ${accentColor ?? 'inherit'};
@@ -183,6 +186,7 @@ export const overridePaletteDeclarationsToUseAccentColor = (
 			--article-link-text: inherit;
 			--article-link-text-hover: inherit;
 			--article-link-border-hover: inherit;
+			/* This CSS variable only exists in the scope of hosted content and it isn't defined in the paletteDeclarations.ts */
 			--accent-colour: ${sourcePalette.neutral[86]};
 		}
 	`;
@@ -242,9 +246,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 
 			<main
 				data-layout="HostedArticleLayout"
-				css={overridePaletteDeclarationsToUseAccentColor(
-					branding?.hostedCampaignColour,
-				)}
+				css={overridePaletteColours(branding?.hostedCampaignColour)}
 			>
 				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>

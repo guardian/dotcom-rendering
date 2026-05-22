@@ -7334,6 +7334,10 @@ const paletteColours = {
 		light: highlightContainerStartLight,
 		dark: highlightContainerStartDark,
 	},
+	'--hosted-content-onwards-heading': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
 	'--image-title-background': {
 		light: imageTitleBackground,
 		dark: imageTitleBackground,

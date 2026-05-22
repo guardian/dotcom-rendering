@@ -26,7 +26,7 @@ import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { overridePaletteDeclarationsToUseAccentColor } from './HostedArticleLayout';
+import { overridePaletteColours } from './HostedArticleLayout';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -208,9 +208,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 
 			<main
 				data-layout="HostedVideoLayout"
-				css={overridePaletteDeclarationsToUseAccentColor(
-					branding?.hostedCampaignColour,
-				)}
+				css={overridePaletteColours(branding?.hostedCampaignColour)}
 			>
 				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
