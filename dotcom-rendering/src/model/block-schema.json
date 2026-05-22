@@ -2346,6 +2346,9 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "caption": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -3539,6 +3542,9 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "caption": {
+                    "type": "string"
                 }
             },
             "required": [

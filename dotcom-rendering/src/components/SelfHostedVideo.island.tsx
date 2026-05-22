@@ -16,6 +16,7 @@ import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
+import { useVideoMilestoneTracking } from '../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
 	customSelfHostedVideoPlayAudioEventName,
@@ -385,7 +386,7 @@ type Props = {
 	format?: ArticleFormat;
 	isMainMedia?: boolean;
 	role?: RoleType;
-	maxHeightDesktop?: number;
+	restrictHeightOnDesktop?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -414,7 +415,7 @@ export const SelfHostedVideo = ({
 	isMainMedia,
 	role,
 	posterImageAspectRatio,
-	maxHeightDesktop,
+	restrictHeightOnDesktop = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -542,6 +543,8 @@ export const SelfHostedVideo = ({
 		playerState,
 		currentTime,
 	});
+
+	const trackMilestones = useVideoMilestoneTracking(sendOphanTrackingEvent);
 
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
@@ -1075,6 +1078,14 @@ export const SelfHostedVideo = ({
 
 		if (playerState === 'PLAYING') {
 			setCurrentTime(video.currentTime);
+
+			/**
+			 * We only want to track milestone events for "long-form"
+			 * videos, not loops or cinemagraphs.
+			 */
+			if (videoStyle === 'Default') {
+				trackMilestones(video.currentTime, video.duration);
+			}
 		}
 	};
 
@@ -1143,7 +1154,7 @@ export const SelfHostedVideo = ({
 						containerAspectRatioMobile,
 						containerAspectRatioDesktop,
 					),
-					!isUndefined(maxHeightDesktop) && maxHeightStyles,
+					restrictHeightOnDesktop && maxHeightStyles,
 				]}
 			>
 				<div

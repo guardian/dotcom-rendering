@@ -31,7 +31,6 @@ export const FetchHostedOnwards = ({ branding, url }: Props) => {
 		<HostedContentOnwards
 			trails={trails}
 			brandName={branding?.sponsorName ?? ''}
-			accentColor={branding?.hostedCampaignColour}
 		/>
 	);
 };
