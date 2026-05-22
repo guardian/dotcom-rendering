@@ -32,6 +32,7 @@ interface DirectoryPageNavConfig {
 	textColor: string;
 	textHoverColor?: string;
 	backgroundColor: string;
+	containerBackgroundColor?: string;
 	titleIcon?: React.ReactElement;
 	title: { label: string; id: string };
 	links: Array<{ label: string; id: string }>;
@@ -102,6 +103,7 @@ const configs = [
 		textColor: themePalette('--masthead-nav-link-text'),
 		textHoverColor: themePalette('--masthead-nav-link-text-hover'),
 		backgroundColor: palette.brand[400],
+		containerBackgroundColor: palette.brand[400],
 		title: {
 			label: 'World Cup 2026',
 			id: 'football/world-cup-2026',
@@ -223,9 +225,19 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const { textColor, backgroundColor } = config;
 
+	const container = (backgroundColor: string) =>
+		css({
+			backgroundColor,
+		});
+
 	const nav = css({
 		backgroundColor,
-		'&': css(grid.paddedContainer),
+		'&': css(
+			grid.paddedContainer,
+			grid.verticalRules({
+				color: themePalette('--masthead-nav-lines'),
+			}),
+		),
 		alignContent: 'space-between',
 		position: 'relative',
 	});
@@ -255,35 +267,37 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		},
 	});
 
-	const list = css({
-		'&': css(grid.column.all),
-		display: 'flex',
-		alignItems: 'center',
-		position: 'relative',
-		overflowX: 'scroll',
-		scrollbarWidth: 'none',
-		borderTop: '1px solid',
-		borderColor: themePalette('--masthead-nav-lines'),
-		padding: `0 ${space[3]}px`,
-		height: space[10],
-		[from.mobileLandscape]: {
-			padding: `0 ${space[5]}px`,
-			height: space[12],
-		},
-		// This creates a gradient fade on the right side to indicate that there's more to scroll for.
-		'&:after': {
-			content: '""',
-			position: 'sticky',
-			right: -space[3],
-			top: 0,
-			height: '100%',
-			minWidth: 40,
-			background: `linear-gradient(to left, ${backgroundColor}, transparent)`,
+	const list = (hasHeader = true) =>
+		css({
+			'&': css(grid.column.all),
+			display: 'flex',
+			alignItems: 'center',
+			position: 'relative',
+			overflowX: 'scroll',
+			scrollbarWidth: 'none',
+			borderTop: hasHeader ? '1px solid' : undefined,
+			borderBottom: '1px solid',
+			borderColor: themePalette('--masthead-nav-lines'),
+			padding: `0 ${space[3]}px`,
+			height: space[10],
 			[from.mobileLandscape]: {
-				right: `-${space[5]}px`,
+				padding: `0 ${space[5]}px`,
+				height: hasHeader ? space[12] : space[10],
 			},
-		},
-	});
+			// This creates a gradient fade on the right side to indicate that there's more to scroll for.
+			'&:after': {
+				content: '""',
+				position: 'sticky',
+				right: -space[3],
+				top: 0,
+				height: '100%',
+				minWidth: 40,
+				background: `linear-gradient(to left, ${backgroundColor}, transparent)`,
+				[from.mobileLandscape]: {
+					right: `-${space[5]}px`,
+				},
+			},
+		});
 
 	const listItem = css({
 		position: 'relative',
@@ -353,48 +367,50 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	});
 
 	return (
-		<nav css={[nav]}>
-			{config.showHeader && (
-				<>
-					<a href={`/${config.title.id}`} css={largeLinkStyles}>
-						{config.titleIcon && config.titleIcon}
-						{config.title.label}
-					</a>
-					<BackgroundImage images={config.backgroundImages} />
-				</>
-			)}
-
-			<ul css={list}>
-				{!config.showHeader && (
-					<li css={listItem}>
-						<a
-							href={`/${config.title.id}`}
-							css={[
-								smallLink,
-								primaryLinkStyles,
-								pageId === config.title.id && boldSmallLink,
-							]}
-						>
-							{config.titleIcon}
+		<div css={container(config.containerBackgroundColor ?? 'transparent')}>
+			<nav css={[nav]}>
+				{config.showHeader && (
+					<>
+						<a href={`/${config.title.id}`} css={largeLinkStyles}>
+							{config.titleIcon && config.titleIcon}
 							{config.title.label}
 						</a>
-					</li>
+						<BackgroundImage images={config.backgroundImages} />
+					</>
 				)}
-				{config.links.map((link) => (
-					<li key={link.label} css={listItem}>
-						<a
-							href={`/${link.id}`}
-							css={[
-								smallLink,
-								pageId === link.id && boldSmallLink,
-							]}
-						>
-							{link.label}
-						</a>
-					</li>
-				))}
-			</ul>
-		</nav>
+
+				<ul css={list(config.showHeader)}>
+					{!config.showHeader && (
+						<li css={listItem}>
+							<a
+								href={`/${config.title.id}`}
+								css={[
+									smallLink,
+									primaryLinkStyles,
+									pageId === config.title.id && boldSmallLink,
+								]}
+							>
+								{config.titleIcon}
+								{config.title.label}
+							</a>
+						</li>
+					)}
+					{config.links.map((link) => (
+						<li key={link.label} css={listItem}>
+							<a
+								href={`/${link.id}`}
+								css={[
+									smallLink,
+									pageId === link.id && boldSmallLink,
+								]}
+							>
+								{link.label}
+							</a>
+						</li>
+					))}
+				</ul>
+			</nav>
+		</div>
 	);
 };
 
