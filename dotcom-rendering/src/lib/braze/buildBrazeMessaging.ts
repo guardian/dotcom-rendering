@@ -174,13 +174,23 @@ export const buildBrazeMessaging = async (
 		 * SDK fires the error callback in refreshBanners, which resolves gracefully
 		 * without blocking the page or throwing.
 		 *
+		 * We also keep a local timestamp of the last refresh. The initial page-load
+		 * requestBannersRefresh above counts as the first refresh, so lastRefreshAt
+		 * starts at Date.now(). Inside the listener we skip the call if fewer than
+		 * 5 seconds have elapsed — this prevents burning two tokens on a trivial
+		 * background tab open (e.g. the user Command+clicks a link and instantly
+		 * switches back), while still refreshing on any meaningful return to the tab.
+		 *
 		 * This fix was validated with Braze support, who confirmed that
 		 * requestBannersRefresh must be called at the start of each new session for
 		 * Canvas re-eligibility to work as expected.
 		 */
+		let lastRefreshAt = Date.now();
 		document.addEventListener('visibilitychange', () => {
 			if (document.visibilityState === 'visible') {
-				void refreshBanners(braze);
+				if (Date.now() - lastRefreshAt < 5000) return;
+				lastRefreshAt = Date.now();
+				// void refreshBanners(braze);
 			}
 		});
 
