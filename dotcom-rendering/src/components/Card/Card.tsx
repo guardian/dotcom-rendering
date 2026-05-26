@@ -70,7 +70,7 @@ import { TrailText, type TrailTextSize } from './components/TrailText';
 export type Position = 'inner' | 'outer' | 'none';
 
 export type LiveUpdatesConfig = {
-	position: 'inner' | 'outer';
+	position: Omit<Position, 'none'>;
 	direction: Alignment;
 	directionOnMobile?: 'horizontal' | 'vertical';
 	displayHeader: boolean;
@@ -330,11 +330,11 @@ const getMedia = ({
 };
 
 const decideSublinkPosition = (
+	hasLiveUpdates: boolean,
 	supportingContent?: DCRSupportingContent[],
 	mediaPositionOnDesktop?: MediaPositionType,
 	alignment?: Alignment,
 	supportingContentPosition?: Position,
-	showLivePlayable?: boolean,
 ): 'inner' | 'outer' | 'none' => {
 	if (!supportingContent || supportingContent.length === 0) {
 		return 'none';
@@ -347,7 +347,7 @@ const decideSublinkPosition = (
 	if (
 		mediaPositionOnDesktop === 'top' ||
 		mediaPositionOnDesktop === 'bottom' ||
-		showLivePlayable
+		hasLiveUpdates
 	) {
 		return 'outer';
 	}
@@ -417,9 +417,6 @@ export const Card = ({
 	isOnwardContent = false,
 	isExternalLink,
 	slideshowImages,
-	showLivePlayable = false,
-	liveUpdatesAlignment = 'vertical',
-	liveUpdatesPosition = 'inner',
 	onwardsSource,
 	showVideo = true,
 	serverTime,
@@ -436,14 +433,17 @@ export const Card = ({
 	subtitleSize = 'small',
 	starRatingSize = 'small',
 	articleMedia,
+	liveUpdates,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
+	const hasLiveUpdates = !isUndefined(liveUpdates);
+
 	const sublinkPosition = decideSublinkPosition(
+		hasLiveUpdates,
 		supportingContent,
 		mediaPositionOnDesktop,
 		supportingContentAlignment,
 		supportingContentPosition,
-		showLivePlayable,
 	);
 	const showQuotes = !!showQuotedHeadline;
 
@@ -670,7 +670,7 @@ export const Card = ({
 			mediaPositionOnMobile === 'bottom'
 		) {
 			return {
-				row: showLivePlayable ? 'small' : 'tiny',
+				row: hasLiveUpdates ? 'small' : 'tiny',
 				column: 'large',
 			};
 		}
@@ -1188,7 +1188,7 @@ export const Card = ({
 							/>
 						)}
 
-						{!isOpinionCardWithAvatar && !showLivePlayable && (
+						{!isOpinionCardWithAvatar && !hasLiveUpdates && (
 							<CardFooter
 								format={format}
 								age={decideAge()}
@@ -1206,30 +1206,23 @@ export const Card = ({
 								isNewsletter={isNewsletter}
 							/>
 						)}
-						{showLivePlayable &&
-							liveUpdatesPosition === 'inner' && (
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<LatestLinks
-										id={linkTo}
-										direction={
-											isFlexibleContainer
-												? liveUpdatesAlignment
-												: supportingContentAlignment
-										}
-										containerPalette={containerPalette}
-										serverTime={serverTime}
-										displayHeader={isFlexibleContainer}
-										directionOnMobile={
-											isFlexibleContainer
-												? 'horizontal'
-												: undefined
-										}
-									></LatestLinks>
-								</Island>
-							)}
+						{liveUpdates?.position === 'inner' && (
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<LatestLinks
+									id={linkTo}
+									direction={liveUpdates.direction}
+									containerPalette={containerPalette}
+									serverTime={serverTime}
+									displayHeader={liveUpdates.displayHeader}
+									directionOnMobile={
+										liveUpdates.directionOnMobile
+									}
+								></LatestLinks>
+							</Island>
+						)}
 					</div>
 
 					{/* This div is needed to push this content to the bottom of the card */}
@@ -1267,26 +1260,22 @@ export const Card = ({
 							: 0,
 				}}
 			>
-				{showLivePlayable && liveUpdatesPosition === 'outer' && (
+				{liveUpdates?.position === 'outer' && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<LatestLinks
 							id={linkTo}
-							direction={
-								isFlexibleContainer
-									? liveUpdatesAlignment
-									: supportingContentAlignment
-							}
+							direction={liveUpdates.direction}
 							containerPalette={containerPalette}
 							serverTime={serverTime}
-							displayHeader={isFlexibleContainer}
-							directionOnMobile={'horizontal'}
+							displayHeader={liveUpdates.displayHeader}
+							directionOnMobile={liveUpdates.directionOnMobile}
 						></LatestLinks>
 					</Island>
 				)}
 
 				{decideOuterSublinks()}
 
-				{isOpinionCardWithAvatar && !showLivePlayable && (
+				{isOpinionCardWithAvatar && !hasLiveUpdates && (
 					<CardFooter
 						format={format}
 						age={decideAge()}

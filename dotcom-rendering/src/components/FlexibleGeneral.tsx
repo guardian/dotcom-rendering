@@ -10,7 +10,7 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type { Position } from './Card/Card';
+import type { LiveUpdatesConfig, Position } from './Card/Card';
 import { LI } from './Card/components/LI';
 import type {
 	MediaPositionType,
@@ -305,6 +305,15 @@ const SplashCardLayout = ({
 		!!card.avatarUrl,
 	);
 
+	const liveUpdates: LiveUpdatesConfig | undefined = card.showLivePlayable
+		? {
+				position: 'inner',
+				direction: liveUpdatesAlignment,
+				directionOnMobile: 'horizontal',
+				displayHeader: true,
+		  }
+		: undefined;
+
 	return (
 		<UL
 			padBottom={!isLastRow}
@@ -330,15 +339,11 @@ const SplashCardLayout = ({
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={
-						card.showLivePlayable
-							? 'horizontal'
-							: supportingContentAlignment
+						liveUpdates ? 'horizontal' : supportingContentAlignment
 					}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					kickerText={card.kickerText}
-					showLivePlayable={card.showLivePlayable}
-					liveUpdatesAlignment={liveUpdatesAlignment}
 					isFlexSplash={true}
 					showTopBarDesktop={false}
 					showTopBarMobile={
@@ -349,8 +354,9 @@ const SplashCardLayout = ({
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					subtitleSize={subtitleSize}
-					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
+					headlinePosition={liveUpdates ? 'outer' : 'inner'}
 					starRatingSize="medium"
+					liveUpdates={liveUpdates}
 				/>
 			</LI>
 		</UL>
@@ -360,7 +366,7 @@ const SplashCardLayout = ({
 type BoostedCardProperties = {
 	headlineSizes: ResponsiveFontSize;
 	mediaSize: MediaSizeType;
-	liveUpdatesPosition: Position;
+	liveUpdatesPosition: Omit<Position, 'none'>;
 	supportingContentAlignment: Alignment;
 	subtitleSize: SubtitleSize;
 };
@@ -447,6 +453,15 @@ const FullWidthCardLayout = ({
 		card.avatarUrl,
 	);
 
+	const liveUpdates: LiveUpdatesConfig | undefined = card.showLivePlayable
+		? {
+				position: liveUpdatesPosition,
+				direction: 'horizontal',
+				directionOnMobile: 'horizontal',
+				displayHeader: true,
+		  }
+		: undefined;
+
 	const shouldShowImmersive = card.isImmersive;
 
 	if (shouldShowImmersive) {
@@ -488,26 +503,22 @@ const FullWidthCardLayout = ({
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={
-						card.showLivePlayable
-							? 'horizontal'
-							: supportingContentAlignment
+						liveUpdates ? 'horizontal' : supportingContentAlignment
 					}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					kickerText={card.kickerText}
-					showLivePlayable={card.showLivePlayable}
-					liveUpdatesAlignment="horizontal"
 					showTopBarDesktop={false}
 					showTopBarMobile={
 						!isFirstRow ||
 						(containerLevel === 'Primary' &&
 							!isMediaCard(card.format))
 					}
-					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					subtitleSize={subtitleSize}
 					starRatingSize="medium"
+					liveUpdates={liveUpdates}
 				/>
 			</LI>
 		</UL>
@@ -586,7 +597,6 @@ const HalfWidthCardLayout = ({
 							mediaSize="small"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
-							showLivePlayable={false}
 							showTopBarDesktop={false}
 							showTopBarMobile={
 								!isFirstRow ||

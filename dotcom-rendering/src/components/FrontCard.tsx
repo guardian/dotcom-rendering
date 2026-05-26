@@ -55,7 +55,8 @@ export const FrontCard = (props: Props) => {
 		liveUpdates: trail.showLivePlayable
 			? {
 					position: 'inner',
-					direction: 'vertical',
+					direction:
+						cardProps.supportingContentAlignment ?? 'vertical',
 					displayHeader: false,
 			  }
 			: undefined,
