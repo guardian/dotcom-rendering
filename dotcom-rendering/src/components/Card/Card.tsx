@@ -255,7 +255,6 @@ const getMedia = ({
 	slideshowImages,
 	mainMedia,
 	canPlayInline,
-	isFrontContainer,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -264,7 +263,6 @@ const getMedia = ({
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
-	isFrontContainer: boolean;
 }) => {
 	if (mainMedia?.type === 'SelfHostedVideo' && canPlayInline) {
 		let type: CardMediaType;
@@ -301,11 +299,7 @@ const getMedia = ({
 		return { type: 'avatar', avatarUrl } as const;
 	}
 
-	if (
-		mainMedia?.type === 'Audio' &&
-		mainMedia.podcastImage &&
-		isFrontContainer
-	) {
+	if (mainMedia?.type === 'Audio' && mainMedia.podcastImage) {
 		return {
 			...mainMedia,
 			type: 'podcast',
@@ -538,7 +532,6 @@ export const Card = ({
 		slideshowImages,
 		mainMedia,
 		canPlayInline,
-		isFrontContainer,
 	});
 
 	const isSelfHostedVideo =
