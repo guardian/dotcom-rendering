@@ -69,6 +69,13 @@ import { TrailText, type TrailTextSize } from './components/TrailText';
 
 export type Position = 'inner' | 'outer' | 'none';
 
+export type LiveUpdatesConfig = {
+	position: 'inner' | 'outer';
+	direction: Alignment;
+	directionOnMobile?: 'horizontal' | 'vertical';
+	displayHeader: boolean;
+};
+
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
@@ -134,10 +141,6 @@ export type Props = {
 	discussionId?: string;
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
-	/** Determines if liveblog update links are displayed on a card */
-	showLivePlayable?: boolean;
-	liveUpdatesAlignment?: Alignment;
-	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
 	showVideo?: boolean;
 	/** Allows the consumer to set the aspect ratio on the media */
@@ -162,6 +165,11 @@ export type Props = {
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	starRatingSize?: RatingSizeType;
+	/** Determines if liveblog update links are displayed on a card.
+	 * The config contains all necessary layout decisions determined
+	 * by the parent container
+	 **/
+	liveUpdates?: LiveUpdatesConfig;
 };
 
 const waveformWrapper = (
