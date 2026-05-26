@@ -2826,13 +2826,90 @@ const captionOverlayText: PaletteFunction = () => {
 	return sourcePalette.neutral[100];
 };
 
-const keyEventBulletLight: PaletteFunction = () => sourcePalette.neutral[46];
-const keyEventBulletDark: PaletteFunction = () => sourcePalette.neutral[60];
+const keyEventBulletLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Culture:
+			return sourcePalette.culture[300];
+		case Pillar.Opinion:
+			// opinion[300] is deprecated and is the same value as opinion[400]
+			return sourcePalette.opinion[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
 
-const keyEventBulletHoverLight: PaletteFunction = () =>
-	sourcePalette.neutral[0];
-const keyEventBulletHoverDark: PaletteFunction = () =>
-	sourcePalette.neutral[86];
+const keyEventBulletDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[500];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[500];
+		case Pillar.Sport:
+			return sourcePalette.sport[500];
+		case Pillar.Culture:
+			return sourcePalette.culture[500];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
+
+const keyEventBulletHoverLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[200];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[200];
+		case Pillar.Sport:
+			return sourcePalette.sport[200];
+		case Pillar.Culture:
+			return sourcePalette.culture[200];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const keyEventBulletHoverDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[200];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[200];
+		case Pillar.Sport:
+			return sourcePalette.sport[200];
+		case Pillar.Culture:
+			return sourcePalette.culture[200];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
 
 const keyEventTitleLight: PaletteFunction = () => sourcePalette.neutral[7];
 const keyEventTitleDark: PaletteFunction = () => sourcePalette.neutral[86];
