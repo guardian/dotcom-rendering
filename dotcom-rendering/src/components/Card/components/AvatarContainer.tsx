@@ -7,7 +7,6 @@ type Props = {
 	imageSize: MediaSizeType;
 	imagePositionOnDesktop: MediaPositionType;
 	imagePositionOnMobile: MediaPositionType;
-	isFlexibleContainer: boolean;
 };
 
 const sideMarginStyles = css`
@@ -16,7 +15,6 @@ const sideMarginStyles = css`
 
 const sizingStyles = (
 	imageSize: MediaSizeType,
-	isFlexibleContainer: boolean,
 	isVerticalOnDesktop: boolean,
 	isVerticalOnMobile: boolean,
 ) => {
@@ -34,19 +32,10 @@ const sizingStyles = (
 	switch (imageSize) {
 		case 'small':
 		case 'scrollable-small':
-			return isFlexibleContainer
-				? css`
-						width: 90px;
-						height: 90px;
-						${until.tablet} {
-							height: 80px;
-							width: 80px;
-						}
-				  `
-				: css`
-						width: 80px;
-						height: 80px;
-				  `;
+			return css`
+				width: 80px;
+				height: 80px;
+			`;
 		case 'large':
 		case 'xlarge':
 			return css`
@@ -71,6 +60,13 @@ const sizingStyles = (
 				}
 			`;
 		case 'medium':
+		case 'carousel':
+		case 'scrollable-medium':
+		case 'podcast':
+		case 'highlights-card':
+		case 'feature':
+		case 'feature-large':
+		case 'feature-immersive':
 		default:
 			return css`
 				width: 90px;
@@ -88,7 +84,6 @@ export const AvatarContainer = ({
 	imageSize,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
-	isFlexibleContainer,
 }: Props) => {
 	const isVerticalOnDesktop =
 		imagePositionOnDesktop === 'top' || imagePositionOnDesktop === 'bottom';
@@ -101,7 +96,6 @@ export const AvatarContainer = ({
 				sideMarginStyles,
 				sizingStyles(
 					imageSize,
-					isFlexibleContainer,
 					isVerticalOnDesktop,
 					isVerticalOnMobile,
 				),

@@ -924,7 +924,6 @@ export const Card = ({
 								imageSize={mediaSize}
 								imagePositionOnDesktop={mediaPositionOnDesktop}
 								imagePositionOnMobile={mediaPositionOnMobile}
-								isFlexibleContainer={isFlexibleContainer}
 							>
 								<Avatar
 									src={media.avatarUrl}
