@@ -16,7 +16,7 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FetchMoreGalleriesData } from '../components/FetchMoreGalleriesData.island';
 import { Footer } from '../components/Footer';
@@ -151,7 +151,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						<AdPortals />
 					</Island>
 				)}
-				<DirectoryPageNav
+				<DirectoryPageNavIsland
 					pageTags={frontendData.tags}
 					pageId={frontendData.pageId}
 				/>

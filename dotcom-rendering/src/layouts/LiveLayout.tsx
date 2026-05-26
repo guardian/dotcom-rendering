@@ -20,7 +20,7 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.island';
 import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
@@ -363,7 +363,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 
 			<main data-layout="LiveLayout">
-				<DirectoryPageNav
+				<DirectoryPageNavIsland
 					pageTags={article.tags}
 					pageId={article.pageId}
 				/>

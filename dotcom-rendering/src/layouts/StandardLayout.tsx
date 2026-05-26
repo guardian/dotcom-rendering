@@ -22,7 +22,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
@@ -463,7 +463,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<AdPortals />
 					</Island>
 				)}
-				<DirectoryPageNav
+				<DirectoryPageNavIsland
 					pageId={article.pageId}
 					pageTags={article.tags}
 				/>

@@ -20,7 +20,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -373,7 +373,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						<AdPortals />
 					</Island>
 				)}
-				<DirectoryPageNav
+				<DirectoryPageNavIsland
 					pageId={article.pageId}
 					pageTags={article.tags}
 				/>

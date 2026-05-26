@@ -11,6 +11,7 @@ import {
 	textSansBold14Object,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
+import { getInteractionClient } from '../lib/bridgetApi';
 import { generateImageURL } from '../lib/image';
 import { useBetaAB } from '../lib/useAB';
 import {
@@ -252,6 +253,14 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		slimNav,
 	} = config;
 
+	const onTouchStart = async () => {
+		await getInteractionClient().disableArticleSwipe(true);
+	};
+
+	const onTouchEnd = async () => {
+		await getInteractionClient().disableArticleSwipe(false);
+	};
+
 	const backgroundColor = getColour(configBackgroundColour, renderingTarget);
 
 	const textColor = getColour(configTextColor, renderingTarget);
@@ -388,9 +397,11 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const primaryLinkHoverStylesApp = css({
 		'&:not(:hover)': {
-			color: palette.sport[400],
+			color: themePalette('--apps-directory-page-nav-primary-link-color'),
 			'svg rect, svg circle': {
-				fill: palette.sport[400],
+				fill: themePalette(
+					'--apps-directory-page-nav-primary-link-color',
+				),
 			},
 		},
 	});
@@ -432,7 +443,11 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 					</>
 				)}
 
-				<ul css={list}>
+				<ul
+					css={list}
+					onTouchStart={isApps ? void onTouchStart : undefined}
+					onTouchEnd={isApps ? void onTouchEnd : undefined}
+				>
 					{config.slimNav && (
 						<li css={listItem}>
 							<a
