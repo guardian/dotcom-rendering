@@ -8,6 +8,7 @@ on:
     paths:
       - 'ab-testing/**'
       - '.github/workflows/ab-testing-ci.yml'
+      - 'pnpm-workspace.yaml'
 
 jobs:
   ab-testing-checks:
@@ -17,7 +18,7 @@ jobs:
       run:
         working-directory: ab-testing
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -39,7 +40,7 @@ jobs:
       FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
     needs: [ab-testing-checks]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -65,7 +66,7 @@ jobs:
       contents: read
     needs: [ab-testing-checks]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -90,7 +91,7 @@ jobs:
       contents: read
     needs: [ab-testing-checks]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -120,7 +121,7 @@ jobs:
       contents: read
     needs: [ab-testing-checks]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -154,7 +155,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -163,25 +164,25 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Fetch config build
-        uses: actions/download-artifact@v7.0.0
+        uses: actions/download-artifact@v8.0.1
         with:
           name: ab-testing-build
           path: ab-testing/config/dist
 
       - name: Fetch UI build
-        uses: actions/download-artifact@v7.0.0
+        uses: actions/download-artifact@v8.0.1
         with:
           name: ui-build
           path: ab-testing/frontend/output/ab-tests.html
 
       - name: Fetch Deploy Lambda build
-        uses: actions/download-artifact@v7.0.0
+        uses: actions/download-artifact@v8.0.1
         with:
           name: ab-testing-deploy-lambda-build
           path: ab-testing/deploy-lambda/dist/lambda.zip
 
       - name: Fetch Notification Lambda build
-        uses: actions/download-artifact@v7.0.0
+        uses: actions/download-artifact@v8.0.1
         with:
           name: ab-testing-notification-lambda-build
           path: ab-testing/notification-lambda/dist/lambda.zip

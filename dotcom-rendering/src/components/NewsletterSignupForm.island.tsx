@@ -204,7 +204,7 @@ const SuccessMessage = ({
 				</span>
 			</InlineSuccess>
 			<LinkButton
-				href="/email-newsletters"
+				href="/email-newsletters?INTCMP=DOTCOM_NEWSLETTER_SIGNUP_CARD"
 				priority="tertiary"
 				theme={newsletterTertiaryButtonTheme}
 				cssOverrides={tryAgainButtonStyles}

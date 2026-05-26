@@ -26,6 +26,7 @@ import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { overridePaletteColours } from './HostedArticleLayout';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -198,17 +199,17 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 						padSides={true}
 						element="header"
 					>
-						<Island
-							priority="enhancement"
-							defer={{ until: 'idle' }}
-						>
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<HostedContentHeader branding={branding} />
 						</Island>
 					</Section>
 				</Stuck>
 			) : null}
 
-			<main data-layout="HostedVideoLayout">
+			<main
+				data-layout="HostedVideoLayout"
+				css={overridePaletteColours(branding?.hostedCampaignColour)}
+			>
 				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
 						<MainMedia
@@ -301,7 +302,6 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										frontendData.isRightToLeftLang
 									}
-									accentColor={branding?.hostedCampaignColour}
 								/>
 								<HostedContentDisclaimer />
 							</ArticleContainer>
@@ -324,6 +324,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 								backgroundImage={cta.image}
 								text={cta.label}
 								buttonText={cta.btnText}
+								accentColor={branding?.hostedCampaignColour}
 							/>
 						</div>
 					)}
