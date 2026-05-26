@@ -88,7 +88,7 @@ const textblockTextDark: PaletteFunction = () => 'inherit';
 const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
-			return sourcePalette.neutral[97];
+			return sourcePalette.neutral[7];
 		default: {
 			switch (design) {
 				case ArticleDesign.Editorial:
@@ -193,19 +193,8 @@ const headlineMatchTextLight: PaletteFunction = (format) =>
 const headlineMatchTextDark: PaletteFunction = (format) =>
 	seriesTitleMatchTextDark(format);
 
-const headlineBackgroundLight: PaletteFunction = ({
-	display,
-	design,
-	theme,
-}) => {
+const headlineBackgroundLight: PaletteFunction = ({ display, design }) => {
 	switch (display) {
-		case ArticleDisplay.Immersive:
-			switch (theme) {
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[300];
-				default:
-					return sourcePalette.neutral[7];
-			}
 		case ArticleDisplay.Showcase:
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Standard:

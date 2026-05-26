@@ -2,7 +2,11 @@ import { css, type SerializedStyles } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
 import { grid } from '../../grid';
 
-export type LayoutType = 'standard' | 'media' | 'portrait';
+export type LayoutType =
+	| 'standard'
+	| 'media'
+	| 'immersiveLandscape'
+	| 'immersivePortrait';
 
 export type Area =
 	| 'title'
@@ -117,7 +121,7 @@ const mediaCss: LayoutCssMap = {
 	},
 };
 
-const portraitCss: LayoutCssMap = {
+const immersivePortraitCss: LayoutCssMap = {
 	title: {
 		mobile: 'grid-row: 1;',
 		tablet: 'grid-row: 1;',
@@ -131,7 +135,7 @@ const portraitCss: LayoutCssMap = {
 		leftCol: 'grid-row: 2; grid-column: left-column-start / 9;',
 		wide: 'grid-row: 2; grid-column: left-column-start / 10;',
 	},
-	'main-media': {
+	media: {
 		mobile: 'grid-row: 3;',
 		tablet: 'grid-row: 3;',
 		desktop: 'grid-row: 1 / span 4; grid-column: 8 / right-column-end;',
@@ -143,6 +147,7 @@ const portraitCss: LayoutCssMap = {
 		tablet: 'grid-row: 4;',
 		desktop: 'grid-row: 3; grid-column: centre-column-start / 7;',
 		leftCol: 'grid-row: 3; grid-column: centre-column-start / 8;',
+		wide: 'grid-row: 3; grid-column: centre-column-start / 9;',
 	},
 	meta: {
 		mobile: 'grid-row: 5;',
@@ -162,10 +167,51 @@ const portraitCss: LayoutCssMap = {
 	},
 };
 
+const immersiveLandscapeCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		desktop: 'grid-row: 2;',
+	},
+	headline: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		desktop: 'grid-row: 3 / span 2;',
+	},
+	media: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+		desktop:
+			'grid-row: 1 / span 3; grid-column: centre-column-start / right-column-end;',
+		leftCol:
+			'grid-row: 1 / span 3; grid-column: left-column-start / right-column-end;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		desktop: 'grid-row: 5;',
+	},
+	meta: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		desktop: 'grid-row: 6; grid-column: centre-column-start / 8;',
+		leftCol:
+			'grid-row: 6 / span 2; grid-column: left-column-start / left-column-end;',
+	},
+	body: {
+		mobile: 'grid-row: 6;',
+	},
+	'right-column': {
+		desktop:
+			'grid-row: 5 / span 3; grid-column: right-column-start / right-column-end;',
+	},
+};
+
 const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	standard: standardCss,
 	media: mediaCss,
-	portrait: portraitCss,
+	immersiveLandscape: immersiveLandscapeCss,
+	immersivePortrait: immersivePortraitCss,
 };
 
 /**

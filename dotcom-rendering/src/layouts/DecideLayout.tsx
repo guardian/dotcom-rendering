@@ -10,7 +10,6 @@ import { GalleryLayout } from './GalleryLayout';
 import { HostedArticleLayout } from './HostedArticleLayout';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { HostedVideoLayout } from './HostedVideoLayout';
-import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
@@ -58,7 +57,7 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 				}
 				default: {
 					return (
-						<ImmersiveLayout
+						<StandardLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -237,7 +236,7 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 				}
 				default: {
 					return (
-						<ImmersiveLayout
+						<StandardLayout
 							article={article.frontendData}
 							format={format}
 							NAV={NAV}
