@@ -2,6 +2,11 @@ packages:
   - 'dotcom-rendering'
   - 'ab-testing'
   - 'ab-testing/*'
+allowBuilds:
+  '@swc/core': true
+  esbuild: true
+  nice-napi: true
+blockExoticSubdeps: true
 catalog:
   '@aws-sdk/client-s3': 3.995.0
   '@aws-sdk/client-ssm': 3.995.0
@@ -24,11 +29,6 @@ catalog:
   tslib: 2.6.2
   type-fest: 4.21.0
   typescript: 5.9.3
-allowBuilds:
-  '@swc/core': true
-  esbuild: true
-  nice-napi: true
 minimumReleaseAge: 2880 # 2 day minimum package version age
 minimumReleaseAgeExclude:
   - '@guardian/*'
-blockExoticSubdeps: true
