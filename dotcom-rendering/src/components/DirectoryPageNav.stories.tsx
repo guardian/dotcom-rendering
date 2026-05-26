@@ -16,33 +16,38 @@ setBetaABTests(mockAB);
 const meta = preview.meta({
 	component: DirectoryPageNav,
 	title: 'Components/Directory Page Nav',
-	parameters: {
-		chromatic: {
-			modes: {
-				'light mobileMedium': allModes['light mobileMedium'],
-				'light desktop': allModes['light desktop'],
-				'light leftCol': allModes['light leftCol'],
-			},
+});
+
+// So that these aren't applied to the apps stories
+const webChromaticParams = {
+	chromatic: {
+		modes: {
+			'light mobileMedium': allModes['light mobileMedium'],
+			'light desktop': allModes['light desktop'],
+			'light leftCol': allModes['light leftCol'],
 		},
 	},
-});
+};
 
 export const WomensEuro2025 = meta.story({
 	args: {
 		pageId: 'football/women-s-euro-2025/table',
 	},
+	parameters: webChromaticParams,
 });
 
 export const WorldCup2026 = meta.story({
 	args: {
 		pageId: 'football/world-cup-2026',
 	},
+	parameters: webChromaticParams,
 });
 
 export const WorldCup2026MatchCenter = meta.story({
 	args: {
 		pageId: 'football/world-cup-2026/overview',
 	},
+	parameters: webChromaticParams,
 });
 
 export const WorldCup2026ArticleWeb = meta.story({
@@ -52,10 +57,11 @@ export const WorldCup2026ArticleWeb = meta.story({
 			{
 				id: 'football/world-cup-2026',
 				type: 'Topic',
-				title: 'World Cup 2026',
+				title: 'World Cup 2026 Fronts',
 			},
 		],
 	},
+	parameters: webChromaticParams,
 });
 
 export const WorldCup2026ArticleApp = meta.story({
@@ -95,10 +101,12 @@ export const OtherCompetition = meta.story({
 	args: {
 		pageId: 'football/premierleague/table',
 	},
+	parameters: webChromaticParams,
 });
 
 export const WinterOlympics = meta.story({
 	args: {
 		pageId: 'sport/winter-olympics-2026',
 	},
+	parameters: webChromaticParams,
 });
