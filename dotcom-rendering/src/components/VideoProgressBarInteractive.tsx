@@ -38,6 +38,7 @@ const trackStyles = css`
 const thumbStyles = css`
 	-webkit-appearance: none;
 	appearance: none;
+	pointer-events: auto;
 	width: 14px;
 	height: 14px;
 	border: none;
@@ -49,9 +50,9 @@ const thumbStyles = css`
 
 const progressBarStyles = (roundedProgressPercentage: number) => css`
 	width: 100%;
-	cursor: pointer;
 	height: 5px;
 	margin: 0;
+	cursor: pointer;
 	-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
 	appearance: none;
 	/* The colour to the left of the thumb is different to the right to indicate progress */
@@ -66,6 +67,15 @@ const progressBarStyles = (roundedProgressPercentage: number) => css`
 		)} ${roundedProgressPercentage}%,
 		${palette('--video-progress-bar-interactive-background')} 100%
 	)`};
+
+	/**
+	 * Prevent touches on the progress bar on touch devices from changing the time.
+	 * Only the thumb can be used to change the time on touch devices.
+	 */
+	pointer-events: none;
+	@media (hover: hover) {
+		pointer-events: auto;
+	}
 
 	/* We don't use the default focus ring as it includes the thumb, which looks odd. */
 	:focus-visible {
@@ -124,9 +134,10 @@ const handleChange = (
 type Props = {
 	videoId: string;
 	currentTime: number;
+	duration: number;
 	updateCurrentTime: (time: number) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-	duration: number;
+	handleInput: (event: React.FormEvent<HTMLInputElement>) => void;
 };
 
 /**
@@ -138,9 +149,10 @@ type Props = {
 export const VideoProgressBarInteractive = ({
 	videoId,
 	currentTime,
+	duration,
 	updateCurrentTime,
 	handleKeyDown,
-	duration,
+	handleInput,
 }: Props) => {
 	if (duration <= 0) {
 		return null;
@@ -170,13 +182,14 @@ export const VideoProgressBarInteractive = ({
 				max={100}
 				step={0.01}
 				tabIndex={0}
-				onChange={(event) =>
+				onChange={(event) => {
 					handleChange(
 						event.target.value,
 						duration,
 						updateCurrentTime,
-					)
-				}
+					);
+				}}
+				onInput={handleInput}
 				onKeyDown={handleKeyDown}
 			/>
 		</div>
