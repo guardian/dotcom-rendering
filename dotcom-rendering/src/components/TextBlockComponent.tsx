@@ -291,7 +291,7 @@ const buildElementTree =
 					 * @see https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links
 					 */
 					rel: isSkimlink(href)
-						? 'sponsored'
+						? 'sponsored noreferrer noopener'
 						: getAttrs(node)?.getNamedItem('rel')?.value,
 					key,
 					children,
