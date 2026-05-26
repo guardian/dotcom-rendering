@@ -20,18 +20,20 @@ const sendPreviewTracking = ({
 	eventDescription,
 	renderingTarget,
 	renderUrl,
+	isSignedIn,
 }: {
 	identityName: string;
 	eventDescription: PreviewEventDescription;
 	renderingTarget: RenderingTarget;
 	renderUrl: string;
+	isSignedIn?: boolean | 'Pending';
 }) => {
 	sendNewsletterSignupEvent({
 		action: eventDescription === 'preview-open' ? 'EXPAND' : 'CLOSE',
 		identityName,
 		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName),
 		renderingTarget,
-		value: { eventDescription, renderUrl },
+		value: { eventDescription, renderUrl, isSignedIn },
 	});
 };
 
@@ -90,12 +92,13 @@ export const NewsletterSignupCardContainer = ({
 					eventDescription: 'preview-open',
 					renderingTarget,
 					renderUrl,
+					isSignedIn,
 				});
 			}
 
 			return true;
 		});
-	}, [identityName, renderingTarget, renderUrl]);
+	}, [identityName, isSignedIn, renderingTarget, renderUrl]);
 
 	const trackPreviewLinkOpen = useCallback(() => {
 		if (!renderUrl) {
@@ -107,8 +110,9 @@ export const NewsletterSignupCardContainer = ({
 			eventDescription: 'preview-open',
 			renderingTarget,
 			renderUrl,
+			isSignedIn,
 		});
-	}, [identityName, renderingTarget, renderUrl]);
+	}, [identityName, isSignedIn, renderingTarget, renderUrl]);
 
 	const closePreview = useCallback(() => {
 		setIsPreviewOpen((isOpen) => {
@@ -118,12 +122,13 @@ export const NewsletterSignupCardContainer = ({
 					eventDescription: 'preview-close',
 					renderingTarget,
 					renderUrl,
+					isSignedIn,
 				});
 			}
 
 			return false;
 		});
-	}, [identityName, renderingTarget, renderUrl]);
+	}, [identityName, isSignedIn, renderingTarget, renderUrl]);
 
 	const previewAction = hasPreviewUrl
 		? renderingTarget === 'Apps'

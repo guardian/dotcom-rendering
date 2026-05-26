@@ -102,7 +102,7 @@ const NewsletterSignupHeader = (
 		<div css={titleAndMetaStyles}>
 			<div css={frequencyTagStyles}>
 				<SvgNewsletterFilled />
-				Newsletter | {props.frequency}
+				Free newsletter | {props.frequency}
 			</div>
 			<p css={titleStyles}>
 				Sign up to <span>{props.name}</span>

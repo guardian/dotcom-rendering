@@ -6,6 +6,7 @@ export const AB_TEST_NAME = 'newsletters-newsletter-signup-card';
 
 export type NewsletterEventDescription =
 	| 'click-button'
+	| 'email-input-focused'
 	| 'form-submission'
 	| 'submission-confirmed'
 	| 'submission-failed'
@@ -17,6 +18,7 @@ export type NewsletterEventDescription =
 
 export const EVENT_DESCRIPTION_TO_ACTION = {
 	'click-button': 'CLICK',
+	'email-input-focused': 'EXPAND',
 	'form-submission': 'ANSWER',
 	'captcha-not-passed': 'ANSWER',
 	'captcha-passed': 'ANSWER',

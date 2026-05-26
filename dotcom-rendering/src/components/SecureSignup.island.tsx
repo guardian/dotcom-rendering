@@ -208,6 +208,7 @@ const sendTracking = (
 	newsletterId: string,
 	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
+	isSignedIn: boolean | 'Pending',
 	abTest?: AbTest,
 ): void => {
 	sendNewsletterSignupEvent({
@@ -215,7 +216,7 @@ const sendTracking = (
 		identityName: newsletterId,
 		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.control(newsletterId),
 		renderingTarget,
-		value: { eventDescription },
+		value: { eventDescription, isSignedIn },
 		abTest,
 	});
 };
@@ -275,7 +276,13 @@ export const SecureSignup = ({
 			document.querySelector('input[type="email"]') ?? null;
 		const emailAddress: string = input?.value ?? '';
 
-		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
+		sendTracking(
+			newsletterId,
+			'form-submission',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
 
 		const formData = buildFormData(
 			emailAddress,
@@ -305,6 +312,7 @@ export const SecureSignup = ({
 			newsletterId,
 			response.ok ? 'submission-confirmed' : 'submission-failed',
 			renderingTarget,
+			isSignedIn,
 			abTest,
 		);
 	};
@@ -320,6 +328,7 @@ export const SecureSignup = ({
 			newsletterId,
 			'captcha-load-error',
 			renderingTarget,
+			isSignedIn,
 			abTest,
 		);
 		setErrorMessage(`Sorry, the reCAPTCHA failed to load.`);
@@ -332,11 +341,18 @@ export const SecureSignup = ({
 				newsletterId,
 				'captcha-not-passed',
 				renderingTarget,
+				isSignedIn,
 				abTest,
 			);
 			return;
 		}
-		sendTracking(newsletterId, 'captcha-passed', renderingTarget, abTest);
+		sendTracking(
+			newsletterId,
+			'captcha-passed',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
 			console.error(error);
@@ -344,6 +360,7 @@ export const SecureSignup = ({
 				newsletterId,
 				'form-submit-error',
 				renderingTarget,
+				isSignedIn,
 				abTest,
 			);
 			setErrorMessage(`Sorry, there was an error signing you up.`);
@@ -352,7 +369,23 @@ export const SecureSignup = ({
 	};
 
 	const handleClick = (): void => {
-		sendTracking(newsletterId, 'click-button', renderingTarget, abTest);
+		sendTracking(
+			newsletterId,
+			'click-button',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
+	};
+
+	const handleEmailFocus = (): void => {
+		sendTracking(
+			newsletterId,
+			'email-input-focused',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
 	};
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -361,7 +394,13 @@ export const SecureSignup = ({
 			return;
 		}
 		setErrorMessage(undefined);
-		sendTracking(newsletterId, 'open-captcha', renderingTarget, abTest);
+		sendTracking(
+			newsletterId,
+			'open-captcha',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
 		recaptchaRef.current?.execute();
 	};
 
@@ -387,6 +426,7 @@ export const SecureSignup = ({
 					type="email"
 					value={userEmail ?? ''}
 					onChange={(e) => setUserEmail(e.target.value)}
+					onFocus={handleEmailFocus}
 				/>
 				{isSignedIn === false && (
 					<CheckboxGroup
