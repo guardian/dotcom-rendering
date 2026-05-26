@@ -8,6 +8,7 @@ on:
     paths:
       - 'ab-testing/**'
       - '.github/workflows/ab-testing-ci.yml'
+      - 'pnpm-workspace.yaml'
 
 jobs:
   ab-testing-checks:
