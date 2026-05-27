@@ -44,6 +44,7 @@ import type { SubtitlesPosition } from './SubtitleOverlay';
 import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import type { VideoEventKey } from './YoutubeAtom/YoutubeAtom';
+import { useBetaAB } from '../lib/useAB';
 
 /**
  * The fraction of the video required to be visible in the viewport to be considered "in view".
@@ -166,6 +167,7 @@ const fullscreenStyles = css`
 
 		/* Override the fixed aspect-ratio + width:100% on the video so it
 		   fits within the screen while preserving its aspect ratio. */
+
 		video {
 			width: 100%;
 			height: 100%;
@@ -457,6 +459,12 @@ export const SelfHostedVideo = ({
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
+
+	const ab = useBetaAB();
+
+	const isLoopClickThroughTest =
+		videoStyle === 'Loop' &&
+		ab?.isUserInTest('fronts-and-curation-loop-click-through');
 
 	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
@@ -1319,6 +1327,7 @@ export const SelfHostedVideo = ({
 						headlineText={headlineText}
 						dataLinkName={dataLinkName}
 						isExternalLink={isExternalLink}
+						isLoopClickThroughTest={isLoopClickThroughTest}
 					/>
 				</div>
 			</div>

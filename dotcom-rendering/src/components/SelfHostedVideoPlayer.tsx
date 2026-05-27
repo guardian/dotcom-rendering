@@ -43,6 +43,7 @@ const videoControlsStyles = css`
 	top: 0;
 	left: 0;
 	pointer-events: none;
+
 	& > * {
 		pointer-events: auto;
 	}
@@ -156,6 +157,7 @@ export type Props = {
 	headlineText: string;
 	dataLinkName?: string;
 	isExternalLink: boolean;
+	isLoopClickThroughTest?: boolean;
 };
 
 /**
@@ -214,6 +216,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			headlineText,
 			dataLinkName,
 			isExternalLink,
+			isLoopClickThroughTest,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -226,23 +229,18 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const showProgressBar = canShowProgressBar && currentRefExists;
 		const showIcons = canShowIcons && currentRefExists;
 
-		/*
-		 *
-		 * DO NOT MERGE TO PROD
-		 * TODO: update to ab test value
-		 * Temporary value whilst test is defined
-		 * */
-		const isInTest = true;
 		return (
 			<>
-				<CardLink
-					linkTo={linkTo}
-					headlineText={headlineText}
-					dataLinkName={dataLinkName}
-					isExternalLink={isExternalLink}
-					isVideoCard={true}
-				/>
-
+				$
+				{isLoopClickThroughTest && (
+					<CardLink
+						linkTo={linkTo}
+						headlineText={headlineText}
+						dataLinkName={dataLinkName}
+						isExternalLink={isExternalLink}
+						isLoopClickThroughTest={true}
+					/>
+				)}
 				<video
 					id={videoId}
 					css={[
@@ -270,7 +268,11 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onPlaying={handlePlaying}
 					onTimeUpdate={handleTimeUpdate}
 					onPause={handlePause}
-					onClick={isInTest ? undefined : handlePlayPauseClick}
+					onClick={
+						isLoopClickThroughTest === true
+							? undefined
+							: handlePlayPauseClick
+					}
 					onKeyDown={handleKeyDown}
 					onError={onError}
 					onEnded={handleEnded}
@@ -309,15 +311,15 @@ export const SelfHostedVideoPlayer = forwardRef(
 					className="controls-container"
 					css={[
 						videoControlsStyles,
-						isInTest && videoControlsZIndexStyles,
+						isLoopClickThroughTest && videoControlsZIndexStyles,
 					]}
 				>
-					{!isInTest && showPlayPauseIcon !== null && (
+					{!!isLoopClickThroughTest && showPlayPauseIcon !== null && (
 						<PlayPauseIcon
 							type={showPlayPauseIcon}
 							atomId={atomId}
 							handleClick={handlePlayPauseClick}
-							isInTest={false}
+							isLoopClickThroughTest={false}
 						/>
 					)}
 					{showProgressBar &&
@@ -349,12 +351,12 @@ export const SelfHostedVideoPlayer = forwardRef(
 									iconsTopPositionStyles,
 							]}
 						>
-							{isInTest && (
+							{isLoopClickThroughTest && (
 								<PlayPauseIcon
 									type={showPlayPauseIcon ?? 'pause'}
 									atomId={atomId}
 									handleClick={handlePlayPauseClick}
-									isInTest={true}
+									isLoopClickThroughTest={true}
 								/>
 							)}
 							{showFullscreenIcon && (

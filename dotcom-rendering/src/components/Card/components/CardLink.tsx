@@ -25,24 +25,27 @@ type Props = {
 	headlineText: string;
 	dataLinkName?: string;
 	isExternalLink: boolean;
-	isVideoCard?: boolean;
+	isLoopClickThroughTest?: boolean;
 };
 
 const InternalLink = ({
 	linkTo,
 	headlineText,
 	dataLinkName,
-	isVideoCard,
+	isLoopClickThroughTest,
 }: {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
-	isVideoCard?: boolean;
+	isLoopClickThroughTest?: boolean;
 }) => {
 	return (
 		<a
 			href={linkTo}
-			css={[fauxLinkStyles, isVideoCard && videoCardLinkStyles]}
+			css={[
+				fauxLinkStyles,
+				isLoopClickThroughTest && videoCardLinkStyles,
+			]}
 			data-link-name={dataLinkName}
 			aria-label={headlineText}
 		/>
@@ -53,17 +56,20 @@ const ExternalLink = ({
 	linkTo,
 	headlineText,
 	dataLinkName,
-	isVideoCard,
+	isLoopClickThroughTest,
 }: {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
-	isVideoCard: boolean;
+	isLoopClickThroughTest: boolean;
 }) => {
 	return (
 		<a
 			href={linkTo}
-			css={[fauxLinkStyles, isVideoCard && videoCardLinkStyles]}
+			css={[
+				fauxLinkStyles,
+				isLoopClickThroughTest && videoCardLinkStyles,
+			]}
 			data-link-name={dataLinkName}
 			aria-label={headlineText + ' (opens in new tab)'}
 			target="_blank"
@@ -77,7 +83,7 @@ export const CardLink = ({
 	headlineText,
 	dataLinkName = 'article', //this makes sense if the link is to an article, but should this say something like "external" if it's an external link? are there any other uses/alternatives?
 	isExternalLink,
-	isVideoCard,
+	isLoopClickThroughTest,
 }: Props) => {
 	return (
 		<>
@@ -86,7 +92,7 @@ export const CardLink = ({
 					linkTo={linkTo}
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
-					isVideoCard={!!isVideoCard}
+					isLoopClickThroughTest={isLoopClickThroughTest === true}
 				/>
 			)}
 			{!isExternalLink && (
@@ -94,7 +100,7 @@ export const CardLink = ({
 					linkTo={linkTo}
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
-					isVideoCard={!!isVideoCard}
+					isLoopClickThroughTest={isLoopClickThroughTest === true}
 				/>
 			)}
 		</>
