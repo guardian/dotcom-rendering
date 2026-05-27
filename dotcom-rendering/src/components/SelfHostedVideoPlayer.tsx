@@ -338,7 +338,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 								duration={ref.current!.duration}
 							/>
 						))}
-					{showIcons && (showFullscreenIcon || hasAudio) && (
+					{((showIcons && (showFullscreenIcon || hasAudio)) ||
+						isLoopClickThroughTest) && (
 						<div
 							css={[
 								iconsContainerStyles,
