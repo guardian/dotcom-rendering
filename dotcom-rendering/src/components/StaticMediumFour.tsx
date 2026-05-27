@@ -79,7 +79,7 @@ export const StaticMediumFour = ({
 							mediaSize="medium"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
-							showLivePlayable={false}
+							liveUpdates={undefined} // unsupported
 							showTopBarDesktop={false}
 							showTopBarMobile={
 								cardIndex !== 0 ||

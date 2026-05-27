@@ -10,6 +10,7 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
+import type { LiveUpdatesConfig } from './Card/Card';
 import { LI } from './Card/components/LI';
 import type {
 	MediaPositionType,
@@ -175,6 +176,15 @@ export const OneCardLayout = ({
 		card.showLivePlayable,
 	);
 
+	const liveUpdates: LiveUpdatesConfig | undefined = card.showLivePlayable
+		? {
+				position: 'inner',
+				direction: liveUpdatesAlignment,
+				directionOnMobile: 'horizontal',
+				displayHeader: true,
+		  }
+		: undefined;
+
 	return (
 		<UL padBottom={!isLastRow} hasLargeSpacing={!isLastRow}>
 			<LI padSides={true}>
@@ -196,8 +206,6 @@ export const OneCardLayout = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					kickerText={card.kickerText}
-					showLivePlayable={card.showLivePlayable}
-					liveUpdatesAlignment={liveUpdatesAlignment}
 					isFlexSplash={true}
 					showTopBarDesktop={!isFirstRow}
 					showTopBarMobile={
@@ -211,6 +219,7 @@ export const OneCardLayout = ({
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 					subtitleSize={subtitleSize}
 					starRatingSize="medium"
+					liveUpdates={liveUpdates}
 				/>
 			</LI>
 		</UL>
@@ -292,7 +301,7 @@ const TwoOrFourCardLayout = ({
 							mediaSize="small"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
-							showLivePlayable={false}
+							liveUpdates={undefined}
 							showTopBarDesktop={false}
 							showTopBarMobile={
 								!isFirstRow ||

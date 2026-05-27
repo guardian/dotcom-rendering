@@ -32,7 +32,7 @@ const basicCardProps: CardProps = {
 	},
 	mediaPositionOnDesktop: 'top',
 	isExternalLink: false,
-	showLivePlayable: false,
+	liveUpdates: undefined,
 	canPlayInline: true,
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',

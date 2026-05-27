@@ -13,8 +13,8 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { type OnwardsSource } from '../types/onwards';
 import { type TrailType } from '../types/trails';
-import { Card } from './Card/Card';
 import type { Props as CardProps } from './Card/Card';
+import { Card } from './Card/Card';
 import { ScrollableCarousel } from './ScrollableCarousel';
 
 type Props = {
@@ -233,7 +233,7 @@ const getDefaultCardProps = (
 		canPlayInline: false,
 		onwardsSource,
 		isOnwardContent: true,
-		showLivePlayable: false,
+		liveUpdates: undefined, // unsupported
 	};
 
 	return defaultProps;
