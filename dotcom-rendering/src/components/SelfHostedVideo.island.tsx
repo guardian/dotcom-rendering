@@ -395,6 +395,9 @@ type Props = {
 	isMainMedia?: boolean;
 	role?: RoleType;
 	restrictHeightOnDesktop?: boolean;
+	headlineText: string;
+	dataLinkName?: string;
+	isExternalLink: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -424,6 +427,9 @@ export const SelfHostedVideo = ({
 	role,
 	posterImageAspectRatio,
 	restrictHeightOnDesktop = false,
+	headlineText,
+	dataLinkName,
+	isExternalLink,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -1309,6 +1315,10 @@ export const SelfHostedVideo = ({
 						}
 						isInteractive={videoStyleSettings.isInteractive}
 						isWebKitFullscreen={isWebKitFullscreen}
+						linkTo={linkTo}
+						headlineText={headlineText}
+						dataLinkName={dataLinkName}
+						isExternalLink={isExternalLink}
 					/>
 				</div>
 			</div>

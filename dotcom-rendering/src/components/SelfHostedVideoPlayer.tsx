@@ -7,9 +7,11 @@ import {
 } from '@guardian/source/foundations';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
+import { getZIndex } from '../lib/getZIndex';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
+import { CardLink } from './Card/components/CardLink';
 import {
 	AudioIcon as AudioIconComponent,
 	FullscreenIcon,
@@ -44,6 +46,10 @@ const videoControlsStyles = css`
 	& > * {
 		pointer-events: auto;
 	}
+`;
+
+const videoControlsZIndexStyles = css`
+	z-index: ${getZIndex('video-controls-container')};
 `;
 
 const interactiveStyles = css`
@@ -145,6 +151,11 @@ export type Props = {
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
 	isWebKitFullscreen: boolean;
+	/* used by the card link component for click through to article functionality */
+	linkTo: string;
+	headlineText: string;
+	dataLinkName?: string;
+	isExternalLink: boolean;
 };
 
 /**
@@ -199,6 +210,10 @@ export const SelfHostedVideoPlayer = forwardRef(
 			iconsPosition,
 			subtitlesPosition,
 			isWebKitFullscreen,
+			linkTo,
+			headlineText,
+			dataLinkName,
+			isExternalLink,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -211,8 +226,23 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const showProgressBar = canShowProgressBar && currentRefExists;
 		const showIcons = canShowIcons && currentRefExists;
 
+		/*
+		 *
+		 * DO NOT MERGE TO PROD
+		 * TODO: update to ab test value
+		 * Temporary value whilst test is defined
+		 * */
+		const isInTest = true;
 		return (
 			<>
+				<CardLink
+					linkTo={linkTo}
+					headlineText={headlineText}
+					dataLinkName={dataLinkName}
+					isExternalLink={isExternalLink}
+					isVideoCard={true}
+				/>
+
 				<video
 					id={videoId}
 					css={[
