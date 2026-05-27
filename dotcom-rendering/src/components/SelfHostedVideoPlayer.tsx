@@ -270,7 +270,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onPlaying={handlePlaying}
 					onTimeUpdate={handleTimeUpdate}
 					onPause={handlePause}
-					onClick={handlePlayPauseClick}
+					onClick={isInTest ? undefined : handlePlayPauseClick}
 					onKeyDown={handleKeyDown}
 					onError={onError}
 					onEnded={handleEnded}
@@ -305,12 +305,19 @@ export const SelfHostedVideoPlayer = forwardRef(
 						position={subtitlesPosition}
 					/>
 				)}
-				<div className="controls-container" css={videoControlsStyles}>
-					{showPlayPauseIcon !== null && (
+				<div
+					className="controls-container"
+					css={[
+						videoControlsStyles,
+						isInTest && videoControlsZIndexStyles,
+					]}
+				>
+					{!isInTest && showPlayPauseIcon !== null && (
 						<PlayPauseIcon
 							type={showPlayPauseIcon}
 							atomId={atomId}
 							handleClick={handlePlayPauseClick}
+							isInTest={false}
 						/>
 					)}
 					{showProgressBar &&
@@ -342,6 +349,14 @@ export const SelfHostedVideoPlayer = forwardRef(
 									iconsTopPositionStyles,
 							]}
 						>
+							{isInTest && (
+								<PlayPauseIcon
+									type={showPlayPauseIcon ?? 'pause'}
+									atomId={atomId}
+									handleClick={handlePlayPauseClick}
+									isInTest={true}
+								/>
+							)}
 							{showFullscreenIcon && (
 								<FullscreenIcon
 									handleClick={handleFullscreenClick}
