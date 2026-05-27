@@ -89,6 +89,7 @@ const paddedContainer = `
 
 type VerticalRuleOptions = {
 	centre?: boolean;
+	color?: string;
 };
 
 /**
@@ -121,7 +122,7 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
       top: 0;
       bottom: 0;
       width: 1px;
-      background-color: ${palette('--article-border')};
+      background-color: ${options.color ?? palette('--article-border')};
       content: '';
     }
 

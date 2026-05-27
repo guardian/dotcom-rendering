@@ -4,4 +4,4 @@ export const worldCup2026PageIds = [
 	'football/world-cup-2026/overview',
 ];
 
-export const worldCupTagIds = [];
+export const worldCupTagId = 'football/world-cup-2026';

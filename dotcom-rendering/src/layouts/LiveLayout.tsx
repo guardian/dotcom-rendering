@@ -20,6 +20,7 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.island';
 import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
@@ -50,6 +51,8 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
+import { useBetaAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -305,6 +308,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const ab = useBetaAB();
+
+	const isWorldCup2026 =
+		article.tags.some((tag) => tag.id === worldCupTagId) &&
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
+
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
@@ -337,7 +346,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
+						showSubNav={!isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
@@ -354,6 +363,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 
 			<main data-layout="LiveLayout">
+				<DirectoryPageNavIsland
+					pageTags={article.tags}
+					pageId={article.pageId}
+				/>
 				{isWeb && renderAds && hasLiveBlogTopAd && (
 					<Hide from="tablet">
 						<Section

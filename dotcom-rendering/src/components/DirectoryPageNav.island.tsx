@@ -11,25 +11,54 @@ import {
 	textSansBold14Object,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
+import { getInteractionClient } from '../lib/bridgetApi';
 import { generateImageURL } from '../lib/image';
 import { useBetaAB } from '../lib/useAB';
 import { worldCup2026PageIds } from '../lib/worldCup2026';
+import {
+	WorldCup2026Icon,
+	WorldCup2026IconSmall,
+} from '../lib/WorldCup2026Icons';
+import { palette as themePalette } from '../palette';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	pageId: string;
 	pageTags?: TagType[];
 };
 
-interface DirectoryPageNavConfig {
+type PlatformColor =
+	| string
+	| {
+			web: string;
+			app: string;
+	  };
+
+interface SlimDirectoryPageNavConfig {
 	pageIds: string[];
 	tagIds: string[];
-	textColor: string;
-	backgroundColor: string;
+	textColor: PlatformColor;
+	primaryLinkColor: PlatformColor;
+	textHoverColor: PlatformColor;
+	backgroundColor: PlatformColor;
+	borderColor: PlatformColor;
 	titleIcon?: React.ReactElement;
 	title: { label: string; id: string };
 	links: Array<{ label: string; id: string }>;
-	backgroundImages?: {
+	slimNav: true;
+}
+
+interface FullDirectoryPageNavConfig {
+	pageIds: string[];
+	tagIds: string[];
+	textColor: PlatformColor;
+	backgroundColor: PlatformColor;
+	titleIcon?: React.ReactElement;
+	title: { label: string; id: string };
+	links: Array<{ label: string; id: string }>;
+	backgroundImages: {
 		mobile: string;
 		mobileLandscape: string;
 		phablet: string;
@@ -37,63 +66,50 @@ interface DirectoryPageNavConfig {
 		desktop: string;
 		wide: string;
 	};
+	slimNav?: never;
 }
 
-const WorldCup2026Icon = () => (
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		width="40"
-		height="46"
-		viewBox="0 0 40 46"
-		fill="none"
-	>
-		<rect width="12.3697" height="32.4706" fill="#D71921" />
-		<rect
-			x="13.5294"
-			y="13.5295"
-			width="12.3697"
-			height="32.4706"
-			fill="white"
-		/>
-		<rect x="27.059" width="12.3697" height="32.4706" fill="#007E46" />
-		<circle cx="19.7142" cy="6.18487" r="6.18487" fill="white" />
-	</svg>
-);
+type DirectoryPageNavConfig =
+	| SlimDirectoryPageNavConfig
+	| FullDirectoryPageNavConfig;
+
+const worldCup2026Links = [
+	{
+		label: 'Match centre',
+		id: 'football/world-cup-2026/overview',
+	},
+	{
+		label: 'Player guide',
+		id: '',
+	},
+	{
+		label: 'Bracketology',
+		id: '',
+	},
+	{
+		label: 'Golden boot',
+		id: '',
+	},
+	{
+		label: 'More football',
+		id: 'football',
+	},
+];
 
 const configs = [
-	// World Cup 2026
+	// World Cup 2026 Fronts
 	{
 		pageIds: worldCup2026PageIds,
 		tagIds: [],
 		textColor: palette.neutral[100],
 		backgroundColor: palette.brand[400],
+		borderColor: themePalette('--masthead-nav-lines'),
 		title: {
 			label: 'World Cup',
 			id: 'football/world-cup-2026',
 		},
 		titleIcon: <WorldCup2026Icon />,
-		links: [
-			{
-				label: 'Match centre',
-				id: 'football/world-cup-2026/overview',
-			},
-			{
-				label: 'Player guide',
-				id: '',
-			},
-			{
-				label: 'Bracketology',
-				id: '',
-			},
-			{
-				label: 'Golden boot',
-				id: '',
-			},
-			{
-				label: 'More football',
-				id: 'football',
-			},
-		],
+		links: worldCup2026Links,
 		backgroundImages: {
 			mobile: 'https://media.guim.co.uk/4ba0caac6d18c1fe6a5a3267b270d8c21ae6f940/0_0_750_376/750.jpg',
 			mobileLandscape:
@@ -105,6 +121,35 @@ const configs = [
 				'https://media.guim.co.uk/167bec4a208bfc7fdc6b2127186b9bb183932259/0_0_1960_276/1960.jpg',
 			wide: 'https://media.guim.co.uk/4e44f9a88fcc9a3b1b5294f7e581644baa75c904/0_0_2600_276/2600.jpg',
 		},
+	},
+	// World Cup 2026 Articles
+	{
+		pageIds: [] as string[],
+		tagIds: ['football/world-cup-2026'],
+		textColor: {
+			web: themePalette('--masthead-nav-link-text'),
+			app: themePalette('--article-text'),
+		},
+		primaryLinkColor: {
+			web: palette.sport[600],
+			app: themePalette('--apps-directory-page-nav-primary-link-color'),
+		},
+		textHoverColor: themePalette('--masthead-nav-link-text-hover'),
+		backgroundColor: {
+			web: themePalette('--masthead-nav-background'),
+			app: themePalette('--article-background'),
+		},
+		borderColor: {
+			web: themePalette('--masthead-nav-lines'),
+			app: themePalette('--article-border'),
+		},
+		title: {
+			label: 'World Cup 2026',
+			id: 'football/world-cup-2026',
+		},
+		slimNav: true,
+		titleIcon: <WorldCup2026IconSmall />,
+		links: worldCup2026Links,
 	},
 	// Winter Olympics 2026
 	{
@@ -193,7 +238,22 @@ const configs = [
 	},
 ] satisfies DirectoryPageNavConfig[];
 
+const getPlatformColour = (
+	color: PlatformColor,
+	renderingTarget: RenderingTarget,
+): string => {
+	if (typeof color === 'string') {
+		return color;
+	}
+
+	return renderingTarget === 'Web' ? color.web : color.app;
+};
+
 export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
+	const { renderingTarget } = useConfig();
+
+	const isApps = renderingTarget === 'Apps';
+
 	const ab = useBetaAB();
 
 	const config = configs.find(
@@ -215,13 +275,51 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		return null;
 	}
 
-	const { textColor, backgroundColor } = config;
+	const { slimNav } = config;
+
+	const includeHeader = !slimNav;
+
+	const onTouchStart = async () => {
+		await getInteractionClient().disableArticleSwipe(true);
+	};
+
+	const onTouchEnd = async () => {
+		await getInteractionClient().disableArticleSwipe(false);
+	};
+
+	const backgroundColor = getPlatformColour(
+		config.backgroundColor,
+		renderingTarget,
+	);
+
+	const textColor = getPlatformColour(config.textColor, renderingTarget);
+
+	const primaryLinkColor = config.primaryLinkColor
+		? getPlatformColour(config.primaryLinkColor, renderingTarget)
+		: textColor;
+
+	const borderColor =
+		config.borderColor &&
+		getPlatformColour(config.borderColor, renderingTarget);
+
+	const container = css({
+		backgroundColor: slimNav ? backgroundColor : 'transparent',
+	});
 
 	const nav = css({
 		backgroundColor,
 		'&': css(grid.paddedContainer),
 		alignContent: 'space-between',
 		position: 'relative',
+	});
+
+	const navWeb = css({
+		'&': css(
+			grid.paddedContainer,
+			grid.verticalRules({
+				color: borderColor,
+			}),
+		),
 	});
 
 	const largeLinkStyles = css({
@@ -256,19 +354,20 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		position: 'relative',
 		overflowX: 'scroll',
 		scrollbarWidth: 'none',
-		borderTop: '1px solid',
-		borderColor: palette.brand[600],
+		borderTop: slimNav ? undefined : '1px solid',
+		borderBottom: '1px solid',
+		borderColor,
 		padding: `0 ${space[3]}px`,
 		height: space[10],
 		[from.mobileLandscape]: {
 			padding: `0 ${space[5]}px`,
-			height: space[12],
+			height: slimNav ? space[10] : space[12],
 		},
 		// This creates a gradient fade on the right side to indicate that there's more to scroll for.
 		'&:after': {
 			content: '""',
 			position: 'sticky',
-			right: `-${space[3]}px`,
+			right: -space[3],
 			top: 0,
 			height: '100%',
 			minWidth: 40,
@@ -293,10 +392,41 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 			backgroundColor: textColor,
 			transition: 'height 0.3s ease-in-out, opacity 0.05s 0.1s linear',
 		},
-		[from.desktop]: {
-			'&:hover a': {
-				textDecoration: 'underline',
-				color: 'var(--masthead-nav-link-text-hover)',
+	});
+
+	const primaryLinkStyles = css({
+		display: 'flex',
+		alignItems: 'center',
+		paddingRight: space[6],
+		svg: {
+			marginRight: space[2],
+		},
+		// small right border
+		'&::after': {
+			content: '""',
+			display: 'block',
+			position: 'absolute',
+			right: space[3],
+			top: '50%',
+			transform: 'translateY(-50%)',
+			width: 1,
+			height: space[3],
+			backgroundColor: borderColor,
+		},
+		'&:not(:hover)': {
+			color: primaryLinkColor,
+			'svg rect, svg circle': {
+				fill: primaryLinkColor,
+			},
+		},
+	});
+
+	const primaryLinkHoverStyles = css({
+		'&:hover': {
+			textDecoration: 'none',
+			color: config.textHoverColor,
+			'svg rect, svg circle': {
+				fill: config.textHoverColor,
 			},
 		},
 	});
@@ -311,44 +441,77 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		whiteSpace: 'nowrap',
 	});
 
+	const smallLinkWeb = css({
+		'&:hover': {
+			textDecoration: 'underline',
+			color: config.textHoverColor,
+		},
+	});
+
 	const boldSmallLink = css({
 		...textSansBold14Object,
 	});
 
 	return (
-		<nav css={[nav]}>
-			<a href={`/${config.title.id}`} css={largeLinkStyles}>
-				{config.titleIcon && config.titleIcon}
-				{config.title.label}
-			</a>
-			<BackgroundImage images={config.backgroundImages} />
-
-			<ul css={list}>
-				{config.links.map((link) => (
-					<li key={link.label} css={listItem}>
-						<a
-							href={`/${link.id}`}
-							css={[
-								smallLink,
-								pageId === link.id && boldSmallLink,
-							]}
-						>
-							{link.label}
+		<div css={container}>
+			<nav css={[nav, !isApps && navWeb]}>
+				{includeHeader && (
+					<>
+						<a href={`/${config.title.id}`} css={largeLinkStyles}>
+							{config.titleIcon && config.titleIcon}
+							{config.title.label}
 						</a>
-					</li>
-				))}
-			</ul>
-		</nav>
+						<BackgroundImage images={config.backgroundImages} />
+					</>
+				)}
+
+				<ul
+					css={list}
+					onTouchStart={isApps ? void onTouchStart : undefined}
+					onTouchEnd={isApps ? void onTouchEnd : undefined}
+				>
+					{
+						// If the nav is without a header, the first link is styled as a primary link, otherwise there is a separate header link and all links in the list are styled the same.
+					}
+					{slimNav && (
+						<li css={listItem}>
+							<a
+								href={`/${config.title.id}`}
+								css={[
+									smallLink,
+									primaryLinkStyles,
+									!isApps && primaryLinkHoverStyles,
+									pageId === config.title.id && boldSmallLink,
+								]}
+							>
+								{config.titleIcon}
+								{config.title.label}
+							</a>
+						</li>
+					)}
+					{config.links.map((link) => (
+						<li key={link.label} css={listItem}>
+							<a
+								href={`/${link.id}`}
+								css={[
+									smallLink,
+									!isApps && smallLinkWeb,
+									pageId === link.id && boldSmallLink,
+								]}
+							>
+								{link.label}
+							</a>
+						</li>
+					))}
+				</ul>
+			</nav>
+		</div>
 	);
 };
 
 const BackgroundImage = (props: {
-	images: DirectoryPageNavConfig['backgroundImages'];
+	images: FullDirectoryPageNavConfig['backgroundImages'];
 }) => {
-	if (props.images === undefined) {
-		return null;
-	}
-
 	return (
 		<picture
 			css={[
@@ -423,5 +586,8 @@ const breakpointToImageSize = (breakpoint: Breakpoint): ImageSize => {
 	}
 };
 
-type Images = Exclude<DirectoryPageNavConfig['backgroundImages'], undefined>;
+type Images = Exclude<
+	FullDirectoryPageNavConfig['backgroundImages'],
+	undefined
+>;
 type ImageSize = keyof Images;
