@@ -29,24 +29,36 @@ type Props = {
 	pageTags?: TagType[];
 };
 
-type Color =
+type PlatformColor =
 	| string
 	| {
 			web: string;
 			app: string;
 	  };
 
-interface DirectoryPageNavConfig {
+interface SlimDirectoryPageNavConfig {
 	pageIds: string[];
 	tagIds: string[];
-	textColor: Color;
-	textHoverColor?: Color;
-	backgroundColor: Color;
+	textColor: PlatformColor;
+	primaryLinkColor: PlatformColor;
+	textHoverColor: PlatformColor;
+	backgroundColor: PlatformColor;
+	borderColor: PlatformColor;
 	titleIcon?: React.ReactElement;
 	title: { label: string; id: string };
 	links: Array<{ label: string; id: string }>;
-	slimNav?: boolean;
-	backgroundImages?: {
+	slimNav: true;
+}
+
+interface FullDirectoryPageNavConfig {
+	pageIds: string[];
+	tagIds: string[];
+	textColor: PlatformColor;
+	backgroundColor: PlatformColor;
+	titleIcon?: React.ReactElement;
+	title: { label: string; id: string };
+	links: Array<{ label: string; id: string }>;
+	backgroundImages: {
 		mobile: string;
 		mobileLandscape: string;
 		phablet: string;
@@ -54,7 +66,12 @@ interface DirectoryPageNavConfig {
 		desktop: string;
 		wide: string;
 	};
+	slimNav?: never;
 }
+
+type DirectoryPageNavConfig =
+	| SlimDirectoryPageNavConfig
+	| FullDirectoryPageNavConfig;
 
 const worldCup2026Links = [
 	{
@@ -86,6 +103,7 @@ const configs = [
 		tagIds: [],
 		textColor: palette.neutral[100],
 		backgroundColor: palette.brand[400],
+		borderColor: themePalette('--masthead-nav-lines'),
 		title: {
 			label: 'World Cup',
 			id: 'football/world-cup-2026',
@@ -112,10 +130,18 @@ const configs = [
 			web: themePalette('--masthead-nav-link-text'),
 			app: themePalette('--article-text'),
 		},
+		primaryLinkColor: {
+			web: palette.sport[600],
+			app: themePalette('--apps-directory-page-nav-primary-link-color'),
+		},
 		textHoverColor: themePalette('--masthead-nav-link-text-hover'),
 		backgroundColor: {
 			web: themePalette('--masthead-nav-background'),
 			app: themePalette('--article-background'),
+		},
+		borderColor: {
+			web: themePalette('--masthead-nav-lines'),
+			app: themePalette('--article-border'),
 		},
 		title: {
 			label: 'World Cup 2026',
@@ -212,7 +238,10 @@ const configs = [
 	},
 ] satisfies DirectoryPageNavConfig[];
 
-const getColour = (color: Color, renderingTarget: RenderingTarget): string => {
+const getPlatformColour = (
+	color: PlatformColor,
+	renderingTarget: RenderingTarget,
+): string => {
 	if (typeof color === 'string') {
 		return color;
 	}
@@ -223,7 +252,6 @@ const getColour = (color: Color, renderingTarget: RenderingTarget): string => {
 export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	const { renderingTarget } = useConfig();
 
-	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
 	const ab = useBetaAB();
@@ -247,11 +275,9 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		return null;
 	}
 
-	const {
-		textColor: configTextColor,
-		backgroundColor: configBackgroundColour,
-		slimNav,
-	} = config;
+	const { slimNav } = config;
+
+	const includeHeader = !slimNav;
 
 	const onTouchStart = async () => {
 		await getInteractionClient().disableArticleSwipe(true);
@@ -261,9 +287,20 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		await getInteractionClient().disableArticleSwipe(false);
 	};
 
-	const backgroundColor = getColour(configBackgroundColour, renderingTarget);
+	const backgroundColor = getPlatformColour(
+		config.backgroundColor,
+		renderingTarget,
+	);
 
-	const textColor = getColour(configTextColor, renderingTarget);
+	const textColor = getPlatformColour(config.textColor, renderingTarget);
+
+	const primaryLinkColor = config.primaryLinkColor
+		? getPlatformColour(config.primaryLinkColor, renderingTarget)
+		: textColor;
+
+	const borderColor =
+		config.borderColor &&
+		getPlatformColour(config.borderColor, renderingTarget);
 
 	const container = css({
 		backgroundColor: slimNav ? backgroundColor : 'transparent',
@@ -280,7 +317,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		'&': css(
 			grid.paddedContainer,
 			grid.verticalRules({
-				color: themePalette('--masthead-nav-lines'),
+				color: borderColor,
 			}),
 		),
 	});
@@ -319,9 +356,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		scrollbarWidth: 'none',
 		borderTop: slimNav ? undefined : '1px solid',
 		borderBottom: '1px solid',
-		borderColor: isWeb
-			? themePalette('--masthead-nav-lines')
-			: themePalette('--article-border'),
+		borderColor,
 		padding: `0 ${space[3]}px`,
 		height: space[10],
 		[from.mobileLandscape]: {
@@ -376,32 +411,22 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 			transform: 'translateY(-50%)',
 			width: 1,
 			height: space[3],
-			backgroundColor: themePalette('--masthead-nav-lines'),
+			backgroundColor: borderColor,
 		},
-	});
-
-	const primaryLinkHoverStylesWeb = css({
 		'&:not(:hover)': {
-			color: palette.sport[600],
+			color: primaryLinkColor,
 			'svg rect, svg circle': {
-				fill: palette.sport[600],
-			},
-		},
-		[from.desktop]: {
-			'&:hover': {
-				textDecoration: 'underline',
-				color: themePalette('--masthead-nav-link-text-hover'),
+				fill: primaryLinkColor,
 			},
 		},
 	});
 
-	const primaryLinkHoverStylesApp = css({
-		'&:not(:hover)': {
-			color: themePalette('--apps-directory-page-nav-primary-link-color'),
+	const primaryLinkHoverStyles = css({
+		'&:hover': {
+			textDecoration: 'none',
+			color: config.textHoverColor,
 			'svg rect, svg circle': {
-				fill: themePalette(
-					'--apps-directory-page-nav-primary-link-color',
-				),
+				fill: config.textHoverColor,
 			},
 		},
 	});
@@ -420,9 +445,6 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		'&:hover': {
 			textDecoration: 'underline',
 			color: config.textHoverColor,
-			'svg rect, svg circle': {
-				fill: config.textHoverColor,
-			},
 		},
 	});
 
@@ -432,8 +454,8 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	return (
 		<div css={container}>
-			<nav css={[nav, isWeb && navWeb]}>
-				{!config.slimNav && (
+			<nav css={[nav, !isApps && navWeb]}>
+				{includeHeader && (
 					<>
 						<a href={`/${config.title.id}`} css={largeLinkStyles}>
 							{config.titleIcon && config.titleIcon}
@@ -448,15 +470,17 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 					onTouchStart={isApps ? void onTouchStart : undefined}
 					onTouchEnd={isApps ? void onTouchEnd : undefined}
 				>
-					{config.slimNav && (
+					{
+						// If the nav is without a header, the first link is styled as a primary link, otherwise there is a separate header link and all links in the list are styled the same.
+					}
+					{slimNav && (
 						<li css={listItem}>
 							<a
 								href={`/${config.title.id}`}
 								css={[
 									smallLink,
 									primaryLinkStyles,
-									isWeb && primaryLinkHoverStylesWeb,
-									isApps && primaryLinkHoverStylesApp,
+									!isApps && primaryLinkHoverStyles,
 									pageId === config.title.id && boldSmallLink,
 								]}
 							>
@@ -471,7 +495,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 								href={`/${link.id}`}
 								css={[
 									smallLink,
-									isWeb && smallLinkWeb,
+									!isApps && smallLinkWeb,
 									pageId === link.id && boldSmallLink,
 								]}
 							>
@@ -486,12 +510,8 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 };
 
 const BackgroundImage = (props: {
-	images: DirectoryPageNavConfig['backgroundImages'];
+	images: FullDirectoryPageNavConfig['backgroundImages'];
 }) => {
-	if (props.images === undefined) {
-		return null;
-	}
-
 	return (
 		<picture
 			css={[
@@ -566,5 +586,8 @@ const breakpointToImageSize = (breakpoint: Breakpoint): ImageSize => {
 	}
 };
 
-type Images = Exclude<DirectoryPageNavConfig['backgroundImages'], undefined>;
+type Images = Exclude<
+	FullDirectoryPageNavConfig['backgroundImages'],
+	undefined
+>;
 type ImageSize = keyof Images;
