@@ -1156,7 +1156,8 @@ export const SelfHostedVideo = ({
 			setCurrentTime(video.currentTime);
 			/**
 			 * We only want to track milestone events for "long-form"
-			 * videos, not loops or cinemagraphs.
+			 * videos, not loops or cinemagraphs. We expect these to be
+			 * too short to be worth tracking progress milestones.
 			 */
 			trackMilestones({
 				currentTime: video.currentTime,
