@@ -10,7 +10,7 @@ import { grid } from '../grid';
 import { palette } from '../palette';
 import type { Region } from '../sportDataPage';
 import { AdSlot } from './AdSlot.web';
-import { DirectoryPageNav } from './DirectoryPageNav';
+import { DirectoryPageNavIsland } from './DirectoryPageNavIsland';
 import { FootballTableList } from './FootballTableList';
 import { FootballTablesCompetitionSelect } from './FootballTablesCompetitionSelect.island';
 import { Island } from './Island';
@@ -31,7 +31,8 @@ export const FootballTablesPage = ({
 	guardianBaseUrl,
 }: Props) => (
 	<>
-		<DirectoryPageNav pageId={pageId} />
+		<DirectoryPageNavIsland pageId={pageId} />
+
 		<main
 			id="maincontent"
 			data-layout="FootballDataPageLayout"

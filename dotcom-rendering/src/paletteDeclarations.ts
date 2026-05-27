@@ -6490,6 +6490,14 @@ const paletteColours = {
 		light: ageWarningWrapperBackground,
 		dark: ageWarningWrapperBackground,
 	},
+	'--apps-directory-page-nav-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[10],
+	},
+	'--apps-directory-page-nav-primary-link-color': {
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
+	},
 	'--apps-epic-background': {
 		light: appsEpicBackgroundLight,
 		dark: appsEpicBackgroundDark,
