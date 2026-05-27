@@ -160,6 +160,7 @@ const getDefaultCardProps = (
 	trail: TrailType,
 	discussionApiUrl: string,
 	format: ArticleFormat,
+	showTrailText: boolean,
 	serverTime?: number,
 ) => {
 	const defaultProps: CardProps = {
@@ -189,7 +190,7 @@ const getDefaultCardProps = (
 		branding: trail.branding,
 		serverTime,
 		imageLoading: 'lazy',
-		trailText: trail.trailText,
+		trailText: showTrailText ? trail.trailText : undefined,
 		showAge: false,
 		showTopBarDesktop: false,
 		showTopBarMobile: false,
@@ -238,6 +239,7 @@ export const MoreGalleries = (props: Props) => {
 						firstTrail,
 						props.discussionApiUrl,
 						props.format,
+						firstTrail.mainMedia?.type !== 'Audio',
 						props.serverTime,
 					)}
 				/>
@@ -261,6 +263,7 @@ export const MoreGalleries = (props: Props) => {
 									trail,
 									props.discussionApiUrl,
 									props.format,
+									false,
 									props.serverTime,
 								)}
 								mediaSize="medium"
