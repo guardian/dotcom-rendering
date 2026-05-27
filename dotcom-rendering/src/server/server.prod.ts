@@ -31,6 +31,7 @@ import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
+import { handleFootballSubNavEmbed } from './handler.footballEmbed';
 
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
@@ -61,6 +62,7 @@ export const prodServer = (): void => {
 	app.post('/CricketMatchPage', handleCricketMatchPage);
 	app.post('/FootballTablesPage', handleFootballTablesPage);
 	app.post('/FootballMatchSummaryPage', handleFootballMatchPage);
+	app.post('/FootballSubNavEmbed', handleFootballSubNavEmbed);
 	app.post('/FootballMatchDayEmbed', handleFootballMatchDayEmbed);
 	app.post('/HostedContent', handleHostedContent);
 

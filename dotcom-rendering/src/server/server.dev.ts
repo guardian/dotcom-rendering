@@ -30,6 +30,7 @@ import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
+import { handleFootballSubNavEmbed } from './handler.footballEmbed';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /(\/\d{4}\/[a-z]{3}\/\d{2}\/)/;
@@ -123,6 +124,7 @@ renderer.get('/AppsFootballMatchSummaryPage/*url', handleAppsFootballMatchPage);
 renderer.get('/HostedContent/*url', handleHostedContent);
 renderer.get('/AppsHostedContent/*url', handleAppsHostedContent);
 renderer.get('/AppsComponent/thrasher/:name', handleAppsThrasher);
+renderer.get('/FootballSubNavEmbed/*url', handleFootballSubNavEmbed);
 renderer.get('/FootballMatchDayEmbed/*url', handleFootballMatchDayEmbed);
 
 // POST routes for running frontend locally
@@ -144,6 +146,7 @@ renderer.post('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 renderer.post('/HostedContent', handleHostedContent);
 renderer.post('/AppsHostedContent', handleAppsHostedContent);
 renderer.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
+renderer.post('/FootballSubNavEmbed', handleFootballSubNavEmbed);
 renderer.post('/FootballMatchDayEmbed', handleFootballMatchDayEmbed);
 
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);

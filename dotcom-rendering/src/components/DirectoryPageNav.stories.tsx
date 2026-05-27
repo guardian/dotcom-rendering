@@ -2,7 +2,6 @@ import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { BetaABTests } from '../experiments/lib/beta-ab-tests';
 import { setBetaABTests } from '../lib/useAB';
-import { ConfigProvider } from './ConfigContext';
 import { DirectoryPageNav } from './DirectoryPageNav.island';
 
 const mockAB = new BetaABTests({
@@ -32,6 +31,7 @@ const webChromaticParams = {
 export const WomensEuro2025 = meta.story({
 	args: {
 		pageId: 'football/women-s-euro-2025/table',
+		renderingTarget: 'Web',
 	},
 	parameters: webChromaticParams,
 });
@@ -39,6 +39,7 @@ export const WomensEuro2025 = meta.story({
 export const WorldCup2026 = meta.story({
 	args: {
 		pageId: 'football/world-cup-2026',
+		renderingTarget: 'Web',
 	},
 	parameters: webChromaticParams,
 });
@@ -46,6 +47,7 @@ export const WorldCup2026 = meta.story({
 export const WorldCup2026MatchCenter = meta.story({
 	args: {
 		pageId: 'football/world-cup-2026/overview',
+		renderingTarget: 'Web',
 	},
 	parameters: webChromaticParams,
 });
@@ -60,23 +62,12 @@ export const WorldCup2026ArticleWeb = meta.story({
 				title: 'World Cup 2026 Fronts',
 			},
 		],
+		renderingTarget: 'Web',
 	},
 	parameters: webChromaticParams,
 });
 
 export const WorldCup2026ArticleApp = meta.story({
-	render: (args) => (
-		<ConfigProvider
-			value={{
-				renderingTarget: 'Apps',
-				darkModeAvailable: true,
-				assetOrigin: '/',
-				editionId: 'UK',
-			}}
-		>
-			<DirectoryPageNav {...args} />
-		</ConfigProvider>
-	),
 	args: {
 		pageId: 'football/2026/may/19/brazils-world-cup-squad-offers-a-hint-of-the-magical-pragmatism-of-1994',
 		pageTags: [
@@ -86,6 +77,7 @@ export const WorldCup2026ArticleApp = meta.story({
 				title: 'World Cup 2026',
 			},
 		],
+		renderingTarget: 'Apps',
 	},
 	parameters: {
 		chromatic: {
@@ -100,6 +92,7 @@ export const WorldCup2026ArticleApp = meta.story({
 export const OtherCompetition = meta.story({
 	args: {
 		pageId: 'football/premierleague/table',
+		renderingTarget: 'Web',
 	},
 	parameters: webChromaticParams,
 });
@@ -107,6 +100,7 @@ export const OtherCompetition = meta.story({
 export const WinterOlympics = meta.story({
 	args: {
 		pageId: 'sport/winter-olympics-2026',
+		renderingTarget: 'Web',
 	},
 	parameters: webChromaticParams,
 });

@@ -14,7 +14,11 @@ import { grid } from '../grid';
 import { getInteractionClient } from '../lib/bridgetApi';
 import { generateImageURL } from '../lib/image';
 import { useBetaAB } from '../lib/useAB';
-import { worldCup2026PageIds } from '../lib/worldCup2026';
+import {
+	worldCup2026EmbedPageIds,
+	worldCup2026FrontPageIds,
+	worldCup2026PageIds,
+} from '../lib/worldCup2026';
 import {
 	WorldCup2026Icon,
 	WorldCup2026IconSmall,
@@ -22,11 +26,11 @@ import {
 import { palette as themePalette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
-import { useConfig } from './ConfigContext';
 
 type Props = {
 	pageId: string;
 	pageTags?: TagType[];
+	renderingTarget: RenderingTarget;
 };
 
 type PlatformColor =
@@ -99,7 +103,7 @@ const worldCup2026Links = [
 const configs = [
 	// World Cup 2026 Fronts
 	{
-		pageIds: worldCup2026PageIds,
+		pageIds: worldCup2026FrontPageIds,
 		tagIds: [],
 		textColor: palette.neutral[100],
 		backgroundColor: palette.brand[400],
@@ -124,7 +128,7 @@ const configs = [
 	},
 	// World Cup 2026 Articles
 	{
-		pageIds: [] as string[],
+		pageIds: worldCup2026PageIds,
 		tagIds: ['football/world-cup-2026'],
 		textColor: {
 			web: themePalette('--masthead-nav-link-text'),
@@ -143,6 +147,23 @@ const configs = [
 			web: themePalette('--masthead-nav-lines'),
 			app: themePalette('--article-border'),
 		},
+		title: {
+			label: 'World Cup 2026',
+			id: 'football/world-cup-2026',
+		},
+		slimNav: true,
+		titleIcon: <WorldCup2026IconSmall />,
+		links: worldCup2026Links,
+	},
+	// World Cup 2026 Embed
+	{
+		pageIds: worldCup2026EmbedPageIds,
+		tagIds: ['football/world-cup-2026'],
+		textColor: palette.neutral[100],
+		primaryLinkColor: palette.sport[600],
+		textHoverColor: palette.brandAlt[400],
+		backgroundColor: palette.brand[400],
+		borderColor: palette.brand[600],
 		title: {
 			label: 'World Cup 2026',
 			id: 'football/world-cup-2026',
@@ -249,9 +270,11 @@ const getPlatformColour = (
 	return renderingTarget === 'Web' ? color.web : color.app;
 };
 
-export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
-	const { renderingTarget } = useConfig();
-
+export const DirectoryPageNav = ({
+	pageId,
+	pageTags,
+	renderingTarget,
+}: Props) => {
 	const isApps = renderingTarget === 'Apps';
 
 	const ab = useBetaAB();
@@ -270,6 +293,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	if (
 		config.title.id === 'football/world-cup-2026' &&
+		!config.pageIds.includes('football/world-cup-2026/overview') &&
 		ab?.isUserInTest('webx-world-cup-2026-subnav') !== true
 	) {
 		return null;
@@ -349,6 +373,8 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const list = css({
 		'&': css(grid.column.all),
+		marginBlock: 0,
+		listStyle: 'none',
 		display: 'flex',
 		alignItems: 'center',
 		position: 'relative',
