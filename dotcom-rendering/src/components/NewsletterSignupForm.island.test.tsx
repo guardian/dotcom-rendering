@@ -213,6 +213,7 @@ describe('NewsletterSignupForm', () => {
 		expect(params.get('browserId')).toBe('test-browser-id');
 
 		expectTrackedEventDescriptions([
+			'email-input-focused',
 			'click-button',
 			'open-captcha',
 			'captcha-passed',
@@ -409,6 +410,7 @@ describe('NewsletterSignupForm', () => {
 		});
 
 		expectTrackedEventDescriptions([
+			'email-input-focused',
 			'click-button',
 			'open-captcha',
 			'captcha-passed',
@@ -443,6 +445,7 @@ describe('NewsletterSignupForm', () => {
 		expect(global.fetch).not.toHaveBeenCalled();
 
 		expectTrackedEventDescriptions([
+			'email-input-focused',
 			'click-button',
 			'open-captcha',
 			'captcha-not-passed',
@@ -474,6 +477,7 @@ describe('NewsletterSignupForm', () => {
 		expect(global.fetch).not.toHaveBeenCalled();
 
 		expectTrackedEventDescriptions([
+			'email-input-focused',
 			'click-button',
 			'open-captcha',
 			'captcha-load-error',

@@ -114,6 +114,7 @@ const sendTracking = (
 	newsletterId: string,
 	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
+	isSignedIn: boolean | 'Pending',
 	abTest?: AbTest,
 	extraDetails?: Record<string, unknown>,
 ): void => {
@@ -125,6 +126,7 @@ const sendTracking = (
 		value: {
 			...extraDetails,
 			eventDescription,
+			isSignedIn,
 		},
 		abTest,
 	});
@@ -331,6 +333,7 @@ export const useNewsletterSignupForm = (
 				newsletterId,
 				'form-submission',
 				renderingTarget,
+				isSignedIn,
 				abTest,
 				marketingOptInType ? { marketingOptInType } : undefined,
 			);
@@ -367,11 +370,12 @@ export const useNewsletterSignupForm = (
 				newsletterId,
 				response.ok ? 'submission-confirmed' : 'submission-failed',
 				renderingTarget,
+				isSignedIn,
 				abTest,
 				marketingOptInType ? { marketingOptInType } : undefined,
 			);
 		},
-		[abTest, newsletterId, renderingTarget],
+		[abTest, isSignedIn, newsletterId, renderingTarget],
 	);
 
 	const handleCaptchaComplete = useCallback(
@@ -381,6 +385,7 @@ export const useNewsletterSignupForm = (
 					newsletterId,
 					'captcha-not-passed',
 					renderingTarget,
+					isSignedIn,
 					abTest,
 				);
 				setIsValidationError(false);
@@ -393,6 +398,7 @@ export const useNewsletterSignupForm = (
 				newsletterId,
 				'captcha-passed',
 				renderingTarget,
+				isSignedIn,
 				abTest,
 			);
 			// Read the email that was validated at submit-time — not the
@@ -406,6 +412,7 @@ export const useNewsletterSignupForm = (
 						newsletterId,
 						'form-submit-error',
 						renderingTarget,
+						isSignedIn,
 						abTest,
 					);
 					setIsValidationError(false);
@@ -418,7 +425,7 @@ export const useNewsletterSignupForm = (
 					setIsWaitingForResponse(false);
 				});
 		},
-		[abTest, newsletterId, renderingTarget, submitForm],
+		[abTest, isSignedIn, newsletterId, renderingTarget, submitForm],
 	);
 
 	const handleCaptchaLoadError = useCallback((): void => {
@@ -426,13 +433,14 @@ export const useNewsletterSignupForm = (
 			newsletterId,
 			'captcha-load-error',
 			renderingTarget,
+			isSignedIn,
 			abTest,
 		);
 		setIsValidationError(false);
 		setErrorMessage('Sorry, the reCAPTCHA failed to load.');
 		setIsWaitingForResponse(false);
 		recaptchaRef.current?.reset();
-	}, [abTest, newsletterId, renderingTarget]);
+	}, [abTest, isSignedIn, newsletterId, renderingTarget]);
 
 	const handleSubmit = useCallback(
 		(event: FormEvent<HTMLFormElement>): void => {
@@ -450,11 +458,18 @@ export const useNewsletterSignupForm = (
 			setIsValidationError(false);
 			setErrorMessage(undefined);
 			setIsWaitingForResponse(true);
-			sendTracking(newsletterId, 'open-captcha', renderingTarget, abTest);
+			sendTracking(
+				newsletterId,
+				'open-captcha',
+				renderingTarget,
+				isSignedIn,
+				abTest,
+			);
 			recaptchaRef.current?.execute();
 		},
 		[
 			abTest,
+			isSignedIn,
 			isWaitingForResponse,
 			newsletterId,
 			renderingTarget,
@@ -471,7 +486,14 @@ export const useNewsletterSignupForm = (
 
 	const handleEmailFocus = useCallback((): void => {
 		setIsInteracted(true);
-	}, []);
+		sendTracking(
+			newsletterId,
+			'email-input-focused',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
+	}, [abTest, isSignedIn, newsletterId, renderingTarget]);
 
 	const handleEmailInvalid = useCallback<
 		React.FormEventHandler<HTMLInputElement>
@@ -496,8 +518,14 @@ export const useNewsletterSignupForm = (
 
 	const handleSubmitButtonClick = useCallback((): void => {
 		hasAttemptedSubmitRef.current = true;
-		sendTracking(newsletterId, 'click-button', renderingTarget, abTest);
-	}, [abTest, newsletterId, renderingTarget]);
+		sendTracking(
+			newsletterId,
+			'click-button',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
+	}, [abTest, isSignedIn, newsletterId, renderingTarget]);
 
 	const handleReset = useCallback<
 		ReactEventHandler<HTMLButtonElement>

@@ -22,7 +22,6 @@ export const WithAccentColour = () => {
 		<HostedContentOnwards
 			trails={hostedOnwardsTrails}
 			brandName="TrendAI"
-			accentColor="#FF0000"
 		/>
 	);
 };

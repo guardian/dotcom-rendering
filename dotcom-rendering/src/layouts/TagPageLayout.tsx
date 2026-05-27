@@ -25,6 +25,8 @@ import {
 	getTagPageBannerAdPositions,
 	getTagPageMobileAdPositions,
 } from '../lib/getTagPageAdPositions';
+import { useBetaAB } from '../lib/useAB';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 import { enhanceTags } from '../model/enhanceTags';
 import type { NavType } from '../model/extract-nav';
 import type { TagPage as TagPageModel } from '../types/tagPage';
@@ -66,6 +68,12 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
 
+	const ab = useBetaAB();
+
+	const isWorldCup2026 =
+		worldCup2026PageIds.includes(pageId) &&
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -91,7 +99,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					discussionApiUrl={tagPage.config.discussionApiUrl}
 					idApiUrl={tagPage.config.idApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
-					showSubNav={true}
+					showSubNav={!isWorldCup2026}
 					showSlimNav={false}
 					hasPageSkin={hasPageSkin}
 					pageId={pageId}

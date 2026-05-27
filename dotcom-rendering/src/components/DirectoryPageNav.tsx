@@ -3,16 +3,17 @@ import {
 	type Breakpoint,
 	breakpoints,
 	from,
-	headlineBold15Object,
-	headlineBold17Object,
 	headlineBold24Object,
 	headlineBold42Object,
-	headlineMedium15Object,
-	headlineMedium17Object,
 	palette,
+	space,
+	textSans14Object,
+	textSansBold14Object,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
 import { generateImageURL } from '../lib/image';
+import { useBetaAB } from '../lib/useAB';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 import type { TagType } from '../types/tag';
 
 type Props = {
@@ -25,6 +26,7 @@ interface DirectoryPageNavConfig {
 	tagIds: string[];
 	textColor: string;
 	backgroundColor: string;
+	titleIcon?: React.ReactElement;
 	title: { label: string; id: string };
 	links: Array<{ label: string; id: string }>;
 	backgroundImages?: {
@@ -33,10 +35,77 @@ interface DirectoryPageNavConfig {
 		phablet: string;
 		tablet: string;
 		desktop: string;
+		wide: string;
 	};
 }
 
+const WorldCup2026Icon = () => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="40"
+		height="46"
+		viewBox="0 0 40 46"
+		fill="none"
+	>
+		<rect width="12.3697" height="32.4706" fill="#D71921" />
+		<rect
+			x="13.5294"
+			y="13.5295"
+			width="12.3697"
+			height="32.4706"
+			fill="white"
+		/>
+		<rect x="27.059" width="12.3697" height="32.4706" fill="#007E46" />
+		<circle cx="19.7142" cy="6.18487" r="6.18487" fill="white" />
+	</svg>
+);
+
 const configs = [
+	// World Cup 2026
+	{
+		pageIds: worldCup2026PageIds,
+		tagIds: [],
+		textColor: palette.neutral[100],
+		backgroundColor: palette.brand[400],
+		title: {
+			label: 'World Cup',
+			id: 'football/world-cup-2026',
+		},
+		titleIcon: <WorldCup2026Icon />,
+		links: [
+			{
+				label: 'Match centre',
+				id: 'football/world-cup-2026/overview',
+			},
+			{
+				label: 'Player guide',
+				id: '',
+			},
+			{
+				label: 'Bracketology',
+				id: '',
+			},
+			{
+				label: 'Golden boot',
+				id: '',
+			},
+			{
+				label: 'More football',
+				id: 'football',
+			},
+		],
+		backgroundImages: {
+			mobile: 'https://media.guim.co.uk/4ba0caac6d18c1fe6a5a3267b270d8c21ae6f940/0_0_750_376/750.jpg',
+			mobileLandscape:
+				'https://media.guim.co.uk/8e1356cc926c6bbfcdb3da5908252ba0b4cbd3bb/0_0_960_376/960.jpg',
+			phablet:
+				'https://media.guim.co.uk/ed4fe540c6a114db35c1f73fc41ee802c3fea7d3/0_0_1320_282/1320.jpg',
+			tablet: 'https://media.guim.co.uk/861646115875f3f246313036f754b2f5f1480b1a/0_0_1480_276/1480.jpg',
+			desktop:
+				'https://media.guim.co.uk/167bec4a208bfc7fdc6b2127186b9bb183932259/0_0_1960_276/1960.jpg',
+			wide: 'https://media.guim.co.uk/4e44f9a88fcc9a3b1b5294f7e581644baa75c904/0_0_2600_276/2600.jpg',
+		},
+	},
 	// Winter Olympics 2026
 	{
 		pageIds: [
@@ -79,6 +148,7 @@ const configs = [
 			tablet: 'https://uploads.guim.co.uk/2026/02/03/winter-olympics-740px-thin.jpg',
 			desktop:
 				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-980px.jpg',
+			wide: 'https://uploads.guim.co.uk/2026/02/03/winter-olympics-980px.jpg',
 		},
 	},
 	// Winter Paralympics 2026
@@ -118,11 +188,14 @@ const configs = [
 			tablet: 'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-740px-thin.jpg',
 			desktop:
 				'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-980px.jpg',
+			wide: 'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-980px.jpg',
 		},
 	},
 ] satisfies DirectoryPageNavConfig[];
 
 export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
+	const ab = useBetaAB();
+
 	const config = configs.find(
 		(cfg) =>
 			cfg.pageIds.includes(pageId) ||
@@ -135,58 +208,76 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		return null;
 	}
 
+	if (
+		config.title.id === 'football/world-cup-2026' &&
+		ab?.isUserInTest('webx-world-cup-2026-subnav') !== true
+	) {
+		return null;
+	}
+
 	const { textColor, backgroundColor } = config;
 
 	const nav = css({
 		backgroundColor,
 		'&': css(grid.paddedContainer),
 		alignContent: 'space-between',
+		position: 'relative',
 	});
 
 	const largeLinkStyles = css({
+		position: 'absolute',
+		top: space[3],
+		left: 0,
 		...headlineBold24Object,
 		color: textColor,
 		textDecoration: 'none',
 		'&': css(grid.column.centre),
 		gridRow: 1,
+		display: 'flex',
+		alignItems: 'flex-start',
 		[from.tablet]: headlineBold42Object,
 		[from.leftCol]: css(
 			grid.between('left-column-start', 'right-column-end'),
 		),
+		svg: {
+			marginRight: space[2],
+			width: space[10],
+			height: 'auto',
+			[from.tablet]: {
+				width: space[14],
+			},
+		},
 	});
 
 	const list = css({
-		display: 'flex',
-		flexWrap: 'wrap',
 		'&': css(grid.column.all),
-		gridRow: 2,
-		alignSelf: 'end',
+		display: 'flex',
+		alignItems: 'center',
 		position: 'relative',
-		'--top-border-gap': '1.55rem',
+		overflowX: 'scroll',
+		scrollbarWidth: 'none',
+		borderTop: '1px solid',
+		borderColor: palette.brand[600],
+		padding: `0 ${space[3]}px`,
+		height: space[10],
 		[from.mobileLandscape]: {
-			paddingLeft: 10,
+			padding: `0 ${space[5]}px`,
+			height: space[12],
 		},
-		[from.tablet]: {
-			'--top-border-gap': '3rem',
+		// This creates a gradient fade on the right side to indicate that there's more to scroll for.
+		'&:after': {
+			content: '""',
+			position: 'sticky',
+			right: `-${space[3]}px`,
+			top: 0,
+			height: '100%',
+			minWidth: 40,
+			background: `linear-gradient(to left, ${backgroundColor}, transparent)`,
+			[from.mobileLandscape]: {
+				right: `-${space[5]}px`,
+			},
 		},
-		backgroundImage: `
-			linear-gradient(
-				${textColor} 0,
-				${textColor} 1px,
-				transparent 1px,
-				transparent var(--top-border-gap),
-				${textColor} var(--top-border-gap),
-				${textColor} calc(var(--top-border-gap) + 1px),
-				transparent 1px,
-				transparent var(--top-border-gap)
-			)
-		`,
 	});
-
-	const selectedStyles = {
-		'--selected-height': '4px',
-		'--selected-opacity': '1',
-	};
 
 	const listItem = css({
 		position: 'relative',
@@ -202,61 +293,45 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 			backgroundColor: textColor,
 			transition: 'height 0.3s ease-in-out, opacity 0.05s 0.1s linear',
 		},
-		'&:hover': selectedStyles,
-		[from.leftCol]: {
-			flexBasis: 160,
+		[from.desktop]: {
+			'&:hover a': {
+				textDecoration: 'underline',
+				color: 'var(--masthead-nav-link-text-hover)',
+			},
 		},
 	});
 
 	const smallLink = css({
-		...headlineBold15Object,
-		padding: '4px 10px 6px',
+		...textSans14Object,
+		paddingRight: space[3],
 		display: 'block',
 		lineHeight: 1,
 		color: textColor,
 		textDecoration: 'none',
-		'&::after': {
-			content: '""',
-			display: 'block',
-			position: 'absolute',
-			top: 0,
-			right: 0,
-			width: 1,
-			height: '1.3rem',
-			backgroundColor: textColor,
-		},
-		[from.tablet]: headlineBold17Object,
-		[from.leftCol]: {
-			padding: '9px 10px 10px',
-		},
+		whiteSpace: 'nowrap',
 	});
 
-	const lastSmallLink = css(smallLink, {
-		...headlineMedium15Object,
-		lineHeight: 1,
-		[from.tablet]: headlineMedium17Object,
+	const boldSmallLink = css({
+		...textSansBold14Object,
 	});
 
 	return (
-		<nav css={[nav, heightStyles]}>
-			<BackgroundImage images={config.backgroundImages} />
+		<nav css={[nav]}>
 			<a href={`/${config.title.id}`} css={largeLinkStyles}>
+				{config.titleIcon && config.titleIcon}
 				{config.title.label}
 			</a>
+			<BackgroundImage images={config.backgroundImages} />
+
 			<ul css={list}>
-				{config.links.map((link, i) => (
-					<li
-						key={link.label}
-						css={listItem}
-						style={pageId === link.id ? selectedStyles : {}}
-					>
+				{config.links.map((link) => (
+					<li key={link.label} css={listItem}>
 						<a
 							href={`/${link.id}`}
-							css={
-								i === config.links.length - 1
-									? lastSmallLink
-									: smallLink
-							}
+							css={[
+								smallLink,
+								pageId === link.id && boldSmallLink,
+							]}
 						>
 							{link.label}
 						</a>
@@ -266,16 +341,6 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		</nav>
 	);
 };
-
-const heightStyles = css({
-	height: 116,
-	[from.tablet]: {
-		height: 140,
-	},
-	[from.desktop]: {
-		height: 150,
-	},
-});
 
 const BackgroundImage = (props: {
 	images: DirectoryPageNavConfig['backgroundImages'];
@@ -291,7 +356,6 @@ const BackgroundImage = (props: {
 					'&': css(grid.column.all),
 					gridRow: '1/3',
 				},
-				heightStyles,
 			]}
 		>
 			<Source images={props.images} breakpoint="wide" />
@@ -311,7 +375,8 @@ const BackgroundImage = (props: {
 				alt="Winter Olympics background graphic"
 				css={{
 					width: '100%',
-					height: '100%',
+					height: 'auto',
+					display: 'block',
 					objectFit: 'cover',
 					objectPosition: 'top',
 				}}
@@ -352,8 +417,9 @@ const breakpointToImageSize = (breakpoint: Breakpoint): ImageSize => {
 			return 'tablet';
 		case 'desktop':
 		case 'leftCol':
-		case 'wide':
 			return 'desktop';
+		case 'wide':
+			return 'wide';
 	}
 };
 
