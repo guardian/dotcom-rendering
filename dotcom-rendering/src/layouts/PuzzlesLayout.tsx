@@ -11,6 +11,7 @@ import {
 	textSans17,
 } from '@guardian/source/foundations';
 import { Footer } from '../components/Footer';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import type { NavType } from '../model/extract-nav';
@@ -19,6 +20,7 @@ import type {
 	PuzzleContainer,
 	PuzzleItem,
 } from '../types/puzzlesPage';
+import { Stuck } from './lib/stickiness';
 
 type Props = {
 	puzzlesPage: FEPuzzlesPageType;
@@ -587,9 +589,25 @@ const PuzzleContainerBlock = ({
 };
 
 export const PuzzlesLayout = ({ puzzlesPage, NAV }: Props) => {
+	const renderAds = !puzzlesPage.isAdFreeUser;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
+				{renderAds && (
+					<Stuck>
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot />
+						</Section>
+					</Stuck>
+				)}
+
 				<Masthead
 					nav={NAV}
 					editionId={puzzlesPage.editionId}
