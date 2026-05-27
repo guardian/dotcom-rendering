@@ -231,7 +231,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 
 		return (
 			<>
-				$
 				{isLoopClickThroughTest && (
 					<CardLink
 						linkTo={linkTo}
@@ -314,7 +313,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						isLoopClickThroughTest && videoControlsZIndexStyles,
 					]}
 				>
-					{!!isLoopClickThroughTest && showPlayPauseIcon !== null && (
+					{!isLoopClickThroughTest && showPlayPauseIcon !== null && (
 						<PlayPauseIcon
 							type={showPlayPauseIcon}
 							atomId={atomId}
