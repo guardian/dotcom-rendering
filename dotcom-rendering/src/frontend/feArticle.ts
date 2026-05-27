@@ -113,7 +113,6 @@ export interface FEArticle {
 	// The logic is date-driven. See:
 	// https://github.com/guardian/frontend/blob/main/common/app/model/dotcomrendering/InteractiveSwitchOver.scala#L7.
 	isLegacyInteractive?: boolean;
-	filterKeyEvents: boolean;
 
 	// Included on live and dead blogs. Used when polling
 	mostRecentBlockId?: string;

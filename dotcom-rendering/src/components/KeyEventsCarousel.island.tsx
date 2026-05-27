@@ -15,7 +15,6 @@ import { KeyEventCard } from './KeyEventCard';
 
 interface Props {
 	keyEvents: Block[];
-	filterKeyEvents: boolean;
 	id: 'key-events-carousel-desktop' | 'key-events-carousel-mobile';
 	serverTime?: number;
 	renderingTarget: RenderingTarget;
@@ -108,7 +107,6 @@ const isValidKeyEvent = (keyEvent: Block): keyEvent is ValidBlock => {
 };
 export const KeyEventsCarousel = ({
 	keyEvents,
-	filterKeyEvents,
 	id,
 	serverTime,
 	renderingTarget,
@@ -158,7 +156,6 @@ export const KeyEventsCarousel = ({
 						return (
 							<KeyEventCard
 								key={keyEvent.id}
-								filterKeyEvents={filterKeyEvents}
 								id={keyEvent.id}
 								blockFirstPublished={
 									keyEvent.blockFirstPublished

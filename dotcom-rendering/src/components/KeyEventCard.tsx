@@ -15,7 +15,6 @@ interface Props {
 	blockFirstPublished: number;
 	title: string;
 	isSummary: boolean;
-	filterKeyEvents: boolean;
 	serverTime?: number;
 	cardPosition?: string;
 	renderingTarget: RenderingTarget;
@@ -114,16 +113,13 @@ const timeStyles = css`
 `;
 
 export const getUrl = ({
-	filterKeyEvents,
 	renderingTarget,
 	id,
 }: {
-	filterKeyEvents: boolean;
 	renderingTarget: RenderingTarget;
 	id: string;
 }) => {
 	const searchParams = new URLSearchParams();
-	searchParams.append('filterKeyEvents', String(filterKeyEvents));
 	searchParams.append('page', `with:block-${id}`);
 	if (renderingTarget === 'Apps') {
 		searchParams.append('dcr', 'apps');
@@ -137,12 +133,11 @@ export const KeyEventCard = ({
 	blockFirstPublished,
 	isSummary,
 	title,
-	filterKeyEvents,
 	cardPosition = 'unknown position',
 	serverTime,
 	renderingTarget,
 }: Props) => {
-	const url = getUrl({ filterKeyEvents, renderingTarget, id });
+	const url = getUrl({ renderingTarget, id });
 
 	return (
 		<li css={listItemStyles}>
