@@ -11,6 +11,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
+import { useBetaAB } from '../lib/useAB';
 import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
@@ -44,7 +45,6 @@ import type { SubtitlesPosition } from './SubtitleOverlay';
 import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import type { VideoEventKey } from './YoutubeAtom/YoutubeAtom';
-import { useBetaAB } from '../lib/useAB';
 
 /**
  * The fraction of the video required to be visible in the viewport to be considered "in view".
@@ -397,9 +397,11 @@ type Props = {
 	isMainMedia?: boolean;
 	role?: RoleType;
 	restrictHeightOnDesktop?: boolean;
-	headlineText: string;
-	dataLinkName?: string;
-	isExternalLink: boolean;
+	cardLink?: {
+		headlineText: string;
+		dataLinkName?: string;
+		isExternalLink: boolean;
+	};
 };
 
 export const SelfHostedVideo = ({
@@ -429,9 +431,7 @@ export const SelfHostedVideo = ({
 	role,
 	posterImageAspectRatio,
 	restrictHeightOnDesktop = false,
-	headlineText,
-	dataLinkName,
-	isExternalLink,
+	cardLink,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -1324,9 +1324,7 @@ export const SelfHostedVideo = ({
 						isInteractive={videoStyleSettings.isInteractive}
 						isWebKitFullscreen={isWebKitFullscreen}
 						linkTo={linkTo}
-						headlineText={headlineText}
-						dataLinkName={dataLinkName}
-						isExternalLink={isExternalLink}
+						cardLink={cardLink}
 						isLoopClickThroughTest={isLoopClickThroughTest}
 					/>
 				</div>

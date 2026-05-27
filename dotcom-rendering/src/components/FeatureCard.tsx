@@ -174,6 +174,7 @@ const overlayStyles = css`
 	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
 	 * Links define their own z-index.
 	 */
+
 	> :not(.waveform):not(a) {
 		z-index: 1;
 	}
@@ -601,6 +602,11 @@ export const FeatureCard = ({
 											controlsPosition="top"
 											minAspectRatio={aspectRatioNumber}
 											maxAspectRatio={aspectRatioNumber}
+											cardLink={{
+												headlineText,
+												dataLinkName,
+												isExternalLink,
+											}}
 										/>
 									</Island>
 								)}

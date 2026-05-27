@@ -932,9 +932,11 @@ export const Card = ({
 									subtitleSize={subtitleSize}
 									minAspectRatio={3 / 4}
 									containerAspectRatioDesktop={5 / 4}
-									headlineText={headlineText}
-									dataLinkName={resolvedDataLinkName}
-									isExternalLink={isExternalLink}
+									cardLink={{
+										headlineText,
+										dataLinkName,
+										isExternalLink,
+									}}
 								/>
 							</Island>
 						)}

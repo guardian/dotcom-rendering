@@ -154,9 +154,11 @@ export type Props = {
 	isWebKitFullscreen: boolean;
 	/* used by the card link component for click through to article functionality */
 	linkTo: string;
-	headlineText: string;
-	dataLinkName?: string;
-	isExternalLink: boolean;
+	cardLink?: {
+		headlineText: string;
+		dataLinkName?: string;
+		isExternalLink: boolean;
+	};
 	isLoopClickThroughTest?: boolean;
 };
 
@@ -213,9 +215,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			subtitlesPosition,
 			isWebKitFullscreen,
 			linkTo,
-			headlineText,
-			dataLinkName,
-			isExternalLink,
+			cardLink,
 			isLoopClickThroughTest,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
@@ -231,12 +231,12 @@ export const SelfHostedVideoPlayer = forwardRef(
 
 		return (
 			<>
-				{isLoopClickThroughTest && (
+				{cardLink && isLoopClickThroughTest && (
 					<CardLink
 						linkTo={linkTo}
-						headlineText={headlineText}
-						dataLinkName={dataLinkName}
-						isExternalLink={isExternalLink}
+						headlineText={cardLink.headlineText}
+						dataLinkName={cardLink.dataLinkName}
+						isExternalLink={cardLink.isExternalLink}
 						isLoopClickThroughTest={true}
 					/>
 				)}
