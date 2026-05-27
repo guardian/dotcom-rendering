@@ -11,7 +11,7 @@ import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
-import { isSkimlink } from '../lib/affiliateLinksUtils';
+import { isSkimlink, SKIMLINK_REL } from '../lib/affiliateLinksUtils';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -291,7 +291,7 @@ const buildElementTree =
 					 * @see https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links
 					 */
 					rel: isSkimlink(href)
-						? 'sponsored noreferrer noopener'
+						? SKIMLINK_REL
 						: getAttrs(node)?.getNamedItem('rel')?.value,
 					key,
 					children,
