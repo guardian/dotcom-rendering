@@ -47,8 +47,10 @@ export type ArticleFields = {
 	serverTime?: number | undefined;
 };
 
+export type GalleryDesign = ArticleDesign.Gallery | ArticleDesign.HostedGallery;
+
 export type Gallery = ArticleFields & {
-	design: ArticleDesign.Gallery;
+	design: GalleryDesign;
 	bodyElements: (ImageBlockElement | AdPlaceholderBlockElement)[];
 	mainMedia?: ImageBlockElement;
 };
@@ -120,13 +122,14 @@ export const enhanceArticleType = (
 		data.main,
 	)(data.mainMediaElements);
 
-	const storyPackage = parseStoryPackage(
-		data.storyPackage,
-		format.design === ArticleDesign.Gallery,
-	);
+	const isGalleryPage =
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.HostedGallery;
 
-	if (format.design === ArticleDesign.Gallery) {
-		const design = ArticleDesign.Gallery;
+	const storyPackage = parseStoryPackage(data.storyPackage, isGalleryPage);
+
+	if (isGalleryPage) {
+		const { design } = format;
 
 		return {
 			frontendData: {
