@@ -14,15 +14,15 @@ import { grid } from '../grid';
 import { getInteractionClient } from '../lib/bridgetApi';
 import { generateImageURL } from '../lib/image';
 import { useBetaAB } from '../lib/useAB';
-import {
-	WorldCup2026Icon,
-	WorldCup2026IconSmall,
-	worldCup2026PageIds,
-} from '../lib/worldCup2026';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 import { palette as themePalette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
+import {
+	WorldCup2026Icon,
+	WorldCup2026IconSmall,
+} from '../lib/WorldCup2026Icons';
 
 type Props = {
 	pageId: string;

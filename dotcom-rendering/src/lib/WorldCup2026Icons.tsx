@@ -1,11 +1,3 @@
-export const worldCup2026PageIds = [
-	'football/world-cup-2026',
-	'football/world-cup-2026/fixtures',
-	'football/world-cup-2026/overview',
-];
-
-export const worldCupTagId = 'football/world-cup-2026';
-
 export const WorldCup2026Icon = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
