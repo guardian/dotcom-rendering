@@ -239,7 +239,7 @@ export const MoreGalleries = (props: Props) => {
 						firstTrail,
 						props.discussionApiUrl,
 						props.format,
-						firstTrail.mainMedia?.type !== 'Audio',
+						true,
 						props.serverTime,
 					)}
 				/>
