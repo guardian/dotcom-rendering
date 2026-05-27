@@ -7,6 +7,10 @@ import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { lazyFetchEmailWithTimeout } from './fetchEmail';
 import {
+	getEffectiveMarketingOptIn,
+	getMarketingOptInType,
+} from './newsletter-marketing-opt-in';
+import {
 	EVENT_DESCRIPTION_TO_ACTION,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	type NewsletterEventDescription,
@@ -20,13 +24,21 @@ import { useBrowserId } from './useBrowserId';
 // Helpers (kept local — not part of the public API)
 // ---------------------------------------------------------------------------
 
-const buildFormData = (
-	emailAddress: string,
-	newsletterId: string,
-	token: string,
-	marketingOptIn?: boolean,
-	browserId?: string,
-): FormData => {
+const buildFormData = ({
+	emailAddress,
+	newsletterId,
+	token,
+	marketingOptIn,
+	browserId,
+	marketingOptInHiddenForCountry,
+}: {
+	emailAddress: string;
+	newsletterId: string;
+	token: string;
+	marketingOptIn?: boolean;
+	browserId?: string;
+	marketingOptInHiddenForCountry?: boolean;
+}): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
 
@@ -43,6 +55,10 @@ const buildFormData = (
 
 	if (marketingOptIn !== undefined) {
 		formData.append('marketing', marketingOptIn ? 'true' : 'false');
+	}
+
+	if (marketingOptInHiddenForCountry === true) {
+		formData.append('marketingOptInHidden', 'true');
 	}
 
 	if (browserId !== undefined) {
@@ -100,13 +116,18 @@ const sendTracking = (
 	renderingTarget: RenderingTarget,
 	isSignedIn: boolean | 'Pending',
 	abTest?: AbTest,
+	extraDetails?: Record<string, unknown>,
 ): void => {
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
 		identityName: newsletterId,
 		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(newsletterId),
 		renderingTarget,
-		value: { eventDescription, isSignedIn },
+		value: {
+			...extraDetails,
+			eventDescription,
+			isSignedIn,
+		},
 		abTest,
 	});
 };
@@ -136,6 +157,12 @@ export type NewsletterSignupFormState = {
 	/** `true` for signed-out users — shows the marketing opt-in toggle. */
 	showMarketingToggle: boolean;
 	marketingOptIn: boolean | undefined;
+	/**
+	 * `true` when the marketing toggle is hidden by country policy (switch on,
+	 * US, signed out). Included in the sign-up payload so the backend knows
+	 * the opt-in was implicit.
+	 */
+	marketingOptInHiddenForCountry: boolean;
 
 	/** `true` while the POST request is in-flight. */
 	isWaitingForResponse: boolean;
@@ -187,6 +214,7 @@ export const useNewsletterSignupForm = (
 	newsletterId: string,
 	renderingTarget: RenderingTarget,
 	abTest?: AbTest,
+	hideMarketingToggle = false,
 ): NewsletterSignupFormState => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
@@ -216,6 +244,13 @@ export const useNewsletterSignupForm = (
 	const marketingOptInRef = useRef(marketingOptIn);
 	const browserIdRef = useRef(browserId);
 	const authStatusRef = useRef(authStatus);
+	const isSignedInRef = useRef(isSignedIn);
+	const hideMarketingToggleRef = useRef(hideMarketingToggle);
+	// Single source of truth for the submit handler — derived from the same
+	// inputs as the UI value so they can never diverge due to a timing race.
+	const marketingOptInHiddenForCountryRef = useRef(
+		hideMarketingToggle && isSignedIn === false,
+	);
 	useEffect(() => {
 		marketingOptInRef.current = marketingOptIn;
 	}, [marketingOptIn]);
@@ -225,6 +260,16 @@ export const useNewsletterSignupForm = (
 	useEffect(() => {
 		authStatusRef.current = authStatus;
 	}, [authStatus]);
+	useEffect(() => {
+		isSignedInRef.current = isSignedIn;
+	}, [isSignedIn]);
+	useEffect(() => {
+		hideMarketingToggleRef.current = hideMarketingToggle;
+	}, [hideMarketingToggle]);
+	useEffect(() => {
+		marketingOptInHiddenForCountryRef.current =
+			hideMarketingToggle && isSignedIn === false;
+	}, [hideMarketingToggle, isSignedIn]);
 
 	// The email address that was validated at submit-time. We stash it in a
 	// ref and read it back when the captcha resolves, so it can't change out
@@ -271,21 +316,38 @@ export const useNewsletterSignupForm = (
 
 	const submitForm = useCallback(
 		async (emailAddress: string, token: string): Promise<void> => {
+			const marketingOptInHiddenForCountry =
+				marketingOptInHiddenForCountryRef.current;
+			const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
+				marketingOptInHiddenForCountry,
+				isSignedIn: isSignedInRef.current,
+				marketingOptIn: marketingOptInRef.current,
+			});
+			const marketingOptInType = getMarketingOptInType({
+				marketingOptInHiddenForCountry,
+				isSignedIn: isSignedInRef.current,
+				effectiveMarketingOptIn,
+			});
+
 			sendTracking(
 				newsletterId,
 				'form-submission',
 				renderingTarget,
 				isSignedIn,
 				abTest,
+				marketingOptInType ? { marketingOptInType } : undefined,
 			);
 
-			const formData = buildFormData(
+			const formData = buildFormData({
 				emailAddress,
 				newsletterId,
 				token,
-				marketingOptInRef.current,
-				browserIdRef.current,
-			);
+				marketingOptIn: effectiveMarketingOptIn,
+				browserId: browserIdRef.current,
+				marketingOptInHiddenForCountry: marketingOptInHiddenForCountry
+					? true
+					: undefined,
+			});
 
 			const response = await postFormData(
 				window.guardian.config.page.ajaxUrl + '/email',
@@ -310,6 +372,7 @@ export const useNewsletterSignupForm = (
 				renderingTarget,
 				isSignedIn,
 				abTest,
+				marketingOptInType ? { marketingOptInType } : undefined,
 			);
 		},
 		[abTest, isSignedIn, newsletterId, renderingTarget],
@@ -478,8 +541,10 @@ export const useNewsletterSignupForm = (
 		userEmail,
 		isSignedIn: hasPrefilledEmail,
 		isInteracted,
-		showMarketingToggle: isSignedIn === false,
+		showMarketingToggle: isSignedIn !== true && !hideMarketingToggle,
 		marketingOptIn,
+		marketingOptInHiddenForCountry:
+			hideMarketingToggle && isSignedIn === false,
 		isWaitingForResponse,
 		responseOk,
 		errorMessage,

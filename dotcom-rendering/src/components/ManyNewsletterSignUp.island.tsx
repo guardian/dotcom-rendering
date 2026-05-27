@@ -14,11 +14,16 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 // Use the default export instead.
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import {
+	getEffectiveMarketingOptIn,
+	getMarketingOptInType,
+} from '../lib/newsletter-marketing-opt-in';
+import {
 	reportTrackingEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
+import { useHideMarketingToggleForCountry } from '../lib/useHideMarketingToggleForCountry';
 import { useConfig } from './ConfigContext';
 import { Flex } from './Flex';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
@@ -137,6 +142,10 @@ export const ManyNewsletterSignUp = ({
 }: Props) => {
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
+	const hideMarketingToggle = useHideMarketingToggleForCountry();
+	/** True when the marketing toggle is hidden for this user due to country policy. */
+	const marketingOptInHiddenForCountry =
+		hideMarketingToggle && isSignedIn === false;
 
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		Array<{
@@ -248,6 +257,16 @@ export const ManyNewsletterSignUp = ({
 		const listIds = newslettersToSignUpFor.map(
 			(newsletter) => newsletter.listId,
 		);
+		const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
+			marketingOptInHiddenForCountry,
+			isSignedIn,
+			marketingOptIn,
+		});
+		const marketingOptInType = getMarketingOptInType({
+			marketingOptInHiddenForCountry,
+			isSignedIn,
+			effectiveMarketingOptIn,
+		});
 
 		void reportTrackingEvent(
 			'ManyNewsletterSignUp',
@@ -262,14 +281,11 @@ export const ManyNewsletterSignUp = ({
 			email,
 			identityNames,
 			reCaptchaToken,
-			marketingOptIn,
+			effectiveMarketingOptIn,
+			marketingOptInHiddenForCountry ? true : undefined,
 		).catch(() => {
 			return undefined;
 		});
-
-		const marketingOptInType = marketingOptIn
-			? 'similar-guardian-products-optin'
-			: 'similar-guardian-products-optout';
 
 		if (!response?.ok) {
 			const responseText = response
@@ -281,12 +297,9 @@ export const ManyNewsletterSignUp = ({
 				renderingTarget,
 				{
 					listIds,
-					...(marketingOptIn !== undefined && { marketingOptInType }),
-					// If the backend handles the failure and responds with an informative
-					// error message (E.G. "Service unavailable", "Invalid email" etc) this
-					// should be included in the event data.
-					// If not, the response text will be the HTML for the default error page
-					// which would not be helpful to include it in the tracking data.
+					...(marketingOptInType !== undefined && {
+						marketingOptInType,
+					}),
 					responseText: responseText.substring(0, 100),
 				},
 			);
@@ -300,7 +313,7 @@ export const ManyNewsletterSignUp = ({
 			renderingTarget,
 			{
 				listIds,
-				...(marketingOptIn !== undefined && { marketingOptInType }),
+				...(marketingOptInType !== undefined && { marketingOptInType }),
 			},
 		);
 
@@ -418,7 +431,12 @@ export const ManyNewsletterSignUp = ({
 								status,
 							}}
 							newsletterCount={newslettersToSignUpFor.length}
-							marketingOptIn={marketingOptIn}
+							marketingOptIn={
+								marketingOptInHiddenForCountry ||
+								isSignedIn === true
+									? undefined
+									: marketingOptIn
+							}
 							setMarketingOptIn={setMarketingOptIn}
 							useReCaptcha={useReCaptcha}
 							captchaSiteKey={captchaSiteKey}
