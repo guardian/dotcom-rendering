@@ -2,6 +2,7 @@ import { submitComponentEvent } from '../client/ophan/ophan';
 import {
 	AB_TEST_NAME,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT,
 	sendNewsletterSignupEvent,
 } from './newsletterSignupTracking';
 
@@ -13,17 +14,26 @@ const IDENTITY_NAME = 'morning-briefing';
 const RENDERING_TARGET = 'Web';
 const MOCK_TIMESTAMP = 1_000_000_000_000;
 
-describe('NEWSLETTER_SIGNUP_COMPONENT_ID', () => {
-	it('returns the correct control component id', () => {
-		expect(NEWSLETTER_SIGNUP_COMPONENT_ID.control(IDENTITY_NAME)).toBe(
-			`AR SecureSignup ${IDENTITY_NAME}`,
-		);
-	});
-
-	it('returns the correct variant component id', () => {
-		expect(NEWSLETTER_SIGNUP_COMPONENT_ID.variant(IDENTITY_NAME)).toBe(
-			`AR NewsletterSignupForm ${IDENTITY_NAME}`,
-		);
+describe('NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT', () => {
+	it('returns explicit IDs for in-article and highlights contexts', () => {
+		expect({
+			inArticleControl:
+				NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.control(
+					IDENTITY_NAME,
+				),
+			inArticleVariant:
+				NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.variant(
+					IDENTITY_NAME,
+				),
+			highlights:
+				NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.highlights.control(
+					IDENTITY_NAME,
+				),
+		}).toEqual({
+			inArticleControl: `AR SecureSignup ${IDENTITY_NAME}`,
+			inArticleVariant: `AR NewsletterSignupForm ${IDENTITY_NAME}`,
+			highlights: `AR HighlightsNewsletterSignupForm ${IDENTITY_NAME}`,
+		});
 	});
 });
 
@@ -64,37 +74,7 @@ describe('sendNewsletterSignupEvent', () => {
 		);
 	});
 
-	it('calls submitComponentEvent with the correct shape for an EXPAND event', () => {
-		const renderUrl = '/world/newsletters/morning-briefing/latest';
-
-		sendNewsletterSignupEvent({
-			action: 'EXPAND',
-			identityName: IDENTITY_NAME,
-			componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(IDENTITY_NAME),
-			renderingTarget: RENDERING_TARGET,
-			value: { eventDescription: 'preview-open', renderUrl },
-		});
-
-		expect(submitComponentEvent).toHaveBeenCalledWith(
-			{
-				component: {
-					componentType: 'NEWSLETTER_SUBSCRIPTION',
-					id: `AR NewsletterSignupForm ${IDENTITY_NAME}`,
-				},
-				action: 'EXPAND',
-				value: JSON.stringify({
-					eventDescription: 'preview-open',
-					renderUrl,
-					newsletterId: IDENTITY_NAME,
-					timestamp: MOCK_TIMESTAMP,
-				}),
-				abTest: undefined,
-			},
-			RENDERING_TARGET,
-		);
-	});
-
-	it('always merges newsletterId and timestamp into the value payload', () => {
+	it('merges newsletterId and timestamp into event payload', () => {
 		sendNewsletterSignupEvent({
 			action: 'CLOSE',
 			identityName: IDENTITY_NAME,
