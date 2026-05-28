@@ -40,7 +40,6 @@ export const Audio: FEArticle = {
 		},
 	],
 	main: '<!-- Invalid audio element without "html" field -->',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{

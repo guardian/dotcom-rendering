@@ -288,7 +288,6 @@ export const Live: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="2dbb8d5200a0c46420d3d9145194d7bcb9311d44"> \n <img src="https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/1000.jpg" alt="Perseverance rover as it touched down in the area known as Jezero crater." width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">Perseverance rover as it touched down in the area known as Jezero crater.</span> <span class="element-image__credit">Photograph: NASA/Getty Images</span> \n </figcaption> \n</figure>',
-	filterKeyEvents: false,
 	keyEvents: [
 		{
 			id: '60300f5f8f08ad21ea60071e',
@@ -2156,8 +2155,8 @@ export const Live: FEArticle = {
 	pagination: {
 		currentPage: 1,
 		totalPages: 4,
-		oldest: '?page=with:block-602fd0c48f08ad21ea600275&filterKeyEvents=false',
-		older: '?page=with:block-603006048f08c3cb92a5ca64&filterKeyEvents=false',
+		oldest: '?page=with:block-602fd0c48f08ad21ea600275',
+		older: '?page=with:block-603006048f08c3cb92a5ca64',
 	},
 	author: {
 		byline: 'Tom McCarthy and Natalie Grover',

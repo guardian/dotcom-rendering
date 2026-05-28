@@ -283,7 +283,6 @@ export const Picture: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="332083af16a1d51a7d6d70e0ad266f19ab57fd96"> <img src="https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/1000.jpg" alt="Nicola Jennings cartoon 26/4/21: Johnson covering walls of No 10 with \'Sleaze\' paint" width="1000" height="600" class="gu-image" /> </figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [],
 	author: {

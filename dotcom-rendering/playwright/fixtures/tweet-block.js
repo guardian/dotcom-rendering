@@ -7,7 +7,7 @@
  *
  * The request was:
  *
- * https://api.nextgen.guardianapps.co.uk/us-news/live/2024/jan/08/government-shutdown-republicans-budget-biden-speech-trump-politics-latest.json?lastUpdate=block-659bf8cb8f08f409d77a80dd&isLivePage=true&dcr=true&filterKeyEvents=false
+ * https://api.nextgen.guardianapps.co.uk/us-news/live/2024/jan/08/government-shutdown-republicans-budget-biden-speech-trump-politics-latest.json?lastUpdate=block-659bf8cb8f08f409d77a80dd&isLivePage=true&dcr=true
  *
  * To replace look for similar requests on an active liveblog and check if they have an embedded tweet
  */
