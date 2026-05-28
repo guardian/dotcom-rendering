@@ -132,7 +132,6 @@ const descriptionStyles = css`
 // ── Props ─────────────────────────────────────────────────────────────────────
 
 type FeastContextualNudgeProps = {
-	brazeBannersSystemPlacementIdIndex?: number;
 	recipe?: RecipeBlockElement;
 	recipeArticleTitle: string;
 	pageId: string;
@@ -141,7 +140,6 @@ type FeastContextualNudgeProps = {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export const FeastContextualNudge = ({
-	brazeBannersSystemPlacementIdIndex,
 	recipe,
 	recipeArticleTitle,
 	pageId,

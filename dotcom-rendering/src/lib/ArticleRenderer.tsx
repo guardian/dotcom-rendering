@@ -168,7 +168,6 @@ export const ArticleRenderer = ({
 					{section.subheadingEl}
 					{section.recipe && (
 						<FeastContextualNudge
-							brazeBannersSystemPlacementIdIndex={0}
 							pageId={pageId}
 							recipe={section.recipe}
 							recipeArticleTitle={section.recipeArticleTitle}
