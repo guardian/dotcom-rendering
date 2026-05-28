@@ -29,12 +29,18 @@ test("riffRaffYamlFile", async () => {
 
 		const riffRaff = riffRaffYamlFile({ app, stack, region });
 
-		const {
-			riffRaffYaml: { deployments },
-		} = riffRaff;
+		const { configuration } = riffRaff;
 
-		ok(deployments.get("config/ab-testing"));
-		ok(deployments.get("admin/ab-testing"));
+		ok(
+			configuration
+				.get("dotcom:ab-testing")
+				?.deployments.get("config/ab-testing"),
+		);
+		ok(
+			configuration
+				.get("dotcom:ab-testing")
+				?.deployments.get("admin/ab-testing"),
+		);
 	});
 
 	it("should have correct dependencies for config CloudFormation deployment", () => {
@@ -59,21 +65,19 @@ test("riffRaffYamlFile", async () => {
 		});
 
 		const riffRaff = riffRaffYamlFile({ app, stack, region });
-		const {
-			riffRaffYaml: { deployments },
-		} = riffRaff;
+		const { configuration } = riffRaff;
 
 		const configCloudformationDeploymentName = `cfn-${region}-${stack}-ab-testing-config`;
 
 		const deploymentLambdaDeploymentName = `lambda-update-${region}-${stack}-ab-testing-deployment-lambda`;
 
-		const configCloudformationDeployment = deployments.get(
-			configCloudformationDeploymentName,
-		);
+		const configCloudformationDeployment = configuration
+			.get("dotcom:ab-testing")
+			?.deployments.get(configCloudformationDeploymentName);
 
-		const deploymentLambdaDeployment = deployments.get(
-			deploymentLambdaDeploymentName,
-		);
+		const deploymentLambdaDeployment = configuration
+			.get("dotcom:ab-testing")
+			?.deployments.get(deploymentLambdaDeploymentName);
 
 		ok(
 			configCloudformationDeployment,
@@ -86,7 +90,7 @@ test("riffRaffYamlFile", async () => {
 		);
 
 		deepEqual(
-			configCloudformationDeployment.dependencies,
+			configCloudformationDeployment?.dependencies?.sort(),
 			["config/ab-testing", deploymentLambdaDeploymentName].sort(),
 		);
 	});

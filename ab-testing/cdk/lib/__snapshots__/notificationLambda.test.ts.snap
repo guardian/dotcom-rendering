@@ -10,7 +10,7 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
       "GuScheduledLambda",
       "GuLambdaErrorPercentageAlarm"
     ],
-    "gu:cdk:version": "62.6.1"
+    "gu:cdk:version": "63.3.1"
   },
   "Resources": {
     "EmailIdentityAbtestingnotificationlambdaE053C648": {
@@ -24,11 +24,15 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.6.1"
+            "Value": "63.3.1"
           },
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "gu:riff-raff:project",
+            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",
@@ -113,11 +117,15 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
         "Tags": [
           {
             "Key": "gu:cdk:version",
-            "Value": "62.6.1"
+            "Value": "63.3.1"
           },
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "gu:riff-raff:project",
+            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",
@@ -166,11 +174,15 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.6.1"
+            "Value": "63.3.1"
           },
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "gu:riff-raff:project",
+            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",
@@ -340,11 +352,15 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.6.1"
+            "Value": "63.3.1"
           },
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "gu:riff-raff:project",
+            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",
@@ -452,11 +468,15 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
         "Tags": [
           {
             "Key": "gu:cdk:version",
-            "Value": "62.6.1"
+            "Value": "63.3.1"
           },
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "gu:riff-raff:project",
+            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",
@@ -494,7 +514,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
       "GuScheduledLambda",
       "GuLambdaErrorPercentageAlarm"
     ],
-    "gu:cdk:version": "62.6.1"
+    "gu:cdk:version": "63.3.1"
   },
   "Resources": {
     "EmailIdentityAbtestingnotificationlambdaE053C648": {
@@ -508,11 +528,15 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.6.1"
+            "Value": "63.3.1"
           },
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "gu:riff-raff:project",
+            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",
@@ -597,11 +621,15 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
         "Tags": [
           {
             "Key": "gu:cdk:version",
-            "Value": "62.6.1"
+            "Value": "63.3.1"
           },
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "gu:riff-raff:project",
+            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",
@@ -660,11 +688,15 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.6.1"
+            "Value": "63.3.1"
           },
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "gu:riff-raff:project",
+            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",
@@ -834,11 +866,15 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.6.1"
+            "Value": "63.3.1"
           },
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "gu:riff-raff:project",
+            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",
@@ -869,11 +905,15 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.6.1"
+            "Value": "63.3.1"
           },
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "gu:riff-raff:project",
+            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",
@@ -1006,11 +1046,15 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
         "Tags": [
           {
             "Key": "gu:cdk:version",
-            "Value": "62.6.1"
+            "Value": "63.3.1"
           },
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "gu:riff-raff:project",
+            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",

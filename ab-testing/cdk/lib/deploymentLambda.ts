@@ -10,7 +10,10 @@ export const lambdaFunctionName = "ab-testing-deployment-lambda";
 
 export class AbTestingDeploymentLambda extends GuStack {
 	constructor(scope: App, id: string, props: GuStackProps) {
-		super(scope, id, props);
+		super(scope, id, {
+			...props,
+			riffRaffProjectName: "dotcom:ab-testing",
+		});
 
 		const s3Bucket = GuS3Bucket.fromBucketName(
 			this,

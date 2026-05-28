@@ -23,7 +23,10 @@ const getEmailDomain = (stage: GuStackProps["stage"]) => {
 
 export class AbTestingNotificationLambda extends GuStack {
 	constructor(scope: App, id: string, props: GuStackProps) {
-		super(scope, id, props);
+		super(scope, id, {
+			...props,
+			riffRaffProjectName: "dotcom:ab-testing",
+		});
 
 		const runDailyRule = {
 			// 5am daily on weekdays

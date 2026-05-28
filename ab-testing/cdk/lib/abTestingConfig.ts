@@ -7,7 +7,10 @@ import { lambdaFunctionName } from "./deploymentLambda.ts";
 
 export class AbTestingConfig extends GuStack {
 	constructor(scope: App, id: string, props: GuStackProps) {
-		super(scope, id, props);
+		super(scope, id, {
+			...props,
+			riffRaffProjectName: "dotcom:ab-testing",
+		});
 
 		const lambda = Function.fromFunctionName(
 			this,
