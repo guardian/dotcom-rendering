@@ -13,6 +13,7 @@ import {
 	ArticleSpecial,
 } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
+import { appendLinkNameMedia } from '../lib/getDataLinkName';
 import { getZIndex } from '../lib/getZIndex';
 import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
@@ -453,6 +454,13 @@ export const FeatureCard = ({
 		return null;
 	}
 
+	const mediaType =
+		media.type === 'self-hosted-video' ? media.style : media.type;
+
+	const resolvedDataLinkName = !isUndefined(dataLinkName)
+		? appendLinkNameMedia(dataLinkName, mediaType)
+		: undefined;
+
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
 
@@ -492,7 +500,7 @@ export const FeatureCard = ({
 						<CardLink
 							linkTo={linkTo}
 							headlineText={headlineText}
-							dataLinkName={dataLinkName}
+							dataLinkName={resolvedDataLinkName}
 							isExternalLink={isExternalLink}
 						/>
 					)}
@@ -604,7 +612,8 @@ export const FeatureCard = ({
 											maxAspectRatio={aspectRatioNumber}
 											cardLink={{
 												headlineText,
-												dataLinkName,
+												dataLinkName:
+													resolvedDataLinkName,
 												isExternalLink,
 											}}
 										/>
