@@ -59,7 +59,7 @@ jobs:
           exitOnceUploaded: true
           # Skip when no relevant UI files changed.
           # Chromatic will post a passing status without building Storybook.
-          skip: needs.check-paths.outputs.relevant != 'true'
+          skip: ${{ needs.check-paths.outputs.relevant != 'true' }}
 
   remove-label:
     # Only remove label when Chromatic actually ran (label present and relevant changes)
