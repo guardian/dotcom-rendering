@@ -28,7 +28,7 @@ const meta = {
 	component: FeastContextualNudge,
 	args: {
 		pageId: 'food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-		recipeName: "Meera Sodha's spring onion pancakes",
+		recipeArticleTitle: "Meera Sodha's spring onion pancakes",
 		recipe: mockRecipe,
 	},
 	parameters: {
