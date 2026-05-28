@@ -124,6 +124,7 @@ export const EmailSignUpWrapper = ({
 			renderingTarget,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
+				isSignedIn,
 			},
 			// Use the standard Ophan abTest field so Ophan can join events
 			// to the A/B test — not strings encoded inside value.
@@ -133,6 +134,7 @@ export const EmailSignUpWrapper = ({
 		abResolved,
 		abVariant,
 		identityName,
+		isSignedIn,
 		isSubscribed,
 		isVariant,
 		abTestEnabled,
