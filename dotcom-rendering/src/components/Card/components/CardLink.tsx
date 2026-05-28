@@ -85,13 +85,17 @@ export const CardLink = ({
 	isExternalLink,
 	isLoopClickThroughTest,
 }: Props) => {
+	const amendedLinkName = isLoopClickThroughTest
+		? `${dataLinkName} | article-link`
+		: dataLinkName;
+
 	return (
 		<>
 			{isExternalLink && (
 				<ExternalLink
 					linkTo={linkTo}
 					headlineText={headlineText}
-					dataLinkName={dataLinkName}
+					dataLinkName={amendedLinkName}
 					isLoopClickThroughTest={isLoopClickThroughTest === true}
 				/>
 			)}
@@ -99,7 +103,7 @@ export const CardLink = ({
 				<InternalLink
 					linkTo={linkTo}
 					headlineText={headlineText}
-					dataLinkName={dataLinkName}
+					dataLinkName={amendedLinkName}
 					isLoopClickThroughTest={isLoopClickThroughTest === true}
 				/>
 			)}

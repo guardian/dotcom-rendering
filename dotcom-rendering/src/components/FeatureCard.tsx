@@ -17,6 +17,7 @@ import { appendLinkNameMedia } from '../lib/getDataLinkName';
 import { getZIndex } from '../lib/getZIndex';
 import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
+import { useBetaAB } from '../lib/useAB';
 import { palette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { StarRating as Rating, RatingSizeType } from '../types/content';
@@ -437,6 +438,16 @@ export const FeatureCard = ({
 	starRatingSize,
 	articleMedia,
 }: Props) => {
+	const ab = useBetaAB();
+	const isInLoopClickTestControl = ab?.isUserInTestGroup(
+		'fronts-and-curation-loop-click-through',
+		'control',
+	);
+	const isInLoopClickTestVariant = ab?.isUserInTestGroup(
+		'fronts-and-curation-loop-click-through',
+		'variant',
+	);
+
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
 	/**
@@ -453,6 +464,11 @@ export const FeatureCard = ({
 	if (!media) {
 		return null;
 	}
+
+	const isInLoopClickTest =
+		media.style &&
+		media.style === 'loop-video' &&
+		(isInLoopClickTestControl || isInLoopClickTestVariant);
 
 	const mediaType =
 		media.type === 'self-hosted-video' ? media.style : media.type;
@@ -502,6 +518,7 @@ export const FeatureCard = ({
 							headlineText={headlineText}
 							dataLinkName={resolvedDataLinkName}
 							isExternalLink={isExternalLink}
+							isLoopClickThroughTest={isInLoopClickTest}
 						/>
 					)}
 					<div css={contentStyles}>
@@ -616,6 +633,9 @@ export const FeatureCard = ({
 													resolvedDataLinkName,
 												isExternalLink,
 											}}
+											isInLoopClickTestVariant={
+												isInLoopClickTestVariant
+											}
 										/>
 									</Island>
 								)}

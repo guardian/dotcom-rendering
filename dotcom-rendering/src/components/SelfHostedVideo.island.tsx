@@ -11,7 +11,6 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
-import { useBetaAB } from '../lib/useAB';
 import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
@@ -402,6 +401,7 @@ type Props = {
 		dataLinkName?: string;
 		isExternalLink: boolean;
 	};
+	isInLoopClickTestVariant?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -432,6 +432,7 @@ export const SelfHostedVideo = ({
 	posterImageAspectRatio,
 	restrictHeightOnDesktop = false,
 	cardLink,
+	isInLoopClickTestVariant,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -460,11 +461,8 @@ export const SelfHostedVideo = ({
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
-	const ab = useBetaAB();
-
 	const isLoopClickThroughTest =
-		videoStyle === 'Loop' &&
-		ab?.isUserInTest('fronts-and-curation-loop-click-through');
+		videoStyle === 'Loop' && isInLoopClickTestVariant;
 
 	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
