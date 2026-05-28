@@ -29,6 +29,8 @@ export const EVENT_DESCRIPTION_TO_ACTION = {
 	'open-captcha': 'EXPAND',
 } as const satisfies Record<NewsletterEventDescription, string>;
 
+export type NewsletterSignupTrackingContext = 'inArticle' | 'highlights';
+
 /**
  * The component ids used by each branch of the newsletter signup A/B test.
  * Keeping them here ensures the VIEW event (fired on mount in EmailSignUpWrapper)
@@ -38,10 +40,39 @@ export const EVENT_DESCRIPTION_TO_ACTION = {
  * Note: both ids use the `AR` prefix as a shared convention, keeping them
  * consistent with the pre-existing `SecureSignup` component id.
  */
+export const NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT = {
+	inArticle: {
+		control: (identityName: string) => `AR SecureSignup ${identityName}`,
+		variant: (identityName: string) =>
+			`AR NewsletterSignupForm ${identityName}`,
+	},
+	highlights: {
+		control: (identityName: string) =>
+			`AR HighlightsNewsletterSignupForm ${identityName}`,
+		variant: (identityName: string) =>
+			`AR HighlightsNewsletterSignupForm ${identityName}`,
+	},
+} as const satisfies Record<
+	NewsletterSignupTrackingContext,
+	{
+		control: (identityName: string) => string;
+		variant: (identityName: string) => string;
+	}
+>;
+
+/**
+ * Backwards-compatible aliases used by the current in-article signup flow.
+ * Keep this wrapper while we migrate call sites to explicit context selection.
+ */
 export const NEWSLETTER_SIGNUP_COMPONENT_ID = {
-	control: (identityName: string) => `AR SecureSignup ${identityName}`,
+	control: (identityName: string) =>
+		NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.control(
+			identityName,
+		),
 	variant: (identityName: string) =>
-		`AR NewsletterSignupForm ${identityName}`,
+		NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.variant(
+			identityName,
+		),
 } as const;
 
 /**
