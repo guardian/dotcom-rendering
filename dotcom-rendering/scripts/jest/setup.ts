@@ -1,4 +1,3 @@
-/* eslint-disable ssr-friendly/no-dom-globals-in-module-scope -- this runs in JSDOM */
 // add some helpful assertions
 import '@testing-library/jest-dom';
 import { TextDecoder, TextEncoder } from 'node:util';
@@ -61,7 +60,7 @@ const windowGuardian = {
 // We should never be able to directly set things to the global window object.
 // But in this case we want to stub things for testing, so it's ok to ignore this rule
 if (!isServer) {
-	// @ts-expect-error
+	// @ts-expect-error -- we want to stub the global window.guardian object for testing purposes
 	window.guardian = windowGuardian;
 }
 
@@ -107,7 +106,7 @@ if (!isServer) {
  * DOM and NodeJS versions of `TextDecoder`. This affect the running of the application and
  * allows us to update jsdom.
  */
-global.TextEncoder = TextEncoder;
+global.TextEncoder = TextEncoder as unknown as typeof global.TextEncoder;
 global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;
 
 // Mocks the version number used by CDK, we don't want our tests to fail every time we update our cdk dependency.

@@ -45,19 +45,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "thefilter-at-a-glance-redesign-v2",
-		description:
-			"Testing redesigned at a glance component on The Filter articles",
-		owners: ["thefilter.dev@guardian.co.uk"],
-		expirationDate: "2026-05-15",
-		type: "server",
-		status: "ON",
-		audienceSize: 80 / 100,
-		audienceSpace: "B",
-		groups: ["control", "carousel", "stacked-default", "stacked-expanded"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "growth-admiral-adblock-detect",
 		description:
 			"Control group for Admiral ad blocker - runs the detection script but does not show the modal",
@@ -90,7 +77,7 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-07-01",
 		type: "server",
 		status: "ON",
-		audienceSize: 0 / 100,
+		audienceSize: 10 / 100,
 		audienceSpace: "A",
 		groups: ["preview"],
 		shouldForceMetricsCollection: false,
@@ -115,9 +102,8 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-07-01",
 		type: "client",
 		status: "ON",
-		// Intentionally 0% — will be ramped up incrementally
-		audienceSize: 0 / 100,
-		audienceSpace: "C",
+		audienceSize: 1,
+		audienceSpace: "B",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
@@ -128,7 +114,7 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-05-15",
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
@@ -139,13 +125,25 @@ const ABTests: ABTest[] = [
 		description:
 			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module.",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-05-21",
+		expirationDate: "2026-06-18",
 		type: "client",
 		status: "ON",
-		audienceSize: 0 / 100,
+		audienceSize: 10 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "webx-world-cup-2026-subnav",
+		description:
+			"Test of World Cup 2026 subnav on world cup related content",
+		owners: ["dotcom.platform@guardian.co.uk:"],
+		expirationDate: "2026-07-20",
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		groups: ["enable"],
+		shouldForceMetricsCollection: false,
 	},
 ];
 

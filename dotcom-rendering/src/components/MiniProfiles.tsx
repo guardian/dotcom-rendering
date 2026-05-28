@@ -59,7 +59,6 @@ export const MiniProfiles = ({
 	return (
 		<ol data-ignore="global-ol-styling">
 			{miniProfiles.map((miniProfile, index) => (
-				// eslint-disable-next-line react/no-array-index-key -- Title should usually be identical, but in case it isn't, also use array index
 				<MiniProfileComponent
 					miniProfile={miniProfile}
 					format={format}

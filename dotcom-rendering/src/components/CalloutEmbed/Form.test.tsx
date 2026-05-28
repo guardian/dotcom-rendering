@@ -138,7 +138,7 @@ describe('Callout form', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- it's a test
 		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
 			[textField.id]: 'textInput',
 		});
@@ -167,7 +167,7 @@ describe('Callout form', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- it's a test
 		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
 			[textAreaField.id]: 'textAreaInput',
 		});
@@ -199,7 +199,7 @@ describe('Callout form', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- it's a test
 		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
 			[radioField.id]: 'radio 2',
 		});
@@ -231,7 +231,7 @@ describe('Callout form', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- it's a test
 		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
 			[checkboxField.id]: ['checkbox 1', 'checkbox 3'],
 		});
@@ -249,7 +249,7 @@ describe('Callout form', () => {
 
 		await user.upload(input, file);
 
-		const inputFiles = input.files ? input.files : [];
+		const inputFiles = input.files ?? [];
 
 		expect(inputFiles[0]).toStrictEqual(file);
 		expect(inputFiles).toHaveLength(1);
@@ -285,7 +285,7 @@ describe('Callout form', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- it's a test
 		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
 			[selectField.id]: selectText,
 		});
@@ -325,7 +325,7 @@ describe('Callout form', () => {
 		) as HTMLButtonElement;
 		fireEvent.click(submitButton);
 		expect(mockSubmit.mock.calls.length).toBe(1);
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- it's a test
 		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
 			[checkboxField.id]: ['checkbox 1', 'checkbox 2'],
 			[radioField.id]: 'radio 1',

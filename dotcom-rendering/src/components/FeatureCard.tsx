@@ -448,7 +448,9 @@ export const FeatureCard = ({
 		showVideo: showVideo && canPlayInline,
 	});
 
-	if (!media) return null;
+	if (!media) {
+		return null;
+	}
 
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;

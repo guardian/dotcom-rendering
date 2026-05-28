@@ -1,26 +1,23 @@
+import { AB } from '@guardian/ab-core';
+import { setCookie, storage } from '@guardian/libs';
+import { resets } from '@guardian/source/foundations';
+import { palette as sourcePalette } from '@guardian/source/foundations';
 import addonA11y from '@storybook/addon-a11y';
 import addonDocs from '@storybook/addon-docs';
-import { setCookie, storage } from '@guardian/libs';
-import { AB } from '@guardian/ab-core';
-
+import { definePreview } from '@storybook/react-webpack5';
 import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
-
-import { rawFontsCss } from '../src/lib/fonts-css';
-import { resets } from '@guardian/source/foundations';
-
+import { sb } from 'storybook/test';
 import { Lazy } from '../src/components/Lazy';
 import { Picture } from '../src/components/Picture';
+import { rawFontsCss } from '../src/lib/fonts-css';
 import { mockFetch } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
-import { sb } from 'storybook/test';
-import { definePreview } from '@storybook/react-webpack5';
 import {
 	globalColourScheme,
 	globalColourSchemeDecorator,
 } from './toolbar/globalColourScheme';
-import { palette as sourcePalette } from '@guardian/source/foundations';
 
 // Set up module mocking for auth and newsletter subscription hooks
 // @ts-ignore -- Storybook wants the file extension, TS does not.
@@ -33,6 +30,8 @@ sb.mock(import('../src/lib/fetchEmail.ts'), { spy: true });
 sb.mock(import('../src/lib/useNewsletterSignupForm.ts'), { spy: true });
 // @ts-ignore -- Storybook wants the file extension, TS does not.
 sb.mock(import('../src/lib/useAB.ts'), { spy: true });
+// @ts-ignore -- Storybook wants the file extension, TS does not.
+sb.mock(import('../src/lib/useCountryCode.ts'), { spy: true });
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -58,9 +57,9 @@ setABTests({
 });
 
 // Add base css for the site
-let css = `${rawFontsCss}${resets.resetCSS}`;
-let head = document.head;
-let style = document.createElement('style');
+const css = `${rawFontsCss}${resets.resetCSS}`;
+const head = document.head;
+const style = document.createElement('style');
 head.appendChild(style);
 style.type = 'text/css';
 style.appendChild(document.createTextNode(css));
@@ -86,6 +85,7 @@ style.appendChild(document.createTextNode(css));
 		serverSideABTests: {},
 	},
 	ophan: {
+		// eslint-disable-next-line no-empty-pattern -- just a mock
 		record: ({}) => {},
 		pageViewId: 'storybook-does-not-have-a-page-view-id',
 	},

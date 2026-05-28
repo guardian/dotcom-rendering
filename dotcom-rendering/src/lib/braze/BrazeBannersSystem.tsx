@@ -69,7 +69,9 @@ const DEVELOPMENT_DOMAINS = [
  * @returns boolean indicating if the current domain is a development domain
  */
 export const isDevelopmentDomain = (): boolean => {
-	if (typeof window === 'undefined') return false; // Safety for SSR/Node environments
+	if (typeof window === 'undefined') {
+		return false;
+	} // Safety for SSR/Node environments
 	return DEVELOPMENT_DOMAINS.includes(window.location.hostname);
 };
 
@@ -78,13 +80,19 @@ export const isDevelopmentDomain = (): boolean => {
  */
 export const brazeBannersSystemLogger = {
 	log: (...args: any[]): void => {
-		if (isDevelopmentDomain()) console.log(LOG_PREFIX, ...args);
+		if (isDevelopmentDomain()) {
+			console.log(LOG_PREFIX, ...args);
+		}
 	},
 	info: (...args: any[]): void => {
-		if (isDevelopmentDomain()) console.info(LOG_PREFIX, ...args);
+		if (isDevelopmentDomain()) {
+			console.info(LOG_PREFIX, ...args);
+		}
 	},
 	warn: (...args: any[]): void => {
-		if (isDevelopmentDomain()) console.warn(LOG_PREFIX, ...args);
+		if (isDevelopmentDomain()) {
+			console.warn(LOG_PREFIX, ...args);
+		}
 	},
 	error: (...args: any[]): void => {
 		// Even for errors, we add the prefix so we know where it came from
@@ -742,7 +750,7 @@ export const BrazeBannersSystemDisplay = ({
 			if (
 				event.origin === window.location.origin &&
 				Object.values(BrazeBannersSystemMessageType).includes(
-					event.data?.type,
+					event.data.type,
 				)
 			) {
 				brazeBannersSystemLogger.log(
@@ -750,7 +758,7 @@ export const BrazeBannersSystemDisplay = ({
 					event.data,
 				);
 			}
-			switch (event.data?.type) {
+			switch (event.data.type) {
 				case BrazeBannersSystemMessageType.GetAuthStatus:
 					postMessageToBrazeBanner(
 						BrazeBannersSystemMessageType.GetAuthStatus,
@@ -1190,6 +1198,7 @@ export const BrazeBannersSystemDisplay = ({
 										<path
 											d="m1 7.224 10.498 10.498h1.004L23 7.224l-.98-.954L12 14.708 1.98 6.27z"
 											transform="scale(1 -1) translate(0 -3)"
+											// eslint-disable-next-line react/no-unknown-property -- it's a valid SVG attribute
 											transform-origin="center"
 											css={css`
 												fill: ${wrapperModeForegroundColor};

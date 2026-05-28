@@ -25,7 +25,7 @@ export const renderEditorialNewslettersPage = ({
 	const NAV = extractNAV(newslettersPage.nav);
 
 	const darkModeAvailable =
-		newslettersPage.config.serverSideABTests?.['webx-dark-mode-web'] ===
+		newslettersPage.config.serverSideABTests['webx-dark-mode-web'] ===
 		'enable';
 
 	// The newsletters page is currently only supported on Web

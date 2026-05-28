@@ -167,7 +167,9 @@ export const InteractiveContentsBlockComponent = ({
 	// list elements we do not effect the page height
 	const [height, setHeight] = useState<number>();
 	const divRef = useCallback((node: HTMLDivElement | null) => {
-		if (node) setHeight(node.getBoundingClientRect().height);
+		if (node) {
+			setHeight(node.getBoundingClientRect().height);
+		}
 	}, []);
 
 	const [stickyNavCurrentHeader, setStickyNavCurrentHeader] =
@@ -255,7 +257,9 @@ export const InteractiveContentsBlockComponent = ({
 			if (endDocumentElementId) {
 				const endDocumentRef =
 					document.getElementById(endDocumentElementId);
-				if (endDocumentRef) observer.observe(endDocumentRef);
+				if (endDocumentRef) {
+					observer.observe(endDocumentRef);
+				}
 			}
 
 			// Disable the observer

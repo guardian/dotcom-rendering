@@ -33,15 +33,18 @@ declare global {
  */
 export const doHydration = async (
 	name: string,
-	data: { [key: string]: unknown } | null,
+	data: Record<string, unknown> | null,
 	element: HTMLElement,
 	emotionCache: EmotionCache,
 	config: Config,
 ): Promise<void> => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
-	if (!isUndefined(element.dataset.islandStatus)) return;
-	else element.dataset.islandStatus = 'identified';
+	if (!isUndefined(element.dataset.islandStatus)) {
+		return;
+	} else {
+		element.dataset.islandStatus = 'identified';
+	}
 
 	const { endPerformanceMeasure: endImportPerformanceMeasure } =
 		startPerformanceMeasure('dotcom', name, 'import');
@@ -77,7 +80,9 @@ export const doHydration = async (
 			return { importDuration, islandDuration };
 		})
 		.then(({ importDuration, islandDuration }) => {
-			if (!('getEntriesByType' in window.performance)) return;
+			if (!('getEntriesByType' in window.performance)) {
+				return;
+			}
 
 			element.dataset.islandStatus = 'hydrated';
 

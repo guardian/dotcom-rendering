@@ -407,7 +407,9 @@ export const CarouselForNewsletters = ({
 
 	const getItems = (): HTMLElement[] => {
 		const { current } = carouselRef;
-		if (current === null) return [];
+		if (current === null) {
+			return [];
+		}
 
 		return Array.from(current.children) as HTMLElement[];
 	};
@@ -418,7 +420,9 @@ export const CarouselForNewsletters = ({
 			.filter(notPresentation)
 			.map((el) => el.offsetLeft);
 		const [offset] = offsets;
-		if (current === null || isUndefined(offset)) return 0;
+		if (current === null || isUndefined(offset)) {
+			return 0;
+		}
 
 		const scrolled = current.scrollLeft + offset;
 		const active = offsets.findIndex((el) => el >= scrolled);
@@ -432,7 +436,9 @@ export const CarouselForNewsletters = ({
 
 	const goToIndex = (newIndex: number) => {
 		const { current } = carouselRef;
-		if (current === null) return;
+		if (current === null) {
+			return;
+		}
 
 		const offsets = getItems()
 			.filter(notPresentation)
@@ -450,7 +456,9 @@ export const CarouselForNewsletters = ({
 			.map(({ offsetLeft }) => offsetLeft);
 		const [offset] = offsets;
 
-		if (current === null || isUndefined(offset)) return;
+		if (current === null || isUndefined(offset)) {
+			return;
+		}
 
 		const scrolled = current.scrollLeft + offset;
 
@@ -471,7 +479,9 @@ export const CarouselForNewsletters = ({
 			.map(({ offsetLeft }) => offsetLeft);
 		const [offset] = offsets;
 
-		if (current === null || isUndefined(offset)) return;
+		if (current === null || isUndefined(offset)) {
+			return;
+		}
 
 		const scrolled = current.scrollLeft + offset;
 		const nextOffset = offsets.find((currOffset) => currOffset > scrolled);

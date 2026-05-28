@@ -113,9 +113,9 @@ export const Form = ({
 }: FormProps) => {
 	const formElement = useRef<HTMLFormElement>(null);
 	const [formData, setFormData] = useState<FormDataType>({});
-	const [validationErrors, setValidationErrors] = useState<{
-		[key in string]: string;
-	}>({});
+	const [validationErrors, setValidationErrors] = useState<
+		Record<string, string>
+	>({});
 
 	const [networkError, setNetworkError] = useState('');
 	const [submissionSuccess, setSubmissionSuccess] = useState(false);
@@ -136,7 +136,7 @@ export const Form = ({
 	};
 
 	const validateForm = (): boolean => {
-		const errors: { [key in string]: string } = {};
+		const errors: Record<string, string> = {};
 
 		for (const field of formFields) {
 			const data = formData[field.id];

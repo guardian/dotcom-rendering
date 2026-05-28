@@ -2,10 +2,12 @@ import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source/foundations';
 import {
 	SvgArrowExpand,
+	SvgAudio,
+	SvgAudioMute,
 	SvgMediaControlsPause,
+	SvgMediaControlsPlay,
 } from '@guardian/source/react-components';
 import { palette } from '../palette';
-import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
 import type { Props as SelfHostedVideoPlayerProps } from './SelfHostedVideoPlayer';
 
 const buttonStyles = css`
@@ -13,114 +15,75 @@ const buttonStyles = css`
 	background: none;
 	padding: 0;
 	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
 `;
 
 const iconContainerStyles = css`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-`;
-
-const smallIconContainerStyles = css`
 	width: ${space[8]}px;
 	height: ${space[8]}px;
-	background-color: ${palette('--video-icon-small-background')};
+	background-color: ${palette('--video-icon-background')};
 	border-radius: 50%;
-	border: 1px solid ${palette('--video-icon-border')};
-`;
-
-const largeIconContainerStyles = css`
-	width: 44px;
-	height: 44px;
-	background-color: ${palette('--video-icon-large-background')};
-	border-radius: ${space[5]}px;
 `;
 
 type AudioIconProps = {
-	Icon: Exclude<SelfHostedVideoPlayerProps['AudioIcon'], null>;
-	size: 'small' | 'large';
 	isMuted: SelfHostedVideoPlayerProps['isMuted'];
 	handleClick: SelfHostedVideoPlayerProps['handleAudioClick'];
 };
 
-export const AudioIcon = ({
-	Icon,
-	size,
-	isMuted,
-	handleClick,
-}: AudioIconProps) => (
-	<button type="button" onClick={handleClick} css={buttonStyles}>
-		<div
-			css={[
-				iconContainerStyles,
-				size === 'small' && smallIconContainerStyles,
-				size === 'large' && largeIconContainerStyles,
-			]}
+export const AudioIcon = ({ isMuted, handleClick }: AudioIconProps) => {
+	const IconComponent = isMuted ? SvgAudioMute : SvgAudio;
+
+	return (
+		<button
+			type="button"
+			onClick={handleClick}
+			css={[buttonStyles, iconContainerStyles]}
 			data-testid={`${isMuted ? 'unmute' : 'mute'}-icon`}
 		>
-			<Icon
+			<IconComponent
 				size="xsmall"
 				theme={{
 					fill: palette('--video-icon'),
 				}}
 			/>
-		</div>
-	</button>
-);
+		</button>
+	);
+};
 
 type FullscreenIconProps = {
-	atomId: SelfHostedVideoPlayerProps['atomId'];
-	size: 'small' | 'large';
 	handleClick: SelfHostedVideoPlayerProps['handleFullscreenClick'];
 };
 
-export const FullscreenIcon = ({
-	atomId,
-	size,
-	handleClick,
-}: FullscreenIconProps) => (
+export const FullscreenIcon = ({ handleClick }: FullscreenIconProps) => (
 	<button
 		type="button"
 		onClick={handleClick}
-		css={buttonStyles}
-		data-link-name={`gu-video-loop-fullscreen-${atomId}`}
+		css={[buttonStyles, iconContainerStyles]}
+		data-testid="fullscreen-icon"
 	>
-		<div
-			css={[
-				iconContainerStyles,
-				size === 'small' && smallIconContainerStyles,
-				size === 'large' && largeIconContainerStyles,
-			]}
-			data-testid="fullscreen-icon"
-		>
-			<SvgArrowExpand
-				size="xsmall"
-				theme={{
-					fill: palette('--video-icon'),
-				}}
-			/>
-		</div>
+		<SvgArrowExpand
+			size="xsmall"
+			theme={{
+				fill: palette('--video-icon'),
+			}}
+		/>
 	</button>
 );
 
+const buttonSize = 56;
 const playPauseButtonStyles = css`
 	position: absolute;
 	/* Center the icon */
-	top: calc(50% - ${narrowPlayIconDiameter / 2}px);
-	left: calc(50% - ${narrowPlayIconDiameter / 2}px);
-	cursor: pointer;
-	border: none;
-	background: none;
-	padding: 0;
-`;
-
-const playPauseIconStyles = css`
-	width: 56px;
-	height: 56px;
-	background-color: ${palette('--narrow-play-icon-background')};
+	top: calc(50% - ${buttonSize / 2}px);
+	left: calc(50% - ${buttonSize / 2}px);
+	width: ${buttonSize}px;
+	height: ${buttonSize}px;
+	background-color: ${palette('--video-icon-background')};
 	border-radius: 50%;
-	border: 1px solid ${palette('--narrow-play-icon-border')};
-	fill: ${palette('--narrow-play-icon-fill')};
+	fill: ${palette('--video-icon')};
 `;
 
 type PlayPauseIconProps = {
@@ -133,22 +96,19 @@ export const PlayPauseIcon = ({
 	type,
 	atomId,
 	handleClick,
-}: PlayPauseIconProps) => (
-	<button
-		type="button"
-		onClick={handleClick}
-		css={playPauseButtonStyles}
-		data-link-name={`gu-video-loop-pause-${atomId}`}
-		data-testid={`${type}-icon`}
-	>
-		<div css={[iconContainerStyles, playPauseIconStyles]}>
-			{type === 'play' ? (
-				<PlayIcon iconWidth="narrow" />
-			) : (
-				<SvgMediaControlsPause
-					theme={{ fill: sourcePalette.neutral[100] }}
-				/>
-			)}
-		</div>
-	</button>
-);
+}: PlayPauseIconProps) => {
+	const IconComponent =
+		type === 'play' ? SvgMediaControlsPlay : SvgMediaControlsPause;
+
+	return (
+		<button
+			type="button"
+			onClick={handleClick}
+			css={[buttonStyles, playPauseButtonStyles]}
+			data-link-name={`gu-video-loop-${type}-${atomId}`}
+			data-testid={`${type}-icon`}
+		>
+			<IconComponent theme={{ fill: sourcePalette.neutral[100] }} />
+		</button>
+	);
+};

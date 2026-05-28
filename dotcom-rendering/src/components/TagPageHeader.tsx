@@ -282,7 +282,9 @@ const BylineImage = ({
 
 	const fallback = sources[0]?.lowResUrl;
 
-	if (!fallback) throw new Error('Missing source');
+	if (!fallback) {
+		throw new Error('Missing source');
+	}
 
 	return (
 		<>

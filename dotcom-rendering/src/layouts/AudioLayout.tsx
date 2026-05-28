@@ -20,6 +20,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { AudioPlayerWrapper } from '../components/AudioPlayerWrapper.island';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.island';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -45,6 +46,8 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
+import { useBetaAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -164,6 +167,12 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const ab = useBetaAB();
+
+	const isWorldCup2026 =
+		article.tags.some((tag) => tag.id === worldCupTagId) &&
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
+
 	const renderAds = canRenderAds(article);
 
 	return (
@@ -191,7 +200,7 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={!isLabs}
+						showSubNav={!isLabs && !isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
@@ -227,6 +236,11 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 						<AdPortals />
 					</Island>
 				)}
+				<DirectoryPageNavIsland
+					pageTags={article.tags}
+					pageId={article.pageId}
+				/>
+
 				<Section
 					fullWidth={true}
 					showTopBorder={false}

@@ -1,4 +1,5 @@
-import { onConsent as onConsent_, setCookie, storage } from '@guardian/libs';
+import { onConsent as onConsent_ } from '@guardian/consent-manager';
+import { setCookie, storage } from '@guardian/libs';
 import MockDate from 'mockdate';
 import { createOrRenewCookie } from '../client/userFeatures/cookies/cookieHelpers';
 import { HIDE_SUPPORT_MESSAGING_COOKIE } from '../client/userFeatures/cookies/hideSupportMessaging';
@@ -202,8 +203,8 @@ describe('hasSupporterCookie', () => {
 	});
 });
 
-jest.mock('@guardian/libs', () => ({
-	...jest.requireActual('@guardian/libs'),
+jest.mock('@guardian/consent-manager', () => ({
+	...jest.requireActual('@guardian/consent-manager'),
 	onConsent: jest.fn(),
 }));
 jest.mock('./identity', () => ({

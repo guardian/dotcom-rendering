@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ConsentState } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
 import type { Decorator, Meta, StoryObj } from '@storybook/react-webpack5';
 import { useState } from 'react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
@@ -131,7 +131,6 @@ const baseConfiguration = {
 	uniqueId: '-ZCvZmYlQD8-1',
 	alt: '',
 	eventEmitters: [
-		// eslint-disable-next-line no-console -- check event emitters are called
 		(e: unknown) => console.log(`event emitter ${String(e)} called`),
 	],
 	duration: 252,

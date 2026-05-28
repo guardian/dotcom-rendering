@@ -503,10 +503,7 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			if (
-				element.videoPlayerFormat &&
-				['Loop', 'Cinemagraph'].includes(element.videoPlayerFormat)
-			) {
+			if (element.videoPlayerFormat) {
 				return (
 					<SelfHostedVideoInArticle
 						element={element}
@@ -514,6 +511,7 @@ export const renderElement = ({
 						isMainMedia={isMainMedia}
 						videoStyle={element.videoPlayerFormat}
 						role={element.role}
+						caption={element.caption ?? element.title}
 					/>
 				);
 			} else {
@@ -522,7 +520,7 @@ export const renderElement = ({
 						format={format}
 						assets={element.assets}
 						poster={element.posterImage?.[0]?.url}
-						caption={element.title}
+						caption={element.caption ?? element.title}
 						isMainMedia={isMainMedia}
 					/>
 				);
@@ -591,7 +589,9 @@ export const renderElement = ({
 				showNewNewsletterSignupCard:
 					!!switches.showNewNewsletterSignupCard,
 			};
-			if (isListElement || isTimeline) return null;
+			if (isListElement || isTimeline) {
+				return null;
+			}
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<EmailSignUpWrapper {...emailSignUpProps} />
@@ -953,7 +953,7 @@ export const renderElement = ({
 							getLargestImageSize(element.posterImage ?? [])?.url
 						}
 						duration={element.duration}
-						mediaTitle={element.mediaTitle}
+						mediaTitle={element.caption ?? element.mediaTitle}
 						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
@@ -1112,6 +1112,7 @@ type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
 type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
 
 export const getNestedArticleElement =
+	// eslint-disable-next-line react/display-name -- this is not a React component, but a function that returns one
 	(articleProps: ArticleLevelProps) => (elementProps: ElementLevelProps) => (
 		<RenderArticleElement {...articleProps} {...elementProps} />
 	);

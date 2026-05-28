@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints, from } from '@guardian/source/foundations';
-import React from 'react';
+import type React from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,

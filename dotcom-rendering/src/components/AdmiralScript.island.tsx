@@ -1,6 +1,7 @@
 import { isInUsa } from '@guardian/commercial-core/geo/geo-utils';
 import type { Admiral, AdmiralEvent } from '@guardian/commercial-core/types';
-import { cmp, getCookie, log } from '@guardian/libs';
+import { cmp } from '@guardian/consent-manager';
+import { getCookie, log } from '@guardian/libs';
 import { useEffect } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import { useBetaAB } from '../lib/useAB';
@@ -230,7 +231,9 @@ export const AdmiralScript = () => {
 		 * Variant-detect group loads the script but the modal will not be shown.
 		 */
 		const page = window.guardian.config.page;
-		if (!window.guardian.config.switches.consentManagement) return;
+		if (!window.guardian.config.switches.consentManagement) {
+			return;
+		}
 
 		let admiralScript: HTMLScriptElement | undefined;
 		let isCancelled = false;
@@ -262,7 +265,9 @@ export const AdmiralScript = () => {
 						'thefilter',
 					].includes(page.section ?? '');
 
-				if (!shouldRun || isCancelled) return;
+				if (!shouldRun || isCancelled) {
+					return;
+				}
 
 				void recordAdmiralOphanEvent(
 					variantName,
@@ -280,7 +285,9 @@ export const AdmiralScript = () => {
 
 				if (!w.admiral) {
 					const stub = function (...args: unknown[]) {
-						if (!stub.q) stub.q = [];
+						if (!stub.q) {
+							stub.q = [];
+						}
 						stub.q.push(args);
 					} as AdmiralStub;
 					w.admiral = stub;

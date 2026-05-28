@@ -97,15 +97,23 @@ export const EmailSignUpWrapper = ({
 	const viewFiredRef = useRef(false);
 
 	useEffect(() => {
-		if (abTestEnabled && !abResolved) return;
+		if (abTestEnabled && !abResolved) {
+			return;
+		}
 		// Wait for subscription status in both branches — we only want to track
 		// a view of the actual signup form, not a loading state or success message.
-		if (isSubscribed === undefined) return;
+		if (isSubscribed === undefined) {
+			return;
+		}
 		// Don't fire if the user is already subscribed: in both branches they
 		// will see a success/already-subscribed message, not the signup form.
-		if (isSubscribed) return;
+		if (isSubscribed) {
+			return;
+		}
 		// Guard against double-firing (e.g. if deps change after the first fire)
-		if (viewFiredRef.current) return;
+		if (viewFiredRef.current) {
+			return;
+		}
 		viewFiredRef.current = true;
 		sendNewsletterSignupEvent({
 			action: 'VIEW',

@@ -106,10 +106,18 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 	useEffect(
 		function coreWebVitals() {
-			if (isUndefined(abTestApi)) return;
-			if (isUndefined(browserId)) return;
-			if (isUndefined(isDev)) return;
-			if (isUndefined(pageViewId)) return;
+			if (isUndefined(abTestApi)) {
+				return;
+			}
+			if (isUndefined(browserId)) {
+				return;
+			}
+			if (isUndefined(isDev)) {
+				return;
+			}
+			if (isUndefined(pageViewId)) {
+				return;
+			}
 
 			const bypassSampling = shouldBypassSampling(abTestApi);
 
@@ -137,13 +145,25 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 	useEffect(
 		function commercialMetrics() {
 			// Only send metrics if the switch is enabled
-			if (!commercialMetricsEnabled) return;
+			if (!commercialMetricsEnabled) {
+				return;
+			}
 
-			if (isUndefined(abTestApi)) return;
-			if (isUndefined(adBlockerInUse)) return;
-			if (isUndefined(browserId)) return;
-			if (isUndefined(isDev)) return;
-			if (isUndefined(pageViewId)) return;
+			if (isUndefined(abTestApi)) {
+				return;
+			}
+			if (isUndefined(adBlockerInUse)) {
+				return;
+			}
+			if (isUndefined(browserId)) {
+				return;
+			}
+			if (isUndefined(isDev)) {
+				return;
+			}
+			if (isUndefined(pageViewId)) {
+				return;
+			}
 
 			const bypassSampling = shouldBypassSampling(abTestApi);
 

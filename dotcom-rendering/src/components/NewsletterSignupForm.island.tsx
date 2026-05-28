@@ -17,6 +17,7 @@ import { ToggleSwitch } from '@guardian/source-development-kitchen/react-compone
 // Use the default export instead.
 import type { ChangeEvent } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
+import { useHideMarketingToggleForCountry } from '../lib/useHideMarketingToggleForCountry';
 import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
@@ -204,7 +205,7 @@ const SuccessMessage = ({
 				</span>
 			</InlineSuccess>
 			<LinkButton
-				href="/email-newsletters"
+				href="/email-newsletters?INTCMP=DOTCOM_NEWSLETTER_SIGNUP_CARD"
 				priority="tertiary"
 				theme={newsletterTertiaryButtonTheme}
 				cssOverrides={tryAgainButtonStyles}
@@ -273,6 +274,7 @@ const NewsletterSignupFormActive = ({
 	abTest,
 }: Omit<Props, 'isAlreadySubscribed'>) => {
 	const { renderingTarget } = useConfig();
+	const hideMarketingToggle = useHideMarketingToggleForCountry();
 
 	const {
 		userEmail,
@@ -295,7 +297,12 @@ const NewsletterSignupFormActive = ({
 		handleSubmit,
 		handleSubmitButtonClick,
 		handleReset,
-	} = useNewsletterSignupForm(newsletterId, renderingTarget, abTest);
+	} = useNewsletterSignupForm(
+		newsletterId,
+		renderingTarget,
+		abTest,
+		hideMarketingToggle,
+	);
 
 	const hasResponse = typeof responseOk === 'boolean';
 	const hasNonValidationError = !!errorMessage && !isValidationError;
