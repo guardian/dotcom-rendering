@@ -10,6 +10,7 @@ import {
 import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { useConfig } from './ConfigContext';
+import type { StageType } from '../types/config';
 import type { RecipeBlockElement } from '../types/content';
 
 // ── Utility helpers ───────────────────────────────────────────────────────────
@@ -48,22 +49,14 @@ const darkVars = css`
 
 // ── Deep-link helpers ─────────────────────────────────────────────────────────
 
-// const buildFeastDeepLink = (id: string): string => `feast://recipes/${id}`;
+const FEAST_ADJUST_TOKEN_PROD = '20wmhy68';
+const FEAST_ADJUST_TOKEN_CODE = '20o7ykck';
 
-// const buildAppLink = (
-// 	pageId: string,
-// 	campaign: string,
-// 	feastId?: string,
-// ): string => {
-// 	const params = new URLSearchParams({
-// 		utm_medium: 'ACQUISITIONS_NUDGE',
-// 		utm_campaign: campaign,
-// 		utm_content: pageId,
-// 		utm_source: 'GUARDIAN_WEB',
-// 		...(feastId ? { deep_link_value: buildFeastDeepLink(feastId) } : {}),
-// 	});
-// 	return `https://guardian-feast.go.link/p0nQT?${params.toString()}`;
-// };
+const buildFeastLink = (recipeId: string, stage: StageType): string => {
+	const token =
+		stage === 'PROD' ? FEAST_ADJUST_TOKEN_PROD : FEAST_ADJUST_TOKEN_CODE;
+	return `https://guardian-feast.go.link/recipe/${recipeId}?adj_t=${token}`;
+};
 
 // ── Button themes ─────────────────────────────────────────────────────────────
 
@@ -161,6 +154,11 @@ export const FeastContextualNudge = ({
 		setIsStorybook(true);
 	}, []);
 
+	const [stage, setStage] = useState<StageType>('PROD');
+	useEffect(() => {
+		setStage(window.guardian.config.stage);
+	}, []);
+
 	const title = recipe?.title ?? recipeArticleTitle;
 	const feastId = recipe?.id;
 
@@ -208,11 +206,17 @@ export const FeastContextualNudge = ({
 				<LinkButton
 					priority="primary"
 					size="xsmall"
-					// href={buildFeastDeepLink(feastId)}
+					{...(feastId
+						? {
+								href: buildFeastLink(feastId, stage),
+								target: '_blank',
+								rel: 'noreferrer',
+						  }
+						: {})}
 					theme={primaryCtaTheme}
 					data-ignore="global-link-styling"
 				>
-					Start your free trial
+					Open in the Feast app
 				</LinkButton>
 			</div>
 		</div>
