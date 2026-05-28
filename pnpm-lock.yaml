@@ -311,9 +311,6 @@ importers:
       '@emotion/server':
         specifier: 11.11.0
         version: 11.11.0
-      '@guardian/ab-core':
-        specifier: 8.0.0
-        version: 8.0.0(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/ab-testing-config':
         specifier: workspace:ab-testing-config
         version: link:../ab-testing/config
@@ -2405,15 +2402,6 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@guardian/ab-core@8.0.0':
-    resolution: {integrity: sha512-I6KV03kROJPnU7FdRbqkmEAzsTDMMK/bgnB7rbL/qht8+hrK9y52ySFSJF5WX0zPX/9MoMRyAgmf+wBWOeogBA==}
-    peerDependencies:
-      tslib: ^2.6.2
-      typescript: ~5.5.2
-    peerDependenciesMeta:
-      typescript:
-        optional: true
 
   '@guardian/braze-components@22.2.0':
     resolution: {integrity: sha512-uSkHd6mBVTAD+BrvJZNt+oSipYHQXBdVt9Pu/VTvkliXHzT8OUsep7ObIWM1lkf3znWbqLDhoXtwS5apX2AEWQ==}
@@ -11442,12 +11430,6 @@ snapshots:
     dependencies:
       '@eslint/core': 0.17.0
       levn: 0.4.1
-
-  '@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.9.3)':
-    dependencies:
-      tslib: 2.6.2
-    optionalDependencies:
-      typescript: 5.9.3
 
   '@guardian/braze-components@22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@3.0.0)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(react@18.3.1)':
     dependencies:
