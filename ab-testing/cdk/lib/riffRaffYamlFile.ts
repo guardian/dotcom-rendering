@@ -23,48 +23,52 @@ export const riffRaffYamlFile = ({
 }) => {
 	const riffRaff = new RiffRaffYamlFile(app);
 	const { configuration } = riffRaff;
+	const projectConfiguration = configuration.get(riffRaffProjectName);
 
 	// The dictionary artifacts to be deployed to S3
-	configuration
-		.get(riffRaffProjectName)
-		?.deployments.set("config/ab-testing", {
-			app: "ab-testing-config-artifact",
-			contentDirectory: "ab-testing-config-artifacts",
-			type: "aws-s3",
-			regions: new Set([region]),
-			stacks: new Set([stack]),
-			parameters: {
-				bucketSsmKey: "/account/services/dotcom-store.bucket",
-				cacheControl: "public, max-age=315360000",
-				prefixStack: false,
-				publicReadAcl: false,
-			},
-		});
+	projectConfiguration?.deployments.set("config/ab-testing", {
+		app: "ab-testing-config-artifact",
+		contentDirectory: "ab-testing-config-artifacts",
+		type: "aws-s3",
+		regions: new Set([region]),
+		stacks: new Set([stack]),
+		parameters: {
+			bucketSsmKey: "/account/services/dotcom-store.bucket",
+			cacheControl: "public, max-age=315360000",
+			prefixStack: false,
+			publicReadAcl: false,
+		},
+	});
 
 	// the admin UI artifacts to be deployed to S3
-	configuration
-		.get(riffRaffProjectName)
-		?.deployments.set("admin/ab-testing", {
-			app: "ab-testing-ui-artifact",
-			contentDirectory: "ab-testing-ui-artifact",
-			type: "aws-s3",
-			regions: new Set([region]),
-			stacks: new Set([stack]),
-			parameters: {
-				bucketSsmKey: "/account/services/dotcom-store.bucket",
-				cacheControl: "public, max-age=315360000",
-				prefixStack: false,
-				publicReadAcl: false,
-			},
-		});
+	projectConfiguration?.deployments.set("admin/ab-testing", {
+		app: "ab-testing-ui-artifact",
+		contentDirectory: "ab-testing-ui-artifact",
+		type: "aws-s3",
+		regions: new Set([region]),
+		stacks: new Set([stack]),
+		parameters: {
+			bucketSsmKey: "/account/services/dotcom-store.bucket",
+			cacheControl: "public, max-age=315360000",
+			prefixStack: false,
+			publicReadAcl: false,
+		},
+	});
 
-	const configCloudformationDeployment = configuration
-		.get(riffRaffProjectName)
-		?.deployments.get(`cfn-${region}-${stack}-ab-testing-config`)!;
+	const configCloudformationDeployment =
+		projectConfiguration?.deployments.get(
+			`cfn-${region}-${stack}-ab-testing-config`,
+		);
 
-	configuration
-		.get(riffRaffProjectName)
-		?.deployments.set(`cfn-${region}-${stack}-ab-testing-config`, {
+	if (!configCloudformationDeployment) {
+		throw new Error(
+			`Expected to find a cloud formation deployment named cfn-${region}-${stack}-ab-testing-config in the RiffRaff configuration for project ${riffRaffProjectName}`,
+		);
+	}
+
+	projectConfiguration?.deployments.set(
+		`cfn-${region}-${stack}-ab-testing-config`,
+		{
 			...configCloudformationDeployment,
 			dependencies: [
 				...(configCloudformationDeployment.dependencies ?? []),
@@ -78,7 +82,8 @@ export const riffRaffYamlFile = ({
 					"ab-testing-deployment-lambda",
 				].join("-"),
 			],
-		});
+		},
+	);
 
 	return riffRaff;
 };
