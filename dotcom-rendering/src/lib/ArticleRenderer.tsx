@@ -168,6 +168,7 @@ export const ArticleRenderer = ({
 					{section.subheadingEl}
 					{section.recipe && (
 						<FeastContextualNudge
+							isDev={isDev}
 							pageId={pageId}
 							recipe={section.recipe}
 							recipeArticleTitle={section.recipeArticleTitle}

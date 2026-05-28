@@ -135,6 +135,7 @@ type FeastContextualNudgeProps = {
 	recipe?: RecipeBlockElement;
 	recipeArticleTitle: string;
 	pageId: string;
+	isDev: boolean;
 };
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -143,6 +144,7 @@ export const FeastContextualNudge = ({
 	recipe,
 	recipeArticleTitle,
 	pageId,
+	isDev,
 }: FeastContextualNudgeProps) => {
 	const { darkModeAvailable } = useConfig();
 
@@ -160,12 +162,17 @@ export const FeastContextualNudge = ({
 	const title = recipe?.title ?? recipeArticleTitle;
 	const feastId = recipe?.id;
 
+	if (isDev) {
+		console.log(
+			`Contextual nudge for the Feast app, related to the recipe: ${title}. (id: ${
+				feastId ?? 'N/A'
+			}; pageId: ${pageId})`,
+		);
+	}
+
 	return (
 		<div
-			aria-description={`Contextual nudge for the Feast app, related to the recipe: ${title}. (id: ${
-				feastId ?? 'N/A'
-			}; pageId: ${pageId})`}
-			aria-id
+			aria-description={`Open the recipe ${title} in the Feast app`}
 			data-component="feast-contextual-nudge"
 			css={[
 				showcaseCardStyles,
