@@ -34,11 +34,6 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Node environment
-        # Only needed for a full Chromatic run.
-        if: |
-          github.ref == 'refs/heads/main' ||
-          (github.event_name == 'pull_request' &&
-            contains(github.event.pull_request.labels.*.name, 'run_chromatic'))
         uses: ./.github/actions/setup-node-env
 
         # If on push to main, always run the Chromatic step.
