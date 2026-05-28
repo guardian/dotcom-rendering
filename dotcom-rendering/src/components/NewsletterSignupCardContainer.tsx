@@ -7,6 +7,7 @@ import {
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { NewsletterHighlightsCard } from './NewsletterHighlightsCard';
 import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
@@ -41,6 +42,7 @@ type Props = Pick<
 	NewsletterSignupCardProps,
 	'name' | 'frequency' | 'description' | 'illustrationSquare'
 > & {
+	highlightCardTitle?: string;
 	identityName: string;
 	category?: string;
 	exampleUrl?: string;
@@ -65,6 +67,7 @@ export const NewsletterSignupCardContainer = ({
 	renderingTarget,
 	theme,
 	name,
+	highlightCardTitle,
 	frequency,
 	description,
 	illustrationSquare,
@@ -78,10 +81,10 @@ export const NewsletterSignupCardContainer = ({
 		exampleUrl,
 		category,
 	});
-	const hasPreviewUrl = Boolean(renderUrl);
+	const hasPreviewUrl = typeof renderUrl === 'string' && renderUrl.length > 0;
 
 	const openPreview = useCallback(() => {
-		if (!renderUrl) {
+		if (!hasPreviewUrl) {
 			return;
 		}
 
@@ -98,10 +101,10 @@ export const NewsletterSignupCardContainer = ({
 
 			return true;
 		});
-	}, [identityName, isSignedIn, renderingTarget, renderUrl]);
+	}, [hasPreviewUrl, identityName, isSignedIn, renderingTarget, renderUrl]);
 
 	const trackPreviewLinkOpen = useCallback(() => {
-		if (!renderUrl) {
+		if (!hasPreviewUrl) {
 			return;
 		}
 
@@ -112,11 +115,11 @@ export const NewsletterSignupCardContainer = ({
 			renderUrl,
 			isSignedIn,
 		});
-	}, [identityName, isSignedIn, renderingTarget, renderUrl]);
+	}, [hasPreviewUrl, identityName, isSignedIn, renderingTarget, renderUrl]);
 
 	const closePreview = useCallback(() => {
 		setIsPreviewOpen((isOpen) => {
-			if (isOpen && renderUrl) {
+			if (isOpen && hasPreviewUrl) {
 				sendPreviewTracking({
 					identityName,
 					eventDescription: 'preview-close',
@@ -128,13 +131,13 @@ export const NewsletterSignupCardContainer = ({
 
 			return false;
 		});
-	}, [identityName, isSignedIn, renderingTarget, renderUrl]);
+	}, [hasPreviewUrl, identityName, isSignedIn, renderingTarget, renderUrl]);
 
 	const previewAction = hasPreviewUrl
 		? renderingTarget === 'Apps'
 			? {
 					behaviour: 'link' as const,
-					href: renderUrl ?? '',
+					href: renderUrl,
 					onClick: trackPreviewLinkOpen,
 			  }
 			: {
@@ -143,12 +146,17 @@ export const NewsletterSignupCardContainer = ({
 			  }
 		: undefined;
 
+	const cardClickHandler =
+		previewAction?.behaviour === 'modal'
+			? previewAction.onClick
+			: () => undefined;
+
 	return (
 		<div css={themeColorStyles(theme)}>
 			{isPreviewOpen && hasPreviewUrl && (
 				<NewsletterPreviewModal
 					newsletterName={name}
-					renderUrl={renderUrl ?? ''}
+					renderUrl={renderUrl}
 					onClose={closePreview}
 				/>
 			)}
@@ -157,16 +165,24 @@ export const NewsletterSignupCardContainer = ({
 					margin-bottom: ${space[6]}px;
 				`}
 			>
-				<NewsletterSignupCard
-					name={name}
-					frequency={frequency}
-					description={description}
-					illustrationSquare={illustrationSquare}
-					previewAction={previewAction}
-					isSignedIn={isSignedIn}
-				>
-					{children?.(previewAction)}
-				</NewsletterSignupCard>
+				{highlightCardTitle !== undefined ? (
+					<NewsletterHighlightsCard
+						highlightCardTitle={highlightCardTitle}
+						illustrationSquare={illustrationSquare}
+						onClick={cardClickHandler}
+					/>
+				) : (
+					<NewsletterSignupCard
+						name={name}
+						frequency={frequency}
+						description={description}
+						illustrationSquare={illustrationSquare}
+						previewAction={previewAction}
+						isSignedIn={isSignedIn}
+					>
+						{children?.(previewAction)}
+					</NewsletterSignupCard>
+				)}
 				{showPrivacyMessageOutside && (
 					<NewsletterPrivacyMessage
 						textColor="regular"

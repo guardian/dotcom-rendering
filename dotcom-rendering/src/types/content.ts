@@ -1200,6 +1200,7 @@ export type Newsletter = {
 	listId: number;
 	identityName: string;
 	name: string;
+	highlightCardTitle?: string;
 	description: string;
 	frequency: string;
 	successDescription: string;
