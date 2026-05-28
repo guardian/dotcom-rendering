@@ -539,7 +539,7 @@ export const renderElement = ({
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
 					isLastElement={index === totalElements - 1}
-					sectioned={!!isSectionedMiniProfilesArticle}
+					sectioned={isSectionedMiniProfilesArticle}
 					shouldHideAds={shouldHideAds}
 				/>
 			);
@@ -576,6 +576,7 @@ export const renderElement = ({
 				listId: newsletter.listId,
 				identityName: newsletter.identityName,
 				category: newsletter.category,
+				highlightCardTitle: newsletter.highlightCardTitle,
 				description: newsletter.description,
 				name: newsletter.name,
 				frequency: newsletter.frequency,

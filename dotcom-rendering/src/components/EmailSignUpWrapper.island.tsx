@@ -32,6 +32,7 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	index: number;
 	listId: number;
 	identityName: string;
+	highlightCardTitle?: string;
 	category?: string;
 	successDescription: string;
 	/** Illustration image URL (square crop) for the NewsletterSignupCard variant */
@@ -60,6 +61,7 @@ export const EmailSignUpWrapper = ({
 	index,
 	listId,
 	identityName,
+	highlightCardTitle,
 	category,
 	idApiUrl,
 	exampleUrl,
@@ -151,6 +153,7 @@ export const EmailSignUpWrapper = ({
 			>
 				<NewsletterSignupCardContainer
 					name={name}
+					highlightCardTitle={highlightCardTitle}
 					description={description}
 					illustrationSquare={illustrationSquare}
 					frequency={frequency}
@@ -205,7 +208,7 @@ export const EmailSignUpWrapper = ({
 						abTest={{ name: AB_TEST_NAME, variant: abVariant }}
 					/>
 				</Island>
-				{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
+				{hidePrivacyMessage === false && <NewsletterPrivacyMessage />}
 			</EmailSignup>
 		</InlineSkipToWrapper>
 	);

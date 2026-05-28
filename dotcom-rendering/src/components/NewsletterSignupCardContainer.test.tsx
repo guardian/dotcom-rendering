@@ -1,5 +1,10 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import {
+	fireEvent,
+	render,
+	screen as testScreen,
+	waitFor,
+} from '@testing-library/react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { NEWSLETTER_SIGNUP_COMPONENT_ID } from '../lib/newsletterSignupTracking';
 import { NewsletterSignupCardContainer } from './NewsletterSignupCardContainer';
@@ -49,15 +54,17 @@ describe('NewsletterSignupCardContainer', () => {
 	it('closes preview modal when Escape is pressed', async () => {
 		renderContainer();
 
-		fireEvent.click(screen.getByRole('button', { name: 'Preview latest' }));
+		fireEvent.click(
+			testScreen.getByRole('button', { name: 'Preview latest' }),
+		);
 
-		const dialog = screen.getByRole('dialog');
+		const dialog = testScreen.getByRole('dialog');
 		expect(dialog).toBeInTheDocument();
 
 		fireEvent.keyDown(dialog, { key: 'Escape', code: 'Escape' });
 
 		await waitFor(() => {
-			expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+			expect(testScreen.queryByRole('dialog')).not.toBeInTheDocument();
 		});
 	});
 
@@ -66,7 +73,7 @@ describe('NewsletterSignupCardContainer', () => {
 			renderContainer();
 
 			fireEvent.click(
-				screen.getByRole('button', { name: 'Preview latest' }),
+				testScreen.getByRole('button', { name: 'Preview latest' }),
 			);
 
 			expect(submitComponentEvent).toHaveBeenCalledWith(
@@ -90,11 +97,11 @@ describe('NewsletterSignupCardContainer', () => {
 			renderContainer();
 
 			fireEvent.click(
-				screen.getByRole('button', { name: 'Preview latest' }),
+				testScreen.getByRole('button', { name: 'Preview latest' }),
 			);
 			jest.clearAllMocks();
 
-			const dialog = screen.getByRole('dialog');
+			const dialog = testScreen.getByRole('dialog');
 			fireEvent.keyDown(dialog, { key: 'Escape', code: 'Escape' });
 
 			await waitFor(() => {
@@ -120,13 +127,13 @@ describe('NewsletterSignupCardContainer', () => {
 			renderContainer();
 
 			fireEvent.click(
-				screen.getByRole('button', { name: 'Preview latest' }),
+				testScreen.getByRole('button', { name: 'Preview latest' }),
 			);
 			const firstCallCount = (submitComponentEvent as jest.Mock).mock
 				.calls.length;
 
 			fireEvent.click(
-				screen.getByRole('button', { name: 'Preview latest' }),
+				testScreen.getByRole('button', { name: 'Preview latest' }),
 			);
 
 			expect((submitComponentEvent as jest.Mock).mock.calls.length).toBe(
@@ -161,7 +168,7 @@ describe('NewsletterSignupCardContainer', () => {
 			</NewsletterSignupCardContainer>,
 		);
 
-		const previewLink = screen.getByRole('link', {
+		const previewLink = testScreen.getByRole('link', {
 			name: 'Preview latest',
 		});
 
@@ -183,6 +190,33 @@ describe('NewsletterSignupCardContainer', () => {
 			}),
 			'Apps',
 		);
-		expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+		expect(testScreen.queryByRole('dialog')).not.toBeInTheDocument();
+	});
+
+	it('renders the Highlights card face when highlightCardTitle is provided', () => {
+		renderContainer({
+			highlightCardTitle: 'Sign up to Morning Briefing',
+		});
+
+		expect(testScreen.getByText('Free newsletter')).toBeInTheDocument();
+		expect(
+			testScreen.getByText('Sign up to Morning Briefing'),
+		).toBeInTheDocument();
+		expect(testScreen.queryByText('Every weekday')).toBeNull();
+		expect(
+			testScreen.queryByText('Start your day with top stories.'),
+		).toBeNull();
+	});
+
+	it('opens preview when the Highlights card is clicked on Web', () => {
+		renderContainer({
+			highlightCardTitle: 'Sign up to Morning Briefing',
+		});
+
+		fireEvent.click(
+			testScreen.getByRole('button', { name: /Free newsletter/i }),
+		);
+
+		expect(testScreen.getByRole('dialog')).toBeInTheDocument();
 	});
 });
