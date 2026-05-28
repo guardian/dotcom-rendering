@@ -1,5 +1,7 @@
 import type { ABParticipations } from '../experiments/lib/beta-ab-tests';
 
+export const SKIMLINK_REL = 'sponsored noreferrer noopener';
+
 /** A function to check if a URL represents an affiliate link */
 export const isSkimlink = (url?: string): boolean => {
 	try {
