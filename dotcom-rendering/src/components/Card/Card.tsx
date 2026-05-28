@@ -934,7 +934,7 @@ export const Card = ({
 									containerAspectRatioDesktop={5 / 4}
 									cardLink={{
 										headlineText,
-										dataLinkName,
+										dataLinkName: resolvedDataLinkName,
 										isExternalLink,
 									}}
 								/>
