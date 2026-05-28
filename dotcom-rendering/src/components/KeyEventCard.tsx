@@ -49,6 +49,7 @@ const linkStyles = css`
 		div {
 			text-decoration: underline ${palette('--key-event-text')};
 			text-underline-offset: 1px;
+			text-decoration-thickness: 1px;
 		}
 	}
 `;
