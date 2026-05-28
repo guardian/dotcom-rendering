@@ -10,10 +10,14 @@ import {
 	textSans14,
 	textSans17,
 } from '@guardian/source/foundations';
+import { EmailSignup } from '../components/EmailSignup';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
+import { NewsletterPrivacyMessage } from '../components/NewsletterPrivacyMessage';
 import { Section } from '../components/Section';
+import { SecureSignup } from '../components/SecureSignup.island';
 import type { NavType } from '../model/extract-nav';
 import type {
 	FEPuzzlesPageType,
@@ -35,6 +39,10 @@ const descriptionStyles = css`
 	margin: 0 0 ${space[6]}px;
 	color: ${palette.neutral[20]};
 	${textSans17};
+`;
+
+const newsletterSignupStyles = css`
+	margin-bottom: ${space[6]}px;
 `;
 
 const containerTitleStyles = css`
@@ -638,6 +646,25 @@ export const PuzzlesLayout = ({ puzzlesPage, NAV }: Props) => {
 					{puzzlesPage.description && (
 						<p css={descriptionStyles}>{puzzlesPage.description}</p>
 					)}
+					<div css={newsletterSignupStyles}>
+						<EmailSignup
+							name="Puzzles updates"
+							description="Get the latest puzzles news, features and updates from the Guardian."
+							frequency="Occasional"
+							theme="culture"
+						>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<SecureSignup
+									newsletterId="crossword-archive"
+									successDescription="You're signed up to receive puzzles updates."
+								/>
+							</Island>
+							<NewsletterPrivacyMessage />
+						</EmailSignup>
+					</div>
 					<div css={rowsStyles}>
 						{puzzlesPage.layout.containers.map((container) => (
 							<PuzzleContainerBlock
