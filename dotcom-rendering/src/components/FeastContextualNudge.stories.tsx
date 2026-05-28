@@ -30,6 +30,7 @@ const meta = {
 		pageId: 'food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 		recipeArticleTitle: "Meera Sodha's spring onion pancakes",
 		recipe: mockRecipe,
+		isDev: true,
 	},
 	parameters: {
 		chromatic: { viewports: [375, 740, 980] },
