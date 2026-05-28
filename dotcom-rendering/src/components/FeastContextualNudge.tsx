@@ -9,9 +9,9 @@ import {
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
-import { useConfig } from './ConfigContext';
 import type { StageType } from '../types/config';
 import type { RecipeBlockElement } from '../types/content';
+import { useConfig } from './ConfigContext';
 
 // ── Utility helpers ───────────────────────────────────────────────────────────
 
