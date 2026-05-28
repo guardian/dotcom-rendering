@@ -1,8 +1,6 @@
 import { joinUrl, log } from '@guardian/libs';
-import { abTestTest } from '../experiments/tests/ab-test-test';
 import { decideTrail } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
-import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
 import { palette } from '../palette';
 import type { FETrailTabType, TrailTabType } from '../types/trails';
@@ -54,23 +52,6 @@ export const MostViewedFooterData = ({
 	ajaxUrl,
 	edition,
 }: Props) => {
-	// Example usage of AB Tests
-	// Used in the Cypress tests as smoke test of the AB tests framework integration
-	const ABTestAPI = useAB()?.api;
-
-	let abTestCypressDataAttr = 'ab-test-not-in-test';
-
-	if (ABTestAPI?.isUserInVariant('AbTestTest', 'control')) {
-		abTestCypressDataAttr = 'ab-test-control';
-	}
-
-	if (ABTestAPI?.isUserInVariant('AbTestTest', 'variant')) {
-		abTestCypressDataAttr = 'ab-test-variant';
-	}
-
-	const runnableTest = ABTestAPI?.runnableTest(abTestTest);
-	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
-
 	const url = buildSectionUrl(ajaxUrl, edition, sectionId);
 	const { data, loading, error } = useApi<
 		MostViewedFooterPayloadType | FETrailTabType[]
@@ -90,8 +71,6 @@ export const MostViewedFooterData = ({
 		return (
 			<MostViewedFooter
 				tabs={transformTabs(tabs)}
-				abTestCypressDataAttr={abTestCypressDataAttr}
-				variantFromRunnable={variantFromRunnable}
 				sectionId={sectionId}
 				selectedColour={palette('--most-viewed-tab-border')}
 			/>

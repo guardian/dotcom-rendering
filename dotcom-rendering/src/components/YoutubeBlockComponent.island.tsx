@@ -1,7 +1,7 @@
 import type { ConsentState } from '@guardian/consent-manager';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import type { AdTargeting } from '../types/commercial';
 import type { AspectRatio } from '../types/front';
@@ -103,7 +103,7 @@ export const YoutubeBlockComponent = ({
 	const adTargeting = useAdTargeting(duration);
 	const { renderingTarget } = useConfig();
 
-	const abTests = useBetaAB();
+	const abTests = useAB();
 	const abTestParticipations = abTests?.getParticipations() ?? {};
 
 	/**

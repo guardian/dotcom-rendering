@@ -5,7 +5,7 @@ import {
 	AB_TEST_NAME,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 } from '../lib/newsletterSignupTracking';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { ConfigProvider } from './ConfigContext';
@@ -16,7 +16,7 @@ jest.mock('../client/ophan/ophan', () => ({
 }));
 
 jest.mock('../lib/useAB', () => ({
-	useBetaAB: jest.fn(),
+	useAB: jest.fn(),
 }));
 
 jest.mock('../lib/useAuthStatus', () => ({
@@ -87,7 +87,7 @@ const renderWrapper = (props = {}, renderingTarget: 'Web' | 'Apps' = 'Web') =>
 	);
 
 const mockAbTests = (isInVariant: boolean) => {
-	(useBetaAB as jest.Mock).mockReturnValue({
+	(useAB as jest.Mock).mockReturnValue({
 		isUserInTestGroup: (_testName: string, group: string) =>
 			group === 'variant' ? isInVariant : !isInVariant,
 	});
@@ -97,7 +97,7 @@ describe('EmailSignUpWrapper', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
 		// Default: AB API not yet hydrated
-		(useBetaAB as jest.Mock).mockReturnValue(undefined);
+		(useAB as jest.Mock).mockReturnValue(undefined);
 		(useIsSignedIn as jest.Mock).mockReturnValue(false);
 		(useNewsletterSubscription as jest.Mock).mockReturnValue(false);
 	});
@@ -137,7 +137,7 @@ describe('EmailSignUpWrapper', () => {
 
 	describe('flag on (showNewNewsletterSignupCard = true)', () => {
 		it('shows a placeholder when AB API has not hydrated yet', () => {
-			// useBetaAB returns undefined before hydration — component shows
+			// useAB returns undefined before hydration — component shows
 			// Placeholder rather than committing to control or variant early.
 			// (default set in outer beforeEach, no override needed)
 			renderWrapper({ showNewNewsletterSignupCard: true });
@@ -187,7 +187,7 @@ describe('EmailSignUpWrapper', () => {
 
 	describe('Apps rendering target', () => {
 		it('renders the legacy EmailSignup without waiting for AB to resolve', () => {
-			// useBetaAB remains undefined (AB framework never initialises on Apps)
+			// useAB remains undefined (AB framework never initialises on Apps)
 			// but the component should not block on it
 			renderWrapper({ showNewNewsletterSignupCard: true }, 'Apps');
 			expect(screen.getByTestId('email-signup')).toBeInTheDocument();
@@ -280,7 +280,7 @@ describe('EmailSignUpWrapper', () => {
 		});
 
 		it('does not fire a VIEW event while the AB client has not hydrated', () => {
-			// useBetaAB returns undefined — default set in beforeEach
+			// useAB returns undefined — default set in beforeEach
 			renderWrapper({ showNewNewsletterSignupCard: true });
 
 			expect(submitComponentEvent).not.toHaveBeenCalled();

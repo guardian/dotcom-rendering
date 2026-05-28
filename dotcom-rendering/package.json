@@ -27,7 +27,6 @@
 		"@emotion/cache": "11.14.0",
 		"@emotion/react": "11.14.0",
 		"@emotion/server": "11.11.0",
-		"@guardian/ab-core": "8.0.0",
 		"@guardian/ab-testing-config": "workspace:ab-testing-config",
 		"@guardian/braze-components": "22.2.0",
 		"@guardian/bridget": "8.11.0",

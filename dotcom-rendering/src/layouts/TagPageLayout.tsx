@@ -25,7 +25,7 @@ import {
 	getTagPageBannerAdPositions,
 	getTagPageMobileAdPositions,
 } from '../lib/getTagPageAdPositions';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { worldCup2026PageIds } from '../lib/worldCup2026';
 import { enhanceTags } from '../model/enhanceTags';
 import type { NavType } from '../model/extract-nav';
@@ -68,7 +68,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
 
-	const ab = useBetaAB();
+	const ab = useAB();
 
 	const isWorldCup2026 =
 		worldCup2026PageIds.includes(pageId) &&

@@ -14,7 +14,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubNav } from '../components/SubNav.island';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { worldCup2026PageIds } from '../lib/worldCup2026';
 import { palette as themePalette } from '../palette';
 import type {
@@ -99,7 +99,7 @@ export const SportDataPageLayout = (
 	const isApps = props.renderingTarget === 'Apps';
 	const pageFooter = sportData.pageFooter;
 	const renderAds = canRenderAds(sportData);
-	const ab = useBetaAB();
+	const ab = useAB();
 
 	const contributionsServiceUrl = getContributionsServiceUrl(sportData);
 

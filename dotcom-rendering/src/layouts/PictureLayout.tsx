@@ -40,7 +40,7 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -276,7 +276,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const ab = useBetaAB();
+	const ab = useAB();
 
 	const isWorldCup2026 =
 		article.tags.some((tag) => tag.id === worldCupTagId) &&

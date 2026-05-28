@@ -4,7 +4,6 @@ import { TagPageLayout } from '../layouts/TagPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
-import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { TagPage as TagPageModel } from '../types/tagPage';
 import { AdmiralScript } from './AdmiralScript.island';
@@ -75,12 +74,6 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 			</Island>
 			<Island priority="critical">
 				<SetABTests
-					abTestSwitches={filterABTestSwitches(
-						tagPage.config.switches,
-					)}
-					pageIsSensitive={tagPage.config.isSensitive}
-					isDev={!!tagPage.config.isDev}
-					serverSideTests={tagPage.config.abTests}
 					serverSideABTests={tagPage.config.serverSideABTests}
 				/>
 			</Island>

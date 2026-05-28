@@ -2,14 +2,14 @@ import type { StoryObj } from '@storybook/react-webpack5';
 import { mocked, within } from 'storybook/test';
 import preview from '../../.storybook/preview';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { EmailSignUpWrapper } from './EmailSignUpWrapper.island';
 
-/** Resolves `useBetaAB` as if the AB framework has hydrated, placing the user in control or variant. */
+/** Resolves `useAB` as if the AB framework has hydrated, placing the user in control or variant. */
 const mockBetaAB = (isInVariant: boolean) => {
-	mocked(useBetaAB).mockReturnValue({
+	mocked(useAB).mockReturnValue({
 		isUserInTestGroup: (_testName: string, group: string) =>
 			group === 'variant' ? isInVariant : !isInVariant,
 		isUserInTest: () => true,

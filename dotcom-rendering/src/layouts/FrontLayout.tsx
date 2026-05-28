@@ -40,7 +40,7 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import { ophanComponentId } from '../lib/ophan-helpers';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { worldCup2026PageIds } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
@@ -124,7 +124,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
-	const ab = useBetaAB();
+	const ab = useAB();
 
 	const isWorldCup2026 =
 		worldCup2026PageIds.includes(pageId) &&

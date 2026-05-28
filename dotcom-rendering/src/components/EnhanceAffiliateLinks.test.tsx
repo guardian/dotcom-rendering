@@ -1,11 +1,11 @@
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { EnhanceAffiliateLinks } from './EnhanceAffiliateLinks.island';
 
 // Mock the useAB module
 jest.mock('../lib/useAB', () => ({
-	useBetaAB: jest.fn(),
+	useAB: jest.fn(),
 }));
 
 describe('EnhanceAffiliateLinks', () => {
@@ -67,7 +67,7 @@ describe('EnhanceAffiliateLinks', () => {
             <a href="https://go.skimresources.com/?id=12345">Skimlink</a>
         `;
 
-		(useBetaAB as jest.Mock).mockReturnValue({
+		(useAB as jest.Mock).mockReturnValue({
 			getParticipations: () => ({
 				test1: 'variantA',
 				test2: 'variantB',
