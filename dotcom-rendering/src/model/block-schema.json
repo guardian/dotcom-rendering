@@ -370,6 +370,9 @@
                 },
                 {
                     "$ref": "#/definitions/ProductSummaryElement"
+                },
+                {
+                    "$ref": "#/definitions/RecipeBlockElement"
                 }
             ]
         },
@@ -4278,6 +4281,74 @@
                 "_type",
                 "matchedProducts",
                 "variant"
+            ]
+        },
+        "RecipeBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.RecipeBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "featuredImage": {
+                    "$ref": "#/definitions/RecipeFeaturedImage"
+                }
+            },
+            "required": [
+                "_type",
+                "id"
+            ]
+        },
+        "RecipeFeaturedImage": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "mediaId": {
+                    "type": "string"
+                },
+                "cropId": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "photographer": {
+                    "type": "string"
+                },
+                "imageType": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "mediaApiUri": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cropId",
+                "mediaId",
+                "url"
             ]
         },
         "Attributes": {
