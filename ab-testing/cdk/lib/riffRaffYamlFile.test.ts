@@ -5,6 +5,8 @@ import { AbTestingConfig } from "./abTestingConfig.ts";
 import { AbTestingDeploymentLambda } from "./deploymentLambda.ts";
 import { riffRaffYamlFile } from "./riffRaffYamlFile.ts";
 
+const riffRaffProjectName = "dotcom:ab-testing";
+
 test("riffRaffYamlFile", async () => {
 	await it("should have config deployments", () => {
 		const app = new GuRoot();
@@ -17,6 +19,7 @@ test("riffRaffYamlFile", async () => {
 			env: {
 				region: "eu-west-1",
 			},
+			riffRaffProjectName,
 		});
 
 		new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambda", {
@@ -25,9 +28,15 @@ test("riffRaffYamlFile", async () => {
 			env: {
 				region: "eu-west-1",
 			},
+			riffRaffProjectName,
 		});
 
-		const riffRaff = riffRaffYamlFile({ app, stack, region });
+		const riffRaff = riffRaffYamlFile({
+			app,
+			stack,
+			region,
+			riffRaffProjectName,
+		});
 
 		const { configuration } = riffRaff;
 
@@ -54,6 +63,7 @@ test("riffRaffYamlFile", async () => {
 			env: {
 				region,
 			},
+			riffRaffProjectName,
 		});
 
 		new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambda", {
@@ -62,9 +72,15 @@ test("riffRaffYamlFile", async () => {
 			env: {
 				region,
 			},
+			riffRaffProjectName,
 		});
 
-		const riffRaff = riffRaffYamlFile({ app, stack, region });
+		const riffRaff = riffRaffYamlFile({
+			app,
+			stack,
+			region,
+			riffRaffProjectName,
+		});
 		const { configuration } = riffRaff;
 
 		const configCloudformationDeploymentName = `cfn-${region}-${stack}-ab-testing-config`;
@@ -72,11 +88,11 @@ test("riffRaffYamlFile", async () => {
 		const deploymentLambdaDeploymentName = `lambda-update-${region}-${stack}-ab-testing-deployment-lambda`;
 
 		const configCloudformationDeployment = configuration
-			.get("dotcom:ab-testing")
+			.get(riffRaffProjectName)
 			?.deployments.get(configCloudformationDeploymentName);
 
 		const deploymentLambdaDeployment = configuration
-			.get("dotcom:ab-testing")
+			.get(riffRaffProjectName)
 			?.deployments.get(deploymentLambdaDeploymentName);
 
 		ok(

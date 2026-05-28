@@ -62,10 +62,6 @@ exports[`The AB testing deployment lambda stack > matches the CODE snapshot 1`] 
             "Value": "guardian/dotcom-rendering"
           },
           {
-            "Key": "gu:riff-raff:project",
-            "Value": "dotcom:ab-testing"
-          },
-          {
             "Key": "Stack",
             "Value": "frontend"
           },
@@ -305,10 +301,6 @@ exports[`The AB testing deployment lambda stack > matches the CODE snapshot 1`] 
             "Value": "guardian/dotcom-rendering"
           },
           {
-            "Key": "gu:riff-raff:project",
-            "Value": "dotcom:ab-testing"
-          },
-          {
             "Key": "Stack",
             "Value": "frontend"
           },
@@ -390,10 +382,6 @@ exports[`The AB testing deployment lambda stack > matches the PROD snapshot 1`] 
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
-          },
-          {
-            "Key": "gu:riff-raff:project",
-            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",
@@ -633,10 +621,6 @@ exports[`The AB testing deployment lambda stack > matches the PROD snapshot 1`] 
           {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering"
-          },
-          {
-            "Key": "gu:riff-raff:project",
-            "Value": "dotcom:ab-testing"
           },
           {
             "Key": "Stack",

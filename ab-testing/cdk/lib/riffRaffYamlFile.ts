@@ -14,17 +14,19 @@ export const riffRaffYamlFile = ({
 	app,
 	stack,
 	region,
+	riffRaffProjectName,
 }: {
 	app: App;
 	stack: string;
 	region: string;
+	riffRaffProjectName: string;
 }) => {
 	const riffRaff = new RiffRaffYamlFile(app);
 	const { configuration } = riffRaff;
 
 	// The dictionary artifacts to be deployed to S3
 	configuration
-		.get("dotcom:ab-testing")
+		.get(riffRaffProjectName)
 		?.deployments.set("config/ab-testing", {
 			app: "ab-testing-config-artifact",
 			contentDirectory: "ab-testing-config-artifacts",
@@ -41,7 +43,7 @@ export const riffRaffYamlFile = ({
 
 	// the admin UI artifacts to be deployed to S3
 	configuration
-		.get("dotcom:ab-testing")
+		.get(riffRaffProjectName)
 		?.deployments.set("admin/ab-testing", {
 			app: "ab-testing-ui-artifact",
 			contentDirectory: "ab-testing-ui-artifact",
@@ -57,11 +59,11 @@ export const riffRaffYamlFile = ({
 		});
 
 	const configCloudformationDeployment = configuration
-		.get("dotcom:ab-testing")
+		.get(riffRaffProjectName)
 		?.deployments.get(`cfn-${region}-${stack}-ab-testing-config`)!;
 
 	configuration
-		.get("dotcom:ab-testing")
+		.get(riffRaffProjectName)
 		?.deployments.set(`cfn-${region}-${stack}-ab-testing-config`, {
 			...configCloudformationDeployment,
 			dependencies: [
