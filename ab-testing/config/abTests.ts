@@ -95,6 +95,19 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
+		name: "newsletters-highlights-newsletter-signup",
+		description:
+			"Show the Highlights newsletter signup card + modal flow on the Guardian front. audienceSize is 0 so it is inert in production; force with ?abforce=newsletters-highlights-newsletter-signup%3Avariant",
+		owners: ["newsletters.dev@guardian.co.uk"],
+		expirationDate: "2027-06-01",
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "newsletters-newsletter-signup-card",
 		description:
 			"Compare the existing SecureSignup (control) against the new NewsletterSignupCard design (variant)",
