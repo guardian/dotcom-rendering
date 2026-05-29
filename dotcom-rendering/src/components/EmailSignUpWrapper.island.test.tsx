@@ -238,6 +238,7 @@ describe('EmailSignUpWrapper', () => {
 						componentType: 'NEWSLETTER_SUBSCRIPTION',
 						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
 							defaultProps.identityName,
+							'variantB',
 						),
 					},
 					action: 'VIEW',

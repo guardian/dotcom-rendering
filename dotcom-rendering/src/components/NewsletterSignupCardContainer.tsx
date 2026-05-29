@@ -31,7 +31,10 @@ const sendPreviewTracking = ({
 	sendNewsletterSignupEvent({
 		action: eventDescription === 'preview-open' ? 'EXPAND' : 'CLOSE',
 		identityName,
-		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName),
+		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+			identityName,
+			'variantB',
+		),
 		renderingTarget,
 		value: { eventDescription, renderUrl, isSignedIn },
 	});

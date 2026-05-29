@@ -75,6 +75,7 @@ describe('NewsletterSignupCardContainer', () => {
 						componentType: 'NEWSLETTER_SUBSCRIPTION',
 						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
 							defaultProps.identityName,
+							'variantB',
 						),
 					},
 					action: 'EXPAND',
@@ -104,6 +105,7 @@ describe('NewsletterSignupCardContainer', () => {
 							componentType: 'NEWSLETTER_SUBSCRIPTION',
 							id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
 								defaultProps.identityName,
+								'variantB',
 							),
 						},
 						action: 'CLOSE',
@@ -178,6 +180,7 @@ describe('NewsletterSignupCardContainer', () => {
 				component: expect.objectContaining({
 					id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
 						defaultProps.identityName,
+						'variantB',
 					),
 				}),
 			}),
