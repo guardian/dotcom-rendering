@@ -5,7 +5,7 @@
 	"deno.enablePaths": ["scripts/deno"],
 	"deno.lint": true,
 	"deno.unstable": false,
-	"typescript.tsdk": "node_modules/typescript/lib",
+	"js/ts.tsdk.path": "./dotcom-rendering/node_modules/typescript/lib",
 	"git.branchProtection": ["main"],
 	"eslint.workingDirectories": ["./dotcom-rendering"]
 }
