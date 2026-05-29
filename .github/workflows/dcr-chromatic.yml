@@ -62,9 +62,9 @@ jobs:
           workingDir: dotcom-rendering
           buildScriptName: 'build-storybook'
           exitOnceUploaded: true
-          # Skip when no relevant UI files changed.
+          # Skip on PRs when no relevant UI files changed and the run_chromatic label isn't present (so that chromatic can still be run even if it's not required)
           # Chromatic will post a passing status without building Storybook.
-          skip: ${{ needs.check-paths.outputs.relevant != 'true' }}
+          skip: ${{ github.event_name == 'pull_request' && needs.check-paths.outputs.relevant != 'true' && !contains(github.event.pull_request.labels.*.name, 'run_chromatic') }}
 
   remove-label:
     # Only remove label when Chromatic actually ran (label present and relevant changes)
