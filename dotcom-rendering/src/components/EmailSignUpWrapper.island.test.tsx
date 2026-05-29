@@ -89,7 +89,7 @@ const renderWrapper = (props = {}, renderingTarget: 'Web' | 'Apps' = 'Web') =>
 const mockAbTests = (isInVariant: boolean) => {
 	(useAB as jest.Mock).mockReturnValue({
 		getParticipations: () => ({
-			[AB_TEST_NAME]: isInVariant ? 'variantA' : 'control',
+			[AB_TEST_NAME]: isInVariant ? 'variantB' : 'control',
 		}),
 		isUserInTestGroup: (_testName: string, group: string) =>
 			group === 'variant' ? isInVariant : !isInVariant,
@@ -245,7 +245,7 @@ describe('EmailSignUpWrapper', () => {
 						),
 					},
 					action: 'VIEW',
-					abTest: { name: AB_TEST_NAME, variant: 'variant' },
+					abTest: { name: AB_TEST_NAME, variant: 'variantB' },
 				}),
 				'Web',
 			);
