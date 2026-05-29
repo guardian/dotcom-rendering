@@ -65,7 +65,11 @@ export const FootballMatchDay = ({
 			href={`${guardianBaseUrl}/football/${competitionTag}/overview`}
 			css={fixtureLinkCss}
 		>
-			See all fixtures <SvgChevronRightSingleSmall size="xsmall" />
+			See all fixtures{' '}
+			<SvgChevronRightSingleSmall
+				size="xsmall"
+				theme={{ fill: 'currentColor' }}
+			/>
 		</a>
 	</section>
 );
@@ -78,6 +82,7 @@ export const FootballMatchDay = ({
 
 const paletteCss = css`
 	--match-day-text: ${neutral[7]};
+	--match-day-text-live: ${neutral[7]};
 	--match-day-text-result: ${neutral[97]};
 	--match-day-background: ${sport[800]};
 	--match-day-background-live: ${brandAlt[400]};
@@ -88,6 +93,22 @@ const paletteCss = css`
 	--match-day-kicker: ${sport[400]};
 	--match-day-border: ${neutral[86]};
 	--match-day-crest: ${neutral[100]};
+
+	.ios,
+	.android {
+		@media (prefers-color-scheme: dark) {
+			--match-day-text: ${neutral[86]};
+			--match-day-text-live: ${neutral[7]};
+			--match-day-text-result: ${neutral[97]};
+			--match-day-background: ${neutral[20]};
+			--match-day-background-live: ${brandAlt[200]};
+			--match-day-background-result: ${sport[100]};
+			--match-day-comment: ${neutral[86]};
+			--match-day-comment-live: ${neutral[10]};
+			--match-day-live: ${sport[100]};
+			--match-day-kicker: ${sport[500]};
+		}
+	}
 `;
 
 const kickerCss = css`
@@ -111,7 +132,7 @@ const fixtureLinkCss = css`
 	align-items: center;
 	float: right;
 	margin-top: ${space[3]}px;
-	color: inherit;
+	color: var(--match-day-text);
 	text-decoration: none;
 	&:hover {
 		text-decoration: underline;
@@ -150,8 +171,9 @@ const Match = ({
 const matchTextColour = (matchKind: FootballMatch['kind']): string => {
 	switch (matchKind) {
 		case 'Fixture':
-		case 'Live':
 			return 'var(--match-day-text)';
+		case 'Live':
+			return 'var(--match-day-text-live)';
 		case 'Result':
 			return 'var(--match-day-text-result)';
 	}
