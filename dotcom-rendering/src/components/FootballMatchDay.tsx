@@ -178,6 +178,10 @@ const wrapperCss = css`
 		grid-area: away;
 		justify-self: end;
 	}
+
+	&:hover {
+		text-decoration: none;
+	}
 `;
 
 const kickOffFormatterForEdition = (edition: EditionId): Intl.DateTimeFormat =>
