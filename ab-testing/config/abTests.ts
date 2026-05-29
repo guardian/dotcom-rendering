@@ -97,14 +97,14 @@ const ABTests: ABTest[] = [
 	{
 		name: "newsletters-newsletter-signup-card",
 		description:
-			"Compare the existing SecureSignup (control) against the new NewsletterSignupCard design (variant)",
+			"Compare the existing SecureSignup (control) against a slightly modified version of the control (variantA) and the new NewsletterSignupCard design (variantB)",
 		owners: ["newsletters.dev@guardian.co.uk"],
 		expirationDate: "2026-07-01",
 		type: "client",
 		status: "ON",
 		audienceSize: 1,
 		audienceSpace: "B",
-		groups: ["control", "variant"],
+		groups: ["control", "variantA", "variantB"],
 		shouldForceMetricsCollection: false,
 	},
 	{

@@ -50,6 +50,9 @@ type Props = {
 	newsletterId: string;
 	successDescription: string;
 	abTest?: AbTest;
+	emailInputNameOverride?: string;
+	emailInputIdOverride?: string;
+	addBotHoneyPotField?: boolean;
 };
 
 const formStyles = css`
@@ -116,6 +119,10 @@ const optInCheckboxTextSmall = css`
 	}
 `;
 
+const botHoneypotFieldStyles = css`
+	display: none;
+`;
+
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
 		<span>
@@ -144,10 +151,19 @@ const buildFormData = (
 	emailAddress: string,
 	newsletterId: string,
 	token: string,
-	marketingOptIn?: boolean,
-	browserId?: string,
-	marketingOptInHiddenForCountry?: boolean,
+	additionalOptions?: {
+		marketingOptIn?: boolean;
+		browserId?: string;
+		marketingOptInHiddenForCountry?: boolean;
+		botHoneyPotValue?: string;
+	},
 ): FormData => {
+	const {
+		marketingOptIn,
+		browserId,
+		marketingOptInHiddenForCountry,
+		botHoneyPotValue,
+	} = additionalOptions ?? {};
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
 
@@ -172,6 +188,10 @@ const buildFormData = (
 
 	if (browserId !== undefined) {
 		formData.append('browserId', browserId);
+	}
+
+	if (botHoneyPotValue !== undefined) {
+		formData.append('botHoneyPot', botHoneyPotValue);
 	}
 
 	return formData;
@@ -254,6 +274,9 @@ export const SecureSignup = ({
 	newsletterId,
 	successDescription,
 	abTest,
+	emailInputNameOverride,
+	emailInputIdOverride,
+	addBotHoneyPotField = false,
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
@@ -313,6 +336,12 @@ export const SecureSignup = ({
 			isSignedIn,
 			effectiveMarketingOptIn,
 		});
+		const possibleBotHoneyPotInput: HTMLInputElement | null =
+			document.querySelector(
+				`#secure-signup-${newsletterId} input[name="website"]`,
+			) ?? null;
+		const honeyPotValue = possibleBotHoneyPotInput?.value;
+		console.log('honeyPotValue = ', honeyPotValue);
 
 		sendTracking(
 			newsletterId,
@@ -323,14 +352,14 @@ export const SecureSignup = ({
 			marketingOptInType ? { marketingOptInType } : undefined,
 		);
 
-		const formData = buildFormData(
-			emailAddress,
-			newsletterId,
-			token,
-			effectiveMarketingOptIn,
+		const formData = buildFormData(emailAddress, newsletterId, token, {
+			marketingOptIn: effectiveMarketingOptIn,
 			browserId,
-			marketingOptInHiddenForCountry ? true : undefined,
-		);
+			marketingOptInHiddenForCountry: marketingOptInHiddenForCountry
+				? true
+				: undefined,
+			botHoneyPotValue: honeyPotValue,
+		});
 
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
@@ -462,7 +491,8 @@ export const SecureSignup = ({
 				<TextInput
 					hidden={hideEmailInput}
 					hideLabel={hideEmailInput}
-					name="email"
+					name={emailInputNameOverride ?? 'email'}
+					id={emailInputIdOverride}
 					label="Enter your email address"
 					type="email"
 					value={userEmail ?? ''}
@@ -485,6 +515,20 @@ export const SecureSignup = ({
 							}
 						/>
 					</CheckboxGroup>
+				)}
+				{addBotHoneyPotField && (
+					<TextInput
+						name="website"
+						label="website"
+						hideLabel={true}
+						type="text"
+						maxLength={100}
+						optional={true}
+						tabIndex={-1}
+						autoComplete="off"
+						aria-hidden="true"
+						cssOverrides={botHoneypotFieldStyles}
+					/>
 				)}
 				<Button onClick={handleClick} size="small" type="submit">
 					Sign up

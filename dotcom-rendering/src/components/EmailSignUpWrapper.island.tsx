@@ -81,11 +81,17 @@ export const EmailSignUpWrapper = ({
 	const abTests = useAB();
 	const abResolved = abTests !== undefined;
 
-	const isVariant =
-		abTestEnabled &&
-		(abTests?.isUserInTestGroup(AB_TEST_NAME, 'variant') ?? false);
-
-	const abVariant = isVariant ? 'variant' : 'control';
+	const getVariantName = () => {
+		const currentUserVariant = abTests?.getParticipations()[AB_TEST_NAME];
+		if (
+			currentUserVariant &&
+			['variantA', 'variantB'].includes(currentUserVariant)
+		) {
+			return currentUserVariant;
+		}
+		return 'control';
+	};
+	const abVariant = abTestEnabled ? getVariantName() : 'control';
 
 	const isSubscribed = useNewsletterSubscription(
 		listId,
@@ -118,8 +124,11 @@ export const EmailSignUpWrapper = ({
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName,
-			componentId: isVariant
-				? NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName)
+			componentId: abVariant.includes('variant')
+				? NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+						identityName,
+						abVariant,
+				  )
 				: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
 			renderingTarget,
 			value: {
@@ -134,7 +143,6 @@ export const EmailSignUpWrapper = ({
 		abVariant,
 		identityName,
 		isSubscribed,
-		isVariant,
 		abTestEnabled,
 		renderingTarget,
 	]);
@@ -143,7 +151,7 @@ export const EmailSignUpWrapper = ({
 		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
 	}
 
-	if (isVariant) {
+	if (abVariant === 'variantB') {
 		return (
 			<InlineSkipToWrapper
 				id={`EmailSignup-skip-link-${index}`}
@@ -187,6 +195,10 @@ export const EmailSignUpWrapper = ({
 		return null;
 	}
 
+	const emailInputName = abVariant === 'variantA' ? 'emailAddress' : 'email';
+	const emailInputId =
+		abVariant === 'variantA' ? `emailInput-${identityName}` : undefined;
+
 	return (
 		<InlineSkipToWrapper
 			id={`EmailSignup-skip-link-${index}`}
@@ -203,6 +215,9 @@ export const EmailSignUpWrapper = ({
 						newsletterId={identityName}
 						successDescription={successDescription}
 						abTest={{ name: AB_TEST_NAME, variant: abVariant }}
+						emailInputNameOverride={emailInputName}
+						emailInputIdOverride={emailInputId}
+						addBotHoneyPotField={abVariant === 'variantA'}
 					/>
 				</Island>
 				{!hidePrivacyMessage && <NewsletterPrivacyMessage />}

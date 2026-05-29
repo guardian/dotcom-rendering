@@ -40,8 +40,8 @@ export const EVENT_DESCRIPTION_TO_ACTION = {
  */
 export const NEWSLETTER_SIGNUP_COMPONENT_ID = {
 	control: (identityName: string) => `AR SecureSignup ${identityName}`,
-	variant: (identityName: string) =>
-		`AR NewsletterSignupForm ${identityName}`,
+	variant: (identityName: string, variantName: string) =>
+		`AR NewsletterSignupForm ${identityName} - ${variantName}`,
 } as const;
 
 /**
