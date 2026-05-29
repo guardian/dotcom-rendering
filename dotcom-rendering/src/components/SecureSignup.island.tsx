@@ -341,7 +341,6 @@ export const SecureSignup = ({
 				`#secure-signup-${newsletterId} input[name="website"]`,
 			) ?? null;
 		const honeyPotValue = possibleBotHoneyPotInput?.value;
-		console.log('honeyPotValue = ', honeyPotValue);
 
 		sendTracking(
 			newsletterId,
