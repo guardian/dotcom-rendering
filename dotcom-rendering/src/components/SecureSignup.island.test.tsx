@@ -27,7 +27,16 @@ jest.mock('../lib/fetchEmail', () => ({
 
 jest.mock('../lib/newsletterSignupTracking', () => ({
 	EVENT_DESCRIPTION_TO_ACTION: {},
-	NEWSLETTER_SIGNUP_COMPONENT_ID: { control: () => 'test-id' },
+	NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT: {
+		inArticle: {
+			control: () => 'test-id',
+			variant: () => 'test-id',
+		},
+		highlights: {
+			control: () => 'test-id',
+			variant: () => 'test-id',
+		},
+	},
 	sendNewsletterSignupEvent: jest.fn(),
 }));
 

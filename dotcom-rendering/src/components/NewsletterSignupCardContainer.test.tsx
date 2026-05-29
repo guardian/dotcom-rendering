@@ -6,7 +6,7 @@ import {
 	waitFor,
 } from '@testing-library/react';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import { NEWSLETTER_SIGNUP_COMPONENT_ID } from '../lib/newsletterSignupTracking';
+import { NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT } from '../lib/newsletterSignupTracking';
 import { NewsletterSignupCardContainer } from './NewsletterSignupCardContainer';
 
 jest.mock('../client/ophan/ophan', () => ({
@@ -80,7 +80,7 @@ describe('NewsletterSignupCardContainer', () => {
 				expect.objectContaining({
 					component: {
 						componentType: 'NEWSLETTER_SUBSCRIPTION',
-						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+						id: NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.variant(
 							defaultProps.identityName,
 						),
 					},
@@ -109,7 +109,7 @@ describe('NewsletterSignupCardContainer', () => {
 					expect.objectContaining({
 						component: {
 							componentType: 'NEWSLETTER_SUBSCRIPTION',
-							id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+							id: NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.variant(
 								defaultProps.identityName,
 							),
 						},
@@ -183,7 +183,7 @@ describe('NewsletterSignupCardContainer', () => {
 			expect.objectContaining({
 				action: 'EXPAND',
 				component: expect.objectContaining({
-					id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+					id: NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.variant(
 						defaultProps.identityName,
 					),
 				}),
@@ -208,7 +208,7 @@ describe('NewsletterSignupCardContainer', () => {
 		).toBeNull();
 	});
 
-	it('opens preview when the Highlights card is clicked on Web', () => {
+	it('does not open preview when the Highlights card is clicked on Web', () => {
 		renderContainer({
 			highlightCardTitle: 'Sign up to Morning Briefing',
 		});
@@ -217,6 +217,18 @@ describe('NewsletterSignupCardContainer', () => {
 			testScreen.getByRole('button', { name: /Free newsletter/i }),
 		);
 
-		expect(testScreen.getByRole('dialog')).toBeInTheDocument();
+		expect(testScreen.queryByRole('dialog')).not.toBeInTheDocument();
+	});
+
+	it('does not fire preview tracking when the Highlights card is clicked', () => {
+		renderContainer({
+			highlightCardTitle: 'Sign up to Morning Briefing',
+		});
+
+		fireEvent.click(
+			testScreen.getByRole('button', { name: /Free newsletter/i }),
+		);
+
+		expect(submitComponentEvent).not.toHaveBeenCalled();
 	});
 });
