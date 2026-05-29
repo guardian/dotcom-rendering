@@ -39,14 +39,7 @@ export const FootballMatchDay = ({
 			<h3 css={kickerCss}>{matches[0].competitions[0].name} matchday</h3>
 		)}
 		{matches.length > 0 ? (
-			<ul
-				css={css`
-					${textSans12}
-					list-style: none;
-					margin: 0;
-					padding: 0;
-				`}
-			>
+			<ul css={matchesCss}>
 				{matches.map(
 					(day) =>
 						day.competitions[0]?.matches.map((match) => (
@@ -115,6 +108,13 @@ const kickerCss = css`
 	${textSans15}
 	color: var(--match-day-kicker);
 	margin-bottom: ${space[2]}px;
+`;
+
+const matchesCss = css`
+	${textSans12}
+	list-style: none;
+	margin: 0;
+	padding: 0;
 `;
 
 const noMatchesCss = css`
@@ -193,7 +193,7 @@ const matchBackgroundColour = (matchKind: FootballMatch['kind']): string => {
 const matchCss = (matchKind: FootballMatch['kind']) => css`
 	color: ${matchTextColour(matchKind)};
 	background-color: ${matchBackgroundColour(matchKind)};
-	& + & {
+	:not(:first-of-type) {
 		border-top: 1px dashed var(--match-day-border);
 	}
 `;
