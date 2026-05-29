@@ -469,6 +469,7 @@ export interface MediaAtomBlockElement {
 	duration?: number;
 	videoPlayerFormat?: VideoPlayerFormat;
 	role?: RoleType;
+	caption?: string;
 }
 
 export interface MultiImageBlockElement {
@@ -753,6 +754,7 @@ export interface YoutubeBlockElement {
 	overrideImage?: string;
 	altText?: string;
 	role?: RoleType;
+	caption?: string;
 }
 
 interface WitnessTypeDataBase {

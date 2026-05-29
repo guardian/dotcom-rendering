@@ -54,8 +54,12 @@ const getBundleReport = () =>
  * @type {(gzipSize: number) => '🔴' | '🟠' | '🟢'}
  */
 const getTrafficLight = (gzipSize) => {
-	if (gzipSize < 1 * 1024) return '🟢';
-	if (gzipSize < 5 * 1024) return '🟠';
+	if (gzipSize < 1 * 1024) {
+		return '🟢';
+	}
+	if (gzipSize < 5 * 1024) {
+		return '🟠';
+	}
 	return '🔴';
 };
 

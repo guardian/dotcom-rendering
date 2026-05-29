@@ -50,7 +50,9 @@ export const SlideshowCarouselScrollingDots = ({
 	const scrollDots = () => {
 		const offsetPerDot = -(dotSize + dotGap);
 
-		if (total <= dotsVisible) return;
+		if (total <= dotsVisible) {
+			return;
+		}
 
 		if (current < scrollThreshold) {
 			return { transform: 'translateX(0)' };
@@ -72,7 +74,9 @@ export const SlideshowCarouselScrollingDots = ({
 	};
 
 	const scaleDot = (index: number) => {
-		if (total <= dotsVisible) return;
+		if (total <= dotsVisible) {
+			return;
+		}
 
 		/**
 		 * If we haven't reached the scroll threshold and the current dot is the

@@ -22,7 +22,6 @@ export const options = {
 export default function () {
 	const response = http.post(
 		`http://localhost:${PORT}/Article`,
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- k6 api
 		JSON.stringify(jsonPayload[0]),
 		{ headers: { 'Content-type': 'application/json' } },
 	);

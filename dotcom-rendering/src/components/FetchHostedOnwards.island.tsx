@@ -9,7 +9,7 @@ type Props = {
 };
 
 type OnwardsResponse = {
-	trails: Array<TrailType>;
+	trails: TrailType[];
 };
 
 export const FetchHostedOnwards = ({ branding, url }: Props) => {
@@ -31,7 +31,6 @@ export const FetchHostedOnwards = ({ branding, url }: Props) => {
 		<HostedContentOnwards
 			trails={trails}
 			brandName={branding?.sponsorName ?? ''}
-			accentColor={branding?.hostedCampaignColour}
 		/>
 	);
 };

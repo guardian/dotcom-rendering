@@ -119,7 +119,6 @@ export const MainMedia = ({
 		<div css={[mainMedia, chooseWrapper(format)]}>
 			{elements.map((element, index) => (
 				<RenderArticleElement
-					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
 					key={index}
 					format={format}
 					element={element}

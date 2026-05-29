@@ -6,9 +6,12 @@ export type CustomPlayEventDetail = { uniqueId: string };
 /** We expect all videos to include dimensions since the field was added to FEMediaAsset */
 export const DEFAULT_ASPECT_RATIO = 5 / 4;
 
+export const DEFAULT_IMAGE_ASPECT_RATIO = '5:4';
+
 export const customSelfHostedVideoPlayAudioEventName =
 	'self-hosted-video:play-with-audio';
 export const customYoutubePlayEventName = 'youtube-video:play';
+export const customYoutubePauseEventName = 'youtube-video:pause';
 
 export type Source = {
 	src: string;
@@ -74,6 +77,19 @@ export const convertFEMediaAssetsToVideoAssets = (
 	}));
 
 /**
+ * Round an aspect ratio value to 3 decimal places.
+ *
+ * This helps avoid floating point precision issues and ensures
+ * consistent aspect ratio values for rendering and comparisons.
+ *
+ * @param aspectRatio - The raw aspect ratio value to round up.
+ * @returns The aspect ratio rounded to 3 decimal places.
+ * */
+export const roundAspectRatio = (aspectRatio: number): number => {
+	return Number(aspectRatio.toFixed(3));
+};
+
+/**
  * Aspect ratio is needed for self-hosted video so that the browser knows how much
  * space the video will take up: width and height are unknown when the page first
  * renders, as there can be multiple sources available with different dimensions.
@@ -92,7 +108,7 @@ export const getAspectRatioFromSources = (sources: Source[]): number => {
 			width > 0 &&
 			height > 0
 		) {
-			return width / height;
+			return roundAspectRatio(width / height);
 		}
 	}
 
@@ -100,7 +116,7 @@ export const getAspectRatioFromSources = (sources: Source[]): number => {
 		return DEFAULT_ASPECT_RATIO;
 	}
 
-	return firstSource.width / firstSource.height;
+	return roundAspectRatio(firstSource.width / firstSource.height);
 };
 
 export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>

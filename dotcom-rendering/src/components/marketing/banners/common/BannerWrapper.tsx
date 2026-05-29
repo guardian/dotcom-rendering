@@ -121,7 +121,6 @@ const withBannerData =
 			isSupporter,
 			separateArticleCount,
 			separateArticleCountSettings,
-			choiceCardAmounts,
 			choiceCardsSettings,
 			design,
 			bannerChannel,
@@ -194,7 +193,7 @@ const withBannerData =
 
 		const finaliseParagraphs = (
 			paras: string[],
-		): (Array<JSX.Element> | JSX.Element)[] => {
+		): Array<JSX.Element[] | JSX.Element> => {
 			return paras.map((p) =>
 				replaceArticleCount(p, numArticles, 'banner'),
 			);
@@ -407,7 +406,6 @@ const withBannerData =
 					articleCounts,
 					separateArticleCount,
 					separateArticleCountSettings,
-					choiceCardAmounts,
 					choiceCardsSettings,
 					tracking,
 					submitComponentEvent,

@@ -2,9 +2,7 @@ import type { BrazeBannerComponent as BrazeBannerComponentType } from '@guardian
 import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 
-type BrazeMessageProps = {
-	[key: string]: string | undefined;
-};
+type BrazeMessageProps = Record<string, string | undefined>;
 
 type NewsletterSubscribeCallback = (id: string) => Promise<void>;
 const subscribeToNewsletter: NewsletterSubscribeCallback = () =>

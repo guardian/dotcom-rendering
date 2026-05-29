@@ -15,6 +15,8 @@ import { border, primaryText, selected } from './colours';
 
 type Props = {
 	matchKind: FootballMatch['kind'];
+	// eslint-disable-next-line react/no-unused-prop-types -- false positive, this is passed into the tab components
+	sportKind?: 'football' | 'cricket';
 } & (
 	| {
 			selected: 'info';
@@ -89,13 +91,14 @@ const LiveFeed = (props: Props) => {
 };
 
 const MatchInfo = (props: Props) => {
+	const tabText = props.sportKind === 'cricket' ? 'Scorecard' : 'Match info';
 	if (props.selected === 'info') {
-		return <Tab matchKind={props.matchKind}>Match info</Tab>;
+		return <Tab matchKind={props.matchKind}>{tabText}</Tab>;
 	}
 
 	return (
 		<Tab matchKind={props.matchKind} href={props.infoURL}>
-			Match info
+			{tabText}
 		</Tab>
 	);
 };

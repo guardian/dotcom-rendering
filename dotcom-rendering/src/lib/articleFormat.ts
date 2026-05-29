@@ -192,7 +192,7 @@ const isTheme = (theme: string | ArticleTheme): theme is ArticleTheme =>
 const isDesign = (design: string | ArticleDesign): design is ArticleDesign =>
 	!isString(design);
 
-const isHostedContentDesign = (design: ArticleDesign): boolean =>
+export const isHostedContentDesign = (design: ArticleDesign): boolean =>
 	[
 		ArticleDesign.HostedArticle,
 		ArticleDesign.HostedVideo,

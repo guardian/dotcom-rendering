@@ -21,7 +21,6 @@ import { enhanceElementsImages, enhanceImages } from './enhance-images';
 import { enhanceInteractiveAtomElements } from './enhance-interactive-atom';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
-import { enhanceProductSummary } from './enhance-product-summary';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceGuVideos } from './enhance-videos';
 import { enhanceLists } from './enhanceLists';
@@ -101,12 +100,6 @@ export const enhanceElements =
 				options.shouldHideAds,
 			),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer, isNested),
-			enhanceProductSummary({
-				pageId: options.pageId,
-				serverSideABTests: options.serverSideABTests,
-				renderingTarget: options.renderingTarget,
-				filterAtAGlanceEnabled: !!options.switches?.filterAtAGlance,
-			}),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,

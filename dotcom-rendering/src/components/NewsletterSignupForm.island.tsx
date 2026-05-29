@@ -1,14 +1,13 @@
 import { css } from '@emotion/react';
 import type { AbTest } from '@guardian/ophan-tracker-js';
 import { from, space, textSans15, until } from '@guardian/source/foundations';
-import type { Size, ThemeButton } from '@guardian/source/react-components';
+import type { ThemeButton } from '@guardian/source/react-components';
 import {
 	Button,
 	InlineError,
 	InlineSuccess,
 	Link,
 	LinkButton,
-	SvgEye,
 	SvgReload,
 	TextInput,
 } from '@guardian/source/react-components';
@@ -18,11 +17,16 @@ import { ToggleSwitch } from '@guardian/source-development-kitchen/react-compone
 // Use the default export instead.
 import type { ChangeEvent } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
+import { useHideMarketingToggleForCountry } from '../lib/useHideMarketingToggleForCountry';
 import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
+import {
+	NewsletterPreviewButton,
+	newsletterTertiaryButtonTheme,
+} from './NewsletterPreviewButton';
+import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
-import type { NewsletterPreviewAction } from './NewsletterSignupCardContainer';
 
 type Props = {
 	newsletterId: string;
@@ -92,10 +96,6 @@ const submitButtonStyles = css`
 	${from.tablet} {
 		max-width: 220px;
 	}
-`;
-
-const previewButtonContainerStyles = css`
-	margin-bottom: ${space[2]}px;
 `;
 
 const toggleContainerStyles = css`
@@ -170,52 +170,6 @@ const primaryButtonTheme: Partial<ThemeButton> = {
 	textPrimary: palette('--newsletter-signup-submit-text'),
 };
 
-/**
- * Colour overrides for tertiary buttons so that they are visible
- * in both light and dark mode, independent of the article theme.
- */
-const tertiaryButtonTheme: Partial<ThemeButton> = {
-	textTertiary: palette('--newsletter-preview-button-text'),
-	borderTertiary: palette('--newsletter-preview-button-border'),
-	backgroundTertiaryHover: palette('--newsletter-preview-button-hover'),
-};
-
-const PreviewButton = ({
-	previewAction,
-	size = 'default',
-}: {
-	previewAction: NewsletterPreviewAction;
-	size?: Size;
-}) =>
-	previewAction.behaviour === 'link' ? (
-		<LinkButton
-			data-ignore="global-link-styling"
-			priority="tertiary"
-			icon={<SvgEye />}
-			iconSide="left"
-			href={previewAction.href}
-			target="_blank"
-			rel="noreferrer"
-			onClick={previewAction.onClick}
-			size={size}
-			theme={tertiaryButtonTheme}
-		>
-			Preview latest
-		</LinkButton>
-	) : (
-		<Button
-			priority="tertiary"
-			icon={<SvgEye />}
-			iconSide="left"
-			onClick={previewAction.onClick}
-			type="button"
-			size={size}
-			theme={tertiaryButtonTheme}
-		>
-			Preview latest
-		</Button>
-	);
-
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
 		<span>
@@ -251,9 +205,9 @@ const SuccessMessage = ({
 				</span>
 			</InlineSuccess>
 			<LinkButton
-				href="/email-newsletters"
+				href="/email-newsletters?INTCMP=DOTCOM_NEWSLETTER_SIGNUP_CARD"
 				priority="tertiary"
-				theme={tertiaryButtonTheme}
+				theme={newsletterTertiaryButtonTheme}
 				cssOverrides={tryAgainButtonStyles}
 				data-ignore="global-link-styling"
 			>
@@ -320,6 +274,7 @@ const NewsletterSignupFormActive = ({
 	abTest,
 }: Omit<Props, 'isAlreadySubscribed'>) => {
 	const { renderingTarget } = useConfig();
+	const hideMarketingToggle = useHideMarketingToggleForCountry();
 
 	const {
 		userEmail,
@@ -342,7 +297,12 @@ const NewsletterSignupFormActive = ({
 		handleSubmit,
 		handleSubmitButtonClick,
 		handleReset,
-	} = useNewsletterSignupForm(newsletterId, renderingTarget, abTest);
+	} = useNewsletterSignupForm(
+		newsletterId,
+		renderingTarget,
+		abTest,
+		hideMarketingToggle,
+	);
 
 	const hasResponse = typeof responseOk === 'boolean';
 	const hasNonValidationError = !!errorMessage && !isValidationError;
@@ -360,11 +320,6 @@ const NewsletterSignupFormActive = ({
 
 	return (
 		<>
-			{showForm && previewAction && !isSignedIn && (
-				<div css={previewButtonContainerStyles}>
-					<PreviewButton previewAction={previewAction} size="small" />
-				</div>
-			)}
 			<form
 				onSubmit={handleSubmit}
 				id={`newsletter-signup-${newsletterId}`}
@@ -419,7 +374,9 @@ const NewsletterSignupFormActive = ({
 				)}
 				<div css={submitButtonContainerStyles}>
 					{isSignedIn && previewAction && (
-						<PreviewButton previewAction={previewAction} />
+						<NewsletterPreviewButton
+							previewAction={previewAction}
+						/>
 					)}
 					<Button
 						cssOverrides={submitButtonStyles}

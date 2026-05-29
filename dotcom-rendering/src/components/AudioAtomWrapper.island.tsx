@@ -1,4 +1,4 @@
-import { getConsentFor, onConsentChange } from '@guardian/libs';
+import { getConsentFor, onConsentChange } from '@guardian/consent-manager';
 import { useEffect, useState } from 'react';
 import { AudioAtom } from './AudioAtom/AudioAtom';
 

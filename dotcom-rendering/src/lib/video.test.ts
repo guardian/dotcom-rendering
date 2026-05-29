@@ -9,6 +9,7 @@ import {
 	findOptimisedSourcePerMimeType,
 	formatTimeForDisplay,
 	getAspectRatioFromSources,
+	roundAspectRatio,
 } from './video';
 
 const mp4Asset480w: VideoAssets = {
@@ -182,7 +183,12 @@ describe('video', () => {
 				aspectRatio: '5:3',
 				hasAudio: true,
 			};
-			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 3);
+
+			const fiveThreeAspectRatio = 1.667;
+
+			expect(getAspectRatioFromSources([testSource])).toEqual(
+				fiveThreeAspectRatio,
+			);
 		});
 
 		it('should calculate the aspect ratio from the width and height if aspect ratio is missing', () => {
@@ -193,7 +199,12 @@ describe('video', () => {
 				aspectRatio: undefined,
 				hasAudio: true,
 			};
-			expect(getAspectRatioFromSources([testSource])).toEqual(2 / 3);
+
+			const twoThreeAspectRatio = 0.667;
+
+			expect(getAspectRatioFromSources([testSource])).toEqual(
+				twoThreeAspectRatio,
+			);
 		});
 
 		it('should return the default aspect ratio if the aspect ratio is undefined and width is 0', () => {
@@ -345,6 +356,21 @@ describe('video', () => {
 			({ timeInSeconds, expectedFormattedTime }) => {
 				expect(formatTimeForDisplay(timeInSeconds)).toEqual(
 					expectedFormattedTime,
+				);
+			},
+		);
+	});
+	describe('roundAspectRatio', () => {
+		it.each([
+			{ aspectRatio: 0.56938445, expectedRoundedAspectRatio: 0.569 },
+			{ aspectRatio: 1.277777, expectedRoundedAspectRatio: 1.278 },
+			{ aspectRatio: 1.25, expectedRoundedAspectRatio: 1.25 },
+			{ aspectRatio: 0.8, expectedRoundedAspectRatio: 0.8 },
+		])(
+			'should return the correct aspect ratio rounded to 3 decimal places',
+			({ aspectRatio, expectedRoundedAspectRatio }) => {
+				expect(roundAspectRatio(aspectRatio)).toEqual(
+					expectedRoundedAspectRatio,
 				);
 			},
 		);

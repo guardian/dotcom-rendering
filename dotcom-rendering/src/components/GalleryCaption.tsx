@@ -53,7 +53,7 @@ const styles = css`
 		&::after {
 			content: '';
 			position: absolute;
-			right: -10px;
+			right: -11px;
 			top: -12px;
 			bottom: 0;
 			width: 1px;

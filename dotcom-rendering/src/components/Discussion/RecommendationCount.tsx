@@ -65,7 +65,9 @@ export const RecommendationCount = ({
 	const [recommended, setRecommended] = useState(alreadyRecommended);
 
 	const tryToRecommend: MouseEventHandler<HTMLButtonElement> = () => {
-		if (!user) return;
+		if (!user) {
+			return;
+		}
 
 		const newCount = count + 1;
 		setCount(newCount);

@@ -85,7 +85,9 @@ export const HorizontalSummaryProductCard = ({
 	format: ArticleFormat;
 }) => {
 	const cardCta = product.productCtas[0];
-	if (!cardCta) return null;
+	if (!cardCta) {
+		return null;
+	}
 
 	return (
 		<div css={horizontalCard}>

@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
 import {
 	palette as sourcePalette,
 	space,
@@ -12,8 +11,9 @@ import {
 	type StoryContext,
 	type StrictArgs,
 } from '@storybook/react-webpack5';
-import { ArticleFormat } from '../../src/lib/articleFormat';
 import type { CSSProperties } from 'react';
+import type { ArticleFormat } from '../../src/lib/articleFormat';
+import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
 
 const darkStoryCss = css`
 	background-color: ${sourcePalette.neutral[0]};

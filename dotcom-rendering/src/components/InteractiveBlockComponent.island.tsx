@@ -257,8 +257,8 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 			const postPositionMessage = (subscribe?: boolean) => {
 				const iframeBox = iframe.getBoundingClientRect();
 				postMessage({
-					id: message?.id || '',
-					type: message?.type || '',
+					id: message.id || '',
+					type: message.type || '',
 					subscribe: !!subscribe,
 					iframeTop: iframeBox.top,
 					iframeRight: iframeBox.right,
