@@ -41,6 +41,9 @@ export const FootballMatchDay = ({
 	edition,
 }: Props) => (
 	<section>
+		{matches[0]?.competitions[0]?.name && (
+			<h3 css={kickerCss}>{matches[0].competitions[0].name} matchday</h3>
+		)}
 		{matches.length > 0 ? (
 			<ul
 				css={css`
@@ -72,6 +75,12 @@ export const FootballMatchDay = ({
 		</a>
 	</section>
 );
+
+const kickerCss = css`
+	${textSans15}
+	color: ${sport[400]};
+	margin-bottom: ${space[2]}px;
+`;
 
 const noMatchesCss = css`
 	${headlineMedium14}
