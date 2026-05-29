@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import {
 	AB_TEST_NAME,
-	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT,
 } from '../lib/newsletterSignupTracking';
 import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
@@ -217,7 +217,7 @@ describe('EmailSignUpWrapper', () => {
 				expect.objectContaining({
 					component: {
 						componentType: 'NEWSLETTER_SUBSCRIPTION',
-						id: NEWSLETTER_SIGNUP_COMPONENT_ID.control(
+						id: NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.control(
 							defaultProps.identityName,
 						),
 					},
@@ -236,7 +236,7 @@ describe('EmailSignUpWrapper', () => {
 				expect.objectContaining({
 					component: {
 						componentType: 'NEWSLETTER_SUBSCRIPTION',
-						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+						id: NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.variant(
 							defaultProps.identityName,
 						),
 					},
@@ -254,11 +254,33 @@ describe('EmailSignUpWrapper', () => {
 			expect(submitComponentEvent).toHaveBeenCalledWith(
 				expect.objectContaining({
 					component: expect.objectContaining({
-						id: NEWSLETTER_SIGNUP_COMPONENT_ID.control(
+						id: NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.control(
 							defaultProps.identityName,
 						),
 					}),
 					action: 'VIEW',
+				}),
+				'Web',
+			);
+		});
+
+		it('uses highlights component ids for VIEW when highlightCardTitle is present', () => {
+			mockAbTests(true);
+			renderWrapper({
+				showNewNewsletterSignupCard: true,
+				highlightCardTitle: 'Sign up to The Recap',
+			});
+
+			expect(submitComponentEvent).toHaveBeenCalledWith(
+				expect.objectContaining({
+					component: {
+						componentType: 'NEWSLETTER_SUBSCRIPTION',
+						id: NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.highlights.variant(
+							defaultProps.identityName,
+						),
+					},
+					action: 'VIEW',
+					abTest: { name: AB_TEST_NAME, variant: 'variant' },
 				}),
 				'Web',
 			);

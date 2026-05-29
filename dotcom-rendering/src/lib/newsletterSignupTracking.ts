@@ -61,21 +61,6 @@ export const NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT = {
 >;
 
 /**
- * Backwards-compatible aliases used by the current in-article signup flow.
- * Keep this wrapper while we migrate call sites to explicit context selection.
- */
-export const NEWSLETTER_SIGNUP_COMPONENT_ID = {
-	control: (identityName: string) =>
-		NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.control(
-			identityName,
-		),
-	variant: (identityName: string) =>
-		NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.variant(
-			identityName,
-		),
-} as const;
-
-/**
  * Sends a newsletter signup tracking event to Ophan.
  *
  * Used by both branches of the A/B test so that all events share a consistent

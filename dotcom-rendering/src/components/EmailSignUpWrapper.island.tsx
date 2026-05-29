@@ -2,7 +2,7 @@ import type { Breakpoint } from '@guardian/source/foundations';
 import { useEffect, useRef } from 'react';
 import {
 	AB_TEST_NAME,
-	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT,
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
 import { useBetaAB } from '../lib/useAB';
@@ -88,6 +88,10 @@ export const EmailSignUpWrapper = ({
 		(abTests?.isUserInTestGroup(AB_TEST_NAME, 'variant') ?? false);
 
 	const abVariant = isVariant ? 'variant' : 'control';
+	const trackingComponentIds =
+		highlightCardTitle !== undefined
+			? NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.highlights
+			: NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle;
 
 	const isSubscribed = useNewsletterSubscription(
 		listId,
@@ -121,8 +125,8 @@ export const EmailSignUpWrapper = ({
 			action: 'VIEW',
 			identityName,
 			componentId: isVariant
-				? NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName)
-				: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
+				? trackingComponentIds.variant(identityName)
+				: trackingComponentIds.control(identityName),
 			renderingTarget,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
@@ -137,6 +141,7 @@ export const EmailSignUpWrapper = ({
 		identityName,
 		isSubscribed,
 		isVariant,
+		trackingComponentIds,
 		abTestEnabled,
 		renderingTarget,
 	]);

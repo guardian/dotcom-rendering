@@ -12,7 +12,7 @@ import {
 } from './newsletter-marketing-opt-in';
 import {
 	EVENT_DESCRIPTION_TO_ACTION,
-	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT,
 	type NewsletterEventDescription,
 	sendNewsletterSignupEvent,
 } from './newsletterSignupTracking';
@@ -121,7 +121,10 @@ const sendTracking = (
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
 		identityName: newsletterId,
-		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(newsletterId),
+		componentId:
+			NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.variant(
+				newsletterId,
+			),
 		renderingTarget,
 		value: {
 			...extraDetails,

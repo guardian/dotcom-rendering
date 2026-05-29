@@ -3,7 +3,7 @@ import { palette as sourcePalette, space } from '@guardian/source/foundations';
 import { useCallback, useState } from 'react';
 import { buildNewsletterPreviewUrl } from '../lib/newsletterPreviewUrl';
 import {
-	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT,
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -22,17 +22,23 @@ const sendPreviewTracking = ({
 	renderingTarget,
 	renderUrl,
 	isSignedIn,
+	isHighlights,
 }: {
 	identityName: string;
 	eventDescription: PreviewEventDescription;
 	renderingTarget: RenderingTarget;
 	renderUrl: string;
 	isSignedIn?: boolean | 'Pending';
+	isHighlights?: boolean;
 }) => {
+	const componentIds = isHighlights
+		? NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.highlights
+		: NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle;
+
 	sendNewsletterSignupEvent({
 		action: eventDescription === 'preview-open' ? 'EXPAND' : 'CLOSE',
 		identityName,
-		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName),
+		componentId: componentIds.variant(identityName),
 		renderingTarget,
 		value: { eventDescription, renderUrl, isSignedIn },
 	});
@@ -75,6 +81,7 @@ export const NewsletterSignupCardContainer = ({
 	isSignedIn,
 }: Props) => {
 	const showPrivacyMessageOutside = isSignedIn === true;
+	const isHighlights = highlightCardTitle !== undefined;
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
 	const renderUrl = buildNewsletterPreviewUrl({
@@ -96,12 +103,20 @@ export const NewsletterSignupCardContainer = ({
 					renderingTarget,
 					renderUrl,
 					isSignedIn,
+					isHighlights,
 				});
 			}
 
 			return true;
 		});
-	}, [hasPreviewUrl, identityName, isSignedIn, renderingTarget, renderUrl]);
+	}, [
+		hasPreviewUrl,
+		identityName,
+		isHighlights,
+		isSignedIn,
+		renderingTarget,
+		renderUrl,
+	]);
 
 	const trackPreviewLinkOpen = useCallback(() => {
 		if (!hasPreviewUrl) {
@@ -114,8 +129,16 @@ export const NewsletterSignupCardContainer = ({
 			renderingTarget,
 			renderUrl,
 			isSignedIn,
+			isHighlights,
 		});
-	}, [hasPreviewUrl, identityName, isSignedIn, renderingTarget, renderUrl]);
+	}, [
+		hasPreviewUrl,
+		identityName,
+		isHighlights,
+		isSignedIn,
+		renderingTarget,
+		renderUrl,
+	]);
 
 	const closePreview = useCallback(() => {
 		setIsPreviewOpen((isOpen) => {
@@ -126,12 +149,20 @@ export const NewsletterSignupCardContainer = ({
 					renderingTarget,
 					renderUrl,
 					isSignedIn,
+					isHighlights,
 				});
 			}
 
 			return false;
 		});
-	}, [hasPreviewUrl, identityName, isSignedIn, renderingTarget, renderUrl]);
+	}, [
+		hasPreviewUrl,
+		identityName,
+		isHighlights,
+		isSignedIn,
+		renderingTarget,
+		renderUrl,
+	]);
 
 	const previewAction = hasPreviewUrl
 		? renderingTarget === 'Apps'
@@ -146,10 +177,11 @@ export const NewsletterSignupCardContainer = ({
 			  }
 		: undefined;
 
-	const cardClickHandler =
-		previewAction?.behaviour === 'modal'
-			? previewAction.onClick
-			: () => undefined;
+	const cardClickHandler = isHighlights
+		? () => undefined
+		: previewAction?.behaviour === 'modal'
+		? previewAction.onClick
+		: () => undefined;
 
 	return (
 		<div css={themeColorStyles(theme)}>

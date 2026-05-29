@@ -1,7 +1,6 @@
 import { submitComponentEvent } from '../client/ophan/ophan';
 import {
 	AB_TEST_NAME,
-	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT,
 	sendNewsletterSignupEvent,
 } from './newsletterSignupTracking';
@@ -51,7 +50,10 @@ describe('sendNewsletterSignupEvent', () => {
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName: IDENTITY_NAME,
-			componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.control(IDENTITY_NAME),
+			componentId:
+				NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.control(
+					IDENTITY_NAME,
+				),
 			renderingTarget: RENDERING_TARGET,
 			value: { eventDescription: 'newsletter-signup-viewed' },
 		});
@@ -78,7 +80,10 @@ describe('sendNewsletterSignupEvent', () => {
 		sendNewsletterSignupEvent({
 			action: 'CLOSE',
 			identityName: IDENTITY_NAME,
-			componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(IDENTITY_NAME),
+			componentId:
+				NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.variant(
+					IDENTITY_NAME,
+				),
 			renderingTarget: RENDERING_TARGET,
 			value: {
 				eventDescription: 'preview-close',
@@ -103,7 +108,10 @@ describe('sendNewsletterSignupEvent', () => {
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName: IDENTITY_NAME,
-			componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.control(IDENTITY_NAME),
+			componentId:
+				NEWSLETTER_SIGNUP_COMPONENT_ID_BY_CONTEXT.inArticle.control(
+					IDENTITY_NAME,
+				),
 			renderingTarget: RENDERING_TARGET,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
