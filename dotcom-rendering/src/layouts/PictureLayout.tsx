@@ -18,6 +18,7 @@ import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.island';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -39,6 +40,8 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
+import { useBetaAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -273,6 +276,12 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const ab = useBetaAB();
+
+	const isWorldCup2026 =
+		article.tags.some((tag) => tag.id === worldCupTagId) &&
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
+
 	const avatarUrl = getSoleContributor(article.tags, article.byline)
 		?.bylineLargeImageUrl;
 
@@ -303,11 +312,14 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
+						showSubNav={!isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
 						pageId={article.pageId}
+						tagIds={article.tags.map((tag) => tag.id)}
+						sectionId={article.config.section}
+						contentType={article.contentType}
 					/>
 				</div>
 			)}
@@ -327,6 +339,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						<AdPortals />
 					</Island>
 				)}
+				<DirectoryPageNavIsland
+					pageTags={article.tags}
+					pageId={article.pageId}
+				/>
 				<Section
 					fullWidth={true}
 					showTopBorder={false}

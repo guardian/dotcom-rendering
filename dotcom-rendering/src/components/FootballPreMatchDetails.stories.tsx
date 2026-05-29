@@ -1,18 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { FootballPreMatchDetails as FootballPreMatchDetailsComponent } from './FootballPreMatchDetails';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Football Pre-Match Details',
 	component: FootballPreMatchDetailsComponent,
 	parameters: {
 		layout: 'padded',
 	},
-} satisfies Meta<typeof FootballPreMatchDetailsComponent>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const FootballPreMatchDetails = {
+export const FootballPreMatchDetails = meta.story({
 	args: {
 		homeTeam: 'Man United',
 		awayTeam: 'Arsenal',
@@ -21,4 +18,4 @@ export const FootballPreMatchDetails = {
 		kickOff: new Date('2026-02-15T17:30:00Z'),
 		edition: 'UK',
 	},
-} satisfies Story;
+});

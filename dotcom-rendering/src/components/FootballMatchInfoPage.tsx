@@ -34,7 +34,6 @@ export const FootballMatchInfoPage = ({
 				<FootballMatchHeaderWrapper
 					initialTab="info"
 					initialData={{
-						leagueName: competitionName,
 						match: matchInfo,
 						tabs: {
 							selected: 'info',
@@ -44,6 +43,7 @@ export const FootballMatchInfoPage = ({
 							liveURL: undefined,
 						},
 					}}
+					leagueName={competitionName}
 					edition={edition}
 					matchHeaderURL={matchHeaderUrl.href}
 					renderingTarget={renderingTarget}

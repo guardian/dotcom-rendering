@@ -13,19 +13,22 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import { type ComponentProps, type ReactNode, useMemo } from 'react';
+import { type ComponentProps, useMemo } from 'react';
 import type { SWRConfiguration } from 'swr';
 import useSWR from 'swr';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import type {
+	MatchNotificationsClient,
+	NotificationsClient,
+} from '../../lib/bridgetApi';
 import {
 	type EditionId,
 	getLocaleFromEdition,
 	getTimeZoneFromEdition,
 } from '../../lib/edition';
 import { palette } from '../../palette';
-import type { ColourName } from '../../paletteDeclarations';
 import type { ArticleDeprecated } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { BigNumber } from '../BigNumber';
@@ -34,11 +37,15 @@ import { Placeholder } from '../Placeholder';
 import { background, border, primaryText, secondaryText } from './colours';
 import { FootballMatchHeaderFallback } from './FootballMatchHeaderFallback';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
+import { Hr } from './Hr';
+import { Notifications } from './Notifications';
 import { Tabs } from './Tabs';
 
 export type FootballMatchHeaderProps = {
 	initialTab: ComponentProps<typeof Tabs>['selected'];
 	initialData?: HeaderData;
+	leagueName: string;
+	leagueURL?: string;
 	edition: EditionId;
 	matchHeaderURL: string;
 	renderingTarget: RenderingTarget;
@@ -49,6 +56,8 @@ export type FootballMatchHeaderProps = {
 type Props = FootballMatchHeaderProps & {
 	getHeaderData: (url: string) => Promise<unknown>;
 	refreshInterval: number;
+	notificationsClient: NotificationsClient;
+	matchNotificationsClient: MatchNotificationsClient;
 };
 
 export const FootballMatchHeader = (props: Props) => {
@@ -60,7 +69,6 @@ export const FootballMatchHeader = (props: Props) => {
 
 	const match = data?.match ?? props.initialData?.match;
 	const tabs = data?.tabs ?? props.initialData?.tabs;
-	const leagueName = data?.leagueName ?? props.initialData?.leagueName;
 
 	if (error) {
 		if (
@@ -79,7 +87,7 @@ export const FootballMatchHeader = (props: Props) => {
 		return null;
 	}
 
-	if (match === undefined || tabs === undefined || leagueName === undefined) {
+	if (match === undefined || tabs === undefined) {
 		return (
 			<Placeholder
 				heights={
@@ -113,13 +121,20 @@ export const FootballMatchHeader = (props: Props) => {
 				}}
 			>
 				<StatusLine
-					leagueName={leagueName}
+					leagueName={props.leagueName}
+					leagueURL={props.leagueURL}
 					match={match}
 					edition={props.edition}
 				/>
 				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
 				<Teams match={match} />
 				<Comment match={match} />
+				<Notifications
+					edition={props.edition}
+					match={match}
+					notificationsClient={props.notificationsClient}
+					matchNotificationsClient={props.matchNotificationsClient}
+				/>
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 				<Tabs {...tabs} />
 			</div>
@@ -161,6 +176,7 @@ const fetcher =
 
 const StatusLine = (props: {
 	leagueName: string;
+	leagueURL?: string;
 	match: FootballMatch;
 	edition: EditionId;
 }) => (
@@ -179,7 +195,11 @@ const StatusLine = (props: {
 			color: palette(secondaryText(props.match.kind)),
 		}}
 	>
-		<LeagueName matchKind={props.match.kind}>{props.leagueName}</LeagueName>
+		<LeagueName
+			matchKind={props.match.kind}
+			name={props.leagueName}
+			url={props.leagueURL}
+		/>
 		{props.match.venue ? `${props.match.venue} • ` : null}
 		<MatchStatus edition={props.edition} match={props.match} />
 	</p>
@@ -187,7 +207,8 @@ const StatusLine = (props: {
 
 const LeagueName = (props: {
 	matchKind: FootballMatch['kind'];
-	children: ReactNode;
+	name: string;
+	url?: string;
 }) => (
 	<>
 		<span
@@ -220,7 +241,20 @@ const LeagueName = (props: {
 				},
 			}}
 		>
-			{props.children}
+			{props.url ? (
+				<a
+					href={props.url}
+					css={{
+						color: 'inherit',
+						textDecoration: 'none',
+						'&:hover': { textDecoration: 'underline' },
+					}}
+				>
+					{props.name}
+				</a>
+			) : (
+				props.name
+			)}
 		</span>
 		<span
 			css={{
@@ -261,28 +295,6 @@ const kickOffFormatterForEdition = (edition: EditionId): Intl.DateTimeFormat =>
 		timeZoneName: 'short',
 		timeZone: getTimeZoneFromEdition(edition),
 	});
-
-const Hr = (props: {
-	borderStyle: 'dotted' | 'solid';
-	borderColour: ColourName;
-}) => (
-	<hr
-		css={{
-			'&': css(grid.column.all),
-			margin: 0,
-			width: '100%',
-			borderWidth: 0,
-			borderBottomWidth: 1,
-			[from.leftCol]: {
-				display: 'none',
-			},
-		}}
-		style={{
-			borderBottomColor: palette(props.borderColour),
-			borderBottomStyle: props.borderStyle,
-		}}
-	/>
-);
 
 const Teams = (props: { match: FootballMatch }) => (
 	<div

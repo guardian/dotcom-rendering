@@ -2826,13 +2826,90 @@ const captionOverlayText: PaletteFunction = () => {
 	return sourcePalette.neutral[100];
 };
 
-const keyEventBulletLight: PaletteFunction = () => sourcePalette.neutral[46];
-const keyEventBulletDark: PaletteFunction = () => sourcePalette.neutral[60];
+const keyEventBulletLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Culture:
+			return sourcePalette.culture[300];
+		case Pillar.Opinion:
+			// opinion[300] is deprecated and is the same value as opinion[400]
+			return sourcePalette.opinion[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
 
-const keyEventBulletHoverLight: PaletteFunction = () =>
-	sourcePalette.neutral[0];
-const keyEventBulletHoverDark: PaletteFunction = () =>
-	sourcePalette.neutral[86];
+const keyEventBulletDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[500];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[500];
+		case Pillar.Sport:
+			return sourcePalette.sport[500];
+		case Pillar.Culture:
+			return sourcePalette.culture[500];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
+
+const keyEventBulletHoverLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[200];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[200];
+		case Pillar.Sport:
+			return sourcePalette.sport[200];
+		case Pillar.Culture:
+			return sourcePalette.culture[200];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const keyEventBulletHoverDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[200];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[200];
+		case Pillar.Sport:
+			return sourcePalette.sport[200];
+		case Pillar.Culture:
+			return sourcePalette.culture[200];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
 
 const keyEventTitleLight: PaletteFunction = () => sourcePalette.neutral[7];
 const keyEventTitleDark: PaletteFunction = () => sourcePalette.neutral[86];
@@ -3864,6 +3941,9 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 const shareButtonDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedArticle:
+		case ArticleDesign.HostedGallery:
+		case ArticleDesign.HostedVideo:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -5164,7 +5244,7 @@ const privacyTextSupportingLight: PaletteFunction = () =>
 const privacyTextSupportingSubduedLight: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 const privacyTextSupportingSubduedDark: PaletteFunction = () =>
-	sourcePalette.neutral[60];
+	sourcePalette.neutral[73];
 
 const productCarouselCardBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
@@ -6301,12 +6381,6 @@ const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
-const storylinesBackground: PaletteFunction = () => sourcePalette.neutral[93];
-const storylinesBorder: PaletteFunction = () => sourcePalette.neutral[86];
-const storylinesTitles: PaletteFunction = () => sourcePalette.brand[400];
-const storylinesActiveTab: PaletteFunction = () => sourcePalette.neutral[60];
-const storylinesInactiveTab: PaletteFunction = () => sourcePalette.neutral[38];
-
 // ----- Palette ----- //
 
 /**
@@ -6415,6 +6489,14 @@ const paletteColours = {
 	'--age-warning-wrapper-background': {
 		light: ageWarningWrapperBackground,
 		dark: ageWarningWrapperBackground,
+	},
+	'--apps-directory-page-nav-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[10],
+	},
+	'--apps-directory-page-nav-primary-link-color': {
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
 	'--apps-epic-background': {
 		light: appsEpicBackgroundLight,
@@ -6832,6 +6914,18 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--cricket-scorecard-first-team-color': {
+		light: () => '#22721a',
+		dark: () => '#4aad42',
+	},
+	'--cricket-scorecard-innings-heading-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--cricket-scorecard-second-team-color': {
+		light: () => '#071b3c',
+		dark: () => '#4878c0',
+	},
 	'--crossword-anagram-helper-background': {
 		light: crosswordAnagramHelperBackgroundLight,
 		dark: crosswordAnagramHelperBackgroundDark,
@@ -7218,19 +7312,19 @@ const paletteColours = {
 	},
 	'--football-pre-match-background': {
 		light: () => sourcePalette.sport[800],
-		dark: () => sourcePalette.sport[800], // TODO: Update with dark mode colour
+		dark: () => sourcePalette.neutral[10],
 	},
 	'--football-pre-match-button': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
 	'--football-pre-match-button-hover': {
 		light: () => '#c8e4f3', // replace with Source's `calculateHoverColour` when available
-		dark: () => '#c8e4f3',
+		dark: () => '#4d4d4d',
 	},
 	'--football-pre-match-kickoff': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
 	'--football-score-border': {
 		light: () => sourcePalette.neutral[7],
@@ -7324,6 +7418,10 @@ const paletteColours = {
 	'--highlights-container-start-fade': {
 		light: highlightContainerStartLight,
 		dark: highlightContainerStartDark,
+	},
+	'--hosted-content-onwards-heading': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--image-title-background': {
 		light: imageTitleBackground,
@@ -7565,18 +7663,6 @@ const paletteColours = {
 		light: multiBylineNonLinkedTextLight,
 		dark: multiBylineNonLinkedTextDark,
 	},
-	'--narrow-play-icon-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--narrow-play-icon-border': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
-	'--narrow-play-icon-fill': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
-	},
 	'--nav-reader-revenue-link-text': {
 		light: navReaderRevenueLinkText,
 		dark: navReaderRevenueLinkText,
@@ -7592,6 +7678,62 @@ const paletteColours = {
 	'--nav-search-bar-text': {
 		light: navSearchBarText,
 		dark: navSearchBarText,
+	},
+	'--newsletter-card-background': {
+		light: () => '#F3F7FF',
+		dark: () => sourcePalette.brand[100],
+	},
+	'--newsletter-card-description': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--newsletter-card-divider': {
+		light: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-card-frequency-tag': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[73],
+	},
+	'--newsletter-card-title': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-preview-button-border': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-preview-button-hover': {
+		light: () => sourcePalette.brand[800],
+		dark: () => sourcePalette.brand[300],
+	},
+	'--newsletter-preview-button-text': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-input-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[300],
+	},
+	'--newsletter-signup-input-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-submit-background': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-submit-background-hover': {
+		light: () => sourcePalette.brand[600],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--newsletter-signup-submit-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[400],
+	},
+	'--newsletter-signup-toggle-text': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[73],
 	},
 	'--numbered-list-heading': {
 		light: numberedListHeadingLight,
@@ -7997,18 +8139,6 @@ const paletteColours = {
 		light: slideshowPaginationDotActiveLight,
 		dark: slideshowPaginationDotActiveDark,
 	},
-	'--slim-homepage-most-viewed-big-number': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
-	'--slim-homepage-most-viewed-header': {
-		light: () => sourcePalette.neutral[46],
-		dark: () => sourcePalette.neutral[46],
-	},
-	'--slim-homepage-most-viewed-headline': {
-		light: () => sourcePalette.neutral[0],
-		dark: () => sourcePalette.neutral[0],
-	},
 	'--speech-bubble-background': {
 		light: speechBubbleBackgroundLight,
 		dark: speechBubbleBackgroundLight,
@@ -8096,26 +8226,6 @@ const paletteColours = {
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,
 		dark: starRatingFillColourDark,
-	},
-	'--storylines-active-tab': {
-		light: storylinesActiveTab,
-		dark: storylinesActiveTab,
-	},
-	'--storylines-background': {
-		light: storylinesBackground,
-		dark: storylinesBackground,
-	},
-	'--storylines-border': {
-		light: storylinesBorder,
-		dark: storylinesBorder,
-	},
-	'--storylines-inactive-tab': {
-		light: storylinesInactiveTab,
-		dark: storylinesInactiveTab,
-	},
-	'--storylines-titles': {
-		light: storylinesTitles,
-		dark: storylinesTitles,
 	},
 	'--straight-lines': {
 		light: straightLinesLight,
@@ -8377,6 +8487,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[93],
 	},
+	'--video-fullscreen-background': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[0],
+	},
 	'--video-icon': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
@@ -8392,6 +8506,14 @@ const paletteColours = {
 	'--video-progress-bar-background': {
 		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
 		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-progress-bar-interactive-background': {
+		light: () => transparentColour(sourcePalette.neutral[100], 0.5),
+		dark: () => transparentColour(sourcePalette.neutral[100], 0.5),
+	},
+	'--video-progress-bar-interactive-value': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--video-progress-bar-value': {
 		light: () => sourcePalette.neutral[86],

@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { FootballTableForm as FootballTableFormComponent } from './FootballTableForm';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Football Table Form',
 	component: FootballTableFormComponent,
 	decorators: [
@@ -14,13 +14,9 @@ const meta = {
 			</>
 		),
 	],
-} satisfies Meta<typeof FootballTableFormComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const FootballTableForm: Story = {
+export const FootballTableForm = meta.story({
 	args: {
 		teamResults: [
 			{
@@ -50,4 +46,4 @@ export const FootballTableForm: Story = {
 			},
 		],
 	},
-};
+});

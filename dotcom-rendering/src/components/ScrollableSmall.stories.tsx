@@ -26,7 +26,7 @@ const meta = {
 	args: {
 		trails,
 		containerPalette: undefined,
-		showAge: true,
+		hideAge: false,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 	},

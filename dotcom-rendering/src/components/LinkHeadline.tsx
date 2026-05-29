@@ -5,7 +5,6 @@ import {
 	headlineMedium20,
 	headlineMedium24,
 	headlineMedium28,
-	textSans15,
 	textSans17,
 	textSans20,
 	textSans24,
@@ -34,23 +33,9 @@ type Props = {
 	size?: SmallHeadlineSize;
 	link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
 	byline?: string;
-	/**
-	 * This headline is being used on the right-hand side of a front in a most popular container,
-	 * either Most Viewed or Deeply Read, as part of the Slim Homepage AB test.
-	 */
-	isInSlimHomepageAbTest?: boolean;
 };
 
-const fontStyles = (
-	size: SmallHeadlineSize,
-	isInSlimHomepageAbTest: boolean,
-) => {
-	if (isInSlimHomepageAbTest) {
-		return css`
-			${textSans15};
-		`;
-	}
-
+const fontStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
 		case 'ginormous':
 		case 'huge':
@@ -139,10 +124,9 @@ export const LinkHeadline = ({
 	size = 'medium',
 	link,
 	byline,
-	isInSlimHomepageAbTest = false,
 }: Props) => {
 	return (
-		<h4 css={[fontStyles(size, isInSlimHomepageAbTest)]}>
+		<h4 css={fontStyles(size)}>
 			{!!kickerText && (
 				<Kicker
 					text={kickerText}
@@ -176,7 +160,7 @@ export const LinkHeadline = ({
 							fontStyles={
 								isLabs
 									? bylineLabsStyles(size)
-									: fontStyles(size, isInSlimHomepageAbTest)
+									: fontStyles(size)
 							}
 							text={byline}
 						/>
@@ -191,7 +175,7 @@ export const LinkHeadline = ({
 							fontStyles={
 								isLabs
 									? bylineLabsStyles(size)
-									: fontStyles(size, isInSlimHomepageAbTest)
+									: fontStyles(size)
 							}
 							text={byline}
 						/>

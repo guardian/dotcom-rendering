@@ -503,10 +503,7 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			if (
-				element.videoPlayerFormat &&
-				['Loop', 'Cinemagraph'].includes(element.videoPlayerFormat)
-			) {
+			if (element.videoPlayerFormat) {
 				return (
 					<SelfHostedVideoInArticle
 						element={element}
@@ -514,6 +511,7 @@ export const renderElement = ({
 						isMainMedia={isMainMedia}
 						videoStyle={element.videoPlayerFormat}
 						role={element.role}
+						caption={element.caption ?? element.title}
 					/>
 				);
 			} else {
@@ -522,7 +520,7 @@ export const renderElement = ({
 						format={format}
 						assets={element.assets}
 						poster={element.posterImage?.[0]?.url}
-						caption={element.title}
+						caption={element.caption ?? element.title}
 						isMainMedia={isMainMedia}
 					/>
 				);
@@ -571,26 +569,35 @@ export const renderElement = ({
 					caption={element.caption}
 				/>
 			);
-		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement': {
+			const newsletter = element.newsletter;
 			const emailSignUpProps = {
 				index,
-				listId: element.newsletter.listId,
-				identityName: element.newsletter.identityName,
-				description: element.newsletter.description,
-				name: element.newsletter.name,
-				frequency: element.newsletter.frequency,
-				successDescription: element.newsletter.successDescription,
-				theme: element.newsletter.theme,
+				listId: newsletter.listId,
+				identityName: newsletter.identityName,
+				category: newsletter.category,
+				description: newsletter.description,
+				name: newsletter.name,
+				frequency: newsletter.frequency,
+				successDescription: newsletter.successDescription,
+				theme: newsletter.theme,
+				illustrationSquare: newsletter.illustrationSquare,
+				exampleUrl: newsletter.exampleUrl,
 				idApiUrl: idApiUrl ?? '',
 				hideNewsletterSignupComponentForSubscribers:
 					!!switches.hideNewsletterSignupComponentForSubscribers,
+				showNewNewsletterSignupCard:
+					!!switches.showNewNewsletterSignupCard,
 			};
-			if (isListElement || isTimeline) return null;
+			if (isListElement || isTimeline) {
+				return null;
+			}
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<EmailSignUpWrapper {...emailSignUpProps} />
 				</Island>
 			);
+		}
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return renderAds && <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
@@ -946,13 +953,11 @@ export const renderElement = ({
 							getLargestImageSize(element.posterImage ?? [])?.url
 						}
 						duration={element.duration}
-						mediaTitle={element.mediaTitle}
+						mediaTitle={element.caption ?? element.mediaTitle}
 						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
 						enableAds={true}
-						iconSizeOnDesktop="large"
-						iconSizeOnMobile="large"
 						hidePillOnMobile={false}
 						contentType={contentType}
 						contentLayout={contentLayout}
@@ -1107,6 +1112,7 @@ type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
 type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
 
 export const getNestedArticleElement =
+	// eslint-disable-next-line react/display-name -- this is not a React component, but a function that returns one
 	(articleProps: ArticleLevelProps) => (elementProps: ElementLevelProps) => (
 		<RenderArticleElement {...articleProps} {...elementProps} />
 	);

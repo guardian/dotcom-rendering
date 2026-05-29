@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -7,16 +7,12 @@ import {
 } from '../lib/articleFormat';
 import { DesignTag } from './DesignTag';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/DesignTag',
 	component: DesignTag,
-} satisfies Meta<typeof DesignTag>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const WithDesignAnalysis = {
+export const WithDesignAnalysis = meta.story({
 	args: {
 		format: {
 			design: ArticleDesign.Analysis,
@@ -24,9 +20,9 @@ export const WithDesignAnalysis = {
 			theme: Pillar.News,
 		},
 	},
-} satisfies Story;
+});
 
-export const WithDesignInterview = {
+export const WithDesignInterview = meta.story({
 	args: {
 		format: {
 			design: ArticleDesign.Interview,
@@ -34,9 +30,9 @@ export const WithDesignInterview = {
 			theme: Pillar.Sport,
 		},
 	},
-} satisfies Story;
+});
 
-export const WithDesignExplainer = {
+export const WithDesignExplainer = meta.story({
 	args: {
 		format: {
 			design: ArticleDesign.Explainer,
@@ -44,9 +40,9 @@ export const WithDesignExplainer = {
 			theme: Pillar.Sport,
 		},
 	},
-} satisfies Story;
+});
 
-export const WithDesignLetter = {
+export const WithDesignLetter = meta.story({
 	args: {
 		format: {
 			design: ArticleDesign.Letter,
@@ -54,9 +50,9 @@ export const WithDesignLetter = {
 			theme: Pillar.Sport,
 		},
 	},
-} satisfies Story;
+});
 
-export const WithDesignAnalysisAndThemeSpecialReport = {
+export const WithDesignAnalysisAndThemeSpecialReport = meta.story({
 	args: {
 		format: {
 			design: ArticleDesign.Analysis,
@@ -64,9 +60,9 @@ export const WithDesignAnalysisAndThemeSpecialReport = {
 			theme: ArticleSpecial.SpecialReport,
 		},
 	},
-} satisfies Story;
+});
 
-export const WithDesignTimeline = {
+export const WithDesignTimeline = meta.story({
 	args: {
 		format: {
 			design: ArticleDesign.Timeline,
@@ -74,9 +70,9 @@ export const WithDesignTimeline = {
 			theme: Pillar.Sport,
 		},
 	},
-} satisfies Story;
+});
 
-export const WithDesignProfile = {
+export const WithDesignProfile = meta.story({
 	args: {
 		format: {
 			design: ArticleDesign.Profile,
@@ -84,4 +80,4 @@ export const WithDesignProfile = {
 			theme: Pillar.Sport,
 		},
 	},
-} satisfies Story;
+});

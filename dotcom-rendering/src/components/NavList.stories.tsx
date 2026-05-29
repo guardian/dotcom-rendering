@@ -18,14 +18,14 @@ export default {
 };
 
 export const Default = () => (
-	<FrontSection title="NavList" editionId="UK">
+	<FrontSection title="NavList" editionId="UK" showTopBorder={false}>
 		<NavList trails={trails} showImage={false} />
 	</FrontSection>
 );
 Default.storyName = 'NavList';
 
 export const DefaultWithImages = () => (
-	<FrontSection title="Nav Media List" editionId="UK">
+	<FrontSection title="Nav Media List" editionId="UK" showTopBorder={false}>
 		<NavList trails={trails} showImage={true} />
 	</FrontSection>
 );

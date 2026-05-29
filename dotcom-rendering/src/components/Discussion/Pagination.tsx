@@ -191,7 +191,7 @@ const PageButton = ({
 export const getPages = (
 	currentPage: number,
 	totalPages: number,
-): (number | '…')[] => {
+): Array<number | '…'> => {
 	if (totalPages <= 6) {
 		return [1, 2, 3, 4, 5, 6].filter((page) => page <= totalPages);
 	} else if (currentPage <= 3) {

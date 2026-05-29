@@ -31,13 +31,13 @@ reset='\033[0m'
 # get the node version from .nvmrc
 nvmrc_contents=$(cat .nvmrc)
 
-# check that it's a valid version (matches x.y.z)
-nvmrc_version_pattern="^[0-9]+\.[0-9]+\.[0-9]+$"
+# check that it's a valid version (matches x major version)
+nvmrc_version_pattern="^[0-9]+$"
 if [[ $nvmrc_contents =~ $nvmrc_version_pattern ]]; then
 	nvmrc_version=${BASH_REMATCH[0]}
 else
 	log_with_color "${red}The Node version in .nvmrc is invalid${reset}"
-	log_with_color "${dim}It should match the pattern 'x.y.z'.${reset}"
+	log_with_color "${dim}Use a major version only (e.g. '20').${reset}"
 	# exit with failure
     exit 1
 fi
@@ -51,8 +51,9 @@ if [[ -x "$(command -v node)" ]]; then
 fi
 
 # check the version we're using
-# note that `node_version` will be empty if node wan't available above
-if [ "$node_version" == "$nvmrc_version" ]; then
+# note that `node_version` will be empty if node wasn't available above
+node_major_version=$(echo "$node_version" | cut -d. -f1)
+if [ "$node_major_version" == "$nvmrc_version" ]; then
 	# we're using the correct version of node
 	log_with_color "${dim}Using Node ${blue}$node_version${reset}"
 

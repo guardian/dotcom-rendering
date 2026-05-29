@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { productImage } from '../../fixtures/manual/productImage';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
@@ -11,7 +11,7 @@ const format: ArticleFormat = {
 	theme: Pillar.Lifestyle,
 };
 
-const meta = {
+const meta = preview.meta({
 	component: ProductCardLeftCol,
 	title: 'Components/ProductCardLeftCol',
 	parameters: {
@@ -51,21 +51,17 @@ const meta = {
 		],
 		lowestPrice: '£89.99',
 	},
-} satisfies Meta<typeof ProductCardLeftCol>;
+});
 
-export default meta;
+export const Default = meta.story();
 
-type Story = StoryObj<typeof meta>;
-
-export const Default = {} satisfies Story;
-
-export const WithNoCustomAttributes = {
+export const WithNoCustomAttributes = meta.story({
 	args: {
 		customAttributes: [],
 	},
-} satisfies Story;
+});
 
-export const SingleCta = {
+export const SingleCta = meta.story({
 	args: {
 		productCtas: [
 			{
@@ -77,9 +73,9 @@ export const SingleCta = {
 		],
 		lowestPrice: '£89.99',
 	},
-} satisfies Story;
+});
 
-export const ShortCta = {
+export const ShortCta = meta.story({
 	args: {
 		productCtas: [
 			{
@@ -91,9 +87,9 @@ export const ShortCta = {
 		],
 		lowestPrice: '£89.99',
 	},
-} satisfies Story;
+});
 
-export const LotsOfCtas = {
+export const LotsOfCtas = meta.story({
 	args: {
 		productCtas: [
 			{
@@ -123,4 +119,4 @@ export const LotsOfCtas = {
 		],
 		lowestPrice: '£89.99',
 	},
-} satisfies Story;
+});

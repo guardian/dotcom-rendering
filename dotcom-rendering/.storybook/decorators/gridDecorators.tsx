@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
 import type { Decorator } from '@storybook/react-webpack5';
 import { grid } from '../../src/grid';
-import { from } from '@guardian/source/foundations';
 
 /**
  * If "Side-by-side Horizontal" is set in the toolbar, the grid decorator is not

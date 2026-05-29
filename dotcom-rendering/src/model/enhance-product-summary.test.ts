@@ -3,7 +3,8 @@ import {
 	atAGlanceHeading,
 	dividerElement,
 	findCarousel,
-	findStacked,
+	findStackedDefault,
+	findStackedExpanded,
 	linkElement,
 	productElement,
 	textElement,
@@ -222,7 +223,9 @@ describe('enhanceProductSummary', () => {
 
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
-			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'carousel' },
+			serverSideABTests: {
+				'thefilter-at-a-glance-redesign-v2': 'carousel',
+			},
 			renderingTarget: 'Web',
 			filterAtAGlanceEnabled: true,
 		})(input);
@@ -232,7 +235,7 @@ describe('enhanceProductSummary', () => {
 		expect(carousel).toBeDefined();
 	});
 
-	it('enhances elements with a stacked product for allowlisted pages', () => {
+	it('enhances elements with a default stacked product component for allowlisted pages', () => {
 		const allowedPageId =
 			'thefilter/test-article-example-for-product-summary';
 
@@ -264,14 +267,60 @@ describe('enhanceProductSummary', () => {
 
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
-			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
+			serverSideABTests: {
+				'thefilter-at-a-glance-redesign-v2': 'stacked-default',
+			},
 			renderingTarget: 'Web',
 			filterAtAGlanceEnabled: true,
 		})(input);
 
-		const stacked = findStacked(output);
+		const stackedDefault = findStackedDefault(output);
 
-		expect(stacked).toBeDefined();
+		expect(stackedDefault).toBeDefined();
+	});
+
+	it('enhances elements with an expanded stacked product component for allowlisted pages', () => {
+		const allowedPageId =
+			'thefilter/test-article-example-for-product-summary';
+
+		const input = [
+			atAGlanceHeading(),
+			linkElement(
+				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
+				'Buy now',
+			),
+			linkElement(
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+				'Buy now',
+			),
+			linkElement(
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+				'Buy now',
+			),
+			dividerElement(),
+			productElement([
+				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
+			]),
+			productElement([
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+			]),
+			productElement([
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+			]),
+		];
+
+		const output = enhanceProductSummary({
+			pageId: allowedPageId,
+			serverSideABTests: {
+				'thefilter-at-a-glance-redesign-v2': 'stacked-expanded',
+			},
+			renderingTarget: 'Web',
+			filterAtAGlanceEnabled: true,
+		})(input);
+
+		const stackedExpanded = findStackedExpanded(output);
+
+		expect(stackedExpanded).toBeDefined();
 	});
 
 	it('does not return stacked cards when the rendering target is apps', () => {
@@ -306,14 +355,16 @@ describe('enhanceProductSummary', () => {
 
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
-			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
+			serverSideABTests: {
+				'thefilter-at-a-glance-redesign-v2': 'stacked-default',
+			},
 			renderingTarget: 'Apps',
 			filterAtAGlanceEnabled: true,
 		})(input);
 
-		const stacked = findStacked(output);
+		const stackedDefault = findStackedDefault(output);
 
-		expect(stacked).toBeUndefined();
+		expect(stackedDefault).toBeUndefined();
 	});
 
 	it('does not return stacked cards when the filterAtAGlance switch is OFF', () => {
@@ -348,13 +399,15 @@ describe('enhanceProductSummary', () => {
 
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
-			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
+			serverSideABTests: {
+				'thefilter-at-a-glance-redesign-v2': 'stacked-default',
+			},
 			renderingTarget: 'Web',
 			filterAtAGlanceEnabled: false,
 		})(input);
 
-		const stacked = findStacked(output);
+		const stackedDefault = findStackedDefault(output);
 
-		expect(stacked).toBeUndefined();
+		expect(stackedDefault).toBeUndefined();
 	});
 });

@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { table } from '../../fixtures/manual/footballTable';
 import { FootballTable as FootballTableComponent } from './FootballTable';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Football Table',
 	component: FootballTableComponent,
 	decorators: [
@@ -24,13 +24,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof FootballTableComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const FootballTable = {
+export const FootballTable = meta.story({
 	args: {
 		competitionName: 'Premier League',
 		competitionUrl: '/football/premierleague',
@@ -39,4 +35,4 @@ export const FootballTable = {
 		hasLinkToFullTable: true,
 		table,
 	},
-} satisfies Story;
+});

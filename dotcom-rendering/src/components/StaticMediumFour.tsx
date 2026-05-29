@@ -1,5 +1,6 @@
 import type { ArticleFormat } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
+import { isWithinTwelveHours } from '../lib/formatTime';
 import type {
 	AspectRatio,
 	DCRContainerLevel,
@@ -9,7 +10,6 @@ import type {
 import { LI } from './Card/components/LI';
 import type { MediaPositionType } from './Card/components/MediaWrapper';
 import { UL } from './Card/components/UL';
-import { defaultFontSizes } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
 
@@ -28,24 +28,22 @@ type Props = {
 	trails: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
-	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 export const StaticMediumFour = ({
 	trails,
 	containerPalette,
-	showAge,
+	hideAge,
 	serverTime,
 	imageLoading,
 	showImage = true,
 	aspectRatio,
 	containerLevel = 'Primary',
-	isInSlimHomepageAbTestVariant = false,
 }: Props) => {
 	const cards = trails.slice(0, 4);
 
@@ -64,7 +62,10 @@ export const StaticMediumFour = ({
 							trail={card}
 							containerPalette={containerPalette}
 							containerType="static/medium/4"
-							showAge={showAge}
+							showAge={
+								!hideAge &&
+								isWithinTwelveHours(card.webPublicationDate)
+							}
 							serverTime={serverTime}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
@@ -73,14 +74,6 @@ export const StaticMediumFour = ({
 								!!card.isNewsletter,
 							)}
 							mediaPositionOnMobile="left"
-							headlineSizes={
-								isInSlimHomepageAbTestVariant
-									? {
-											...defaultFontSizes,
-											wide: defaultFontSizes.tablet,
-									  }
-									: defaultFontSizes
-							}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							mediaSize="medium"

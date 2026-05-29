@@ -1,39 +1,112 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
-import { DirectoryPageNav } from './DirectoryPageNav';
+import preview from '../../.storybook/preview';
+import { BetaABTests } from '../experiments/lib/beta-ab-tests';
+import { setBetaABTests } from '../lib/useAB';
+import { ConfigProvider } from './ConfigContext';
+import { DirectoryPageNav } from './DirectoryPageNav.island';
 
-const meta = {
+const mockAB = new BetaABTests({
+	isServer: true,
+	serverSideABTests: {
+		'webx-world-cup-2026-subnav': 'enable',
+	},
+});
+setBetaABTests(mockAB);
+
+const meta = preview.meta({
 	component: DirectoryPageNav,
 	title: 'Components/Directory Page Nav',
-	parameters: {
-		chromatic: {
-			modes: {
-				'light mobileMedium': allModes['light mobileMedium'],
-				'light desktop': allModes['light desktop'],
-				'light leftCol': allModes['light leftCol'],
-			},
+});
+
+// So that these aren't applied to the apps stories
+const webChromaticParams = {
+	chromatic: {
+		modes: {
+			'light mobileMedium': allModes['light mobileMedium'],
+			'light desktop': allModes['light desktop'],
+			'light leftCol': allModes['light leftCol'],
 		},
 	},
-} satisfies Meta<typeof DirectoryPageNav>;
+};
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const WomensEuro2025 = {
+export const WomensEuro2025 = meta.story({
 	args: {
 		pageId: 'football/women-s-euro-2025/table',
 	},
-} satisfies Story;
+	parameters: webChromaticParams,
+});
 
-export const OtherCompetition = {
+export const WorldCup2026 = meta.story({
+	args: {
+		pageId: 'football/world-cup-2026',
+	},
+	parameters: webChromaticParams,
+});
+
+export const WorldCup2026MatchCenter = meta.story({
+	args: {
+		pageId: 'football/world-cup-2026/overview',
+	},
+	parameters: webChromaticParams,
+});
+
+export const WorldCup2026ArticleWeb = meta.story({
+	args: {
+		pageId: 'football/2026/may/19/brazils-world-cup-squad-offers-a-hint-of-the-magical-pragmatism-of-1994',
+		pageTags: [
+			{
+				id: 'football/world-cup-2026',
+				type: 'Topic',
+				title: 'World Cup 2026 Fronts',
+			},
+		],
+	},
+	parameters: webChromaticParams,
+});
+
+export const WorldCup2026ArticleApp = meta.story({
+	render: (args) => (
+		<ConfigProvider
+			value={{
+				renderingTarget: 'Apps',
+				darkModeAvailable: true,
+				assetOrigin: '/',
+				editionId: 'UK',
+			}}
+		>
+			<DirectoryPageNav {...args} />
+		</ConfigProvider>
+	),
+	args: {
+		pageId: 'football/2026/may/19/brazils-world-cup-squad-offers-a-hint-of-the-magical-pragmatism-of-1994',
+		pageTags: [
+			{
+				id: 'football/world-cup-2026',
+				type: 'Topic',
+				title: 'World Cup 2026',
+			},
+		],
+	},
+	parameters: {
+		chromatic: {
+			modes: {
+				'apps light': allModes['light'],
+				'apps dark': allModes['dark'],
+			},
+		},
+	},
+});
+
+export const OtherCompetition = meta.story({
 	args: {
 		pageId: 'football/premierleague/table',
 	},
-} satisfies Story;
+	parameters: webChromaticParams,
+});
 
-export const WinterOlympics = {
+export const WinterOlympics = meta.story({
 	args: {
 		pageId: 'sport/winter-olympics-2026',
 	},
-} satisfies Story;
+	parameters: webChromaticParams,
+});

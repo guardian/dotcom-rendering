@@ -21,7 +21,6 @@ import { SetABTests } from './SetABTests.island';
 import { SetAdTargeting } from './SetAdTargeting.island';
 import { ShowHideContainers } from './ShowHideContainers.island';
 import { SkipTo } from './SkipTo';
-import { SlimHomepageAbTest } from './SlimHomepageAbTest.island';
 
 type Props = {
 	front: Front;
@@ -97,9 +96,6 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			</Island>
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
-			</Island>
-			<Island priority="enhancement" defer={{ until: 'idle' }}>
-				<SlimHomepageAbTest />
 			</Island>
 			{isGoogleOneTapEnabled(
 				front.config.abTests,

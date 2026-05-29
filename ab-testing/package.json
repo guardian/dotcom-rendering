@@ -1,0 +1,17 @@
+{
+	"name": "@guardian/ab-testing",
+	"description": "AB testing framework for theguardian.com",
+	"private": true,
+	"version": "0.0.1",
+	"scripts": {
+		"lint": "eslint --quiet --cache .",
+		"lint:fix": "eslint --quiet --cache --fix .",
+		"test": "pnpm --filter @guardian/ab-testing-* test"
+	},
+	"devDependencies": {
+		"@guardian/eslint-config": "catalog:",
+		"@guardian/tsconfig": "catalog:",
+		"eslint": "catalog:",
+		"typescript": "catalog:"
+	}
+}

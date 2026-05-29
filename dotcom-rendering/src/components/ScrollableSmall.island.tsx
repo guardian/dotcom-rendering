@@ -1,4 +1,5 @@
 import { until } from '@guardian/source/foundations';
+import { isWithinTwelveHours } from '../lib/formatTime';
 import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import type {
 	AspectRatio,
@@ -11,7 +12,7 @@ import { ScrollableCarousel } from './ScrollableCarousel';
 type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
@@ -56,7 +57,7 @@ export const ScrollableSmall = ({
 	containerPalette,
 	serverTime,
 	imageLoading,
-	showAge,
+	hideAge,
 	aspectRatio,
 	sectionId,
 }: Props) => {
@@ -90,7 +91,10 @@ export const ScrollableSmall = ({
 							serverTime={serverTime}
 							containerPalette={containerPalette}
 							containerType="scrollable/small"
-							showAge={!!showAge}
+							showAge={
+								!hideAge &&
+								isWithinTwelveHours(trail.webPublicationDate)
+							}
 							headlineSizes={{
 								desktop: 'xxsmall',
 								mobile: 'xxxsmall',

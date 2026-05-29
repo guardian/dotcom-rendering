@@ -1,19 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { navInternational } from '../../fixtures/manual/nav-international';
 import { navWorld } from '../../fixtures/manual/nav-world';
 import { extractNAV } from '../model/extract-nav';
 import { SubNav as SubNavComponent } from './SubNav.island';
 
-const meta = {
+const meta = preview.meta({
 	component: SubNavComponent,
 	parameters: {},
-} satisfies Meta<typeof SubNavComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		subNavSections: extractNAV(navInternational).subNavSections ?? {
 			links: [],
@@ -21,12 +17,12 @@ export const Default = {
 		currentNavLink: '',
 		position: 'header',
 	},
-} satisfies Story;
+});
 
-export const World = {
+export const World = meta.story({
 	args: {
 		subNavSections: extractNAV(navWorld).subNavSections ?? { links: [] },
 		currentNavLink: 'World',
 		position: 'footer',
 	},
-} satisfies Story;
+});

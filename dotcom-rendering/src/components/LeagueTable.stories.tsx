@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { table } from '../../fixtures/manual/footballTable';
 import { grid } from '../grid';
 import { palette } from '../palette';
 import { LeagueTable as LeagueTableComponent } from './LeagueTable';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/LeagueTable',
 	component: LeagueTableComponent,
 	parameters: {
@@ -38,14 +38,10 @@ const meta = {
 			</div>
 		),
 	],
-} satisfies Meta<typeof LeagueTableComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const LeagueTableStory = {
+export const LeagueTableStory = meta.story({
 	args: {
 		table,
 	},
-} satisfies Story;
+});

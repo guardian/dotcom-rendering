@@ -22,7 +22,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
@@ -57,6 +57,8 @@ import { decideStoryPackageTrails } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
+import { useBetaAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -363,6 +365,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			? article.matchHeaderUrl
 			: undefined;
 
+	const footballMatchLeagueName = article.sectionLabel;
+	const footballMatchLeagueUrl = `${article.guardianBaseURL}/${article.sectionUrl}`;
+
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
@@ -379,6 +384,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
+
+	const ab = useBetaAB();
+
+	const isWorldCup2026 =
+		article.tags.some((tag) => tag.id === worldCupTagId) &&
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
 
 	const renderAds = canRenderAds(article);
 
@@ -407,10 +418,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={!isLabs}
+						showSubNav={!isLabs && !isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
+						tagIds={article.tags.map((tag) => tag.id)}
+						sectionId={article.config.section}
+						contentType={article.contentType}
 					/>
 				</div>
 			)}
@@ -433,6 +447,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			<MatchHeaderContainer
 				isMatchReport={isMatchReport}
 				footballMatchHeaderUrl={footballMatchHeaderUrl}
+				leagueName={footballMatchLeagueName}
+				leagueUrl={footballMatchLeagueUrl}
 				editionId={editionId}
 				renderingTarget={renderingTarget}
 			/>
@@ -447,7 +463,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<AdPortals />
 					</Island>
 				)}
-				<DirectoryPageNav
+				<DirectoryPageNavIsland
 					pageId={article.pageId}
 					pageTags={article.tags}
 				/>
@@ -741,6 +757,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											articleEndSlot={
 												!!article.config.switches
 													.articleEndSlot
+											}
+											isSensitive={
+												article.config.isSensitive
 											}
 										/>
 									</Island>
@@ -1052,11 +1071,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 const MatchHeaderContainer = ({
 	isMatchReport,
 	footballMatchHeaderUrl,
+	leagueName,
+	leagueUrl,
 	editionId,
 	renderingTarget,
 }: {
 	isMatchReport: boolean;
 	footballMatchHeaderUrl: string | undefined;
+	leagueName: string;
+	leagueUrl: string;
 	editionId: EditionId;
 	renderingTarget: RenderingTarget;
 }) => {
@@ -1076,6 +1099,8 @@ const MatchHeaderContainer = ({
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<FootballMatchHeaderWrapper
 					initialTab="report"
+					leagueName={leagueName}
+					leagueURL={leagueUrl}
 					edition={editionId}
 					matchHeaderURL={footballMatchHeaderUrl}
 					renderingTarget={renderingTarget}

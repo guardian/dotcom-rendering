@@ -10,8 +10,9 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
+import { FetchHostedOnwards } from '../components/FetchHostedOnwards.island';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
-import { HostedContentHeader } from '../components/HostedContentHeader';
+import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
@@ -40,6 +41,14 @@ interface WebProps extends Props {
 interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
+
+const containerStyles = css`
+	${grid.container}
+
+	${from.desktop} {
+		${grid.paddedContainer}
+	}
+`;
 
 const mainMediaStyles = css`
 	${grid.column.all}
@@ -100,7 +109,7 @@ const shareButtonStyles = css`
 	padding: ${space[1]}px;
 `;
 
-const standfirstStyles = css`
+const standfirstAndArticleBodyStyles = css`
 	${grid.column.centre}
 	grid-row-start: 5;
 
@@ -115,28 +124,21 @@ const standfirstStyles = css`
 `;
 
 const articleBodyStyles = css`
-	${grid.column.centre}
-
-	padding-bottom: ${space[6]}px;
+	margin-bottom: ${space[6]}px;
 
 	${from.desktop} {
-		${grid.between(4, 'right-column-end')}
-	}
-
-	${from.leftCol} {
-		${grid.column.centre}
+		margin-bottom: ${space[10]}px;
 	}
 `;
 
 const onwardContentStyles = css`
 	${grid.column.centre}
 
-	height: 20px;
-	background-color: lightgrey;
-	margin-bottom: ${space[6]}px;
+	margin-bottom: ${space[5]}px;
 
 	${from.desktop} {
 		${grid.span(4, 8)}
+		margin-bottom: ${space[10]}px;
 	}
 
 	${from.leftCol} {
@@ -159,46 +161,41 @@ const ctaStyles = css`
 
 const sideBorders = css`
 	${from.desktop} {
-		position: relative;
-
-		&::before {
-			z-index: 1;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			content: '';
-			width: 1px;
-			background-color: ${themePalette('--article-border')};
-
-			left: -${grid.mobileColumnGap};
-			${from.mobileLandscape} {
-				left: -${grid.columnGap};
-			}
-
-			grid-column-start: left-column-start;
-		}
-
-		&::after {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			content: '';
-			width: 1px;
-			background-color: ${themePalette('--article-border')};
-
-			right: -${grid.mobileColumnGap};
-			${from.mobileLandscape} {
-				right: -${grid.columnGap};
-			}
-
-			grid-column-end: right-column-end;
-		}
+		/* box-sizing property needed to prevent the width of the grid taking into account the border width */
+		box-sizing: content-box;
+		border-left: 1px solid ${themePalette('--article-border')};
+		border-right: 1px solid ${themePalette('--article-border')};
 	}
 `;
+
+/**
+ * Overrides palette declarations in light mode to use the accent color for the hosted content.
+ * @param accentColor - The accentColor to use for the hosted content in light mode.
+ * @returns A CSS string with the overridden palette declarations.
+ */
+export const overridePaletteColours = (accentColor?: string) => {
+	return css`
+		@media (prefers-color-scheme: light) {
+			--article-link-text: ${accentColor ?? 'inherit'};
+			--article-link-text-hover: ${accentColor ?? 'inherit'};
+			--article-link-border-hover: ${accentColor ?? 'inherit'};
+			--accent-colour: ${accentColor ?? `${sourcePalette.neutral[38]}`};
+		}
+		/* The following styles are to reflect the current accentColor behaviour in storybook as well so we maintain consistency */
+		[data-color-scheme='dark'] & {
+			--article-link-text: inherit;
+			--article-link-text-hover: inherit;
+			--article-link-border-hover: inherit;
+			/* This CSS variable only exists in the scope of hosted content and it isn't defined in the paletteDeclarations.ts */
+			--accent-colour: ${sourcePalette.neutral[86]};
+		}
+	`;
+};
 
 export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	const {
 		content: { frontendData },
+		renderingTarget,
 		format,
 	} = props;
 
@@ -240,13 +237,18 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						element="header"
 					>
-						<HostedContentHeader branding={branding} />
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<HostedContentHeader branding={branding} />
+						</Island>
 					</Section>
 				</Stuck>
 			) : null}
 
-			<main data-layout="HostedArticleLayout">
-				<article css={[grid.container, sideBorders]}>
+			<main
+				data-layout="HostedArticleLayout"
+				css={overridePaletteColours(branding?.hostedCampaignColour)}
+			>
+				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
 						<MainMedia
 							format={format}
@@ -275,7 +277,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 					</div>
 
 					<div data-print-layout="hide" css={metaStyles}>
-						{props.renderingTarget === 'Web' && (
+						{renderingTarget === 'Web' && (
 							<div css={shareButtonStyles}>
 								<Island
 									priority="feature"
@@ -304,54 +306,61 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						/>
 					</div>
 
-					<div css={standfirstStyles}>
+					<div css={standfirstAndArticleBodyStyles}>
 						<Standfirst
 							format={format}
 							standfirst={frontendData.standfirst}
 						/>
-					</div>
-					<div css={articleBodyStyles}>
-						<ArticleContainer format={format}>
-							<ArticleBody
-								format={format}
-								blocks={blocks}
-								editionId={frontendData.editionId}
-								host={frontendData.config.host}
-								pageId={frontendData.pageId}
-								webTitle={frontendData.webTitle}
-								ajaxUrl={frontendData.config.ajaxUrl}
-								isAdFreeUser={frontendData.isAdFreeUser}
-								switches={frontendData.config.switches}
-								sectionId={frontendData.config.section}
-								shouldHideReaderRevenue={
-									frontendData.shouldHideReaderRevenue
-								}
-								tags={frontendData.tags}
-								isPaidContent={
-									!!frontendData.config.isPaidContent
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								contentType={frontendData.contentType}
-								idUrl={frontendData.config.idUrl ?? ''}
-								isSensitive={frontendData.config.isSensitive}
-								isDev={!!frontendData.config.isDev}
-								keywordIds={frontendData.config.keywordIds}
-								abTests={frontendData.config.abTests}
-								shouldHideAds={frontendData.shouldHideAds}
-								lang={frontendData.lang}
-								isRightToLeftLang={
-									frontendData.isRightToLeftLang
-								}
-								accentColor={branding?.hostedCampaignColour}
-							/>
-							<HostedContentDisclaimer />
-						</ArticleContainer>
+
+						<div css={articleBodyStyles}>
+							<ArticleContainer format={format}>
+								<ArticleBody
+									format={format}
+									blocks={blocks}
+									editionId={frontendData.editionId}
+									host={frontendData.config.host}
+									pageId={frontendData.pageId}
+									webTitle={frontendData.webTitle}
+									ajaxUrl={frontendData.config.ajaxUrl}
+									isAdFreeUser={frontendData.isAdFreeUser}
+									switches={frontendData.config.switches}
+									sectionId={frontendData.config.section}
+									shouldHideReaderRevenue={
+										frontendData.shouldHideReaderRevenue
+									}
+									tags={frontendData.tags}
+									isPaidContent={
+										!!frontendData.config.isPaidContent
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									contentType={frontendData.contentType}
+									idUrl={frontendData.config.idUrl ?? ''}
+									isSensitive={
+										frontendData.config.isSensitive
+									}
+									isDev={!!frontendData.config.isDev}
+									keywordIds={frontendData.config.keywordIds}
+									abTests={frontendData.config.abTests}
+									shouldHideAds={frontendData.shouldHideAds}
+									lang={frontendData.lang}
+									isRightToLeftLang={
+										frontendData.isRightToLeftLang
+									}
+								/>
+								<HostedContentDisclaimer />
+							</ArticleContainer>
+						</div>
 					</div>
 
 					<div css={onwardContentStyles}>
-						{'Placeholder - onward content'}
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<FetchHostedOnwards
+								url={`${frontendData.config.ajaxUrl}/${frontendData.config.pageId}/onward.json`}
+								branding={branding}
+							/>
+						</Island>
 					</div>
 
 					{cta && (
@@ -361,6 +370,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 								backgroundImage={cta.image}
 								text={cta.label}
 								buttonText={cta.btnText}
+								accentColor={branding?.hostedCampaignColour}
 							/>
 						</div>
 					)}

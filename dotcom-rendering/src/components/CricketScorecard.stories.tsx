@@ -1,8 +1,8 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { CricketScorecard as CricketScorecardComponent } from './CricketScorecard';
 
-const meta = {
+const meta = preview.meta({
 	component: CricketScorecardComponent,
 	title: 'Components/CricketScorecard',
 	decorators: [
@@ -20,18 +20,15 @@ const meta = {
 			viewports: [breakpoints.mobileLandscape],
 		},
 	},
-} satisfies Meta<typeof CricketScorecardComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const CricketScorecard = {
+export const CricketScorecard = meta.story({
 	name: 'Cricket Scorecard',
 	args: {
 		allInnings: [
 			{
 				description: 'India first innings',
+				battingTeam: 'India',
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',
@@ -53,6 +50,9 @@ export const CricketScorecard = {
 						fours: 7,
 						sixes: 3,
 						howOut: 'st Latham b Ravindra',
+						out: true,
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Shubman Gill',
@@ -61,6 +61,9 @@ export const CricketScorecard = {
 						fours: 0,
 						sixes: 1,
 						howOut: 'c Phillips b Santner',
+						out: true,
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Virat Kohli',
@@ -69,6 +72,9 @@ export const CricketScorecard = {
 						fours: 0,
 						sixes: 0,
 						howOut: 'lbw b Bracewell',
+						out: true,
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Shreyas Iyer',
@@ -77,6 +83,9 @@ export const CricketScorecard = {
 						fours: 2,
 						sixes: 2,
 						howOut: 'c Ravindra b Santner',
+						out: true,
+						onStrike: false,
+						nonStrike: false,
 					},
 				],
 				bowlers: [
@@ -162,6 +171,7 @@ export const CricketScorecard = {
 					wides: 13,
 				},
 				description: 'New Zealand first innings',
+				battingTeam: 'New Zealand',
 				batters: [
 					{
 						name: 'Will Young',
@@ -170,6 +180,9 @@ export const CricketScorecard = {
 						fours: 2,
 						sixes: 0,
 						howOut: 'lbw b Vinod',
+						out: true,
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Rachin Ravindra',
@@ -178,6 +191,9 @@ export const CricketScorecard = {
 						fours: 4,
 						sixes: 1,
 						howOut: 'b Yadav',
+						out: true,
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Kane Williamson',
@@ -186,6 +202,9 @@ export const CricketScorecard = {
 						fours: 1,
 						sixes: 0,
 						howOut: 'c & b Yadav',
+						out: true,
+						onStrike: false,
+						nonStrike: false,
 					},
 					{
 						name: 'Daryl Mitchell',
@@ -194,6 +213,9 @@ export const CricketScorecard = {
 						fours: 3,
 						sixes: 0,
 						howOut: 'c Sharma b Ahmed',
+						out: true,
+						onStrike: false,
+						nonStrike: false,
 					},
 				],
 				bowlers: [
@@ -284,4 +306,4 @@ export const CricketScorecard = {
 			],
 		},
 	},
-} satisfies Story;
+});

@@ -1,21 +1,17 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import {
 	BlockElement,
 	MainMedia,
 } from '../../fixtures/manual/InteractiveAtomBlockElement';
 import { InteractiveAtom } from './InteractiveAtom';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/InteractiveAtom',
 	component: InteractiveAtom,
-} satisfies Meta<typeof InteractiveAtom>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		id: BlockElement.id,
 		elementHtml: BlockElement.html,
@@ -37,9 +33,9 @@ export const Default = {
 		// This interactive uses animation which is causing false negatives for Chromatic
 		chromatic: { disable: true },
 	},
-} satisfies Story;
+});
 
-export const ImmersiveMainMedia = {
+export const ImmersiveMainMedia = meta.story({
 	args: {
 		id: MainMedia.id,
 		elementHtml: MainMedia.html,
@@ -62,4 +58,4 @@ export const ImmersiveMainMedia = {
 		// This interactive uses animation which is causing false negatives for Chromatic
 		chromatic: { disable: true },
 	},
-} satisfies Story;
+});

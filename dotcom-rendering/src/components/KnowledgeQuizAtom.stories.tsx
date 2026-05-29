@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { userEvent, within } from 'storybook/test';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import {
 	exampleKnowledgeQuestions,
 	natureQuestions,
@@ -16,7 +16,7 @@ import {
 } from '../lib/articleFormat';
 import { KnowledgeQuizAtom } from './KnowledgeQuizAtom.island';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/KnowledgeQuizAtom',
 	component: KnowledgeQuizAtom,
 	decorators: centreColumnDecorator,
@@ -27,13 +27,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof KnowledgeQuizAtom>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		id: '2c6bf552-2827-4256-b3a0-f557d215c394',
 		questions: exampleKnowledgeQuestions,
@@ -46,10 +42,10 @@ export const Default = {
 			theme: Pillar.News,
 		},
 	},
-} satisfies Story;
+});
 
-export const WithResults = {
-	...Default,
+export const WithResults = meta.story({
+	...Default.input,
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 
@@ -73,23 +69,23 @@ export const WithResults = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const BatchedResults = {
+export const BatchedResults = meta.story({
 	args: {
-		...Default.args,
+		...Default.input.args,
 		questions: natureQuestions,
 		resultGroups: natureResultGroups,
 	},
-} satisfies Story;
+});
 
-export const LabsTheme = {
+export const LabsTheme = meta.story({
 	args: {
-		...Default.args,
+		...Default.input.args,
 		format: {
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Comment,
 			theme: ArticleSpecial.Labs,
 		},
 	},
-} satisfies Story;
+});

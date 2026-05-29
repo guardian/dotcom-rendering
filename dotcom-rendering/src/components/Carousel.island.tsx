@@ -510,9 +510,8 @@ const CarouselCard = ({
 				webPublicationDate={webPublicationDate}
 				kickerText={kickerText}
 				image={image}
-				mediaSize={'carousel'}
+				mediaSize="carousel"
 				showClock={!isOnwardContent && true}
-				showAge={true}
 				showQuotedHeadline={format.design === ArticleDesign.Comment}
 				dataLinkName={dataLinkName}
 				discussionId={discussionId}
@@ -533,7 +532,7 @@ const CarouselCard = ({
 				index={index}
 				showTopBarDesktop={!isOnwardContent}
 				showTopBarMobile={!isOnwardContent}
-				aspectRatio={'5:4'}
+				aspectRatio="5:4"
 			/>
 		</LI>
 	);
@@ -777,7 +776,9 @@ export const Carousel = ({
 
 	const getItems = (): HTMLElement[] => {
 		const { current } = carouselRef;
-		if (current === null) return [];
+		if (current === null) {
+			return [];
+		}
 
 		return Array.from(current.children) as HTMLElement[];
 	};
@@ -788,7 +789,9 @@ export const Carousel = ({
 			.filter(notPresentation)
 			.map((el) => el.offsetLeft);
 		const [offset] = offsets;
-		if (current === null || isUndefined(offset)) return 0;
+		if (current === null || isUndefined(offset)) {
+			return 0;
+		}
 
 		const scrolled = current.scrollLeft + offset;
 		const active = offsets.findIndex((el) => el >= scrolled);
@@ -802,7 +805,9 @@ export const Carousel = ({
 
 	const goToIndex = (newIndex: number) => {
 		const { current } = carouselRef;
-		if (current === null) return;
+		if (current === null) {
+			return;
+		}
 
 		const offsets = getItems()
 			.filter(notPresentation)
@@ -820,7 +825,9 @@ export const Carousel = ({
 			.map(({ offsetLeft }) => offsetLeft);
 		const [offset] = offsets;
 
-		if (current === null || isUndefined(offset)) return;
+		if (current === null || isUndefined(offset)) {
+			return;
+		}
 
 		const scrolled = current.scrollLeft + offset;
 
@@ -841,7 +848,9 @@ export const Carousel = ({
 			.map(({ offsetLeft }) => offsetLeft);
 		const [offset] = offsets;
 
-		if (current === null || isUndefined(offset)) return;
+		if (current === null || isUndefined(offset)) {
+			return;
+		}
 
 		const scrolled = current.scrollLeft + offset;
 		const nextOffset = offsets.find((currOffset) => currOffset > scrolled);
@@ -959,7 +968,9 @@ export const Carousel = ({
 
 							// Don't try to render cards that have no publication date. This property
 							// is technically optional but we rarely if ever expect it not to exist.
-							if (!webPublicationDate) return null;
+							if (!webPublicationDate) {
+								return null;
+							}
 
 							const image = trailImage && {
 								src: getSourceImageUrl(trailImage.src),

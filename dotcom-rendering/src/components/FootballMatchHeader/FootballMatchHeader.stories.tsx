@@ -1,15 +1,21 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, within } from 'storybook/test';
 import { SWRConfig } from 'swr';
+import preview from '../../../.storybook/preview';
 import {
 	matchDayLive,
 	matchFixture,
 	matchResult,
 } from '../../../fixtures/manual/footballMatches';
 import type { FEFootballMatchHeader } from '../../frontend/feFootballMatchHeader';
+import type { MatchNotificationsClient } from '../../lib/bridgetApi';
+import { NotificationsToggle } from '../NotificationsToggle.stories';
 import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader';
 
-const meta = {
+const mockMatchNotificationsClient: MatchNotificationsClient = {
+	isAvailable: () => Promise.resolve({ isAvailable: true }),
+};
+
+const meta = preview.meta({
 	component: FootballMatchHeaderComponent,
 	decorators: [
 		(Story) => (
@@ -19,9 +25,7 @@ const meta = {
 			</SWRConfig>
 		),
 	],
-} satisfies Meta<typeof FootballMatchHeaderComponent>;
-
-export default meta;
+});
 
 const feHeaderData: FEFootballMatchHeader = {
 	footballMatch: matchFixture,
@@ -34,13 +38,10 @@ const feHeaderData: FEFootballMatchHeader = {
 		'https://www.theguardian.com/football/match/2025/nov/26/arsenal-v-bayernmunich',
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const Fixture = {
+export const FixtureWeb = meta.story({
 	args: {
 		initialTab: 'info',
 		initialData: {
-			leagueName: feHeaderData.competitionName,
 			match: {
 				kind: 'Fixture',
 				kickOff: new Date('2025-11-05T20:30:00Z'),
@@ -60,6 +61,7 @@ export const Fixture = {
 				matchKind: 'Fixture',
 			},
 		},
+		leagueName: 'Premier League',
 		edition: 'UK',
 		getHeaderData: () =>
 			getMockData({
@@ -71,6 +73,8 @@ export const Fixture = {
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
 		renderingTarget: 'Web',
+		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		const nav = canvas.getByRole('navigation');
@@ -101,22 +105,26 @@ export const Fixture = {
 			void expect(updatedTabs[0]).toHaveTextContent('Match info');
 		});
 	},
-} satisfies Story;
+});
 
-export const Live = {
+export const LiveApps = meta.story({
 	args: {
 		initialTab: 'live',
+		leagueName: 'Premier League',
+		leagueURL: 'https://www.theguardian.com/football/premierleague',
 		edition: 'EUR',
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
-		refreshInterval: Fixture.args.refreshInterval,
+		refreshInterval: FixtureWeb.input.args.refreshInterval,
 		getHeaderData: () =>
 			getMockData({
 				...feHeaderData,
 				footballMatch: matchDayLive,
 				reportURL: undefined,
 			}),
-		renderingTarget: 'Web',
+		renderingTarget: 'Apps',
+		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		await step(
@@ -146,21 +154,30 @@ export const Live = {
 			void expect(tabs[1]).toHaveTextContent('Match info');
 		});
 	},
-} satisfies Story;
+	parameters: {
+		config: {
+			renderingTarget: 'Apps',
+		},
+	},
+});
 
-export const Result = {
+export const ResultWeb = meta.story({
 	args: {
 		initialTab: 'report',
+		leagueName: 'Premier League',
+		leagueURL: 'https://www.theguardian.com/football/premierleague',
 		edition: 'AU',
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
-		refreshInterval: Fixture.args.refreshInterval,
+		refreshInterval: FixtureWeb.input.args.refreshInterval,
 		getHeaderData: () =>
 			getMockData({
 				...feHeaderData,
 				footballMatch: matchResult,
 			}),
 		renderingTarget: 'Web',
+		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 
 	play: async ({ canvas, canvasElement, step }) => {
@@ -189,21 +206,25 @@ export const Result = {
 			void expect(tabs[2]).toHaveTextContent('Match info');
 		});
 	},
-} satisfies Story;
+});
 
-export const AppsResult = {
+export const ResultApps = meta.story({
 	args: {
 		initialTab: 'report',
+		leagueName: 'Premier League',
+		leagueURL: 'https://www.theguardian.com/football/premierleague',
 		edition: 'AU',
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
-		refreshInterval: Fixture.args.refreshInterval,
+		refreshInterval: FixtureWeb.input.args.refreshInterval,
 		getHeaderData: () =>
 			getMockData({
 				...feHeaderData,
 				footballMatch: matchResult,
 			}),
 		renderingTarget: 'Apps',
+		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
 	},
 
 	play: async ({ canvas, canvasElement, step }) => {
@@ -232,7 +253,13 @@ export const AppsResult = {
 			);
 		});
 	},
-} satisfies Story;
+
+	parameters: {
+		config: {
+			renderingTarget: 'Apps',
+		},
+	},
+});
 
 const getMockData = (data: FEFootballMatchHeader) =>
 	new Promise((resolve) => {

@@ -94,7 +94,7 @@ export const FootballMiniMatchStats = (props: Props) => {
 	return (
 		<div css={containerCss}>
 			<FootballMatchStat
-				heading="Posession"
+				heading="Possession"
 				homeTeam={homeTeam}
 				awayTeam={awayTeam}
 				homeValue={data.homeTeam.possession}
@@ -103,7 +103,7 @@ export const FootballMiniMatchStats = (props: Props) => {
 				layout="compact"
 			/>
 			<FootballMatchStat
-				heading="Goal Attempts"
+				heading="Goal attempts"
 				homeTeam={homeTeam}
 				awayTeam={awayTeam}
 				homeValue={data.homeTeam.shotsTotal}

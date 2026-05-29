@@ -26,7 +26,9 @@ export const GetCricketScoreboard = ({ matchUrl, format }: Props) => {
 		scorecardUrl: string;
 	}>(matchUrl, options);
 
-	if (loading) return <Loading />;
+	if (loading) {
+		return <Loading />;
+	}
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
 		window.guardian.modules.sentry.reportError(error, 'cricket-scoreboard');

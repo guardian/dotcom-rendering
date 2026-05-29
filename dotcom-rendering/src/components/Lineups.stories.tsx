@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { matchStats } from '../../fixtures/manual/matchStats';
 import { grid } from '../grid';
 import { palette } from '../palette';
 import { Lineups as LineupsComponent } from './Lineups';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Lineups',
 	component: LineupsComponent,
 	parameters: {
@@ -36,23 +36,19 @@ const meta = {
 			</div>
 		),
 	],
-} satisfies Meta<typeof LineupsComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const WithLineup = {
+export const WithLineup = meta.story({
 	args: {
 		matchStats,
 	},
-} satisfies Story;
+});
 
-export const ComingSoon = {
+export const ComingSoon = meta.story({
 	args: {
 		matchStats: {
 			homeTeam: { ...matchStats.homeTeam, players: [] },
 			awayTeam: { ...matchStats.awayTeam, players: [] },
 		},
 	},
-} satisfies Story;
+});

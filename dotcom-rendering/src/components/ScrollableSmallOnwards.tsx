@@ -29,7 +29,9 @@ type Props = {
 
 export const ScrollableSmallOnwards = (props: Props) => {
 	const trails = props.trails.slice(0, 4); // Limit to 4 cards
-	if (trails.length !== 4) return null;
+	if (trails.length !== 4) {
+		return null;
+	}
 
 	const mobileBottomCards = [1, 3];
 	const desktopBottomCards = [2, 3];
@@ -218,7 +220,6 @@ const getDefaultCardProps = (
 		mainMedia: trail.mainMedia,
 		isExternalLink: false,
 		branding: trail.branding,
-		showAge: true,
 		aspectRatio: '5:4',
 		mediaSize: 'scrollable-small',
 		mediaPositionOnDesktop: 'left',

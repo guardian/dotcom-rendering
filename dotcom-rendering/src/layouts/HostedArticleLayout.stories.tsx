@@ -1,16 +1,27 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { hostedArticle } from '../../fixtures/manual/hostedArticle';
+import { hostedOnwardsTrails } from '../../fixtures/manual/onwardsTrails';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { enhanceArticleType } from '../types/article';
 import type { Branding } from '../types/branding';
 import { HostedArticleLayout } from './HostedArticleLayout';
 
-const meta = {
+const mockOnwardsContentFetch = customMockFetch([
+	{
+		mockedMethod: 'GET',
+		mockedUrl: `${hostedArticle.config.ajaxUrl}/${hostedArticle.config.pageId}/onward.json`,
+		mockedStatus: 200,
+		mockedBody: { trails: hostedOnwardsTrails },
+	},
+]);
+
+const meta = preview.meta({
 	title: 'Layouts/HostedArticle',
 	component: HostedArticleLayout,
 	parameters: {
@@ -20,11 +31,11 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof HostedArticleLayout>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
+	render: (args) => {
+		global.fetch = mockOnwardsContentFetch;
+		return <HostedArticleLayout {...args} />;
+	},
+});
 
 const format = {
 	theme: ArticleSpecial.Labs,
@@ -32,7 +43,7 @@ const format = {
 	display: ArticleDisplay.Standard,
 };
 
-export const Apps = {
+export const Apps = meta.story({
 	args: {
 		content: enhanceArticleType(hostedArticle, 'Apps'),
 		format,
@@ -49,11 +60,11 @@ export const Apps = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
 const webHostedArticle = enhanceArticleType(hostedArticle, 'Web');
 
-export const Web = {
+export const Web = meta.story({
 	args: {
 		content: webHostedArticle,
 		format,
@@ -64,9 +75,9 @@ export const Web = {
 			renderingTarget: 'Web',
 		},
 	},
-} satisfies Story;
+});
 
-export const WithoutAccentColour = {
+export const WithoutAccentColour = meta.story({
 	args: {
 		content: {
 			...webHostedArticle,
@@ -95,4 +106,39 @@ export const WithoutAccentColour = {
 			renderingTarget: 'Web',
 		},
 	},
-} satisfies Story;
+});
+
+export const WithoutMainMediaCaption = meta.story({
+	args: {
+		content: {
+			...webHostedArticle,
+			frontendData: {
+				...webHostedArticle.frontendData,
+				mainMediaElements:
+					webHostedArticle.frontendData.mainMediaElements[0]
+						?._type ===
+					'model.dotcomrendering.pageElements.ImageBlockElement'
+						? [
+								{
+									...webHostedArticle.frontendData
+										.mainMediaElements[0],
+									data: {
+										...webHostedArticle.frontendData
+											.mainMediaElements[0].data,
+										caption: undefined,
+										credit: undefined,
+									},
+								},
+						  ]
+						: webHostedArticle.frontendData.mainMediaElements,
+			},
+		},
+		format,
+		renderingTarget: 'Web',
+	},
+	parameters: {
+		config: {
+			renderingTarget: 'Web',
+		},
+	},
+});

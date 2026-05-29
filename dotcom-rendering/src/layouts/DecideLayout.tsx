@@ -167,9 +167,16 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 						/>
 					);
 				case ArticleDesign.HostedArticle:
-				case ArticleDesign.HostedVideo:
 					return (
 						<HostedArticleLayout
+							content={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.HostedVideo:
+					return (
+						<HostedVideoLayout
 							content={article}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -181,6 +188,15 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							content={article}
 							format={format}
 							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.Audio:
+					return (
+						<AudioLayout
+							article={article.frontendData}
+							format={format}
+							renderingTarget={renderingTarget}
+							serverTime={serverTime}
 						/>
 					);
 				default:

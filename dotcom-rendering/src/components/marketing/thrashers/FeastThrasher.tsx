@@ -15,12 +15,19 @@ import {
 	SvgArrowRightStraight,
 	SvgGuardianLogo,
 } from '@guardian/source/react-components';
+import type { RenderingTarget } from '../../../types/renderingTarget';
 
 const styles = {
-	container: css`
+	container: (renderingTarget: RenderingTarget) => css`
 		/* stylelint-disable-next-line color-no-hex */
 		background: #f7efe9;
 		color: ${palette.neutral[0]};
+		${renderingTarget === 'Apps'
+			? css`
+					margin: 0 4px;
+					border-radius: 8px;
+			  `
+			: ''}
 	`,
 	grid: css`
 		display: grid;
@@ -113,9 +120,13 @@ const tabletImageUrl =
 const mobileAndDesktopImageUrl =
 	'https://media.guim.co.uk/a0cc02db1394f8710bdce008e2297759098d53b3/0_0_2000_1200/2000.png';
 
-export const FeastThrasher = () => {
+interface Props {
+	renderingTarget: RenderingTarget;
+}
+
+export const FeastThrasher = ({ renderingTarget }: Props) => {
 	return (
-		<div css={styles.container}>
+		<div css={styles.container(renderingTarget)}>
 			<div css={styles.grid}>
 				<div css={styles.logo}>
 					<SvgGuardianLogo

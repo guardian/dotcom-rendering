@@ -9,7 +9,7 @@ import { generateId } from './enhance-H2s';
  * further up the rendering pipeline.
  */
 
-export type ABTestVariant = 'carousel' | 'stacked';
+export type ABTestVariant = 'carousel' | 'stacked-default' | 'stacked-expanded';
 
 /**
  * List of page IDs eligible for product carousel enhancement.
@@ -53,6 +53,18 @@ export const allowedPageIds: string[] = [
 	'thefilter/2026/feb/20/best-drills-power-cordless-uk',
 	'thefilter/2026/feb/19/best-steam-irons-uk-tested',
 	'thefilter/2025/jul/22/best-electric-kettles-uk',
+	'thefilter/2026/apr/12/best-barefoot-shoes-tested-uk',
+	'thefilter/2026/apr/10/best-meal-delivery-service-food-recipe-kit-tested-uk',
+	'thefilter/2026/apr/08/best-carry-on-luggage-cabin-bags-uk',
+	'thefilter/2025/jun/03/best-water-flosser-uk',
+	'thefilter-us/2026/apr/09/sonos-portable-speaker-review',
+	'thefilter/2025/aug/31/best-mattress-toppers-uk',
+	'thefilter/2025/may/13/best-hot-brushes-uk',
+	'thefilter/2025/feb/06/best-mattress',
+	'thefilter/2025/may/28/best-fake-tan-uk',
+	'thefilter/2025/apr/18/best-pressure-washers-cleaners-uk',
+	'thefilter/2025/may/18/best-suitcases-luggage-uk',
+	'thefilter/2025/may/21/best-eye-creams-serums-uk',
 ];
 
 const isEligibleForSummary = (pageId: string) => {
@@ -60,7 +72,11 @@ const isEligibleForSummary = (pageId: string) => {
 };
 
 const isCarouselOrStacked = (string: string) => {
-	return string === 'carousel' || string === 'stacked';
+	return (
+		string === 'carousel' ||
+		string === 'stacked-default' ||
+		string === 'stacked-expanded'
+	);
 };
 
 // Extract URLs from 'At a glance' section elements
@@ -202,7 +218,7 @@ export const enhanceProductSummary =
 	}) =>
 	(elements: FEElement[]): FEElement[] => {
 		const abTestVariant =
-			serverSideABTests?.['thefilter-at-a-glance-redesign'];
+			serverSideABTests?.['thefilter-at-a-glance-redesign-v2'];
 
 		// do nothing if article is not on allow list / not in the test / variant is 'control' / renderingTarget is Apps / filterAtAGlance switch is OFF
 		if (

@@ -9,10 +9,14 @@ import type { CSSProperties, ReactNode } from 'react';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { palette } from '../../palette';
+import type { RenderingTarget } from '../../types/renderingTarget';
+import { useConfig } from '../ConfigContext';
 import { border, primaryText, selected } from './colours';
 
 type Props = {
 	matchKind: FootballMatch['kind'];
+	// eslint-disable-next-line react/no-unused-prop-types -- false positive, this is passed into the tab components
+	sportKind?: 'football' | 'cricket';
 } & (
 	| {
 			selected: 'info';
@@ -87,13 +91,14 @@ const LiveFeed = (props: Props) => {
 };
 
 const MatchInfo = (props: Props) => {
+	const tabText = props.sportKind === 'cricket' ? 'Scorecard' : 'Match info';
 	if (props.selected === 'info') {
-		return <Tab matchKind={props.matchKind}>Match info</Tab>;
+		return <Tab matchKind={props.matchKind}>{tabText}</Tab>;
 	}
 
 	return (
 		<Tab matchKind={props.matchKind} href={props.infoURL}>
-			Match info
+			{tabText}
 		</Tab>
 	);
 };
@@ -133,12 +138,14 @@ const TabText = (props: {
 	href?: URL;
 	matchKind: FootballMatch['kind'];
 }) => {
+	const { renderingTarget } = useConfig();
+
 	if (props.href !== undefined) {
 		return (
 			<a
 				href={props.href.toString()}
 				css={tabTextCss}
-				style={tabTextStyle(props.matchKind)}
+				style={tabTextStyle(props.matchKind, renderingTarget)}
 			>
 				{props.children}
 			</a>
@@ -149,7 +156,7 @@ const TabText = (props: {
 		<span
 			css={tabTextCss}
 			style={{
-				...tabTextStyle(props.matchKind),
+				...tabTextStyle(props.matchKind, renderingTarget),
 				borderBottomColor: palette(selected(props.matchKind)),
 			}}
 		>
@@ -174,7 +181,13 @@ const tabTextCss = css({
 	},
 });
 
-const tabTextStyle = (matchKind: FootballMatch['kind']): CSSProperties => ({
+const tabTextStyle = (
+	matchKind: FootballMatch['kind'],
+	renderingTarget: RenderingTarget,
+): CSSProperties => ({
 	color: palette(primaryText(matchKind)),
-	'--hover-colour': palette(selected(matchKind)),
+	'--hover-colour':
+		renderingTarget === 'Web'
+			? palette(selected(matchKind))
+			: 'transparent',
 });

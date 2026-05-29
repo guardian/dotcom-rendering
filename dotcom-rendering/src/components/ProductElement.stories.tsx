@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { productImage } from '../../fixtures/manual/productImage';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { getNestedArticleElement } from '../lib/renderElement';
@@ -264,7 +264,7 @@ const product = {
 	],
 } satisfies ProductBlockElement;
 
-const meta = {
+const meta = preview.meta({
 	component: ProductElement,
 	title: 'Components/ProductElement',
 	parameters: {
@@ -288,15 +288,11 @@ const meta = {
 		shouldShowLeftColCard: true,
 	},
 	decorators: [centreColumnDecorator],
-} satisfies Meta<typeof ProductElement>;
+});
 
-export default meta;
+export const Default = meta.story();
 
-type Story = StoryObj<typeof ProductElement>;
-
-export const Default = {} satisfies Story;
-
-export const WithoutHeading = {
+export const WithoutHeading = meta.story({
 	args: {
 		product: {
 			...product,
@@ -306,18 +302,18 @@ export const WithoutHeading = {
 			secondaryHeadingText: '',
 		},
 	},
-} satisfies Story;
+});
 
-export const DisplayCredit = {
+export const DisplayCredit = meta.story({
 	args: {
 		product: {
 			...product,
 			image: { ...productImage, displayCredit: true },
 		},
 	},
-} satisfies Story;
+});
 
-export const NoSecondaryHeading = {
+export const NoSecondaryHeading = meta.story({
 	args: {
 		product: {
 			...product,
@@ -326,9 +322,9 @@ export const NoSecondaryHeading = {
 			secondaryHeadingText: '',
 		},
 	},
-} satisfies Story;
+});
 
-export const NoPrimaryHeading = {
+export const NoPrimaryHeading = meta.story({
 	args: {
 		product: {
 			...product,
@@ -337,36 +333,36 @@ export const NoPrimaryHeading = {
 			secondaryHeadingHtml: 'Secondary heading only',
 		},
 	},
-} satisfies Story;
+});
 
-export const DisplayTypeProductCardOnly = {
+export const DisplayTypeProductCardOnly = meta.story({
 	args: {
 		product: {
 			...product,
 			displayType: 'ProductCardOnly',
 		},
 	},
-} satisfies Story;
+});
 
-export const DisplayTypeInlineOnly = {
+export const DisplayTypeInlineOnly = meta.story({
 	args: {
 		product: {
 			...product,
 			displayType: 'InlineOnly',
 		},
 	},
-} satisfies Story;
+});
 
-export const MultipleProducts = {
+export const MultipleProducts = meta.story({
 	render: (args) => (
 		<>
 			<ProductElement {...args} />
 			<ProductElement {...args} />
 		</>
 	),
-} satisfies Story;
+});
 
-export const MultipleProductsWithoutStats = {
+export const MultipleProductsWithoutStats = meta.story({
 	render: (args) => (
 		<>
 			<ProductElement
@@ -379,9 +375,9 @@ export const MultipleProductsWithoutStats = {
 			/>
 		</>
 	),
-} satisfies Story;
+});
 
-export const EmptyFields = {
+export const EmptyFields = meta.story({
 	args: {
 		product: {
 			...product,
@@ -397,4 +393,4 @@ export const EmptyFields = {
 			lowestPrice: undefined,
 		},
 	},
-} satisfies Story;
+});

@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { CaptionBlockComponent } from './CaptionBlockComponent';
 
-const meta = {
+const meta = preview.meta({
 	component: CaptionBlockComponent,
 	title: 'Components/Caption Block Component',
 	decorators: [centreColumnDecorator],
@@ -15,13 +15,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof CaptionBlockComponent>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default = {
+export const Default = meta.story({
 	args: {
 		captionText: 'Caption text',
 		format: {
@@ -35,48 +31,48 @@ export const Default = {
 		shouldLimitWidth: false,
 		isOverlaid: false,
 	},
-} satisfies Story;
+});
 
-export const WithDefaults = {
+export const WithDefaults = meta.story({
 	args: {
-		...Default.args,
+		...Default.input.args,
 		padCaption: undefined,
 		credit: undefined,
 		displayCredit: undefined,
 		shouldLimitWidth: undefined,
 		isOverlaid: undefined,
 	},
-} satisfies Story;
+});
 
-export const PhotoEssay = {
+export const PhotoEssay = meta.story({
 	args: {
-		...Default.args,
+		...Default.input.args,
 		format: {
 			display: ArticleDisplay.Immersive,
 			design: ArticleDesign.PhotoEssay,
 			theme: Pillar.Lifestyle,
 		},
 	},
-} satisfies Story;
+});
 
-export const PhotoEssayUsingHTML = {
+export const PhotoEssayUsingHTML = meta.story({
 	args: {
-		...PhotoEssay.args,
+		...PhotoEssay.input.args,
 		captionText:
 			'<ul><li>Line 1 text</li><li>Line 2 text</li><li>Line 3 text</li></ul>',
 	},
-} satisfies Story;
+});
 
-export const WhenPadded = {
+export const WhenPadded = meta.story({
 	args: {
-		...Default.args,
+		...Default.input.args,
 		padCaption: true,
 	},
-} satisfies Story;
+});
 
-export const WithWidthLimited = {
+export const WithWidthLimited = meta.story({
 	args: {
-		...Default.args,
+		...Default.input.args,
 		captionText:
 			'Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit',
 		shouldLimitWidth: true,
@@ -89,19 +85,19 @@ export const WithWidthLimited = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const WithCredit = {
+export const WithCredit = meta.story({
 	args: {
-		...Default.args,
+		...Default.input.args,
 		displayCredit: true,
 	},
-} satisfies Story;
+});
 
-export const WhenOverlaid = {
+export const WhenOverlaid = meta.story({
 	args: {
-		...Default.args,
-		captionText: WithWidthLimited.args.captionText,
+		...Default.input.args,
+		captionText: WithWidthLimited.input.args.captionText,
 		isOverlaid: true,
 		format: {
 			display: ArticleDisplay.Showcase,
@@ -117,4 +113,4 @@ export const WhenOverlaid = {
 			},
 		},
 	},
-} satisfies Story;
+});

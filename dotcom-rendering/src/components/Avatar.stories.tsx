@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import preview from '../../.storybook/preview';
 import { Avatar } from './Avatar';
 
-const meta = {
+const meta = preview.meta({
 	component: Avatar,
 	title: 'Components/Avatar',
 	decorators: [
@@ -16,13 +16,9 @@ const meta = {
 			</div>
 		),
 	],
-} satisfies Meta<typeof Avatar>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const RoundAvatar = {
+export const RoundAvatar = meta.story({
 	args: {
 		src: 'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png',
 		alt: 'The alt of the image',
@@ -32,4 +28,4 @@ export const RoundAvatar = {
 		size: '136px',
 	},
 	name: 'Round Avatar Cutout With Coloured Background',
-} satisfies Story;
+});

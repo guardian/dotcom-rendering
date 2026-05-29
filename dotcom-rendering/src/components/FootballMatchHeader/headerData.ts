@@ -16,7 +16,6 @@ import type { Tabs } from './Tabs';
 export type HeaderData = {
 	tabs: ComponentProps<typeof Tabs>;
 	match: FootballMatch;
-	leagueName: string;
 };
 
 export const parse =
@@ -55,7 +54,6 @@ export const parse =
 		return ok({
 			match: parsedMatch.value,
 			tabs: maybeTabs.value,
-			leagueName: feData.value.competitionName,
 		});
 	};
 

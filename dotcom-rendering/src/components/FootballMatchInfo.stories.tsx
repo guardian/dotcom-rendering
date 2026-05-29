@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { table } from '../../fixtures/manual/footballTable';
 import { matchStats } from '../../fixtures/manual/matchStats';
 import { grid } from '../grid';
 import { palette } from '../palette';
 import { FootballMatchInfo as FootballMatchInfoComponent } from './FootballMatchInfo';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Football Match Info',
 	component: FootballMatchInfoComponent,
 	parameters: {
@@ -39,14 +39,11 @@ const meta = {
 			</div>
 		),
 	],
-} satisfies Meta<typeof FootballMatchInfoComponent>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const FootballMatchInfo = {
+export const FootballMatchInfo = meta.story({
 	args: {
 		matchStats,
 		table,
 	},
-} satisfies Story;
+});

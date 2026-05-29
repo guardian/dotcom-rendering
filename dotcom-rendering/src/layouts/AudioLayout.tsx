@@ -6,22 +6,28 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import { AppsAudioPlayer } from '../components/AppsAudioPlayer.island';
+import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { AudioPlayerWrapper } from '../components/AudioPlayerWrapper.island';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.island';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { formatAudioDuration } from '../components/ListenToArticle.island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -40,6 +46,8 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
+import { useBetaAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -134,8 +142,14 @@ interface WebProps extends Props {
 	renderingTarget: 'Web';
 }
 
-export const AudioLayout = (props: WebProps) => {
+interface AppProps extends Props {
+	renderingTarget: 'Apps';
+}
+
+export const AudioLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget, serverTime } = props;
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 	const audioData = getAudioData(article.mainMediaElements);
 
 	const {
@@ -153,40 +167,51 @@ export const AudioLayout = (props: WebProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const ab = useBetaAB();
+
+	const isWorldCup2026 =
+		article.tags.some((tag) => tag.id === worldCupTagId) &&
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
+
 	const renderAds = canRenderAds(article);
 
 	return (
 		<>
-			<div data-print-layout="hide" id="bannerandheader">
-				{renderAds && (
-					<Stuck>
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot />
-						</Section>
-					</Stuck>
-				)}
-				<Masthead
-					nav={props.NAV}
-					editionId={article.editionId}
-					idUrl={article.config.idUrl}
-					mmaUrl={article.config.mmaUrl}
-					discussionApiUrl={article.config.discussionApiUrl}
-					idApiUrl={article.config.idApiUrl}
-					contributionsServiceUrl={contributionsServiceUrl}
-					showSubNav={!isLabs}
-					showSlimNav={false}
-					hasPageSkinContentSelfConstrain={true}
-					pageId={article.pageId}
-				/>
-			</div>
+			{isWeb && (
+				<div data-print-layout="hide" id="bannerandheader">
+					{renderAds && (
+						<Stuck>
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot />
+							</Section>
+						</Stuck>
+					)}
+					<Masthead
+						nav={props.NAV}
+						editionId={article.editionId}
+						idUrl={article.config.idUrl}
+						mmaUrl={article.config.mmaUrl}
+						discussionApiUrl={article.config.discussionApiUrl}
+						idApiUrl={article.config.idApiUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
+						showSubNav={!isLabs && !isWorldCup2026}
+						showSlimNav={false}
+						hasPageSkinContentSelfConstrain={true}
+						pageId={article.pageId}
+						sectionId={article.config.section}
+						tagIds={article.tags.map((tag) => tag.id)}
+						contentType={article.contentType}
+					/>
+				</div>
+			)}
 
-			{format.theme === ArticleSpecial.Labs && (
+			{isWeb && format.theme === ArticleSpecial.Labs && (
 				<Stuck zIndex="subNavBanner">
 					<Section
 						fullWidth={true}
@@ -201,11 +226,21 @@ export const AudioLayout = (props: WebProps) => {
 				</Stuck>
 			)}
 
-			{renderAds && hasSurveyAd && (
+			{isWeb && renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
 			<main data-layout="AudioLayout">
+				{isApps && renderAds && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
+				)}
+				<DirectoryPageNavIsland
+					pageTags={article.tags}
+					pageId={article.pageId}
+				/>
+
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -248,36 +283,60 @@ export const AudioLayout = (props: WebProps) => {
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
-								<ArticleMeta
-									branding={branding}
-									format={format}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									byline={article.byline}
-									source={article.config.source}
-									tags={article.tags}
-									primaryDateline={
-										article.webPublicationDateDisplay
-									}
-									secondaryDateline={
-										article.webPublicationSecondaryDateDisplay
-									}
-									isCommentable={article.isCommentable}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									shortUrlId={article.config.shortUrlId}
-									mainMediaElements={
-										article.mainMediaElements
-									}
-								/>
+								{renderingTarget === 'Web' ? (
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										byline={article.byline}
+										source={article.config.source}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										mainMediaElements={
+											article.mainMediaElements
+										}
+									/>
+								) : (
+									<ArticleMetaApps
+										branding={branding}
+										format={format}
+										pageId={article.pageId}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										mainMediaElements={
+											article.mainMediaElements
+										}
+									/>
+								)}
 								{!!article.affiliateLinksDisclaimer && (
 									<AffiliateDisclaimer />
 								)}
 							</div>
 						</GridItem>
 						<GridItem area="media">
-							{audioData && (
+							{isWeb && audioData && (
 								<Island
 									priority="critical"
 									defer={{ until: 'visible' }}
@@ -291,6 +350,23 @@ export const AudioLayout = (props: WebProps) => {
 										}
 										src={audioData.audioDownloadUrl}
 										mediaId={audioData.mediaId}
+									/>
+								</Island>
+							)}
+							{isApps && audioData && (
+								<Island
+									priority="critical"
+									defer={{ until: 'visible' }}
+								>
+									<AppsAudioPlayer
+										audioDuration={
+											typeof audioData.durationSeconds ===
+											'number'
+												? formatAudioDuration(
+														audioData.durationSeconds,
+												  )
+												: undefined
+										}
 									/>
 								</Island>
 							)}
@@ -348,7 +424,7 @@ export const AudioLayout = (props: WebProps) => {
 									shouldHideAds={article.shouldHideAds}
 									idApiUrl={article.config.idApiUrl}
 								/>
-								{showBodyEndSlot && (
+								{isWeb && showBodyEndSlot && (
 									<Island
 										priority="feature"
 										defer={{ until: 'visible' }}
@@ -376,6 +452,9 @@ export const AudioLayout = (props: WebProps) => {
 											articleEndSlot={
 												!!article.config.switches
 													.articleEndSlot
+											}
+											isSensitive={
+												article.config.isSensitive
 											}
 										/>
 									</Island>
@@ -406,54 +485,57 @@ export const AudioLayout = (props: WebProps) => {
 							</ArticleContainer>
 						</GridItem>
 						<GridItem area="right-column">
-							<div
-								css={css`
-									padding-top: 0;
-									height: 100%;
-									${from.desktop} {
-										/* above 980 */
-										margin-left: 20px;
-										margin-right: -20px;
-										padding-bottom: 41px;
-									}
-									${from.leftCol} {
-										/* above 1140 */
-										margin-left: 0;
-										margin-right: 0;
-									}
-								`}
-							>
-								<RightColumn>
-									<Island
-										priority="feature"
-										defer={{
-											until: 'visible',
-											// Provide a much higher value for the top margin for the intersection observer
-											// This is because the most viewed would otherwise only be lazy loaded when the
-											// bottom of the container intersects with the viewport
-											rootMargin: '700px 100px',
-										}}
-									>
-										<MostViewedRightWithAd
-											format={format}
-											isPaidContent={
-												article.pageType.isPaidContent
-											}
-											renderAds={renderAds}
-											shouldHideReaderRevenue={
-												!!article.config
-													.shouldHideReaderRevenue
-											}
-											shouldHideMostViewed={true}
-										/>
-									</Island>
-								</RightColumn>
-							</div>
+							{isWeb && (
+								<div
+									css={css`
+										padding-top: 0;
+										height: 100%;
+										${from.desktop} {
+											/* above 980 */
+											margin-left: 20px;
+											margin-right: -20px;
+											padding-bottom: 41px;
+										}
+										${from.leftCol} {
+											/* above 1140 */
+											margin-left: 0;
+											margin-right: 0;
+										}
+									`}
+								>
+									<RightColumn>
+										<Island
+											priority="feature"
+											defer={{
+												until: 'visible',
+												// Provide a much higher value for the top margin for the intersection observer
+												// This is because the most viewed would otherwise only be lazy loaded when the
+												// bottom of the container intersects with the viewport
+												rootMargin: '700px 100px',
+											}}
+										>
+											<MostViewedRightWithAd
+												format={format}
+												isPaidContent={
+													article.pageType
+														.isPaidContent
+												}
+												renderAds={renderAds}
+												shouldHideReaderRevenue={
+													!!article.config
+														.shouldHideReaderRevenue
+												}
+												shouldHideMostViewed={true}
+											/>
+										</Island>
+									</RightColumn>
+								</div>
+							)}
 						</GridItem>
 					</AudioGrid>
 				</Section>
 
-				{renderAds && !isLabs && (
+				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -520,7 +602,7 @@ export const AudioLayout = (props: WebProps) => {
 						webURL={article.webURL}
 					/>
 				</Island>
-				{showComments && (
+				{isWeb && showComments && (
 					<Section
 						fullWidth={true}
 						sectionId="comments"
@@ -577,7 +659,7 @@ export const AudioLayout = (props: WebProps) => {
 					</Section>
 				)}
 
-				{renderAds && !isLabs && (
+				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -594,66 +676,89 @@ export const AudioLayout = (props: WebProps) => {
 				)}
 			</main>
 
-			<>
-				{props.NAV.subNavSections && (
-					<Section fullWidth={true} padSides={false} element="aside">
-						<Island
-							priority="enhancement"
-							defer={{ until: 'visible' }}
+			{isWeb && (
+				<>
+					{props.NAV.subNavSections && (
+						<Section
+							fullWidth={true}
+							padSides={false}
+							element="aside"
 						>
-							<SubNav
-								subNavSections={props.NAV.subNavSections}
-								currentNavLink={props.NAV.currentNavLink}
-								position="footer"
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<SubNav
+									subNavSections={props.NAV.subNavSections}
+									currentNavLink={props.NAV.currentNavLink}
+									position="footer"
+								/>
+							</Island>
+						</Section>
+					)}
+					<Section
+						fullWidth={true}
+						padSides={false}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Footer
+							pageFooter={article.pageFooter}
+							selectedPillar={props.NAV.selectedPillar}
+							pillars={props.NAV.pillars}
+							urls={article.nav.readerRevenueLinks.footer}
+							editionId={article.editionId}
+						/>
+					</Section>
+					<BannerWrapper data-print-layout="hide">
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<StickyBottomBanner
+								contentType={article.contentType}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								isMinuteArticle={
+									article.pageType.isMinuteArticle
+								}
+								isPaidContent={article.pageType.isPaidContent}
+								isPreview={!!article.config.isPreview}
+								isSensitive={article.config.isSensitive}
+								pageId={article.pageId}
+								sectionId={article.config.section}
+								shouldHideReaderRevenue={
+									article.shouldHideReaderRevenue
+								}
+								remoteBannerSwitch={
+									!!article.config.switches.remoteBanner
+								}
+								tags={article.tags}
+								host={host}
 							/>
 						</Island>
-					</Section>
-				)}
-				<Section
-					fullWidth={true}
-					padSides={false}
-					backgroundColour={sourcePalette.brand[400]}
-					borderColour={sourcePalette.brand[600]}
-					showSideBorders={false}
-					element="footer"
-				>
-					<Footer
-						pageFooter={article.pageFooter}
-						selectedPillar={props.NAV.selectedPillar}
-						pillars={props.NAV.pillars}
-						urls={article.nav.readerRevenueLinks.footer}
-						editionId={article.editionId}
+					</BannerWrapper>
+					<MobileStickyContainer
+						data-print-layout="hide"
+						contentType={article.contentType}
+						pageId={article.pageId}
 					/>
-				</Section>
-				<BannerWrapper data-print-layout="hide">
-					<Island priority="feature" defer={{ until: 'idle' }}>
-						<StickyBottomBanner
-							contentType={article.contentType}
-							contributionsServiceUrl={contributionsServiceUrl}
-							idApiUrl={article.config.idApiUrl}
-							isMinuteArticle={article.pageType.isMinuteArticle}
-							isPaidContent={article.pageType.isPaidContent}
-							isPreview={!!article.config.isPreview}
-							isSensitive={article.config.isSensitive}
-							pageId={article.pageId}
-							sectionId={article.config.section}
-							shouldHideReaderRevenue={
-								article.shouldHideReaderRevenue
-							}
-							remoteBannerSwitch={
-								!!article.config.switches.remoteBanner
-							}
-							tags={article.tags}
-							host={host}
-						/>
+				</>
+			)}
+			{isApps && (
+				<div
+					css={{
+						backgroundColor: themePalette(
+							'--apps-footer-background',
+						),
+					}}
+				>
+					<Island priority="critical">
+						<AppsFooter design={format.design} />
 					</Island>
-				</BannerWrapper>
-				<MobileStickyContainer
-					data-print-layout="hide"
-					contentType={article.contentType}
-					pageId={article.pageId}
-				/>
-			</>
+				</div>
+			)}
 		</>
 	);
 };

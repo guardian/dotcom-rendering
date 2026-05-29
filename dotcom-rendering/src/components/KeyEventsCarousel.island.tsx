@@ -118,10 +118,14 @@ export const KeyEventsCarousel = ({
 	const isApps = renderingTarget === 'Apps';
 
 	const goPrevious = () => {
-		if (carousel.current) carousel.current.scrollLeft -= cardWidth;
+		if (carousel.current) {
+			carousel.current.scrollLeft -= cardWidth;
+		}
 	};
 	const goNext = () => {
-		if (carousel.current) carousel.current.scrollLeft += cardWidth;
+		if (carousel.current) {
+			carousel.current.scrollLeft += cardWidth;
+		}
 	};
 
 	const onTouchStart = async () => {

@@ -43,6 +43,6 @@ export const Fixtures = {
 export const WithCompetitionNav = {
 	args: {
 		...Fixtures.args,
-		pageId: WomensEuro2025.args.pageId,
+		pageId: WomensEuro2025.input.args.pageId,
 	},
 } satisfies Story;

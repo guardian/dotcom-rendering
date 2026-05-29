@@ -286,14 +286,18 @@ export const AudioAtom = ({
 				e.keyCode === rightArrowKeyCode &&
 				document.activeElement === progressBarEl.current
 			) {
-				if (audioEl.current) audioEl.current.currentTime += 15;
+				if (audioEl.current) {
+					audioEl.current.currentTime += 15;
+				}
 			}
 
 			if (
 				e.keyCode === leftArrowKeyCode &&
 				document.activeElement === progressBarEl.current
 			) {
-				if (audioEl.current) audioEl.current.currentTime -= 15;
+				if (audioEl.current) {
+					audioEl.current.currentTime -= 15;
+				}
 			}
 		};
 
@@ -327,7 +331,6 @@ export const AudioAtom = ({
 				<h4 css={titleStyle}>{title}</h4>
 			</div>
 			<div css={audioBodyStyle}>
-				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- TODO */}
 				<audio
 					css={audioElementStyle}
 					src={urlToUse}

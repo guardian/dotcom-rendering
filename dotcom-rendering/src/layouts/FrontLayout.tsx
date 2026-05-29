@@ -8,7 +8,7 @@ import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.island';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
@@ -40,11 +40,8 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import { ophanComponentId } from '../lib/ophan-helpers';
-import {
-	calculateWhenToStartSlimming,
-	doesPageQualifyForSlimHomepageAbTest,
-} from '../lib/SlimHomepageAbTestHelpers';
 import { useBetaAB } from '../lib/useAB';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
 import type {
@@ -82,14 +79,7 @@ const isToggleable = (
 	index: number,
 	collection: DCRCollectionType,
 	isNetworkFront: boolean,
-	/**
-	 * The show/hide button would be covered by the MostPopularFrontRight component
-	 * in the variant of the Slim Homepage AB test.
-	 */
-	isShowingRightContentForSlimHomepageAbTest: boolean,
 ) => {
-	if (isShowingRightContentForSlimHomepageAbTest) return;
-
 	if (isNetworkFront) {
 		return (
 			collection.displayName.toLowerCase() !== 'headlines' &&
@@ -134,6 +124,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
+	const ab = useBetaAB();
+
+	const isWorldCup2026 =
+		worldCup2026PageIds.includes(pageId) &&
+		ab?.isUserInTest('webx-world-cup-2026-subnav');
+
 	const filteredCollections = front.pressedPage.collections.filter(
 		(collection) => !isHighlights(collection),
 	);
@@ -152,41 +148,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
-
-	const abTests = useBetaAB();
-
-	/**
-	 * The Slim Homepage AB test only runs on /uk and on screen widths >=1300px.
-	 * In variant one and two of this test, the content is slimmed down.
-	 * In variant two of this test, a Most Popular component is inserted into the right-hand side of the page.
-	 * Page skins require slim content and is incompatible with this test, so we do not run
-	 * this test on pages where there is a page skin (a page skin takes precedence).
-	 */
-	const pageQualifiesForSlimHomepageAbTest =
-		doesPageQualifyForSlimHomepageAbTest(
-			front.pressedPage.collections,
-			pageId,
-			hasPageSkin,
-		);
-	const isInSlimHomepageAbTestVariantOne =
-		(pageQualifiesForSlimHomepageAbTest &&
-			abTests?.isUserInTestGroup(
-				'fronts-and-curation-slim-homepage',
-				'variant-one',
-			)) ??
-		false;
-	const isInSlimHomepageAbTestVariantTwo =
-		(pageQualifiesForSlimHomepageAbTest &&
-			abTests?.isUserInTestGroup(
-				'fronts-and-curation-slim-homepage',
-				'variant-two',
-			)) ??
-		false;
-	const isInEitherSlimHomepageAbTestVariant =
-		isInSlimHomepageAbTestVariantOne || isInSlimHomepageAbTestVariantTwo;
-	// Don't slimify sections above the News container.
-	const indexToStartSlimmingFrom =
-		calculateWhenToStartSlimming(filteredCollections);
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -219,7 +180,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						...highlightsCollection.backfill,
 					]}
 					groupedTrails={highlightsCollection.grouped}
-					showAge={false}
+					hideAge={true}
 					serverTime={serverTime}
 					imageLoading="eager"
 					aspectRatio={
@@ -274,11 +235,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					discussionApiUrl={front.config.discussionApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
 					idApiUrl={front.config.idApiUrl}
-					showSubNav={!isPaidContent}
+					showSubNav={!isPaidContent && !isWorldCup2026}
 					showSlimNav={false}
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}
 					pageId={pageId}
+					tagIds={front.trendingTopics?.map(
+						(tag) => tag.properties.id,
+					)}
+					sectionId={front.config.section}
+					contentType={front.config.contentType}
 				/>
 
 				{isPaidContent && (
@@ -308,7 +274,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						/>
 					</Island>
 				)}
-				<DirectoryPageNav pageId={pageId} />
+				<DirectoryPageNavIsland pageId={pageId} />
 
 				{filteredCollections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
@@ -318,7 +284,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					const [trail] = trails;
 
 					// There are some containers that have zero trails. We don't want to render these
-					if (!trail) return null;
+					if (!trail) {
+						return null;
+					}
 
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
@@ -509,7 +477,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 									collection,
 									front.isNetworkFront,
-									isInSlimHomepageAbTestVariantTwo,
 								)}
 								leftContent={decideLeftContent(
 									front,
@@ -545,15 +512,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 								)}
 								isLabs={isLabs(collection)}
-								slimifySectionForSlimHomepageAbTest={
-									isInEitherSlimHomepageAbTestVariant &&
-									index >= indexToStartSlimmingFrom
-								}
-								showRightContentForSlimHomepageAbTest={
-									isInSlimHomepageAbTestVariantTwo
-								}
-								mostViewed={front.mostViewed}
-								deeplyRead={front.deeplyRead}
 							>
 								<DecideContainer
 									trails={trails}
@@ -562,11 +520,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerPalette={
 										collection.containerPalette
 									}
-									showAge={
-										!hideAge.includes(
-											collection.displayName,
-										)
-									}
+									hideAge={hideAge.includes(
+										collection.displayName,
+									)}
 									imageLoading={imageLoading}
 									serverTime={serverTime}
 									aspectRatio={
@@ -578,9 +534,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									isInSlimHomepageAbTestVariant={
-										isInEitherSlimHomepageAbTestVariant
-									}
 								/>
 							</FrontSection>
 

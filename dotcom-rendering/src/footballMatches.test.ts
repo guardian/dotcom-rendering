@@ -118,6 +118,10 @@ describe('footballMatches', () => {
 			Holland: 'The Netherlands',
 			'Ivory Coast': 'Côte d’Ivoire',
 			'Union Saint Gilloise': 'Union Saint-Gilloise',
+			'Bosnia-Herzegovina': 'Bosnia and Herzegovina',
+			'Congo DR': 'DR Congo',
+			Curacao: 'Curaçao',
+			'Czech Republic': 'Czechia',
 		};
 
 		for (const [uncleanName, cleanName] of Object.entries(

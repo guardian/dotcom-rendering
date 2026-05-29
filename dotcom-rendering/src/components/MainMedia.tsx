@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, until } from '@guardian/source/foundations';
+import { breakpoints, space, until } from '@guardian/source/foundations';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -65,6 +65,12 @@ const chooseWrapper = (format: ArticleFormat) => {
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
 					return padBottom;
+				case ArticleDesign.HostedVideo:
+					return css`
+						margin: auto;
+						max-width: ${breakpoints.desktop}px;
+						height: 100%;
+					`;
 				default:
 					return noGutters;
 			}
@@ -113,7 +119,6 @@ export const MainMedia = ({
 		<div css={[mainMedia, chooseWrapper(format)]}>
 			{elements.map((element, index) => (
 				<RenderArticleElement
-					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
 					key={index}
 					format={format}
 					element={element}

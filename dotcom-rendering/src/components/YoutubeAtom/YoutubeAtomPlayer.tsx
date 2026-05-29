@@ -1,7 +1,6 @@
 import { css, Global } from '@emotion/react';
-import type { Participations } from '@guardian/ab-core';
 import { buildImaAdTagUrl } from '@guardian/commercial-core';
-import type { ConsentState } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
 import { log } from '@guardian/libs';
 import {
 	useCallback,
@@ -13,9 +12,11 @@ import {
 import { getVideoClient } from '../../lib/bridgetApi';
 import { getZIndex } from '../../lib/getZIndex';
 import { getAuthStatus } from '../../lib/identity';
+import { useVideoMilestoneTracking } from '../../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail } from '../../lib/video';
 import {
 	customSelfHostedVideoPlayAudioEventName,
+	customYoutubePauseEventName,
 	customYoutubePlayEventName,
 } from '../../lib/video';
 import type { AdTargeting } from '../../types/commercial';
@@ -40,15 +41,12 @@ type Props = {
 	enableAds: boolean;
 	adTargeting: AdTargeting;
 	consentState: ConsentState;
-	abTestParticipations: Participations;
+	abTestParticipations: Record<string, string>;
 	renderingTarget: RenderingTarget;
 };
 
 type ProgressEvents = {
 	hasSentPlayEvent: boolean;
-	hasSent25Event: boolean;
-	hasSent50Event: boolean;
-	hasSent75Event: boolean;
 	hasSentEndEvent: boolean;
 };
 
@@ -159,12 +157,20 @@ const setAppsConfiguration = async (
 };
 
 /**
- * Dispatches a custom play event so that other players listening
- * for this event will stop playing
+ * Dispatch a custom play and pause event so that other components listening
+ * for this event can handle the video state
  */
 const dispatchCustomPlayEvent = (uniqueId: string) => {
 	document.dispatchEvent(
 		new CustomEvent(customYoutubePlayEventName, {
+			detail: { uniqueId },
+		}),
+	);
+};
+
+const dispatchCustomPauseEvent = (uniqueId: string) => {
+	document.dispatchEvent(
+		new CustomEvent(customYoutubePauseEventName, {
 			detail: { uniqueId },
 		}),
 	);
@@ -189,7 +195,8 @@ const createOnStateChangeListener =
 		videoId: string,
 		uniqueId: string,
 		progressEvents: ProgressEvents,
-		eventEmitters: Props['eventEmitters'],
+		sendOphanTrackingEvent: (event: VideoEventKey) => void,
+		trackMilestones: (currentTime: number, duration: number) => void,
 	): YT.PlayerEventHandler<YT.OnStateChangeEvent> =>
 	(event) => {
 		const loggerFrom = 'YoutubeAtomPlayer onStateChange';
@@ -218,7 +225,7 @@ const createOnStateChangeListener =
 					msg: 'start play',
 					event,
 				});
-				for (const eventEmitter of eventEmitters) eventEmitter('play');
+				sendOphanTrackingEvent('play');
 				progressEvents.hasSentPlayEvent = true;
 
 				/**
@@ -234,61 +241,13 @@ const createOnStateChangeListener =
 					msg: 'resume',
 					event,
 				});
-				for (const eventEmitter of eventEmitters) {
-					eventEmitter('resume');
-				}
+				sendOphanTrackingEvent('resume');
 			}
 
 			const checkProgress = () => {
-				const currentTime = player.getCurrentTime();
-				const duration = player.getDuration();
+				trackMilestones(player.getCurrentTime(), player.getDuration());
 
-				if (!duration || !currentTime) return;
-
-				const percentPlayed = (currentTime / duration) * 100;
-
-				if (!progressEvents.hasSent25Event && 25 < percentPlayed) {
-					log('dotcom', {
-						from: loggerFrom,
-						videoId,
-						msg: 'played 25%',
-						event,
-					});
-					for (const eventEmitter of eventEmitters) {
-						eventEmitter('25');
-					}
-					progressEvents.hasSent25Event = true;
-				}
-
-				if (!progressEvents.hasSent50Event && 50 < percentPlayed) {
-					log('dotcom', {
-						from: loggerFrom,
-						videoId,
-						msg: 'played 50%',
-						event,
-					});
-					for (const eventEmitter of eventEmitters) {
-						eventEmitter('50');
-					}
-					progressEvents.hasSent50Event = true;
-				}
-
-				if (!progressEvents.hasSent75Event && 75 < percentPlayed) {
-					log('dotcom', {
-						from: loggerFrom,
-						videoId,
-						msg: 'played 75%',
-						event,
-					});
-					for (const eventEmitter of eventEmitters) {
-						eventEmitter('75');
-					}
-					progressEvents.hasSent75Event = true;
-				}
-
-				const currentPlayerState = player.getPlayerState();
-
-				if (currentPlayerState !== YT.PlayerState.ENDED) {
+				if (player.getPlayerState() !== YT.PlayerState.ENDED) {
 					/**
 					 * Set a timeout to check progress again in the future
 					 */
@@ -300,13 +259,15 @@ const createOnStateChangeListener =
 		}
 
 		if (event.data === YT.PlayerState.PAUSED) {
+			dispatchCustomPauseEvent(uniqueId);
+
 			log('dotcom', {
 				from: loggerFrom,
 				videoId,
 				msg: 'pause',
 				event,
 			});
-			for (const eventEmitter of eventEmitters) eventEmitter('pause');
+			sendOphanTrackingEvent('pause');
 		}
 
 		if (event.data === YT.PlayerState.CUED) {
@@ -316,7 +277,7 @@ const createOnStateChangeListener =
 				msg: 'cued',
 				event,
 			});
-			for (const eventEmitter of eventEmitters) eventEmitter('cued');
+			sendOphanTrackingEvent('cued');
 			progressEvents.hasSentPlayEvent = false;
 		}
 
@@ -324,13 +285,15 @@ const createOnStateChangeListener =
 			event.data === YT.PlayerState.ENDED &&
 			!progressEvents.hasSentEndEvent
 		) {
+			dispatchCustomPauseEvent(uniqueId);
+
 			log('dotcom', {
 				from: loggerFrom,
 				videoId,
 				msg: 'ended',
 				event,
 			});
-			for (const eventEmitter of eventEmitters) eventEmitter('end');
+			sendOphanTrackingEvent('end');
 			progressEvents.hasSentEndEvent = true;
 			progressEvents.hasSentPlayEvent = false;
 		}
@@ -369,7 +332,7 @@ const createOnReadyListener =
 const createImaAdsRequestCallback = (
 	adTargeting: AdTargeting | undefined,
 	consentState: ConsentState,
-	abTestParticipations: Participations,
+	abTestParticipations: Record<string, string>,
 	isSignedIn: boolean,
 ) => {
 	const adTargetingEnabled = adTargeting && !adTargeting.disableAds;
@@ -385,7 +348,7 @@ const createImaAdsRequestCallback = (
 			adUnit,
 			customParams,
 			consentState,
-			clientSideParticipations: abTestParticipations,
+			abTestParticipations,
 			isSignedIn,
 		});
 		adsRenderingSettings.useStyledNonLinearAds = true;
@@ -470,11 +433,18 @@ export const YoutubeAtomPlayer = ({
 	 * Does not cause re-renders on update
 	 */
 	const player = useRef<YouTubePlayer>();
+	const sendOphanTrackingEvent = useCallback(
+		(event: VideoEventKey) => {
+			for (const eventEmitter of eventEmitters) {
+				eventEmitter(event);
+			}
+		},
+		[eventEmitters],
+	);
+	const trackMilestones = useVideoMilestoneTracking(sendOphanTrackingEvent);
+
 	const progressEvents = useRef<ProgressEvents>({
 		hasSentPlayEvent: false,
-		hasSent25Event: false,
-		hasSent50Event: false,
-		hasSent75Event: false,
 		hasSentEndEvent: false,
 	});
 
@@ -516,7 +486,8 @@ export const YoutubeAtomPlayer = ({
 					videoId,
 					uniqueId,
 					progressEvents.current,
-					eventEmitters,
+					sendOphanTrackingEvent,
+					trackMilestones,
 				);
 
 				/**
@@ -668,15 +639,16 @@ export const YoutubeAtomPlayer = ({
 			adTargeting,
 			autoPlay,
 			consentState,
-			enableAds,
-			eventEmitters,
 			deactivateVideo,
+			enableAds,
+			sendOphanTrackingEvent,
 			height,
 			id,
 			onReady,
 			origin,
 			playerReadyCallback,
 			renderingTarget,
+			trackMilestones,
 			uniqueId,
 			videoId,
 			width,

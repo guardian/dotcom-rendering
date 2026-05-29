@@ -1152,11 +1152,15 @@ export const ContainerOverrides = ({ containerPalette, children }: Props) => {
 	const [isStorybook, setIsStorybook] = useState(false);
 
 	useEffect(() => {
-		if (!('STORIES' in window)) return;
+		if (!('STORIES' in window)) {
+			return;
+		}
 		setIsStorybook(true);
 	}, []);
 
-	if (!containerPalette) return children;
+	if (!containerPalette) {
+		return children;
+	}
 
 	return (
 		<div

@@ -4,7 +4,7 @@ import { ConfigProvider } from './ConfigContext';
 import { responseWithTwoTabs } from './MostViewed.mocks';
 import { MostViewedFooterData } from './MostViewedFooterData.island';
 
-const useApi: { [key: string]: any } = useApi_;
+const useApi: Record<string, any> = useApi_;
 
 jest.mock('../lib/useApi', () => ({
 	useApi: jest.fn(),

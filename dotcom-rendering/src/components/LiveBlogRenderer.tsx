@@ -159,6 +159,7 @@ export const LiveBlogRenderer = ({
 						pageId={pageId}
 						keywordIds={keywordIds}
 						renderingTarget={renderingTarget}
+						isSensitive={isSensitive}
 					/>
 				</Island>
 			)}

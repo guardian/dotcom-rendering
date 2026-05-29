@@ -208,7 +208,9 @@ export const YoutubeAtomSticky = ({
 	 * useEffect for the sticky state
 	 */
 	useEffect(() => {
-		if (shouldStick) setIsSticky(isActive && !isIntersecting && !isClosed);
+		if (shouldStick) {
+			setIsSticky(isActive && !isIntersecting && !isClosed);
+		}
 	}, [isIntersecting, isActive, shouldStick, isClosed]);
 
 	/**

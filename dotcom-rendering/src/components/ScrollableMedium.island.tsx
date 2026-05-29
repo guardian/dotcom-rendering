@@ -1,5 +1,6 @@
 import { until } from '@guardian/source/foundations';
 import { isMediaCard } from '../lib/cardHelpers';
+import { isWithinTwelveHours } from '../lib/formatTime';
 import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import type {
 	AspectRatio,
@@ -12,12 +13,11 @@ import { ScrollableCarousel } from './ScrollableCarousel';
 type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
+	hideAge: boolean;
 	serverTime?: number;
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	sectionId: string;
-	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 /**
@@ -32,10 +32,9 @@ export const ScrollableMedium = ({
 	containerPalette,
 	serverTime,
 	imageLoading,
-	showAge,
+	hideAge,
 	aspectRatio,
 	sectionId,
-	isInSlimHomepageAbTestVariant,
 }: Props) => {
 	const isBelowTabletBreakpoint = useMatchMedia(
 		removeMediaRulePrefix(until.tablet),
@@ -70,13 +69,11 @@ export const ScrollableMedium = ({
 							serverTime={serverTime}
 							containerPalette={containerPalette}
 							containerType="scrollable/medium"
-							showAge={!!showAge}
-							headlineSizes={{
-								...headlineSizes,
-								wide: isInSlimHomepageAbTestVariant
-									? headlineSizes.tablet
-									: headlineSizes.desktop,
-							}}
+							showAge={
+								!hideAge &&
+								isWithinTwelveHours(trail.webPublicationDate)
+							}
+							headlineSizes={headlineSizes}
 							mediaPositionOnDesktop={imagePosition}
 							mediaPositionOnMobile={imagePosition}
 							mediaSize="scrollable-medium"

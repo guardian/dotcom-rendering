@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
-import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
+import type { AbTest } from '@guardian/ophan-tracker-js';
 import { space, textSans14, until } from '@guardian/source/foundations';
 import {
 	Button,
@@ -19,11 +19,21 @@ import { useEffect, useRef, useState } from 'react';
 // that version will compile and render but is non-functional.
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
-import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
+import {
+	getEffectiveMarketingOptIn,
+	getMarketingOptInType,
+} from '../lib/newsletter-marketing-opt-in';
+import {
+	EVENT_DESCRIPTION_TO_ACTION,
+	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	type NewsletterEventDescription,
+	sendNewsletterSignupEvent,
+} from '../lib/newsletterSignupTracking';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
+import { useHideMarketingToggleForCountry } from '../lib/useHideMarketingToggleForCountry';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -36,12 +46,10 @@ import { useConfig } from './ConfigContext';
 // be accurately predicated for every breakpoint).
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
-type OphanABTest = ComponentEvent['abTest'];
-
 type Props = {
 	newsletterId: string;
 	successDescription: string;
-	abTest?: OphanABTest;
+	abTest?: AbTest;
 };
 
 const formStyles = css`
@@ -138,6 +146,7 @@ const buildFormData = (
 	token: string,
 	marketingOptIn?: boolean,
 	browserId?: string,
+	marketingOptInHiddenForCountry?: boolean,
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -157,6 +166,10 @@ const buildFormData = (
 		formData.append('marketing', marketingOptIn ? 'true' : 'false');
 	}
 
+	if (marketingOptInHiddenForCountry === true) {
+		formData.append('marketingOptInHidden', 'true');
+	}
+
 	if (browserId !== undefined) {
 		formData.append('browserId', browserId);
 	}
@@ -164,11 +177,20 @@ const buildFormData = (
 	return formData;
 };
 
-const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
+const resolveEmailForSignedInUser = async (
+	isSignedIn: boolean | 'Pending',
+): Promise<string | undefined> => {
+	if (isSignedIn !== true) {
+		return;
+	}
 	const { idApiUrl } = window.guardian.config.page;
-	if (!idApiUrl) return;
+	if (!idApiUrl) {
+		return;
+	}
 	const fetchedEmail = await lazyFetchEmailWithTimeout()();
-	if (!fetchedEmail) return;
+	if (!fetchedEmail) {
+		return;
+	}
 	return fetchedEmail;
 };
 
@@ -197,71 +219,26 @@ const postFormData = async (
 	});
 };
 
-type EventDescription =
-	| 'click-button'
-	| 'form-submission'
-	| 'submission-confirmed'
-	| 'submission-failed'
-	| 'open-captcha'
-	| 'captcha-load-error'
-	| 'form-submit-error'
-	| 'captcha-not-passed'
-	| 'captcha-passed';
-
 const sendTracking = (
 	newsletterId: string,
-	eventDescription: EventDescription,
+	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
-	abTest?: OphanABTest,
+	isSignedIn: boolean | 'Pending',
+	abTest?: AbTest,
+	extraDetails?: Record<string, unknown>,
 ): void => {
-	let action: TAction = 'CLICK';
-
-	switch (eventDescription) {
-		case 'form-submission':
-		case 'captcha-not-passed':
-		case 'captcha-passed':
-			action = 'ANSWER';
-			break;
-		case 'submission-confirmed':
-			action = 'SUBSCRIBE';
-			break;
-		case 'captcha-load-error':
-		case 'form-submit-error':
-		case 'submission-failed':
-			action = 'CLOSE';
-			break;
-		case 'open-captcha':
-			action = 'EXPAND';
-			break;
-		case 'click-button':
-		default:
-			action = 'CLICK';
-			break;
-	}
-
-	// The data team use a custom date format for timestamps,
-	// (yyy-MM-dd hh:mm:ss.ssssss UTC)
-	// and will cast the integer value  to this
-	// format at their end
-	const value = JSON.stringify({
-		eventDescription,
-		newsletterId,
-		timestamp: Date.now(),
-	});
-
-	void submitComponentEvent(
-		{
-			action,
-			value,
-			//check if this can be used or needs to be added
-			component: {
-				componentType: 'NEWSLETTER_SUBSCRIPTION',
-				id: `AR SecureSignup ${newsletterId}`,
-			},
-			abTest,
-		},
+	sendNewsletterSignupEvent({
+		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
+		identityName: newsletterId,
+		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.control(newsletterId),
 		renderingTarget,
-	);
+		value: {
+			...extraDetails,
+			eventDescription,
+			isSignedIn,
+		},
+		abTest,
+	});
 };
 
 /**
@@ -295,6 +272,9 @@ export const SecureSignup = ({
 	);
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
+	const hideMarketingToggle = useHideMarketingToggleForCountry();
+	const marketingOptInHiddenForCountry =
+		hideMarketingToggle && isSignedIn === false;
 
 	useEffect(() => {
 		if (isSignedIn !== 'Pending' && !isSignedIn) {
@@ -304,11 +284,16 @@ export const SecureSignup = ({
 
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
-		void resolveEmailIfSignedIn().then((email) => {
-			setUserEmail(email);
-			setHideEmailInput(isString(email));
-		});
 	}, []);
+
+	useEffect(() => {
+		if (isSignedIn === true) {
+			void resolveEmailForSignedInUser(isSignedIn).then((email) => {
+				setUserEmail(email);
+				setHideEmailInput(isString(email));
+			});
+		}
+	}, [isSignedIn]);
 	const { renderingTarget } = useConfig();
 	const browserId = useBrowserId();
 
@@ -318,15 +303,33 @@ export const SecureSignup = ({
 		const input: HTMLInputElement | null =
 			document.querySelector('input[type="email"]') ?? null;
 		const emailAddress: string = input?.value ?? '';
+		const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
+			marketingOptInHiddenForCountry,
+			isSignedIn,
+			marketingOptIn,
+		});
+		const marketingOptInType = getMarketingOptInType({
+			marketingOptInHiddenForCountry,
+			isSignedIn,
+			effectiveMarketingOptIn,
+		});
 
-		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
+		sendTracking(
+			newsletterId,
+			'form-submission',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+			marketingOptInType ? { marketingOptInType } : undefined,
+		);
 
 		const formData = buildFormData(
 			emailAddress,
 			newsletterId,
 			token,
-			marketingOptIn,
+			effectiveMarketingOptIn,
 			browserId,
+			marketingOptInHiddenForCountry ? true : undefined,
 		);
 
 		const response = await postFormData(
@@ -349,7 +352,9 @@ export const SecureSignup = ({
 			newsletterId,
 			response.ok ? 'submission-confirmed' : 'submission-failed',
 			renderingTarget,
+			isSignedIn,
 			abTest,
+			marketingOptInType ? { marketingOptInType } : undefined,
 		);
 	};
 
@@ -364,6 +369,7 @@ export const SecureSignup = ({
 			newsletterId,
 			'captcha-load-error',
 			renderingTarget,
+			isSignedIn,
 			abTest,
 		);
 		setErrorMessage(`Sorry, the reCAPTCHA failed to load.`);
@@ -376,19 +382,26 @@ export const SecureSignup = ({
 				newsletterId,
 				'captcha-not-passed',
 				renderingTarget,
+				isSignedIn,
 				abTest,
 			);
 			return;
 		}
-		sendTracking(newsletterId, 'captcha-passed', renderingTarget, abTest);
+		sendTracking(
+			newsletterId,
+			'captcha-passed',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
-			// eslint-disable-next-line no-console -- unexpected error
 			console.error(error);
 			sendTracking(
 				newsletterId,
 				'form-submit-error',
 				renderingTarget,
+				isSignedIn,
 				abTest,
 			);
 			setErrorMessage(`Sorry, there was an error signing you up.`);
@@ -397,7 +410,23 @@ export const SecureSignup = ({
 	};
 
 	const handleClick = (): void => {
-		sendTracking(newsletterId, 'click-button', renderingTarget, abTest);
+		sendTracking(
+			newsletterId,
+			'click-button',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
+	};
+
+	const handleEmailFocus = (): void => {
+		sendTracking(
+			newsletterId,
+			'email-input-focused',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
 	};
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -406,7 +435,13 @@ export const SecureSignup = ({
 			return;
 		}
 		setErrorMessage(undefined);
-		sendTracking(newsletterId, 'open-captcha', renderingTarget, abTest);
+		sendTracking(
+			newsletterId,
+			'open-captcha',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
 		recaptchaRef.current?.execute();
 	};
 
@@ -432,8 +467,9 @@ export const SecureSignup = ({
 					type="email"
 					value={userEmail ?? ''}
 					onChange={(e) => setUserEmail(e.target.value)}
+					onFocus={handleEmailFocus}
 				/>
-				{isSignedIn === false && (
+				{isSignedIn !== true && !marketingOptInHiddenForCountry && (
 					<CheckboxGroup
 						name="marketing-preferences"
 						label="Marketing preferences"

@@ -33,10 +33,12 @@ export const StackedProducts = ({
 	products,
 	heading,
 	format,
+	showAllProducts,
 }: {
 	products: ProductBlockElement[];
 	heading: string;
 	format: ArticleFormat;
+	showAllProducts: boolean;
 }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	return (
@@ -54,7 +56,7 @@ export const StackedProducts = ({
 				<Subheading format={format} topPadding={false}>
 					{heading}
 				</Subheading>
-				{products.length > cardsShownByDefault && (
+				{products.length > cardsShownByDefault && !showAllProducts && (
 					<p css={cardCounterStyles}>
 						{isExpanded
 							? products.length
@@ -79,10 +81,14 @@ export const StackedProducts = ({
 				{products.map((product: ProductBlockElement, index) => (
 					<div
 						key={index}
-						data-component={`at-a-glance-stacked-card-${index + 1}`}
+						data-component={`at-a-glance-stacked-card-${
+							showAllProducts ? 'expanded' : 'default'
+						}-${index + 1}`}
 						style={{
 							display:
-								!isExpanded && index >= cardsShownByDefault
+								!isExpanded &&
+								index >= cardsShownByDefault &&
+								!showAllProducts
 									? 'none'
 									: 'block',
 						}}
@@ -95,7 +101,7 @@ export const StackedProducts = ({
 				))}
 			</div>
 
-			{products.length > cardsShownByDefault && (
+			{products.length > cardsShownByDefault && !showAllProducts && (
 				<LinkButton
 					onClick={() => setIsExpanded(!isExpanded)}
 					cssOverrides={showAllButtonStyles}

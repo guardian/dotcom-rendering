@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import preview from '../../../.storybook/preview';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import { GuardianContributor, GuardianPick, GuardianStaff } from './Badges';
 
-export default {
+const meta = preview.meta({
 	title: 'Discussion/Badges',
+
 	decorators: splitTheme([
 		{
 			display: ArticleDisplay.Standard,
@@ -12,9 +14,9 @@ export default {
 			theme: Pillar.Opinion,
 		},
 	]),
-};
+});
 
-export const Badges = () => (
+export const Badges = meta.story(() => (
 	<div
 		css={css`
 			padding: 6px;
@@ -24,4 +26,4 @@ export const Badges = () => (
 		<GuardianContributor />
 		<GuardianPick />
 	</div>
-);
+));

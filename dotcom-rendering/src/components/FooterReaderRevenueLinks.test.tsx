@@ -3,9 +3,8 @@ import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../li
 import { ConfigProvider } from './ConfigContext';
 import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.island';
 
-const shouldHideSupportMessaging: {
-	[key: string]: any;
-} = shouldHideSupportMessaging_;
+const shouldHideSupportMessaging: Record<string, any> =
+	shouldHideSupportMessaging_;
 
 // @swc/jest does not seem to handle dynamic import of ophan.ng.js
 // We get a “define is not defined” in Jest, but it seems to work in browsers

@@ -310,7 +310,6 @@ export const FiveCardWithSingleBranding = () => {
 				trails={singleBrandedTrails}
 				speed="fast"
 				imageLoading="eager"
-				isTagPage={true}
 				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>
@@ -325,7 +324,6 @@ export const FiveCardWithMultipleBranding = () => {
 				trails={multipleBrandedTrails}
 				speed="fast"
 				imageLoading="eager"
-				isTagPage={true}
 				aspectRatio={ASPECT_RATIO}
 			/>
 		</FrontSection>

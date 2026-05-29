@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { images } from '../../fixtures/generated/images';
 import type { ArticleFormat } from '../lib/articleFormat';
 import {
@@ -16,15 +16,11 @@ import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
 import { MultiBylines } from './MultiBylines';
 
-const meta = {
+const meta = preview.meta({
 	component: MultiBylines,
 	title: 'Components/MultiBylines',
 	decorators: [centreColumnDecorator],
-} satisfies Meta<typeof MultiBylines>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
+});
 
 const testTextElement: TextBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -59,7 +55,7 @@ const multiBylineWithNoContributorLink = {
 		"<span data-contributor-rel='author'>Steve McQueen</span> on Paul Gilroy",
 };
 
-export const ThemeVariations = {
+export const ThemeVariations = meta.story({
 	args: {
 		multiBylines: [
 			multiBylineWithLongHeader,
@@ -100,15 +96,15 @@ export const ThemeVariations = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
 // Audio designs don't support multi-bylines
 const isNotAudioDesign = (format: ArticleFormat) =>
 	format.design !== ArticleDesign.Audio;
 
-export const DesignVariations = {
+export const DesignVariations = meta.story({
 	args: {
-		...ThemeVariations.args,
+		...ThemeVariations.input.args,
 		multiBylines: [multiBylineWithLongHeader],
 	},
 	parameters: {
@@ -122,18 +118,18 @@ export const DesignVariations = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const DesignVariationsWithNoContributorLink = {
+export const DesignVariationsWithNoContributorLink = meta.story({
 	args: {
-		...ThemeVariations.args,
+		...ThemeVariations.input.args,
 		multiBylines: [multiBylineWithNoContributorLink],
 	},
-	parameters: DesignVariations.parameters,
-} satisfies Story;
+	parameters: DesignVariations.input.parameters,
+});
 
-export const OtherVariations = {
-	args: ThemeVariations.args,
+export const OtherVariations = meta.story({
+	args: ThemeVariations.input.args,
 	parameters: {
 		formats: [
 			{
@@ -168,11 +164,11 @@ export const OtherVariations = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const Images = {
+export const Images = meta.story({
 	args: {
-		...ThemeVariations.args,
+		...ThemeVariations.input.args,
 		format: {
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
@@ -215,11 +211,11 @@ export const Images = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const WithSeparatorLine = {
+export const WithSeparatorLine = meta.story({
 	args: {
-		...ThemeVariations.args,
+		...ThemeVariations.input.args,
 		isLastElement: false,
 		format: {
 			design: ArticleDesign.Standard,
@@ -227,4 +223,4 @@ export const WithSeparatorLine = {
 			theme: Pillar.Culture,
 		},
 	},
-} satisfies Story;
+});

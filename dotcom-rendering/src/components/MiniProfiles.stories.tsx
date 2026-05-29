@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { images } from '../../fixtures/generated/images';
 import {
 	ArticleDesign,
@@ -15,14 +15,10 @@ import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
 import { MiniProfiles } from './MiniProfiles';
 
-const meta = {
+const meta = preview.meta({
 	component: MiniProfiles,
 	title: 'Components/MiniProfiles',
-} satisfies Meta<typeof MiniProfiles>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
+});
 
 const testTextElement: TextBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -39,7 +35,7 @@ const testBioText = testParagraph + testListHtml;
 const endNoteText =
 	'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eu auctor ex.';
 
-export const ThemeVariations = {
+export const ThemeVariations = meta.story({
 	args: {
 		miniProfiles: [
 			{
@@ -90,14 +86,14 @@ export const ThemeVariations = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
 // Audio designs don't support mini profiles
 const isNotAudioDesign = (format: ArticleFormat) =>
 	format.design !== ArticleDesign.Audio;
 
-export const DesignVariations = {
-	args: ThemeVariations.args,
+export const DesignVariations = meta.story({
+	args: ThemeVariations.input.args,
 	decorators: [centreColumnDecorator],
 	parameters: {
 		formats: getAllDesigns({
@@ -110,10 +106,10 @@ export const DesignVariations = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const OtherVariations = {
-	args: ThemeVariations.args,
+export const OtherVariations = meta.story({
+	args: ThemeVariations.input.args,
 	decorators: [centreColumnDecorator],
 	parameters: {
 		formats: [
@@ -149,11 +145,11 @@ export const OtherVariations = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const Images = {
+export const Images = meta.story({
 	args: {
-		...ThemeVariations.args,
+		...ThemeVariations.input.args,
 		format: {
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
@@ -192,11 +188,11 @@ export const Images = {
 			},
 		},
 	},
-} satisfies Story;
+});
 
-export const WithSeparatorLine = {
+export const WithSeparatorLine = meta.story({
 	args: {
-		...ThemeVariations.args,
+		...ThemeVariations.input.args,
 		isLastElement: false,
 		format: {
 			design: ArticleDesign.Standard,
@@ -205,11 +201,11 @@ export const WithSeparatorLine = {
 		},
 	},
 	decorators: [centreColumnDecorator],
-} satisfies Story;
+});
 
-export const Sectioned = {
+export const Sectioned = meta.story({
 	args: {
-		...ThemeVariations.args,
+		...ThemeVariations.input.args,
 		sectioned: true,
 		format: {
 			design: ArticleDesign.Standard,
@@ -218,4 +214,4 @@ export const Sectioned = {
 		},
 	},
 	decorators: [centreColumnDecorator],
-} satisfies Story;
+});

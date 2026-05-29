@@ -23,7 +23,9 @@ export const FormatBoundary = ({ format, children }: Props) => {
 
 	const [isStorybook, setIsStorybook] = useState(false);
 	useEffect(() => {
-		if (!('STORIES' in window)) return;
+		if (!('STORIES' in window)) {
+			return;
+		}
 		setIsStorybook(true);
 	}, []);
 

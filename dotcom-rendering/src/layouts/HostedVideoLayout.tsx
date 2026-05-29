@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	breakpoints,
 	from,
+	palette,
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
@@ -9,9 +10,9 @@ import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { CallToActionAtom } from '../components/CallToActionAtom';
-import { Caption } from '../components/Caption';
+import { FetchHostedOnwards } from '../components/FetchHostedOnwards.island';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
-import { HostedContentHeader } from '../components/HostedContentHeader';
+import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
@@ -20,10 +21,12 @@ import { Standfirst } from '../components/Standfirst';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideMainMediaCaption } from '../lib/decide-caption';
-import { palette } from '../palette';
+import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
+import type { Block } from '../types/blocks';
+import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { overridePaletteColours } from './HostedArticleLayout';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -40,114 +43,109 @@ interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
 
-const headerStyles = css`
+const containerStyles = css`
 	${grid.container}
-	${grid.column.all}
-	grid-row: 1;
-`;
 
-const contentStyles = css`
-	${grid.container}
-	${grid.column.all}
-	grid-row: 2;
+	${from.desktop} {
+		${grid.paddedContainer}
+	}
 `;
 
 const mainMediaStyles = css`
 	${grid.column.all}
-	grid-row: 1;
+	grid-row-start: 1;
+	background-color: ${palette.neutral[10]};
+
+	z-index: 1;
 	overflow: hidden;
-	max-height: 400px;
-
-	${from.wide} {
-		width: ${breakpoints.wide}px;
-		margin: auto;
-	}
-`;
-
-const captionStyles = css`
-	${grid.column.centre}
-	grid-row: 2;
-
-	${from.desktop} {
-		${grid.span(12, 2)}
-	}
-	${from.leftCol} {
-		${grid.column.right}
-	}
+	max-height: 600px;
 `;
 
 const headlineStyles = css`
-	margin-top: ${space[4]}px;
 	${grid.column.centre}
+	grid-row-start: 4;
+
+	margin-top: ${space[4]}px;
+
 	${from.desktop} {
 		${grid.span(4, 8)}
-		grid-row: 2;
+		grid-row-start: 2;
 	}
+
 	${from.leftCol} {
 		${grid.column.centre}
 	}
 `;
+
 const metaStyles = css`
-	margin-top: ${space[4]}px;
-	padding: ${space[1]}px;
 	${grid.column.centre}
-	grid-row: 3;
+	grid-row-start: 3;
+
 	${from.desktop} {
-		grid-row: 2;
+		grid-row-start: 2;
 	}
+
 	${from.leftCol} {
 		${grid.column.left}
 	}
 `;
 
-const standfirstStyles = css`
+const shareButtonStyles = css`
+	margin-top: ${space[4]}px;
+	padding: ${space[1]}px;
+`;
+
+const standfirstAndArticleBodyStyles = css`
 	${grid.column.centre}
-	grid-row: 1;
+	grid-row-start: 5;
+
 	${from.desktop} {
 		${grid.between(4, 'right-column-end')}
+		grid-row-start: 3;
 	}
+
 	${from.leftCol} {
 		${grid.column.centre}
 	}
 `;
 
 const articleBodyStyles = css`
-	${grid.column.centre}
-	grid-row:auto;
+	margin-bottom: ${space[6]}px;
+
 	${from.desktop} {
-		${grid.between(4, 'right-column-end')}
-		grid-row: 2;
+		margin-bottom: ${space[10]}px;
 	}
-	${from.leftCol} {
-		${grid.column.centre}
-		grid-row: 2;
-	}
-	padding-bottom: 24px;
 `;
 
 const onwardContentStyles = css`
-	height: 20px;
-	background-color: lightgrey;
-
 	${grid.column.centre}
-	grid-row:auto;
+	grid-row-start: 6;
+
+	margin-bottom: ${space[5]}px;
 
 	${from.desktop} {
 		${grid.span(4, 8)}
-		grid-row: 3;
+		margin-bottom: ${space[10]}px;
 	}
+
 	${from.leftCol} {
+		grid-row: 2 / 5;
+		margin-top: ${space[4]}px;
 		${grid.column.right}
-		grid-row: 1
 	}
-	margin-bottom: 24px;
 `;
 
 const ctaStyles = css`
+	z-index: 1;
 	${grid.column.all}
-	grid-row:auto;
+	grid-row-start: 7;
+
 	overflow: hidden;
 	max-height: 400px;
+
+	${from.leftCol} {
+		grid-row-start: unset;
+	}
 	${from.wide} {
 		width: ${breakpoints.wide}px;
 		margin: auto;
@@ -156,25 +154,10 @@ const ctaStyles = css`
 
 const sideBorders = css`
 	${from.desktop} {
-		position: relative;
-		::before {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			content: '';
-			border-left: 1px solid ${palette('--article-border')};
-			border-right: 1px solid ${palette('--article-border')};
-			left: -${grid.mobileColumnGap};
-			right: -${grid.mobileColumnGap};
-			${from.mobileLandscape} {
-				left: -${grid.columnGap};
-				right: -${grid.columnGap};
-			}
-			${grid.between('centre-column-start', 'right-column-end')}
-			${from.leftCol} {
-				${grid.between('left-column-start', 'right-column-end')}
-			}
-		}
+		/* box-sizing property needed to prevent the width of the grid taking into account the border width */
+		box-sizing: content-box;
+		border-left: 1px solid ${themePalette('--article-border')};
+		border-right: 1px solid ${themePalette('--article-border')};
 	}
 `;
 
@@ -182,15 +165,26 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 	const {
 		content: { frontendData },
 		format,
+		renderingTarget,
 	} = props;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
 
-	const mainMedia = frontendData.mainMediaElements[0];
-	const mainMediaCaptionText = decideMainMediaCaption(mainMedia);
-
 	const { branding } =
 		frontendData.commercialProperties[frontendData.editionId];
+
+	const isCtaElement = (element: FEElement) =>
+		element._type ===
+		'model.dotcomrendering.pageElements.CallToActionAtomBlockElement';
+
+	// The CTA atom is extracted and rendered separately at the end of the article body
+	const cta = frontendData.blocks[0]?.elements.find(isCtaElement);
+
+	// Block elements without CTA atoms
+	const blocks: Block[] = frontendData.blocks.map((block) => ({
+		...block,
+		elements: block.elements.filter((element) => !isCtaElement(element)),
+	}));
 
 	return (
 		<>
@@ -205,43 +199,40 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 						padSides={true}
 						element="header"
 					>
-						<HostedContentHeader branding={branding} />
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<HostedContentHeader branding={branding} />
+						</Island>
 					</Section>
 				</Stuck>
 			) : null}
 
-			<main data-layout="HostedVideoLayout">
-				<article css={[grid.container, sideBorders]}>
-					<header css={headerStyles}>
-						<div css={mainMediaStyles}>
-							<MainMedia
-								format={format}
-								elements={frontendData.mainMediaElements}
-								host={frontendData.config.host}
-								pageId={frontendData.pageId}
-								webTitle={frontendData.webTitle}
-								ajaxUrl={frontendData.config.ajaxUrl}
-								abTests={frontendData.config.abTests}
-								switches={frontendData.config.switches}
-								isAdFreeUser={frontendData.isAdFreeUser}
-								isSensitive={frontendData.config.isSensitive}
-								editionId={frontendData.editionId}
-								hideCaption={true}
-								shouldHideAds={true}
-								contentType={frontendData.contentType}
-							/>
-						</div>
+			<main
+				data-layout="HostedVideoLayout"
+				css={overridePaletteColours(branding?.hostedCampaignColour)}
+			>
+				<article css={[containerStyles, sideBorders]}>
+					<div css={mainMediaStyles}>
+						<MainMedia
+							format={format}
+							elements={frontendData.mainMediaElements}
+							host={frontendData.config.host}
+							pageId={frontendData.pageId}
+							webTitle={frontendData.webTitle}
+							ajaxUrl={frontendData.config.ajaxUrl}
+							abTests={frontendData.config.abTests}
+							switches={frontendData.config.switches}
+							isAdFreeUser={frontendData.isAdFreeUser}
+							isSensitive={frontendData.config.isSensitive}
+							editionId={frontendData.editionId}
+							hideCaption={true}
+							shouldHideAds={true}
+							contentType={frontendData.contentType}
+						/>
+					</div>
 
-						<div css={captionStyles}>
-							<Caption
-								captionText={mainMediaCaptionText}
-								format={format}
-								isMainMedia={true}
-							/>
-						</div>
-
-						{props.renderingTarget === 'Web' && (
-							<div data-print-layout="hide" css={metaStyles}>
+					<div data-print-layout="hide" css={metaStyles}>
+						{renderingTarget === 'Web' && (
+							<div css={shareButtonStyles}>
 								<Island
 									priority="feature"
 									defer={{ until: 'visible' }}
@@ -255,33 +246,31 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 								</Island>
 							</div>
 						)}
+					</div>
 
-						<div css={headlineStyles}>
-							<ArticleHeadline
-								format={format}
-								headlineString={frontendData.headline}
-								tags={frontendData.tags}
-								byline={frontendData.byline}
-								webPublicationDateDeprecated={
-									frontendData.webPublicationDateDeprecated
-								}
-							/>
-						</div>
-					</header>
+					<div css={headlineStyles}>
+						<ArticleHeadline
+							format={format}
+							headlineString={frontendData.headline}
+							tags={frontendData.tags}
+							byline={frontendData.byline}
+							webPublicationDateDeprecated={
+								frontendData.webPublicationDateDeprecated
+							}
+						/>
+					</div>
 
-					<div css={contentStyles}>
-						<div css={standfirstStyles}>
-							<Standfirst
-								format={format}
-								standfirst={frontendData.standfirst}
-							/>
-						</div>
+					<div css={standfirstAndArticleBodyStyles}>
+						<Standfirst
+							format={format}
+							standfirst={frontendData.standfirst}
+						/>
 
 						<div css={articleBodyStyles}>
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
-									blocks={frontendData.blocks}
+									blocks={blocks}
 									editionId={frontendData.editionId}
 									host={frontendData.config.host}
 									pageId={frontendData.pageId}
@@ -317,20 +306,28 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 								<HostedContentDisclaimer />
 							</ArticleContainer>
 						</div>
+					</div>
 
-						<div css={onwardContentStyles}>
-							{'Placeholder - onward content'}
-						</div>
+					<div css={onwardContentStyles}>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<FetchHostedOnwards
+								url={`${frontendData.config.ajaxUrl}/${frontendData.config.pageId}/onward.json`}
+								branding={branding}
+							/>
+						</Island>
+					</div>
 
+					{cta && (
 						<div css={ctaStyles}>
 							<CallToActionAtom
-								linkUrl="https://safety.epicgames.com/en-US?lang=en-US"
-								backgroundImage="https://media.guim.co.uk/7fe58f11470360bc9f1e4b6bbcbf45d7cf06cfcf/0_0_1300_375/1300.jpg"
-								text="This is a call to action text"
-								buttonText="Learn more"
+								linkUrl={cta.url}
+								backgroundImage={cta.image}
+								text={cta.label}
+								buttonText={cta.btnText}
+								accentColor={branding?.hostedCampaignColour}
 							/>
 						</div>
-					</div>
+					)}
 				</article>
 			</main>
 		</>

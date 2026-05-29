@@ -469,6 +469,7 @@ export interface MediaAtomBlockElement {
 	duration?: number;
 	videoPlayerFormat?: VideoPlayerFormat;
 	role?: RoleType;
+	caption?: string;
 }
 
 export interface MultiImageBlockElement {
@@ -526,7 +527,7 @@ export interface ProductBlockElement {
 export interface ProductSummaryElement {
 	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
 	matchedProducts: ProductBlockElement[];
-	variant: 'carousel' | 'stacked';
+	variant: 'carousel' | 'stacked-default' | 'stacked-expanded';
 }
 
 interface ProfileAtomBlockElement {
@@ -752,6 +753,7 @@ export interface YoutubeBlockElement {
 	overrideImage?: string;
 	altText?: string;
 	role?: RoleType;
+	caption?: string;
 }
 
 interface WitnessTypeDataBase {
@@ -815,6 +817,7 @@ export interface WitnessAssetType {
 		name?: string;
 	};
 }
+
 interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.WitnessBlockElement';
 	elementId: string;
@@ -1000,6 +1003,7 @@ export interface VideoAssets {
 		width?: string;
 		caption?: string;
 	};
+	hasAudio?: boolean;
 }
 
 interface AudioAsset {
@@ -1201,8 +1205,11 @@ export type Newsletter = {
 	successDescription: string;
 	theme: string;
 	group: string;
+	category?: string;
 	regionFocus?: string;
 	illustrationCard?: string;
+	illustrationSquare?: string;
+	exampleUrl?: string;
 };
 
 export type NewsletterLayout = {

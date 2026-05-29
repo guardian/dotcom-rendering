@@ -27,11 +27,19 @@ const mvtMaxValue = 1_000_000;
 
 /** Parse a valid MVT ID between 1 and 1,000,000 or undefined if it fails */
 const parseMvtId = (id: string | null): number | undefined => {
-	if (!id) return; // null or empty string
+	if (!id) {
+		return;
+	} // null or empty string
 	const number = Number(id);
-	if (Number.isNaN(number)) return;
-	if (number < mvtMinValue) return;
-	if (number > mvtMaxValue) return;
+	if (Number.isNaN(number)) {
+		return;
+	}
+	if (number < mvtMinValue) {
+		return;
+	}
+	if (number > mvtMaxValue) {
+		return;
+	}
 	return number;
 };
 
@@ -105,7 +113,9 @@ export const SetABTests = ({
 	}, [serverSideABTests]);
 
 	useEffect(() => {
-		if (!ophan) return;
+		if (!ophan) {
+			return;
+		}
 
 		const mvtId = isDev ? getLocalMvtId() ?? getMvtId() : getMvtId();
 

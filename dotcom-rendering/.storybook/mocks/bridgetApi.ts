@@ -1,9 +1,8 @@
 import { DiscussionNativeError } from '@guardian/bridget/DiscussionNativeError';
-import {
-	DiscussionServiceResponse,
-	DiscussionServiceResponseType,
-} from '@guardian/bridget/DiscussionServiceResponse';
+import type { DiscussionServiceResponse } from '@guardian/bridget/DiscussionServiceResponse';
+import { DiscussionServiceResponseType } from '@guardian/bridget/DiscussionServiceResponse';
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports -- can only be imported dynamically
 type BridgeModule = typeof import('../../src/lib/bridgetApi');
 
 type BridgetApi<T extends keyof BridgeModule> = () => Partial<
@@ -103,11 +102,22 @@ export const getListenToArticleClient: BridgetApi<
 	isPlaying: async () => false,
 });
 
+export const getAudioClient: BridgetApi<'getAudioClient'> = () => ({
+	isAvailable: async () => true,
+	isPlaying: async () => false,
+});
+
 export const getNativeABTestingClient: BridgetApi<
 	'getNativeABTestingClient'
 > = () => ({
 	getParticipations: async () =>
 		new Map(Object.entries({ 'test-id': 'variant' })),
+});
+
+export const getMatchNotificationsClient: BridgetApi<
+	'getMatchNotificationsClient'
+> = () => ({
+	isAvailable: async () => ({ isAvailable: true }),
 });
 
 export const ensure_all_exports_are_present = {
@@ -127,7 +137,9 @@ export const ensure_all_exports_are_present = {
 	getInteractionClient,
 	getInteractivesClient,
 	getListenToArticleClient,
+	getAudioClient,
 	getNativeABTestingClient,
+	getMatchNotificationsClient,
 } satisfies {
 	[Method in keyof BridgeModule]: BridgetApi<Method>;
 };
