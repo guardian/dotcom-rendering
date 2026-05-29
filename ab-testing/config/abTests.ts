@@ -145,6 +145,19 @@ const ABTests: ABTest[] = [
 		groups: ["enable"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "commercial-teads-prebid",
+		description:
+			"Test to measure the impact of adding Teads as a bidder in prebid .",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-06-04",
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
