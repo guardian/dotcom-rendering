@@ -41,6 +41,7 @@ const productBlockElement: ProductBlockElement = {
 			html: '<h2>Unique Heading.</h2>',
 		},
 	],
+	id: '123',
 	displayType: 'InlineOnly',
 	productCtas: [
 		{

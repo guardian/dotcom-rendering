@@ -519,6 +519,7 @@ export interface ProductBlockElement {
 	content: FEElement[];
 	h2Id?: string;
 	displayType: ProductDisplayType;
+	id: string;
 	productCtas: ProductCta[];
 	lowestPrice?: string;
 }
