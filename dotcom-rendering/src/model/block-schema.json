@@ -4153,6 +4153,9 @@
                 "displayType": {
                     "$ref": "#/definitions/ProductDisplayType"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "productCtas": {
                     "type": "array",
                     "items": {
@@ -4181,10 +4184,7 @@
                 },
                 "lowestPrice": {
                     "type": "string"
-                },
-				"id": {
-					"type": "string"
-				}
+                }
             },
             "required": [
                 "_type",
@@ -4193,6 +4193,7 @@
                 "customAttributes",
                 "displayType",
                 "elementId",
+                "id",
                 "primaryHeadingHtml",
                 "productCtas",
                 "productName",
