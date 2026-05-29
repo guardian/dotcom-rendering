@@ -29,8 +29,6 @@ const notificationTextStyles = css`
 	padding: 0;
 `;
 
-const blockList = ['profile/anas-al-sharif'];
-
 export const FollowWrapper = ({ id, displayName }: Props) => {
 	const [isFollowingNotifications, setIsFollowingNotifications] = useState<
 		boolean | undefined
@@ -161,19 +159,10 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 				.then((success) => {
 					if (success) {
 						setIsFollowingTag(true);
+						return getNotificationsClient().follow(topic);
 					}
+					return false;
 				})
-				.catch((error) => {
-					window.guardian.modules.sentry.reportError(
-						error,
-						'bridget-getTagClient-follow-error',
-					);
-					log('dotcom', 'Bridget getTagClient.follow Error:', error);
-				});
-
-			// Enable notifications when following
-			void getNotificationsClient()
-				.follow(topic)
 				.then((success) => {
 					if (success) {
 						setIsFollowingNotifications(true);
@@ -182,13 +171,9 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 				.catch((error) => {
 					window.guardian.modules.sentry.reportError(
 						error,
-						'bridget-getNotificationsClient-follow-error',
+						'bridget-getTagClient-follow-error',
 					);
-					log(
-						'dotcom',
-						'Bridget getNotificationsClient.follow Error:',
-						error,
-					);
+					log('dotcom', 'Bridget getTagClient.follow Error:', error);
 				});
 		}
 	};
