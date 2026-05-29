@@ -748,6 +748,7 @@ export const SelfHostedVideo = ({
 					setIsAutoplayAllowed(doesUserPermitAutoplayOnWeb());
 				}
 				setHasPageBecomeActive(true);
+				setMutedState({ value: false });
 			} else {
 				setHasPageBecomeActive(false);
 			}
