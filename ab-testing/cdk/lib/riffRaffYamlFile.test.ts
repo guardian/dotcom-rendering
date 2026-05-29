@@ -91,8 +91,22 @@ test("riffRaffYamlFile", async () => {
 			.get(riffRaffProjectName)
 			?.deployments.get(configCloudformationDeploymentName);
 
+		const deploymentLambdaDeployment = configuration
+			.get(riffRaffProjectName)
+			?.deployments.get(deploymentLambdaDeploymentName);
+
+		ok(
+			configCloudformationDeployment,
+			"Config CloudFormation deployment not found",
+		);
+
+		ok(
+			deploymentLambdaDeployment,
+			"Deployment Lambda deployment not found",
+		);
+
 		deepEqual(
-			[...(configCloudformationDeployment?.dependencies ?? [])].sort(),
+			[...(configCloudformationDeployment.dependencies ?? [])].sort(),
 			["config/ab-testing", deploymentLambdaDeploymentName].sort(),
 		);
 	});
