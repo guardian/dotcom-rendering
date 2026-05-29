@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { from, space, until } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { grid } from '../grid';
 import { type ArticleFormat } from '../lib/articleFormat';
 import { getImage } from '../lib/image';
@@ -39,6 +39,10 @@ const styles = css`
 				padding-top: ${space[3]}px;
 			}
 		}
+	}
+
+	${between.desktop.and.leftCol} {
+		${grid.verticalRules({ plusChild: 2 })}
 	}
 `;
 

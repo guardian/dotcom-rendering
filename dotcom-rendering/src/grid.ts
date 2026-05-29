@@ -125,7 +125,7 @@ const optionalCentreRule = (
         grid-column: centre-column-start;
         transform: translateX(-${columnGap});
 
-        ${fromBreakpoint.leftCol} {
+        ${fromBreakpoint.desktop} {
           transform: translateX(calc(-${columnGap} / 2));
         }
       }
