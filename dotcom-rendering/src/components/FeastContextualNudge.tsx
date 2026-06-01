@@ -3,7 +3,6 @@ import {
 	article15,
 	from,
 	headlineBold17,
-	headlineMedium24,
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
@@ -55,7 +54,9 @@ const FEAST_ADJUST_TOKEN_CODE = '20o7ykck';
 const buildFeastLink = (recipeId: string, stage: StageType): string => {
 	const token =
 		stage === 'PROD' ? FEAST_ADJUST_TOKEN_PROD : FEAST_ADJUST_TOKEN_CODE;
-	return `https://guardian-feast.go.link/recipe/${recipeId}?adj_t=${token}`;
+	return `https://guardian-feast.go.link/recipe/${encodeURIComponent(
+		recipeId,
+	)}?adj_t=${encodeURIComponent(token)}`;
 };
 
 // ── Button themes ─────────────────────────────────────────────────────────────
@@ -92,10 +93,6 @@ const showcaseCardStyles = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${space[2]}px;
-	/* ${from.mobileLandscape} {
-		column-gap: 20px;
-		row-gap: ${space[2]}px;
-	} */
 	margin: ${space[2]}px 0;
 `;
 
@@ -111,9 +108,6 @@ const primaryHeadingStyles = css`
 	${headlineBold17};
 	font-weight: 600;
 	color: var(--feast-nudge-heading);
-	/* ${from.mobileLandscape} {
-	 	${headlineMedium24};
-	} */
 `;
 
 const buttonWrapperStyles = css`
@@ -132,7 +126,7 @@ const descriptionStyles = css`
 // ── Props ─────────────────────────────────────────────────────────────────────
 
 type FeastContextualNudgeProps = {
-	recipe?: RecipeBlockElement;
+	recipe: RecipeBlockElement;
 	recipeArticleTitle: string;
 	pageId: string;
 	isDev: boolean;
@@ -159,16 +153,16 @@ export const FeastContextualNudge = ({
 		setStage(window.guardian.config.stage);
 	}, []);
 
-	const title = recipe?.title ?? recipeArticleTitle;
-	const feastId = recipe?.id;
+	const title = recipe.title ?? recipeArticleTitle;
+	const feastId = recipe.id;
 
-	if (isDev) {
-		console.log(
-			`Contextual nudge for the Feast app, related to the recipe: ${title}. (id: ${
-				feastId ?? 'N/A'
-			}; pageId: ${pageId})`,
-		);
-	}
+	useEffect(() => {
+		if (isDev) {
+			console.log(
+				`Contextual nudge for the Feast app, related to the recipe: ${title}. (id: ${feastId}; pageId: ${pageId})`,
+			);
+		}
+	}, [feastId, title, pageId, isDev]);
 
 	return (
 		<div
@@ -211,13 +205,9 @@ export const FeastContextualNudge = ({
 				<LinkButton
 					priority="primary"
 					size="xsmall"
-					{...(feastId
-						? {
-								href: buildFeastLink(feastId, stage),
-								target: '_blank',
-								rel: 'noreferrer',
-						  }
-						: {})}
+					href={buildFeastLink(feastId, stage)}
+					target="_blank"
+					rel="noreferrer"
 					theme={primaryCtaTheme}
 					data-ignore="global-link-styling"
 				>
