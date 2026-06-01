@@ -52,11 +52,20 @@ export const useVideoMilestoneTracking = (
 				| { ended: true },
 		) => {
 			let percent = 0;
+			let reachedEnd = false;
 
 			if ('ended' in progress) {
-				percent = 100;
+				reachedEnd = true;
 			} else if ('duration' in progress && progress.duration > 0) {
 				percent = (progress.currentTime / progress.duration) * 100;
+
+				/**
+				 * If a video reaches the last half a second considered it to have reached the end.
+				 * This is important for shorter videos where percentage updates will be less granular.
+				 */
+				if (Math.abs(progress.duration - progress.currentTime) < 0.5) {
+					reachedEnd = true;
+				}
 			}
 
 			if (!milestones.current.hasSentPlay && percent >= 0) {
@@ -81,7 +90,7 @@ export const useVideoMilestoneTracking = (
 				}
 			}
 
-			if (!milestones.current.hasSentEnd && percent >= 99) {
+			if (!milestones.current.hasSentEnd && reachedEnd) {
 				onMilestone('end');
 				milestones.current.hasSentEnd = true;
 			}
