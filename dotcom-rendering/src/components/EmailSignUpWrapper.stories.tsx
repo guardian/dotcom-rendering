@@ -2,6 +2,7 @@ import type { StoryObj } from '@storybook/react-webpack5';
 import { mocked, within } from 'storybook/test';
 import preview from '../../.storybook/preview';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
+import { AB_TEST_NAME } from '../lib/newsletterSignupTracking';
 import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
@@ -18,7 +19,7 @@ const mockAB = (
 		getParticipations: () =>
 			(variant !== 'control'
 				? {
-						'newsletters-newsletter-signup-card': variant,
+						[AB_TEST_NAME]: variant,
 				  }
 				: {}) as Record<string, string>,
 		trackABTests: () => ({}),
