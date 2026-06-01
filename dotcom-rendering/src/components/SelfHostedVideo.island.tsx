@@ -230,13 +230,6 @@ const logAndReportError = (src: string, error: Error) => {
 	log('dotcom', message);
 };
 
-const dispatchOphanAttentionEvent = (
-	eventType: 'videoPlaying' | 'videoPause',
-) => {
-	const event = new Event(eventType, { bubbles: true });
-	document.dispatchEvent(event);
-};
-
 const getOptimisedPosterImage = (
 	mainImage: string,
 	aspectRatio: string,
@@ -571,9 +564,6 @@ export const SelfHostedVideo = ({
 			await startPlayPromise
 				.then(() => {
 					// Autoplay succeeded
-					if (isWeb) {
-						dispatchOphanAttentionEvent('videoPlaying');
-					}
 					setPlayerState('PLAYING');
 				})
 				.catch((error: Error) => {
@@ -603,10 +593,6 @@ export const SelfHostedVideo = ({
 		}
 
 		setPlayerState(pauseReason);
-
-		if (isWeb) {
-			dispatchOphanAttentionEvent('videoPause');
-		}
 
 		void video.pause();
 	};

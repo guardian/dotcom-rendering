@@ -8,6 +8,13 @@ import type { RenderingTarget } from '../types/renderingTarget';
  */
 const REPORTING_INTERVAL_MS = 10_000;
 
+const dispatchOphanAttentionEvent = (
+	eventType: 'videoPlaying' | 'videoPause',
+) => {
+	const event = new Event(eventType, { bubbles: true });
+	document.dispatchEvent(event);
+};
+
 /**
  * Tracks incremental video attention time whilst the video is both visible
  * in the viewport and actively playing.
@@ -33,51 +40,27 @@ export const useVideoAttentionTracking = (
 	isPlaying: boolean,
 	renderingTarget: RenderingTarget,
 ): void => {
-	/** Accumulated attention time in milliseconds. */
 	const totalAttentionMsRef = useRef(0);
-
-	/**
-	 * The last value of `totalAttentionMsRef` that was reported to Ophan.
-	 * Initialised to `null` so the first report fires even when attention is 0ms,
-	 * matching the behaviour of attention.js.
-	 */
+	const attentionStartedAtRef = useRef<number | null>(null);
 	const reportedAttentionMsRef = useRef<number | null>(null);
 
-	/**
-	 * The `performance.now()` timestamp at which the current unrecorded attention
-	 * period began. `null` when attention is not being tracked.
-	 */
-	const attentionStartedAtRef = useRef<number | null>(null);
-
-	/**
-	 * Kept in refs so they can be read from the interval callback without
-	 * requiring it as a dependency or causing stale closures.
-	 */
-	const componentNameRef = useRef(componentName);
-	const renderingTargetRef = useRef(renderingTarget);
-	componentNameRef.current = componentName;
-	renderingTargetRef.current = renderingTarget;
-
-	/**
-	 * Attention is active when the video is both in view and playing.
-	 * Mirrors the condition in ophan-tracker-js where a video component only
-	 * accumulates attention when `visible && videoPlaying`.
-	 */
 	const isActive = isInView === true && isPlaying;
 
-	/**
-	 * React to changes in the active state:
-	 * - When becoming active, record the start timestamp.
-	 * - When becoming inactive, flush unrecorded time into the total and clear
-	 *   the start timestamp.
-	 */
 	useEffect(() => {
 		if (isActive) {
-			if (attentionStartedAtRef.current === null) {
-				attentionStartedAtRef.current = performance.now();
-			}
+			/**
+			 * Update Ophan to flag a video is playing. This will
+			 * mean attention time updates are continually sent.
+			 */
+			dispatchOphanAttentionEvent('videoPlaying');
+			attentionStartedAtRef.current ??= performance.now();
 		} else {
 			if (attentionStartedAtRef.current !== null) {
+				/**
+				 * Update Ophan to flag a video has stopped. This will
+				 * mean attention time updates are eventually stopped.
+				 */
+				dispatchOphanAttentionEvent('videoPause');
 				const now = performance.now();
 				totalAttentionMsRef.current += Math.min(
 					now - attentionStartedAtRef.current,
@@ -88,20 +71,6 @@ export const useVideoAttentionTracking = (
 		}
 	}, [isActive]);
 
-	/**
-	 * Set up periodic reporting. Runs once on mount.
-	 *
-	 * Matches the reporting cadence of attention.js:
-	 * - An initial report fires after 100ms.
-	 * - Subsequent reports fire every `REPORTING_INTERVAL_MS`.
-	 *
-	 * Each report:
-	 * 1. Flushes any unrecorded time from the current attention period into the
-	 *    total (capped at `REPORTING_INTERVAL_MS` to avoid inflated values from
-	 *    suspended devices).
-	 * 2. Sends `componentAttentionMs` via `ophan.record` only when the total has
-	 *    changed since the last report.
-	 */
 	useEffect(() => {
 		const accumulateAttention = () => {
 			if (attentionStartedAtRef.current !== null) {
@@ -110,9 +79,6 @@ export const useVideoAttentionTracking = (
 					now - attentionStartedAtRef.current,
 					REPORTING_INTERVAL_MS,
 				);
-				// Reset to now so the next accumulation starts from here,
-				// matching the behaviour of incrementTotalAttentionTimeByUnrecordedAmount
-				// in components.js.
 				attentionStartedAtRef.current = now;
 			}
 		};
@@ -123,19 +89,26 @@ export const useVideoAttentionTracking = (
 				totalAttentionMsRef.current !== reportedAttentionMsRef.current
 			) {
 				const attentionMs = Math.round(totalAttentionMsRef.current);
-				// Update before the async call to prevent duplicate reports if
-				// the interval fires again before the promise resolves.
 				reportedAttentionMsRef.current = totalAttentionMsRef.current;
-				void getOphan(renderingTargetRef.current).then((ophan) => {
+
+				void getOphan(renderingTarget).then((ophan) => {
 					// `componentAttentionMs` is not part of the EventPayload TypeScript
 					// type definition, but it is the raw query-string key consumed by
 					// the Ophan backend — matching what attention.js sends via
 					// transmit.sendMore.
-					ophan.record({
-						componentAttentionMs: {
-							[componentNameRef.current]: attentionMs,
-						},
-					} as Parameters<typeof ophan.record>[0]);
+					console.log(
+						'Submitting attention time:',
+						componentName,
+						attentionMs,
+					);
+					// ophan.record({
+					// 	attention: {
+					// 		attentionMs: 0,
+					// 		componentAttentionMs: {
+					// 			[componentName]: attentionMs,
+					// 		},
+					// 	},
+					// });
 				});
 			}
 		};
@@ -147,5 +120,5 @@ export const useVideoAttentionTracking = (
 			window.clearTimeout(initialTimerId);
 			window.clearInterval(intervalId);
 		};
-	}, []);
+	}, [componentName, renderingTarget]);
 };
