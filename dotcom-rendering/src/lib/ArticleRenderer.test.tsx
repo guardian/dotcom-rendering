@@ -10,8 +10,8 @@ import type { TagType } from '../types/tag';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	Pillar,
 	type ArticleFormat,
+	Pillar,
 } from './articleFormat';
 import { ArticleRenderer } from './ArticleRenderer';
 
