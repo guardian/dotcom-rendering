@@ -6,6 +6,7 @@ import type {
 	SubheadingBlockElement,
 	TextBlockElement,
 } from '../types/content';
+import type { TagType } from '../types/tag';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -68,7 +69,7 @@ const defaultProps = {
 	ajaxUrl: 'https://api.test',
 	contentType: 'Article',
 	sectionId: 'food',
-	tags: [],
+	tags: [] as TagType[],
 	isPaidContent: false,
 	idUrl: 'https://id.test',
 	switches: {},
