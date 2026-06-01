@@ -25,7 +25,7 @@ type Props = {
 	headlineText: string;
 	dataLinkName?: string;
 	isExternalLink: boolean;
-	isLoopClickThroughTest?: boolean;
+	isLoopClickThroughTest: boolean;
 };
 
 const InternalLink = ({
@@ -97,7 +97,7 @@ export const CardLink = ({
 					linkTo={linkTo}
 					headlineText={headlineText}
 					dataLinkName={clickThroughLinkName}
-					isLoopClickThroughTest={isLoopClickThroughTest === true}
+					isLoopClickThroughTest={isLoopClickThroughTest}
 				/>
 			)}
 			{!isExternalLink && (
@@ -105,7 +105,7 @@ export const CardLink = ({
 					linkTo={linkTo}
 					headlineText={headlineText}
 					dataLinkName={clickThroughLinkName}
-					isLoopClickThroughTest={isLoopClickThroughTest === true}
+					isLoopClickThroughTest={isLoopClickThroughTest}
 				/>
 			)}
 		</>
