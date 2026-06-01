@@ -17,8 +17,7 @@ import { ArticleRenderer } from './ArticleRenderer';
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
-jest.mock('../components/FeastContextualNudge', () => ({
-	...jest.requireActual('../components/FeastContextualNudge'),
+jest.mock('../components/FeastContextualNudge.island', () => ({
 	FeastContextualNudge: ({ recipe }: { recipe: { id: string } }) => (
 		<div data-testid="feast-nudge" data-recipe-id={recipe.id} />
 	),

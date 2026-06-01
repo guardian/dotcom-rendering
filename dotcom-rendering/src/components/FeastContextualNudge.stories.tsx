@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { darkDecorator } from '../../.storybook/decorators/themeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { RecipeBlockElement } from '../types/content';
-import { FeastContextualNudge } from './FeastContextualNudge';
+import { FeastContextualNudge } from './FeastContextualNudge.island';
 
 const recipeFormat = {
 	design: ArticleDesign.Recipe,

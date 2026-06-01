@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
 import { Fragment } from 'react';
 import { useConfig } from '../components/ConfigContext';
-import {
-	FeastContextualNudge,
-	stripHtmlTags,
-} from '../components/FeastContextualNudge';
+import { FeastContextualNudge } from '../components/FeastContextualNudge.island';
+import { Island } from '../components/Island';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RecipeBlockElement } from '../types/content';
@@ -136,7 +134,9 @@ export const ArticleRenderer = ({
 				data?._type ===
 				'model.dotcomrendering.pageElements.SubheadingBlockElement'
 			) {
-				const recipeArticleTitle = stripHtmlTags(data.html);
+				const recipeArticleTitle = data.html
+					.replace(/<[^>]+>/g, '')
+					.trim();
 				current = {
 					subheadingEl: el,
 					recipeArticleTitle,
@@ -166,12 +166,14 @@ export const ArticleRenderer = ({
 				<Fragment key={`recipe-section-${section.index}`}>
 					{section.subheadingEl}
 					{section.recipe && (
-						<FeastContextualNudge
-							isDev={isDev}
-							pageId={pageId}
-							recipe={section.recipe}
-							recipeArticleTitle={section.recipeArticleTitle}
-						/>
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<FeastContextualNudge
+								isDev={isDev}
+								pageId={pageId}
+								recipe={section.recipe}
+								recipeArticleTitle={section.recipeArticleTitle}
+							/>
+						</Island>
 					)}
 					{section.contentEls}
 				</Fragment>,
