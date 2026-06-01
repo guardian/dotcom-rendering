@@ -1,3 +1,4 @@
+import type { EventPayload } from '@guardian/ophan-tracker-js';
 import { useEffect, useRef } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -23,10 +24,7 @@ const dispatchOphanAttentionEvent = (
  * (`components.js` / `attention.js`), but managed within React so that
  * attention is only accumulated when the video is playing — not merely when
  * it is in view.
- *
- * Attention time is reported periodically via `ophan.record` using the same
- * `componentAttentionMs` payload format as ophan-tracker-js.
- *
+
  * @param componentName - The component name key used in the `componentAttentionMs` payload.
  *   Should follow the `gu-video-<style>-<atomId>` convention.
  * @param isInView - Whether the video element is sufficiently visible in the viewport.
@@ -41,8 +39,8 @@ export const useVideoAttentionTracking = (
 	renderingTarget: RenderingTarget,
 ): void => {
 	const totalAttentionMsRef = useRef(0);
+	const reportedAttentionMsRef = useRef(0);
 	const attentionStartedAtRef = useRef<number | null>(null);
-	const reportedAttentionMsRef = useRef<number | null>(null);
 
 	const isActive = isInView === true && isPlaying;
 
@@ -88,36 +86,30 @@ export const useVideoAttentionTracking = (
 			if (
 				totalAttentionMsRef.current !== reportedAttentionMsRef.current
 			) {
-				const attentionMs = Math.round(totalAttentionMsRef.current);
-				reportedAttentionMsRef.current = totalAttentionMsRef.current;
-
 				void getOphan(renderingTarget).then((ophan) => {
-					// `componentAttentionMs` is not part of the EventPayload TypeScript
-					// type definition, but it is the raw query-string key consumed by
-					// the Ophan backend — matching what attention.js sends via
-					// transmit.sendMore.
-					console.log(
-						'Submitting attention time:',
-						componentName,
-						attentionMs,
-					);
-					// ophan.record({
-					// 	attention: {
-					// 		attentionMs: 0,
-					// 		componentAttentionMs: {
-					// 			[componentName]: attentionMs,
-					// 		},
-					// 	},
-					// });
+					if (renderingTarget === 'Web') {
+						// EventPayload is current typed erroneously
+						ophan.record({
+							componentAttentionMs: {
+								[componentName]: Math.round(
+									totalAttentionMsRef.current,
+								),
+							},
+						} as unknown as EventPayload);
+					} else {
+						/**
+						 * Report component attention time via Bridget.
+						 */
+					}
 				});
+
+				reportedAttentionMsRef.current = totalAttentionMsRef.current;
 			}
 		};
 
-		const initialTimerId = window.setTimeout(report, 100);
 		const intervalId = window.setInterval(report, REPORTING_INTERVAL_MS);
 
 		return () => {
-			window.clearTimeout(initialTimerId);
 			window.clearInterval(intervalId);
 		};
 	}, [componentName, renderingTarget]);

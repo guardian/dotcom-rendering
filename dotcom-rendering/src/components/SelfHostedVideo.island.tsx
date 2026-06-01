@@ -573,7 +573,7 @@ export const SelfHostedVideo = ({
 					setPlayerState('PAUSED_BY_BROWSER');
 				});
 		}
-	}, [isWeb]);
+	}, []);
 
 	const pauseVideo = (
 		pauseReason: Extract<
