@@ -283,7 +283,6 @@ export const Labs: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="8b723eb4d94368efc040dc26313a01cec69b588a"> <img src="https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/1000.jpg" alt="Are you royal?" width="1000" height="600" class="gu-image" /> </figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{

@@ -287,7 +287,6 @@ export const NewsletterSignup: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="f05addc1c6b98dc15f73f332ba340b8f5b5afb9f"> <img src="https://media.guim.co.uk/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/1000.jpg" alt="Sign up for Moving the Goalposts." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">Sign up for Moving the Goalposts.</span> <span class="element-image__credit">Illustration: Guardian Design</span> </figcaption> </figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{

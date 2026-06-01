@@ -1533,7 +1533,6 @@
 	"isSpecialReport": false,
 	"isCommentable": true,
 	"keyEvents": [],
-	"filterKeyEvents": false,
 	"config": {
 		"avatarApiUrl": "https://avatar.theguardian.com",
 		"references": [

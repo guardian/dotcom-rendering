@@ -248,7 +248,6 @@ export const hostedGallery: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="3e10857a494a7765614b771e9f6d6ebfea41667b"> \n <img src="https://media.guim.co.uk/3e10857a494a7765614b771e9f6d6ebfea41667b/0_79_802_481/802.jpg" alt="Crowd gathered at the We Are Still In Day Rally at the US Capitol in DC" width="802" height="481" class="gu-image"> \n</figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{

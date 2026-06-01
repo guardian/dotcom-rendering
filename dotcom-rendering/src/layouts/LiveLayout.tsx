@@ -22,7 +22,6 @@ import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.island';
 import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.island';
@@ -568,7 +567,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							>
 								<KeyEventsCarousel
 									keyEvents={article.keyEvents}
-									filterKeyEvents={article.filterKeyEvents}
 									id={'key-events-carousel-desktop'}
 									serverTime={serverTime}
 									renderingTarget={renderingTarget}
@@ -615,7 +613,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									pageId={article.pageId}
 									webTitle={article.webTitle}
 									ajaxUrl={article.config.ajaxUrl}
-									filterKeyEvents={article.filterKeyEvents}
 									enhanceTweetsSwitch={
 										!!article.config.switches.enhanceTweets
 									}
@@ -755,23 +752,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											footballMatchBodyWrapper,
 									]}
 								>
-									{hasKeyEvents ? (
-										<Hide below="desktop">
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<FilterKeyEventsToggle
-													filterKeyEvents={
-														article.filterKeyEvents
-													}
-													id="filter-toggle-desktop"
-												/>
-											</Island>
-										</Hide>
-									) : (
-										<></>
-									)}
 									<ArticleContainer format={format}>
 										{pagination.currentPage !== 1 && (
 											<Pagination
@@ -823,9 +803,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												pagination.currentPage === 1
 											}
 											keyEvents={article.keyEvents}
-											filterKeyEvents={
-												article.filterKeyEvents
-											}
 											keywordIds={
 												article.config.keywordIds
 											}

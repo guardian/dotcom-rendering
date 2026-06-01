@@ -263,7 +263,6 @@ describe('Island: server-side rendering', () => {
 					webTitle=""
 					ajaxUrl=""
 					pageId=""
-					filterKeyEvents={false}
 					enhanceTweetsSwitch={false}
 					onFirstPage={true}
 					webURL=""
