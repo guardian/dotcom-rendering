@@ -122,13 +122,18 @@ export const enhanceArticleType = (
 		data.main,
 	)(data.mainMediaElements);
 
-	const isGalleryPage =
-		format.design === ArticleDesign.Gallery ||
-		format.design === ArticleDesign.HostedGallery;
+	const isGalleryPage = (
+		design: ArticleDesign,
+	): design is ArticleDesign.Gallery | ArticleDesign.HostedGallery =>
+		design === ArticleDesign.Gallery ||
+		design === ArticleDesign.HostedGallery;
 
-	const storyPackage = parseStoryPackage(data.storyPackage, isGalleryPage);
+	const storyPackage = parseStoryPackage(
+		data.storyPackage,
+		isGalleryPage(format.design),
+	);
 
-	if (isGalleryPage) {
+	if (isGalleryPage(format.design)) {
 		const { design } = format;
 
 		return {
