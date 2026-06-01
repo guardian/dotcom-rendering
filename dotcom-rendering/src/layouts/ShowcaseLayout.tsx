@@ -505,6 +505,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 												secondaryDateline={
 													article.webPublicationSecondaryDateDisplay
 												}
+												webPublicationDate={
+													article.webPublicationDate
+												}
 												isCommentable={
 													article.isCommentable
 												}
@@ -535,6 +538,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											}
 											secondaryDateline={
 												article.webPublicationSecondaryDateDisplay
+											}
+											webPublicationDate={
+												article.webPublicationDate
 											}
 											isCommentable={
 												article.isCommentable
