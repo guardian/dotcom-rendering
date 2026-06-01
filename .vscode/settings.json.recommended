@@ -6,7 +6,7 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true
 	},
-	"eslint.workingDirectories": ["./dotcom-rendering"],
+	"eslint.workingDirectories": ["./dotcom-rendering", "./ab-testing"],
 	"files.watcherExclude": {
 		"**/target": true
 	},
