@@ -167,7 +167,7 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-06-19",
 		type: "server",
 		audienceSize: 0 / 100,
-		groups: ["enable"],
+		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
 ];
