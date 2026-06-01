@@ -217,7 +217,7 @@ export const EmailSignUpWrapper = ({
 						abTest={{ name: AB_TEST_NAME, variant: abVariant }}
 						emailInputNameOverride={emailInputName}
 						emailInputIdOverride={emailInputId}
-						addBotHoneyPotField={abVariant === 'variantA'}
+						addCountryField={abVariant === 'variantA'}
 					/>
 				</Island>
 				{!hidePrivacyMessage && <NewsletterPrivacyMessage />}

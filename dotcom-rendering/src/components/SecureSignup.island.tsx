@@ -52,7 +52,7 @@ type Props = {
 	abTest?: AbTest;
 	emailInputNameOverride?: string;
 	emailInputIdOverride?: string;
-	addBotHoneyPotField?: boolean;
+	addCountryField?: boolean;
 };
 
 const formStyles = css`
@@ -119,7 +119,11 @@ const optInCheckboxTextSmall = css`
 	}
 `;
 
-const botHoneypotFieldStyles = css`
+/*
+ * The country form field is used here to try and fool bots into filling the field in
+ * and therefore be able to detect them
+ */
+const countryFieldStyles = css`
 	display: none;
 `;
 
@@ -155,14 +159,14 @@ const buildFormData = (
 		marketingOptIn?: boolean;
 		browserId?: string;
 		marketingOptInHiddenForCountry?: boolean;
-		botHoneyPotValue?: string;
+		countryValue?: string;
 	},
 ): FormData => {
 	const {
 		marketingOptIn,
 		browserId,
 		marketingOptInHiddenForCountry,
-		botHoneyPotValue,
+		countryValue,
 	} = additionalOptions ?? {};
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -190,8 +194,11 @@ const buildFormData = (
 		formData.append('browserId', browserId);
 	}
 
-	if (botHoneyPotValue !== undefined) {
-		formData.append('botHoneyPot', botHoneyPotValue);
+	/*
+		The country form field is used here to try and fool bots into filling the field in
+	*/
+	if (countryValue !== undefined) {
+		formData.append('country', countryValue);
 	}
 
 	return formData;
@@ -276,7 +283,7 @@ export const SecureSignup = ({
 	abTest,
 	emailInputNameOverride,
 	emailInputIdOverride,
-	addBotHoneyPotField = false,
+	addCountryField = false,
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
@@ -336,11 +343,11 @@ export const SecureSignup = ({
 			isSignedIn,
 			effectiveMarketingOptIn,
 		});
-		const possibleBotHoneyPotInput: HTMLInputElement | null =
+		const possibleCountryInput: HTMLInputElement | null =
 			document.querySelector(
-				`#secure-signup-${newsletterId} input[name="website"]`,
+				`#secure-signup-${newsletterId} input[name="country"]`,
 			) ?? null;
-		const honeyPotValue = possibleBotHoneyPotInput?.value;
+		const countryValue = possibleCountryInput?.value;
 
 		sendTracking(
 			newsletterId,
@@ -357,7 +364,7 @@ export const SecureSignup = ({
 			marketingOptInHiddenForCountry: marketingOptInHiddenForCountry
 				? true
 				: undefined,
-			botHoneyPotValue: honeyPotValue,
+			countryValue,
 		});
 
 		const response = await postFormData(
@@ -515,10 +522,13 @@ export const SecureSignup = ({
 						/>
 					</CheckboxGroup>
 				)}
-				{addBotHoneyPotField && (
+				{/*
+					The country form field is used here to try and fool bots into filling the field in
+				*/}
+				{addCountryField && (
 					<TextInput
-						name="website"
-						label="website"
+						name="country"
+						label="country"
 						hideLabel={true}
 						type="text"
 						maxLength={100}
@@ -526,7 +536,7 @@ export const SecureSignup = ({
 						tabIndex={-1}
 						autoComplete="off"
 						aria-hidden="true"
-						cssOverrides={botHoneypotFieldStyles}
+						cssOverrides={countryFieldStyles}
 					/>
 				)}
 				<Button onClick={handleClick} size="small" type="submit">
