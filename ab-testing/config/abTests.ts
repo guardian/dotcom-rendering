@@ -95,7 +95,7 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "newsletters-newsletter-signup-card",
+		name: "newsletters-signup-card-country-illustration",
 		description:
 			"Compare the existing SecureSignup (control) against a slightly modified version of the control (variantNewField) and the new NewsletterSignupCard design (variantIllustratedCard)",
 		owners: ["newsletters.dev@guardian.co.uk"],
