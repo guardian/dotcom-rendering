@@ -51,18 +51,15 @@ Once your A/B test has been configured you can conditionally put your code chang
 
 #### In React Components (DCR)
 
-> [!NOTE]
-> You should use the `useBetaAB` hook described below in React components **_only_**.
-
 The `useAB` module exposes methods for getting a user's A/B test participations, this can be used **both client _and_ server side**.
 
 ```ts
 // Within the components
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 
 const someComponent = () => {
 	// Example usage of A/B tests
-	const abTests = useBetaAB();
+	const abTests = useAB();
 
 	// Am I in the test at all?
 	const isInTest = abTests?.isUserInTest('webex-example-test') ?? false;

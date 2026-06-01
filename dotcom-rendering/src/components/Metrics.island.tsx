@@ -27,7 +27,7 @@ const sampling = 1 / 100;
 /** defining this here allows to share this with other metrics */
 const willRecordCoreWebVitals = Math.random() < sampling;
 
-const shouldCollectMetricsForBetaTests = (userTestParticipations: string[]) => {
+const shouldCollectMetricsForTests = (userTestParticipations: string[]) => {
 	const userParticipationConfigs = activeABtests.filter((test) =>
 		userTestParticipations.includes(test.name),
 	);
@@ -79,19 +79,19 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 	const userInServerSideTest = Object.keys(tests).length > 0;
 
-	const userBetaParticipations = abTests?.getParticipations() ?? {};
+	const userParticipations = abTests?.getParticipations() ?? {};
 
-	const collectBetaTestMetrics = shouldCollectMetricsForBetaTests(
-		Object.keys(userBetaParticipations),
+	const collectTestMetrics = shouldCollectMetricsForTests(
+		Object.keys(userParticipations),
 	);
 
 	const shouldBypassSampling = useCallback(
 		() =>
 			willRecordCoreWebVitals ||
 			userInServerSideTest ||
-			collectBetaTestMetrics,
+			collectTestMetrics,
 
-		[userInServerSideTest, collectBetaTestMetrics],
+		[userInServerSideTest, collectTestMetrics],
 	);
 
 	useEffect(
