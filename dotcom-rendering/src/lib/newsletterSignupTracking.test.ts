@@ -22,8 +22,12 @@ describe('NEWSLETTER_SIGNUP_COMPONENT_ID', () => {
 
 	it('returns the correct variant component id', () => {
 		expect(
-			NEWSLETTER_SIGNUP_COMPONENT_ID.variant(IDENTITY_NAME, 'variantB'),
-		).toBe(`AR NewsletterSignupForm ${IDENTITY_NAME} - variantB`);
+			NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
+				IDENTITY_NAME,
+			),
+		).toBe(
+			`AR NewsletterSignupForm ${IDENTITY_NAME} - variantIllustratedCard`,
+		);
 	});
 });
 
@@ -70,10 +74,10 @@ describe('sendNewsletterSignupEvent', () => {
 		sendNewsletterSignupEvent({
 			action: 'EXPAND',
 			identityName: IDENTITY_NAME,
-			componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
-				IDENTITY_NAME,
-				'variantB',
-			),
+			componentId:
+				NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
+					IDENTITY_NAME,
+				),
 			renderingTarget: RENDERING_TARGET,
 			value: { eventDescription: 'preview-open', renderUrl },
 		});
@@ -82,7 +86,7 @@ describe('sendNewsletterSignupEvent', () => {
 			{
 				component: {
 					componentType: 'NEWSLETTER_SUBSCRIPTION',
-					id: `AR NewsletterSignupForm ${IDENTITY_NAME} - variantB`,
+					id: `AR NewsletterSignupForm ${IDENTITY_NAME} - variantIllustratedCard`,
 				},
 				action: 'EXPAND',
 				value: JSON.stringify({
@@ -101,10 +105,10 @@ describe('sendNewsletterSignupEvent', () => {
 		sendNewsletterSignupEvent({
 			action: 'CLOSE',
 			identityName: IDENTITY_NAME,
-			componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
-				IDENTITY_NAME,
-				'variantB',
-			),
+			componentId:
+				NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
+					IDENTITY_NAME,
+				),
 			renderingTarget: RENDERING_TARGET,
 			value: {
 				eventDescription: 'preview-close',

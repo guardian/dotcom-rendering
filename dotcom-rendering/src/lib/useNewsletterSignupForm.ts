@@ -119,11 +119,12 @@ const sendTracking = (
 	extraDetails?: Record<string, unknown>,
 ): void => {
 	const componentId =
-		abTest !== undefined
-			? NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+		abTest?.variant === 'variantIllustratedCard'
+			? NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
 					newsletterId,
-					abTest.variant,
 			  )
+			: abTest?.variant === 'variantNewField'
+			? NEWSLETTER_SIGNUP_COMPONENT_ID.variantNewField(newsletterId)
 			: NEWSLETTER_SIGNUP_COMPONENT_ID.control(newsletterId);
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],

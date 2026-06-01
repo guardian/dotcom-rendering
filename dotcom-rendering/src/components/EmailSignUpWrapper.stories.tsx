@@ -11,11 +11,14 @@ import { EmailSignUpWrapper } from './EmailSignUpWrapper.island';
 const mockAB = (isInVariant: boolean) => {
 	mocked(useAB).mockReturnValue({
 		isUserInTestGroup: (_testName: string, group: string) =>
-			group === 'variantB' ? isInVariant : !isInVariant,
+			group === 'variantIllustratedCard' ? isInVariant : !isInVariant,
 		isUserInTest: () => true,
 		getParticipations: () =>
 			(isInVariant
-				? { 'newsletters-newsletter-signup-card': 'variantB' }
+				? {
+						'newsletters-newsletter-signup-card':
+							'variantIllustratedCard',
+				  }
 				: {}) as Record<string, string>,
 		trackABTests: () => ({}),
 	});

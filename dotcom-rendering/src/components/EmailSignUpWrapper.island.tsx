@@ -85,7 +85,9 @@ export const EmailSignUpWrapper = ({
 		const currentUserVariant = abTests?.getParticipations()[AB_TEST_NAME];
 		if (
 			currentUserVariant &&
-			['variantA', 'variantB'].includes(currentUserVariant)
+			['variantNewField', 'variantIllustratedCard'].includes(
+				currentUserVariant,
+			)
 		) {
 			return currentUserVariant;
 		}
@@ -124,12 +126,16 @@ export const EmailSignUpWrapper = ({
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName,
-			componentId: abVariant.includes('variant')
-				? NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
-						identityName,
-						abVariant,
-				  )
-				: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
+			componentId:
+				abVariant === 'variantIllustratedCard'
+					? NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
+							identityName,
+					  )
+					: abVariant === 'variantNewField'
+					? NEWSLETTER_SIGNUP_COMPONENT_ID.variantNewField(
+							identityName,
+					  )
+					: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
 			renderingTarget,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
@@ -151,7 +157,7 @@ export const EmailSignUpWrapper = ({
 		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
 	}
 
-	if (abVariant === 'variantB') {
+	if (abVariant === 'variantIllustratedCard') {
 		return (
 			<InlineSkipToWrapper
 				id={`EmailSignup-skip-link-${index}`}
@@ -195,9 +201,12 @@ export const EmailSignUpWrapper = ({
 		return null;
 	}
 
-	const emailInputName = abVariant === 'variantA' ? 'emailAddress' : 'email';
+	const emailInputName =
+		abVariant === 'variantNewField' ? 'emailAddress' : 'email';
 	const emailInputId =
-		abVariant === 'variantA' ? `emailInput-${identityName}` : undefined;
+		abVariant === 'variantNewField'
+			? `emailInput-${identityName}`
+			: undefined;
 
 	return (
 		<InlineSkipToWrapper
@@ -217,7 +226,7 @@ export const EmailSignUpWrapper = ({
 						abTest={{ name: AB_TEST_NAME, variant: abVariant }}
 						emailInputNameOverride={emailInputName}
 						emailInputIdOverride={emailInputId}
-						addCountryField={abVariant === 'variantA'}
+						addCountryField={abVariant === 'variantNewField'}
 					/>
 				</Island>
 				{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
