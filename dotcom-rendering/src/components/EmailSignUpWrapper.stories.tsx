@@ -8,16 +8,17 @@ import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { EmailSignUpWrapper } from './EmailSignUpWrapper.island';
 
 /** Resolves `useAB` as if the AB framework has hydrated, placing the user in control or variant. */
-const mockAB = (isInVariant: boolean) => {
+const mockAB = (
+	variant: 'control' | 'variantNewField' | 'variantIllustratedCard',
+) => {
 	mocked(useAB).mockReturnValue({
 		isUserInTestGroup: (_testName: string, group: string) =>
-			group === 'variantIllustratedCard' ? isInVariant : !isInVariant,
+			group === variant,
 		isUserInTest: () => true,
 		getParticipations: () =>
-			(isInVariant
+			(variant !== 'control'
 				? {
-						'newsletters-newsletter-signup-card':
-							'variantIllustratedCard',
+						'newsletters-newsletter-signup-card': variant,
 				  }
 				: {}) as Record<string, string>,
 		trackABTests: () => ({}),
@@ -56,7 +57,7 @@ const newCardArgs = {
 export const Placeholder = meta.story({
 	args: { hidePrivacyMessage: false, ...defaultArgs },
 	beforeEach() {
-		mockAB(false);
+		mockAB('control');
 		mocked(useNewsletterSubscription).mockReturnValue(undefined);
 	},
 });
@@ -64,7 +65,7 @@ export const Placeholder = meta.story({
 export const DefaultStory = meta.story({
 	args: { hidePrivacyMessage: true, ...defaultArgs },
 	beforeEach() {
-		mockAB(false);
+		mockAB('control');
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(false);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -76,7 +77,7 @@ export const DefaultStory = meta.story({
 export const DefaultStoryWithPrivacy = meta.story({
 	args: { hidePrivacyMessage: false, ...defaultArgs },
 	beforeEach() {
-		mockAB(false);
+		mockAB('control');
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(false);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -88,7 +89,7 @@ export const DefaultStoryWithPrivacy = meta.story({
 export const SignedInNotSubscribed = meta.story({
 	args: { hidePrivacyMessage: false, ...defaultArgs },
 	beforeEach() {
-		mockAB(false);
+		mockAB('control');
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(true);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -104,7 +105,7 @@ export const SignedInAlreadySubscribed = meta.story({
 		hideNewsletterSignupComponentForSubscribers: true,
 	},
 	beforeEach() {
-		mockAB(false);
+		mockAB('control');
 		mocked(useNewsletterSubscription).mockReturnValue(true);
 	},
 });
@@ -116,7 +117,7 @@ export const FeatureFlagDisabled = meta.story({
 		hideNewsletterSignupComponentForSubscribers: false,
 	},
 	beforeEach() {
-		mockAB(false);
+		mockAB('control');
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(true);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -135,7 +136,7 @@ export const FeatureFlagDisabled = meta.story({
 export const NewsletterSignupCardSignedInNotSubscribed = meta.story({
 	args: newCardArgs,
 	beforeEach() {
-		mockAB(true);
+		mockAB('variantIllustratedCard');
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(true);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -147,7 +148,7 @@ export const NewsletterSignupCardSignedInNotSubscribed = meta.story({
 export const NewsletterSignupCardSignedOutNotSubscribed = meta.story({
 	args: newCardArgs,
 	beforeEach() {
-		mockAB(true);
+		mockAB('variantIllustratedCard');
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(false);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -159,7 +160,7 @@ export const NewsletterSignupCardSignedOutNotSubscribed = meta.story({
 export const NewsletterSignupCardSignedInAlreadySubscribed = meta.story({
 	args: newCardArgs,
 	beforeEach() {
-		mockAB(true);
+		mockAB('variantIllustratedCard');
 		mocked(useNewsletterSubscription).mockReturnValue(true);
 		mocked(useIsSignedIn).mockReturnValue(true);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -171,7 +172,7 @@ export const NewsletterSignupCardSignedInAlreadySubscribed = meta.story({
 export const NewsletterSignupCardSignedOutAlreadySubscribed = meta.story({
 	args: newCardArgs,
 	beforeEach() {
-		mockAB(true);
+		mockAB('variantIllustratedCard');
 		mocked(useNewsletterSubscription).mockReturnValue(true);
 		mocked(useIsSignedIn).mockReturnValue(false);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
@@ -183,7 +184,7 @@ export const NewsletterSignupCardSignedOutAlreadySubscribed = meta.story({
 export const NewsletterSignupCardFocused = meta.story({
 	args: newCardArgs,
 	beforeEach() {
-		mockAB(true);
+		mockAB('variantIllustratedCard');
 		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useIsSignedIn).mockReturnValue(false);
 		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
