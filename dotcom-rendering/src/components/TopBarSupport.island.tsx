@@ -22,7 +22,7 @@ import {
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import { getHeader } from '../lib/sdcRequests';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
@@ -69,7 +69,7 @@ const ReaderRevenueLinksRemote = ({
 	const isSignedIn = useIsSignedIn();
 
 	const { renderingTarget } = useConfig();
-	const abTests = useBetaAB();
+	const abTests = useAB();
 
 	useEffect((): void => {
 		if (isUndefined(countryCode) || isSignedIn === 'Pending') {

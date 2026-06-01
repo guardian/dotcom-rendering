@@ -370,14 +370,7 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<WithConfig>
-					<SetABTests
-						isDev={false}
-						pageIsSensitive={false}
-						abTestSwitches={{}}
-						serverSideTests={{}}
-						serverSideABTests={{}}
-					/>
-					,
+					<SetABTests serverSideABTests={{}} />,
 				</WithConfig>,
 			),
 		).not.toThrow();

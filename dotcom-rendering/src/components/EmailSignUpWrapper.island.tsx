@@ -5,7 +5,7 @@ import {
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { useConfig } from './ConfigContext';
@@ -78,7 +78,7 @@ export const EmailSignUpWrapper = ({
 	const abTestEnabled =
 		showNewNewsletterSignupCard && renderingTarget === 'Web';
 
-	const abTests = useBetaAB();
+	const abTests = useAB();
 	const abResolved = abTests !== undefined;
 
 	const isVariant =

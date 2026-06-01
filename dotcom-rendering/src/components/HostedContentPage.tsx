@@ -5,7 +5,6 @@ import { HostedGalleryLayout } from '../layouts/HostedGalleryLayout';
 import { HostedVideoLayout } from '../layouts/HostedVideoLayout';
 import { ArticleDesign } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
-import { filterABTestSwitches } from '../model/enhance-switches';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.island';
@@ -116,12 +115,6 @@ export const HostedContentPage = (props: WebProps | AppProps) => {
 
 					<Island priority="critical">
 						<SetABTests
-							abTestSwitches={filterABTestSwitches(
-								frontendData.config.switches,
-							)}
-							pageIsSensitive={frontendData.config.isSensitive}
-							isDev={!!frontendData.config.isDev}
-							serverSideTests={frontendData.config.abTests}
 							serverSideABTests={
 								frontendData.config.serverSideABTests
 							}

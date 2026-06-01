@@ -2,8 +2,6 @@
 
 This documentation covers the updated A/B test framework, developed by commercial-dev to support both client and server side A/B tests in DCR and launched in January 2026. If you're interested in how it works please visit the docs [here](https://github.com/guardian/dotcom-rendering/tree/main/ab-testing).
 
-Instructions for the legacy framework can still be found [here](./legacy-ab-testing-in-dcr.md).
-
 ## Creating a new A/B test
 
 ### 1. Configure your A/B test
@@ -53,18 +51,15 @@ Once your A/B test has been configured you can conditionally put your code chang
 
 #### In React Components (DCR)
 
-> [!NOTE]
-> You should use the `useBetaAB` hook described below in React components **_only_**.
-
 The `useAB` module exposes methods for getting a user's A/B test participations, this can be used **both client _and_ server side**.
 
 ```ts
 // Within the components
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 
 const someComponent = () => {
 	// Example usage of A/B tests
-	const abTests = useBetaAB();
+	const abTests = useAB();
 
 	// Am I in the test at all?
 	const isInTest = abTests?.isUserInTest('webex-example-test') ?? false;
