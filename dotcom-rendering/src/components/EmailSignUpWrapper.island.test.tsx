@@ -91,8 +91,6 @@ const mockAbTests = (isInVariant: boolean) => {
 		getParticipations: () => ({
 			[AB_TEST_NAME]: isInVariant ? 'variantIllustratedCard' : 'control',
 		}),
-		isUserInTestGroup: (_testName: string, group: string) =>
-			group === 'variant' ? isInVariant : !isInVariant,
 	});
 };
 
