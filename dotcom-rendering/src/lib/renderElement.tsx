@@ -319,6 +319,19 @@ export const renderElement = ({
 					);
 				}
 
+				// Sandbox in a srcdoc iframe so inline `document.write`
+				// scripts can't wipe surrounding article content.
+				if (format.design === ArticleDesign.HostedArticle) {
+					return (
+						<iframe
+							title={element.alt ?? ''}
+							srcDoc={element.html}
+							width={element.width ?? '100%'}
+							height={element.height ?? 600}
+						/>
+					);
+				}
+
 				return (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<UnsafeEmbedBlockComponent
