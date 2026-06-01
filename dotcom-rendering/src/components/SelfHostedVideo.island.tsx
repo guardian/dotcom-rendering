@@ -434,6 +434,7 @@ export const SelfHostedVideo = ({
 	const [isMuted, setIsMuted] = useState(true);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
+	const [duration, setDuration] = useState<number | undefined>(undefined);
 	const [playerState, setPlayerState] =
 		useState<(typeof PLAYER_STATES)[number]>('NOT_STARTED');
 	const [isAutoplayAllowed, setIsAutoplayAllowed] = useState<boolean | null>(
@@ -470,7 +471,7 @@ export const SelfHostedVideo = ({
 		playerState !== 'NOT_STARTED';
 
 	const subtitlesPosition: SubtitlesPosition =
-		videoStyleSettings.useInteractiveProgressBar &&
+		videoStyleSettings.useInteractiveProgressBar === true &&
 		controlsPosition === 'bottom'
 			? 'bottom-elevated'
 			: controlsPosition;
@@ -617,7 +618,7 @@ export const SelfHostedVideo = ({
 
 	const playPauseVideo = () => {
 		if (playerState === 'PLAYING') {
-			if (isInView) {
+			if (isInView === true) {
 				void pauseVideo('PAUSED_BY_USER');
 				sendOphanTrackingEvent('pause');
 			}
@@ -847,7 +848,7 @@ export const SelfHostedVideo = ({
 		);
 
 		sendOphanTrackingEvent('view');
-	}, [isInView ? true : undefined]);
+	}, [isInView === true ? true : undefined]);
 
 	/**
 	 * Show a poster image if a video does NOT play automatically. Otherwise, we do not need
@@ -883,7 +884,7 @@ export const SelfHostedVideo = ({
 				document.fullscreenElement ||
 				(video &&
 					'webkitDisplayingFullscreen' in video &&
-					video.webkitDisplayingFullscreen)
+					Boolean(video.webkitDisplayingFullscreen))
 					? 'enter_fullscreen'
 					: 'exit_fullscreen';
 
@@ -961,6 +962,7 @@ export const SelfHostedVideo = ({
 			return;
 		}
 
+		setDuration(video.duration);
 		positionCues(video);
 	};
 
@@ -1204,8 +1206,8 @@ export const SelfHostedVideo = ({
 	 */
 	if (isPlayable) {
 		if (
-			shouldAutoplay &&
-			isInView &&
+			shouldAutoplay === true &&
+			isInView === true &&
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
 				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
@@ -1273,6 +1275,7 @@ export const SelfHostedVideo = ({
 						posterImage={optimisedPosterImage}
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
+						duration={duration}
 						ref={vidRef}
 						hasAudio={hasAudio}
 						isMuted={isMuted}
@@ -1289,11 +1292,12 @@ export const SelfHostedVideo = ({
 						handleEnded={handleEnded}
 						updateCurrentTime={updateCurrentTime}
 						onError={onError}
-						preloadPartialData={!!shouldAutoplay}
+						preloadPartialData={shouldAutoplay === true}
 						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
 						useLongFormProgressBar={
-							!!videoStyleSettings.useInteractiveProgressBar
+							videoStyleSettings.useInteractiveProgressBar ===
+							true
 						}
 						handleProgressBarInput={showControlsAndStartTimer}
 						showSubtitles={videoStyleSettings.canShowSubtitles}
@@ -1312,7 +1316,7 @@ export const SelfHostedVideo = ({
 					/>
 				</div>
 			</div>
-			{!!caption && format && (
+			{caption !== undefined && caption !== '' && format && (
 				<Caption
 					captionText={caption}
 					format={format}
