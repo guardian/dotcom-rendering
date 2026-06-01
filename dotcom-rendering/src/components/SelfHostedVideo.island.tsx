@@ -440,7 +440,6 @@ export const SelfHostedVideo = ({
 		null,
 	);
 	const [hasPageBecomeActive, setHasPageBecomeActive] = useState(false);
-	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
@@ -557,7 +556,10 @@ export const SelfHostedVideo = ({
 		currentTime,
 	});
 
-	const trackMilestones = useVideoMilestoneTracking(sendOphanTrackingEvent);
+	const [trackMilestones, resetMilestones] = useVideoMilestoneTracking(
+		sendOphanTrackingEvent,
+		videoStyle === 'Default',
+	);
 
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
@@ -621,10 +623,8 @@ export const SelfHostedVideo = ({
 			}
 		} else {
 			void playVideo();
-			if (hasTrackedPlay) {
+			if (playerState !== 'NOT_STARTED' && playerState !== 'ENDED') {
 				sendOphanTrackingEvent('resume');
-			} else {
-				sendOphanTrackingEvent('play');
 			}
 		}
 	};
@@ -986,11 +986,7 @@ export const SelfHostedVideo = ({
 	 * Track the first successful video play in Ophan.
 	 */
 	const handlePlaying = () => {
-		if (hasTrackedPlay) {
-			return;
-		}
-		sendOphanTrackingEvent('play');
-		setHasTrackedPlay(true);
+		trackMilestones({ started: true });
 	};
 
 	const showControlsAndStartTimer = () => {
@@ -1103,6 +1099,12 @@ export const SelfHostedVideo = ({
 		pauseVideo('PAUSED_BY_BROWSER');
 	};
 
+	const handleEnded = () => {
+		trackMilestones({ ended: true });
+		resetMilestones();
+		setPlayerState('ENDED');
+	};
+
 	/**
 	 * If the video could not be loaded due to an error, report to
 	 * Sentry and log in the console.
@@ -1152,13 +1154,18 @@ export const SelfHostedVideo = ({
 
 		if (playerState === 'PLAYING') {
 			setCurrentTime(video.currentTime);
-
 			/**
 			 * We only want to track milestone events for "long-form"
-			 * videos, not loops or cinemagraphs.
+			 * videos, not loops or cinemagraphs. We expect these to be
+			 * too short to be worth tracking progress milestones.
 			 */
-			if (videoStyle === 'Default') {
-				trackMilestones(video.currentTime, video.duration);
+			trackMilestones({
+				currentTime: video.currentTime,
+				duration: video.duration,
+			});
+
+			if (video.currentTime < 1) {
+				resetMilestones();
 			}
 		}
 	};
@@ -1279,6 +1286,7 @@ export const SelfHostedVideo = ({
 						handleKeyDown={handleKeyDown}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
+						handleEnded={handleEnded}
 						updateCurrentTime={updateCurrentTime}
 						onError={onError}
 						preloadPartialData={!!shouldAutoplay}
