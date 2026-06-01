@@ -5,21 +5,18 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { ArticleMetaApps } from '../components/ArticleMeta.apps';
-import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Caption } from '../components/Caption';
 import { GalleryImage } from '../components/GalleryImage';
 import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
-import { MainMediaGallery } from '../components/MainMediaGallery';
+import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
+import { ShareButton } from '../components/ShareButton.island';
 import { Standfirst } from '../components/Standfirst';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
-import { decideMainMediaCaption } from '../lib/decide-caption';
 import { palette } from '../palette';
-import type { ArticleDeprecated, Gallery } from '../types/article';
+import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
 
@@ -47,20 +44,34 @@ const headerStyles = css`
 	}
 `;
 
+const metaStyles = css`
+	${grid.column.centre}
+	grid-row-start: 3;
+
+	${from.desktop} {
+		grid-row-start: 2;
+	}
+
+	${from.leftCol} {
+		${grid.column.left}
+	}
+`;
+
+const shareButtonStyles = css`
+	margin-top: ${space[4]}px;
+	padding: ${space[1]}px;
+`;
+
 export const HostedGalleryLayout = (props: WebProps | AppProps) => {
-	const { content, renderingTarget, format } = props;
+	const { content, renderingTarget, format, serverTime } = props;
 	const { frontendData } = content;
 	const { commercialProperties, editionId } = frontendData;
 
 	const { branding } = commercialProperties[editionId];
 
-	const isWeb = renderingTarget === 'Web';
-
-	const captionText = decideMainMediaCaption(content.mainMedia);
-
 	return (
 		<>
-			{isWeb && branding ? (
+			{branding ? (
 				<Stuck>
 					<Section
 						fullWidth={true}
@@ -84,11 +95,6 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 				}}
 			>
 				<header css={headerStyles}>
-					<MainMediaGallery
-						mainMedia={content.mainMedia}
-						format={format}
-						renderingTarget={props.renderingTarget}
-					/>
 					<ArticleTitle
 						format={format}
 						tags={frontendData.tags}
@@ -109,16 +115,24 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 						standfirst={frontendData.standfirst}
 					/>
-					<Caption
-						captionText={captionText}
-						format={format}
-						isMainMedia={true}
-					/>
-					<Meta
-						renderingTarget={renderingTarget}
-						format={format}
-						frontendData={frontendData}
-					/>
+
+					<div data-print-layout="hide" css={metaStyles}>
+						{renderingTarget === 'Web' && (
+							<div css={shareButtonStyles}>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<ShareButton
+										pageId={frontendData.pageId}
+										webTitle={frontendData.webTitle}
+										format={format}
+										context="ArticleMeta"
+									/>
+								</Island>
+							</div>
+						)}
+					</div>
 				</header>
 				<GalleryBody
 					renderingTarget={renderingTarget}
@@ -128,78 +142,31 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					webTitle={frontendData.webTitle}
 				/>
 			</main>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<OnwardsUpper
+					ajaxUrl={frontendData.config.ajaxUrl}
+					hasRelated={frontendData.hasRelated}
+					hasStoryPackage={frontendData.hasStoryPackage}
+					isAdFreeUser={frontendData.isAdFreeUser}
+					pageId={frontendData.pageId}
+					isPaidContent={!!frontendData.config.isPaidContent}
+					showRelatedContent={frontendData.config.showRelatedContent}
+					keywordIds={frontendData.config.keywordIds}
+					contentType={frontendData.contentType}
+					tags={frontendData.tags}
+					format={format}
+					pillar={format.theme}
+					editionId={frontendData.editionId}
+					shortUrlId={frontendData.config.shortUrlId}
+					discussionApiUrl={frontendData.config.discussionApiUrl}
+					serverTime={serverTime}
+					renderingTarget={renderingTarget}
+					webURL={frontendData.webURL}
+				/>
+			</Island>
 		</>
 	);
 };
-
-const Meta = ({
-	renderingTarget,
-	format,
-	frontendData,
-}: {
-	renderingTarget: RenderingTarget;
-	format: ArticleFormat;
-	frontendData: ArticleDeprecated;
-}) => (
-	<div
-		css={{
-			'&': css(grid.column.centre),
-			paddingBottom: space[6],
-			[from.tablet]: {
-				position: 'relative',
-				'&::before': {
-					content: '""',
-					position: 'absolute',
-					left: -10,
-					top: 0,
-					bottom: 0,
-					width: 1,
-					backgroundColor: palette('--article-border'),
-				},
-			},
-		}}
-	>
-		{renderingTarget === 'Web' ? (
-			<ArticleMeta
-				branding={
-					frontendData.commercialProperties[frontendData.editionId]
-						.branding
-				}
-				format={format}
-				pageId={frontendData.pageId}
-				webTitle={frontendData.webTitle}
-				byline={frontendData.byline}
-				tags={frontendData.tags}
-				primaryDateline={frontendData.webPublicationDateDisplay}
-				secondaryDateline={
-					frontendData.webPublicationSecondaryDateDisplay
-				}
-				isCommentable={frontendData.isCommentable}
-				discussionApiUrl={frontendData.config.discussionApiUrl}
-				shortUrlId={frontendData.config.shortUrlId}
-			/>
-		) : null}
-		{renderingTarget === 'Apps' ? (
-			<ArticleMetaApps
-				branding={
-					frontendData.commercialProperties[frontendData.editionId]
-						.branding
-				}
-				format={format}
-				pageId={frontendData.pageId}
-				byline={frontendData.byline}
-				tags={frontendData.tags}
-				primaryDateline={frontendData.webPublicationDateDisplay}
-				secondaryDateline={
-					frontendData.webPublicationSecondaryDateDisplay
-				}
-				isCommentable={frontendData.isCommentable}
-				discussionApiUrl={frontendData.config.discussionApiUrl}
-				shortUrlId={frontendData.config.shortUrlId}
-			/>
-		) : null}
-	</div>
-);
 
 const GalleryBody = (props: {
 	renderingTarget: RenderingTarget;
