@@ -2,7 +2,7 @@ import type { AbTest, TAction } from '@guardian/ophan-tracker-js';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
-export const AB_TEST_NAME = 'newsletters-newsletter-signup-card';
+export const AB_TEST_NAME = 'newsletters-signup-card-country-illustration';
 
 export type NewsletterEventDescription =
 	| 'click-button'
