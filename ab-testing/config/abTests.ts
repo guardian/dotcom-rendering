@@ -163,7 +163,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Test impact of click to article via loop videos on fronts",
 		owners: ["fronts.and.curation@guardian.co.uk"],
-		status: "OFF",
+		status: "ON",
 		expirationDate: "2026-06-19",
 		type: "server",
 		audienceSize: 0 / 100,
