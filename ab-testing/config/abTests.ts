@@ -45,19 +45,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "growth-admiral-adblock-detect",
-		description:
-			"Control group for Admiral ad blocker - runs the detection script but does not show the modal",
-		owners: ["growth.dev@guardian.co.uk"],
-		expirationDate: "2027-01-21",
-		type: "client",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["variant-detect"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "growth-holdback-group",
 		description:
 			"Test for 5% holdback group that does not qualify for any testing so long as the test is live in the RRCP",
@@ -167,6 +154,19 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-06-19",
 		type: "server",
 		audienceSize: 0 / 100,
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "martech-admiral-adblock",
+		description:
+			"Control group for Admiral ad blocker - runs the detection script but does not show the modal",
+		owners: ["martech.dev@guardian.co.uk"],
+		expirationDate: "2027-01-21",
+		type: "client",
+		status: "ON",
+		audienceSize: 20 / 100,
+		audienceSpace: "A",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
