@@ -150,7 +150,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Test to measure the impact of adding Teads as a bidder in prebid .",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-06-04",
+		expirationDate: "2026-06-11",
 		type: "client",
 		status: "ON",
 		audienceSize: 0 / 100,
@@ -163,7 +163,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Test impact of click to article via loop videos on fronts",
 		owners: ["fronts.and.curation@guardian.co.uk"],
-		status: "OFF",
+		status: "ON",
 		expirationDate: "2026-06-19",
 		type: "server",
 		audienceSize: 0 / 100,

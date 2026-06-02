@@ -153,6 +153,7 @@ export const HighlightsCard = ({
 					dataLinkName={dataLinkName}
 					isExternalLink={isExternalLink}
 					isLoopClickThroughTest={false}
+					isLoopClickThroughTestVariant={false}
 				/>
 
 				<div css={[content, shouldJustifyContent && spaceBetween]}>
