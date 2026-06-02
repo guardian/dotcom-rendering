@@ -1,12 +1,17 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
-import { forwardRef, useImperativeHandle } from 'react';
-import { sendNewsletterSignupEvent } from '../lib/newsletterSignupTracking';
+import { type ComponentProps, forwardRef, useImperativeHandle } from 'react';
+import * as newsletterSignupTracking from '../lib/newsletterSignupTracking';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
 import { useCountryCode } from '../lib/useCountryCode';
 import { ConfigProvider } from './ConfigContext';
 import { SecureSignup } from './SecureSignup.island';
+
+jest.mock('../lib/newsletterSignupTracking', () => ({
+	...jest.requireActual('../lib/newsletterSignupTracking'),
+	sendNewsletterSignupEvent: jest.fn(),
+}));
 
 jest.mock('../lib/useAuthStatus', () => ({
 	useAuthStatus: jest.fn(),
@@ -25,11 +30,7 @@ jest.mock('../lib/fetchEmail', () => ({
 	lazyFetchEmailWithTimeout: jest.fn(() => () => Promise.resolve(null)),
 }));
 
-jest.mock('../lib/newsletterSignupTracking', () => ({
-	EVENT_DESCRIPTION_TO_ACTION: {},
-	NEWSLETTER_SIGNUP_COMPONENT_ID: { control: () => 'test-id' },
-	sendNewsletterSignupEvent: jest.fn(),
-}));
+let sendNewsletterSignupEventSpy: jest.SpyInstance;
 
 type RecaptchaProps = {
 	// eslint-disable-next-line react/no-unused-prop-types -- false positive
@@ -62,7 +63,9 @@ jest.mock('react-google-recaptcha', () => ({
 	),
 }));
 
-const secureSignupElement = () => (
+const secureSignupElement = (
+	props?: Partial<ComponentProps<typeof SecureSignup>>,
+) => (
 	<ConfigProvider
 		value={{
 			renderingTarget: 'Web',
@@ -74,11 +77,14 @@ const secureSignupElement = () => (
 		<SecureSignup
 			newsletterId="morning-briefing"
 			successDescription="You'll receive Morning Briefing every weekday."
+			{...props}
 		/>
 	</ConfigProvider>
 );
 
-const renderSecureSignup = () => render(secureSignupElement());
+const renderSecureSignup = (
+	props?: Partial<ComponentProps<typeof SecureSignup>>,
+) => render(secureSignupElement(props));
 
 const getRequestBodyParams = (callIndex = 0): URLSearchParams => {
 	const [, requestInit] = (global.fetch as jest.Mock).mock.calls[
@@ -89,8 +95,7 @@ const getRequestBodyParams = (callIndex = 0): URLSearchParams => {
 };
 
 const getTrackingPayloadForEvent = (eventDescription: string) => {
-	const trackingCalls = (sendNewsletterSignupEvent as jest.Mock).mock
-		.calls as Array<
+	const trackingCalls = sendNewsletterSignupEventSpy.mock.calls as Array<
 		[
 			{
 				value: {
@@ -110,6 +115,27 @@ const getTrackingPayloadForEvent = (eventDescription: string) => {
 	return undefined;
 };
 
+const getTrackingCallForEvent = (eventDescription: string) => {
+	const trackingCalls = sendNewsletterSignupEventSpy.mock.calls as Array<
+		[
+			{
+				componentId: string;
+				value: {
+					eventDescription: string;
+				};
+			},
+		]
+	>;
+
+	for (const [payload] of trackingCalls) {
+		if (payload.value.eventDescription === eventDescription) {
+			return payload;
+		}
+	}
+
+	return undefined;
+};
+
 describe('SecureSignup — US marketing toggle hiding', () => {
 	const pageConfig = window.guardian.config
 		.page as typeof window.guardian.config.page & {
@@ -118,6 +144,10 @@ describe('SecureSignup — US marketing toggle hiding', () => {
 
 	beforeEach(() => {
 		jest.clearAllMocks();
+		sendNewsletterSignupEventSpy = jest.spyOn(
+			newsletterSignupTracking,
+			'sendNewsletterSignupEvent',
+		);
 
 		recaptchaBehaviour = (_handle, props) =>
 			props.onChange?.('test-recaptcha-token');
@@ -255,5 +285,70 @@ describe('SecureSignup — US marketing toggle hiding', () => {
 				'Get updates about our journalism and ways to support and enjoy our work.',
 			),
 		).toBeInTheDocument();
+	});
+});
+
+describe('SecureSignup tracking component id', () => {
+	const submitSignupForm = async (
+		testUser: ReturnType<typeof user.setup>,
+	) => {
+		await waitFor(() => {
+			expect(
+				screen.getByRole('button', { name: 'Sign up' }),
+			).toBeInTheDocument();
+		});
+		await testUser.type(
+			screen.getByLabelText('Enter your email address'),
+			'reader@example.com',
+		);
+		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+	};
+
+	beforeEach(() => {
+		jest.clearAllMocks();
+		sendNewsletterSignupEventSpy = jest.spyOn(
+			newsletterSignupTracking,
+			'sendNewsletterSignupEvent',
+		);
+
+		recaptchaBehaviour = (_handle, props) =>
+			props.onChange?.('test-recaptcha-token');
+
+		(useIsSignedIn as jest.Mock).mockReturnValue(false);
+		(useAuthStatus as jest.Mock).mockReturnValue({ kind: 'SignedOut' });
+		(useBrowserId as jest.Mock).mockReturnValue('test-browser-id');
+		(useCountryCode as jest.Mock).mockReturnValue('GB');
+
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = false;
+		global.fetch = jest.fn().mockResolvedValue({ ok: true } as Response);
+	});
+
+	it('uses the control component id when no abTest variant is provided', async () => {
+		const testUser = user.setup();
+		renderSecureSignup();
+		await submitSignupForm(testUser);
+
+		await waitFor(() => {
+			expect(
+				getTrackingCallForEvent('form-submission')?.componentId,
+			).toBe('AR SecureSignup morning-briefing');
+		});
+	});
+
+	it('uses the variantNewField component id when variant is variantNewField', async () => {
+		const testUser = user.setup();
+		renderSecureSignup({
+			abTest: {
+				name: 'test-ab',
+				variant: 'variantNewField',
+			},
+		});
+		await submitSignupForm(testUser);
+
+		await waitFor(() => {
+			expect(
+				getTrackingCallForEvent('form-submission')?.componentId,
+			).toBe('AR SecureSignup morning-briefing - variantNewField');
+		});
 	});
 });
