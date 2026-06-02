@@ -85,7 +85,7 @@ export const CardLink = ({
 	isExternalLink,
 	isLoopClickThroughTest,
 }: Props) => {
-	/* if we are in the loop click through test, we are adding a unique string to the data link name tracking so clicks to article can be diffrentiated from other clicks on the card */
+	/* if we are in the loop click through test, we add a unique string to the data link name tracking so clicks to article can be diffrentiated from other clicks on the card */
 	const clickThroughLinkName = isLoopClickThroughTest
 		? `${dataLinkName} | card-link-clickthrough`
 		: dataLinkName;
