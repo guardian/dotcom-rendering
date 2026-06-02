@@ -3,7 +3,6 @@ import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-	getOphan,
 	submitClickComponentEvent,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
@@ -16,6 +15,7 @@ import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
+import { useVideoAttentionTracking } from '../lib/useVideoAttentionTracking';
 import { useVideoMilestoneTracking } from '../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
@@ -29,7 +29,6 @@ import { videoSettingsMap } from '../lib/videoStyleSettings';
 import { palette } from '../palette';
 import type { RoleType } from '../types/content';
 import type { VideoPlayerFormat } from '../types/mainMedia';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
@@ -229,35 +228,6 @@ const logAndReportError = (src: string, error: Error) => {
 	}
 
 	log('dotcom', message);
-};
-
-/**
- * Initiates attention tracking for ophan
- */
-const trackAttention = async (
-	videoElement: HTMLVideoElement,
-	atomId: string,
-	renderingTarget: RenderingTarget,
-	videoStyle: OphanVideoStyle,
-) => {
-	try {
-		const ophan = await getOphan(renderingTarget);
-		ophan.trackComponentAttention(
-			`gu-video-${videoStyle}-${atomId}`,
-			videoElement,
-			VISIBILITY_THRESHOLD,
-			true,
-		);
-	} catch (error) {
-		log('dotcom', 'Failed to track video attention:', error);
-	}
-};
-
-const dispatchOphanAttentionEvent = (
-	eventType: 'videoPlaying' | 'videoPause',
-) => {
-	const event = new Event(eventType, { bubbles: true });
-	document.dispatchEvent(event);
 };
 
 const getOptimisedPosterImage = (
@@ -573,6 +543,13 @@ export const SelfHostedVideo = ({
 		videoStyle === 'Default',
 	);
 
+	useVideoAttentionTracking(
+		`gu-video-${ophanVideoStyle}-${atomId}`,
+		isInView,
+		playerState === 'PLAYING',
+		renderingTarget,
+	);
+
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
 		if (!video) {
@@ -587,9 +564,6 @@ export const SelfHostedVideo = ({
 			await startPlayPromise
 				.then(() => {
 					// Autoplay succeeded
-					if (isWeb) {
-						dispatchOphanAttentionEvent('videoPlaying');
-					}
 					setPlayerState('PLAYING');
 				})
 				.catch((error: Error) => {
@@ -599,7 +573,7 @@ export const SelfHostedVideo = ({
 					setPlayerState('PAUSED_BY_BROWSER');
 				});
 		}
-	}, [isWeb]);
+	}, []);
 
 	const pauseVideo = (
 		pauseReason: Extract<
@@ -619,10 +593,6 @@ export const SelfHostedVideo = ({
 		}
 
 		setPlayerState(pauseReason);
-
-		if (isWeb) {
-			dispatchOphanAttentionEvent('videoPause');
-		}
 
 		void video.pause();
 	};
@@ -692,7 +662,6 @@ export const SelfHostedVideo = ({
 	 *
 	 * 1. Determine whether we can autoplay video.
 	 * 2. Use the best video size available for the user's screen size
-	 * 2. Initialise Ophan attention tracking.
 	 * 3. Creates event listeners to control playback when there are multiple videos.
 	 */
 	useEffect(() => {
@@ -708,18 +677,6 @@ export const SelfHostedVideo = ({
 			screenWidth,
 		);
 		setOptimisedSources(filteredSources);
-
-		/**
-		 * Initialise Ophan attention tracking
-		 */
-		if (vidRef.current) {
-			void trackAttention(
-				vidRef.current,
-				atomId,
-				renderingTarget,
-				ophanVideoStyle,
-			);
-		}
 
 		/**
 		 * Mutes the current video when another video is unmuted
@@ -808,14 +765,7 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [
-		setMutedState,
-		uniqueId,
-		atomId,
-		sources,
-		renderingTarget,
-		ophanVideoStyle,
-	]);
+	}, [setMutedState, uniqueId, sources, renderingTarget]);
 
 	/* Creates video-specific event listeners to handle fullscreen behaviour */
 	useEffect(() => {
