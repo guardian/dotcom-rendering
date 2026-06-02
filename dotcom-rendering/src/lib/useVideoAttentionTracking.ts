@@ -88,8 +88,10 @@ export const useVideoAttentionTracking = (
 			) {
 				void getOphan(renderingTarget).then((ophan) => {
 					if (renderingTarget === 'Web') {
-						// EventPayload is current typed erroneously
+						// EventPayload is currently typed erroneously
 						ophan.record({
+							// AttentionMs value is currently required to avoid the event from being dropped
+							attentionMs: 0,
 							componentAttentionMs: {
 								[componentName]: Math.round(
 									totalAttentionMsRef.current,
