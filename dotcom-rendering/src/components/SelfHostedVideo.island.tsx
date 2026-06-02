@@ -166,6 +166,7 @@ const fullscreenStyles = css`
 
 		/* Override the fixed aspect-ratio + width:100% on the video so it
 		   fits within the screen while preserving its aspect ratio. */
+
 		video {
 			width: 100%;
 			height: 100%;
@@ -395,6 +396,12 @@ type Props = {
 	isMainMedia?: boolean;
 	role?: RoleType;
 	restrictHeightOnDesktop?: boolean;
+	cardLink?: {
+		headlineText: string;
+		dataLinkName?: string;
+		isExternalLink: boolean;
+	};
+	isInLoopClickTestVariant?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -424,6 +431,8 @@ export const SelfHostedVideo = ({
 	role,
 	posterImageAspectRatio,
 	restrictHeightOnDesktop = false,
+	cardLink,
+	isInLoopClickTestVariant,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -452,6 +461,9 @@ export const SelfHostedVideo = ({
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
+
+	const isLoopClickThroughTest =
+		videoStyle === 'Loop' && isInLoopClickTestVariant;
 
 	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
@@ -1313,6 +1325,9 @@ export const SelfHostedVideo = ({
 						}
 						isInteractive={videoStyleSettings.isInteractive}
 						isWebKitFullscreen={isWebKitFullscreen}
+						linkTo={linkTo}
+						cardLink={cardLink}
+						isLoopClickThroughTest={isLoopClickThroughTest}
 					/>
 				</div>
 			</div>

@@ -12,6 +12,7 @@ import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
 import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
 import { getOphanComponents } from '../../lib/labs';
+import { useAB } from '../../lib/useAB';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
@@ -256,7 +257,6 @@ const getMedia = ({
 	slideshowImages,
 	mainMedia,
 	canPlayInline,
-	isFrontContainer,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -265,7 +265,6 @@ const getMedia = ({
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
-	isFrontContainer: boolean;
 }) => {
 	if (mainMedia?.type === 'SelfHostedVideo' && canPlayInline) {
 		let type: CardMediaType;
@@ -302,11 +301,7 @@ const getMedia = ({
 		return { type: 'avatar', avatarUrl } as const;
 	}
 
-	if (
-		mainMedia?.type === 'Audio' &&
-		mainMedia.podcastImage &&
-		isFrontContainer
-	) {
+	if (mainMedia?.type === 'Audio' && mainMedia.podcastImage) {
 		return {
 			...mainMedia,
 			type: 'podcast',
@@ -410,6 +405,18 @@ export const Card = ({
 	articleMedia,
 	contentSpacing,
 }: Props) => {
+	const ab = useAB();
+	const isInLoopClickTestControl =
+		ab?.isUserInTestGroup(
+			'fronts-and-curation-loop-click-through',
+			'control',
+		) ?? false;
+	const isInLoopClickTestVariant =
+		ab?.isUserInTestGroup(
+			'fronts-and-curation-loop-click-through',
+			'variant',
+		) ?? false;
+
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
@@ -521,7 +528,6 @@ export const Card = ({
 		slideshowImages,
 		mainMedia,
 		canPlayInline,
-		isFrontContainer,
 	});
 
 	const isSelfHostedVideo =
@@ -531,9 +537,9 @@ export const Card = ({
 			media.type === 'cinemagraph');
 
 	const resolvedDataLinkName =
-		media && dataLinkName
+		media && !isUndefined(dataLinkName)
 			? appendLinkNameMedia(dataLinkName, media.type)
-			: dataLinkName;
+			: undefined;
 
 	/**
 	 * For opinion type cards with avatars (which aren't onwards content)
@@ -788,6 +794,11 @@ export const Card = ({
 		);
 	};
 
+	const isInLoopClickTest =
+		isSelfHostedVideo &&
+		media.mainMedia.videoStyle === 'Loop' &&
+		(isInLoopClickTestControl || isInLoopClickTestVariant);
+
 	return (
 		<CardWrapper
 			format={format}
@@ -805,6 +816,7 @@ export const Card = ({
 				headlineText={headlineText}
 				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
+				isLoopClickThroughTest={!!isInLoopClickTest}
 			/>
 			{headlinePosition === 'outer' && (
 				<div
@@ -932,6 +944,14 @@ export const Card = ({
 									subtitleSize={subtitleSize}
 									minAspectRatio={3 / 4}
 									containerAspectRatioDesktop={5 / 4}
+									cardLink={{
+										headlineText,
+										dataLinkName: resolvedDataLinkName,
+										isExternalLink,
+									}}
+									isInLoopClickTestVariant={
+										isInLoopClickTestVariant
+									}
 								/>
 							</Island>
 						)}
