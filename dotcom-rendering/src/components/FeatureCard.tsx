@@ -520,7 +520,10 @@ export const FeatureCard = ({
 							headlineText={headlineText}
 							dataLinkName={resolvedDataLinkName}
 							isExternalLink={isExternalLink}
-							isLoopClickThroughTest={!!isInLoopClickTest}
+							isLoopClickThroughTest={isInLoopClickTest === true}
+							isLoopClickThroughTestVariant={
+								isInLoopClickTestVariant
+							}
 						/>
 					)}
 					<div css={contentStyles}>
@@ -737,7 +740,10 @@ export const FeatureCard = ({
 												dataLinkName={dataLinkName}
 												isExternalLink={isExternalLink}
 												isLoopClickThroughTest={
-													!!isInLoopClickTest
+													isInLoopClickTest === true
+												}
+												isLoopClickThroughTestVariant={
+													isInLoopClickTestVariant
 												}
 											/>
 										)}

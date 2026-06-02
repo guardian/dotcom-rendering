@@ -431,7 +431,7 @@ export const SelfHostedVideo = ({
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
-	const isLoopClickThroughTest =
+	const isLoopClickThroughTestVariant =
 		videoStyle === 'Loop' && isInLoopClickTestVariant;
 
 	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
@@ -1273,7 +1273,9 @@ export const SelfHostedVideo = ({
 						isWebKitFullscreen={isWebKitFullscreen}
 						linkTo={linkTo}
 						cardLink={cardLink}
-						isLoopClickThroughTest={isLoopClickThroughTest}
+						isLoopClickThroughTestVariant={
+							isLoopClickThroughTestVariant
+						}
 					/>
 				</div>
 			</div>
