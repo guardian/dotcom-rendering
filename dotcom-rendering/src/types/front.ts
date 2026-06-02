@@ -70,6 +70,23 @@ export type DCRFrontImage = {
 	altText: string;
 };
 
+export type DCRFrontCardNewsletter = {
+	identityName: string;
+	name: string;
+	highlightCardTitle?: string;
+	theme: string;
+	description: string;
+	frequency: string;
+	listId: number;
+	group: string;
+	successDescription: string;
+	regionFocus?: string;
+	illustrationCard?: string;
+	illustrationSquare?: string;
+	exampleUrl?: string;
+	category: string;
+};
+
 export type DCRFrontCard = {
 	format: ArticleFormat;
 	url: string;
@@ -101,6 +118,7 @@ export type DCRFrontCard = {
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
 	showVideo?: boolean;
+	newsletter?: DCRFrontCardNewsletter;
 	uniqueId?: string;
 	serverTime?: number;
 	articleMedia?: ArticleMedia;

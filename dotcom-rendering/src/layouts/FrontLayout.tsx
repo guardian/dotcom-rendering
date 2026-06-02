@@ -192,6 +192,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					frontId={front.pressedPage.id}
 					collectionId={0}
+					idApiUrl={front.config.idApiUrl}
+					hideNewsletterSignupComponentForSubscribers={
+						!!switches.hideNewsletterSignupComponentForSubscribers
+					}
 				/>
 			)
 		);
@@ -534,6 +538,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
+									idApiUrl={front.config.idApiUrl}
+									hideNewsletterSignupComponentForSubscribers={
+										!!switches.hideNewsletterSignupComponentForSubscribers
+									}
 								/>
 							</FrontSection>
 

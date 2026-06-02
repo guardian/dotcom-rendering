@@ -35,12 +35,16 @@ const meta = preview.meta({
 export const Default = meta.story({
 	args: {
 		trails: trails.slice(0, 6),
+		idApiUrl: 'https://idapi.theguardian.com',
+		hideNewsletterSignupComponentForSubscribers: false,
 	},
 });
 
 export const withEightCards = meta.story({
+	...Default.input,
 	name: 'With Eight Cards',
 	args: {
+		...Default.input.args,
 		trails: trails.slice(0, 8),
 	},
 });
@@ -49,6 +53,7 @@ export const withTwoLineKicker = meta.story({
 	...Default.input,
 	name: 'With Two Line Kicker',
 	args: {
+		...Default.input.args,
 		trails: [
 			{
 				...defaultCard,
@@ -63,6 +68,7 @@ export const withLiveKicker = meta.story({
 	...Default.input,
 	name: 'With Live Kicker',
 	args: {
+		...Default.input.args,
 		trails: [
 			{
 				...defaultCard,
@@ -78,6 +84,7 @@ export const withFourLineHeadline = meta.story({
 	...Default.input,
 	name: 'With Four Line Headline',
 	args: {
+		...Default.input.args,
 		trails: [
 			{
 				...defaultCard,
@@ -93,6 +100,7 @@ export const withExcessivleyLongHeadline = meta.story({
 	...Default.input,
 	name: 'With Excessively Long Headline',
 	args: {
+		...Default.input.args,
 		trails: [
 			{
 				...defaultCard,

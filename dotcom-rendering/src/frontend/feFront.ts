@@ -118,6 +118,23 @@ export interface FEMediaAtom {
 	// channelId?: string; // currently unused
 }
 
+export type FENewsletterData = {
+	identityName: string;
+	name: string;
+	highlightCardTitle?: string;
+	theme: string;
+	description: string;
+	frequency: string;
+	listId: number;
+	group: string;
+	successDescription: string;
+	regionFocus?: string;
+	illustrationCard?: string;
+	illustrationSquare?: string;
+	exampleUrl?: string;
+	category: string;
+};
+
 export type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
@@ -198,6 +215,7 @@ export type FEFrontCard = {
 		editionBrandings: EditionBranding[];
 		href?: string;
 		embedUri?: string;
+		newsletterData?: FENewsletterData;
 	};
 	header: {
 		isVideo: boolean;

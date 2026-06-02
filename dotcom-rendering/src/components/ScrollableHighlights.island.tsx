@@ -12,10 +12,13 @@ import { ophanComponentId } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
+import { HighlightsNewsletterSignupCard } from './Masthead/HighlightsNewsletterSignupCard';
 
 type Props = {
 	trails: DCRFrontCard[];
 	frontId?: string;
+	idApiUrl: string;
+	hideNewsletterSignupComponentForSubscribers: boolean;
 };
 
 const containerStyles = css`
@@ -207,7 +210,12 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-export const ScrollableHighlights = ({ trails, frontId }: Props) => {
+export const ScrollableHighlights = ({
+	trails,
+	frontId,
+	idApiUrl,
+	hideNewsletterSignupComponentForSubscribers,
+}: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
@@ -294,6 +302,26 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				data-heatphan-type="carousel"
 			>
 				{trails.map((trail) => {
+					if (trail.newsletter) {
+						return (
+							<li
+								key={trail.url}
+								css={[itemStyles, verticalLineStyles]}
+								role="group"
+								aria-roledescription="slide"
+							>
+								<HighlightsNewsletterSignupCard
+									newsletter={trail.newsletter}
+									dataLinkName={trail.dataLinkName}
+									idApiUrl={idApiUrl}
+									hideNewsletterSignupComponentForSubscribers={
+										hideNewsletterSignupComponentForSubscribers
+									}
+								/>
+							</li>
+						);
+					}
+
 					return (
 						<li
 							key={trail.url}
