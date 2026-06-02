@@ -106,6 +106,7 @@ export const PlayPauseIcon = ({
 		<button
 			type="button"
 			onClick={handleClick}
+			className="play-pause-icon"
 			css={[
 				buttonStyles,
 				isLoopClickThroughTest

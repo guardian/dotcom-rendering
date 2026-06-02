@@ -53,6 +53,7 @@ const VISIBILITY_THRESHOLD = 0.5;
  * The duration in ms for which controls are displayed before fading out.
  */
 const CONTROLS_FADE_DELAY = 2700;
+const PLAY_BUTTON_FADE_DELAY = 1700;
 
 const cardStyles = (
 	isInteractive: boolean,
@@ -177,24 +178,41 @@ const fullscreenStyles = css`
 	}
 `;
 
+const showTransitionStyles = css`
+	visibility: visible;
+	opacity: 1;
+	transition:
+		visibility 0.2s,
+		opacity 0.2s ease-in-out;
+`;
+
 const showControlsStyles = css`
 	.controls-container {
-		visibility: visible;
-		opacity: 1;
-		transition:
-			visibility 0.2s,
-			opacity 0.2s ease-in-out;
+		${showTransitionStyles};
 	}
+
+	.play-pause-icon {
+		${showTransitionStyles};
+	}
+`;
+
+const hideTransitionStyles = css`
+	visibility: hidden;
+	opacity: 0;
+	transition:
+		visibility 0.3s,
+		opacity 0.3s ease-in-out;
 `;
 
 const hideControlsStyles = css`
 	.controls-container {
-		visibility: hidden;
-		opacity: 0;
-		transition:
-			visibility 0.3s,
-			opacity 0.3s ease-in-out;
+		${hideTransitionStyles}
 		transition-delay: ${CONTROLS_FADE_DELAY}ms;
+	}
+
+	.play-pause-icon {
+		${hideTransitionStyles}
+		transition-delay: ${PLAY_BUTTON_FADE_DELAY}ms;
 	}
 
 	@media (hover: hover) {
