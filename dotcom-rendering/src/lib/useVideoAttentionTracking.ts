@@ -1,4 +1,3 @@
-import type { EventPayload } from '@guardian/ophan-tracker-js';
 import { useEffect, useRef } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -86,24 +85,21 @@ export const useVideoAttentionTracking = (
 			if (
 				totalAttentionMsRef.current !== reportedAttentionMsRef.current
 			) {
-				void getOphan(renderingTarget).then((ophan) => {
-					if (renderingTarget === 'Web') {
-						// EventPayload is currently typed erroneously
+				if (renderingTarget === 'Web') {
+					void getOphan(renderingTarget).then((ophan) => {
 						ophan.record({
-							// AttentionMs value is currently required to avoid the event from being dropped
-							attentionMs: 0,
 							componentAttentionMs: {
 								[componentName]: Math.round(
 									totalAttentionMsRef.current,
 								),
 							},
-						} as unknown as EventPayload);
-					} else {
-						/**
-						 * Report component attention time via Bridget.
-						 */
-					}
-				});
+						});
+					});
+				} else {
+					/**
+					 * Report component attention time via Bridget.
+					 */
+				}
 
 				reportedAttentionMsRef.current = totalAttentionMsRef.current;
 			}
