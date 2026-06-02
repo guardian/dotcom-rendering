@@ -95,16 +95,16 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "newsletters-newsletter-signup-card",
+		name: "newsletters-signup-card-country-illustration",
 		description:
-			"Compare the existing SecureSignup (control) against the new NewsletterSignupCard design (variant)",
+			"Compare the existing SecureSignup (control) against a slightly modified version of the control (variantNewField) and the new NewsletterSignupCard design (variantIllustratedCard)",
 		owners: ["newsletters.dev@guardian.co.uk"],
 		expirationDate: "2026-07-01",
 		type: "client",
 		status: "ON",
 		audienceSize: 1,
 		audienceSpace: "B",
-		groups: ["control", "variant"],
+		groups: ["control", "variantNewField", "variantIllustratedCard"],
 		shouldForceMetricsCollection: false,
 	},
 	{

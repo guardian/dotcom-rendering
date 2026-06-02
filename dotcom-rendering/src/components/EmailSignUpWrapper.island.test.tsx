@@ -88,8 +88,9 @@ const renderWrapper = (props = {}, renderingTarget: 'Web' | 'Apps' = 'Web') =>
 
 const mockAbTests = (isInVariant: boolean) => {
 	(useAB as jest.Mock).mockReturnValue({
-		isUserInTestGroup: (_testName: string, group: string) =>
-			group === 'variant' ? isInVariant : !isInVariant,
+		getParticipations: () => ({
+			[AB_TEST_NAME]: isInVariant ? 'variantIllustratedCard' : 'control',
+		}),
 	});
 };
 
@@ -236,12 +237,15 @@ describe('EmailSignUpWrapper', () => {
 				expect.objectContaining({
 					component: {
 						componentType: 'NEWSLETTER_SUBSCRIPTION',
-						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
 							defaultProps.identityName,
 						),
 					},
 					action: 'VIEW',
-					abTest: { name: AB_TEST_NAME, variant: 'variant' },
+					abTest: {
+						name: AB_TEST_NAME,
+						variant: 'variantIllustratedCard',
+					},
 				}),
 				'Web',
 			);
