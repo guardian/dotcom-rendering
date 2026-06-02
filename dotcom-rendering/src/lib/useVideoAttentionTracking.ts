@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { log } from '@guardian/libs';
 import { getVideoClient } from './bridgetApi';
+import { hasMinimumBridgetVersion } from './useIsBridgetCompatible';
 
 /**
  * How often attention time is reported to Ophan, matching the interval used
@@ -82,7 +82,7 @@ export const useVideoAttentionTracking = (
 			}
 		};
 
-		const report = () => {
+		const report = async () => {
 			accumulateAttention();
 			if (
 				totalAttentionMsRef.current !== reportedAttentionMsRef.current
@@ -98,19 +98,26 @@ export const useVideoAttentionTracking = (
 						});
 					});
 				} else {
-					const attentionTime = new Map<string, number>();
-					attentionTime.set(
-						componentName,
-						Math.round(totalAttentionMsRef.current),
-					);
-					void getVideoClient().sendVideoAttentionTime(attentionTime);
+					if (await hasMinimumBridgetVersion('8.11.0-2026-06-02"')) {
+						const attentionTime = new Map<string, number>();
+						attentionTime.set(
+							componentName,
+							Math.round(totalAttentionMsRef.current),
+						);
+						void getVideoClient().sendVideoAttentionTime(
+							attentionTime,
+						);
+					}
 				}
 
 				reportedAttentionMsRef.current = totalAttentionMsRef.current;
 			}
 		};
 
-		const intervalId = window.setInterval(report, REPORTING_INTERVAL_MS);
+		const intervalId = window.setInterval(
+			() => void report,
+			REPORTING_INTERVAL_MS,
+		);
 
 		return () => {
 			window.clearInterval(intervalId);
