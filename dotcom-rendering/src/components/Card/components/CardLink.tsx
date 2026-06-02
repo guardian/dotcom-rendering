@@ -26,25 +26,26 @@ type Props = {
 	dataLinkName?: string;
 	isExternalLink: boolean;
 	isLoopClickThroughTest: boolean;
+	isLoopClickThroughTestVariant: boolean;
 };
 
 const InternalLink = ({
 	linkTo,
 	headlineText,
 	dataLinkName,
-	isLoopClickThroughTest,
+	isLoopClickThroughTestVariant,
 }: {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
-	isLoopClickThroughTest?: boolean;
+	isLoopClickThroughTestVariant: boolean;
 }) => {
 	return (
 		<a
 			href={linkTo}
 			css={[
 				fauxLinkStyles,
-				isLoopClickThroughTest && videoCardLinkStyles,
+				isLoopClickThroughTestVariant && videoCardLinkStyles,
 			]}
 			data-link-name={dataLinkName}
 			aria-label={headlineText}
@@ -56,19 +57,19 @@ const ExternalLink = ({
 	linkTo,
 	headlineText,
 	dataLinkName,
-	isLoopClickThroughTest,
+	isLoopClickThroughTestVariant,
 }: {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
-	isLoopClickThroughTest: boolean;
+	isLoopClickThroughTestVariant: boolean;
 }) => {
 	return (
 		<a
 			href={linkTo}
 			css={[
 				fauxLinkStyles,
-				isLoopClickThroughTest && videoCardLinkStyles,
+				isLoopClickThroughTestVariant && videoCardLinkStyles,
 			]}
 			data-link-name={dataLinkName}
 			aria-label={headlineText + ' (opens in new tab)'}
@@ -84,6 +85,7 @@ export const CardLink = ({
 	dataLinkName = 'article', //this makes sense if the link is to an article, but should this say something like "external" if it's an external link? are there any other uses/alternatives?
 	isExternalLink,
 	isLoopClickThroughTest,
+	isLoopClickThroughTestVariant,
 }: Props) => {
 	/* if we are in the loop click through test, we add a unique string to the data link name tracking so clicks to article can be diffrentiated from other clicks on the card */
 	const clickThroughLinkName = isLoopClickThroughTest
@@ -97,7 +99,9 @@ export const CardLink = ({
 					linkTo={linkTo}
 					headlineText={headlineText}
 					dataLinkName={clickThroughLinkName}
-					isLoopClickThroughTest={isLoopClickThroughTest}
+					isLoopClickThroughTestVariant={
+						isLoopClickThroughTestVariant
+					}
 				/>
 			)}
 			{!isExternalLink && (
@@ -105,7 +109,9 @@ export const CardLink = ({
 					linkTo={linkTo}
 					headlineText={headlineText}
 					dataLinkName={clickThroughLinkName}
-					isLoopClickThroughTest={isLoopClickThroughTest}
+					isLoopClickThroughTestVariant={
+						isLoopClickThroughTestVariant
+					}
 				/>
 			)}
 		</>

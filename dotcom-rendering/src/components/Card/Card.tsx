@@ -816,7 +816,10 @@ export const Card = ({
 				headlineText={headlineText}
 				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
-				isLoopClickThroughTest={!!isInLoopClickTest}
+				isLoopClickThroughTest={Boolean(isInLoopClickTest)}
+				isLoopClickThroughTestVariant={Boolean(
+					isInLoopClickTestVariant,
+				)}
 			/>
 			{headlinePosition === 'outer' && (
 				<div

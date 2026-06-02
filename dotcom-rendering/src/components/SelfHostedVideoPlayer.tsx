@@ -159,7 +159,7 @@ export type Props = {
 		dataLinkName?: string;
 		isExternalLink: boolean;
 	};
-	isLoopClickThroughTest?: boolean;
+	isLoopClickThroughTestVariant?: boolean;
 };
 
 /**
@@ -216,7 +216,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isWebKitFullscreen,
 			linkTo,
 			cardLink,
-			isLoopClickThroughTest,
+			isLoopClickThroughTestVariant,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -231,13 +231,14 @@ export const SelfHostedVideoPlayer = forwardRef(
 
 		return (
 			<>
-				{cardLink && isLoopClickThroughTest && (
+				{cardLink && isLoopClickThroughTestVariant === true && (
 					<CardLink
 						linkTo={linkTo}
 						headlineText={cardLink.headlineText}
 						dataLinkName={cardLink.dataLinkName}
 						isExternalLink={cardLink.isExternalLink}
 						isLoopClickThroughTest={true}
+						isLoopClickThroughTestVariant={true}
 					/>
 				)}
 				<video
@@ -268,7 +269,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onTimeUpdate={handleTimeUpdate}
 					onPause={handlePause}
 					onClick={
-						isLoopClickThroughTest === true
+						isLoopClickThroughTestVariant === true
 							? undefined
 							: handlePlayPauseClick
 					}
@@ -310,17 +311,19 @@ export const SelfHostedVideoPlayer = forwardRef(
 					className="controls-container"
 					css={[
 						videoControlsStyles,
-						isLoopClickThroughTest && videoControlsZIndexStyles,
+						isLoopClickThroughTestVariant === true &&
+							videoControlsZIndexStyles,
 					]}
 				>
-					{!isLoopClickThroughTest && showPlayPauseIcon !== null && (
-						<PlayPauseIcon
-							type={showPlayPauseIcon}
-							atomId={atomId}
-							handleClick={handlePlayPauseClick}
-							isLoopClickThroughTest={false}
-						/>
-					)}
+					{!isLoopClickThroughTestVariant &&
+						showPlayPauseIcon !== null && (
+							<PlayPauseIcon
+								type={showPlayPauseIcon}
+								atomId={atomId}
+								handleClick={handlePlayPauseClick}
+								isLoopClickThroughTest={false}
+							/>
+						)}
 					{showProgressBar &&
 						(useLongFormProgressBar ? (
 							<VideoProgressBarInteractive
@@ -339,7 +342,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 							/>
 						))}
 					{((showIcons && (showFullscreenIcon || hasAudio)) ||
-						isLoopClickThroughTest) && (
+						isLoopClickThroughTestVariant === true) && (
 						<div
 							css={[
 								iconsContainerStyles,
@@ -351,7 +354,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 									iconsTopPositionStyles,
 							]}
 						>
-							{isLoopClickThroughTest && (
+							{isLoopClickThroughTestVariant === true && (
 								<PlayPauseIcon
 									type={showPlayPauseIcon ?? 'pause'}
 									atomId={atomId}
