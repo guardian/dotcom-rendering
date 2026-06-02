@@ -50,6 +50,9 @@ type Props = {
 	newsletterId: string;
 	successDescription: string;
 	abTest?: AbTest;
+	emailInputNameOverride?: string;
+	emailInputIdOverride?: string;
+	addCountryField?: boolean;
 };
 
 const formStyles = css`
@@ -116,6 +119,14 @@ const optInCheckboxTextSmall = css`
 	}
 `;
 
+/*
+ * The country form field is used here to try and fool bots into filling the field in
+ * and therefore be able to detect them
+ */
+const countryFieldStyles = css`
+	display: none;
+`;
+
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
 		<span>
@@ -144,10 +155,19 @@ const buildFormData = (
 	emailAddress: string,
 	newsletterId: string,
 	token: string,
-	marketingOptIn?: boolean,
-	browserId?: string,
-	marketingOptInHiddenForCountry?: boolean,
+	additionalOptions?: {
+		marketingOptIn?: boolean;
+		browserId?: string;
+		marketingOptInHiddenForCountry?: boolean;
+		countryValue?: string;
+	},
 ): FormData => {
+	const {
+		marketingOptIn,
+		browserId,
+		marketingOptInHiddenForCountry,
+		countryValue,
+	} = additionalOptions ?? {};
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
 
@@ -172,6 +192,13 @@ const buildFormData = (
 
 	if (browserId !== undefined) {
 		formData.append('browserId', browserId);
+	}
+
+	/*
+		The country form field is used here to try and fool bots into filling the field in
+	*/
+	if (countryValue !== undefined) {
+		formData.append('country', countryValue);
 	}
 
 	return formData;
@@ -254,6 +281,9 @@ export const SecureSignup = ({
 	newsletterId,
 	successDescription,
 	abTest,
+	emailInputNameOverride,
+	emailInputIdOverride,
+	addCountryField = false,
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
@@ -313,6 +343,11 @@ export const SecureSignup = ({
 			isSignedIn,
 			effectiveMarketingOptIn,
 		});
+		const possibleCountryInput: HTMLInputElement | null =
+			document.querySelector(
+				`#secure-signup-${newsletterId} input[name="country"]`,
+			) ?? null;
+		const countryValue = possibleCountryInput?.value;
 
 		sendTracking(
 			newsletterId,
@@ -323,14 +358,14 @@ export const SecureSignup = ({
 			marketingOptInType ? { marketingOptInType } : undefined,
 		);
 
-		const formData = buildFormData(
-			emailAddress,
-			newsletterId,
-			token,
-			effectiveMarketingOptIn,
+		const formData = buildFormData(emailAddress, newsletterId, token, {
+			marketingOptIn: effectiveMarketingOptIn,
 			browserId,
-			marketingOptInHiddenForCountry ? true : undefined,
-		);
+			marketingOptInHiddenForCountry: marketingOptInHiddenForCountry
+				? true
+				: undefined,
+			countryValue,
+		});
 
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
@@ -462,7 +497,8 @@ export const SecureSignup = ({
 				<TextInput
 					hidden={hideEmailInput}
 					hideLabel={hideEmailInput}
-					name="email"
+					name={emailInputNameOverride ?? 'email'}
+					id={emailInputIdOverride}
 					label="Enter your email address"
 					type="email"
 					value={userEmail ?? ''}
@@ -485,6 +521,23 @@ export const SecureSignup = ({
 							}
 						/>
 					</CheckboxGroup>
+				)}
+				{/*
+					The country form field is used here to try and fool bots into filling the field in
+				*/}
+				{addCountryField && (
+					<TextInput
+						name="country"
+						label="country"
+						hideLabel={true}
+						type="text"
+						maxLength={100}
+						optional={true}
+						tabIndex={-1}
+						autoComplete="off"
+						aria-hidden="true"
+						cssOverrides={countryFieldStyles}
+					/>
 				)}
 				<Button onClick={handleClick} size="small" type="submit">
 					Sign up

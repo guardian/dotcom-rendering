@@ -73,7 +73,7 @@ describe('NewsletterSignupCardContainer', () => {
 				expect.objectContaining({
 					component: {
 						componentType: 'NEWSLETTER_SUBSCRIPTION',
-						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
 							defaultProps.identityName,
 						),
 					},
@@ -102,7 +102,7 @@ describe('NewsletterSignupCardContainer', () => {
 					expect.objectContaining({
 						component: {
 							componentType: 'NEWSLETTER_SUBSCRIPTION',
-							id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+							id: NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
 								defaultProps.identityName,
 							),
 						},
@@ -176,7 +176,7 @@ describe('NewsletterSignupCardContainer', () => {
 			expect.objectContaining({
 				action: 'EXPAND',
 				component: expect.objectContaining({
-					id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+					id: NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
 						defaultProps.identityName,
 					),
 				}),
