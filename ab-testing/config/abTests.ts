@@ -158,6 +158,18 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "fronts-and-curation-loop-click-through",
+		description:
+			"Test impact of click to article via loop videos on fronts",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		status: "OFF",
+		expirationDate: "2026-06-19",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
