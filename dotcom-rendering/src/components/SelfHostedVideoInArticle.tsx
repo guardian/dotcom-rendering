@@ -71,9 +71,7 @@ export const SelfHostedVideoInArticle = ({
 					format={format}
 					isMainMedia={isMainMedia}
 					role={role}
-					restrictHeightOnDesktop={
-						!isMainMedia && !isInteractive(format.design)
-					}
+					restrictHeightOnDesktop={!isInteractive(format.design)}
 				/>
 			</Island>
 		</div>
