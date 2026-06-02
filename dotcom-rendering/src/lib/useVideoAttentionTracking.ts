@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { log } from '@guardian/libs';
+import { getVideoClient } from './bridgetApi';
 
 /**
  * How often attention time is reported to Ophan, matching the interval used
@@ -96,9 +98,12 @@ export const useVideoAttentionTracking = (
 						});
 					});
 				} else {
-					/**
-					 * Report component attention time via Bridget.
-					 */
+					const attentionTime = new Map<string, number>();
+					attentionTime.set(
+						componentName,
+						Math.round(totalAttentionMsRef.current),
+					);
+					void getVideoClient().sendVideoAttentionTime(attentionTime);
 				}
 
 				reportedAttentionMsRef.current = totalAttentionMsRef.current;
