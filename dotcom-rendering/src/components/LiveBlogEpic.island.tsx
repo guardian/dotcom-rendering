@@ -17,7 +17,7 @@ import {
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
@@ -109,7 +109,7 @@ const usePayload = ({
 	const countryCode = useCountryCode('liveblog-epic');
 	const mvtId = useMvtId();
 	const isSignedIn = useIsSignedIn();
-	const abTests = useBetaAB();
+	const abTests = useAB();
 
 	if (isSignedIn === 'Pending') {
 		return;

@@ -13,7 +13,7 @@ import {
 import { grid } from '../grid';
 import { getInteractionClient } from '../lib/bridgetApi';
 import { generateImageURL } from '../lib/image';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { worldCup2026PageIds } from '../lib/worldCup2026';
 import {
 	WorldCup2026Icon,
@@ -254,7 +254,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const isApps = renderingTarget === 'Apps';
 
-	const ab = useBetaAB();
+	const ab = useAB();
 
 	const config = configs.find(
 		(cfg) =>

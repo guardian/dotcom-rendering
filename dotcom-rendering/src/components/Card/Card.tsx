@@ -12,6 +12,7 @@ import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
 import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
 import { getOphanComponents } from '../../lib/labs';
+import { useAB } from '../../lib/useAB';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
@@ -162,6 +163,7 @@ export type Props = {
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	starRatingSize?: RatingSizeType;
+	contentSpacing?: 'small' | 'large';
 };
 
 const waveformWrapper = (
@@ -255,7 +257,6 @@ const getMedia = ({
 	slideshowImages,
 	mainMedia,
 	canPlayInline,
-	isFrontContainer,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -264,7 +265,6 @@ const getMedia = ({
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
-	isFrontContainer: boolean;
 }) => {
 	if (mainMedia?.type === 'SelfHostedVideo' && canPlayInline) {
 		let type: CardMediaType;
@@ -301,11 +301,7 @@ const getMedia = ({
 		return { type: 'avatar', avatarUrl } as const;
 	}
 
-	if (
-		mainMedia?.type === 'Audio' &&
-		mainMedia.podcastImage &&
-		isFrontContainer
-	) {
+	if (mainMedia?.type === 'Audio' && mainMedia.podcastImage) {
 		return {
 			...mainMedia,
 			type: 'podcast',
@@ -345,27 +341,6 @@ const decideSublinkPosition = (
 	}
 
 	return alignment === 'vertical' ? 'inner' : 'outer';
-};
-
-const determinePadContent = (
-	isMediaCardOrNewsletter: boolean,
-	isFrontContainer: boolean,
-	isOnwardContent: boolean,
-	isInGalleryContext: boolean,
-): 'large' | 'small' | undefined => {
-	if (isInGalleryContext) {
-		return undefined;
-	}
-
-	if (isMediaCardOrNewsletter) {
-		return isFrontContainer ? 'large' : 'small';
-	}
-
-	if (isOnwardContent) {
-		return 'small';
-	}
-
-	return undefined;
 };
 
 export const Card = ({
@@ -428,7 +403,20 @@ export const Card = ({
 	subtitleSize = 'small',
 	starRatingSize = 'small',
 	articleMedia,
+	contentSpacing,
 }: Props) => {
+	const ab = useAB();
+	const isInLoopClickTestControl =
+		ab?.isUserInTestGroup(
+			'fronts-and-curation-loop-click-through',
+			'control',
+		) ?? false;
+	const isInLoopClickTestVariant =
+		ab?.isUserInTestGroup(
+			'fronts-and-curation-loop-click-through',
+			'variant',
+		) ?? false;
+
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
@@ -449,6 +437,8 @@ export const Card = ({
 	 * It is treated as a media card in the design system.
 	 */
 	const isVideoArticle = format.design === ArticleDesign.Video;
+
+	const isOnwardsContent = onwardsSource !== undefined;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
@@ -538,7 +528,6 @@ export const Card = ({
 		slideshowImages,
 		mainMedia,
 		canPlayInline,
-		isFrontContainer,
 	});
 
 	const isSelfHostedVideo =
@@ -548,9 +537,9 @@ export const Card = ({
 			media.type === 'cinemagraph');
 
 	const resolvedDataLinkName =
-		media && dataLinkName
+		media && !isUndefined(dataLinkName)
 			? appendLinkNameMedia(dataLinkName, media.type)
-			: dataLinkName;
+			: undefined;
 
 	/**
 	 * For opinion type cards with avatars (which aren't onwards content)
@@ -627,23 +616,12 @@ export const Card = ({
 			}
 
 			return {
-				row: 'none',
-				column: 'none',
+				row: 'tiny',
+				column: 'tiny',
 			};
 		}
 
 		if (!isFrontContainer) {
-			/**
-			 * Media cards have 4px padding around the content so we have a
-			 * tiny (4px) gap to account for this and make it 8px total
-			 */
-			if (isMediaCardOrNewsletter) {
-				return {
-					row: 'tiny',
-					column: 'tiny',
-				};
-			}
-
 			return { row: 'small', column: 'small' };
 		}
 
@@ -816,6 +794,11 @@ export const Card = ({
 		);
 	};
 
+	const isInLoopClickTest =
+		isSelfHostedVideo &&
+		media.mainMedia.videoStyle === 'Loop' &&
+		(isInLoopClickTestControl || isInLoopClickTestVariant);
+
 	return (
 		<CardWrapper
 			format={format}
@@ -833,6 +816,7 @@ export const Card = ({
 				headlineText={headlineText}
 				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
+				isLoopClickThroughTest={!!isInLoopClickTest}
 			/>
 			{headlinePosition === 'outer' && (
 				<div
@@ -895,11 +879,7 @@ export const Card = ({
 						articleMedia={articleMedia}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
-						padMedia={
-							isMediaCardOrNewsletter &&
-							isFrontContainer &&
-							!isGallerySecondaryOnward
-						}
+						padMedia={isMediaCardOrNewsletter && !isOnwardsContent}
 						isSmallCard={isSmallCard}
 					>
 						{media.type === 'slideshow' && (
@@ -964,6 +944,14 @@ export const Card = ({
 									subtitleSize={subtitleSize}
 									minAspectRatio={3 / 4}
 									containerAspectRatioDesktop={5 / 4}
+									cardLink={{
+										headlineText,
+										dataLinkName: resolvedDataLinkName,
+										isExternalLink,
+									}}
+									isInLoopClickTestVariant={
+										isInLoopClickTestVariant
+									}
 								/>
 							</Island>
 						)}
@@ -1108,19 +1096,13 @@ export const Card = ({
 				<ContentWrapper
 					mediaSize={mediaSize}
 					isAvatar={media?.type === 'avatar'}
-					isFrontContainer={isFrontContainer}
 					mediaPositionOnDesktop={
 						media ? mediaPositionOnDesktop : 'none'
 					}
 					mediaPositionOnMobile={
 						media ? mediaPositionOnMobile : 'none'
 					}
-					padContent={determinePadContent(
-						isMediaCardOrNewsletter,
-						isFrontContainer,
-						isOnwardContent,
-						isInGalleryContext,
-					)}
+					padContent={contentSpacing}
 				>
 					{/* the div is needed to keep the headline and trail text justified at the start */}
 					<div

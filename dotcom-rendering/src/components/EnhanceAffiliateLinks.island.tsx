@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { buildXcustParamForAffiliateLink } from '../lib/affiliateLinksUtils';
 import { safeParseURL } from '../lib/parse';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 
 /**
  * Add custom parameters to skimlink URLs:
@@ -44,7 +44,7 @@ const utmKeys = [
 ];
 
 export const EnhanceAffiliateLinks = () => {
-	const abTests = useBetaAB();
+	const abTests = useAB();
 
 	// Get users server & client-side AB test participations
 	const abTestParticipations = abTests?.getParticipations();

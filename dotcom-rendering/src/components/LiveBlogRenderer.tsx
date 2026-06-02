@@ -6,7 +6,6 @@ import type { ServerSideTests, Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.island';
-import { FilterKeyEventsToggle } from './FilterKeyEventsToggle.island';
 import { Island } from './Island';
 import { KeyEventsCarousel } from './KeyEventsCarousel.island';
 import { LiveBlock } from './LiveBlock';
@@ -36,7 +35,6 @@ type Props = {
 	contributionsServiceUrl: string;
 	onFirstPage: boolean;
 	keyEvents: Block[];
-	filterKeyEvents: boolean;
 	shouldHideAds: boolean;
 	serverTime?: number;
 	idApiUrl?: string;
@@ -63,7 +61,6 @@ export const LiveBlogRenderer = ({
 	contributionsServiceUrl,
 	onFirstPage,
 	keyEvents,
-	filterKeyEvents = false,
 	editionId,
 	shouldHideAds,
 	serverTime,
@@ -74,7 +71,7 @@ export const LiveBlogRenderer = ({
 
 	return (
 		<>
-			{pinnedPost && onFirstPage && !filterKeyEvents && (
+			{pinnedPost && onFirstPage && (
 				<>
 					<Island defer={{ until: 'idle' }} priority="feature">
 						<EnhancePinnedPost />
@@ -106,16 +103,9 @@ export const LiveBlogRenderer = ({
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<KeyEventsCarousel
 							keyEvents={keyEvents}
-							filterKeyEvents={filterKeyEvents}
 							id={'key-events-carousel-mobile'}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
-						/>
-					</Island>
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<FilterKeyEventsToggle
-							filterKeyEvents={filterKeyEvents}
-							id="filter-toggle-mobile"
 						/>
 					</Island>
 				</Hide>

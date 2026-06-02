@@ -4,7 +4,7 @@ import { cmp } from '@guardian/consent-manager';
 import { getCookie, log } from '@guardian/libs';
 import { useEffect } from 'react';
 import { getOphan } from '../client/ophan/ophan';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useConfig } from './ConfigContext';
 
 const testName = 'growth-admiral-adblock-detect';
@@ -210,7 +210,7 @@ const setUpAdmiralEventLogger = (
 
 export const AdmiralScript = () => {
 	const { renderingTarget } = useConfig();
-	const abTests = useBetaAB();
+	const abTests = useAB();
 	const isInVariantDetectGroup =
 		abTests?.isUserInTestGroup(testName, 'variant-detect') ?? false;
 	const variantName = isInVariantDetectGroup

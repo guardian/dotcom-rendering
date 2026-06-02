@@ -166,6 +166,7 @@ const fullscreenStyles = css`
 
 		/* Override the fixed aspect-ratio + width:100% on the video so it
 		   fits within the screen while preserving its aspect ratio. */
+
 		video {
 			width: 100%;
 			height: 100%;
@@ -395,6 +396,12 @@ type Props = {
 	isMainMedia?: boolean;
 	role?: RoleType;
 	restrictHeightOnDesktop?: boolean;
+	cardLink?: {
+		headlineText: string;
+		dataLinkName?: string;
+		isExternalLink: boolean;
+	};
+	isInLoopClickTestVariant?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -424,6 +431,8 @@ export const SelfHostedVideo = ({
 	role,
 	posterImageAspectRatio,
 	restrictHeightOnDesktop = false,
+	cardLink,
+	isInLoopClickTestVariant,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -440,7 +449,6 @@ export const SelfHostedVideo = ({
 		null,
 	);
 	const [hasPageBecomeActive, setHasPageBecomeActive] = useState(false);
-	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
@@ -452,6 +460,9 @@ export const SelfHostedVideo = ({
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
+
+	const isLoopClickThroughTest =
+		videoStyle === 'Loop' && isInLoopClickTestVariant;
 
 	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
@@ -557,7 +568,10 @@ export const SelfHostedVideo = ({
 		currentTime,
 	});
 
-	const trackMilestones = useVideoMilestoneTracking(sendOphanTrackingEvent);
+	const [trackMilestones, resetMilestones] = useVideoMilestoneTracking(
+		sendOphanTrackingEvent,
+		videoStyle === 'Default',
+	);
 
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
@@ -621,10 +635,8 @@ export const SelfHostedVideo = ({
 			}
 		} else {
 			void playVideo();
-			if (hasTrackedPlay) {
+			if (playerState !== 'NOT_STARTED' && playerState !== 'ENDED') {
 				sendOphanTrackingEvent('resume');
-			} else {
-				sendOphanTrackingEvent('play');
 			}
 		}
 	};
@@ -748,6 +760,7 @@ export const SelfHostedVideo = ({
 					setIsAutoplayAllowed(doesUserPermitAutoplayOnWeb());
 				}
 				setHasPageBecomeActive(true);
+				setMutedState({ value: false });
 			} else {
 				setHasPageBecomeActive(false);
 			}
@@ -985,11 +998,7 @@ export const SelfHostedVideo = ({
 	 * Track the first successful video play in Ophan.
 	 */
 	const handlePlaying = () => {
-		if (hasTrackedPlay) {
-			return;
-		}
-		sendOphanTrackingEvent('play');
-		setHasTrackedPlay(true);
+		trackMilestones({ started: true });
 	};
 
 	const showControlsAndStartTimer = () => {
@@ -1102,6 +1111,12 @@ export const SelfHostedVideo = ({
 		pauseVideo('PAUSED_BY_BROWSER');
 	};
 
+	const handleEnded = () => {
+		trackMilestones({ ended: true });
+		resetMilestones();
+		setPlayerState('ENDED');
+	};
+
 	/**
 	 * If the video could not be loaded due to an error, report to
 	 * Sentry and log in the console.
@@ -1151,13 +1166,18 @@ export const SelfHostedVideo = ({
 
 		if (playerState === 'PLAYING') {
 			setCurrentTime(video.currentTime);
-
 			/**
 			 * We only want to track milestone events for "long-form"
-			 * videos, not loops or cinemagraphs.
+			 * videos, not loops or cinemagraphs. We expect these to be
+			 * too short to be worth tracking progress milestones.
 			 */
-			if (videoStyle === 'Default') {
-				trackMilestones(video.currentTime, video.duration);
+			trackMilestones({
+				currentTime: video.currentTime,
+				duration: video.duration,
+			});
+
+			if (video.currentTime < 1) {
+				resetMilestones();
 			}
 		}
 	};
@@ -1278,6 +1298,7 @@ export const SelfHostedVideo = ({
 						handleKeyDown={handleKeyDown}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
+						handleEnded={handleEnded}
 						updateCurrentTime={updateCurrentTime}
 						onError={onError}
 						preloadPartialData={!!shouldAutoplay}
@@ -1300,6 +1321,9 @@ export const SelfHostedVideo = ({
 						}
 						isInteractive={videoStyleSettings.isInteractive}
 						isWebKitFullscreen={isWebKitFullscreen}
+						linkTo={linkTo}
+						cardLink={cardLink}
+						isLoopClickThroughTest={isLoopClickThroughTest}
 					/>
 				</div>
 			</div>

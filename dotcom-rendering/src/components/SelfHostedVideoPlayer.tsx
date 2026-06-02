@@ -7,9 +7,11 @@ import {
 } from '@guardian/source/foundations';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
+import { getZIndex } from '../lib/getZIndex';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
+import { CardLink } from './Card/components/CardLink';
 import {
 	AudioIcon as AudioIconComponent,
 	FullscreenIcon,
@@ -41,9 +43,14 @@ const videoControlsStyles = css`
 	top: 0;
 	left: 0;
 	pointer-events: none;
+
 	& > * {
 		pointer-events: auto;
 	}
+`;
+
+const videoControlsZIndexStyles = css`
+	z-index: ${getZIndex('video-controls-container')};
 `;
 
 const interactiveStyles = css`
@@ -98,6 +105,7 @@ export const PLAYER_STATES = [
 	 * For example, iOS devices in low power mode will suspend playback on autoplaying videos.
 	 */
 	'PAUSED_BY_BROWSER',
+	'ENDED',
 ] as const;
 
 export type PlayerStates = (typeof PLAYER_STATES)[number];
@@ -124,6 +132,7 @@ export type Props = {
 	handleTimeUpdate: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick: (event: SyntheticEvent) => void;
+	handleEnded?: (event: SyntheticEvent) => void;
 	updateCurrentTime: (time: number) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	posterImage?: string;
@@ -143,6 +152,14 @@ export type Props = {
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
 	isWebKitFullscreen: boolean;
+	/* used by the card link component for click through to article functionality */
+	linkTo: string;
+	cardLink?: {
+		headlineText: string;
+		dataLinkName?: string;
+		isExternalLink: boolean;
+	};
+	isLoopClickThroughTest?: boolean;
 };
 
 /**
@@ -179,6 +196,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleTimeUpdate,
 			handlePause,
 			handleFullscreenClick,
+			handleEnded,
 			updateCurrentTime,
 			onError,
 			preloadPartialData,
@@ -196,6 +214,9 @@ export const SelfHostedVideoPlayer = forwardRef(
 			iconsPosition,
 			subtitlesPosition,
 			isWebKitFullscreen,
+			linkTo,
+			cardLink,
+			isLoopClickThroughTest,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -210,6 +231,15 @@ export const SelfHostedVideoPlayer = forwardRef(
 
 		return (
 			<>
+				{cardLink && isLoopClickThroughTest && (
+					<CardLink
+						linkTo={linkTo}
+						headlineText={cardLink.headlineText}
+						dataLinkName={cardLink.dataLinkName}
+						isExternalLink={cardLink.isExternalLink}
+						isLoopClickThroughTest={true}
+					/>
+				)}
 				<video
 					id={videoId}
 					css={[
@@ -237,9 +267,14 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onPlaying={handlePlaying}
 					onTimeUpdate={handleTimeUpdate}
 					onPause={handlePause}
-					onClick={handlePlayPauseClick}
+					onClick={
+						isLoopClickThroughTest === true
+							? undefined
+							: handlePlayPauseClick
+					}
 					onKeyDown={handleKeyDown}
 					onError={onError}
+					onEnded={handleEnded}
 					disablePictureInPicture={true}
 				>
 					{sources.map(({ src, mimeType }) => (
@@ -271,12 +306,19 @@ export const SelfHostedVideoPlayer = forwardRef(
 						position={subtitlesPosition}
 					/>
 				)}
-				<div className="controls-container" css={videoControlsStyles}>
-					{showPlayPauseIcon !== null && (
+				<div
+					className="controls-container"
+					css={[
+						videoControlsStyles,
+						isLoopClickThroughTest && videoControlsZIndexStyles,
+					]}
+				>
+					{!isLoopClickThroughTest && showPlayPauseIcon !== null && (
 						<PlayPauseIcon
 							type={showPlayPauseIcon}
 							atomId={atomId}
 							handleClick={handlePlayPauseClick}
+							isLoopClickThroughTest={false}
 						/>
 					)}
 					{showProgressBar &&
@@ -296,7 +338,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 								duration={ref.current!.duration}
 							/>
 						))}
-					{showIcons && (showFullscreenIcon || hasAudio) && (
+					{((showIcons && (showFullscreenIcon || hasAudio)) ||
+						isLoopClickThroughTest) && (
 						<div
 							css={[
 								iconsContainerStyles,
@@ -308,6 +351,14 @@ export const SelfHostedVideoPlayer = forwardRef(
 									iconsTopPositionStyles,
 							]}
 						>
+							{isLoopClickThroughTest && (
+								<PlayPauseIcon
+									type={showPlayPauseIcon ?? 'pause'}
+									atomId={atomId}
+									handleClick={handlePlayPauseClick}
+									isLoopClickThroughTest={true}
+								/>
+							)}
 							{showFullscreenIcon && (
 								<FullscreenIcon
 									handleClick={handleFullscreenClick}

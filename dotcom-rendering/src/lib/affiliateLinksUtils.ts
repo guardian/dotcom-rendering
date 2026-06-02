@@ -1,4 +1,4 @@
-import type { ABParticipations } from '../experiments/lib/beta-ab-tests';
+import type { ABParticipations } from '../experiments/lib/ab-tests';
 
 export const SKIMLINK_REL = 'sponsored noreferrer noopener';
 

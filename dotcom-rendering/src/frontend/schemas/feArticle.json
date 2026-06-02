@@ -383,9 +383,6 @@
         "isLegacyInteractive": {
             "type": "boolean"
         },
-        "filterKeyEvents": {
-            "type": "boolean"
-        },
         "mostRecentBlockId": {
             "type": "string"
         },
@@ -561,7 +558,6 @@
         "designType",
         "editionId",
         "editionLongForm",
-        "filterKeyEvents",
         "format",
         "guardianBaseURL",
         "hasRelated",
