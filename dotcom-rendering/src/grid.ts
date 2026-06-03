@@ -176,44 +176,6 @@ const outerRules = (color?: string): string => `
     }
   }`;
 
-const verticalRules = (options: VerticalRuleOptions = {}): string => `
-  ${fromBreakpoint.tablet} {
-    position: relative;
-
-    &::before,
-    &::after
-    ${options.centre ? ', & > *:first-child::before' : ''} {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background-color: ${palette('--article-border')};
-      content: '';
-    }
-
-    /* LEFT OUTER RULE */
-    &::before {
-      grid-column: centre-column-start;
-      transform: translateX(-${columnGap});
-
-      ${fromBreakpoint.leftCol} {
-        grid-column: left-column-start;
-      }
-    }
-
-    /* RIGHT OUTER RULE */
-    &::after {
-      grid-column: right-column-end;
-      transform: translateX(-1px);
-
-      ${betweenBreakpoint.tablet.and.desktop} {
-        grid-column: centre-column-end;
-      }
-    }
-
-    ${options.centre ? optionalCentreRule : ''}
-`;
-
 // ----- API ----- //
 
 /**
@@ -326,4 +288,10 @@ const grid = {
 	centreRule,
 } as const;
 
+// ----- Types ----- //
+type ColumnPreset = keyof typeof grid.column;
+
+// ----- Exports ----- //
+
+export type { Line, ColumnPreset };
 export { grid };

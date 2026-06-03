@@ -259,6 +259,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<AdPortals />
 					</Island>
 				)}
+
 				{/* GridItem order matters — mobile layout relies on DOM order for grid placement.
     See furnitureArrangements.ts if reordering. */}
 				<article
