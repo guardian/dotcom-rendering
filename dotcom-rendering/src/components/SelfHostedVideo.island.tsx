@@ -485,6 +485,7 @@ export const SelfHostedVideo = ({
 		videoStyleSettings.canShowPlayIcon &&
 		(playerState === 'PAUSED_BY_USER' ||
 			playerState === 'PAUSED_BY_BROWSER' ||
+			playerState === 'ENDED' ||
 			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
 
 	const showPauseIcon =
