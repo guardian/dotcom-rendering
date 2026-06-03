@@ -18,8 +18,8 @@ export type Source = {
 	mimeType: SupportedVideoFileType;
 	height: number;
 	width: number;
+	hasAudio: boolean;
 	aspectRatio?: string;
-	hasAudio?: boolean;
 };
 
 /**
