@@ -8,11 +8,13 @@ export type Area =
 	| 'title'
 	| 'headline'
 	| 'standfirst'
-	| 'main-media'
+	| 'media'
 	| 'meta'
 	| 'body'
 	| 'right-column';
 
+// Breakpoint must stay in sync with the keys of `from` / `until` from
+// @guardian/source/foundations. If those change, this type needs updating too.
 type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'leftCol';
 
 // Rows config
@@ -20,7 +22,7 @@ const tabletStandardRows: Rows = [
 	['title'],
 	['headline'],
 	['standfirst'],
-	['main-media'],
+	['media'],
 	['meta'],
 	['body'],
 ];
@@ -29,7 +31,7 @@ const desktopStandardRows: Rows = [
 	['title', 'right-column'],
 	['headline', 'right-column'],
 	['standfirst', 'right-column'],
-	['main-media', 'right-column'],
+	['media', 'right-column'],
 	['meta', 'right-column'],
 	['body', 'right-column'],
 ];
@@ -37,7 +39,7 @@ const desktopStandardRows: Rows = [
 const mediaRowsUntilDesktop: Rows = [
 	['title'],
 	['headline'],
-	['main-media'],
+	['media'],
 	['standfirst'],
 	['meta'],
 	['body'],
@@ -51,7 +53,7 @@ const furnitureRowArrangements: Record<LayoutType, ArrangementDefinition> = {
 		leftCol: [
 			['title', 'headline', 'right-column'],
 			['standfirst', 'right-column'],
-			['meta', 'main-media', 'right-column'],
+			['meta', 'media', 'right-column'],
 			['meta', 'body', 'right-column'],
 		],
 	},
@@ -61,14 +63,14 @@ const furnitureRowArrangements: Record<LayoutType, ArrangementDefinition> = {
 		desktop: [
 			['title'],
 			['headline'],
-			['main-media', 'right-column'],
+			['media', 'right-column'],
 			['standfirst', 'right-column'],
 			['meta', 'right-column'],
 			['body', 'right-column'],
 		],
 		leftCol: [
 			['title', 'headline'],
-			['meta', 'main-media', 'right-column'],
+			['meta', 'media', 'right-column'],
 			['meta', 'standfirst', 'right-column'],
 			['meta', 'body', 'right-column'],
 		],
@@ -87,7 +89,7 @@ const furnitureColumnArrangements: Record<LayoutType, ColumnArrangementMap> = {
 	standard: furnitureColumnDefaults,
 	media: {
 		...furnitureColumnDefaults,
-		'main-media': {
+		media: {
 			desktop: ['centre-column-start', 'right-column-start'],
 		},
 		standfirst: {
@@ -123,6 +125,36 @@ const breakpointQueries: Record<Breakpoint, string> = {
 };
 
 /**
+ * Returns the CSS `grid-row` value for an area at a given breakpoint, or null
+ * if the area doesn't appear in that breakpoint's row config.
+ *
+ * Consecutive row appearances are collapsed into a single span, e.g. rows
+ * [2, 3, 4] becomes "2 / span 3".
+ */
+const getRowValue = (area: Area, rows: Rows): string | number | null => {
+	const indices = rows
+		.map((areas, i) => (areas.includes(area) ? i + 1 : null))
+		.filter((i): i is number => i !== null);
+
+	if (indices.length === 0) return null;
+
+	return indices.length > 1
+		? `${indices[0]} / span ${indices.length}`
+		: indices[0] ?? null;
+};
+
+/**
+ * Returns the `grid-column` CSS string for a column config entry — either a
+ * named preset (e.g. 'left', 'right') or a custom [start, end] line pair.
+ */
+const getColumnStyle = (
+	colOrSpan: ColumnPreset | [Line | number, Line | number],
+): string =>
+	Array.isArray(colOrSpan)
+		? grid.between(colOrSpan[0], colOrSpan[1])
+		: grid.column[colOrSpan];
+
+/**
  * Returns the Emotion CSS needed to position a single grid item — its
  * default column, its row at each breakpoint, and any column overrides.
  * The grid item _must_ be inside a {@link grid} module container.
@@ -152,18 +184,8 @@ export const gridItemCss = (
 	const rowPlacementCss = (
 		Object.entries(layoutRowConfig) as [Breakpoint, Rows][]
 	).flatMap(([breakpoint, rows]) => {
-		// Find which row indices the area appears in (1-indexed for CSS grid)
-		const rowIndicesOfArea = rows
-			.map((areas, i) => (areas.includes(area) ? i + 1 : null))
-			.filter((i): i is number => i !== null);
-
-		if (rowIndicesOfArea.length === 0) return [];
-
-		const startingRow = rowIndicesOfArea[0];
-		const rowValue =
-			rowIndicesOfArea.length > 1
-				? `${startingRow} / span ${rowIndicesOfArea.length}`
-				: startingRow;
+		const rowValue = getRowValue(area, rows);
+		if (rowValue === null) return [];
 
 		return css`
 			${breakpointQueries[breakpoint]} {
@@ -173,17 +195,11 @@ export const gridItemCss = (
 	});
 
 	const columnPlacementCss = Object.entries(areaColumnsConfig).map(
-		([breakpoint, colOrSpan]) => {
-			const colStyle = Array.isArray(colOrSpan)
-				? grid.between(colOrSpan[0], colOrSpan[1])
-				: grid.column[colOrSpan];
-
-			return css`
-				${from[breakpoint as keyof typeof from]} {
-					${colStyle};
-				}
-			`;
-		},
+		([breakpoint, colOrSpan]) => css`
+			${from[breakpoint as keyof typeof from]} {
+				${getColumnStyle(colOrSpan)};
+			}
+		`,
 	);
 
 	return css([grid.column.centre, rowPlacementCss, columnPlacementCss]);

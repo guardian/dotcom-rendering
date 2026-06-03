@@ -262,7 +262,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						}),
 					]}
 				>
-					<GridItem area="main-media" layoutType={layoutType}>
+					<GridItem area="media" layoutType={layoutType}>
 						<MainMedia
 							format={format}
 							elements={article.mainMediaElements}
