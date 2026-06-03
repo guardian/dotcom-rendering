@@ -354,10 +354,10 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		position: 'relative',
 		overflowX: 'scroll',
 		scrollbarWidth: 'none',
-		borderTop: slimNav ? undefined : '1px solid',
-		borderBottom: '1px solid',
+		borderTop: '1px solid',
 		borderColor,
 		padding: `0 ${space[3]}px`,
+		marginTop: '-1px', // to overlap the bottom border of the main nav if it's slim, it's not wide enough
 		height: space[10],
 		[from.mobileLandscape]: {
 			padding: `0 ${space[5]}px`,
