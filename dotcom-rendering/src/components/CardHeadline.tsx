@@ -247,6 +247,9 @@ export const CardHeadline = ({
 					isSublink ? 'card-sublink-headline' : 'card-headline'
 				}`}
 				css={[
+					{
+						overflowWrap: 'anywhere',
+					},
 					isSublink
 						? css`
 								${textSans14}
