@@ -89,7 +89,7 @@ const paddedContainer = `
 
 type VerticalRuleOptions = {
 	color?: string;
-	plusChild?: number;
+	centreRuleOnChildElement?: number;
 };
 
 /**
@@ -97,22 +97,24 @@ type VerticalRuleOptions = {
  *
  * Left and right rules are always present.
  * A centre rule can optionally be enabled, anchored to the nth
- * child of the grid container as specified by the `plusChild` option
+ * child of the grid container as specified by the `centreRuleOnChildElement` option
+ *
+ * The centre rule is self-contained on the nth child element rather than on
+ * the grid container, so that `top: 0` aligns to that element's top edge.
+ * `bottom` uses a large negative value to extend the rule down to the
+ * container's bottom so `overflow: hidden` is set on the container.
  *
  * Usage:
  * css([grid.container, grid.verticalRules()])
- * css([grid.container, grid.verticalRules({ plusChild: 3 })])
+ * css([grid.container, grid.verticalRules({ centreRuleOnChildElement: 3 })])
  */
-
-// The centre rule is self-contained on the nth child element rather than on
-// the grid container, so that `top: 0` aligns to that element's top edge.
-// `bottom` uses a large negative value to extend the rule down to the
-// container's bottom; ensure `overflow: hidden` is set on the container
 const optionalCentreRule = (
-	nth: number,
+	n: number,
 	color?: string,
 ): string => `/* CENTRE RULE */
-    & > *:nth-child(${nth}) {
+	overflow: hidden;
+
+    & > *:nth-child(${n}) {
       position: relative;
 
       &::before {
@@ -132,7 +134,7 @@ const optionalCentreRule = (
     }`;
 
 const verticalRules = (options: VerticalRuleOptions = {}): string => {
-	const { plusChild, color } = options;
+	const { centreRuleOnChildElement, color } = options;
 
 	return `
   ${fromBreakpoint.tablet} {
@@ -168,7 +170,11 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => {
       }
     }
 
-    ${plusChild !== undefined ? optionalCentreRule(plusChild, color) : ''}
+    ${
+		centreRuleOnChildElement !== undefined
+			? optionalCentreRule(centreRuleOnChildElement, color)
+			: ''
+	}
   }`;
 };
 

@@ -22,9 +22,8 @@ type Props = {
 };
 
 const styles = css`
-	overflow: hidden;
 	${grid.paddedContainer}
-	${grid.verticalRules({ plusChild: 1 })}
+	${grid.verticalRules()}
 	grid-auto-flow: row dense;
 	background-color: ${palette('--article-inner-background')};
 
@@ -34,15 +33,16 @@ const styles = css`
 	}
 
 	${from.desktop} {
-		&:first-of-type {
-			& > * {
-				padding-top: ${space[3]}px;
-			}
+		&:first-of-type > * {
+			padding-top: ${space[3]}px;
 		}
 	}
 
 	${between.desktop.and.leftCol} {
-		${grid.verticalRules({ plusChild: 2 })}
+		${grid.verticalRules({ centreRuleOnChildElement: 2 })}
+	}
+	${from.leftCol} {
+		${grid.verticalRules({ centreRuleOnChildElement: 1 })}
 	}
 `;
 
