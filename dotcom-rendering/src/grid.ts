@@ -140,7 +140,7 @@ const centreRule = (n: number, color?: string): string => `/* CENTRE RULE */
  *   ${grid.verticalRules()}
  * `
  */
-const verticalRules = (color?: string): string => `
+const outerRules = (color?: string): string => `
   overflow: hidden;
 
   ${fromBreakpoint.tablet} {
@@ -280,7 +280,7 @@ const grid = {
 	 * CSS for the left and right vertical rules. Use `grid.centreRule`
 	 * separately to add a centre rule anchored to a specific child element.
 	 */
-	verticalRules,
+	outerRules,
 	/**
 	 * CSS for a centre vertical rule anchored to the top of the nth child of
 	 * the grid container. Can be called multiple times within different
@@ -289,10 +289,6 @@ const grid = {
 	centreRule,
 } as const;
 
-// ----- Types ----- //
-type ColumnPreset = keyof typeof grid.column;
-
 // ----- Exports ----- //
 
-export type { Line, ColumnPreset };
 export { grid };

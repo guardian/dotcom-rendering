@@ -23,7 +23,7 @@ type Props = {
 
 const styles = css`
 	${grid.paddedContainer}
-	${grid.verticalRules()}
+	${grid.outerRules()}
 	grid-auto-flow: row dense;
 	background-color: ${palette('--article-inner-background')};
 
