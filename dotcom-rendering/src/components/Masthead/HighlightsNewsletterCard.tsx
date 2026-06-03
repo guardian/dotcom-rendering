@@ -1,0 +1,238 @@
+import { css } from '@emotion/react';
+import {
+	between,
+	focusHalo,
+	from,
+	space,
+	textSans15,
+	until,
+} from '@guardian/source/foundations';
+import { SvgNewsletterFilled } from '@guardian/source/react-components';
+import { useEffect } from 'react';
+import type { ArticleFormat } from '../../lib/articleFormat';
+import { getZIndex } from '../../lib/getZIndex';
+import {
+	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	sendNewsletterSignupEvent,
+} from '../../lib/newsletterSignupTracking';
+import { useIsInView } from '../../lib/useIsInView';
+import { palette } from '../../palette';
+import type { Newsletter } from '../../types/content';
+import type { DCRFrontImage } from '../../types/front';
+import type { RenderingTarget } from '../../types/renderingTarget';
+import { CardHeadline } from '../CardHeadline';
+import type { Loading } from '../CardPicture';
+import { CardPicture } from '../CardPicture';
+import { FormatBoundary } from '../FormatBoundary';
+
+type Props = {
+	format: ArticleFormat;
+	newsletter: Newsletter;
+	headlineText: string;
+	image?: DCRFrontImage;
+	imageLoading?: Loading;
+	renderingTarget: RenderingTarget;
+};
+
+const container = css`
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: space-between;
+	/** Relative positioning is required to absolutely position the button overlay */
+	position: relative;
+	padding: ${space[2]}px ${space[2]}px 0 ${space[2]}px;
+	background-color: ${palette('--newsletter-card-background')};
+	word-break: break-word;
+
+	${until.mobileMedium} {
+		min-height: 174px;
+	}
+	${between.mobileMedium.and.tablet} {
+		min-height: 194px;
+	}
+	${from.tablet} {
+		width: 280px;
+		flex-direction: row;
+		padding: 10px 10px 0 10px;
+	}
+	${from.desktop} {
+		width: 300px;
+	}
+`;
+
+const hoverStyles = css`
+	:hover .media-overlay {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		height: 100%;
+		width: 100%;
+		background-color: ${palette('--card-background-hover')};
+	}
+	:hover .circular {
+		border-radius: 100%;
+	}
+
+	:hover .card-headline .show-underline {
+		text-decoration: underline;
+	}
+`;
+
+const content = css`
+	display: flex;
+	flex-direction: column;
+	gap: ${space[1]}px;
+
+	${from.tablet} {
+		padding-bottom: 10px;
+	}
+
+	${between.mobileMedium.and.mobileLandscape} {
+		.headline-text {
+			font-size: 1rem;
+		}
+	}
+`;
+
+const kickerStyles = css`
+	${textSans15};
+	color: ${palette('--newsletter-card-frequency-tag')};
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	svg {
+		height: 20px;
+		width: 20px;
+		fill: currentColor;
+		flex-shrink: 0;
+	}
+`;
+
+const imageStyles = css`
+	position: relative;
+	align-self: flex-end;
+	flex-shrink: 0;
+	width: 98px;
+	margin-bottom: 10px;
+
+	${until.tablet} {
+		margin-top: ${space[2]}px;
+	}
+`;
+
+const signupButtonOverlayStyles = css`
+	position: absolute;
+	z-index: ${getZIndex('card-link')};
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+
+	:focus {
+		${focusHalo};
+	}
+`;
+
+const AB_TEST = {
+	name: 'newsletters-highlights-signup-card',
+	variant: 'variant',
+} as const;
+
+export const HighlightsNewsletterCard = ({
+	format,
+	newsletter,
+	headlineText,
+	image,
+	imageLoading = 'lazy',
+	renderingTarget,
+}: Props) => {
+	const componentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(
+		newsletter.identityName,
+	);
+
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+		threshold: 0,
+	});
+
+	useEffect(() => {
+		if (hasBeenSeen === true) {
+			sendNewsletterSignupEvent({
+				action: 'VIEW',
+				identityName: newsletter.identityName,
+				componentId,
+				renderingTarget,
+				value: { eventDescription: 'highlights-card-viewed' },
+				abTest: AB_TEST,
+			});
+		}
+	}, [hasBeenSeen, componentId, newsletter.identityName, renderingTarget]);
+
+	const handleClick = () => {
+		sendNewsletterSignupEvent({
+			action: 'EXPAND',
+			identityName: newsletter.identityName,
+			componentId,
+			renderingTarget,
+			value: { eventDescription: 'highlights-card-modal-opened' },
+			abTest: AB_TEST,
+		});
+		// TODO: open modal
+	};
+
+	return (
+		<FormatBoundary format={format}>
+			<div ref={setNode} css={[container, hoverStyles]}>
+				<button
+					css={signupButtonOverlayStyles}
+					onClick={handleClick}
+					data-link-name="highlights-newsletter-card | open-signup"
+					aria-label={`Sign up to ${headlineText}`}
+					type="button"
+				/>
+
+				<div css={content}>
+					<span css={kickerStyles}>
+						<SvgNewsletterFilled />
+						Free newsletter
+					</span>
+
+					<CardHeadline
+						headlineText={headlineText}
+						format={format}
+						fontSizes={{
+							desktop: 'xxsmall',
+							tablet: 'xxsmall',
+							mobileMedium: 'xxsmall',
+							mobile: 'xxxsmall',
+						}}
+						showQuotes={false}
+						headlineColour={palette(
+							'--highlights-newsletter-card-headline',
+						)}
+					/>
+				</div>
+
+				{image !== undefined && (
+					<div css={imageStyles}>
+						<CardPicture
+							imageSize="highlights-card"
+							mainImage={image.src}
+							alt={image.altText}
+							loading={imageLoading}
+							isCircular={true}
+							aspectRatio="1:1"
+						/>
+						<div className="media-overlay circular" />
+					</div>
+				)}
+			</div>
+		</FormatBoundary>
+	);
+};

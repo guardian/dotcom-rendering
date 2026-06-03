@@ -9,9 +9,12 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
+import { useAB } from '../lib/useAB';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
+import { useConfig } from './ConfigContext';
 import { HighlightsCard } from './Masthead/HighlightsCard';
+import { HighlightsNewsletterCard } from './Masthead/HighlightsNewsletterCard';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -214,6 +217,15 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const [showPreviousButton, setShowPreviousButton] = useState(false);
 	const [showNextButton, setShowNextButton] = useState(true);
 
+	const abTests = useAB();
+	const isNewsletterVariant =
+		abTests?.isUserInTestGroup(
+			'newsletters-highlights-signup-card',
+			'variant',
+		) ?? false;
+
+	const { renderingTarget } = useConfig();
+
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) {
 			return;
@@ -301,22 +313,35 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 							role="group"
 							aria-roledescription="slide"
 						>
-							<HighlightsCard
-								format={trail.format}
-								headlineText={trail.headline}
-								kickerText={trail.kickerText}
-								avatarUrl={trail.avatarUrl}
-								byline={trail.byline}
-								image={trail.image}
-								imageLoading={imageLoading}
-								linkTo={trail.url}
-								dataLinkName={trail.dataLinkName}
-								isExternalLink={trail.isExternalLink}
-								showQuotedHeadline={trail.showQuotedHeadline}
-								mainMedia={trail.mainMedia}
-								starRating={trail.starRating}
-								articleMedia={trail.articleMedia}
-							/>
+							{isNewsletterVariant && trail.newsletterData ? (
+								<HighlightsNewsletterCard
+									format={trail.format}
+									newsletter={trail.newsletterData}
+									headlineText={trail.headline}
+									image={trail.image}
+									imageLoading={imageLoading}
+									renderingTarget={renderingTarget}
+								/>
+							) : (
+								<HighlightsCard
+									format={trail.format}
+									headlineText={trail.headline}
+									kickerText={trail.kickerText}
+									avatarUrl={trail.avatarUrl}
+									byline={trail.byline}
+									image={trail.image}
+									imageLoading={imageLoading}
+									linkTo={trail.url}
+									dataLinkName={trail.dataLinkName}
+									isExternalLink={trail.isExternalLink}
+									showQuotedHeadline={
+										trail.showQuotedHeadline
+									}
+									mainMedia={trail.mainMedia}
+									starRating={trail.starRating}
+									articleMedia={trail.articleMedia}
+								/>
+							)}
 						</li>
 					);
 				})}

@@ -283,6 +283,59 @@ export const trails: Array<DCRFrontCard> = [
 	},
 ];
 
+export const newsletterCard: DCRFrontCard = {
+	format: {
+		theme: Pillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+	},
+	dataLinkName: 'news | group-0 | card-@1',
+	url: '/global/2023/sep/27/sign-up-for-the-guardian-headlines-europe-newsletter-a-daily-news-email-with-all-the-top-stories',
+	headline: 'Guardian Headlines Europe',
+	trailText: 'A daily news email with all the top stories',
+	starRating: undefined,
+	webPublicationDate: '2023-09-27T00:00:00.000Z',
+	kickerText: undefined,
+	supportingContent: [],
+	discussionApiUrl:
+		'https://discussion.code.dev-theguardian.com/discussion-api',
+	discussionId: undefined,
+	byline: undefined,
+	showByline: false,
+	snapData: {},
+	isBoosted: false,
+	isCrossword: false,
+	isNewsletter: true,
+	showQuotedHeadline: false,
+	showLivePlayable: false,
+	avatarUrl: undefined,
+	mainMedia: undefined,
+	isExternalLink: false,
+	embedUri: undefined,
+	branding: undefined,
+	slideshowImages: undefined,
+	showVideo: false,
+	isImmersive: false,
+	image: {
+		src: 'https://uploads.guim.co.uk/2023/09/25/Headlines_-_5-3_-_Europe.jpg',
+		altText: 'Guardian Headlines Europe newsletter',
+	},
+	newsletterData: {
+		listId: 6033,
+		identityName: 'headlines-europe',
+		name: 'Headlines Europe',
+		description:
+			"A digest of the morning's main headlines from the Europe edition emailed direct to you every week day",
+		frequency: 'Every day',
+		successDescription: 'You are subscribed',
+		theme: 'news',
+		group: 'News in brief',
+		highlightCardTitle: 'Sign up for Headlines Europe',
+		illustrationCard:
+			'https://uploads.guim.co.uk/2023/09/25/Headlines_-_5-3_-_Europe.jpg',
+	},
+};
+
 export const defaultCard: DCRFrontCard = {
 	format: {
 		theme: Pillar.Lifestyle,

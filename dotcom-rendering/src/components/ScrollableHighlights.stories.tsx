@@ -1,8 +1,27 @@
 import { breakpoints } from '@guardian/source/foundations';
+import { mocked } from 'storybook/test';
 import preview from '../../.storybook/preview';
-import { defaultCard, trails } from '../../fixtures/manual/highlights-trails';
+import {
+	defaultCard,
+	newsletterCard,
+	trails,
+} from '../../fixtures/manual/highlights-trails';
+import { useAB } from '../lib/useAB';
 import { ScrollableHighlights } from './ScrollableHighlights.island';
 import { Section } from './Section';
+
+const AB_TEST_NAME = 'newsletters-highlights-signup-card';
+
+const mockNewsletterVariant = () => {
+	mocked(useAB).mockReturnValue({
+		isUserInTestGroup: (testName: string, group: string) =>
+			testName === AB_TEST_NAME && group === 'variant',
+		isUserInTest: () => true,
+		getParticipations: () =>
+			({ [AB_TEST_NAME]: 'variant' }) as Record<string, string>,
+		trackABTests: () => ({}),
+	});
+};
 
 const meta = preview.meta({
 	title: 'Front Containers/ScrollableHighlights',
@@ -101,5 +120,24 @@ export const withExcessivleyLongHeadline = meta.story({
 			},
 			...Default.input.args.trails,
 		],
+	},
+});
+
+export const withNewsletterCardControl = meta.story({
+	...Default.input,
+	name: 'With Newsletter Card (AB control – original card)',
+	args: {
+		trails: [newsletterCard, ...Default.input.args.trails],
+	},
+});
+
+export const withNewsletterCardVariant = meta.story({
+	...Default.input,
+	name: 'With Newsletter Signup Card (AB variant)',
+	beforeEach() {
+		mockNewsletterVariant();
+	},
+	args: {
+		trails: [newsletterCard, ...Default.input.args.trails],
 	},
 });
