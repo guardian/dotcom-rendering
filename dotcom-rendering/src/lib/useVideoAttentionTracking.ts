@@ -98,14 +98,14 @@ export const useVideoAttentionTracking = (
 						});
 					});
 				} else {
-					if (await hasMinimumBridgetVersion('8.11.0-2026-06-02"')) {
-						const attentionTime = new Map<string, number>();
-						attentionTime.set(
+					if (await hasMinimumBridgetVersion('8.12.0')) {
+						const attentionTimeMap = new Map<string, number>();
+						attentionTimeMap.set(
 							componentName,
 							Math.round(totalAttentionMsRef.current),
 						);
-						void getVideoClient().sendVideoAttentionTime(
-							attentionTime,
+						void getVideoClient().sendVideoAttentionTimes(
+							attentionTimeMap,
 						);
 					}
 				}
@@ -115,7 +115,7 @@ export const useVideoAttentionTracking = (
 		};
 
 		const intervalId = window.setInterval(
-			() => void report,
+			() => void report(),
 			REPORTING_INTERVAL_MS,
 		);
 
