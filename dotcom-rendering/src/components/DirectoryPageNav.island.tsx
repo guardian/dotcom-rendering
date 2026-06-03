@@ -80,7 +80,7 @@ const worldCup2026Links = [
 	},
 	{
 		label: 'Player guide',
-		id: '',
+		id: 'p/x4n6cb',
 	},
 	{
 		label: 'Bracketology',
@@ -88,7 +88,7 @@ const worldCup2026Links = [
 	},
 	{
 		label: 'Golden boot',
-		id: '',
+		id: 'p/x5vn6x',
 	},
 	{
 		label: 'More football',
