@@ -84,7 +84,7 @@ const worldCup2026Links = [
 	},
 	{
 		label: 'Bracketology',
-		id: '',
+		id: 'p/x4z6hj',
 	},
 	{
 		label: 'Golden boot',
