@@ -39,10 +39,10 @@ const styles = css`
 	}
 
 	${between.desktop.and.leftCol} {
-		${grid.verticalRules({ centreRuleOnChildElement: 2 })}
+		${grid.centreRule(2)}
 	}
 	${from.leftCol} {
-		${grid.verticalRules({ centreRuleOnChildElement: 1 })}
+		${grid.centreRule(1)}
 	}
 `;
 
