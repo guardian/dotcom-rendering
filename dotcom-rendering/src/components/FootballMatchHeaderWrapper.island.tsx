@@ -1,4 +1,6 @@
 import {
+	getEnvironmentClient,
+	getLiveActivitiesClient,
 	getMatchNotificationsClient,
 	getNotificationsClient,
 } from '../lib/bridgetApi';
@@ -33,6 +35,12 @@ export const FootballMatchHeaderWrapper = (props: Props) => (
 		renderingTarget={props.renderingTarget}
 		notificationsClient={getNotificationsClient()}
 		matchNotificationsClient={getMatchNotificationsClient()}
+		environmentClient={{
+			...getEnvironmentClient(),
+			// Hardcoded for testing, before this version is published.
+			nativeThriftPackageVersion: () => Promise.resolve('8.13.0'),
+		}}
+		liveActivitiesClient={getLiveActivitiesClient()}
 	/>
 );
 

@@ -1,4 +1,5 @@
 import type { ThriftClient } from '@creditkarma/thrift-server-core';
+import { LiveActivities } from '@guardian/bridget';
 import * as AbTesting from '@guardian/bridget/AbTesting';
 import * as Acquisitions from '@guardian/bridget/Acquisitions';
 import * as Analytics from '@guardian/bridget/Analytics';
@@ -30,9 +31,11 @@ type BridgetClient<Client extends ThriftClient> = Omit<
 	| '_methodParameters'
 >;
 
-let environmentClient: Environment.Client<void> | undefined = undefined;
-export const getEnvironmentClient = (): Environment.Client<void> => {
-	if (isUndefined(environmentClient)) {
+export type EnvironmentClient = BridgetClient<Environment.Client>;
+
+let environmentClient: EnvironmentClient | undefined = undefined;
+export const getEnvironmentClient = (): EnvironmentClient => {
+	if (!environmentClient) {
 		environmentClient = createAppClient<Environment.Client<void>>(
 			Environment.Client,
 			'buffered',
@@ -253,4 +256,18 @@ export const getMatchNotificationsClient = (): MatchNotificationsClient => {
 		>(MatchNotifications.Client, 'buffered', 'compact');
 	}
 	return matchNotificationsClient;
+};
+
+export type LiveActivitiesClient = BridgetClient<LiveActivities.Client>;
+
+let liveActivitiesClient: LiveActivitiesClient | undefined = undefined;
+export const getLiveActivitiesClient = (): LiveActivitiesClient => {
+	if (!liveActivitiesClient) {
+		liveActivitiesClient = createAppClient<LiveActivities.Client<void>>(
+			LiveActivities.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return liveActivitiesClient;
 };
