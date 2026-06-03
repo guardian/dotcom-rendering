@@ -17,6 +17,11 @@ type CallToActionProps = {
 	buttonText?: string;
 	accentColor?: string;
 };
+type CallToActionButtonProps = {
+	linkUrl: string;
+	buttonText?: string;
+	accentColor?: string;
+};
 
 const blurStyles = css`
 	position: absolute;
@@ -98,8 +103,6 @@ export const CallToActionAtom = ({
 	buttonText,
 	accentColor,
 }: CallToActionProps) => {
-	const buttonBgColour = accentColor ?? sourcePalette.neutral[100];
-
 	return (
 		<picture
 			css={css`
@@ -126,26 +129,41 @@ export const CallToActionAtom = ({
 			<div css={blurAndTextWrapperStyles}>
 				<div css={textAndButtonWrapperStyles}>
 					{!!text && <h2 css={textStyles}>{text}</h2>}
-					<LinkButton
-						href={linkUrl}
-						iconSide="right"
-						size="small"
-						icon={<SvgExternal />}
-						theme={{
-							textPrimary: accentColor
-								? sourcePalette.neutral[100]
-								: sourcePalette.neutral[0],
-							backgroundPrimary: buttonBgColour,
-							backgroundPrimaryHover:
-								calculateHoverColour(buttonBgColour),
-						}}
-					>
-						{buttonText ?? 'Learn more'}
-					</LinkButton>
+					<CallToActionButton
+						linkUrl={linkUrl}
+						buttonText={buttonText}
+						accentColor={accentColor}
+					/>
 				</div>
 				{/* blur overlay */}
 				<div aria-hidden="true" css={blurStyles} />
 			</div>
 		</picture>
+	);
+};
+
+export const CallToActionButton = ({
+	linkUrl,
+	buttonText,
+	accentColor,
+}: CallToActionButtonProps) => {
+	const buttonBgColour = accentColor ?? sourcePalette.neutral[100];
+
+	return (
+		<LinkButton
+			href={linkUrl}
+			iconSide="right"
+			size="small"
+			icon={<SvgExternal />}
+			theme={{
+				textPrimary: accentColor
+					? sourcePalette.neutral[100]
+					: sourcePalette.neutral[0],
+				backgroundPrimary: buttonBgColour,
+				backgroundPrimaryHover: calculateHoverColour(buttonBgColour),
+			}}
+		>
+			{buttonText ?? 'Learn more'}
+		</LinkButton>
 	);
 };
