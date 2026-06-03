@@ -130,11 +130,12 @@ export type Props = {
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
 	handleProgressBarInput: (event: React.FormEvent<HTMLInputElement>) => void;
+	handleProgressBarSeekStart: () => void;
+	handleProgressBarSeekEnd: () => void;
 	handleTimeUpdate: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick: (event: SyntheticEvent) => void;
 	handleEnded?: (event: SyntheticEvent) => void;
-	updateCurrentTime: (time: number) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	posterImage?: string;
 	preloadPartialData: boolean;
@@ -195,11 +196,12 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleAudioClick,
 			handleKeyDown,
 			handleProgressBarInput,
+			handleProgressBarSeekStart,
+			handleProgressBarSeekEnd,
 			handleTimeUpdate,
 			handlePause,
 			handleFullscreenClick,
 			handleEnded,
-			updateCurrentTime,
 			onError,
 			preloadPartialData,
 			showProgressBar,
@@ -329,9 +331,10 @@ export const SelfHostedVideoPlayer = forwardRef(
 								videoId={videoId}
 								currentTime={currentTime}
 								duration={duration}
-								updateCurrentTime={updateCurrentTime}
 								handleKeyDown={handleKeyDown}
 								handleInput={handleProgressBarInput}
+								onSeekStart={handleProgressBarSeekStart}
+								onSeekEnd={handleProgressBarSeekEnd}
 							/>
 						) : (
 							<VideoProgressBar
