@@ -893,6 +893,9 @@
                 },
                 {
                     "$ref": "#/definitions/ProductSummaryElement"
+                },
+                {
+                    "$ref": "#/definitions/EnhancedProductSummaryElement"
                 }
             ]
         },
@@ -4792,25 +4795,76 @@
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.ProductSummaryElement"
                 },
-                "matchedProducts": {
+                "products": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/ProductBlockElement"
+                        "$ref": "#/definitions/ProductSummaryMap"
                     }
                 },
-                "variant": {
+                "displayType": {
                     "enum": [
-                        "carousel",
-                        "stacked-default",
-                        "stacked-expanded"
+                        "CAROUSEL",
+                        "CTA_LIST",
+                        "STACKED_CARD"
                     ],
+                    "type": "string"
+                },
+                "title": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "matchedProducts",
-                "variant"
+                "displayType",
+                "products",
+                "title"
+            ]
+        },
+        "ProductSummaryMap": {
+            "type": "object",
+            "properties": {
+                "productId": {
+                    "type": "string"
+                },
+                "ctaIndex": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "ctaIndex",
+                "productId"
+            ]
+        },
+        "EnhancedProductSummaryElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.EnhancedProductSummaryElement"
+                },
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ProductBlockElement"
+                    }
+                },
+                "displayType": {
+                    "enum": [
+                        "CAROUSEL",
+                        "CTA_LIST",
+                        "STACKED_CARD"
+                    ],
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "displayType",
+                "products",
+                "title"
             ]
         },
         "Block": {

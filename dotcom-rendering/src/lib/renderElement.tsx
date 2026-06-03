@@ -993,12 +993,13 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
-		case 'model.dotcomrendering.pageElements.ProductSummaryElement':
+		case 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement':
 			return (
 				<ProductSummary
-					products={element.matchedProducts}
+					title={element.title}
+					products={element.products}
 					format={format}
-					variant={element.variant}
+					displayType={element.displayType}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':

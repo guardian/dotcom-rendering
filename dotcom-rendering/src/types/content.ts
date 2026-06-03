@@ -525,10 +525,23 @@ export interface ProductBlockElement {
 	lowestPrice?: string;
 }
 
+export interface ProductSummaryMap {
+	productId: string;
+	ctaIndex: number;
+}
+
 export interface ProductSummaryElement {
 	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
-	matchedProducts: ProductBlockElement[];
-	variant: 'carousel' | 'stacked-default' | 'stacked-expanded';
+	products: ProductSummaryMap[];
+	displayType: 'CTA_LIST' | 'CAROUSEL' | 'STACKED_CARD';
+	title: string;
+}
+
+export interface EnhancedProductSummaryElement {
+	_type: 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement';
+	products: ProductBlockElement[];
+	displayType: 'CTA_LIST' | 'CAROUSEL' | 'STACKED_CARD';
+	title: string;
 }
 
 interface ProfileAtomBlockElement {
@@ -901,7 +914,8 @@ export type FEElement =
 	| WitnessTypeBlockElement
 	| CrosswordElement
 	| ProductBlockElement
-	| ProductSummaryElement;
+	| ProductSummaryElement
+	| EnhancedProductSummaryElement;
 
 // -------------------------------------
 // Misc

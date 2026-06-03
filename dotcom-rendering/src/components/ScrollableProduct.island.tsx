@@ -39,6 +39,7 @@ export type FixedSlideWidth = {
 };
 
 type Props = {
+	title: string;
 	products: ProductBlockElement[];
 	format: ArticleFormat;
 };
@@ -148,7 +149,7 @@ const generateFixedWidthColumStyles = ({
  * we can move quickly. There will be some work to define a base carousel at some
  * point to see what functionality can be shared.
  */
-export const ScrollableProduct = ({ products, format }: Props) => {
+export const ScrollableProduct = ({ title, products, format }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
@@ -283,12 +284,8 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	return (
 		<>
 			<div css={carouselHeader}>
-				<Subheading
-					format={format}
-					id={'at-a-glance'}
-					topPadding={false}
-				>
-					At a glance
+				<Subheading format={format} id={'heading'} topPadding={false}>
+					{title}
 				</Subheading>
 				<div
 					css={navigationStyles}

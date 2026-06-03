@@ -1,33 +1,38 @@
 import type { ArticleFormat } from '../lib/articleFormat';
-import type { ABTestVariant } from '../model/enhance-product-summary';
 import type { ProductBlockElement } from '../types/content';
 import { Island } from './Island';
 import { ScrollableProduct } from './ScrollableProduct.island';
 import { StackedProducts } from './StackedProducts.island';
 
 export const ProductSummary = ({
+	title,
 	products,
 	format,
-	variant,
+	displayType,
 }: {
+	title: string;
 	products: ProductBlockElement[];
 	format: ArticleFormat;
-	variant: ABTestVariant;
+	displayType: string; // ToDo: type this
 }) => {
-	if (variant === 'carousel') {
+	if (displayType === 'CAROUSEL') {
 		return (
 			<Island priority="feature" defer={{ until: 'idle' }}>
-				<ScrollableProduct products={products} format={format} />
+				<ScrollableProduct
+					title={title}
+					products={products}
+					format={format}
+				/>
 			</Island>
 		);
 	}
 
-	if (variant === 'stacked-default') {
+	if (displayType === 'STACKED_CARD') {
 		return (
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<StackedProducts
 					products={products}
-					heading={'At a glance'}
+					title={title}
 					format={format}
 					showAllProducts={false}
 				/>
@@ -39,7 +44,7 @@ export const ProductSummary = ({
 		<Island priority="feature" defer={{ until: 'idle' }}>
 			<StackedProducts
 				products={products}
-				heading={'At a glance'}
+				title={title}
 				format={format}
 				showAllProducts={true}
 			/>

@@ -31,12 +31,12 @@ export const theme: Partial<ThemeButton> = {
 
 export const StackedProducts = ({
 	products,
-	heading,
+	title,
 	format,
 	showAllProducts,
 }: {
 	products: ProductBlockElement[];
-	heading: string;
+	title: string;
 	format: ArticleFormat;
 	showAllProducts: boolean;
 }) => {
@@ -54,7 +54,7 @@ export const StackedProducts = ({
 				]}
 			>
 				<Subheading format={format} topPadding={false}>
-					{heading}
+					{title}
 				</Subheading>
 				{products.length > cardsShownByDefault && !showAllProducts && (
 					<p css={cardCounterStyles}>
