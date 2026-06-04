@@ -1,5 +1,4 @@
 import type { ThriftClient } from '@creditkarma/thrift-server-core';
-import { LiveActivities } from '@guardian/bridget';
 import * as AbTesting from '@guardian/bridget/AbTesting';
 import * as Acquisitions from '@guardian/bridget/Acquisitions';
 import * as Analytics from '@guardian/bridget/Analytics';
@@ -11,6 +10,7 @@ import * as Gallery from '@guardian/bridget/Gallery';
 import * as Interaction from '@guardian/bridget/Interaction';
 import * as Interactives from '@guardian/bridget/Interactives';
 import * as ListenToArticle from '@guardian/bridget/ListenToArticle';
+import * as LiveActivities from '@guardian/bridget/LiveActivities';
 import * as MatchNotifications from '@guardian/bridget/MatchNotifications';
 import * as Metrics from '@guardian/bridget/Metrics';
 import * as Navigation from '@guardian/bridget/Navigation';
