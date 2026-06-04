@@ -38,6 +38,8 @@ const meta = {
 		},
 		newsletter: newsletterCard.newsletterData!,
 		headlineText: newsletterCard.headline,
+		linkTo: newsletterCard.url,
+		dataLinkName: 'highlights-newsletter-card | open-signup',
 		image: newsletterCard.image,
 		imageLoading: 'eager',
 		renderingTarget: 'Web',

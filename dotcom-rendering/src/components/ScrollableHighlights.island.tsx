@@ -323,6 +323,8 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 									format={trail.format}
 									newsletter={trail.newsletterData}
 									headlineText={trail.headline}
+									linkTo={trail.url}
+									dataLinkName={trail.dataLinkName}
 									image={trail.image}
 									imageLoading={imageLoading}
 									renderingTarget={renderingTarget}

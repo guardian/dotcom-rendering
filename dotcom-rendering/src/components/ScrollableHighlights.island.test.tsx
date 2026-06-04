@@ -64,7 +64,7 @@ describe('ScrollableHighlights — newsletter card AB test', () => {
 			renderHighlights([newsletterCard]);
 
 			expect(
-				screen.getByRole('button', {
+				screen.getByRole('link', {
 					name: newsletterCard.headline,
 				}),
 			).toBeInTheDocument();
@@ -76,19 +76,11 @@ describe('ScrollableHighlights — newsletter card AB test', () => {
 			expect(screen.getByText('Free newsletter')).toBeInTheDocument();
 		});
 
-		it('does not render regular card link for a newsletter trail', () => {
-			renderHighlights([newsletterCard]);
-
-			expect(
-				screen.queryByRole('link', { name: newsletterCard.headline }),
-			).not.toBeInTheDocument();
-		});
-
 		it('still renders regular cards alongside the newsletter card', () => {
 			renderHighlights([newsletterCard, defaultCard]);
 
 			expect(
-				screen.getByRole('button', {
+				screen.getByRole('link', {
 					name: `${newsletterCard.headline}`,
 				}),
 			).toBeInTheDocument();
@@ -105,7 +97,7 @@ describe('ScrollableHighlights — newsletter card AB test', () => {
 			renderHighlights([newsletterCard]);
 
 			expect(
-				screen.queryByRole('button', {
+				screen.queryByRole('link', {
 					name: newsletterCard.headline,
 				}),
 			).not.toBeInTheDocument();

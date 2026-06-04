@@ -21,13 +21,15 @@ import type { DCRFrontImage } from '../../types/front';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
-import { CardPicture } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
+import { HighlightsCardImage } from './HighlightsCardImage';
 
 type Props = {
 	format: ArticleFormat;
 	newsletter: Newsletter;
 	headlineText: string;
+	linkTo: string;
+	dataLinkName: string;
 	image?: DCRFrontImage;
 	imageLoading?: Loading;
 	renderingTarget: RenderingTarget;
@@ -37,8 +39,9 @@ const container = css`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	column-gap: ${space[2]}px;
 	justify-content: space-between;
-	/** Relative positioning is required to absolutely position the button overlay */
+	/** Relative positioning is required to absolutely position the card link overlay */
 	position: relative;
 	padding: ${space[2]}px ${space[2]}px 0 ${space[2]}px;
 	background-color: ${palette('--newsletter-card-background')};
@@ -51,9 +54,12 @@ const container = css`
 		min-height: 194px;
 	}
 	${from.tablet} {
+		width: 160px;
+		padding: 10px 10px 0 10px;
+	}
+	${from.tablet} {
 		width: 280px;
 		flex-direction: row;
-		padding: 10px 10px 0 10px;
 	}
 	${from.desktop} {
 		width: 300px;
@@ -75,6 +81,20 @@ const hoverStyles = css`
 
 	:hover .card-headline .show-underline {
 		text-decoration: underline;
+	}
+`;
+
+const linkOverlayStyles = css`
+	position: absolute;
+	z-index: ${getZIndex('card-link')};
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: transparent;
+
+	:focus {
+		${focusHalo};
 	}
 `;
 
@@ -109,39 +129,12 @@ const kickerStyles = css`
 	}
 `;
 
-const imageStyles = css`
-	position: relative;
-	align-self: flex-end;
-	flex-shrink: 0;
-	width: 98px;
-	margin-bottom: 10px;
-
-	${until.tablet} {
-		margin-top: ${space[2]}px;
-	}
-`;
-
-const signupButtonOverlayStyles = css`
-	position: absolute;
-	z-index: ${getZIndex('card-link')};
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background-color: transparent;
-	border: none;
-	padding: 0;
-	cursor: pointer;
-
-	:focus {
-		${focusHalo};
-	}
-`;
-
 export const HighlightsNewsletterCard = ({
 	format,
 	newsletter,
 	headlineText,
+	linkTo,
+	dataLinkName,
 	image,
 	imageLoading = 'lazy',
 	renderingTarget,
@@ -168,18 +161,27 @@ export const HighlightsNewsletterCard = ({
 			renderingTarget,
 			value: { eventDescription: 'highlights-card-modal-opened' },
 		});
-		// TODO: open modal
 	};
+
+	const newsletterImageSrc =
+		newsletter.illustrationSquare ?? newsletter.illustrationCard;
+	const newsletterImage: DCRFrontImage | undefined =
+		newsletterImageSrc !== undefined
+			? {
+					src: newsletterImageSrc,
+					altText: `${newsletter.name} newsletter`,
+				}
+			: image;
 
 	return (
 		<FormatBoundary format={format}>
 			<div css={[container, hoverStyles]}>
-				<button
-					css={signupButtonOverlayStyles}
+				<a
+					href={linkTo}
+					css={linkOverlayStyles}
 					onClick={handleClick}
-					data-link-name="highlights-newsletter-card | open-signup"
+					data-link-name={dataLinkName}
 					aria-label={headlineText}
-					type="button"
 				/>
 
 				<div css={content}>
@@ -204,18 +206,11 @@ export const HighlightsNewsletterCard = ({
 					/>
 				</div>
 
-				{image !== undefined && (
-					<div css={imageStyles}>
-						<CardPicture
-							imageSize="highlights-card"
-							mainImage={image.src}
-							alt={image.altText}
-							loading={imageLoading}
-							isCircular={true}
-							aspectRatio="1:1"
-						/>
-						<div className="media-overlay circular" />
-					</div>
+				{newsletterImage !== undefined && (
+					<HighlightsCardImage
+						imageLoading={imageLoading}
+						image={newsletterImage}
+					/>
 				)}
 			</div>
 		</FormatBoundary>
