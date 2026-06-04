@@ -4682,6 +4682,9 @@
                 "displayType": {
                     "$ref": "#/definitions/ProductDisplayType"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "productCtas": {
                     "type": "array",
                     "items": {
@@ -4719,6 +4722,7 @@
                 "customAttributes",
                 "displayType",
                 "elementId",
+                "id",
                 "primaryHeadingHtml",
                 "productCtas",
                 "productName",
