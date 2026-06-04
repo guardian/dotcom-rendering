@@ -112,7 +112,7 @@ const getDcrUrl = ({
 		? `?${new URLSearchParams({
 				adtest: 'fixed-puppies-ci',
 				...queryParams,
-		  }).toString()}`
+			}).toString()}`
 		: '';
 	return `${ORIGIN}${path}${paramsString}`;
 };
@@ -170,7 +170,7 @@ const loadPage = async ({
 		: validateJson(
 				path,
 				await getFrontendJson(path, cookies, queryParams),
-		  ));
+			));
 
 	// Apply the config and switch overrides
 	const postData = {

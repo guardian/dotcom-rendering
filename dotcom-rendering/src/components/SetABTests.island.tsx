@@ -48,7 +48,7 @@ export const SetABTests = ({ serverSideABTests }: Props) => {
 				? {
 						serverSideABTests,
 						isServer: true,
-				  }
+					}
 				: { isServer: false },
 		);
 		setABTests(abTests);

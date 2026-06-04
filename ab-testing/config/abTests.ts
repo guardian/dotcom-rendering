@@ -134,18 +134,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "webx-world-cup-2026-subnav",
-		description:
-			"Test of World Cup 2026 subnav on world cup related content",
-		owners: ["dotcom.platform@guardian.co.uk:"],
-		expirationDate: "2026-07-20",
-		type: "server",
-		status: "ON",
-		audienceSize: 0 / 100,
-		groups: ["enable"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "commercial-teads-prebid",
 		description:
 			"Test to measure the impact of adding Teads as a bidder in prebid .",

@@ -148,9 +148,9 @@ Once opted-out of all tests you've opted into, you'll be back to your mvt based 
 
 These links are also in the [frontend admin](https://frontend.gutools.co.uk/analytics/ab-testing) and [CODE frontend admin](https://frontend.code.dev-gutools.co.uk/analytics/ab-testing).
 
--   Opt-in Example on PROD: `https://theguardian.com/ab-tests/opt-in/commercial-test-example:variant`
--   Opt-out Example on PROD: `https://theguardian.com/ab-tests/opt-out/commercial-test-example:variant`
--   Opt-out of all (opted in) tests on PROD: `https://theguardian.com/ab-tests/opt-out`
+- Opt-in Example on PROD: `https://theguardian.com/ab-tests/opt-in/commercial-test-example:variant`
+- Opt-out Example on PROD: `https://theguardian.com/ab-tests/opt-out/commercial-test-example:variant`
+- Opt-out of all (opted in) tests on PROD: `https://theguardian.com/ab-tests/opt-out`
 
 You can use the same routes on CODE.
 
@@ -160,9 +160,9 @@ A URL query parameter can be used to force yourself into a test locally. The par
 
 **Opt-in Example**
 
--   Articles: `http://localhost:3030/Article/https://www.theguardian.com/politics/2026/jan/08/go-back-home-farage-schoolmate-accounts-bring-total-alleging-racist-behaviour-to-34?ab-commercial-test-example=variant`
--   Fronts: `http://localhost:3030/Front/https://www.theguardian.com/international?ab-commercial-test-example=variant`
--   Interactives: `http://localhost:3030/Interactive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive?ab-commercial-test-example=variant`
+- Articles: `http://localhost:3030/Article/https://www.theguardian.com/politics/2026/jan/08/go-back-home-farage-schoolmate-accounts-bring-total-alleging-racist-behaviour-to-34?ab-commercial-test-example=variant`
+- Fronts: `http://localhost:3030/Front/https://www.theguardian.com/international?ab-commercial-test-example=variant`
+- Interactives: `http://localhost:3030/Interactive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive?ab-commercial-test-example=variant`
 
 You can verify that you're in the test by checking `window.guardian.modules.abTests.getParticipations()` in the browser console.
 

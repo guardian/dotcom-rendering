@@ -127,7 +127,7 @@ const getPodcastSeriesImage = (
 		? {
 				src: podcastFromTags.podcast.image,
 				altText: podcastFromTags.webTitle,
-		  }
+			}
 		: undefined;
 };
 
@@ -189,7 +189,7 @@ const decideMediaAtomImage = (
 		? {
 				src: largestMediaAtomImage.url,
 				imageAspectRatio: largestMediaAtomImage.fields.aspectRatio,
-		  }
+			}
 		: { src: cardTrailImage };
 };
 
@@ -457,7 +457,7 @@ export const enhanceCards = (
 			)
 				? new Date(
 						faciaCard.card.webPublicationDateOption,
-				  ).toISOString()
+					).toISOString()
 				: undefined,
 			kickerText: decideKicker(faciaCard, cardInTagPage, pageId),
 			supportingContent: faciaCard.supportingContent
@@ -485,7 +485,7 @@ export const enhanceCards = (
 					? decideAvatarUrl(
 							tags,
 							faciaCard.properties.maybeContent.trail.byline,
-					  )
+						)
 					: undefined,
 			mainMedia: cardMainMedia,
 			articleMedia,

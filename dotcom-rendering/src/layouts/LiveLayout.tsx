@@ -50,7 +50,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
-import { useAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -307,11 +306,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const ab = useAB();
-
-	const isWorldCup2026 =
-		article.tags.some((tag) => tag.id === worldCupTagId) &&
-		ab?.isUserInTest('webx-world-cup-2026-subnav');
+	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';

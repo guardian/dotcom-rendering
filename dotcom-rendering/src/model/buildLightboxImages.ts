@@ -52,12 +52,12 @@ const buildLightboxImage = (
 				caption: element.data.caption,
 				title: element.title,
 				starRating: element.starRating,
-		  }
+			}
 		: {
 				alt: element.alt,
 				credit: element.credit,
 				caption: element.caption,
-		  };
+			};
 
 	return {
 		masterUrl: masterImage.url,
@@ -136,7 +136,7 @@ export const buildLightboxImages = (
 									...lightboxImage,
 									blockId: block.id,
 									firstPublished: block.blockFirstPublished,
-							  }
+								}
 							: lightboxImage;
 					}),
 				),

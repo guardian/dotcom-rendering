@@ -220,7 +220,7 @@ export const ManyNewsletterSignUp = ({
 			button.classList.remove(BUTTON_SELECTED_CLASS);
 			const ariaLabelText =
 				button instanceof HTMLElement
-					? button.dataset.ariaLabelWhenUnchecked ?? 'add to list'
+					? (button.dataset.ariaLabelWhenUnchecked ?? 'add to list')
 					: 'add to list';
 
 			button.setAttribute('aria-label', ariaLabelText);

@@ -5,8 +5,8 @@ writing, but the hope is that this will improve soon._
 
 ## Track clicks:
 
--   add a data-link-name attribute to your component and the `ophan-tracking.js`
-    script will automatically send click data to Ophan.
+- add a data-link-name attribute to your component and the `ophan-tracking.js`
+  script will automatically send click data to Ophan.
 
 The code that does this is
 [here](https://github.com/guardian/ophan/blob/75b86abcce07369c8998521399327d436246c016/tracker-js/assets/coffee/ophan/click-path-capture.coffee)

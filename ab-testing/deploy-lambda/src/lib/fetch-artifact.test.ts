@@ -39,9 +39,8 @@ describe("fetch-artifact", () => {
 
 			mockS3SendResponse(mockData);
 
-			const { fetchDictionaryArtifact } = await import(
-				"./fetch-artifact.ts"
-			);
+			const { fetchDictionaryArtifact } =
+				await import("./fetch-artifact.ts");
 
 			const result = await fetchDictionaryArtifact(
 				"test-bucket",
@@ -58,9 +57,8 @@ describe("fetch-artifact", () => {
 				Body: null,
 			}));
 
-			const { fetchDictionaryArtifact } = await import(
-				"./fetch-artifact.ts"
-			);
+			const { fetchDictionaryArtifact } =
+				await import("./fetch-artifact.ts");
 
 			await assert.rejects(
 				async () => {
@@ -76,9 +74,8 @@ describe("fetch-artifact", () => {
 		it("should throw error when JSON parsing fails", async () => {
 			mockS3SendResponse("invalid json {");
 
-			const { fetchDictionaryArtifact } = await import(
-				"./fetch-artifact.ts"
-			);
+			const { fetchDictionaryArtifact } =
+				await import("./fetch-artifact.ts");
 
 			await assert.rejects(async () => {
 				await fetchDictionaryArtifact("test-bucket", "test-key");
@@ -90,9 +87,8 @@ describe("fetch-artifact", () => {
 				{ wrong_key: "test1", wrong_value: "value1" }, // Invalid structure
 			]);
 
-			const { fetchDictionaryArtifact } = await import(
-				"./fetch-artifact.ts"
-			);
+			const { fetchDictionaryArtifact } =
+				await import("./fetch-artifact.ts");
 
 			await assert.rejects(async () => {
 				await fetchDictionaryArtifact("test-bucket", "test-key");
@@ -105,9 +101,8 @@ describe("fetch-artifact", () => {
 				{ item_key: "test2" }, // Missing item_value
 			]);
 
-			const { fetchDictionaryArtifact } = await import(
-				"./fetch-artifact.ts"
-			);
+			const { fetchDictionaryArtifact } =
+				await import("./fetch-artifact.ts");
 
 			await assert.rejects(async () => {
 				await fetchDictionaryArtifact("test-bucket", "test-key");
@@ -119,9 +114,8 @@ describe("fetch-artifact", () => {
 				throw new Error("S3 access denied");
 			});
 
-			const { fetchDictionaryArtifact } = await import(
-				"./fetch-artifact.ts"
-			);
+			const { fetchDictionaryArtifact } =
+				await import("./fetch-artifact.ts");
 
 			await assert.rejects(
 				async () => {
@@ -137,9 +131,8 @@ describe("fetch-artifact", () => {
 		it("should handle empty array response", async () => {
 			mockS3SendResponse([]);
 
-			const { fetchDictionaryArtifact } = await import(
-				"./fetch-artifact.ts"
-			);
+			const { fetchDictionaryArtifact } =
+				await import("./fetch-artifact.ts");
 
 			const result = await fetchDictionaryArtifact(
 				"test-bucket",

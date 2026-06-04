@@ -130,12 +130,12 @@ export const EmailSignUpWrapper = ({
 				abVariant === 'variantIllustratedCard'
 					? NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
 							identityName,
-					  )
+						)
 					: abVariant === 'variantNewField'
-					? NEWSLETTER_SIGNUP_COMPONENT_ID.variantNewField(
-							identityName,
-					  )
-					: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
+						? NEWSLETTER_SIGNUP_COMPONENT_ID.variantNewField(
+								identityName,
+							)
+						: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
 			renderingTarget,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
