@@ -11,7 +11,7 @@ blockExoticSubdeps: true
 catalog:
   '@aws-sdk/client-s3': 3.995.0
   '@aws-sdk/client-ssm': 3.995.0
-  '@guardian/cdk': 63.3.1
+  '@guardian/cdk': 63.5.1
   '@guardian/eslint-config': 14.0.1
   '@guardian/tsconfig': 1.0.1
   '@rollup/plugin-commonjs': 29.0.0
