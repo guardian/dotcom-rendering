@@ -6,6 +6,7 @@ import {
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { CallToActionButton } from '../components/CallToActionAtom';
 import { GalleryImage } from '../components/GalleryImage';
 import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
@@ -57,8 +58,13 @@ const metaStyles = css`
 	}
 `;
 
+const metaContentStyles = css`
+	display: flex;
+	align-items: center;
+	gap: 0.3rem;
+`;
+
 const shareButtonStyles = css`
-	margin-top: ${space[4]}px;
 	padding: ${space[1]}px;
 `;
 
@@ -118,19 +124,28 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 
 					<div data-print-layout="hide" css={metaStyles}>
 						{renderingTarget === 'Web' && (
-							<div css={shareButtonStyles}>
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<ShareButton
-										pageId={frontendData.pageId}
-										webTitle={frontendData.webTitle}
-										format={format}
-										context="ArticleMeta"
+							<>
+								<div css={metaContentStyles}>
+									<CallToActionButton
+										linkUrl="https://www.trendmicro.com/vinfo/gb/security/research-and-analysis/predictions/the-ai-fication-of-cyberthreats-trend-micro-security-predictions-for-2026?utm_source=guardian&utm_medium=referral&utm_campaign=ent_cyber+risk_aw_e_ukie_int_guardian&utm_content=ghb"
+										buttonText="Explore more"
+										accentColor="#0077B6"
 									/>
-								</Island>
-							</div>
+									<div css={shareButtonStyles}>
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<ShareButton
+												pageId={frontendData.pageId}
+												webTitle={frontendData.webTitle}
+												format={format}
+												context="ArticleMeta"
+											/>
+										</Island>
+									</div>
+								</div>
+							</>
 						)}
 					</div>
 				</header>

@@ -56,7 +56,7 @@ export type Gallery = ArticleFields & {
 };
 
 export type OtherArticles = ArticleFields & {
-	design: Exclude<ArticleDesign, ArticleDesign.Gallery>;
+	design: Exclude<ArticleDesign, GalleryDesign>;
 };
 
 export type Article = Gallery | OtherArticles;
