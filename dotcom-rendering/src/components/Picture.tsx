@@ -614,9 +614,9 @@ export const Picture = ({
 	const sizes =
 		ratio >= 1
 			? // portrait or square
-			  '100vw'
+				'100vw'
 			: // landscape
-			  `${Math.round(100 / ratio)}vh`;
+				`${Math.round(100 / ratio)}vh`;
 
 	const fallbackSource = getFallbackSource(sources);
 

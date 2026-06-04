@@ -364,7 +364,7 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 											'number'
 												? formatAudioDuration(
 														audioData.durationSeconds,
-												  )
+													)
 												: undefined
 										}
 									/>

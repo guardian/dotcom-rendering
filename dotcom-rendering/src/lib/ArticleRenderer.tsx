@@ -123,7 +123,7 @@ export const ArticleRenderer = ({
 			{renderingTarget === 'Apps'
 				? renderedElements
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
-				  withSignInGateSlot({
+					withSignInGateSlot({
 						renderedElements,
 						contentType,
 						sectionId,
@@ -137,7 +137,7 @@ export const ArticleRenderer = ({
 						isDev,
 						contributionsServiceUrl,
 						editionId,
-				  })}
+					})}
 		</div>
 	); // classname that space finder is going to target for in-body ads in DCR
 };

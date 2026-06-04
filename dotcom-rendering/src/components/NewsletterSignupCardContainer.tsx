@@ -137,11 +137,11 @@ export const NewsletterSignupCardContainer = ({
 					behaviour: 'link' as const,
 					href: renderUrl ?? '',
 					onClick: trackPreviewLinkOpen,
-			  }
+				}
 			: {
 					behaviour: 'modal' as const,
 					onClick: openPreview,
-			  }
+				}
 		: undefined;
 
 	return (

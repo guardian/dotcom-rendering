@@ -18,7 +18,7 @@
 	"Import neutral": {
 		"prefix": "neutral",
 		"body": ["import { neutral } from '@guardian/source/foundations';"],
-		"description": "Import for neutral"
+		"description": "Import for neutral",
 	},
 	"React wrapper component": {
 		"prefix": "rw",
@@ -29,8 +29,8 @@
 			"",
 			"export const $TM_FILENAME_BASE = ({ children }: Props) => ($1",
 			"  <div>{children}</div>",
-			");"
+			");",
 		],
-		"description": "React wrapper component"
-	}
+		"description": "React wrapper component",
+	},
 }

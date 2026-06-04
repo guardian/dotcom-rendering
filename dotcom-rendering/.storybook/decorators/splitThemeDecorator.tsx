@@ -126,10 +126,10 @@ const backgroundColour = (
 	context: Context,
 ): string =>
 	colourScheme === 'light'
-		? context.parameters.colourSchemeBackground?.light ??
-		  sourcePalette.neutral[100]
-		: context.parameters.colourSchemeBackground?.dark ??
-		  sourcePalette.neutral[0];
+		? (context.parameters.colourSchemeBackground?.light ??
+			sourcePalette.neutral[100])
+		: (context.parameters.colourSchemeBackground?.dark ??
+			sourcePalette.neutral[0]);
 
 /**
  * Derives the text colour for a story based on the colour scheme set by the
@@ -143,10 +143,10 @@ const backgroundColour = (
  */
 const textColour = (colourScheme: ColourScheme, context: Context): string =>
 	colourScheme === 'light'
-		? context.parameters.colourSchemeTextColour?.light ??
-		  sourcePalette.neutral[0]
-		: context.parameters.colourSchemeTextColour?.dark ??
-		  sourcePalette.neutral[100];
+		? (context.parameters.colourSchemeTextColour?.light ??
+			sourcePalette.neutral[0])
+		: (context.parameters.colourSchemeTextColour?.dark ??
+			sourcePalette.neutral[100]);
 
 /**
  * Describes the theme being used to render the Story, 'light' or 'dark'.

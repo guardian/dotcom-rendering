@@ -117,7 +117,7 @@ const insertAdPlaceholdersForGallery = (elements: FEElement[]): FEElement[] => {
 							prev.elements,
 							currentElement,
 							prev.adPlaceholderCounter,
-					  )
+						)
 					: [...prev.elements, currentElement],
 				imageBlockElementCounter,
 				adPlaceholderCounter: shouldInsertAd
@@ -180,7 +180,7 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 							prev.elements,
 							currentElement,
 							prev.numberOfAdsInserted,
-					  )
+						)
 					: currentElements,
 				elementCounter,
 				lastAdIndex: shouldInsertAd ? elementCounter : prev.lastAdIndex,

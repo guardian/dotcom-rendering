@@ -109,7 +109,7 @@ const preferredSourceMetaFlex = (hasButton: boolean): CSSProperties =>
 	hasButton
 		? {
 				marginBottom: 8,
-		  }
+			}
 		: {};
 
 const stretchLines = css`
@@ -152,7 +152,7 @@ const preferredSourceMetaExtras = (hasButton: boolean): CSSProperties =>
 	hasButton
 		? {
 				paddingTop: 8,
-		  }
+			}
 		: {};
 
 const metaNumbers = (isPictureContent: boolean) => css`
@@ -208,7 +208,7 @@ export const metaContainer = (format: ArticleFormat) => {
 								${from.wide} {
 									margin-left: 40px;
 								}
-						  `;
+							`;
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 				case ArticleDesign.Gallery: {

@@ -129,7 +129,7 @@ export const WithoutMainMediaCaption = meta.story({
 										credit: undefined,
 									},
 								},
-						  ]
+							]
 						: webHostedArticle.frontendData.mainMediaElements,
 			},
 		},
