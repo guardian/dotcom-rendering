@@ -136,7 +136,7 @@ const configs = [
 		textHoverColor: themePalette('--masthead-nav-link-text-hover'),
 		backgroundColor: {
 			web: themePalette('--masthead-nav-background'),
-			app: themePalette('--article-background'),
+			app: themePalette('--apps-directory-page-nav-background'),
 		},
 		borderColor: {
 			web: themePalette('--masthead-nav-lines'),
