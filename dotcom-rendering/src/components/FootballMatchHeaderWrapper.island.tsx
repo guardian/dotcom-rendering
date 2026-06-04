@@ -35,11 +35,7 @@ export const FootballMatchHeaderWrapper = (props: Props) => (
 		renderingTarget={props.renderingTarget}
 		notificationsClient={getNotificationsClient()}
 		matchNotificationsClient={getMatchNotificationsClient()}
-		environmentClient={{
-			...getEnvironmentClient(),
-			// Hardcoded for testing, before this version is published.
-			nativeThriftPackageVersion: () => Promise.resolve('8.13.0'),
-		}}
+		environmentClient={getEnvironmentClient()}
 		liveActivitiesClient={getLiveActivitiesClient()}
 	/>
 );
