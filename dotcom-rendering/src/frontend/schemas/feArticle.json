@@ -6095,14 +6095,15 @@
                                     "width": {
                                         "type": "number"
                                     },
-                                    "aspectRatio": {
-                                        "type": "string"
-                                    },
                                     "hasAudio": {
                                         "type": "boolean"
+                                    },
+                                    "aspectRatio": {
+                                        "type": "string"
                                     }
                                 },
                                 "required": [
+                                    "hasAudio",
                                     "height",
                                     "mimeType",
                                     "src",

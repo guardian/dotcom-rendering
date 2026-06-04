@@ -19,6 +19,7 @@ import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.island';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
+import { HostedEmbedBlockComponent } from '../components/HostedEmbedBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.island';
 import { InteractiveAtom } from '../components/InteractiveAtom';
@@ -315,6 +316,17 @@ export const renderElement = ({
 						<MainMediaEmbedBlockComponent
 							title={element.alt ?? ''}
 							srcDoc={element.html}
+						/>
+					);
+				}
+
+				if (format.design === ArticleDesign.HostedArticle) {
+					return (
+						<HostedEmbedBlockComponent
+							html={element.html}
+							alt={element.alt ?? ''}
+							height={element.height}
+							width={element.width}
 						/>
 					);
 				}
