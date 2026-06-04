@@ -56,7 +56,6 @@ type Props = {
 	shouldHideAds: boolean;
 	serverTime?: number;
 	idApiUrl?: string;
-	accentColor?: string;
 	isOldInteractive?: boolean;
 };
 
@@ -149,7 +148,6 @@ export const ArticleBody = ({
 	shouldHideAds,
 	serverTime,
 	idApiUrl,
-	accentColor,
 	isOldInteractive = false,
 }: Props) => {
 	const isInteractiveContent =
