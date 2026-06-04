@@ -171,7 +171,8 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 								${horizontalPaddingMobile +
 								2 * cardGap +
 								peepingCardWidthMobileMedium}px
-						) / 2
+						) /
+						2
 				)
 			);
 		}
@@ -184,7 +185,8 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 								${horizontalPaddingMobileLandscape +
 								2 * cardGap +
 								peepingCardWidthMobileMedium}px
-						) / 2
+						) /
+						2
 				)
 			);
 		}

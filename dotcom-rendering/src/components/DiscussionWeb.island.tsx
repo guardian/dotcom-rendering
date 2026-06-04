@@ -54,7 +54,7 @@ const getUser = async ({
 				onUnpick: unPickComment(authStatus),
 				addUsername: addUserName(authStatus),
 				reportAbuse: reportAbuse(authStatus),
-		  }
+			}
 		: {
 				kind: 'Reader',
 				profile,
@@ -63,7 +63,7 @@ const getUser = async ({
 				onRecommend: recommend(authStatus),
 				addUsername: addUserName(authStatus),
 				reportAbuse: reportAbuse(authStatus),
-		  };
+			};
 };
 
 /**

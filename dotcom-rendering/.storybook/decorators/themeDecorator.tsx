@@ -29,10 +29,10 @@ function backgroundColour<Args>(
 	context: StoryContext<Args>,
 ): CSSProperties['backgroundColor'] {
 	return colourScheme === 'light'
-		? context.parameters.colourSchemeBackground?.light ??
-				sourcePalette.neutral[100]
-		: context.parameters.colourSchemeBackground?.dark ??
-				sourcePalette.neutral[0];
+		? (context.parameters.colourSchemeBackground?.light ??
+				sourcePalette.neutral[100])
+		: (context.parameters.colourSchemeBackground?.dark ??
+				sourcePalette.neutral[0]);
 }
 
 function textColour<Args>(
@@ -40,10 +40,10 @@ function textColour<Args>(
 	context: StoryContext<Args>,
 ): CSSProperties['color'] {
 	return colourScheme === 'light'
-		? context.parameters.colourSchemeTextColour?.light ??
-				sourcePalette.neutral[7]
-		: context.parameters.colourSchemeTextColour?.dark ??
-				sourcePalette.neutral[97];
+		? (context.parameters.colourSchemeTextColour?.light ??
+				sourcePalette.neutral[7])
+		: (context.parameters.colourSchemeTextColour?.dark ??
+				sourcePalette.neutral[97]);
 }
 
 // ----- Decorators ----- //

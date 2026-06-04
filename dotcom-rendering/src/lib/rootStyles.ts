@@ -50,7 +50,7 @@ export const rootStyles = (
 							}
 						}
 					}
-			  `
+				`
 			: ''}
 		${hostedHeaderOffset(format)}
 	}

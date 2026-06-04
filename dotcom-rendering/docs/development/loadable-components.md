@@ -10,8 +10,8 @@ The end goal is ‘Nothing over the wire’. I.E: Do not send any Javascript to 
 
 Along with this goal we're looking to:
 
--   Parallelise downloads so that we can get to parse and execute of the main app as quickly as possible.
--   Increase browser and Fastly caching for multi-visit users by reducing the number of new files (currently any change in the React app generates a new hash and invalidates the cache)
+- Parallelise downloads so that we can get to parse and execute of the main app as quickly as possible.
+- Increase browser and Fastly caching for multi-visit users by reducing the number of new files (currently any change in the React app generates a new hash and invalidates the cache)
 
 ## How do I split out my component for Loadable Components?
 
@@ -37,12 +37,12 @@ Along with this goal we're looking to:
 
 #### What parts of loadable components are we and are we not using?
 
--   We are using the [client-side module for loadable components](https://loadable-components.com/docs/api-loadable-component/) that gives us some [benefits over react lazy](https://loadable-components.com/docs/loadable-vs-react-lazy/), like being able to code split _for hydrated components_
--   [The webpack plugin](https://loadable-components.com/docs/api-loadable-webpack-plugin/) generates a stats file that we use on the server to gather chunks
--   [The babel plugin](https://loadable-components.com/docs/babel-plugin/#babel-plugin) turns a loadable call into what is required for chunking, automatically adding things like the chunkName
--   The [loadable/server module](https://loadable-components.com/docs/api-loadable-server/) has some methods that we use to:
-    -   Add chunks based on the components needed for the pageview
-    -   Gather the information for those chunks so we can create the script tags
+- We are using the [client-side module for loadable components](https://loadable-components.com/docs/api-loadable-component/) that gives us some [benefits over react lazy](https://loadable-components.com/docs/loadable-vs-react-lazy/), like being able to code split _for hydrated components_
+- [The webpack plugin](https://loadable-components.com/docs/api-loadable-webpack-plugin/) generates a stats file that we use on the server to gather chunks
+- [The babel plugin](https://loadable-components.com/docs/babel-plugin/#babel-plugin) turns a loadable call into what is required for chunking, automatically adding things like the chunkName
+- The [loadable/server module](https://loadable-components.com/docs/api-loadable-server/) has some methods that we use to:
+    - Add chunks based on the components needed for the pageview
+    - Gather the information for those chunks so we can create the script tags
 
 We do not use the loadable/server `collectChunks` method because our partial hydration and architecture make it difficult when loadable expects a fully isomorphic app that is similar on client and server. This does give us more control, however, on what components we add to the page - and mirrors how we're splitting components for AMP.
 

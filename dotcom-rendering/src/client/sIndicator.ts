@@ -53,7 +53,7 @@ const displaySIndicatorRoundel = (
 			: `https://syndication.${window.location.hostname.replace(
 					/^(m\.|www\.)/i,
 					'',
-			  )}/sIndicator`,
+				)}/sIndicator`,
 	);
 
 	switch (status) {

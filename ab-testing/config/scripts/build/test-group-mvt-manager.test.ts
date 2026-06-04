@@ -374,5 +374,8 @@ test("TestGroupMVTManager - constructor with invalid MVT key format", () => {
 	equal(testGroup?.length, 1);
 	deepEqual(testGroup, [123]);
 	// No NaN values should be present
-	equal(testGroup?.some((mvt) => Number.isNaN(mvt)), false);
+	equal(
+		testGroup?.some((mvt) => Number.isNaN(mvt)),
+		false,
+	);
 });

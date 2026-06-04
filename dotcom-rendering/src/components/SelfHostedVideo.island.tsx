@@ -19,6 +19,7 @@ import { useVideoAttentionTracking } from '../lib/useVideoAttentionTracking';
 import { useVideoMilestoneTracking } from '../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
+	convertProgressPercentageToCurrentTime,
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 	findOptimisedSourcePerMimeType,
@@ -442,6 +443,7 @@ export const SelfHostedVideo = ({
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
 	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
+	const [isProgressBarSeeking, setIsProgressBarSeeking] = useState(false);
 	/** Whether the video should show controls */
 	const [showControls, setShowControls] = useState(true);
 	/** Whether the video is currently showing controls */
@@ -1136,7 +1138,10 @@ export const SelfHostedVideo = ({
 		}
 
 		if (playerState === 'PLAYING') {
-			setCurrentTime(video.currentTime);
+			if (!isProgressBarSeeking) {
+				setCurrentTime(video.currentTime);
+			}
+
 			/**
 			 * We only want to track milestone events for "long-form"
 			 * videos, not loops or cinemagraphs. We expect these to be
@@ -1177,6 +1182,28 @@ export const SelfHostedVideo = ({
 				setMutedState({ value: !isMuted });
 				break;
 		}
+	};
+
+	const handleProgressBarInput = (
+		event: React.FormEvent<HTMLInputElement>,
+	) => {
+		if (duration === undefined) {
+			return;
+		}
+
+		showControlsAndStartTimer();
+
+		const percentage = Number(event.currentTarget.value);
+		const time = convertProgressPercentageToCurrentTime(
+			percentage,
+			duration,
+		);
+
+		if (time === null) {
+			return;
+		}
+
+		updateCurrentTime(time);
 	};
 
 	/**
@@ -1268,10 +1295,16 @@ export const SelfHostedVideo = ({
 						handleAudioClick={handleAudioClick}
 						handleTimeUpdate={handleTimeUpdate}
 						handleKeyDown={handleKeyDown}
+						handleProgressBarInput={handleProgressBarInput}
+						handleProgressBarSeekStart={() => {
+							setIsProgressBarSeeking(true);
+						}}
+						handleProgressBarSeekEnd={() => {
+							setIsProgressBarSeeking(false);
+						}}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
 						handleEnded={handleEnded}
-						updateCurrentTime={updateCurrentTime}
 						onError={onError}
 						preloadPartialData={shouldAutoplay === true}
 						showPlayPauseIcon={showPlayPauseIcon}
@@ -1280,7 +1313,6 @@ export const SelfHostedVideo = ({
 							videoStyleSettings.useInteractiveProgressBar ===
 							true
 						}
-						handleProgressBarInput={showControlsAndStartTimer}
 						showSubtitles={videoStyleSettings.canShowSubtitles}
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}

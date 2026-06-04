@@ -40,15 +40,14 @@ export const FootballMatchDay = ({
 		)}
 		{matches.length > 0 ? (
 			<ul css={matchesCss}>
-				{matches.map(
-					(day) =>
-						day.competitions[0]?.matches.map((match) => (
-							<Match
-								key={match.paId}
-								match={match}
-								edition={edition}
-							/>
-						)),
+				{matches.map((day) =>
+					day.competitions[0]?.matches.map((match) => (
+						<Match
+							key={match.paId}
+							match={match}
+							edition={edition}
+						/>
+					)),
 				)}
 			</ul>
 		) : (

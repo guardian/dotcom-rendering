@@ -26,7 +26,7 @@ const styles = {
 			? css`
 					margin: 0 4px;
 					border-radius: 8px;
-			  `
+				`
 			: ''}
 	`,
 	grid: css`

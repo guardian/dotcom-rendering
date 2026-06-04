@@ -89,7 +89,7 @@ export const Kicker = ({
 					: [
 							standardTextStyles,
 							fontWeight === 'bold' && boldTextOverrideStyles,
-					  ],
+						],
 				isInline && inlineKickerStyles,
 			]}
 			style={{

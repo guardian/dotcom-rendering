@@ -18,31 +18,31 @@
 
 For all possible sign in gates, the following rules should apply:
 
--   All variant names should be unique across all tests
--   Running a Control/Variant with same audience size?
-    -   Use single AB test with 2 variants defined
--   Running a Control/Variant test with different audience sizes?
-    -   Use a separate AB test for each variant with unique id
-    -   Use the `dataLinkNames` parameter to join up the name of the tests in reporting, essentially have this be the same between the tests.
-    -   Useful example, see how the `SignInGateMain` is set up
--   Sign In Gate audience across all tests/variants should never overlap. If there is not enough space to deploy a new test, then change the audience of another test/variant.
+- All variant names should be unique across all tests
+- Running a Control/Variant with same audience size?
+    - Use single AB test with 2 variants defined
+- Running a Control/Variant test with different audience sizes?
+    - Use a separate AB test for each variant with unique id
+    - Use the `dataLinkNames` parameter to join up the name of the tests in reporting, essentially have this be the same between the tests.
+    - Useful example, see how the `SignInGateMain` is set up
+- Sign In Gate audience across all tests/variants should never overlap. If there is not enough space to deploy a new test, then change the audience of another test/variant.
 
 #### `SignInGateMain`
 
--   The current version of the gate rolled out to the largest audience
--   This test should be continuous, when deploying a new version, just update the number of the variant.
--   Control and Variant running as 2 tests due to differing audience size
--   Both share the same `dataLinkNames` (`SignInGateMain`) for consistent reporting
--   Variant Test
-    -   Test ID: `SignInGateMainVariant`
-    -   Test Variants: `main-variant-x`
-        -   `x` is a number relating to the current version of the test
-    -   Variant shows the gate, should share the same display rules as control. A `VIEW` Ophan ComponentEvent is fired when the display rules are met, and the gate is inserted.
--   Control Test
-    -   Test ID: `SignInGateMainControl`
-    -   Test Variants: `main-control-x`
-        -   `x` is a number relating to the current version of the test
-    -   Control has same display rule as Variant, but will never see the gate itself. A `VIEW` Ophan ComponentEvent is fired if the display rules are met, but the gate is not inserted.
+- The current version of the gate rolled out to the largest audience
+- This test should be continuous, when deploying a new version, just update the number of the variant.
+- Control and Variant running as 2 tests due to differing audience size
+- Both share the same `dataLinkNames` (`SignInGateMain`) for consistent reporting
+- Variant Test
+    - Test ID: `SignInGateMainVariant`
+    - Test Variants: `main-variant-x`
+        - `x` is a number relating to the current version of the test
+    - Variant shows the gate, should share the same display rules as control. A `VIEW` Ophan ComponentEvent is fired when the display rules are met, and the gate is inserted.
+- Control Test
+    - Test ID: `SignInGateMainControl`
+    - Test Variants: `main-control-x`
+        - `x` is a number relating to the current version of the test
+    - Control has same display rule as Variant, but will never see the gate itself. A `VIEW` Ophan ComponentEvent is fired if the display rules are met, but the gate is not inserted.
 
 ### AB Test Setup
 
@@ -117,12 +117,12 @@ You can see frontends [Writing a test](https://twitter.com/Ryallin/status/123824
 
 The most important properties are:
 
--   `id` - The unique name of the test. This must be TitleCased and correspond to the hyphen-separated portion of the switch id that follows ab-. e.g. if the switch id is `ab-sign-in-gate-patientia`, the test id in the test definition must be `SignInGatePatientia`.
--   `audience` - The ratio of people who you want in the test (Eg, 0.2 = 20%), who will then be split equally between the variants defined in the test.
--   `audienceOffset` - All users are given a permanent, unique hash that is a number between 0 and 1. audienceOffset allows you to specify the range of users you want to test. For example, an `audienceOffset` value of `0.5` and an audience of `0.1` means user with a hash between `0.5` and `0.6` will be opted in to the test. This helps to avoid overlapping tests.
--   `dataLinkNames` - Link names or custom link names used for test. As mentioned above, use the `dataLinkNames` parameter to join up the name of the tests in reporting, essentially have this be the same between the tests, if you're using multiple tests for multiple variants of different audience sizes.
--   `canRun` - A function to determine if the test is allowed to run (Eg, so you can target individual pages, segments etc.). For the sign in gate, this is likely always just returning true, since the display rules for the gate are determined in the component itself.
--   `variants` - An array of objects representing the groups (variants) in the test. In terms of the object properties, the main one that's required for the sign in gate is the `id` property. This is the `id` of the variant, and should be unique across all sign in gate tests. The `run` property should just be void, since we display the test elsewhere.
+- `id` - The unique name of the test. This must be TitleCased and correspond to the hyphen-separated portion of the switch id that follows ab-. e.g. if the switch id is `ab-sign-in-gate-patientia`, the test id in the test definition must be `SignInGatePatientia`.
+- `audience` - The ratio of people who you want in the test (Eg, 0.2 = 20%), who will then be split equally between the variants defined in the test.
+- `audienceOffset` - All users are given a permanent, unique hash that is a number between 0 and 1. audienceOffset allows you to specify the range of users you want to test. For example, an `audienceOffset` value of `0.5` and an audience of `0.1` means user with a hash between `0.5` and `0.6` will be opted in to the test. This helps to avoid overlapping tests.
+- `dataLinkNames` - Link names or custom link names used for test. As mentioned above, use the `dataLinkNames` parameter to join up the name of the tests in reporting, essentially have this be the same between the tests, if you're using multiple tests for multiple variants of different audience sizes.
+- `canRun` - A function to determine if the test is allowed to run (Eg, so you can target individual pages, segments etc.). For the sign in gate, this is likely always just returning true, since the display rules for the gate are determined in the component itself.
+- `variants` - An array of objects representing the groups (variants) in the test. In terms of the object properties, the main one that's required for the sign in gate is the `id` property. This is the `id` of the variant, and should be unique across all sign in gate tests. The `run` property should just be void, since we display the test elsewhere.
 
 Once you've made the test definition, you'll need to import it into the `tests` array in the `src/experiments/ab-tests.ts` file.
 
@@ -306,8 +306,8 @@ The disadvantage of this method is that it's a bit tricky to work out exactly wh
 
 The advantages of using the forcedTestVariant:
 
--   you don't have to work out the value of the mvt_id to set, and that if the audience size or offset has changed it will automatically be picked up.
--   you can technically run it without running `frontend` locally by manually switchi on your AB test switch:
+- you don't have to work out the value of the mvt_id to set, and that if the audience size or offset has changed it will automatically be picked up.
+- you can technically run it without running `frontend` locally by manually switchi on your AB test switch:
 
 ```tsx
  abTestSwitches={{
