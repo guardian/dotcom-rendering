@@ -1,5 +1,6 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import {
+	from,
 	palette as sourcePalette,
 	space,
 	until,
@@ -218,9 +219,12 @@ export const InteractiveLayout = (props: WebProps | AppProps) => {
 							)};
 						`,
 						grid.container,
-						grid.verticalRules({
-							centre: true,
-						}),
+						grid.outerRules(),
+						css`
+							${from.leftCol} {
+								${grid.centreRule(3)}
+							}
+						`,
 					]}
 				>
 					<GridItem area="media" layoutType="standard">
