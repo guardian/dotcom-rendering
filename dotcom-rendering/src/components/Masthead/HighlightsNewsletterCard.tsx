@@ -15,7 +15,6 @@ import {
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	sendNewsletterSignupEvent,
 } from '../../lib/newsletterSignupTracking';
-import { useIsInView } from '../../lib/useIsInView';
 import { palette } from '../../palette';
 import type { Newsletter } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
@@ -152,27 +151,20 @@ export const HighlightsNewsletterCard = ({
 	imageLoading = 'lazy',
 	renderingTarget,
 }: Props) => {
-	const componentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(
+	const componentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsNewsletterCard(
 		newsletter.identityName,
 	);
 
-	const [hasBeenSeen, setNode] = useIsInView({
-		debounce: true,
-		threshold: 0,
-	});
-
 	useEffect(() => {
-		if (hasBeenSeen === true) {
-			sendNewsletterSignupEvent({
-				action: 'VIEW',
-				identityName: newsletter.identityName,
-				componentId,
-				renderingTarget,
-				value: { eventDescription: 'highlights-card-viewed' },
-				abTest: AB_TEST,
-			});
-		}
-	}, [hasBeenSeen, componentId, newsletter.identityName, renderingTarget]);
+		sendNewsletterSignupEvent({
+			action: 'VIEW',
+			identityName: newsletter.identityName,
+			componentId,
+			renderingTarget,
+			value: { eventDescription: 'highlights-card-viewed' },
+			abTest: AB_TEST,
+		});
+	}, [componentId, newsletter.identityName, renderingTarget]);
 
 	const handleClick = () => {
 		sendNewsletterSignupEvent({
@@ -188,7 +180,7 @@ export const HighlightsNewsletterCard = ({
 
 	return (
 		<FormatBoundary format={format}>
-			<div ref={setNode} css={[container, hoverStyles]}>
+			<div css={[container, hoverStyles]}>
 				<button
 					css={signupButtonOverlayStyles}
 					onClick={handleClick}
