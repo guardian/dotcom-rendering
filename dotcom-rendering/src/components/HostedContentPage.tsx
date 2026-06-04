@@ -33,6 +33,7 @@ interface AppProps extends BaseProps {
  * HostedContentPage is a high level wrapper for hosted content pages on Dotcom. Sets strict mode and some globals
  */
 export const HostedContentPage = (props: WebProps | AppProps) => {
+	const { article } = props;
 	const {
 		article: { design, display, theme, frontendData },
 		renderingTarget,
@@ -48,11 +49,11 @@ export const HostedContentPage = (props: WebProps | AppProps) => {
 	};
 
 	const decideLayout = () => {
-		switch (format.design) {
+		switch (article.design) {
 			case ArticleDesign.HostedVideo:
 				return (
 					<HostedVideoLayout
-						content={props.article}
+						content={article}
 						format={format}
 						renderingTarget={renderingTarget}
 					/>
@@ -60,7 +61,7 @@ export const HostedContentPage = (props: WebProps | AppProps) => {
 			case ArticleDesign.HostedGallery:
 				return (
 					<HostedGalleryLayout
-						content={props.article}
+						content={article}
 						format={format}
 						renderingTarget={renderingTarget}
 					/>
@@ -68,7 +69,7 @@ export const HostedContentPage = (props: WebProps | AppProps) => {
 			case ArticleDesign.HostedArticle:
 				return (
 					<HostedArticleLayout
-						content={props.article}
+						content={article}
 						format={format}
 						renderingTarget={renderingTarget}
 					/>
