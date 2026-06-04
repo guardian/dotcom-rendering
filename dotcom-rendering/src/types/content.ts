@@ -1205,7 +1205,6 @@ export type Newsletter = {
 	successDescription: string;
 	theme: string;
 	group: string;
-	highlightCardTitle?: string;
 	category?: string;
 	regionFocus?: string;
 	illustrationCard?: string;

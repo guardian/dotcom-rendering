@@ -138,11 +138,6 @@ const signupButtonOverlayStyles = css`
 	}
 `;
 
-const AB_TEST = {
-	name: 'newsletters-highlights-signup-card',
-	variant: 'variant',
-} as const;
-
 export const HighlightsNewsletterCard = ({
 	format,
 	newsletter,
@@ -151,7 +146,7 @@ export const HighlightsNewsletterCard = ({
 	imageLoading = 'lazy',
 	renderingTarget,
 }: Props) => {
-	const componentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsNewsletterCard(
+	const componentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(
 		newsletter.identityName,
 	);
 
@@ -162,7 +157,6 @@ export const HighlightsNewsletterCard = ({
 			componentId,
 			renderingTarget,
 			value: { eventDescription: 'highlights-card-viewed' },
-			abTest: AB_TEST,
 		});
 	}, [componentId, newsletter.identityName, renderingTarget]);
 
@@ -173,7 +167,6 @@ export const HighlightsNewsletterCard = ({
 			componentId,
 			renderingTarget,
 			value: { eventDescription: 'highlights-card-modal-opened' },
-			abTest: AB_TEST,
 		});
 		// TODO: open modal
 	};
@@ -185,7 +178,7 @@ export const HighlightsNewsletterCard = ({
 					css={signupButtonOverlayStyles}
 					onClick={handleClick}
 					data-link-name="highlights-newsletter-card | open-signup"
-					aria-label={`Sign up to ${headlineText}`}
+					aria-label={headlineText}
 					type="button"
 				/>
 

@@ -291,7 +291,8 @@ export const newsletterCard: DCRFrontCard = {
 	},
 	dataLinkName: 'news | group-0 | card-@1',
 	url: '/global/2023/sep/27/sign-up-for-the-guardian-headlines-europe-newsletter-a-daily-news-email-with-all-the-top-stories',
-	headline: 'Guardian Headlines Europe',
+	headline:
+		'Sign up for the Guardian Headlines Europe newsletter, a daily news email with all the top stories',
 	trailText: 'A daily news email with all the top stories',
 	starRating: undefined,
 	webPublicationDate: '2023-09-27T00:00:00.000Z',
@@ -330,7 +331,6 @@ export const newsletterCard: DCRFrontCard = {
 		successDescription: 'You are subscribed',
 		theme: 'news',
 		group: 'News in brief',
-		highlightCardTitle: 'Sign up for Headlines Europe',
 		illustrationCard:
 			'https://uploads.guim.co.uk/2023/09/25/Headlines_-_5-3_-_Europe.jpg',
 	},

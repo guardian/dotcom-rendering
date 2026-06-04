@@ -212,17 +212,20 @@ const getOphanInfo = (frontId?: string) => {
 
 export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
-	const carouselLength = trails.length;
+	const abTests = useAB();
+	const isNewsletterEnabled =
+		abTests?.isUserInTestGroup(
+			'newsletters-highlights-signup-card',
+			'enable',
+		) ?? false;
+
+	const visibleTrails = trails.filter(
+		(trail) => !trail.newsletterData || isNewsletterEnabled,
+	);
+	const carouselLength = visibleTrails.length;
 	const imageLoading = 'eager';
 	const [showPreviousButton, setShowPreviousButton] = useState(false);
 	const [showNextButton, setShowNextButton] = useState(true);
-
-	const abTests = useAB();
-	const isNewsletterVariant =
-		abTests?.isUserInTestGroup(
-			'newsletters-highlights-signup-card',
-			'variant',
-		) ?? false;
 
 	const { renderingTarget } = useConfig();
 
@@ -305,7 +308,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				data-container-name="scrollable/highlights"
 				data-heatphan-type="carousel"
 			>
-				{trails.map((trail) => {
+				{visibleTrails.map((trail) => {
 					return (
 						<li
 							key={trail.url}
@@ -313,7 +316,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 							role="group"
 							aria-roledescription="slide"
 						>
-							{isNewsletterVariant && trail.newsletterData ? (
+							{trail.newsletterData ? (
 								<HighlightsNewsletterCard
 									format={trail.format}
 									newsletter={trail.newsletterData}

@@ -168,7 +168,7 @@ const ABTests: ABTest[] = [
 		type: "client",
 		audienceSize: 0,
 		audienceSpace: "C",
-		groups: ["control", "variant"],
+		groups: ["enable"],
 		shouldForceMetricsCollection: true,
 	},
 	{

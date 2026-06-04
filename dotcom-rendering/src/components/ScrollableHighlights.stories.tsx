@@ -12,13 +12,13 @@ import { Section } from './Section';
 
 const AB_TEST_NAME = 'newsletters-highlights-signup-card';
 
-const mockNewsletterVariant = () => {
+const mockNewsletterEnabled = () => {
 	mocked(useAB).mockReturnValue({
 		isUserInTestGroup: (testName: string, group: string) =>
-			testName === AB_TEST_NAME && group === 'variant',
+			testName === AB_TEST_NAME && group === 'enable',
 		isUserInTest: () => true,
 		getParticipations: () =>
-			({ [AB_TEST_NAME]: 'variant' }) as Record<string, string>,
+			({ [AB_TEST_NAME]: 'enable' }) as Record<string, string>,
 		trackABTests: () => ({}),
 	});
 };
@@ -123,19 +123,11 @@ export const withExcessivleyLongHeadline = meta.story({
 	},
 });
 
-export const withNewsletterCardControl = meta.story({
-	...Default.input,
-	name: 'With Newsletter Card (AB control – original card)',
-	args: {
-		trails: [newsletterCard, ...Default.input.args.trails],
-	},
-});
-
 export const withNewsletterCardVariant = meta.story({
 	...Default.input,
-	name: 'With Newsletter Signup Card (AB variant)',
+	name: 'With Newsletter Signup Card (AB enabled)',
 	beforeEach() {
-		mockNewsletterVariant();
+		mockNewsletterEnabled();
 	},
 	args: {
 		trails: [newsletterCard, ...Default.input.args.trails],
