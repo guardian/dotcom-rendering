@@ -199,7 +199,7 @@ export const HighlightsNewsletterCard = ({
 						}}
 						showQuotes={false}
 						headlineColour={palette(
-							'--highlights-newsletter-card-headline',
+							'--newsletter-highlights-card-headline',
 						)}
 					/>
 				</div>

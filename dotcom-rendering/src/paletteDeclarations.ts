@@ -7695,12 +7695,12 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[38],
 		dark: () => sourcePalette.neutral[73],
 	},
-	'--highlights-newsletter-card-headline': {
-		light: () => sourcePalette.brand[400],
-		dark: () => sourcePalette.neutral[100],
-	},
 	'--newsletter-card-title': {
 		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-highlights-card-headline': {
+		light: () => sourcePalette.brand[400],
 		dark: () => sourcePalette.neutral[100],
 	},
 	'--newsletter-preview-button-border': {
