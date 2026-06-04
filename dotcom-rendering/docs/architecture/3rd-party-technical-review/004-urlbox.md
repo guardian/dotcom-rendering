@@ -2,9 +2,9 @@
 
 ## Metadata
 
--   Date: 3rd August 2021
--   Author: Nic Long
--   Platform concerned: n/a
+- Date: 3rd August 2021
+- Author: Nic Long
+- Platform concerned: n/a
 
 ## Context
 

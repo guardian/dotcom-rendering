@@ -40,7 +40,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
-import { useAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -177,7 +176,7 @@ const mainMediaWrapper = (displayAvatarUrl: boolean) => css`
 	${displayAvatarUrl
 		? css`
 				margin-top: 8px;
-		  `
+			`
 		: ``}
 `;
 
@@ -234,7 +233,7 @@ const LeftColLines = (displayAvatarUrl: boolean) => css`
 	${displayAvatarUrl
 		? css`
 				margin-top: -29px;
-		  `
+			`
 		: ''}
 `;
 
@@ -276,14 +275,12 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const ab = useAB();
+	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
 
-	const isWorldCup2026 =
-		article.tags.some((tag) => tag.id === worldCupTagId) &&
-		ab?.isUserInTest('webx-world-cup-2026-subnav');
-
-	const avatarUrl = getSoleContributor(article.tags, article.byline)
-		?.bylineLargeImageUrl;
+	const avatarUrl = getSoleContributor(
+		article.tags,
+		article.byline,
+	)?.bylineLargeImageUrl;
 
 	const displayAvatarUrl = avatarUrl ? true : false;
 

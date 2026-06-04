@@ -198,7 +198,7 @@ export class RenderingCDKStack extends CDKStack {
 							numberOfMinutesAboveThresholdBeforeAlarm: 1,
 						},
 						unhealthyInstancesAlarm: true,
-				  } satisfies Alarms)
+					} satisfies Alarms)
 				: ({ noMonitoring: true } satisfies NoMonitoring);
 
 		const ec2App = new GuEc2App(this, {

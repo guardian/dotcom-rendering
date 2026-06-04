@@ -298,7 +298,7 @@ const ageWarningMargins = (format: ArticleFormat) => {
 				${from.leftCol} {
 					margin-left: 20px;
 				}
-		  `
+			`
 		: css`
 				margin-top: 12px;
 				margin-left: -10px;
@@ -312,7 +312,7 @@ const ageWarningMargins = (format: ArticleFormat) => {
 					margin-left: -10px;
 					margin-top: 0;
 				}
-		  `;
+			`;
 };
 
 const backgroundStyles = css`
@@ -403,7 +403,7 @@ const decideBottomPadding = ({
 								${from.tablet} {
 									padding-bottom: ${space[9]}px;
 								}
-						  `;
+							`;
 			}
 		}
 	}
@@ -808,10 +808,10 @@ export const ArticleHeadline = ({
 											color: ${isMatch
 												? themePalette(
 														'--headline-match-colour',
-												  )
+													)
 												: themePalette(
 														'--headline-colour',
-												  )};
+													)};
 										`,
 									]}
 								>

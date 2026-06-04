@@ -1561,7 +1561,7 @@ export const WithSpecialPaletteVariations = () => {
 							? {
 									...basicCardProps.format,
 									theme: ArticleSpecial.Labs,
-							  }
+								}
 							: basicCardProps.format
 					}
 					kickerText="Live kicker"
@@ -1584,12 +1584,12 @@ export const WithSpecialPaletteVariations = () => {
 									display: ArticleDisplay.Standard,
 									design: ArticleDesign.Audio,
 									theme: ArticleSpecial.Labs,
-							  }
+								}
 							: {
 									display: ArticleDisplay.Standard,
 									design: ArticleDesign.Audio,
 									theme: Pillar.Lifestyle,
-							  }
+								}
 					}
 					headlineText="Audio"
 					kickerText="Kicker"
@@ -1624,7 +1624,7 @@ export const WithSpecialPaletteVariations = () => {
 									isContainerBranding: true,
 									hasMultipleBranding: false,
 									isFrontBranding: false,
-							  }
+								}
 							: undefined
 					}
 				>

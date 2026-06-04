@@ -311,13 +311,13 @@ const Image = ({
 							'--wider-margin': banner
 								? '0 90px 0 0'
 								: 'var(--margin)',
-					  }
+						}
 					: {
 							'--margin': '0 0 0 55px',
 							'--wider-margin': banner
 								? '0 0 0 90px'
 								: 'var(--margin)',
-					  }
+						}
 			}
 			css={{
 				height: 103,

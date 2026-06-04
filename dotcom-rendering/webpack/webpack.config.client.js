@@ -99,7 +99,7 @@ module.exports = ({ build }) => ({
 							},
 						},
 					},
-			  },
+				},
 	output: {
 		filename: (data) => {
 			// We don't want to hash the debug script so it can be used in bookmarklets
@@ -123,7 +123,7 @@ module.exports = ({ build }) => ({
 					new webpack.ProvidePlugin({
 						Buffer: ['buffer', 'Buffer'],
 					}),
-			  ]
+				]
 			: []),
 	],
 	externals: getExternalModules(build),

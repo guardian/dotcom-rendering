@@ -751,7 +751,7 @@ export const Card = ({
 			? getOphanComponents({
 					branding,
 					locationPrefix,
-			  })
+				})
 			: undefined;
 
 		return (
