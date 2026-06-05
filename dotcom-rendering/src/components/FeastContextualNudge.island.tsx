@@ -110,6 +110,9 @@ const buttonWrapperStyles = css`
 const descriptionStyles = css`
 	${article15};
 	color: var(--feast-nudge-subtext);
+	b {
+		font-weight: bold;
+	}
 `;
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -197,9 +200,8 @@ export const FeastContextualNudge = ({
 			{/* info: title · id */}
 			<div css={productInfoContainerStyles}>
 				<div css={descriptionStyles}>
-					<b>Want to save this recipe?</b>
-					Download the Guardian Feast app to add this to your
-					collection.
+					<b>Want to save this recipe?</b> Download the Guardian Feast
+					app to add this to your collection.
 				</div>
 			</div>
 
