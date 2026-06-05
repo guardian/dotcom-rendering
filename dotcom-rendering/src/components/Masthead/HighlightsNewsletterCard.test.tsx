@@ -25,9 +25,15 @@ jest.mock('./HighlightsCardImage', () => ({
 }));
 
 jest.mock('./HighlightsNewsletterSignupModal', () => ({
-	HighlightsNewsletterSignupModal: jest.fn(() => (
-		<div data-testid="highlights-newsletter-signup-modal" />
-	)),
+	HighlightsNewsletterSignupModal: jest.fn(
+		({ onClose }: { onClose: () => void }) => (
+			<div data-testid="highlights-newsletter-signup-modal">
+				<button type="button" onClick={onClose}>
+					Close signup form
+				</button>
+			</div>
+		),
+	),
 }));
 
 const defaultProps: React.ComponentProps<typeof HighlightsNewsletterCard> = {
@@ -107,6 +113,35 @@ describe('HighlightsNewsletterCard', () => {
 				componentId: `highlights-card-${defaultProps.newsletter.identityName}`,
 				renderingTarget: defaultProps.renderingTarget,
 				value: { eventDescription: 'highlights-card-modal-opened' },
+			}),
+		);
+	});
+
+	it('tracks a CLOSE event and unmounts the modal when dismissed', () => {
+		renderCard();
+
+		fireEvent.click(
+			screen.getByRole('link', { name: defaultProps.headlineText }),
+		);
+		expect(
+			screen.getByTestId('highlights-newsletter-signup-modal'),
+		).toBeInTheDocument();
+
+		fireEvent.click(
+			screen.getByRole('button', { name: 'Close signup form' }),
+		);
+
+		expect(
+			screen.queryByTestId('highlights-newsletter-signup-modal'),
+		).not.toBeInTheDocument();
+
+		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
+			expect.objectContaining({
+				action: 'CLOSE',
+				identityName: defaultProps.newsletter.identityName,
+				componentId: `highlights-card-${defaultProps.newsletter.identityName}`,
+				renderingTarget: defaultProps.renderingTarget,
+				value: { eventDescription: 'highlights-card-modal-closed' },
 			}),
 		);
 	});

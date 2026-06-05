@@ -193,6 +193,16 @@ export const HighlightsNewsletterCard = ({
 						newsletter={newsletter}
 						onClose={() => {
 							setIsModalOpen(false);
+							sendNewsletterSignupEvent({
+								action: 'CLOSE',
+								identityName: newsletter.identityName,
+								componentId,
+								renderingTarget,
+								value: {
+									eventDescription:
+										'highlights-card-modal-closed',
+								},
+							});
 						}}
 					/>
 				)}
