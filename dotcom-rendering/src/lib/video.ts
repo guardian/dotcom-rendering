@@ -90,9 +90,10 @@ export const extractValidSourcesFromAssets = (
 export const convertFEMediaAssetsToVideoAssets = (
 	assets: FEMediaAsset[],
 ): VideoAssets[] =>
-	assets.map(({ id, mimeType, dimensions, hasAudio }) => ({
+	assets.map(({ id, mimeType, aspectRatio, dimensions, hasAudio }) => ({
 		url: id,
 		mimeType,
+		aspectRatio,
 		dimensions,
 		hasAudio,
 	}));
