@@ -7,6 +7,7 @@ import {
 import { Button, SvgCross } from '@guardian/source/react-components';
 import { useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { useNewsletterSubscription } from '../../lib/useNewsletterSubscription';
 import type { Newsletter } from '../../types/content';
 import { NewsletterSignupCard } from '../NewsletterSignupCard';
 import { NewsletterSignupForm } from '../NewsletterSignupForm.island';
@@ -95,6 +96,11 @@ export const HighlightsNewsletterSignupModal = ({
 	const heroImage =
 		newsletter.illustrationCard ?? newsletter.illustrationSquare;
 
+	const isSubscribed = useNewsletterSubscription(
+		newsletter.listId,
+		window.guardian.config.page.idApiUrl,
+	);
+
 	const overlayRef = useRef<HTMLDivElement>(null);
 	const dialogRef = useRef<HTMLDivElement>(null);
 	const titleId = useId();
@@ -178,6 +184,11 @@ export const HighlightsNewsletterSignupModal = ({
 							newsletterName={newsletter.name}
 							frequency={newsletter.frequency}
 							isModal={true}
+							isAlreadySubscribed={isSubscribed === true}
+							abTest={{
+								name: 'highlights-newsletter-card',
+								variant: 'highlightsCard',
+							}}
 						/>
 					</NewsletterSignupCard>
 				</div>
