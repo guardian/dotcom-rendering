@@ -10,6 +10,7 @@ import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import type { StageType } from '../types/config';
 import type { RecipeBlockElement } from '../types/content';
+import { useBetaAB } from '../lib/useAB';
 import { useConfig } from './ConfigContext';
 
 // ── Feast brand colours ───────────────────────────────────────────────────────
@@ -146,6 +147,10 @@ export const FeastContextualNudge = ({
 	pageId,
 	isDev,
 }: FeastContextualNudgeProps) => {
+	const abTests = useBetaAB();
+	const isVariant =
+		abTests?.isUserInTestGroup('feast-recipe-nudge', 'variant-1') ?? false;
+
 	const { darkModeAvailable } = useConfig();
 
 	const [isStorybook, setIsStorybook] = useState(false);
@@ -169,6 +174,8 @@ export const FeastContextualNudge = ({
 			);
 		}
 	}, [feastId, title, pageId, isDev]);
+
+	if (!isVariant) return null;
 
 	return (
 		<div
