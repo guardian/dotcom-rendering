@@ -215,12 +215,6 @@ const hideControlsStyles = css`
 		${hideTransitionStyles}
 		transition-delay: ${PLAY_BUTTON_FADE_DELAY}ms;
 	}
-
-	@media (hover: hover) {
-		:hover {
-			${showControlsStyles}
-		}
-	}
 `;
 
 /**
@@ -524,6 +518,17 @@ export const SelfHostedVideo = ({
 	const optimisedPosterImage = showPosterImage
 		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
 		: undefined;
+
+	const showFadeableControls =
+		videoStyleSettings.hideControlsWhenNotInteractedWith &&
+		!showControls &&
+		playerState === 'PLAYING';
+
+	const hideFadeableControls =
+		videoStyleSettings.hideControlsWhenNotInteractedWith &&
+		showControls &&
+		(playerState === 'PAUSED_BY_USER' ||
+			playerState === 'PAUSED_BY_BROWSER');
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
 
@@ -1261,15 +1266,8 @@ export const SelfHostedVideo = ({
 							containerAspectRatioDesktop,
 						),
 						fullscreenStyles,
-						videoStyleSettings.hideControlsWhenNotInteractedWith &&
-							!showControls &&
-							playerState === 'PLAYING' &&
-							hideControlsStyles,
-						videoStyleSettings.hideControlsWhenNotInteractedWith &&
-							showControls &&
-							(playerState === 'PAUSED_BY_USER' ||
-								playerState === 'PAUSED_BY_BROWSER') &&
-							showControlsStyles,
+						showFadeableControls && hideControlsStyles,
+						hideFadeableControls && showControlsStyles,
 					]}
 					onMouseOver={showControlsAndStartTimer}
 				>
