@@ -9,6 +9,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { GalleryImage } from '../components/GalleryImage';
 import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
+import { MainMediaGallery } from '../components/MainMediaGallery';
 import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.island';
@@ -41,19 +42,6 @@ const headerStyles = css`
 
 	${from.tablet} {
 		border-bottom: 1px solid ${palette('--article-border')};
-	}
-`;
-
-const metaStyles = css`
-	${grid.column.centre}
-	grid-row-start: 3;
-
-	${from.desktop} {
-		grid-row-start: 2;
-	}
-
-	${from.leftCol} {
-		${grid.column.left}
 	}
 `;
 
@@ -95,6 +83,11 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 				}}
 			>
 				<header css={headerStyles}>
+					<MainMediaGallery
+						mainMedia={gallery.mainMedia}
+						format={format}
+						renderingTarget={props.renderingTarget}
+					/>
 					<ArticleTitle
 						format={format}
 						tags={frontendData.tags}
@@ -116,8 +109,27 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 						standfirst={frontendData.standfirst}
 					/>
 
-					<div data-print-layout="hide" css={metaStyles}>
-						{renderingTarget === 'Web' && (
+					{renderingTarget === 'Web' && (
+						<div
+							data-print-layout="hide"
+							css={{
+								'&': css(grid.column.centre),
+								paddingBottom: space[6],
+								[from.tablet]: {
+									position: 'relative',
+									'&::before': {
+										content: '""',
+										position: 'absolute',
+										left: -10,
+										top: 0,
+										bottom: 0,
+										width: 1,
+										backgroundColor:
+											palette('--article-border'),
+									},
+								},
+							}}
+						>
 							<div css={shareButtonStyles}>
 								<Island
 									priority="feature"
@@ -131,8 +143,8 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 									/>
 								</Island>
 							</div>
-						)}
-					</div>
+						</div>
+					)}
 				</header>
 				<GalleryBody
 					renderingTarget={renderingTarget}
