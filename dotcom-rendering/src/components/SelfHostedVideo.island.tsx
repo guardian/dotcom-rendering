@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined, log, storage } from '@guardian/libs';
+import { log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -56,32 +56,41 @@ const VISIBILITY_THRESHOLD = 0.5;
 const CONTROLS_FADE_DELAY = 2700;
 const PLAY_BUTTON_FADE_DELAY = 1700;
 
-const cardStyles = (
-	isInteractive: boolean,
-	aspectRatioOfVisibleVideo: number,
-	containerAspectRatioMobile?: number,
-	containerAspectRatioDesktop?: number,
-) => css`
+const cardStyles = (aspectRatioOfVisibleVideo: number) => css`
 	position: relative;
 	display: flex;
 	background-color: ${palette('--video-background')};
 	align-items: center;
 	justify-content: space-around;
-	${isInteractive && `z-index: ${getZIndex('video-container')}`};
 
 	/**
 	 * Use the aspect ratio of the video, unless the aspect-ratio of the container is fixed
 	 */
 	aspect-ratio: ${aspectRatioOfVisibleVideo};
+`;
 
+const interactiveStyles = css`
+	z-index: ${getZIndex('video-container')};
+`;
+
+/**
+ * If a fixed container aspect ratio is specified, we fix the aspect ratio of the video to
+ * that of the container. Different values can be specified for mobile and desktop, and
+ * these are treated independently.
+ */
+const videoInFixedContainerMobileStyles = (
+	containerAspectRatioMobile: number,
+) => css`
 	${until.tablet} {
-		${!isUndefined(containerAspectRatioMobile) &&
-		`aspect-ratio: ${containerAspectRatioMobile};`}
+		aspect-ratio: ${containerAspectRatioMobile};
 	}
+`;
 
+const videoInFixedContainerDesktopStyles = (
+	containerAspectRatioDesktop: number,
+) => css`
 	${from.tablet} {
-		${!isUndefined(containerAspectRatioDesktop) &&
-		`aspect-ratio: ${containerAspectRatioDesktop};`}
+		aspect-ratio: ${containerAspectRatioDesktop};
 	}
 `;
 
@@ -97,63 +106,59 @@ const maxHeightStyles = css`
 		max-height: 80svh;
 	}
 `;
+
 const videoContainerStyles = (
 	aspectRatio: number,
 	aspectRatioOfVisibleVideo: number,
-	greyBarsAtSidesOnDesktop: boolean,
-	greyBarsAtTopAndBottomOnDesktop: boolean,
-	isVideoCroppedAtTopBottom: boolean,
-	isVideoCroppedAtLeftRight: boolean,
-	containerAspectRatioDesktop?: number,
 ) => css`
 	position: relative;
 	aspect-ratio: ${aspectRatioOfVisibleVideo};
 	max-width: 100%;
 	height: 100%;
+`;
 
-	/**
-	 * The grey bars fall outside of the figure element. The figure is the full height of the container.
-	 * We need to work out how wide the video needs to be so that the height of the video matches
-	 * the height of the container AND the video can maintain its aspect ratio.
-	 */
-	${greyBarsAtSidesOnDesktop &&
-	css`
-		${from.tablet} {
-			${!isUndefined(containerAspectRatioDesktop) &&
-			`max-width: ${
-				aspectRatioOfVisibleVideo *
-				(1 / containerAspectRatioDesktop) *
-				100
-			}%;`}
-		}
-	`}
+/**
+ * The grey bars fall outside of the video container element.
+ * The container is the full height of the figure element.
+ * We need to calculate how wide the video needs to be so that the height of the video
+ * matches the height of the figure element AND the video can maintain its aspect ratio.
+ */
+const verticalGreyBarsOnDesktopStyles = (
+	aspectRatioOfVisibleVideo: number,
+	containerAspectRatioDesktop: number,
+) => css`
+	${from.tablet} {
+		max-width: ${aspectRatioOfVisibleVideo *
+		(1 / containerAspectRatioDesktop) *
+		100}%;
+	}
+`;
 
-	${greyBarsAtTopAndBottomOnDesktop &&
-	css`
-		${from.tablet} {
-			height: fit-content;
-		}
-	`}
+const horizontalGreyBarsOnDesktopStyles = css`
+	${from.tablet} {
+		height: fit-content;
+	}
+`;
 
-	${isVideoCroppedAtTopBottom &&
-	css`
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	`}
+const videoCroppedAtTopBottomStyles = css`
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+`;
 
-	${isVideoCroppedAtLeftRight &&
-	css`
-		overflow: hidden;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
+const videoCroppedAtLeftRightStyles = (
+	aspectRatio: number,
+	aspectRatioOfVisibleVideo: number,
+) => css`
+	overflow: hidden;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 
-		video {
-			width: ${(aspectRatio / aspectRatioOfVisibleVideo) * 100}%;
-		}
-	`}
+	video {
+		width: ${(aspectRatio / aspectRatioOfVisibleVideo) * 100}%;
+	}
 `;
 
 const fullscreenStyles = css`
@@ -1239,12 +1244,16 @@ export const SelfHostedVideo = ({
 			<div
 				ref={setNode}
 				css={[
-					cardStyles(
-						videoStyleSettings.isInteractive,
-						aspectRatioOfVisibleVideo,
-						containerAspectRatioMobile,
-						containerAspectRatioDesktop,
-					),
+					cardStyles(aspectRatioOfVisibleVideo),
+					videoStyleSettings.isInteractive && interactiveStyles,
+					containerAspectRatioMobile !== undefined &&
+						videoInFixedContainerMobileStyles(
+							containerAspectRatioMobile,
+						),
+					containerAspectRatioDesktop !== undefined &&
+						videoInFixedContainerDesktopStyles(
+							containerAspectRatioDesktop,
+						),
 					restrictHeightOnDesktop && maxHeightStyles,
 				]}
 			>
@@ -1254,12 +1263,21 @@ export const SelfHostedVideo = ({
 						videoContainerStyles(
 							aspectRatio,
 							aspectRatioOfVisibleVideo,
-							isGreyBarsAtSidesOnDesktop,
-							isGreyBarsAtTopAndBottomOnDesktop,
-							isVideoCroppedAtTopBottom,
-							isVideoCroppedAtLeftRight,
-							containerAspectRatioDesktop,
 						),
+						isGreyBarsAtSidesOnDesktop &&
+							verticalGreyBarsOnDesktopStyles(
+								aspectRatioOfVisibleVideo,
+								containerAspectRatioDesktop,
+							),
+						isGreyBarsAtTopAndBottomOnDesktop &&
+							horizontalGreyBarsOnDesktopStyles,
+						isVideoCroppedAtTopBottom &&
+							videoCroppedAtTopBottomStyles,
+						isVideoCroppedAtLeftRight &&
+							videoCroppedAtLeftRightStyles(
+								aspectRatio,
+								aspectRatioOfVisibleVideo,
+							),
 						fullscreenStyles,
 						videoStyleSettings.hideControlsWhenNotInteractedWith &&
 							!showControls &&
