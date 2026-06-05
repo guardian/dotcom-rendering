@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import {
 	article15,
 	from,
-	headlineBold17,
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
@@ -98,12 +97,6 @@ const productInfoContainerStyles = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${space[1]}px;
-`;
-
-const primaryHeadingStyles = css`
-	${headlineBold17};
-	font-weight: 600;
-	color: var(--feast-nudge-heading);
 `;
 
 const buttonWrapperStyles = css`
@@ -203,13 +196,10 @@ export const FeastContextualNudge = ({
 		>
 			{/* info: title · id */}
 			<div css={productInfoContainerStyles}>
-				<div css={primaryHeadingStyles}>
-					Feast app: Your most useful kitchen utensil
-				</div>
-
 				<div css={descriptionStyles}>
-					The best of the Guardian's world-class recipes with app
-					exclusive recipes and cooking features
+					<b>Want to save this recipe?</b>
+					Download the Guardian Feast app to add this to your
+					collection.
 				</div>
 			</div>
 
@@ -224,7 +214,7 @@ export const FeastContextualNudge = ({
 					theme={primaryCtaTheme}
 					data-ignore="global-link-styling"
 				>
-					Open in the Feast app
+					Download the app
 				</LinkButton>
 			</div>
 		</div>
