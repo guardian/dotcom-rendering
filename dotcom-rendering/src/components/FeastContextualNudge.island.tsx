@@ -7,9 +7,9 @@ import {
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
+import { useBetaAB } from '../lib/useAB';
 import type { StageType } from '../types/config';
 import type { RecipeBlockElement } from '../types/content';
-import { useBetaAB } from '../lib/useAB';
 import { useConfig } from './ConfigContext';
 
 // ── Feast brand colours ───────────────────────────────────────────────────────

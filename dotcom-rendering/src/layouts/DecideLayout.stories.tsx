@@ -3,7 +3,6 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Decorator, StoryObj } from '@storybook/react-webpack5';
 import { useEffect } from 'react';
 import { mocked } from 'storybook/test';
-import { useBetaAB } from '../lib/useAB';
 import { colourSchemeDecorator } from '../../.storybook/decorators/themeDecorator';
 import { Analysis as AnalysisStandardNewsFixture } from '../../fixtures/generated/fe-articles/Analysis';
 import { Comment as CommentStandardOpinionFixture } from '../../fixtures/generated/fe-articles/Comment';
@@ -24,6 +23,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '../lib/articleFormat';
+import { useBetaAB } from '../lib/useAB';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { type Article, enhanceArticleType } from '../types/article';
