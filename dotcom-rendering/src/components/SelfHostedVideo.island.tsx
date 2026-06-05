@@ -1269,7 +1269,6 @@ export const SelfHostedVideo = ({
 						showFadeableControls && hideControlsStyles,
 						hideFadeableControls && showControlsStyles,
 					]}
-					onMouseOver={showControlsAndStartTimer}
 					onMouseMove={showControlsAndStartTimer}
 				>
 					<SelfHostedVideoPlayer
