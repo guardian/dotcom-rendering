@@ -71,7 +71,7 @@ export const prodServer = (): void => {
 	app.post('/EditionsCrossword', handleEditionsCrossword);
 	app.post('/AppsHostedContent', handleAppsHostedContent);
 	app.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
-	app.use('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
+	app.post('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 
 	app.get('/assets/rendered-items-assets', handleAppsAssets);
 
