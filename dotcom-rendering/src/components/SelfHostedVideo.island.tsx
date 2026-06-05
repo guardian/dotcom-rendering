@@ -1270,6 +1270,7 @@ export const SelfHostedVideo = ({
 						hideFadeableControls && showControlsStyles,
 					]}
 					onMouseOver={showControlsAndStartTimer}
+					onMouseMove={showControlsAndStartTimer}
 				>
 					<SelfHostedVideoPlayer
 						sources={optimisedSources}
