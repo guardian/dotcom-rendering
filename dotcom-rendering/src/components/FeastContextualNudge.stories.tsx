@@ -1,8 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { mocked } from 'storybook/test';
 import { darkDecorator } from '../../.storybook/decorators/themeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { useBetaAB } from '../lib/useAB';
 import type { RecipeBlockElement } from '../types/content';
 import { FeastContextualNudge } from './FeastContextualNudge.island';
+
+const mockBetaABVariant1 = () => {
+	mocked(useBetaAB).mockReturnValue({
+		isUserInTestGroup: (_testId: string, group: string) =>
+			group === 'variant-1',
+		isUserInTest: () => true,
+		getParticipations: () => ({}),
+		trackABTests: () => ({}),
+	});
+};
 
 const recipeFormat = {
 	design: ArticleDesign.Recipe,
@@ -41,9 +53,16 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /** Default — recipe name + CTAs */
-export const Default: Story = {};
+export const Default: Story = {
+	beforeEach() {
+		mockBetaABVariant1();
+	},
+};
 
 /** Dark mode */
 export const DefaultDark: Story = {
+	beforeEach() {
+		mockBetaABVariant1();
+	},
 	decorators: [darkDecorator([recipeFormat])],
 };

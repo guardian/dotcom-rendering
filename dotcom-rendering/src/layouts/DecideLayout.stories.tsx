@@ -2,6 +2,8 @@ import { isObject } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Decorator, StoryObj } from '@storybook/react-webpack5';
 import { useEffect } from 'react';
+import { mocked } from 'storybook/test';
+import { useBetaAB } from '../lib/useAB';
 import { colourSchemeDecorator } from '../../.storybook/decorators/themeDecorator';
 import { Analysis as AnalysisStandardNewsFixture } from '../../fixtures/generated/fe-articles/Analysis';
 import { Comment as CommentStandardOpinionFixture } from '../../fixtures/generated/fe-articles/Comment';
@@ -290,7 +292,20 @@ const recipeStandardLifestyleWebFixture: Article = enhanceArticleType(
 	'Web',
 );
 
+const mockBetaFeastContextualNudgeABVariant1 = () => {
+	mocked(useBetaAB).mockReturnValue({
+		isUserInTestGroup: (_testId: string, group: string) =>
+			group === 'variant-1',
+		isUserInTest: () => true,
+		getParticipations: () => ({}),
+		trackABTests: () => {},
+	});
+};
+
 export const WebRecipeStandardLabsLight: Story = {
+	beforeEach() {
+		mockBetaFeastContextualNudgeABVariant1();
+	},
 	args: {
 		article: {
 			...recipeStandardLifestyleWebFixture,
@@ -301,6 +316,9 @@ export const WebRecipeStandardLabsLight: Story = {
 };
 
 export const AppsRecipeStandardLifestyleLight = {
+	beforeEach() {
+		mockBetaFeastContextualNudgeABVariant1();
+	},
 	args: {
 		article: enhanceArticleType(RecipeStandardLifestyleFixture, 'Apps'),
 		colourScheme: 'light',
@@ -309,6 +327,9 @@ export const AppsRecipeStandardLifestyleLight = {
 } satisfies Story;
 
 export const AppsRecipeStandardLifestyleDark: Story = {
+	beforeEach() {
+		mockBetaFeastContextualNudgeABVariant1();
+	},
 	args: {
 		article: AppsRecipeStandardLifestyleLight.args.article,
 		colourScheme: 'dark',
