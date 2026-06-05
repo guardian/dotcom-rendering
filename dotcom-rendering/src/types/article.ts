@@ -175,7 +175,7 @@ export const enhanceArticleType = (
 		storyPackage,
 		serverTime,
 		frontendData: {
-			...data,
+			...data, // this is the data coming in from frontend POST
 			mainMediaElements,
 			blocks,
 			pinnedPost: enhancePinnedPost(
