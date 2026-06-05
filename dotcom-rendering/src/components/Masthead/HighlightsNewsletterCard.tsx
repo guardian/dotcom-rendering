@@ -8,7 +8,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { getZIndex } from '../../lib/getZIndex';
 import {
@@ -23,6 +23,7 @@ import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
 import { HighlightsCardImage } from './HighlightsCardImage';
+import { HighlightsNewsletterSignupModal } from './HighlightsNewsletterSignupModal';
 
 type Props = {
 	format: ArticleFormat;
@@ -139,6 +140,8 @@ export const HighlightsNewsletterCard = ({
 	imageLoading = 'lazy',
 	renderingTarget,
 }: Props) => {
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
 	const componentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(
 		newsletter.identityName,
 	);
@@ -153,7 +156,12 @@ export const HighlightsNewsletterCard = ({
 		});
 	}, [componentId, newsletter.identityName, renderingTarget]);
 
-	const handleClick = () => {
+	const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+		if (renderingTarget === 'Web') {
+			event.preventDefault();
+			setIsModalOpen(true);
+		}
+
 		sendNewsletterSignupEvent({
 			action: 'EXPAND',
 			identityName: newsletter.identityName,
@@ -175,44 +183,54 @@ export const HighlightsNewsletterCard = ({
 
 	return (
 		<FormatBoundary format={format}>
-			<div css={[container, hoverStyles]}>
-				<a
-					href={linkTo}
-					css={linkOverlayStyles}
-					onClick={handleClick}
-					data-link-name={dataLinkName}
-					aria-label={headlineText}
-				/>
-
-				<div css={content}>
-					<span css={kickerStyles}>
-						<SvgNewsletterFilled />
-						Free newsletter
-					</span>
-
-					<CardHeadline
-						headlineText={headlineText}
-						format={format}
-						fontSizes={{
-							desktop: 'xxsmall',
-							tablet: 'xxsmall',
-							mobileMedium: 'xxsmall',
-							mobile: 'xxxsmall',
+			<>
+				{isModalOpen && (
+					<HighlightsNewsletterSignupModal
+						newsletter={newsletter}
+						onClose={() => {
+							setIsModalOpen(false);
 						}}
-						showQuotes={false}
-						headlineColour={palette(
-							'--newsletter-highlights-card-headline',
-						)}
-					/>
-				</div>
-
-				{newsletterImage !== undefined && (
-					<HighlightsCardImage
-						imageLoading={imageLoading}
-						image={newsletterImage}
 					/>
 				)}
-			</div>
+				<div css={[container, hoverStyles]}>
+					<a
+						href={linkTo}
+						css={linkOverlayStyles}
+						onClick={handleClick}
+						data-link-name={dataLinkName}
+						aria-label={headlineText}
+					/>
+
+					<div css={content}>
+						<span css={kickerStyles}>
+							<SvgNewsletterFilled />
+							Free newsletter
+						</span>
+
+						<CardHeadline
+							headlineText={headlineText}
+							format={format}
+							fontSizes={{
+								desktop: 'xxsmall',
+								tablet: 'xxsmall',
+								mobileMedium: 'xxsmall',
+								mobile: 'xxxsmall',
+							}}
+							showQuotes={false}
+							headlineColour={palette(
+								'--newsletter-highlights-card-headline',
+							)}
+						/>
+					</div>
+
+					{newsletterImage !== undefined && (
+						<HighlightsCardImage
+							imageLoading={imageLoading}
+							image={newsletterImage}
+						/>
+					)}
+				</div>
+			</>
 		</FormatBoundary>
 	);
 };

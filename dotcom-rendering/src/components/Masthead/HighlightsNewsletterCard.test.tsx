@@ -19,6 +19,12 @@ jest.mock('./HighlightsCardImage', () => ({
 	)),
 }));
 
+jest.mock('./HighlightsNewsletterSignupModal', () => ({
+	HighlightsNewsletterSignupModal: jest.fn(() => (
+		<div data-testid="highlights-newsletter-signup-modal" />
+	)),
+}));
+
 const defaultProps: React.ComponentProps<typeof HighlightsNewsletterCard> = {
 	format: newsletterCard.format,
 	newsletter: newsletterCard.newsletterData!,
@@ -52,7 +58,7 @@ describe('HighlightsNewsletterCard', () => {
 		jest.clearAllMocks();
 	});
 
-	it('renders a semantic link overlay with expected attributes and tracks click', () => {
+	it('opens signup modal on Web click and tracks click', () => {
 		renderCard();
 
 		const link = screen.getByRole('link', {
@@ -75,6 +81,9 @@ describe('HighlightsNewsletterCard', () => {
 		);
 
 		fireEvent.click(link);
+		expect(
+			screen.getByTestId('highlights-newsletter-signup-modal'),
+		).toBeInTheDocument();
 
 		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
 			expect.objectContaining({
@@ -85,6 +94,20 @@ describe('HighlightsNewsletterCard', () => {
 				value: { eventDescription: 'highlights-card-modal-opened' },
 			}),
 		);
+	});
+
+	it('does not open signup modal on Apps click', () => {
+		renderCard({ renderingTarget: 'Apps' });
+
+		const link = screen.getByRole('link', {
+			name: defaultProps.headlineText,
+		});
+
+		fireEvent.click(link);
+
+		expect(
+			screen.queryByTestId('highlights-newsletter-signup-modal'),
+		).not.toBeInTheDocument();
 	});
 
 	it('prefers newsletter illustrationSquare for the card image', () => {

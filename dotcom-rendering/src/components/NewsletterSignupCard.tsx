@@ -19,6 +19,7 @@ export type NewsletterSignupCardProps = {
 	children?: React.ReactNode;
 	previewAction?: NewsletterPreviewAction;
 	isSignedIn?: boolean | 'Pending';
+	hideDivider?: boolean;
 };
 
 const containerStyles = css`
@@ -137,9 +138,9 @@ export const NewsletterSignupCard = ({
 	children,
 	previewAction,
 	isSignedIn,
-}: NewsletterSignupCardProps) => (
-	<>
-		<hr css={dividerStyles} />
+	hideDivider = false,
+}: NewsletterSignupCardProps) => {
+	const content = (
 		<aside css={containerStyles} aria-label="newsletter promotion">
 			<NewsletterSignupHeader
 				frequency={frequency}
@@ -151,5 +152,12 @@ export const NewsletterSignupCard = ({
 			/>
 			{children}
 		</aside>
-	</>
-);
+	);
+
+	return (
+		<>
+			{!hideDivider && <hr css={dividerStyles} />}
+			{content}
+		</>
+	);
+};
