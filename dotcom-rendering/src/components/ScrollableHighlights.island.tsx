@@ -9,7 +9,6 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
-import { useAB } from '../lib/useAB';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { useConfig } from './ConfigContext';
@@ -19,6 +18,7 @@ import { HighlightsNewsletterCard } from './Masthead/HighlightsNewsletterCard';
 type Props = {
 	trails: DCRFrontCard[];
 	frontId?: string;
+	isNewsletterSignupCardEnabled: boolean;
 };
 
 const containerStyles = css`
@@ -212,18 +212,17 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-export const ScrollableHighlights = ({ trails, frontId }: Props) => {
+export const ScrollableHighlights = ({
+	trails,
+	frontId,
+	isNewsletterSignupCardEnabled,
+}: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
-	const abTests = useAB();
-	const isNewsletterEnabled =
-		abTests?.isUserInTestGroup(
-			'newsletters-highlights-signup-card',
-			'enable',
-		) ?? false;
 
-	const visibleTrails = trails.filter(
-		(trail) => !trail.newsletterData || isNewsletterEnabled,
-	);
+	const visibleTrails = trails.filter((trail) => {
+		if (trail.isNewsletter !== true) return true;
+		return isNewsletterSignupCardEnabled && Boolean(trail.newsletterData);
+	});
 	const carouselLength = visibleTrails.length;
 	const imageLoading = 'eager';
 	const [showPreviousButton, setShowPreviousButton] = useState(false);

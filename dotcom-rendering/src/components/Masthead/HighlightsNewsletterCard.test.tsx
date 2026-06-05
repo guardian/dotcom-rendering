@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { newsletterCard } from '../../../fixtures/manual/highlights-trails';
 import { sendNewsletterSignupEvent } from '../../lib/newsletterSignupTracking';
+import { useIsInView } from '../../lib/useIsInView';
 import { ConfigProvider } from '../ConfigContext';
 import { HighlightsCardImage } from './HighlightsCardImage';
 import { HighlightsNewsletterCard } from './HighlightsNewsletterCard';
@@ -11,6 +12,10 @@ jest.mock('../../lib/newsletterSignupTracking', () => ({
 	NEWSLETTER_SIGNUP_COMPONENT_ID: {
 		highlightsCard: (id: string) => `highlights-card-${id}`,
 	},
+}));
+
+jest.mock('../../lib/useIsInView', () => ({
+	useIsInView: jest.fn(),
 }));
 
 jest.mock('./HighlightsCardImage', () => ({
@@ -35,6 +40,14 @@ const defaultProps: React.ComponentProps<typeof HighlightsNewsletterCard> = {
 	renderingTarget: 'Web',
 };
 
+const mockUseIsInView = useIsInView as jest.MockedFunction<typeof useIsInView>;
+
+const setCardInView = (isInView: boolean | null) => {
+	mockUseIsInView.mockReturnValue([isInView, jest.fn()] as ReturnType<
+		typeof useIsInView
+	>);
+};
+
 const renderCard = (
 	overrides: Partial<
 		React.ComponentProps<typeof HighlightsNewsletterCard>
@@ -56,9 +69,11 @@ const renderCard = (
 describe('HighlightsNewsletterCard', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
+		setCardInView(false);
 	});
 
 	it('opens signup modal on Web click and tracks click', () => {
+		setCardInView(true);
 		renderCard();
 
 		const link = screen.getByRole('link', {
@@ -92,6 +107,22 @@ describe('HighlightsNewsletterCard', () => {
 				componentId: `highlights-card-${defaultProps.newsletter.identityName}`,
 				renderingTarget: defaultProps.renderingTarget,
 				value: { eventDescription: 'highlights-card-modal-opened' },
+			}),
+		);
+	});
+
+	it('does not track a VIEW event before the card is seen', () => {
+		setCardInView(false);
+
+		renderCard();
+
+		expect(sendNewsletterSignupEvent).not.toHaveBeenCalledWith(
+			expect.objectContaining({
+				action: 'VIEW',
+				identityName: defaultProps.newsletter.identityName,
+				componentId: `highlights-card-${defaultProps.newsletter.identityName}`,
+				renderingTarget: defaultProps.renderingTarget,
+				value: { eventDescription: 'highlights-card-viewed' },
 			}),
 		);
 	});

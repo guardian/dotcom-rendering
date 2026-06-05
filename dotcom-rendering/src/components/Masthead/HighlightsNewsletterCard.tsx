@@ -8,13 +8,14 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { getZIndex } from '../../lib/getZIndex';
 import {
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	sendNewsletterSignupEvent,
 } from '../../lib/newsletterSignupTracking';
+import { useIsInView } from '../../lib/useIsInView';
 import { palette } from '../../palette';
 import type { Newsletter } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
@@ -55,11 +56,8 @@ const container = css`
 		min-height: 194px;
 	}
 	${from.tablet} {
-		width: 160px;
-		padding: 10px 10px 0 10px;
-	}
-	${from.tablet} {
 		width: 280px;
+		padding: 10px 10px 0 10px;
 		flex-direction: row;
 	}
 	${from.desktop} {
@@ -145,8 +143,14 @@ export const HighlightsNewsletterCard = ({
 	const componentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(
 		newsletter.identityName,
 	);
+	const [hasBeenSeen, setIsInViewRef] = useIsInView({});
+	const hasTrackedView = useRef(false);
 
 	useEffect(() => {
+		if (hasBeenSeen !== true || hasTrackedView.current) return;
+
+		hasTrackedView.current = true;
+
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName: newsletter.identityName,
@@ -154,7 +158,7 @@ export const HighlightsNewsletterCard = ({
 			renderingTarget,
 			value: { eventDescription: 'highlights-card-viewed' },
 		});
-	}, [componentId, newsletter.identityName, renderingTarget]);
+	}, [hasBeenSeen, componentId, newsletter.identityName, renderingTarget]);
 
 	const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
 		if (renderingTarget === 'Web') {
@@ -192,7 +196,7 @@ export const HighlightsNewsletterCard = ({
 						}}
 					/>
 				)}
-				<div css={[container, hoverStyles]}>
+				<div ref={setIsInViewRef} css={[container, hoverStyles]}>
 					<a
 						href={linkTo}
 						css={linkOverlayStyles}

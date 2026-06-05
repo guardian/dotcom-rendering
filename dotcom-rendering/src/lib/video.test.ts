@@ -93,7 +93,10 @@ describe('video', () => {
 		it('should drop unsupported assets', () => {
 			const assets = [mp4Asset480w, m3u8Asset720h, unsupportedAsset];
 			const expected = [mp4Src480w, m3u8Src720h];
-			expect(extractValidSourcesFromAssets(assets)).toEqual(expected);
+
+			expect(extractValidSourcesFromAssets(assets, 'Loop')).toEqual(
+				expected,
+			);
 		});
 
 		it('should reorder sources by supportedVideoFileTypes order', () => {
@@ -111,7 +114,36 @@ describe('video', () => {
 				m3u8Src720h,
 				m3u8Src720h,
 			];
-			expect(extractValidSourcesFromAssets(assets)).toEqual(expected);
+			expect(extractValidSourcesFromAssets(assets, 'Loop')).toEqual(
+				expected,
+			);
+		});
+
+		it('should prefer M3U8 sources with Default video style', () => {
+			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
+			const expected = [m3u8Src720h, mp4Src480w, mp4Src720h];
+
+			expect(extractValidSourcesFromAssets(assets, 'Default')).toEqual(
+				expected,
+			);
+		});
+
+		it('should prefer MP4 sources with Loop video style', () => {
+			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
+			const expected = [mp4Src480w, mp4Src720h, m3u8Src720h];
+
+			expect(extractValidSourcesFromAssets(assets, 'Loop')).toEqual(
+				expected,
+			);
+		});
+
+		it('should prefer MP4 sources with Cinemagraph video style', () => {
+			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
+			const expected = [mp4Src480w, mp4Src720h, m3u8Src720h];
+
+			expect(
+				extractValidSourcesFromAssets(assets, 'Cinemagraph'),
+			).toEqual(expected);
 		});
 	});
 

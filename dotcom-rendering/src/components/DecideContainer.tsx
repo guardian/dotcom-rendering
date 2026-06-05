@@ -31,6 +31,7 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
+	isNewsletterSignupCardEnabled?: boolean;
 };
 
 export const DecideContainer = ({
@@ -46,6 +47,7 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
+	isNewsletterSignupCardEnabled = false,
 }: Props) => {
 	switch (containerType) {
 		case 'nav/list':
@@ -55,7 +57,13 @@ export const DecideContainer = ({
 		case 'scrollable/highlights':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<ScrollableHighlights trails={trails} frontId={frontId} />
+					<ScrollableHighlights
+						trails={trails}
+						frontId={frontId}
+						isNewsletterSignupCardEnabled={
+							isNewsletterSignupCardEnabled
+						}
+					/>
 				</Island>
 			);
 		case 'flexible/special':
