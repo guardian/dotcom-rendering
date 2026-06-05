@@ -136,7 +136,7 @@ export const HighlightsNewsletterSignupModal = ({
 		<div
 			ref={overlayRef}
 			css={overlayStyles}
-			onMouseDown={(event) => {
+			onClick={(event) => {
 				if (event.target === overlayRef.current) {
 					onClose();
 				}
@@ -171,12 +171,13 @@ export const HighlightsNewsletterSignupModal = ({
 						name={newsletter.name}
 						frequency={newsletter.frequency}
 						description={newsletter.description}
-						hideDivider={true}
+						isModal={true}
 					>
 						<NewsletterSignupForm
 							newsletterId={newsletter.identityName}
 							newsletterName={newsletter.name}
 							frequency={newsletter.frequency}
+							isModal={true}
 						/>
 					</NewsletterSignupCard>
 				</div>

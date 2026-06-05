@@ -19,7 +19,7 @@ export type NewsletterSignupCardProps = {
 	children?: React.ReactNode;
 	previewAction?: NewsletterPreviewAction;
 	isSignedIn?: boolean | 'Pending';
-	hideDivider?: boolean;
+	isModal?: boolean;
 };
 
 const containerStyles = css`
@@ -138,7 +138,7 @@ export const NewsletterSignupCard = ({
 	children,
 	previewAction,
 	isSignedIn,
-	hideDivider = false,
+	isModal = false,
 }: NewsletterSignupCardProps) => {
 	const content = (
 		<aside css={containerStyles} aria-label="newsletter promotion">
@@ -156,7 +156,7 @@ export const NewsletterSignupCard = ({
 
 	return (
 		<>
-			{!hideDivider && <hr css={dividerStyles} />}
+			{!isModal && <hr css={dividerStyles} />}
 			{content}
 		</>
 	);
