@@ -19,6 +19,7 @@ import { useVideoAttentionTracking } from '../lib/useVideoAttentionTracking';
 import { useVideoMilestoneTracking } from '../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
+	convertProgressPercentageToCurrentTime,
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 	findOptimisedSourcePerMimeType,
@@ -431,6 +432,7 @@ export const SelfHostedVideo = ({
 	const [isMuted, setIsMuted] = useState(true);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
+	const [duration, setDuration] = useState<number | undefined>(undefined);
 	const [playerState, setPlayerState] =
 		useState<(typeof PLAYER_STATES)[number]>('NOT_STARTED');
 	const [isAutoplayAllowed, setIsAutoplayAllowed] = useState<boolean | null>(
@@ -441,6 +443,7 @@ export const SelfHostedVideo = ({
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
 	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
+	const [isProgressBarSeeking, setIsProgressBarSeeking] = useState(false);
 	/** Whether the video should show controls */
 	const [showControls, setShowControls] = useState(true);
 	/** Whether the video is currently showing controls */
@@ -470,7 +473,7 @@ export const SelfHostedVideo = ({
 		playerState !== 'NOT_STARTED';
 
 	const subtitlesPosition: SubtitlesPosition =
-		videoStyleSettings.useInteractiveProgressBar &&
+		videoStyleSettings.useInteractiveProgressBar === true &&
 		controlsPosition === 'bottom'
 			? 'bottom-elevated'
 			: controlsPosition;
@@ -484,6 +487,7 @@ export const SelfHostedVideo = ({
 		videoStyleSettings.canShowPlayIcon &&
 		(playerState === 'PAUSED_BY_USER' ||
 			playerState === 'PAUSED_BY_BROWSER' ||
+			playerState === 'ENDED' ||
 			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
 
 	const showPauseIcon =
@@ -617,7 +621,7 @@ export const SelfHostedVideo = ({
 
 	const playPauseVideo = () => {
 		if (playerState === 'PLAYING') {
-			if (isInView) {
+			if (isInView === true) {
 				void pauseVideo('PAUSED_BY_USER');
 				sendOphanTrackingEvent('pause');
 			}
@@ -735,7 +739,7 @@ export const SelfHostedVideo = ({
 					setIsAutoplayAllowed(doesUserPermitAutoplayOnWeb());
 				}
 				setHasPageBecomeActive(true);
-				setMutedState({ value: false });
+				setMutedState({ value: true });
 			} else {
 				setHasPageBecomeActive(false);
 			}
@@ -827,7 +831,7 @@ export const SelfHostedVideo = ({
 		);
 
 		sendOphanTrackingEvent('view');
-	}, [isInView ? true : undefined]);
+	}, [isInView === true ? true : undefined]);
 
 	/**
 	 * Show a poster image if a video does NOT play automatically. Otherwise, we do not need
@@ -863,7 +867,7 @@ export const SelfHostedVideo = ({
 				document.fullscreenElement ||
 				(video &&
 					'webkitDisplayingFullscreen' in video &&
-					video.webkitDisplayingFullscreen)
+					Boolean(video.webkitDisplayingFullscreen))
 					? 'enter_fullscreen'
 					: 'exit_fullscreen';
 
@@ -941,6 +945,7 @@ export const SelfHostedVideo = ({
 			return;
 		}
 
+		setDuration(video.duration);
 		positionCues(video);
 	};
 
@@ -1133,7 +1138,10 @@ export const SelfHostedVideo = ({
 		}
 
 		if (playerState === 'PLAYING') {
-			setCurrentTime(video.currentTime);
+			if (!isProgressBarSeeking) {
+				setCurrentTime(video.currentTime);
+			}
+
 			/**
 			 * We only want to track milestone events for "long-form"
 			 * videos, not loops or cinemagraphs. We expect these to be
@@ -1176,6 +1184,28 @@ export const SelfHostedVideo = ({
 		}
 	};
 
+	const handleProgressBarInput = (
+		event: React.FormEvent<HTMLInputElement>,
+	) => {
+		if (duration === undefined) {
+			return;
+		}
+
+		showControlsAndStartTimer();
+
+		const percentage = Number(event.currentTarget.value);
+		const time = convertProgressPercentageToCurrentTime(
+			percentage,
+			duration,
+		);
+
+		if (time === null) {
+			return;
+		}
+
+		updateCurrentTime(time);
+	};
+
 	/**
 	 * Autoplay/resume playback when the player comes into view or when
 	 * the page has been restored from the BFCache.
@@ -1184,8 +1214,8 @@ export const SelfHostedVideo = ({
 	 */
 	if (isPlayable) {
 		if (
-			shouldAutoplay &&
-			isInView &&
+			shouldAutoplay === true &&
+			isInView === true &&
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
 				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
@@ -1253,6 +1283,7 @@ export const SelfHostedVideo = ({
 						posterImage={optimisedPosterImage}
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
+						duration={duration}
 						ref={vidRef}
 						hasAudio={hasAudio}
 						isMuted={isMuted}
@@ -1264,18 +1295,24 @@ export const SelfHostedVideo = ({
 						handleAudioClick={handleAudioClick}
 						handleTimeUpdate={handleTimeUpdate}
 						handleKeyDown={handleKeyDown}
+						handleProgressBarInput={handleProgressBarInput}
+						handleProgressBarSeekStart={() => {
+							setIsProgressBarSeeking(true);
+						}}
+						handleProgressBarSeekEnd={() => {
+							setIsProgressBarSeeking(false);
+						}}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
 						handleEnded={handleEnded}
-						updateCurrentTime={updateCurrentTime}
 						onError={onError}
-						preloadPartialData={!!shouldAutoplay}
+						preloadPartialData={shouldAutoplay === true}
 						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
 						useLongFormProgressBar={
-							!!videoStyleSettings.useInteractiveProgressBar
+							videoStyleSettings.useInteractiveProgressBar ===
+							true
 						}
-						handleProgressBarInput={showControlsAndStartTimer}
 						showSubtitles={videoStyleSettings.canShowSubtitles}
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}
@@ -1297,7 +1334,7 @@ export const SelfHostedVideo = ({
 					/>
 				</div>
 			</div>
-			{!!caption && format && (
+			{caption !== undefined && caption !== '' && format && (
 				<Caption
 					captionText={caption}
 					format={format}

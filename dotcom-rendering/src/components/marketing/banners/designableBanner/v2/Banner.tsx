@@ -68,10 +68,9 @@ const styles = {
 			max-width: 740px;
 			margin: 0 auto;
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
-			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} max-content minmax(
-					0,
-					0.5fr
-				);
+			grid-template-columns:
+				minmax(0, 0.5fr)
+				${phabletContentMaxWidth} max-content minmax(0, 0.5fr);
 			grid-template-rows: auto auto auto;
 			grid-template-areas:
 				'.	copy-container						close-button			close-button'
@@ -245,8 +244,8 @@ const Banner = (props: BannerRenderProps): JSX.Element | null => {
 		.choiceCardSettings
 		? 'choice-cards-container'
 		: bannerData.settings.imageSettings
-		? 'main-image'
-		: '.';
+			? 'main-image'
+			: '.';
 
 	return (
 		<div
@@ -264,10 +263,10 @@ const Banner = (props: BannerRenderProps): JSX.Element | null => {
 					bannerData.isCollapsible && bannerData.isCollapsed
 						? styles.collapsedLayoutOverrides(
 								cardsImageOrSpaceTemplateString,
-						  )
+							)
 						: styles.layoutOverrides(
 								cardsImageOrSpaceTemplateString,
-						  )
+							)
 				}
 			>
 				<div css={styles.verticalLine} />

@@ -95,6 +95,7 @@ export interface FEMediaAsset {
 	platform: string;
 	mimeType?: string;
 	assetType: string;
+	aspectRatio?: string;
 	dimensions?: {
 		width: number;
 		height: number;

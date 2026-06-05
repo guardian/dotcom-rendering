@@ -47,8 +47,8 @@ const sharedButtonStyles = (
 	border-color: ${isNonLabsGalleryMeta
 		? themePalette('--share-button-border-meta')
 		: sizeXSmall
-		? themePalette('--share-button-xsmall-border')
-		: themePalette('--share-button-border')};
+			? themePalette('--share-button-xsmall-border')
+			: themePalette('--share-button-border')};
 	height: ${sizeXSmall ? '24px' : '36px'};
 `;
 

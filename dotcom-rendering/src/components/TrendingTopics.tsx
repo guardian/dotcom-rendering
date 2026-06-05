@@ -53,7 +53,8 @@ const listStyleNone = css`
 	 we create a 1px horizontal slit
 	 through which we show a repeating pattern
 	*/
-	background-image: repeating-linear-gradient(
+	background-image:
+		repeating-linear-gradient(
 			to bottom,
 			${palette('--trending-topics-background')} 0px,
 			${palette('--trending-topics-background')} 36px,

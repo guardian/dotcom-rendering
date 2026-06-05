@@ -55,7 +55,7 @@ const enhanceNewsletterSignup =
 					blockId,
 					format,
 					promotedNewsletter,
-			  )
+				)
 			: elements;
 
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind

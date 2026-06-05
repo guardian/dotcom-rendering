@@ -1131,6 +1131,9 @@
                 "assetType": {
                     "type": "string"
                 },
+                "aspectRatio": {
+                    "type": "string"
+                },
                 "dimensions": {
                     "type": "object",
                     "properties": {

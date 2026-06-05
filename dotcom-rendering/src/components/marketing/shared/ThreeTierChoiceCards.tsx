@@ -145,18 +145,18 @@ export const ThreeTierChoiceCards = ({
 			? `2px solid ${
 					choiceCardDesignSettings?.buttonSelectBorderColour ??
 					palette.brand['500']
-			  }`
+				}`
 			: `1px solid ${
 					choiceCardDesignSettings?.buttonBorderColour ??
 					palette.neutral[46]
-			  }`};
+				}`};
 		background-color: ${selected
-			? choiceCardDesignSettings?.buttonSelectColour ??
-			  palette.neutral[100]
-			: choiceCardDesignSettings?.buttonColour ?? palette.neutral[100]};
+			? (choiceCardDesignSettings?.buttonSelectColour ??
+				palette.neutral[100])
+			: (choiceCardDesignSettings?.buttonColour ?? palette.neutral[100])};
 		color: ${selected
-			? choiceCardDesignSettings?.buttonSelectTextColour ?? 'inherit'
-			: choiceCardDesignSettings?.buttonTextColour ?? 'inherit'};
+			? (choiceCardDesignSettings?.buttonSelectTextColour ?? 'inherit')
+			: (choiceCardDesignSettings?.buttonTextColour ?? 'inherit')};
 		border-radius: 10px;
 		padding: ${selected
 			? `6px ${space[5]}px 10px ${space[5]}px`
@@ -167,8 +167,9 @@ export const ThreeTierChoiceCards = ({
 		+ label div {
 			${isSelected ? 'font-weight: bold;' : ''}
 			color: ${isSelected
-				? choiceCardDesignSettings?.buttonSelectTextColour ?? 'inherit'
-				: choiceCardDesignSettings?.buttonTextColour ?? 'inherit'};
+				? (choiceCardDesignSettings?.buttonSelectTextColour ??
+					'inherit')
+				: (choiceCardDesignSettings?.buttonTextColour ?? 'inherit')};
 			s {
 				font-weight: normal;
 			}
@@ -354,7 +355,7 @@ export const ThreeTierChoiceCards = ({
 														pill
 															? getPillBackgroundColour(
 																	pill,
-															  )
+																)
 															: undefined
 													}
 													choiceCardDesignSettings={

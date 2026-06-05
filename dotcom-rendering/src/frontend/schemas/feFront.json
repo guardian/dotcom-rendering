@@ -2960,6 +2960,9 @@
                 "assetType": {
                     "type": "string"
                 },
+                "aspectRatio": {
+                    "type": "string"
+                },
                 "dimensions": {
                     "type": "object",
                     "properties": {
@@ -3984,14 +3987,15 @@
                                     "width": {
                                         "type": "number"
                                     },
-                                    "aspectRatio": {
-                                        "type": "string"
-                                    },
                                     "hasAudio": {
                                         "type": "boolean"
+                                    },
+                                    "aspectRatio": {
+                                        "type": "string"
                                     }
                                 },
                                 "required": [
+                                    "hasAudio",
                                     "height",
                                     "mimeType",
                                     "src",

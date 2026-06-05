@@ -35,7 +35,7 @@ export const SelfHostedVideoInArticle = ({
 	caption,
 }: SelfHostedVideoInArticleProps) => {
 	const posterImageUrl = element.posterImage?.[0]?.url;
-	const sources = extractValidSourcesFromAssets(element.assets);
+	const sources = extractValidSourcesFromAssets(element.assets, videoStyle);
 	const aspectRatio = getAspectRatioFromSources(sources);
 	const firstVideoSource = sources[0];
 
@@ -71,9 +71,7 @@ export const SelfHostedVideoInArticle = ({
 					format={format}
 					isMainMedia={isMainMedia}
 					role={role}
-					restrictHeightOnDesktop={
-						!isMainMedia && !isInteractive(format.design)
-					}
+					restrictHeightOnDesktop={!isInteractive(format.design)}
 				/>
 			</Island>
 		</div>
