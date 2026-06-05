@@ -179,29 +179,22 @@ const fullscreenStyles = css`
 	}
 `;
 
-const showTransitionStyles = css`
-	visibility: visible;
-	opacity: 1;
-`;
-
 const showControlsStyles = css`
 	.controls-container {
-		${showTransitionStyles};
+		visibility: visible;
+		opacity: 1;
 	}
 
 	.play-pause-icon {
-		${showTransitionStyles};
+		visibility: visible;
+		opacity: 1;
 	}
-`;
-
-const hideTransitionStyles = css`
-	visibility: hidden;
-	opacity: 0;
 `;
 
 const hideControlsStyles = css`
 	.controls-container {
-		${hideTransitionStyles}
+		visibility: hidden;
+		opacity: 0;
 		transition:
 			visibility 500ms,
 			opacity 500ms ease-in-out;
@@ -209,7 +202,8 @@ const hideControlsStyles = css`
 	}
 
 	.play-pause-icon {
-		${hideTransitionStyles}
+		visibility: hidden;
+		opacity: 0;
 		transition:
 			visibility 400ms,
 			opacity 400ms ease-in-out;
