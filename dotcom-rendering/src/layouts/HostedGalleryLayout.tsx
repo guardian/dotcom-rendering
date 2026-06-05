@@ -21,7 +21,7 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
-	content: Gallery;
+	gallery: Gallery;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 	serverTime?: number;
@@ -63,8 +63,8 @@ const shareButtonStyles = css`
 `;
 
 export const HostedGalleryLayout = (props: WebProps | AppProps) => {
-	const { content, renderingTarget, format, serverTime } = props;
-	const { frontendData } = content;
+	const { gallery, renderingTarget, format, serverTime } = props;
+	const { frontendData } = gallery;
 	const { commercialProperties, editionId } = frontendData;
 
 	const { branding } = commercialProperties[editionId];
@@ -137,7 +137,7 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 				<GalleryBody
 					renderingTarget={renderingTarget}
 					format={format}
-					bodyElements={content.bodyElements}
+					bodyElements={gallery.bodyElements}
 					pageId={frontendData.pageId}
 					webTitle={frontendData.webTitle}
 				/>

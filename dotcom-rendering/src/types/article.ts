@@ -56,7 +56,7 @@ export type Gallery = ArticleFields & {
 };
 
 export type OtherArticles = ArticleFields & {
-	design: Exclude<ArticleDesign, ArticleDesign.Gallery>;
+	design: Exclude<ArticleDesign, GalleryDesign>;
 };
 
 export type Article = Gallery | OtherArticles;
@@ -122,15 +122,13 @@ export const enhanceArticleType = (
 		data.main,
 	)(data.mainMediaElements);
 
-	const isGalleryPage = (
-		design: ArticleDesign,
-	): design is ArticleDesign.Gallery | ArticleDesign.HostedGallery =>
+	const isGalleryPage = (design: ArticleDesign): design is GalleryDesign =>
 		design === ArticleDesign.Gallery ||
 		design === ArticleDesign.HostedGallery;
 
 	const storyPackage = parseStoryPackage(
 		data.storyPackage,
-		isGalleryPage(format.design),
+		format.design === ArticleDesign.Gallery,
 	);
 
 	if (isGalleryPage(format.design)) {
