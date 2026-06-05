@@ -181,6 +181,11 @@ export const renderElement = ({
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
 
+	const isHostedContent =
+		format.design === ArticleDesign.HostedArticle ||
+		format.design === ArticleDesign.HostedVideo ||
+		format.design === ArticleDesign.HostedGallery;
+
 	const renderAds = !isAdFreeUser && !shouldHideAds;
 
 	switch (element._type) {
@@ -969,7 +974,7 @@ export const renderElement = ({
 						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
-						enableAds={true}
+						enableAds={!isHostedContent} // YT ads on by default on all pages apart from hosted content
 						hidePillOnMobile={false}
 						contentType={contentType}
 						contentLayout={contentLayout}
