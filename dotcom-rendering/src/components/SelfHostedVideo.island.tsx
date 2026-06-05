@@ -41,6 +41,7 @@ import type {
 } from './SelfHostedVideoPlayer';
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
 import type { SubtitlesPosition } from './SubtitleOverlay';
+import { useFadeableControls } from './useFadeableControls';
 import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import type { VideoEventKey } from './YoutubeAtom/YoutubeAtom';
@@ -415,7 +416,6 @@ export const SelfHostedVideo = ({
 	const { renderingTarget } = useConfig();
 	const vidRef = useRef<HTMLVideoElement>(null);
 	const playerContainerRef = useRef<HTMLDivElement>(null);
-	const showControlsTimer = useRef<number | null>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
@@ -433,10 +433,6 @@ export const SelfHostedVideo = ({
 	const [isFullscreen, setIsFullscreen] = useState(false);
 	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
 	const [isProgressBarSeeking, setIsProgressBarSeeking] = useState(false);
-	/** Whether the video should show controls */
-	const [showControls, setShowControls] = useState(true);
-	/** Whether the video is currently showing controls */
-	const [isShowingControls, setIsShowingControls] = useState(true);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -479,9 +475,17 @@ export const SelfHostedVideo = ({
 			playerState === 'ENDED' ||
 			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
 
-	const showPauseIcon =
-		videoStyleSettings.hideControlsWhenNotInteractedWith &&
-		playerState === 'PLAYING';
+	const {
+		showControls: showFadeableControls,
+		hideControls: hideFadeableControls,
+		isShowingControls: isShowingFadeableControls,
+		showPauseIcon,
+		showFadeableControlsAndStartTimer,
+	} = useFadeableControls({
+		playerState,
+		isEnabled: videoStyleSettings.enableFadeableControls,
+		controlsFadeDelay: CONTROLS_FADE_DELAY,
+	});
 
 	let showPlayPauseIcon: 'play' | 'pause' | null = null;
 	if (showPlayIcon) {
@@ -513,17 +517,6 @@ export const SelfHostedVideo = ({
 	const optimisedPosterImage = showPosterImage
 		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
 		: undefined;
-
-	const showFadeableControls =
-		videoStyleSettings.hideControlsWhenNotInteractedWith &&
-		!showControls &&
-		playerState === 'PLAYING';
-
-	const hideFadeableControls =
-		videoStyleSettings.hideControlsWhenNotInteractedWith &&
-		showControls &&
-		(playerState === 'PAUSED_BY_USER' ||
-			playerState === 'PAUSED_BY_BROWSER');
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
 
@@ -917,41 +910,6 @@ export const SelfHostedVideo = ({
 		};
 	}, [sendOphanTrackingEvent]);
 
-	/**
-	 * When the video starts playing, start a timer to hide the controls after a few seconds.
-	 * If there is any user interaction while the video is playing, restart the timer.
-	 * The controls will fade out after a period of no user interaction.
-	 */
-	useEffect(() => {
-		if (playerState !== 'PLAYING') {
-			return;
-		}
-
-		/**
-		 * We currently use this piece of state `showControls` as a self-resetting trigger.
-		 * It's switched on to show the controls -> it's then immediately switched off to start
-		 * the transition to hide the controls.
-		 */
-		setTimeout(() => {
-			setShowControls(false);
-		}, 0);
-
-		if (showControlsTimer.current !== null) {
-			window.clearTimeout(showControlsTimer.current);
-		}
-
-		showControlsTimer.current = window.setTimeout(() => {
-			setIsShowingControls(false);
-		}, CONTROLS_FADE_DELAY);
-
-		return () => {
-			if (showControlsTimer.current !== null) {
-				window.clearTimeout(showControlsTimer.current);
-				showControlsTimer.current = null;
-			}
-		};
-	}, [showControls, playerState]);
-
 	if (adapted) {
 		return FallbackImageComponent;
 	}
@@ -991,13 +949,6 @@ export const SelfHostedVideo = ({
 		trackMilestones({ started: true });
 	};
 
-	const showControlsAndStartTimer = () => {
-		if (!videoStyleSettings.hideControlsWhenNotInteractedWith) return;
-
-		setShowControls(true);
-		setIsShowingControls(true);
-	};
-
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
 		if (!videoStyleSettings.isInteractive) {
 			return;
@@ -1008,12 +959,8 @@ export const SelfHostedVideo = ({
 		 * show the controls instead of pausing the video.
 		 * Note that hovering with a mouse shows controls on non-touch devices.
 		 */
-		if (
-			videoStyleSettings.hideControlsWhenNotInteractedWith &&
-			playerState === 'PLAYING' &&
-			!isShowingControls
-		) {
-			showControlsAndStartTimer();
+		if (playerState === 'PLAYING' && !isShowingFadeableControls) {
+			showFadeableControlsAndStartTimer();
 			return;
 		}
 
@@ -1030,7 +977,7 @@ export const SelfHostedVideo = ({
 
 		event.stopPropagation(); // Don't pause the video
 
-		showControlsAndStartTimer(); // Show controls when a button is clicked
+		showFadeableControlsAndStartTimer(); // Show controls when a button is clicked
 
 		if (isMuted) {
 			// Emit video play audio event so other components are aware when a video is played with sound
@@ -1045,7 +992,7 @@ export const SelfHostedVideo = ({
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 		event.stopPropagation(); // Don't pause the video
 
-		showControlsAndStartTimer(); // Show controls when a button is clicked
+		showFadeableControlsAndStartTimer(); // Show controls when a button is clicked
 
 		const video = vidRef.current;
 		if (!video) {
@@ -1208,7 +1155,7 @@ export const SelfHostedVideo = ({
 			return;
 		}
 
-		showControlsAndStartTimer();
+		showFadeableControlsAndStartTimer();
 
 		const percentage = Number(event.currentTarget.value);
 		const time = convertProgressPercentageToCurrentTime(
@@ -1281,7 +1228,7 @@ export const SelfHostedVideo = ({
 						showFadeableControls && hideControlsStyles,
 						hideFadeableControls && showControlsStyles,
 					]}
-					onMouseMove={showControlsAndStartTimer}
+					onMouseMove={showFadeableControlsAndStartTimer}
 				>
 					<SelfHostedVideoPlayer
 						sources={optimisedSources}
