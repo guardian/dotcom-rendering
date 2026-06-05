@@ -54,11 +54,8 @@ const container = css`
 		min-height: 194px;
 	}
 	${from.tablet} {
-		width: 160px;
-		padding: 10px 10px 0 10px;
-	}
-	${from.tablet} {
 		width: 280px;
+		padding: 10px 10px 0 10px;
 		flex-direction: row;
 	}
 	${from.desktop} {

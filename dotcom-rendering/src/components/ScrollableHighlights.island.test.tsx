@@ -36,6 +36,11 @@ const renderHighlights = (
 		</ConfigProvider>,
 	);
 
+const newsletterCardWithoutData = {
+	...newsletterCard,
+	newsletterData: undefined,
+};
+
 const mockABEnabled = () => {
 	(useAB as jest.Mock).mockReturnValue({
 		isUserInTestGroup: (testName: string, group: string) =>
@@ -70,10 +75,14 @@ describe('ScrollableHighlights — newsletter card AB test', () => {
 			).toBeInTheDocument();
 		});
 
-		it('renders the "Free newsletter" kicker for a newsletter trail', () => {
-			renderHighlights([newsletterCard]);
+		it('does not render a newsletter card when newsletterData is missing', () => {
+			renderHighlights([newsletterCardWithoutData]);
 
-			expect(screen.getByText('Free newsletter')).toBeInTheDocument();
+			expect(
+				screen.queryByRole('link', {
+					name: newsletterCardWithoutData.headline,
+				}),
+			).not.toBeInTheDocument();
 		});
 
 		it('still renders regular cards alongside the newsletter card', () => {
@@ -93,6 +102,16 @@ describe('ScrollableHighlights — newsletter card AB test', () => {
 			mockABDisabled();
 		});
 
+		it('does not render a newsletter card when newsletterData is missing', () => {
+			renderHighlights([newsletterCardWithoutData]);
+
+			expect(
+				screen.queryByRole('link', {
+					name: newsletterCardWithoutData.headline,
+				}),
+			).not.toBeInTheDocument();
+		});
+
 		it('does not render a newsletter card at all', () => {
 			renderHighlights([newsletterCard]);
 
@@ -107,12 +126,16 @@ describe('ScrollableHighlights — newsletter card AB test', () => {
 			).not.toBeInTheDocument();
 		});
 
-		it('does not render the newsletter trail as a regular card either', () => {
-			renderHighlights([newsletterCard]);
+		it('does not render a newsletter trail when newsletterData is missing', () => {
+			renderHighlights([newsletterCardWithoutData]);
 
-			// The card should be completely absent — no headline rendered
 			expect(
-				screen.queryByText(newsletterCard.headline),
+				screen.queryByRole('link', {
+					name: newsletterCardWithoutData.headline,
+				}),
+			).not.toBeInTheDocument();
+			expect(
+				screen.queryByText('Free newsletter'),
 			).not.toBeInTheDocument();
 		});
 

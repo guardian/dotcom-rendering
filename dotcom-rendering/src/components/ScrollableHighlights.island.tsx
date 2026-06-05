@@ -221,9 +221,10 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			'enable',
 		) ?? false;
 
-	const visibleTrails = trails.filter(
-		(trail) => !trail.newsletterData || isNewsletterEnabled,
-	);
+	const visibleTrails = trails.filter((trail) => {
+		if (!trail.isNewsletter) return true;
+		return isNewsletterEnabled && Boolean(trail.newsletterData);
+	});
 	const carouselLength = visibleTrails.length;
 	const imageLoading = 'eager';
 	const [showPreviousButton, setShowPreviousButton] = useState(false);
