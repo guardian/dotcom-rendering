@@ -216,3 +216,19 @@ export const formatTimeForDisplay = (timeInSeconds: number): string => {
 
 	return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 };
+
+export const getVideoFormat = (): SupportedVideoFileType => {
+	const param = new URLSearchParams(location.search).get('videoFormat');
+
+	switch (param) {
+		case 'mp4':
+			return 'video/mp4';
+		case 'hls':
+			return 'application/vnd.apple.mpegurl';
+
+		case 'hls-alt':
+			return 'application/x-mpegURL';
+		default:
+			return 'video/mp4';
+	}
+};

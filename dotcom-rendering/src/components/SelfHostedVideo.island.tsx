@@ -14,7 +14,7 @@ import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
-import { useSubtitles } from '../lib/useSubtitles';
+// import { useSubtitles } from '../lib/useSubtitles';
 import { useVideoAttentionTracking } from '../lib/useVideoAttentionTracking';
 import { useVideoMilestoneTracking } from '../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
@@ -23,6 +23,7 @@ import {
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 	findOptimisedSourcePerMimeType,
+	getVideoFormat,
 	roundAspectRatio,
 } from '../lib/video';
 import type { VideoStyleSettings } from '../lib/videoStyleSettings';
@@ -33,6 +34,7 @@ import type { VideoPlayerFormat } from '../types/mainMedia';
 import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
+import { SelfHostedVideoDebugOverlay } from './SelfHostedVideoDebugOverlay';
 import type {
 	ControlsPosition,
 	PLAYER_STATES,
@@ -207,12 +209,12 @@ const hideTransitionStyles = css`
 
 const hideControlsStyles = css`
 	.controls-container {
-		${hideTransitionStyles}
+		${hideTransitionStyles};
 		transition-delay: ${CONTROLS_FADE_DELAY}ms;
 	}
 
 	.play-pause-icon {
-		${hideTransitionStyles}
+		${hideTransitionStyles};
 		transition-delay: ${PLAY_BUTTON_FADE_DELAY}ms;
 	}
 
@@ -554,11 +556,13 @@ export const SelfHostedVideo = ({
 		threshold: VISIBILITY_THRESHOLD,
 	});
 
-	const activeCue = useSubtitles({
-		video: vidRef.current,
-		playerState,
-		currentTime,
-	});
+	/*cues disabled for testing to avoid cors*/
+	const activeCue = null;
+	// const activeCue = useSubtitles({
+	// 	video: vidRef.current,
+	// 	playerState,
+	// 	currentTime,
+	// });
 
 	const [trackMilestones, resetMilestones] = useVideoMilestoneTracking(
 		sendOphanTrackingEvent,
@@ -694,10 +698,12 @@ export const SelfHostedVideo = ({
 		}
 
 		const screenWidth = window.innerWidth;
+		const vidFormat = getVideoFormat();
 		const filteredSources = findOptimisedSourcePerMimeType(
 			sources,
 			screenWidth,
-		);
+		).filter((source) => source.mimeType === vidFormat);
+
 		setOptimisedSources(filteredSources);
 
 		/**
@@ -1331,6 +1337,10 @@ export const SelfHostedVideo = ({
 						isLoopClickThroughTestVariant={
 							isLoopClickThroughTestVariant
 						}
+					/>
+					<SelfHostedVideoDebugOverlay
+						videoRef={vidRef}
+						atomId={atomId}
 					/>
 				</div>
 			</div>
