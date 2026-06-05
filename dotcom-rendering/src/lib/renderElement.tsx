@@ -74,7 +74,11 @@ import {
 } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
-import { ArticleDesign, type ArticleFormat } from './articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	isHostedContentDesign,
+} from './articleFormat';
 import type { EditionId } from './edition';
 import { getLargestImageSize } from './image';
 
@@ -180,11 +184,6 @@ export const renderElement = ({
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
-
-	const isHostedContent =
-		format.design === ArticleDesign.HostedArticle ||
-		format.design === ArticleDesign.HostedVideo ||
-		format.design === ArticleDesign.HostedGallery;
 
 	const renderAds = !isAdFreeUser && !shouldHideAds;
 
@@ -974,7 +973,8 @@ export const renderElement = ({
 						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
-						enableAds={!isHostedContent} // YT ads on by default on all pages apart from hosted content
+						// YT ads on by default on all pages apart from hosted content
+						enableAds={!isHostedContentDesign(format.design)}
 						hidePillOnMobile={false}
 						contentType={contentType}
 						contentLayout={contentLayout}
