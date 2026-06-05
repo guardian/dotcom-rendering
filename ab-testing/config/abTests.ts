@@ -134,6 +134,19 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
+		name: "commercial-user-module-intentIq-us-region",
+		description:
+			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module for users in the US",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-06-18",
+		type: "client",
+		status: "ON",
+		audienceSize: 5 / 100,
+		audienceSpace: "A",
+		groups: ["holdback"],
+		shouldForceMetricsCollection: true,
+	},
+	{
 		name: "commercial-teads-prebid",
 		description:
 			"Test to measure the impact of adding Teads as a bidder in prebid .",
