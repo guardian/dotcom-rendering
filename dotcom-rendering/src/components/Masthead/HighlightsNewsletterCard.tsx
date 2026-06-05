@@ -8,13 +8,14 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { getZIndex } from '../../lib/getZIndex';
 import {
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	sendNewsletterSignupEvent,
 } from '../../lib/newsletterSignupTracking';
+import { useIsInView } from '../../lib/useIsInView';
 import { palette } from '../../palette';
 import type { Newsletter } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
@@ -139,8 +140,14 @@ export const HighlightsNewsletterCard = ({
 	const componentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(
 		newsletter.identityName,
 	);
+	const [hasBeenSeen, setIsInViewRef] = useIsInView({});
+	const hasTrackedView = useRef(false);
 
 	useEffect(() => {
+		if (hasBeenSeen !== true || hasTrackedView.current) return;
+
+		hasTrackedView.current = true;
+
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName: newsletter.identityName,
@@ -148,7 +155,7 @@ export const HighlightsNewsletterCard = ({
 			renderingTarget,
 			value: { eventDescription: 'highlights-card-viewed' },
 		});
-	}, [componentId, newsletter.identityName, renderingTarget]);
+	}, [hasBeenSeen, componentId, newsletter.identityName, renderingTarget]);
 
 	const handleClick = () => {
 		sendNewsletterSignupEvent({
@@ -172,7 +179,7 @@ export const HighlightsNewsletterCard = ({
 
 	return (
 		<FormatBoundary format={format}>
-			<div css={[container, hoverStyles]}>
+			<div ref={setIsInViewRef} css={[container, hoverStyles]}>
 				<a
 					href={linkTo}
 					css={linkOverlayStyles}
