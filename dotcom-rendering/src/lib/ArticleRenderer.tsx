@@ -166,7 +166,11 @@ export const ArticleRenderer = ({
 				<Fragment key={`recipe-section-${section.index}`}>
 					{section.subheadingEl}
 					{section.recipe && (
-						<Island priority="feature" defer={{ until: 'visible' }}>
+						<Island
+							priority="feature"
+							defer={{ until: 'visible' }}
+							role="inline"
+						>
 							<FeastContextualNudge
 								isDev={isDev}
 								pageId={pageId}
