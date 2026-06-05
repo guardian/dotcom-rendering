@@ -84,7 +84,7 @@ declare namespace JSX {
 		/**
 		 * **Spacefinder Role**
 		 *
-		 * [Spacefinder](https://github.com/guardian/commercial/blob/main/src/insert/spacefinder/article.ts)
+		 * [Spacefinder](https://github.com/guardian/commercial/blob/7866c914573cb6352b4076683b7906b87a70da72/docs/spacefinder/readme.md)
 		 * is a part of the commercial bundle that is used to find positions
 		 * for ad slots within articles.
 		 *
@@ -102,7 +102,7 @@ declare namespace JSX {
 		/**
 		 * **Spacefinder Type**
 		 *
-		 * [Spacefinder](https://github.com/guardian/commercial/blob/main/src/insert/spacefinder/article.ts)
+		 * [Spacefinder](https://github.com/guardian/commercial/blob/7866c914573cb6352b4076683b7906b87a70da72/docs/spacefinder/readme.md)
 		 * is a part of the commercial bundle that is used to find positions
 		 * for ad slots within articles.
 		 *
