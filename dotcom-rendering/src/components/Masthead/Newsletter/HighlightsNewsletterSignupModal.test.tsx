@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { newsletterCard } from '../../../../fixtures/manual/highlights-trails';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import { ConfigProvider } from '../../ConfigContext';
@@ -50,7 +50,12 @@ const renderModal = (onClose = jest.fn()) =>
 describe('HighlightsNewsletterSignupModal', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
+		jest.useFakeTimers();
 		mockUseNewsletterSubscription.mockReturnValue(false);
+	});
+
+	afterEach(() => {
+		jest.useRealTimers();
 	});
 
 	it('renders a labelled dialog with the newsletter name', () => {
@@ -90,6 +95,10 @@ describe('HighlightsNewsletterSignupModal', () => {
 		fireEvent.click(
 			screen.getByRole('button', { name: 'Close signup form' }),
 		);
+
+		act(() => {
+			jest.runAllTimers();
+		});
 
 		expect(onClose).toHaveBeenCalledTimes(1);
 	});
