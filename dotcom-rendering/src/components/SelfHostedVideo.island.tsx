@@ -1320,9 +1320,9 @@ export const SelfHostedVideo = ({
 						isWebKitFullscreen={isWebKitFullscreen}
 						linkTo={linkTo}
 						cardLink={cardLink}
-						isLoopClickThroughTestVariant={
-							isLoopClickThroughTestVariant
-						}
+						isLoopAndInLoopClickTestVariant={Boolean(
+							isLoopClickThroughTestVariant,
+						)}
 					/>
 				</div>
 			</div>
