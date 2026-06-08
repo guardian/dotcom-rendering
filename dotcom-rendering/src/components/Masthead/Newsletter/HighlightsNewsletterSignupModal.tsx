@@ -5,29 +5,15 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
-import { useEffect, useId, useRef } from 'react';
-import { getZIndex } from '../../../lib/getZIndex';
+import { useId } from 'react';
+import type { ArticleFormat } from '../../../lib/articleFormat';
 import { generateImageURL } from '../../../lib/image';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import type { Newsletter } from '../../../types/content';
+import { FormatBoundary } from '../../FormatBoundary';
+import { ModalOverlay } from '../../ModalOverlay';
 import { NewsletterSignupCard } from '../../NewsletterSignupCard';
 import { NewsletterSignupForm } from '../../NewsletterSignupForm.island';
-
-const overlayStyles = css`
-	position: fixed;
-	inset: 0;
-	display: flex;
-	align-items: flex-end;
-	justify-content: center;
-	padding-top: ${space[3]}px;
-	background-color: rgba(0, 0, 0, 0.75);
-	z-index: ${getZIndex('lightbox')};
-
-	${from.tablet} {
-		align-items: center;
-		padding: ${space[3]}px;
-	}
-`;
 
 const dialogStyles = css`
 	background: transparent;
@@ -99,11 +85,13 @@ const visuallyHiddenStyles = css`
 `;
 
 type Props = {
+	format: ArticleFormat;
 	newsletter: Newsletter;
 	onClose: () => void;
 };
 
 export const HighlightsNewsletterSignupModal = ({
+	format,
 	newsletter,
 	onClose,
 }: Props) => {
@@ -112,85 +100,15 @@ export const HighlightsNewsletterSignupModal = ({
 		window.guardian.config.page.idApiUrl,
 	);
 
-	const overlayRef = useRef<HTMLDivElement>(null);
-	const dialogRef = useRef<HTMLDivElement>(null);
 	const titleId = useId();
 
-	useEffect(() => {
-		const previousRootOverflow = document.documentElement.style.overflow;
-		const previousBodyOverflow = document.body.style.overflow;
-		document.documentElement.style.overflow = 'hidden';
-		document.body.style.overflow = 'hidden';
-
-		return () => {
-			document.documentElement.style.overflow = previousRootOverflow;
-			document.body.style.overflow = previousBodyOverflow;
-		};
-	}, []);
-
-	useEffect(() => {
-		const dialogElement = dialogRef.current;
-		if (!dialogElement) {
-			return;
-		}
-
-		const previouslyFocusedElement =
-			document.activeElement instanceof HTMLElement
-				? document.activeElement
-				: null;
-
-		dialogElement.focus();
-
-		return () => {
-			if (
-				previouslyFocusedElement &&
-				document.contains(previouslyFocusedElement)
-			) {
-				previouslyFocusedElement.focus();
-			}
-		};
-	}, []);
-	useEffect(() => {
-		const onKeyDown = (event: KeyboardEvent) => {
-			const dialogElement = dialogRef.current;
-			if (!dialogElement) {
-				return;
-			}
-
-			if (!dialogElement.contains(document.activeElement)) {
-				return;
-			}
-
-			if (event.key === 'Escape') {
-				event.stopPropagation();
-				onClose();
-			}
-		};
-
-		document.addEventListener('keydown', onKeyDown);
-		return () => {
-			document.removeEventListener('keydown', onKeyDown);
-		};
-	}, [onClose]);
-
 	return (
-		<div
-			ref={overlayRef}
-			css={overlayStyles}
-			onClick={(event) => {
-				if (event.target === overlayRef.current) {
-					onClose();
-				}
-			}}
+		<ModalOverlay
+			aria-labelledby={titleId}
+			onClose={onClose}
+			dialogCss={dialogStyles}
 		>
-			<div
-				ref={dialogRef}
-				role="dialog"
-				aria-modal="true"
-				aria-labelledby={titleId}
-				tabIndex={-1}
-				css={dialogStyles}
-			>
+			<FormatBoundary format={format}>
 				<div css={closeButtonWrapperStyles}>
 					<Button
 						size="small"
@@ -230,7 +148,7 @@ export const HighlightsNewsletterSignupModal = ({
 						/>
 					</NewsletterSignupCard>
 				</div>
-			</div>
-		</div>
+			</FormatBoundary>
+		</ModalOverlay>
 	);
 };

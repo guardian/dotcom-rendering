@@ -1,6 +1,11 @@
 import { mocked } from 'storybook/test';
 import preview from '../../../../.storybook/preview';
 import { newsletterCard } from '../../../../fixtures/manual/highlights-trails';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	Pillar,
+} from '../../../lib/articleFormat';
 import { lazyFetchEmailWithTimeout } from '../../../lib/fetchEmail';
 import { useIsSignedIn } from '../../../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
@@ -12,6 +17,11 @@ const meta = preview.meta({
 	title: 'Components/Masthead/HighlightsNewsletterSignupModal',
 	component: HighlightsNewsletterSignupModal,
 	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
 		newsletter,
 		onClose: () => {},
 	},

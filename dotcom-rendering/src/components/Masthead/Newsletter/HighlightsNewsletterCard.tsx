@@ -190,6 +190,7 @@ export const HighlightsNewsletterCard = ({
 			<>
 				{isModalOpen && (
 					<HighlightsNewsletterSignupModal
+						format={format}
 						newsletter={newsletter}
 						onClose={() => {
 							setIsModalOpen(false);
