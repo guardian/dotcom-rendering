@@ -80,6 +80,7 @@ describe('HighlightsNewsletterCard', () => {
 
 	it('opens signup modal on Web click and tracks click', () => {
 		setCardInView(true);
+
 		renderCard();
 
 		const link = screen.getByRole('link', {
