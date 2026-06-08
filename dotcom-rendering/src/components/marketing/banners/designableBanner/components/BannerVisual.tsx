@@ -101,10 +101,7 @@ export const BannerVisual = ({
 		return null;
 	}
 
-	if (
-		isHeaderImage === false &&
-		bannerData.selectors.showBodyVisual === false
-	) {
+	if (!(isHeaderImage ?? false) && !bannerData.selectors.showBodyVisual) {
 		return null;
 	}
 

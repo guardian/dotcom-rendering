@@ -7,7 +7,7 @@ import type {
 	Image as SupportImage,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
@@ -139,17 +139,16 @@ export const useDesignableBannerModel = ({
 		(cc: ChoiceCard) => cc.isDefault,
 	);
 
-	const [selectedChoiceCard, setSelectedChoiceCard] = useState<
+	const [selectedChoiceCardState, setSelectedChoiceCardState] = useState<
 		ChoiceCard | undefined
 	>(defaultChoiceCard);
 
-	// Reset selectedChoiceCard when choiceCards change
-	// eslint-disable-next-line react-hooks/exhaustive-deps -- Intentionally reset state when choiceCards change
-	useEffect(() => {
+	const selectedChoiceCard = useMemo(() => {
 		if (!choiceCards || choiceCards.length === 0) {
-			setSelectedChoiceCard(undefined);
+			return undefined;
 		}
-	}, [choiceCards]);
+		return selectedChoiceCardState;
+	}, [choiceCards, selectedChoiceCardState]);
 
 	const isCollapsableBanner: boolean =
 		isCollapsible ??
@@ -370,7 +369,7 @@ export const useDesignableBannerModel = ({
 				onToggleCollapse: handleToggleCollapse,
 				onCtaClick: combinedHandlers.onCtaClick,
 				onSecondaryCtaClick: combinedHandlers.onSecondaryCtaClick,
-				onChoiceCardChange: setSelectedChoiceCard,
+				onChoiceCardChange: setSelectedChoiceCardState,
 				submitComponentEvent,
 			},
 			selectors,

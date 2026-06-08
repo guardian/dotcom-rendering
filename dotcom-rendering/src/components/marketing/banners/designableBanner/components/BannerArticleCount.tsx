@@ -5,9 +5,9 @@ import {
 	headlineBold17,
 	space,
 } from '@guardian/source/foundations';
+import type { BannerData } from '../BannerProps';
 import { CustomArticleCountCopy } from './CustomArticleCountCopy';
 import { DesignableBannerArticleCountOptOut } from './DesignableBannerArticleCountOptOut';
-import type { BannerData } from '../BannerProps';
 
 const containsArticleCountTemplate = (copy: string): boolean =>
 	copy.includes('%%ARTICLE_COUNT%%');
@@ -36,7 +36,11 @@ export const BannerArticleCount = ({
 	const numArticles = bannerData.articleCounts.forTargetedWeeks;
 	const copy = bannerData.separateArticleCountSettings?.copy;
 
-	if (copy && containsArticleCountTemplate(copy)) {
+	if (
+		copy !== undefined &&
+		copy.length > 0 &&
+		containsArticleCountTemplate(copy)
+	) {
 		return (
 			<CustomArticleCountCopy
 				numArticles={numArticles}
