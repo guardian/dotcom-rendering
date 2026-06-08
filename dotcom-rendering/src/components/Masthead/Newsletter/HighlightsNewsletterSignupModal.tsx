@@ -63,11 +63,22 @@ const heroStyles = (imageSrc?: string) => css`
 
 const closeButtonStyles = css`
 	padding: 0;
-	min-width: 32px;
-	min-height: 32px;
-	width: 32px;
-	height: 32px;
+	min-width: 44px;
+	min-height: 44px;
+	width: 44px;
+	height: 44px;
 	border-radius: 50%;
+	background-color: ${sourcePalette.neutral[86]}99;
+	border: none;
+	color: ${sourcePalette.brand[400]};
+
+	svg {
+		fill: ${sourcePalette.brand[400]};
+	}
+
+	&:hover {
+		background-color: ${sourcePalette.neutral[86]}cc;
+	}
 `;
 
 const contentStyles = css`
