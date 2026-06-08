@@ -57,7 +57,7 @@ const formStyles = css`
 `;
 
 const signedOutLayoutStyles = css`
-	grid-template-columns: minmax(0, 1fr) 160px;
+	grid-template-columns: minmax(0, 1fr) auto;
 	grid-template-areas: 'email submit';
 
 	${until.tablet} {
@@ -93,13 +93,15 @@ const submitButtonContainerStyles = css`
 	width: 100%;
 	display: flex;
 	gap: ${space[2]}px;
+	${from.tablet} {
+		width: auto;
+	}
 `;
 
 const submitButtonStyles = css`
-	flex: 1;
 	width: 100%;
 	${from.tablet} {
-		max-width: 220px;
+		width: auto;
 	}
 `;
 
