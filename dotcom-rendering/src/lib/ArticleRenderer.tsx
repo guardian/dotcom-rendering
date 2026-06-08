@@ -210,7 +210,7 @@ export const ArticleRenderer = ({
 			{renderingTarget === 'Apps'
 				? augmentedElements
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
-				  withSignInGateSlot({
+					withSignInGateSlot({
 						renderedElements: augmentedElements,
 						contentType,
 						sectionId,
