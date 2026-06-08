@@ -30,6 +30,7 @@ const videoStyles = (aspectRatio: number) => css`
 	display: block;
 	height: auto;
 	width: 100%;
+	object-fit: cover;
 	-webkit-tap-highlight-color: transparent;
 
 	/* Prevents CLS by letting the browser know the space the video will take up. */
