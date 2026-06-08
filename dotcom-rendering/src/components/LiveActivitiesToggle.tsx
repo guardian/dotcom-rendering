@@ -109,7 +109,7 @@ const toggleLiveActivity = (
 						})
 						.catch(handleError('follow'));
 				}
-		  };
+			};
 
 const handleError =
 	(methodName: 'follow' | 'unfollow' | 'isFollowing') =>
