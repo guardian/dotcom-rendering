@@ -163,7 +163,7 @@ describe('HighlightsNewsletterCard', () => {
 		);
 	});
 
-	it('does not open signup modal on Apps click', () => {
+	it('does not open signup modal on Apps click and does not track EXPAND', () => {
 		renderCard({ renderingTarget: 'Apps' });
 
 		const link = screen.getByRole('link', {
@@ -175,6 +175,10 @@ describe('HighlightsNewsletterCard', () => {
 		expect(
 			screen.queryByTestId('highlights-newsletter-signup-modal'),
 		).not.toBeInTheDocument();
+
+		expect(sendNewsletterSignupEvent).not.toHaveBeenCalledWith(
+			expect.objectContaining({ action: 'EXPAND' }),
+		);
 	});
 
 	it('prefers newsletter illustrationSquare for the card image', () => {

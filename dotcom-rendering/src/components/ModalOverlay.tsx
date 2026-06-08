@@ -71,7 +71,11 @@ const dialogStyles = ({ isVisible, dialogCss }: DialogStylesOptions) => [
 		${from.tablet} {
 			transform: none;
 			opacity: ${isVisible ? 1 : 0};
-			transition: opacity ${isVisible ? 225 : 175}ms ease;
+			transition: opacity
+				${isVisible
+					? OPEN_ANIMATION_DURATION_MS
+					: CLOSE_ANIMATION_DURATION_MS}ms
+				ease;
 			will-change: opacity;
 		}
 
@@ -176,10 +180,6 @@ export const ModalOverlay = ({
 				return;
 			}
 
-			if (!dialogElement.contains(document.activeElement)) {
-				return;
-			}
-
 			if (event.key === 'Escape') {
 				event.stopPropagation();
 				requestClose();
@@ -187,6 +187,11 @@ export const ModalOverlay = ({
 			}
 
 			if (event.key !== 'Tab') {
+				return;
+			}
+
+			// Only trap Tab when focus is already inside the dialog
+			if (!dialogElement.contains(document.activeElement)) {
 				return;
 			}
 

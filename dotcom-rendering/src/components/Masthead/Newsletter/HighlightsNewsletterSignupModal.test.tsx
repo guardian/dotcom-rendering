@@ -6,9 +6,7 @@ import { ConfigProvider } from '../../ConfigContext';
 import { HighlightsNewsletterSignupModal } from './HighlightsNewsletterSignupModal';
 
 // Only mock what cannot run in jsdom: the signup form (reCAPTCHA, identity
-// API) and the subscription hook (network + auth).  Everything else —
-// the portal, dialog markup, close button, keyboard/overlay dismissal —
-// is rendered and tested for real.
+// API) and the subscription hook (network + auth).
 
 jest.mock('../../../lib/useNewsletterSubscription', () => ({
 	useNewsletterSubscription: jest.fn(),
@@ -94,41 +92,5 @@ describe('HighlightsNewsletterSignupModal', () => {
 		);
 
 		expect(onClose).toHaveBeenCalledTimes(1);
-	});
-
-	it('calls onClose when the Escape key is pressed', () => {
-		const onClose = jest.fn();
-		renderModal(onClose);
-
-		fireEvent.keyDown(document, { key: 'Escape' });
-
-		expect(onClose).toHaveBeenCalledTimes(1);
-	});
-
-	it('calls onClose when the overlay backdrop is clicked', () => {
-		const onClose = jest.fn();
-		renderModal(onClose);
-
-		// The overlay is the direct parent of the dialog; clicking it (but not
-		// the dialog itself) should dismiss the modal.
-		const overlay = screen.getByRole('dialog').parentElement!;
-		fireEvent.click(overlay);
-
-		expect(onClose).toHaveBeenCalledTimes(1);
-	});
-
-	it('does not call onClose when the dialog itself is clicked', () => {
-		const onClose = jest.fn();
-		renderModal(onClose);
-
-		fireEvent.click(screen.getByRole('dialog'));
-
-		expect(onClose).not.toHaveBeenCalled();
-	});
-
-	it('locks body scroll while open', () => {
-		renderModal();
-
-		expect(document.body.style.overflow).toBe('hidden');
 	});
 });

@@ -82,10 +82,6 @@ const closeButtonStyles = css`
 	}
 `;
 
-const contentStyles = css`
-	padding: 0;
-`;
-
 const visuallyHiddenStyles = css`
 	position: absolute;
 	width: 1px;
@@ -140,26 +136,24 @@ export const HighlightsNewsletterSignupModal = ({
 					css={heroStyles(newsletter.illustrationCard)}
 					aria-hidden="true"
 				/>
-				<div css={contentStyles}>
-					<NewsletterSignupCard
-						name={newsletter.name}
+				<NewsletterSignupCard
+					name={newsletter.name}
+					frequency={newsletter.frequency}
+					description={newsletter.description}
+					isModal={true}
+				>
+					<NewsletterSignupForm
+						newsletterId={newsletter.identityName}
+						newsletterName={newsletter.name}
 						frequency={newsletter.frequency}
-						description={newsletter.description}
 						isModal={true}
-					>
-						<NewsletterSignupForm
-							newsletterId={newsletter.identityName}
-							newsletterName={newsletter.name}
-							frequency={newsletter.frequency}
-							isModal={true}
-							isAlreadySubscribed={isSubscribed === true}
-							abTest={{
-								name: 'highlights-newsletter-card',
-								variant: 'highlightsCard',
-							}}
-						/>
-					</NewsletterSignupCard>
-				</div>
+						isAlreadySubscribed={isSubscribed === true}
+						abTest={{
+							name: 'highlights-newsletter-card',
+							variant: 'highlightsCard',
+						}}
+					/>
+				</NewsletterSignupCard>
 			</FormatBoundary>
 		</ModalOverlay>
 	);

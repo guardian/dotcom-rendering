@@ -164,15 +164,15 @@ export const HighlightsNewsletterCard = ({
 		if (renderingTarget === 'Web') {
 			event.preventDefault();
 			setIsModalOpen(true);
-		}
 
-		sendNewsletterSignupEvent({
-			action: 'EXPAND',
-			identityName: newsletter.identityName,
-			componentId,
-			renderingTarget,
-			value: { eventDescription: 'highlights-card-modal-opened' },
-		});
+			sendNewsletterSignupEvent({
+				action: 'EXPAND',
+				identityName: newsletter.identityName,
+				componentId,
+				renderingTarget,
+				value: { eventDescription: 'highlights-card-modal-opened' },
+			});
+		}
 	};
 
 	const newsletterImageSrc =
