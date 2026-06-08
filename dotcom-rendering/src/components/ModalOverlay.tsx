@@ -1,11 +1,30 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+	createContext,
+	useCallback,
+	useContext,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 import { createPortal } from 'react-dom';
 import { getZIndex } from '../lib/getZIndex';
 
 const OPEN_ANIMATION_DURATION_MS = 300;
 const CLOSE_ANIMATION_DURATION_MS = 225;
+
+const ModalRequestCloseContext = createContext<(() => void) | null>(null);
+
+export const useModalRequestClose = (): (() => void) => {
+	const ctx = useContext(ModalRequestCloseContext);
+	if (ctx === null) {
+		throw new Error(
+			'useModalRequestClose must be used inside ModalOverlay',
+		);
+	}
+	return ctx;
+};
 
 const FOCUSABLE_SELECTOR =
 	'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
@@ -268,7 +287,9 @@ export const ModalOverlay = ({
 				tabIndex={-1}
 				css={dialogStyles({ isVisible, dialogCss })}
 			>
-				{children}
+				<ModalRequestCloseContext.Provider value={requestClose}>
+					{children}
+				</ModalRequestCloseContext.Provider>
 			</div>
 		</div>,
 		document.body,

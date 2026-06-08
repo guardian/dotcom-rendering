@@ -15,7 +15,7 @@ import { generateImageURL } from '../../../lib/image';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import type { Newsletter } from '../../../types/content';
 import { FormatBoundary } from '../../FormatBoundary';
-import { ModalOverlay } from '../../ModalOverlay';
+import { ModalOverlay, useModalRequestClose } from '../../ModalOverlay';
 import { NewsletterSignupCard } from '../../NewsletterSignupCard';
 import { NewsletterSignupForm } from '../../NewsletterSignupForm.island';
 
@@ -99,6 +99,60 @@ type Props = {
 	onClose: () => void;
 };
 
+const HighlightsNewsletterSignupModalContent = ({
+	newsletter,
+	titleId,
+	isSubscribed,
+}: {
+	newsletter: Newsletter;
+	titleId: string;
+	isSubscribed: boolean | undefined;
+}) => {
+	const requestClose = useModalRequestClose();
+
+	return (
+		<FormatBoundary format={HIGHLIGHTS_MODAL_FORMAT}>
+			<div css={closeButtonWrapperStyles}>
+				<Button
+					size="small"
+					priority="tertiary"
+					onClick={requestClose}
+					icon={<SvgCross size="small" />}
+					hideLabel={true}
+					cssOverrides={closeButtonStyles}
+				>
+					Close signup form
+				</Button>
+			</div>
+			<h2 id={titleId} css={visuallyHiddenStyles}>
+				Sign up to {newsletter.name}
+			</h2>
+			<div
+				css={heroStyles(newsletter.illustrationCard)}
+				aria-hidden="true"
+			/>
+			<NewsletterSignupCard
+				name={newsletter.name}
+				frequency={newsletter.frequency}
+				description={newsletter.description}
+				isModal={true}
+			>
+				<NewsletterSignupForm
+					newsletterId={newsletter.identityName}
+					newsletterName={newsletter.name}
+					frequency={newsletter.frequency}
+					isModal={true}
+					isAlreadySubscribed={isSubscribed === true}
+					abTest={{
+						name: 'highlights-newsletter-card',
+						variant: 'highlightsCard',
+					}}
+				/>
+			</NewsletterSignupCard>
+		</FormatBoundary>
+	);
+};
+
 export const HighlightsNewsletterSignupModal = ({
 	newsletter,
 	onClose,
@@ -116,45 +170,11 @@ export const HighlightsNewsletterSignupModal = ({
 			onClose={onClose}
 			dialogCss={dialogStyles}
 		>
-			<FormatBoundary format={HIGHLIGHTS_MODAL_FORMAT}>
-				<div css={closeButtonWrapperStyles}>
-					<Button
-						size="small"
-						priority="tertiary"
-						onClick={onClose}
-						icon={<SvgCross size="small" />}
-						hideLabel={true}
-						cssOverrides={closeButtonStyles}
-					>
-						Close signup form
-					</Button>
-				</div>
-				<h2 id={titleId} css={visuallyHiddenStyles}>
-					Sign up to {newsletter.name}
-				</h2>
-				<div
-					css={heroStyles(newsletter.illustrationCard)}
-					aria-hidden="true"
-				/>
-				<NewsletterSignupCard
-					name={newsletter.name}
-					frequency={newsletter.frequency}
-					description={newsletter.description}
-					isModal={true}
-				>
-					<NewsletterSignupForm
-						newsletterId={newsletter.identityName}
-						newsletterName={newsletter.name}
-						frequency={newsletter.frequency}
-						isModal={true}
-						isAlreadySubscribed={isSubscribed === true}
-						abTest={{
-							name: 'highlights-newsletter-card',
-							variant: 'highlightsCard',
-						}}
-					/>
-				</NewsletterSignupCard>
-			</FormatBoundary>
+			<HighlightsNewsletterSignupModalContent
+				newsletter={newsletter}
+				titleId={titleId}
+				isSubscribed={isSubscribed}
+			/>
 		</ModalOverlay>
 	);
 };
