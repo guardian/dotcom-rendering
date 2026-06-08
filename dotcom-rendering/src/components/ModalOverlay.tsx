@@ -69,6 +69,7 @@ const overlayStyles = (isVisible: boolean) => css`
 
 	@media (prefers-reduced-motion: reduce) {
 		transition: none;
+		background-color: rgba(0, 0, 0, 0.75);
 	}
 `;
 
@@ -130,6 +131,16 @@ export const ModalOverlay = ({
 			return;
 		}
 
+		const prefersReducedMotion =
+			window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ??
+			false;
+
+		if (prefersReducedMotion) {
+			closeTimeoutRef.current = 0;
+			onClose();
+			return;
+		}
+
 		setIsVisible(false);
 		closeTimeoutRef.current = window.setTimeout(() => {
 			closeTimeoutRef.current = null;
@@ -139,6 +150,15 @@ export const ModalOverlay = ({
 
 	// Trigger open animation on mount
 	useEffect(() => {
+		const prefersReducedMotion =
+			window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ??
+			false;
+
+		if (prefersReducedMotion) {
+			setIsVisible(true);
+			return;
+		}
+
 		const animationFrameId = window.requestAnimationFrame(() => {
 			setIsVisible(true);
 		});
