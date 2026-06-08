@@ -6,10 +6,11 @@ import {
 } from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
 import { useEffect, useId, useRef } from 'react';
-import { useNewsletterSubscription } from '../../lib/useNewsletterSubscription';
-import type { Newsletter } from '../../types/content';
-import { NewsletterSignupCard } from '../NewsletterSignupCard';
-import { NewsletterSignupForm } from '../NewsletterSignupForm.island';
+import { generateImageURL } from '../../../lib/image';
+import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
+import type { Newsletter } from '../../../types/content';
+import { NewsletterSignupCard } from '../../NewsletterSignupCard';
+import { NewsletterSignupForm } from '../../NewsletterSignupForm.island';
 
 const overlayStyles = css`
 	position: fixed;
@@ -52,7 +53,9 @@ const heroStyles = (imageSrc?: string) => css`
 	width: 100%;
 	height: 136px;
 	background-color: ${sourcePalette.neutral[86]};
-	background-image: ${imageSrc ? `url(${imageSrc})` : 'none'};
+	background-image: ${imageSrc !== undefined
+		? `url(${generateImageURL({ mainImage: imageSrc, imageWidth: 560, resolution: 'high' })})`
+		: 'none'};
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -92,9 +95,6 @@ export const HighlightsNewsletterSignupModal = ({
 	newsletter,
 	onClose,
 }: Props) => {
-	const heroImage =
-		newsletter.illustrationCard ?? newsletter.illustrationSquare;
-
 	const isSubscribed = useNewsletterSubscription(
 		newsletter.listId,
 		window.guardian.config.page.idApiUrl,
@@ -166,7 +166,10 @@ export const HighlightsNewsletterSignupModal = ({
 				<h2 id={titleId} css={visuallyHiddenStyles}>
 					Sign up to {newsletter.name}
 				</h2>
-				<div css={heroStyles(heroImage)} aria-hidden="true" />
+				<div
+					css={heroStyles(newsletter.illustrationCard)}
+					aria-hidden="true"
+				/>
 				<div css={contentStyles}>
 					<NewsletterSignupCard
 						name={newsletter.name}

@@ -9,21 +9,21 @@ import {
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
-import type { ArticleFormat } from '../../lib/articleFormat';
-import { getZIndex } from '../../lib/getZIndex';
+import type { ArticleFormat } from '../../../lib/articleFormat';
+import { getZIndex } from '../../../lib/getZIndex';
 import {
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	sendNewsletterSignupEvent,
-} from '../../lib/newsletterSignupTracking';
-import { useIsInView } from '../../lib/useIsInView';
-import { palette } from '../../palette';
-import type { Newsletter } from '../../types/content';
-import type { DCRFrontImage } from '../../types/front';
-import type { RenderingTarget } from '../../types/renderingTarget';
-import { CardHeadline } from '../CardHeadline';
-import type { Loading } from '../CardPicture';
-import { FormatBoundary } from '../FormatBoundary';
-import { HighlightsCardImage } from './HighlightsCardImage';
+} from '../../../lib/newsletterSignupTracking';
+import { useIsInView } from '../../../lib/useIsInView';
+import { palette } from '../../../palette';
+import type { Newsletter } from '../../../types/content';
+import type { DCRFrontImage } from '../../../types/front';
+import type { RenderingTarget } from '../../../types/renderingTarget';
+import { CardHeadline } from '../../CardHeadline';
+import type { Loading } from '../../CardPicture';
+import { FormatBoundary } from '../../FormatBoundary';
+import { HighlightsCardImage } from '../HighlightsCardImage';
 import { HighlightsNewsletterSignupModal } from './HighlightsNewsletterSignupModal';
 
 type Props = {

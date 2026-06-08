@@ -1,24 +1,24 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { newsletterCard } from '../../../fixtures/manual/highlights-trails';
-import { sendNewsletterSignupEvent } from '../../lib/newsletterSignupTracking';
-import { useIsInView } from '../../lib/useIsInView';
-import { ConfigProvider } from '../ConfigContext';
-import { HighlightsCardImage } from './HighlightsCardImage';
+import { newsletterCard } from '../../../../fixtures/manual/highlights-trails';
+import { sendNewsletterSignupEvent } from '../../../lib/newsletterSignupTracking';
+import { useIsInView } from '../../../lib/useIsInView';
+import { ConfigProvider } from '../../ConfigContext';
+import { HighlightsCardImage } from '../HighlightsCardImage';
 import { HighlightsNewsletterCard } from './HighlightsNewsletterCard';
 
-jest.mock('../../lib/newsletterSignupTracking', () => ({
+jest.mock('../../../lib/newsletterSignupTracking', () => ({
 	sendNewsletterSignupEvent: jest.fn(),
 	NEWSLETTER_SIGNUP_COMPONENT_ID: {
 		highlightsCard: (id: string) => `highlights-card-${id}`,
 	},
 }));
 
-jest.mock('../../lib/useIsInView', () => ({
+jest.mock('../../../lib/useIsInView', () => ({
 	useIsInView: jest.fn(),
 }));
 
-jest.mock('./HighlightsCardImage', () => ({
+jest.mock('../HighlightsCardImage', () => ({
 	HighlightsCardImage: jest.fn(() => (
 		<div data-testid="highlights-card-image" />
 	)),

@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { newsletterCard } from '../../../fixtures/manual/highlights-trails';
-import { useNewsletterSubscription } from '../../lib/useNewsletterSubscription';
-import { ConfigProvider } from '../ConfigContext';
+import { newsletterCard } from '../../../../fixtures/manual/highlights-trails';
+import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
+import { ConfigProvider } from '../../ConfigContext';
 import { HighlightsNewsletterSignupModal } from './HighlightsNewsletterSignupModal';
 
 // Only mock what cannot run in jsdom: the signup form (reCAPTCHA, identity
@@ -10,11 +10,11 @@ import { HighlightsNewsletterSignupModal } from './HighlightsNewsletterSignupMod
 // the portal, dialog markup, close button, keyboard/overlay dismissal —
 // is rendered and tested for real.
 
-jest.mock('../../lib/useNewsletterSubscription', () => ({
+jest.mock('../../../lib/useNewsletterSubscription', () => ({
 	useNewsletterSubscription: jest.fn(),
 }));
 
-jest.mock('../NewsletterSignupForm.island', () => ({
+jest.mock('../../NewsletterSignupForm.island', () => ({
 	NewsletterSignupForm: jest.fn(
 		({ isAlreadySubscribed }: { isAlreadySubscribed: boolean }) => (
 			<div

@@ -1,9 +1,9 @@
 import { mocked } from 'storybook/test';
-import preview from '../../../.storybook/preview';
-import { newsletterCard } from '../../../fixtures/manual/highlights-trails';
-import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
-import { useIsSignedIn } from '../../lib/useAuthStatus';
-import { useNewsletterSubscription } from '../../lib/useNewsletterSubscription';
+import preview from '../../../../.storybook/preview';
+import { newsletterCard } from '../../../../fixtures/manual/highlights-trails';
+import { lazyFetchEmailWithTimeout } from '../../../lib/fetchEmail';
+import { useIsSignedIn } from '../../../lib/useAuthStatus';
+import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import { HighlightsNewsletterSignupModal } from './HighlightsNewsletterSignupModal';
 
 const newsletter = newsletterCard.newsletterData!;
