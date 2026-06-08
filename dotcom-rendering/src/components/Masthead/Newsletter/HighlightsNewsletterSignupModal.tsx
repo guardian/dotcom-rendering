@@ -6,6 +6,7 @@ import {
 } from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
 import { useEffect, useId, useRef } from 'react';
+import { getZIndex } from '../../../lib/getZIndex';
 import { generateImageURL } from '../../../lib/image';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import type { Newsletter } from '../../../types/content';
@@ -20,7 +21,7 @@ const overlayStyles = css`
 	justify-content: center;
 	padding-top: ${space[3]}px;
 	background-color: rgba(0, 0, 0, 0.75);
-	z-index: 1000;
+	z-index: ${getZIndex('lightbox')};
 
 	${from.tablet} {
 		align-items: center;
@@ -128,12 +129,40 @@ export const HighlightsNewsletterSignupModal = ({
 	}, []);
 
 	useEffect(() => {
-		dialogRef.current?.focus();
-	}, []);
+		const dialogElement = dialogRef.current;
+		if (!dialogElement) {
+			return;
+		}
 
+		const previouslyFocusedElement =
+			document.activeElement instanceof HTMLElement
+				? document.activeElement
+				: null;
+
+		dialogElement.focus();
+
+		return () => {
+			if (
+				previouslyFocusedElement &&
+				document.contains(previouslyFocusedElement)
+			) {
+				previouslyFocusedElement.focus();
+			}
+		};
+	}, []);
 	useEffect(() => {
 		const onKeyDown = (event: KeyboardEvent) => {
+			const dialogElement = dialogRef.current;
+			if (!dialogElement) {
+				return;
+			}
+
+			if (!dialogElement.contains(document.activeElement)) {
+				return;
+			}
+
 			if (event.key === 'Escape') {
+				event.stopPropagation();
 				onClose();
 			}
 		};
