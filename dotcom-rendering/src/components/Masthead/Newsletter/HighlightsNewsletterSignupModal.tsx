@@ -6,7 +6,11 @@ import {
 } from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
 import { useId } from 'react';
-import type { ArticleFormat } from '../../../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	Pillar,
+} from '../../../lib/articleFormat';
 import { generateImageURL } from '../../../lib/image';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import type { Newsletter } from '../../../types/content';
@@ -14,6 +18,12 @@ import { FormatBoundary } from '../../FormatBoundary';
 import { ModalOverlay } from '../../ModalOverlay';
 import { NewsletterSignupCard } from '../../NewsletterSignupCard';
 import { NewsletterSignupForm } from '../../NewsletterSignupForm.island';
+
+const HIGHLIGHTS_MODAL_FORMAT = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+} as const;
 
 const dialogStyles = css`
 	background: transparent;
@@ -41,7 +51,11 @@ const heroStyles = (imageSrc?: string) => css`
 	height: 136px;
 	background-color: ${sourcePalette.neutral[86]};
 	background-image: ${imageSrc !== undefined
-		? `url(${generateImageURL({ mainImage: imageSrc, imageWidth: 560, resolution: 'high' })})`
+		? `url(${generateImageURL({
+				mainImage: imageSrc,
+				imageWidth: 560,
+				resolution: 'high',
+			})})`
 		: 'none'};
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -85,13 +99,11 @@ const visuallyHiddenStyles = css`
 `;
 
 type Props = {
-	format: ArticleFormat;
 	newsletter: Newsletter;
 	onClose: () => void;
 };
 
 export const HighlightsNewsletterSignupModal = ({
-	format,
 	newsletter,
 	onClose,
 }: Props) => {
@@ -108,7 +120,7 @@ export const HighlightsNewsletterSignupModal = ({
 			onClose={onClose}
 			dialogCss={dialogStyles}
 		>
-			<FormatBoundary format={format}>
+			<FormatBoundary format={HIGHLIGHTS_MODAL_FORMAT}>
 				<div css={closeButtonWrapperStyles}>
 					<Button
 						size="small"
