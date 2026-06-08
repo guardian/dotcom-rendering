@@ -1,4 +1,3 @@
-import type { ABTest, ABTestAPI } from '@guardian/ab-core';
 import { activeABtests } from '@guardian/ab-testing-config';
 import {
 	bypassCommercialMetricsSampling,
@@ -11,7 +10,7 @@ import {
 } from '@guardian/core-web-vitals';
 import { isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
-import { useAB, useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useBrowserId } from '../lib/useBrowserId';
 import { useDetectAdBlock } from '../lib/useDetectAdBlock';
@@ -28,12 +27,7 @@ const sampling = 1 / 100;
 /** defining this here allows to share this with other metrics */
 const willRecordCoreWebVitals = Math.random() < sampling;
 
-// For these tests switch off sampling and collect metrics for 100% of views
-const clientSideTestsToForceMetrics: ABTest[] = [
-	/* keep array multi-line */
-];
-
-const shouldCollectMetricsForBetaTests = (userTestParticipations: string[]) => {
+const shouldCollectMetricsForTests = (userTestParticipations: string[]) => {
 	const userParticipationConfigs = activeABtests.filter((test) =>
 		userTestParticipations.includes(test.name),
 	);
@@ -73,8 +67,7 @@ const useDev = () => {
  * (No visual story exists as this does not render anything)
  */
 export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
-	const abTestApi = useAB()?.api;
-	const betaABTest = useBetaAB();
+	const abTests = useAB();
 	const adBlockerInUse = useAdBlockInUse();
 	const detectedAdBlocker = useDetectAdBlock();
 
@@ -86,27 +79,24 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 	const userInServerSideTest = Object.keys(tests).length > 0;
 
-	const userBetaParticipations = betaABTest?.getParticipations() ?? {};
+	const userParticipations = abTests?.getParticipations() ?? {};
 
-	const collectBetaTestMetrics = shouldCollectMetricsForBetaTests(
-		Object.keys(userBetaParticipations),
+	const collectTestMetrics = shouldCollectMetricsForTests(
+		Object.keys(userParticipations),
 	);
 
 	const shouldBypassSampling = useCallback(
-		(api: ABTestAPI) =>
+		() =>
 			willRecordCoreWebVitals ||
 			userInServerSideTest ||
-			collectBetaTestMetrics ||
-			clientSideTestsToForceMetrics.some((test) =>
-				api.runnableTest(test),
-			),
+			collectTestMetrics,
 
-		[userInServerSideTest, collectBetaTestMetrics],
+		[userInServerSideTest, collectTestMetrics],
 	);
 
 	useEffect(
 		function coreWebVitals() {
-			if (isUndefined(abTestApi)) {
+			if (isUndefined(abTests)) {
 				return;
 			}
 			if (isUndefined(browserId)) {
@@ -119,7 +109,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				return;
 			}
 
-			const bypassSampling = shouldBypassSampling(abTestApi);
+			const bypassSampling = shouldBypassSampling();
 
 			/**
 			 * We rely on `bypassSampling` rather than the built-in sampling,
@@ -139,7 +129,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				void bypassCoreWebVitalsSampling('commercial');
 			}
 		},
-		[abTestApi, browserId, isDev, pageViewId, shouldBypassSampling],
+		[abTests, browserId, isDev, pageViewId, shouldBypassSampling],
 	);
 
 	useEffect(
@@ -149,7 +139,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				return;
 			}
 
-			if (isUndefined(abTestApi)) {
+			if (isUndefined(abTests)) {
 				return;
 			}
 			if (isUndefined(adBlockerInUse)) {
@@ -165,7 +155,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				return;
 			}
 
-			const bypassSampling = shouldBypassSampling(abTestApi);
+			const bypassSampling = shouldBypassSampling();
 
 			// This is a new detection method we are trying, so we want to record it separately to `adBlockerInUse`
 			EventTimer.get().setProperty(
@@ -191,7 +181,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				);
 		},
 		[
-			abTestApi,
+			abTests,
 			adBlockerInUse,
 			detectedAdBlocker,
 			browserId,

@@ -13,9 +13,11 @@ import {
 	ArticleSpecial,
 } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
+import { appendLinkNameMedia } from '../lib/getDataLinkName';
 import { getZIndex } from '../lib/getZIndex';
 import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
+import { useAB } from '../lib/useAB';
 import { palette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { StarRating as Rating, RatingSizeType } from '../types/content';
@@ -174,6 +176,7 @@ const overlayStyles = css`
 	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
 	 * Links define their own z-index.
 	 */
+
 	> :not(.waveform):not(a) {
 		z-index: 1;
 	}
@@ -435,6 +438,18 @@ export const FeatureCard = ({
 	starRatingSize,
 	articleMedia,
 }: Props) => {
+	const ab = useAB();
+	const isInLoopClickTestControl =
+		ab?.isUserInTestGroup(
+			'fronts-and-curation-loop-click-through',
+			'control',
+		) ?? false;
+	const isInLoopClickTestVariant =
+		ab?.isUserInTestGroup(
+			'fronts-and-curation-loop-click-through',
+			'variant',
+		) ?? false;
+
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
 	/**
@@ -452,6 +467,18 @@ export const FeatureCard = ({
 		return null;
 	}
 
+	const isInLoopClickTest =
+		media.style &&
+		media.style === 'loop-video' &&
+		(isInLoopClickTestControl || isInLoopClickTestVariant);
+
+	const mediaType =
+		media.type === 'self-hosted-video' ? media.style : media.type;
+
+	const resolvedDataLinkName = !isUndefined(dataLinkName)
+		? appendLinkNameMedia(dataLinkName, mediaType)
+		: undefined;
+
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
 
@@ -467,7 +494,7 @@ export const FeatureCard = ({
 		? getOphanComponents({
 				branding,
 				locationPrefix: 'front-card',
-		  })
+			})
 		: undefined;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
@@ -491,8 +518,12 @@ export const FeatureCard = ({
 						<CardLink
 							linkTo={linkTo}
 							headlineText={headlineText}
-							dataLinkName={dataLinkName}
+							dataLinkName={resolvedDataLinkName}
 							isExternalLink={isExternalLink}
+							isLoopClickThroughTest={isInLoopClickTest === true}
+							isLoopClickThroughTestVariant={
+								isInLoopClickTestVariant
+							}
 						/>
 					)}
 					<div css={contentStyles}>
@@ -601,6 +632,15 @@ export const FeatureCard = ({
 											controlsPosition="top"
 											minAspectRatio={aspectRatioNumber}
 											maxAspectRatio={aspectRatioNumber}
+											cardLink={{
+												headlineText,
+												dataLinkName:
+													resolvedDataLinkName,
+												isExternalLink,
+											}}
+											isInLoopClickTestVariant={
+												isInLoopClickTestVariant
+											}
 										/>
 									</Island>
 								)}
@@ -699,6 +739,12 @@ export const FeatureCard = ({
 												headlineText={headlineText}
 												dataLinkName={dataLinkName}
 												isExternalLink={isExternalLink}
+												isLoopClickThroughTest={
+													isInLoopClickTest === true
+												}
+												isLoopClickThroughTestVariant={
+													isInLoopClickTestVariant
+												}
 											/>
 										)}
 

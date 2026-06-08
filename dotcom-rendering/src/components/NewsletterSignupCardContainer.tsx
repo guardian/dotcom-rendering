@@ -31,7 +31,8 @@ const sendPreviewTracking = ({
 	sendNewsletterSignupEvent({
 		action: eventDescription === 'preview-open' ? 'EXPAND' : 'CLOSE',
 		identityName,
-		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName),
+		componentId:
+			NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(identityName),
 		renderingTarget,
 		value: { eventDescription, renderUrl, isSignedIn },
 	});
@@ -136,11 +137,11 @@ export const NewsletterSignupCardContainer = ({
 					behaviour: 'link' as const,
 					href: renderUrl ?? '',
 					onClick: trackPreviewLinkOpen,
-			  }
+				}
 			: {
 					behaviour: 'modal' as const,
 					onClick: openPreview,
-			  }
+				}
 		: undefined;
 
 	return (

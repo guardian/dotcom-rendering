@@ -211,7 +211,7 @@ const reducer = (state: State, action: Action): State => {
 									...comment.responses,
 									action.comment,
 								],
-						  }
+							}
 						: comment,
 				),
 				isExpanded: true,

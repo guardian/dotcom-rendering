@@ -41,12 +41,12 @@ export function DesignableBannerBody({
 						mainContent.paragraphs,
 						mainContent.highlightedText,
 						styles,
-				  )
+					)
 				: createBannerBodyCopy(
 						mobileContent.paragraphs,
 						mobileContent.highlightedText,
 						styles,
-				  )}
+					)}
 		</div>
 	);
 }

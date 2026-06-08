@@ -21,12 +21,6 @@ import {
 } from '../lib/edition';
 import { FootballCrest } from './FootballCrest';
 
-/**
- * Note: this component does not use the global colour palette declarations as
- * it is currently rendered in isolation via a dedicated endpoint where these
- * are unavailable. (And it would be undesirable to output the full palette.)
- */
-
 type Props = {
 	competitionTag: string;
 	matches: FootballMatches;
@@ -40,25 +34,20 @@ export const FootballMatchDay = ({
 	guardianBaseUrl,
 	edition,
 }: Props) => (
-	<section>
+	<section css={containerCss}>
+		{matches[0]?.competitions[0]?.name && (
+			<h3 css={kickerCss}>{matches[0].competitions[0].name} matchday</h3>
+		)}
 		{matches.length > 0 ? (
-			<ul
-				css={css`
-					${textSans12}
-					list-style: none;
-					margin: 0;
-					padding: 0;
-				`}
-			>
-				{matches.map(
-					(day) =>
-						day.competitions[0]?.matches.map((match) => (
-							<Match
-								key={match.paId}
-								match={match}
-								edition={edition}
-							/>
-						)),
+			<ul css={matchesCss}>
+				{matches.map((day) =>
+					day.competitions[0]?.matches.map((match) => (
+						<Match
+							key={match.paId}
+							match={match}
+							edition={edition}
+						/>
+					)),
 				)}
 			</ul>
 		) : (
@@ -68,27 +57,84 @@ export const FootballMatchDay = ({
 			href={`${guardianBaseUrl}/football/${competitionTag}/overview`}
 			css={fixtureLinkCss}
 		>
-			See all fixtures <SvgChevronRightSingleSmall size="xsmall" />
+			See all fixtures{' '}
+			<SvgChevronRightSingleSmall
+				size="xsmall"
+				theme={{ fill: 'currentColor' }}
+			/>
 		</a>
 	</section>
 );
+
+/**
+ * Note: this component does not use the global colour palette declarations as
+ * it is currently rendered in isolation via a dedicated endpoint where these
+ * are unavailable. (And it would be undesirable to output the full palette.)
+ */
+
+const containerCss = css`
+	--match-day-text: ${neutral[7]};
+	--match-day-text-live: ${neutral[7]};
+	--match-day-text-result: ${neutral[97]};
+	--match-day-background: ${sport[800]};
+	--match-day-background-live: ${brandAlt[400]};
+	--match-day-background-result: ${sport[300]};
+	--match-day-comment: ${neutral[86]};
+	--match-day-comment-live: ${neutral[10]};
+	--match-day-live: ${sport[300]};
+	--match-day-kicker: ${sport[400]};
+	--match-day-border: ${neutral[86]};
+	--match-day-crest: ${neutral[100]};
+
+	display: flex;
+	flex-direction: column;
+	gap: ${space[2]}px;
+
+	.ios,
+	.android {
+		@media (prefers-color-scheme: dark) {
+			--match-day-text: ${neutral[86]};
+			--match-day-text-live: ${neutral[7]};
+			--match-day-text-result: ${neutral[97]};
+			--match-day-background: ${neutral[20]};
+			--match-day-background-live: ${brandAlt[200]};
+			--match-day-background-result: ${sport[100]};
+			--match-day-comment: ${neutral[86]};
+			--match-day-comment-live: ${neutral[10]};
+			--match-day-live: ${sport[100]};
+			--match-day-kicker: ${sport[500]};
+		}
+	}
+`;
+
+const kickerCss = css`
+	${textSans15}
+	color: var(--match-day-kicker);
+	margin: 0;
+`;
+
+const matchesCss = css`
+	${textSans12}
+	list-style: none;
+	margin: 0;
+	padding: 0;
+`;
 
 const noMatchesCss = css`
 	${headlineMedium14}
 	margin: 0;
 	padding: 11px ${space[2]}px;
 	text-align: center;
-	color: ${neutral[7]};
-	background-color: ${sport[800]};
+	color: var(--match-day-text);
+	background-color: var(--match-day-background);
 `;
 
 const fixtureLinkCss = css`
 	${textSans15}
-	display: inline-flex;
+	display: flex;
 	align-items: center;
-	float: right;
-	margin-top: ${space[3]}px;
-	color: inherit;
+	align-self: flex-end;
+	color: var(--match-day-text);
 	text-decoration: none;
 	&:hover {
 		text-decoration: underline;
@@ -127,29 +173,30 @@ const Match = ({
 const matchTextColour = (matchKind: FootballMatch['kind']): string => {
 	switch (matchKind) {
 		case 'Fixture':
+			return 'var(--match-day-text)';
 		case 'Live':
-			return neutral[7];
+			return 'var(--match-day-text-live)';
 		case 'Result':
-			return neutral[97];
+			return 'var(--match-day-text-result)';
 	}
 };
 
 const matchBackgroundColour = (matchKind: FootballMatch['kind']): string => {
 	switch (matchKind) {
 		case 'Fixture':
-			return sport[800];
+			return 'var(--match-day-background)';
 		case 'Live':
-			return brandAlt[400];
+			return 'var(--match-day-background-live)';
 		case 'Result':
-			return sport[300];
+			return 'var(--match-day-background-result)';
 	}
 };
 
 const matchCss = (matchKind: FootballMatch['kind']) => css`
 	color: ${matchTextColour(matchKind)};
 	background-color: ${matchBackgroundColour(matchKind)};
-	& + & {
-		border-top: 1px dashed ${neutral[86]};
+	:not(:first-of-type) {
+		border-top: 1px dashed var(--match-day-border);
 	}
 `;
 
@@ -168,6 +215,10 @@ const wrapperCss = css`
 	svg {
 		grid-area: away;
 		justify-self: end;
+	}
+
+	&:hover {
+		text-decoration: none;
 	}
 `;
 
@@ -232,7 +283,7 @@ const statusCss = css`
 const liveCss = css`
 	${textSansBold14}
 	position: relative;
-	color: ${sport[300]};
+	color: var(--match-day-live);
 	&::before {
 		display: inline-block;
 		content: '';
@@ -311,7 +362,7 @@ const Crest = ({ teamId }: { teamId: string }) => (
 			height: ${space[5]}px;
 			padding: ${space[1]}px;
 			border-radius: 100%;
-			background-color: ${neutral[100]};
+			background-color: var(--match-day-crest);
 		`}
 	>
 		<FootballCrest
@@ -339,5 +390,7 @@ const commentCss = (matchKind: FootballMatch['kind']) => css`
 	${textSansItalic12}
 	grid-area: comment;
 	text-align: center;
-	color: ${matchKind === 'Live' ? neutral[10] : neutral[86]};
+	color: ${matchKind === 'Live'
+		? 'var(--match-day-comment-live)'
+		: 'var(--match-day-comment)'};
 `;

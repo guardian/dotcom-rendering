@@ -12,7 +12,6 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-	filterKeyEvents: boolean;
 	enhanceTweetsSwitch: boolean;
 	onFirstPage: boolean;
 	webURL: string;
@@ -114,7 +113,6 @@ function getKey(
 	pageId: string,
 	ajaxUrl: string,
 	latestBlockId: string,
-	filterKeyEvents: boolean,
 ): string | undefined {
 	try {
 		// Construct the url to poll
@@ -122,10 +120,6 @@ function getKey(
 		url.searchParams.set('lastUpdate', latestBlockId);
 		url.searchParams.set('isLivePage', 'true');
 		url.searchParams.set('dcr', 'true');
-		url.searchParams.set(
-			'filterKeyEvents',
-			filterKeyEvents ? 'true' : 'false',
-		);
 
 		return url.href;
 	} catch {
@@ -154,7 +148,6 @@ export const Liveness = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
-	filterKeyEvents,
 	enhanceTweetsSwitch,
 	onFirstPage,
 	webURL,
@@ -230,8 +223,8 @@ export const Liveness = ({
 	}, [onSuccess]);
 
 	useEffect(() => {
-		setKey(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents));
-	}, [pageId, ajaxUrl, latestBlockId, filterKeyEvents]);
+		setKey(getKey(pageId, ajaxUrl, latestBlockId));
+	}, [pageId, ajaxUrl, latestBlockId]);
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(key, {

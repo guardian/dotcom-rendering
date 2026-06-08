@@ -25,7 +25,6 @@ import {
 	getTagPageBannerAdPositions,
 	getTagPageMobileAdPositions,
 } from '../lib/getTagPageAdPositions';
-import { useBetaAB } from '../lib/useAB';
 import { worldCup2026PageIds } from '../lib/worldCup2026';
 import { enhanceTags } from '../model/enhanceTags';
 import type { NavType } from '../model/extract-nav';
@@ -68,11 +67,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
 
-	const ab = useBetaAB();
-
-	const isWorldCup2026 =
-		worldCup2026PageIds.includes(pageId) &&
-		ab?.isUserInTest('webx-world-cup-2026-subnav');
+	const isWorldCup2026 = worldCup2026PageIds.includes(pageId);
 
 	return (
 		<>
@@ -130,7 +125,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								groupedTrails.day,
 								groupedTrails.month,
 								groupedTrails.year,
-						  ].join(' ');
+							].join(' ');
 
 					const containerId = title
 						.replaceAll(' ', '-')
@@ -138,13 +133,13 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 					const url = groupedTrails.day
 						? '/' +
-						  joinUrl(
+							joinUrl(
 								tagPage.pageId,
 								groupedTrails.year,
 								groupedTrails.month.slice(0, 3).toLowerCase(),
 								groupedTrails.day.padStart(2, '0'),
 								'all',
-						  )
+							)
 						: undefined;
 
 					/**

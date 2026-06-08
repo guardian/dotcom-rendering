@@ -118,10 +118,18 @@ const sendTracking = (
 	abTest?: AbTest,
 	extraDetails?: Record<string, unknown>,
 ): void => {
+	const componentId =
+		abTest?.variant === 'variantIllustratedCard'
+			? NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
+					newsletterId,
+				)
+			: abTest?.variant === 'variantNewField'
+				? NEWSLETTER_SIGNUP_COMPONENT_ID.variantNewField(newsletterId)
+				: NEWSLETTER_SIGNUP_COMPONENT_ID.control(newsletterId);
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
 		identityName: newsletterId,
-		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(newsletterId),
+		componentId,
 		renderingTarget,
 		value: {
 			...extraDetails,

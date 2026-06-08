@@ -64,7 +64,6 @@ export const SingleKeyEventCarousel = () => {
 		<Wrapper>
 			<KeyEventsCarousel
 				keyEvents={SingleKeyEvent}
-				filterKeyEvents={false}
 				id="key-events-carousel-desktop"
 				renderingTarget="Web"
 			/>
@@ -78,7 +77,6 @@ export const ShortKeyEventCarousel = () => {
 		<Wrapper>
 			<KeyEventsCarousel
 				keyEvents={ShortKeyEvents}
-				filterKeyEvents={false}
 				id="key-events-carousel-desktop"
 				renderingTarget="Web"
 			/>
@@ -92,7 +90,6 @@ export const LongKeyEventCarousel = () => {
 		<Wrapper>
 			<KeyEventsCarousel
 				keyEvents={LongKeyEvents}
-				filterKeyEvents={false}
 				id="key-events-carousel-desktop"
 				renderingTarget="Web"
 			/>

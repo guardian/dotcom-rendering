@@ -7,9 +7,11 @@ import {
 } from '@guardian/source/foundations';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
+import { getZIndex } from '../lib/getZIndex';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
+import { CardLink } from './Card/components/CardLink';
 import {
 	AudioIcon as AudioIconComponent,
 	FullscreenIcon,
@@ -41,9 +43,14 @@ const videoControlsStyles = css`
 	top: 0;
 	left: 0;
 	pointer-events: none;
+
 	& > * {
 		pointer-events: auto;
 	}
+`;
+
+const videoControlsZIndexStyles = css`
+	z-index: ${getZIndex('video-controls-container')};
 `;
 
 const interactiveStyles = css`
@@ -98,6 +105,7 @@ export const PLAYER_STATES = [
 	 * For example, iOS devices in low power mode will suspend playback on autoplaying videos.
 	 */
 	'PAUSED_BY_BROWSER',
+	'ENDED',
 ] as const;
 
 export type PlayerStates = (typeof PLAYER_STATES)[number];
@@ -111,6 +119,7 @@ export type Props = {
 	aspectRatio: number;
 	FallbackImageComponent: ReactElement;
 	currentTime: number;
+	duration?: number;
 	hasAudio: boolean;
 	isMuted: boolean;
 	handleLoadedMetadata: (event: SyntheticEvent) => void;
@@ -121,10 +130,12 @@ export type Props = {
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
 	handleProgressBarInput: (event: React.FormEvent<HTMLInputElement>) => void;
+	handleProgressBarSeekStart: () => void;
+	handleProgressBarSeekEnd: () => void;
 	handleTimeUpdate: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick: (event: SyntheticEvent) => void;
-	updateCurrentTime: (time: number) => void;
+	handleEnded?: (event: SyntheticEvent) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	posterImage?: string;
 	preloadPartialData: boolean;
@@ -143,6 +154,14 @@ export type Props = {
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
 	isWebKitFullscreen: boolean;
+	/* used by the card link component for click through to article functionality */
+	linkTo: string;
+	cardLink?: {
+		headlineText: string;
+		dataLinkName?: string;
+		isExternalLink: boolean;
+	};
+	isLoopClickThroughTestVariant?: boolean;
 };
 
 /**
@@ -166,6 +185,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			FallbackImageComponent,
 			posterImage,
 			currentTime,
+			duration,
 			hasAudio,
 			isMuted,
 			handleLoadedMetadata,
@@ -176,16 +196,18 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleAudioClick,
 			handleKeyDown,
 			handleProgressBarInput,
+			handleProgressBarSeekStart,
+			handleProgressBarSeekEnd,
 			handleTimeUpdate,
 			handlePause,
 			handleFullscreenClick,
-			updateCurrentTime,
+			handleEnded,
 			onError,
 			preloadPartialData,
-			showProgressBar: canShowProgressBar,
+			showProgressBar,
 			useLongFormProgressBar,
 			showPlayPauseIcon,
-			showIcons: canShowIcons,
+			showIcons,
 			showFullscreenIcon,
 			showSubtitles: canShowSubtitles,
 			subtitleSource,
@@ -196,20 +218,29 @@ export const SelfHostedVideoPlayer = forwardRef(
 			iconsPosition,
 			subtitlesPosition,
 			isWebKitFullscreen,
+			linkTo,
+			cardLink,
+			isLoopClickThroughTestVariant,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const videoId = `video-${uniqueId}`;
 
-		const currentRefExists = ref && 'current' in ref && !!ref.current;
-
-		const showSubtitles = canShowSubtitles && !!subtitleSource;
+		const showSubtitles = canShowSubtitles && subtitleSource !== undefined;
 		const showCustomSubtitles = showSubtitles && !isWebKitFullscreen;
-		const showProgressBar = canShowProgressBar && currentRefExists;
-		const showIcons = canShowIcons && currentRefExists;
 
 		return (
 			<>
+				{cardLink && isLoopClickThroughTestVariant === true && (
+					<CardLink
+						linkTo={linkTo}
+						headlineText={cardLink.headlineText}
+						dataLinkName={cardLink.dataLinkName}
+						isExternalLink={cardLink.isExternalLink}
+						isLoopClickThroughTest={true}
+						isLoopClickThroughTestVariant={true}
+					/>
+				)}
 				<video
 					id={videoId}
 					css={[
@@ -237,9 +268,14 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onPlaying={handlePlaying}
 					onTimeUpdate={handleTimeUpdate}
 					onPause={handlePause}
-					onClick={handlePlayPauseClick}
+					onClick={
+						isLoopClickThroughTestVariant === true
+							? undefined
+							: handlePlayPauseClick
+					}
 					onKeyDown={handleKeyDown}
 					onError={onError}
+					onEnded={handleEnded}
 					disablePictureInPicture={true}
 				>
 					{sources.map(({ src, mimeType }) => (
@@ -264,39 +300,51 @@ export const SelfHostedVideoPlayer = forwardRef(
 					)}
 					{FallbackImageComponent}
 				</video>
-				{showCustomSubtitles && !!activeCue?.text && (
+				{showCustomSubtitles && activeCue?.text !== undefined && (
 					<SubtitleOverlay
 						text={activeCue.text}
 						size={subtitleSize}
 						position={subtitlesPosition}
 					/>
 				)}
-				<div className="controls-container" css={videoControlsStyles}>
-					{showPlayPauseIcon !== null && (
-						<PlayPauseIcon
-							type={showPlayPauseIcon}
-							atomId={atomId}
-							handleClick={handlePlayPauseClick}
-						/>
-					)}
+				<div
+					className="controls-container"
+					css={[
+						videoControlsStyles,
+						isLoopClickThroughTestVariant === true &&
+							videoControlsZIndexStyles,
+					]}
+				>
+					{!isLoopClickThroughTestVariant &&
+						showPlayPauseIcon !== null && (
+							<PlayPauseIcon
+								type={showPlayPauseIcon}
+								atomId={atomId}
+								handleClick={handlePlayPauseClick}
+								isLoopClickThroughTest={false}
+							/>
+						)}
 					{showProgressBar &&
+						duration !== undefined &&
 						(useLongFormProgressBar ? (
 							<VideoProgressBarInteractive
 								videoId={videoId}
 								currentTime={currentTime}
-								duration={ref.current!.duration}
-								updateCurrentTime={updateCurrentTime}
+								duration={duration}
 								handleKeyDown={handleKeyDown}
 								handleInput={handleProgressBarInput}
+								onSeekStart={handleProgressBarSeekStart}
+								onSeekEnd={handleProgressBarSeekEnd}
 							/>
 						) : (
 							<VideoProgressBar
 								videoId={videoId}
 								currentTime={currentTime}
-								duration={ref.current!.duration}
+								duration={duration}
 							/>
 						))}
-					{showIcons && (showFullscreenIcon || hasAudio) && (
+					{((showIcons && (showFullscreenIcon || hasAudio)) ||
+						isLoopClickThroughTestVariant === true) && (
 						<div
 							css={[
 								iconsContainerStyles,
@@ -308,6 +356,14 @@ export const SelfHostedVideoPlayer = forwardRef(
 									iconsTopPositionStyles,
 							]}
 						>
+							{isLoopClickThroughTestVariant === true && (
+								<PlayPauseIcon
+									type={showPlayPauseIcon ?? 'pause'}
+									atomId={atomId}
+									handleClick={handlePlayPauseClick}
+									isLoopClickThroughTest={true}
+								/>
+							)}
 							{showFullscreenIcon && (
 								<FullscreenIcon
 									handleClick={handleFullscreenClick}
@@ -326,3 +382,4 @@ export const SelfHostedVideoPlayer = forwardRef(
 		);
 	},
 );
+SelfHostedVideoPlayer.displayName = 'SelfHostedVideoPlayer';

@@ -151,13 +151,13 @@ const scrollTo = (
 const getPreviousPosition = (position: number, length: number): number =>
 	position <= 1
 		? // Cycle around to the end
-		  length
+			length
 		: position - 1;
 
 const getNextPosition = (position: number, length: number): number =>
 	position >= length
 		? // Cycle back to the start
-		  1
+			1
 		: position + 1;
 
 const eagerLoad = (images: HTMLImageElement[], position: number) => {

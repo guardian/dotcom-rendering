@@ -110,7 +110,7 @@ export const YoutubeAtomOverlay = ({
 							hidePillOnMobile
 								? css`
 										display: none;
-								  `
+									`
 								: pillStyles
 						}
 					>
@@ -125,7 +125,7 @@ export const YoutubeAtomOverlay = ({
 							hidePillOnMobile
 								? css`
 										display: none;
-								  `
+									`
 								: pillStyles
 						}
 					>

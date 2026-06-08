@@ -1,4 +1,3 @@
-import { AB } from '@guardian/ab-core';
 import { setCookie, storage } from '@guardian/libs';
 import { resets } from '@guardian/source/foundations';
 import { palette as sourcePalette } from '@guardian/source/foundations';
@@ -12,6 +11,7 @@ import { Lazy } from '../src/components/Lazy';
 import { Picture } from '../src/components/Picture';
 import { rawFontsCss } from '../src/lib/fonts-css';
 import { mockFetch } from '../src/lib/mockRESTCalls';
+import { ABTests } from '../src/experiments/lib/ab-tests';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
 import {
@@ -42,19 +42,7 @@ global.fetch = mockFetch;
 // Fix the date to prevent false negatives
 MockDate.set('Sat Jan 1 2022 12:00:00 GMT+0000 (Greenwich Mean Time)');
 
-setABTests({
-	api: new AB({
-		mvtMaxValue: 1_000_000,
-		mvtId: 1234,
-		pageIsSensitive: false,
-		abTestSwitches: {},
-		arrayOfTestObjects: [],
-		serverSideTests: {},
-		ophanRecord: () => {},
-		errorReporter: () => {},
-	}),
-	participations: {},
-});
+setABTests(new ABTests({ isServer: true, serverSideABTests: {} }));
 
 // Add base css for the site
 const css = `${rawFontsCss}${resets.resetCSS}`;

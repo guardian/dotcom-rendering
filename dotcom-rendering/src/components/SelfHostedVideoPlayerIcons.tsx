@@ -90,12 +90,14 @@ type PlayPauseIconProps = {
 	type: 'play' | 'pause';
 	atomId: SelfHostedVideoPlayerProps['atomId'];
 	handleClick: SelfHostedVideoPlayerProps['handlePlayPauseClick'];
+	isLoopClickThroughTest: boolean;
 };
 
 export const PlayPauseIcon = ({
 	type,
 	atomId,
 	handleClick,
+	isLoopClickThroughTest,
 }: PlayPauseIconProps) => {
 	const IconComponent =
 		type === 'play' ? SvgMediaControlsPlay : SvgMediaControlsPause;
@@ -104,7 +106,13 @@ export const PlayPauseIcon = ({
 		<button
 			type="button"
 			onClick={handleClick}
-			css={[buttonStyles, playPauseButtonStyles]}
+			className="play-pause-icon"
+			css={[
+				buttonStyles,
+				isLoopClickThroughTest
+					? iconContainerStyles
+					: playPauseButtonStyles,
+			]}
 			data-link-name={`gu-video-loop-${type}-${atomId}`}
 			data-testid={`${type}-icon`}
 		>

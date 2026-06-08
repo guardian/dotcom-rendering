@@ -24,7 +24,7 @@ const expiredOverlayStyles = (overrideImage?: string) =>
 				padding-bottom: 56%;
 				color: ${palette.neutral[100]};
 				background-color: ${palette.neutral[20]};
-		  `
+			`
 		: undefined;
 
 const expiredTextWrapperStyles = css`

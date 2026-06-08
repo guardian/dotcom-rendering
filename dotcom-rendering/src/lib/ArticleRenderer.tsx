@@ -224,7 +224,7 @@ export const ArticleRenderer = ({
 						isDev,
 						contributionsServiceUrl,
 						editionId,
-				  })}
+					})}
 		</div>
 	); // classname that space finder is going to target for in-body ads in DCR
 };

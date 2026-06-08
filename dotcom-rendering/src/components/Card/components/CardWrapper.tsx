@@ -58,11 +58,11 @@ const hoverStyles = css`
 	  * a click won't result in navigating to the main article
 	*/
 	:has(
-			ul.sublinks:hover,
-			.video-container:not(.cinemagraph):hover,
-			.slideshow-carousel-footer:hover,
-			.branding-logo:hover
-		) {
+		ul.sublinks:hover,
+		.video-container:not(.cinemagraph):hover,
+		.slideshow-carousel-footer:hover,
+		.branding-logo:hover
+	) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
