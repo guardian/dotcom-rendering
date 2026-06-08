@@ -9,7 +9,7 @@ const meta = preview.meta({
 	component: StackedProducts,
 	args: {
 		products: exampleAtAGlanceProductArray,
-		heading: 'At a glance',
+		title: 'At a glance',
 		format: {
 			design: ArticleDesign.Review,
 			display: ArticleDisplay.Standard,

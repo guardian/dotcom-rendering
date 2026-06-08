@@ -18,6 +18,7 @@ const meta = preview.meta({
 		},
 	},
 	args: {
+		title: 'At a glance',
 		products: [
 			{
 				...exampleProduct,
