@@ -7,7 +7,7 @@ import {
 import { useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { ProductBlockElement } from '../types/content';
+import type { EnhancedProductSummaryMap } from '../types/content';
 import { HorizontalSummaryProductCard } from './HorizontalSummaryProductCard';
 import { Subheading } from './Subheading';
 
@@ -35,7 +35,7 @@ export const StackedProducts = ({
 	format,
 	showAllProducts,
 }: {
-	products: ProductBlockElement[];
+	products: EnhancedProductSummaryMap[];
 	title: string;
 	format: ArticleFormat;
 	showAllProducts: boolean;
@@ -78,9 +78,12 @@ export const StackedProducts = ({
 					`,
 				]}
 			>
-				{products.map((product: ProductBlockElement, index) => (
+				{products.map((product: EnhancedProductSummaryMap, index) => (
 					<div
-						key={index}
+						key={
+							product.productBlock.productCtas[0]?.url ??
+							product.productBlock.elementId
+						}
 						data-component={`at-a-glance-stacked-card-${
 							showAllProducts ? 'expanded' : 'default'
 						}-${index + 1}`}

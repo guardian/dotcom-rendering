@@ -7,7 +7,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
-import type { ProductBlockElement } from '../types/content';
+import type { EnhancedProductSummaryMap } from '../types/content';
 import { CarouselCount } from './CarouselCount';
 import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 import { ProductCarouselCard } from './ProductCarouselCard';
@@ -40,7 +40,7 @@ export type FixedSlideWidth = {
 
 type Props = {
 	title: string;
-	products: ProductBlockElement[];
+	products: EnhancedProductSummaryMap[];
 	format: ArticleFormat;
 };
 
@@ -301,11 +301,11 @@ export const ScrollableProduct = ({ title, products, format }: Props) => {
 					data-heatphan-type="carousel"
 				>
 					{products.map(
-						(product: ProductBlockElement, index: number) => (
+						(product: EnhancedProductSummaryMap, index: number) => (
 							<li
 								key={
-									product.productCtas[0]?.url ??
-									product.elementId
+									product.productBlock.productCtas[0]?.url ??
+									product.productBlock.elementId
 								}
 								css={[subgridStyles, leftBorderStyles]}
 								data-component={`at-a-glance-carousel-card-${

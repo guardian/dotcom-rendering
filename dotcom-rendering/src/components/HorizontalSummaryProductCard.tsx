@@ -10,7 +10,7 @@ import {
 import { Link } from '@guardian/source/react-components';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { ProductBlockElement } from '../types/content';
+import type { EnhancedProductSummaryMap } from '../types/content';
 import { ProductLinkButton } from './Button/ProductLinkButton';
 import { ProductCardImage } from './ProductCardImage';
 
@@ -81,10 +81,11 @@ export const HorizontalSummaryProductCard = ({
 	product,
 	format,
 }: {
-	product: ProductBlockElement;
+	product: EnhancedProductSummaryMap;
 	format: ArticleFormat;
 }) => {
-	const cardCta = product.productCtas[0];
+	const { productBlock, ctaIndex } = product;
+	const cardCta = productBlock.productCtas[ctaIndex];
 	if (!cardCta) {
 		return null;
 	}
@@ -95,15 +96,19 @@ export const HorizontalSummaryProductCard = ({
 				<ProductCardImage
 					xCustComponentId={'horizontal-summary-card'}
 					format={format}
-					image={product.image}
+					image={productBlock.image}
 					url={cardCta.url}
 				/>
 			</div>
 			<div css={informationContainer}>
-				<div css={productCardHeading}>{product.primaryHeadingText}</div>
-				<div css={secondaryHeading}>{product.secondaryHeadingText}</div>
+				<div css={productCardHeading}>
+					{productBlock.primaryHeadingText}
+				</div>
+				<div css={secondaryHeading}>
+					{productBlock.secondaryHeadingText}
+				</div>
 				<Link
-					href={`#${product.h2Id}`}
+					href={`#${productBlock.h2Id}`}
 					onFocus={(event) => event.stopPropagation()}
 					cssOverrides={readMore}
 					data-component="at-a-glance-stacked-card-read-more"

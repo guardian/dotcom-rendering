@@ -3,12 +3,15 @@ import type {
 	FEElement,
 	ProductBlockElement,
 	ProductSummaryElement,
+	ProductSummaryMap,
 } from '../types/content';
 
-export const productSummaryElement = (ids: string[]): ProductSummaryElement =>
+export const productSummaryElement = (
+	summaryProducts: ProductSummaryMap[],
+): ProductSummaryElement =>
 	({
 		_type: 'model.dotcomrendering.pageElements.ProductSummaryElement',
-		products: ids.map((id) => ({ productId: id, ctaIndex: 0 })),
+		products: summaryProducts,
 	}) as ProductSummaryElement;
 
 export const productElement = (

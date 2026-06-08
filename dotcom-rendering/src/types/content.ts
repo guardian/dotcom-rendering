@@ -530,17 +530,22 @@ export interface ProductSummaryMap {
 	ctaIndex: number;
 }
 
+export interface EnhancedProductSummaryMap {
+	productBlock: ProductBlockElement;
+	ctaIndex: number;
+}
+
 export interface ProductSummaryElement {
 	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
 	products: ProductSummaryMap[];
-	displayType: 'CTA_LIST' | 'CAROUSEL' | 'STACKED_CARD';
+	displayType: ProductSummaryDisplayType;
 	title: string;
 }
 
 export interface EnhancedProductSummaryElement {
 	_type: 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement';
-	products: ProductBlockElement[];
-	displayType: 'CTA_LIST' | 'CAROUSEL' | 'STACKED_CARD';
+	products: EnhancedProductSummaryMap[];
+	displayType: ProductSummaryDisplayType;
 	title: string;
 }
 
@@ -972,6 +977,12 @@ export type ProductStarRating =
 	| '4'
 	| '5'
 	| 'none-selected';
+
+export type ProductSummaryDisplayType =
+	| 'Carousel'
+	| 'CtaList'
+	| 'StackedCard'
+	| 'StackedCardExpanded';
 
 export interface SrcSetItem {
 	src: string;

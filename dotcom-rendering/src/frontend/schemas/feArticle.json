@@ -4802,12 +4802,7 @@
                     }
                 },
                 "displayType": {
-                    "enum": [
-                        "CAROUSEL",
-                        "CTA_LIST",
-                        "STACKED_CARD"
-                    ],
-                    "type": "string"
+                    "$ref": "#/definitions/ProductSummaryDisplayType"
                 },
                 "title": {
                     "type": "string"
@@ -4835,6 +4830,15 @@
                 "productId"
             ]
         },
+        "ProductSummaryDisplayType": {
+            "enum": [
+                "Carousel",
+                "CtaList",
+                "StackedCard",
+                "StackedCardExpanded"
+            ],
+            "type": "string"
+        },
         "EnhancedProductSummaryElement": {
             "type": "object",
             "properties": {
@@ -4845,16 +4849,11 @@
                 "products": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/ProductBlockElement"
+                        "$ref": "#/definitions/EnhancedProductSummaryMap"
                     }
                 },
                 "displayType": {
-                    "enum": [
-                        "CAROUSEL",
-                        "CTA_LIST",
-                        "STACKED_CARD"
-                    ],
-                    "type": "string"
+                    "$ref": "#/definitions/ProductSummaryDisplayType"
                 },
                 "title": {
                     "type": "string"
@@ -4865,6 +4864,21 @@
                 "displayType",
                 "products",
                 "title"
+            ]
+        },
+        "EnhancedProductSummaryMap": {
+            "type": "object",
+            "properties": {
+                "productBlock": {
+                    "$ref": "#/definitions/ProductBlockElement"
+                },
+                "ctaIndex": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "ctaIndex",
+                "productBlock"
             ]
         },
         "Block": {

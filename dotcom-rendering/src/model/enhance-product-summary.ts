@@ -1,27 +1,36 @@
 import type {
+	EnhancedProductSummaryMap,
 	FEElement,
-	ProductBlockElement,
 	ProductSummaryMap,
 } from '../types/content';
 
-const productIsInSummary = (
-	product: ProductBlockElement,
-	summaryProducts: ProductSummaryMap[],
-): boolean => {
-	return summaryProducts.some(
-		(summaryProduct) => summaryProduct.productId === product.id,
-	);
-};
-const findSummaryProducts = (
+const getSummaryProducts = (
 	pageElements: FEElement[],
 	summaryProducts: ProductSummaryMap[],
-): ProductBlockElement[] =>
-	pageElements.filter(
-		(el): el is ProductBlockElement =>
-			el._type ===
-				'model.dotcomrendering.pageElements.ProductBlockElement' &&
-			productIsInSummary(el, summaryProducts),
-	);
+): EnhancedProductSummaryMap[] =>
+	pageElements.reduce<EnhancedProductSummaryMap[]>((acc, element) => {
+		if (
+			element._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			return acc;
+		}
+
+		const matchingSummaryProduct = summaryProducts.find(
+			(summaryProduct) => summaryProduct.productId === element.id,
+		);
+
+		if (!matchingSummaryProduct) {
+			return acc;
+		}
+
+		acc.push({
+			productBlock: element,
+			ctaIndex: matchingSummaryProduct.ctaIndex,
+		});
+
+		return acc;
+	}, []);
 
 export const enhanceProductSummary = (elements: FEElement[]): FEElement[] =>
 	elements.map<FEElement>((element) => {
@@ -30,7 +39,7 @@ export const enhanceProductSummary = (elements: FEElement[]): FEElement[] =>
 				return {
 					...element,
 					_type: 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement',
-					products: findSummaryProducts(elements, element.products),
+					products: getSummaryProducts(elements, element.products),
 				};
 			}
 

@@ -1,5 +1,8 @@
 import type { ArticleFormat } from '../lib/articleFormat';
-import type { ProductBlockElement } from '../types/content';
+import type {
+	EnhancedProductSummaryMap,
+	ProductSummaryDisplayType,
+} from '../types/content';
 import { Island } from './Island';
 import { ScrollableProduct } from './ScrollableProduct.island';
 import { StackedProducts } from './StackedProducts.island';
@@ -11,43 +14,44 @@ export const ProductSummary = ({
 	displayType,
 }: {
 	title: string;
-	products: ProductBlockElement[];
+	products: EnhancedProductSummaryMap[];
 	format: ArticleFormat;
-	displayType: string; // ToDo: type this
+	displayType: ProductSummaryDisplayType;
 }) => {
-	if (displayType === 'CAROUSEL') {
-		return (
-			<Island priority="feature" defer={{ until: 'idle' }}>
-				<ScrollableProduct
-					title={title}
-					products={products}
-					format={format}
-				/>
-			</Island>
-		);
+	switch (displayType) {
+		case 'Carousel':
+			return (
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<ScrollableProduct
+						title={title}
+						products={products}
+						format={format}
+					/>
+				</Island>
+			);
+		case 'StackedCard':
+			return (
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<StackedProducts
+						products={products}
+						title={title}
+						format={format}
+						showAllProducts={false}
+					/>
+				</Island>
+			);
+		case 'StackedCardExpanded':
+			return (
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<StackedProducts
+						products={products}
+						title={title}
+						format={format}
+						showAllProducts={true}
+					/>
+				</Island>
+			);
+		case 'CtaList':
+			return <>ToDo</>;
 	}
-
-	if (displayType === 'STACKED_CARD') {
-		return (
-			<Island priority="feature" defer={{ until: 'idle' }}>
-				<StackedProducts
-					products={products}
-					title={title}
-					format={format}
-					showAllProducts={false}
-				/>
-			</Island>
-		);
-	}
-
-	return (
-		<Island priority="feature" defer={{ until: 'idle' }}>
-			<StackedProducts
-				products={products}
-				title={title}
-				format={format}
-				showAllProducts={true}
-			/>
-		</Island>
-	);
 };

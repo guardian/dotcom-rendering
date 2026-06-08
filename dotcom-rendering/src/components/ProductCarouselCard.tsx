@@ -11,12 +11,12 @@ import {
 import { Link } from '@guardian/source/react-components';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { ProductBlockElement } from '../types/content';
+import type { EnhancedProductSummaryMap } from '../types/content';
 import { ProductLinkButton } from './Button/ProductLinkButton';
 import { ProductCardImage } from './ProductCardImage';
 
 export type ProductCarouselCardProps = {
-	product: ProductBlockElement;
+	product: EnhancedProductSummaryMap;
 	format: ArticleFormat;
 };
 
@@ -83,10 +83,15 @@ export const ProductCarouselCard = ({
 	product,
 	format,
 }: ProductCarouselCardProps) => {
-	const hasHeading = !!product.primaryHeadingHtml;
-	const firstCta = product.productCtas[0];
-	const headingId = product.h2Id;
-	const productAndBrandName = [product.brandName, product.productName]
+	const { productBlock, ctaIndex } = product;
+
+	const hasHeading = !!productBlock.primaryHeadingHtml;
+	const cardCta = productBlock.productCtas[ctaIndex];
+	const headingId = productBlock.h2Id;
+	const productAndBrandName = [
+		productBlock.brandName,
+		productBlock.productName,
+	]
 		.filter(Boolean)
 		.join(' ');
 	return (
@@ -95,7 +100,7 @@ export const ProductCarouselCard = ({
 				{hasHeading && (
 					<>
 						<div css={headingFont}>
-							{product.primaryHeadingText}
+							{productBlock.primaryHeadingText}
 						</div>
 						<div css={brandAndProductNameFont}>
 							{productAndBrandName}
@@ -106,7 +111,7 @@ export const ProductCarouselCard = ({
 			<div css={readMoreArea}>
 				{!isUndefined(headingId) &&
 					hasHeading &&
-					product.displayType !== 'ProductCardOnly' && (
+					productBlock.displayType !== 'ProductCardOnly' && (
 						<Link
 							href={`#${headingId}`}
 							cssOverrides={readMoreCta}
@@ -120,25 +125,27 @@ export const ProductCarouselCard = ({
 			<div css={imageArea}>
 				<ProductCardImage
 					format={format}
-					image={product.image}
+					image={productBlock.image}
 					xCustComponentId={'carousel-card-image'}
 				/>
 			</div>
 			<div css={belowImageArea}>
 				{!hasHeading && (
 					<div>
-						<div css={brandNameFont}>{product.brandName}</div>
-						<div css={productNameFont}>{product.productName}</div>
+						<div css={brandNameFont}>{productBlock.brandName}</div>
+						<div css={productNameFont}>
+							{productBlock.productName}
+						</div>
 					</div>
 				)}
-				{firstCta && (
+				{cardCta && (
 					<>
-						<div css={priceStyle}>{firstCta.price}</div>
+						<div css={priceStyle}>{cardCta.price}</div>
 						<div css={buttonWrapper}>
 							<ProductLinkButton
 								xCustComponentId={'carousel-card'}
-								label={`Buy at ${firstCta.retailer}`}
-								url={firstCta.url}
+								label={`Buy at ${cardCta.retailer}`}
+								url={cardCta.url}
 								fullwidth={true}
 								minimisePadding={true}
 							/>
