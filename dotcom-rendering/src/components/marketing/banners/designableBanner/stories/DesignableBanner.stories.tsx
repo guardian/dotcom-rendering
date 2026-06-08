@@ -1,4 +1,3 @@
-import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
 import { choiceCardsSettings } from '../../../lib/storybook';
@@ -28,14 +27,7 @@ const meta: Meta<Props> = {
 				text: 'Support once',
 				baseUrl: 'https://support.theguardian.com/contribute/one-off',
 			},
-			secondaryCta: {
-				type: SecondaryCtaType.Custom,
-				cta: {
-					text: 'Support monthly',
-					baseUrl:
-						'https://support.theguardian.com/contribute/recurring',
-				},
-			},
+			secondaryCta: undefined,
 		},
 		mobileContent: {
 			heading: 'Show your support for reader-funded journalism',
@@ -49,14 +41,7 @@ const meta: Meta<Props> = {
 				text: 'Support us',
 				baseUrl: 'https://support.theguardian.com/contribute/one-off',
 			},
-			secondaryCta: {
-				type: SecondaryCtaType.Custom,
-				cta: {
-					text: 'Learn more',
-					baseUrl:
-						'https://support.theguardian.com/contribute/recurring',
-				},
-			},
+			secondaryCta: undefined,
 		},
 		articleCounts: {
 			for52Weeks: 12,
@@ -95,13 +80,7 @@ const baseContent = {
 		text: 'Support once',
 		baseUrl: 'https://support.theguardian.com/contribute/one-off',
 	},
-	secondaryCta: {
-		type: SecondaryCtaType.Custom,
-		cta: {
-			text: 'Support monthly',
-			baseUrl: 'https://support.theguardian.com/contribute/recurring',
-		},
-	},
+	secondaryCta: undefined,
 };
 
 const baseMobileContent = {
@@ -116,13 +95,7 @@ const baseMobileContent = {
 		text: 'Support us',
 		baseUrl: 'https://support.theguardian.com/contribute/one-off',
 	},
-	secondaryCta: {
-		type: SecondaryCtaType.Custom,
-		cta: {
-			text: 'Learn more',
-			baseUrl: 'https://support.theguardian.com/contribute/recurring',
-		},
-	},
+	secondaryCta: undefined,
 };
 
 export const Default: Story = {
@@ -141,14 +114,7 @@ export const Default: Story = {
 				text: 'Support once',
 				baseUrl: 'https://support.theguardian.com/contribute/one-off',
 			},
-			secondaryCta: {
-				type: SecondaryCtaType.Custom,
-				cta: {
-					text: 'Support monthly',
-					baseUrl:
-						'https://support.theguardian.com/contribute/recurring',
-				},
-			},
+			secondaryCta: undefined,
 		},
 		mobileContent: {
 			heading: 'Show your support for reader-funded journalism',
@@ -162,14 +128,7 @@ export const Default: Story = {
 				text: 'Support us',
 				baseUrl: 'https://support.theguardian.com/contribute/one-off',
 			},
-			secondaryCta: {
-				type: SecondaryCtaType.Custom,
-				cta: {
-					text: 'Learn more',
-					baseUrl:
-						'https://support.theguardian.com/contribute/recurring',
-				},
-			},
+			secondaryCta: undefined,
 		},
 		tracking: {
 			...tracking,
