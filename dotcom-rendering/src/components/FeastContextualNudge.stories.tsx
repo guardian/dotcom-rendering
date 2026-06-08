@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { mocked } from 'storybook/test';
 import { darkDecorator } from '../../.storybook/decorators/themeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import type { RecipeBlockElement } from '../types/content';
 import { FeastContextualNudge } from './FeastContextualNudge.island';
 
 const mockBetaABVariant1 = () => {
-	mocked(useBetaAB).mockReturnValue({
+	mocked(useAB).mockReturnValue({
 		isUserInTestGroup: (_testId: string, group: string) =>
 			group === 'variant-1',
 		isUserInTest: () => true,

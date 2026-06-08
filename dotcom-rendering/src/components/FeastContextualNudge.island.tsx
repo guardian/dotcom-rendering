@@ -7,7 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import type { StageType } from '../types/config';
 import type { RecipeBlockElement } from '../types/content';
 import { useConfig } from './ConfigContext';
@@ -143,7 +143,7 @@ export const FeastContextualNudge = ({
 	pageId,
 	isDev,
 }: FeastContextualNudgeProps) => {
-	const abTests = useBetaAB();
+	const abTests = useAB();
 	const isVariant =
 		abTests?.isUserInTestGroup('feast-recipe-nudge', 'variant-1') ?? false;
 

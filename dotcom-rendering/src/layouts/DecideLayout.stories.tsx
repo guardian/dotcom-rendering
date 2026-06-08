@@ -24,7 +24,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { extractNAV } from '../model/extract-nav';
 import { type Article, enhanceArticleType } from '../types/article';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
@@ -293,7 +293,7 @@ const recipeStandardLifestyleWebFixture: Article = enhanceArticleType(
 );
 
 const mockBetaFeastContextualNudgeABVariant1 = () => {
-	mocked(useBetaAB).mockReturnValue({
+	mocked(useAB).mockReturnValue({
 		isUserInTestGroup: (_testId: string, group: string) =>
 			group === 'variant-1',
 		isUserInTest: () => true,
