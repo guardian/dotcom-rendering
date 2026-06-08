@@ -128,9 +128,9 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-06-18",
 		type: "client",
 		status: "ON",
-		audienceSize: 5 / 100,
+		audienceSize: 10 / 100,
 		audienceSpace: "A",
-		groups: ["holdback"],
+		groups: ["control", "holdback"],
 		shouldForceMetricsCollection: true,
 	},
 	{
