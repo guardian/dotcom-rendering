@@ -23,8 +23,8 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '../lib/articleFormat';
-import { useBetaAB } from '../lib/useAB';
 import { getCurrentPillar } from '../lib/layoutHelpers';
+import { useBetaAB } from '../lib/useAB';
 import { extractNAV } from '../model/extract-nav';
 import { type Article, enhanceArticleType } from '../types/article';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
