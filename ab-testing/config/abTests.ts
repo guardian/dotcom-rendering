@@ -121,7 +121,7 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-user-module-intentIq-us-region",
+		name: "commercial-user-module-intentIq-us",
 		description:
 			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module for users in the US",
 		owners: ["commercial.dev@guardian.co.uk"],
