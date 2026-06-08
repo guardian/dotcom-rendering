@@ -6,8 +6,8 @@ import {
 	SvgChevronUpSingle,
 	SvgCross,
 } from '@guardian/source/react-components';
-import { buttonStyles, buttonThemes } from '../../styles/buttonStyles';
 import type { BannerData } from '../BannerProps';
+import { buttonStyles, buttonThemes } from '../styles/buttonStyles';
 
 const styles = {
 	closeButtonContainer: css`

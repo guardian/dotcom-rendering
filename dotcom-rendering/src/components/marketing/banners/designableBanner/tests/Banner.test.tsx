@@ -6,7 +6,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import type { BannerRenderProps } from '../../../common/types';
+import type { BannerRenderProps } from '../../common/types';
 import { BannerComponent } from '../exports';
 
 jest.mock('../../../../../../lib/useMatchMedia', () => ({

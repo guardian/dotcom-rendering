@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
 import { choiceCardsSettings } from '../../../lib/storybook';
 import { design, stringToHexColour, tracking } from '../../utils/storybook';
-import { DesignableBannerUnvalidated as DesignableBanner } from '../DesignableBanner';
+import { DesignableBannerUnvalidated as DesignableBanner } from '../Banner';
 
 type WithJsonProps<T> = T & { json?: string };
 type Props = WithJsonProps<React.ComponentProps<typeof DesignableBanner>>;

@@ -5,8 +5,8 @@ import {
 	headlineBold17,
 	space,
 } from '@guardian/source/foundations';
-import { CustomArticleCountCopy } from '../../components/CustomArticleCountCopy';
-import { DesignableBannerArticleCountOptOut } from '../../components/DesignableBannerArticleCountOptOut';
+import { CustomArticleCountCopy } from './CustomArticleCountCopy';
+import { DesignableBannerArticleCountOptOut } from './DesignableBannerArticleCountOptOut';
 import type { BannerData } from '../BannerProps';
 
 const containsArticleCountTemplate = (copy: string): boolean =>

@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { useContributionsReminderSignup } from '../../../../hooks/useContributionsReminderSignup';
-import { DesignableBannerReminderSignedOut } from '../../components/DesignableBannerReminderSignedOut';
+import { useContributionsReminderSignup } from '../../../hooks/useContributionsReminderSignup';
 import type { BannerData } from '../BannerProps';
+import { DesignableBannerReminderSignedOut } from './DesignableBannerReminderSignedOut';
 
 const styles = {
 	container: css`

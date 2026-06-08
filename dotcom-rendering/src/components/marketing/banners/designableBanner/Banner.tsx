@@ -7,11 +7,8 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { useEffect, useRef } from 'react';
-import {
-	bannerWrapper,
-	validatedBannerWrapper,
-} from '../../common/BannerWrapper';
-import type { BannerRenderProps } from '../../common/types';
+import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
+import type { BannerRenderProps } from '../common/types';
 import { BannerArticleCount } from './components/BannerArticleCount';
 import { BannerBody } from './components/BannerBody';
 import { BannerChoiceCards } from './components/BannerChoiceCards';
@@ -279,7 +276,9 @@ const Banner = (props: BannerRenderProps): JSX.Element | null => {
 				</BannerContent>
 				<BannerChoiceCards bannerData={bannerData} />
 				<BannerCtas bannerData={bannerData} />
-				<BannerVisual bannerData={bannerData} />
+				{!bannerData.isCollapsed && (
+					<BannerVisual bannerData={bannerData} />
+				)}
 				<BannerCloseButton bannerData={bannerData} />
 			</div>
 		</div>
