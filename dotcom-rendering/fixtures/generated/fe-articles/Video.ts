@@ -61,7 +61,6 @@ export const Video: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-atom"> <gu-atom data-atom-id="b71e095c-8863-4a13-a44d-47a090333c51" data-atom-type="media"> \n  <div>\n   <iframe frameborder="0" allowfullscreen="true" src="https://www.youtube-nocookie.com/embed/i9is5y5scGU?showinfo=0&amp;rel=0"></iframe>\n  </div>\n </gu-atom> \n</figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [],
 	author: {},

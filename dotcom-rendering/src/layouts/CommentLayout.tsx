@@ -44,7 +44,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
-import { useBetaAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -101,7 +100,7 @@ const StandardGrid = ({
 									'meta       border  media      media      media'
 									'meta       border  body       .          right-column'
 									'.          border  .          .          right-column';
-						  `
+							`
 						: css`
 								grid-template-areas:
 									'title      border  headline   . right-column'
@@ -110,7 +109,7 @@ const StandardGrid = ({
 									'meta       border  media      . right-column'
 									'meta       border  body       . right-column'
 									'.          border  .          . right-column';
-						  `}
+							`}
 				}
 
 				/*
@@ -133,7 +132,7 @@ const StandardGrid = ({
 									'meta       border  media       media'
 									'meta       border  body        right-column'
 									'.          border  .           right-column';
-						  `
+							`
 						: css`
 								grid-template-areas:
 									'title      border  headline    right-column'
@@ -142,7 +141,7 @@ const StandardGrid = ({
 									'meta       border  media       right-column'
 									'meta       border  body        right-column'
 									'.          border  .           right-column';
-						  `}
+							`}
 				}
 
 				/*
@@ -294,18 +293,16 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const showComments = article.isCommentable && !isPaidContent;
 
-	const avatarUrl = getSoleContributor(article.tags, article.byline)
-		?.bylineLargeImageUrl;
+	const avatarUrl = getSoleContributor(
+		article.tags,
+		article.byline,
+	)?.bylineLargeImageUrl;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const ab = useBetaAB();
-
-	const isWorldCup2026 =
-		article.tags.some((tag) => tag.id === worldCupTagId) &&
-		ab?.isUserInTest('webx-world-cup-2026-subnav');
+	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
 
 	const renderAds = canRenderAds(article);
 

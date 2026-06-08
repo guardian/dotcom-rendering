@@ -19,6 +19,7 @@ import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.island';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
+import { HostedEmbedBlockComponent } from '../components/HostedEmbedBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.island';
 import { InteractiveAtom } from '../components/InteractiveAtom';
@@ -73,7 +74,11 @@ import {
 } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
-import { ArticleDesign, type ArticleFormat } from './articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	isHostedContentDesign,
+} from './articleFormat';
 import type { EditionId } from './edition';
 import { getLargestImageSize } from './image';
 
@@ -315,6 +320,17 @@ export const renderElement = ({
 						<MainMediaEmbedBlockComponent
 							title={element.alt ?? ''}
 							srcDoc={element.html}
+						/>
+					);
+				}
+
+				if (format.design === ArticleDesign.HostedArticle) {
+					return (
+						<HostedEmbedBlockComponent
+							html={element.html}
+							alt={element.alt ?? ''}
+							height={element.height}
+							width={element.width}
 						/>
 					);
 				}
@@ -957,7 +973,8 @@ export const renderElement = ({
 						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
-						enableAds={true}
+						// YT ads on by default on all pages apart from hosted content
+						enableAds={!isHostedContentDesign(format.design)}
 						hidePillOnMobile={false}
 						contentType={contentType}
 						contentLayout={contentLayout}

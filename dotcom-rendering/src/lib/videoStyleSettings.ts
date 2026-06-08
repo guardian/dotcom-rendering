@@ -6,7 +6,7 @@ type ProgessBarStyles =
 			/**
 			 * A progress bar that includes seeking. Taller than the default progress bar
 			 */
-			useInteractiveProgressBar: boolean | null;
+			useInteractiveProgressBar: boolean;
 	  }
 	| {
 			showProgressBar: false;

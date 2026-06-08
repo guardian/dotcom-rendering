@@ -445,7 +445,7 @@ export const WithThreeTierChoiceCardsAndMixedDestinationsDefaultExpanded: Story 
 										...c,
 										isDefault: false,
 										defaultExpanded: true,
-								  }
+									}
 								: { ...c, isDefault: false },
 						),
 					mobileChoiceCards:
@@ -456,7 +456,7 @@ export const WithThreeTierChoiceCardsAndMixedDestinationsDefaultExpanded: Story 
 											...c,
 											isDefault: false,
 											defaultExpanded: true,
-									  }
+										}
 									: { ...c, isDefault: false },
 						),
 				},

@@ -3,7 +3,6 @@ import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-	getOphan,
 	submitClickComponentEvent,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
@@ -16,9 +15,11 @@ import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
+import { useVideoAttentionTracking } from '../lib/useVideoAttentionTracking';
 import { useVideoMilestoneTracking } from '../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
+	convertProgressPercentageToCurrentTime,
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 	findOptimisedSourcePerMimeType,
@@ -29,7 +30,6 @@ import { videoSettingsMap } from '../lib/videoStyleSettings';
 import { palette } from '../palette';
 import type { RoleType } from '../types/content';
 import type { VideoPlayerFormat } from '../types/mainMedia';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
@@ -53,7 +53,8 @@ const VISIBILITY_THRESHOLD = 0.5;
 /**
  * The duration in ms for which controls are displayed before fading out.
  */
-const CONTROLS_FADE_DELAY = 2700;
+const CONTROLS_FADE_DELAY = 3_000;
+const PLAY_BUTTON_FADE_DELAY = 1_500;
 
 const cardStyles = (
 	isInteractive: boolean,
@@ -166,6 +167,7 @@ const fullscreenStyles = css`
 
 		/* Override the fixed aspect-ratio + width:100% on the video so it
 		   fits within the screen while preserving its aspect ratio. */
+
 		video {
 			width: 100%;
 			height: 100%;
@@ -181,9 +183,11 @@ const showControlsStyles = css`
 	.controls-container {
 		visibility: visible;
 		opacity: 1;
-		transition:
-			visibility 0.2s,
-			opacity 0.2s ease-in-out;
+	}
+
+	.play-pause-icon {
+		visibility: visible;
+		opacity: 1;
 	}
 `;
 
@@ -192,15 +196,18 @@ const hideControlsStyles = css`
 		visibility: hidden;
 		opacity: 0;
 		transition:
-			visibility 0.3s,
-			opacity 0.3s ease-in-out;
+			visibility 500ms,
+			opacity 500ms ease-in-out;
 		transition-delay: ${CONTROLS_FADE_DELAY}ms;
 	}
 
-	@media (hover: hover) {
-		:hover {
-			${showControlsStyles}
-		}
+	.play-pause-icon {
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			visibility 400ms,
+			opacity 400ms ease-in-out;
+		transition-delay: ${PLAY_BUTTON_FADE_DELAY}ms;
 	}
 `;
 
@@ -228,35 +235,6 @@ const logAndReportError = (src: string, error: Error) => {
 	}
 
 	log('dotcom', message);
-};
-
-/**
- * Initiates attention tracking for ophan
- */
-const trackAttention = async (
-	videoElement: HTMLVideoElement,
-	atomId: string,
-	renderingTarget: RenderingTarget,
-	videoStyle: OphanVideoStyle,
-) => {
-	try {
-		const ophan = await getOphan(renderingTarget);
-		ophan.trackComponentAttention(
-			`gu-video-${videoStyle}-${atomId}`,
-			videoElement,
-			VISIBILITY_THRESHOLD,
-			true,
-		);
-	} catch (error) {
-		log('dotcom', 'Failed to track video attention:', error);
-	}
-};
-
-const dispatchOphanAttentionEvent = (
-	eventType: 'videoPlaying' | 'videoPause',
-) => {
-	const event = new Event(eventType, { bubbles: true });
-	document.dispatchEvent(event);
 };
 
 const getOptimisedPosterImage = (
@@ -395,6 +373,12 @@ type Props = {
 	isMainMedia?: boolean;
 	role?: RoleType;
 	restrictHeightOnDesktop?: boolean;
+	cardLink?: {
+		headlineText: string;
+		dataLinkName?: string;
+		isExternalLink: boolean;
+	};
+	isInLoopClickTestVariant?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -424,6 +408,8 @@ export const SelfHostedVideo = ({
 	role,
 	posterImageAspectRatio,
 	restrictHeightOnDesktop = false,
+	cardLink,
+	isInLoopClickTestVariant,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -434,17 +420,18 @@ export const SelfHostedVideo = ({
 	const [isMuted, setIsMuted] = useState(true);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
+	const [duration, setDuration] = useState<number | undefined>(undefined);
 	const [playerState, setPlayerState] =
 		useState<(typeof PLAYER_STATES)[number]>('NOT_STARTED');
 	const [isAutoplayAllowed, setIsAutoplayAllowed] = useState<boolean | null>(
 		null,
 	);
 	const [hasPageBecomeActive, setHasPageBecomeActive] = useState(false);
-	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
 	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
+	const [isProgressBarSeeking, setIsProgressBarSeeking] = useState(false);
 	/** Whether the video should show controls */
 	const [showControls, setShowControls] = useState(true);
 	/** Whether the video is currently showing controls */
@@ -452,6 +439,9 @@ export const SelfHostedVideo = ({
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
+
+	const isLoopClickThroughTestVariant =
+		videoStyle === 'Loop' && isInLoopClickTestVariant;
 
 	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
@@ -471,7 +461,7 @@ export const SelfHostedVideo = ({
 		playerState !== 'NOT_STARTED';
 
 	const subtitlesPosition: SubtitlesPosition =
-		videoStyleSettings.useInteractiveProgressBar &&
+		videoStyleSettings.useInteractiveProgressBar === true &&
 		controlsPosition === 'bottom'
 			? 'bottom-elevated'
 			: controlsPosition;
@@ -485,6 +475,7 @@ export const SelfHostedVideo = ({
 		videoStyleSettings.canShowPlayIcon &&
 		(playerState === 'PAUSED_BY_USER' ||
 			playerState === 'PAUSED_BY_BROWSER' ||
+			playerState === 'ENDED' ||
 			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
 
 	const showPauseIcon =
@@ -522,6 +513,17 @@ export const SelfHostedVideo = ({
 		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
 		: undefined;
 
+	const showFadeableControls =
+		videoStyleSettings.hideControlsWhenNotInteractedWith &&
+		!showControls &&
+		playerState === 'PLAYING';
+
+	const hideFadeableControls =
+		videoStyleSettings.hideControlsWhenNotInteractedWith &&
+		showControls &&
+		(playerState === 'PAUSED_BY_USER' ||
+			playerState === 'PAUSED_BY_BROWSER');
+
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
 
 	const sendOphanTrackingEvent = useCallback(
@@ -557,7 +559,17 @@ export const SelfHostedVideo = ({
 		currentTime,
 	});
 
-	const trackMilestones = useVideoMilestoneTracking(sendOphanTrackingEvent);
+	const [trackMilestones, resetMilestones] = useVideoMilestoneTracking(
+		sendOphanTrackingEvent,
+		videoStyle === 'Default',
+	);
+
+	useVideoAttentionTracking(
+		`gu-video-${ophanVideoStyle}-${atomId}`,
+		isInView,
+		playerState === 'PLAYING',
+		renderingTarget,
+	);
 
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
@@ -573,9 +585,6 @@ export const SelfHostedVideo = ({
 			await startPlayPromise
 				.then(() => {
 					// Autoplay succeeded
-					if (isWeb) {
-						dispatchOphanAttentionEvent('videoPlaying');
-					}
 					setPlayerState('PLAYING');
 				})
 				.catch((error: Error) => {
@@ -585,7 +594,7 @@ export const SelfHostedVideo = ({
 					setPlayerState('PAUSED_BY_BROWSER');
 				});
 		}
-	}, [isWeb]);
+	}, []);
 
 	const pauseVideo = (
 		pauseReason: Extract<
@@ -606,25 +615,19 @@ export const SelfHostedVideo = ({
 
 		setPlayerState(pauseReason);
 
-		if (isWeb) {
-			dispatchOphanAttentionEvent('videoPause');
-		}
-
 		void video.pause();
 	};
 
 	const playPauseVideo = () => {
 		if (playerState === 'PLAYING') {
-			if (isInView) {
+			if (isInView === true) {
 				void pauseVideo('PAUSED_BY_USER');
 				sendOphanTrackingEvent('pause');
 			}
 		} else {
 			void playVideo();
-			if (hasTrackedPlay) {
+			if (playerState !== 'NOT_STARTED' && playerState !== 'ENDED') {
 				sendOphanTrackingEvent('resume');
-			} else {
-				sendOphanTrackingEvent('play');
 			}
 		}
 	};
@@ -680,7 +683,6 @@ export const SelfHostedVideo = ({
 	 *
 	 * 1. Determine whether we can autoplay video.
 	 * 2. Use the best video size available for the user's screen size
-	 * 2. Initialise Ophan attention tracking.
 	 * 3. Creates event listeners to control playback when there are multiple videos.
 	 */
 	useEffect(() => {
@@ -696,18 +698,6 @@ export const SelfHostedVideo = ({
 			screenWidth,
 		);
 		setOptimisedSources(filteredSources);
-
-		/**
-		 * Initialise Ophan attention tracking
-		 */
-		if (vidRef.current) {
-			void trackAttention(
-				vidRef.current,
-				atomId,
-				renderingTarget,
-				ophanVideoStyle,
-			);
-		}
 
 		/**
 		 * Mutes the current video when another video is unmuted
@@ -748,6 +738,7 @@ export const SelfHostedVideo = ({
 					setIsAutoplayAllowed(doesUserPermitAutoplayOnWeb());
 				}
 				setHasPageBecomeActive(true);
+				setMutedState({ value: true });
 			} else {
 				setHasPageBecomeActive(false);
 			}
@@ -795,14 +786,7 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [
-		setMutedState,
-		uniqueId,
-		atomId,
-		sources,
-		renderingTarget,
-		ophanVideoStyle,
-	]);
+	}, [setMutedState, uniqueId, sources, renderingTarget]);
 
 	/* Creates video-specific event listeners to handle fullscreen behaviour */
 	useEffect(() => {
@@ -846,7 +830,7 @@ export const SelfHostedVideo = ({
 		);
 
 		sendOphanTrackingEvent('view');
-	}, [isInView ? true : undefined]);
+	}, [isInView === true ? true : undefined]);
 
 	/**
 	 * Show a poster image if a video does NOT play automatically. Otherwise, we do not need
@@ -882,7 +866,7 @@ export const SelfHostedVideo = ({
 				document.fullscreenElement ||
 				(video &&
 					'webkitDisplayingFullscreen' in video &&
-					video.webkitDisplayingFullscreen)
+					Boolean(video.webkitDisplayingFullscreen))
 					? 'enter_fullscreen'
 					: 'exit_fullscreen';
 
@@ -960,6 +944,7 @@ export const SelfHostedVideo = ({
 			return;
 		}
 
+		setDuration(video.duration);
 		positionCues(video);
 	};
 
@@ -985,11 +970,7 @@ export const SelfHostedVideo = ({
 	 * Track the first successful video play in Ophan.
 	 */
 	const handlePlaying = () => {
-		if (hasTrackedPlay) {
-			return;
-		}
-		sendOphanTrackingEvent('play');
-		setHasTrackedPlay(true);
+		trackMilestones({ started: true });
 	};
 
 	const showControlsAndStartTimer = () => {
@@ -1102,6 +1083,12 @@ export const SelfHostedVideo = ({
 		pauseVideo('PAUSED_BY_BROWSER');
 	};
 
+	const handleEnded = () => {
+		trackMilestones({ ended: true });
+		resetMilestones();
+		setPlayerState('ENDED');
+	};
+
 	/**
 	 * If the video could not be loaded due to an error, report to
 	 * Sentry and log in the console.
@@ -1150,14 +1137,22 @@ export const SelfHostedVideo = ({
 		}
 
 		if (playerState === 'PLAYING') {
-			setCurrentTime(video.currentTime);
+			if (!isProgressBarSeeking) {
+				setCurrentTime(video.currentTime);
+			}
 
 			/**
 			 * We only want to track milestone events for "long-form"
-			 * videos, not loops or cinemagraphs.
+			 * videos, not loops or cinemagraphs. We expect these to be
+			 * too short to be worth tracking progress milestones.
 			 */
-			if (videoStyle === 'Default') {
-				trackMilestones(video.currentTime, video.duration);
+			trackMilestones({
+				currentTime: video.currentTime,
+				duration: video.duration,
+			});
+
+			if (video.currentTime < 1) {
+				resetMilestones();
 			}
 		}
 	};
@@ -1188,6 +1183,28 @@ export const SelfHostedVideo = ({
 		}
 	};
 
+	const handleProgressBarInput = (
+		event: React.FormEvent<HTMLInputElement>,
+	) => {
+		if (duration === undefined) {
+			return;
+		}
+
+		showControlsAndStartTimer();
+
+		const percentage = Number(event.currentTarget.value);
+		const time = convertProgressPercentageToCurrentTime(
+			percentage,
+			duration,
+		);
+
+		if (time === null) {
+			return;
+		}
+
+		updateCurrentTime(time);
+	};
+
 	/**
 	 * Autoplay/resume playback when the player comes into view or when
 	 * the page has been restored from the BFCache.
@@ -1196,8 +1213,8 @@ export const SelfHostedVideo = ({
 	 */
 	if (isPlayable) {
 		if (
-			shouldAutoplay &&
-			isInView &&
+			shouldAutoplay === true &&
+			isInView === true &&
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
 				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
@@ -1243,17 +1260,10 @@ export const SelfHostedVideo = ({
 							containerAspectRatioDesktop,
 						),
 						fullscreenStyles,
-						videoStyleSettings.hideControlsWhenNotInteractedWith &&
-							!showControls &&
-							playerState === 'PLAYING' &&
-							hideControlsStyles,
-						videoStyleSettings.hideControlsWhenNotInteractedWith &&
-							showControls &&
-							(playerState === 'PAUSED_BY_USER' ||
-								playerState === 'PAUSED_BY_BROWSER') &&
-							showControlsStyles,
+						showFadeableControls && hideControlsStyles,
+						hideFadeableControls && showControlsStyles,
 					]}
-					onMouseOver={showControlsAndStartTimer}
+					onMouseMove={showControlsAndStartTimer}
 				>
 					<SelfHostedVideoPlayer
 						sources={optimisedSources}
@@ -1265,6 +1275,7 @@ export const SelfHostedVideo = ({
 						posterImage={optimisedPosterImage}
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
+						duration={duration}
 						ref={vidRef}
 						hasAudio={hasAudio}
 						isMuted={isMuted}
@@ -1276,17 +1287,24 @@ export const SelfHostedVideo = ({
 						handleAudioClick={handleAudioClick}
 						handleTimeUpdate={handleTimeUpdate}
 						handleKeyDown={handleKeyDown}
+						handleProgressBarInput={handleProgressBarInput}
+						handleProgressBarSeekStart={() => {
+							setIsProgressBarSeeking(true);
+						}}
+						handleProgressBarSeekEnd={() => {
+							setIsProgressBarSeeking(false);
+						}}
 						handlePause={handlePause}
 						handleFullscreenClick={handleFullscreenClick}
-						updateCurrentTime={updateCurrentTime}
+						handleEnded={handleEnded}
 						onError={onError}
-						preloadPartialData={!!shouldAutoplay}
+						preloadPartialData={shouldAutoplay === true}
 						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
 						useLongFormProgressBar={
-							!!videoStyleSettings.useInteractiveProgressBar
+							videoStyleSettings.useInteractiveProgressBar ===
+							true
 						}
-						handleProgressBarInput={showControlsAndStartTimer}
 						showSubtitles={videoStyleSettings.canShowSubtitles}
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}
@@ -1300,10 +1318,15 @@ export const SelfHostedVideo = ({
 						}
 						isInteractive={videoStyleSettings.isInteractive}
 						isWebKitFullscreen={isWebKitFullscreen}
+						linkTo={linkTo}
+						cardLink={cardLink}
+						isLoopClickThroughTestVariant={
+							isLoopClickThroughTestVariant
+						}
 					/>
 				</div>
 			</div>
-			{!!caption && format && (
+			{caption !== undefined && caption !== '' && format && (
 				<Caption
 					captionText={caption}
 					format={format}

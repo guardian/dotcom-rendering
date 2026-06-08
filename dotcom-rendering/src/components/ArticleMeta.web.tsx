@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { CSSProperties } from 'react';
@@ -35,6 +36,7 @@ import { Island } from './Island';
 import { PodcastMeta } from './PodcastMeta';
 import { PreferredSourceButton } from './PreferredSourceButton';
 import { ShareButton } from './ShareButton.island';
+import { TimeDateline } from './TimeDateline';
 
 type Props = {
 	format: ArticleFormat;
@@ -45,6 +47,7 @@ type Props = {
 	tags: TagType[];
 	primaryDateline: string;
 	secondaryDateline: string;
+	webPublicationDate?: string;
 	branding?: BrandingType;
 	discussionApiUrl: string;
 	shortUrlId: string;
@@ -106,7 +109,7 @@ const preferredSourceMetaFlex = (hasButton: boolean): CSSProperties =>
 	hasButton
 		? {
 				marginBottom: 8,
-		  }
+			}
 		: {};
 
 const stretchLines = css`
@@ -149,7 +152,7 @@ const preferredSourceMetaExtras = (hasButton: boolean): CSSProperties =>
 	hasButton
 		? {
 				paddingTop: 8,
-		  }
+			}
 		: {};
 
 const metaNumbers = (isPictureContent: boolean) => css`
@@ -205,7 +208,7 @@ export const metaContainer = (format: ArticleFormat) => {
 								${from.wide} {
 									margin-left: 40px;
 								}
-						  `;
+							`;
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 				case ArticleDesign.Gallery: {
@@ -280,6 +283,7 @@ export const ArticleMeta = ({
 	tags,
 	primaryDateline,
 	secondaryDateline,
+	webPublicationDate,
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
@@ -307,6 +311,12 @@ export const ArticleMeta = ({
 	const audioData = getAudioData(mainMediaElements);
 	const podcast = getPodcast(tags);
 	const rssFeedUrl = getRssFeedUrl(tags);
+
+	const isFilterArticle = tags.some(
+		(tag) =>
+			tag.id === 'tracking/commissioningdesk/the-filter' ||
+			tag.id === 'tracking/commissioningdesk/filter-us',
+	);
 
 	return (
 		<div
@@ -375,11 +385,21 @@ export const ArticleMeta = ({
 								/>
 							)}
 
-							<Dateline
-								primaryDateline={primaryDateline}
-								secondaryDateline={secondaryDateline}
-								format={format}
-							/>
+							{!isUndefined(webPublicationDate) &&
+							isFilterArticle ? (
+								<TimeDateline
+									primaryDateline={primaryDateline}
+									secondaryDateline={secondaryDateline}
+									webPublicationDate={webPublicationDate}
+									format={format}
+								/>
+							) : (
+								<Dateline
+									primaryDateline={primaryDateline}
+									secondaryDateline={secondaryDateline}
+									format={format}
+								/>
+							)}
 						</div>
 					</>
 				</RowBelowLeftCol>

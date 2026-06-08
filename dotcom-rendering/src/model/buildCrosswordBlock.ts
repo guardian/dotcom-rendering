@@ -18,6 +18,6 @@ export const buildCrosswordBlock = (data: FEArticle): Block | undefined => {
 				},
 				primaryDateLine: data.webPublicationDateDisplay,
 				secondaryDateLine: data.webPublicationSecondaryDateDisplay,
-		  }
+			}
 		: undefined;
 };

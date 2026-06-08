@@ -51,7 +51,6 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { parse } from '../lib/slot-machine-flags';
-import { useBetaAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -248,11 +247,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const ab = useBetaAB();
-
-	const isWorldCup2026 =
-		article.tags.some((tag) => tag.id === worldCupTagId) &&
-		ab?.isUserInTest('webx-world-cup-2026-subnav');
+	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
 
 	const renderAds = canRenderAds(article);
 
@@ -505,6 +500,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 												secondaryDateline={
 													article.webPublicationSecondaryDateDisplay
 												}
+												webPublicationDate={
+													article.webPublicationDate
+												}
 												isCommentable={
 													article.isCommentable
 												}
@@ -535,6 +533,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											}
 											secondaryDateline={
 												article.webPublicationSecondaryDateDisplay
+											}
+											webPublicationDate={
+												article.webPublicationDate
 											}
 											isCommentable={
 												article.isCommentable

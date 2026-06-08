@@ -113,7 +113,7 @@ const enhanceTagPage = (body: unknown): TagPage => {
 	const tagPageBranding = branding
 		? decideTagPageBranding({
 				branding,
-		  })
+			})
 		: undefined;
 
 	const enhancedCards = enhanceCards(data.contents, {
@@ -144,7 +144,7 @@ const enhanceTagPage = (body: unknown): TagPage => {
 						...data.pagination,
 						sectionName: data.webTitle,
 						pageId: data.pageId,
-				  }
+					}
 				: undefined,
 		trendingTopics: extractTrendingTopics(data.contents, data.pageId),
 		header: {

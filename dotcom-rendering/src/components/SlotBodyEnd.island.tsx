@@ -24,7 +24,7 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -126,7 +126,7 @@ export const SlotBodyEnd = ({
 	const countryCode = useCountryCode('slot-body-end');
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
-	const abTests = useBetaAB();
+	const abTests = useAB();
 	const [pickMessageResult, setPickMessageResult] =
 		useState<PickMessageResult | null>(null);
 	const [asyncArticleCount, setAsyncArticleCount] =

@@ -1,4 +1,4 @@
-import { BetaABTests } from './beta-ab-tests';
+import { ABTests } from './ab-tests';
 
 // Mock @guardian/libs
 jest.mock('@guardian/libs', () => ({
@@ -12,8 +12,8 @@ jest.mock('../../client/abTesting', () => ({
 	getABTestParticipations: () => mockGetParticipations(),
 }));
 
-describe('BetaABTests', () => {
-	let betaABTests: BetaABTests;
+describe('ABTests', () => {
+	let abTests: ABTests;
 	let mockOphanRecord: jest.Mock;
 	let mockErrorReporter: jest.Mock;
 
@@ -33,12 +33,12 @@ describe('BetaABTests', () => {
 
 				mockGetParticipations.mockReturnValue(clientParticipations);
 
-				betaABTests = new BetaABTests({
+				abTests = new ABTests({
 					isServer: false,
 				});
 
 				expect(mockGetParticipations).toHaveBeenCalled();
-				expect(betaABTests.getParticipations()).toEqual(
+				expect(abTests.getParticipations()).toEqual(
 					clientParticipations,
 				);
 			});
@@ -53,11 +53,11 @@ describe('BetaABTests', () => {
 					serverTestB: 'serverVariantB',
 				};
 				mockGetParticipations.mockReturnValue(combinedParticipations);
-				betaABTests = new BetaABTests({
+				abTests = new ABTests({
 					isServer: false,
 				});
 
-				expect(betaABTests.getParticipations()).toEqual(
+				expect(abTests.getParticipations()).toEqual(
 					combinedParticipations,
 				);
 			});
@@ -72,15 +72,15 @@ describe('BetaABTests', () => {
 					serverTestB: 'serverVariantB',
 				};
 				mockGetParticipations.mockReturnValue(participations);
-				betaABTests = new BetaABTests({
+				abTests = new ABTests({
 					isServer: false,
 				});
 
 				// Should work for both client and server tests
-				expect(betaABTests.isUserInTest('clientTestA')).toBe(true);
-				expect(betaABTests.isUserInTest('clientTestB')).toBe(true);
-				expect(betaABTests.isUserInTest('serverTestA')).toBe(true);
-				expect(betaABTests.isUserInTest('serverTestB')).toBe(true);
+				expect(abTests.isUserInTest('clientTestA')).toBe(true);
+				expect(abTests.isUserInTest('clientTestB')).toBe(true);
+				expect(abTests.isUserInTest('serverTestA')).toBe(true);
+				expect(abTests.isUserInTest('serverTestB')).toBe(true);
 			});
 
 			it('should return false when user is not in test (client-side)', () => {
@@ -89,12 +89,12 @@ describe('BetaABTests', () => {
 					testB: 'variantB',
 				};
 				mockGetParticipations.mockReturnValue(participations);
-				betaABTests = new BetaABTests({
+				abTests = new ABTests({
 					isServer: false,
 				});
 
-				expect(betaABTests.isUserInTest('testC')).toBe(false);
-				expect(betaABTests.isUserInTest('nonExistentTest')).toBe(false);
+				expect(abTests.isUserInTest('testC')).toBe(false);
+				expect(abTests.isUserInTest('nonExistentTest')).toBe(false);
 			});
 
 			it('should return false when testId is undefined in client participations', () => {
@@ -102,11 +102,11 @@ describe('BetaABTests', () => {
 					testA: 'variantA',
 				};
 				mockGetParticipations.mockReturnValue(participations);
-				betaABTests = new BetaABTests({
+				abTests = new ABTests({
 					isServer: false,
 				});
 
-				expect(betaABTests.isUserInTest('testB')).toBe(false);
+				expect(abTests.isUserInTest('testB')).toBe(false);
 			});
 		});
 
@@ -120,34 +120,25 @@ describe('BetaABTests', () => {
 					serverTestB: 'control',
 				};
 				mockGetParticipations.mockReturnValue(participations);
-				betaABTests = new BetaABTests({
+				abTests = new ABTests({
 					isServer: false,
 				});
 
 				// Should work for both client and server tests
 				expect(
-					betaABTests.isUserInTestGroup(
-						'clientTestA',
-						'clientVariantA',
-					),
+					abTests.isUserInTestGroup('clientTestA', 'clientVariantA'),
 				).toBe(true);
 				expect(
-					betaABTests.isUserInTestGroup(
-						'clientTestB',
-						'clientVariantB',
-					),
+					abTests.isUserInTestGroup('clientTestB', 'clientVariantB'),
 				).toBe(true);
 				expect(
-					betaABTests.isUserInTestGroup('clientTestC', 'control'),
+					abTests.isUserInTestGroup('clientTestC', 'control'),
 				).toBe(true);
 				expect(
-					betaABTests.isUserInTestGroup(
-						'serverTestA',
-						'serverVariantA',
-					),
+					abTests.isUserInTestGroup('serverTestA', 'serverVariantA'),
 				).toBe(true);
 				expect(
-					betaABTests.isUserInTestGroup('serverTestB', 'control'),
+					abTests.isUserInTestGroup('serverTestB', 'control'),
 				).toBe(true);
 			});
 
@@ -158,17 +149,17 @@ describe('BetaABTests', () => {
 					testC: 'control',
 				};
 				mockGetParticipations.mockReturnValue(participations);
-				betaABTests = new BetaABTests({
+				abTests = new ABTests({
 					isServer: false,
 				});
 
-				expect(betaABTests.isUserInTestGroup('testA', 'variantB')).toBe(
+				expect(abTests.isUserInTestGroup('testA', 'variantB')).toBe(
 					false,
 				);
-				expect(betaABTests.isUserInTestGroup('testB', 'control')).toBe(
+				expect(abTests.isUserInTestGroup('testB', 'control')).toBe(
 					false,
 				);
-				expect(betaABTests.isUserInTestGroup('testC', 'variantA')).toBe(
+				expect(abTests.isUserInTestGroup('testC', 'variantA')).toBe(
 					false,
 				);
 			});
@@ -179,15 +170,12 @@ describe('BetaABTests', () => {
 					testB: 'variantB',
 				};
 				mockGetParticipations.mockReturnValue(participations);
-				betaABTests = new BetaABTests({
+				abTests = new ABTests({
 					isServer: false,
 				});
 
 				expect(
-					betaABTests.isUserInTestGroup(
-						'nonExistentTest',
-						'variantA',
-					),
+					abTests.isUserInTestGroup('nonExistentTest', 'variantA'),
 				).toBe(false);
 			});
 		});
@@ -201,7 +189,7 @@ describe('BetaABTests', () => {
 					serverTestB: 'serverVariantB',
 				};
 
-				const serverInstance = new BetaABTests({
+				const serverInstance = new ABTests({
 					serverSideABTests,
 					isServer: true,
 				});
@@ -219,7 +207,7 @@ describe('BetaABTests', () => {
 					serverTestB: 'serverVariantB',
 				};
 
-				const serverInstance = new BetaABTests({
+				const serverInstance = new ABTests({
 					serverSideABTests,
 					isServer: true,
 				});
@@ -233,7 +221,7 @@ describe('BetaABTests', () => {
 					serverTestA: 'serverVariantA',
 				};
 
-				const serverInstance = new BetaABTests({
+				const serverInstance = new ABTests({
 					serverSideABTests,
 					isServer: true,
 				});
@@ -251,7 +239,7 @@ describe('BetaABTests', () => {
 					serverTestB: 'control',
 				};
 
-				const serverInstance = new BetaABTests({
+				const serverInstance = new ABTests({
 					serverSideABTests,
 					isServer: true,
 				});
@@ -272,7 +260,7 @@ describe('BetaABTests', () => {
 					serverTestB: 'control',
 				};
 
-				const serverInstance = new BetaABTests({
+				const serverInstance = new ABTests({
 					serverSideABTests,
 					isServer: true,
 				});
@@ -293,7 +281,7 @@ describe('BetaABTests', () => {
 					serverTestA: 'serverVariantA',
 				};
 
-				const serverInstance = new BetaABTests({
+				const serverInstance = new ABTests({
 					serverSideABTests,
 					isServer: true,
 				});
@@ -314,11 +302,11 @@ describe('BetaABTests', () => {
 				testB: 'variantB',
 			};
 			mockGetParticipations.mockReturnValue(participations);
-			betaABTests = new BetaABTests({ isServer: false });
+			abTests = new ABTests({ isServer: false });
 		});
 
 		it('should call ophanRecord with correct payload', () => {
-			betaABTests.trackABTests(mockOphanRecord, mockErrorReporter);
+			abTests.trackABTests(mockOphanRecord, mockErrorReporter);
 
 			expect(mockOphanRecord).toHaveBeenCalledWith({
 				abTestRegister: {
@@ -337,9 +325,9 @@ describe('BetaABTests', () => {
 
 		it('should handle empty participations', () => {
 			mockGetParticipations.mockReturnValue({});
-			betaABTests = new BetaABTests({ isServer: false });
+			abTests = new ABTests({ isServer: false });
 
-			betaABTests.trackABTests(mockOphanRecord, mockErrorReporter);
+			abTests.trackABTests(mockOphanRecord, mockErrorReporter);
 
 			expect(mockOphanRecord).toHaveBeenCalledWith({
 				abTestRegister: {},
@@ -355,7 +343,7 @@ describe('BetaABTests', () => {
 				testB: 'variantB',
 			};
 			mockGetParticipations.mockReturnValue(participations);
-			betaABTests = new BetaABTests({ isServer: false });
+			abTests = new ABTests({ isServer: false });
 		});
 
 		it('should handle errors and call errorReporter', () => {
@@ -365,7 +353,7 @@ describe('BetaABTests', () => {
 				throw new Error('Test error');
 			});
 
-			betaABTests.trackABTests(mockOphanRecord, mockErrorReporter);
+			abTests.trackABTests(mockOphanRecord, mockErrorReporter);
 
 			expect(mockErrorReporter).toHaveBeenCalledWith(
 				new Error('Test error'),
@@ -386,9 +374,9 @@ describe('BetaABTests', () => {
 				},
 			};
 			mockGetParticipations.mockReturnValue(participationsWithError);
-			betaABTests = new BetaABTests({ isServer: false });
+			abTests = new ABTests({ isServer: false });
 
-			betaABTests.trackABTests(mockOphanRecord, mockErrorReporter);
+			abTests.trackABTests(mockOphanRecord, mockErrorReporter);
 
 			expect(mockErrorReporter).toHaveBeenCalledWith(
 				new Error('Test error'),
@@ -411,36 +399,33 @@ describe('BetaABTests', () => {
 				'ssr-experiment': 'control',
 			};
 			mockGetParticipations.mockReturnValue(participations);
-			betaABTests = new BetaABTests({
+			abTests = new ABTests({
 				isServer: false,
 			});
 
 			// Test all methods together
-			expect(betaABTests.getParticipations()).toEqual(participations);
+			expect(abTests.getParticipations()).toEqual(participations);
 
 			// Test client-side tests
-			expect(betaABTests.isUserInTest('header-experiment')).toBe(true);
-			expect(betaABTests.isUserInTest('non-existent-test')).toBe(false);
+			expect(abTests.isUserInTest('header-experiment')).toBe(true);
+			expect(abTests.isUserInTest('non-existent-test')).toBe(false);
 			expect(
-				betaABTests.isUserInTestGroup('header-experiment', 'variant'),
+				abTests.isUserInTestGroup('header-experiment', 'variant'),
 			).toBe(true);
 			expect(
-				betaABTests.isUserInTestGroup('header-experiment', 'control'),
+				abTests.isUserInTestGroup('header-experiment', 'control'),
 			).toBe(false);
 
 			// Test server-side tests that are available client-side
-			expect(betaABTests.isUserInTest('server-side-test')).toBe(true);
+			expect(abTests.isUserInTest('server-side-test')).toBe(true);
 			expect(
-				betaABTests.isUserInTestGroup(
-					'server-side-test',
-					'server-variant',
-				),
+				abTests.isUserInTestGroup('server-side-test', 'server-variant'),
 			).toBe(true);
-			expect(
-				betaABTests.isUserInTestGroup('ssr-experiment', 'control'),
-			).toBe(true);
+			expect(abTests.isUserInTestGroup('ssr-experiment', 'control')).toBe(
+				true,
+			);
 
-			betaABTests.trackABTests(mockOphanRecord, mockErrorReporter);
+			abTests.trackABTests(mockOphanRecord, mockErrorReporter);
 
 			expect(mockOphanRecord).toHaveBeenCalledWith({
 				abTestRegister: {

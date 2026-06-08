@@ -205,8 +205,8 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	const cardsImageOrSpaceTemplateString = choiceCardSettings
 		? 'choice-cards-container'
 		: imageSettings
-		? 'main-image'
-		: '.';
+			? 'main-image'
+			: '.';
 
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
@@ -307,10 +307,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					isCollapsableBanner && isCollapsed
 						? styles.collapsedLayoutOverrides(
 								cardsImageOrSpaceTemplateString,
-						  )
+							)
 						: styles.layoutOverrides(
 								cardsImageOrSpaceTemplateString,
-						  )
+							)
 				}
 			>
 				<div css={styles.guardianLogoContainer}>
@@ -417,7 +417,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						isCollapsableBanner
 							? styles.closeAndCollapseButtonContainer(
 									isCollapsed,
-							  )
+								)
 							: styles.closeButtonContainer
 					}
 				>
@@ -583,10 +583,9 @@ const styles = {
 			max-width: 740px;
 			margin: 0 auto;
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
-			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} max-content minmax(
-					0,
-					0.5fr
-				);
+			grid-template-columns:
+				minmax(0, 0.5fr)
+				${phabletContentMaxWidth} max-content minmax(0, 0.5fr);
 			grid-template-rows: auto auto auto;
 			grid-template-areas:
 				'.	copy-container						close-button			close-button'

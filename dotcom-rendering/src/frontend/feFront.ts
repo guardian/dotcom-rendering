@@ -2,7 +2,12 @@ import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { EditionBranding } from '../types/branding';
 import type { ServerSideTests, StageType, Switches } from '../types/config';
-import type { BoostLevel, Image, StarRating } from '../types/content';
+import type {
+	BoostLevel,
+	Image,
+	Newsletter,
+	StarRating,
+} from '../types/content';
 import type { FooterType } from '../types/footer';
 import type { FENavType } from '../types/frontend';
 import type { FETagType } from '../types/tag';
@@ -95,6 +100,7 @@ export interface FEMediaAsset {
 	platform: string;
 	mimeType?: string;
 	assetType: string;
+	aspectRatio?: string;
 	dimensions?: {
 		width: number;
 		height: number;
@@ -198,6 +204,7 @@ export type FEFrontCard = {
 		editionBrandings: EditionBranding[];
 		href?: string;
 		embedUri?: string;
+		newsletterData?: Newsletter;
 	};
 	header: {
 		isVideo: boolean;

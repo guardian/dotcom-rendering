@@ -49,7 +49,6 @@ type Props = {
 	isDev: boolean;
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
-	filterKeyEvents?: boolean;
 	abTests: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
@@ -139,7 +138,6 @@ export const ArticleBody = ({
 	isDev,
 	onFirstPage = false,
 	keyEvents = [],
-	filterKeyEvents = false,
 	keywordIds,
 	abTests,
 	tableOfContents,
@@ -217,7 +215,6 @@ export const ArticleBody = ({
 					contributionsServiceUrl={contributionsServiceUrl}
 					onFirstPage={onFirstPage}
 					keyEvents={keyEvents}
-					filterKeyEvents={filterKeyEvents}
 					keywordIds={keywordIds}
 					editionId={editionId}
 					shouldHideAds={shouldHideAds}

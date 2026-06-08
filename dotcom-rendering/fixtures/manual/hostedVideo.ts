@@ -40,7 +40,6 @@ export const hostedVideo: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-atom"> <gu-atom data-atom-id="80ed8aaa-dc67-4631-89c2-1e233bf1cd5a" data-atom-type="media"> \n  <div>\n   <iframe frameborder="0" allowfullscreen="true" src="https://www.youtube-nocookie.com/embed/oDbRVF-CUko?showinfo=0&amp;rel=0"></iframe>\n  </div>\n </gu-atom> \n</figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{

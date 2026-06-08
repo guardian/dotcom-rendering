@@ -2,7 +2,7 @@ import { activeABtests } from '@guardian/ab-testing-config';
 import { isUndefined } from '@guardian/libs';
 import { getABTestParticipations } from '../../client/abTesting';
 
-export interface BetaABTestAPI {
+export interface ABTestAPI {
 	getParticipations: () => ABParticipations;
 	isUserInTest: (testId: string) => boolean;
 	isUserInTestGroup: (testId: string, groupId: string) => boolean;
@@ -28,7 +28,7 @@ type OphanRecordFunction = (send: Record<string, OphanABPayload>) => void;
 
 type ErrorReporter = (e: unknown) => void;
 
-type BetaABTestsConfig =
+type ABTestsConfig =
 	| {
 			isServer: true;
 			serverSideABTests: Record<string, string>;
@@ -50,10 +50,10 @@ const makeABEvent = (variantName: string, complete: boolean): OphanABEvent => {
 	return event;
 };
 
-export class BetaABTests implements BetaABTestAPI {
+export class ABTests implements ABTestAPI {
 	private participations: ABParticipations;
 
-	constructor({ isServer, serverSideABTests }: BetaABTestsConfig) {
+	constructor({ isServer, serverSideABTests }: ABTestsConfig) {
 		if (isServer) {
 			this.participations = serverSideABTests;
 		} else {

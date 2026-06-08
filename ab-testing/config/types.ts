@@ -12,7 +12,8 @@ type Team =
 	| "thefilter"
 	| "newsletters"
 	| "fronts-and-curation"
-	| "growth";
+	| "growth"
+	| "martech";
 
 type TestName = `${Team}-${string}`;
 

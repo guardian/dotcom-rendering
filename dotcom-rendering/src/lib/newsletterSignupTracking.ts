@@ -2,7 +2,7 @@ import type { AbTest, TAction } from '@guardian/ophan-tracker-js';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
-export const AB_TEST_NAME = 'newsletters-newsletter-signup-card';
+export const AB_TEST_NAME = 'newsletters-signup-card-country-illustration';
 
 export type NewsletterEventDescription =
 	| 'click-button'
@@ -14,7 +14,9 @@ export type NewsletterEventDescription =
 	| 'captcha-load-error'
 	| 'form-submit-error'
 	| 'captcha-not-passed'
-	| 'captcha-passed';
+	| 'captcha-passed'
+	| 'highlights-card-viewed'
+	| 'highlights-card-modal-opened';
 
 export const EVENT_DESCRIPTION_TO_ACTION = {
 	'click-button': 'CLICK',
@@ -27,6 +29,8 @@ export const EVENT_DESCRIPTION_TO_ACTION = {
 	'form-submit-error': 'CLOSE',
 	'submission-failed': 'CLOSE',
 	'open-captcha': 'EXPAND',
+	'highlights-card-viewed': 'VIEW',
+	'highlights-card-modal-opened': 'EXPAND',
 } as const satisfies Record<NewsletterEventDescription, string>;
 
 /**
@@ -40,8 +44,12 @@ export const EVENT_DESCRIPTION_TO_ACTION = {
  */
 export const NEWSLETTER_SIGNUP_COMPONENT_ID = {
 	control: (identityName: string) => `AR SecureSignup ${identityName}`,
-	variant: (identityName: string) =>
-		`AR NewsletterSignupForm ${identityName}`,
+	variantNewField: (identityName: string) =>
+		`AR SecureSignup ${identityName} - variantNewField`,
+	variantIllustratedCard: (identityName: string) =>
+		`AR NewsletterSignupForm ${identityName} - variantIllustratedCard`,
+	highlightsCard: (identityName: string) =>
+		`HighlightsNewsletterCard ${identityName}`,
 } as const;
 
 /**

@@ -383,9 +383,6 @@
         "isLegacyInteractive": {
             "type": "boolean"
         },
-        "filterKeyEvents": {
-            "type": "boolean"
-        },
         "mostRecentBlockId": {
             "type": "string"
         },
@@ -561,7 +558,6 @@
         "designType",
         "editionId",
         "editionLongForm",
-        "filterKeyEvents",
         "format",
         "guardianBaseURL",
         "hasRelated",
@@ -4686,6 +4682,9 @@
                 "displayType": {
                     "$ref": "#/definitions/ProductDisplayType"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "productCtas": {
                     "type": "array",
                     "items": {
@@ -4723,6 +4722,7 @@
                 "customAttributes",
                 "displayType",
                 "elementId",
+                "id",
                 "primaryHeadingHtml",
                 "productCtas",
                 "productName",
@@ -6095,14 +6095,15 @@
                                     "width": {
                                         "type": "number"
                                     },
-                                    "aspectRatio": {
-                                        "type": "string"
-                                    },
                                     "hasAudio": {
                                         "type": "boolean"
+                                    },
+                                    "aspectRatio": {
+                                        "type": "string"
                                     }
                                 },
                                 "required": [
+                                    "hasAudio",
                                     "height",
                                     "mimeType",
                                     "src",

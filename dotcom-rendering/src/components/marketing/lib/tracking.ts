@@ -364,14 +364,14 @@ const createEventFromTracking = (action: TAction) => {
 				? {
 						name: abTestName,
 						variant: abTestVariant,
-				  }
+					}
 				: null;
 
 		const targetingAbTest = tracking.targetingAbTest
 			? {
 					name: tracking.targetingAbTest.testName,
 					variant: tracking.targetingAbTest.variantName,
-			  }
+				}
 			: null;
 
 		return {

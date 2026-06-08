@@ -288,7 +288,6 @@ export const Analysis: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="59ff93fd27eea2be66feecf0b9a7c0b98d12877a"> \n <img src="https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/1000.jpg" alt="The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters" width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.</span> <span class="element-image__credit">Photograph: Peter Morrison/AP</span> \n </figcaption> \n</figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{
