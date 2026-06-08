@@ -6,7 +6,6 @@ import {
 } from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
 import { useEffect, useId, useRef } from 'react';
-import { createPortal } from 'react-dom';
 import { useNewsletterSubscription } from '../../lib/useNewsletterSubscription';
 import type { Newsletter } from '../../types/content';
 import { NewsletterSignupCard } from '../NewsletterSignupCard';
@@ -134,11 +133,7 @@ export const HighlightsNewsletterSignupModal = ({
 		};
 	}, [onClose]);
 
-	if (typeof document === 'undefined') {
-		return null;
-	}
-
-	return createPortal(
+	return (
 		<div
 			ref={overlayRef}
 			css={overlayStyles}
@@ -193,7 +188,6 @@ export const HighlightsNewsletterSignupModal = ({
 					</NewsletterSignupCard>
 				</div>
 			</div>
-		</div>,
-		document.body,
+		</div>
 	);
 };
