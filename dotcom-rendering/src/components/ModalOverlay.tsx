@@ -89,6 +89,13 @@ const dialogStyles = ({ isVisible, dialogCss }: DialogStylesOptions) => [
 			ease;
 		will-change: transform;
 
+		/*
+		   This blocks Android from recognising or passing horizontal
+		   swipes to whatever carousel happens to live behind it.
+		*/
+		touch-action: pan-y;
+		overscroll-behavior: contain;
+
 		${from.tablet} {
 			transform: none;
 			opacity: ${isVisible ? 1 : 0};
@@ -230,7 +237,6 @@ export const ModalOverlay = ({
 				return;
 			}
 
-			// Only trap Tab when focus is already inside the dialog
 			if (!dialogElement.contains(document.activeElement)) {
 				return;
 			}
@@ -301,6 +307,7 @@ export const ModalOverlay = ({
 	return createPortal(
 		<div ref={overlayRef} css={overlayStyles(isVisible)}>
 			<div
+				/* PRISTINE JSX: No hacky touch handlers needed anymore */
 				ref={dialogRef}
 				role="dialog"
 				aria-modal="true"
