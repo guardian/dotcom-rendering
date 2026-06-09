@@ -100,7 +100,6 @@ const linkOverlayStyles = css`
 const content = css`
 	display: flex;
 	flex-direction: column;
-	gap: ${space[1]}px;
 
 	${from.tablet} {
 		padding-bottom: 10px;
@@ -115,15 +114,16 @@ const content = css`
 
 const kickerStyles = css`
 	${textSans15};
-	color: ${palette('--newsletter-card-frequency-tag')};
+	line-height: 1;
+	color: ${palette('--highlights-card-kicker-text')};
 	display: flex;
 	align-items: center;
-	gap: 4px;
+	gap: 2px;
 
 	svg {
 		height: 20px;
 		width: 20px;
-		fill: currentColor;
+		fill: ${palette('--newsletter-card-frequency-tag')};
 		flex-shrink: 0;
 	}
 `;
