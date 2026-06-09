@@ -106,11 +106,11 @@ const getIslands = async (report) => {
 
 			const lines = match
 				? '#' +
-				  [
+					[
 						content.slice(0, index).split('\n').length + 1,
 						content.slice(0, index + match.length).split('\n')
 							.length + 2,
-				  ]
+					]
 						.map((line_count) => `L${line_count}`)
 						.join('-')
 				: '';

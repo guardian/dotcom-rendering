@@ -161,7 +161,7 @@ export const groupTrailsByDates = (
 						trail,
 						date: new Date(trail.webPublicationDate),
 					},
-			  ]
+				]
 			: [],
 	);
 

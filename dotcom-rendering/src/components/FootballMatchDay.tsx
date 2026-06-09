@@ -34,21 +34,20 @@ export const FootballMatchDay = ({
 	guardianBaseUrl,
 	edition,
 }: Props) => (
-	<section css={paletteCss}>
+	<section css={containerCss}>
 		{matches[0]?.competitions[0]?.name && (
 			<h3 css={kickerCss}>{matches[0].competitions[0].name} matchday</h3>
 		)}
 		{matches.length > 0 ? (
 			<ul css={matchesCss}>
-				{matches.map(
-					(day) =>
-						day.competitions[0]?.matches.map((match) => (
-							<Match
-								key={match.paId}
-								match={match}
-								edition={edition}
-							/>
-						)),
+				{matches.map((day) =>
+					day.competitions[0]?.matches.map((match) => (
+						<Match
+							key={match.paId}
+							match={match}
+							edition={edition}
+						/>
+					)),
 				)}
 			</ul>
 		) : (
@@ -73,7 +72,7 @@ export const FootballMatchDay = ({
  * are unavailable. (And it would be undesirable to output the full palette.)
  */
 
-const paletteCss = css`
+const containerCss = css`
 	--match-day-text: ${neutral[7]};
 	--match-day-text-live: ${neutral[7]};
 	--match-day-text-result: ${neutral[97]};
@@ -86,6 +85,10 @@ const paletteCss = css`
 	--match-day-kicker: ${sport[400]};
 	--match-day-border: ${neutral[86]};
 	--match-day-crest: ${neutral[100]};
+
+	display: flex;
+	flex-direction: column;
+	gap: ${space[2]}px;
 
 	.ios,
 	.android {
@@ -107,7 +110,7 @@ const paletteCss = css`
 const kickerCss = css`
 	${textSans15}
 	color: var(--match-day-kicker);
-	margin-bottom: ${space[2]}px;
+	margin: 0;
 `;
 
 const matchesCss = css`
@@ -128,10 +131,9 @@ const noMatchesCss = css`
 
 const fixtureLinkCss = css`
 	${textSans15}
-	display: inline-flex;
+	display: flex;
 	align-items: center;
-	float: right;
-	margin-top: ${space[3]}px;
+	align-self: flex-end;
 	color: var(--match-day-text);
 	text-decoration: none;
 	&:hover {

@@ -20,7 +20,7 @@ const mockAB = (
 			(variant !== 'control'
 				? {
 						[AB_TEST_NAME]: variant,
-				  }
+					}
 				: {}) as Record<string, string>,
 		trackABTests: () => ({}),
 	});

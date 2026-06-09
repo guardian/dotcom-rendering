@@ -89,7 +89,7 @@ const TopBarLinkContainer = ({
 				? verticalDividerStyles
 				: css`
 						align-items: center;
-				  `,
+					`,
 		]}
 		style={{ paddingRight: isLastChild ? 0 : `${space[3]}px` }}
 	>

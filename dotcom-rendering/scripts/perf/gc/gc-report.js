@@ -33,7 +33,9 @@ lineReader.on('line', (line) => {
 
 		totalGCCount++;
 		totalPauseTime += pause;
-		if (pause > maxPauseTime) maxPauseTime = pause;
+		if (pause > maxPauseTime) {
+			maxPauseTime = pause;
+		}
 
 		if (!gcStatsByType[type]) {
 			gcStatsByType[type] = {

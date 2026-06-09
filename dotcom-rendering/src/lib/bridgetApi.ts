@@ -10,6 +10,7 @@ import * as Gallery from '@guardian/bridget/Gallery';
 import * as Interaction from '@guardian/bridget/Interaction';
 import * as Interactives from '@guardian/bridget/Interactives';
 import * as ListenToArticle from '@guardian/bridget/ListenToArticle';
+import * as LiveActivities from '@guardian/bridget/LiveActivities';
 import * as MatchNotifications from '@guardian/bridget/MatchNotifications';
 import * as Metrics from '@guardian/bridget/Metrics';
 import * as Navigation from '@guardian/bridget/Navigation';
@@ -30,9 +31,11 @@ type BridgetClient<Client extends ThriftClient> = Omit<
 	| '_methodParameters'
 >;
 
-let environmentClient: Environment.Client<void> | undefined = undefined;
-export const getEnvironmentClient = (): Environment.Client<void> => {
-	if (isUndefined(environmentClient)) {
+export type EnvironmentClient = BridgetClient<Environment.Client>;
+
+let environmentClient: EnvironmentClient | undefined = undefined;
+export const getEnvironmentClient = (): EnvironmentClient => {
+	if (!environmentClient) {
 		environmentClient = createAppClient<Environment.Client<void>>(
 			Environment.Client,
 			'buffered',
@@ -253,4 +256,18 @@ export const getMatchNotificationsClient = (): MatchNotificationsClient => {
 		>(MatchNotifications.Client, 'buffered', 'compact');
 	}
 	return matchNotificationsClient;
+};
+
+export type LiveActivitiesClient = BridgetClient<LiveActivities.Client>;
+
+let liveActivitiesClient: LiveActivitiesClient | undefined = undefined;
+export const getLiveActivitiesClient = (): LiveActivitiesClient => {
+	if (!liveActivitiesClient) {
+		liveActivitiesClient = createAppClient<LiveActivities.Client<void>>(
+			LiveActivities.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return liveActivitiesClient;
 };

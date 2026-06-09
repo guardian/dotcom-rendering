@@ -119,6 +119,7 @@ export type Props = {
 	aspectRatio: number;
 	FallbackImageComponent: ReactElement;
 	currentTime: number;
+	duration?: number;
 	hasAudio: boolean;
 	isMuted: boolean;
 	handleLoadedMetadata: (event: SyntheticEvent) => void;
@@ -129,11 +130,12 @@ export type Props = {
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
 	handleProgressBarInput: (event: React.FormEvent<HTMLInputElement>) => void;
+	handleProgressBarSeekStart: () => void;
+	handleProgressBarSeekEnd: () => void;
 	handleTimeUpdate: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	handlePause: (event: SyntheticEvent) => void;
 	handleFullscreenClick: (event: SyntheticEvent) => void;
 	handleEnded?: (event: SyntheticEvent) => void;
-	updateCurrentTime: (time: number) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	posterImage?: string;
 	preloadPartialData: boolean;
@@ -151,6 +153,7 @@ export type Props = {
 	isInteractive: boolean;
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
+	isFullscreen: boolean;
 	isWebKitFullscreen: boolean;
 	/* used by the card link component for click through to article functionality */
 	linkTo: string;
@@ -183,6 +186,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			FallbackImageComponent,
 			posterImage,
 			currentTime,
+			duration,
 			hasAudio,
 			isMuted,
 			handleLoadedMetadata,
@@ -193,17 +197,18 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleAudioClick,
 			handleKeyDown,
 			handleProgressBarInput,
+			handleProgressBarSeekStart,
+			handleProgressBarSeekEnd,
 			handleTimeUpdate,
 			handlePause,
 			handleFullscreenClick,
 			handleEnded,
-			updateCurrentTime,
 			onError,
 			preloadPartialData,
-			showProgressBar: canShowProgressBar,
+			showProgressBar,
 			useLongFormProgressBar,
 			showPlayPauseIcon,
-			showIcons: canShowIcons,
+			showIcons,
 			showFullscreenIcon,
 			showSubtitles: canShowSubtitles,
 			subtitleSource,
@@ -213,6 +218,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			iconsPosition,
 			subtitlesPosition,
+			isFullscreen,
 			isWebKitFullscreen,
 			linkTo,
 			cardLink,
@@ -222,12 +228,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 	) => {
 		const videoId = `video-${uniqueId}`;
 
-		const currentRefExists = ref && 'current' in ref && !!ref.current;
-
-		const showSubtitles = canShowSubtitles && !!subtitleSource;
+		const showSubtitles = canShowSubtitles && subtitleSource !== undefined;
 		const showCustomSubtitles = showSubtitles && !isWebKitFullscreen;
-		const showProgressBar = canShowProgressBar && currentRefExists;
-		const showIcons = canShowIcons && currentRefExists;
 
 		return (
 			<>
@@ -300,7 +302,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					)}
 					{FallbackImageComponent}
 				</video>
-				{showCustomSubtitles && !!activeCue?.text && (
+				{showCustomSubtitles && activeCue?.text !== undefined && (
 					<SubtitleOverlay
 						text={activeCue.text}
 						size={subtitleSize}
@@ -325,20 +327,22 @@ export const SelfHostedVideoPlayer = forwardRef(
 							/>
 						)}
 					{showProgressBar &&
+						duration !== undefined &&
 						(useLongFormProgressBar ? (
 							<VideoProgressBarInteractive
 								videoId={videoId}
 								currentTime={currentTime}
-								duration={ref.current!.duration}
-								updateCurrentTime={updateCurrentTime}
+								duration={duration}
 								handleKeyDown={handleKeyDown}
 								handleInput={handleProgressBarInput}
+								onSeekStart={handleProgressBarSeekStart}
+								onSeekEnd={handleProgressBarSeekEnd}
 							/>
 						) : (
 							<VideoProgressBar
 								videoId={videoId}
 								currentTime={currentTime}
-								duration={ref.current!.duration}
+								duration={duration}
 							/>
 						))}
 					{((showIcons && (showFullscreenIcon || hasAudio)) ||
@@ -364,6 +368,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 							)}
 							{showFullscreenIcon && (
 								<FullscreenIcon
+									isFullscreen={isFullscreen}
 									handleClick={handleFullscreenClick}
 								/>
 							)}
@@ -380,3 +385,4 @@ export const SelfHostedVideoPlayer = forwardRef(
 		);
 	},
 );
+SelfHostedVideoPlayer.displayName = 'SelfHostedVideoPlayer';

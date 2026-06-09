@@ -13,7 +13,6 @@ import {
 import { grid } from '../grid';
 import { getInteractionClient } from '../lib/bridgetApi';
 import { generateImageURL } from '../lib/image';
-import { useAB } from '../lib/useAB';
 import { worldCup2026PageIds } from '../lib/worldCup2026';
 import {
 	WorldCup2026Icon,
@@ -80,15 +79,15 @@ const worldCup2026Links = [
 	},
 	{
 		label: 'Player guide',
-		id: '',
+		id: 'football/ng-interactive/2026/jun/04/world-cup-2026-complete-player-guide',
 	},
 	{
 		label: 'Bracketology',
-		id: '',
+		id: 'football/ng-interactive/2026/jun/04/bracketology-predict-a-path-to-world-cup-victory',
 	},
 	{
 		label: 'Golden boot',
-		id: '',
+		id: 'football/ng-interactive/2026/jun/04/golden-boot-world-cup-2026-top-goalscorers-winner',
 	},
 	{
 		label: 'More football',
@@ -137,7 +136,7 @@ const configs = [
 		textHoverColor: themePalette('--masthead-nav-link-text-hover'),
 		backgroundColor: {
 			web: themePalette('--masthead-nav-background'),
-			app: themePalette('--article-background'),
+			app: themePalette('--apps-directory-page-nav-background'),
 		},
 		borderColor: {
 			web: themePalette('--masthead-nav-lines'),
@@ -254,8 +253,6 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const isApps = renderingTarget === 'Apps';
 
-	const ab = useAB();
-
 	const config = configs.find(
 		(cfg) =>
 			cfg.pageIds.includes(pageId) ||
@@ -265,13 +262,6 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	);
 
 	if (!config) {
-		return null;
-	}
-
-	if (
-		config.title.id === 'football/world-cup-2026' &&
-		ab?.isUserInTest('webx-world-cup-2026-subnav') !== true
-	) {
 		return null;
 	}
 
