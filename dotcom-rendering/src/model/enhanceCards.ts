@@ -481,6 +481,7 @@ export const enhanceCards = (
 			isImmersive: !!faciaCard.display.isImmersive,
 			isCrossword: faciaCard.properties.isCrossword,
 			isNewsletter,
+			newsletterData: faciaCard.properties.newsletterData,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			// show latest 3 updates from a live blog
 			showLivePlayable: faciaCard.display.showLivePlayable,

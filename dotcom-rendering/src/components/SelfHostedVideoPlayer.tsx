@@ -153,6 +153,7 @@ export type Props = {
 	isInteractive: boolean;
 	iconsPosition: ControlsPosition;
 	subtitlesPosition: SubtitlesPosition;
+	isFullscreen: boolean;
 	isWebKitFullscreen: boolean;
 	/* used by the card link component for click through to article functionality */
 	linkTo: string;
@@ -217,6 +218,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			isInteractive,
 			iconsPosition,
 			subtitlesPosition,
+			isFullscreen,
 			isWebKitFullscreen,
 			linkTo,
 			cardLink,
@@ -366,6 +368,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 							)}
 							{showFullscreenIcon && (
 								<FullscreenIcon
+									isFullscreen={isFullscreen}
 									handleClick={handleFullscreenClick}
 								/>
 							)}

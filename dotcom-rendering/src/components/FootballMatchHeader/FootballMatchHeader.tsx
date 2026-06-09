@@ -20,6 +20,8 @@ import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import type {
+	EnvironmentClient,
+	LiveActivitiesClient,
 	MatchNotificationsClient,
 	NotificationsClient,
 } from '../../lib/bridgetApi';
@@ -58,6 +60,8 @@ type Props = FootballMatchHeaderProps & {
 	refreshInterval: number;
 	notificationsClient: NotificationsClient;
 	matchNotificationsClient: MatchNotificationsClient;
+	environmentClient: EnvironmentClient;
+	liveActivitiesClient: LiveActivitiesClient;
 };
 
 export const FootballMatchHeader = (props: Props) => {
@@ -134,6 +138,8 @@ export const FootballMatchHeader = (props: Props) => {
 					match={match}
 					notificationsClient={props.notificationsClient}
 					matchNotificationsClient={props.matchNotificationsClient}
+					environmentClient={props.environmentClient}
+					liveActivitiesClient={props.liveActivitiesClient}
 				/>
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 				<Tabs {...tabs} />

@@ -53,8 +53,8 @@ const VISIBILITY_THRESHOLD = 0.5;
 /**
  * The duration in ms for which controls are displayed before fading out.
  */
-const CONTROLS_FADE_DELAY = 2700;
-const PLAY_BUTTON_FADE_DELAY = 1700;
+const CONTROLS_FADE_DELAY = 3_000;
+const PLAY_BUTTON_FADE_DELAY = 1_500;
 
 const cardStyles = (
 	isInteractive: boolean,
@@ -179,47 +179,35 @@ const fullscreenStyles = css`
 	}
 `;
 
-const showTransitionStyles = css`
-	visibility: visible;
-	opacity: 1;
-	transition:
-		visibility 0.2s,
-		opacity 0.2s ease-in-out;
-`;
-
 const showControlsStyles = css`
 	.controls-container {
-		${showTransitionStyles};
+		visibility: visible;
+		opacity: 1;
 	}
 
 	.play-pause-icon {
-		${showTransitionStyles};
+		visibility: visible;
+		opacity: 1;
 	}
-`;
-
-const hideTransitionStyles = css`
-	visibility: hidden;
-	opacity: 0;
-	transition:
-		visibility 0.3s,
-		opacity 0.3s ease-in-out;
 `;
 
 const hideControlsStyles = css`
 	.controls-container {
-		${hideTransitionStyles}
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			visibility 500ms,
+			opacity 500ms ease-in-out;
 		transition-delay: ${CONTROLS_FADE_DELAY}ms;
 	}
 
 	.play-pause-icon {
-		${hideTransitionStyles}
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			visibility 400ms,
+			opacity 400ms ease-in-out;
 		transition-delay: ${PLAY_BUTTON_FADE_DELAY}ms;
-	}
-
-	@media (hover: hover) {
-		:hover {
-			${showControlsStyles}
-		}
 	}
 `;
 
@@ -442,6 +430,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
+	const [isFullscreen, setIsFullscreen] = useState(false);
 	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
 	const [isProgressBarSeeking, setIsProgressBarSeeking] = useState(false);
 	/** Whether the video should show controls */
@@ -524,6 +513,17 @@ export const SelfHostedVideo = ({
 	const optimisedPosterImage = showPosterImage
 		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
 		: undefined;
+
+	const showFadeableControls =
+		videoStyleSettings.hideControlsWhenNotInteractedWith &&
+		!showControls &&
+		playerState === 'PLAYING';
+
+	const hideFadeableControls =
+		videoStyleSettings.hideControlsWhenNotInteractedWith &&
+		showControls &&
+		(playerState === 'PAUSED_BY_USER' ||
+			playerState === 'PAUSED_BY_BROWSER');
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
 
@@ -862,38 +862,55 @@ export const SelfHostedVideo = ({
 
 		if (!playerContainer && !video) return;
 
-		const reportFullscreenEvent = () => {
-			const event =
-				document.fullscreenElement ||
-				(video &&
+		const updateStateAndReportFullscreenEvent = () => {
+			const isInFullscreenMode =
+				document.fullscreenElement !== null ||
+				(video !== null &&
 					'webkitDisplayingFullscreen' in video &&
-					Boolean(video.webkitDisplayingFullscreen))
-					? 'enter_fullscreen'
-					: 'exit_fullscreen';
+					Boolean(video.webkitDisplayingFullscreen));
+
+			if (isInFullscreenMode) {
+				setIsFullscreen(true);
+			} else {
+				setIsFullscreen(false);
+			}
+
+			const event = isInFullscreenMode
+				? 'enter_fullscreen'
+				: 'exit_fullscreen';
 
 			sendOphanTrackingEvent(event);
 		};
 
 		for (const event of fullscreenChangeEvents) {
 			if (video) {
-				video.addEventListener(event, reportFullscreenEvent);
+				video.addEventListener(
+					event,
+					updateStateAndReportFullscreenEvent,
+				);
 			}
 
 			if (playerContainer) {
-				playerContainer.addEventListener(event, reportFullscreenEvent);
+				playerContainer.addEventListener(
+					event,
+					updateStateAndReportFullscreenEvent,
+				);
 			}
 		}
 
 		return () => {
 			for (const event of fullscreenChangeEvents) {
 				if (video) {
-					video.removeEventListener(event, reportFullscreenEvent);
+					video.removeEventListener(
+						event,
+						updateStateAndReportFullscreenEvent,
+					);
 				}
 
 				if (playerContainer) {
 					playerContainer.removeEventListener(
 						event,
-						reportFullscreenEvent,
+						updateStateAndReportFullscreenEvent,
 					);
 				}
 			}
@@ -1261,17 +1278,10 @@ export const SelfHostedVideo = ({
 							containerAspectRatioDesktop,
 						),
 						fullscreenStyles,
-						videoStyleSettings.hideControlsWhenNotInteractedWith &&
-							!showControls &&
-							playerState === 'PLAYING' &&
-							hideControlsStyles,
-						videoStyleSettings.hideControlsWhenNotInteractedWith &&
-							showControls &&
-							(playerState === 'PAUSED_BY_USER' ||
-								playerState === 'PAUSED_BY_BROWSER') &&
-							showControlsStyles,
+						showFadeableControls && hideControlsStyles,
+						hideFadeableControls && showControlsStyles,
 					]}
-					onMouseOver={showControlsAndStartTimer}
+					onMouseMove={showControlsAndStartTimer}
 				>
 					<SelfHostedVideoPlayer
 						sources={optimisedSources}
@@ -1325,6 +1335,7 @@ export const SelfHostedVideo = ({
 							videoStyleSettings.supportsFullscreen
 						}
 						isInteractive={videoStyleSettings.isInteractive}
+						isFullscreen={isFullscreen}
 						isWebKitFullscreen={isWebKitFullscreen}
 						linkTo={linkTo}
 						cardLink={cardLink}
