@@ -958,6 +958,7 @@ export const Card = ({
 									subtitleSize={subtitleSize}
 									minAspectRatio={3 / 4}
 									containerAspectRatioDesktop={5 / 4}
+									preventAutoplay={false}
 									cardLink={{
 										headlineText,
 										dataLinkName: resolvedDataLinkName,

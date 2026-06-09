@@ -638,6 +638,7 @@ export const FeatureCard = ({
 											controlsPosition="top"
 											minAspectRatio={aspectRatioNumber}
 											maxAspectRatio={aspectRatioNumber}
+											preventAutoplay={false}
 											cardLink={{
 												headlineText,
 												dataLinkName:
