@@ -10,9 +10,9 @@ for the web (which is historically what it was built for), but also for our apps
 While the goal (both from an engineering & product) perspective is that content rendered for each target
 will remain largely the same, we do need to support some differences.
 
--   Using web technology vs native implementations of some features, e.g videos & lightbox.
--   Commercial code like adverts & reader revenue callouts.
--   Support for dark-mode
+- Using web technology vs native implementations of some features, e.g videos & lightbox.
+- Commercial code like adverts & reader revenue callouts.
+- Support for dark-mode
 
 In order to support these differences, we're implementing a `renderingTarget` type that will allow a component
 or piece of code to know whether it should output for web, apps, or any other potential target.

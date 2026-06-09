@@ -17,7 +17,7 @@ function hexToRgb(hex: string): {
 				r: parseInt(r, 16),
 				g: parseInt(g, 16),
 				b: parseInt(b, 16),
-		  }
+			}
 		: null;
 }
 

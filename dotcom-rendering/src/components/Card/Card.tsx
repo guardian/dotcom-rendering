@@ -414,16 +414,18 @@ export const Card = ({
 	allowHeadlineToBreakWords,
 }: Props) => {
 	const ab = useAB();
-	const isInLoopClickTestControl =
+	const isInLoopClickTestControl = Boolean(
 		ab?.isUserInTestGroup(
 			'fronts-and-curation-loop-click-through',
 			'control',
-		) ?? false;
-	const isInLoopClickTestVariant =
+		),
+	);
+	const isInLoopClickTestVariant = Boolean(
 		ab?.isUserInTestGroup(
 			'fronts-and-curation-loop-click-through',
 			'variant',
-		) ?? false;
+		),
+	);
 
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -753,7 +755,7 @@ export const Card = ({
 			? getOphanComponents({
 					branding,
 					locationPrefix,
-			  })
+				})
 			: undefined;
 
 		return (
@@ -803,10 +805,14 @@ export const Card = ({
 		);
 	};
 
-	const isInLoopClickTest =
-		isSelfHostedVideo &&
-		media.mainMedia.videoStyle === 'Loop' &&
-		(isInLoopClickTestControl || isInLoopClickTestVariant);
+	const isLoopAndInLoopClickTestControl = Boolean(
+		media?.type === 'loop-video' && isInLoopClickTestControl,
+	);
+	const isLoopAndInLoopClickTestVariant = Boolean(
+		media?.type === 'loop-video' && isInLoopClickTestVariant,
+	);
+	const isLoopAndInLoopClickTest =
+		isLoopAndInLoopClickTestControl || isLoopAndInLoopClickTestVariant;
 
 	return (
 		<CardWrapper
@@ -825,10 +831,8 @@ export const Card = ({
 				headlineText={headlineText}
 				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
-				isLoopClickThroughTest={Boolean(isInLoopClickTest)}
-				isLoopClickThroughTestVariant={Boolean(
-					isInLoopClickTestVariant,
-				)}
+				isLoopAndInLoopClickTest={isLoopAndInLoopClickTest}
+				shouldRaiseZIndexForAbTest={false} // The z-index is raised in a new CardLink in the SelfHostedVideo island.
 			/>
 			{headlinePosition === 'outer' && (
 				<div
@@ -957,13 +961,14 @@ export const Card = ({
 									subtitleSize={subtitleSize}
 									minAspectRatio={3 / 4}
 									containerAspectRatioDesktop={5 / 4}
+									preventAutoplay={false}
 									cardLink={{
 										headlineText,
 										dataLinkName: resolvedDataLinkName,
 										isExternalLink,
 									}}
 									isInLoopClickTestVariant={
-										isInLoopClickTestVariant
+										isLoopAndInLoopClickTestVariant
 									}
 								/>
 							</Island>

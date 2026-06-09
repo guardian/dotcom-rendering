@@ -138,9 +138,8 @@ export const YoutubeBlockComponent = ({
 	useEffect(() => {
 		if (renderingTarget === 'Web') {
 			const defineConsentState = async () => {
-				const { onConsentChange } = await import(
-					'@guardian/consent-manager'
-				);
+				const { onConsentChange } =
+					await import('@guardian/consent-manager');
 				onConsentChange((newConsent: ConsentState) => {
 					setConsentState(newConsent);
 				});

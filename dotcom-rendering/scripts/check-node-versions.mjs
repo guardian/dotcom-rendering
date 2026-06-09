@@ -105,7 +105,7 @@ const problems = (
 								nodeVersion,
 								foundNodeVersion,
 								matchLevel,
-						  );
+							);
 
 				return matches
 					? undefined

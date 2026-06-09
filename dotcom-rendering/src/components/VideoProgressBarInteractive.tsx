@@ -7,7 +7,6 @@ import {
 import { getZIndex } from '../lib/getZIndex';
 import {
 	convertCurrentTimeToProgressPercentage,
-	convertProgressPercentageToCurrentTime,
 	formatTimeForDisplay,
 } from '../lib/video';
 import { palette } from '../palette';
@@ -116,28 +115,14 @@ const progressBarStyles = (roundedProgressPercentage: number) => css`
 	}
 `;
 
-const handleChange = (
-	value: string,
-	duration: Props['duration'],
-	updateCurrentTime: Props['updateCurrentTime'],
-) => {
-	const percentage = Number(value);
-	const time = convertProgressPercentageToCurrentTime(percentage, duration);
-
-	if (time === null) {
-		return;
-	}
-
-	updateCurrentTime(time);
-};
-
 type Props = {
 	videoId: string;
 	currentTime: number;
 	duration: number;
-	updateCurrentTime: (time: number) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 	handleInput: (event: React.FormEvent<HTMLInputElement>) => void;
+	onSeekStart: () => void;
+	onSeekEnd: () => void;
 };
 
 /**
@@ -150,9 +135,10 @@ export const VideoProgressBarInteractive = ({
 	videoId,
 	currentTime,
 	duration,
-	updateCurrentTime,
 	handleKeyDown,
 	handleInput,
+	onSeekStart,
+	onSeekEnd,
 }: Props) => {
 	if (duration <= 0) {
 		return null;
@@ -182,15 +168,12 @@ export const VideoProgressBarInteractive = ({
 				max={100}
 				step={0.01}
 				tabIndex={0}
-				onChange={(event) => {
-					handleChange(
-						event.target.value,
-						duration,
-						updateCurrentTime,
-					);
-				}}
 				onInput={handleInput}
 				onKeyDown={handleKeyDown}
+				onPointerDown={onSeekStart}
+				onPointerUp={onSeekEnd}
+				onPointerCancel={onSeekEnd}
+				onBlur={onSeekEnd}
 			/>
 		</div>
 	);

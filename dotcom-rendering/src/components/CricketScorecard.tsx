@@ -71,18 +71,24 @@ const hideFromTabletStyle = css`
 
 const cricketScorecardGridStyles = css`
 	display: grid;
-	grid-template-columns: [centre-column-start] repeat(4, 1fr) [centre-column-end];
+	grid-template-columns:
+		[centre-column-start] repeat(4, 1fr)
+		[centre-column-end];
 	column-gap: 10px;
 	${from.mobileLandscape} {
 		column-gap: 20px;
 	}
 
 	${from.tablet} {
-		grid-template-columns: [centre-column-start] repeat(12, 40px) [centre-column-end];
+		grid-template-columns:
+			[centre-column-start] repeat(12, 40px)
+			[centre-column-end];
 	}
 
 	${from.desktop} {
-		grid-template-columns: [centre-column-start] repeat(8, 60px) [centre-column-end];
+		grid-template-columns:
+			[centre-column-start] repeat(8, 60px)
+			[centre-column-end];
 	}
 
 	${from.leftCol} {

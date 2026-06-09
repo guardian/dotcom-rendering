@@ -154,8 +154,8 @@ describe('NewsletterSignupForm', () => {
 		jest.clearAllMocks();
 
 		// Reset reCAPTCHA to the default happy-path behaviour.
-		mockRecaptcha(
-			(_handle, props) => props.onChange?.('test-recaptcha-token'),
+		mockRecaptcha((_handle, props) =>
+			props.onChange?.('test-recaptcha-token'),
 		);
 
 		(useIsSignedIn as jest.Mock).mockReturnValue(false);

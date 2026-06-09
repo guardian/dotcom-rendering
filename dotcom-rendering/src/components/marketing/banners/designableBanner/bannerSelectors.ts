@@ -1,8 +1,8 @@
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
-import type { BannerRenderProps } from '../../common/types';
-import type { BannerTemplateSettings } from '../settings';
+import type { BannerRenderProps } from '../common/types';
 import type { BannerSelectors } from './BannerProps';
+import type { BannerTemplateSettings } from './settings';
 
 type BuildBannerSelectorsArgs = {
 	content: BannerRenderProps['content'];

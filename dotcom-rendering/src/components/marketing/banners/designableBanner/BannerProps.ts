@@ -6,8 +6,8 @@ import type {
 	BannerEnrichedReminderCta,
 	BannerRenderProps,
 	ContributionsReminderTracking,
-} from '../../common/types';
-import type { BannerTemplateSettings } from '../settings';
+} from '../common/types';
+import type { BannerTemplateSettings } from './settings';
 
 export interface BannerSelectors {
 	copyForViewport: BannerRenderProps['content']['mainContent'];

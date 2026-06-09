@@ -1,17 +1,7 @@
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
-import { ABTests } from '../experiments/lib/ab-tests';
-import { setABTests } from '../lib/useAB';
 import { ConfigProvider } from './ConfigContext';
 import { DirectoryPageNav } from './DirectoryPageNav.island';
-
-const mockAB = new ABTests({
-	isServer: true,
-	serverSideABTests: {
-		'webx-world-cup-2026-subnav': 'enable',
-	},
-});
-setABTests(mockAB);
 
 const meta = preview.meta({
 	component: DirectoryPageNav,

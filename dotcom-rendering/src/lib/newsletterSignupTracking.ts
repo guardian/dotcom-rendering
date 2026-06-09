@@ -14,7 +14,10 @@ export type NewsletterEventDescription =
 	| 'captcha-load-error'
 	| 'form-submit-error'
 	| 'captcha-not-passed'
-	| 'captcha-passed';
+	| 'captcha-passed'
+	| 'highlights-card-viewed'
+	| 'highlights-card-modal-opened'
+	| 'highlights-card-modal-closed';
 
 export const EVENT_DESCRIPTION_TO_ACTION = {
 	'click-button': 'CLICK',
@@ -27,6 +30,9 @@ export const EVENT_DESCRIPTION_TO_ACTION = {
 	'form-submit-error': 'CLOSE',
 	'submission-failed': 'CLOSE',
 	'open-captcha': 'EXPAND',
+	'highlights-card-viewed': 'VIEW',
+	'highlights-card-modal-opened': 'EXPAND',
+	'highlights-card-modal-closed': 'CLOSE',
 } as const satisfies Record<NewsletterEventDescription, string>;
 
 /**
@@ -44,6 +50,8 @@ export const NEWSLETTER_SIGNUP_COMPONENT_ID = {
 		`AR SecureSignup ${identityName} - variantNewField`,
 	variantIllustratedCard: (identityName: string) =>
 		`AR NewsletterSignupForm ${identityName} - variantIllustratedCard`,
+	highlightsCard: (identityName: string) =>
+		`HighlightsNewsletterCard ${identityName}`,
 } as const;
 
 /**

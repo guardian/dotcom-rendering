@@ -82,11 +82,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					? {
 							lightboxImages: frontendData.imagesForLightbox,
 							renderingTarget,
-					  }
+						}
 					: {
 							lightboxImages: frontendData.imagesForAppsLightbox,
 							renderingTarget,
-					  })}
+						})}
 			/>
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />

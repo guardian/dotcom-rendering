@@ -186,12 +186,12 @@ You can also find these extensions by searching for `@recommended` in the extens
 
 There are some concepts to learn, that will make working with Dotcom Rendering clearer:
 
--   Design and Display Types use the [Switch Pattern](docs/patterns/switch-on-display-design.md)
--   [DecideLayout](docs/patterns/decide-layout.md)
--   [Prop Drilling](https://kentcdodds.com/blog/prop-drilling/) (and [why we don't use React Context](docs/architecture/016-react-context-api.md))
--   Dynamic imports
--   [Enhancers](docs/patterns/enhancers.md)
--   Data generated in Frontend
+- Design and Display Types use the [Switch Pattern](docs/patterns/switch-on-display-design.md)
+- [DecideLayout](docs/patterns/decide-layout.md)
+- [Prop Drilling](https://kentcdodds.com/blog/prop-drilling/) (and [why we don't use React Context](docs/architecture/016-react-context-api.md))
+- Dynamic imports
+- [Enhancers](docs/patterns/enhancers.md)
+- Data generated in Frontend
 
 ## Design system
 

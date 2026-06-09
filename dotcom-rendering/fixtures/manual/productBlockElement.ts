@@ -36,6 +36,7 @@ export const exampleProduct: ProductBlockElement = {
 		},
 	],
 	starRating: 'none-selected',
+	id: '123',
 	content: [
 		{
 			displayCredit: true,
@@ -283,6 +284,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 			},
 		],
 		starRating: 'none-selected',
+		id: '123',
 		content: [],
 	},
 	{
@@ -323,6 +325,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		],
 		starRating: 'none-selected',
 		content: [],
+		id: '456',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
@@ -362,6 +365,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		],
 		starRating: 'none-selected',
 		content: [],
+		id: '789',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
@@ -401,6 +405,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		],
 		starRating: 'none-selected',
 		content: [],
+		id: '987',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
@@ -440,6 +445,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		],
 		starRating: 'none-selected',
 		content: [],
+		id: '654',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
@@ -479,6 +485,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		],
 		starRating: 'none-selected',
 		content: [],
+		id: '321',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
@@ -519,5 +526,6 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		],
 		starRating: 'none-selected',
 		content: [],
+		id: '098',
 	},
 ];
