@@ -6,6 +6,11 @@ import {
 	galleryTrails,
 	getSublinks,
 	opinionTrails,
+	selfHostedDefaultVideo169Card,
+	selfHostedDefaultVideo45Card,
+	selfHostedDefaultVideo53Card,
+	selfHostedDefaultVideo54Card,
+	selfHostedDefaultVideo916Card,
 	selfHostedLoopVideo169Card,
 	selfHostedLoopVideo45Card,
 	selfHostedLoopVideo53Card,
@@ -531,8 +536,7 @@ export const ImmersiveCardsSplashAndStandard: Story = {
 	},
 };
 
-export const SelfHostedVideoCardsInSplashSlots: Story = {
-	name: 'Self-hosted video cards in Splash slots',
+export const SelfHostedLoopVideoCardsInSplashSlots: Story = {
 	render: (args) => {
 		const Section = ({
 			title,
@@ -560,6 +564,53 @@ export const SelfHostedVideoCardsInSplashSlots: Story = {
 			selfHostedLoopVideo53Card,
 			selfHostedLoopVideo916Card,
 			selfHostedLoopVideo169Card,
+		];
+
+		return (
+			<>
+				{videos.map((video) =>
+					boostLevels.map((boostLevel) => (
+						<Section
+							key={`${video.headline}-${boostLevel}`}
+							title={boostLevel}
+							video={video}
+							boostLevel={boostLevel}
+						/>
+					)),
+				)}
+			</>
+		);
+	},
+};
+
+export const SelfHostedDefaultVideoCardsInSplashSlots: Story = {
+	render: (args) => {
+		const Section = ({
+			title,
+			video,
+			boostLevel,
+		}: {
+			title: string;
+			video: DCRFrontCard;
+			boostLevel?: BoostLevel;
+		}) => (
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						splash: [{ ...video, boostLevel }],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		const videos = [
+			selfHostedDefaultVideo54Card,
+			selfHostedDefaultVideo45Card,
+			selfHostedDefaultVideo53Card,
+			selfHostedDefaultVideo916Card,
+			selfHostedDefaultVideo169Card,
 		];
 
 		return (
