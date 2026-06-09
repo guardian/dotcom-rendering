@@ -99,10 +99,6 @@ export const useFadeableControls = ({
 			setShouldShowControls(false);
 		}, 0);
 
-		if (showControlsTimer.current !== null) {
-			window.clearTimeout(showControlsTimer.current);
-		}
-
 		showControlsTimer.current = window.setTimeout(() => {
 			setIsShowingControls(false);
 		}, CONTROLS_FADE_DELAY);
