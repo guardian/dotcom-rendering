@@ -1,5 +1,44 @@
+import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
-import type { PlayerStates } from './SelfHostedVideoPlayer';
+import type { PlayerStates } from '../components/SelfHostedVideoPlayer';
+
+/**
+ * The duration in ms for which controls are displayed before fading out.
+ */
+const CONTROLS_FADE_DELAY = 3_000;
+const PLAY_BUTTON_FADE_DELAY = 1_500;
+
+const showControlsStyles = css`
+	.controls-container {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.play-pause-icon {
+		visibility: visible;
+		opacity: 1;
+	}
+`;
+
+const hideControlsStyles = css`
+	.controls-container {
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			visibility 500ms,
+			opacity 500ms ease-in-out;
+		transition-delay: ${CONTROLS_FADE_DELAY}ms;
+	}
+
+	.play-pause-icon {
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			visibility 400ms,
+			opacity 400ms ease-in-out;
+		transition-delay: ${PLAY_BUTTON_FADE_DELAY}ms;
+	}
+`;
 
 type Props = {
 	/**
@@ -7,12 +46,6 @@ type Props = {
 	 */
 	isEnabled: boolean;
 	playerState: PlayerStates;
-	/**
-	 * The delay in milliseconds before the controls fade out.
-	 * If controls fade away at different times, then this value should
-	 * be set to the longest fade out time among the controls.
-	 */
-	controlsFadeDelay: number;
 };
 
 /**
@@ -22,10 +55,8 @@ type Props = {
 export const useFadeableControls = ({
 	isEnabled,
 	playerState,
-	controlsFadeDelay,
 }: Props): {
-	showControls: boolean;
-	hideControls: boolean;
+	fadeableControlsStyles: ReturnType<typeof css> | undefined;
 	isShowingControls: boolean;
 	showPauseIcon: boolean;
 	showFadeableControlsAndStartTimer: () => void;
@@ -36,13 +67,6 @@ export const useFadeableControls = ({
 	const [shouldShowControls, setShouldShowControls] = useState(true);
 	/** Whether the video is currently showing controls */
 	const [isShowingControls, setIsShowingControls] = useState(true);
-
-	const showControls = !shouldShowControls && playerState === 'PLAYING';
-
-	const hideControls =
-		shouldShowControls &&
-		(playerState === 'PAUSED_BY_USER' ||
-			playerState === 'PAUSED_BY_BROWSER');
 
 	const showFadeableControlsAndStartTimer = () => {
 		if (!isEnabled) {
@@ -81,7 +105,7 @@ export const useFadeableControls = ({
 
 		showControlsTimer.current = window.setTimeout(() => {
 			setIsShowingControls(false);
-		}, controlsFadeDelay);
+		}, CONTROLS_FADE_DELAY);
 
 		return () => {
 			if (showControlsTimer.current !== null) {
@@ -89,12 +113,11 @@ export const useFadeableControls = ({
 				showControlsTimer.current = null;
 			}
 		};
-	}, [shouldShowControls, playerState, controlsFadeDelay]);
+	}, [shouldShowControls, playerState]);
 
 	if (!isEnabled) {
 		return {
-			showControls: false,
-			hideControls: false,
+			fadeableControlsStyles: undefined,
 			isShowingControls: true,
 			showPauseIcon: false,
 			showFadeableControlsAndStartTimer,
@@ -102,8 +125,10 @@ export const useFadeableControls = ({
 	}
 
 	return {
-		showControls,
-		hideControls,
+		fadeableControlsStyles:
+			!shouldShowControls && playerState === 'PLAYING'
+				? hideControlsStyles
+				: showControlsStyles,
 		isShowingControls,
 		showPauseIcon: playerState === 'PLAYING',
 		showFadeableControlsAndStartTimer,

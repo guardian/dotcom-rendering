@@ -10,6 +10,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
+import { useFadeableControls } from '../lib/useFadeableControls';
 import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
@@ -41,7 +42,6 @@ import type {
 } from './SelfHostedVideoPlayer';
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
 import type { SubtitlesPosition } from './SubtitleOverlay';
-import { useFadeableControls } from './useFadeableControls';
 import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import type { VideoEventKey } from './YoutubeAtom/YoutubeAtom';
@@ -50,12 +50,6 @@ import type { VideoEventKey } from './YoutubeAtom/YoutubeAtom';
  * The fraction of the video required to be visible in the viewport to be considered "in view".
  */
 const VISIBILITY_THRESHOLD = 0.5;
-
-/**
- * The duration in ms for which controls are displayed before fading out.
- */
-const CONTROLS_FADE_DELAY = 3_000;
-const PLAY_BUTTON_FADE_DELAY = 1_500;
 
 const cardStyles = (
 	isInteractive: boolean,
@@ -177,38 +171,6 @@ const fullscreenStyles = css`
 			aspect-ratio: auto;
 			object-fit: contain;
 		}
-	}
-`;
-
-const showControlsStyles = css`
-	.controls-container {
-		visibility: visible;
-		opacity: 1;
-	}
-
-	.play-pause-icon {
-		visibility: visible;
-		opacity: 1;
-	}
-`;
-
-const hideControlsStyles = css`
-	.controls-container {
-		visibility: hidden;
-		opacity: 0;
-		transition:
-			visibility 500ms,
-			opacity 500ms ease-in-out;
-		transition-delay: ${CONTROLS_FADE_DELAY}ms;
-	}
-
-	.play-pause-icon {
-		visibility: hidden;
-		opacity: 0;
-		transition:
-			visibility 400ms,
-			opacity 400ms ease-in-out;
-		transition-delay: ${PLAY_BUTTON_FADE_DELAY}ms;
 	}
 `;
 
@@ -476,15 +438,13 @@ export const SelfHostedVideo = ({
 			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
 
 	const {
-		showControls: showFadeableControls,
-		hideControls: hideFadeableControls,
+		fadeableControlsStyles,
 		isShowingControls: isShowingFadeableControls,
 		showPauseIcon,
 		showFadeableControlsAndStartTimer,
 	} = useFadeableControls({
 		playerState,
 		isEnabled: videoStyleSettings.enableFadeableControls,
-		controlsFadeDelay: CONTROLS_FADE_DELAY,
 	});
 
 	let showPlayPauseIcon: 'play' | 'pause' | null = null;
@@ -1225,8 +1185,7 @@ export const SelfHostedVideo = ({
 							containerAspectRatioDesktop,
 						),
 						fullscreenStyles,
-						showFadeableControls && hideControlsStyles,
-						hideFadeableControls && showControlsStyles,
+						fadeableControlsStyles,
 					]}
 					onMouseMove={showFadeableControlsAndStartTimer}
 				>
