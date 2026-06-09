@@ -12,12 +12,12 @@ import { type ReactNode } from 'react';
 import type {
 	Batter,
 	Bowler,
+	CricketResult,
 	CricketTeam,
 	Extras,
 	FallOfWicket,
 	Innings,
 	InningsTotals,
-	CricketResult,
 } from '../cricketMatchV2';
 import { palette } from '../palette';
 

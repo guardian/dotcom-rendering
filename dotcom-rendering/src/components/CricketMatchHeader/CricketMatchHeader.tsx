@@ -17,9 +17,9 @@ import type { ComponentProps } from 'react';
 import { Fragment, type ReactNode, useMemo } from 'react';
 import type {
 	CricketMatch,
+	CricketResult,
 	CricketTeam,
 	InningsOverview,
-	CricketResult,
 } from '../../cricketMatchV2';
 import { grid } from '../../grid';
 import {

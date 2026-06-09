@@ -1,12 +1,13 @@
 import { isUndefined } from '@guardian/libs';
-import {
+import type {
 	FECricketMatch,
 	FECricketMatchResult,
 	FECricketMatchResultWinnerStatus,
 	FECricketTeam,
 } from './frontend/feCricketMatchPage';
-import { error, ok, Result } from './lib/result';
 import { parseDate, parseIntResult } from './lib/parse';
+import type { Result } from './lib/result';
+import { error, ok } from './lib/result';
 
 export type Bowler = {
 	name: string;
@@ -239,7 +240,7 @@ const parseWinnerResult = (
 				}))
 				.map<WinnerResult>((margin) => ({
 					type: resultType,
-					description: description,
+					description,
 					winner: {
 						type: winnerType,
 						team: winner.team,
@@ -250,7 +251,7 @@ const parseWinnerResult = (
 
 		return ok<ParserError, WinnerResult>({
 			type: resultType,
-			description: description,
+			description,
 			winner: {
 				type: winnerType,
 				team: winner.team,
