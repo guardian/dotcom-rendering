@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { between, from, space } from '@guardian/source/foundations';
-import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
-import type { ImageAttrs } from '../../../../shared/ResponsiveImage';
-import { ResponsiveImage } from '../../../../shared/ResponsiveImage';
+import type { Image as SupportImage } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { ImageAttrs } from '../../../shared/ResponsiveImage';
+import { ResponsiveImage } from '../../../shared/ResponsiveImage';
 import type { BannerData } from '../BannerProps';
 
 interface BannerVisualProps {
 	bannerData: BannerData;
-	settings?: Image;
+	settings?: SupportImage;
 	isHeaderImage?: boolean;
 }
 
@@ -101,7 +101,7 @@ export const BannerVisual = ({
 		return null;
 	}
 
-	if (!isHeaderImage && !bannerData.selectors.showBodyVisual) {
+	if (!(isHeaderImage ?? false) && !bannerData.selectors.showBodyVisual) {
 		return null;
 	}
 
@@ -114,13 +114,19 @@ export const BannerVisual = ({
 	const images: ImageAttrs[] = [];
 	const styles = getStyles(isHeaderImage);
 
-	if (imageSettings.mobileUrl) {
+	if (
+		imageSettings.mobileUrl !== undefined &&
+		imageSettings.mobileUrl.length > 0
+	) {
 		images.push({
 			url: imageSettings.mobileUrl,
 			media: '(max-width: 739px)',
 		});
 	}
-	if (imageSettings.tabletUrl) {
+	if (
+		imageSettings.tabletUrl !== undefined &&
+		imageSettings.tabletUrl.length > 0
+	) {
 		images.push({
 			url: getImageUrl(
 				bannerData.isCollapsed,
@@ -130,7 +136,10 @@ export const BannerVisual = ({
 			media: '(max-width: 979px)',
 		});
 	}
-	if (imageSettings.desktopUrl) {
+	if (
+		imageSettings.desktopUrl !== undefined &&
+		imageSettings.desktopUrl.length > 0
+	) {
 		images.push({
 			url: getImageUrl(
 				bannerData.isCollapsed,
@@ -140,13 +149,19 @@ export const BannerVisual = ({
 			media: '(max-width: 1139px)',
 		});
 	}
-	if (imageSettings.leftColUrl) {
+	if (
+		imageSettings.leftColUrl !== undefined &&
+		imageSettings.leftColUrl.length > 0
+	) {
 		images.push({
 			url: imageSettings.leftColUrl,
 			media: '(max-width: 1299px)',
 		});
 	}
-	if (imageSettings.wideUrl) {
+	if (
+		imageSettings.wideUrl !== undefined &&
+		imageSettings.wideUrl.length > 0
+	) {
 		images.push({
 			url: getImageUrl(
 				bannerData.isCollapsed,

@@ -71,6 +71,7 @@ export const SelfHostedVideoInArticle = ({
 					format={format}
 					isMainMedia={isMainMedia}
 					role={role}
+					preventAutoplay={videoStyle === 'Default'}
 					restrictHeightOnDesktop={!isInteractive(format.design)}
 				/>
 			</Island>
