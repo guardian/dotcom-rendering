@@ -387,6 +387,12 @@ export const WithMixedDestinations: Story = {
 	name: 'With destinationUrl on all choice cards',
 	args: {
 		...WithThreeTierChoiceCards.args,
+		content: {
+			...baseContent,
+		},
+		mobileContent: {
+			...baseContent,
+		},
 		choiceCardsSettings: {
 			choiceCards: [
 				{
