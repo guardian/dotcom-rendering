@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source/foundations';
 import {
+	SvgArrowContract,
 	SvgArrowExpand,
 	SvgAudio,
 	SvgAudioMute,
@@ -54,24 +55,32 @@ export const AudioIcon = ({ isMuted, handleClick }: AudioIconProps) => {
 };
 
 type FullscreenIconProps = {
+	isFullscreen: SelfHostedVideoPlayerProps['isFullscreen'];
 	handleClick: SelfHostedVideoPlayerProps['handleFullscreenClick'];
 };
 
-export const FullscreenIcon = ({ handleClick }: FullscreenIconProps) => (
-	<button
-		type="button"
-		onClick={handleClick}
-		css={[buttonStyles, iconContainerStyles]}
-		data-testid="fullscreen-icon"
-	>
-		<SvgArrowExpand
-			size="xsmall"
-			theme={{
-				fill: palette('--video-icon'),
-			}}
-		/>
-	</button>
-);
+export const FullscreenIcon = ({
+	isFullscreen,
+	handleClick,
+}: FullscreenIconProps) => {
+	const Icon = isFullscreen ? SvgArrowContract : SvgArrowExpand;
+
+	return (
+		<button
+			type="button"
+			onClick={handleClick}
+			css={[buttonStyles, iconContainerStyles]}
+			data-testid="fullscreen-icon"
+		>
+			<Icon
+				size="xsmall"
+				theme={{
+					fill: palette('--video-icon'),
+				}}
+			/>
+		</button>
+	);
+};
 
 const buttonSize = 56;
 const playPauseButtonStyles = css`

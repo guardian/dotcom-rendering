@@ -430,6 +430,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
+	const [isFullscreen, setIsFullscreen] = useState(false);
 	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
 	const [isProgressBarSeeking, setIsProgressBarSeeking] = useState(false);
 	/** Whether the video should show controls */
@@ -861,38 +862,55 @@ export const SelfHostedVideo = ({
 
 		if (!playerContainer && !video) return;
 
-		const reportFullscreenEvent = () => {
-			const event =
-				document.fullscreenElement ||
-				(video &&
+		const updateStateAndReportFullscreenEvent = () => {
+			const isInFullscreenMode =
+				document.fullscreenElement !== null ||
+				(video !== null &&
 					'webkitDisplayingFullscreen' in video &&
-					Boolean(video.webkitDisplayingFullscreen))
-					? 'enter_fullscreen'
-					: 'exit_fullscreen';
+					Boolean(video.webkitDisplayingFullscreen));
+
+			if (isInFullscreenMode) {
+				setIsFullscreen(true);
+			} else {
+				setIsFullscreen(false);
+			}
+
+			const event = isInFullscreenMode
+				? 'enter_fullscreen'
+				: 'exit_fullscreen';
 
 			sendOphanTrackingEvent(event);
 		};
 
 		for (const event of fullscreenChangeEvents) {
 			if (video) {
-				video.addEventListener(event, reportFullscreenEvent);
+				video.addEventListener(
+					event,
+					updateStateAndReportFullscreenEvent,
+				);
 			}
 
 			if (playerContainer) {
-				playerContainer.addEventListener(event, reportFullscreenEvent);
+				playerContainer.addEventListener(
+					event,
+					updateStateAndReportFullscreenEvent,
+				);
 			}
 		}
 
 		return () => {
 			for (const event of fullscreenChangeEvents) {
 				if (video) {
-					video.removeEventListener(event, reportFullscreenEvent);
+					video.removeEventListener(
+						event,
+						updateStateAndReportFullscreenEvent,
+					);
 				}
 
 				if (playerContainer) {
 					playerContainer.removeEventListener(
 						event,
-						reportFullscreenEvent,
+						updateStateAndReportFullscreenEvent,
 					);
 				}
 			}
@@ -1317,6 +1335,7 @@ export const SelfHostedVideo = ({
 							videoStyleSettings.supportsFullscreen
 						}
 						isInteractive={videoStyleSettings.isInteractive}
+						isFullscreen={isFullscreen}
 						isWebKitFullscreen={isWebKitFullscreen}
 						linkTo={linkTo}
 						cardLink={cardLink}
