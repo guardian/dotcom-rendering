@@ -6,10 +6,10 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import type { BannerRenderProps } from '../../../common/types';
+import type { BannerRenderProps } from '../../common/types';
 import { BannerComponent } from '../exports';
 
-jest.mock('../../../../../../lib/useMatchMedia', () => ({
+jest.mock('../../../../../lib/useMatchMedia', () => ({
 	useMatchMedia: jest.fn(() => true),
 	removeMediaRulePrefix: jest.fn(() => ''),
 }));
@@ -20,7 +20,7 @@ const hex = (r: string, g: string, b: string): HexColour =>
 		g,
 		b,
 		kind: 'hex',
-	}) as any;
+	}) as HexColour;
 
 const mockProps: BannerRenderProps = {
 	onCtaClick: jest.fn(),
@@ -137,7 +137,9 @@ describe('DesignableBanner V2', () => {
 	it('calls onCloseClick when the close button is clicked', () => {
 		render(<BannerComponent {...mockProps} />);
 
-		const closeButton = screen.getByRole('button', { name: /Close/i });
+		const closeButton = screen.getByRole('button', {
+			name: /Close/i,
+		});
 		fireEvent.click(closeButton);
 
 		expect(mockProps.onCloseClick).toHaveBeenCalled();
@@ -212,7 +214,7 @@ describe('DesignableBanner V2', () => {
 						benefits: [],
 					},
 				],
-			} as any,
+			} as BannerRenderProps['choiceCardsSettings'],
 			design: {
 				...mockProps.design!,
 				visual: {
@@ -223,7 +225,7 @@ describe('DesignableBanner V2', () => {
 					buttonSelectColour: hex('00', '00', '00'),
 					buttonSelectTextColour: hex('FF', 'FF', 'FF'),
 					buttonSelectBorderColour: hex('00', '00', '00'),
-				} as any,
+				} as ConfigurableDesign['visual'],
 			},
 		};
 
