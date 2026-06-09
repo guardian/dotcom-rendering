@@ -36,6 +36,7 @@ const getVisibleFocusableElements = (dialog: HTMLElement): HTMLElement[] =>
 			return (
 				computedStyle.display !== 'none' &&
 				computedStyle.visibility !== 'hidden' &&
+				computedStyle.visibility !== 'collapse' &&
 				element.getAttribute('aria-hidden') !== 'true'
 			);
 		},
@@ -57,7 +58,6 @@ const overlayStyles = (isVisible: boolean) => css`
 			: CLOSE_ANIMATION_DURATION_MS}ms
 		ease;
 	z-index: ${getZIndex('lightbox')};
-	will-change: background-color;
 
 	@supports (height: 100dvh) {
 		height: 100dvh;
@@ -87,7 +87,6 @@ const dialogStyles = ({ isVisible, dialogCss }: DialogStylesOptions) => [
 				? OPEN_ANIMATION_DURATION_MS
 				: CLOSE_ANIMATION_DURATION_MS}ms
 			ease;
-		will-change: transform;
 
 		/*
 		   This blocks Android from recognising or passing horizontal
@@ -104,7 +103,6 @@ const dialogStyles = ({ isVisible, dialogCss }: DialogStylesOptions) => [
 					? OPEN_ANIMATION_DURATION_MS
 					: CLOSE_ANIMATION_DURATION_MS}ms
 				ease;
-			will-change: opacity;
 		}
 
 		@media (prefers-reduced-motion: reduce) {
