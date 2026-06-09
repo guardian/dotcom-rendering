@@ -64,7 +64,7 @@ export type FEFootballMatchInfoPage = FEFootballDataPage & {
 	// Since this change needs to happen in both frontend and DCAR, and it also
 	// needs to be backward compatible for a temporary duration, we will handle
 	// that in a separate PR.
-	footballMatch: FEFootballMatchStats;
+	matchStats: FEFootballMatchStats;
 	matchInfo: FEFootballMatch;
 	group?: FEGroupSummary;
 	competitionName: string;

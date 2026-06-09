@@ -45,7 +45,7 @@
         {
             "type": "object",
             "properties": {
-                "footballMatch": {
+                "matchStats": {
                     "$ref": "#/definitions/{id:string;homeTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};awayTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};status:string;comments?:string;}"
                 },
                 "matchInfo": {
@@ -255,9 +255,9 @@
             },
             "required": [
                 "competitionName",
-                "footballMatch",
                 "matchHeaderUrl",
                 "matchInfo",
+                "matchStats",
                 "matchUrl"
             ]
         }
