@@ -13,7 +13,7 @@ import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { useConfig } from './ConfigContext';
 import { HighlightsCard } from './Masthead/HighlightsCard';
-import { HighlightsNewsletterCard } from './Masthead/HighlightsNewsletterCard';
+import { HighlightsNewsletterCard } from './Masthead/Newsletter/HighlightsNewsletterCard';
 
 type Props = {
 	trails: DCRFrontCard[];

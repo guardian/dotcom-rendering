@@ -1,8 +1,12 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { newsletterCard } from '../../../fixtures/manual/highlights-trails';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
+import { newsletterCard } from '../../../../fixtures/manual/highlights-trails';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	Pillar,
+} from '../../../lib/articleFormat';
 import { HighlightsNewsletterCard } from './HighlightsNewsletterCard';
 
 const CardWrapper = ({ children }: { children: React.ReactNode }) => (
