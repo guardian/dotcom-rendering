@@ -1,3 +1,13 @@
+import { isUndefined } from '@guardian/libs';
+import {
+	FECricketMatch,
+	FECricketMatchResult,
+	FECricketMatchResultWinnerStatus,
+	FECricketTeam,
+} from './frontend/feCricketMatchPage';
+import { error, ok, Result } from './lib/result';
+import { parseDate, parseIntResult } from './lib/parse';
+
 export type Bowler = {
 	name: string;
 	overs: number;
@@ -66,11 +76,36 @@ export type InningsOverview = {
 	fallOfWickets: number;
 };
 
+const winnerTypes = [
+	'runs',
+	'wickets',
+	'innings',
+	'forfeit',
+	'run-rate',
+] as const;
+type WinnerType = (typeof winnerTypes)[number];
+
+// Type guard handles the strict comparison safely
+const isValidWinnerType = (type: string): type is WinnerType => {
+	return winnerTypes.includes(type as any);
+};
+
+const parseWinnerType = (type: string): Result<ParserError, WinnerType> => {
+	if (isValidWinnerType(type)) {
+		return ok(type);
+	}
+
+	return error({
+		kind: 'CricketMatchInvalidResult',
+		message: `Invalid winner type: ${type}`,
+	});
+};
+
 type WinnerResult = {
 	type: 'home-win' | 'away-win';
 	description?: string;
 	winner: {
-		type: 'runs' | 'wickets' | 'innings' | 'forfeit' | 'run-rate';
+		type: WinnerType;
 		team: string;
 		margin?: number;
 	};
@@ -87,10 +122,12 @@ type OtherResult = {
 	description?: string;
 };
 
-export type Result = WinnerResult | OtherResult;
+export type CricketResult = WinnerResult | OtherResult;
+
+export type CricketMatchKind = 'Fixture' | 'Live' | 'Result';
 
 export type CricketMatch = {
-	kind: 'Fixture' | 'Live' | 'Result';
+	kind: CricketMatchKind;
 	series: string;
 	competition: string;
 	venue: string;
@@ -99,5 +136,219 @@ export type CricketMatch = {
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
 	innings: InningsOverview[];
-	result?: Result;
+	result?: CricketResult;
+};
+
+const paCricketStatusToMatchKind: Record<string, CricketMatchKind> = {
+	'pre-match': 'Fixture',
+	'start-delayed': 'Fixture',
+	cancelled: 'Fixture',
+	'in-play': 'Live',
+	tea: 'Live',
+	lunch: 'Live',
+	'between-innings': 'Live',
+	stumps: 'Live',
+	'rain-delay': 'Live',
+	'bad-light': 'Live',
+	'crowd-trouble': 'Live',
+	'pitch-condition': 'Live',
+	'floodlight-failure': 'Live',
+	'play-suspended-unknown': 'Live',
+	snow: 'Live',
+	'medical-emergency': 'Live',
+	result: 'Result',
+	abandoned: 'Result',
+};
+
+type CricketMatchInvalidDate = {
+	kind: 'CricketMatchInvalidDate';
+	message: string;
+};
+
+type UnknownMatchStatus = {
+	kind: 'UnknownMatchStatus';
+	message: string;
+};
+
+type CricketMatchInvalidResult = {
+	kind: 'CricketMatchInvalidResult';
+	message: string;
+};
+
+type CricketWinnerInvalidMarginNumber = {
+	kind: 'CricketWinnerInvalidMarginNumber';
+	message: string;
+};
+
+type CricketMatchInvalidTeams = {
+	kind: 'CricketMatchInvalidTeams';
+	message: string;
+};
+
+type ParserError =
+	| CricketMatchInvalidDate
+	| UnknownMatchStatus
+	| CricketMatchInvalidResult
+	| CricketWinnerInvalidMarginNumber
+	| CricketMatchInvalidTeams;
+
+type ParsedTeams = {
+	homeTeam: CricketTeam;
+	awayTeam: CricketTeam;
+};
+
+const parseTeams = (
+	teams: FECricketTeam[],
+): Result<ParserError, ParsedTeams> => {
+	const [firstTeam, secondTeam] = teams;
+
+	if (!firstTeam || !secondTeam) {
+		return error({
+			kind: 'CricketMatchInvalidTeams',
+			message: `Expected two teams, received ${teams.length}`,
+		});
+	}
+
+	const [homeSource, awaySource] = firstTeam.home
+		? [firstTeam, secondTeam]
+		: [secondTeam, firstTeam];
+
+	return ok({
+		homeTeam: {
+			name: homeSource.name,
+			paID: homeSource.id,
+		},
+		awayTeam: {
+			name: awaySource.name,
+			paID: awaySource.id,
+		},
+	});
+};
+
+const parseWinnerResult = (
+	winner: FECricketMatchResultWinnerStatus,
+	resultType: WinnerResult['type'],
+	description?: string,
+): Result<ParserError, WinnerResult> => {
+	return parseWinnerType(winner.winType).flatMap((winnerType) => {
+		if (winner.margin) {
+			return parseIntResult(winner.margin)
+				.mapError<ParserError>((message) => ({
+					kind: 'CricketWinnerInvalidMarginNumber',
+					message,
+				}))
+				.map<WinnerResult>((margin) => ({
+					type: resultType,
+					description: description,
+					winner: {
+						type: winnerType,
+						team: winner.team,
+						margin,
+					},
+				}));
+		}
+
+		return ok<ParserError, WinnerResult>({
+			type: resultType,
+			description: description,
+			winner: {
+				type: winnerType,
+				team: winner.team,
+			},
+		});
+	});
+};
+
+const parseCricketResult = (
+	fullResult?: FECricketMatchResult,
+): Result<ParserError, CricketResult | undefined> => {
+	if (isUndefined(fullResult)) {
+		return ok<ParserError, CricketResult | undefined>(undefined);
+	}
+
+	if (
+		fullResult.resultType === 'home-win' ||
+		fullResult.resultType === 'away-win'
+	) {
+		if (!fullResult.winner) {
+			return error({
+				kind: 'CricketMatchInvalidResult',
+				message: `Missing winner information for result type ${fullResult.resultType}`,
+			});
+		}
+
+		return parseWinnerResult(
+			fullResult.winner,
+			fullResult.resultType,
+			fullResult.description,
+		);
+	}
+
+	if (
+		fullResult.resultType === 'no-result' ||
+		fullResult.resultType === 'draw' ||
+		fullResult.resultType === 'abandoned' ||
+		fullResult.resultType === 'tied' ||
+		fullResult.resultType === 'level-scores-draw' ||
+		fullResult.resultType === 'none'
+	) {
+		return ok<ParserError, OtherResult>({
+			type: fullResult.resultType,
+			description: fullResult.description,
+		});
+	}
+
+	return error({
+		kind: 'CricketMatchInvalidResult',
+		message: `Invalid result type: ${fullResult?.resultType ?? 'undefined'}`,
+	});
+};
+
+export const parseCricketMatchV2 = (
+	feMatch: FECricketMatch,
+): Result<ParserError, CricketMatch> => {
+	const matchKind = paCricketStatusToMatchKind[feMatch.result];
+
+	if (!matchKind) {
+		return error({
+			kind: 'UnknownMatchStatus',
+			message: `Unknown match status: ${feMatch.result}`,
+		});
+	}
+
+	// The PA cricket date doesn't have time zone but it is a UTC date
+	const parsedDate = parseDate(`${feMatch.gameDate}Z`).mapError<ParserError>(
+		(message) => ({
+			kind: 'CricketMatchInvalidDate',
+			message,
+		}),
+	);
+
+	if (!parsedDate.ok) {
+		return error(parsedDate.error);
+	}
+
+	return parseTeams(feMatch.teams).flatMap(({ homeTeam, awayTeam }) =>
+		parseCricketResult(feMatch.fullResult).map(
+			(parsedResult): CricketMatch => ({
+				kind: matchKind,
+				series: feMatch.competitionName, // TODO: this will be stage after frontend changes are complete
+				competition: feMatch.competitionName,
+				venue: feMatch.venueName,
+				matchDate: parsedDate.value,
+				day: feMatch.currentDay,
+				homeTeam,
+				awayTeam,
+				innings: feMatch.innings.map((innings) => ({
+					battingTeam: innings.battingTeam,
+					runs: innings.runsScored,
+					overs: innings.overs,
+					declared: innings.declared,
+					forfeited: innings.forfeited,
+					fallOfWickets: innings.fallOfWicket.length,
+				})),
+				result: parsedResult,
+			}),
+		),
+	);
 };

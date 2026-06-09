@@ -17,7 +17,7 @@ import type {
 	FallOfWicket,
 	Innings,
 	InningsTotals,
-	Result,
+	CricketResult,
 } from '../cricketMatchV2';
 import { palette } from '../palette';
 
@@ -668,7 +668,7 @@ type Props = {
 	officials: string[];
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
-	matchResult?: Result;
+	matchResult?: CricketResult;
 	lineups: {
 		homeTeam: string[];
 		awayTeam: string[];
