@@ -17,6 +17,7 @@ const feCricketTeamSchema = object({
 	id: string(),
 	home: boolean(),
 	lineup: array(string()),
+	teamTagId: optional(string()),
 });
 
 export type FECricketTeam = Output<typeof feCricketTeamSchema>;
@@ -54,6 +55,7 @@ const feCricketInningsSchema = object({
 	order: number(),
 	battingTeam: string(),
 	runsScored: number(),
+	wickets: number(),
 	overs: string(),
 	declared: boolean(),
 	forfeited: boolean(),
