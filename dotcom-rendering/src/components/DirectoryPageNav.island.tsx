@@ -438,8 +438,9 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		},
 	});
 
-	const boldSmallLink = css({
+	const selectedLink = css({
 		...textSansBold14Object,
+		pointerEvents: 'none',
 	});
 
 	return (
@@ -471,7 +472,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 									smallLink,
 									primaryLinkStyles,
 									!isApps && primaryLinkHoverStyles,
-									pageId === config.title.id && boldSmallLink,
+									pageId === config.title.id && selectedLink,
 								]}
 							>
 								{config.titleIcon}
@@ -486,7 +487,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 								css={[
 									smallLink,
 									!isApps && smallLinkWeb,
-									pageId === link.id && boldSmallLink,
+									pageId === link.id && selectedLink,
 								]}
 							>
 								{link.label}
