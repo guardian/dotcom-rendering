@@ -1,4 +1,4 @@
-import type { BannerId } from '../../common/types';
+import type { BannerId } from '../common/types';
 
 export const getComponentIds = (
 	bannerId: BannerId,

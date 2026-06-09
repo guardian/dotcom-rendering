@@ -372,6 +372,7 @@ type Props = {
 	format?: ArticleFormat;
 	isMainMedia?: boolean;
 	role?: RoleType;
+	preventAutoplay: boolean;
 	restrictHeightOnDesktop?: boolean;
 	cardLink?: {
 		headlineText: string;
@@ -388,6 +389,7 @@ export const SelfHostedVideo = ({
 	videoStyle,
 	aspectRatio,
 	posterImage,
+	posterImageAspectRatio,
 	fallbackImage,
 	fallbackImageSize,
 	fallbackImageLoading,
@@ -406,7 +408,7 @@ export const SelfHostedVideo = ({
 	format,
 	isMainMedia,
 	role,
-	posterImageAspectRatio,
+	preventAutoplay,
 	restrictHeightOnDesktop = false,
 	cardLink,
 	isInLoopClickTestVariant,
@@ -446,7 +448,14 @@ export const SelfHostedVideo = ({
 
 	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
-	const shouldAutoplay = videoStyleSettings.autoplay && isAutoplayAllowed;
+	/**
+	 * The video will autoplay if all of the following are true:
+	 * - the style of video allows autoplay
+	 * - the parent allows autoplay, i.e. we may not want to autoplay on certain page types
+	 * - autoplay is allowed by the browser, e.g. if "reduce motion" is enabled then we don't autoplay
+	 */
+	const shouldAutoplay =
+		videoStyleSettings.autoplay && !preventAutoplay && isAutoplayAllowed;
 
 	const showProgressBar =
 		!hideProgressBar &&
@@ -1339,9 +1348,9 @@ export const SelfHostedVideo = ({
 						isWebKitFullscreen={isWebKitFullscreen}
 						linkTo={linkTo}
 						cardLink={cardLink}
-						isLoopClickThroughTestVariant={
-							isLoopClickThroughTestVariant
-						}
+						isLoopAndInLoopClickTestVariant={Boolean(
+							isLoopClickThroughTestVariant,
+						)}
 					/>
 				</div>
 			</div>

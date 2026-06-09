@@ -38,6 +38,11 @@ type Props = {
 	isAlreadySubscribed?: boolean;
 	/** Ophan A/B test metadata — forwarded to tracking events. */
 	abTest?: AbTest;
+	/**
+	 * When `true`, the marketing toggle and privacy message are shown
+	 * immediately and the toggle is full-width.
+	 */
+	isModal?: boolean;
 };
 
 const formStyles = css`
@@ -100,8 +105,8 @@ const submitButtonStyles = css`
 	}
 `;
 
-const toggleContainerStyles = css`
-	grid-column: 1;
+const getToggleContainerStyles = (isFullWidth: boolean) => css`
+	grid-column: ${isFullWidth ? '1 / -1' : '1'};
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -274,6 +279,7 @@ const NewsletterSignupFormActive = ({
 	hidePrivacyMessage = false,
 	previewAction,
 	abTest,
+	isModal = false,
 }: Omit<Props, 'isAlreadySubscribed'>) => {
 	const { renderingTarget } = useConfig();
 	const hideMarketingToggle = useHideMarketingToggleForCountry();
@@ -316,7 +322,7 @@ const NewsletterSignupFormActive = ({
 	const failureMessage = hasNonValidationError
 		? errorMessage
 		: 'Sign up failed.';
-	const showAdditionalFields = isInteracted || !!userEmail;
+	const showAdditionalFields = isModal || isInteracted || !!userEmail;
 	// isValidationError comes from the hook — true only for inline field
 	// errors (empty / bad format), false for reCAPTCHA / network errors.
 
@@ -354,7 +360,7 @@ const NewsletterSignupFormActive = ({
 				{showAdditionalFields && (
 					<>
 						{showMarketingToggle && (
-							<div css={toggleContainerStyles}>
+							<div css={getToggleContainerStyles(isModal)}>
 								<div css={marketingToggleBoxStyles}>
 									<ToggleSwitch
 										id={`marketing-opt-in-${newsletterId}`}
