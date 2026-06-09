@@ -49,6 +49,7 @@ const overlayStyles = (isVisible: boolean) => css`
 	justify-content: center;
 	padding: ${space[3]}px 0 0;
 	height: 100vh;
+	overflow: hidden;
 	background-color: rgba(0, 0, 0, ${isVisible ? 0.75 : 0});
 	transition: background-color
 		${isVisible
