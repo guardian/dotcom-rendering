@@ -326,14 +326,12 @@ export const renderElement = ({
 
 				if (format.design === ArticleDesign.HostedArticle) {
 					return (
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<HostedEmbedBlockComponent
-								html={element.html}
-								alt={element.alt ?? ''}
-								height={element.height}
-								width={element.width}
-							/>
-						</Island>
+						<HostedEmbedBlockComponent
+							html={element.html}
+							alt={element.alt ?? ''}
+							height={element.height}
+							width={element.width}
+						/>
 					);
 				}
 
