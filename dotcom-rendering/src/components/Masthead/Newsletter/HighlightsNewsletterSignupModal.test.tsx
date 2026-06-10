@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { newsletterCard } from '../../../../fixtures/manual/highlights-trails';
+import { newsletterSignupCard } from '../../../../fixtures/manual/highlights-trails';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import { ConfigProvider } from '../../ConfigContext';
 import { HighlightsNewsletterSignupModal } from './HighlightsNewsletterSignupModal';
@@ -28,7 +28,7 @@ const mockUseNewsletterSubscription =
 		typeof useNewsletterSubscription
 	>;
 
-const newsletter = newsletterCard.newsletterData!;
+const newsletter = newsletterSignupCard.newsletterData!;
 
 const renderModal = (onClose = jest.fn()) =>
 	render(
