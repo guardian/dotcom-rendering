@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { newsletterCard } from '../../../../fixtures/manual/highlights-trails';
+import { newsletterSignupCard } from '../../../../fixtures/manual/highlights-trails';
 import { sendNewsletterSignupEvent } from '../../../lib/newsletterSignupTracking';
 import { useIsInView } from '../../../lib/useIsInView';
 import { ConfigProvider } from '../../ConfigContext';
@@ -37,12 +37,12 @@ jest.mock('./HighlightsNewsletterSignupModal', () => ({
 }));
 
 const defaultProps: React.ComponentProps<typeof HighlightsNewsletterCard> = {
-	format: newsletterCard.format,
-	newsletter: newsletterCard.newsletterData!,
-	headlineText: newsletterCard.headline,
-	linkTo: newsletterCard.url,
+	format: newsletterSignupCard.format,
+	newsletter: newsletterSignupCard.newsletterData!,
+	headlineText: newsletterSignupCard.headline,
+	linkTo: newsletterSignupCard.url,
 	dataLinkName: 'highlights-newsletter-card | open-signup',
-	image: newsletterCard.image,
+	image: newsletterSignupCard.image,
 	renderingTarget: 'Web',
 };
 

@@ -2,7 +2,7 @@ import { breakpoints } from '@guardian/source/foundations';
 import preview from '../../.storybook/preview';
 import {
 	defaultCard,
-	newsletterCard,
+	newsletterSignupCard,
 	trails,
 } from '../../fixtures/manual/highlights-trails';
 import { ScrollableHighlights } from './ScrollableHighlights.island';
@@ -118,7 +118,7 @@ export const withNewsletterCardVariant = meta.story({
 	...Default.input,
 	name: 'With Newsletter Signup Card (AB enabled)',
 	args: {
-		trails: [newsletterCard, ...Default.input.args.trails],
+		trails: [newsletterSignupCard, ...Default.input.args.trails],
 		isNewsletterSignupCardEnabled: true,
 	},
 });
