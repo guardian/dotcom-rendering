@@ -63,14 +63,17 @@ const standardCss: LayoutCssMap = {
 const mediaCss: LayoutCssMap = {
 	title: {
 		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
 		leftCol: `grid-row: 1; ${grid.column.left};`,
 	},
 	headline: {
 		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
 		leftCol: 'grid-row: 1;',
 	},
 	media: {
 		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
 		desktop: `grid-row: 3; ${grid.between(
 			'centre-column-start',
 			'right-column-start',
@@ -82,6 +85,7 @@ const mediaCss: LayoutCssMap = {
 	},
 	standfirst: {
 		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
 		desktop: `grid-row: 4; ${grid.between(
 			'centre-column-start',
 			'right-column-start',
@@ -93,6 +97,7 @@ const mediaCss: LayoutCssMap = {
 	},
 	meta: {
 		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
 		leftCol: `grid-row: 2 / span 3; ${grid.column.left};`,
 	},
 	body: {
