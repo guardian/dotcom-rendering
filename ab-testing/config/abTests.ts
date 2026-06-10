@@ -45,19 +45,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "growth-admiral-adblock-detect",
-		description:
-			"Control group for Admiral ad blocker - runs the detection script but does not show the modal",
-		owners: ["growth.dev@guardian.co.uk"],
-		expirationDate: "2027-01-21",
-		type: "client",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["variant-detect"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "growth-holdback-group",
 		description:
 			"Test for 5% holdback group that does not qualify for any testing so long as the test is live in the RRCP",
@@ -71,13 +58,13 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-hosted-content",
-		description: "Preview the Hosted Content pages using dotcom-rendering",
+		name: "commercial-hosted-gallery",
+		description: "Preview the Hosted Gallery pages using dotcom-rendering",
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-07-01",
 		type: "server",
 		status: "ON",
-		audienceSize: 50 / 100,
+		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["preview"],
 		shouldForceMetricsCollection: false,
@@ -134,6 +121,19 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
+		name: "commercial-user-module-intentIq-us",
+		description:
+			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module for users in the US",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-06-18",
+		type: "client",
+		status: "ON",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "holdback"],
+		shouldForceMetricsCollection: true,
+	},
+	{
 		name: "commercial-teads-prebid",
 		description:
 			"Test to measure the impact of adding Teads as a bidder in prebid .",
@@ -147,6 +147,19 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
+		name: "newsletters-highlights-signup-card",
+		description:
+			"Test a new newsletter signup card design in the scrollable/highlights container. Only users in the enabled group see the newsletter card; for all other users, newsletter trails are hidden during this rollout phase.",
+		owners: ["newsletters.dev@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-12-31",
+		type: "server",
+		audienceSize: 0,
+		audienceSpace: "C",
+		groups: ["enable"],
+		shouldForceMetricsCollection: true,
+	},
+	{
 		name: "fronts-and-curation-loop-click-through",
 		description:
 			"Test impact of click to article via loop videos on fronts",
@@ -155,6 +168,19 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-06-19",
 		type: "server",
 		audienceSize: 0 / 100,
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "martech-admiral-adblock",
+		description:
+			"Control group for Admiral ad blocker - runs the detection script but does not show the modal",
+		owners: ["martech.dev@guardian.co.uk"],
+		expirationDate: "2027-01-21",
+		type: "client",
+		status: "ON",
+		audienceSize: 20 / 100,
+		audienceSpace: "A",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},

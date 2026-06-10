@@ -261,7 +261,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							)};
 						`,
 						grid.container,
-						grid.verticalRules(),
+						grid.outerRules(),
 						!isLabs &&
 							css`
 								${from.leftCol} {

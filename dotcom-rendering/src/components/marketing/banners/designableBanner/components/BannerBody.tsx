@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from, space, textSans15 } from '@guardian/source/foundations';
-import { createBannerBodyCopy } from '../../components/BannerText';
 import type { BannerData } from '../BannerProps';
+import { createBannerBodyCopy } from './BannerText';
 
 const getStyles = (
 	highlightedTextColour: string,
@@ -29,7 +29,7 @@ const getStyles = (
 		display: inline;
 		color: ${highlightedTextColour};
 
-		${highlightColour
+		${highlightColour !== undefined && highlightColour.length > 0
 			? `
             background: ${highlightColour};
             box-shadow: 2px 0 0 ${highlightColour}, -2px 0 0 ${highlightColour};
@@ -45,7 +45,7 @@ export const BannerBody = ({
 	bannerData: BannerData;
 }): JSX.Element | null => {
 	const highlightedTextColour =
-		bannerData.settings.highlightedTextSettings.textColour ?? '';
+		bannerData.settings.highlightedTextSettings.textColour;
 	const highlightColour =
 		bannerData.settings.highlightedTextSettings.highlightColour;
 

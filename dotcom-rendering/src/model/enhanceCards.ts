@@ -232,15 +232,21 @@ export const getActiveMediaAtom = (
 				cardTrailImage,
 			);
 
+			const videoStyle = mediaAtom.videoPlayerFormat ?? 'Loop';
+
 			const videoAssets =
 				convertFEMediaAssetsToVideoAssets(selfHostedAssets);
-			const sources = extractValidSourcesFromAssets(videoAssets);
+
+			const sources = extractValidSourcesFromAssets(
+				videoAssets,
+				videoStyle,
+			);
 
 			const aspectRatio = getAspectRatioFromSources(sources);
 
 			return {
 				type: 'SelfHostedVideo',
-				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
+				videoStyle,
 				atomId: mediaAtom.id,
 				sources,
 				subtitleSource: subtitleAsset?.id,
@@ -475,6 +481,7 @@ export const enhanceCards = (
 			isImmersive: !!faciaCard.display.isImmersive,
 			isCrossword: faciaCard.properties.isCrossword,
 			isNewsletter,
+			newsletterData: faciaCard.properties.newsletterData,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			// show latest 3 updates from a live blog
 			showLivePlayable: faciaCard.display.showLivePlayable,

@@ -29,7 +29,7 @@
 		"@emotion/server": "11.11.0",
 		"@guardian/ab-testing-config": "workspace:ab-testing-config",
 		"@guardian/braze-components": "22.2.0",
-		"@guardian/bridget": "8.11.0",
+		"@guardian/bridget": "8.13.1",
 		"@guardian/browserslist-config": "6.1.0",
 		"@guardian/cdk": "catalog:",
 		"@guardian/consent-manager": "1.0.0",

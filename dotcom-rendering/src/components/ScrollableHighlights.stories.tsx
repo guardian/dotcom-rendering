@@ -1,6 +1,10 @@
 import { breakpoints } from '@guardian/source/foundations';
 import preview from '../../.storybook/preview';
-import { defaultCard, trails } from '../../fixtures/manual/highlights-trails';
+import {
+	defaultCard,
+	newsletterCard,
+	trails,
+} from '../../fixtures/manual/highlights-trails';
 import { ScrollableHighlights } from './ScrollableHighlights.island';
 import { Section } from './Section';
 
@@ -35,6 +39,7 @@ const meta = preview.meta({
 export const Default = meta.story({
 	args: {
 		trails: trails.slice(0, 6),
+		isNewsletterSignupCardEnabled: false,
 	},
 });
 
@@ -42,6 +47,7 @@ export const withEightCards = meta.story({
 	name: 'With Eight Cards',
 	args: {
 		trails: trails.slice(0, 8),
+		isNewsletterSignupCardEnabled: false,
 	},
 });
 
@@ -56,6 +62,7 @@ export const withTwoLineKicker = meta.story({
 			},
 			...Default.input.args.trails,
 		],
+		isNewsletterSignupCardEnabled: false,
 	},
 });
 
@@ -71,6 +78,7 @@ export const withLiveKicker = meta.story({
 			},
 			...Default.input.args.trails,
 		],
+		isNewsletterSignupCardEnabled: false,
 	},
 });
 
@@ -86,6 +94,7 @@ export const withFourLineHeadline = meta.story({
 			},
 			...Default.input.args.trails,
 		],
+		isNewsletterSignupCardEnabled: false,
 	},
 });
 
@@ -101,5 +110,15 @@ export const withExcessivleyLongHeadline = meta.story({
 			},
 			...Default.input.args.trails,
 		],
+		isNewsletterSignupCardEnabled: false,
+	},
+});
+
+export const withNewsletterCardVariant = meta.story({
+	...Default.input,
+	name: 'With Newsletter Signup Card (AB enabled)',
+	args: {
+		trails: [newsletterCard, ...Default.input.args.trails],
+		isNewsletterSignupCardEnabled: true,
 	},
 });

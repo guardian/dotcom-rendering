@@ -439,16 +439,18 @@ export const FeatureCard = ({
 	articleMedia,
 }: Props) => {
 	const ab = useAB();
-	const isInLoopClickTestControl =
+	const isInLoopClickTestControl = Boolean(
 		ab?.isUserInTestGroup(
 			'fronts-and-curation-loop-click-through',
 			'control',
-		) ?? false;
-	const isInLoopClickTestVariant =
+		),
+	);
+	const isInLoopClickTestVariant = Boolean(
 		ab?.isUserInTestGroup(
 			'fronts-and-curation-loop-click-through',
 			'variant',
-		) ?? false;
+		),
+	);
 
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -467,10 +469,14 @@ export const FeatureCard = ({
 		return null;
 	}
 
-	const isInLoopClickTest =
-		media.style &&
-		media.style === 'loop-video' &&
-		(isInLoopClickTestControl || isInLoopClickTestVariant);
+	const isLoopAndInLoopClickTestControl = Boolean(
+		media.style === 'loop-video' && isInLoopClickTestControl,
+	);
+	const isLoopAndInLoopClickTestVariant = Boolean(
+		media.style === 'loop-video' && isInLoopClickTestVariant,
+	);
+	const isLoopAndInLoopClickTest =
+		isLoopAndInLoopClickTestControl || isLoopAndInLoopClickTestVariant;
 
 	const mediaType =
 		media.type === 'self-hosted-video' ? media.style : media.type;
@@ -520,9 +526,9 @@ export const FeatureCard = ({
 							headlineText={headlineText}
 							dataLinkName={resolvedDataLinkName}
 							isExternalLink={isExternalLink}
-							isLoopClickThroughTest={isInLoopClickTest === true}
-							isLoopClickThroughTestVariant={
-								isInLoopClickTestVariant
+							isLoopAndInLoopClickTest={isLoopAndInLoopClickTest}
+							shouldRaiseZIndexForAbTest={
+								isLoopAndInLoopClickTestVariant
 							}
 						/>
 					)}
@@ -632,6 +638,7 @@ export const FeatureCard = ({
 											controlsPosition="top"
 											minAspectRatio={aspectRatioNumber}
 											maxAspectRatio={aspectRatioNumber}
+											preventAutoplay={false}
 											cardLink={{
 												headlineText,
 												dataLinkName:
@@ -739,11 +746,11 @@ export const FeatureCard = ({
 												headlineText={headlineText}
 												dataLinkName={dataLinkName}
 												isExternalLink={isExternalLink}
-												isLoopClickThroughTest={
-													isInLoopClickTest === true
+												isLoopAndInLoopClickTest={
+													isLoopAndInLoopClickTest
 												}
-												isLoopClickThroughTestVariant={
-													isInLoopClickTestVariant
+												shouldRaiseZIndexForAbTest={
+													isLoopAndInLoopClickTestVariant
 												}
 											/>
 										)}

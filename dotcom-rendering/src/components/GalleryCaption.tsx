@@ -31,34 +31,10 @@ const styles = css`
 
 	${between.desktop.and.leftCol} {
 		${grid.column.right}
-
-		position: relative; /* allows the ::before to be positioned relative to this */
-
-		&::before {
-			content: '';
-			position: absolute;
-			left: -10px; /* 10px to the left of this element */
-			top: 0;
-			bottom: 0;
-			width: 1px;
-			background-color: ${palette('--article-border')};
-		}
 	}
 
 	${from.leftCol} {
 		${grid.column.left}
-
-		position: relative; /* allows the ::before to be positioned relative to this */
-
-		&::after {
-			content: '';
-			position: absolute;
-			right: -11px;
-			top: -12px;
-			bottom: 0;
-			width: 1px;
-			background-color: ${palette('--article-border')};
-		}
 	}
 `;
 

@@ -60,7 +60,7 @@ export const DesignableBannerArticleCountOptOut: ReactComponent<
 	return (
 		<div css={styles.optOutContainer}>
 			<button css={styles.articleCountButton} onClick={onToggle}>
-				{`${numArticles}${nextWord ? nextWord : ''}`}
+				{`${numArticles}${nextWord !== null && nextWord.length > 0 ? nextWord : ''}`}
 			</button>
 
 			{isOpen && (

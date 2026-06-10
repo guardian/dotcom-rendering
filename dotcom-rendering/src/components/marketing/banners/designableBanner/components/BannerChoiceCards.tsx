@@ -10,10 +10,10 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import { enrichSupportUrl, getChoiceCardUrl } from '../../../../lib/tracking';
-import { ThreeTierChoiceCards } from '../../../../shared/ThreeTierChoiceCards';
-import { buttonStyles, buttonThemes } from '../../styles/buttonStyles';
+import { enrichSupportUrl, getChoiceCardUrl } from '../../../lib/tracking';
+import { ThreeTierChoiceCards } from '../../../shared/ThreeTierChoiceCards';
 import type { BannerData } from '../BannerProps';
+import { buttonStyles, buttonThemes } from '../styles/buttonStyles';
 
 const phabletContentMaxWidth = '492px';
 

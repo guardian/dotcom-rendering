@@ -94,13 +94,12 @@ const paddedContainer = `
  * The rule is self-contained on the nth child element rather than on the grid
  * container, so that `top: 0` aligns to that element's top edge. `bottom`
  * uses a large negative value to extend the rule down to the container's
- * bottom, so ensure `overflow: hidden` is set on the container.
+ * bottom, so `overflow: hidden` is applied to the container.
  *
  * @example
  * css`
- *   overflow: hidden;
  *   ${grid.container}
- *   ${grid.verticalRules()}
+ *   ${grid.outerRules()}
  *   ${grid.centreRule(1)}
  *
  *   ${from.leftCol} {
@@ -109,6 +108,8 @@ const paddedContainer = `
  * `
  */
 const centreRule = (n: number, color?: string): string => `/* CENTRE RULE */
+	overflow: hidden;
+
     & > *:nth-child(${n}) {
       position: relative;
 
@@ -137,12 +138,10 @@ const centreRule = (n: number, color?: string): string => `/* CENTRE RULE */
  * @example
  * css`
  *   ${grid.container}
- *   ${grid.verticalRules()}
+ *   ${grid.outerRules()}
  * `
  */
-const verticalRules = (color?: string): string => `
-  overflow: hidden;
-
+const outerRules = (color?: string): string => `
   ${fromBreakpoint.tablet} {
     position: relative;
 
@@ -280,7 +279,7 @@ const grid = {
 	 * CSS for the left and right vertical rules. Use `grid.centreRule`
 	 * separately to add a centre rule anchored to a specific child element.
 	 */
-	verticalRules,
+	outerRules,
 	/**
 	 * CSS for a centre vertical rule anchored to the top of the nth child of
 	 * the grid container. Can be called multiple times within different

@@ -51,7 +51,11 @@ export const AgeWarning = ({ age, isScreenReader, size = 'medium' }: Props) => {
 	}
 
 	return (
-		<div css={ageWarningStyles(isSmall)} aria-hidden="true">
+		<div
+			css={ageWarningStyles(isSmall)}
+			aria-hidden="true"
+			data-gu-name="age-warning"
+		>
 			<svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor">
 				<path d="M5.4 0C2.4 0 0 2.4 0 5.4s2.4 5.4 5.4 5.4 5.4-2.4 5.4-5.4S8.4 0 5.4 0zm3 6.8H4.7V1.7h.7L6 5.4l2.4.6v.8z"></path>
 			</svg>{' '}
