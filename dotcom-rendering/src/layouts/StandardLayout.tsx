@@ -551,7 +551,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						layoutType={layoutType}
 						css={css`
 							padding-top: ${isMedia ? 0 : 6}px;
-							padding-bottom: ${isMedia ? 41 : 0}px;
+							${from.desktop} {
+								padding-bottom: ${isMedia ? 41 : 0}px;
+							}
 						`}
 					>
 						<Hide until="desktop">
