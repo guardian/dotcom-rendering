@@ -1,4 +1,4 @@
-import { css, type SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import {
 	from,
@@ -82,7 +82,7 @@ interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
 	element?: 'div' | 'aside';
-	customCss?: SerializedStyles;
+	className?: string;
 	children: React.ReactNode;
 }
 
@@ -90,12 +90,13 @@ const GridItem = ({
 	area,
 	layoutType,
 	element: Element = 'div',
-	customCss,
+	className,
 	children,
 }: GridItemProps) => (
 	<Element
 		data-gu-name={area}
-		css={[gridItemCss(area, layoutType), customCss]}
+		css={gridItemCss(area, layoutType)}
+		className={className}
 	>
 		{children}
 	</Element>
@@ -548,7 +549,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<GridItem
 						area="right-column"
 						layoutType={layoutType}
-						customCss={css`
+						css={css`
 							padding-top: ${isMedia ? 0 : 6}px;
 							padding-bottom: ${isMedia ? 41 : 0}px;
 						`}

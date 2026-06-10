@@ -288,10 +288,4 @@ const grid = {
 	centreRule,
 } as const;
 
-// ----- Types ----- //
-type ColumnPreset = keyof typeof grid.column;
-
-// ----- Exports ----- //
-
-export type { Line, ColumnPreset };
 export { grid };
