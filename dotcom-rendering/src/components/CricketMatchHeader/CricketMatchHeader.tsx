@@ -30,8 +30,13 @@ import { generateImageURL } from '../../lib/image';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import { BigNumber } from '../BigNumber';
-import { background, border, primaryText, secondaryText } from './colours';
-import { Tabs } from './Tabs';
+import {
+	background,
+	border,
+	primaryText,
+	secondaryText,
+} from '../FootballMatchHeader/colours';
+import { Tabs } from '../FootballMatchHeader/Tabs';
 
 type Props = {
 	edition: EditionId;

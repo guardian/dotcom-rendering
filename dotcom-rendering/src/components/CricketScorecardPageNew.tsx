@@ -4,9 +4,9 @@ import type { CricketMatch, Innings } from '../cricketMatchV2';
 import { grid } from '../grid';
 import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
+import { CricketMatchHeader } from './CricketMatchHeader/CricketMatchHeader';
 import { CricketScorecardNew } from './CricketScorecardNew';
-import { CricketMatchHeader } from './SportsMatchHeader/CricketMatchHeader';
-import type { TabName } from './SportsMatchHeader/Tabs';
+import type { TabName } from './FootballMatchHeader/Tabs';
 
 export const CricketScorecardPageNew = ({
 	match,

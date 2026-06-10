@@ -40,7 +40,7 @@ import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Pagination } from '../components/Pagination';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
-import { FootballMatchHeaderFallback } from '../components/SportsMatchHeader/FootballMatchHeaderFallback';
+import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';

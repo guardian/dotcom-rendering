@@ -11,11 +11,7 @@ import { grid } from '../../grid';
 import { palette } from '../../palette';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { useConfig } from '../ConfigContext';
-import {
-	border,
-	primaryText,
-	selected as selectedTabColour,
-} from '../SportsMatchHeader/colours';
+import { border, primaryText, selected as selectedTabColour } from './colours';
 
 export type TabName = 'info' | 'live' | 'report';
 
@@ -42,7 +38,6 @@ export const Tabs = (props: Props) => (
 			style={{
 				borderColor: palette(border(props.matchKind)),
 			}}
-			role="navigation"
 		>
 			{props.reportURL !== undefined && (
 				<Tab
