@@ -1,13 +1,12 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
-import type { ComponentProps } from 'react';
 import type { CricketMatch, Innings } from '../cricketMatchV2';
 import { grid } from '../grid';
 import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
-import { CricketMatchHeader } from './CricketMatchHeader/CricketMatchHeader';
 import { CricketScorecardNew } from './CricketScorecardNew';
-import type { Tabs } from './FootballMatchHeader/Tabs';
+import { CricketMatchHeader } from './SportsMatchHeader/CricketMatchHeader';
+import type { TabName } from './SportsMatchHeader/Tabs';
 
 export const CricketScorecardPageNew = ({
 	match,
@@ -15,7 +14,10 @@ export const CricketScorecardPageNew = ({
 	edition,
 	lineups,
 	officials,
-	tabs,
+	selectedTab,
+	infoURL,
+	liveURL,
+	reportURL,
 }: {
 	match: CricketMatch;
 	allInnings: Innings[];
@@ -25,11 +27,21 @@ export const CricketScorecardPageNew = ({
 		awayTeam: string[];
 	};
 	officials: string[];
-	tabs: ComponentProps<typeof Tabs>;
+	selectedTab: TabName;
+	infoURL?: URL;
+	liveURL?: URL;
+	reportURL?: URL;
 }) => {
 	return (
 		<main id="maincontent">
-			<CricketMatchHeader match={match} edition={edition} tabs={tabs} />
+			<CricketMatchHeader
+				match={match}
+				edition={edition}
+				selectedTab={selectedTab}
+				infoURL={infoURL}
+				liveURL={liveURL}
+				reportURL={reportURL}
+			/>
 			<div css={bodyGridStyles}>
 				<div
 					css={css`
