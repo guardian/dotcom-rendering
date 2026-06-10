@@ -304,12 +304,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	});
 
 	const navWeb = css({
-		'&': css(
-			grid.paddedContainer,
-			grid.verticalRules({
-				color: borderColor,
-			}),
-		),
+		'&': css(grid.paddedContainer, grid.outerRules(borderColor)),
 	});
 
 	const largeLinkStyles = css({
