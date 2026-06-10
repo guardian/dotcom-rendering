@@ -389,7 +389,6 @@ export const ArticleMeta = ({
 							isFilterArticle ? (
 								<TimeDateline
 									primaryDateline={primaryDateline}
-									secondaryDateline={secondaryDateline}
 									webPublicationDate={webPublicationDate}
 									format={format}
 								/>

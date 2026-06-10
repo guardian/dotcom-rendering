@@ -4,6 +4,7 @@ import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 
 const datelineStyles = css`
+	display: block;
 	${textSans12};
 	color: ${palette('--dateline')};
 	padding-top: 2px;
@@ -14,30 +15,15 @@ const datelineStyles = css`
 	}
 `;
 
-const primaryStyles = css`
-	list-style: none;
-	cursor: pointer;
-	&::-webkit-details-marker {
-		display: none;
-	}
-`;
-
-const hoverUnderline = css`
-	:hover {
-		text-decoration: underline;
-	}
-`;
-
 type Props = {
 	primaryDateline: string;
-	secondaryDateline: string;
 	webPublicationDate: string;
 	format: ArticleFormat;
 };
 
+// This component is for trying to optimise the SEO date freshness by changing the primary date line to be a time element and removing any other dates from the page.
 export const TimeDateline = ({
 	primaryDateline,
-	secondaryDateline,
 	webPublicationDate,
 	format,
 }: Props) => {
@@ -50,22 +36,6 @@ export const TimeDateline = ({
 			? palette('--standfirst-text')
 			: palette('--dateline'),
 	};
-	if (secondaryDateline && !secondaryDateline.includes(primaryDateline)) {
-		return (
-			<details
-				css={datelineStyles}
-				style={mobileColour}
-				data-gu-name="dateline"
-			>
-				<summary css={primaryStyles}>
-					<time dateTime={webPublicationDate} css={hoverUnderline}>
-						{primaryDateline}
-					</time>
-				</summary>
-				{secondaryDateline}
-			</details>
-		);
-	}
 	return (
 		<time
 			dateTime={webPublicationDate}
