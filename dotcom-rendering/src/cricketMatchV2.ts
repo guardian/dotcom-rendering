@@ -88,7 +88,7 @@ type WinnerType = (typeof winnerTypes)[number];
 
 // Type guard handles the strict comparison safely
 const isValidWinnerType = (type: string): type is WinnerType => {
-	return winnerTypes.includes(type as any);
+	return (winnerTypes as readonly string[]).includes(type);
 };
 
 const parseWinnerType = (type: string): Result<ParserError, WinnerType> => {
@@ -141,9 +141,11 @@ export type CricketMatch = {
 };
 
 const paCricketStatusToMatchKind: Record<string, CricketMatchKind> = {
+	// Fixtures
 	'pre-match': 'Fixture',
 	'start-delayed': 'Fixture',
 	cancelled: 'Fixture',
+	// Live
 	'in-play': 'Live',
 	tea: 'Live',
 	lunch: 'Live',
@@ -157,6 +159,7 @@ const paCricketStatusToMatchKind: Record<string, CricketMatchKind> = {
 	'play-suspended-unknown': 'Live',
 	snow: 'Live',
 	'medical-emergency': 'Live',
+	// Results
 	result: 'Result',
 	abandoned: 'Result',
 };
@@ -267,42 +270,39 @@ const parseCricketResult = (
 		return ok<ParserError, CricketResult | undefined>(undefined);
 	}
 
-	if (
-		fullResult.resultType === 'home-win' ||
-		fullResult.resultType === 'away-win'
-	) {
-		if (!fullResult.winner) {
+	switch (fullResult.resultType) {
+		case 'home-win':
+		case 'away-win':
+			if (!fullResult.winner) {
+				return error({
+					kind: 'CricketMatchInvalidResult',
+					message: `Missing winner information for result type ${fullResult.resultType}`,
+				});
+			}
+
+			return parseWinnerResult(
+				fullResult.winner,
+				fullResult.resultType,
+				fullResult.description,
+			);
+
+		case 'no-result':
+		case 'draw':
+		case 'abandoned':
+		case 'tied':
+		case 'level-scores-draw':
+		case 'none':
+			return ok<ParserError, OtherResult>({
+				type: fullResult.resultType,
+				description: fullResult.description,
+			});
+
+		default:
 			return error({
 				kind: 'CricketMatchInvalidResult',
-				message: `Missing winner information for result type ${fullResult.resultType}`,
+				message: `Invalid result type: ${fullResult.resultType}`,
 			});
-		}
-
-		return parseWinnerResult(
-			fullResult.winner,
-			fullResult.resultType,
-			fullResult.description,
-		);
 	}
-
-	if (
-		fullResult.resultType === 'no-result' ||
-		fullResult.resultType === 'draw' ||
-		fullResult.resultType === 'abandoned' ||
-		fullResult.resultType === 'tied' ||
-		fullResult.resultType === 'level-scores-draw' ||
-		fullResult.resultType === 'none'
-	) {
-		return ok<ParserError, OtherResult>({
-			type: fullResult.resultType,
-			description: fullResult.description,
-		});
-	}
-
-	return error({
-		kind: 'CricketMatchInvalidResult',
-		message: `Invalid result type: ${fullResult?.resultType ?? 'undefined'}`,
-	});
 };
 
 export const parseCricketMatchV2 = (
