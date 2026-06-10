@@ -1,4 +1,6 @@
 import { isUndefined } from '@guardian/libs';
+import type { Output } from 'valibot';
+import { is, picklist } from 'valibot';
 import type {
 	FECricketMatch,
 	FECricketMatchResult,
@@ -77,22 +79,17 @@ export type InningsOverview = {
 	fallOfWickets: number;
 };
 
-const winnerTypes = [
+const winnerTypesSchema = picklist([
 	'runs',
 	'wickets',
 	'innings',
 	'forfeit',
 	'run-rate',
-] as const;
-type WinnerType = (typeof winnerTypes)[number];
-
-// Type guard handles the strict comparison safely
-const isValidWinnerType = (type: string): type is WinnerType => {
-	return (winnerTypes as readonly string[]).includes(type);
-};
+] as const);
+type WinnerType = Output<typeof winnerTypesSchema>;
 
 const parseWinnerType = (type: string): Result<ParserError, WinnerType> => {
-	if (isValidWinnerType(type)) {
+	if (is(winnerTypesSchema, type)) {
 		return ok(type);
 	}
 
