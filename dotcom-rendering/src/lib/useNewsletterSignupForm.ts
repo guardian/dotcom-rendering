@@ -110,6 +110,25 @@ const postFormData = async (
 	});
 };
 
+// TODO: when the in-article newsletter signup AB test (newsletters-signup-card-country-illustration)
+// is cleaned up, refactor getComponentId (and useNewsletterSignupForm) to accept an explicit
+// componentId rather than deriving it from abTest.variant, so tracking is not coupled to test state.
+const getComponentId = (newsletterId: string, abTest?: AbTest): string => {
+	switch (abTest?.variant) {
+		case 'variantIllustratedCard':
+			return NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
+				newsletterId,
+			);
+		case 'variantNewField':
+			return NEWSLETTER_SIGNUP_COMPONENT_ID.variantNewField(newsletterId);
+		case 'highlightsCard':
+			return NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(newsletterId);
+		case undefined:
+		default:
+			return NEWSLETTER_SIGNUP_COMPONENT_ID.control(newsletterId);
+	}
+};
+
 const sendTracking = (
 	newsletterId: string,
 	eventDescription: NewsletterEventDescription,
@@ -118,14 +137,7 @@ const sendTracking = (
 	abTest?: AbTest,
 	extraDetails?: Record<string, unknown>,
 ): void => {
-	const componentId =
-		abTest?.variant === 'variantIllustratedCard'
-			? NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
-					newsletterId,
-				)
-			: abTest?.variant === 'variantNewField'
-				? NEWSLETTER_SIGNUP_COMPONENT_ID.variantNewField(newsletterId)
-				: NEWSLETTER_SIGNUP_COMPONENT_ID.control(newsletterId);
+	const componentId = getComponentId(newsletterId, abTest);
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
 		identityName: newsletterId,

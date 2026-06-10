@@ -16,7 +16,8 @@ export type NewsletterEventDescription =
 	| 'captcha-not-passed'
 	| 'captcha-passed'
 	| 'highlights-card-viewed'
-	| 'highlights-card-modal-opened';
+	| 'highlights-card-modal-opened'
+	| 'highlights-card-modal-closed';
 
 export const EVENT_DESCRIPTION_TO_ACTION = {
 	'click-button': 'CLICK',
@@ -31,6 +32,7 @@ export const EVENT_DESCRIPTION_TO_ACTION = {
 	'open-captcha': 'EXPAND',
 	'highlights-card-viewed': 'VIEW',
 	'highlights-card-modal-opened': 'EXPAND',
+	'highlights-card-modal-closed': 'CLOSE',
 } as const satisfies Record<NewsletterEventDescription, string>;
 
 /**

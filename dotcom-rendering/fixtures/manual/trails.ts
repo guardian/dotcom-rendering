@@ -809,6 +809,49 @@ export const selfHostedLoopVideo169Card = {
 	},
 } satisfies DCRFrontCard;
 
+export const selfHostedDefaultVideo54Card = {
+	...selfHostedLoopVideo54Card,
+	headline: 'Self-hosted 5:4 default video card',
+	mainMedia: {
+		...selfHostedLoopVideo54Card.mainMedia,
+		videoStyle: 'Default',
+	},
+} satisfies DCRFrontCard;
+
+export const selfHostedDefaultVideo45Card = {
+	...selfHostedLoopVideo45Card,
+	headline: 'Self-hosted 4:5 default video card',
+	mainMedia: {
+		...selfHostedLoopVideo45Card.mainMedia,
+		videoStyle: 'Default',
+	},
+} satisfies DCRFrontCard;
+
+export const selfHostedDefaultVideo53Card = {
+	...selfHostedLoopVideo53Card,
+	headline: 'Self-hosted 5:3 default video card',
+	mainMedia: {
+		...selfHostedLoopVideo53Card.mainMedia,
+		videoStyle: 'Default',
+	},
+} satisfies DCRFrontCard;
+
+export const selfHostedDefaultVideo916Card = {
+	...selfHostedLoopVideo916Card,
+	mainMedia: {
+		...selfHostedLoopVideo916Card.mainMedia,
+		videoStyle: 'Default',
+	},
+} satisfies DCRFrontCard;
+
+export const selfHostedDefaultVideo169Card = {
+	...selfHostedLoopVideo169Card,
+	mainMedia: {
+		...selfHostedLoopVideo169Card.mainMedia,
+		videoStyle: 'Default',
+	},
+} satisfies DCRFrontCard;
+
 export const slideshowCard: DCRFrontCard = {
 	...defaultCardProps,
 	dataLinkName: 'news | group-0 | card-@2',

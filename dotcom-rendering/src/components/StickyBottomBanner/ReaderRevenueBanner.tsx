@@ -93,7 +93,7 @@ const getArticleCountToday = (
 function parseAbandonedBasket(
 	cookie: string | null,
 ): AbandonedBasket | undefined {
-	if (!cookie) {
+	if (cookie === null || cookie.length === 0) {
 		return;
 	}
 
@@ -227,7 +227,9 @@ export const canShowRRBanner: CanShowFunctionType<
 
 	const purchaseInfo = getPurchaseInfo();
 	const showSignInPrompt =
-		purchaseInfo && !isSignedIn && !signInBannerLastClosedAt;
+		purchaseInfo !== undefined &&
+		!isSignedIn &&
+		signInBannerLastClosedAt === undefined;
 
 	const hasForceBannerParam = window.location.search.includes('force-banner');
 
@@ -241,8 +243,8 @@ export const canShowRRBanner: CanShowFunctionType<
 		}
 		// Don't ask the API for a banner again if it's recently told us not to show one. This is an optimisation to reduce traffic to the API
 		if (
-			engagementBannerLastClosedAt &&
-			subscriptionBannerLastClosedAt &&
+			engagementBannerLastClosedAt !== undefined &&
+			subscriptionBannerLastClosedAt !== undefined &&
 			withinLocalNoBannerCachePeriod()
 		) {
 			return { show: false };
@@ -285,7 +287,10 @@ export const canShowRRBanner: CanShowFunctionType<
 		headers,
 	);
 	if (!response.data) {
-		if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
+		if (
+			engagementBannerLastClosedAt !== undefined &&
+			subscriptionBannerLastClosedAt !== undefined
+		) {
 			setLocalNoBannerCachePeriod();
 		}
 		return { show: false };
@@ -331,8 +336,8 @@ export const ReaderRevenueBanner = ({
 		(name === 'SignInPromptBanner'
 			? /* webpackChunkName: "sign-in-prompt-banner" */
 				import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
-			: /* webpackChunkName: "designable-banner-v2" */
-				import(`../marketing/banners/designableBanner/v2/Banner`)
+			: /* webpackChunkName: "designable-banner" */
+				import(`../marketing/banners/designableBanner/Banner`)
 		)
 			.then((bannerModule: Record<string, React.ElementType>) => {
 				setBanner(() => bannerModule[name] ?? null);

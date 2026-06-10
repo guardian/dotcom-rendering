@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
-import { buttonStyles, buttonThemes } from '../../styles/buttonStyles';
 import type { BannerData } from '../BannerProps';
+import { buttonStyles, buttonThemes } from '../styles/buttonStyles';
 
 const styles = {
 	/* ctas for use with main images */
