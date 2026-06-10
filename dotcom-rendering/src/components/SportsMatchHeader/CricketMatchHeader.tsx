@@ -13,7 +13,6 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import type { ComponentProps } from 'react';
 import { Fragment, type ReactNode, useMemo } from 'react';
 import type {
 	CricketMatch,
@@ -31,18 +30,16 @@ import { generateImageURL } from '../../lib/image';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import { BigNumber } from '../BigNumber';
-import {
-	background,
-	border,
-	primaryText,
-	secondaryText,
-} from '../FootballMatchHeader/colours';
-import { Tabs } from '../FootballMatchHeader/Tabs';
+import { background, border, primaryText, secondaryText } from './colours';
+import { Tabs } from './Tabs';
 
 type Props = {
 	edition: EditionId;
 	match: CricketMatch;
-	tabs: ComponentProps<typeof Tabs>;
+	selectedTab: 'info' | 'live' | 'report';
+	reportURL?: URL;
+	liveURL?: URL;
+	infoURL?: URL;
 };
 
 export const CricketMatchHeader = (props: Props) => {
@@ -73,7 +70,13 @@ export const CricketMatchHeader = (props: Props) => {
 				<Teams match={match} />
 				{match.result && <ResultLine result={match.result} />}
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
-				<Tabs {...props.tabs} />
+				<Tabs
+					matchKind={match.kind}
+					selected={props.selectedTab}
+					reportURL={props.reportURL}
+					liveURL={props.liveURL}
+					infoURL={props.infoURL}
+				/>
 			</div>
 		</section>
 	);

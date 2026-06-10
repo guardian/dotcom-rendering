@@ -4,9 +4,9 @@ import {
 	getMatchNotificationsClient,
 	getNotificationsClient,
 } from '../lib/bridgetApi';
-import type { FootballMatchHeaderProps } from './FootballMatchHeader/FootballMatchHeader';
-import { FootballMatchHeader } from './FootballMatchHeader/FootballMatchHeader';
-import type { HeaderData } from './FootballMatchHeader/headerData';
+import type { FootballMatchHeaderProps } from './SportsMatchHeader/FootballMatchHeader';
+import { FootballMatchHeader } from './SportsMatchHeader/FootballMatchHeader';
+import type { HeaderData } from './SportsMatchHeader/headerData';
 
 type Props =
 	| (FootballMatchHeaderProps & {

@@ -5,35 +5,27 @@ import {
 	headlineBold17Object,
 	space,
 } from '@guardian/source/foundations';
-import type { CSSProperties, ReactNode } from 'react';
+import { type CSSProperties, type ReactNode } from 'react';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { palette } from '../../palette';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { useConfig } from '../ConfigContext';
-import { border, primaryText, selected } from './colours';
+import {
+	border,
+	primaryText,
+	selected as selectedTabColour,
+} from '../SportsMatchHeader/colours';
+
+export type TabName = 'info' | 'live' | 'report';
 
 type Props = {
 	matchKind: FootballMatch['kind'];
-	// eslint-disable-next-line react/no-unused-prop-types -- false positive, this is passed into the tab components
-	sportKind?: 'football' | 'cricket';
-} & (
-	| {
-			selected: 'info';
-			reportURL?: URL;
-			liveURL?: URL;
-	  }
-	| {
-			selected: 'live';
-			reportURL?: URL;
-			infoURL: URL;
-	  }
-	| {
-			selected: 'report';
-			liveURL?: URL;
-			infoURL: URL;
-	  }
-);
+	selected: TabName;
+	reportURL?: URL;
+	liveURL?: URL;
+	infoURL?: URL;
+};
 
 export const Tabs = (props: Props) => (
 	<nav css={[grid.column.centre]}>
@@ -50,63 +42,46 @@ export const Tabs = (props: Props) => (
 			style={{
 				borderColor: palette(border(props.matchKind)),
 			}}
+			role="navigation"
 		>
-			<MatchReport {...props} />
-			<LiveFeed {...props} />
-			<MatchInfo {...props} />
+			{props.reportURL !== undefined && (
+				<Tab
+					matchKind={props.matchKind}
+					href={props.reportURL}
+					selected={props.selected === 'report'}
+				>
+					Match report
+				</Tab>
+			)}
+
+			{props.liveURL !== undefined && (
+				<Tab
+					matchKind={props.matchKind}
+					href={props.liveURL}
+					selected={props.selected === 'live'}
+				>
+					Live feed
+				</Tab>
+			)}
+
+			{props.infoURL !== undefined && (
+				<Tab
+					matchKind={props.matchKind}
+					href={props.infoURL}
+					selected={props.selected === 'info'}
+				>
+					Scorecard
+				</Tab>
+			)}
 		</ul>
 	</nav>
 );
-
-const MatchReport = (props: Props) => {
-	if (props.selected === 'report') {
-		return <Tab matchKind={props.matchKind}>Match report</Tab>;
-	}
-
-	if (props.reportURL !== undefined) {
-		return (
-			<Tab matchKind={props.matchKind} href={props.reportURL}>
-				Match report
-			</Tab>
-		);
-	}
-
-	return null;
-};
-
-const LiveFeed = (props: Props) => {
-	if (props.selected === 'live') {
-		return <Tab matchKind={props.matchKind}>Live feed</Tab>;
-	}
-
-	if (props.liveURL !== undefined) {
-		return (
-			<Tab matchKind={props.matchKind} href={props.liveURL}>
-				Live feed
-			</Tab>
-		);
-	}
-
-	return null;
-};
-
-const MatchInfo = (props: Props) => {
-	const tabText = props.sportKind === 'cricket' ? 'Scorecard' : 'Match info';
-	if (props.selected === 'info') {
-		return <Tab matchKind={props.matchKind}>{tabText}</Tab>;
-	}
-
-	return (
-		<Tab matchKind={props.matchKind} href={props.infoURL}>
-			{tabText}
-		</Tab>
-	);
-};
 
 const Tab = (props: {
 	children: ReactNode;
 	href?: URL;
 	matchKind: FootballMatch['kind'];
+	selected?: boolean;
 }) => (
 	<li
 		css={{
@@ -127,7 +102,11 @@ const Tab = (props: {
 			borderLeftColor: palette(border(props.matchKind)),
 		}}
 	>
-		<TabText href={props.href} matchKind={props.matchKind}>
+		<TabText
+			href={props.href}
+			matchKind={props.matchKind}
+			selected={props.selected}
+		>
 			{props.children}
 		</TabText>
 	</li>
@@ -137,6 +116,7 @@ const TabText = (props: {
 	children: ReactNode;
 	href?: URL;
 	matchKind: FootballMatch['kind'];
+	selected?: boolean;
 }) => {
 	const { renderingTarget } = useConfig();
 
@@ -145,7 +125,15 @@ const TabText = (props: {
 			<a
 				href={props.href.toString()}
 				css={tabTextCss}
-				style={tabTextStyle(props.matchKind, renderingTarget)}
+				style={{
+					...tabTextStyle(props.matchKind, renderingTarget),
+					borderBottomColor:
+						props.selected === true
+							? palette(selectedTabColour(props.matchKind))
+							: 'transparent',
+				}}
+				role="tab"
+				aria-selected={props.selected}
 			>
 				{props.children}
 			</a>
@@ -157,8 +145,10 @@ const TabText = (props: {
 			css={tabTextCss}
 			style={{
 				...tabTextStyle(props.matchKind, renderingTarget),
-				borderBottomColor: palette(selected(props.matchKind)),
+				borderBottomColor: palette(selectedTabColour(props.matchKind)),
 			}}
+			role="tab"
+			aria-selected={props.selected}
 		>
 			{props.children}
 		</span>
@@ -188,6 +178,6 @@ const tabTextStyle = (
 	color: palette(primaryText(matchKind)),
 	'--hover-colour':
 		renderingTarget === 'Web'
-			? palette(selected(matchKind))
+			? palette(selectedTabColour(matchKind))
 			: 'transparent',
 });

@@ -89,10 +89,7 @@ export const FixtureWeb = meta.story({
 				},
 				paId: 'matchId',
 			},
-			tabs: {
-				selected: 'info',
-				matchKind: 'Fixture',
-			},
+			tabs: {},
 		},
 		leagueName: 'Premier League',
 		edition: 'UK',
