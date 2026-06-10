@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { from, space, until } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { grid } from '../grid';
 import { type ArticleFormat } from '../lib/articleFormat';
 import { getImage } from '../lib/image';
@@ -23,7 +23,7 @@ type Props = {
 
 const styles = css`
 	${grid.paddedContainer}
-	${grid.verticalRules()}
+	${grid.outerRules()}
 	grid-auto-flow: row dense;
 	background-color: ${palette('--article-inner-background')};
 
@@ -33,9 +33,16 @@ const styles = css`
 	}
 
 	${from.desktop} {
-		&:first-of-type {
+		&:first-of-type > * {
 			padding-top: ${space[3]}px;
 		}
+	}
+
+	${between.desktop.and.leftCol} {
+		${grid.centreRule(2)}
+	}
+	${from.leftCol} {
+		${grid.centreRule(1)}
 	}
 `;
 
