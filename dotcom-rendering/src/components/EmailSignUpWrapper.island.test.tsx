@@ -334,5 +334,19 @@ describe('EmailSignUpWrapper', () => {
 
 			expect(submitComponentEvent).not.toHaveBeenCalled();
 		});
+
+		it('includes isSignedIn in the VIEW tracking payload', () => {
+			(useIsSignedIn as jest.Mock).mockReturnValue(true);
+			mockAbTests(false);
+			renderWrapper({ showNewNewsletterSignupCard: true });
+
+			expect(submitComponentEvent).toHaveBeenCalledWith(
+				expect.objectContaining({
+					action: 'VIEW',
+					abTest: { name: AB_TEST_NAME, variant: 'control' },
+				}),
+				'Web',
+			);
+		});
 	});
 });
