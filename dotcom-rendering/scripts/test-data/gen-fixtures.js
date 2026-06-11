@@ -137,7 +137,7 @@ const articles = [
 	},
 	{
 		name: 'AffiliateProductStandard',
-		url: 'https://www.theguardian.com/thefilter-us/2026/jun/09/caraway-saute-pan-review',
+		url: 'https://www.theguardian.com/thefilter-us/2025/dec/25/glass-food-containers-to-store-leftovers',
 	},
 ];
 
