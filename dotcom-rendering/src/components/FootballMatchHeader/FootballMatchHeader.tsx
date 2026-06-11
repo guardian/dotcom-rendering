@@ -144,6 +144,7 @@ export const FootballMatchHeader = (props: Props) => {
 				/>
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 				<Tabs
+					sportKind="football"
 					matchKind={match.kind}
 					selected={props.initialTab}
 					reportURL={tabs.reportURL}

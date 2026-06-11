@@ -17,6 +17,7 @@ export type TabName = 'info' | 'live' | 'report';
 
 type Props = {
 	matchKind: FootballMatch['kind'];
+	sportKind: 'football' | 'cricket';
 	selected: TabName;
 	reportURL?: URL;
 	liveURL?: URL;
@@ -65,7 +66,9 @@ export const Tabs = (props: Props) => (
 					href={props.infoURL}
 					selected={props.selected === 'info'}
 				>
-					Scorecard
+					{props.sportKind === 'football'
+						? 'Match info'
+						: 'Scorecard'}
 				</Tab>
 			)}
 		</ul>

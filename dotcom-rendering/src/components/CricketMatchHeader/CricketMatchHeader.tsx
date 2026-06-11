@@ -76,6 +76,7 @@ export const CricketMatchHeader = (props: Props) => {
 				{match.result && <ResultLine result={match.result} />}
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 				<Tabs
+					sportKind="cricket"
 					matchKind={match.kind}
 					selected={props.selectedTab}
 					reportURL={props.reportURL}
