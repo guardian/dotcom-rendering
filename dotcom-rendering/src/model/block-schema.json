@@ -2147,6 +2147,9 @@
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.LinkBlockElement"
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -2170,6 +2173,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "label",
                 "linkType",
                 "url"
