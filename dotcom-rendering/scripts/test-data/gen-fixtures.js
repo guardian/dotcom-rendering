@@ -131,6 +131,14 @@ const articles = [
 		name: 'Video',
 		url: 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 	},
+	{
+		name: 'AffiliateProductShowcase',
+		url: 'https://www.theguardian.com/thefilter/2025/jun/17/best-fans-uk',
+	},
+	{
+		name: 'AffiliateProductStandard',
+		url: 'https://www.theguardian.com/thefilter-us/2026/may/27/fathers-day-deals-sales',
+	},
 ];
 
 const HEADER = `/**

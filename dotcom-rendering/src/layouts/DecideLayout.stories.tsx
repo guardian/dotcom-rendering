@@ -3,6 +3,8 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Decorator, StoryObj } from '@storybook/react-webpack5';
 import { useEffect } from 'react';
 import { colourSchemeDecorator } from '../../.storybook/decorators/themeDecorator';
+import { AffiliateProductShowcase as AffiliateProductShowcaseFixture } from '../../fixtures/generated/fe-articles/AffiliateProductShowcase';
+import { AffiliateProductStandard as AffiliateProductStandardFixture } from '../../fixtures/generated/fe-articles/AffiliateProductStandard';
 import { Analysis as AnalysisStandardNewsFixture } from '../../fixtures/generated/fe-articles/Analysis';
 import { Comment as CommentStandardOpinionFixture } from '../../fixtures/generated/fe-articles/Comment';
 import { Feature as FeatureStandardCultureFixture } from '../../fixtures/generated/fe-articles/Feature';
@@ -329,6 +331,20 @@ export const WebLiveBlogStandardLabsLight: Story = {
 			...WebLiveBlogStandardNewsLight.args.article,
 			theme: ArticleSpecial.Labs,
 		},
+	},
+	parameters: webParameters,
+};
+
+export const AffiliateProductStandardLight: Story = {
+	args: {
+		article: enhanceArticleType(AffiliateProductStandardFixture, 'Web'),
+	},
+	parameters: webParameters,
+};
+
+export const AffiliateProductShowcaseLight: Story = {
+	args: {
+		article: enhanceArticleType(AffiliateProductShowcaseFixture, 'Web'),
 	},
 	parameters: webParameters,
 };
