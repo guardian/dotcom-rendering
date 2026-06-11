@@ -20,12 +20,22 @@ const containerStyles = css`
 	z-index: ${getZIndex('video-progress-bar-background')};
 	cursor: pointer;
 	padding: 0 12px;
+	-webkit-tap-highlight-color: transparent;
+`;
+
+const backgroundStyles = css`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 52px;
+	width: 100%;
+	z-index: -1;
 	background: linear-gradient(
 		to top,
 		${sourcePalette.neutral[0]} 0%,
+		rgba(0, 0, 0, 0.7) 50%,
 		transparent 100%
 	);
-	-webkit-tap-highlight-color: transparent;
 `;
 
 const trackStyles = css`
@@ -175,6 +185,7 @@ export const VideoProgressBarInteractive = ({
 				onPointerCancel={onSeekEnd}
 				onBlur={onSeekEnd}
 			/>
+			<div css={backgroundStyles} />
 		</div>
 	);
 };
