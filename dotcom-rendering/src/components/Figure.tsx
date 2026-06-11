@@ -1,6 +1,18 @@
 import { css } from '@emotion/react';
-import { breakpoints, from, space, until } from '@guardian/source/foundations';
-import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import {
+	breakpoints,
+	from,
+	palette as sourcePalette,
+	space,
+	until,
+} from '@guardian/source/foundations';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../lib/articleFormat';
+import { transparentColour } from '../lib/transparentColour';
+import { palette } from '../palette';
 import type { FEElement, RoleType } from '../types/content';
 
 type Props = {
@@ -13,6 +25,32 @@ type Props = {
 	type?: FEElement['_type'];
 	isTimeline?: boolean;
 };
+
+const overlayMaskGradientStyles = (angle: string) => css`
+	mask-image: linear-gradient(
+		${angle},
+		rgb(0, 0, 0) 0%,
+		rgba(0, 0, 0, 0.9619) 12.5%,
+		rgba(0, 0, 0, 0.8536) 25%,
+		rgba(0, 0, 0, 0.6913) 37.5%,
+		rgba(0, 0, 0, 0.5) 50%,
+		rgba(0, 0, 0, 0.3087) 62.5%,
+		rgba(0, 0, 0, 0.1464) 75%,
+		rgba(0, 0, 0, 0.0381) 87.5%,
+		transparent 100%
+	);
+`;
+
+const blurStyles = css`
+	position: absolute;
+	inset: 0;
+	background-color: ${palette('--article-background')};
+	backdrop-filter: blur(12px) brightness(0.5);
+	@supports not (backdrop-filter: blur(12px)) {
+		background-color: ${transparentColour(sourcePalette.neutral[10], 0.7)};
+	}
+	${overlayMaskGradientStyles('0deg')};
+`;
 
 const roleCss = {
 	inline: css`
@@ -273,6 +311,17 @@ export const Figure = ({
 		return (
 			<figure id={id} key={id} css={mainMediaFigureStyles}>
 				{children}
+				{format.display === ArticleDisplay.Immersive && (
+					<div
+						css={[
+							blurStyles,
+							css`
+								height: 40%;
+								top: 60%;
+							`,
+						]}
+					/>
+				)}
 			</figure>
 		);
 	}
