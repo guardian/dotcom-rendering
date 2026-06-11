@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { between, from, space, textSans14 } from '@guardian/source/foundations';
 import { grid } from '../grid';
-import { type ArticleFormat } from '../lib/articleFormat';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { CaptionText } from './CaptionText';
 import { Island } from './Island';
@@ -50,6 +50,8 @@ export const GalleryCaption = ({
 	const emptyCaption = captionHtml === undefined || captionHtml.trim() === '';
 	const hideCredit =
 		displayCredit === false || credit === undefined || credit === '';
+	const shouldIncludeShareButton =
+		format.design !== ArticleDesign.HostedGallery;
 
 	if (emptyCaption && hideCredit) {
 		return null;
@@ -73,19 +75,21 @@ export const GalleryCaption = ({
 					padding-top: ${space[2]}px;
 				`}
 			>
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ShareButton
-						format={format}
-						pageId={pageId}
-						webTitle={webTitle}
-						context="ImageCaption"
-						hash={
-							typeof position === 'number'
-								? `img-${position}`
-								: undefined
-						}
-					/>
-				</Island>
+				{shouldIncludeShareButton && (
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<ShareButton
+							format={format}
+							pageId={pageId}
+							webTitle={webTitle}
+							context="ImageCaption"
+							hash={
+								typeof position === 'number'
+									? `img-${position}`
+									: undefined
+							}
+						/>
+					</Island>
+				)}
 			</div>
 		</figcaption>
 	);
