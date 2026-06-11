@@ -50,7 +50,7 @@ export const GalleryCaption = ({
 	const emptyCaption = captionHtml === undefined || captionHtml.trim() === '';
 	const hideCredit =
 		displayCredit === false || credit === undefined || credit === '';
-	const isShareButtonVisible = !(
+	const shouldIncludeShareButton = !(
 		format.design === ArticleDesign.HostedGallery
 	);
 
@@ -76,7 +76,7 @@ export const GalleryCaption = ({
 					padding-top: ${space[2]}px;
 				`}
 			>
-				{isShareButtonVisible && (
+				{shouldIncludeShareButton && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<ShareButton
 							format={format}
