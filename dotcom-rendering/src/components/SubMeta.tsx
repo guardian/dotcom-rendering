@@ -64,7 +64,8 @@ const listStyles = css`
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1.5rem 0.25rem;
-	background-image: repeating-linear-gradient(
+	background-image:
+		repeating-linear-gradient(
 			to bottom,
 			${palette('--sub-meta-background')} 0px,
 			${palette('--sub-meta-background')} 2.25rem,

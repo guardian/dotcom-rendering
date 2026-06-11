@@ -1,6 +1,6 @@
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
-import { templateSpacing } from '../../styles/templateStyles';
 import type { BannerData } from '../BannerProps';
+import { templateSpacing } from '../styles/templateStyles';
 
 export const BannerTicker = ({
 	bannerData,

@@ -129,7 +129,7 @@ const MessageUs = ({
 				useBrandColour
 					? {
 							'--article-link-text': palette('--callout-prompt'),
-					  }
+						}
 					: {}
 			}
 		>

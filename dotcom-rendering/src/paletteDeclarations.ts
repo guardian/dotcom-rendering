@@ -2520,8 +2520,7 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 };
 
 const cardBorderTopLight: PaletteFunction = () => sourcePalette.neutral[73];
-const cardBorderTopDark: PaletteFunction = (format) =>
-	cardBorderTopLight(format);
+const cardBorderTopDark: PaletteFunction = () => sourcePalette.neutral[46];
 
 const cardBorderSupportingLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
@@ -7697,6 +7696,10 @@ const paletteColours = {
 	},
 	'--newsletter-card-title': {
 		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-highlights-card-headline': {
+		light: () => sourcePalette.brand[400],
 		dark: () => sourcePalette.neutral[100],
 	},
 	'--newsletter-preview-button-border': {

@@ -250,7 +250,7 @@ export const CardHeadline = ({
 					isSublink
 						? css`
 								${textSans14}
-						  `
+							`
 						: fontStyles,
 				]}
 			>

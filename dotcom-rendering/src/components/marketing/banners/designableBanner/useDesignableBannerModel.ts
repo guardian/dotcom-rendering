@@ -4,29 +4,29 @@ import type {
 	BannerDesignHeaderImage,
 	BannerDesignImage,
 	ConfigurableDesign,
-	Image,
+	Image as SupportImage,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
-} from '../../../../../lib/useMatchMedia';
-import { getChoiceCards } from '../../../lib/choiceCards';
-import { createClickEventFromTracking } from '../../../lib/tracking';
-import type { BannerRenderProps } from '../../common/types';
-import { setChannelClosedTimestamp } from '../../utils/localStorage';
-import type {
-	BannerTemplateSettings,
-	ChoiceCardDesignSettings,
-} from '../settings';
+} from '../../../../lib/useMatchMedia';
+import { getChoiceCards } from '../../lib/choiceCards';
+import { createClickEventFromTracking } from '../../lib/tracking';
+import type { BannerRenderProps } from '../common/types';
+import { setChannelClosedTimestamp } from '../utils/localStorage';
 import type { BannerData } from './BannerProps';
 import { buildBannerSelectors } from './bannerSelectors';
 import { getComponentIds } from './componentIds';
+import type {
+	BannerTemplateSettings,
+	ChoiceCardDesignSettings,
+} from './settings';
 
 const buildImageSettings = (
 	design: BannerDesignImage | BannerDesignHeaderImage,
-): Image | undefined => {
+): SupportImage | undefined => {
 	return {
 		mainUrl: design.mobileUrl,
 		mobileUrl: design.mobileUrl,
@@ -39,7 +39,7 @@ const buildImageSettings = (
 
 const buildMainImageSettings = (
 	design: ConfigurableDesign,
-): Image | undefined => {
+): SupportImage | undefined => {
 	if (design.visual?.kind !== 'Image') {
 		return undefined;
 	}
@@ -48,7 +48,7 @@ const buildMainImageSettings = (
 
 const buildHeaderImageSettings = (
 	design: ConfigurableDesign,
-): Image | undefined => {
+): SupportImage | undefined => {
 	if (!design.headerImage) {
 		return undefined;
 	}
@@ -135,18 +135,20 @@ export const useDesignableBannerModel = ({
 		[isTabletOrAbove, choiceCardsSettings],
 	);
 
-	const defaultChoiceCard = choiceCards?.find((cc) => cc.isDefault);
+	const defaultChoiceCard = choiceCards?.find(
+		(cc: ChoiceCard) => cc.isDefault,
+	);
 
-	const [selectedChoiceCard, setSelectedChoiceCard] = useState<
+	const [selectedChoiceCardState, setSelectedChoiceCardState] = useState<
 		ChoiceCard | undefined
 	>(defaultChoiceCard);
 
-	// Reset selectedChoiceCard when choiceCards change
-	useEffect(() => {
+	const selectedChoiceCard = useMemo(() => {
 		if (!choiceCards || choiceCards.length === 0) {
-			setSelectedChoiceCard(undefined);
+			return undefined;
 		}
-	}, [choiceCards]);
+		return selectedChoiceCardState;
+	}, [choiceCards, selectedChoiceCardState]);
 
 	const isCollapsableBanner: boolean =
 		isCollapsible ??
@@ -367,7 +369,7 @@ export const useDesignableBannerModel = ({
 				onToggleCollapse: handleToggleCollapse,
 				onCtaClick: combinedHandlers.onCtaClick,
 				onSecondaryCtaClick: combinedHandlers.onSecondaryCtaClick,
-				onChoiceCardChange: setSelectedChoiceCard,
+				onChoiceCardChange: setSelectedChoiceCardState,
 				submitComponentEvent,
 			},
 			selectors,

@@ -7,11 +7,8 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { useEffect, useRef } from 'react';
-import {
-	bannerWrapper,
-	validatedBannerWrapper,
-} from '../../common/BannerWrapper';
-import type { BannerRenderProps } from '../../common/types';
+import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
+import type { BannerRenderProps } from '../common/types';
 import { BannerArticleCount } from './components/BannerArticleCount';
 import { BannerBody } from './components/BannerBody';
 import { BannerChoiceCards } from './components/BannerChoiceCards';
@@ -68,10 +65,9 @@ const styles = {
 			max-width: 740px;
 			margin: 0 auto;
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
-			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} max-content minmax(
-					0,
-					0.5fr
-				);
+			grid-template-columns:
+				minmax(0, 0.5fr)
+				${phabletContentMaxWidth} max-content minmax(0, 0.5fr);
 			grid-template-rows: auto auto auto;
 			grid-template-areas:
 				'.	copy-container						close-button			close-button'
@@ -245,8 +241,8 @@ const Banner = (props: BannerRenderProps): JSX.Element | null => {
 		.choiceCardSettings
 		? 'choice-cards-container'
 		: bannerData.settings.imageSettings
-		? 'main-image'
-		: '.';
+			? 'main-image'
+			: '.';
 
 	return (
 		<div
@@ -264,10 +260,10 @@ const Banner = (props: BannerRenderProps): JSX.Element | null => {
 					bannerData.isCollapsible && bannerData.isCollapsed
 						? styles.collapsedLayoutOverrides(
 								cardsImageOrSpaceTemplateString,
-						  )
+							)
 						: styles.layoutOverrides(
 								cardsImageOrSpaceTemplateString,
-						  )
+							)
 				}
 			>
 				<div css={styles.verticalLine} />
@@ -280,7 +276,9 @@ const Banner = (props: BannerRenderProps): JSX.Element | null => {
 				</BannerContent>
 				<BannerChoiceCards bannerData={bannerData} />
 				<BannerCtas bannerData={bannerData} />
-				<BannerVisual bannerData={bannerData} />
+				{!bannerData.isCollapsed && (
+					<BannerVisual bannerData={bannerData} />
+				)}
 				<BannerCloseButton bannerData={bannerData} />
 			</div>
 		</div>

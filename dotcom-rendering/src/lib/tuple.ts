@@ -2,30 +2,30 @@
 export type Tuple<T, N extends number> = N extends 12
 	? [T, T, T, T, T, T, T, T, T, T, T, T]
 	: N extends 11
-	? [T, T, T, T, T, T, T, T, T, T, T]
-	: N extends 10
-	? [T, T, T, T, T, T, T, T, T, T]
-	: N extends 9
-	? [T, T, T, T, T, T, T, T, T]
-	: N extends 8
-	? [T, T, T, T, T, T, T, T]
-	: N extends 7
-	? [T, T, T, T, T, T, T]
-	: N extends 6
-	? [T, T, T, T, T, T]
-	: N extends 5
-	? [T, T, T, T, T]
-	: N extends 4
-	? [T, T, T, T]
-	: N extends 3
-	? [T, T, T]
-	: N extends 2
-	? [T, T]
-	: N extends 1
-	? [T]
-	: N extends 0
-	? []
-	: T[];
+		? [T, T, T, T, T, T, T, T, T, T, T]
+		: N extends 10
+			? [T, T, T, T, T, T, T, T, T, T]
+			: N extends 9
+				? [T, T, T, T, T, T, T, T, T]
+				: N extends 8
+					? [T, T, T, T, T, T, T, T]
+					: N extends 7
+						? [T, T, T, T, T, T, T]
+						: N extends 6
+							? [T, T, T, T, T, T]
+							: N extends 5
+								? [T, T, T, T, T]
+								: N extends 4
+									? [T, T, T, T]
+									: N extends 3
+										? [T, T, T]
+										: N extends 2
+											? [T, T]
+											: N extends 1
+												? [T]
+												: N extends 0
+													? []
+													: T[];
 
 /**
  * Type-guard for whether an array is a tuple of exact length.
@@ -44,28 +44,28 @@ type SlicedTuple<
 > = N extends 12
 	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12>
 	: N extends 11
-	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11>
-	: N extends 10
-	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10>
-	: N extends 9
-	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9>
-	: N extends 8
-	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>
-	: N extends 7
-	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7>
-	: N extends 6
-	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6>
-	: N extends 5
-	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5>
-	: N extends 4
-	? Tuple<T, 0 | 1 | 2 | 3 | 4>
-	: N extends 3
-	? Tuple<T, 0 | 1 | 2 | 3>
-	: N extends 2
-	? Tuple<T, 0 | 1 | 2>
-	: N extends 1
-	? Tuple<T, 0 | 1>
-	: undefined;
+		? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11>
+		: N extends 10
+			? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10>
+			: N extends 9
+				? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9>
+				: N extends 8
+					? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>
+					: N extends 7
+						? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7>
+						: N extends 6
+							? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6>
+							: N extends 5
+								? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5>
+								: N extends 4
+									? Tuple<T, 0 | 1 | 2 | 3 | 4>
+									: N extends 3
+										? Tuple<T, 0 | 1 | 2 | 3>
+										: N extends 2
+											? Tuple<T, 0 | 1 | 2>
+											: N extends 1
+												? Tuple<T, 0 | 1>
+												: undefined;
 
 /**
  * Takes the first 'n' number of items in an array

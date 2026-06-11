@@ -120,6 +120,15 @@ export const getMatchNotificationsClient: BridgetApi<
 	isAvailable: async () => ({ isAvailable: true }),
 });
 
+export const getLiveActivitiesClient: BridgetApi<
+	'getLiveActivitiesClient'
+> = () => ({
+	isAvailable: async () => true,
+	isFollowing: async () => false,
+	follow: async () => false,
+	unfollow: async () => false,
+});
+
 export const ensure_all_exports_are_present = {
 	getUserClient,
 	getAcquisitionsClient,
@@ -140,6 +149,7 @@ export const ensure_all_exports_are_present = {
 	getAudioClient,
 	getNativeABTestingClient,
 	getMatchNotificationsClient,
+	getLiveActivitiesClient,
 } satisfies {
 	[Method in keyof BridgeModule]: BridgetApi<Method>;
 };

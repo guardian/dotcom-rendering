@@ -1,5 +1,6 @@
 import type { FEMediaAsset } from '../frontend/feFront';
 import type { VideoAssets } from '../types/content';
+import type { VideoPlayerFormat } from '../types/mainMedia';
 
 export type CustomPlayEventDetail = { uniqueId: string };
 
@@ -25,13 +26,27 @@ export type Source = {
 /**
  * Order is important here - the browser will use the first type it supports.
  */
-export const supportedVideoFileTypes = [
-	'video/mp4', // MP4 format
+const m3u8FileTypes = [
 	'application/x-mpegURL', // HLS format
 	'application/vnd.apple.mpegurl', // Alternative HLS format
 ] as const;
 
-export type SupportedVideoFileType = (typeof supportedVideoFileTypes)[number];
+const mp4FileTypes = [
+	'video/mp4', // MP4 format
+] as const;
+
+const allSupportedVideoFileTypes = [...mp4FileTypes, ...m3u8FileTypes] as const;
+
+export const supportedFileTypesPreferM3U8 = Array.from(
+	new Set([...m3u8FileTypes, ...allSupportedVideoFileTypes]),
+);
+
+export const supportedFileTypesPreferMp4 = Array.from(
+	new Set([...mp4FileTypes, ...allSupportedVideoFileTypes]),
+);
+
+export type SupportedVideoFileType =
+	(typeof allSupportedVideoFileTypes)[number];
 
 /**
  * The looping video player types its `sources` attribute as `Sources`.
@@ -41,12 +56,17 @@ export type SupportedVideoFileType = (typeof supportedVideoFileTypes)[number];
  */
 export const extractValidSourcesFromAssets = (
 	assets: VideoAssets[],
-): Source[] =>
+	videoStyle: VideoPlayerFormat,
+): Source[] => {
 	/**
-	 * Ensure sources are ordered by the order that MIME types are specified in
-	 * `supportedVideoFileTypes` as the browser picks the first one that it supports.
+	 * Sources are ordered because the browser will use the first source that it supports.
 	 */
-	supportedVideoFileTypes.reduce<Source[]>((acc, type) => {
+	const orderedMimeTypes =
+		videoStyle === 'Default'
+			? supportedFileTypesPreferM3U8
+			: supportedFileTypesPreferMp4;
+
+	return orderedMimeTypes.reduce<Source[]>((acc, type) => {
 		const sourcesByType = assets.filter(
 			({ mimeType }) => mimeType === type,
 		);
@@ -65,13 +85,15 @@ export const extractValidSourcesFromAssets = (
 		}
 		return acc;
 	}, []);
+};
 
 export const convertFEMediaAssetsToVideoAssets = (
 	assets: FEMediaAsset[],
 ): VideoAssets[] =>
-	assets.map(({ id, mimeType, dimensions, hasAudio }) => ({
+	assets.map(({ id, mimeType, aspectRatio, dimensions, hasAudio }) => ({
 		url: id,
 		mimeType,
+		aspectRatio,
 		dimensions,
 		hasAudio,
 	}));
@@ -145,7 +167,11 @@ export const findOptimisedSourcePerMimeType = (
 	sources: Source[],
 	screenWidth: number,
 ): Source[] => {
-	return supportedVideoFileTypes.reduce<Source[]>((acc, type) => {
+	const uniqueMimeTypes = Array.from(
+		new Set(sources.map(({ mimeType }) => mimeType)),
+	);
+
+	return uniqueMimeTypes.reduce<Source[]>((acc, type) => {
 		const sourcesForMimeType = sources.filter(
 			({ mimeType }) => mimeType === type,
 		);

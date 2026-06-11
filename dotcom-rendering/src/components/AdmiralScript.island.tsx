@@ -7,7 +7,7 @@ import { getOphan } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { useConfig } from './ConfigContext';
 
-const testName = 'growth-admiral-adblock-detect';
+const testName = 'martech-admiral-adblock';
 
 /**
  * Sends component events to Ophan with the componentType of `AD_BLOCK_RECOVERY`
@@ -212,7 +212,7 @@ export const AdmiralScript = () => {
 	const { renderingTarget } = useConfig();
 	const abTests = useAB();
 	const isInVariantDetectGroup =
-		abTests?.isUserInTestGroup(testName, 'variant-detect') ?? false;
+		abTests?.isUserInTestGroup(testName, 'control') ?? false;
 	const variantName = isInVariantDetectGroup
 		? 'variant-detect'
 		: 'variant-recover'; //We need to default to 'variant-recover' for users who are not in the AB test in order to show Admiral Modal to all users in the US who are not blocked by the CMP and meet the other criteria.

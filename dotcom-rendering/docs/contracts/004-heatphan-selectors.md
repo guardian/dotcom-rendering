@@ -4,7 +4,7 @@
 
 Within the article body, we add the following attributes to certain elements:
 
--   `data-heatphan-type`: This denotes the component or element type, eg "carousel"
+- `data-heatphan-type`: This denotes the component or element type, eg "carousel"
 
 These are elements that heatphan needs to be able to find and modify for heatphan to function correctly.
 

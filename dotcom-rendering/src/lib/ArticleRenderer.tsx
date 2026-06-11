@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
 import { useConfig } from '../components/ConfigContext';
 import { grid } from '../grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -110,9 +111,11 @@ export const ArticleRenderer = ({
 	//    But should be soon.
 
 	const interactiveLayoutCSS = css`
-		${grid.container}
-		> * {
-			${grid.column.centre}
+		${from.desktop} {
+			${grid.container}
+			> * {
+				${grid.column.centre}
+			}
 		}
 	`;
 
@@ -138,7 +141,7 @@ export const ArticleRenderer = ({
 			{renderingTarget === 'Apps'
 				? renderedElements
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
-				  withSignInGateSlot({
+					withSignInGateSlot({
 						renderedElements,
 						contentType,
 						sectionId,
@@ -152,7 +155,7 @@ export const ArticleRenderer = ({
 						isDev,
 						contributionsServiceUrl,
 						editionId,
-				  })}
+					})}
 		</div>
 	); // classname that space finder is going to target for in-body ads in DCR
 };

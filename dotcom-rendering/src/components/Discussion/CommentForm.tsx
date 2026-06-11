@@ -434,12 +434,12 @@ export const CommentForm = ({
 								body,
 								user.profile,
 								commentBeingRepliedTo,
-						  )
+							)
 						: simulateNewComment(
 								response.value,
 								body,
 								user.profile,
-						  ),
+							),
 				);
 				resetForm();
 			}

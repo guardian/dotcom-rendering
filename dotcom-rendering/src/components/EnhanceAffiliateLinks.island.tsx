@@ -69,8 +69,8 @@ export const EnhanceAffiliateLinks = () => {
 			utmParamsFromArticleURL && utmParamsFromArticleURL.trim() !== ''
 				? utmParamsFromArticleURL
 				: utmParamsFromReferrer && utmParamsFromReferrer.trim() !== ''
-				? utmParamsFromReferrer
-				: '';
+					? utmParamsFromReferrer
+					: '';
 		const referrerDomain =
 			document.referrer === ''
 				? 'none'

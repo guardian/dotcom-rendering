@@ -192,7 +192,7 @@ export const InteractiveContentsBlockComponent = ({
 				const endElement = endDocumentElementId
 					? entries.find(
 							(entry) => entry.target.id === endDocumentElementId,
-					  )
+						)
 					: undefined;
 
 				if (endElement?.isIntersecting) {

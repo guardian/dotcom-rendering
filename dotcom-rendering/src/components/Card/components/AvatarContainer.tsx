@@ -42,11 +42,11 @@ const sizingStyles = (
 							height: 80px;
 							width: 80px;
 						}
-				  `
+					`
 				: css`
 						width: 80px;
 						height: 80px;
-				  `;
+					`;
 		case 'large':
 		case 'xlarge':
 			return css`

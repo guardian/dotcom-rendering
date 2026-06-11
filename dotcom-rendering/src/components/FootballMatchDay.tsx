@@ -40,15 +40,14 @@ export const FootballMatchDay = ({
 		)}
 		{matches.length > 0 ? (
 			<ul css={matchesCss}>
-				{matches.map(
-					(day) =>
-						day.competitions[0]?.matches.map((match) => (
-							<Match
-								key={match.paId}
-								match={match}
-								edition={edition}
-							/>
-						)),
+				{matches.map((day) =>
+					day.competitions[0]?.matches.map((match) => (
+						<Match
+							key={match.paId}
+							match={match}
+							edition={edition}
+						/>
+					)),
 				)}
 			</ul>
 		) : (
@@ -91,9 +90,9 @@ const containerCss = css`
 	flex-direction: column;
 	gap: ${space[2]}px;
 
-	.ios,
-	.android {
-		@media (prefers-color-scheme: dark) {
+	@media (prefers-color-scheme: dark) {
+		.ios &,
+		.android & {
 			--match-day-text: ${neutral[86]};
 			--match-day-text-live: ${neutral[7]};
 			--match-day-text-result: ${neutral[97]};

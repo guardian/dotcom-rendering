@@ -127,7 +127,7 @@ const getPodcastSeriesImage = (
 		? {
 				src: podcastFromTags.podcast.image,
 				altText: podcastFromTags.webTitle,
-		  }
+			}
 		: undefined;
 };
 
@@ -189,7 +189,7 @@ const decideMediaAtomImage = (
 		? {
 				src: largestMediaAtomImage.url,
 				imageAspectRatio: largestMediaAtomImage.fields.aspectRatio,
-		  }
+			}
 		: { src: cardTrailImage };
 };
 
@@ -232,15 +232,21 @@ export const getActiveMediaAtom = (
 				cardTrailImage,
 			);
 
+			const videoStyle = mediaAtom.videoPlayerFormat ?? 'Loop';
+
 			const videoAssets =
 				convertFEMediaAssetsToVideoAssets(selfHostedAssets);
-			const sources = extractValidSourcesFromAssets(videoAssets);
+
+			const sources = extractValidSourcesFromAssets(
+				videoAssets,
+				videoStyle,
+			);
 
 			const aspectRatio = getAspectRatioFromSources(sources);
 
 			return {
 				type: 'SelfHostedVideo',
-				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
+				videoStyle,
 				atomId: mediaAtom.id,
 				sources,
 				subtitleSource: subtitleAsset?.id,
@@ -410,6 +416,11 @@ export const enhanceCards = (
 				(type === 'Tone' && id === 'tone/newsletter-tone'),
 		);
 
+		const isNewsletterSignup = tags.some(
+			({ id, type }) =>
+				type === 'Keyword' && id === 'info/newsletter-sign-up',
+		);
+
 		const branding = faciaCard.properties.editionBrandings.find(
 			(editionBranding) => editionBranding.edition.id === editionId,
 		)?.branding;
@@ -457,7 +468,7 @@ export const enhanceCards = (
 			)
 				? new Date(
 						faciaCard.card.webPublicationDateOption,
-				  ).toISOString()
+					).toISOString()
 				: undefined,
 			kickerText: decideKicker(faciaCard, cardInTagPage, pageId),
 			supportingContent: faciaCard.supportingContent
@@ -475,6 +486,8 @@ export const enhanceCards = (
 			isImmersive: !!faciaCard.display.isImmersive,
 			isCrossword: faciaCard.properties.isCrossword,
 			isNewsletter,
+			isNewsletterSignup,
+			newsletterData: faciaCard.properties.newsletterData,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			// show latest 3 updates from a live blog
 			showLivePlayable: faciaCard.display.showLivePlayable,
@@ -485,7 +498,7 @@ export const enhanceCards = (
 					? decideAvatarUrl(
 							tags,
 							faciaCard.properties.maybeContent.trail.byline,
-					  )
+						)
 					: undefined,
 			mainMedia: cardMainMedia,
 			articleMedia,
