@@ -99,7 +99,7 @@ const paddedContainer = `
  * @example
  * css`
  *   ${grid.container}
- *   ${grid.verticalRules()}
+ *   ${grid.outerRules()}
  *   ${grid.centreRule(1)}
  *
  *   ${from.leftCol} {
@@ -138,7 +138,7 @@ const centreRule = (n: number, color?: string): string => `/* CENTRE RULE */
  * @example
  * css`
  *   ${grid.container}
- *   ${grid.verticalRules()}
+ *   ${grid.outerRules()}
  * `
  */
 const outerRules = (color?: string): string => `
@@ -287,7 +287,5 @@ const grid = {
 	 */
 	centreRule,
 } as const;
-
-// ----- Exports ----- //
 
 export { grid };
