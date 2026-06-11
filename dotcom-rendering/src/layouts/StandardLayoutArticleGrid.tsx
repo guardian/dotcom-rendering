@@ -11,6 +11,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { AudioPlayer } from '../components/AudioPlayer/AudioPlayer';
 import { DecideLines } from '../components/DecideLines';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -28,6 +29,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { getAudioData } from '../lib/audio-data';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
@@ -111,8 +113,6 @@ export const StandardLayoutArticleGrid = ({
 		format.design === ArticleDesign.Audio;
 	const isShowcase = format.display === ArticleDisplay.Showcase;
 
-	const isVideo = format.design === ArticleDesign.Video;
-
 	const footballMatchUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchUrl
@@ -120,6 +120,8 @@ export const StandardLayoutArticleGrid = ({
 
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
+
+	const audioData = getAudioData(article.mainMediaElements);
 
 	const layoutType: LayoutType = isMedia
 		? 'media'
@@ -144,22 +146,33 @@ export const StandardLayoutArticleGrid = ({
 			]}
 		>
 			<GridItem area="media" layoutType={layoutType}>
-				<MainMedia
-					format={format}
-					elements={article.mainMediaElements}
-					host={host}
-					pageId={article.pageId}
-					webTitle={article.webTitle}
-					ajaxUrl={article.config.ajaxUrl}
-					switches={article.config.switches}
-					isAdFreeUser={article.isAdFreeUser}
-					isSensitive={article.config.isSensitive}
-					editionId={article.editionId}
-					hideCaption={isMedia}
-					shouldHideAds={article.shouldHideAds}
-					contentType={article.contentType}
-					contentLayout={`${ArticleDisplay[format.display]}Layout`}
-				/>
+				{format.design === ArticleDesign.Audio && audioData ? (
+					<AudioPlayer
+						audioData={audioData}
+						isSensitive={article.config.isSensitive}
+						isAcastEnabled={!!article.config.switches.acast}
+						isApps={isApps}
+					/>
+				) : (
+					<MainMedia
+						format={format}
+						elements={article.mainMediaElements}
+						host={host}
+						pageId={article.pageId}
+						webTitle={article.webTitle}
+						ajaxUrl={article.config.ajaxUrl}
+						switches={article.config.switches}
+						isAdFreeUser={article.isAdFreeUser}
+						isSensitive={article.config.isSensitive}
+						editionId={article.editionId}
+						hideCaption={isMedia}
+						shouldHideAds={article.shouldHideAds}
+						contentType={article.contentType}
+						contentLayout={`${
+							ArticleDisplay[format.display]
+						}Layout`}
+					/>
+				)}
 			</GridItem>
 			<GridItem area="title" layoutType={layoutType} element="aside">
 				<ArticleTitle
@@ -187,18 +200,20 @@ export const StandardLayoutArticleGrid = ({
 				<Standfirst format={format} standfirst={article.standfirst} />
 			</GridItem>
 			<GridItem area="meta" layoutType={layoutType} element="aside">
-				<div css={stretchLines}>
-					{isWeb &&
-					format.theme === ArticleSpecial.Labs &&
-					format.design !== ArticleDesign.Video ? (
-						<GuardianLabsLines />
-					) : (
-						<DecideLines
-							format={format}
-							color={themePalette('--article-border')}
-						/>
-					)}
-				</div>
+				{format.design !== ArticleDesign.Audio && (
+					<div css={stretchLines}>
+						{isWeb &&
+						format.theme === ArticleSpecial.Labs &&
+						format.design !== ArticleDesign.Video ? (
+							<GuardianLabsLines />
+						) : (
+							<DecideLines
+								format={format}
+								color={themePalette('--article-border')}
+							/>
+						)}
+					</div>
+				)}
 				{isApps ? (
 					<>
 						<Hide from="leftCol">
@@ -279,7 +294,7 @@ export const StandardLayoutArticleGrid = ({
 				{/* Only show Listen to Article button on App landscape views */}
 				{isApps && (
 					<Hide until="leftCol">
-						{!isVideo && (
+						{!isMedia && (
 							<div
 								css={css`
 									margin-top: ${space[2]}px;
@@ -419,6 +434,7 @@ export const StandardLayoutArticleGrid = ({
 							shouldHideReaderRevenue={
 								!!article.config.shouldHideReaderRevenue
 							}
+							shouldHideMostViewed={!!audioData}
 						/>
 					</Island>
 				</Hide>
