@@ -130,8 +130,7 @@ const TabText = (props: {
 							? palette(selectedTabColour(props.matchKind))
 							: 'transparent',
 				}}
-				role="tab"
-				aria-selected={props.selected}
+				aria-current={props.selected}
 			>
 				{props.children}
 			</a>
@@ -145,8 +144,7 @@ const TabText = (props: {
 				...tabTextStyle(props.matchKind, renderingTarget),
 				borderBottomColor: palette(selectedTabColour(props.matchKind)),
 			}}
-			role="tab"
-			aria-selected={props.selected}
+			aria-current={props.selected}
 		>
 			{props.children}
 		</span>
