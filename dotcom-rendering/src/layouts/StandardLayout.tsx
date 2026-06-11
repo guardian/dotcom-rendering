@@ -228,6 +228,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					</Section>
 				</Stuck>
 			)}
+			<DirectoryPageNavIsland
+				pageId={article.pageId}
+				pageTags={article.tags}
+			/>
 
 			<MatchHeaderContainer
 				isMatchReport={isMatchReport}
@@ -248,10 +252,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<AdPortals />
 					</Island>
 				)}
-				<DirectoryPageNavIsland
-					pageId={article.pageId}
-					pageTags={article.tags}
-				/>
+
 				{/* GridItem order matters — mobile layout relies on DOM order for grid placement.
     See furnitureArrangements.ts if reordering. */}
 				<article
