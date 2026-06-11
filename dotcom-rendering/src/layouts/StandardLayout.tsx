@@ -395,27 +395,34 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								</Hide>
 							</>
 						) : (
-							<ArticleMeta
-								branding={branding}
-								format={format}
-								pageId={article.pageId}
-								webTitle={article.webTitle}
-								byline={article.byline}
-								source={article.config.source}
-								tags={article.tags}
-								primaryDateline={
-									article.webPublicationDateDisplay
-								}
-								secondaryDateline={
-									article.webPublicationSecondaryDateDisplay
-								}
-								isCommentable={article.isCommentable}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								shortUrlId={article.config.shortUrlId}
-								mainMediaElements={article.mainMediaElements}
-							/>
+							<>
+								<ArticleMeta
+									branding={branding}
+									format={format}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
+									byline={article.byline}
+									source={article.config.source}
+									tags={article.tags}
+									primaryDateline={
+										article.webPublicationDateDisplay
+									}
+									secondaryDateline={
+										article.webPublicationSecondaryDateDisplay
+									}
+									isCommentable={article.isCommentable}
+									discussionApiUrl={
+										article.config.discussionApiUrl
+									}
+									shortUrlId={article.config.shortUrlId}
+									mainMediaElements={
+										article.mainMediaElements
+									}
+								/>
+								{!!article.affiliateLinksDisclaimer && (
+									<AffiliateDisclaimer />
+								)}
+							</>
 						)}
 					</GridItem>
 					<GridItem area="body" layoutType={layoutType}>
