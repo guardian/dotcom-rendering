@@ -383,9 +383,6 @@
         "isLegacyInteractive": {
             "type": "boolean"
         },
-        "filterKeyEvents": {
-            "type": "boolean"
-        },
         "mostRecentBlockId": {
             "type": "string"
         },
@@ -561,7 +558,6 @@
         "designType",
         "editionId",
         "editionLongForm",
-        "filterKeyEvents",
         "format",
         "guardianBaseURL",
         "hasRelated",
@@ -2873,6 +2869,9 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "caption": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -4066,6 +4065,9 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "caption": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -4680,6 +4682,9 @@
                 "displayType": {
                     "$ref": "#/definitions/ProductDisplayType"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "productCtas": {
                     "type": "array",
                     "items": {
@@ -4717,6 +4722,7 @@
                 "customAttributes",
                 "displayType",
                 "elementId",
+                "id",
                 "primaryHeadingHtml",
                 "productCtas",
                 "productName",
@@ -6089,14 +6095,15 @@
                                     "width": {
                                         "type": "number"
                                     },
-                                    "aspectRatio": {
-                                        "type": "string"
-                                    },
                                     "hasAudio": {
                                         "type": "boolean"
+                                    },
+                                    "aspectRatio": {
+                                        "type": "string"
                                     }
                                 },
                                 "required": [
+                                    "hasAudio",
                                     "height",
                                     "mimeType",
                                     "src",
@@ -6114,13 +6121,25 @@
                             "type": "string"
                         },
                         "image": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "src": {
+                                    "type": "string"
+                                },
+                                "aspectRatio": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "aspectRatio"
+                            ]
                         }
                     },
                     "required": [
                         "aspectRatio",
                         "atomId",
                         "duration",
+                        "image",
                         "sources",
                         "type",
                         "videoStyle"

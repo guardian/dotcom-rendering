@@ -144,7 +144,7 @@ export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
 
 			<Hide from="desktop">
 				<li role="none">
-					<SearchBar />
+					<SearchBar searchId="gu-search-mobile" />
 				</li>
 			</Hide>
 			<div css={lineStyle}></div>
@@ -164,7 +164,7 @@ export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
 
 			{/* Desktop only Brand Extensions list*/}
 			<li css={desktopBrandExtensionColumn} role="none">
-				<SearchBar />
+				<SearchBar searchId="gu-search-desktop" />
 
 				<ul
 					css={[

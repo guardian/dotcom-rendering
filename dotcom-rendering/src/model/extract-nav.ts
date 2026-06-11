@@ -103,7 +103,7 @@ export const extractNAV = (data: FENavType): NavType => {
 			? {
 					parent: subnav.parent ? getLink(subnav.parent) : undefined,
 					links: subnav.links.map(getLink),
-			  }
+				}
 			: undefined,
 		readerRevenueLinks: buildRRLinkModel(data),
 	};

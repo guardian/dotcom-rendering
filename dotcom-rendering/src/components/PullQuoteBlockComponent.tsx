@@ -259,7 +259,9 @@ export const PullQuoteBlockComponent = ({
 	attribution,
 	role,
 }: Props) => {
-	if (!html) return <></>;
+	if (!html) {
+		return <></>;
+	}
 
 	return (
 		<aside

@@ -27,7 +27,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
-import React from 'react';
+import type React from 'react';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
@@ -58,7 +58,6 @@ type Props = {
 	kickerColour?: string;
 	quoteColour?: string;
 	kickerImage?: PodcastSeriesImage;
-	isStorylines?: boolean;
 };
 
 const sublinkStyles = css`
@@ -235,7 +234,6 @@ export const CardHeadline = ({
 	kickerColour = palette('--card-kicker-text'),
 	quoteColour = palette('--card-quote-icon'),
 	kickerImage,
-	isStorylines,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
@@ -249,10 +247,10 @@ export const CardHeadline = ({
 					isSublink ? 'card-sublink-headline' : 'card-headline'
 				}`}
 				css={[
-					isSublink && !isStorylines
+					isSublink
 						? css`
 								${textSans14}
-						  `
+							`
 						: fontStyles,
 				]}
 			>

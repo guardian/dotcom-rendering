@@ -5,12 +5,16 @@ import { validateAsBlock, validateAsFEArticle } from '../model/validate';
 import { enhanceArticleType } from '../types/article';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
-import { renderBlocks, renderHtml } from './render.article.web';
+import {
+	renderArticle,
+	renderBlocks,
+	renderHostedContent,
+} from './render.article.web';
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Web');
-	const { html, prefetchScripts } = renderHtml({
+	const { html, prefetchScripts } = renderArticle({
 		article,
 	});
 
@@ -20,7 +24,7 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Web');
-	const { html, prefetchScripts } = renderHtml({
+	const { html, prefetchScripts } = renderArticle({
 		article,
 	});
 
@@ -30,7 +34,7 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 export const handleHostedContent: RequestHandler = ({ body }, res) => {
 	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Web');
-	const { html, prefetchScripts } = renderHtml({
+	const { html, prefetchScripts } = renderHostedContent({
 		article,
 	});
 

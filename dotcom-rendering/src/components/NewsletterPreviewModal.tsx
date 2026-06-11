@@ -16,6 +16,7 @@ import { EMAIL_PREVIEW_ORIGIN } from '../lib/newsletterPreviewUrl';
 const PREVIEW_LOAD_TIMEOUT_MS = 10_000;
 const OPEN_ANIMATION_DURATION_MS = 300;
 const CLOSE_ANIMATION_DURATION_MS = 225;
+const MOBILE_PREVIEW_IFRAME_HEIGHT_PX = 10000;
 const TIMEOUT_FAILURE_MESSAGE =
 	'The preview is taking longer than expected. You can retry loading it.';
 const UNAVAILABLE_FAILURE_MESSAGE =
@@ -39,14 +40,18 @@ const parseEmbedStatusMessage = (
 		}
 	}
 
-	if (!payload || typeof payload !== 'object') return undefined;
+	if (!payload || typeof payload !== 'object') {
+		return undefined;
+	}
 
 	const { type, ok } = payload as {
 		type?: unknown;
 		ok?: unknown;
 	};
 
-	if (type !== 'embed-status' || typeof ok !== 'boolean') return undefined;
+	if (type !== 'embed-status' || typeof ok !== 'boolean') {
+		return undefined;
+	}
 
 	return {
 		type: 'embed-status',
@@ -93,15 +98,20 @@ const previewOverlayStyles = (isVisible: boolean) => css`
 	align-items: flex-end;
 	justify-content: center;
 	padding: ${space[3]}px 0 0;
-	background: rgba(0, 0, 0, 0.75);
-	opacity: ${isVisible ? 1 : 0};
-	transition: opacity
+	height: 100vh;
+	height: 100svh;
+	background-color: rgba(0, 0, 0, ${isVisible ? 0.75 : 0});
+	transition: background-color
 		${isVisible
 			? OPEN_ANIMATION_DURATION_MS
 			: CLOSE_ANIMATION_DURATION_MS}ms
 		ease;
 	z-index: ${getZIndex('lightbox')};
-	will-change: opacity;
+	will-change: background-color;
+
+	@supports (height: 100dvh) {
+		height: 100dvh;
+	}
 
 	${from.tablet} {
 		align-items: center;
@@ -119,6 +129,7 @@ const previewDialogStyles = (isVisible: boolean) => css`
 	background: ${palette.neutral[100]};
 	width: 100%;
 	height: min(82vh, 760px);
+	height: min(82svh, 760px);
 	border-radius: ${space[3]}px ${space[3]}px 0 0;
 	overflow: hidden;
 	transform: translateY(${isVisible ? '0' : '100%'});
@@ -128,6 +139,10 @@ const previewDialogStyles = (isVisible: boolean) => css`
 			: CLOSE_ANIMATION_DURATION_MS}ms
 		ease;
 	will-change: transform;
+
+	@supports (height: 100dvh) {
+		height: min(82dvh, 760px);
+	}
 
 	${from.tablet} {
 		width: min(652px, 100%);
@@ -169,14 +184,19 @@ const previewTitleStyles = css`
 `;
 
 const previewFrameStyles = css`
-	flex: 1;
-	min-height: 0;
-	height: 100%;
+	height: ${MOBILE_PREVIEW_IFRAME_HEIGHT_PX}px;
 	width: 100%;
+	min-height: 100%;
+	min-width: 100%;
 	display: block;
 	border: 0;
 	background: ${palette.neutral[100]};
 	padding: 0;
+
+	${from.tablet} {
+		height: 1px;
+		width: 1px;
+	}
 `;
 
 const previewFrameContainerStyles = css`
@@ -185,8 +205,13 @@ const previewFrameContainerStyles = css`
 	min-height: 0;
 	flex: 1;
 	background: ${palette.neutral[100]};
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	-webkit-overflow-scrolling: touch;
+	touch-action: pan-y;
 
 	${from.tablet} {
+		overflow: hidden;
 		padding: 0 ${space[6]}px;
 	}
 `;
@@ -319,7 +344,8 @@ const desktopCloseButtonStyles = css`
 `;
 
 const mobileCloseBarStyles = css`
-	padding: ${space[3]}px ${space[3]}px ${space[6]}px;
+	padding: ${space[3]}px ${space[3]}px
+		calc(${space[6]}px + env(safe-area-inset-bottom));
 	border-top: 1px solid ${palette.neutral[86]};
 	background: ${palette.neutral[100]};
 	position: relative;
@@ -359,6 +385,7 @@ export const NewsletterPreviewModal = ({
 	renderUrl,
 	onClose,
 }: Props) => {
+	const overlayRef = useRef<HTMLDivElement>(null);
 	const dialogRef = useRef<HTMLDivElement>(null);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 	const hasEmbedStatusFailureRef = useRef(false);
@@ -398,7 +425,9 @@ export const NewsletterPreviewModal = ({
 		});
 
 	const requestClose = useCallback(() => {
-		if (closeTimeoutRef.current !== null) return;
+		if (closeTimeoutRef.current !== null) {
+			return;
+		}
 
 		setIsVisible(false);
 		closeTimeoutRef.current = window.setTimeout(() => {
@@ -436,7 +465,9 @@ export const NewsletterPreviewModal = ({
 	}, []);
 
 	useEffect(() => {
-		if (!dialogRef.current) return;
+		if (!dialogRef.current) {
+			return;
+		}
 
 		const dialogElement = dialogRef.current;
 		const previouslyFocusedElement =
@@ -458,10 +489,14 @@ export const NewsletterPreviewModal = ({
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent): void => {
-			if (!dialogRef.current) return;
+			if (!dialogRef.current) {
+				return;
+			}
 
 			const dialogElement = dialogRef.current;
-			if (!dialogElement.contains(document.activeElement)) return;
+			if (!dialogElement.contains(document.activeElement)) {
+				return;
+			}
 
 			if (event.key === 'Escape') {
 				event.stopPropagation();
@@ -469,7 +504,9 @@ export const NewsletterPreviewModal = ({
 				return;
 			}
 
-			if (event.key !== 'Tab') return;
+			if (event.key !== 'Tab') {
+				return;
+			}
 
 			const focusableElements =
 				getVisibleFocusableElements(dialogElement);
@@ -508,17 +545,24 @@ export const NewsletterPreviewModal = ({
 	}, [requestClose]);
 
 	useEffect(() => {
-		const closeOnClickAway = (event: MouseEvent) => {
-			if (!dialogRef.current) return;
-			if (!dialogRef.current.contains(event.target as Node)) {
+		const overlayElement = overlayRef.current;
+		if (!overlayElement) {
+			return;
+		}
+
+		const handleOverlayMouseDown = (event: MouseEvent) => {
+			if (event.target === overlayElement) {
 				requestClose();
 			}
 		};
 
-		document.addEventListener('mousedown', closeOnClickAway);
+		overlayElement.addEventListener('mousedown', handleOverlayMouseDown);
 
 		return () => {
-			document.removeEventListener('mousedown', closeOnClickAway);
+			overlayElement.removeEventListener(
+				'mousedown',
+				handleOverlayMouseDown,
+			);
 		};
 	}, [requestClose]);
 
@@ -530,7 +574,9 @@ export const NewsletterPreviewModal = ({
 	}, [renderUrl, iframeKey]);
 
 	useEffect(() => {
-		if (!isLoading) return;
+		if (!isLoading) {
+			return;
+		}
 
 		const timeoutId = window.setTimeout(() => {
 			setFailureMessage(TIMEOUT_FAILURE_MESSAGE);
@@ -544,10 +590,14 @@ export const NewsletterPreviewModal = ({
 	}, [isLoading]);
 
 	useEffect(() => {
-		if (!trustedIframeOrigin) return;
+		if (!trustedIframeOrigin) {
+			return;
+		}
 
 		const handleMessage = (event: MessageEvent) => {
-			if (!iframeRef.current) return;
+			if (!iframeRef.current) {
+				return;
+			}
 
 			const iframeWindow = iframeRef.current.contentWindow;
 			if (
@@ -561,7 +611,9 @@ export const NewsletterPreviewModal = ({
 			}
 
 			const embedStatusMessage = parseEmbedStatusMessage(event.data);
-			if (!embedStatusMessage) return;
+			if (!embedStatusMessage) {
+				return;
+			}
 
 			applyEmbedStatus(embedStatusMessage.ok);
 		};
@@ -574,7 +626,9 @@ export const NewsletterPreviewModal = ({
 	}, [trustedIframeOrigin]);
 
 	const handleIframeLoad = () => {
-		if (hasEmbedStatusFailureRef.current) return;
+		if (hasEmbedStatusFailureRef.current) {
+			return;
+		}
 		setIsLoading(false);
 		setHasLoadFailed(false);
 	};
@@ -589,10 +643,12 @@ export const NewsletterPreviewModal = ({
 		setIframeKey((currentKey) => currentKey + 1);
 	};
 
-	if (typeof document === 'undefined') return null;
+	if (typeof document === 'undefined') {
+		return null;
+	}
 
 	return createPortal(
-		<div css={previewOverlayStyles(isVisible)}>
+		<div ref={overlayRef} css={previewOverlayStyles(isVisible)}>
 			<div
 				ref={dialogRef}
 				role="dialog"

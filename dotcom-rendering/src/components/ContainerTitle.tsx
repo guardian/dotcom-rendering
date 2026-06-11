@@ -122,7 +122,9 @@ export const ContainerTitle = ({
 	containerLevel,
 	isLabs = false,
 }: Props) => {
-	if (!title) return null;
+	if (!title) {
+		return null;
+	}
 
 	const now = new Date();
 

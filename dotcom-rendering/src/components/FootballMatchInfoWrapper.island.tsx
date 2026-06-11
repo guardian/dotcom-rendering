@@ -26,7 +26,9 @@ export const FootballMatchInfoWrapper = ({
 		errorRetryCount: 1,
 	});
 
-	if (loading) return <Loading />;
+	if (loading) {
+		return <Loading />;
+	}
 
 	if (apiError) {
 		// Send the error to Sentry and then prevent the element from rendering

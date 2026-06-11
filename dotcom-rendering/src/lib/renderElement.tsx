@@ -19,6 +19,7 @@ import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.island';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
+import { HostedEmbedBlockComponent } from '../components/HostedEmbedBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.island';
 import { InteractiveAtom } from '../components/InteractiveAtom';
@@ -73,7 +74,11 @@ import {
 } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
-import { ArticleDesign, type ArticleFormat } from './articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	isHostedContentDesign,
+} from './articleFormat';
 import type { EditionId } from './edition';
 import { getLargestImageSize } from './image';
 
@@ -319,6 +324,17 @@ export const renderElement = ({
 					);
 				}
 
+				if (format.design === ArticleDesign.HostedArticle) {
+					return (
+						<HostedEmbedBlockComponent
+							html={element.html}
+							alt={element.alt ?? ''}
+							height={element.height}
+							width={element.width}
+						/>
+					);
+				}
+
 				return (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<UnsafeEmbedBlockComponent
@@ -503,10 +519,7 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			if (
-				element.videoPlayerFormat &&
-				['Loop', 'Cinemagraph'].includes(element.videoPlayerFormat)
-			) {
+			if (element.videoPlayerFormat) {
 				return (
 					<SelfHostedVideoInArticle
 						element={element}
@@ -514,6 +527,7 @@ export const renderElement = ({
 						isMainMedia={isMainMedia}
 						videoStyle={element.videoPlayerFormat}
 						role={element.role}
+						caption={element.caption ?? element.title}
 					/>
 				);
 			} else {
@@ -522,7 +536,7 @@ export const renderElement = ({
 						format={format}
 						assets={element.assets}
 						poster={element.posterImage?.[0]?.url}
-						caption={element.title}
+						caption={element.caption ?? element.title}
 						isMainMedia={isMainMedia}
 					/>
 				);
@@ -591,7 +605,9 @@ export const renderElement = ({
 				showNewNewsletterSignupCard:
 					!!switches.showNewNewsletterSignupCard,
 			};
-			if (isListElement || isTimeline) return null;
+			if (isListElement || isTimeline) {
+				return null;
+			}
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<EmailSignUpWrapper {...emailSignUpProps} />
@@ -953,11 +969,12 @@ export const renderElement = ({
 							getLargestImageSize(element.posterImage ?? [])?.url
 						}
 						duration={element.duration}
-						mediaTitle={element.mediaTitle}
+						mediaTitle={element.caption ?? element.mediaTitle}
 						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
-						enableAds={true}
+						// YT ads on by default on all pages apart from hosted content
+						enableAds={!isHostedContentDesign(format.design)}
 						hidePillOnMobile={false}
 						contentType={contentType}
 						contentLayout={contentLayout}
@@ -1112,6 +1129,7 @@ type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
 type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
 
 export const getNestedArticleElement =
+	// eslint-disable-next-line react/display-name -- this is not a React component, but a function that returns one
 	(articleProps: ArticleLevelProps) => (elementProps: ElementLevelProps) => (
 		<RenderArticleElement {...articleProps} {...elementProps} />
 	);

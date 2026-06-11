@@ -35,3 +35,6 @@ jobs:
               - 'dotcom-rendering/package.json'
               - 'libs/**'
               - 'pnpm-lock.yaml'
+              - 'pnpm-workspace.yaml'
+              - '.github/workflows/dcr-chromatic.yml'
+              - '.github/workflows/check-chromatic-paths.yml'

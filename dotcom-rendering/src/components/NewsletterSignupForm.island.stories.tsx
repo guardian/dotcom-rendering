@@ -2,8 +2,10 @@ import { createRef } from 'react';
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { fn, mocked } from 'storybook/test';
 import preview from '../../.storybook/preview';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
 import type { NewsletterSignupFormState } from '../lib/useNewsletterSignupForm';
+import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
 import { NewsletterSignupCard } from './NewsletterSignupCard';
 import { NewsletterSignupForm } from './NewsletterSignupForm.island';
 import { Section } from './Section';
@@ -12,7 +14,16 @@ const meta = preview.meta({
 	title: 'Components/Newsletter Signup Form',
 	component: NewsletterSignupForm,
 	decorators: [
-		(Story) => (
+		(
+			Story,
+			{
+				args,
+				parameters,
+			}: {
+				args: { previewAction?: NewsletterPreviewAction };
+				parameters: { isSignedIn?: boolean };
+			},
+		) => (
 			<Section
 				title="NewsletterSignupForm"
 				showTopBorder={true}
@@ -24,6 +35,8 @@ const meta = preview.meta({
 					frequency="Weekly"
 					description="An exclusive roundup of the week's best Guardian journalism from the editor-in-chief, Katharine Viner, free to your inbox every Saturday."
 					illustrationSquare="https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3"
+					previewAction={args.previewAction}
+					isSignedIn={parameters.isSignedIn === true}
 				>
 					<Story />
 				</NewsletterSignupCard>
@@ -69,6 +82,7 @@ const mockForm = (state: Partial<NewsletterSignupFormState>) => ({
 	isInteracted: false,
 	showMarketingToggle: false,
 	marketingOptIn: undefined,
+	marketingOptInHiddenForCountry: false,
 	isWaitingForResponse: false,
 	responseOk: undefined,
 	errorMessage: undefined,
@@ -95,22 +109,8 @@ export const SignedOut = meta.story({
 
 /**
  * After the user focuses the email field — marketing toggle and privacy
- * message are revealed.
+ * message are revealed, email typed in, ready to submit.
  */
-export const SignedOutFocused = meta.story({
-	args: defaultArgs,
-	beforeEach() {
-		mocked(useNewsletterSignupForm).mockReturnValue(
-			mockForm({
-				isInteracted: true,
-				showMarketingToggle: true,
-				marketingOptIn: true,
-			}),
-		);
-	},
-});
-
-/** Signed-out user with an email typed in, ready to submit. */
 export const SignedOutWithEmail = meta.story({
 	args: defaultArgs,
 	beforeEach() {
@@ -131,6 +131,7 @@ export const SignedOutWithEmail = meta.story({
  */
 export const SignedIn = meta.story({
 	args: defaultArgs,
+	parameters: { isSignedIn: true },
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(
 			mockForm({
@@ -155,7 +156,7 @@ export const Loading = meta.story({
 
 /** Subscription confirmed. */
 export const Success = meta.story({
-	args: defaultArgs,
+	args: { ...defaultArgs, previewAction: undefined },
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(
 			mockForm({ responseOk: true }),
@@ -165,7 +166,7 @@ export const Success = meta.story({
 
 /** Server returned a non-2xx response — error message and "Try again" button. */
 export const SubmissionFailed = meta.story({
-	args: defaultArgs,
+	args: { ...defaultArgs, previewAction: undefined },
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(
 			mockForm({ responseOk: false }),
@@ -201,26 +202,13 @@ export const InvalidEmail = meta.story({
 	},
 });
 
-/** reCAPTCHA widget failed to load — form replaced by bordered error box. */
-export const CaptchaLoadError = meta.story({
+/** reCAPTCHA failed — form replaced by bordered error box. */
+export const CaptchaError = meta.story({
 	args: defaultArgs,
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(
 			mockForm({
 				errorMessage: 'Sorry, the reCAPTCHA failed to load.',
-				isValidationError: false,
-			}),
-		);
-	},
-});
-
-/** reCAPTCHA check expired or was dismissed — form replaced by bordered error box. */
-export const CaptchaNotPassed = meta.story({
-	args: defaultArgs,
-	beforeEach() {
-		mocked(useNewsletterSignupForm).mockReturnValue(
-			mockForm({
-				errorMessage: 'The reCAPTCHA check did not complete.',
 				isValidationError: false,
 			}),
 		);
@@ -246,5 +234,38 @@ export const HidePrivacyMessage = meta.story({
 				marketingOptIn: true,
 			}),
 		);
+	},
+});
+
+/** User is already subscribed — success message shown immediately. */
+export const AlreadySubscribed = meta.story({
+	args: { ...defaultArgs, isAlreadySubscribed: true },
+	parameters: { isSignedIn: true },
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(mockForm({}));
+	},
+});
+
+/**
+ * US user — marketing toggle is hidden and the user is silently enrolled in
+ * similar_guardian_products.
+ */
+export const USHideMarketingToggle = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useCountryCode).mockReturnValue('US');
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = true;
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({
+				userEmail: 'reader@example.com',
+				isInteracted: true,
+				showMarketingToggle: false,
+				marketingOptIn: true,
+			}),
+		);
+	},
+	afterEach() {
+		mocked(useCountryCode).mockReset();
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = false;
 	},
 });

@@ -2346,6 +2346,9 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "caption": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -3539,6 +3542,9 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "caption": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -4153,6 +4159,9 @@
                 "displayType": {
                     "$ref": "#/definitions/ProductDisplayType"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "productCtas": {
                     "type": "array",
                     "items": {
@@ -4190,6 +4199,7 @@
                 "customAttributes",
                 "displayType",
                 "elementId",
+                "id",
                 "primaryHeadingHtml",
                 "productCtas",
                 "productName",

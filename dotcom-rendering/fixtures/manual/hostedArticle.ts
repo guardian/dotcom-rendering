@@ -256,7 +256,6 @@ export const hostedArticle: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="e544821d1505fe27bc83e8cfbd014aa4a230cbb7"> \n <img src="https://media.guim.co.uk/e544821d1505fe27bc83e8cfbd014aa4a230cbb7/0_0_1300_325/1000.jpg" alt="Vis, Croatia." width="1000" height="250" class="gu-image"> \n <figcaption> <span class="element-image__caption">Vis, Croatia. Photograph: Julien Duval</span> <span class="element-image__credit">Photograph: Julien Duval</span> \n </figcaption> \n</figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{

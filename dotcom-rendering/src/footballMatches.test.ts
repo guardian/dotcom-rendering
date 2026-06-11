@@ -121,6 +121,7 @@ describe('footballMatches', () => {
 			'Bosnia-Herzegovina': 'Bosnia and Herzegovina',
 			'Congo DR': 'DR Congo',
 			Curacao: 'Curaçao',
+			'Czech Republic': 'Czechia',
 		};
 
 		for (const [uncleanName, cleanName] of Object.entries(

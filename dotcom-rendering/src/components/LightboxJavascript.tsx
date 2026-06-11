@@ -18,10 +18,18 @@ const getPosition = (
 ): number | undefined => {
 	const scrollPosition = imageList.scrollLeft;
 	const liWidth = lightbox.querySelector('li')?.clientWidth;
-	if (scrollPosition === 0 && liWidth === 0) return;
-	if (isUndefined(liWidth)) return;
-	if (Number.isNaN(liWidth) || Number.isNaN(scrollPosition)) return;
-	if (scrollPosition === 0) return 1;
+	if (scrollPosition === 0 && liWidth === 0) {
+		return;
+	}
+	if (isUndefined(liWidth)) {
+		return;
+	}
+	if (Number.isNaN(liWidth) || Number.isNaN(scrollPosition)) {
+		return;
+	}
+	if (scrollPosition === 0) {
+		return 1;
+	}
 	return Math.round(scrollPosition / liWidth) + 1;
 };
 
@@ -45,7 +53,9 @@ const getTabbableElements = (
 		);
 	}
 	const currentPosition = getPosition(lightbox, imageList);
-	if (currentPosition == null) return [];
+	if (currentPosition == null) {
+		return [];
+	}
 	const currentPage = lightbox.querySelector<HTMLElement>(
 		`li[data-index="${currentPosition}"]`,
 	);
@@ -86,7 +96,9 @@ const exitFullscreen = async () => {
 };
 
 const restoreFocus = (previouslyFocused: Element) => {
-	if (!(previouslyFocused instanceof HTMLElement)) return;
+	if (!(previouslyFocused instanceof HTMLElement)) {
+		return;
+	}
 	previouslyFocused.focus();
 };
 
@@ -121,7 +133,9 @@ const scrollTo = (
 	// liWidth is the actual dom width in pixels of the containing li element for each image
 	const liWidth = lightbox.querySelector('li')?.clientWidth;
 
-	if (isUndefined(liWidth)) return;
+	if (isUndefined(liWidth)) {
+		return;
+	}
 	switch (position) {
 		case 0:
 		case 1: {
@@ -137,18 +151,20 @@ const scrollTo = (
 const getPreviousPosition = (position: number, length: number): number =>
 	position <= 1
 		? // Cycle around to the end
-		  length
+			length
 		: position - 1;
 
 const getNextPosition = (position: number, length: number): number =>
 	position >= length
 		? // Cycle back to the start
-		  1
+			1
 		: position + 1;
 
 const eagerLoad = (images: HTMLImageElement[], position: number) => {
 	const image = images[position - 1];
-	if (image) image.loading = 'eager';
+	if (image) {
+		image.loading = 'eager';
+	}
 };
 
 /**
@@ -214,7 +230,9 @@ const open = async (
 ) => {
 	log('dotcom', '💡 Opening lightbox.');
 	// Remember where we were so we can restore focus
-	if (document.activeElement) previouslyFocused = document.activeElement;
+	if (document.activeElement) {
+		previouslyFocused = document.activeElement;
+	}
 	// Try to open the lightbox in fullscreen mode. This may fail
 	await requestFullscreen(lightbox).catch(() => {
 		// fullscreen request failed
@@ -319,18 +337,30 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 	const captionLinks =
 		lightbox.querySelectorAll<HTMLAnchorElement>('li aside a');
 
-	if (!imageList) return;
-	if (!closeButton) return;
-	if (!previousButton) return;
-	if (!nextButton) return;
-	if (!infoButton) return;
+	if (!imageList) {
+		return;
+	}
+	if (!closeButton) {
+		return;
+	}
+	if (!previousButton) {
+		return;
+	}
+	if (!nextButton) {
+		return;
+	}
+	if (!infoButton) {
+		return;
+	}
 
 	// --------------------------------------------------------------------------------
 	// FUNCTIONS
 	// --------------------------------------------------------------------------------
 
 	const handleKeydown = (event: KeyboardEvent) => {
-		if (event.ctrlKey || event.metaKey || event.altKey) return;
+		if (event.ctrlKey || event.metaKey || event.altKey) {
+			return;
+		}
 		switch (event.code) {
 			case 'Tab': {
 				event.preventDefault();
@@ -406,10 +436,14 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 		libDebounce(
 			() => {
 				const currentPosition = getPosition(lightbox, imageList);
-				if (isUndefined(currentPosition)) return;
+				if (isUndefined(currentPosition)) {
+					return;
+				}
 				const positionIndicator =
 					lightbox.querySelector<HTMLElement>('nav .selected'); // Eg. 2/4, as in image 2 of 4
-				if (!positionIndicator) return;
+				if (!positionIndicator) {
+					return;
+				}
 
 				onSelect(
 					positionIndicator,
@@ -501,7 +535,9 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 
 	// Check the user's preferences to decide if we show the caption or not
 	const info = storage.local.get('gu.prefs.lightbox-info');
-	if (info === 'hide') toggleInfo(lightbox, infoButton, 'hide');
+	if (info === 'hide') {
+		toggleInfo(lightbox, infoButton, 'hide');
+	}
 
 	// Open the lightbox at the position given in the url hash
 	const { hash } = window.location;
@@ -574,7 +610,9 @@ export const LightboxJavascript = ({
 	const [initialised, setInitialised] = useState(false);
 
 	useEffect(() => {
-		if (!lightbox) return;
+		if (!lightbox) {
+			return;
+		}
 		if (initialised) {
 			log('dotcom', '💡 Lightbox already initialised, skipping');
 			return;
@@ -583,7 +621,9 @@ export const LightboxJavascript = ({
 		setInitialised(true);
 	}, [initialised, lightbox]);
 
-	if (!lightbox) return null;
+	if (!lightbox) {
+		return null;
+	}
 
 	log('dotcom', '💡 Generating HTML for lightbox images...');
 	return (

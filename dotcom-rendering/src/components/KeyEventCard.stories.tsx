@@ -57,7 +57,6 @@ export const SummaryCard = () => (
 			id={events[0].id}
 			blockFirstPublished={events[0].blockFirstPublished}
 			title={events[0].title}
-			filterKeyEvents={false}
 			isSummary={true}
 			renderingTarget="Web"
 		/>
@@ -74,7 +73,6 @@ export const StandardCard = () => (
 			blockFirstPublished={events[0].blockFirstPublished}
 			title={events[0].title}
 			isSummary={events[0].isSummary}
-			filterKeyEvents={false}
 			renderingTarget="Web"
 		/>
 	</ul>
@@ -91,7 +89,6 @@ export const MultipleCards = () => (
 				blockFirstPublished={event.blockFirstPublished}
 				title={event.title}
 				isSummary={event.isSummary}
-				filterKeyEvents={false}
 				renderingTarget="Web"
 			/>
 		))}

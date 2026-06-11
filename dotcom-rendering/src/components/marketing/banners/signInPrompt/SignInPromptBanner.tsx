@@ -133,18 +133,16 @@ const SignInPromptBanner: ReactComponent<BannerRenderProps> = (props) => {
 									{primaryCta.ctaText}
 								</LinkButton>
 							)}
-							{secondaryCta &&
-								secondaryCta.type ===
-									SecondaryCtaType.Custom && (
-									<Button
-										priority="subdued"
-										size="small"
-										onClick={props.onCloseClick}
-										cssOverrides={closeButton}
-									>
-										{secondaryCta.cta.ctaText}
-									</Button>
-								)}
+							{secondaryCta?.type === SecondaryCtaType.Custom && (
+								<Button
+									priority="subdued"
+									size="small"
+									onClick={props.onCloseClick}
+									cssOverrides={closeButton}
+								>
+									{secondaryCta.cta.ctaText}
+								</Button>
+							)}
 						</ThemeProvider>
 					</div>
 

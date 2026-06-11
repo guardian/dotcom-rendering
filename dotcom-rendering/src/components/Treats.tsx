@@ -58,7 +58,7 @@ const ImageTreat = ({
 	altText,
 }: {
 	imageUrl: string;
-	links: { text: string; title?: string; linkTo: string }[];
+	links: Array<{ text: string; title?: string; linkTo: string }>;
 	altText?: string;
 }) => {
 	const sources = generateSources(imageUrl, [
@@ -171,7 +171,9 @@ export const Treats = ({
 	treats: TreatType[];
 	borderColour?: string;
 }) => {
-	if (treats.length === 0) return null;
+	if (treats.length === 0) {
+		return null;
+	}
 
 	return (
 		<ul

@@ -1,6 +1,7 @@
-import { css, type SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import {
+	from,
 	palette as sourcePalette,
 	space,
 	until,
@@ -20,7 +21,7 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
@@ -54,6 +55,7 @@ import { decideStoryPackageTrails } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
+import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -80,7 +82,7 @@ interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
 	element?: 'div' | 'aside';
-	customCss?: SerializedStyles;
+	className?: string;
 	children: React.ReactNode;
 }
 
@@ -88,12 +90,13 @@ const GridItem = ({
 	area,
 	layoutType,
 	element: Element = 'div',
-	customCss,
+	className,
 	children,
 }: GridItemProps) => (
 	<Element
 		data-gu-name={area}
-		css={[gridItemCss(area, layoutType), customCss]}
+		css={gridItemCss(area, layoutType)}
+		className={className}
 	>
 		{children}
 	</Element>
@@ -169,6 +172,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
+
 	const renderAds = canRenderAds(article);
 
 	const layoutType: LayoutType = isMedia ? 'media' : 'standard';
@@ -198,7 +203,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={!isLabs}
+						showSubNav={!isLabs && !isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
@@ -243,7 +248,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<AdPortals />
 					</Island>
 				)}
-				<DirectoryPageNav
+				<DirectoryPageNavIsland
 					pageId={article.pageId}
 					pageTags={article.tags}
 				/>
@@ -257,9 +262,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							)};
 						`,
 						grid.container,
-						grid.verticalRules({
-							centre: isLabs ? false : true,
-						}),
+						grid.outerRules(),
+						!isLabs &&
+							css`
+								${from.leftCol} {
+									${grid.centreRule(3)}
+								}
+							`,
 					]}
 				>
 					<GridItem area="media" layoutType={layoutType}>
@@ -366,6 +375,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										}
 										secondaryDateline={
 											article.webPublicationSecondaryDateDisplay
+										}
+										webPublicationDate={
+											article.webPublicationDate
 										}
 										isCommentable={article.isCommentable}
 										discussionApiUrl={
@@ -537,9 +549,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<GridItem
 						area="right-column"
 						layoutType={layoutType}
-						customCss={css`
+						css={css`
 							padding-top: ${isMedia ? 0 : 6}px;
-							padding-bottom: ${isMedia ? 41 : 0}px;
+							${from.desktop} {
+								padding-bottom: ${isMedia ? 41 : 0}px;
+							}
 						`}
 					>
 						<Hide until="desktop">

@@ -242,8 +242,12 @@ export const Comments = ({
 	 * page and is added to the DOM later, following an API call.
 	 * */
 	useEffect(() => {
-		if (isUndefined(commentToScrollTo)) return;
-		if (loading) return;
+		if (isUndefined(commentToScrollTo)) {
+			return;
+		}
+		if (loading) {
+			return;
+		}
 
 		document
 			.getElementById(`comment-${commentToScrollTo}`)

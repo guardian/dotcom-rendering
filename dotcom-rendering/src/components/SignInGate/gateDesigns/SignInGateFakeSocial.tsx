@@ -206,6 +206,7 @@ const googleIcon = (
 		/>
 		<mask
 			id="mask0"
+			// eslint-disable-next-line react/no-unknown-property --- this is a valid SVG attribute, but React doesn't recognize it
 			mask-type="alpha"
 			maskUnits="userSpaceOnUse"
 			x="3"
@@ -230,6 +231,7 @@ const googleIcon = (
 		</g>
 		<mask
 			id="mask1"
+			// eslint-disable-next-line react/no-unknown-property --- this is a valid SVG attribute, but React doesn't recognize it
 			mask-type="alpha"
 			maskUnits="userSpaceOnUse"
 			x="10"

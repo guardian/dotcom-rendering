@@ -4,7 +4,6 @@ import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
-import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -83,11 +82,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					? {
 							lightboxImages: frontendData.imagesForLightbox,
 							renderingTarget,
-					  }
+						}
 					: {
 							lightboxImages: frontendData.imagesForAppsLightbox,
 							renderingTarget,
-					  })}
+						})}
 			/>
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />
@@ -103,7 +102,6 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			)}
 			{renderingTarget === 'Web' && (
 				<>
-					<SkipTo id="navigation" label="Skip to navigation" />
 					<Island priority="feature" defer={{ until: 'idle' }}>
 						<AlreadyVisited />
 					</Island>
@@ -133,12 +131,6 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					</Island>
 					<Island priority="critical">
 						<SetABTests
-							abTestSwitches={filterABTestSwitches(
-								frontendData.config.switches,
-							)}
-							pageIsSensitive={frontendData.config.isSensitive}
-							isDev={!!frontendData.config.isDev}
-							serverSideTests={frontendData.config.abTests}
 							serverSideABTests={
 								frontendData.config.serverSideABTests
 							}

@@ -13,9 +13,10 @@ import { getSoleContributor } from '../lib/byline';
 import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
-import { getLargestImageSize } from '../lib/image';
+import { getLargestImage } from '../lib/image';
 import {
 	convertFEMediaAssetsToVideoAssets,
+	DEFAULT_IMAGE_ASPECT_RATIO,
 	extractValidSourcesFromAssets,
 	getAspectRatioFromSources,
 } from '../lib/video';
@@ -126,7 +127,7 @@ const getPodcastSeriesImage = (
 		? {
 				src: podcastFromTags.podcast.image,
 				altText: podcastFromTags.webTitle,
-		  }
+			}
 		: undefined;
 };
 
@@ -162,34 +163,34 @@ const decideSlideshowImages = (
 	return undefined;
 };
 
-const getLargestImageUrl = (images?: Image[]) => {
-	return getLargestImageSize(
-		images?.map(({ url, fields: { width } }) => ({
-			url,
-			width: Number(width),
-		})) ?? [],
-	)?.url;
-};
-
 /**
- * If we have a replacement video, we should prioritise the largest available trail image from the media atom.
- * For all other videos, we should prioritise the card's trail image.
+ * If we have a replacement video, we prioritise the largest available trail image from the media atom.
+ * For all other videos, we prioritise the card's trail image.
  */
 const decideMediaAtomImage = (
 	videoReplace: boolean,
-	mediaAtom: FEMediaAtom,
+	mediaAtomImages?: Image[],
 	cardTrailImage?: string,
-	isSelfHostedVideo?: boolean,
-) => {
-	const largestMediaAtomImage = isSelfHostedVideo
-		? getLargestImageUrl(mediaAtom.posterImage?.allImages)
-		: getLargestImageUrl(mediaAtom.trailImage?.allImages);
+): { src?: string; imageAspectRatio?: string } => {
+	const largestMediaAtomImage = getLargestImage(mediaAtomImages);
 
-	if (videoReplace) {
-		return largestMediaAtomImage ?? cardTrailImage;
+	if (isUndefined(largestMediaAtomImage)) {
+		return { src: cardTrailImage };
 	}
 
-	return cardTrailImage ?? largestMediaAtomImage;
+	if (isUndefined(cardTrailImage)) {
+		return {
+			src: largestMediaAtomImage.url,
+			imageAspectRatio: largestMediaAtomImage.fields.aspectRatio,
+		};
+	}
+
+	return videoReplace
+		? {
+				src: largestMediaAtomImage.url,
+				imageAspectRatio: largestMediaAtomImage.fields.aspectRatio,
+			}
+		: { src: cardTrailImage };
 };
 
 /**
@@ -213,13 +214,6 @@ export const getActiveMediaAtom = (
 		)[0];
 		if (!firstVideoAsset) return undefined;
 
-		const image = decideMediaAtomImage(
-			videoReplace,
-			mediaAtom,
-			cardTrailImage,
-			firstVideoAsset.platform === 'Url',
-		);
-
 		/**
 		 * Each version of a media atom will contain assets for self-hosted OR YouTube, but not both.
 		 * Therefore, we check the platform of the first asset and assume the rest are the same.
@@ -232,21 +226,37 @@ export const getActiveMediaAtom = (
 				({ assetType }) => assetType === 'Subtitles',
 			);
 
+			const image = decideMediaAtomImage(
+				videoReplace,
+				mediaAtom.posterImage?.allImages,
+				cardTrailImage,
+			);
+
+			const videoStyle = mediaAtom.videoPlayerFormat ?? 'Loop';
+
 			const videoAssets =
 				convertFEMediaAssetsToVideoAssets(selfHostedAssets);
-			const sources = extractValidSourcesFromAssets(videoAssets);
+
+			const sources = extractValidSourcesFromAssets(
+				videoAssets,
+				videoStyle,
+			);
 
 			const aspectRatio = getAspectRatioFromSources(sources);
 
 			return {
 				type: 'SelfHostedVideo',
-				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
+				videoStyle,
 				atomId: mediaAtom.id,
 				sources,
 				subtitleSource: subtitleAsset?.id,
 				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
-				image,
+				image: {
+					src: image.src,
+					aspectRatio:
+						image.imageAspectRatio ?? DEFAULT_IMAGE_ASPECT_RATIO,
+				},
 			};
 		}
 
@@ -254,6 +264,12 @@ export const getActiveMediaAtom = (
 		 * There should only be one asset for Youtube atoms, so we use the first one.
 		 */
 		if (firstVideoAsset.platform === 'Youtube') {
+			const image = decideMediaAtomImage(
+				videoReplace,
+				mediaAtom.trailImage?.allImages,
+				cardTrailImage,
+			);
+
 			return {
 				type: 'YoutubeVideo',
 				id: mediaAtom.id,
@@ -270,7 +286,7 @@ export const getActiveMediaAtom = (
 				 * a soft contract with Editorial who manually set the duration of videos.
 				 */
 				isLive: mediaAtom.duration === 0,
-				image,
+				image: image.src,
 			};
 		}
 	}
@@ -400,6 +416,11 @@ export const enhanceCards = (
 				(type === 'Tone' && id === 'tone/newsletter-tone'),
 		);
 
+		const isNewsletterSignup = tags.some(
+			({ id, type }) =>
+				type === 'Keyword' && id === 'info/newsletter-sign-up',
+		);
+
 		const branding = faciaCard.properties.editionBrandings.find(
 			(editionBranding) => editionBranding.edition.id === editionId,
 		)?.branding;
@@ -447,7 +468,7 @@ export const enhanceCards = (
 			)
 				? new Date(
 						faciaCard.card.webPublicationDateOption,
-				  ).toISOString()
+					).toISOString()
 				: undefined,
 			kickerText: decideKicker(faciaCard, cardInTagPage, pageId),
 			supportingContent: faciaCard.supportingContent
@@ -465,6 +486,8 @@ export const enhanceCards = (
 			isImmersive: !!faciaCard.display.isImmersive,
 			isCrossword: faciaCard.properties.isCrossword,
 			isNewsletter,
+			isNewsletterSignup,
+			newsletterData: faciaCard.properties.newsletterData,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			// show latest 3 updates from a live blog
 			showLivePlayable: faciaCard.display.showLivePlayable,
@@ -475,7 +498,7 @@ export const enhanceCards = (
 					? decideAvatarUrl(
 							tags,
 							faciaCard.properties.maybeContent.trail.byline,
-					  )
+						)
 					: undefined,
 			mainMedia: cardMainMedia,
 			articleMedia,

@@ -140,7 +140,7 @@ const getRowValue = (area: Area, rows: Rows): string | number | null => {
 
 	return indices.length > 1
 		? `${indices[0]} / span ${indices.length}`
-		: indices[0] ?? null;
+		: (indices[0] ?? null);
 };
 
 /**

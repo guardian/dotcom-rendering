@@ -1,7 +1,7 @@
-import type { ConsentState } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import type { AdTargeting } from '../types/commercial';
 import type { AspectRatio } from '../types/front';
@@ -103,7 +103,7 @@ export const YoutubeBlockComponent = ({
 	const adTargeting = useAdTargeting(duration);
 	const { renderingTarget } = useConfig();
 
-	const abTests = useBetaAB();
+	const abTests = useAB();
 	const abTestParticipations = abTests?.getParticipations() ?? {};
 
 	/**
@@ -138,7 +138,8 @@ export const YoutubeBlockComponent = ({
 	useEffect(() => {
 		if (renderingTarget === 'Web') {
 			const defineConsentState = async () => {
-				const { onConsentChange } = await import('@guardian/libs');
+				const { onConsentChange } =
+					await import('@guardian/consent-manager');
 				onConsentChange((newConsent: ConsentState) => {
 					setConsentState(newConsent);
 				});

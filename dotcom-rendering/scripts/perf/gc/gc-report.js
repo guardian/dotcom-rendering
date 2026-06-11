@@ -1,4 +1,3 @@
-/* eslint-disable -- perf script */
 const fs = require('node:fs');
 const readline = require('node:readline');
 
@@ -34,7 +33,9 @@ lineReader.on('line', (line) => {
 
 		totalGCCount++;
 		totalPauseTime += pause;
-		if (pause > maxPauseTime) maxPauseTime = pause;
+		if (pause > maxPauseTime) {
+			maxPauseTime = pause;
+		}
 
 		if (!gcStatsByType[type]) {
 			gcStatsByType[type] = {

@@ -5,22 +5,30 @@ import { useIsSignedIn } from '../lib/useAuthStatus';
 /**
  * A mapping of container IDs to their states ('opened' or 'closed').
  */
-type ContainerStates = { [id: string]: string };
+type ContainerStates = Record<string, string>;
 
 /**
  * Type guard to check if an item is a valid `ContainerStates` object.
  */
 const isContainerStates = (item: unknown): item is ContainerStates => {
-	if (!isObject(item)) return false;
-	if (!Object.keys(item).every(isString)) return false;
-	if (!Object.values(item).every(isString)) return false;
+	if (!isObject(item)) {
+		return false;
+	}
+	if (!Object.keys(item).every(isString)) {
+		return false;
+	}
+	if (!Object.values(item).every(isString)) {
+		return false;
+	}
 	return true;
 };
 
 const getContainerStates = (): ContainerStates => {
 	const item = storage.local.get(`gu.prefs.container-states`);
 
-	if (!isContainerStates(item)) return {};
+	if (!isContainerStates(item)) {
+		return {};
+	}
 
 	return item;
 };
@@ -92,7 +100,9 @@ export const ShowHideContainers = () => {
 		 * We need to know if a user is signed in before we can make any further decisions about show/hide buttons.
 		 * If the state is still pending, return early to prevent any flickering of the buttons.
 		 */
-		if (isSignedIn === 'Pending') return;
+		if (isSignedIn === 'Pending') {
+			return;
+		}
 
 		const showHideButtons = document.querySelectorAll<HTMLElement>(
 			'[data-show-hide-button]',
@@ -100,7 +110,9 @@ export const ShowHideContainers = () => {
 
 		for (const button of showHideButtons) {
 			const sectionId = button.getAttribute('data-show-hide-button');
-			if (!sectionId) continue;
+			if (!sectionId) {
+				continue;
+			}
 
 			/**
 			 * Show/hide is only enabled for signed in users.

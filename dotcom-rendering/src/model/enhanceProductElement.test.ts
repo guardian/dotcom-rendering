@@ -41,6 +41,7 @@ const productBlockElement: ProductBlockElement = {
 			html: '<h2>Unique Heading.</h2>',
 		},
 	],
+	id: '123',
 	displayType: 'InlineOnly',
 	productCtas: [
 		{
@@ -94,9 +95,8 @@ describe('enhanceProductBlockElements', () => {
 
 	const enhancedElements = result[0];
 	if (
-		enhancedElements === undefined ||
-		enhancedElements._type !==
-			'model.dotcomrendering.pageElements.ProductBlockElement'
+		enhancedElements?._type !==
+		'model.dotcomrendering.pageElements.ProductBlockElement'
 	) {
 		throw new Error(
 			'Expected "enhancedElements" to be a ProductBlockElement',
@@ -124,9 +124,8 @@ describe('enhanceProductBlockElements', () => {
 
 		const enhancedElementNoCtas = resultNoCtas[0];
 		if (
-			enhancedElementNoCtas === undefined ||
-			enhancedElementNoCtas._type !==
-				'model.dotcomrendering.pageElements.ProductBlockElement'
+			enhancedElementNoCtas?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
 		) {
 			throw new Error(
 				'Expected "enhancedElementNoCtas" to be a ProductBlockElement',
@@ -156,9 +155,8 @@ describe('enhanceProductBlockElements', () => {
 
 		const enhancedElementWithNaN = resultWithNaN[0];
 		if (
-			enhancedElementWithNaN === undefined ||
-			enhancedElementWithNaN._type !==
-				'model.dotcomrendering.pageElements.ProductBlockElement'
+			enhancedElementWithNaN?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
 		) {
 			throw new Error(
 				'Expected "enhancedElementWithNaN" to be a ProductBlockElement',

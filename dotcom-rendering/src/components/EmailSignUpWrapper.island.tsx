@@ -5,7 +5,7 @@ import {
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { useConfig } from './ConfigContext';
@@ -78,14 +78,22 @@ export const EmailSignUpWrapper = ({
 	const abTestEnabled =
 		showNewNewsletterSignupCard && renderingTarget === 'Web';
 
-	const abTests = useBetaAB();
+	const abTests = useAB();
 	const abResolved = abTests !== undefined;
 
-	const isVariant =
-		abTestEnabled &&
-		(abTests?.isUserInTestGroup(AB_TEST_NAME, 'variant') ?? false);
-
-	const abVariant = isVariant ? 'variant' : 'control';
+	const getVariantName = () => {
+		const currentUserVariant = abTests?.getParticipations()[AB_TEST_NAME];
+		if (
+			currentUserVariant &&
+			['variantNewField', 'variantIllustratedCard'].includes(
+				currentUserVariant,
+			)
+		) {
+			return currentUserVariant;
+		}
+		return 'control';
+	};
+	const abVariant = abTestEnabled ? getVariantName() : 'control';
 
 	const isSubscribed = useNewsletterSubscription(
 		listId,
@@ -97,22 +105,37 @@ export const EmailSignUpWrapper = ({
 	const viewFiredRef = useRef(false);
 
 	useEffect(() => {
-		if (abTestEnabled && !abResolved) return;
+		if (abTestEnabled && !abResolved) {
+			return;
+		}
 		// Wait for subscription status in both branches — we only want to track
 		// a view of the actual signup form, not a loading state or success message.
-		if (isSubscribed === undefined) return;
+		if (isSubscribed === undefined) {
+			return;
+		}
 		// Don't fire if the user is already subscribed: in both branches they
 		// will see a success/already-subscribed message, not the signup form.
-		if (isSubscribed) return;
+		if (isSubscribed) {
+			return;
+		}
 		// Guard against double-firing (e.g. if deps change after the first fire)
-		if (viewFiredRef.current) return;
+		if (viewFiredRef.current) {
+			return;
+		}
 		viewFiredRef.current = true;
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName,
-			componentId: isVariant
-				? NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName)
-				: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
+			componentId:
+				abVariant === 'variantIllustratedCard'
+					? NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
+							identityName,
+						)
+					: abVariant === 'variantNewField'
+						? NEWSLETTER_SIGNUP_COMPONENT_ID.variantNewField(
+								identityName,
+							)
+						: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
 			renderingTarget,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
@@ -126,7 +149,6 @@ export const EmailSignUpWrapper = ({
 		abVariant,
 		identityName,
 		isSubscribed,
-		isVariant,
 		abTestEnabled,
 		renderingTarget,
 	]);
@@ -135,7 +157,7 @@ export const EmailSignUpWrapper = ({
 		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
 	}
 
-	if (isVariant) {
+	if (abVariant === 'variantIllustratedCard') {
 		return (
 			<InlineSkipToWrapper
 				id={`EmailSignup-skip-link-${index}`}
@@ -179,6 +201,13 @@ export const EmailSignUpWrapper = ({
 		return null;
 	}
 
+	const emailInputName =
+		abVariant === 'variantNewField' ? 'emailAddress' : 'email';
+	const emailInputId =
+		abVariant === 'variantNewField'
+			? `emailInput-${identityName}`
+			: undefined;
+
 	return (
 		<InlineSkipToWrapper
 			id={`EmailSignup-skip-link-${index}`}
@@ -195,6 +224,9 @@ export const EmailSignUpWrapper = ({
 						newsletterId={identityName}
 						successDescription={successDescription}
 						abTest={{ name: AB_TEST_NAME, variant: abVariant }}
+						emailInputNameOverride={emailInputName}
+						emailInputIdOverride={emailInputId}
+						addCountryField={abVariant === 'variantNewField'}
 					/>
 				</Island>
 				{!hidePrivacyMessage && <NewsletterPrivacyMessage />}

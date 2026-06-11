@@ -41,7 +41,7 @@ export const unwrapHtml = ({
 
 	const unwrappedHtml = matchingFix
 		? // Chop off the start and end tags if we have matches to unwrap the html
-		  stripTags(html, matchingFix.prefix, matchingFix.suffix)
+			stripTags(html, matchingFix.prefix, matchingFix.suffix)
 		: html;
 
 	/** `p` is the default unwrappedElement */

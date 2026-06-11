@@ -231,7 +231,7 @@ export const SeriesSectionLink = ({
 	// the publication tag over the commentisfree tag.
 	const tag = observerTag && isCommentIsFree ? observerTag : seriesTag;
 
-	const hasSeriesTag = tag && tag.type === 'Series';
+	const hasSeriesTag = tag?.type === 'Series';
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 

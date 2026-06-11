@@ -35,7 +35,7 @@ const formFieldWrapperStyles = css`
 	flex-direction: column;
 `;
 
-type FormDataType = { [key in string]: any };
+type FormDataType = Record<string, any>;
 
 type FormFieldProp = {
 	formField: CampaignFieldType;
@@ -114,7 +114,7 @@ type FormProps = {
 
 export const Form = ({ onSubmit, formFields, error }: FormProps) => {
 	const [twitterHandle, setTwitterHandle] = useState('');
-	const [formData, setFormData] = useState<{ [key in string]: any }>({});
+	const [formData, setFormData] = useState<Record<string, any>>({});
 
 	return (
 		<form
@@ -132,6 +132,7 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
 					// we use custom-guardian to find 1st field for accessibility
 					// ideally we should useRef but need to wait for Source to
 					// support React references
+					// eslint-disable-next-line react/no-unknown-property -- see above comment
 					custom-guardian="callout-form-field"
 					key={index}
 				>

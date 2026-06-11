@@ -72,7 +72,6 @@ export const ArticleRenderer = ({
 	const renderedElements = elements.map((element, index, { length }) => {
 		return (
 			<RenderArticleElement
-				// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
 				key={index}
 				format={format}
 				element={element}
@@ -124,7 +123,7 @@ export const ArticleRenderer = ({
 			{renderingTarget === 'Apps'
 				? renderedElements
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
-				  withSignInGateSlot({
+					withSignInGateSlot({
 						renderedElements,
 						contentType,
 						sectionId,
@@ -138,7 +137,7 @@ export const ArticleRenderer = ({
 						isDev,
 						contributionsServiceUrl,
 						editionId,
-				  })}
+					})}
 		</div>
 	); // classname that space finder is going to target for in-body ads in DCR
 };

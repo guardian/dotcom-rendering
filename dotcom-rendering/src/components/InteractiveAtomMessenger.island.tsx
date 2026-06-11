@@ -47,20 +47,28 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 		const found = document.querySelector<HTMLIFrameElement>(
 			`iframe[id="${id}"]`,
 		);
-		if (!found) return;
+		if (!found) {
+			return;
+		}
 
 		setIframe(found);
 	}, [id]);
 
 	useEffect(() => {
-		if (!iframe?.parentElement) return;
+		if (!iframe?.parentElement) {
+			return;
+		}
 
 		setContainer(iframe.parentElement);
 	}, [iframe]);
 
 	useEffect(() => {
-		if (!iframe) return;
-		if (!container) return;
+		if (!iframe) {
+			return;
+		}
+		if (!container) {
+			return;
+		}
 
 		let timeout: ReturnType<typeof requestAnimationFrame> | null = null;
 
@@ -70,18 +78,26 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 			}
 			timeout = requestAnimationFrame(() => {
 				const rect = container.getBoundingClientRect();
-				if (rect.top > 0) return setScroll(0);
-				if (rect.top < -rect.height) return setScroll(1);
+				if (rect.top > 0) {
+					return setScroll(0);
+				}
+				if (rect.top < -rect.height) {
+					return setScroll(1);
+				}
 				setScroll(-Math.round(rect.top));
 			});
 		};
 
 		const messageListener = (event: MessageEvent<unknown>) => {
-			if (event.source !== iframe.contentWindow) return;
+			if (event.source !== iframe.contentWindow) {
+				return;
+			}
 
 			const result = safeParse(interactiveMessageSchema, event.data);
 
-			if (!result.success) return;
+			if (!result.success) {
+				return;
+			}
 
 			switch (result.output.kind) {
 				case 'interactive:height': {
@@ -100,7 +116,9 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 		window.addEventListener('message', messageListener);
 
 		return () => {
-			if (timeout != null) cancelAnimationFrame(timeout);
+			if (timeout != null) {
+				cancelAnimationFrame(timeout);
+			}
 			window.removeEventListener('scroll', scrollListener);
 			window.removeEventListener('message', messageListener);
 		};
@@ -111,7 +129,9 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 	}, [postMessage, scroll]);
 
 	useEffect(() => {
-		if (!container) return;
+		if (!container) {
+			return;
+		}
 		container.style.height = height > 0 ? `${height}px` : 'auto';
 		postMessage({ kind: 'interactive:height', height });
 	}, [postMessage, height, container]);

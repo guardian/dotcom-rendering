@@ -15,7 +15,7 @@ import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/t
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { shouldHideSupportMessaging } from '../lib/contributions';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
@@ -48,7 +48,7 @@ const LiveblogGutterAskBuilder = ({
 
 	const { renderingTarget } = useConfig();
 	const isSignedIn = useIsSignedIn();
-	const abTests = useBetaAB();
+	const abTests = useAB();
 
 	// get gutter props
 	useEffect((): void => {

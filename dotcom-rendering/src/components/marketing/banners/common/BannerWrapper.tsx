@@ -193,7 +193,7 @@ const withBannerData =
 
 		const finaliseParagraphs = (
 			paras: string[],
-		): (Array<JSX.Element> | JSX.Element)[] => {
+		): Array<JSX.Element[] | JSX.Element> => {
 			return paras.map((p) =>
 				replaceArticleCount(p, numArticles, 'banner'),
 			);
@@ -298,7 +298,7 @@ const withBannerData =
 						cleanHighlightedText,
 						numArticles,
 						'banner',
-				  )
+					)
 				: null;
 
 			if (copyHasPlaceholder) {

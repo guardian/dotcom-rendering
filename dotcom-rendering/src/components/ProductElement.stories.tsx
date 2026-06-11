@@ -54,6 +54,7 @@ const product = {
 		},
 	],
 	starRating: 'none-selected',
+	id: '123',
 	content: [
 		{
 			displayCredit: true,

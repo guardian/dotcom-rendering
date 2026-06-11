@@ -92,6 +92,8 @@ const indices = [
 	// Self-hosted video
 	'video-progress-bar-foreground',
 	'video-progress-bar-background',
+	'video-controls-container',
+	'video-card-link',
 	'video-container',
 
 	// Main media

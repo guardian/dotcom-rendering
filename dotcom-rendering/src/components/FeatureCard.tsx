@@ -13,9 +13,11 @@ import {
 	ArticleSpecial,
 } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
+import { appendLinkNameMedia } from '../lib/getDataLinkName';
 import { getZIndex } from '../lib/getZIndex';
 import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
+import { useAB } from '../lib/useAB';
 import { palette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { StarRating as Rating, RatingSizeType } from '../types/content';
@@ -174,6 +176,7 @@ const overlayStyles = css`
 	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
 	 * Links define their own z-index.
 	 */
+
 	> :not(.waveform):not(a) {
 		z-index: 1;
 	}
@@ -395,7 +398,6 @@ export type Props = {
 	 * all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
 	 */
 	isImmersive?: boolean;
-	isStorylines?: boolean;
 	starRatingSize: RatingSizeType;
 };
 
@@ -433,10 +435,23 @@ export const FeatureCard = ({
 	uniqueId,
 	isNewsletter = false,
 	isImmersive = false,
-	isStorylines = false,
 	starRatingSize,
 	articleMedia,
 }: Props) => {
+	const ab = useAB();
+	const isInLoopClickTestControl = Boolean(
+		ab?.isUserInTestGroup(
+			'fronts-and-curation-loop-click-through',
+			'control',
+		),
+	);
+	const isInLoopClickTestVariant = Boolean(
+		ab?.isUserInTestGroup(
+			'fronts-and-curation-loop-click-through',
+			'variant',
+		),
+	);
+
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
 	/**
@@ -450,7 +465,25 @@ export const FeatureCard = ({
 		showVideo: showVideo && canPlayInline,
 	});
 
-	if (!media) return null;
+	if (!media) {
+		return null;
+	}
+
+	const isLoopAndInLoopClickTestControl = Boolean(
+		media.style === 'loop-video' && isInLoopClickTestControl,
+	);
+	const isLoopAndInLoopClickTestVariant = Boolean(
+		media.style === 'loop-video' && isInLoopClickTestVariant,
+	);
+	const isLoopAndInLoopClickTest =
+		isLoopAndInLoopClickTestControl || isLoopAndInLoopClickTestVariant;
+
+	const mediaType =
+		media.type === 'self-hosted-video' ? media.style : media.type;
+
+	const resolvedDataLinkName = !isUndefined(dataLinkName)
+		? appendLinkNameMedia(dataLinkName, mediaType)
+		: undefined;
 
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
@@ -467,7 +500,7 @@ export const FeatureCard = ({
 		? getOphanComponents({
 				branding,
 				locationPrefix: 'front-card',
-		  })
+			})
 		: undefined;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
@@ -491,8 +524,12 @@ export const FeatureCard = ({
 						<CardLink
 							linkTo={linkTo}
 							headlineText={headlineText}
-							dataLinkName={dataLinkName}
+							dataLinkName={resolvedDataLinkName}
 							isExternalLink={isExternalLink}
+							isLoopAndInLoopClickTest={isLoopAndInLoopClickTest}
+							shouldRaiseZIndexForAbTest={
+								isLoopAndInLoopClickTestVariant
+							}
 						/>
 					)}
 					<div css={contentStyles}>
@@ -575,10 +612,14 @@ export const FeatureCard = ({
 												media.mainMedia.videoStyle
 											}
 											posterImage={
-												media.mainMedia.image ?? ''
+												media.mainMedia.image.src ?? ''
+											}
+											posterImageAspectRatio={
+												media.mainMedia.image
+													.aspectRatio
 											}
 											fallbackImage={
-												media.mainMedia.image ?? ''
+												media.mainMedia.image.src ?? ''
 											}
 											fallbackImageSize={imageSize}
 											fallbackImageLoading={imageLoading}
@@ -597,6 +638,16 @@ export const FeatureCard = ({
 											controlsPosition="top"
 											minAspectRatio={aspectRatioNumber}
 											maxAspectRatio={aspectRatioNumber}
+											preventAutoplay={false}
+											cardLink={{
+												headlineText,
+												dataLinkName:
+													resolvedDataLinkName,
+												isExternalLink,
+											}}
+											isInLoopClickTestVariant={
+												isInLoopClickTestVariant
+											}
 										/>
 									</Island>
 								)}
@@ -695,6 +746,12 @@ export const FeatureCard = ({
 												headlineText={headlineText}
 												dataLinkName={dataLinkName}
 												isExternalLink={isExternalLink}
+												isLoopAndInLoopClickTest={
+													isLoopAndInLoopClickTest
+												}
+												shouldRaiseZIndexForAbTest={
+													isLoopAndInLoopClickTestVariant
+												}
 											/>
 										)}
 
@@ -789,9 +846,6 @@ export const FeatureCard = ({
 														}
 														showClock={!!showClock}
 														serverTime={serverTime}
-														isStorylines={
-															isStorylines
-														}
 													/>
 												) : undefined
 											}

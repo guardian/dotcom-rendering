@@ -4,7 +4,6 @@ import { FrontLayout } from '../layouts/FrontLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
-import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { Front } from '../types/front';
 import { AdmiralScript } from './AdmiralScript.island';
@@ -81,10 +80,6 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			</Island>
 			<Island priority="critical">
 				<SetABTests
-					abTestSwitches={filterABTestSwitches(front.config.switches)}
-					pageIsSensitive={front.config.isSensitive}
-					isDev={!!front.config.isDev}
-					serverSideTests={front.config.abTests}
 					serverSideABTests={front.config.serverSideABTests}
 				/>
 			</Island>

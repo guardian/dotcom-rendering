@@ -21,7 +21,11 @@ const defaultProps = {
 
 const renderContainer = (props = {}) =>
 	render(
-		<NewsletterSignupCardContainer {...defaultProps} {...props}>
+		<NewsletterSignupCardContainer
+			{...defaultProps}
+			isSignedIn={true}
+			{...props}
+		>
 			{(previewAction) => (
 				<button
 					type="button"
@@ -69,7 +73,7 @@ describe('NewsletterSignupCardContainer', () => {
 				expect.objectContaining({
 					component: {
 						componentType: 'NEWSLETTER_SUBSCRIPTION',
-						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
 							defaultProps.identityName,
 						),
 					},
@@ -98,7 +102,7 @@ describe('NewsletterSignupCardContainer', () => {
 					expect.objectContaining({
 						component: {
 							componentType: 'NEWSLETTER_SUBSCRIPTION',
-							id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+							id: NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
 								defaultProps.identityName,
 							),
 						},
@@ -142,6 +146,7 @@ describe('NewsletterSignupCardContainer', () => {
 				name="Morning Briefing"
 				frequency="Every weekday"
 				description="Start your day with top stories."
+				isSignedIn={true}
 			>
 				{(previewAction) =>
 					previewAction?.behaviour === 'link' ? (
@@ -171,7 +176,7 @@ describe('NewsletterSignupCardContainer', () => {
 			expect.objectContaining({
 				action: 'EXPAND',
 				component: expect.objectContaining({
-					id: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(
+					id: NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
 						defaultProps.identityName,
 					),
 				}),

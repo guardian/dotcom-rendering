@@ -7,7 +7,6 @@ import {
 import { getZIndex } from '../lib/getZIndex';
 import {
 	convertCurrentTimeToProgressPercentage,
-	convertProgressPercentageToCurrentTime,
 	formatTimeForDisplay,
 } from '../lib/video';
 import { palette } from '../palette';
@@ -26,18 +25,19 @@ const containerStyles = css`
 		${sourcePalette.neutral[0]} 0%,
 		transparent 100%
 	);
+	-webkit-tap-highlight-color: transparent;
 `;
 
 const trackStyles = css`
 	-webkit-appearance: none;
 	appearance: none;
 	height: 5px;
-	border-radius: 5px;
 `;
 
 const thumbStyles = css`
 	-webkit-appearance: none;
 	appearance: none;
+	pointer-events: auto;
 	width: 14px;
 	height: 14px;
 	border: none;
@@ -49,9 +49,9 @@ const thumbStyles = css`
 
 const progressBarStyles = (roundedProgressPercentage: number) => css`
 	width: 100%;
-	cursor: pointer;
 	height: 5px;
-	border-radius: 5px;
+	margin: 0;
+	cursor: pointer;
 	-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
 	appearance: none;
 	/* The colour to the left of the thumb is different to the right to indicate progress */
@@ -66,6 +66,15 @@ const progressBarStyles = (roundedProgressPercentage: number) => css`
 		)} ${roundedProgressPercentage}%,
 		${palette('--video-progress-bar-interactive-background')} 100%
 	)`};
+
+	/**
+	 * Prevent touches on the progress bar on touch devices from changing the time.
+	 * Only the thumb can be used to change the time on touch devices.
+	 */
+	pointer-events: none;
+	@media (hover: hover) {
+		pointer-events: auto;
+	}
 
 	/* We don't use the default focus ring as it includes the thumb, which looks odd. */
 	:focus-visible {
@@ -106,25 +115,14 @@ const progressBarStyles = (roundedProgressPercentage: number) => css`
 	}
 `;
 
-const handleChange = (
-	value: string,
-	duration: Props['duration'],
-	updateCurrentTime: Props['updateCurrentTime'],
-) => {
-	const percentage = Number(value);
-	const time = convertProgressPercentageToCurrentTime(percentage, duration);
-
-	if (time === null) return;
-
-	updateCurrentTime(time);
-};
-
 type Props = {
 	videoId: string;
 	currentTime: number;
-	updateCurrentTime: (time: number) => void;
-	handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 	duration: number;
+	handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+	handleInput: (event: React.FormEvent<HTMLInputElement>) => void;
+	onSeekStart: () => void;
+	onSeekEnd: () => void;
 };
 
 /**
@@ -136,11 +134,15 @@ type Props = {
 export const VideoProgressBarInteractive = ({
 	videoId,
 	currentTime,
-	updateCurrentTime,
-	handleKeyDown,
 	duration,
+	handleKeyDown,
+	handleInput,
+	onSeekStart,
+	onSeekEnd,
 }: Props) => {
-	if (duration <= 0) return null;
+	if (duration <= 0) {
+		return null;
+	}
 
 	const progressPercentage = convertCurrentTimeToProgressPercentage(
 		currentTime,
@@ -166,14 +168,12 @@ export const VideoProgressBarInteractive = ({
 				max={100}
 				step={0.01}
 				tabIndex={0}
-				onChange={(event) =>
-					handleChange(
-						event.target.value,
-						duration,
-						updateCurrentTime,
-					)
-				}
+				onInput={handleInput}
 				onKeyDown={handleKeyDown}
+				onPointerDown={onSeekStart}
+				onPointerUp={onSeekEnd}
+				onPointerCancel={onSeekEnd}
+				onBlur={onSeekEnd}
 			/>
 		</div>
 	);
@@ -182,7 +182,6 @@ export const VideoProgressBarInteractive = ({
 const timeStyles = css`
 	${textSans12};
 	color: ${sourcePalette.neutral[100]};
-	margin-left: 1px; /* To make it _feel_ more aligned with the progress bar, which has a border radius. */
 `;
 
 const Time = ({ current, duration }: { current: number; duration: number }) => {

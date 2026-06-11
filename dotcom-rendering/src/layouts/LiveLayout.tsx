@@ -20,8 +20,8 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.island';
 import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.island';
@@ -50,6 +50,7 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
+import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -305,6 +306,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
+
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
@@ -337,7 +340,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
+						showSubNav={!isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
@@ -354,6 +357,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 
 			<main data-layout="LiveLayout">
+				<DirectoryPageNavIsland
+					pageTags={article.tags}
+					pageId={article.pageId}
+				/>
 				{isWeb && renderAds && hasLiveBlogTopAd && (
 					<Hide from="tablet">
 						<Section
@@ -555,7 +562,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							>
 								<KeyEventsCarousel
 									keyEvents={article.keyEvents}
-									filterKeyEvents={article.filterKeyEvents}
 									id={'key-events-carousel-desktop'}
 									serverTime={serverTime}
 									renderingTarget={renderingTarget}
@@ -602,7 +608,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									pageId={article.pageId}
 									webTitle={article.webTitle}
 									ajaxUrl={article.config.ajaxUrl}
-									filterKeyEvents={article.filterKeyEvents}
 									enhanceTweetsSwitch={
 										!!article.config.switches.enhanceTweets
 									}
@@ -742,23 +747,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											footballMatchBodyWrapper,
 									]}
 								>
-									{hasKeyEvents ? (
-										<Hide below="desktop">
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<FilterKeyEventsToggle
-													filterKeyEvents={
-														article.filterKeyEvents
-													}
-													id="filter-toggle-desktop"
-												/>
-											</Island>
-										</Hide>
-									) : (
-										<></>
-									)}
 									<ArticleContainer format={format}>
 										{pagination.currentPage !== 1 && (
 											<Pagination
@@ -810,9 +798,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												pagination.currentPage === 1
 											}
 											keyEvents={article.keyEvents}
-											filterKeyEvents={
-												article.filterKeyEvents
-											}
 											keywordIds={
 												article.config.keywordIds
 											}

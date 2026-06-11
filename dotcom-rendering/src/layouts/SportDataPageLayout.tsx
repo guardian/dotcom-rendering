@@ -14,6 +14,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubNav } from '../components/SubNav.island';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 import { palette as themePalette } from '../palette';
 import type {
 	AppSportDataPage,
@@ -100,6 +101,10 @@ export const SportDataPageLayout = (
 
 	const contributionsServiceUrl = getContributionsServiceUrl(sportData);
 
+	const isWorldCup2026 = worldCup2026PageIds.includes(
+		sportData.config.pageId,
+	);
+
 	return (
 		<>
 			{isWeb && (
@@ -126,7 +131,7 @@ export const SportDataPageLayout = (
 						discussionApiUrl={sportData.config.discussionApiUrl}
 						idApiUrl={sportData.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
+						showSubNav={!isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkin={sportData.config.hasPageSkin}
 						pageId={sportData.config.pageId}

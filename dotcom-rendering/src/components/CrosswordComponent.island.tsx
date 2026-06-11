@@ -71,7 +71,9 @@ const Layout: CrosswordProps['Layout'] = ({
 
 	const updateGradientVisibility = () => {
 		const clueList = cluesRef.current;
-		if (!clueList) return;
+		if (!clueList) {
+			return;
+		}
 		const scrollPos = clueList.scrollTop;
 		const maxScroll = clueList.scrollHeight - clueList.clientHeight;
 		setShowGradient(scrollPos < maxScroll - 16);
@@ -79,7 +81,9 @@ const Layout: CrosswordProps['Layout'] = ({
 
 	useEffect(() => {
 		const clueList = cluesRef.current;
-		if (!clueList) return;
+		if (!clueList) {
+			return;
+		}
 
 		updateGradientVisibility();
 

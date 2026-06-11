@@ -38,7 +38,9 @@ type Props = {
  * A. It was not possible to properly style the native progress element in Safari.
  */
 export const VideoProgressBar = ({ videoId, currentTime, duration }: Props) => {
-	if (duration <= 0) return null;
+	if (duration <= 0) {
+		return null;
+	}
 
 	/**
 	 * We achieve a smooth progress bar by using CSS transitions. Given that

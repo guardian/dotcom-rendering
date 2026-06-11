@@ -11,11 +11,14 @@ import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
+import { useConfig } from './ConfigContext';
 import { HighlightsCard } from './Masthead/HighlightsCard';
+import { HighlightsNewsletterCard } from './Masthead/Newsletter/HighlightsNewsletterCard';
 
 type Props = {
 	trails: DCRFrontCard[];
 	frontId?: string;
+	isNewsletterSignupCardEnabled: boolean;
 };
 
 const containerStyles = css`
@@ -168,7 +171,8 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 								${horizontalPaddingMobile +
 								2 * cardGap +
 								peepingCardWidthMobileMedium}px
-						) / 2
+						) /
+						2
 				)
 			);
 		}
@@ -181,7 +185,8 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 								${horizontalPaddingMobileLandscape +
 								2 * cardGap +
 								peepingCardWidthMobileMedium}px
-						) / 2
+						) /
+						2
 				)
 			);
 		}
@@ -207,15 +212,28 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-export const ScrollableHighlights = ({ trails, frontId }: Props) => {
+export const ScrollableHighlights = ({
+	trails,
+	frontId,
+	isNewsletterSignupCardEnabled,
+}: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
-	const carouselLength = trails.length;
+
+	const visibleTrails = trails.filter((trail) => {
+		if (trail.isNewsletterSignup !== true) return true;
+		return isNewsletterSignupCardEnabled && Boolean(trail.newsletterData);
+	});
+	const carouselLength = visibleTrails.length;
 	const imageLoading = 'eager';
 	const [showPreviousButton, setShowPreviousButton] = useState(false);
 	const [showNextButton, setShowNextButton] = useState(true);
 
+	const { renderingTarget } = useConfig();
+
 	const scrollTo = (direction: 'left' | 'right') => {
-		if (!carouselRef.current) return;
+		if (!carouselRef.current) {
+			return;
+		}
 
 		const cardWidth =
 			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
@@ -237,7 +255,9 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	 */
 	const updateButtonVisibilityOnScroll = () => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
@@ -249,7 +269,9 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 
 	useEffect(() => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		carouselElement.addEventListener(
 			'scroll',
@@ -287,7 +309,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				data-container-name="scrollable/highlights"
 				data-heatphan-type="carousel"
 			>
-				{trails.map((trail) => {
+				{visibleTrails.map((trail) => {
 					return (
 						<li
 							key={trail.url}
@@ -295,22 +317,37 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 							role="group"
 							aria-roledescription="slide"
 						>
-							<HighlightsCard
-								format={trail.format}
-								headlineText={trail.headline}
-								kickerText={trail.kickerText}
-								avatarUrl={trail.avatarUrl}
-								byline={trail.byline}
-								image={trail.image}
-								imageLoading={imageLoading}
-								linkTo={trail.url}
-								dataLinkName={trail.dataLinkName}
-								isExternalLink={trail.isExternalLink}
-								showQuotedHeadline={trail.showQuotedHeadline}
-								mainMedia={trail.mainMedia}
-								starRating={trail.starRating}
-								articleMedia={trail.articleMedia}
-							/>
+							{trail.newsletterData ? (
+								<HighlightsNewsletterCard
+									format={trail.format}
+									newsletter={trail.newsletterData}
+									headlineText={trail.headline}
+									linkTo={trail.url}
+									dataLinkName={trail.dataLinkName}
+									image={trail.image}
+									imageLoading={imageLoading}
+									renderingTarget={renderingTarget}
+								/>
+							) : (
+								<HighlightsCard
+									format={trail.format}
+									headlineText={trail.headline}
+									kickerText={trail.kickerText}
+									avatarUrl={trail.avatarUrl}
+									byline={trail.byline}
+									image={trail.image}
+									imageLoading={imageLoading}
+									linkTo={trail.url}
+									dataLinkName={trail.dataLinkName}
+									isExternalLink={trail.isExternalLink}
+									showQuotedHeadline={
+										trail.showQuotedHeadline
+									}
+									mainMedia={trail.mainMedia}
+									starRating={trail.starRating}
+									articleMedia={trail.articleMedia}
+								/>
+							)}
 						</li>
 					);
 				})}

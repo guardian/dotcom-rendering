@@ -154,7 +154,9 @@ export const OneCardLayout = ({
 	isSplashCard,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
-	if (!card) return null;
+	if (!card) {
+		return null;
+	}
 
 	const {
 		headlineSizes,
@@ -219,9 +221,13 @@ const getImagePosition = (
 	hasTwoOrFewerCards: boolean,
 	isMediaCardOrNewsletter: boolean,
 ) => {
-	if (hasTwoOrFewerCards) return 'left';
+	if (hasTwoOrFewerCards) {
+		return 'left';
+	}
 
-	if (isMediaCardOrNewsletter) return 'top';
+	if (isMediaCardOrNewsletter) {
+		return 'top';
+	}
 
 	return 'bottom';
 };
@@ -249,7 +255,9 @@ const TwoOrFourCardLayout = ({
 	isFirstRow,
 	containerLevel,
 }: TwoOrFourCardLayoutProps) => {
-	if (cards.length === 0) return null;
+	if (cards.length === 0) {
+		return null;
+	}
 	const hasTwoOrFewerCards = cards.length <= 2;
 
 	return (

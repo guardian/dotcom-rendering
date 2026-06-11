@@ -4,7 +4,7 @@ import type {
 	ConsentState,
 	OnConsentChangeCallback,
 	VendorName,
-} from '@guardian/libs';
+} from '@guardian/consent-manager';
 import type ophan from '@guardian/ophan-tracker-js';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type { google } from './src/components/YoutubeAtom/ima';

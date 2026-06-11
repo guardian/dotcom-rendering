@@ -22,7 +22,6 @@ const canShowProps: CanShowSignInGateProps = {
 	isPreview: false,
 	pageId: 'page-id',
 	contributionsServiceUrl: 'https://contributions.local',
-	isInAuxiaControlGroup: false,
 	editionId: 'UK',
 	contentType: 'Article',
 	sectionId: 'section',
