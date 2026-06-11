@@ -36,9 +36,6 @@ export const FootballMatchInfoPage = ({
 					initialData={{
 						match: matchInfo,
 						tabs: {
-							infoURL: new URL(
-								'https://www.theguardian.com/football/match/2025/nov/26/arsenal-v-bayernmunich',
-							),
 							// We don't have these urls in the data yet. This will be fixed in upcoming PRs.
 							reportURL: undefined,
 							liveURL: undefined,

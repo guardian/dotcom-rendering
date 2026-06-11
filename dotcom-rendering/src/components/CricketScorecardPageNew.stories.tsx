@@ -84,7 +84,7 @@ export const CricketScorecardPageNewLive = meta.story({
 	name: 'Cricket Scorecard Page Live (New)',
 	args: {
 		...baseArgs,
-		selectedTab: 'live',
+		selectedTab: 'info',
 
 		liveURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',

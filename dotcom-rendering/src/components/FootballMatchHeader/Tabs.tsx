@@ -5,13 +5,13 @@ import {
 	headlineBold17Object,
 	space,
 } from '@guardian/source/foundations';
-import { type CSSProperties, type ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { palette } from '../../palette';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { useConfig } from '../ConfigContext';
-import { border, primaryText, selected as selectedTabColour } from './colours';
+import { border, primaryText, selected } from './colours';
 
 export type TabName = 'info' | 'live' | 'report';
 
@@ -152,7 +152,7 @@ const TabText = (props: {
 			css={tabTextCss}
 			style={{
 				...tabTextStyle(props.matchKind, renderingTarget),
-				borderBottomColor: palette(selectedTabColour(props.matchKind)),
+				borderBottomColor: palette(selected(props.matchKind)),
 			}}
 		>
 			{props.children}
@@ -183,6 +183,6 @@ const tabTextStyle = (
 	color: palette(primaryText(matchKind)),
 	'--hover-colour':
 		renderingTarget === 'Web'
-			? palette(selectedTabColour(matchKind))
+			? palette(selected(matchKind))
 			: 'transparent',
 });
