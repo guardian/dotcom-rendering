@@ -133,11 +133,11 @@ const articles = [
 	},
 	{
 		name: 'AffiliateProductShowcase',
-		url: 'https://www.theguardian.com/thefilter/2025/jun/17/best-fans-uk',
+		url: 'https://www.theguardian.com/thefilter/2026/jun/09/how-to-make-bathroom-more-sustainable',
 	},
 	{
 		name: 'AffiliateProductStandard',
-		url: 'https://www.theguardian.com/thefilter-us/2026/may/27/fathers-day-deals-sales',
+		url: 'https://www.theguardian.com/thefilter-us/2026/jun/09/caraway-saute-pan-review',
 	},
 ];
 
