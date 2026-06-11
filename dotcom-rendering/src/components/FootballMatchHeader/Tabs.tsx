@@ -118,8 +118,6 @@ const Tab = (props: {
 				borderLeftWidth: 1,
 			},
 			[from.leftCol]: {
-				paddingLeft: space[2],
-				borderLeftWidth: 1,
 				flex: '0 0 auto',
 			},
 		}}
