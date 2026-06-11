@@ -8,22 +8,23 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
-import { useEffect, useRef } from 'react';
-import type { ArticleFormat } from '../../lib/articleFormat';
-import { getZIndex } from '../../lib/getZIndex';
+import { useEffect, useRef, useState } from 'react';
+import type { ArticleFormat } from '../../../lib/articleFormat';
+import { getZIndex } from '../../../lib/getZIndex';
 import {
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	sendNewsletterSignupEvent,
-} from '../../lib/newsletterSignupTracking';
-import { useIsInView } from '../../lib/useIsInView';
-import { palette } from '../../palette';
-import type { Newsletter } from '../../types/content';
-import type { DCRFrontImage } from '../../types/front';
-import type { RenderingTarget } from '../../types/renderingTarget';
-import { CardHeadline } from '../CardHeadline';
-import type { Loading } from '../CardPicture';
-import { FormatBoundary } from '../FormatBoundary';
-import { HighlightsCardImage } from './HighlightsCardImage';
+} from '../../../lib/newsletterSignupTracking';
+import { useIsInView } from '../../../lib/useIsInView';
+import { palette } from '../../../palette';
+import type { Newsletter } from '../../../types/content';
+import type { DCRFrontImage } from '../../../types/front';
+import type { RenderingTarget } from '../../../types/renderingTarget';
+import { CardHeadline } from '../../CardHeadline';
+import type { Loading } from '../../CardPicture';
+import { FormatBoundary } from '../../FormatBoundary';
+import { HighlightsCardImage } from '../HighlightsCardImage';
+import { HighlightsNewsletterSignupModal } from './HighlightsNewsletterSignupModal';
 
 type Props = {
 	format: ArticleFormat;
@@ -99,7 +100,6 @@ const linkOverlayStyles = css`
 const content = css`
 	display: flex;
 	flex-direction: column;
-	gap: ${space[1]}px;
 
 	${from.tablet} {
 		padding-bottom: 10px;
@@ -114,15 +114,16 @@ const content = css`
 
 const kickerStyles = css`
 	${textSans15};
-	color: ${palette('--newsletter-card-frequency-tag')};
+	line-height: 1;
+	color: ${palette('--highlights-card-kicker-text')};
 	display: flex;
 	align-items: center;
-	gap: 4px;
+	gap: 2px;
 
 	svg {
 		height: 20px;
 		width: 20px;
-		fill: currentColor;
+		fill: ${palette('--newsletter-card-frequency-tag')};
 		flex-shrink: 0;
 	}
 `;
@@ -137,6 +138,8 @@ export const HighlightsNewsletterCard = ({
 	imageLoading = 'lazy',
 	renderingTarget,
 }: Props) => {
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
 	const componentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(
 		newsletter.identityName,
 	);
@@ -157,14 +160,19 @@ export const HighlightsNewsletterCard = ({
 		});
 	}, [hasBeenSeen, componentId, newsletter.identityName, renderingTarget]);
 
-	const handleClick = () => {
-		sendNewsletterSignupEvent({
-			action: 'EXPAND',
-			identityName: newsletter.identityName,
-			componentId,
-			renderingTarget,
-			value: { eventDescription: 'highlights-card-modal-opened' },
-		});
+	const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+		if (renderingTarget === 'Web') {
+			event.preventDefault();
+			setIsModalOpen(true);
+
+			sendNewsletterSignupEvent({
+				action: 'EXPAND',
+				identityName: newsletter.identityName,
+				componentId,
+				renderingTarget,
+				value: { eventDescription: 'highlights-card-modal-opened' },
+			});
+		}
 	};
 
 	const newsletterImageSrc =
@@ -179,44 +187,64 @@ export const HighlightsNewsletterCard = ({
 
 	return (
 		<FormatBoundary format={format}>
-			<div ref={setIsInViewRef} css={[container, hoverStyles]}>
-				<a
-					href={linkTo}
-					css={linkOverlayStyles}
-					onClick={handleClick}
-					data-link-name={dataLinkName}
-					aria-label={headlineText}
-				/>
-
-				<div css={content}>
-					<span css={kickerStyles}>
-						<SvgNewsletterFilled />
-						Free newsletter
-					</span>
-
-					<CardHeadline
-						headlineText={headlineText}
-						format={format}
-						fontSizes={{
-							desktop: 'xxsmall',
-							tablet: 'xxsmall',
-							mobileMedium: 'xxsmall',
-							mobile: 'xxxsmall',
+			<>
+				{isModalOpen && (
+					<HighlightsNewsletterSignupModal
+						newsletter={newsletter}
+						onClose={() => {
+							setIsModalOpen(false);
+							sendNewsletterSignupEvent({
+								action: 'CLOSE',
+								identityName: newsletter.identityName,
+								componentId,
+								renderingTarget,
+								value: {
+									eventDescription:
+										'highlights-card-modal-closed',
+								},
+							});
 						}}
-						showQuotes={false}
-						headlineColour={palette(
-							'--newsletter-highlights-card-headline',
-						)}
-					/>
-				</div>
-
-				{newsletterImage !== undefined && (
-					<HighlightsCardImage
-						imageLoading={imageLoading}
-						image={newsletterImage}
 					/>
 				)}
-			</div>
+				<div ref={setIsInViewRef} css={[container, hoverStyles]}>
+					<a
+						href={linkTo}
+						css={linkOverlayStyles}
+						onClick={handleClick}
+						data-link-name={dataLinkName}
+						aria-label={headlineText}
+					/>
+
+					<div css={content}>
+						<span css={kickerStyles}>
+							<SvgNewsletterFilled />
+							Free newsletter
+						</span>
+
+						<CardHeadline
+							headlineText={headlineText}
+							format={format}
+							fontSizes={{
+								desktop: 'xxsmall',
+								tablet: 'xxsmall',
+								mobileMedium: 'xxsmall',
+								mobile: 'xxxsmall',
+							}}
+							showQuotes={false}
+							headlineColour={palette(
+								'--newsletter-highlights-card-headline',
+							)}
+						/>
+					</div>
+
+					{newsletterImage !== undefined && (
+						<HighlightsCardImage
+							imageLoading={imageLoading}
+							image={newsletterImage}
+						/>
+					)}
+				</div>
+			</>
 		</FormatBoundary>
 	);
 };

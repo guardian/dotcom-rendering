@@ -87,42 +87,71 @@ const paddedContainer = `
 
 // ----- Vertical Rules ----- //
 
-type VerticalRuleOptions = {
-	centre?: boolean;
-	color?: string;
-};
-
 /**
- * Render Guardian grid vertical rules.
+ * CSS for a centre vertical rule anchored to the top of the nth child of the
+ * grid container.
  *
- * Left and right rules are always present.
- * A centre rule can optionally be enabled.
+ * The rule is self-contained on the nth child element rather than on the grid
+ * container, so that `top: 0` aligns to that element's top edge. `bottom`
+ * uses a large negative value to extend the rule down to the container's
+ * bottom, so `overflow: hidden` is applied to the container.
  *
- * Usage:
- * css([grid.container, grid.verticalRules()])
- * css([grid.container, grid.verticalRules({ centre: true })])
+ * @example
+ * css`
+ *   ${grid.container}
+ *   ${grid.outerRules()}
+ *   ${grid.centreRule(1)}
+ *
+ *   ${from.leftCol} {
+ *     ${grid.centreRule(3)}
+ *   }
+ * `
  */
-const optionalCentreRule = `/* CENTRE RULE */
-    & > *:first-child::before {
-      grid-column: centre-column-start;
-      transform: translateX(-${columnGap});
-	  ${fromBreakpoint.leftCol} {
-		transform: translateX(calc(-${columnGap} / 2));
-	  }
+const centreRule = (n: number, color?: string): string => `/* CENTRE RULE */
+	overflow: hidden;
+
+    & > *:nth-child(${n}) {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        bottom: -9999px;
+        width: 1px;
+        background-color: ${color ?? palette('--article-border')};
+        content: '';
+        grid-column: centre-column-start;
+        transform: translateX(-${columnGap});
+
+        ${fromBreakpoint.desktop} {
+          transform: translateX(calc(-${columnGap} / 2));
+        }
+      }
     }`;
 
-const verticalRules = (options: VerticalRuleOptions = {}): string => `
+/**
+ * CSS for the left and right Guardian grid vertical rules.
+ *
+ * Use `grid.centreRule` separately to add a centre rule anchored to a
+ * specific child element.
+ *
+ * @example
+ * css`
+ *   ${grid.container}
+ *   ${grid.outerRules()}
+ * `
+ */
+const outerRules = (color?: string): string => `
   ${fromBreakpoint.tablet} {
     position: relative;
 
     &::before,
-    &::after
-    ${options.centre ? ', & > *:first-child::before' : ''} {
+    &::after {
       position: absolute;
       top: 0;
       bottom: 0;
       width: 1px;
-      background-color: ${options.color ?? palette('--article-border')};
+      background-color: ${color ?? palette('--article-border')};
       content: '';
     }
 
@@ -145,9 +174,7 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
         grid-column: centre-column-end;
       }
     }
-
-    ${options.centre ? optionalCentreRule : ''}
-`;
+  }`;
 
 // ----- API ----- //
 
@@ -248,10 +275,17 @@ const grid = {
 	 * breakpoint.
 	 */
 	mobileColumnGap,
-
-	verticalRules,
+	/**
+	 * CSS for the left and right vertical rules. Use `grid.centreRule`
+	 * separately to add a centre rule anchored to a specific child element.
+	 */
+	outerRules,
+	/**
+	 * CSS for a centre vertical rule anchored to the top of the nth child of
+	 * the grid container. Can be called multiple times within different
+	 * breakpoint contexts to vary which child the rule anchors to.
+	 */
+	centreRule,
 } as const;
-
-// ----- Exports ----- //
 
 export { grid };
