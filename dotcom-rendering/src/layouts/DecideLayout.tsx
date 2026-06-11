@@ -2,7 +2,6 @@ import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { AudioLayout } from './AudioLayout';
 import { CommentLayout } from './CommentLayout';
 import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
@@ -196,7 +195,7 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 					);
 				case ArticleDesign.Audio:
 					return (
-						<AudioLayout
+						<StandardLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -358,7 +357,7 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 					);
 				case ArticleDesign.Audio:
 					return (
-						<AudioLayout
+						<StandardLayout
 							article={article.frontendData}
 							format={format}
 							NAV={NAV}

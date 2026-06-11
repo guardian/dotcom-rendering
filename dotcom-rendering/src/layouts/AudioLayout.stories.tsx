@@ -5,12 +5,12 @@ import { ArticleDesign } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { enhanceArticleType } from '../types/article';
-import { AudioLayout } from './AudioLayout';
+import { StandardLayout } from './StandardLayout';
 
 const meta = {
 	title: 'Layouts/Audio',
-	component: AudioLayout,
-} satisfies Meta<typeof AudioLayout>;
+	component: StandardLayout,
+} satisfies Meta<typeof StandardLayout>;
 
 export default meta;
 
