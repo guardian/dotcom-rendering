@@ -606,27 +606,30 @@ export const SelfHostedVideo = ({
 		}
 	}, []);
 
-	const pauseVideo = (
-		pauseReason: Extract<
-			PlayerStates,
-			| 'PAUSED_BY_USER'
-			| 'PAUSED_BY_INTERSECTION_OBSERVER'
-			| 'PAUSED_BY_BROWSER'
-		>,
-	) => {
-		const video = vidRef.current;
-		if (!video) {
-			return;
-		}
+	const pauseVideo = useCallback(
+		(
+			pauseReason: Extract<
+				PlayerStates,
+				| 'PAUSED_BY_USER'
+				| 'PAUSED_BY_INTERSECTION_OBSERVER'
+				| 'PAUSED_BY_BROWSER'
+			>,
+		) => {
+			const video = vidRef.current;
+			if (!video) {
+				return;
+			}
 
-		if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
-			setMutedState({ value: true, track: false });
-		}
+			if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
+				setMutedState({ value: true, track: false });
+			}
 
-		setPlayerState(pauseReason);
+			setPlayerState(pauseReason);
 
-		void video.pause();
-	};
+			void video.pause();
+		},
+		[setMutedState],
+	);
 
 	const playPauseVideo = () => {
 		if (playerState === 'PLAYING') {
@@ -778,6 +781,9 @@ export const SelfHostedVideo = ({
 			if (document.visibilityState === 'visible') {
 				handlePageBecomesVisible();
 			}
+			if (renderingTarget === 'Apps' && document.hidden) {
+				pauseVideo('PAUSED_BY_BROWSER');
+			}
 		});
 
 		return () => {
@@ -796,7 +802,7 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [setMutedState, uniqueId, sources, renderingTarget]);
+	}, [setMutedState, uniqueId, sources, renderingTarget, pauseVideo]);
 
 	/* Creates video-specific event listeners to handle fullscreen behaviour */
 	useEffect(() => {

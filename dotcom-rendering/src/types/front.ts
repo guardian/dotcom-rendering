@@ -92,6 +92,7 @@ export type DCRFrontCard = {
 	isImmersive: boolean;
 	isCrossword?: boolean;
 	isNewsletter?: boolean;
+	isNewsletterSignup?: boolean;
 	newsletterData?: Newsletter;
 	discussionId?: string;
 	byline?: string;

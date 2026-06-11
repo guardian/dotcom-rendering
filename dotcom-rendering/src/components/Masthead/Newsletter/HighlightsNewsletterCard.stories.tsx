@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { newsletterCard } from '../../../../fixtures/manual/highlights-trails';
+import { newsletterSignupCard } from '../../../../fixtures/manual/highlights-trails';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -40,11 +40,11 @@ const meta = {
 			design: ArticleDesign.Standard,
 			theme: Pillar.News,
 		},
-		newsletter: newsletterCard.newsletterData!,
-		headlineText: newsletterCard.headline,
-		linkTo: newsletterCard.url,
+		newsletter: newsletterSignupCard.newsletterData!,
+		headlineText: newsletterSignupCard.headline,
+		linkTo: newsletterSignupCard.url,
 		dataLinkName: 'highlights-newsletter-card | open-signup',
-		image: newsletterCard.image,
+		image: newsletterSignupCard.image,
 		imageLoading: 'eager',
 		renderingTarget: 'Web',
 	},

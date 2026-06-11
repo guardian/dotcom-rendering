@@ -220,7 +220,7 @@ export const ScrollableHighlights = ({
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 
 	const visibleTrails = trails.filter((trail) => {
-		if (trail.isNewsletter !== true) return true;
+		if (trail.isNewsletterSignup !== true) return true;
 		return isNewsletterSignupCardEnabled && Boolean(trail.newsletterData);
 	});
 	const carouselLength = visibleTrails.length;
