@@ -159,6 +159,7 @@ const outerRules = (color?: string): string => `
     &::before {
       grid-column: centre-column-start;
       transform: translateX(-${columnGap});
+	  z-index: 10;
 
       ${fromBreakpoint.leftCol} {
         grid-column: left-column-start;
@@ -169,6 +170,7 @@ const outerRules = (color?: string): string => `
     &::after {
       grid-column: right-column-end;
       transform: translateX(-1px);
+      z-index: 10;
 
       ${betweenBreakpoint.tablet.and.desktop} {
         grid-column: centre-column-end;
