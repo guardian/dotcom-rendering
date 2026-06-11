@@ -32,6 +32,10 @@ const baseArgs = {
 		},
 		innings: [],
 	},
+	selectedTab: 'info' as 'info' | 'live' | 'report',
+	infoURL: new URL(
+		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+	),
 	allInnings: [],
 	officials: [
 		'P R Reiffel',
@@ -69,7 +73,6 @@ const baseArgs = {
 		],
 	},
 	edition: 'UK',
-	selectedTab: 'info',
 } satisfies ComponentProps<typeof CricketScorecardPageNewComponent>;
 
 export const CricketScorecardPageNewFixture = meta.story({

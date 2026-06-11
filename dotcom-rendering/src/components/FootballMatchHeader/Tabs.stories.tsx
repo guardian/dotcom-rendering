@@ -12,6 +12,9 @@ export const MatchInfoWhenFixture = meta.story({
 		selected: 'info',
 		sportKind: 'football',
 		matchKind: 'Fixture',
+		infoURL: new URL(
+			'https://www.theguardian.com/football/match/2025/nov/26/arsenal-v-bayernmunich',
+		),
 	},
 	parameters: {
 		colourSchemeBackground: {
@@ -27,10 +30,12 @@ export const LiveWhenLive = meta.story({
 	args: {
 		selected: 'live',
 		sportKind: 'football',
-
 		matchKind: 'Live',
 		infoURL: new URL(
 			'https://www.theguardian.com/football/match/2025/nov/26/arsenal-v-bayernmunich',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/football/live/2025/nov/26/arsenal-v-bayern-munich-champions-league-live',
 		),
 	},
 	parameters: {
@@ -51,6 +56,11 @@ export const ReportWhenResult = meta.story({
 		liveURL: new URL(
 			'https://www.theguardian.com/football/live/2025/nov/26/arsenal-v-bayern-munich-champions-league-live',
 		),
-		infoURL: LiveWhenLive.input.args.infoURL,
+		infoURL: new URL(
+			'https://www.theguardian.com/football/match/2025/nov/26/arsenal-v-bayernmunich',
+		),
+		reportURL: new URL(
+			'https://www.theguardian.com/football/2025/nov/26/arsenal-v-bayernmunich-champions-league-match-report',
+		),
 	},
 });

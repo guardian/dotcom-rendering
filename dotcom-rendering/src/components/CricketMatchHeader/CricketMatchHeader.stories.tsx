@@ -29,12 +29,9 @@ const baseArgs = {
 		},
 		innings: [],
 	},
-	selectedTab: 'live' as 'info' | 'live' | 'report',
-	reportURL: new URL(
-		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#match-report',
-	),
-	liveURL: new URL(
-		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+	selectedTab: 'info' as 'info' | 'live' | 'report',
+	infoURL: new URL(
+		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
 	),
 	allInnings: [],
 	officials: [
@@ -108,6 +105,9 @@ export const Live = {
 		infoURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
 		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		),
 	},
 } satisfies Story;
 
@@ -134,6 +134,9 @@ export const LiveYetToBat = {
 		selectedTab: 'info',
 		infoURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 		),
 	},
 } satisfies Story;
@@ -194,6 +197,9 @@ export const Result = {
 		infoURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
 		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		),
 	},
 } satisfies Story;
 
@@ -235,6 +241,9 @@ export const ResultWinByWickets = {
 
 		infoURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 		),
 	},
 } satisfies Story;
@@ -288,6 +297,9 @@ export const ResultDrawn = {
 		selectedTab: 'info',
 		infoURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 		),
 	},
 } satisfies Story;
