@@ -33,42 +33,6 @@ const baseArgs = {
 	infoURL: new URL(
 		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
 	),
-	allInnings: [],
-	officials: [
-		'P R Reiffel',
-		'R K Illingworth',
-		'J S Wilson',
-		'H D P K Dharmasena',
-		'R S Madugalle',
-	],
-	lineups: {
-		homeTeam: [
-			'Rohit Sharma',
-			'Shubman Gill',
-			'Virat Kohli',
-			'Shreyas Iyer',
-			'Axar Patel',
-			'Lokesh Rahul',
-			'Hardik Pandya',
-			'Ravindra Jadeja',
-			'Mohammed Shami',
-			'Kuldeep Yadav',
-			'Varun Chakaravarthy',
-		],
-		awayTeam: [
-			'Rachin Ravindra',
-			'Will Young',
-			'Kane Williamson',
-			'Daryl Mitchell',
-			'Tom Latham',
-			'Glenn Phillips',
-			'Michael Bracewell',
-			'Mitchell Santner',
-			'Nathan Smith',
-			'Kyle Jamieson',
-			"Will O'Rourke",
-		],
-	},
 };
 
 export const Fixture = {
