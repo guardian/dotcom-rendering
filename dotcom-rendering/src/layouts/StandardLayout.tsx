@@ -282,7 +282,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout="StandardLayout">
+			<main data-layout={`${ArticleDisplay[format.display]}Layout`}>
 				{isApps && renderAds && (
 					<Island priority="critical">
 						<AdPortals />
@@ -356,7 +356,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							hideCaption={isMedia}
 							shouldHideAds={article.shouldHideAds}
 							contentType={article.contentType}
-							contentLayout="StandardLayout"
+							contentLayout={`${ArticleDisplay[format.display]}Layout`}
 						/>
 					</GridItem>
 					<GridItem
@@ -407,7 +407,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								article.webPublicationDateDeprecated
 							}
 							starRating={article.starRating}
-							isInverted={layoutType === 'immersiveLandscape'}
 						/>
 					</GridItem>
 					<GridItem area="standfirst" layoutType={layoutType}>
