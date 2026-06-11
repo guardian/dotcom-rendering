@@ -57,14 +57,18 @@ export const CricketMatchHeader = (props: Props) => {
 		>
 			<div
 				css={{
-					'&': css(grid.paddedContainer),
+					'&': css(
+						grid.paddedContainer,
+						grid.outerRules(
+							palette(
+								'--football-match-header-fixture-result-border',
+							),
+						),
+					),
 					[from.tablet]: {
 						borderColor: palette(
 							'--football-match-header-fixture-result-border',
 						),
-						borderStyle: 'solid',
-						borderLeftWidth: 1,
-						borderRightWidth: 1,
 					},
 				}}
 			>
@@ -250,6 +254,9 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 					paddingLeft: space[2],
 					borderLeftWidth: 1,
 					paddingTop: space[3],
+					'&:first-of-type': {
+						marginLeft: `-10px`,
+					},
 				},
 			}}
 			style={{
