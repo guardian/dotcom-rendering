@@ -85,7 +85,12 @@ const useAvailability = (
 	useEffect(() => {
 		getAvailability(
 			renderingTarget,
-			match,
+			match.kind,
+			match.paId,
+			match.homeTeam.name,
+			match.homeTeam.paID,
+			match.awayTeam.name,
+			match.awayTeam.paID,
 			environment,
 			liveActivities,
 			matchNotifications,
@@ -107,7 +112,12 @@ const useAvailability = (
 			});
 	}, [
 		renderingTarget,
-		match,
+		match.kind,
+		match.paId,
+		match.homeTeam.name,
+		match.homeTeam.paID,
+		match.awayTeam.name,
+		match.awayTeam.paID,
 		environment,
 		liveActivities,
 		matchNotifications,
@@ -118,30 +128,35 @@ const useAvailability = (
 
 const getAvailability = async (
 	renderingTarget: RenderingTarget,
-	match: FootballMatch,
+	matchKind: FootballMatch['kind'],
+	matchId: FootballMatch['paId'],
+	homeTeamName: FootballMatch['homeTeam']['name'],
+	homeTeamId: FootballMatch['homeTeam']['paID'],
+	awayTeamName: FootballMatch['awayTeam']['name'],
+	awayTeamId: FootballMatch['awayTeam']['paID'],
 	environment: EnvironmentClient,
 	liveActivities: LiveActivitiesClient,
 	matchNotifications: MatchNotificationsClient,
 ): Promise<Availability> => {
-	if (renderingTarget !== 'Apps' || match.kind === 'Result') {
+	if (renderingTarget !== 'Apps' || matchKind === 'Result') {
 		return { kind: 'none' };
 	}
 
 	if (
 		(await hasLiveActivitiesSupport(environment)) &&
-		(await liveActivities.isAvailable('football-match', match.paId))
+		(await liveActivities.isAvailable('football-match', matchId))
 	) {
 		return { kind: 'liveActivities' };
 	}
 
 	const notificationsAvailability = await matchNotifications.isAvailable({
 		homeTeam: {
-			paId: match.homeTeam.paID,
-			name: match.homeTeam.name,
+			paId: homeTeamId,
+			name: homeTeamName,
 		},
 		awayTeam: {
-			paId: match.awayTeam.paID,
-			name: match.awayTeam.name,
+			paId: awayTeamId,
+			name: awayTeamName,
 		},
 	});
 
