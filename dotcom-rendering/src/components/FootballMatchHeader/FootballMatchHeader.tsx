@@ -120,16 +120,6 @@ export const FootballMatchHeader = (props: Props) => {
 								'--football-match-header-fixture-result-border',
 							),
 						),
-						css`
-							${from.leftCol} {
-								${grid.centreRule(
-									3,
-									palette(
-										'--football-match-header-fixture-result-border',
-									),
-								)}
-							}
-						`,
 					),
 					[from.tablet]: {
 						borderColor: palette(
@@ -343,15 +333,18 @@ const Team = (props: {
 		css={{
 			flex: '1 1 50%',
 			wordBreak: 'break-word',
+			borderLeftStyle: 'solid',
 			'&:last-of-type': {
 				paddingLeft: space[2],
 				borderLeftWidth: 1,
-				borderLeftStyle: 'solid',
 			},
 			[from.leftCol]: {
 				paddingLeft: space[2],
 				borderLeftWidth: 1,
 				paddingTop: space[3],
+				'&:first-of-type': {
+					marginLeft: `-10px`,
+				},
 			},
 		}}
 		style={{
