@@ -133,7 +133,7 @@ const articles = [
 	},
 	{
 		name: 'AffiliateProductShowcase',
-		url: 'https://www.theguardian.com/thefilter/2026/jun/09/how-to-make-bathroom-more-sustainable',
+		url: 'https://www.theguardian.com/thefilter/2026/may/04/things-you-loved-most-april-2026',
 	},
 	{
 		name: 'AffiliateProductStandard',
