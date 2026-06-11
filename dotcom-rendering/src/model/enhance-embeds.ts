@@ -12,11 +12,18 @@ export const enhanceEmbeds = (elements: FEElement[]): FEElement[] =>
 				const iframe = dom.querySelector('iframe');
 				if (iframe && element.alt) {
 					iframe.setAttribute('title', element.alt);
-					if (element.source === 'Vimeo') {
-						return {
-							...element,
-						};
-					}
+					// if (element.source === 'Vimeo') {
+					// 	return {
+					// 		...element,
+					// 	};
+					// }
+					const iframeElememt = {
+						...element,
+						...{
+							html: iframe.outerHTML,
+						},
+					};
+					console.log('iframeElememt', iframeElememt);
 					return {
 						...element,
 						...{
