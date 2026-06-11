@@ -11,6 +11,7 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import { AppsAudioPlayer } from '../components/AppsAudioPlayer.island';
 import { AppsEpic } from '../components/AppsEpic.island';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
@@ -19,6 +20,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { AudioPlayerWrapper } from '../components/AudioPlayerWrapper.island';
 import { Carousel } from '../components/Carousel.island';
 import { CricketMatchHeaderWrapper } from '../components/CricketMatchHeaderWrapper.island';
 import { DecideLines } from '../components/DecideLines';
@@ -31,7 +33,10 @@ import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import { ListenToArticle } from '../components/ListenToArticle.island';
+import {
+	formatAudioDuration,
+	ListenToArticle,
+} from '../components/ListenToArticle.island';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MatchHeaderFallback } from '../components/MatchHeaderFallback';
@@ -52,6 +57,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { getAudioData } from '../lib/audio-data';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
@@ -181,6 +187,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const audioData = getAudioData(article.mainMediaElements);
+
 	const layoutType: LayoutType = isMedia
 		? 'media'
 		: isShowcase
@@ -283,25 +291,59 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						]}
 					>
 						<GridItem area="media" layoutType={layoutType}>
-							<MainMedia
-								format={format}
-								elements={article.mainMediaElements}
-								host={host}
-								pageId={article.pageId}
-								webTitle={article.webTitle}
-								ajaxUrl={article.config.ajaxUrl}
-								abTests={article.config.abTests}
-								switches={article.config.switches}
-								isAdFreeUser={article.isAdFreeUser}
-								isSensitive={article.config.isSensitive}
-								editionId={article.editionId}
-								hideCaption={isMedia}
-								shouldHideAds={article.shouldHideAds}
-								contentType={article.contentType}
-								contentLayout={`${
-									ArticleDisplay[format.display]
-								}Layout`}
-							/>
+							{audioData ? (
+								<>
+									{isApps ? (
+										<AppsAudioPlayer
+											audioDuration={
+												typeof audioData.durationSeconds ===
+												'number'
+													? formatAudioDuration(
+															audioData.durationSeconds,
+														)
+													: undefined
+											}
+										/>
+									) : (
+										<AudioPlayerWrapper
+											contentIsNotSensitive={
+												!article.config.isSensitive
+											}
+											isAcastEnabled={
+												!!article.config.switches.acast
+											}
+											src={audioData.audioDownloadUrl}
+											mediaId={audioData.mediaId}
+										/>
+									)}
+									<StraightLines
+										cssOverrides={css`
+											display: block;
+											margin-bottom: ${space[2]}px;
+										`}
+										count={1}
+										color={themePalette('--straight-lines')}
+									/>
+								</>
+							) : (
+								<MainMedia
+									format={format}
+									elements={article.mainMediaElements}
+									host={host}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
+									ajaxUrl={article.config.ajaxUrl}
+									abTests={article.config.abTests}
+									switches={article.config.switches}
+									isAdFreeUser={article.isAdFreeUser}
+									isSensitive={article.config.isSensitive}
+									editionId={article.editionId}
+									hideCaption={isMedia}
+									shouldHideAds={article.shouldHideAds}
+									contentType={article.contentType}
+									contentLayout="StandardLayout"
+								/>
+							)}
 						</GridItem>
 						<GridItem
 							area="title"
