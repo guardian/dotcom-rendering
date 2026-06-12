@@ -6914,16 +6914,24 @@ const paletteColours = {
 		dark: () => sourcePalette.neutral[86],
 	},
 	'--cricket-scorecard-first-team-color': {
-		light: () => '#22721a',
-		dark: () => '#4aad42',
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[400],
+	},
+	'--cricket-scorecard-first-team-lineup-color': {
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--cricket-scorecard-innings-heading-text': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
 	},
 	'--cricket-scorecard-second-team-color': {
-		light: () => '#071b3c',
-		dark: () => '#4878c0',
+		light: () => sourcePalette.sport[100],
+		dark: () => sourcePalette.sport[100],
+	},
+	'--cricket-scorecard-second-team-lineup-color': {
+		light: () => sourcePalette.sport[100],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--crossword-anagram-helper-background': {
 		light: crosswordAnagramHelperBackgroundLight,

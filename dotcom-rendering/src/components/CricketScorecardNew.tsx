@@ -253,11 +253,11 @@ const teamNameStyles = css`
 `;
 
 const homeTeamNameStyles = css`
-	color: ${palette('--cricket-scorecard-first-team-color')};
+	color: ${palette('--cricket-scorecard-first-team-lineup-color')};
 `;
 
 const awayTeamNameStyles = css`
-	color: ${palette('--cricket-scorecard-second-team-color')};
+	color: ${palette('--cricket-scorecard-second-team-lineup-color')};
 `;
 
 const playerListStyles = css`
