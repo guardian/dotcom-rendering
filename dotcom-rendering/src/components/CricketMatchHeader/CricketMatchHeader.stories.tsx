@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { CricketMatch } from '../../cricketMatchV2';
+import type { EditionId } from '../../lib/edition';
 import { CricketMatchHeader } from './CricketMatchHeader';
 
 const meta = {
@@ -9,39 +11,40 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Fixture = {
-	args: {
-		edition: 'UK',
-		match: {
-			kind: 'Fixture',
-			series: 'Ashes 2025–2026',
-			competition: 'Second Test Match',
-			venue: 'Brisbane Cricket Ground',
-			matchDate: new Date('2026-01-26'),
-			homeTeam: {
-				paID: 'f7f611a1-e667-2aa2-c3e0-6dbc6981cfa4',
-				name: 'Australia',
-			},
-			awayTeam: {
-				paID: 'a359844f-fc07-9cfa-d4cc-9a9ac0d5d075',
-				name: 'England',
-			},
-			innings: [],
+const baseArgs = {
+	edition: 'UK' as EditionId,
+	match: {
+		kind: 'Fixture' as CricketMatch['kind'],
+		series: 'Ashes 2025–2026',
+		competition: 'Second Test Match',
+		venue: 'Brisbane Cricket Ground',
+		matchDate: new Date('2026-01-26'),
+		homeTeam: {
+			paID: 'f7f611a1-e667-2aa2-c3e0-6dbc6981cfa4',
+			name: 'Australia',
 		},
-		tabs: {
-			selected: 'info',
-			sportKind: 'cricket',
-			matchKind: 'Fixture',
+		awayTeam: {
+			paID: 'a359844f-fc07-9cfa-d4cc-9a9ac0d5d075',
+			name: 'England',
 		},
+		innings: [],
 	},
+	selectedTab: 'info' as 'info' | 'live' | 'report',
+	infoURL: new URL(
+		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+	),
+};
+
+export const Fixture = {
+	args: baseArgs,
 } satisfies Story;
 
 export const Live = {
 	args: {
-		edition: 'UK',
+		...baseArgs,
 		match: {
 			...Fixture.args.match,
-			kind: 'Live',
+			kind: 'Live' as CricketMatch['kind'],
 			day: 2,
 			innings: [
 				{
@@ -62,21 +65,21 @@ export const Live = {
 				},
 			],
 		},
-		tabs: {
-			selected: 'info',
-			sportKind: 'cricket',
-			matchKind: 'Live',
-			liveURL: new URL(
-				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-			),
-		},
+		selectedTab: 'info',
+		infoURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		),
 	},
 } satisfies Story;
 
 export const LiveYetToBat = {
 	name: 'Live (Team yet to bat)',
 	args: {
-		edition: 'UK',
+		...baseArgs,
+		edition: 'UK' as EditionId,
 		match: {
 			...Fixture.args.match,
 			kind: 'Live',
@@ -92,20 +95,20 @@ export const LiveYetToBat = {
 				},
 			],
 		},
-		tabs: {
-			selected: 'info',
-			sportKind: 'cricket',
-			matchKind: 'Live',
-			liveURL: new URL(
-				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-			),
-		},
+		selectedTab: 'info',
+		infoURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		),
 	},
 } satisfies Story;
 
 export const Result = {
 	args: {
-		edition: 'UK',
+		...baseArgs,
+		edition: 'UK' as EditionId,
 		match: {
 			...Fixture.args.match,
 			kind: 'Result',
@@ -154,20 +157,20 @@ export const Result = {
 				},
 			},
 		},
-		tabs: {
-			selected: 'info',
-			sportKind: 'cricket',
-			matchKind: 'Result',
-			liveURL: new URL(
-				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-			),
-		},
+		selectedTab: 'info',
+		infoURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		),
 	},
 } satisfies Story;
 
 export const ResultWinByWickets = {
 	args: {
-		edition: 'UK',
+		...baseArgs,
+		edition: 'UK' as EditionId,
 		match: {
 			...Fixture.args.match,
 			kind: 'Result',
@@ -198,20 +201,21 @@ export const ResultWinByWickets = {
 				},
 			},
 		},
-		tabs: {
-			selected: 'info',
-			sportKind: 'cricket',
-			matchKind: 'Result',
-			liveURL: new URL(
-				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-			),
-		},
+		selectedTab: 'info',
+
+		infoURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		),
 	},
 } satisfies Story;
 
 export const ResultDrawn = {
 	args: {
-		edition: 'UK',
+		...baseArgs,
+		edition: 'UK' as EditionId,
 		match: {
 			...Fixture.args.match,
 			kind: 'Result',
@@ -254,13 +258,12 @@ export const ResultDrawn = {
 				type: 'draw',
 			},
 		},
-		tabs: {
-			selected: 'info',
-			sportKind: 'cricket',
-			matchKind: 'Result',
-			liveURL: new URL(
-				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-			),
-		},
+		selectedTab: 'info',
+		infoURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		),
 	},
 } satisfies Story;

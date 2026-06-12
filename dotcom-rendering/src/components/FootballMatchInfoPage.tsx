@@ -36,8 +36,6 @@ export const FootballMatchInfoPage = ({
 					initialData={{
 						match: matchInfo,
 						tabs: {
-							selected: 'info',
-							matchKind: matchInfo.kind,
 							// We don't have these urls in the data yet. This will be fixed in upcoming PRs.
 							reportURL: undefined,
 							liveURL: undefined,
