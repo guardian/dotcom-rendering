@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
-import type { CricketMatch, Innings } from '../cricketMatchV2';
+import type { ComponentProps } from 'react';
+import type { CricketMatch } from '../cricketMatchV2';
 import { grid } from '../grid';
 import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
@@ -10,7 +11,6 @@ import type { TabName } from './FootballMatchHeader/Tabs';
 
 export const CricketScorecardPageNew = ({
 	match,
-	allInnings,
 	edition,
 	lineups,
 	officials,
@@ -20,7 +20,6 @@ export const CricketScorecardPageNew = ({
 	reportURL,
 }: {
 	match: CricketMatch;
-	allInnings: Innings[];
 	edition: EditionId;
 	lineups: {
 		homeTeam: string[];
@@ -49,9 +48,8 @@ export const CricketScorecardPageNew = ({
 					`}
 				>
 					<CricketScorecardNew
-						allInnings={allInnings}
-						lineups={lineups}
-						officials={officials}
+						allInnings={match.innings}
+						officials={match.officials}
 						homeTeam={match.homeTeam}
 						awayTeam={match.awayTeam}
 						matchResult={match.result}
