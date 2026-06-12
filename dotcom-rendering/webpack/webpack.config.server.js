@@ -50,6 +50,7 @@ module.exports = {
 							/^@guardian/,
 							// this project is ESM-only and throws an error when not bundled
 							'screenfull',
+							'css-tree',
 						],
 						additionalModuleDirs: [
 							// Since we use workspaces for the monorepo, node_modules will be co-located
