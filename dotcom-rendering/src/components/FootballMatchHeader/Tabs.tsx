@@ -89,11 +89,15 @@ const MatchInfo = (
 		return <Tab matchKind={props.matchKind}>{tabText}</Tab>;
 	}
 
-	return (
-		<Tab matchKind={props.matchKind} href={props.infoURL}>
-			{tabText}
-		</Tab>
-	);
+	if (props.infoURL !== undefined) {
+		return (
+			<Tab matchKind={props.matchKind} href={props.infoURL}>
+				{tabText}
+			</Tab>
+		);
+	}
+
+	return null;
 };
 
 const Tab = (props: {
@@ -138,9 +142,7 @@ const TabText = (props: {
 			<a
 				href={props.href.toString()}
 				css={tabTextCss}
-				style={{
-					...tabTextStyle(props.matchKind, renderingTarget),
-				}}
+				style={tabTextStyle(props.matchKind, renderingTarget)}
 			>
 				{props.children}
 			</a>
