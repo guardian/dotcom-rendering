@@ -17,9 +17,9 @@ import type { ComponentProps } from 'react';
 import { Fragment, type ReactNode, useMemo } from 'react';
 import type {
 	CricketMatch,
+	CricketResult,
 	CricketTeam,
 	InningsOverview,
-	Result,
 } from '../../cricketMatchV2';
 import { grid } from '../../grid';
 import {
@@ -510,7 +510,7 @@ const crestUrl = (teamId: string): URL | undefined => {
  * But in some cases, we just get the data about the result and need to generate
  * a description from that.
  */
-const resultDescription = (result: Result): string => {
+const resultDescription = (result: CricketResult): string => {
 	if (result.description) {
 		return result.description;
 	}
@@ -546,7 +546,7 @@ const resultDescription = (result: Result): string => {
 	}
 };
 
-const ResultLine = (props: { result: Result }) => {
+const ResultLine = (props: { result: CricketResult }) => {
 	const description = resultDescription(props.result);
 	return (
 		<div

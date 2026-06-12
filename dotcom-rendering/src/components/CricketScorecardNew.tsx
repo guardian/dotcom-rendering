@@ -12,12 +12,12 @@ import { type ReactNode } from 'react';
 import type {
 	Batter,
 	Bowler,
+	CricketResult,
 	CricketTeam,
 	Extras,
 	FallOfWicket,
 	Innings,
 	InningsTotals,
-	Result,
 } from '../cricketMatchV2';
 import { palette } from '../palette';
 
@@ -668,7 +668,7 @@ type Props = {
 	officials: string[];
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
-	matchResult?: Result;
+	matchResult?: CricketResult;
 	lineups: {
 		homeTeam: string[];
 		awayTeam: string[];
