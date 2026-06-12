@@ -130,6 +130,7 @@ type Props = {
 	webUrl: string;
 	webTitle: string;
 	showBottomSocialButtons: boolean;
+	isDeprecatedInteractiveLayout?: boolean;
 };
 
 const syndicationButtonOverrides = css`
@@ -205,6 +206,7 @@ export const SubMeta = ({
 	webUrl,
 	webTitle,
 	showBottomSocialButtons,
+	isDeprecatedInteractiveLayout = false,
 }: Props) => {
 	const createLinks = () => {
 		const links: BaseLinkType[] = [];
@@ -229,9 +231,7 @@ export const SubMeta = ({
 		<div
 			data-print-layout="hide"
 			css={[
-				format.design === ArticleDesign.Interactive
-					? setMetaWidth
-					: undefined,
+				isDeprecatedInteractiveLayout ? setMetaWidth : undefined,
 				format.design === ArticleDesign.Gallery
 					? galleryStyles
 					: bottomPadding,
