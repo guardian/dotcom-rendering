@@ -61,7 +61,7 @@ module.exports = {
 						],
 					}),
 				]
-			: [nodeExternals({ allowlist: ['css-tree'] })]),
+			: []),
 		// @aws-sdk modules are only used in CODE/PROD, so we don't need to
 		// include them in the development bundle
 		({ request }, callback) => {
