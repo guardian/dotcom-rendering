@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { adSizes, constants } from '@guardian/commercial-core';
 import { from, textSans12, until } from '@guardian/source/foundations';
 import { palette } from '../palette';
+import { getZIndex } from './getZIndex';
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
 
@@ -137,6 +138,7 @@ const spacefinderAdSlotContainerStyles = css`
 			/* this fixes inter-scrollers stealing mouse events */
 			overflow: hidden;
 			position: relative;
+			z-index: ${getZIndex('interscrollerAd')};
 
 			/* position the iframe absolutely (relative to the slot) so that it is in the correct position to detect viewability */
 			.ad-slot__content {
