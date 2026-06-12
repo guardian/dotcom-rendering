@@ -48,12 +48,12 @@ describe('ModalOverlay', () => {
 		expect(onClose).toHaveBeenCalledTimes(1);
 	});
 
-	it('calls onClose when the overlay backdrop receives a mousedown', () => {
+	it('calls onClose when the overlay backdrop receives a pointerdown', () => {
 		const onClose = jest.fn();
 		renderOverlay(onClose);
 
 		const overlay = screen.getByRole('dialog').parentElement!;
-		fireEvent.mouseDown(overlay);
+		fireEvent.pointerDown(overlay);
 
 		act(() => {
 			jest.runAllTimers();
@@ -62,11 +62,11 @@ describe('ModalOverlay', () => {
 		expect(onClose).toHaveBeenCalledTimes(1);
 	});
 
-	it('does not call onClose when the dialog itself receives a mousedown', () => {
+	it('does not call onClose when the dialog itself receives a pointerdown', () => {
 		const onClose = jest.fn();
 		renderOverlay(onClose);
 
-		fireEvent.mouseDown(screen.getByRole('dialog'));
+		fireEvent.pointerDown(screen.getByRole('dialog'));
 
 		act(() => {
 			jest.runAllTimers();

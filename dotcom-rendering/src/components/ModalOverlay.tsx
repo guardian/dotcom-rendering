@@ -14,6 +14,10 @@ import { getZIndex } from '../lib/getZIndex';
 const OPEN_ANIMATION_DURATION_MS = 300;
 const CLOSE_ANIMATION_DURATION_MS = 225;
 
+const prefersReducedMotion = (): boolean =>
+	typeof window !== 'undefined' &&
+	window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const ModalRequestCloseContext = createContext<(() => void) | null>(null);
 
 export const useModalRequestClose = (): (() => void) => {
@@ -130,19 +134,16 @@ export const ModalOverlay = ({
 	const overlayRef = useRef<HTMLDivElement>(null);
 	const dialogRef = useRef<HTMLDivElement>(null);
 	const closeTimeoutRef = useRef<number | null>(null);
-	const [isVisible, setIsVisible] = useState(false);
+
+	const [isVisible, setIsVisible] = useState(() => prefersReducedMotion());
 
 	const requestClose = useCallback(() => {
 		if (closeTimeoutRef.current !== null) {
 			return;
 		}
 
-		const prefersReducedMotion =
-			window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ??
-			false;
-
-		if (prefersReducedMotion) {
-			closeTimeoutRef.current = 0;
+		if (prefersReducedMotion()) {
+			closeTimeoutRef.current = -1;
 			onClose();
 			return;
 		}
@@ -156,21 +157,19 @@ export const ModalOverlay = ({
 
 	// Trigger open animation on mount
 	useEffect(() => {
-		const prefersReducedMotion =
-			window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ??
-			false;
-
-		if (prefersReducedMotion) {
-			setIsVisible(true);
+		if (prefersReducedMotion()) {
 			return;
 		}
-
-		const animationFrameId = window.requestAnimationFrame(() => {
-			setIsVisible(true);
+		let innerAnimationFrameId: number = 0;
+		const outerAnimationFrameId = window.requestAnimationFrame(() => {
+			innerAnimationFrameId = window.requestAnimationFrame(() => {
+				setIsVisible(true);
+			});
 		});
 
 		return () => {
-			window.cancelAnimationFrame(animationFrameId);
+			window.cancelAnimationFrame(outerAnimationFrameId);
+			window.cancelAnimationFrame(innerAnimationFrameId);
 		};
 	}, []);
 
@@ -282,18 +281,21 @@ export const ModalOverlay = ({
 			return;
 		}
 
-		const handleOverlayMouseDown = (event: MouseEvent) => {
+		const handleOverlayPointerDown = (event: PointerEvent) => {
 			if (event.target === overlayElement) {
 				requestClose();
 			}
 		};
 
-		overlayElement.addEventListener('mousedown', handleOverlayMouseDown);
+		overlayElement.addEventListener(
+			'pointerdown',
+			handleOverlayPointerDown,
+		);
 
 		return () => {
 			overlayElement.removeEventListener(
-				'mousedown',
-				handleOverlayMouseDown,
+				'pointerdown',
+				handleOverlayPointerDown,
 			);
 		};
 	}, [requestClose]);
@@ -305,7 +307,6 @@ export const ModalOverlay = ({
 	return createPortal(
 		<div ref={overlayRef} css={overlayStyles(isVisible)}>
 			<div
-				/* PRISTINE JSX: No hacky touch handlers needed anymore */
 				ref={dialogRef}
 				role="dialog"
 				aria-modal="true"
