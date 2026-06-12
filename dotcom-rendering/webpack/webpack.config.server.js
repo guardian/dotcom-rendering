@@ -84,7 +84,7 @@ module.exports = {
 			},
 			svgr,
 			{
-				test: /jsdom\/.+\/style-rules\.js$/, // make sure we're only patching the jsdom style rules file
+				test: /jsdom.*computed-style\.js$/,
 				use: [path.resolve(__dirname, './jsdom-patch.js')],
 			},
 		],

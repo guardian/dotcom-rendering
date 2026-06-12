@@ -4,6 +4,8 @@ const esModules = [
 	'@guardian/',
 	'@csstools',
 	'@exodus',
+	'@asamuzakjp',
+	'@bramus',
 	'screenfull',
 	'node-fetch',
 	'data-uri-to-buffer',
