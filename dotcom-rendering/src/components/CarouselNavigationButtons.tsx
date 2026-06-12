@@ -89,7 +89,7 @@ export const CarouselNavigationButtons = ({
 	return ReactDOM.createPortal(
 		<div
 			role="group"
-			aria-controls="carousel"
+			aria-controls={`${sectionId}-carousel`}
 			aria-label="carousel arrows"
 			css={buttonStyles}
 		>

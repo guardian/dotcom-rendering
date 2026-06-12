@@ -285,7 +285,7 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 			<div css={carouselHeader}>
 				<Subheading
 					format={format}
-					id={'at-a-glance'}
+					id={'at-a-glance-title'}
 					topPadding={false}
 				>
 					At a glance
@@ -302,6 +302,7 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 					ref={carouselRef}
 					css={carouselStyles}
 					data-heatphan-type="carousel"
+					id="at-a-glance-carousel"
 				>
 					{products.map(
 						(product: ProductBlockElement, index: number) => (
