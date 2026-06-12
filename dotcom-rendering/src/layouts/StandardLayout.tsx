@@ -44,8 +44,10 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.island';
 import { grid } from '../grid';
+import { getAgeWarning } from '../lib/age-warning';
 import {
 	ArticleDesign,
+	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
@@ -176,7 +178,41 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const layoutType: LayoutType = isMedia ? 'media' : 'standard';
+	const isImmersive = format.display === ArticleDisplay.Immersive;
+
+	const firstMainMediaElement = article.mainMediaElements[0];
+	const mainMediaUrl: string | undefined =
+		firstMainMediaElement?._type ===
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+			? firstMainMediaElement.media.allImages[0]?.url
+			: undefined;
+
+	const orientation = (url: string): 'portrait' | 'landscape' | 'square' => {
+		const match = url.match(/\/\d+_\d+_(\d+)_(\d+)\/\d+\.\w+$/);
+		if (!match) return 'landscape';
+		const [, width, height] = match.map(Number);
+		if (width == null || height == null) return 'landscape';
+		if (height > width) return 'portrait';
+		if (width > height) return 'landscape';
+		return 'square';
+	};
+
+	const mainMediaOrientation =
+		mainMediaUrl != null ? orientation(mainMediaUrl) : 'landscape';
+
+	const layoutType: LayoutType =
+		isImmersive && mainMediaOrientation === 'landscape'
+			? 'immersiveLandscape'
+			: isImmersive && mainMediaOrientation === 'portrait'
+				? 'immersivePortrait'
+				: isVideo
+					? 'media'
+					: 'standard';
+
+	const ageWarning = getAgeWarning(
+		article.tags,
+		article.webPublicationDateDeprecated,
+	);
 
 	return (
 		<>
@@ -246,7 +282,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout="StandardLayout">
+			<main data-layout={`${ArticleDisplay[format.display]}Layout`}>
 				{isApps && renderAds && (
 					<Island priority="critical">
 						<AdPortals />
@@ -267,12 +303,44 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						!isLabs &&
 							css`
 								${from.leftCol} {
-									${grid.centreRule(3)}
+									${grid.centreRule(
+										layoutType === 'immersivePortrait'
+											? 4
+											: layoutType ===
+												  'immersiveLandscape'
+												? 4
+												: 1,
+									)}
+								}
+							`,
+						layoutType === 'immersivePortrait' &&
+							css`
+								grid-template-rows: 0.25fr 1fr auto;
+							`,
+						layoutType === 'immersiveLandscape' &&
+							css`
+								${from.desktop} {
+									grid-template-rows: auto auto ${ageWarning
+											? '130px'
+											: '90px'};
 								}
 							`,
 					]}
 				>
-					<GridItem area="media" layoutType={layoutType}>
+					<GridItem
+						area="media"
+						layoutType={layoutType}
+						css={
+							layoutType === 'immersiveLandscape'
+								? css`
+										${from.desktop} {
+											margin-left: -20px;
+											margin-right: -20px;
+										}
+									`
+								: undefined
+						}
+					>
 						<MainMedia
 							format={format}
 							elements={article.mainMediaElements}
@@ -288,13 +356,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							hideCaption={isMedia}
 							shouldHideAds={article.shouldHideAds}
 							contentType={article.contentType}
-							contentLayout="StandardLayout"
+							contentLayout={`${ArticleDisplay[format.display]}Layout`}
 						/>
 					</GridItem>
 					<GridItem
 						area="title"
 						layoutType={layoutType}
 						element="aside"
+						css={css`
+							z-index: 1;
+						`}
 					>
 						<ArticleTitle
 							format={format}
@@ -305,7 +376,28 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							isMatch={!!footballMatchUrl}
 						/>
 					</GridItem>
-					<GridItem area="headline" layoutType={layoutType}>
+					<GridItem
+						area="headline"
+						layoutType={layoutType}
+						css={
+							layoutType === 'immersivePortrait'
+								? css`
+										${from.desktop} {
+											border-bottom: 1px solid
+												${themePalette(
+													'--article-border',
+												)};
+											border-top: 1px solid
+												${themePalette(
+													'--article-border',
+												)};
+										}
+									`
+								: css`
+										z-index: 20;
+									`
+						}
+					>
 						<ArticleHeadline
 							format={format}
 							headlineString={article.headline}
@@ -327,19 +419,30 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						area="meta"
 						layoutType={layoutType}
 						element="aside"
+						css={
+							layoutType === 'immersivePortrait'
+								? css`
+										${from.leftCol} {
+											margin-right: -10px;
+										}
+									`
+								: undefined
+						}
 					>
-						<div css={stretchLines}>
-							{isWeb &&
-							format.theme === ArticleSpecial.Labs &&
-							format.design !== ArticleDesign.Video ? (
-								<GuardianLabsLines />
-							) : (
-								<DecideLines
-									format={format}
-									color={themePalette('--article-border')}
-								/>
-							)}
-						</div>
+						{layoutType !== 'immersivePortrait' && (
+							<div css={stretchLines}>
+								{isWeb &&
+								format.theme === ArticleSpecial.Labs &&
+								format.design !== ArticleDesign.Video ? (
+									<GuardianLabsLines />
+								) : (
+									<DecideLines
+										format={format}
+										color={themePalette('--article-border')}
+									/>
+								)}
+							</div>
+						)}
 						{isApps ? (
 							<>
 								<Hide from="leftCol">
@@ -409,6 +512,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									}
 									secondaryDateline={
 										article.webPublicationSecondaryDateDisplay
+									}
+									webPublicationDate={
+										article.webPublicationDate
 									}
 									isCommentable={article.isCommentable}
 									discussionApiUrl={

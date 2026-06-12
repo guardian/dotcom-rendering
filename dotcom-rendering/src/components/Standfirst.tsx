@@ -264,7 +264,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					`;
 				default:
 					return css`
-						max-width: 280px;
 						${from.tablet} {
 							max-width: 460px;
 						}

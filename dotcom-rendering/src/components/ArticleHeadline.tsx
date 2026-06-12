@@ -27,7 +27,6 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '../lib/articleFormat';
-import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { StarRating as Rating } from '../types/content';
 import type { TagType } from '../types/tag';
@@ -205,30 +204,20 @@ const invertedStyles = css`
 	box-decoration-break: clone;
 `;
 
-const immersiveStyles = css`
-	min-height: 112px;
-	padding-bottom: ${space[6]}px;
-	padding-left: ${space[1]}px;
-
-	${from.mobileLandscape} {
-		padding-left: ${space[3]}px;
-	}
-
-	${from.tablet} {
-		padding-left: ${space[1]}px;
-	}
-
-	margin-right: ${space[5]}px;
-`;
-
 const darkBackground = css`
 	background-color: ${themePalette('--headline-background')};
 `;
 
 const invertedText = css`
-	white-space: pre-wrap;
-	padding-bottom: ${space[1]}px;
-	padding-right: ${space[1]}px;
+	${from.desktop} {
+		color: white;
+		background-color: black;
+		white-space: pre-wrap;
+		padding-bottom: ${space[1]}px;
+		padding-right: ${space[1]}px;
+		margin-left: -10px;
+		padding-left: 10px;
+	}
 `;
 
 const maxWidth = css`
@@ -246,35 +235,6 @@ const invertedWrapper = css`
 	margin-left: 6px;
 `;
 
-const immersiveWrapper = css`
-	/*
-        Make sure we vertically align the headline font with the body font
-    */
-	margin-left: 6px;
-
-	${from.tablet} {
-		margin-left: 16px;
-	}
-
-	${from.leftCol} {
-		margin-left: 25px;
-	}
-
-	/*
-        We need this grow to ensure the headline fills the main content column
-    */
-	flex-grow: 1;
-	/*
-        This z-index is what ensures the headline text shows above the pseudo black
-        box that extends the black background to the right
-    */
-	z-index: ${getZIndex('articleHeadline')};
-
-	${until.mobileLandscape} {
-		margin-right: 40px;
-	}
-`;
-
 // Due to MainMedia using position: relative, this seems to effect the rendering order
 // To mitigate we use z-index
 // TODO: find a cleaner solution
@@ -283,59 +243,58 @@ const zIndex = css`
 `;
 
 const ageWarningMargins = (format: ArticleFormat) => {
-	if (format.design === ArticleDesign.Gallery) {
+	if (
+		format.design === ArticleDesign.Gallery ||
+		format.display === ArticleDisplay.Immersive
+	) {
 		return '';
 	}
-	return format.display === ArticleDisplay.Immersive
-		? css`
-				margin-left: 0px;
-				margin-bottom: 0px;
+	return css`
+		margin-top: 12px;
+		margin-left: -10px;
+		margin-bottom: 6px;
 
-				${from.tablet} {
-					margin-left: 10px;
-				}
+		${from.tablet} {
+			margin-left: -20px;
+		}
 
-				${from.leftCol} {
-					margin-left: 20px;
-				}
-			`
-		: css`
-				margin-top: 12px;
-				margin-left: -10px;
-				margin-bottom: 6px;
-
-				${from.tablet} {
-					margin-left: -20px;
-				}
-
-				${from.leftCol} {
-					margin-left: -10px;
-					margin-top: 0;
-				}
-			`;
+		${from.leftCol} {
+			margin-left: -10px;
+			margin-top: 0;
+		}
+	`;
 };
-
-const backgroundStyles = css`
-	background-color: ${themePalette('--age-warning-wrapper-background')};
-`;
 
 const WithAgeWarning = ({
 	tags,
 	webPublicationDateDeprecated,
 	format,
 	children,
+	snapToInverted = false,
 }: {
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
 	format: ArticleFormat;
 	children: React.ReactNode;
+	snapToInverted?: boolean;
 }) => {
 	const age = getAgeWarning(tags, webPublicationDateDeprecated);
 
 	if (age) {
 		return (
 			<>
-				<div css={[backgroundStyles, ageWarningMargins(format)]}>
+				<div
+					css={[
+						ageWarningMargins(format),
+						snapToInverted
+							? css`
+									${from.desktop} {
+										margin-left: -10px;
+									}
+								`
+							: '',
+					]}
+				>
 					<AgeWarning age={age} />
 				</div>
 				{children}
@@ -431,6 +390,9 @@ export const ArticleHeadline = ({
 	isMatch,
 	starRating,
 }: Props) => {
+	const isInverted =
+		format.design === ArticleDesign.Standard &&
+		format.display === ArticleDisplay.Immersive;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
@@ -456,12 +418,13 @@ export const ArticleHeadline = ({
 										format.theme === ArticleSpecial.Labs
 											? labsFont
 											: headlineFont(format),
-										invertedText,
-										css`
-											color: ${themePalette(
-												'--headline-colour',
-											)};
-										`,
+										isInverted
+											? [invertedText, darkBackground]
+											: css`
+													color: ${themePalette(
+														'--headline-colour',
+													)};
+												`,
 									]}
 								>
 									{headlineString}
@@ -487,16 +450,17 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated
 							}
 							format={format}
+							snapToInverted={true}
 						>
 							<h1
 								css={[
-									immersiveWrapper,
-									darkBackground,
-									css`
-										color: ${themePalette(
-											'--headline-colour',
-										)};
-									`,
+									isInverted
+										? [invertedText, darkBackground]
+										: css`
+												color: ${themePalette(
+													'--headline-colour',
+												)};
+											`,
 								]}
 							>
 								<span
@@ -505,8 +469,6 @@ export const ArticleHeadline = ({
 											? jumboLabsFont
 											: headlineFont(format),
 										maxWidth,
-										invertedStyles,
-										immersiveStyles,
 										displayBlock,
 									]}
 								>
