@@ -117,4 +117,24 @@ describe('parseCricketMatchV2', () => {
 			},
 		});
 	});
+
+	it('parses a cricket match with no winner', () => {
+		const result = parseCricketMatchV2({
+			...cricketMatchData.cricketMatch,
+			fullResult: {
+				resultType: 'no-result',
+				description: 'No result',
+				winner: undefined,
+			},
+		}).getOrThrow('Expected parsing cricket match to succeed');
+
+		expect(result).toEqual({
+			...expected,
+			result: {
+				type: 'no-result',
+				description: 'No result',
+				winner: undefined,
+			},
+		});
+	});
 });
