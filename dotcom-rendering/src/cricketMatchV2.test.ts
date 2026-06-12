@@ -6,7 +6,7 @@ describe('parseCricketMatchV2', () => {
 	const expected: CricketMatch = {
 		kind: 'Result',
 		series: 'First Test Match',
-		competition: 'First Test Match',
+		competition: 'Test Match Series',
 		venue: "Lord's",
 		day: 4,
 		matchDate: new Date('2026-06-04T10:00:00.000Z'),

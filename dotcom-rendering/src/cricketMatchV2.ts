@@ -330,7 +330,7 @@ export const parseCricketMatchV2 = (
 		parseCricketResult(feMatch.fullResult).map(
 			(parsedResult): CricketMatch => ({
 				kind: matchKind,
-				series: feMatch.competitionName, // TODO: this will be stage after frontend changes are complete
+				series: feMatch.stage,
 				competition: feMatch.competitionName,
 				venue: feMatch.venueName,
 				matchDate: parsedDate.value,
