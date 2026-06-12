@@ -317,6 +317,10 @@ const teamCss = css`
 	display: flex;
 	align-items: center;
 	gap: ${space[1]}px;
+	text-align: right;
+	${from.phablet} {
+		padding-left: 8ch;
+	}
 `;
 
 const awayTeamCss = css`
@@ -324,6 +328,10 @@ const awayTeamCss = css`
 	flex-direction: row-reverse;
 	justify-self: start;
 	padding-right: ${space[4]}px;
+	text-align: left;
+	${from.phablet} {
+		padding-left: 0;
+	}
 `;
 
 const Score = ({ match }: { match: FootballMatch }) => {
