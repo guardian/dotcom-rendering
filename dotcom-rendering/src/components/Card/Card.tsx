@@ -164,6 +164,7 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	starRatingSize?: RatingSizeType;
 	contentSpacing?: 'small' | 'large';
+	allowHeadlineToBreakWords?: boolean;
 };
 
 const waveformWrapper = (
@@ -410,6 +411,7 @@ export const Card = ({
 	starRatingSize = 'small',
 	articleMedia,
 	contentSpacing,
+	allowHeadlineToBreakWords,
 }: Props) => {
 	const ab = useAB();
 	const isInLoopClickTestControl = Boolean(
@@ -857,6 +859,7 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
+						allowHeadlineToBreakWords={allowHeadlineToBreakWords}
 					/>
 					{!isUndefined(starRating) && (
 						<StarRating rating={starRating} size={starRatingSize} />
@@ -1156,6 +1159,9 @@ export const Card = ({
 										media?.type === 'podcast'
 											? media.podcastImage
 											: undefined
+									}
+									allowHeadlineToBreakWords={
+										allowHeadlineToBreakWords
 									}
 								/>
 
