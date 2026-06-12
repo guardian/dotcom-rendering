@@ -46,6 +46,7 @@ import { SubNav } from '../components/SubNav.island';
 import { grid } from '../grid';
 import {
 	ArticleDesign,
+	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
@@ -64,7 +65,7 @@ import {
 	type Area,
 	gridItemCss,
 	type LayoutType,
-} from './lib/furnitureArrangements';
+} from './lib/articleArrangements';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const stretchLines = css`
@@ -164,6 +165,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isVideo = format.design === ArticleDesign.Video;
 
+	const isShowcase = format.display === ArticleDisplay.Showcase;
+
 	const showComments = article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
@@ -176,7 +179,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const layoutType: LayoutType = isMedia ? 'media' : 'standard';
+	const layoutType: LayoutType = isMedia
+		? 'media'
+		: isShowcase
+			? 'showcase'
+			: 'standard';
 
 	return (
 		<>
@@ -246,7 +253,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout="StandardLayout">
+			<main data-layout={`${ArticleDisplay[format.display]}Layout`}>
 				{isApps && renderAds && (
 					<Island priority="critical">
 						<AdPortals />
@@ -288,7 +295,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							hideCaption={isMedia}
 							shouldHideAds={article.shouldHideAds}
 							contentType={article.contentType}
-							contentLayout="StandardLayout"
+							contentLayout={`${
+								ArticleDisplay[format.display]
+							}Layout`}
 						/>
 					</GridItem>
 					<GridItem
