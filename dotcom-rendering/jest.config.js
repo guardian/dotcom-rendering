@@ -2,6 +2,7 @@ const swcConfig = require('./webpack/.swcrc.json');
 
 const esModules = [
 	'@guardian/',
+	'@csstools',
 	'screenfull',
 	'node-fetch',
 	'data-uri-to-buffer',
@@ -14,7 +15,7 @@ module.exports = {
 	testEnvironment: 'jsdom',
 	moduleDirectories: ['node_modules', 'src'],
 	transform: {
-		'^.+\\.(js|ts|tsx)$': ['@swc/jest', swcConfig],
+		'^.+\\.(mjs|js|ts|tsx)$': ['@swc/jest', swcConfig],
 	},
 	testMatch: ['**/*.test.+(ts|tsx|js)'],
 	setupFilesAfterEnv: ['<rootDir>/scripts/jest/setup.ts'],
