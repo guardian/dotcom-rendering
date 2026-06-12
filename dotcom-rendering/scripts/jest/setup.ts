@@ -1,6 +1,8 @@
 // add some helpful assertions
 import '@testing-library/jest-dom';
+import { ReadableStream } from 'node:stream/web';
 import { TextDecoder, TextEncoder } from 'node:util';
+import { MessagePort } from 'node:worker_threads';
 import { isServer } from '../../src/lib/isServer';
 import type { Guardian } from '../../src/model/guardian';
 
@@ -108,6 +110,9 @@ if (!isServer) {
  */
 global.TextEncoder = TextEncoder as unknown as typeof global.TextEncoder;
 global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;
+global.ReadableStream =
+	ReadableStream as unknown as typeof global.ReadableStream;
+global.MessagePort = MessagePort as unknown as typeof global.MessagePort;
 
 // Mocks the version number used by CDK, we don't want our tests to fail every time we update our cdk dependency.
 jest.mock('@guardian/cdk/lib/constants/tracking-tag');

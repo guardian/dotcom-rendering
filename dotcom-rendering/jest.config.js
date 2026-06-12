@@ -3,12 +3,15 @@ const swcConfig = require('./webpack/.swcrc.json');
 const esModules = [
 	'@guardian/',
 	'@csstools',
+	'@exodus',
 	'screenfull',
 	'node-fetch',
 	'data-uri-to-buffer',
 	'fetch-blob',
 	'formdata-polyfill',
 	'storybook',
+	'parse5',
+	'entities',
 ].join('|');
 
 module.exports = {
