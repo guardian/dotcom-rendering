@@ -98,7 +98,7 @@ export const matchDayWorldCup: FootballMatches = [
 							score: 0,
 						},
 						awayTeam: {
-							name: 'Bosnia-Herzegovina',
+							name: 'Bosnia and Herzegovina',
 							id: '7531',
 							score: 0,
 						},
