@@ -143,9 +143,6 @@ export const ModalOverlay = ({
 		}
 
 		if (prefersReducedMotion()) {
-			// Use -1 as a sentinel to block re-entrant calls. 0 is a valid
-			// setTimeout ID and must not be used here.
-			closeTimeoutRef.current = -1;
 			onClose();
 			return;
 		}
