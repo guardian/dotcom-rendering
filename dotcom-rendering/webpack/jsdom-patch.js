@@ -36,6 +36,6 @@ module.exports = function (src) {
 
 	return src.replace(
 		regexToFindCodeToReplace,
-		`const defaultStyleSheet = ${JSON.stringify(defaultCSS)};`,
+		`const defaultStyleSheet = ${JSON.stringify(defaultCSS)}`,
 	);
 };
