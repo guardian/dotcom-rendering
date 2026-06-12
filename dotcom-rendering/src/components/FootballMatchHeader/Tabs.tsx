@@ -113,21 +113,27 @@ const Tab = (props: {
 			// Ensures that if there are only two tabs they take up exactly 50%
 			flex: '1 1 50%',
 			borderLeftStyle: 'solid',
+			borderLeftColor: 'var(--border-left-colour)',
 			'&:not(:first-of-type)': {
 				paddingLeft: space[2],
 				borderLeftWidth: 1,
 			},
 			[from.leftCol]: {
-				paddingLeft: space[2],
-				borderLeftWidth: 1,
 				flex: '0 0 auto',
-				'&:first-of-type': {
-					marginLeft: `-10px`,
+				position: 'relative',
+				'&:first-of-type::before': {
+					content: '""',
+					top: 0,
+					left: -11,
+					width: 1,
+					backgroundColor: 'var(--border-left-colour)',
+					position: 'absolute',
+					height: '100%',
 				},
 			},
 		}}
 		style={{
-			borderLeftColor: palette(border(props.matchKind)),
+			'--border-left-colour': palette(border(props.matchKind)),
 		}}
 	>
 		<TabText href={props.href} matchKind={props.matchKind}>
