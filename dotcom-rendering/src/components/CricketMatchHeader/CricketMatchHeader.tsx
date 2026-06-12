@@ -19,7 +19,6 @@ import type {
 	CricketMatch,
 	CricketResult,
 	CricketTeam,
-	InningsOverview,
 } from '../../cricketMatchV2';
 import { grid } from '../../grid';
 import {
@@ -271,13 +270,20 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 					innings.map((inning, index) => (
 						<Fragment key={index}>
 							<Score
-								runs={inning.runs}
-								fallOfWickets={inning.fallOfWickets}
+								runs={inning.inningsTotals.runs}
+								fallOfWickets={inning.inningsTotals.wickets}
 								matchKind={props.match.kind}
 							/>
-							{!!inning.overs && (
+							{!!inning.inningsTotals.overs && (
 								<>
-									<EndOfInningReason inning={inning} />
+									<EndOfInningReason
+										inning={{
+											wickets:
+												inning.inningsTotals.wickets,
+											declared: inning.declared,
+											forfeited: inning.forfeited,
+										}}
+									/>
 									<span
 										css={{
 											...textSans12Object,
@@ -291,7 +297,7 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 											),
 										}}
 									>
-										{inning.overs} overs
+										{inning.inningsTotals.overs} overs
 									</span>
 								</>
 							)}
@@ -313,13 +319,19 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 	);
 };
 
-const EndOfInningReason = (props: { inning: InningsOverview }) => {
+const EndOfInningReason = (props: {
+	inning: {
+		wickets: number;
+		declared: boolean;
+		forfeited: boolean;
+	};
+}) => {
 	const styles = {
 		...textSans14Object,
 		marginRight: space[1],
 	};
 
-	if (props.inning.fallOfWickets === 10) {
+	if (props.inning.wickets === 10) {
 		return <span css={styles}>All out</span>;
 	}
 	if (props.inning.declared) {
