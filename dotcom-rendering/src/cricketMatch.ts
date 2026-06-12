@@ -138,7 +138,7 @@ export const parse = (
 		awayTeam,
 		officials: feCricketMatch.officials,
 		innings,
-		competitionName: feCricketMatch.competitionName,
+		competitionName: feCricketMatch.stage,
 		venueName: feCricketMatch.venueName,
 		result: feCricketMatch.result,
 	});
