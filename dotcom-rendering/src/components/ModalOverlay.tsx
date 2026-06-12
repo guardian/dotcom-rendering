@@ -160,16 +160,13 @@ export const ModalOverlay = ({
 		if (prefersReducedMotion()) {
 			return;
 		}
-		let innerAnimationFrameId: number = 0;
-		const outerAnimationFrameId = window.requestAnimationFrame(() => {
-			innerAnimationFrameId = window.requestAnimationFrame(() => {
-				setIsVisible(true);
-			});
+
+		const animationFrameId = window.requestAnimationFrame(() => {
+			setIsVisible(true);
 		});
 
 		return () => {
-			window.cancelAnimationFrame(outerAnimationFrameId);
-			window.cancelAnimationFrame(innerAnimationFrameId);
+			window.cancelAnimationFrame(animationFrameId);
 		};
 	}, []);
 
@@ -204,7 +201,9 @@ export const ModalOverlay = ({
 				? document.activeElement
 				: null;
 
-		dialogElement.focus();
+		// preventScroll stops iOS Safari from jerking the viewport to bring
+		// the off-screen element into view before the slide-up animation runs.
+		dialogElement.focus({ preventScroll: true });
 
 		return () => {
 			if (
@@ -283,6 +282,7 @@ export const ModalOverlay = ({
 
 		const handleOverlayPointerDown = (event: PointerEvent) => {
 			if (event.target === overlayElement) {
+				event.preventDefault();
 				requestClose();
 			}
 		};
