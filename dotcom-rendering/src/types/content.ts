@@ -532,6 +532,28 @@ export interface ProductSummaryElement {
 	variant: 'carousel' | 'stacked-default' | 'stacked-expanded';
 }
 
+export interface RecipeFeaturedImage {
+	url: string;
+	mediaId: string;
+	cropId: string;
+	source?: string;
+	photographer?: string;
+	imageType?: string;
+	caption?: string;
+	width?: number;
+	height?: number;
+	mediaApiUri?: string;
+}
+
+export interface RecipeBlockElement {
+	_type: 'model.dotcomrendering.pageElements.RecipeBlockElement';
+	elementId?: string;
+	id: string;
+	title?: string;
+	description?: string;
+	featuredImage?: RecipeFeaturedImage;
+}
+
 interface ProfileAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ProfileAtomBlockElement';
 	elementId: string;
@@ -902,7 +924,8 @@ export type FEElement =
 	| WitnessTypeBlockElement
 	| CrosswordElement
 	| ProductBlockElement
-	| ProductSummaryElement;
+	| ProductSummaryElement
+	| RecipeBlockElement;
 
 // -------------------------------------
 // Misc
