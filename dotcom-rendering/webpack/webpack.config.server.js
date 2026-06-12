@@ -88,6 +88,10 @@ module.exports = {
 				test: /jsdom.*computed-style\.js$/,
 				use: [path.resolve(__dirname, './jsdom-patch.js')],
 			},
+			{
+				test: /\.json$/,
+				type: 'json',
+			},
 		],
 	},
 };
