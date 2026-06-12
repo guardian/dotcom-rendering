@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const swcConfig = require('./.swcrc.json');
@@ -139,6 +140,10 @@ module.exports = ({ build }) => ({
 				use: ['to-string-loader', 'css-loader'],
 			},
 			svgr,
+			{
+				test: /jsdom.*computed-style\.js$/,
+				use: [path.resolve(__dirname, './jsdom-patch.js')],
+			},
 		],
 	},
 	resolve: {
