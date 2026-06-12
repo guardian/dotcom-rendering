@@ -246,21 +246,27 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 				flex: '1 1 50%',
 				wordBreak: 'break-word',
 				borderLeftStyle: 'solid',
+				borderLeftColor: 'var(--border-left-colour)',
 				'&:last-of-type': {
 					paddingLeft: space[2],
 					borderLeftWidth: 1,
 				},
 				[from.leftCol]: {
-					paddingLeft: space[2],
-					borderLeftWidth: 1,
 					paddingTop: space[3],
-					'&:first-of-type': {
-						marginLeft: `-10px`,
+					position: 'relative',
+					'&:first-of-type::before': {
+						content: '""',
+						top: 0,
+						left: -10,
+						width: 1,
+						backgroundColor: 'var(--border-left-colour)',
+						position: 'absolute',
+						height: '100%',
 					},
 				},
 			}}
 			style={{
-				borderLeftColor: palette(border(props.match.kind)),
+				'--border-left-colour': palette(border(props.match.kind)),
 			}}
 		>
 			<TeamName name={props.team.name} />
