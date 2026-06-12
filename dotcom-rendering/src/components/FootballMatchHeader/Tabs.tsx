@@ -124,7 +124,7 @@ const Tab = (props: {
 				'&:first-of-type::before': {
 					content: '""',
 					top: 0,
-					left: -11,
+					left: -10,
 					width: 1,
 					backgroundColor: 'var(--border-left-colour)',
 					position: 'absolute',
