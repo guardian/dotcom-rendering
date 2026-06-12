@@ -57,6 +57,9 @@ const indices = [
 	// Edition selector in nav - needs to be below stickyAdWrapper
 	'editionDropdown',
 
+	// Interscroller ads need their own stacking context to force the background image below the ad to stop it capturing mouse events
+	'interscrollerAd',
+
 	// The content displayed by the Details component
 	'summaryDetails',
 
