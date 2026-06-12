@@ -1,4 +1,5 @@
 // @ts-check
+const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const swcConfig = require('./.swcrc.json');
 const { svgr } = require('./svg.cjs');
@@ -82,6 +83,10 @@ module.exports = {
 				use: swcLoader,
 			},
 			svgr,
+			{
+				test: /jsdom\/.+\/style-rules\.js$/, // make sure we're only patching the jsdom style rules file
+				use: [path.resolve(__dirname, './jsdom-patch.js')],
+			},
 		],
 	},
 };
