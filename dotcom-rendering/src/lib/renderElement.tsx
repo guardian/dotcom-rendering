@@ -327,10 +327,17 @@ export const renderElement = ({
 				if (format.design === ArticleDesign.HostedArticle) {
 					return (
 						<HostedEmbedBlockComponent
+							key={index}
 							html={element.html}
 							alt={element.alt ?? ''}
-							height={element.height}
+							index={index}
+							role={element.role}
+							isTracking={element.isThirdPartyTracking}
+							isMainMedia={isMainMedia}
+							source={element.source}
+							sourceDomain={element.sourceDomain}
 							width={element.width}
+							height={element.height}
 						/>
 					);
 				}
