@@ -3,11 +3,11 @@ import { useArgs } from 'storybook/preview-api';
 import { expect, userEvent, waitFor } from 'storybook/test';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
-import { CricketScorecardPageNew as CricketScorecardPageNewComponent } from './CricketScorecardPageNew';
+import { CricketTabsDemo } from './CricketTabsDemo';
 
 const meta = preview.meta({
-	component: CricketScorecardPageNewComponent,
-	title: 'Components/CricketScorecardPageNew',
+	component: CricketTabsDemo,
+	title: 'Components/CricketTabsDemo',
 	parameters: {
 		chromatic: {
 			modes: {
@@ -72,7 +72,7 @@ const baseArgs = {
 		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 	),
 	edition: 'UK',
-} satisfies ComponentProps<typeof CricketScorecardPageNewComponent>;
+} satisfies ComponentProps<typeof CricketTabsDemo>;
 
 const liveArgs = {
 	...baseArgs,
@@ -387,7 +387,7 @@ const liveArgs = {
 			},
 		],
 	},
-} satisfies ComponentProps<typeof CricketScorecardPageNewComponent>;
+} satisfies ComponentProps<typeof CricketTabsDemo>;
 
 export const CricketScorecardPageNewFixture = meta.story({
 	name: 'Live',
@@ -404,7 +404,7 @@ export const ClickScorecardTab = meta.story({
 	args: { ...liveArgs, selectedTab: 'live' },
 	play: async ({ canvas }) => {
 		// Click the Scorecard tab button
-		const scorecardTab = canvas.getByRole('tab', { name: 'Scorecard' });
+		const scorecardTab = canvas.getByRole('button', { name: 'Scorecard' });
 		await userEvent.click(scorecardTab);
 
 		// Check that the scorecard renders in the main content element
@@ -455,7 +455,7 @@ export const UpdateScorecardTab = meta.story({
 				<button data-testid="simulate-update" onClick={simulateUpdate}>
 					Simulate update
 				</button>
-				<CricketScorecardPageNewComponent {...args} />
+				<CricketTabsDemo {...args} />
 			</>
 		);
 	},

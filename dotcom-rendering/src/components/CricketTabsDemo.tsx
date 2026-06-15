@@ -8,7 +8,7 @@ import type { TabName } from './FootballMatchHeader/Tabs';
  * This component is just used to test the CricketMatchHeader tab rendering in Storybook.
  * It is not used in production.
  */
-export const CricketScorecardPageNew = ({
+export const CricketTabsDemo = ({
 	match,
 	edition,
 	selectedTab,
