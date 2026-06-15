@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { updateIframeHeight } from '../client/updateIframeHeight';
+import { parseHtml } from '../lib/domUtils';
 import type { RoleType } from '../types/content';
 import { ClickToView } from './ClickToView';
 
@@ -13,11 +14,22 @@ type Props = {
 	source?: string;
 	sourceDomain?: string;
 	isPinnedPost?: boolean;
+	height?: number;
+	width?: number;
 };
 
 const fullWidthStyles = css`
 	width: 100%;
 `;
+
+const getIframeDimension = (
+	iframe: HTMLIFrameElement | null,
+	attr: 'height' | 'width',
+): number | undefined => {
+	const attrValue = iframe?.getAttribute(attr);
+	const styleValue = iframe?.style[attr];
+	return parseInt(attrValue ?? styleValue ?? '', 10) || undefined;
+};
 
 export const UnsafeEmbedBlockComponent = ({
 	html,
@@ -29,9 +41,25 @@ export const UnsafeEmbedBlockComponent = ({
 	source,
 	sourceDomain,
 	isPinnedPost,
+	height: heightProp,
+	width: widthProp,
 }: Props) => {
 	// This allows for when a block is duplicated on a live blog inside a pinned post
 	const uniqueIndex = isPinnedPost ? `${index}-pinned` : index;
+
+	const srcDoc = `
+	${html}
+    <script src="https://interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js"></script>
+    <gu-script>iframeMessenger.enableAutoResize();</gu-script>
+	`;
+
+	const iframe = parseHtml(html).querySelector<HTMLIFrameElement>('iframe');
+
+	const height = heightProp ?? getIframeDimension(iframe, 'height');
+	const width = widthProp ?? getIframeDimension(iframe, 'width');
+
+	if (height === undefined) return null;
+
 	return (
 		<ClickToView
 			role={role}
@@ -40,7 +68,9 @@ export const UnsafeEmbedBlockComponent = ({
 			source={source}
 			sourceDomain={sourceDomain}
 			onAccept={() =>
-				updateIframeHeight(`iframe[name="unsafe-embed-${uniqueIndex}"]`)
+				void updateIframeHeight(
+					`iframe[name="unsafe-embed-${uniqueIndex}"]`,
+				)
 			}
 		>
 			<iframe
@@ -52,9 +82,9 @@ export const UnsafeEmbedBlockComponent = ({
 				// construct a unique ID
 				name={`unsafe-embed-${uniqueIndex}`}
 				data-testid="embed-block"
-				srcDoc={`${html}
-            <script src="https://interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js"></script>
-            <gu-script>iframeMessenger.enableAutoResize();</gu-script>`}
+				srcDoc={srcDoc}
+				width={width}
+				height={height}
 			/>
 		</ClickToView>
 	);

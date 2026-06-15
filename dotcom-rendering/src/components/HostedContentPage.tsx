@@ -3,6 +3,7 @@ import { StrictMode } from 'react';
 import { HostedArticleLayout } from '../layouts/HostedArticleLayout';
 import { HostedGalleryLayout } from '../layouts/HostedGalleryLayout';
 import { HostedVideoLayout } from '../layouts/HostedVideoLayout';
+import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import type { Article } from '../types/article';
@@ -14,7 +15,9 @@ import { FocusStyles } from './FocusStyles.island';
 import { Island } from './Island';
 import { Lightbox } from './Lightbox';
 import { Metrics } from './Metrics.island';
+import { SendTargetingParams } from './SendTargetingParams.island';
 import { SetABTests } from './SetABTests.island';
+import { SetAdTargeting } from './SetAdTargeting.island';
 import { SkipTo } from './SkipTo';
 
 interface BaseProps {
@@ -37,6 +40,15 @@ export const HostedContentPage = (props: WebProps | AppProps) => {
 		article: { design, display, theme, frontendData },
 		renderingTarget,
 	} = props;
+
+	const adTargeting = buildAdTargeting({
+		isAdFreeUser: frontendData.isAdFreeUser,
+		isSensitive: frontendData.config.isSensitive,
+		edition: frontendData.config.edition,
+		section: frontendData.config.section,
+		sharedAdTargeting: frontendData.config.sharedAdTargeting,
+		adUnit: frontendData.config.adUnit,
+	});
 
 	const isWeb = renderingTarget === 'Web';
 	const { darkModeAvailable } = useConfig();
@@ -121,6 +133,21 @@ export const HostedContentPage = (props: WebProps | AppProps) => {
 						/>
 					</Island>
 				</>
+			)}
+			{renderingTarget === 'Web' ? (
+				<Island priority="critical">
+					<SetAdTargeting adTargeting={adTargeting} />
+				</Island>
+			) : (
+				<Island priority="critical">
+					<SendTargetingParams
+						editionCommercialProperties={
+							frontendData.commercialProperties[
+								frontendData.editionId
+							]
+						}
+					/>
+				</Island>
 			)}
 			{renderingTarget === 'Web' && darkModeAvailable && (
 				<DarkModeMessage>
