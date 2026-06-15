@@ -99,7 +99,7 @@ const ABTests: ABTest[] = [
 		description:
 			"This test will be the 5% holdback group for the prebid price floor",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-06-17",
+		expirationDate: "2026-07-16",
 		type: "client",
 		status: "ON",
 		audienceSize: 5 / 100,
