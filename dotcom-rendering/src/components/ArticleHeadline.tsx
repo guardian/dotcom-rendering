@@ -888,7 +888,8 @@ export const ArticleHeadline = ({
 							</h1>
 						</div>
 					);
-				case ArticleDesign.Gallery: {
+				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery: {
 					return (
 						<div css={galleryStyles}>
 							<WithAgeWarning
