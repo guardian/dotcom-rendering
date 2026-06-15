@@ -8,7 +8,7 @@ export function enoughSpace(allTests: ABTest[]) {
 			acc[space] += test.audienceSize;
 			return acc;
 		},
-		{ A: 0, B: 0, C: 0 },
+		{ A: 0, B: 0, C: 0, D: 0 },
 	);
 
 	Object.entries(spaceTotalSize).forEach(([space, size]) => {
