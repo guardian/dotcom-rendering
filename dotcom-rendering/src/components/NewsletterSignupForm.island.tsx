@@ -32,7 +32,6 @@ type Props = {
 	newsletterId: string;
 	newsletterName: string;
 	frequency: string;
-	hidePrivacyMessage?: boolean;
 	previewAction?: NewsletterPreviewAction;
 	/** When `true`, the success message is shown immediately (user is already subscribed). */
 	isAlreadySubscribed?: boolean;
@@ -276,7 +275,6 @@ const NewsletterSignupFormActive = ({
 	newsletterId,
 	newsletterName,
 	frequency,
-	hidePrivacyMessage = false,
 	previewAction,
 	abTest,
 	isModal = false,
@@ -373,13 +371,9 @@ const NewsletterSignupFormActive = ({
 								</div>
 							</div>
 						)}
-						{!hidePrivacyMessage && (
-							<div css={privacyContainerStyles}>
-								<NewsletterPrivacyMessage
-									isSignedIn={isSignedIn}
-								/>
-							</div>
-						)}
+						<div css={privacyContainerStyles}>
+							<NewsletterPrivacyMessage isSignedIn={isSignedIn} />
+						</div>
 					</>
 				)}
 				<div css={submitButtonContainerStyles}>
