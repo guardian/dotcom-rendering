@@ -75,18 +75,6 @@ export const DefaultStory = meta.story({
 	},
 });
 
-export const DefaultStoryWithPrivacy = meta.story({
-	args: { ...defaultArgs },
-	beforeEach() {
-		mockAB('control');
-		mocked(useNewsletterSubscription).mockReturnValue(false);
-		mocked(useIsSignedIn).mockReturnValue(false);
-		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
-			Promise.resolve(null),
-		);
-	},
-});
-
 export const SignedInNotSubscribed = meta.story({
 	args: { ...defaultArgs },
 	beforeEach() {
