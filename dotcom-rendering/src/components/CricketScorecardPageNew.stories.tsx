@@ -7,7 +7,7 @@ import { CricketScorecardPageNew as CricketScorecardPageNewComponent } from './C
 
 const meta = preview.meta({
 	component: CricketScorecardPageNewComponent,
-	title: 'Components/CricketScorecardPage',
+	title: 'Components/CricketScorecardPageNew',
 	parameters: {
 		chromatic: {
 			modes: {

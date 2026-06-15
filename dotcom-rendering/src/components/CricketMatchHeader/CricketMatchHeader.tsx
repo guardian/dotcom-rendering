@@ -29,6 +29,7 @@ import { generateImageURL } from '../../lib/image';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import { BigNumber } from '../BigNumber';
+import { CricketScorecardTabRemoteRender } from '../CricketScorecardTabRemoteRender';
 import {
 	background,
 	border,
@@ -36,7 +37,6 @@ import {
 	secondaryText,
 } from '../FootballMatchHeader/colours';
 import { Tabs } from '../FootballMatchHeader/Tabs';
-import { CricketScorecardTabRemoteRender } from './CricketScorecardTabRemoteRender';
 
 type Props = {
 	edition: EditionId;
@@ -51,12 +51,8 @@ type Props = {
 export const CricketMatchHeader = (props: Props) => {
 	const match = props.match;
 
-	const scorecardHash = props.infoURL?.hash;
-	const initialSelectedTab =
-		scorecardHash === '#scorecard' ? 'info' : props.selectedTab;
-
 	const [selectedTab, setSelectedTab] = useState<'info' | 'live' | 'report'>(
-		initialSelectedTab,
+		props.selectedTab,
 	);
 
 	const onTabClick = (tab: 'info' | 'live' | 'report') => {

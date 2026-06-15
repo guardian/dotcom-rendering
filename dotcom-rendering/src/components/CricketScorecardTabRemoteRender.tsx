@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import type { Root } from 'react-dom/client';
 import { createRoot } from 'react-dom/client';
-import type { CricketScorecardTabProps } from '../CricketScorecardTab';
-import { CricketScorecardTab } from '../CricketScorecardTab';
+import type { CricketScorecardTabProps } from './CricketScorecardTab';
+import { CricketScorecardTab } from './CricketScorecardTab';
 
 type Props = {
 	tabContentElement?: HTMLElement;

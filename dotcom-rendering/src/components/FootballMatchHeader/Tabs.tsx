@@ -211,7 +211,6 @@ const TabButton = (props: {
 				padding: 0,
 				margin: 0,
 			}}
-			role="tab"
 			aria-current={props.selected}
 		>
 			{props.children}
