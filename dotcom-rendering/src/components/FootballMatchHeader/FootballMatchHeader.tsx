@@ -13,7 +13,7 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import { type ComponentProps, useMemo } from 'react';
+import { useMemo } from 'react';
 import type { SWRConfiguration } from 'swr';
 import useSWR from 'swr';
 import type { FootballMatch } from '../../footballMatchV2';
@@ -41,10 +41,11 @@ import { FootballMatchHeaderFallback } from './FootballMatchHeaderFallback';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
 import { Hr } from './Hr';
 import { Notifications } from './Notifications';
+import type { TabName } from './Tabs';
 import { Tabs } from './Tabs';
 
 export type FootballMatchHeaderProps = {
-	initialTab: ComponentProps<typeof Tabs>['selected'];
+	initialTab: TabName;
 	initialData?: HeaderData;
 	leagueName: string;
 	leagueURL?: string;
@@ -146,7 +147,14 @@ export const FootballMatchHeader = (props: Props) => {
 					liveActivitiesClient={props.liveActivitiesClient}
 				/>
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
-				<Tabs {...tabs} />
+				<Tabs
+					sportKind="football"
+					matchKind={match.kind}
+					selected={props.initialTab}
+					reportURL={tabs.reportURL}
+					liveURL={tabs.liveURL}
+					infoURL={tabs.infoURL}
+				/>
 			</div>
 		</section>
 	);
@@ -164,7 +172,7 @@ const swrOptions = (refreshInterval: number): SWRConfiguration<HeaderData> => ({
 
 const fetcher =
 	(
-		selected: Props['initialTab'],
+		selected: TabName,
 		renderingTarget: RenderingTarget,
 		getHeaderData: Props['getHeaderData'],
 	) =>
