@@ -17,10 +17,8 @@ type Props = {
  *
  * Secondly, we use ReactDOM's `createRoot` and `render` here instead of
  * rendering as part of the main React tree to avoid wrapping a large portion
- * of the StandardLayout and LiveLayout in an island, which would cause practically
- * the entire page to be hydrated and lose the benefits of islands, as well as causing
- * complications with passing the entire live blog or article content as props to
- * said island.
+ * of the StandardLayout and LiveLayout in an island, which would be very large and
+ * require passing the entire live blog or article content as props to said island.
  *
  */
 export const CricketScorecardTabRemoteRender = ({
@@ -50,8 +48,6 @@ export const CricketScorecardTabRemoteRender = ({
 				result={result}
 			/>,
 		);
-
-		// We don't bother cleaning up the root,react can't efficiently update the content when props change if we call `unmount` first, there's no need anyway as this component will never be unmounted or reused, the page will be navigated away from instead.
 	}, [tabContentElement, innings, officials, homeTeam, awayTeam, result]);
 
 	return null;

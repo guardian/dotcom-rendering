@@ -447,242 +447,62 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</HeadlineGrid>
 					</Section>
 				)}
-
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					backgroundColour={themePalette('--standfirst-background')}
-					borderColour={themePalette('--standfirst-border')}
-				>
-					<StandFirstGrid>
-						<GridItem area="standfirst">
-							<Standfirst
-								format={format}
-								standfirst={article.standfirst}
-							/>
-						</GridItem>
-						<GridItem area="lastupdated">
-							<Hide until="desktop">
-								{article.blocks[0]?.blockLastUpdated !==
-									undefined && (
-									<ArticleLastUpdated
-										format={format}
-										lastUpdated={
-											article.blocks[0].blockLastUpdated
-										}
-									/>
-								)}
-							</Hide>
-						</GridItem>
-
-						<GridItem area="lines">
-							<Hide from="desktop">
-								<div
-									css={[
-										sidePaddingDesktop,
-										isApps && stretchLines,
-									]}
-								>
-									<DecideLines
-										format={format}
-										color={
-											format.design ===
-											ArticleDesign.LiveBlog
-												? 'rgba(255, 255, 255, 0.4)'
-												: undefined
-										}
-									/>
-								</div>
-							</Hide>
-						</GridItem>
-						<GridItem area="meta">
-							<Hide from="desktop">
-								{isApps && (
-									<ArticleMetaApps
-										format={format}
-										byline={article.byline}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										isCommentable={showComments}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-										pageId={article.pageId}
-										headline={article.headline}
-									></ArticleMetaApps>
-								)}
-								{isWeb && (
-									<div css={sidePaddingDesktop}>
-										<ArticleMeta
-											branding={branding}
-											format={format}
-											pageId={article.pageId}
-											webTitle={article.webTitle}
-											byline={article.byline}
-											tags={article.tags}
-											primaryDateline={
-												article.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												article.webPublicationSecondaryDateDisplay
-											}
-											isCommentable={showComments}
-											discussionApiUrl={
-												article.config.discussionApiUrl
-											}
-											shortUrlId={
-												article.config.shortUrlId
-											}
-										/>
-									</div>
-								)}
-							</Hide>
-						</GridItem>
-					</StandFirstGrid>
-				</Section>
-				{hasKeyEvents ? (
+				<div id="tab-content">
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
 						backgroundColour={themePalette(
-							'--key-event-background-desktop',
+							'--standfirst-background',
 						)}
-						borderColour={themePalette('--article-border')}
+						borderColour={themePalette('--standfirst-border')}
 					>
-						<Hide until={'desktop'}>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<KeyEventsCarousel
-									keyEvents={article.keyEvents}
-									id={'key-events-carousel-desktop'}
-									serverTime={serverTime}
-									renderingTarget={renderingTarget}
+						<StandFirstGrid>
+							<GridItem area="standfirst">
+								<Standfirst
+									format={format}
+									standfirst={article.standfirst}
 								/>
-							</Island>
-						</Hide>
-					</Section>
-				) : null}
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					borderColour={themePalette('--article-border')}
-					backgroundColour={themePalette('--article-background')}
-				>
-					<Hide until="desktop">
-						<div
-							css={css`
-								height: ${space[4]}px;
-							`}
-						/>
-					</Hide>
-				</Section>
-
-				{/* This div is used to contain the Toast */}
-				<div>
-					{format.design === ArticleDesign.LiveBlog && (
-						<>
-							{/* The Toast component is inserted into this div using a Portal */}
-							<div
-								id="toast-root"
-								css={css`
-									position: sticky;
-									top: 0;
-									z-index: ${getZIndex('toast')};
-									display: flex;
-									justify-content: center;
-								`}
-							/>
-							<Island
-								priority="feature"
-								defer={{ until: 'idle' }}
-							>
-								<Liveness
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									enhanceTweetsSwitch={
-										!!article.config.switches.enhanceTweets
-									}
-									onFirstPage={pagination.currentPage === 1}
-									webURL={article.webURL}
-									renderingTarget={renderingTarget}
-									// We default to string here because the property is optional but we
-									// know it will exist for all blogs
-									mostRecentBlockId={
-										article.mostRecentBlockId ?? ''
-									}
-									hasPinnedPost={!!article.pinnedPost}
-								/>
-							</Island>
-						</>
-					)}
-
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						backgroundColour={themePalette('--article-background')}
-						borderColour={themePalette('--article-border')}
-						padSides={false}
-					>
-						<LiveGrid>
-							<GridItem area="media">
-								<div css={maxWidth}>
-									{!!cricketMatchUrl && (
-										<Island
-											priority="critical"
-											defer={{ until: 'visible' }}
-										>
-											<GetCricketScoreboard
-												matchUrl={cricketMatchUrl}
-												format={format}
-											/>
-										</Island>
-									)}
-									<MainMedia
-										format={format}
-										elements={article.mainMediaElements}
-										host={host}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										ajaxUrl={article.config.ajaxUrl}
-										abTests={article.config.abTests}
-										switches={article.config.switches}
-										isSensitive={article.config.isSensitive}
-										isAdFreeUser={article.isAdFreeUser}
-										editionId={article.editionId}
-										shouldHideAds={article.shouldHideAds}
-										contentLayout="LiveblogLayout"
-									/>
-								</div>
 							</GridItem>
-							<GridItem area="info" element="aside">
-								{/* Lines */}
+							<GridItem area="lastupdated">
 								<Hide until="desktop">
-									<div css={[maxWidth, sidePaddingDesktop]}>
+									{article.blocks[0]?.blockLastUpdated !==
+										undefined && (
+										<ArticleLastUpdated
+											format={format}
+											lastUpdated={
+												article.blocks[0]
+													.blockLastUpdated
+											}
+										/>
+									)}
+								</Hide>
+							</GridItem>
+
+							<GridItem area="lines">
+								<Hide from="desktop">
+									<div
+										css={[
+											sidePaddingDesktop,
+											isApps && stretchLines,
+										]}
+									>
 										<DecideLines
 											format={format}
-											color={themePalette(
-												'--straight-lines',
-											)}
+											color={
+												format.design ===
+												ArticleDesign.LiveBlog
+													? 'rgba(255, 255, 255, 0.4)'
+													: undefined
+											}
 										/>
 									</div>
 								</Hide>
-								{/* Meta */}
-								<Hide until="desktop">
-									<div css={[maxWidth, sidePaddingDesktop]}>
-										<ArticleMeta
-											branding={branding}
+							</GridItem>
+							<GridItem area="meta">
+								<Hide from="desktop">
+									{isApps && (
+										<ArticleMetaApps
 											format={format}
-											pageId={article.pageId}
-											webTitle={article.webTitle}
 											byline={article.byline}
 											tags={article.tags}
 											primaryDateline={
@@ -698,362 +518,592 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-										/>
-									</div>
-								</Hide>
-
-								{isWeb && (
-									<Hide until="desktop">
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<LiveblogGutterAskWrapper
-												shouldHideReaderRevenueOnArticle={
-													article.shouldHideReaderRevenue
-												}
-												sectionId={article.sectionName}
-												tags={article.tags}
-												contributionsServiceUrl={
-													contributionsServiceUrl
-												}
-												pageUrl={article.webURL}
+											pageId={article.pageId}
+											headline={article.headline}
+										></ArticleMetaApps>
+									)}
+									{isWeb && (
+										<div css={sidePaddingDesktop}>
+											<ArticleMeta
+												branding={branding}
+												format={format}
 												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
+												}
+												isCommentable={showComments}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
+												}
 											/>
-										</Island>
-									</Hide>
-								)}
-
-								{/* Match stats */}
-								{!!footballMatchStatsUrl && (
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<FootballMiniMatchStatsWrapper
-											matchStatsUrl={
-												footballMatchStatsUrl
-											}
-										/>
-									</Island>
-								)}
+										</div>
+									)}
+								</Hide>
 							</GridItem>
-							<GridItem area="body">
-								<div
-									id="maincontent"
-									css={[
-										bodyWrapper,
-										!!footballMatchUrl &&
-											footballMatchBodyWrapper,
-									]}
+						</StandFirstGrid>
+					</Section>
+					{hasKeyEvents ? (
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={themePalette(
+								'--key-event-background-desktop',
+							)}
+							borderColour={themePalette('--article-border')}
+						>
+							<Hide until={'desktop'}>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
 								>
-									<ArticleContainer format={format}>
-										{pagination.currentPage !== 1 && (
-											<Pagination
-												currentPage={
-													pagination.currentPage
-												}
-												totalPages={
-													pagination.totalPages
-												}
-												newest={pagination.newest}
-												oldest={pagination.oldest}
-												newer={pagination.newer}
-												older={pagination.older}
-												renderingTarget={
-													renderingTarget
-												}
-											/>
+									<KeyEventsCarousel
+										keyEvents={article.keyEvents}
+										id={'key-events-carousel-desktop'}
+										serverTime={serverTime}
+										renderingTarget={renderingTarget}
+									/>
+								</Island>
+							</Hide>
+						</Section>
+					) : null}
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						borderColour={themePalette('--article-border')}
+						backgroundColour={themePalette('--article-background')}
+					>
+						<Hide until="desktop">
+							<div
+								css={css`
+									height: ${space[4]}px;
+								`}
+							/>
+						</Hide>
+					</Section>
+
+					{/* This div is used to contain the Toast */}
+					<div>
+						{format.design === ArticleDesign.LiveBlog && (
+							<>
+								{/* The Toast component is inserted into this div using a Portal */}
+								<div
+									id="toast-root"
+									css={css`
+										position: sticky;
+										top: 0;
+										z-index: ${getZIndex('toast')};
+										display: flex;
+										justify-content: center;
+									`}
+								/>
+								<Island
+									priority="feature"
+									defer={{ until: 'idle' }}
+								>
+									<Liveness
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										ajaxUrl={article.config.ajaxUrl}
+										enhanceTweetsSwitch={
+											!!article.config.switches
+												.enhanceTweets
+										}
+										onFirstPage={
+											pagination.currentPage === 1
+										}
+										webURL={article.webURL}
+										renderingTarget={renderingTarget}
+										// We default to string here because the property is optional but we
+										// know it will exist for all blogs
+										mostRecentBlockId={
+											article.mostRecentBlockId ?? ''
+										}
+										hasPinnedPost={!!article.pinnedPost}
+									/>
+								</Island>
+							</>
+						)}
+
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
+							borderColour={themePalette('--article-border')}
+							padSides={false}
+						>
+							<LiveGrid>
+								<GridItem area="media">
+									<div css={maxWidth}>
+										{!!cricketMatchUrl && (
+											<Island
+												priority="critical"
+												defer={{ until: 'visible' }}
+											>
+												<GetCricketScoreboard
+													matchUrl={cricketMatchUrl}
+													format={format}
+												/>
+											</Island>
 										)}
-										<ArticleBody
+										<MainMedia
 											format={format}
-											blocks={article.blocks}
-											pinnedPost={article.pinnedPost}
+											elements={article.mainMediaElements}
 											host={host}
 											pageId={article.pageId}
 											webTitle={article.webTitle}
 											ajaxUrl={article.config.ajaxUrl}
-											sectionId={article.config.section}
 											abTests={article.config.abTests}
 											switches={article.config.switches}
 											isSensitive={
 												article.config.isSensitive
 											}
 											isAdFreeUser={article.isAdFreeUser}
-											shouldHideReaderRevenue={
-												article.shouldHideReaderRevenue
-											}
-											tags={article.tags}
-											isPaidContent={
-												!!article.config.isPaidContent
-											}
-											contributionsServiceUrl={
-												contributionsServiceUrl
-											}
-											contentType={article.contentType}
-											isPreview={article.config.isPreview}
-											idUrl={article.config.idUrl ?? ''}
-											isDev={!!article.config.isDev}
-											onFirstPage={
-												pagination.currentPage === 1
-											}
-											keyEvents={article.keyEvents}
-											keywordIds={
-												article.config.keywordIds
-											}
-											lang={article.lang}
-											isRightToLeftLang={
-												article.isRightToLeftLang
-											}
 											editionId={article.editionId}
 											shouldHideAds={
 												article.shouldHideAds
 											}
-											serverTime={serverTime}
-											idApiUrl={article.config.idApiUrl}
+											contentLayout="LiveblogLayout"
 										/>
-										{pagination.totalPages > 1 && (
-											<Pagination
-												currentPage={
-													pagination.currentPage
+									</div>
+								</GridItem>
+								<GridItem area="info" element="aside">
+									{/* Lines */}
+									<Hide until="desktop">
+										<div
+											css={[maxWidth, sidePaddingDesktop]}
+										>
+											<DecideLines
+												format={format}
+												color={themePalette(
+													'--straight-lines',
+												)}
+											/>
+										</div>
+									</Hide>
+									{/* Meta */}
+									<Hide until="desktop">
+										<div
+											css={[maxWidth, sidePaddingDesktop]}
+										>
+											<ArticleMeta
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
 												}
-												totalPages={
-													pagination.totalPages
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
 												}
-												newest={pagination.newest}
-												oldest={pagination.oldest}
-												newer={pagination.newer}
-												older={pagination.older}
-												renderingTarget={
-													renderingTarget
+												isCommentable={showComments}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
 												}
 											/>
-										)}
-										<StraightLines
-											data-print-layout="hide"
-											count={4}
-											color={themePalette(
-												'--straight-lines',
-											)}
-											cssOverrides={css`
-												display: block;
-											`}
-										/>
-										<SubMeta
-											format={format}
-											subMetaKeywordLinks={
-												article.subMetaKeywordLinks
-											}
-											subMetaSectionLinks={
-												article.subMetaSectionLinks
-											}
-											pageId={article.pageId}
-											webUrl={article.webURL}
-											webTitle={article.webTitle}
-											showBottomSocialButtons={
-												article.showBottomSocialButtons &&
-												renderingTarget === 'Web'
-											}
-										/>
-									</ArticleContainer>
-								</div>
-							</GridItem>
-							<GridItem area="right-column">
-								<div
-									css={css`
-										height: 100%;
-										${from.desktop} {
-											/* above 980 */
-											margin-left: 20px;
-											margin-right: -20px;
-											display: none;
-										}
-										${from.leftCol} {
-											/* above 1140 */
-											margin-left: 0px;
-											margin-right: 0px;
-										}
-										${from.wide} {
-											display: block;
-											padding-bottom: 255px;
-										}
-									`}
-								>
-									<RightColumn showFrom="wide">
-										{isWeb && renderAds && (
-											<AdSlot
-												position="right"
-												display={format.display}
-												isPaidContent={isPaidContent}
-												shouldHideReaderRevenue={
-													!!article.config
-														.shouldHideReaderRevenue
-												}
-											/>
-										)}
+										</div>
+									</Hide>
 
-										{isApps && <RightAdsPlaceholder />}
-									</RightColumn>
-								</div>
-							</GridItem>
-						</LiveGrid>
-					</Section>
-
-					{isWeb && renderAds && (
-						<Section
-							fullWidth={true}
-							padSides={false}
-							showTopBorder={true}
-							showSideBorders={false}
-							backgroundColour={themePalette('--ad-background')}
-							shouldCenter={false}
-							element="aside"
-						>
-							<AdSlot
-								data-print-layout="hide"
-								position="merchandising-high"
-								display={format.display}
-							/>
-						</Section>
-					)}
-
-					{article.storyPackage && (
-						<Section
-							fullWidth={true}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
-							borderColour={themePalette('--article-border')}
-						>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<Carousel
-									heading={article.storyPackage.heading}
-									trails={decideStoryPackageTrails(
-										article.storyPackage.trails,
-										article.webURL,
+									{isWeb && (
+										<Hide until="desktop">
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<LiveblogGutterAskWrapper
+													shouldHideReaderRevenueOnArticle={
+														article.shouldHideReaderRevenue
+													}
+													sectionId={
+														article.sectionName
+													}
+													tags={article.tags}
+													contributionsServiceUrl={
+														contributionsServiceUrl
+													}
+													pageUrl={article.webURL}
+													pageId={article.pageId}
+												/>
+											</Island>
+										</Hide>
 									)}
-									onwardsSource="more-on-this-story"
-									format={format}
-									leftColSize={'wide'}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									serverTime={serverTime}
-									renderingTarget={renderingTarget}
+
+									{/* Match stats */}
+									{!!footballMatchStatsUrl && (
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<FootballMiniMatchStatsWrapper
+												matchStatsUrl={
+													footballMatchStatsUrl
+												}
+											/>
+										</Island>
+									)}
+								</GridItem>
+								<GridItem area="body">
+									<div
+										id="maincontent"
+										css={[
+											bodyWrapper,
+											!!footballMatchUrl &&
+												footballMatchBodyWrapper,
+										]}
+									>
+										<ArticleContainer format={format}>
+											{pagination.currentPage !== 1 && (
+												<Pagination
+													currentPage={
+														pagination.currentPage
+													}
+													totalPages={
+														pagination.totalPages
+													}
+													newest={pagination.newest}
+													oldest={pagination.oldest}
+													newer={pagination.newer}
+													older={pagination.older}
+													renderingTarget={
+														renderingTarget
+													}
+												/>
+											)}
+											<ArticleBody
+												format={format}
+												blocks={article.blocks}
+												pinnedPost={article.pinnedPost}
+												host={host}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												ajaxUrl={article.config.ajaxUrl}
+												sectionId={
+													article.config.section
+												}
+												abTests={article.config.abTests}
+												switches={
+													article.config.switches
+												}
+												isSensitive={
+													article.config.isSensitive
+												}
+												isAdFreeUser={
+													article.isAdFreeUser
+												}
+												shouldHideReaderRevenue={
+													article.shouldHideReaderRevenue
+												}
+												tags={article.tags}
+												isPaidContent={
+													!!article.config
+														.isPaidContent
+												}
+												contributionsServiceUrl={
+													contributionsServiceUrl
+												}
+												contentType={
+													article.contentType
+												}
+												isPreview={
+													article.config.isPreview
+												}
+												idUrl={
+													article.config.idUrl ?? ''
+												}
+												isDev={!!article.config.isDev}
+												onFirstPage={
+													pagination.currentPage === 1
+												}
+												keyEvents={article.keyEvents}
+												keywordIds={
+													article.config.keywordIds
+												}
+												lang={article.lang}
+												isRightToLeftLang={
+													article.isRightToLeftLang
+												}
+												editionId={article.editionId}
+												shouldHideAds={
+													article.shouldHideAds
+												}
+												serverTime={serverTime}
+												idApiUrl={
+													article.config.idApiUrl
+												}
+											/>
+											{pagination.totalPages > 1 && (
+												<Pagination
+													currentPage={
+														pagination.currentPage
+													}
+													totalPages={
+														pagination.totalPages
+													}
+													newest={pagination.newest}
+													oldest={pagination.oldest}
+													newer={pagination.newer}
+													older={pagination.older}
+													renderingTarget={
+														renderingTarget
+													}
+												/>
+											)}
+											<StraightLines
+												data-print-layout="hide"
+												count={4}
+												color={themePalette(
+													'--straight-lines',
+												)}
+												cssOverrides={css`
+													display: block;
+												`}
+											/>
+											<SubMeta
+												format={format}
+												subMetaKeywordLinks={
+													article.subMetaKeywordLinks
+												}
+												subMetaSectionLinks={
+													article.subMetaSectionLinks
+												}
+												pageId={article.pageId}
+												webUrl={article.webURL}
+												webTitle={article.webTitle}
+												showBottomSocialButtons={
+													article.showBottomSocialButtons &&
+													renderingTarget === 'Web'
+												}
+											/>
+										</ArticleContainer>
+									</div>
+								</GridItem>
+								<GridItem area="right-column">
+									<div
+										css={css`
+											height: 100%;
+											${from.desktop} {
+												/* above 980 */
+												margin-left: 20px;
+												margin-right: -20px;
+												display: none;
+											}
+											${from.leftCol} {
+												/* above 1140 */
+												margin-left: 0px;
+												margin-right: 0px;
+											}
+											${from.wide} {
+												display: block;
+												padding-bottom: 255px;
+											}
+										`}
+									>
+										<RightColumn showFrom="wide">
+											{isWeb && renderAds && (
+												<AdSlot
+													position="right"
+													display={format.display}
+													isPaidContent={
+														isPaidContent
+													}
+													shouldHideReaderRevenue={
+														!!article.config
+															.shouldHideReaderRevenue
+													}
+												/>
+											)}
+
+											{isApps && <RightAdsPlaceholder />}
+										</RightColumn>
+									</div>
+								</GridItem>
+							</LiveGrid>
+						</Section>
+
+						{isWeb && renderAds && (
+							<Section
+								fullWidth={true}
+								padSides={false}
+								showTopBorder={true}
+								showSideBorders={false}
+								backgroundColour={themePalette(
+									'--ad-background',
+								)}
+								shouldCenter={false}
+								element="aside"
+							>
+								<AdSlot
+									data-print-layout="hide"
+									position="merchandising-high"
+									display={format.display}
 								/>
-							</Island>
-						</Section>
-					)}
+							</Section>
+						)}
 
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<OnwardsUpper
-							ajaxUrl={article.config.ajaxUrl}
-							hasRelated={article.hasRelated}
-							hasStoryPackage={article.hasStoryPackage}
-							isAdFreeUser={article.isAdFreeUser}
-							pageId={article.pageId}
-							isPaidContent={!!article.config.isPaidContent}
-							showRelatedContent={
-								article.config.showRelatedContent
-							}
-							keywordIds={article.config.keywordIds}
-							contentType={article.contentType}
-							tags={article.tags}
-							format={format}
-							pillar={format.theme}
-							editionId={article.editionId}
-							shortUrlId={article.config.shortUrlId}
-							discussionApiUrl={article.config.discussionApiUrl}
-							serverTime={serverTime}
-							renderingTarget={renderingTarget}
-							webURL={article.webURL}
-						/>
-					</Island>
-
-					{showComments && (
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							sectionId="comments"
-							element="section"
-							backgroundColour={themePalette(
-								'--discussion-section-background',
-							)}
-							borderColour={themePalette('--article-border')}
-							fontColour={themePalette('--discussion-text')}
-						>
-							<DiscussionLayout
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								shortUrlId={article.config.shortUrlId}
-								format={format}
-								discussionD2Uid={article.config.discussionD2Uid}
-								discussionApiClientHeader={
-									article.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={
-									!!article.config.switches
-										.enableDiscussionSwitch
-								}
-								isAdFreeUser={article.isAdFreeUser}
-								shouldHideAds={article.shouldHideAds}
-								idApiUrl={article.config.idApiUrl}
-							/>
-						</Section>
-					)}
-
-					{!isPaidContent && (
-						<Section
-							title="Most viewed"
-							padContent={false}
-							verticalMargins={false}
-							element="aside"
-							data-link-name="most-popular"
-							data-component="most-popular"
-							leftColSize="wide"
-							backgroundColour={themePalette(
-								'--article-section-background',
-							)}
-							borderColour={themePalette('--article-border')}
-							fontColour={themePalette('--article-section-title')}
-						>
-							<MostViewedFooterLayout
-								renderAds={isWeb && renderAds}
-								isLiveblog={true}
+						{article.storyPackage && (
+							<Section
+								fullWidth={true}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
+								borderColour={themePalette('--article-border')}
 							>
 								<Island
 									priority="feature"
 									defer={{ until: 'visible' }}
 								>
-									<MostViewedFooterData
-										sectionId={article.config.section}
-										ajaxUrl={article.config.ajaxUrl}
-										edition={article.editionId}
+									<Carousel
+										heading={article.storyPackage.heading}
+										trails={decideStoryPackageTrails(
+											article.storyPackage.trails,
+											article.webURL,
+										)}
+										onwardsSource="more-on-this-story"
+										format={format}
+										leftColSize={'wide'}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										serverTime={serverTime}
+										renderingTarget={renderingTarget}
 									/>
 								</Island>
-							</MostViewedFooterLayout>
-						</Section>
-					)}
+							</Section>
+						)}
 
-					{isWeb && renderAds && (
-						<Section
-							fullWidth={true}
-							padSides={false}
-							showTopBorder={false}
-							showSideBorders={false}
-							backgroundColour={themePalette('--ad-background')}
-							element="aside"
-						>
-							<AdSlot
-								position="merchandising"
-								display={format.display}
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<OnwardsUpper
+								ajaxUrl={article.config.ajaxUrl}
+								hasRelated={article.hasRelated}
+								hasStoryPackage={article.hasStoryPackage}
+								isAdFreeUser={article.isAdFreeUser}
+								pageId={article.pageId}
+								isPaidContent={!!article.config.isPaidContent}
+								showRelatedContent={
+									article.config.showRelatedContent
+								}
+								keywordIds={article.config.keywordIds}
+								contentType={article.contentType}
+								tags={article.tags}
+								format={format}
+								pillar={format.theme}
+								editionId={article.editionId}
+								shortUrlId={article.config.shortUrlId}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
+								serverTime={serverTime}
+								renderingTarget={renderingTarget}
+								webURL={article.webURL}
 							/>
-						</Section>
-					)}
+						</Island>
+
+						{showComments && (
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								sectionId="comments"
+								element="section"
+								backgroundColour={themePalette(
+									'--discussion-section-background',
+								)}
+								borderColour={themePalette('--article-border')}
+								fontColour={themePalette('--discussion-text')}
+							>
+								<DiscussionLayout
+									discussionApiUrl={
+										article.config.discussionApiUrl
+									}
+									shortUrlId={article.config.shortUrlId}
+									format={format}
+									discussionD2Uid={
+										article.config.discussionD2Uid
+									}
+									discussionApiClientHeader={
+										article.config.discussionApiClientHeader
+									}
+									enableDiscussionSwitch={
+										!!article.config.switches
+											.enableDiscussionSwitch
+									}
+									isAdFreeUser={article.isAdFreeUser}
+									shouldHideAds={article.shouldHideAds}
+									idApiUrl={article.config.idApiUrl}
+								/>
+							</Section>
+						)}
+
+						{!isPaidContent && (
+							<Section
+								title="Most viewed"
+								padContent={false}
+								verticalMargins={false}
+								element="aside"
+								data-link-name="most-popular"
+								data-component="most-popular"
+								leftColSize="wide"
+								backgroundColour={themePalette(
+									'--article-section-background',
+								)}
+								borderColour={themePalette('--article-border')}
+								fontColour={themePalette(
+									'--article-section-title',
+								)}
+							>
+								<MostViewedFooterLayout
+									renderAds={isWeb && renderAds}
+									isLiveblog={true}
+								>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<MostViewedFooterData
+											sectionId={article.config.section}
+											ajaxUrl={article.config.ajaxUrl}
+											edition={article.editionId}
+										/>
+									</Island>
+								</MostViewedFooterLayout>
+							</Section>
+						)}
+
+						{isWeb && renderAds && (
+							<Section
+								fullWidth={true}
+								padSides={false}
+								showTopBorder={false}
+								showSideBorders={false}
+								backgroundColour={themePalette(
+									'--ad-background',
+								)}
+								element="aside"
+							>
+								<AdSlot
+									position="merchandising"
+									display={format.display}
+								/>
+							</Section>
+						)}
+					</div>
 				</div>
 			</main>
 
