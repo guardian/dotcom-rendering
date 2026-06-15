@@ -90,8 +90,9 @@ export const FixtureWeb = meta.story({
 				paId: 'matchId',
 			},
 			tabs: {
-				selected: 'info',
-				matchKind: 'Fixture',
+				infoURL: new URL(
+					'https://www.theguardian.com/football/match/2025/nov/26/arsenal-v-bayernmunich',
+				),
 			},
 		},
 		leagueName: 'Premier League',
