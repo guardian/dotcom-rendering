@@ -70,7 +70,6 @@ const signedOutLayoutStyles = css`
 const signedInLayoutStyles = css`
 	grid-template-columns: minmax(0, 1fr);
 	grid-template-areas: 'submit';
-	padding-bottom: ${space[2]}px;
 `;
 
 const emailFieldStyles = css`
@@ -116,6 +115,20 @@ const getToggleContainerStyles = (isFullWidth: boolean) => css`
 const privacyContainerStyles = css`
 	grid-column: 1 / -1;
 `;
+
+const signedInPrivacyContainerStyles = css`
+	margin-top: ${space[3]}px;
+	padding-top: ${space[2]}px;
+	border-top: 1px solid ${palette('--card-border-supporting')};
+`;
+
+const getPrivacyContainerStyles = (
+	isSignedIn: boolean | 'Pending',
+	isModal: boolean,
+) => [
+	privacyContainerStyles,
+	isSignedIn === true && !isModal && signedInPrivacyContainerStyles,
+];
 
 const successTextStyles = css`
 	color: ${palette('--newsletter-card-description')};
@@ -371,7 +384,9 @@ const NewsletterSignupFormActive = ({
 								</div>
 							</div>
 						)}
-						<div css={privacyContainerStyles}>
+						<div
+							css={getPrivacyContainerStyles(isSignedIn, isModal)}
+						>
 							<NewsletterPrivacyMessage isSignedIn={isSignedIn} />
 						</div>
 					</>
