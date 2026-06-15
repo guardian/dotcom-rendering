@@ -207,16 +207,10 @@ const TabButton = (props: {
 		<button
 			type="button"
 			onClick={props.onClick}
-			css={tabTextCss}
+			css={[tabTextCss, resetButtonStyles]}
 			style={{
 				...tabTextStyle(props.matchKind, renderingTarget),
 				borderBottomColor: palette(selected(props.matchKind)),
-				background: 'none',
-				border: 'none',
-				cursor: 'pointer',
-				font: 'inherit',
-				padding: 0,
-				margin: 0,
 			}}
 			aria-current={props.selected}
 		>
@@ -250,4 +244,13 @@ const tabTextStyle = (
 		renderingTarget === 'Web'
 			? palette(selected(matchKind))
 			: 'transparent',
+});
+
+const resetButtonStyles = css({
+	background: 'none',
+	border: 'none',
+	cursor: 'pointer',
+	font: 'inherit',
+	padding: 0,
+	margin: 0,
 });
