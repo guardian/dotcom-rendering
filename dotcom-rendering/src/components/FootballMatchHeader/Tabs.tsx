@@ -100,13 +100,20 @@ const MatchInfo = (
 	);
 };
 
-const Tab = (props: {
-	children: ReactNode;
-	href?: URL;
-	matchKind: FootballMatch['kind'];
-	onClick?: () => void;
-	selected?: boolean;
-}) => (
+const Tab = (
+	props: {
+		children: ReactNode;
+		matchKind: FootballMatch['kind'];
+		selected?: boolean;
+	} & (
+		| {
+				href?: URL;
+		  }
+		| {
+				onClick: () => void;
+		  }
+	),
+) => (
 	<li
 		css={{
 			// Ensures that if there are only two tabs they take up exactly 50%
@@ -135,7 +142,7 @@ const Tab = (props: {
 			'--border-left-colour': palette(border(props.matchKind)),
 		}}
 	>
-		{props.onClick ? (
+		{'onClick' in props ? (
 			<TabButton
 				onClick={props.onClick}
 				matchKind={props.matchKind}
