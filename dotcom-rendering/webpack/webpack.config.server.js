@@ -89,4 +89,9 @@ module.exports = {
 			},
 		],
 	},
+	resolve: {
+		alias: {
+			'css-tree': require.resolve('css-tree/dist/csstree.esm'),
+		},
+	},
 };
