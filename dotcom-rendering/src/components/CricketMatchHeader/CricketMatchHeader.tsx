@@ -13,7 +13,7 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import { Fragment, type ReactNode, useMemo } from 'react';
+import { Fragment, type ReactNode, useMemo, useState } from 'react';
 import type {
 	CricketMatch,
 	CricketResult,
@@ -36,11 +36,13 @@ import {
 	secondaryText,
 } from '../FootballMatchHeader/colours';
 import { Tabs } from '../FootballMatchHeader/Tabs';
+import { CricketScorecardTabRemoteRender } from './CricketScorecardTabRemoteRender';
 
 type Props = {
 	edition: EditionId;
 	match: CricketMatch;
 	selectedTab: 'info' | 'live' | 'report';
+	tabContentElement?: HTMLElement;
 	reportURL?: URL;
 	liveURL?: URL;
 	infoURL?: URL;
@@ -48,6 +50,22 @@ type Props = {
 
 export const CricketMatchHeader = (props: Props) => {
 	const match = props.match;
+
+	const scorecardHash = props.infoURL?.hash;
+	const initialSelectedTab =
+		scorecardHash === '#scorecard' ? 'info' : props.selectedTab;
+
+	const [selectedTab, setSelectedTab] = useState<'info' | 'live' | 'report'>(
+		initialSelectedTab,
+	);
+
+	const onTabClick = (tab: 'info' | 'live' | 'report') => {
+		setSelectedTab(tab);
+		if (tab === 'info') {
+			// Focus the tab content for accessibility, so that screen readers will read out the scorecard when it displays.
+			props.tabContentElement?.focus();
+		}
+	};
 
 	return (
 		<section
@@ -81,12 +99,23 @@ export const CricketMatchHeader = (props: Props) => {
 				<Tabs
 					sportKind="cricket"
 					matchKind={match.kind}
-					selected={props.selectedTab}
+					selected={selectedTab}
 					reportURL={props.reportURL}
 					liveURL={props.liveURL}
 					infoURL={props.infoURL}
+					onTabClick={onTabClick}
 				/>
 			</div>
+			{selectedTab === 'info' && (
+				<CricketScorecardTabRemoteRender
+					tabContentElement={props.tabContentElement}
+					innings={match.innings}
+					officials={match.officials}
+					homeTeam={match.homeTeam}
+					awayTeam={match.awayTeam}
+					result={match.result}
+				/>
+			)}
 		</section>
 	);
 };

@@ -22,10 +22,11 @@ type Props = {
 	reportURL?: URL;
 	liveURL?: URL;
 	infoURL?: URL;
+	onTabClick?: (tab: TabName) => void;
 };
 
 export const Tabs = (props: Props) => (
-	<nav css={[grid.column.centre]}>
+	<nav css={[grid.column.centre]} aria-label="Match details navigation">
 		<ul
 			css={{
 				...headlineBold15Object,
@@ -82,28 +83,29 @@ const LiveFeed = (props: Pick<Props, 'selected' | 'matchKind' | 'liveURL'>) => {
 };
 
 const MatchInfo = (
-	props: Pick<Props, 'selected' | 'matchKind' | 'sportKind' | 'infoURL'>,
+	props: Pick<Props, 'selected' | 'matchKind' | 'sportKind' | 'onTabClick'>,
 ) => {
 	const tabText = props.sportKind === 'cricket' ? 'Scorecard' : 'Match info';
 	if (props.selected === 'info') {
 		return <Tab matchKind={props.matchKind}>{tabText}</Tab>;
 	}
 
-	if (props.infoURL !== undefined) {
-		return (
-			<Tab matchKind={props.matchKind} href={props.infoURL}>
-				{tabText}
-			</Tab>
-		);
-	}
-
-	return null;
+	return (
+		<Tab
+			matchKind={props.matchKind}
+			onClick={() => props.onTabClick?.('info')}
+		>
+			{tabText}
+		</Tab>
+	);
 };
 
 const Tab = (props: {
 	children: ReactNode;
 	href?: URL;
 	matchKind: FootballMatch['kind'];
+	onClick?: () => void;
+	selected?: boolean;
 }) => (
 	<li
 		css={{
@@ -133,16 +135,31 @@ const Tab = (props: {
 			'--border-left-colour': palette(border(props.matchKind)),
 		}}
 	>
-		<TabText href={props.href} matchKind={props.matchKind}>
-			{props.children}
-		</TabText>
+		{props.onClick ? (
+			<TabButton
+				onClick={props.onClick}
+				matchKind={props.matchKind}
+				selected={props.selected ?? false}
+			>
+				{props.children}
+			</TabButton>
+		) : (
+			<TabLink
+				href={props.href}
+				matchKind={props.matchKind}
+				selected={props.selected}
+			>
+				{props.children}
+			</TabLink>
+		)}
 	</li>
 );
 
-const TabText = (props: {
+const TabLink = (props: {
 	children: ReactNode;
 	href?: URL;
 	matchKind: FootballMatch['kind'];
+	selected?: boolean;
 }) => {
 	const { renderingTarget } = useConfig();
 
@@ -165,9 +182,40 @@ const TabText = (props: {
 				...tabTextStyle(props.matchKind, renderingTarget),
 				borderBottomColor: palette(selected(props.matchKind)),
 			}}
+			aria-current={props.selected}
 		>
 			{props.children}
 		</span>
+	);
+};
+
+const TabButton = (props: {
+	children: ReactNode;
+	onClick: () => void;
+	matchKind: FootballMatch['kind'];
+	selected: boolean;
+}) => {
+	const { renderingTarget } = useConfig();
+	return (
+		<button
+			type="button"
+			onClick={props.onClick}
+			css={tabTextCss}
+			style={{
+				...tabTextStyle(props.matchKind, renderingTarget),
+				borderBottomColor: palette(selected(props.matchKind)),
+				background: 'none',
+				border: 'none',
+				cursor: 'pointer',
+				font: 'inherit',
+				padding: 0,
+				margin: 0,
+			}}
+			role="tab"
+			aria-current={props.selected}
+		>
+			{props.children}
+		</button>
 	);
 };
 

@@ -1,11 +1,12 @@
 import type { ComponentProps } from 'react';
+import { expect, userEvent, within } from 'storybook/test';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { CricketScorecardPageNew as CricketScorecardPageNewComponent } from './CricketScorecardPageNew';
 
 const meta = preview.meta({
 	component: CricketScorecardPageNewComponent,
-	title: 'Components/CricketScorecardPageNew',
+	title: 'Components/CricketScorecardPage',
 	parameters: {
 		chromatic: {
 			modes: {
@@ -65,20 +66,20 @@ const baseArgs = {
 			'R S Madugalle',
 		],
 	},
-	selectedTab: 'info' as 'info' | 'live' | 'report',
-	infoURL: new URL(
-		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+	selectedTab: 'live' as 'info' | 'live' | 'report',
+	liveURL: new URL(
+		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 	),
 	edition: 'UK',
 } satisfies ComponentProps<typeof CricketScorecardPageNewComponent>;
 
 export const CricketScorecardPageNewFixture = meta.story({
-	name: 'Cricket Scorecard Page Fixture (New)',
+	name: 'Live',
 	args: baseArgs,
 });
 
 export const CricketScorecardPageNewLive = meta.story({
-	name: 'Cricket Scorecard Page Live (New)',
+	name: 'Scorecard',
 	args: {
 		...baseArgs,
 		selectedTab: 'info',
@@ -403,5 +404,24 @@ export const CricketScorecardPageNewLive = meta.story({
 				},
 			],
 		},
+	},
+});
+
+export const ClickScorecardTab = meta.story({
+	name: 'Live -> Scorecard',
+	args: baseArgs,
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+
+		// Click the Scorecard tab button
+		const scorecardTab = canvas.getByRole('tab', { name: 'Scorecard' });
+		await userEvent.click(scorecardTab);
+
+		// Check that the scorecard renders in the main content element
+		const main = canvasElement.querySelector('#maincontent');
+		await within(main as HTMLElement).findByRole('heading', {
+			name: 'Lineups',
+		});
+		void expect(main).not.toBeNull();
 	},
 });
