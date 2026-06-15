@@ -32,6 +32,7 @@ const commonConfigs = ({ platform }) => ({
 	resolve: {
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 		alias: {
+			// css-tree wasn't bundling properly due to CJS build's createRequire so this points imports to the esm dist
 			'css-tree': require.resolve('css-tree/dist/csstree.esm'),
 		},
 	},
