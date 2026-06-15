@@ -185,7 +185,7 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 				case ArticleDesign.HostedGallery:
 					return (
 						<HostedGalleryLayout
-							content={article}
+							gallery={article}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -398,7 +398,7 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 				case ArticleDesign.HostedGallery:
 					return (
 						<HostedGalleryLayout
-							content={article}
+							gallery={article}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
