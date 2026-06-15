@@ -16,32 +16,10 @@ const meta = preview.meta({
 });
 
 const baseArgs = {
-	match: {
-		kind: 'Fixture',
-		series: 'Ashes 2025–2026',
-		competition: 'Second Test Match',
-		venue: 'Bengaluru Cricket Ground',
-		matchDate: new Date('2026-01-26'),
-		homeTeam: {
-			paID: 'f822b9f9-9fdc-399f-54f9-e621edaf0a28',
-			name: 'India',
-		},
-		awayTeam: {
-			paID: '110c70b5-c05f-3be7-6670-baecd50a8c6b',
-			name: 'New Zealand',
-		},
-		innings: [],
-	},
-	allInnings: [],
-	officials: [
-		'P R Reiffel',
-		'R K Illingworth',
-		'J S Wilson',
-		'H D P K Dharmasena',
-		'R S Madugalle',
-	],
-	lineups: {
-		homeTeam: [
+	homeTeam: {
+		paID: 'f822b9f9-9fdc-399f-54f9-e621edaf0a28',
+		name: 'India',
+		lineup: [
 			'Rohit Sharma',
 			'Shubman Gill',
 			'Virat Kohli',
@@ -54,7 +32,11 @@ const baseArgs = {
 			'Kuldeep Yadav',
 			'Varun Chakaravarthy',
 		],
-		awayTeam: [
+	},
+	awayTeam: {
+		paID: '110c70b5-c05f-3be7-6670-baecd50a8c6b',
+		name: 'New Zealand',
+		lineup: [
 			'Rachin Ravindra',
 			'Will Young',
 			'Kane Williamson',
@@ -68,6 +50,14 @@ const baseArgs = {
 			"Will O'Rourke",
 		],
 	},
+	innings: [],
+	officials: [
+		'P R Reiffel',
+		'R K Illingworth',
+		'J S Wilson',
+		'H D P K Dharmasena',
+		'R S Madugalle',
+	],
 } satisfies ComponentProps<typeof CricketScorecardTabComponent>;
 
 export const CricketScorecardTabFixture = meta.story({
@@ -79,44 +69,17 @@ export const CricketScorecardTabLive = meta.story({
 	name: 'Cricket Scorecard Page Live (New)',
 	args: {
 		...baseArgs,
-		selectedTab: 'info',
-
-		liveURL: new URL(
-			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-		),
-
-		match: {
-			...baseArgs.match,
-			kind: 'Live',
-			day: 2,
-			innings: [
-				{
-					declared: false,
-					forfeited: false,
-					battingTeam: 'India',
-					runs: 254,
-					overs: '49.0',
-					fallOfWickets: 3,
-				},
-				{
-					declared: false,
-					forfeited: false,
-					battingTeam: 'New Zealand',
-					runs: 254,
-					overs: '49.0',
-					fallOfWickets: 2,
-				},
-			],
-		},
-		allInnings: [
+		innings: [
 			{
 				description: 'India first innings',
 				battingTeam: 'India',
+				declared: false,
+				forfeited: false,
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',
 					extras: 8,
-					wickets: 7,
+					wickets: 3,
 				},
 				extras: {
 					byes: 1,
@@ -275,11 +238,13 @@ export const CricketScorecardTabLive = meta.story({
 			{
 				description: 'New Zealand first innings',
 				battingTeam: 'New Zealand',
+				declared: false,
+				forfeited: false,
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',
 					extras: 8,
-					wickets: 7,
+					wickets: 2,
 				},
 				extras: {
 					byes: 0,
@@ -353,17 +318,6 @@ export const CricketScorecardTabLive = meta.story({
 						howOut: 'not out',
 						out: false,
 						onStrike: true,
-						nonStrike: true,
-					},
-					{
-						name: 'Michael Bracewell',
-						ballsFaced: 8,
-						runs: 5,
-						fours: 0,
-						sixes: 0,
-						howOut: 'not out',
-						out: false,
-						onStrike: false,
 						nonStrike: true,
 					},
 				],
