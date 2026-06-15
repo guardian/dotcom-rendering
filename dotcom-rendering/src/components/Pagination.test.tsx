@@ -51,8 +51,8 @@ describe('Pagination', () => {
 				<Pagination
 					currentPage={2}
 					totalPages={3}
-					oldest=""
-					older=""
+					oldest="?page=with:block-6a2b00d18f0881a067713ae5"
+					older="?page=with:block-6a2b00d18f0881a067713ae5"
 					renderingTarget="Web"
 				/>,
 			);
