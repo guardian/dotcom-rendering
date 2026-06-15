@@ -89,7 +89,7 @@ const defaultInnings = {
 
 const baseArgs = {
 	edition: 'UK' as EditionId,
-	match: {
+	initialData: {
 		kind: 'Fixture' as CricketMatch['kind'],
 		series: 'Ashes 2025–2026',
 		competition: 'Second Test Match',
@@ -112,6 +112,10 @@ const baseArgs = {
 	infoURL: new URL(
 		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
 	),
+	matchHeaderURL:
+		'https://api.nextgen.guardianapps.co.uk/sport/cricket/match-header/2026-06-13/australia-women-s-cricket-team.json',
+	refreshInterval: 3_000,
+	getHeaderData: () => Promise.resolve(undefined),
 };
 
 export const Fixture = {
@@ -121,8 +125,8 @@ export const Fixture = {
 export const Live = {
 	args: {
 		...baseArgs,
-		match: {
-			...Fixture.args.match,
+		initialData: {
+			...Fixture.args.initialData,
 			kind: 'Live' as CricketMatch['kind'],
 			day: 2,
 			innings: [
@@ -167,8 +171,8 @@ export const LiveYetToBat = {
 	args: {
 		...baseArgs,
 		edition: 'UK' as EditionId,
-		match: {
-			...Fixture.args.match,
+		initialData: {
+			...Fixture.args.initialData,
 			kind: 'Live',
 			day: 2,
 			innings: [
@@ -200,8 +204,8 @@ export const Result = {
 	args: {
 		...baseArgs,
 		edition: 'UK' as EditionId,
-		match: {
-			...Fixture.args.match,
+		initialData: {
+			...Fixture.args.initialData,
 			kind: 'Result',
 			day: 4,
 			innings: [
@@ -270,8 +274,8 @@ export const ResultWinByWickets = {
 	args: {
 		...baseArgs,
 		edition: 'UK' as EditionId,
-		match: {
-			...Fixture.args.match,
+		initialData: {
+			...Fixture.args.initialData,
 			kind: 'Result',
 			innings: [
 				{
@@ -321,8 +325,8 @@ export const ResultDrawn = {
 	args: {
 		...baseArgs,
 		edition: 'UK' as EditionId,
-		match: {
-			...Fixture.args.match,
+		initialData: {
+			...Fixture.args.initialData,
 			kind: 'Result',
 			day: 4,
 			innings: [

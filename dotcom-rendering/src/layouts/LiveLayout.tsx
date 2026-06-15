@@ -19,6 +19,7 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.island';
+import { CricketMatchHeaderWrapper } from '../components/CricketMatchHeaderWrapper.island';
 import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -50,6 +51,7 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
+import { useAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -281,6 +283,15 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const { branding } = article.commercialProperties[article.editionId];
 
+	const ab = useAB();
+	const isCricketRedesignEnabled = Boolean(
+		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
+	);
+
+	const isSportsMatch =
+		article.matchType === 'FootballMatchType' ||
+		article.matchType === 'CricketMatchType';
+
 	const footballMatchUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchUrl
@@ -301,6 +312,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const cricketMatchUrl =
 		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
+
+	const cricketMatchHeaderUrl =
+		article.matchType === 'CricketMatchType'
+			? article.matchHeaderUrl
+			: undefined;
 
 	const hasKeyEvents = !!article.keyEvents.length;
 
@@ -383,32 +399,22 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						<AdPortals rightAlignFrom="wide" />
 					</Island>
 				)}
-				{footballMatchUrl ? (
-					footballMatchHeaderUrl && (
-						<>
-							<noscript>
-								<FootballMatchHeaderFallback
-									format={format}
-									article={article}
-								/>
-							</noscript>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<FootballMatchHeaderWrapper
-									initialTab="live"
-									leagueName={footballMatchLeagueName}
-									leagueURL={footballMatchLeagueUrl}
-									edition={article.editionId}
-									matchHeaderURL={footballMatchHeaderUrl}
-									renderingTarget={renderingTarget}
-									article={article}
-									format={format}
-								/>
-							</Island>
-						</>
-					)
+				{isSportsMatch ? (
+					<MatchHeader
+						football={{
+							footballMatchLeagueName,
+							footballMatchLeagueUrl,
+							footballMatchHeaderUrl,
+							footballMatchUrl,
+						}}
+						cricket={{
+							cricketMatchHeaderUrl,
+							isCricketRedesignEnabled,
+						}}
+						renderingTarget={renderingTarget}
+						format={format}
+						article={article}
+					/>
 				) : (
 					<Section
 						fullWidth={true}
@@ -1146,4 +1152,66 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 		</>
 	);
+};
+
+const MatchHeader = (props: {
+	football: {
+		footballMatchLeagueName: string;
+		footballMatchLeagueUrl: string;
+		footballMatchHeaderUrl?: string;
+		footballMatchUrl?: string;
+	};
+	cricket: {
+		cricketMatchHeaderUrl?: string;
+		isCricketRedesignEnabled: boolean;
+	};
+	renderingTarget: RenderingTarget;
+	format: ArticleFormat;
+	article: ArticleDeprecated;
+}) => {
+	if (
+		props.football.footballMatchUrl &&
+		props.football.footballMatchHeaderUrl
+	) {
+		return (
+			<>
+				<noscript>
+					<FootballMatchHeaderFallback
+						format={props.format}
+						article={props.article}
+					/>
+				</noscript>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FootballMatchHeaderWrapper
+						initialTab="live"
+						leagueName={props.football.footballMatchLeagueName}
+						leagueURL={props.football.footballMatchLeagueUrl}
+						edition={props.article.editionId}
+						matchHeaderURL={props.football.footballMatchHeaderUrl}
+						renderingTarget={props.renderingTarget}
+						article={props.article}
+						format={props.format}
+					/>
+				</Island>
+			</>
+		);
+	}
+
+	if (
+		props.cricket.cricketMatchHeaderUrl &&
+		props.cricket.isCricketRedesignEnabled
+	) {
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<CricketMatchHeaderWrapper
+					initialData={undefined}
+					selectedTab={'live'}
+					edition={props.article.editionId}
+					matchHeaderURL={props.cricket.cricketMatchHeaderUrl}
+				/>
+			</Island>
+		);
+	}
+
+	return null;
 };

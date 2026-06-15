@@ -65,10 +65,11 @@ const baseArgs = {
 			'R S Madugalle',
 		],
 	},
-	selectedTab: 'info' as 'info' | 'live' | 'report',
 	infoURL: new URL(
 		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
 	),
+	matchHeaderURL:
+		'https://api.nextgen.guardianapps.co.uk/sport/cricket/match-header/2026-06-13/australia-women-s-cricket-team.json',
 	edition: 'UK',
 } satisfies ComponentProps<typeof CricketScorecardPageNewComponent>;
 
@@ -81,7 +82,6 @@ export const CricketScorecardPageNewLive = meta.story({
 	name: 'Cricket Scorecard Page Live (New)',
 	args: {
 		...baseArgs,
-		selectedTab: 'info',
 
 		liveURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
