@@ -315,8 +315,8 @@ importers:
         specifier: workspace:ab-testing-config
         version: link:../ab-testing/config
       '@guardian/braze-components':
-        specifier: 22.2.0
-        version: 22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(react@18.3.1)
+        specifier: 23.0.1
+        version: 23.0.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(react@18.3.1)
       '@guardian/bridget':
         specifier: 8.13.1
         version: 8.13.1
@@ -2453,13 +2453,13 @@ packages:
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@guardian/braze-components@22.2.0':
-    resolution: {integrity: sha512-uSkHd6mBVTAD+BrvJZNt+oSipYHQXBdVt9Pu/VTvkliXHzT8OUsep7ObIWM1lkf3znWbqLDhoXtwS5apX2AEWQ==}
-    engines: {node: ^18.15 || ^20.8}
+  '@guardian/braze-components@23.0.1':
+    resolution: {integrity: sha512-gYGu1lJCkjQ9PzYl4ucNBaeOiyb1bO9ColC5vSDr/+u1CsCyypF6c9uWCjfLiWXDUY9ywwggPNspqVZ5i8A+zA==}
+    engines: {node: '24.2'}
     peerDependencies:
-      '@emotion/react': ^11.1.2
-      '@guardian/libs': ^16.0.0
-      '@guardian/source': ^9.0.0
+      '@emotion/react': 11.1.2
+      '@guardian/libs': 27.1.0
+      '@guardian/source': 12.2.0
       react: 17.0.2 || 18.2.0
 
   '@guardian/bridget@8.13.1':
@@ -11677,7 +11677,7 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@guardian/braze-components@22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(react@18.3.1)':
+  '@guardian/braze-components@23.0.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(react@18.3.1)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
       '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
