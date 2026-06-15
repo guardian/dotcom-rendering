@@ -27,9 +27,15 @@ const format = {
 	display: ArticleDisplay.Standard,
 };
 
+const appsArticle = enhanceArticleType(hostedGallery, 'Apps');
+
+if (appsArticle.design !== ArticleDesign.HostedGallery) {
+	throw new Error('Expected hosted gallery');
+}
+
 export const Apps = meta.story({
 	args: {
-		content: enhanceArticleType(hostedGallery, 'Apps'),
+		content: appsArticle,
 		format,
 		renderingTarget: 'Apps',
 	},
@@ -40,9 +46,15 @@ export const Apps = meta.story({
 	},
 });
 
+const webArticle = enhanceArticleType(hostedGallery, 'Web');
+
+if (webArticle.design !== ArticleDesign.HostedGallery) {
+	throw new Error('Expected hosted gallery');
+}
+
 export const Web = meta.story({
 	args: {
-		content: enhanceArticleType(hostedGallery, 'Web'),
+		content: webArticle,
 		format,
 		renderingTarget: 'Web',
 	},
