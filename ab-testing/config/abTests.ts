@@ -134,6 +134,19 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
+		name: "commercial-mobile-sticky-liveblog-us",
+		description:
+			"Holdback test to measure uplift in adding the mobile-sticky slot for Liveblogs articles in Us.",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-06-25",
+		type: "client",
+		status: "OFF",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "holdback"],
+		shouldForceMetricsCollection: true,
+	},
+	{
 		name: "commercial-teads-prebid",
 		description:
 			"Test to measure the impact of adding Teads as a bidder in prebid .",
