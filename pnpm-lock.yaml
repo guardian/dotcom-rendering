@@ -13,8 +13,8 @@ catalogs:
       specifier: 3.995.0
       version: 3.995.0
     '@guardian/cdk':
-      specifier: 63.3.1
-      version: 63.3.1
+      specifier: 63.6.1
+      version: 63.6.1
     '@guardian/eslint-config':
       specifier: 14.0.1
       version: 14.0.1
@@ -37,8 +37,8 @@ catalogs:
       specifier: 24.12.4
       version: 24.12.4
     aws-cdk:
-      specifier: 2.1124.1
-      version: 2.1124.1
+      specifier: 2.1126.0
+      version: 2.1126.0
     aws-cdk-lib:
       specifier: 2.257.0
       version: 2.257.0
@@ -121,7 +121,7 @@ importers:
         version: 3.995.0
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 63.3.1(aws-cdk-lib@2.257.0(constructs@10.6.0))(aws-cdk@2.1124.1)(constructs@10.6.0)
+        version: 63.6.1(aws-cdk-lib@2.257.0(constructs@10.6.0))(aws-cdk@2.1126.0)(constructs@10.6.0)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -130,7 +130,7 @@ importers:
         version: 24.12.4
       aws-cdk:
         specifier: 'catalog:'
-        version: 2.1124.1
+        version: 2.1126.0
       aws-cdk-lib:
         specifier: 'catalog:'
         version: 2.257.0(constructs@10.6.0)
@@ -218,23 +218,23 @@ importers:
         specifier: workspace:ab-testing-config
         version: link:../config
       '@sveltejs/adapter-auto':
-        specifier: 6.1.1
-        version: 6.1.1(@sveltejs/kit@2.60.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))(svelte@5.55.7(@typescript-eslint/types@8.61.0))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))
+        specifier: 7.0.1
+        version: 7.0.1(@sveltejs/kit@2.60.1(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))(svelte@5.56.3(@typescript-eslint/types@8.59.2))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))
       '@sveltejs/adapter-static':
         specifier: 3.0.10
-        version: 3.0.10(@sveltejs/kit@2.60.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))(svelte@5.55.7(@typescript-eslint/types@8.61.0))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))
+        version: 3.0.10(@sveltejs/kit@2.60.1(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))(svelte@5.56.3(@typescript-eslint/types@8.59.2))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))
       '@sveltejs/kit':
         specifier: 2.60.1
-        version: 2.60.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))(svelte@5.55.7(@typescript-eslint/types@8.61.0))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0))
+        version: 2.60.1(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))(svelte@5.56.3(@typescript-eslint/types@8.59.2))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0))
       '@sveltejs/vite-plugin-svelte':
-        specifier: 5.1.1
-        version: 5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0))
+        specifier: 7.1.2
+        version: 7.1.2(svelte@5.56.3(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0))
       svelte:
-        specifier: 5.55.7
-        version: 5.55.7(@typescript-eslint/types@8.61.0)
+        specifier: 5.56.3
+        version: 5.56.3(@typescript-eslint/types@8.59.2)
       svelte-check:
-        specifier: 4.3.3
-        version: 4.3.3(picomatch@4.0.4)(svelte@5.55.7(@typescript-eslint/types@8.61.0))(typescript@5.9.3)
+        specifier: 4.6.0
+        version: 4.6.0(picomatch@4.0.4)(svelte@5.56.3(@typescript-eslint/types@8.59.2))(typescript@5.9.3)
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -316,43 +316,43 @@ importers:
         version: link:../ab-testing/config
       '@guardian/braze-components':
         specifier: 22.2.0
-        version: 22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(react@18.3.1)
+        version: 22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(react@18.3.1)
       '@guardian/bridget':
-        specifier: 8.11.0
-        version: 8.11.0
+        specifier: 8.13.1
+        version: 8.13.1
       '@guardian/browserslist-config':
         specifier: 6.1.0
         version: 6.1.0(browserslist@4.24.4)(tslib@2.6.2)
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 63.3.1(aws-cdk-lib@2.257.0(constructs@10.6.0))(aws-cdk@2.1124.1)(constructs@10.6.0)
+        version: 63.6.1(aws-cdk-lib@2.257.0(constructs@10.6.0))(aws-cdk@2.1126.0)(constructs@10.6.0)
       '@guardian/commercial-core':
         specifier: 34.0.0
-        version: 34.0.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))
+        version: 34.0.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))
       '@guardian/consent-manager':
         specifier: 1.0.0
-        version: 1.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)
+        version: 1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/core-web-vitals':
         specifier: 7.0.0
-        version: 7.0.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)(web-vitals@4.2.3)
+        version: 7.0.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)(web-vitals@4.2.3)
       '@guardian/eslint-config':
         specifier: 'catalog:'
         version: 14.0.1(@typescript-eslint/utils@8.57.1(eslint@9.39.1)(typescript@5.9.3))(eslint@9.39.1)(typescript@5.9.3)
       '@guardian/identity-auth':
         specifier: 6.0.1
-        version: 6.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)
+        version: 6.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/identity-auth-frontend':
         specifier: 8.1.0
-        version: 8.1.0(@guardian/identity-auth@6.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)
+        version: 8.1.0(@guardian/identity-auth@6.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/libs':
         specifier: 32.0.0
-        version: 32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)
+        version: 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/ophan-tracker-js':
-        specifier: 4.0.1
-        version: 4.0.1
+        specifier: 4.0.2
+        version: 4.0.2
       '@guardian/react-crossword':
         specifier: 17.1.0
-        version: 17.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+        version: 17.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -361,10 +361,10 @@ importers:
         version: 12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/source-development-kitchen':
         specifier: 28.1.0
-        version: 28.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)
+        version: 28.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/support-dotcom-components':
         specifier: 10.0.1
-        version: 10.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(@guardian/ophan-tracker-js@4.0.1)(zod@4.1.12)
+        version: 10.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/ophan-tracker-js@4.0.2)(zod@4.1.12)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -508,7 +508,7 @@ importers:
         version: 2.1.1(ajv@8.18.0)
       aws-cdk:
         specifier: 'catalog:'
-        version: 2.1124.1
+        version: 2.1126.0
       aws-cdk-lib:
         specifier: 'catalog:'
         version: 2.257.0(constructs@10.6.0)
@@ -2589,8 +2589,8 @@ packages:
       '@guardian/source': ^9.0.0
       react: 17.0.2 || 18.2.0
 
-  '@guardian/bridget@8.11.0':
-    resolution: {integrity: sha512-vtjclCZg+sFMTnWj5mq2hTf1yeCHyb0ZeXtnG3MNPV1aA7jm5EkW/Up/xQ4CwKFLYFIiFwR3aPGzyYGMrYwdfA==}
+  '@guardian/bridget@8.13.1':
+    resolution: {integrity: sha512-aSza9vG5hPqB0x3mX0ZUTBWbT1vB3k567KWGy6tVoWPw7vSolFD82qo03YcUYqE7AJbe/XHwJp74PaSMsG//Ow==}
 
   '@guardian/browserslist-config@6.1.0':
     resolution: {integrity: sha512-qM0QxAv6E5IHXny5Okli6AZXEio0mpXzzEzz38qrb4IwO91R6eWVKyihdj0qW2k7TVxMFVOSfNmBZ1H5EiJhgw==}
@@ -2598,8 +2598,8 @@ packages:
       browserslist: ^4.22.2
       tslib: ^2.6.2
 
-  '@guardian/cdk@63.3.1':
-    resolution: {integrity: sha512-PdHQyhTuE9pIIIGfyQeGhwBUCI0TfpoFLCrYqdIniNA+cZWRivm+o6A8D4dxy+n9L5axFAv8YFNyUeH0BmbRGQ==}
+  '@guardian/cdk@63.6.1':
+    resolution: {integrity: sha512-C9uiYwGnPxIOSOw3Gn3DTuoK9u85W29aggFgAE/oG9wt3TP7UGOyydhjq+lEmuYqgwFE0zgh4uWbldwG3IfVyQ==}
     hasBin: true
     peerDependencies:
       aws-cdk: ^2.1110.0
@@ -2673,8 +2673,8 @@ packages:
       typescript:
         optional: true
 
-  '@guardian/ophan-tracker-js@4.0.1':
-    resolution: {integrity: sha512-/QE+lonQ4itg6gTiDx4F/sS4xx4AUPGXm3ZxTWVzvTI+0osvZhYzpR0Qsqt9jTJ3WP6tZEluDUNmMRrLjbngsg==}
+  '@guardian/ophan-tracker-js@4.0.2':
+    resolution: {integrity: sha512-sqgJG7G8zxHn9FlqcZGBF+gimu5lVa0CHAUs5fJicdf4xjjtnvpKuNfgKKpQaBFvhK686wtkur8zwhO+nm6BpQ==}
     engines: {node: '>=16'}
 
   '@guardian/prettier@10.0.0':
@@ -4032,13 +4032,18 @@ packages:
     peerDependencies:
       eslint: ^9.0.0 || ^10.0.0
 
+  '@sveltejs/acorn-typescript@1.0.10':
+    resolution: {integrity: sha512-4WfKk68eTih+MiJD4fSbxN7E8kVBmTMPWHUPYjvl2N0rMs53YLTT8/YjKU5Dtnz5LqDjl7LEw4U7lXR2W3J5WA==}
+    peerDependencies:
+      acorn: ^8.9.0
+
   '@sveltejs/acorn-typescript@1.0.9':
     resolution: {integrity: sha512-lVJX6qEgs/4DOcRTpo56tmKzVPtoWAaVbL4hfO7t7NVwl9AAXzQR6cihesW1BmNMPl+bK6dreu2sOKBP2Q9CIA==}
     peerDependencies:
       acorn: ^8.9.0
 
-  '@sveltejs/adapter-auto@6.1.1':
-    resolution: {integrity: sha512-cBNt4jgH4KuaNO5gRSB2CZKkGtz+OCZ8lPjRQGjhvVUD4akotnj2weUia6imLl2v07K3IgsQRyM36909miSwoQ==}
+  '@sveltejs/adapter-auto@7.0.1':
+    resolution: {integrity: sha512-dvuPm1E7M9NI/+canIQ6KKQDU2AkEefEZ2Dp7cY6uKoPq9Z/PhOXABe526UdW2mN986gjVkuSLkOYIBnS/M2LQ==}
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
 
@@ -4063,20 +4068,16 @@ packages:
       typescript:
         optional: true
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1':
-    resolution: {integrity: sha512-J/Nmb2Q2y7mck2hyCX4ckVHcR5tu2J+MtBEQqpDrrgELZ2uvraQcK/ioCV61AqkdXFgriksOKIceDcQmqnGhVw==}
-    engines: {node: ^18.0.0 || ^20.0.0 || >=22}
-    peerDependencies:
-      '@sveltejs/vite-plugin-svelte': ^5.0.0
-      svelte: ^5.0.0
-      vite: ^6.0.0
+  '@sveltejs/load-config@0.1.1':
+    resolution: {integrity: sha512-BXXm+VOH/9X4N7Dd1iZ2MqA1h7M+9i2noI8QYuLDY8QcN2WHYn7D/VK/+IJNfcAmRw7ACNJ538UT9GXIhnBTiA==}
+    engines: {node: '>= 18.0.0'}
 
-  '@sveltejs/vite-plugin-svelte@5.1.1':
-    resolution: {integrity: sha512-Y1Cs7hhTc+a5E9Va/xwKlAJoariQyHY+5zBgCZg4PFWNYQ1nMN9sjK1zhw1gK69DuqVP++sht/1GZg1aRwmAXQ==}
-    engines: {node: ^18.0.0 || ^20.0.0 || >=22}
+  '@sveltejs/vite-plugin-svelte@7.1.2':
+    resolution: {integrity: sha512-DrUBA2UXRfDmUX/ZTiEopd3X40yavsJF1FX2RygcuIScHL7o5YX1fMvoYnDhjeJQC4weCOklirpNWlcb2NiSeA==}
+    engines: {node: ^20.19 || ^22.12 || >=24}
     peerDependencies:
-      svelte: ^5.0.0
-      vite: ^6.0.0
+      svelte: ^5.46.4
+      vite: ^8.0.0-beta.7 || ^8.0.0
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0':
     resolution: {integrity: sha512-b9MIk7yhdS1pMCZM8VeNfUlSKVRhsHZNMl5O9SfaX0l0t5wjdgu4IDzGB8bpnGBBOjGST3rRFVsaaEtI4W6f7g==}
@@ -5112,8 +5113,8 @@ packages:
       - yaml
       - mime-types
 
-  aws-cdk@2.1124.1:
-    resolution: {integrity: sha512-sRYdPMdkX+02EHaT946AFV0w0CMfbHKWpLZPv525xTCkaVu1eYu6DzHFuTdimxdSN0uGQ2D4LHrD1sr94tRhow==}
+  aws-cdk@2.1126.0:
+    resolution: {integrity: sha512-uNoocb3vCPiAT3j9+SwL6pn/VVggHWBsgC2XpxyhNvYQYt6cE9BM/149GWwtdcwnLrPjnwW1+CV/5nSSh5dV+w==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
 
@@ -6293,8 +6294,8 @@ packages:
     resolution: {integrity: sha512-Ap6G0WQwcU/LHsvLwON1fAQX9Zp0A2Y6Y/cJBl9r/JbW90Zyg4/zbG6zzKa2OTALELarYHmKu0GhpM5EO+7T0g==}
     engines: {node: '>=0.10'}
 
-  esrap@2.2.9:
-    resolution: {integrity: sha512-4KijP+NxCWthMCUC3qHbE6n4vCjqgJS1uAYKhuT/GWfFTf1Qyive2TgOjep+gzbSzRfnNyaN/UU9YmdOt8Eg0A==}
+  esrap@2.2.11:
+    resolution: {integrity: sha512-gPdx+I+BjYEinNMQaBXFjbaJVyoPMU4ZODg5mE+M4DqVG9VusAVHHjcBX+zqyITlI0DIARwDMMzZwAWj36dRoQ==}
     peerDependencies:
       '@typescript-eslint/types': ^8.2.0
     peerDependenciesMeta:
@@ -7958,6 +7959,10 @@ packages:
   obuf@1.1.2:
     resolution: {integrity: sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==}
 
+  obug@2.1.2:
+    resolution: {integrity: sha512-AWGB9WFcRXOQs48Z/udjI5ZcZMHXwX8XPByNpOydgcGsDLIzjGizhoMWJyKAWze7AVW/2W1i+/gPX4YtKe5cyg==}
+    engines: {node: '>=12.20.0'}
+
   on-finished@2.4.1:
     resolution: {integrity: sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==}
     engines: {node: '>= 0.8'}
@@ -9023,16 +9028,16 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  svelte-check@4.3.3:
-    resolution: {integrity: sha512-RYP0bEwenDXzfv0P1sKAwjZSlaRyqBn0Fz1TVni58lqyEiqgwztTpmodJrGzP6ZT2aHl4MbTvWP6gbmQ3FOnBg==}
+  svelte-check@4.6.0:
+    resolution: {integrity: sha512-KhVnDFDSid57mmZtHz8gfW8AAGylOZ0vPnOIzVmAL+urzwK8sBYXRss953gD8T0OdgAQ11mdWhE6uadmtOz8TQ==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.0
       typescript: '>=5.0.0'
 
-  svelte@5.55.7:
-    resolution: {integrity: sha512-ymI5ykLPwIHW839E053FQbI1G+jnRFJEw3Kv5Y4njixVWywQBx+NUFpkkKyk5LIb36Fg9DVXSYpqiGekLD0hyw==}
+  svelte@5.56.3:
+    resolution: {integrity: sha512-w7JvrM5IFl5cmfbY0TLik9o7mjRUJmRMhOR51tBPu708Gr/MjbGs7VnJnr/B0CaXeI4vtnOh7RKxDr0cwhMdDA==}
     engines: {node: '>=18'}
 
   svg-parser@2.0.4:
@@ -9559,10 +9564,10 @@ packages:
       yaml:
         optional: true
 
-  vitefu@1.1.1:
-    resolution: {integrity: sha512-B/Fegf3i8zh0yFbpzZ21amWzHmuNlLlmJT6n7bu5e+pCHUKQIfXSYokrqOBGEMMe9UG2sostKQF9mml/vYaWJQ==}
+  vitefu@1.1.3:
+    resolution: {integrity: sha512-ub4okH7Z5KLjb6hDyjqrGXqWtWvoYdU3IGm/NorpgHncKoLTCfRIbvlhBm7r0YstIaQRYlp4yEbFqDcKSzXSSg==}
     peerDependencies:
-      vite: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0-beta.0
+      vite: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
     peerDependenciesMeta:
       vite:
         optional: true
@@ -12285,28 +12290,26 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@exodus/bytes@1.15.1': {}
-
-  '@guardian/braze-components@22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(react@18.3.1)':
+  '@guardian/braze-components@22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(react@18.3.1)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)
+      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/source': 12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)
       react: 18.3.1
 
-  '@guardian/bridget@8.11.0': {}
+  '@guardian/bridget@8.13.1': {}
 
   '@guardian/browserslist-config@6.1.0(browserslist@4.24.4)(tslib@2.6.2)':
     dependencies:
       browserslist: 4.24.4
       tslib: 2.6.2
 
-  '@guardian/cdk@63.3.1(aws-cdk-lib@2.257.0(constructs@10.6.0))(aws-cdk@2.1124.1)(constructs@10.6.0)':
+  '@guardian/cdk@63.6.1(aws-cdk-lib@2.257.0(constructs@10.6.0))(aws-cdk@2.1126.0)(constructs@10.6.0)':
     dependencies:
-      '@aws-sdk/client-ec2': 3.1065.0
-      '@aws-sdk/client-ssm': 3.1065.0
-      '@aws-sdk/credential-providers': 3.1065.0
-      aws-cdk: 2.1124.1
+      '@aws-sdk/client-ec2': 3.1053.0
+      '@aws-sdk/client-ssm': 3.1053.0
+      '@aws-sdk/credential-providers': 3.1053.0
+      aws-cdk: 2.1126.0
       aws-cdk-lib: 2.257.0(constructs@10.6.0)
       chalk: 4.1.2
       codemaker: 1.134.0
@@ -12316,22 +12319,22 @@ snapshots:
       read-pkg-up: 7.0.1
       yargs: 17.7.2
 
-  '@guardian/commercial-core@34.0.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))':
+  '@guardian/commercial-core@34.0.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))':
     dependencies:
-      '@guardian/consent-manager': 1.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)
-      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)
+      '@guardian/consent-manager': 1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
+      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
 
-  '@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)':
+  '@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)':
     dependencies:
-      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)
-      '@guardian/ophan-tracker-js': 4.0.1
+      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
+      '@guardian/ophan-tracker-js': 4.0.2
       tslib: 2.6.2
     optionalDependencies:
       typescript: 5.9.3
 
-  '@guardian/core-web-vitals@7.0.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)(web-vitals@4.2.3)':
+  '@guardian/core-web-vitals@7.0.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)(web-vitals@4.2.3)':
     dependencies:
-      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)
+      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
       tslib: 2.6.2
       web-vitals: 4.2.3
     optionalDependencies:
@@ -12359,29 +12362,29 @@ snapshots:
       - supports-color
       - typescript
 
-  '@guardian/identity-auth-frontend@8.1.0(@guardian/identity-auth@6.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)':
+  '@guardian/identity-auth-frontend@8.1.0(@guardian/identity-auth@6.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)':
     dependencies:
-      '@guardian/identity-auth': 6.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)
-      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)
+      '@guardian/identity-auth': 6.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)
+      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
       tslib: 2.6.2
     optionalDependencies:
       typescript: 5.9.3
 
-  '@guardian/identity-auth@6.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)':
+  '@guardian/identity-auth@6.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(tslib@2.6.2)(typescript@5.9.3)':
     dependencies:
-      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)
+      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
       tslib: 2.6.2
     optionalDependencies:
       typescript: 5.9.3
 
-  '@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)':
+  '@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)':
     dependencies:
-      '@guardian/ophan-tracker-js': 4.0.1
+      '@guardian/ophan-tracker-js': 4.0.2
       tslib: 2.6.2
     optionalDependencies:
       typescript: 5.9.3
 
-  '@guardian/ophan-tracker-js@4.0.1':
+  '@guardian/ophan-tracker-js@4.0.2':
     dependencies:
       '@guardian/tsconfig': 1.0.1
 
@@ -12390,10 +12393,10 @@ snapshots:
       prettier: 3.8.3
       tslib: 2.6.2
 
-  '@guardian/react-crossword@17.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)':
+  '@guardian/react-crossword@17.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)
+      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/source': 12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)
       react: 18.3.1
       tslib: 2.8.1
@@ -12408,9 +12411,9 @@ snapshots:
     dependencies:
       tslib: 2.6.2
 
-  '@guardian/source-development-kitchen@28.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)':
+  '@guardian/source-development-kitchen@28.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)':
     dependencies:
-      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)
+      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
       '@guardian/source': 12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.9.3)
       tslib: 2.6.2
     optionalDependencies:
@@ -12429,10 +12432,10 @@ snapshots:
       react: 18.3.1
       typescript: 5.9.3
 
-  '@guardian/support-dotcom-components@10.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3))(@guardian/ophan-tracker-js@4.0.1)(zod@4.1.12)':
+  '@guardian/support-dotcom-components@10.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3))(@guardian/ophan-tracker-js@4.0.2)(zod@4.1.12)':
     dependencies:
-      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.1)(tslib@2.6.2)(typescript@5.9.3)
-      '@guardian/ophan-tracker-js': 4.0.1
+      '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@5.9.3)
+      '@guardian/ophan-tracker-js': 4.0.2
       zod: 4.1.12
 
   '@guardian/tsconfig@1.0.1': {}
@@ -13969,23 +13972,27 @@ snapshots:
       estraverse: 5.3.0
       picomatch: 4.0.4
 
+  '@sveltejs/acorn-typescript@1.0.10(acorn@8.16.0)':
+    dependencies:
+      acorn: 8.16.0
+
   '@sveltejs/acorn-typescript@1.0.9(acorn@8.16.0)':
     dependencies:
       acorn: 8.16.0
 
-  '@sveltejs/adapter-auto@6.1.1(@sveltejs/kit@2.60.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))(svelte@5.55.7(@typescript-eslint/types@8.61.0))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))':
+  '@sveltejs/adapter-auto@7.0.1(@sveltejs/kit@2.60.1(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))(svelte@5.56.3(@typescript-eslint/types@8.59.2))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))':
     dependencies:
-      '@sveltejs/kit': 2.60.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))(svelte@5.55.7(@typescript-eslint/types@8.61.0))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0))
+      '@sveltejs/kit': 2.60.1(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))(svelte@5.56.3(@typescript-eslint/types@8.59.2))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0))
 
-  '@sveltejs/adapter-static@3.0.10(@sveltejs/kit@2.60.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))(svelte@5.55.7(@typescript-eslint/types@8.61.0))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))':
+  '@sveltejs/adapter-static@3.0.10(@sveltejs/kit@2.60.1(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))(svelte@5.56.3(@typescript-eslint/types@8.59.2))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))':
     dependencies:
-      '@sveltejs/kit': 2.60.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))(svelte@5.55.7(@typescript-eslint/types@8.61.0))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0))
+      '@sveltejs/kit': 2.60.1(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))(svelte@5.56.3(@typescript-eslint/types@8.59.2))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0))
 
-  '@sveltejs/kit@2.60.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))(svelte@5.55.7(@typescript-eslint/types@8.61.0))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0))':
+  '@sveltejs/kit@2.60.1(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)))(svelte@5.56.3(@typescript-eslint/types@8.59.2))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0))':
     dependencies:
       '@standard-schema/spec': 1.1.0
       '@sveltejs/acorn-typescript': 1.0.9(acorn@8.16.0)
-      '@sveltejs/vite-plugin-svelte': 5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0))
+      '@sveltejs/vite-plugin-svelte': 7.1.2(svelte@5.56.3(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0))
       '@types/cookie': 0.6.0
       acorn: 8.16.0
       cookie: 0.6.0
@@ -13996,32 +14003,21 @@ snapshots:
       mrmime: 2.0.1
       set-cookie-parser: 3.1.0
       sirv: 3.0.2
-      svelte: 5.55.7(@typescript-eslint/types@8.61.0)
-      vite: 6.4.2(@types/node@24.12.4)(terser@5.48.0)(tsx@4.6.2)
+      svelte: 5.56.3(@typescript-eslint/types@8.59.2)
+      vite: 6.4.2(@types/node@24.12.4)(terser@5.46.0)(tsx@4.6.2)
     optionalDependencies:
       typescript: 5.9.3
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0))':
-    dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0))
-      debug: 4.4.3
-      svelte: 5.55.7(@typescript-eslint/types@8.61.0)
-      vite: 6.4.2(@types/node@24.12.4)(terser@5.48.0)(tsx@4.6.2)
-    transitivePeerDependencies:
-      - supports-color
+  '@sveltejs/load-config@0.1.1': {}
 
-  '@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0))':
+  '@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3(@typescript-eslint/types@8.59.2))(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)))(svelte@5.55.7(@typescript-eslint/types@8.61.0))(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0))
-      debug: 4.4.3
       deepmerge: 4.3.1
-      kleur: 4.1.5
       magic-string: 0.30.21
-      svelte: 5.55.7(@typescript-eslint/types@8.61.0)
-      vite: 6.4.2(@types/node@24.12.4)(terser@5.48.0)(tsx@4.6.2)
-      vitefu: 1.1.1(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0))
-    transitivePeerDependencies:
-      - supports-color
+      obug: 2.1.2
+      svelte: 5.56.3(@typescript-eslint/types@8.59.2)
+      vite: 6.4.2(@types/node@24.12.4)(terser@5.46.0)(tsx@4.6.2)
+      vitefu: 1.1.3(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0))
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0(@babel/core@7.29.7)':
     dependencies:
@@ -15190,7 +15186,7 @@ snapshots:
       '@aws-cdk/cloud-assembly-schema': 53.28.0
       constructs: 10.6.0
 
-  aws-cdk@2.1124.1: {}
+  aws-cdk@2.1126.0: {}
 
   axe-core@4.12.1: {}
 
@@ -16600,7 +16596,7 @@ snapshots:
     dependencies:
       estraverse: 5.3.0
 
-  esrap@2.2.9(@typescript-eslint/types@8.61.0):
+  esrap@2.2.11(@typescript-eslint/types@8.59.2):
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
     optionalDependencies:
@@ -18669,6 +18665,8 @@ snapshots:
 
   obuf@1.1.2: {}
 
+  obug@2.1.2: {}
+
   on-finished@2.4.1:
     dependencies:
       ee-first: 1.1.1
@@ -19993,23 +19991,24 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-check@4.3.3(picomatch@4.0.4)(svelte@5.55.7(@typescript-eslint/types@8.61.0))(typescript@5.9.3):
+  svelte-check@4.6.0(picomatch@4.0.4)(svelte@5.56.3(@typescript-eslint/types@8.59.2))(typescript@5.9.3):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
+      '@sveltejs/load-config': 0.1.1
       chokidar: 4.0.3
       fdir: 6.5.0(picomatch@4.0.4)
       picocolors: 1.1.1
       sade: 1.8.1
-      svelte: 5.55.7(@typescript-eslint/types@8.61.0)
+      svelte: 5.56.3(@typescript-eslint/types@8.59.2)
       typescript: 5.9.3
     transitivePeerDependencies:
       - picomatch
 
-  svelte@5.55.7(@typescript-eslint/types@8.61.0):
+  svelte@5.56.3(@typescript-eslint/types@8.59.2):
     dependencies:
       '@jridgewell/remapping': 2.3.5
       '@jridgewell/sourcemap-codec': 1.5.5
-      '@sveltejs/acorn-typescript': 1.0.9(acorn@8.16.0)
+      '@sveltejs/acorn-typescript': 1.0.10(acorn@8.16.0)
       '@types/estree': 1.0.9
       '@types/trusted-types': 2.0.7
       acorn: 8.16.0
@@ -20018,7 +20017,7 @@ snapshots:
       clsx: 2.1.1
       devalue: 5.8.1
       esm-env: 1.2.2
-      esrap: 2.2.9(@typescript-eslint/types@8.61.0)
+      esrap: 2.2.11(@typescript-eslint/types@8.59.2)
       is-reference: 3.0.3
       locate-character: 3.0.0
       magic-string: 0.30.21
@@ -20578,7 +20577,7 @@ snapshots:
       terser: 5.48.0
       tsx: 4.6.2
 
-  vitefu@1.1.1(vite@6.4.2(@types/node@24.12.4)(terser@5.48.0)):
+  vitefu@1.1.3(vite@6.4.2(@types/node@24.12.4)(terser@5.46.0)):
     optionalDependencies:
       vite: 6.4.2(@types/node@24.12.4)(terser@5.48.0)(tsx@4.6.2)
 

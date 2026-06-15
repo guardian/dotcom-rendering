@@ -579,7 +579,7 @@ const BodyAdSlot = (props: {
 const WebAdSlot = (props: { adIndex: number }) => (
 	<div
 		css={{
-			'&': css([grid.paddedContainer, grid.verticalRules()]),
+			'&': css([grid.paddedContainer, grid.outerRules()]),
 			gridAutoFlow: 'row dense',
 			backgroundColor: palette('--article-inner-background'),
 		}}

@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { CricketMatch } from '../../cricketMatchV2';
+import type { EditionId } from '../../lib/edition';
 import { CricketMatchHeader } from './CricketMatchHeader';
 
 const meta = {
@@ -9,139 +11,239 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Fixture = {
-	args: {
-		edition: 'UK',
-		match: {
-			kind: 'Fixture',
-			series: 'Ashes 2025–2026',
-			competition: 'Second Test Match',
-			venue: 'Brisbane Cricket Ground',
-			matchDate: new Date('2026-01-26'),
-			homeTeam: {
-				paID: 'f7f611a1-e667-2aa2-c3e0-6dbc6981cfa4',
-				name: 'Australia',
-			},
-			awayTeam: {
-				paID: 'a359844f-fc07-9cfa-d4cc-9a9ac0d5d075',
-				name: 'England',
-			},
-			innings: [],
-		},
-		tabs: {
-			selected: 'info',
-			sportKind: 'cricket',
-			matchKind: 'Fixture',
-		},
+const defaultFallOfWickets = [
+	{
+		order: 1,
+		name: 'Emilio Gay',
+		runs: 16,
 	},
+	{
+		order: 2,
+		name: 'Ben Duckett',
+		runs: 31,
+	},
+	{
+		order: 3,
+		name: 'Jacob Bethell',
+		runs: 33,
+	},
+	{
+		order: 4,
+		name: 'Joe Root',
+		runs: 34,
+	},
+	{
+		order: 5,
+		name: 'Jamie Smith',
+		runs: 55,
+	},
+	{
+		order: 6,
+		name: 'Ben Stokes',
+		runs: 94,
+	},
+	{
+		order: 7,
+		name: 'Gus Atkinson',
+		runs: 108,
+	},
+	{
+		order: 8,
+		name: 'Harry Brook',
+		runs: 113,
+	},
+	{
+		order: 9,
+		name: 'Ollie Robinson',
+		runs: 118,
+	},
+	{
+		order: 10,
+		name: 'Shoaib Bashir',
+		runs: 140,
+	},
+];
+
+const defaultInnings = {
+	description: 'Australia 169/10 (20.0 overs)',
+	battingTeam: 'Australia',
+	bowlers: [],
+	batters: [],
+	extras: {
+		byes: 0,
+		legByes: 0,
+		noBalls: 0,
+		penalties: 0,
+		wides: 0,
+	},
+	declared: false,
+	forfeited: false,
+	inningsTotals: {
+		runs: 169,
+		overs: '20.0',
+		wickets: 0,
+		extras: 0,
+	},
+	fallOfWickets: defaultFallOfWickets,
+};
+
+const baseArgs = {
+	edition: 'UK' as EditionId,
+	match: {
+		kind: 'Fixture' as CricketMatch['kind'],
+		series: 'Ashes 2025–2026',
+		competition: 'Second Test Match',
+		venue: 'Brisbane Cricket Ground',
+		matchDate: new Date('2026-01-26'),
+		homeTeam: {
+			paID: 'f7f611a1-e667-2aa2-c3e0-6dbc6981cfa4',
+			name: 'Australia',
+			lineup: ['David Warner', 'Travis Head'],
+		},
+		awayTeam: {
+			paID: 'a359844f-fc07-9cfa-d4cc-9a9ac0d5d075',
+			name: 'England',
+			lineup: ['Zak Crawley', 'Alex Lees'],
+		},
+		innings: [],
+		officials: [],
+	},
+	selectedTab: 'info' as 'info' | 'live' | 'report',
+	infoURL: new URL(
+		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+	),
+};
+
+export const Fixture = {
+	args: baseArgs,
 } satisfies Story;
 
 export const Live = {
 	args: {
-		edition: 'UK',
+		...baseArgs,
 		match: {
 			...Fixture.args.match,
-			kind: 'Live',
+			kind: 'Live' as CricketMatch['kind'],
 			day: 2,
 			innings: [
 				{
-					declared: false,
-					forfeited: false,
+					...defaultInnings,
+					description: 'Australia 169/10 (20.0 overs)',
 					battingTeam: 'Australia',
-					runs: 169,
-					overs: '20.0',
-					fallOfWickets: 0,
+					inningsTotals: {
+						runs: 169,
+						overs: '20.0',
+						wickets: 0,
+						extras: 0,
+					},
+					fallOfWickets: [],
 				},
 				{
-					declared: false,
-					forfeited: false,
+					...defaultInnings,
+					description: 'England 173/3 (19.3 overs)',
 					battingTeam: 'England',
-					runs: 173,
-					overs: '19.3',
-					fallOfWickets: 3,
+					inningsTotals: {
+						runs: 173,
+						overs: '19.3',
+						wickets: 3,
+						extras: 0,
+					},
+					fallOfWickets: defaultFallOfWickets.slice(0, 3),
 				},
 			],
 		},
-		tabs: {
-			selected: 'info',
-			sportKind: 'cricket',
-			matchKind: 'Live',
-			liveURL: new URL(
-				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-			),
-		},
+		selectedTab: 'info',
+		infoURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		),
 	},
 } satisfies Story;
 
 export const LiveYetToBat = {
 	name: 'Live (Team yet to bat)',
 	args: {
-		edition: 'UK',
+		...baseArgs,
+		edition: 'UK' as EditionId,
 		match: {
 			...Fixture.args.match,
 			kind: 'Live',
 			day: 2,
 			innings: [
 				{
-					declared: false,
-					forfeited: false,
+					...defaultInnings,
+					description: 'Australia 169 all out (20.0 overs)',
 					battingTeam: 'Australia',
-					runs: 169,
-					overs: '20.0',
-					fallOfWickets: 10,
+					inningsTotals: {
+						runs: 169,
+						overs: '20.0',
+						wickets: 10,
+						extras: 0,
+					},
+					fallOfWickets: defaultFallOfWickets,
 				},
 			],
 		},
-		tabs: {
-			selected: 'info',
-			sportKind: 'cricket',
-			matchKind: 'Live',
-			liveURL: new URL(
-				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-			),
-		},
+		selectedTab: 'info',
+		infoURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		),
 	},
 } satisfies Story;
 
 export const Result = {
 	args: {
-		edition: 'UK',
+		...baseArgs,
+		edition: 'UK' as EditionId,
 		match: {
 			...Fixture.args.match,
 			kind: 'Result',
 			day: 4,
 			innings: [
 				{
-					declared: false,
-					forfeited: false,
+					...defaultInnings,
 					battingTeam: 'Australia',
-					runs: 245,
-					overs: '65.0',
-					fallOfWickets: 10,
+					inningsTotals: {
+						runs: 245,
+						overs: '65.0',
+						wickets: 10,
+						extras: 0,
+					},
 				},
 				{
-					declared: false,
-					forfeited: false,
+					...defaultInnings,
 					battingTeam: 'England',
-					runs: 361,
-					overs: '89.5',
-					fallOfWickets: 10,
+					inningsTotals: {
+						runs: 361,
+						overs: '89.5',
+						wickets: 10,
+						extras: 0,
+					},
 				},
 				{
-					declared: false,
-					forfeited: false,
+					...defaultInnings,
 					battingTeam: 'Australia',
-					runs: 258,
-					overs: '78.1',
-					fallOfWickets: 10,
+					inningsTotals: {
+						runs: 258,
+						overs: '78.1',
+						wickets: 10,
+						extras: 0,
+					},
 				},
 				{
-					declared: false,
-					forfeited: false,
+					...defaultInnings,
 					battingTeam: 'England',
-					runs: 364,
-					overs: '92.5',
-					fallOfWickets: 10,
+					inningsTotals: {
+						runs: 364,
+						overs: '92.5',
+						wickets: 10,
+						extras: 0,
+					},
 				},
 			],
 			result: {
@@ -154,39 +256,45 @@ export const Result = {
 				},
 			},
 		},
-		tabs: {
-			selected: 'info',
-			sportKind: 'cricket',
-			matchKind: 'Result',
-			liveURL: new URL(
-				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-			),
-		},
+		selectedTab: 'info',
+		infoURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		),
 	},
 } satisfies Story;
 
 export const ResultWinByWickets = {
 	args: {
-		edition: 'UK',
+		...baseArgs,
+		edition: 'UK' as EditionId,
 		match: {
 			...Fixture.args.match,
 			kind: 'Result',
 			innings: [
 				{
-					declared: false,
-					forfeited: false,
+					...defaultInnings,
 					battingTeam: 'Australia',
-					runs: 186,
-					overs: '16.2',
-					fallOfWickets: 3,
+					inningsTotals: {
+						runs: 186,
+						overs: '16.2',
+						wickets: 3,
+						extras: 0,
+					},
+					fallOfWickets: defaultFallOfWickets.slice(0, 3),
 				},
 				{
-					declared: false,
-					forfeited: false,
+					...defaultInnings,
 					battingTeam: 'England',
-					runs: 182,
-					overs: '20.0',
-					fallOfWickets: 8,
+					inningsTotals: {
+						runs: 182,
+						overs: '20.0',
+						wickets: 8,
+						extras: 0,
+					},
+					fallOfWickets: defaultFallOfWickets.slice(0, 8),
 				},
 			],
 			result: {
@@ -198,69 +306,81 @@ export const ResultWinByWickets = {
 				},
 			},
 		},
-		tabs: {
-			selected: 'info',
-			sportKind: 'cricket',
-			matchKind: 'Result',
-			liveURL: new URL(
-				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-			),
-		},
+		selectedTab: 'info',
+
+		infoURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		),
 	},
 } satisfies Story;
 
 export const ResultDrawn = {
 	args: {
-		edition: 'UK',
+		...baseArgs,
+		edition: 'UK' as EditionId,
 		match: {
 			...Fixture.args.match,
 			kind: 'Result',
 			day: 4,
 			innings: [
 				{
-					declared: false,
-					forfeited: false,
+					...defaultInnings,
 					battingTeam: 'Australia',
-					runs: 302,
-					overs: '120.3',
-					fallOfWickets: 10,
+					inningsTotals: {
+						runs: 302,
+						overs: '120.3',
+						wickets: 10,
+						extras: 0,
+					},
 				},
 				{
-					declared: false,
-					forfeited: false,
+					...defaultInnings,
 					battingTeam: 'England',
-					runs: 226,
-					overs: '60.2',
-					fallOfWickets: 10,
+					inningsTotals: {
+						runs: 226,
+						overs: '60.2',
+						wickets: 10,
+						extras: 0,
+					},
 				},
 				{
+					...defaultInnings,
 					declared: true,
-					forfeited: false,
 					battingTeam: 'Australia',
-					runs: 218,
-					overs: '72.5',
-					fallOfWickets: 5,
+					inningsTotals: {
+						runs: 218,
+						overs: '72.5',
+						wickets: 5,
+						extras: 0,
+					},
+					fallOfWickets: defaultFallOfWickets.slice(0, 5),
 				},
 				{
-					declared: false,
+					...defaultInnings,
 					forfeited: false,
 					battingTeam: 'England',
-					runs: 239,
-					overs: '67.4',
-					fallOfWickets: 7,
+					inningsTotals: {
+						runs: 239,
+						overs: '67.4',
+						wickets: 7,
+						extras: 0,
+					},
+					fallOfWickets: defaultFallOfWickets.slice(0, 7),
 				},
 			],
 			result: {
 				type: 'draw',
 			},
 		},
-		tabs: {
-			selected: 'info',
-			sportKind: 'cricket',
-			matchKind: 'Result',
-			liveURL: new URL(
-				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-			),
-		},
+		selectedTab: 'info',
+		infoURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+		),
+		liveURL: new URL(
+			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		),
 	},
 } satisfies Story;

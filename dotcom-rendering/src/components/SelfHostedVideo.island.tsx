@@ -372,6 +372,7 @@ type Props = {
 	format?: ArticleFormat;
 	isMainMedia?: boolean;
 	role?: RoleType;
+	preventAutoplay: boolean;
 	restrictHeightOnDesktop?: boolean;
 	cardLink?: {
 		headlineText: string;
@@ -388,6 +389,7 @@ export const SelfHostedVideo = ({
 	videoStyle,
 	aspectRatio,
 	posterImage,
+	posterImageAspectRatio,
 	fallbackImage,
 	fallbackImageSize,
 	fallbackImageLoading,
@@ -406,7 +408,7 @@ export const SelfHostedVideo = ({
 	format,
 	isMainMedia,
 	role,
-	posterImageAspectRatio,
+	preventAutoplay,
 	restrictHeightOnDesktop = false,
 	cardLink,
 	isInLoopClickTestVariant,
@@ -430,6 +432,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
+	const [isFullscreen, setIsFullscreen] = useState(false);
 	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
 	const [isProgressBarSeeking, setIsProgressBarSeeking] = useState(false);
 	/** Whether the video should show controls */
@@ -445,7 +448,14 @@ export const SelfHostedVideo = ({
 
 	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
-	const shouldAutoplay = videoStyleSettings.autoplay && isAutoplayAllowed;
+	/**
+	 * The video will autoplay if all of the following are true:
+	 * - the style of video allows autoplay
+	 * - the parent allows autoplay, i.e. we may not want to autoplay on certain page types
+	 * - autoplay is allowed by the browser, e.g. if "reduce motion" is enabled then we don't autoplay
+	 */
+	const shouldAutoplay =
+		videoStyleSettings.autoplay && !preventAutoplay && isAutoplayAllowed;
 
 	const showProgressBar =
 		!hideProgressBar &&
@@ -596,27 +606,30 @@ export const SelfHostedVideo = ({
 		}
 	}, []);
 
-	const pauseVideo = (
-		pauseReason: Extract<
-			PlayerStates,
-			| 'PAUSED_BY_USER'
-			| 'PAUSED_BY_INTERSECTION_OBSERVER'
-			| 'PAUSED_BY_BROWSER'
-		>,
-	) => {
-		const video = vidRef.current;
-		if (!video) {
-			return;
-		}
+	const pauseVideo = useCallback(
+		(
+			pauseReason: Extract<
+				PlayerStates,
+				| 'PAUSED_BY_USER'
+				| 'PAUSED_BY_INTERSECTION_OBSERVER'
+				| 'PAUSED_BY_BROWSER'
+			>,
+		) => {
+			const video = vidRef.current;
+			if (!video) {
+				return;
+			}
 
-		if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
-			setMutedState({ value: true, track: false });
-		}
+			if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
+				setMutedState({ value: true, track: false });
+			}
 
-		setPlayerState(pauseReason);
+			setPlayerState(pauseReason);
 
-		void video.pause();
-	};
+			void video.pause();
+		},
+		[setMutedState],
+	);
 
 	const playPauseVideo = () => {
 		if (playerState === 'PLAYING') {
@@ -768,6 +781,9 @@ export const SelfHostedVideo = ({
 			if (document.visibilityState === 'visible') {
 				handlePageBecomesVisible();
 			}
+			if (renderingTarget === 'Apps' && document.hidden) {
+				pauseVideo('PAUSED_BY_BROWSER');
+			}
 		});
 
 		return () => {
@@ -786,7 +802,7 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [setMutedState, uniqueId, sources, renderingTarget]);
+	}, [setMutedState, uniqueId, sources, renderingTarget, pauseVideo]);
 
 	/* Creates video-specific event listeners to handle fullscreen behaviour */
 	useEffect(() => {
@@ -861,38 +877,55 @@ export const SelfHostedVideo = ({
 
 		if (!playerContainer && !video) return;
 
-		const reportFullscreenEvent = () => {
-			const event =
-				document.fullscreenElement ||
-				(video &&
+		const updateStateAndReportFullscreenEvent = () => {
+			const isInFullscreenMode =
+				document.fullscreenElement !== null ||
+				(video !== null &&
 					'webkitDisplayingFullscreen' in video &&
-					Boolean(video.webkitDisplayingFullscreen))
-					? 'enter_fullscreen'
-					: 'exit_fullscreen';
+					Boolean(video.webkitDisplayingFullscreen));
+
+			if (isInFullscreenMode) {
+				setIsFullscreen(true);
+			} else {
+				setIsFullscreen(false);
+			}
+
+			const event = isInFullscreenMode
+				? 'enter_fullscreen'
+				: 'exit_fullscreen';
 
 			sendOphanTrackingEvent(event);
 		};
 
 		for (const event of fullscreenChangeEvents) {
 			if (video) {
-				video.addEventListener(event, reportFullscreenEvent);
+				video.addEventListener(
+					event,
+					updateStateAndReportFullscreenEvent,
+				);
 			}
 
 			if (playerContainer) {
-				playerContainer.addEventListener(event, reportFullscreenEvent);
+				playerContainer.addEventListener(
+					event,
+					updateStateAndReportFullscreenEvent,
+				);
 			}
 		}
 
 		return () => {
 			for (const event of fullscreenChangeEvents) {
 				if (video) {
-					video.removeEventListener(event, reportFullscreenEvent);
+					video.removeEventListener(
+						event,
+						updateStateAndReportFullscreenEvent,
+					);
 				}
 
 				if (playerContainer) {
 					playerContainer.removeEventListener(
 						event,
-						reportFullscreenEvent,
+						updateStateAndReportFullscreenEvent,
 					);
 				}
 			}
@@ -1084,9 +1117,11 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleEnded = () => {
-		trackMilestones({ ended: true });
-		resetMilestones();
-		setPlayerState('ENDED');
+		if (playerState === 'PLAYING') {
+			trackMilestones({ ended: true });
+			resetMilestones();
+			setPlayerState('ENDED');
+		}
 	};
 
 	/**
@@ -1317,12 +1352,13 @@ export const SelfHostedVideo = ({
 							videoStyleSettings.supportsFullscreen
 						}
 						isInteractive={videoStyleSettings.isInteractive}
+						isFullscreen={isFullscreen}
 						isWebKitFullscreen={isWebKitFullscreen}
 						linkTo={linkTo}
 						cardLink={cardLink}
-						isLoopClickThroughTestVariant={
-							isLoopClickThroughTestVariant
-						}
+						isLoopAndInLoopClickTestVariant={Boolean(
+							isLoopClickThroughTestVariant,
+						)}
 					/>
 				</div>
 			</div>

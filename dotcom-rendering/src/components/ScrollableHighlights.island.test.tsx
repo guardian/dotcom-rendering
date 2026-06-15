@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import {
 	defaultCard,
-	newsletterCard,
+	newsletterSignupCard,
 	trails,
 } from '../../fixtures/manual/highlights-trails';
 import { ConfigProvider } from './ConfigContext';
@@ -35,8 +35,17 @@ const renderHighlights = (
 		</ConfigProvider>,
 	);
 
-const newsletterCardWithoutData = {
-	...newsletterCard,
+/** A signup card where newsletterData is missing — should still be hidden when the switch is off. */
+const newsletterSignupCardWithoutData = {
+	...newsletterSignupCard,
+	newsletterData: undefined,
+};
+
+/** An article tagged with a newsletter topic but NOT a signup card — should always be shown. */
+const newsletterTaggedArticle = {
+	...newsletterSignupCard,
+	isNewsletter: true,
+	isNewsletterSignup: false,
 	newsletterData: undefined,
 };
 
@@ -47,31 +56,41 @@ describe('ScrollableHighlights — newsletter card AB test', () => {
 
 	describe('when user is in the "enable" group', () => {
 		it('renders the HighlightsNewsletterCard for a newsletter trail', () => {
-			renderHighlights([newsletterCard], true);
+			renderHighlights([newsletterSignupCard], true);
 
 			expect(
 				screen.getByRole('link', {
-					name: newsletterCard.headline,
+					name: newsletterSignupCard.headline,
 				}),
 			).toBeInTheDocument();
 		});
 
-		it('does not render a newsletter card when newsletterData is missing', () => {
-			renderHighlights([newsletterCardWithoutData], true);
+		it('does not render a newsletter signup card when newsletterData is missing', () => {
+			renderHighlights([newsletterSignupCardWithoutData], true);
 
 			expect(
 				screen.queryByRole('link', {
-					name: newsletterCardWithoutData.headline,
+					name: newsletterSignupCardWithoutData.headline,
 				}),
 			).not.toBeInTheDocument();
 		});
 
-		it('still renders regular cards alongside the newsletter card', () => {
-			renderHighlights([newsletterCard, defaultCard], true);
+		it('renders a newsletter-tagged article (isNewsletter) even when newsletterData is missing', () => {
+			renderHighlights([newsletterTaggedArticle], true);
 
 			expect(
 				screen.getByRole('link', {
-					name: `${newsletterCard.headline}`,
+					name: newsletterTaggedArticle.headline,
+				}),
+			).toBeInTheDocument();
+		});
+
+		it('still renders regular cards alongside the newsletter card', () => {
+			renderHighlights([newsletterSignupCard, defaultCard], true);
+
+			expect(
+				screen.getByRole('link', {
+					name: `${newsletterSignupCard.headline}`,
 				}),
 			).toBeInTheDocument();
 			expect(screen.getByText(defaultCard.headline)).toBeInTheDocument();
@@ -79,22 +98,32 @@ describe('ScrollableHighlights — newsletter card AB test', () => {
 	});
 
 	describe('when user is NOT in the "enable" group', () => {
-		it('does not render a newsletter card when newsletterData is missing', () => {
-			renderHighlights([newsletterCardWithoutData], false);
+		it('does not render a newsletter signup card when newsletterData is missing', () => {
+			renderHighlights([newsletterSignupCardWithoutData], false);
 
 			expect(
 				screen.queryByRole('link', {
-					name: newsletterCardWithoutData.headline,
+					name: newsletterSignupCardWithoutData.headline,
 				}),
 			).not.toBeInTheDocument();
 		});
 
+		it('renders a newsletter-tagged article (isNewsletter) even when newsletterData is missing', () => {
+			renderHighlights([newsletterTaggedArticle], false);
+
+			expect(
+				screen.getByRole('link', {
+					name: newsletterTaggedArticle.headline,
+				}),
+			).toBeInTheDocument();
+		});
+
 		it('does not render a newsletter card at all', () => {
-			renderHighlights([newsletterCard], false);
+			renderHighlights([newsletterSignupCard], false);
 
 			expect(
 				screen.queryByRole('link', {
-					name: newsletterCard.headline,
+					name: newsletterSignupCard.headline,
 				}),
 			).not.toBeInTheDocument();
 
@@ -104,11 +133,11 @@ describe('ScrollableHighlights — newsletter card AB test', () => {
 		});
 
 		it('does not render a newsletter trail when newsletterData is missing', () => {
-			renderHighlights([newsletterCardWithoutData], false);
+			renderHighlights([newsletterSignupCardWithoutData], false);
 
 			expect(
 				screen.queryByRole('link', {
-					name: newsletterCardWithoutData.headline,
+					name: newsletterSignupCardWithoutData.headline,
 				}),
 			).not.toBeInTheDocument();
 			expect(
@@ -117,7 +146,7 @@ describe('ScrollableHighlights — newsletter card AB test', () => {
 		});
 
 		it('still renders non-newsletter cards normally', () => {
-			renderHighlights([newsletterCard, defaultCard], false);
+			renderHighlights([newsletterSignupCard, defaultCard], false);
 
 			expect(screen.getByText(defaultCard.headline)).toBeInTheDocument();
 		});

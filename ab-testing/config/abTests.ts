@@ -121,7 +121,7 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-user-module-intentIq-us-region",
+		name: "commercial-user-module-intentIq-us",
 		description:
 			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module for users in the US",
 		owners: ["commercial.dev@guardian.co.uk"],
@@ -140,7 +140,7 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-06-11",
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
@@ -182,6 +182,19 @@ const ABTests: ABTest[] = [
 		audienceSize: 20 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "feast-recipe-nudge",
+		description:
+			"Measures the impact of showing the Feast contextual nudge on recipe article pages",
+		owners: ["feast@theguardian.com"],
+		status: "ON",
+		expirationDate: "2027-01-01",
+		type: "client",
+		audienceSize: 1,
+		audienceSpace: "D",
+		groups: ["control", "variant-1"],
 		shouldForceMetricsCollection: false,
 	},
 ];

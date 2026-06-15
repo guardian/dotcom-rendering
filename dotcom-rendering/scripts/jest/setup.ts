@@ -114,5 +114,22 @@ global.ReadableStream =
 	ReadableStream as unknown as typeof global.ReadableStream;
 global.MessagePort = MessagePort as unknown as typeof global.MessagePort;
 
+if (!isServer) {
+	Object.defineProperty(window, 'matchMedia', {
+		writable: true,
+		value: (query: string): MediaQueryList =>
+			({
+				matches: false,
+				media: query,
+				onchange: null,
+				addListener: () => {},
+				removeListener: () => {},
+				addEventListener: () => {},
+				removeEventListener: () => {},
+				dispatchEvent: () => false,
+			}) as MediaQueryList,
+	});
+}
+
 // Mocks the version number used by CDK, we don't want our tests to fail every time we update our cdk dependency.
 jest.mock('@guardian/cdk/lib/constants/tracking-tag');

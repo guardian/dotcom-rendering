@@ -1,36 +1,48 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { newsletterCard } from '../../../fixtures/manual/highlights-trails';
-import { sendNewsletterSignupEvent } from '../../lib/newsletterSignupTracking';
-import { useIsInView } from '../../lib/useIsInView';
-import { ConfigProvider } from '../ConfigContext';
-import { HighlightsCardImage } from './HighlightsCardImage';
+import { newsletterSignupCard } from '../../../../fixtures/manual/highlights-trails';
+import { sendNewsletterSignupEvent } from '../../../lib/newsletterSignupTracking';
+import { useIsInView } from '../../../lib/useIsInView';
+import { ConfigProvider } from '../../ConfigContext';
+import { HighlightsCardImage } from '../HighlightsCardImage';
 import { HighlightsNewsletterCard } from './HighlightsNewsletterCard';
 
-jest.mock('../../lib/newsletterSignupTracking', () => ({
+jest.mock('../../../lib/newsletterSignupTracking', () => ({
 	sendNewsletterSignupEvent: jest.fn(),
 	NEWSLETTER_SIGNUP_COMPONENT_ID: {
 		highlightsCard: (id: string) => `highlights-card-${id}`,
 	},
 }));
 
-jest.mock('../../lib/useIsInView', () => ({
+jest.mock('../../../lib/useIsInView', () => ({
 	useIsInView: jest.fn(),
 }));
 
-jest.mock('./HighlightsCardImage', () => ({
+jest.mock('../HighlightsCardImage', () => ({
 	HighlightsCardImage: jest.fn(() => (
 		<div data-testid="highlights-card-image" />
 	)),
 }));
 
+jest.mock('./HighlightsNewsletterSignupModal', () => ({
+	HighlightsNewsletterSignupModal: jest.fn(
+		({ onClose }: { onClose: () => void }) => (
+			<div data-testid="highlights-newsletter-signup-modal">
+				<button type="button" onClick={onClose}>
+					Close signup form
+				</button>
+			</div>
+		),
+	),
+}));
+
 const defaultProps: React.ComponentProps<typeof HighlightsNewsletterCard> = {
-	format: newsletterCard.format,
-	newsletter: newsletterCard.newsletterData!,
-	headlineText: newsletterCard.headline,
-	linkTo: newsletterCard.url,
+	format: newsletterSignupCard.format,
+	newsletter: newsletterSignupCard.newsletterData!,
+	headlineText: newsletterSignupCard.headline,
+	linkTo: newsletterSignupCard.url,
 	dataLinkName: 'highlights-newsletter-card | open-signup',
-	image: newsletterCard.image,
+	image: newsletterSignupCard.image,
 	renderingTarget: 'Web',
 };
 
@@ -66,7 +78,7 @@ describe('HighlightsNewsletterCard', () => {
 		setCardInView(false);
 	});
 
-	it('renders a semantic link overlay with expected attributes and tracks click', () => {
+	it('opens signup modal on Web click and tracks click', () => {
 		setCardInView(true);
 
 		renderCard();
@@ -91,6 +103,9 @@ describe('HighlightsNewsletterCard', () => {
 		);
 
 		fireEvent.click(link);
+		expect(
+			screen.getByTestId('highlights-newsletter-signup-modal'),
+		).toBeInTheDocument();
 
 		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
 			expect.objectContaining({
@@ -99,6 +114,35 @@ describe('HighlightsNewsletterCard', () => {
 				componentId: `highlights-card-${defaultProps.newsletter.identityName}`,
 				renderingTarget: defaultProps.renderingTarget,
 				value: { eventDescription: 'highlights-card-modal-opened' },
+			}),
+		);
+	});
+
+	it('tracks a CLOSE event and unmounts the modal when dismissed', () => {
+		renderCard();
+
+		fireEvent.click(
+			screen.getByRole('link', { name: defaultProps.headlineText }),
+		);
+		expect(
+			screen.getByTestId('highlights-newsletter-signup-modal'),
+		).toBeInTheDocument();
+
+		fireEvent.click(
+			screen.getByRole('button', { name: 'Close signup form' }),
+		);
+
+		expect(
+			screen.queryByTestId('highlights-newsletter-signup-modal'),
+		).not.toBeInTheDocument();
+
+		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
+			expect.objectContaining({
+				action: 'CLOSE',
+				identityName: defaultProps.newsletter.identityName,
+				componentId: `highlights-card-${defaultProps.newsletter.identityName}`,
+				renderingTarget: defaultProps.renderingTarget,
+				value: { eventDescription: 'highlights-card-modal-closed' },
 			}),
 		);
 	});
@@ -116,6 +160,24 @@ describe('HighlightsNewsletterCard', () => {
 				renderingTarget: defaultProps.renderingTarget,
 				value: { eventDescription: 'highlights-card-viewed' },
 			}),
+		);
+	});
+
+	it('does not open signup modal on Apps click and does not track EXPAND', () => {
+		renderCard({ renderingTarget: 'Apps' });
+
+		const link = screen.getByRole('link', {
+			name: defaultProps.headlineText,
+		});
+
+		fireEvent.click(link);
+
+		expect(
+			screen.queryByTestId('highlights-newsletter-signup-modal'),
+		).not.toBeInTheDocument();
+
+		expect(sendNewsletterSignupEvent).not.toHaveBeenCalledWith(
+			expect.objectContaining({ action: 'EXPAND' }),
 		);
 	});
 
