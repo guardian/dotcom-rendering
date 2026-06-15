@@ -72,12 +72,6 @@ const getPagePath = ({
 		searchParams.append('dcr', 'apps');
 	}
 
-	const fragmentPart = `#${fragment}`;
-
-	if (!searchParams.size) {
-		return fragmentPart;
-	}
-
 	return `?${searchParams.toString()}#${fragment}`;
 };
 

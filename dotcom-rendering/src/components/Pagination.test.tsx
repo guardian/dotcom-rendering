@@ -30,26 +30,6 @@ describe('Pagination', () => {
 			expect(queryAllByText('Newest').length).toBeGreaterThan(0);
 			expect(queryByText('Previous')).not.toBeNull();
 		});
-
-		it('does not add an empty query string when there are no params to render', () => {
-			const { getAllByRole } = render(
-				<Pagination
-					currentPage={2}
-					totalPages={3}
-					newest=""
-					newer=""
-					renderingTarget="Web"
-				/>,
-			);
-
-			expect(
-				getAllByRole('link').map((a) => (a as HTMLAnchorElement).href),
-			).toEqual([
-				'http://localhost/#maincontent',
-				'http://localhost/#maincontent',
-				'http://localhost/#liveblog-navigation',
-			]);
-		});
 	});
 
 	describe('older and oldest', () => {
