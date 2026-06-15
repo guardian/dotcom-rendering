@@ -16,11 +16,11 @@ type Props = {
  * across apps & webx.
  *
  * Secondly, we use ReactDOM's `createRoot` and `render` here instead of
- * rendering `CricketScorecardPageNew` as part of the main React tree. This lets
- * us avoid wrapping a large portion of the StandardLayout and LiveLayout in an
- * island, which would cause practically the entire page to be hydrated and lose
- * the performance benefits of islands, as well as causing complications with
- * passing the entire live blog or article content as props to said island.
+ * rendering as part of the main React tree to avoid wrapping a large portion
+ * of the StandardLayout and LiveLayout in an island, which would cause practically
+ * the entire page to be hydrated and lose the benefits of islands, as well as causing
+ * complications with passing the entire live blog or article content as props to
+ * said island.
  *
  */
 export const CricketScorecardTabRemoteRender = ({

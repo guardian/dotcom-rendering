@@ -4,6 +4,10 @@ import { type EditionId } from '../lib/edition';
 import { CricketMatchHeader } from './CricketMatchHeader/CricketMatchHeader';
 import type { TabName } from './FootballMatchHeader/Tabs';
 
+/**
+ * This component is just used to test the CricketMatchHeader tab rendering in Storybook.
+ * It is not used in production.
+ */
 export const CricketScorecardPageNew = ({
 	match,
 	edition,
