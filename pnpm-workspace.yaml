@@ -22,7 +22,7 @@ catalog:
   aws-cdk: 2.1126.0
   aws-cdk-lib: 2.257.0
   constructs: 10.6.0
-  esbuild: 0.27.0
+  esbuild: 0.28.1
   eslint: 9.39.1
   rollup: 4.59.0
   rollup-plugin-esbuild: 6.2.1
