@@ -112,27 +112,24 @@ const getToggleContainerStyles = (isFullWidth: boolean) => css`
 	min-width: 0;
 `;
 
-const privacyContainerStyles = css`
-	margin-top: ${space[2]}px;
-
-	${until.tablet} {
-		margin-top: ${space[3]}px;
-	}
-`;
-
-const signedInPrivacyContainerStyles = css`
-	margin-top: ${space[3]}px;
-	padding-top: ${space[2]}px;
-	border-top: 1px solid ${palette('--card-border-supporting')};
-`;
-
 const getPrivacyContainerStyles = (
 	isSignedIn: boolean | 'Pending',
 	isModal: boolean,
-) => [
-	privacyContainerStyles,
-	isSignedIn === true && !isModal && signedInPrivacyContainerStyles,
-];
+) => {
+	if (isSignedIn === true && !isModal) {
+		return css`
+			margin-top: ${space[5]}px;
+			padding-top: ${space[2]}px;
+			border-top: 1px solid ${palette('--card-border-supporting')};
+		`;
+	}
+	return css`
+		margin-top: ${space[2]}px;
+		${until.tablet} {
+			margin-top: ${space[3]}px;
+		}
+	`;
+};
 
 const successTextStyles = css`
 	color: ${palette('--newsletter-card-description')};
