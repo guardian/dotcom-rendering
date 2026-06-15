@@ -56,10 +56,6 @@ const baseArgs = {
 				"Will O'Rourke",
 			],
 		},
-		selectedTab: 'info' as 'info' | 'live' | 'report',
-		infoURL: new URL(
-			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
-		),
 		innings: [],
 		officials: [
 			'P R Reiffel',
@@ -69,6 +65,10 @@ const baseArgs = {
 			'R S Madugalle',
 		],
 	},
+	selectedTab: 'info' as 'info' | 'live' | 'report',
+	infoURL: new URL(
+		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
+	),
 	edition: 'UK',
 } satisfies ComponentProps<typeof CricketScorecardPageNewComponent>;
 
