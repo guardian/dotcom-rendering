@@ -113,7 +113,11 @@ const getToggleContainerStyles = (isFullWidth: boolean) => css`
 `;
 
 const privacyContainerStyles = css`
-	grid-column: 1 / -1;
+	margin-top: ${space[2]}px;
+
+	${until.tablet} {
+		margin-top: ${space[3]}px;
+	}
 `;
 
 const signedInPrivacyContainerStyles = css`
@@ -368,28 +372,19 @@ const NewsletterSignupFormActive = ({
 						/>
 					</div>
 				)}
-				{showAdditionalFields && (
-					<>
-						{showMarketingToggle && (
-							<div css={getToggleContainerStyles(isModal)}>
-								<div css={marketingToggleBoxStyles}>
-									<ToggleSwitch
-										id={`marketing-opt-in-${newsletterId}`}
-										checked={marketingOptIn ?? false}
-										onClick={handleMarketingToggle}
-										label="Get updates about our journalism and ways to support and enjoy
+				{showAdditionalFields && showMarketingToggle && (
+					<div css={getToggleContainerStyles(isModal)}>
+						<div css={marketingToggleBoxStyles}>
+							<ToggleSwitch
+								id={`marketing-opt-in-${newsletterId}`}
+								checked={marketingOptIn ?? false}
+								onClick={handleMarketingToggle}
+								label="Get updates about our journalism and ways to support and enjoy
 								our work. Toggle to opt out."
-										labelPosition="left"
-									/>
-								</div>
-							</div>
-						)}
-						<div
-							css={getPrivacyContainerStyles(isSignedIn, isModal)}
-						>
-							<NewsletterPrivacyMessage isSignedIn={isSignedIn} />
+								labelPosition="left"
+							/>
 						</div>
-					</>
+					</div>
 				)}
 				<div css={submitButtonContainerStyles}>
 					{isSignedIn && previewAction && (
@@ -410,6 +405,12 @@ const NewsletterSignupFormActive = ({
 					</Button>
 				</div>
 			</form>
+
+			{showAdditionalFields && showForm && (
+				<div css={getPrivacyContainerStyles(isSignedIn, isModal)}>
+					<NewsletterPrivacyMessage isSignedIn={isSignedIn} />
+				</div>
+			)}
 
 			{showSuccess && (
 				<SuccessMessage
