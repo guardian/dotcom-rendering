@@ -19,10 +19,9 @@ type Props = {
 	matchKind: FootballMatch['kind'];
 	sportKind: 'football' | 'cricket';
 	selected: TabName;
-	reportURL?: URL;
-	liveURL?: URL;
-	infoURL?: URL;
-	onTabClick?: (tab: TabName) => void;
+	reportTab?: URL;
+	liveTab?: URL;
+	infoTab?: URL | (() => void);
 };
 
 export const Tabs = (props: Props) => (
@@ -49,15 +48,15 @@ export const Tabs = (props: Props) => (
 );
 
 const MatchReport = (
-	props: Pick<Props, 'selected' | 'matchKind' | 'reportURL'>,
+	props: Pick<Props, 'selected' | 'matchKind' | 'reportTab'>,
 ) => {
 	if (props.selected === 'report') {
 		return <Tab matchKind={props.matchKind}>Match report</Tab>;
 	}
 
-	if (props.reportURL !== undefined) {
+	if (props.reportTab !== undefined) {
 		return (
-			<Tab matchKind={props.matchKind} href={props.reportURL}>
+			<Tab matchKind={props.matchKind} href={props.reportTab}>
 				Match report
 			</Tab>
 		);
@@ -66,14 +65,14 @@ const MatchReport = (
 	return null;
 };
 
-const LiveFeed = (props: Pick<Props, 'selected' | 'matchKind' | 'liveURL'>) => {
+const LiveFeed = (props: Pick<Props, 'selected' | 'matchKind' | 'liveTab'>) => {
 	if (props.selected === 'live') {
 		return <Tab matchKind={props.matchKind}>Live feed</Tab>;
 	}
 
-	if (props.liveURL !== undefined) {
+	if (props.liveTab !== undefined) {
 		return (
-			<Tab matchKind={props.matchKind} href={props.liveURL}>
+			<Tab matchKind={props.matchKind} href={props.liveTab}>
 				Live feed
 			</Tab>
 		);
@@ -83,21 +82,30 @@ const LiveFeed = (props: Pick<Props, 'selected' | 'matchKind' | 'liveURL'>) => {
 };
 
 const MatchInfo = (
-	props: Pick<Props, 'selected' | 'matchKind' | 'sportKind' | 'onTabClick'>,
+	props: Pick<Props, 'selected' | 'matchKind' | 'sportKind' | 'infoTab'>,
 ) => {
 	const tabText = props.sportKind === 'cricket' ? 'Scorecard' : 'Match info';
 	if (props.selected === 'info') {
 		return <Tab matchKind={props.matchKind}>{tabText}</Tab>;
 	}
 
-	return (
-		<Tab
-			matchKind={props.matchKind}
-			onClick={() => props.onTabClick?.('info')}
-		>
-			{tabText}
-		</Tab>
-	);
+	if (props.infoTab instanceof URL) {
+		return (
+			<Tab matchKind={props.matchKind} href={props.infoTab}>
+				{tabText}
+			</Tab>
+		);
+	}
+
+	if (props.infoTab) {
+		return (
+			<Tab matchKind={props.matchKind} onClick={props.infoTab}>
+				{tabText}
+			</Tab>
+		);
+	}
+
+	return null;
 };
 
 const Tab = (

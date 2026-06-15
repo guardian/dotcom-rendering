@@ -12,14 +12,12 @@ export const CricketTabsDemo = ({
 	match,
 	edition,
 	selectedTab,
-	infoURL,
 	liveURL,
 	reportURL,
 }: {
 	match: CricketMatch;
 	edition: EditionId;
 	selectedTab: TabName;
-	infoURL?: URL;
 	liveURL?: URL;
 	reportURL?: URL;
 }) => {
@@ -46,7 +44,6 @@ export const CricketTabsDemo = ({
 				edition={edition}
 				selectedTab={selectedTab}
 				tabContentElement={tabContentElement ?? undefined}
-				infoURL={infoURL}
 				liveURL={liveURL}
 				reportURL={reportURL}
 			/>

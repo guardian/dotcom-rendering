@@ -109,9 +109,6 @@ const baseArgs = {
 		officials: [],
 	},
 	selectedTab: 'info' as 'info' | 'live' | 'report',
-	infoURL: new URL(
-		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
-	),
 };
 
 export const Fixture = {
@@ -153,9 +150,6 @@ export const Live = {
 			],
 		},
 		selectedTab: 'info',
-		infoURL: new URL(
-			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
-		),
 		liveURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 		),
@@ -187,9 +181,6 @@ export const LiveYetToBat = {
 			],
 		},
 		selectedTab: 'info',
-		infoURL: new URL(
-			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
-		),
 		liveURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 		),
@@ -257,9 +248,6 @@ export const Result = {
 			},
 		},
 		selectedTab: 'info',
-		infoURL: new URL(
-			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
-		),
 		liveURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 		),
@@ -308,9 +296,6 @@ export const ResultWinByWickets = {
 		},
 		selectedTab: 'info',
 
-		infoURL: new URL(
-			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
-		),
 		liveURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 		),
@@ -376,9 +361,6 @@ export const ResultDrawn = {
 			},
 		},
 		selectedTab: 'info',
-		infoURL: new URL(
-			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket#scorecard',
-		),
 		liveURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 		),

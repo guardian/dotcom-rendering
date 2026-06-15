@@ -45,7 +45,6 @@ type Props = {
 	tabContentElement?: HTMLElement;
 	reportURL?: URL;
 	liveURL?: URL;
-	infoURL?: URL;
 };
 
 export const CricketMatchHeader = (props: Props) => {
@@ -55,12 +54,10 @@ export const CricketMatchHeader = (props: Props) => {
 		props.selectedTab,
 	);
 
-	const onTabClick = (tab: 'info' | 'live' | 'report') => {
-		setSelectedTab(tab);
-		if (tab === 'info') {
-			// Focus the tab content for accessibility, so that screen readers will read out the scorecard when it displays.
-			props.tabContentElement?.focus();
-		}
+	const onInfoTabClick = () => {
+		setSelectedTab('info');
+		// Focus the tab content for accessibility, so that screen readers will read out the scorecard when it displays.
+		props.tabContentElement?.focus();
 	};
 
 	return (
@@ -96,10 +93,9 @@ export const CricketMatchHeader = (props: Props) => {
 					sportKind="cricket"
 					matchKind={match.kind}
 					selected={selectedTab}
-					reportURL={props.reportURL}
-					liveURL={props.liveURL}
-					infoURL={props.infoURL}
-					onTabClick={onTabClick}
+					reportTab={props.reportURL}
+					liveTab={props.liveURL}
+					infoTab={onInfoTabClick}
 				/>
 			</div>
 			{selectedTab === 'info' && (
