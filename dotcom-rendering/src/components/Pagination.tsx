@@ -72,6 +72,12 @@ const getPagePath = ({
 		searchParams.append('dcr', 'apps');
 	}
 
+	const fragmentPart = `#${fragment}`;
+
+	if (!searchParams.size) {
+		return fragmentPart;
+	}
+
 	return `?${searchParams.toString()}#${fragment}`;
 };
 
@@ -93,7 +99,7 @@ export const Pagination = ({
 					style={{ gridArea: 'newer', justifySelf: 'start' }}
 					css={flexSection}
 				>
-					{!!newest && (
+					{newest !== undefined && (
 						<>
 							<Hide from="phablet">
 								<LinkButton
@@ -132,7 +138,7 @@ export const Pagination = ({
 							</Hide>
 						</>
 					)}
-					{!!newer && (
+					{newer !== undefined && (
 						<LinkButton
 							size="small"
 							priority="tertiary"
@@ -165,7 +171,7 @@ export const Pagination = ({
 					style={{ gridArea: 'older', justifySelf: 'end' }}
 					css={flexSection}
 				>
-					{!!older && (
+					{older !== undefined && (
 						<LinkButton
 							size="small"
 							priority="tertiary"
@@ -181,7 +187,7 @@ export const Pagination = ({
 							Next
 						</LinkButton>
 					)}
-					{!!oldest && (
+					{oldest !== undefined && (
 						<>
 							<Hide from="phablet">
 								<LinkButton
