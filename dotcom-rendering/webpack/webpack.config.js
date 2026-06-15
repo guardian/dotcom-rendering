@@ -31,6 +31,9 @@ const commonConfigs = ({ platform }) => ({
 			: 'eval-cheap-module-source-map',
 	resolve: {
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
+		alias: {
+			'css-tree': require.resolve('css-tree/dist/csstree.esm'),
+		},
 	},
 	ignoreWarnings: [
 		/**
