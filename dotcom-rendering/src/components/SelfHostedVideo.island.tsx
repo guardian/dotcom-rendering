@@ -1117,9 +1117,11 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleEnded = () => {
-		trackMilestones({ ended: true });
-		resetMilestones();
-		setPlayerState('ENDED');
+		if (playerState === 'PLAYING') {
+			trackMilestones({ ended: true });
+			resetMilestones();
+			setPlayerState('ENDED');
+		}
 	};
 
 	/**
