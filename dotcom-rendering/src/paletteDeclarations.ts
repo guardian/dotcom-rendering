@@ -3419,6 +3419,7 @@ const articleMetaLinesDark: PaletteFunction = ({ design }) => {
 		case ArticleDesign.Audio:
 			return sourcePalette.neutral[20];
 		case ArticleDesign.Comment:
+			return sourcePalette.neutral[20];
 		case ArticleDesign.Interactive:
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[46];
