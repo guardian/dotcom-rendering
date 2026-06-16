@@ -444,6 +444,7 @@ export const YoutubeAtomPlayer = ({
 	const id = `youtube-player-${uniqueId}`;
 
 	const [isInView, setNode] = useIsInView({
+		debounce: true,
 		repeat: true,
 		threshold: 0.5,
 	});
