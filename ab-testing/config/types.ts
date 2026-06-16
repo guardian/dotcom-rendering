@@ -45,7 +45,7 @@ type ABTest = {
 	 * Having multiple test spaces allows deliberate overlapping of test audiences
 	 * Defaults to A
 	 */
-	audienceSpace?: "A" | "B" | "C" | "D";
+	audienceSpace?: "A" | "B" | "C";
 	/** Test group definition */
 	groups: string[];
 	/**
