@@ -213,7 +213,6 @@ const headlineBackgroundLight: PaletteFunction = ({
 		case ArticleDisplay.Standard:
 			switch (design) {
 				case ArticleDesign.Gallery:
-				case ArticleDesign.HostedGallery:
 					return sourcePalette.neutral[7];
 				case ArticleDesign.Interview:
 					return sourcePalette.neutral[7];
@@ -1939,6 +1938,8 @@ const articleInnerAdBackgroundLight: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[93];
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[7];
+		case ArticleDesign.HostedGallery:
+			return sourcePalette.neutral[10];
 		default:
 			return sourcePalette.neutral[97];
 	}
@@ -1948,6 +1949,7 @@ const articleInnerAdBackgroundDark: PaletteFunction = ({ design }) => {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[7];
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[10];
 		default:
 			return sourcePalette.neutral[20];
@@ -2280,7 +2282,6 @@ const standfirstBackgroundLight: PaletteFunction = ({
 					return sourcePalette.neutral[93];
 			}
 		case ArticleDesign.Gallery:
-		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[7];
 		default:
 			return articleBackgroundLight({ design, display, theme });
@@ -3178,8 +3179,9 @@ const articleBackgroundLight: PaletteFunction = ({
 		case ArticleDesign.FullPageInteractive:
 			return 'transparent';
 		case ArticleDesign.Gallery:
-		case ArticleDesign.HostedGallery:
 			return '#0d0d0d';
+		case ArticleDesign.HostedGallery:
+			return sourcePalette.neutral[10];
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -3241,9 +3243,9 @@ const articleInnerBackgroundLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[0];
 			}
 		case ArticleDesign.Gallery:
-		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[7];
-
+		case ArticleDesign.HostedGallery:
+			return sourcePalette.neutral[10];
 		default:
 			return 'transparent';
 	}
@@ -3549,6 +3551,8 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleDesign.HostedArticle:
 				case ArticleDesign.HostedVideo:
 					return sourcePalette.neutral[86];
+				case ArticleDesign.HostedGallery:
+					return sourcePalette.neutral[20];
 				default:
 					return sourcePalette.neutral[60];
 			}
