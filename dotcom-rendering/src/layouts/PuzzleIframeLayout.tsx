@@ -9,7 +9,9 @@ import {
 import { AdSlot } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
+import { PuzzleMeEmbed } from '../components/PuzzleMeEmbed.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
@@ -45,6 +47,29 @@ const iframeWrapStyles = css`
 	border-radius: 12px;
 	overflow: hidden;
 	background: white;
+
+	.puzzle-me-embed,
+	.pm-embed-div {
+		display: block;
+		width: 100%;
+	}
+
+	.puzzle-me-embed iframe,
+	.pm-embed-div iframe {
+		display: block;
+		width: 100% !important;
+		height: 760px !important;
+		min-height: 760px;
+		border: 0;
+	}
+
+	${from.desktop} {
+		.puzzle-me-embed iframe,
+		.pm-embed-div iframe {
+			height: 900px !important;
+			min-height: 900px;
+		}
+	}
 `;
 
 const iframePageGridStyles = css`
@@ -60,17 +85,6 @@ const iframePageGridStyles = css`
 
 const rightColumnAdStyles = css`
 	margin-top: ${space[1]}px;
-`;
-
-const iframeStyles = css`
-	display: block;
-	width: 100%;
-	min-height: 70vh;
-	border: 0;
-
-	${from.desktop} {
-		min-height: 80vh;
-	}
 `;
 
 const fallbackStyles = css`
@@ -123,18 +137,21 @@ export const PuzzleIframeLayout = ({ puzzlePage, NAV }: Props) => {
 					<a css={backLinkStyles} href="/puzzles">
 						Back to puzzles
 					</a>
-					{puzzlePage.description && (
+					{puzzlePage.description !== undefined && (
 						<p css={copyStyles}>{puzzlePage.description}</p>
 					)}
 					<div css={iframePageGridStyles}>
 						<div css={iframeWrapStyles}>
-							{src ? (
-								<iframe
-									allow="clipboard-write; fullscreen"
-									css={iframeStyles}
-									src={src}
-									title={puzzlePage.webTitle}
-								/>
+							{src !== undefined ? (
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<PuzzleMeEmbed
+										src={src}
+										title={puzzlePage.webTitle}
+									/>
+								</Island>
 							) : (
 								<div css={fallbackStyles}>
 									Puzzle unavailable

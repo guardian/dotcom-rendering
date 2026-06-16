@@ -4,8 +4,8 @@ import {
 	headlineBold20,
 	headlineBold24,
 	headlineMedium20,
-	palette as sourcePalette,
 	palette,
+	palette as sourcePalette,
 	space,
 	textSans14,
 	textSans17,
@@ -643,7 +643,7 @@ export const PuzzlesLayout = ({ puzzlesPage, NAV }: Props) => {
 					fullWidth={true}
 					showTopBorder={false}
 				>
-					{puzzlesPage.description && (
+					{puzzlesPage.description !== undefined && (
 						<p css={descriptionStyles}>{puzzlesPage.description}</p>
 					)}
 					<div css={newsletterSignupStyles}>
