@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
+import { useEffect, useRef } from 'react';
 import type { CricketMatch } from '../cricketMatchV2';
 import { grid } from '../grid';
 import { palette } from '../palette';
@@ -17,8 +18,23 @@ export const CricketScorecardTab = ({
 	awayTeam,
 	result,
 }: CricketScorecardTabProps) => {
+	const regionRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		// Focus the tab content when it renders for accessibility, so that screen readers will read out the scorecard label when it displays.
+		regionRef.current?.focus({
+			preventScroll: true,
+		});
+	}, []);
+
 	return (
-		<div css={bodyGridStyles}>
+		<div
+			ref={regionRef}
+			css={bodyGridStyles}
+			aria-label="Cricket scorecard"
+			role="region"
+			tabIndex={-1}
+		>
 			<div
 				css={css`
 					${grid.column.centre};

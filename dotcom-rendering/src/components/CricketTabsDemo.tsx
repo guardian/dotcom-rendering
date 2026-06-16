@@ -32,11 +32,6 @@ export const CricketTabsDemo = ({
 		}
 	}, []);
 
-	const tabLabels: Record<TabName, string> = {
-		info: 'Scorecard',
-		live: 'Live feed',
-		report: 'Match report',
-	};
 	return (
 		<main id="maincontent">
 			<CricketMatchHeader
@@ -47,14 +42,7 @@ export const CricketTabsDemo = ({
 				liveURL={liveURL}
 				reportURL={reportURL}
 			/>
-			<div
-				id={`cricket-tab-content`}
-				tabIndex={-1}
-				role="region"
-				aria-label={`${tabLabels[selectedTab]}`}
-			>
-				Initial Tab content
-			</div>
+			<div id="cricket-tab-content">Initial Tab content</div>
 		</main>
 	);
 };

@@ -56,8 +56,6 @@ export const CricketMatchHeader = (props: Props) => {
 
 	const onInfoTabClick = () => {
 		setSelectedTab('info');
-		// Focus the tab content for accessibility, so that screen readers will read out the scorecard when it displays.
-		props.tabContentElement?.focus();
 	};
 
 	return (
