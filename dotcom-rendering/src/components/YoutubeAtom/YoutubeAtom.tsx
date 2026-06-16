@@ -218,6 +218,7 @@ export const YoutubeAtom = ({
 						loadPlayer && consentState && adTargeting && (
 							<YoutubeAtomPlayer
 								videoId={videoId}
+								atomId={atomId}
 								uniqueId={uniqueId}
 								height={height}
 								width={width}
