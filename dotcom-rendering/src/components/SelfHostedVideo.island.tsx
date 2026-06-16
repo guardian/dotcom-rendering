@@ -151,26 +151,32 @@ const videoContainerStyles = (
 	`}
 `;
 
-const fullscreenStyles = css`
+const displayFullscreenStyle = css`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: ${palette('--video-fullscreen-background')};
+	width: 100vw;
+	height: 100vh;
+
+	/* Override the fixed aspect-ratio + width:100% on the video so it
+   fits within the screen while preserving its aspect ratio. */
+
+	video {
+		width: 100%;
+		height: 100%;
+		max-width: 100vw;
+		max-height: 100vh;
+		aspect-ratio: auto;
+		object-fit: contain;
+	}
+`;
+
+const fullscreenStyles = (bridgetFullscreen: boolean) => css`
+	${bridgetFullscreen && displayFullscreenStyle}
+
 	&:fullscreen {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background-color: ${palette('--video-fullscreen-background')};
-		width: 100vw;
-		height: 100vh;
-
-		/* Override the fixed aspect-ratio + width:100% on the video so it
-		   fits within the screen while preserving its aspect ratio. */
-
-		video {
-			width: 100%;
-			height: 100%;
-			max-width: 100vw;
-			max-height: 100vh;
-			aspect-ratio: auto;
-			object-fit: contain;
-		}
+		${displayFullscreenStyle};
 	}
 `;
 
@@ -786,12 +792,35 @@ export const SelfHostedVideo = ({
 			);
 	}, [positionCues]);
 
+	const doesBridgetSupportFullscreen = async () => {
+		const isBridgetCompatible = await hasMinimumBridgetVersion('8.8.0');
+
+		if (!isBridgetCompatible) {
+			return false;
+		}
+
+		try {
+			const videoClient = getVideoClient();
+			return await videoClient.setFullscreen(false);
+		} catch (error) {
+			if (error instanceof Error) {
+				window.guardian.modules.sentry.reportError(
+					error,
+					'self-hosted-video',
+				);
+			}
+			log('dotcom', 'Failed to set app autoplay user preference:', error);
+			return false;
+		}
+	};
+
 	useEffect(() => {
-		const videoClient = getVideoClient();
-		void videoClient
-			.setFullscreen(false)
-			.then(setShouldUseBridgetFullscreen);
-	}, []);
+		if (isApps) {
+			void doesBridgetSupportFullscreen().then(
+				setShouldUseBridgetFullscreen,
+			);
+		}
+	}, [isApps]);
 
 	/**
 	 * Track the first time the video comes into view.
@@ -1226,7 +1255,7 @@ export const SelfHostedVideo = ({
 							isVideoCroppedAtLeftRight,
 							containerAspectRatioDesktop,
 						),
-						fullscreenStyles,
+						fullscreenStyles(isBridgetFullscreen),
 						fadeableControlsStyles,
 					]}
 					onMouseMove={showFadeableControlsAndStartTimer}
