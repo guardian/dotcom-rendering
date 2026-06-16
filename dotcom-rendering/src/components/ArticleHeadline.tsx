@@ -167,6 +167,16 @@ const labsGalleryFont = css`
 	}
 `;
 
+const hostedGalleryFont = css`
+	${textSansBold34};
+	line-height: 2.1875rem;
+
+	${from.desktop} {
+		${textSansBold34};
+		line-height: 3.125rem;
+	}
+`;
+
 const jumboLabsFont = css`
 	${textSansBold34};
 	font-size: 3.125rem;
@@ -888,8 +898,7 @@ export const ArticleHeadline = ({
 							</h1>
 						</div>
 					);
-				case ArticleDesign.Gallery:
-				case ArticleDesign.HostedGallery: {
+				case ArticleDesign.Gallery: {
 					return (
 						<div css={galleryStyles}>
 							<WithAgeWarning
@@ -926,6 +935,34 @@ export const ArticleHeadline = ({
 									</span>
 								</h1>
 							</WithAgeWarning>
+						</div>
+					);
+				}
+				case ArticleDesign.HostedGallery: {
+					return (
+						<div css={galleryStyles}>
+							<h1
+								css={[
+									hostedGalleryFont,
+									css`
+										color: ${themePalette(
+											'--headline-colour',
+										)};
+										${darkBackground};
+										padding-bottom: ${space[6]}px;
+										padding-left: ${space[3]}px;
+										padding-right: ${space[3]}px;
+
+										${between.mobileLandscape.and.tablet} {
+											padding-left: ${space[5]}px;
+										}
+									`,
+								]}
+							>
+								<span css={[displayBlock, maxWidth]}>
+									{headlineString}
+								</span>
+							</h1>
 						</div>
 					);
 				}
