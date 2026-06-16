@@ -404,7 +404,11 @@ export const SelfHostedVideo = ({
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
 	const [isFullscreen, setIsFullscreen] = useState(false);
 	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
+	const [isBridgetFullscreen, setIsBridgetFullscreen] = useState(false);
 	const [isProgressBarSeeking, setIsProgressBarSeeking] = useState(false);
+
+	const [shouldUseBridgetFullscreen, setShouldUseBridgetFullscreen] =
+		useState(false);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -782,6 +786,13 @@ export const SelfHostedVideo = ({
 			);
 	}, [positionCues]);
 
+	useEffect(() => {
+		const videoClient = getVideoClient();
+		void videoClient
+			.setFullscreen(false)
+			.then(setShouldUseBridgetFullscreen);
+	}, []);
+
 	/**
 	 * Track the first time the video comes into view.
 	 */
@@ -1000,6 +1011,14 @@ export const SelfHostedVideo = ({
 				setIsWebKitFullscreen(true);
 				return webkitVideo.webkitEnterFullscreen();
 			}
+		}
+
+		if (shouldUseBridgetFullscreen) {
+			const videoClient = getVideoClient();
+			const fullscreen = !isBridgetFullscreen;
+			void videoClient
+				.setFullscreen(fullscreen)
+				.then(() => setIsBridgetFullscreen(fullscreen));
 		}
 
 		if (document.fullscreenElement) {
