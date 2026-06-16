@@ -171,6 +171,7 @@ export const NewsletterSignupCardContainer = ({
 				{showPrivacyMessageOutside && (
 					<NewsletterPrivacyMessage
 						textColor="regular"
+						isSignedIn={isSignedIn}
 						cssOverrides={css`
 							display: block;
 							margin-top: ${space[2]}px;

@@ -375,7 +375,9 @@ const NewsletterSignupFormActive = ({
 						)}
 						{!hidePrivacyMessage && (
 							<div css={privacyContainerStyles}>
-								<NewsletterPrivacyMessage />
+								<NewsletterPrivacyMessage
+									isSignedIn={isSignedIn}
+								/>
 							</div>
 						)}
 					</>
