@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { expect, within } from 'storybook/test';
 import type { CricketMatch } from '../../cricketMatchV2';
 import type { EditionId } from '../../lib/edition';
 import { CricketMatchHeader } from './CricketMatchHeader';
@@ -120,6 +121,35 @@ const baseArgs = {
 
 export const Fixture = {
 	args: baseArgs,
+	play: async ({ canvas, canvasElement, step }) => {
+		const nav = canvas.getByRole('navigation');
+
+		await step(
+			'Placeholder not shown as we have initial data and can render header',
+			async () => {
+				void expect(
+					canvasElement.querySelector('[data-name="placeholder"]'),
+				).toBeNull();
+
+				const initialTabs = within(nav).getAllByRole('listitem');
+
+				void expect(initialTabs.length).toBe(1);
+				void expect(initialTabs[0]).toHaveTextContent('Scorecard');
+			},
+		);
+
+		await step('Fetch updated match header data', async () => {
+			// Wait for 'Ashes 2025–2026' to appear which indicates match header
+			// data has been fetched and the UI updated on the client
+			await canvas.findByText('Ashes 2025–2026');
+			void canvas.findByText('England');
+			void canvas.findByText('Australia');
+
+			const updatedTabs = within(nav).getAllByRole('listitem');
+			void expect(updatedTabs.length).toBe(1);
+			void expect(updatedTabs[0]).toHaveTextContent('Scorecard');
+		});
+	},
 } satisfies Story;
 
 export const Live = {
@@ -163,6 +193,29 @@ export const Live = {
 		liveURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 		),
+	},
+	play: async ({ canvas, step }) => {
+		await step('Fetch match header data and render UI', async () => {
+			// Wait for 'Ashes 2025–2026' to appear which signals match header
+			// data has been fetched and the UI rendered on the client
+			await canvas.findByText('Ashes 2025–2026');
+			void canvas.findByText('England');
+			void canvas.findByText('Australia');
+
+			void expect(
+				canvas.getByLabelText('169 runs, 0 wickets fallen'),
+			).toBeInTheDocument();
+			void expect(
+				canvas.getByLabelText('173 runs, 3 wickets fallen'),
+			).toBeInTheDocument();
+
+			const nav = canvas.getByRole('navigation');
+			const tabs = within(nav).getAllByRole('listitem');
+
+			void expect(tabs.length).toBe(2);
+			void expect(tabs[0]).toHaveTextContent('Live feed');
+			void expect(tabs[1]).toHaveTextContent('Scorecard');
+		});
 	},
 } satisfies Story;
 
@@ -267,6 +320,22 @@ export const Result = {
 		liveURL: new URL(
 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 		),
+	},
+	play: async ({ canvas, step }) => {
+		await step('Fetch match header data and render UI', async () => {
+			// Wait for 'Ashes 2025–2026' to appear which signals match header
+			// data has been fetched and the UI rendered on the client
+			await canvas.findByText('Ashes 2025–2026');
+			void canvas.findByText('England');
+			void canvas.findByText('Australia');
+
+			const nav = canvas.getByRole('navigation');
+			const tabs = within(nav).getAllByRole('listitem');
+
+			void expect(tabs.length).toBe(2);
+			void expect(tabs[0]).toHaveTextContent('Live feed');
+			void expect(tabs[1]).toHaveTextContent('Scorecard');
+		});
 	},
 } satisfies Story;
 
