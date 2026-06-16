@@ -56,6 +56,7 @@ export const useVideoMilestoneTracking = (
 
 			if ('ended' in progress) {
 				reachedEnd = true;
+				percent = 100;
 			} else if ('duration' in progress && progress.duration > 0) {
 				percent = (progress.currentTime / progress.duration) * 100;
 
@@ -65,6 +66,7 @@ export const useVideoMilestoneTracking = (
 				 */
 				if (Math.abs(progress.duration - progress.currentTime) < 0.5) {
 					reachedEnd = true;
+					percent = 100;
 				}
 			}
 

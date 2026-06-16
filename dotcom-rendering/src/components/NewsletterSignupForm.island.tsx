@@ -376,8 +376,7 @@ const NewsletterSignupFormActive = ({
 								id={`marketing-opt-in-${newsletterId}`}
 								checked={marketingOptIn ?? false}
 								onClick={handleMarketingToggle}
-								label="Get updates about our journalism and ways to support and enjoy
-								our work. Toggle to opt out."
+								label="Get updates about our journalism and ways to support and enjoy our work. Toggle to opt out."
 								labelPosition="left"
 							/>
 						</div>

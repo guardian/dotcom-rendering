@@ -2,6 +2,11 @@
 # Commercial rely on a container image built from the main branch with the tag 'main'
 on:
   workflow_call:
+    inputs:
+      commitSha:
+        description: 'The SHA of the commit being built. Will be used as an image tag.'
+        required: true
+        type: string
     outputs:
       container-image:
         description: 'The generated container image path'
@@ -27,7 +32,7 @@ jobs:
       - name: Add commit hash for PRout
         working-directory: dotcom-rendering
         run: |
-          echo 'export const GIT_COMMIT_HASH = "${{ github.sha }}";' > src/server/prout.ts
+          echo 'export const GIT_COMMIT_HASH = "${{ inputs.commitSha }}";' > src/server/prout.ts
 
       - name: Generate production bundle
         run: make riffraff-bundle
@@ -39,7 +44,7 @@ jobs:
         with:
           image: dotcom-rendering
           # Commercial rely on a container image built from the main branch with the tag 'main'
-          tags: ${{ github.sha }} ${{ github.ref == 'refs/heads/main' && 'main' || '' }}
+          tags: ${{ inputs.commitSha }} ${{ github.ref == 'refs/heads/main' && 'main' || '' }}
           context: ./
           containerfiles: ./dotcom-rendering/Containerfile
 
