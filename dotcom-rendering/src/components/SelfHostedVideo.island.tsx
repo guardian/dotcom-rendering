@@ -706,9 +706,18 @@ export const SelfHostedVideo = ({
 	 */
 	useEffect(() => {
 		if (renderingTarget === 'Apps') {
-			void doesUserPermitAutoplayOnApps().then(setIsAutoplayAllowed);
+			void doesUserPermitAutoplayOnApps().then((shouldVideoAutoplay) => {
+				setIsAutoplayAllowed(shouldVideoAutoplay);
+				if (!shouldVideoAutoplay) {
+					setMutedState({ value: false });
+				}
+			});
 		} else {
-			setIsAutoplayAllowed(doesUserPermitAutoplayOnWeb());
+			const shouldVideoAutoplay = doesUserPermitAutoplayOnWeb();
+			setIsAutoplayAllowed(shouldVideoAutoplay);
+			if (!shouldVideoAutoplay) {
+				setMutedState({ value: false });
+			}
 		}
 
 		const screenWidth = window.innerWidth;
