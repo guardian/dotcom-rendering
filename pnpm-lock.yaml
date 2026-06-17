@@ -399,7 +399,7 @@ importers:
         specifier: 0.2.39
         version: 0.2.39(@swc/core@1.15.41)
       '@swc/plugin-emotion':
-        specifier: ^14.12.0
+        specifier: 14.12.0
         version: 14.12.0
       '@testing-library/dom':
         specifier: 10.4.1
