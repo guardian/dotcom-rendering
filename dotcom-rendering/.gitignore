@@ -4,6 +4,3 @@ tsconfig.tsbuildinfo
 # CDK asset staging directory
 .cdk.staging
 cdk.out
-
-# SWC cache
-.swc
