@@ -821,6 +821,13 @@ export const SelfHostedVideo = ({
 
 		try {
 			const videoClient = getVideoClient();
+
+			/**
+			 * We request to set the video to fullscreen to determine if the Bridget function is supported.
+			 * > On Android, this method will return true if the operation was successful, false otherwise
+			 * > On iOS, this method will always return false
+			 * – taken from comments on the Bridget thrift interface.
+			 */
 			return await videoClient.setFullscreen(false);
 		} catch (error) {
 			if (error instanceof Error) {
@@ -829,7 +836,7 @@ export const SelfHostedVideo = ({
 					'self-hosted-video',
 				);
 			}
-			log('dotcom', 'Failed to set app autoplay user preference:', error);
+			log('dotcom', 'Failed to check Bridget fullscreen support:', error);
 			return false;
 		}
 	};
