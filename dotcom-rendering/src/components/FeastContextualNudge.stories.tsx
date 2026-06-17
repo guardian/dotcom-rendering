@@ -43,6 +43,8 @@ const meta = {
 		recipeArticleTitle: "Meera Sodha's spring onion pancakes",
 		recipe: mockRecipe,
 		isDev: true,
+		nudgeIndex: 1,
+		idApiUrl: undefined,
 	},
 	parameters: {
 		chromatic: { viewports: [375, 740, 980] },
