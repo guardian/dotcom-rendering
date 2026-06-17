@@ -378,10 +378,18 @@ export const SelfHostedVideo = ({
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
+	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
+
+	const willAttemptAutoplay = videoStyleSettings.autoplay && !preventAutoplay;
+
 	const vidRef = useRef<HTMLVideoElement>(null);
 	const playerContainerRef = useRef<HTMLDivElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
-	const [isMuted, setIsMuted] = useState(true);
+	/**
+	 * Autoplay videos must start muted as browser autoplay policies require it.
+	 * Click-to-play videos start unmuted as the user deliberately chose to play.
+	 */
+	const [isMuted, setIsMuted] = useState<boolean>(willAttemptAutoplay);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [duration, setDuration] = useState<number | undefined>(undefined);
@@ -403,8 +411,6 @@ export const SelfHostedVideo = ({
 
 	const isLoopClickThroughTestVariant =
 		videoStyle === 'Loop' && isInLoopClickTestVariant;
-
-	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
 	/**
 	 * The video will autoplay if all of the following are true:
