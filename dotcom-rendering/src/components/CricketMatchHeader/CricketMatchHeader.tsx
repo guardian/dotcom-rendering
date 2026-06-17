@@ -68,6 +68,10 @@ export const CricketMatchHeader = (props: Props) => {
 	);
 	const match = data?.match ?? props.initialData;
 
+	const [selectedTab, setSelectedTab] = useState<'info' | 'live' | 'report'>(
+		props.selectedTab,
+	);
+
 	if (match === undefined) {
 		return (
 			<Placeholder
@@ -80,10 +84,6 @@ export const CricketMatchHeader = (props: Props) => {
 			/>
 		);
 	}
-
-	const [selectedTab, setSelectedTab] = useState<'info' | 'live' | 'report'>(
-		props.selectedTab,
-	);
 
 	const onInfoTabClick = () => {
 		setSelectedTab('info');

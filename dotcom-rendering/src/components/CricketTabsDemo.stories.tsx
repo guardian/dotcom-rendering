@@ -18,7 +18,7 @@ const meta = preview.meta({
 });
 
 const baseArgs = {
-	match: {
+	initialData: {
 		kind: 'Fixture',
 		series: 'Ashes 2025–2026',
 		competition: 'Second Test Match',
@@ -67,6 +67,8 @@ const baseArgs = {
 			'R S Madugalle',
 		],
 	},
+	matchHeaderURL:
+		'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
 	selectedTab: 'live' as 'info' | 'live' | 'report',
 	liveURL: new URL(
 		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
@@ -82,8 +84,8 @@ const liveArgs = {
 		'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 	),
 
-	match: {
-		...baseArgs.match,
+	initialData: {
+		...baseArgs.initialData,
 		kind: 'Live',
 		day: 2,
 		innings: [
@@ -425,14 +427,14 @@ export const UpdateScorecardTab = meta.story({
 		const simulateUpdate = () =>
 			updateArgs({
 				...args,
-				match: {
-					...args.match,
+				initialData: {
+					...args.initialData,
 					innings: [
-						args.match.innings[0],
+						args.initialData!.innings[0],
 						{
-							...args.match.innings[1],
+							...args.initialData!.innings[1],
 							batters: [
-								...args.match.innings[1]!.batters,
+								...args.initialData!.innings[1]!.batters,
 								{
 									name: 'Michael Bracewell',
 									ballsFaced: 8,

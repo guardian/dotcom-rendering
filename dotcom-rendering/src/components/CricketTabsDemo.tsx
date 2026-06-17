@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { CricketMatch } from '../cricketMatchV2';
 import { type EditionId } from '../lib/edition';
-import { CricketMatchHeader } from './CricketMatchHeader/CricketMatchHeader';
+import { CricketMatchHeaderWrapper } from './CricketMatchHeaderWrapper.island';
 import type { TabName } from './FootballMatchHeader/Tabs';
 
 /**
@@ -9,14 +9,16 @@ import type { TabName } from './FootballMatchHeader/Tabs';
  * It is not used in production.
  */
 export const CricketTabsDemo = ({
-	match,
+	initialData,
 	edition,
+	matchHeaderURL,
 	selectedTab,
 	liveURL,
 	reportURL,
 }: {
-	match: CricketMatch;
+	initialData?: CricketMatch;
 	edition: EditionId;
+	matchHeaderURL: string;
 	selectedTab: TabName;
 	liveURL?: URL;
 	reportURL?: URL;
@@ -34,8 +36,9 @@ export const CricketTabsDemo = ({
 
 	return (
 		<main id="maincontent">
-			<CricketMatchHeader
-				match={match}
+			<CricketMatchHeaderWrapper
+				initialData={initialData}
+				matchHeaderURL={matchHeaderURL}
 				edition={edition}
 				selectedTab={selectedTab}
 				tabContentElement={tabContentElement ?? undefined}
