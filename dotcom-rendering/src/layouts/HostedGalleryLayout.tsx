@@ -5,6 +5,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { CallToActionButton } from '../components/CallToActionAtom';
 import { GalleryImage } from '../components/GalleryImage';
 import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
@@ -54,6 +55,10 @@ const headerStyles = css`
 const shareButtonStyles = css`
 	${grid.column.centre}
 	padding-bottom: ${space[6]}px;
+	margin-top: ${space[4]}px;
+	padding: ${space[1]}px;
+	display: flex;
+
 	${from.tablet} {
 		position: relative;
 		&::before {
@@ -73,12 +78,23 @@ const shareButtonStyles = css`
 	}
 `;
 
+const ctaButtonStyles = css`
+	margin-right: ${space[1]}px;
+`;
+
 export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 	const { gallery, renderingTarget, format, serverTime } = props;
 	const { frontendData } = gallery;
 	const { commercialProperties, editionId } = frontendData;
 
 	const { branding } = commercialProperties[editionId];
+
+	// The CTA block element is rendered separately as a button
+	const cta = frontendData.blocks[0]?.elements.find(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.CallToActionAtomBlockElement',
+	);
 
 	return (
 		<>
@@ -127,6 +143,17 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 
 					{renderingTarget === 'Web' && (
 						<div data-print-layout="hide" css={shareButtonStyles}>
+							{cta?.url && (
+								<div css={ctaButtonStyles}>
+									<CallToActionButton
+										linkUrl={cta.url}
+										accentColor={
+											branding?.hostedCampaignColour
+										}
+										buttonText={cta.btnText}
+									/>
+								</div>
+							)}
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
