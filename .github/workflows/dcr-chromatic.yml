@@ -7,15 +7,6 @@ on:
     types: [opened, labeled, synchronize]
 
 jobs:
-  facts:
-    runs-on: ubuntu-slim
-    permissions: {}
-    outputs:
-      commitSha: ${{ steps.get-build-facts.outputs.commitSha }}
-    steps:
-      - uses: guardian/actions-build-facts@v0.0.1
-        id: get-build-facts
-
   check-paths:
     name: Check changed paths
     uses: ./.github/workflows/check-chromatic-paths.yml
@@ -23,7 +14,7 @@ jobs:
   chromatic:
     name: Chromatic
     runs-on: ubuntu-latest
-    needs: [facts, check-paths]
+    needs: check-paths
     # Always run so the required "UI Tests: dotcom_rendering" status check is always
     # reported. When skipping, Chromatic posts a passing status without building Storybook.
     steps:
@@ -32,7 +23,10 @@ jobs:
         if: ${{ github.event_name == 'pull_request'}}
         with:
           fetch-depth: 0
-          ref: ${{ needs.facts.outputs.commitSha }}
+          # By default the pull_request event will run on a ephermeral merge commit which simulates a merge between the pull request
+          # and the target branch. This can cause issues with Chromatic https://www.chromatic.com/docs/turbosnap#github-pullrequest-triggers
+          # Hopefully by checking out the HEAD commit of a PR instead of the merge commit we can avoid some of those issues.
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Checkout - On Push Event
         uses: actions/checkout@v6
         if: ${{ github.event_name == 'push'}}

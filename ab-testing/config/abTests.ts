@@ -101,7 +101,7 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-07-16",
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 5 / 100,
 		audienceSpace: "A",
 		groups: ["holdback"],
@@ -131,6 +131,19 @@ const ABTests: ABTest[] = [
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
 		groups: ["control", "holdback"],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-mobile-sticky-liveblog-us",
+		description:
+			"Holdback test, where variant is the 'holdback' group, to measure uplift in adding the mobile-sticky slot for Liveblogs articles in the US.",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-07-02",
+		type: "client",
+		status: "ON",
+		audienceSize: 5 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
 	{
