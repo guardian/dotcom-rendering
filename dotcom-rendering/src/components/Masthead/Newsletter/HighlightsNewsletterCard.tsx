@@ -218,7 +218,7 @@ export const HighlightsNewsletterCard = ({
 					<div css={content}>
 						<span css={kickerStyles}>
 							<SvgNewsletterFilled />
-							Free newsletter
+							Newsletter
 						</span>
 
 						<CardHeadline
