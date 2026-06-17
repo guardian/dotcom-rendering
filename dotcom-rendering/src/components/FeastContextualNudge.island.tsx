@@ -7,7 +7,12 @@ import {
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
+import {
+	BrazeBannersSystemDisplay,
+	BrazeBannersSystemPlacementId,
+} from '../lib/braze/BrazeBannersSystem';
 import { useAB } from '../lib/useAB';
+import { useBraze } from '../lib/useBraze';
 import type { StageType } from '../types/config';
 import type { RecipeBlockElement } from '../types/content';
 import { useConfig } from './ConfigContext';
@@ -122,6 +127,8 @@ type FeastContextualNudgeProps = {
 	recipeArticleTitle: string;
 	pageId: string;
 	isDev: boolean;
+	nudgeIndex: number;
+	idApiUrl: string | undefined;
 };
 
 /**
@@ -142,12 +149,16 @@ export const FeastContextualNudge = ({
 	recipeArticleTitle,
 	pageId,
 	isDev,
+	nudgeIndex,
+	idApiUrl,
 }: FeastContextualNudgeProps) => {
 	const abTests = useAB();
 	const isVariant =
 		abTests?.isUserInTestGroup('feast-recipe-nudge', 'variant-1') ?? false;
 
-	const { darkModeAvailable } = useConfig();
+	const { darkModeAvailable, renderingTarget } = useConfig();
+
+	const { braze } = useBraze(idApiUrl ?? '', renderingTarget);
 
 	const [isStorybook, setIsStorybook] = useState(false);
 	useEffect(() => {
@@ -172,6 +183,29 @@ export const FeastContextualNudge = ({
 	}, [feastId, title, pageId, isDev]);
 
 	if (!isVariant) return null;
+
+	// If idApiUrl is defined and Braze has a banner for this placement slot,
+	// render the Braze banner instead of the native nudge.
+	if (idApiUrl !== undefined) {
+		const placementId =
+			BrazeBannersSystemPlacementId[
+				`FeastContextualNudge${nudgeIndex}` as keyof typeof BrazeBannersSystemPlacementId
+			];
+		const banner = braze?.getBanner(placementId) ?? null;
+		if (banner && braze) {
+			return (
+				<BrazeBannersSystemDisplay
+					meta={{
+						id: `feast-contextual-nudge-${nudgeIndex}`,
+						braze,
+						banner,
+					}}
+					idApiUrl={idApiUrl}
+					stage={stage}
+				/>
+			);
+		}
+	}
 
 	return (
 		<div

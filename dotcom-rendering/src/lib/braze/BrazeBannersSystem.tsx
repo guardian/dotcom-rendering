@@ -106,6 +106,11 @@ export const brazeBannersSystemLogger = {
 export enum BrazeBannersSystemPlacementId {
 	EndOfArticle = 'dotcom-rendering_end-of-article',
 	Banner = 'dotcom-rendering_banner',
+	FeastContextualNudge1 = 'dotcom-rendering_feast-contextual-nudge-1',
+	FeastContextualNudge2 = 'dotcom-rendering_feast-contextual-nudge-2',
+	FeastContextualNudge3 = 'dotcom-rendering_feast-contextual-nudge-3',
+	FeastContextualNudge4 = 'dotcom-rendering_feast-contextual-nudge-4',
+	FeastContextualNudge5 = 'dotcom-rendering_feast-contextual-nudge-5',
 }
 
 /**
