@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { log } from '@guardian/libs';
 import {
 	from,
 	headlineBold20Object,
@@ -13,13 +14,13 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import type { ComponentProps } from 'react';
 import { Fragment, type ReactNode, useMemo } from 'react';
+import type { SWRConfiguration } from 'swr';
+import useSWR from 'swr';
 import type {
 	CricketMatch,
+	CricketResult,
 	CricketTeam,
-	InningsOverview,
-	Result,
 } from '../../cricketMatchV2';
 import { grid } from '../../grid';
 import {
@@ -37,16 +38,47 @@ import {
 	primaryText,
 	secondaryText,
 } from '../FootballMatchHeader/colours';
+import type { TabName } from '../FootballMatchHeader/Tabs';
 import { Tabs } from '../FootballMatchHeader/Tabs';
+import { Placeholder } from '../Placeholder';
+import type { CricketHeaderData } from './headerData';
+import { parse as parseHeaderData } from './headerData';
 
-type Props = {
+export type CricketMatchHeaderProps = {
+	initialData?: CricketMatch;
+	matchHeaderURL: string;
 	edition: EditionId;
-	match: CricketMatch;
-	tabs: ComponentProps<typeof Tabs>;
+	selectedTab: 'info' | 'live' | 'report';
+	reportURL?: URL;
+	liveURL?: URL;
+	infoURL?: URL;
+};
+
+type Props = CricketMatchHeaderProps & {
+	getHeaderData: (url: string) => Promise<unknown>;
+	refreshInterval: number;
 };
 
 export const CricketMatchHeader = (props: Props) => {
-	const match = props.match;
+	const { data } = useSWR<CricketHeaderData, Error>(
+		props.matchHeaderURL,
+		fetcher(props.selectedTab, props.getHeaderData),
+		swrOptions(props.refreshInterval),
+	);
+	const match = data?.match ?? props.initialData;
+
+	if (match === undefined) {
+		return (
+			<Placeholder
+				heights={
+					new Map([
+						['mobile', 182],
+						['leftCol', 172],
+					])
+				}
+			/>
+		);
+	}
 
 	return (
 		<section
@@ -57,14 +89,18 @@ export const CricketMatchHeader = (props: Props) => {
 		>
 			<div
 				css={{
-					'&': css(grid.paddedContainer),
+					'&': css(
+						grid.paddedContainer,
+						grid.outerRules(
+							palette(
+								'--football-match-header-fixture-result-border',
+							),
+						),
+					),
 					[from.tablet]: {
 						borderColor: palette(
 							'--football-match-header-fixture-result-border',
 						),
-						borderStyle: 'solid',
-						borderLeftWidth: 1,
-						borderRightWidth: 1,
 					},
 				}}
 			>
@@ -73,11 +109,48 @@ export const CricketMatchHeader = (props: Props) => {
 				<Teams match={match} />
 				{match.result && <ResultLine result={match.result} />}
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
-				<Tabs {...props.tabs} />
+				<Tabs
+					sportKind="cricket"
+					matchKind={match.kind}
+					selected={props.selectedTab}
+					reportURL={props.reportURL}
+					liveURL={props.liveURL}
+					infoURL={props.infoURL}
+				/>
 			</div>
 		</section>
 	);
 };
+
+const swrOptions = (
+	refreshInterval: number,
+): SWRConfiguration<CricketHeaderData> => ({
+	errorRetryCount: 1,
+	refreshInterval: (latestData: CricketHeaderData | undefined) => {
+		return latestData?.match.kind === 'Live' ||
+			latestData?.match.kind === 'Fixture'
+			? refreshInterval
+			: 0;
+	},
+});
+
+const fetcher =
+	(selected: TabName, getHeaderData: Props['getHeaderData']) =>
+	(url: string): Promise<CricketHeaderData> =>
+		getHeaderData(url)
+			.then(parseHeaderData(selected))
+			.then((result) => {
+				if (!result.ok) {
+					log('dotcom', result.error);
+					throw new Error();
+				} else {
+					return result.value;
+				}
+			})
+			.catch(() => {
+				log('dotcom', 'Failed to fetch match header json');
+				throw new Error();
+			});
 
 const StatusLine = (props: { match: CricketMatch; edition: EditionId }) => (
 	<p
@@ -242,18 +315,27 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 				flex: '1 1 50%',
 				wordBreak: 'break-word',
 				borderLeftStyle: 'solid',
+				borderLeftColor: 'var(--border-left-colour)',
 				'&:last-of-type': {
 					paddingLeft: space[2],
 					borderLeftWidth: 1,
 				},
 				[from.leftCol]: {
-					paddingLeft: space[2],
-					borderLeftWidth: 1,
 					paddingTop: space[3],
+					position: 'relative',
+					'&:first-of-type::before': {
+						content: '""',
+						top: 0,
+						left: -10,
+						width: 1,
+						backgroundColor: 'var(--border-left-colour)',
+						position: 'absolute',
+						height: '100%',
+					},
 				},
 			}}
 			style={{
-				borderLeftColor: palette(border(props.match.kind)),
+				'--border-left-colour': palette(border(props.match.kind)),
 			}}
 		>
 			<TeamName name={props.team.name} />
@@ -271,13 +353,20 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 					innings.map((inning, index) => (
 						<Fragment key={index}>
 							<Score
-								runs={inning.runs}
-								fallOfWickets={inning.fallOfWickets}
+								runs={inning.inningsTotals.runs}
+								fallOfWickets={inning.inningsTotals.wickets}
 								matchKind={props.match.kind}
 							/>
-							{!!inning.overs && (
+							{!!inning.inningsTotals.overs && (
 								<>
-									<EndOfInningReason inning={inning} />
+									<EndOfInningReason
+										inning={{
+											wickets:
+												inning.inningsTotals.wickets,
+											declared: inning.declared,
+											forfeited: inning.forfeited,
+										}}
+									/>
 									<span
 										css={{
 											...textSans12Object,
@@ -291,7 +380,7 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 											),
 										}}
 									>
-										{inning.overs} overs
+										{inning.inningsTotals.overs} overs
 									</span>
 								</>
 							)}
@@ -313,13 +402,19 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 	);
 };
 
-const EndOfInningReason = (props: { inning: InningsOverview }) => {
+const EndOfInningReason = (props: {
+	inning: {
+		wickets: number;
+		declared: boolean;
+		forfeited: boolean;
+	};
+}) => {
 	const styles = {
 		...textSans14Object,
 		marginRight: space[1],
 	};
 
-	if (props.inning.fallOfWickets === 10) {
+	if (props.inning.wickets === 10) {
 		return <span css={styles}>All out</span>;
 	}
 	if (props.inning.declared) {
@@ -510,7 +605,7 @@ const crestUrl = (teamId: string): URL | undefined => {
  * But in some cases, we just get the data about the result and need to generate
  * a description from that.
  */
-const resultDescription = (result: Result): string => {
+const resultDescription = (result: CricketResult): string => {
 	if (result.description) {
 		return result.description;
 	}
@@ -546,7 +641,7 @@ const resultDescription = (result: Result): string => {
 	}
 };
 
-const ResultLine = (props: { result: Result }) => {
+const ResultLine = (props: { result: CricketResult }) => {
 	const description = resultDescription(props.result);
 	return (
 		<div

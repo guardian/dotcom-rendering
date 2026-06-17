@@ -8,7 +8,7 @@ import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.island';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
@@ -40,7 +40,6 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import { ophanComponentId } from '../lib/ophan-helpers';
-import { useBetaAB } from '../lib/useAB';
 import { worldCup2026PageIds } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
@@ -119,16 +118,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	} = front;
 
 	const serverTime = front.serverTime;
+	const isNewsletterSignupCardEnabled =
+		front.config.isPreview ||
+		front.config.serverSideABTests['newsletters-highlights-signup-card'] ===
+			'enable';
 
 	const renderAds = canRenderAds(front);
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
-	const ab = useBetaAB();
-
-	const isWorldCup2026 =
-		worldCup2026PageIds.includes(pageId) &&
-		ab?.isUserInTest('webx-world-cup-2026-subnav');
+	const isWorldCup2026 = worldCup2026PageIds.includes(pageId);
 
 	const filteredCollections = front.pressedPage.collections.filter(
 		(collection) => !isHighlights(collection),
@@ -192,6 +191,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					frontId={front.pressedPage.id}
 					collectionId={0}
+					isNewsletterSignupCardEnabled={
+						isNewsletterSignupCardEnabled
+					}
 				/>
 			)
 		);
@@ -274,7 +276,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						/>
 					</Island>
 				)}
-				<DirectoryPageNav pageId={pageId} />
+				<DirectoryPageNavIsland pageId={pageId} />
 
 				{filteredCollections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content

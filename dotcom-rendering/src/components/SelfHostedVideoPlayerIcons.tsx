@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source/foundations';
 import {
+	SvgArrowContract,
 	SvgArrowExpand,
 	SvgAudio,
 	SvgAudioMute,
@@ -54,24 +55,32 @@ export const AudioIcon = ({ isMuted, handleClick }: AudioIconProps) => {
 };
 
 type FullscreenIconProps = {
+	isFullscreen: SelfHostedVideoPlayerProps['isFullscreen'];
 	handleClick: SelfHostedVideoPlayerProps['handleFullscreenClick'];
 };
 
-export const FullscreenIcon = ({ handleClick }: FullscreenIconProps) => (
-	<button
-		type="button"
-		onClick={handleClick}
-		css={[buttonStyles, iconContainerStyles]}
-		data-testid="fullscreen-icon"
-	>
-		<SvgArrowExpand
-			size="xsmall"
-			theme={{
-				fill: palette('--video-icon'),
-			}}
-		/>
-	</button>
-);
+export const FullscreenIcon = ({
+	isFullscreen,
+	handleClick,
+}: FullscreenIconProps) => {
+	const Icon = isFullscreen ? SvgArrowContract : SvgArrowExpand;
+
+	return (
+		<button
+			type="button"
+			onClick={handleClick}
+			css={[buttonStyles, iconContainerStyles]}
+			data-testid="fullscreen-icon"
+		>
+			<Icon
+				size="xsmall"
+				theme={{
+					fill: palette('--video-icon'),
+				}}
+			/>
+		</button>
+	);
+};
 
 const buttonSize = 56;
 const playPauseButtonStyles = css`
@@ -90,12 +99,14 @@ type PlayPauseIconProps = {
 	type: 'play' | 'pause';
 	atomId: SelfHostedVideoPlayerProps['atomId'];
 	handleClick: SelfHostedVideoPlayerProps['handlePlayPauseClick'];
+	isLoopClickThroughTest: boolean;
 };
 
 export const PlayPauseIcon = ({
 	type,
 	atomId,
 	handleClick,
+	isLoopClickThroughTest,
 }: PlayPauseIconProps) => {
 	const IconComponent =
 		type === 'play' ? SvgMediaControlsPlay : SvgMediaControlsPause;
@@ -104,7 +115,13 @@ export const PlayPauseIcon = ({
 		<button
 			type="button"
 			onClick={handleClick}
-			css={[buttonStyles, playPauseButtonStyles]}
+			className="play-pause-icon"
+			css={[
+				buttonStyles,
+				isLoopClickThroughTest
+					? iconContainerStyles
+					: playPauseButtonStyles,
+			]}
 			data-link-name={`gu-video-loop-${type}-${atomId}`}
 			data-testid={`${type}-icon`}
 		>

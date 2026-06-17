@@ -1,4 +1,5 @@
 import { ArticleDesign } from '../lib/articleFormat';
+import { isMediaCard } from '../lib/cardHelpers';
 import type { DCRFrontCard } from '../types/front';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
@@ -25,34 +26,39 @@ type Props = {
  */
 export const FrontCard = (props: Props) => {
 	const { trail, ...cardProps } = props;
+
+	const contentSpacing =
+		isMediaCard(trail.format) || trail.isNewsletter ? 'large' : undefined;
+
 	const defaultProps: Omit<CardProps, 'imageLoading' | 'serverTime'> = {
-		linkTo: trail.url,
-		format: trail.format,
-		headlineText: trail.headline,
+		articleMedia: trail.articleMedia,
+		avatarUrl: trail.avatarUrl,
+		branding: trail.branding,
 		byline: trail.byline,
-		showByline: trail.showByline,
-		showQuotedHeadline: trail.showQuotedHeadline,
-		webPublicationDate: trail.webPublicationDate,
-		kickerText: trail.kickerText,
-		showPulsingDot: trail.format.design === ArticleDesign.LiveBlog,
-		showClock: false,
-		image: trail.image,
-		isCrossword: trail.isCrossword,
-		isNewsletter: trail.isNewsletter,
-		starRating: trail.starRating,
+		contentSpacing,
 		dataLinkName: trail.dataLinkName,
-		snapData: trail.snapData,
 		discussionApiUrl: trail.discussionApiUrl,
 		discussionId: trail.discussionId,
-		avatarUrl: trail.avatarUrl,
-		mainMedia: trail.mainMedia,
+		format: trail.format,
+		headlineText: trail.headline,
+		image: trail.image,
+		isCrossword: trail.isCrossword,
 		isExternalLink: trail.isExternalLink,
-		branding: trail.branding,
-		slideshowImages: trail.slideshowImages,
+		isNewsletter: trail.isNewsletter,
+		kickerText: trail.kickerText,
+		linkTo: trail.url,
+		mainMedia: trail.mainMedia,
+		showByline: trail.showByline,
+		showClock: false,
 		showLivePlayable: trail.showLivePlayable,
+		showPulsingDot: trail.format.design === ArticleDesign.LiveBlog,
+		showQuotedHeadline: trail.showQuotedHeadline,
 		showVideo: trail.showVideo,
+		slideshowImages: trail.slideshowImages,
+		snapData: trail.snapData,
+		starRating: trail.starRating,
 		uniqueId: trail.uniqueId,
-		articleMedia: trail.articleMedia,
+		webPublicationDate: trail.webPublicationDate,
 	};
 
 	return Card({ ...defaultProps, ...cardProps });

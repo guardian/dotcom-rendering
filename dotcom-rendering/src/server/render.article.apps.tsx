@@ -196,7 +196,6 @@ export const renderAppsBlocks = ({
 				editionId={editionId}
 				onFirstPage={false}
 				keyEvents={[]}
-				filterKeyEvents={false}
 				shouldHideAds={shouldHideAds}
 			/>
 		</ConfigProvider>,

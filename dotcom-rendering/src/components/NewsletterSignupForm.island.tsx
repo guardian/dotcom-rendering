@@ -17,6 +17,7 @@ import { ToggleSwitch } from '@guardian/source-development-kitchen/react-compone
 // Use the default export instead.
 import type { ChangeEvent } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
+import { useHideMarketingToggleForCountry } from '../lib/useHideMarketingToggleForCountry';
 import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
@@ -31,12 +32,16 @@ type Props = {
 	newsletterId: string;
 	newsletterName: string;
 	frequency: string;
-	hidePrivacyMessage?: boolean;
 	previewAction?: NewsletterPreviewAction;
 	/** When `true`, the success message is shown immediately (user is already subscribed). */
 	isAlreadySubscribed?: boolean;
 	/** Ophan A/B test metadata — forwarded to tracking events. */
 	abTest?: AbTest;
+	/**
+	 * When `true`, the marketing toggle and privacy message are shown
+	 * immediately and the toggle is full-width.
+	 */
+	isModal?: boolean;
 };
 
 const formStyles = css`
@@ -51,7 +56,7 @@ const formStyles = css`
 `;
 
 const signedOutLayoutStyles = css`
-	grid-template-columns: minmax(0, 1fr) 160px;
+	grid-template-columns: minmax(0, 1fr) auto;
 	grid-template-areas: 'email submit';
 
 	${until.tablet} {
@@ -65,7 +70,6 @@ const signedOutLayoutStyles = css`
 const signedInLayoutStyles = css`
 	grid-template-columns: minmax(0, 1fr);
 	grid-template-areas: 'submit';
-	padding-bottom: ${space[2]}px;
 `;
 
 const emailFieldStyles = css`
@@ -87,18 +91,20 @@ const submitButtonContainerStyles = css`
 	width: 100%;
 	display: flex;
 	gap: ${space[2]}px;
-`;
-
-const submitButtonStyles = css`
-	flex: 1;
-	width: 100%;
 	${from.tablet} {
-		max-width: 220px;
+		width: auto;
 	}
 `;
 
-const toggleContainerStyles = css`
-	grid-column: 1;
+const submitButtonStyles = css`
+	width: 100%;
+	${from.tablet} {
+		width: auto;
+	}
+`;
+
+const getToggleContainerStyles = (isFullWidth: boolean) => css`
+	grid-column: ${isFullWidth ? '1 / -1' : '1'};
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -106,9 +112,24 @@ const toggleContainerStyles = css`
 	min-width: 0;
 `;
 
-const privacyContainerStyles = css`
-	grid-column: 1 / -1;
-`;
+const getPrivacyContainerStyles = (
+	isSignedIn: boolean | 'Pending',
+	isModal: boolean,
+) => {
+	if (isSignedIn === true && !isModal) {
+		return css`
+			margin-top: ${space[5]}px;
+			padding-top: ${space[2]}px;
+			border-top: 1px solid ${palette('--card-border-supporting')};
+		`;
+	}
+	return css`
+		margin-top: ${space[2]}px;
+		${until.tablet} {
+			margin-top: ${space[3]}px;
+		}
+	`;
+};
 
 const successTextStyles = css`
 	color: ${palette('--newsletter-card-description')};
@@ -268,11 +289,12 @@ const NewsletterSignupFormActive = ({
 	newsletterId,
 	newsletterName,
 	frequency,
-	hidePrivacyMessage = false,
 	previewAction,
 	abTest,
+	isModal = false,
 }: Omit<Props, 'isAlreadySubscribed'>) => {
 	const { renderingTarget } = useConfig();
+	const hideMarketingToggle = useHideMarketingToggleForCountry();
 
 	const {
 		userEmail,
@@ -295,7 +317,12 @@ const NewsletterSignupFormActive = ({
 		handleSubmit,
 		handleSubmitButtonClick,
 		handleReset,
-	} = useNewsletterSignupForm(newsletterId, renderingTarget, abTest);
+	} = useNewsletterSignupForm(
+		newsletterId,
+		renderingTarget,
+		abTest,
+		hideMarketingToggle,
+	);
 
 	const hasResponse = typeof responseOk === 'boolean';
 	const hasNonValidationError = !!errorMessage && !isValidationError;
@@ -307,7 +334,7 @@ const NewsletterSignupFormActive = ({
 	const failureMessage = hasNonValidationError
 		? errorMessage
 		: 'Sign up failed.';
-	const showAdditionalFields = isInteracted || !!userEmail;
+	const showAdditionalFields = isModal || isInteracted || !!userEmail;
 	// isValidationError comes from the hook — true only for inline field
 	// errors (empty / bad format), false for reCAPTCHA / network errors.
 
@@ -342,28 +369,18 @@ const NewsletterSignupFormActive = ({
 						/>
 					</div>
 				)}
-				{showAdditionalFields && (
-					<>
-						{showMarketingToggle && (
-							<div css={toggleContainerStyles}>
-								<div css={marketingToggleBoxStyles}>
-									<ToggleSwitch
-										id={`marketing-opt-in-${newsletterId}`}
-										checked={marketingOptIn ?? false}
-										onClick={handleMarketingToggle}
-										label="Get updates about our journalism and ways to support and enjoy
-								our work. Toggle to opt out."
-										labelPosition="left"
-									/>
-								</div>
-							</div>
-						)}
-						{!hidePrivacyMessage && (
-							<div css={privacyContainerStyles}>
-								<NewsletterPrivacyMessage />
-							</div>
-						)}
-					</>
+				{showAdditionalFields && showMarketingToggle && (
+					<div css={getToggleContainerStyles(isModal)}>
+						<div css={marketingToggleBoxStyles}>
+							<ToggleSwitch
+								id={`marketing-opt-in-${newsletterId}`}
+								checked={marketingOptIn ?? false}
+								onClick={handleMarketingToggle}
+								label="Get updates about our journalism and ways to support and enjoy our work. Toggle to opt out."
+								labelPosition="left"
+							/>
+						</div>
+					</div>
 				)}
 				<div css={submitButtonContainerStyles}>
 					{isSignedIn && previewAction && (
@@ -384,6 +401,12 @@ const NewsletterSignupFormActive = ({
 					</Button>
 				</div>
 			</form>
+
+			{showAdditionalFields && showForm && (
+				<div css={getPrivacyContainerStyles(isSignedIn, isModal)}>
+					<NewsletterPrivacyMessage isSignedIn={isSignedIn} />
+				</div>
+			)}
 
 			{showSuccess && (
 				<SuccessMessage

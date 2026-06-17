@@ -13,27 +13,16 @@ import type { RenderingTarget } from '../../types/renderingTarget';
 import { useConfig } from '../ConfigContext';
 import { border, primaryText, selected } from './colours';
 
+export type TabName = 'info' | 'live' | 'report';
+
 type Props = {
 	matchKind: FootballMatch['kind'];
-	// eslint-disable-next-line react/no-unused-prop-types -- false positive, this is passed into the tab components
-	sportKind?: 'football' | 'cricket';
-} & (
-	| {
-			selected: 'info';
-			reportURL?: URL;
-			liveURL?: URL;
-	  }
-	| {
-			selected: 'live';
-			reportURL?: URL;
-			infoURL: URL;
-	  }
-	| {
-			selected: 'report';
-			liveURL?: URL;
-			infoURL: URL;
-	  }
-);
+	sportKind: 'football' | 'cricket';
+	selected: TabName;
+	reportURL?: URL;
+	liveURL?: URL;
+	infoURL?: URL;
+};
 
 export const Tabs = (props: Props) => (
 	<nav css={[grid.column.centre]}>
@@ -58,7 +47,9 @@ export const Tabs = (props: Props) => (
 	</nav>
 );
 
-const MatchReport = (props: Props) => {
+const MatchReport = (
+	props: Pick<Props, 'selected' | 'matchKind' | 'reportURL'>,
+) => {
 	if (props.selected === 'report') {
 		return <Tab matchKind={props.matchKind}>Match report</Tab>;
 	}
@@ -74,7 +65,7 @@ const MatchReport = (props: Props) => {
 	return null;
 };
 
-const LiveFeed = (props: Props) => {
+const LiveFeed = (props: Pick<Props, 'selected' | 'matchKind' | 'liveURL'>) => {
 	if (props.selected === 'live') {
 		return <Tab matchKind={props.matchKind}>Live feed</Tab>;
 	}
@@ -90,17 +81,23 @@ const LiveFeed = (props: Props) => {
 	return null;
 };
 
-const MatchInfo = (props: Props) => {
+const MatchInfo = (
+	props: Pick<Props, 'selected' | 'matchKind' | 'sportKind' | 'infoURL'>,
+) => {
 	const tabText = props.sportKind === 'cricket' ? 'Scorecard' : 'Match info';
 	if (props.selected === 'info') {
 		return <Tab matchKind={props.matchKind}>{tabText}</Tab>;
 	}
 
-	return (
-		<Tab matchKind={props.matchKind} href={props.infoURL}>
-			{tabText}
-		</Tab>
-	);
+	if (props.infoURL !== undefined) {
+		return (
+			<Tab matchKind={props.matchKind} href={props.infoURL}>
+				{tabText}
+			</Tab>
+		);
+	}
+
+	return null;
 };
 
 const Tab = (props: {
@@ -113,18 +110,27 @@ const Tab = (props: {
 			// Ensures that if there are only two tabs they take up exactly 50%
 			flex: '1 1 50%',
 			borderLeftStyle: 'solid',
+			borderLeftColor: 'var(--border-left-colour)',
 			'&:not(:first-of-type)': {
 				paddingLeft: space[2],
 				borderLeftWidth: 1,
 			},
 			[from.leftCol]: {
-				paddingLeft: space[2],
-				borderLeftWidth: 1,
 				flex: '0 0 auto',
+				position: 'relative',
+				'&:first-of-type::before': {
+					content: '""',
+					top: 0,
+					left: -10,
+					width: 1,
+					backgroundColor: 'var(--border-left-colour)',
+					position: 'absolute',
+					height: '100%',
+				},
 			},
 		}}
 		style={{
-			borderLeftColor: palette(border(props.matchKind)),
+			'--border-left-colour': palette(border(props.matchKind)),
 		}}
 	>
 		<TabText href={props.href} matchKind={props.matchKind}>

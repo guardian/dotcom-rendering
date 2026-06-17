@@ -14,18 +14,19 @@ export const riffRaffYamlFile = ({
 	app,
 	stack,
 	region,
+	riffRaffProjectName,
 }: {
 	app: App;
 	stack: string;
 	region: string;
+	riffRaffProjectName: string;
 }) => {
 	const riffRaff = new RiffRaffYamlFile(app);
-	const {
-		riffRaffYaml: { deployments },
-	} = riffRaff;
+	const { configuration } = riffRaff;
+	const projectConfiguration = configuration.get(riffRaffProjectName);
 
 	// The dictionary artifacts to be deployed to S3
-	deployments.set("config/ab-testing", {
+	projectConfiguration?.deployments.set("config/ab-testing", {
 		app: "ab-testing-config-artifact",
 		contentDirectory: "ab-testing-config-artifacts",
 		type: "aws-s3",
@@ -40,7 +41,7 @@ export const riffRaffYamlFile = ({
 	});
 
 	// the admin UI artifacts to be deployed to S3
-	deployments.set("admin/ab-testing", {
+	projectConfiguration?.deployments.set("admin/ab-testing", {
 		app: "ab-testing-ui-artifact",
 		contentDirectory: "ab-testing-ui-artifact",
 		type: "aws-s3",
@@ -54,25 +55,35 @@ export const riffRaffYamlFile = ({
 		},
 	});
 
-	const configCloudformationDeployment = deployments.get(
-		`cfn-${region}-${stack}-ab-testing-config`,
-	)!;
+	const configCloudformationDeployment =
+		projectConfiguration?.deployments.get(
+			`cfn-${region}-${stack}-ab-testing-config`,
+		);
 
-	deployments.set(`cfn-${region}-${stack}-ab-testing-config`, {
-		...configCloudformationDeployment,
-		dependencies: [
-			...(configCloudformationDeployment.dependencies ?? []),
-			// We need the test artifacts in place before running the ab-testing-config CloudFormation deployment
-			"config/ab-testing",
-			// We need the lambda to be updated before running the ab-testing-config CloudFormation deployment
-			[
-				"lambda-update",
-				region,
-				stack,
-				"ab-testing-deployment-lambda",
-			].join("-"),
-		],
-	});
+	if (!configCloudformationDeployment) {
+		throw new Error(
+			`Expected to find a cloud formation deployment named cfn-${region}-${stack}-ab-testing-config in the RiffRaff configuration for project ${riffRaffProjectName}`,
+		);
+	}
+
+	projectConfiguration?.deployments.set(
+		`cfn-${region}-${stack}-ab-testing-config`,
+		{
+			...configCloudformationDeployment,
+			dependencies: [
+				...(configCloudformationDeployment.dependencies ?? []),
+				// We need the test artifacts in place before running the ab-testing-config CloudFormation deployment
+				"config/ab-testing",
+				// We need the lambda to be updated before running the ab-testing-config CloudFormation deployment
+				[
+					"lambda-update",
+					region,
+					stack,
+					"ab-testing-deployment-lambda",
+				].join("-"),
+			],
+		},
+	);
 
 	return riffRaff;
 };

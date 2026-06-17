@@ -36,6 +36,7 @@ export const exampleProduct: ProductBlockElement = {
 		},
 	],
 	starRating: 'none-selected',
+	id: '123',
 	content: [
 		{
 			displayCredit: true,
@@ -213,12 +214,14 @@ export const exampleProduct: ProductBlockElement = {
 			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
 			url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
 			label: '£79.99 at John Lewis',
+			elementId: '123',
 			linkType: 'ProductButton',
 		},
 		{
 			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
 			url: 'https://www.amazon.co.uk/Bosch-TWK7203GB-Sky-Variable-Temperature/dp/B07Z8VQ2V6',
 			label: '£79.99 at Amazon',
+			elementId: '1234',
 			linkType: 'ProductButton',
 		},
 		{
@@ -283,6 +286,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 			},
 		],
 		starRating: 'none-selected',
+		id: '123',
 		content: [],
 	},
 	{
@@ -323,6 +327,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		],
 		starRating: 'none-selected',
 		content: [],
+		id: '456',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
@@ -362,6 +367,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		],
 		starRating: 'none-selected',
 		content: [],
+		id: '789',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
@@ -401,6 +407,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		],
 		starRating: 'none-selected',
 		content: [],
+		id: '987',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
@@ -440,6 +447,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		],
 		starRating: 'none-selected',
 		content: [],
+		id: '654',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
@@ -479,6 +487,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		],
 		starRating: 'none-selected',
 		content: [],
+		id: '321',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
@@ -519,5 +528,6 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		],
 		starRating: 'none-selected',
 		content: [],
+		id: '098',
 	},
 ];

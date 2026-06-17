@@ -21,7 +21,7 @@ test.describe('Affiliate links', () => {
 			await expect(disclaimerLocator).toContainText('affiliate link');
 		});
 
-		test.skip('skimlinks should have the attribute rel="sponsored noreferrer noopener"', async ({
+		test('skimlinks should have the attribute rel="sponsored noreferrer noopener"', async ({
 			page,
 		}) => {
 			await loadPage({

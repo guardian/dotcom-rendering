@@ -39,11 +39,11 @@ const relativeTime = (
 			environment === 'server'
 				? now
 				: then +
-				  getDuration({
+					getDuration({
 						then,
 						now: Date.now(),
 						precision: ONE_MINUTE,
-				  }),
+					}),
 		daysUntilAbsolute: 7,
 	});
 

@@ -2,6 +2,7 @@ import { createRef } from 'react';
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { fn, mocked } from 'storybook/test';
 import preview from '../../.storybook/preview';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
 import type { NewsletterSignupFormState } from '../lib/useNewsletterSignupForm';
 import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
@@ -81,6 +82,7 @@ const mockForm = (state: Partial<NewsletterSignupFormState>) => ({
 	isInteracted: false,
 	showMarketingToggle: false,
 	marketingOptIn: undefined,
+	marketingOptInHiddenForCountry: false,
 	isWaitingForResponse: false,
 	responseOk: undefined,
 	errorMessage: undefined,
@@ -221,25 +223,35 @@ export const WithoutPreview = meta.story({
 	},
 });
 
-/** `hidePrivacyMessage` — focused state without the privacy notice. */
-export const HidePrivacyMessage = meta.story({
-	args: { ...defaultArgs, hidePrivacyMessage: true },
-	beforeEach() {
-		mocked(useNewsletterSignupForm).mockReturnValue(
-			mockForm({
-				isInteracted: true,
-				showMarketingToggle: true,
-				marketingOptIn: true,
-			}),
-		);
-	},
-});
-
 /** User is already subscribed — success message shown immediately. */
 export const AlreadySubscribed = meta.story({
 	args: { ...defaultArgs, isAlreadySubscribed: true },
 	parameters: { isSignedIn: true },
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(mockForm({}));
+	},
+});
+
+/**
+ * US user — marketing toggle is hidden and the user is silently enrolled in
+ * similar_guardian_products.
+ */
+export const USHideMarketingToggle = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useCountryCode).mockReturnValue('US');
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = true;
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({
+				userEmail: 'reader@example.com',
+				isInteracted: true,
+				showMarketingToggle: false,
+				marketingOptIn: true,
+			}),
+		);
+	},
+	afterEach() {
+		mocked(useCountryCode).mockReset();
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = false;
 	},
 });

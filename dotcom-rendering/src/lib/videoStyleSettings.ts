@@ -6,7 +6,7 @@ type ProgessBarStyles =
 			/**
 			 * A progress bar that includes seeking. Taller than the default progress bar
 			 */
-			useInteractiveProgressBar: boolean | null;
+			useInteractiveProgressBar: boolean;
 	  }
 	| {
 			showProgressBar: false;
@@ -29,16 +29,20 @@ export type VideoStyleSettings = ProgessBarStyles & {
 	 */
 	canShowPlayIcon: boolean;
 	canShowSubtitles: boolean;
+	/**
+	 * When seeking left/right, how many seconds the video skips backward/forward.
+	 * If null, the video does not support seeking.
+	 */
 	seekIncrement: number | null;
 	/**
-	 * Does the video respond to user input
+	 * Whether the video responds to user input.
 	 */
 	isInteractive: boolean;
 	/**
-	 * Functionality to hide controls when the video is not interacted with
-	 * so the full, unobscured video can be displayed to the user without distractions.
+	 * When enabled, controls will be hidden after a period of time of user inactivity
+	 * so that the full, unobscured video can be displayed.
 	 */
-	hideControlsWhenNotInteractedWith: boolean;
+	enableFadeableControls: boolean;
 };
 
 const loopSettings: VideoStyleSettings = {
@@ -52,7 +56,7 @@ const loopSettings: VideoStyleSettings = {
 	canShowSubtitles: true,
 	seekIncrement: 1,
 	isInteractive: true,
-	hideControlsWhenNotInteractedWith: false,
+	enableFadeableControls: false,
 };
 
 /**
@@ -70,7 +74,7 @@ const cinemagraphSettings: VideoStyleSettings = {
 	canShowSubtitles: false,
 	seekIncrement: null,
 	isInteractive: false,
-	hideControlsWhenNotInteractedWith: false,
+	enableFadeableControls: false,
 };
 
 /**
@@ -88,7 +92,7 @@ const defaultSettings: VideoStyleSettings = {
 	canShowSubtitles: true,
 	seekIncrement: 10,
 	isInteractive: true,
-	hideControlsWhenNotInteractedWith: true,
+	enableFadeableControls: true,
 };
 
 export const videoSettingsMap: Record<VideoPlayerFormat, VideoStyleSettings> = {

@@ -5,6 +5,7 @@ import type {
 	ThemeButton,
 } from '@guardian/source/react-components';
 import { LinkButton } from '@guardian/source/react-components';
+import { SKIMLINK_REL } from '../../lib/affiliateLinksUtils';
 import { palette } from '../../palette';
 import { heightAutoStyle, wrapButtonTextStyle } from './styles';
 import { getPropsForLinkUrl } from './utils';
@@ -66,7 +67,7 @@ export const ProductLinkButton = ({
 		<LinkButton
 			{...getPropsForLinkUrl(label)}
 			href={url}
-			rel="sponsored noreferrer noopener"
+			rel={SKIMLINK_REL}
 			priority={priority}
 			theme={theme}
 			data-component={dataComponent}

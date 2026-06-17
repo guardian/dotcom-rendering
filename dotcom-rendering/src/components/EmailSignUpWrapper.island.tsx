@@ -5,7 +5,7 @@ import {
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { useConfig } from './ConfigContext';
@@ -38,8 +38,6 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	illustrationSquare?: string;
 	idApiUrl: string;
 	exampleUrl?: string;
-	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
-	hidePrivacyMessage?: boolean;
 	/** Feature flag to enable hiding newsletter signup for already subscribed users */
 	hideNewsletterSignupComponentForSubscribers?: boolean;
 	/** Feature flag to show the new NewsletterSignupCard design instead of EmailSignup */
@@ -69,7 +67,6 @@ export const EmailSignUpWrapper = ({
 	frequency,
 	theme,
 	successDescription,
-	hidePrivacyMessage,
 	hideNewsletterSignupComponentForSubscribers = false,
 	showNewNewsletterSignupCard = false,
 }: EmailSignUpWrapperProps) => {
@@ -78,14 +75,22 @@ export const EmailSignUpWrapper = ({
 	const abTestEnabled =
 		showNewNewsletterSignupCard && renderingTarget === 'Web';
 
-	const abTests = useBetaAB();
+	const abTests = useAB();
 	const abResolved = abTests !== undefined;
 
-	const isVariant =
-		abTestEnabled &&
-		(abTests?.isUserInTestGroup(AB_TEST_NAME, 'variant') ?? false);
-
-	const abVariant = isVariant ? 'variant' : 'control';
+	const getVariantName = () => {
+		const currentUserVariant = abTests?.getParticipations()[AB_TEST_NAME];
+		if (
+			currentUserVariant &&
+			['variantNewField', 'variantIllustratedCard'].includes(
+				currentUserVariant,
+			)
+		) {
+			return currentUserVariant;
+		}
+		return 'control';
+	};
+	const abVariant = abTestEnabled ? getVariantName() : 'control';
 
 	const isSubscribed = useNewsletterSubscription(
 		listId,
@@ -118,9 +123,16 @@ export const EmailSignUpWrapper = ({
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName,
-			componentId: isVariant
-				? NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName)
-				: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
+			componentId:
+				abVariant === 'variantIllustratedCard'
+					? NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
+							identityName,
+						)
+					: abVariant === 'variantNewField'
+						? NEWSLETTER_SIGNUP_COMPONENT_ID.variantNewField(
+								identityName,
+							)
+						: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
 			renderingTarget,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
@@ -134,7 +146,6 @@ export const EmailSignUpWrapper = ({
 		abVariant,
 		identityName,
 		isSubscribed,
-		isVariant,
 		abTestEnabled,
 		renderingTarget,
 	]);
@@ -143,7 +154,7 @@ export const EmailSignUpWrapper = ({
 		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
 	}
 
-	if (isVariant) {
+	if (abVariant === 'variantIllustratedCard') {
 		return (
 			<InlineSkipToWrapper
 				id={`EmailSignup-skip-link-${index}`}
@@ -167,7 +178,6 @@ export const EmailSignUpWrapper = ({
 								newsletterId={identityName}
 								newsletterName={name}
 								frequency={frequency}
-								hidePrivacyMessage={isSignedIn === true}
 								previewAction={previewAction}
 								isAlreadySubscribed={isSubscribed}
 								abTest={{
@@ -187,6 +197,13 @@ export const EmailSignUpWrapper = ({
 		return null;
 	}
 
+	const emailInputName =
+		abVariant === 'variantNewField' ? 'emailAddress' : 'email';
+	const emailInputId =
+		abVariant === 'variantNewField'
+			? `emailInput-${identityName}`
+			: undefined;
+
 	return (
 		<InlineSkipToWrapper
 			id={`EmailSignup-skip-link-${index}`}
@@ -203,9 +220,12 @@ export const EmailSignUpWrapper = ({
 						newsletterId={identityName}
 						successDescription={successDescription}
 						abTest={{ name: AB_TEST_NAME, variant: abVariant }}
+						emailInputNameOverride={emailInputName}
+						emailInputIdOverride={emailInputId}
+						addCountryField={abVariant === 'variantNewField'}
 					/>
 				</Island>
-				{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
+				<NewsletterPrivacyMessage />
 			</EmailSignup>
 		</InlineSkipToWrapper>
 	);

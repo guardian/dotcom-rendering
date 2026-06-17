@@ -533,6 +533,7 @@ const CarouselCard = ({
 				showTopBarDesktop={!isOnwardContent}
 				showTopBarMobile={!isOnwardContent}
 				aspectRatio="5:4"
+				contentSpacing="small"
 			/>
 		</LI>
 	);

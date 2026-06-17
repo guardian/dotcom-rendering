@@ -243,7 +243,7 @@ export const AudioAtom = ({
 				? audioElCurrent.removeEventListener(
 						'timeupdate',
 						updateCurrentTimeAndPosition,
-				  )
+					)
 				: undefined;
 	}, [audioEl, setCurrentTime, shouldUseAcast]);
 

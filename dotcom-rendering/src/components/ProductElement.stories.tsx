@@ -54,6 +54,7 @@ const product = {
 		},
 	],
 	starRating: 'none-selected',
+	id: '123',
 	content: [
 		{
 			displayCredit: true,
@@ -233,6 +234,7 @@ const product = {
 			label: '£79.99 at John Lewis',
 			linkType: 'ProductButton',
 			priority: 'Primary',
+			elementId: '123',
 		},
 		{
 			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
@@ -240,6 +242,7 @@ const product = {
 			label: '£79.99 at Amazon',
 			linkType: 'ProductButton',
 			priority: 'Primary',
+			elementId: '1234',
 		},
 		{
 			_type: 'model.dotcomrendering.pageElements.TextBlockElement',

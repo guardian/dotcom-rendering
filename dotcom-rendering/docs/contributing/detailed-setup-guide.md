@@ -32,7 +32,7 @@ However, if you are working on a feature branch and plan to make a PR, it's stil
 
 For ease of development you may want to install:
 
--   [React Developer Tools](https://github.com/facebook/react-devtools)
+- [React Developer Tools](https://github.com/facebook/react-devtools)
 
 ### Running alongside identity/sign in
 
@@ -42,24 +42,21 @@ In order for this to work you have to run `dotcom-rendering` on a local domain w
 To set this up this:
 
 1. Run `./scripts/nginx/setup.sh`
-
     - This will create a local domain `r.thegulocal.com` and set up a reverse proxy to `localhost:3030` with a valid SSL certificate.
 
 2. `dotcom-rendering` can now be accessed through https://r.thegulocal.com when running the development server
 3. Sign in to https://profile.code.dev-theguardian.com/ on a separate tab/window
-
     - Third party cookies must be enabled in your browser for this to work
 
 4. Back on `dotcom-rendering` under https://r.thegulocal.com set a cookie with the name `GU_U` with any value on the `r.thegulocal.com` domain and refresh the page
 5. You should now be signed in!
-
     - You should see the header change to show `My Account` instead of `Sign in`
     - In local storage you should see a key `gu.access_token` and `gu.id_token` with the values of the tokens you are signed in with
 
 ## Production
 
--   `make build` creates production-ready bundles.
--   `make prod` starts the production server.
+- `make build` creates production-ready bundles.
+- `make prod` starts the production server.
 
 More scripts can be found in the `makefile` prod section [scripts](https://github.com/guardian/dotcom-rendering/blob/main/makefile)
 

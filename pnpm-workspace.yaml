@@ -2,10 +2,16 @@ packages:
   - 'dotcom-rendering'
   - 'ab-testing'
   - 'ab-testing/*'
+allowBuilds:
+  '@swc/core': true
+  esbuild: true
+  nice-napi: true
+  unrs-resolver: false # This postinstall is just a workaround for an npm issue so we don't need it https://github.com/unrs/unrs-resolver/pull/66
+blockExoticSubdeps: true
 catalog:
   '@aws-sdk/client-s3': 3.995.0
   '@aws-sdk/client-ssm': 3.995.0
-  '@guardian/cdk': 62.6.1
+  '@guardian/cdk': 63.6.1
   '@guardian/eslint-config': 14.0.1
   '@guardian/tsconfig': 1.0.1
   '@rollup/plugin-commonjs': 29.0.0
@@ -13,10 +19,10 @@ catalog:
   '@rollup/plugin-node-resolve': 16.0.3
   '@types/aws-lambda': 8.10.158
   '@types/node': 24.12.4
-  aws-cdk: 2.1115.1
-  aws-cdk-lib: 2.246.0
+  aws-cdk: 2.1126.0
+  aws-cdk-lib: 2.257.0
   constructs: 10.6.0
-  esbuild: 0.27.0
+  esbuild: 0.28.1
   eslint: 9.39.1
   rollup: 4.59.0
   rollup-plugin-esbuild: 6.2.1
@@ -24,11 +30,6 @@ catalog:
   tslib: 2.6.2
   type-fest: 4.21.0
   typescript: 5.9.3
-allowBuilds:
-  '@swc/core': true
-  esbuild: true
-  nice-napi: true
 minimumReleaseAge: 2880 # 2 day minimum package version age
 minimumReleaseAgeExclude:
   - '@guardian/*'
-blockExoticSubdeps: true

@@ -72,12 +72,12 @@ const directionOnMobileStyles = (direction: Alignment) => {
 				${until.tablet} {
 					${horizontal}
 				}
-		  `
+			`
 		: css`
 				${until.tablet} {
 					${vertical}
 				}
-		  `;
+			`;
 };
 
 const transparent = css`

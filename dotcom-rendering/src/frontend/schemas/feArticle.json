@@ -383,9 +383,6 @@
         "isLegacyInteractive": {
             "type": "boolean"
         },
-        "filterKeyEvents": {
-            "type": "boolean"
-        },
         "mostRecentBlockId": {
             "type": "string"
         },
@@ -561,7 +558,6 @@
         "designType",
         "editionId",
         "editionLongForm",
-        "filterKeyEvents",
         "format",
         "guardianBaseURL",
         "hasRelated",
@@ -897,6 +893,9 @@
                 },
                 {
                     "$ref": "#/definitions/ProductSummaryElement"
+                },
+                {
+                    "$ref": "#/definitions/RecipeBlockElement"
                 }
             ]
         },
@@ -2674,6 +2673,9 @@
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.LinkBlockElement"
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -2697,6 +2699,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "label",
                 "linkType",
                 "url"
@@ -4686,6 +4689,9 @@
                 "displayType": {
                     "$ref": "#/definitions/ProductDisplayType"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "productCtas": {
                     "type": "array",
                     "items": {
@@ -4723,6 +4729,7 @@
                 "customAttributes",
                 "displayType",
                 "elementId",
+                "id",
                 "primaryHeadingHtml",
                 "productCtas",
                 "productName",
@@ -4811,6 +4818,74 @@
                 "_type",
                 "matchedProducts",
                 "variant"
+            ]
+        },
+        "RecipeBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.RecipeBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "featuredImage": {
+                    "$ref": "#/definitions/RecipeFeaturedImage"
+                }
+            },
+            "required": [
+                "_type",
+                "id"
+            ]
+        },
+        "RecipeFeaturedImage": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "mediaId": {
+                    "type": "string"
+                },
+                "cropId": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "photographer": {
+                    "type": "string"
+                },
+                "imageType": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "mediaApiUri": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cropId",
+                "mediaId",
+                "url"
             ]
         },
         "Block": {
@@ -6095,14 +6170,15 @@
                                     "width": {
                                         "type": "number"
                                     },
-                                    "aspectRatio": {
-                                        "type": "string"
-                                    },
                                     "hasAudio": {
                                         "type": "boolean"
+                                    },
+                                    "aspectRatio": {
+                                        "type": "string"
                                     }
                                 },
                                 "required": [
+                                    "hasAudio",
                                     "height",
                                     "mimeType",
                                     "src",

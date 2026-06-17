@@ -580,6 +580,60 @@
                                                 },
                                                 "embedUri": {
                                                     "type": "string"
+                                                },
+                                                "newsletterData": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "listId": {
+                                                            "type": "number"
+                                                        },
+                                                        "identityName": {
+                                                            "type": "string"
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "description": {
+                                                            "type": "string"
+                                                        },
+                                                        "frequency": {
+                                                            "type": "string"
+                                                        },
+                                                        "successDescription": {
+                                                            "type": "string"
+                                                        },
+                                                        "theme": {
+                                                            "type": "string"
+                                                        },
+                                                        "group": {
+                                                            "type": "string"
+                                                        },
+                                                        "category": {
+                                                            "type": "string"
+                                                        },
+                                                        "regionFocus": {
+                                                            "type": "string"
+                                                        },
+                                                        "illustrationCard": {
+                                                            "type": "string"
+                                                        },
+                                                        "illustrationSquare": {
+                                                            "type": "string"
+                                                        },
+                                                        "exampleUrl": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "description",
+                                                        "frequency",
+                                                        "group",
+                                                        "identityName",
+                                                        "listId",
+                                                        "name",
+                                                        "successDescription",
+                                                        "theme"
+                                                    ]
                                                 }
                                             },
                                             "required": [
@@ -1361,6 +1415,60 @@
                                                 },
                                                 "embedUri": {
                                                     "type": "string"
+                                                },
+                                                "newsletterData": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "listId": {
+                                                            "type": "number"
+                                                        },
+                                                        "identityName": {
+                                                            "type": "string"
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "description": {
+                                                            "type": "string"
+                                                        },
+                                                        "frequency": {
+                                                            "type": "string"
+                                                        },
+                                                        "successDescription": {
+                                                            "type": "string"
+                                                        },
+                                                        "theme": {
+                                                            "type": "string"
+                                                        },
+                                                        "group": {
+                                                            "type": "string"
+                                                        },
+                                                        "category": {
+                                                            "type": "string"
+                                                        },
+                                                        "regionFocus": {
+                                                            "type": "string"
+                                                        },
+                                                        "illustrationCard": {
+                                                            "type": "string"
+                                                        },
+                                                        "illustrationSquare": {
+                                                            "type": "string"
+                                                        },
+                                                        "exampleUrl": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "description",
+                                                        "frequency",
+                                                        "group",
+                                                        "identityName",
+                                                        "listId",
+                                                        "name",
+                                                        "successDescription",
+                                                        "theme"
+                                                    ]
                                                 }
                                             },
                                             "required": [
@@ -2142,6 +2250,60 @@
                                                 },
                                                 "embedUri": {
                                                     "type": "string"
+                                                },
+                                                "newsletterData": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "listId": {
+                                                            "type": "number"
+                                                        },
+                                                        "identityName": {
+                                                            "type": "string"
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "description": {
+                                                            "type": "string"
+                                                        },
+                                                        "frequency": {
+                                                            "type": "string"
+                                                        },
+                                                        "successDescription": {
+                                                            "type": "string"
+                                                        },
+                                                        "theme": {
+                                                            "type": "string"
+                                                        },
+                                                        "group": {
+                                                            "type": "string"
+                                                        },
+                                                        "category": {
+                                                            "type": "string"
+                                                        },
+                                                        "regionFocus": {
+                                                            "type": "string"
+                                                        },
+                                                        "illustrationCard": {
+                                                            "type": "string"
+                                                        },
+                                                        "illustrationSquare": {
+                                                            "type": "string"
+                                                        },
+                                                        "exampleUrl": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "description",
+                                                        "frequency",
+                                                        "group",
+                                                        "identityName",
+                                                        "listId",
+                                                        "name",
+                                                        "successDescription",
+                                                        "theme"
+                                                    ]
                                                 }
                                             },
                                             "required": [
@@ -2958,6 +3120,9 @@
                     "type": "string"
                 },
                 "assetType": {
+                    "type": "string"
+                },
+                "aspectRatio": {
                     "type": "string"
                 },
                 "dimensions": {
@@ -3984,14 +4149,15 @@
                                     "width": {
                                         "type": "number"
                                     },
-                                    "aspectRatio": {
-                                        "type": "string"
-                                    },
                                     "hasAudio": {
                                         "type": "boolean"
+                                    },
+                                    "aspectRatio": {
+                                        "type": "string"
                                     }
                                 },
                                 "required": [
+                                    "hasAudio",
                                     "height",
                                     "mimeType",
                                     "src",
