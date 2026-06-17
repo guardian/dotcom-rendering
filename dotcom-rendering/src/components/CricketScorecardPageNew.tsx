@@ -4,31 +4,31 @@ import type { CricketMatch } from '../cricketMatchV2';
 import { grid } from '../grid';
 import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
-import { CricketMatchHeader } from './CricketMatchHeader/CricketMatchHeader';
+import { CricketMatchHeaderWrapper } from './CricketMatchHeaderWrapper.island';
 import { CricketScorecardNew } from './CricketScorecardNew';
-import type { TabName } from './FootballMatchHeader/Tabs';
 
 export const CricketScorecardPageNew = ({
 	match,
 	edition,
-	selectedTab,
+	matchHeaderURL,
 	infoURL,
 	liveURL,
 	reportURL,
 }: {
 	match: CricketMatch;
 	edition: EditionId;
-	selectedTab: TabName;
+	matchHeaderURL: string;
 	infoURL?: URL;
 	liveURL?: URL;
 	reportURL?: URL;
 }) => {
 	return (
 		<main id="maincontent">
-			<CricketMatchHeader
-				match={match}
+			<CricketMatchHeaderWrapper
+				initialData={match}
 				edition={edition}
-				selectedTab={selectedTab}
+				selectedTab={'info'}
+				matchHeaderURL={matchHeaderURL}
 				infoURL={infoURL}
 				liveURL={liveURL}
 				reportURL={reportURL}
