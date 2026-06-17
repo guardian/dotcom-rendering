@@ -1103,6 +1103,8 @@ const Header = (props: {
 		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
 	);
 
+	const isApps = props.renderingTarget === 'Apps';
+
 	if (footballMatchHeaderUrl) {
 		return (
 			<>
@@ -1128,7 +1130,7 @@ const Header = (props: {
 		);
 	}
 
-	if (cricketMatchHeaderUrl && isCricketRedesignEnabled) {
+	if (!isApps && cricketMatchHeaderUrl && isCricketRedesignEnabled) {
 		return (
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<CricketMatchHeaderWrapper
