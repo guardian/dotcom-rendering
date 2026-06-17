@@ -172,15 +172,19 @@ const displayFullscreenStyle = css`
 	}
 `;
 
+const fullscreenGlobalHiddenOverflow = (hideOverflow: boolean) =>
+	hideOverflow &&
+	css`
+		html {
+			overflow: hidden;
+		}
+	`;
+
 const fullscreenStyles = (bridgetFullscreen: boolean) => css`
 	${bridgetFullscreen && displayFullscreenStyle}
 
 	${bridgetFullscreen &&
 	css`
-		html {
-			overflow: hidden;
-		}
-
 		position: fixed;
 		top: 0;
 		z-index: ${getZIndex('selfHostedFullscreen')};
@@ -1258,7 +1262,11 @@ export const SelfHostedVideo = ({
 				]}
 			>
 				{isBridgetFullscreen && (
-					<Global styles={fullscreenStyles(isBridgetFullscreen)} />
+					<Global
+						styles={fullscreenGlobalHiddenOverflow(
+							isBridgetFullscreen,
+						)}
+					/>
 				)}
 				<div
 					ref={playerContainerRef}
