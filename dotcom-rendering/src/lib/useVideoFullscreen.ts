@@ -1,13 +1,14 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import React, { useEffect, useState } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 import { submitClickComponentEvent } from '../client/ophan/ophan';
+import type { VideoEventKey } from '../components/YoutubeAtom/YoutubeAtom';
+import { palette } from '../palette';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { getVideoClient } from './bridgetApi';
 import { getZIndex } from './getZIndex';
 import { hasMinimumBridgetVersion } from './useIsBridgetCompatible';
-import { palette } from '../palette';
-import type { RenderingTarget } from '../types/renderingTarget';
-import type { VideoEventKey } from '../components/YoutubeAtom/YoutubeAtom';
 
 /**
  * The Fullscreen API is not supported by Safari mobile,
@@ -56,13 +57,14 @@ const displayFullscreenStyle = css`
  * Returns a global style that hides overflow on the html element when the
  * video is in bridget fullscreen mode.
  */
-export const getFullscreenGlobalHiddenOverflow = (hideOverflow: boolean) =>
-	hideOverflow &&
-	css`
-		html {
-			overflow: hidden;
-		}
-	`;
+const getFullscreenGlobalHiddenOverflow = (hideOverflow: boolean) =>
+	(hideOverflow &&
+		css`
+			html {
+				overflow: hidden;
+			}
+		`) ||
+	css``;
 
 const buildFullscreenStyles = (bridgetFullscreen: boolean) => css`
 	${bridgetFullscreen && displayFullscreenStyle}
@@ -125,7 +127,6 @@ type Props = {
 type ReturnValue = {
 	isFullscreen: boolean;
 	isWebKitFullscreen: boolean;
-	isBridgetFullscreen: boolean;
 	handleFullscreenClick: (event: React.SyntheticEvent) => void;
 	/**
 	 * Styles for the player container element. Applies bridget fullscreen
@@ -159,11 +160,11 @@ export const useVideoFullscreen = ({
 }: Props): ReturnValue => {
 	const [isFullscreen, setIsFullscreen] = useState(false);
 	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
-	const [isBridgetFullscreen, setIsBridgetFullscreen] = useState(false);
 	const [shouldUseBridgetFullscreen, setShouldUseBridgetFullscreen] =
 		useState(false);
 
 	const isApps = renderingTarget === 'Apps';
+	const isBridgetFullscreen = isFullscreen && shouldUseBridgetFullscreen;
 
 	/* Detect whether the apps bridget client supports fullscreen */
 	useEffect(() => {
@@ -296,11 +297,18 @@ export const useVideoFullscreen = ({
 
 		if (shouldUseBridgetFullscreen) {
 			const videoClient = getVideoClient();
-			const fullscreen = !isBridgetFullscreen;
+			const fullscreen = !isFullscreen;
 			void videoClient
 				.setFullscreen(fullscreen)
-				.then(() => setIsBridgetFullscreen(fullscreen));
-		} else if (document.fullscreenElement) {
+				.then(() => setIsFullscreen(fullscreen));
+			const trackingEvent = isFullscreen
+				? 'enter_fullscreen'
+				: 'exit_fullscreen';
+			sendOphanTrackingEvent(trackingEvent);
+			return;
+		}
+
+		if (document.fullscreenElement) {
 			void document.exitFullscreen();
 		} else if (playerContainerRef.current) {
 			void playerContainerRef.current.requestFullscreen();
@@ -310,7 +318,6 @@ export const useVideoFullscreen = ({
 	return {
 		isFullscreen,
 		isWebKitFullscreen,
-		isBridgetFullscreen,
 		handleFullscreenClick,
 		fullscreenStyles: buildFullscreenStyles(isBridgetFullscreen),
 		globalFullscreenStyles:

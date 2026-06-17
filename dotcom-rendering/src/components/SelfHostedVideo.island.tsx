@@ -13,11 +13,11 @@ import { generateImageURL } from '../lib/image';
 import { useFadeableControls } from '../lib/useFadeableControls';
 import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
-import { useVideoFullscreen } from '../lib/useVideoFullscreen';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
 import { useVideoAttentionTracking } from '../lib/useVideoAttentionTracking';
+import { useVideoFullscreen } from '../lib/useVideoFullscreen';
 import { useVideoMilestoneTracking } from '../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
