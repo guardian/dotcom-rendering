@@ -12,7 +12,6 @@ import {
 import { getVideoClient } from '../../lib/bridgetApi';
 import { getZIndex } from '../../lib/getZIndex';
 import { getAuthStatus } from '../../lib/identity';
-import { useIsInView } from '../../lib/useIsInView';
 import { useVideoAttentionTracking } from '../../lib/useVideoAttentionTracking';
 import { useVideoMilestoneTracking } from '../../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail } from '../../lib/video';
@@ -46,6 +45,7 @@ type Props = {
 	consentState: ConsentState;
 	abTestParticipations: Record<string, string>;
 	renderingTarget: RenderingTarget;
+	isInView: boolean;
 };
 
 /**
@@ -404,6 +404,7 @@ export const YoutubeAtomPlayer = ({
 	consentState,
 	abTestParticipations,
 	renderingTarget,
+	isInView,
 }: Props): JSX.Element => {
 	/**
 	 * useRef for player and progressEvents
@@ -442,12 +443,6 @@ export const YoutubeAtomPlayer = ({
 	const adsManager = useRef<google.ima.AdsManager>();
 
 	const id = `youtube-player-${uniqueId}`;
-
-	const [isInView, setNode] = useIsInView({
-		debounce: true,
-		repeat: true,
-		threshold: 0.5,
-	});
 
 	useVideoAttentionTracking(
 		`gu-video-youtube-${atomId}`,
@@ -751,7 +746,6 @@ export const YoutubeAtomPlayer = ({
 				data-atom-type="youtube"
 				title={title}
 				css={enableAds && imaPlayerStyles}
-				ref={setNode}
 			></div>
 		</>
 	);
