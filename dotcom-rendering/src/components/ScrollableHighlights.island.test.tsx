@@ -127,9 +127,7 @@ describe('ScrollableHighlights — newsletter card AB test', () => {
 				}),
 			).not.toBeInTheDocument();
 
-			expect(
-				screen.queryByText('Free newsletter'),
-			).not.toBeInTheDocument();
+			expect(screen.queryByText('Newsletter')).not.toBeInTheDocument();
 		});
 
 		it('does not render a newsletter trail when newsletterData is missing', () => {
@@ -140,9 +138,7 @@ describe('ScrollableHighlights — newsletter card AB test', () => {
 					name: newsletterSignupCardWithoutData.headline,
 				}),
 			).not.toBeInTheDocument();
-			expect(
-				screen.queryByText('Free newsletter'),
-			).not.toBeInTheDocument();
+			expect(screen.queryByText('Newsletter')).not.toBeInTheDocument();
 		});
 
 		it('still renders non-newsletter cards normally', () => {
