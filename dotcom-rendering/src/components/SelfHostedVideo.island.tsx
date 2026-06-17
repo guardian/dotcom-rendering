@@ -13,6 +13,7 @@ import { generateImageURL } from '../lib/image';
 import { useFadeableControls } from '../lib/useFadeableControls';
 import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
+import { useVideoFullscreen } from '../lib/useVideoFullscreen';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
@@ -151,55 +152,6 @@ const videoContainerStyles = (
 	`}
 `;
 
-const displayFullscreenStyle = css`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: ${palette('--video-fullscreen-background')};
-	width: 100vw;
-	height: 100vh;
-
-	/* Override the fixed aspect-ratio + width:100% on the video so it
-   fits within the screen while preserving its aspect ratio. */
-
-	video {
-		width: 100%;
-		height: 100%;
-		max-width: 100vw;
-		max-height: 100vh;
-		aspect-ratio: auto;
-		object-fit: contain;
-	}
-`;
-
-const fullscreenGlobalHiddenOverflow = (hideOverflow: boolean) =>
-	hideOverflow &&
-	css`
-		html {
-			overflow: hidden;
-		}
-	`;
-
-const fullscreenStyles = (bridgetFullscreen: boolean) => css`
-	${bridgetFullscreen && displayFullscreenStyle}
-
-	${bridgetFullscreen &&
-	css`
-		position: fixed;
-		top: 0;
-		z-index: ${getZIndex('selfHostedFullscreen')};
-		/* override vw and vh with svw and svh if supported */
-		/* stylelint-disable declaration-block-no-duplicate-properties */
-		width: 100svw;
-		height: 100svh;
-		/* stylelint-enable declaration-block-no-duplicate-properties */
-	`}
-
-	&:fullscreen {
-		${displayFullscreenStyle};
-	}
-`;
-
 /**
  * Dispatches a custom play audio event so that other videos listening for this event will be muted.
  */
@@ -240,28 +192,6 @@ const getOptimisedPosterImage = (
 		aspectRatio,
 	});
 };
-
-/**
- * 	The Fullscreen api is not supported by Safari mobile,
- * 	so we need to check if we have access to the webkit api we can use instead.
- * */
-const shouldUseWebkitFullscreen = (video: HTMLVideoElement): boolean => {
-	return (
-		'webkitDisplayingFullscreen' in video &&
-		'webkitEnterFullscreen' in video &&
-		'webkitExitFullscreen' in video
-	);
-};
-
-/**
- * 	The events we need to respond to for fullscreen tracking
- * */
-const fullscreenChangeEvents = [
-	'fullscreenchange',
-	'webkitfullscreenchange',
-	'webkitbeginfullscreen',
-	'webkitendfullscreen',
-];
 
 /**
  * Ensures the aspect ratio falls between the minimum and maximum allowed aspect ratios, if specified.
@@ -428,13 +358,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
-	const [isFullscreen, setIsFullscreen] = useState(false);
-	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
-	const [isBridgetFullscreen, setIsBridgetFullscreen] = useState(false);
 	const [isProgressBarSeeking, setIsProgressBarSeeking] = useState(false);
-
-	const [shouldUseBridgetFullscreen, setShouldUseBridgetFullscreen] =
-		useState(false);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -793,62 +717,6 @@ export const SelfHostedVideo = ({
 		};
 	}, [setMutedState, uniqueId, sources, renderingTarget, pauseVideo]);
 
-	/* Creates video-specific event listeners to handle fullscreen behaviour */
-	useEffect(() => {
-		const video = vidRef.current;
-		if (!video) return;
-
-		const handleEndFullscreen = () => {
-			setIsWebKitFullscreen(false);
-			positionCues(video);
-		};
-
-		video.addEventListener('webkitendfullscreen', handleEndFullscreen);
-
-		return () =>
-			video.removeEventListener(
-				'webkitendfullscreen',
-				handleEndFullscreen,
-			);
-	}, [positionCues]);
-
-	const doesBridgetSupportFullscreen = async () => {
-		const isBridgetCompatible = await hasMinimumBridgetVersion('8.8.0');
-
-		if (!isBridgetCompatible) {
-			return false;
-		}
-
-		try {
-			const videoClient = getVideoClient();
-
-			/**
-			 * We request to set the video to fullscreen to determine if the Bridget function is supported.
-			 * > On Android, this method will return true if the operation was successful, false otherwise
-			 * > On iOS, this method will always return false
-			 * – taken from comments on the Bridget thrift interface.
-			 */
-			return await videoClient.setFullscreen(false);
-		} catch (error) {
-			if (error instanceof Error) {
-				window.guardian.modules.sentry.reportError(
-					error,
-					'self-hosted-video',
-				);
-			}
-			log('dotcom', 'Failed to check Bridget fullscreen support:', error);
-			return false;
-		}
-	};
-
-	useEffect(() => {
-		if (isApps) {
-			void doesBridgetSupportFullscreen().then(
-				setShouldUseBridgetFullscreen,
-			);
-		}
-	}, [isApps]);
-
 	/**
 	 * Track the first time the video comes into view.
 	 */
@@ -890,73 +758,20 @@ export const SelfHostedVideo = ({
 		}
 	}, [shouldAutoplay, isInView, playerState]);
 
-	/**
-	 * Capture fullscreen tracking events across browsers and devices
-	 * We need to support events across:
-	 * 	- Browsers with fullscreen API support
-	 * 	- OSX Safari
-	 * 	- iOS Safari
-	 */
-	useEffect(() => {
-		const video = vidRef.current;
-		const playerContainer = playerContainerRef.current;
-
-		if (!playerContainer && !video) return;
-
-		const updateStateAndReportFullscreenEvent = () => {
-			const isInFullscreenMode =
-				document.fullscreenElement !== null ||
-				(video !== null &&
-					'webkitDisplayingFullscreen' in video &&
-					Boolean(video.webkitDisplayingFullscreen));
-
-			if (isInFullscreenMode) {
-				setIsFullscreen(true);
-			} else {
-				setIsFullscreen(false);
-			}
-
-			const event = isInFullscreenMode
-				? 'enter_fullscreen'
-				: 'exit_fullscreen';
-
-			sendOphanTrackingEvent(event);
-		};
-
-		for (const event of fullscreenChangeEvents) {
-			if (video) {
-				video.addEventListener(
-					event,
-					updateStateAndReportFullscreenEvent,
-				);
-			}
-
-			if (playerContainer) {
-				playerContainer.addEventListener(
-					event,
-					updateStateAndReportFullscreenEvent,
-				);
-			}
-		}
-
-		return () => {
-			for (const event of fullscreenChangeEvents) {
-				if (video) {
-					video.removeEventListener(
-						event,
-						updateStateAndReportFullscreenEvent,
-					);
-				}
-
-				if (playerContainer) {
-					playerContainer.removeEventListener(
-						event,
-						updateStateAndReportFullscreenEvent,
-					);
-				}
-			}
-		};
-	}, [sendOphanTrackingEvent]);
+	const {
+		isFullscreen,
+		isWebKitFullscreen,
+		handleFullscreenClick,
+		fullscreenStyles,
+		globalFullscreenStyles,
+	} = useVideoFullscreen({
+		videoRef: vidRef,
+		playerContainerRef,
+		renderingTarget,
+		sendOphanTrackingEvent,
+		positionCues,
+		showFadeableControlsAndStartTimer,
+	});
 
 	if (adapted) {
 		return FallbackImageComponent;
@@ -1033,52 +848,6 @@ export const SelfHostedVideo = ({
 			setMutedState({ value: false });
 		} else {
 			setMutedState({ value: true });
-		}
-	};
-
-	const handleFullscreenClick = (event: React.SyntheticEvent) => {
-		void submitClickComponentEvent(event.currentTarget, renderingTarget);
-		event.stopPropagation(); // Don't pause the video
-
-		showFadeableControlsAndStartTimer(); // Show controls when a button is clicked
-
-		const video = vidRef.current;
-		if (!video) {
-			return;
-		}
-
-		if (shouldUseWebkitFullscreen(video)) {
-			/***
-			 * webkit fullscreen methods are not part of the standard HTMLVideoElement
-			 * type definition as they are iOS only.
-			 * We need to extend the type expect these handlers when we're on iOS to keep TS happy.
-			 * @see https://developer.apple.com/documentation/webkitjs/htmlvideoelement/1633500-webkitenterfullscreen
-			 */
-			const webkitVideo = video as HTMLVideoElement & {
-				webkitDisplayingFullscreen: boolean;
-				webkitEnterFullscreen: () => void;
-				webkitExitFullscreen: () => void;
-			};
-
-			if (webkitVideo.webkitDisplayingFullscreen) {
-				setIsWebKitFullscreen(false);
-				return webkitVideo.webkitExitFullscreen();
-			} else {
-				setIsWebKitFullscreen(true);
-				return webkitVideo.webkitEnterFullscreen();
-			}
-		}
-
-		if (shouldUseBridgetFullscreen) {
-			const videoClient = getVideoClient();
-			const fullscreen = !isBridgetFullscreen;
-			void videoClient
-				.setFullscreen(fullscreen)
-				.then(() => setIsBridgetFullscreen(fullscreen));
-		} else if (document.fullscreenElement) {
-			void document.exitFullscreen();
-		} else if (playerContainerRef.current) {
-			void playerContainerRef.current.requestFullscreen();
 		}
 	};
 
@@ -1268,12 +1037,8 @@ export const SelfHostedVideo = ({
 					restrictHeightOnDesktop && maxHeightStyles,
 				]}
 			>
-				{isBridgetFullscreen && (
-					<Global
-						styles={fullscreenGlobalHiddenOverflow(
-							isBridgetFullscreen,
-						)}
-					/>
+				{globalFullscreenStyles && (
+					<Global styles={globalFullscreenStyles} />
 				)}
 				<div
 					ref={playerContainerRef}
@@ -1287,7 +1052,7 @@ export const SelfHostedVideo = ({
 							isVideoCroppedAtLeftRight,
 							containerAspectRatioDesktop,
 						),
-						fullscreenStyles(isBridgetFullscreen),
+						fullscreenStyles,
 						fadeableControlsStyles,
 					]}
 					onMouseMove={showFadeableControlsAndStartTimer}
