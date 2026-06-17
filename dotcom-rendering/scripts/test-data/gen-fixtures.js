@@ -368,7 +368,7 @@ requests.push(
 requests.push(
 	// This match data will expire after two months, find a new match if this needs updating
 	fetch(
-		'https://www.theguardian.com/sport/cricket/match/2025-08-04/england-cricket-team.json?dcr',
+		'https://www.theguardian.com/sport/cricket/match/2026-06-04/england-cricket-team.json?dcr',
 	)
 		.then((res) => res.json())
 		.then((json) => {

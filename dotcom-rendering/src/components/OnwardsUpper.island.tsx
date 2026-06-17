@@ -318,7 +318,9 @@ export const OnwardsUpper = ({
 	const showCuratedContainer =
 		!!curatedDataUrl && !isPaidContent && canHaveCuratedContent;
 
-	const isGalleryArticle = format.design === ArticleDesign.Gallery;
+	const isGalleryArticle =
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.HostedGallery;
 
 	return (
 		<div css={onwardsWrapper}>

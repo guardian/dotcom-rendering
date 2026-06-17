@@ -28,55 +28,52 @@ interface AppProps extends BaseProps {
 	renderingTarget: 'Apps';
 }
 
+const decideLayout = (article: Article, renderingTarget: 'Web' | 'Apps') => {
+	const format = {
+		design: article.design,
+		display: article.display,
+		theme: article.theme,
+	};
+	switch (article.design) {
+		case ArticleDesign.HostedGallery:
+			return (
+				<HostedGalleryLayout
+					gallery={article}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			);
+		case ArticleDesign.HostedVideo:
+			return (
+				<HostedVideoLayout
+					content={article}
+					format={article}
+					renderingTarget={renderingTarget}
+				/>
+			);
+		case ArticleDesign.HostedArticle:
+			return (
+				<HostedArticleLayout
+					content={article}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			);
+		default:
+			return null;
+	}
+};
+
 /**
  * @description
  * HostedContentPage is a high level wrapper for hosted content pages on Dotcom. Sets strict mode and some globals
  */
 export const HostedContentPage = (props: WebProps | AppProps) => {
-	const {
-		article: { design, display, theme, frontendData },
-		renderingTarget,
-	} = props;
-
+	const { article, renderingTarget } = props;
+	const { frontendData, design, display, theme } = article;
 	const isWeb = renderingTarget === 'Web';
 	const { darkModeAvailable } = useConfig();
-
-	const format = {
-		design,
-		display,
-		theme,
-	};
-
-	const decideLayout = () => {
-		switch (format.design) {
-			case ArticleDesign.HostedVideo:
-				return (
-					<HostedVideoLayout
-						content={props.article}
-						format={format}
-						renderingTarget={renderingTarget}
-					/>
-				);
-			case ArticleDesign.HostedGallery:
-				return (
-					<HostedGalleryLayout
-						content={props.article}
-						format={format}
-						renderingTarget={renderingTarget}
-					/>
-				);
-			case ArticleDesign.HostedArticle:
-				return (
-					<HostedArticleLayout
-						content={props.article}
-						format={format}
-						renderingTarget={renderingTarget}
-					/>
-				);
-			default:
-				return null;
-		}
-	};
+	const format = { design, display, theme };
 
 	return (
 		<StrictMode>
@@ -137,7 +134,7 @@ export const HostedContentPage = (props: WebProps | AppProps) => {
 				</DarkModeMessage>
 			)}
 
-			{decideLayout()}
+			{decideLayout(article, renderingTarget)}
 		</StrictMode>
 	);
 };

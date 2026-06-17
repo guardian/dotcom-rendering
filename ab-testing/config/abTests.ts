@@ -99,7 +99,7 @@ const ABTests: ABTest[] = [
 		description:
 			"This test will be the 5% holdback group for the prebid price floor",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-06-17",
+		expirationDate: "2026-07-16",
 		type: "client",
 		status: "ON",
 		audienceSize: 5 / 100,
@@ -112,7 +112,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module.",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-06-18",
+		expirationDate: "2026-07-16",
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
@@ -125,7 +125,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module for users in the US",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-06-18",
+		expirationDate: "2026-07-16",
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
@@ -182,6 +182,19 @@ const ABTests: ABTest[] = [
 		audienceSize: 20 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "feast-recipe-nudge",
+		description:
+			"Measures the impact of showing the Feast contextual nudge on recipe article pages",
+		owners: ["feast@theguardian.com"],
+		status: "ON",
+		expirationDate: "2027-01-01",
+		type: "client",
+		audienceSize: 50 / 100,
+		audienceSpace: "A",
+		groups: ["variant-1"],
 		shouldForceMetricsCollection: false,
 	},
 ];

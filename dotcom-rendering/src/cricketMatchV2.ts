@@ -56,6 +56,7 @@ export type FallOfWicket = {
 export type CricketTeam = {
 	name: string;
 	paID: string;
+	lineup: string[];
 };
 
 export type Innings = {
@@ -64,19 +65,10 @@ export type Innings = {
 	bowlers: Bowler[];
 	batters: Batter[];
 	extras: Extras;
-	declared?: boolean;
-	forfeited?: boolean;
-	inningsTotals: InningsTotals;
-	fallOfWickets: FallOfWicket[];
-};
-
-export type InningsOverview = {
-	battingTeam: string;
-	runs: number;
-	overs: string;
 	declared: boolean;
 	forfeited: boolean;
-	fallOfWickets: number;
+	inningsTotals: InningsTotals;
+	fallOfWickets: FallOfWicket[];
 };
 
 const winnerTypesSchema = picklist([
@@ -133,8 +125,9 @@ export type CricketMatch = {
 	matchDate: Date;
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
-	innings: InningsOverview[];
+	innings: Innings[];
 	result?: CricketResult;
+	officials: string[];
 };
 
 const paCricketStatusToMatchKind: Record<string, CricketMatchKind> = {
@@ -218,10 +211,12 @@ const parseTeams = (
 		homeTeam: {
 			name: homeSource.name,
 			paID: homeSource.id,
+			lineup: homeSource.lineup,
 		},
 		awayTeam: {
 			name: awaySource.name,
 			paID: awaySource.id,
+			lineup: awaySource.lineup,
 		},
 	});
 };
@@ -330,7 +325,7 @@ export const parseCricketMatchV2 = (
 		parseCricketResult(feMatch.fullResult).map(
 			(parsedResult): CricketMatch => ({
 				kind: matchKind,
-				series: feMatch.competitionName, // TODO: this will be stage after frontend changes are complete
+				series: feMatch.stage,
 				competition: feMatch.competitionName,
 				venue: feMatch.venueName,
 				matchDate: parsedDate.value,
@@ -338,14 +333,50 @@ export const parseCricketMatchV2 = (
 				homeTeam,
 				awayTeam,
 				innings: feMatch.innings.map((innings) => ({
+					description: innings.description,
 					battingTeam: innings.battingTeam,
-					runs: innings.runsScored,
-					overs: innings.overs,
+					bowlers: innings.bowlers.map((bowler) => ({
+						name: bowler.name,
+						overs: bowler.overs,
+						maidens: bowler.maidens,
+						runs: bowler.runs,
+						wickets: bowler.wickets,
+						balls: bowler.balls,
+					})),
+					batters: innings.batters.map((batter) => ({
+						name: batter.name,
+						ballsFaced: batter.ballsFaced,
+						runs: batter.runs,
+						fours: batter.fours,
+						sixes: batter.sixes,
+						howOut: batter.howOut,
+						out: batter.out,
+						onStrike: batter.onStrike,
+						nonStrike: batter.nonStrike,
+					})),
+					extras: {
+						byes: innings.byes,
+						legByes: innings.legByes,
+						noBalls: innings.noBalls,
+						penalties: innings.penalties,
+						wides: innings.wides,
+					},
 					declared: innings.declared,
 					forfeited: innings.forfeited,
-					fallOfWickets: innings.fallOfWicket.length,
+					fallOfWickets: innings.fallOfWicket.map((fallOfWicket) => ({
+						order: fallOfWicket.order,
+						name: fallOfWicket.name,
+						runs: fallOfWicket.runs,
+					})),
+					inningsTotals: {
+						extras: innings.extras,
+						runs: innings.runsScored,
+						overs: innings.overs,
+						wickets: innings.wickets,
+					},
 				})),
 				result: parsedResult,
+				officials: feMatch.officials,
 			}),
 		),
 	);
