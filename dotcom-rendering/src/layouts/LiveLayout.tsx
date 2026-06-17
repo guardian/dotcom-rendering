@@ -283,16 +283,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const { branding } = article.commercialProperties[article.editionId];
 
-	const ab = useAB();
-	const isCricketRedesignEnabled = Boolean(
-		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
-	);
-
-	const footballMatchUrl =
-		article.matchType === 'FootballMatchType'
-			? article.matchUrl
-			: undefined;
-
 	const footballMatchHeaderUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchHeaderUrl
@@ -303,16 +293,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			? article.matchStatsUrl
 			: undefined;
 
-	const footballMatchLeagueName = article.sectionLabel;
-	const footballMatchLeagueUrl = `${article.guardianBaseURL}/${article.sectionUrl}`;
-
 	const cricketMatchUrl =
 		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
-
-	const cricketMatchHeaderUrl =
-		article.matchType === 'CricketMatchType'
-			? article.matchHeaderUrl
-			: undefined;
 
 	const hasKeyEvents = !!article.keyEvents.length;
 
@@ -396,16 +378,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</Island>
 				)}
 				<Header
-					football={{
-						footballMatchLeagueName,
-						footballMatchLeagueUrl,
-						footballMatchHeaderUrl,
-						footballMatchUrl,
-					}}
-					cricket={{
-						cricketMatchHeaderUrl,
-						isCricketRedesignEnabled,
-					}}
 					renderingTarget={renderingTarget}
 					format={format}
 					article={article}
@@ -705,7 +677,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									id="maincontent"
 									css={[
 										bodyWrapper,
-										!!footballMatchUrl &&
+										!!footballMatchHeaderUrl &&
 											footballMatchBodyWrapper,
 									]}
 								>
@@ -1111,24 +1083,27 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 };
 
 const Header = (props: {
-	football: {
-		footballMatchLeagueName: string;
-		footballMatchLeagueUrl: string;
-		footballMatchHeaderUrl?: string;
-		footballMatchUrl?: string;
-	};
-	cricket: {
-		cricketMatchHeaderUrl?: string;
-		isCricketRedesignEnabled: boolean;
-	};
 	renderingTarget: RenderingTarget;
 	format: ArticleFormat;
 	article: ArticleDeprecated;
 }) => {
-	if (
-		props.football.footballMatchUrl &&
-		props.football.footballMatchHeaderUrl
-	) {
+	const footballMatchLeagueName = props.article.sectionLabel;
+	const footballMatchLeagueUrl = `${props.article.guardianBaseURL}/${props.article.sectionUrl}`;
+	const footballMatchHeaderUrl =
+		props.article.matchType === 'FootballMatchType'
+			? props.article.matchHeaderUrl
+			: undefined;
+	const cricketMatchHeaderUrl =
+		props.article.matchType === 'CricketMatchType'
+			? props.article.matchHeaderUrl
+			: undefined;
+
+	const ab = useAB();
+	const isCricketRedesignEnabled = Boolean(
+		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
+	);
+
+	if (footballMatchHeaderUrl) {
 		return (
 			<>
 				<noscript>
@@ -1140,10 +1115,10 @@ const Header = (props: {
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<FootballMatchHeaderWrapper
 						initialTab="live"
-						leagueName={props.football.footballMatchLeagueName}
-						leagueURL={props.football.footballMatchLeagueUrl}
+						leagueName={footballMatchLeagueName}
+						leagueURL={footballMatchLeagueUrl}
 						edition={props.article.editionId}
-						matchHeaderURL={props.football.footballMatchHeaderUrl}
+						matchHeaderURL={footballMatchHeaderUrl}
 						renderingTarget={props.renderingTarget}
 						article={props.article}
 						format={props.format}
@@ -1153,17 +1128,14 @@ const Header = (props: {
 		);
 	}
 
-	if (
-		props.cricket.cricketMatchHeaderUrl &&
-		props.cricket.isCricketRedesignEnabled
-	) {
+	if (cricketMatchHeaderUrl && isCricketRedesignEnabled) {
 		return (
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<CricketMatchHeaderWrapper
 					initialData={undefined}
 					selectedTab={'live'}
 					edition={props.article.editionId}
-					matchHeaderURL={props.cricket.cricketMatchHeaderUrl}
+					matchHeaderURL={cricketMatchHeaderUrl}
 				/>
 			</Island>
 		);
@@ -1188,7 +1160,7 @@ const Header = (props: {
 				</GridItem>
 				<GridItem area="headline">
 					<div css={maxWidth}>
-						{!props.football.footballMatchUrl && (
+						{!footballMatchHeaderUrl && (
 							<ArticleHeadline
 								format={props.format}
 								headlineString={props.article.headline}
