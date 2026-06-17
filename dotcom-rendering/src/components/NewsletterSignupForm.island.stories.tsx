@@ -223,20 +223,6 @@ export const WithoutPreview = meta.story({
 	},
 });
 
-/** `hidePrivacyMessage` — focused state without the privacy notice. */
-export const HidePrivacyMessage = meta.story({
-	args: { ...defaultArgs, hidePrivacyMessage: true },
-	beforeEach() {
-		mocked(useNewsletterSignupForm).mockReturnValue(
-			mockForm({
-				isInteracted: true,
-				showMarketingToggle: true,
-				marketingOptIn: true,
-			}),
-		);
-	},
-});
-
 /** User is already subscribed — success message shown immediately. */
 export const AlreadySubscribed = meta.story({
 	args: { ...defaultArgs, isAlreadySubscribed: true },

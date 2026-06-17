@@ -83,6 +83,7 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 	const isLabs = theme === ArticleSpecial.Labs;
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			if (isLabs) {
 				return css`
 					${textSansBold15};
@@ -322,6 +323,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						color: ${palette('--standfirst-text')};
 					`;
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					return css`
 						${grid.span('centre-column-start', 5)}
 						color: ${palette('--standfirst-text')};

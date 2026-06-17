@@ -56,7 +56,7 @@ const newCardArgs = {
 } satisfies Story['args'];
 
 export const Placeholder = meta.story({
-	args: { hidePrivacyMessage: false, ...defaultArgs },
+	args: { ...defaultArgs },
 	beforeEach() {
 		mockAB('control');
 		mocked(useNewsletterSubscription).mockReturnValue(undefined);
@@ -64,19 +64,7 @@ export const Placeholder = meta.story({
 });
 
 export const DefaultStory = meta.story({
-	args: { hidePrivacyMessage: true, ...defaultArgs },
-	beforeEach() {
-		mockAB('control');
-		mocked(useNewsletterSubscription).mockReturnValue(false);
-		mocked(useIsSignedIn).mockReturnValue(false);
-		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
-			Promise.resolve(null),
-		);
-	},
-});
-
-export const DefaultStoryWithPrivacy = meta.story({
-	args: { hidePrivacyMessage: false, ...defaultArgs },
+	args: { ...defaultArgs },
 	beforeEach() {
 		mockAB('control');
 		mocked(useNewsletterSubscription).mockReturnValue(false);
@@ -88,7 +76,7 @@ export const DefaultStoryWithPrivacy = meta.story({
 });
 
 export const SignedInNotSubscribed = meta.story({
-	args: { hidePrivacyMessage: false, ...defaultArgs },
+	args: { ...defaultArgs },
 	beforeEach() {
 		mockAB('control');
 		mocked(useNewsletterSubscription).mockReturnValue(false);
@@ -101,7 +89,6 @@ export const SignedInNotSubscribed = meta.story({
 
 export const SignedInAlreadySubscribed = meta.story({
 	args: {
-		hidePrivacyMessage: false,
 		...defaultArgs,
 		hideNewsletterSignupComponentForSubscribers: true,
 	},
@@ -113,7 +100,6 @@ export const SignedInAlreadySubscribed = meta.story({
 
 export const FeatureFlagDisabled = meta.story({
 	args: {
-		hidePrivacyMessage: false,
 		...defaultArgs,
 		hideNewsletterSignupComponentForSubscribers: false,
 	},

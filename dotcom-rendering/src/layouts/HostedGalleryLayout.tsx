@@ -4,20 +4,28 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
+import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleTitle } from '../components/ArticleTitle';
+import { GalleryImage } from '../components/GalleryImage';
 import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
+import { MainMediaGallery } from '../components/MainMediaGallery';
+import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.island';
+import { Standfirst } from '../components/Standfirst';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
-import type { Article } from '../types/article';
+import { palette } from '../palette';
+import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
-	content: Article;
+	gallery: Gallery;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends Props {
@@ -28,29 +36,30 @@ interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
 
-const border = css`
-	border: 1px solid black;
+const headerStyles = css`
+	${grid.container}
+	background-color: ${palette('--article-inner-background')};
+
+	${from.tablet} {
+		border-bottom: 1px solid ${palette('--article-border')};
+	}
 `;
 
-const metaFlex = css`
-	margin-bottom: ${space[3]}px;
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
+const shareButtonStyles = css`
+	margin-top: ${space[4]}px;
+	padding: ${space[1]}px;
 `;
 
 export const HostedGalleryLayout = (props: WebProps | AppProps) => {
-	const {
-		content: { frontendData },
-		format,
-	} = props;
+	const { gallery, renderingTarget, format, serverTime } = props;
+	const { frontendData } = gallery;
+	const { commercialProperties, editionId } = frontendData;
 
-	const { branding } =
-		frontendData.commercialProperties[frontendData.editionId];
+	const { branding } = commercialProperties[editionId];
 
 	return (
 		<>
-			{props.renderingTarget === 'Web' && branding ? (
+			{branding ? (
 				<Stuck>
 					<Section
 						fullWidth={true}
@@ -67,54 +76,134 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					</Section>
 				</Stuck>
 			) : null}
-			<main>
-				<header css={[grid.container, border]}>
-					<div
-						css={[grid.between('centre-column-start', 'grid-end')]}
-					>
-						{props.content.frontendData.headline}
-					</div>
-				</header>
-				<div css={[grid.container]}>
-					<article css={[grid.column.all]}>
-						<div css={border}>Gallery</div>
-						<div css={border}>Onward</div>
-					</article>
-				</div>
-				<div
-					css={[
-						grid.container,
-						border,
-						css`
-							padding: ${space[2]}px;
 
-							${from.desktop} {
-								padding: ${space[4]}px ${space[8]}px;
-							}
-						`,
-					]}
-				>
-					<div css={[grid.column.all]}>
-						<div css={[grid.column.left]}>
-							<div data-print-layout="hide" css={metaFlex}>
-								{props.renderingTarget === 'Web' && (
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<ShareButton
-											pageId={frontendData.pageId}
-											webTitle={frontendData.webTitle}
-											format={format}
-											context="ArticleMeta"
-										/>
-									</Island>
-								)}
+			<main
+				css={{
+					backgroundColor: palette('--article-background'),
+				}}
+			>
+				<header css={headerStyles}>
+					<MainMediaGallery
+						mainMedia={gallery.mainMedia}
+						format={format}
+						renderingTarget={props.renderingTarget}
+					/>
+					<ArticleTitle
+						format={format}
+						tags={frontendData.tags}
+						sectionLabel={frontendData.sectionLabel}
+						sectionUrl={frontendData.sectionUrl}
+						guardianBaseURL={frontendData.guardianBaseURL}
+					/>
+					<ArticleHeadline
+						format={format}
+						headlineString={frontendData.headline}
+						tags={frontendData.tags}
+						byline={frontendData.byline}
+						webPublicationDateDeprecated={
+							frontendData.webPublicationDateDeprecated
+						}
+					/>
+					<Standfirst
+						format={format}
+						standfirst={frontendData.standfirst}
+					/>
+
+					{renderingTarget === 'Web' && (
+						<div
+							data-print-layout="hide"
+							css={{
+								'&': css(grid.column.centre),
+								paddingBottom: space[6],
+								[from.tablet]: {
+									position: 'relative',
+									'&::before': {
+										content: '""',
+										position: 'absolute',
+										left: -10,
+										top: 0,
+										bottom: 0,
+										width: 1,
+										backgroundColor:
+											palette('--article-border'),
+									},
+								},
+							}}
+						>
+							<div css={shareButtonStyles}>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<ShareButton
+										pageId={frontendData.pageId}
+										webTitle={frontendData.webTitle}
+										format={format}
+										context="ArticleMeta"
+									/>
+								</Island>
 							</div>
 						</div>
-					</div>
-				</div>
+					)}
+				</header>
+				<GalleryBody
+					renderingTarget={renderingTarget}
+					format={format}
+					bodyElements={gallery.bodyElements}
+					pageId={frontendData.pageId}
+					webTitle={frontendData.webTitle}
+				/>
 			</main>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<OnwardsUpper
+					ajaxUrl={frontendData.config.ajaxUrl}
+					hasRelated={frontendData.hasRelated}
+					hasStoryPackage={frontendData.hasStoryPackage}
+					isAdFreeUser={frontendData.isAdFreeUser}
+					pageId={frontendData.pageId}
+					isPaidContent={!!frontendData.config.isPaidContent}
+					showRelatedContent={frontendData.config.showRelatedContent}
+					keywordIds={frontendData.config.keywordIds}
+					contentType={frontendData.contentType}
+					tags={frontendData.tags}
+					format={format}
+					pillar={format.theme}
+					editionId={frontendData.editionId}
+					shortUrlId={frontendData.config.shortUrlId}
+					discussionApiUrl={frontendData.config.discussionApiUrl}
+					serverTime={serverTime}
+					renderingTarget={renderingTarget}
+					webURL={frontendData.webURL}
+				/>
+			</Island>
 		</>
 	);
 };
+
+const GalleryBody = (props: {
+	renderingTarget: RenderingTarget;
+	format: ArticleFormat;
+	bodyElements: Gallery['bodyElements'];
+	pageId: string;
+	webTitle: string;
+}) => (
+	<>
+		{props.bodyElements.map((element) => {
+			switch (element._type) {
+				case 'model.dotcomrendering.pageElements.ImageBlockElement':
+					return (
+						<GalleryImage
+							image={element}
+							format={props.format}
+							pageId={props.pageId}
+							webTitle={props.webTitle}
+							renderingTarget={props.renderingTarget}
+							key={element.elementId}
+						/>
+					);
+				default:
+					return null;
+			}
+		})}
+	</>
+);
