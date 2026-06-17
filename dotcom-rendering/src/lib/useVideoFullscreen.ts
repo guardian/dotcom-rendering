@@ -301,7 +301,7 @@ export const useVideoFullscreen = ({
 			void videoClient
 				.setFullscreen(fullscreen)
 				.then(() => setIsFullscreen(fullscreen));
-			const trackingEvent = isFullscreen
+			const trackingEvent = fullscreen
 				? 'enter_fullscreen'
 				: 'exit_fullscreen';
 			sendOphanTrackingEvent(trackingEvent);

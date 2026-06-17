@@ -1013,7 +1013,11 @@ export const SelfHostedVideo = ({
 				setHasPageBecomeActive(false);
 			}
 			void playVideo();
-		} else if (playerState === 'PLAYING' && isInView === false) {
+		} else if (
+			playerState === 'PLAYING' &&
+			isInView === false &&
+			!isFullscreen
+		) {
 			void pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
 		}
 	}
