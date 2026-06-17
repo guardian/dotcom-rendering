@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -174,6 +174,22 @@ const displayFullscreenStyle = css`
 
 const fullscreenStyles = (bridgetFullscreen: boolean) => css`
 	${bridgetFullscreen && displayFullscreenStyle}
+
+	${bridgetFullscreen &&
+	css`
+		html {
+			overflow: hidden;
+		}
+
+		position: fixed;
+		top: 0;
+		z-index: ${getZIndex('selfHostedFullscreen')};
+		/* override vw and vh with svw and svh if supported */
+		/* stylelint-disable declaration-block-no-duplicate-properties */
+		width: 100svw;
+		height: 100svh;
+		/* stylelint-enable declaration-block-no-duplicate-properties */
+	`}
 
 	&:fullscreen {
 		${displayFullscreenStyle};
@@ -1048,9 +1064,7 @@ export const SelfHostedVideo = ({
 			void videoClient
 				.setFullscreen(fullscreen)
 				.then(() => setIsBridgetFullscreen(fullscreen));
-		}
-
-		if (document.fullscreenElement) {
+		} else if (document.fullscreenElement) {
 			void document.exitFullscreen();
 		} else if (playerContainerRef.current) {
 			void playerContainerRef.current.requestFullscreen();
@@ -1243,6 +1257,9 @@ export const SelfHostedVideo = ({
 					restrictHeightOnDesktop && maxHeightStyles,
 				]}
 			>
+				{isBridgetFullscreen && (
+					<Global styles={fullscreenStyles(isBridgetFullscreen)} />
+				)}
 				<div
 					ref={playerContainerRef}
 					css={[
