@@ -32,7 +32,6 @@ type Props = {
 	newsletterId: string;
 	newsletterName: string;
 	frequency: string;
-	hidePrivacyMessage?: boolean;
 	previewAction?: NewsletterPreviewAction;
 	/** When `true`, the success message is shown immediately (user is already subscribed). */
 	isAlreadySubscribed?: boolean;
@@ -71,7 +70,6 @@ const signedOutLayoutStyles = css`
 const signedInLayoutStyles = css`
 	grid-template-columns: minmax(0, 1fr);
 	grid-template-areas: 'submit';
-	padding-bottom: ${space[2]}px;
 `;
 
 const emailFieldStyles = css`
@@ -114,9 +112,24 @@ const getToggleContainerStyles = (isFullWidth: boolean) => css`
 	min-width: 0;
 `;
 
-const privacyContainerStyles = css`
-	grid-column: 1 / -1;
-`;
+const getPrivacyContainerStyles = (
+	isSignedIn: boolean | 'Pending',
+	isModal: boolean,
+) => {
+	if (isSignedIn === true && !isModal) {
+		return css`
+			margin-top: ${space[5]}px;
+			padding-top: ${space[2]}px;
+			border-top: 1px solid ${palette('--card-border-supporting')};
+		`;
+	}
+	return css`
+		margin-top: ${space[2]}px;
+		${until.tablet} {
+			margin-top: ${space[3]}px;
+		}
+	`;
+};
 
 const successTextStyles = css`
 	color: ${palette('--newsletter-card-description')};
@@ -276,7 +289,6 @@ const NewsletterSignupFormActive = ({
 	newsletterId,
 	newsletterName,
 	frequency,
-	hidePrivacyMessage = false,
 	previewAction,
 	abTest,
 	isModal = false,
@@ -357,30 +369,18 @@ const NewsletterSignupFormActive = ({
 						/>
 					</div>
 				)}
-				{showAdditionalFields && (
-					<>
-						{showMarketingToggle && (
-							<div css={getToggleContainerStyles(isModal)}>
-								<div css={marketingToggleBoxStyles}>
-									<ToggleSwitch
-										id={`marketing-opt-in-${newsletterId}`}
-										checked={marketingOptIn ?? false}
-										onClick={handleMarketingToggle}
-										label="Get updates about our journalism and ways to support and enjoy
-								our work. Toggle to opt out."
-										labelPosition="left"
-									/>
-								</div>
-							</div>
-						)}
-						{!hidePrivacyMessage && (
-							<div css={privacyContainerStyles}>
-								<NewsletterPrivacyMessage
-									isSignedIn={isSignedIn}
-								/>
-							</div>
-						)}
-					</>
+				{showAdditionalFields && showMarketingToggle && (
+					<div css={getToggleContainerStyles(isModal)}>
+						<div css={marketingToggleBoxStyles}>
+							<ToggleSwitch
+								id={`marketing-opt-in-${newsletterId}`}
+								checked={marketingOptIn ?? false}
+								onClick={handleMarketingToggle}
+								label="Get updates about our journalism and ways to support and enjoy our work. Toggle to opt out."
+								labelPosition="left"
+							/>
+						</div>
+					</div>
 				)}
 				<div css={submitButtonContainerStyles}>
 					{isSignedIn && previewAction && (
@@ -401,6 +401,12 @@ const NewsletterSignupFormActive = ({
 					</Button>
 				</div>
 			</form>
+
+			{showAdditionalFields && showForm && (
+				<div css={getPrivacyContainerStyles(isSignedIn, isModal)}>
+					<NewsletterPrivacyMessage isSignedIn={isSignedIn} />
+				</div>
+			)}
 
 			{showSuccess && (
 				<SuccessMessage
