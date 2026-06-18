@@ -26,6 +26,7 @@ const indices = [
 	'sign-in-gate',
 	'lightbox',
 	'youTubeFullscreen',
+	'selfHostedFullscreen',
 
 	// Sticky video and button need to be above everything
 	'sticky-video-button',
