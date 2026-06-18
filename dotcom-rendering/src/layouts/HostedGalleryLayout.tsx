@@ -52,12 +52,12 @@ const headerStyles = css`
 	}
 `;
 
-const shareButtonStyles = css`
+const metaStyles = css`
 	${grid.column.centre}
-	padding-bottom: ${space[6]}px;
-	margin-top: ${space[4]}px;
 	padding: ${space[1]}px;
+	padding-bottom: ${space[6]}px;
 	display: flex;
+	flex-wrap: wrap;
 
 	${from.tablet} {
 		position: relative;
@@ -72,9 +72,8 @@ const shareButtonStyles = css`
 		}
 	}
 
-	& button {
+	& > * {
 		margin-top: ${space[4]}px;
-		padding: ${space[1]}px;
 	}
 `;
 
@@ -142,7 +141,7 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					/>
 
 					{renderingTarget === 'Web' && (
-						<div data-print-layout="hide" css={shareButtonStyles}>
+						<div data-print-layout="hide" css={metaStyles}>
 							{cta?.url && (
 								<div css={ctaButtonStyles}>
 									<CallToActionButton
