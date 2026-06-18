@@ -382,7 +382,7 @@ export const SelfHostedVideo = ({
 	const shouldAutoplay =
 		videoStyleSettings.autoplay &&
 		!preventAutoplay &&
-		isAutoplayAllowed &&
+		isAutoplayAllowed === true &&
 		!isInClickToPlayTest;
 
 	const showProgressBar =
