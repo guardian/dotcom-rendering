@@ -172,7 +172,6 @@ const hostedGalleryFont = css`
 	line-height: 2.1875rem;
 
 	${from.desktop} {
-		${textSansBold34};
 		line-height: 3.125rem;
 	}
 `;
