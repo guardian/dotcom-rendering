@@ -418,7 +418,7 @@ export const SelfHostedVideo = ({
 		(playerState === 'PAUSED_BY_USER' ||
 			playerState === 'PAUSED_BY_BROWSER' ||
 			playerState === 'ENDED' ||
-			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
+			(playerState === 'NOT_STARTED' && !shouldAutoplay));
 
 	const {
 		fadeableControlsStyles,
@@ -765,7 +765,7 @@ export const SelfHostedVideo = ({
 	 */
 	useEffect(() => {
 		if (
-			shouldAutoplay === false ||
+			!shouldAutoplay ||
 			(isInView === false && playerState === 'NOT_STARTED')
 		) {
 			setShowPosterImage(true);
@@ -1017,7 +1017,7 @@ export const SelfHostedVideo = ({
 	 */
 	if (isPlayable) {
 		if (
-			shouldAutoplay === true &&
+			shouldAutoplay &&
 			isInView === true &&
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
@@ -1108,7 +1108,7 @@ export const SelfHostedVideo = ({
 						handleFullscreenClick={handleFullscreenClick}
 						handleEnded={handleEnded}
 						onError={onError}
-						preloadPartialData={shouldAutoplay === true}
+						preloadPartialData={shouldAutoplay}
 						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
 						useLongFormProgressBar={
