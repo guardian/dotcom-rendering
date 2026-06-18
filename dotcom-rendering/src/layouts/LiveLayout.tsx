@@ -269,6 +269,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 		config: { isPaidContent, host, hasLiveBlogTopAd, hasSurveyAd },
 	} = article;
 
+	const ab = useAB();
+
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
@@ -586,17 +588,23 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							<LiveGrid>
 								<GridItem area="media">
 									<div css={maxWidth}>
-										{!!cricketMatchUrl && (
-											<Island
-												priority="critical"
-												defer={{ until: 'visible' }}
-											>
-												<GetCricketScoreboard
-													matchUrl={cricketMatchUrl}
-													format={format}
-												/>
-											</Island>
-										)}
+										{!!cricketMatchUrl &&
+											!ab?.isUserInTestGroup(
+												'webx-cricket-redesign',
+												'enable',
+											) && (
+												<Island
+													priority="critical"
+													defer={{ until: 'visible' }}
+												>
+													<GetCricketScoreboard
+														matchUrl={
+															cricketMatchUrl
+														}
+														format={format}
+													/>
+												</Island>
+											)}
 										<MainMedia
 											format={format}
 											elements={article.mainMediaElements}
