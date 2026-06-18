@@ -5,7 +5,6 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { ArticleTitle } from '../components/ArticleTitle';
 import { GalleryImage } from '../components/GalleryImage';
 import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
@@ -40,14 +39,38 @@ const headerStyles = css`
 	${grid.container}
 	background-color: ${palette('--article-inner-background')};
 
+	/** Additional padding needed due to no main media pushing the content down */
+	padding-top: ${space[24]}px;
+
 	${from.tablet} {
 		border-bottom: 1px solid ${palette('--article-border')};
+	}
+
+	${from.leftCol} {
+		padding-top: ${space[4]}px;
 	}
 `;
 
 const shareButtonStyles = css`
-	margin-top: ${space[4]}px;
-	padding: ${space[1]}px;
+	${grid.column.centre}
+	padding-bottom: ${space[6]}px;
+	${from.tablet} {
+		position: relative;
+		&::before {
+			content: '';
+			position: absolute;
+			left: -10px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${palette('--article-border')};
+		}
+	}
+
+	& button {
+		margin-top: ${space[4]}px;
+		padding: ${space[1]}px;
+	}
 `;
 
 export const HostedGalleryLayout = (props: WebProps | AppProps) => {
@@ -67,7 +90,7 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 						showTopBorder={false}
 						shouldCenter={false}
 						backgroundColour={sourcePalette.neutral[7]}
-						padSides={true}
+						padSides={false}
 						element="header"
 					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
@@ -88,13 +111,6 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 						renderingTarget={props.renderingTarget}
 					/>
-					<ArticleTitle
-						format={format}
-						tags={frontendData.tags}
-						sectionLabel={frontendData.sectionLabel}
-						sectionUrl={frontendData.sectionUrl}
-						guardianBaseURL={frontendData.guardianBaseURL}
-					/>
 					<ArticleHeadline
 						format={format}
 						headlineString={frontendData.headline}
@@ -110,39 +126,18 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					/>
 
 					{renderingTarget === 'Web' && (
-						<div
-							data-print-layout="hide"
-							css={{
-								'&': css(grid.column.centre),
-								paddingBottom: space[6],
-								[from.tablet]: {
-									position: 'relative',
-									'&::before': {
-										content: '""',
-										position: 'absolute',
-										left: -10,
-										top: 0,
-										bottom: 0,
-										width: 1,
-										backgroundColor:
-											palette('--article-border'),
-									},
-								},
-							}}
-						>
-							<div css={shareButtonStyles}>
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<ShareButton
-										pageId={frontendData.pageId}
-										webTitle={frontendData.webTitle}
-										format={format}
-										context="ArticleMeta"
-									/>
-								</Island>
-							</div>
+						<div data-print-layout="hide" css={shareButtonStyles}>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<ShareButton
+									pageId={frontendData.pageId}
+									webTitle={frontendData.webTitle}
+									format={format}
+									context="ArticleMeta"
+								/>
+							</Island>
 						</div>
 					)}
 				</header>
@@ -189,20 +184,22 @@ const GalleryBody = (props: {
 }) => (
 	<>
 		{props.bodyElements.map((element) => {
-			switch (element._type) {
-				case 'model.dotcomrendering.pageElements.ImageBlockElement':
-					return (
-						<GalleryImage
-							image={element}
-							format={props.format}
-							pageId={props.pageId}
-							webTitle={props.webTitle}
-							renderingTarget={props.renderingTarget}
-							key={element.elementId}
-						/>
-					);
-				default:
-					return null;
+			if (
+				element._type ===
+				'model.dotcomrendering.pageElements.ImageBlockElement'
+			) {
+				return (
+					<GalleryImage
+						image={element}
+						format={props.format}
+						pageId={props.pageId}
+						webTitle={props.webTitle}
+						renderingTarget={props.renderingTarget}
+						key={element.elementId}
+					/>
+				);
+			} else {
+				return null;
 			}
 		})}
 	</>
