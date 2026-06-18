@@ -70,12 +70,12 @@ export const GalleryCaption = ({
 					{credit}
 				</small>
 			)}
-			<div
-				css={css`
-					padding-top: ${space[2]}px;
-				`}
-			>
-				{shouldIncludeShareButton && (
+			{shouldIncludeShareButton && (
+				<div
+					css={css`
+						padding-top: ${space[2]}px;
+					`}
+				>
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<ShareButton
 							format={format}
@@ -89,8 +89,8 @@ export const GalleryCaption = ({
 							}
 						/>
 					</Island>
-				)}
-			</div>
+				</div>
+			)}
 		</figcaption>
 	);
 };
