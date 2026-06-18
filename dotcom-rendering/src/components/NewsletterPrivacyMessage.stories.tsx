@@ -10,3 +10,9 @@ export const Default = () => {
 };
 
 Default.storyName = 'Default';
+
+export const SignedIn = () => {
+	return <NewsletterPrivacyMessage isSignedIn={true} />;
+};
+
+SignedIn.storyName = 'Signed in';

@@ -19,6 +19,7 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.island';
+import { CricketMatchHeaderWrapper } from '../components/CricketMatchHeaderWrapper.island';
 import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -50,6 +51,7 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
+import { useAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -281,11 +283,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const { branding } = article.commercialProperties[article.editionId];
 
-	const footballMatchUrl =
-		article.matchType === 'FootballMatchType'
-			? article.matchUrl
-			: undefined;
-
 	const footballMatchHeaderUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchHeaderUrl
@@ -295,9 +292,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 		article.matchType === 'FootballMatchType'
 			? article.matchStatsUrl
 			: undefined;
-
-	const footballMatchLeagueName = article.sectionLabel;
-	const footballMatchLeagueUrl = `${article.guardianBaseURL}/${article.sectionUrl}`;
 
 	const cricketMatchUrl =
 		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
@@ -383,71 +377,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						<AdPortals rightAlignFrom="wide" />
 					</Island>
 				)}
-				{footballMatchUrl ? (
-					footballMatchHeaderUrl && (
-						<>
-							<noscript>
-								<FootballMatchHeaderFallback
-									format={format}
-									article={article}
-								/>
-							</noscript>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<FootballMatchHeaderWrapper
-									initialTab="live"
-									leagueName={footballMatchLeagueName}
-									leagueURL={footballMatchLeagueUrl}
-									edition={article.editionId}
-									matchHeaderURL={footballMatchHeaderUrl}
-									renderingTarget={renderingTarget}
-									article={article}
-									format={format}
-								/>
-							</Island>
-						</>
-					)
-				) : (
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						backgroundColour={themePalette(
-							'--headline-blog-background',
-						)}
-						borderColour={themePalette('--headline-border')}
-					>
-						<HeadlineGrid>
-							<GridItem area="title">
-								<ArticleTitle
-									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
-								/>
-							</GridItem>
-							<GridItem area="headline">
-								<div css={maxWidth}>
-									{!footballMatchUrl && (
-										<ArticleHeadline
-											format={format}
-											headlineString={article.headline}
-											tags={article.tags}
-											byline={article.byline}
-											webPublicationDateDeprecated={
-												article.webPublicationDateDeprecated
-											}
-											starRating={article.starRating}
-										/>
-									)}
-								</div>
-							</GridItem>
-						</HeadlineGrid>
-					</Section>
-				)}
-
+				<Header
+					renderingTarget={renderingTarget}
+					format={format}
+					article={article}
+				/>
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -743,7 +677,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									id="maincontent"
 									css={[
 										bodyWrapper,
-										!!footballMatchUrl &&
+										!!footballMatchHeaderUrl &&
 											footballMatchBodyWrapper,
 									]}
 								>
@@ -1145,5 +1079,104 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				</Section>
 			)}
 		</>
+	);
+};
+
+const Header = (props: {
+	renderingTarget: RenderingTarget;
+	format: ArticleFormat;
+	article: ArticleDeprecated;
+}) => {
+	const footballMatchLeagueName = props.article.sectionLabel;
+	const footballMatchLeagueUrl = `${props.article.guardianBaseURL}/${props.article.sectionUrl}`;
+	const footballMatchHeaderUrl =
+		props.article.matchType === 'FootballMatchType'
+			? props.article.matchHeaderUrl
+			: undefined;
+	const cricketMatchHeaderUrl =
+		props.article.matchType === 'CricketMatchType'
+			? props.article.matchHeaderUrl
+			: undefined;
+
+	const ab = useAB();
+	const isCricketRedesignEnabled = Boolean(
+		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
+	);
+
+	const isApps = props.renderingTarget === 'Apps';
+
+	if (footballMatchHeaderUrl) {
+		return (
+			<>
+				<noscript>
+					<FootballMatchHeaderFallback
+						format={props.format}
+						article={props.article}
+					/>
+				</noscript>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FootballMatchHeaderWrapper
+						initialTab="live"
+						leagueName={footballMatchLeagueName}
+						leagueURL={footballMatchLeagueUrl}
+						edition={props.article.editionId}
+						matchHeaderURL={footballMatchHeaderUrl}
+						renderingTarget={props.renderingTarget}
+						article={props.article}
+						format={props.format}
+					/>
+				</Island>
+			</>
+		);
+	}
+
+	if (!isApps && cricketMatchHeaderUrl && isCricketRedesignEnabled) {
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<CricketMatchHeaderWrapper
+					initialData={undefined}
+					selectedTab={'live'}
+					edition={props.article.editionId}
+					matchHeaderURL={cricketMatchHeaderUrl}
+				/>
+			</Island>
+		);
+	}
+
+	return (
+		<Section
+			fullWidth={true}
+			showTopBorder={false}
+			backgroundColour={themePalette('--headline-blog-background')}
+			borderColour={themePalette('--headline-border')}
+		>
+			<HeadlineGrid>
+				<GridItem area="title">
+					<ArticleTitle
+						format={props.format}
+						tags={props.article.tags}
+						sectionLabel={props.article.sectionLabel}
+						sectionUrl={props.article.sectionUrl}
+						guardianBaseURL={props.article.guardianBaseURL}
+					/>
+				</GridItem>
+				<GridItem area="headline">
+					<div css={maxWidth}>
+						{!footballMatchHeaderUrl && (
+							<ArticleHeadline
+								format={props.format}
+								headlineString={props.article.headline}
+								tags={props.article.tags}
+								byline={props.article.byline}
+								webPublicationDateDeprecated={
+									props.article.webPublicationDateDeprecated
+								}
+								starRating={props.article.starRating}
+							/>
+						)}
+					</div>
+				</GridItem>
+			</HeadlineGrid>
+		</Section>
 	);
 };
