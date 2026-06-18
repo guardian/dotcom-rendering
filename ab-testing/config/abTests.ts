@@ -91,7 +91,7 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		audienceSize: 1,
 		audienceSpace: "B",
-		groups: ["control", "variantNewField", "variantIllustratedCard"],
+		groups: ["variantIllustratedCard"],
 		shouldForceMetricsCollection: false,
 	},
 	{
