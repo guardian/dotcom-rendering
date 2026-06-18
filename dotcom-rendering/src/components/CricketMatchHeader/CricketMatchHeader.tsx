@@ -14,7 +14,7 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import { Fragment, type ReactNode, useMemo } from 'react';
+import { Fragment, type ReactNode, useMemo, useState } from 'react';
 import type { SWRConfiguration } from 'swr';
 import useSWR from 'swr';
 import type {
@@ -32,6 +32,7 @@ import { generateImageURL } from '../../lib/image';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import { BigNumber } from '../BigNumber';
+import { CricketScorecardTabRemoteRender } from '../CricketScorecardTabRemoteRender';
 import {
 	background,
 	border,
@@ -49,9 +50,9 @@ export type CricketMatchHeaderProps = {
 	matchHeaderURL: string;
 	edition: EditionId;
 	selectedTab: 'info' | 'live' | 'report';
+	tabContentElement?: HTMLElement;
 	reportURL?: URL;
 	liveURL?: URL;
-	infoURL?: URL;
 };
 
 type Props = CricketMatchHeaderProps & {
@@ -67,6 +68,10 @@ export const CricketMatchHeader = (props: Props) => {
 	);
 	const match = data?.match ?? props.initialData;
 
+	const [selectedTab, setSelectedTab] = useState<'info' | 'live' | 'report'>(
+		props.selectedTab,
+	);
+
 	if (match === undefined) {
 		return (
 			<Placeholder
@@ -79,6 +84,10 @@ export const CricketMatchHeader = (props: Props) => {
 			/>
 		);
 	}
+
+	const onInfoTabClick = () => {
+		setSelectedTab('info');
+	};
 
 	return (
 		<section
@@ -112,12 +121,22 @@ export const CricketMatchHeader = (props: Props) => {
 				<Tabs
 					sportKind="cricket"
 					matchKind={match.kind}
-					selected={props.selectedTab}
-					reportURL={props.reportURL}
-					liveURL={props.liveURL}
-					infoURL={props.infoURL}
+					selected={selectedTab}
+					reportTab={props.reportURL}
+					liveTab={props.liveURL}
+					infoTab={onInfoTabClick}
 				/>
 			</div>
+			{selectedTab === 'info' && (
+				<CricketScorecardTabRemoteRender
+					tabContentElement={props.tabContentElement}
+					innings={match.innings}
+					officials={match.officials}
+					homeTeam={match.homeTeam}
+					awayTeam={match.awayTeam}
+					result={match.result}
+				/>
+			)}
 		</section>
 	);
 };
