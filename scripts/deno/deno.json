@@ -1,7 +1,8 @@
 {
 	"compilerOptions": {
 		"allowJs": false,
-		"lib": ["deno.window"]
+		"lib": ["deno.window"],
+		"strict": true
 	},
 	"unstable": ["temporal"],
 	"fmt": {
