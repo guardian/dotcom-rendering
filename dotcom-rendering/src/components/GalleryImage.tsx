@@ -19,6 +19,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	renderingTarget: RenderingTarget;
+	imagesLength?: number;
 };
 
 const styles = css`
@@ -70,6 +71,7 @@ export const GalleryImage = ({
 	pageId,
 	webTitle,
 	renderingTarget,
+	imagesLength,
 }: Props) => {
 	const asset = getImage(image.media.allImages);
 
@@ -138,6 +140,7 @@ export const GalleryImage = ({
 				pageId={pageId}
 				webTitle={webTitle}
 				position={image.position}
+				imagesLength={imagesLength}
 			/>
 		</figure>
 	);

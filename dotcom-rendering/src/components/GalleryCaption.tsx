@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { between, from, space, textSans14 } from '@guardian/source/foundations';
+import {
+	between,
+	from,
+	space,
+	textSans14,
+	textSans15,
+} from '@guardian/source/foundations';
 import { grid } from '../grid';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
@@ -16,6 +22,7 @@ type Props = {
 	webTitle: string;
 	/** Position of the image in the gallery used to build share fragment */
 	position?: number;
+	imagesLength?: number;
 };
 
 const styles = css`
@@ -46,12 +53,12 @@ export const GalleryCaption = ({
 	pageId,
 	webTitle,
 	position,
+	imagesLength,
 }: Props) => {
 	const emptyCaption = captionHtml === undefined || captionHtml.trim() === '';
 	const hideCredit =
 		displayCredit === false || credit === undefined || credit === '';
-	const shouldIncludeShareButton =
-		format.design !== ArticleDesign.HostedGallery;
+	const isHostedGallery = format.design === ArticleDesign.HostedGallery;
 
 	if (emptyCaption && hideCredit) {
 		return null;
@@ -59,6 +66,19 @@ export const GalleryCaption = ({
 
 	return (
 		<figcaption css={styles}>
+			{isHostedGallery &&
+			typeof position === 'number' &&
+			imagesLength !== undefined ? (
+				<small
+					css={css`
+						${textSans15}
+						display: block;
+						padding: ${space[2]}px 0 ${space[1]}px;
+					`}
+				>
+					{position - 1}&#47;{imagesLength}
+				</small>
+			) : null}
 			{emptyCaption ? null : <CaptionText html={captionHtml} />}
 			{hideCredit ? null : (
 				<small
@@ -71,7 +91,7 @@ export const GalleryCaption = ({
 				</small>
 			)}
 
-			{shouldIncludeShareButton && (
+			{!isHostedGallery && (
 				<div
 					css={css`
 						padding-top: ${space[2]}px;
