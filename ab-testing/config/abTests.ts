@@ -185,6 +185,17 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
+		name: "fronts-and-curation-click-to-play",
+		description: "Test click to play longform videos vs autoplay",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		status: "OFF",
+		expirationDate: "2026-07-19",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "martech-admiral-adblock",
 		description:
 			"Control group for Admiral ad blocker - runs the detection script but does not show the modal",
