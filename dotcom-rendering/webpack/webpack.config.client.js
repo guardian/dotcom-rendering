@@ -160,6 +160,7 @@ module.exports.transpileExclude = {
 		// Include the dynamic-import-polyfill
 		/dynamic-import-polyfill/,
 		/valibot/,
+		/css-tree/,
 	],
 };
 
