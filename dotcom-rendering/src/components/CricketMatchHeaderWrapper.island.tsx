@@ -2,17 +2,7 @@ import type { CricketMatch } from '../cricketMatchV2';
 import type { CricketMatchHeaderProps } from './CricketMatchHeader/CricketMatchHeader';
 import { CricketMatchHeader } from './CricketMatchHeader/CricketMatchHeader';
 
-type Props =
-	| (CricketMatchHeaderProps & {
-			selectedTab: 'info';
-			initialData: CricketMatch;
-	  })
-	| (CricketMatchHeaderProps & {
-			selectedTab: 'live' | 'report';
-			initialData?: never;
-	  });
-
-export const CricketMatchHeaderWrapper = (props: Props) => (
+export const CricketMatchHeaderWrapper = (props: CricketMatchHeaderProps) => (
 	<CricketMatchHeader
 		{...props}
 		initialData={

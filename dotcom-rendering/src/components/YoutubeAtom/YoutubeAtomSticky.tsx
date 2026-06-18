@@ -9,7 +9,6 @@ import { SvgCross } from '@guardian/source/react-components';
 import detectMobile from 'is-mobile';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
-import { useIsInView } from '../../lib/useIsInView';
 import { useConfig } from '../ConfigContext';
 import type { VideoEventKey } from './YoutubeAtom';
 
@@ -124,6 +123,7 @@ type Props = {
 	isClosed: boolean;
 	setIsClosed: (state: boolean) => void;
 	shouldPauseOutOfView: boolean;
+	isIntersecting: boolean | null;
 };
 
 const isMobile = detectMobile({ tablet: true });
@@ -140,17 +140,12 @@ export const YoutubeAtomSticky = ({
 	isClosed,
 	setIsClosed,
 	shouldPauseOutOfView,
+	isIntersecting,
 }: Props): JSX.Element => {
 	const [isSticky, setIsSticky] = useState<boolean>(false);
 	const [stickEventSent, setStickEventSent] = useState<boolean>(false);
 	const [showOverlay, setShowOverlay] = useState<boolean>(isMobile);
 	const { renderingTarget } = useConfig();
-
-	const [isIntersecting, setRef] = useIsInView({
-		threshold: 0.5,
-		repeat: true,
-		debounce: true,
-	});
 
 	/**
 	 * Click handler for the sticky video close button
@@ -269,7 +264,6 @@ export const YoutubeAtomSticky = ({
 
 	return (
 		<div
-			ref={setRef}
 			css={isSticky && stickyContainerStyles(isMainMedia)}
 			data-testid={`youtube-sticky-${uniqueId}`}
 			data-is-sticky={isSticky}
