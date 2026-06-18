@@ -336,9 +336,13 @@ export const SelfHostedVideo = ({
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
 	const ab = useAB();
-	const isInClickToPlayTest = Boolean(
-		ab?.isUserInTestGroup('fronts-and-curation-click-to-play', 'variant'),
-	);
+	const isInClickToPlayTest =
+		Boolean(
+			ab?.isUserInTestGroup(
+				'fronts-and-curation-click-to-play',
+				'variant',
+			),
+		) && videoStyle === 'Default';
 	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
 	const willAttemptAutoplay =
