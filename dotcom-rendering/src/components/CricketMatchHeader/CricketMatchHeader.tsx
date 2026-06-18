@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { log } from '@guardian/libs';
 import {
 	from,
 	headlineBold20Object,
@@ -13,7 +14,9 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import { Fragment, type ReactNode, useMemo } from 'react';
+import { Fragment, type ReactNode, useMemo, useState } from 'react';
+import type { SWRConfiguration } from 'swr';
+import useSWR from 'swr';
 import type {
 	CricketMatch,
 	CricketResult,
@@ -29,25 +32,62 @@ import { generateImageURL } from '../../lib/image';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import { BigNumber } from '../BigNumber';
+import { CricketScorecardTabRemoteRender } from '../CricketScorecardTabRemoteRender';
 import {
 	background,
 	border,
 	primaryText,
 	secondaryText,
 } from '../FootballMatchHeader/colours';
+import type { TabName } from '../FootballMatchHeader/Tabs';
 import { Tabs } from '../FootballMatchHeader/Tabs';
+import { Placeholder } from '../Placeholder';
+import type { CricketHeaderData } from './headerData';
+import { parse as parseHeaderData } from './headerData';
 
-type Props = {
+export type CricketMatchHeaderProps = {
+	initialData?: CricketMatch;
+	matchHeaderURL: string;
 	edition: EditionId;
-	match: CricketMatch;
 	selectedTab: 'info' | 'live' | 'report';
+	tabContentElement?: HTMLElement;
 	reportURL?: URL;
 	liveURL?: URL;
-	infoURL?: URL;
+};
+
+type Props = CricketMatchHeaderProps & {
+	getHeaderData: (url: string) => Promise<unknown>;
+	refreshInterval: number;
 };
 
 export const CricketMatchHeader = (props: Props) => {
-	const match = props.match;
+	const { data } = useSWR<CricketHeaderData, Error>(
+		props.matchHeaderURL,
+		fetcher(props.selectedTab, props.getHeaderData),
+		swrOptions(props.refreshInterval),
+	);
+	const match = data?.match ?? props.initialData;
+
+	const [selectedTab, setSelectedTab] = useState<'info' | 'live' | 'report'>(
+		props.selectedTab,
+	);
+
+	if (match === undefined) {
+		return (
+			<Placeholder
+				heights={
+					new Map([
+						['mobile', 182],
+						['leftCol', 172],
+					])
+				}
+			/>
+		);
+	}
+
+	const onInfoTabClick = () => {
+		setSelectedTab('info');
+	};
 
 	return (
 		<section
@@ -81,15 +121,55 @@ export const CricketMatchHeader = (props: Props) => {
 				<Tabs
 					sportKind="cricket"
 					matchKind={match.kind}
-					selected={props.selectedTab}
-					reportURL={props.reportURL}
-					liveURL={props.liveURL}
-					infoURL={props.infoURL}
+					selected={selectedTab}
+					reportTab={props.reportURL}
+					liveTab={props.liveURL}
+					infoTab={onInfoTabClick}
 				/>
 			</div>
+			{selectedTab === 'info' && (
+				<CricketScorecardTabRemoteRender
+					tabContentElement={props.tabContentElement}
+					innings={match.innings}
+					officials={match.officials}
+					homeTeam={match.homeTeam}
+					awayTeam={match.awayTeam}
+					result={match.result}
+				/>
+			)}
 		</section>
 	);
 };
+
+const swrOptions = (
+	refreshInterval: number,
+): SWRConfiguration<CricketHeaderData> => ({
+	errorRetryCount: 1,
+	refreshInterval: (latestData: CricketHeaderData | undefined) => {
+		return latestData?.match.kind === 'Live' ||
+			latestData?.match.kind === 'Fixture'
+			? refreshInterval
+			: 0;
+	},
+});
+
+const fetcher =
+	(selected: TabName, getHeaderData: Props['getHeaderData']) =>
+	(url: string): Promise<CricketHeaderData> =>
+		getHeaderData(url)
+			.then(parseHeaderData(selected))
+			.then((result) => {
+				if (!result.ok) {
+					log('dotcom', result.error);
+					throw new Error();
+				} else {
+					return result.value;
+				}
+			})
+			.catch(() => {
+				log('dotcom', 'Failed to fetch match header json');
+				throw new Error();
+			});
 
 const StatusLine = (props: { match: CricketMatch; edition: EditionId }) => (
 	<p

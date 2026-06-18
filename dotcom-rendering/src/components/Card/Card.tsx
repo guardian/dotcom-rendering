@@ -600,9 +600,7 @@ export const Card = ({
 		return 'tablet';
 	};
 
-	const shouldShowTrailText = isMoreGalleriesOnwardContent
-		? media?.type !== 'podcast' && isOnwardSplash
-		: media?.type !== 'podcast';
+	const shouldShowTrailText = media?.type !== 'podcast';
 
 	/**
 	 * Determines the gap of between card components based on card properties
