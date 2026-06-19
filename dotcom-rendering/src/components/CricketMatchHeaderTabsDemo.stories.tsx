@@ -68,10 +68,8 @@ export const CricketScorecardPageNewLive = meta.story({
 export const ClickScorecardTab = meta.story({
 	name: 'Live -> Scorecard',
 	args: { ...liveArgs, selectedTab: 'live' },
-	play: async ({ canvas, canvasElement }) => {
-		await canvas.findByText('Initial Tab content');
-
-		console.log(canvasElement);
+	play: async ({ canvas }) => {
+		await canvas.findByText('Second Test Match');
 
 		// Click the Scorecard tab button
 		const scorecardTab = canvas.getByRole('button', { name: 'Scorecard' });
@@ -88,20 +86,15 @@ export const ClickScorecardTab = meta.story({
 
 let matchType = 'live' as 'live' | 'result';
 
-let headerDataGenerator: AsyncGenerator<unknown, void, unknown> | null = null;
-
 export const UpdateScorecardTab = meta.story({
 	name: 'Scorecard Update',
-	// beforeAll: () => {
-	// 	headerDataGenerator = getChangingHeaderData();
-	// },
+	beforeEach: () => {
+		matchType = 'live';
+	},
 	args: {
 		...liveArgs,
 		getHeaderData: async () => {
-			headerDataGenerator ??= getChangingHeaderData();
-			console.log('Fetching header data...');
-			const value = (await headerDataGenerator.next()).value;
-			console.log('Fetched header data:', value);
+			const value = (await getChangingHeaderData.next()).value;
 			return value;
 		},
 		refreshInterval: 100,
@@ -137,7 +130,7 @@ export const UpdateScorecardTab = meta.story({
 
 const getMockData = (data: FECricketMatchHeader) => Promise.resolve(data);
 
-const getChangingHeaderData = async function* () {
+const getChangingHeaderData = (async function* () {
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- This is a test generator function
 	while (true) {
 		if (matchType === 'live') {
@@ -154,4 +147,4 @@ const getChangingHeaderData = async function* () {
 			});
 		}
 	}
-};
+})();

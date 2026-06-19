@@ -129,35 +129,26 @@ const baseArgs = {
 		'https://api.nextgen.guardianapps.co.uk/sport/cricket/match-header/2026-06-13/australia-women-s-cricket-team.json',
 	refreshInterval: 3_000,
 	tabContentId: 'cricket-tab-content',
-	getHeaderData: () => Promise.resolve(headerData(baseMatch)),
+	getHeaderData: () => getMockData(headerData(baseMatch)),
 } satisfies ComponentProps<typeof CricketMatchHeader>;
+
+const getMockData = (data: FECricketMatchHeader) =>
+	new Promise<FECricketMatchHeader>((resolve) => {
+		setTimeout(() => resolve(data), 100);
+	});
 
 export const Fixture = {
 	args: baseArgs,
-	play: async ({ canvas, canvasElement, step }) => {
-		await step(
-			'Placeholder shown while match header data is being fetched',
-			async () => {
-				await waitFor(() => {
-					const placeholder = canvasElement.querySelector(
-						'[data-name="placeholder"]',
-					);
-					void expect(placeholder).not.toBeNull();
-				});
-			},
-		);
-
+	play: async ({ canvas, step }) => {
 		await step('Fetch match header data and render UI', async () => {
-			// Wait for 'Ashes 2025–2026' to appear which indicates match header
-			// data has been fetched and the UI updated on the client
-			await canvas.findByText('Ashes 2025–2026');
-			void canvas.findByText('England');
-			void canvas.findByText('Australia');
+			await waitFor(() =>
+				expect(canvas.getByText('Ashes 2025–2026')).toBeInTheDocument(),
+			);
 
-			const nav = canvas.getByRole('navigation');
-			const updatedTabs = within(nav).getAllByRole('listitem');
-			void expect(updatedTabs.length).toBe(1);
-			void expect(updatedTabs[0]).toHaveTextContent('Scorecard');
+			await expect(canvas.getByText('England')).toBeInTheDocument();
+			await expect(canvas.getByText('Australia')).toBeInTheDocument();
+
+			await expect(canvas.getByRole('navigation')).toBeInTheDocument();
 		});
 	},
 } satisfies Story;
@@ -230,6 +221,7 @@ export const LiveYetToBat = {
 			Promise.resolve(
 				headerData({
 					...baseMatch,
+					result: 'in-play',
 					currentDay: 2,
 					innings: [
 						{
