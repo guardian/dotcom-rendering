@@ -53,13 +53,6 @@ const baseArgs = {
 const liveArgs = {
 	...baseArgs,
 	selectedTab: 'info',
-
-	// getHeaderData: () =>
-	// 	getMockData({
-	// 		cricketMatch: liveMatch,
-	// 		liveURL:
-	// 			'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-	// 	}),
 } satisfies ComponentProps<typeof CricketMatchHeader>;
 
 export const CricketScorecardPageNewFixture = meta.story({
@@ -75,7 +68,11 @@ export const CricketScorecardPageNewLive = meta.story({
 export const ClickScorecardTab = meta.story({
 	name: 'Live -> Scorecard',
 	args: { ...liveArgs, selectedTab: 'live' },
-	play: async ({ canvas }) => {
+	play: async ({ canvas, canvasElement }) => {
+		await canvas.findByText('Initial Tab content');
+
+		console.log(canvasElement);
+
 		// Click the Scorecard tab button
 		const scorecardTab = canvas.getByRole('button', { name: 'Scorecard' });
 		await userEvent.click(scorecardTab);
@@ -91,34 +88,20 @@ export const ClickScorecardTab = meta.story({
 
 let matchType = 'live' as 'live' | 'result';
 
-const getChangingHeaderData = async function* () {
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- This is a test generator function
-	while (true) {
-		if (matchType === 'live') {
-			yield getMockData({
-				cricketMatch: liveMatch,
-				liveURL:
-					'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-			});
-		} else {
-			yield getMockData({
-				cricketMatch: resultMatch,
-				liveURL:
-					'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
-			});
-		}
-	}
-};
-
-const headerDataGenerator = getChangingHeaderData();
+let headerDataGenerator: AsyncGenerator<unknown, void, unknown> | null = null;
 
 export const UpdateScorecardTab = meta.story({
 	name: 'Scorecard Update',
-
+	// beforeAll: () => {
+	// 	headerDataGenerator = getChangingHeaderData();
+	// },
 	args: {
 		...liveArgs,
 		getHeaderData: async () => {
+			headerDataGenerator ??= getChangingHeaderData();
+			console.log('Fetching header data...');
 			const value = (await headerDataGenerator.next()).value;
+			console.log('Fetched header data:', value);
 			return value;
 		},
 		refreshInterval: 100,
@@ -152,9 +135,23 @@ export const UpdateScorecardTab = meta.story({
 	},
 });
 
-const getMockData = (data: FECricketMatchHeader) =>
-	new Promise((resolve) => {
-		setTimeout(() => {
-			resolve(data);
-		}, 500);
-	});
+const getMockData = (data: FECricketMatchHeader) => Promise.resolve(data);
+
+const getChangingHeaderData = async function* () {
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- This is a test generator function
+	while (true) {
+		if (matchType === 'live') {
+			yield getMockData({
+				cricketMatch: liveMatch,
+				liveURL:
+					'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+			});
+		} else {
+			yield getMockData({
+				cricketMatch: resultMatch,
+				liveURL:
+					'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+			});
+		}
+	}
+};
