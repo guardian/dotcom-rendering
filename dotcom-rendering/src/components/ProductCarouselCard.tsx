@@ -9,6 +9,7 @@ import {
 	textSansBold17,
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
+import { getProductLinkLabel } from '../lib/affiliateLinksUtils';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { EnhancedProductSummaryMap } from '../types/content';
@@ -144,7 +145,7 @@ export const ProductCarouselCard = ({
 						<div css={buttonWrapper}>
 							<ProductLinkButton
 								xCustComponentId={'carousel-card'}
-								label={`Buy at ${cardCta.retailer}`}
+								label={getProductLinkLabel(cardCta)}
 								url={cardCta.url}
 								fullwidth={true}
 								minimisePadding={true}

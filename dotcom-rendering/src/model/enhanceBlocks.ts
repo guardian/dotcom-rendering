@@ -79,9 +79,9 @@ export const enhanceElements =
 			enhanceProductElement(
 				enhanceElements(format, blockId, options, true),
 			),
-			enhanceProductSummary,
 			enhanceDividers,
 			enhanceH2s,
+			enhanceProductSummary,
 			enhanceInteractiveAtomElements(format),
 			enhanceInteractiveContentsElements,
 			enhanceBlockquotes(format),
