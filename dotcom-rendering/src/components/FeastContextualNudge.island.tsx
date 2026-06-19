@@ -44,7 +44,7 @@ const darkVars = css`
 // ── Deep-link helpers ─────────────────────────────────────────────────────────
 
 const FEAST_ADJUST_TOKEN_PROD = '20wmhy68';
-const FEAST_ADJUST_TOKEN_CODE = '20o7yckk';
+const FEAST_ADJUST_TOKEN_CODE = '20o7ykck';
 
 const buildFeastLink = (recipeId: string, stage: StageType): string => {
 	const token =
@@ -145,7 +145,8 @@ export const FeastContextualNudge = ({
 }: FeastContextualNudgeProps) => {
 	const abTests = useAB();
 	const isVariant =
-		abTests?.isUserInTestGroup('feast-recipe-nudge-v2', 'variant-1') ?? false;
+		abTests?.isUserInTestGroup('feast-recipe-nudge-v2', 'variant-1') ??
+		false;
 
 	const { darkModeAvailable } = useConfig();
 
