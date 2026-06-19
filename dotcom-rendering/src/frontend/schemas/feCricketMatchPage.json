@@ -2,7 +2,7 @@
     "type": "object",
     "properties": {
         "cricketMatch": {
-            "$ref": "#/definitions/{teams:{name:string;id:string;home:boolean;lineup:string[];teamTagId?:string;}[];innings:{order:number;overs:string;wickets:number;battingTeam:string;runsScored:number;declared:boolean;forfeited:boolean;description:string;batters:{name:string;order:number;ballsFaced:number;runs:number;fours:number;sixes:number;out:boolean;howOut:string;onStrike:boolean;nonStrike:boolean;}[];bowlers:{name:string;order:number;runs:number;overs:number;maidens:number;wickets:number;balls:number;}[];fallOfWicket:{name:string;order:number;runs:number;}[];byes:number;legByes:number;noBalls:number;penalties:number;wides:number;extras:number;}[];competitionName:string;venueName:string;result:string;currentDay:number;totalDays:number;gameDate:string;officials:string[];matchId:string;fullResult?:{resultType:string;description?:string;winner?:{winType:string;team:string;margin?:string;};};}"
+            "$ref": "#/definitions/{stage:string;teams:{name:string;id:string;home:boolean;lineup:string[];teamTagId?:string;}[];innings:{order:number;overs:string;wickets:number;battingTeam:string;runsScored:number;declared:boolean;forfeited:boolean;description:string;batters:{name:string;order:number;ballsFaced:number;runs:number;fours:number;sixes:number;out:boolean;howOut:string;onStrike:boolean;nonStrike:boolean;}[];bowlers:{name:string;order:number;runs:number;overs:number;maidens:number;wickets:number;balls:number;}[];fallOfWicket:{name:string;order:number;runs:number;}[];byes:number;legByes:number;noBalls:number;penalties:number;wides:number;extras:number;}[];competitionName:string;venueName:string;result:string;currentDay:number;totalDays:number;gameDate:string;officials:string[];matchId:string;fullResult?:{resultType:string;description?:string;winner?:{winType:string;team:string;margin?:string;};};}"
         },
         "nav": {
             "$ref": "#/definitions/FENavType"
@@ -44,9 +44,12 @@
         "pageId"
     ],
     "definitions": {
-        "{teams:{name:string;id:string;home:boolean;lineup:string[];teamTagId?:string;}[];innings:{order:number;overs:string;wickets:number;battingTeam:string;runsScored:number;declared:boolean;forfeited:boolean;description:string;batters:{name:string;order:number;ballsFaced:number;runs:number;fours:number;sixes:number;out:boolean;howOut:string;onStrike:boolean;nonStrike:boolean;}[];bowlers:{name:string;order:number;runs:number;overs:number;maidens:number;wickets:number;balls:number;}[];fallOfWicket:{name:string;order:number;runs:number;}[];byes:number;legByes:number;noBalls:number;penalties:number;wides:number;extras:number;}[];competitionName:string;venueName:string;result:string;currentDay:number;totalDays:number;gameDate:string;officials:string[];matchId:string;fullResult?:{resultType:string;description?:string;winner?:{winType:string;team:string;margin?:string;};};}": {
+        "{stage:string;teams:{name:string;id:string;home:boolean;lineup:string[];teamTagId?:string;}[];innings:{order:number;overs:string;wickets:number;battingTeam:string;runsScored:number;declared:boolean;forfeited:boolean;description:string;batters:{name:string;order:number;ballsFaced:number;runs:number;fours:number;sixes:number;out:boolean;howOut:string;onStrike:boolean;nonStrike:boolean;}[];bowlers:{name:string;order:number;runs:number;overs:number;maidens:number;wickets:number;balls:number;}[];fallOfWicket:{name:string;order:number;runs:number;}[];byes:number;legByes:number;noBalls:number;penalties:number;wides:number;extras:number;}[];competitionName:string;venueName:string;result:string;currentDay:number;totalDays:number;gameDate:string;officials:string[];matchId:string;fullResult?:{resultType:string;description?:string;winner?:{winType:string;team:string;margin?:string;};};}": {
             "type": "object",
             "properties": {
+                "stage": {
+                    "type": "string"
+                },
                 "teams": {
                     "type": "array",
                     "items": {
@@ -98,6 +101,7 @@
                 "matchId",
                 "officials",
                 "result",
+                "stage",
                 "teams",
                 "totalDays",
                 "venueName"

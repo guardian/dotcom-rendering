@@ -86,7 +86,7 @@ const worldCup2026Links = [
 		id: 'football/ng-interactive/2026/jun/04/bracketology-predict-a-path-to-world-cup-victory',
 	},
 	{
-		label: 'Golden boot',
+		label: 'Golden Boot',
 		id: 'football/ng-interactive/2026/jun/04/golden-boot-world-cup-2026-top-goalscorers-winner',
 	},
 	{

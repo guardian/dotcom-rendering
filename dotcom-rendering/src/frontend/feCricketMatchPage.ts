@@ -87,6 +87,7 @@ export type FECricketMatchResult = Output<typeof matchResultSchema>;
 export const feCricketMatchSchema = object({
 	teams: array(feCricketTeamSchema),
 	innings: array(feCricketInningsSchema),
+	stage: string(),
 	competitionName: string(),
 	venueName: string(),
 	result: string(),

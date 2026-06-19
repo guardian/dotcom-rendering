@@ -175,8 +175,7 @@ const decideImageWidths = ({
 		 */
 		if (
 			format.design === ArticleDesign.HostedArticle ||
-			format.design === ArticleDesign.HostedVideo ||
-			format.design === ArticleDesign.HostedGallery
+			format.design === ArticleDesign.HostedVideo
 		) {
 			return [
 				{
@@ -334,7 +333,10 @@ const decideImageWidths = ({
 					},
 				];
 		}
-	} else if (format.design === ArticleDesign.Gallery) {
+	} else if (
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.HostedGallery
+	) {
 		return [
 			{ breakpoint: breakpoints.mobile, width: 375 },
 			{ breakpoint: breakpoints.mobileMedium, width: 480 },
@@ -544,7 +546,10 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 };
 
 const styles = ({ design }: ArticleFormat, isLightbox: boolean) => {
-	if (design === ArticleDesign.Gallery) {
+	if (
+		design === ArticleDesign.Gallery ||
+		design === ArticleDesign.HostedGallery
+	) {
 		return css`
 			img {
 				width: 100%;

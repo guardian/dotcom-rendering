@@ -6,6 +6,7 @@ import { palette as themePalette } from '../palette';
 interface Props {
 	textColor?: 'supporting' | 'regular';
 	cssOverrides?: ReturnType<typeof css>;
+	isSignedIn?: boolean | 'Pending';
 }
 
 const GUARDIAN_HOMEPAGE = 'https://www.theguardian.com';
@@ -72,15 +73,22 @@ const textStyles = (textColor: 'supporting' | 'regular') => {
 export const NewsletterPrivacyMessage = ({
 	textColor = 'supporting',
 	cssOverrides,
+	isSignedIn,
 }: Props) => (
 	<span css={[termsStyle, textStyles(textColor), cssOverrides]}>
 		<strong>Privacy Notice: </strong>
 		Newsletters may contain information about charities, online ads, and
-		content funded by outside parties. If you do not have an account, we
-		will create a guest account for you on{' '}
-		<LegalLink href={GUARDIAN_HOMEPAGE}>theguardian.com</LegalLink> to send
-		you this newsletter. You can complete full registration at any time. For
-		more information about how we use your data see our{' '}
+		content funded by outside parties.{' '}
+		{isSignedIn !== true && (
+			<>
+				If you do not have an account, we will create a guest account
+				for you on{' '}
+				<LegalLink href={GUARDIAN_HOMEPAGE}>theguardian.com</LegalLink>{' '}
+				to send you this newsletter. You can complete full registration
+				at any time.{' '}
+			</>
+		)}
+		For more information about how we use your data see our{' '}
 		<LegalLink href={GUARDIAN_PRIVACY_POLICY}>Privacy Policy</LegalLink>.
 	</span>
 );
