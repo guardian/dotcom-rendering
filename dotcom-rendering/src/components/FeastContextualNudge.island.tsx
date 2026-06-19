@@ -145,7 +145,8 @@ export const FeastContextualNudge = ({
 }: FeastContextualNudgeProps) => {
 	const abTests = useAB();
 	const isVariant =
-		abTests?.isUserInTestGroup('feast-recipe-nudge-v2', 'variant-1') ?? false;
+		abTests?.isUserInTestGroup('feast-recipe-nudge-v2', 'variant-1') ??
+		false;
 
 	const { darkModeAvailable } = useConfig();
 
