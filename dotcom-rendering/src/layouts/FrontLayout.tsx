@@ -118,10 +118,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	} = front;
 
 	const serverTime = front.serverTime;
-	const isNewsletterSignupCardEnabled =
-		front.config.isPreview ||
-		front.config.serverSideABTests['newsletters-highlights-signup-card'] ===
-			'enable';
 
 	const renderAds = canRenderAds(front);
 
@@ -191,9 +187,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					frontId={front.pressedPage.id}
 					collectionId={0}
-					isNewsletterSignupCardEnabled={
-						isNewsletterSignupCardEnabled
-					}
 				/>
 			)
 		);
