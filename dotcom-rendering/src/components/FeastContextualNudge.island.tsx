@@ -165,12 +165,12 @@ export const FeastContextualNudge = ({
 	const feastId = recipe.id;
 
 	useEffect(() => {
-		if (isDev) {
+		if (isDev && isVariant) {
 			console.log(
 				`Contextual nudge for the Feast app, related to the recipe: ${title}. (id: ${feastId}; pageId: ${pageId})`,
 			);
 		}
-	}, [feastId, title, pageId, isDev]);
+	}, [feastId, title, pageId, isDev, isVariant]);
 
 	if (!isVariant) return null;
 
