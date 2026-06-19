@@ -3,6 +3,7 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
+	textSansBold15,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { CallToActionButton } from '../components/CallToActionAtom';
@@ -75,6 +76,64 @@ const metaStyles = css`
 	& > * {
 		margin-top: ${space[4]}px;
 	}
+`;
+
+const bttPosition = css`
+	background-color: ${palette('--article-inner-background')};
+	padding: 0 5px;
+	position: absolute;
+	bottom: ${space[5]}px;
+	right: ${space[5]}px;
+`;
+
+const iconHeight = '42px';
+
+const iconContainer = css`
+	position: relative;
+	float: right;
+	border-radius: 100%;
+	background-color: ${sourcePalette.neutral[100]};
+	cursor: pointer;
+	height: ${iconHeight};
+	min-width: ${iconHeight};
+`;
+
+const link = css`
+	text-decoration: none;
+	color: ${sourcePalette.neutral[100]};
+	font-weight: bold;
+	line-height: ${iconHeight};
+
+	:hover {
+		color: ${sourcePalette.neutral[86]};
+
+		.icon-container {
+			background-color: ${sourcePalette.neutral[86]};
+		}
+	}
+`;
+
+const icon = css`
+	::before {
+		position: absolute;
+		top: 6px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		border: 2px solid ${sourcePalette.neutral[7]};
+		border-bottom: 0;
+		border-right: 0;
+		content: '';
+		height: 12px;
+		width: 12px;
+		transform: rotate(45deg);
+	}
+`;
+
+const textStyles = css`
+	${textSansBold15};
+	padding-right: 5px;
 `;
 
 const ctaButtonStyles = css`
@@ -174,6 +233,9 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					pageId={frontendData.pageId}
 					webTitle={frontendData.webTitle}
 				/>
+				<div css={bttPosition}>
+					<BackToTop />
+				</div>
 			</main>
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<OnwardsUpper
@@ -208,7 +270,11 @@ const GalleryBody = (props: {
 	pageId: string;
 	webTitle: string;
 }) => (
-	<>
+	<div
+		css={css`
+			position: relative;
+		`}
+	>
 		{props.bodyElements.map((element) => {
 			if (
 				element._type ===
@@ -230,5 +296,14 @@ const GalleryBody = (props: {
 				return null;
 			}
 		})}
-	</>
+	</div>
+);
+
+const BackToTop = () => (
+	<a css={link} href="#top" data-link-name="back to top">
+		<span css={textStyles}>Back to top</span>
+		<span css={iconContainer} className="icon-container">
+			<i css={icon} />
+		</span>
+	</a>
 );
