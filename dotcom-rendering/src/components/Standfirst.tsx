@@ -83,7 +83,6 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 	const isLabs = theme === ArticleSpecial.Labs;
 	switch (design) {
 		case ArticleDesign.Gallery:
-		case ArticleDesign.HostedGallery:
 			if (isLabs) {
 				return css`
 					${textSansBold15};
@@ -91,6 +90,10 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 			}
 			return css`
 				${headlineMedium20}
+			`;
+		case ArticleDesign.HostedGallery:
+			return css`
+				${textSans24};
 			`;
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:

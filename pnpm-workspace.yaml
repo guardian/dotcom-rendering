@@ -29,7 +29,7 @@ catalog:
   superstruct: 2.0.2
   tslib: 2.6.2
   type-fest: 4.21.0
-  typescript: 5.9.3
+  typescript: 6.0.3
 minimumReleaseAge: 2880 # 2 day minimum package version age
 minimumReleaseAgeExclude:
   - '@guardian/*'
