@@ -160,19 +160,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "newsletters-highlights-signup-card",
-		description:
-			"Test a new newsletter signup card design in the scrollable/highlights container. Only users in the enabled group see the newsletter card; for all other users, newsletter trails are hidden during this rollout phase.",
-		owners: ["newsletters.dev@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2026-12-31",
-		type: "server",
-		audienceSize: 0,
-		audienceSpace: "C",
-		groups: ["enable"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "fronts-and-curation-loop-click-through",
 		description:
 			"Test impact of click to article via loop videos on fronts",
