@@ -4,6 +4,7 @@ import {
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
 import { useIsSignedIn } from '../lib/useAuthStatus';
+import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { useConfig } from './ConfigContext';
 import type { EmailSignUpProps } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
@@ -16,10 +17,12 @@ import { NewsletterSignupForm } from './NewsletterSignupForm.island';
 
 interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	index: number;
+	listId: number;
 	identityName: string;
 	category?: string;
 	/** Illustration image URL (square crop) for the NewsletterSignupCard */
 	illustrationSquare?: string;
+	idApiUrl: string;
 	exampleUrl?: string;
 }
 
@@ -31,8 +34,10 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
  */
 export const EmailSignUpWrapper = ({
 	index,
+	listId,
 	identityName,
 	category,
+	idApiUrl,
 	exampleUrl,
 	name,
 	description,
@@ -42,6 +47,7 @@ export const EmailSignUpWrapper = ({
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
 	const isSignedIn = useIsSignedIn();
+	const isSubscribed = useNewsletterSubscription(listId, idApiUrl);
 
 	const componentId =
 		NEWSLETTER_SIGNUP_COMPONENT_ID.inArticleSignupForm(identityName);
@@ -49,6 +55,15 @@ export const EmailSignUpWrapper = ({
 	const viewFiredRef = useRef(false);
 
 	useEffect(() => {
+		// Wait for subscription status — we only want to track a view of the
+		// actual signup form, not a loading state or success message.
+		if (isSubscribed === undefined) {
+			return;
+		}
+		// Don't fire if the user is already subscribed.
+		if (isSubscribed) {
+			return;
+		}
 		if (viewFiredRef.current) {
 			return;
 		}
@@ -62,7 +77,7 @@ export const EmailSignUpWrapper = ({
 				eventDescription: 'newsletter-signup-viewed',
 			},
 		});
-	}, [componentId, identityName, renderingTarget]);
+	}, [componentId, identityName, isSubscribed, renderingTarget]);
 
 	return (
 		<InlineSkipToWrapper
@@ -89,6 +104,7 @@ export const EmailSignUpWrapper = ({
 							frequency={frequency}
 							previewAction={previewAction}
 							componentId={componentId}
+							isAlreadySubscribed={isSubscribed}
 						/>
 					</Island>
 				)}

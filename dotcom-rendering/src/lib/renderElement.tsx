@@ -107,6 +107,8 @@ type Props = {
 	shouldHideAds: boolean;
 	contentType?: string;
 	contentLayout?: string;
+	/** @deprecated No longer forwarded to renderElement — retained only so call sites do not need updating. */
+	idApiUrl?: string;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -1046,6 +1048,7 @@ export const RenderArticleElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	idApiUrl: _idApiUrl, // accepted for backwards compatibility but no longer used
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
