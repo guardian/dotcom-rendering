@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import { AB_TEST_NAME } from '../lib/newsletterSignupTracking';
-import { useAB } from '../lib/useAB';
+import { NEWSLETTER_SIGNUP_COMPONENT_ID } from '../lib/newsletterSignupTracking';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { ConfigProvider } from './ConfigContext';
@@ -10,10 +9,6 @@ import { EmailSignUpWrapper } from './EmailSignUpWrapper.island';
 
 jest.mock('../client/ophan/ophan', () => ({
 	submitComponentEvent: jest.fn(() => Promise.resolve()),
-}));
-
-jest.mock('../lib/useAB', () => ({
-	useAB: jest.fn(),
 }));
 
 jest.mock('../lib/useAuthStatus', () => ({
@@ -35,10 +30,6 @@ jest.mock('./NewsletterSignupForm.island', () => ({
 	),
 }));
 
-jest.mock('./SecureSignup.island', () => ({
-	SecureSignup: () => <div data-testid="secure-signup">SecureSignup</div>,
-}));
-
 jest.mock('./NewsletterSignupCardContainer', () => ({
 	NewsletterSignupCardContainer: ({
 		children,
@@ -51,12 +42,6 @@ jest.mock('./NewsletterSignupCardContainer', () => ({
 	),
 }));
 
-jest.mock('./EmailSignup', () => ({
-	EmailSignup: ({ children }: { children: React.ReactNode }) => (
-		<div data-testid="email-signup">{children}</div>
-	),
-}));
-
 const defaultProps = {
 	index: 0,
 	listId: 4147,
@@ -64,7 +49,6 @@ const defaultProps = {
 	name: 'The Recap',
 	description: 'A weekly sports roundup',
 	frequency: 'Weekly',
-	successDescription: "We'll send you The Recap every week",
 	theme: 'sport',
 	idApiUrl: 'https://idapi.theguardian.com',
 };
@@ -83,181 +67,62 @@ const renderWrapper = (props = {}, renderingTarget: 'Web' | 'Apps' = 'Web') =>
 		</ConfigProvider>,
 	);
 
-const mockAbTests = (variant: 'control' | 'variantIllustratedCard') => {
-	(useAB as jest.Mock).mockReturnValue({
-		getParticipations: () => ({
-			[AB_TEST_NAME]: variant,
-		}),
-	});
-};
-
 describe('EmailSignUpWrapper', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
-		// Default: AB API not yet hydrated
-		(useAB as jest.Mock).mockReturnValue(undefined);
 		(useIsSignedIn as jest.Mock).mockReturnValue(false);
 		(useNewsletterSubscription as jest.Mock).mockReturnValue(false);
 	});
 
-	describe('flag off (showNewNewsletterSignupCard = false)', () => {
+	describe('rendering', () => {
 		it('shows a placeholder while subscription status is loading', () => {
 			(useNewsletterSubscription as jest.Mock).mockReturnValue(undefined);
 			renderWrapper();
-			// The Placeholder component renders a div with specific heights
-			expect(
-				screen.queryByTestId('email-signup'),
-			).not.toBeInTheDocument();
 			expect(
 				screen.queryByTestId('newsletter-signup-card-container'),
 			).not.toBeInTheDocument();
 		});
 
-		it('renders nothing when the user is already subscribed', () => {
-			mockAbTests('control');
-			(useNewsletterSubscription as jest.Mock).mockReturnValue(true);
-			const { container } = renderWrapper({
-				hideNewsletterSignupComponentForSubscribers: true,
-			});
-			expect(container).toBeEmptyDOMElement();
-		});
-
-		it('renders the legacy EmailSignup when the user is not subscribed', () => {
-			mockAbTests('control');
+		it('renders the NewsletterSignupCardContainer when the user is not subscribed', () => {
 			renderWrapper();
-			expect(screen.getByTestId('email-signup')).toBeInTheDocument();
-			expect(screen.getByTestId('secure-signup')).toBeInTheDocument();
-			expect(
-				screen.queryByTestId('newsletter-signup-card-container'),
-			).not.toBeInTheDocument();
-		});
-	});
-
-	describe('flag on (showNewNewsletterSignupCard = true)', () => {
-		it('shows a placeholder when AB API has not hydrated yet', () => {
-			// useAB returns undefined before hydration — component shows
-			// Placeholder rather than committing to control or variant early.
-			// (default set in outer beforeEach, no override needed)
-			renderWrapper({ showNewNewsletterSignupCard: true });
-			expect(
-				screen.queryByTestId('email-signup'),
-			).not.toBeInTheDocument();
-			expect(
-				screen.queryByTestId('newsletter-signup-card-container'),
-			).not.toBeInTheDocument();
-		});
-
-		it('renders NewsletterSignupCardContainer for all web users regardless of AB participation', () => {
-			mockAbTests('control');
-			renderWrapper({ showNewNewsletterSignupCard: true });
-			expect(
-				screen.getByTestId('newsletter-signup-card-container'),
-			).toBeInTheDocument();
-			expect(
-				screen.queryByTestId('email-signup'),
-			).not.toBeInTheDocument();
-		});
-
-		it('renders NewsletterSignupCardContainer for users in the variant group', () => {
-			mockAbTests('variantIllustratedCard');
-			renderWrapper({ showNewNewsletterSignupCard: true });
 			expect(
 				screen.getByTestId('newsletter-signup-card-container'),
 			).toBeInTheDocument();
 			expect(
 				screen.getByTestId('newsletter-signup-form'),
 			).toBeInTheDocument();
-			expect(
-				screen.queryByTestId('email-signup'),
-			).not.toBeInTheDocument();
 		});
 
-		it('does not hide the variant for already-subscribed users (subscription handled inside the card)', () => {
-			mockAbTests('variantIllustratedCard');
+		it('still renders the card for already-subscribed users (subscription handled inside the card)', () => {
 			(useNewsletterSubscription as jest.Mock).mockReturnValue(true);
 			renderWrapper({
-				showNewNewsletterSignupCard: true,
 				hideNewsletterSignupComponentForSubscribers: true,
 			});
 			expect(
 				screen.getByTestId('newsletter-signup-card-container'),
 			).toBeInTheDocument();
 		});
-	});
 
-	describe('Apps rendering target', () => {
-		it('renders the legacy EmailSignup without waiting for AB to resolve', () => {
-			// useAB remains undefined (AB framework never initialises on Apps)
-			// but the component should not block on it
-			renderWrapper({ showNewNewsletterSignupCard: true }, 'Apps');
-			expect(screen.getByTestId('email-signup')).toBeInTheDocument();
+		it('renders the NewsletterSignupCardContainer on Apps as well as Web', () => {
+			renderWrapper({}, 'Apps');
 			expect(
-				screen.queryByTestId('newsletter-signup-card-container'),
-			).not.toBeInTheDocument();
-		});
-
-		it('fires a VIEW tracking event without waiting for AB to resolve', () => {
-			renderWrapper({ showNewNewsletterSignupCard: true }, 'Apps');
-			expect(submitComponentEvent).toHaveBeenCalledWith(
-				expect.objectContaining({
-					action: 'VIEW',
-					abTest: { name: AB_TEST_NAME, variant: 'control' },
-				}),
-				'Apps',
-			);
+				screen.getByTestId('newsletter-signup-card-container'),
+			).toBeInTheDocument();
 		});
 	});
 
 	describe('VIEW tracking', () => {
-		it('fires a VIEW event with the variantIllustratedCard component id for all web users', () => {
-			mockAbTests('control');
-			renderWrapper({ showNewNewsletterSignupCard: true });
+		it('fires a VIEW event with the illustrated card component id', () => {
+			renderWrapper();
 
 			expect(submitComponentEvent).toHaveBeenCalledWith(
 				expect.objectContaining({
 					component: {
 						componentType: 'NEWSLETTER_SUBSCRIPTION',
-						id: 'AR NewsletterSignupForm the-recap - variantIllustratedCard',
+						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
+							'the-recap',
+						),
 					},
-					action: 'VIEW',
-					abTest: {
-						name: AB_TEST_NAME,
-						variant: 'variantIllustratedCard',
-					},
-				}),
-				'Web',
-			);
-		});
-
-		it('fires a VIEW event with the correct variant component id and ab metadata', () => {
-			mockAbTests('variantIllustratedCard');
-			renderWrapper({ showNewNewsletterSignupCard: true });
-
-			expect(submitComponentEvent).toHaveBeenCalledWith(
-				expect.objectContaining({
-					component: {
-						componentType: 'NEWSLETTER_SUBSCRIPTION',
-						id: 'AR NewsletterSignupForm the-recap - variantIllustratedCard',
-					},
-					action: 'VIEW',
-					abTest: {
-						name: AB_TEST_NAME,
-						variant: 'variantIllustratedCard',
-					},
-				}),
-				'Web',
-			);
-		});
-
-		it('fires a VIEW event with the control component id when the flag is off', () => {
-			mockAbTests('control');
-			renderWrapper({ showNewNewsletterSignupCard: false });
-
-			expect(submitComponentEvent).toHaveBeenCalledWith(
-				expect.objectContaining({
-					component: expect.objectContaining({
-						id: 'AR SecureSignup the-recap',
-					}),
 					action: 'VIEW',
 				}),
 				'Web',
@@ -265,43 +130,21 @@ describe('EmailSignUpWrapper', () => {
 		});
 
 		it('fires the VIEW event exactly once on mount', () => {
-			mockAbTests('control');
-			renderWrapper({ showNewNewsletterSignupCard: true });
+			renderWrapper();
 
 			expect(submitComponentEvent).toHaveBeenCalledTimes(1);
 		});
 
 		it('does not fire a VIEW event while subscription status is loading', () => {
-			mockAbTests('control');
 			(useNewsletterSubscription as jest.Mock).mockReturnValue(undefined);
-			renderWrapper({ showNewNewsletterSignupCard: true });
+			renderWrapper();
 
 			expect(submitComponentEvent).not.toHaveBeenCalled();
 		});
 
-		it('does not fire a VIEW event while the AB client has not hydrated', () => {
-			// useAB returns undefined — default set in beforeEach
-			renderWrapper({ showNewNewsletterSignupCard: true });
-
-			expect(submitComponentEvent).not.toHaveBeenCalled();
-		});
-
-		it('does not fire a VIEW event for control users who are already subscribed', () => {
-			mockAbTests('control');
+		it('does not fire a VIEW event when the user is already subscribed', () => {
 			(useNewsletterSubscription as jest.Mock).mockReturnValue(true);
 			renderWrapper({
-				showNewNewsletterSignupCard: true,
-				hideNewsletterSignupComponentForSubscribers: true,
-			});
-
-			expect(submitComponentEvent).not.toHaveBeenCalled();
-		});
-
-		it('does not fire a VIEW event for variant users who are already subscribed', () => {
-			mockAbTests('variantIllustratedCard');
-			(useNewsletterSubscription as jest.Mock).mockReturnValue(true);
-			renderWrapper({
-				showNewNewsletterSignupCard: true,
 				hideNewsletterSignupComponentForSubscribers: true,
 			});
 

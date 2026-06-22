@@ -1,23 +1,21 @@
 import type { Breakpoint } from '@guardian/source/foundations';
 import { useEffect, useRef } from 'react';
 import {
-	AB_TEST_NAME,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
-import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { useConfig } from './ConfigContext';
 import type { EmailSignUpProps } from './EmailSignup';
-import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { Island } from './Island';
-import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { NewsletterSignupCardContainer } from './NewsletterSignupCardContainer';
 import { NewsletterSignupForm } from './NewsletterSignupForm.island';
 import { Placeholder } from './Placeholder';
-import { SecureSignup } from './SecureSignup.island';
+// When the next A/B experiment is added (e.g. preview-button test), import
+// useAB and AB_TEST_NAME from their respective modules and thread them through
+// sendNewsletterSignupEvent's `abTest` param and NewsletterSignupForm's `abTest` prop.
 
 /**
  * Approximate heights of the EmailSignup component at different breakpoints.
@@ -33,15 +31,12 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	listId: number;
 	identityName: string;
 	category?: string;
-	successDescription: string;
-	/** Illustration image URL (square crop) for the NewsletterSignupCard variant */
+	/** Illustration image URL (square crop) for the NewsletterSignupCard */
 	illustrationSquare?: string;
 	idApiUrl: string;
 	exampleUrl?: string;
 	/** Feature flag to enable hiding newsletter signup for already subscribed users */
 	hideNewsletterSignupComponentForSubscribers?: boolean;
-	/** Feature flag to show the new NewsletterSignupCard design instead of EmailSignup */
-	showNewNewsletterSignupCard?: boolean;
 }
 
 /**
@@ -66,21 +61,9 @@ export const EmailSignUpWrapper = ({
 	illustrationSquare,
 	frequency,
 	theme,
-	successDescription,
 	hideNewsletterSignupComponentForSubscribers = false,
-	showNewNewsletterSignupCard = false,
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
-
-	const abTestEnabled =
-		showNewNewsletterSignupCard && renderingTarget === 'Web';
-
-	const abTests = useAB();
-	const abResolved = abTests !== undefined;
-
-	const getVariantName = () => 'variantIllustratedCard';
-
-	const abVariant = abTestEnabled ? getVariantName() : 'control';
 
 	const isSubscribed = useNewsletterSubscription(
 		listId,
@@ -92,16 +75,12 @@ export const EmailSignUpWrapper = ({
 	const viewFiredRef = useRef(false);
 
 	useEffect(() => {
-		if (abTestEnabled && !abResolved) {
-			return;
-		}
-		// Wait for subscription status in both branches — we only want to track
-		// a view of the actual signup form, not a loading state or success message.
+		// Wait for subscription status — we only want to track a view of the
+		// actual signup form, not a loading state or success message.
 		if (isSubscribed === undefined) {
 			return;
 		}
-		// Don't fire if the user is already subscribed: in both branches they
-		// will see a success/already-subscribed message, not the signup form.
+		// Don't fire if the user is already subscribed.
 		if (isSubscribed) {
 			return;
 		}
@@ -114,109 +93,49 @@ export const EmailSignUpWrapper = ({
 			action: 'VIEW',
 			identityName,
 			componentId:
-				abVariant === 'variantIllustratedCard'
-					? NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
-							identityName,
-						)
-					: abVariant === 'variantNewField'
-						? NEWSLETTER_SIGNUP_COMPONENT_ID.variantNewField(
-								identityName,
-							)
-						: NEWSLETTER_SIGNUP_COMPONENT_ID.control(identityName),
+				NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
+					identityName,
+				),
 			renderingTarget,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
 			},
-			// Use the standard Ophan abTest field so Ophan can join events
-			// to the A/B test — not strings encoded inside value.
-			abTest: { name: AB_TEST_NAME, variant: abVariant },
 		});
-	}, [
-		abResolved,
-		abVariant,
-		identityName,
-		isSubscribed,
-		abTestEnabled,
-		renderingTarget,
-	]);
+	}, [identityName, isSubscribed, renderingTarget]);
 
-	if ((abTestEnabled && !abResolved) || isSubscribed === undefined) {
+	if (isSubscribed === undefined) {
 		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
 	}
-
-	if (abVariant === 'variantIllustratedCard') {
-		return (
-			<InlineSkipToWrapper
-				id={`EmailSignup-skip-link-${index}`}
-				blockDescription="newsletter promotion"
-			>
-				<NewsletterSignupCardContainer
-					name={name}
-					description={description}
-					illustrationSquare={illustrationSquare}
-					frequency={frequency}
-					theme={theme}
-					identityName={identityName}
-					category={category}
-					exampleUrl={exampleUrl}
-					renderingTarget={renderingTarget}
-					isSignedIn={isSignedIn}
-				>
-					{(previewAction) => (
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<NewsletterSignupForm
-								newsletterId={identityName}
-								newsletterName={name}
-								frequency={frequency}
-								previewAction={previewAction}
-								isAlreadySubscribed={isSubscribed}
-								abTest={{
-									name: AB_TEST_NAME,
-									variant: abVariant,
-								}}
-							/>
-						</Island>
-					)}
-				</NewsletterSignupCardContainer>
-			</InlineSkipToWrapper>
-		);
-	}
-
-	// Don't render control if user is already subscribed
-	if (isSubscribed) {
-		return null;
-	}
-
-	const emailInputName =
-		abVariant === 'variantNewField' ? 'emailAddress' : 'email';
-	const emailInputId =
-		abVariant === 'variantNewField'
-			? `emailInput-${identityName}`
-			: undefined;
 
 	return (
 		<InlineSkipToWrapper
 			id={`EmailSignup-skip-link-${index}`}
 			blockDescription="newsletter promotion"
 		>
-			<EmailSignup
+			<NewsletterSignupCardContainer
 				name={name}
 				description={description}
+				illustrationSquare={illustrationSquare}
 				frequency={frequency}
 				theme={theme}
+				identityName={identityName}
+				category={category}
+				exampleUrl={exampleUrl}
+				renderingTarget={renderingTarget}
+				isSignedIn={isSignedIn}
 			>
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<SecureSignup
-						newsletterId={identityName}
-						successDescription={successDescription}
-						abTest={{ name: AB_TEST_NAME, variant: abVariant }}
-						emailInputNameOverride={emailInputName}
-						emailInputIdOverride={emailInputId}
-						addCountryField={abVariant === 'variantNewField'}
-					/>
-				</Island>
-				<NewsletterPrivacyMessage />
-			</EmailSignup>
+				{(previewAction) => (
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<NewsletterSignupForm
+							newsletterId={identityName}
+							newsletterName={name}
+							frequency={frequency}
+							previewAction={previewAction}
+							isAlreadySubscribed={isSubscribed}
+						/>
+					</Island>
+				)}
+			</NewsletterSignupCardContainer>
 		</InlineSkipToWrapper>
 	);
 };
