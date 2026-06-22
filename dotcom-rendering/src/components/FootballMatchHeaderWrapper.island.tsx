@@ -1,4 +1,6 @@
 import {
+	getEnvironmentClient,
+	getLiveActivitiesClient,
 	getMatchNotificationsClient,
 	getNotificationsClient,
 } from '../lib/bridgetApi';
@@ -29,10 +31,12 @@ export const FootballMatchHeaderWrapper = (props: Props) => (
 		article={props.article}
 		format={props.format}
 		getHeaderData={getHeaderData}
-		refreshInterval={16_000}
+		refreshInterval={10_000}
 		renderingTarget={props.renderingTarget}
 		notificationsClient={getNotificationsClient()}
 		matchNotificationsClient={getMatchNotificationsClient()}
+		environmentClient={getEnvironmentClient()}
+		liveActivitiesClient={getLiveActivitiesClient()}
 	/>
 );
 

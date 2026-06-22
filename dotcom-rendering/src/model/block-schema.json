@@ -372,7 +372,7 @@
                     "$ref": "#/definitions/ProductSummaryElement"
                 },
                 {
-                    "$ref": "#/definitions/EnhancedProductSummaryElement"
+                    "$ref": "#/definitions/RecipeBlockElement"
                 }
             ]
         },
@@ -2150,6 +2150,9 @@
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.LinkBlockElement"
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -2173,6 +2176,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "label",
                 "linkType",
                 "url"
@@ -4272,90 +4276,93 @@
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.ProductSummaryElement"
                 },
-                "products": {
+                "matchedProducts": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/SummaryProductRef"
+                        "$ref": "#/definitions/ProductBlockElement"
                     }
                 },
-                "displayType": {
-                    "$ref": "#/definitions/ProductSummaryDisplayType"
-                },
-                "title": {
+                "variant": {
+                    "enum": [
+                        "carousel",
+                        "stacked-default",
+                        "stacked-expanded"
+                    ],
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "displayType",
-                "products",
-                "title"
+                "matchedProducts",
+                "variant"
             ]
         },
-        "SummaryProductRef": {
-            "type": "object",
-            "properties": {
-                "productId": {
-                    "type": "string"
-                },
-                "ctaIndex": {
-                    "type": "number"
-                }
-            },
-            "required": [
-                "ctaIndex",
-                "productId"
-            ]
-        },
-        "ProductSummaryDisplayType": {
-            "enum": [
-                "Carousel",
-                "CtaList",
-                "StackedCard",
-                "StackedCardExpanded"
-            ],
-            "type": "string"
-        },
-        "EnhancedProductSummaryElement": {
+        "RecipeBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
-                    "const": "model.dotcomrendering.pageElements.EnhancedProductSummaryElement"
+                    "const": "model.dotcomrendering.pageElements.RecipeBlockElement"
                 },
-                "products": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/SummaryProduct"
-                    }
+                "elementId": {
+                    "type": "string"
                 },
-                "displayType": {
-                    "$ref": "#/definitions/ProductSummaryDisplayType"
+                "id": {
+                    "type": "string"
                 },
                 "title": {
                     "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "featuredImage": {
+                    "$ref": "#/definitions/RecipeFeaturedImage"
                 }
             },
             "required": [
                 "_type",
-                "displayType",
-                "products",
-                "title"
+                "id"
             ]
         },
-        "SummaryProduct": {
+        "RecipeFeaturedImage": {
             "type": "object",
             "properties": {
-                "productBlock": {
-                    "$ref": "#/definitions/ProductBlockElement"
+                "url": {
+                    "type": "string"
                 },
-                "ctaIndex": {
+                "mediaId": {
+                    "type": "string"
+                },
+                "cropId": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "photographer": {
+                    "type": "string"
+                },
+                "imageType": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "width": {
                     "type": "number"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "mediaApiUri": {
+                    "type": "string"
                 }
             },
             "required": [
-                "ctaIndex",
-                "productBlock"
+                "cropId",
+                "mediaId",
+                "url"
             ]
         },
         "Attributes": {

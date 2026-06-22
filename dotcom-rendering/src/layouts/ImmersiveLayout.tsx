@@ -20,6 +20,7 @@ import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -330,6 +331,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					contentType={article.contentType}
 				/>
 			)}
+
+			<DirectoryPageNavIsland
+				pageId={article.pageId}
+				pageTags={article.tags}
+			/>
 
 			{format.theme === ArticleSpecial.Labs && (
 				<Stuck zIndex="subNavBanner">

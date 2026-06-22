@@ -75,7 +75,7 @@ jest.mock('react-google-recaptcha', () => ({
 	),
 }));
 
-const renderForm = (hidePrivacyMessage = false) =>
+const renderForm = () =>
 	render(
 		<ConfigProvider
 			value={{
@@ -89,7 +89,6 @@ const renderForm = (hidePrivacyMessage = false) =>
 				newsletterId="morning-briefing"
 				newsletterName="Morning Briefing"
 				frequency="every day"
-				hidePrivacyMessage={hidePrivacyMessage}
 			/>
 		</ConfigProvider>,
 	);
@@ -232,7 +231,7 @@ describe('NewsletterSignupForm', () => {
 	it('supports tab order from email input to marketing toggle to sign up', async () => {
 		const testUser = user.setup();
 
-		renderForm(true);
+		renderForm();
 
 		await testUser.tab();
 		expect(screen.getByLabelText('Enter your email')).toHaveFocus();
@@ -277,7 +276,7 @@ describe('NewsletterSignupForm', () => {
 	it('supports keyboard interaction for marketing toggle and submit button', async () => {
 		const testUser = user.setup();
 
-		renderForm(true);
+		renderForm();
 
 		await testUser.tab();
 		const emailInput = screen.getByLabelText('Enter your email');
@@ -395,13 +394,12 @@ describe('NewsletterSignupForm', () => {
 		).not.toBeInTheDocument();
 	});
 
-	it('shows failure UI with retry and supports hiding the privacy message', async () => {
+	it('shows failure UI with retry', async () => {
 		const testUser = user.setup();
 		global.fetch = jest.fn().mockResolvedValue({ ok: false } as Response);
 
-		renderForm(true);
+		renderForm();
 
-		expect(screen.queryByText('Privacy Notice:')).not.toBeInTheDocument();
 		await typeEmailAddress(testUser);
 		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
 

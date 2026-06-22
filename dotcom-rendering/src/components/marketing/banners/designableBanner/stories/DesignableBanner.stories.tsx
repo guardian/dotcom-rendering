@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
 import { choiceCardsSettings } from '../../../lib/storybook';
 import { design, stringToHexColour, tracking } from '../../utils/storybook';
-import { DesignableBannerUnvalidated as DesignableBanner } from '../DesignableBanner';
+import { DesignableBannerUnvalidated as DesignableBanner } from '../Banner';
 
 type WithJsonProps<T> = T & { json?: string };
 type Props = WithJsonProps<React.ComponentProps<typeof DesignableBanner>>;
@@ -28,14 +28,7 @@ const meta: Meta<Props> = {
 				text: 'Support once',
 				baseUrl: 'https://support.theguardian.com/contribute/one-off',
 			},
-			secondaryCta: {
-				type: SecondaryCtaType.Custom,
-				cta: {
-					text: 'Support monthly',
-					baseUrl:
-						'https://support.theguardian.com/contribute/recurring',
-				},
-			},
+			secondaryCta: undefined,
 		},
 		mobileContent: {
 			heading: 'Show your support for reader-funded journalism',
@@ -49,14 +42,7 @@ const meta: Meta<Props> = {
 				text: 'Support us',
 				baseUrl: 'https://support.theguardian.com/contribute/one-off',
 			},
-			secondaryCta: {
-				type: SecondaryCtaType.Custom,
-				cta: {
-					text: 'Learn more',
-					baseUrl:
-						'https://support.theguardian.com/contribute/recurring',
-				},
-			},
+			secondaryCta: undefined,
 		},
 		articleCounts: {
 			for52Weeks: 12,
@@ -186,7 +172,35 @@ export const Default: Story = {
 export const WithThreeTierChoiceCards: Story = {
 	name: 'With three tier choice cards',
 	args: {
-		...Default.args,
+		...meta.args,
+		content: {
+			heading: 'Show your support for reader-funded journalism',
+			paragraphs: [
+				'Fearless, investigative reporting shapes a fairer world. At the Guardian, our independence allows us to chase the truth wherever it takes us. <strong>We have no shareholders.</strong> No vested interests. Just the determination and passion to bring readers quality reporting, including groundbreaking investigations.',
+				'We do not shy away. And we provide all this for free, for everyone.',
+			],
+			highlightedText:
+				'Show your support today from just £1, or sustain us long term with a little more. Thank you.',
+			cta: {
+				text: 'Support once',
+				baseUrl: 'https://support.theguardian.com/contribute/one-off',
+			},
+			secondaryCta: undefined,
+		},
+		mobileContent: {
+			heading: 'Show your support for reader-funded journalism',
+			paragraphs: [
+				'Fearless, investigative reporting shapes a fairer world. At the Guardian, our independence allows us to chase the truth wherever it takes us. <strong>We have no shareholders.</strong> No vested interests. Just the determination and passion to bring readers quality reporting, including groundbreaking investigations.',
+				'We do not shy away. And we provide all this for free, for everyone.',
+			],
+			highlightedText:
+				'Show your support today from just £1, or sustain us long term with a little more. Thank you.',
+			cta: {
+				text: 'Support us',
+				baseUrl: 'https://support.theguardian.com/contribute/one-off',
+			},
+			secondaryCta: undefined,
+		},
 		design: {
 			...design,
 			visual: {
@@ -232,10 +246,12 @@ export const HeaderImageOnly: Story = {
 		content: {
 			...baseContent,
 			heading: undefined,
+			secondaryCta: undefined,
 		},
 		mobileContent: {
 			...baseMobileContent,
 			heading: undefined,
+			secondaryCta: undefined,
 		},
 		design: {
 			...design,
@@ -294,10 +310,12 @@ export const DesignThreeAnimatedHeaderImage: Story = {
 		content: {
 			...baseContent,
 			heading: undefined,
+			secondaryCta: undefined,
 		},
 		mobileContent: {
 			...baseMobileContent,
 			heading: undefined,
+			secondaryCta: undefined,
 		},
 		design: {
 			...design,
@@ -369,6 +387,12 @@ export const WithMixedDestinations: Story = {
 	name: 'With destinationUrl on all choice cards',
 	args: {
 		...WithThreeTierChoiceCards.args,
+		content: {
+			...baseContent,
+		},
+		mobileContent: {
+			...baseContent,
+		},
 		choiceCardsSettings: {
 			choiceCards: [
 				{

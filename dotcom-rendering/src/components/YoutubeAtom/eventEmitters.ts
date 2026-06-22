@@ -74,7 +74,7 @@ const ophanTrackerApps = (id: string, videoStyle: OphanVideoStyle) => {
 		void getAppsMediaEvent(trackingEvent).then((appsMediaEvent) => {
 			if (!isUndefined(appsMediaEvent)) {
 				const event = {
-					videoId: id,
+					videoId: `gu-video-${videoStyle}-${id}`,
 					event: appsMediaEvent,
 				};
 				log('dotcom', {

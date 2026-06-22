@@ -38,8 +38,6 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	illustrationSquare?: string;
 	idApiUrl: string;
 	exampleUrl?: string;
-	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
-	hidePrivacyMessage?: boolean;
 	/** Feature flag to enable hiding newsletter signup for already subscribed users */
 	hideNewsletterSignupComponentForSubscribers?: boolean;
 	/** Feature flag to show the new NewsletterSignupCard design instead of EmailSignup */
@@ -69,7 +67,6 @@ export const EmailSignUpWrapper = ({
 	frequency,
 	theme,
 	successDescription,
-	hidePrivacyMessage,
 	hideNewsletterSignupComponentForSubscribers = false,
 	showNewNewsletterSignupCard = false,
 }: EmailSignUpWrapperProps) => {
@@ -81,18 +78,8 @@ export const EmailSignUpWrapper = ({
 	const abTests = useAB();
 	const abResolved = abTests !== undefined;
 
-	const getVariantName = () => {
-		const currentUserVariant = abTests?.getParticipations()[AB_TEST_NAME];
-		if (
-			currentUserVariant &&
-			['variantNewField', 'variantIllustratedCard'].includes(
-				currentUserVariant,
-			)
-		) {
-			return currentUserVariant;
-		}
-		return 'control';
-	};
+	const getVariantName = () => 'variantIllustratedCard';
+
 	const abVariant = abTestEnabled ? getVariantName() : 'control';
 
 	const isSubscribed = useNewsletterSubscription(
@@ -181,7 +168,6 @@ export const EmailSignUpWrapper = ({
 								newsletterId={identityName}
 								newsletterName={name}
 								frequency={frequency}
-								hidePrivacyMessage={isSignedIn === true}
 								previewAction={previewAction}
 								isAlreadySubscribed={isSubscribed}
 								abTest={{
@@ -229,7 +215,7 @@ export const EmailSignUpWrapper = ({
 						addCountryField={abVariant === 'variantNewField'}
 					/>
 				</Island>
-				{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
+				<NewsletterPrivacyMessage />
 			</EmailSignup>
 		</InlineSkipToWrapper>
 	);

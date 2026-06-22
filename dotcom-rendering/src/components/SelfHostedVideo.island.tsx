@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -10,12 +10,15 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
+import { useAB } from '../lib/useAB';
+import { useFadeableControls } from '../lib/useFadeableControls';
 import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
 import { useVideoAttentionTracking } from '../lib/useVideoAttentionTracking';
+import { useVideoFullscreen } from '../lib/useVideoFullscreen';
 import { useVideoMilestoneTracking } from '../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
@@ -49,12 +52,6 @@ import type { VideoEventKey } from './YoutubeAtom/YoutubeAtom';
  * The fraction of the video required to be visible in the viewport to be considered "in view".
  */
 const VISIBILITY_THRESHOLD = 0.5;
-
-/**
- * The duration in ms for which controls are displayed before fading out.
- */
-const CONTROLS_FADE_DELAY = 2700;
-const PLAY_BUTTON_FADE_DELAY = 1700;
 
 const cardStyles = (
 	isInteractive: boolean,
@@ -156,73 +153,6 @@ const videoContainerStyles = (
 	`}
 `;
 
-const fullscreenStyles = css`
-	&:fullscreen {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background-color: ${palette('--video-fullscreen-background')};
-		width: 100vw;
-		height: 100vh;
-
-		/* Override the fixed aspect-ratio + width:100% on the video so it
-		   fits within the screen while preserving its aspect ratio. */
-
-		video {
-			width: 100%;
-			height: 100%;
-			max-width: 100vw;
-			max-height: 100vh;
-			aspect-ratio: auto;
-			object-fit: contain;
-		}
-	}
-`;
-
-const showTransitionStyles = css`
-	visibility: visible;
-	opacity: 1;
-	transition:
-		visibility 0.2s,
-		opacity 0.2s ease-in-out;
-`;
-
-const showControlsStyles = css`
-	.controls-container {
-		${showTransitionStyles};
-	}
-
-	.play-pause-icon {
-		${showTransitionStyles};
-	}
-`;
-
-const hideTransitionStyles = css`
-	visibility: hidden;
-	opacity: 0;
-	transition:
-		visibility 0.3s,
-		opacity 0.3s ease-in-out;
-`;
-
-const hideControlsStyles = css`
-	.controls-container {
-		${hideTransitionStyles}
-		transition-delay: ${CONTROLS_FADE_DELAY}ms;
-	}
-
-	.play-pause-icon {
-		${hideTransitionStyles}
-		transition-delay: ${PLAY_BUTTON_FADE_DELAY}ms;
-	}
-
-	@media (hover: hover) {
-		:hover {
-			${showControlsStyles}
-		}
-	}
-`;
-
 /**
  * Dispatches a custom play audio event so that other videos listening for this event will be muted.
  */
@@ -263,28 +193,6 @@ const getOptimisedPosterImage = (
 		aspectRatio,
 	});
 };
-
-/**
- * 	The Fullscreen api is not supported by Safari mobile,
- * 	so we need to check if we have access to the webkit api we can use instead.
- * */
-const shouldUseWebkitFullscreen = (video: HTMLVideoElement): boolean => {
-	return (
-		'webkitDisplayingFullscreen' in video &&
-		'webkitEnterFullscreen' in video &&
-		'webkitExitFullscreen' in video
-	);
-};
-
-/**
- * 	The events we need to respond to for fullscreen tracking
- * */
-const fullscreenChangeEvents = [
-	'fullscreenchange',
-	'webkitfullscreenchange',
-	'webkitbeginfullscreen',
-	'webkitendfullscreen',
-];
 
 /**
  * Ensures the aspect ratio falls between the minimum and maximum allowed aspect ratios, if specified.
@@ -384,6 +292,7 @@ type Props = {
 	format?: ArticleFormat;
 	isMainMedia?: boolean;
 	role?: RoleType;
+	preventAutoplay: boolean;
 	restrictHeightOnDesktop?: boolean;
 	cardLink?: {
 		headlineText: string;
@@ -400,6 +309,7 @@ export const SelfHostedVideo = ({
 	videoStyle,
 	aspectRatio,
 	posterImage,
+	posterImageAspectRatio,
 	fallbackImage,
 	fallbackImageSize,
 	fallbackImageLoading,
@@ -418,18 +328,34 @@ export const SelfHostedVideo = ({
 	format,
 	isMainMedia,
 	role,
-	posterImageAspectRatio,
+	preventAutoplay,
 	restrictHeightOnDesktop = false,
 	cardLink,
 	isInLoopClickTestVariant,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
+	const ab = useAB();
+	const isInClickToPlayTest =
+		Boolean(
+			ab?.isUserInTestGroup(
+				'fronts-and-curation-click-to-play',
+				'variant',
+			),
+		) && videoStyle === 'Default';
+	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
+
+	const willAttemptAutoplay =
+		videoStyleSettings.autoplay && !preventAutoplay && !isInClickToPlayTest;
+
 	const vidRef = useRef<HTMLVideoElement>(null);
 	const playerContainerRef = useRef<HTMLDivElement>(null);
-	const showControlsTimer = useRef<number | null>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
-	const [isMuted, setIsMuted] = useState(true);
+	/**
+	 * Autoplay videos must start muted as browser autoplay policies require it.
+	 * Click-to-play videos start unmuted as the user deliberately chose to play.
+	 */
+	const [isMuted, setIsMuted] = useState<boolean>(willAttemptAutoplay);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [duration, setDuration] = useState<number | undefined>(undefined);
@@ -442,12 +368,7 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
-	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
 	const [isProgressBarSeeking, setIsProgressBarSeeking] = useState(false);
-	/** Whether the video should show controls */
-	const [showControls, setShowControls] = useState(true);
-	/** Whether the video is currently showing controls */
-	const [isShowingControls, setIsShowingControls] = useState(true);
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -455,9 +376,18 @@ export const SelfHostedVideo = ({
 	const isLoopClickThroughTestVariant =
 		videoStyle === 'Loop' && isInLoopClickTestVariant;
 
-	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
-
-	const shouldAutoplay = videoStyleSettings.autoplay && isAutoplayAllowed;
+	/**
+	 * The video will autoplay if all of the following are true:
+	 * - the style of video allows autoplay
+	 * - the parent allows autoplay, i.e. we may not want to autoplay on certain page types
+	 * - autoplay is allowed by the browser, e.g. if "reduce motion" is enabled then we don't autoplay
+	 * - the user is not in the click-to-play test variant
+	 */
+	const shouldAutoplay =
+		videoStyleSettings.autoplay &&
+		!preventAutoplay &&
+		isAutoplayAllowed === true &&
+		!isInClickToPlayTest;
 
 	const showProgressBar =
 		!hideProgressBar &&
@@ -488,11 +418,17 @@ export const SelfHostedVideo = ({
 		(playerState === 'PAUSED_BY_USER' ||
 			playerState === 'PAUSED_BY_BROWSER' ||
 			playerState === 'ENDED' ||
-			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
+			(playerState === 'NOT_STARTED' && !shouldAutoplay));
 
-	const showPauseIcon =
-		videoStyleSettings.hideControlsWhenNotInteractedWith &&
-		playerState === 'PLAYING';
+	const {
+		fadeableControlsStyles,
+		isShowingControls: isShowingFadeableControls,
+		showPauseIcon,
+		showFadeableControlsAndStartTimer,
+	} = useFadeableControls({
+		playerState,
+		isEnabled: videoStyleSettings.enableFadeableControls,
+	});
 
 	let showPlayPauseIcon: 'play' | 'pause' | null = null;
 	if (showPlayIcon) {
@@ -597,27 +533,30 @@ export const SelfHostedVideo = ({
 		}
 	}, []);
 
-	const pauseVideo = (
-		pauseReason: Extract<
-			PlayerStates,
-			| 'PAUSED_BY_USER'
-			| 'PAUSED_BY_INTERSECTION_OBSERVER'
-			| 'PAUSED_BY_BROWSER'
-		>,
-	) => {
-		const video = vidRef.current;
-		if (!video) {
-			return;
-		}
+	const pauseVideo = useCallback(
+		(
+			pauseReason: Extract<
+				PlayerStates,
+				| 'PAUSED_BY_USER'
+				| 'PAUSED_BY_INTERSECTION_OBSERVER'
+				| 'PAUSED_BY_BROWSER'
+			>,
+		) => {
+			const video = vidRef.current;
+			if (!video) {
+				return;
+			}
 
-		if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
-			setMutedState({ value: true, track: false });
-		}
+			if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
+				setMutedState({ value: true, track: false });
+			}
 
-		setPlayerState(pauseReason);
+			setPlayerState(pauseReason);
 
-		void video.pause();
-	};
+			void video.pause();
+		},
+		[setMutedState],
+	);
 
 	const playPauseVideo = () => {
 		if (playerState === 'PLAYING') {
@@ -769,6 +708,9 @@ export const SelfHostedVideo = ({
 			if (document.visibilityState === 'visible') {
 				handlePageBecomesVisible();
 			}
+			if (renderingTarget === 'Apps' && document.hidden) {
+				pauseVideo('PAUSED_BY_BROWSER');
+			}
 		});
 
 		return () => {
@@ -787,26 +729,7 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [setMutedState, uniqueId, sources, renderingTarget]);
-
-	/* Creates video-specific event listeners to handle fullscreen behaviour */
-	useEffect(() => {
-		const video = vidRef.current;
-		if (!video) return;
-
-		const handleEndFullscreen = () => {
-			setIsWebKitFullscreen(false);
-			positionCues(video);
-		};
-
-		video.addEventListener('webkitendfullscreen', handleEndFullscreen);
-
-		return () =>
-			video.removeEventListener(
-				'webkitendfullscreen',
-				handleEndFullscreen,
-			);
-	}, [positionCues]);
+	}, [setMutedState, uniqueId, sources, renderingTarget, pauseVideo]);
 
 	/**
 	 * Track the first time the video comes into view.
@@ -842,98 +765,27 @@ export const SelfHostedVideo = ({
 	 */
 	useEffect(() => {
 		if (
-			shouldAutoplay === false ||
+			!shouldAutoplay ||
 			(isInView === false && playerState === 'NOT_STARTED')
 		) {
 			setShowPosterImage(true);
 		}
 	}, [shouldAutoplay, isInView, playerState]);
 
-	/**
-	 * Capture fullscreen tracking events across browsers and devices
-	 * We need to support events across:
-	 * 	- Browsers with fullscreen API support
-	 * 	- OSX Safari
-	 * 	- iOS Safari
-	 */
-	useEffect(() => {
-		const video = vidRef.current;
-		const playerContainer = playerContainerRef.current;
-
-		if (!playerContainer && !video) return;
-
-		const reportFullscreenEvent = () => {
-			const event =
-				document.fullscreenElement ||
-				(video &&
-					'webkitDisplayingFullscreen' in video &&
-					Boolean(video.webkitDisplayingFullscreen))
-					? 'enter_fullscreen'
-					: 'exit_fullscreen';
-
-			sendOphanTrackingEvent(event);
-		};
-
-		for (const event of fullscreenChangeEvents) {
-			if (video) {
-				video.addEventListener(event, reportFullscreenEvent);
-			}
-
-			if (playerContainer) {
-				playerContainer.addEventListener(event, reportFullscreenEvent);
-			}
-		}
-
-		return () => {
-			for (const event of fullscreenChangeEvents) {
-				if (video) {
-					video.removeEventListener(event, reportFullscreenEvent);
-				}
-
-				if (playerContainer) {
-					playerContainer.removeEventListener(
-						event,
-						reportFullscreenEvent,
-					);
-				}
-			}
-		};
-	}, [sendOphanTrackingEvent]);
-
-	/**
-	 * When the video starts playing, start a timer to hide the controls after a few seconds.
-	 * If there is any user interaction while the video is playing, restart the timer.
-	 * The controls will fade out after a period of no user interaction.
-	 */
-	useEffect(() => {
-		if (playerState !== 'PLAYING') {
-			return;
-		}
-
-		/**
-		 * We currently use this piece of state `showControls` as a self-resetting trigger.
-		 * It's switched on to show the controls -> it's then immediately switched off to start
-		 * the transition to hide the controls.
-		 */
-		setTimeout(() => {
-			setShowControls(false);
-		}, 0);
-
-		if (showControlsTimer.current !== null) {
-			window.clearTimeout(showControlsTimer.current);
-		}
-
-		showControlsTimer.current = window.setTimeout(() => {
-			setIsShowingControls(false);
-		}, CONTROLS_FADE_DELAY);
-
-		return () => {
-			if (showControlsTimer.current !== null) {
-				window.clearTimeout(showControlsTimer.current);
-				showControlsTimer.current = null;
-			}
-		};
-	}, [showControls, playerState]);
+	const {
+		isFullscreen,
+		isWebKitFullscreen,
+		handleFullscreenClick,
+		fullscreenStyles,
+		globalFullscreenStyles,
+	} = useVideoFullscreen({
+		videoRef: vidRef,
+		playerContainerRef,
+		renderingTarget,
+		sendOphanTrackingEvent,
+		positionCues,
+		showFadeableControlsAndStartTimer,
+	});
 
 	if (adapted) {
 		return FallbackImageComponent;
@@ -974,13 +826,6 @@ export const SelfHostedVideo = ({
 		trackMilestones({ started: true });
 	};
 
-	const showControlsAndStartTimer = () => {
-		if (!videoStyleSettings.hideControlsWhenNotInteractedWith) return;
-
-		setShowControls(true);
-		setIsShowingControls(true);
-	};
-
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
 		if (!videoStyleSettings.isInteractive) {
 			return;
@@ -991,12 +836,8 @@ export const SelfHostedVideo = ({
 		 * show the controls instead of pausing the video.
 		 * Note that hovering with a mouse shows controls on non-touch devices.
 		 */
-		if (
-			videoStyleSettings.hideControlsWhenNotInteractedWith &&
-			playerState === 'PLAYING' &&
-			!isShowingControls
-		) {
-			showControlsAndStartTimer();
+		if (playerState === 'PLAYING' && !isShowingFadeableControls) {
+			showFadeableControlsAndStartTimer();
 			return;
 		}
 
@@ -1013,7 +854,7 @@ export const SelfHostedVideo = ({
 
 		event.stopPropagation(); // Don't pause the video
 
-		showControlsAndStartTimer(); // Show controls when a button is clicked
+		showFadeableControlsAndStartTimer(); // Show controls when a button is clicked
 
 		if (isMuted) {
 			// Emit video play audio event so other components are aware when a video is played with sound
@@ -1021,46 +862,6 @@ export const SelfHostedVideo = ({
 			setMutedState({ value: false });
 		} else {
 			setMutedState({ value: true });
-		}
-	};
-
-	const handleFullscreenClick = (event: React.SyntheticEvent) => {
-		void submitClickComponentEvent(event.currentTarget, renderingTarget);
-		event.stopPropagation(); // Don't pause the video
-
-		showControlsAndStartTimer(); // Show controls when a button is clicked
-
-		const video = vidRef.current;
-		if (!video) {
-			return;
-		}
-
-		if (shouldUseWebkitFullscreen(video)) {
-			/***
-			 * webkit fullscreen methods are not part of the standard HTMLVideoElement
-			 * type definition as they are iOS only.
-			 * We need to extend the type expect these handlers when we're on iOS to keep TS happy.
-			 * @see https://developer.apple.com/documentation/webkitjs/htmlvideoelement/1633500-webkitenterfullscreen
-			 */
-			const webkitVideo = video as HTMLVideoElement & {
-				webkitDisplayingFullscreen: boolean;
-				webkitEnterFullscreen: () => void;
-				webkitExitFullscreen: () => void;
-			};
-
-			if (webkitVideo.webkitDisplayingFullscreen) {
-				setIsWebKitFullscreen(false);
-				return webkitVideo.webkitExitFullscreen();
-			} else {
-				setIsWebKitFullscreen(true);
-				return webkitVideo.webkitEnterFullscreen();
-			}
-		}
-
-		if (document.fullscreenElement) {
-			void document.exitFullscreen();
-		} else if (playerContainerRef.current) {
-			void playerContainerRef.current.requestFullscreen();
 		}
 	};
 
@@ -1085,9 +886,11 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleEnded = () => {
-		trackMilestones({ ended: true });
-		resetMilestones();
-		setPlayerState('ENDED');
+		if (playerState === 'PLAYING') {
+			trackMilestones({ ended: true });
+			resetMilestones();
+			setPlayerState('ENDED');
+		}
 	};
 
 	/**
@@ -1191,7 +994,7 @@ export const SelfHostedVideo = ({
 			return;
 		}
 
-		showControlsAndStartTimer();
+		showFadeableControlsAndStartTimer();
 
 		const percentage = Number(event.currentTarget.value);
 		const time = convertProgressPercentageToCurrentTime(
@@ -1214,7 +1017,7 @@ export const SelfHostedVideo = ({
 	 */
 	if (isPlayable) {
 		if (
-			shouldAutoplay === true &&
+			shouldAutoplay &&
 			isInView === true &&
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
@@ -1224,7 +1027,11 @@ export const SelfHostedVideo = ({
 				setHasPageBecomeActive(false);
 			}
 			void playVideo();
-		} else if (playerState === 'PLAYING' && isInView === false) {
+		} else if (
+			playerState === 'PLAYING' &&
+			isInView === false &&
+			!isFullscreen
+		) {
 			void pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
 		}
 	}
@@ -1248,6 +1055,9 @@ export const SelfHostedVideo = ({
 					restrictHeightOnDesktop && maxHeightStyles,
 				]}
 			>
+				{globalFullscreenStyles && (
+					<Global styles={globalFullscreenStyles} />
+				)}
 				<div
 					ref={playerContainerRef}
 					css={[
@@ -1261,17 +1071,9 @@ export const SelfHostedVideo = ({
 							containerAspectRatioDesktop,
 						),
 						fullscreenStyles,
-						videoStyleSettings.hideControlsWhenNotInteractedWith &&
-							!showControls &&
-							playerState === 'PLAYING' &&
-							hideControlsStyles,
-						videoStyleSettings.hideControlsWhenNotInteractedWith &&
-							showControls &&
-							(playerState === 'PAUSED_BY_USER' ||
-								playerState === 'PAUSED_BY_BROWSER') &&
-							showControlsStyles,
+						fadeableControlsStyles,
 					]}
-					onMouseOver={showControlsAndStartTimer}
+					onMouseMove={showFadeableControlsAndStartTimer}
 				>
 					<SelfHostedVideoPlayer
 						sources={optimisedSources}
@@ -1306,7 +1108,7 @@ export const SelfHostedVideo = ({
 						handleFullscreenClick={handleFullscreenClick}
 						handleEnded={handleEnded}
 						onError={onError}
-						preloadPartialData={shouldAutoplay === true}
+						preloadPartialData={shouldAutoplay}
 						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
 						useLongFormProgressBar={
@@ -1325,12 +1127,13 @@ export const SelfHostedVideo = ({
 							videoStyleSettings.supportsFullscreen
 						}
 						isInteractive={videoStyleSettings.isInteractive}
+						isFullscreen={isFullscreen}
 						isWebKitFullscreen={isWebKitFullscreen}
 						linkTo={linkTo}
 						cardLink={cardLink}
-						isLoopClickThroughTestVariant={
-							isLoopClickThroughTestVariant
-						}
+						isLoopAndInLoopClickTestVariant={Boolean(
+							isLoopClickThroughTestVariant,
+						)}
 					/>
 				</div>
 			</div>

@@ -86,7 +86,7 @@ const worldCup2026Links = [
 		id: 'football/ng-interactive/2026/jun/04/bracketology-predict-a-path-to-world-cup-victory',
 	},
 	{
-		label: 'Golden boot',
+		label: 'Golden Boot',
 		id: 'football/ng-interactive/2026/jun/04/golden-boot-world-cup-2026-top-goalscorers-winner',
 	},
 	{
@@ -304,12 +304,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	});
 
 	const navWeb = css({
-		'&': css(
-			grid.paddedContainer,
-			grid.verticalRules({
-				color: borderColor,
-			}),
-		),
+		'&': css(grid.paddedContainer, grid.outerRules(borderColor)),
 	});
 
 	const largeLinkStyles = css({
@@ -344,10 +339,10 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		position: 'relative',
 		overflowX: 'scroll',
 		scrollbarWidth: 'none',
-		borderTop: slimNav ? undefined : '1px solid',
-		borderBottom: '1px solid',
+		borderTop: '1px solid',
 		borderColor,
 		padding: `0 ${space[3]}px`,
+		marginTop: '-1px', // to overlap the bottom border of the main nav if it's slim, it's not wide enough
 		height: space[10],
 		[from.mobileLandscape]: {
 			padding: `0 ${space[5]}px`,
@@ -438,8 +433,9 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		},
 	});
 
-	const boldSmallLink = css({
+	const selectedLink = css({
 		...textSansBold14Object,
+		pointerEvents: 'none',
 	});
 
 	return (
@@ -471,7 +467,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 									smallLink,
 									primaryLinkStyles,
 									!isApps && primaryLinkHoverStyles,
-									pageId === config.title.id && boldSmallLink,
+									pageId === config.title.id && selectedLink,
 								]}
 							>
 								{config.titleIcon}
@@ -486,7 +482,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 								css={[
 									smallLink,
 									!isApps && smallLinkWeb,
-									pageId === link.id && boldSmallLink,
+									pageId === link.id && selectedLink,
 								]}
 							>
 								{link.label}

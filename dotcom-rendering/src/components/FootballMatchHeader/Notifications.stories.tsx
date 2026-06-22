@@ -7,10 +7,6 @@ import { background } from './colours';
 import { FixtureWeb } from './FootballMatchHeader.stories';
 import { Notifications } from './Notifications';
 
-const mockMatchNotificationsClient: MatchNotificationsClient = {
-	isAvailable: () => Promise.resolve({ isAvailable: true }),
-};
-
 const meta = preview.meta({
 	component: Notifications,
 });
@@ -20,7 +16,10 @@ export const Fixture = meta.story({
 		match: FixtureWeb.input.args.initialData.match,
 		edition: 'UK',
 		notificationsClient: NotificationsToggle.args.notificationsClient,
-		matchNotificationsClient: mockMatchNotificationsClient,
+		matchNotificationsClient:
+			FixtureWeb.input.args.matchNotificationsClient,
+		environmentClient: FixtureWeb.input.args.environmentClient,
+		liveActivitiesClient: FixtureWeb.input.args.liveActivitiesClient,
 	},
 	decorators: [gridContainerDecorator],
 	parameters: {

@@ -283,7 +283,7 @@ export const trails: Array<DCRFrontCard> = [
 	},
 ];
 
-export const newsletterCard: DCRFrontCard = {
+export const newsletterSignupCard: DCRFrontCard = {
 	format: {
 		theme: Pillar.News,
 		design: ArticleDesign.Standard,
@@ -307,6 +307,7 @@ export const newsletterCard: DCRFrontCard = {
 	isBoosted: false,
 	isCrossword: false,
 	isNewsletter: true,
+	isNewsletterSignup: true,
 	showQuotedHeadline: false,
 	showLivePlayable: false,
 	avatarUrl: undefined,

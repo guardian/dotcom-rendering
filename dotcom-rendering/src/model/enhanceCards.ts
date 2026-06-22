@@ -416,6 +416,11 @@ export const enhanceCards = (
 				(type === 'Tone' && id === 'tone/newsletter-tone'),
 		);
 
+		const isNewsletterSignup = tags.some(
+			({ id, type }) =>
+				type === 'Keyword' && id === 'info/newsletter-sign-up',
+		);
+
 		const branding = faciaCard.properties.editionBrandings.find(
 			(editionBranding) => editionBranding.edition.id === editionId,
 		)?.branding;
@@ -481,6 +486,7 @@ export const enhanceCards = (
 			isImmersive: !!faciaCard.display.isImmersive,
 			isCrossword: faciaCard.properties.isCrossword,
 			isNewsletter,
+			isNewsletterSignup,
 			newsletterData: faciaCard.properties.newsletterData,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			// show latest 3 updates from a live blog

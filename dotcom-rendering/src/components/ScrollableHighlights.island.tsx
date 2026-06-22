@@ -13,12 +13,11 @@ import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { useConfig } from './ConfigContext';
 import { HighlightsCard } from './Masthead/HighlightsCard';
-import { HighlightsNewsletterCard } from './Masthead/HighlightsNewsletterCard';
+import { HighlightsNewsletterCard } from './Masthead/Newsletter/HighlightsNewsletterCard';
 
 type Props = {
 	trails: DCRFrontCard[];
 	frontId?: string;
-	isNewsletterSignupCardEnabled: boolean;
 };
 
 const containerStyles = css`
@@ -212,16 +211,12 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-export const ScrollableHighlights = ({
-	trails,
-	frontId,
-	isNewsletterSignupCardEnabled,
-}: Props) => {
+export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 
 	const visibleTrails = trails.filter((trail) => {
-		if (trail.isNewsletter !== true) return true;
-		return isNewsletterSignupCardEnabled && Boolean(trail.newsletterData);
+		if (trail.isNewsletterSignup !== true) return true;
+		return Boolean(trail.newsletterData);
 	});
 	const carouselLength = visibleTrails.length;
 	const imageLoading = 'eager';

@@ -23,6 +23,8 @@ export const CricketScorecardNew = meta.story({
 			{
 				description: 'India first innings',
 				battingTeam: 'India',
+				declared: false,
+				forfeited: false,
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',
@@ -186,6 +188,8 @@ export const CricketScorecardNew = meta.story({
 			{
 				description: 'New Zealand first innings',
 				battingTeam: 'New Zealand',
+				declared: false,
+				forfeited: false,
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',
@@ -336,13 +340,7 @@ export const CricketScorecardNew = meta.story({
 		homeTeam: {
 			paID: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
 			name: 'India',
-		},
-		awayTeam: {
-			paID: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
-			name: 'New Zealand',
-		},
-		lineups: {
-			homeTeam: [
+			lineup: [
 				'Rohit Sharma',
 				'Shubman Gill',
 				'Virat Kohli',
@@ -355,7 +353,11 @@ export const CricketScorecardNew = meta.story({
 				'Kuldeep Yadav',
 				'Varun Chakaravarthy',
 			],
-			awayTeam: [
+		},
+		awayTeam: {
+			paID: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+			name: 'New Zealand',
+			lineup: [
 				'Rachin Ravindra',
 				'Will Young',
 				'Kane Williamson',

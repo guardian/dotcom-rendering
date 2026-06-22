@@ -124,8 +124,8 @@ export const FootballMiniMatchStats = (props: Props) => {
 					),
 				}}
 			>
-				<span css={buttonTextCss}>More stats, line-ups and tables</span>
-				<span css={buttonTextShortCss}>Stats and line ups</span>
+				<span css={buttonTextCss}>More match info</span>
+				<span css={buttonTextShortCss}>More match info</span>
 			</LinkButton>
 		</div>
 	);

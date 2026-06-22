@@ -47,14 +47,16 @@ export type ArticleFields = {
 	serverTime?: number | undefined;
 };
 
+export type GalleryDesign = ArticleDesign.Gallery | ArticleDesign.HostedGallery;
+
 export type Gallery = ArticleFields & {
-	design: ArticleDesign.Gallery;
+	design: GalleryDesign;
 	bodyElements: (ImageBlockElement | AdPlaceholderBlockElement)[];
 	mainMedia?: ImageBlockElement;
 };
 
 export type OtherArticles = ArticleFields & {
-	design: Exclude<ArticleDesign, ArticleDesign.Gallery>;
+	design: Exclude<ArticleDesign, GalleryDesign>;
 };
 
 export type Article = Gallery | OtherArticles;
@@ -120,13 +122,17 @@ export const enhanceArticleType = (
 		data.main,
 	)(data.mainMediaElements);
 
+	const isGalleryPage = (design: ArticleDesign): design is GalleryDesign =>
+		design === ArticleDesign.Gallery ||
+		design === ArticleDesign.HostedGallery;
+
 	const storyPackage = parseStoryPackage(
 		data.storyPackage,
 		format.design === ArticleDesign.Gallery,
 	);
 
-	if (format.design === ArticleDesign.Gallery) {
-		const design = ArticleDesign.Gallery;
+	if (isGalleryPage(format.design)) {
+		const { design } = format;
 
 		return {
 			frontendData: {
