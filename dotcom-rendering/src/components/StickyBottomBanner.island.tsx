@@ -371,13 +371,18 @@ export const StickyBottomBanner = ({
 
 		const hasForceBannerParam =
 			window.location.search.includes('force-banner');
+		// rrcp=1 is appended by the RRCP tool's "web preview" button alongside
+		// force-banner. It skips CMP and sign-in gate so the banner is always visible.
+		const isRRCPPreview = window.location.search.includes('rrcp=1');
 		const hasForceBrazeMessageParam = window.location.hash.includes(
 			'force-braze-message',
 		);
 
 		let candidates: SlotConfig['candidates'];
 
-		if (hasForceBannerParam) {
+		if (hasForceBannerParam && isRRCPPreview) {
+			candidates = [readerRevenue];
+		} else if (hasForceBannerParam) {
 			candidates = [CMP, readerRevenue];
 		} else if (hasForceBrazeMessageParam) {
 			candidates = [CMP, brazeBannersSystem, brazeBanner];
