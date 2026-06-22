@@ -107,7 +107,6 @@ type Props = {
 	shouldHideAds: boolean;
 	contentType?: string;
 	contentLayout?: string;
-	idApiUrl?: string;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -179,7 +178,6 @@ export const renderElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
-	idApiUrl,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -589,7 +587,6 @@ export const renderElement = ({
 			const newsletter = element.newsletter;
 			const emailSignUpProps = {
 				index,
-				listId: newsletter.listId,
 				identityName: newsletter.identityName,
 				category: newsletter.category,
 				description: newsletter.description,
@@ -598,9 +595,6 @@ export const renderElement = ({
 				theme: newsletter.theme,
 				illustrationSquare: newsletter.illustrationSquare,
 				exampleUrl: newsletter.exampleUrl,
-				idApiUrl: idApiUrl ?? '',
-				hideNewsletterSignupComponentForSubscribers:
-					!!switches.hideNewsletterSignupComponentForSubscribers,
 			};
 			if (isListElement || isTimeline) {
 				return null;
@@ -1052,7 +1046,6 @@ export const RenderArticleElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
-	idApiUrl,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -1081,7 +1074,6 @@ export const RenderArticleElement = ({
 		shouldHideAds,
 		contentType,
 		contentLayout,
-		idApiUrl,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

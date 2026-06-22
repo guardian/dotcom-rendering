@@ -147,10 +147,6 @@ const HighlightsNewsletterSignupModalContent = ({
 					componentId={NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(
 						newsletter.identityName,
 					)}
-					abTest={{
-						name: 'highlights-newsletter-card',
-						variant: 'highlightsCard',
-					}}
 				/>
 			</NewsletterSignupCard>
 		</FormatBoundary>
