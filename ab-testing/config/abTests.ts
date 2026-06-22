@@ -82,19 +82,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "newsletters-signup-card-country-illustration",
-		description:
-			"Compare the existing SecureSignup (control) against a slightly modified version of the control (variantNewField) and the new NewsletterSignupCard design (variantIllustratedCard)",
-		owners: ["newsletters.dev@guardian.co.uk"],
-		expirationDate: "2026-07-01",
-		type: "client",
-		status: "ON",
-		audienceSize: 1,
-		audienceSpace: "B",
-		groups: ["control", "variantNewField", "variantIllustratedCard"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "commercial-prebid-price-floor-holdback",
 		description:
 			"This test will be the 5% holdback group for the prebid price floor",
@@ -157,19 +144,6 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
-		name: "newsletters-highlights-signup-card",
-		description:
-			"Test a new newsletter signup card design in the scrollable/highlights container. Only users in the enabled group see the newsletter card; for all other users, newsletter trails are hidden during this rollout phase.",
-		owners: ["newsletters.dev@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2026-12-31",
-		type: "server",
-		audienceSize: 0,
-		audienceSpace: "C",
-		groups: ["enable"],
 		shouldForceMetricsCollection: true,
 	},
 	{
