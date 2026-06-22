@@ -5,7 +5,10 @@ import { grid } from '../grid';
 import { type ArticleFormat } from '../lib/articleFormat';
 import { getImage } from '../lib/image';
 import { palette } from '../palette';
-import { type ImageBlockElement } from '../types/content';
+import type {
+	AdPlaceholderBlockElement,
+	ImageBlockElement,
+} from '../types/content';
 import { type RenderingTarget } from '../types/renderingTarget';
 import { AppsLightboxImage } from './AppsLightboxImage.island';
 import { GalleryCaption } from './GalleryCaption';
@@ -19,7 +22,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	renderingTarget: RenderingTarget;
-	imagesLength?: number;
+	images?: (ImageBlockElement | AdPlaceholderBlockElement)[];
 };
 
 const styles = css`
@@ -71,7 +74,7 @@ export const GalleryImage = ({
 	pageId,
 	webTitle,
 	renderingTarget,
-	imagesLength,
+	images,
 }: Props) => {
 	const asset = getImage(image.media.allImages);
 
@@ -85,6 +88,8 @@ export const GalleryImage = ({
 	if (isNaN(width) || isNaN(height)) {
 		return null;
 	}
+
+	const imageIndex = images?.indexOf(image);
 
 	return (
 		<figure css={styles}>
@@ -140,7 +145,8 @@ export const GalleryImage = ({
 				pageId={pageId}
 				webTitle={webTitle}
 				position={image.position}
-				imagesLength={imagesLength}
+				imagesLength={images?.length}
+				imageIndex={imageIndex}
 			/>
 		</figure>
 	);

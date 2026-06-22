@@ -23,6 +23,7 @@ type Props = {
 	/** Position of the image in the gallery used to build share fragment */
 	position?: number;
 	imagesLength?: number;
+	imageIndex?: number;
 };
 
 const styles = css`
@@ -54,6 +55,7 @@ export const GalleryCaption = ({
 	webTitle,
 	position,
 	imagesLength,
+	imageIndex,
 }: Props) => {
 	const emptyCaption = captionHtml === undefined || captionHtml.trim() === '';
 	const hideCredit =
@@ -67,7 +69,7 @@ export const GalleryCaption = ({
 	return (
 		<figcaption css={styles}>
 			{isHostedGallery &&
-			typeof position === 'number' &&
+			imageIndex !== undefined &&
 			imagesLength !== undefined ? (
 				<small
 					css={css`
@@ -76,8 +78,7 @@ export const GalleryCaption = ({
 						padding: ${space[2]}px 0 ${space[1]}px;
 					`}
 				>
-					{/* Gallery caption hashes use a 1-offset position (first image maps to "img-2"), so subtract 1 to show the expected hosted gallery index. */}
-					{position - 1}&#47;{imagesLength}
+					{imageIndex + 1}&#47;{imagesLength}
 				</small>
 			) : null}
 			{emptyCaption ? null : <CaptionText html={captionHtml} />}

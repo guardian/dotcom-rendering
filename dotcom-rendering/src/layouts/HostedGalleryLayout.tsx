@@ -222,7 +222,7 @@ const GalleryBody = (props: {
 						webTitle={props.webTitle}
 						renderingTarget={props.renderingTarget}
 						key={element.elementId}
-						imagesLength={props.bodyElements.length}
+						images={props.bodyElements}
 					/>
 				);
 			} else {
