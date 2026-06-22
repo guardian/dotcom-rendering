@@ -1,0 +1,51 @@
+name: Production container
+
+# Run this workflow when...
+on:
+  # ...manually invoked
+  workflow_call:
+
+  # ...a pull request is opened
+  pull_request:
+
+  # ...`main` changes, e.g. when a PR is merged
+  push:
+    branches:
+      - main
+
+jobs:
+  facts:
+    runs-on: ubuntu-slim
+    permissions: {} # This job doesn't need any permissions. Explicitly set it to an empty object to avoid inheriting any default permissions of the workflow.
+    outputs:
+      branchName: ${{ steps.get-build-facts.outputs.branchName }}
+      buildNumber: ${{ steps.get-build-facts.outputs.buildNumber }}
+      commitSha: ${{ steps.get-build-facts.outputs.commitSha }}
+    steps:
+      - uses: guardian/actions-build-facts@v0.0.1
+        id: get-build-facts
+
+  build-production-image:
+    runs-on: ubuntu-latest
+    needs:
+      - facts
+    permissions:
+      contents: read
+      id-token: write # Required to exchange for AWS credentials using OIDC
+    outputs:
+      imageDigest: ${{ steps.publish-image.outputs.imageDigest }}
+    steps:
+      - uses: actions/checkout@v6.0.2
+      - name: Add commit hash for PRout
+        working-directory: dotcom-rendering
+        run: echo 'export const GIT_COMMIT_HASH = "${{ needs.facts.outputs.commitSha }}";' > src/server/prout.ts
+      - name: Build image
+        run: docker buildx build -f Containerfile.production -t ${{ github.repository }}:latest .
+      - name: Publish Image
+        uses: guardian/actions-publish-image@v0.0.2
+        id: publish-image
+        with:
+          roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+          branchName: ${{ needs.facts.outputs.branchName }}
+          buildNumber: ${{ needs.facts.outputs.buildNumber }}
+          commitSha: ${{ needs.facts.outputs.commitSha }}
