@@ -72,6 +72,9 @@ export const EmailSignUpWrapper = ({
 	);
 	const isSignedIn = useIsSignedIn();
 
+	const componentId =
+		NEWSLETTER_SIGNUP_COMPONENT_ID.inArticleSignupForm(identityName);
+
 	const viewFiredRef = useRef(false);
 
 	useEffect(() => {
@@ -92,16 +95,13 @@ export const EmailSignUpWrapper = ({
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName,
-			componentId:
-				NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
-					identityName,
-				),
+			componentId,
 			renderingTarget,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
 			},
 		});
-	}, [identityName, isSubscribed, renderingTarget]);
+	}, [componentId, identityName, isSubscribed, renderingTarget]);
 
 	if (isSubscribed === undefined) {
 		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
@@ -132,6 +132,7 @@ export const EmailSignUpWrapper = ({
 							frequency={frequency}
 							previewAction={previewAction}
 							isAlreadySubscribed={isSubscribed}
+							componentId={componentId}
 						/>
 					</Island>
 				)}

@@ -119,7 +119,7 @@ describe('EmailSignUpWrapper', () => {
 				expect.objectContaining({
 					component: {
 						componentType: 'NEWSLETTER_SUBSCRIPTION',
-						id: NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
+						id: NEWSLETTER_SIGNUP_COMPONENT_ID.inArticleSignupForm(
 							'the-recap',
 						),
 					},
