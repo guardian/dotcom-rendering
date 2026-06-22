@@ -129,8 +129,8 @@ describe('sendNewsletterSignupEvent', () => {
 
 	it('passes the abTest object to the top-level abTest field (not encoded in value)', () => {
 		const abTest = {
-			name: 'highlights-newsletter-card',
-			variant: 'highlightsCard',
+			name: 'ab-test-name',
+			variant: 'ab-test-variant',
 		};
 
 		sendNewsletterSignupEvent({
