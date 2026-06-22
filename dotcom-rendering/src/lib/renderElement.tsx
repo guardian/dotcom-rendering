@@ -107,7 +107,6 @@ type Props = {
 	shouldHideAds: boolean;
 	contentType?: string;
 	contentLayout?: string;
-	/** @deprecated No longer forwarded to renderElement — retained only so call sites do not need updating. */
 	idApiUrl?: string;
 };
 
@@ -180,6 +179,7 @@ export const renderElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	idApiUrl,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -589,6 +589,7 @@ export const renderElement = ({
 			const newsletter = element.newsletter;
 			const emailSignUpProps = {
 				index,
+				listId: newsletter.listId,
 				identityName: newsletter.identityName,
 				category: newsletter.category,
 				description: newsletter.description,
@@ -597,6 +598,7 @@ export const renderElement = ({
 				theme: newsletter.theme,
 				illustrationSquare: newsletter.illustrationSquare,
 				exampleUrl: newsletter.exampleUrl,
+				idApiUrl: idApiUrl ?? '',
 			};
 			if (isListElement || isTimeline) {
 				return null;
@@ -1048,7 +1050,7 @@ export const RenderArticleElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
-	idApiUrl: _idApiUrl, // accepted for backwards compatibility but no longer used
+	idApiUrl,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -1077,6 +1079,7 @@ export const RenderArticleElement = ({
 		shouldHideAds,
 		contentType,
 		contentLayout,
+		idApiUrl,
 	});
 
 	const needsFigure = !bareElements.has(element._type);
