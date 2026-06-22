@@ -183,16 +183,16 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "feast-recipe-nudge",
+		name: "feast-recipe-nudge-v2",
 		description:
 			"Measures the impact of showing the Feast contextual nudge on recipe article pages",
 		owners: ["feast@theguardian.com"],
 		status: "ON",
 		expirationDate: "2027-01-01",
 		type: "client",
-		audienceSize: 50 / 100,
-		audienceSpace: "A",
-		groups: ["variant-1"],
+		audienceSize: 1,
+		audienceSpace: "B",
+		groups: ["control", "variant-1"],
 		shouldForceMetricsCollection: false,
 	},
 	{
