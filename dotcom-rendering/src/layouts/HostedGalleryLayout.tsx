@@ -80,10 +80,21 @@ const metaStyles = css`
 
 const bttPosition = css`
 	background-color: ${palette('--article-inner-background')};
-	padding: 0 5px;
+	padding: ${space[5]}px ${space[3]}px ${space[4]}px;
 	position: absolute;
-	bottom: ${space[5]}px;
-	right: ${space[5]}px;
+	bottom: -21px;
+	right: 0;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+
+	${from.tablet} {
+		padding: ${space[5]}px ${space[8]}px ${space[4]}px;
+	}
+
+	${from.desktop} {
+		padding: ${space[5]}px ${space[5]}px ${space[4]}px;
+	}
 `;
 
 const iconHeight = '42px';
@@ -177,6 +188,7 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 			<main
 				css={{
 					backgroundColor: palette('--article-background'),
+					position: 'relative',
 				}}
 			>
 				<header css={headerStyles}>
