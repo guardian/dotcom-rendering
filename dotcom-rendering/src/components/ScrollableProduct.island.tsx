@@ -7,7 +7,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
-import type { EnhancedProductSummaryMap } from '../types/content';
+import type { SummaryProduct } from '../types/content';
 import { CarouselCount } from './CarouselCount';
 import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 import { ProductCarouselCard } from './ProductCarouselCard';
@@ -40,7 +40,7 @@ export type FixedSlideWidth = {
 
 type Props = {
 	title: string;
-	products: EnhancedProductSummaryMap[];
+	products: SummaryProduct[];
 	format: ArticleFormat;
 };
 
@@ -300,25 +300,23 @@ export const ScrollableProduct = ({ title, products, format }: Props) => {
 					css={carouselStyles}
 					data-heatphan-type="carousel"
 				>
-					{products.map(
-						(product: EnhancedProductSummaryMap, index: number) => (
-							<li
-								key={
-									product.productBlock.productCtas[0]?.url ??
-									product.productBlock.elementId
-								}
-								css={[subgridStyles, leftBorderStyles]}
-								data-component={`at-a-glance-carousel-card-${
-									index + 1
-								}`}
-							>
-								<ProductCarouselCard
-									product={product}
-									format={format}
-								/>
-							</li>
-						),
-					)}
+					{products.map((product: SummaryProduct, index: number) => (
+						<li
+							key={
+								product.productBlock.productCtas[0]?.url ??
+								product.productBlock.elementId
+							}
+							css={[subgridStyles, leftBorderStyles]}
+							data-component={`at-a-glance-carousel-card-${
+								index + 1
+							}`}
+						>
+							<ProductCarouselCard
+								product={product}
+								format={format}
+							/>
+						</li>
+					))}
 				</ul>
 				<CarouselNavigationButtons
 					previousButtonEnabled={previousButtonEnabled}

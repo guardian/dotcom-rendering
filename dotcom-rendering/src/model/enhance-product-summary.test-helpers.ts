@@ -3,11 +3,11 @@ import type {
 	FEElement,
 	ProductBlockElement,
 	ProductSummaryElement,
-	ProductSummaryMap,
+	SummaryProductRef,
 } from '../types/content';
 
 export const productSummaryElement = (
-	summaryProducts: ProductSummaryMap[],
+	summaryProducts: SummaryProductRef[],
 ): ProductSummaryElement =>
 	({
 		_type: 'model.dotcomrendering.pageElements.ProductSummaryElement',

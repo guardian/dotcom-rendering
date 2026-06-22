@@ -12,12 +12,12 @@ import { Link } from '@guardian/source/react-components';
 import { getProductLinkLabel } from '../lib/affiliateLinksUtils';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { EnhancedProductSummaryMap } from '../types/content';
+import type { SummaryProduct } from '../types/content';
 import { ProductLinkButton } from './Button/ProductLinkButton';
 import { ProductCardImage } from './ProductCardImage';
 
 export type ProductCarouselCardProps = {
-	product: EnhancedProductSummaryMap;
+	product: SummaryProduct;
 	format: ArticleFormat;
 };
 

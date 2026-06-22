@@ -1,7 +1,7 @@
 import type { ArticleFormat } from '../lib/articleFormat';
 import type {
-	EnhancedProductSummaryMap,
 	ProductSummaryDisplayType,
+	SummaryProduct,
 } from '../types/content';
 import { Island } from './Island';
 import { ProductCtaList } from './ProductCtaList';
@@ -15,7 +15,7 @@ export const ProductSummary = ({
 	displayType,
 }: {
 	title: string;
-	products: EnhancedProductSummaryMap[];
+	products: SummaryProduct[];
 	format: ArticleFormat;
 	displayType: ProductSummaryDisplayType;
 }) => {

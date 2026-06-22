@@ -7,7 +7,7 @@ import {
 import { useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { EnhancedProductSummaryMap } from '../types/content';
+import type { SummaryProduct } from '../types/content';
 import { HorizontalSummaryProductCard } from './HorizontalSummaryProductCard';
 import { Subheading } from './Subheading';
 
@@ -35,7 +35,7 @@ export const StackedProducts = ({
 	format,
 	showAllProducts,
 }: {
-	products: EnhancedProductSummaryMap[];
+	products: SummaryProduct[];
 	title: string;
 	format: ArticleFormat;
 	showAllProducts: boolean;
@@ -78,7 +78,7 @@ export const StackedProducts = ({
 					`,
 				]}
 			>
-				{products.map((product: EnhancedProductSummaryMap, index) => (
+				{products.map((product: SummaryProduct, index) => (
 					<div
 						key={
 							product.productBlock.productCtas[0]?.url ??

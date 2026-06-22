@@ -1,14 +1,14 @@
 import type {
-	EnhancedProductSummaryMap,
 	FEElement,
-	ProductSummaryMap,
+	SummaryProduct,
+	SummaryProductRef,
 } from '../types/content';
 
 const getSummaryProducts = (
 	pageElements: FEElement[],
-	summaryProducts: ProductSummaryMap[],
-): EnhancedProductSummaryMap[] =>
-	pageElements.reduce<EnhancedProductSummaryMap[]>((acc, element) => {
+	summaryProducts: SummaryProductRef[],
+): SummaryProduct[] =>
+	pageElements.reduce<SummaryProduct[]>((acc, element) => {
 		if (
 			element._type !==
 			'model.dotcomrendering.pageElements.ProductBlockElement'

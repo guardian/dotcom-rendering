@@ -4275,7 +4275,7 @@
                 "products": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/ProductSummaryMap"
+                        "$ref": "#/definitions/SummaryProductRef"
                     }
                 },
                 "displayType": {
@@ -4292,7 +4292,7 @@
                 "title"
             ]
         },
-        "ProductSummaryMap": {
+        "SummaryProductRef": {
             "type": "object",
             "properties": {
                 "productId": {
@@ -4326,7 +4326,7 @@
                 "products": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/EnhancedProductSummaryMap"
+                        "$ref": "#/definitions/SummaryProduct"
                     }
                 },
                 "displayType": {
@@ -4343,7 +4343,7 @@
                 "title"
             ]
         },
-        "EnhancedProductSummaryMap": {
+        "SummaryProduct": {
             "type": "object",
             "properties": {
                 "productBlock": {

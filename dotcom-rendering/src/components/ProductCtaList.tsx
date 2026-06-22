@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { article17, palette, remSpace } from '@guardian/source/foundations';
 import { getProductLinkLabel } from '../lib/affiliateLinksUtils';
 import type { ArticleFormat } from '../lib/articleFormat';
-import type { EnhancedProductSummaryMap } from '../types/content';
+import type { SummaryProduct } from '../types/content';
 import { ProductLinkButton } from './Button/ProductLinkButton';
 import { Subheading } from './Subheading';
 
@@ -39,7 +39,7 @@ const listStyles = css`
 	}
 `;
 
-const ListItem = ({ product }: { product: EnhancedProductSummaryMap }) => {
+const ListItem = ({ product }: { product: SummaryProduct }) => {
 	const { productBlock, ctaIndex } = product;
 	const cta = productBlock.productCtas[ctaIndex];
 	return (
@@ -66,7 +66,7 @@ export const ProductCtaList = ({
 	format,
 	title,
 }: {
-	products: EnhancedProductSummaryMap[];
+	products: SummaryProduct[];
 	format: ArticleFormat;
 	title: string;
 }) => {

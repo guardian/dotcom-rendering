@@ -1,7 +1,7 @@
 import { extractHeadingText } from '../../src/model/enhanceProductElement';
 import type {
-	EnhancedProductSummaryMap,
 	ProductBlockElement,
+	SummaryProduct,
 } from '../../src/types/content';
 import { productImage } from './productImage';
 
@@ -533,7 +533,7 @@ const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 	},
 ];
 
-export const exampleSummaryProducts: EnhancedProductSummaryMap[] =
+export const exampleSummaryProducts: SummaryProduct[] =
 	exampleAtAGlanceProductArray.map((p) => ({
 		productBlock: p,
 		ctaIndex: 0,

@@ -525,26 +525,26 @@ export interface ProductBlockElement {
 	lowestPrice?: string;
 }
 
-export interface ProductSummaryMap {
+export interface SummaryProductRef {
 	productId: string;
 	ctaIndex: number;
 }
 
-export interface EnhancedProductSummaryMap {
+export interface SummaryProduct {
 	productBlock: ProductBlockElement;
 	ctaIndex: number;
 }
 
 export interface ProductSummaryElement {
 	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
-	products: ProductSummaryMap[];
+	products: SummaryProductRef[];
 	displayType: ProductSummaryDisplayType;
 	title: string;
 }
 
 export interface EnhancedProductSummaryElement {
 	_type: 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement';
-	products: EnhancedProductSummaryMap[];
+	products: SummaryProduct[];
 	displayType: ProductSummaryDisplayType;
 	title: string;
 }
