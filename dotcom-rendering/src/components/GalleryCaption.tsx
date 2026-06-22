@@ -76,6 +76,7 @@ export const GalleryCaption = ({
 						padding: ${space[2]}px 0 ${space[1]}px;
 					`}
 				>
+					{/* Gallery caption hashes use a 1-offset position (first image maps to "img-2"), so subtract 1 to show the expected hosted gallery index. */}
 					{position - 1}&#47;{imagesLength}
 				</small>
 			) : null}
