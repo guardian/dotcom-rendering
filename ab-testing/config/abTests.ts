@@ -82,19 +82,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "newsletters-signup-card-country-illustration",
-		description:
-			"Compare the existing SecureSignup (control) against a slightly modified version of the control (variantNewField) and the new NewsletterSignupCard design (variantIllustratedCard)",
-		owners: ["newsletters.dev@guardian.co.uk"],
-		expirationDate: "2026-07-01",
-		type: "client",
-		status: "ON",
-		audienceSize: 1,
-		audienceSpace: "B",
-		groups: ["variantIllustratedCard"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "commercial-prebid-price-floor-holdback",
 		description:
 			"This test will be the 5% holdback group for the prebid price floor",
@@ -165,6 +152,17 @@ const ABTests: ABTest[] = [
 			"Test impact of click to article via loop videos on fronts",
 		owners: ["fronts.and.curation@guardian.co.uk"],
 		status: "ON",
+		expirationDate: "2026-07-19",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "fronts-and-curation-click-to-play",
+		description: "Test click to play longform videos vs autoplay",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		status: "OFF",
 		expirationDate: "2026-07-19",
 		type: "server",
 		audienceSize: 0 / 100,

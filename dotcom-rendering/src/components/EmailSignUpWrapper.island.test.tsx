@@ -83,9 +83,7 @@ const renderWrapper = (props = {}, renderingTarget: 'Web' | 'Apps' = 'Web') =>
 		</ConfigProvider>,
 	);
 
-const mockAbTests = (
-	variant: 'control' | 'variantIllustratedCard' | 'variantNewField',
-) => {
+const mockAbTests = (variant: 'control' | 'variantIllustratedCard') => {
 	(useAB as jest.Mock).mockReturnValue({
 		getParticipations: () => ({
 			[AB_TEST_NAME]: variant,
@@ -149,12 +147,14 @@ describe('EmailSignUpWrapper', () => {
 			).not.toBeInTheDocument();
 		});
 
-		it('renders the legacy EmailSignup for users in the control group', () => {
+		it('renders NewsletterSignupCardContainer for all web users regardless of AB participation', () => {
 			mockAbTests('control');
 			renderWrapper({ showNewNewsletterSignupCard: true });
-			expect(screen.getByTestId('email-signup')).toBeInTheDocument();
 			expect(
-				screen.queryByTestId('newsletter-signup-card-container'),
+				screen.getByTestId('newsletter-signup-card-container'),
+			).toBeInTheDocument();
+			expect(
+				screen.queryByTestId('email-signup'),
 			).not.toBeInTheDocument();
 		});
 
@@ -169,16 +169,6 @@ describe('EmailSignUpWrapper', () => {
 			).toBeInTheDocument();
 			expect(
 				screen.queryByTestId('email-signup'),
-			).not.toBeInTheDocument();
-		});
-
-		it('renders the legacy EmailSignup for users in the variantNewField group', () => {
-			mockAbTests('variantNewField');
-			renderWrapper({ showNewNewsletterSignupCard: true });
-			expect(screen.getByTestId('email-signup')).toBeInTheDocument();
-			expect(screen.getByTestId('secure-signup')).toBeInTheDocument();
-			expect(
-				screen.queryByTestId('newsletter-signup-card-container'),
 			).not.toBeInTheDocument();
 		});
 
@@ -219,7 +209,7 @@ describe('EmailSignUpWrapper', () => {
 	});
 
 	describe('VIEW tracking', () => {
-		it('fires a VIEW event with the correct control component id and ab metadata', () => {
+		it('fires a VIEW event with the variantIllustratedCard component id for all web users', () => {
 			mockAbTests('control');
 			renderWrapper({ showNewNewsletterSignupCard: true });
 
@@ -227,10 +217,13 @@ describe('EmailSignUpWrapper', () => {
 				expect.objectContaining({
 					component: {
 						componentType: 'NEWSLETTER_SUBSCRIPTION',
-						id: 'AR SecureSignup the-recap',
+						id: 'AR NewsletterSignupForm the-recap - variantIllustratedCard',
 					},
 					action: 'VIEW',
-					abTest: { name: AB_TEST_NAME, variant: 'control' },
+					abTest: {
+						name: AB_TEST_NAME,
+						variant: 'variantIllustratedCard',
+					},
 				}),
 				'Web',
 			);
@@ -250,26 +243,6 @@ describe('EmailSignUpWrapper', () => {
 					abTest: {
 						name: AB_TEST_NAME,
 						variant: 'variantIllustratedCard',
-					},
-				}),
-				'Web',
-			);
-		});
-
-		it('fires a VIEW event with the correct variantNewField component id and ab metadata', () => {
-			mockAbTests('variantNewField');
-			renderWrapper({ showNewNewsletterSignupCard: true });
-
-			expect(submitComponentEvent).toHaveBeenCalledWith(
-				expect.objectContaining({
-					component: {
-						componentType: 'NEWSLETTER_SUBSCRIPTION',
-						id: 'AR SecureSignup the-recap - variantNewField',
-					},
-					action: 'VIEW',
-					abTest: {
-						name: AB_TEST_NAME,
-						variant: 'variantNewField',
 					},
 				}),
 				'Web',
