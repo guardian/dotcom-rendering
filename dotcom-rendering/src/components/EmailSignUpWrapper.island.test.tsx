@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { NEWSLETTER_SIGNUP_COMPONENT_ID } from '../lib/newsletterSignupTracking';
 import { useIsSignedIn } from '../lib/useAuthStatus';
+import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { ConfigProvider } from './ConfigContext';
 import { EmailSignUpWrapper } from './EmailSignUpWrapper.island';
 
@@ -12,6 +13,10 @@ jest.mock('../client/ophan/ophan', () => ({
 
 jest.mock('../lib/useAuthStatus', () => ({
 	useIsSignedIn: jest.fn(),
+}));
+
+jest.mock('../lib/useNewsletterSubscription', () => ({
+	useNewsletterSubscription: jest.fn(),
 }));
 
 // Avoid rendering real island children in unit tests
@@ -39,11 +44,13 @@ jest.mock('./NewsletterSignupCardContainer', () => ({
 
 const defaultProps = {
 	index: 0,
+	listId: 4147,
 	identityName: 'the-recap',
 	name: 'The Recap',
 	description: 'A weekly sports roundup',
 	frequency: 'Weekly',
 	theme: 'sport',
+	idApiUrl: 'https://idapi.theguardian.com',
 };
 
 const renderWrapper = (props = {}, renderingTarget: 'Web' | 'Apps' = 'Web') =>
@@ -64,6 +71,7 @@ describe('EmailSignUpWrapper', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
 		(useIsSignedIn as jest.Mock).mockReturnValue(false);
+		(useNewsletterSubscription as jest.Mock).mockReturnValue(false);
 	});
 
 	describe('rendering', () => {
@@ -79,6 +87,14 @@ describe('EmailSignUpWrapper', () => {
 
 		it('renders the NewsletterSignupCardContainer on Apps as well as Web', () => {
 			renderWrapper({}, 'Apps');
+			expect(
+				screen.getByTestId('newsletter-signup-card-container'),
+			).toBeInTheDocument();
+		});
+
+		it('still renders the card when the user is already subscribed', () => {
+			(useNewsletterSubscription as jest.Mock).mockReturnValue(true);
+			renderWrapper();
 			expect(
 				screen.getByTestId('newsletter-signup-card-container'),
 			).toBeInTheDocument();
@@ -107,6 +123,20 @@ describe('EmailSignUpWrapper', () => {
 			renderWrapper();
 
 			expect(submitComponentEvent).toHaveBeenCalledTimes(1);
+		});
+
+		it('does not fire a VIEW event while subscription status is loading', () => {
+			(useNewsletterSubscription as jest.Mock).mockReturnValue(undefined);
+			renderWrapper();
+
+			expect(submitComponentEvent).not.toHaveBeenCalled();
+		});
+
+		it('does not fire a VIEW event when the user is already subscribed', () => {
+			(useNewsletterSubscription as jest.Mock).mockReturnValue(true);
+			renderWrapper();
+
+			expect(submitComponentEvent).not.toHaveBeenCalled();
 		});
 	});
 });
