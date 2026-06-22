@@ -28,18 +28,6 @@ const defaultArgs = {
 		'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
 } satisfies Story['args'];
 
-/** Subscription status is still resolving — form renders without subscribed state yet. */
-export const Loading = meta.story({
-	args: { ...defaultArgs },
-	beforeEach() {
-		mocked(useNewsletterSubscription).mockReturnValue(undefined);
-		mocked(useIsSignedIn).mockReturnValue(false);
-		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
-			Promise.resolve(null),
-		);
-	},
-});
-
 export const SignedOut = meta.story({
 	args: { ...defaultArgs },
 	beforeEach() {
