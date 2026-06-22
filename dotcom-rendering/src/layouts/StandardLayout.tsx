@@ -418,6 +418,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									mainMediaElements={
 										article.mainMediaElements
 									}
+									webPublicationDate={
+										article.webPublicationDate
+									}
 								/>
 								{!!article.affiliateLinksDisclaimer && (
 									<AffiliateDisclaimer />
