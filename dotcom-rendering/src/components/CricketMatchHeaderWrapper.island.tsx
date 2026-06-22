@@ -1,11 +1,7 @@
 import type { CricketMatchHeaderProps } from './CricketMatchHeader/CricketMatchHeader';
 import { CricketMatchHeader } from './CricketMatchHeader/CricketMatchHeader';
 
-export const CricketMatchHeaderWrapper = (
-	props: Omit<CricketMatchHeaderProps, 'tabContentElement'> & {
-		tabContentId: string;
-	},
-) => {
+export const CricketMatchHeaderWrapper = (props: CricketMatchHeaderProps) => {
 	return (
 		<CricketMatchHeader
 			{...props}
