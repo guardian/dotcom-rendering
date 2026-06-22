@@ -82,19 +82,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "newsletters-signup-card-country-illustration",
-		description:
-			"Compare the existing SecureSignup (control) against a slightly modified version of the control (variantNewField) and the new NewsletterSignupCard design (variantIllustratedCard)",
-		owners: ["newsletters.dev@guardian.co.uk"],
-		expirationDate: "2026-07-01",
-		type: "client",
-		status: "ON",
-		audienceSize: 1,
-		audienceSpace: "B",
-		groups: ["variantIllustratedCard"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "commercial-prebid-price-floor-holdback",
 		description:
 			"This test will be the 5% holdback group for the prebid price floor",

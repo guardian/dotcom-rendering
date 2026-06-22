@@ -78,18 +78,8 @@ export const EmailSignUpWrapper = ({
 	const abTests = useAB();
 	const abResolved = abTests !== undefined;
 
-	const getVariantName = () => {
-		const currentUserVariant = abTests?.getParticipations()[AB_TEST_NAME];
-		if (
-			currentUserVariant &&
-			['variantNewField', 'variantIllustratedCard'].includes(
-				currentUserVariant,
-			)
-		) {
-			return currentUserVariant;
-		}
-		return 'control';
-	};
+	const getVariantName = () => 'variantIllustratedCard';
+
 	const abVariant = abTestEnabled ? getVariantName() : 'control';
 
 	const isSubscribed = useNewsletterSubscription(
