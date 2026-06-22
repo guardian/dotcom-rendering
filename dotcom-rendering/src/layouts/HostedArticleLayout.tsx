@@ -173,13 +173,14 @@ const sideBorders = css`
  * @param accentColor - The accentColor to use for the hosted content in light mode.
  * @returns A CSS string with the overridden palette declarations.
  */
-export const overridePaletteColours = (accentColor?: string) => {
+const overridePaletteColours = (accentColor?: string) => {
 	return css`
 		@media (prefers-color-scheme: light) {
 			--article-link-text: ${accentColor ?? 'inherit'};
 			--article-link-text-hover: ${accentColor ?? 'inherit'};
 			--article-link-border-hover: ${accentColor ?? 'inherit'};
 			--accent-colour: ${accentColor ?? `${sourcePalette.neutral[38]}`};
+			--lightbox-divider: ${accentColor ?? 'inherit'};
 		}
 		/* The following styles are to reflect the current accentColor behaviour in storybook as well so we maintain consistency */
 		[data-color-scheme='dark'] & {
@@ -188,6 +189,7 @@ export const overridePaletteColours = (accentColor?: string) => {
 			--article-link-border-hover: inherit;
 			/* This CSS variable only exists in the scope of hosted content and it isn't defined in the paletteDeclarations.ts */
 			--accent-colour: ${sourcePalette.neutral[86]};
+			--lightbox-divider: ${accentColor ?? 'inherit'};
 		}
 	`;
 };
