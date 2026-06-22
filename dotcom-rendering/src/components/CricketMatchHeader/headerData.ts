@@ -1,56 +1,50 @@
-import type { ComponentProps } from 'react';
 import { safeParse } from 'valibot';
 import { type CricketMatch, parseCricketMatchV2 } from '../../cricketMatchV2';
 import type { FECricketMatchHeader } from '../../frontend/feCricketMatchHeader';
 import { feCricketMatchHeaderSchema } from '../../frontend/feCricketMatchHeader';
 import { safeParseURL } from '../../lib/parse';
 import { error, fromValibot, ok, type Result } from '../../lib/result';
-import type { Tabs } from '../FootballMatchHeader/Tabs';
 
 export type CricketHeaderData = {
-	tabs: ComponentProps<typeof Tabs>;
+	tabs: {
+		liveURL?: URL;
+		reportURL?: URL;
+	};
 	match: CricketMatch;
 };
 
-export const parse =
-	(selected: CricketHeaderData['tabs']['selected']) =>
-	(json: unknown): Result<string, CricketHeaderData> => {
-		const feData = fromValibot(safeParse(feCricketMatchHeaderSchema, json));
+export const parse = (json: unknown): Result<string, CricketHeaderData> => {
+	const feData = fromValibot(safeParse(feCricketMatchHeaderSchema, json));
 
-		if (!feData.ok) {
-			return error('Failed to validate match header json');
-		}
+	if (!feData.ok) {
+		return error('Failed to validate match header json');
+	}
 
-		const parsedMatch = parseCricketMatchV2(feData.value.cricketMatch);
+	const parsedMatch = parseCricketMatchV2(feData.value.cricketMatch);
 
-		if (!parsedMatch.ok) {
-			return error('Failed to parse the match from the header json');
-		}
+	if (!parsedMatch.ok) {
+		return error('Failed to parse the match from the header json');
+	}
 
-		const maybeTabs = createTabs(
-			selected,
-			feData.value,
-			parsedMatch.value.kind,
+	const maybeTabs = createTabs(feData.value, parsedMatch.value.kind);
+
+	if (!maybeTabs.ok) {
+		return error(
+			`The match header data contained an invalid ${maybeTabs.error.kind} URL`,
 		);
+	}
 
-		if (!maybeTabs.ok) {
-			return error(
-				`The match header data contained an invalid ${maybeTabs.error.kind} URL`,
-			);
-		}
-
-		return ok({
-			match: parsedMatch.value,
-			tabs: maybeTabs.value,
-		});
-	};
+	return ok({
+		match: parsedMatch.value,
+		tabs: maybeTabs.value,
+	});
+};
 
 type MatchURLError = {
 	kind: 'live' | 'report';
 };
 
 const createTabs = (
-	selected: CricketHeaderData['tabs']['selected'],
 	feData: FECricketMatchHeader,
 	matchKind: CricketMatch['kind'],
 ): Result<MatchURLError, CricketHeaderData['tabs']> => {
@@ -68,28 +62,10 @@ const createTabs = (
 		return error({ kind: 'live' });
 	}
 
-	switch (selected) {
-		case 'info':
-			return ok({
-				matchKind,
-				sportKind: 'cricket',
-				selected,
-				reportURL: reportURL?.value,
-				liveURL: liveURL?.value,
-			});
-		case 'live':
-			return ok({
-				matchKind,
-				sportKind: 'cricket',
-				selected,
-				reportURL: reportURL?.value,
-			});
-		case 'report':
-			return ok({
-				matchKind,
-				sportKind: 'cricket',
-				selected,
-				liveURL: liveURL?.value,
-			});
-	}
+	return ok({
+		matchKind,
+		sportKind: 'cricket',
+		reportURL: reportURL?.value,
+		liveURL: liveURL?.value,
+	});
 };
