@@ -2,9 +2,11 @@ import { css } from '@emotion/react';
 import {
 	between,
 	from,
+	palette as sourcePalette,
 	space,
 	textSans14,
 	textSans15,
+	textSans17,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
@@ -46,6 +48,19 @@ const styles = css`
 	}
 `;
 
+const hostedGalleryStyles = css`
+	${textSans17}
+
+	${between.tablet.and.desktop} {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	${from.tablet} {
+		padding-bottom: ${space[10]}px;
+	}
+`;
+
 export const GalleryCaption = ({
 	captionHtml,
 	credit,
@@ -66,7 +81,7 @@ export const GalleryCaption = ({
 	}
 
 	return (
-		<figcaption css={styles}>
+		<figcaption css={[styles, isHostedGallery && hostedGalleryStyles]}>
 			{isHostedGallery &&
 			typeof position === 'number' &&
 			!!imagesLength ? (
@@ -75,6 +90,10 @@ export const GalleryCaption = ({
 						${textSans15}
 						display: block;
 						padding: ${space[2]}px 0 ${space[1]}px;
+
+						${from.desktop} {
+							padding-top: 0;
+						}
 					`}
 				>
 					{position}&#47;{imagesLength}
@@ -83,10 +102,18 @@ export const GalleryCaption = ({
 			{emptyCaption ? null : <CaptionText html={captionHtml} />}
 			{hideCredit ? null : (
 				<small
-					css={css`
-						display: block;
-						padding: ${space[2]}px 0 ${space[2]}px;
-					`}
+					css={[
+						css`
+							display: block;
+							padding: ${space[2]}px 0 ${space[2]}px;
+						`,
+						isHostedGallery &&
+							css`
+								${textSans15}
+								padding-top: ${space[3]}px;
+								color: ${sourcePalette.neutral[73]};
+							`,
+					]}
 				>
 					{credit}
 				</small>
