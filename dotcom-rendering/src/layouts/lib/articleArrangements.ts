@@ -159,45 +159,42 @@ const immersivePortraitCss: LayoutCssMap = {
 	title: {
 		mobile: 'grid-row: 1;',
 		tablet: 'grid-row: 1;',
-		desktop: 'grid-row: 1; grid-column: centre-column-start / 8;',
-		leftCol: 'grid-row: 1; grid-column: left-column-start / 9;',
+		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `grid-row: 1; ${grid.between('left-column-start', 9)};`,
 	},
 	headline: {
 		mobile: 'grid-row: 2;',
 		tablet: 'grid-row: 2;',
-		desktop: 'grid-row: 2; grid-column: centre-column-start / 8;',
-		leftCol: 'grid-row: 2; grid-column: left-column-start / 9;',
-		wide: 'grid-row: 2; grid-column: left-column-start / 10;',
+		desktop: `grid-row: 2; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `grid-row: 2; ${grid.between('left-column-start', 9)};`,
+		wide: `grid-row: 2; ${grid.between('left-column-start', 10)};`,
 	},
 	media: {
 		mobile: 'grid-row: 3;',
 		tablet: 'grid-row: 3;',
-		desktop: 'grid-row: 1 / span 4; grid-column: 8 / right-column-end;',
-		leftCol: 'grid-row: 1 / span 3; grid-column: 9 / right-column-end;',
-		wide: 'grid-row: 1 / span 3; grid-column: 10 / right-column-end;',
+		desktop: `grid-row: 1 / span 4; ${grid.between('centre-column-start', 'right-column-end')};`,
+		leftCol: `grid-row: 1 / span 3; ${grid.between('left-column-start', 'right-column-end')};`,
+		wide: `grid-row: 1 / span 3; ${grid.between('left-column-start', 'right-column-end')};`,
 	},
 	standfirst: {
 		mobile: 'grid-row: 4;',
 		tablet: 'grid-row: 4;',
-		desktop: 'grid-row: 3; grid-column: centre-column-start / 7;',
-		leftCol: 'grid-row: 3; grid-column: centre-column-start / 8;',
-		wide: 'grid-row: 3; grid-column: centre-column-start / 9;',
+		desktop: `grid-row: 3; ${grid.between('centre-column-start', 7)};`,
+		leftCol: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
+		wide: `grid-row: 3; ${grid.between('centre-column-start', 9)};`,
 	},
 	meta: {
 		mobile: 'grid-row: 5;',
 		tablet: 'grid-row: 5;',
-		desktop: 'grid-row: 4; grid-column: centre-column-start / 8;',
-		leftCol:
-			'grid-row: 3; grid-column: left-column-start / left-column-end;',
+		desktop: `grid-row: 4; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `grid-row: 3; ${grid.column.left};`,
 	},
 	body: {
 		mobile: 'grid-row: 6;',
 	},
 	'right-column': {
-		desktop:
-			'grid-row: 5; grid-column: right-column-start / right-column-end;',
-		leftCol:
-			'grid-row: 4; grid-column: right-column-start / right-column-end;',
+		desktop: `grid-row: 5; ${grid.column.right};`,
+		leftCol: `grid-row: 4; ${grid.column.right};`,
 	},
 };
 
@@ -215,10 +212,8 @@ const immersiveLandscapeCss: LayoutCssMap = {
 	media: {
 		mobile: 'grid-row: 3;',
 		tablet: 'grid-row: 3;',
-		desktop:
-			'grid-row: 1 / span 3; grid-column: centre-column-start / right-column-end;',
-		leftCol:
-			'grid-row: 1 / span 3; grid-column: left-column-start / right-column-end;',
+		desktop: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'right-column-end')};`,
+		leftCol: `grid-row: 1 / span 3; ${grid.between('left-column-start', 'right-column-end')};`,
 	},
 	standfirst: {
 		mobile: 'grid-row: 4;',
@@ -228,16 +223,14 @@ const immersiveLandscapeCss: LayoutCssMap = {
 	meta: {
 		mobile: 'grid-row: 5;',
 		tablet: 'grid-row: 5;',
-		desktop: 'grid-row: 6; grid-column: centre-column-start / 8;',
-		leftCol:
-			'grid-row: 6 / span 2; grid-column: left-column-start / left-column-end;',
+		desktop: `grid-row: 6; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `grid-row: 6 / span 2; ${grid.column.left};`,
 	},
 	body: {
 		mobile: 'grid-row: 6;',
 	},
 	'right-column': {
-		desktop:
-			'grid-row: 5 / span 3; grid-column: right-column-start / right-column-end;',
+		desktop: `grid-row: 5 / span 3; ${grid.column.right};`,
 	},
 };
 
