@@ -534,6 +534,7 @@ const CarouselCard = ({
 				showTopBarMobile={!isOnwardContent}
 				aspectRatio="5:4"
 				contentSpacing="small"
+				allowHeadlineToBreakWords={true}
 			/>
 		</LI>
 	);
