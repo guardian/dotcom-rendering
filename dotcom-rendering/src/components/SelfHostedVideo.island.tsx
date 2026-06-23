@@ -1,6 +1,7 @@
 import { css, Global } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
+import type { RefObject } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	submitClickComponentEvent,
@@ -14,6 +15,7 @@ import { useAB } from '../lib/useAB';
 import { useFadeableControls } from '../lib/useFadeableControls';
 import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
+import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
@@ -178,17 +180,32 @@ const logAndReportError = (src: string, error: Error) => {
 
 	log('dotcom', message);
 };
-
+/**
+ * Cards on mobile have variable widths. To avoid requesting many
+ * different image sizes, we use a single default width of 465px across
+ * all mobile devices.
+ */
+const MOBILE_VIDEO_WIDTH = 465;
+/**
+ * 940 represents the widest possible video slot.
+ * This is a flexible general gigaboosted slot on desktop.
+ */
+const MAX_POSTER_WIDTH = 940;
 const getOptimisedPosterImage = (
 	mainImage: string,
 	aspectRatio: string,
+	isTabletOrAbove: boolean,
+	vidRef?: RefObject<HTMLVideoElement> | null,
 ): string => {
 	// This only runs on the client
 	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
+	const imageWidth = !isTabletOrAbove
+		? MOBILE_VIDEO_WIDTH
+		: (vidRef?.current?.offsetWidth ?? MAX_POSTER_WIDTH);
 
 	return generateImageURL({
 		mainImage,
-		imageWidth: 940, // The widest a video can be: flexible special container, giga-boosted slot
+		imageWidth,
 		resolution,
 		aspectRatio,
 	});
@@ -347,6 +364,7 @@ export const SelfHostedVideo = ({
 
 	const willAttemptAutoplay =
 		videoStyleSettings.autoplay && !preventAutoplay && !isInClickToPlayTest;
+	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
 	const vidRef = useRef<HTMLVideoElement>(null);
 	const playerContainerRef = useRef<HTMLDivElement>(null);
@@ -458,7 +476,12 @@ export const SelfHostedVideo = ({
 		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
 
 	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
+		? getOptimisedPosterImage(
+				posterImage,
+				posterImageAspectRatio,
+				isTabletOrAbove,
+				vidRef,
+			)
 		: undefined;
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
