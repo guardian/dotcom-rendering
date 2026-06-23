@@ -13,7 +13,6 @@ import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
-import { PictureLayout } from './PictureLayout';
 import { StandardLayout } from './StandardLayout';
 
 interface BaseProps {
@@ -83,15 +82,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-				case ArticleDesign.Picture:
-					return (
-						<PictureLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -261,16 +251,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
-							article={article.frontendData}
-							NAV={NAV}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-				case ArticleDesign.Picture:
-					return (
-						<PictureLayout
 							article={article.frontendData}
 							NAV={NAV}
 							format={format}
