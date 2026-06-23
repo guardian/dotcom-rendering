@@ -11,7 +11,6 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
-import { AppsAudioPlayer } from '../components/AppsAudioPlayer.island';
 import { AppsEpic } from '../components/AppsEpic.island';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
@@ -20,7 +19,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { AudioPlayerWrapper } from '../components/AudioPlayerWrapper.island';
+import { AudioPlayer } from '../components/AudioPlayer';
 import { Carousel } from '../components/Carousel.island';
 import { CricketMatchHeaderWrapper } from '../components/CricketMatchHeaderWrapper.island';
 import { DecideLines } from '../components/DecideLines';
@@ -33,10 +32,7 @@ import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import {
-	formatAudioDuration,
-	ListenToArticle,
-} from '../components/ListenToArticle.island';
+import { ListenToArticle } from '../components/ListenToArticle.island';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MatchHeaderFallback } from '../components/MatchHeaderFallback';
@@ -292,39 +288,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					>
 						<GridItem area="media" layoutType={layoutType}>
 							{audioData ? (
-								<>
-									{isApps ? (
-										<AppsAudioPlayer
-											audioDuration={
-												typeof audioData.durationSeconds ===
-												'number'
-													? formatAudioDuration(
-															audioData.durationSeconds,
-														)
-													: undefined
-											}
-										/>
-									) : (
-										<AudioPlayerWrapper
-											contentIsNotSensitive={
-												!article.config.isSensitive
-											}
-											isAcastEnabled={
-												!!article.config.switches.acast
-											}
-											src={audioData.audioDownloadUrl}
-											mediaId={audioData.mediaId}
-										/>
-									)}
-									<StraightLines
-										cssOverrides={css`
-											display: block;
-											margin-bottom: ${space[2]}px;
-										`}
-										count={1}
-										color={themePalette('--straight-lines')}
-									/>
-								</>
+								<AudioPlayer
+									audioData={audioData}
+									isSensitive={article.config.isSensitive}
+									isAcastEnabled={
+										!!article.config.switches.acast
+									}
+									isApps={isApps}
+								/>
 							) : (
 								<MainMedia
 									format={format}
