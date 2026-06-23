@@ -17,7 +17,6 @@ import { ShareButton } from '../components/ShareButton.island';
 import { Standfirst } from '../components/Standfirst';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
-import { overridePaletteColours } from '../lib/hostedContent';
 import { palette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -140,12 +139,7 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			) : null}
 
-			<main
-				css={[
-					overridePaletteColours(branding?.hostedCampaignColour),
-					{ backgroundColor: palette('--article-background') },
-				]}
-			>
+			<main css={{ backgroundColor: palette('--article-background') }}>
 				<header css={headerStyles}>
 					<MainMediaGallery
 						mainMedia={gallery.mainMedia}

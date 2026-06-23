@@ -22,7 +22,6 @@ import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { overridePaletteColours } from '../lib/hostedContent';
 import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
@@ -221,10 +220,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			) : null}
 
-			<main
-				data-layout="HostedArticleLayout"
-				css={overridePaletteColours(branding?.hostedCampaignColour)}
-			>
+			<main data-layout="HostedArticleLayout">
 				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
 						<MainMedia
