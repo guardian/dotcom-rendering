@@ -80,20 +80,19 @@ const metaStyles = css`
 
 const bttPosition = css`
 	background-color: ${palette('--article-inner-background')};
-	padding: ${space[5]}px ${space[3]}px ${space[4]}px;
+	padding: 0 ${space[3]}px ${space[4]}px;
 	position: absolute;
-	bottom: -21px;
 	right: 0;
 	display: flex;
 	justify-content: flex-end;
 	width: 100%;
 
 	${from.tablet} {
-		padding: ${space[5]}px ${space[8]}px ${space[4]}px;
+		padding: 0 ${space[8]}px ${space[4]}px;
 	}
 
 	${from.desktop} {
-		padding: ${space[5]}px ${space[5]}px ${space[4]}px;
+		padding: 0 ${space[5]}px ${space[4]}px;
 	}
 `;
 
