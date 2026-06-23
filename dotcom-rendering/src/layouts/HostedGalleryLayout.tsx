@@ -331,6 +331,10 @@ const GalleryBody = (props: {
 	</div>
 );
 
+/** In order to reuse the BackToTop component in the Guardian Footer https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/components/BackToTop.tsx
+ * we need to have access to the format to check if it's Hosted Gallery and then change the Link styling which I think it isn't possible as the Footer is not used in Hosted Content pages.
+ * I created a new BackToTop component here but unfortunately we had to duplicate all the styling from the original BackToTop component except some updates in bttLink.
+ * */
 const BackToTop = () => (
 	<a css={bttLink} href="#top" data-link-name="back to top">
 		<span css={bttTextStyles}>Back to top</span>
