@@ -26,6 +26,7 @@ COPY --from=builder --chown=node:node /app/dotcom-rendering/dist /app
 # Disable logging with Log4js as console logs will be forwarded to Central ELK with a sidecar
 # TODO Maintain metrics
 ENV DISABLE_LOGGING_AND_METRICS=true
+ENV NODE_ENV=production
 
 # Expose the port that the application listens on
 EXPOSE 9000
