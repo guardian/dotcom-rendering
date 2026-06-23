@@ -202,37 +202,6 @@ export class RenderingCDKStack extends CDKStack {
 					} satisfies Alarms)
 				: ({ noMonitoring: true } satisfies NoMonitoring);
 
-		const roleConfiguration = {
-			additionalPolicies: [
-				new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
-					actions: ['cloudwatch:*', 'logs:*'],
-					resources: ['*'],
-				}),
-				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
-					actions: ['kms:Decrypt', 'kms:DescribeKey'],
-					resources: [
-						`arn:aws:kms:${region}:${account}:FrontendConfigKey`,
-					],
-				}),
-				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
-					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
-					resources: [
-						// This is for backwards compatibility reasons with frontend apps and an old SSM naming system
-						// TODO - ideally we should convert these params to use the newer naming style for consistency
-						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
-						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
-					],
-				}),
-			],
-		};
-
-		const userData = getUserData({
-			guApp,
-			guStack,
-			stage,
-			artifactsBucket,
-		});
-
 		const app = new GuLoadBalancedAppExperimental(this, {
 			app: guApp,
 			access: {
@@ -254,9 +223,47 @@ export class RenderingCDKStack extends CDKStack {
 					systemdUnitName: guApp,
 				},
 				instanceType,
-				roleConfiguration,
+				roleConfiguration: {
+					additionalPolicies: [
+						new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
+							actions: ['cloudwatch:*', 'logs:*'],
+							resources: ['*'],
+						}),
+						new GuAllowPolicy(
+							this,
+							'AllowPolicyDescribeDecryptKms',
+							{
+								actions: ['kms:Decrypt', 'kms:DescribeKey'],
+								resources: [
+									`arn:aws:kms:${region}:${account}:FrontendConfigKey`,
+								],
+							},
+						),
+						new GuAllowPolicy(
+							this,
+							'AllowPolicyGetSsmParamsByPath',
+							{
+								actions: [
+									'ssm:GetParametersByPath',
+									'ssm:GetParameter',
+								],
+								resources: [
+									// This is for backwards compatibility reasons with frontend apps and an old SSM naming system
+									// TODO - ideally we should convert these params to use the newer naming style for consistency
+									`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
+									`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
+								],
+							},
+						),
+					],
+				},
 				scaling,
-				userData,
+				userData: getUserData({
+					guApp,
+					guStack,
+					stage,
+					artifactsBucket,
+				}),
 			},
 		});
 
