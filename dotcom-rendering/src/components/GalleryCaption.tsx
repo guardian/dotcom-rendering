@@ -69,7 +69,7 @@ export const GalleryCaption = ({
 		<figcaption css={styles}>
 			{isHostedGallery &&
 			typeof position === 'number' &&
-			imagesLength !== undefined ? (
+			!!imagesLength ? (
 				<small
 					css={css`
 						${textSans15}
