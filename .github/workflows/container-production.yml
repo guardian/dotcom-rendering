@@ -1,18 +1,13 @@
 name: Production container
-
-# Run this workflow when...
 on:
-  # ...manually invoked
   workflow_call:
-
-  # ...a pull request is opened
-  pull_request:
-
-  # ...`main` changes, e.g. when a PR is merged
-  push:
-    branches:
-      - main
-
+    secrets:
+      GU_RIFF_RAFF_ROLE_ARN:
+        required: true
+    outputs:
+      imageDigest:
+        description: 'The digest of the generated container image'
+        value: ${{ jobs.build-production-image.outputs.imageDigest }}
 jobs:
   facts:
     runs-on: ubuntu-slim
