@@ -121,10 +121,12 @@ export const UpdateScorecardTab = meta.story({
 			).toBeInTheDocument();
 		});
 
-		await expect(
-			canvas.queryByRole('rowheader', { name: /Harry Brook/ })
-				?.nextSibling!.textContent,
-		).toBe('lbw b Henry');
+		await waitFor(() => {
+			void expect(
+				canvas.queryByRole('rowheader', { name: /Harry Brook/ })
+					?.nextSibling!.textContent,
+			).toBe('lbw b Henry');
+		});
 	},
 });
 
