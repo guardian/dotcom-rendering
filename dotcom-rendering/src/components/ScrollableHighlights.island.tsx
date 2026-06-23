@@ -18,7 +18,6 @@ import { HighlightsNewsletterCard } from './Masthead/Newsletter/HighlightsNewsle
 type Props = {
 	trails: DCRFrontCard[];
 	frontId?: string;
-	isNewsletterSignupCardEnabled: boolean;
 };
 
 const containerStyles = css`
@@ -212,16 +211,12 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-export const ScrollableHighlights = ({
-	trails,
-	frontId,
-	isNewsletterSignupCardEnabled,
-}: Props) => {
+export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 
 	const visibleTrails = trails.filter((trail) => {
 		if (trail.isNewsletterSignup !== true) return true;
-		return isNewsletterSignupCardEnabled && Boolean(trail.newsletterData);
+		return Boolean(trail.newsletterData);
 	});
 	const carouselLength = visibleTrails.length;
 	const imageLoading = 'eager';

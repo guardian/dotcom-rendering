@@ -10,6 +10,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
+import { useAB } from '../lib/useAB';
 import { useFadeableControls } from '../lib/useFadeableControls';
 import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
@@ -334,9 +335,18 @@ export const SelfHostedVideo = ({
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
+	const ab = useAB();
+	const isInClickToPlayTest =
+		Boolean(
+			ab?.isUserInTestGroup(
+				'fronts-and-curation-click-to-play',
+				'variant',
+			),
+		) && videoStyle === 'Default';
 	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
-	const willAttemptAutoplay = videoStyleSettings.autoplay && !preventAutoplay;
+	const willAttemptAutoplay =
+		videoStyleSettings.autoplay && !preventAutoplay && !isInClickToPlayTest;
 
 	const vidRef = useRef<HTMLVideoElement>(null);
 	const playerContainerRef = useRef<HTMLDivElement>(null);
@@ -371,9 +381,13 @@ export const SelfHostedVideo = ({
 	 * - the style of video allows autoplay
 	 * - the parent allows autoplay, i.e. we may not want to autoplay on certain page types
 	 * - autoplay is allowed by the browser, e.g. if "reduce motion" is enabled then we don't autoplay
+	 * - the user is not in the click-to-play test variant
 	 */
 	const shouldAutoplay =
-		videoStyleSettings.autoplay && !preventAutoplay && isAutoplayAllowed;
+		videoStyleSettings.autoplay &&
+		!preventAutoplay &&
+		isAutoplayAllowed === true &&
+		!isInClickToPlayTest;
 
 	const showProgressBar =
 		!hideProgressBar &&
@@ -404,7 +418,7 @@ export const SelfHostedVideo = ({
 		(playerState === 'PAUSED_BY_USER' ||
 			playerState === 'PAUSED_BY_BROWSER' ||
 			playerState === 'ENDED' ||
-			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
+			(playerState === 'NOT_STARTED' && !shouldAutoplay));
 
 	const {
 		fadeableControlsStyles,
@@ -751,7 +765,7 @@ export const SelfHostedVideo = ({
 	 */
 	useEffect(() => {
 		if (
-			shouldAutoplay === false ||
+			!shouldAutoplay ||
 			(isInView === false && playerState === 'NOT_STARTED')
 		) {
 			setShowPosterImage(true);
@@ -1003,7 +1017,7 @@ export const SelfHostedVideo = ({
 	 */
 	if (isPlayable) {
 		if (
-			shouldAutoplay === true &&
+			shouldAutoplay &&
 			isInView === true &&
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
@@ -1094,7 +1108,7 @@ export const SelfHostedVideo = ({
 						handleFullscreenClick={handleFullscreenClick}
 						handleEnded={handleEnded}
 						onError={onError}
-						preloadPartialData={shouldAutoplay === true}
+						preloadPartialData={shouldAutoplay}
 						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
 						useLongFormProgressBar={
