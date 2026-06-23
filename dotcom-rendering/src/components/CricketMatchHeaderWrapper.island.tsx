@@ -11,5 +11,6 @@ export const CricketMatchHeaderWrapper = (props: CricketMatchHeaderProps) => {
 	);
 };
 
+// Adding comment
 const getHeaderData = (url: string): Promise<unknown> =>
 	fetch(url).then((res) => res.json());
