@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 import {
+	calculateHoverColour,
 	from,
 	palette as sourcePalette,
 	space,
 	textSansBold15,
+	until,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { CallToActionButton } from '../components/CallToActionAtom';
@@ -78,52 +80,70 @@ const metaStyles = css`
 	}
 `;
 
-const bttPosition = css`
+const bttStyles = css`
+	${grid.paddedContainer}
+	${grid.outerRules()}
 	background-color: ${palette('--article-inner-background')};
-	padding: 0 ${space[3]}px ${space[4]}px;
-	position: absolute;
-	right: 0;
-	display: flex;
-	justify-content: flex-end;
-	width: 100%;
 
-	${from.tablet} {
-		padding: 0 ${space[8]}px ${space[4]}px;
+	${until.tablet} {
+		padding-top: ${space[1]}px;
 	}
 
 	${from.desktop} {
-		padding: 0 ${space[5]}px ${space[4]}px;
+		&:first-of-type > * {
+			padding-top: ${space[3]}px;
+		}
 	}
 `;
 
-const iconHeight = '42px';
+const bttPosition = css`
+	${grid.column.all}
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+	padding: 0 ${space[3]}px ${space[4]}px;
 
-const iconContainer = css`
+	${from.tablet} {
+		${grid.column.centre}
+		padding-right: 0;
+		padding-left: 0;
+	}
+
+	${from.desktop} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+`;
+
+const bttIconHeight = '42px';
+
+const bttIconContainer = css`
 	position: relative;
 	float: right;
 	border-radius: 100%;
 	background-color: ${sourcePalette.neutral[100]};
 	cursor: pointer;
-	height: ${iconHeight};
-	min-width: ${iconHeight};
+	height: ${bttIconHeight};
+	min-width: ${bttIconHeight};
 `;
 
-const link = css`
+const bttLink = css`
 	text-decoration: none;
 	color: ${sourcePalette.neutral[100]};
 	font-weight: bold;
-	line-height: ${iconHeight};
+	line-height: ${bttIconHeight};
 
 	:hover {
-		color: ${sourcePalette.neutral[86]};
+		color: ${calculateHoverColour(sourcePalette.neutral[100])};
 
 		.icon-container {
-			background-color: ${sourcePalette.neutral[86]};
+			background-color: ${calculateHoverColour(
+				sourcePalette.neutral[100],
+			)};
 		}
 	}
 `;
 
-const icon = css`
+const bttIcon = css`
 	::before {
 		position: absolute;
 		top: 6px;
@@ -141,7 +161,7 @@ const icon = css`
 	}
 `;
 
-const textStyles = css`
+const bttTextStyles = css`
 	${textSansBold15};
 	padding-right: 5px;
 `;
@@ -187,7 +207,6 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 			<main
 				css={{
 					backgroundColor: palette('--article-background'),
-					position: 'relative',
 				}}
 			>
 				<header css={headerStyles}>
@@ -244,8 +263,10 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					pageId={frontendData.pageId}
 					webTitle={frontendData.webTitle}
 				/>
-				<div css={bttPosition}>
-					<BackToTop />
+				<div css={bttStyles}>
+					<div css={bttPosition}>
+						<BackToTop />
+					</div>
 				</div>
 			</main>
 			<Island priority="feature" defer={{ until: 'visible' }}>
@@ -311,10 +332,10 @@ const GalleryBody = (props: {
 );
 
 const BackToTop = () => (
-	<a css={link} href="#top" data-link-name="back to top">
-		<span css={textStyles}>Back to top</span>
-		<span css={iconContainer} className="icon-container">
-			<i css={icon} />
+	<a css={bttLink} href="#top" data-link-name="back to top">
+		<span css={bttTextStyles}>Back to top</span>
+		<span css={bttIconContainer} className="icon-container">
+			<i css={bttIcon} />
 		</span>
 	</a>
 );
