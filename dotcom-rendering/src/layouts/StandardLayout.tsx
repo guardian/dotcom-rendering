@@ -168,6 +168,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isVideo = format.design === ArticleDesign.Video;
 
 	const isShowcase = format.display === ArticleDisplay.Showcase;
+	const isPicture = format.design === ArticleDesign.Picture;
 
 	const showComments = article.isCommentable && !isPaidContent;
 
@@ -183,9 +184,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const layoutType: LayoutType = isMedia
 		? 'media'
-		: isShowcase
-			? 'showcase'
-			: 'standard';
+		: isPicture
+			? 'picture'
+			: isShowcase
+				? 'showcase'
+				: 'standard';
 
 	return (
 		<>
@@ -595,30 +598,32 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								}
 							`}
 						>
-							<Hide until="desktop">
-								<Island
-									priority="feature"
-									defer={{
-										until: 'visible',
-										// Provide a much higher value for the top margin for the intersection observer
-										// This is because the most viewed would otherwise only be lazy loaded when the
-										// bottom of the container intersects with the viewport
-										rootMargin: '700px 100px',
-									}}
-								>
-									<MostViewedRightWithAd
-										format={format}
-										isPaidContent={
-											article.pageType.isPaidContent
-										}
-										renderAds={isWeb && renderAds}
-										shouldHideReaderRevenue={
-											!!article.config
-												.shouldHideReaderRevenue
-										}
-									/>
-								</Island>
-							</Hide>
+							{!isPicture && (
+								<Hide until="desktop">
+									<Island
+										priority="feature"
+										defer={{
+											until: 'visible',
+											// Provide a much higher value for the top margin for the intersection observer
+											// This is because the most viewed would otherwise only be lazy loaded when the
+											// bottom of the container intersects with the viewport
+											rootMargin: '700px 100px',
+										}}
+									>
+										<MostViewedRightWithAd
+											format={format}
+											isPaidContent={
+												article.pageType.isPaidContent
+											}
+											renderAds={isWeb && renderAds}
+											shouldHideReaderRevenue={
+												!!article.config
+													.shouldHideReaderRevenue
+											}
+										/>
+									</Island>
+								</Hide>
+							)}
 						</GridItem>
 					</article>
 				</div>
