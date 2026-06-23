@@ -167,8 +167,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
 
-	const isVideo = format.design === ArticleDesign.Video;
-
 	const isShowcase = format.display === ArticleDisplay.Showcase;
 
 	const showComments = article.isCommentable && !isPaidContent;
@@ -312,7 +310,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									hideCaption={isMedia}
 									shouldHideAds={article.shouldHideAds}
 									contentType={article.contentType}
-									contentLayout="StandardLayout"
+									contentLayout={`${
+										ArticleDisplay[format.display]
+									}Layout`}
 								/>
 							)}
 						</GridItem>
@@ -353,18 +353,22 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							layoutType={layoutType}
 							element="aside"
 						>
-							<div css={stretchLines}>
-								{isWeb &&
-								format.theme === ArticleSpecial.Labs &&
-								format.design !== ArticleDesign.Video ? (
-									<GuardianLabsLines />
-								) : (
-									<DecideLines
-										format={format}
-										color={themePalette('--article-border')}
-									/>
-								)}
-							</div>
+							{!audioData && (
+								<div css={stretchLines}>
+									{isWeb &&
+									format.theme === ArticleSpecial.Labs &&
+									format.design !== ArticleDesign.Video ? (
+										<GuardianLabsLines />
+									) : (
+										<DecideLines
+											format={format}
+											color={themePalette(
+												'--article-border',
+											)}
+										/>
+									)}
+								</div>
+							)}
 							{isApps ? (
 								<>
 									<Hide from="leftCol">
@@ -465,7 +469,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
 								<Hide until="leftCol">
-									{!isVideo && (
+									{!isMedia && (
 										<div
 											css={css`
 												margin-top: ${space[2]}px;
@@ -629,6 +633,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											!!article.config
 												.shouldHideReaderRevenue
 										}
+										shouldHideMostViewed={!!audioData}
 									/>
 								</Island>
 							</Hide>
