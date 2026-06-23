@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { SvgPlus } from '@guardian/source/react-components';
+import { SvgChevronDownSingle } from '@guardian/source/react-components';
 import { useState } from 'react';
 import type {
 	CommentType,
@@ -199,7 +199,7 @@ export const CommentContainer = ({
 							>
 								<PillarButton
 									priority="secondary"
-									icon={<SvgPlus />}
+									icon={<SvgChevronDownSingle />}
 									iconSide="left"
 									linkName="Show more replies"
 									onClick={() => expand(comment.id)}
