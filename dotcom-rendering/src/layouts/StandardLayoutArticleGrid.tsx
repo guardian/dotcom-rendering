@@ -12,6 +12,7 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
+import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -31,6 +32,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { getSoleContributor } from '../lib/byline';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
 import { getZIndex } from '../lib/getZIndex';
@@ -91,6 +93,54 @@ const immersiveMediaBelowDesktop = (
 			backdrop-filter: blur(12px);
 			mask-image: linear-gradient(to bottom, transparent 40%, black 60%);
 			pointer-events: none;
+		}
+	}
+`;
+
+const avatarHeadlineWrapper = css`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`;
+
+// This styling taken from the similar approach in CommentLayout.tsx
+// If in mobile increase the margin top and margin right deficit
+const avatarPositionStyles = css`
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+	margin-bottom: -29px;
+	pointer-events: none;
+	${from.desktop} {
+		margin-top: -50px;
+	}
+	${until.tablet} {
+		overflow: hidden;
+	}
+
+	/*  Why target img element?
+
+        Because only in this context, where we have overflow: hidden
+        and the margin-bottom and margin-top of avatarPositionStyles
+        do we also want to apply our margin-right. These styles
+        are tightly coupled in this context, and so it does not
+        make sense to move them to the avatar component.
+
+        It's imperfect from the perspective of DCR, the alternative is to bust
+        the combined elements into a separate component (with the
+        relevant stories) and couple them that way, which might be what
+        you want to do if you find yourself adding more styles
+        to this section. For now, this works without making me 🤢.
+    */
+
+	${from.mobile} {
+		img {
+			margin-right: -1.85rem;
+		}
+	}
+	${from.mobileLandscape} {
+		img {
+			margin-right: -1.25rem;
 		}
 	}
 `;
@@ -173,6 +223,8 @@ export const StandardLayoutArticleGrid = ({
 	const isShowcase = format.display === ArticleDisplay.Showcase;
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isFeature = format.design === ArticleDesign.Feature;
+	const isPicture = format.design === ArticleDesign.Picture;
+
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
 	);
@@ -205,6 +257,7 @@ export const StandardLayoutArticleGrid = ({
 		isFeature,
 		orientation: mainMediaOrientation,
 		isMedia,
+		isPicture,
 		isShowcase,
 	});
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
@@ -213,6 +266,13 @@ export const StandardLayoutArticleGrid = ({
 		article.tags,
 		article.webPublicationDateDeprecated,
 	);
+
+	const avatarUrl = getSoleContributor(
+		article.tags,
+		article.byline,
+	)?.bylineLargeImageUrl;
+
+	const displayAvatarUrl = avatarUrl ? true : false;
 
 	return (
 		<article
@@ -264,7 +324,7 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="media"
 				layoutType={layoutType}
-				css={
+				css={[
 					isImmersive
 						? css`
 								${from.desktop} {
@@ -281,8 +341,13 @@ export const StandardLayoutArticleGrid = ({
 									isMainMediaImage,
 								)}
 							`
-						: undefined
-				}
+						: undefined,
+					displayAvatarUrl && isPicture
+						? css`
+								margin-top: ${space[2]}px;
+							`
+						: undefined,
+				]}
 			>
 				<div>
 					<MainMedia
@@ -333,6 +398,12 @@ export const StandardLayoutArticleGrid = ({
 								margin-bottom: 2px;
 							}
 						`,
+					isPicture &&
+						css`
+							display: flex;
+							flex-direction: column;
+							justify-content: space-between;
+						`,
 				]}
 			>
 				<ArticleTitle
@@ -377,17 +448,50 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
-				<ArticleHeadline
-					format={format}
-					layoutType={layoutType}
-					headlineString={article.headline}
-					tags={article.tags}
-					byline={article.byline}
-					webPublicationDateDeprecated={
-						article.webPublicationDateDeprecated
-					}
-					starRating={article.starRating}
-				/>
+				{displayAvatarUrl && isPicture ? (
+					<div css={avatarHeadlineWrapper}>
+						<ArticleHeadline
+							format={format}
+							layoutType={layoutType}
+							headlineString={article.headline}
+							tags={article.tags}
+							byline={article.byline}
+							webPublicationDateDeprecated={
+								article.webPublicationDateDeprecated
+							}
+							starRating={article.starRating}
+						/>
+						{!!avatarUrl && isPicture && (
+							<>
+								<div css={avatarPositionStyles}>
+									<ContributorAvatar
+										imageSrc={avatarUrl}
+										imageAlt={article.byline ?? ''}
+									/>
+								</div>
+								<StraightLines
+									count={8}
+									cssOverrides={css`
+										display: block;
+									`}
+									color={themePalette('--straight-lines')}
+								/>
+							</>
+						)}
+					</div>
+				) : (
+					<ArticleHeadline
+						format={format}
+						layoutType={layoutType}
+						headlineString={article.headline}
+						tags={article.tags}
+						byline={article.byline}
+						webPublicationDateDeprecated={
+							article.webPublicationDateDeprecated
+						}
+						starRating={article.starRating}
+					/>
+				)}
 			</GridItem>
 			<GridItem
 				area="standfirst"
@@ -673,30 +777,32 @@ export const StandardLayoutArticleGrid = ({
 					}
 				`}
 			>
-				<Hide until="desktop">
-					<Island
-						priority="feature"
-						defer={{
-							until: 'visible',
-							// Provide a much higher value for the top margin for the intersection observer
-							// This is because the most viewed would otherwise only be lazy loaded when the
-							// bottom of the container intersects with the viewport
-							rootMargin: '700px 100px',
-						}}
-					>
-						<MostViewedRightWithAd
-							format={format}
-							isPaidContent={article.pageType.isPaidContent}
-							renderAds={isWeb && renderAds}
-							shouldHideReaderRevenue={
-								!!article.config.shouldHideReaderRevenue
-							}
-							shouldHideMostViewed={
-								format.design === ArticleDesign.Audio
-							}
-						/>
-					</Island>
-				</Hide>
+				{!isPicture && (
+					<Hide until="desktop">
+						<Island
+							priority="feature"
+							defer={{
+								until: 'visible',
+								// Provide a much higher value for the top margin for the intersection observer
+								// This is because the most viewed would otherwise only be lazy loaded when the
+								// bottom of the container intersects with the viewport
+								rootMargin: '700px 100px',
+							}}
+						>
+							<MostViewedRightWithAd
+								format={format}
+								isPaidContent={article.pageType.isPaidContent}
+								renderAds={isWeb && renderAds}
+								shouldHideReaderRevenue={
+									!!article.config.shouldHideReaderRevenue
+								}
+								shouldHideMostViewed={
+									format.design === ArticleDesign.Audio
+								}
+							/>
+						</Island>
+					</Hide>
+				)}
 			</GridItem>
 		</article>
 	);
