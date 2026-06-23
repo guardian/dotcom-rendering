@@ -22,8 +22,8 @@ type Props = {
 	webTitle: string;
 	/** Position of the image in the gallery used to build share fragment */
 	position?: number;
+	// Pass the total number of images from Hosted Gallery to include in the image caption (e.g. 1/5, 2/5, etc.)
 	imagesLength?: number;
-	imageIndex?: number;
 };
 
 const styles = css`
@@ -55,7 +55,6 @@ export const GalleryCaption = ({
 	webTitle,
 	position,
 	imagesLength,
-	imageIndex,
 }: Props) => {
 	const emptyCaption = captionHtml === undefined || captionHtml.trim() === '';
 	const hideCredit =
@@ -69,7 +68,7 @@ export const GalleryCaption = ({
 	return (
 		<figcaption css={styles}>
 			{isHostedGallery &&
-			imageIndex !== undefined &&
+			typeof position === 'number' &&
 			imagesLength !== undefined ? (
 				<small
 					css={css`
@@ -78,7 +77,7 @@ export const GalleryCaption = ({
 						padding: ${space[2]}px 0 ${space[1]}px;
 					`}
 				>
-					{imageIndex + 1}&#47;{imagesLength}
+					{position}&#47;{imagesLength}
 				</small>
 			) : null}
 			{emptyCaption ? null : <CaptionText html={captionHtml} />}
