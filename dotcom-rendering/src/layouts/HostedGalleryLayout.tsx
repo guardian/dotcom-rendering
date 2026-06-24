@@ -83,16 +83,6 @@ const bttStyles = css`
 	${grid.paddedContainer}
 	${grid.outerRules()}
 	background-color: ${palette('--article-inner-background')};
-
-	${until.tablet} {
-		padding-top: ${space[1]}px;
-	}
-
-	${from.desktop} {
-		&:first-of-type > * {
-			padding-top: ${space[3]}px;
-		}
-	}
 `;
 
 const bttPosition = css`
@@ -104,8 +94,7 @@ const bttPosition = css`
 
 	${from.tablet} {
 		${grid.column.centre}
-		padding-right: 0;
-		padding-left: 0;
+		padding: 0 0 ${space[4]}px;
 	}
 
 	${from.desktop} {
@@ -249,11 +238,7 @@ const GalleryBody = (props: {
 	pageId: string;
 	webTitle: string;
 }) => (
-	<div
-		css={css`
-			position: relative;
-		`}
-	>
+	<>
 		{props.bodyElements.map((element) => {
 			if (
 				element._type ===
@@ -275,5 +260,5 @@ const GalleryBody = (props: {
 				return null;
 			}
 		})}
-	</div>
+	</>
 );
