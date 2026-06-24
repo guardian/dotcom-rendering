@@ -11,6 +11,7 @@ jest.mock('../../../lib/newsletterSignupTracking', () => ({
 	sendNewsletterSignupEvent: jest.fn(),
 	NEWSLETTER_SIGNUP_COMPONENT_ID: {
 		highlightsCard: (id: string) => `highlights-card-${id}`,
+		highlightsCardForm: (id: string) => `highlights-card-form-${id}`,
 	},
 }));
 
@@ -109,6 +110,16 @@ describe('HighlightsNewsletterCard', () => {
 
 		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
 			expect.objectContaining({
+				action: 'CLICK',
+				identityName: defaultProps.newsletter.identityName,
+				componentId: `highlights-card-${defaultProps.newsletter.identityName}`,
+				renderingTarget: defaultProps.renderingTarget,
+				value: { eventDescription: 'highlights-card-clicked' },
+			}),
+		);
+
+		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
+			expect.objectContaining({
 				action: 'EXPAND',
 				identityName: defaultProps.newsletter.identityName,
 				componentId: `highlights-card-${defaultProps.newsletter.identityName}`,
@@ -175,6 +186,10 @@ describe('HighlightsNewsletterCard', () => {
 		expect(
 			screen.queryByTestId('highlights-newsletter-signup-modal'),
 		).not.toBeInTheDocument();
+
+		expect(sendNewsletterSignupEvent).not.toHaveBeenCalledWith(
+			expect.objectContaining({ action: 'CLICK' }),
+		);
 
 		expect(sendNewsletterSignupEvent).not.toHaveBeenCalledWith(
 			expect.objectContaining({ action: 'EXPAND' }),
