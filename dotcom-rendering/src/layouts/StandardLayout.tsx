@@ -47,6 +47,7 @@ import { SubNav } from '../components/SubNav.island';
 import { grid } from '../grid';
 import {
 	ArticleDesign,
+	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
@@ -65,9 +66,8 @@ import {
 	type Area,
 	gridItemCss,
 	type LayoutType,
-} from './lib/furnitureArrangements';
+} from './lib/articleArrangements';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
 
 const stretchLines = css`
 	${until.phablet} {
@@ -158,6 +158,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isVideo = format.design === ArticleDesign.Video;
 
+	const isShowcase = format.display === ArticleDisplay.Showcase;
+
 	const showComments = article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
@@ -170,7 +172,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const layoutType: LayoutType = isMedia ? 'media' : 'standard';
+	const layoutType: LayoutType = isMedia
+		? 'media'
+		: isShowcase
+			? 'showcase'
+			: 'standard';
 
 	return (
 		<>
@@ -228,7 +234,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			/>
 
 			<MatchHeaderContainer
-				isMatchReport={isMatchReport}
 				renderingTarget={renderingTarget}
 				article={article}
 				format={format}
@@ -238,7 +243,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout="StandardLayout">
+			<main data-layout={`${ArticleDisplay[format.display]}Layout`}>
 				{isApps && renderAds && (
 					<Island priority="critical">
 						<AdPortals />
@@ -282,7 +287,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								hideCaption={isMedia}
 								shouldHideAds={article.shouldHideAds}
 								contentType={article.contentType}
-								contentLayout="StandardLayout"
+								contentLayout={`${
+									ArticleDisplay[format.display]
+								}Layout`}
 							/>
 						</GridItem>
 						<GridItem
@@ -836,12 +843,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 };
 
 const MatchHeaderContainer = ({
-	isMatchReport,
 	renderingTarget,
 	article,
 	format,
 }: {
-	isMatchReport: boolean;
 	renderingTarget: RenderingTarget;
 	article: ArticleDeprecated;
 	format: ArticleFormat;
@@ -868,41 +873,31 @@ const MatchHeaderContainer = ({
 
 	if (footballMatchHeaderUrl) {
 		return (
-			<>
-				<noscript>
-					<MatchHeaderFallback format={format} article={article} />
-				</noscript>
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<FootballMatchHeaderWrapper
-						initialTab="report"
-						leagueName={footballMatchLeagueName}
-						leagueURL={footballMatchLeagueUrl}
-						edition={article.editionId}
-						matchHeaderURL={footballMatchHeaderUrl}
-						renderingTarget={renderingTarget}
-						article={article}
-						format={format}
-					/>
-				</Island>
-			</>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMatchHeaderWrapper
+					initialTab="report"
+					leagueName={footballMatchLeagueName}
+					leagueURL={footballMatchLeagueUrl}
+					edition={article.editionId}
+					matchHeaderURL={footballMatchHeaderUrl}
+					renderingTarget={renderingTarget}
+					article={article}
+					format={format}
+				/>
+			</Island>
 		);
 	}
 
 	if (!isApps && cricketMatchHeaderUrl && isCricketRedesignEnabled) {
 		return (
-			<>
-				<noscript>
-					<MatchHeaderFallback format={format} article={article} />
-				</noscript>
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<CricketMatchHeaderWrapper
-						selectedTab={'report'}
-						edition={article.editionId}
-						matchHeaderURL={cricketMatchHeaderUrl}
-						tabContentId={'article'}
-					/>
-				</Island>
-			</>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<CricketMatchHeaderWrapper
+					selectedTab={'report'}
+					edition={article.editionId}
+					matchHeaderURL={cricketMatchHeaderUrl}
+					tabContentId={'article'}
+				/>
+			</Island>
 		);
 	}
 
