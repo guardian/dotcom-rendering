@@ -151,9 +151,9 @@ export const FootballMatchHeader = (props: Props) => {
 					sportKind="football"
 					matchKind={match.kind}
 					selected={props.initialTab}
-					reportURL={tabs.reportURL}
-					liveURL={tabs.liveURL}
-					infoURL={tabs.infoURL}
+					reportTab={tabs.reportURL}
+					liveTab={tabs.liveURL}
+					infoTab={tabs.infoURL}
 				/>
 			</div>
 		</section>

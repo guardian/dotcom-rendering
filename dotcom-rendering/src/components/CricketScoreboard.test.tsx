@@ -14,7 +14,8 @@ const defaultInnings: CricketInnings = {
 
 const defaultMatch: CricketMatch = {
 	matchId: 'test',
-	competitionName: 'test match',
+	competitionName: 'test match series',
+	stage: 'test match',
 	venueName: 'venue',
 	gameDate: '2021-06-30T14:00:00',
 	teams: [

@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -10,6 +10,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
+import { useAB } from '../lib/useAB';
 import { useFadeableControls } from '../lib/useFadeableControls';
 import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
@@ -17,6 +18,7 @@ import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
 import { useVideoAttentionTracking } from '../lib/useVideoAttentionTracking';
+import { useVideoFullscreen } from '../lib/useVideoFullscreen';
 import { useVideoMilestoneTracking } from '../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
@@ -151,29 +153,6 @@ const videoContainerStyles = (
 	`}
 `;
 
-const fullscreenStyles = css`
-	&:fullscreen {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background-color: ${palette('--video-fullscreen-background')};
-		width: 100vw;
-		height: 100vh;
-
-		/* Override the fixed aspect-ratio + width:100% on the video so it
-		   fits within the screen while preserving its aspect ratio. */
-
-		video {
-			width: 100%;
-			height: 100%;
-			max-width: 100vw;
-			max-height: 100vh;
-			aspect-ratio: auto;
-			object-fit: contain;
-		}
-	}
-`;
-
 /**
  * Dispatches a custom play audio event so that other videos listening for this event will be muted.
  */
@@ -214,28 +193,6 @@ const getOptimisedPosterImage = (
 		aspectRatio,
 	});
 };
-
-/**
- * 	The Fullscreen api is not supported by Safari mobile,
- * 	so we need to check if we have access to the webkit api we can use instead.
- * */
-const shouldUseWebkitFullscreen = (video: HTMLVideoElement): boolean => {
-	return (
-		'webkitDisplayingFullscreen' in video &&
-		'webkitEnterFullscreen' in video &&
-		'webkitExitFullscreen' in video
-	);
-};
-
-/**
- * 	The events we need to respond to for fullscreen tracking
- * */
-const fullscreenChangeEvents = [
-	'fullscreenchange',
-	'webkitfullscreenchange',
-	'webkitbeginfullscreen',
-	'webkitendfullscreen',
-];
 
 /**
  * Ensures the aspect ratio falls between the minimum and maximum allowed aspect ratios, if specified.
@@ -378,9 +335,18 @@ export const SelfHostedVideo = ({
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
+	const ab = useAB();
+	const isInClickToPlayTest =
+		Boolean(
+			ab?.isUserInTestGroup(
+				'fronts-and-curation-click-to-play',
+				'variant',
+			),
+		) && videoStyle === 'Default';
 	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
-	const willAttemptAutoplay = videoStyleSettings.autoplay && !preventAutoplay;
+	const willAttemptAutoplay =
+		videoStyleSettings.autoplay && !preventAutoplay && !isInClickToPlayTest;
 
 	const vidRef = useRef<HTMLVideoElement>(null);
 	const playerContainerRef = useRef<HTMLDivElement>(null);
@@ -402,8 +368,6 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState<number | undefined>();
 	const [height, setHeight] = useState<number | undefined>();
 	const [optimisedSources, setOptimisedSources] = useState<Source[]>([]);
-	const [isFullscreen, setIsFullscreen] = useState(false);
-	const [isWebKitFullscreen, setIsWebKitFullscreen] = useState(false);
 	const [isProgressBarSeeking, setIsProgressBarSeeking] = useState(false);
 
 	const isWeb = renderingTarget === 'Web';
@@ -417,9 +381,13 @@ export const SelfHostedVideo = ({
 	 * - the style of video allows autoplay
 	 * - the parent allows autoplay, i.e. we may not want to autoplay on certain page types
 	 * - autoplay is allowed by the browser, e.g. if "reduce motion" is enabled then we don't autoplay
+	 * - the user is not in the click-to-play test variant
 	 */
 	const shouldAutoplay =
-		videoStyleSettings.autoplay && !preventAutoplay && isAutoplayAllowed;
+		videoStyleSettings.autoplay &&
+		!preventAutoplay &&
+		isAutoplayAllowed === true &&
+		!isInClickToPlayTest;
 
 	const showProgressBar =
 		!hideProgressBar &&
@@ -450,7 +418,7 @@ export const SelfHostedVideo = ({
 		(playerState === 'PAUSED_BY_USER' ||
 			playerState === 'PAUSED_BY_BROWSER' ||
 			playerState === 'ENDED' ||
-			(playerState === 'NOT_STARTED' && shouldAutoplay === false));
+			(playerState === 'NOT_STARTED' && !shouldAutoplay));
 
 	const {
 		fadeableControlsStyles,
@@ -763,25 +731,6 @@ export const SelfHostedVideo = ({
 		};
 	}, [setMutedState, uniqueId, sources, renderingTarget, pauseVideo]);
 
-	/* Creates video-specific event listeners to handle fullscreen behaviour */
-	useEffect(() => {
-		const video = vidRef.current;
-		if (!video) return;
-
-		const handleEndFullscreen = () => {
-			setIsWebKitFullscreen(false);
-			positionCues(video);
-		};
-
-		video.addEventListener('webkitendfullscreen', handleEndFullscreen);
-
-		return () =>
-			video.removeEventListener(
-				'webkitendfullscreen',
-				handleEndFullscreen,
-			);
-	}, [positionCues]);
-
 	/**
 	 * Track the first time the video comes into view.
 	 */
@@ -816,80 +765,27 @@ export const SelfHostedVideo = ({
 	 */
 	useEffect(() => {
 		if (
-			shouldAutoplay === false ||
+			!shouldAutoplay ||
 			(isInView === false && playerState === 'NOT_STARTED')
 		) {
 			setShowPosterImage(true);
 		}
 	}, [shouldAutoplay, isInView, playerState]);
 
-	/**
-	 * Capture fullscreen tracking events across browsers and devices
-	 * We need to support events across:
-	 * 	- Browsers with fullscreen API support
-	 * 	- OSX Safari
-	 * 	- iOS Safari
-	 */
-	useEffect(() => {
-		const video = vidRef.current;
-		const playerContainer = playerContainerRef.current;
-
-		if (!playerContainer && !video) return;
-
-		const updateStateAndReportFullscreenEvent = () => {
-			const isInFullscreenMode =
-				document.fullscreenElement !== null ||
-				(video !== null &&
-					'webkitDisplayingFullscreen' in video &&
-					Boolean(video.webkitDisplayingFullscreen));
-
-			if (isInFullscreenMode) {
-				setIsFullscreen(true);
-			} else {
-				setIsFullscreen(false);
-			}
-
-			const event = isInFullscreenMode
-				? 'enter_fullscreen'
-				: 'exit_fullscreen';
-
-			sendOphanTrackingEvent(event);
-		};
-
-		for (const event of fullscreenChangeEvents) {
-			if (video) {
-				video.addEventListener(
-					event,
-					updateStateAndReportFullscreenEvent,
-				);
-			}
-
-			if (playerContainer) {
-				playerContainer.addEventListener(
-					event,
-					updateStateAndReportFullscreenEvent,
-				);
-			}
-		}
-
-		return () => {
-			for (const event of fullscreenChangeEvents) {
-				if (video) {
-					video.removeEventListener(
-						event,
-						updateStateAndReportFullscreenEvent,
-					);
-				}
-
-				if (playerContainer) {
-					playerContainer.removeEventListener(
-						event,
-						updateStateAndReportFullscreenEvent,
-					);
-				}
-			}
-		};
-	}, [sendOphanTrackingEvent]);
+	const {
+		isFullscreen,
+		isWebKitFullscreen,
+		handleFullscreenClick,
+		fullscreenStyles,
+		globalFullscreenStyles,
+	} = useVideoFullscreen({
+		videoRef: vidRef,
+		playerContainerRef,
+		renderingTarget,
+		sendOphanTrackingEvent,
+		positionCues,
+		showFadeableControlsAndStartTimer,
+	});
 
 	if (adapted) {
 		return FallbackImageComponent;
@@ -966,46 +862,6 @@ export const SelfHostedVideo = ({
 			setMutedState({ value: false });
 		} else {
 			setMutedState({ value: true });
-		}
-	};
-
-	const handleFullscreenClick = (event: React.SyntheticEvent) => {
-		void submitClickComponentEvent(event.currentTarget, renderingTarget);
-		event.stopPropagation(); // Don't pause the video
-
-		showFadeableControlsAndStartTimer(); // Show controls when a button is clicked
-
-		const video = vidRef.current;
-		if (!video) {
-			return;
-		}
-
-		if (shouldUseWebkitFullscreen(video)) {
-			/***
-			 * webkit fullscreen methods are not part of the standard HTMLVideoElement
-			 * type definition as they are iOS only.
-			 * We need to extend the type expect these handlers when we're on iOS to keep TS happy.
-			 * @see https://developer.apple.com/documentation/webkitjs/htmlvideoelement/1633500-webkitenterfullscreen
-			 */
-			const webkitVideo = video as HTMLVideoElement & {
-				webkitDisplayingFullscreen: boolean;
-				webkitEnterFullscreen: () => void;
-				webkitExitFullscreen: () => void;
-			};
-
-			if (webkitVideo.webkitDisplayingFullscreen) {
-				setIsWebKitFullscreen(false);
-				return webkitVideo.webkitExitFullscreen();
-			} else {
-				setIsWebKitFullscreen(true);
-				return webkitVideo.webkitEnterFullscreen();
-			}
-		}
-
-		if (document.fullscreenElement) {
-			void document.exitFullscreen();
-		} else if (playerContainerRef.current) {
-			void playerContainerRef.current.requestFullscreen();
 		}
 	};
 
@@ -1161,7 +1017,7 @@ export const SelfHostedVideo = ({
 	 */
 	if (isPlayable) {
 		if (
-			shouldAutoplay === true &&
+			shouldAutoplay &&
 			isInView === true &&
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
@@ -1171,7 +1027,11 @@ export const SelfHostedVideo = ({
 				setHasPageBecomeActive(false);
 			}
 			void playVideo();
-		} else if (playerState === 'PLAYING' && isInView === false) {
+		} else if (
+			playerState === 'PLAYING' &&
+			isInView === false &&
+			!isFullscreen
+		) {
 			void pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
 		}
 	}
@@ -1195,6 +1055,9 @@ export const SelfHostedVideo = ({
 					restrictHeightOnDesktop && maxHeightStyles,
 				]}
 			>
+				{globalFullscreenStyles && (
+					<Global styles={globalFullscreenStyles} />
+				)}
 				<div
 					ref={playerContainerRef}
 					css={[
@@ -1245,7 +1108,7 @@ export const SelfHostedVideo = ({
 						handleFullscreenClick={handleFullscreenClick}
 						handleEnded={handleEnded}
 						onError={onError}
-						preloadPartialData={shouldAutoplay === true}
+						preloadPartialData={shouldAutoplay}
 						showPlayPauseIcon={showPlayPauseIcon}
 						showProgressBar={showProgressBar}
 						useLongFormProgressBar={

@@ -196,7 +196,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 						showTopBorder={false}
 						shouldCenter={false}
 						backgroundColour={sourcePalette.neutral[7]}
-						padSides={true}
+						padSides={false}
 						element="header"
 					>
 						<Island priority="feature" defer={{ until: 'visible' }}>

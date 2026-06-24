@@ -16,6 +16,16 @@ const mockBetaABVariant1 = () => {
 	});
 };
 
+const mockBetaABControl = () => {
+	mocked(useAB).mockReturnValue({
+		isUserInTestGroup: (_testId: string, group: string) =>
+			group === 'control',
+		isUserInTest: () => true,
+		getParticipations: () => ({}),
+		trackABTests: () => ({}),
+	});
+};
+
 const recipeFormat = {
 	design: ArticleDesign.Recipe,
 	display: ArticleDisplay.Standard,
@@ -67,4 +77,11 @@ export const DefaultDark: Story = {
 		mockBetaABVariant1();
 	},
 	decorators: [darkDecorator([recipeFormat])],
+};
+
+/** Control — nudge is not shown */
+export const Control: Story = {
+	beforeEach() {
+		mockBetaABControl();
+	},
 };
