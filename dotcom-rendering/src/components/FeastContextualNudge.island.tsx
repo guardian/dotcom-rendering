@@ -21,8 +21,8 @@ import { useConfig } from './ConfigContext';
 
 const FEAST_BG = '#F3F3E9';
 const FEAST_BG_DARK = '#2B2B26';
-const FEAST_SUBTEXT = sourcePalette.neutral[20];
-const FEAST_SUBTEXT_DARK = sourcePalette.neutral[93];
+const FEAST_TEXT = sourcePalette.neutral[20];
+const FEAST_TEXT_DARK = sourcePalette.neutral[93];
 const FEAST_GREEN = '#68773C';
 const FEAST_GREEN_HOVER = '#4d5c2b';
 const FEAST_BORDER = FEAST_GREEN;
@@ -32,13 +32,13 @@ const FEAST_BORDER_DARK = FEAST_GREEN;
 
 const lightVars = css`
 	--feast-nudge-bg: ${FEAST_BG};
-	--feast-nudge-subtext: ${FEAST_SUBTEXT};
+	--feast-nudge-text: ${FEAST_TEXT};
 	--feast-nudge-border: ${FEAST_BORDER};
 `;
 
 const darkVars = css`
 	--feast-nudge-bg: ${FEAST_BG_DARK};
-	--feast-nudge-subtext: ${FEAST_SUBTEXT_DARK};
+	--feast-nudge-text: ${FEAST_TEXT_DARK};
 	--feast-nudge-border: ${FEAST_BORDER_DARK};
 `;
 
@@ -110,7 +110,7 @@ const buttonWrapperStyles = css`
 
 const descriptionStyles = css`
 	${article15};
-	color: var(--feast-nudge-subtext);
+	color: var(--feast-nudge-text);
 	b {
 		font-weight: bold;
 	}
