@@ -873,31 +873,41 @@ const MatchHeaderContainer = ({
 
 	if (footballMatchHeaderUrl) {
 		return (
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<FootballMatchHeaderWrapper
-					initialTab="report"
-					leagueName={footballMatchLeagueName}
-					leagueURL={footballMatchLeagueUrl}
-					edition={article.editionId}
-					matchHeaderURL={footballMatchHeaderUrl}
-					renderingTarget={renderingTarget}
-					article={article}
-					format={format}
-				/>
-			</Island>
+			<>
+				<noscript>
+					<MatchHeaderFallback format={format} article={article} />
+				</noscript>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FootballMatchHeaderWrapper
+						initialTab="report"
+						leagueName={footballMatchLeagueName}
+						leagueURL={footballMatchLeagueUrl}
+						edition={article.editionId}
+						matchHeaderURL={footballMatchHeaderUrl}
+						renderingTarget={renderingTarget}
+						article={article}
+						format={format}
+					/>
+				</Island>
+			</>
 		);
 	}
 
 	if (!isApps && cricketMatchHeaderUrl && isCricketRedesignEnabled) {
 		return (
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<CricketMatchHeaderWrapper
-					selectedTab={'report'}
-					edition={article.editionId}
-					matchHeaderURL={cricketMatchHeaderUrl}
-					tabContentId={'article'}
-				/>
-			</Island>
+			<>
+				<noscript>
+					<MatchHeaderFallback format={format} article={article} />
+				</noscript>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<CricketMatchHeaderWrapper
+						selectedTab={'report'}
+						edition={article.editionId}
+						matchHeaderURL={cricketMatchHeaderUrl}
+						tabContentId={'article'}
+					/>
+				</Island>
+			</>
 		);
 	}
 
