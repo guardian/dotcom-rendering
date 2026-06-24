@@ -3,7 +3,6 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
-	until,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { BackToTop } from '../components/BackToTop';
