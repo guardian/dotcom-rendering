@@ -222,6 +222,8 @@ const GalleryBody = (props: {
 						webTitle={props.webTitle}
 						renderingTarget={props.renderingTarget}
 						key={element.elementId}
+						// Pass the total number of images to include in the image caption (e.g. 1/5, 2/5, etc.)
+						imagesLength={props.bodyElements.length}
 					/>
 				);
 			} else {

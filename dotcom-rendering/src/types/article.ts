@@ -93,8 +93,14 @@ export const enhanceArticleType = (
 
 	const serverTime = Date.now();
 
+	const mainMediaElementsData =
+		// Hosted Gallery pages do not display main media
+		format.design === ArticleDesign.HostedGallery
+			? []
+			: data.mainMediaElements;
+
 	const imagesForLightbox = data.config.switches.lightbox
-		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
+		? buildLightboxImages(data.format, data.blocks, mainMediaElementsData)
 		: [];
 
 	const enhancedBlocks = enhanceBlocks(data.blocks, format, {
@@ -120,7 +126,7 @@ export const enhanceArticleType = (
 		imagesForLightbox,
 		true,
 		data.main,
-	)(data.mainMediaElements);
+	)(mainMediaElementsData);
 
 	const isGalleryPage = (design: ArticleDesign): design is GalleryDesign =>
 		design === ArticleDesign.Gallery ||

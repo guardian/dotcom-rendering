@@ -110,7 +110,7 @@ const BlockByline = ({
 	);
 };
 
-const liveBlockContainerStyles = () => css`
+const liveBlockContainerStyles = css`
 	padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 	box-sizing: border-box;
 	margin-bottom: ${space[3]}px;
