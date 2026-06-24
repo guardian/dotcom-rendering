@@ -1,13 +1,12 @@
 import { css } from '@emotion/react';
 import {
-	calculateHoverColour,
 	from,
 	palette as sourcePalette,
 	space,
-	textSansBold15,
 	until,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { BackToTop } from '../components/BackToTop';
 import { CallToActionButton } from '../components/CallToActionAtom';
 import { GalleryImage } from '../components/GalleryImage';
 import { HostedContentHeader } from '../components/HostedContentHeader.island';
@@ -114,58 +113,6 @@ const bttPosition = css`
 	}
 `;
 
-const bttIconHeight = '42px';
-
-const bttIconContainer = css`
-	position: relative;
-	float: right;
-	border-radius: 100%;
-	background-color: ${sourcePalette.neutral[100]};
-	cursor: pointer;
-	height: ${bttIconHeight};
-	min-width: ${bttIconHeight};
-`;
-
-const bttLink = css`
-	text-decoration: none;
-	color: ${sourcePalette.neutral[100]};
-	font-weight: bold;
-	line-height: ${bttIconHeight};
-
-	:hover {
-		color: ${calculateHoverColour(sourcePalette.neutral[100])};
-
-		.icon-container {
-			background-color: ${calculateHoverColour(
-				sourcePalette.neutral[100],
-			)};
-		}
-	}
-`;
-
-const bttIcon = css`
-	::before {
-		position: absolute;
-		top: 6px;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		margin: auto;
-		border: 2px solid ${sourcePalette.neutral[7]};
-		border-bottom: 0;
-		border-right: 0;
-		content: '';
-		height: 12px;
-		width: 12px;
-		transform: rotate(45deg);
-	}
-`;
-
-const bttTextStyles = css`
-	${textSansBold15};
-	padding-right: 5px;
-`;
-
 const ctaButtonStyles = css`
 	margin-right: ${space[3]}px;
 `;
@@ -265,7 +212,7 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 				/>
 				<div css={bttStyles}>
 					<div css={bttPosition}>
-						<BackToTop />
+						<BackToTop format={format} />
 					</div>
 				</div>
 			</main>
@@ -329,17 +276,4 @@ const GalleryBody = (props: {
 			}
 		})}
 	</div>
-);
-
-/** In order to reuse the BackToTop component in the Guardian Footer https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/components/BackToTop.tsx
- * we need to have access to the format to check if it's Hosted Gallery and then change the Link styling which I think it isn't possible as the Footer is not used in Hosted Content pages.
- * I created a new BackToTop component here but unfortunately we had to duplicate all the styling from the original BackToTop component except some updates in bttLink.
- * */
-const BackToTop = () => (
-	<a css={bttLink} href="#top" data-link-name="back to top">
-		<span css={bttTextStyles}>Back to top</span>
-		<span css={bttIconContainer} className="icon-container">
-			<i css={bttIcon} />
-		</span>
-	</a>
 );
