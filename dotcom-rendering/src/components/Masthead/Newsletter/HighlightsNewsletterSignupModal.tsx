@@ -144,7 +144,7 @@ const HighlightsNewsletterSignupModalContent = ({
 					frequency={newsletter.frequency}
 					isModal={true}
 					isAlreadySubscribed={isSubscribed === true}
-					componentId={NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(
+					componentId={NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCardForm(
 						newsletter.identityName,
 					)}
 				/>
