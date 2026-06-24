@@ -39,7 +39,8 @@ jobs:
         run: pnpm playwright test --shard=${{ matrix.group }}/8
         working-directory: ./dotcom-rendering
         env:
-          NODE_ENV: production
+          NODE_ENV: 'production'
+          USE_LOCAL_ASSETS: true
 
       - uses: actions/upload-artifact@v7
         if: always()
