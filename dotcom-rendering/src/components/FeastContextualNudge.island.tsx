@@ -21,8 +21,6 @@ import { useConfig } from './ConfigContext';
 
 const FEAST_BG = '#F3F3E9';
 const FEAST_BG_DARK = '#2B2B26';
-const FEAST_TEXT = sourcePalette.neutral[10];
-const FEAST_TEXT_DARK = sourcePalette.neutral[100];
 const FEAST_SUBTEXT = sourcePalette.neutral[20];
 const FEAST_SUBTEXT_DARK = sourcePalette.neutral[93];
 const FEAST_GREEN = '#68773C';
@@ -34,14 +32,12 @@ const FEAST_BORDER_DARK = FEAST_GREEN;
 
 const lightVars = css`
 	--feast-nudge-bg: ${FEAST_BG};
-	--feast-nudge-heading: ${FEAST_TEXT};
 	--feast-nudge-subtext: ${FEAST_SUBTEXT};
 	--feast-nudge-border: ${FEAST_BORDER};
 `;
 
 const darkVars = css`
 	--feast-nudge-bg: ${FEAST_BG_DARK};
-	--feast-nudge-heading: ${FEAST_TEXT_DARK};
 	--feast-nudge-subtext: ${FEAST_SUBTEXT_DARK};
 	--feast-nudge-border: ${FEAST_BORDER_DARK};
 `;
