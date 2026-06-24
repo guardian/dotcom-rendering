@@ -203,6 +203,14 @@ export const FeastContextualNudge = ({
 					}}
 					idApiUrl={idApiUrl}
 					stage={stage}
+					context={{
+						recipe,
+						recipeArticleTitle,
+						pageId,
+						isDev,
+						nudgeIndex,
+						darkMode: darkModeAvailable,
+					}}
 				/>
 			);
 		}
