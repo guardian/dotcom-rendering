@@ -82,19 +82,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "newsletters-signup-card-country-illustration",
-		description:
-			"Compare the existing SecureSignup (control) against a slightly modified version of the control (variantNewField) and the new NewsletterSignupCard design (variantIllustratedCard)",
-		owners: ["newsletters.dev@guardian.co.uk"],
-		expirationDate: "2026-07-01",
-		type: "client",
-		status: "ON",
-		audienceSize: 1,
-		audienceSpace: "B",
-		groups: ["control", "variantNewField", "variantIllustratedCard"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "commercial-prebid-price-floor-holdback",
 		description:
 			"This test will be the 5% holdback group for the prebid price floor",
@@ -160,24 +147,22 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "newsletters-highlights-signup-card",
-		description:
-			"Test a new newsletter signup card design in the scrollable/highlights container. Only users in the enabled group see the newsletter card; for all other users, newsletter trails are hidden during this rollout phase.",
-		owners: ["newsletters.dev@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2026-12-31",
-		type: "server",
-		audienceSize: 0,
-		audienceSpace: "C",
-		groups: ["enable"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "fronts-and-curation-loop-click-through",
 		description:
 			"Test impact of click to article via loop videos on fronts",
 		owners: ["fronts.and.curation@guardian.co.uk"],
 		status: "ON",
+		expirationDate: "2026-07-19",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "fronts-and-curation-click-to-play",
+		description: "Test click to play longform videos vs autoplay",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		status: "OFF",
 		expirationDate: "2026-07-19",
 		type: "server",
 		audienceSize: 0 / 100,
@@ -198,16 +183,16 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "feast-recipe-nudge",
+		name: "feast-recipe-nudge-v2",
 		description:
 			"Measures the impact of showing the Feast contextual nudge on recipe article pages",
 		owners: ["feast@theguardian.com"],
 		status: "ON",
 		expirationDate: "2027-01-01",
 		type: "client",
-		audienceSize: 50 / 100,
-		audienceSpace: "A",
-		groups: ["variant-1"],
+		audienceSize: 1,
+		audienceSpace: "B",
+		groups: ["control", "variant-1"],
 		shouldForceMetricsCollection: false,
 	},
 	{

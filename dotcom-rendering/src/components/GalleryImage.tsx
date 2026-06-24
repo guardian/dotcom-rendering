@@ -5,7 +5,7 @@ import { grid } from '../grid';
 import { type ArticleFormat } from '../lib/articleFormat';
 import { getImage } from '../lib/image';
 import { palette } from '../palette';
-import { type ImageBlockElement } from '../types/content';
+import type { ImageBlockElement } from '../types/content';
 import { type RenderingTarget } from '../types/renderingTarget';
 import { AppsLightboxImage } from './AppsLightboxImage.island';
 import { GalleryCaption } from './GalleryCaption';
@@ -19,6 +19,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	renderingTarget: RenderingTarget;
+	imagesLength?: number;
 };
 
 const styles = css`
@@ -70,6 +71,7 @@ export const GalleryImage = ({
 	pageId,
 	webTitle,
 	renderingTarget,
+	imagesLength,
 }: Props) => {
 	const asset = getImage(image.media.allImages);
 
@@ -138,6 +140,7 @@ export const GalleryImage = ({
 				pageId={pageId}
 				webTitle={webTitle}
 				position={image.position}
+				imagesLength={imagesLength}
 			/>
 		</figure>
 	);

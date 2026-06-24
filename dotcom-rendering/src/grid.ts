@@ -116,7 +116,7 @@ const centreRule = (n: number, color?: string): string => `/* CENTRE RULE */
       &::before {
         position: absolute;
         top: 0;
-        bottom: -9999px;
+        bottom: -99999px;
         width: 1px;
         background-color: ${color ?? palette('--article-border')};
         content: '';

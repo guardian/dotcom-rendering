@@ -89,6 +89,7 @@ const renderForm = () =>
 				newsletterId="morning-briefing"
 				newsletterName="Morning Briefing"
 				frequency="every day"
+				componentId="AR NewsletterSignupForm morning-briefing"
 			/>
 		</ConfigProvider>,
 	);

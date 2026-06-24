@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined, storage } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
-import { SvgPlus } from '@guardian/source/react-components';
+import { SvgChevronDownSingle } from '@guardian/source/react-components';
 import { useEffect, useReducer } from 'react';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import type {
@@ -536,7 +536,7 @@ export const Discussion = ({
 					onClick={() => {
 						dispatch({ type: 'expandComments' });
 					}}
-					icon={<SvgPlus />}
+					icon={<SvgChevronDownSingle />}
 					linkName="view-more-comments"
 				>
 					View more comments
