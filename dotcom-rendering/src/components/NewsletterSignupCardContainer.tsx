@@ -31,7 +31,7 @@ const sendPreviewTracking = ({
 		action: eventDescription === 'preview-open' ? 'EXPAND' : 'CLOSE',
 		identityName,
 		componentId:
-			NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(identityName),
+			NEWSLETTER_SIGNUP_COMPONENT_ID.inArticleSignupForm(identityName),
 		renderingTarget,
 		value: { eventDescription, renderUrl, isSignedIn },
 	});

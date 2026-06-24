@@ -12,6 +12,7 @@ import {
 	Pillar,
 } from '../../../lib/articleFormat';
 import { generateImageURL } from '../../../lib/image';
+import { NEWSLETTER_SIGNUP_COMPONENT_ID } from '../../../lib/newsletterSignupTracking';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import type { Newsletter } from '../../../types/content';
 import { FormatBoundary } from '../../FormatBoundary';
@@ -143,10 +144,9 @@ const HighlightsNewsletterSignupModalContent = ({
 					frequency={newsletter.frequency}
 					isModal={true}
 					isAlreadySubscribed={isSubscribed === true}
-					abTest={{
-						name: 'highlights-newsletter-card',
-						variant: 'highlightsCard',
-					}}
+					componentId={NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(
+						newsletter.identityName,
+					)}
 				/>
 			</NewsletterSignupCard>
 		</FormatBoundary>

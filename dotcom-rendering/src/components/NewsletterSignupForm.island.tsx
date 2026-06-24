@@ -35,6 +35,9 @@ type Props = {
 	previewAction?: NewsletterPreviewAction;
 	/** When `true`, the success message is shown immediately (user is already subscribed). */
 	isAlreadySubscribed?: boolean;
+	/** Ophan component ID for tracking events. Derived by the caller from the active
+	 * component/experiment so that this form is not coupled to test state. */
+	componentId: string;
 	/** Ophan A/B test metadata — forwarded to tracking events. */
 	abTest?: AbTest;
 	/**
@@ -290,6 +293,7 @@ const NewsletterSignupFormActive = ({
 	newsletterName,
 	frequency,
 	previewAction,
+	componentId,
 	abTest,
 	isModal = false,
 }: Omit<Props, 'isAlreadySubscribed'>) => {
@@ -320,6 +324,7 @@ const NewsletterSignupFormActive = ({
 	} = useNewsletterSignupForm(
 		newsletterId,
 		renderingTarget,
+		componentId,
 		abTest,
 		hideMarketingToggle,
 	);
