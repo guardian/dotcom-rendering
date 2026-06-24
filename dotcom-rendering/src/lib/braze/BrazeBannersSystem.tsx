@@ -318,6 +318,7 @@ enum BrazeBannersSystemMessageType {
 	GetSettingsPropertyValue = 'BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE',
 	NavigateToUrl = 'BRAZE_BANNERS_SYSTEM:NAVIGATE_TO_URL',
 	DismissBanner = 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
+	GetContext = 'BRAZE_BANNERS_SYSTEM:GET_CONTEXT',
 }
 
 /**
@@ -452,16 +453,20 @@ const runCssCheckerOnBrazeBanner = (
  * Displays a Braze Banner using the Braze Banners System.
  * @param meta Meta information required to display the banner
  * @param idApiUrl Identity API URL for newsletter subscriptions
+ * @param stage Current stage of the application (e.g., PROD, CODE)
+ * @param context Additional context for the banner (optional)
  * @returns React component that renders the Braze Banner
  */
 export const BrazeBannersSystemDisplay = ({
 	meta,
 	idApiUrl,
 	stage,
+	context,
 }: {
 	meta: BrazeBannersSystemMeta;
 	idApiUrl: string;
 	stage: StageType;
+	context?: unknown;
 }) => {
 	const supportOrigin = isProd(stage)
 		? 'https://support.theguardian.com'
@@ -750,6 +755,9 @@ export const BrazeBannersSystemDisplay = ({
 				| {
 						type: BrazeBannersSystemMessageType.DismissBanner;
 				  }
+				| {
+						type: BrazeBannersSystemMessageType.GetContext;
+				  }
 			>,
 		) => {
 			if (
@@ -891,6 +899,14 @@ export const BrazeBannersSystemDisplay = ({
 				case BrazeBannersSystemMessageType.DismissBanner:
 					dismissBanner();
 					break;
+				case BrazeBannersSystemMessageType.GetContext:
+					postMessageToBrazeBanner(
+						BrazeBannersSystemMessageType.GetContext,
+						{
+							context,
+						},
+					);
+					break;
 			}
 		};
 
@@ -907,6 +923,7 @@ export const BrazeBannersSystemDisplay = ({
 		createReminder,
 		dismissBanner,
 		postMessageToBrazeBanner,
+		context,
 	]);
 
 	// Log Impressions when the banner is seen, using the hasBeenSeen value from the useIsInView hook
