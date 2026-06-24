@@ -12,7 +12,6 @@ import {
 } from './newsletter-marketing-opt-in';
 import {
 	EVENT_DESCRIPTION_TO_ACTION,
-	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	type NewsletterEventDescription,
 	sendNewsletterSignupEvent,
 } from './newsletterSignupTracking';
@@ -110,34 +109,15 @@ const postFormData = async (
 	});
 };
 
-// TODO: when the in-article newsletter signup AB test (newsletters-signup-card-country-illustration)
-// is cleaned up, refactor getComponentId (and useNewsletterSignupForm) to accept an explicit
-// componentId rather than deriving it from abTest.variant, so tracking is not coupled to test state.
-const getComponentId = (newsletterId: string, abTest?: AbTest): string => {
-	switch (abTest?.variant) {
-		case 'variantIllustratedCard':
-			return NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(
-				newsletterId,
-			);
-		case 'variantNewField':
-			return NEWSLETTER_SIGNUP_COMPONENT_ID.variantNewField(newsletterId);
-		case 'highlightsCard':
-			return NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(newsletterId);
-		case undefined:
-		default:
-			return NEWSLETTER_SIGNUP_COMPONENT_ID.control(newsletterId);
-	}
-};
-
 const sendTracking = (
 	newsletterId: string,
+	componentId: string,
 	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
 	isSignedIn: boolean | 'Pending',
 	abTest?: AbTest,
 	extraDetails?: Record<string, unknown>,
 ): void => {
-	const componentId = getComponentId(newsletterId, abTest);
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
 		identityName: newsletterId,
@@ -233,6 +213,7 @@ export type NewsletterSignupFormState = {
 export const useNewsletterSignupForm = (
 	newsletterId: string,
 	renderingTarget: RenderingTarget,
+	componentId: string,
 	abTest?: AbTest,
 	hideMarketingToggle = false,
 ): NewsletterSignupFormState => {
@@ -351,6 +332,7 @@ export const useNewsletterSignupForm = (
 
 			sendTracking(
 				newsletterId,
+				componentId,
 				'form-submission',
 				renderingTarget,
 				isSignedIn,
@@ -388,6 +370,7 @@ export const useNewsletterSignupForm = (
 
 			sendTracking(
 				newsletterId,
+				componentId,
 				response.ok ? 'submission-confirmed' : 'submission-failed',
 				renderingTarget,
 				isSignedIn,
@@ -395,7 +378,7 @@ export const useNewsletterSignupForm = (
 				marketingOptInType ? { marketingOptInType } : undefined,
 			);
 		},
-		[abTest, isSignedIn, newsletterId, renderingTarget],
+		[abTest, componentId, isSignedIn, newsletterId, renderingTarget],
 	);
 
 	const handleCaptchaComplete = useCallback(
@@ -403,6 +386,7 @@ export const useNewsletterSignupForm = (
 			if (!token) {
 				sendTracking(
 					newsletterId,
+					componentId,
 					'captcha-not-passed',
 					renderingTarget,
 					isSignedIn,
@@ -416,6 +400,7 @@ export const useNewsletterSignupForm = (
 			}
 			sendTracking(
 				newsletterId,
+				componentId,
 				'captcha-passed',
 				renderingTarget,
 				isSignedIn,
@@ -430,6 +415,7 @@ export const useNewsletterSignupForm = (
 					console.error(error);
 					sendTracking(
 						newsletterId,
+						componentId,
 						'form-submit-error',
 						renderingTarget,
 						isSignedIn,
@@ -445,12 +431,20 @@ export const useNewsletterSignupForm = (
 					setIsWaitingForResponse(false);
 				});
 		},
-		[abTest, isSignedIn, newsletterId, renderingTarget, submitForm],
+		[
+			abTest,
+			componentId,
+			isSignedIn,
+			newsletterId,
+			renderingTarget,
+			submitForm,
+		],
 	);
 
 	const handleCaptchaLoadError = useCallback((): void => {
 		sendTracking(
 			newsletterId,
+			componentId,
 			'captcha-load-error',
 			renderingTarget,
 			isSignedIn,
@@ -460,7 +454,7 @@ export const useNewsletterSignupForm = (
 		setErrorMessage('Sorry, the reCAPTCHA failed to load.');
 		setIsWaitingForResponse(false);
 		recaptchaRef.current?.reset();
-	}, [abTest, isSignedIn, newsletterId, renderingTarget]);
+	}, [abTest, componentId, isSignedIn, newsletterId, renderingTarget]);
 
 	const handleSubmit = useCallback(
 		(event: FormEvent<HTMLFormElement>): void => {
@@ -480,6 +474,7 @@ export const useNewsletterSignupForm = (
 			setIsWaitingForResponse(true);
 			sendTracking(
 				newsletterId,
+				componentId,
 				'open-captcha',
 				renderingTarget,
 				isSignedIn,
@@ -489,6 +484,7 @@ export const useNewsletterSignupForm = (
 		},
 		[
 			abTest,
+			componentId,
 			isSignedIn,
 			isWaitingForResponse,
 			newsletterId,
@@ -508,12 +504,13 @@ export const useNewsletterSignupForm = (
 		setIsInteracted(true);
 		sendTracking(
 			newsletterId,
+			componentId,
 			'email-input-focused',
 			renderingTarget,
 			isSignedIn,
 			abTest,
 		);
-	}, [abTest, isSignedIn, newsletterId, renderingTarget]);
+	}, [abTest, componentId, isSignedIn, newsletterId, renderingTarget]);
 
 	const handleEmailInvalid = useCallback<
 		React.FormEventHandler<HTMLInputElement>
@@ -540,12 +537,13 @@ export const useNewsletterSignupForm = (
 		hasAttemptedSubmitRef.current = true;
 		sendTracking(
 			newsletterId,
+			componentId,
 			'click-button',
 			renderingTarget,
 			isSignedIn,
 			abTest,
 		);
-	}, [abTest, isSignedIn, newsletterId, renderingTarget]);
+	}, [abTest, componentId, isSignedIn, newsletterId, renderingTarget]);
 
 	const handleReset = useCallback<
 		ReactEventHandler<HTMLButtonElement>

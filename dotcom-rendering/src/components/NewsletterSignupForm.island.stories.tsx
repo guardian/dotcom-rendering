@@ -50,6 +50,7 @@ const defaultArgs = {
 	newsletterName: 'Saturday Edition',
 	frequency: 'every Saturday',
 	previewAction: { behaviour: 'modal' as const, onClick: fn() },
+	componentId: 'AR NewsletterSignupForm saturday-edition',
 };
 
 /** Shared no-op handlers — stories that focus on visual state don't need real callbacks. */
