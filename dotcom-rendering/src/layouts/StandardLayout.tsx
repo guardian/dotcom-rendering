@@ -67,6 +67,7 @@ import {
 	type LayoutType,
 } from './lib/furnitureArrangements';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
 
 const stretchLines = css`
 	${until.phablet} {
@@ -230,6 +231,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				isMatchReport={isMatchReport}
 				renderingTarget={renderingTarget}
 				article={article}
+				format={format}
 			/>
 
 			{isWeb && renderAds && hasSurveyAd && (
@@ -837,10 +839,12 @@ const MatchHeaderContainer = ({
 	isMatchReport,
 	renderingTarget,
 	article,
+	format,
 }: {
 	isMatchReport: boolean;
 	renderingTarget: RenderingTarget;
 	article: ArticleDeprecated;
+	format: ArticleFormat;
 }) => {
 	const footballMatchHeaderUrl =
 		article.matchType === 'FootballMatchType'
@@ -862,47 +866,43 @@ const MatchHeaderContainer = ({
 
 	const isApps = renderingTarget === 'Apps';
 
-	if (isMatchReport && !!footballMatchHeaderUrl) {
-		const parsedUrl = safeParseURL(footballMatchHeaderUrl);
-		if (!parsedUrl.ok) {
-			log(
-				'dotcom',
-				new Error(
-					`Failed to parse match header URL: ${footballMatchHeaderUrl}`,
-				),
-			);
-
-			return null;
-		}
+	if (footballMatchHeaderUrl) {
 		return (
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<FootballMatchHeaderWrapper
-					initialTab="report"
-					leagueName={footballMatchLeagueName}
-					leagueURL={footballMatchLeagueUrl}
-					edition={article.editionId}
-					matchHeaderURL={footballMatchHeaderUrl}
-					renderingTarget={renderingTarget}
-				/>
-			</Island>
+			<>
+				<noscript>
+					<MatchHeaderFallback format={format} article={article} />
+				</noscript>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FootballMatchHeaderWrapper
+						initialTab="report"
+						leagueName={footballMatchLeagueName}
+						leagueURL={footballMatchLeagueUrl}
+						edition={article.editionId}
+						matchHeaderURL={footballMatchHeaderUrl}
+						renderingTarget={renderingTarget}
+						article={article}
+						format={format}
+					/>
+				</Island>
+			</>
 		);
 	}
 
-	if (
-		isMatchReport &&
-		!isApps &&
-		!!cricketMatchHeaderUrl &&
-		isCricketRedesignEnabled
-	) {
+	if (!isApps && cricketMatchHeaderUrl && isCricketRedesignEnabled) {
 		return (
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<CricketMatchHeaderWrapper
-					selectedTab={'report'}
-					edition={article.editionId}
-					matchHeaderURL={cricketMatchHeaderUrl}
-					tabContentId={'article'}
-				/>
-			</Island>
+			<>
+				<noscript>
+					<MatchHeaderFallback format={format} article={article} />
+				</noscript>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<CricketMatchHeaderWrapper
+						selectedTab={'report'}
+						edition={article.editionId}
+						matchHeaderURL={cricketMatchHeaderUrl}
+						tabContentId={'article'}
+					/>
+				</Island>
+			</>
 		);
 	}
 
