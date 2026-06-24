@@ -191,23 +191,31 @@ export const FeastContextualNudge = ({
 		const banner = braze?.getBanner(placementId) ?? null;
 		if (banner && braze) {
 			return (
-				<BrazeBannersSystemDisplay
-					meta={{
-						id: `feast-contextual-nudge-${nudgeIndex}`,
-						braze,
-						banner,
-					}}
-					idApiUrl={idApiUrl}
-					stage={stage}
-					context={{
-						recipe,
-						recipeArticleTitle,
-						pageId,
-						isDev,
-						nudgeIndex,
-						darkMode: darkModeAvailable,
-					}}
-				/>
+				<div
+					aria-description={`Open the recipe ${title} in the Feast app`}
+					data-component="feast-contextual-nudge"
+					css={css`
+						margin: ${space[2]}px 0;
+					`}
+				>
+					<BrazeBannersSystemDisplay
+						meta={{
+							id: `feast-contextual-nudge-${nudgeIndex}`,
+							braze,
+							banner,
+						}}
+						idApiUrl={idApiUrl}
+						stage={stage}
+						context={{
+							recipe,
+							recipeArticleTitle,
+							pageId,
+							isDev,
+							nudgeIndex,
+							darkMode: darkModeAvailable,
+						}}
+					/>
+				</div>
 			);
 		}
 	}
