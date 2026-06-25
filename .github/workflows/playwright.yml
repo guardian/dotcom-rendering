@@ -40,7 +40,7 @@ jobs:
         working-directory: ./dotcom-rendering
         env:
           NODE_ENV: 'production'
-          USE_LOCAL_ASSETS: true
+          USE_LOCAL_ASSETS: 'true'
 
       - uses: actions/upload-artifact@v7
         if: always()
