@@ -114,6 +114,42 @@ export enum BrazeBannersSystemPlacementId {
 }
 
 /**
+ * Maximum number of placements per refresh request, as per Braze documentation:
+ * https://www.braze.com/docs/developer_guide/banners/placements/#requestBannersRefresh
+ */
+const BRAZE_MAX_PLACEMENTS_PER_REFRESH = 10;
+
+/**
+ * Maps each gu-island component name to the Braze Banner placement IDs it is
+ * responsible for rendering. When a gu-island element is absent from the
+ * server-rendered DOM, its placements are excluded from the refresh request,
+ * keeping requests within Braze's 10-placement cap and avoiding wasted
+ * rate-limit tokens on placements that cannot appear on the current page.
+ */
+const ISLAND_PLACEMENT_MAP: Record<string, BrazeBannersSystemPlacementId[]> = {
+	StickyBottomBanner: [BrazeBannersSystemPlacementId.Banner],
+	SlotBodyEnd: [BrazeBannersSystemPlacementId.EndOfArticle],
+	FeastContextualNudge: [
+		BrazeBannersSystemPlacementId.FeastContextualNudge1,
+		BrazeBannersSystemPlacementId.FeastContextualNudge2,
+		BrazeBannersSystemPlacementId.FeastContextualNudge3,
+		BrazeBannersSystemPlacementId.FeastContextualNudge4,
+		BrazeBannersSystemPlacementId.FeastContextualNudge5,
+	],
+};
+
+/**
+ * Determines which Braze Banner placement IDs are needed on the current page
+ * by checking which gu-island elements were rendered into the DOM server-side.
+ * Only placements whose corresponding island is present are included.
+ */
+export function getPagePlacements(): BrazeBannersSystemPlacementId[] {
+	return Object.entries(ISLAND_PLACEMENT_MAP).flatMap(([islandName, ids]) =>
+		document.querySelector(`gu-island[name="${islandName}"]`) ? ids : [],
+	);
+}
+
+/**
  * Trigger a refresh of Braze Banners System banners
  * "Each call to requestBannersRefresh consumes one token. If you attempt a refresh
  * when no tokens are available, the SDK doesn’t make the request and logs an error
@@ -126,7 +162,20 @@ export enum BrazeBannersSystemPlacementId {
  * @param braze The Braze instance
  * @returns A promise that resolves when the refresh is complete
  */
-export function refreshBanners(braze: BrazeInstance): Promise<void> {
+export function refreshBanners(
+	braze: BrazeInstance,
+	placements: BrazeBannersSystemPlacementId[],
+): Promise<void> {
+	brazeBannersSystemLogger.info(
+		`🔄 Requesting ${placements.length} placement(s): ${placements.join(', ')}`,
+	);
+
+	if (placements.length > BRAZE_MAX_PLACEMENTS_PER_REFRESH) {
+		brazeBannersSystemLogger.warn(
+			`⚠️ ${placements.length} placements requested, but Braze only processes the first ${BRAZE_MAX_PLACEMENTS_PER_REFRESH} per refresh request. See https://www.braze.com/docs/developer_guide/banners/placements/#requestBannersRefresh`,
+		);
+	}
+
 	let timeoutId: NodeJS.Timeout;
 
 	// Create the Timeout Promise
@@ -144,7 +193,7 @@ export function refreshBanners(braze: BrazeInstance): Promise<void> {
 	// Create the Braze Promise
 	const brazeRequest = new Promise<void>((resolve) => {
 		braze.requestBannersRefresh(
-			Object.values(BrazeBannersSystemPlacementId),
+			placements,
 			() => {
 				brazeBannersSystemLogger.info('✅ Refresh completed.');
 				clearTimeout(timeoutId); // Cancel the timeout
