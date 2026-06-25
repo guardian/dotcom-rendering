@@ -96,7 +96,7 @@ const maxHeightStyles = css`
 		max-height: 80svh;
 	}
 `;
-const videoContainerStyles = (
+const videoViewportStyles = (
 	aspectRatio: number,
 	aspectRatioOfVisibleVideo: number,
 	greyBarsAtSidesOnDesktop: boolean,
@@ -180,11 +180,7 @@ const logAndReportError = (src: string, error: Error) => {
 
 	log('dotcom', message);
 };
-/**
- * Cards on mobile have variable widths. To avoid requesting many
- * different image sizes, we use a single default width of 465px across
- * all mobile devices.
- */
+
 const MOBILE_VIDEO_WIDTH = 465;
 /**
  * 940 represents the widest possible video slot.
@@ -195,13 +191,19 @@ const getOptimisedPosterImage = (
 	mainImage: string,
 	aspectRatio: string,
 	isTabletOrAbove: boolean,
-	vidRef?: RefObject<HTMLVideoElement> | null,
+	measurementRef?: RefObject<HTMLElement>,
 ): string => {
 	// This only runs on the client
 	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
+
+	/**
+	 * Cards on mobile have variable widths. To avoid requesting many
+	 * different image sizes, we use a single default width of 465px across
+	 * all mobile devices.
+	 */
 	const imageWidth = !isTabletOrAbove
 		? MOBILE_VIDEO_WIDTH
-		: (vidRef?.current?.offsetWidth ?? MAX_POSTER_WIDTH);
+		: (measurementRef?.current?.offsetWidth ?? MAX_POSTER_WIDTH);
 
 	return generateImageURL({
 		mainImage,
@@ -366,8 +368,10 @@ export const SelfHostedVideo = ({
 		videoStyleSettings.autoplay && !preventAutoplay && !isInClickToPlayTest;
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
-	const vidRef = useRef<HTMLVideoElement>(null);
-	const playerContainerRef = useRef<HTMLDivElement>(null);
+	const videoRef = useRef<HTMLVideoElement>(null);
+	const videoContainerRef = useRef<HTMLElement>(null);
+
+	const fullscreenContainerRef = useRef<HTMLDivElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	/**
 	 * Autoplay videos must start muted as browser autoplay policies require it.
@@ -401,11 +405,11 @@ export const SelfHostedVideo = ({
 	 * - autoplay is allowed by the browser, e.g. if "reduce motion" is enabled then we don't autoplay
 	 * - the user is not in the click-to-play test variant
 	 */
-	const shouldAutoplay =
-		videoStyleSettings.autoplay &&
-		!preventAutoplay &&
-		isAutoplayAllowed === true &&
-		!isInClickToPlayTest;
+	const shouldAutoplay = false;
+	// videoStyleSettings.autoplay &&
+	// !preventAutoplay &&
+	// isAutoplayAllowed === true &&
+	// !isInClickToPlayTest;
 
 	const showProgressBar =
 		!hideProgressBar &&
@@ -480,7 +484,13 @@ export const SelfHostedVideo = ({
 				posterImage,
 				posterImageAspectRatio,
 				isTabletOrAbove,
-				vidRef,
+				/**
+				 * When the video is horizontally letterboxed (grey bars appear at the top and bottom), the
+				 * height of the video is not known, so we measure
+				 * the container. Otherwise, the video element matches the
+				 * rendered width, so we measure the video directly.
+				 */
+				isGreyBarsAtTopAndBottomOnDesktop ? videoContainerRef : vidRef,
 			)
 		: undefined;
 
@@ -804,6 +814,7 @@ export const SelfHostedVideo = ({
 	} = useVideoFullscreen({
 		videoRef: vidRef,
 		playerContainerRef,
+		playerContainerRef: fullscreenContainerRef,
 		renderingTarget,
 		sendOphanTrackingEvent,
 		positionCues,
@@ -1061,6 +1072,7 @@ export const SelfHostedVideo = ({
 
 	return (
 		<figure
+			ref={videoContainerRef}
 			className={`video-container ${videoStyle.toLocaleLowerCase()} ${
 				role === 'immersive' ? 'element-video-immersive' : ''
 			}`}
@@ -1082,7 +1094,7 @@ export const SelfHostedVideo = ({
 					<Global styles={globalFullscreenStyles} />
 				)}
 				<div
-					ref={playerContainerRef}
+					ref={fullscreenContainerRef}
 					css={[
 						videoContainerStyles(
 							aspectRatio,
