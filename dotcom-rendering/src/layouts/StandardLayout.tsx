@@ -241,6 +241,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			/>
 
 			<MatchHeaderContainer
+				article={article}
+				format={format}
 				isMatchReport={isMatchReport}
 				footballMatchHeaderUrl={footballMatchHeaderUrl}
 				leagueName={footballMatchLeagueName}
@@ -834,6 +836,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 };
 
 const MatchHeaderContainer = ({
+	article,
+	format,
 	isMatchReport,
 	footballMatchHeaderUrl,
 	leagueName,
@@ -841,6 +845,8 @@ const MatchHeaderContainer = ({
 	editionId,
 	renderingTarget,
 }: {
+	article: ArticleDeprecated;
+	format: ArticleFormat;
 	isMatchReport: boolean;
 	footballMatchHeaderUrl: string | undefined;
 	leagueName: string;
@@ -869,6 +875,8 @@ const MatchHeaderContainer = ({
 					edition={editionId}
 					matchHeaderURL={footballMatchHeaderUrl}
 					renderingTarget={renderingTarget}
+					article={article}
+					format={format}
 				/>
 			</Island>
 		);

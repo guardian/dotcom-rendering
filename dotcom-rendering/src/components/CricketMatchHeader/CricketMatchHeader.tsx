@@ -52,13 +52,13 @@ export type CricketMatchHeaderProps = {
 	edition: EditionId;
 	selectedTab: 'info' | 'live' | 'report';
 	tabContentId: string;
+	format: ArticleFormat;
+	article: ArticleDeprecated;
 };
 
 type Props = CricketMatchHeaderProps & {
 	getHeaderData: (url: string) => Promise<unknown>;
 	refreshInterval: number;
-	format?: ArticleFormat;
-	article?: ArticleDeprecated;
 };
 
 export const CricketMatchHeader = (props: Props) => {

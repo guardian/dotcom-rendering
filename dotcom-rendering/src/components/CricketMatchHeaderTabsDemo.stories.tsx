@@ -5,6 +5,8 @@ import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { liveMatch, resultMatch } from '../../fixtures/manual/cricketMatch';
 import type { FECricketMatchHeader } from '../frontend/feCricketMatchHeader';
+import type { ArticleFormat } from '../lib/articleFormat';
+import type { ArticleDeprecated } from '../types/article';
 import { CricketMatchHeader } from './CricketMatchHeader/CricketMatchHeader';
 
 const meta = preview.meta({
@@ -48,6 +50,8 @@ const baseArgs = {
 			liveURL:
 				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 		}),
+	article: {} as ArticleDeprecated,
+	format: {} as ArticleFormat,
 } satisfies ComponentProps<typeof CricketMatchHeader>;
 
 const liveArgs = {
