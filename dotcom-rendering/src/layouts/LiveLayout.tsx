@@ -1200,6 +1200,8 @@ const Header = (props: {
 						selectedTab={'live'}
 						edition={props.article.editionId}
 						matchHeaderURL={cricketMatchHeaderUrl}
+						article={props.article}
+						format={props.format}
 					/>
 				</Island>
 			</>
