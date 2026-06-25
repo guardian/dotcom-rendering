@@ -906,6 +906,8 @@ const MatchHeaderContainer = ({
 						edition={article.editionId}
 						matchHeaderURL={cricketMatchHeaderUrl}
 						tabContentId={'article'}
+						article={article}
+						format={format}
 					/>
 				</Island>
 			</>
