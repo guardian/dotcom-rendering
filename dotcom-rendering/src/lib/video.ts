@@ -9,6 +9,9 @@ export const DEFAULT_ASPECT_RATIO = 5 / 4;
 
 export const DEFAULT_IMAGE_ASPECT_RATIO = '5:4';
 
+/** * The maximum duration (in seconds) for a video to be considered "short". * Equals two 10-second time segments plus a small buffer. */
+const SHORT_VIDEO_MAX_DURATION = 20;
+
 export const customSelfHostedVideoPlayAudioEventName =
 	'self-hosted-video:play-with-audio';
 export const customYoutubePlayEventName = 'youtube-video:play';
@@ -49,12 +52,11 @@ export type SupportedVideoFileType =
 	(typeof allSupportedVideoFileTypes)[number];
 
 /**
- * We use an arbitrary limit or 21 seconds before considering a video "long".
+ * We use an arbitrary limit or 20 seconds before considering a video "long".
  * Why 20? This is because we request the video in 10 second chunks.
  * */
 const isLongVideo = (duration: number): boolean => {
-	const shortVideoMaxDuration = 21; // seconds
-	return duration >= shortVideoMaxDuration;
+	return duration > SHORT_VIDEO_MAX_DURATION;
 };
 /**
  * The looping video player types its `sources` attribute as `Sources`.
