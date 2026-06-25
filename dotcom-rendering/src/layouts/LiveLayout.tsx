@@ -23,7 +23,6 @@ import { CricketMatchHeaderWrapper } from '../components/CricketMatchHeaderWrapp
 import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.island';
 import { Footer } from '../components/Footer';
@@ -36,6 +35,7 @@ import { LiveblogGutterAskWrapper } from '../components/LiveblogGutterAskWrapper
 import { Liveness } from '../components/Liveness.island';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
+import { MatchHeaderFallback } from '../components/MatchHeaderFallback';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { OnwardsUpper } from '../components/OnwardsUpper.island';
@@ -1164,7 +1164,7 @@ const Header = (props: {
 		return (
 			<>
 				<noscript>
-					<FootballMatchHeaderFallback
+					<MatchHeaderFallback
 						format={props.format}
 						article={props.article}
 					/>
@@ -1187,14 +1187,22 @@ const Header = (props: {
 
 	if (!isApps && cricketMatchHeaderUrl && isCricketRedesignEnabled) {
 		return (
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<CricketMatchHeaderWrapper
-					tabContentId={props.liveBlogAreaId}
-					selectedTab={'live'}
-					edition={props.article.editionId}
-					matchHeaderURL={cricketMatchHeaderUrl}
-				/>
-			</Island>
+			<>
+				<noscript>
+					<MatchHeaderFallback
+						format={props.format}
+						article={props.article}
+					/>
+				</noscript>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<CricketMatchHeaderWrapper
+						tabContentId={props.liveBlogAreaId}
+						selectedTab={'live'}
+						edition={props.article.editionId}
+						matchHeaderURL={cricketMatchHeaderUrl}
+					/>
+				</Island>
+			</>
 		);
 	}
 
