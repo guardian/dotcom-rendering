@@ -35,7 +35,11 @@ export const SelfHostedVideoInArticle = ({
 	caption,
 }: SelfHostedVideoInArticleProps) => {
 	const posterImageUrl = element.posterImage?.[0]?.url;
-	const sources = extractValidSourcesFromAssets(element.assets, videoStyle);
+	const sources = extractValidSourcesFromAssets(
+		element.assets,
+		videoStyle,
+		element.duration,
+	);
 	const aspectRatio = getAspectRatioFromSources(sources);
 	const firstVideoSource = sources[0];
 

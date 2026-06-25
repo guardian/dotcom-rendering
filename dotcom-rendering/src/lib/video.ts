@@ -49,6 +49,14 @@ export type SupportedVideoFileType =
 	(typeof allSupportedVideoFileTypes)[number];
 
 /**
+ * We use an arbitrary limit or 21 seconds before considering a video "long".
+ * Why 20? This is because we request the video in 10 second chunks.
+ * */
+const isLongVideo = (duration: number): boolean => {
+	const shortVideoMaxDuration = 21; // seconds
+	return duration >= shortVideoMaxDuration;
+};
+/**
  * The looping video player types its `sources` attribute as `Sources`.
  * However, looping videos in articles are delivered as media atoms, which type
  * their `assets` as `VideoAssets`. Which means that we need to alter the shape
@@ -57,12 +65,16 @@ export type SupportedVideoFileType =
 export const extractValidSourcesFromAssets = (
 	assets: VideoAssets[],
 	videoStyle: VideoPlayerFormat,
+	videoDuration?: number,
 ): Source[] => {
 	/**
 	 * Sources are ordered because the browser will use the first source that it supports.
 	 */
 	const orderedMimeTypes =
-		videoStyle === 'Default'
+		/**
+		 * For videos that are 20 seconds or shorter, we prefer mp4 to avoid the overhead of HLS streaming.
+		 * */
+		videoStyle === 'Default' && isLongVideo(videoDuration ?? 0)
 			? supportedFileTypesPreferM3U8
 			: supportedFileTypesPreferMp4;
 
