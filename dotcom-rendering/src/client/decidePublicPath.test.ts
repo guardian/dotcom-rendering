@@ -17,22 +17,11 @@ describe('decidePublicPath', () => {
 
 		mockFrontendAssetsFullURL('https://assets.guim.co.uk/');
 
-		process.env = { NODE_ENV: undefined, HOSTNAME: undefined };
+		process.env = { USE_LOCAL_ASSETS: undefined };
 	});
 
-	it('with development flag', () => {
-		process.env.NODE_ENV = 'development';
-		expect(decidePublicPath()).toEqual('/assets/');
-	});
-
-	it('with production flag', () => {
-		process.env.NODE_ENV = 'production';
-		expect(decidePublicPath()).toEqual('https://assets.guim.co.uk/assets/');
-	});
-
-	it('with production flag in CI', () => {
-		process.env.NODE_ENV = 'production';
-		process.env.CI = 'true';
+	it('with USE_LOCAL_ASSETS flag', () => {
+		process.env.USE_LOCAL_ASSETS = 'true';
 		expect(decidePublicPath()).toEqual('/assets/');
 	});
 
