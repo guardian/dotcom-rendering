@@ -1,23 +1,9 @@
 import { css } from '@emotion/react';
 import { breakpoints, from } from '@guardian/source/foundations';
 import preview from '../../.storybook/preview';
+import type { FECricketMatchStatsSummary } from '../frontend/feCricketMatchPage';
 import { palette } from '../palette';
 import { CricketMiniMatchStats as CricketMiniMatchStatsComponent } from './CricketMiniMatchStats';
-
-// For Development Purposes
-import { object, string, Output } from 'valibot';
-
-const feCricketMatchStatsSummarySchema = object({
-	id: string(),
-	currentBattingTeam: string(),
-	matchStatus: string(),
-	infoURL: string(),
-});
-
-type FECricketMatchStatsSummary = Output<
-	typeof feCricketMatchStatsSummarySchema
->;
-// End of Development Helpers
 
 const gridCss = css`
 	background-color: ${palette('--football-live-blog-background')};

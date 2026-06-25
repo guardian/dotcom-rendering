@@ -8,48 +8,14 @@ import {
 import type { SWRConfiguration } from 'swr';
 import useSWR from 'swr';
 import { safeParse } from 'valibot';
+import type { CricketMatchStatsSummary } from '../cricketMatchV2';
+import { parseMatchStatsSummary } from '../cricketMatchV2';
+import { feCricketMatchStatsSummarySchema } from '../frontend/feCricketMatchPage';
 import type { Result } from '../lib/result';
 import { error, fromValibot, ok } from '../lib/result';
 import { palette } from '../palette';
+import { CricketMatchStat } from './CricketMatchStat';
 import { Placeholder } from './Placeholder';
-
-//For Development Purposes
-import { object, string, Output } from 'valibot';
-
-const feCricketMatchStatsSummarySchema = object({
-	id: string(),
-	currentBattingTeam: string(),
-	matchStatus: string(),
-	infoURL: string(),
-});
-
-type FECricketMatchStatsSummary = Output<
-	typeof feCricketMatchStatsSummarySchema
->;
-
-type CricketMatchStatsSummary = {
-	matchStatus: string;
-	currentBattingTeam: string;
-	infoURL: string;
-};
-
-type UnknownEventType = {
-	kind: 'UnknownEventType';
-	message: string;
-};
-
-type ParserError = UnknownEventType;
-
-const parseMatchStatsSummary = (
-	feCricketMatchStatsSummary: FECricketMatchStatsSummary,
-): Result<ParserError, CricketMatchStatsSummary> =>
-	ok({
-		matchStatus: feCricketMatchStatsSummary.matchStatus,
-		currentBattingTeam: 'England',
-		infoURL: 'www.theguardian.com',
-	});
-
-// End of Development helpers
 
 const containerCss = css`
 	isolation: isolate; /* [1] */
@@ -112,8 +78,11 @@ export const CricketMiniMatchStats = (props: Props) => {
 
 	return (
 		<div css={containerCss}>
-			<h1>Stat 1</h1>
-			<h1>Stat 2</h1>
+			<CricketMatchStat heading={'Match Status'} value={'Lunch'} />
+			<CricketMatchStat
+				heading={'Current Batting Team'}
+				value={'England'}
+			/>
 			<LinkButton
 				href={data.infoURL}
 				size="small"

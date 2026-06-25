@@ -5,6 +5,7 @@ import type {
 	FECricketMatch,
 	FECricketMatchResult,
 	FECricketMatchResultWinnerStatus,
+	FECricketMatchStatsSummary,
 	FECricketTeam,
 } from './frontend/feCricketMatchPage';
 import { parseDate, parseIntResult } from './lib/parse';
@@ -130,6 +131,12 @@ export type CricketMatch = {
 	officials: string[];
 };
 
+export type CricketMatchStatsSummary = {
+	matchStatus: string;
+	currentBattingTeam: string;
+	infoURL: string;
+};
+
 const paCricketStatusToMatchKind: Record<string, CricketMatchKind> = {
 	// Fixtures
 	'pre-match': 'Fixture',
@@ -220,6 +227,16 @@ const parseTeams = (
 		},
 	});
 };
+
+// TODO: Need to actually parse data
+export const parseMatchStatsSummary = (
+	feCricketMatchStatsSummary: FECricketMatchStatsSummary,
+): Result<ParserError, CricketMatchStatsSummary> =>
+	ok({
+		matchStatus: feCricketMatchStatsSummary.matchStatus,
+		currentBattingTeam: 'England',
+		infoURL: 'www.theguardian.com',
+	});
 
 const parseWinnerResult = (
 	winner: FECricketMatchResultWinnerStatus,
