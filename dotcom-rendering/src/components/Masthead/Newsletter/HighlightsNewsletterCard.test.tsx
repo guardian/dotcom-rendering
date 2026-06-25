@@ -252,6 +252,23 @@ describe('HighlightsNewsletterCard', () => {
 		);
 	});
 
+	it('sets data-component-id and data-form-component-id on the link to match Ophan component IDs', () => {
+		renderCard();
+
+		const link = screen.getByRole('link', {
+			name: defaultProps.headlineText,
+		});
+
+		expect(link).toHaveAttribute(
+			'data-component-id',
+			`highlights-card-${defaultProps.newsletter.identityName}`,
+		);
+		expect(link).toHaveAttribute(
+			'data-form-component-id',
+			`highlights-card-form-${defaultProps.newsletter.identityName}`,
+		);
+	});
+
 	it('falls back to trail image when newsletter image metadata is absent', () => {
 		renderCard({
 			newsletter: {
