@@ -23,6 +23,7 @@ import type {
 	CricketTeam,
 } from '../../cricketMatchV2';
 import { grid } from '../../grid';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -31,6 +32,7 @@ import {
 import { generateImageURL } from '../../lib/image';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
+import type { ArticleDeprecated } from '../../types/article';
 import { BigNumber } from '../BigNumber';
 import { CricketScorecardTabRemoteRender } from '../CricketScorecardTabRemoteRender';
 import {
@@ -40,6 +42,7 @@ import {
 	secondaryText,
 } from '../FootballMatchHeader/colours';
 import { Tabs } from '../FootballMatchHeader/Tabs';
+import { MatchHeaderFallback } from '../MatchHeaderFallback';
 import { Placeholder } from '../Placeholder';
 import type { CricketHeaderData } from './headerData';
 import { parse as parseHeaderData } from './headerData';
@@ -54,10 +57,12 @@ export type CricketMatchHeaderProps = {
 type Props = CricketMatchHeaderProps & {
 	getHeaderData: (url: string) => Promise<unknown>;
 	refreshInterval: number;
+	format?: ArticleFormat;
+	article?: ArticleDeprecated;
 };
 
 export const CricketMatchHeader = (props: Props) => {
-	const { data } = useSWR<CricketHeaderData, Error>(
+	const { data, error } = useSWR<CricketHeaderData, Error>(
 		props.matchHeaderURL,
 		fetcher(props.getHeaderData),
 		swrOptions(props.refreshInterval),
@@ -77,6 +82,21 @@ export const CricketMatchHeader = (props: Props) => {
 			setTabContentElement(el);
 		}
 	}, [props.tabContentId]);
+
+	if (error) {
+		if (
+			props.article &&
+			(props.format?.design === ArticleDesign.LiveBlog ||
+				props.format?.design === ArticleDesign.DeadBlog)
+		) {
+			return (
+				<MatchHeaderFallback
+					format={props.format}
+					article={props.article}
+				/>
+			);
+		}
+	}
 
 	if (data === undefined) {
 		return (

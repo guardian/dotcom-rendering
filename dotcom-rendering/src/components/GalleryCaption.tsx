@@ -6,7 +6,7 @@ import {
 	space,
 	textSans14,
 	textSans15,
-	textSans17,
+	textSansBold17,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
@@ -24,7 +24,10 @@ type Props = {
 	webTitle: string;
 	/** Position of the image in the gallery used to build share fragment */
 	position?: number;
-	// Pass the total number of images from Hosted Gallery to include in the image caption (e.g. 1/5, 2/5, etc.)
+	/**
+	 * Total number of images in the article used to display alongside the image position (1/5, 2/5, etc.)
+	 * Used for hosted content galleries only
+	 */
 	imagesLength?: number;
 };
 
@@ -49,7 +52,8 @@ const styles = css`
 `;
 
 const hostedGalleryStyles = css`
-	${textSans17}
+	${textSansBold17}
+	align-self: end;
 
 	${between.tablet.and.desktop} {
 		padding-left: 0;
@@ -59,6 +63,27 @@ const hostedGalleryStyles = css`
 	${from.tablet} {
 		padding-bottom: ${space[10]}px;
 	}
+`;
+
+const positionIndicatorStyles = css`
+	${textSans15}
+	display: block;
+	padding: ${space[2]}px 0 ${space[1]}px;
+
+	${from.desktop} {
+		padding-top: 0;
+	}
+`;
+
+const creditStyles = css`
+	display: block;
+	padding: ${space[2]}px 0 ${space[2]}px;
+`;
+
+const hostedCreditStyles = css`
+	${textSans15}
+	padding-top: ${space[3]}px;
+	color: ${sourcePalette.neutral[73]};
 `;
 
 export const GalleryCaption = ({
@@ -75,6 +100,12 @@ export const GalleryCaption = ({
 	const hideCredit =
 		displayCredit === false || credit === undefined || credit === '';
 	const isHostedGallery = format.design === ArticleDesign.HostedGallery;
+	const showPositionIndicator =
+		isHostedGallery &&
+		typeof position === 'number' &&
+		position !== 0 &&
+		typeof imagesLength === 'number' &&
+		imagesLength !== 0;
 
 	if (emptyCaption && hideCredit) {
 		return null;
@@ -82,38 +113,17 @@ export const GalleryCaption = ({
 
 	return (
 		<figcaption css={[styles, isHostedGallery && hostedGalleryStyles]}>
-			{isHostedGallery &&
-			typeof position === 'number' &&
-			!!imagesLength ? (
-				<small
-					css={css`
-						${textSans15}
-						display: block;
-						padding: ${space[2]}px 0 ${space[1]}px;
-
-						${from.desktop} {
-							padding-top: 0;
-						}
-					`}
-				>
+			{showPositionIndicator && (
+				<small css={positionIndicatorStyles}>
 					{position}&#47;{imagesLength}
 				</small>
-			) : null}
+			)}
+
 			{emptyCaption ? null : <CaptionText html={captionHtml} />}
+
 			{hideCredit ? null : (
 				<small
-					css={[
-						css`
-							display: block;
-							padding: ${space[2]}px 0 ${space[2]}px;
-						`,
-						isHostedGallery &&
-							css`
-								${textSans15}
-								padding-top: ${space[3]}px;
-								color: ${sourcePalette.neutral[73]};
-							`,
-					]}
+					css={[creditStyles, isHostedGallery && hostedCreditStyles]}
 				>
 					{credit}
 				</small>
