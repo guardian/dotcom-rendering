@@ -405,11 +405,11 @@ export const SelfHostedVideo = ({
 	 * - autoplay is allowed by the browser, e.g. if "reduce motion" is enabled then we don't autoplay
 	 * - the user is not in the click-to-play test variant
 	 */
-	const shouldAutoplay = false;
-	// videoStyleSettings.autoplay &&
-	// !preventAutoplay &&
-	// isAutoplayAllowed === true &&
-	// !isInClickToPlayTest;
+	const shouldAutoplay =
+		videoStyleSettings.autoplay &&
+		!preventAutoplay &&
+		isAutoplayAllowed === true &&
+		!isInClickToPlayTest;
 
 	const showProgressBar =
 		!hideProgressBar &&
@@ -490,7 +490,9 @@ export const SelfHostedVideo = ({
 				 * the container. Otherwise, the video element matches the
 				 * rendered width, so we measure the video directly.
 				 */
-				isGreyBarsAtTopAndBottomOnDesktop ? videoContainerRef : vidRef,
+				isGreyBarsAtTopAndBottomOnDesktop
+					? videoContainerRef
+					: videoRef,
 			)
 		: undefined;
 
@@ -524,7 +526,7 @@ export const SelfHostedVideo = ({
 	});
 
 	const activeCue = useSubtitles({
-		video: vidRef.current,
+		video: videoRef.current,
 		playerState,
 		currentTime,
 	});
@@ -542,7 +544,7 @@ export const SelfHostedVideo = ({
 	);
 
 	const playVideo = useCallback(async () => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		if (!video) {
 			return;
 		}
@@ -575,7 +577,7 @@ export const SelfHostedVideo = ({
 				| 'PAUSED_BY_BROWSER'
 			>,
 		) => {
-			const video = vidRef.current;
+			const video = videoRef.current;
 			if (!video) {
 				return;
 			}
@@ -606,8 +608,8 @@ export const SelfHostedVideo = ({
 	};
 
 	const updateCurrentTime = (newTime: number) => {
-		if (vidRef.current) {
-			vidRef.current.currentTime = newTime;
+		if (videoRef.current) {
+			videoRef.current.currentTime = newTime;
 			setCurrentTime(newTime);
 		}
 	};
@@ -768,7 +770,7 @@ export const SelfHostedVideo = ({
 	 * Track the first time the video comes into view.
 	 */
 	useOnce(() => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		const resolution =
 			video === null
 				? 'unknown'
@@ -812,8 +814,7 @@ export const SelfHostedVideo = ({
 		fullscreenStyles,
 		globalFullscreenStyles,
 	} = useVideoFullscreen({
-		videoRef: vidRef,
-		playerContainerRef,
+		videoRef,
 		playerContainerRef: fullscreenContainerRef,
 		renderingTarget,
 		sendOphanTrackingEvent,
@@ -826,7 +827,7 @@ export const SelfHostedVideo = ({
 	}
 
 	const handleLoadedMetadata = () => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		if (!video) {
 			return;
 		}
@@ -836,7 +837,7 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleLoadedData = () => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		if (!video) {
 			return;
 		}
@@ -933,7 +934,7 @@ export const SelfHostedVideo = ({
 	 */
 	const onError = () => {
 		const message = `Self-hosted video could not be played. source: ${
-			vidRef.current?.currentSrc ?? 'unknown'
+			videoRef.current?.currentSrc ?? 'unknown'
 		}`;
 
 		window.guardian.modules.sentry.reportError(
@@ -945,7 +946,7 @@ export const SelfHostedVideo = ({
 	};
 
 	const seekForward = () => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		if (!video) {
 			return;
 		}
@@ -957,7 +958,7 @@ export const SelfHostedVideo = ({
 	};
 
 	const seekBackward = () => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		if (!video) {
 			return;
 		}
@@ -969,7 +970,7 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleTimeUpdate = () => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		if (!video) {
 			return;
 		}
@@ -1096,7 +1097,7 @@ export const SelfHostedVideo = ({
 				<div
 					ref={fullscreenContainerRef}
 					css={[
-						videoContainerStyles(
+						videoViewportStyles(
 							aspectRatio,
 							aspectRatioOfVisibleVideo,
 							isGreyBarsAtSidesOnDesktop,
@@ -1121,7 +1122,7 @@ export const SelfHostedVideo = ({
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
 						duration={duration}
-						ref={vidRef}
+						ref={videoRef}
 						hasAudio={hasAudio}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
