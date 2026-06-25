@@ -15,7 +15,7 @@ import { DocumentBlockComponent } from '../components/DocumentBlockComponent.isl
 import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper.island';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.island';
 import { ExplainerAtom } from '../components/ExplainerAtom';
-import { Figure } from '../components/Figure';
+import { defaultRoleStyles, Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.island';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
@@ -1082,7 +1082,12 @@ export const RenderArticleElement = ({
 		idApiUrl,
 	});
 
-	const needsFigure = !bareElements.has(element._type);
+	const isInteractiveLayoutAtom =
+		element._type ===
+		'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
+
+	const needsFigure =
+		!bareElements.has(element._type) && !isInteractiveLayoutAtom;
 
 	const role =
 		'role' in element
@@ -1106,6 +1111,17 @@ export const RenderArticleElement = ({
 		>
 			{el}
 		</Figure>
+	) : isInteractiveLayoutAtom ? (
+		<section
+			key={'elementId' in element ? element.elementId : index}
+			id={'elementId' in element ? element.elementId : undefined}
+			css={defaultRoleStyles(role ?? 'inline', format, isTimeline)}
+			data-spacefinder-role={role}
+			data-spacefinder-type={element._type}
+			className={interactiveLegacyFigureClasses(element._type, role)}
+		>
+			{el}
+		</section>
 	) : (
 		el
 	);
