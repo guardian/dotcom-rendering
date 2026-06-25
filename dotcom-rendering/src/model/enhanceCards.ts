@@ -311,14 +311,13 @@ export const decideArticleMedia = (
 };
 
 export const decideReplacementMedia = (
-	showMainVideo?: boolean,
+	showMainVideo: boolean,
+	videoReplace: boolean,
 	mediaAtom?: FEMediaAtom,
-	videoReplace?: boolean,
 	cardImage?: string,
 ): MainMedia | undefined => {
 	/* Force video on the card when enabled by the fronts tool */
-	if (!!showMainVideo || !!videoReplace) {
-		return getActiveMediaAtom(!!videoReplace, mediaAtom, cardImage);
+	if (showMainVideo || videoReplace) {
 		return getActiveMediaAtom(mediaAtom, cardImage);
 	}
 	return undefined;
@@ -430,12 +429,12 @@ export const enhanceCards = (
 			imageSrc,
 		);
 		const replacementMainMedia = decideReplacementMedia(
-			faciaCard.properties.showMainVideo ??
-				faciaCard.properties.mediaSelect?.showMainVideo,
+			faciaCard.properties.showMainVideo === true ||
+				faciaCard.properties.mediaSelect?.showMainVideo === true,
+			faciaCard.properties.mediaSelect?.videoReplace === true,
 			faciaCard.mediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
-			faciaCard.properties.mediaSelect?.videoReplace,
 			imageSrc,
 		);
 
