@@ -89,7 +89,7 @@ export const CricketMiniMatchStats = (props: Props) => {
 			<CricketMatchStat
 				heading={'Not Out Batters'}
 				// This data will need to be properly handled here or in CricketMatchStat
-				value={data.notOutBatters.at(0).name}
+				value={data.notOutBatters?.at(0).name}
 			/>
 			<LinkButton
 				href={'#'}
