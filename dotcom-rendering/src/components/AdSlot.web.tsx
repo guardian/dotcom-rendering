@@ -10,7 +10,6 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import type { FEArticle } from '../frontend/feArticle';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center as layoutCenterStyles } from '../lib/center';
@@ -990,22 +989,9 @@ export const AdSlot = ({
 	}
 };
 
-type MobileStickyContainerProps = Pick<FEArticle, 'contentType' | 'pageId'>;
-
-export const MobileStickyContainer = ({
-	contentType,
-	pageId,
-}: MobileStickyContainerProps) => {
-	return (
-		<div
-			className="mobilesticky-container"
-			css={[
-				mobileStickyAdStyles,
-				(contentType === 'Article' ||
-					contentType === 'Interactive' ||
-					pageId.startsWith('football/')) &&
-					mobileStickyAdStylesFullWidth,
-			]}
-		/>
-	);
-};
+export const MobileStickyContainer = () => (
+	<div
+		className="mobilesticky-container"
+		css={[mobileStickyAdStyles, mobileStickyAdStylesFullWidth]}
+	/>
+);
