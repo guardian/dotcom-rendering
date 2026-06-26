@@ -595,15 +595,10 @@ export const renderElement = ({
 				description: newsletter.description,
 				name: newsletter.name,
 				frequency: newsletter.frequency,
-				successDescription: newsletter.successDescription,
 				theme: newsletter.theme,
 				illustrationSquare: newsletter.illustrationSquare,
 				exampleUrl: newsletter.exampleUrl,
 				idApiUrl: idApiUrl ?? '',
-				hideNewsletterSignupComponentForSubscribers:
-					!!switches.hideNewsletterSignupComponentForSubscribers,
-				showNewNewsletterSignupCard:
-					!!switches.showNewNewsletterSignupCard,
 			};
 			if (isListElement || isTimeline) {
 				return null;

@@ -51,7 +51,8 @@ export const NotificationsToggle = (props: Props) => {
 			)}
 			className={props.className}
 		>
-			Notifications {isFollowing ? 'on' : 'off'}
+			<Description notificationType={props.notificationType} />
+			{isFollowing ? ' on' : ' off'}
 		</ToggleButton>
 	);
 };
@@ -142,3 +143,14 @@ const handleError =
 			error,
 		);
 	};
+
+const Description = (props: {
+	notificationType: Props['notificationType'];
+}) => {
+	switch (props.notificationType) {
+		case 'content':
+			return 'Live blog notifications';
+		case 'football-match':
+			return 'Live match updates';
+	}
+};

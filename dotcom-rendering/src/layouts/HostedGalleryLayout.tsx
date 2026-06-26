@@ -5,6 +5,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { BackToTop } from '../components/BackToTop';
 import { CallToActionButton } from '../components/CallToActionAtom';
 import { GalleryImage } from '../components/GalleryImage';
 import { HostedContentHeader } from '../components/HostedContentHeader.island';
@@ -74,6 +75,29 @@ const metaStyles = css`
 
 	& > * {
 		margin-top: ${space[4]}px;
+	}
+`;
+
+const bttStyles = css`
+	${grid.paddedContainer}
+	${grid.outerRules()}
+	background-color: ${palette('--article-inner-background')};
+`;
+
+const bttPosition = css`
+	${grid.column.all}
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+	padding: 0 ${space[3]}px ${space[4]}px;
+
+	${from.tablet} {
+		${grid.column.centre}
+		padding: 0 0 ${space[4]}px;
+	}
+
+	${from.desktop} {
+		${grid.between('centre-column-start', 'right-column-end')}
 	}
 `;
 
@@ -174,6 +198,11 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					pageId={frontendData.pageId}
 					webTitle={frontendData.webTitle}
 				/>
+				<div css={bttStyles}>
+					<div css={bttPosition}>
+						<BackToTop format={format} />
+					</div>
+				</div>
 			</main>
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<OnwardsUpper

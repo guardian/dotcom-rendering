@@ -759,7 +759,7 @@ export const selfHostedLoopVideo53Card = {
 		],
 		aspectRatio: 5 / 3,
 		image: {
-			...selfHostedLoopVideo54Card.mainMedia.image,
+			src: 'https://media.guim.co.uk/211404dc9a4a7fa10fcf6a2f08e930327b2f7f3c/0_184_2909_1637/2000.jpg',
 			aspectRatio: '5:3',
 		},
 	},
@@ -773,7 +773,7 @@ export const selfHostedLoopVideo916Card = {
 		sources: [
 			{
 				mimeType: 'video/mp4',
-				src: 'https://uploads.guimcode.co.uk/2025/11/12/5x4_test--ee49513c-bf16-4321-a444-09c9a037d584-4.0.mp4',
+				src: 'https://uploads.guim.co.uk/2026/06/05/Is_it_possible_to_walk_to_MetLife_Stadium_from_New_York_City_--e4247040-30a8-4bd4-990b-9b80f0e8616e-2.0_720h.mp4"',
 				width: 406,
 				height: 720,
 				hasAudio: true,
@@ -781,7 +781,7 @@ export const selfHostedLoopVideo916Card = {
 		],
 		aspectRatio: 9 / 16,
 		image: {
-			...selfHostedLoopVideo54Card.mainMedia.image,
+			src: 'https://uploads.guim.co.uk/2026/06/05/Is_it_possible_to_walk_to_MetLife_Stadium_from_New_York_City_--e4247040-30a8-4bd4-990b-9b80f0e8616e-2.0.0000000.jpg',
 			aspectRatio: '9:16',
 		},
 	},
@@ -791,11 +791,14 @@ export const selfHostedLoopVideo169Card = {
 	...selfHostedLoopVideo54Card,
 	headline: 'Self-hosted 16:9 loop video card',
 	mainMedia: {
-		...selfHostedLoopVideo54Card.mainMedia,
+		type: 'SelfHostedVideo',
+		videoStyle: 'Loop',
+		atomId: '3cb22b60-2c3f-48d6-8bce-38c956907cce',
+		duration: 30,
 		sources: [
 			{
 				mimeType: 'video/mp4',
-				src: 'https://uploads.guim.co.uk/2026/01/02/Social_media_footage_shows_person_trying_to_put_out_flames_in_Crans-Montana_bar___video--77ec00d2-7e58-4698-898c-08174f65a94b-1.0.mp4',
+				src: 'https://uploads.guim.co.uk/2026/06/24/Samsung_Galaxy_S26_Series_Main_Media--652aad98-a2ce-4cc5-98d8-f67eafea4819-1.0_720h.mp4',
 				width: 1280,
 				height: 720,
 				hasAudio: true,
@@ -803,7 +806,7 @@ export const selfHostedLoopVideo169Card = {
 		],
 		aspectRatio: 16 / 9,
 		image: {
-			...selfHostedLoopVideo54Card.mainMedia.image,
+			src: 'https://uploads.guim.co.uk/2026/06/24/Samsung_Galaxy_S26_Series_Main_Media--652aad98-a2ce-4cc5-98d8-f67eafea4819-1.0.0000000.jpg',
 			aspectRatio: '16:9',
 		},
 	},

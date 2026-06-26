@@ -315,8 +315,8 @@ importers:
         specifier: workspace:ab-testing-config
         version: link:../ab-testing/config
       '@guardian/braze-components':
-        specifier: 23.0.1
-        version: 23.0.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(react@18.3.1)
+        specifier: 23.0.2
+        version: 23.0.2(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(react@18.3.1)
       '@guardian/bridget':
         specifier: 8.13.1
         version: 8.13.1
@@ -351,8 +351,8 @@ importers:
         specifier: 4.0.2
         version: 4.0.2
       '@guardian/react-crossword':
-        specifier: 17.1.0
-        version: 17.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3)
+        specifier: 19.0.1
+        version: 19.0.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -2502,8 +2502,8 @@ packages:
       '@noble/hashes':
         optional: true
 
-  '@guardian/braze-components@23.0.1':
-    resolution: {integrity: sha512-gYGu1lJCkjQ9PzYl4ucNBaeOiyb1bO9ColC5vSDr/+u1CsCyypF6c9uWCjfLiWXDUY9ywwggPNspqVZ5i8A+zA==}
+  '@guardian/braze-components@23.0.2':
+    resolution: {integrity: sha512-j1YwU78FKb1+5xL2Fh8TtJnKHXA46GW8rxTN71u7V5PKnnLCiW0BYPAMyRYCXm9czPnsoyj9ptEOpYKpiuTDZw==}
     engines: {node: '24.2'}
     peerDependencies:
       '@emotion/react': 11.1.2
@@ -2605,15 +2605,15 @@ packages:
       prettier: ^3.7.4
       tslib: ^2.8.1
 
-  '@guardian/react-crossword@17.1.0':
-    resolution: {integrity: sha512-OF0/iAU2bwyHkMwhfC3/3mBexVk70G4OoScXBPjehCwsFa0widb7w8UZoZ/55b3B6EU7Fb05Q7Vl+KExYg15aA==}
+  '@guardian/react-crossword@19.0.1':
+    resolution: {integrity: sha512-YglIyos6dD51pobs5TuaIxBmFbs2h3zGZsfhQlJMm0Pg3etYIiXG3pUkumXiQKyTp62dJt82wJOVXBPDMJH55g==}
     peerDependencies:
       '@emotion/react': ^11.11.4
-      '@guardian/libs': ^31.0.0
-      '@guardian/source': ^12.0.0
+      '@guardian/libs': ^33.0.0
+      '@guardian/source': ^13.0.0
       '@types/react': ^18.2.79
       react: ^18.2.0
-      typescript: ~5.9.3
+      typescript: ~6.0.3
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -11944,7 +11944,7 @@ snapshots:
 
   '@exodus/bytes@1.15.1': {}
 
-  '@guardian/braze-components@23.0.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(react@18.3.1)':
+  '@guardian/braze-components@23.0.2(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(react@18.3.1)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
       '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3)
@@ -12047,7 +12047,7 @@ snapshots:
       prettier: 3.8.3
       tslib: 2.6.2
 
-  '@guardian/react-crossword@17.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3)':
+  '@guardian/react-crossword@19.0.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
       '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3)
