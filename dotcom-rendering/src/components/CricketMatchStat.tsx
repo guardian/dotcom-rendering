@@ -4,15 +4,9 @@ import { visuallyHidden } from '@guardian/source/foundations';
 type MatchStatProps = {
 	heading: string;
 	value: string;
-	layout?: 'regular' | 'compact';
 };
 
-export const CricketMatchStat = ({
-	heading,
-	value,
-	layout,
-}: MatchStatProps) => {
-	const compactLayout = layout === 'compact';
+export const CricketMatchStat = ({ heading, value }: MatchStatProps) => {
 	return (
 		<div>
 			<h2>{heading}</h2>
