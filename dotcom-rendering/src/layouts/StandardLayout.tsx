@@ -153,6 +153,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
+	const cricketMatchUrl =
+		article.matchType == 'CricketMatchType' ? article.matchUrl : undefined;
+
+	const isCricketMatchReport =
+		format.design === ArticleDesign.MatchReport && !!cricketMatchUrl;
+
 	const isMedia =
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
@@ -236,6 +242,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<MatchHeaderContainer
 				isFootballMatchReport={isFootballMatchReport}
+				isCricketMatchReport={isCricketMatchReport}
 				renderingTarget={renderingTarget}
 				article={article}
 				format={format}
@@ -846,11 +853,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 const MatchHeaderContainer = ({
 	isFootballMatchReport,
+	isCricketMatchReport,
 	renderingTarget,
 	article,
 	format,
 }: {
 	isFootballMatchReport: boolean;
+	isCricketMatchReport: boolean;
 	renderingTarget: RenderingTarget;
 	article: ArticleDeprecated;
 	format: ArticleFormat;
@@ -897,7 +906,12 @@ const MatchHeaderContainer = ({
 		);
 	}
 
-	if (!isApps && cricketMatchHeaderUrl && isCricketRedesignEnabled) {
+	if (
+		isCricketMatchReport &&
+		!isApps &&
+		cricketMatchHeaderUrl &&
+		isCricketRedesignEnabled
+	) {
 		return (
 			<>
 				<noscript>
