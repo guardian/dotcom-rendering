@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import { visuallyHidden } from '@guardian/source/foundations';
-import { Batter } from '../cricketMatchV2';
-import { not } from 'ajv/dist/compile/codegen';
-
-type MatchStatProps = {
-	heading: string;
-	value?: string;
-};
+import type { Batter } from '../cricketMatchV2';
 
 export const CricketMatchStatStatus = ({
 	matchStatus,
