@@ -192,12 +192,12 @@ export const FeastContextualNudge = ({
 
 		// Guard against stale placements: if the last requestBannersRefresh
 		// was rate-limited AND this placement has suppressOnStale: true in
-		// ISLAND_PLACEMENT_MAP, skip getBanner() and fall through to the
-		// native nudge below.
+		// PLACEMENT_SUPPRESS_ON_STALE, skip getBanner() and fall through to
+		// the native nudge below.
 		//
-		// With the current config (suppressOnStale: false for
-		// FeastContextualNudge) this check always passes — it exists for
-		// forward-compatibility if the config is ever changed to true.
+		// Each FeastContextualNudge placement ID has its own entry in
+		// PLACEMENT_SUPPRESS_ON_STALE — change any individual one to `true`
+		// to suppress that specific nudge on a failed refresh.
 		const banner = !isPlacementStale(placementId)
 			? (braze?.getBanner(placementId) ?? null)
 			: null;
