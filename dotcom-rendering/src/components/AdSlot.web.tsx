@@ -10,7 +10,6 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import type { FEArticle } from '../frontend/feArticle';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center as layoutCenterStyles } from '../lib/center';
@@ -350,16 +349,19 @@ const liveBlogTopContainerStyles = css`
 `;
 
 const mobileStickyAdStyles = css`
+	z-index: ${getZIndex('mobileSticky')};
 	position: fixed;
 	bottom: 0;
-	width: 320px;
+	width: 100%;
 	margin: 0 auto;
 	right: 0;
 	left: 0;
-	z-index: ${getZIndex('mobileSticky')};
+	text-align: center;
+	background-color: ${schemedPalette('--ad-background')};
 	${from.phablet} {
 		display: none;
 	}
+
 	.ad-slot__close-button {
 		display: none;
 		position: absolute;
@@ -402,15 +404,6 @@ const mobileStickyAdStyles = css`
 		display: block;
 		position: relative;
 		${labelBoxStyles}
-	}
-`;
-
-const mobileStickyAdStylesFullWidth = css`
-	width: 100%;
-	text-align: center;
-	background-color: ${palette.neutral[97]};
-
-	.ad-slot[data-label-show='true']::before {
 		padding-left: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
 		padding-right: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
 	}
@@ -990,22 +983,6 @@ export const AdSlot = ({
 	}
 };
 
-type MobileStickyContainerProps = Pick<FEArticle, 'contentType' | 'pageId'>;
-
-export const MobileStickyContainer = ({
-	contentType,
-	pageId,
-}: MobileStickyContainerProps) => {
-	return (
-		<div
-			className="mobilesticky-container"
-			css={[
-				mobileStickyAdStyles,
-				(contentType === 'Article' ||
-					contentType === 'Interactive' ||
-					pageId.startsWith('football/')) &&
-					mobileStickyAdStylesFullWidth,
-			]}
-		/>
-	);
-};
+export const MobileStickyContainer = () => (
+	<div className="mobilesticky-container" css={mobileStickyAdStyles} />
+);
