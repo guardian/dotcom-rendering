@@ -513,7 +513,7 @@ export const CrosswordLayout = (props: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
-			<MobileStickyContainer data-print-layout="hide" />
+			{renderAds && <MobileStickyContainer data-print-layout="hide" />}
 		</>
 	);
 };
