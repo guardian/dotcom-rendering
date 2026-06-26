@@ -356,7 +356,7 @@ const mobileStickyAdStyles = css`
 	right: 0;
 	left: 0;
 	text-align: center;
-	background-color: ${palette.neutral[97]};
+	background-color: ${schemedPalette('--ad-background')};
 	z-index: ${getZIndex('mobileSticky')};
 	${from.phablet} {
 		display: none;

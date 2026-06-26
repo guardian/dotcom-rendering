@@ -918,7 +918,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer />
+					<MobileStickyContainer data-print-layout="hide" />
 				</>
 			)}
 			{isApps && (
