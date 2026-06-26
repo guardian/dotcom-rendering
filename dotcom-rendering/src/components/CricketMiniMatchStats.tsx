@@ -14,7 +14,11 @@ import { feCricketMatchStatsSummarySchema } from '../frontend/feCricketMatchPage
 import type { Result } from '../lib/result';
 import { error, fromValibot, ok } from '../lib/result';
 import { palette } from '../palette';
-import { CricketMatchStat } from './CricketMatchStat';
+import {
+	CricketMatchStatCurrentBattingTeam,
+	CricketMatchStatNotOutBatters,
+	CricketMatchStatStatus,
+} from './CricketMatchStat';
 import { Placeholder } from './Placeholder';
 
 const containerCss = css`
@@ -78,19 +82,20 @@ export const CricketMiniMatchStats = (props: Props) => {
 
 	return (
 		<div css={containerCss}>
-			<CricketMatchStat
-				heading={'Match Status'}
-				value={data.matchStatus}
-			/>
-			<CricketMatchStat
-				heading={'Current Batting Team'}
-				value={data.currentBattingTeam}
-			/>
-			<CricketMatchStat
-				heading={'Not Out Batters'}
-				// This data will need to be properly handled here or in CricketMatchStat
-				value={data.notOutBatters?.at(0).name}
-			/>
+			<CricketMatchStatStatus matchStatus={data.matchStatus} />
+
+			{data.currentBattingTeam != null && (
+				<CricketMatchStatCurrentBattingTeam
+					currentBattingTeam={data.currentBattingTeam}
+				/>
+			)}
+
+			{data.notOutBatters != null && (
+				<CricketMatchStatNotOutBatters
+					notOutBatters={data.notOutBatters}
+				/>
+			)}
+
 			<LinkButton
 				href={'#'}
 				size="small"
