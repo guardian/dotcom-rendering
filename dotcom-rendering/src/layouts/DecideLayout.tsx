@@ -14,8 +14,7 @@ import { HostedArticleLayout } from './HostedArticleLayout';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { HostedVideoLayout } from './HostedVideoLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
-import { InteractiveLayout } from './InteractiveLayout';
-import { InteractiveLayoutDeprecated } from './InteractiveLayoutDeprecated';
+import { InteractiveLayout } from './interactives/InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { PictureLayout } from './PictureLayout';
@@ -58,7 +57,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	};
 
 	const serverTime = article.serverTime;
-	const publicationDate = new Date(article.frontendData.webPublicationDate);
 
 	switch (article.display) {
 		case ArticleDisplay.Immersive: {
@@ -141,24 +139,13 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 		default: {
 			switch (article.design) {
 				case ArticleDesign.Interactive:
-					if (publicationDate < interactiveLayoutSwitchoverDate) {
-						return (
-							<InteractiveLayoutDeprecated
-								article={article.frontendData}
-								format={format}
-								renderingTarget={renderingTarget}
-								serverTime={serverTime}
-							/>
-						);
-					} else {
-						return (
-							<InteractiveLayout
-								article={article.frontendData}
-								format={format}
-								renderingTarget={renderingTarget}
-							/>
-						);
-					}
+					return (
+						<InteractiveLayout
+							article={article.frontendData}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
@@ -252,7 +239,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 	};
 
 	const serverTime = article.serverTime;
-	const publicationDate = new Date(article.frontendData.webPublicationDate);
 
 	switch (article.display) {
 		case ArticleDisplay.Immersive: {
@@ -342,26 +328,14 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 		default: {
 			switch (article.design) {
 				case ArticleDesign.Interactive:
-					if (publicationDate < interactiveLayoutSwitchoverDate) {
-						return (
-							<InteractiveLayoutDeprecated
-								article={article.frontendData}
-								NAV={NAV}
-								format={format}
-								renderingTarget={renderingTarget}
-								serverTime={serverTime}
-							/>
-						);
-					} else {
-						return (
-							<InteractiveLayout
-								article={article.frontendData}
-								NAV={NAV}
-								format={format}
-								renderingTarget={renderingTarget}
-							/>
-						);
-					}
+					return (
+						<InteractiveLayout
+							article={article.frontendData}
+							NAV={NAV}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout

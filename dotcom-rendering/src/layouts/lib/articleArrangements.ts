@@ -6,6 +6,7 @@ export type LayoutType =
 	| 'standard'
 	| 'showcase'
 	| 'media'
+	| 'interactive'
 	| 'immersiveLandscape'
 	| 'immersivePortrait';
 
@@ -163,6 +164,37 @@ const mediaCss: LayoutCssMap = {
 	},
 };
 
+const interactiveCss: LayoutCssMap = {
+	title: {
+		tablet: 'grid-row: 1;',
+		leftCol: `grid-row: 1; ${grid.column.left}`,
+	},
+	headline: {
+		tablet: 'grid-row: 2;',
+		leftCol: 'grid-row: 1;',
+	},
+	standfirst: {
+		tablet: 'grid-row: 3;',
+		leftCol: 'grid-row: 2;',
+	},
+	media: {
+		tablet: 'grid-row: 4;',
+		leftCol: 'grid-row: 3;',
+	},
+	meta: {
+		tablet: 'grid-row: 5;',
+		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		tablet: `grid-row: 6; ${grid.column.all};`,
+		leftCol: 'grid-row: 4;',
+	},
+	'right-column': {
+		desktop: `grid-row: 1 / span 6; ${grid.column.right};`,
+		leftCol: `grid-row: 1 / span 4; ${grid.column.right};`,
+	},
+};
+
 const immersivePortraitCss: LayoutCssMap = {
 	title: {
 		belowDesktop: `${grid.column.all} grid-row: 2;`,
@@ -247,6 +279,7 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	standard: standardCss,
 	showcase: showcaseCss,
 	media: mediaCss,
+	interactive: interactiveCss,
 	immersiveLandscape: immersiveLandscapeCss,
 	immersivePortrait: immersivePortraitCss,
 };
