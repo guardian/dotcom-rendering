@@ -125,17 +125,54 @@ const BRAZE_MAX_PLACEMENTS_PER_REFRESH = 10;
  * server-rendered DOM, its placements are excluded from the refresh request,
  * keeping requests within Braze's 10-placement cap and avoiding wasted
  * rate-limit tokens on placements that cannot appear on the current page.
+ *
+ * Each entry also carries a `suppressOnStale` flag that controls what happens
+ * when requestBannersRefresh is rate-limited by Braze:
+ *
+ * - true  → the placement IDs are added to `stalePlacements`. Guards in
+ *            canShowBrazeBannersSystem (and direct consumers) will refuse to
+ *            render the cached-but-potentially-outdated banner.
+ * - false → the cached banner is still shown, or the component falls back to
+ *            its own native UI. Use this when a graceful fallback exists or
+ *            when showing a slightly-stale campaign is preferable to silence.
+ *
+ * Default for new entries: false (permissive — show cached or fall back).
  */
-const ISLAND_PLACEMENT_MAP: Record<string, BrazeBannersSystemPlacementId[]> = {
-	StickyBottomBanner: [BrazeBannersSystemPlacementId.Banner],
-	SlotBodyEnd: [BrazeBannersSystemPlacementId.EndOfArticle],
-	FeastContextualNudge: [
-		BrazeBannersSystemPlacementId.FeastContextualNudge1,
-		BrazeBannersSystemPlacementId.FeastContextualNudge2,
-		BrazeBannersSystemPlacementId.FeastContextualNudge3,
-		BrazeBannersSystemPlacementId.FeastContextualNudge4,
-		BrazeBannersSystemPlacementId.FeastContextualNudge5,
-	],
+const ISLAND_PLACEMENT_MAP: Record<
+	string,
+	{
+		/** The Braze Banner placement IDs this island is responsible for. */
+		ids: BrazeBannersSystemPlacementId[];
+		/**
+		 * Whether to suppress rendering when the last refresh was rate-limited.
+		 * See the ISLAND_PLACEMENT_MAP JSDoc above for the full contract.
+		 */
+		suppressOnStale: boolean;
+	}
+> = {
+	// MRR placements: suppress on stale — avoid showing outdated campaigns
+	// that could mislead readers or contradict their current eligibility.
+	StickyBottomBanner: {
+		ids: [BrazeBannersSystemPlacementId.Banner],
+		suppressOnStale: true,
+	},
+	SlotBodyEnd: {
+		ids: [BrazeBannersSystemPlacementId.EndOfArticle],
+		suppressOnStale: true,
+	},
+	// Feast placements: do NOT suppress on stale. FeastContextualNudge has a
+	// native "Download the app" card as a fallback — if the Braze banner is
+	// unavailable or stale, that fallback renders instead of a blank slot.
+	FeastContextualNudge: {
+		ids: [
+			BrazeBannersSystemPlacementId.FeastContextualNudge1,
+			BrazeBannersSystemPlacementId.FeastContextualNudge2,
+			BrazeBannersSystemPlacementId.FeastContextualNudge3,
+			BrazeBannersSystemPlacementId.FeastContextualNudge4,
+			BrazeBannersSystemPlacementId.FeastContextualNudge5,
+		],
+		suppressOnStale: false,
+	},
 };
 
 /**
@@ -144,9 +181,52 @@ const ISLAND_PLACEMENT_MAP: Record<string, BrazeBannersSystemPlacementId[]> = {
  * Only placements whose corresponding island is present are included.
  */
 export function getPagePlacements(): BrazeBannersSystemPlacementId[] {
-	return Object.entries(ISLAND_PLACEMENT_MAP).flatMap(([islandName, ids]) =>
-		document.querySelector(`gu-island[name="${islandName}"]`) ? ids : [],
+	return Object.entries(ISLAND_PLACEMENT_MAP).flatMap(
+		([islandName, { ids }]) =>
+			document.querySelector(`gu-island[name="${islandName}"]`)
+				? ids
+				: [],
 	);
+}
+
+/**
+ * Pre-computed set of placement IDs that opt-in to stale suppression.
+ * Derived once at module load time from ISLAND_PLACEMENT_MAP entries where
+ * suppressOnStale is true — avoids re-computing on every refreshBanners call.
+ */
+const STALE_SUPPRESSABLE_PLACEMENTS = new Set<BrazeBannersSystemPlacementId>(
+	Object.values(ISLAND_PLACEMENT_MAP)
+		.filter(({ suppressOnStale }) => suppressOnStale)
+		.flatMap(({ ids }) => ids),
+);
+
+/**
+ * Tracks placement IDs whose most-recent requestBannersRefresh call failed
+ * due to Braze's rate-limiter. When a placement is in this set, getBanner()
+ * may still return cached data from a previous session — but we actively
+ * suppress rendering to avoid showing outdated campaigns.
+ *
+ * Only placements with suppressOnStale: true in ISLAND_PLACEMENT_MAP are ever
+ * added here. Entries are removed when a subsequent refresh succeeds.
+ *
+ * This is module-level state. DCR has no SPA navigation — every page visit
+ * is a full reload — so this set always starts empty on each page.
+ */
+const stalePlacements = new Set<BrazeBannersSystemPlacementId>();
+
+/**
+ * Returns true if the given placement was marked stale because its last
+ * requestBannersRefresh call was rate-limited by Braze. When true, consumers
+ * should skip getBanner() and not render the Braze banner.
+ *
+ * Note: with the current config, FeastContextualNudge placements have
+ * suppressOnStale: false and will never be stale. This function is exported
+ * for forward-compatibility if that config changes in a future iteration.
+ *
+ * @param id The placement ID to check.
+ */
+export function isPlacementStale(id: BrazeBannersSystemPlacementId): boolean {
+	return stalePlacements.has(id);
 }
 
 /**
@@ -195,12 +275,40 @@ export function refreshBanners(
 		braze.requestBannersRefresh(
 			placements,
 			() => {
+				// On success, lift stale status for any suppressable placements
+				// in this batch so a future re-refresh can restore them cleanly.
+				for (const id of placements) {
+					if (STALE_SUPPRESSABLE_PLACEMENTS.has(id)) {
+						stalePlacements.delete(id);
+					}
+				}
 				brazeBannersSystemLogger.info('✅ Refresh completed.');
 				clearTimeout(timeoutId); // Cancel the timeout
 				resolve();
 			},
 			() => {
-				brazeBannersSystemLogger.warn('⚠️ Refresh failed.');
+				// The errorCallback fires when Braze's rate-limit tokens are
+				// exhausted. getBanner() still returns the last-cached banner,
+				// but that data may be outdated. For placements with
+				// suppressOnStale: true, mark them stale so that
+				// canShowBrazeBannersSystem (and direct consumers like
+				// FeastContextualNudge) will not render the cached banner.
+				const markedStale: BrazeBannersSystemPlacementId[] = [];
+				for (const id of placements) {
+					if (STALE_SUPPRESSABLE_PLACEMENTS.has(id)) {
+						stalePlacements.add(id);
+						markedStale.push(id);
+					}
+				}
+				if (markedStale.length > 0) {
+					brazeBannersSystemLogger.warn(
+						`⚠️ Refresh failed (rate-limited). Marked ${markedStale.length} placement(s) as stale: ${markedStale.join(', ')}`,
+					);
+				} else {
+					brazeBannersSystemLogger.warn(
+						'⚠️ Refresh failed (rate-limited). No placements marked stale.',
+					);
+				}
 				clearTimeout(timeoutId); // Cancel the timeout
 				resolve();
 			},
@@ -278,6 +386,20 @@ export const canShowBrazeBannersSystem = async (
 	if (suppressForTaylorReport(tags)) {
 		brazeBannersSystemLogger.info(
 			'Article is part of the Taylor Report series. Not showing banner.',
+		);
+		return { show: false };
+	}
+
+	/**
+	 * Suppress this placement if it was marked stale by a failed refresh.
+	 * getBanner() still returns cached data when rate-limited, so we must
+	 * check stalePlacements *before* calling it to avoid rendering outdated
+	 * campaigns. Only placements with suppressOnStale: true in
+	 * ISLAND_PLACEMENT_MAP can ever be stale (currently: Banner, EndOfArticle).
+	 */
+	if (stalePlacements.has(placementId)) {
+		brazeBannersSystemLogger.info(
+			`Placement "${placementId}" is stale (last refresh was rate-limited). Not showing banner.`,
 		);
 		return { show: false };
 	}

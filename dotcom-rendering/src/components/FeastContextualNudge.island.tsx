@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import {
 	BrazeBannersSystemDisplay,
 	BrazeBannersSystemPlacementId,
+	isPlacementStale,
 } from '../lib/braze/BrazeBannersSystem';
 import { useAB } from '../lib/useAB';
 import { useBraze } from '../lib/useBraze';
@@ -188,7 +189,19 @@ export const FeastContextualNudge = ({
 			BrazeBannersSystemPlacementId[
 				`FeastContextualNudge${nudgeIndex}` as keyof typeof BrazeBannersSystemPlacementId
 			];
-		const banner = braze?.getBanner(placementId) ?? null;
+
+		// Guard against stale placements: if the last requestBannersRefresh
+		// was rate-limited AND this placement has suppressOnStale: true in
+		// ISLAND_PLACEMENT_MAP, skip getBanner() and fall through to the
+		// native nudge below.
+		//
+		// With the current config (suppressOnStale: false for
+		// FeastContextualNudge) this check always passes — it exists for
+		// forward-compatibility if the config is ever changed to true.
+		const banner = !isPlacementStale(placementId)
+			? (braze?.getBanner(placementId) ?? null)
+			: null;
+
 		if (banner && braze) {
 			return (
 				<div
