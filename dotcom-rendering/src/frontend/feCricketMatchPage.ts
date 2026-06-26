@@ -115,10 +115,9 @@ export type FECricketMatchPage = {
 };
 
 export const feCricketMatchStatsSummarySchema = object({
-	id: string(),
-	currentBattingTeam: string(),
 	matchStatus: string(),
-	infoURL: string(),
+	currentBattingTeam: string(),
+	notOutBatters: array(feCricketBatterSchema),
 });
 
 export type FECricketMatchStatsSummary = Output<

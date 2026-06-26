@@ -3,7 +3,7 @@ import { visuallyHidden } from '@guardian/source/foundations';
 
 type MatchStatProps = {
 	heading: string;
-	value: string;
+	value?: string;
 };
 
 export const CricketMatchStat = ({ heading, value }: MatchStatProps) => {

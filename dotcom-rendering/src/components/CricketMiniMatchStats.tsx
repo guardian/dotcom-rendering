@@ -78,13 +78,21 @@ export const CricketMiniMatchStats = (props: Props) => {
 
 	return (
 		<div css={containerCss}>
-			<CricketMatchStat heading={'Match Status'} value={'Lunch'} />
+			<CricketMatchStat
+				heading={'Match Status'}
+				value={data.matchStatus}
+			/>
 			<CricketMatchStat
 				heading={'Current Batting Team'}
-				value={'England'}
+				value={data.currentBattingTeam}
+			/>
+			<CricketMatchStat
+				heading={'Not Out Batters'}
+				// This data will need to be properly handled here or in CricketMatchStat
+				value={data.notOutBatters.at(0).name}
 			/>
 			<LinkButton
-				href={data.infoURL}
+				href={'#'}
 				size="small"
 				icon={<SvgArrowRightStraight />}
 				iconSide="right"

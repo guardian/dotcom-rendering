@@ -41,11 +41,34 @@ const meta = preview.meta({
 });
 
 const feMatchStatsSummaryData: FECricketMatchStatsSummary = {
-	id: '4540747',
-	matchStatus: 'test',
+	matchStatus: 'In Play',
 	currentBattingTeam: 'England',
-	infoURL:
-		'https://www.theguardian.com/football/match/2026/feb/17/bristolcity-v-wrexham',
+	notOutBatters: [
+		{
+			name: 'Tom Latham',
+			order: 1,
+			ballsFaced: 214,
+			runs: 151,
+			fours: 15,
+			sixes: 0,
+			out: true,
+			howOut: 'c Smith b Stokes',
+			onStrike: false,
+			nonStrike: true,
+		},
+		{
+			name: 'Devon Conway',
+			order: 2,
+			ballsFaced: 224,
+			runs: 157,
+			fours: 22,
+			sixes: 3,
+			out: true,
+			howOut: 'c Sub b Root',
+			onStrike: false,
+			nonStrike: true,
+		},
+	],
 };
 
 const getMockData = (data: FECricketMatchStatsSummary) =>
@@ -58,7 +81,7 @@ const getMockData = (data: FECricketMatchStatsSummary) =>
 export const CricketMiniMatchStats = meta.story({
 	args: {
 		matchStatsUrl:
-			'https://api.nextgen.guardianapps.co.uk/sport/cricket/match-header/2026-06-25/england-cricket-team.json',
+			'https://api.nextgen.guardianapps.co.uk/sport/cricket/match-stats/2026-06-25/england-cricket-team.json',
 		getMatchStatsData: () => getMockData(feMatchStatsSummaryData),
 		refreshInterval: 16_000,
 	},

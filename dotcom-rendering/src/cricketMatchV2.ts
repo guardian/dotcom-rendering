@@ -133,8 +133,8 @@ export type CricketMatch = {
 
 export type CricketMatchStatsSummary = {
 	matchStatus: string;
-	currentBattingTeam: string;
-	infoURL: string;
+	currentBattingTeam?: string;
+	notOutBatters?: Batter[];
 };
 
 const paCricketStatusToMatchKind: Record<string, CricketMatchKind> = {
@@ -228,14 +228,13 @@ const parseTeams = (
 	});
 };
 
-// TODO: Need to actually parse data
 export const parseMatchStatsSummary = (
 	feCricketMatchStatsSummary: FECricketMatchStatsSummary,
 ): Result<ParserError, CricketMatchStatsSummary> =>
 	ok({
 		matchStatus: feCricketMatchStatsSummary.matchStatus,
-		currentBattingTeam: 'England',
-		infoURL: 'www.theguardian.com',
+		currentBattingTeam: feCricketMatchStatsSummary.currentBattingTeam,
+		notOutBatters: feCricketMatchStatsSummary.notOutBatters,
 	});
 
 const parseWinnerResult = (
