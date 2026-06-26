@@ -489,11 +489,7 @@ export const NewsletterSignupLayout = ({
 			</Section>
 
 			<BannerWrapper data-print-layout="hide" />
-			<MobileStickyContainer
-				data-print-layout="hide"
-				contentType={article.contentType}
-				pageId={article.pageId}
-			/>
+			<MobileStickyContainer data-print-layout="hide" />
 		</>
 	);
 };

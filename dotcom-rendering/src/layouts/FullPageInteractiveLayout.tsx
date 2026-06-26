@@ -367,10 +367,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer
-						contentType={article.contentType}
-						pageId={article.pageId}
-					/>
+					<MobileStickyContainer />
 				</>
 			)}
 		</>

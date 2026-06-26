@@ -1110,11 +1110,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer
-						data-print-layout="hide"
-						contentType={article.contentType}
-						pageId={article.pageId}
-					/>
+					<MobileStickyContainer data-print-layout="hide" />
 				</>
 			)}
 

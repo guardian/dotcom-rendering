@@ -734,11 +734,7 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer
-						data-print-layout="hide"
-						contentType={article.contentType}
-						pageId={article.pageId}
-					/>
+					<MobileStickyContainer data-print-layout="hide" />
 				</>
 			)}
 			{isApps && (
