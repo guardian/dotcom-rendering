@@ -158,6 +158,7 @@ const pictureCss: LayoutCssMap = {
 	headline: {
 		mobile: 'grid-row: 2;',
 		tablet: 'grid-row: 2;',
+		desktop: `grid-row: 2; ${grid.between('centre-column-start', 'right-column-end')};`,
 		leftCol: 'grid-row: 1;',
 	},
 	standfirst: {
