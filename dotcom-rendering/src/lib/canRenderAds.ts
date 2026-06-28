@@ -1,3 +1,4 @@
+import type { FEShell } from '../frontend/feShell';
 import type { SportDataPage } from '../sportDataPage';
 import type { ArticleDeprecated } from '../types/article';
 import type { Front } from '../types/front';
@@ -8,7 +9,7 @@ import type { TagPage } from '../types/tagPage';
  * prevent ads from being displayed.
  */
 export const canRenderAds = (
-	pageData: ArticleDeprecated | Front | TagPage | SportDataPage,
+	pageData: ArticleDeprecated | Front | TagPage | SportDataPage | FEShell,
 ): boolean => {
 	if (pageData.isAdFreeUser) {
 		return false;
