@@ -973,10 +973,15 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Picture:
 					return (
 						<div
-							css={decideBottomPadding({
-								format,
-								hasAvatar,
-							})}
+							css={[
+								decideBottomPadding({
+									format,
+									hasAvatar,
+								}),
+								css`
+									max-width: 620px;
+								`,
+							]}
 						>
 							<DesignTag format={format} />
 							<h1
