@@ -43,6 +43,19 @@ async function getContentFromURL(
 			throw error;
 		});
 
+	// TODO: HACK!
+	if (url.pathname.startsWith('/shell')) {
+		return {
+			...config,
+			config: {
+				...config.config,
+				keywordIds: 'shell',
+				shortUrlId: '',
+				showRelatedContent: false,
+			},
+		};
+	}
+
 	return config;
 }
 

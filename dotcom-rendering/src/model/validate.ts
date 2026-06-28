@@ -7,12 +7,14 @@ import type { FEFootballMatchInfoPage } from '../frontend/feFootballMatchInfoPag
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
+import type { FEShell } from '../frontend/feShell';
 import type { FETagPage } from '../frontend/feTagPage';
 import articleSchema from '../frontend/schemas/feArticle.json';
 import footballMatchInfoPageSchema from '../frontend/schemas/feFootballMatchInfoPage.json';
 import footballMatchListPageSchema from '../frontend/schemas/feFootballMatchListPage.json';
 import footballTablesPageSchema from '../frontend/schemas/feFootballTablesPage.json';
 import frontSchema from '../frontend/schemas/feFront.json';
+import shellSchema from '../frontend/schemas/feShell.json';
 import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
@@ -57,6 +59,20 @@ const validateFootballTablesPage = ajv.compile<FEFootballTablesPage>(
 const validateFootballMatchInfoPage = ajv.compile<FEFootballMatchInfoPage>(
 	footballMatchInfoPageSchema,
 );
+
+const validateShell = ajv.compile<FEShell>(shellSchema);
+
+export const validateAsFESite = (data: unknown): FEArticle => {
+	if (validateArticle(data)) return data;
+
+	const url =
+		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateArticle.errors, null, 2)}`,
+	);
+};
 
 export const validateAsFEArticle = (data: unknown): FEArticle => {
 	if (validateArticle(data)) return data;
@@ -424,4 +440,18 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 	}
 
 	return page;
+};
+
+export const validateAsFEShell = (data: unknown): FEShell => {
+	if (validateShell(data)) return data;
+
+	const url =
+		isObject(data) && isObject(data.config) && isString(data.config.pageId)
+			? data.config.pageId
+			: 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateShell.errors, null, 2)}`,
+	);
 };
