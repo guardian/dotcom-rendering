@@ -12,7 +12,7 @@ catalog:
   '@aws-sdk/client-s3': 3.995.0
   '@aws-sdk/client-ssm': 3.995.0
   '@guardian/cdk': 63.6.1
-  '@guardian/eslint-config': 14.0.1
+  '@guardian/eslint-config': 16.0.0
   '@guardian/tsconfig': 1.0.1
   '@rollup/plugin-commonjs': 29.0.0
   '@rollup/plugin-json': 6.1.0
@@ -23,7 +23,7 @@ catalog:
   aws-cdk-lib: 2.257.0
   constructs: 10.6.0
   esbuild: 0.28.1
-  eslint: 9.39.1
+  eslint: 10.6.0
   rollup: 4.59.0
   rollup-plugin-esbuild: 6.2.1
   superstruct: 2.0.2
