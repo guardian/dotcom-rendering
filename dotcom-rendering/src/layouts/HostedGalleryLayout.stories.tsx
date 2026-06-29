@@ -1,3 +1,4 @@
+import { hostedPaletteDecorator } from '../../.storybook/decorators/themeDecorator';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { hostedGallery } from '../../fixtures/manual/hostedGallery';
@@ -21,6 +22,9 @@ const meta = preview.meta({
 	},
 });
 
+const { hostedCampaignColour = '' } =
+	hostedGallery.commercialProperties.UK.branding ?? {};
+
 const format = {
 	theme: ArticleSpecial.Labs,
 	design: ArticleDesign.HostedGallery,
@@ -42,6 +46,7 @@ export const Apps = meta.story({
 			renderingTarget: 'Apps',
 		},
 	},
+	decorators: hostedPaletteDecorator(hostedCampaignColour),
 });
 
 const webHostedGallery = enhanceArticleType(hostedGallery, 'Web');
@@ -55,6 +60,12 @@ export const Web = meta.story({
 		renderingTarget: 'Web',
 	},
 	parameters: {
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+				splitVertical: allModes['splitVertical'],
+			},
+		},
 		config: {
 			renderingTarget: 'Web',
 		},

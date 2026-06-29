@@ -14,6 +14,7 @@ import {
 import type { CSSProperties } from 'react';
 import type { ArticleFormat } from '../../src/lib/articleFormat';
 import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
+import { hostedContentStyleOverrides } from '../../src/lib/hostedContentStyles';
 
 const darkStoryCss = css`
 	background-color: ${sourcePalette.neutral[0]};
@@ -112,4 +113,12 @@ export const browserThemeDecorator =
 				<Story />
 			</div>
 		</>
+	);
+
+export const hostedPaletteDecorator =
+	(accentColour: string): Decorator =>
+	(Story) => (
+		<div css={css(hostedContentStyleOverrides(true, accentColour))}>
+			<Story />
+		</div>
 	);

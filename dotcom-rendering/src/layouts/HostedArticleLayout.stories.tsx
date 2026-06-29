@@ -1,3 +1,4 @@
+import { hostedPaletteDecorator } from '../../.storybook/decorators/themeDecorator';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { hostedArticle } from '../../fixtures/manual/hostedArticle';
@@ -21,6 +22,9 @@ const mockOnwardsContentFetch = customMockFetch([
 	},
 ]);
 
+const { hostedCampaignColour = '' } =
+	hostedArticle.commercialProperties.UK.branding ?? {};
+
 const meta = preview.meta({
 	title: 'Layouts/HostedArticle',
 	component: HostedArticleLayout,
@@ -35,6 +39,7 @@ const meta = preview.meta({
 		global.fetch = mockOnwardsContentFetch;
 		return <HostedArticleLayout {...args} />;
 	},
+	decorators: hostedPaletteDecorator(hostedCampaignColour),
 });
 
 const format = {
@@ -57,6 +62,7 @@ export const Apps = meta.story({
 		chromatic: {
 			modes: {
 				'light mobileMedium': allModes['light mobileMedium'],
+				splitVertical: allModes['splitVertical'],
 			},
 		},
 	},
