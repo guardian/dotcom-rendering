@@ -130,7 +130,7 @@ export const renderSportPage = ({ sportData, nav }: Props) => {
 
 	const build = getModulesBuild({
 		switches: sportData.config.switches,
-		tests: sportData.config.abTests ?? {},
+		tests: sportData.config.abTests,
 	});
 
 	/**
@@ -169,7 +169,7 @@ export const renderSportPage = ({ sportData, nav }: Props) => {
 			ajaxUrl: sportData.config.ajaxUrl,
 			googletagUrl: sportData.config.googletagUrl,
 			switches: sportData.config.switches,
-			abTests: sportData.config.abTests ?? {},
+			abTests: sportData.config.abTests,
 			serverSideABTests: sportData.config.serverSideABTests,
 			brazeApiKey: sportData.config.brazeApiKey,
 			isPaidContent: sportData.config.isPaidContent,

@@ -102,7 +102,7 @@ export const renderFront = ({
 
 	const build = getModulesBuild({
 		switches: front.config.switches,
-		tests: front.config.abTests ?? {},
+		tests: front.config.abTests,
 	});
 
 	/**
@@ -134,7 +134,7 @@ export const renderFront = ({
 		ajaxUrl: front.config.ajaxUrl,
 		googletagUrl: front.config.googletagUrl,
 		switches: front.config.switches,
-		abTests: front.config.abTests ?? {},
+		abTests: front.config.abTests,
 		serverSideABTests: front.config.serverSideABTests,
 		brazeApiKey: front.config.brazeApiKey,
 		contentType: front.config.contentType,
@@ -203,7 +203,7 @@ export const renderTagPage = ({
 
 	const build = getModulesBuild({
 		switches: tagPage.config.switches,
-		tests: tagPage.config.abTests ?? {},
+		tests: tagPage.config.abTests,
 	});
 
 	/**
@@ -235,7 +235,7 @@ export const renderTagPage = ({
 		ajaxUrl: tagPage.config.ajaxUrl,
 		googletagUrl: tagPage.config.googletagUrl,
 		switches: tagPage.config.switches,
-		abTests: tagPage.config.abTests ?? {},
+		abTests: tagPage.config.abTests,
 		serverSideABTests: tagPage.config.serverSideABTests,
 		brazeApiKey: tagPage.config.brazeApiKey,
 		googleRecaptchaSiteKey: tagPage.config.googleRecaptchaSiteKey,

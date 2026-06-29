@@ -480,7 +480,8 @@
                     "type": "string"
                 },
                 "abTests": {
-                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
+                    "description": "Server-side AB tests. Optional from `frontend`; a default of\n`{}` is applied during request validation (see `useDefaults` in\n`validate.ts`), so this is always present after enhancing.",
+                    "default": {},
                     "type": "object"
                 },
                 "ajaxUrl": {
@@ -697,6 +698,7 @@
             },
             "required": [
                 "a9PublisherId",
+                "abTests",
                 "adUnit",
                 "ajaxUrl",
                 "allowUserGeneratedContent",

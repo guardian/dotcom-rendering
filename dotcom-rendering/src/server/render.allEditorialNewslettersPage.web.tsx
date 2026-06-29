@@ -47,7 +47,7 @@ export const renderEditorialNewslettersPage = ({
 
 	const build = getModulesBuild({
 		switches: newslettersPage.config.switches,
-		tests: newslettersPage.config.abTests ?? {},
+		tests: newslettersPage.config.abTests,
 	});
 
 	/**
@@ -79,7 +79,7 @@ export const renderEditorialNewslettersPage = ({
 		ajaxUrl: newslettersPage.config.ajaxUrl,
 		googletagUrl: newslettersPage.config.googletagUrl,
 		switches: newslettersPage.config.switches,
-		abTests: newslettersPage.config.abTests ?? {},
+		abTests: newslettersPage.config.abTests,
 		serverSideABTests: newslettersPage.config.serverSideABTests,
 		brazeApiKey: newslettersPage.config.brazeApiKey,
 		contentType: newslettersPage.config.contentType,

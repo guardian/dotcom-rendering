@@ -282,9 +282,7 @@ export const CrosswordLayout = (props: Props) => {
 												pageId={article.pageId}
 												webTitle={article.webTitle}
 												ajaxUrl={article.config.ajaxUrl}
-												abTests={
-													article.config.abTests ?? {}
-												}
+												abTests={article.config.abTests}
 												switches={
 													article.config.switches
 												}
