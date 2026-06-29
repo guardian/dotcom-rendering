@@ -228,6 +228,7 @@ export const getActiveMediaAtom = (
 			const sources = extractValidSourcesFromAssets(
 				videoAssets,
 				videoStyle,
+				mediaAtom.duration,
 			);
 
 			const aspectRatio = getAspectRatioFromSources(sources);
