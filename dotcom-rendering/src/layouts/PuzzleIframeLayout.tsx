@@ -42,35 +42,49 @@ const backLinkStyles = css`
 	${textSans17};
 `;
 
-const iframeWrapStyles = css`
-	border: 1px solid ${palette.neutral[86]};
-	border-radius: 12px;
-	overflow: hidden;
-	background: white;
+const getIframeHeights = (
+	puzzlePage: FEPuzzleIframePageType,
+): { mobile: number; desktop: number } => {
+	if (puzzlePage.puzzle.slug === 'wordiply')
+		return { mobile: 1200, desktop: 1400 };
+	return { mobile: 760, desktop: 900 };
+};
 
-	.puzzle-me-embed,
-	.pm-embed-div {
-		display: block;
-		width: 100%;
-	}
+const iframeWrapStyles = (puzzlePage: FEPuzzleIframePageType) => {
+	const heights = getIframeHeights(puzzlePage);
 
-	.puzzle-me-embed iframe,
-	.pm-embed-div iframe {
-		display: block;
-		width: 100% !important;
-		height: 760px !important;
-		min-height: 760px;
-		border: 0;
-	}
+	return css`
+		border: 1px solid ${palette.neutral[86]};
+		border-radius: 12px;
+		overflow: hidden;
+		background: white;
 
-	${from.desktop} {
+		.puzzle-me-embed,
+		.pm-embed-div {
+			display: block;
+			width: 100%;
+		}
+
+		iframe,
 		.puzzle-me-embed iframe,
 		.pm-embed-div iframe {
-			height: 900px !important;
-			min-height: 900px;
+			display: block;
+			width: 100% !important;
+			height: ${heights.mobile}px !important;
+			min-height: ${heights.mobile}px;
+			border: 0;
 		}
-	}
-`;
+
+		${from.desktop} {
+			iframe,
+			.puzzle-me-embed iframe,
+			.pm-embed-div iframe {
+				height: ${heights.desktop}px !important;
+				min-height: ${heights.desktop}px;
+			}
+		}
+	`;
+};
 
 const iframePageGridStyles = css`
 	display: grid;
@@ -141,7 +155,7 @@ export const PuzzleIframeLayout = ({ puzzlePage, NAV }: Props) => {
 						<p css={copyStyles}>{puzzlePage.description}</p>
 					)}
 					<div css={iframePageGridStyles}>
-						<div css={iframeWrapStyles}>
+						<div css={iframeWrapStyles(puzzlePage)}>
 							{src !== undefined ? (
 								<Island
 									priority="feature"
