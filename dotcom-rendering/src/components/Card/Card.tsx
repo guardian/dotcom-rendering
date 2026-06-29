@@ -821,6 +821,7 @@ export const Card = ({
 					? palette('--onward-content-top-border')
 					: undefined
 			}
+			isLoopAndInLoopClickTestVariant={isLoopAndInLoopClickTestVariant}
 		>
 			<CardLink
 				linkTo={linkTo}
@@ -893,6 +894,9 @@ export const Card = ({
 						mediaPositionOnMobile={mediaPositionOnMobile}
 						padMedia={isMediaCardOrNewsletter && !isOnwardsContent}
 						isSmallCard={isSmallCard}
+						isLoopAndInLoopClickTestVariant={
+							isLoopAndInLoopClickTestVariant
+						}
 					>
 						{media.type === 'slideshow' && (
 							<Island
