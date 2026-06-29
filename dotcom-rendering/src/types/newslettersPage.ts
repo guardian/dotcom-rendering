@@ -14,7 +14,7 @@ type FENewslettersConfigType = {
 	sentryHost: string;
 	dcrSentryDsn: string; // used in dotcom-rendering/src/client/sentryLoader/sentry.ts
 	switches: Switches;
-	abTests: ServerSideTests;
+	abTests?: ServerSideTests;
 	serverSideABTests: Record<string, string>;
 	dfpAccountId: string;
 	commercialBundleUrl: string;

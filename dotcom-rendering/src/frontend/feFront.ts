@@ -322,7 +322,7 @@ export type FECollection = {
 };
 
 export type FEFrontConfig = {
-	abTests: ServerSideTests;
+	abTests?: ServerSideTests;
 	adUnit: string;
 	ajaxUrl: string;
 	brazeApiKey?: string;

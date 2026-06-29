@@ -44,7 +44,7 @@ export interface Switches {
  * this data could eventually be defined in dotcom-rendering
  */
 export interface ConfigType extends CommercialConfigType, LegacyConfig {
-	abTests: ServerSideTests;
+	abTests?: ServerSideTests;
 	adUnit: string;
 	ajaxUrl: string;
 	brazeApiKey?: string;

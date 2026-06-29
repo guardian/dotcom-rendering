@@ -139,9 +139,9 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 	});
 
 export const getModulesBuild = ({
-	tests,
+	tests = {},
 }: {
-	tests: ServerSideTests;
+	tests?: ServerSideTests;
 	switches: Switches;
 }): Extract<Build, `client.web${string}`> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {

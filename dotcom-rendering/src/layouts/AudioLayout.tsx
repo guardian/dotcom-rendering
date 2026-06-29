@@ -409,7 +409,7 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 									idUrl={article.config.idUrl ?? ''}
 									isDev={!!article.config.isDev}
 									keywordIds={article.config.keywordIds}
-									abTests={article.config.abTests}
+									abTests={article.config.abTests ?? {}}
 									tableOfContents={article.tableOfContents}
 									lang={article.lang}
 									isRightToLeftLang={

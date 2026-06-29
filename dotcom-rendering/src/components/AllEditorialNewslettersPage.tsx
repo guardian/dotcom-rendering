@@ -59,7 +59,7 @@ export const AllEditorialNewslettersPage = ({
 					commercialMetricsEnabled={
 						!!newslettersPage.config.switches.commercialMetrics
 					}
-					tests={newslettersPage.config.abTests}
+					tests={newslettersPage.config.abTests ?? {}}
 				/>
 			</Island>
 			<AllEditorialNewslettersPageLayout

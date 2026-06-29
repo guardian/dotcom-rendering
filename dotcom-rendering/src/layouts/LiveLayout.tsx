@@ -612,7 +612,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											pageId={article.pageId}
 											webTitle={article.webTitle}
 											ajaxUrl={article.config.ajaxUrl}
-											abTests={article.config.abTests}
+											abTests={
+												article.config.abTests ?? {}
+											}
 											switches={article.config.switches}
 											isSensitive={
 												article.config.isSensitive
@@ -746,7 +748,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												sectionId={
 													article.config.section
 												}
-												abTests={article.config.abTests}
+												abTests={
+													article.config.abTests ?? {}
+												}
 												switches={
 													article.config.switches
 												}

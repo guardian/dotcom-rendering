@@ -115,7 +115,7 @@ export const createGuardian = ({
 	ajaxUrl: string;
 	googletagUrl: string;
 	switches: Switches;
-	abTests: ServerSideTests;
+	abTests?: ServerSideTests;
 	serverSideABTests: Record<string, string>;
 	editionId: EditionId;
 	shouldHideReaderRevenue?: boolean;
@@ -166,7 +166,7 @@ export const createGuardian = ({
 				googletag: googletagUrl,
 			},
 			switches,
-			tests: abTests,
+			tests: abTests ?? {},
 			serverSideABTests,
 			ophan: {
 				pageViewId: '',

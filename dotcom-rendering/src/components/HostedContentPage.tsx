@@ -106,7 +106,7 @@ export const HostedContentPage = (props: WebProps | AppProps) => {
 							commercialMetricsEnabled={
 								!!frontendData.config.switches.commercialMetrics
 							}
-							tests={frontendData.config.abTests}
+							tests={frontendData.config.abTests ?? {}}
 						/>
 					</Island>
 

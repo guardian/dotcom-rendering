@@ -113,7 +113,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							commercialMetricsEnabled={
 								!!frontendData.config.switches.commercialMetrics
 							}
-							tests={frontendData.config.abTests}
+							tests={frontendData.config.abTests ?? {}}
 						/>
 					</Island>
 					<Island priority="feature" defer={{ until: 'idle' }}>
@@ -137,7 +137,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 						/>
 					</Island>
 					{isGoogleOneTapEnabled(
-						frontendData.config.abTests,
+						frontendData.config.abTests ?? {},
 						frontendData.config.switches,
 					) && (
 						<Island

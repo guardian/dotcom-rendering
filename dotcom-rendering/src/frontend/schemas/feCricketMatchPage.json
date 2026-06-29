@@ -790,7 +790,6 @@
             },
             "required": [
                 "a9PublisherId",
-                "abTests",
                 "adUnit",
                 "ajaxUrl",
                 "allowUserGeneratedContent",
