@@ -79,7 +79,7 @@ describe('HighlightsNewsletterCard', () => {
 		setCardInView(false);
 	});
 
-	it('opens signup modal on Web click and tracks click', () => {
+	it('opens signup modal on Web click and tracks EXPAND', () => {
 		setCardInView(true);
 
 		renderCard();
@@ -107,16 +107,6 @@ describe('HighlightsNewsletterCard', () => {
 		expect(
 			screen.getByTestId('highlights-newsletter-signup-modal'),
 		).toBeInTheDocument();
-
-		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
-			expect.objectContaining({
-				action: 'CLICK',
-				identityName: defaultProps.newsletter.identityName,
-				componentId: `highlights-card-${defaultProps.newsletter.identityName}`,
-				renderingTarget: defaultProps.renderingTarget,
-				value: { eventDescription: 'highlights-card-clicked' },
-			}),
-		);
 
 		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
 			expect.objectContaining({
@@ -186,10 +176,6 @@ describe('HighlightsNewsletterCard', () => {
 		expect(
 			screen.queryByTestId('highlights-newsletter-signup-modal'),
 		).not.toBeInTheDocument();
-
-		expect(sendNewsletterSignupEvent).not.toHaveBeenCalledWith(
-			expect.objectContaining({ action: 'CLICK' }),
-		);
 
 		expect(sendNewsletterSignupEvent).not.toHaveBeenCalledWith(
 			expect.objectContaining({ action: 'EXPAND' }),
