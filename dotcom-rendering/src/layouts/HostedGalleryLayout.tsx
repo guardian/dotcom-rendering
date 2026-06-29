@@ -164,19 +164,17 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 						standfirst={frontendData.standfirst}
 					/>
 
-					{renderingTarget === 'Web' && (
-						<div data-print-layout="hide" css={metaStyles}>
-							{cta?.url && (
-								<div css={ctaButtonStyles}>
-									<CallToActionButton
-										linkUrl={cta.url}
-										accentColor={
-											branding?.hostedCampaignColour
-										}
-										buttonText={cta.btnText}
-									/>
-								</div>
-							)}
+					<div data-print-layout="hide" css={metaStyles}>
+						{cta?.url && (
+							<div css={ctaButtonStyles}>
+								<CallToActionButton
+									linkUrl={cta.url}
+									accentColor={branding?.hostedCampaignColour}
+									buttonText={cta.btnText}
+								/>
+							</div>
+						)}
+						{renderingTarget === 'Web' && (
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
@@ -188,8 +186,8 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 									context="ArticleMeta"
 								/>
 							</Island>
-						</div>
-					)}
+						)}
+					</div>
 				</header>
 				<GalleryBody
 					renderingTarget={renderingTarget}

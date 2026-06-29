@@ -12,13 +12,6 @@ import { HostedGalleryLayout } from './HostedGalleryLayout';
 const meta = preview.meta({
 	title: 'Layouts/HostedGallery',
 	component: HostedGalleryLayout,
-	parameters: {
-		chromatic: {
-			modes: {
-				'light leftCol': allModes['light leftCol'],
-			},
-		},
-	},
 });
 
 const format = {
@@ -38,6 +31,11 @@ export const Apps = meta.story({
 		renderingTarget: 'Apps',
 	},
 	parameters: {
+		chromatic: {
+			modes: {
+				'light mobileMedium': allModes['light mobileMedium'],
+			},
+		},
 		config: {
 			renderingTarget: 'Apps',
 		},
@@ -55,6 +53,11 @@ export const Web = meta.story({
 		renderingTarget: 'Web',
 	},
 	parameters: {
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
+		},
 		config: {
 			renderingTarget: 'Web',
 		},
