@@ -192,6 +192,8 @@ export const HighlightsNewsletterCard = ({
 				{isModalOpen && (
 					<HighlightsNewsletterSignupModal
 						newsletter={newsletter}
+						renderingTarget={renderingTarget}
+						componentId={componentId}
 						onClose={() => {
 							setIsModalOpen(false);
 							sendNewsletterSignupEvent({
