@@ -11,7 +11,7 @@ jest.mock('../../../lib/newsletterSignupTracking', () => ({
 	sendNewsletterSignupEvent: jest.fn(),
 	NEWSLETTER_SIGNUP_COMPONENT_ID: {
 		highlightsCard: (id: string) => `highlights-card-${id}`,
-		highlightsCardForm: (id: string) => `highlights-card-form-${id}`,
+		highlightsModal: (id: string) => `highlights-modal-${id}`,
 	},
 }));
 

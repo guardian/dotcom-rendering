@@ -47,8 +47,8 @@ export const NEWSLETTER_SIGNUP_COMPONENT_ID = {
 		`AR NewsletterSignupForm ${identityName}`,
 	highlightsCard: (identityName: string) =>
 		`HighlightsNewsletterCard ${identityName}`,
-	highlightsCardForm: (identityName: string) =>
-		`HighlightsNewsletterCardForm ${identityName}`,
+	highlightsModal: (identityName: string) =>
+		`HighlightsNewsletterModal ${identityName}`,
 } as const;
 
 /**
