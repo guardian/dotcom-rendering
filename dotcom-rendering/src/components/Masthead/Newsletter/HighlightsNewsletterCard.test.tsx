@@ -238,7 +238,7 @@ describe('HighlightsNewsletterCard', () => {
 		);
 	});
 
-	it('sets data-component-id and data-form-component-id on the link to match Ophan component IDs', () => {
+	it('sets data-modal-component-id on the link to match the Ophan modal component ID', () => {
 		renderCard();
 
 		const link = screen.getByRole('link', {
@@ -246,12 +246,8 @@ describe('HighlightsNewsletterCard', () => {
 		});
 
 		expect(link).toHaveAttribute(
-			'data-component-id',
-			`highlights-card-${defaultProps.newsletter.identityName}`,
-		);
-		expect(link).toHaveAttribute(
-			'data-form-component-id',
-			`highlights-card-form-${defaultProps.newsletter.identityName}`,
+			'data-modal-component-id',
+			`highlights-modal-${defaultProps.newsletter.identityName}`,
 		);
 	});
 

@@ -143,7 +143,7 @@ export const HighlightsNewsletterCard = ({
 	const componentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(
 		newsletter.identityName,
 	);
-	const formComponentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCardForm(
+	const modalComponentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsModal(
 		newsletter.identityName,
 	);
 	const [hasBeenSeen, setIsInViewRef] = useIsInView({});
@@ -218,8 +218,7 @@ export const HighlightsNewsletterCard = ({
 						css={linkOverlayStyles}
 						onClick={handleClick}
 						data-link-name={dataLinkName}
-						data-component-id={componentId}
-						data-form-component-id={formComponentId}
+						data-modal-component-id={modalComponentId}
 						aria-label={headlineText}
 					/>
 
