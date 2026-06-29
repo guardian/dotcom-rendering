@@ -150,7 +150,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			? article.matchStatsUrl
 			: undefined;
 
-	const isMatchReport =
+	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
 	const isMedia =
@@ -235,6 +235,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			/>
 
 			<MatchHeaderContainer
+				isFootballMatchReport={isFootballMatchReport}
 				renderingTarget={renderingTarget}
 				article={article}
 				format={format}
@@ -499,7 +500,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									idApiUrl={article.config.idApiUrl}
 								/>
 								<MatchInfoContainer
-									isMatchReport={isMatchReport}
+									isMatchReport={isFootballMatchReport}
 									footballMatchStatsUrl={
 										footballMatchStatsUrl
 									}
@@ -815,11 +816,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer
-						data-print-layout="hide"
-						contentType={article.contentType}
-						pageId={article.pageId}
-					/>
+					{renderAds && (
+						<MobileStickyContainer data-print-layout="hide" />
+					)}
 				</>
 			)}
 
@@ -844,10 +843,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 };
 
 const MatchHeaderContainer = ({
+	isFootballMatchReport,
 	renderingTarget,
 	article,
 	format,
 }: {
+	isFootballMatchReport: boolean;
 	renderingTarget: RenderingTarget;
 	article: ArticleDeprecated;
 	format: ArticleFormat;
@@ -872,7 +873,7 @@ const MatchHeaderContainer = ({
 
 	const isApps = renderingTarget === 'Apps';
 
-	if (footballMatchHeaderUrl) {
+	if (isFootballMatchReport && footballMatchHeaderUrl) {
 		return (
 			<>
 				<noscript>

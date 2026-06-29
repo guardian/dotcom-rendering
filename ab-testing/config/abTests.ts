@@ -61,7 +61,7 @@ const ABTests: ABTest[] = [
 		name: "commercial-hosted-gallery",
 		description: "Preview the Hosted Gallery pages using dotcom-rendering",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-07-01",
+		expirationDate: "2026-09-01",
 		type: "server",
 		status: "ON",
 		audienceSize: 0 / 100,

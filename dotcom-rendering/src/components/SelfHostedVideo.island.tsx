@@ -1,6 +1,7 @@
 import { css, Global } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
+import type { RefObject } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	submitClickComponentEvent,
@@ -14,6 +15,7 @@ import { useAB } from '../lib/useAB';
 import { useFadeableControls } from '../lib/useFadeableControls';
 import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
+import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
@@ -94,7 +96,7 @@ const maxHeightStyles = css`
 		max-height: 80svh;
 	}
 `;
-const videoContainerStyles = (
+const videoViewportStyles = (
 	aspectRatio: number,
 	aspectRatioOfVisibleVideo: number,
 	greyBarsAtSidesOnDesktop: boolean,
@@ -179,16 +181,33 @@ const logAndReportError = (src: string, error: Error) => {
 	log('dotcom', message);
 };
 
+const MOBILE_VIDEO_WIDTH = 465;
+/**
+ * 940 represents the widest possible video slot.
+ * This is a flexible general gigaboosted slot on desktop.
+ */
+const MAX_POSTER_WIDTH = 940;
 const getOptimisedPosterImage = (
 	mainImage: string,
 	aspectRatio: string,
+	isTabletOrAbove: boolean,
+	measurementRef?: RefObject<HTMLElement>,
 ): string => {
 	// This only runs on the client
 	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
 
+	/**
+	 * Cards on mobile have variable widths. To avoid requesting many
+	 * different image sizes, we use a single default width of 465px across
+	 * all mobile devices.
+	 */
+	const imageWidth = !isTabletOrAbove
+		? MOBILE_VIDEO_WIDTH
+		: (measurementRef?.current?.offsetWidth ?? MAX_POSTER_WIDTH);
+
 	return generateImageURL({
 		mainImage,
-		imageWidth: 940, // The widest a video can be: flexible special container, giga-boosted slot
+		imageWidth,
 		resolution,
 		aspectRatio,
 	});
@@ -347,9 +366,12 @@ export const SelfHostedVideo = ({
 
 	const willAttemptAutoplay =
 		videoStyleSettings.autoplay && !preventAutoplay && !isInClickToPlayTest;
+	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
-	const vidRef = useRef<HTMLVideoElement>(null);
-	const playerContainerRef = useRef<HTMLDivElement>(null);
+	const videoRef = useRef<HTMLVideoElement>(null);
+	const videoContainerRef = useRef<HTMLElement>(null);
+
+	const fullscreenContainerRef = useRef<HTMLDivElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	/**
 	 * Autoplay videos must start muted as browser autoplay policies require it.
@@ -458,7 +480,20 @@ export const SelfHostedVideo = ({
 		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
 
 	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(posterImage, posterImageAspectRatio)
+		? getOptimisedPosterImage(
+				posterImage,
+				posterImageAspectRatio,
+				isTabletOrAbove,
+				/**
+				 * When the video is horizontally letterboxed (grey bars appear at the top and bottom), the
+				 * height of the video is not known, so we measure
+				 * the container. Otherwise, the video element matches the
+				 * rendered width, so we measure the video directly.
+				 */
+				isGreyBarsAtTopAndBottomOnDesktop
+					? videoContainerRef
+					: videoRef,
+			)
 		: undefined;
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
@@ -491,7 +526,7 @@ export const SelfHostedVideo = ({
 	});
 
 	const activeCue = useSubtitles({
-		video: vidRef.current,
+		video: videoRef.current,
 		playerState,
 		currentTime,
 	});
@@ -509,7 +544,7 @@ export const SelfHostedVideo = ({
 	);
 
 	const playVideo = useCallback(async () => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		if (!video) {
 			return;
 		}
@@ -542,7 +577,7 @@ export const SelfHostedVideo = ({
 				| 'PAUSED_BY_BROWSER'
 			>,
 		) => {
-			const video = vidRef.current;
+			const video = videoRef.current;
 			if (!video) {
 				return;
 			}
@@ -573,8 +608,8 @@ export const SelfHostedVideo = ({
 	};
 
 	const updateCurrentTime = (newTime: number) => {
-		if (vidRef.current) {
-			vidRef.current.currentTime = newTime;
+		if (videoRef.current) {
+			videoRef.current.currentTime = newTime;
 			setCurrentTime(newTime);
 		}
 	};
@@ -735,7 +770,7 @@ export const SelfHostedVideo = ({
 	 * Track the first time the video comes into view.
 	 */
 	useOnce(() => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		const resolution =
 			video === null
 				? 'unknown'
@@ -779,8 +814,8 @@ export const SelfHostedVideo = ({
 		fullscreenStyles,
 		globalFullscreenStyles,
 	} = useVideoFullscreen({
-		videoRef: vidRef,
-		playerContainerRef,
+		videoRef,
+		playerContainerRef: fullscreenContainerRef,
 		renderingTarget,
 		sendOphanTrackingEvent,
 		positionCues,
@@ -792,7 +827,7 @@ export const SelfHostedVideo = ({
 	}
 
 	const handleLoadedMetadata = () => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		if (!video) {
 			return;
 		}
@@ -802,7 +837,7 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleLoadedData = () => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		if (!video) {
 			return;
 		}
@@ -899,7 +934,7 @@ export const SelfHostedVideo = ({
 	 */
 	const onError = () => {
 		const message = `Self-hosted video could not be played. source: ${
-			vidRef.current?.currentSrc ?? 'unknown'
+			videoRef.current?.currentSrc ?? 'unknown'
 		}`;
 
 		window.guardian.modules.sentry.reportError(
@@ -911,7 +946,7 @@ export const SelfHostedVideo = ({
 	};
 
 	const seekForward = () => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		if (!video) {
 			return;
 		}
@@ -923,7 +958,7 @@ export const SelfHostedVideo = ({
 	};
 
 	const seekBackward = () => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		if (!video) {
 			return;
 		}
@@ -935,7 +970,7 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleTimeUpdate = () => {
-		const video = vidRef.current;
+		const video = videoRef.current;
 		if (!video) {
 			return;
 		}
@@ -1038,6 +1073,7 @@ export const SelfHostedVideo = ({
 
 	return (
 		<figure
+			ref={videoContainerRef}
 			className={`video-container ${videoStyle.toLocaleLowerCase()} ${
 				role === 'immersive' ? 'element-video-immersive' : ''
 			}`}
@@ -1059,9 +1095,9 @@ export const SelfHostedVideo = ({
 					<Global styles={globalFullscreenStyles} />
 				)}
 				<div
-					ref={playerContainerRef}
+					ref={fullscreenContainerRef}
 					css={[
-						videoContainerStyles(
+						videoViewportStyles(
 							aspectRatio,
 							aspectRatioOfVisibleVideo,
 							isGreyBarsAtSidesOnDesktop,
@@ -1086,7 +1122,7 @@ export const SelfHostedVideo = ({
 						FallbackImageComponent={FallbackImageComponent}
 						currentTime={currentTime}
 						duration={duration}
-						ref={vidRef}
+						ref={videoRef}
 						hasAudio={hasAudio}
 						isMuted={isMuted}
 						handleLoadedMetadata={handleLoadedMetadata}
