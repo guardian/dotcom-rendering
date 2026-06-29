@@ -47,8 +47,8 @@ const sharedButtonStyles = (
 	border-color: ${isNonLabsGalleryMeta
 		? themePalette('--share-button-border-meta')
 		: sizeXSmall
-		? themePalette('--share-button-xsmall-border')
-		: themePalette('--share-button-border')};
+			? themePalette('--share-button-xsmall-border')
+			: themePalette('--share-button-border')};
 	height: ${sizeXSmall ? '24px' : '36px'};
 `;
 
@@ -264,7 +264,9 @@ export const ShareButton = ({
 	}, [shareData, isLiveBlogBlockDesktop]);
 
 	useEffect(() => {
-		if (!isCopied) return;
+		if (!isCopied) {
+			return;
+		}
 		const timer = setTimeout(() => {
 			setIsCopied(false);
 		}, 3000);

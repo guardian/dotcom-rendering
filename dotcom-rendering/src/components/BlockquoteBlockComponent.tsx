@@ -2,7 +2,7 @@ import { css, jsx } from '@emotion/react';
 import { articleItalic17 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
-import { isSkimlink } from '../lib/affiliateLinksUtils';
+import { isSkimlink, SKIMLINK_REL } from '../lib/affiliateLinksUtils';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
 import { palette } from '../palette';
 import { logger } from '../server/lib/logging';
@@ -52,9 +52,14 @@ const quotedBlockquoteStyles = css`
  */
 const isFirstSiblingOfType = (name: string, node: Node): boolean => {
 	const prevSibling = node.previousSibling;
-	if (!prevSibling) return true;
-	if (prevSibling.nodeName === name) return false;
-	else return isFirstSiblingOfType(name, prevSibling);
+	if (!prevSibling) {
+		return true;
+	}
+	if (prevSibling.nodeName === name) {
+		return false;
+	} else {
+		return isFirstSiblingOfType(name, prevSibling);
+	}
 };
 
 const textElement =
@@ -98,7 +103,7 @@ const textElement =
 					 * @see https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links
 					 */
 					rel: isSkimlink(href)
-						? 'sponsored'
+						? SKIMLINK_REL
 						: getAttrs(node)?.getNamedItem('rel')?.value,
 					key,
 					children,

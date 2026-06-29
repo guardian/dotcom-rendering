@@ -225,7 +225,9 @@ export const OnwardsUpper = ({
 	webURL,
 }: Props) => {
 	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
-	if (!isHorizontalScrollingSupported) return null;
+	if (!isHorizontalScrollingSupported) {
+		return null;
+	}
 
 	// Related content can be a collection of articles based on
 	// two things, 1: A popular tag, or 2: A generic text match
@@ -316,7 +318,9 @@ export const OnwardsUpper = ({
 	const showCuratedContainer =
 		!!curatedDataUrl && !isPaidContent && canHaveCuratedContent;
 
-	const isGalleryArticle = format.design === ArticleDesign.Gallery;
+	const isGalleryArticle =
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.HostedGallery;
 
 	return (
 		<div css={onwardsWrapper}>

@@ -15,11 +15,12 @@ import {
 	handleInteractive,
 } from './handler.article.web';
 import { handleAppsAssets } from './handler.assets.apps';
+import { handleCrosswordArchivePage } from './handler.crosswordArchivePage.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
+import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
 import { handlePuzzleIframePage } from './handler.puzzleIframePage.web';
 import { handlePuzzlesPage } from './handler.puzzlesPage.web';
-import { handleCrosswordArchivePage } from './handler.crosswordArchivePage.web';
 import {
 	handleAppsFootballMatchPage,
 	handleCricketMatchPage,
@@ -128,6 +129,8 @@ renderer.get('/AppsHostedContent/*url', handleAppsHostedContent);
 renderer.get('/AppsComponent/thrasher/:name', handleAppsThrasher);
 renderer.get('/PuzzlesPage/*url', handlePuzzlesPage);
 renderer.get('/PuzzleIframePage/*url', handlePuzzleIframePage);
+renderer.get('/FootballMatchDayEmbed/*url', handleFootballMatchDayEmbed);
+
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
 renderer.post('/Interactive', handleInteractive);
@@ -150,6 +153,8 @@ renderer.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
 renderer.post('/PuzzlesPage', handlePuzzlesPage);
 renderer.post('/PuzzleIframePage', handlePuzzleIframePage);
 renderer.post('/CrosswordArchivePage', handleCrosswordArchivePage);
+renderer.post('/FootballMatchDayEmbed', handleFootballMatchDayEmbed);
+
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);
 
 const router = Router();

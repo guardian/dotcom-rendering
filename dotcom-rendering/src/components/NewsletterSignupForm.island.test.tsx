@@ -6,6 +6,7 @@ import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
+import { useCountryCode } from '../lib/useCountryCode';
 import { ConfigProvider } from './ConfigContext';
 import { NewsletterSignupForm } from './NewsletterSignupForm.island';
 
@@ -30,8 +31,14 @@ jest.mock('../lib/useBrowserId', () => ({
 	useBrowserId: jest.fn(),
 }));
 
+jest.mock('../lib/useCountryCode', () => ({
+	useCountryCode: jest.fn(),
+}));
+
 type RecaptchaProps = {
+	// eslint-disable-next-line react/no-unused-prop-types -- false positive
 	onChange?: (token: string | null) => void;
+	// eslint-disable-next-line react/no-unused-prop-types -- false positive
 	onError?: () => void;
 };
 
@@ -68,7 +75,7 @@ jest.mock('react-google-recaptcha', () => ({
 	),
 }));
 
-const renderForm = (hidePrivacyMessage = false) =>
+const renderForm = () =>
 	render(
 		<ConfigProvider
 			value={{
@@ -82,7 +89,7 @@ const renderForm = (hidePrivacyMessage = false) =>
 				newsletterId="morning-briefing"
 				newsletterName="Morning Briefing"
 				frequency="every day"
-				hidePrivacyMessage={hidePrivacyMessage}
+				componentId="AR NewsletterSignupForm morning-briefing"
 			/>
 		</ConfigProvider>,
 	);
@@ -93,10 +100,31 @@ const getTrackedEventDescription = (call: unknown[]): string => {
 	return value.eventDescription;
 };
 
+const getTrackedPayloadForEvent = (
+	eventDescription: string,
+): { eventDescription: string; marketingOptInType?: string } | undefined => {
+	const trackingCalls = (submitComponentEvent as jest.Mock).mock
+		.calls as Array<[{ value: string }]>;
+
+	for (const [payload] of trackingCalls) {
+		const parsed = JSON.parse(payload.value) as {
+			eventDescription: string;
+			marketingOptInType?: string;
+		};
+
+		if (parsed.eventDescription === eventDescription) {
+			return parsed;
+		}
+	}
+
+	return undefined;
+};
+
 const getRequestBodyParams = (callIndex = 0): URLSearchParams => {
 	const [, requestInit] = (global.fetch as jest.Mock).mock.calls[
 		callIndex
 	] as [string, RequestInit];
+	// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a test
 	return new URLSearchParams(requestInit.body?.toString() ?? '');
 };
 
@@ -126,13 +154,14 @@ describe('NewsletterSignupForm', () => {
 		jest.clearAllMocks();
 
 		// Reset reCAPTCHA to the default happy-path behaviour.
-		mockRecaptcha(
-			(_handle, props) => props.onChange?.('test-recaptcha-token'),
+		mockRecaptcha((_handle, props) =>
+			props.onChange?.('test-recaptcha-token'),
 		);
 
 		(useIsSignedIn as jest.Mock).mockReturnValue(false);
 		(useAuthStatus as jest.Mock).mockReturnValue({ kind: 'SignedOut' });
 		(useBrowserId as jest.Mock).mockReturnValue('test-browser-id');
+		(useCountryCode as jest.Mock).mockReturnValue(undefined);
 		(lazyFetchEmailWithTimeout as jest.Mock).mockReturnValue(() =>
 			Promise.resolve(null),
 		);
@@ -141,6 +170,7 @@ describe('NewsletterSignupForm', () => {
 		pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
 		pageConfig.idApiUrl = 'https://idapi.nextgen.guardianapps.co.uk';
 		pageConfig.googleRecaptchaSiteKey = 'test-site-key';
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = false;
 		if (window.guardian.ophan) {
 			window.guardian.ophan.pageViewId = 'test-page-view-id';
 		}
@@ -183,18 +213,26 @@ describe('NewsletterSignupForm', () => {
 		expect(params.get('browserId')).toBe('test-browser-id');
 
 		expectTrackedEventDescriptions([
+			'email-input-focused',
 			'click-button',
 			'open-captcha',
 			'captcha-passed',
 			'form-submission',
 			'submission-confirmed',
 		]);
+		expect(
+			getTrackedPayloadForEvent('form-submission')?.marketingOptInType,
+		).toBe('similar-guardian-products-optin');
+		expect(
+			getTrackedPayloadForEvent('submission-confirmed')
+				?.marketingOptInType,
+		).toBe('similar-guardian-products-optin');
 	});
 
 	it('supports tab order from email input to marketing toggle to sign up', async () => {
 		const testUser = user.setup();
 
-		renderForm(true);
+		renderForm();
 
 		await testUser.tab();
 		expect(screen.getByLabelText('Enter your email')).toHaveFocus();
@@ -227,12 +265,19 @@ describe('NewsletterSignupForm', () => {
 
 		const params = getRequestBodyParams();
 		expect(params.get('marketing')).toBe('false');
+		expect(
+			getTrackedPayloadForEvent('form-submission')?.marketingOptInType,
+		).toBe('similar-guardian-products-optout');
+		expect(
+			getTrackedPayloadForEvent('submission-confirmed')
+				?.marketingOptInType,
+		).toBe('similar-guardian-products-optout');
 	});
 
 	it('supports keyboard interaction for marketing toggle and submit button', async () => {
 		const testUser = user.setup();
 
-		renderForm(true);
+		renderForm();
 
 		await testUser.tab();
 		const emailInput = screen.getByLabelText('Enter your email');
@@ -350,13 +395,12 @@ describe('NewsletterSignupForm', () => {
 		).not.toBeInTheDocument();
 	});
 
-	it('shows failure UI with retry and supports hiding the privacy message', async () => {
+	it('shows failure UI with retry', async () => {
 		const testUser = user.setup();
 		global.fetch = jest.fn().mockResolvedValue({ ok: false } as Response);
 
-		renderForm(true);
+		renderForm();
 
-		expect(screen.queryByText('Privacy Notice:')).not.toBeInTheDocument();
 		await typeEmailAddress(testUser);
 		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
 
@@ -365,6 +409,7 @@ describe('NewsletterSignupForm', () => {
 		});
 
 		expectTrackedEventDescriptions([
+			'email-input-focused',
 			'click-button',
 			'open-captcha',
 			'captcha-passed',
@@ -399,6 +444,7 @@ describe('NewsletterSignupForm', () => {
 		expect(global.fetch).not.toHaveBeenCalled();
 
 		expectTrackedEventDescriptions([
+			'email-input-focused',
 			'click-button',
 			'open-captcha',
 			'captcha-not-passed',
@@ -430,6 +476,7 @@ describe('NewsletterSignupForm', () => {
 		expect(global.fetch).not.toHaveBeenCalled();
 
 		expectTrackedEventDescriptions([
+			'email-input-focused',
 			'click-button',
 			'open-captcha',
 			'captcha-load-error',
@@ -440,5 +487,135 @@ describe('NewsletterSignupForm', () => {
 		expect(
 			screen.getByRole('button', { name: 'Sign up' }),
 		).toBeInTheDocument();
+	});
+
+	describe('US hide marketing toggle (usSignupHideMarketingToggle switch)', () => {
+		beforeEach(() => {
+			window.guardian.config.switches['usSignupHideMarketingToggle'] =
+				true;
+		});
+
+		it('switch on + US + signed out: hides toggle, sends marketing=true and marketingOptInHidden=true', async () => {
+			(useCountryCode as jest.Mock).mockReturnValue('US');
+			const testUser = user.setup();
+			renderForm();
+
+			await typeEmailAddress(testUser);
+
+			expect(screen.queryByRole('switch')).not.toBeInTheDocument();
+
+			await testUser.click(
+				screen.getByRole('button', { name: 'Sign up' }),
+			);
+			await waitFor(() => {
+				expect(global.fetch).toHaveBeenCalled();
+			});
+
+			const params = getRequestBodyParams();
+			expect(params.get('marketing')).toBe('true');
+			expect(params.get('marketingOptInHidden')).toBe('true');
+			expect(
+				getTrackedPayloadForEvent('form-submission')
+					?.marketingOptInType,
+			).toBe('similar-guardian-products-optin-hidden-us');
+			expect(
+				getTrackedPayloadForEvent('submission-confirmed')
+					?.marketingOptInType,
+			).toBe('similar-guardian-products-optin-hidden-us');
+		});
+
+		it('switch on + non-US + signed out: shows toggle, does not send marketingOptInHidden', async () => {
+			(useCountryCode as jest.Mock).mockReturnValue('GB');
+			const testUser = user.setup();
+			renderForm();
+
+			await typeEmailAddress(testUser);
+
+			expect(screen.getByRole('switch')).toBeInTheDocument();
+
+			await testUser.click(
+				screen.getByRole('button', { name: 'Sign up' }),
+			);
+			await waitFor(() => {
+				expect(global.fetch).toHaveBeenCalled();
+			});
+
+			expect(
+				getRequestBodyParams().get('marketingOptInHidden'),
+			).toBeNull();
+			expect(
+				getTrackedPayloadForEvent('form-submission')
+					?.marketingOptInType,
+			).toBe('similar-guardian-products-optin');
+			expect(
+				getTrackedPayloadForEvent('submission-confirmed')
+					?.marketingOptInType,
+			).toBe('similar-guardian-products-optin');
+		});
+
+		it('switch on + pending country (undefined) + signed out: shows toggle', async () => {
+			(useCountryCode as jest.Mock).mockReturnValue(undefined);
+			const testUser = user.setup();
+			renderForm();
+
+			await typeEmailAddress(testUser);
+
+			expect(screen.getByRole('switch')).toBeInTheDocument();
+		});
+
+		it('switch on + US + signed in: toggle not shown (signed-in behaviour), no marketingOptInHidden', async () => {
+			(useCountryCode as jest.Mock).mockReturnValue('US');
+			(useIsSignedIn as jest.Mock).mockReturnValue(true);
+			(useAuthStatus as jest.Mock).mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: { accessToken: 'token' },
+				idToken: { claims: { email: 'signed.in@example.com' } },
+			});
+			(lazyFetchEmailWithTimeout as jest.Mock).mockReturnValue(() =>
+				Promise.resolve('signed.in@example.com'),
+			);
+
+			renderForm();
+
+			await waitFor(() => {
+				expect(
+					screen.getByRole('button', { name: 'Sign up' }),
+				).toBeInTheDocument();
+			});
+
+			expect(screen.queryByRole('switch')).not.toBeInTheDocument();
+
+			const testUser = user.setup();
+			await testUser.click(
+				screen.getByRole('button', { name: 'Sign up' }),
+			);
+			await waitFor(() => {
+				expect(global.fetch).toHaveBeenCalled();
+			});
+
+			expect(
+				getRequestBodyParams().get('marketingOptInHidden'),
+			).toBeNull();
+			expect(
+				getTrackedPayloadForEvent('form-submission')
+					?.marketingOptInType,
+			).toBeUndefined();
+			expect(
+				getTrackedPayloadForEvent('submission-confirmed')
+					?.marketingOptInType,
+			).toBeUndefined();
+		});
+
+		it('switch off + US + signed out: shows toggle', async () => {
+			window.guardian.config.switches['usSignupHideMarketingToggle'] =
+				false;
+			(useCountryCode as jest.Mock).mockReturnValue('US');
+			const testUser = user.setup();
+			renderForm();
+
+			await typeEmailAddress(testUser);
+
+			expect(screen.getByRole('switch')).toBeInTheDocument();
+		});
 	});
 });

@@ -40,7 +40,7 @@ export const ProductCardImage = ({
 				<a
 					href={url}
 					target="_blank"
-					rel="noopener noreferrer"
+					rel="sponsored noopener noreferrer"
 					data-link-name="product image link"
 					data-x-cust-component-id={xCustComponentId}
 					// this is needed to override global style

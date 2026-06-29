@@ -287,7 +287,6 @@ export const GalleryLabs: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="2cbf4f15ebf5f906832cf326199a3c99beba9299"> <img src="https://media.guim.co.uk/2cbf4f15ebf5f906832cf326199a3c99beba9299/0_141_2121_1273/1000.jpg" alt="This image is taken in the Mont Saint-Michel during the high tides. It\'s an aerial view of the sunset. You can see the Minch, the Couesnon and the Mont Saint-Michel in the foreground." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">Mont Saint-Michel.</span> <span class="element-image__credit">Photograph: MathieuRivrin/Getty Images</span> </figcaption> </figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{

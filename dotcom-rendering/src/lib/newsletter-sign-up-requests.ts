@@ -7,6 +7,7 @@ const buildNewsletterSignUpFormData = (
 	newsletterIdOrList: string | string[],
 	recaptchaToken: string,
 	marketingOptIn?: boolean,
+	marketingOptInHidden?: boolean,
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -32,6 +33,10 @@ const buildNewsletterSignUpFormData = (
 
 	if (marketingOptIn !== undefined) {
 		formData.append('marketing', marketingOptIn ? 'true' : 'false');
+	}
+
+	if (marketingOptInHidden === true) {
+		formData.append('marketingOptInHidden', 'true');
 	}
 
 	return formData;
@@ -67,12 +72,14 @@ export const requestMultipleSignUps = async (
 	newsletterIds: string[],
 	recaptchaToken: string,
 	marketingOptIn?: boolean,
+	marketingOptInHidden?: boolean,
 ): Promise<Response> => {
 	const data = buildNewsletterSignUpFormData(
 		emailAddress,
 		newsletterIds,
 		recaptchaToken,
 		marketingOptIn,
+		marketingOptInHidden,
 	);
 
 	return await postFormData(

@@ -35,7 +35,7 @@ const countStyles = css`
 
 export type FixedSlideWidth = {
 	defaultWidth: number;
-	widthFromBreakpoints: { breakpoint: Breakpoint; width: number }[];
+	widthFromBreakpoints: Array<{ breakpoint: Breakpoint; width: number }>;
 };
 
 type Props = {
@@ -174,7 +174,9 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	 * --- COPIED FROM ScrollableCarousel ---
 	 */
 	const scrollTo = (direction: 'left' | 'right') => {
-		if (!carouselRef.current) return;
+		if (!carouselRef.current) {
+			return;
+		}
 
 		const cardWidth =
 			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
@@ -212,10 +214,14 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	 */
 	const updateCardCountOnScroll = useCallback(() => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
-		if (!cardWidth) return;
+		if (!cardWidth) {
+			return;
+		}
 
 		const count = Math.ceil(
 			(carouselElement.scrollLeft + cardWidth / 2) / cardWidth,
@@ -234,7 +240,9 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	 */
 	const updateButtonVisibilityOnScroll = useCallback(() => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
@@ -256,7 +264,9 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 
 	useEffect(() => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		carouselElement.addEventListener('scroll', throttledCardCount);
 		carouselElement.addEventListener('scroll', debouncedButtonVisibility);

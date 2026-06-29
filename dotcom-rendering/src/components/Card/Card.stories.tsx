@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints, from } from '@guardian/source/foundations';
-import React from 'react';
+import type React from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
@@ -338,7 +338,11 @@ export const WithANewsletter = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
-				<Card {...basicCardProps} isNewsletter={true} />
+				<Card
+					{...basicCardProps}
+					isNewsletter={true}
+					contentSpacing="large"
+				/>
 			</CardWrapper>
 		</CardGroup>
 	);
@@ -360,6 +364,7 @@ export const WithMediaType = () => {
 						articleMedia={youtubeMetaData}
 						headlineText="Video"
 						mediaPositionOnMobile="top"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -377,6 +382,7 @@ export const WithMediaType = () => {
 						}}
 						headlineText="Video without duration"
 						mediaPositionOnMobile="top"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -399,6 +405,7 @@ export const WithMediaType = () => {
 						}}
 						headlineText="Live video"
 						mediaPositionOnMobile="top"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -415,6 +422,7 @@ export const WithMediaType = () => {
 						articleMedia={{ ...youtubeMetaData }}
 						headlineText="Self hosted video with Youtube article media"
 						mediaPositionOnMobile="top"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -429,6 +437,7 @@ export const WithMediaType = () => {
 						articleMedia={{ ...selfHostedMetaData }}
 						headlineText="Self hosted video"
 						mediaPositionOnMobile="top"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -445,6 +454,7 @@ export const WithMediaType = () => {
 						articleMedia={audioMetaData}
 						headlineText="Audio"
 						mediaPositionOnMobile="top"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -459,6 +469,7 @@ export const WithMediaType = () => {
 						articleMedia={audioMetaData}
 						headlineText="Audio with self-hosted video main media"
 						mediaPositionOnMobile="top"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -475,6 +486,7 @@ export const WithMediaType = () => {
 						articleMedia={galleryMetaData}
 						headlineText="Gallery"
 						mediaPositionOnMobile="top"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 				<CardWrapper>
@@ -489,6 +501,7 @@ export const WithMediaType = () => {
 						articleMedia={galleryMetaData}
 						headlineText="Gallery with self-hosted video main media"
 						mediaPositionOnMobile="top"
+						contentSpacing="large"
 					/>
 				</CardWrapper>
 			</CardGroup>
@@ -512,6 +525,7 @@ export const WithMediaTypeAndSublinks = () => {
 					headlineText="Video"
 					supportingContent={twoSublinks}
 					mediaPositionOnMobile="top"
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -527,6 +541,7 @@ export const WithMediaTypeAndSublinks = () => {
 					headlineText="Video without duration"
 					supportingContent={twoSublinks}
 					mediaPositionOnMobile="top"
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -542,6 +557,7 @@ export const WithMediaTypeAndSublinks = () => {
 					headlineText="Audio"
 					supportingContent={twoSublinks}
 					mediaPositionOnMobile="top"
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -557,6 +573,7 @@ export const WithMediaTypeAndSublinks = () => {
 					headlineText="Gallery"
 					supportingContent={twoSublinks}
 					mediaPositionOnMobile="top"
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -578,6 +595,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 					articleMedia={{ ...youtubeMetaData, duration: 30 }}
 					headlineText="Video"
 					mediaPositionOnMobile="top"
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -592,6 +610,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 					articleMedia={mainAudio}
 					headlineText="Audio"
 					mediaPositionOnMobile="top"
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -606,6 +625,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 					articleMedia={mainGallery}
 					headlineText="Gallery"
 					mediaPositionOnMobile="top"
+					contentSpacing="large"
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -1234,6 +1254,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaPositionOnMobile="top"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
+						contentSpacing="large"
 					/>
 				</LI>
 			</UL>
@@ -1251,6 +1272,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaPositionOnMobile="top"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
+						contentSpacing="large"
 					/>
 				</LI>
 				<LI percentage={'25%'} padSides={true} showDivider={true}>
@@ -1265,6 +1287,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
 						canPlayInline={false}
+						contentSpacing="large"
 					/>
 				</LI>
 			</UL>
@@ -1282,6 +1305,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaPositionOnMobile="bottom"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
+						contentSpacing="large"
 					/>
 				</LI>
 				<LI percentage="50%">
@@ -1298,6 +1322,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 								mainMedia={mainYoutubeVideo}
 								articleMedia={youtubeMetaData}
 								canPlayInline={false}
+								contentSpacing="large"
 							/>
 						</LI>
 						<LI padSides={true}>
@@ -1312,6 +1337,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 								mainMedia={mainYoutubeVideo}
 								articleMedia={youtubeMetaData}
 								canPlayInline={false}
+								contentSpacing="large"
 							/>
 						</LI>
 
@@ -1327,6 +1353,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 								mainMedia={mainYoutubeVideo}
 								articleMedia={youtubeMetaData}
 								canPlayInline={false}
+								contentSpacing="large"
 							/>
 						</LI>
 					</UL>
@@ -1347,6 +1374,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaPositionOnMobile="top"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
+						contentSpacing="large"
 					/>
 				</LI>
 				<LI percentage={'33.333%'} padSides={true} showDivider={true}>
@@ -1362,12 +1390,14 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaSize="medium"
 						mainMedia={mainYoutubeVideo}
 						articleMedia={youtubeMetaData}
+						contentSpacing="large"
 					/>
 				</LI>
 			</UL>
 		</Section>
 	);
 };
+
 export const WithLetterDesign = () => {
 	return (
 		<CardWrapper>
@@ -1384,8 +1414,6 @@ export const WithLetterDesign = () => {
 		</CardWrapper>
 	);
 };
-
-WithLetterDesign.storyName = 'WithLetterDesign';
 
 export const WithLetterDesignAndShowQuotedHeadline = () => {
 	return (
@@ -1404,9 +1432,6 @@ export const WithLetterDesignAndShowQuotedHeadline = () => {
 		</CardWrapper>
 	);
 };
-
-WithLetterDesignAndShowQuotedHeadline.storyName =
-	'WithLetterDesignAndShowQuotedHeadline';
 
 const containerPalettes = [
 	'InvestigationPalette',
@@ -1492,6 +1517,7 @@ export const WithBranding = () => {
 							articleMedia={mainGallery}
 							containerPalette={containerPalette}
 							branding={branding}
+							contentSpacing="large"
 						/>
 					</LI>
 					<LI percentage={'33.333%'} padSides={true}>
@@ -1535,7 +1561,7 @@ export const WithSpecialPaletteVariations = () => {
 							? {
 									...basicCardProps.format,
 									theme: ArticleSpecial.Labs,
-							  }
+								}
 							: basicCardProps.format
 					}
 					kickerText="Live kicker"
@@ -1558,12 +1584,12 @@ export const WithSpecialPaletteVariations = () => {
 									display: ArticleDisplay.Standard,
 									design: ArticleDesign.Audio,
 									theme: ArticleSpecial.Labs,
-							  }
+								}
 							: {
 									display: ArticleDisplay.Standard,
 									design: ArticleDesign.Audio,
 									theme: Pillar.Lifestyle,
-							  }
+								}
 					}
 					headlineText="Audio"
 					kickerText="Kicker"
@@ -1575,10 +1601,12 @@ export const WithSpecialPaletteVariations = () => {
 					articleMedia={mainAudio}
 					containerPalette={containerPalette}
 					branding={branding}
+					contentSpacing="large"
 				/>
 			</LI>
 		</UL>
 	);
+
 	return (
 		<>
 			{containerPalettes.map((containerPalette) => (
@@ -1596,7 +1624,7 @@ export const WithSpecialPaletteVariations = () => {
 									isContainerBranding: true,
 									hasMultipleBranding: false,
 									isFrontBranding: false,
-							  }
+								}
 							: undefined
 					}
 				>

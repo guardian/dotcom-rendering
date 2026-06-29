@@ -19,10 +19,10 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.island';
+import { CricketMatchHeaderWrapper } from '../components/CricketMatchHeaderWrapper.island';
 import { DecideLines } from '../components/DecideLines';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.island';
-import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.island';
 import { Footer } from '../components/Footer';
@@ -35,6 +35,7 @@ import { LiveblogGutterAskWrapper } from '../components/LiveblogGutterAskWrapper
 import { Liveness } from '../components/Liveness.island';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
+import { MatchHeaderFallback } from '../components/MatchHeaderFallback';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { OnwardsUpper } from '../components/OnwardsUpper.island';
@@ -50,6 +51,8 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
+import { useAB } from '../lib/useAB';
+import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -266,6 +269,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 		config: { isPaidContent, host, hasLiveBlogTopAd, hasSurveyAd },
 	} = article;
 
+	const ab = useAB();
+
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
@@ -280,11 +285,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const { branding } = article.commercialProperties[article.editionId];
 
-	const footballMatchUrl =
-		article.matchType === 'FootballMatchType'
-			? article.matchUrl
-			: undefined;
-
 	const footballMatchHeaderUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchHeaderUrl
@@ -295,9 +295,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			? article.matchStatsUrl
 			: undefined;
 
-	const footballMatchLeagueName = article.sectionLabel;
-	const footballMatchLeagueUrl = `${article.guardianBaseURL}/${article.sectionUrl}`;
-
 	const cricketMatchUrl =
 		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
 
@@ -305,10 +302,14 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
+
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
 	const showComments = article.isCommentable && !isPaidContent;
+
+	const liveBlogAreaId = 'liveblog';
 
 	return (
 		<>
@@ -337,7 +338,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
+						showSubNav={!isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
@@ -354,6 +355,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 
 			<main data-layout="LiveLayout">
+				<DirectoryPageNavIsland
+					pageTags={article.tags}
+					pageId={article.pageId}
+				/>
 				{isWeb && renderAds && hasLiveBlogTopAd && (
 					<Hide from="tablet">
 						<Section
@@ -376,147 +381,70 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						<AdPortals rightAlignFrom="wide" />
 					</Island>
 				)}
-				{footballMatchUrl ? (
-					footballMatchHeaderUrl && (
-						<>
-							<noscript>
-								<FootballMatchHeaderFallback
-									format={format}
-									article={article}
-								/>
-							</noscript>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<FootballMatchHeaderWrapper
-									initialTab="live"
-									leagueName={footballMatchLeagueName}
-									leagueURL={footballMatchLeagueUrl}
-									edition={article.editionId}
-									matchHeaderURL={footballMatchHeaderUrl}
-									renderingTarget={renderingTarget}
-									article={article}
-									format={format}
-								/>
-							</Island>
-						</>
-					)
-				) : (
+				<Header
+					renderingTarget={renderingTarget}
+					format={format}
+					article={article}
+					liveBlogAreaId={liveBlogAreaId}
+				/>
+
+				{/* This element is used to replace the liveblog with the scorecard when the scorecard tab is clicked */}
+				<div id={liveBlogAreaId}>
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
 						backgroundColour={themePalette(
-							'--headline-blog-background',
+							'--standfirst-background',
 						)}
-						borderColour={themePalette('--headline-border')}
+						borderColour={themePalette('--standfirst-border')}
 					>
-						<HeadlineGrid>
-							<GridItem area="title">
-								<ArticleTitle
+						<StandFirstGrid>
+							<GridItem area="standfirst">
+								<Standfirst
 									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
+									standfirst={article.standfirst}
 								/>
 							</GridItem>
-							<GridItem area="headline">
-								<div css={maxWidth}>
-									{!footballMatchUrl && (
-										<ArticleHeadline
+							<GridItem area="lastupdated">
+								<Hide until="desktop">
+									{article.blocks[0]?.blockLastUpdated !==
+										undefined && (
+										<ArticleLastUpdated
 											format={format}
-											headlineString={article.headline}
-											tags={article.tags}
-											byline={article.byline}
-											webPublicationDateDeprecated={
-												article.webPublicationDateDeprecated
+											lastUpdated={
+												article.blocks[0]
+													.blockLastUpdated
 											}
-											starRating={article.starRating}
 										/>
 									)}
-								</div>
+								</Hide>
 							</GridItem>
-						</HeadlineGrid>
-					</Section>
-				)}
 
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					backgroundColour={themePalette('--standfirst-background')}
-					borderColour={themePalette('--standfirst-border')}
-				>
-					<StandFirstGrid>
-						<GridItem area="standfirst">
-							<Standfirst
-								format={format}
-								standfirst={article.standfirst}
-							/>
-						</GridItem>
-						<GridItem area="lastupdated">
-							<Hide until="desktop">
-								{article.blocks[0]?.blockLastUpdated !==
-									undefined && (
-									<ArticleLastUpdated
-										format={format}
-										lastUpdated={
-											article.blocks[0].blockLastUpdated
-										}
-									/>
-								)}
-							</Hide>
-						</GridItem>
-
-						<GridItem area="lines">
-							<Hide from="desktop">
-								<div
-									css={[
-										sidePaddingDesktop,
-										isApps && stretchLines,
-									]}
-								>
-									<DecideLines
-										format={format}
-										color={
-											format.design ===
-											ArticleDesign.LiveBlog
-												? 'rgba(255, 255, 255, 0.4)'
-												: undefined
-										}
-									/>
-								</div>
-							</Hide>
-						</GridItem>
-						<GridItem area="meta">
-							<Hide from="desktop">
-								{isApps && (
-									<ArticleMetaApps
-										format={format}
-										byline={article.byline}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										isCommentable={showComments}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-										pageId={article.pageId}
-										headline={article.headline}
-									></ArticleMetaApps>
-								)}
-								{isWeb && (
-									<div css={sidePaddingDesktop}>
-										<ArticleMeta
-											branding={branding}
+							<GridItem area="lines">
+								<Hide from="desktop">
+									<div
+										css={[
+											sidePaddingDesktop,
+											isApps && stretchLines,
+										]}
+									>
+										<DecideLines
 											format={format}
-											pageId={article.pageId}
-											webTitle={article.webTitle}
+											color={
+												format.design ===
+												ArticleDesign.LiveBlog
+													? 'rgba(255, 255, 255, 0.4)'
+													: undefined
+											}
+										/>
+									</div>
+								</Hide>
+							</GridItem>
+							<GridItem area="meta">
+								<Hide from="desktop">
+									{isApps && (
+										<ArticleMetaApps
+											format={format}
 											byline={article.byline}
 											tags={article.tags}
 											primaryDateline={
@@ -532,387 +460,432 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-										/>
-									</div>
-								)}
+											pageId={article.pageId}
+											headline={article.headline}
+										></ArticleMetaApps>
+									)}
+									{isWeb && (
+										<div css={sidePaddingDesktop}>
+											<ArticleMeta
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
+												}
+												isCommentable={showComments}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
+												}
+											/>
+										</div>
+									)}
+								</Hide>
+							</GridItem>
+						</StandFirstGrid>
+					</Section>
+					{hasKeyEvents ? (
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={themePalette(
+								'--key-event-background-desktop',
+							)}
+							borderColour={themePalette('--article-border')}
+						>
+							<Hide until={'desktop'}>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<KeyEventsCarousel
+										keyEvents={article.keyEvents}
+										id={'key-events-carousel-desktop'}
+										serverTime={serverTime}
+										renderingTarget={renderingTarget}
+									/>
+								</Island>
 							</Hide>
-						</GridItem>
-					</StandFirstGrid>
-				</Section>
-				{hasKeyEvents ? (
+						</Section>
+					) : null}
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={themePalette(
-							'--key-event-background-desktop',
-						)}
 						borderColour={themePalette('--article-border')}
+						backgroundColour={themePalette('--article-background')}
 					>
-						<Hide until={'desktop'}>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<KeyEventsCarousel
-									keyEvents={article.keyEvents}
-									filterKeyEvents={article.filterKeyEvents}
-									id={'key-events-carousel-desktop'}
-									serverTime={serverTime}
-									renderingTarget={renderingTarget}
-								/>
-							</Island>
-						</Hide>
-					</Section>
-				) : null}
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					borderColour={themePalette('--article-border')}
-					backgroundColour={themePalette('--article-background')}
-				>
-					<Hide until="desktop">
-						<div
-							css={css`
-								height: ${space[4]}px;
-							`}
-						/>
-					</Hide>
-				</Section>
-
-				{/* This div is used to contain the Toast */}
-				<div>
-					{format.design === ArticleDesign.LiveBlog && (
-						<>
-							{/* The Toast component is inserted into this div using a Portal */}
+						<Hide until="desktop">
 							<div
-								id="toast-root"
 								css={css`
-									position: sticky;
-									top: 0;
-									z-index: ${getZIndex('toast')};
-									display: flex;
-									justify-content: center;
+									height: ${space[4]}px;
 								`}
 							/>
-							<Island
-								priority="feature"
-								defer={{ until: 'idle' }}
-							>
-								<Liveness
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									filterKeyEvents={article.filterKeyEvents}
-									enhanceTweetsSwitch={
-										!!article.config.switches.enhanceTweets
-									}
-									onFirstPage={pagination.currentPage === 1}
-									webURL={article.webURL}
-									renderingTarget={renderingTarget}
-									// We default to string here because the property is optional but we
-									// know it will exist for all blogs
-									mostRecentBlockId={
-										article.mostRecentBlockId ?? ''
-									}
-									hasPinnedPost={!!article.pinnedPost}
-								/>
-							</Island>
-						</>
-					)}
+						</Hide>
+					</Section>
 
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						backgroundColour={themePalette('--article-background')}
-						borderColour={themePalette('--article-border')}
-						padSides={false}
-					>
-						<LiveGrid>
-							<GridItem area="media">
-								<div css={maxWidth}>
-									{!!cricketMatchUrl && (
-										<Island
-											priority="critical"
-											defer={{ until: 'visible' }}
-										>
-											<GetCricketScoreboard
-												matchUrl={cricketMatchUrl}
-												format={format}
-											/>
-										</Island>
-									)}
-									<MainMedia
-										format={format}
-										elements={article.mainMediaElements}
-										host={host}
+					{/* This div is used to contain the Toast */}
+					<div>
+						{format.design === ArticleDesign.LiveBlog && (
+							<>
+								{/* The Toast component is inserted into this div using a Portal */}
+								<div
+									id="toast-root"
+									css={css`
+										position: sticky;
+										top: 0;
+										z-index: ${getZIndex('toast')};
+										display: flex;
+										justify-content: center;
+									`}
+								/>
+								<Island
+									priority="feature"
+									defer={{ until: 'idle' }}
+								>
+									<Liveness
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										ajaxUrl={article.config.ajaxUrl}
-										abTests={article.config.abTests}
-										switches={article.config.switches}
-										isSensitive={article.config.isSensitive}
-										isAdFreeUser={article.isAdFreeUser}
-										editionId={article.editionId}
-										shouldHideAds={article.shouldHideAds}
-										contentLayout="LiveblogLayout"
+										enhanceTweetsSwitch={
+											!!article.config.switches
+												.enhanceTweets
+										}
+										onFirstPage={
+											pagination.currentPage === 1
+										}
+										webURL={article.webURL}
+										renderingTarget={renderingTarget}
+										// We default to string here because the property is optional but we
+										// know it will exist for all blogs
+										mostRecentBlockId={
+											article.mostRecentBlockId ?? ''
+										}
+										hasPinnedPost={!!article.pinnedPost}
 									/>
-								</div>
-							</GridItem>
-							<GridItem area="info" element="aside">
-								{/* Lines */}
-								<Hide until="desktop">
-									<div css={[maxWidth, sidePaddingDesktop]}>
-										<DecideLines
-											format={format}
-											color={themePalette(
-												'--straight-lines',
+								</Island>
+							</>
+						)}
+
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
+							borderColour={themePalette('--article-border')}
+							padSides={false}
+						>
+							<LiveGrid>
+								<GridItem area="media">
+									<div css={maxWidth}>
+										{!!cricketMatchUrl &&
+											!ab?.isUserInTestGroup(
+												'webx-cricket-redesign',
+												'enable',
+											) && (
+												<Island
+													priority="critical"
+													defer={{ until: 'visible' }}
+												>
+													<GetCricketScoreboard
+														matchUrl={
+															cricketMatchUrl
+														}
+														format={format}
+													/>
+												</Island>
 											)}
-										/>
-									</div>
-								</Hide>
-								{/* Meta */}
-								<Hide until="desktop">
-									<div css={[maxWidth, sidePaddingDesktop]}>
-										<ArticleMeta
-											branding={branding}
+										<MainMedia
 											format={format}
-											pageId={article.pageId}
-											webTitle={article.webTitle}
-											byline={article.byline}
-											tags={article.tags}
-											primaryDateline={
-												article.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												article.webPublicationSecondaryDateDisplay
-											}
-											isCommentable={showComments}
-											discussionApiUrl={
-												article.config.discussionApiUrl
-											}
-											shortUrlId={
-												article.config.shortUrlId
-											}
-										/>
-									</div>
-								</Hide>
-
-								{isWeb && (
-									<Hide until="desktop">
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<LiveblogGutterAskWrapper
-												shouldHideReaderRevenueOnArticle={
-													article.shouldHideReaderRevenue
-												}
-												sectionId={article.sectionName}
-												tags={article.tags}
-												contributionsServiceUrl={
-													contributionsServiceUrl
-												}
-												pageUrl={article.webURL}
-												pageId={article.pageId}
-											/>
-										</Island>
-									</Hide>
-								)}
-
-								{/* Match stats */}
-								{!!footballMatchStatsUrl && (
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<FootballMiniMatchStatsWrapper
-											matchStatsUrl={
-												footballMatchStatsUrl
-											}
-										/>
-									</Island>
-								)}
-							</GridItem>
-							<GridItem area="body">
-								<div
-									id="maincontent"
-									css={[
-										bodyWrapper,
-										!!footballMatchUrl &&
-											footballMatchBodyWrapper,
-									]}
-								>
-									{hasKeyEvents ? (
-										<Hide below="desktop">
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<FilterKeyEventsToggle
-													filterKeyEvents={
-														article.filterKeyEvents
-													}
-													id="filter-toggle-desktop"
-												/>
-											</Island>
-										</Hide>
-									) : (
-										<></>
-									)}
-									<ArticleContainer format={format}>
-										{pagination.currentPage !== 1 && (
-											<Pagination
-												currentPage={
-													pagination.currentPage
-												}
-												totalPages={
-													pagination.totalPages
-												}
-												newest={pagination.newest}
-												oldest={pagination.oldest}
-												newer={pagination.newer}
-												older={pagination.older}
-												renderingTarget={
-													renderingTarget
-												}
-											/>
-										)}
-										<ArticleBody
-											format={format}
-											blocks={article.blocks}
-											pinnedPost={article.pinnedPost}
+											elements={article.mainMediaElements}
 											host={host}
 											pageId={article.pageId}
 											webTitle={article.webTitle}
 											ajaxUrl={article.config.ajaxUrl}
-											sectionId={article.config.section}
 											abTests={article.config.abTests}
 											switches={article.config.switches}
 											isSensitive={
 												article.config.isSensitive
 											}
 											isAdFreeUser={article.isAdFreeUser}
-											shouldHideReaderRevenue={
-												article.shouldHideReaderRevenue
-											}
-											tags={article.tags}
-											isPaidContent={
-												!!article.config.isPaidContent
-											}
-											contributionsServiceUrl={
-												contributionsServiceUrl
-											}
-											contentType={article.contentType}
-											isPreview={article.config.isPreview}
-											idUrl={article.config.idUrl ?? ''}
-											isDev={!!article.config.isDev}
-											onFirstPage={
-												pagination.currentPage === 1
-											}
-											keyEvents={article.keyEvents}
-											filterKeyEvents={
-												article.filterKeyEvents
-											}
-											keywordIds={
-												article.config.keywordIds
-											}
-											lang={article.lang}
-											isRightToLeftLang={
-												article.isRightToLeftLang
-											}
 											editionId={article.editionId}
 											shouldHideAds={
 												article.shouldHideAds
 											}
-											serverTime={serverTime}
-											idApiUrl={article.config.idApiUrl}
+											contentLayout="LiveblogLayout"
 										/>
-										{pagination.totalPages > 1 && (
-											<Pagination
-												currentPage={
-													pagination.currentPage
+									</div>
+								</GridItem>
+								<GridItem area="info" element="aside">
+									{/* Lines */}
+									<Hide until="desktop">
+										<div
+											css={[maxWidth, sidePaddingDesktop]}
+										>
+											<DecideLines
+												format={format}
+												color={themePalette(
+													'--straight-lines',
+												)}
+											/>
+										</div>
+									</Hide>
+									{/* Meta */}
+									<Hide until="desktop">
+										<div
+											css={[maxWidth, sidePaddingDesktop]}
+										>
+											<ArticleMeta
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
 												}
-												totalPages={
-													pagination.totalPages
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
 												}
-												newest={pagination.newest}
-												oldest={pagination.oldest}
-												newer={pagination.newer}
-												older={pagination.older}
-												renderingTarget={
-													renderingTarget
+												isCommentable={showComments}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
 												}
 											/>
-										)}
-										<StraightLines
-											data-print-layout="hide"
-											count={4}
-											color={themePalette(
-												'--straight-lines',
-											)}
-											cssOverrides={css`
-												display: block;
-											`}
-										/>
-										<SubMeta
-											format={format}
-											subMetaKeywordLinks={
-												article.subMetaKeywordLinks
-											}
-											subMetaSectionLinks={
-												article.subMetaSectionLinks
-											}
-											pageId={article.pageId}
-											webUrl={article.webURL}
-											webTitle={article.webTitle}
-											showBottomSocialButtons={
-												article.showBottomSocialButtons &&
-												renderingTarget === 'Web'
-											}
-										/>
-									</ArticleContainer>
-								</div>
-							</GridItem>
-							<GridItem area="right-column">
-								<div
-									css={css`
-										height: 100%;
-										${from.desktop} {
-											/* above 980 */
-											margin-left: 20px;
-											margin-right: -20px;
-											display: none;
-										}
-										${from.leftCol} {
-											/* above 1140 */
-											margin-left: 0px;
-											margin-right: 0px;
-										}
-										${from.wide} {
-											display: block;
-											padding-bottom: 255px;
-										}
-									`}
-								>
-									<RightColumn showFrom="wide">
-										{isWeb && renderAds && (
-											<AdSlot
-												position="right"
-												display={format.display}
-												isPaidContent={isPaidContent}
-												shouldHideReaderRevenue={
-													!!article.config
-														.shouldHideReaderRevenue
-												}
-											/>
-										)}
+										</div>
+									</Hide>
 
-										{isApps && <RightAdsPlaceholder />}
-									</RightColumn>
-								</div>
-							</GridItem>
-						</LiveGrid>
-					</Section>
+									{isWeb && (
+										<Hide until="desktop">
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<LiveblogGutterAskWrapper
+													shouldHideReaderRevenueOnArticle={
+														article.shouldHideReaderRevenue
+													}
+													sectionId={
+														article.sectionName
+													}
+													tags={article.tags}
+													contributionsServiceUrl={
+														contributionsServiceUrl
+													}
+													pageUrl={article.webURL}
+													pageId={article.pageId}
+												/>
+											</Island>
+										</Hide>
+									)}
+
+									{/* Match stats */}
+									{!!footballMatchStatsUrl && (
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<FootballMiniMatchStatsWrapper
+												matchStatsUrl={
+													footballMatchStatsUrl
+												}
+											/>
+										</Island>
+									)}
+								</GridItem>
+								<GridItem area="body">
+									<div
+										id="maincontent"
+										css={[
+											bodyWrapper,
+											!!footballMatchHeaderUrl &&
+												footballMatchBodyWrapper,
+										]}
+									>
+										<ArticleContainer format={format}>
+											{pagination.currentPage !== 1 && (
+												<Pagination
+													currentPage={
+														pagination.currentPage
+													}
+													totalPages={
+														pagination.totalPages
+													}
+													newest={pagination.newest}
+													oldest={pagination.oldest}
+													newer={pagination.newer}
+													older={pagination.older}
+													renderingTarget={
+														renderingTarget
+													}
+												/>
+											)}
+											<ArticleBody
+												format={format}
+												blocks={article.blocks}
+												pinnedPost={article.pinnedPost}
+												host={host}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												ajaxUrl={article.config.ajaxUrl}
+												sectionId={
+													article.config.section
+												}
+												abTests={article.config.abTests}
+												switches={
+													article.config.switches
+												}
+												isSensitive={
+													article.config.isSensitive
+												}
+												isAdFreeUser={
+													article.isAdFreeUser
+												}
+												shouldHideReaderRevenue={
+													article.shouldHideReaderRevenue
+												}
+												tags={article.tags}
+												isPaidContent={
+													!!article.config
+														.isPaidContent
+												}
+												contributionsServiceUrl={
+													contributionsServiceUrl
+												}
+												contentType={
+													article.contentType
+												}
+												isPreview={
+													article.config.isPreview
+												}
+												idUrl={
+													article.config.idUrl ?? ''
+												}
+												isDev={!!article.config.isDev}
+												onFirstPage={
+													pagination.currentPage === 1
+												}
+												keyEvents={article.keyEvents}
+												keywordIds={
+													article.config.keywordIds
+												}
+												lang={article.lang}
+												isRightToLeftLang={
+													article.isRightToLeftLang
+												}
+												editionId={article.editionId}
+												shouldHideAds={
+													article.shouldHideAds
+												}
+												serverTime={serverTime}
+												idApiUrl={
+													article.config.idApiUrl
+												}
+											/>
+											{pagination.totalPages > 1 && (
+												<Pagination
+													currentPage={
+														pagination.currentPage
+													}
+													totalPages={
+														pagination.totalPages
+													}
+													newest={pagination.newest}
+													oldest={pagination.oldest}
+													newer={pagination.newer}
+													older={pagination.older}
+													renderingTarget={
+														renderingTarget
+													}
+												/>
+											)}
+											<StraightLines
+												data-print-layout="hide"
+												count={4}
+												color={themePalette(
+													'--straight-lines',
+												)}
+												cssOverrides={css`
+													display: block;
+												`}
+											/>
+											<SubMeta
+												format={format}
+												subMetaKeywordLinks={
+													article.subMetaKeywordLinks
+												}
+												subMetaSectionLinks={
+													article.subMetaSectionLinks
+												}
+												pageId={article.pageId}
+												webUrl={article.webURL}
+												webTitle={article.webTitle}
+												showBottomSocialButtons={
+													article.showBottomSocialButtons &&
+													renderingTarget === 'Web'
+												}
+											/>
+										</ArticleContainer>
+									</div>
+								</GridItem>
+								<GridItem area="right-column">
+									<div
+										css={css`
+											height: 100%;
+											${from.desktop} {
+												/* above 980 */
+												margin-left: 20px;
+												margin-right: -20px;
+												display: none;
+											}
+											${from.leftCol} {
+												/* above 1140 */
+												margin-left: 0px;
+												margin-right: 0px;
+											}
+											${from.wide} {
+												display: block;
+												padding-bottom: 255px;
+											}
+										`}
+									>
+										<RightColumn showFrom="wide">
+											{isWeb && renderAds && (
+												<AdSlot
+													position="right"
+													display={format.display}
+													isPaidContent={
+														isPaidContent
+													}
+													shouldHideReaderRevenue={
+														!!article.config
+															.shouldHideReaderRevenue
+													}
+												/>
+											)}
+
+											{isApps && <RightAdsPlaceholder />}
+										</RightColumn>
+									</div>
+								</GridItem>
+							</LiveGrid>
+						</Section>
+					</div>
 
 					{isWeb && renderAds && (
 						<Section
@@ -1137,11 +1110,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer
-						data-print-layout="hide"
-						contentType={article.contentType}
-						pageId={article.pageId}
-					/>
+					{renderAds && (
+						<MobileStickyContainer data-print-layout="hide" />
+					)}
 				</>
 			)}
 
@@ -1160,5 +1131,115 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				</Section>
 			)}
 		</>
+	);
+};
+
+const Header = (props: {
+	renderingTarget: RenderingTarget;
+	format: ArticleFormat;
+	article: ArticleDeprecated;
+	liveBlogAreaId: string;
+}) => {
+	const footballMatchLeagueName = props.article.sectionLabel;
+	const footballMatchLeagueUrl = `${props.article.guardianBaseURL}/${props.article.sectionUrl}`;
+	const footballMatchHeaderUrl =
+		props.article.matchType === 'FootballMatchType'
+			? props.article.matchHeaderUrl
+			: undefined;
+	const cricketMatchHeaderUrl =
+		props.article.matchType === 'CricketMatchType'
+			? props.article.matchHeaderUrl
+			: undefined;
+
+	const ab = useAB();
+	const isCricketRedesignEnabled = Boolean(
+		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
+	);
+
+	const isApps = props.renderingTarget === 'Apps';
+
+	if (footballMatchHeaderUrl) {
+		return (
+			<>
+				<noscript>
+					<MatchHeaderFallback
+						format={props.format}
+						article={props.article}
+					/>
+				</noscript>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FootballMatchHeaderWrapper
+						initialTab="live"
+						leagueName={footballMatchLeagueName}
+						leagueURL={footballMatchLeagueUrl}
+						edition={props.article.editionId}
+						matchHeaderURL={footballMatchHeaderUrl}
+						renderingTarget={props.renderingTarget}
+						article={props.article}
+						format={props.format}
+					/>
+				</Island>
+			</>
+		);
+	}
+
+	if (!isApps && cricketMatchHeaderUrl && isCricketRedesignEnabled) {
+		return (
+			<>
+				<noscript>
+					<MatchHeaderFallback
+						format={props.format}
+						article={props.article}
+					/>
+				</noscript>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<CricketMatchHeaderWrapper
+						tabContentId={props.liveBlogAreaId}
+						selectedTab={'live'}
+						edition={props.article.editionId}
+						matchHeaderURL={cricketMatchHeaderUrl}
+						article={props.article}
+						format={props.format}
+					/>
+				</Island>
+			</>
+		);
+	}
+
+	return (
+		<Section
+			fullWidth={true}
+			showTopBorder={false}
+			backgroundColour={themePalette('--headline-blog-background')}
+			borderColour={themePalette('--headline-border')}
+		>
+			<HeadlineGrid>
+				<GridItem area="title">
+					<ArticleTitle
+						format={props.format}
+						tags={props.article.tags}
+						sectionLabel={props.article.sectionLabel}
+						sectionUrl={props.article.sectionUrl}
+						guardianBaseURL={props.article.guardianBaseURL}
+					/>
+				</GridItem>
+				<GridItem area="headline">
+					<div css={maxWidth}>
+						{!footballMatchHeaderUrl && (
+							<ArticleHeadline
+								format={props.format}
+								headlineString={props.article.headline}
+								tags={props.article.tags}
+								byline={props.article.byline}
+								webPublicationDateDeprecated={
+									props.article.webPublicationDateDeprecated
+								}
+								starRating={props.article.starRating}
+							/>
+						)}
+					</div>
+				</GridItem>
+			</HeadlineGrid>
+		</Section>
 	);
 };

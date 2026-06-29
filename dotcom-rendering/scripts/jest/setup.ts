@@ -1,7 +1,8 @@
-/* eslint-disable ssr-friendly/no-dom-globals-in-module-scope -- this runs in JSDOM */
 // add some helpful assertions
 import '@testing-library/jest-dom';
+import { ReadableStream } from 'node:stream/web';
 import { TextDecoder, TextEncoder } from 'node:util';
+import { MessagePort } from 'node:worker_threads';
 import { isServer } from '../../src/lib/isServer';
 import type { Guardian } from '../../src/model/guardian';
 
@@ -61,7 +62,7 @@ const windowGuardian = {
 // We should never be able to directly set things to the global window object.
 // But in this case we want to stub things for testing, so it's ok to ignore this rule
 if (!isServer) {
-	// @ts-expect-error
+	// @ts-expect-error -- we want to stub the global window.guardian object for testing purposes
 	window.guardian = windowGuardian;
 }
 
@@ -107,8 +108,28 @@ if (!isServer) {
  * DOM and NodeJS versions of `TextDecoder`. This affect the running of the application and
  * allows us to update jsdom.
  */
-global.TextEncoder = TextEncoder;
+global.TextEncoder = TextEncoder as unknown as typeof global.TextEncoder;
 global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;
+global.ReadableStream =
+	ReadableStream as unknown as typeof global.ReadableStream;
+global.MessagePort = MessagePort as unknown as typeof global.MessagePort;
+
+if (!isServer) {
+	Object.defineProperty(window, 'matchMedia', {
+		writable: true,
+		value: (query: string): MediaQueryList =>
+			({
+				matches: false,
+				media: query,
+				onchange: null,
+				addListener: () => {},
+				removeListener: () => {},
+				addEventListener: () => {},
+				removeEventListener: () => {},
+				dispatchEvent: () => false,
+			}) as MediaQueryList,
+	});
+}
 
 // Mocks the version number used by CDK, we don't want our tests to fail every time we update our cdk dependency.
 jest.mock('@guardian/cdk/lib/constants/tracking-tag');

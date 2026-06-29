@@ -185,7 +185,6 @@ test.describe('Liveblogs', () => {
 			queryParams: {
 				live: 'true',
 				page: 'with:block-6214732b8f08f86d89ef68d6',
-				filterKeyEvents: 'false',
 			},
 			fragment: '#liveblog-navigation',
 		});
@@ -202,7 +201,6 @@ test.describe('Liveblogs', () => {
 			queryParams: {
 				live: 'true',
 				page: 'with:block-6214732b8f08f86d89ef68d6',
-				filterKeyEvents: 'false',
 			},
 			fragment: '#liveblog-navigation',
 		});

@@ -7,7 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import React from 'react';
+import type React from 'react';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -513,11 +513,7 @@ export const CrosswordLayout = (props: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
-			<MobileStickyContainer
-				data-print-layout="hide"
-				contentType={article.contentType}
-				pageId={article.pageId}
-			/>
+			{renderAds && <MobileStickyContainer data-print-layout="hide" />}
 		</>
 	);
 };

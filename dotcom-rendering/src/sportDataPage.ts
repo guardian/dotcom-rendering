@@ -101,5 +101,6 @@ export const cleanTeamName = (teamName: string): string => {
 		.replace('Union Saint Gilloise', 'Union Saint-Gilloise')
 		.replace('Bosnia-Herzegovina', 'Bosnia and Herzegovina')
 		.replace('Congo DR', 'DR Congo')
-		.replace('Curacao', 'Curaçao');
+		.replace('Curacao', 'Curaçao')
+		.replace('Czech Republic', 'Czechia');
 };

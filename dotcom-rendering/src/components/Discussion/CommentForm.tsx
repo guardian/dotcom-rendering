@@ -43,9 +43,7 @@ const strikethroughString = (str: string) => `<del>${str}</del>`;
 const codeString = (str: string) => `<code>${str}</code>`;
 const quoteString = (str: string) => `<blockquote>${str}</blockquote>`;
 const linkStringFunc = (url: string, highlightedText?: string) =>
-	`<a href="${url}" rel="nofollow">${
-		highlightedText ? highlightedText : url
-	}</a>`;
+	`<a href="${url}" rel="nofollow">${highlightedText ?? url}</a>`;
 
 const formWrapper = css`
 	display: flex;
@@ -279,7 +277,9 @@ export const CommentForm = ({
 		transfromFunc: (highlightedString: string) => string,
 	) => {
 		const textAreaStrings = getHighlightedString();
-		if (!textAreaStrings) return;
+		if (!textAreaStrings) {
+			return;
+		}
 		const { startString, highlightedString, endString } = textAreaStrings;
 		setBody(
 			startString.concat(transfromFunc(highlightedString), endString),
@@ -288,9 +288,13 @@ export const CommentForm = ({
 
 	const transformLink = () => {
 		const url = prompt('Your URL:', 'http://www.');
-		if (url === null) return;
+		if (url === null) {
+			return;
+		}
 		const textAreaStrings = getHighlightedString();
-		if (!textAreaStrings) return;
+		if (!textAreaStrings) {
+			return;
+		}
 		const { startString, highlightedString, endString } = textAreaStrings;
 		setBody(
 			startString.concat(
@@ -302,7 +306,9 @@ export const CommentForm = ({
 
 	const fetchShowPreview = async () => {
 		const body = textValue;
-		if (!body) return;
+		if (!body) {
+			return;
+		}
 
 		// Reset the error and preview body before fetching the preview
 		// This ensures that if the preview fails, we don't show stale data
@@ -405,7 +411,9 @@ export const CommentForm = ({
 	};
 
 	const submitForm = async () => {
-		if (isDisabled) return;
+		if (isDisabled) {
+			return;
+		}
 		setIsDisabled(true);
 		setError('');
 
@@ -426,12 +434,12 @@ export const CommentForm = ({
 								body,
 								user.profile,
 								commentBeingRepliedTo,
-						  )
+							)
 						: simulateNewComment(
 								response.value,
 								body,
 								user.profile,
-						  ),
+							),
 				);
 				resetForm();
 			}

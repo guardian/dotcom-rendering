@@ -65,7 +65,9 @@ export const ArticleTitle = ({
 }: Props) => (
 	<div
 		css={[
-			format.design === ArticleDesign.Gallery && galleryStyles,
+			[ArticleDesign.Gallery, ArticleDesign.HostedGallery].includes(
+				format.design,
+			) && galleryStyles,
 			sectionStyles,
 		]}
 	>

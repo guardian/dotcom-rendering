@@ -8,6 +8,8 @@ import {
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
+import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
+import { NewsletterPreviewButton } from './NewsletterPreviewButton';
 
 export type NewsletterSignupCardProps = {
 	name: string;
@@ -15,6 +17,9 @@ export type NewsletterSignupCardProps = {
 	description: string;
 	illustrationSquare?: string;
 	children?: React.ReactNode;
+	previewAction?: NewsletterPreviewAction;
+	isSignedIn?: boolean | 'Pending';
+	isModal?: boolean;
 };
 
 const containerStyles = css`
@@ -87,22 +92,31 @@ const illustrationStyles = css`
 	}
 `;
 
-const NewsletterSignupHeader = (props: {
-	frequency: string;
-	name: string;
-	description: string;
-	illustrationSquare?: string;
-}) => (
+const previewButtonWrapperStyles = css`
+	margin-bottom: ${space[4]}px;
+`;
+
+const NewsletterSignupHeader = (
+	props: Omit<NewsletterSignupCardProps, 'children'>,
+) => (
 	<div css={headerStyles}>
 		<div css={titleAndMetaStyles}>
 			<div css={frequencyTagStyles}>
 				<SvgNewsletterFilled />
-				Newsletter | {props.frequency}
+				Free newsletter | {props.frequency}
 			</div>
 			<p css={titleStyles}>
 				Sign up to <span>{props.name}</span>
 			</p>
 			<p css={descriptionStyles}>{props.description}</p>
+			{props.previewAction !== undefined && props.isSignedIn !== true && (
+				<div css={previewButtonWrapperStyles}>
+					<NewsletterPreviewButton
+						previewAction={props.previewAction}
+						size="small"
+					/>
+				</div>
+			)}
 		</div>
 		{!!props.illustrationSquare && (
 			<img
@@ -122,17 +136,28 @@ export const NewsletterSignupCard = ({
 	description,
 	illustrationSquare,
 	children,
-}: NewsletterSignupCardProps) => (
-	<>
-		<hr css={dividerStyles} />
+	previewAction,
+	isSignedIn,
+	isModal = false,
+}: NewsletterSignupCardProps) => {
+	const content = (
 		<aside css={containerStyles} aria-label="newsletter promotion">
 			<NewsletterSignupHeader
 				frequency={frequency}
 				name={name}
 				description={description}
 				illustrationSquare={illustrationSquare}
+				previewAction={previewAction}
+				isSignedIn={isSignedIn}
 			/>
 			{children}
 		</aside>
-	</>
-);
+	);
+
+	return (
+		<>
+			{!isModal && <hr css={dividerStyles} />}
+			{content}
+		</>
+	);
+};

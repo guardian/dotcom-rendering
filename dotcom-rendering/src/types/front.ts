@@ -13,7 +13,7 @@ import type {
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import type { Branding, CollectionBranding } from './branding';
-import type { BoostLevel, StarRating } from './content';
+import type { BoostLevel, Newsletter, StarRating } from './content';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
 import type { ArticleMedia, MainMedia } from './mainMedia';
@@ -92,6 +92,8 @@ export type DCRFrontCard = {
 	isImmersive: boolean;
 	isCrossword?: boolean;
 	isNewsletter?: boolean;
+	isNewsletterSignup?: boolean;
+	newsletterData?: Newsletter;
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;
@@ -151,8 +153,6 @@ export type DCRSupportingContent = {
 	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
-	/** // AIStorylines: The date is shown in the supporting content for the key stories container in a tag page */
-	webPublicationDate?: string;
 };
 
 export type TreatType = {

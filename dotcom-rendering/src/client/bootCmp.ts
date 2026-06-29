@@ -1,5 +1,9 @@
-import type { ConsentState } from '@guardian/libs';
-import { cmp, getConsentDetailsForOphan, onConsent } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
+import {
+	cmp,
+	getConsentDetailsForOphan,
+	onConsent,
+} from '@guardian/consent-manager';
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { isUserLoggedIn } from '../lib/identity';

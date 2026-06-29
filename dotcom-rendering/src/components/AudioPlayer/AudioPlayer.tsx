@@ -15,12 +15,10 @@ type AudioEvents = TAudioEventType extends `audio:content:${infer E}`
 	: never;
 
 // possible progress events for audio in ophan
-type AudioProgressEvents = Extract<
-	AudioEvents,
-	`${number}`
-> extends `${infer N extends number}`
-	? N
-	: never;
+type AudioProgressEvents =
+	Extract<AudioEvents, `${number}`> extends `${infer N extends number}`
+		? N
+		: never;
 
 const reportAudioEvent = (mediaId: string, eventName: AudioEvents) => {
 	const audioEvent: AudioEvent = {
@@ -118,7 +116,9 @@ export const AudioPlayer = ({
 	const onProgress = useCallback(() => {
 		if (audioRef.current) {
 			const buffers = audioRef.current.buffered.length;
-			if (buffers === 0) return;
+			if (buffers === 0) {
+				return;
+			}
 
 			const end = audioRef.current.buffered.end(buffers - 1);
 			setBuffer((end / audioRef.current.duration) * 100);
@@ -220,7 +220,9 @@ export const AudioPlayer = ({
 	// ********************* effects *********************
 
 	useEffect(() => {
-		if (!audioRef.current) return;
+		if (!audioRef.current) {
+			return;
+		}
 
 		const audio = audioRef.current;
 

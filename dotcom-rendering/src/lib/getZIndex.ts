@@ -26,6 +26,7 @@ const indices = [
 	'sign-in-gate',
 	'lightbox',
 	'youTubeFullscreen',
+	'selfHostedFullscreen',
 
 	// Sticky video and button need to be above everything
 	'sticky-video-button',
@@ -56,6 +57,9 @@ const indices = [
 
 	// Edition selector in nav - needs to be below stickyAdWrapper
 	'editionDropdown',
+
+	// Interscroller ads need their own stacking context to force the background image below the ad to stop it capturing mouse events
+	'interscrollerAd',
 
 	// The content displayed by the Details component
 	'summaryDetails',
@@ -92,6 +96,8 @@ const indices = [
 	// Self-hosted video
 	'video-progress-bar-foreground',
 	'video-progress-bar-background',
+	'video-controls-container',
+	'video-card-link',
 	'video-container',
 
 	// Main media

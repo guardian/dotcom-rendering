@@ -12,7 +12,7 @@ import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
 import { FetchHostedOnwards } from '../components/FetchHostedOnwards.island';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
-import { HostedContentHeader } from '../components/HostedContentHeader';
+import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
@@ -168,6 +168,30 @@ const sideBorders = css`
 	}
 `;
 
+/**
+ * Overrides palette declarations in light mode to use the accent color for the hosted content.
+ * @param accentColor - The accentColor to use for the hosted content in light mode.
+ * @returns A CSS string with the overridden palette declarations.
+ */
+export const overridePaletteColours = (accentColor?: string) => {
+	return css`
+		@media (prefers-color-scheme: light) {
+			--article-link-text: ${accentColor ?? 'inherit'};
+			--article-link-text-hover: ${accentColor ?? 'inherit'};
+			--article-link-border-hover: ${accentColor ?? 'inherit'};
+			--accent-colour: ${accentColor ?? `${sourcePalette.neutral[38]}`};
+		}
+		/* The following styles are to reflect the current accentColor behaviour in storybook as well so we maintain consistency */
+		[data-color-scheme='dark'] & {
+			--article-link-text: inherit;
+			--article-link-text-hover: inherit;
+			--article-link-border-hover: inherit;
+			/* This CSS variable only exists in the scope of hosted content and it isn't defined in the paletteDeclarations.ts */
+			--accent-colour: ${sourcePalette.neutral[86]};
+		}
+	`;
+};
+
 export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	const {
 		content: { frontendData },
@@ -213,12 +237,17 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						element="header"
 					>
-						<HostedContentHeader branding={branding} />
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<HostedContentHeader branding={branding} />
+						</Island>
 					</Section>
 				</Stuck>
 			) : null}
 
-			<main data-layout="HostedArticleLayout">
+			<main
+				data-layout="HostedArticleLayout"
+				css={overridePaletteColours(branding?.hostedCampaignColour)}
+			>
 				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
 						<MainMedia
@@ -319,7 +348,6 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										frontendData.isRightToLeftLang
 									}
-									accentColor={branding?.hostedCampaignColour}
 								/>
 								<HostedContentDisclaimer />
 							</ArticleContainer>

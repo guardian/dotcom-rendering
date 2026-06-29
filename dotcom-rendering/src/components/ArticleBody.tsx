@@ -49,7 +49,6 @@ type Props = {
 	isDev: boolean;
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
-	filterKeyEvents?: boolean;
 	abTests: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
@@ -57,7 +56,6 @@ type Props = {
 	shouldHideAds: boolean;
 	serverTime?: number;
 	idApiUrl?: string;
-	accentColor?: string;
 };
 
 const globalOlStyles = () => css`
@@ -104,20 +102,6 @@ const bodyPadding = css`
 	}
 `;
 
-const hostedContentLinkStyles = (accentColor?: string) => css`
-	a:not([data-ignore='global-link-styling']) {
-		text-decoration: none;
-		border-bottom: 1px solid ${themePalette('--article-link-border')};
-		color: ${accentColor ?? themePalette('--article-link-text')};
-
-		:hover {
-			color: ${accentColor ?? themePalette('--article-link-text-hover')};
-			border-bottom: 1px solid
-				${accentColor ?? themePalette('--article-link-border-hover')};
-		}
-	}
-`;
-
 const globalLinkStyles = () => css`
 	a:not([data-ignore='global-link-styling']) {
 		text-decoration: none;
@@ -154,7 +138,6 @@ export const ArticleBody = ({
 	isDev,
 	onFirstPage = false,
 	keyEvents = [],
-	filterKeyEvents = false,
 	keywordIds,
 	abTests,
 	tableOfContents,
@@ -164,7 +147,6 @@ export const ArticleBody = ({
 	shouldHideAds,
 	serverTime,
 	idApiUrl,
-	accentColor,
 }: Props) => {
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
@@ -233,7 +215,6 @@ export const ArticleBody = ({
 					contributionsServiceUrl={contributionsServiceUrl}
 					onFirstPage={onFirstPage}
 					keyEvents={keyEvents}
-					filterKeyEvents={filterKeyEvents}
 					keywordIds={keywordIds}
 					editionId={editionId}
 					shouldHideAds={shouldHideAds}
@@ -262,10 +243,7 @@ export const ArticleBody = ({
 					globalOlStyles(),
 					globalStrongStyles,
 					globalLinkStyles(),
-					isHostedContent && [
-						hostedContentH2Styles,
-						hostedContentLinkStyles(accentColor),
-					],
+					isHostedContent && [hostedContentH2Styles],
 				]}
 				lang={language}
 				dir={languageDirection}

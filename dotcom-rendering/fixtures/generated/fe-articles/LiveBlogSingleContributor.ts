@@ -287,7 +287,6 @@ export const LiveBlogSingleContributor: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="b8e6f4c55da3c6457d78a52d0460d787750185c0"> <img src="https://media.guim.co.uk/b8e6f4c55da3c6457d78a52d0460d787750185c0/0_0_2560_1536/1000.jpg" alt="Rishi Sunak and Keir Starmer at PMQs." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">Rishi Sunak and Keir Starmer at PMQs.</span> <span class="element-image__credit">Photograph: Parliament Live</span> </figcaption> </figure>',
-	filterKeyEvents: false,
 	pinnedPost: {
 		id: '6579a60c8f08c4c875ceac82',
 		elements: [
@@ -3430,8 +3429,8 @@ export const LiveBlogSingleContributor: FEArticle = {
 	pagination: {
 		currentPage: 1,
 		totalPages: 5,
-		oldest: '?page=with:block-657969118f08c4c875cea936&filterKeyEvents=false',
-		older: '?page=with:block-6579c37e8f08e3b7ab1a2fd6&filterKeyEvents=false',
+		oldest: '?page=with:block-657969118f08c4c875cea936',
+		older: '?page=with:block-6579c37e8f08e3b7ab1a2fd6',
 	},
 	author: {
 		byline: 'Andrew Sparrow',

@@ -7,7 +7,7 @@ import { css } from '@emotion/react';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
-import React from 'react';
+import type React from 'react';
 import {
 	choiceCardsSettings,
 	choiceCardsWithMixedDestinations,
@@ -445,7 +445,7 @@ export const WithThreeTierChoiceCardsAndMixedDestinationsDefaultExpanded: Story 
 										...c,
 										isDefault: false,
 										defaultExpanded: true,
-								  }
+									}
 								: { ...c, isDefault: false },
 						),
 					mobileChoiceCards:
@@ -456,7 +456,7 @@ export const WithThreeTierChoiceCardsAndMixedDestinationsDefaultExpanded: Story 
 											...c,
 											isDefault: false,
 											defaultExpanded: true,
-									  }
+										}
 									: { ...c, isDefault: false },
 						),
 				},

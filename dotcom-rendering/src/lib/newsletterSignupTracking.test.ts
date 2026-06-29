@@ -1,6 +1,5 @@
 import { submitComponentEvent } from '../client/ophan/ophan';
 import {
-	AB_TEST_NAME,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	sendNewsletterSignupEvent,
 } from './newsletterSignupTracking';
@@ -14,16 +13,16 @@ const RENDERING_TARGET = 'Web';
 const MOCK_TIMESTAMP = 1_000_000_000_000;
 
 describe('NEWSLETTER_SIGNUP_COMPONENT_ID', () => {
-	it('returns the correct control component id', () => {
-		expect(NEWSLETTER_SIGNUP_COMPONENT_ID.control(IDENTITY_NAME)).toBe(
-			`AR SecureSignup ${IDENTITY_NAME}`,
-		);
+	it('returns the in article signup form component id', () => {
+		expect(
+			NEWSLETTER_SIGNUP_COMPONENT_ID.inArticleSignupForm(IDENTITY_NAME),
+		).toBe(`AR NewsletterSignupForm ${IDENTITY_NAME}`);
 	});
 
-	it('returns the correct variant component id', () => {
-		expect(NEWSLETTER_SIGNUP_COMPONENT_ID.variant(IDENTITY_NAME)).toBe(
-			`AR NewsletterSignupForm ${IDENTITY_NAME}`,
-		);
+	it('returns the correct highlights card component id', () => {
+		expect(
+			NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(IDENTITY_NAME),
+		).toBe(`HighlightsNewsletterCard ${IDENTITY_NAME}`);
 	});
 });
 
@@ -41,7 +40,10 @@ describe('sendNewsletterSignupEvent', () => {
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName: IDENTITY_NAME,
-			componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.control(IDENTITY_NAME),
+			componentId:
+				NEWSLETTER_SIGNUP_COMPONENT_ID.inArticleSignupForm(
+					IDENTITY_NAME,
+				),
 			renderingTarget: RENDERING_TARGET,
 			value: { eventDescription: 'newsletter-signup-viewed' },
 		});
@@ -50,7 +52,7 @@ describe('sendNewsletterSignupEvent', () => {
 			{
 				component: {
 					componentType: 'NEWSLETTER_SUBSCRIPTION',
-					id: `AR SecureSignup ${IDENTITY_NAME}`,
+					id: `AR NewsletterSignupForm ${IDENTITY_NAME}`,
 				},
 				action: 'VIEW',
 				value: JSON.stringify({
@@ -70,7 +72,10 @@ describe('sendNewsletterSignupEvent', () => {
 		sendNewsletterSignupEvent({
 			action: 'EXPAND',
 			identityName: IDENTITY_NAME,
-			componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(IDENTITY_NAME),
+			componentId:
+				NEWSLETTER_SIGNUP_COMPONENT_ID.inArticleSignupForm(
+					IDENTITY_NAME,
+				),
 			renderingTarget: RENDERING_TARGET,
 			value: { eventDescription: 'preview-open', renderUrl },
 		});
@@ -98,7 +103,10 @@ describe('sendNewsletterSignupEvent', () => {
 		sendNewsletterSignupEvent({
 			action: 'CLOSE',
 			identityName: IDENTITY_NAME,
-			componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(IDENTITY_NAME),
+			componentId:
+				NEWSLETTER_SIGNUP_COMPONENT_ID.inArticleSignupForm(
+					IDENTITY_NAME,
+				),
 			renderingTarget: RENDERING_TARGET,
 			value: {
 				eventDescription: 'preview-close',
@@ -120,21 +128,27 @@ describe('sendNewsletterSignupEvent', () => {
 	});
 
 	it('passes the abTest object to the top-level abTest field (not encoded in value)', () => {
+		const abTest = {
+			name: 'ab-test-name',
+			variant: 'ab-test-variant',
+		};
+
 		sendNewsletterSignupEvent({
 			action: 'VIEW',
 			identityName: IDENTITY_NAME,
-			componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.control(IDENTITY_NAME),
+			componentId:
+				NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(IDENTITY_NAME),
 			renderingTarget: RENDERING_TARGET,
 			value: {
 				eventDescription: 'newsletter-signup-viewed',
 				isAlreadySubscribed: false,
 			},
-			abTest: { name: AB_TEST_NAME, variant: 'control' },
+			abTest,
 		});
 
 		expect(submitComponentEvent).toHaveBeenCalledWith(
 			expect.objectContaining({
-				abTest: { name: AB_TEST_NAME, variant: 'control' },
+				abTest,
 				value: JSON.stringify({
 					eventDescription: 'newsletter-signup-viewed',
 					isAlreadySubscribed: false,

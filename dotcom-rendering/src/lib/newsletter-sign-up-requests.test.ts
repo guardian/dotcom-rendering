@@ -97,6 +97,7 @@ describe('requestMultipleSignUps', () => {
 		).mock.calls[0];
 
 		const decodedEntries = decodeURIComponent(
+			// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a test
 			requestInit?.body?.toString() ?? '',
 		).split('&');
 
@@ -131,6 +132,7 @@ describe('requestMultipleSignUps', () => {
 		).mock.calls[0];
 
 		const decodedBody = decodeURIComponent(
+			// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a test
 			requestInit?.body?.toString() ?? '',
 		);
 
@@ -189,6 +191,7 @@ describe('requestSingleSignUp', () => {
 		).mock.calls[0];
 
 		const decodedEntries = decodeURIComponent(
+			// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a test
 			requestInit?.body?.toString() ?? '',
 		).split('&');
 
@@ -220,6 +223,7 @@ describe('requestSingleSignUp', () => {
 		).mock.calls[0];
 
 		const decodedBody = decodeURIComponent(
+			// eslint-disable-next-line @typescript-eslint/no-base-to-string -- just a test
 			requestInit?.body?.toString() ?? '',
 		);
 

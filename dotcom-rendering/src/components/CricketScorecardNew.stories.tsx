@@ -23,6 +23,8 @@ export const CricketScorecardNew = meta.story({
 			{
 				description: 'India first innings',
 				battingTeam: 'India',
+				declared: false,
+				forfeited: false,
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',
@@ -186,6 +188,8 @@ export const CricketScorecardNew = meta.story({
 			{
 				description: 'New Zealand first innings',
 				battingTeam: 'New Zealand',
+				declared: false,
+				forfeited: false,
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',
@@ -334,6 +338,7 @@ export const CricketScorecardNew = meta.story({
 			'R S Madugalle',
 		],
 		homeTeam: {
+			paID: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
 			name: 'India',
 			lineup: [
 				'Rohit Sharma',
@@ -350,6 +355,7 @@ export const CricketScorecardNew = meta.story({
 			],
 		},
 		awayTeam: {
+			paID: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
 			name: 'New Zealand',
 			lineup: [
 				'Rachin Ravindra',
@@ -365,6 +371,5 @@ export const CricketScorecardNew = meta.story({
 				"Will O'Rourke",
 			],
 		},
-		matchResult: 'in progress',
 	},
 });

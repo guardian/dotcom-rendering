@@ -17,6 +17,7 @@ import {
 } from './handler.article.web';
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
+import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
 import { handlePuzzleIframePage } from './handler.puzzleIframePage.web';
 import { handlePuzzlesPage } from './handler.puzzlesPage.web';
@@ -63,6 +64,7 @@ export const prodServer = (): void => {
 	app.post('/CricketMatchPage', handleCricketMatchPage);
 	app.post('/FootballTablesPage', handleFootballTablesPage);
 	app.post('/FootballMatchSummaryPage', handleFootballMatchPage);
+	app.post('/FootballMatchDayEmbed', handleFootballMatchDayEmbed);
 	app.post('/HostedContent', handleHostedContent);
 	app.post('/PuzzlesPage', handlePuzzlesPage);
 	app.post('/PuzzleIframePage', handlePuzzleIframePage);
@@ -74,7 +76,7 @@ export const prodServer = (): void => {
 	app.post('/EditionsCrossword', handleEditionsCrossword);
 	app.post('/AppsHostedContent', handleAppsHostedContent);
 	app.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
-	app.use('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
+	app.post('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 
 	app.get('/assets/rendered-items-assets', handleAppsAssets);
 
@@ -83,7 +85,7 @@ export const prodServer = (): void => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- all params to error handlers must be declared
 	const handleError: ErrorRequestHandler = (e, _req, res, _next) => {
 		const message =
-			e instanceof Error ? e.stack ?? 'Unknown stack' : 'Unknown error';
+			e instanceof Error ? (e.stack ?? 'Unknown stack') : 'Unknown error';
 
 		if (e instanceof TypeError) {
 			res.status(400).send(`<pre>${message}</pre>`);

@@ -1,4 +1,4 @@
-import { expect, within } from 'storybook/test';
+import { expect, fn, within } from 'storybook/test';
 import { SWRConfig } from 'swr';
 import preview from '../../../.storybook/preview';
 import {
@@ -7,8 +7,46 @@ import {
 	matchResult,
 } from '../../../fixtures/manual/footballMatches';
 import type { FEFootballMatchHeader } from '../../frontend/feFootballMatchHeader';
+import type {
+	EnvironmentClient,
+	LiveActivitiesClient,
+	MatchNotificationsClient,
+} from '../../lib/bridgetApi';
 import { NotificationsToggle } from '../NotificationsToggle.stories';
 import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader';
+
+const mockMatchNotificationsClient: MatchNotificationsClient = {
+	isAvailable: () => Promise.resolve({ isAvailable: true }),
+};
+
+const mockEnvironmentClient: EnvironmentClient = {
+	isMyGuardianEnabled: () => Promise.resolve(false),
+	nativeThriftPackageVersion: () => Promise.resolve('8.13.0'),
+};
+
+const mockLiveActivitiesClient: LiveActivitiesClient = (() => {
+	let following = false;
+
+	return {
+		isAvailable: fn(() => {
+			return Promise.resolve(true);
+		}),
+
+		follow: fn(() => {
+			following = true;
+			return Promise.resolve(true);
+		}),
+
+		unfollow: fn(() => {
+			following = false;
+			return Promise.resolve(true);
+		}),
+
+		isFollowing: fn(() => {
+			return Promise.resolve(following);
+		}),
+	};
+})();
 
 const meta = preview.meta({
 	component: FootballMatchHeaderComponent,
@@ -52,8 +90,9 @@ export const FixtureWeb = meta.story({
 				paId: 'matchId',
 			},
 			tabs: {
-				selected: 'info',
-				matchKind: 'Fixture',
+				infoURL: new URL(
+					'https://www.theguardian.com/football/match/2025/nov/26/arsenal-v-bayernmunich',
+				),
 			},
 		},
 		leagueName: 'Premier League',
@@ -69,6 +108,9 @@ export const FixtureWeb = meta.story({
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
 		renderingTarget: 'Web',
 		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
+		environmentClient: mockEnvironmentClient,
+		liveActivitiesClient: mockLiveActivitiesClient,
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		const nav = canvas.getByRole('navigation');
@@ -118,6 +160,9 @@ export const LiveApps = meta.story({
 			}),
 		renderingTarget: 'Apps',
 		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
+		environmentClient: mockEnvironmentClient,
+		liveActivitiesClient: mockLiveActivitiesClient,
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		await step(
@@ -170,6 +215,9 @@ export const ResultWeb = meta.story({
 			}),
 		renderingTarget: 'Web',
 		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
+		environmentClient: mockEnvironmentClient,
+		liveActivitiesClient: mockLiveActivitiesClient,
 	},
 
 	play: async ({ canvas, canvasElement, step }) => {
@@ -216,6 +264,9 @@ export const ResultApps = meta.story({
 			}),
 		renderingTarget: 'Apps',
 		notificationsClient: NotificationsToggle.args.notificationsClient,
+		matchNotificationsClient: mockMatchNotificationsClient,
+		environmentClient: mockEnvironmentClient,
+		liveActivitiesClient: mockLiveActivitiesClient,
 	},
 
 	play: async ({ canvas, canvasElement, step }) => {

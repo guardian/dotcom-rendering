@@ -9,6 +9,7 @@ import {
 	findOptimisedSourcePerMimeType,
 	formatTimeForDisplay,
 	getAspectRatioFromSources,
+	roundAspectRatio,
 } from './video';
 
 const mp4Asset480w: VideoAssets = {
@@ -92,7 +93,10 @@ describe('video', () => {
 		it('should drop unsupported assets', () => {
 			const assets = [mp4Asset480w, m3u8Asset720h, unsupportedAsset];
 			const expected = [mp4Src480w, m3u8Src720h];
-			expect(extractValidSourcesFromAssets(assets)).toEqual(expected);
+
+			expect(extractValidSourcesFromAssets(assets, 'Loop')).toEqual(
+				expected,
+			);
 		});
 
 		it('should reorder sources by supportedVideoFileTypes order', () => {
@@ -110,7 +114,45 @@ describe('video', () => {
 				m3u8Src720h,
 				m3u8Src720h,
 			];
-			expect(extractValidSourcesFromAssets(assets)).toEqual(expected);
+			expect(extractValidSourcesFromAssets(assets, 'Loop')).toEqual(
+				expected,
+			);
+		});
+
+		it('should prefer M3U8 sources for long videos with Default video style', () => {
+			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
+			const expected = [m3u8Src720h, mp4Src480w, mp4Src720h];
+
+			expect(
+				extractValidSourcesFromAssets(assets, 'Default', 37),
+			).toEqual(expected);
+		});
+
+		it('should prefer MP4 sources for short videos with Default video style', () => {
+			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
+			const expected = [mp4Src480w, mp4Src720h, m3u8Src720h];
+
+			expect(
+				extractValidSourcesFromAssets(assets, 'Default', 12),
+			).toEqual(expected);
+		});
+
+		it('should prefer MP4 sources with Loop video style', () => {
+			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
+			const expected = [mp4Src480w, mp4Src720h, m3u8Src720h];
+
+			expect(extractValidSourcesFromAssets(assets, 'Loop')).toEqual(
+				expected,
+			);
+		});
+
+		it('should prefer MP4 sources with Cinemagraph video style', () => {
+			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
+			const expected = [mp4Src480w, mp4Src720h, m3u8Src720h];
+
+			expect(
+				extractValidSourcesFromAssets(assets, 'Cinemagraph'),
+			).toEqual(expected);
 		});
 	});
 
@@ -182,7 +224,12 @@ describe('video', () => {
 				aspectRatio: '5:3',
 				hasAudio: true,
 			};
-			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 3);
+
+			const fiveThreeAspectRatio = 1.667;
+
+			expect(getAspectRatioFromSources([testSource])).toEqual(
+				fiveThreeAspectRatio,
+			);
 		});
 
 		it('should calculate the aspect ratio from the width and height if aspect ratio is missing', () => {
@@ -193,7 +240,12 @@ describe('video', () => {
 				aspectRatio: undefined,
 				hasAudio: true,
 			};
-			expect(getAspectRatioFromSources([testSource])).toEqual(2 / 3);
+
+			const twoThreeAspectRatio = 0.667;
+
+			expect(getAspectRatioFromSources([testSource])).toEqual(
+				twoThreeAspectRatio,
+			);
 		});
 
 		it('should return the default aspect ratio if the aspect ratio is undefined and width is 0', () => {
@@ -345,6 +397,21 @@ describe('video', () => {
 			({ timeInSeconds, expectedFormattedTime }) => {
 				expect(formatTimeForDisplay(timeInSeconds)).toEqual(
 					expectedFormattedTime,
+				);
+			},
+		);
+	});
+	describe('roundAspectRatio', () => {
+		it.each([
+			{ aspectRatio: 0.56938445, expectedRoundedAspectRatio: 0.569 },
+			{ aspectRatio: 1.277777, expectedRoundedAspectRatio: 1.278 },
+			{ aspectRatio: 1.25, expectedRoundedAspectRatio: 1.25 },
+			{ aspectRatio: 0.8, expectedRoundedAspectRatio: 0.8 },
+		])(
+			'should return the correct aspect ratio rounded to 3 decimal places',
+			({ aspectRatio, expectedRoundedAspectRatio }) => {
+				expect(roundAspectRatio(aspectRatio)).toEqual(
+					expectedRoundedAspectRatio,
 				);
 			},
 		);

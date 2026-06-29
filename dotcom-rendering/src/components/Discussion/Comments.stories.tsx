@@ -33,12 +33,16 @@ const meta = preview.meta({
 });
 
 const discussionMock = parse(discussionApiResponseSchema, discussion);
-if (discussionMock.status !== 'ok') throw new Error('Invalid mock');
+if (discussionMock.status !== 'ok') {
+	throw new Error('Invalid mock');
+}
 const discussionWithTwoComments = parse(
 	discussionApiResponseSchema,
 	discussionWithTwoCommentsMock,
 );
-if (discussionWithTwoComments.status !== 'ok') throw new Error('Invalid mock');
+if (discussionWithTwoComments.status !== 'ok') {
+	throw new Error('Invalid mock');
+}
 
 const commentResponseError = function <A>(): Promise<
 	Result<'NetworkError', A>

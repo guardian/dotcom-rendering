@@ -32,8 +32,12 @@ const getUser = async ({
 		.then((r) => r.json())
 		.catch(() => undefined);
 
-	if (!isObject(data)) return;
-	if (!isObject(data.userProfile)) return;
+	if (!isObject(data)) {
+		return;
+	}
+	if (!isObject(data.userProfile)) {
+		return;
+	}
 
 	const profile = data.userProfile as unknown as UserProfile;
 
@@ -50,7 +54,7 @@ const getUser = async ({
 				onUnpick: unPickComment(authStatus),
 				addUsername: addUserName(authStatus),
 				reportAbuse: reportAbuse(authStatus),
-		  }
+			}
 		: {
 				kind: 'Reader',
 				profile,
@@ -59,7 +63,7 @@ const getUser = async ({
 				onRecommend: recommend(authStatus),
 				addUsername: addUserName(authStatus),
 				reportAbuse: reportAbuse(authStatus),
-		  };
+			};
 };
 
 /**
@@ -93,8 +97,12 @@ export const DiscussionWeb = (
 	const [user, setUser] = useState<SignedInUser>();
 
 	useEffect(() => {
-		if (authStatus.kind === 'Pending') return;
-		if (authStatus.kind === 'SignedOut') return;
+		if (authStatus.kind === 'Pending') {
+			return;
+		}
+		if (authStatus.kind === 'SignedOut') {
+			return;
+		}
 
 		getUser({ discussionApiUrl: props.discussionApiUrl, authStatus })
 			.then(setUser)
@@ -103,7 +111,9 @@ export const DiscussionWeb = (
 			});
 	}, [authStatus, props.discussionApiUrl]);
 
-	if (!hydrated) return <Placeholder heights={new Map([['mobile', 324]])} />;
+	if (!hydrated) {
+		return <Placeholder heights={new Map([['mobile', 324]])} />;
+	}
 
 	return (
 		<Discussion

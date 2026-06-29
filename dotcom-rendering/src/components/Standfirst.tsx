@@ -91,6 +91,10 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 			return css`
 				${headlineMedium20}
 			`;
+		case ArticleDesign.HostedGallery:
+			return css`
+				${textSans24};
+			`;
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
@@ -322,6 +326,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						color: ${palette('--standfirst-text')};
 					`;
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					return css`
 						${grid.span('centre-column-start', 5)}
 						color: ${palette('--standfirst-text')};
@@ -386,7 +391,9 @@ const hoverStyles = css`
 `;
 
 export const Standfirst = ({ format, standfirst }: Props) => {
-	if (standfirst.trim() === '') return null;
+	if (standfirst.trim() === '') {
+		return null;
+	}
 	return (
 		<>
 			<div

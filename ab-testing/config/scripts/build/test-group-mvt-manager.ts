@@ -27,21 +27,20 @@ class TestGroupMVTManager {
 			Object.entries(
 				mvtGroups
 					.entries()
-					.reduce<Record<string, number[]>>(
-						(acc, [key, { name }]) => {
-							const mvt = parseInt(key.split(":")[1] ?? "", 10);
-							// Skip invalid MVT values (NaN)
-							if (!Number.isNaN(mvt)) {
-								if (!acc[name]) {
-									acc[name] = [mvt];
-								} else {
-									acc[name].push(mvt);
-								}
+					.reduce<
+						Record<string, number[]>
+					>((acc, [key, { name }]) => {
+						const mvt = parseInt(key.split(":")[1] ?? "", 10);
+						// Skip invalid MVT values (NaN)
+						if (!Number.isNaN(mvt)) {
+							if (!acc[name]) {
+								acc[name] = [mvt];
+							} else {
+								acc[name].push(mvt);
 							}
-							return acc;
-						},
-						{},
-					),
+						}
+						return acc;
+					}, {}),
 			),
 		);
 		this.occupiedMVTs = new Set(

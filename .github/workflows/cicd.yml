@@ -9,6 +9,14 @@ jobs:
       packages: write
     uses: ./.github/workflows/container.yml
 
+  production-container:
+    permissions:
+      contents: read
+      id-token: write # Required to exchange for AWS credentials using OIDC
+    uses: ./.github/workflows/container-production.yml
+    secrets:
+      GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+
   prettier:
     uses: ./.github/workflows/prettier.yml
 

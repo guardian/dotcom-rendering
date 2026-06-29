@@ -12,25 +12,32 @@ import { HostedContentOnwardsCard } from './HostedContentOnwardsCard';
 type HostedContentOnwardsProps = {
 	trails: TrailType[];
 	brandName: string;
-	accentColor?: string;
 };
 
-const headerStyles = (accentColor?: string) => css`
+const headerStyles = css`
 	margin-bottom: ${space[1]}px;
 	border-top: ${space[2]}px solid
-		${accentColor ? accentColor : sourcePalette.neutral[7]};
-
-	span {
-		${textSansBold20}
-		display: block;
-		color: ${accentColor ? accentColor : sourcePalette.neutral[7]};
-	}
+		var(--accent-colour, ${sourcePalette.neutral[86]});
 `;
 
 const headingStyles = css`
 	${textSans17}
 	padding-top: ${space[2]}px;
-	color: ${sourcePalette.neutral[7]};
+	color: ${palette('--hosted-content-onwards-heading')};
+
+	@media (prefers-color-scheme: dark) {
+		color: ${palette('--hosted-content-onwards-heading')};
+	}
+
+	[data-color-scheme='dark'] & {
+		color: ${palette('--hosted-content-onwards-heading')};
+	}
+
+	span {
+		${textSansBold20}
+		display: block;
+		color: var(--accent-colour);
+	}
 `;
 
 const stackedCardsStyles = css`
@@ -52,27 +59,25 @@ const stackedCardWrapper = css`
 export const HostedContentOnwards = ({
 	trails,
 	brandName,
-	accentColor,
 }: HostedContentOnwardsProps) => {
 	return (
-		<div>
-			<header css={headerStyles(accentColor)}>
+		<>
+			<header css={headerStyles}>
 				<h2 css={headingStyles}>
 					More from
-					<span> {brandName}</span>
+					<span>{brandName}</span>
 				</h2>
 			</header>
-			<main>
-				<div css={stackedCardsStyles}>
-					{trails.map((trail) => {
-						return (
-							<div key={trail.url} css={stackedCardWrapper}>
-								<HostedContentOnwardsCard trail={trail} />
-							</div>
-						);
-					})}
-				</div>
-			</main>
-		</div>
+
+			<ul css={stackedCardsStyles}>
+				{trails.map((trail) => {
+					return (
+						<li key={trail.url} css={stackedCardWrapper}>
+							<HostedContentOnwardsCard trail={trail} />
+						</li>
+					);
+				})}
+			</ul>
+		</>
 	);
 };

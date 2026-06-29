@@ -12,9 +12,9 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import {
-	SvgMinus,
+	SvgChevronDownSingle,
+	SvgChevronUpSingle,
 	SvgPinned,
-	SvgPlus,
 } from '@guardian/source/react-components';
 import { palette } from '../palette';
 import type { Block } from '../types/blocks';
@@ -36,12 +36,12 @@ const pinnedPostContainer = css`
 		margin-bottom: ${space[1]}px;
 	}
 	#pinned-post-checkbox:checked ~ #pinned-post-overlay,
-	#pinned-post-checkbox ~ label #svgminus,
-	#pinned-post-checkbox:checked ~ label #svgplus {
+	#pinned-post-checkbox ~ label #svgchevronupsingle,
+	#pinned-post-checkbox:checked ~ label #svgchevrondownsingle {
 		display: none;
 	}
-	#pinned-post-checkbox ~ label #svgplus,
-	#pinned-post-checkbox:checked ~ label #svgminus {
+	#pinned-post-checkbox ~ label #svgchevrondownsingle,
+	#pinned-post-checkbox:checked ~ label #svgchevronupsingle {
 		display: block;
 	}
 	#pinned-post-checkbox ~ label::after {
@@ -188,11 +188,11 @@ export const PinnedPost = ({ pinnedPost, children, serverTime }: Props) => {
 				id="pinned-post-button"
 			>
 				<>
-					<span id="svgminus" css={buttonIcon}>
-						<SvgMinus />
+					<span id="svgchevronupsingle" css={buttonIcon}>
+						<SvgChevronUpSingle />
 					</span>
-					<span id="svgplus" css={buttonIcon}>
-						<SvgPlus />
+					<span id="svgchevrondownsingle" css={buttonIcon}>
+						<SvgChevronDownSingle />
 					</span>
 				</>
 			</label>

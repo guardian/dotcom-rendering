@@ -2,9 +2,9 @@
 
 ## Metadata
 
--   Date: 24/09/2020 (Updated 27/11/2020)
--   Author: Jon Soul
--   Platform concerned: Web & AMP
+- Date: 24/09/2020 (Updated 27/11/2020)
+- Author: Jon Soul
+- Platform concerned: Web & AMP
 
 ## Context
 
@@ -21,12 +21,12 @@ The tag being used is the Dotmetrics tag, which is hosted on AWS EC2. No documen
 
 When used the tracker send the following information to the server:
 
--   `id`: this is the ID of the tag, which is used to identify the type of content (e.g. Sport)
--   `url`: The URL of page being viewed
--   `dom`: The domain of the page being viewed
--   `r`: The timestamp of the event (page view)
--   `pvs`: Integer to indicate whether the event corresponds to a single page view or multiple (i.e. if the page is embedded)
--   `pvid`: Randomly generated string to identify the page view
+- `id`: this is the ID of the tag, which is used to identify the type of content (e.g. Sport)
+- `url`: The URL of page being viewed
+- `dom`: The domain of the page being viewed
+- `r`: The timestamp of the event (page view)
+- `pvs`: Integer to indicate whether the event corresponds to a single page view or multiple (i.e. if the page is embedded)
+- `pvid`: Randomly generated string to identify the page view
 
 Subsequent requests are also fired off with similar fields, but also a large number of other data points that enable device fingerprinting that is done on the server by dotmetrics. These data points are not sent on every page view, but are presumably refreshed from time to time.
 
@@ -34,8 +34,8 @@ Standard HTTP headers and other data from the request will also be sent. This in
 
 Cookies are also dropped and sent with each request:
 
--   `Dotmetrics.UniqueUserIdentityCookie` containing a user identifier, a creation date and a global identifier. It is not clear what the global identifier is for.
--   `DotMetrics.DeviceKey` containing a device ID which appears to be unusued on web.
+- `Dotmetrics.UniqueUserIdentityCookie` containing a user identifier, a creation date and a global identifier. It is not clear what the global identifier is for.
+- `DotMetrics.DeviceKey` containing a device ID which appears to be unusued on web.
 
 The `url` field for the Guardian does not usually contain personal information, but sometimes it may as the previous page URL may contain an identifier. This is not only theoretical and there is [good documentation about privacy concerns of referrer](https://developer.mozilla.org/en-US/docs/Web/Security/Referer_header:_privacy_and_security_concerns). It is a reminder to always follow good security practice on our website (i.e. no identifiers in URLs) and to never include these trackers on unnecessary pages (e.g. identity) where the risk of PII leakage may be higher.
 
@@ -59,17 +59,17 @@ While none of the other fields individually contains information [that relates t
 
 Adding a third-party script with access to the main window involve several risks:
 
--   Ability for the third-party script to modify content of the page
--   Ability for the third-party script to access cookies and local storage
--   Ability for the third-party script to redirect user to a different page and domain
--   Ability for the third-party script to fingerprint users
--   Ability for the third-party script to send/retrieve data over the network
+- Ability for the third-party script to modify content of the page
+- Ability for the third-party script to access cookies and local storage
+- Ability for the third-party script to redirect user to a different page and domain
+- Ability for the third-party script to fingerprint users
+- Ability for the third-party script to send/retrieve data over the network
 
 Unfortunately our current security control are not enough to prevent most of those behaviours:
 
--   Our CSP is allowing `unsafe-eval` and `unsafe-inline`
--   We are not loading each third-party scripts in an iframe with reduced capabilities.
--   We are not using [subresource intregrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) to ensure content of script is not changing.
+- Our CSP is allowing `unsafe-eval` and `unsafe-inline`
+- We are not loading each third-party scripts in an iframe with reduced capabilities.
+- We are not using [subresource intregrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) to ensure content of script is not changing.
 
 Additionally loading a third-party script from a storage not controlled by us, allows the content of the script to be modified from its original purpose for malicious activities. This may be slightly complicated further for Dotmetrics which uses the initial script to load further scripts from their servers.
 

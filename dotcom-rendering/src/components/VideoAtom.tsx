@@ -1,6 +1,12 @@
+import { css } from '@emotion/react';
+import { space } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { Caption } from './Caption';
 import { MaintainAspectRatio } from './MaintainAspectRatio';
+
+const figureStyles = css`
+	margin-bottom: ${space[3]}px;
+`;
 
 type AssetType = {
 	url: string;
@@ -26,15 +32,17 @@ export const VideoAtom = ({
 	height = 259,
 	width = 460,
 }: Props) => {
-	if (assets.length === 0) return null; // Handle empty assets array
+	if (assets.length === 0) {
+		return null;
+	} // Handle empty assets array
 	return (
-		<>
+		<figure css={figureStyles}>
 			<MaintainAspectRatio
 				height={height}
 				width={width}
 				data-spacefinder-role="inline"
 			>
-				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- caption not available */}
+				{}
 				<video
 					controls={true}
 					preload="metadata"
@@ -63,6 +71,6 @@ export const VideoAtom = ({
 					isMainMedia={isMainMedia}
 				/>
 			)}
-		</>
+		</figure>
 	);
 };

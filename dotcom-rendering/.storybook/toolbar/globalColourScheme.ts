@@ -1,12 +1,12 @@
 import type { Decorator, Preview } from '@storybook/react-webpack5';
-import { lightDecorator, darkDecorator } from '../decorators/themeDecorator';
-import { splitTheme } from '../decorators/splitThemeDecorator';
 import {
-	ArticleDisplay,
 	ArticleDesign,
-	Pillar,
+	ArticleDisplay,
 	type ArticleFormat,
+	Pillar,
 } from '../../src/lib/articleFormat';
+import { splitTheme } from '../decorators/splitThemeDecorator';
+import { darkDecorator, lightDecorator } from '../decorators/themeDecorator';
 
 const defaultFormat: ArticleFormat = {
 	display: ArticleDisplay.Standard,

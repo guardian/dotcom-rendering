@@ -7,21 +7,10 @@ import {
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
 import type { RenderingTarget } from '../types/renderingTarget';
+import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
-import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import type { NewsletterSignupCardProps } from './NewsletterSignupCard';
 import { NewsletterSignupCard } from './NewsletterSignupCard';
-
-export type NewsletterPreviewAction =
-	| {
-			behaviour: 'modal';
-			onClick: () => void;
-	  }
-	| {
-			behaviour: 'link';
-			href: string;
-			onClick: () => void;
-	  };
 
 type PreviewEventDescription = 'preview-open' | 'preview-close';
 
@@ -30,31 +19,33 @@ const sendPreviewTracking = ({
 	eventDescription,
 	renderingTarget,
 	renderUrl,
+	isSignedIn,
 }: {
 	identityName: string;
 	eventDescription: PreviewEventDescription;
 	renderingTarget: RenderingTarget;
 	renderUrl: string;
+	isSignedIn?: boolean | 'Pending';
 }) => {
 	sendNewsletterSignupEvent({
 		action: eventDescription === 'preview-open' ? 'EXPAND' : 'CLOSE',
 		identityName,
-		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.variant(identityName),
+		componentId:
+			NEWSLETTER_SIGNUP_COMPONENT_ID.inArticleSignupForm(identityName),
 		renderingTarget,
-		value: { eventDescription, renderUrl },
+		value: { eventDescription, renderUrl, isSignedIn },
 	});
 };
 
-type Props = Omit<NewsletterSignupCardProps, 'children'> & {
+type Props = Pick<
+	NewsletterSignupCardProps,
+	'name' | 'frequency' | 'description' | 'illustrationSquare'
+> & {
 	identityName: string;
 	category?: string;
 	exampleUrl?: string;
 	renderingTarget: RenderingTarget;
 	theme: string;
-	/**
-	 * Pass the signed-in status so the container can render the privacy message
-	 * below the card (rather than inside the form) when the user is signed in.
-	 */
 	isSignedIn?: boolean | 'Pending';
 	children?: (
 		previewAction: NewsletterPreviewAction | undefined,
@@ -80,7 +71,6 @@ export const NewsletterSignupCardContainer = ({
 	children,
 	isSignedIn,
 }: Props) => {
-	const showPrivacyMessageOutside = isSignedIn === true;
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
 	const renderUrl = buildNewsletterPreviewUrl({
@@ -90,7 +80,9 @@ export const NewsletterSignupCardContainer = ({
 	const hasPreviewUrl = Boolean(renderUrl);
 
 	const openPreview = useCallback(() => {
-		if (!renderUrl) return;
+		if (!renderUrl) {
+			return;
+		}
 
 		setIsPreviewOpen((isOpen) => {
 			if (!isOpen) {
@@ -99,23 +91,27 @@ export const NewsletterSignupCardContainer = ({
 					eventDescription: 'preview-open',
 					renderingTarget,
 					renderUrl,
+					isSignedIn,
 				});
 			}
 
 			return true;
 		});
-	}, [identityName, renderingTarget, renderUrl]);
+	}, [identityName, isSignedIn, renderingTarget, renderUrl]);
 
 	const trackPreviewLinkOpen = useCallback(() => {
-		if (!renderUrl) return;
+		if (!renderUrl) {
+			return;
+		}
 
 		sendPreviewTracking({
 			identityName,
 			eventDescription: 'preview-open',
 			renderingTarget,
 			renderUrl,
+			isSignedIn,
 		});
-	}, [identityName, renderingTarget, renderUrl]);
+	}, [identityName, isSignedIn, renderingTarget, renderUrl]);
 
 	const closePreview = useCallback(() => {
 		setIsPreviewOpen((isOpen) => {
@@ -125,12 +121,13 @@ export const NewsletterSignupCardContainer = ({
 					eventDescription: 'preview-close',
 					renderingTarget,
 					renderUrl,
+					isSignedIn,
 				});
 			}
 
 			return false;
 		});
-	}, [identityName, renderingTarget, renderUrl]);
+	}, [identityName, isSignedIn, renderingTarget, renderUrl]);
 
 	const previewAction = hasPreviewUrl
 		? renderingTarget === 'Apps'
@@ -138,11 +135,11 @@ export const NewsletterSignupCardContainer = ({
 					behaviour: 'link' as const,
 					href: renderUrl ?? '',
 					onClick: trackPreviewLinkOpen,
-			  }
+				}
 			: {
 					behaviour: 'modal' as const,
 					onClick: openPreview,
-			  }
+				}
 		: undefined;
 
 	return (
@@ -156,9 +153,6 @@ export const NewsletterSignupCardContainer = ({
 			)}
 			<div
 				css={css`
-					display: flex;
-					flex-direction: column;
-					gap: ${space[2]}px;
 					margin-bottom: ${space[6]}px;
 				`}
 			>
@@ -167,12 +161,11 @@ export const NewsletterSignupCardContainer = ({
 					frequency={frequency}
 					description={description}
 					illustrationSquare={illustrationSquare}
+					previewAction={previewAction}
+					isSignedIn={isSignedIn}
 				>
 					{children?.(previewAction)}
 				</NewsletterSignupCard>
-				{showPrivacyMessageOutside && (
-					<NewsletterPrivacyMessage textColor="regular" />
-				)}
 			</div>
 		</div>
 	);

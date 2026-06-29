@@ -12,12 +12,13 @@ import { type ReactNode } from 'react';
 import type {
 	Batter,
 	Bowler,
+	CricketResult,
 	CricketTeam,
 	Extras,
 	FallOfWicket,
 	Innings,
 	InningsTotals,
-} from '../cricketMatch';
+} from '../cricketMatchV2';
 import { palette } from '../palette';
 
 const visuallyHiddenStyles = css`
@@ -252,11 +253,11 @@ const teamNameStyles = css`
 `;
 
 const homeTeamNameStyles = css`
-	color: ${palette('--cricket-scorecard-first-team-color')};
+	color: ${palette('--cricket-scorecard-first-team-lineup-color')};
 `;
 
 const awayTeamNameStyles = css`
-	color: ${palette('--cricket-scorecard-second-team-color')};
+	color: ${palette('--cricket-scorecard-second-team-lineup-color')};
 `;
 
 const playerListStyles = css`
@@ -665,7 +666,7 @@ type Props = {
 	officials: string[];
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
-	matchResult: string;
+	matchResult?: CricketResult;
 };
 
 export const CricketScorecardNew = ({
@@ -679,7 +680,7 @@ export const CricketScorecardNew = ({
 		{allInnings.map((innings, index) => {
 			const isHomeTeam = innings.battingTeam === homeTeam.name;
 			const isCurrentInnings =
-				matchResult !== 'result' && index === allInnings.length - 1;
+				!matchResult && index === allInnings.length - 1;
 			return (
 				<section key={innings.description} css={inningsContainerStyles}>
 					<div css={cardStyles}>

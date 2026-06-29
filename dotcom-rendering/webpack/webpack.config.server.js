@@ -1,4 +1,5 @@
 // @ts-check
+const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const swcConfig = require('./.swcrc.json');
 const { svgr } = require('./svg.cjs');
@@ -58,7 +59,7 @@ module.exports = {
 							'../node_modules',
 						],
 					}),
-			  ]
+				]
 			: []),
 		// @aws-sdk modules are only used in CODE/PROD, so we don't need to
 		// include them in the development bundle
@@ -82,6 +83,10 @@ module.exports = {
 				use: swcLoader,
 			},
 			svgr,
+			{
+				test: /jsdom.*computed-style\.js$/,
+				use: [path.resolve(__dirname, './jsdom-patch.js')],
+			},
 		],
 	},
 };

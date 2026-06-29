@@ -6,7 +6,7 @@ import type { TagType } from '../types/tag';
 import type { EditionId } from './edition';
 
 type Props = {
-	renderedElements: (JSX.Element | null | undefined)[];
+	renderedElements: Array<JSX.Element | null | undefined>;
 	contentType: string;
 	sectionId: string;
 	tags: TagType[];

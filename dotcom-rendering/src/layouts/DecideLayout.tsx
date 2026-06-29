@@ -15,7 +15,6 @@ import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { PictureLayout } from './PictureLayout';
-import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
 interface BaseProps {
@@ -103,7 +102,7 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 					);
 				default:
 					return (
-						<ShowcaseLayout
+						<StandardLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -167,9 +166,16 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 						/>
 					);
 				case ArticleDesign.HostedArticle:
-				case ArticleDesign.HostedVideo:
 					return (
 						<HostedArticleLayout
+							content={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.HostedVideo:
+					return (
+						<HostedVideoLayout
 							content={article}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -178,7 +184,7 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 				case ArticleDesign.HostedGallery:
 					return (
 						<HostedGalleryLayout
-							content={article}
+							gallery={article}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>
@@ -279,7 +285,7 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 					);
 				default:
 					return (
-						<ShowcaseLayout
+						<StandardLayout
 							article={article.frontendData}
 							NAV={NAV}
 							format={format}
@@ -391,7 +397,7 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 				case ArticleDesign.HostedGallery:
 					return (
 						<HostedGalleryLayout
-							content={article}
+							gallery={article}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>

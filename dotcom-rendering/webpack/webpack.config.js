@@ -31,6 +31,10 @@ const commonConfigs = ({ platform }) => ({
 			: 'eval-cheap-module-source-map',
 	resolve: {
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
+		alias: {
+			// css-tree wasn't bundling properly due to CJS build's createRequire so this points imports to the esm dist
+			'css-tree': require.resolve('css-tree/dist/csstree.esm'),
+		},
 	},
 	ignoreWarnings: [
 		/**
@@ -64,14 +68,14 @@ const commonConfigs = ({ platform }) => ({
 		}),
 		...(DEV
 			? // DEV plugins
-			  [
+				[
 					// @ts-expect-error -- somehow the type declaration isn’t playing nice
 					new WebpackMessages({
 						name: platform,
 					}),
-			  ]
+				]
 			: // PROD plugins
-			  [
+				[
 					new BundleAnalyzerPlugin({
 						reportFilename: path.join(
 							dist,
@@ -92,7 +96,7 @@ const commonConfigs = ({ platform }) => ({
 						openAnalyzer: false,
 						logLevel: 'warn',
 					}),
-			  ]),
+				]),
 	],
 	infrastructureLogging: {
 		level: PROD ? 'info' : 'warn',

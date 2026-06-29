@@ -179,7 +179,7 @@ const regionalFocusDivStyle = css`
 
 const getMainMediaCaptions = (
 	article: ArticleDeprecated,
-): (string | undefined)[] =>
+): Array<string | undefined> =>
 	article.mainMediaElements.map((el) =>
 		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 			? el.data.caption
@@ -489,11 +489,7 @@ export const NewsletterSignupLayout = ({
 			</Section>
 
 			<BannerWrapper data-print-layout="hide" />
-			<MobileStickyContainer
-				data-print-layout="hide"
-				contentType={article.contentType}
-				pageId={article.pageId}
-			/>
+			{renderAds && <MobileStickyContainer data-print-layout="hide" />}
 		</>
 	);
 };

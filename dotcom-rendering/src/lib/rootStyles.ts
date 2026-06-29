@@ -1,11 +1,24 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import {
 	focusHalo,
+	from,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
 import { paletteDeclarations } from '../paletteDeclarations';
 import { rootAdStyles } from './adStyles';
-import type { ArticleFormat } from './articleFormat';
+import { type ArticleFormat, isHostedContentDesign } from './articleFormat';
+
+const hostedHeaderOffset = (format: ArticleFormat) => {
+	if (isHostedContentDesign(format.design)) {
+		return css`
+			/* Brute force fix for the fixed hosted header causing odd behaviour on skip to main content */
+			${from.tablet} {
+				scroll-padding-top: 250px;
+			}
+		`;
+	}
+	return '';
+};
 
 /**
  * Global styles for pages:
@@ -37,8 +50,9 @@ export const rootStyles = (
 							}
 						}
 					}
-			  `
+				`
 			: ''}
+		${hostedHeaderOffset(format)}
 	}
 	/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
 	/* The not(.src...) selector is to work with Source's FocusStyleManager. */

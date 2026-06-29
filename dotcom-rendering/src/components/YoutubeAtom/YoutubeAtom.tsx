@@ -1,6 +1,7 @@
-import type { ConsentState } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
 import { useCallback, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
+import { useIsInView } from '../../lib/useIsInView';
 import type { AdTargeting } from '../../types/commercial';
 import type { AspectRatio } from '../../types/front';
 import type { ArticleMedia } from '../../types/mainMedia';
@@ -22,7 +23,12 @@ export type VideoEventKey =
 	| 'skip'
 	| 'cued'
 	| 'resume'
-	| 'pause';
+	| 'pause'
+	| 'mute'
+	| 'unmute'
+	| 'enter_fullscreen'
+	| 'exit_fullscreen'
+	| 'view';
 
 export type Props = {
 	atomId: string;
@@ -123,6 +129,12 @@ export const YoutubeAtom = ({
 	const [isClosed, setIsClosed] = useState<boolean>(false);
 	const [pauseVideo, setPauseVideo] = useState<boolean>(false);
 
+	const [isInView, setRef] = useIsInView({
+		threshold: 0.5,
+		repeat: true,
+		debounce: true,
+	});
+
 	/**
 	 * Consent and ad targeting are initially undefined and set by subsequent re-renders
 	 */
@@ -186,6 +198,7 @@ export const YoutubeAtom = ({
 			data-atom-id={atomId}
 			data-video-id={videoId}
 			data-video-unique-id={uniqueId}
+			ref={setRef}
 		>
 			<YoutubeAtomSticky
 				uniqueId={uniqueId}
@@ -198,6 +211,7 @@ export const YoutubeAtom = ({
 				isClosed={isClosed}
 				setIsClosed={setIsClosed}
 				shouldPauseOutOfView={shouldPauseOutOfView}
+				isIntersecting={isInView}
 			>
 				<MaintainAspectRatio
 					height={height}
@@ -213,6 +227,7 @@ export const YoutubeAtom = ({
 						loadPlayer && consentState && adTargeting && (
 							<YoutubeAtomPlayer
 								videoId={videoId}
+								atomId={atomId}
 								uniqueId={uniqueId}
 								height={height}
 								width={width}
@@ -234,6 +249,9 @@ export const YoutubeAtom = ({
 								consentState={consentState}
 								abTestParticipations={abTestParticipations}
 								renderingTarget={renderingTarget}
+								isInView={
+									isInView == true || shouldStick == true
+								}
 							/>
 						)
 					}

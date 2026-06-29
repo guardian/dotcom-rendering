@@ -167,6 +167,15 @@ const labsGalleryFont = css`
 	}
 `;
 
+const hostedGalleryFont = css`
+	${textSansBold34};
+	line-height: 2.1875rem;
+
+	${from.desktop} {
+		line-height: 3.125rem;
+	}
+`;
+
 const jumboLabsFont = css`
 	${textSansBold34};
 	font-size: 3.125rem;
@@ -298,7 +307,7 @@ const ageWarningMargins = (format: ArticleFormat) => {
 				${from.leftCol} {
 					margin-left: 20px;
 				}
-		  `
+			`
 		: css`
 				margin-top: 12px;
 				margin-left: -10px;
@@ -312,7 +321,7 @@ const ageWarningMargins = (format: ArticleFormat) => {
 					margin-left: -10px;
 					margin-top: 0;
 				}
-		  `;
+			`;
 };
 
 const backgroundStyles = css`
@@ -403,7 +412,7 @@ const decideBottomPadding = ({
 								${from.tablet} {
 									padding-bottom: ${space[9]}px;
 								}
-						  `;
+							`;
 			}
 		}
 	}
@@ -808,10 +817,10 @@ export const ArticleHeadline = ({
 											color: ${isMatch
 												? themePalette(
 														'--headline-match-colour',
-												  )
+													)
 												: themePalette(
 														'--headline-colour',
-												  )};
+													)};
 										`,
 									]}
 								>
@@ -925,6 +934,34 @@ export const ArticleHeadline = ({
 									</span>
 								</h1>
 							</WithAgeWarning>
+						</div>
+					);
+				}
+				case ArticleDesign.HostedGallery: {
+					return (
+						<div css={galleryStyles}>
+							<h1
+								css={[
+									hostedGalleryFont,
+									css`
+										color: ${themePalette(
+											'--headline-colour',
+										)};
+										${darkBackground};
+										padding-bottom: ${space[6]}px;
+										padding-left: ${space[3]}px;
+										padding-right: ${space[3]}px;
+
+										${between.mobileLandscape.and.tablet} {
+											padding-left: ${space[5]}px;
+										}
+									`,
+								]}
+							>
+								<span css={[displayBlock, maxWidth]}>
+									{headlineString}
+								</span>
+							</h1>
 						</div>
 					);
 				}

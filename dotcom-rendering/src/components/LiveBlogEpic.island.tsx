@@ -8,7 +8,8 @@ import type {
 	EpicProps,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
-import React, { useEffect, useState } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { useArticleCounts } from '../lib/articleCount';
@@ -16,7 +17,7 @@ import {
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
@@ -66,7 +67,9 @@ const useMvtId = (isDev = false): number => {
 	useEffect(() => {
 		const cookie = getCookie({ name: 'GU_mvt_id', shouldMemoize: true });
 
-		if (cookie === null) return;
+		if (cookie === null) {
+			return;
+		}
 
 		const id = Number(cookie) || 0;
 
@@ -106,15 +109,25 @@ const usePayload = ({
 	const countryCode = useCountryCode('liveblog-epic');
 	const mvtId = useMvtId();
 	const isSignedIn = useIsSignedIn();
-	const abTests = useBetaAB();
+	const abTests = useAB();
 
-	if (isSignedIn === 'Pending') return;
+	if (isSignedIn === 'Pending') {
+		return;
+	}
 	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
-	if (hideSupportMessagingForUser === 'Pending') return;
-	if (articleCounts === 'Pending') return;
-	if (hasOptedOutOfArticleCount === 'Pending') return;
+	if (hideSupportMessagingForUser === 'Pending') {
+		return;
+	}
+	if (articleCounts === 'Pending') {
+		return;
+	}
+	if (hasOptedOutOfArticleCount === 'Pending') {
+		return;
+	}
 	log('dotcom', 'LiveBlogEpic has consent state');
-	if (!countryCode) return;
+	if (!countryCode) {
+		return;
+	}
 	log('dotcom', 'LiveBlogEpic has countryCode');
 	const inHoldbackGroup =
 		abTests?.isUserInTestGroup('growth-holdback-group', 'control') ?? false;
@@ -155,7 +168,9 @@ const usePayload = ({
 const Render = ({ name, props }: { name: string; props: EpicProps }) => {
 	const { Epic } = useEpic({ name });
 
-	if (isUndefined(Epic)) return null;
+	if (isUndefined(Epic)) {
+		return null;
+	}
 	log('dotcom', 'LiveBlogEpic has the Epic');
 
 	return (
@@ -269,7 +284,9 @@ export const LiveBlogEpic = ({
 		keywordIds,
 		isSensitive,
 	});
-	if (!ophanPageViewId || !payload || !pageUrl) return null;
+	if (!ophanPageViewId || !payload || !pageUrl) {
+		return null;
+	}
 
 	/**
 	 * Here we decide where to insert the epic.

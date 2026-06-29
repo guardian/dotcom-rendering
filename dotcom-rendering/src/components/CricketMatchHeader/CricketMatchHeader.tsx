@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { log } from '@guardian/libs';
 import {
 	from,
 	headlineBold20Object,
@@ -9,10 +10,20 @@ import {
 	textSans15Object,
 	textSansBold14Object,
 	textSansBold17Object,
+	textSansItalic14Object,
+	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import { Fragment, type ReactNode, useMemo } from 'react';
+import { Fragment, type ReactNode, useEffect, useMemo, useState } from 'react';
+import type { SWRConfiguration } from 'swr';
+import useSWR from 'swr';
+import type {
+	CricketMatch,
+	CricketResult,
+	CricketTeam,
+} from '../../cricketMatchV2';
 import { grid } from '../../grid';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -21,47 +32,99 @@ import {
 import { generateImageURL } from '../../lib/image';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
+import type { ArticleDeprecated } from '../../types/article';
 import { BigNumber } from '../BigNumber';
+import { CricketScorecardTabRemoteRender } from '../CricketScorecardTabRemoteRender';
 import {
 	background,
 	border,
 	primaryText,
 	secondaryText,
 } from '../FootballMatchHeader/colours';
+import { Tabs } from '../FootballMatchHeader/Tabs';
+import { MatchHeaderFallback } from '../MatchHeaderFallback';
+import { Placeholder } from '../Placeholder';
+import type { CricketHeaderData } from './headerData';
+import { parse as parseHeaderData } from './headerData';
 
-type CricketTeam = {
-	name: string;
-	paID: string;
-};
-
-type Inning = {
-	battingTeam: string;
-	runsScored: number;
-	overs: string;
-	declared: boolean;
-	forfeited: boolean;
-	fallOfWicket: number;
-};
-
-type CricketMatch = {
-	kind: 'Fixture' | 'Live' | 'Result';
-	series: string;
-	competition: string;
-	venue: string;
-	day?: number;
-	matchDate: Date;
-	homeTeam: CricketTeam;
-	awayTeam: CricketTeam;
-	innings: Inning[];
-};
-
-type Props = {
+export type CricketMatchHeaderProps = {
+	matchHeaderURL: string;
 	edition: EditionId;
-	match: CricketMatch;
+	selectedTab: 'info' | 'live' | 'report';
+	tabContentId: string;
+	format: ArticleFormat;
+	article: ArticleDeprecated;
+};
+
+type Props = CricketMatchHeaderProps & {
+	getHeaderData: (url: string) => Promise<unknown>;
+	refreshInterval: number;
 };
 
 export const CricketMatchHeader = (props: Props) => {
-	const match = props.match;
+	const scorecardHashbang = '#scorecard';
+
+	const { data, error } = useSWR<CricketHeaderData, Error>(
+		props.matchHeaderURL,
+		fetcher(props.getHeaderData),
+		swrOptions(props.refreshInterval),
+	);
+
+	const [selectedTab, setSelectedTab] = useState<'info' | 'live' | 'report'>(
+		props.selectedTab,
+	);
+
+	const [tabContentElement, setTabContentElement] =
+		useState<HTMLElement | null>(null);
+
+	useEffect(() => {
+		if (window.location.hash === scorecardHashbang) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect -- we want to set the selected tab based on the hashbang in the URL
+			setSelectedTab('info');
+		}
+	}, []);
+
+	useEffect(() => {
+		const el = document.getElementById(props.tabContentId);
+		if (el) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect -- We need to capture the element client side
+			setTabContentElement(el);
+		}
+	}, [props.tabContentId]);
+
+	if (error) {
+		if (
+			props.format.design === ArticleDesign.LiveBlog ||
+			props.format.design === ArticleDesign.DeadBlog
+		) {
+			return (
+				<MatchHeaderFallback
+					format={props.format}
+					article={props.article}
+				/>
+			);
+		}
+	}
+
+	if (data === undefined) {
+		return (
+			<Placeholder
+				heights={
+					new Map([
+						['mobile', 182],
+						['leftCol', 172],
+					])
+				}
+			/>
+		);
+	}
+
+	const { match, tabs } = data;
+
+	const onInfoTabClick = () => {
+		setSelectedTab('info');
+		window.location.hash = scorecardHashbang;
+	};
 
 	return (
 		<section
@@ -72,25 +135,78 @@ export const CricketMatchHeader = (props: Props) => {
 		>
 			<div
 				css={{
-					'&': css(grid.paddedContainer),
+					'&': css(
+						grid.paddedContainer,
+						grid.outerRules(
+							palette(
+								'--football-match-header-fixture-result-border',
+							),
+						),
+					),
 					[from.tablet]: {
 						borderColor: palette(
 							'--football-match-header-fixture-result-border',
 						),
-						borderStyle: 'solid',
-						borderLeftWidth: 1,
-						borderRightWidth: 1,
 					},
 				}}
 			>
 				<StatusLine match={match} edition={props.edition} />
 				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
 				<Teams match={match} />
+				{match.result && <ResultLine result={match.result} />}
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
+				<Tabs
+					sportKind="cricket"
+					matchKind={match.kind}
+					selected={selectedTab}
+					reportTab={tabs.reportURL}
+					liveTab={tabs.liveURL}
+					infoTab={onInfoTabClick}
+				/>
 			</div>
+			{selectedTab === 'info' && (
+				<CricketScorecardTabRemoteRender
+					tabContentElement={tabContentElement ?? undefined}
+					innings={match.innings}
+					officials={match.officials}
+					homeTeam={match.homeTeam}
+					awayTeam={match.awayTeam}
+					result={match.result}
+				/>
+			)}
 		</section>
 	);
 };
+
+const swrOptions = (
+	refreshInterval: number,
+): SWRConfiguration<CricketHeaderData> => ({
+	errorRetryCount: 1,
+	refreshInterval: (latestData: CricketHeaderData | undefined) => {
+		return latestData?.match.kind === 'Live' ||
+			latestData?.match.kind === 'Fixture'
+			? refreshInterval
+			: 0;
+	},
+});
+
+const fetcher =
+	(getHeaderData: Props['getHeaderData']) =>
+	(url: string): Promise<CricketHeaderData> =>
+		getHeaderData(url)
+			.then(parseHeaderData)
+			.then((result) => {
+				if (!result.ok) {
+					log('dotcom', result.error);
+					throw new Error();
+				} else {
+					return result.value;
+				}
+			})
+			.catch(() => {
+				log('dotcom', 'Failed to fetch match header json');
+				throw new Error();
+			});
 
 const StatusLine = (props: { match: CricketMatch; edition: EditionId }) => (
 	<p
@@ -249,32 +365,33 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 		(inning) => inning.battingTeam === props.team.name,
 	);
 
-	/**
-	 * TODO: Determine if there is a match winner and the nature of the victory
-	 * (eg. won by x runs or x wickets). A match may have no overall winner due
-	 * to a draw or the match being abandoned.
-	 */
-	const isWinner = false;
-	const marginOfVictory = '';
-
 	return (
 		<div
 			css={{
 				flex: '1 1 50%',
 				wordBreak: 'break-word',
 				borderLeftStyle: 'solid',
+				borderLeftColor: 'var(--border-left-colour)',
 				'&:last-of-type': {
 					paddingLeft: space[2],
 					borderLeftWidth: 1,
 				},
 				[from.leftCol]: {
-					paddingLeft: space[2],
-					borderLeftWidth: 1,
 					paddingTop: space[3],
+					position: 'relative',
+					'&:first-of-type::before': {
+						content: '""',
+						top: 0,
+						left: -10,
+						width: 1,
+						backgroundColor: 'var(--border-left-colour)',
+						position: 'absolute',
+						height: '100%',
+					},
 				},
 			}}
 			style={{
-				borderLeftColor: palette(border(props.match.kind)),
+				'--border-left-colour': palette(border(props.match.kind)),
 			}}
 		>
 			<TeamName name={props.team.name} />
@@ -292,13 +409,20 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 					innings.map((inning, index) => (
 						<Fragment key={index}>
 							<Score
-								runs={inning.runsScored}
-								fallOfWicket={inning.fallOfWicket}
+								runs={inning.inningsTotals.runs}
+								fallOfWickets={inning.inningsTotals.wickets}
 								matchKind={props.match.kind}
 							/>
-							{!!inning.overs && (
+							{!!inning.inningsTotals.overs && (
 								<>
-									<EndOfInningReason inning={inning} />
+									<EndOfInningReason
+										inning={{
+											wickets:
+												inning.inningsTotals.wickets,
+											declared: inning.declared,
+											forfeited: inning.forfeited,
+										}}
+									/>
 									<span
 										css={{
 											...textSans12Object,
@@ -312,7 +436,7 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 											),
 										}}
 									>
-										{inning.overs} overs
+										{inning.inningsTotals.overs} overs
 									</span>
 								</>
 							)}
@@ -330,30 +454,23 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 						Yet to bat
 					</span>
 				))}
-			{isWinner && (
-				<div
-					css={{
-						...textSans14Object,
-						paddingTop: space[2],
-					}}
-				>
-					Won by{' '}
-					<span css={{ ...textSansBold14Object }}>
-						{marginOfVictory}
-					</span>
-				</div>
-			)}
 		</div>
 	);
 };
 
-const EndOfInningReason = (props: { inning: Inning }) => {
+const EndOfInningReason = (props: {
+	inning: {
+		wickets: number;
+		declared: boolean;
+		forfeited: boolean;
+	};
+}) => {
 	const styles = {
 		...textSans14Object,
 		marginRight: space[1],
 	};
 
-	if (props.inning.fallOfWicket === 10) {
+	if (props.inning.wickets === 10) {
 		return <span css={styles}>All out</span>;
 	}
 	if (props.inning.declared) {
@@ -409,17 +526,17 @@ const Crest = (props: { name: string; paID: string }) => (
  */
 const Score = (props: {
 	runs: number;
-	fallOfWicket: number;
+	fallOfWickets: number;
 	matchKind: CricketMatch['kind'];
 }) => {
 	const showFallenWickets =
-		props.fallOfWicket >= 0 && props.fallOfWicket < 10;
+		props.fallOfWickets >= 0 && props.fallOfWickets < 10;
 	return (
 		<span
 			role="img"
 			aria-label={`${props.runs} runs${
 				showFallenWickets
-					? `, ${props.fallOfWicket} wickets fallen`
+					? `, ${props.fallOfWickets} wickets fallen`
 					: ''
 			}`}
 			css={{
@@ -455,7 +572,7 @@ const Score = (props: {
 							),
 						}}
 					></span>
-					<ScoreNumber score={props.fallOfWicket} />
+					<ScoreNumber score={props.fallOfWickets} />
 				</>
 			) : null}
 		</span>
@@ -537,4 +654,70 @@ const crestUrl = (teamId: string): URL | undefined => {
 	} catch (e) {
 		return undefined;
 	}
+};
+
+/**
+ * In most cases, the result will come with a description that we can use directly.
+ * But in some cases, we just get the data about the result and need to generate
+ * a description from that.
+ */
+const resultDescription = (result: CricketResult): string => {
+	if (result.description) {
+		return result.description;
+	}
+
+	switch (result.type) {
+		case 'home-win':
+		case 'away-win':
+			if (result.winner.type === 'forfeit') {
+				return `${result.winner.team} win by forfeit`;
+			}
+			if (
+				['runs', 'wickets', 'innings'].includes(result.winner.type) &&
+				typeof result.winner.margin === 'number'
+			) {
+				return `${result.winner.team} win by ${result.winner.margin} ${result.winner.type}`;
+			}
+			if (result.winner.type === 'run-rate') {
+				// Run-rate is an old method of deciding a winner in rain-affected matches before DLS
+				return `${result.winner.team} win by run rate`;
+			}
+			return `${result.winner.team} win`;
+		// none is usually accompanied by a description, but if it's not, "No result" seems like a reasonable default
+		case 'none':
+		case 'no-result':
+			return 'No result';
+		case 'draw':
+		case 'level-scores-draw':
+			return 'Match drawn';
+		case 'abandoned':
+			return 'Match abandoned';
+		case 'tied':
+			return 'Match tied';
+	}
+};
+
+const ResultLine = (props: { result: CricketResult }) => {
+	const description = resultDescription(props.result);
+	return (
+		<div
+			css={{
+				'&': css(grid.column.centre),
+				paddingBottom: space[3],
+				[from.leftCol]: {
+					paddingLeft: 10,
+					paddingBottom: space[5],
+				},
+			}}
+		>
+			<p
+				css={{
+					...textSansItalic14Object,
+					[from.leftCol]: textSansItalic15Object,
+				}}
+			>
+				{description}
+			</p>
+		</div>
+	);
 };

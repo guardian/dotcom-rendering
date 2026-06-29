@@ -12,7 +12,7 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import React from 'react';
+import type React from 'react';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import {
 	OPHAN_COMPONENT_EVENT_PRIMARY_CTA,

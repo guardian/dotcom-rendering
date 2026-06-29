@@ -1,5 +1,5 @@
-import type { ConsentState } from '@guardian/libs';
-import { onConsentChange } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
+import { onConsentChange } from '@guardian/consent-manager';
 import { useEffect, useState } from 'react';
 
 /**
