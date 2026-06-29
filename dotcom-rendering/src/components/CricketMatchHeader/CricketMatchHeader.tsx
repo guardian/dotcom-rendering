@@ -23,6 +23,7 @@ import type {
 	CricketTeam,
 } from '../../cricketMatchV2';
 import { grid } from '../../grid';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -31,6 +32,7 @@ import {
 import { generateImageURL } from '../../lib/image';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
+import type { ArticleDeprecated } from '../../types/article';
 import { BigNumber } from '../BigNumber';
 import { CricketScorecardTabRemoteRender } from '../CricketScorecardTabRemoteRender';
 import {
@@ -40,6 +42,7 @@ import {
 	secondaryText,
 } from '../FootballMatchHeader/colours';
 import { Tabs } from '../FootballMatchHeader/Tabs';
+import { MatchHeaderFallback } from '../MatchHeaderFallback';
 import { Placeholder } from '../Placeholder';
 import type { CricketHeaderData } from './headerData';
 import { parse as parseHeaderData } from './headerData';
@@ -49,6 +52,8 @@ export type CricketMatchHeaderProps = {
 	edition: EditionId;
 	selectedTab: 'info' | 'live' | 'report';
 	tabContentId: string;
+	format: ArticleFormat;
+	article: ArticleDeprecated;
 };
 
 type Props = CricketMatchHeaderProps & {
@@ -57,7 +62,9 @@ type Props = CricketMatchHeaderProps & {
 };
 
 export const CricketMatchHeader = (props: Props) => {
-	const { data } = useSWR<CricketHeaderData, Error>(
+	const scorecardHashbang = '#scorecard';
+
+	const { data, error } = useSWR<CricketHeaderData, Error>(
 		props.matchHeaderURL,
 		fetcher(props.getHeaderData),
 		swrOptions(props.refreshInterval),
@@ -71,12 +78,33 @@ export const CricketMatchHeader = (props: Props) => {
 		useState<HTMLElement | null>(null);
 
 	useEffect(() => {
+		if (window.location.hash === scorecardHashbang) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect -- we want to set the selected tab based on the hashbang in the URL
+			setSelectedTab('info');
+		}
+	}, []);
+
+	useEffect(() => {
 		const el = document.getElementById(props.tabContentId);
 		if (el) {
 			// eslint-disable-next-line react-hooks/set-state-in-effect -- We need to capture the element client side
 			setTabContentElement(el);
 		}
 	}, [props.tabContentId]);
+
+	if (error) {
+		if (
+			props.format.design === ArticleDesign.LiveBlog ||
+			props.format.design === ArticleDesign.DeadBlog
+		) {
+			return (
+				<MatchHeaderFallback
+					format={props.format}
+					article={props.article}
+				/>
+			);
+		}
+	}
 
 	if (data === undefined) {
 		return (
@@ -95,6 +123,7 @@ export const CricketMatchHeader = (props: Props) => {
 
 	const onInfoTabClick = () => {
 		setSelectedTab('info');
+		window.location.hash = scorecardHashbang;
 	};
 
 	return (
