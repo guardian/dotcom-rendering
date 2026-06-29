@@ -37,11 +37,11 @@ catalogs:
       specifier: 24.12.4
       version: 24.12.4
     aws-cdk:
-      specifier: 2.1126.0
-      version: 2.1126.0
+      specifier: 2.1128.1
+      version: 2.1128.1
     aws-cdk-lib:
-      specifier: 2.257.0
-      version: 2.257.0
+      specifier: 2.260.0
+      version: 2.260.0
     constructs:
       specifier: 10.6.0
       version: 10.6.0
@@ -121,7 +121,7 @@ importers:
         version: 3.995.0
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 63.6.1(aws-cdk-lib@2.257.0(constructs@10.6.0))(aws-cdk@2.1126.0)(constructs@10.6.0)
+        version: 63.6.1(aws-cdk-lib@2.260.0(constructs@10.6.0))(aws-cdk@2.1128.1)(constructs@10.6.0)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -130,10 +130,10 @@ importers:
         version: 24.12.4
       aws-cdk:
         specifier: 'catalog:'
-        version: 2.1126.0
+        version: 2.1128.1
       aws-cdk-lib:
         specifier: 'catalog:'
-        version: 2.257.0(constructs@10.6.0)
+        version: 2.260.0(constructs@10.6.0)
       constructs:
         specifier: 'catalog:'
         version: 10.6.0
@@ -325,7 +325,7 @@ importers:
         version: 6.1.0(browserslist@4.24.4)(tslib@2.6.2)
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 63.6.1(aws-cdk-lib@2.257.0(constructs@10.6.0))(aws-cdk@2.1126.0)(constructs@10.6.0)
+        version: 63.6.1(aws-cdk-lib@2.260.0(constructs@10.6.0))(aws-cdk@2.1128.1)(constructs@10.6.0)
       '@guardian/commercial-core':
         specifier: 34.0.0
         version: 34.0.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))
@@ -511,10 +511,10 @@ importers:
         version: 2.1.1(ajv@8.18.0)
       aws-cdk:
         specifier: 'catalog:'
-        version: 2.1126.0
+        version: 2.1128.1
       aws-cdk-lib:
         specifier: 'catalog:'
-        version: 2.257.0(constructs@10.6.0)
+        version: 2.260.0(constructs@10.6.0)
       body-parser:
         specifier: 1.20.4
         version: 1.20.4
@@ -783,14 +783,14 @@ packages:
   '@asamuzakjp/nwsapi@2.3.9':
     resolution: {integrity: sha512-n8GuYSrI9bF7FFZ/SjhwevlHc8xaVlb/7HmHelnc/PZXBD2ZR49NnN9sMMuDdEGPeeRQ5d0hqlSlEpgCX3Wl0Q==}
 
-  '@aws-cdk/asset-awscli-v1@2.2.273':
-    resolution: {integrity: sha512-X57HYUtHt9BQrlrzUNcMyRsDUCoakYNnY6qh5lNwRCHPtQoTfXmuISkfLk0AjLkcbS5lw1LLTQFiQhTDXfiTvg==}
+  '@aws-cdk/asset-awscli-v1@2.2.282':
+    resolution: {integrity: sha512-7hKMi5tTxDcKGIMIOq14PnY0GBcugW33Uh/2YHDZiEwSxLeFOCYBwhR+BFXONb/EJeVI3RETFgailNZbkcKF6g==}
 
-  '@aws-cdk/asset-node-proxy-agent-v6@2.1.1':
-    resolution: {integrity: sha512-We4bmHaowOPHr+IQR4/FyTGjRfjgBj4ICMjtqmJeBDWad3Q/6St12NT07leNtyuukv2qMhtSZJQorD8KpKTwRA==}
+  '@aws-cdk/asset-node-proxy-agent-v6@2.1.2':
+    resolution: {integrity: sha512-pDiuqH+qY3zM9lhhLjbKJ1tnKOHzQ2V4Wr/3qsxyKeKAkuPMI/BVGvZG1PbrikUw949cGVTfVEt4ETKKYnrj0Q==}
 
-  '@aws-cdk/cloud-assembly-schema@53.27.0':
-    resolution: {integrity: sha512-OTxe/L2Vc60r2nYih7kFaFpn93sa7shJu9T0tQZsryeDE3HHOAuazKNmS6tLInOjJjVx/dvM5XGyUA+lZAiKxA==}
+  '@aws-cdk/cloud-assembly-schema@54.5.0':
+    resolution: {integrity: sha512-X37oRfMQYO/wXBBDotbW8msJ6AgrcMio/W6TpDR/9To9TUWld1KtY/jveHpU58nZyLVPTYEhDgFP548w3JJGsQ==}
     engines: {node: '>= 18.0.0'}
     bundledDependencies:
       - jsonschema
@@ -4809,8 +4809,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  aws-cdk-lib@2.257.0:
-    resolution: {integrity: sha512-GoHfWklrBJcMwLtDlY64pvaT7cD2KyDXC8sik89DR6jHl6nQsBtYTKSJCM+C/k4jgXaecbv8myNX75FySejq0A==}
+  aws-cdk-lib@2.260.0:
+    resolution: {integrity: sha512-2PPG+hbPDot8+ibkb5Jl9y3OY5rBE6TFwjzOi+yEyU4ZG6u8bM4DDKhhBi/S20NqqSFDso9rH1txVJAdwXNiuQ==}
     engines: {node: '>= 20.0.0'}
     peerDependencies:
       constructs: ^10.5.0
@@ -4828,8 +4828,8 @@ packages:
       - yaml
       - mime-types
 
-  aws-cdk@2.1126.0:
-    resolution: {integrity: sha512-uNoocb3vCPiAT3j9+SwL6pn/VVggHWBsgC2XpxyhNvYQYt6cE9BM/149GWwtdcwnLrPjnwW1+CV/5nSSh5dV+w==}
+  aws-cdk@2.1128.1:
+    resolution: {integrity: sha512-y9OHn5/BOcIiq409vPvpypMIr7/8M1ScFe8IkFMSCN1/GI/5c73fQ4pfzNq+VDkj86T5zxs7BQ1qU2lQQytdXA==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
 
@@ -9701,11 +9701,11 @@ snapshots:
 
   '@asamuzakjp/nwsapi@2.3.9': {}
 
-  '@aws-cdk/asset-awscli-v1@2.2.273': {}
+  '@aws-cdk/asset-awscli-v1@2.2.282': {}
 
-  '@aws-cdk/asset-node-proxy-agent-v6@2.1.1': {}
+  '@aws-cdk/asset-node-proxy-agent-v6@2.1.2': {}
 
-  '@aws-cdk/cloud-assembly-schema@53.27.0': {}
+  '@aws-cdk/cloud-assembly-schema@54.5.0': {}
 
   '@aws-crypto/crc32@5.2.0':
     dependencies:
@@ -11958,13 +11958,13 @@ snapshots:
       browserslist: 4.24.4
       tslib: 2.6.2
 
-  '@guardian/cdk@63.6.1(aws-cdk-lib@2.257.0(constructs@10.6.0))(aws-cdk@2.1126.0)(constructs@10.6.0)':
+  '@guardian/cdk@63.6.1(aws-cdk-lib@2.260.0(constructs@10.6.0))(aws-cdk@2.1128.1)(constructs@10.6.0)':
     dependencies:
       '@aws-sdk/client-ec2': 3.1053.0
       '@aws-sdk/client-ssm': 3.1053.0
       '@aws-sdk/credential-providers': 3.1053.0
-      aws-cdk: 2.1126.0
-      aws-cdk-lib: 2.257.0(constructs@10.6.0)
+      aws-cdk: 2.1128.1
+      aws-cdk-lib: 2.260.0(constructs@10.6.0)
       chalk: 4.1.2
       codemaker: 1.132.0
       constructs: 10.6.0
@@ -14533,14 +14533,14 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  aws-cdk-lib@2.257.0(constructs@10.6.0):
+  aws-cdk-lib@2.260.0(constructs@10.6.0):
     dependencies:
-      '@aws-cdk/asset-awscli-v1': 2.2.273
-      '@aws-cdk/asset-node-proxy-agent-v6': 2.1.1
-      '@aws-cdk/cloud-assembly-schema': 53.27.0
+      '@aws-cdk/asset-awscli-v1': 2.2.282
+      '@aws-cdk/asset-node-proxy-agent-v6': 2.1.2
+      '@aws-cdk/cloud-assembly-schema': 54.5.0
       constructs: 10.6.0
 
-  aws-cdk@2.1126.0: {}
+  aws-cdk@2.1128.1: {}
 
   axe-core@4.11.1: {}
 
