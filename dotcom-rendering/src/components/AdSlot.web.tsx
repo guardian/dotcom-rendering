@@ -108,7 +108,7 @@ const hideBelowDesktop = css`
 	}
 `;
 
-const containerMinHeight = getMinHeightOfAdSlot(250, space[5]);
+const topAboveNavPaddingHeight = space[5];
 
 const topAboveNavContainerStyles = css`
 	padding-bottom: ${space[5]}px;
@@ -117,7 +117,17 @@ const topAboveNavContainerStyles = css`
 	text-align: left;
 	display: block;
 	width: 100%;
-	min-height: ${containerMinHeight}px;
+
+	min-height: ${getMinHeightOfAdSlot(
+		adSizes.leaderboard.height,
+		topAboveNavPaddingHeight,
+	)}px;
+	${from.desktop} {
+		min-height: ${getMinHeightOfAdSlot(
+			adSizes.billboard.height,
+			topAboveNavPaddingHeight,
+		)}px;
+	}
 
 	/* Remove the min-height when the ad has rendered, so that the container can shrink if the ad is smaller */
 	&[top-above-nav-ad-rendered='true'] {
@@ -129,7 +139,7 @@ const topAboveNavContainerStyles = css`
 		::before {
 			content: '';
 			position: absolute;
-			height: ${adSizes.billboard.height}px;
+			height: ${adSizes.leaderboard.height}px;
 			width: ${adSizes.leaderboard.width}px;
 			top: ${labelHeight}px;
 			left: 50%;
@@ -138,6 +148,7 @@ const topAboveNavContainerStyles = css`
 		}
 		${from.desktop} {
 			::before {
+				height: ${adSizes.billboard.height}px;
 				width: ${adSizes.billboard.width}px;
 			}
 		}
