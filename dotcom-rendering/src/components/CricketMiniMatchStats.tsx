@@ -14,11 +14,7 @@ import { feCricketMatchStatsSummarySchema } from '../frontend/feCricketMatchPage
 import type { Result } from '../lib/result';
 import { error, fromValibot, ok } from '../lib/result';
 import { palette } from '../palette';
-import {
-	CricketMatchStatCurrentBattingTeam,
-	CricketMatchStatNotOutBatters,
-	CricketMatchStatStatus,
-} from './CricketMatchStat';
+import { CricketMatchStatNotOutBatters } from './CricketMatchStat';
 import { Placeholder } from './Placeholder';
 
 const containerCss = css`
@@ -57,13 +53,13 @@ type Props = {
 };
 
 export const CricketMiniMatchStats = (props: Props) => {
-	const { data, error: swrError } = useSWR<CricketMatchStatsSummary, string>(
+	const { data, error: swrError } = useSWR<CricketMatchStatsSummary, Error>(
 		props.matchStatsUrl,
 		fetcher(props.getMatchStatsData),
 		swrOptions(props.refreshInterval),
 	);
 
-	if (swrError != null) {
+	if (swrError) {
 		return null;
 	}
 
@@ -82,14 +78,6 @@ export const CricketMiniMatchStats = (props: Props) => {
 
 	return (
 		<div css={containerCss}>
-			<CricketMatchStatStatus matchStatus={data.matchStatus} />
-
-			{data.currentBattingTeam != null && (
-				<CricketMatchStatCurrentBattingTeam
-					currentBattingTeam={data.currentBattingTeam}
-				/>
-			)}
-
 			{data.notOutBatters != null && (
 				<CricketMatchStatNotOutBatters
 					notOutBatters={data.notOutBatters}
@@ -110,8 +98,8 @@ export const CricketMiniMatchStats = (props: Props) => {
 					),
 				}}
 			>
-				<span css={buttonTextCss}>More match info</span>
-				<span css={buttonTextShortCss}>More match info</span>
+				<span css={buttonTextCss}>View full scorecard</span>
+				<span css={buttonTextShortCss}>View full scorecard</span>
 			</LinkButton>
 		</div>
 	);
@@ -122,7 +110,7 @@ const swrOptions = (
 ): SWRConfiguration<CricketMatchStatsSummary> => ({
 	errorRetryCount: 1,
 	refreshInterval: (latestData: CricketMatchStatsSummary | undefined) =>
-		latestData?.matchStatus === 'FT' ? 0 : refreshInterval,
+		latestData?.status === 'FT' ? 0 : refreshInterval,
 });
 
 const fetcher =

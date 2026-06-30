@@ -12,5 +12,6 @@ export const CricketMiniMatchStatsWrapper = ({
 	/>
 );
 
-const getMatchStatsData = (url: string): Promise<unknown> =>
-	fetch(url).then((res) => res.json());
+const getMatchStatsData = (url: string): Promise<unknown> => {
+	return fetch(url).then((res) => res.json());
+};

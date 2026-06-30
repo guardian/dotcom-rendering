@@ -132,7 +132,7 @@ export type CricketMatch = {
 };
 
 export type CricketMatchStatsSummary = {
-	matchStatus: string;
+	status: string;
 	currentBattingTeam?: string;
 	notOutBatters?: Batter[];
 };
@@ -232,7 +232,7 @@ export const parseMatchStatsSummary = (
 	feCricketMatchStatsSummary: FECricketMatchStatsSummary,
 ): Result<ParserError, CricketMatchStatsSummary> =>
 	ok({
-		matchStatus: feCricketMatchStatsSummary.matchStatus,
+		status: feCricketMatchStatsSummary.status,
 		currentBattingTeam: feCricketMatchStatsSummary.currentBattingTeam,
 		notOutBatters: feCricketMatchStatsSummary.notOutBatters,
 	});

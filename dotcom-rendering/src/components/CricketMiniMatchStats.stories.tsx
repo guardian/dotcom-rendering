@@ -41,7 +41,7 @@ const meta = preview.meta({
 });
 
 const feMatchStatsSummaryData: FECricketMatchStatsSummary = {
-	matchStatus: 'In Play',
+	status: 'In Play',
 	currentBattingTeam: 'England',
 	notOutBatters: [
 		{
