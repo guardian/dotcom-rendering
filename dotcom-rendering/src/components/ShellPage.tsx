@@ -12,8 +12,7 @@ import type { NavType } from '../model/extract-nav';
 import { AlreadyVisited } from './AlreadyVisited.island';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
-// @ts-expect-error -- HTML asset
-import html from './fashion.html';
+// import html from './fashion.html';
 import { FocusStyles } from './FocusStyles.island';
 import { Footer } from './Footer';
 import { HeaderAdSlot } from './HeaderAdSlot';
@@ -149,8 +148,9 @@ export const ShellPage = (props: Props) => {
 				<AdSlot position="survey" />
 			)}
 
-			{/* <div>Hello DCAR sites shell 👋</div> */}
-			<div dangerouslySetInnerHTML={{ __html: html }} />
+			{/* @ts-expect-error Fastly ESI namespaced tag is not part of React JSX types */}
+			<esi:include src="/esi/time" />
+			{/* <div dangerouslySetInnerHTML={{ __html: html }} /> */}
 
 			{isWeb && (
 				<>
