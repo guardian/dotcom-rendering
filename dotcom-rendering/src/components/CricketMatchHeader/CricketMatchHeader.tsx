@@ -62,6 +62,8 @@ type Props = CricketMatchHeaderProps & {
 };
 
 export const CricketMatchHeader = (props: Props) => {
+	const scorecardHashbang = '#scorecard';
+
 	const { data, error } = useSWR<CricketHeaderData, Error>(
 		props.matchHeaderURL,
 		fetcher(props.getHeaderData),
@@ -76,6 +78,13 @@ export const CricketMatchHeader = (props: Props) => {
 		useState<HTMLElement | null>(null);
 
 	useEffect(() => {
+		if (window.location.hash === scorecardHashbang) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect -- we want to set the selected tab based on the hashbang in the URL
+			setSelectedTab('info');
+		}
+	}, []);
+
+	useEffect(() => {
 		const el = document.getElementById(props.tabContentId);
 		if (el) {
 			// eslint-disable-next-line react-hooks/set-state-in-effect -- We need to capture the element client side
@@ -85,9 +94,8 @@ export const CricketMatchHeader = (props: Props) => {
 
 	if (error) {
 		if (
-			props.article &&
-			(props.format?.design === ArticleDesign.LiveBlog ||
-				props.format?.design === ArticleDesign.DeadBlog)
+			props.format.design === ArticleDesign.LiveBlog ||
+			props.format.design === ArticleDesign.DeadBlog
 		) {
 			return (
 				<MatchHeaderFallback
@@ -115,6 +123,7 @@ export const CricketMatchHeader = (props: Props) => {
 
 	const onInfoTabClick = () => {
 		setSelectedTab('info');
+		window.location.hash = scorecardHashbang;
 	};
 
 	return (

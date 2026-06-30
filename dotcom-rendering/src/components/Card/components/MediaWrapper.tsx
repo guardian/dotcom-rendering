@@ -35,6 +35,7 @@ type Props = {
 	mediaPositionOnMobile: MediaPositionType;
 	isSmallCard: boolean;
 	padMedia?: boolean;
+	isLoopAndInLoopClickTestVariant?: boolean;
 };
 
 const mediaOverlayContainerStyles = css`
@@ -72,6 +73,7 @@ const mediaPaddingStyles = (
 		padding-top: ${mediaPositionOnMobile !== 'bottom' && `${space[2]}px`};
 		padding-bottom: ${mediaPositionOnMobile !== 'top' && `${space[2]}px`};
 	}
+
 	${from.tablet} {
 		padding-left: ${mediaPositionOnDesktop !== 'right' && `${space[2]}px`};
 		padding-right: ${mediaPositionOnDesktop !== 'left' && `${space[2]}px`};
@@ -96,6 +98,7 @@ const flexBasisStyles = ({
 	if (mediaType === 'podcast' && !isSmallCard) {
 		return css`
 			flex-basis: 120px;
+
 			${from.desktop} {
 				flex-basis: 168px;
 			}
@@ -114,6 +117,7 @@ const flexBasisStyles = ({
 				${from.tablet} {
 					flex-basis: 460px;
 				}
+
 				${from.desktop} {
 					flex-basis: 620px;
 				}
@@ -123,6 +127,7 @@ const flexBasisStyles = ({
 				${from.tablet} {
 					flex-basis: 520px;
 				}
+
 				${from.desktop} {
 					flex-basis: 700px;
 				}
@@ -172,6 +177,7 @@ export const MediaWrapper = ({
 	mediaPositionOnMobile,
 	isSmallCard,
 	padMedia,
+	isLoopAndInLoopClickTestVariant,
 }: Props) => {
 	const isHorizontalOnMobile =
 		mediaPositionOnMobile === 'left' || mediaPositionOnMobile === 'right';
@@ -209,6 +215,7 @@ export const MediaWrapper = ({
 				css`
 					/* position relative is required here to bound the image overlay */
 					position: relative;
+
 					img {
 						width: 100%;
 						display: block;
@@ -232,7 +239,9 @@ export const MediaWrapper = ({
 			<>
 				{children}
 				{/* This overlay is styled when the CardLink is hovered */}
-				{(mediaType === 'picture' || mediaType === 'cinemagraph') && (
+				{(mediaType === 'picture' ||
+					mediaType === 'cinemagraph' ||
+					isLoopAndInLoopClickTestVariant == true) && (
 					<div
 						css={[
 							mediaOverlayContainerStyles,
