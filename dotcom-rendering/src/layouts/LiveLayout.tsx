@@ -271,6 +271,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	} = article;
 
 	const ab = useAB();
+	const isCricketRedesignEnabled = Boolean(
+		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
+	);
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -316,11 +319,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const showComments = article.isCommentable && !isPaidContent;
 
 	const liveBlogAreaId = 'liveblog';
-
-	// const isCricketRedesignEnabled = Boolean(
-	// 	ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
-	// );
-	const isCricketRedesignEnabled = true;
 
 	return (
 		<>
@@ -1175,10 +1173,9 @@ const Header = (props: {
 			: undefined;
 
 	const ab = useAB();
-	// const isCricketRedesignEnabled = Boolean(
-	// 	ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
-	// );
-	const isCricketRedesignEnabled = true;
+	const isCricketRedesignEnabled = Boolean(
+		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
+	);
 
 	const isApps = props.renderingTarget === 'Apps';
 
