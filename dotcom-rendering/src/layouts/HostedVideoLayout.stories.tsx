@@ -60,8 +60,7 @@ export const Apps = meta.story({
 		},
 		chromatic: {
 			modes: {
-				'light mobileMedium': allModes['light mobileMedium'],
-				splitVertical: allModes['splitVertical'],
+				'vertical mobileMedium': allModes['vertical mobileMedium'],
 			},
 		},
 	},

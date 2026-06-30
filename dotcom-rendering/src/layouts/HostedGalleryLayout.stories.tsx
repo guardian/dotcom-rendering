@@ -45,6 +45,11 @@ export const Apps = meta.story({
 		config: {
 			renderingTarget: 'Apps',
 		},
+		chromatic: {
+			modes: {
+				'vertical mobileMedium': allModes['vertical mobileMedium'],
+			},
+		},
 	},
 	decorators: hostedPaletteDecorator(hostedCampaignColour),
 });
@@ -60,12 +65,6 @@ export const Web = meta.story({
 		renderingTarget: 'Web',
 	},
 	parameters: {
-		chromatic: {
-			modes: {
-				'light leftCol': allModes['light leftCol'],
-				splitVertical: allModes['splitVertical'],
-			},
-		},
 		config: {
 			renderingTarget: 'Web',
 		},
