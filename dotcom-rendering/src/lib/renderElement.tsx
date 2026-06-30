@@ -68,6 +68,7 @@ import {
 } from '../components/WitnessBlockComponent';
 import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent.island';
 import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	interactiveLegacyFigureClasses,
 	isInteractive,
@@ -107,6 +108,7 @@ type Props = {
 	shouldHideAds: boolean;
 	contentType?: string;
 	contentLayout?: string;
+	articleArrangement?: LayoutType;
 	idApiUrl?: string;
 };
 
@@ -1050,6 +1052,7 @@ export const RenderArticleElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	articleArrangement,
 	idApiUrl,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
@@ -1103,6 +1106,7 @@ export const RenderArticleElement = ({
 			type={element._type}
 			format={format}
 			isTimeline={isTimeline}
+			articleArrangement={articleArrangement}
 		>
 			{el}
 		</Figure>
