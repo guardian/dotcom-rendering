@@ -18,7 +18,7 @@ jobs:
       run:
         working-directory: ab-testing
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -40,7 +40,7 @@ jobs:
       FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
     needs: [ab-testing-checks]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -66,7 +66,7 @@ jobs:
       contents: read
     needs: [ab-testing-checks]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -91,7 +91,7 @@ jobs:
       contents: read
     needs: [ab-testing-checks]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -121,7 +121,7 @@ jobs:
       contents: read
     needs: [ab-testing-checks]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -155,7 +155,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           persist-credentials: false
