@@ -6,16 +6,14 @@ import type { TrailType } from '../types/trails';
 
 type Props = {
 	trail: TrailType;
+	isGalleryPage?: boolean;
 };
 
 type CardPictureProps = {
 	image: string;
 	alt: string;
+	width?: string;
 };
-
-const imageStyles = css`
-	width: 120px;
-`;
 
 const mediaOverlayContainerStyles = css`
 	position: absolute;
@@ -44,16 +42,24 @@ const hoverStyles = css`
 `;
 
 const linkStyles = css`
+	text-decoration: none;
+	gap: ${space[2]}px;
+	position: relative;
+	${hoverStyles}
+`;
+
+const horizontalStyles = css`
 	display: flex;
 	flex-direction: row-reverse;
 	/* Needed due to row-reverse direction */
 	justify-content: flex-end;
 	align-items: flex-start;
-	text-decoration: none;
-	gap: ${space[2]}px;
-	position: relative;
-
-	${hoverStyles}
+`;
+const verticalStyles = css`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 `;
 
 const headingStyles = css`
@@ -61,11 +67,17 @@ const headingStyles = css`
 	color: ${palette('--card-headline')};
 `;
 
-const CardPicture = ({ image, alt }: CardPictureProps) => {
+const CardPicture = ({ image, alt, width }: CardPictureProps) => {
 	return (
 		<>
 			<picture>
-				<img alt={alt} src={image} css={imageStyles} />
+				<img
+					alt={alt}
+					src={image}
+					css={css`
+						width: ${width};
+					`}
+				/>
 			</picture>
 			<div css={mediaOverlayContainerStyles}>
 				<div className="media-overlay" />
@@ -74,14 +86,24 @@ const CardPicture = ({ image, alt }: CardPictureProps) => {
 	);
 };
 
-export const HostedContentOnwardsCard = ({ trail }: Props) => {
+export const HostedContentOnwardsCard = ({
+	trail,
+	isGalleryPage = false,
+}: Props) => {
 	return (
-		<a href={trail.url} css={linkStyles}>
+		<a
+			href={trail.url}
+			css={[
+				linkStyles,
+				isGalleryPage ? verticalStyles : horizontalStyles,
+			]}
+		>
 			<h3 css={headingStyles}>{trail.headline}</h3>
 			{!!trail.image && (
 				<CardPicture
 					image={trail.image.src}
 					alt={trail.image.altText || ''}
+					width={isGalleryPage ? '100%' : '120px'}
 				/>
 			)}
 		</a>

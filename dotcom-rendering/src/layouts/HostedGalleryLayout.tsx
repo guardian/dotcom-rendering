@@ -7,11 +7,11 @@ import {
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { BackToTop } from '../components/BackToTop';
 import { CallToActionButton } from '../components/CallToActionAtom';
+import { FetchHostedOnwards } from '../components/FetchHostedOnwards.island';
 import { GalleryImage } from '../components/GalleryImage';
 import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
 import { MainMediaGallery } from '../components/MainMediaGallery';
-import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.island';
 import { Standfirst } from '../components/Standfirst';
@@ -106,7 +106,7 @@ const ctaButtonStyles = css`
 `;
 
 export const HostedGalleryLayout = (props: WebProps | AppProps) => {
-	const { gallery, renderingTarget, format, serverTime } = props;
+	const { gallery, renderingTarget, format } = props;
 	const { frontendData } = gallery;
 	const { commercialProperties, editionId } = frontendData;
 
@@ -204,28 +204,19 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					</div>
 				</div>
 			</main>
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<OnwardsUpper
-					ajaxUrl={frontendData.config.ajaxUrl}
-					hasRelated={frontendData.hasRelated}
-					hasStoryPackage={frontendData.hasStoryPackage}
-					isAdFreeUser={frontendData.isAdFreeUser}
-					pageId={frontendData.pageId}
-					isPaidContent={!!frontendData.config.isPaidContent}
-					showRelatedContent={frontendData.config.showRelatedContent}
-					keywordIds={frontendData.config.keywordIds}
-					contentType={frontendData.contentType}
-					tags={frontendData.tags}
-					format={format}
-					pillar={format.theme}
-					editionId={frontendData.editionId}
-					shortUrlId={frontendData.config.shortUrlId}
-					discussionApiUrl={frontendData.config.discussionApiUrl}
-					serverTime={serverTime}
-					renderingTarget={renderingTarget}
-					webURL={frontendData.webURL}
-				/>
-			</Island>
+			<div
+				css={css`
+					background: ${palette('--article-background')};
+				`}
+			>
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<FetchHostedOnwards
+						url={`${frontendData.config.ajaxUrl}/${frontendData.config.pageId}/onward.json`}
+						branding={branding}
+						isGalleryPage={true}
+					/>
+				</Island>
+			</div>
 		</>
 	);
 };
