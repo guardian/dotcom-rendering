@@ -163,34 +163,24 @@ const decideSlideshowImages = (
 	return undefined;
 };
 
-/**
- * If we have a replacement video, we prioritise the largest available trail image from the media atom.
- * For all other videos, we prioritise the card's trail image.
- */
-const decideMediaAtomImage = (
-	videoReplace: boolean,
+const decideVideoAtomImage = (
 	mediaAtomImages?: Image[],
-	cardTrailImage?: string,
-): { src?: string; imageAspectRatio?: string } => {
+	fallbackImage?: string,
+): { src: string; imageAspectRatio?: string } | undefined => {
 	const largestMediaAtomImage = getLargestImage(mediaAtomImages);
 
-	if (isUndefined(largestMediaAtomImage)) {
-		return { src: cardTrailImage };
-	}
-
-	if (isUndefined(cardTrailImage)) {
+	if (largestMediaAtomImage) {
 		return {
 			src: largestMediaAtomImage.url,
 			imageAspectRatio: largestMediaAtomImage.fields.aspectRatio,
 		};
 	}
 
-	return videoReplace
-		? {
-				src: largestMediaAtomImage.url,
-				imageAspectRatio: largestMediaAtomImage.fields.aspectRatio,
-			}
-		: { src: cardTrailImage };
+	if (!isUndefined(fallbackImage)) {
+		return { src: fallbackImage };
+	}
+
+	return undefined;
 };
 
 /**
@@ -200,7 +190,6 @@ const decideMediaAtomImage = (
  */
 
 export const getActiveMediaAtom = (
-	videoReplace: boolean,
 	mediaAtom?: FEMediaAtom,
 	cardTrailImage?: string,
 ): MainMedia | undefined => {
@@ -226,8 +215,7 @@ export const getActiveMediaAtom = (
 				({ assetType }) => assetType === 'Subtitles',
 			);
 
-			const image = decideMediaAtomImage(
-				videoReplace,
+			const image = decideVideoAtomImage(
 				mediaAtom.posterImage?.allImages,
 				cardTrailImage,
 			);
@@ -254,9 +242,9 @@ export const getActiveMediaAtom = (
 				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
 				image: {
-					src: image.src,
+					src: image?.src,
 					aspectRatio:
-						image.imageAspectRatio ?? DEFAULT_IMAGE_ASPECT_RATIO,
+						image?.imageAspectRatio ?? DEFAULT_IMAGE_ASPECT_RATIO,
 				},
 			};
 		}
@@ -265,8 +253,7 @@ export const getActiveMediaAtom = (
 		 * There should only be one asset for Youtube atoms, so we use the first one.
 		 */
 		if (firstVideoAsset.platform === 'Youtube') {
-			const image = decideMediaAtomImage(
-				videoReplace,
+			const image = decideVideoAtomImage(
 				mediaAtom.trailImage?.allImages,
 				cardTrailImage,
 			);
@@ -287,7 +274,7 @@ export const getActiveMediaAtom = (
 				 * a soft contract with Editorial who manually set the duration of videos.
 				 */
 				isLive: mediaAtom.duration === 0,
-				image: image.src,
+				image: image?.src,
 			};
 		}
 	}
@@ -316,7 +303,7 @@ export const decideArticleMedia = (
 			};
 
 		case ArticleDesign.Video: {
-			return getActiveMediaAtom(false, mediaAtom, cardImage);
+			return getActiveMediaAtom(mediaAtom, cardImage);
 		}
 
 		default:
@@ -325,14 +312,14 @@ export const decideArticleMedia = (
 };
 
 export const decideReplacementMedia = (
-	showMainVideo?: boolean,
+	showMainVideo: boolean,
+	videoReplace: boolean,
 	mediaAtom?: FEMediaAtom,
-	videoReplace?: boolean,
 	cardImage?: string,
 ): MainMedia | undefined => {
 	/* Force video on the card when enabled by the fronts tool */
-	if (!!showMainVideo || !!videoReplace) {
-		return getActiveMediaAtom(!!videoReplace, mediaAtom, cardImage);
+	if (showMainVideo || videoReplace) {
+		return getActiveMediaAtom(mediaAtom, cardImage);
 	}
 	return undefined;
 };
@@ -443,12 +430,12 @@ export const enhanceCards = (
 			imageSrc,
 		);
 		const replacementMainMedia = decideReplacementMedia(
-			faciaCard.properties.showMainVideo ??
-				faciaCard.properties.mediaSelect?.showMainVideo,
+			faciaCard.properties.showMainVideo === true ||
+				faciaCard.properties.mediaSelect?.showMainVideo === true,
+			faciaCard.properties.mediaSelect?.videoReplace === true,
 			faciaCard.mediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
-			faciaCard.properties.mediaSelect?.videoReplace,
 			imageSrc,
 		);
 
