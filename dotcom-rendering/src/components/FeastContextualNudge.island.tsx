@@ -48,9 +48,12 @@ const darkVars = css`
 const FEAST_ADJUST_TOKEN_PROD = '20wmhy68';
 const FEAST_ADJUST_TOKEN_CODE = '20o7ykck';
 
+const getAdjustToken = (stage: StageType): string => {
+	return stage === 'PROD' ? FEAST_ADJUST_TOKEN_PROD : FEAST_ADJUST_TOKEN_CODE;
+};
+
 const buildFeastLink = (recipeId: string, stage: StageType): string => {
-	const token =
-		stage === 'PROD' ? FEAST_ADJUST_TOKEN_PROD : FEAST_ADJUST_TOKEN_CODE;
+	const token = getAdjustToken(stage);
 	return `https://guardian-feast.go.link/recipe/${encodeURIComponent(
 		recipeId,
 	)}?adj_t=${encodeURIComponent(token)}`;
@@ -226,6 +229,7 @@ export const FeastContextualNudge = ({
 							isDev,
 							nudgeIndex,
 							darkMode: darkModeAvailable,
+							adjustToken: getAdjustToken(stage),
 						}}
 					/>
 				</div>
