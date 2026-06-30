@@ -20,6 +20,7 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.island';
+import { CricketMatchHeaderWrapper } from '../components/CricketMatchHeaderWrapper.island';
 import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -33,6 +34,7 @@ import { LabsHeader } from '../components/LabsHeader';
 import { ListenToArticle } from '../components/ListenToArticle.island';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
+import { MatchHeaderFallback } from '../components/MatchHeaderFallback';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.island';
@@ -54,9 +56,9 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
-import type { EditionId } from '../lib/edition';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
+import { useAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -167,16 +169,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			? article.matchStatsUrl
 			: undefined;
 
-	const footballMatchHeaderUrl =
-		article.matchType === 'FootballMatchType'
-			? article.matchHeaderUrl
+	const isFootballMatchReport =
+		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
+
+	const cricketMatchUrl =
+		article.matchType === 'CricketMatchType'
+			? article.matchStatsUrl
 			: undefined;
 
-	const footballMatchLeagueName = article.sectionLabel;
-	const footballMatchLeagueUrl = `${article.guardianBaseURL}/${article.sectionUrl}`;
-
-	const isMatchReport =
-		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
+	const isCricketMatchReport =
+		format.design === ArticleDesign.MatchReport && !!cricketMatchUrl;
 
 	const isMedia =
 		format.design === ArticleDesign.Video ||
@@ -286,12 +288,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			/>
 
 			<MatchHeaderContainer
-				isMatchReport={isMatchReport}
-				footballMatchHeaderUrl={footballMatchHeaderUrl}
-				leagueName={footballMatchLeagueName}
-				leagueUrl={footballMatchLeagueUrl}
-				editionId={editionId}
+				isFootballMatchReport={isFootballMatchReport}
+				isCricketMatchReport={isCricketMatchReport}
 				renderingTarget={renderingTarget}
+				article={article}
+				format={format}
 			/>
 
 			{isWeb && renderAds && hasSurveyAd && (
@@ -604,7 +605,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								idApiUrl={article.config.idApiUrl}
 							/>
 							<MatchInfoContainer
-								isMatchReport={isMatchReport}
+								isMatchReport={isFootballMatchReport}
 								footballMatchStatsUrl={footballMatchStatsUrl}
 							/>
 
@@ -940,43 +941,82 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 };
 
 const MatchHeaderContainer = ({
-	isMatchReport,
-	footballMatchHeaderUrl,
-	leagueName,
-	leagueUrl,
-	editionId,
+	isFootballMatchReport,
+	isCricketMatchReport,
 	renderingTarget,
+	article,
+	format,
 }: {
-	isMatchReport: boolean;
-	footballMatchHeaderUrl: string | undefined;
-	leagueName: string;
-	leagueUrl: string;
-	editionId: EditionId;
+	isFootballMatchReport: boolean;
+	isCricketMatchReport: boolean;
 	renderingTarget: RenderingTarget;
+	article: ArticleDeprecated;
+	format: ArticleFormat;
 }) => {
-	if (isMatchReport && !!footballMatchHeaderUrl) {
-		const parsedUrl = safeParseURL(footballMatchHeaderUrl);
-		if (!parsedUrl.ok) {
-			log(
-				'dotcom',
-				new Error(
-					`Failed to parse match header URL: ${footballMatchHeaderUrl}`,
-				),
-			);
+	const footballMatchHeaderUrl =
+		article.matchType === 'FootballMatchType'
+			? article.matchHeaderUrl
+			: undefined;
 
-			return null;
-		}
+	const footballMatchLeagueName = article.sectionLabel;
+	const footballMatchLeagueUrl = `${article.guardianBaseURL}/${article.sectionUrl}`;
+
+	const cricketMatchHeaderUrl =
+		article.matchType === 'CricketMatchType'
+			? article.matchHeaderUrl
+			: undefined;
+
+	const ab = useAB();
+	const isCricketRedesignEnabled = Boolean(
+		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
+	);
+
+	const isApps = renderingTarget === 'Apps';
+
+	if (isFootballMatchReport && footballMatchHeaderUrl) {
 		return (
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<FootballMatchHeaderWrapper
-					initialTab="report"
-					leagueName={leagueName}
-					leagueURL={leagueUrl}
-					edition={editionId}
-					matchHeaderURL={footballMatchHeaderUrl}
-					renderingTarget={renderingTarget}
-				/>
-			</Island>
+			<>
+				<noscript>
+					<MatchHeaderFallback format={format} article={article} />
+				</noscript>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FootballMatchHeaderWrapper
+						initialTab="report"
+						leagueName={footballMatchLeagueName}
+						leagueURL={footballMatchLeagueUrl}
+						edition={article.editionId}
+						matchHeaderURL={footballMatchHeaderUrl}
+						renderingTarget={renderingTarget}
+						article={article}
+						format={format}
+					/>
+				</Island>
+			</>
+		);
+	}
+
+	if (
+		!isApps &&
+		cricketMatchHeaderUrl &&
+		isCricketMatchReport &&
+		isCricketRedesignEnabled
+	) {
+		return (
+			<>
+				<noscript>
+					<MatchHeaderFallback format={format} article={article} />
+				</noscript>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<CricketMatchHeaderWrapper
+						selectedTab={'report'}
+						edition={article.editionId}
+						matchHeaderURL={cricketMatchHeaderUrl}
+						tabContentId={'article'}
+						article={article}
+						format={format}
+					/>
+				</Island>
+			</>
 		);
 	}
 
