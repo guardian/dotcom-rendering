@@ -324,7 +324,7 @@ export type FECollection = {
 export type FEFrontConfig = {
 	/**
 	 * Server-side AB tests. Optional from `frontend`; a default of
-	 * `{}` is applied during request validation (see `useDefaults` in
+	 * `{}` is applied by AJV during request validation (see `useDefaults` in
 	 * `validate.ts`), so this is always present after enhancing.
 	 *
 	 * @default {}
