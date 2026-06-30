@@ -400,8 +400,8 @@ export const ArticleHeadline = ({
 	starRating,
 }: Props) => {
 	const isInverted =
-		format.design === ArticleDesign.Standard &&
-		format.display === ArticleDisplay.Immersive;
+		format.display === ArticleDisplay.Immersive &&
+		format.design === ArticleDesign.Standard;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
