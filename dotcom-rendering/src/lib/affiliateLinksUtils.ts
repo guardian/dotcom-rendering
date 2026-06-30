@@ -1,4 +1,5 @@
 import type { ABParticipations } from '../experiments/lib/ab-tests';
+import type { ProductCta } from '../types/content';
 
 export const SKIMLINK_REL = 'sponsored noreferrer noopener';
 
@@ -136,4 +137,8 @@ export const buildXcustParamForAffiliateLink = ({
 		utmParamsString,
 		xcustComponentId,
 	});
+};
+
+export const getProductLinkLabel = (cardCta: ProductCta): string => {
+	return cardCta.text !== '' ? cardCta.text : `Buy at ${cardCta.retailer}`;
 };

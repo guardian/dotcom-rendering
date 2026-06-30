@@ -9,7 +9,10 @@ const meta = preview.meta({
 	title: 'Components/Horizontal Summary Product Card',
 	component: HorizontalSummaryProductCard,
 	args: {
-		product: { ...exampleProduct, h2Id: 'example-1' },
+		product: {
+			productBlock: { ...exampleProduct, h2Id: 'example-1' },
+			ctaIndex: 0,
+		},
 		format: {
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,

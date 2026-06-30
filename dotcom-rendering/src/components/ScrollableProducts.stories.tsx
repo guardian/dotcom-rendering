@@ -18,32 +18,48 @@ const meta = preview.meta({
 		},
 	},
 	args: {
+		title: 'At a glance',
 		products: [
 			{
-				...exampleProduct,
-				primaryHeadingHtml: '<em>Product 0</em>',
-				h2Id: 'product',
+				productBlock: {
+					...exampleProduct,
+					primaryHeadingHtml: '<em>Product 0</em>',
+					h2Id: 'product',
+				},
+				ctaIndex: 0,
 			},
 			{
-				...exampleProduct,
-				primaryHeadingHtml: '<em>Product 1</em>',
-				h2Id: 'product-1',
-				productName: 'Lorem ipsum dolor sit amet',
+				productBlock: {
+					...exampleProduct,
+					primaryHeadingHtml: '<em>Product 1</em>',
+					h2Id: 'product-1',
+					productName: 'Lorem ipsum dolor sit amet',
+				},
+				ctaIndex: 0,
 			},
 			{
-				...exampleProduct,
-				primaryHeadingHtml: '<em>Product 2</em>',
-				h2Id: 'product-2',
+				productBlock: {
+					...exampleProduct,
+					primaryHeadingHtml: '<em>Product 2</em>',
+					h2Id: 'product-2',
+				},
+				ctaIndex: 0,
 			},
 			{
-				...exampleProduct,
-				primaryHeadingHtml: '<em>Product 3</em>',
-				h2Id: 'product-3',
+				productBlock: {
+					...exampleProduct,
+					primaryHeadingHtml: '<em>Product 3</em>',
+					h2Id: 'product-3',
+				},
+				ctaIndex: 0,
 			},
 			{
-				...exampleProduct,
-				primaryHeadingHtml: '<em>Product 4</em>',
-				h2Id: 'product-4',
+				productBlock: {
+					...exampleProduct,
+					primaryHeadingHtml: '<em>Product 4</em>',
+					h2Id: 'product-4',
+				},
+				ctaIndex: 0,
 			},
 		],
 		format: {
