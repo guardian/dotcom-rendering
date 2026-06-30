@@ -6,11 +6,8 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-} from '../lib/articleFormat';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
 import type { FEElement, RoleType } from '../types/content';
@@ -24,6 +21,7 @@ type Props = {
 	className?: string;
 	type?: FEElement['_type'];
 	isTimeline?: boolean;
+	articleArrangement?: LayoutType;
 };
 
 const overlayMaskGradientStyles = (angle: string) => css`
@@ -301,6 +299,7 @@ export const Figure = ({
 	className = '',
 	type,
 	isTimeline = false,
+	articleArrangement = 'standard',
 }: Props) => {
 	if (isMainMedia && !isTimeline) {
 		// Don't add in-body styles for main media elements
@@ -311,18 +310,17 @@ export const Figure = ({
 		return (
 			<figure id={id} key={id} css={mainMediaFigureStyles}>
 				{children}
-				{format.display === ArticleDisplay.Immersive &&
-					format.design === ArticleDesign.Feature && (
-						<div
-							css={[
-								blurStyles,
-								css`
-									height: 40%;
-									top: 60%;
-								`,
-							]}
-						/>
-					)}
+				{articleArrangement === 'immersiveLandscapeFeature' && (
+					<div
+						css={[
+							blurStyles,
+							css`
+								height: 40%;
+								top: 60%;
+							`,
+						]}
+					/>
+				)}
 			</figure>
 		);
 	}
