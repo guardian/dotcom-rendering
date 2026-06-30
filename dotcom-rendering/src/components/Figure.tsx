@@ -311,17 +311,18 @@ export const Figure = ({
 		return (
 			<figure id={id} key={id} css={mainMediaFigureStyles}>
 				{children}
-				{format.display === ArticleDisplay.Immersive && (
-					<div
-						css={[
-							blurStyles,
-							css`
-								height: 40%;
-								top: 60%;
-							`,
-						]}
-					/>
-				)}
+				{format.display === ArticleDisplay.Immersive &&
+					format.design === ArticleDesign.Feature && (
+						<div
+							css={[
+								blurStyles,
+								css`
+									height: 40%;
+									top: 60%;
+								`,
+							]}
+						/>
+					)}
 			</figure>
 		);
 	}
