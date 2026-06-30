@@ -98,13 +98,11 @@ export const PuzzleMeEmbed = ({
 			window.PM_Config.PM_BasePath = config.basePath;
 
 			if (authStatus.kind === 'SignedIn') {
-				const guardianUserId =
-					authStatus.idToken.claims.legacy_identity_id ??
-					authStatus.idToken.claims.sub;
+				const puzzleId = authStatus.idToken.claims.puzzle_id;
 
-				if (guardianUserId) {
-					embedRef.current?.setAttribute('data-uid', guardianUserId);
-					window.PM_Config.getUID = () => guardianUserId;
+				if (puzzleId != null) {
+					embedRef.current?.setAttribute('data-uid', puzzleId);
+					window.PM_Config.getUID = () => puzzleId;
 				}
 			}
 

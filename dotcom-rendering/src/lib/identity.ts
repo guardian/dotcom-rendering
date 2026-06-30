@@ -9,6 +9,7 @@ import { getIdentityAuth } from '@guardian/identity-auth-frontend';
 export type CustomIdTokenClaims = CustomClaims & {
 	email: string;
 	braze_uuid: string;
+	puzzle_id?: string;
 };
 
 export async function isSignedInAuthState(): Promise<
