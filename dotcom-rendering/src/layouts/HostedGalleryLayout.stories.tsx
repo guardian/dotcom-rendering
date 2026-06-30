@@ -14,6 +14,7 @@ const meta = preview.meta({
 	title: 'Layouts/HostedGallery',
 	component: HostedGalleryLayout,
 	parameters: {
+		config: { darkModeAvailable: true },
 		chromatic: {
 			modes: {
 				'light leftCol': allModes['light leftCol'],

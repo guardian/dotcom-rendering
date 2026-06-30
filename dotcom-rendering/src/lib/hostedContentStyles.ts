@@ -7,7 +7,7 @@ import { from, palette as sourcePalette } from '@guardian/source/foundations';
  * @param accentColor - The accentColor to use for the hosted content in light mode.
  * @returns A CSS string with the overridden palette declarations.
  */
-const hostedPaletteOverrides = (
+export const hostedPaletteOverrides = (
 	colourScheme: 'light' | 'dark',
 	accentColor?: string,
 ): SerializedStyles => {
@@ -55,9 +55,7 @@ export const hostedContentStyleOverrides = (
 		${darkModeAvailable
 			? css`
 					@media (prefers-color-scheme: dark) {
-						:root:not([data-color-scheme='light']) {
-							${hostedPaletteOverrides('dark', accentColour)}
-						}
+						${hostedPaletteOverrides('dark', accentColour)}
 					}
 				`
 			: ''}

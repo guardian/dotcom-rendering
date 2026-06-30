@@ -29,6 +29,7 @@ const meta = preview.meta({
 	title: 'Layouts/HostedArticle',
 	component: HostedArticleLayout,
 	parameters: {
+		config: { darkModeAvailable: true },
 		chromatic: {
 			modes: {
 				'light leftCol': allModes['light leftCol'],
@@ -147,8 +148,14 @@ const overrideMainMediaCaption = (article: Article): Article => ({
 					el._type ===
 					'model.dotcomrendering.pageElements.ImageBlockElement'
 				) {
-					el.data.caption = undefined;
-					el.data.credit = undefined;
+					return {
+						...el,
+						data: {
+							caption: '',
+							credit: '',
+							alt: '',
+						},
+					};
 				}
 				return el;
 			}),

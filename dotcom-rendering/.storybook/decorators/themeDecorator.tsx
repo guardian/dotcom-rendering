@@ -14,7 +14,7 @@ import {
 import type { CSSProperties } from 'react';
 import type { ArticleFormat } from '../../src/lib/articleFormat';
 import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
-import { hostedContentStyleOverrides } from '../../src/lib/hostedContentStyles';
+import { hostedPaletteOverrides } from '../../src/lib/hostedContentStyles';
 
 const darkStoryCss = css`
 	background-color: ${sourcePalette.neutral[0]};
@@ -115,10 +115,32 @@ export const browserThemeDecorator =
 		</>
 	);
 
+/**
+ * Colour scheme decorator specifically for hosted content pages,
+ * where the accent colour from the branding overrides some palette colours
+ */
 export const hostedPaletteDecorator =
 	(accentColour: string): Decorator =>
-	(Story) => (
-		<div css={css(hostedContentStyleOverrides(true, accentColour))}>
+	(Story, context) => (
+		<div
+			css={css`
+				${hostedPaletteOverrides('light', accentColour)}
+				${!!context.parameters?.config?.darkModeAvailable
+					? css`
+							@media (prefers-color-scheme: dark) {
+								${hostedPaletteOverrides('dark', accentColour)}
+							}
+						`
+					: ''}
+
+				[data-color-scheme='light'] & {
+					${hostedPaletteOverrides('light', accentColour)}
+				}
+				[data-color-scheme='dark'] & {
+					${hostedPaletteOverrides('dark', accentColour)}
+				}
+			`}
+		>
 			<Story />
 		</div>
 	);

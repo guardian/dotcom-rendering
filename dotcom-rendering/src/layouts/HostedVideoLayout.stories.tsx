@@ -28,6 +28,7 @@ const meta = preview.meta({
 	title: 'Layouts/HostedVideo',
 	component: HostedVideoLayout,
 	parameters: {
+		config: { darkModeAvailable: true },
 		chromatic: {
 			modes: {
 				'light leftCol': allModes['light leftCol'],
