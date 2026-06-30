@@ -50,16 +50,6 @@ const parsePuzzleMeUrl = (src: string): PuzzleMeConfig | undefined => {
 	};
 };
 
-const hashUserId = async (userId: string): Promise<string> => {
-	if (window.crypto.subtle === undefined) return userId;
-
-	const bytes = new TextEncoder().encode(userId);
-	const hashBuffer = await window.crypto.subtle.digest('SHA-256', bytes);
-	const hashArray = Array.from(new Uint8Array(hashBuffer));
-
-	return hashArray.map((byte) => byte.toString(16).padStart(2, '0')).join('');
-};
-
 const loadScript = (scriptSrc: string): Promise<void> =>
 	new Promise((resolve, reject) => {
 		const existingScript = document.querySelector<HTMLScriptElement>(
@@ -108,14 +98,13 @@ export const PuzzleMeEmbed = ({
 			window.PM_Config.PM_BasePath = config.basePath;
 
 			if (authStatus.kind === 'SignedIn') {
-				const userId =
-					authStatus.idToken.claims.sub ??
-					authStatus.idToken.claims.legacy_identity_id;
+				const guardianUserId =
+					authStatus.idToken.claims.legacy_identity_id ??
+					authStatus.idToken.claims.sub;
 
-				if (userId) {
-					const hashedUserId = await hashUserId(userId);
-					embedRef.current?.setAttribute('data-uid', hashedUserId);
-					window.PM_Config.getUID = () => hashedUserId;
+				if (guardianUserId) {
+					embedRef.current?.setAttribute('data-uid', guardianUserId);
+					window.PM_Config.getUID = () => guardianUserId;
 				}
 			}
 
