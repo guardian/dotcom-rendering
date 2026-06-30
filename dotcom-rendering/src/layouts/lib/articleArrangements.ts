@@ -350,3 +350,38 @@ export const gridItemCss = (
 		${breakpointCss}
 	`;
 };
+
+/**
+ * Determines which {@link LayoutType} to render. Immersive layouts are
+ * split by orientation (portrait vs. landscape/square) and by whether the
+ * format is a Feature, since each combination has a distinct grid
+ * arrangement. Non-immersive formats fall back to media/showcase/standard.
+ */
+export const getLayoutType = ({
+	isImmersive,
+	isFeature,
+	orientation,
+	isVideo,
+	isShowcase,
+}: {
+	isImmersive: boolean;
+	isFeature: boolean;
+	orientation: 'portrait' | 'landscape' | 'square';
+	isVideo: boolean;
+	isShowcase: boolean;
+}): LayoutType => {
+	if (isImmersive) {
+		if (orientation === 'portrait') {
+			return isFeature
+				? 'immersivePortraitFeature'
+				: 'immersivePortraitDefault';
+		}
+		// Square images are treated the same as landscape for immersive layouts.
+		return isFeature
+			? 'immersiveLandscapeFeature'
+			: 'immersiveLandscapeDefault';
+	}
+	if (isVideo) return 'media';
+	if (isShowcase) return 'showcase';
+	return 'standard';
+};
