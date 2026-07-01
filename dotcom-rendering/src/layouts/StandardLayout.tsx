@@ -19,6 +19,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { AudioPlayer } from '../components/AudioPlayer';
 import { Carousel } from '../components/Carousel.island';
 import { CricketMatchHeaderWrapper } from '../components/CricketMatchHeaderWrapper.island';
 import { DecideLines } from '../components/DecideLines';
@@ -52,6 +53,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { getAudioData } from '../lib/audio-data';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
@@ -165,8 +167,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
 
-	const isVideo = format.design === ArticleDesign.Video;
-
 	const isShowcase = format.display === ArticleDisplay.Showcase;
 
 	const showComments = article.isCommentable && !isPaidContent;
@@ -180,6 +180,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
 
 	const renderAds = canRenderAds(article);
+
+	const audioData = getAudioData(article.mainMediaElements);
 
 	const layoutType: LayoutType = isMedia
 		? 'media'
@@ -283,25 +285,36 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						]}
 					>
 						<GridItem area="media" layoutType={layoutType}>
-							<MainMedia
-								format={format}
-								elements={article.mainMediaElements}
-								host={host}
-								pageId={article.pageId}
-								webTitle={article.webTitle}
-								ajaxUrl={article.config.ajaxUrl}
-								abTests={article.config.abTests}
-								switches={article.config.switches}
-								isAdFreeUser={article.isAdFreeUser}
-								isSensitive={article.config.isSensitive}
-								editionId={article.editionId}
-								hideCaption={isMedia}
-								shouldHideAds={article.shouldHideAds}
-								contentType={article.contentType}
-								contentLayout={`${
-									ArticleDisplay[format.display]
-								}Layout`}
-							/>
+							{audioData ? (
+								<AudioPlayer
+									audioData={audioData}
+									isSensitive={article.config.isSensitive}
+									isAcastEnabled={
+										!!article.config.switches.acast
+									}
+									isApps={isApps}
+								/>
+							) : (
+								<MainMedia
+									format={format}
+									elements={article.mainMediaElements}
+									host={host}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
+									ajaxUrl={article.config.ajaxUrl}
+									abTests={article.config.abTests}
+									switches={article.config.switches}
+									isAdFreeUser={article.isAdFreeUser}
+									isSensitive={article.config.isSensitive}
+									editionId={article.editionId}
+									hideCaption={isMedia}
+									shouldHideAds={article.shouldHideAds}
+									contentType={article.contentType}
+									contentLayout={`${
+										ArticleDisplay[format.display]
+									}Layout`}
+								/>
+							)}
 						</GridItem>
 						<GridItem
 							area="title"
@@ -340,18 +353,22 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							layoutType={layoutType}
 							element="aside"
 						>
-							<div css={stretchLines}>
-								{isWeb &&
-								format.theme === ArticleSpecial.Labs &&
-								format.design !== ArticleDesign.Video ? (
-									<GuardianLabsLines />
-								) : (
-									<DecideLines
-										format={format}
-										color={themePalette('--article-border')}
-									/>
-								)}
-							</div>
+							{!audioData && (
+								<div css={stretchLines}>
+									{isWeb &&
+									format.theme === ArticleSpecial.Labs &&
+									format.design !== ArticleDesign.Video ? (
+										<GuardianLabsLines />
+									) : (
+										<DecideLines
+											format={format}
+											color={themePalette(
+												'--article-border',
+											)}
+										/>
+									)}
+								</div>
+							)}
 							{isApps ? (
 								<>
 									<Hide from="leftCol">
@@ -452,7 +469,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
 								<Hide until="leftCol">
-									{!isVideo && (
+									{!isMedia && (
 										<div
 											css={css`
 												margin-top: ${space[2]}px;
@@ -616,6 +633,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											!!article.config
 												.shouldHideReaderRevenue
 										}
+										shouldHideMostViewed={!!audioData}
 									/>
 								</Island>
 							</Hide>
