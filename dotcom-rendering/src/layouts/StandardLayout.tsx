@@ -823,11 +823,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer
-						data-print-layout="hide"
-						contentType={article.contentType}
-						pageId={article.pageId}
-					/>
+					{renderAds && (
+						<MobileStickyContainer data-print-layout="hide" />
+					)}
 				</>
 			)}
 
@@ -907,9 +905,9 @@ const MatchHeaderContainer = ({
 	}
 
 	if (
-		isCricketMatchReport &&
 		!isApps &&
 		cricketMatchHeaderUrl &&
+		isCricketMatchReport &&
 		isCricketRedesignEnabled
 	) {
 		return (

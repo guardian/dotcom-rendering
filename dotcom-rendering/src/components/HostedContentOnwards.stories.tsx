@@ -1,29 +1,20 @@
+import { hostedPaletteDecorator } from '../../.storybook/decorators/themeDecorator';
+import preview from '../../.storybook/preview';
 import { hostedOnwardsTrails } from '../../fixtures/manual/onwardsTrails';
 import { HostedContentOnwards } from './HostedContentOnwards';
 
-export default {
+const meta = preview.meta({
 	component: HostedContentOnwards,
 	title: 'Components/HostedContentOnwards',
-};
+	args: {
+		trails: hostedOnwardsTrails,
+		brandName: 'TrendAI',
+	},
+	render: (args) => <HostedContentOnwards {...args} />,
+});
 
-export const Default = () => {
-	return (
-		<HostedContentOnwards
-			trails={hostedOnwardsTrails}
-			brandName="TrendAI"
-		/>
-	);
-};
+export const Default = meta.story({});
 
-Default.storyName = 'default';
-
-export const WithAccentColour = () => {
-	return (
-		<HostedContentOnwards
-			trails={hostedOnwardsTrails}
-			brandName="TrendAI"
-		/>
-	);
-};
-
-WithAccentColour.storyName = 'with accent colour';
+export const WithAccentColour = meta.story({
+	decorators: hostedPaletteDecorator('#d90c1f'),
+});

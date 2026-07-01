@@ -14,6 +14,13 @@ type FENewslettersConfigType = {
 	sentryHost: string;
 	dcrSentryDsn: string; // used in dotcom-rendering/src/client/sentryLoader/sentry.ts
 	switches: Switches;
+	/**
+	 * Server-side AB tests. Optional from `frontend`; a default of
+	 * `{}` is applied by AJV during request validation (see `useDefaults` in
+	 * `validate.ts`), so this is always present after enhancing.
+	 *
+	 * @default {}
+	 */
 	abTests: ServerSideTests;
 	serverSideABTests: Record<string, string>;
 	dfpAccountId: string;
