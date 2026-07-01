@@ -41,7 +41,7 @@ import { useConfig } from './ConfigContext';
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the
 // badge, its parent must include the T+C along side it.
-// The T+C are not included in this componet directly to reduce layout shift
+// The T+C are not included in this component directly to reduce layout shift
 // from the island hydrating (placeholder height for the text can't
 // be accurately predicated for every breakpoint).
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
@@ -246,6 +246,18 @@ const postFormData = async (
 	});
 };
 
+const getErrorType = (error: unknown): string => {
+	if (error instanceof TypeError) {
+		return 'network-or-fetch';
+	}
+
+	if (error instanceof Error) {
+		return error.name || 'error';
+	}
+
+	return 'unknown';
+};
+
 const sendTracking = (
 	newsletterId: string,
 	eventDescription: NewsletterEventDescription,
@@ -383,13 +395,25 @@ export const SecureSignup = ({
 			clearSubscriptionCache();
 		}
 
+		const trackingDetails: Record<string, unknown> = {};
+
+		if (marketingOptInType) {
+			trackingDetails.marketingOptInType = marketingOptInType;
+		}
+
+		if (!response.ok) {
+			trackingDetails.responseStatus = response.status;
+		}
+
 		sendTracking(
 			newsletterId,
 			response.ok ? 'submission-confirmed' : 'submission-failed',
 			renderingTarget,
 			isSignedIn,
 			abTest,
-			marketingOptInType ? { marketingOptInType } : undefined,
+			Object.keys(trackingDetails).length > 0
+				? trackingDetails
+				: undefined,
 		);
 	};
 
@@ -438,6 +462,7 @@ export const SecureSignup = ({
 				renderingTarget,
 				isSignedIn,
 				abTest,
+				{ errorType: getErrorType(error) },
 			);
 			setErrorMessage(`Sorry, there was an error signing you up.`);
 			setIsWaitingForResponse(false);
