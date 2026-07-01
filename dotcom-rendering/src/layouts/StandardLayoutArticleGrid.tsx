@@ -235,6 +235,7 @@ export const StandardLayoutArticleGrid = ({
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
 	);
+	const isInteractive = format.design === ArticleDesign.Interactive;
 
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
@@ -267,6 +268,7 @@ export const StandardLayoutArticleGrid = ({
 		isMedia,
 		isPicture,
 		isShowcase,
+		isInteractive,
 	});
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
@@ -824,7 +826,7 @@ export const StandardLayoutArticleGrid = ({
 					}
 				`}
 			>
-				{!isPicture && (
+				{!isPicture && !isInteractive && (
 					<Hide until="desktop">
 						<Island
 							priority="feature"

@@ -171,7 +171,9 @@ export const temporaryBodyCopyColourOverride = css`
 	}
 `;
 
-export const InteractiveGridV1 = (props: WebProps | AppProps) => {
+export const InteractiveArticleGridDeprecated = (
+	props: WebProps | AppProps,
+) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { host },
