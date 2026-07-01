@@ -164,14 +164,6 @@ export const HighlightsNewsletterCard = ({
 		if (renderingTarget === 'Web') {
 			event.preventDefault();
 
-			sendNewsletterSignupEvent({
-				action: 'CLICK',
-				identityName: newsletter.identityName,
-				componentId,
-				renderingTarget,
-				value: { eventDescription: 'highlights-card-clicked' },
-			});
-
 			setIsModalOpen(true);
 
 			sendNewsletterSignupEvent({
@@ -200,6 +192,8 @@ export const HighlightsNewsletterCard = ({
 				{isModalOpen && (
 					<HighlightsNewsletterSignupModal
 						newsletter={newsletter}
+						renderingTarget={renderingTarget}
+						componentId={componentId}
 						onClose={() => {
 							setIsModalOpen(false);
 							sendNewsletterSignupEvent({
