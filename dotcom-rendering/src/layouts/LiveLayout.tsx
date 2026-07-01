@@ -598,7 +598,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								<GridItem area="media">
 									<div css={maxWidth}>
 										{!!cricketMatchUrl &&
-											isCricketRedesignEnabled && (
+											!isCricketRedesignEnabled && (
 												<Island
 													priority="critical"
 													defer={{ until: 'visible' }}
