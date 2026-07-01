@@ -32,7 +32,7 @@ export const renderShell = (
 ): { html: string; prefetchScripts: string[] } => {
 	const NAV = parseNav(frontendData.nav);
 
-	const title = 'Shell Page';
+	const title = `Shell Page - ${name}`;
 
 	const renderingTarget = 'Web';
 	const config: Config = {
