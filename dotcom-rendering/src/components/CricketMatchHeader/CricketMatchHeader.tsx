@@ -30,6 +30,7 @@ import {
 	getTimeZoneFromEdition,
 } from '../../lib/edition';
 import { generateImageURL } from '../../lib/image';
+import { useLocationHash } from '../../lib/useLocationHash';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import type { ArticleDeprecated } from '../../types/article';
@@ -63,6 +64,7 @@ type Props = CricketMatchHeaderProps & {
 
 export const CricketMatchHeader = (props: Props) => {
 	const scorecardHashbang = '#scorecard';
+	const locationHash = useLocationHash();
 
 	const { data, error } = useSWR<CricketHeaderData, Error>(
 		props.matchHeaderURL,
@@ -78,11 +80,11 @@ export const CricketMatchHeader = (props: Props) => {
 		useState<HTMLElement | null>(null);
 
 	useEffect(() => {
-		if (window.location.hash === scorecardHashbang) {
+		if (locationHash === scorecardHashbang) {
 			// eslint-disable-next-line react-hooks/set-state-in-effect -- we want to set the selected tab based on the hashbang in the URL
 			setSelectedTab('info');
 		}
-	}, []);
+	}, [locationHash]);
 
 	useEffect(() => {
 		const el = document.getElementById(props.tabContentId);
