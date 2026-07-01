@@ -1,41 +1,42 @@
-import { css, type SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import { log } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import { AffiliateDisclaimer } from '../../components/AffiliateDisclaimer';
-import { AppsEpic } from '../../components/AppsEpic.island';
-import { ArticleBody } from '../../components/ArticleBody';
-import { ArticleContainer } from '../../components/ArticleContainer';
-import { ArticleHeadline } from '../../components/ArticleHeadline';
-import { ArticleMetaApps } from '../../components/ArticleMeta.apps';
-import { ArticleMeta } from '../../components/ArticleMeta.web';
-import { ArticleTitle } from '../../components/ArticleTitle';
-import { DecideLines } from '../../components/DecideLines';
-import { GuardianLabsLines } from '../../components/GuardianLabsLines';
-import { Island } from '../../components/Island';
-import { ListenToArticle } from '../../components/ListenToArticle.island';
-import { MainMedia } from '../../components/MainMedia';
-import { MostViewedRightWithAd } from '../../components/MostViewedRightWithAd.island';
-import { SlotBodyEnd } from '../../components/SlotBodyEnd.island';
-import { Standfirst } from '../../components/Standfirst';
-import { SubMeta } from '../../components/SubMeta';
-import { grid } from '../../grid';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import { AppsEpic } from '../components/AppsEpic.island';
+import { ArticleBody } from '../components/ArticleBody';
+import { ArticleContainer } from '../components/ArticleContainer';
+import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
+import { ArticleMeta } from '../components/ArticleMeta.web';
+import { ArticleTitle } from '../components/ArticleTitle';
+import { DecideLines } from '../components/DecideLines';
+import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
+import { GuardianLabsLines } from '../components/GuardianLabsLines';
+import { Island } from '../components/Island';
+import { ListenToArticle } from '../components/ListenToArticle.island';
+import { MainMedia } from '../components/MainMedia';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.island';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.island';
+import { Standfirst } from '../components/Standfirst';
+import { SubMeta } from '../components/SubMeta';
+import { grid } from '../grid';
 import {
 	ArticleDesign,
-	type ArticleFormat,
+	ArticleDisplay,
 	ArticleSpecial,
-} from '../../lib/articleFormat';
-import { getContributionsServiceUrl } from '../../lib/contributions';
-import { parse } from '../../lib/slot-machine-flags';
-import type { NavType } from '../../model/extract-nav';
-import { palette as themePalette } from '../../palette';
-import type { ArticleDeprecated } from '../../types/article';
-import type { RenderingTarget } from '../../types/renderingTarget';
+} from '../lib/articleFormat';
+import { getContributionsServiceUrl } from '../lib/contributions';
+import { safeParseURL } from '../lib/parse';
+import { parse } from '../lib/slot-machine-flags';
+import { palette as themePalette } from '../palette';
 import {
 	type Area,
 	gridItemCss,
 	type LayoutType,
-} from '../lib/articleArrangements';
+} from './lib/articleArrangements';
+import type { AppProps, WebProps } from './StandardLayout';
 
 const stretchLines = css`
 	${until.phablet} {
@@ -52,7 +53,7 @@ interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
 	element?: 'div' | 'aside';
-	customCss?: SerializedStyles;
+	className?: string;
 	children: React.ReactNode;
 }
 
@@ -60,34 +61,25 @@ const GridItem = ({
 	area,
 	layoutType,
 	element: Element = 'div',
-	customCss,
+	className,
 	children,
 }: GridItemProps) => (
 	<Element
 		data-gu-name={area}
-		css={[gridItemCss(area, layoutType), customCss]}
+		css={gridItemCss(area, layoutType)}
+		className={className}
 	>
 		{children}
 	</Element>
 );
 
-interface Props {
-	article: ArticleDeprecated;
-	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
-	serverTime?: number;
-}
-
-interface WebProps extends Props {
-	NAV: NavType;
-	renderingTarget: 'Web';
-}
-
-interface AppProps extends Props {
-	renderingTarget: 'Apps';
-}
-
-export const InteractiveGridV2 = (props: WebProps | AppProps) => {
+export const StandardLayoutContentGrid = ({
+	props,
+	layoutType,
+}: {
+	props: WebProps | AppProps;
+	layoutType: LayoutType;
+}) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { host },
@@ -105,6 +97,26 @@ export const InteractiveGridV2 = (props: WebProps | AppProps) => {
 
 	const { branding } = article.commercialProperties[article.editionId];
 
+	const footballMatchStatsUrl =
+		article.matchType === 'FootballMatchType'
+			? article.matchStatsUrl
+			: undefined;
+
+	const isLabs = format.theme === ArticleSpecial.Labs;
+	const isMedia =
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Audio;
+
+	const isVideo = format.design === ArticleDesign.Video;
+
+	const footballMatchUrl =
+		article.matchType === 'FootballMatchType'
+			? article.matchUrl
+			: undefined;
+
+	const isFootballMatchReport =
+		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
+
 	return (
 		<article
 			css={[
@@ -113,14 +125,15 @@ export const InteractiveGridV2 = (props: WebProps | AppProps) => {
 				`,
 				grid.container,
 				grid.outerRules(),
-				css`
-					${from.leftCol} {
-						${grid.centreRule(3)}
-					}
-				`,
+				!isLabs &&
+					css`
+						${from.leftCol} {
+							${grid.centreRule(3)}
+						}
+					`,
 			]}
 		>
-			<GridItem area="media" layoutType="interactive">
+			<GridItem area="media" layoutType={layoutType}>
 				<MainMedia
 					format={format}
 					elements={article.mainMediaElements}
@@ -133,23 +146,23 @@ export const InteractiveGridV2 = (props: WebProps | AppProps) => {
 					isAdFreeUser={article.isAdFreeUser}
 					isSensitive={article.config.isSensitive}
 					editionId={article.editionId}
-					hideCaption={false}
+					hideCaption={isMedia}
 					shouldHideAds={article.shouldHideAds}
 					contentType={article.contentType}
-					contentLayout="InteractiveLayout"
+					contentLayout={`${ArticleDisplay[format.display]}Layout`}
 				/>
 			</GridItem>
-			<GridItem area="title" layoutType="interactive" element="aside">
+			<GridItem area="title" layoutType={layoutType} element="aside">
 				<ArticleTitle
 					format={format}
 					tags={article.tags}
 					sectionLabel={article.sectionLabel}
 					sectionUrl={article.sectionUrl}
 					guardianBaseURL={article.guardianBaseURL}
-					isMatch={false}
+					isMatch={!!footballMatchUrl}
 				/>
 			</GridItem>
-			<GridItem area="headline" layoutType="interactive">
+			<GridItem area="headline" layoutType={layoutType}>
 				<ArticleHeadline
 					format={format}
 					headlineString={article.headline}
@@ -161,17 +174,10 @@ export const InteractiveGridV2 = (props: WebProps | AppProps) => {
 					starRating={article.starRating}
 				/>
 			</GridItem>
-			<GridItem area="standfirst" layoutType="interactive">
+			<GridItem area="standfirst" layoutType={layoutType}>
 				<Standfirst format={format} standfirst={article.standfirst} />
 			</GridItem>
-			<GridItem
-				area="meta"
-				layoutType="interactive"
-				element="aside"
-				customCss={css`
-					z-index: 5;
-				`}
-			>
+			<GridItem area="meta" layoutType={layoutType} element="aside">
 				<div css={stretchLines}>
 					{isWeb &&
 					format.theme === ArticleSpecial.Labs &&
@@ -221,6 +227,7 @@ export const InteractiveGridV2 = (props: WebProps | AppProps) => {
 								secondaryDateline={
 									article.webPublicationSecondaryDateDisplay
 								}
+								webPublicationDate={article.webPublicationDate}
 								isCommentable={article.isCommentable}
 								discussionApiUrl={
 									article.config.discussionApiUrl
@@ -234,41 +241,51 @@ export const InteractiveGridV2 = (props: WebProps | AppProps) => {
 						</Hide>
 					</>
 				) : (
-					<ArticleMeta
-						branding={branding}
-						format={format}
-						pageId={article.pageId}
-						webTitle={article.webTitle}
-						byline={article.byline}
-						source={article.config.source}
-						tags={article.tags}
-						primaryDateline={article.webPublicationDateDisplay}
-						secondaryDateline={
-							article.webPublicationSecondaryDateDisplay
-						}
-						isCommentable={article.isCommentable}
-						discussionApiUrl={article.config.discussionApiUrl}
-						shortUrlId={article.config.shortUrlId}
-						mainMediaElements={article.mainMediaElements}
-					/>
+					<>
+						<ArticleMeta
+							branding={branding}
+							format={format}
+							pageId={article.pageId}
+							webTitle={article.webTitle}
+							byline={article.byline}
+							source={article.config.source}
+							tags={article.tags}
+							primaryDateline={article.webPublicationDateDisplay}
+							secondaryDateline={
+								article.webPublicationSecondaryDateDisplay
+							}
+							isCommentable={article.isCommentable}
+							discussionApiUrl={article.config.discussionApiUrl}
+							shortUrlId={article.config.shortUrlId}
+							mainMediaElements={article.mainMediaElements}
+							webPublicationDate={article.webPublicationDate}
+						/>
+						{!!article.affiliateLinksDisclaimer && (
+							<AffiliateDisclaimer />
+						)}
+					</>
 				)}
 			</GridItem>
-			<GridItem area="body" layoutType="interactive">
+			<GridItem area="body" layoutType={layoutType}>
 				{/* Only show Listen to Article button on App landscape views */}
 				{isApps && (
 					<Hide until="leftCol">
-						<div
-							css={css`
-								margin-top: ${space[2]}px;
-							`}
-						>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
+						{!isVideo && (
+							<div
+								css={css`
+									margin-top: ${space[2]}px;
+								`}
 							>
-								<ListenToArticle articleId={article.pageId} />
-							</Island>
-						</div>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<ListenToArticle
+										articleId={article.pageId}
+									/>
+								</Island>
+							</div>
+						)}
 					</Hide>
 				)}
 				<ArticleContainer format={format}>
@@ -303,6 +320,10 @@ export const InteractiveGridV2 = (props: WebProps | AppProps) => {
 						shouldHideAds={article.shouldHideAds}
 						idApiUrl={article.config.idApiUrl}
 					/>
+					<MatchInfoContainer
+						isMatchReport={isFootballMatchReport}
+						footballMatchStatsUrl={footballMatchStatsUrl}
+					/>
 
 					{isApps && (
 						<Island
@@ -332,7 +353,7 @@ export const InteractiveGridV2 = (props: WebProps | AppProps) => {
 								}
 								tags={article.tags}
 								renderAds={renderAds}
-								isLabs={false}
+								isLabs={isLabs}
 								articleEndSlot={
 									!!article.config.switches.articleEndSlot
 								}
@@ -340,75 +361,93 @@ export const InteractiveGridV2 = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					)}
-					<div
-						css={css`
-							${grid.container}
+					<StraightLines
+						data-print-layout="hide"
+						count={4}
+						cssOverrides={css`
+							display: block;
 						`}
-					>
-						<div
-							css={css`
-								${grid.column.centre}
-							`}
-						>
-							<StraightLines
-								data-print-layout="hide"
-								count={4}
-								cssOverrides={css`
-									display: block;
-								`}
-								color={themePalette('--straight-lines')}
-							/>
-							<SubMeta
-								format={format}
-								subMetaKeywordLinks={
-									article.subMetaKeywordLinks
-								}
-								subMetaSectionLinks={
-									article.subMetaSectionLinks
-								}
-								pageId={article.pageId}
-								webUrl={article.webURL}
-								webTitle={article.webTitle}
-								showBottomSocialButtons={
-									article.showBottomSocialButtons &&
-									renderingTarget === 'Web'
-								}
-							/>
-						</div>
-					</div>
+						color={themePalette('--straight-lines')}
+					/>
+					<SubMeta
+						format={format}
+						subMetaKeywordLinks={article.subMetaKeywordLinks}
+						subMetaSectionLinks={article.subMetaSectionLinks}
+						pageId={article.pageId}
+						webUrl={article.webURL}
+						webTitle={article.webTitle}
+						showBottomSocialButtons={
+							article.showBottomSocialButtons &&
+							renderingTarget === 'Web'
+						}
+					/>
 				</ArticleContainer>
 			</GridItem>
-			<GridItem
-				area="right-column"
-				layoutType="interactive"
-				customCss={css`
-					padding-top: 6px;
-					padding-bottom: 0px;
-					z-index: 5;
-				`}
-			>
-				<Hide until="desktop">
-					<Island
-						priority="feature"
-						defer={{
-							until: 'visible',
-							// Provide a much higher value for the top margin for the intersection observer
-							// This is because the most viewed would otherwise only be lazy loaded when the
-							// bottom of the container intersects with the viewport
-							rootMargin: '700px 100px',
-						}}
-					>
-						<MostViewedRightWithAd
-							format={format}
-							isPaidContent={article.pageType.isPaidContent}
-							renderAds={isWeb && renderAds}
-							shouldHideReaderRevenue={
-								!!article.config.shouldHideReaderRevenue
-							}
-						/>
-					</Island>
-				</Hide>
-			</GridItem>
+			{layoutType !== 'interactive' && (
+				<GridItem
+					area="right-column"
+					layoutType={layoutType}
+					css={css`
+						padding-top: ${isMedia ? 0 : 6}px;
+						${from.desktop} {
+							padding-bottom: ${isMedia ? 41 : 0}px;
+						}
+					`}
+				>
+					<Hide until="desktop">
+						<Island
+							priority="feature"
+							defer={{
+								until: 'visible',
+								// Provide a much higher value for the top margin for the intersection observer
+								// This is because the most viewed would otherwise only be lazy loaded when the
+								// bottom of the container intersects with the viewport
+								rootMargin: '700px 100px',
+							}}
+						>
+							<MostViewedRightWithAd
+								format={format}
+								isPaidContent={article.pageType.isPaidContent}
+								renderAds={isWeb && renderAds}
+								shouldHideReaderRevenue={
+									!!article.config.shouldHideReaderRevenue
+								}
+							/>
+						</Island>
+					</Hide>
+				</GridItem>
+			)}
 		</article>
 	);
+};
+
+const MatchInfoContainer = ({
+	isMatchReport,
+	footballMatchStatsUrl,
+}: {
+	isMatchReport: boolean;
+	footballMatchStatsUrl: string | undefined;
+}) => {
+	if (isMatchReport && !!footballMatchStatsUrl) {
+		const parsedUrl = safeParseURL(footballMatchStatsUrl);
+		if (!parsedUrl.ok) {
+			log(
+				'dotcom',
+				new Error(
+					`Failed to parse match stats URL: ${footballMatchStatsUrl}`,
+				),
+			);
+
+			return null;
+		}
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMatchInfoWrapper
+					matchStatsUrl={footballMatchStatsUrl}
+				/>
+			</Island>
+		);
+	}
+
+	return null;
 };

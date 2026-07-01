@@ -11,7 +11,6 @@ import { HostedArticleLayout } from './HostedArticleLayout';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { HostedVideoLayout } from './HostedVideoLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
-import { InteractiveLayout } from './interactives/InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { PictureLayout } from './PictureLayout';
@@ -116,7 +115,7 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 			switch (article.design) {
 				case ArticleDesign.Interactive:
 					return (
-						<InteractiveLayout
+						<StandardLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -298,7 +297,7 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 			switch (article.design) {
 				case ArticleDesign.Interactive:
 					return (
-						<InteractiveLayout
+						<StandardLayout
 							article={article.frontendData}
 							NAV={NAV}
 							format={format}
