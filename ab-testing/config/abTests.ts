@@ -125,7 +125,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Holdback test, where variant is the 'holdback' group, to measure uplift in adding the mobile-sticky slot for Liveblogs articles in the US.",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-07-02",
+		expirationDate: "2026-07-22",
 		type: "client",
 		status: "ON",
 		audienceSize: 5 / 100,
