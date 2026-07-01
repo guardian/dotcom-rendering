@@ -111,6 +111,8 @@ export const StandardLayoutArticleGrid = ({
 		format.design === ArticleDesign.Audio;
 	const isShowcase = format.display === ArticleDisplay.Showcase;
 
+	const isInteractive = format.design === ArticleDesign.Interactive;
+
 	const isVideo = format.design === ArticleDesign.Video;
 
 	const footballMatchUrl =
@@ -125,7 +127,9 @@ export const StandardLayoutArticleGrid = ({
 		? 'media'
 		: isShowcase
 			? 'showcase'
-			: 'standard';
+			: isInteractive
+				? 'interactive'
+				: 'standard';
 
 	return (
 		<article
@@ -391,38 +395,40 @@ export const StandardLayoutArticleGrid = ({
 					/>
 				</ArticleContainer>
 			</GridItem>
-			<GridItem
-				area="right-column"
-				layoutType={layoutType}
-				css={css`
-					padding-top: ${isMedia ? 0 : 6}px;
-					${from.desktop} {
-						padding-bottom: ${isMedia ? 41 : 0}px;
-					}
-				`}
-			>
-				<Hide until="desktop">
-					<Island
-						priority="feature"
-						defer={{
-							until: 'visible',
-							// Provide a much higher value for the top margin for the intersection observer
-							// This is because the most viewed would otherwise only be lazy loaded when the
-							// bottom of the container intersects with the viewport
-							rootMargin: '700px 100px',
-						}}
-					>
-						<MostViewedRightWithAd
-							format={format}
-							isPaidContent={article.pageType.isPaidContent}
-							renderAds={isWeb && renderAds}
-							shouldHideReaderRevenue={
-								!!article.config.shouldHideReaderRevenue
-							}
-						/>
-					</Island>
-				</Hide>
-			</GridItem>
+			{layoutType !== 'interactive' && (
+				<GridItem
+					area="right-column"
+					layoutType={layoutType}
+					css={css`
+						padding-top: ${isMedia ? 0 : 6}px;
+						${from.desktop} {
+							padding-bottom: ${isMedia ? 41 : 0}px;
+						}
+					`}
+				>
+					<Hide until="desktop">
+						<Island
+							priority="feature"
+							defer={{
+								until: 'visible',
+								// Provide a much higher value for the top margin for the intersection observer
+								// This is because the most viewed would otherwise only be lazy loaded when the
+								// bottom of the container intersects with the viewport
+								rootMargin: '700px 100px',
+							}}
+						>
+							<MostViewedRightWithAd
+								format={format}
+								isPaidContent={article.pageType.isPaidContent}
+								renderAds={isWeb && renderAds}
+								shouldHideReaderRevenue={
+									!!article.config.shouldHideReaderRevenue
+								}
+							/>
+						</Island>
+					</Hide>
+				</GridItem>
+			)}
 		</article>
 	);
 };

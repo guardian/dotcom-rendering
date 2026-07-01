@@ -33,6 +33,7 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { InteractiveArticleGridDeprecated } from './interactives/InteractiveArticleGridDeprecated';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 import { StandardLayoutArticleGrid } from './StandardLayoutArticleGrid';
 
@@ -43,12 +44,12 @@ interface Props {
 	serverTime?: number;
 }
 
-interface WebProps extends Props {
+export interface WebProps extends Props {
 	NAV: NavType;
 	renderingTarget: 'Web';
 }
 
-interface AppProps extends Props {
+export interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
 
@@ -79,6 +80,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isCricketMatchReport =
 		format.design === ArticleDesign.MatchReport && !!cricketMatchUrl;
+
+	const interactiveLayoutSwitchoverDate = new Date('2024-06-01T00:00:00Z');
+	const publicationDate = new Date(article.webPublicationDate);
+	const isLegacyInteractive =
+		publicationDate < interactiveLayoutSwitchoverDate;
 
 	const showComments = article.isCommentable && !isPaidContent;
 
@@ -166,11 +172,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 				{/* This element is used to replace the article with the scorecard when the scorecard tab is clicked */}
 				<div id="article">
-					<StandardLayoutArticleGrid
-						article={article}
-						format={format}
-						renderingTarget={renderingTarget}
-					/>
+					{isLegacyInteractive ? (
+						<InteractiveArticleGridDeprecated {...props} />
+					) : (
+						<StandardLayoutArticleGrid
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					)}
 				</div>
 				{isWeb && renderAds && !isLabs && (
 					<Section
