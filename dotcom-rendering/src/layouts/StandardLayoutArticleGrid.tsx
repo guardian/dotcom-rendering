@@ -176,6 +176,7 @@ export const StandardLayoutArticleGrid = ({
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
 	);
+	const isInteractive = format.design === ArticleDesign.Interactive;
 
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
@@ -206,6 +207,7 @@ export const StandardLayoutArticleGrid = ({
 		orientation: mainMediaOrientation,
 		isMedia,
 		isShowcase,
+		isInteractive,
 	});
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
@@ -663,41 +665,43 @@ export const StandardLayoutArticleGrid = ({
 					/>
 				</ArticleContainer>
 			</GridItem>
-			<GridItem
-				area="right-column"
-				layoutType={layoutType}
-				css={css`
-					padding-top: ${isMedia ? 0 : 6}px;
-					${from.desktop} {
-						padding-bottom: ${isMedia ? 41 : 0}px;
-					}
-				`}
-			>
-				<Hide until="desktop">
-					<Island
-						priority="feature"
-						defer={{
-							until: 'visible',
-							// Provide a much higher value for the top margin for the intersection observer
-							// This is because the most viewed would otherwise only be lazy loaded when the
-							// bottom of the container intersects with the viewport
-							rootMargin: '700px 100px',
-						}}
-					>
-						<MostViewedRightWithAd
-							format={format}
-							isPaidContent={article.pageType.isPaidContent}
-							renderAds={isWeb && renderAds}
-							shouldHideReaderRevenue={
-								!!article.config.shouldHideReaderRevenue
-							}
-							shouldHideMostViewed={
-								format.design === ArticleDesign.Audio
-							}
-						/>
-					</Island>
-				</Hide>
-			</GridItem>
+			{layoutType !== 'interactive' && (
+				<GridItem
+					area="right-column"
+					layoutType={layoutType}
+					css={css`
+						padding-top: ${isMedia ? 0 : 6}px;
+						${from.desktop} {
+							padding-bottom: ${isMedia ? 41 : 0}px;
+						}
+					`}
+				>
+					<Hide until="desktop">
+						<Island
+							priority="feature"
+							defer={{
+								until: 'visible',
+								// Provide a much higher value for the top margin for the intersection observer
+								// This is because the most viewed would otherwise only be lazy loaded when the
+								// bottom of the container intersects with the viewport
+								rootMargin: '700px 100px',
+							}}
+						>
+							<MostViewedRightWithAd
+								format={format}
+								isPaidContent={article.pageType.isPaidContent}
+								renderAds={isWeb && renderAds}
+								shouldHideReaderRevenue={
+									!!article.config.shouldHideReaderRevenue
+								}
+								shouldHideMostViewed={
+									format.design === ArticleDesign.Audio
+								}
+							/>
+						</Island>
+					</Hide>
+				</GridItem>
+			)}
 		</article>
 	);
 };

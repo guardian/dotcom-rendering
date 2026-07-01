@@ -333,12 +333,14 @@ export const getLayoutType = ({
 	orientation,
 	isMedia,
 	isShowcase,
+	isInteractive,
 }: {
 	isImmersive: boolean;
 	isFeature: boolean;
 	orientation: 'portrait' | 'landscape' | 'square';
 	isMedia: boolean;
 	isShowcase: boolean;
+	isInteractive: boolean;
 }): LayoutType => {
 	if (isImmersive) {
 		if (orientation === 'portrait') {
@@ -349,5 +351,6 @@ export const getLayoutType = ({
 	}
 	if (isMedia) return 'media';
 	if (isShowcase) return 'showcase';
+	if (isInteractive) return 'interactive';
 	return 'standard';
 };
