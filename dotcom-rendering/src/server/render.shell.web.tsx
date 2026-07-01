@@ -28,6 +28,7 @@ const parseNav = (nav: FENavType): NavType => {
 
 export const renderShell = (
 	frontendData: FEShell,
+	name: string,
 ): { html: string; prefetchScripts: string[] } => {
 	const NAV = parseNav(frontendData.nav);
 
