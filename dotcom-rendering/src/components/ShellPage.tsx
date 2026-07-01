@@ -151,6 +151,7 @@ export const ShellPage = (props: Props) => {
 			{/* @ts-expect-error Fastly ESI namespaced tag is not part of React JSX types */}
 			<esi:include src="/esi/time" />
 			{/* <div dangerouslySetInnerHTML={{ __html: html }} /> */}
+			<div>Hello DCAR Sites shell!</div>
 
 			{isWeb && (
 				<>
