@@ -246,6 +246,18 @@ const postFormData = async (
 	});
 };
 
+const getErrorType = (error: unknown): string => {
+	if (error instanceof TypeError) {
+		return 'network-or-fetch';
+	}
+
+	if (error instanceof Error) {
+		return error.name || 'error';
+	}
+
+	return 'unknown';
+};
+
 const sendTracking = (
 	newsletterId: string,
 	eventDescription: NewsletterEventDescription,
@@ -383,13 +395,25 @@ export const SecureSignup = ({
 			clearSubscriptionCache();
 		}
 
+		const trackingDetails: Record<string, unknown> = {};
+
+		if (marketingOptInType) {
+			trackingDetails.marketingOptInType = marketingOptInType;
+		}
+
+		if (!response.ok) {
+			trackingDetails.responseStatus = response.status;
+		}
+
 		sendTracking(
 			newsletterId,
 			response.ok ? 'submission-confirmed' : 'submission-failed',
 			renderingTarget,
 			isSignedIn,
 			abTest,
-			marketingOptInType ? { marketingOptInType } : undefined,
+			Object.keys(trackingDetails).length > 0
+				? trackingDetails
+				: undefined,
 		);
 	};
 
@@ -438,6 +462,7 @@ export const SecureSignup = ({
 				renderingTarget,
 				isSignedIn,
 				abTest,
+				{ errorType: getErrorType(error) },
 			);
 			setErrorMessage(`Sorry, there was an error signing you up.`);
 			setIsWaitingForResponse(false);
