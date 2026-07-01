@@ -76,16 +76,16 @@ export const CricketMiniMatchStats = (props: Props) => {
 		);
 	}
 
+	if (data.notOutBatters == null) {
+		return null;
+	}
+
 	return (
 		<div css={containerCss}>
-			{data.notOutBatters != null && (
-				<CricketMatchStatNotOutBatters
-					notOutBatters={data.notOutBatters}
-				/>
-			)}
+			<CricketMatchStatNotOutBatters notOutBatters={data.notOutBatters} />
 
 			<LinkButton
-				href={'#'}
+				href={'#scorecard'}
 				size="small"
 				icon={<SvgArrowRightStraight />}
 				iconSide="right"
