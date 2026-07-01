@@ -147,6 +147,19 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
+		name: "commercial-full-width-hold-back",
+		description:
+			"Test to measure impact of adding full width to spacefinder",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-07-04",
+		type: "client",
+		status: "ON",
+		audienceSize: 5 / 100,
+		audienceSpace: "A",
+		groups: ["holdback", "control"],
+		shouldForceMetricsCollection: true,
+	},
+	{
 		name: "fronts-and-curation-loop-click-through",
 		description:
 			"Test impact of click to article via loop videos on fronts",
