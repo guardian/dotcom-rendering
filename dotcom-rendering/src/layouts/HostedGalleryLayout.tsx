@@ -140,9 +140,8 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 			) : null}
 
 			<main
-				css={{
-					backgroundColor: palette('--article-background'),
-				}}
+				data-layout="HostedGalleryLayout"
+				css={{ backgroundColor: palette('--article-background') }}
 			>
 				<header css={headerStyles}>
 					<MainMediaGallery
