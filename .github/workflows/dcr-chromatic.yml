@@ -47,7 +47,7 @@ jobs:
       - name: Chromatic - DCR
         env:
           NODE_OPTIONS: '--max_old_space_size=4096'
-        uses: chromaui/action@v17.4.1
+        uses: chromaui/action@v18.0.0
         if: |
           github.ref == 'refs/heads/main' ||
           (github.event_name == 'pull_request' &&
