@@ -437,5 +437,6 @@ export const getLayoutType = (
 	) {
 		return 'comment';
 	}
+	if (format.design === ArticleDesign.Interactive) return 'interactive';
 	return 'standard';
 };

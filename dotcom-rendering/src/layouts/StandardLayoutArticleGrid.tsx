@@ -814,7 +814,7 @@ export const StandardLayoutArticleGrid = ({
 					}
 				`}
 			>
-				{layoutType !== 'picture' && (
+				{layoutType !== 'picture' && layoutType !== 'interactive' && (
 					<Hide until="desktop">
 						<Island
 							priority="feature"
