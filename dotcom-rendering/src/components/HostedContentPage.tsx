@@ -75,9 +75,18 @@ export const HostedContentPage = (props: WebProps | AppProps) => {
 	const { darkModeAvailable } = useConfig();
 	const format = { design, display, theme };
 
+	const { branding } =
+		frontendData.commercialProperties[frontendData.editionId];
+
 	return (
 		<StrictMode>
-			<Global styles={rootStyles(format, darkModeAvailable)} />
+			<Global
+				styles={rootStyles(
+					format,
+					darkModeAvailable,
+					branding?.hostedCampaignColour,
+				)}
+			/>
 			{isWeb && <SkipTo id="maincontent" label="Skip to main content" />}
 			<Lightbox
 				format={format}
