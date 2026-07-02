@@ -20,6 +20,7 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.island';
 import { CricketMatchHeaderWrapper } from '../components/CricketMatchHeaderWrapper.island';
+import { CricketMiniMatchStatsWrapper } from '../components/CricketMiniMatchStatsWrapper.island';
 import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -270,6 +271,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	} = article;
 
 	const ab = useAB();
+	const isCricketRedesignEnabled = Boolean(
+		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
+	);
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -297,6 +301,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const cricketMatchUrl =
 		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
+
+	const cricketMatchStatsUrl =
+		article.matchType === 'CricketMatchType'
+			? article.matchStatsUrl
+			: undefined;
 
 	const hasKeyEvents = !!article.keyEvents.length;
 
@@ -589,10 +598,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								<GridItem area="media">
 									<div css={maxWidth}>
 										{!!cricketMatchUrl &&
-											!ab?.isUserInTestGroup(
-												'webx-cricket-redesign',
-												'enable',
-											) && (
+											!isCricketRedesignEnabled && (
 												<Island
 													priority="critical"
 													defer={{ until: 'visible' }}
@@ -707,6 +713,19 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											/>
 										</Island>
 									)}
+									{!!cricketMatchStatsUrl &&
+										isCricketRedesignEnabled && (
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<CricketMiniMatchStatsWrapper
+													matchStatsUrl={
+														cricketMatchStatsUrl
+													}
+												/>
+											</Island>
+										)}
 								</GridItem>
 								<GridItem area="body">
 									<div

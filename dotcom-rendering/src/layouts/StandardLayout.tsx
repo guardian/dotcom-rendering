@@ -154,9 +154,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
 	const cricketMatchUrl =
-		article.matchType === 'CricketMatchType'
-			? article.matchStatsUrl
-			: undefined;
+		article.matchType == 'CricketMatchType' ? article.matchUrl : undefined;
 
 	const isCricketMatchReport =
 		format.design === ArticleDesign.MatchReport && !!cricketMatchUrl;
