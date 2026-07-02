@@ -25,6 +25,29 @@ import type { FETrailType } from '../types/trails';
  * WARNING: run `gen-schema` task if changing this to update the associated JSON
  * schema definition.
  */
+
+type IabSegment = {
+	id: string;
+	name: string;
+};
+
+type IabTaxonomy = {
+	taxonomy: string;
+	segtax: number;
+	segments: IabSegment[];
+};
+
+type IabModel = {
+	model_id: string;
+	model_version: string;
+	description: string;
+	taxonomies: IabTaxonomy[];
+};
+
+export type IabTaxonomyCapiData = {
+	content_id: string;
+	models: IabModel[];
+};
 export interface FEArticle {
 	headline: string;
 	standfirst: string;
@@ -39,6 +62,7 @@ export interface FEArticle {
 	byline?: string;
 	/** @deprecated - will be removed in the next model version */
 	author?: unknown;
+	iabTaxonomyTags?: IabTaxonomyCapiData;
 
 	/**
 	 * @TJS-format date-time
