@@ -21,6 +21,10 @@ import { useEffect, useRef, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import {
+	getErrorType,
+	getResponseErrorDescription,
+} from '../lib/newsletterSignupFailureDetails';
+import {
 	getEffectiveMarketingOptIn,
 	getMarketingOptInType,
 } from '../lib/newsletter-marketing-opt-in';
@@ -245,19 +249,6 @@ const postFormData = async (
 		},
 	});
 };
-
-const getErrorType = (error: unknown): string => {
-	if (error instanceof TypeError) {
-		return 'network-or-fetch';
-	}
-
-	if (error instanceof Error) {
-		return error.name || 'error';
-	}
-
-	return 'unknown';
-};
-
 const sendTracking = (
 	newsletterId: string,
 	eventDescription: NewsletterEventDescription,
@@ -403,6 +394,11 @@ export const SecureSignup = ({
 
 		if (!response.ok) {
 			trackingDetails.responseStatus = response.status;
+			const errorDescription =
+				await getResponseErrorDescription(response);
+			if (errorDescription) {
+				trackingDetails.errorDescription = errorDescription;
+			}
 		}
 
 		sendTracking(
