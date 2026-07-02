@@ -87,15 +87,6 @@ const numericCellStyles = css`
 	text-align: left;
 `;
 
-const fixedColStyles = css`
-	flex-shrink: 0;
-`;
-
-const batColWidthStyles = css`
-	${fixedColStyles}
-	width: 42px;
-`;
-
 const howOutStyles = css`
 	color: ${palette('--football-match-info-team-number')};
 `;
@@ -106,37 +97,19 @@ export const CricketMatchStatNotOutBatters = ({
 	notOutBatters: Batter[];
 }) => {
 	const currentBatters = notOutBatters.filter(
-		(batter) => !batter.out && (batter.onStrike || batter.nonStrike),
+		(batter) => batter.onStrike || batter.nonStrike,
 	);
 	return (
 		<div css={[containerCss, desktopPaddingCss]}>
-			<span
-				css={css`
-					${visuallyHidden}
-				`}
-			>
-				Not Out Batters
-			</span>
+			<span css={visuallyHiddenStyles}>Current Batters</span>
 			<table css={tableStyles}>
 				<thead>
 					<tr>
 						<th css={tableHeadCellStyles}>Batter</th>
-						<th
-							css={[
-								tableHeadCellStyles,
-								numericCellStyles,
-								batColWidthStyles,
-							]}
-						>
+						<th css={[tableHeadCellStyles, numericCellStyles]}>
 							Runs
 						</th>
-						<th
-							css={[
-								tableHeadCellStyles,
-								numericCellStyles,
-								batColWidthStyles,
-							]}
-						>
+						<th css={[tableHeadCellStyles, numericCellStyles]}>
 							Balls
 						</th>
 					</tr>
@@ -158,22 +131,10 @@ export const CricketMatchStatNotOutBatters = ({
 										</div>
 									</div>
 								</th>
-								<td
-									css={[
-										tableCellStyles,
-										numericCellStyles,
-										batColWidthStyles,
-									]}
-								>
+								<td css={[tableCellStyles, numericCellStyles]}>
 									{batter.runs}
 								</td>
-								<td
-									css={[
-										tableCellStyles,
-										numericCellStyles,
-										batColWidthStyles,
-									]}
-								>
+								<td css={[tableCellStyles, numericCellStyles]}>
 									{batter.ballsFaced}
 								</td>
 							</tr>

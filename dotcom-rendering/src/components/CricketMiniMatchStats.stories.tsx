@@ -41,7 +41,7 @@ const meta = preview.meta({
 });
 
 const feMatchStatsSummaryData: FECricketMatchStatsSummary = {
-	status: 'In Play',
+	status: 'abandoned',
 	currentBattingTeam: 'England',
 	notOutBatters: [
 		{
@@ -66,6 +66,18 @@ const feMatchStatsSummaryData: FECricketMatchStatsSummary = {
 			out: false,
 			howOut: 'not out',
 			onStrike: true,
+			nonStrike: false,
+		},
+		{
+			name: 'Devon Conway',
+			order: 2,
+			ballsFaced: 224,
+			runs: 157,
+			fours: 22,
+			sixes: 3,
+			out: false,
+			howOut: 'not out',
+			onStrike: false,
 			nonStrike: false,
 		},
 	],

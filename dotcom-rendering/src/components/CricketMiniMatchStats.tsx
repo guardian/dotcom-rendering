@@ -105,12 +105,15 @@ export const CricketMiniMatchStats = (props: Props) => {
 	);
 };
 
+const isMatchOver = (matchStatus: string | undefined) =>
+	matchStatus === 'result' || matchStatus === 'abandoned';
+
 const swrOptions = (
 	refreshInterval: number,
 ): SWRConfiguration<CricketMatchStatsSummary> => ({
 	errorRetryCount: 1,
 	refreshInterval: (latestData: CricketMatchStatsSummary | undefined) =>
-		latestData?.status === 'FT' ? 0 : refreshInterval,
+		isMatchOver(latestData?.status) ? 0 : refreshInterval,
 });
 
 const fetcher =
