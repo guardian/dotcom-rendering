@@ -21,13 +21,13 @@ import { useEffect, useRef, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import {
-	getErrorType,
-	getResponseErrorDescription,
-} from '../lib/newsletterSignupFailureDetails';
-import {
 	getEffectiveMarketingOptIn,
 	getMarketingOptInType,
 } from '../lib/newsletter-marketing-opt-in';
+import {
+	getErrorType,
+	getResponseErrorDescription,
+} from '../lib/newsletterSignupFailureDetails';
 import {
 	EVENT_DESCRIPTION_TO_ACTION,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
