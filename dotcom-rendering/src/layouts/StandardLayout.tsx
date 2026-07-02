@@ -46,6 +46,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.island';
 import { grid } from '../grid';
+import { getAgeWarning } from '../lib/age-warning';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -65,6 +66,7 @@ import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import {
 	type Area,
+	getLayoutType,
 	gridItemCss,
 	type LayoutType,
 } from './lib/articleArrangements';
@@ -121,6 +123,23 @@ interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
 
+/**
+ * Works out the orientation of an image from its Guardian media URL, which
+ * encodes the crop dimensions in the path (e.g. `/1000_600_800_480/`).
+ * Falls back to 'landscape' if the URL doesn't match the expected pattern.
+ */
+const getImageOrientation = (
+	url: string,
+): 'portrait' | 'landscape' | 'square' => {
+	const match = url.match(/\/\d+_\d+_(\d+)_(\d+)\/\d+\.\w+$/);
+	if (!match) return 'landscape';
+	const [, width, height] = match.map(Number);
+	if (width == null || height == null) return 'landscape';
+	if (height > width) return 'portrait';
+	if (width > height) return 'landscape';
+	return 'square';
+};
+
 export const StandardLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget, serverTime } = props;
 	const {
@@ -164,10 +183,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isMedia =
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
+	const isShowcase = format.display === ArticleDisplay.Showcase;
+	const isImmersive = format.display === ArticleDisplay.Immersive;
+	const isFeature = format.design === ArticleDesign.Feature;
 
 	const isVideo = format.design === ArticleDesign.Video;
-
-	const isShowcase = format.display === ArticleDisplay.Showcase;
 
 	const showComments = article.isCommentable && !isPaidContent;
 
@@ -181,11 +201,36 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const layoutType: LayoutType = isMedia
-		? 'media'
-		: isShowcase
-			? 'showcase'
-			: 'standard';
+	const firstMainMediaElement = article.mainMediaElements[0];
+	const mainMediaUrl: string | undefined =
+		firstMainMediaElement?._type ===
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+			? firstMainMediaElement.media.allImages[0]?.url
+			: undefined;
+
+	const mainMediaOrientation =
+		mainMediaUrl != null ? getImageOrientation(mainMediaUrl) : 'landscape';
+
+	const layoutType = getLayoutType({
+		isImmersive,
+		isFeature,
+		orientation: mainMediaOrientation,
+		isVideo,
+		isShowcase,
+	});
+	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
+
+	const isImmersivePortrait =
+		layoutType === 'immersivePortraitDefault' ||
+		layoutType === 'immersivePortraitFeature';
+	const isImmersiveLandscape =
+		layoutType === 'immersiveLandscapeDefault' ||
+		layoutType === 'immersiveLandscapeFeature';
+
+	const ageWarning = getAgeWarning(
+		article.tags,
+		article.webPublicationDateDeprecated,
+	);
 
 	return (
 		<>
@@ -254,7 +299,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout={`${ArticleDisplay[format.display]}Layout`}>
+			<main data-layout={contentLayoutName}>
 				{isApps && renderAds && (
 					<Island priority="critical">
 						<AdPortals />
@@ -277,12 +322,43 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							!isLabs &&
 								css`
 									${from.leftCol} {
-										${grid.centreRule(3)}
+										${grid.centreRule(
+											isImmersivePortrait
+												? 4
+												: isImmersiveLandscape
+													? 3
+													: 1,
+										)}
+									}
+								`,
+							isImmersivePortrait &&
+								css`
+									grid-template-rows: 0.25fr 1fr auto;
+								`,
+							isImmersiveLandscape &&
+								css`
+									${from.desktop} {
+										grid-template-rows: auto auto ${ageWarning
+												? '130px'
+												: '90px'};
 									}
 								`,
 						]}
 					>
-						<GridItem area="media" layoutType={layoutType}>
+						<GridItem
+							area="media"
+							layoutType={layoutType}
+							css={
+								isImmersiveLandscape
+									? css`
+											${from.desktop} {
+												margin-left: -20px;
+												margin-right: -20px;
+											}
+										`
+									: undefined
+							}
+						>
 							<MainMedia
 								format={format}
 								elements={article.mainMediaElements}
@@ -298,15 +374,17 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								hideCaption={isMedia}
 								shouldHideAds={article.shouldHideAds}
 								contentType={article.contentType}
-								contentLayout={`${
-									ArticleDisplay[format.display]
-								}Layout`}
+								contentLayout={contentLayoutName}
+								articleArrangement={layoutType}
 							/>
 						</GridItem>
 						<GridItem
 							area="title"
 							layoutType={layoutType}
 							element="aside"
+							css={css`
+								z-index: 100;
+							`}
 						>
 							<ArticleTitle
 								format={format}
@@ -317,7 +395,28 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								isMatch={!!footballMatchUrl}
 							/>
 						</GridItem>
-						<GridItem area="headline" layoutType={layoutType}>
+						<GridItem
+							area="headline"
+							layoutType={layoutType}
+							css={
+								layoutType === 'immersivePortraitDefault'
+									? css`
+											${from.desktop} {
+												border-bottom: 1px solid
+													${themePalette(
+														'--article-border',
+													)};
+												border-top: 1px solid
+													${themePalette(
+														'--article-border',
+													)};
+											}
+										`
+									: css`
+											z-index: 20;
+										`
+							}
+						>
 							<ArticleHeadline
 								format={format}
 								headlineString={article.headline}
@@ -339,19 +438,32 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							area="meta"
 							layoutType={layoutType}
 							element="aside"
+							css={
+								layoutType === 'immersivePortraitDefault'
+									? css`
+											${from.leftCol} {
+												margin-right: -10px;
+											}
+										`
+									: undefined
+							}
 						>
-							<div css={stretchLines}>
-								{isWeb &&
-								format.theme === ArticleSpecial.Labs &&
-								format.design !== ArticleDesign.Video ? (
-									<GuardianLabsLines />
-								) : (
-									<DecideLines
-										format={format}
-										color={themePalette('--article-border')}
-									/>
-								)}
-							</div>
+							{layoutType !== 'immersivePortraitDefault' && (
+								<div css={stretchLines}>
+									{isWeb &&
+									format.theme === ArticleSpecial.Labs &&
+									format.design !== ArticleDesign.Video ? (
+										<GuardianLabsLines />
+									) : (
+										<DecideLines
+											format={format}
+											color={themePalette(
+												'--article-border',
+											)}
+										/>
+									)}
+								</div>
+							)}
 							{isApps ? (
 								<>
 									<Hide from="leftCol">
@@ -430,6 +542,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										secondaryDateline={
 											article.webPublicationSecondaryDateDisplay
 										}
+										webPublicationDate={
+											article.webPublicationDate
+										}
 										isCommentable={article.isCommentable}
 										discussionApiUrl={
 											article.config.discussionApiUrl
@@ -437,9 +552,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										shortUrlId={article.config.shortUrlId}
 										mainMediaElements={
 											article.mainMediaElements
-										}
-										webPublicationDate={
-											article.webPublicationDate
 										}
 									/>
 									{!!article.affiliateLinksDisclaimer && (
@@ -622,6 +734,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						</GridItem>
 					</article>
 				</div>
+
 				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
@@ -825,9 +938,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					{renderAds && (
-						<MobileStickyContainer data-print-layout="hide" />
-					)}
+					<MobileStickyContainer data-print-layout="hide" />
 				</>
 			)}
 
