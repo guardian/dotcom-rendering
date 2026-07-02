@@ -5,6 +5,8 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { BackToTop } from '../components/BackToTop';
+import { CallToActionButton } from '../components/CallToActionAtom';
 import { GalleryImage } from '../components/GalleryImage';
 import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
@@ -51,9 +53,13 @@ const headerStyles = css`
 	}
 `;
 
-const shareButtonStyles = css`
+const metaStyles = css`
 	${grid.column.centre}
+	padding: ${space[1]}px;
 	padding-bottom: ${space[6]}px;
+	display: flex;
+	flex-wrap: wrap;
+
 	${from.tablet} {
 		position: relative;
 		&::before {
@@ -67,10 +73,36 @@ const shareButtonStyles = css`
 		}
 	}
 
-	& button {
+	& > * {
 		margin-top: ${space[4]}px;
-		padding: ${space[1]}px;
 	}
+`;
+
+const bttStyles = css`
+	${grid.paddedContainer}
+	${grid.outerRules()}
+	background-color: ${palette('--article-inner-background')};
+`;
+
+const bttPosition = css`
+	${grid.column.all}
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+	padding: 0 ${space[3]}px ${space[4]}px;
+
+	${from.tablet} {
+		${grid.column.centre}
+		padding: 0 0 ${space[4]}px;
+	}
+
+	${from.desktop} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+`;
+
+const ctaButtonStyles = css`
+	margin-right: ${space[3]}px;
 `;
 
 export const HostedGalleryLayout = (props: WebProps | AppProps) => {
@@ -79,6 +111,13 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 	const { commercialProperties, editionId } = frontendData;
 
 	const { branding } = commercialProperties[editionId];
+
+	// The CTA block element is rendered separately as a button
+	const cta = frontendData.blocks[0]?.elements.find(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.CallToActionAtomBlockElement',
+	);
 
 	return (
 		<>
@@ -101,9 +140,8 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 			) : null}
 
 			<main
-				css={{
-					backgroundColor: palette('--article-background'),
-				}}
+				data-layout="HostedGalleryLayout"
+				css={{ backgroundColor: palette('--article-background') }}
 			>
 				<header css={headerStyles}>
 					<MainMediaGallery
@@ -126,7 +164,18 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					/>
 
 					{renderingTarget === 'Web' && (
-						<div data-print-layout="hide" css={shareButtonStyles}>
+						<div data-print-layout="hide" css={metaStyles}>
+							{cta?.url && (
+								<div css={ctaButtonStyles}>
+									<CallToActionButton
+										linkUrl={cta.url}
+										accentColor={
+											branding?.hostedCampaignColour
+										}
+										buttonText={cta.btnText}
+									/>
+								</div>
+							)}
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
@@ -148,6 +197,11 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					pageId={frontendData.pageId}
 					webTitle={frontendData.webTitle}
 				/>
+				<div css={bttStyles}>
+					<div css={bttPosition}>
+						<BackToTop format={format} />
+					</div>
+				</div>
 			</main>
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<OnwardsUpper
@@ -196,6 +250,8 @@ const GalleryBody = (props: {
 						webTitle={props.webTitle}
 						renderingTarget={props.renderingTarget}
 						key={element.elementId}
+						// Pass the total number of images to include in the image caption (e.g. 1/5, 2/5, etc.)
+						imagesLength={props.bodyElements.length}
 					/>
 				);
 			} else {

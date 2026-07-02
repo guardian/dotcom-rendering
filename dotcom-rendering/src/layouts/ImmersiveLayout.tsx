@@ -1001,10 +1001,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						</Island>
 					</BannerWrapper>
 					{renderAds && (
-						<MobileStickyContainer
-							contentType={article.contentType}
-							pageId={article.pageId}
-						/>
+						<MobileStickyContainer data-print-layout="hide" />
 					)}
 				</>
 			)}

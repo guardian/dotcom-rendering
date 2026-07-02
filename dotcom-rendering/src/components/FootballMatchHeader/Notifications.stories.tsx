@@ -1,6 +1,10 @@
+import { fn } from 'storybook/test';
 import { gridContainerDecorator } from '../../../.storybook/decorators/gridDecorators';
 import preview from '../../../.storybook/preview';
-import type { MatchNotificationsClient } from '../../lib/bridgetApi';
+import type {
+	LiveActivitiesClient,
+	MatchNotificationsClient,
+} from '../../lib/bridgetApi';
 import { palette } from '../../palette';
 import { NotificationsToggle } from '../NotificationsToggle.stories';
 import { background } from './colours';
@@ -11,7 +15,34 @@ const meta = preview.meta({
 	component: Notifications,
 });
 
-export const Fixture = meta.story({
+const mockLiveActivitiesClient = (
+	initFollowing: boolean,
+	isAvailable: boolean,
+): LiveActivitiesClient => {
+	let following = initFollowing;
+
+	return {
+		isAvailable: fn(() => {
+			return Promise.resolve(isAvailable);
+		}),
+
+		follow: fn(() => {
+			following = true;
+			return Promise.resolve(true);
+		}),
+
+		unfollow: fn(() => {
+			following = false;
+			return Promise.resolve(true);
+		}),
+
+		isFollowing: fn(() => {
+			return Promise.resolve(following);
+		}),
+	};
+};
+
+export const FixtureLiveActivity = meta.story({
 	args: {
 		match: FixtureWeb.input.args.initialData.match,
 		edition: 'UK',
@@ -19,7 +50,7 @@ export const Fixture = meta.story({
 		matchNotificationsClient:
 			FixtureWeb.input.args.matchNotificationsClient,
 		environmentClient: FixtureWeb.input.args.environmentClient,
-		liveActivitiesClient: FixtureWeb.input.args.liveActivitiesClient,
+		liveActivitiesClient: mockLiveActivitiesClient(false, true),
 	},
 	decorators: [gridContainerDecorator],
 	parameters: {
@@ -33,20 +64,26 @@ export const Fixture = meta.story({
 	},
 });
 
-export const Live = Fixture.extend({
+export const FixtureNotifications = FixtureLiveActivity.extend({
+	args: {
+		liveActivitiesClient: mockLiveActivitiesClient(false, false),
+	},
+});
+
+export const LiveLiveActivity = FixtureLiveActivity.extend({
 	args: {
 		edition: 'AU',
 		match: {
-			...Fixture.input.args.match,
+			...FixtureLiveActivity.input.args.match,
 			kind: 'Live',
 			status: 'HT',
 			homeTeam: {
-				...Fixture.input.args.match.homeTeam,
+				...FixtureLiveActivity.input.args.match.homeTeam,
 				score: 1,
 				scorers: [],
 			},
 			awayTeam: {
-				...Fixture.input.args.match.awayTeam,
+				...FixtureLiveActivity.input.args.match.awayTeam,
 				score: 0,
 				scorers: [],
 			},
@@ -61,25 +98,41 @@ export const Live = Fixture.extend({
 	},
 });
 
+export const LiveNotifications = LiveLiveActivity.extend({
+	args: {
+		liveActivitiesClient: mockLiveActivitiesClient(false, false),
+	},
+});
+
 /**
- * This should be blank. You can't sign up for notifications once a match is
+ * This should be blank. You can't sign up for live activities once a match is
  * over.
  */
-export const Result = Live.extend({
+export const ResultLiveActivity = LiveLiveActivity.extend({
 	args: {
 		edition: 'US',
 		match: {
-			...Live.input.args.match,
+			...LiveLiveActivity.input.args.match,
 			kind: 'Result',
 		},
 	},
 });
 
 /**
- * When the user already has team notifications for one of the teams, the app
- * returns `isAvailable: false` so we show a message instead of the toggle.
+ * This should be blank. You can't sign up for notifications once a match is
+ * over.
  */
-export const Unavailable = Fixture.extend({
+export const ResultNotifications = ResultLiveActivity.extend({
+	args: {
+		liveActivitiesClient: mockLiveActivitiesClient(false, false),
+	},
+});
+
+/**
+ * Even if a user is following a team, we should allow them to control the live
+ * activity here.
+ */
+export const FollowingTeamLiveActivity = FixtureLiveActivity.extend({
 	args: {
 		matchNotificationsClient: {
 			isAvailable: () =>
@@ -89,5 +142,16 @@ export const Unavailable = Fixture.extend({
 						'Notifications for this match are on because you follow Arsenal. Turn off anytime in Settings > Notifications',
 				}),
 		} satisfies MatchNotificationsClient,
+	},
+});
+
+/**
+ * When the user already has team notifications for one of the teams, the app
+ * returns `isAvailable: false` so we show a message instead of the toggle.
+ */
+export const FollowingTeamNotifications = FixtureNotifications.extend({
+	args: {
+		matchNotificationsClient:
+			FollowingTeamLiveActivity.input.args.matchNotificationsClient,
 	},
 });

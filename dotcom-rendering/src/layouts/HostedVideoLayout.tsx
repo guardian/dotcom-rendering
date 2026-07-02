@@ -26,7 +26,6 @@ import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { overridePaletteColours } from './HostedArticleLayout';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -206,10 +205,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			) : null}
 
-			<main
-				data-layout="HostedVideoLayout"
-				css={overridePaletteColours(branding?.hostedCampaignColour)}
-			>
+			<main data-layout="HostedVideoLayout">
 				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
 						<MainMedia
