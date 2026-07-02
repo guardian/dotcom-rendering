@@ -156,6 +156,16 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
+		shouldReportToOphan: () => {
+			const flashingElements = window.localStorage.getItem(
+				"gu.prefs.accessibility.flashing-elements",
+			);
+			const autoplayVideo = window.localStorage.getItem(
+				"gu.prefs.accessibility.autoplay-video",
+			);
+			/* Don't report if either preference has been disabled as videos will not autoplay*/
+			return flashingElements !== "false" && autoplayVideo !== "false";
+		},
 	},
 	{
 		name: "martech-admiral-adblock",
