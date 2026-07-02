@@ -3,7 +3,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import { getLiveblogAdPositions } from '../lib/getLiveblogAdPositions';
 import type { Block } from '../types/blocks';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import { AdPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';
@@ -18,7 +18,6 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-	abTests: ServerSideTests;
 	switches: Switches;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
@@ -43,7 +42,6 @@ export const LiveBlogBlocksAndAdverts = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
-	abTests,
 	switches,
 	isAdFreeUser,
 	isSensitive,
@@ -67,7 +65,6 @@ export const LiveBlogBlocksAndAdverts = ({
 				host={host}
 				ajaxUrl={ajaxUrl}
 				isLiveUpdate={isLiveUpdate}
-				abTests={abTests}
 				switches={switches}
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
