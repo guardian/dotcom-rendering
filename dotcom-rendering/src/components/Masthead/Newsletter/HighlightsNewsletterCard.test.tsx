@@ -238,6 +238,19 @@ describe('HighlightsNewsletterCard', () => {
 		);
 	});
 
+	it('sets data-modal-component-id on the link to match the Ophan modal component ID', () => {
+		renderCard();
+
+		const link = screen.getByRole('link', {
+			name: defaultProps.headlineText,
+		});
+
+		expect(link).toHaveAttribute(
+			'data-modal-component-id',
+			`highlights-modal-${defaultProps.newsletter.identityName}`,
+		);
+	});
+
 	it('falls back to trail image when newsletter image metadata is absent', () => {
 		renderCard({
 			newsletter: {
