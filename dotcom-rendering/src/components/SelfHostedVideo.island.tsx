@@ -319,6 +319,7 @@ type Props = {
 		isExternalLink: boolean;
 	};
 	isInLoopClickTestVariant?: boolean;
+	isInArticle?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -351,6 +352,7 @@ export const SelfHostedVideo = ({
 	restrictHeightOnDesktop = false,
 	cardLink,
 	isInLoopClickTestVariant,
+	isInArticle = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -1075,9 +1077,13 @@ export const SelfHostedVideo = ({
 
 	return (
 		<figure
-			css={css`
-				margin-bottom: ${space[3]}px;
-			`}
+			css={
+				isInArticle
+					? css`
+							margin-bottom: ${space[3]}px;
+						`
+					: undefined
+			}
 			ref={videoContainerRef}
 			className={`video-container ${videoStyleFormat} ${
 				role === 'immersive' ? 'element-video-immersive' : ''

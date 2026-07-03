@@ -70,6 +70,7 @@ export const SelfHostedVideoInArticle = ({
 				restrictHeightOnDesktop={
 					isVerticalVideo && !isInteractive(format.design)
 				}
+				isInArticle={true}
 			/>
 		</Island>
 	);
