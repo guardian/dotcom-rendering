@@ -1071,13 +1071,18 @@ export const SelfHostedVideo = ({
 		}
 	}
 
+	const videoStyleFormat = videoStyle.toLocaleLowerCase();
+
 	return (
 		<figure
+			css={css`
+				margin-bottom: ${space[3]}px;
+			`}
 			ref={videoContainerRef}
-			className={`video-container ${videoStyle.toLocaleLowerCase()} ${
+			className={`video-container ${videoStyleFormat} ${
 				role === 'immersive' ? 'element-video-immersive' : ''
 			}`}
-			data-component="gu-video-loop"
+			data-component={`gu-video-${videoStyleFormat}`}
 		>
 			<div
 				ref={setNode}
