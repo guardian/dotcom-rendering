@@ -194,7 +194,14 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		const { stack: guStack, region, account } = this;
-		const { guApp, stage, instanceType, scaling, domainName } = props;
+		const {
+			guApp,
+			stage,
+			instanceType,
+			scaling,
+			domainName,
+			imageIdentifier,
+		} = props;
 
 		const artifactsBucket =
 			GuDistributionBucketParameter.getInstance(this).valueAsString;
@@ -262,6 +269,30 @@ export class RenderingCDKStack extends CDKStack {
 					artifactsBucket,
 				}),
 			},
+
+			// Provision ECS resources only when `imageIdentifier` has been provided
+			...(imageIdentifier == null
+				? {}
+				: {
+						ecsProps: {
+							repositoryName: 'guardian/dotcom-rendering',
+							imageIdentifier,
+
+							// TODO tune these values
+							memoryLimitMiB: 2048,
+							cpu: 1024,
+							scaling: {
+								minimumTasks: 1,
+								maximumTasks: 2,
+							},
+						},
+
+						// Route all traffic to EC2
+						targetGroupWeights: {
+							ec2: 1,
+							ecs: 0,
+						},
+					}),
 		});
 
 		/**
