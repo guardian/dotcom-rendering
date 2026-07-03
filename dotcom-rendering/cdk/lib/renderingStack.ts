@@ -38,6 +38,16 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 			};
 		};
 	};
+
+	/**
+	 * Which image to run.
+	 * This should be the image digest (e.g. 'sha256:abc123') to ensure immutable deployments.
+	 *
+	 * @note Currently optional to control which services run in an EC2-ECS hybrid mode, or EC2-only.
+	 *
+	 * @see https://docs.docker.com/dhi/core-concepts/digests
+	 */
+	imageIdentifier?: string;
 }
 
 const addCPUStepScalingPolicy = (

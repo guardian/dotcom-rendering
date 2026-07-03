@@ -56,11 +56,10 @@ describe('The RenderingCDKStack', () => {
 	it('matches the snapshot for Tag Page Rendering CODE (uses ECS)', () => {
 		const app = new App();
 
-		const stack = new RenderingCDKStack(
-			app,
-			'TagPageRendering-CODE',
-			TagPageRenderingPropsCODE,
-		);
+		const stack = new RenderingCDKStack(app, 'TagPageRendering-CODE', {
+			...TagPageRenderingPropsCODE,
+			imageIdentifier: 'sha256:12345',
+		});
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();
 	});
