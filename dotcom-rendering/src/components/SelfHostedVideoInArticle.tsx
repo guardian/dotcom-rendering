@@ -1,5 +1,3 @@
-import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
 import type { FEAspectRatio } from '../frontend/feFront';
 import { isInteractive } from '../layouts/lib/interactiveLegacyStyling';
 import type { ArticleFormat } from '../lib/articleFormat';
@@ -12,10 +10,6 @@ import type { MediaAtomBlockElement, RoleType } from '../types/content';
 import type { VideoPlayerFormat } from '../types/mainMedia';
 import { Island } from './Island';
 import { SelfHostedVideo } from './SelfHostedVideo.island';
-
-const containerStyles = css`
-	margin-bottom: ${space[3]}px;
-`;
 
 type SelfHostedVideoInArticleProps = {
 	element: MediaAtomBlockElement;
@@ -49,39 +43,34 @@ export const SelfHostedVideoInArticle = ({
 	}
 
 	return (
-		<div css={containerStyles}>
-			<Island priority="critical" defer={{ until: 'visible' }}>
-				<SelfHostedVideo
-					atomId={element.id}
-					fallbackImage={posterImageUrl}
-					fallbackImageAlt={caption}
-					fallbackImageAspectRatio={
-						(firstVideoSource?.aspectRatio ??
-							'5:4') as FEAspectRatio
-					}
-					fallbackImageLoading="lazy"
-					fallbackImageSize="small"
-					aspectRatio={aspectRatio}
-					linkTo="Article-embed-MediaAtomBlockElement"
-					posterImage={posterImageUrl}
-					posterImageAspectRatio={
-						firstVideoSource?.aspectRatio ?? '5:4'
-					}
-					sources={sources}
-					subtitleSize="medium"
-					subtitleSource={getSubtitleAsset(element.assets)}
-					videoStyle={videoStyle}
-					uniqueId={element.id}
-					caption={caption}
-					format={format}
-					isMainMedia={isMainMedia}
-					role={role}
-					preventAutoplay={videoStyle === 'Default'}
-					restrictHeightOnDesktop={
-						isVerticalVideo && !isInteractive(format.design)
-					}
-				/>
-			</Island>
-		</div>
+		<Island priority="critical" defer={{ until: 'visible' }}>
+			<SelfHostedVideo
+				atomId={element.id}
+				fallbackImage={posterImageUrl}
+				fallbackImageAlt={caption}
+				fallbackImageAspectRatio={
+					(firstVideoSource?.aspectRatio ?? '5:4') as FEAspectRatio
+				}
+				fallbackImageLoading="lazy"
+				fallbackImageSize="small"
+				aspectRatio={aspectRatio}
+				linkTo="Article-embed-MediaAtomBlockElement"
+				posterImage={posterImageUrl}
+				posterImageAspectRatio={firstVideoSource?.aspectRatio ?? '5:4'}
+				sources={sources}
+				subtitleSize="medium"
+				subtitleSource={getSubtitleAsset(element.assets)}
+				videoStyle={videoStyle}
+				uniqueId={element.id}
+				caption={caption}
+				format={format}
+				isMainMedia={isMainMedia}
+				role={role}
+				preventAutoplay={videoStyle === 'Default'}
+				restrictHeightOnDesktop={
+					isVerticalVideo && !isInteractive(format.design)
+				}
+			/>
+		</Island>
 	);
 };
