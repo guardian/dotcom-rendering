@@ -1,5 +1,6 @@
 import { App } from 'aws-cdk-lib';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
+import type { RenderingCDKStackProps } from '../lib/renderingStack';
 import { RenderingCDKStack } from '../lib/renderingStack';
 
 const cdkApp = new App();
@@ -96,13 +97,20 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 });
 
 /** Tag pages */
-new RenderingCDKStack(cdkApp, 'TagPageRendering-CODE', {
+export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 	guApp: 'tag-page-rendering',
 	stage: 'CODE',
 	domainName: 'tag-page-rendering.code.dev-guardianapis.com',
 	scaling: { minimumInstances: 1, maximumInstances: 3 },
 	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
-});
+};
+
+new RenderingCDKStack(
+	cdkApp,
+	'TagPageRendering-CODE',
+	TagPageRenderingPropsCODE,
+);
+
 new RenderingCDKStack(cdkApp, 'TagPageRendering-PROD', {
 	guApp: 'tag-page-rendering',
 	stage: 'PROD',
