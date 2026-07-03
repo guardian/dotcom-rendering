@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { space, textSansBold15 } from '@guardian/source/foundations';
 import { getZIndex } from '../lib/getZIndex';
+import { generateImageURL } from '../lib/image';
 import { palette } from '../palette';
 import type { TrailType } from '../types/trails';
 
@@ -65,8 +66,12 @@ export const HostedContentOnwardsCard = ({
 					<picture>
 						<img
 							alt={trail.image.altText}
-							src={trail.image.src}
-							style={{ width: isGalleryPage ? '200px' : '120px' }}
+							src={generateImageURL({
+								mainImage: trail.image.src,
+								imageWidth: isGalleryPage ? 180 : 120,
+								resolution: 'low',
+								aspectRatio: '5:4',
+							})}
 						/>
 					</picture>
 					<div css={mediaOverlayContainerStyles}>

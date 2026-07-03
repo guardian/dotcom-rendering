@@ -9,6 +9,7 @@ const meta = preview.meta({
 	args: {
 		trails: hostedOnwardsTrails,
 		brandName: 'TrendAI',
+		isGalleryPage: false,
 	},
 	render: (args) => <HostedContentOnwards {...args} />,
 });
@@ -16,5 +17,12 @@ const meta = preview.meta({
 export const Default = meta.story({});
 
 export const WithAccentColour = meta.story({
+	decorators: hostedPaletteDecorator('#d90c1f'),
+});
+
+export const HostedGallery = meta.story({
+	args: {
+		isGalleryPage: true,
+	},
 	decorators: hostedPaletteDecorator('#d90c1f'),
 });

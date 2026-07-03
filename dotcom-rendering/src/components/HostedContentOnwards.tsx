@@ -31,6 +31,7 @@ const headerStyles = css`
 const headingStyles = css`
 	${textSans17}
 	padding-top: ${space[2]}px;
+	padding-bottom: ${space[2]}px;
 	color: ${palette('--onward-text')};
 
 	@media (prefers-color-scheme: dark) {
