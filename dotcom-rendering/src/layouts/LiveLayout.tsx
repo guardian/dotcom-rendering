@@ -395,6 +395,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					format={format}
 					article={article}
 					liveBlogAreaId={liveBlogAreaId}
+					isCricketRedesignEnabled={isCricketRedesignEnabled}
 				/>
 
 				{/* This element is used to replace the liveblog with the scorecard when the scorecard tab is clicked */}
@@ -699,33 +700,17 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											</Island>
 										</Hide>
 									)}
-
-									{/* Match stats */}
-									{!!footballMatchStatsUrl && (
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<FootballMiniMatchStatsWrapper
-												matchStatsUrl={
-													footballMatchStatsUrl
-												}
-											/>
-										</Island>
-									)}
-									{!!cricketMatchStatsUrl &&
-										isCricketRedesignEnabled && (
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<CricketMiniMatchStatsWrapper
-													matchStatsUrl={
-														cricketMatchStatsUrl
-													}
-												/>
-											</Island>
-										)}
+									<MiniMatchStats
+										footballMatchStatsUrl={
+											footballMatchStatsUrl
+										}
+										cricketMatchStatsUrl={
+											cricketMatchStatsUrl
+										}
+										isCricketRedesignEnabled={
+											isCricketRedesignEnabled
+										}
+									/>
 								</GridItem>
 								<GridItem area="body">
 									<div
@@ -1153,11 +1138,40 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	);
 };
 
+const MiniMatchStats = (props: {
+	footballMatchStatsUrl: string | undefined;
+	cricketMatchStatsUrl: string | undefined;
+	isCricketRedesignEnabled: boolean;
+}) => {
+	if (props.footballMatchStatsUrl) {
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMiniMatchStatsWrapper
+					matchStatsUrl={props.footballMatchStatsUrl}
+				/>
+			</Island>
+		);
+	}
+
+	if (props.cricketMatchStatsUrl && props.isCricketRedesignEnabled) {
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<CricketMiniMatchStatsWrapper
+					matchStatsUrl={props.cricketMatchStatsUrl}
+				/>
+			</Island>
+		);
+	}
+
+	return null;
+};
+
 const Header = (props: {
 	renderingTarget: RenderingTarget;
 	format: ArticleFormat;
 	article: ArticleDeprecated;
 	liveBlogAreaId: string;
+	isCricketRedesignEnabled: boolean;
 }) => {
 	const footballMatchLeagueName = props.article.sectionLabel;
 	const footballMatchLeagueUrl = `${props.article.guardianBaseURL}/${props.article.sectionUrl}`;
@@ -1169,11 +1183,6 @@ const Header = (props: {
 		props.article.matchType === 'CricketMatchType'
 			? props.article.matchHeaderUrl
 			: undefined;
-
-	const ab = useAB();
-	const isCricketRedesignEnabled = Boolean(
-		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
-	);
 
 	const isApps = props.renderingTarget === 'Apps';
 
@@ -1202,7 +1211,7 @@ const Header = (props: {
 		);
 	}
 
-	if (!isApps && cricketMatchHeaderUrl && isCricketRedesignEnabled) {
+	if (!isApps && cricketMatchHeaderUrl && props.isCricketRedesignEnabled) {
 		return (
 			<>
 				<noscript>
