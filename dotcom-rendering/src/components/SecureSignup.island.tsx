@@ -25,6 +25,10 @@ import {
 	getMarketingOptInType,
 } from '../lib/newsletter-marketing-opt-in';
 import {
+	getErrorType,
+	getResponseErrorDescription,
+} from '../lib/newsletterSignupFailureDetails';
+import {
 	EVENT_DESCRIPTION_TO_ACTION,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	type NewsletterEventDescription,
@@ -245,19 +249,6 @@ const postFormData = async (
 		},
 	});
 };
-
-const getErrorType = (error: unknown): string => {
-	if (error instanceof TypeError) {
-		return 'network-or-fetch';
-	}
-
-	if (error instanceof Error) {
-		return error.name || 'error';
-	}
-
-	return 'unknown';
-};
-
 const sendTracking = (
 	newsletterId: string,
 	eventDescription: NewsletterEventDescription,
@@ -403,6 +394,11 @@ export const SecureSignup = ({
 
 		if (!response.ok) {
 			trackingDetails.responseStatus = response.status;
+			const errorDescription =
+				await getResponseErrorDescription(response);
+			if (errorDescription) {
+				trackingDetails.errorDescription = errorDescription;
+			}
 		}
 
 		sendTracking(
