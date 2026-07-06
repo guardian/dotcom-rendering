@@ -95,32 +95,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-user-module-intentIq",
-		description:
-			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module.",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-07-16",
-		type: "client",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
-		name: "commercial-user-module-intentIq-us",
-		description:
-			"Holdback test to measure the impact of adding intentIq as an ID partner in the user module for users in the US",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-07-16",
-		type: "client",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "holdback"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-mobile-sticky-liveblog-us",
 		description:
 			"Holdback test, where variant is the 'holdback' group, to measure uplift in adding the mobile-sticky slot for Liveblogs articles in the US.",
@@ -144,6 +118,19 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-full-width-hold-back",
+		description:
+			"Test to measure impact of adding full width to spacefinder",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-07-14",
+		type: "client",
+		status: "ON",
+		audienceSize: 5 / 100,
+		audienceSpace: "A",
+		groups: ["holdback", "control"],
 		shouldForceMetricsCollection: true,
 	},
 	{
