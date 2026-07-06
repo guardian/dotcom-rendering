@@ -1,6 +1,5 @@
 import * as Sentry from '@sentry/browser';
 import type { BrowserOptions } from '@sentry/browser';
-import { BUILD_VARIANT, dcrJavascriptBundle } from '../../../webpack/bundles';
 import type { ReportError } from '../../types/sentry';
 
 const allowUrls: BrowserOptions['allowUrls'] = [
@@ -47,10 +46,6 @@ Sentry.init({
 	maxBreadcrumbs: 50,
 	// sampleRate: // We use Math.random in init.ts to sample errors
 });
-
-if (BUILD_VARIANT) {
-	Sentry.setTag('dcr.bundle', dcrJavascriptBundle('Variant'));
-}
 
 export const reportError: ReportError = (error, feature, tags, extras) => {
 	Sentry.withScope(() => {

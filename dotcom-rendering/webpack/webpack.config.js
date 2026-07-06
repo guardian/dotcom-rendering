@@ -4,13 +4,10 @@ const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
-const { BUILD_VARIANT: BUILD_VARIANT_SWITCH } = require('./bundles');
 
 const dist = path.resolve(__dirname, '..', 'dist');
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
-
-const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
 
 /** @typedef {import('../src/lib/assets').Build} Build */
 
@@ -104,14 +101,7 @@ const commonConfigs = ({ platform }) => ({
 });
 
 /** @type {readonly Build[]} */
-const clientBuilds = [
-	'client.web',
-	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
-		? /** @type {const} */ (['client.web.variant'])
-		: []),
-	'client.apps',
-	'client.editionsCrossword',
-];
+const clientBuilds = ['client.web', 'client.apps', 'client.editionsCrossword'];
 
 module.exports = [
 	merge(

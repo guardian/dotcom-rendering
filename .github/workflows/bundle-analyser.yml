@@ -25,13 +25,6 @@ jobs:
           path: dotcom-rendering/dist/stats/client.web-bundles.html
           if-no-files-found: error
 
-      - name: Archive code coverage results for web variant bundle
-        uses: actions/upload-artifact@v7
-        with:
-          name: bundle-analyser-report-web
-          path: dotcom-rendering/dist/stats/client.web.variant-bundles.html
-          if-no-files-found: warn # Variant bundle only exists when an active experiment is going on
-
       - name: Archive code coverage results for apps bundle
         uses: actions/upload-artifact@v7
         with:

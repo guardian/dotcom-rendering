@@ -13,7 +13,6 @@ import {
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
-	getModulesBuild,
 	getPathFromManifest,
 } from '../lib/assets';
 import { isEditionId } from '../lib/edition';
@@ -102,7 +101,7 @@ export const renderArticle = ({
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const build = getModulesBuild();
+	const build = 'client.web';
 
 	/**
 	 * The highest priority scripts.
@@ -347,7 +346,7 @@ export const renderHostedContent = ({
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const build = getModulesBuild();
+	const build = 'client.web';
 
 	/**
 	 * The highest priority scripts.

@@ -1,13 +1,10 @@
 import { readFileSync } from 'node:fs';
-import { BUILD_VARIANT } from '../../webpack/bundles';
 import {
 	APPS_SCRIPT,
 	BASE_URL_DEV,
 	decideAssetOrigin,
-	getModulesBuild,
 	getPathFromManifest,
 	WEB,
-	WEB_VARIANT_SCRIPT,
 } from './assets';
 
 jest.mock('node:fs');
@@ -38,19 +35,10 @@ describe('regular expression to match files', () => {
 		expect('/assets/ophan.client.web.eb74205c979f58659ed7.js').toMatch(WEB);
 	});
 
-	it('should handle DEV environment', () => {
-		expect('/assets/ophan.client.web.variant.js').toMatch(
-			WEB_VARIANT_SCRIPT,
-		);
-	});
-
 	it('should handle PROD environment', () => {
 		expect(
 			'https://assets.guim.co.uk/assets/ophan.client.web.abcdefghijklmnopqrst.js',
 		).toMatch(WEB);
-		expect(
-			'https://assets.guim.co.uk/assets/ophan.client.web.variant.abcdefghijklmnopqrst.js',
-		).toMatch(WEB_VARIANT_SCRIPT);
 		expect(
 			'https://assets.guim.co.uk/assets/ophan.client.apps.eb74205c979f58659ed7.js',
 		).toMatch(APPS_SCRIPT);
@@ -92,13 +80,5 @@ describe('getPathFromManifest', () => {
 		expect(() => getPathFromManifest('client.web', 'foo.bar.js')).toThrow(
 			'Missing manifest for foo.bar.js',
 		);
-	});
-});
-
-describe('getModulesBuild', () => {
-	it('should default to web', () => {
-		const build = getModulesBuild();
-		const expected = BUILD_VARIANT ? 'client.web.variant' : 'client.web';
-		expect(build).toBe(expected);
 	});
 });

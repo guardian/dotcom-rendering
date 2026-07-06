@@ -9,7 +9,6 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			isSentryEnabled({
 				isDev: false,
 				enableSentryReporting: false,
-				isInBrowserVariantTest: true,
 				random: 99 / 100,
 			}),
 		).toEqual(false);
@@ -19,27 +18,15 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			isSentryEnabled({
 				isDev: true,
 				enableSentryReporting: true,
-				isInBrowserVariantTest: true,
 				random: 1 / 100,
 			}),
 		).toEqual(false);
-	});
-	it('does enable Sentry when the user is in the browser bundle variant test', () => {
-		expect(
-			isSentryEnabled({
-				isDev: false,
-				enableSentryReporting: true,
-				isInBrowserVariantTest: true,
-				random: 1 / 100,
-			}),
-		).toEqual(true);
 	});
 	it('does enable Sentry for 1% of users', () => {
 		expect(
 			isSentryEnabled({
 				isDev: false,
 				enableSentryReporting: true,
-				isInBrowserVariantTest: false,
 				random: 1 / 100,
 			}),
 		).toEqual(false);
@@ -47,7 +34,6 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			isSentryEnabled({
 				isDev: false,
 				enableSentryReporting: true,
-				isInBrowserVariantTest: false,
 				random: 99 / 100,
 			}),
 		).toEqual(false);
@@ -55,7 +41,6 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			isSentryEnabled({
 				isDev: false,
 				enableSentryReporting: true,
-				isInBrowserVariantTest: false,
 				random: 99.0001 / 100,
 			}),
 		).toEqual(true);
@@ -63,7 +48,6 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			isSentryEnabled({
 				isDev: false,
 				enableSentryReporting: true,
-				isInBrowserVariantTest: false,
 				random: 100 / 100,
 			}),
 		).toEqual(true);

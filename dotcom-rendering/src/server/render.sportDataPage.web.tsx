@@ -5,7 +5,6 @@ import type { FootballMatch } from '../footballMatch';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
-	getModulesBuild,
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
@@ -128,7 +127,7 @@ export const renderSportPage = ({ sportData, nav }: Props) => {
 		</ConfigProvider>,
 	);
 
-	const build = getModulesBuild();
+	const build = 'client.web';
 
 	/**
 	 * The highest priority scripts.

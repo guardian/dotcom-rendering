@@ -51,10 +51,6 @@ dev: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./webpack/webpack.config.js
 
-dev-variant: clear clean-dist install
-	$(call log, "starting DEV server")
-	@NODE_ENV=development BUILD_VARIANT=true webpack serve --config ./webpack/webpack.config.js
-
 dev-debug: clear clean-dist install
 	$(call log, "starting DEV server and debugger")
 	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")

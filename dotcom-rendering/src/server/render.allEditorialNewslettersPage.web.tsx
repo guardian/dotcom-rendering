@@ -3,7 +3,6 @@ import { ConfigProvider } from '../components/ConfigContext';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
-	getModulesBuild,
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
@@ -45,7 +44,7 @@ export const renderEditorialNewslettersPage = ({
 		</ConfigProvider>,
 	);
 
-	const build = getModulesBuild();
+	const build = 'client.web';
 
 	/**
 	 * The highest priority scripts.

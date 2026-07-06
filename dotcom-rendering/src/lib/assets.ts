@@ -1,7 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isObject, isString } from '@guardian/libs';
-import { BUILD_VARIANT } from '../../webpack/bundles';
 import { makeMemoizedFunction } from './memoize';
 
 interface AssetHash {
@@ -67,11 +66,7 @@ const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	}
 });
 
-export type Build =
-	| 'client.apps'
-	| 'client.web'
-	| 'client.web.variant'
-	| 'client.editionsCrossword';
+export type Build = 'client.apps' | 'client.web' | 'client.editionsCrossword';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
@@ -114,7 +109,6 @@ const getScriptRegex = (build: Build) =>
 	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
 export const WEB = getScriptRegex('client.web');
-export const WEB_VARIANT_SCRIPT = getScriptRegex('client.web.variant');
 export const APPS_SCRIPT = getScriptRegex('client.apps');
 export const EDITIONS_CROSSWORD_SCRIPT = getScriptRegex(
 	'client.editionsCrossword',
@@ -124,7 +118,6 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 	scripts.filter(isString).map((script) => {
 		if (
 			script.match(WEB) ??
-			script.match(WEB_VARIANT_SCRIPT) ??
 			script.match(APPS_SCRIPT) ??
 			script.match(EDITIONS_CROSSWORD_SCRIPT)
 		) {
@@ -136,10 +129,3 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 			`<script defer src="${script}"></script>`,
 		].join('\n');
 	});
-
-export const getModulesBuild = (): Extract<Build, `client.web${string}`> => {
-	if (BUILD_VARIANT) {
-		return 'client.web.variant';
-	}
-	return 'client.web';
-};

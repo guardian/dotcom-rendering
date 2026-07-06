@@ -6,7 +6,6 @@ import { Pillar } from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
-	getModulesBuild,
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
@@ -100,7 +99,7 @@ export const renderFront = ({
 		</ConfigProvider>,
 	);
 
-	const build = getModulesBuild();
+	const build = 'client.web';
 
 	/**
 	 * The highest priority scripts.
@@ -197,7 +196,7 @@ export const renderTagPage = ({
 		</ConfigProvider>,
 	);
 
-	const build = getModulesBuild();
+	const build = 'client.web';
 
 	/**
 	 * The highest priority scripts.
