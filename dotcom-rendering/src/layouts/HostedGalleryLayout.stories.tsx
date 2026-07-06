@@ -2,24 +2,34 @@ import { hostedPaletteDecorator } from '../../.storybook/decorators/themeDecorat
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { hostedGallery } from '../../fixtures/manual/hostedGallery';
+import { hostedOnwardsTrails } from '../../fixtures/manual/onwardsTrails';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { enhanceArticleType } from '../types/article';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
+
+const mockOnwardsContentFetch = customMockFetch([
+	{
+		mockedMethod: 'GET',
+		mockedUrl: `${hostedGallery.config.ajaxUrl}/${hostedGallery.config.pageId}/onward.json`,
+		mockedStatus: 200,
+		mockedBody: { trails: hostedOnwardsTrails },
+	},
+]);
 
 const meta = preview.meta({
 	title: 'Layouts/HostedGallery',
 	component: HostedGalleryLayout,
 	parameters: {
 		config: { darkModeAvailable: true },
-		chromatic: {
-			modes: {
-				'light leftCol': allModes['light leftCol'],
-			},
-		},
+	},
+	render: (args) => {
+		global.fetch = mockOnwardsContentFetch;
+		return <HostedGalleryLayout {...args} />;
 	},
 });
 
@@ -68,6 +78,11 @@ export const Web = meta.story({
 	parameters: {
 		config: {
 			renderingTarget: 'Web',
+		},
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
 		},
 	},
 });

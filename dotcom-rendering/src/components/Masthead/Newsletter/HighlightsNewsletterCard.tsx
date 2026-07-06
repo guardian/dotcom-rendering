@@ -143,6 +143,9 @@ export const HighlightsNewsletterCard = ({
 	const componentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCard(
 		newsletter.identityName,
 	);
+	const modalComponentId = NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsModal(
+		newsletter.identityName,
+	);
 	const [hasBeenSeen, setIsInViewRef] = useIsInView({});
 	const hasTrackedView = useRef(false);
 
@@ -163,14 +166,6 @@ export const HighlightsNewsletterCard = ({
 	const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
 		if (renderingTarget === 'Web') {
 			event.preventDefault();
-
-			sendNewsletterSignupEvent({
-				action: 'CLICK',
-				identityName: newsletter.identityName,
-				componentId,
-				renderingTarget,
-				value: { eventDescription: 'highlights-card-clicked' },
-			});
 
 			setIsModalOpen(true);
 
@@ -200,6 +195,8 @@ export const HighlightsNewsletterCard = ({
 				{isModalOpen && (
 					<HighlightsNewsletterSignupModal
 						newsletter={newsletter}
+						renderingTarget={renderingTarget}
+						componentId={componentId}
 						onClose={() => {
 							setIsModalOpen(false);
 							sendNewsletterSignupEvent({
@@ -221,6 +218,7 @@ export const HighlightsNewsletterCard = ({
 						css={linkOverlayStyles}
 						onClick={handleClick}
 						data-link-name={dataLinkName}
+						data-modal-component-id={modalComponentId}
 						aria-label={headlineText}
 					/>
 
