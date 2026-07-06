@@ -58,18 +58,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-hosted-gallery",
-		description: "Preview the Hosted Gallery pages using dotcom-rendering",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-01",
-		type: "server",
-		status: "ON",
-		audienceSize: 0 / 100,
-		audienceSpace: "A",
-		groups: ["preview"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "growth-auxia-banner",
 		description: "Use Auxia API for deciding when to show a RR banner",
 		owners: ["growth.dev@guardian.co.uk"],
