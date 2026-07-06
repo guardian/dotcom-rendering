@@ -29,11 +29,6 @@ const meta = preview.meta({
 	component: HostedVideoLayout,
 	parameters: {
 		config: { darkModeAvailable: true },
-		chromatic: {
-			modes: {
-				'light leftCol': allModes['light leftCol'],
-			},
-		},
 	},
 	render: (args) => {
 		global.fetch = mockOnwardsContentFetch;
@@ -76,6 +71,11 @@ export const Web = meta.story({
 	parameters: {
 		config: {
 			renderingTarget: 'Web',
+		},
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
 		},
 	},
 });
