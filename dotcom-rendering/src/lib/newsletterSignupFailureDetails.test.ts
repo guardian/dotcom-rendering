@@ -3,20 +3,21 @@ import {
 	getResponseFailureDetails,
 } from './newsletterSignupFailureDetails';
 
+type MockHeaders = Partial<Record<string, string>>;
+
+const mockHeaders = (headers: MockHeaders) => ({
+	get: jest.fn().mockImplementation((headerName: string) => {
+		return headers[headerName.toLowerCase()] ?? null;
+	}),
+});
+
 const mockResponse = (
 	text: string,
-	additionalHeaders: Record<string, string> = {},
+	additionalHeaders: MockHeaders = {},
 ): Response =>
 	({
 		text: jest.fn().mockResolvedValue(text),
-		headers: {
-			get: jest
-				.fn()
-				.mockImplementation(
-					(headerName: string) =>
-						additionalHeaders[headerName.toLowerCase()] ?? null,
-				),
-		},
+		headers: mockHeaders(additionalHeaders),
 	}) as unknown as Response;
 
 describe('newsletterSignupFailureDetails', () => {
@@ -53,15 +54,19 @@ describe('newsletterSignupFailureDetails', () => {
 		});
 
 		it('returns the error code header when present', async () => {
-			const response = mockResponse('ignored body', {
-				'content-type': 'text/plain',
-				'email-signup-error-code': 'already-subscribed',
-			});
+			const textMock = jest.fn().mockResolvedValue('ignored body');
+			const response = {
+				text: textMock,
+				headers: mockHeaders({
+					'content-type': 'text/plain',
+					'email-signup-error-code': 'already-subscribed',
+				}),
+			} as unknown as Response;
 
 			await expect(getResponseFailureDetails(response)).resolves.toEqual({
 				errorCode: 'already-subscribed',
 			});
-			expect(response.text).not.toHaveBeenCalled();
+			expect(textMock).not.toHaveBeenCalled();
 		});
 
 		it('returns undefined for html error pages based on content type', async () => {
@@ -78,15 +83,7 @@ describe('newsletterSignupFailureDetails', () => {
 		it('returns undefined when reading the response body throws', async () => {
 			const response = {
 				text: jest.fn().mockRejectedValue(new Error('read failed')),
-				headers: {
-					get: jest
-						.fn()
-						.mockImplementation((headerName: string) =>
-							headerName.toLowerCase() === 'content-type'
-								? 'text/plain'
-								: null,
-						),
-				},
+				headers: mockHeaders({ 'content-type': 'text/plain' }),
 			} as unknown as Response;
 
 			await expect(getResponseFailureDetails(response)).resolves.toEqual(

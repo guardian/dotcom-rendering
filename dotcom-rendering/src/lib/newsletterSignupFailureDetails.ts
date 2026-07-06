@@ -15,13 +15,13 @@ export const getResponseFailureDetails = async (
 			?.trim()
 			.substring(0, MAX_FAILURE_DETAIL_LENGTH);
 
-		if (errorCode) {
+		if (errorCode !== undefined && errorCode !== '') {
 			return { errorCode };
 		}
 
 		const contentType = response.headers.get('content-type')?.toLowerCase();
 
-		if (contentType?.includes('text/html')) {
+		if (contentType?.includes('text/html') === true) {
 			return {};
 		}
 
