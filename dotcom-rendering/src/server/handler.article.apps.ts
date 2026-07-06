@@ -51,7 +51,6 @@ export const handleAppsBlocks: RequestHandler = ({ body }, res) => {
 		section,
 		sharedAdTargeting,
 		adUnit,
-		abTests,
 		switches,
 		keywordIds,
 		shouldHideAds,
@@ -84,7 +83,6 @@ export const handleAppsBlocks: RequestHandler = ({ body }, res) => {
 		sharedAdTargeting,
 		adUnit,
 		switches,
-		abTests,
 		keywordIds,
 		shouldHideAds,
 	});
