@@ -125,7 +125,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Test to measure impact of adding full width to spacefinder",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-07-04",
+		expirationDate: "2026-07-14",
 		type: "client",
 		status: "ON",
 		audienceSize: 5 / 100,

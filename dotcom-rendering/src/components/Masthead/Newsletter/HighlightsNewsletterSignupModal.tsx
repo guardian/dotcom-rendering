@@ -5,16 +5,20 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
-import { useId } from 'react';
+import { useEffect, useId } from 'react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	Pillar,
 } from '../../../lib/articleFormat';
 import { generateImageURL } from '../../../lib/image';
-import { NEWSLETTER_SIGNUP_COMPONENT_ID } from '../../../lib/newsletterSignupTracking';
+import {
+	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	sendNewsletterSignupEvent,
+} from '../../../lib/newsletterSignupTracking';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import type { Newsletter } from '../../../types/content';
+import type { RenderingTarget } from '../../../types/renderingTarget';
 import { FormatBoundary } from '../../FormatBoundary';
 import { ModalOverlay, useModalRequestClose } from '../../ModalOverlay';
 import { NewsletterSignupCard } from '../../NewsletterSignupCard';
@@ -98,6 +102,8 @@ const visuallyHiddenStyles = css`
 type Props = {
 	newsletter: Newsletter;
 	onClose: () => void;
+	renderingTarget: RenderingTarget;
+	componentId: string;
 };
 
 const HighlightsNewsletterSignupModalContent = ({
@@ -144,7 +150,7 @@ const HighlightsNewsletterSignupModalContent = ({
 					frequency={newsletter.frequency}
 					isModal={true}
 					isAlreadySubscribed={isSubscribed === true}
-					componentId={NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsCardForm(
+					componentId={NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsModal(
 						newsletter.identityName,
 					)}
 				/>
@@ -156,6 +162,8 @@ const HighlightsNewsletterSignupModalContent = ({
 export const HighlightsNewsletterSignupModal = ({
 	newsletter,
 	onClose,
+	renderingTarget,
+	componentId,
 }: Props) => {
 	const isSubscribed = useNewsletterSubscription(
 		newsletter.listId,
@@ -163,6 +171,18 @@ export const HighlightsNewsletterSignupModal = ({
 	);
 
 	const titleId = useId();
+
+	useEffect(() => {
+		sendNewsletterSignupEvent({
+			action: 'VIEW',
+			identityName: newsletter.identityName,
+			componentId,
+			renderingTarget,
+			value: { eventDescription: 'highlights-card-modal-viewed' },
+		});
+		// Fire once on mount only
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally fire only on mount
+	}, []);
 
 	return (
 		<ModalOverlay
