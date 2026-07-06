@@ -18,7 +18,7 @@ import { CricketMatchStatNotOutBatters } from './CricketMatchStat';
 import { Placeholder } from './Placeholder';
 
 const containerCss = css`
-	isolation: isolate; /* [1] */
+	isolation: isolate;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
