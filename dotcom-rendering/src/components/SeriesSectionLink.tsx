@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	between,
 	from,
 	headlineBold17,
 	headlineBold20,
@@ -83,23 +82,14 @@ const marginRight = css`
 	}
 `;
 
-const invertedStyle = (design: ArticleDesign) => {
-	if (design === ArticleDesign.Gallery) {
-		return '';
-	}
-	return css`
-		/* Handle text wrapping onto a new line */
-		white-space: pre-wrap;
-		box-decoration-break: clone;
-		line-height: 28px;
-		${from.leftCol} {
-			line-height: 28px;
-		}
-		padding-right: ${space[1]}px;
-		padding-top: ${space[1]}px;
-		padding-bottom: ${space[3]}px;
-	`;
-};
+const invertedStyle = css`
+	/* Handle text wrapping onto a new line */
+	white-space: pre-wrap;
+	box-decoration-break: clone;
+	padding-right: ${space[2]}px;
+	padding-top: ${space[1]}px;
+	padding-bottom: ${space[2]}px;
+`;
 
 const fontStyles = (format: ArticleFormat) => {
 	switch (format.design) {
@@ -184,26 +174,15 @@ const breakWord = css`
 	word-break: break-word;
 `;
 
-const sectionPadding = (design: ArticleDesign) => {
-	if (design === ArticleDesign.Gallery) {
-		return css`
-			padding: 0 ${space[2]}px 0 ${space[3]}px;
-
-			${between.mobileLandscape.and.tablet} {
-				padding-left: ${space[5]}px;
-			}
-		`;
+const sectionPadding = css`
+	padding-left: 10px;
+	${from.mobileLandscape} {
+		padding-left: 18px;
 	}
-	return css`
-		padding-left: 10px;
-		${from.mobileLandscape} {
-			padding-left: 18px;
-		}
-		${from.tablet} {
-			padding-left: ${space[1]}px;
-		}
-	`;
-};
+	${from.tablet} {
+		padding-left: ${space[3]}px;
+	}
+`;
 
 export const SeriesSectionLink = ({
 	format,
@@ -358,9 +337,9 @@ export const SeriesSectionLink = ({
 						css={[
 							sectionLabelLink,
 							fontStyles(format),
-							invertedStyle(format.design),
+							invertedStyle,
 							breakWord,
-							sectionPadding(format.design),
+							sectionPadding,
 							css`
 								color: ${titleColour};
 								background-color: ${themePalette(
@@ -369,7 +348,6 @@ export const SeriesSectionLink = ({
 							`,
 							format.design === ArticleDesign.Gallery &&
 								css`
-									display: inline-block;
 									position: relative;
 								`,
 							format.display === ArticleDisplay.Immersive &&
