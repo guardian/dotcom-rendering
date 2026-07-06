@@ -1,47 +1,96 @@
 import {
 	getErrorType,
-	getResponseErrorDescription,
+	getResponseFailureDetails,
 } from './newsletterSignupFailureDetails';
 
-const mockResponse = (text: string): Response =>
+const mockResponse = (
+	text: string,
+	additionalHeaders: Record<string, string> = {},
+): Response =>
 	({
 		text: jest.fn().mockResolvedValue(text),
+		headers: {
+			get: jest
+				.fn()
+				.mockImplementation(
+					(headerName: string) =>
+						additionalHeaders[headerName.toLowerCase()] ?? null,
+				),
+		},
 	}) as unknown as Response;
 
 describe('newsletterSignupFailureDetails', () => {
-	describe('getResponseErrorDescription', () => {
+	describe('getResponseFailureDetails', () => {
 		it('returns undefined for an empty response body', async () => {
-			const response = mockResponse('   ');
+			const response = mockResponse('   ', {
+				'content-type': 'text/plain',
+			});
 
-			await expect(getResponseErrorDescription(response)).resolves.toBe(
-				undefined,
+			await expect(getResponseFailureDetails(response)).resolves.toEqual(
+				{},
 			);
 		});
 
 		it('trims and collapses whitespace in the response body', async () => {
-			const response = mockResponse('  too\n\n many\t spaces  ');
+			const response = mockResponse('  too\n\n many\t spaces  ', {
+				'content-type': 'text/plain',
+			});
 
-			await expect(getResponseErrorDescription(response)).resolves.toBe(
-				'too many spaces',
-			);
+			await expect(getResponseFailureDetails(response)).resolves.toEqual({
+				errorDescription: 'too many spaces',
+			});
 		});
 
-		it('truncates the response body to 120 characters', async () => {
-			const longMessage = 'a'.repeat(130);
-			const response = mockResponse(longMessage);
+		it('truncates the response body to 60 characters', async () => {
+			const longMessage = 'a'.repeat(70);
+			const response = mockResponse(longMessage, {
+				'content-type': 'text/plain',
+			});
 
-			await expect(getResponseErrorDescription(response)).resolves.toBe(
-				'a'.repeat(120),
+			await expect(getResponseFailureDetails(response)).resolves.toEqual({
+				errorDescription: 'a'.repeat(60),
+			});
+		});
+
+		it('returns the error code header when present', async () => {
+			const response = mockResponse('ignored body', {
+				'content-type': 'text/plain',
+				'email-signup-error-code': 'already-subscribed',
+			});
+
+			await expect(getResponseFailureDetails(response)).resolves.toEqual({
+				errorCode: 'already-subscribed',
+			});
+			expect(response.text).not.toHaveBeenCalled();
+		});
+
+		it('returns undefined for html error pages based on content type', async () => {
+			const response = mockResponse(
+				'<!DOCTYPE html><html><head><title>Error</title></head><body>Oops</body></html>',
+				{ 'content-type': 'text/html; charset=utf-8' },
+			);
+
+			await expect(getResponseFailureDetails(response)).resolves.toEqual(
+				{},
 			);
 		});
 
 		it('returns undefined when reading the response body throws', async () => {
 			const response = {
 				text: jest.fn().mockRejectedValue(new Error('read failed')),
+				headers: {
+					get: jest
+						.fn()
+						.mockImplementation((headerName: string) =>
+							headerName.toLowerCase() === 'content-type'
+								? 'text/plain'
+								: null,
+						),
+				},
 			} as unknown as Response;
 
-			await expect(getResponseErrorDescription(response)).resolves.toBe(
-				undefined,
+			await expect(getResponseFailureDetails(response)).resolves.toEqual(
+				{},
 			);
 		});
 	});

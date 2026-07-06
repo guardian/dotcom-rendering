@@ -1,12 +1,42 @@
-export const getResponseErrorDescription = async (
+const MAX_FAILURE_DETAIL_LENGTH = 60;
+const ERROR_CODE_HEADER = 'Email-Signup-Error-Code';
+
+export type NewsletterSignupFailureDetails = {
+	errorCode?: string;
+	errorDescription?: string;
+};
+
+export const getResponseFailureDetails = async (
 	response: Response,
-): Promise<string | undefined> => {
+): Promise<NewsletterSignupFailureDetails> => {
 	try {
+		const errorCode = response.headers
+			.get(ERROR_CODE_HEADER)
+			?.trim()
+			.substring(0, MAX_FAILURE_DETAIL_LENGTH);
+
+		if (errorCode) {
+			return { errorCode };
+		}
+
+		const contentType = response.headers.get('content-type')?.toLowerCase();
+
+		if (contentType?.includes('text/html')) {
+			return {};
+		}
+
 		const responseText = (await response.text()).trim();
-		if (!responseText) return;
-		return responseText.replace(/\s+/g, ' ').substring(0, 120);
+		if (!responseText) return {};
+
+		const normalisedResponseText = responseText.replace(/\s+/g, ' ');
+		return {
+			errorDescription: normalisedResponseText.substring(
+				0,
+				MAX_FAILURE_DETAIL_LENGTH,
+			),
+		};
 	} catch {
-		return;
+		return {};
 	}
 };
 
