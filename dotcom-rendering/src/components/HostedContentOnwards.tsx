@@ -25,7 +25,7 @@ const galleryOverrides = css`
 
 const headerStyles = css`
 	margin-bottom: ${space[1]}px;
-	border-top: ${space[2]}px solid var(--accent-colour);
+	border-top: ${space[2]}px solid var(--accent-colour, var(--onward-text));
 `;
 
 const headingStyles = css`
@@ -33,10 +33,6 @@ const headingStyles = css`
 	padding-top: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
 	color: ${palette('--onward-text')};
-
-	@media (prefers-color-scheme: dark) {
-		color: ${palette('--onward-text')};
-	}
 
 	span {
 		${textSansBold20}
