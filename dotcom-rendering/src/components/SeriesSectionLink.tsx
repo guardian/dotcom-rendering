@@ -86,9 +86,13 @@ const invertedStyle = css`
 	/* Handle text wrapping onto a new line */
 	white-space: pre-wrap;
 	box-decoration-break: clone;
-	padding-right: ${space[2]}px;
+	line-height: 28px;
+	padding-right: ${space[1]}px;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[2]}px;
+	${from.wide} {
+		line-height: 28px;
+	}
 `;
 
 const fontStyles = (format: ArticleFormat) => {
@@ -180,7 +184,7 @@ const sectionPadding = css`
 		padding-left: 18px;
 	}
 	${from.tablet} {
-		padding-left: ${space[3]}px;
+		padding-left: ${space[1]}px;
 	}
 `;
 
