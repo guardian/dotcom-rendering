@@ -154,9 +154,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
 	const cricketMatchUrl =
-		article.matchType === 'CricketMatchType'
-			? article.matchStatsUrl
-			: undefined;
+		article.matchType == 'CricketMatchType' ? article.matchUrl : undefined;
 
 	const isCricketMatchReport =
 		format.design === ArticleDesign.MatchReport && !!cricketMatchUrl;
@@ -290,7 +288,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								pageId={article.pageId}
 								webTitle={article.webTitle}
 								ajaxUrl={article.config.ajaxUrl}
-								abTests={article.config.abTests}
 								switches={article.config.switches}
 								isAdFreeUser={article.isAdFreeUser}
 								isSensitive={article.config.isSensitive}
@@ -498,7 +495,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									idUrl={article.config.idUrl ?? ''}
 									isDev={!!article.config.isDev}
 									keywordIds={article.config.keywordIds}
-									abTests={article.config.abTests}
 									tableOfContents={article.tableOfContents}
 									lang={article.lang}
 									isRightToLeftLang={

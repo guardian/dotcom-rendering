@@ -102,10 +102,7 @@ export const renderArticle = ({
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const build = getModulesBuild({
-		tests: frontendData.config.abTests,
-		switches: frontendData.config.switches,
-	});
+	const build = getModulesBuild();
 
 	/**
 	 * The highest priority scripts.
@@ -143,7 +140,6 @@ export const renderArticle = ({
 		ajaxUrl: frontendData.config.ajaxUrl,
 		googletagUrl: frontendData.config.googletagUrl,
 		switches: frontendData.config.switches,
-		abTests: frontendData.config.abTests,
 		serverSideABTests: frontendData.config.serverSideABTests,
 		brazeApiKey: frontendData.config.brazeApiKey,
 		isPaidContent: frontendData.pageType.isPaidContent,
@@ -244,7 +240,6 @@ export const renderBlocks = ({
 	section,
 	switches,
 	keywordIds,
-	abTests = {},
 	serverSideABTests,
 	edition,
 	shouldHideAds,
@@ -274,7 +269,6 @@ export const renderBlocks = ({
 				ajaxUrl={ajaxUrl}
 				isSensitive={isSensitive}
 				isAdFreeUser={isAdFreeUser}
-				abTests={abTests}
 				switches={switches}
 				isLiveUpdate={true}
 				sectionId={section}
@@ -353,10 +347,7 @@ export const renderHostedContent = ({
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const build = getModulesBuild({
-		tests: frontendData.config.abTests,
-		switches: frontendData.config.switches,
-	});
+	const build = getModulesBuild();
 
 	/**
 	 * The highest priority scripts.
@@ -394,7 +385,6 @@ export const renderHostedContent = ({
 		ajaxUrl: frontendData.config.ajaxUrl,
 		googletagUrl: frontendData.config.googletagUrl,
 		switches: frontendData.config.switches,
-		abTests: frontendData.config.abTests,
 		serverSideABTests: frontendData.config.serverSideABTests,
 		brazeApiKey: frontendData.config.brazeApiKey,
 		isPaidContent: frontendData.pageType.isPaidContent,

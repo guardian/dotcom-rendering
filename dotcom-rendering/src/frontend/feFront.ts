@@ -1,7 +1,7 @@
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { EditionBranding } from '../types/branding';
-import type { ServerSideTests, StageType, Switches } from '../types/config';
+import type { StageType, Switches } from '../types/config';
 import type {
 	BoostLevel,
 	Image,
@@ -322,14 +322,6 @@ export type FECollection = {
 };
 
 export type FEFrontConfig = {
-	/**
-	 * Server-side AB tests. Optional from `frontend`; a default of
-	 * `{}` is applied by AJV during request validation (see `useDefaults` in
-	 * `validate.ts`), so this is always present after enhancing.
-	 *
-	 * @default {}
-	 */
-	abTests: ServerSideTests;
 	adUnit: string;
 	ajaxUrl: string;
 	brazeApiKey?: string;

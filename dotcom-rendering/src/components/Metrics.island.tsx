@@ -15,12 +15,10 @@ import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useBrowserId } from '../lib/useBrowserId';
 import { useDetectAdBlock } from '../lib/useDetectAdBlock';
 import { usePageViewId } from '../lib/usePageViewId';
-import type { ServerSideTests } from '../types/config';
 import { useConfig } from './ConfigContext';
 
 type Props = {
 	commercialMetricsEnabled: boolean;
-	tests: ServerSideTests;
 };
 
 const sampling = 1 / 100;
@@ -66,7 +64,7 @@ const useDev = () => {
  *
  * (No visual story exists as this does not render anything)
  */
-export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
+export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 	const abTests = useAB();
 	const adBlockerInUse = useAdBlockInUse();
 	const detectedAdBlocker = useDetectAdBlock();
@@ -77,8 +75,6 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 	const isDev = useDev();
 
-	const userInServerSideTest = Object.keys(tests).length > 0;
-
 	const userParticipations = abTests?.getParticipations() ?? {};
 
 	const collectTestMetrics = shouldCollectMetricsForTests(
@@ -86,12 +82,8 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 	);
 
 	const shouldBypassSampling = useCallback(
-		() =>
-			willRecordCoreWebVitals ||
-			userInServerSideTest ||
-			collectTestMetrics,
-
-		[userInServerSideTest, collectTestMetrics],
+		() => willRecordCoreWebVitals || collectTestMetrics,
+		[collectTestMetrics],
 	);
 
 	useEffect(
