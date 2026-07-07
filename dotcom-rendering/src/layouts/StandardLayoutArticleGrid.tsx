@@ -236,6 +236,7 @@ export const StandardLayoutArticleGrid = ({
 					shouldHideAds={article.shouldHideAds}
 					contentType={article.contentType}
 					contentLayout={contentLayoutName}
+					articleArrangement={layoutType}
 				/>
 			</GridItem>
 			<GridItem
@@ -282,6 +283,7 @@ export const StandardLayoutArticleGrid = ({
 						article.webPublicationDateDeprecated
 					}
 					starRating={article.starRating}
+					isInverted={layoutType === 'immersiveLandscapeDefault'}
 				/>
 			</GridItem>
 			<GridItem area="standfirst" layoutType={layoutType}>
@@ -391,7 +393,13 @@ export const StandardLayoutArticleGrid = ({
 					</>
 				)}
 			</GridItem>
-			<GridItem area="body" layoutType={layoutType}>
+			<GridItem
+				area="body"
+				layoutType={layoutType}
+				css={css`
+					z-index: 20;
+				`}
+			>
 				{/* Only show Listen to Article button on App landscape views */}
 				{isApps && (
 					<Hide until="leftCol">
