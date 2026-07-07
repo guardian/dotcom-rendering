@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { between, from, space, until } from '@guardian/source/foundations';
 import type { CSSProperties } from 'react';
 import type { FEArticle } from '../frontend/feArticle';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -40,6 +41,7 @@ import { TimeDateline } from './TimeDateline';
 
 type Props = {
 	format: ArticleFormat;
+	layoutType: LayoutType;
 	pageId: string;
 	webTitle: string;
 	byline?: string;
@@ -276,6 +278,7 @@ const metaNumbersExtrasLiveBlog = css`
 export const ArticleMeta = ({
 	branding,
 	format,
+	layoutType,
 	pageId,
 	webTitle,
 	byline,
@@ -369,7 +372,7 @@ export const ArticleMeta = ({
 								/>
 							)}
 
-							{shouldShowContributor(format) && (
+							{shouldShowContributor(format, layoutType) && (
 								<Contributor
 									byline={byline}
 									tags={tags}

@@ -1,3 +1,4 @@
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import type { Podcast, TagType } from '../types/tag';
 import {
 	ArticleDesign,
@@ -27,12 +28,21 @@ export const shouldShowAvatar = (format: ArticleFormat): boolean => {
 	}
 };
 
-export const shouldShowContributor = (format: ArticleFormat): boolean => {
+export const shouldShowContributor = (
+	format: ArticleFormat,
+	layoutType: LayoutType,
+): boolean => {
 	switch (format.display) {
 		case ArticleDisplay.NumberedList:
 			return true;
 		case ArticleDisplay.Immersive:
-			return false;
+			switch (layoutType) {
+				case 'immersivePortraitDefault':
+				case 'immersivePortraitFeature':
+					return true;
+				default:
+					return false;
+			}
 		case ArticleDisplay.Showcase:
 		case ArticleDisplay.Standard: {
 			switch (format.design) {

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
@@ -7,7 +8,6 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
@@ -531,6 +531,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									<ArticleMeta
 										branding={branding}
 										format={format}
+										layoutType={layoutType}
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										byline={article.byline}
