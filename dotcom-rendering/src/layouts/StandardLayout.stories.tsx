@@ -8,7 +8,7 @@ import { enhanceArticleType } from '../types/article';
 import { StandardLayout } from './StandardLayout';
 
 const meta = {
-	title: 'Layouts/Audio',
+	title: 'Layouts/Standard',
 	component: StandardLayout,
 } satisfies Meta<typeof StandardLayout>;
 
@@ -16,30 +16,30 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const appsArticle = enhanceArticleType(AudioFixture, 'Apps');
+const appsAudioArticle = enhanceArticleType(AudioFixture, 'Apps');
 
-if (appsArticle.design !== ArticleDesign.Audio) {
+if (appsAudioArticle.design !== ArticleDesign.Audio) {
 	throw new Error(
-		`Expected ArticleDesign.Audio, got: ${String(appsArticle.design)}`,
+		`Expected ArticleDesign.Audio, got: ${String(appsAudioArticle.design)}`,
 	);
 }
 
-export const Apps: Story = {
+export const AppsAudio: Story = {
 	args: {
 		renderingTarget: 'Apps',
-		article: appsArticle.frontendData,
+		article: appsAudioArticle.frontendData,
 		format: {
-			design: appsArticle.design,
-			display: appsArticle.display,
-			theme: appsArticle.theme,
+			design: appsAudioArticle.design,
+			display: appsAudioArticle.display,
+			theme: appsAudioArticle.theme,
 		},
 	},
 	parameters: {
 		formats: [
 			{
-				design: appsArticle.design,
-				display: appsArticle.display,
-				theme: appsArticle.theme,
+				design: appsAudioArticle.design,
+				display: appsAudioArticle.display,
+				theme: appsAudioArticle.theme,
 			},
 		],
 		config: {
@@ -54,34 +54,34 @@ export const Apps: Story = {
 	},
 };
 
-const webArticle = enhanceArticleType(AudioFixture, 'Web');
+const webAudioArticle = enhanceArticleType(AudioFixture, 'Web');
 
-if (webArticle.design !== ArticleDesign.Audio) {
+if (webAudioArticle.design !== ArticleDesign.Audio) {
 	throw new Error(
-		`Expected ArticleDesign.Audio, got: ${String(webArticle.design)}`,
+		`Expected ArticleDesign.Audio, got: ${String(webAudioArticle.design)}`,
 	);
 }
 
-export const Web: Story = {
+export const WebAudio: Story = {
 	args: {
 		renderingTarget: 'Web',
 		NAV: {
-			...extractNAV(webArticle.frontendData.nav),
-			selectedPillar: getCurrentPillar(webArticle.frontendData),
+			...extractNAV(webAudioArticle.frontendData.nav),
+			selectedPillar: getCurrentPillar(webAudioArticle.frontendData),
 		},
-		article: webArticle.frontendData,
+		article: webAudioArticle.frontendData,
 		format: {
-			design: webArticle.design,
-			display: webArticle.display,
-			theme: webArticle.theme,
+			design: webAudioArticle.design,
+			display: webAudioArticle.display,
+			theme: webAudioArticle.theme,
 		},
 	},
 	parameters: {
 		formats: [
 			{
-				design: webArticle.design,
-				display: webArticle.display,
-				theme: webArticle.theme,
+				design: webAudioArticle.design,
+				display: webAudioArticle.display,
+				theme: webAudioArticle.theme,
 			},
 		],
 		chromatic: {
