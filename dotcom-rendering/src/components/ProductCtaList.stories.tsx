@@ -1,19 +1,14 @@
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import preview from '../../.storybook/preview';
-import { exampleProduct } from '../../fixtures/manual/productBlockElement';
+import { exampleSummaryProducts } from '../../fixtures/manual/productBlockElement';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { ProductCtaList } from './ProductCtaList';
 
 const meta = preview.meta({
 	component: ProductCtaList,
-	title: 'Components/ProductCtaList',
+	title: 'Components/Product Cta List',
 	args: {
-		products: [
-			{
-				productBlock: { ...exampleProduct, h2Id: 'h2-id' },
-				ctaIndex: 0,
-			},
-		],
+		products: exampleSummaryProducts,
 		format: {
 			design: ArticleDesign.Review,
 			display: ArticleDisplay.Standard,
