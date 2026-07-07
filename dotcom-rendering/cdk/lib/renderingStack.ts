@@ -216,6 +216,27 @@ export class RenderingCDKStack extends CDKStack {
 			certificateProps: { domainName },
 			healthcheck: { path: '/_healthcheck' },
 			monitoringConfiguration,
+			additionalPolicies: [
+				new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
+					actions: ['cloudwatch:*', 'logs:*'],
+					resources: ['*'],
+				}),
+				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
+					actions: ['kms:Decrypt', 'kms:DescribeKey'],
+					resources: [
+						`arn:aws:kms:${region}:${account}:FrontendConfigKey`,
+					],
+				}),
+				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
+					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
+					resources: [
+						// This is for backwards compatibility reasons with frontend apps and an old SSM naming system
+						// TODO - ideally we should convert these params to use the newer naming style for consistency
+						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
+					],
+				}),
+			],
 			ec2Props: {
 				instanceMetricGranularity: '1Minute',
 				applicationLogging: {
@@ -223,40 +244,6 @@ export class RenderingCDKStack extends CDKStack {
 					systemdUnitName: guApp,
 				},
 				instanceType,
-				roleConfiguration: {
-					additionalPolicies: [
-						new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
-							actions: ['cloudwatch:*', 'logs:*'],
-							resources: ['*'],
-						}),
-						new GuAllowPolicy(
-							this,
-							'AllowPolicyDescribeDecryptKms',
-							{
-								actions: ['kms:Decrypt', 'kms:DescribeKey'],
-								resources: [
-									`arn:aws:kms:${region}:${account}:FrontendConfigKey`,
-								],
-							},
-						),
-						new GuAllowPolicy(
-							this,
-							'AllowPolicyGetSsmParamsByPath',
-							{
-								actions: [
-									'ssm:GetParametersByPath',
-									'ssm:GetParameter',
-								],
-								resources: [
-									// This is for backwards compatibility reasons with frontend apps and an old SSM naming system
-									// TODO - ideally we should convert these params to use the newer naming style for consistency
-									`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
-									`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
-								],
-							},
-						),
-					],
-				},
 				scaling,
 				userData: getUserData({
 					guApp,
