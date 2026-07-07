@@ -44,12 +44,12 @@ interface Props {
 	serverTime?: number;
 }
 
-export interface WebProps extends Props {
+interface WebProps extends Props {
 	NAV: NavType;
 	renderingTarget: 'Web';
 }
 
-export interface AppProps extends Props {
+interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
 
