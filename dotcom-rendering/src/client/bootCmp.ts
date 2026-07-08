@@ -58,8 +58,9 @@ export const bootCmp = async (
 ): Promise<void> => {
 	if (!window.guardian.config.switches.consentManagement) return; // CMP turned off!
 
+	// Initalise CMP before attempting to submit consent to Ophan, otherwise the consent state may be empty on first load.
+	await initialiseCmp();
 	await Promise.all([
-		initialiseCmp(),
 		eagerlyImportPrivacySettingsLinkIsland(),
 		submitConsentToOphan(renderingTarget),
 	]);

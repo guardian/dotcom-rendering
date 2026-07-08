@@ -3,7 +3,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { KeyTakeaway, StarRating } from '../types/content';
 import { KeyTakeaway as KeyTakeawayComponent } from './KeyTakeaway';
 
@@ -14,7 +14,6 @@ interface KeyTakeawaysProps {
 	pageId: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
@@ -44,7 +43,6 @@ export const KeyTakeaways = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
-	abTests,
 	editionId,
 	hideCaption,
 	starRating,
@@ -64,7 +62,6 @@ export const KeyTakeaways = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					switches={switches}
-					abTests={abTests}
 					editionId={editionId}
 					titleIndex={index + 1}
 					hideCaption={hideCaption}

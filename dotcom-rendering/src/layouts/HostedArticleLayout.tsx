@@ -168,30 +168,6 @@ const sideBorders = css`
 	}
 `;
 
-/**
- * Overrides palette declarations in light mode to use the accent color for the hosted content.
- * @param accentColor - The accentColor to use for the hosted content in light mode.
- * @returns A CSS string with the overridden palette declarations.
- */
-export const overridePaletteColours = (accentColor?: string) => {
-	return css`
-		@media (prefers-color-scheme: light) {
-			--article-link-text: ${accentColor ?? 'inherit'};
-			--article-link-text-hover: ${accentColor ?? 'inherit'};
-			--article-link-border-hover: ${accentColor ?? 'inherit'};
-			--accent-colour: ${accentColor ?? `${sourcePalette.neutral[38]}`};
-		}
-		/* The following styles are to reflect the current accentColor behaviour in storybook as well so we maintain consistency */
-		[data-color-scheme='dark'] & {
-			--article-link-text: inherit;
-			--article-link-text-hover: inherit;
-			--article-link-border-hover: inherit;
-			/* This CSS variable only exists in the scope of hosted content and it isn't defined in the paletteDeclarations.ts */
-			--accent-colour: ${sourcePalette.neutral[86]};
-		}
-	`;
-};
-
 export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	const {
 		content: { frontendData },
@@ -244,10 +220,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			) : null}
 
-			<main
-				data-layout="HostedArticleLayout"
-				css={overridePaletteColours(branding?.hostedCampaignColour)}
-			>
+			<main data-layout="HostedArticleLayout">
 				<article css={[containerStyles, sideBorders]}>
 					<div css={mainMediaStyles}>
 						<MainMedia
@@ -257,7 +230,6 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 							pageId={frontendData.pageId}
 							webTitle={frontendData.webTitle}
 							ajaxUrl={frontendData.config.ajaxUrl}
-							abTests={frontendData.config.abTests}
 							switches={frontendData.config.switches}
 							isAdFreeUser={frontendData.isAdFreeUser}
 							isSensitive={frontendData.config.isSensitive}
@@ -342,7 +314,6 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 									}
 									isDev={!!frontendData.config.isDev}
 									keywordIds={frontendData.config.keywordIds}
-									abTests={frontendData.config.abTests}
 									shouldHideAds={frontendData.shouldHideAds}
 									lang={frontendData.lang}
 									isRightToLeftLang={
