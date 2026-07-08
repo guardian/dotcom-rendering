@@ -139,13 +139,17 @@ const getLoggerCategory = (): string => {
 	if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
 		return 'off';
 	}
+
+	// Are we running in a container?
+	// See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-environment-variables.html
+	if (process.env.AWS_EXECUTION_ENV?.startsWith('AWS_ECS_') === true) {
+		return 'container';
+	}
+
 	if (process.env.NODE_ENV === 'development') {
 		return 'development';
 	}
 	if (process.env.NODE_ENV === 'production') {
-		if (process.env.GU_CONTAINER === 'true') {
-			return 'container';
-		}
 		return process.env.GU_STAGE === 'CODE' ? 'code' : 'production';
 	}
 	return 'default';

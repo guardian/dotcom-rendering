@@ -23,7 +23,6 @@ FROM dhi.io/node:24-alpine3.23 AS application
 WORKDIR /app
 COPY --from=builder --chown=node:node /app/dotcom-rendering/dist /app
 
-ENV GU_CONTAINER=true
 ENV NODE_ENV=production
 
 # Expose the port that the application listens on
