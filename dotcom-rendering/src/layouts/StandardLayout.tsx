@@ -429,9 +429,6 @@ const MatchHeaderContainer = ({
 			: undefined;
 
 	const ab = useAB();
-	const isCricketRedesignEnabled = Boolean(
-		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
-	);
 
 	const isApps = renderingTarget === 'Apps';
 
@@ -457,12 +454,7 @@ const MatchHeaderContainer = ({
 		);
 	}
 
-	if (
-		!isApps &&
-		cricketMatchHeaderUrl &&
-		isCricketMatchReport &&
-		isCricketRedesignEnabled
-	) {
+	if (!isApps && cricketMatchHeaderUrl && isCricketMatchReport) {
 		return (
 			<>
 				<noscript>
