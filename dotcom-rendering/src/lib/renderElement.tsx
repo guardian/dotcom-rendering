@@ -72,7 +72,7 @@ import {
 	interactiveLegacyFigureClasses,
 	isInteractive,
 } from '../layouts/lib/interactiveLegacyStyling';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
 import {
 	ArticleDesign,
@@ -97,7 +97,6 @@ type Props = {
 	isSensitive: boolean;
 	switches: Switches;
 	isPinnedPost?: boolean;
-	abTests: ServerSideTests;
 	editionId: EditionId;
 	forceDropCap?: 'on' | 'off';
 	isTimeline?: boolean;
@@ -169,7 +168,6 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
-	abTests,
 	editionId,
 	forceDropCap,
 	isTimeline = false,
@@ -491,7 +489,6 @@ export const renderElement = ({
 					pageId={pageId}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
@@ -550,7 +547,6 @@ export const renderElement = ({
 					pageId={pageId}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
@@ -568,7 +564,6 @@ export const renderElement = ({
 					pageId={pageId}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
@@ -644,7 +639,6 @@ export const renderElement = ({
 				<ProductElement
 					product={element}
 					ArticleElementComponent={getNestedArticleElement({
-						abTests,
 						ajaxUrl,
 						editionId,
 						isAdFreeUser,
@@ -692,7 +686,6 @@ export const renderElement = ({
 					pageId={pageId}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
@@ -813,7 +806,6 @@ export const renderElement = ({
 				<Timeline
 					timeline={element}
 					ArticleElementComponent={getNestedArticleElement({
-						abTests,
 						ajaxUrl,
 						editionId,
 						isAdFreeUser,
@@ -1040,7 +1032,6 @@ export const RenderArticleElement = ({
 	isSensitive,
 	switches,
 	isPinnedPost,
-	abTests,
 	editionId,
 	forceDropCap,
 	isTimeline,
@@ -1069,7 +1060,6 @@ export const RenderArticleElement = ({
 		isSensitive,
 		switches,
 		isPinnedPost,
-		abTests,
 		editionId,
 		forceDropCap,
 		isTimeline,

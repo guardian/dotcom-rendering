@@ -11,7 +11,7 @@ jest.mock('../../../lib/newsletterSignupTracking', () => ({
 	sendNewsletterSignupEvent: jest.fn(),
 	NEWSLETTER_SIGNUP_COMPONENT_ID: {
 		highlightsCard: (id: string) => `highlights-card-${id}`,
-		highlightsCardForm: (id: string) => `highlights-card-form-${id}`,
+		highlightsModal: (id: string) => `highlights-modal-${id}`,
 	},
 }));
 
@@ -79,7 +79,7 @@ describe('HighlightsNewsletterCard', () => {
 		setCardInView(false);
 	});
 
-	it('opens signup modal on Web click and tracks click', () => {
+	it('opens signup modal on Web click and tracks EXPAND', () => {
 		setCardInView(true);
 
 		renderCard();
@@ -107,16 +107,6 @@ describe('HighlightsNewsletterCard', () => {
 		expect(
 			screen.getByTestId('highlights-newsletter-signup-modal'),
 		).toBeInTheDocument();
-
-		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
-			expect.objectContaining({
-				action: 'CLICK',
-				identityName: defaultProps.newsletter.identityName,
-				componentId: `highlights-card-${defaultProps.newsletter.identityName}`,
-				renderingTarget: defaultProps.renderingTarget,
-				value: { eventDescription: 'highlights-card-clicked' },
-			}),
-		);
 
 		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
 			expect.objectContaining({
@@ -188,10 +178,6 @@ describe('HighlightsNewsletterCard', () => {
 		).not.toBeInTheDocument();
 
 		expect(sendNewsletterSignupEvent).not.toHaveBeenCalledWith(
-			expect.objectContaining({ action: 'CLICK' }),
-		);
-
-		expect(sendNewsletterSignupEvent).not.toHaveBeenCalledWith(
 			expect.objectContaining({ action: 'EXPAND' }),
 		);
 	});
@@ -249,6 +235,19 @@ describe('HighlightsNewsletterCard', () => {
 					altText: `${defaultProps.newsletter.name} newsletter`,
 				},
 			}),
+		);
+	});
+
+	it('sets data-modal-component-id on the link to match the Ophan modal component ID', () => {
+		renderCard();
+
+		const link = screen.getByRole('link', {
+			name: defaultProps.headlineText,
+		});
+
+		expect(link).toHaveAttribute(
+			'data-modal-component-id',
+			`highlights-modal-${defaultProps.newsletter.identityName}`,
 		);
 	});
 

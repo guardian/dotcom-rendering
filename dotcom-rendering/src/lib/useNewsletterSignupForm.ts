@@ -11,6 +11,10 @@ import {
 	getMarketingOptInType,
 } from './newsletter-marketing-opt-in';
 import {
+	getErrorType,
+	getResponseErrorDescription,
+} from './newsletterSignupFailureDetails';
+import {
 	EVENT_DESCRIPTION_TO_ACTION,
 	type NewsletterEventDescription,
 	sendNewsletterSignupEvent,
@@ -108,7 +112,6 @@ const postFormData = async (
 		},
 	});
 };
-
 const sendTracking = (
 	newsletterId: string,
 	componentId: string,
@@ -368,6 +371,21 @@ export const useNewsletterSignupForm = (
 
 			setResponseOk(response.ok);
 
+			const trackingDetails: Record<string, unknown> = {};
+
+			if (marketingOptInType) {
+				trackingDetails.marketingOptInType = marketingOptInType;
+			}
+
+			if (!response.ok) {
+				trackingDetails.responseStatus = response.status;
+				const errorDescription =
+					await getResponseErrorDescription(response);
+				if (errorDescription) {
+					trackingDetails.errorDescription = errorDescription;
+				}
+			}
+
 			sendTracking(
 				newsletterId,
 				componentId,
@@ -375,7 +393,9 @@ export const useNewsletterSignupForm = (
 				renderingTarget,
 				isSignedIn,
 				abTest,
-				marketingOptInType ? { marketingOptInType } : undefined,
+				Object.keys(trackingDetails).length > 0
+					? trackingDetails
+					: undefined,
 			);
 		},
 		[abTest, componentId, isSignedIn, newsletterId, renderingTarget],
@@ -420,6 +440,7 @@ export const useNewsletterSignupForm = (
 						renderingTarget,
 						isSignedIn,
 						abTest,
+						{ errorType: getErrorType(error) },
 					);
 					setIsValidationError(false);
 					setErrorMessage(

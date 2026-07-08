@@ -16,7 +16,7 @@ type LogFields = Partial<DCRLoggingStore> &
 	Record<string | number | symbol, unknown>;
 
 const logFields = (logEvent: LoggingEvent): LogFields => {
-	const { request, requestId, abTests } = loggingStore.getStore() ?? {
+	const { request, requestId } = loggingStore.getStore() ?? {
 		request: { pageId: 'outside-request-context' },
 	};
 
@@ -31,7 +31,6 @@ const logFields = (logEvent: LoggingEvent): LogFields => {
 		level: logEvent.level.levelStr,
 		request,
 		requestId,
-		abTests,
 	};
 	// log4js uses any[] to type data but we want to coerce it here
 	// because we now depend on the type to log the result properly
@@ -111,6 +110,7 @@ const enableLog4js: Configuration = {
 		production: { appenders: ['out', 'fileAppender'], level: 'info' },
 		code: { appenders: ['out', 'fileAppender'], level: 'debug' },
 		development: { appenders: ['console'], level: 'debug' },
+		container: { appenders: ['out'], level: 'info' },
 	},
 	// log4js cluster mode handling does not work as it prevents
 	// logs from processes other than the main process from
@@ -139,6 +139,13 @@ const getLoggerCategory = (): string => {
 	if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
 		return 'off';
 	}
+
+	// Are we running in a container?
+	// See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-environment-variables.html
+	if (process.env.AWS_EXECUTION_ENV?.startsWith('AWS_ECS_') === true) {
+		return 'container';
+	}
+
 	if (process.env.NODE_ENV === 'development') {
 		return 'development';
 	}

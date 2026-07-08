@@ -11,7 +11,7 @@ import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { useIsMyGuardianEnabled } from '../lib/useIsMyGuardianEnabled';
 import { palette as schemedPalette } from '../palette';
-import { FollowTagButton } from './FollowButtons';
+import { FollowTagButton } from './FollowTagButton';
 
 type Props = {
 	id: string;
