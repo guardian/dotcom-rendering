@@ -110,6 +110,7 @@ const enableLog4js: Configuration = {
 		production: { appenders: ['out', 'fileAppender'], level: 'info' },
 		code: { appenders: ['out', 'fileAppender'], level: 'debug' },
 		development: { appenders: ['console'], level: 'debug' },
+		container: { appenders: ['out'], level: 'info' },
 	},
 	// log4js cluster mode handling does not work as it prevents
 	// logs from processes other than the main process from
@@ -142,6 +143,9 @@ const getLoggerCategory = (): string => {
 		return 'development';
 	}
 	if (process.env.NODE_ENV === 'production') {
+		if (process.env.GU_CONTAINER === 'true') {
+			return 'container';
+		}
 		return process.env.GU_STAGE === 'CODE' ? 'code' : 'production';
 	}
 	return 'default';
