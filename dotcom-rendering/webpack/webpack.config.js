@@ -60,6 +60,9 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.env.HOSTNAME': JSON.stringify(process.env.HOSTNAME),
+			'process.env.USE_LOCAL_ASSETS': JSON.stringify(
+				process.env.USE_LOCAL_ASSETS,
+			),
 		}),
 		// Matching modules specified in this regex will not be imported during the webpack build
 		// We use this if there are optional dependencies (e.g in jsdom, ws) to remove uneccesary warnings in our builds / console outpouts.

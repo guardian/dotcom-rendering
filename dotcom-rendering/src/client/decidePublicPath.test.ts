@@ -1,14 +1,5 @@
 import { decidePublicPath } from './decidePublicPath';
 
-const mockHostname = (hostname: string | undefined) => {
-	Object.defineProperty(window, 'location', {
-		value: {
-			hostname,
-		},
-		writable: true,
-	});
-};
-
 const mockFrontendAssetsFullURL = (frontendAssetsFullURL: string) => {
 	Object.defineProperty(window, 'guardian', {
 		value: {
@@ -24,26 +15,13 @@ describe('decidePublicPath', () => {
 	beforeEach(() => {
 		jest.resetModules();
 
-		mockHostname(undefined);
-
 		mockFrontendAssetsFullURL('https://assets.guim.co.uk/');
 
-		process.env = { NODE_ENV: undefined, HOSTNAME: undefined };
+		process.env = { USE_LOCAL_ASSETS: undefined };
 	});
 
-	it('with development flag', () => {
-		process.env.NODE_ENV = 'development';
-		expect(decidePublicPath()).toEqual('/assets/');
-	});
-
-	it('with production flag', () => {
-		process.env.NODE_ENV = 'production';
-		expect(decidePublicPath()).toEqual('https://assets.guim.co.uk/assets/');
-	});
-
-	it('with production flag and localhost', () => {
-		process.env.NODE_ENV = 'production';
-		mockHostname('localhost');
+	it('with USE_LOCAL_ASSETS flag', () => {
+		process.env.USE_LOCAL_ASSETS = 'true';
 		expect(decidePublicPath()).toEqual('/assets/');
 	});
 
