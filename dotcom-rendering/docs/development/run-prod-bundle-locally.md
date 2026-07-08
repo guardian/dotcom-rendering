@@ -1,7 +1,6 @@
 # Run the production bundle locally
 
-While slow to iterate, it can sometimes be useful to build and run the
-production build locally.
+It can be useful to build and run the production build locally.
 
 To do this:
 
@@ -15,7 +14,9 @@ You can then use the provided POST endpoints for testing e.g.:
     /Article
     /Front
 
-Unlike the DEV server, the DCAR PROD server does _not_ implement GET endpoints.
+## Notes
 
-As in production, it expects the Frontend JSON data model to be
+The prod server does not have dev server functionality, so if you make changes you will need to rebuild and run.
+
+The prod server does _not_ implement GET endpoints. Hence, as in production, the Frontend JSON data model will need to be
 `POSTed` to DCAR.
