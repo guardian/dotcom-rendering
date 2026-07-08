@@ -11,5 +11,6 @@ EXPOSE 9000
 
 ENV DISABLE_LOGGING_AND_METRICS=true
 ENV NODE_ENV=production
+ENV USE_LOCAL_ASSETS=true
 
 ENTRYPOINT ["node", "article-rendering/dist/server.js"]
