@@ -13,7 +13,18 @@ import type {
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import type { Branding, CollectionBranding } from './branding';
-import type { BoostLevel, Newsletter, StarRating } from './content';
+import type {
+	AudioAtomBlockElement,
+	BoostLevel,
+	CallToActionAtomBlockElement,
+	ExplainerAtomBlockElement,
+	GuideAtomBlockElement,
+	Newsletter,
+	ProfileAtomBlockElement,
+	QABlockElement,
+	StarRating,
+	TimelineAtomBlockElement,
+} from './content';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
 import type { ArticleMedia, MainMedia } from './mainMedia';
@@ -113,10 +124,26 @@ export type DCRSlideshowImage = {
 	imageCaption?: string;
 };
 
+/**
+ * Atom block elements that have been placed on a front as a snap and
+ * pre-fetched by facia-press so they can be rendered server-side. Each field
+ * mirrors the equivalent DCR block element for that atom type.
+ */
+export type SnapAtoms = {
+	guide?: GuideAtomBlockElement;
+	qanda?: QABlockElement;
+	profile?: ProfileAtomBlockElement;
+	timeline?: TimelineAtomBlockElement;
+	audio?: AudioAtomBlockElement;
+	explainer?: ExplainerAtomBlockElement;
+	cta?: CallToActionAtomBlockElement;
+};
+
 export type DCRSnapType = {
 	embedHtml?: string;
 	embedCss?: string;
 	embedJs?: string;
+	atoms?: SnapAtoms;
 };
 
 export type AspectRatio = FEAspectRatio;

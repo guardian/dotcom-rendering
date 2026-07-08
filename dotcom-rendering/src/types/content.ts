@@ -251,7 +251,7 @@ export interface EmbedBlockElement extends ThirdPartyEmbeddedContent {
 	caption?: string;
 }
 
-interface ExplainerAtomBlockElement {
+export interface ExplainerAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement';
 	elementId: string;
 	id: string;
@@ -271,7 +271,7 @@ interface GenericAtomBlockElement {
 	elementId: string;
 }
 
-interface GuideAtomBlockElement {
+export interface GuideAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.GuideAtomBlockElement';
 	elementId: string;
 	id: string;
@@ -554,7 +554,7 @@ export interface RecipeBlockElement {
 	featuredImage?: RecipeFeaturedImage;
 }
 
-interface ProfileAtomBlockElement {
+export interface ProfileAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ProfileAtomBlockElement';
 	elementId: string;
 	id: string;
@@ -575,7 +575,7 @@ interface PullquoteBlockElement {
 	isThirdPartyTracking?: boolean;
 }
 
-interface QABlockElement {
+export interface QABlockElement {
 	_type: 'model.dotcomrendering.pageElements.QABlockElement';
 	elementId: string;
 	id: string;

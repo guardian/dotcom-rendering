@@ -35,6 +35,7 @@ import { CardCommentCount } from '../CardCommentCount.island';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
+import { CardSnapAtom } from '../CardSnapAtom';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.island';
 import { Pill } from '../Pill';
@@ -506,6 +507,12 @@ export const Card = ({
 				<Snap snapData={snapData} dataLinkName={dataLinkName} />
 			</SnapCssSandbox>
 		);
+	}
+
+	// SPIKE: render an atom (guide, Q&A, profile, timeline, audio, explainer or
+	// CTA) that arrived on a front as a `LinkSnap`.
+	if (snapData?.atoms) {
+		return <CardSnapAtom atoms={snapData.atoms} />;
 	}
 
 	// Determine if the card is used within a gallery article
