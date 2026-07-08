@@ -37,16 +37,26 @@ const hoverStyles = css`
 `;
 
 const linkStyles = css`
+	position: relative;
+	text-decoration: none;
+	${hoverStyles}
+`;
+
+const horizontalLayout = css`
 	display: flex;
 	flex-direction: row-reverse;
 	/* Needed due to row-reverse direction */
 	justify-content: flex-end;
 	align-items: flex-start;
-	text-decoration: none;
 	gap: ${space[2]}px;
-	position: relative;
+`;
 
-	${hoverStyles}
+const verticalLayout = css`
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: start;
+	align-items: start;
+	gap: ${space[2]}px;
 `;
 
 const headingStyles = css`
@@ -59,7 +69,13 @@ export const HostedContentOnwardsCard = ({
 	isGalleryPage = false,
 }: Props) => {
 	return (
-		<a href={trail.url} css={linkStyles}>
+		<a
+			href={trail.url}
+			css={[
+				linkStyles,
+				isGalleryPage ? verticalLayout : horizontalLayout,
+			]}
+		>
 			<h3 css={headingStyles}>{trail.headline}</h3>
 			{!!trail.image && (
 				<>
@@ -68,7 +84,7 @@ export const HostedContentOnwardsCard = ({
 							alt={trail.image.altText}
 							src={generateImageURL({
 								mainImage: trail.image.src,
-								imageWidth: isGalleryPage ? 180 : 120,
+								imageWidth: isGalleryPage ? 220 : 120,
 								resolution: 'low',
 								aspectRatio: '5:4',
 							})}

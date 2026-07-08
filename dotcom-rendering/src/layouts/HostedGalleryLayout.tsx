@@ -105,12 +105,15 @@ const ctaButtonStyles = css`
 	margin-right: ${space[3]}px;
 `;
 
+const borderTop = css`
+	border-top: 1px solid ${palette('--article-border')};
+`;
+
 const onwardContentStyles = css`
 	${grid.column.centre}
 	${from.desktop} {
 		${grid.between('centre-column-start', 'right-column-end')}
 	}
-
 	padding-bottom: ${space[5]}px;
 `;
 
@@ -212,7 +215,12 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					<div css={bttPosition}>
 						<BackToTop format={format} />
 					</div>
+				</div>
 
+				<section
+					data-component="series"
+					css={[paddedContainer, borderTop]}
+				>
 					<div css={onwardContentStyles}>
 						<Island priority="feature" defer={{ until: 'idle' }}>
 							<FetchHostedOnwards
@@ -222,7 +230,7 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</div>
-				</div>
+				</section>
 			</main>
 		</>
 	);
