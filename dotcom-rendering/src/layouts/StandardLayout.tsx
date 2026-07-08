@@ -28,7 +28,6 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
-import { useAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -427,8 +426,6 @@ const MatchHeaderContainer = ({
 		article.matchType === 'CricketMatchType'
 			? article.matchHeaderUrl
 			: undefined;
-
-	const ab = useAB();
 
 	const isApps = renderingTarget === 'Apps';
 

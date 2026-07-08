@@ -51,7 +51,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
-import { useAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -269,8 +268,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 		config: { isPaidContent, host, hasLiveBlogTopAd, hasSurveyAd },
 	} = article;
 
-	const ab = useAB();
-
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
@@ -294,9 +291,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 		article.matchType === 'FootballMatchType'
 			? article.matchStatsUrl
 			: undefined;
-
-	const cricketMatchUrl =
-		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
 
 	const cricketMatchStatsUrl =
 		article.matchType === 'CricketMatchType'
