@@ -2138,6 +2138,24 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                 "Ref": "RiffRaffDeploymentId",
               },
             },
+            "Environment": [
+              {
+                "Name": "NODE_ENV",
+                "Value": "production",
+              },
+              {
+                "Name": "GU_STAGE",
+                "Value": "CODE",
+              },
+              {
+                "Name": "GU_APP",
+                "Value": "tag-page-rendering",
+              },
+              {
+                "Name": "GU_STACK",
+                "Value": "frontend",
+              },
+            ],
             "Essential": true,
             "Image": {
               "Fn::Join": [

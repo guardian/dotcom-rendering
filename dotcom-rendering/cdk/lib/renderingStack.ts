@@ -295,6 +295,22 @@ export class RenderingCDKStack extends CDKStack {
 					}),
 		});
 
+		if (imageIdentifier != null) {
+			const ecsEnvVars: Record<string, string> = {
+				NODE_ENV: 'production',
+				GU_STAGE: stage,
+				GU_APP: guApp,
+				GU_STACK: guStack,
+			};
+
+			for (const [key, value] of Object.entries(ecsEnvVars)) {
+				app.ecsService?.taskDefinition.defaultContainer?.addEnvironment(
+					key,
+					value,
+				);
+			}
+		}
+
 		/**
 		 * The default Node server keep alive timeout is 5 seconds
 		 * @see https://nodejs.org/api/http.html#serverkeepalivetimeout
