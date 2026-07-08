@@ -178,7 +178,7 @@ test.describe('Banner browserId targeting', function () {
 	});
 
 	// Skip this test because it doesn't work in the github actions run. It does however work locally
-	test.skip('does not send browserId when user has not consented, even if in the auxia variant', async ({
+	test('does not send browserId when user has not consented, even if in the auxia variant', async ({
 		page,
 		context,
 	}) => {
