@@ -43,12 +43,10 @@ prod:
 	NODE_ENV=production node dist/server.js
 
 prod-local: export DISABLE_LOGGING_AND_METRICS = true
-prod-local: export USE_LOCAL_ASSETS = true
 prod-local: prod
 
 # dev #########################################
 
-dev: export USE_LOCAL_ASSETS = true
 dev: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./webpack/webpack.config.js
