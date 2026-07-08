@@ -69,7 +69,6 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 					commercialMetricsEnabled={
 						!!tagPage.config.switches.commercialMetrics
 					}
-					tests={tagPage.config.abTests}
 				/>
 			</Island>
 			<Island priority="critical">
@@ -80,10 +79,7 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
-			{isGoogleOneTapEnabled(
-				tagPage.config.abTests,
-				tagPage.config.switches,
-			) && (
+			{isGoogleOneTapEnabled(tagPage.config.switches) && (
 				<Island priority="enhancement" defer={{ until: 'idle' }}>
 					<GoogleOneTap />
 				</Island>

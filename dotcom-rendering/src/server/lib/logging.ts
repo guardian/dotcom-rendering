@@ -16,7 +16,7 @@ type LogFields = Partial<DCRLoggingStore> &
 	Record<string | number | symbol, unknown>;
 
 const logFields = (logEvent: LoggingEvent): LogFields => {
-	const { request, requestId, abTests } = loggingStore.getStore() ?? {
+	const { request, requestId } = loggingStore.getStore() ?? {
 		request: { pageId: 'outside-request-context' },
 	};
 
@@ -31,7 +31,6 @@ const logFields = (logEvent: LoggingEvent): LogFields => {
 		level: logEvent.level.levelStr,
 		request,
 		requestId,
-		abTests,
 	};
 	// log4js uses any[] to type data but we want to coerce it here
 	// because we now depend on the type to log the result properly
