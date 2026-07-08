@@ -13,13 +13,15 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import { type ComponentProps, useMemo } from 'react';
+import { useMemo } from 'react';
 import type { SWRConfiguration } from 'swr';
 import useSWR from 'swr';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import type {
+	EnvironmentClient,
+	LiveActivitiesClient,
 	MatchNotificationsClient,
 	NotificationsClient,
 } from '../../lib/bridgetApi';
@@ -33,16 +35,17 @@ import type { ArticleDeprecated } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { BigNumber } from '../BigNumber';
 import { FootballCrest } from '../FootballCrest';
+import { MatchHeaderFallback } from '../MatchHeaderFallback';
 import { Placeholder } from '../Placeholder';
 import { background, border, primaryText, secondaryText } from './colours';
-import { FootballMatchHeaderFallback } from './FootballMatchHeaderFallback';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
 import { Hr } from './Hr';
 import { Notifications } from './Notifications';
+import type { TabName } from './Tabs';
 import { Tabs } from './Tabs';
 
 export type FootballMatchHeaderProps = {
-	initialTab: ComponentProps<typeof Tabs>['selected'];
+	initialTab: TabName;
 	initialData?: HeaderData;
 	leagueName: string;
 	leagueURL?: string;
@@ -58,6 +61,8 @@ type Props = FootballMatchHeaderProps & {
 	refreshInterval: number;
 	notificationsClient: NotificationsClient;
 	matchNotificationsClient: MatchNotificationsClient;
+	environmentClient: EnvironmentClient;
+	liveActivitiesClient: LiveActivitiesClient;
 };
 
 export const FootballMatchHeader = (props: Props) => {
@@ -78,7 +83,7 @@ export const FootballMatchHeader = (props: Props) => {
 				props.format.design === ArticleDesign.DeadBlog)
 		) {
 			return (
-				<FootballMatchHeaderFallback
+				<MatchHeaderFallback
 					format={props.format}
 					article={props.article}
 				/>
@@ -109,14 +114,18 @@ export const FootballMatchHeader = (props: Props) => {
 		>
 			<div
 				css={{
-					'&': css(grid.paddedContainer),
+					'&': css(
+						grid.paddedContainer,
+						grid.outerRules(
+							palette(
+								'--football-match-header-fixture-result-border',
+							),
+						),
+					),
 					[from.tablet]: {
 						borderColor: palette(
 							'--football-match-header-fixture-result-border',
 						),
-						borderStyle: 'solid',
-						borderLeftWidth: 1,
-						borderRightWidth: 1,
 					},
 				}}
 			>
@@ -134,9 +143,18 @@ export const FootballMatchHeader = (props: Props) => {
 					match={match}
 					notificationsClient={props.notificationsClient}
 					matchNotificationsClient={props.matchNotificationsClient}
+					environmentClient={props.environmentClient}
+					liveActivitiesClient={props.liveActivitiesClient}
 				/>
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
-				<Tabs {...tabs} />
+				<Tabs
+					sportKind="football"
+					matchKind={match.kind}
+					selected={props.initialTab}
+					reportTab={tabs.reportURL}
+					liveTab={tabs.liveURL}
+					infoTab={tabs.infoURL}
+				/>
 			</div>
 		</section>
 	);
@@ -154,7 +172,7 @@ const swrOptions = (refreshInterval: number): SWRConfiguration<HeaderData> => ({
 
 const fetcher =
 	(
-		selected: Props['initialTab'],
+		selected: TabName,
 		renderingTarget: RenderingTarget,
 		getHeaderData: Props['getHeaderData'],
 	) =>
@@ -324,18 +342,27 @@ const Team = (props: {
 			flex: '1 1 50%',
 			wordBreak: 'break-word',
 			borderLeftStyle: 'solid',
+			borderLeftColor: 'var(--border-left-colour)',
 			'&:last-of-type': {
 				paddingLeft: space[2],
 				borderLeftWidth: 1,
 			},
 			[from.leftCol]: {
-				paddingLeft: space[2],
-				borderLeftWidth: 1,
 				paddingTop: space[3],
+				position: 'relative',
+				'&:first-of-type::before': {
+					content: '""',
+					top: 0,
+					left: -10,
+					width: 1,
+					backgroundColor: 'var(--border-left-colour)',
+					position: 'absolute',
+					height: '100%',
+				},
 			},
 		}}
 		style={{
-			borderLeftColor: palette(border(props.match.kind)),
+			'--border-left-colour': palette(border(props.match.kind)),
 		}}
 	>
 		<TeamName name={props.match[props.team].name} />

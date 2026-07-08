@@ -223,7 +223,7 @@ export const handleCricketMatchPage: RequestHandler = ({ body }, res) => {
 const parseFEFootballMatch = (
 	data: FEFootballMatchInfoPage,
 ): FootballMatchInfoPage => {
-	const parsedFootballMatch = parseFootballMatch(data.footballMatch);
+	const parsedFootballMatch = parseFootballMatch(data.matchStats);
 
 	if (!parsedFootballMatch.ok) {
 		throw new Error(
@@ -231,7 +231,7 @@ const parseFEFootballMatch = (
 		);
 	}
 
-	const parsedFootballMatchStats = parseMatchStats(data.footballMatch);
+	const parsedFootballMatchStats = parseMatchStats(data.matchStats);
 	const matchInfo = parseFootballMatchV2(data.matchInfo);
 
 	if (!parsedFootballMatchStats.ok) {

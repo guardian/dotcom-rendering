@@ -83,7 +83,7 @@ const underlineOnHoverStyles = css`
 	}
 `;
 
-const hoverStyles = css`
+const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 	:hover .media-overlay {
 		position: absolute;
 		top: 0;
@@ -91,6 +91,8 @@ const hoverStyles = css`
 		width: 100%;
 		height: 100%;
 		background-color: ${palette('--card-background-hover')};
+
+		${isLoopAndInLoopClickTestVariant && loopClickThroughOverlayStyles}
 	}
 
 	${underlineOnHoverStyles}
@@ -104,6 +106,12 @@ const hoverStyles = css`
 			background-color: transparent;
 		}
 	}
+`;
+
+const loopClickThroughOverlayStyles = css`
+	z-index: ${getZIndex('mediaOverlay')};
+	cursor: pointer;
+	pointer-events: none;
 `;
 
 const contentStyles = css`
@@ -439,16 +447,18 @@ export const FeatureCard = ({
 	articleMedia,
 }: Props) => {
 	const ab = useAB();
-	const isInLoopClickTestControl =
+	const isInLoopClickTestControl = Boolean(
 		ab?.isUserInTestGroup(
 			'fronts-and-curation-loop-click-through',
 			'control',
-		) ?? false;
-	const isInLoopClickTestVariant =
+		),
+	);
+	const isInLoopClickTestVariant = Boolean(
 		ab?.isUserInTestGroup(
 			'fronts-and-curation-loop-click-through',
 			'variant',
-		) ?? false;
+		),
+	);
 
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -467,10 +477,14 @@ export const FeatureCard = ({
 		return null;
 	}
 
-	const isInLoopClickTest =
-		media.style &&
-		media.style === 'loop-video' &&
-		(isInLoopClickTestControl || isInLoopClickTestVariant);
+	const isLoopAndInLoopClickTestControl = Boolean(
+		media.style === 'loop-video' && isInLoopClickTestControl,
+	);
+	const isLoopAndInLoopClickTestVariant = Boolean(
+		media.style === 'loop-video' && isInLoopClickTestVariant,
+	);
+	const isLoopAndInLoopClickTest =
+		isLoopAndInLoopClickTestControl || isLoopAndInLoopClickTestVariant;
 
 	const mediaType =
 		media.type === 'self-hosted-video' ? media.style : media.type;
@@ -501,9 +515,15 @@ export const FeatureCard = ({
 
 	const aspectRatioNumber = isImmersive ? 5 / 3 : 4 / 5;
 
-	/* The whole card is clickable on cinemagraphs and pictures */
+	/** The whole card is clickable for:
+	 * - cinemagraphs
+	 * - pictures
+	 * - loops in the loop click test variant group
+	 * */
 	const allowLinkThroughOverlay =
-		media.style === 'cinemagraph' || media.type === 'picture';
+		media.style === 'cinemagraph' ||
+		media.type === 'picture' ||
+		isLoopAndInLoopClickTestVariant;
 
 	return (
 		<FormatBoundary format={format}>
@@ -511,7 +531,9 @@ export const FeatureCard = ({
 				<div
 					css={[
 						baseCardStyles,
-						!isSelfHostedVideoWithControls && hoverStyles,
+						(!isSelfHostedVideoWithControls ||
+							isLoopAndInLoopClickTestVariant) &&
+							hoverStyles(isLoopAndInLoopClickTestVariant),
 					]}
 				>
 					{!isYoutubeVideo && !isSelfHostedVideoWithControls && (
@@ -520,9 +542,9 @@ export const FeatureCard = ({
 							headlineText={headlineText}
 							dataLinkName={resolvedDataLinkName}
 							isExternalLink={isExternalLink}
-							isLoopClickThroughTest={isInLoopClickTest === true}
-							isLoopClickThroughTestVariant={
-								isInLoopClickTestVariant
+							isLoopAndInLoopClickTest={isLoopAndInLoopClickTest}
+							shouldRaiseZIndexForAbTest={
+								isLoopAndInLoopClickTestVariant
 							}
 						/>
 					)}
@@ -632,6 +654,7 @@ export const FeatureCard = ({
 											controlsPosition="top"
 											minAspectRatio={aspectRatioNumber}
 											maxAspectRatio={aspectRatioNumber}
+											preventAutoplay={false}
 											cardLink={{
 												headlineText,
 												dataLinkName:
@@ -685,7 +708,8 @@ export const FeatureCard = ({
 								)}
 
 								{/* This overlay is styled when the CardLink is hovered */}
-								{!isSelfHostedVideoWithControls && (
+								{(!isSelfHostedVideoWithControls ||
+									isLoopAndInLoopClickTestVariant) && (
 									<div className="media-overlay" />
 								)}
 								<div
@@ -739,11 +763,11 @@ export const FeatureCard = ({
 												headlineText={headlineText}
 												dataLinkName={dataLinkName}
 												isExternalLink={isExternalLink}
-												isLoopClickThroughTest={
-													isInLoopClickTest === true
+												isLoopAndInLoopClickTest={
+													isLoopAndInLoopClickTest
 												}
-												isLoopClickThroughTestVariant={
-													isInLoopClickTestVariant
+												shouldRaiseZIndexForAbTest={
+													isLoopAndInLoopClickTestVariant
 												}
 											/>
 										)}

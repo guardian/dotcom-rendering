@@ -9,6 +9,9 @@ export const DEFAULT_ASPECT_RATIO = 5 / 4;
 
 export const DEFAULT_IMAGE_ASPECT_RATIO = '5:4';
 
+/** * The maximum duration (in seconds) for a video to be considered "short". * Equals two 10-second time segments plus a small buffer. */
+const SHORT_VIDEO_MAX_DURATION = 20;
+
 export const customSelfHostedVideoPlayAudioEventName =
 	'self-hosted-video:play-with-audio';
 export const customYoutubePlayEventName = 'youtube-video:play';
@@ -49,6 +52,13 @@ export type SupportedVideoFileType =
 	(typeof allSupportedVideoFileTypes)[number];
 
 /**
+ * We use an arbitrary limit or 20 seconds before considering a video "long".
+ * Why 20? This is because we request the video in 10 second chunks.
+ * */
+const isLongVideo = (duration: number): boolean => {
+	return duration > SHORT_VIDEO_MAX_DURATION;
+};
+/**
  * The looping video player types its `sources` attribute as `Sources`.
  * However, looping videos in articles are delivered as media atoms, which type
  * their `assets` as `VideoAssets`. Which means that we need to alter the shape
@@ -57,12 +67,16 @@ export type SupportedVideoFileType =
 export const extractValidSourcesFromAssets = (
 	assets: VideoAssets[],
 	videoStyle: VideoPlayerFormat,
+	videoDuration?: number,
 ): Source[] => {
 	/**
 	 * Sources are ordered because the browser will use the first source that it supports.
 	 */
 	const orderedMimeTypes =
-		videoStyle === 'Default'
+		/**
+		 * For videos that are 20 seconds or shorter, we prefer mp4 to avoid the overhead of HLS streaming.
+		 * */
+		videoStyle === 'Default' && isLongVideo(videoDuration ?? 0)
 			? supportedFileTypesPreferM3U8
 			: supportedFileTypesPreferMp4;
 
@@ -90,9 +104,10 @@ export const extractValidSourcesFromAssets = (
 export const convertFEMediaAssetsToVideoAssets = (
 	assets: FEMediaAsset[],
 ): VideoAssets[] =>
-	assets.map(({ id, mimeType, dimensions, hasAudio }) => ({
+	assets.map(({ id, mimeType, aspectRatio, dimensions, hasAudio }) => ({
 		url: id,
 		mimeType,
+		aspectRatio,
 		dimensions,
 		hasAudio,
 	}));

@@ -50,6 +50,7 @@ const defaultArgs = {
 	newsletterName: 'Saturday Edition',
 	frequency: 'every Saturday',
 	previewAction: { behaviour: 'modal' as const, onClick: fn() },
+	componentId: 'AR NewsletterSignupForm saturday-edition',
 };
 
 /** Shared no-op handlers — stories that focus on visual state don't need real callbacks. */
@@ -220,20 +221,6 @@ export const WithoutPreview = meta.story({
 	args: { ...defaultArgs, previewAction: undefined },
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(mockForm({}));
-	},
-});
-
-/** `hidePrivacyMessage` — focused state without the privacy notice. */
-export const HidePrivacyMessage = meta.story({
-	args: { ...defaultArgs, hidePrivacyMessage: true },
-	beforeEach() {
-		mocked(useNewsletterSignupForm).mockReturnValue(
-			mockForm({
-				isInteracted: true,
-				showMarketingToggle: true,
-				marketingOptIn: true,
-			}),
-		);
 	},
 });
 

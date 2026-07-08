@@ -20,6 +20,7 @@ import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -331,6 +332,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				/>
 			)}
 
+			<DirectoryPageNavIsland
+				pageId={article.pageId}
+				pageTags={article.tags}
+			/>
+
 			{format.theme === ArticleSpecial.Labs && (
 				<Stuck zIndex="subNavBanner">
 					<Section
@@ -367,7 +373,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						pageId={article.pageId}
 						webTitle={article.webTitle}
 						ajaxUrl={article.config.ajaxUrl}
-						abTests={article.config.abTests}
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
@@ -683,7 +688,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									isPreview={article.config.isPreview}
 									idUrl={article.config.idUrl ?? ''}
 									isDev={!!article.config.isDev}
-									abTests={article.config.abTests}
 									tableOfContents={article.tableOfContents}
 									lang={article.lang}
 									isRightToLeftLang={
@@ -995,10 +999,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						</Island>
 					</BannerWrapper>
 					{renderAds && (
-						<MobileStickyContainer
-							contentType={article.contentType}
-							pageId={article.pageId}
-						/>
+						<MobileStickyContainer data-print-layout="hide" />
 					)}
 				</>
 			)}

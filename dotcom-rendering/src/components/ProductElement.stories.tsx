@@ -9,7 +9,6 @@ import type { ProductBlockElement } from '../types/content';
 import { ProductElement } from './ProductElement';
 
 const ArticleElementComponent = getNestedArticleElement({
-	abTests: {},
 	ajaxUrl: '',
 	editionId: 'UK',
 	isAdFreeUser: false,
@@ -234,6 +233,7 @@ const product = {
 			label: '£79.99 at John Lewis',
 			linkType: 'ProductButton',
 			priority: 'Primary',
+			elementId: '123',
 		},
 		{
 			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
@@ -241,6 +241,7 @@ const product = {
 			label: '£79.99 at Amazon',
 			linkType: 'ProductButton',
 			priority: 'Primary',
+			elementId: '1234',
 		},
 		{
 			_type: 'model.dotcomrendering.pageElements.TextBlockElement',

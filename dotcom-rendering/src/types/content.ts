@@ -427,6 +427,7 @@ export interface ListItem {
 
 export interface LinkBlockElement {
 	_type: 'model.dotcomrendering.pageElements.LinkBlockElement';
+	elementId: string;
 	url: string;
 	label: string;
 	linkType: 'ProductButton' | 'StandardButton';
@@ -529,6 +530,28 @@ export interface ProductSummaryElement {
 	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
 	matchedProducts: ProductBlockElement[];
 	variant: 'carousel' | 'stacked-default' | 'stacked-expanded';
+}
+
+export interface RecipeFeaturedImage {
+	url: string;
+	mediaId: string;
+	cropId: string;
+	source?: string;
+	photographer?: string;
+	imageType?: string;
+	caption?: string;
+	width?: number;
+	height?: number;
+	mediaApiUri?: string;
+}
+
+export interface RecipeBlockElement {
+	_type: 'model.dotcomrendering.pageElements.RecipeBlockElement';
+	elementId?: string;
+	id: string;
+	title?: string;
+	description?: string;
+	featuredImage?: RecipeFeaturedImage;
 }
 
 interface ProfileAtomBlockElement {
@@ -901,7 +924,8 @@ export type FEElement =
 	| WitnessTypeBlockElement
 	| CrosswordElement
 	| ProductBlockElement
-	| ProductSummaryElement;
+	| ProductSummaryElement
+	| RecipeBlockElement;
 
 // -------------------------------------
 // Misc

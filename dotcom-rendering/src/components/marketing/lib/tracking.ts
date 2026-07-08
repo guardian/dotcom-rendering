@@ -261,6 +261,7 @@ const addChoiceCardDestinationTestParam = (
 	url: string,
 	destination: ChoiceCard['destination'],
 	destinationTest: ChoiceCard['destinationTest'],
+	isRecurringProduct: boolean,
 ): string => {
 	if (!destinationTest || typeof destinationTest !== 'object') {
 		return url;
@@ -275,7 +276,7 @@ const addChoiceCardDestinationTestParam = (
 
 	const { testName, variantName } = parsedDestinationTest;
 	const paramKey =
-		destination === 'LandingPage'
+		isRecurringProduct || destination === 'LandingPage'
 			? 'force-landing-page'
 			: 'force-one-time-checkout';
 	const newParam = `${paramKey}=${testName}:${variantName}`;
@@ -308,12 +309,14 @@ export const getChoiceCardUrl = (choiceCard: ChoiceCard): string => {
 				addChoiceCardsOneTimeParams(`${SupportUrl}/contribute`),
 				destination,
 				destinationTest,
+				false,
 			);
 		} else {
 			return addChoiceCardDestinationTestParam(
 				`${SupportUrl}/one-time-checkout`,
 				destination,
 				destinationTest,
+				false,
 			);
 		}
 	} else {
@@ -326,6 +329,7 @@ export const getChoiceCardUrl = (choiceCard: ChoiceCard): string => {
 			),
 			destination,
 			destinationTest,
+			true,
 		);
 	}
 };

@@ -5,7 +5,11 @@ import { validateAsBlock, validateAsFEArticle } from '../model/validate';
 import { enhanceArticleType } from '../types/article';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
-import { renderAppsBlocks, renderArticle } from './render.article.apps';
+import {
+	renderAppsBlocks,
+	renderArticle,
+	renderHostedContent,
+} from './render.article.apps';
 
 export const handleAppsArticle: RequestHandler = ({ body }, res) => {
 	const frontendData = validateAsFEArticle(body);
@@ -27,7 +31,7 @@ export const handleAppsInteractive: RequestHandler = ({ body }, res) => {
 export const handleAppsHostedContent: RequestHandler = ({ body }, res) => {
 	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Apps');
-	const { html, prefetchScripts } = renderArticle(article);
+	const { html, prefetchScripts } = renderHostedContent(article);
 
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
@@ -47,7 +51,6 @@ export const handleAppsBlocks: RequestHandler = ({ body }, res) => {
 		section,
 		sharedAdTargeting,
 		adUnit,
-		abTests,
 		switches,
 		keywordIds,
 		shouldHideAds,
@@ -80,7 +83,6 @@ export const handleAppsBlocks: RequestHandler = ({ body }, res) => {
 		sharedAdTargeting,
 		adUnit,
 		switches,
-		abTests,
 		keywordIds,
 		shouldHideAds,
 	});

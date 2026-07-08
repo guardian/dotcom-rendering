@@ -12,6 +12,7 @@ import {
 import { getVideoClient } from '../../lib/bridgetApi';
 import { getZIndex } from '../../lib/getZIndex';
 import { getAuthStatus } from '../../lib/identity';
+import { useVideoAttentionTracking } from '../../lib/useVideoAttentionTracking';
 import { useVideoMilestoneTracking } from '../../lib/useVideoMilestoneTracking';
 import type { CustomPlayEventDetail } from '../../lib/video';
 import {
@@ -28,6 +29,7 @@ import { YouTubePlayer } from './YoutubePlayer';
 
 type Props = {
 	uniqueId: string;
+	atomId: string;
 	videoId: string;
 	height: number;
 	width: number;
@@ -43,6 +45,7 @@ type Props = {
 	consentState: ConsentState;
 	abTestParticipations: Record<string, string>;
 	renderingTarget: RenderingTarget;
+	isInView: boolean;
 };
 
 /**
@@ -196,6 +199,7 @@ const createOnStateChangeListener =
 		sendOphanTrackingEvent: (event: VideoEventKey) => void,
 		trackMilestones: ReturnType<typeof useVideoMilestoneTracking>[0],
 		resetMilestones: () => void,
+		setIsPlaying: (value: boolean) => void,
 	): YT.PlayerEventHandler<YT.OnStateChangeEvent> =>
 	(event) => {
 		const loggerFrom = 'YoutubeAtomPlayer onStateChange';
@@ -216,6 +220,7 @@ const createOnStateChangeListener =
 			 * get aware when a video is played
 			 */
 			dispatchCustomPlayEvent(uniqueId);
+			setIsPlaying(true);
 
 			trackMilestones({ started: true });
 			if (playerState.paused) {
@@ -239,6 +244,7 @@ const createOnStateChangeListener =
 
 		if (event.data === YT.PlayerState.PAUSED) {
 			dispatchCustomPauseEvent(uniqueId);
+			setIsPlaying(false);
 
 			log('dotcom', {
 				from: loggerFrom,
@@ -263,6 +269,7 @@ const createOnStateChangeListener =
 
 		if (event.data === YT.PlayerState.ENDED) {
 			dispatchCustomPauseEvent(uniqueId);
+			setIsPlaying(false);
 			clearInterval(playerState.progressIntervalId);
 			trackMilestones({ ended: true });
 			resetMilestones();
@@ -381,6 +388,7 @@ const isSignedIn = async (): Promise<boolean> => {
 
 export const YoutubeAtomPlayer = ({
 	uniqueId,
+	atomId,
 	videoId,
 	height,
 	width,
@@ -396,6 +404,7 @@ export const YoutubeAtomPlayer = ({
 	consentState,
 	abTestParticipations,
 	renderingTarget,
+	isInView,
 }: Props): JSX.Element => {
 	/**
 	 * useRef for player and progressEvents
@@ -411,15 +420,14 @@ export const YoutubeAtomPlayer = ({
 		},
 		[eventEmitters],
 	);
-	const [trackMilestones, resetMilestones] = useVideoMilestoneTracking(
-		sendOphanTrackingEvent,
-	);
+
 	const playerPauseState = useRef<{
 		paused: boolean;
 		progressIntervalId: ReturnType<typeof setInterval> | undefined;
 	}>({ paused: false, progressIntervalId: undefined });
 
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
+	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 	const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 	const [applyFullscreenStyles, setApplyFullscreenStyles] =
 		useState<boolean>(false);
@@ -435,6 +443,17 @@ export const YoutubeAtomPlayer = ({
 	const adsManager = useRef<google.ima.AdsManager>();
 
 	const id = `youtube-player-${uniqueId}`;
+
+	useVideoAttentionTracking(
+		`gu-video-youtube-${atomId}`,
+		isInView,
+		isPlaying,
+		renderingTarget,
+	);
+
+	const [trackMilestones, resetMilestones] = useVideoMilestoneTracking(
+		sendOphanTrackingEvent,
+	);
 
 	/**
 	 * Initialise player useEffect
@@ -460,6 +479,7 @@ export const YoutubeAtomPlayer = ({
 					sendOphanTrackingEvent,
 					trackMilestones,
 					resetMilestones,
+					setIsPlaying,
 				);
 
 				/**

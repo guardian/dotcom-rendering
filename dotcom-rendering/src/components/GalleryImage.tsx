@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { from, space, until } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { grid } from '../grid';
-import { type ArticleFormat } from '../lib/articleFormat';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getImage } from '../lib/image';
 import { palette } from '../palette';
-import { type ImageBlockElement } from '../types/content';
+import type { ImageBlockElement } from '../types/content';
 import { type RenderingTarget } from '../types/renderingTarget';
 import { AppsLightboxImage } from './AppsLightboxImage.island';
 import { GalleryCaption } from './GalleryCaption';
@@ -19,11 +19,12 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	renderingTarget: RenderingTarget;
+	imagesLength?: number;
 };
 
 const styles = css`
 	${grid.paddedContainer}
-	${grid.verticalRules()}
+	${grid.outerRules()}
 	grid-auto-flow: row dense;
 	background-color: ${palette('--article-inner-background')};
 
@@ -33,9 +34,22 @@ const styles = css`
 	}
 
 	${from.desktop} {
-		&:first-of-type {
+		&:first-of-type > * {
 			padding-top: ${space[3]}px;
 		}
+	}
+
+	${between.desktop.and.leftCol} {
+		${grid.centreRule(2)}
+	}
+	${from.leftCol} {
+		${grid.centreRule(1)}
+	}
+`;
+
+const hostedGalleryOverrides = css`
+	${between.desktop.and.leftCol} {
+		${grid.centreRule(2, 'transparent')}
 	}
 `;
 
@@ -63,6 +77,7 @@ export const GalleryImage = ({
 	pageId,
 	webTitle,
 	renderingTarget,
+	imagesLength,
 }: Props) => {
 	const asset = getImage(image.media.allImages);
 
@@ -78,7 +93,13 @@ export const GalleryImage = ({
 	}
 
 	return (
-		<figure css={styles}>
+		<figure
+			css={[
+				styles,
+				format.design === ArticleDesign.HostedGallery &&
+					hostedGalleryOverrides,
+			]}
+		>
 			<div
 				css={galleryBodyImageStyles}
 				/**
@@ -131,6 +152,7 @@ export const GalleryImage = ({
 				pageId={pageId}
 				webTitle={webTitle}
 				position={image.position}
+				imagesLength={imagesLength}
 			/>
 		</figure>
 	);

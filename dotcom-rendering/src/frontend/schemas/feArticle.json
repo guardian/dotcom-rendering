@@ -893,6 +893,9 @@
                 },
                 {
                     "$ref": "#/definitions/ProductSummaryElement"
+                },
+                {
+                    "$ref": "#/definitions/RecipeBlockElement"
                 }
             ]
         },
@@ -2670,6 +2673,9 @@
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.LinkBlockElement"
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -2693,6 +2699,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "label",
                 "linkType",
                 "url"
@@ -4813,6 +4820,74 @@
                 "variant"
             ]
         },
+        "RecipeBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.RecipeBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "featuredImage": {
+                    "$ref": "#/definitions/RecipeFeaturedImage"
+                }
+            },
+            "required": [
+                "_type",
+                "id"
+            ]
+        },
+        "RecipeFeaturedImage": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "mediaId": {
+                    "type": "string"
+                },
+                "cropId": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "photographer": {
+                    "type": "string"
+                },
+                "imageType": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "mediaApiUri": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cropId",
+                "mediaId",
+                "url"
+            ]
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -5088,10 +5163,6 @@
             "description": "the config model will contain useful app/site\nlevel data. Although currently derived from the config model\nconstructed in frontend and passed to dotcom-rendering\nthis data could eventually be defined in dotcom-rendering",
             "type": "object",
             "properties": {
-                "abTests": {
-                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
-                    "type": "object"
-                },
                 "adUnit": {
                     "type": "string"
                 },
@@ -5631,7 +5702,6 @@
                 }
             },
             "required": [
-                "abTests",
                 "adUnit",
                 "ajaxUrl",
                 "ampIframeUrl",

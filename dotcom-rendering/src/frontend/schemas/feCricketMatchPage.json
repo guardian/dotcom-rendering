@@ -2,244 +2,7 @@
     "type": "object",
     "properties": {
         "cricketMatch": {
-            "type": "object",
-            "properties": {
-                "teams": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "id": {
-                                "type": "string"
-                            },
-                            "home": {
-                                "type": "boolean"
-                            },
-                            "lineup": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "required": [
-                            "home",
-                            "id",
-                            "lineup",
-                            "name"
-                        ]
-                    }
-                },
-                "innings": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "order": {
-                                "type": "number"
-                            },
-                            "battingTeam": {
-                                "type": "string"
-                            },
-                            "runsScored": {
-                                "type": "number"
-                            },
-                            "overs": {
-                                "type": "string"
-                            },
-                            "declared": {
-                                "type": "boolean"
-                            },
-                            "forfeited": {
-                                "type": "boolean"
-                            },
-                            "description": {
-                                "type": "string"
-                            },
-                            "batters": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        },
-                                        "order": {
-                                            "type": "number"
-                                        },
-                                        "ballsFaced": {
-                                            "type": "number"
-                                        },
-                                        "runs": {
-                                            "type": "number"
-                                        },
-                                        "fours": {
-                                            "type": "number"
-                                        },
-                                        "sixes": {
-                                            "type": "number"
-                                        },
-                                        "out": {
-                                            "type": "boolean"
-                                        },
-                                        "howOut": {
-                                            "type": "string"
-                                        },
-                                        "onStrike": {
-                                            "type": "boolean"
-                                        },
-                                        "nonStrike": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "required": [
-                                        "ballsFaced",
-                                        "fours",
-                                        "howOut",
-                                        "name",
-                                        "nonStrike",
-                                        "onStrike",
-                                        "order",
-                                        "out",
-                                        "runs",
-                                        "sixes"
-                                    ]
-                                }
-                            },
-                            "bowlers": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        },
-                                        "order": {
-                                            "type": "number"
-                                        },
-                                        "overs": {
-                                            "type": "number"
-                                        },
-                                        "maidens": {
-                                            "type": "number"
-                                        },
-                                        "runs": {
-                                            "type": "number"
-                                        },
-                                        "wickets": {
-                                            "type": "number"
-                                        },
-                                        "balls": {
-                                            "type": "number"
-                                        }
-                                    },
-                                    "required": [
-                                        "balls",
-                                        "maidens",
-                                        "name",
-                                        "order",
-                                        "overs",
-                                        "runs",
-                                        "wickets"
-                                    ]
-                                }
-                            },
-                            "fallOfWicket": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "order": {
-                                            "type": "number"
-                                        },
-                                        "name": {
-                                            "type": "string"
-                                        },
-                                        "runs": {
-                                            "type": "number"
-                                        }
-                                    },
-                                    "required": [
-                                        "name",
-                                        "order",
-                                        "runs"
-                                    ]
-                                }
-                            },
-                            "byes": {
-                                "type": "number"
-                            },
-                            "legByes": {
-                                "type": "number"
-                            },
-                            "noBalls": {
-                                "type": "number"
-                            },
-                            "penalties": {
-                                "type": "number"
-                            },
-                            "wides": {
-                                "type": "number"
-                            },
-                            "extras": {
-                                "type": "number"
-                            }
-                        },
-                        "required": [
-                            "batters",
-                            "battingTeam",
-                            "bowlers",
-                            "byes",
-                            "declared",
-                            "description",
-                            "extras",
-                            "fallOfWicket",
-                            "forfeited",
-                            "legByes",
-                            "noBalls",
-                            "order",
-                            "overs",
-                            "penalties",
-                            "runsScored",
-                            "wides"
-                        ]
-                    }
-                },
-                "competitionName": {
-                    "type": "string"
-                },
-                "venueName": {
-                    "type": "string"
-                },
-                "result": {
-                    "type": "string"
-                },
-                "gameDate": {
-                    "type": "string"
-                },
-                "officials": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "matchId": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "competitionName",
-                "gameDate",
-                "innings",
-                "matchId",
-                "officials",
-                "result",
-                "teams",
-                "venueName"
-            ]
+            "$ref": "#/definitions/{stage:string;teams:{name:string;id:string;home:boolean;lineup:string[];teamTagId?:string;}[];innings:{order:number;overs:string;wickets:number;battingTeam:string;runsScored:number;declared:boolean;forfeited:boolean;description:string;batters:{name:string;order:number;ballsFaced:number;runs:number;fours:number;sixes:number;out:boolean;howOut:string;onStrike:boolean;nonStrike:boolean;}[];bowlers:{name:string;order:number;runs:number;overs:number;maidens:number;wickets:number;balls:number;}[];fallOfWicket:{name:string;order:number;runs:number;}[];byes:number;legByes:number;noBalls:number;penalties:number;wides:number;extras:number;}[];competitionName:string;venueName:string;result:string;currentDay:number;totalDays:number;gameDate:string;officials:string[];matchId:string;fullResult?:{resultType:string;description?:string;winner?:{winType:string;team:string;margin?:string;};};}"
         },
         "nav": {
             "$ref": "#/definitions/FENavType"
@@ -281,6 +44,318 @@
         "pageId"
     ],
     "definitions": {
+        "{stage:string;teams:{name:string;id:string;home:boolean;lineup:string[];teamTagId?:string;}[];innings:{order:number;overs:string;wickets:number;battingTeam:string;runsScored:number;declared:boolean;forfeited:boolean;description:string;batters:{name:string;order:number;ballsFaced:number;runs:number;fours:number;sixes:number;out:boolean;howOut:string;onStrike:boolean;nonStrike:boolean;}[];bowlers:{name:string;order:number;runs:number;overs:number;maidens:number;wickets:number;balls:number;}[];fallOfWicket:{name:string;order:number;runs:number;}[];byes:number;legByes:number;noBalls:number;penalties:number;wides:number;extras:number;}[];competitionName:string;venueName:string;result:string;currentDay:number;totalDays:number;gameDate:string;officials:string[];matchId:string;fullResult?:{resultType:string;description?:string;winner?:{winType:string;team:string;margin?:string;};};}": {
+            "type": "object",
+            "properties": {
+                "stage": {
+                    "type": "string"
+                },
+                "teams": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{name:string;id:string;home:boolean;lineup:string[];teamTagId?:string;}"
+                    }
+                },
+                "innings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{order:number;overs:string;wickets:number;battingTeam:string;runsScored:number;declared:boolean;forfeited:boolean;description:string;batters:{name:string;order:number;ballsFaced:number;runs:number;fours:number;sixes:number;out:boolean;howOut:string;onStrike:boolean;nonStrike:boolean;}[];bowlers:{name:string;order:number;runs:number;overs:number;maidens:number;wickets:number;balls:number;}[];fallOfWicket:{name:string;order:number;runs:number;}[];byes:number;legByes:number;noBalls:number;penalties:number;wides:number;extras:number;}"
+                    }
+                },
+                "competitionName": {
+                    "type": "string"
+                },
+                "venueName": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "string"
+                },
+                "currentDay": {
+                    "type": "number"
+                },
+                "totalDays": {
+                    "type": "number"
+                },
+                "gameDate": {
+                    "type": "string"
+                },
+                "officials": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "matchId": {
+                    "type": "string"
+                },
+                "fullResult": {
+                    "$ref": "#/definitions/{resultType:string;description?:string;winner?:{winType:string;team:string;margin?:string;};}"
+                }
+            },
+            "required": [
+                "competitionName",
+                "currentDay",
+                "gameDate",
+                "innings",
+                "matchId",
+                "officials",
+                "result",
+                "stage",
+                "teams",
+                "totalDays",
+                "venueName"
+            ]
+        },
+        "{name:string;id:string;home:boolean;lineup:string[];teamTagId?:string;}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "home": {
+                    "type": "boolean"
+                },
+                "lineup": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "teamTagId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "home",
+                "id",
+                "lineup",
+                "name"
+            ]
+        },
+        "{order:number;overs:string;wickets:number;battingTeam:string;runsScored:number;declared:boolean;forfeited:boolean;description:string;batters:{name:string;order:number;ballsFaced:number;runs:number;fours:number;sixes:number;out:boolean;howOut:string;onStrike:boolean;nonStrike:boolean;}[];bowlers:{name:string;order:number;runs:number;overs:number;maidens:number;wickets:number;balls:number;}[];fallOfWicket:{name:string;order:number;runs:number;}[];byes:number;legByes:number;noBalls:number;penalties:number;wides:number;extras:number;}": {
+            "type": "object",
+            "properties": {
+                "order": {
+                    "type": "number"
+                },
+                "overs": {
+                    "type": "string"
+                },
+                "wickets": {
+                    "type": "number"
+                },
+                "battingTeam": {
+                    "type": "string"
+                },
+                "runsScored": {
+                    "type": "number"
+                },
+                "declared": {
+                    "type": "boolean"
+                },
+                "forfeited": {
+                    "type": "boolean"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "batters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{name:string;order:number;ballsFaced:number;runs:number;fours:number;sixes:number;out:boolean;howOut:string;onStrike:boolean;nonStrike:boolean;}"
+                    }
+                },
+                "bowlers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{name:string;order:number;runs:number;overs:number;maidens:number;wickets:number;balls:number;}"
+                    }
+                },
+                "fallOfWicket": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{name:string;order:number;runs:number;}"
+                    }
+                },
+                "byes": {
+                    "type": "number"
+                },
+                "legByes": {
+                    "type": "number"
+                },
+                "noBalls": {
+                    "type": "number"
+                },
+                "penalties": {
+                    "type": "number"
+                },
+                "wides": {
+                    "type": "number"
+                },
+                "extras": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "batters",
+                "battingTeam",
+                "bowlers",
+                "byes",
+                "declared",
+                "description",
+                "extras",
+                "fallOfWicket",
+                "forfeited",
+                "legByes",
+                "noBalls",
+                "order",
+                "overs",
+                "penalties",
+                "runsScored",
+                "wickets",
+                "wides"
+            ]
+        },
+        "{name:string;order:number;ballsFaced:number;runs:number;fours:number;sixes:number;out:boolean;howOut:string;onStrike:boolean;nonStrike:boolean;}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "number"
+                },
+                "ballsFaced": {
+                    "type": "number"
+                },
+                "runs": {
+                    "type": "number"
+                },
+                "fours": {
+                    "type": "number"
+                },
+                "sixes": {
+                    "type": "number"
+                },
+                "out": {
+                    "type": "boolean"
+                },
+                "howOut": {
+                    "type": "string"
+                },
+                "onStrike": {
+                    "type": "boolean"
+                },
+                "nonStrike": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "ballsFaced",
+                "fours",
+                "howOut",
+                "name",
+                "nonStrike",
+                "onStrike",
+                "order",
+                "out",
+                "runs",
+                "sixes"
+            ]
+        },
+        "{name:string;order:number;runs:number;overs:number;maidens:number;wickets:number;balls:number;}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "number"
+                },
+                "runs": {
+                    "type": "number"
+                },
+                "overs": {
+                    "type": "number"
+                },
+                "maidens": {
+                    "type": "number"
+                },
+                "wickets": {
+                    "type": "number"
+                },
+                "balls": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "balls",
+                "maidens",
+                "name",
+                "order",
+                "overs",
+                "runs",
+                "wickets"
+            ]
+        },
+        "{name:string;order:number;runs:number;}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "number"
+                },
+                "runs": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "name",
+                "order",
+                "runs"
+            ]
+        },
+        "{resultType:string;description?:string;winner?:{winType:string;team:string;margin?:string;};}": {
+            "type": "object",
+            "properties": {
+                "resultType": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "winner": {
+                    "$ref": "#/definitions/{winType:string;team:string;margin?:string;}"
+                }
+            },
+            "required": [
+                "resultType"
+            ]
+        },
+        "{winType:string;team:string;margin?:string;}": {
+            "type": "object",
+            "properties": {
+                "winType": {
+                    "type": "string"
+                },
+                "team": {
+                    "type": "string"
+                },
+                "margin": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "team",
+                "winType"
+            ]
+        },
         "FENavType": {
             "type": "object",
             "properties": {
@@ -497,10 +572,6 @@
                 "adUnit": {
                     "type": "string"
                 },
-                "abTests": {
-                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
-                    "type": "object"
-                },
                 "ajaxUrl": {
                     "type": "string"
                 },
@@ -715,7 +786,6 @@
             },
             "required": [
                 "a9PublisherId",
-                "abTests",
                 "adUnit",
                 "ajaxUrl",
                 "allowUserGeneratedContent",

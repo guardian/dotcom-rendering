@@ -119,13 +119,22 @@ describe('video', () => {
 			);
 		});
 
-		it('should prefer M3U8 sources with Default video style', () => {
+		it('should prefer M3U8 sources for long videos with Default video style', () => {
 			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
 			const expected = [m3u8Src720h, mp4Src480w, mp4Src720h];
 
-			expect(extractValidSourcesFromAssets(assets, 'Default')).toEqual(
-				expected,
-			);
+			expect(
+				extractValidSourcesFromAssets(assets, 'Default', 37),
+			).toEqual(expected);
+		});
+
+		it('should prefer MP4 sources for short videos with Default video style', () => {
+			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
+			const expected = [mp4Src480w, mp4Src720h, m3u8Src720h];
+
+			expect(
+				extractValidSourcesFromAssets(assets, 'Default', 12),
+			).toEqual(expected);
 		});
 
 		it('should prefer MP4 sources with Loop video style', () => {

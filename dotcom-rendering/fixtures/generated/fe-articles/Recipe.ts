@@ -287,6 +287,20 @@ export const Recipe: FEArticle = {
 					elementId: '6338873b-49fd-48e4-9851-fefd51c92dab',
 				},
 				{
+					_type: 'model.dotcomrendering.pageElements.RecipeBlockElement',
+					id: 'e5a2cb2a63b788eae68ff654f739eff53a0cee28',
+					title: 'Spring onion pancakes with sesame sauce',
+					description:
+						"The world of pancakes is so vast, it is hard to think that on Pancake Day, there could be only one type proffered across the world. This offering is for cong you bing, a flaky, coiled, spring onion pancake ubiquitous across China. It's as enjoyable to make as it is to eat and, happily, there's no whiff of abstinence about it.",
+					featuredImage: {
+						url: 'https://i.guim.co.uk/img/media/9dcb491db0315d5598fc47aa51d049e12eedcbbc/0_18_2831_3539/master/2831.jpg?width=620&dpr=2&s=none&crop=none',
+						mediaId: 'e5a2cb2a63b788eae68ff654f739eff53a0cee28',
+						cropId: '0_0_3731_4384',
+						caption:
+							"Meera Sodha's spring onion pancakes with sesame sauce",
+					},
+				},
+				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
 					elementId: '75809805-364b-4c34-bce2-33931f85fedd',
@@ -848,7 +862,6 @@ export const Recipe: FEArticle = {
 		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
-		abTests: {},
 		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',

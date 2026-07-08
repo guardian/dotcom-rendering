@@ -75,7 +75,7 @@ jest.mock('react-google-recaptcha', () => ({
 	),
 }));
 
-const renderForm = (hidePrivacyMessage = false) =>
+const renderForm = () =>
 	render(
 		<ConfigProvider
 			value={{
@@ -89,7 +89,7 @@ const renderForm = (hidePrivacyMessage = false) =>
 				newsletterId="morning-briefing"
 				newsletterName="Morning Briefing"
 				frequency="every day"
-				hidePrivacyMessage={hidePrivacyMessage}
+				componentId="AR NewsletterSignupForm morning-briefing"
 			/>
 		</ConfigProvider>,
 	);
@@ -102,7 +102,14 @@ const getTrackedEventDescription = (call: unknown[]): string => {
 
 const getTrackedPayloadForEvent = (
 	eventDescription: string,
-): { eventDescription: string; marketingOptInType?: string } | undefined => {
+):
+	| {
+			eventDescription: string;
+			marketingOptInType?: string;
+			responseStatus?: number;
+			errorType?: string;
+	  }
+	| undefined => {
 	const trackingCalls = (submitComponentEvent as jest.Mock).mock
 		.calls as Array<[{ value: string }]>;
 
@@ -110,6 +117,8 @@ const getTrackedPayloadForEvent = (
 		const parsed = JSON.parse(payload.value) as {
 			eventDescription: string;
 			marketingOptInType?: string;
+			responseStatus?: number;
+			errorType?: string;
 		};
 
 		if (parsed.eventDescription === eventDescription) {
@@ -232,7 +241,7 @@ describe('NewsletterSignupForm', () => {
 	it('supports tab order from email input to marketing toggle to sign up', async () => {
 		const testUser = user.setup();
 
-		renderForm(true);
+		renderForm();
 
 		await testUser.tab();
 		expect(screen.getByLabelText('Enter your email')).toHaveFocus();
@@ -277,7 +286,7 @@ describe('NewsletterSignupForm', () => {
 	it('supports keyboard interaction for marketing toggle and submit button', async () => {
 		const testUser = user.setup();
 
-		renderForm(true);
+		renderForm();
 
 		await testUser.tab();
 		const emailInput = screen.getByLabelText('Enter your email');
@@ -395,13 +404,14 @@ describe('NewsletterSignupForm', () => {
 		).not.toBeInTheDocument();
 	});
 
-	it('shows failure UI with retry and supports hiding the privacy message', async () => {
+	it('shows failure UI with retry', async () => {
 		const testUser = user.setup();
-		global.fetch = jest.fn().mockResolvedValue({ ok: false } as Response);
+		global.fetch = jest
+			.fn()
+			.mockResolvedValue({ ok: false, status: 500 } as Response);
 
-		renderForm(true);
+		renderForm();
 
-		expect(screen.queryByText('Privacy Notice:')).not.toBeInTheDocument();
 		await typeEmailAddress(testUser);
 		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
 
@@ -417,6 +427,9 @@ describe('NewsletterSignupForm', () => {
 			'form-submission',
 			'submission-failed',
 		]);
+		expect(
+			getTrackedPayloadForEvent('submission-failed')?.responseStatus,
+		).toBe(500);
 
 		await testUser.click(screen.getByRole('button', { name: 'Try again' }));
 
@@ -488,6 +501,36 @@ describe('NewsletterSignupForm', () => {
 		expect(
 			screen.getByRole('button', { name: 'Sign up' }),
 		).toBeInTheDocument();
+	});
+
+	it('tracks an error type when the submit request throws', async () => {
+		const testUser = user.setup();
+		global.fetch = jest
+			.fn()
+			.mockRejectedValue(new TypeError('Failed to fetch'));
+
+		renderForm();
+
+		await typeEmailAddress(testUser);
+		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+
+		await waitFor(() => {
+			expect(
+				screen.getByText(/there was an error signing you up\./i),
+			).toBeInTheDocument();
+		});
+
+		expectTrackedEventDescriptions([
+			'email-input-focused',
+			'click-button',
+			'open-captcha',
+			'captcha-passed',
+			'form-submission',
+			'form-submit-error',
+		]);
+		expect(getTrackedPayloadForEvent('form-submit-error')?.errorType).toBe(
+			'network-or-fetch',
+		);
 	});
 
 	describe('US hide marketing toggle (usSignupHideMarketingToggle switch)', () => {

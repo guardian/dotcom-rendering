@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
+import { Fragment } from 'react';
 import { useConfig } from '../components/ConfigContext';
+import { FeastContextualNudge } from '../components/FeastContextualNudge.island';
+import { Island } from '../components/Island';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import type { ServerSideTests, Switches } from '../types/config';
-import type { FEElement } from '../types/content';
+import type { Switches } from '../types/config';
+import type { FEElement, RecipeBlockElement } from '../types/content';
 import type { TagType } from '../types/tag';
 import { spacefinderAdStyles } from './adStyles';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
@@ -32,7 +35,6 @@ type Props = {
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	editionId: EditionId;
 	contributionsServiceUrl: string;
 	shouldHideAds: boolean;
@@ -56,7 +58,6 @@ export const ArticleRenderer = ({
 	isAdFreeUser,
 	isSensitive,
 	isDev,
-	abTests,
 	editionId,
 	contributionsServiceUrl,
 	shouldHideAds,
@@ -84,7 +85,6 @@ export const ArticleRenderer = ({
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				switches={switches}
-				abTests={abTests}
 				editionId={editionId}
 				totalElements={length}
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
@@ -99,6 +99,90 @@ export const ArticleRenderer = ({
 	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
 	 */
 	const { renderingTarget } = useConfig();
+
+	/**
+	 * For recipe articles, group elements into per-recipe sections separated
+	 * by SubheadingBlockElements. Each section gets the subheading followed by
+	 * a FeastContextualNudge (populated from the RecipeBlockElement if present, or
+	 * showing a fallback using the recipe name), then the remaining body elements.
+	 *
+	 * Elements that precede the first subheading are rendered as-is.
+	 */
+	const augmentedElements = (() => {
+		if (format.design !== ArticleDesign.Recipe) {
+			return renderedElements;
+		}
+
+		type RecipeSection = {
+			subheadingEl: JSX.Element;
+			recipe?: RecipeBlockElement;
+			recipeArticleTitle: string;
+			contentEls: JSX.Element[];
+			index: number;
+		};
+
+		const preSection: JSX.Element[] = [];
+		const sections: RecipeSection[] = [];
+		let current: RecipeSection | null = null;
+
+		for (const [i, el] of renderedElements.entries()) {
+			const data = elements[i];
+			if (
+				data?._type ===
+				'model.dotcomrendering.pageElements.SubheadingBlockElement'
+			) {
+				const recipeArticleTitle = data.html
+					.replace(/<[^>]+>/g, '')
+					.trim();
+				current = {
+					subheadingEl: el,
+					recipeArticleTitle,
+					contentEls: [],
+					index: sections.length,
+				};
+				sections.push(current);
+			} else if (current) {
+				if (
+					data?._type ===
+					'model.dotcomrendering.pageElements.RecipeBlockElement'
+				) {
+					// Store structured recipe data for the nudge; don't render as a body element.
+					current.recipe = data;
+				} else {
+					current.contentEls.push(el);
+				}
+			} else {
+				preSection.push(el);
+			}
+		}
+
+		const result: (JSX.Element | null | undefined)[] = [...preSection];
+
+		for (const section of sections) {
+			result.push(
+				<Fragment key={`recipe-section-${section.index}`}>
+					{section.subheadingEl}
+					{section.recipe && (
+						<Island
+							priority="feature"
+							defer={{ until: 'visible' }}
+							role="inline"
+						>
+							<FeastContextualNudge
+								isDev={isDev}
+								pageId={pageId}
+								recipe={section.recipe}
+								recipeArticleTitle={section.recipeArticleTitle}
+							/>
+						</Island>
+					)}
+					{section.contentEls}
+				</Fragment>,
+			);
+		}
+
+		return result;
+	})();
 
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
@@ -121,10 +205,10 @@ export const ArticleRenderer = ({
 			css={[commercialPosition, spacefinderAdStyles]}
 		>
 			{renderingTarget === 'Apps'
-				? renderedElements
+				? augmentedElements
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
 					withSignInGateSlot({
-						renderedElements,
+						renderedElements: augmentedElements,
 						contentType,
 						sectionId,
 						tags,

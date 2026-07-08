@@ -323,24 +323,12 @@ describe('SecureSignup tracking component id', () => {
 		global.fetch = jest.fn().mockResolvedValue({ ok: true } as Response);
 	});
 
-	it('uses the control component id when no abTest variant is provided', async () => {
-		const testUser = user.setup();
-		renderSecureSignup();
-		await submitSignupForm(testUser);
-
-		await waitFor(() => {
-			expect(
-				getTrackingCallForEvent('form-submission')?.componentId,
-			).toBe('AR SecureSignup morning-briefing');
-		});
-	});
-
-	it('uses the variantNewField component id when variant is variantNewField', async () => {
+	it('always uses the secureSignup component id regardless of abTest variant', async () => {
 		const testUser = user.setup();
 		renderSecureSignup({
 			abTest: {
 				name: 'test-ab',
-				variant: 'variantNewField',
+				variant: 'someVariant',
 			},
 		});
 		await submitSignupForm(testUser);
@@ -348,7 +336,7 @@ describe('SecureSignup tracking component id', () => {
 		await waitFor(() => {
 			expect(
 				getTrackingCallForEvent('form-submission')?.componentId,
-			).toBe('AR SecureSignup morning-briefing - variantNewField');
+			).toBe('AR SecureSignup morning-briefing');
 		});
 	});
 });

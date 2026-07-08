@@ -9,7 +9,6 @@ import {
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
 import { NewsletterPreviewModal } from './NewsletterPreviewModal';
-import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import type { NewsletterSignupCardProps } from './NewsletterSignupCard';
 import { NewsletterSignupCard } from './NewsletterSignupCard';
 
@@ -32,7 +31,7 @@ const sendPreviewTracking = ({
 		action: eventDescription === 'preview-open' ? 'EXPAND' : 'CLOSE',
 		identityName,
 		componentId:
-			NEWSLETTER_SIGNUP_COMPONENT_ID.variantIllustratedCard(identityName),
+			NEWSLETTER_SIGNUP_COMPONENT_ID.inArticleSignupForm(identityName),
 		renderingTarget,
 		value: { eventDescription, renderUrl, isSignedIn },
 	});
@@ -72,7 +71,6 @@ export const NewsletterSignupCardContainer = ({
 	children,
 	isSignedIn,
 }: Props) => {
-	const showPrivacyMessageOutside = isSignedIn === true;
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
 	const renderUrl = buildNewsletterPreviewUrl({
@@ -168,15 +166,6 @@ export const NewsletterSignupCardContainer = ({
 				>
 					{children?.(previewAction)}
 				</NewsletterSignupCard>
-				{showPrivacyMessageOutside && (
-					<NewsletterPrivacyMessage
-						textColor="regular"
-						cssOverrides={css`
-							display: block;
-							margin-top: ${space[2]}px;
-						`}
-					/>
-				)}
 			</div>
 		</div>
 	);
