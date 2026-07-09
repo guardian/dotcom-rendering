@@ -110,7 +110,6 @@ const enableLog4js: Configuration = {
 		production: { appenders: ['out', 'fileAppender'], level: 'info' },
 		code: { appenders: ['out', 'fileAppender'], level: 'debug' },
 		development: { appenders: ['console'], level: 'debug' },
-		container: { appenders: ['out'], level: 'info' },
 	},
 	// log4js cluster mode handling does not work as it prevents
 	// logs from processes other than the main process from
@@ -139,13 +138,6 @@ const getLoggerCategory = (): string => {
 	if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
 		return 'off';
 	}
-
-	// Are we running in a container?
-	// See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-environment-variables.html
-	if (process.env.AWS_EXECUTION_ENV?.startsWith('AWS_ECS_') === true) {
-		return 'container';
-	}
-
 	if (process.env.NODE_ENV === 'development') {
 		return 'development';
 	}
