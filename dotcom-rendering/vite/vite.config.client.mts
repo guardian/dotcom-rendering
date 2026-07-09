@@ -3,7 +3,7 @@ import type { PluginOption, UserConfig } from 'vite';
 import { mergeConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import type { Build } from '../src/lib/assets.ts';
-import { getBrowserTargets } from './browser-targets.mts';
+import { getBrowserTargets } from './browser-targets.ts';
 import { sharedConfig } from './vite.config.shared.mts';
 
 const DEV = process.env.NODE_ENV === 'development';
