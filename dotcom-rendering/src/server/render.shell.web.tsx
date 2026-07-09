@@ -52,10 +52,7 @@ export const renderShell = (
 		</ConfigProvider>,
 	);
 
-	const build = getModulesBuild({
-		tests: frontendData.config.abTests,
-		switches: frontendData.config.switches,
-	});
+	const build = getModulesBuild();
 
 	/**
 	 * The highest priority scripts.
@@ -91,7 +88,6 @@ export const renderShell = (
 		ajaxUrl: frontendData.config.ajaxUrl,
 		googletagUrl: frontendData.config.googletagUrl,
 		switches: frontendData.config.switches,
-		abTests: frontendData.config.abTests,
 		serverSideABTests: frontendData.config.serverSideABTests,
 		brazeApiKey: frontendData.config.brazeApiKey,
 		googleRecaptchaSiteKey: frontendData.config.googleRecaptchaSiteKey,
