@@ -2,10 +2,11 @@ import type { SnapAtoms } from '../types/front';
 import { AudioAtomWrapper } from './AudioAtomWrapper.island';
 import { CallToActionAtom } from './CallToActionAtom';
 import { ExplainerAtom } from './ExplainerAtom';
+import { FootballCompetitionAtom } from './FootballCompetitionAtom.island';
 import { GuideAtomWrapper } from './GuideAtomWrapper.island';
 import { Island } from './Island';
 import { ProfileAtomWrapper } from './ProfileAtomWrapper.island';
-import { QandaAtom } from './QandaAtom.island';
+// import { QandaAtom } from './QandaAtom.island';
 import { TimelineAtom } from './TimelineAtom.island';
 
 type Props = {
@@ -20,6 +21,7 @@ type Props = {
  * atom logic out of `Card`.
  */
 export const CardSnapAtom = ({ atoms }: Props) => {
+	console.log('test');
 	if (atoms.guide) {
 		return (
 			<Island priority="feature" defer={{ until: 'visible' }}>
@@ -35,17 +37,33 @@ export const CardSnapAtom = ({ atoms }: Props) => {
 	}
 
 	if (atoms.qanda) {
-		return (
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<QandaAtom
-					id={atoms.qanda.id}
-					title={atoms.qanda.title}
-					html={atoms.qanda.html}
-					image={atoms.qanda.img}
-					credit={atoms.qanda.credit}
-				/>
-			</Island>
-		);
+		const mockData = {
+			competitionId: '700',
+			footballCompetitionComponentType: 'match-day',
+		};
+
+		// for testing until the capi flow is setup
+		if (mockData) {
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FootballCompetitionAtom
+						footballCompetitionData={mockData}
+					/>
+				</Island>
+			);
+		}
+
+		//  // return (
+		//  //  <Island priority="feature" defer={{ until: 'visible' }}>
+		//  //      <QandaAtom
+		//  //          id={atoms.qanda.id}
+		//  //          title={atoms.qanda.title}
+		//  //          html={atoms.qanda.html}
+		//  //          image={atoms.qanda.img}
+		//  //          credit={atoms.qanda.credit}
+		//  //      />
+		//  //  </Island>
+		//  // );
 	}
 
 	if (atoms.profile) {
@@ -112,6 +130,14 @@ export const CardSnapAtom = ({ atoms }: Props) => {
 			/>
 		);
 	}
+
+	// if (atoms.footballcompetition) {
+	// 	return (
+	// 		<FootballCompetitionAtom
+	// 			footballCompetitionData={atoms.footballcompetition}
+	// 		/>
+	// 	);
+	// }
 
 	return null;
 };
