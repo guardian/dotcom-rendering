@@ -4,18 +4,18 @@
  * Derives browser targets from @guardian/browserslist-config and upgrades
  * iOS < 11 to iOS 11 (required for dynamic import support).
  */
-import { createRequire } from 'node:module';
+import getTargetsFromBrowsersList from '@babel/helper-compilation-targets';
+import browserslist from 'browserslist';
 
-const require = createRequire(import.meta.url);
-
-const getTargetsFromBrowsersList: (opts: {
+type GetTargetsFromBrowsersList = (opts: {
 	browsers: string[];
-}) => Record<string, string> =
-	require('@babel/helper-compilation-targets').default;
-const browserslist: (query: string) => string[] = require('browserslist');
+}) => Record<string, string>;
+
+const getTargetsFromBrowsersListTyped =
+	getTargetsFromBrowsersList as unknown as GetTargetsFromBrowsersList;
 
 const browsers = browserslist('extends @guardian/browserslist-config');
-const rawTargets: Record<string, string> = getTargetsFromBrowsersList({
+const rawTargets: Record<string, string> = getTargetsFromBrowsersListTyped({
 	browsers,
 });
 
