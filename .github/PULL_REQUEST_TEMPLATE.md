@@ -6,9 +6,13 @@
 
 <!--
 
-Where applicable please add automated tests
+## Tests
 
-Automated tests
+Where applicable please add automated tests.
+
+If you'd like help testing your changes as part of the PR review process then mention that explicitly here.
+
+### Automated tests
 
 - unit tests
   - https://jestjs.io/docs/using-matchers
@@ -23,12 +27,10 @@ Automated tests
 
 You can find examples of each type of test in the repo.
 
-Manual testing
+### Manual testing
 
 - running the change locally and verifying correct behaviour
 - deploying to CODE and verifying correct behaviour
-
-If you'd like help testing your changes as part of the PR review process then mention that explicitly here.
 
 -->
 
