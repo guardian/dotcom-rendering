@@ -24,6 +24,7 @@ const meta = preview.meta({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
 		},
+		elementId: 'product-card-inline-story',
 		image: productImage,
 		productCtas: [
 			{

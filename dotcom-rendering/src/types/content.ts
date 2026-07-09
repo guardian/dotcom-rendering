@@ -996,6 +996,7 @@ export interface ProductImage {
 	displayCredit: boolean;
 	height: number;
 	width: number;
+	position?: number;
 }
 
 export interface Image {

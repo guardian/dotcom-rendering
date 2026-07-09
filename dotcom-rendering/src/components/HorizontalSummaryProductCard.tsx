@@ -95,6 +95,7 @@ export const HorizontalSummaryProductCard = ({
 				<ProductCardImage
 					xCustComponentId={'horizontal-summary-card'}
 					format={format}
+					elementId={product.elementId}
 					image={product.image}
 					url={cardCta.url}
 				/>

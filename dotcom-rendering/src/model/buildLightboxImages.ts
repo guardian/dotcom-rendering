@@ -7,6 +7,7 @@ import type {
 	FEElement,
 	ImageBlockElement,
 	ImageForLightbox,
+	ProductBlockElement,
 } from '../types/content';
 import {
 	getCartoonImageForLightbox,
@@ -92,10 +93,56 @@ const getImages = (
 					event.body.flatMap(getImages),
 				),
 			);
+		case 'model.dotcomrendering.pageElements.ProductBlockElement':
+			return element.content.flatMap(getImages);
 
 		default:
 			return [];
 	}
+};
+
+/**
+ * Finds every ProductBlockElement reachable from an element, including ones
+ * nested inside lists, timelines, or another product's content.
+ */
+const getProducts = (element: FEElement): ProductBlockElement[] => {
+	switch (element._type) {
+		case 'model.dotcomrendering.pageElements.ProductBlockElement':
+			return [element, ...element.content.flatMap(getProducts)];
+		case 'model.dotcomrendering.pageElements.ListBlockElement':
+			return element.items.flatMap((item) =>
+				item.elements.flatMap(getProducts),
+			);
+		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+			return element.sections.flatMap((section) =>
+				section.events.flatMap((event) =>
+					event.body.flatMap(getProducts),
+				),
+			);
+
+		default:
+			return [];
+	}
+};
+
+const buildProductLightboxImage = (
+	element: ProductBlockElement,
+): Omit<ImageForLightbox, 'position'> | undefined => {
+	const { image } = element;
+	if (!image) return;
+
+	if (!isLightboxable(image.width, image.height)) return;
+
+	return {
+		masterUrl: image.url,
+		width: image.width,
+		height: image.height,
+		elementId: element.elementId,
+		displayCredit: image.displayCredit,
+		alt: image.alt,
+		credit: image.credit,
+		caption: image.caption,
+	};
 };
 
 /**
@@ -138,6 +185,19 @@ export const buildLightboxImages = (
 									firstPublished: block.blockFirstPublished,
 								}
 							: lightboxImage;
+					}),
+				),
+			),
+		)
+		.concat(
+			blocks.flatMap((block) =>
+				block.elements.flatMap((element) =>
+					getProducts(element).flatMap((product) => {
+						const lightboxImage =
+							buildProductLightboxImage(product);
+						return isUndefined(lightboxImage)
+							? []
+							: [lightboxImage];
 					}),
 				),
 			),

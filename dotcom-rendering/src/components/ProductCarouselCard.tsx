@@ -120,6 +120,7 @@ export const ProductCarouselCard = ({
 			<div css={imageArea}>
 				<ProductCardImage
 					format={format}
+					elementId={product.elementId}
 					image={product.image}
 					xCustComponentId={'carousel-card-image'}
 				/>

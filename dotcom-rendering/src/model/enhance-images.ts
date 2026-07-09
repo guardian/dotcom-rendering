@@ -13,6 +13,7 @@ import type {
 	ImageBlockElement,
 	ImageForLightbox,
 	MultiImageBlockElement,
+	ProductBlockElement,
 	SubheadingBlockElement,
 	TextBlockElement,
 } from '../types/content';
@@ -69,6 +70,16 @@ export const isCartoon = (
 	return (
 		element._type ===
 		'model.dotcomrendering.pageElements.CartoonBlockElement'
+	);
+};
+
+export const isProduct = (
+	element?: FEElement,
+): element is ProductBlockElement => {
+	if (!element) return false;
+	return (
+		element._type ===
+		'model.dotcomrendering.pageElements.ProductBlockElement'
 	);
 };
 
@@ -328,6 +339,18 @@ const addImagePositions = <E extends FEElement>(
 				...element,
 				images: addImagePositions(element.images, imagesForLightbox),
 			};
+		}
+
+		if (isProduct(element)) {
+			if (!element.image) return element;
+
+			const position = imagesForLightbox.find(
+				({ masterUrl }) => element.image?.url === masterUrl,
+			)?.position;
+
+			return isUndefined(position)
+				? element
+				: { ...element, image: { ...element.image, position } };
 		}
 
 		if (!isImage(element) && !isCartoon(element)) {

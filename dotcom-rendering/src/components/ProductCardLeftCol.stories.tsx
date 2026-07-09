@@ -27,6 +27,7 @@ const meta = preview.meta({
 		format,
 		brandName: 'AirCraft',
 		productName: 'Lume',
+		elementId: 'product-card-left-col-story',
 		image: productImage,
 		productCtas: [
 			{
