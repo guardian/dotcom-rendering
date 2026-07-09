@@ -15,11 +15,8 @@ declare module 'dynamic-import-polyfill' {
 }
 
 declare module '@babel/helper-compilation-targets' {
-	const getTargetsFromBrowsersList: (opts: {
-		browsers: string[];
-	}) => Record<string, string>;
-
-	export default getTargetsFromBrowsersList;
+	const getTargets: (opts: { browsers: string[] }) => Record<string, string>;
+	export default getTargets;
 }
 
 // SVG handling
