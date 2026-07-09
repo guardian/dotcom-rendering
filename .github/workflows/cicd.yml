@@ -4,11 +4,6 @@ on:
   push:
 
 jobs:
-  container:
-    permissions:
-      packages: write
-    uses: ./.github/workflows/container.yml
-
   production-container:
     permissions:
       contents: read
@@ -16,6 +11,14 @@ jobs:
     uses: ./.github/workflows/container-production.yml
     secrets:
       GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+
+  container:
+    permissions:
+      packages: write
+    needs: [production-container]
+    uses: ./.github/workflows/container.yml
+    with:
+      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
 
   prettier:
     uses: ./.github/workflows/prettier.yml
