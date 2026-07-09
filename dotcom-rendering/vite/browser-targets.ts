@@ -1,21 +1,22 @@
+/* eslint-disable import/order -- TODO fixme */
+
 /**
  * ES module equivalent of webpack/browser-targets.js
  *
  * Derives browser targets from @guardian/browserslist-config and upgrades
  * iOS < 11 to iOS 11 (required for dynamic import support).
  */
-import getTargetsFromBrowsersList from '@babel/helper-compilation-targets';
+import { createRequire } from 'node:module';
 import browserslist from 'browserslist';
 
-type GetTargetsFromBrowsersList = (opts: {
-	browsers: string[];
-}) => Record<string, string>;
+const require = createRequire(import.meta.url);
+const targetsModule = require('@babel/helper-compilation-targets');
 
-const getTargetsFromBrowsersListTyped =
-	getTargetsFromBrowsersList as unknown as GetTargetsFromBrowsersList;
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- TODO weird CJS issue
+const getTargets = targetsModule.default;
 
 const browsers = browserslist('extends @guardian/browserslist-config');
-const rawTargets: Record<string, string> = getTargetsFromBrowsersListTyped({
+const rawTargets: Record<string, string> = getTargets({
 	browsers,
 });
 

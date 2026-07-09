@@ -155,10 +155,8 @@ install: check-env
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
 
-validate-build: # private
+validate-build: build # private
 	$(call log, "checking bundling")
-	@rm -rf dist
-	@NODE_ENV=production webpack --config ./webpack/webpack.config.js
 
 check-env: # private
 	$(call log, "checking environment")
