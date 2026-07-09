@@ -119,6 +119,27 @@ function configureLog4jsEC2() {
 	});
 }
 
+function configureLog4jsECS() {
+	configure({
+		appenders: {
+			out: {
+				type: 'stdout',
+				layout: { type: 'json', separator: ',' },
+			},
+		},
+		categories: {
+			default: { appenders: ['out'], level: 'info' },
+			production: { appenders: ['out'], level: 'info' },
+			code: { appenders: ['out'], level: 'debug' },
+			development: { appenders: ['out'], level: 'debug' },
+		},
+		// log4js cluster mode handling does not work as it prevents
+		// logs from processes other than the main process from
+		// writing to the log.
+		disableClustering: true,
+	});
+}
+
 // We do this to ensure no memory leaks during development as hot reloading
 // doesn't clear up old listeners.
 if (process.env.NODE_ENV === 'development') {
@@ -133,7 +154,15 @@ if (process.env.NODE_ENV === 'development') {
 if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
 	configure(disableLog4js);
 } else {
-	configureLog4jsEC2();
+	// See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-environment-variables.html
+	const runningInECS =
+		process.env.AWS_EXECUTION_ENV?.startsWith('AWS_ECS_') === true;
+
+	if (runningInECS) {
+		configureLog4jsECS();
+	} else {
+		configureLog4jsEC2();
+	}
 }
 
 const getLoggerCategory = (): string => {
