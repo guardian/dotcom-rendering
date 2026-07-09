@@ -1,3 +1,4 @@
+import type { ThemeButton } from '@guardian/source/react-components';
 import type { ProductCta } from '../types/content';
 import { ProductLinkButton } from './Button/ProductLinkButton';
 
@@ -9,9 +10,11 @@ const getLabel = (cta: ProductCta): string => {
 export const ProductCardButtons = ({
 	productCtas,
 	xCustComponentId,
+	themeOverrides,
 }: {
 	productCtas: ProductCta[];
 	xCustComponentId?: string;
+	themeOverrides?: Partial<ThemeButton>;
 }) => (
 	<>
 		{productCtas.map((productCta, index) => {
@@ -26,6 +29,7 @@ export const ProductCardButtons = ({
 					fullWidthText={productCtas.length > 1}
 					priority={index === 0 ? 'primary' : 'tertiary'}
 					fullwidth={true}
+					themeOverrides={themeOverrides}
 				/>
 			);
 		})}

@@ -12,6 +12,7 @@ interface BaseProps {
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 	switches: Switches;
+	isFilterArticle: boolean;
 }
 
 interface WebProps extends BaseProps {
@@ -29,6 +30,7 @@ export const Lightbox = ({
 	lightboxImages,
 	renderingTarget,
 	switches,
+	isFilterArticle,
 }: WebProps | AppProps) => {
 	switch (renderingTarget) {
 		case 'Web':
@@ -46,6 +48,7 @@ export const Lightbox = ({
 						<LightboxLayout
 							format={format}
 							images={lightboxImages}
+							isFilterArticle={isFilterArticle}
 						/>
 					</Island>
 					<Island priority="feature" defer={{ until: 'idle' }}>

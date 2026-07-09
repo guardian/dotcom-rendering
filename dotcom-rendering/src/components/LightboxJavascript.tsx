@@ -590,9 +590,11 @@ const ulStyles = css`
 export const LightboxJavascript = ({
 	format,
 	images,
+	isFilterArticle = false,
 }: {
 	format: ArticleFormat;
 	images: ImageForLightbox[];
+	isFilterArticle?: boolean;
 }) => {
 	/**
 	 * Hydration has been requested so the first step is to render the list of images and put them into
@@ -628,7 +630,11 @@ export const LightboxJavascript = ({
 	log('dotcom', '💡 Generating HTML for lightbox images...');
 	return (
 		<ul css={ulStyles} aria-label="All images">
-			<LightboxImages format={format} images={images} />
+			<LightboxImages
+				format={format}
+				images={images}
+				isFilterArticle={isFilterArticle}
+			/>
 		</ul>
 	);
 };
