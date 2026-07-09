@@ -5854,6 +5854,33 @@
                         },
                         "embedJs": {
                             "type": "string"
+                        },
+                        "atoms": {
+                            "description": "Atom block elements that have been placed on a front as a snap and\npre-fetched by facia-press so they can be rendered server-side. Each field\nmirrors the equivalent DCR block element for that atom type.",
+                            "type": "object",
+                            "properties": {
+                                "guide": {
+                                    "$ref": "#/definitions/GuideAtomBlockElement"
+                                },
+                                "qanda": {
+                                    "$ref": "#/definitions/QABlockElement"
+                                },
+                                "profile": {
+                                    "$ref": "#/definitions/ProfileAtomBlockElement"
+                                },
+                                "timeline": {
+                                    "$ref": "#/definitions/TimelineAtomBlockElement"
+                                },
+                                "audio": {
+                                    "$ref": "#/definitions/AudioAtomBlockElement"
+                                },
+                                "explainer": {
+                                    "$ref": "#/definitions/ExplainerAtomBlockElement"
+                                },
+                                "cta": {
+                                    "$ref": "#/definitions/CallToActionAtomBlockElement"
+                                }
+                            }
                         }
                     }
                 },

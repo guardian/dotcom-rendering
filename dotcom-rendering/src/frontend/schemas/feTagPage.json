@@ -723,6 +723,28 @@
                             },
                             "embedJs": {
                                 "type": "string"
+                            },
+                            "GuideAtom": {
+                                "$ref": "#/definitions/GuideAtomBlockElement",
+                                "description": "Atom block elements pre-fetched by facia-press so that atoms placed on\nfronts (as snaps) can be rendered server-side. Each field mirrors the\nequivalent DCR block element for that atom type."
+                            },
+                            "QandaAtom": {
+                                "$ref": "#/definitions/QABlockElement"
+                            },
+                            "ProfileAtom": {
+                                "$ref": "#/definitions/ProfileAtomBlockElement"
+                            },
+                            "TimelineAtom": {
+                                "$ref": "#/definitions/TimelineAtomBlockElement"
+                            },
+                            "AudioAtom": {
+                                "$ref": "#/definitions/AudioAtomBlockElement"
+                            },
+                            "ExplainerAtom": {
+                                "$ref": "#/definitions/ExplainerAtomBlockElement"
+                            },
+                            "CtaAtom": {
+                                "$ref": "#/definitions/CallToActionAtomBlockElement"
                             }
                         }
                     },
@@ -1466,6 +1488,318 @@
                 "megaboost"
             ],
             "type": "string"
+        },
+        "GuideAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.GuideAtomBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "img": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                }
+            },
+            "required": [
+                "_type",
+                "credit",
+                "elementId",
+                "html",
+                "id",
+                "label",
+                "title"
+            ]
+        },
+        "RoleType": {
+            "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+            "enum": [
+                "halfWidth",
+                "immersive",
+                "inline",
+                "showcase",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
+        },
+        "QABlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.QABlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "img": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                }
+            },
+            "required": [
+                "_type",
+                "credit",
+                "elementId",
+                "html",
+                "id",
+                "title"
+            ]
+        },
+        "ProfileAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.ProfileAtomBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "img": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                }
+            },
+            "required": [
+                "_type",
+                "credit",
+                "elementId",
+                "html",
+                "id",
+                "label",
+                "title"
+            ]
+        },
+        "TimelineAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.TimelineAtomBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TimelineAtomEvent"
+                    }
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "events",
+                "id",
+                "title"
+            ]
+        },
+        "TimelineAtomEvent": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "unixDate": {
+                    "type": "number"
+                },
+                "body": {
+                    "type": "string"
+                },
+                "toDate": {
+                    "type": "string"
+                },
+                "toUnixDate": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "date",
+                "title",
+                "unixDate"
+            ]
+        },
+        "AudioAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.AudioAtomBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "kicker": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "trackUrl": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "number"
+                },
+                "coverUrl": {
+                    "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                }
+            },
+            "required": [
+                "_type",
+                "coverUrl",
+                "duration",
+                "elementId",
+                "id",
+                "kicker",
+                "trackUrl"
+            ]
+        },
+        "ExplainerAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.ExplainerAtomBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                }
+            },
+            "required": [
+                "_type",
+                "body",
+                "elementId",
+                "id",
+                "title"
+            ]
+        },
+        "CallToActionAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.CallToActionAtomBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "trackingCode": {
+                    "type": "string"
+                },
+                "btnText": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "id",
+                "title",
+                "url"
+            ]
         },
         "FENavType": {
             "type": "object",
