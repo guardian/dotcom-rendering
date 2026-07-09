@@ -16,50 +16,6 @@ const ARTICLE_PATH =
 	'/Article/https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people';
 const RR_BANNER_URL = 'https://contributions.guardianapis.com/banner';
 
-const isCmpReady = async (page: Page, timeoutMs = 5000): Promise<boolean> => {
-	const result = await page
-		.evaluate(
-			({ timeoutMs: timeout }) =>
-				new Promise<boolean>((resolve) => {
-					const start = Date.now();
-					type TcfApi = (
-						command: string,
-						version: number,
-						callback: (ping: unknown, success: boolean) => void,
-					) => void;
-
-					const check = () => {
-						const tcfApi = (
-							window as unknown as Record<string, unknown>
-						)['__tcfapi'];
-
-						if (typeof tcfApi !== 'function') {
-							if (Date.now() - start >= timeout) {
-								resolve(false);
-								return;
-							}
-							setTimeout(check, 100);
-							return;
-						}
-
-						(tcfApi as TcfApi)(
-							'ping',
-							2,
-							(_ping: unknown, pingSuccess: boolean) => {
-								resolve(pingSuccess);
-							},
-						);
-					};
-
-					check();
-				}),
-			{ timeoutMs },
-		)
-		.catch(() => false);
-
-	return result;
-};
-
 const requestBodyHasProperties = (
 	request: Request,
 	url: string | RegExp,
@@ -102,6 +58,11 @@ test.describe('The banner', function () {
 			waitUntil: 'domcontentloaded',
 			region: 'GB',
 			preventSupportBanner: false,
+			overrides: {
+				switchOverrides: {
+					consentManagement: true,
+				},
+			},
 		});
 		await cmpAcceptAll(page);
 
@@ -191,13 +152,14 @@ test.describe('Banner browserId targeting', function () {
 			waitUntil: 'domcontentloaded',
 			region: 'GB',
 			preventSupportBanner: false,
+			overrides: {
+				switchOverrides: {
+					consentManagement: true,
+				},
+			},
+			queryParamsOn: true,
+			queryParams: { _sp_geo_override: 'GB-XX' },
 		});
-
-		const cmpReady = await isCmpReady(page);
-		expect(
-			cmpReady,
-			'CMP should be ready before running banner consent assertions.',
-		).toBe(true);
 
 		if (acceptConsent) {
 			await cmpAcceptAll(page);
@@ -237,6 +199,12 @@ test.describe('Banner browserId targeting', function () {
 			acceptConsent: false,
 			inAuxiaVariant: true,
 		});
+
+		// CI/CD runs these tests with US geolocation, and fixing the origin to GB in loadPage is not enough for CMP initialization to conclude that the country is GDPR-applied.
+		// If gdprApplies is false, TCData is allowed to be minimal. If GDPR does not apply to this user in this context then only gdprApplies, tcfPolicyVersion, cmpId and cmpVersion shall exist in the object. (If GDPR does not apply to this user in this context then only gdprApplies, tcfPolicyVersion, cmpId and cmpVersion shall exist in the object.)
+		// @Guardian/content-management-platform uses the _sp_geo_override query parameter to override geo location in non-production environments.
+		const currentUrl = new URL(page.url());
+		expect(currentUrl.searchParams.get('_sp_geo_override')).toBe('GB-XX');
 
 		const browserId = getBannerRequestField(
 			bannerRequest,
