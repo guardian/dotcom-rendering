@@ -1,5 +1,4 @@
 import { compare } from 'compare-versions';
-
 import { useEffect, useState } from 'react';
 import { type EnvironmentClient, getEnvironmentClient } from './bridgetApi';
 
