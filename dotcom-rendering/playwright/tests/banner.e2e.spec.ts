@@ -16,6 +16,50 @@ const ARTICLE_PATH =
 	'/Article/https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people';
 const RR_BANNER_URL = 'https://contributions.guardianapis.com/banner';
 
+const isCmpReady = async (page: Page, timeoutMs = 5000): Promise<boolean> => {
+	const result = await page
+		.evaluate(
+			({ timeoutMs: timeout }) =>
+				new Promise<boolean>((resolve) => {
+					const start = Date.now();
+					type TcfApi = (
+						command: string,
+						version: number,
+						callback: (ping: unknown, success: boolean) => void,
+					) => void;
+
+					const check = () => {
+						const tcfApi = (
+							window as unknown as Record<string, unknown>
+						)['__tcfapi'];
+
+						if (typeof tcfApi !== 'function') {
+							if (Date.now() - start >= timeout) {
+								resolve(false);
+								return;
+							}
+							setTimeout(check, 100);
+							return;
+						}
+
+						(tcfApi as TcfApi)(
+							'ping',
+							2,
+							(_ping: unknown, pingSuccess: boolean) => {
+								resolve(pingSuccess);
+							},
+						);
+					};
+
+					check();
+				}),
+			{ timeoutMs },
+		)
+		.catch(() => false);
+
+	return result;
+};
+
 const requestBodyHasProperties = (
 	request: Request,
 	url: string | RegExp,
@@ -149,6 +193,12 @@ test.describe('Banner browserId targeting', function () {
 			preventSupportBanner: false,
 		});
 
+		const cmpReady = await isCmpReady(page);
+		expect(
+			cmpReady,
+			'CMP should be ready before running banner consent assertions.',
+		).toBe(true);
+
 		if (acceptConsent) {
 			await cmpAcceptAll(page);
 		} else {
@@ -177,7 +227,6 @@ test.describe('Banner browserId targeting', function () {
 		expect(browserId).toBe('test-browser-id');
 	});
 
-	// Skip this test because it doesn't work in the github actions run. It does however work locally
 	test('does not send browserId when user has not consented, even if in the auxia variant', async ({
 		page,
 		context,
