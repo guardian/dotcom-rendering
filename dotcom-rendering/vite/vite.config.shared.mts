@@ -1,4 +1,5 @@
 import type { UserConfig } from 'vite';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 const DEV = process.env.NODE_ENV === 'development';
 
@@ -16,4 +17,13 @@ export const sharedConfig: UserConfig = {
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx'],
 	},
+	plugins: [
+		DEV
+			? undefined
+			: visualizer({
+					emitFile: true,
+					filename: 'a1stats.html',
+					template: 'treemap',
+			  }),
+	],
 };
