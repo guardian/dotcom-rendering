@@ -65,10 +65,13 @@ type Props = CricketMatchHeaderProps & {
 export const CricketMatchHeader = (props: Props) => {
 	const scorecardHashbang = '#scorecard';
 	const locationHash = useLocationHash();
+	const currentUrl = new URL(
+		`${props.article.guardianBaseURL}${props.article.pageId}`,
+	);
 
 	const { data, error } = useSWR<CricketHeaderData, Error>(
 		props.matchHeaderURL,
-		fetcher(props.getHeaderData),
+		fetcher(props.getHeaderData, props.selectedTab, currentUrl),
 		swrOptions(props.refreshInterval),
 	);
 
@@ -193,10 +196,14 @@ const swrOptions = (
 });
 
 const fetcher =
-	(getHeaderData: Props['getHeaderData']) =>
+	(
+		getHeaderData: Props['getHeaderData'],
+		selectedTab: 'info' | 'live' | 'report',
+		currentUrl: URL,
+	) =>
 	(url: string): Promise<CricketHeaderData> =>
 		getHeaderData(url)
-			.then(parseHeaderData)
+			.then(parseHeaderData(selectedTab, currentUrl))
 			.then((result) => {
 				if (!result.ok) {
 					log('dotcom', result.error);
