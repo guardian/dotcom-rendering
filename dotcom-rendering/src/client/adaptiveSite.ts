@@ -16,19 +16,6 @@ export const shouldAdapt = async (): Promise<boolean> => {
 	if (!window.guardian.config.switches.adaptiveSite) return false;
 	if (window.location.host !== 'www.theguardian.com') return false;
 
-	/**
-	 * The europe beta front is being served to a 0% audience. This means it's rarely in cache and so it gets adapted more often.
-	 * This is a temporary measure to ensure that the front is not adapted during testing.
-	 */
-	if (
-		(window.guardian.config.tests.europeBetaFrontVariant === 'variant' ||
-			window.guardian.config.tests.europeBetaFrontTest2Variant ===
-				'variant') &&
-		window.location.pathname === '/europe'
-	) {
-		return false;
-	}
-
 	// only evaluate this code if we want to adapt in response to page performance
 	const { isPerformingPoorly } = await import(
 		/* webpackMode: "eager" */ './poorPerformanceMonitoring'

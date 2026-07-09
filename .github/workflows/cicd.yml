@@ -4,10 +4,21 @@ on:
   push:
 
 jobs:
+  production-container:
+    permissions:
+      contents: read
+      id-token: write # Required to exchange for AWS credentials using OIDC
+    uses: ./.github/workflows/container-production.yml
+    secrets:
+      GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+
   container:
     permissions:
       packages: write
+    needs: [production-container]
     uses: ./.github/workflows/container.yml
+    with:
+      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
 
   prettier:
     uses: ./.github/workflows/prettier.yml

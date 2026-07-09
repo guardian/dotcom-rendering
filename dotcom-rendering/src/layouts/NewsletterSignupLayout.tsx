@@ -411,7 +411,6 @@ export const NewsletterSignupLayout = ({
 									pageId={article.pageId}
 									webTitle={article.webTitle}
 									ajaxUrl={article.config.ajaxUrl}
-									abTests={article.config.abTests}
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
@@ -489,11 +488,7 @@ export const NewsletterSignupLayout = ({
 			</Section>
 
 			<BannerWrapper data-print-layout="hide" />
-			<MobileStickyContainer
-				data-print-layout="hide"
-				contentType={article.contentType}
-				pageId={article.pageId}
-			/>
+			{renderAds && <MobileStickyContainer data-print-layout="hide" />}
 		</>
 	);
 };

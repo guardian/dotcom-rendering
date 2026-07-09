@@ -13,8 +13,8 @@ catalogs:
       specifier: 3.995.0
       version: 3.995.0
     '@guardian/cdk':
-      specifier: 63.6.1
-      version: 63.6.1
+      specifier: 64.0.0
+      version: 64.0.0
     '@guardian/eslint-config':
       specifier: 14.0.1
       version: 14.0.1
@@ -37,11 +37,11 @@ catalogs:
       specifier: 24.12.4
       version: 24.12.4
     aws-cdk:
-      specifier: 2.1126.0
-      version: 2.1126.0
+      specifier: 2.1128.1
+      version: 2.1128.1
     aws-cdk-lib:
-      specifier: 2.257.0
-      version: 2.257.0
+      specifier: 2.260.0
+      version: 2.260.0
     constructs:
       specifier: 10.6.0
       version: 10.6.0
@@ -121,7 +121,7 @@ importers:
         version: 3.995.0
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 63.6.1(aws-cdk-lib@2.257.0(constructs@10.6.0))(aws-cdk@2.1126.0)(constructs@10.6.0)
+        version: 64.0.0(aws-cdk-lib@2.260.0(constructs@10.6.0))(aws-cdk@2.1128.1)(constructs@10.6.0)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -130,10 +130,10 @@ importers:
         version: 24.12.4
       aws-cdk:
         specifier: 'catalog:'
-        version: 2.1126.0
+        version: 2.1128.1
       aws-cdk-lib:
         specifier: 'catalog:'
-        version: 2.257.0(constructs@10.6.0)
+        version: 2.260.0(constructs@10.6.0)
       constructs:
         specifier: 'catalog:'
         version: 10.6.0
@@ -315,8 +315,8 @@ importers:
         specifier: workspace:ab-testing-config
         version: link:../ab-testing/config
       '@guardian/braze-components':
-        specifier: 23.0.1
-        version: 23.0.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(react@18.3.1)
+        specifier: 23.0.2
+        version: 23.0.2(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(react@18.3.1)
       '@guardian/bridget':
         specifier: 8.13.1
         version: 8.13.1
@@ -325,7 +325,7 @@ importers:
         version: 6.1.0(browserslist@4.24.4)(tslib@2.6.2)
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 63.6.1(aws-cdk-lib@2.257.0(constructs@10.6.0))(aws-cdk@2.1126.0)(constructs@10.6.0)
+        version: 64.0.0(aws-cdk-lib@2.260.0(constructs@10.6.0))(aws-cdk@2.1128.1)(constructs@10.6.0)
       '@guardian/commercial-core':
         specifier: 34.0.0
         version: 34.0.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))
@@ -351,8 +351,8 @@ importers:
         specifier: 4.0.2
         version: 4.0.2
       '@guardian/react-crossword':
-        specifier: 17.1.0
-        version: 17.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3)
+        specifier: 19.0.1
+        version: 19.0.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -511,10 +511,10 @@ importers:
         version: 2.1.1(ajv@8.18.0)
       aws-cdk:
         specifier: 'catalog:'
-        version: 2.1126.0
+        version: 2.1128.1
       aws-cdk-lib:
         specifier: 'catalog:'
-        version: 2.257.0(constructs@10.6.0)
+        version: 2.260.0(constructs@10.6.0)
       body-parser:
         specifier: 1.20.4
         version: 1.20.4
@@ -783,14 +783,14 @@ packages:
   '@asamuzakjp/nwsapi@2.3.9':
     resolution: {integrity: sha512-n8GuYSrI9bF7FFZ/SjhwevlHc8xaVlb/7HmHelnc/PZXBD2ZR49NnN9sMMuDdEGPeeRQ5d0hqlSlEpgCX3Wl0Q==}
 
-  '@aws-cdk/asset-awscli-v1@2.2.273':
-    resolution: {integrity: sha512-X57HYUtHt9BQrlrzUNcMyRsDUCoakYNnY6qh5lNwRCHPtQoTfXmuISkfLk0AjLkcbS5lw1LLTQFiQhTDXfiTvg==}
+  '@aws-cdk/asset-awscli-v1@2.2.282':
+    resolution: {integrity: sha512-7hKMi5tTxDcKGIMIOq14PnY0GBcugW33Uh/2YHDZiEwSxLeFOCYBwhR+BFXONb/EJeVI3RETFgailNZbkcKF6g==}
 
-  '@aws-cdk/asset-node-proxy-agent-v6@2.1.1':
-    resolution: {integrity: sha512-We4bmHaowOPHr+IQR4/FyTGjRfjgBj4ICMjtqmJeBDWad3Q/6St12NT07leNtyuukv2qMhtSZJQorD8KpKTwRA==}
+  '@aws-cdk/asset-node-proxy-agent-v6@2.1.2':
+    resolution: {integrity: sha512-pDiuqH+qY3zM9lhhLjbKJ1tnKOHzQ2V4Wr/3qsxyKeKAkuPMI/BVGvZG1PbrikUw949cGVTfVEt4ETKKYnrj0Q==}
 
-  '@aws-cdk/cloud-assembly-schema@53.27.0':
-    resolution: {integrity: sha512-OTxe/L2Vc60r2nYih7kFaFpn93sa7shJu9T0tQZsryeDE3HHOAuazKNmS6tLInOjJjVx/dvM5XGyUA+lZAiKxA==}
+  '@aws-cdk/cloud-assembly-schema@54.5.0':
+    resolution: {integrity: sha512-X37oRfMQYO/wXBBDotbW8msJ6AgrcMio/W6TpDR/9To9TUWld1KtY/jveHpU58nZyLVPTYEhDgFP548w3JJGsQ==}
     engines: {node: '>= 18.0.0'}
     bundledDependencies:
       - jsonschema
@@ -2502,8 +2502,8 @@ packages:
       '@noble/hashes':
         optional: true
 
-  '@guardian/braze-components@23.0.1':
-    resolution: {integrity: sha512-gYGu1lJCkjQ9PzYl4ucNBaeOiyb1bO9ColC5vSDr/+u1CsCyypF6c9uWCjfLiWXDUY9ywwggPNspqVZ5i8A+zA==}
+  '@guardian/braze-components@23.0.2':
+    resolution: {integrity: sha512-j1YwU78FKb1+5xL2Fh8TtJnKHXA46GW8rxTN71u7V5PKnnLCiW0BYPAMyRYCXm9czPnsoyj9ptEOpYKpiuTDZw==}
     engines: {node: '24.2'}
     peerDependencies:
       '@emotion/react': 11.1.2
@@ -2520,8 +2520,8 @@ packages:
       browserslist: ^4.22.2
       tslib: ^2.6.2
 
-  '@guardian/cdk@63.6.1':
-    resolution: {integrity: sha512-C9uiYwGnPxIOSOw3Gn3DTuoK9u85W29aggFgAE/oG9wt3TP7UGOyydhjq+lEmuYqgwFE0zgh4uWbldwG3IfVyQ==}
+  '@guardian/cdk@64.0.0':
+    resolution: {integrity: sha512-DWDV+P81uRi9kPO4gw+9jmBF3fYsE4LA5Q000Q4aYTG0TM+THOeJMsp49clJRTLkNCDIbXzzw7uMRD0OpAlSqQ==}
     hasBin: true
     peerDependencies:
       aws-cdk: ^2.1110.0
@@ -2605,15 +2605,15 @@ packages:
       prettier: ^3.7.4
       tslib: ^2.8.1
 
-  '@guardian/react-crossword@17.1.0':
-    resolution: {integrity: sha512-OF0/iAU2bwyHkMwhfC3/3mBexVk70G4OoScXBPjehCwsFa0widb7w8UZoZ/55b3B6EU7Fb05Q7Vl+KExYg15aA==}
+  '@guardian/react-crossword@19.0.1':
+    resolution: {integrity: sha512-YglIyos6dD51pobs5TuaIxBmFbs2h3zGZsfhQlJMm0Pg3etYIiXG3pUkumXiQKyTp62dJt82wJOVXBPDMJH55g==}
     peerDependencies:
       '@emotion/react': ^11.11.4
-      '@guardian/libs': ^31.0.0
-      '@guardian/source': ^12.0.0
+      '@guardian/libs': ^33.0.0
+      '@guardian/source': ^13.0.0
       '@types/react': ^18.2.79
       react: ^18.2.0
-      typescript: ~5.9.3
+      typescript: ~6.0.3
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -4809,8 +4809,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  aws-cdk-lib@2.257.0:
-    resolution: {integrity: sha512-GoHfWklrBJcMwLtDlY64pvaT7cD2KyDXC8sik89DR6jHl6nQsBtYTKSJCM+C/k4jgXaecbv8myNX75FySejq0A==}
+  aws-cdk-lib@2.260.0:
+    resolution: {integrity: sha512-2PPG+hbPDot8+ibkb5Jl9y3OY5rBE6TFwjzOi+yEyU4ZG6u8bM4DDKhhBi/S20NqqSFDso9rH1txVJAdwXNiuQ==}
     engines: {node: '>= 20.0.0'}
     peerDependencies:
       constructs: ^10.5.0
@@ -4828,8 +4828,8 @@ packages:
       - yaml
       - mime-types
 
-  aws-cdk@2.1126.0:
-    resolution: {integrity: sha512-uNoocb3vCPiAT3j9+SwL6pn/VVggHWBsgC2XpxyhNvYQYt6cE9BM/149GWwtdcwnLrPjnwW1+CV/5nSSh5dV+w==}
+  aws-cdk@2.1128.1:
+    resolution: {integrity: sha512-y9OHn5/BOcIiq409vPvpypMIr7/8M1ScFe8IkFMSCN1/GI/5c73fQ4pfzNq+VDkj86T5zxs7BQ1qU2lQQytdXA==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
 
@@ -6246,8 +6246,8 @@ packages:
     resolution: {integrity: sha512-G6NsmEW15s0Uw9XnCg+33H3ViYRyiM0hMrMhhqQOR8NFc5GhYrI+6I3u7OTw7b91J2g8rtvMBZJDbcGb2YUniw==}
     engines: {node: '>= 18'}
 
-  form-data@4.0.4:
-    resolution: {integrity: sha512-KrGhL9Q4zjj0kiUt5OO4Mr/A/jlI2jDYs5eHBpYHPcBEVSiipAvn2Ko2HnPe20rmcuuvMHNdZFp+4IlGTMF0Ow==}
+  form-data@4.0.6:
+    resolution: {integrity: sha512-vKatAh4SlVfgbv+YtmhiRjhEMJsYpsG1Y2rMQtR+SVSbytsSD1YGzDIcrAJmdFec88u/+VoGmxnl+80gL1tRCQ==}
     engines: {node: '>= 6'}
 
   formdata-polyfill@4.0.10:
@@ -6475,6 +6475,10 @@ packages:
 
   hasown@2.0.3:
     resolution: {integrity: sha512-ej4AhfhfL2Q2zpMmLo7U1Uv9+PyhIZpgQLGT1F9miIGmiCJIoCgSmczFdrc97mWT4kVY72KA+WnnhJ5pghSvSg==}
+    engines: {node: '>= 0.4'}
+
+  hasown@2.0.4:
+    resolution: {integrity: sha512-T2UbfbBEF32wiepXIsMlTW9+dDYC6wMh/t/vYA4tuOMKqWz/n3vr1NFSxQiyP+zk2mXsoMA/i/7qV6LKut1t1A==}
     engines: {node: '>= 0.4'}
 
   hast-util-from-parse5@8.0.1:
@@ -7920,8 +7924,8 @@ packages:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
 
-  piscina@4.9.2:
-    resolution: {integrity: sha512-Fq0FERJWFEUpB4eSY59wSNwXD4RYqR+nR/WiEVcZW8IWfVBxJJafcgTEZDQo8k3w0sUarJ8RyVbbUF4GQ2LGbQ==}
+  piscina@4.9.3:
+    resolution: {integrity: sha512-3e3ka9QCE8RJ5I9uszdAADZnkcYi21cqmF3gxox3u884N72qpFHCsIVhHt8cEQ9t3Auq/NqoiCEuhxlxxQuDWA==}
 
   pkg-dir@4.2.0:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
@@ -9163,8 +9167,8 @@ packages:
   undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
 
-  undici@7.27.2:
-    resolution: {integrity: sha512-uZsKNuzQxDMUY6M3pIMvy5tvlGmtq8XJ2oLAkfRKGNu+1VQAIvLy2xIVG5ATZl5wDXl/tddByAWCizRbOme+TA==}
+  undici@7.28.0:
+    resolution: {integrity: sha512-cRZYrTDwWznlnRiPjggAGxZXanty6M8RV1ff8Wm4LWXBp7/IG8v5DnOm74DtUBp9OONpK75YlPnIjQqX0dBDtA==}
     engines: {node: '>=20.18.1'}
 
   unicode-canonical-property-names-ecmascript@2.0.1:
@@ -9701,11 +9705,11 @@ snapshots:
 
   '@asamuzakjp/nwsapi@2.3.9': {}
 
-  '@aws-cdk/asset-awscli-v1@2.2.273': {}
+  '@aws-cdk/asset-awscli-v1@2.2.282': {}
 
-  '@aws-cdk/asset-node-proxy-agent-v6@2.1.1': {}
+  '@aws-cdk/asset-node-proxy-agent-v6@2.1.2': {}
 
-  '@aws-cdk/cloud-assembly-schema@53.27.0': {}
+  '@aws-cdk/cloud-assembly-schema@54.5.0': {}
 
   '@aws-crypto/crc32@5.2.0':
     dependencies:
@@ -11944,7 +11948,7 @@ snapshots:
 
   '@exodus/bytes@1.15.1': {}
 
-  '@guardian/braze-components@23.0.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(react@18.3.1)':
+  '@guardian/braze-components@23.0.2(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(react@18.3.1)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
       '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3)
@@ -11958,13 +11962,13 @@ snapshots:
       browserslist: 4.24.4
       tslib: 2.6.2
 
-  '@guardian/cdk@63.6.1(aws-cdk-lib@2.257.0(constructs@10.6.0))(aws-cdk@2.1126.0)(constructs@10.6.0)':
+  '@guardian/cdk@64.0.0(aws-cdk-lib@2.260.0(constructs@10.6.0))(aws-cdk@2.1128.1)(constructs@10.6.0)':
     dependencies:
       '@aws-sdk/client-ec2': 3.1053.0
       '@aws-sdk/client-ssm': 3.1053.0
       '@aws-sdk/credential-providers': 3.1053.0
-      aws-cdk: 2.1126.0
-      aws-cdk-lib: 2.257.0(constructs@10.6.0)
+      aws-cdk: 2.1128.1
+      aws-cdk-lib: 2.260.0(constructs@10.6.0)
       chalk: 4.1.2
       codemaker: 1.132.0
       constructs: 10.6.0
@@ -12047,7 +12051,7 @@ snapshots:
       prettier: 3.8.3
       tslib: 2.6.2
 
-  '@guardian/react-crossword@17.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3)':
+  '@guardian/react-crossword@19.0.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
       '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3)
@@ -13518,7 +13522,7 @@ snapshots:
       '@xhmikosr/bin-wrapper': 14.3.0
       commander: 8.3.0
       minimatch: 9.0.9
-      piscina: 4.9.2
+      piscina: 4.9.3
       semver: 7.5.4
       slash: 3.0.0
       source-map: 0.7.4
@@ -14533,14 +14537,14 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  aws-cdk-lib@2.257.0(constructs@10.6.0):
+  aws-cdk-lib@2.260.0(constructs@10.6.0):
     dependencies:
-      '@aws-cdk/asset-awscli-v1': 2.2.273
-      '@aws-cdk/asset-node-proxy-agent-v6': 2.1.1
-      '@aws-cdk/cloud-assembly-schema': 53.27.0
+      '@aws-cdk/asset-awscli-v1': 2.2.282
+      '@aws-cdk/asset-node-proxy-agent-v6': 2.1.2
+      '@aws-cdk/cloud-assembly-schema': 54.5.0
       constructs: 10.6.0
 
-  aws-cdk@2.1126.0: {}
+  aws-cdk@2.1128.1: {}
 
   axe-core@4.11.1: {}
 
@@ -16296,12 +16300,12 @@ snapshots:
 
   form-data-encoder@4.1.0: {}
 
-  form-data@4.0.4:
+  form-data@4.0.6:
     dependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8
       es-set-tostringtag: 2.1.0
-      hasown: 2.0.2
+      hasown: 2.0.4
       mime-types: 2.1.35
 
   formdata-polyfill@4.0.10:
@@ -16530,6 +16534,10 @@ snapshots:
       function-bind: 1.1.2
 
   hasown@2.0.3:
+    dependencies:
+      function-bind: 1.1.2
+
+  hasown@2.0.4:
     dependencies:
       function-bind: 1.1.2
 
@@ -17453,7 +17461,7 @@ snapshots:
       decimal.js: 10.6.0
       domexception: 4.0.0
       escodegen: 2.1.0
-      form-data: 4.0.4
+      form-data: 4.0.6
       html-encoding-sniffer: 3.0.0
       http-proxy-agent: 5.0.0
       https-proxy-agent: 5.0.1
@@ -17492,7 +17500,7 @@ snapshots:
       saxes: 6.0.0
       symbol-tree: 3.2.4
       tough-cookie: 6.0.1
-      undici: 7.27.2
+      undici: 7.28.0
       w3c-xmlserializer: 5.0.0
       webidl-conversions: 8.0.1
       whatwg-mimetype: 5.0.0
@@ -18276,7 +18284,7 @@ snapshots:
 
   pirates@4.0.6: {}
 
-  piscina@4.9.2:
+  piscina@4.9.3:
     optionalDependencies:
       '@napi-rs/nice': 1.1.1
 
@@ -19850,7 +19858,7 @@ snapshots:
 
   undici-types@7.16.0: {}
 
-  undici@7.27.2: {}
+  undici@7.28.0: {}
 
   unicode-canonical-property-names-ecmascript@2.0.1: {}
 

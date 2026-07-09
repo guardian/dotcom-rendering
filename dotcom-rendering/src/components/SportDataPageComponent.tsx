@@ -70,7 +70,6 @@ export const SportDataPageComponent = (props: Props) => {
 							commercialMetricsEnabled={
 								!!sportData.config.switches.commercialMetrics
 							}
-							tests={sportData.config.abTests}
 						/>
 					</Island>
 					<Island priority="critical">

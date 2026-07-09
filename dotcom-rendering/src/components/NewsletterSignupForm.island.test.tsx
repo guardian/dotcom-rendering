@@ -89,6 +89,7 @@ const renderForm = () =>
 				newsletterId="morning-briefing"
 				newsletterName="Morning Briefing"
 				frequency="every day"
+				componentId="AR NewsletterSignupForm morning-briefing"
 			/>
 		</ConfigProvider>,
 	);
@@ -101,7 +102,14 @@ const getTrackedEventDescription = (call: unknown[]): string => {
 
 const getTrackedPayloadForEvent = (
 	eventDescription: string,
-): { eventDescription: string; marketingOptInType?: string } | undefined => {
+):
+	| {
+			eventDescription: string;
+			marketingOptInType?: string;
+			responseStatus?: number;
+			errorType?: string;
+	  }
+	| undefined => {
 	const trackingCalls = (submitComponentEvent as jest.Mock).mock
 		.calls as Array<[{ value: string }]>;
 
@@ -109,6 +117,8 @@ const getTrackedPayloadForEvent = (
 		const parsed = JSON.parse(payload.value) as {
 			eventDescription: string;
 			marketingOptInType?: string;
+			responseStatus?: number;
+			errorType?: string;
 		};
 
 		if (parsed.eventDescription === eventDescription) {
@@ -396,7 +406,9 @@ describe('NewsletterSignupForm', () => {
 
 	it('shows failure UI with retry', async () => {
 		const testUser = user.setup();
-		global.fetch = jest.fn().mockResolvedValue({ ok: false } as Response);
+		global.fetch = jest
+			.fn()
+			.mockResolvedValue({ ok: false, status: 500 } as Response);
 
 		renderForm();
 
@@ -415,6 +427,9 @@ describe('NewsletterSignupForm', () => {
 			'form-submission',
 			'submission-failed',
 		]);
+		expect(
+			getTrackedPayloadForEvent('submission-failed')?.responseStatus,
+		).toBe(500);
 
 		await testUser.click(screen.getByRole('button', { name: 'Try again' }));
 
@@ -486,6 +501,36 @@ describe('NewsletterSignupForm', () => {
 		expect(
 			screen.getByRole('button', { name: 'Sign up' }),
 		).toBeInTheDocument();
+	});
+
+	it('tracks an error type when the submit request throws', async () => {
+		const testUser = user.setup();
+		global.fetch = jest
+			.fn()
+			.mockRejectedValue(new TypeError('Failed to fetch'));
+
+		renderForm();
+
+		await typeEmailAddress(testUser);
+		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+
+		await waitFor(() => {
+			expect(
+				screen.getByText(/there was an error signing you up\./i),
+			).toBeInTheDocument();
+		});
+
+		expectTrackedEventDescriptions([
+			'email-input-focused',
+			'click-button',
+			'open-captcha',
+			'captcha-passed',
+			'form-submission',
+			'form-submit-error',
+		]);
+		expect(getTrackedPayloadForEvent('form-submit-error')?.errorType).toBe(
+			'network-or-fetch',
+		);
 	});
 
 	describe('US hide marketing toggle (usSignupHideMarketingToggle switch)', () => {

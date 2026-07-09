@@ -51,7 +51,7 @@ export const NotificationsToggle = {
 			type: args.notificationType,
 		});
 
-		await expect(button).toHaveTextContent('Notifications off');
+		await expect(button).toHaveTextContent('Live blog notifications off');
 
 		await step('isFollowing is called', async () => {
 			await waitFor(() =>
@@ -67,7 +67,9 @@ export const NotificationsToggle = {
 				await expect(
 					mockNotificationsClient.follow,
 				).toHaveBeenCalledWith(expectedTopic);
-				await expect(button).toHaveTextContent('Notifications on');
+				await expect(button).toHaveTextContent(
+					'Live blog notifications on',
+				);
 			});
 		});
 
@@ -77,7 +79,9 @@ export const NotificationsToggle = {
 				await expect(
 					mockNotificationsClient.unfollow,
 				).toHaveBeenCalledWith(expectedTopic);
-				await expect(button).toHaveTextContent('Notifications off');
+				await expect(button).toHaveTextContent(
+					'Live blog notifications off',
+				);
 			});
 		});
 	},

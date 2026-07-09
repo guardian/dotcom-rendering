@@ -25,6 +25,10 @@ import {
 	getMarketingOptInType,
 } from '../lib/newsletter-marketing-opt-in';
 import {
+	getErrorType,
+	getResponseErrorDescription,
+} from '../lib/newsletterSignupFailureDetails';
+import {
 	EVENT_DESCRIPTION_TO_ACTION,
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	type NewsletterEventDescription,
@@ -41,7 +45,7 @@ import { useConfig } from './ConfigContext';
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the
 // badge, its parent must include the T+C along side it.
-// The T+C are not included in this componet directly to reduce layout shift
+// The T+C are not included in this component directly to reduce layout shift
 // from the island hydrating (placeholder height for the text can't
 // be accurately predicated for every breakpoint).
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
@@ -245,7 +249,6 @@ const postFormData = async (
 		},
 	});
 };
-
 const sendTracking = (
 	newsletterId: string,
 	eventDescription: NewsletterEventDescription,
@@ -254,15 +257,10 @@ const sendTracking = (
 	abTest?: AbTest,
 	extraDetails?: Record<string, unknown>,
 ): void => {
-	const componentId =
-		abTest?.variant === 'variantNewField'
-			? NEWSLETTER_SIGNUP_COMPONENT_ID.variantNewField(newsletterId)
-			: NEWSLETTER_SIGNUP_COMPONENT_ID.control(newsletterId);
-
 	sendNewsletterSignupEvent({
 		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
 		identityName: newsletterId,
-		componentId,
+		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.secureSignup(newsletterId),
 		renderingTarget,
 		value: {
 			...extraDetails,
@@ -388,13 +386,30 @@ export const SecureSignup = ({
 			clearSubscriptionCache();
 		}
 
+		const trackingDetails: Record<string, unknown> = {};
+
+		if (marketingOptInType) {
+			trackingDetails.marketingOptInType = marketingOptInType;
+		}
+
+		if (!response.ok) {
+			trackingDetails.responseStatus = response.status;
+			const errorDescription =
+				await getResponseErrorDescription(response);
+			if (errorDescription) {
+				trackingDetails.errorDescription = errorDescription;
+			}
+		}
+
 		sendTracking(
 			newsletterId,
 			response.ok ? 'submission-confirmed' : 'submission-failed',
 			renderingTarget,
 			isSignedIn,
 			abTest,
-			marketingOptInType ? { marketingOptInType } : undefined,
+			Object.keys(trackingDetails).length > 0
+				? trackingDetails
+				: undefined,
 		);
 	};
 
@@ -443,6 +458,7 @@ export const SecureSignup = ({
 				renderingTarget,
 				isSignedIn,
 				abTest,
+				{ errorType: getErrorType(error) },
 			);
 			setErrorMessage(`Sorry, there was an error signing you up.`);
 			setIsWaitingForResponse(false);

@@ -20,10 +20,10 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.island';
 import { CricketMatchHeaderWrapper } from '../components/CricketMatchHeaderWrapper.island';
+import { CricketMiniMatchStatsWrapper } from '../components/CricketMiniMatchStatsWrapper.island';
 import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.island';
 import { Footer } from '../components/Footer';
@@ -36,6 +36,7 @@ import { LiveblogGutterAskWrapper } from '../components/LiveblogGutterAskWrapper
 import { Liveness } from '../components/Liveness.island';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
+import { MatchHeaderFallback } from '../components/MatchHeaderFallback';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { OnwardsUpper } from '../components/OnwardsUpper.island';
@@ -270,6 +271,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	} = article;
 
 	const ab = useAB();
+	const isCricketRedesignEnabled = Boolean(
+		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
+	);
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -297,6 +301,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const cricketMatchUrl =
 		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
+
+	const cricketMatchStatsUrl =
+		article.matchType === 'CricketMatchType'
+			? article.matchStatsUrl
+			: undefined;
 
 	const hasKeyEvents = !!article.keyEvents.length;
 
@@ -386,6 +395,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					format={format}
 					article={article}
 					liveBlogAreaId={liveBlogAreaId}
+					isCricketRedesignEnabled={isCricketRedesignEnabled}
 				/>
 
 				{/* This element is used to replace the liveblog with the scorecard when the scorecard tab is clicked */}
@@ -589,10 +599,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								<GridItem area="media">
 									<div css={maxWidth}>
 										{!!cricketMatchUrl &&
-											!ab?.isUserInTestGroup(
-												'webx-cricket-redesign',
-												'enable',
-											) && (
+											!isCricketRedesignEnabled && (
 												<Island
 													priority="critical"
 													defer={{ until: 'visible' }}
@@ -612,7 +619,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											pageId={article.pageId}
 											webTitle={article.webTitle}
 											ajaxUrl={article.config.ajaxUrl}
-											abTests={article.config.abTests}
 											switches={article.config.switches}
 											isSensitive={
 												article.config.isSensitive
@@ -693,20 +699,17 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											</Island>
 										</Hide>
 									)}
-
-									{/* Match stats */}
-									{!!footballMatchStatsUrl && (
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<FootballMiniMatchStatsWrapper
-												matchStatsUrl={
-													footballMatchStatsUrl
-												}
-											/>
-										</Island>
-									)}
+									<MiniMatchStats
+										footballMatchStatsUrl={
+											footballMatchStatsUrl
+										}
+										cricketMatchStatsUrl={
+											cricketMatchStatsUrl
+										}
+										isCricketRedesignEnabled={
+											isCricketRedesignEnabled
+										}
+									/>
 								</GridItem>
 								<GridItem area="body">
 									<div
@@ -746,7 +749,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												sectionId={
 													article.config.section
 												}
-												abTests={article.config.abTests}
 												switches={
 													article.config.switches
 												}
@@ -1110,11 +1112,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer
-						data-print-layout="hide"
-						contentType={article.contentType}
-						pageId={article.pageId}
-					/>
+					{renderAds && (
+						<MobileStickyContainer data-print-layout="hide" />
+					)}
 				</>
 			)}
 
@@ -1136,11 +1136,40 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	);
 };
 
+const MiniMatchStats = (props: {
+	footballMatchStatsUrl: string | undefined;
+	cricketMatchStatsUrl: string | undefined;
+	isCricketRedesignEnabled: boolean;
+}) => {
+	if (props.footballMatchStatsUrl) {
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMiniMatchStatsWrapper
+					matchStatsUrl={props.footballMatchStatsUrl}
+				/>
+			</Island>
+		);
+	}
+
+	if (props.cricketMatchStatsUrl && props.isCricketRedesignEnabled) {
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<CricketMiniMatchStatsWrapper
+					matchStatsUrl={props.cricketMatchStatsUrl}
+				/>
+			</Island>
+		);
+	}
+
+	return null;
+};
+
 const Header = (props: {
 	renderingTarget: RenderingTarget;
 	format: ArticleFormat;
 	article: ArticleDeprecated;
 	liveBlogAreaId: string;
+	isCricketRedesignEnabled: boolean;
 }) => {
 	const footballMatchLeagueName = props.article.sectionLabel;
 	const footballMatchLeagueUrl = `${props.article.guardianBaseURL}/${props.article.sectionUrl}`;
@@ -1153,18 +1182,13 @@ const Header = (props: {
 			? props.article.matchHeaderUrl
 			: undefined;
 
-	const ab = useAB();
-	const isCricketRedesignEnabled = Boolean(
-		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
-	);
-
 	const isApps = props.renderingTarget === 'Apps';
 
 	if (footballMatchHeaderUrl) {
 		return (
 			<>
 				<noscript>
-					<FootballMatchHeaderFallback
+					<MatchHeaderFallback
 						format={props.format}
 						article={props.article}
 					/>
@@ -1185,16 +1209,26 @@ const Header = (props: {
 		);
 	}
 
-	if (!isApps && cricketMatchHeaderUrl && isCricketRedesignEnabled) {
+	if (!isApps && cricketMatchHeaderUrl && props.isCricketRedesignEnabled) {
 		return (
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<CricketMatchHeaderWrapper
-					tabContentId={props.liveBlogAreaId}
-					selectedTab={'live'}
-					edition={props.article.editionId}
-					matchHeaderURL={cricketMatchHeaderUrl}
-				/>
-			</Island>
+			<>
+				<noscript>
+					<MatchHeaderFallback
+						format={props.format}
+						article={props.article}
+					/>
+				</noscript>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<CricketMatchHeaderWrapper
+						tabContentId={props.liveBlogAreaId}
+						selectedTab={'live'}
+						edition={props.article.editionId}
+						matchHeaderURL={cricketMatchHeaderUrl}
+						article={props.article}
+						format={props.format}
+					/>
+				</Island>
+			</>
 		);
 	}
 
