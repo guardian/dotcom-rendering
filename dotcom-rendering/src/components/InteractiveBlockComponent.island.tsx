@@ -1,10 +1,4 @@
 // AMD require provided by curl.js loader for legacy interactives
-declare global {
-	interface Window {
-		require(modules: string[], callback: (...args: never[]) => void): void;
-	}
-}
-
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { getErrorMessage, isUndefined, log } from '@guardian/libs';
@@ -25,6 +19,12 @@ import { Caption } from './Caption';
 import { useConfig } from './ConfigContext';
 import { defaultRoleStyles } from './Figure';
 import { Placeholder } from './Placeholder';
+
+declare global {
+	interface Window {
+		require(modules: string[], callback: (...args: never[]) => void): void;
+	}
+}
 
 /*
 HISTORY

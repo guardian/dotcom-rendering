@@ -46,6 +46,7 @@
 		"@guardian/support-dotcom-components": "10.0.1",
 		"@guardian/tsconfig": "catalog:",
 		"@playwright/test": "1.60.0",
+		"@rollup/plugin-inject": "5.0.5",
 		"@sentry/browser": "10.52.0",
 		"@storybook/addon-a11y": "10.3.3",
 		"@storybook/addon-docs": "10.3.3",
@@ -129,6 +130,7 @@
 		"react": "18.3.1",
 		"react-dom": "18.3.1",
 		"react-google-recaptcha": "3.1.0",
+		"rollup-plugin-visualizer": "7.0.1",
 		"rehype-autolink-headings": "7.1.0",
 		"rehype-slug": "6.0.0",
 		"rehype-stringify": "10.0.1",
@@ -153,13 +155,9 @@
 		"unified": "11.0.5",
 		"url": "0.11.4",
 		"valibot": "0.28.1",
+		"vite": "8.0.11",
+		"vite-plugin-svgr": "5.2.0",
 		"web-vitals": "4.2.3",
 		"zod": "4.1.12"
-	},
-	"devDependencies": {
-		"@rollup/plugin-inject": "5.0.5",
-		"rollup-plugin-visualizer": "7.0.1",
-		"vite": "8.0.11",
-		"vite-plugin-svgr": "5.2.0"
 	}
 }
