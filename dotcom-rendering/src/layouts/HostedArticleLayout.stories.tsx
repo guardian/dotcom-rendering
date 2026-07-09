@@ -1,3 +1,4 @@
+import { hostedPaletteDecorator } from '../../.storybook/decorators/themeDecorator';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { hostedArticle } from '../../fixtures/manual/hostedArticle';
@@ -8,8 +9,8 @@ import {
 	ArticleSpecial,
 } from '../lib/articleFormat';
 import { customMockFetch } from '../lib/mockRESTCalls';
+import type { Article } from '../types/article';
 import { enhanceArticleType } from '../types/article';
-import type { Branding } from '../types/branding';
 import { HostedArticleLayout } from './HostedArticleLayout';
 
 const mockOnwardsContentFetch = customMockFetch([
@@ -21,20 +22,20 @@ const mockOnwardsContentFetch = customMockFetch([
 	},
 ]);
 
+const { hostedCampaignColour = '' } =
+	hostedArticle.commercialProperties.UK.branding ?? {};
+
 const meta = preview.meta({
 	title: 'Layouts/HostedArticle',
 	component: HostedArticleLayout,
 	parameters: {
-		chromatic: {
-			modes: {
-				'light leftCol': allModes['light leftCol'],
-			},
-		},
+		config: { darkModeAvailable: true },
 	},
 	render: (args) => {
 		global.fetch = mockOnwardsContentFetch;
 		return <HostedArticleLayout {...args} />;
 	},
+	decorators: hostedPaletteDecorator(hostedCampaignColour),
 });
 
 const format = {
@@ -56,7 +57,7 @@ export const Apps = meta.story({
 		},
 		chromatic: {
 			modes: {
-				'light mobileMedium': allModes['light mobileMedium'],
+				'vertical mobileMedium': allModes['vertical mobileMedium'],
 			},
 		},
 	},
@@ -74,30 +75,58 @@ export const Web = meta.story({
 		config: {
 			renderingTarget: 'Web',
 		},
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
+		},
 	},
 });
 
-export const WithoutAccentColour = meta.story({
-	args: {
-		content: {
-			...webHostedArticle,
-			frontendData: {
-				...webHostedArticle.frontendData,
-				commercialProperties: {
-					...webHostedArticle.frontendData.commercialProperties,
-					UK: {
-						...webHostedArticle.frontendData.commercialProperties
-							.UK,
+const overrideBranding = (article: Article): Article => {
+	const brandingWithoutAccentColour = {
+		sponsorName: 'Croatia NTB',
+		logo: {
+			src: 'https://static.theguardian.com/commercial/sponsor/27/Mar/2026/2bd1de6c-47ce-4152-9031-66ce0b1bd96f-croatia_pos_140.png',
+			dimensions: {
+				width: 140,
+				height: 90,
+			},
+			link: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
+			label: 'Paid for by',
+		},
+		logoForDarkBackground: {
+			src: 'https://static.theguardian.com/commercial/sponsor/27/Mar/2026/6f3bc0bd-41ef-4970-9cd7-c75fd1e8a0ce-croatia_pos_140.png',
+			dimensions: {
+				width: 140,
+				height: 90,
+			},
+			link: 'https://croatia.hr/en-gb/why-visit-croatia-in-spring/spring-is-meant-to-be-felt',
+			label: 'Paid for by',
+		},
+		aboutThisLink:
+			'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		hostedCampaignColour: '',
+	};
 
-						branding: {
-							...webHostedArticle.frontendData
-								.commercialProperties.UK.branding,
-							hostedCampaignColour: undefined,
-						} as Branding,
-					},
+	return {
+		...article,
+		frontendData: {
+			...article.frontendData,
+			commercialProperties: {
+				...article.frontendData.commercialProperties,
+				UK: {
+					...article.frontendData.commercialProperties.UK,
+					branding: brandingWithoutAccentColour,
 				},
 			},
 		},
+	};
+};
+
+export const WithoutAccentColour = meta.story({
+	args: {
+		content: overrideBranding(webHostedArticle),
 		format,
 		renderingTarget: 'Web',
 	},
@@ -105,40 +134,54 @@ export const WithoutAccentColour = meta.story({
 		config: {
 			renderingTarget: 'Web',
 		},
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
+		},
+	},
+	decorators: hostedPaletteDecorator(''),
+});
+
+const overrideMainMediaCaption = (article: Article): Article => ({
+	...article,
+	frontendData: {
+		...article.frontendData,
+		mainMediaElements: [
+			...article.frontendData.mainMediaElements.map((el) => {
+				if (
+					el._type ===
+					'model.dotcomrendering.pageElements.ImageBlockElement'
+				) {
+					return {
+						...el,
+						data: {
+							caption: '',
+							credit: '',
+							alt: '',
+						},
+					};
+				}
+				return el;
+			}),
+		],
 	},
 });
 
 export const WithoutMainMediaCaption = meta.story({
 	args: {
-		content: {
-			...webHostedArticle,
-			frontendData: {
-				...webHostedArticle.frontendData,
-				mainMediaElements:
-					webHostedArticle.frontendData.mainMediaElements[0]
-						?._type ===
-					'model.dotcomrendering.pageElements.ImageBlockElement'
-						? [
-								{
-									...webHostedArticle.frontendData
-										.mainMediaElements[0],
-									data: {
-										...webHostedArticle.frontendData
-											.mainMediaElements[0].data,
-										caption: undefined,
-										credit: undefined,
-									},
-								},
-							]
-						: webHostedArticle.frontendData.mainMediaElements,
-			},
-		},
+		content: overrideMainMediaCaption(webHostedArticle),
 		format,
 		renderingTarget: 'Web',
 	},
 	parameters: {
 		config: {
 			renderingTarget: 'Web',
+		},
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
 		},
 	},
 });

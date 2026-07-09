@@ -6,13 +6,18 @@ import { HostedContentOnwards } from './HostedContentOnwards';
 type Props = {
 	url: string;
 	branding?: Branding;
+	isGalleryPage?: boolean;
 };
 
 type OnwardsResponse = {
 	trails: TrailType[];
 };
 
-export const FetchHostedOnwards = ({ branding, url }: Props) => {
+export const FetchHostedOnwards = ({
+	branding,
+	url,
+	isGalleryPage = false,
+}: Props) => {
 	const { data, error } = useApi<OnwardsResponse>(url);
 
 	if (error) {
@@ -31,6 +36,7 @@ export const FetchHostedOnwards = ({ branding, url }: Props) => {
 		<HostedContentOnwards
 			trails={trails}
 			brandName={branding?.sponsorName ?? ''}
+			isGalleryPage={isGalleryPage}
 		/>
 	);
 };

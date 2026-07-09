@@ -35,9 +35,9 @@ import type { ArticleDeprecated } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { BigNumber } from '../BigNumber';
 import { FootballCrest } from '../FootballCrest';
+import { MatchHeaderFallback } from '../MatchHeaderFallback';
 import { Placeholder } from '../Placeholder';
 import { background, border, primaryText, secondaryText } from './colours';
-import { FootballMatchHeaderFallback } from './FootballMatchHeaderFallback';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
 import { Hr } from './Hr';
 import { Notifications } from './Notifications';
@@ -83,7 +83,7 @@ export const FootballMatchHeader = (props: Props) => {
 				props.format.design === ArticleDesign.DeadBlog)
 		) {
 			return (
-				<FootballMatchHeaderFallback
+				<MatchHeaderFallback
 					format={props.format}
 					article={props.article}
 				/>

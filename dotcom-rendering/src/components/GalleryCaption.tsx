@@ -1,5 +1,13 @@
 import { css } from '@emotion/react';
-import { between, from, space, textSans14 } from '@guardian/source/foundations';
+import {
+	between,
+	from,
+	palette as sourcePalette,
+	space,
+	textSans14,
+	textSans15,
+	textSansBold17,
+} from '@guardian/source/foundations';
 import { grid } from '../grid';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
@@ -16,6 +24,11 @@ type Props = {
 	webTitle: string;
 	/** Position of the image in the gallery used to build share fragment */
 	position?: number;
+	/**
+	 * Total number of images in the article used to display alongside the image position (1/5, 2/5, etc.)
+	 * Used for hosted content galleries only
+	 */
+	imagesLength?: number;
 };
 
 const styles = css`
@@ -38,6 +51,41 @@ const styles = css`
 	}
 `;
 
+const hostedGalleryStyles = css`
+	${textSansBold17}
+	align-self: end;
+
+	${from.tablet} {
+		padding-bottom: ${space[10]}px;
+	}
+
+	${between.tablet.and.desktop} {
+		padding-left: 0;
+		padding-right: 0;
+	}
+`;
+
+const positionIndicatorStyles = css`
+	${textSans15}
+	display: block;
+	padding: ${space[2]}px 0 ${space[1]}px;
+
+	${from.desktop} {
+		padding-top: 0;
+	}
+`;
+
+const creditStyles = css`
+	display: block;
+	padding: ${space[2]}px 0 ${space[2]}px;
+`;
+
+const hostedCreditStyles = css`
+	${textSans15}
+	padding-top: ${space[3]}px;
+	color: ${sourcePalette.neutral[73]};
+`;
+
 export const GalleryCaption = ({
 	captionHtml,
 	credit,
@@ -46,32 +94,42 @@ export const GalleryCaption = ({
 	pageId,
 	webTitle,
 	position,
+	imagesLength,
 }: Props) => {
 	const emptyCaption = captionHtml === undefined || captionHtml.trim() === '';
 	const hideCredit =
 		displayCredit === false || credit === undefined || credit === '';
-	const shouldIncludeShareButton =
-		format.design !== ArticleDesign.HostedGallery;
+	const isHostedGallery = format.design === ArticleDesign.HostedGallery;
+	const showPositionIndicator =
+		isHostedGallery &&
+		typeof position === 'number' &&
+		position !== 0 &&
+		typeof imagesLength === 'number' &&
+		imagesLength !== 0;
 
 	if (emptyCaption && hideCredit) {
 		return null;
 	}
 
 	return (
-		<figcaption css={styles}>
+		<figcaption css={[styles, isHostedGallery && hostedGalleryStyles]}>
+			{showPositionIndicator && (
+				<small css={positionIndicatorStyles}>
+					{position}&#47;{imagesLength}
+				</small>
+			)}
+
 			{emptyCaption ? null : <CaptionText html={captionHtml} />}
+
 			{hideCredit ? null : (
 				<small
-					css={css`
-						display: block;
-						padding: ${space[2]}px 0 ${space[2]}px;
-					`}
+					css={[creditStyles, isHostedGallery && hostedCreditStyles]}
 				>
 					{credit}
 				</small>
 			)}
 
-			{shouldIncludeShareButton && (
+			{!isHostedGallery && (
 				<div
 					css={css`
 						padding-top: ${space[2]}px;

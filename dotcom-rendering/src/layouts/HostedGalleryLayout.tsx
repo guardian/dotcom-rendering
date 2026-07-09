@@ -5,12 +5,13 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { BackToTop } from '../components/BackToTop';
 import { CallToActionButton } from '../components/CallToActionAtom';
+import { FetchHostedOnwards } from '../components/FetchHostedOnwards.island';
 import { GalleryImage } from '../components/GalleryImage';
 import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
 import { MainMediaGallery } from '../components/MainMediaGallery';
-import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.island';
 import { Standfirst } from '../components/Standfirst';
@@ -77,12 +78,44 @@ const metaStyles = css`
 	}
 `;
 
+const paddedContainer = css`
+	${grid.paddedContainer}
+	${grid.outerRules()}
+	background-color: ${palette('--article-inner-background')};
+`;
+
+const bttPosition = css`
+	${grid.column.all}
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+	padding: 0 ${space[3]}px ${space[4]}px;
+
+	${from.tablet} {
+		${grid.column.centre}
+		padding: 0 0 ${space[4]}px;
+	}
+
+	${from.desktop} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+`;
+
 const ctaButtonStyles = css`
 	margin-right: ${space[3]}px;
 `;
 
+const onwardContentStyles = css`
+	${grid.column.centre}
+	${from.desktop} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+
+	padding-bottom: ${space[5]}px;
+`;
+
 export const HostedGalleryLayout = (props: WebProps | AppProps) => {
-	const { gallery, renderingTarget, format, serverTime } = props;
+	const { gallery, renderingTarget, format } = props;
 	const { frontendData } = gallery;
 	const { commercialProperties, editionId } = frontendData;
 
@@ -116,9 +149,8 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 			) : null}
 
 			<main
-				css={{
-					backgroundColor: palette('--article-background'),
-				}}
+				data-layout="HostedGalleryLayout"
+				css={{ backgroundColor: palette('--article-background') }}
 			>
 				<header css={headerStyles}>
 					<MainMediaGallery
@@ -126,6 +158,7 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 						renderingTarget={props.renderingTarget}
 					/>
+
 					<ArticleHeadline
 						format={format}
 						headlineString={frontendData.headline}
@@ -135,24 +168,23 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 							frontendData.webPublicationDateDeprecated
 						}
 					/>
+
 					<Standfirst
 						format={format}
 						standfirst={frontendData.standfirst}
 					/>
 
-					{renderingTarget === 'Web' && (
-						<div data-print-layout="hide" css={metaStyles}>
-							{cta?.url && (
-								<div css={ctaButtonStyles}>
-									<CallToActionButton
-										linkUrl={cta.url}
-										accentColor={
-											branding?.hostedCampaignColour
-										}
-										buttonText={cta.btnText}
-									/>
-								</div>
-							)}
+					<div data-print-layout="hide" css={metaStyles}>
+						{cta?.url && (
+							<div css={ctaButtonStyles}>
+								<CallToActionButton
+									linkUrl={cta.url}
+									accentColor={branding?.hostedCampaignColour}
+									buttonText={cta.btnText}
+								/>
+							</div>
+						)}
+						{renderingTarget === 'Web' && (
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
@@ -164,9 +196,10 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 									context="ArticleMeta"
 								/>
 							</Island>
-						</div>
-					)}
+						)}
+					</div>
 				</header>
+
 				<GalleryBody
 					renderingTarget={renderingTarget}
 					format={format}
@@ -174,29 +207,23 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					pageId={frontendData.pageId}
 					webTitle={frontendData.webTitle}
 				/>
+
+				<div css={paddedContainer}>
+					<div css={bttPosition}>
+						<BackToTop format={format} />
+					</div>
+
+					<div css={onwardContentStyles}>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<FetchHostedOnwards
+								url={`${frontendData.config.ajaxUrl}/${frontendData.config.pageId}/onward.json`}
+								branding={branding}
+								isGalleryPage={true}
+							/>
+						</Island>
+					</div>
+				</div>
 			</main>
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<OnwardsUpper
-					ajaxUrl={frontendData.config.ajaxUrl}
-					hasRelated={frontendData.hasRelated}
-					hasStoryPackage={frontendData.hasStoryPackage}
-					isAdFreeUser={frontendData.isAdFreeUser}
-					pageId={frontendData.pageId}
-					isPaidContent={!!frontendData.config.isPaidContent}
-					showRelatedContent={frontendData.config.showRelatedContent}
-					keywordIds={frontendData.config.keywordIds}
-					contentType={frontendData.contentType}
-					tags={frontendData.tags}
-					format={format}
-					pillar={format.theme}
-					editionId={frontendData.editionId}
-					shortUrlId={frontendData.config.shortUrlId}
-					discussionApiUrl={frontendData.config.discussionApiUrl}
-					serverTime={serverTime}
-					renderingTarget={renderingTarget}
-					webURL={frontendData.webURL}
-				/>
-			</Island>
 		</>
 	);
 };
@@ -222,6 +249,8 @@ const GalleryBody = (props: {
 						webTitle={props.webTitle}
 						renderingTarget={props.renderingTarget}
 						key={element.elementId}
+						// Pass the total number of images to include in the image caption (e.g. 1/5, 2/5, etc.)
+						imagesLength={props.bodyElements.length}
 					/>
 				);
 			} else {

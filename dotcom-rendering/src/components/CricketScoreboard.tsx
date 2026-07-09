@@ -144,7 +144,7 @@ export const CricketScoreboard = ({ scorecardUrl, match }: Props) => {
 					showDate={true}
 					showTime={false}
 				/>
-				{match.competitionName}, {match.venueName}
+				{match.stage}, {match.venueName}
 			</h2>
 			<table css={tableStyle}>
 				<thead css={screenReaderOnlyStyle}>
@@ -174,7 +174,7 @@ export const CricketScoreboard = ({ scorecardUrl, match }: Props) => {
 					</tr>
 				</tbody>
 				<caption css={captionStyle}>
-					{match.competitionName}, {match.venueName}
+					{match.stage}, {match.venueName}
 				</caption>
 				<tfoot>
 					<tr css={rowStyle}>

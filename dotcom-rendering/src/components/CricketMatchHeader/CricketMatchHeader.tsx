@@ -14,7 +14,7 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import { Fragment, type ReactNode, useMemo, useState } from 'react';
+import { Fragment, type ReactNode, useEffect, useMemo, useState } from 'react';
 import type { SWRConfiguration } from 'swr';
 import useSWR from 'swr';
 import type {
@@ -23,14 +23,17 @@ import type {
 	CricketTeam,
 } from '../../cricketMatchV2';
 import { grid } from '../../grid';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import {
 	type EditionId,
 	getLocaleFromEdition,
 	getTimeZoneFromEdition,
 } from '../../lib/edition';
 import { generateImageURL } from '../../lib/image';
+import { useLocationHash } from '../../lib/useLocationHash';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
+import type { ArticleDeprecated } from '../../types/article';
 import { BigNumber } from '../BigNumber';
 import { CricketScorecardTabRemoteRender } from '../CricketScorecardTabRemoteRender';
 import {
@@ -39,20 +42,19 @@ import {
 	primaryText,
 	secondaryText,
 } from '../FootballMatchHeader/colours';
-import type { TabName } from '../FootballMatchHeader/Tabs';
 import { Tabs } from '../FootballMatchHeader/Tabs';
+import { MatchHeaderFallback } from '../MatchHeaderFallback';
 import { Placeholder } from '../Placeholder';
 import type { CricketHeaderData } from './headerData';
 import { parse as parseHeaderData } from './headerData';
 
 export type CricketMatchHeaderProps = {
-	initialData?: CricketMatch;
 	matchHeaderURL: string;
 	edition: EditionId;
 	selectedTab: 'info' | 'live' | 'report';
-	tabContentElement?: HTMLElement;
-	reportURL?: URL;
-	liveURL?: URL;
+	tabContentId: string;
+	format: ArticleFormat;
+	article: ArticleDeprecated;
 };
 
 type Props = CricketMatchHeaderProps & {
@@ -61,18 +63,52 @@ type Props = CricketMatchHeaderProps & {
 };
 
 export const CricketMatchHeader = (props: Props) => {
-	const { data } = useSWR<CricketHeaderData, Error>(
+	const scorecardHashbang = '#scorecard';
+	const locationHash = useLocationHash();
+
+	const { data, error } = useSWR<CricketHeaderData, Error>(
 		props.matchHeaderURL,
-		fetcher(props.selectedTab, props.getHeaderData),
+		fetcher(props.getHeaderData),
 		swrOptions(props.refreshInterval),
 	);
-	const match = data?.match ?? props.initialData;
 
 	const [selectedTab, setSelectedTab] = useState<'info' | 'live' | 'report'>(
 		props.selectedTab,
 	);
 
-	if (match === undefined) {
+	const [tabContentElement, setTabContentElement] =
+		useState<HTMLElement | null>(null);
+
+	useEffect(() => {
+		if (locationHash === scorecardHashbang) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect -- we want to set the selected tab based on the hashbang in the URL
+			setSelectedTab('info');
+		}
+	}, [locationHash]);
+
+	useEffect(() => {
+		const el = document.getElementById(props.tabContentId);
+		if (el) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect -- We need to capture the element client side
+			setTabContentElement(el);
+		}
+	}, [props.tabContentId]);
+
+	if (error) {
+		if (
+			props.format.design === ArticleDesign.LiveBlog ||
+			props.format.design === ArticleDesign.DeadBlog
+		) {
+			return (
+				<MatchHeaderFallback
+					format={props.format}
+					article={props.article}
+				/>
+			);
+		}
+	}
+
+	if (data === undefined) {
 		return (
 			<Placeholder
 				heights={
@@ -85,8 +121,11 @@ export const CricketMatchHeader = (props: Props) => {
 		);
 	}
 
+	const { match, tabs } = data;
+
 	const onInfoTabClick = () => {
 		setSelectedTab('info');
+		window.location.hash = scorecardHashbang;
 	};
 
 	return (
@@ -122,14 +161,14 @@ export const CricketMatchHeader = (props: Props) => {
 					sportKind="cricket"
 					matchKind={match.kind}
 					selected={selectedTab}
-					reportTab={props.reportURL}
-					liveTab={props.liveURL}
+					reportTab={tabs.reportURL}
+					liveTab={tabs.liveURL}
 					infoTab={onInfoTabClick}
 				/>
 			</div>
 			{selectedTab === 'info' && (
 				<CricketScorecardTabRemoteRender
-					tabContentElement={props.tabContentElement}
+					tabContentElement={tabContentElement ?? undefined}
 					innings={match.innings}
 					officials={match.officials}
 					homeTeam={match.homeTeam}
@@ -154,10 +193,10 @@ const swrOptions = (
 });
 
 const fetcher =
-	(selected: TabName, getHeaderData: Props['getHeaderData']) =>
+	(getHeaderData: Props['getHeaderData']) =>
 	(url: string): Promise<CricketHeaderData> =>
 		getHeaderData(url)
-			.then(parseHeaderData(selected))
+			.then(parseHeaderData)
 			.then((result) => {
 				if (!result.ok) {
 					log('dotcom', result.error);
