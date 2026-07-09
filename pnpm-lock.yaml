@@ -538,6 +538,9 @@ importers:
       '@playwright/test':
         specifier: 1.60.0
         version: 1.60.0
+      '@rollup/plugin-inject':
+        specifier: 5.0.5
+        version: 5.0.5(rollup@4.63.4)
       '@sentry/browser':
         specifier: 10.65.0
         version: 10.65.0
@@ -784,6 +787,9 @@ importers:
       remark-rehype:
         specifier: 11.1.2
         version: 11.1.2
+      rollup-plugin-visualizer:
+        specifier: 7.0.1
+        version: 7.0.1(rolldown@1.0.0-rc.18)(rollup@4.63.4)
       sanitize-html:
         specifier: 2.17.7
         version: 2.17.7
@@ -841,25 +847,18 @@ importers:
       valibot:
         specifier: 'catalog:'
         version: 1.4.2(typescript@6.0.3)
-      web-vitals:
-        specifier: 4.2.3
-        version: 4.2.3
-      zod:
-        specifier: 4.1.12
-        version: 4.1.12
-    devDependencies:
-      '@rollup/plugin-inject':
-        specifier: 5.0.5
-        version: 5.0.5(rollup@4.63.4)
-      rollup-plugin-visualizer:
-        specifier: 7.0.1
-        version: 7.0.1(rolldown@1.0.0-rc.18)(rollup@4.63.4)
       vite:
         specifier: 8.0.11
         version: 8.0.11(@types/node@24.12.4)(esbuild@0.28.2)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.1)
       vite-plugin-svgr:
         specifier: 5.2.0
         version: 5.2.0(rollup@4.63.4)(supports-color@8.1.1)(typescript@6.0.3)(vite@8.0.11(@types/node@24.12.4)(esbuild@0.28.2)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.1))
+      web-vitals:
+        specifier: 4.2.3
+        version: 4.2.3
+      zod:
+        specifier: 4.1.12
+        version: 4.1.12
 
 packages:
 

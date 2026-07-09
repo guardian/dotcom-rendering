@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access -- necessary for calling our async loaded modules */
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
 import { isUndefined, log, startPerformanceMeasure } from '@guardian/libs';
@@ -75,6 +74,7 @@ export const doHydration = async (
 						<IslandProvider value={{ isChild: true }}>
 							{/* The component to hydrate must be a single JSX Element */}
 							{createElement(
+								// eslint-disable-next-line @typescript-eslint/no-restricted-types --  load a component dynamically so we can't determine the type
 								module[name] as React.FunctionComponent,
 								data,
 							)}

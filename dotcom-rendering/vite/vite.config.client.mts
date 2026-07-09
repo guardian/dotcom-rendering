@@ -114,7 +114,7 @@ export const createClientConfig = (build: Build): UserConfig => {
 						inject({
 							Buffer: ['buffer', 'Buffer'],
 						}) as PluginOption,
-				  ]
+					]
 				: []),
 		],
 		resolve: {},
@@ -126,11 +126,11 @@ export const createClientConfig = (build: Build): UserConfig => {
 			rolldownOptions: {
 				input: isSingleChunk
 					? // Single-chunk builds can only have one entry
-					  { index: getEntryIndex(build) }
+						{ index: getEntryIndex(build) }
 					: {
 							index: getEntryIndex(build),
 							debug: './src/client/debug/debug.ts',
-					  },
+						},
 				external: getExternals(build),
 				output: {
 					// Naming: [name].[build].[hash].js — matches webpack output pattern
@@ -161,7 +161,7 @@ export const createClientConfig = (build: Build): UserConfig => {
 										maxSize: 500000,
 									},
 								],
-						  },
+							},
 					globals: getGlobals(build),
 				},
 			},
