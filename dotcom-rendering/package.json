@@ -32,7 +32,7 @@
 		"@guardian/bridget": "8.13.1",
 		"@guardian/browserslist-config": "6.1.0",
 		"@guardian/cdk": "catalog:",
-		"@guardian/commercial-core": "34.0.0",
+		"@guardian/commercial-core": "34.3.0",
 		"@guardian/consent-manager": "1.0.0",
 		"@guardian/core-web-vitals": "7.0.0",
 		"@guardian/eslint-config": "catalog:",

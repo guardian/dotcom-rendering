@@ -327,8 +327,8 @@ importers:
         specifier: 'catalog:'
         version: 64.0.0(aws-cdk-lib@2.260.0(constructs@10.6.0))(aws-cdk@2.1128.1)(constructs@10.6.0)
       '@guardian/commercial-core':
-        specifier: 34.0.0
-        version: 34.0.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))
+        specifier: 34.3.0
+        version: 34.3.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))
       '@guardian/consent-manager':
         specifier: 1.0.0
         version: 1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3)
@@ -2528,8 +2528,8 @@ packages:
       aws-cdk-lib: ^2.241.0
       constructs: ^10.5.1
 
-  '@guardian/commercial-core@34.0.0':
-    resolution: {integrity: sha512-Uq1fIk6jaHPNfk5Y1E2hgwYTNegOH1iILeOG3oRY6aVJ2LDCZtiXwVqClaXaZLD+xdRFQJYCOZse+xKOnUQvBA==}
+  '@guardian/commercial-core@34.3.0':
+    resolution: {integrity: sha512-Ja+SqeaJLUz4Yeb7HIkbHcRCif/pmthjzIs/u/gEu8zQTk/QEILjQNnV3bWf8m/9d2VAOT+pwxbH7m5EjeFWaw==}
     peerDependencies:
       '@guardian/consent-manager': ^1.0.0
       '@guardian/libs': ^32.0.0
@@ -11919,7 +11919,7 @@ snapshots:
       read-pkg-up: 7.0.1
       yargs: 17.7.2
 
-  '@guardian/commercial-core@34.0.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))':
+  '@guardian/commercial-core@34.3.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))':
     dependencies:
       '@guardian/consent-manager': 1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3)
       '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3)
