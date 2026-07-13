@@ -82,6 +82,40 @@ const cardGridStyles = css`
 	}
 `;
 
+// ── CLS mitigation ────────────────────────────────────────────────────────────
+
+/**
+ * Reserves vertical space for the nudge so that the async swap between the
+ * native fallback card and a Braze banner (see the `useBraze` fetch below)
+ * doesn't shift surrounding content once the placement is already visible to
+ * the reader.
+ *
+ * Values are the rendered height of the native fallback card (fixed copy, so
+ * the height is deterministic), measured via Storybook at each named
+ * breakpoint where the description text wraps to a different number of
+ * lines:
+ * - < mobileMedium (375px): 3 lines  → 111px
+ * - mobileMedium–phablet (375–659px): 2 lines → 90px
+ * - >= phablet (660px): 1 line → 69px
+ *
+ * A small buffer is added to absorb minor font-metric differences (e.g.
+ * webfont vs. fallback font during load).
+ *
+ * This only guarantees no shift when a Braze banner is the same height or
+ * shorter. Braze banners can set their own `minHeight` custom property (see
+ * `BrazeBannersSystem.tsx`) to match or exceed these values so their content
+ * doesn't overflow the reserved space either.
+ */
+const nudgeMinHeightStyles = css`
+	min-height: 112px;
+	${from.mobileMedium} {
+		min-height: 92px;
+	}
+	${from.phablet} {
+		min-height: 72px;
+	}
+`;
+
 // ── Card styles ───────────────────────────────────────────────────────────────
 
 const showcaseCardStyles = css`
@@ -210,9 +244,12 @@ export const FeastContextualNudge = ({
 				<div
 					aria-description={`Open the recipe ${title} in the Feast app`}
 					data-component="feast-contextual-nudge"
-					css={css`
-						margin: ${space[2]}px 0;
-					`}
+					css={[
+						nudgeMinHeightStyles,
+						css`
+							margin: ${space[2]}px 0;
+						`,
+					]}
 				>
 					<BrazeBannersSystemDisplay
 						meta={{
@@ -244,6 +281,7 @@ export const FeastContextualNudge = ({
 			css={[
 				showcaseCardStyles,
 				cardGridStyles,
+				nudgeMinHeightStyles,
 				darkModeAvailable &&
 					css`
 						@media (prefers-color-scheme: dark) {
