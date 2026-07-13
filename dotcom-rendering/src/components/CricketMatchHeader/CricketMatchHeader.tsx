@@ -205,6 +205,7 @@ const fetcher =
 		getHeaderData(url)
 			.then(parseHeaderData(selectedTab, currentUrl))
 			.then((result) => {
+				console.log('CricketMatchHeader fetcher result', result);
 				if (!result.ok) {
 					log('dotcom', result.error);
 					throw new Error();
