@@ -123,6 +123,8 @@ test.describe('Liveblogs', () => {
 	test('should enhance tweets after they have been inserted', async ({
 		page,
 	}) => {
+		await page.clock.install();
+
 		await loadPage({
 			page,
 			path: `/Article/${blogUrl}`,
@@ -154,9 +156,10 @@ test.describe('Liveblogs', () => {
 
 		const twitterIframe = getIframeBody(page, tweetIframeSelector);
 
+		await page.clock.runFor(20_000);
+
 		await expect(await twitterIframe).toContainText(
 			'Don’t believe the spin. Once you break through typical Washington math',
-			{ timeout: 20000 },
 		);
 	});
 
@@ -248,6 +251,8 @@ test.describe('Liveblogs', () => {
 	test('should initially hide new blocks, only revealing them when the top of blog is in view', async ({
 		page,
 	}) => {
+		await page.clock.install();
+
 		await loadPage({
 			page,
 			path: `/Article/${blogUrl}`,
@@ -284,9 +289,10 @@ test.describe('Liveblogs', () => {
 
 		const twitterIframe = getIframeBody(page, tweetIframeSelector);
 
+		await page.clock.runFor(20_000);
+
 		await expect(await twitterIframe).toContainText(
 			'Don’t believe the spin. Once you break through typical Washington math',
-			{ timeout: 20000 },
 		);
 	});
 
@@ -329,7 +335,6 @@ test.describe('Liveblogs', () => {
 
 		await page.clock.runFor(60_000);
 
-		// The cricket data is updated every 14 seconds, so we need a longer timeout here
 		await expect(
 			page.getByLabel('130 runs, 6 wickets fallen'),
 		).toBeVisible();
