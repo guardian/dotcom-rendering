@@ -63,6 +63,7 @@ export type CricketTeam = {
 export type Innings = {
 	description: string;
 	battingTeam: string;
+	order: number;
 	bowlers: Bowler[];
 	batters: Batter[];
 	extras: Extras;
@@ -351,6 +352,7 @@ export const parseCricketMatchV2 = (
 				innings: feMatch.innings.map((innings) => ({
 					description: innings.description,
 					battingTeam: innings.battingTeam,
+					order: innings.order,
 					bowlers: innings.bowlers.map((bowler) => ({
 						name: bowler.name,
 						overs: bowler.overs,
