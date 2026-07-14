@@ -1,4 +1,11 @@
-import { type ErrorRequestHandler, type Handler, Router } from 'express';
+import {
+	type ErrorRequestHandler,
+	type Handler,
+	type NextFunction,
+	type Request,
+	type Response,
+	Router,
+} from 'express';
 import { pages } from '../devServer/routers/pages';
 import { targets } from '../devServer/routers/targets';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
@@ -61,6 +68,8 @@ const editionalisefront = (url: string): string => {
 	return url;
 };
 
+const backendApp = process.env.GU_APP ?? 'dev';
+
 const redirects: Handler = (req, res, next) => {
 	const path = req.path.split('/')[1];
 
@@ -105,6 +114,20 @@ const renderer = Router();
 renderer.use(getContentFromURLMiddleware);
 renderer.use(getABTestsFromQueryParams);
 renderer.use(requestLoggerMiddleware);
+
+renderer.use((req: Request, res: Response, next: NextFunction) => {
+	const headers = {
+		'X-Gu-Backend-App': backendApp,
+		'X-Gu-Backend-App-Target-Group': 'dev',
+	};
+
+	for (const [key, value] of Object.entries(headers)) {
+		res.setHeader(key, value);
+	}
+
+	next();
+});
+
 renderer.get('/Article/*url', handleArticle);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);
