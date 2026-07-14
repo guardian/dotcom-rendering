@@ -363,8 +363,8 @@ importers:
         specifier: 28.1.0
         version: 28.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3)
       '@guardian/support-dotcom-components':
-        specifier: 10.0.1
-        version: 10.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@4.0.2)(zod@4.1.12)
+        specifier: 10.1.0
+        version: 10.1.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@4.0.2)(zod@4.1.12)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -2661,8 +2661,8 @@ packages:
       typescript:
         optional: true
 
-  '@guardian/support-dotcom-components@10.0.1':
-    resolution: {integrity: sha512-lxV3Zf5crtOBN8qZd1CO4ELn7FT2MYYUsE/R/m4f0kyfilR8pvemMRT2F0SxVaGLUsTM2Q7Pz5ebRbSOjpQPog==}
+  '@guardian/support-dotcom-components@10.1.0':
+    resolution: {integrity: sha512-jhykTjlqoDg1Ihz6TIWrteUp/rn4TQbU+nGX8IYH2zhzaTvp8t3fMXpJf6TBPlqPkoETcHY21B3Z2vc4HpZEkQ==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
       '@guardian/ophan-tracker-js': 2.8.0
@@ -12032,7 +12032,7 @@ snapshots:
       react: 18.3.1
       typescript: 6.0.3
 
-  '@guardian/support-dotcom-components@10.0.1(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@4.0.2)(zod@4.1.12)':
+  '@guardian/support-dotcom-components@10.1.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@4.0.2)(zod@4.1.12)':
     dependencies:
       '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3)
       '@guardian/ophan-tracker-js': 4.0.2

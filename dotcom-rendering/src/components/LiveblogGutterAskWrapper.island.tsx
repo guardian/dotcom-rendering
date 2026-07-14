@@ -47,7 +47,7 @@ const LiveblogGutterAskBuilder = ({
 	const isSignedIn = useIsSignedIn();
 	const abTests = useAB();
 
-	const tagIds = tags.map((tag) => tag.id);
+	const tagIds = useMemo(() => tags.map((tag) => tag.id), [tags]);
 
 	const hideSupportMessagingForUser = shouldHideSupportMessaging(
 		isSignedIn as boolean,
