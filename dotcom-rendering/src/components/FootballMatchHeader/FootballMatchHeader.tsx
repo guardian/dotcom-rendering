@@ -365,7 +365,10 @@ const Team = (props: {
 			'--border-left-colour': palette(border(props.match.kind)),
 		}}
 	>
-		<TeamName name={props.match[props.team].name} />
+		<TeamName
+			name={props.match[props.team].name}
+			teamUrl={props.match[props.team].teamUrl}
+		/>
 		<span
 			css={{
 				display: 'flex',
@@ -390,7 +393,7 @@ const Team = (props: {
 	</div>
 );
 
-const TeamName = (props: { name: string }) => (
+const TeamName = (props: { name: string; teamUrl?: string }) => (
 	<p
 		css={{
 			...headlineBold20Object,
@@ -398,7 +401,20 @@ const TeamName = (props: { name: string }) => (
 			[from.leftCol]: headlineBold24Object,
 		}}
 	>
-		{props.name}
+		{props.teamUrl ? (
+			<a
+				href={props.teamUrl}
+				css={{
+					color: 'inherit',
+					textDecoration: 'none',
+					'&:hover': { textDecoration: 'underline' },
+				}}
+			>
+				{props.name}
+			</a>
+		) : (
+			props.name
+		)}
 	</p>
 );
 
