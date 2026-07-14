@@ -88,7 +88,7 @@ export const NewsletterSignupCardContainer = ({
 	const hasPreviewUrl = enablePreview && Boolean(renderUrl);
 
 	const openPreview = useCallback(() => {
-		if (renderUrl === undefined) {
+		if (renderUrl === undefined || renderUrl === '') {
 			return;
 		}
 
@@ -109,7 +109,7 @@ export const NewsletterSignupCardContainer = ({
 	}, [abTest, identityName, isSignedIn, renderingTarget, renderUrl]);
 
 	const trackPreviewLinkOpen = useCallback(() => {
-		if (renderUrl === undefined) {
+		if (renderUrl === undefined || renderUrl === '') {
 			return;
 		}
 
@@ -125,7 +125,7 @@ export const NewsletterSignupCardContainer = ({
 
 	const closePreview = useCallback(() => {
 		setIsPreviewOpen((isOpen) => {
-			if (isOpen && renderUrl !== undefined) {
+			if (isOpen && renderUrl !== undefined && renderUrl !== '') {
 				sendPreviewTracking({
 					identityName,
 					eventDescription: 'preview-close',

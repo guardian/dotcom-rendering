@@ -2,11 +2,11 @@ import { render, screen, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import { type ComponentProps, forwardRef, useImperativeHandle } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import {
 	NEWSLETTER_PREVIEW_AB_TEST_NAME,
 	NEWSLETTER_PREVIEW_VARIANT,
 } from '../lib/newsletterSignupAbTest';
-import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
