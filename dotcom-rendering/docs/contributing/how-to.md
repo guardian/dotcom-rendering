@@ -59,3 +59,31 @@ To make requests to the API from your local machine, use the [SOCKS proxy](https
 2. Run the `browse-with-socks-proxy` script from the [`guardian/platform` repo](https://github.com/guardian/platform/blob/main/scripts/browse-with-socks-proxy):
    This will start a new instance of the Chrome browser with a SOCKS proxy configured to route request via an EC2 instance in the VPC.
    You can now browse the DCR API on CODE/PROD from this browser instance.
+
+### Using `curl`
+
+It is worth mentioning the CORS configuration of DCR in CODE/PROD limits what can be done in the browser; `curl` might be better for your use-case.
+
+For example, to interact with a `POST` endpoint, first connect to the SOCKS proxy instance with [guardian/ssm-scala](https://github.com/guardian/ssm-scala):
+
+```bash
+ssm ssh -t frontend,INFRA,socks-proxy --user ec2-user --newest --profile frontend -x
+```
+
+Then make a request:
+
+```bash
+curl -s "https://www.theguardian.com/tone/minutebyminute.json?dcr=true" | \
+  curl -X POST https://tag-page-rendering.code.dev-guardianapis.com/TagPage -H "Content-Type: application/json" -d @-
+```
+
+To discard the response body and show the response headers:
+
+```bash
+curl -s "https://www.theguardian.com/tone/minutebyminute.json?dcr=true" | \
+  curl -s -X POST https://tag-page-rendering.code.dev-guardianapis.com/TagPage \
+  -H "Content-Type: application/json" \
+  -d @- \
+  -D - \
+  -o /dev/null
+```
