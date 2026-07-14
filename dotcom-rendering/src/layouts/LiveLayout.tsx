@@ -681,7 +681,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										cricketMatchStatsUrl={
 											cricketMatchStatsUrl
 										}
-										renderingTarget={renderingTarget}
 									/>
 								</GridItem>
 								<GridItem area="body">
@@ -1112,10 +1111,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 const MiniMatchStats = (props: {
 	footballMatchStatsUrl: string | undefined;
 	cricketMatchStatsUrl: string | undefined;
-	renderingTarget: RenderingTarget;
 }) => {
-	const isApps = props.renderingTarget === 'Apps';
-
 	if (props.footballMatchStatsUrl) {
 		return (
 			<Island priority="feature" defer={{ until: 'visible' }}>
@@ -1126,7 +1122,7 @@ const MiniMatchStats = (props: {
 		);
 	}
 
-	if (!isApps && props.cricketMatchStatsUrl) {
+	if (props.cricketMatchStatsUrl) {
 		return (
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<CricketMiniMatchStatsWrapper
@@ -1156,8 +1152,6 @@ const Header = (props: {
 			? props.article.matchHeaderUrl
 			: undefined;
 
-	const isApps = props.renderingTarget === 'Apps';
-
 	if (footballMatchHeaderUrl) {
 		return (
 			<>
@@ -1183,7 +1177,7 @@ const Header = (props: {
 		);
 	}
 
-	if (!isApps && cricketMatchHeaderUrl) {
+	if (cricketMatchHeaderUrl) {
 		return (
 			<>
 				<noscript>
