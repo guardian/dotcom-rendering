@@ -1,6 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import type { BrowserContext, Page, Request } from '@playwright/test';
 import { expect, test } from '@playwright/test';
+import { ORIGIN } from '../../playwright.config';
 import { allowRejectAll, cmpAcceptAll, cmpRejectAll } from '../lib/cmp';
 import { addCookie } from '../lib/cookies';
 import { loadPage } from '../lib/load-page';
@@ -15,6 +16,7 @@ const optOutOfArticleCountConsent = async (context: BrowserContext) => {
 const ARTICLE_PATH =
 	'/Article/https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people';
 const RR_BANNER_URL = 'https://contributions.guardianapis.com/banner';
+const LOCAL_ASSET_ORIGIN = `${ORIGIN}/`;
 
 const requestBodyHasProperties = (
 	request: Request,
@@ -59,6 +61,9 @@ test.describe('The banner', function () {
 			region: 'GB',
 			preventSupportBanner: false,
 			overrides: {
+				configOverrides: {
+					frontendAssetsFullURL: LOCAL_ASSET_ORIGIN,
+				},
 				switchOverrides: {
 					consentManagement: true,
 				},
@@ -86,6 +91,11 @@ test.describe('Sign-in gate portal', function () {
 			waitUntil: 'domcontentloaded',
 			region: 'GB',
 			preventSupportBanner: false,
+			overrides: {
+				configOverrides: {
+					frontendAssetsFullURL: LOCAL_ASSET_ORIGIN,
+				},
+			},
 			queryParamsOn: true,
 			queryParams: { showgate: 'true' },
 		});
@@ -153,6 +163,9 @@ test.describe('Banner browserId targeting', function () {
 			region: 'GB',
 			preventSupportBanner: false,
 			overrides: {
+				configOverrides: {
+					frontendAssetsFullURL: LOCAL_ASSET_ORIGIN,
+				},
 				switchOverrides: {
 					consentManagement: true,
 				},
