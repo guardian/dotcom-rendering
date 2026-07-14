@@ -1,6 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import type { BrowserContext, Page, Request } from '@playwright/test';
 import { expect, test } from '@playwright/test';
+import { ORIGIN } from '../../playwright.config';
 import { allowRejectAll, cmpAcceptAll, cmpRejectAll } from '../lib/cmp';
 import { addCookie } from '../lib/cookies';
 import { loadPage } from '../lib/load-page';
@@ -15,6 +16,7 @@ const optOutOfArticleCountConsent = async (context: BrowserContext) => {
 const ARTICLE_PATH =
 	'/Article/https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people';
 const RR_BANNER_URL = 'https://contributions.guardianapis.com/banner';
+const LOCAL_ASSET_ORIGIN = `${ORIGIN}/`;
 
 const requestBodyHasProperties = (
 	request: Request,
@@ -58,6 +60,14 @@ test.describe('The banner', function () {
 			waitUntil: 'domcontentloaded',
 			region: 'GB',
 			preventSupportBanner: false,
+			overrides: {
+				configOverrides: {
+					frontendAssetsFullURL: LOCAL_ASSET_ORIGIN,
+				},
+				switchOverrides: {
+					consentManagement: true,
+				},
+			},
 		});
 		await cmpAcceptAll(page);
 
@@ -81,6 +91,11 @@ test.describe('Sign-in gate portal', function () {
 			waitUntil: 'domcontentloaded',
 			region: 'GB',
 			preventSupportBanner: false,
+			overrides: {
+				configOverrides: {
+					frontendAssetsFullURL: LOCAL_ASSET_ORIGIN,
+				},
+			},
 			queryParamsOn: true,
 			queryParams: { showgate: 'true' },
 		});
@@ -147,6 +162,16 @@ test.describe('Banner browserId targeting', function () {
 			waitUntil: 'domcontentloaded',
 			region: 'GB',
 			preventSupportBanner: false,
+			overrides: {
+				configOverrides: {
+					frontendAssetsFullURL: LOCAL_ASSET_ORIGIN,
+				},
+				switchOverrides: {
+					consentManagement: true,
+				},
+			},
+			queryParamsOn: true,
+			queryParams: { _sp_geo_override: 'GB-XX' },
 		});
 
 		if (acceptConsent) {
@@ -177,8 +202,7 @@ test.describe('Banner browserId targeting', function () {
 		expect(browserId).toBe('test-browser-id');
 	});
 
-	// Skip this test because it doesn't work in the github actions run. It does however work locally
-	test.skip('does not send browserId when user has not consented, even if in the auxia variant', async ({
+	test('does not send browserId when user has not consented, even if in the auxia variant', async ({
 		page,
 		context,
 	}) => {
@@ -188,6 +212,12 @@ test.describe('Banner browserId targeting', function () {
 			acceptConsent: false,
 			inAuxiaVariant: true,
 		});
+
+		// CI/CD runs these tests with US geolocation, and fixing the origin to GB in loadPage is not enough for CMP initialization to conclude that the country is GDPR-applied.
+		// If gdprApplies is false, TCData is allowed to be minimal. If GDPR does not apply to this user in this context then only gdprApplies, tcfPolicyVersion, cmpId and cmpVersion shall exist in the object. (If GDPR does not apply to this user in this context then only gdprApplies, tcfPolicyVersion, cmpId and cmpVersion shall exist in the object.)
+		// @Guardian/content-management-platform uses the _sp_geo_override query parameter to override geo location in non-production environments.
+		const currentUrl = new URL(page.url());
+		expect(currentUrl.searchParams.get('_sp_geo_override')).toBe('GB-XX');
 
 		const browserId = getBannerRequestField(
 			bannerRequest,
