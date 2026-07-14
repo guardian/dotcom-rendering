@@ -4,9 +4,8 @@
 // 1. That the manifest files are output
 // 2. That the manifest files contain at least the entry points under the expected property
 
-const { readFile } = require('node:fs').promises;
-const find = require('find');
-const { BUILD_VARIANT } = require('../../webpack/bundles');
+const { access, readFile } = require('node:fs').promises;
+const { BUILD_VARIANT } = require('../../webpack/bundles.ts');
 
 /**
  * Loads a JSON file.
@@ -25,37 +24,45 @@ const errorAndThrow = (error) => {
 	throw new Error(error);
 };
 
-/** @type {(glob: string) => Promise<void>} */
-const fileExists = async (glob) => {
-	await find.file(glob, `./dist/`, (files) => {
-		if (files.length === 1) {
-			console.log(`${glob} exists`);
-		} else {
-			errorAndThrow(`${glob} does not exist`);
-		}
-	});
+/** @type {(filePath: string) => Promise<void>} */
+const fileExists = async (filePath) => {
+	try {
+		await access(filePath);
+		console.log(`${filePath} exists`);
+	} catch {
+		errorAndThrow(`${filePath} does not exist`);
+	}
 };
 
 (async () => {
-	// Check that the manifest files exist
-	await fileExists('manifest.client.web.json');
-	if (BUILD_VARIANT) {
-		await fileExists('manifest.client.web.variant.json');
-	}
-
 	// Check that the manifest files return values for all the chunks
-	const manifests = [await loadJsonFile('./dist/manifest.client.web.json')];
+	const manifestFiles = [
+		'./dist/manifest.client.web.json',
+		'./dist/manifest.client.apps.json',
+		'./dist/manifest.client.editionsCrossword.json',
+	];
 	if (BUILD_VARIANT) {
-		manifests.push(
-			await loadJsonFile('./dist/manifest.client.web.variant.json'),
-		);
+		manifestFiles.push('./dist/manifest.client.web.variant.json');
 	}
 
-	for (const manifest of manifests) {
-		if (manifest['index.js']) {
-			console.log(`A manifest has an index file`);
+	// Check that the manifest files exist
+	for (const file of manifestFiles) {
+		await fileExists(file);
+	}
+
+	// Check that the manifest files contain an entry for the index chunk
+	const manifests = await Promise.all(
+		manifestFiles.map(async (file) => ({
+			file,
+			data: await loadJsonFile(file),
+		})),
+	);
+
+	for (const { file, data } of manifests) {
+		if (Object.values(data).some((entry) => entry.name === 'index')) {
+			console.log(`${file} has an index entry`);
 		} else {
-			errorAndThrow(`A manifest did not have an index file`);
+			errorAndThrow(`${file} did not have an index entry`);
 		}
 	}
 })();
