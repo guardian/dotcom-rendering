@@ -3,16 +3,13 @@ import { getCookie, isUndefined } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { palette, space } from '@guardian/source/foundations';
 import { getGutterLiveblog } from '@guardian/support-dotcom-components';
-import type {
-	ModuleData,
-	ModuleDataResponse,
-} from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { ModuleDataResponse } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type {
 	GutterPayload,
 	GutterProps,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { shouldHideSupportMessaging } from '../lib/contributions';
 import { useAB } from '../lib/useAB';
@@ -41,95 +38,99 @@ const LiveblogGutterAskBuilder = ({
 	pageUrl,
 	pageId,
 }: LiveblogGutterAskBuilderProps) => {
-	const [gutterVariantResponse, setGutterVariantResponse] =
-		useState<ModuleData<GutterProps> | null>(null);
 	const [GutterWrapperComponent, setGutterWrapperComponent] =
 		useState<React.ElementType<GutterProps>>();
+	const [gutterVariantResponse, setGutterVariantResponse] =
+		useState<ModuleDataResponse<GutterProps>>();
 
 	const { renderingTarget } = useConfig();
 	const isSignedIn = useIsSignedIn();
 	const abTests = useAB();
 
-	// get gutter props
-	useEffect((): void => {
-		if (isUndefined(countryCode) || isSignedIn === 'Pending') {
-			return;
-		}
-		const tagIds = tags.map((tag) => tag.id);
+	const tagIds = useMemo(() => tags.map((tag) => tag.id), [tags]);
 
-		const hideSupportMessagingForUser =
-			shouldHideSupportMessaging(isSignedIn);
-		if (hideSupportMessagingForUser === 'Pending') {
-			// We don't yet know the user's supporter status
-			return;
-		}
+	const hideSupportMessagingForUser =
+		isSignedIn === 'Pending'
+			? 'Pending'
+			: shouldHideSupportMessaging(isSignedIn);
 
-		const inHoldbackGroup =
-			abTests?.isUserInTestGroup('growth-holdback-group', 'control') ??
-			false;
+	const inHoldbackGroup =
+		abTests?.isUserInTestGroup('growth-holdback-group', 'control') ?? false;
 
-		// CALL the API
-		const payload: GutterPayload = {
+	// Build payload for SDC request
+	const payload: GutterPayload = useMemo(
+		() => ({
 			targeting: {
-				showSupportMessaging: !hideSupportMessagingForUser,
+				showSupportMessaging:
+					hideSupportMessagingForUser === 'Pending'
+						? false
+						: !hideSupportMessagingForUser,
 				countryCode,
 				mvtId: Number(
 					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 				),
-				isSignedIn,
+				isSignedIn: isSignedIn === 'Pending' ? false : isSignedIn,
 				tagIds,
 				sectionId,
 				pageId,
 				inHoldbackGroup,
 			},
-		};
+		}),
+		[
+			hideSupportMessagingForUser,
+			countryCode,
+			isSignedIn,
+			tagIds,
+			sectionId,
+			pageId,
+			inHoldbackGroup,
+		],
+	);
+
+	// Fetch gutter data from SDC
+	useEffect((): void => {
+		if (hideSupportMessagingForUser === 'Pending') {
+			// We don't yet know the user's supporter status
+			return;
+		}
 
 		getGutterLiveblog(contributionsServiceUrl, payload)
-			.then((response: ModuleDataResponse<GutterProps>) => {
-				if (response.data) {
-					const { module } = response.data;
-					setGutterVariantResponse(module);
-
-					import(`./marketing/gutters/GutterAskWrapper`)
-						.then((gutterModule) => {
-							setGutterWrapperComponent(
-								() => gutterModule.GutterAskWrapper,
-							);
-						})
-						.catch((err) => {
-							const msg = `Error importing GutterLiveBlog: ${String(
-								err,
-							)}`;
-							window.guardian.modules.sentry.reportError(
-								new Error(msg),
-								'rr-gutter-liveblog-dynamic-import',
-							);
-						});
-				}
+			.then((response) => {
+				setGutterVariantResponse(response);
 			})
-			.catch((error) => {
-				const msg = `Error fetching gutter-ask tests: ${String(error)}`;
-
-				console.log(msg);
+			.catch((err) => {
+				const msg = `Error fetching gutter data: ${String(err)}`;
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
-					'rr-gutter-liveblog-ask-fetch',
+					'rr-gutter-liveblog-fetch',
 				);
 			});
-	}, [
-		countryCode,
-		isSignedIn,
-		contributionsServiceUrl,
-		pageViewId,
-		pageUrl,
-		sectionId,
-		tags,
-		pageId,
-		abTests,
-	]);
+	}, [contributionsServiceUrl, payload, hideSupportMessagingForUser]);
 
-	if (gutterVariantResponse && !isUndefined(GutterWrapperComponent)) {
-		const { props } = gutterVariantResponse;
+	// Dynamically import the wrapper component when we have data
+	useEffect((): void => {
+		if (gutterVariantResponse?.data) {
+			import(`./marketing/gutters/GutterAskWrapper`)
+				.then((gutterModule) => {
+					setGutterWrapperComponent(
+						() => gutterModule.GutterAskWrapper,
+					);
+				})
+				.catch((err) => {
+					const msg = `Error importing GutterLiveBlog: ${String(
+						err,
+					)}`;
+					window.guardian.modules.sentry.reportError(
+						new Error(msg),
+						'rr-gutter-liveblog-dynamic-import',
+					);
+				});
+		}
+	}, [gutterVariantResponse]);
+
+	if (gutterVariantResponse?.data && !isUndefined(GutterWrapperComponent)) {
+		const { module } = gutterVariantResponse.data;
+		const { props } = module;
 
 		const tracking: Tracking = {
 			...props.tracking,
