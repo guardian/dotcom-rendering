@@ -219,25 +219,28 @@ describe('EmailSignUpWrapper', () => {
 
 		it('still fires the VIEW event without AB metadata if the AB framework never resolves', () => {
 			jest.useFakeTimers();
-			(useAB as jest.Mock).mockReturnValue(undefined);
 
-			renderWrapper();
+			try {
+				(useAB as jest.Mock).mockReturnValue(undefined);
 
-			// The VIEW event is deferred while waiting for the AB framework.
-			expect(submitComponentEvent).not.toHaveBeenCalled();
+				renderWrapper();
 
-			jest.runOnlyPendingTimers();
+				// The VIEW event is deferred while waiting for the AB framework.
+				expect(submitComponentEvent).not.toHaveBeenCalled();
 
-			expect(submitComponentEvent).toHaveBeenCalledTimes(1);
-			expect(submitComponentEvent).toHaveBeenCalledWith(
-				expect.objectContaining({
-					action: 'VIEW',
-					abTest: undefined,
-				}),
-				'Web',
-			);
+				jest.advanceTimersByTime(2000);
 
-			jest.useRealTimers();
+				expect(submitComponentEvent).toHaveBeenCalledTimes(1);
+				expect(submitComponentEvent).toHaveBeenCalledWith(
+					expect.objectContaining({
+						action: 'VIEW',
+						abTest: undefined,
+					}),
+					'Web',
+				);
+			} finally {
+				jest.useRealTimers();
+			}
 		});
 	});
 });
