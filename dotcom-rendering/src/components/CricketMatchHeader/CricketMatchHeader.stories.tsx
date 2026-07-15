@@ -132,7 +132,10 @@ const baseArgs = {
 	refreshInterval: 3_000,
 	tabContentId: 'cricket-tab-content',
 	getHeaderData: () => getMockData(headerData(baseMatch)),
-	article: {} as ArticleDeprecated,
+	article: {
+		pageId: 'sport/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		guardianBaseURL: 'https://www.theguardian.com',
+	} as ArticleDeprecated,
 	format: {} as ArticleFormat,
 } satisfies ComponentProps<typeof CricketMatchHeader>;
 
