@@ -143,6 +143,24 @@ describe('sdcRequests', () => {
 				},
 			);
 		});
+
+		it('does not append force when neither is present', async () => {
+			const { getEpic } = await import('./sdcRequests');
+			await getEpic('https://contributions.guardianapis.com', {
+				targeting: {},
+			} as never);
+
+			expect(global.fetch).toHaveBeenCalledWith(
+				'https://contributions.guardianapis.com/epic',
+				{
+					method: 'post',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: '{"targeting":{}}',
+				},
+			);
+		});
 	});
 
 	describe('getBanner', () => {

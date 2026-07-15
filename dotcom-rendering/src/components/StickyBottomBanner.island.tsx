@@ -371,13 +371,15 @@ export const StickyBottomBanner = ({
 
 		const hasForceBannerParam =
 			window.location.search.includes('force-banner');
+		const hasPreviewBannerParam =
+			window.location.search.includes('preview-banner');
 		const hasForceBrazeMessageParam = window.location.hash.includes(
 			'force-braze-message',
 		);
 
 		let candidates: SlotConfig['candidates'];
 
-		if (hasForceBannerParam) {
+		if (hasForceBannerParam || hasPreviewBannerParam) {
 			candidates = [CMP, readerRevenue];
 		} else if (hasForceBrazeMessageParam) {
 			candidates = [CMP, brazeBannersSystem, brazeBanner];
