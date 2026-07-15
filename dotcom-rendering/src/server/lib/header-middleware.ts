@@ -11,7 +11,7 @@ const getTargetGroupHeaderValue = () => {
 	return 'dev';
 };
 
-const backendApp = process.env.GU_APP ?? 'dev';
+const backendApp = process.env.GU_APP ?? 'rendering';
 const targetGroup = getTargetGroupHeaderValue();
 
 /**
