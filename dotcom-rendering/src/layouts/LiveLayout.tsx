@@ -1203,7 +1203,6 @@ const Header = (props: {
 						renderingTarget={props.renderingTarget}
 						article={props.article}
 						format={props.format}
-						baseUrl={props.article.guardianBaseURL}
 					/>
 				</Island>
 			</>

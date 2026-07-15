@@ -156,12 +156,10 @@ const parseFixture = (
 			homeTeam: {
 				name: cleanTeamName(feFixture.homeTeam.name),
 				paID: feFixture.homeTeam.id,
-				teamUrl: feFixture.homeTeam.teamUrl,
 			},
 			awayTeam: {
 				name: cleanTeamName(feFixture.awayTeam.name),
 				paID: feFixture.awayTeam.id,
-				teamUrl: feFixture.awayTeam.teamUrl,
 			},
 		}));
 };
@@ -205,14 +203,12 @@ const parseMatchResult = (
 				paID: feResult.homeTeam.id,
 				score: homeScore,
 				scorers: feResult.homeTeam.scorers?.split(',') ?? [],
-				teamUrl: feResult.homeTeam.teamUrl,
 			},
 			awayTeam: {
 				name: cleanTeamName(feResult.awayTeam.name),
 				paID: feResult.awayTeam.id,
 				score: awayScore,
 				scorers: feResult.awayTeam.scorers?.split(',') ?? [],
-				teamUrl: feResult.awayTeam.teamUrl,
 			},
 			comment: feResult.comments,
 		}));
@@ -257,14 +253,12 @@ const parseLiveMatch = (
 				paID: feMatchDay.homeTeam.id,
 				score: homeScore,
 				scorers: feMatchDay.homeTeam.scorers?.split(',') ?? [],
-				teamUrl: feMatchDay.homeTeam.teamUrl,
 			},
 			awayTeam: {
 				name: cleanTeamName(feMatchDay.awayTeam.name),
 				paID: feMatchDay.awayTeam.id,
 				score: awayScore,
 				scorers: feMatchDay.awayTeam.scorers?.split(',') ?? [],
-				teamUrl: feMatchDay.awayTeam.teamUrl,
 			},
 			dateTimeISOString,
 			comment: cleanTeamName(feMatchDay.comments ?? ''),

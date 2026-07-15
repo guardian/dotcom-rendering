@@ -111,7 +111,6 @@ export const FixtureWeb = meta.story({
 		matchNotificationsClient: mockMatchNotificationsClient,
 		environmentClient: mockEnvironmentClient,
 		liveActivitiesClient: mockLiveActivitiesClient,
-		baseUrl: 'https://www.theguardian.com',
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		const nav = canvas.getByRole('navigation');
@@ -164,7 +163,6 @@ export const LiveApps = meta.story({
 		matchNotificationsClient: mockMatchNotificationsClient,
 		environmentClient: mockEnvironmentClient,
 		liveActivitiesClient: mockLiveActivitiesClient,
-		baseUrl: 'https://www.theguardian.com',
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		await step(
@@ -220,7 +218,6 @@ export const ResultWeb = meta.story({
 		matchNotificationsClient: mockMatchNotificationsClient,
 		environmentClient: mockEnvironmentClient,
 		liveActivitiesClient: mockLiveActivitiesClient,
-		baseUrl: 'https://www.theguardian.com',
 	},
 
 	play: async ({ canvas, canvasElement, step }) => {
@@ -270,7 +267,6 @@ export const ResultApps = meta.story({
 		matchNotificationsClient: mockMatchNotificationsClient,
 		environmentClient: mockEnvironmentClient,
 		liveActivitiesClient: mockLiveActivitiesClient,
-		baseUrl: 'https://www.theguardian.com',
 	},
 
 	play: async ({ canvas, canvasElement, step }) => {

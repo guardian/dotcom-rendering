@@ -52,7 +52,6 @@ export type FootballMatchHeaderProps = {
 	edition: EditionId;
 	matchHeaderURL: string;
 	renderingTarget: RenderingTarget;
-	baseUrl: string;
 	format?: ArticleFormat;
 	article?: ArticleDeprecated;
 };
@@ -137,7 +136,7 @@ export const FootballMatchHeader = (props: Props) => {
 					edition={props.edition}
 				/>
 				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
-				<Teams match={match} baseUrl={props.baseUrl} />
+				<Teams match={match} />
 				<Comment match={match} />
 				<Notifications
 					edition={props.edition}
@@ -315,7 +314,7 @@ const kickOffFormatterForEdition = (edition: EditionId): Intl.DateTimeFormat =>
 		timeZone: getTimeZoneFromEdition(edition),
 	});
 
-const Teams = (props: { match: FootballMatch; baseUrl: string }) => (
+const Teams = (props: { match: FootballMatch }) => (
 	<div
 		css={{
 			'&': css(grid.column.centre),
@@ -329,15 +328,14 @@ const Teams = (props: { match: FootballMatch; baseUrl: string }) => (
 			},
 		}}
 	>
-		<Team team="homeTeam" match={props.match} baseUrl={props.baseUrl} />
-		<Team team="awayTeam" match={props.match} baseUrl={props.baseUrl} />
+		<Team team="homeTeam" match={props.match} />
+		<Team team="awayTeam" match={props.match} />
 	</div>
 );
 
 const Team = (props: {
 	team: 'homeTeam' | 'awayTeam';
 	match: FootballMatch;
-	baseUrl: string;
 }) => (
 	<div
 		css={{
@@ -367,11 +365,7 @@ const Team = (props: {
 			'--border-left-colour': palette(border(props.match.kind)),
 		}}
 	>
-		<TeamName
-			name={props.match[props.team].name}
-			teamUrl={props.match[props.team].teamUrl}
-			baseUrl={props.baseUrl}
-		/>
+		<TeamName name={props.match[props.team].name} />
 		<span
 			css={{
 				display: 'flex',
@@ -396,11 +390,7 @@ const Team = (props: {
 	</div>
 );
 
-const TeamName = (props: {
-	name: string;
-	teamUrl?: string;
-	baseUrl: string;
-}) => (
+const TeamName = (props: { name: string }) => (
 	<p
 		css={{
 			...headlineBold20Object,
@@ -408,20 +398,7 @@ const TeamName = (props: {
 			[from.leftCol]: headlineBold24Object,
 		}}
 	>
-		{props.teamUrl ? (
-			<a
-				href={`${props.baseUrl}${props.teamUrl}`}
-				css={{
-					color: 'inherit',
-					textDecoration: 'none',
-					'&:hover': { textDecoration: 'underline' },
-				}}
-			>
-				{props.name}
-			</a>
-		) : (
-			props.name
-		)}
+		{props.name}
 	</p>
 );
 

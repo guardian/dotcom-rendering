@@ -5,5 +5,4 @@
 export type FootballTeam = {
 	name: string;
 	paID: string;
-	teamUrl?: string;
 };
