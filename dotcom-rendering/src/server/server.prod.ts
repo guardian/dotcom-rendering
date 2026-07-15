@@ -1,10 +1,5 @@
 import compression from 'compression';
-import type {
-	ErrorRequestHandler,
-	NextFunction,
-	Request,
-	Response,
-} from 'express';
+import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
@@ -33,16 +28,10 @@ import {
 } from './handler.sportDataPage';
 import { handleAppsThrasher } from './handler.thrasher.apps';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
+import { responseHeaderMiddleware } from './lib/header-middleware';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
-
-// TODO extract this, and other places that read env vars, into a `config` object?
-// See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-environment-variables.html
-const runningInECS =
-	process.env.AWS_EXECUTION_ENV?.startsWith('AWS_ECS_') === true;
-
-const backendApp = process.env.GU_APP ?? 'unknown';
 
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
@@ -52,19 +41,7 @@ export const prodServer = (): void => {
 	app.use(express.json({ limit: '50mb' }));
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
-
-	app.use((req: Request, res: Response, next: NextFunction) => {
-		const headers = {
-			'X-Gu-Backend-App': backendApp,
-			'X-Gu-Backend-App-Target-Group': runningInECS ? 'ecs' : 'ec2',
-		};
-
-		for (const [key, value] of Object.entries(headers)) {
-			res.setHeader(key, value);
-		}
-
-		next();
-	});
+	app.use(responseHeaderMiddleware);
 
 	app.get('/_healthcheck', (req: Request, res: Response) => {
 		res.status(200).send('OKAY');
