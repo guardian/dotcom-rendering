@@ -49,9 +49,10 @@ const LiveblogGutterAskBuilder = ({
 
 	const tagIds = useMemo(() => tags.map((tag) => tag.id), [tags]);
 
-	const hideSupportMessagingForUser = shouldHideSupportMessaging(
-		isSignedIn as boolean,
-	);
+	const hideSupportMessagingForUser =
+		isSignedIn === 'Pending'
+			? 'Pending'
+			: shouldHideSupportMessaging(isSignedIn);
 
 	const inHoldbackGroup =
 		abTests?.isUserInTestGroup('growth-holdback-group', 'control') ?? false;
@@ -60,12 +61,15 @@ const LiveblogGutterAskBuilder = ({
 	const payload: GutterPayload = useMemo(
 		() => ({
 			targeting: {
-				showSupportMessaging: !hideSupportMessagingForUser,
+				showSupportMessaging:
+					hideSupportMessagingForUser === 'Pending'
+						? false
+						: !hideSupportMessagingForUser,
 				countryCode,
 				mvtId: Number(
 					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 				),
-				isSignedIn: isSignedIn as boolean,
+				isSignedIn: isSignedIn === 'Pending' ? false : isSignedIn,
 				tagIds,
 				sectionId,
 				pageId,
@@ -85,6 +89,11 @@ const LiveblogGutterAskBuilder = ({
 
 	// Fetch gutter data from SDC
 	useEffect((): void => {
+		if (hideSupportMessagingForUser === 'Pending') {
+			// We don't yet know the user's supporter status
+			return;
+		}
+
 		getGutterLiveblog(contributionsServiceUrl, payload)
 			.then((response) => {
 				setGutterVariantResponse(response);
@@ -96,7 +105,7 @@ const LiveblogGutterAskBuilder = ({
 					'rr-gutter-liveblog-fetch',
 				);
 			});
-	}, [contributionsServiceUrl, payload]);
+	}, [contributionsServiceUrl, payload, hideSupportMessagingForUser]);
 
 	// Dynamically import the wrapper component when we have data
 	useEffect((): void => {
