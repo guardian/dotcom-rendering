@@ -3,6 +3,7 @@ import { mergeConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import { cjsPackages } from './cjs-packages.mts';
 import { ssrCjsPlugin } from './ssr-cjs-plugin.mts';
+import { addVisualizerPlugins } from './visualizer.ts';
 import { sharedConfig } from './vite.config.shared.mts';
 
 const DEV = process.env.NODE_ENV === 'development';
@@ -19,13 +20,14 @@ const DEV = process.env.NODE_ENV === 'development';
  */
 export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 	plugins: [
+		// Wrap CJS deps with ESM shims so `import { X } from 'pkg'` works
+		// under Vite's SSR pipeline. Only fires for ids in `ssr.noExternal`.
+		ssrCjsPlugin([...cjsPackages]),
 		svgr({
 			include: '**/*.svg',
 			svgrOptions: { svgo: false },
 		}),
-		// Wrap CJS deps with ESM shims so `import { X } from 'pkg'` works
-		// under Vite's SSR pipeline. Only fires for ids in `ssr.noExternal`.
-		ssrCjsPlugin([...cjsPackages]),
+		...(DEV ? [] : addVisualizerPlugins('server')),
 	],
 	build: {
 		outDir: 'dist',
