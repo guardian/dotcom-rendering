@@ -1,4 +1,4 @@
-import type { StoryObj } from '@storybook/react-webpack5';
+import type { StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 import { initialDays, regions } from '../../fixtures/manual/footballData';
 import { WomensEuro2025 } from './DirectoryPageNav.stories';

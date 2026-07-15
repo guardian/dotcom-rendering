@@ -1,6 +1,6 @@
 import { isObject } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
-import type { Decorator, StoryObj } from '@storybook/react-webpack5';
+import type { Decorator, StoryObj } from '@storybook/react-vite';
 import { useEffect } from 'react';
 import { mocked } from 'storybook/test';
 import { colourSchemeDecorator } from '../../.storybook/decorators/themeDecorator';

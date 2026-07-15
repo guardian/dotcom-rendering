@@ -334,10 +334,8 @@ export const ReaderRevenueBanner = ({
 
 	useEffect(() => {
 		(name === 'SignInPromptBanner'
-			? /* webpackChunkName: "sign-in-prompt-banner" */
-				import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
-			: /* webpackChunkName: "designable-banner" */
-				import(`../marketing/banners/designableBanner/Banner`)
+			? import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
+			: import(`../marketing/banners/designableBanner/Banner`)
 		)
 			.then((bannerModule: Record<string, React.ElementType>) => {
 				setBanner(() => bannerModule[name] ?? null);

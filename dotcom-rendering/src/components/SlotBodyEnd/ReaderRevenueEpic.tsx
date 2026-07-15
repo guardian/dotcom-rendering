@@ -188,9 +188,7 @@ export const ReaderRevenueEpic = ({ props }: ModuleData<EpicProps>) => {
 			'contributions-epic-module',
 		);
 
-		import(
-			/* webpackChunkName: "contributions-epic" */ `../marketing/epics/ContributionsEpic`
-		)
+		import(`../marketing/epics/ContributionsEpic`)
 			.then((epicModule) => {
 				endPerformanceMeasure();
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped

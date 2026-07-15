@@ -7,6 +7,7 @@ pnpm-lock.yaml
 dotcom-rendering/src/model/*-schema.json
 dotcom-rendering/src/frontend/schemas
 dotcom-rendering/stories/generated
+dotcom-rendering/cdk.out
 
 # specific files
 /**/*/curl-with-js-and-domReady.js

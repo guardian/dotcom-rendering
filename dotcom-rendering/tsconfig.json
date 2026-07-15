@@ -1,6 +1,7 @@
 {
 	"extends": "@guardian/tsconfig/tsconfig.json",
 	"compilerOptions": {
+		"allowImportingTsExtensions": true,
 		"allowJs": true,
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true,
@@ -9,6 +10,7 @@
 		"lib": ["esnext", "es2015", "dom"],
 		"moduleResolution": "bundler",
 		"noEmit": true,
+		"skipLibCheck": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedIndexedAccess": true,
 		"preserveConstEnums": true,
@@ -18,7 +20,7 @@
 			"react",
 			"react-dom",
 			"@testing-library/jest-dom",
-			"webpack-env",
+			"vite/client",
 			"youtube",
 			"twitter-for-web",
 			// This is to fix a "Cannot find namespace 'Chai'" error that arose during

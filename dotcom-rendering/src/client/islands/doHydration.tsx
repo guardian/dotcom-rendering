@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access -- necessary for calling our async loaded modules */
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
 import { isUndefined, log, startPerformanceMeasure } from '@guardian/libs';
@@ -7,6 +6,7 @@ import { hydrateRoot } from 'react-dom/client';
 import { ConfigProvider } from '../../components/ConfigContext';
 import { IslandProvider } from '../../components/IslandContext';
 import type { Config } from '../../types/configContext';
+import { getIslandModule } from './islandRegistry';
 
 declare global {
 	interface DOMStringMap {
@@ -48,11 +48,16 @@ export const doHydration = async (
 
 	const { endPerformanceMeasure: endImportPerformanceMeasure } =
 		startPerformanceMeasure('dotcom', name, 'import');
-	await import(
-		/* webpackInclude: /\.island\.tsx$/ */
-		/* webpackChunkName: "[request]" */
-		`../../components/${name}.island`
-	)
+
+	const loadModule = getIslandModule(name);
+	if (!loadModule) {
+		console.error(
+			`🚨 Island module not found: ${name}. Components must live in the root of /components and follow the [MyComponent].island.tsx naming convention 🚨`,
+		);
+		return;
+	}
+
+	await loadModule()
 		.then((module) => {
 			/** The duration of importing the module for this island */
 			const importDuration = endImportPerformanceMeasure();
@@ -68,7 +73,11 @@ export const doHydration = async (
 						{/* Child islands should not be hydrated separately */}
 						<IslandProvider value={{ isChild: true }}>
 							{/* The component to hydrate must be a single JSX Element */}
-							{createElement(module[name], data)}
+							{createElement(
+								// eslint-disable-next-line @typescript-eslint/no-restricted-types --  load a component dynamically so we can't determine the type
+								module[name] as React.FunctionComponent,
+								data,
+							)}
 						</IslandProvider>
 					</CacheProvider>
 				</ConfigProvider>,
@@ -93,11 +102,7 @@ export const doHydration = async (
 		})
 		.catch((error) => {
 			element.dataset.islandStatus = undefined; // remove any island status
-			if (name && error.message.includes(name)) {
-				console.error(
-					`🚨 Error importing ${name}. Components must live in the root of /components and follow the [MyComponent].island.tsx naming convention 🚨`,
-				);
-			}
+			console.error(`🚨 Error hydrating island: ${name} 🚨`);
 			throw error;
 		});
 };

@@ -1,12 +1,8 @@
-import { devServer } from './server.dev';
 import { prodServer } from './server.prod';
 
-// this export is expected by webpack-hot-server-middleware
-// not used in prod
+// Re-export devServer for use by Vite's ssrLoadModule in dev
+export { devServer } from './server.dev';
 
-export default devServer;
-
-// this is the actual production server
 if (process.env.NODE_ENV === 'production') {
 	prodServer();
 }
