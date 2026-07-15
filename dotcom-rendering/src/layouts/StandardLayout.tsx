@@ -427,6 +427,8 @@ const MatchHeaderContainer = ({
 			? article.matchHeaderUrl
 			: undefined;
 
+	const isApps = renderingTarget === 'Apps';
+
 	if (isFootballMatchReport && footballMatchHeaderUrl) {
 		return (
 			<>
@@ -449,7 +451,7 @@ const MatchHeaderContainer = ({
 		);
 	}
 
-	if (cricketMatchHeaderUrl && isCricketMatchReport) {
+	if (!isApps && cricketMatchHeaderUrl && isCricketMatchReport) {
 		return (
 			<>
 				<noscript>
