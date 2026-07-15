@@ -4,6 +4,7 @@ import { mergeConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import type { Build } from '../src/lib/assets.ts';
 import { getBrowserTargets } from './browser-targets.ts';
+import { addVisualizerPlugins } from './visualizer.ts';
 import { sharedConfig } from './vite.config.shared.mts';
 
 const DEV = process.env.NODE_ENV === 'development';
@@ -107,6 +108,7 @@ export const createClientConfig = (build: Build): UserConfig => {
 				include: '**/*.svg',
 				svgrOptions: { svgo: false },
 			}),
+			...(DEV ? [] : addVisualizerPlugins(build)),
 			// Buffer polyfill for apps/crossword builds
 			// Replaces webpack.ProvidePlugin({ Buffer: ['buffer', 'Buffer'] })
 			...(isSingleChunk
