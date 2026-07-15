@@ -18,23 +18,30 @@ jobs:
         run: make build
         working-directory: dotcom-rendering
 
-      - name: Archive code coverage results for web bundle
+      - name: Archive bundle analyser report for server bundle
         uses: actions/upload-artifact@v7
         with:
-          name: bundle-analyser-report-web-bundles
-          path: dotcom-rendering/dist/stats/client.web-bundles.html
+          name: bundle-analyser-report-server
+          path: dotcom-rendering/dist/stats/server.treemap.html
           if-no-files-found: error
 
-      - name: Archive code coverage results for web variant bundle
+      - name: Archive bundle analyser report for web bundle
         uses: actions/upload-artifact@v7
         with:
           name: bundle-analyser-report-web
-          path: dotcom-rendering/dist/stats/client.web.variant-bundles.html
+          path: dotcom-rendering/dist/stats/client.web.treemap.html
+          if-no-files-found: error
+
+      - name: Archive bundle analyser report for web variant bundle
+        uses: actions/upload-artifact@v7
+        with:
+          name: bundle-analyser-report-web-variant
+          path: dotcom-rendering/dist/stats/client.web.variant.treemap.html
           if-no-files-found: warn # Variant bundle only exists when an active experiment is going on
 
-      - name: Archive code coverage results for apps bundle
+      - name: Archive bundle analyser report for apps bundle
         uses: actions/upload-artifact@v7
         with:
           name: bundle-analyser-report-apps
-          path: dotcom-rendering/dist/stats/client.apps-bundles.html
+          path: dotcom-rendering/dist/stats/client.apps.treemap.html
           if-no-files-found: error
