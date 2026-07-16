@@ -60,7 +60,13 @@ const logMvt = (mvtId: string | null) => {
 		method: 'POST',
 		body: JSON.stringify({
 			label: 'webx.ab-testing',
-			properties: [{ name: 'mvtId', value: mvtId }],
+			properties: [
+				{ name: 'mvtId', value: mvtId },
+				{
+					name: 'pageviewId',
+					value: window.guardian.config.ophan.pageViewId,
+				},
+			],
 		}),
 		keepalive: true,
 		cache: 'no-store',
