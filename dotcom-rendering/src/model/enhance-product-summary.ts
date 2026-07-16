@@ -35,7 +35,7 @@ const getSummaryProducts = (
 export const enhanceProductSummary = (elements: FEElement[]): FEElement[] =>
 	elements.map<FEElement>((element) => {
 		switch (element._type) {
-			case 'model.dotcomrendering.pageElements.ProductSummaryElement': {
+			case 'model.dotcomrendering.pageElements.ProductSummaryBlockElement': {
 				return {
 					...element,
 					_type: 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement',

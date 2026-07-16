@@ -58,8 +58,6 @@ const validateFootballMatchInfoPage = ajv.compile<FEFootballMatchInfoPage>(
 );
 
 export const validateAsFEArticle = (data: unknown): FEArticle => {
-	console.log('data to validate', data);
-
 	if (validateArticle(data)) return data;
 
 	const url =

@@ -369,7 +369,7 @@
                     "$ref": "#/definitions/ProductBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/ProductSummaryElement"
+                    "$ref": "#/definitions/ProductSummaryBlockElement"
                 },
                 {
                     "$ref": "#/definitions/EnhancedProductSummaryElement"
@@ -4272,12 +4272,12 @@
             ],
             "type": "string"
         },
-        "ProductSummaryElement": {
+        "ProductSummaryBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
-                    "const": "model.dotcomrendering.pageElements.ProductSummaryElement"
+                    "const": "model.dotcomrendering.pageElements.ProductSummaryBlockElement"
                 },
                 "products": {
                     "type": "array",

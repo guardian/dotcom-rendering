@@ -2,17 +2,17 @@ import type {
 	EnhancedProductSummaryElement,
 	FEElement,
 	ProductBlockElement,
-	ProductSummaryElement,
+	ProductSummaryBlockElement,
 	SummaryProductRef,
 } from '../types/content';
 
 export const productSummaryElement = (
 	summaryProducts: SummaryProductRef[],
-): ProductSummaryElement =>
+): ProductSummaryBlockElement =>
 	({
-		_type: 'model.dotcomrendering.pageElements.ProductSummaryElement',
+		_type: 'model.dotcomrendering.pageElements.ProductSummaryBlockElement',
 		products: summaryProducts,
-	}) as ProductSummaryElement;
+	}) as ProductSummaryBlockElement;
 
 export const productElement = (
 	urls: string[],

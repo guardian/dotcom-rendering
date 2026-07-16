@@ -536,8 +536,8 @@ export interface SummaryProduct {
 	ctaIndex: number;
 }
 
-export interface ProductSummaryElement {
-	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
+export interface ProductSummaryBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ProductSummaryBlockElement';
 	products: SummaryProductRef[];
 	displayType: ProductSummaryDisplayType;
 	title: string;
@@ -942,7 +942,7 @@ export type FEElement =
 	| WitnessTypeBlockElement
 	| CrosswordElement
 	| ProductBlockElement
-	| ProductSummaryElement
+	| ProductSummaryBlockElement
 	| EnhancedProductSummaryElement
 	| RecipeBlockElement;
 
