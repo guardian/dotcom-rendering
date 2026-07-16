@@ -445,6 +445,7 @@ const MatchHeaderContainer = ({
 						renderingTarget={renderingTarget}
 						article={article}
 						format={format}
+						baseUrl={article.guardianBaseURL}
 					/>
 				</Island>
 			</>
