@@ -32,7 +32,6 @@ export const shouldShowContributor = (format: ArticleFormat): boolean => {
 		case ArticleDisplay.NumberedList:
 			return true;
 		case ArticleDisplay.Immersive:
-			return false;
 		case ArticleDisplay.Showcase:
 		case ArticleDisplay.Standard: {
 			switch (format.design) {

@@ -116,7 +116,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={!isLabs && !isWorldCup2026}
-						showSlimNav={false}
+						showSlimNav={
+							format.display === ArticleDisplay.Immersive
+						}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
 						tagIds={article.tags.map((tag) => tag.id)}
