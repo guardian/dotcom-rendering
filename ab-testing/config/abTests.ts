@@ -109,19 +109,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-full-width-hold-back",
-		description:
-			"Test to measure impact of adding full width to spacefinder",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-07-14",
-		type: "client",
-		status: "ON",
-		audienceSize: 5 / 100,
-		audienceSpace: "A",
-		groups: ["holdback", "control"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-ozone-outstream",
 		description: "A test to ensure correct integration of Ozone outstream.",
 		owners: ["commercial.dev@guardian.co.uk"],
