@@ -183,6 +183,19 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant-1"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "webx-monitor-group-contamination",
+		description:
+			"Test to measure the impact of contamination between groups in ab tests",
+		owners: ["dotcom.platform@theguardian.com"],
+		status: "ON",
+		expirationDate: "2026-08-31",
+		type: "client",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
