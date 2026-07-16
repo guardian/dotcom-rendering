@@ -5,14 +5,14 @@ export function enoughSpace(allTests: ABTest[]) {
 		(acc, test) => {
 			const space = test.audienceSpace ?? "A";
 
-			acc[space] += test.audienceSize;
+			acc[space] += test.audienceSize * 100;
 			return acc;
 		},
 		{ A: 0, B: 0, C: 0 },
 	);
 
 	Object.entries(spaceTotalSize).forEach(([space, size]) => {
-		if (size > 1) {
+		if (size > 100) {
 			throw new Error(`Audience sizes in space ${space} exceeds 100%`);
 		}
 	});
