@@ -1,4 +1,4 @@
-import { from, palette } from '@guardian/source/foundations';
+import { from } from '@guardian/source/foundations';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types/props/epic';
 import { useState } from 'react';
@@ -49,11 +49,6 @@ export const ContributionsEpicCtasContainer: ReactComponent<EpicProps> = ({
 					choices={choiceCards}
 					id={'epic'}
 					submitComponentEvent={submitComponentEvent}
-					choiceCardDesignSettings={{
-						pillBackgroundColour: palette.brand[500],
-						pillTextColour: palette.neutral[100],
-						buttonSelectBorderColour: palette.brand[400],
-					}}
 				/>
 			)}
 			<ContributionsEpicButtons
