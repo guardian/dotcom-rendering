@@ -253,6 +253,7 @@ const immersiveLandscapeDefaultCss: LayoutCssMap = {
 		mobile: 'grid-row: 2;',
 		tablet: 'grid-row: 2;',
 		desktop: 'grid-row: 3 / span 2;',
+		wide: `${grid.between('centre-column-start', 14)};`,
 	},
 	media: {
 		mobile: 'grid-row: 3;',
@@ -269,13 +270,13 @@ const immersiveLandscapeDefaultCss: LayoutCssMap = {
 		mobile: 'grid-row: 5;',
 		tablet: 'grid-row: 5;',
 		desktop: `grid-row: 6; ${grid.between('centre-column-start', 8)};`,
-		leftCol: `grid-row: 6 / span 2; ${grid.column.left};`,
+		leftCol: `grid-row: 5 / span 2; ${grid.column.left};`,
 	},
 	body: {
 		mobile: 'grid-row: 6;',
 	},
 	'right-column': {
-		desktop: `grid-row: 5 / span 3; ${grid.column.right};`,
+		desktop: `grid-row: 6 / span 2; ${grid.column.right};`,
 	},
 };
 
@@ -296,10 +297,10 @@ const immersiveLandscapeFeatureCss: LayoutCssMap = {
 	},
 	meta: {
 		desktop: `grid-row: 6; ${grid.between('centre-column-start', 8)};`,
-		leftCol: `grid-row: 6 / span 2; ${grid.column.left};`,
+		leftCol: `grid-row: 5 / span 2; ${grid.column.left};`,
 	},
 	'right-column': {
-		desktop: `grid-row: 5 / span 3; ${grid.column.right};`,
+		desktop: `grid-row: 6 / span 2; ${grid.column.right};`,
 	},
 };
 
