@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsEpic } from '../components/AppsEpic.island';
 import { ArticleBody } from '../components/ArticleBody';
@@ -187,7 +186,17 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem area="standfirst" layoutType={layoutType}>
 				<Standfirst format={format} standfirst={article.standfirst} />
 			</GridItem>
-			<GridItem area="meta" layoutType={layoutType} element="aside">
+			<GridItem
+				area="meta"
+				layoutType={layoutType}
+				element="aside"
+				css={
+					isInteractive &&
+					css`
+						z-index: 10;
+					`
+				}
+			>
 				{format.design !== ArticleDesign.Audio && (
 					<div css={stretchLines}>
 						{isWeb &&
@@ -372,14 +381,6 @@ export const StandardLayoutArticleGrid = ({
 							/>
 						</Island>
 					)}
-					<StraightLines
-						data-print-layout="hide"
-						count={4}
-						cssOverrides={css`
-							display: block;
-						`}
-						color={themePalette('--straight-lines')}
-					/>
 					<SubMeta
 						format={format}
 						subMetaKeywordLinks={article.subMetaKeywordLinks}
@@ -394,43 +395,41 @@ export const StandardLayoutArticleGrid = ({
 					/>
 				</ArticleContainer>
 			</GridItem>
-			{layoutType !== 'interactive' && (
-				<GridItem
-					area="right-column"
-					layoutType={layoutType}
-					css={css`
-						padding-top: ${isMedia ? 0 : 6}px;
-						${from.desktop} {
-							padding-bottom: ${isMedia ? 41 : 0}px;
-						}
-					`}
-				>
-					<Hide until="desktop">
-						<Island
-							priority="feature"
-							defer={{
-								until: 'visible',
-								// Provide a much higher value for the top margin for the intersection observer
-								// This is because the most viewed would otherwise only be lazy loaded when the
-								// bottom of the container intersects with the viewport
-								rootMargin: '700px 100px',
-							}}
-						>
-							<MostViewedRightWithAd
-								format={format}
-								isPaidContent={article.pageType.isPaidContent}
-								renderAds={isWeb && renderAds}
-								shouldHideReaderRevenue={
-									!!article.config.shouldHideReaderRevenue
-								}
-								shouldHideMostViewed={
-									format.design === ArticleDesign.Audio
-								}
-							/>
-						</Island>
-					</Hide>
-				</GridItem>
-			)}
+			<GridItem
+				area="right-column"
+				layoutType={layoutType}
+				css={css`
+					padding-top: ${isMedia ? 0 : 6}px;
+					${from.desktop} {
+						padding-bottom: ${isMedia ? 41 : 0}px;
+					}
+				`}
+			>
+				<Hide until="desktop">
+					<Island
+						priority="feature"
+						defer={{
+							until: 'visible',
+							// Provide a much higher value for the top margin for the intersection observer
+							// This is because the most viewed would otherwise only be lazy loaded when the
+							// bottom of the container intersects with the viewport
+							rootMargin: '700px 100px',
+						}}
+					>
+						<MostViewedRightWithAd
+							format={format}
+							isPaidContent={article.pageType.isPaidContent}
+							renderAds={isWeb && renderAds}
+							shouldHideReaderRevenue={
+								!!article.config.shouldHideReaderRevenue
+							}
+							shouldHideMostViewed={
+								format.design === ArticleDesign.Audio
+							}
+						/>
+					</Island>
+				</Hide>
+			</GridItem>
 		</article>
 	);
 };
