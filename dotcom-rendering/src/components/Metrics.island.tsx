@@ -207,7 +207,7 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 
 	useOnce(
 		function reportMvtId() {
-			if (isDev || !isInMonitoringTest) return;
+			if (!isInMonitoringTest) return;
 
 			const mvtId = getCookie({
 				name: 'gu_v2_mvt_id',
@@ -216,7 +216,7 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 
 			logMvt(mvtId);
 		},
-		[isDev, isInMonitoringTest],
+		[isInMonitoringTest],
 	);
 
 	// We don’t render anything
