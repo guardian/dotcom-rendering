@@ -11,8 +11,15 @@ const getTargetGroupHeaderValue = () => {
 	return 'dev';
 };
 
-const backendApp = process.env.GU_APP ?? 'rendering';
-const targetGroup = getTargetGroupHeaderValue();
+const getHeaders: () => Record<string, string> = () => {
+	const backendApp = process.env.GU_APP ?? 'rendering';
+	const targetGroup = getTargetGroupHeaderValue();
+
+	return {
+		'X-Gu-Backend-App': backendApp,
+		'X-Gu-Backend-App-Target-Group': targetGroup,
+	};
+};
 
 /**
  * Middleware to add response headers useful for debugging.
@@ -24,10 +31,7 @@ export const responseHeaderMiddleware: RequestHandler = (
 	res: Response,
 	next: NextFunction,
 ) => {
-	const headers = {
-		'X-Gu-Backend-App': backendApp,
-		'X-Gu-Backend-App-Target-Group': targetGroup,
-	};
+	const headers = getHeaders();
 
 	for (const [key, value] of Object.entries(headers)) {
 		res.setHeader(key, value);
