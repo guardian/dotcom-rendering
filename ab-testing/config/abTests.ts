@@ -200,7 +200,7 @@ const ABTests: ABTest[] = [
 		name: "webx-monitor-group-contamination",
 		description:
 			"Test to measure the impact of contamination between groups in ab tests",
-		owners: ["dotcom.platform@guardian.com"],
+		owners: ["dotcom.platform@theguardian.com"],
 		status: "ON",
 		expirationDate: "2026-08-31",
 		type: "client",
