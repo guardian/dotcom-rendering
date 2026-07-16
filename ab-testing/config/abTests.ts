@@ -196,17 +196,6 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant-1"],
 		shouldForceMetricsCollection: false,
 	},
-	{
-		name: "webx-cricket-redesign",
-		description: "Redesign of the cricket header and scorecard on web",
-		owners: ["dotcom.platform@theguardian.com"],
-		status: "ON",
-		expirationDate: "2026-08-01",
-		type: "server",
-		audienceSize: 0 / 100,
-		groups: ["enable"],
-		shouldForceMetricsCollection: false,
-	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
