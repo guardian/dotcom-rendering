@@ -186,7 +186,10 @@ export const StandardLayoutArticleGrid = ({
 								isImmersivePortrait
 									? 4
 									: isImmersiveLandscape
-										? 3
+										? layoutType ===
+											'immersiveLandscapeFeature'
+											? 3
+											: 4
 										: 1,
 							)}
 						}
@@ -208,7 +211,7 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="media"
 				layoutType={layoutType}
-				css={
+				css={[
 					isImmersiveLandscape
 						? css`
 								${from.desktop} {
@@ -216,8 +219,14 @@ export const StandardLayoutArticleGrid = ({
 									margin-right: -20px;
 								}
 							`
-						: undefined
-				}
+						: undefined,
+					// Force portrait aspect ratio for local dev purposes
+					isImmersivePortrait
+						? css`
+								aspect-ratio: 4 / 5;
+							`
+						: undefined,
+				]}
 			>
 				<MainMedia
 					format={format}
@@ -257,7 +266,7 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="headline"
 				layoutType={layoutType}
-				css={
+				css={[
 					layoutType === 'immersivePortraitDefault'
 						? css`
 								${from.desktop} {
@@ -269,8 +278,14 @@ export const StandardLayoutArticleGrid = ({
 							`
 						: css`
 								z-index: 20;
-							`
-				}
+							`,
+					isImmersiveLandscape &&
+						css`
+							${from.desktop} {
+								padding-bottom: ${space[8]}px;
+							}
+						`,
+				]}
 			>
 				<ArticleHeadline
 					format={format}
@@ -284,7 +299,18 @@ export const StandardLayoutArticleGrid = ({
 					isInverted={layoutType === 'immersiveLandscapeDefault'}
 				/>
 			</GridItem>
-			<GridItem area="standfirst" layoutType={layoutType}>
+			<GridItem
+				area="standfirst"
+				layoutType={layoutType}
+				css={[
+					isImmersiveLandscape &&
+						css`
+							${from.desktop} {
+								padding-bottom: ${space[8]}px;
+							}
+						`,
+				]}
+			>
 				<Standfirst format={format} standfirst={article.standfirst} />
 			</GridItem>
 			<GridItem
@@ -518,7 +544,7 @@ export const StandardLayoutArticleGrid = ({
 				area="right-column"
 				layoutType={layoutType}
 				css={css`
-					padding-top: ${isMedia ? 0 : 6}px;
+					padding-top: ${isMedia || isImmersive ? 0 : 6}px;
 					${from.desktop} {
 						padding-bottom: ${isMedia ? 41 : 0}px;
 					}
