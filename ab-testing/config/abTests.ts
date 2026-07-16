@@ -134,6 +134,19 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
+		name: "newsletters-in-article-signup-preview",
+		description:
+			"Test in-article newsletter signup with illustrated preview CTA vs without preview CTA",
+		owners: ["newsletters.dev@guardian.co.uk"],
+		expirationDate: "2026-07-21",
+		type: "client",
+		status: "ON",
+		audienceSize: 50 / 100,
+		audienceSpace: "A",
+		groups: ["illustrated", "without-preview"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "fronts-and-curation-loop-click-through",
 		description:
 			"Test impact of click to article via loop videos on fronts",
@@ -181,17 +194,6 @@ const ABTests: ABTest[] = [
 		audienceSize: 1,
 		audienceSpace: "B",
 		groups: ["control", "variant-1"],
-		shouldForceMetricsCollection: false,
-	},
-	{
-		name: "webx-cricket-redesign",
-		description: "Redesign of the cricket header and scorecard on web",
-		owners: ["dotcom.platform@theguardian.com"],
-		status: "ON",
-		expirationDate: "2026-08-01",
-		type: "server",
-		audienceSize: 0 / 100,
-		groups: ["enable"],
 		shouldForceMetricsCollection: false,
 	},
 ];

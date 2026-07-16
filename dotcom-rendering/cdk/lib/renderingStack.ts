@@ -38,6 +38,16 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 			};
 		};
 	};
+
+	/**
+	 * Which image to run.
+	 * This should be the image digest (e.g. 'sha256:abc123') to ensure immutable deployments.
+	 *
+	 * @note Currently optional to control which services run in an EC2-ECS hybrid mode, or EC2-only.
+	 *
+	 * @see https://docs.docker.com/dhi/core-concepts/digests
+	 */
+	imageIdentifier?: string;
 }
 
 const addCPUStepScalingPolicy = (
@@ -184,7 +194,14 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		const { stack: guStack, region, account } = this;
-		const { guApp, stage, instanceType, scaling, domainName } = props;
+		const {
+			guApp,
+			stage,
+			instanceType,
+			scaling,
+			domainName,
+			imageIdentifier,
+		} = props;
 
 		const artifactsBucket =
 			GuDistributionBucketParameter.getInstance(this).valueAsString;
@@ -216,6 +233,27 @@ export class RenderingCDKStack extends CDKStack {
 			certificateProps: { domainName },
 			healthcheck: { path: '/_healthcheck' },
 			monitoringConfiguration,
+			additionalPolicies: [
+				new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
+					actions: ['cloudwatch:*', 'logs:*'],
+					resources: ['*'],
+				}),
+				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
+					actions: ['kms:Decrypt', 'kms:DescribeKey'],
+					resources: [
+						`arn:aws:kms:${region}:${account}:FrontendConfigKey`,
+					],
+				}),
+				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
+					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
+					resources: [
+						// This is for backwards compatibility reasons with frontend apps and an old SSM naming system
+						// TODO - ideally we should convert these params to use the newer naming style for consistency
+						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
+					],
+				}),
+			],
 			ec2Props: {
 				instanceMetricGranularity: '1Minute',
 				applicationLogging: {
@@ -223,40 +261,6 @@ export class RenderingCDKStack extends CDKStack {
 					systemdUnitName: guApp,
 				},
 				instanceType,
-				roleConfiguration: {
-					additionalPolicies: [
-						new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
-							actions: ['cloudwatch:*', 'logs:*'],
-							resources: ['*'],
-						}),
-						new GuAllowPolicy(
-							this,
-							'AllowPolicyDescribeDecryptKms',
-							{
-								actions: ['kms:Decrypt', 'kms:DescribeKey'],
-								resources: [
-									`arn:aws:kms:${region}:${account}:FrontendConfigKey`,
-								],
-							},
-						),
-						new GuAllowPolicy(
-							this,
-							'AllowPolicyGetSsmParamsByPath',
-							{
-								actions: [
-									'ssm:GetParametersByPath',
-									'ssm:GetParameter',
-								],
-								resources: [
-									// This is for backwards compatibility reasons with frontend apps and an old SSM naming system
-									// TODO - ideally we should convert these params to use the newer naming style for consistency
-									`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
-									`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
-								],
-							},
-						),
-					],
-				},
 				scaling,
 				userData: getUserData({
 					guApp,
@@ -265,7 +269,47 @@ export class RenderingCDKStack extends CDKStack {
 					artifactsBucket,
 				}),
 			},
+
+			// Provision ECS resources only when `imageIdentifier` has been provided
+			...(imageIdentifier == null
+				? {}
+				: {
+						ecsProps: {
+							repositoryName: 'guardian/dotcom-rendering',
+							imageIdentifier,
+
+							// TODO tune these values
+							memoryLimitMiB: 2048,
+							cpu: 1024,
+							scaling: {
+								minimumTasks: 1,
+								maximumTasks: 2,
+							},
+						},
+
+						// Route all traffic to EC2
+						targetGroupWeights: {
+							ec2: 1,
+							ecs: 0,
+						},
+					}),
 		});
+
+		if (imageIdentifier != null) {
+			const ecsEnvVars: Record<string, string> = {
+				NODE_ENV: 'production',
+				GU_STAGE: stage,
+				GU_APP: guApp,
+				GU_STACK: guStack,
+			};
+
+			for (const [key, value] of Object.entries(ecsEnvVars)) {
+				app.ecsService?.taskDefinition.defaultContainer?.addEnvironment(
+					key,
+					value,
+				);
+			}
+		}
 
 		/**
 		 * The default Node server keep alive timeout is 5 seconds

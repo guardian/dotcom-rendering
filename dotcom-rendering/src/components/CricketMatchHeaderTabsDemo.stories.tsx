@@ -50,7 +50,10 @@ const baseArgs = {
 			liveURL:
 				'https://www.theguardian.com/sport/live/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
 		}),
-	article: {} as ArticleDeprecated,
+	article: {
+		pageId: 'sport/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		guardianBaseURL: 'https://www.theguardian.com',
+	} as ArticleDeprecated,
 	format: {} as ArticleFormat,
 } satisfies ComponentProps<typeof CricketMatchHeader>;
 
