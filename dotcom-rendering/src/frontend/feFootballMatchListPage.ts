@@ -40,6 +40,7 @@ const matchDayTeamSchema = object({
 	htScore: optional(number()),
 	aggregateScore: optional(number()),
 	scorers: optional(string()),
+	teamUrl: optional(string()),
 });
 
 const officialSchema = object({
