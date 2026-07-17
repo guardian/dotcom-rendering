@@ -17,7 +17,6 @@ import type { Front } from '../types/front';
 import type { FETagType } from '../types/tag';
 import type { TagPage } from '../types/tagPage';
 import { makePrefetchHeader } from './lib/header';
-import { traceSync } from './lib/tracing';
 import { renderFront, renderTagPage } from './render.front.web';
 
 const enhanceFront = (body: unknown): Front => {
@@ -107,79 +106,57 @@ const headerImage = (tags: FETagType[]): TagPage['header']['image'] => {
 };
 
 const enhanceTagPage = (body: unknown): TagPage => {
-	return traceSync('enhanceTagPage', (parentSpan) => {
-		const data: FETagPage = traceSync('validateAsFETagPage', () =>
-			validateAsFETagPage(body),
-		);
+	const data: FETagPage = validateAsFETagPage(body);
 
-		parentSpan.setAttribute('tagPage.pageId', data.pageId);
-		parentSpan.setAttribute('tagPage.editionId', data.editionId);
-		parentSpan.setAttribute('tagPage.contentsCount', data.contents.length);
+	const branding = data.commercialProperties[data.editionId].branding;
 
-		const branding = data.commercialProperties[data.editionId].branding;
+	const tagPageBranding = branding
+		? decideTagPageBranding({
+				branding,
+			})
+		: undefined;
 
-		const tagPageBranding = branding
-			? decideTagPageBranding({
-					branding,
-				})
-			: undefined;
-
-		const enhancedCards = traceSync('enhanceCards', (span) => {
-			const cards = enhanceCards(data.contents, {
-				cardInTagPage: true,
-				pageId: data.pageId,
-				discussionApiUrl: data.config.discussionApiUrl,
-				editionId: data.editionId,
-				stripBranding: !!tagPageBranding,
-			});
-			span.setAttribute('cards.count', cards.length);
-			return cards;
-		});
-
-		const speed = traceSync('getSpeedFromTrails', () =>
-			getSpeedFromTrails(data.contents),
-		);
-
-		const groupedTrails = traceSync('groupTrailsByDates', (span) => {
-			const groups = groupTrailsByDates(
-				enhancedCards,
-				data.editionId,
-				speed === 'slow' || data.forceDay,
-			);
-			span.setAttribute('groups.count', groups.length);
-			return groups;
-		});
-
-		const trendingTopics = traceSync('extractTrendingTopics', () =>
-			extractTrendingTopics(data.contents, data.pageId),
-		);
-
-		return {
-			...data,
-			webTitle: tagPageWebTitle(data),
-			tags: data.tags.tags,
-			groupedTrails,
-			speed,
-			pagination:
-				data.pagination && data.pagination.lastPage > 1
-					? {
-							...data.pagination,
-							sectionName: data.webTitle,
-							pageId: data.pageId,
-						}
-					: undefined,
-			trendingTopics,
-			header: {
-				title: data.webTitle,
-				description:
-					data.tags.tags[0]?.properties.bio ??
-					data.tags.tags[0]?.properties.description,
-				image: headerImage(data.tags.tags),
-			},
-			branding: tagPageBranding,
-			canonicalUrl: data.canonicalUrl,
-		};
+	const enhancedCards = enhanceCards(data.contents, {
+		cardInTagPage: true,
+		pageId: data.pageId,
+		discussionApiUrl: data.config.discussionApiUrl,
+		editionId: data.editionId,
+		stripBranding: !!tagPageBranding,
 	});
+
+	const speed = getSpeedFromTrails(data.contents);
+
+	const groupedTrails = groupTrailsByDates(
+		enhancedCards,
+		data.editionId,
+		speed === 'slow' || data.forceDay,
+	);
+
+	return {
+		...data,
+		webTitle: tagPageWebTitle(data),
+		tags: data.tags.tags,
+		groupedTrails,
+		speed,
+		pagination:
+			data.pagination && data.pagination.lastPage > 1
+				? {
+						...data.pagination,
+						sectionName: data.webTitle,
+						pageId: data.pageId,
+					}
+				: undefined,
+		trendingTopics: extractTrendingTopics(data.contents, data.pageId),
+		header: {
+			title: data.webTitle,
+			description:
+				data.tags.tags[0]?.properties.bio ??
+				data.tags.tags[0]?.properties.description,
+			image: headerImage(data.tags.tags),
+		},
+		branding: tagPageBranding,
+		canonicalUrl: data.canonicalUrl,
+	};
 };
 
 export const handleFront: RequestHandler = ({ body }, res) => {
@@ -190,30 +167,10 @@ export const handleFront: RequestHandler = ({ body }, res) => {
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
-export const handleTagPage: RequestHandler = (req, res) => {
-	traceSync('handleTagPage', (span) => {
-		const requestId = req.headers['x-request-id'];
-		if (requestId) {
-			span.setAttribute(
-				'request.id',
-				Array.isArray(requestId) ? (requestId[0] ?? '') : requestId,
-			);
-		}
-
-		const tagPage = enhanceTagPage(req.body);
-
-		span.setAttribute('tagPage.pageId', tagPage.pageId);
-
-		const { html, prefetchScripts } = renderTagPage({
-			tagPage,
-		});
-
-		span.setAttribute('response.htmlSizeBytes', html.length);
-
-		traceSync('sendResponse', () => {
-			res.status(200)
-				.set('Link', makePrefetchHeader(prefetchScripts))
-				.send(html);
-		});
+export const handleTagPage: RequestHandler = ({ body }, res) => {
+	const tagPage = enhanceTagPage(body);
+	const { html, prefetchScripts } = renderTagPage({
+		tagPage,
 	});
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
