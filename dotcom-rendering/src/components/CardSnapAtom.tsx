@@ -6,7 +6,7 @@ import { FootballCompetitionAtom } from './FootballCompetitionAtom.island';
 import { GuideAtomWrapper } from './GuideAtomWrapper.island';
 import { Island } from './Island';
 import { ProfileAtomWrapper } from './ProfileAtomWrapper.island';
-// import { QandaAtom } from './QandaAtom.island';
+import { QandaAtom } from './QandaAtom.island';
 import { TimelineAtom } from './TimelineAtom.island';
 
 type Props = {
@@ -37,33 +37,17 @@ export const CardSnapAtom = ({ atoms }: Props) => {
 	}
 
 	if (atoms.qanda) {
-		const mockData = {
-			competitionId: '700',
-			footballCompetitionComponentType: 'match-day',
-		};
-
-		// for testing until the capi flow is setup
-		if (mockData) {
-			return (
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<FootballCompetitionAtom
-						footballCompetitionData={mockData}
-					/>
-				</Island>
-			);
-		}
-
-		//  // return (
-		//  //  <Island priority="feature" defer={{ until: 'visible' }}>
-		//  //      <QandaAtom
-		//  //          id={atoms.qanda.id}
-		//  //          title={atoms.qanda.title}
-		//  //          html={atoms.qanda.html}
-		//  //          image={atoms.qanda.img}
-		//  //          credit={atoms.qanda.credit}
-		//  //      />
-		//  //  </Island>
-		//  // );
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<QandaAtom
+					id={atoms.qanda.id}
+					title={atoms.qanda.title}
+					html={atoms.qanda.html}
+					image={atoms.qanda.img}
+					credit={atoms.qanda.credit}
+				/>
+			</Island>
+		);
 	}
 
 	if (atoms.profile) {
@@ -131,13 +115,13 @@ export const CardSnapAtom = ({ atoms }: Props) => {
 		);
 	}
 
-	// if (atoms.footballcompetition) {
-	// 	return (
-	// 		<FootballCompetitionAtom
-	// 			footballCompetitionData={atoms.footballcompetition}
-	// 		/>
-	// 	);
-	// }
+	if (atoms.tempfootballcompetition) {
+		return (
+			<FootballCompetitionAtom
+				footballCompetitionData={atoms.tempfootballcompetition}
+			/>
+		);
+	}
 
 	return null;
 };

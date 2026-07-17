@@ -137,6 +137,10 @@ export type SnapAtoms = {
 	audio?: AudioAtomBlockElement;
 	explainer?: ExplainerAtomBlockElement;
 	cta?: CallToActionAtomBlockElement;
+	tempfootballcompetition?: {
+		competitionId: string;
+		footballCompetitionComponentType: string;
+	};
 };
 
 export type DCRSnapType = {

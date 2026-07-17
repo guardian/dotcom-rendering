@@ -294,6 +294,10 @@ export type FESnap = {
 	AudioAtom?: AudioAtomBlockElement;
 	ExplainerAtom?: ExplainerAtomBlockElement;
 	CtaAtom?: CallToActionAtomBlockElement;
+	FootballCompetitionAtom?: {
+		competitionId: string;
+		footballCompetitionComponentType: string;
+	};
 };
 
 export type FEAspectRatio = '5:3' | '5:4' | '4:5' | '1:1';

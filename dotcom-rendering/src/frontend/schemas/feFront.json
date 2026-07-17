@@ -902,6 +902,21 @@
                                                 },
                                                 "CtaAtom": {
                                                     "$ref": "#/definitions/CallToActionAtomBlockElement"
+                                                },
+                                                "FootballCompetitionAtom": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "competitionId": {
+                                                            "type": "string"
+                                                        },
+                                                        "footballCompetitionComponentType": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "competitionId",
+                                                        "footballCompetitionComponentType"
+                                                    ]
                                                 }
                                             }
                                         },
@@ -1759,6 +1774,21 @@
                                                 },
                                                 "CtaAtom": {
                                                     "$ref": "#/definitions/CallToActionAtomBlockElement"
+                                                },
+                                                "FootballCompetitionAtom": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "competitionId": {
+                                                            "type": "string"
+                                                        },
+                                                        "footballCompetitionComponentType": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "competitionId",
+                                                        "footballCompetitionComponentType"
+                                                    ]
                                                 }
                                             }
                                         },
@@ -2616,6 +2646,21 @@
                                                 },
                                                 "CtaAtom": {
                                                     "$ref": "#/definitions/CallToActionAtomBlockElement"
+                                                },
+                                                "FootballCompetitionAtom": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "competitionId": {
+                                                            "type": "string"
+                                                        },
+                                                        "footballCompetitionComponentType": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "competitionId",
+                                                        "footballCompetitionComponentType"
+                                                    ]
                                                 }
                                             }
                                         },
@@ -4369,6 +4414,21 @@
                                 },
                                 "cta": {
                                     "$ref": "#/definitions/CallToActionAtomBlockElement"
+                                },
+                                "tempfootballcompetition": {
+                                    "type": "object",
+                                    "properties": {
+                                        "competitionId": {
+                                            "type": "string"
+                                        },
+                                        "footballCompetitionComponentType": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "competitionId",
+                                        "footballCompetitionComponentType"
+                                    ]
                                 }
                             }
                         }
