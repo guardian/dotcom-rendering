@@ -6282,18 +6282,6 @@ const designTagBackground: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const cricketScoreboardBorderTop: PaletteFunction = () => {
-	return sourcePalette.sport[300];
-};
-
-const cricketScoreboardDivider: PaletteFunction = () => {
-	return sourcePalette.neutral[86];
-};
-
-const cricketScoreboardLinkText: PaletteFunction = () => {
-	return sourcePalette.sport[300];
-};
-
 const imageTitleBackground: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
 		return sourcePalette.news[300];
@@ -6972,18 +6960,6 @@ const paletteColours = {
 	'--comment-form-input-background': {
 		light: commentFormInputBackgroundLight,
 		dark: commentFormInputBackgroundDark,
-	},
-	'--cricket-scoreboard-border-top': {
-		light: cricketScoreboardBorderTop,
-		dark: cricketScoreboardBorderTop,
-	},
-	'--cricket-scoreboard-divider': {
-		light: cricketScoreboardDivider,
-		dark: cricketScoreboardDivider,
-	},
-	'--cricket-scoreboard-link-text': {
-		light: cricketScoreboardLinkText,
-		dark: cricketScoreboardLinkText,
 	},
 	'--cricket-scorecard-divider': {
 		light: () => sourcePalette.neutral[7],

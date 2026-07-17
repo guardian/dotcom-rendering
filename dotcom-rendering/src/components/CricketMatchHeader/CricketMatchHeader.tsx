@@ -65,10 +65,13 @@ type Props = CricketMatchHeaderProps & {
 export const CricketMatchHeader = (props: Props) => {
 	const scorecardHashbang = '#scorecard';
 	const locationHash = useLocationHash();
+	const currentUrl = new URL(
+		`${props.article.guardianBaseURL}${props.article.pageId}`,
+	);
 
 	const { data, error } = useSWR<CricketHeaderData, Error>(
 		props.matchHeaderURL,
-		fetcher(props.getHeaderData),
+		fetcher(props.getHeaderData, props.selectedTab, currentUrl),
 		swrOptions(props.refreshInterval),
 	);
 
@@ -193,10 +196,14 @@ const swrOptions = (
 });
 
 const fetcher =
-	(getHeaderData: Props['getHeaderData']) =>
+	(
+		getHeaderData: Props['getHeaderData'],
+		selectedTab: 'info' | 'live' | 'report',
+		currentUrl: URL,
+	) =>
 	(url: string): Promise<CricketHeaderData> =>
 		getHeaderData(url)
-			.then(parseHeaderData)
+			.then(parseHeaderData(selectedTab, currentUrl))
 			.then((result) => {
 				if (!result.ok) {
 					log('dotcom', result.error);
@@ -408,42 +415,47 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 			</span>
 			{props.match.kind !== 'Fixture' &&
 				(innings.length > 0 ? (
-					innings.map((inning, index) => (
-						<Fragment key={index}>
-							<Score
-								runs={inning.inningsTotals.runs}
-								fallOfWickets={inning.inningsTotals.wickets}
-								matchKind={props.match.kind}
-							/>
-							{!!inning.inningsTotals.overs && (
-								<>
-									<EndOfInningReason
-										inning={{
-											wickets:
-												inning.inningsTotals.wickets,
-											declared: inning.declared,
-											forfeited: inning.forfeited,
-										}}
-									/>
-									<span
-										css={{
-											...textSans12Object,
-											display: 'inline-block',
-											marginTop: space[2],
-											padding: `0 ${space[1]}px 1px ${space[1]}px`,
-											border: '1px solid',
-											borderRadius: 30,
-											color: palette(
-												secondaryText(props.match.kind),
-											),
-										}}
-									>
-										{inning.inningsTotals.overs} overs
-									</span>
-								</>
-							)}
-						</Fragment>
-					))
+					innings
+						.sort((a, b) => a.order - b.order)
+						.map((inning, index) => (
+							<Fragment key={index}>
+								<Score
+									runs={inning.inningsTotals.runs}
+									fallOfWickets={inning.inningsTotals.wickets}
+									matchKind={props.match.kind}
+								/>
+								{!!inning.inningsTotals.overs && (
+									<>
+										<EndOfInningReason
+											inning={{
+												wickets:
+													inning.inningsTotals
+														.wickets,
+												declared: inning.declared,
+												forfeited: inning.forfeited,
+											}}
+										/>
+										<span
+											css={{
+												...textSans12Object,
+												display: 'inline-block',
+												marginTop: space[2],
+												padding: `0 ${space[1]}px 1px ${space[1]}px`,
+												border: '1px solid',
+												borderRadius: 30,
+												color: palette(
+													secondaryText(
+														props.match.kind,
+													),
+												),
+											}}
+										>
+											{inning.inningsTotals.overs} overs
+										</span>
+									</>
+								)}
+							</Fragment>
+						))
 				) : (
 					<span
 						css={{
