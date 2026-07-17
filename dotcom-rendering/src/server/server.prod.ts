@@ -20,6 +20,10 @@ import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
 import {
+	handleGetSavedFromWeb,
+	handlePutSavedFromWebRecipe,
+} from './handler.savedFromWeb';
+import {
 	handleAppsFootballMatchPage,
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
@@ -74,6 +78,9 @@ export const prodServer = (): void => {
 	app.post('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 
 	app.get('/assets/rendered-items-assets', handleAppsAssets);
+
+	app.get('/api/saved-from-web', handleGetSavedFromWeb);
+	app.put('/api/saved-from-web/:recipeId', handlePutSavedFromWebRecipe);
 
 	// All params to error handlers must be declared for express to identify them as error middleware
 	// https://expressjs.com/en/api.html#:~:text=Error%2Dhandling%20middleware%20always,see%3A%20Error%20handling

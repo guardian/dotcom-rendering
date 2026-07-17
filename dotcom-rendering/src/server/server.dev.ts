@@ -19,6 +19,10 @@ import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
 import {
+	handleGetSavedFromWeb,
+	handlePutSavedFromWebRecipe,
+} from './handler.savedFromWeb';
+import {
 	handleAppsFootballMatchPage,
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
@@ -147,6 +151,9 @@ renderer.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
 renderer.post('/FootballMatchDayEmbed', handleFootballMatchDayEmbed);
 
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);
+
+renderer.get('/api/saved-from-web', handleGetSavedFromWeb);
+renderer.put('/api/saved-from-web/:recipeId', handlePutSavedFromWebRecipe);
 
 const router = Router();
 router.use('/pages', pages);

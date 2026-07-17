@@ -12,7 +12,9 @@ import {
 	BrazeBannersSystemPlacementId,
 	isPlacementStale,
 } from '../lib/braze/BrazeBannersSystem';
+import { getFeastSavedFromTheWebRecipes } from '../lib/feast/savedFromWeb';
 import { useAB } from '../lib/useAB';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import type { StageType } from '../types/config';
 import type { RecipeBlockElement } from '../types/content';
@@ -221,6 +223,22 @@ export const FeastContextualNudge = ({
 		}
 	}, [feastId, title, pageId, isDev, isVariant]);
 
+	// Whether this recipe is already in the reader's "Saved from web" list.
+	// `getFeastSavedFromTheWebRecipes` is memoized by access token, so no
+	// matter how many FeastContextualNudge islands on this page call it as
+	// they hydrate (each is deferred `until: 'visible'`), only one network
+	// request for the reader's full saved-recipe list is ever made.
+	const authStatus = useAuthStatus();
+	const [isRecipeSaved, setIsRecipeSaved] = useState(false);
+	useEffect(() => {
+		if (authStatus.kind !== 'SignedIn') return;
+		void getFeastSavedFromTheWebRecipes(
+			authStatus.accessToken.accessToken,
+		).then((savedRecipeIds) => {
+			setIsRecipeSaved(savedRecipeIds.has(feastId));
+		});
+	}, [authStatus, feastId]);
+
 	if (!isVariant) return null;
 
 	// If idApiUrl is defined and Braze has a banner for this placement slot,
@@ -271,6 +289,7 @@ export const FeastContextualNudge = ({
 							nudgeIndex,
 							darkMode: darkModeAvailable,
 							adjustToken: getAdjustToken(stage),
+							isRecipeSaved,
 						}}
 					/>
 				</div>
