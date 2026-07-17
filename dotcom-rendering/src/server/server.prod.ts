@@ -32,13 +32,28 @@ import { responseHeaderMiddleware } from './lib/header-middleware';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
+import { traceAsync, tracingMiddleware } from './lib/tracing';
 
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
 
 	const app = express();
 
-	app.use(express.json({ limit: '50mb' }));
+	app.use(tracingMiddleware);
+	app.use((req, res, next) => {
+		traceAsync('express.json', (span) => {
+			express.json({ limit: '50mb' })(req, res, (err) => {
+				if (req.body) {
+					span.setAttribute(
+						'body.sizeBytes',
+						JSON.stringify(req.body).length,
+					);
+				}
+				span.end();
+				next(err);
+			});
+		});
+	});
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
 	app.use(responseHeaderMiddleware);

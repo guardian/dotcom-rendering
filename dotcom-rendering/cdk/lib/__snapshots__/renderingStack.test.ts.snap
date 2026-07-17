@@ -8,6 +8,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuAllowPolicy",
+      "GuAllowPolicy",
       "GuVpcParameter",
       "GuSubnetListParameter",
       "GuSubnetListParameter",
@@ -182,6 +183,32 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           "Version": "2012-10-17",
         },
         "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyXRay6A9BDA0E": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+                "xray:GetSamplingRules",
+                "xray:GetSamplingTargets",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyXRay6A9BDA0E",
         "Roles": [
           {
             "Ref": "InstanceRoleArticlerendering0D4717E8",
@@ -1623,6 +1650,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuAllowPolicy",
+      "GuAllowPolicy",
       "GuVpcParameter",
       "GuSubnetListParameter",
       "GuSubnetListParameter",
@@ -1812,6 +1840,35 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           "Version": "2012-10-17",
         },
         "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleTagpagerendering171BC2F9",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyXRay6A9BDA0E": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+                "xray:GetSamplingRules",
+                "xray:GetSamplingTargets",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyXRay6A9BDA0E",
         "Roles": [
           {
             "Ref": "InstanceRoleTagpagerendering171BC2F9",
@@ -2157,6 +2214,14 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                 "Name": "GU_STACK",
                 "Value": "frontend",
               },
+              {
+                "Name": "OTEL_EXPORTER_OTLP_ENDPOINT",
+                "Value": "http://localhost:4318",
+              },
+              {
+                "Name": "OTEL_SERVICE_NAME",
+                "Value": "tag-page-rendering",
+              },
             ],
             "Essential": true,
             "Image": {
@@ -2243,6 +2308,32 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             "Name": "LogShipping",
             "ReadonlyRootFilesystem": true,
             "VersionConsistency": "disabled",
+          },
+          {
+            "Command": [
+              "--config=/etc/ecs/ecs-default-config.yaml",
+            ],
+            "Cpu": 256,
+            "Essential": true,
+            "Image": "public.ecr.aws/aws-observability/aws-otel-collector:latest",
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "EcsTaskDefinitionadotcollectorLogGroup9B99E580",
+                },
+                "awslogs-region": "eu-west-1",
+                "awslogs-stream-prefix": "tag-page-rendering-adot",
+              },
+            },
+            "MemoryReservation": 256,
+            "Name": "adot-collector",
+            "PortMappings": [
+              {
+                "ContainerPort": 4318,
+                "Protocol": "tcp",
+              },
+            ],
           },
         ],
         "Cpu": "1024",
@@ -2380,6 +2471,19 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                 ],
               },
             },
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EcsTaskDefinitionadotcollectorLogGroup9B99E580",
+                  "Arn",
+                ],
+              },
+            },
           ],
           "Version": "2012-10-17",
         },
@@ -2452,6 +2556,31 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         ],
       },
       "Type": "AWS::IAM::Role",
+    },
+    "EcsTaskDefinitionadotcollectorLogGroup9B99E580": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
     },
     "GetDistributablePolicyTagpagerendering346128E3": {
       "Properties": {

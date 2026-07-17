@@ -16,6 +16,10 @@ services:
 
       # Explicitly tell AWS SDK where to find credentials
       AWS_SHARED_CREDENTIALS_FILE: /.aws/credentials
+
+      # OpenTelemetry exporter endpoint (Jaeger)
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4318
+      OTEL_SERVICE_NAME: tag-page-rendering
     ports:
       - '9000:9000'
 
@@ -48,6 +52,13 @@ services:
     depends_on:
       tag-page-rendering:
         condition: service_healthy
+    volumes:
+      - ./tag-page-payload.json:/data/tag-page-payload.json:ro
     command: |
-      curl "https://www.theguardian.com/tone/minutebyminute.json?dcr=true" --silent > data.json && \
-        curl -X POST http://localhost:9000/TagPage -d @data.json -H "Content-Type: application/json"
+      curl -X POST http://tag-page-rendering:9000/TagPage -d @/data/tag-page-payload.json -H "Content-Type: application/json"
+
+  jaeger:
+    image: jaegertracing/jaeger:2.6.0
+    ports:
+      - '16686:16686'
+      - '4318:4318'
