@@ -146,7 +146,7 @@ clean-dist:
 
 clean-deps:
 	$(call log, "trashing dependencies")
-	@rm -rf node_modules
+	@pnpm clean
 
 install: check-env
 	$(call log, "refreshing dependencies")
