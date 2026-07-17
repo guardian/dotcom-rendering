@@ -187,9 +187,13 @@ export const FeastContextualNudge = ({
 	idApiUrl,
 }: FeastContextualNudgeProps) => {
 	const abTests = useAB();
-	const isVariant =
+	let isVariant =
 		abTests?.isUserInTestGroup('feast-recipe-nudge-v2', 'variant-1') ??
 		false;
+
+	// TEMP ONLY FOR DEVELOPMENT: force the nudge to render for testing purposes, even if the user is not in the AB test variant.
+	isVariant = true;
+	// TEMP ONLY FOR DEVELOPMENT: force the nudge to render for testing purposes, even if the user is not in the AB test variant.
 
 	const { darkModeAvailable, renderingTarget } = useConfig();
 
