@@ -219,6 +219,9 @@ export const FeastContextualNudge = ({
 
 	if (!isVariant) return null;
 
+	// Build Feast deep-link URL for the current recipe, using the correct Adjust token
+	const feastLink = buildFeastLink(feastId, stage);
+
 	// If idApiUrl is defined and Braze has a banner for this placement slot,
 	// render the Braze banner instead of the native nudge.
 	if (idApiUrl !== undefined) {
@@ -266,7 +269,7 @@ export const FeastContextualNudge = ({
 							isDev,
 							nudgeIndex,
 							darkMode: darkModeAvailable,
-							adjustToken: getAdjustToken(stage),
+							feastLink,
 						}}
 					/>
 				</div>
@@ -312,7 +315,7 @@ export const FeastContextualNudge = ({
 				<LinkButton
 					priority="primary"
 					size="xsmall"
-					href={buildFeastLink(feastId, stage)}
+					href={feastLink}
 					target="_blank"
 					rel="noreferrer"
 					theme={primaryCtaTheme}
