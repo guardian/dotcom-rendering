@@ -39,6 +39,8 @@ export const shouldShowContributor = (
 			switch (layoutType) {
 				case 'immersivePortraitDefault':
 				case 'immersivePortraitFeature':
+				case 'immersiveLandscapeDefault':
+				case 'immersiveLandscapeFeature':
 					return true;
 				default:
 					return false;
