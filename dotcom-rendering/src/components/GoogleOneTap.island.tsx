@@ -7,7 +7,7 @@ import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useConsent } from '../lib/useConsent';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
-import type { ServerSideTests, StageType, Switches } from '../types/config';
+import type { StageType, Switches } from '../types/config';
 
 type IdentityProviderConfig = {
 	configURL: string;
@@ -24,11 +24,7 @@ type CredentialsProvider = {
 	}) => Promise<{ token: string }>;
 };
 
-export const isGoogleOneTapEnabled = (
-	tests: ServerSideTests,
-	switches: Switches,
-): boolean =>
-	tests['googleOneTapVariant'] === 'variant' ||
+export const isGoogleOneTapEnabled = (switches: Switches): boolean =>
 	switches['googleOneTapSwitch'] === true;
 
 /**

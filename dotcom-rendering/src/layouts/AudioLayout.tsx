@@ -409,7 +409,6 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 									idUrl={article.config.idUrl ?? ''}
 									isDev={!!article.config.isDev}
 									keywordIds={article.config.keywordIds}
-									abTests={article.config.abTests}
 									tableOfContents={article.tableOfContents}
 									lang={article.lang}
 									isRightToLeftLang={
@@ -734,11 +733,9 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer
-						data-print-layout="hide"
-						contentType={article.contentType}
-						pageId={article.pageId}
-					/>
+					{renderAds && (
+						<MobileStickyContainer data-print-layout="hide" />
+					)}
 				</>
 			)}
 			{isApps && (
