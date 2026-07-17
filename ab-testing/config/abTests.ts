@@ -32,19 +32,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-mobile-inline1-halfpage",
-		description:
-			"To measure impact (RPM) and CLS of adding halfPage as an additional size option to mobile inline1 ad slot",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2026-02-28`,
-		type: "client",
-		status: "OFF",
-		audienceSize: 20 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "growth-holdback-group",
 		description:
 			"Test for 5% holdback group that does not qualify for any testing so long as the test is live in the RRCP",
