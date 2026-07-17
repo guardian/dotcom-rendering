@@ -88,6 +88,10 @@ buildCheck:
 	$(call log, "checking build files")
 	@node ./scripts/test/build-check.js
 
+check-islands:
+	$(call log, "checking island component locations")
+	@node ./scripts/islands/check-islands.mts
+
 # quality #########################################
 
 tsc: clean-dist install
