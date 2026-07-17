@@ -2041,6 +2041,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           "Type": "ECS",
         },
         "EnableECSManagedTags": false,
+        "EnableExecuteCommand": "true",
         "HealthCheckGracePeriodSeconds": 60,
         "LaunchType": "FARGATE",
         "LoadBalancers": [
