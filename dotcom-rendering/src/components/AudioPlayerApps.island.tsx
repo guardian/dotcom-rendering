@@ -1,8 +1,8 @@
 import { log } from '@guardian/libs';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { getAudioClient } from '../../lib/bridgetApi';
-import { useIsBridgetCompatible } from '../../lib/useIsBridgetCompatible';
-import { AppsAudioPlayButton } from './AppsAudioPlayButton';
+import { getAudioClient } from '../lib/bridgetApi';
+import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
+import { AppsAudioPlayButton } from './AudioPlayer/AppsAudioPlayButton';
 
 const AUDIO_BRIDGET_VERSION = '8.9.0';
 const POLLING_INTERVAL_MS = 3000;

@@ -1,7 +1,7 @@
+import { AudioPlayerApps } from '../AudioPlayerApps.island';
+import { AudioPlayerWeb } from '../AudioPlayerWeb.island';
 import { Island } from '../Island';
 import { formatAudioDuration } from '../ListenToArticle.island';
-import { AudioPlayerApps } from './AudioPlayerApps.island';
-import { AudioPlayerWeb } from './AudioPlayerWeb.island';
 
 export const AudioPlayer = ({
 	audioData,

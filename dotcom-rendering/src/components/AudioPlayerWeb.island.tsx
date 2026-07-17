@@ -2,11 +2,11 @@ import { getConsentFor, onConsentChange } from '@guardian/consent-manager';
 import { log } from '@guardian/libs';
 import type { AudioEvent, TAudioEventType } from '@guardian/ophan-tracker-js';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { getOphan } from '../../client/ophan/ophan';
-import { Playback } from './components/Playback';
-import { ProgressBar } from './components/ProgressBar';
-import { CurrentTime, Duration } from './components/time';
-import { Wrapper } from './components/Wrapper';
+import { getOphan } from '../client/ophan/ophan';
+import { Playback } from './AudioPlayer/components/Playback';
+import { ProgressBar } from './AudioPlayer/components/ProgressBar';
+import { CurrentTime, Duration } from './AudioPlayer/components/time';
+import { Wrapper } from './AudioPlayer/components/Wrapper';
 
 // ********************* Ophan stuff *********************
 
