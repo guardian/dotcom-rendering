@@ -1,5 +1,5 @@
-import { devServer } from './server.dev';
 import { initTracing } from './lib/tracing';
+import { devServer } from './server.dev';
 import { prodServer } from './server.prod';
 
 // this export is expected by webpack-hot-server-middleware
