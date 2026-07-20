@@ -317,6 +317,13 @@ export const LightboxLayout = ({
 								css`
 									order: 3;
 								`,
+								// On Filter articles the info is always shown, so
+								// the toggle is redundant. It stays in the DOM
+								// (the lightbox JS requires it) but is hidden.
+								isFilterArticle &&
+									css`
+										display: none;
+									`,
 							]}
 							className="info"
 							title="Toggle caption [i]"

@@ -307,7 +307,10 @@ const toggleInfo = (
  *
  */
 
-const initialiseLightbox = (lightbox: HTMLElement) => {
+const initialiseLightbox = (
+	lightbox: HTMLElement,
+	isFilterArticle: boolean,
+) => {
 	log('dotcom', '💡 Initialising lightbox');
 
 	// --------------------------------------------------------------------------------
@@ -356,6 +359,17 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 	// --------------------------------------------------------------------------------
 	// FUNCTIONS
 	// --------------------------------------------------------------------------------
+
+	// On Filter articles the info panel is always shown and the toggle button is
+	// hidden, so we disable every path that would toggle the caption. This keeps
+	// the info visible and avoids the mobile nav being hidden (a `hide-info` side
+	// effect) or polluting the shared `gu.prefs.lightbox-info` preference.
+	const handleToggleInfo = (force?: 'hide' | 'show') => {
+		if (isFilterArticle) {
+			return;
+		}
+		toggleInfo(lightbox, infoButton, force);
+	};
 
 	const handleKeydown = (event: KeyboardEvent) => {
 		if (event.ctrlKey || event.metaKey || event.altKey) {
@@ -407,11 +421,11 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 			case 'ArrowRight':
 				return goForward(lightbox, images, nextButton, imageList);
 			case 'KeyI':
-				return toggleInfo(lightbox, infoButton);
+				return handleToggleInfo();
 			case 'ArrowUp':
-				return toggleInfo(lightbox, infoButton, 'show');
+				return handleToggleInfo('show');
 			case 'ArrowDown':
-				return toggleInfo(lightbox, infoButton, 'hide');
+				return handleToggleInfo('hide');
 			case 'KeyQ':
 			case 'Escape':
 				return void close(lightbox, handleKeydown);
@@ -424,7 +438,7 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 	for (const picture of pictures) {
 		// Clicking on the image toggles the caption
 		picture.addEventListener('mousedown', (event) => {
-			toggleInfo(lightbox, infoButton);
+			handleToggleInfo();
 			// We want to maintain focus so halt all further actions
 			event.preventDefault();
 			event.stopPropagation();
@@ -468,7 +482,7 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 		goForward(lightbox, images, nextButton, imageList);
 	});
 	infoButton.addEventListener('click', () => {
-		toggleInfo(lightbox, infoButton);
+		handleToggleInfo();
 	});
 
 	for (const link of captionLinks) {
@@ -536,7 +550,7 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 	// Check the user's preferences to decide if we show the caption or not
 	const info = storage.local.get('gu.prefs.lightbox-info');
 	if (info === 'hide') {
-		toggleInfo(lightbox, infoButton, 'hide');
+		handleToggleInfo('hide');
 	}
 
 	// Open the lightbox at the position given in the url hash
@@ -619,9 +633,9 @@ export const LightboxJavascript = ({
 			log('dotcom', '💡 Lightbox already initialised, skipping');
 			return;
 		}
-		initialiseLightbox(lightbox);
+		initialiseLightbox(lightbox, isFilterArticle);
 		setInitialised(true);
-	}, [initialised, lightbox]);
+	}, [initialised, lightbox, isFilterArticle]);
 
 	if (!lightbox) {
 		return null;
