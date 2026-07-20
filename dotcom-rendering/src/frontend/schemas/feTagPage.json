@@ -746,19 +746,19 @@
                             "CtaAtom": {
                                 "$ref": "#/definitions/CallToActionAtomBlockElement"
                             },
-                            "FootballCompetitionAtom": {
+                            "TempFootballCompetitionAtom": {
                                 "type": "object",
                                 "properties": {
                                     "competitionId": {
                                         "type": "string"
                                     },
-                                    "footballCompetitionComponentType": {
+                                    "componentType": {
                                         "type": "string"
                                     }
                                 },
                                 "required": [
                                     "competitionId",
-                                    "footballCompetitionComponentType"
+                                    "componentType"
                                 ]
                             }
                         }

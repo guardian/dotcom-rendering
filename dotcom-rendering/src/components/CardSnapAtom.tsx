@@ -21,7 +21,6 @@ type Props = {
  * atom logic out of `Card`.
  */
 export const CardSnapAtom = ({ atoms }: Props) => {
-	console.log('test');
 	if (atoms.guide) {
 		return (
 			<Island priority="feature" defer={{ until: 'visible' }}>
@@ -117,9 +116,11 @@ export const CardSnapAtom = ({ atoms }: Props) => {
 
 	if (atoms.tempfootballcompetition) {
 		return (
-			<FootballCompetitionAtom
-				footballCompetitionData={atoms.tempfootballcompetition}
-			/>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballCompetitionAtom
+					footballCompetitionData={atoms.tempfootballcompetition}
+				/>
+			</Island>
 		);
 	}
 

@@ -14,6 +14,7 @@ const enhanceSnapAtoms = (snap: FESnap): SnapAtoms | undefined => {
 		audio: snap.AudioAtom,
 		explainer: snap.ExplainerAtom,
 		cta: snap.CtaAtom,
+		tempfootballcompetition: snap.TempFootballCompetitionAtom,
 	};
 
 	const hasAtom = Object.values(atoms).some((atom) => atom !== undefined);

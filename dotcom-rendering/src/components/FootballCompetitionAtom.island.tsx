@@ -7,7 +7,7 @@ import { FootballMatchDay } from './FootballMatchDay';
 type Props = {
 	footballCompetitionData: {
 		competitionId: string;
-		footballCompetitionComponentType: string;
+		componentType: string;
 	};
 };
 

@@ -5886,13 +5886,13 @@
                                         "competitionId": {
                                             "type": "string"
                                         },
-                                        "footballCompetitionComponentType": {
+                                        "componentType": {
                                             "type": "string"
                                         }
                                     },
                                     "required": [
                                         "competitionId",
-                                        "footballCompetitionComponentType"
+                                        "componentType"
                                     ]
                                 }
                             }

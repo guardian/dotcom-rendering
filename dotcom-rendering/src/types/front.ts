@@ -139,7 +139,7 @@ export type SnapAtoms = {
 	cta?: CallToActionAtomBlockElement;
 	tempfootballcompetition?: {
 		competitionId: string;
-		footballCompetitionComponentType: string;
+		componentType: string;
 	};
 };
 

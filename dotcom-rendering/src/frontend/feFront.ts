@@ -294,9 +294,9 @@ export type FESnap = {
 	AudioAtom?: AudioAtomBlockElement;
 	ExplainerAtom?: ExplainerAtomBlockElement;
 	CtaAtom?: CallToActionAtomBlockElement;
-	FootballCompetitionAtom?: {
+	TempFootballCompetitionAtom?: {
 		competitionId: string;
-		footballCompetitionComponentType: string;
+		componentType: string;
 	};
 };
 
