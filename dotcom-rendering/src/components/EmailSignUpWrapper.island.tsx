@@ -1,8 +1,14 @@
 import { useEffect, useRef } from 'react';
 import {
+	isWithoutPreviewVariant,
+	NEWSLETTER_PREVIEW_AB_TEST_NAME,
+	resolveNewsletterPreviewAbTest,
+} from '../lib/newsletterSignupAbTest';
+import {
 	NEWSLETTER_SIGNUP_COMPONENT_ID,
 	sendNewsletterSignupEvent,
 } from '../lib/newsletterSignupTracking';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { useConfig } from './ConfigContext';
@@ -11,9 +17,13 @@ import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { Island } from './Island';
 import { NewsletterSignupCardContainer } from './NewsletterSignupCardContainer';
 import { NewsletterSignupForm } from './NewsletterSignupForm.island';
-// When the next A/B experiment is added (e.g. preview-button test), import
-// useAB and AB_TEST_NAME from their respective modules and thread them through
-// sendNewsletterSignupEvent's `abTest` param and NewsletterSignupForm's `abTest` prop.
+
+/**
+ * How long to wait for the AB framework to resolve before firing the VIEW
+ * event without test metadata. Ensures newsletter view tracking still fires
+ * even if the AB framework never initialises.
+ */
+const AB_RESOLUTION_TIMEOUT_MS = 2000;
 
 interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	index: number;
@@ -46,8 +56,14 @@ export const EmailSignUpWrapper = ({
 	theme,
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
+	const abTests = useAB();
 	const isSignedIn = useIsSignedIn();
 	const isSubscribed = useNewsletterSubscription(listId, idApiUrl);
+	const isABResolved = abTests !== undefined;
+	const previewVariant =
+		abTests?.getParticipations()[NEWSLETTER_PREVIEW_AB_TEST_NAME];
+	const abTest = resolveNewsletterPreviewAbTest(previewVariant);
+	const enablePreview = !isWithoutPreviewVariant(previewVariant);
 
 	const componentId =
 		NEWSLETTER_SIGNUP_COMPONENT_ID.inArticleSignupForm(identityName);
@@ -67,17 +83,44 @@ export const EmailSignUpWrapper = ({
 		if (viewFiredRef.current) {
 			return;
 		}
-		viewFiredRef.current = true;
-		sendNewsletterSignupEvent({
-			action: 'VIEW',
-			identityName,
-			componentId,
-			renderingTarget,
-			value: {
-				eventDescription: 'newsletter-signup-viewed',
-			},
-		});
-	}, [componentId, identityName, isSubscribed, renderingTarget]);
+
+		const fireView = () => {
+			if (viewFiredRef.current) {
+				return;
+			}
+			viewFiredRef.current = true;
+			sendNewsletterSignupEvent({
+				action: 'VIEW',
+				identityName,
+				componentId,
+				renderingTarget,
+				abTest,
+				value: {
+					eventDescription: 'newsletter-signup-viewed',
+				},
+			});
+		};
+
+		// When the AB framework has resolved, fire immediately with the test
+		// metadata attached. Otherwise wait briefly for it to resolve so we can
+		// attribute the view to the correct arm — but never block the VIEW event
+		// indefinitely: the AB framework can fail to initialise, and newsletter
+		// tracking must continue to work regardless.
+		if (isABResolved) {
+			fireView();
+			return;
+		}
+
+		const timeoutId = setTimeout(fireView, AB_RESOLUTION_TIMEOUT_MS);
+		return () => clearTimeout(timeoutId);
+	}, [
+		abTest,
+		componentId,
+		identityName,
+		isABResolved,
+		isSubscribed,
+		renderingTarget,
+	]);
 
 	return (
 		<InlineSkipToWrapper
@@ -94,6 +137,8 @@ export const EmailSignUpWrapper = ({
 				category={category}
 				exampleUrl={exampleUrl}
 				renderingTarget={renderingTarget}
+				abTest={abTest}
+				enablePreview={enablePreview}
 				isSignedIn={isSignedIn}
 			>
 				{(previewAction) => (
@@ -104,6 +149,7 @@ export const EmailSignUpWrapper = ({
 							frequency={frequency}
 							previewAction={previewAction}
 							componentId={componentId}
+							abTest={abTest}
 							isAlreadySubscribed={isSubscribed}
 						/>
 					</Island>

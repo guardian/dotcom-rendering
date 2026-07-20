@@ -18,6 +18,7 @@ export const FootballMatchInfoPage = ({
 	edition,
 	matchHeaderUrl,
 	renderingTarget,
+	baseUrl,
 	table,
 }: {
 	matchStats: FootballMatchStats;
@@ -26,6 +27,7 @@ export const FootballMatchInfoPage = ({
 	edition: EditionId;
 	matchHeaderUrl: URL;
 	renderingTarget: RenderingTarget;
+	baseUrl: string;
 	table?: FootballTableSummary;
 }) => {
 	return (
@@ -45,6 +47,7 @@ export const FootballMatchInfoPage = ({
 					edition={edition}
 					matchHeaderURL={matchHeaderUrl.href}
 					renderingTarget={renderingTarget}
+					baseUrl={baseUrl}
 				/>
 			</Island>
 			<div css={bodyGridStyles}>

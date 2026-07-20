@@ -1959,6 +1959,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
     "EcsService81FC6EF6": {
       "DependsOn": [
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
+        "ListenerTagpagerenderingDeterministicRouteToEc2Rule1C5C95A4",
+        "ListenerTagpagerenderingDeterministicRouteToEcsRuleAB05C756",
         "ListenerTagpagerendering92E57078",
       ],
       "Properties": {
@@ -2849,6 +2851,62 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
     },
+    "ListenerTagpagerenderingDeterministicRouteToEc2Rule1C5C95A4": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "TargetGroupTagpagerendering42E428EE",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "http-header",
+            "HttpHeaderConfig": {
+              "HttpHeaderName": "X-Gu-Target-Group",
+              "Values": [
+                "ec2",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "ListenerTagpagerendering92E57078",
+        },
+        "Priority": 10,
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "ListenerTagpagerenderingDeterministicRouteToEcsRuleAB05C756": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "EcsTargetGroupTagpagerendering06213654",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "http-header",
+            "HttpHeaderConfig": {
+              "HttpHeaderName": "X-Gu-Target-Group",
+              "Values": [
+                "ecs",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "ListenerTagpagerendering92E57078",
+        },
+        "Priority": 11,
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
     "LoadBalancerDNS": {
       "Properties": {
         "Name": "tag-page-rendering.code.dev-guardianapis.com",
@@ -3358,6 +3416,12 @@ systemctl start tag-page-rendering",
     },
     "tagpagerenderingEcsClusterE7696595": {
       "Properties": {
+        "ClusterSettings": [
+          {
+            "Name": "containerInsights",
+            "Value": "enhanced",
+          },
+        ],
         "Tags": [
           {
             "Key": "gu:cdk:version",
