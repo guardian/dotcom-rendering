@@ -1,6 +1,6 @@
 // @ts-check
 const path = require('node:path');
-const bodyParser = require('body-parser');
+const express = require('express');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const { dim, reset, blue, underline } = require('../../scripts/log');
 
@@ -52,7 +52,7 @@ module.exports = {
 			// with webpack-dev-middleware, so here we add some other middlewares
 			// of our own
 
-			devServer.app.use(bodyParser.json({ limit: '10mb' }));
+			devServer.app.use(express.json({ limit: '10mb' }));
 
 			devServer.app.get('/', (req, res) => {
 				res.sendFile(

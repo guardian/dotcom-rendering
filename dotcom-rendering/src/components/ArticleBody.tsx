@@ -18,7 +18,7 @@ import { revealStyles } from '../lib/revealStyles';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette as themePalette } from '../palette';
 import type { Block } from '../types/blocks';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
@@ -49,7 +49,6 @@ type Props = {
 	isDev: boolean;
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
-	abTests: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
 	isRightToLeftLang?: boolean;
@@ -139,7 +138,6 @@ export const ArticleBody = ({
 	onFirstPage = false,
 	keyEvents = [],
 	keywordIds,
-	abTests,
 	tableOfContents,
 	lang,
 	isRightToLeftLang = false,
@@ -203,7 +201,6 @@ export const ArticleBody = ({
 					pageId={pageId}
 					webTitle={webTitle}
 					ajaxUrl={ajaxUrl}
-					abTests={abTests}
 					switches={switches}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
@@ -265,7 +262,6 @@ export const ArticleBody = ({
 					isDev={isDev}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					editionId={editionId}
 					contributionsServiceUrl={contributionsServiceUrl}
 					shouldHideAds={shouldHideAds}

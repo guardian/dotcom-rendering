@@ -4,7 +4,7 @@ import { useConfig } from '../components/ConfigContext';
 import { FeastContextualNudge } from '../components/FeastContextualNudge.island';
 import { Island } from '../components/Island';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { FEElement, RecipeBlockElement } from '../types/content';
 import type { TagType } from '../types/tag';
 import { spacefinderAdStyles } from './adStyles';
@@ -35,7 +35,6 @@ type Props = {
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	editionId: EditionId;
 	contributionsServiceUrl: string;
 	shouldHideAds: boolean;
@@ -59,7 +58,6 @@ export const ArticleRenderer = ({
 	isAdFreeUser,
 	isSensitive,
 	isDev,
-	abTests,
 	editionId,
 	contributionsServiceUrl,
 	shouldHideAds,
@@ -87,7 +85,6 @@ export const ArticleRenderer = ({
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				switches={switches}
-				abTests={abTests}
 				editionId={editionId}
 				totalElements={length}
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}

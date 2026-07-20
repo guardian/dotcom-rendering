@@ -35,11 +35,17 @@ const getForcedVariant = (type: ModuleType): string | null => {
 	return params.get(`force-${type}`);
 };
 
+const getPreviewVariant = (type: ModuleType): string | null => {
+	const params = new URLSearchParams(window.location.search);
+	return params.get(`preview-${type}`);
+};
+
 type Payload = EpicPayload | BannerPayload | HeaderPayload | GutterPayload;
 
 const buildSDCUrl = (baseUrl: string, type: ModuleType): string => {
 	const deviceClass = getDeviceClass();
 	const forcedVariant = getForcedVariant(type);
+	const previewVariant = getPreviewVariant(type);
 
 	const queryParams = new URLSearchParams();
 	if (deviceClass) {
@@ -47,6 +53,9 @@ const buildSDCUrl = (baseUrl: string, type: ModuleType): string => {
 	}
 	if (forcedVariant) {
 		queryParams.set('force', forcedVariant);
+	}
+	if (previewVariant) {
+		queryParams.set('preview', previewVariant);
 	}
 
 	const queryString = queryParams.toString();

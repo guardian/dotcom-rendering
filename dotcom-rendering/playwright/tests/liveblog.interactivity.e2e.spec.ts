@@ -123,6 +123,8 @@ test.describe('Liveblogs', () => {
 	test('should enhance tweets after they have been inserted', async ({
 		page,
 	}) => {
+		await page.clock.install();
+
 		await loadPage({
 			page,
 			path: `/Article/${blogUrl}`,
@@ -154,9 +156,10 @@ test.describe('Liveblogs', () => {
 
 		const twitterIframe = getIframeBody(page, tweetIframeSelector);
 
+		await page.clock.runFor(20_000);
+
 		await expect(await twitterIframe).toContainText(
 			'Don’t believe the spin. Once you break through typical Washington math',
-			{ timeout: 20000 },
 		);
 	});
 
@@ -248,6 +251,8 @@ test.describe('Liveblogs', () => {
 	test('should initially hide new blocks, only revealing them when the top of blog is in view', async ({
 		page,
 	}) => {
+		await page.clock.install();
+
 		await loadPage({
 			page,
 			path: `/Article/${blogUrl}`,
@@ -284,9 +289,10 @@ test.describe('Liveblogs', () => {
 
 		const twitterIframe = getIframeBody(page, tweetIframeSelector);
 
+		await page.clock.runFor(20_000);
+
 		await expect(await twitterIframe).toContainText(
 			'Don’t believe the spin. Once you break through typical Washington math',
-			{ timeout: 20000 },
 		);
 	});
 
@@ -295,44 +301,42 @@ test.describe('Liveblogs', () => {
 	}) => {
 		const update1ResponsePromise = stubResponse(
 			page,
-			/england-cricket-team\.json/,
+			/england-women-cricket-team\.json/,
 			{
 				status: 200,
-				json: {
-					scorecardUrl: '/test',
-					match: match1,
-				},
+				json: match1,
 			},
 		);
 
+		await page.clock.install();
+
 		await loadPage({
 			page,
-			path: `/Article/https://theguardian.com/sport/live/2022/mar/27/west-indies-v-england-third-test-day-four-live`,
+			path: `/Article/https://www.theguardian.com/sport/live/2026/jul/12/england-v-india-womens-test-day-three-updates-cricket-live`,
 			queryParams: {
 				live: 'true',
 			},
 		});
-		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
+
+		await waitForIsland(page, 'CricketMatchHeaderWrapper', {
+			waitFor: 'attached',
+		});
 
 		await update1ResponsePromise;
 
-		await expect(page.getByText('297 & 28 - 0 (4.5 overs)')).toBeVisible();
-
 		await expect(
-			page.getByText('204 & 120 all out (64.2 overs)'),
+			page.getByLabel('341 runs, 7 wickets fallen'),
 		).toBeVisible();
 
-		await stubResponse(page, /england-cricket-team\.json/, {
+		await stubResponse(page, /england-women-cricket-team\.json/, {
 			status: 200,
-			json: {
-				scorecardUrl: '/test',
-				match: match2,
-			},
+			json: match2,
 		});
 
-		// The cricket data is updated every 14 seconds, so we need a longer timeout here
-		await expect(page.getByText('297 & 104 - 3 (25 overs)')).toBeVisible({
-			timeout: 30000,
-		});
+		await page.clock.runFor(60_000);
+
+		await expect(
+			page.getByLabel('130 runs, 6 wickets fallen'),
+		).toBeVisible();
 	});
 });

@@ -1,12 +1,21 @@
 import '@testing-library/jest-dom';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { newsletterSignupCard } from '../../../../fixtures/manual/highlights-trails';
+import { sendNewsletterSignupEvent } from '../../../lib/newsletterSignupTracking';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import { ConfigProvider } from '../../ConfigContext';
 import { HighlightsNewsletterSignupModal } from './HighlightsNewsletterSignupModal';
 
 // Only mock what cannot run in jsdom: the signup form (reCAPTCHA, identity
 // API) and the subscription hook (network + auth).
+
+jest.mock('../../../lib/newsletterSignupTracking', () => ({
+	sendNewsletterSignupEvent: jest.fn(),
+	NEWSLETTER_SIGNUP_COMPONENT_ID: {
+		highlightsCard: (id: string) => `highlights-card-${id}`,
+		highlightsModal: (id: string) => `highlights-modal-${id}`,
+	},
+}));
 
 jest.mock('../../../lib/useNewsletterSubscription', () => ({
 	useNewsletterSubscription: jest.fn(),
@@ -29,6 +38,8 @@ const mockUseNewsletterSubscription =
 	>;
 
 const newsletter = newsletterSignupCard.newsletterData!;
+// Mirrors the mock factory above
+const componentId = `highlights-card-${newsletter.identityName}`;
 
 const renderModal = (onClose = jest.fn()) =>
 	render(
@@ -43,6 +54,8 @@ const renderModal = (onClose = jest.fn()) =>
 			<HighlightsNewsletterSignupModal
 				newsletter={newsletter}
 				onClose={onClose}
+				renderingTarget="Web"
+				componentId={componentId}
 			/>
 		</ConfigProvider>,
 	);
@@ -56,6 +69,20 @@ describe('HighlightsNewsletterSignupModal', () => {
 
 	afterEach(() => {
 		jest.useRealTimers();
+	});
+
+	it('fires a VIEW event on mount with the correct identifiers', () => {
+		renderModal();
+
+		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
+			expect.objectContaining({
+				action: 'VIEW',
+				identityName: newsletter.identityName,
+				componentId,
+				renderingTarget: 'Web',
+				value: { eventDescription: 'highlights-card-modal-viewed' },
+			}),
+		);
 	});
 
 	it('renders a labelled dialog with the newsletter name', () => {

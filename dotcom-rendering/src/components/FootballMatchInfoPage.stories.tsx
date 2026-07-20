@@ -40,5 +40,6 @@ export const FootballMatchInfoPage = meta.story({
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
 		),
 		renderingTarget: 'Web',
+		baseUrl: 'https://www.theguardian.com',
 	},
 });

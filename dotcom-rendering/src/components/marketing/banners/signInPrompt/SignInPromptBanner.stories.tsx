@@ -25,11 +25,12 @@ const baseArgs = {
 		secondaryCta: {
 			type: SecondaryCtaType.Custom,
 			cta: {
-				baseUrl: '',
+				baseUrl: 'https://theguardian.com',
 				text: 'Not now',
 			},
 		},
 	},
+	submitComponentEvent: async () => Promise.resolve(),
 };
 
 const meta = preview.meta({
@@ -38,5 +39,7 @@ const meta = preview.meta({
 	render: (args) => <SignInPromptBanner {...args} />,
 	args: baseArgs,
 });
+
+export default meta;
 
 export const Default = meta.story();

@@ -103,7 +103,6 @@ window.twttr = (function(d, s, id) {
 		ajaxUrl: frontendData.config.ajaxUrl,
 		googletagUrl: frontendData.config.googletagUrl,
 		switches: frontendData.config.switches,
-		abTests: frontendData.config.abTests,
 		serverSideABTests: frontendData.config.serverSideABTests,
 		isPaidContent: frontendData.pageType.isPaidContent,
 		contentType: frontendData.contentType,
@@ -157,7 +156,6 @@ export const renderAppsBlocks = ({
 	section,
 	switches,
 	keywordIds,
-	abTests = {},
 	edition,
 	shouldHideAds,
 }: FEBlocksRequest): string => {
@@ -183,7 +181,6 @@ export const renderAppsBlocks = ({
 				ajaxUrl={ajaxUrl}
 				isSensitive={isSensitive}
 				isAdFreeUser={isAdFreeUser}
-				abTests={abTests}
 				switches={switches}
 				isLiveUpdate={true}
 				sectionId={section}
@@ -287,7 +284,6 @@ window.twttr = (function(d, s, id) {
 		ajaxUrl: frontendData.config.ajaxUrl,
 		googletagUrl: frontendData.config.googletagUrl,
 		switches: frontendData.config.switches,
-		abTests: frontendData.config.abTests,
 		serverSideABTests: frontendData.config.serverSideABTests,
 		isPaidContent: frontendData.pageType.isPaidContent,
 		contentType: frontendData.contentType,

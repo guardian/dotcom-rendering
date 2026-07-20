@@ -72,7 +72,6 @@ export const FrontPage = ({ front, NAV }: Props) => {
 					commercialMetricsEnabled={
 						!!front.config.switches.commercialMetrics
 					}
-					tests={front.config.abTests}
 				/>
 			</Island>
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
@@ -92,10 +91,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
-			{isGoogleOneTapEnabled(
-				front.config.abTests,
-				front.config.switches,
-			) && (
+			{isGoogleOneTapEnabled(front.config.switches) && (
 				<Island priority="enhancement" defer={{ until: 'idle' }}>
 					<GoogleOneTap />
 				</Island>

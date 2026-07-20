@@ -1,5 +1,7 @@
 name: 🦕 Deno health
 on:
+  merge_group:
+    types: [checks_requested]
   pull_request:
     paths:
       - 'scripts/deno/**'

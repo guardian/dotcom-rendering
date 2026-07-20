@@ -2571,7 +2571,12 @@ const cardMediaBackgroundDark: PaletteFunction = () =>
 const cardMediaWaveformLight: PaletteFunction = () => sourcePalette.neutral[86];
 const cardMediaWaveformDark: PaletteFunction = () => sourcePalette.neutral[38];
 
-const cardHeadlineTextLight: PaletteFunction = () => sourcePalette.neutral[7];
+const cardHeadlineTextLight: PaletteFunction = (format) => {
+	if (format.design === ArticleDesign.HostedGallery) {
+		return sourcePalette.neutral[97];
+	}
+	return sourcePalette.neutral[7];
+};
 
 const cardTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
@@ -5795,6 +5800,15 @@ const discussionLoadingShimmerLight: PaletteFunction = () =>
 const discussionLoadingShimmerDark: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 
+const onwardTextLight: PaletteFunction = (format) => {
+	if (format.design === ArticleDesign.HostedGallery) {
+		return sourcePalette.neutral[86];
+	}
+	return sourcePalette.neutral[7];
+};
+
+const onwardTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+
 const paginationTextLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -6266,18 +6280,6 @@ const designTagBackground: PaletteFunction = ({ theme }) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[100];
 	}
-};
-
-const cricketScoreboardBorderTop: PaletteFunction = () => {
-	return sourcePalette.sport[300];
-};
-
-const cricketScoreboardDivider: PaletteFunction = () => {
-	return sourcePalette.neutral[86];
-};
-
-const cricketScoreboardLinkText: PaletteFunction = () => {
-	return sourcePalette.sport[300];
 };
 
 const imageTitleBackground: PaletteFunction = ({ design, theme }) => {
@@ -6959,18 +6961,6 @@ const paletteColours = {
 		light: commentFormInputBackgroundLight,
 		dark: commentFormInputBackgroundDark,
 	},
-	'--cricket-scoreboard-border-top': {
-		light: cricketScoreboardBorderTop,
-		dark: cricketScoreboardBorderTop,
-	},
-	'--cricket-scoreboard-divider': {
-		light: cricketScoreboardDivider,
-		dark: cricketScoreboardDivider,
-	},
-	'--cricket-scoreboard-link-text': {
-		light: cricketScoreboardLinkText,
-		dark: cricketScoreboardLinkText,
-	},
 	'--cricket-scorecard-divider': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
@@ -7488,10 +7478,6 @@ const paletteColours = {
 		light: highlightContainerStartLight,
 		dark: highlightContainerStartDark,
 	},
-	'--hosted-content-onwards-heading': {
-		light: () => sourcePalette.neutral[7],
-		dark: () => sourcePalette.neutral[86],
-	},
 	'--image-title-background': {
 		light: imageTitleBackground,
 		dark: imageTitleBackground,
@@ -7841,8 +7827,8 @@ const paletteColours = {
 		dark: () => sourcePalette.neutral[20],
 	},
 	'--onward-text': {
-		light: () => sourcePalette.neutral[7],
-		dark: () => sourcePalette.neutral[86],
+		light: onwardTextLight,
+		dark: onwardTextDark,
 	},
 	'--pagination-text': {
 		light: paginationTextLight,

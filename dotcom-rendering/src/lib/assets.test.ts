@@ -97,15 +97,7 @@ describe('getPathFromManifest', () => {
 
 describe('getModulesBuild', () => {
 	it('should default to web', () => {
-		const build = getModulesBuild({ tests: {}, switches: {} });
-		expect(build).toBe('client.web');
-	});
-
-	it('should support variant build when in test, if enabled', () => {
-		const build = getModulesBuild({
-			tests: { dcrJavascriptBundleVariant: 'variant' },
-			switches: {},
-		});
+		const build = getModulesBuild();
 		const expected = BUILD_VARIANT ? 'client.web.variant' : 'client.web';
 		expect(build).toBe(expected);
 	});

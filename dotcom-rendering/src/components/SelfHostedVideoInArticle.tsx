@@ -41,6 +41,7 @@ export const SelfHostedVideoInArticle = ({
 		element.duration,
 	);
 	const aspectRatio = getAspectRatioFromSources(sources);
+	const isVerticalVideo = aspectRatio < 1;
 	const firstVideoSource = sources[0];
 
 	if (!posterImageUrl) {
@@ -76,7 +77,9 @@ export const SelfHostedVideoInArticle = ({
 					isMainMedia={isMainMedia}
 					role={role}
 					preventAutoplay={videoStyle === 'Default'}
-					restrictHeightOnDesktop={!isInteractive(format.design)}
+					restrictHeightOnDesktop={
+						isVerticalVideo && !isInteractive(format.design)
+					}
 				/>
 			</Island>
 		</div>

@@ -75,7 +75,6 @@ const defaultProps = {
 	isDev: false,
 	isAdFreeUser: false,
 	isSensitive: false,
-	abTests: {},
 	editionId: 'UK' as const,
 	contributionsServiceUrl: 'https://contributions.test',
 	shouldHideAds: false,

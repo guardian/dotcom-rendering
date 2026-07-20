@@ -3,7 +3,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type {
 	MultiByline as MultiBylineModel,
 	StarRating,
@@ -17,7 +17,6 @@ interface MultiBylineProps {
 	pageId: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
@@ -47,7 +46,6 @@ export const MultiBylines = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
-	abTests,
 	editionId,
 	hideCaption,
 	starRating,
@@ -77,7 +75,6 @@ export const MultiBylines = ({
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
 							switches={switches}
-							abTests={abTests}
 							editionId={editionId}
 							hideCaption={hideCaption}
 							starRating={starRating}

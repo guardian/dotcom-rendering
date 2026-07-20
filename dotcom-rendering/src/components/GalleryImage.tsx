@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { grid } from '../grid';
-import { type ArticleFormat } from '../lib/articleFormat';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getImage } from '../lib/image';
 import { palette } from '../palette';
 import type { ImageBlockElement } from '../types/content';
@@ -47,6 +47,12 @@ const styles = css`
 	}
 `;
 
+const hostedGalleryOverrides = css`
+	${between.desktop.and.leftCol} {
+		${grid.centreRule(2, 'transparent')}
+	}
+`;
+
 const galleryBodyImageStyles = css`
 	display: inline;
 	position: relative;
@@ -87,7 +93,13 @@ export const GalleryImage = ({
 	}
 
 	return (
-		<figure css={styles}>
+		<figure
+			css={[
+				styles,
+				format.design === ArticleDesign.HostedGallery &&
+					hostedGalleryOverrides,
+			]}
+		>
 			<div
 				css={galleryBodyImageStyles}
 				/**

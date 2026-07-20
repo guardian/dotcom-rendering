@@ -48,10 +48,7 @@ Sentry.init({
 	// sampleRate: // We use Math.random in init.ts to sample errors
 });
 
-if (
-	BUILD_VARIANT &&
-	window.guardian.config.tests[dcrJavascriptBundle('Variant')] === 'variant'
-) {
+if (BUILD_VARIANT) {
 	Sentry.setTag('dcr.bundle', dcrJavascriptBundle('Variant'));
 }
 

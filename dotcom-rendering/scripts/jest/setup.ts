@@ -17,7 +17,6 @@ const windowGuardianConfig = {
 		browserId: 'jest-browser-id',
 		pageViewId: 'jest-page-view-id',
 	},
-	tests: {},
 	switches: {},
 } as Guardian['config'];
 

@@ -11,6 +11,14 @@ export type CricketScorecardTabProps = Pick<
 	'innings' | 'officials' | 'homeTeam' | 'awayTeam' | 'result'
 >;
 
+// this is needed to override global style
+// html:not(.src-focus-disabled) *:focus
+const disableFocusShadow = css({
+	'&&:focus': {
+		boxShadow: 'none',
+	},
+});
+
 export const CricketScorecardTab = ({
 	innings,
 	officials,
@@ -30,7 +38,7 @@ export const CricketScorecardTab = ({
 	return (
 		<div
 			ref={regionRef}
-			css={bodyGridStyles}
+			css={[bodyGridStyles, disableFocusShadow]}
 			aria-label="Cricket scorecard"
 			role="region"
 			tabIndex={-1}

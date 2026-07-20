@@ -79,16 +79,13 @@ describe('Enhance Cards', () => {
 
 	describe('getActiveMediaAtom', () => {
 		it('returns only SelfHostedVideo if the first asset is a self-hosted video', () => {
-			const videoReplace = true;
 			const mediaAtom = {
 				...testMediaAtom,
 				assets: [testMp4Asset, testYoutubeAsset],
 			};
 			const cardTrailImage = '';
 
-			expect(
-				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
-			).toEqual({
+			expect(getActiveMediaAtom(mediaAtom, cardTrailImage)).toEqual({
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
@@ -112,16 +109,13 @@ describe('Enhance Cards', () => {
 		});
 
 		it('returns only YoutubeVideo if the first asset is a YouTube video', () => {
-			const videoReplace = true;
 			const mediaAtom = {
 				...testMediaAtom,
 				assets: [testYoutubeAsset, testMp4Asset],
 			};
 			const cardTrailImage = '';
 
-			expect(
-				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
-			).toEqual({
+			expect(getActiveMediaAtom(mediaAtom, cardTrailImage)).toEqual({
 				type: 'YoutubeVideo',
 				id: 'atomID',
 				videoId: 'test-youtube-id',
@@ -137,7 +131,6 @@ describe('Enhance Cards', () => {
 		});
 
 		it('returns only one YoutubeVideo if there are multiple YouTube assets', () => {
-			const videoReplace = true;
 			const mediaAtom = {
 				...testMediaAtom,
 				assets: [
@@ -151,9 +144,7 @@ describe('Enhance Cards', () => {
 			};
 			const cardTrailImage = '';
 
-			expect(
-				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
-			).toEqual({
+			expect(getActiveMediaAtom(mediaAtom, cardTrailImage)).toEqual({
 				type: 'YoutubeVideo',
 				id: 'atomID',
 				videoId: 'test-youtube-id',
@@ -169,7 +160,6 @@ describe('Enhance Cards', () => {
 		});
 
 		it('prioritises MP4 assets over m3u8 assets', () => {
-			const videoReplace = true;
 			const mediaAtom = {
 				...testMediaAtom,
 				assets: [
@@ -181,9 +171,7 @@ describe('Enhance Cards', () => {
 			};
 			const cardTrailImage = '';
 
-			expect(
-				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
-			).toEqual({
+			expect(getActiveMediaAtom(mediaAtom, cardTrailImage)).toEqual({
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
@@ -228,16 +216,13 @@ describe('Enhance Cards', () => {
 		});
 
 		it('filters out non-video assets', () => {
-			const videoReplace = true;
 			const mediaAtom: FEMediaAtom = {
 				...testMediaAtom,
 				assets: [testSubtitleAsset, testM3u8Asset, testMp4Asset],
 			};
 			const cardTrailImage = '';
 
-			expect(
-				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
-			).toEqual({
+			expect(getActiveMediaAtom(mediaAtom, cardTrailImage)).toEqual({
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
@@ -470,7 +455,7 @@ describe('Enhance Cards', () => {
 
 	describe('decideReplacementMedia', () => {
 		it('returns undefined if a mediaAtom is not provided', () => {
-			expect(decideReplacementMedia()).toEqual(undefined);
+			expect(decideReplacementMedia(true, true)).toEqual(undefined);
 		});
 
 		it('returns undefined if a mediaAtom is provided but showMainVideo and videoReplace are both false', () => {
@@ -479,7 +464,7 @@ describe('Enhance Cards', () => {
 			const videoReplace = false;
 
 			expect(
-				decideReplacementMedia(showMainVideo, mediaAtom, videoReplace),
+				decideReplacementMedia(showMainVideo, videoReplace, mediaAtom),
 			).toEqual(undefined);
 		});
 
@@ -489,7 +474,7 @@ describe('Enhance Cards', () => {
 			const videoReplace = false;
 
 			expect(
-				decideReplacementMedia(showMainVideo, mediaAtom, videoReplace),
+				decideReplacementMedia(showMainVideo, videoReplace, mediaAtom),
 			).toEqual({
 				atomId: 'atomID',
 				duration: 15,
@@ -518,7 +503,7 @@ describe('Enhance Cards', () => {
 			const videoReplace = true;
 
 			expect(
-				decideReplacementMedia(showMainVideo, mediaAtom, videoReplace),
+				decideReplacementMedia(showMainVideo, videoReplace, mediaAtom),
 			).toEqual({
 				type: 'SelfHostedVideo',
 				atomId: 'atomID',

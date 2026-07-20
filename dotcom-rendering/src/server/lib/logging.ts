@@ -4,19 +4,11 @@ import type { Configuration, Layout, LoggingEvent } from 'log4js';
 import { addLayout, configure, getLogger, shutdown } from 'log4js';
 import { type DCRLoggingStore, loggingStore } from './logging-store';
 
-const logName = `dotcom-rendering.log`;
-
-const logLocation =
-	process.env.NODE_ENV === 'production' &&
-	!process.env.DISABLE_LOGGING_AND_METRICS
-		? `/var/log/dotcom-rendering/${logName}`
-		: `${path.resolve('logs')}/${logName}`;
-
 type LogFields = Partial<DCRLoggingStore> &
 	Record<string | number | symbol, unknown>;
 
 const logFields = (logEvent: LoggingEvent): LogFields => {
-	const { request, requestId, abTests } = loggingStore.getStore() ?? {
+	const { request, requestId } = loggingStore.getStore() ?? {
 		request: { pageId: 'outside-request-context' },
 	};
 
@@ -31,7 +23,6 @@ const logFields = (logEvent: LoggingEvent): LogFields => {
 		level: logEvent.level.levelStr,
 		request,
 		requestId,
-		abTests,
 	};
 	// log4js uses any[] to type data but we want to coerce it here
 	// because we now depend on the type to log the result properly
@@ -85,38 +76,69 @@ const disableLog4js: Configuration = {
 	},
 };
 
-const enableLog4js: Configuration = {
-	appenders: {
-		console: {
-			type: 'console',
-			layout: consoleLayout,
+function configureLog4jsEC2() {
+	const logName = `dotcom-rendering.log`;
+
+	const logLocation =
+		process.env.NODE_ENV === 'production' &&
+		!process.env.DISABLE_LOGGING_AND_METRICS
+			? `/var/log/dotcom-rendering/${logName}`
+			: `${path.resolve('logs')}/${logName}`;
+
+	configure({
+		appenders: {
+			console: {
+				type: 'console',
+				layout: consoleLayout,
+			},
+			fileAppender: {
+				type: 'file',
+				filename: logLocation,
+				maxLogSize: '5M',
+				backups: 5,
+				compress: true,
+				layout: { type: 'json', separator: ',' },
+				// Owner Read & Write, Group Read
+				mode: 0o640,
+			},
+			out: {
+				type: 'stdout',
+				layout: { type: 'json', separator: ',' },
+			},
 		},
-		fileAppender: {
-			type: 'file',
-			filename: logLocation,
-			maxLogSize: '5M',
-			backups: 5,
-			compress: true,
-			layout: { type: 'json', separator: ',' },
-			// Owner Read & Write, Group Read
-			mode: 0o640,
+		categories: {
+			default: { appenders: ['out'], level: 'off' },
+			production: { appenders: ['out', 'fileAppender'], level: 'info' },
+			code: { appenders: ['out', 'fileAppender'], level: 'debug' },
+			development: { appenders: ['console'], level: 'debug' },
 		},
-		out: {
-			type: 'stdout',
-			layout: { type: 'json', separator: ',' },
+		// log4js cluster mode handling does not work as it prevents
+		// logs from processes other than the main process from
+		// writing to the log.
+		disableClustering: true,
+	});
+}
+
+function configureLog4jsECS() {
+	configure({
+		appenders: {
+			out: {
+				type: 'stdout',
+				layout: { type: 'json', separator: ',' },
+			},
 		},
-	},
-	categories: {
-		default: { appenders: ['out'], level: 'off' },
-		production: { appenders: ['out', 'fileAppender'], level: 'info' },
-		code: { appenders: ['out', 'fileAppender'], level: 'debug' },
-		development: { appenders: ['console'], level: 'debug' },
-	},
-	// log4js cluster mode handling does not work as it prevents
-	// logs from processes other than the main process from
-	// writing to the log.
-	disableClustering: true,
-};
+		categories: {
+			default: { appenders: ['out'], level: 'info' },
+			production: { appenders: ['out'], level: 'info' },
+			code: { appenders: ['out'], level: 'debug' },
+			development: { appenders: ['out'], level: 'debug' },
+		},
+		// log4js cluster mode handling does not work as it prevents
+		// logs from processes other than the main process from
+		// writing to the log.
+		disableClustering: true,
+	});
+}
 
 // We do this to ensure no memory leaks during development as hot reloading
 // doesn't clear up old listeners.
@@ -132,7 +154,15 @@ if (process.env.NODE_ENV === 'development') {
 if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
 	configure(disableLog4js);
 } else {
-	configure(enableLog4js);
+	// See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-environment-variables.html
+	const runningInECS =
+		process.env.AWS_EXECUTION_ENV?.startsWith('AWS_ECS_') === true;
+
+	if (runningInECS) {
+		configureLog4jsECS();
+	} else {
+		configureLog4jsEC2();
+	}
 }
 
 const getLoggerCategory = (): string => {

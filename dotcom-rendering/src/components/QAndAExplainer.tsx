@@ -4,7 +4,7 @@ import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type {
 	QAndAExplainer as QAndAExplainerModel,
 	StarRating,
@@ -19,7 +19,6 @@ interface Props {
 	pageId: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
@@ -45,7 +44,6 @@ export const QAndAExplainer = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
-	abTests,
 	editionId,
 	hideCaption,
 	starRating,
@@ -76,7 +74,6 @@ export const QAndAExplainer = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					switches={switches}
-					abTests={abTests}
 					editionId={editionId}
 					hideCaption={hideCaption}
 					starRating={starRating}

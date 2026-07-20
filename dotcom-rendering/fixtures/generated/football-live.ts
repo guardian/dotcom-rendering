@@ -1048,9 +1048,6 @@ export const footballData: FEFootballMatchListPage = {
 			europeBetaFront: true,
 			prebidBidCache: true,
 		},
-		abTests: {
-			europeBetaFrontTest2Variant: 'variant',
-		},
 		serverSideABTests: {},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		stage: 'PROD',

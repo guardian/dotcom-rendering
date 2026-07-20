@@ -4,7 +4,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { Block } from '../types/blocks';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import { Island } from './Island';
 import { LastUpdated } from './LastUpdated';
 import { LiveBlockContainer } from './LiveBlockContainer';
@@ -19,7 +19,6 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	isLiveUpdate?: boolean;
 	isPinnedPost: boolean;
@@ -39,7 +38,6 @@ export const LiveBlock = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
-	abTests,
 	switches,
 	isLiveUpdate,
 	isPinnedPost,
@@ -89,7 +87,6 @@ export const LiveBlock = ({
 					webTitle={webTitle}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					isPinnedPost={isPinnedPost}
 					editionId={editionId}

@@ -82,6 +82,7 @@ const SportsPage = ({
 					matchHeaderUrl={sportData.matchHeaderUrl}
 					table={sportData.group}
 					renderingTarget={renderingTarget}
+					baseUrl={sportData.guardianBaseURL}
 				/>
 			);
 	}

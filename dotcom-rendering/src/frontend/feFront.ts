@@ -1,7 +1,7 @@
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { EditionBranding } from '../types/branding';
-import type { ServerSideTests, StageType, Switches } from '../types/config';
+import type { StageType, Switches } from '../types/config';
 import type {
 	BoostLevel,
 	Image,
@@ -322,7 +322,6 @@ export type FECollection = {
 };
 
 export type FEFrontConfig = {
-	abTests: ServerSideTests;
 	adUnit: string;
 	ajaxUrl: string;
 	brazeApiKey?: string;

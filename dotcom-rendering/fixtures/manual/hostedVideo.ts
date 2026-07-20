@@ -326,7 +326,6 @@ export const hostedVideo: FEArticle = {
 			shouldLoadGoogletag: true,
 			inizio: true,
 		},
-		abTests: {},
 		serverSideABTests: {
 			'thefilter-at-a-glance-redesign-v2': 'stacked-default',
 		},
