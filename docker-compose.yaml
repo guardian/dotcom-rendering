@@ -70,6 +70,13 @@ services:
       - '8080:8080'
     volumes:
       - ./nginx-throttle.conf:/etc/nginx/nginx.conf:ro
+    command:
+      - /bin/sh
+      - -c
+      - |
+        apk add --no-cache iproute2 &&
+        tc qdisc add dev eth0 root tbf rate 8mbit burst 32kbit latency 50ms &&
+        nginx -g 'daemon off;'
 
   jaeger:
     image: jaegertracing/jaeger:2.6.0

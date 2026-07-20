@@ -77,9 +77,6 @@ importers:
       '@guardian/prettier':
         specifier: 10.0.0
         version: 10.0.0(prettier@3.8.3)(tslib@2.6.2)
-      '@opentelemetry/api':
-        specifier: 1.9.1
-        version: 1.9.1
       '@types/chai':
         specifier: 5.2.2
         version: 5.2.2
