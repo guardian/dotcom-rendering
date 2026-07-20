@@ -7,4 +7,5 @@ then
 fi
 
 cd ./$(dirname "$0")/../dotcom-rendering
+make lint-project
 make tsc
