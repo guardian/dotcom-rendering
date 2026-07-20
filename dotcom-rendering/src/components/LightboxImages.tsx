@@ -287,7 +287,10 @@ export const LightboxImages = ({
 								)}
 
 								{!!image.productCtas?.length && (
-									<div css={productCtasStyles}>
+									<div
+										css={productCtasStyles}
+										data-component="product-lightbox-link"
+									>
 										<ProductCardButtons
 											productCtas={image.productCtas}
 											xCustComponentId="lightbox"
