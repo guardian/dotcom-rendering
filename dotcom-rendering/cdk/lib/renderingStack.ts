@@ -243,8 +243,6 @@ export class RenderingCDKStack extends CDKStack {
 					actions: [
 						'xray:PutTraceSegments',
 						'xray:PutTelemetryRecords',
-						'xray:GetSamplingRules',
-						'xray:GetSamplingTargets',
 					],
 					resources: ['*'],
 				}),
@@ -326,7 +324,7 @@ export class RenderingCDKStack extends CDKStack {
 			// traces from the app and forward them to AWS X-Ray.
 			app.ecsService?.taskDefinition.addContainer('adot-collector', {
 				image: ContainerImage.fromRegistry(
-					'public.ecr.aws/aws-observability/aws-otel-collector:latest',
+					'public.ecr.aws/aws-observability/aws-otel-collector:v0.49.0',
 				),
 				command: ['--config=/etc/ecs/ecs-default-config.yaml'],
 				logging: LogDrivers.awsLogs({

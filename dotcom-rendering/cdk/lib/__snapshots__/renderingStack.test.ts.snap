@@ -199,8 +199,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
               "Action": [
                 "xray:PutTraceSegments",
                 "xray:PutTelemetryRecords",
-                "xray:GetSamplingRules",
-                "xray:GetSamplingTargets",
               ],
               "Effect": "Allow",
               "Resource": "*",
@@ -1859,8 +1857,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
               "Action": [
                 "xray:PutTraceSegments",
                 "xray:PutTelemetryRecords",
-                "xray:GetSamplingRules",
-                "xray:GetSamplingTargets",
               ],
               "Effect": "Allow",
               "Resource": "*",
@@ -2315,7 +2311,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             ],
             "Cpu": 256,
             "Essential": true,
-            "Image": "public.ecr.aws/aws-observability/aws-otel-collector:latest",
+            "Image": "public.ecr.aws/aws-observability/aws-otel-collector:v0.49.0",
             "LogConfiguration": {
               "LogDriver": "awslogs",
               "Options": {
