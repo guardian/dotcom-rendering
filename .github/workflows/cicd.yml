@@ -1,6 +1,8 @@
 name: DCR CICD
 
 on:
+  merge_group:
+    types: [checks_requested]
   push:
 
 jobs:
@@ -41,6 +43,7 @@ jobs:
       contents: read
       pull-requests: write # required by riff-raff action
     needs: [container, prettier, jest, lint, playwright]
+    if: github.event_name == 'push' # We don't need a riff-raff deployment for merge_group events
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}

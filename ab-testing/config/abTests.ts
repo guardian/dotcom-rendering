@@ -32,19 +32,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-mobile-inline1-halfpage",
-		description:
-			"To measure impact (RPM) and CLS of adding halfPage as an additional size option to mobile inline1 ad slot",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2026-02-28`,
-		type: "client",
-		status: "OFF",
-		audienceSize: 20 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "growth-holdback-group",
 		description:
 			"Test for 5% holdback group that does not qualify for any testing so long as the test is live in the RRCP",
@@ -106,19 +93,6 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
-		name: "commercial-full-width-hold-back",
-		description:
-			"Test to measure impact of adding full width to spacefinder",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-07-14",
-		type: "client",
-		status: "ON",
-		audienceSize: 5 / 100,
-		audienceSpace: "A",
-		groups: ["holdback", "control"],
 		shouldForceMetricsCollection: true,
 	},
 	{
@@ -194,6 +168,19 @@ const ABTests: ABTest[] = [
 		audienceSize: 1,
 		audienceSpace: "B",
 		groups: ["control", "variant-1"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "webx-monitor-group-contamination",
+		description:
+			"Test to measure the impact of contamination between groups in ab tests",
+		owners: ["dotcom.platform@theguardian.com"],
+		status: "ON",
+		expirationDate: "2026-08-31",
+		type: "client",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
 ];
