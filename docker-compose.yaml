@@ -57,6 +57,20 @@ services:
     command: |
       curl -X POST http://tag-page-rendering:9000/TagPage -d @/data/tag-page-payload.json -H "Content-Type: application/json"
 
+  # Bandwidth-throttling reverse proxy to simulate AWS network conditions.
+  # Send requests to port 8080 instead of 9000 to test with throttled body upload.
+  throttle-proxy:
+    image: nginx:alpine
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      tag-page-rendering:
+        condition: service_healthy
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./nginx-throttle.conf:/etc/nginx/nginx.conf:ro
+
   jaeger:
     image: jaegertracing/jaeger:2.6.0
     ports:

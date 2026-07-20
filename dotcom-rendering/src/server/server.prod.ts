@@ -31,13 +31,14 @@ import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
+import { tracedBodyParser } from './traced-body-parser';
 
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
 
 	const app = express();
 
-	app.use(express.json({ limit: '50mb' }));
+	app.use(tracedBodyParser);
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
 
