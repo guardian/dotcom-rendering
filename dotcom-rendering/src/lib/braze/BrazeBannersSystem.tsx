@@ -106,7 +106,56 @@ export const brazeBannersSystemLogger = {
 export enum BrazeBannersSystemPlacementId {
 	EndOfArticle = 'dotcom-rendering_end-of-article',
 	Banner = 'dotcom-rendering_banner',
+	FeastContextualNudge1 = 'dotcom-rendering_feast-contextual-nudge-1',
+	FeastContextualNudge2 = 'dotcom-rendering_feast-contextual-nudge-2',
+	FeastContextualNudge3 = 'dotcom-rendering_feast-contextual-nudge-3',
+	FeastContextualNudge4 = 'dotcom-rendering_feast-contextual-nudge-4',
+	FeastContextualNudge5 = 'dotcom-rendering_feast-contextual-nudge-5',
 }
+
+const BRAZE_MAX_PLACEMENTS_PER_REFRESH = 10;
+
+const ISLAND_PLACEMENT_MAP: Record<string, BrazeBannersSystemPlacementId[]> = {
+	StickyBottomBanner: [BrazeBannersSystemPlacementId.Banner],
+	SlotBodyEnd: [BrazeBannersSystemPlacementId.EndOfArticle],
+	FeastContextualNudge: [
+		BrazeBannersSystemPlacementId.FeastContextualNudge1,
+		BrazeBannersSystemPlacementId.FeastContextualNudge2,
+		BrazeBannersSystemPlacementId.FeastContextualNudge3,
+		BrazeBannersSystemPlacementId.FeastContextualNudge4,
+		BrazeBannersSystemPlacementId.FeastContextualNudge5,
+	],
+};
+
+/** Returns only placements whose rendering islands exist on this page. */
+export function getPagePlacements(): BrazeBannersSystemPlacementId[] {
+	return Object.entries(ISLAND_PLACEMENT_MAP).flatMap(([islandName, ids]) =>
+		document.querySelector(`gu-island[name="${islandName}"]`) ? ids : [],
+	);
+}
+
+/**
+ * Placements whose latest refresh failed or timed out. Braze can continue to
+ * return cached banners after a failed refresh, so consumers must not render
+ * them until a later successful refresh confirms current eligibility.
+ */
+const stalePlacements = new Set<BrazeBannersSystemPlacementId>();
+
+export function isPlacementStale(id: BrazeBannersSystemPlacementId): boolean {
+	return stalePlacements.has(id);
+}
+
+const markPlacementsStale = (
+	placements: BrazeBannersSystemPlacementId[],
+): void => {
+	for (const placement of placements) stalePlacements.add(placement);
+};
+
+const markPlacementsFresh = (
+	placements: BrazeBannersSystemPlacementId[],
+): void => {
+	for (const placement of placements) stalePlacements.delete(placement);
+};
 
 /**
  * Trigger a refresh of Braze Banners System banners
@@ -121,39 +170,53 @@ export enum BrazeBannersSystemPlacementId {
  * @param braze The Braze instance
  * @returns A promise that resolves when the refresh is complete
  */
-export function refreshBanners(braze: BrazeInstance): Promise<void> {
+export function refreshBanners(
+	braze: BrazeInstance,
+	placements: BrazeBannersSystemPlacementId[],
+): Promise<void> {
 	let timeoutId: NodeJS.Timeout;
+	let settled = false;
 
-	// Create the Timeout Promise
+	brazeBannersSystemLogger.info(
+		`Requesting ${placements.length} Braze Banner placement(s): ${placements.join(', ')}`,
+	);
+	if (placements.length > BRAZE_MAX_PLACEMENTS_PER_REFRESH) {
+		brazeBannersSystemLogger.warn(
+			`Braze accepts at most ${BRAZE_MAX_PLACEMENTS_PER_REFRESH} placements per refresh; ${placements.length} were requested.`,
+		);
+	}
+
 	const timeout = new Promise<void>((resolve) => {
 		timeoutId = setTimeout(() => {
+			settled = true;
+			markPlacementsStale(placements);
 			brazeBannersSystemLogger.warn(
-				'⏱️ Refresh timed out. Proceeding anyway...',
+				'Refresh timed out. Placements will use their non-Braze fallback.',
 			);
-			// We can't cancel the Braze network request,
-			// but we can ensure we stop waiting for it.
 			resolve();
 		}, 2000);
 	});
 
-	// Create the Braze Promise
 	const brazeRequest = new Promise<void>((resolve) => {
 		braze.requestBannersRefresh(
-			Object.values(BrazeBannersSystemPlacementId),
+			placements,
 			() => {
-				brazeBannersSystemLogger.info('✅ Refresh completed.');
-				clearTimeout(timeoutId); // Cancel the timeout
-				resolve();
+				markPlacementsFresh(placements);
+				brazeBannersSystemLogger.info('Refresh completed.');
+				clearTimeout(timeoutId);
+				if (!settled) resolve();
 			},
 			() => {
-				brazeBannersSystemLogger.warn('⚠️ Refresh failed.');
-				clearTimeout(timeoutId); // Cancel the timeout
-				resolve();
+				markPlacementsStale(placements);
+				brazeBannersSystemLogger.warn(
+					'Refresh failed. Placements will use their non-Braze fallback.',
+				);
+				clearTimeout(timeoutId);
+				if (!settled) resolve();
 			},
 		);
 	});
 
-	// Race them
 	return Promise.race([brazeRequest, timeout]);
 }
 
@@ -224,6 +287,13 @@ export const canShowBrazeBannersSystem = async (
 	if (suppressForTaylorReport(tags)) {
 		brazeBannersSystemLogger.info(
 			'Article is part of the Taylor Report series. Not showing banner.',
+		);
+		return { show: false };
+	}
+
+	if (isPlacementStale(placementId)) {
+		brazeBannersSystemLogger.info(
+			`Placement "${placementId}" is stale. Not showing its cached banner.`,
 		);
 		return { show: false };
 	}
@@ -313,6 +383,7 @@ enum BrazeBannersSystemMessageType {
 	GetSettingsPropertyValue = 'BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE',
 	NavigateToUrl = 'BRAZE_BANNERS_SYSTEM:NAVIGATE_TO_URL',
 	DismissBanner = 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
+	GetContext = 'BRAZE_BANNERS_SYSTEM:GET_CONTEXT',
 }
 
 /**
@@ -447,16 +518,19 @@ const runCssCheckerOnBrazeBanner = (
  * Displays a Braze Banner using the Braze Banners System.
  * @param meta Meta information required to display the banner
  * @param idApiUrl Identity API URL for newsletter subscriptions
+ * @param context Optional page context exposed to trusted banner code
  * @returns React component that renders the Braze Banner
  */
 export const BrazeBannersSystemDisplay = ({
 	meta,
 	idApiUrl,
 	stage,
+	context,
 }: {
 	meta: BrazeBannersSystemMeta;
 	idApiUrl: string;
 	stage: StageType;
+	context?: unknown;
 }) => {
 	const supportOrigin = isProd(stage)
 		? 'https://support.theguardian.com'
@@ -466,6 +540,7 @@ export const BrazeBannersSystemDisplay = ({
 	const [showBanner, setShowBanner] = useState(true);
 	// Tracks whether banner:open has been dispatched so we only fire banner:close if the open event was sent first.
 	const hasDispatchedOpenRef = useRef(false);
+	const hasDismissedRef = useRef(false);
 
 	const [minHeight, setMinHeight] = useState<string>('0px');
 	const [wrapperModeEnabled, setWrapperModeEnabled] =
@@ -606,7 +681,10 @@ export const BrazeBannersSystemDisplay = ({
 	 * commercial code can release the mobile sticky ad slot.
 	 */
 	const dismissBanner = useCallback(() => {
+		if (hasDismissedRef.current) return;
+		hasDismissedRef.current = true;
 		setShowBanner(false);
+		meta.braze.dismissBanner(meta.banner);
 		meta.braze.logBannerClick(meta.banner, 'dismiss_button');
 		if (hasDispatchedOpenRef.current) {
 			document.dispatchEvent(
@@ -745,19 +823,24 @@ export const BrazeBannersSystemDisplay = ({
 				| {
 						type: BrazeBannersSystemMessageType.DismissBanner;
 				  }
+				| {
+						type: BrazeBannersSystemMessageType.GetContext;
+				  }
 			>,
 		) => {
 			if (
-				event.origin === window.location.origin &&
-				Object.values(BrazeBannersSystemMessageType).includes(
-					event.data.type,
+				event.origin !== window.location.origin ||
+				!Object.values(BrazeBannersSystemMessageType).includes(
+					event.data?.type,
 				)
 			) {
-				brazeBannersSystemLogger.log(
-					'📥 Received message from Braze Banner:',
-					event.data,
-				);
+				return;
 			}
+
+			brazeBannersSystemLogger.log(
+				'📥 Received message from Braze Banner:',
+				event.data,
+			);
 			switch (event.data.type) {
 				case BrazeBannersSystemMessageType.GetAuthStatus:
 					postMessageToBrazeBanner(
@@ -886,6 +969,12 @@ export const BrazeBannersSystemDisplay = ({
 				case BrazeBannersSystemMessageType.DismissBanner:
 					dismissBanner();
 					break;
+				case BrazeBannersSystemMessageType.GetContext:
+					postMessageToBrazeBanner(
+						BrazeBannersSystemMessageType.GetContext,
+						{ context },
+					);
+					break;
 			}
 		};
 
@@ -902,6 +991,7 @@ export const BrazeBannersSystemDisplay = ({
 		createReminder,
 		dismissBanner,
 		postMessageToBrazeBanner,
+		context,
 	]);
 
 	// Log Impressions when the banner is seen, using the hasBeenSeen value from the useIsInView hook

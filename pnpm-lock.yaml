@@ -297,8 +297,8 @@ importers:
         specifier: 7.29.7
         version: 7.29.7
       '@braze/web-sdk':
-        specifier: 6.5.0
-        version: 6.5.0
+        specifier: 6.9.0
+        version: 6.9.0
       '@creditkarma/thrift-server-core':
         specifier: 1.0.4
         version: 1.0.4
@@ -1697,8 +1697,8 @@ packages:
     resolution: {integrity: sha512-ctxtJ/eA+t+6q2++vj5j7FYX3nRu311q1wfYH3xjlLOsczhlhxAg2FWNUXhpGvAw3BWo1xBcvOV6/YLc2r5FJw==}
     hasBin: true
 
-  '@braze/web-sdk@6.5.0':
-    resolution: {integrity: sha512-MdfwZn+tfe7+tR8Ir5468/njQDGhgVB9tBthq7gwSETsjv6Q+Hw2bXiQy3scDcACI2RLqiq+dNXKh6fD+pN4/Q==}
+  '@braze/web-sdk@6.9.0':
+    resolution: {integrity: sha512-JiYpRJsx/qJT3VFunt4i2aiSo2jfwT1z5KCUM3Mytah3F6VMdGDW3CLUo+aU12QRSTkdbsHezD0ZRxOJEgtFmA==}
 
   '@cacheable/memory@2.0.8':
     resolution: {integrity: sha512-FvEb29x5wVwu/Kf93IWwsOOEuhHh6dYCJF3vcKLzXc0KXIW181AOzv6ceT4ZpBHDvAfG60eqb+ekmrnLHIy+jw==}
@@ -11376,7 +11376,7 @@ snapshots:
     dependencies:
       css-tree: 3.2.1
 
-  '@braze/web-sdk@6.5.0': {}
+  '@braze/web-sdk@6.9.0': {}
 
   '@cacheable/memory@2.0.8':
     dependencies:
