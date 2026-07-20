@@ -27,6 +27,7 @@ import {
 	handleFootballTablesPage,
 } from './handler.sportDataPage';
 import { handleAppsThrasher } from './handler.thrasher.apps';
+import { jsonBodyParser } from './json-body-parser';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
@@ -39,6 +40,7 @@ export const prodServer = (): void => {
 	const app = express();
 
 	app.use(rawBodyReader);
+	app.use(jsonBodyParser);
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
 

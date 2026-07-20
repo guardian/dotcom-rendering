@@ -168,7 +168,7 @@ export const handleFront: RequestHandler = ({ body }, res) => {
 };
 
 export const handleTagPage: RequestHandler = ({ body }, res) => {
-	const tagPage = enhanceTagPage(JSON.parse(body as string) as unknown);
+	const tagPage = enhanceTagPage(body);
 	const { html, prefetchScripts } = renderTagPage({
 		tagPage,
 	});
