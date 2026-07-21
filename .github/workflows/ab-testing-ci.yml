@@ -4,6 +4,8 @@ permissions:
   contents: read
 
 on:
+  merge_group:
+    types: [checks_requested]
   push:
     paths:
       - 'ab-testing/**'

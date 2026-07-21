@@ -27,7 +27,6 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.island';
 import { Footer } from '../components/Footer';
-import { GetCricketScoreboard } from '../components/GetCricketScoreboard.island';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -52,7 +51,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
-import { useAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -270,11 +268,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 		config: { isPaidContent, host, hasLiveBlogTopAd, hasSurveyAd },
 	} = article;
 
-	const ab = useAB();
-	const isCricketRedesignEnabled = Boolean(
-		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
-	);
-
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
@@ -298,9 +291,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 		article.matchType === 'FootballMatchType'
 			? article.matchStatsUrl
 			: undefined;
-
-	const cricketMatchUrl =
-		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
 
 	const cricketMatchStatsUrl =
 		article.matchType === 'CricketMatchType'
@@ -395,7 +385,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					format={format}
 					article={article}
 					liveBlogAreaId={liveBlogAreaId}
-					isCricketRedesignEnabled={isCricketRedesignEnabled}
 				/>
 
 				{/* This element is used to replace the liveblog with the scorecard when the scorecard tab is clicked */}
@@ -598,20 +587,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							<LiveGrid>
 								<GridItem area="media">
 									<div css={maxWidth}>
-										{!!cricketMatchUrl &&
-											!isCricketRedesignEnabled && (
-												<Island
-													priority="critical"
-													defer={{ until: 'visible' }}
-												>
-													<GetCricketScoreboard
-														matchUrl={
-															cricketMatchUrl
-														}
-														format={format}
-													/>
-												</Island>
-											)}
 										<MainMedia
 											format={format}
 											elements={article.mainMediaElements}
@@ -705,9 +680,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										}
 										cricketMatchStatsUrl={
 											cricketMatchStatsUrl
-										}
-										isCricketRedesignEnabled={
-											isCricketRedesignEnabled
 										}
 									/>
 								</GridItem>
@@ -1139,7 +1111,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 const MiniMatchStats = (props: {
 	footballMatchStatsUrl: string | undefined;
 	cricketMatchStatsUrl: string | undefined;
-	isCricketRedesignEnabled: boolean;
 }) => {
 	if (props.footballMatchStatsUrl) {
 		return (
@@ -1151,7 +1122,7 @@ const MiniMatchStats = (props: {
 		);
 	}
 
-	if (props.cricketMatchStatsUrl && props.isCricketRedesignEnabled) {
+	if (props.cricketMatchStatsUrl) {
 		return (
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<CricketMiniMatchStatsWrapper
@@ -1169,7 +1140,6 @@ const Header = (props: {
 	format: ArticleFormat;
 	article: ArticleDeprecated;
 	liveBlogAreaId: string;
-	isCricketRedesignEnabled: boolean;
 }) => {
 	const footballMatchLeagueName = props.article.sectionLabel;
 	const footballMatchLeagueUrl = `${props.article.guardianBaseURL}/${props.article.sectionUrl}`;
@@ -1181,8 +1151,6 @@ const Header = (props: {
 		props.article.matchType === 'CricketMatchType'
 			? props.article.matchHeaderUrl
 			: undefined;
-
-	const isApps = props.renderingTarget === 'Apps';
 
 	if (footballMatchHeaderUrl) {
 		return (
@@ -1203,13 +1171,14 @@ const Header = (props: {
 						renderingTarget={props.renderingTarget}
 						article={props.article}
 						format={props.format}
+						baseUrl={props.article.guardianBaseURL}
 					/>
 				</Island>
 			</>
 		);
 	}
 
-	if (!isApps && cricketMatchHeaderUrl && props.isCricketRedesignEnabled) {
+	if (cricketMatchHeaderUrl) {
 		return (
 			<>
 				<noscript>

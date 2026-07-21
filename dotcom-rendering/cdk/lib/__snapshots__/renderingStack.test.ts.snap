@@ -3416,6 +3416,12 @@ systemctl start tag-page-rendering",
     },
     "tagpagerenderingEcsClusterE7696595": {
       "Properties": {
+        "ClusterSettings": [
+          {
+            "Name": "containerInsights",
+            "Value": "enhanced",
+          },
+        ],
         "Tags": [
           {
             "Key": "gu:cdk:version",
