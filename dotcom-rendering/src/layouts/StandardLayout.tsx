@@ -28,7 +28,6 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
-import { useAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -428,11 +427,6 @@ const MatchHeaderContainer = ({
 			? article.matchHeaderUrl
 			: undefined;
 
-	const ab = useAB();
-	const isCricketRedesignEnabled = Boolean(
-		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
-	);
-
 	const isApps = renderingTarget === 'Apps';
 
 	if (isFootballMatchReport && footballMatchHeaderUrl) {
@@ -451,18 +445,14 @@ const MatchHeaderContainer = ({
 						renderingTarget={renderingTarget}
 						article={article}
 						format={format}
+						baseUrl={article.guardianBaseURL}
 					/>
 				</Island>
 			</>
 		);
 	}
 
-	if (
-		!isApps &&
-		cricketMatchHeaderUrl &&
-		isCricketMatchReport &&
-		isCricketRedesignEnabled
-	) {
+	if (!isApps && cricketMatchHeaderUrl && isCricketMatchReport) {
 		return (
 			<>
 				<noscript>

@@ -2,6 +2,11 @@
 # Commercial rely on a container image built from the main branch with the tag 'main'
 on:
   workflow_call:
+    inputs:
+      production-image-digest:
+        description: 'Digest of image pushed to AWS ECR to run on AWS ECS. Gets used by `cdk synth`.'
+        required: true
+        type: string
     outputs:
       container-image:
         description: 'The generated container image path'
@@ -30,6 +35,8 @@ jobs:
           echo 'export const GIT_COMMIT_HASH = "${{ github.sha }}";' > src/server/prout.ts
 
       - name: Generate production bundle
+        env:
+          IMAGE_DIGEST: ${{ inputs.production-image-digest }}
         run: make riffraff-bundle
         working-directory: dotcom-rendering
 
