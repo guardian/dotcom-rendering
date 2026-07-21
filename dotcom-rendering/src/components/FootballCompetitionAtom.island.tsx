@@ -29,6 +29,7 @@ export const FootballCompetitionAtom = ({ footballCompetitionData }: Props) => {
 	const competitionIdToNameMap: Record<string, string> = {
 		700: 'world-cup-2026',
 		100: 'premier-league',
+		501: 'champions-league-qualifying',
 	};
 
 	const competitionName =
