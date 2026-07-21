@@ -19,6 +19,7 @@ import type { Config } from '../types/configContext';
 import type { Front } from '../types/front';
 import type { TagPage as TagPageModel } from '../types/tagPage';
 import { htmlPageTemplate } from './htmlPageTemplate';
+import { traceSync } from './lib/tracing';
 
 interface Props {
 	front: Front;
@@ -176,84 +177,102 @@ export const renderTagPage = ({
 }: {
 	tagPage: TagPageModel;
 }): { html: string; prefetchScripts: string[] } => {
-	const title = tagPage.webTitle;
-	const NAV = extractNAV(tagPage.nav);
-	const enhancedNAV = enhanceNav(NAV);
+	return traceSync('renderTagPage', (parentSpan) => {
+		const title = tagPage.webTitle;
 
-	const darkModeAvailable =
-		tagPage.config.serverSideABTests['webx-dark-mode-web'] === 'enable';
+		const enhancedNAV = traceSync('extractAndEnhanceNav', () => {
+			const NAV = extractNAV(tagPage.nav);
+			return enhanceNav(NAV);
+		});
 
-	// Fronts are not supported in Apps
-	const config: Config = {
-		renderingTarget: 'Web',
-		darkModeAvailable,
-		assetOrigin: ASSET_ORIGIN,
-		editionId: tagPage.editionId,
-	};
+		const darkModeAvailable =
+			tagPage.config.serverSideABTests['webx-dark-mode-web'] === 'enable';
 
-	const { html, extractedCss } = renderToStringWithEmotion(
-		<ConfigProvider value={config}>
-			<TagPage tagPage={tagPage} NAV={enhancedNAV} />
-		</ConfigProvider>,
-	);
+		// Fronts are not supported in Apps
+		const config: Config = {
+			renderingTarget: 'Web',
+			darkModeAvailable,
+			assetOrigin: ASSET_ORIGIN,
+			editionId: tagPage.editionId,
+		};
 
-	const build = getModulesBuild();
+		const { html, extractedCss } = traceSync(
+			'reactSSR.renderToStringWithEmotion',
+			(span) => {
+				const result = renderToStringWithEmotion(
+					<ConfigProvider value={config}>
+						<TagPage tagPage={tagPage} NAV={enhancedNAV} />
+					</ConfigProvider>,
+				);
+				span.setAttribute('html.sizeBytes', result.html.length);
+				span.setAttribute('css.sizeBytes', result.extractedCss.length);
+				return result;
+			},
+		);
 
-	/**
-	 * The highest priority scripts.
-	 * These scripts have a considerable impact on site performance.
-	 * Only scripts critical to application execution may go in here.
-	 * Please talk to the dotcom platform team before adding more.
-	 * Scripts will be executed in the order they appear in this array
-	 */
-	const prefetchScripts = [
-		polyfillIO,
-		getPathFromManifest(build, 'frameworks.js'),
-		getPathFromManifest(build, 'index.js'),
-		process.env.COMMERCIAL_BUNDLE_URL ?? tagPage.config.commercialBundleUrl,
-	].filter(isString);
+		const { prefetchScripts, scriptTags } = traceSync(
+			'resolveAssets',
+			() => {
+				const b = getModulesBuild();
+				const ps = [
+					polyfillIO,
+					getPathFromManifest(b, 'frameworks.js'),
+					getPathFromManifest(b, 'index.js'),
+					process.env.COMMERCIAL_BUNDLE_URL ??
+						tagPage.config.commercialBundleUrl,
+				].filter(isString);
+				const st = generateScriptTags(ps);
+				return { prefetchScripts: ps, scriptTags: st };
+			},
+		);
 
-	const scriptTags = generateScriptTags(prefetchScripts);
+		const guardian = traceSync('createGuardian', () =>
+			createGuardian({
+				editionId: tagPage.editionId,
+				stage: tagPage.config.stage,
+				frontendAssetsFullURL: tagPage.config.frontendAssetsFullURL,
+				revisionNumber: tagPage.config.revisionNumber,
+				sentryPublicApiKey: tagPage.config.sentryPublicApiKey,
+				sentryHost: tagPage.config.sentryHost,
+				keywordIds: tagPage.config.keywordIds,
+				dfpAccountId: tagPage.config.dfpAccountId,
+				adUnit: tagPage.config.adUnit,
+				ajaxUrl: tagPage.config.ajaxUrl,
+				googletagUrl: tagPage.config.googletagUrl,
+				switches: tagPage.config.switches,
+				serverSideABTests: tagPage.config.serverSideABTests,
+				brazeApiKey: tagPage.config.brazeApiKey,
+				googleRecaptchaSiteKey: tagPage.config.googleRecaptchaSiteKey,
+				unknownConfig: tagPage.config,
+			}),
+		);
 
-	const guardian = createGuardian({
-		editionId: tagPage.editionId,
-		stage: tagPage.config.stage,
-		frontendAssetsFullURL: tagPage.config.frontendAssetsFullURL,
-		revisionNumber: tagPage.config.revisionNumber,
-		sentryPublicApiKey: tagPage.config.sentryPublicApiKey,
-		sentryHost: tagPage.config.sentryHost,
-		keywordIds: tagPage.config.keywordIds,
-		dfpAccountId: tagPage.config.dfpAccountId,
-		adUnit: tagPage.config.adUnit,
-		ajaxUrl: tagPage.config.ajaxUrl,
-		googletagUrl: tagPage.config.googletagUrl,
-		switches: tagPage.config.switches,
-		serverSideABTests: tagPage.config.serverSideABTests,
-		brazeApiKey: tagPage.config.brazeApiKey,
-		googleRecaptchaSiteKey: tagPage.config.googleRecaptchaSiteKey,
-		// Until we understand exactly what config we need to make available client-side,
-		// add everything we haven't explicitly typed as unknown config
-		unknownConfig: tagPage.config,
+		const section = tagPage.config.section;
+
+		const pageHtml = traceSync('htmlPageTemplate', (span) => {
+			const result = htmlPageTemplate({
+				scriptTags,
+				css: extractedCss,
+				html,
+				title,
+				description: tagPage.header.description,
+				guardian,
+				section,
+				renderingTarget: 'Web',
+				weAreHiring: !!tagPage.config.switches.weAreHiring,
+				canonicalUrl: tagPage.canonicalUrl,
+				config,
+				rssFeedUrl: tagPage.webURL + '/rss',
+			});
+			span.setAttribute('pageHtml.sizeBytes', result.length);
+			return result;
+		});
+
+		parentSpan.setAttribute('totalHtml.sizeBytes', pageHtml.length);
+
+		return {
+			html: pageHtml,
+			prefetchScripts,
+		};
 	});
-
-	const section = tagPage.config.section;
-
-	const pageHtml = htmlPageTemplate({
-		scriptTags,
-		css: extractedCss,
-		html,
-		title,
-		description: tagPage.header.description,
-		guardian,
-		section,
-		renderingTarget: 'Web',
-		weAreHiring: !!tagPage.config.switches.weAreHiring,
-		canonicalUrl: tagPage.canonicalUrl,
-		config,
-		rssFeedUrl: tagPage.webURL + '/rss',
-	});
-	return {
-		html: pageHtml,
-		prefetchScripts,
-	};
 };

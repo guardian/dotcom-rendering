@@ -1,3 +1,4 @@
+import { initTracing } from './lib/tracing';
 import { devServer } from './server.dev';
 import { prodServer } from './server.prod';
 
@@ -8,5 +9,6 @@ export default devServer;
 
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
+	initTracing();
 	prodServer();
 }

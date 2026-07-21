@@ -17,6 +17,8 @@ import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
+import { ContainerImage, LogDrivers } from 'aws-cdk-lib/aws-ecs';
+import type { CfnService } from 'aws-cdk-lib/aws-ecs';
 import { ClusterSettings } from 'aws-cdk-lib/aws-ecs/mixins';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
@@ -239,6 +241,15 @@ export class RenderingCDKStack extends CDKStack {
 					actions: ['cloudwatch:*', 'logs:*'],
 					resources: ['*'],
 				}),
+				new GuAllowPolicy(this, 'AllowPolicyXRay', {
+					actions: [
+						'xray:PutTraceSegments',
+						'xray:PutTelemetryRecords',
+						'xray:GetSamplingRules',
+						'xray:GetSamplingTargets',
+					],
+					resources: ['*'],
+				}),
 				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
 					actions: ['kms:Decrypt', 'kms:DescribeKey'],
 					resources: [
@@ -302,6 +313,8 @@ export class RenderingCDKStack extends CDKStack {
 				GU_STAGE: stage,
 				GU_APP: guApp,
 				GU_STACK: guStack,
+				OTEL_EXPORTER_OTLP_ENDPOINT: 'http://localhost:4318',
+				OTEL_SERVICE_NAME: guApp,
 			};
 
 			for (const [key, value] of Object.entries(ecsEnvVars)) {
@@ -311,12 +324,31 @@ export class RenderingCDKStack extends CDKStack {
 				);
 			}
 
+			// Enable us to "ssh" to the container
+			const ecsService = app.ecsService?.node.defaultChild as CfnService;
+			ecsService.addPropertyOverride('EnableExecuteCommand', 'true');
+
 			// TODO enable this at the pattern level in GuCDK
 			app.ecsService?.cluster.with(
 				new ClusterSettings([
 					{ name: 'containerInsights', value: 'enhanced' },
 				]),
 			);
+
+			// ADOT (AWS Distro for OpenTelemetry) sidecar to receive OTLP
+			// traces from the app and forward them to AWS X-Ray.
+			app.ecsService?.taskDefinition.addContainer('adot-collector', {
+				image: ContainerImage.fromRegistry(
+					'public.ecr.aws/aws-observability/aws-otel-collector:latest',
+				),
+				command: ['--config=/etc/ecs/ecs-default-config.yaml'],
+				logging: LogDrivers.awsLogs({
+					streamPrefix: `${guApp}-adot`,
+				}),
+				portMappings: [{ containerPort: 4318 }],
+				cpu: 256,
+				memoryReservationMiB: 256,
+			});
 		}
 
 		/**
