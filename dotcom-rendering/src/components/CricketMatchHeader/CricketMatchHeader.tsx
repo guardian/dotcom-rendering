@@ -35,6 +35,7 @@ import { useLocationHash } from '../../lib/useLocationHash';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import type { ArticleDeprecated } from '../../types/article';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { BigNumber } from '../BigNumber';
 import { CricketScorecardTabRemoteRender } from '../CricketScorecardTabRemoteRender';
 import {
@@ -48,7 +49,6 @@ import { MatchHeaderFallback } from '../MatchHeaderFallback';
 import { Placeholder } from '../Placeholder';
 import type { CricketHeaderData } from './headerData';
 import { parse as parseHeaderData } from './headerData';
-import { RenderingTarget } from '../../types/renderingTarget';
 
 export type CricketMatchHeaderProps = {
 	matchHeaderURL: string;
