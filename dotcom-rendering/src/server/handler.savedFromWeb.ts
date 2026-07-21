@@ -52,14 +52,42 @@ const proxyToFeastApi = async (
 };
 
 /**
- * GET /api/saved-from-web
- * Proxies to the Feast API to fetch the reader's full list of recipe ids
- * saved to their "Saved from web" list.
+ * Upper bound on how many recipe ids can be requested in one call to
+ * `GET /api/saved-from-web`. Mirrors the Feast API's own
+ * `MaxSavedFromWebIdsPerRequest` limit, so we can reject an over-long
+ * request early with a clear 400 rather than relying on a round trip to the
+ * Feast API to find out.
+ */
+const MAX_SAVED_FROM_WEB_IDS_PER_REQUEST = 5;
+
+/**
+ * GET /api/saved-from-web?ids=a,b,c
+ * Proxies to the Feast API to check which of the given recipe ids are
+ * present in the reader's "Saved from web" list. Returns only the ids that
+ * are saved (as `{ recipeId, lastModified }[]`); ids not present are simply
+ * omitted from the response.
  */
 export const handleGetSavedFromWeb: RequestHandler = async (req, res) => {
+	const idsParam = req.query.ids;
+	if (typeof idsParam !== 'string' || idsParam.length === 0) {
+		res.status(400).json({
+			message:
+				'missing required "ids" query parameter (comma-separated recipe ids)',
+		});
+		return;
+	}
+
+	const recipeIds = idsParam.split(',');
+	if (recipeIds.length > MAX_SAVED_FROM_WEB_IDS_PER_REQUEST) {
+		res.status(400).json({
+			message: `too many ids requested, max is ${MAX_SAVED_FROM_WEB_IDS_PER_REQUEST}`,
+		});
+		return;
+	}
+
 	try {
 		const { status, body } = await proxyToFeastApi(
-			FEAST_API_SAVED_FROM_WEB_PATH,
+			`${FEAST_API_SAVED_FROM_WEB_PATH}?ids=${encodeURIComponent(idsParam)}`,
 			'GET',
 			req.headers.authorization,
 		);

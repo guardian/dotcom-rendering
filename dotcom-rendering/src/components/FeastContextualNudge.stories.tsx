@@ -55,6 +55,7 @@ const meta = {
 		isDev: true,
 		nudgeIndex: 1,
 		idApiUrl: undefined,
+		allNudgeRecipeIds: [mockRecipe.id],
 	},
 	parameters: {
 		chromatic: { viewports: [375, 740, 980] },

@@ -168,11 +168,29 @@ export const ArticleRenderer = ({
 		const MAX_NUDGES = 5;
 		const interval = Math.ceil(sections.length / MAX_NUDGES);
 
-		for (const section of sections) {
+		const sectionsWithNudgeIndex = sections.map((section) => {
 			const position = section.index + 1; // 1-based
 			const nudgeIndex =
 				position % interval === 0 ? position / interval : null;
+			return { section, nudgeIndex };
+		});
 
+		/**
+		 * Every recipe id that will get a nudge on this page, known upfront
+		 * (at most MAX_NUDGES). Passed to every FeastContextualNudge
+		 * instance so that whichever one hydrates first can fetch the
+		 * reader's "Saved from web" state for the whole batch in a single
+		 * request (see `getFeastSavedFromTheWebRecipes`), rather than each
+		 * nudge querying just its own recipe id separately.
+		 */
+		const allNudgeRecipeIds = sectionsWithNudgeIndex
+			.filter(
+				({ section, nudgeIndex }) =>
+					section.recipe !== undefined && nudgeIndex !== null,
+			)
+			.map(({ section }) => section.recipe!.id);
+
+		for (const { section, nudgeIndex } of sectionsWithNudgeIndex) {
 			result.push(
 				<Fragment key={`recipe-section-${section.index}`}>
 					{section.subheadingEl}
@@ -189,6 +207,7 @@ export const ArticleRenderer = ({
 								recipeArticleTitle={section.recipeArticleTitle}
 								nudgeIndex={nudgeIndex}
 								idApiUrl={idApiUrl}
+								allNudgeRecipeIds={allNudgeRecipeIds}
 							/>
 						</Island>
 					)}

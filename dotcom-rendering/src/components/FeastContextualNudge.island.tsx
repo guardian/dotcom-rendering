@@ -165,6 +165,14 @@ type FeastContextualNudgeProps = {
 	isDev: boolean;
 	nudgeIndex: number;
 	idApiUrl: string | undefined;
+	/**
+	 * Every recipe id that will get a nudge on this page (at most 5). Shared
+	 * across all FeastContextualNudge instances so that whichever one
+	 * hydrates first fetches the reader's "Saved from web" state for the
+	 * whole batch in a single request, rather than each nudge querying just
+	 * its own recipe id separately.
+	 */
+	allNudgeRecipeIds: string[];
 };
 
 /**
@@ -187,6 +195,7 @@ export const FeastContextualNudge = ({
 	isDev,
 	nudgeIndex,
 	idApiUrl,
+	allNudgeRecipeIds,
 }: FeastContextualNudgeProps) => {
 	const abTests = useAB();
 	let isVariant =
@@ -234,10 +243,11 @@ export const FeastContextualNudge = ({
 		if (authStatus.kind !== 'SignedIn') return;
 		void getFeastSavedFromTheWebRecipes(
 			authStatus.accessToken.accessToken,
+			allNudgeRecipeIds,
 		).then((savedRecipeIds) => {
 			setIsRecipeSaved(savedRecipeIds.has(feastId));
 		});
-	}, [authStatus, feastId]);
+	}, [authStatus, feastId, allNudgeRecipeIds]);
 
 	if (!isVariant) return null;
 
