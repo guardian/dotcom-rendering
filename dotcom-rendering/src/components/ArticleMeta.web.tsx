@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { CSSProperties } from 'react';
 import type { FEArticle } from '../frontend/feArticle';
@@ -20,6 +21,7 @@ import {
 } from '../lib/articleMeta';
 import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
+import { decideMainMediaCaption } from '../lib/decide-caption';
 import { palette as themePalette } from '../palette';
 import { hasPreferredSourceButton } from '../preferredSource';
 import type { Branding as BrandingType } from '../types/branding';
@@ -27,6 +29,7 @@ import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.island';
+import { Caption } from './Caption';
 import { CommentCount } from './CommentCount.island';
 import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
@@ -479,6 +482,26 @@ export const ArticleMeta = ({
 					</div>
 				</div>
 				{showPreferredSource ? <PreferredSourceButton /> : null}
+				{format.display === ArticleDisplay.Immersive &&
+					mainMediaElements?.[0] && (
+						<Hide until="leftCol">
+							<div
+								css={css`
+									margin-top: ${space[2]}px;
+								`}
+							>
+								<Caption
+									captionText={decideMainMediaCaption(
+										mainMediaElements[0],
+									)}
+									format={format}
+									shouldLimitWidth={false}
+									isLeftCol={true}
+									isMainMedia={true}
+								/>
+							</div>
+						</Hide>
+					)}
 			</div>
 		</div>
 	);

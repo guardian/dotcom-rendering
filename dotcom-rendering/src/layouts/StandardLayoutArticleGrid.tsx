@@ -11,6 +11,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { Caption } from '../components/Caption';
 import { DecideLines } from '../components/DecideLines';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -30,6 +31,7 @@ import {
 	ArticleSpecial,
 } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { decideMainMediaCaption } from '../lib/decide-caption';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
 import { palette as themePalette } from '../palette';
@@ -142,11 +144,12 @@ export const StandardLayoutArticleGrid = ({
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	const firstMainMediaElement = article.mainMediaElements[0];
+	const mainMedia = article.mainMediaElements[0];
+	const captionText = decideMainMediaCaption(mainMedia);
 	const mainMediaUrl: string | undefined =
-		firstMainMediaElement?._type ===
+		mainMedia?._type ===
 		'model.dotcomrendering.pageElements.ImageBlockElement'
-			? firstMainMediaElement.media.allImages[0]?.url
+			? mainMedia.media.allImages[0]?.url
 			: undefined;
 
 	const mainMediaOrientation =
@@ -198,14 +201,16 @@ export const StandardLayoutArticleGrid = ({
 					`,
 				isImmersivePortrait &&
 					css`
-						grid-template-rows: 0.25fr 1fr auto;
+						${from.desktop} {
+							grid-template-rows: 0.25fr 1fr auto;
+						}
 					`,
 				isImmersiveLandscape &&
 					css`
 						${from.desktop} {
 							grid-template-rows: auto auto ${ageWarning
 									? '130px'
-									: '90px'};
+									: '90px'} auto auto auto auto auto;
 						}
 					`,
 			]}
@@ -315,6 +320,25 @@ export const StandardLayoutArticleGrid = ({
 			>
 				<Standfirst format={format} standfirst={article.standfirst} />
 			</GridItem>
+			{isImmersive && (
+				<GridItem
+					area="caption"
+					layoutType={layoutType}
+					css={css`
+						padding-top: ${space[2]}px;
+					`}
+				>
+					<Hide from="leftCol">
+						<Caption
+							captionText={captionText}
+							format={format}
+							shouldLimitWidth={false}
+							isLeftCol={true}
+							isMainMedia={true}
+						/>
+					</Hide>
+				</GridItem>
+			)}
 			<GridItem
 				area="meta"
 				layoutType={layoutType}
@@ -545,7 +569,7 @@ export const StandardLayoutArticleGrid = ({
 				area="right-column"
 				layoutType={layoutType}
 				css={css`
-					padding-top: ${isMedia || isImmersive ? 0 : 6}px;
+					padding-top: ${isMedia ? 0 : 6}px;
 					${from.desktop} {
 						padding-bottom: ${isMedia ? 41 : 0}px;
 					}
