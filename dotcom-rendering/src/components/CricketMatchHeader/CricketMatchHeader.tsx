@@ -48,6 +48,7 @@ import { MatchHeaderFallback } from '../MatchHeaderFallback';
 import { Placeholder } from '../Placeholder';
 import type { CricketHeaderData } from './headerData';
 import { parse as parseHeaderData } from './headerData';
+import { RenderingTarget } from '../../types/renderingTarget';
 
 export type CricketMatchHeaderProps = {
 	matchHeaderURL: string;
@@ -56,6 +57,7 @@ export type CricketMatchHeaderProps = {
 	tabContentId: string;
 	format: ArticleFormat;
 	article: ArticleDeprecated;
+	renderingTarget: RenderingTarget;
 };
 
 type Props = CricketMatchHeaderProps & {
@@ -131,8 +133,10 @@ export const CricketMatchHeader = (props: Props) => {
 		setSelectedTab('info');
 		window.location.hash = scorecardHashbang;
 
-		// Remove ads by inserting a list of empty ad slots
-		void getCommercialClient().insertAdverts([]);
+		if (props.renderingTarget == 'Apps') {
+			// Remove ads by inserting a list of empty ad slots
+			void getCommercialClient().insertAdverts([]);
+		}
 	};
 
 	return (
