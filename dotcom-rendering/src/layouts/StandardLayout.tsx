@@ -466,6 +466,7 @@ const MatchHeaderContainer = ({
 						tabContentId={'article'}
 						article={article}
 						format={format}
+						renderingTarget={renderingTarget}
 					/>
 				</Island>
 			</>
