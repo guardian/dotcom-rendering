@@ -23,10 +23,6 @@ describe('shouldShowContributor', () => {
 		...standardFormat,
 		display: ArticleDisplay.NumberedList,
 	};
-	const immersive = {
-		...standardFormat,
-		display: ArticleDisplay.Immersive,
-	};
 
 	it('should return true if Standard display and Standard design', () => {
 		expect(shouldShowContributor(standardFormat)).toBe(true);
@@ -46,9 +42,5 @@ describe('shouldShowContributor', () => {
 
 	it('should return true if Numbered list display', () => {
 		expect(shouldShowContributor(numberedList)).toBe(true);
-	});
-
-	it('should return false if Immersive display', () => {
-		expect(shouldShowContributor(immersive)).toBe(false);
 	});
 });

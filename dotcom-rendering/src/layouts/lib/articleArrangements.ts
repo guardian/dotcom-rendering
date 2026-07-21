@@ -15,6 +15,7 @@ export type Area =
 	| 'title'
 	| 'headline'
 	| 'standfirst'
+	| 'caption'
 	| 'media'
 	| 'meta'
 	| 'body'
@@ -185,38 +186,44 @@ const immersivePortraitDefaultCss: LayoutCssMap = {
 		leftCol: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
 		wide: `grid-row: 3; ${grid.between('centre-column-start', 9)};`,
 	},
-	meta: {
+	caption: {
 		mobile: 'grid-row: 5;',
 		tablet: 'grid-row: 5;',
+		desktop: `grid-row: 5;`,
+	},
+	meta: {
+		mobile: 'grid-row: 6;',
+		tablet: 'grid-row: 6;',
 		desktop: `grid-row: 4; ${grid.between('centre-column-start', 8)};`,
-		leftCol: `grid-row: 3; ${grid.column.left};`,
+		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
 	},
 	body: {
-		mobile: 'grid-row: 6;',
+		mobile: 'grid-row: 7;',
+		leftCol: 'grid-row: 4;',
 	},
 	'right-column': {
-		desktop: `grid-row: 5; ${grid.column.right};`,
+		desktop: `grid-row: 5 / span 2; ${grid.column.right};`,
 		leftCol: `grid-row: 4; ${grid.column.right};`,
 	},
 };
 
 const immersivePortraitFeatureCss: LayoutCssMap = {
 	title: {
-		mobile: 'grid-row: 1;',
-		tablet: 'grid-row: 1;',
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
 		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 1; ${grid.between('left-column-start', 9)};`,
 	},
 	headline: {
-		mobile: 'grid-row: 2;',
-		tablet: 'grid-row: 2;',
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
 		desktop: `grid-row: 2; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 2; ${grid.between('left-column-start', 9)};`,
 		wide: `grid-row: 2; ${grid.between('left-column-start', 10)};`,
 	},
 	media: {
-		mobile: 'grid-row: 3;',
-		tablet: 'grid-row: 3;',
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
 		desktop: `grid-row: 1 / span 4; ${grid.between(8, 'right-column-end')};`,
 		leftCol: `grid-row: 1 / span 3; ${grid.between(9, 'right-column-end')};`,
 		wide: `grid-row: 1 / span 3; ${grid.between(10, 'right-column-end')};`,
@@ -228,17 +235,23 @@ const immersivePortraitFeatureCss: LayoutCssMap = {
 		leftCol: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
 		wide: `grid-row: 3; ${grid.between('centre-column-start', 9)};`,
 	},
-	meta: {
+	caption: {
 		mobile: 'grid-row: 5;',
 		tablet: 'grid-row: 5;',
+		desktop: `grid-row: 5;`,
+	},
+	meta: {
+		mobile: 'grid-row: 6;',
+		tablet: 'grid-row: 6;',
 		desktop: `grid-row: 4; ${grid.between('centre-column-start', 8)};`,
-		leftCol: `grid-row: 3; ${grid.column.left};`,
+		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
 	},
 	body: {
-		mobile: 'grid-row: 6;',
+		mobile: 'grid-row: 7;',
+		leftCol: 'grid-row: 4;',
 	},
 	'right-column': {
-		desktop: `grid-row: 5; ${grid.column.right};`,
+		desktop: `grid-row: 5 / span 2; ${grid.column.right};`,
 		leftCol: `grid-row: 4; ${grid.column.right};`,
 	},
 };
@@ -266,17 +279,20 @@ const immersiveLandscapeDefaultCss: LayoutCssMap = {
 		tablet: 'grid-row: 4;',
 		desktop: 'grid-row: 5;',
 	},
+	caption: {
+		desktop: 'grid-row: 6;',
+	},
 	meta: {
 		mobile: 'grid-row: 5;',
 		tablet: 'grid-row: 5;',
-		desktop: `grid-row: 6; ${grid.between('centre-column-start', 8)};`,
+		desktop: `grid-row: 7;`,
 		leftCol: `grid-row: 5 / span 2; ${grid.column.left};`,
 	},
 	body: {
-		mobile: 'grid-row: 6;',
+		leftCol: 'grid-row: 6;',
 	},
 	'right-column': {
-		desktop: `grid-row: 6 / span 2; ${grid.column.right};`,
+		desktop: `grid-row: 6 / span 3; ${grid.column.right};`,
 	},
 };
 
@@ -295,12 +311,18 @@ const immersiveLandscapeFeatureCss: LayoutCssMap = {
 	standfirst: {
 		desktop: 'grid-row: 5;',
 	},
+	caption: {
+		desktop: 'grid-row: 6;',
+	},
 	meta: {
-		desktop: `grid-row: 6; ${grid.between('centre-column-start', 8)};`,
+		desktop: `grid-row: 7;`,
 		leftCol: `grid-row: 5 / span 2; ${grid.column.left};`,
 	},
+	body: {
+		leftCol: 'grid-row: 6;',
+	},
 	'right-column': {
-		desktop: `grid-row: 6 / span 2; ${grid.column.right};`,
+		desktop: `grid-row: 6 / span 3; ${grid.column.right};`,
 	},
 };
 
