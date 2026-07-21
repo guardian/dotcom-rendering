@@ -1,5 +1,3 @@
-import { makeMemoizedFunction } from '../memoize';
-
 /**
  * DCR's own server-side proxy for the Feast API's "Saved from web"
  * endpoints (see `handler.savedFromWeb.ts`). The browser never talks to the
@@ -18,34 +16,36 @@ const SAVED_FROM_WEB_PROXY_PATH = '/api/saved-from-web';
 const MAX_SAVED_FROM_WEB_IDS_PER_REQUEST = 5;
 
 /**
- * Builds a single string key combining the access token and the requested
- * recipe ids (deduped and sorted, so equivalent id sets in a different
- * order still hit the same cache entry), for use with `makeMemoizedFunction`
- * (which caches by a single primitive key, not by array/object reference).
+ * In-flight/resolved request cache, keyed by `userId:sortedRecipeIds`.
+ *
+ * Deliberately keyed by the reader's user id, not their access token: the
+ * token is only ever used transiently to make the one underlying fetch and
+ * is not retained here, which keeps it out of any long-lived module-level
+ * state. This is module-level state that resets on every full page
+ * load — DCR has no SPA navigation, so a page refresh always starts with an
+ * empty cache, same as `stalePlacements` in `BrazeBannersSystem.tsx`.
  */
-const buildCacheKey = (accessToken: string, recipeIds: string[]): string => {
-	const sortedIds = Array.from(new Set(recipeIds)).sort();
-	return `${accessToken}|${sortedIds.join(',')}`;
-};
+const savedFromWebCache = new Map<string, Promise<Set<string>>>();
 
 type SavedFromWebItem = { recipeId: string; lastModified: string };
 
 /**
- * Checks which of the given recipe ids are already saved to the reader's
- * "Saved from web" list. The underlying `GET /api/saved-from-web?ids=...`
- * request returns only the ids that are saved, so an id absent from the
- * response is simply not saved (not an error).
- *
- * Memoized by (access token + sorted recipe ids): performs only one network
- * request per unique combination, no matter how many `FeastContextualNudge`
- * islands call it independently as they hydrate (each is deferred
- * `until: 'visible'` and hydrates at its own time). As long as every nudge
- * on a page is passed the same full list of recipe ids (see
- * `ArticleRenderer`), they'll all share the one in-flight/resolved request.
+ * Performs (and caches) the underlying request for a given cache key. The
+ * cache entry is written synchronously, before the fetch resolves, so
+ * concurrent callers in the same tick share the one in-flight promise
+ * rather than each triggering their own request.
  */
-const fetchSavedFromWebRecipes = makeMemoizedFunction(
-	async (cacheKey: string): Promise<Set<string>> => {
-		const [accessToken = '', idsParam = ''] = cacheKey.split('|');
+const fetchSavedFromWebRecipes = (
+	cacheKey: string,
+	accessToken: string,
+	idsParam: string,
+): Promise<Set<string>> => {
+	const cached = savedFromWebCache.get(cacheKey);
+	if (cached) {
+		return cached;
+	}
+
+	const promise = (async (): Promise<Set<string>> => {
 		try {
 			const response = await fetch(
 				`${SAVED_FROM_WEB_PROXY_PATH}?ids=${encodeURIComponent(idsParam)}`,
@@ -87,17 +87,22 @@ const fetchSavedFromWebRecipes = makeMemoizedFunction(
 			);
 			return new Set();
 		}
-	},
-);
+	})();
+
+	savedFromWebCache.set(cacheKey, promise);
+	return promise;
+};
 
 /**
  * Checks which of the given recipe ids are already saved to the reader's
- * "Saved from web" list. See `fetchSavedFromWebRecipes` for the memoization
+ * "Saved from web" list. See `fetchSavedFromWebRecipes` for the caching
  * behaviour that keeps this to one network request per page.
- * @param accessToken The reader's Okta access token
+ * @param userId The reader's user id (`idToken.claims.sub`), used only as the cache key
+ * @param accessToken The reader's Okta access token, used only to make the request
  * @param recipeIds The recipe ids to check (capped at `MaxSavedFromWebIdsPerRequest` on the Feast API; longer lists are truncated)
  */
 export const getFeastSavedFromTheWebRecipes = (
+	userId: string,
 	accessToken: string,
 	recipeIds: string[],
 ): Promise<Set<string>> => {
@@ -116,9 +121,10 @@ export const getFeastSavedFromTheWebRecipes = (
 		);
 	}
 
-	return fetchSavedFromWebRecipes(
-		buildCacheKey(accessToken, cappedRecipeIds),
-	);
+	const idsParam = Array.from(new Set(cappedRecipeIds)).sort().join(',');
+	const cacheKey = `${userId}:${idsParam}`;
+
+	return fetchSavedFromWebRecipes(cacheKey, accessToken, idsParam);
 };
 
 /**

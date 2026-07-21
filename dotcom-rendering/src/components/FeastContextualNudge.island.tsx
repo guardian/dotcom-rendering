@@ -233,15 +233,16 @@ export const FeastContextualNudge = ({
 	}, [feastId, title, pageId, isDev, isVariant]);
 
 	// Whether this recipe is already in the reader's "Saved from web" list.
-	// `getFeastSavedFromTheWebRecipes` is memoized by access token, so no
+	// `getFeastSavedFromTheWebRecipes` caches by user id + recipe ids, so no
 	// matter how many FeastContextualNudge islands on this page call it as
 	// they hydrate (each is deferred `until: 'visible'`), only one network
-	// request for the reader's full saved-recipe list is ever made.
+	// request for the batch of recipe ids on this page is ever made.
 	const authStatus = useAuthStatus();
 	const [isRecipeSaved, setIsRecipeSaved] = useState(false);
 	useEffect(() => {
 		if (authStatus.kind !== 'SignedIn') return;
 		void getFeastSavedFromTheWebRecipes(
+			authStatus.idToken.claims.sub,
 			authStatus.accessToken.accessToken,
 			allNudgeRecipeIds,
 		).then((savedRecipeIds) => {
