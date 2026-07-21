@@ -24,6 +24,7 @@ import type {
 } from '../../cricketMatchV2';
 import { grid } from '../../grid';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import { getCommercialClient } from '../../lib/bridgetApi';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -129,6 +130,9 @@ export const CricketMatchHeader = (props: Props) => {
 	const onInfoTabClick = () => {
 		setSelectedTab('info');
 		window.location.hash = scorecardHashbang;
+
+		// Remove ads by inserting a list of empty ad slots
+		void getCommercialClient().insertAdverts([]);
 	};
 
 	return (
