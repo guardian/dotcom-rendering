@@ -12,6 +12,7 @@ import {
 	textSansBold20,
 	until,
 } from '@guardian/source/foundations';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -27,6 +28,7 @@ import { PulsingDot } from './PulsingDot.island';
 
 type Props = {
 	format: ArticleFormat;
+	layoutType: LayoutType;
 	tags: TagType[];
 	sectionLabel: string;
 	sectionUrl: string;
@@ -207,6 +209,7 @@ const sectionPadding = (design: ArticleDesign) => {
 
 export const SeriesSectionLink = ({
 	format,
+	layoutType,
 	tags,
 	sectionLabel,
 	sectionUrl,
@@ -394,7 +397,38 @@ export const SeriesSectionLink = ({
 				</div>
 			);
 		}
-		// Immersives show nothing at all if there's no series tag
+		if (
+			layoutType === 'immersivePortraitDefault' ||
+			layoutType === 'immersivePortraitFeature' ||
+			layoutType === 'immersiveLandscapeDefault' ||
+			layoutType === 'immersiveLandscapeFeature'
+		) {
+			return (
+				<>
+					<a
+						href={`${guardianBaseURL}/${sectionUrl}`}
+						css={[
+							sectionLabelLink,
+							css`
+								color: ${titleColour};
+								background-color: ${themePalette(
+									'--section-title-background',
+								)};
+							`,
+							marginRight,
+							fontStyles(format),
+							breakWord,
+						]}
+						data-component="section"
+						data-link-name="article section"
+						className={interactiveLegacyClasses.labelLink}
+					>
+						<span>{sectionLabel}</span>
+					</a>
+				</>
+			);
+		}
+		// Other types of immersives show nothing at all if there's no series tag
 		return null;
 	}
 	if (tag) {

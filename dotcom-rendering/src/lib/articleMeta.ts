@@ -6,10 +6,21 @@ import {
 	type ArticleFormat,
 } from './articleFormat';
 
-export const shouldShowAvatar = (format: ArticleFormat): boolean => {
+export const shouldShowAvatar = (
+	format: ArticleFormat,
+	layoutType: LayoutType,
+): boolean => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
-			return false;
+			switch (layoutType) {
+				case 'immersivePortraitDefault':
+				case 'immersivePortraitFeature':
+				case 'immersiveLandscapeDefault':
+				case 'immersiveLandscapeFeature':
+					return true;
+				default:
+					return false;
+			}
 		case ArticleDisplay.Showcase:
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Standard: {

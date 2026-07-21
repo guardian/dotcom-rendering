@@ -388,6 +388,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						>
 							<ArticleTitle
 								format={format}
+								layoutType={layoutType}
 								tags={article.tags}
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
@@ -399,7 +400,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							area="headline"
 							layoutType={layoutType}
 							css={
-								layoutType === 'immersivePortraitDefault'
+								layoutType === 'immersivePortraitDefault' ||
+								layoutType === 'immersivePortraitFeature'
 									? css`
 											${from.desktop} {
 												border-bottom: 1px solid
@@ -448,22 +450,26 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									: undefined
 							}
 						>
-							{layoutType !== 'immersivePortraitDefault' && (
-								<div css={stretchLines}>
-									{isWeb &&
-									format.theme === ArticleSpecial.Labs &&
-									format.design !== ArticleDesign.Video ? (
-										<GuardianLabsLines />
-									) : (
-										<DecideLines
-											format={format}
-											color={themePalette(
-												'--article-border',
-											)}
-										/>
-									)}
-								</div>
-							)}
+							{layoutType !== 'immersivePortraitDefault' &&
+								layoutType !== 'immersivePortraitFeature' &&
+								layoutType !== 'immersiveLandscapeDefault' &&
+								layoutType !== 'immersiveLandscapeFeature' && (
+									<div css={stretchLines}>
+										{isWeb &&
+										format.theme === ArticleSpecial.Labs &&
+										format.design !==
+											ArticleDesign.Video ? (
+											<GuardianLabsLines />
+										) : (
+											<DecideLines
+												format={format}
+												color={themePalette(
+													'--article-border',
+												)}
+											/>
+										)}
+									</div>
+								)}
 							{isApps ? (
 								<>
 									<Hide from="leftCol">
