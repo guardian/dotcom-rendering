@@ -287,8 +287,8 @@ export class RenderingCDKStack extends CDKStack {
 							imageIdentifier,
 
 							// TODO tune these values
-							memoryLimitMiB: 4096,
-							cpu: 2048,
+							memoryLimitMiB: 2048,
+							cpu: 1024,
 							scaling: {
 								minimumTasks: 1,
 								maximumTasks: 2,
