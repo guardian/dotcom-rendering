@@ -43,11 +43,11 @@ const ListItem = ({ product }: { product: SummaryProduct }) => {
 	const { productBlock, ctaIndex } = product;
 	const cta = productBlock.productCtas[ctaIndex];
 	return (
-		<li key={product.productBlock.brandName}>
+		<li key={product.productBlock.id}>
 			<p>
 				<strong>{productBlock.primaryHeadingText}</strong>
 				<br />
-				{productBlock.brandName}
+				{productBlock.brandName} {productBlock.productName}
 			</p>
 			{cta && (
 				<ProductLinkButton
