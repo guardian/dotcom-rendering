@@ -47,10 +47,14 @@ const getTabbableElements = (
 ): HTMLElement[] => {
 	function getElements(parent: HTMLElement): HTMLElement[] {
 		return Array.from(
-			parent.querySelectorAll(
+			parent.querySelectorAll<HTMLElement>(
 				'button:not([disabled]), a:not([disabled]), input:not([disabled]), select:not([disabled])',
 			),
-		);
+			// Ignore elements that aren't rendered (e.g. the info toggle is
+			// hidden with `display: none` on Filter articles). They can't
+			// receive focus, so leaving them in the list would trap keyboard
+			// tabbing on the element before them.
+		).filter((element) => element.getClientRects().length > 0);
 	}
 	const currentPosition = getPosition(lightbox, imageList);
 	if (currentPosition == null) {
