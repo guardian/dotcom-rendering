@@ -102,7 +102,7 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 	stage: 'CODE',
 	domainName: 'tag-page-rendering.code.dev-guardianapis.com',
 	scaling: { minimumInstances: 1, maximumInstances: 3 },
-	instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
+	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
 	imageIdentifier: process.env.IMAGE_DIGEST ?? 'DEV',
 };
 

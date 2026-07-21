@@ -3371,7 +3371,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           "ImageId": {
             "Ref": "AMITagpagerendering",
           },
-          "InstanceType": "c8g.medium",
+          "InstanceType": "t4g.small",
           "MetadataOptions": {
             "HttpTokens": "required",
             "InstanceMetadataTags": "enabled",
