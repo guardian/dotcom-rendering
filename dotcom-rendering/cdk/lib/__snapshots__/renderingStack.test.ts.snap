@@ -2188,6 +2188,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "Properties": {
         "ContainerDefinitions": [
           {
+            "Cpu": 1024,
             "DockerLabels": {
               "RiffRaffDeploymentId": {
                 "Ref": "RiffRaffDeploymentId",
@@ -2332,7 +2333,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             ],
           },
         ],
-        "Cpu": "1024",
+        "Cpu": "2048",
         "ExecutionRoleArn": {
           "Fn::GetAtt": [
             "EcsTaskDefinitionExecutionRoleBE450C73",
@@ -2340,7 +2341,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           ],
         },
         "Family": "TagPageRenderingCODEEcsTaskDefinition616FF027",
-        "Memory": "2048",
+        "Memory": "16384",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "FARGATE",

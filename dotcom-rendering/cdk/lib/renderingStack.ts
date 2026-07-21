@@ -17,6 +17,7 @@ import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
+import type { CfnTaskDefinition } from 'aws-cdk-lib/aws-ecs';
 import { ContainerImage, LogDrivers } from 'aws-cdk-lib/aws-ecs';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
@@ -287,8 +288,8 @@ export class RenderingCDKStack extends CDKStack {
 							imageIdentifier,
 
 							// TODO tune these values
-							memoryLimitMiB: 2048,
-							cpu: 1024,
+							memoryLimitMiB: 16384,
+							cpu: 2048,
 							scaling: {
 								minimumTasks: 1,
 								maximumTasks: 2,
@@ -334,6 +335,18 @@ export class RenderingCDKStack extends CDKStack {
 				cpu: 256,
 				memoryReservationMiB: 256,
 			});
+
+			// Reserve a full vCPU for the application container so it is
+			// guaranteed CPU and is not starved by the logging or ADOT
+			// sidecars under load. The app is the first container in the task
+			// definition (index 0). The Guardian construct does not expose a
+			// per-container CPU option, so we set it via an escape hatch.
+			const cfnTaskDefinition = app.ecsService?.taskDefinition.node
+				.defaultChild as CfnTaskDefinition;
+			cfnTaskDefinition.addPropertyOverride(
+				'ContainerDefinitions.0.Cpu',
+				1024,
+			);
 		}
 
 		/**
