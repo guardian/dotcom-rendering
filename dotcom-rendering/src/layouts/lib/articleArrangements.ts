@@ -153,7 +153,7 @@ const pictureCss: LayoutCssMap = {
 	title: {
 		mobile: 'grid-row: 1;',
 		tablet: 'grid-row: 1;',
-		leftCol: `grid-row: 1; ${grid.column.left}`,
+		leftCol: grid.column.left,
 	},
 	headline: {
 		mobile: 'grid-row: 2;',
