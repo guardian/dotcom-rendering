@@ -170,7 +170,7 @@ const pictureCss: LayoutCssMap = {
 	media: {
 		mobile: 'grid-row: 5;',
 		tablet: 'grid-row: 5;',
-		desktop: `grid-row: 5; ${grid.between('centre-column-start', 'right-column-end')};`,
+		desktop: grid.between('centre-column-start', 'right-column-end'),
 		leftCol: `grid-row: 3; ${grid.between('centre-column-start', 'right-column-end')};`,
 	},
 	meta: {
