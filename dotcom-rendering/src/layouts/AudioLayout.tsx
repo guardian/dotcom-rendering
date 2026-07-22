@@ -330,19 +330,14 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 						</GridItem>
 						<GridItem area="media">
 							{audioData && (
-								<Island
-									priority="critical"
-									defer={{ until: 'visible' }}
-								>
-									<AudioPlayer
-										audioData={audioData}
-										isSensitive={article.config.isSensitive}
-										isAcastEnabled={
-											!!article.config.switches.acast
-										}
-										isApps={isApps}
-									/>
-								</Island>
+								<AudioPlayer
+									audioData={audioData}
+									isSensitive={article.config.isSensitive}
+									isAcastEnabled={
+										!!article.config.switches.acast
+									}
+									isApps={isApps}
+								/>
 							)}
 							<StraightLines
 								cssOverrides={css`
