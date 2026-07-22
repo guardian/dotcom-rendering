@@ -1,4 +1,4 @@
-import { ListenToArticleButton } from '../ListenToArticleButton';
+import { ListenToArticleButton } from './ListenToArticleButton';
 
 type Props = {
 	onClickHandler: () => void;
