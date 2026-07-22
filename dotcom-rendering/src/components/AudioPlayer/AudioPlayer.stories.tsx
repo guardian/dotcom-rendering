@@ -1,7 +1,7 @@
 import { defaultFormats } from '../../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../../.storybook/modes';
 import preview from '../../../.storybook/preview';
-import { AudioPlayerWeb as Player } from '../AudioPlayerWeb.island';
+import { AudioPlayer as Player } from './AudioPlayer';
 // import audioFile from './stories/default_audio_test.mp3';
 
 const meta = preview.meta({
@@ -14,8 +14,6 @@ export const AudioPlayer = meta.story({
 		// src: audioFile,
 		src: 'https://audio.guim.co.uk/2024/10/18-57753-USEE_181024.mp3',
 		mediaId: 'mediaId',
-		contentIsNotSensitive: true,
-		isAcastEnabled: true,
 	},
 	parameters: {
 		// We only want to snapshot the `multipleFormats` version below.

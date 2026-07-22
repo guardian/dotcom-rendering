@@ -2,7 +2,7 @@ import { log } from '@guardian/libs';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getAudioClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
-import { AppsAudioPlayButton } from './AudioPlayer/AppsAudioPlayButton';
+import { AppsAudioPlayButton } from './AppsAudioPlayButton';
 
 const AUDIO_BRIDGET_VERSION = '8.9.0';
 const POLLING_INTERVAL_MS = 3000;
@@ -11,7 +11,7 @@ type Props = {
 	audioDuration?: string;
 };
 
-export const AudioPlayerApps = ({ audioDuration }: Props) => {
+export const AppsAudioPlayer = ({ audioDuration }: Props) => {
 	const [showButton, setShowButton] = useState<boolean>(false);
 	const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
