@@ -83,19 +83,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-teads-prebid",
-		description:
-			"Test to measure the impact of adding Teads as a bidder in prebid .",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-06-11",
-		type: "client",
-		status: "OFF",
-		audienceSize: 0 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-ozone-outstream",
 		description: "A test to ensure correct integration of Ozone outstream.",
 		owners: ["commercial.dev@guardian.co.uk"],
