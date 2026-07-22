@@ -55,6 +55,7 @@ const baseArgs = {
 		guardianBaseURL: 'https://www.theguardian.com',
 	} as ArticleDeprecated,
 	format: {} as ArticleFormat,
+	renderingTarget: 'Web',
 } satisfies ComponentProps<typeof CricketMatchHeader>;
 
 const liveArgs = {

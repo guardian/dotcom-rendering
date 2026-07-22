@@ -24,6 +24,7 @@ import type {
 } from '../../cricketMatchV2';
 import { grid } from '../../grid';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import { getCommercialClient } from '../../lib/bridgetApi';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -34,6 +35,7 @@ import { useLocationHash } from '../../lib/useLocationHash';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import type { ArticleDeprecated } from '../../types/article';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { BigNumber } from '../BigNumber';
 import { CricketScorecardTabRemoteRender } from '../CricketScorecardTabRemoteRender';
 import {
@@ -55,6 +57,7 @@ export type CricketMatchHeaderProps = {
 	tabContentId: string;
 	format: ArticleFormat;
 	article: ArticleDeprecated;
+	renderingTarget: RenderingTarget;
 };
 
 type Props = CricketMatchHeaderProps & {
@@ -129,6 +132,11 @@ export const CricketMatchHeader = (props: Props) => {
 	const onInfoTabClick = () => {
 		setSelectedTab('info');
 		window.location.hash = scorecardHashbang;
+
+		if (props.renderingTarget == 'Apps') {
+			// Remove ads by inserting a list of empty ad slots
+			void getCommercialClient().insertAdverts([]);
+		}
 	};
 
 	return (
