@@ -8,7 +8,7 @@ import {
 
 export const shouldShowAvatar = (
 	format: ArticleFormat,
-	layoutType: LayoutType,
+	layoutType?: LayoutType,
 ): boolean => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
@@ -41,7 +41,7 @@ export const shouldShowAvatar = (
 
 export const shouldShowContributor = (
 	format: ArticleFormat,
-	layoutType: LayoutType,
+	layoutType?: LayoutType,
 ): boolean => {
 	switch (format.display) {
 		case ArticleDisplay.NumberedList:

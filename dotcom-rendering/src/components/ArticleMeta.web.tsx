@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { between, from, space, until } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { CSSProperties } from 'react';
 import type { FEArticle } from '../frontend/feArticle';
 import type { LayoutType } from '../layouts/lib/articleArrangements';
@@ -108,11 +108,7 @@ const metaFlex = css`
 `;
 
 const preferredSourceMetaFlex = (hasButton: boolean): CSSProperties =>
-	hasButton
-		? {
-				marginBottom: 8,
-			}
-		: {};
+	hasButton ? { marginBottom: 8 } : {};
 
 const stretchLines = css`
 	display: block;
@@ -151,11 +147,7 @@ const metaExtras = (isPictureContent: boolean) => css`
 `;
 
 const preferredSourceMetaExtras = (hasButton: boolean): CSSProperties =>
-	hasButton
-		? {
-				paddingTop: 8,
-			}
-		: {};
+	hasButton ? { paddingTop: 8 } : {};
 
 const metaNumbers = (isPictureContent: boolean) => css`
 	border-top: 1px solid ${themePalette('--article-border')};
