@@ -2829,13 +2829,13 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                   "TargetGroupArn": {
                     "Ref": "TargetGroupTagpagerendering42E428EE",
                   },
-                  "Weight": 1,
+                  "Weight": 0,
                 },
                 {
                   "TargetGroupArn": {
                     "Ref": "EcsTargetGroupTagpagerendering06213654",
                   },
-                  "Weight": 0,
+                  "Weight": 1,
                 },
               ],
             },
