@@ -57,6 +57,9 @@ const categorySectionsStyles = css`
 	}
 `;
 
+const getDesktopSectionSpan = (desktopSpan: number) =>
+	Math.min(12, Math.max(1, desktopSpan));
+
 const sectionStyles = (desktopSpan: number, hasMultipleCards: boolean) => css`
 	display: flex;
 	min-width: 0;
@@ -64,7 +67,7 @@ const sectionStyles = (desktopSpan: number, hasMultipleCards: boolean) => css`
 	grid-column: ${hasMultipleCards ? '1 / -1' : 'span 1'};
 
 	${from.desktop} {
-		grid-column: span ${Math.min(12, Math.max(1, desktopSpan))};
+		grid-column: span ${getDesktopSectionSpan(desktopSpan)};
 	}
 `;
 
@@ -72,6 +75,9 @@ const sectionTitleStyles = css`
 	margin: 0 0 ${space[2]}px;
 	${headlineBold20};
 `;
+
+const getDesktopCardColumns = (cardCount: number) =>
+	Math.min(4, Math.max(1, cardCount));
 
 const cardsStyles = (cardCount: number) => css`
 	display: grid;
@@ -82,7 +88,7 @@ const cardsStyles = (cardCount: number) => css`
 
 	${from.desktop} {
 		grid-template-columns: repeat(
-			${Math.min(4, Math.max(1, cardCount))},
+			${getDesktopCardColumns(cardCount)},
 			minmax(0, 1fr)
 		);
 	}
@@ -158,32 +164,49 @@ const cardImageStyles = css`
 	opacity: 0.32;
 `;
 
-const archiveStyles = css`
-	display: flex;
-	width: 100%;
-	min-width: 0;
-	min-height: 30px;
-	align-items: center;
-	justify-content: space-between;
-	align-self: stretch;
-	margin-top: ${space[2]}px;
-	padding: 0 ${space[2]}px;
-	border-radius: 4px;
-	box-sizing: border-box;
-	color: #121212;
-	text-decoration: none;
-	${textSansBold14};
+const getDesktopArchiveWidth = (cardCount: number, desktopSpan: number) => {
+	const sectionsPerRow = Math.round(12 / getDesktopSectionSpan(desktopSpan));
+	const cardsPerRow = Math.max(
+		getDesktopCardColumns(cardCount),
+		sectionsPerRow,
+	);
 
-	:hover {
-		text-decoration: underline;
+	if (cardsPerRow === 2) return '50%';
+	if (cardsPerRow === 3) return '75%';
+	if (cardsPerRow >= 4) {
+		const totalGap = 3 * space[3];
+		return `calc((100% - ${totalGap}px) / 4)`;
 	}
+	return '100%';
+};
 
-	${from.desktop} {
-		width: fit-content;
-		min-width: 96px;
-		align-self: flex-end;
-	}
-`;
+const archiveStyles = (cardCount: number, desktopSpan: number) => {
+	return css`
+		display: flex;
+		width: 100%;
+		min-width: 0;
+		min-height: 30px;
+		align-items: center;
+		justify-content: space-between;
+		align-self: stretch;
+		margin-top: ${space[2]}px;
+		padding: 0 ${space[2]}px;
+		border-radius: 4px;
+		box-sizing: border-box;
+		color: #121212;
+		text-decoration: none;
+		${textSansBold14};
+
+		:hover {
+			text-decoration: underline;
+		}
+
+		${from.desktop} {
+			width: ${getDesktopArchiveWidth(cardCount, desktopSpan)};
+			align-self: flex-end;
+		}
+	`;
+};
 
 const archiveIconStyles = css`
 	flex: 0 0 auto;
@@ -273,12 +296,20 @@ const PuzzleCard = ({ item }: { item: PuzzleItem }) => {
 	);
 };
 
-const ArchiveLink = ({ archive }: { archive: PuzzleItem }) => {
+const ArchiveLink = ({
+	archive,
+	cardCount,
+	desktopSpan,
+}: {
+	archive: PuzzleItem;
+	cardCount: number;
+	desktopSpan: number;
+}) => {
 	const url = getItemUrl(archive);
 
 	return (
 		<a
-			css={archiveStyles}
+			css={archiveStyles(cardCount, desktopSpan)}
 			href={url}
 			style={{ backgroundColor: archive.backgroundColour ?? '#F1F1F1' }}
 			{...externalLinkProps(url)}
@@ -347,7 +378,11 @@ const SectionBlock = ({
 				))}
 			</div>
 			{section.content.archive && (
-				<ArchiveLink archive={section.content.archive} />
+				<ArchiveLink
+					archive={section.content.archive}
+					cardCount={items.length}
+					desktopSpan={desktopSpan}
+				/>
 			)}
 		</section>
 	);
