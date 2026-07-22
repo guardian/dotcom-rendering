@@ -3,6 +3,7 @@ import {
 	from,
 	headlineBold20,
 	headlineBold24,
+	headlineBold34,
 	headlineMedium20,
 	palette,
 	palette as sourcePalette,
@@ -35,10 +36,9 @@ const mainStyles = css`
 	padding: ${space[6]}px 0 ${space[12]}px;
 `;
 
-const descriptionStyles = css`
-	margin: 0 0 ${space[6]}px;
-	color: ${palette.neutral[20]};
-	${textSans17};
+const titleStyles = css`
+	margin: 0 0 ${space[4]}px;
+	${headlineBold34};
 `;
 
 const newsletterSignupStyles = css`
@@ -224,8 +224,9 @@ const crosswordSetToUrl = (set: string): string => {
 };
 
 const getItemUrl = (item: PuzzleItem): string => {
-	if (item.variant === 'iframe-page' && item.slug)
+	if (item.variant === 'iframe-page' && item.slug) {
 		return `/puzzles/${item.slug}`;
+	}
 	if (item.url) return item.url;
 	if (item.type === 'crossword') return crosswordSetToUrl(item.set);
 	return '#';
@@ -643,9 +644,7 @@ export const PuzzlesLayout = ({ puzzlesPage, NAV }: Props) => {
 					fullWidth={true}
 					showTopBorder={false}
 				>
-					{puzzlesPage.description !== undefined && (
-						<p css={descriptionStyles}>{puzzlesPage.description}</p>
-					)}
+					<h1 css={titleStyles}>{puzzlesPage.webTitle}</h1>
 					<div css={newsletterSignupStyles}>
 						<EmailSignup
 							name="Puzzles updates"
