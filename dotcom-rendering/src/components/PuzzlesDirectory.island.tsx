@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import {
-	focusHalo,
 	from,
 	headlineBold20,
 	space,
 	textSans14,
+	textSansBold14,
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { useState } from 'react';
@@ -33,14 +33,11 @@ const filterLegendStyles = css`
 	${visuallyHidden};
 `;
 
-const filterButtonStyles = (isActive: boolean) => css`
+const filterButtonStyles = () => css`
 	${textSans14};
-	${focusHalo};
 	min-height: 32px;
 	padding: 0 ${space[3]}px;
-	border: 1px solid ${isActive ? '#121212' : 'transparent'};
 	border-radius: 999px;
-	box-shadow: ${isActive ? 'inset 0 0 0 1px #121212' : 'none'};
 	color: #121212;
 	cursor: pointer;
 
@@ -92,16 +89,21 @@ const cardsStyles = (cardCount: number) => css`
 `;
 
 const cardStyles = css`
-	${focusHalo};
 	position: relative;
 	display: flex;
 	min-height: 118px;
 	padding: ${space[3]}px;
+	border: 0;
 	border-radius: 8px;
+	box-shadow: none;
 	box-sizing: border-box;
 	color: #121212;
 	text-decoration: none;
 	overflow: hidden;
+
+	:focus-visible {
+		outline-offset: 2px;
+	}
 
 	::before,
 	::after {
@@ -156,8 +158,7 @@ const cardImageStyles = css`
 	opacity: 0.32;
 `;
 
-const archiveStyles = (isCompact: boolean) => css`
-	${focusHalo};
+const archiveStyles = css`
 	display: flex;
 	width: 100%;
 	min-width: 0;
@@ -171,18 +172,42 @@ const archiveStyles = (isCompact: boolean) => css`
 	box-sizing: border-box;
 	color: #121212;
 	text-decoration: none;
-	${textSans14};
+	${textSansBold14};
 
 	:hover {
 		text-decoration: underline;
 	}
 
 	${from.desktop} {
-		width: ${isCompact ? 'fit-content' : '100%'};
-		min-width: ${isCompact ? '132px' : 0};
-		align-self: ${isCompact ? 'flex-end' : 'stretch'};
+		width: fit-content;
+		min-width: 96px;
+		align-self: flex-end;
 	}
 `;
+
+const archiveIconStyles = css`
+	flex: 0 0 auto;
+	margin-left: ${space[2]}px;
+`;
+
+const ArchiveIcon = () => (
+	<svg
+		aria-hidden="true"
+		css={archiveIconStyles}
+		fill="none"
+		height="16"
+		viewBox="0 0 20 16"
+		width="20"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			clipRule="evenodd"
+			d="M3.31176 0L1.88147 1.47908L2.08305 2.8782H1.4495L0 4.37726L1.96786 14.7308L3.82053 16.01H15.4549L17.3076 14.7308L19.3522 4.37726L17.9027 2.8782H17.2884L17.4708 1.46908L16.0405 0L3.31176 0ZM17.2692 4.4772L17.6819 4.89694L15.9349 13.7514L14.9941 14.401H4.2813L3.35016 13.7614L1.67028 4.90693L2.08305 4.4772H17.2692ZM15.7333 2.8782L15.8389 2.04872L15.4069 1.599H3.94532L3.51335 2.03873L3.62854 2.8782H15.7333ZM5.32762 6.2461L5.6156 7.8451H13.6694L13.9574 6.2461H5.32762ZM6.25876 9.2742L6.54674 10.8732H12.7383L13.0263 9.2742H6.25876Z"
+			fill="#121212"
+			fillRule="evenodd"
+		/>
+	</svg>
+);
 
 const crosswordSetToUrl = (set: string): string => {
 	switch (set) {
@@ -248,24 +273,18 @@ const PuzzleCard = ({ item }: { item: PuzzleItem }) => {
 	);
 };
 
-const ArchiveLink = ({
-	archive,
-	isCompact,
-}: {
-	archive: PuzzleItem;
-	isCompact: boolean;
-}) => {
+const ArchiveLink = ({ archive }: { archive: PuzzleItem }) => {
 	const url = getItemUrl(archive);
 
 	return (
 		<a
-			css={archiveStyles(isCompact)}
+			css={archiveStyles}
 			href={url}
 			style={{ backgroundColor: archive.backgroundColour ?? '#F1F1F1' }}
 			{...externalLinkProps(url)}
 		>
 			<span>{archive.title}</span>
-			<span aria-hidden="true">↗</span>
+			<ArchiveIcon />
 		</a>
 	);
 };
@@ -328,10 +347,7 @@ const SectionBlock = ({
 				))}
 			</div>
 			{section.content.archive && (
-				<ArchiveLink
-					archive={section.content.archive}
-					isCompact={hasMultipleCards}
-				/>
+				<ArchiveLink archive={section.content.archive} />
 			)}
 		</section>
 	);
@@ -384,7 +400,7 @@ const FilterButtons = ({
 				return (
 					<button
 						aria-pressed={isActive}
-						css={filterButtonStyles(isActive)}
+						css={filterButtonStyles()}
 						key={filter.id}
 						onClick={() =>
 							onChange(isActive ? undefined : filter.id)
