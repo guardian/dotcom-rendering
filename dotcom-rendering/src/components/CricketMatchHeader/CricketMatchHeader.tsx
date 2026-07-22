@@ -66,15 +66,15 @@ type Props = CricketMatchHeaderProps & {
 };
 
 export const getUrl = (
-	url: URL | undefined,
+	baseUrl: URL | undefined,
 	renderingTarget: RenderingTarget,
 ) => {
 	const searchParams = new URLSearchParams();
 	if (renderingTarget === 'Apps') {
 		searchParams.append('dcr', 'apps');
 	}
-	if (url) {
-		return `${url.toString()}?${searchParams.toString()}`;
+	if (baseUrl) {
+		return `${baseUrl.toString()}?${searchParams.toString()}`;
 	}
 	return `?${searchParams.toString()}`;
 };
@@ -186,7 +186,9 @@ export const CricketMatchHeader = (props: Props) => {
 					sportKind="cricket"
 					matchKind={match.kind}
 					selected={selectedTab}
-					reportTab={tabs.reportURL}
+					reportTab={
+						new URL(getUrl(tabs.reportURL, props.renderingTarget))
+					}
 					liveTab={
 						new URL(getUrl(tabs.liveURL, props.renderingTarget))
 					}
