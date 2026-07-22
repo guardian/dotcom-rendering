@@ -7,7 +7,7 @@ import {
 	submitClickComponentEvent,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
-import type { ArticleFormat } from '../lib/articleFormat';
+import { type ArticleFormat } from '../lib/articleFormat';
 import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
@@ -280,9 +280,9 @@ type Props = {
 	uniqueId: string;
 	videoStyle: VideoPlayerFormat;
 	aspectRatio: number;
-	posterImage: string;
+	posterImage?: string;
 	posterImageAspectRatio: string;
-	fallbackImage: CardPictureProps['mainImage'];
+	fallbackImage?: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
 	fallbackImageLoading: CardPictureProps['loading'];
 	fallbackImageAlt: CardPictureProps['alt'];
@@ -479,22 +479,23 @@ export const SelfHostedVideo = ({
 		containerAspectRatioDesktop !== undefined &&
 		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
 
-	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(
-				posterImage,
-				posterImageAspectRatio,
-				isTabletOrAbove,
-				/**
-				 * When the video is horizontally letterboxed (grey bars appear at the top and bottom), the
-				 * height of the video is not known, so we measure
-				 * the container. Otherwise, the video element matches the
-				 * rendered width, so we measure the video directly.
-				 */
-				isGreyBarsAtTopAndBottomOnDesktop
-					? videoContainerRef
-					: videoRef,
-			)
-		: undefined;
+	const optimisedPosterImage =
+		!isUndefined(posterImage) && showPosterImage
+			? getOptimisedPosterImage(
+					posterImage,
+					posterImageAspectRatio,
+					isTabletOrAbove,
+					/**
+					 * When the video is horizontally letterboxed (grey bars appear at the top and bottom), the
+					 * height of the video is not known, so we measure
+					 * the container. Otherwise, the video element matches the
+					 * rendered width, so we measure the video directly.
+					 */
+					isGreyBarsAtTopAndBottomOnDesktop
+						? videoContainerRef
+						: videoRef,
+				)
+			: undefined;
 
 	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
 

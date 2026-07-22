@@ -44,10 +44,6 @@ export const SelfHostedVideoInArticle = ({
 	const isVerticalVideo = aspectRatio < 1;
 	const firstVideoSource = sources[0];
 
-	if (!posterImageUrl) {
-		return null;
-	}
-
 	return (
 		<div css={containerStyles}>
 			<Island priority="critical" defer={{ until: 'visible' }}>
