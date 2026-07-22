@@ -359,7 +359,8 @@ const immersiveLandscapeFeatureCss: LayoutCssMap = {
 		leftCol: 'grid-row: 6;',
 	},
 	'right-column': {
-		desktop: `grid-row: 6 / span 3; ${grid.column.right};`,
+		desktop: `grid-row: 6; ${grid.between('centre-column-start', 'right-column-end')};`,
+		leftCol: `grid-row: 5;`,
 	},
 };
 
