@@ -7,11 +7,11 @@ import type { NavType } from '../model/extract-nav';
 import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import { AdmiralScript } from './AdmiralScript.island';
 import { AlreadyVisited } from './AlreadyVisited.island';
+import { useConfig } from './ConfigContext';
 import { FocusStyles } from './FocusStyles.island';
 import { Island } from './Island';
 import { Metrics } from './Metrics.island';
 import { SkipTo } from './SkipTo';
-import { useConfig } from './ConfigContext';
 
 type Props = {
 	puzzlesPage: FEPuzzlesPageType;
@@ -46,7 +46,6 @@ export const PuzzlesPage = ({ puzzlesPage, NAV }: Props) => {
 					commercialMetricsEnabled={
 						!!puzzlesPage.config.switches.commercialMetrics
 					}
-					tests={puzzlesPage.config.abTests}
 				/>
 			</Island>
 			<PuzzlesLayout puzzlesPage={puzzlesPage} NAV={NAV} />

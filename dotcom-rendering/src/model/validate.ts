@@ -9,7 +9,6 @@ import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPag
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
-import { FECrosswordArchivePageType } from '../types/crosswordArchivePage';
 import articleSchema from '../frontend/schemas/feArticle.json';
 import cricketMatchPageSchema from '../frontend/schemas/feCricketMatchPage.json';
 import footballMatchInfoPageSchema from '../frontend/schemas/feFootballMatchInfoPage.json';
@@ -18,6 +17,7 @@ import footballTablesPageSchema from '../frontend/schemas/feFootballTablesPage.j
 import frontSchema from '../frontend/schemas/feFront.json';
 import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
+import type { FECrosswordArchivePageType } from '../types/crosswordArchivePage';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 import type { FENewslettersPageType } from '../types/newslettersPage';
 import type { FEPuzzleIframePageType } from '../types/puzzleIframePage';
@@ -123,15 +123,22 @@ const isPuzzleItem = (data: unknown): boolean =>
 	isString(data.title) &&
 	isString(data.type) &&
 	isString(data.set) &&
+	(data.url === undefined || isString(data.url)) &&
 	(data.image === undefined || isString(data.image)) &&
 	(data.slug === undefined || isString(data.slug)) &&
-	(data.variant === undefined || isString(data.variant));
+	(data.index === undefined || typeof data.index === 'number') &&
+	(data.variant === undefined || isString(data.variant)) &&
+	(data.backgroundColour === undefined || isString(data.backgroundColour)) &&
+	(data.filterId === undefined || isString(data.filterId));
 
 const isPuzzleContainer = (data: unknown): boolean => {
 	if (
 		!isObject(data) ||
 		!isString(data.title) ||
 		(data.variant !== undefined && !isString(data.variant)) ||
+		(data.filterId !== undefined && !isString(data.filterId)) ||
+		(data.desktopSpan !== undefined &&
+			typeof data.desktopSpan !== 'number') ||
 		!isObject(data.content)
 	) {
 		return false;
@@ -150,9 +157,17 @@ const isPuzzleContainer = (data: unknown): boolean => {
 		content.nestedContainers.every((container) =>
 			isPuzzleContainer(container),
 		);
+	const archiveValid =
+		content.archive === undefined || isPuzzleItem(content.archive);
 
-	return itemsValid && nestedValid;
+	return itemsValid && nestedValid && archiveValid;
 };
+
+const isPuzzleFilter = (data: unknown): boolean =>
+	isObject(data) &&
+	isString(data.id) &&
+	isString(data.title) &&
+	(data.backgroundColour === undefined || isString(data.backgroundColour));
 
 export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 	if (
@@ -164,6 +179,11 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 		isObject(data.nav) &&
 		isObject(data.pageFooter) &&
 		isObject(data.layout) &&
+		(data.layout.filters === undefined ||
+			(Array.isArray(data.layout.filters) &&
+				data.layout.filters.every((filter) =>
+					isPuzzleFilter(filter),
+				))) &&
 		Array.isArray(data.layout.containers) &&
 		data.layout.containers.every((container) =>
 			isPuzzleContainer(container),

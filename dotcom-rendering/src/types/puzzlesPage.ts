@@ -12,21 +12,33 @@ export type PuzzleItem = {
 	slug?: string;
 	index?: number;
 	variant?: string;
+	backgroundColour?: string;
+	filterId?: string;
 };
 
 export type PuzzleContent = {
 	items: PuzzleItem[][];
 	nestedContainers: PuzzleContainer[];
+	archive?: PuzzleItem;
 };
 
 export type PuzzleContainer = {
 	title: string;
 	variant?: string;
 	content: PuzzleContent;
+	filterId?: string;
+	desktopSpan?: number;
+};
+
+export type PuzzleFilter = {
+	id: string;
+	title: string;
+	backgroundColour?: string;
 };
 
 export type PuzzlesLayoutType = {
 	containers: PuzzleContainer[];
+	filters?: PuzzleFilter[];
 };
 
 export interface FEPuzzlesPageType {
