@@ -1,4 +1,4 @@
-import { type Alarms, GuEc2App } from '@guardian/cdk';
+import type { Alarms } from '@guardian/cdk';
 import { AccessScope } from '@guardian/cdk/lib/constants';
 import type { NoMonitoring } from '@guardian/cdk/lib/constructs/cloudwatch';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
@@ -8,6 +8,7 @@ import {
 } from '@guardian/cdk/lib/constructs/core';
 import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
+import { GuLoadBalancedAppExperimental } from '@guardian/cdk/lib/experimental/patterns/gu-load-balanced-app';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { aws_cloudwatch, type App as CDKApp, Duration } from 'aws-cdk-lib';
 import type { ScalingInterval } from 'aws-cdk-lib/aws-applicationautoscaling';
@@ -16,6 +17,7 @@ import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
+import { ClusterSettings } from 'aws-cdk-lib/aws-ecs/mixins';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
@@ -37,11 +39,21 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 			};
 		};
 	};
+
+	/**
+	 * Which image to run.
+	 * This should be the image digest (e.g. 'sha256:abc123') to ensure immutable deployments.
+	 *
+	 * @note Currently optional to control which services run in an EC2-ECS hybrid mode, or EC2-only.
+	 *
+	 * @see https://docs.docker.com/dhi/core-concepts/digests
+	 */
+	imageIdentifier?: string;
 }
 
 const addCPUStepScalingPolicy = (
 	context: RenderingCDKStack,
-	ec2App: GuEc2App,
+	app: GuLoadBalancedAppExperimental,
 	props: RenderingCDKStackProps,
 	stage: string,
 ) => {
@@ -52,7 +64,7 @@ const addCPUStepScalingPolicy = (
 			unit: Unit.PERCENT,
 			dimensionsMap: {
 				AutoScalingGroupName:
-					ec2App.autoScalingGroup.autoScalingGroupName,
+					app.autoScalingGroup!.autoScalingGroupName,
 			},
 			statistic: aws_cloudwatch.Stats.percentile(90),
 			period: Duration.seconds(30),
@@ -78,7 +90,7 @@ const addCPUStepScalingPolicy = (
 			context,
 			'CPUScaleUpPolicy',
 			{
-				autoScalingGroup: ec2App.autoScalingGroup,
+				autoScalingGroup: app.autoScalingGroup!,
 				metric: cpuMetric,
 				scalingSteps: props.scaling.policies.step.cpu.scalingStepsOut,
 				adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
@@ -101,15 +113,15 @@ const addCPUStepScalingPolicy = (
 
 const addLatencyStepScalingPolicy = (
 	context: RenderingCDKStack,
-	ec2App: GuEc2App,
+	app: GuLoadBalancedAppExperimental,
 	props: RenderingCDKStackProps,
 	stage: string,
 ) => {
 	if (stage === 'PROD' && props.scaling.policies?.step?.latency) {
 		const latencyMetric = new Metric({
 			dimensionsMap: {
-				LoadBalancer: ec2App.loadBalancer.loadBalancerFullName,
-				TargetGroup: ec2App.targetGroup.targetGroupFullName,
+				LoadBalancer: app.loadBalancer.loadBalancerFullName,
+				TargetGroup: app.targetGroups.ec2!.targetGroupFullName,
 			},
 			metricName: 'TargetResponseTime',
 			namespace: 'AWS/ApplicationELB',
@@ -137,7 +149,7 @@ const addLatencyStepScalingPolicy = (
 			context,
 			'LatencyScaleUpPolicy',
 			{
-				autoScalingGroup: ec2App.autoScalingGroup,
+				autoScalingGroup: app.autoScalingGroup!,
 				metric: latencyMetric,
 				scalingSteps:
 					props.scaling.policies.step.latency.scalingStepsOut,
@@ -162,7 +174,7 @@ const addLatencyStepScalingPolicy = (
 
 		/** Scale in policy */
 		new StepScalingPolicy(context, 'LatencyScaleDownPolicy', {
-			autoScalingGroup: ec2App.autoScalingGroup,
+			autoScalingGroup: app.autoScalingGroup!,
 			metric: latencyMetric,
 			scalingSteps: props.scaling.policies.step.latency.scalingStepsIn,
 			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
@@ -183,7 +195,14 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		const { stack: guStack, region, account } = this;
-		const { guApp, stage, instanceType, scaling, domainName } = props;
+		const {
+			guApp,
+			stage,
+			instanceType,
+			scaling,
+			domainName,
+			imageIdentifier,
+		} = props;
 
 		const artifactsBucket =
 			GuDistributionBucketParameter.getInstance(this).valueAsString;
@@ -201,17 +220,12 @@ export class RenderingCDKStack extends CDKStack {
 					} satisfies Alarms)
 				: ({ noMonitoring: true } satisfies NoMonitoring);
 
-		const ec2App = new GuEc2App(this, {
+		const app = new GuLoadBalancedAppExperimental(this, {
 			app: guApp,
 			access: {
 				// Restrict access to this range within the VPC
 				cidrRanges: [Peer.ipv4('10.0.0.0/8')],
 				scope: AccessScope.INTERNAL,
-			},
-			instanceMetricGranularity: '1Minute',
-			applicationLogging: {
-				enabled: true,
-				systemdUnitName: guApp,
 			},
 			// TODO - should we change to 3000?
 			applicationPort: 9000,
@@ -219,42 +233,91 @@ export class RenderingCDKStack extends CDKStack {
 			// instead of the default 8080 which is unreachable.
 			certificateProps: { domainName },
 			healthcheck: { path: '/_healthcheck' },
-			instanceType,
 			monitoringConfiguration,
-			roleConfiguration: {
-				additionalPolicies: [
-					new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
-						actions: ['cloudwatch:*', 'logs:*'],
-						resources: ['*'],
-					}),
-					new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
-						actions: ['kms:Decrypt', 'kms:DescribeKey'],
-						resources: [
-							`arn:aws:kms:${region}:${account}:FrontendConfigKey`,
-						],
-					}),
-					new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
-						actions: [
-							'ssm:GetParametersByPath',
-							'ssm:GetParameter',
-						],
-						resources: [
-							// This is for backwards compatibility reasons with frontend apps and an old SSM naming system
-							// TODO - ideally we should convert these params to use the newer naming style for consistency
-							`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
-							`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
-						],
-					}),
-				],
+			additionalPolicies: [
+				new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
+					actions: ['cloudwatch:*', 'logs:*'],
+					resources: ['*'],
+				}),
+				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
+					actions: ['kms:Decrypt', 'kms:DescribeKey'],
+					resources: [
+						`arn:aws:kms:${region}:${account}:FrontendConfigKey`,
+					],
+				}),
+				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
+					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
+					resources: [
+						// This is for backwards compatibility reasons with frontend apps and an old SSM naming system
+						// TODO - ideally we should convert these params to use the newer naming style for consistency
+						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
+					],
+				}),
+			],
+			ec2Props: {
+				instanceMetricGranularity: '1Minute',
+				applicationLogging: {
+					enabled: true,
+					systemdUnitName: guApp,
+				},
+				instanceType,
+				scaling,
+				userData: getUserData({
+					guApp,
+					guStack,
+					stage,
+					artifactsBucket,
+				}),
 			},
-			scaling,
-			userData: getUserData({
-				guApp,
-				guStack,
-				stage,
-				artifactsBucket,
-			}),
+
+			// Provision ECS resources only when `imageIdentifier` has been provided
+			...(imageIdentifier == null
+				? {}
+				: {
+						ecsProps: {
+							repositoryName: 'guardian/dotcom-rendering',
+							imageIdentifier,
+
+							// TODO tune these values
+							memoryLimitMiB: 2048,
+							cpu: 1024,
+							scaling: {
+								minimumTasks: 1,
+								maximumTasks: 2,
+							},
+						},
+
+						// Route all traffic to EC2
+						targetGroupWeights: {
+							ec2: 1,
+							ecs: 0,
+						},
+					}),
 		});
+
+		if (imageIdentifier != null) {
+			const ecsEnvVars: Record<string, string> = {
+				NODE_ENV: 'production',
+				GU_STAGE: stage,
+				GU_APP: guApp,
+				GU_STACK: guStack,
+			};
+
+			for (const [key, value] of Object.entries(ecsEnvVars)) {
+				app.ecsService?.taskDefinition.defaultContainer?.addEnvironment(
+					key,
+					value,
+				);
+			}
+
+			// TODO enable this at the pattern level in GuCDK
+			app.ecsService?.cluster.with(
+				new ClusterSettings([
+					{ name: 'containerInsights', value: 'enhanced' },
+				]),
+			);
+		}
 
 		/**
 		 * The default Node server keep alive timeout is 5 seconds
@@ -264,21 +327,21 @@ export class RenderingCDKStack extends CDKStack {
 		 * so that the Node app does not prematurely close the connection before the load balancer can accept the response.
 		 * @see https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#connection-idle-timeout
 		 */
-		ec2App.loadBalancer.setAttribute('idle_timeout.timeout_seconds', '4');
+		app.loadBalancer.setAttribute('idle_timeout.timeout_seconds', '4');
 
 		// Maps the certificate domain name to the load balancer DNS name
 		new GuCname(this, 'LoadBalancerDNS', {
 			domainName,
 			app: guApp,
-			resourceRecord: ec2App.loadBalancer.loadBalancerDnsName,
+			resourceRecord: app.loadBalancer.loadBalancerDnsName,
 			ttl: Duration.hours(1),
 		});
 
 		/** Add CPU utilisation based STEP scaling policy for PROD only if a policy is defined */
-		addCPUStepScalingPolicy(this, ec2App, props, stage);
+		addCPUStepScalingPolicy(this, app, props, stage);
 
 		/** Add latency-based STEP scaling policy for PROD only if a policy is defined */
-		addLatencyStepScalingPolicy(this, ec2App, props, stage);
+		addLatencyStepScalingPolicy(this, app, props, stage);
 
 		// Saves the value of the rendering base URL to SSM for frontend apps to use
 		new StringParameter(this, 'RenderingBaseURLParam', {

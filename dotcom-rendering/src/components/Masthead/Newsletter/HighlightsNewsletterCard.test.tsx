@@ -11,6 +11,7 @@ jest.mock('../../../lib/newsletterSignupTracking', () => ({
 	sendNewsletterSignupEvent: jest.fn(),
 	NEWSLETTER_SIGNUP_COMPONENT_ID: {
 		highlightsCard: (id: string) => `highlights-card-${id}`,
+		highlightsModal: (id: string) => `highlights-modal-${id}`,
 	},
 }));
 
@@ -26,8 +27,17 @@ jest.mock('../HighlightsCardImage', () => ({
 
 jest.mock('./HighlightsNewsletterSignupModal', () => ({
 	HighlightsNewsletterSignupModal: jest.fn(
-		({ onClose }: { onClose: () => void }) => (
-			<div data-testid="highlights-newsletter-signup-modal">
+		({
+			onClose,
+			componentId,
+		}: {
+			onClose: () => void;
+			componentId: string;
+		}) => (
+			<div
+				data-testid="highlights-newsletter-signup-modal"
+				data-component-id={componentId}
+			>
 				<button type="button" onClick={onClose}>
 					Close signup form
 				</button>
@@ -78,7 +88,7 @@ describe('HighlightsNewsletterCard', () => {
 		setCardInView(false);
 	});
 
-	it('opens signup modal on Web click and tracks click', () => {
+	it('opens signup modal on Web click and tracks EXPAND', () => {
 		setCardInView(true);
 
 		renderCard();
@@ -105,7 +115,10 @@ describe('HighlightsNewsletterCard', () => {
 		fireEvent.click(link);
 		expect(
 			screen.getByTestId('highlights-newsletter-signup-modal'),
-		).toBeInTheDocument();
+		).toHaveAttribute(
+			'data-component-id',
+			`highlights-modal-${defaultProps.newsletter.identityName}`,
+		);
 
 		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
 			expect.objectContaining({
@@ -234,6 +247,24 @@ describe('HighlightsNewsletterCard', () => {
 					altText: `${defaultProps.newsletter.name} newsletter`,
 				},
 			}),
+		);
+	});
+
+	it('sets card and modal component IDs on the link to match the Ophan component IDs', () => {
+		renderCard();
+
+		const link = screen.getByRole('link', {
+			name: defaultProps.headlineText,
+		});
+
+		expect(link).toHaveAttribute(
+			'data-card-component-id',
+			`highlights-card-${defaultProps.newsletter.identityName}`,
+		);
+
+		expect(link).toHaveAttribute(
+			'data-modal-component-id',
+			`highlights-modal-${defaultProps.newsletter.identityName}`,
 		);
 	});
 

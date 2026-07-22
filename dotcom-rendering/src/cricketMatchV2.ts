@@ -5,6 +5,7 @@ import type {
 	FECricketMatch,
 	FECricketMatchResult,
 	FECricketMatchResultWinnerStatus,
+	FECricketMatchStatsSummary,
 	FECricketTeam,
 } from './frontend/feCricketMatchPage';
 import { parseDate, parseIntResult } from './lib/parse';
@@ -62,6 +63,7 @@ export type CricketTeam = {
 export type Innings = {
 	description: string;
 	battingTeam: string;
+	order: number;
 	bowlers: Bowler[];
 	batters: Batter[];
 	extras: Extras;
@@ -128,6 +130,12 @@ export type CricketMatch = {
 	innings: Innings[];
 	result?: CricketResult;
 	officials: string[];
+};
+
+export type CricketMatchStatsSummary = {
+	status: string;
+	currentBattingTeam?: string;
+	notOutBatters?: Batter[];
 };
 
 const paCricketStatusToMatchKind: Record<string, CricketMatchKind> = {
@@ -220,6 +228,15 @@ const parseTeams = (
 		},
 	});
 };
+
+export const parseMatchStatsSummary = (
+	feCricketMatchStatsSummary: FECricketMatchStatsSummary,
+): Result<ParserError, CricketMatchStatsSummary> =>
+	ok({
+		status: feCricketMatchStatsSummary.status,
+		currentBattingTeam: feCricketMatchStatsSummary.currentBattingTeam,
+		notOutBatters: feCricketMatchStatsSummary.notOutBatters,
+	});
 
 const parseWinnerResult = (
 	winner: FECricketMatchResultWinnerStatus,
@@ -335,6 +352,7 @@ export const parseCricketMatchV2 = (
 				innings: feMatch.innings.map((innings) => ({
 					description: innings.description,
 					battingTeam: innings.battingTeam,
+					order: innings.order,
 					bowlers: innings.bowlers.map((bowler) => ({
 						name: bowler.name,
 						overs: bowler.overs,

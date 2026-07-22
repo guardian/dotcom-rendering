@@ -11,8 +11,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       "GuVpcParameter",
       "GuSubnetListParameter",
       "GuSubnetListParameter",
-      "GuEc2App",
-      "GuCertificate",
+      "GuLoadBalancedAppExperimental",
       "GuInstanceRole",
       "GuSsmSshPolicy",
       "GuDescribeEC2Policy",
@@ -23,9 +22,10 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       "GuAmiParameter",
       "GuHttpsEgressSecurityGroup",
       "GuAutoScalingGroup",
+      "GuApplicationTargetGroup",
+      "GuCertificate",
       "GuApplicationLoadBalancer",
       "GuAccessLoggingBucketParameter",
-      "GuApplicationTargetGroup",
       "GuHttpsApplicationListener",
       "GuSecurityGroup",
       "GuAlb5xxPercentageAlarm",
@@ -1610,6 +1610,1838 @@ systemctl start article-rendering",
         ],
       },
       "Type": "AWS::IAM::InstanceProfile",
+    },
+  },
+}
+`;
+
+exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE (uses ECS) 1`] = `
+{
+  "Metadata": {
+    "gu:cdk:constructs": [
+      "GuDistributionBucketParameter",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuVpcParameter",
+      "GuSubnetListParameter",
+      "GuSubnetListParameter",
+      "GuLoadBalancedAppExperimental",
+      "GuInstanceRole",
+      "GuSsmSshPolicy",
+      "GuDescribeEC2Policy",
+      "GuLoggingStreamNameParameter",
+      "GuLogShippingPolicy",
+      "GuGetDistributablePolicy",
+      "GuParameterStoreReadPolicy",
+      "GuAmiParameter",
+      "GuHttpsEgressSecurityGroup",
+      "GuAutoScalingGroup",
+      "GuApplicationTargetGroup",
+      "GuRiffRaffDeploymentIdParameterExperimental",
+      "GuHttpsEgressSecurityGroup",
+      "GuApplicationTargetGroup",
+      "GuCertificate",
+      "GuApplicationLoadBalancer",
+      "GuAccessLoggingBucketParameter",
+      "GuHttpsApplicationListener",
+      "GuSecurityGroup",
+      "GuCname",
+    ],
+    "gu:cdk:version": "TEST",
+  },
+  "Outputs": {
+    "LoadBalancerTagpagerenderingDnsName": {
+      "Description": "DNS entry for LoadBalancerTagpagerendering",
+      "Value": {
+        "Fn::GetAtt": [
+          "LoadBalancerTagpagerenderingB0B7AC4E",
+          "DNSName",
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "AMITagpagerendering": {
+      "Description": "Amazon Machine Image ID for the app tag-page-rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
+      "Type": "AWS::EC2::Image::Id",
+    },
+    "AccessLoggingBucket": {
+      "Default": "/account/services/access-logging/bucket",
+      "Description": "S3 bucket to store your access logs",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "DeployToolsAccountIdParameter": {
+      "Default": "/organisation/accounts/deployTools",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "DistributionBucketName": {
+      "Default": "/account/services/artifact.bucket",
+      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "LoggingStreamName": {
+      "Default": "/account/services/logging.stream.name",
+      "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "RiffRaffDeploymentId": {
+      "Description": "Used by Riff-Raff to inject the deployment ID.",
+      "Type": "String",
+    },
+    "VpcId": {
+      "Default": "/account/vpc/primary/id",
+      "Description": "Virtual Private Cloud to run EC2 instances within. Should NOT be the account default VPC.",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::VPC::Id>",
+    },
+    "tagpagerenderingPrivateSubnets": {
+      "Default": "/account/vpc/primary/subnets/private",
+      "Description": "A list of private subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
+    },
+    "tagpagerenderingPublicSubnets": {
+      "Default": "/account/vpc/primary/subnets/public",
+      "Description": "A list of public subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
+    },
+  },
+  "Resources": {
+    "AllowPolicyCloudwatchLogsA783E5B4": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "cloudwatch:*",
+                "logs:*",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyCloudwatchLogsA783E5B4",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleTagpagerendering171BC2F9",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyDescribeDecryptKmsE91286F3": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:kms:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":FrontendConfigKey",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyDescribeDecryptKmsE91286F3",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleTagpagerendering171BC2F9",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyGetSsmParamsByPathB54B2DE8": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ssm:GetParametersByPath",
+                "ssm:GetParameter",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/frontend/*",
+                    ],
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/dotcom/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleTagpagerendering171BC2F9",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AutoScalingGroupTagpagerenderingASG7F7E0748": {
+      "Properties": {
+        "HealthCheckGracePeriod": 120,
+        "HealthCheckType": "ELB",
+        "LaunchTemplate": {
+          "LaunchTemplateId": {
+            "Ref": "frontendCODEtagpagerendering3C218821",
+          },
+          "Version": {
+            "Fn::GetAtt": [
+              "frontendCODEtagpagerendering3C218821",
+              "LatestVersionNumber",
+            ],
+          },
+        },
+        "MaxSize": "3",
+        "MetricsCollection": [
+          {
+            "Granularity": "1Minute",
+          },
+        ],
+        "MinSize": "1",
+        "Tags": [
+          {
+            "Key": "App",
+            "PropagateAtLaunch": true,
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "PropagateAtLaunch": true,
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "PropagateAtLaunch": true,
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "LogKinesisStreamName",
+            "PropagateAtLaunch": true,
+            "Value": {
+              "Ref": "LoggingStreamName",
+            },
+          },
+          {
+            "Key": "Stack",
+            "PropagateAtLaunch": true,
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "PropagateAtLaunch": true,
+            "Value": "CODE",
+          },
+          {
+            "Key": "SystemdUnit",
+            "PropagateAtLaunch": true,
+            "Value": "tag-page-rendering.service",
+          },
+        ],
+        "TargetGroupARNs": [
+          {
+            "Ref": "TargetGroupTagpagerendering42E428EE",
+          },
+        ],
+        "VPCZoneIdentifier": {
+          "Ref": "tagpagerenderingPrivateSubnets",
+        },
+      },
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
+    },
+    "CertificateTagpagerendering5182FE63": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "DomainName": "tag-page-rendering.code.dev-guardianapis.com",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Name",
+            "Value": "TagPageRendering-CODE/CertificateTagpagerendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "ValidationMethod": "DNS",
+      },
+      "Type": "AWS::CertificateManager::Certificate",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "DescribeEC2PolicyFF5F9295": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "autoscaling:DescribeAutoScalingInstances",
+                "autoscaling:DescribeAutoScalingGroups",
+                "ec2:DescribeTags",
+                "ec2:DescribeInstances",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "describe-ec2-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleTagpagerendering171BC2F9",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EcsService81FC6EF6": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+        "ListenerTagpagerenderingDeterministicRouteToEc2Rule1C5C95A4",
+        "ListenerTagpagerenderingDeterministicRouteToEcsRuleAB05C756",
+        "ListenerTagpagerendering92E57078",
+      ],
+      "Properties": {
+        "Cluster": {
+          "Ref": "tagpagerenderingEcsClusterE7696595",
+        },
+        "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
+          "DeploymentCircuitBreaker": {
+            "Enable": true,
+            "Rollback": true,
+          },
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 100,
+        },
+        "DeploymentController": {
+          "Type": "ECS",
+        },
+        "EnableECSManagedTags": false,
+        "HealthCheckGracePeriodSeconds": 60,
+        "LaunchType": "FARGATE",
+        "LoadBalancers": [
+          {
+            "ContainerName": "tag-page-rendering",
+            "ContainerPort": 9000,
+            "TargetGroupArn": {
+              "Ref": "EcsTargetGroupTagpagerendering06213654",
+            },
+          },
+        ],
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": {
+              "Ref": "tagpagerenderingPrivateSubnets",
+            },
+          },
+        },
+        "PropagateTags": "SERVICE",
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TaskDefinition": {
+          "Ref": "EcsTaskDefinition63157ED3",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "EcsServiceTaskCountTarget02FCCE22": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "MaxCapacity": 2,
+        "MinCapacity": 1,
+        "ResourceId": {
+          "Fn::Join": [
+            "",
+            [
+              "service/",
+              {
+                "Ref": "tagpagerenderingEcsClusterE7696595",
+              },
+              "/",
+              {
+                "Fn::GetAtt": [
+                  "EcsService81FC6EF6",
+                  "Name",
+                ],
+              },
+            ],
+          ],
+        },
+        "RoleARN": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+            ],
+          ],
+        },
+        "ScalableDimension": "ecs:service:DesiredCount",
+        "ServiceNamespace": "ecs",
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+    },
+    "EcsTargetGroupTagpagerendering06213654": {
+      "Properties": {
+        "HealthCheckIntervalSeconds": 10,
+        "HealthCheckPath": "/_healthcheck",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 5,
+        "HealthyThresholdCount": 5,
+        "Port": 9000,
+        "Protocol": "HTTP",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "ip",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "EcsTaskDefinition63157ED3": {
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "DockerLabels": {
+              "RiffRaffDeploymentId": {
+                "Ref": "RiffRaffDeploymentId",
+              },
+            },
+            "Environment": [
+              {
+                "Name": "NODE_ENV",
+                "Value": "production",
+              },
+              {
+                "Name": "GU_STAGE",
+                "Value": "CODE",
+              },
+              {
+                "Name": "GU_APP",
+                "Value": "tag-page-rendering",
+              },
+              {
+                "Name": "GU_STACK",
+                "Value": "frontend",
+              },
+            ],
+            "Essential": true,
+            "Image": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "DeployToolsAccountIdParameter",
+                  },
+                  ".dkr.ecr.eu-west-1.",
+                  {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/guardian/dotcom-rendering@sha256:12345",
+                ],
+              ],
+            },
+            "LogConfiguration": {
+              "LogDriver": "awsfirelens",
+              "Options": {
+                "Name": "kinesis_streams",
+                "region": "eu-west-1",
+                "retry_limit": "2",
+                "stream": {
+                  "Ref": "LoggingStreamName",
+                },
+              },
+            },
+            "Name": "tag-page-rendering",
+            "PortMappings": [
+              {
+                "ContainerPort": 9000,
+                "Protocol": "tcp",
+              },
+            ],
+            "ReadonlyRootFilesystem": true,
+            "VersionConsistency": "disabled",
+          },
+          {
+            "Environment": [
+              {
+                "Name": "STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "STAGE",
+                "Value": "CODE",
+              },
+              {
+                "Name": "APP",
+                "Value": "tag-page-rendering",
+              },
+              {
+                "Name": "TASK_NAME",
+                "Value": "tag-page-rendering",
+              },
+              {
+                "Name": "GU_REPO",
+                "Value": "guardian/dotcom-rendering",
+              },
+            ],
+            "Essential": true,
+            "FirelensConfiguration": {
+              "Type": "fluentbit",
+            },
+            "Image": "ghcr.io/guardian/devx-logs@sha256:cf91724a5166f1c143e07958820aa2122afb61c164b68555d15cb92abb5acda0",
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "EcsTaskDefinitionLogShippingLogGroup0E405BD0",
+                },
+                "awslogs-region": "eu-west-1",
+                "awslogs-stream-prefix": "frontend/CODE/tag-page-rendering/devx-logs-sidecar",
+              },
+            },
+            "MountPoints": [
+              {
+                "ContainerPath": "/init",
+                "ReadOnly": false,
+                "SourceVolume": "logging-volume",
+              },
+            ],
+            "Name": "LogShipping",
+            "ReadonlyRootFilesystem": true,
+            "VersionConsistency": "disabled",
+          },
+        ],
+        "Cpu": "1024",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "EcsTaskDefinitionExecutionRoleBE450C73",
+            "Arn",
+          ],
+        },
+        "Family": "TagPageRenderingCODEEcsTaskDefinition616FF027",
+        "Memory": "2048",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE",
+        ],
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "EcsTaskDefinitionTaskRoleB7B6D8DD",
+            "Arn",
+          ],
+        },
+        "Volumes": [
+          {
+            "Name": "logging-volume",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "EcsTaskDefinitionExecutionRoleBE450C73": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EcsTaskDefinitionExecutionRoleDefaultPolicy1611A942": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":ecr:eu-west-1:",
+                    {
+                      "Ref": "DeployToolsAccountIdParameter",
+                    },
+                    ":repository/guardian/dotcom-rendering",
+                  ],
+                ],
+              },
+            },
+            {
+              "Action": "ecr:GetAuthorizationToken",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:ecr:eu-west-1:694911143906:repository/aws-guardduty-agent-fargate",
+            },
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EcsTaskDefinitionLogShippingLogGroup0E405BD0",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EcsTaskDefinitionExecutionRoleDefaultPolicy1611A942",
+        "Roles": [
+          {
+            "Ref": "EcsTaskDefinitionExecutionRoleBE450C73",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EcsTaskDefinitionLogShippingLogGroup0E405BD0": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "RetentionInDays": 1,
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "EcsTaskDefinitionTaskRoleB7B6D8DD": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "GetDistributablePolicyTagpagerendering346128E3": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:GetObject",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:s3:::",
+                    {
+                      "Ref": "DistributionBucketName",
+                    },
+                    "/frontend/CODE/tag-page-rendering/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GetDistributablePolicyTagpagerendering346128E3",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleTagpagerendering171BC2F9",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "GuHttpsEgressSecurityGroupTagpagerenderingDC233ADE": {
+      "Properties": {
+        "GroupDescription": "Allow all outbound HTTPS traffic",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound HTTPS traffic",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36": {
+      "Properties": {
+        "GroupDescription": "Allow all outbound HTTPS traffic",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound HTTPS traffic",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering-ecs",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GuHttpsEgressSecurityGroupTagpagerenderingecsfromTagPageRenderingCODEInternalIngressSecurityGroupTagpagerendering0B98E4F990001A2DADD1": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupTagpagerendering38FD16DB",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupTagpagerenderingecsfromTagPageRenderingCODELoadBalancerTagpagerenderingSecurityGroup301E895290004324C739": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupTagpagerenderingfromTagPageRenderingCODEInternalIngressSecurityGroupTagpagerendering0B98E4F9900035DE48AC": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupTagpagerenderingDC233ADE",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupTagpagerendering38FD16DB",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupTagpagerenderingfromTagPageRenderingCODELoadBalancerTagpagerenderingSecurityGroup301E895290002304A373": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupTagpagerenderingDC233ADE",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuLogShippingPolicy981BFE5A": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "kinesis:Describe*",
+                "kinesis:Put*",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:kinesis:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":stream/",
+                    {
+                      "Ref": "LoggingStreamName",
+                    },
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GuLogShippingPolicy981BFE5A",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleTagpagerendering171BC2F9",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "InstanceRoleTagpagerendering171BC2F9": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Path": "/",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "InternalIngressSecurityGroupTagpagerendering38FD16DB": {
+      "Properties": {
+        "GroupDescription": "Allow restricted ingress from CIDR ranges",
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "10.0.0.0/8",
+            "Description": "Allow access on port 443 from 10.0.0.0/8",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "InternalIngressSecurityGroupTagpagerenderingtoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF3890004F95C890": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupTagpagerenderingDC233ADE",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupTagpagerendering38FD16DB",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "InternalIngressSecurityGroupTagpagerenderingtoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900094544771": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupTagpagerendering38FD16DB",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "ListenerTagpagerendering92E57078": {
+      "Properties": {
+        "Certificates": [
+          {
+            "CertificateArn": {
+              "Ref": "CertificateTagpagerendering5182FE63",
+            },
+          },
+        ],
+        "DefaultActions": [
+          {
+            "ForwardConfig": {
+              "TargetGroups": [
+                {
+                  "TargetGroupArn": {
+                    "Ref": "TargetGroupTagpagerendering42E428EE",
+                  },
+                  "Weight": 1,
+                },
+                {
+                  "TargetGroupArn": {
+                    "Ref": "EcsTargetGroupTagpagerendering06213654",
+                  },
+                  "Weight": 0,
+                },
+              ],
+            },
+            "Type": "forward",
+          },
+        ],
+        "LoadBalancerArn": {
+          "Ref": "LoadBalancerTagpagerenderingB0B7AC4E",
+        },
+        "Port": 443,
+        "Protocol": "HTTPS",
+        "SslPolicy": "ELBSecurityPolicy-TLS13-1-2-2021-06",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "ListenerTagpagerenderingDeterministicRouteToEc2Rule1C5C95A4": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "TargetGroupTagpagerendering42E428EE",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "http-header",
+            "HttpHeaderConfig": {
+              "HttpHeaderName": "X-Gu-Target-Group",
+              "Values": [
+                "ec2",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "ListenerTagpagerendering92E57078",
+        },
+        "Priority": 10,
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "ListenerTagpagerenderingDeterministicRouteToEcsRuleAB05C756": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "EcsTargetGroupTagpagerendering06213654",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "http-header",
+            "HttpHeaderConfig": {
+              "HttpHeaderName": "X-Gu-Target-Group",
+              "Values": [
+                "ecs",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "ListenerTagpagerendering92E57078",
+        },
+        "Priority": 11,
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "LoadBalancerDNS": {
+      "Properties": {
+        "Name": "tag-page-rendering.code.dev-guardianapis.com",
+        "RecordType": "CNAME",
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "LoadBalancerTagpagerenderingB0B7AC4E",
+              "DNSName",
+            ],
+          },
+        ],
+        "Stage": "CODE",
+        "TTL": 3600,
+      },
+      "Type": "Guardian::DNS::RecordSet",
+    },
+    "LoadBalancerTagpagerenderingB0B7AC4E": {
+      "Properties": {
+        "LoadBalancerAttributes": [
+          {
+            "Key": "deletion_protection.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "routing.http.x_amzn_tls_version_and_cipher_suite.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "routing.http.drop_invalid_header_fields.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "access_logs.s3.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "access_logs.s3.bucket",
+            "Value": {
+              "Ref": "AccessLoggingBucket",
+            },
+          },
+          {
+            "Key": "access_logs.s3.prefix",
+            "Value": "application-load-balancer/CODE/frontend/tag-page-rendering",
+          },
+          {
+            "Key": "idle_timeout.timeout_seconds",
+            "Value": "4",
+          },
+        ],
+        "Scheme": "internal",
+        "SecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+              "GroupId",
+            ],
+          },
+          {
+            "Fn::GetAtt": [
+              "InternalIngressSecurityGroupTagpagerendering38FD16DB",
+              "GroupId",
+            ],
+          },
+        ],
+        "Subnets": {
+          "Ref": "tagpagerenderingPrivateSubnets",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "Type": "application",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    },
+    "LoadBalancerTagpagerenderingSecurityGroup4D481A16": {
+      "Properties": {
+        "GroupDescription": "Automatically created Security Group for ELB TagPageRenderingCODELoadBalancerTagpagerenderingC39A1127",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupTagpagerenderingDC233ADE",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "ParameterStoreReadTagpagerendering4CA7B6E3": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "ssm:GetParametersByPath",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":parameter/CODE/frontend/tag-page-rendering",
+                  ],
+                ],
+              },
+            },
+            {
+              "Action": [
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":parameter/CODE/frontend/tag-page-rendering/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "parameter-store-read-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleTagpagerendering171BC2F9",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "RenderingBaseURLParamAE11E777": {
+      "Properties": {
+        "Description": "The rendering base URL for frontend to call the tag-page-rendering app in the CODE environment",
+        "Name": "/frontend/code/tag-page-rendering.baseURL",
+        "Tags": {
+          "Stack": "frontend",
+          "Stage": "CODE",
+          "gu:cdk:version": "TEST",
+          "gu:repo": "guardian/dotcom-rendering",
+        },
+        "Type": "String",
+        "Value": "https://tag-page-rendering.code.dev-guardianapis.com",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "SsmSshPolicy4CFC977E": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ec2messages:AcknowledgeMessage",
+                "ec2messages:DeleteMessage",
+                "ec2messages:FailMessage",
+                "ec2messages:GetEndpoint",
+                "ec2messages:GetMessages",
+                "ec2messages:SendReply",
+                "ssm:UpdateInstanceInformation",
+                "ssm:ListInstanceAssociations",
+                "ssm:DescribeInstanceProperties",
+                "ssm:DescribeDocumentParameters",
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ssm-ssh-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleTagpagerendering171BC2F9",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "TargetGroupTagpagerendering42E428EE": {
+      "Properties": {
+        "HealthCheckIntervalSeconds": 10,
+        "HealthCheckPath": "/_healthcheck",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 5,
+        "HealthyThresholdCount": 5,
+        "Port": 9000,
+        "Protocol": "HTTP",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "frontendCODEtagpagerendering3C218821": {
+      "DependsOn": [
+        "InstanceRoleTagpagerendering171BC2F9",
+      ],
+      "Properties": {
+        "LaunchTemplateData": {
+          "IamInstanceProfile": {
+            "Arn": {
+              "Fn::GetAtt": [
+                "frontendCODEtagpagerenderingProfile70961F87",
+                "Arn",
+              ],
+            },
+          },
+          "ImageId": {
+            "Ref": "AMITagpagerendering",
+          },
+          "InstanceType": "t4g.small",
+          "MetadataOptions": {
+            "HttpTokens": "required",
+            "InstanceMetadataTags": "enabled",
+          },
+          "Monitoring": {
+            "Enabled": true,
+          },
+          "SecurityGroupIds": [
+            {
+              "Fn::GetAtt": [
+                "GuHttpsEgressSecurityGroupTagpagerenderingDC233ADE",
+                "GroupId",
+              ],
+            },
+          ],
+          "TagSpecifications": [
+            {
+              "ResourceType": "instance",
+              "Tags": [
+                {
+                  "Key": "App",
+                  "Value": "tag-page-rendering",
+                },
+                {
+                  "Key": "gu:cdk:version",
+                  "Value": "TEST",
+                },
+                {
+                  "Key": "gu:repo",
+                  "Value": "guardian/dotcom-rendering",
+                },
+                {
+                  "Key": "Name",
+                  "Value": "TagPageRendering-CODE/frontend-CODE-tag-page-rendering",
+                },
+                {
+                  "Key": "Stack",
+                  "Value": "frontend",
+                },
+                {
+                  "Key": "Stage",
+                  "Value": "CODE",
+                },
+              ],
+            },
+            {
+              "ResourceType": "volume",
+              "Tags": [
+                {
+                  "Key": "App",
+                  "Value": "tag-page-rendering",
+                },
+                {
+                  "Key": "gu:cdk:version",
+                  "Value": "TEST",
+                },
+                {
+                  "Key": "gu:repo",
+                  "Value": "guardian/dotcom-rendering",
+                },
+                {
+                  "Key": "Name",
+                  "Value": "TagPageRendering-CODE/frontend-CODE-tag-page-rendering",
+                },
+                {
+                  "Key": "Stack",
+                  "Value": "frontend",
+                },
+                {
+                  "Key": "Stage",
+                  "Value": "CODE",
+                },
+              ],
+            },
+          ],
+          "UserData": {
+            "Fn::Base64": {
+              "Fn::Join": [
+                "",
+                [
+                  "#!/bin/bash
+set -ev
+groupadd frontend
+useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
+cd /home/dotcom-rendering
+aws --region eu-west-1 s3 cp s3://",
+                  {
+                    "Ref": "DistributionBucketName",
+                  },
+                  "/frontend/CODE/tag-page-rendering/tag-page-rendering.tar.gz ./
+tar -zxf tag-page-rendering.tar.gz tag-page-rendering
+chown -R dotcom-rendering:frontend tag-page-rendering
+cd tag-page-rendering
+mkdir /var/log/dotcom-rendering
+chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
+cat > /etc/systemd/system/tag-page-rendering.service << EOF
+[Unit]
+Description=tag-page-rendering
+After=network.target
+[Service]
+WorkingDirectory=/home/dotcom-rendering/tag-page-rendering
+Type=simple
+User=dotcom-rendering
+Group=frontend
+StandardError=journal
+StandardOutput=journal
+Environment=TERM=xterm-256color
+Environment=NODE_ENV=production
+Environment=GU_STAGE=CODE
+Environment=GU_APP=tag-page-rendering
+Environment=GU_STACK=frontend
+ExecStart=make prod
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl enable tag-page-rendering
+systemctl start tag-page-rendering",
+                ],
+              ],
+            },
+          },
+        },
+        "TagSpecifications": [
+          {
+            "ResourceType": "launch-template",
+            "Tags": [
+              {
+                "Key": "App",
+                "Value": "tag-page-rendering",
+              },
+              {
+                "Key": "gu:cdk:version",
+                "Value": "TEST",
+              },
+              {
+                "Key": "gu:repo",
+                "Value": "guardian/dotcom-rendering",
+              },
+              {
+                "Key": "Name",
+                "Value": "TagPageRendering-CODE/frontend-CODE-tag-page-rendering",
+              },
+              {
+                "Key": "Stack",
+                "Value": "frontend",
+              },
+              {
+                "Key": "Stage",
+                "Value": "CODE",
+              },
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::EC2::LaunchTemplate",
+    },
+    "frontendCODEtagpagerenderingProfile70961F87": {
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "InstanceRoleTagpagerendering171BC2F9",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "tagpagerenderingEcsClusterE7696595": {
+      "Properties": {
+        "ClusterSettings": [
+          {
+            "Name": "containerInsights",
+            "Value": "enhanced",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::Cluster",
     },
   },
 }

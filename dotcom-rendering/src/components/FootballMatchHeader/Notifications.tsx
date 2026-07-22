@@ -228,7 +228,7 @@ const LiveActivities = (props: {
 }) => (
 	<>
 		<Hr borderStyle="solid" borderColour={border(props.match.kind)} />
-		<LiveActivityDescription matchKind={props.match.kind} />
+		<MatchDescription matchKind={props.match.kind} />
 		<LiveActivitiesToggle
 			id={props.match.paId}
 			activityType="football-match"
@@ -260,10 +260,7 @@ const MatchNotifications = (props: {
 	return (
 		<>
 			<Hr borderStyle="solid" borderColour={border(props.match.kind)} />
-			<Description matchKind={props.match.kind}>
-				Be notified about the lineup, kick-off time, goals, half-time
-				and full time scores
-			</Description>
+			<MatchDescription matchKind={props.match.kind} />
 			<NotificationsToggle
 				displayName={displayName(props.match)}
 				id={props.match.paId}
@@ -293,9 +290,7 @@ const NoneWithReason = (props: {
 	</>
 );
 
-const LiveActivityDescription = (props: {
-	matchKind: FootballMatch['kind'];
-}) => {
+const MatchDescription = (props: { matchKind: FootballMatch['kind'] }) => {
 	switch (props.matchKind) {
 		case 'Fixture':
 			return (

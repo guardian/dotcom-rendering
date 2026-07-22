@@ -282,7 +282,6 @@ export const CrosswordLayout = (props: Props) => {
 												pageId={article.pageId}
 												webTitle={article.webTitle}
 												ajaxUrl={article.config.ajaxUrl}
-												abTests={article.config.abTests}
 												switches={
 													article.config.switches
 												}
@@ -513,11 +512,7 @@ export const CrosswordLayout = (props: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
-			<MobileStickyContainer
-				data-print-layout="hide"
-				contentType={article.contentType}
-				pageId={article.pageId}
-			/>
+			{renderAds && <MobileStickyContainer data-print-layout="hide" />}
 		</>
 	);
 };

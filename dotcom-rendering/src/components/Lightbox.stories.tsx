@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
@@ -264,4 +265,30 @@ export const WithLabs = {
 			},
 		],
 	},
+} satisfies Story;
+
+export const WithHostedAccentColour = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.HostedGallery,
+			theme: ArticleSpecial.Labs,
+		},
+		images: [
+			{
+				...testImage,
+				title: 'Title',
+				displayCredit: true,
+			},
+		],
+	},
+	decorators: (Story) => (
+		<div
+			css={css`
+				--lightbox-divider: purple;
+			`}
+		>
+			{Story()}
+		</div>
+	),
 } satisfies Story;

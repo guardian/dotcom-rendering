@@ -1,19 +1,20 @@
-import type { ComponentProps } from 'react';
 import { safeParse } from 'valibot';
 import { type CricketMatch, parseCricketMatchV2 } from '../../cricketMatchV2';
 import type { FECricketMatchHeader } from '../../frontend/feCricketMatchHeader';
 import { feCricketMatchHeaderSchema } from '../../frontend/feCricketMatchHeader';
 import { safeParseURL } from '../../lib/parse';
 import { error, fromValibot, ok, type Result } from '../../lib/result';
-import type { Tabs } from '../FootballMatchHeader/Tabs';
 
 export type CricketHeaderData = {
-	tabs: ComponentProps<typeof Tabs>;
+	tabs: {
+		liveURL?: URL;
+		reportURL?: URL;
+	};
 	match: CricketMatch;
 };
 
 export const parse =
-	(selected: CricketHeaderData['tabs']['selected']) =>
+	(selectedTab: 'live' | 'info' | 'report', currentUrl: URL) =>
 	(json: unknown): Result<string, CricketHeaderData> => {
 		const feData = fromValibot(safeParse(feCricketMatchHeaderSchema, json));
 
@@ -28,9 +29,10 @@ export const parse =
 		}
 
 		const maybeTabs = createTabs(
-			selected,
 			feData.value,
 			parsedMatch.value.kind,
+			selectedTab,
+			currentUrl,
 		);
 
 		if (!maybeTabs.ok) {
@@ -49,47 +51,57 @@ type MatchURLError = {
 	kind: 'live' | 'report';
 };
 
+/**
+ * Returns the URL for a given tab if we have it, if we don't have it and we are on that tab we can fallback to the current URL, there are some edge cases where live/report tabs urls aren't found by the API e.g the article is not tagged correctly.
+ */
+const getTabURL = (
+	kind: 'live' | 'report',
+	url: string | undefined,
+	selectedTab: 'live' | 'info' | 'report',
+	currentUrl: URL,
+): Result<MatchURLError, URL | undefined> => {
+	if (url === undefined) {
+		if (selectedTab === kind) {
+			return ok(currentUrl);
+		}
+		return ok(undefined);
+	}
+
+	const parsedURL = safeParseURL(url);
+
+	if (!parsedURL.ok) {
+		return error({ kind });
+	}
+
+	return ok(parsedURL.value);
+};
+
 const createTabs = (
-	selected: CricketHeaderData['tabs']['selected'],
 	feData: FECricketMatchHeader,
 	matchKind: CricketMatch['kind'],
+	selectedTab: 'live' | 'info' | 'report',
+	currentUrl: URL,
 ): Result<MatchURLError, CricketHeaderData['tabs']> => {
-	const reportURL =
-		feData.reportURL !== undefined
-			? safeParseURL(feData.reportURL)
-			: undefined;
-	const liveURL =
-		feData.liveURL !== undefined ? safeParseURL(feData.liveURL) : undefined;
-	if (reportURL !== undefined && !reportURL.ok) {
-		return error({ kind: 'report' });
+	const reportURL = getTabURL(
+		'report',
+		feData.reportURL,
+		selectedTab,
+		currentUrl,
+	);
+	const liveURL = getTabURL('live', feData.liveURL, selectedTab, currentUrl);
+
+	if (!reportURL.ok) {
+		return error(reportURL.error);
 	}
 
-	if (liveURL !== undefined && !liveURL.ok) {
-		return error({ kind: 'live' });
+	if (!liveURL.ok) {
+		return error(liveURL.error);
 	}
 
-	switch (selected) {
-		case 'info':
-			return ok({
-				matchKind,
-				sportKind: 'cricket',
-				selected,
-				reportURL: reportURL?.value,
-				liveURL: liveURL?.value,
-			});
-		case 'live':
-			return ok({
-				matchKind,
-				sportKind: 'cricket',
-				selected,
-				reportURL: reportURL?.value,
-			});
-		case 'report':
-			return ok({
-				matchKind,
-				sportKind: 'cricket',
-				selected,
-				liveURL: liveURL?.value,
-			});
-	}
+	return ok({
+		matchKind,
+		sportKind: 'cricket',
+		reportURL: reportURL.value,
+		liveURL: liveURL.value,
+	});
 };

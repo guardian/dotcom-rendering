@@ -220,7 +220,7 @@ const TabButton = (props: {
 				...tabTextStyle(props.matchKind, renderingTarget),
 				borderBottomColor: palette(selected(props.matchKind)),
 			}}
-			aria-current={props.selected || 'page'}
+			aria-current={props.selected && 'page'}
 		>
 			{props.children}
 		</button>

@@ -143,6 +143,49 @@ describe('sdcRequests', () => {
 				},
 			);
 		});
+
+		it('appends preview parameter when present in URL', async () => {
+			Object.defineProperty(window, 'location', {
+				value: {
+					search: '?preview-epic=control',
+				},
+				writable: true,
+			});
+
+			const { getEpic } = await import('./sdcRequests');
+			await getEpic('https://contributions.guardianapis.com', {
+				targeting: {},
+			} as never);
+
+			expect(global.fetch).toHaveBeenCalledWith(
+				'https://contributions.guardianapis.com/epic?preview=control',
+				{
+					method: 'post',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: '{"targeting":{}}',
+				},
+			);
+		});
+
+		it('does not append force when neither is present', async () => {
+			const { getEpic } = await import('./sdcRequests');
+			await getEpic('https://contributions.guardianapis.com', {
+				targeting: {},
+			} as never);
+
+			expect(global.fetch).toHaveBeenCalledWith(
+				'https://contributions.guardianapis.com/epic',
+				{
+					method: 'post',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: '{"targeting":{}}',
+				},
+			);
+		});
 	});
 
 	describe('getBanner', () => {

@@ -1,10 +1,10 @@
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { FollowNotificationsButton, FollowTagButton } from './FollowButtons';
+import { FollowTagButton } from './FollowTagButton';
 
 export default {
-	component: [FollowNotificationsButton, FollowTagButton],
-	title: 'Components/FollowStatus',
+	component: FollowTagButton,
+	title: 'Components/FollowTagButton',
 	args: {
 		isFollowing: false,
 	},
@@ -12,17 +12,11 @@ export default {
 
 export const Default = ({ isFollowing }: { isFollowing: boolean }) => {
 	return (
-		<>
-			<FollowTagButton
-				isFollowing={isFollowing}
-				displayName={'John Doe'}
-				onClickHandler={() => undefined}
-			/>
-			<FollowNotificationsButton
-				isFollowing={isFollowing}
-				onClickHandler={() => undefined}
-			/>
-		</>
+		<FollowTagButton
+			isFollowing={isFollowing}
+			displayName={'John Doe'}
+			onClickHandler={() => undefined}
+		/>
 	);
 };
 
@@ -36,22 +30,6 @@ Default.decorators = [
 		},
 	]),
 ];
-
-export const NotificationsButtonBothStates = () => {
-	return (
-		<>
-			<FollowNotificationsButton
-				isFollowing={false}
-				onClickHandler={() => undefined}
-			/>
-			<FollowNotificationsButton
-				isFollowing={true}
-				onClickHandler={() => undefined}
-			/>
-		</>
-	);
-};
-NotificationsButtonBothStates.decorators = [splitTheme()];
 
 export const FollowContributorBothStates = () => {
 	return (

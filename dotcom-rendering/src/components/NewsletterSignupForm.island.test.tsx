@@ -1,8 +1,12 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
-import { forwardRef, useImperativeHandle } from 'react';
+import { type ComponentProps, forwardRef, useImperativeHandle } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
+import {
+	NEWSLETTER_PREVIEW_AB_TEST_NAME,
+	NEWSLETTER_PREVIEW_VARIANT,
+} from '../lib/newsletterSignupAbTest';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
@@ -75,7 +79,9 @@ jest.mock('react-google-recaptcha', () => ({
 	),
 }));
 
-const renderForm = () =>
+const renderForm = (
+	props?: Partial<ComponentProps<typeof NewsletterSignupForm>>,
+) =>
 	render(
 		<ConfigProvider
 			value={{
@@ -89,6 +95,8 @@ const renderForm = () =>
 				newsletterId="morning-briefing"
 				newsletterName="Morning Briefing"
 				frequency="every day"
+				componentId="AR NewsletterSignupForm morning-briefing"
+				{...props}
 			/>
 		</ConfigProvider>,
 	);
@@ -101,7 +109,14 @@ const getTrackedEventDescription = (call: unknown[]): string => {
 
 const getTrackedPayloadForEvent = (
 	eventDescription: string,
-): { eventDescription: string; marketingOptInType?: string } | undefined => {
+):
+	| {
+			eventDescription: string;
+			marketingOptInType?: string;
+			responseStatus?: number;
+			errorType?: string;
+	  }
+	| undefined => {
 	const trackingCalls = (submitComponentEvent as jest.Mock).mock
 		.calls as Array<[{ value: string }]>;
 
@@ -109,6 +124,8 @@ const getTrackedPayloadForEvent = (
 		const parsed = JSON.parse(payload.value) as {
 			eventDescription: string;
 			marketingOptInType?: string;
+			responseStatus?: number;
+			errorType?: string;
 		};
 
 		if (parsed.eventDescription === eventDescription) {
@@ -226,6 +243,28 @@ describe('NewsletterSignupForm', () => {
 			getTrackedPayloadForEvent('submission-confirmed')
 				?.marketingOptInType,
 		).toBe('similar-guardian-products-optin');
+	});
+
+	it('forwards AB metadata to tracking events when provided', async () => {
+		const testUser = user.setup();
+		const abTest = {
+			name: NEWSLETTER_PREVIEW_AB_TEST_NAME,
+			variant: NEWSLETTER_PREVIEW_VARIANT.illustrated,
+		} as const;
+
+		renderForm({ abTest });
+
+		await typeEmailAddress(testUser);
+		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+
+		await waitFor(() => {
+			expect(screen.getByText("You're signed up!")).toBeInTheDocument();
+		});
+
+		const trackingCalls = (submitComponentEvent as jest.Mock).mock
+			.calls as Array<[{ abTest?: { name: string; variant: string } }]>;
+		const [firstEventPayload] = trackingCalls[0] ?? [{}];
+		expect(firstEventPayload.abTest).toEqual(abTest);
 	});
 
 	it('supports tab order from email input to marketing toggle to sign up', async () => {
@@ -396,7 +435,9 @@ describe('NewsletterSignupForm', () => {
 
 	it('shows failure UI with retry', async () => {
 		const testUser = user.setup();
-		global.fetch = jest.fn().mockResolvedValue({ ok: false } as Response);
+		global.fetch = jest
+			.fn()
+			.mockResolvedValue({ ok: false, status: 500 } as Response);
 
 		renderForm();
 
@@ -415,6 +456,9 @@ describe('NewsletterSignupForm', () => {
 			'form-submission',
 			'submission-failed',
 		]);
+		expect(
+			getTrackedPayloadForEvent('submission-failed')?.responseStatus,
+		).toBe(500);
 
 		await testUser.click(screen.getByRole('button', { name: 'Try again' }));
 
@@ -486,6 +530,36 @@ describe('NewsletterSignupForm', () => {
 		expect(
 			screen.getByRole('button', { name: 'Sign up' }),
 		).toBeInTheDocument();
+	});
+
+	it('tracks an error type when the submit request throws', async () => {
+		const testUser = user.setup();
+		global.fetch = jest
+			.fn()
+			.mockRejectedValue(new TypeError('Failed to fetch'));
+
+		renderForm();
+
+		await typeEmailAddress(testUser);
+		await testUser.click(screen.getByRole('button', { name: 'Sign up' }));
+
+		await waitFor(() => {
+			expect(
+				screen.getByText(/there was an error signing you up\./i),
+			).toBeInTheDocument();
+		});
+
+		expectTrackedEventDescriptions([
+			'email-input-focused',
+			'click-button',
+			'open-captcha',
+			'captcha-passed',
+			'form-submission',
+			'form-submit-error',
+		]);
+		expect(getTrackedPayloadForEvent('form-submit-error')?.errorType).toBe(
+			'network-or-fetch',
+		);
 	});
 
 	describe('US hide marketing toggle (usSignupHideMarketingToggle switch)', () => {
