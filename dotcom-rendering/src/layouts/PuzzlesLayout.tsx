@@ -645,6 +645,14 @@ export const PuzzlesLayout = ({ puzzlesPage, NAV }: Props) => {
 					showTopBorder={false}
 				>
 					<h1 css={titleStyles}>{puzzlesPage.webTitle}</h1>
+					<div css={rowsStyles}>
+						{puzzlesPage.layout.containers.map((container) => (
+							<PuzzleContainerBlock
+								container={container}
+								key={container.title}
+							/>
+						))}
+					</div>
 					<div css={newsletterSignupStyles}>
 						<EmailSignup
 							name="Puzzles updates"
@@ -663,14 +671,6 @@ export const PuzzlesLayout = ({ puzzlesPage, NAV }: Props) => {
 							</Island>
 							<NewsletterPrivacyMessage />
 						</EmailSignup>
-					</div>
-					<div css={rowsStyles}>
-						{puzzlesPage.layout.containers.map((container) => (
-							<PuzzleContainerBlock
-								container={container}
-								key={container.title}
-							/>
-						))}
 					</div>
 				</Section>
 			</main>
