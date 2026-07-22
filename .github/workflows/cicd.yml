@@ -46,7 +46,6 @@ jobs:
       contents: read
       pull-requests: write # required by riff-raff action
     needs: [container, islands, prettier, jest, lint, playwright]
-    if: github.event_name == 'push' # We don't need a riff-raff deployment for merge_group events
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}
