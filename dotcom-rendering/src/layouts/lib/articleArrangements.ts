@@ -164,7 +164,6 @@ const pictureCss: LayoutCssMap = {
 	standfirst: {
 		mobile: 'grid-row: 4;',
 		tablet: 'grid-row: 4;',
-		desktop: 'grid-row: 4;',
 		leftCol: 'grid-row: 2;',
 	},
 	media: {
