@@ -10,7 +10,8 @@
 		"transform": {
 			"react": {
 				"runtime": "automatic",
-				"importSource": "@emotion/react"
+				"importSource": "@emotion/react",
+				"throwIfNamespace": false
 			}
 		},
 		"experimental": {
