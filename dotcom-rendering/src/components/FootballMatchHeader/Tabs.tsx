@@ -72,10 +72,7 @@ const LiveFeed = (props: Pick<Props, 'selected' | 'matchKind' | 'liveTab'>) => {
 
 	if (props.liveTab !== undefined) {
 		return (
-			<Tab
-				matchKind={props.matchKind}
-				href={new URL(`${props.liveTab}?test`)}
-			>
+			<Tab matchKind={props.matchKind} href={new URL(`${props.liveTab}`)}>
 				Live feed
 			</Tab>
 		);

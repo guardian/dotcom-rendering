@@ -65,6 +65,20 @@ type Props = CricketMatchHeaderProps & {
 	refreshInterval: number;
 };
 
+export const getUrl = (
+	url: URL | undefined,
+	renderingTarget: RenderingTarget,
+) => {
+	const searchParams = new URLSearchParams();
+	if (renderingTarget === 'Apps') {
+		searchParams.append('dcr', 'apps');
+	}
+	if (url) {
+		return `${url.toString()}?${searchParams.toString()}`;
+	}
+	return `?${searchParams.toString()}`;
+};
+
 export const CricketMatchHeader = (props: Props) => {
 	const scorecardHashbang = '#scorecard';
 	const locationHash = useLocationHash();
@@ -173,7 +187,9 @@ export const CricketMatchHeader = (props: Props) => {
 					matchKind={match.kind}
 					selected={selectedTab}
 					reportTab={tabs.reportURL}
-					liveTab={tabs.liveURL}
+					liveTab={
+						new URL(getUrl(tabs.liveURL, props.renderingTarget))
+					}
 					infoTab={onInfoTabClick}
 				/>
 			</div>
