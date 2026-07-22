@@ -181,7 +181,7 @@ const pictureCss: LayoutCssMap = {
 	},
 	body: {
 		tablet: 'grid-row: 6;',
-		desktop: `grid-row: 6; ${grid.between('centre-column-start', 'right-column-end')};`,
+		desktop: grid.between('centre-column-start', 'right-column-end'),
 		leftCol: `grid-row: 5;`,
 	},
 };
