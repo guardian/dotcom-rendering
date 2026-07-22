@@ -39,7 +39,7 @@
 		"@guardian/identity-auth": "6.0.1",
 		"@guardian/identity-auth-frontend": "8.1.0",
 		"@guardian/libs": "32.0.0",
-		"@guardian/ophan-tracker-js": "4.0.2",
+		"@guardian/ophan-tracker-js": "5.0.0",
 		"@guardian/react-crossword": "19.0.1",
 		"@guardian/shimport": "1.0.2",
 		"@guardian/source": "12.2.1",
