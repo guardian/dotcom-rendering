@@ -3,17 +3,17 @@ import type { ConfigType } from './config';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
 
-export type CrosswordArchiveTab = {
-	label: string;
-	crosswordType: string;
+export type CrosswordArchiveEntry = {
+	date: string;
 	url: string;
-	isSelected: boolean;
 };
 
-export type CrosswordArchiveEntry = {
+export type CrosswordArchiveSection = {
 	title: string;
-	url: string;
-	isLocked: boolean;
+	cadence: string;
+	crosswordType: string;
+	moreUrl: string;
+	entries: CrosswordArchiveEntry[];
 };
 
 export interface FECrosswordArchivePageType {
@@ -28,7 +28,5 @@ export interface FECrosswordArchivePageType {
 	pageFooter: FooterType;
 	canonicalUrl: string;
 	isAdFreeUser: boolean;
-	selectedType: string;
-	tabs: CrosswordArchiveTab[];
-	entries: CrosswordArchiveEntry[];
+	sections: CrosswordArchiveSection[];
 }

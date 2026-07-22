@@ -68,7 +68,7 @@ export const validateAsFEArticle = (data: unknown): FEArticle => {
 
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateArticle.errors, null, 2)}`,
+ ${JSON.stringify(validateArticle.errors, null, 2)}`,
 	);
 };
 
@@ -80,7 +80,7 @@ export const validateAsEditionsCrosswordType = (
 	}
 	throw new TypeError(
 		`Unable to validate request body for editions crosswords.\n
-		${JSON.stringify(validateEditionsCrossword.errors, null, 2)}`,
+ ${JSON.stringify(validateEditionsCrossword.errors, null, 2)}`,
 	);
 };
 
@@ -92,7 +92,7 @@ export const validateAsFEFront = (data: unknown): FEFront => {
 
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateFront.errors, null, 2)}`,
+ ${JSON.stringify(validateFront.errors, null, 2)}`,
 	);
 };
 
@@ -104,7 +104,7 @@ export const validateAsFETagPage = (data: unknown): FETagPage => {
 
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateTagPage.errors, null, 2)}`,
+ ${JSON.stringify(validateTagPage.errors, null, 2)}`,
 	);
 };
 
@@ -114,7 +114,7 @@ export const validateAsAllEditorialNewslettersPageType = (
 	if (validateAllEditorialNewslettersPage(data)) return data;
 	throw new TypeError(
 		`Unable to validate request body for newsletters page.\n
-		${JSON.stringify(validateAllEditorialNewslettersPage.errors, null, 2)}`,
+ ${JSON.stringify(validateAllEditorialNewslettersPage.errors, null, 2)}`,
 	);
 };
 
@@ -225,26 +225,24 @@ export const validateAsCrosswordArchivePageType = (
 		isString(data.id) &&
 		isString(data.webTitle) &&
 		isString(data.editionId) &&
-		isString(data.selectedType) &&
 		isObject(data.config) &&
 		isObject(data.nav) &&
 		isObject(data.pageFooter) &&
-		Array.isArray(data.tabs) &&
-		data.tabs.every(
-			(tab) =>
-				isObject(tab) &&
-				isString(tab.label) &&
-				isString(tab.crosswordType) &&
-				isString(tab.url) &&
-				typeof tab.isSelected === 'boolean',
-		) &&
-		Array.isArray(data.entries) &&
-		data.entries.every(
-			(entry) =>
-				isObject(entry) &&
-				isString(entry.title) &&
-				isString(entry.url) &&
-				typeof entry.isLocked === 'boolean',
+		Array.isArray(data.sections) &&
+		data.sections.every(
+			(section) =>
+				isObject(section) &&
+				isString(section.title) &&
+				isString(section.cadence) &&
+				isString(section.crosswordType) &&
+				isString(section.moreUrl) &&
+				Array.isArray(section.entries) &&
+				section.entries.every(
+					(entry) =>
+						isObject(entry) &&
+						isString(entry.date) &&
+						isString(entry.url),
+				),
 		)
 	) {
 		return data as unknown as FECrosswordArchivePageType;
@@ -259,7 +257,7 @@ export const validateAsBlock = (data: unknown): Block[] => {
 	if (validateBlock(data)) return data;
 	throw new TypeError(
 		`Unable to validate request body for block.\n
-            ${JSON.stringify(validateBlock.errors, null, 2)}`,
+ ${JSON.stringify(validateBlock.errors, null, 2)}`,
 	);
 };
 
@@ -275,7 +273,7 @@ export const validateAsFootballMatchListPage = (
 
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateFootballMatchListPage.errors, null, 2)}`,
+ ${JSON.stringify(validateFootballMatchListPage.errors, null, 2)}`,
 	);
 };
 
@@ -291,7 +289,7 @@ export const validateAsFootballTablesPage = (
 
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateFootballMatchListPage.errors, null, 2)}`,
+ ${JSON.stringify(validateFootballMatchListPage.errors, null, 2)}`,
 	);
 };
 
@@ -307,7 +305,7 @@ export const validateAsCricketMatchPageType = (
 
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateCricketMatchPage.errors, null, 2)}`,
+ ${JSON.stringify(validateCricketMatchPage.errors, null, 2)}`,
 	);
 };
 
@@ -323,6 +321,6 @@ export const validateAsFootballMatchPageType = (
 
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateFootballMatchInfoPage.errors, null, 2)}`,
+ ${JSON.stringify(validateFootballMatchInfoPage.errors, null, 2)}`,
 	);
 };
