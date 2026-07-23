@@ -69,7 +69,7 @@ export const CricketMatchHeader = (props: Props) => {
 	const scorecardHashbang = '#scorecard';
 	const locationHash = useLocationHash();
 	const currentUrl = new URL(
-		`${props.article.guardianBaseURL}${props.article.pageId}`,
+		`${props.article.guardianBaseURL}/${props.article.pageId}`,
 	);
 
 	const { data, error } = useSWR<CricketHeaderData, Error>(
