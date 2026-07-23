@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { article17, palette, remSpace } from '@guardian/source/foundations';
-import { getProductLinkLabel } from '../lib/affiliateLinksUtils';
+import { getProductLinkLabelWithPrice } from '../lib/affiliateLinksUtils';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { SummaryProduct } from '../types/content';
 import { ProductLinkButton } from './Button/ProductLinkButton';
@@ -52,7 +52,7 @@ const ListItem = ({ product }: { product: SummaryProduct }) => {
 			{cta && (
 				<ProductLinkButton
 					xCustComponentId={'cta-list'}
-					label={getProductLinkLabel(cta)}
+					label={getProductLinkLabelWithPrice(cta)}
 					url={cta.url}
 					minimisePadding={true}
 				/>

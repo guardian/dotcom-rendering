@@ -139,6 +139,13 @@ export const buildXcustParamForAffiliateLink = ({
 	});
 };
 
-export const getProductLinkLabel = (cardCta: ProductCta): string => {
+export const getProductLinkLabelWithoutPrice = (
+	cardCta: ProductCta,
+): string => {
 	return cardCta.text !== '' ? cardCta.text : `Buy at ${cardCta.retailer}`;
+};
+
+export const getProductLinkLabelWithPrice = (cta: ProductCta): string => {
+	const overrideLabel = cta.text.trim().length > 0;
+	return overrideLabel ? cta.text : `${cta.price} at ${cta.retailer}`;
 };
