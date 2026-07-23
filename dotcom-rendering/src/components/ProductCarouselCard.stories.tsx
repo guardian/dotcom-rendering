@@ -9,7 +9,10 @@ const meta = preview.meta({
 	component: ProductCarouselCard,
 	title: 'Components/ProductCarouselCard',
 	args: {
-		product: { ...exampleProduct, h2Id: 'h2-id' },
+		product: {
+			productBlock: { ...exampleProduct, h2Id: 'h2-id' },
+			ctaIndex: 0,
+		},
 		format: {
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
@@ -32,22 +35,25 @@ export const Default = meta.story();
 export const WithLongHeadingProductNameAndCTA = meta.story({
 	args: {
 		product: {
-			...exampleProduct,
-			h2Id: 'h2-id',
-			primaryHeadingHtml: 'Super long product category review name',
-			primaryHeadingText: extractHeadingText(
-				'<em>Super long product: category review name:</em>',
-			),
-			productName:
-				'Sky Kettle with a super duper long name that goes on and on',
-			productCtas: [
-				{
-					url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
-					text: '',
-					retailer: 'John Lewis with a very long name',
-					price: '£45.99',
-				},
-			],
+			productBlock: {
+				...exampleProduct,
+				h2Id: 'h2-id',
+				primaryHeadingHtml: 'Super long product category review name',
+				primaryHeadingText: extractHeadingText(
+					'<em>Super long product: category review name:</em>',
+				),
+				productName:
+					'Sky Kettle with a super duper long name that goes on and on',
+				productCtas: [
+					{
+						url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
+						text: '',
+						retailer: 'John Lewis with a very long name',
+						price: '£45.99',
+					},
+				],
+			},
+			ctaIndex: 0,
 		},
 	},
 });

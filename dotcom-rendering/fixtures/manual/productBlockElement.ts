@@ -1,5 +1,8 @@
 import { extractHeadingText } from '../../src/model/enhanceProductElement';
-import type { ProductBlockElement } from '../../src/types/content';
+import type {
+	ProductBlockElement,
+	SummaryProduct,
+} from '../../src/types/content';
 import { productImage } from './productImage';
 
 export const exampleProduct: ProductBlockElement = {
@@ -247,7 +250,7 @@ export const exampleProduct: ProductBlockElement = {
 	],
 };
 
-export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
+const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 	{
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 		elementId: 'b85ec38b-091b-40c2-8902-a9114df3cfe3',
@@ -531,3 +534,9 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		id: '098',
 	},
 ];
+
+export const exampleSummaryProducts: SummaryProduct[] =
+	exampleAtAGlanceProductArray.map((p) => ({
+		productBlock: p,
+		ctaIndex: 0,
+	}));

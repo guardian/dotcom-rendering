@@ -526,10 +526,28 @@ export interface ProductBlockElement {
 	lowestPrice?: string;
 }
 
-export interface ProductSummaryElement {
-	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
-	matchedProducts: ProductBlockElement[];
-	variant: 'carousel' | 'stacked-default' | 'stacked-expanded';
+export interface SummaryProductRef {
+	productId: string;
+	ctaIndex: number;
+}
+
+export interface SummaryProduct {
+	productBlock: ProductBlockElement;
+	ctaIndex: number;
+}
+
+export interface ProductSummaryBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ProductSummaryBlockElement';
+	products: SummaryProductRef[];
+	displayType: ProductSummaryDisplayType;
+	title: string;
+}
+
+export interface EnhancedProductSummaryElement {
+	_type: 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement';
+	products: SummaryProduct[];
+	displayType: ProductSummaryDisplayType;
+	title: string;
 }
 
 export interface RecipeFeaturedImage {
@@ -924,7 +942,8 @@ export type FEElement =
 	| WitnessTypeBlockElement
 	| CrosswordElement
 	| ProductBlockElement
-	| ProductSummaryElement
+	| ProductSummaryBlockElement
+	| EnhancedProductSummaryElement
 	| RecipeBlockElement;
 
 // -------------------------------------
@@ -982,6 +1001,12 @@ export type ProductStarRating =
 	| '4'
 	| '5'
 	| 'none-selected';
+
+export type ProductSummaryDisplayType =
+	| 'Carousel'
+	| 'CtaList'
+	| 'StackedCard'
+	| 'StackedCardExpanded';
 
 export interface SrcSetItem {
 	src: string;
