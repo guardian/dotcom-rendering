@@ -9,7 +9,6 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
-import { AppsAudioPlayer } from '../components/AppsAudioPlayer.island';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -17,7 +16,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { AudioPlayerWrapper } from '../components/AudioPlayerWrapper.island';
+import { AudioPlayer } from '../components/AudioPlayer/AudioPlayer';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.island';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
@@ -27,7 +26,6 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import { formatAudioDuration } from '../components/ListenToArticle.island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -331,39 +329,15 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 							</div>
 						</GridItem>
 						<GridItem area="media">
-							{isWeb && audioData && (
-								<Island
-									priority="critical"
-									defer={{ until: 'visible' }}
-								>
-									<AudioPlayerWrapper
-										contentIsNotSensitive={
-											!article.config.isSensitive
-										}
-										isAcastEnabled={
-											!!article.config.switches.acast
-										}
-										src={audioData.audioDownloadUrl}
-										mediaId={audioData.mediaId}
-									/>
-								</Island>
-							)}
-							{isApps && audioData && (
-								<Island
-									priority="critical"
-									defer={{ until: 'visible' }}
-								>
-									<AppsAudioPlayer
-										audioDuration={
-											typeof audioData.durationSeconds ===
-											'number'
-												? formatAudioDuration(
-														audioData.durationSeconds,
-													)
-												: undefined
-										}
-									/>
-								</Island>
+							{audioData && (
+								<AudioPlayer
+									audioData={audioData}
+									isSensitive={article.config.isSensitive}
+									isAcastEnabled={
+										!!article.config.switches.acast
+									}
+									isApps={isApps}
+								/>
 							)}
 							<StraightLines
 								cssOverrides={css`
