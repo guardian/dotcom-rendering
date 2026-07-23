@@ -8,27 +8,22 @@ const getSummaryProducts = (
 	pageElements: FEElement[],
 	summaryProducts: SummaryProductRef[],
 ): SummaryProduct[] =>
-	pageElements.reduce<SummaryProduct[]>((acc, element) => {
+	summaryProducts.reduce<SummaryProduct[]>((acc, summaryProduct) => {
+		const matchingPageElement = pageElements.find(
+			(pageElement) =>
+				pageElement._type ===
+					'model.dotcomrendering.pageElements.ProductBlockElement' &&
+				summaryProduct.productId === pageElement.id,
+		);
 		if (
-			element._type !==
+			matchingPageElement?._type ===
 			'model.dotcomrendering.pageElements.ProductBlockElement'
 		) {
-			return acc;
+			acc.push({
+				productBlock: matchingPageElement,
+				ctaIndex: summaryProduct.ctaIndex,
+			});
 		}
-
-		const matchingSummaryProduct = summaryProducts.find(
-			(summaryProduct) => summaryProduct.productId === element.id,
-		);
-
-		if (!matchingSummaryProduct) {
-			return acc;
-		}
-
-		acc.push({
-			productBlock: element,
-			ctaIndex: matchingSummaryProduct.ctaIndex,
-		});
-
 		return acc;
 	}, []);
 
