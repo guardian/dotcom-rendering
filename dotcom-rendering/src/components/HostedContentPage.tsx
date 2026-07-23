@@ -5,6 +5,7 @@ import { HostedGalleryLayout } from '../layouts/HostedGalleryLayout';
 import { HostedVideoLayout } from '../layouts/HostedVideoLayout';
 import { ArticleDesign } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
+import { isFilterPageId } from '../lib/theFilter';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.island';
@@ -91,6 +92,7 @@ export const HostedContentPage = (props: WebProps | AppProps) => {
 			<Lightbox
 				format={format}
 				switches={frontendData.config.switches}
+				isFilterArticle={isFilterPageId(frontendData.pageId)}
 				{...(renderingTarget === 'Web'
 					? {
 							lightboxImages: frontendData.imagesForLightbox,

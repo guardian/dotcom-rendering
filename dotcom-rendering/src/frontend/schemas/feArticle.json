@@ -4772,6 +4772,9 @@
                 },
                 "width": {
                     "type": "number"
+                },
+                "position": {
+                    "type": "number"
                 }
             },
             "required": [

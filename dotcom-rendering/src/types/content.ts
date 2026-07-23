@@ -996,6 +996,7 @@ export interface ProductImage {
 	displayCredit: boolean;
 	height: number;
 	width: number;
+	position?: number;
 }
 
 export interface Image {
@@ -1085,6 +1086,13 @@ export type ImageForLightbox = {
 	 * Used to show when a liveblog image was posted
 	 */
 	firstPublished?: number;
+	/**
+	 * The buy/retailer CTAs for the product this image belongs to — either
+	 * the product's own card photo, or an image nested in its review body.
+	 * Priority is implicit in array order (index 0 is primary), matching
+	 * `ProductCardButtons`.
+	 */
+	productCtas?: ProductCta[];
 };
 
 // -------------------------------------

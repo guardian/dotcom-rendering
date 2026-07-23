@@ -21,6 +21,7 @@ import { LightboxJavascript } from './LightboxJavascript';
 type Props = {
 	format: ArticleFormat;
 	images: ImageForLightbox[];
+	isFilterArticle?: boolean;
 };
 
 const lightboxStyles = css`
@@ -32,6 +33,12 @@ const lightboxStyles = css`
 		/* Always hide the info aside when the hide-info class exists on the lightbox element */
 		aside {
 			display: none;
+		}
+		/* Product links and their accompanying text are commercial content,
+		   not decorative caption info, so they stay visible even when the
+		   reader has chosen to hide the info panel. */
+		aside.lightbox-product-info {
+			display: block;
 		}
 		${until.tablet} {
 			/* Also hide the nav controls when on mobile */
@@ -196,7 +203,11 @@ const Selection = ({
 	);
 };
 
-export const LightboxLayout = ({ format, images }: Props) => {
+export const LightboxLayout = ({
+	format,
+	images,
+	isFilterArticle = false,
+}: Props) => {
 	return (
 		<>
 			<Global
@@ -222,7 +233,11 @@ export const LightboxLayout = ({ format, images }: Props) => {
 				hidden={true}
 			>
 				<div css={containerStyles}>
-					<LightboxJavascript format={format} images={images} />
+					<LightboxJavascript
+						format={format}
+						images={images}
+						isFilterArticle={isFilterArticle}
+					/>
 					<nav css={navStyles}>
 						<button
 							type="button"
@@ -302,6 +317,13 @@ export const LightboxLayout = ({ format, images }: Props) => {
 								css`
 									order: 3;
 								`,
+								// On Filter articles the info is always shown, so
+								// the toggle is redundant. It stays in the DOM
+								// (the lightbox JS requires it) but is hidden.
+								isFilterArticle &&
+									css`
+										display: none;
+									`,
 							]}
 							className="info"
 							title="Toggle caption [i]"

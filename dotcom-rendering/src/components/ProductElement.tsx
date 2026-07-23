@@ -57,6 +57,7 @@ export const ProductElement = ({
 			{showProductCard && (
 				<ProductCardInline
 					format={format}
+					elementId={product.elementId}
 					brandName={product.brandName}
 					productName={product.productName}
 					image={product.image}
@@ -93,6 +94,7 @@ const Content = ({
 				{showLeftCol && (
 					<LeftColProductCardContainer>
 						<ProductCardLeftCol
+							elementId={product.elementId}
 							brandName={product.brandName}
 							productName={product.productName}
 							image={product.image}
