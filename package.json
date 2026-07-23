@@ -18,6 +18,7 @@
 	},
 	"dependencies": {
 		"@guardian/prettier": "10.0.0",
+		"@opentelemetry/propagator-aws-xray": "2.2.0",
 		"@types/chai": "5.2.2",
 		"chromatic": "16.1.0",
 		"husky": "9.1.7",

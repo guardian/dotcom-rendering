@@ -3,6 +3,7 @@ const {
 } = require('@opentelemetry/exporter-trace-otlp-http');
 const { registerInstrumentations } = require('@opentelemetry/instrumentation');
 const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http');
+const { AWSXRayPropagator } = require('@opentelemetry/propagator-aws-xray');
 const { resourceFromAttributes } = require('@opentelemetry/resources');
 const { BatchSpanProcessor } = require('@opentelemetry/sdk-trace-base');
 const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node');
@@ -14,7 +15,9 @@ const provider = new NodeTracerProvider({
 	spanProcessors: [new BatchSpanProcessor(new OTLPTraceExporter())],
 });
 
-provider.register();
+provider.register({
+	propagator: new AWSXRayPropagator(),
+});
 
 registerInstrumentations({
 	instrumentations: [new HttpInstrumentation()],
