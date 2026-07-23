@@ -12,6 +12,7 @@ import { useConfig } from '../../components/ConfigContext';
 import { isProd } from '../../components/marketing/lib/stage';
 import type { StageType } from '../../types/config';
 import type { TagType } from '../../types/tag';
+import { addFeastRecipeToSavedFromWebList } from '../feast/savedFromWeb';
 import { getAuthState, getOptionsHeaders } from '../identity';
 import type { CandidateConfig, CanShowResult } from '../messagePicker';
 import { useAuthStatus } from '../useAuthStatus';
@@ -483,6 +484,7 @@ enum BrazeBannersSystemMessageType {
 	NavigateToUrl = 'BRAZE_BANNERS_SYSTEM:NAVIGATE_TO_URL',
 	DismissBanner = 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
 	GetContext = 'BRAZE_BANNERS_SYSTEM:GET_CONTEXT',
+	SaveFeastRecipeById = 'BRAZE_BANNERS_SYSTEM:SAVE_FEAST_RECIPE_BY_ID',
 }
 
 /**
@@ -653,6 +655,41 @@ export const BrazeBannersSystemDisplay = ({
 		debounce: true,
 		threshold: 0,
 	});
+
+	/**
+	 * Save a Feast recipe by its Id on the "Saved from the Web" recipes list on the App.
+	 * Proxied through DCR's own server (`/api/saved-from-web/:recipeId`),
+	 * which forwards the reader's bearer token to the Feast API. Idempotent:
+	 * saving the same recipe id twice has no extra effect.
+	 * @param feastRecipeId The ID of the Feast recipe to save
+	 * @returns A promise that resolves to true if the add process was successful, or false if it failed or the user is not signed in
+	 */
+	const saveFeastRecipeById = useCallback(
+		async (feastRecipeId: string): Promise<boolean> => {
+			if (authStatus.kind === 'SignedIn') {
+				const success = await addFeastRecipeToSavedFromWebList(
+					authStatus.accessToken.accessToken,
+					feastRecipeId,
+				);
+
+				if (success) {
+					brazeBannersSystemLogger.info(
+						'Successfully saved recipe to the "Saved from web" list:',
+						feastRecipeId,
+					);
+				} else {
+					brazeBannersSystemLogger.warn(
+						'Failed to save recipe to the "Saved from web" list:',
+						feastRecipeId,
+					);
+				}
+
+				return success;
+			}
+			return false;
+		},
+		[authStatus],
+	);
 
 	/**
 	 * Subscribes the user to a newsletter via the Identity API.
@@ -922,6 +959,10 @@ export const BrazeBannersSystemDisplay = ({
 				| {
 						type: BrazeBannersSystemMessageType.GetContext;
 				  }
+				| {
+						type: BrazeBannersSystemMessageType.SaveFeastRecipeById;
+						feastRecipeId?: string;
+				  }
 			>,
 		) => {
 			if (
@@ -1071,6 +1112,34 @@ export const BrazeBannersSystemDisplay = ({
 						},
 					);
 					break;
+				case BrazeBannersSystemMessageType.SaveFeastRecipeById: {
+					meta.braze.logBannerClick(
+						meta.banner,
+						'save_feast_recipe_button',
+					);
+					const { feastRecipeId } = event.data;
+					if (feastRecipeId !== undefined) {
+						void saveFeastRecipeById(feastRecipeId).then(
+							(success) => {
+								postMessageToBrazeBanner(
+									BrazeBannersSystemMessageType.SaveFeastRecipeById,
+									{
+										success,
+									},
+								);
+								meta.braze.logCustomEvent(
+									'braze_banner_save_feast_recipe',
+									{
+										placementId: meta.banner.placementId,
+										feastRecipeId,
+										success,
+									},
+								);
+							},
+						);
+					}
+					break;
+				}
 			}
 		};
 
@@ -1088,6 +1157,7 @@ export const BrazeBannersSystemDisplay = ({
 		dismissBanner,
 		postMessageToBrazeBanner,
 		context,
+		saveFeastRecipeById,
 	]);
 
 	// Log Impressions when the banner is seen, using the hasBeenSeen value from the useIsInView hook
