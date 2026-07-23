@@ -51,7 +51,7 @@ const useDev = () => {
 	return isDev;
 };
 
-const logMvt = (mvtId: string | null) => {
+const logMvt = (mvtId: string | null, abTestCookie: string | null) => {
 	const logsEndpoint = window.guardian.config.page.isDev
 		? '//logs.code.dev-guardianapis.com/log'
 		: '//logs.guardianapis.com/log';
@@ -66,6 +66,7 @@ const logMvt = (mvtId: string | null) => {
 					name: 'pageviewId',
 					value: window.guardian.config.ophan.pageViewId,
 				},
+				{ name: 'abTestCookie', value: abTestCookie },
 			],
 		}),
 		keepalive: true,
@@ -110,8 +111,9 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 		[collectTestMetrics],
 	);
 
-	const isInMonitoringTest =
-		abTests?.isUserInTest('webx-monitor-group-contamination') ?? false;
+	const isInMonitoringTest = abTests?.isUserInTest(
+		'webx-monitor-group-contamination',
+	);
 
 	useEffect(
 		function coreWebVitals() {
@@ -220,7 +222,12 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 				shouldMemoize: true,
 			});
 
-			logMvt(mvtId);
+			const rawClientABTests = getCookie({
+				name: 'gu_client_ab_tests',
+				shouldMemoize: true,
+			});
+
+			logMvt(mvtId, rawClientABTests);
 		},
 		[isInMonitoringTest],
 	);
