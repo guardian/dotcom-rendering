@@ -223,6 +223,11 @@ export function isPlacementStale(id: BrazeBannersSystemPlacementId): boolean {
 }
 
 /**
+ * All known Braze Banners System placement IDs, in enum declaration order.
+ */
+const ALL_PLACEMENT_IDS = Object.values(BrazeBannersSystemPlacementId);
+
+/**
  * Trigger a refresh of Braze Banners System banners
  * "Each call to requestBannersRefresh consumes one token. If you attempt a refresh
  * when no tokens are available, the SDK doesn’t make the request and logs an error
@@ -232,20 +237,36 @@ export function isPlacementStale(id: BrazeBannersSystemPlacementId): boolean {
  * logged, but note the necessary delay for Braze to ingest and process the event
  * before the user qualifies for a different Banner campaign."
  * https://www.braze.com/docs/developer_guide/banners/#rate-limiting-for-refresh-requests
+ *
+ * Stopgap while the number of known placements fits within Braze's
+ * per-request cap: request *all* known placements on every call, rather than
+ * just the ones the caller asked for. A refresh call costs the same one
+ * rate-limit token regardless of how many placement IDs it contains, so this
+ * is free in token terms, and it keeps every placement "warm" for whichever
+ * page happens to render it. Once the enum grows past
+ * `BRAZE_MAX_PLACEMENTS_PER_REFRESH`, this falls back to requesting only the
+ * placements passed in, and the placement-prioritisation problem will need a
+ * proper solution at that point.
  * @param braze The Braze instance
+ * @param placements The placements the current page actually needs
  * @returns A promise that resolves when the refresh is complete
  */
 export function refreshBanners(
 	braze: BrazeInstance,
 	placements: BrazeBannersSystemPlacementId[],
 ): Promise<void> {
+	const placementsToRequest =
+		ALL_PLACEMENT_IDS.length <= BRAZE_MAX_PLACEMENTS_PER_REFRESH
+			? ALL_PLACEMENT_IDS
+			: placements;
+
 	brazeBannersSystemLogger.info(
-		`🔄 Requesting ${placements.length} placement(s): ${placements.join(', ')}`,
+		`🔄 Requesting ${placementsToRequest.length} placement(s): ${placementsToRequest.join(', ')}`,
 	);
 
-	if (placements.length > BRAZE_MAX_PLACEMENTS_PER_REFRESH) {
+	if (placementsToRequest.length > BRAZE_MAX_PLACEMENTS_PER_REFRESH) {
 		brazeBannersSystemLogger.warn(
-			`⚠️ ${placements.length} placements requested, but Braze only processes the first ${BRAZE_MAX_PLACEMENTS_PER_REFRESH} per refresh request. See https://www.braze.com/docs/developer_guide/banners/placements/#requestBannersRefresh`,
+			`⚠️ ${placementsToRequest.length} placements requested, but Braze only processes the first ${BRAZE_MAX_PLACEMENTS_PER_REFRESH} per refresh request. See https://www.braze.com/docs/developer_guide/banners/placements/#requestBannersRefresh`,
 		);
 	}
 
@@ -266,11 +287,11 @@ export function refreshBanners(
 	// Create the Braze Promise
 	const brazeRequest = new Promise<void>((resolve) => {
 		braze.requestBannersRefresh(
-			placements,
+			placementsToRequest,
 			() => {
 				// On success, lift stale status for any suppressable placements
 				// in this batch so a future re-refresh can restore them cleanly.
-				for (const id of placements) {
+				for (const id of placementsToRequest) {
 					if (STALE_SUPPRESSABLE_PLACEMENTS.has(id)) {
 						stalePlacements.delete(id);
 					}
@@ -287,7 +308,7 @@ export function refreshBanners(
 				// canShowBrazeBannersSystem (and direct consumers like
 				// FeastContextualNudge) will not render the cached banner.
 				const markedStale: BrazeBannersSystemPlacementId[] = [];
-				for (const id of placements) {
+				for (const id of placementsToRequest) {
 					if (STALE_SUPPRESSABLE_PLACEMENTS.has(id)) {
 						stalePlacements.add(id);
 						markedStale.push(id);
