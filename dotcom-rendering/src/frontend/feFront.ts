@@ -3,10 +3,17 @@ import type { EditionId } from '../lib/edition';
 import type { EditionBranding } from '../types/branding';
 import type { StageType, Switches } from '../types/config';
 import type {
+	AudioAtomBlockElement,
 	BoostLevel,
+	CallToActionAtomBlockElement,
+	ExplainerAtomBlockElement,
+	GuideAtomBlockElement,
 	Image,
 	Newsletter,
+	ProfileAtomBlockElement,
+	QABlockElement,
 	StarRating,
+	TimelineAtomBlockElement,
 } from '../types/content';
 import type { FooterType } from '../types/footer';
 import type { FENavType } from '../types/frontend';
@@ -275,6 +282,22 @@ export type FESnap = {
 	embedHtml?: string;
 	embedCss?: string;
 	embedJs?: string;
+	/**
+	 * Atom block elements pre-fetched by facia-press so that atoms placed on
+	 * fronts (as snaps) can be rendered server-side. Each field mirrors the
+	 * equivalent DCR block element for that atom type.
+	 */
+	GuideAtom?: GuideAtomBlockElement;
+	QandaAtom?: QABlockElement;
+	ProfileAtom?: ProfileAtomBlockElement;
+	TimelineAtom?: TimelineAtomBlockElement;
+	AudioAtom?: AudioAtomBlockElement;
+	ExplainerAtom?: ExplainerAtomBlockElement;
+	CtaAtom?: CallToActionAtomBlockElement;
+	TempFootballCompetitionAtom?: {
+		competitionId: string;
+		componentType: string;
+	};
 };
 
 export type FEAspectRatio = '5:3' | '5:4' | '4:5' | '1:1';
