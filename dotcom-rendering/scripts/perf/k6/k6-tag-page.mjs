@@ -9,7 +9,7 @@ export default function () {
 	const response = http.post(URL, payload, {
 		headers: {
 			'Content-type': 'application/json',
-			'X-Gu-Target-Group': 'ecs',
+			'X-Gu-Target-Group': 'ecs', //valid options are ecs and ec2
 		},
 	});
 	check(response, {
