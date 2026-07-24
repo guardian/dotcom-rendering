@@ -20,6 +20,7 @@ import {
 } from '../hasCurrentBrazeUser';
 import {
 	brazeBannersSystemLogger,
+	getPagePlacements,
 	isDevelopmentDomain,
 	refreshBanners,
 } from './BrazeBannersSystem';
@@ -132,7 +133,10 @@ export const buildBrazeMessaging = async (
 			// This callback runs every time Braze has new data (initially empty, then populated)
 			const subscriptionId = braze.subscribeToBannersUpdates(
 				(banners) => {
-					brazeBannersSystemLogger.log('📢 Check:', banners);
+					brazeBannersSystemLogger.log(
+						'📢 These Banners were updated:',
+						banners,
+					);
 				},
 			);
 			brazeBannersSystemLogger.info(
@@ -146,7 +150,10 @@ export const buildBrazeMessaging = async (
 		// (Note that this method can only be called once per session.)
 		// Since we want to suppress In-App Messages if a banner exists, we must
 		// call requestBannersRefresh before openSession.
-		await refreshBanners(braze);
+		const placements = getPagePlacements();
+		if (placements.length > 0) {
+			await refreshBanners(braze, placements);
+		}
 
 		braze.openSession();
 
