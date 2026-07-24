@@ -579,7 +579,7 @@ export const StandardLayoutArticleGrid = ({
 								padding-top: ${space[8]}px;
 							}
 						`,
-					isInteractive &&
+					layoutType === 'interactive' &&
 						css`
 							z-index: 10;
 						`,
@@ -810,7 +810,7 @@ export const StandardLayoutArticleGrid = ({
 					}
 				`}
 			>
-				{layoutType !== 'picture' && layoutType !== 'interactive' && (
+				{layoutType !== 'picture' && (
 					<Hide until="desktop">
 						<Island
 							priority="feature"
@@ -830,7 +830,8 @@ export const StandardLayoutArticleGrid = ({
 									!!article.config.shouldHideReaderRevenue
 								}
 								shouldHideMostViewed={
-									format.design === ArticleDesign.Audio
+									format.design === ArticleDesign.Audio ||
+									format.design === ArticleDesign.Interactive
 								}
 							/>
 						</Island>
