@@ -213,7 +213,6 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 				case ArticleDisplay.Immersive:
 					return css`
 						padding-bottom: 0;
-						padding-top: ${space[2]}px;
 
 						${from.tablet} {
 							padding-bottom: 0;
@@ -238,7 +237,6 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 				case ArticleDisplay.Immersive:
 					return css`
 						padding-bottom: 0;
-						padding-top: ${space[2]}px;
 
 						${from.tablet} {
 							padding-bottom: 0;
@@ -268,7 +266,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					`;
 				default:
 					return css`
-						max-width: 280px;
 						${from.tablet} {
 							max-width: 460px;
 						}

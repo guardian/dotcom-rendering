@@ -3,6 +3,7 @@ import { palette } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	ArticleDesign,
+	ArticleDisplay,
 	type ArticleFormat,
 	Pillar,
 } from '../lib/articleFormat';
@@ -41,7 +42,12 @@ const DottedLines = ({
 );
 
 export const DecideLines = ({ format, color }: Props) => {
-	const count = format.design === ArticleDesign.Comment ? 8 : 4;
+	const count =
+		format.design === ArticleDesign.Comment
+			? 8
+			: format.display === ArticleDisplay.Immersive
+				? 1
+				: 4;
 
 	switch (format.theme) {
 		case Pillar.Sport:

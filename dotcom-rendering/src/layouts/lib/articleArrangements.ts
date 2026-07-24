@@ -2,24 +2,33 @@ import { css, type SerializedStyles } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
 import { grid } from '../../grid';
 
-export type LayoutType = 'standard' | 'showcase' | 'media';
+export type LayoutType =
+	| 'standard'
+	| 'showcase'
+	| 'media'
+	| 'immersiveLandscapeDefault'
+	| 'immersiveLandscapeFeature'
+	| 'immersivePortraitDefault'
+	| 'immersivePortraitFeature';
 
 export type Area =
 	| 'title'
 	| 'headline'
 	| 'standfirst'
+	| 'caption'
 	| 'media'
 	| 'meta'
 	| 'body'
 	| 'right-column';
 
-type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'leftCol';
+type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'leftCol' | 'wide';
 
 const breakpointQueries: Record<Breakpoint, string> = {
 	mobile: until.tablet,
 	tablet: from.tablet,
 	desktop: from.desktop,
 	leftCol: from.leftCol,
+	wide: from.wide,
 };
 
 // Raw CSS overrides per area per breakpoint. Entries are only needed when an area
@@ -149,10 +158,182 @@ const mediaCss: LayoutCssMap = {
 	},
 };
 
+const immersivePortraitDefaultCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `grid-row: 1; ${grid.between('left-column-start', 9)};`,
+	},
+	headline: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		desktop: `grid-row: 2; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `grid-row: 2; ${grid.between('left-column-start', 9)};`,
+		wide: `grid-row: 2; ${grid.between('left-column-start', 10)};`,
+	},
+	media: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+		desktop: `grid-row: 1 / span 4; ${grid.between(8, 'right-column-end')};`,
+		leftCol: `grid-row: 1 / span 3; ${grid.between(9, 'right-column-end')};`,
+		wide: `grid-row: 1 / span 3; ${grid.between(10, 'right-column-end')};`,
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		desktop: `grid-row: 3; ${grid.between('centre-column-start', 7)};`,
+		leftCol: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
+		wide: `grid-row: 3; ${grid.between('centre-column-start', 9)};`,
+	},
+	caption: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		desktop: `grid-row: 5;`,
+	},
+	meta: {
+		mobile: 'grid-row: 6;',
+		tablet: 'grid-row: 6;',
+		desktop: `grid-row: 4; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		mobile: 'grid-row: 7;',
+		leftCol: 'grid-row: 4;',
+	},
+	'right-column': {
+		desktop: `grid-row: 5 / span 2; ${grid.column.right};`,
+		leftCol: `grid-row: 4; ${grid.column.right};`,
+	},
+};
+
+const immersivePortraitFeatureCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `grid-row: 1; ${grid.between('left-column-start', 9)};`,
+	},
+	headline: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+		desktop: `grid-row: 2; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `grid-row: 2; ${grid.between('left-column-start', 9)};`,
+		wide: `grid-row: 2; ${grid.between('left-column-start', 10)};`,
+	},
+	media: {
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		desktop: `grid-row: 1 / span 4; ${grid.between(8, 'right-column-end')};`,
+		leftCol: `grid-row: 1 / span 3; ${grid.between(9, 'right-column-end')};`,
+		wide: `grid-row: 1 / span 3; ${grid.between(10, 'right-column-end')};`,
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		desktop: `grid-row: 3; ${grid.between('centre-column-start', 7)};`,
+		leftCol: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
+		wide: `grid-row: 3; ${grid.between('centre-column-start', 9)};`,
+	},
+	caption: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		desktop: `grid-row: 5;`,
+	},
+	meta: {
+		mobile: 'grid-row: 6;',
+		tablet: 'grid-row: 6;',
+		desktop: `grid-row: 4; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		mobile: 'grid-row: 7;',
+		leftCol: 'grid-row: 4;',
+	},
+	'right-column': {
+		desktop: `grid-row: 5 / span 2; ${grid.column.right};`,
+		leftCol: `grid-row: 4; ${grid.column.right};`,
+	},
+};
+
+const immersiveLandscapeDefaultCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		desktop: 'grid-row: 2;',
+	},
+	headline: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		desktop: 'grid-row: 3 / span 2;',
+		wide: `${grid.between('centre-column-start', 14)};`,
+	},
+	media: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+		desktop: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'right-column-end')};`,
+		leftCol: `grid-row: 1 / span 3; ${grid.between('left-column-start', 'right-column-end')};`,
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		desktop: 'grid-row: 5;',
+	},
+	caption: {
+		desktop: 'grid-row: 6;',
+	},
+	meta: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		desktop: `grid-row: 7;`,
+		leftCol: `grid-row: 5 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		leftCol: 'grid-row: 6;',
+	},
+	'right-column': {
+		desktop: `grid-row: 6 / span 3; ${grid.column.right};`,
+	},
+};
+
+const immersiveLandscapeFeatureCss: LayoutCssMap = {
+	title: {
+		desktop: 'grid-row: 2;',
+	},
+	headline: {
+		desktop: 'grid-row: 3 / span 2;',
+	},
+	media: {
+		mobile: `${grid.column.all}`,
+		desktop: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'right-column-end')};`,
+		leftCol: `grid-row: 1 / span 3; ${grid.between('left-column-start', 'right-column-end')};`,
+	},
+	standfirst: {
+		desktop: 'grid-row: 5;',
+	},
+	caption: {
+		desktop: 'grid-row: 6;',
+	},
+	meta: {
+		desktop: `grid-row: 7;`,
+		leftCol: `grid-row: 5 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		leftCol: 'grid-row: 6;',
+	},
+	'right-column': {
+		desktop: `grid-row: 6 / span 3; ${grid.column.right};`,
+	},
+};
+
 const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	standard: standardCss,
 	showcase: showcaseCss,
 	media: mediaCss,
+	immersiveLandscapeDefault: immersiveLandscapeDefaultCss,
+	immersiveLandscapeFeature: immersiveLandscapeFeatureCss,
+	immersivePortraitDefault: immersivePortraitDefaultCss,
+	immersivePortraitFeature: immersivePortraitFeatureCss,
 };
 
 /**
@@ -191,4 +372,39 @@ export const gridItemCss = (
 		grid-column: centre-column-start / centre-column-end;
 		${breakpointCss}
 	`;
+};
+
+/**
+ * Determines which {@link LayoutType} to render. Immersive layouts are
+ * split by orientation (portrait vs. landscape/square) and by whether the
+ * format is a Feature, since each combination has a distinct grid
+ * arrangement. Non-immersive formats fall back to media/showcase/standard.
+ */
+export const getLayoutType = ({
+	isImmersive,
+	isFeature,
+	orientation,
+	isVideo,
+	isShowcase,
+}: {
+	isImmersive: boolean;
+	isFeature: boolean;
+	orientation: 'portrait' | 'landscape' | 'square';
+	isVideo: boolean;
+	isShowcase: boolean;
+}): LayoutType => {
+	if (isImmersive) {
+		if (orientation === 'portrait') {
+			return isFeature
+				? 'immersivePortraitFeature'
+				: 'immersivePortraitDefault';
+		}
+		// Square images are treated the same as landscape for immersive layouts.
+		return isFeature
+			? 'immersiveLandscapeFeature'
+			: 'immersiveLandscapeDefault';
+	}
+	if (isVideo) return 'media';
+	if (isShowcase) return 'showcase';
+	return 'standard';
 };

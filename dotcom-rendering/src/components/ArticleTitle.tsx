@@ -28,17 +28,11 @@ const sectionStyles = css`
 `;
 
 const immersiveMargins = css`
-	max-width: 400px;
+	max-width: 500px;
 	min-width: 200px;
 	margin-bottom: 4px;
-	/*
-        Make sure we vertically align the title font with the body font
-    */
 	${from.tablet} {
-		margin-left: 16px;
-	}
-	${from.leftCol} {
-		margin-left: 25px;
+		margin-left: -4px;
 	}
 `;
 
