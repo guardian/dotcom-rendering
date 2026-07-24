@@ -7,7 +7,13 @@ import {
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
+import {
+	BrazeBannersSystemDisplay,
+	BrazeBannersSystemPlacementId,
+	isPlacementStale,
+} from '../lib/braze/BrazeBannersSystem';
 import { useAB } from '../lib/useAB';
+import { useBraze } from '../lib/useBraze';
 import type { StageType } from '../types/config';
 import type { RecipeBlockElement } from '../types/content';
 import { useConfig } from './ConfigContext';
@@ -46,9 +52,19 @@ const darkVars = css`
 const FEAST_ADJUST_TOKEN_PROD = '20wmhy68';
 const FEAST_ADJUST_TOKEN_CODE = '20o7ykck';
 
+const FEAST_BRAZE_PLACEMENTS = [
+	BrazeBannersSystemPlacementId.FeastContextualNudge1,
+	BrazeBannersSystemPlacementId.FeastContextualNudge2,
+	BrazeBannersSystemPlacementId.FeastContextualNudge3,
+	BrazeBannersSystemPlacementId.FeastContextualNudge4,
+	BrazeBannersSystemPlacementId.FeastContextualNudge5,
+] as const;
+
+const getAdjustToken = (stage: StageType): string =>
+	stage === 'PROD' ? FEAST_ADJUST_TOKEN_PROD : FEAST_ADJUST_TOKEN_CODE;
+
 const buildFeastLink = (recipeId: string, stage: StageType): string => {
-	const token =
-		stage === 'PROD' ? FEAST_ADJUST_TOKEN_PROD : FEAST_ADJUST_TOKEN_CODE;
+	const token = getAdjustToken(stage);
 	return `https://guardian-feast.go.link/recipe/${encodeURIComponent(
 		recipeId,
 	)}?adj_t=${encodeURIComponent(token)}`;
@@ -122,6 +138,8 @@ type FeastContextualNudgeProps = {
 	recipeArticleTitle: string;
 	pageId: string;
 	isDev: boolean;
+	nudgeIndex: number;
+	idApiUrl?: string;
 };
 
 /**
@@ -142,13 +160,16 @@ export const FeastContextualNudge = ({
 	recipeArticleTitle,
 	pageId,
 	isDev,
+	nudgeIndex,
+	idApiUrl,
 }: FeastContextualNudgeProps) => {
 	const abTests = useAB();
 	const isVariant =
 		abTests?.isUserInTestGroup('feast-recipe-nudge-v2', 'variant-1') ??
 		false;
 
-	const { darkModeAvailable } = useConfig();
+	const { darkModeAvailable, renderingTarget } = useConfig();
+	const { braze } = useBraze(idApiUrl ?? '', renderingTarget);
 
 	const [isStorybook, setIsStorybook] = useState(false);
 	useEffect(() => {
@@ -173,6 +194,42 @@ export const FeastContextualNudge = ({
 	}, [feastId, title, pageId, isDev, isVariant]);
 
 	if (!isVariant) return null;
+
+	const placementId = FEAST_BRAZE_PLACEMENTS[nudgeIndex - 1];
+	const banner =
+		idApiUrl && placementId && !isPlacementStale(placementId)
+			? braze?.getBanner(placementId)
+			: null;
+
+	if (banner && braze && idApiUrl) {
+		return (
+			<div
+				aria-description={`Open the recipe ${title} in the Feast app`}
+				data-component="feast-contextual-nudge"
+				css={css`
+					margin: ${space[2]}px 0;
+				`}
+			>
+				<BrazeBannersSystemDisplay
+					meta={{
+						id: `feast-contextual-nudge-${nudgeIndex}`,
+						braze,
+						banner,
+					}}
+					idApiUrl={idApiUrl}
+					stage={stage}
+					context={{
+						recipe,
+						recipeArticleTitle,
+						pageId,
+						nudgeIndex,
+						darkMode: darkModeAvailable,
+						adjustToken: getAdjustToken(stage),
+					}}
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div

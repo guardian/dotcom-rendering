@@ -13,13 +13,23 @@ import {
 	type ArticleFormat,
 	Pillar,
 } from './articleFormat';
-import { ArticleRenderer } from './ArticleRenderer';
+import { ArticleRenderer, getFeastNudgeIndex } from './ArticleRenderer';
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
 jest.mock('../components/FeastContextualNudge.island', () => ({
-	FeastContextualNudge: ({ recipe }: { recipe: { id: string } }) => (
-		<div data-testid="feast-nudge" data-recipe-id={recipe.id} />
+	FeastContextualNudge: ({
+		recipe,
+		nudgeIndex,
+	}: {
+		recipe: { id: string };
+		nudgeIndex: number;
+	}) => (
+		<div
+			data-testid="feast-nudge"
+			data-recipe-id={recipe.id}
+			data-nudge-index={nudgeIndex}
+		/>
 	),
 }));
 
@@ -215,6 +225,40 @@ describe('ArticleRenderer — augmentedElements', () => {
 		expect(nudges).toHaveLength(2);
 		expect(nudges[0]).toHaveAttribute('data-recipe-id', 'recipe-001');
 		expect(nudges[1]).toHaveAttribute('data-recipe-id', 'recipe-002');
+		expect(nudges[0]).toHaveAttribute('data-nudge-index', '1');
+		expect(nudges[1]).toHaveAttribute('data-nudge-index', '2');
+	});
+
+	it('distributes exactly five numbered placements across a long recipe article', () => {
+		const elements: FEElement[] = Array.from({ length: 10 }, (_, index) => [
+			makeSubheading(`<h2>Recipe ${index}</h2>`, index),
+			makeRecipe(`recipe-${index}`),
+		]).flat();
+
+		renderWithConfig(
+			<ArticleRenderer
+				{...defaultProps}
+				format={recipeFormat}
+				elements={elements}
+			/>,
+		);
+
+		const nudges = screen.getAllByTestId('feast-nudge');
+		expect(nudges).toHaveLength(5);
+		expect(nudges.map((nudge) => nudge.dataset.recipeId)).toEqual([
+			'recipe-0',
+			'recipe-2',
+			'recipe-5',
+			'recipe-7',
+			'recipe-9',
+		]);
+		expect(nudges.map((nudge) => nudge.dataset.nudgeIndex)).toEqual([
+			'1',
+			'2',
+			'3',
+			'4',
+			'5',
+		]);
 	});
 
 	it('renders body elements within each section in order', () => {
@@ -235,5 +279,19 @@ describe('ArticleRenderer — augmentedElements', () => {
 
 		expect(screen.getByTestId('article-element-2')).toBeInTheDocument();
 		expect(screen.getByTestId('article-element-3')).toBeInTheDocument();
+	});
+});
+
+describe('getFeastNudgeIndex', () => {
+	it('assigns every section when there are at most five', () => {
+		expect([0, 1, 2].map((index) => getFeastNudgeIndex(index, 3))).toEqual([
+			1, 2, 3,
+		]);
+	});
+
+	it('returns null for invalid section indexes', () => {
+		expect(getFeastNudgeIndex(-1, 3)).toBeNull();
+		expect(getFeastNudgeIndex(3, 3)).toBeNull();
+		expect(getFeastNudgeIndex(0, 0)).toBeNull();
 	});
 });
