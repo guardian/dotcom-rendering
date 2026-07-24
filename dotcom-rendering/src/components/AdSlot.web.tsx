@@ -646,7 +646,7 @@ export const AdSlot = ({
 		}
 		case 'mostpop': {
 			return (
-				<Hide until="tablet">
+				<Hide until="desktop">
 					<AdSlotWrapper css={mostPopContainerStyles}>
 						<div
 							id="dfp-ad--mostpop"
