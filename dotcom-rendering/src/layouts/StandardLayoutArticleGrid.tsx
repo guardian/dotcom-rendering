@@ -424,7 +424,8 @@ export const StandardLayoutArticleGrid = ({
 								!!article.config.shouldHideReaderRevenue
 							}
 							shouldHideMostViewed={
-								format.design === ArticleDesign.Audio
+								format.design === ArticleDesign.Audio ||
+								format.design === ArticleDesign.Interactive
 							}
 						/>
 					</Island>
