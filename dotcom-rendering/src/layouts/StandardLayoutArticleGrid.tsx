@@ -11,7 +11,6 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { AudioPlayer } from '../components/AudioPlayer/AudioPlayer';
 import { DecideLines } from '../components/DecideLines';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -29,7 +28,6 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
-import { getAudioData } from '../lib/audio-data';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
@@ -121,8 +119,6 @@ export const StandardLayoutArticleGrid = ({
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	const audioData = getAudioData(article.mainMediaElements);
-
 	const layoutType: LayoutType = isMedia
 		? 'media'
 		: isShowcase
@@ -146,33 +142,23 @@ export const StandardLayoutArticleGrid = ({
 			]}
 		>
 			<GridItem area="media" layoutType={layoutType}>
-				{format.design === ArticleDesign.Audio && audioData ? (
-					<AudioPlayer
-						audioData={audioData}
-						isSensitive={article.config.isSensitive}
-						isAcastEnabled={!!article.config.switches.acast}
-						isApps={isApps}
-					/>
-				) : (
-					<MainMedia
-						format={format}
-						elements={article.mainMediaElements}
-						host={host}
-						pageId={article.pageId}
-						webTitle={article.webTitle}
-						ajaxUrl={article.config.ajaxUrl}
-						switches={article.config.switches}
-						isAdFreeUser={article.isAdFreeUser}
-						isSensitive={article.config.isSensitive}
-						editionId={article.editionId}
-						hideCaption={isMedia}
-						shouldHideAds={article.shouldHideAds}
-						contentType={article.contentType}
-						contentLayout={`${
-							ArticleDisplay[format.display]
-						}Layout`}
-					/>
-				)}
+				<MainMedia
+					format={format}
+					elements={article.mainMediaElements}
+					host={host}
+					pageId={article.pageId}
+					webTitle={article.webTitle}
+					ajaxUrl={article.config.ajaxUrl}
+					switches={article.config.switches}
+					isAdFreeUser={article.isAdFreeUser}
+					isSensitive={article.config.isSensitive}
+					editionId={article.editionId}
+					hideCaption={isMedia}
+					shouldHideAds={article.shouldHideAds}
+					contentType={article.contentType}
+					contentLayout={`${ArticleDisplay[format.display]}Layout`}
+					isApps={isApps}
+				/>
 			</GridItem>
 			<GridItem area="title" layoutType={layoutType} element="aside">
 				<ArticleTitle
@@ -434,7 +420,9 @@ export const StandardLayoutArticleGrid = ({
 							shouldHideReaderRevenue={
 								!!article.config.shouldHideReaderRevenue
 							}
-							shouldHideMostViewed={!!audioData}
+							shouldHideMostViewed={
+								format.design === ArticleDesign.Audio
+							}
 						/>
 					</Island>
 				</Hide>
