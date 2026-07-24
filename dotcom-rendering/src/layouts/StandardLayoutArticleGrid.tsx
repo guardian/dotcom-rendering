@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsEpic } from '../components/AppsEpic.island';
 import { ArticleBody } from '../components/ArticleBody';
@@ -111,6 +110,8 @@ export const StandardLayoutArticleGrid = ({
 		format.design === ArticleDesign.Audio;
 	const isShowcase = format.display === ArticleDisplay.Showcase;
 
+	const isInteractive = format.design === ArticleDesign.Interactive;
+
 	const isVideo = format.design === ArticleDesign.Video;
 
 	const footballMatchUrl =
@@ -125,7 +126,9 @@ export const StandardLayoutArticleGrid = ({
 		? 'media'
 		: isShowcase
 			? 'showcase'
-			: 'standard';
+			: isInteractive
+				? 'interactive'
+				: 'standard';
 
 	return (
 		<article
@@ -186,7 +189,17 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem area="standfirst" layoutType={layoutType}>
 				<Standfirst format={format} standfirst={article.standfirst} />
 			</GridItem>
-			<GridItem area="meta" layoutType={layoutType} element="aside">
+			<GridItem
+				area="meta"
+				layoutType={layoutType}
+				element="aside"
+				css={
+					isInteractive &&
+					css`
+						z-index: 10;
+					`
+				}
+			>
 				<div css={stretchLines}>
 					{isWeb &&
 					format.theme === ArticleSpecial.Labs &&
@@ -369,14 +382,6 @@ export const StandardLayoutArticleGrid = ({
 							/>
 						</Island>
 					)}
-					<StraightLines
-						data-print-layout="hide"
-						count={4}
-						cssOverrides={css`
-							display: block;
-						`}
-						color={themePalette('--straight-lines')}
-					/>
 					<SubMeta
 						format={format}
 						subMetaKeywordLinks={article.subMetaKeywordLinks}
@@ -418,6 +423,9 @@ export const StandardLayoutArticleGrid = ({
 							renderAds={isWeb && renderAds}
 							shouldHideReaderRevenue={
 								!!article.config.shouldHideReaderRevenue
+							}
+							shouldHideMostViewed={
+								format.design === ArticleDesign.Interactive
 							}
 						/>
 					</Island>
