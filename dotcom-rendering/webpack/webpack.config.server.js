@@ -1,5 +1,11 @@
 // @ts-check
 const path = require('path');
+const {
+	ExpressInstrumentation,
+} = require('@opentelemetry/instrumentation-express');
+const {
+	OpenTelemetryWebpackPlugin,
+} = require('opentelemetry-webpack-plugin-node');
 const nodeExternals = require('webpack-node-externals');
 const swcConfig = require('./.swcrc.json');
 const { svgr } = require('./svg.cjs');
@@ -27,6 +33,7 @@ const swcLoader = [
 module.exports = {
 	entry: {
 		server: './src/server/server.ts',
+		instrumentation: './src/server/instrumentation.js',
 	},
 	output: {
 		filename: `[name].js`,
@@ -89,4 +96,14 @@ module.exports = {
 			},
 		],
 	},
+	plugins: [
+		// Patches express at build time so instrumentation works in the bundle
+		...(DEV
+			? []
+			: [
+					new OpenTelemetryWebpackPlugin({
+						instrumentations: [new ExpressInstrumentation()],
+					}),
+				]),
+	],
 };

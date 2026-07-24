@@ -28,4 +28,4 @@ ENV NODE_ENV=production
 # Expose the port that the application listens on
 EXPOSE 9000
 
-CMD ["node", "/app/server.js"]
+CMD ["node", "--require", "/app/instrumentation.js", "/app/server.js"]
