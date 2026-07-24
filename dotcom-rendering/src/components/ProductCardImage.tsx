@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { focusHalo } from '@guardian/source/foundations';
 import type { HTMLAttributes } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { ProductImage } from '../types/content';
@@ -43,12 +44,15 @@ export const ProductCardImage = ({
 					rel="sponsored noopener noreferrer"
 					data-link-name="product image link"
 					data-x-cust-component-id={xCustComponentId}
-					// this is needed to override global style
-					// html:not(.src-focus-disabled) *:focus
-					// it has specificity(0, 2, 1) so we need (0, 3, 0)
 					css={css`
 						&&:focus {
+							// this is needed to override global style
+							// html:not(.src-focus-disabled) *:focus
+							// it has specificity(0, 2, 1) so we need (0, 3, 0)
 							box-shadow: none;
+							img {
+								${focusHalo}
+							}
 						}
 					`}
 				>
