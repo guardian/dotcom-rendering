@@ -684,8 +684,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       ts-unused-exports:
-        specifier: 10.1.0
-        version: 10.1.0(typescript@6.0.3)
+        specifier: 11.0.1
+        version: 11.0.1(typescript@6.0.3)
       tslib:
         specifier: 'catalog:'
         version: 2.6.2
@@ -8970,8 +8970,8 @@ packages:
       '@swc/wasm':
         optional: true
 
-  ts-unused-exports@10.1.0:
-    resolution: {integrity: sha512-QA11Dpwkm5Apfe9s/UkFzHEpbiBxKy0VQ72YRAoqq9VgNbxvvIOcS5Kgm1MCitOec9YU6nf51DEWnmL6jkP2Yg==}
+  ts-unused-exports@11.0.1:
+    resolution: {integrity: sha512-b1uIe0B8YfNZjeb+bx62LrB6qaO4CHT8SqMVBkwbwLj7Nh0xQ4J8uV0dS9E6AABId0U4LQ+3yB/HXZBMslGn2A==}
     hasBin: true
     peerDependencies:
       typescript: '>=3.8.3'
@@ -19497,7 +19497,7 @@ snapshots:
       '@swc/core': 1.15.41
     optional: true
 
-  ts-unused-exports@10.1.0(typescript@6.0.3):
+  ts-unused-exports@11.0.1(typescript@6.0.3):
     dependencies:
       chalk: 4.1.2
       tsconfig-paths: 3.15.0
