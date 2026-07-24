@@ -7,6 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import {
 	BrazeBannersSystemDisplay,
 	BrazeBannersSystemPlacementId,
@@ -213,6 +214,23 @@ export const FeastContextualNudge = ({
 	const title = recipe.title ?? recipeArticleTitle;
 	const feastId = recipe.id;
 
+	/**
+	 * Logs a CLICK event with Ophan when the reader taps the native
+	 * (non-Braze) "Download the app" install button.
+	 */
+	const handleDownloadClick = () => {
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'RETENTION_ENGAGEMENT_BANNER',
+					id: `feast-contextual-nudge-${nudgeIndex}`,
+				},
+				action: 'CLICK',
+			},
+			renderingTarget,
+		);
+	};
+
 	useEffect(() => {
 		if (isDev && isVariant) {
 			console.log(
@@ -321,6 +339,7 @@ export const FeastContextualNudge = ({
 					rel="noreferrer"
 					theme={primaryCtaTheme}
 					data-ignore="global-link-styling"
+					onClick={handleDownloadClick}
 				>
 					Download the app
 				</LinkButton>

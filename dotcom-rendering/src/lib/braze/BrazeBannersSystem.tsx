@@ -816,6 +816,31 @@ export const BrazeBannersSystemDisplay = ({
 	}, [meta.id, meta.braze, meta.banner]);
 
 	/**
+	 * Logs a CLICK event with Ophan when the reader taps a
+	 * "navigate to URL" button inside the Braze Banner.
+	 * @param url The URL the reader is being sent to
+	 */
+	const logNavigateToUrlClick = useCallback(
+		(url: string) => {
+			const ophanComponentId =
+				meta.banner.getStringProperty('ophanComponentId') ??
+				meta.banner.placementId;
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'RETENTION_ENGAGEMENT_BANNER',
+						id: ophanComponentId,
+					},
+					action: 'CLICK',
+					value: url,
+				},
+				renderingTarget,
+			);
+		},
+		[meta.banner, renderingTarget],
+	);
+
+	/**
 	 * Sets the background and foreground colors for wrapper mode based on a given background color.
 	 * @param backgroundColor The background color to use for the wrapper, which will also determine the foreground color for text and other elements to ensure sufficient contrast and accessibility.
 	 */
@@ -1058,6 +1083,7 @@ export const BrazeBannersSystemDisplay = ({
 								target,
 							},
 						);
+						logNavigateToUrlClick(url);
 						if (target === 'blank') {
 							window.open(url, '_blank');
 						} else {
@@ -1107,6 +1133,7 @@ export const BrazeBannersSystemDisplay = ({
 		subscribeToNewsletter,
 		createReminder,
 		dismissBanner,
+		logNavigateToUrlClick,
 		postMessageToBrazeBanner,
 		context,
 	]);
