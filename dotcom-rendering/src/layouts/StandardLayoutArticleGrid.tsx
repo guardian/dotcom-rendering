@@ -822,7 +822,7 @@ export const StandardLayoutArticleGrid = ({
 					}
 				`}
 			>
-				{!isPicture && !isInteractive && (
+				{!isPicture && (
 					<Hide until="desktop">
 						<Island
 							priority="feature"
@@ -842,7 +842,8 @@ export const StandardLayoutArticleGrid = ({
 									!!article.config.shouldHideReaderRevenue
 								}
 								shouldHideMostViewed={
-									format.design === ArticleDesign.Audio
+									format.design === ArticleDesign.Audio ||
+									format.design === ArticleDesign.Interactive
 								}
 							/>
 						</Island>
