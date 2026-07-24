@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import {
 	from,
 	palette as sourcePalette,
-	space,
 	until,
 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
@@ -16,7 +15,6 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { AudioPlayer } from '../components/AudioPlayer/AudioPlayer';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.island';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
@@ -26,6 +24,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -39,7 +38,6 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.island';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
-import { getAudioData } from '../lib/audio-data';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
@@ -147,7 +145,6 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget, serverTime } = props;
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
-	const audioData = getAudioData(article.mainMediaElements);
 
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
@@ -329,23 +326,21 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 							</div>
 						</GridItem>
 						<GridItem area="media">
-							{audioData && (
-								<AudioPlayer
-									audioData={audioData}
-									isSensitive={article.config.isSensitive}
-									isAcastEnabled={
-										!!article.config.switches.acast
-									}
-									isApps={isApps}
-								/>
-							)}
-							<StraightLines
-								cssOverrides={css`
-									display: block;
-									margin-bottom: ${space[2]}px;
-								`}
-								count={1}
-								color={themePalette('--straight-lines')}
+							<MainMedia
+								format={format}
+								elements={article.mainMediaElements}
+								host={host}
+								pageId={article.pageId}
+								webTitle={article.webTitle}
+								ajaxUrl={article.config.ajaxUrl}
+								switches={article.config.switches}
+								isAdFreeUser={article.isAdFreeUser}
+								isSensitive={article.config.isSensitive}
+								editionId={article.editionId}
+								hideCaption={true}
+								shouldHideAds={article.shouldHideAds}
+								contentType={article.contentType}
+								contentLayout={'AudioLayout'}
 							/>
 						</GridItem>
 						<GridItem area="standfirst">
