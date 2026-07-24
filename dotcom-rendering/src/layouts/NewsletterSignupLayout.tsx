@@ -40,16 +40,22 @@ import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
-type Props = {
+type BaseProps = {
 	article: ArticleDeprecated;
-	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 	serverTime?: number;
 };
+
+type WebProps = {
+	NAV: NavType;
+	renderingTarget: 'Web';
+} & BaseProps;
+
+type AppsProps = {
+	renderingTarget: 'Apps';
+} & BaseProps;
 
 const mainColWrapperStyle = css`
 	display: flex;
@@ -186,13 +192,8 @@ const getMainMediaCaptions = (
 			: undefined,
 	);
 
-export const NewsletterSignupLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-	serverTime,
-}: Props) => {
+export const NewsletterSignupLayout = (props: WebProps | AppsProps) => {
+	const { article, format, renderingTarget, serverTime } = props;
 	const {
 		promotedNewsletter,
 		config: { host, hasSurveyAd },
@@ -217,39 +218,43 @@ export const NewsletterSignupLayout = ({
 
 	return (
 		<>
-			<div data-print-layout="hide" id="bannerandheader">
-				{isWeb && renderAds && (
-					<Stuck>
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot />
-						</Section>
-					</Stuck>
-				)}
+			{isWeb && (
+				<div data-print-layout="hide" id="bannerandheader">
+					{renderAds && (
+						<Stuck>
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot />
+							</Section>
+						</Stuck>
+					)}
 
-				<Masthead
-					nav={NAV}
-					editionId={article.editionId}
-					idUrl={article.config.idUrl}
-					mmaUrl={article.config.mmaUrl}
-					discussionApiUrl={article.config.discussionApiUrl}
-					idApiUrl={article.config.idApiUrl}
-					contributionsServiceUrl={contributionsServiceUrl}
-					showSubNav={true}
-					showSlimNav={format.display === ArticleDisplay.Immersive}
-					hasPageSkin={false}
-					hasPageSkinContentSelfConstrain={false}
-					pageId={article.pageId}
-					tagIds={article.tags.map((tag) => tag.id)}
-					sectionId={article.config.section}
-					contentType={article.contentType}
-				/>
-			</div>
+					<Masthead
+						nav={props.NAV}
+						editionId={article.editionId}
+						idUrl={article.config.idUrl}
+						mmaUrl={article.config.mmaUrl}
+						discussionApiUrl={article.config.discussionApiUrl}
+						idApiUrl={article.config.idApiUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
+						showSubNav={true}
+						showSlimNav={
+							format.display === ArticleDisplay.Immersive
+						}
+						hasPageSkin={false}
+						hasPageSkinContentSelfConstrain={false}
+						pageId={article.pageId}
+						tagIds={article.tags.map((tag) => tag.id)}
+						sectionId={article.config.section}
+						contentType={article.contentType}
+					/>
+				</div>
+			)}
 
 			{isWeb && renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
@@ -469,23 +474,25 @@ export const NewsletterSignupLayout = ({
 				</Island>
 			</main>
 
-			<Section
-				fullWidth={true}
-				padSides={false}
-				showTopBorder={false}
-				backgroundColour={sourcePalette.brand[400]}
-				borderColour={sourcePalette.brand[600]}
-				showSideBorders={false}
-				element="footer"
-			>
-				<Footer
-					pageFooter={article.pageFooter}
-					selectedPillar={NAV.selectedPillar}
-					pillars={NAV.pillars}
-					urls={article.nav.readerRevenueLinks.footer}
-					editionId={article.editionId}
-				/>
-			</Section>
+			{isWeb && (
+				<Section
+					fullWidth={true}
+					padSides={false}
+					showTopBorder={false}
+					backgroundColour={sourcePalette.brand[400]}
+					borderColour={sourcePalette.brand[600]}
+					showSideBorders={false}
+					element="footer"
+				>
+					<Footer
+						pageFooter={article.pageFooter}
+						selectedPillar={props.NAV.selectedPillar}
+						pillars={props.NAV.pillars}
+						urls={article.nav.readerRevenueLinks.footer}
+						editionId={article.editionId}
+					/>
+				</Section>
+			)}
 
 			<BannerWrapper data-print-layout="hide" />
 			{renderAds && <MobileStickyContainer data-print-layout="hide" />}
