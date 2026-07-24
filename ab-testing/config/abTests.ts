@@ -170,6 +170,19 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "identity-and-trust-consent-banner-us",
+		description:
+			"Test to measure the impact of showing different US consent banners for US users",
+		owners: ["identitydev@theguardian.com"],
+		status: "ON",
+		expirationDate: "2027-01-01",
+		type: "client",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant-1", "variant-2"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
