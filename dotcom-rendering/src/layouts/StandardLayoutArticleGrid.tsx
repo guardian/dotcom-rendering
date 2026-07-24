@@ -60,7 +60,7 @@ const avatarHeadlineWrapper = css`
 `;
 
 // This styling taken from the similar approach in CommentLayout.tsx
-// If in mobile increase the margin top and margin right deficit
+// If on mobile, increase the margin top and margin right deficit
 const avatarPositionStyles = css`
 	display: flex;
 	justify-content: flex-end;
