@@ -97,7 +97,7 @@ type Props = {
 	shouldHideAds: boolean;
 	contentType?: string;
 	contentLayout?: string;
-	isApps?: boolean;
+	isApps: boolean;
 };
 
 export const MainMedia = ({
@@ -115,7 +115,7 @@ export const MainMedia = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
-	isApps = false,
+	isApps,
 }: Props) => {
 	const audioData = getAudioData(elements);
 

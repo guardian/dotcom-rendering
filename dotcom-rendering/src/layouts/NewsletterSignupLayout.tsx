@@ -422,6 +422,7 @@ export const NewsletterSignupLayout = (props: WebProps | AppsProps) => {
 									hideCaption={true}
 									editionId={article.editionId}
 									shouldHideAds={article.shouldHideAds}
+									isApps={renderingTarget === 'Apps'}
 								/>
 							</div>
 						</Column>

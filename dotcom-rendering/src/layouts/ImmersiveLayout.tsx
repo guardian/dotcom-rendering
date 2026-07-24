@@ -378,6 +378,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						isSensitive={article.config.isSensitive}
 						editionId={article.editionId}
 						shouldHideAds={article.shouldHideAds}
+						isApps={isApps}
 					/>
 				</div>
 				{mainMedia && (
