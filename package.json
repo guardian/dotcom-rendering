@@ -21,7 +21,7 @@
 		"@types/chai": "5.2.2",
 		"chromatic": "16.1.0",
 		"husky": "9.1.7",
-		"lint-staged": "15.2.0",
+		"lint-staged": "17.1.0",
 		"prettier": "3.8.3",
 		"tslib": "catalog:"
 	},
