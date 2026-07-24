@@ -341,7 +341,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										isSensitive={article.config.isSensitive}
 										editionId={article.editionId}
 										shouldHideAds={article.shouldHideAds}
-										isApps={isApps}
 									/>
 								</div>
 							</GridItem>

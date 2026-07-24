@@ -604,7 +604,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												article.shouldHideAds
 											}
 											contentLayout="LiveblogLayout"
-											isApps={isApps}
 										/>
 									</div>
 								</GridItem>

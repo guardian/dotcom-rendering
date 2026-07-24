@@ -157,7 +157,6 @@ export const StandardLayoutArticleGrid = ({
 					shouldHideAds={article.shouldHideAds}
 					contentType={article.contentType}
 					contentLayout={`${ArticleDisplay[format.display]}Layout`}
-					isApps={isApps}
 				/>
 			</GridItem>
 			<GridItem area="title" layoutType={layoutType} element="aside">
