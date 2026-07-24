@@ -236,12 +236,15 @@ export const SubMeta = ({
 				format.design === ArticleDesign.Gallery
 					? galleryStyles
 					: bottomPadding,
-				grid.container,
-				css`
-					> * {
-						${grid.column.centre}
-					}
-				`,
+				format.design === ArticleDesign.Interactive &&
+				!isDeprecatedInteractiveLayout
+					? css`
+							${grid.container};
+							> * {
+								${grid.column.centre}
+							}
+						`
+					: undefined,
 			]}
 		>
 			<StraightLines

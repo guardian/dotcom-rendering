@@ -424,6 +424,9 @@ export const StandardLayoutArticleGrid = ({
 							shouldHideReaderRevenue={
 								!!article.config.shouldHideReaderRevenue
 							}
+							shouldHideMostViewed={
+								format.design === ArticleDesign.Interactive
+							}
 						/>
 					</Island>
 				</Hide>

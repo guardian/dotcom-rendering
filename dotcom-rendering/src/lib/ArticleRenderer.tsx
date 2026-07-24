@@ -216,7 +216,9 @@ export const ArticleRenderer = ({
 			css={[
 				commercialPosition,
 				spacefinderAdStyles,
-				!isOldInteractive && interactiveLayoutCSS,
+				format.design === ArticleDesign.Interactive &&
+					!isOldInteractive &&
+					interactiveLayoutCSS,
 			]}
 		>
 			{renderingTarget === 'Apps'

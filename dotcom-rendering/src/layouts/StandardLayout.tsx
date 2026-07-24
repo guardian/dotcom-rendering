@@ -84,7 +84,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const interactiveLayoutSwitchoverDate = new Date('2024-06-01T00:00:00Z');
 	const publicationDate = new Date(article.webPublicationDate);
 	const isLegacyInteractive =
-		publicationDate < interactiveLayoutSwitchoverDate;
+		publicationDate < interactiveLayoutSwitchoverDate &&
+		format.design === ArticleDesign.Interactive;
 
 	const showComments = article.isCommentable && !isPaidContent;
 

@@ -171,6 +171,7 @@ const interactiveCss: LayoutCssMap = {
 		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
 	},
 	body: {
+		mobile: `${grid.column.all};`,
 		tablet: `grid-row: 6; ${grid.column.all};`,
 		leftCol: 'grid-row: 4;',
 	},
