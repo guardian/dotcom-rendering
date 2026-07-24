@@ -2,7 +2,6 @@ import { isObject } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Decorator, StoryObj } from '@storybook/react-webpack5';
 import { useEffect } from 'react';
-import { mocked } from 'storybook/test';
 import { colourSchemeDecorator } from '../../.storybook/decorators/themeDecorator';
 import { AffiliateProductShowcase as AffiliateProductShowcaseFixture } from '../../fixtures/generated/fe-articles/AffiliateProductShowcase';
 import { AffiliateProductStandard as AffiliateProductStandardFixture } from '../../fixtures/generated/fe-articles/AffiliateProductStandard';
@@ -26,7 +25,6 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
-import { useAB } from '../lib/useAB';
 import { extractNAV } from '../model/extract-nav';
 import { type Article, enhanceArticleType } from '../types/article';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
@@ -294,20 +292,7 @@ const recipeStandardLifestyleWebFixture: Article = enhanceArticleType(
 	'Web',
 );
 
-const mockBetaFeastContextualNudgeABVariant1 = () => {
-	mocked(useAB).mockReturnValue({
-		isUserInTestGroup: (_testId: string, group: string) =>
-			group === 'variant-1',
-		isUserInTest: () => true,
-		getParticipations: () => ({}),
-		trackABTests: () => {},
-	});
-};
-
 export const WebRecipeStandardLabsLight: Story = {
-	beforeEach() {
-		mockBetaFeastContextualNudgeABVariant1();
-	},
 	args: {
 		article: {
 			...recipeStandardLifestyleWebFixture,
@@ -318,9 +303,6 @@ export const WebRecipeStandardLabsLight: Story = {
 };
 
 export const AppsRecipeStandardLifestyleLight = {
-	beforeEach() {
-		mockBetaFeastContextualNudgeABVariant1();
-	},
 	args: {
 		article: enhanceArticleType(RecipeStandardLifestyleFixture, 'Apps'),
 		colourScheme: 'light',
@@ -329,9 +311,6 @@ export const AppsRecipeStandardLifestyleLight = {
 } satisfies Story;
 
 export const AppsRecipeStandardLifestyleDark: Story = {
-	beforeEach() {
-		mockBetaFeastContextualNudgeABVariant1();
-	},
 	args: {
 		article: AppsRecipeStandardLifestyleLight.args.article,
 		colourScheme: 'dark',
