@@ -44,11 +44,11 @@ export const ProductCardImage = ({
 					rel="sponsored noopener noreferrer"
 					data-link-name="product image link"
 					data-x-cust-component-id={xCustComponentId}
+					// 'box-shadow: none' is needed to override global style
+					// html:not(.src-focus-disabled) *:focus
+					// it has specificity(0, 2, 1) so we need (0, 3, 0)
 					css={css`
 						&&:focus {
-							// this is needed to override global style
-							// html:not(.src-focus-disabled) *:focus
-							// it has specificity(0, 2, 1) so we need (0, 3, 0)
 							box-shadow: none;
 							img {
 								${focusHalo}
