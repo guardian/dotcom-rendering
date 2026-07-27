@@ -289,13 +289,13 @@ const frontsBannerAdStyles = css`
 	}
 `;
 
+/**
+ * The article-end slot is used to display the Public Good advert in the US. However, this advert
+ * is not currently being used. Therefore, there is no minimum height on the slot, so that the
+ * slot does not expand (anticipating an advert) and then collapse (when no advert is served), causing CLS.
+ */
 const articleEndAdStyles = css`
 	position: relative;
-	min-height: 450px;
-
-	&.ad-slot--fluid {
-		min-height: 450px;
-	}
 `;
 
 const mostPopAdStyles = css`
