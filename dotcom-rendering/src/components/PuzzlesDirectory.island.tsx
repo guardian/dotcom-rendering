@@ -256,6 +256,9 @@ const crosswordSetToUrl = (set: string): string => {
 };
 
 const getItemUrl = (item: PuzzleItem): string => {
+	if (item.variant === 'archive-page' && item.slug) {
+		return `/puzzles/${item.slug}/archive`;
+	}
 	if (item.variant === 'iframe-page' && item.slug) {
 		return `/puzzles/${item.slug}`;
 	}
@@ -402,9 +405,9 @@ const CategoryContent = ({ category }: { category: PuzzleContainer }) => {
 
 	return (
 		<div css={categorySectionsStyles}>
-			{sections.map(({ section, showTitle }, index) => (
+			{sections.map(({ section, showTitle }) => (
 				<SectionBlock
-					key={`${category.title}-${section.title}-${index}`}
+					key={`${category.title}-${section.title}`}
 					section={section}
 					showTitle={showTitle}
 				/>

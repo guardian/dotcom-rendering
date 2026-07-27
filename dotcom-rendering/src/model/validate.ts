@@ -207,7 +207,15 @@ export const validateAsPuzzleIframePageType = (
 		isObject(data.nav) &&
 		isObject(data.pageFooter) &&
 		isObject(data.puzzle) &&
-		isPuzzleItem(data.puzzle)
+		isPuzzleItem(data.puzzle) &&
+		(data.archiveNavigation === undefined ||
+			(Array.isArray(data.archiveNavigation) &&
+				data.archiveNavigation.every(
+					(item) =>
+						isObject(item) &&
+						isString(item.title) &&
+						isString(item.url),
+				)))
 	) {
 		return data as unknown as FEPuzzleIframePageType;
 	}

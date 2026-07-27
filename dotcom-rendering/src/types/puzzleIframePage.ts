@@ -2,7 +2,7 @@ import type { EditionId } from '../lib/edition';
 import type { ConfigType } from './config';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
-import type { PuzzleItem } from './puzzlesPage';
+import type { PuzzleArchiveNavigation, PuzzleItem } from './puzzlesPage';
 
 export interface FEPuzzleIframePageType {
 	id: string;
@@ -17,4 +17,5 @@ export interface FEPuzzleIframePageType {
 	canonicalUrl: string;
 	isAdFreeUser: boolean;
 	puzzle: PuzzleItem;
+	archiveNavigation?: PuzzleArchiveNavigation[];
 }

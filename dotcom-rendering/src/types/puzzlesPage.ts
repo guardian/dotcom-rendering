@@ -36,6 +36,11 @@ export type PuzzleFilter = {
 	backgroundColour?: string;
 };
 
+export type PuzzleArchiveNavigation = {
+	title: string;
+	url: string;
+};
+
 export type PuzzlesLayoutType = {
 	containers: PuzzleContainer[];
 	filters?: PuzzleFilter[];

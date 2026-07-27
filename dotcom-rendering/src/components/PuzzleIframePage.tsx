@@ -1,5 +1,6 @@
 import { Global } from '@emotion/react';
 import { StrictMode } from 'react';
+import { PuzzleArchiveLayout } from '../layouts/PuzzleArchiveLayout';
 import { PuzzleIframeLayout } from '../layouts/PuzzleIframeLayout';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
@@ -7,11 +8,11 @@ import type { NavType } from '../model/extract-nav';
 import type { FEPuzzleIframePageType } from '../types/puzzleIframePage';
 import { AdmiralScript } from './AdmiralScript.island';
 import { AlreadyVisited } from './AlreadyVisited.island';
+import { useConfig } from './ConfigContext';
 import { FocusStyles } from './FocusStyles.island';
 import { Island } from './Island';
 import { Metrics } from './Metrics.island';
 import { SkipTo } from './SkipTo';
-import { useConfig } from './ConfigContext';
 
 type Props = {
 	puzzlePage: FEPuzzleIframePageType;
@@ -46,10 +47,13 @@ export const PuzzleIframePage = ({ puzzlePage, NAV }: Props) => {
 					commercialMetricsEnabled={
 						!!puzzlePage.config.switches.commercialMetrics
 					}
-					tests={puzzlePage.config.abTests}
 				/>
 			</Island>
-			<PuzzleIframeLayout puzzlePage={puzzlePage} NAV={NAV} />
+			{puzzlePage.puzzle.variant === 'archive-page' ? (
+				<PuzzleArchiveLayout puzzlePage={puzzlePage} NAV={NAV} />
+			) : (
+				<PuzzleIframeLayout puzzlePage={puzzlePage} NAV={NAV} />
+			)}
 		</StrictMode>
 	);
 };
