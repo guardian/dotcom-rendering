@@ -5,6 +5,7 @@ import {
 	space,
 	textSans14,
 	textSansBold14,
+	textSansBold17,
 } from '@guardian/source/foundations';
 import {
 	SvgChevronLeftSingle,
@@ -30,7 +31,7 @@ const calendarContentStyles = css`
 	width: 100%;
 
 	${from.desktop} {
-		max-width: 960px;
+		max-width: 880px;
 	}
 `;
 
@@ -59,6 +60,11 @@ const statusMarkerStyles = (status: PuzzleStatus) => css`
 	border-radius: 50%;
 	background: ${statusColours[status]};
 	box-sizing: border-box;
+
+	${from.desktop} {
+		width: 32px;
+		height: 32px;
+	}
 `;
 
 const monthHeaderStyles = css`
@@ -72,6 +78,10 @@ const monthTitleStyles = css`
 	margin: 0;
 	text-align: center;
 	${textSansBold14};
+
+	${from.desktop} {
+		${textSansBold17};
+	}
 `;
 
 const monthControlStyles = css`
@@ -98,13 +108,24 @@ const monthControlStyles = css`
 		width: 22px;
 		height: 22px;
 	}
+
+	${from.desktop} {
+		width: 42px;
+		height: 42px;
+	}
 `;
 
 const calendarStyles = css`
 	display: grid;
 	grid-template-columns: repeat(7, minmax(0, 1fr));
-	row-gap: ${space[5]}px;
+	row-gap: ${space[4]}px;
 	align-items: center;
+	justify-items: center;
+
+	${from.desktop} {
+		column-gap: ${space[3]}px;
+		row-gap: ${space[6]}px;
+	}
 `;
 
 const weekdayStyles = css`
@@ -119,7 +140,7 @@ const dayCellStyles = css`
 	justify-content: center;
 
 	${from.desktop} {
-		min-height: 42px;
+		min-height: 44px;
 	}
 `;
 
@@ -148,8 +169,8 @@ const dayStyles = (
 	}
 
 	${from.desktop} {
-		width: 38px;
-		height: 38px;
+		width: 42px;
+		height: 42px;
 	}
 `;
 
