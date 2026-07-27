@@ -45,8 +45,12 @@ const ListItem = ({ product }: { product: SummaryProduct }) => {
 	return (
 		<li key={product.productBlock.id}>
 			<p>
-				<strong>{productBlock.primaryHeadingText}</strong>
-				<br />
+				{(productBlock.primaryHeadingText ?? '') && (
+					<>
+						<strong>{productBlock.primaryHeadingText}</strong>
+						<br />
+					</>
+				)}
 				{productBlock.brandName} {productBlock.productName}
 			</p>
 			{cta && (
