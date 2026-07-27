@@ -10,11 +10,11 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useState } from 'react';
 
 type PuzzleStatus = 'not-started' | 'in-progress' | 'completed';
 
 type Props = {
+	initialMonth: string;
 	puzzleSlug: string;
 	today: string;
 	progress?: Record<string, PuzzleStatus>;
@@ -66,7 +66,7 @@ const monthTitleStyles = css`
 	${textSansBold14};
 `;
 
-const monthButtonStyles = css`
+const monthControlStyles = css`
 	display: inline-flex;
 	width: 36px;
 	height: 36px;
@@ -78,8 +78,9 @@ const monthButtonStyles = css`
 	background: transparent;
 	color: ${palette.neutral[0]};
 	cursor: pointer;
+	text-decoration: none;
 
-	:disabled {
+	&[aria-disabled='true'] {
 		border-color: ${palette.neutral[86]};
 		color: ${palette.neutral[86]};
 		cursor: default;
@@ -157,30 +158,39 @@ const toDateString = (year: number, month: number, day: number): string =>
 const addMonths = (date: Date, amount: number): Date =>
 	new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + amount, 1));
 
+const archiveMonthUrl = (puzzleSlug: string, date: Date): string =>
+	`/puzzles/${puzzleSlug}/archive/${date.getUTCFullYear()}/${String(
+		date.getUTCMonth() + 1,
+	).padStart(2, '0')}`;
+
 export const PuzzleArchiveCalendar = ({
+	initialMonth,
 	puzzleSlug,
 	today,
 	progress = {},
 }: Props) => {
 	const todayDate = parseDate(today);
-	const [visibleMonth, setVisibleMonth] = useState(
-		() =>
-			new Date(
+	const requestedMonth = parseDate(`${initialMonth}-01`);
+	const visibleMonth = Number.isNaN(requestedMonth.getTime())
+		? new Date(
 				Date.UTC(
 					todayDate.getUTCFullYear(),
 					todayDate.getUTCMonth(),
 					1,
 				),
-			),
-	);
+			)
+		: requestedMonth;
 	const year = visibleMonth.getUTCFullYear();
 	const month = visibleMonth.getUTCMonth();
 	const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
 	const leadingEmptyDays =
 		(new Date(Date.UTC(year, month, 1)).getUTCDay() + 6) % 7;
-	const isCurrentMonth =
-		year === todayDate.getUTCFullYear() &&
-		month === todayDate.getUTCMonth();
+	const currentMonth = new Date(
+		Date.UTC(todayDate.getUTCFullYear(), todayDate.getUTCMonth(), 1),
+	);
+	const isLatestMonth = visibleMonth.getTime() >= currentMonth.getTime();
+	const previousMonth = addMonths(visibleMonth, -1);
+	const nextMonth = addMonths(visibleMonth, 1);
 	const monthLabel = visibleMonth.toLocaleDateString('en-GB', {
 		month: 'long',
 		year: 'numeric',
@@ -207,30 +217,33 @@ export const PuzzleArchiveCalendar = ({
 			</div>
 
 			<div css={monthHeaderStyles}>
-				<button
+				<a
 					aria-label="Previous month"
-					css={monthButtonStyles}
-					onClick={() => {
-						setVisibleMonth((current) => addMonths(current, -1));
-					}}
-					type="button"
+					css={monthControlStyles}
+					href={archiveMonthUrl(puzzleSlug, previousMonth)}
 				>
 					<SvgChevronLeftSingle />
-				</button>
+				</a>
 				<h2 aria-live="polite" css={monthTitleStyles}>
 					{monthLabel}
 				</h2>
-				<button
-					aria-label="Next month"
-					css={monthButtonStyles}
-					disabled={isCurrentMonth}
-					onClick={() => {
-						setVisibleMonth((current) => addMonths(current, 1));
-					}}
-					type="button"
-				>
-					<SvgChevronRightSingle />
-				</button>
+				{isLatestMonth ? (
+					<span
+						aria-disabled="true"
+						aria-label="Next month"
+						css={monthControlStyles}
+					>
+						<SvgChevronRightSingle />
+					</span>
+				) : (
+					<a
+						aria-label="Next month"
+						css={monthControlStyles}
+						href={archiveMonthUrl(puzzleSlug, nextMonth)}
+					>
+						<SvgChevronRightSingle />
+					</a>
+				)}
 			</div>
 
 			<div aria-label={monthLabel} css={calendarStyles} role="grid">
@@ -267,7 +280,10 @@ export const PuzzleArchiveCalendar = ({
 							) : (
 								<a
 									aria-current={isToday ? 'date' : undefined}
-									aria-label={`${date}, ${status.replace('-', ' ')}`}
+									aria-label={`${date}, ${status.replace(
+										'-',
+										' ',
+									)}`}
 									css={dayStyles(status, isToday, false)}
 									href={`/puzzles/${puzzleSlug}?date=${date}`}
 								>

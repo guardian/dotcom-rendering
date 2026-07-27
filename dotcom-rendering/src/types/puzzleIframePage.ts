@@ -18,4 +18,5 @@ export interface FEPuzzleIframePageType {
 	isAdFreeUser: boolean;
 	puzzle: PuzzleItem;
 	archiveNavigation?: PuzzleArchiveNavigation[];
+	archiveMonth?: string;
 }

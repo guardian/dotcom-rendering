@@ -8,9 +8,8 @@ import {
 	textSansBold12,
 } from '@guardian/source/foundations';
 import { Footer } from '../components/Footer';
-import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
-import { PuzzleArchiveCalendar } from '../components/PuzzleArchiveCalendar.island';
+import { PuzzleArchiveCalendar } from '../components/PuzzleArchiveCalendar';
 import { Section } from '../components/Section';
 import type { NavType } from '../model/extract-nav';
 import type { FEPuzzleIframePageType } from '../types/puzzleIframePage';
@@ -154,6 +153,7 @@ export const PuzzleArchiveLayout = ({ puzzlePage, NAV }: Props) => {
 	const currentSlug = puzzlePage.puzzle.slug ?? '';
 	const today = new Date().toISOString().slice(0, 10);
 	const archiveNavigation = puzzlePage.archiveNavigation ?? [];
+	const initialMonth = puzzlePage.archiveMonth ?? today.slice(0, 7);
 
 	return (
 		<>
@@ -239,12 +239,11 @@ export const PuzzleArchiveLayout = ({ puzzlePage, NAV }: Props) => {
 						</nav>
 
 						<div css={calendarColumnStyles}>
-							<Island priority="critical">
-								<PuzzleArchiveCalendar
-									puzzleSlug={currentSlug}
-									today={today}
-								/>
-							</Island>
+							<PuzzleArchiveCalendar
+								initialMonth={initialMonth}
+								puzzleSlug={currentSlug}
+								today={today}
+							/>
 						</div>
 					</div>
 

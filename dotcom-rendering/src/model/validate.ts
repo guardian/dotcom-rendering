@@ -215,7 +215,8 @@ export const validateAsPuzzleIframePageType = (
 						isObject(item) &&
 						isString(item.title) &&
 						isString(item.url),
-				)))
+				))) &&
+		(data.archiveMonth === undefined || isString(data.archiveMonth))
 	) {
 		return data as unknown as FEPuzzleIframePageType;
 	}
