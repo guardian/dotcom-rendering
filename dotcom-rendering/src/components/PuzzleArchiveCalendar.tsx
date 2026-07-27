@@ -26,6 +26,14 @@ const statusColours: Record<PuzzleStatus, string> = {
 	completed: '#54C954',
 };
 
+const calendarContentStyles = css`
+	width: 100%;
+
+	${from.desktop} {
+		max-width: 960px;
+	}
+`;
+
 const legendStyles = css`
 	display: flex;
 	flex-wrap: wrap;
@@ -198,7 +206,7 @@ export const PuzzleArchiveCalendar = ({
 	});
 
 	return (
-		<div>
+		<div css={calendarContentStyles}>
 			<div aria-label="Puzzle progress key" css={legendStyles}>
 				{(['not-started', 'in-progress', 'completed'] as const).map(
 					(status) => (

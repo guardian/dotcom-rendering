@@ -11,6 +11,7 @@ import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
+import { PuzzleBackLink } from '../components/PuzzleBackLink.island';
 import { PuzzleMeEmbed } from '../components/PuzzleMeEmbed.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -31,14 +32,6 @@ const mainStyles = css`
 const copyStyles = css`
 	margin: 0 0 ${space[5]}px;
 	color: ${palette.neutral[20]};
-	${textSans17};
-`;
-
-const backLinkStyles = css`
-	display: inline-block;
-	margin-bottom: ${space[4]}px;
-	color: ${palette.brand[500]};
-	text-decoration: none;
 	${textSans17};
 `;
 
@@ -148,9 +141,12 @@ export const PuzzleIframeLayout = ({ puzzlePage, NAV }: Props) => {
 					fullWidth={true}
 					showTopBorder={false}
 				>
-					<a css={backLinkStyles} href="/puzzles">
-						Back to puzzles
-					</a>
+					<Island priority="critical">
+						<PuzzleBackLink
+							archiveMonth={puzzlePage.archiveMonth}
+							puzzleSlug={puzzlePage.puzzle.slug}
+						/>
+					</Island>
 					{puzzlePage.description !== undefined && (
 						<p css={copyStyles}>{puzzlePage.description}</p>
 					)}

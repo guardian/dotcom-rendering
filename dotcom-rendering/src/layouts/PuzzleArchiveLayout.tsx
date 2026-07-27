@@ -96,7 +96,6 @@ const calendarColumnStyles = css`
 	padding: 0 0 ${space[12]}px;
 
 	${from.desktop} {
-		max-width: 620px;
 		padding: 0 ${space[4]}px ${space[12]}px;
 	}
 `;
@@ -153,7 +152,14 @@ export const PuzzleArchiveLayout = ({ puzzlePage, NAV }: Props) => {
 	const currentSlug = puzzlePage.puzzle.slug ?? '';
 	const today = new Date().toISOString().slice(0, 10);
 	const archiveNavigation = puzzlePage.archiveNavigation ?? [];
-	const initialMonth = puzzlePage.archiveMonth ?? today.slice(0, 7);
+	const archiveMonthMatch = puzzlePage.id.match(
+		/\/archive\/(\d{4})\/(0[1-9]|1[0-2])(?:\.json)?$/,
+	);
+	const initialMonth =
+		puzzlePage.archiveMonth ??
+		(archiveMonthMatch !== null
+			? `${archiveMonthMatch[1]}-${archiveMonthMatch[2]}`
+			: today.slice(0, 7));
 
 	return (
 		<>
