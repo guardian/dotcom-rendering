@@ -495,7 +495,9 @@ export const NewsletterSignupLayout = (props: WebProps | AppsProps) => {
 			)}
 
 			<BannerWrapper data-print-layout="hide" />
-			{renderAds && <MobileStickyContainer data-print-layout="hide" />}
+			{isWeb && renderAds && (
+				<MobileStickyContainer data-print-layout="hide" />
+			)}
 		</>
 	);
 };
