@@ -145,19 +145,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "feast-recipe-nudge-v2",
-		description:
-			"Measures the impact of showing the Feast contextual nudge on recipe article pages",
-		owners: ["feast@theguardian.com"],
-		status: "ON",
-		expirationDate: "2027-01-01",
-		type: "client",
-		audienceSize: 1,
-		audienceSpace: "B",
-		groups: ["control", "variant-1"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "webx-monitor-group-contamination",
 		description:
 			"Test to measure the impact of contamination between groups in ab tests",
