@@ -8,12 +8,13 @@ import {
 	bypassCoreWebVitalsSampling,
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
-import { isUndefined } from '@guardian/libs';
+import { getCookie, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useBrowserId } from '../lib/useBrowserId';
 import { useDetectAdBlock } from '../lib/useDetectAdBlock';
+import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import { useConfig } from './ConfigContext';
 
@@ -50,6 +51,30 @@ const useDev = () => {
 	return isDev;
 };
 
+const logMvt = (mvtId: string | null, abTestCookie: string | null) => {
+	const logsEndpoint = window.guardian.config.page.isDev
+		? '//logs.code.dev-guardianapis.com/log'
+		: '//logs.guardianapis.com/log';
+
+	void fetch(logsEndpoint, {
+		method: 'POST',
+		body: JSON.stringify({
+			label: 'webx.ab-testing',
+			properties: [
+				{ name: 'mvtId', value: mvtId },
+				{
+					name: 'pageviewId',
+					value: window.guardian.config.ophan.pageViewId,
+				},
+				{ name: 'abTestCookie', value: abTestCookie },
+			],
+		}),
+		keepalive: true,
+		cache: 'no-store',
+		mode: 'no-cors',
+	});
+};
+
 /**
  * Record relevant metrics to our data warehouse:
  * - Core Web Vitals
@@ -84,6 +109,10 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 	const shouldBypassSampling = useCallback(
 		() => willRecordCoreWebVitals || collectTestMetrics,
 		[collectTestMetrics],
+	);
+
+	const isInMonitoringTest = abTests?.isUserInTest(
+		'webx-monitor-group-contamination',
 	);
 
 	useEffect(
@@ -182,6 +211,25 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 			pageViewId,
 			shouldBypassSampling,
 		],
+	);
+
+	useOnce(
+		function reportMvtId() {
+			if (!isInMonitoringTest) return;
+
+			const mvtId = getCookie({
+				name: 'gu_v2_mvt_id',
+				shouldMemoize: true,
+			});
+
+			const rawClientABTests = getCookie({
+				name: 'gu_client_ab_tests',
+				shouldMemoize: true,
+			});
+
+			logMvt(mvtId, rawClientABTests);
+		},
+		[isInMonitoringTest],
 	);
 
 	// We don’t render anything

@@ -43,12 +43,10 @@ prod:
 	NODE_ENV=production node dist/server.js
 
 prod-local: export DISABLE_LOGGING_AND_METRICS = true
-prod-local: export USE_LOCAL_ASSETS = true
 prod-local: prod
 
 # dev #########################################
 
-dev: export USE_LOCAL_ASSETS = true
 dev: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./webpack/webpack.config.js
@@ -89,6 +87,10 @@ playwright-open: clear clean-dist install build
 buildCheck:
 	$(call log, "checking build files")
 	@node ./scripts/test/build-check.js
+
+check-islands:
+	$(call log, "checking island component locations")
+	@node ./scripts/islands/check-islands.mts
 
 # quality #########################################
 
@@ -148,7 +150,7 @@ clean-dist:
 
 clean-deps:
 	$(call log, "trashing dependencies")
-	@rm -rf node_modules
+	@pnpm clean
 
 install: check-env
 	$(call log, "refreshing dependencies")

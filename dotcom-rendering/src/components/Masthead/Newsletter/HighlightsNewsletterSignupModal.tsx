@@ -12,10 +12,7 @@ import {
 	Pillar,
 } from '../../../lib/articleFormat';
 import { generateImageURL } from '../../../lib/image';
-import {
-	NEWSLETTER_SIGNUP_COMPONENT_ID,
-	sendNewsletterSignupEvent,
-} from '../../../lib/newsletterSignupTracking';
+import { sendNewsletterSignupEvent } from '../../../lib/newsletterSignupTracking';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import type { Newsletter } from '../../../types/content';
 import type { RenderingTarget } from '../../../types/renderingTarget';
@@ -110,10 +107,12 @@ const HighlightsNewsletterSignupModalContent = ({
 	newsletter,
 	titleId,
 	isSubscribed,
+	componentId,
 }: {
 	newsletter: Newsletter;
 	titleId: string;
 	isSubscribed: boolean | undefined;
+	componentId: string;
 }) => {
 	const requestClose = useModalRequestClose();
 
@@ -150,9 +149,7 @@ const HighlightsNewsletterSignupModalContent = ({
 					frequency={newsletter.frequency}
 					isModal={true}
 					isAlreadySubscribed={isSubscribed === true}
-					componentId={NEWSLETTER_SIGNUP_COMPONENT_ID.highlightsModal(
-						newsletter.identityName,
-					)}
+					componentId={componentId}
 				/>
 			</NewsletterSignupCard>
 		</FormatBoundary>
@@ -194,6 +191,7 @@ export const HighlightsNewsletterSignupModal = ({
 				newsletter={newsletter}
 				titleId={titleId}
 				isSubscribed={isSubscribed}
+				componentId={componentId}
 			/>
 		</ModalOverlay>
 	);

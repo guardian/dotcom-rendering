@@ -144,7 +144,7 @@ export const ThreeTierChoiceCards = ({
 		border: ${selected
 			? `2px solid ${
 					choiceCardDesignSettings?.buttonSelectBorderColour ??
-					palette.brand['500']
+					palette.brand['400']
 				}`
 			: `1px solid ${
 					choiceCardDesignSettings?.buttonBorderColour ??
@@ -180,12 +180,12 @@ export const ThreeTierChoiceCards = ({
 		...themeRadio,
 		borderSelected:
 			choiceCardDesignSettings?.buttonSelectBorderColour ??
-			palette.brandAlt[400],
+			palette.brand[400],
 		borderUnselected:
 			choiceCardDesignSettings?.buttonBorderColour ?? palette.neutral[46],
 		borderHover:
 			choiceCardDesignSettings?.buttonSelectBorderColour ??
-			palette.brandAlt[400],
+			palette.brand[400],
 		fillSelected:
 			choiceCardDesignSettings?.buttonSelectMarkerColour ??
 			palette.brand[400],
@@ -200,7 +200,7 @@ export const ThreeTierChoiceCards = ({
 		if (pill.backgroundColour) {
 			return hexColourToString(pill.backgroundColour as HexColour);
 		}
-		return palette.brandAlt[400];
+		return palette.brand[500];
 	};
 
 	const pillStyles = (pill: NonNullable<ChoiceCard['pill']>) => {
@@ -211,7 +211,7 @@ export const ThreeTierChoiceCards = ({
 			if (pill.textColour) {
 				return hexColourToString(pill.textColour as HexColour);
 			}
-			return palette.neutral[7];
+			return palette.neutral[100];
 		};
 
 		return css`

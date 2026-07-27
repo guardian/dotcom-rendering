@@ -52,6 +52,7 @@ export type FootballMatchHeaderProps = {
 	edition: EditionId;
 	matchHeaderURL: string;
 	renderingTarget: RenderingTarget;
+	baseUrl: string;
 	format?: ArticleFormat;
 	article?: ArticleDeprecated;
 };
@@ -136,7 +137,7 @@ export const FootballMatchHeader = (props: Props) => {
 					edition={props.edition}
 				/>
 				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
-				<Teams match={match} />
+				<Teams match={match} baseUrl={props.baseUrl} />
 				<Comment match={match} />
 				<Notifications
 					edition={props.edition}
@@ -314,7 +315,7 @@ const kickOffFormatterForEdition = (edition: EditionId): Intl.DateTimeFormat =>
 		timeZone: getTimeZoneFromEdition(edition),
 	});
 
-const Teams = (props: { match: FootballMatch }) => (
+const Teams = (props: { match: FootballMatch; baseUrl: string }) => (
 	<div
 		css={{
 			'&': css(grid.column.centre),
@@ -328,14 +329,15 @@ const Teams = (props: { match: FootballMatch }) => (
 			},
 		}}
 	>
-		<Team team="homeTeam" match={props.match} />
-		<Team team="awayTeam" match={props.match} />
+		<Team team="homeTeam" match={props.match} baseUrl={props.baseUrl} />
+		<Team team="awayTeam" match={props.match} baseUrl={props.baseUrl} />
 	</div>
 );
 
 const Team = (props: {
 	team: 'homeTeam' | 'awayTeam';
 	match: FootballMatch;
+	baseUrl: string;
 }) => (
 	<div
 		css={{
@@ -365,7 +367,11 @@ const Team = (props: {
 			'--border-left-colour': palette(border(props.match.kind)),
 		}}
 	>
-		<TeamName name={props.match[props.team].name} />
+		<TeamName
+			name={props.match[props.team].name}
+			teamUrl={props.match[props.team].teamUrl}
+			baseUrl={props.baseUrl}
+		/>
 		<span
 			css={{
 				display: 'flex',
@@ -390,7 +396,11 @@ const Team = (props: {
 	</div>
 );
 
-const TeamName = (props: { name: string }) => (
+const TeamName = (props: {
+	name: string;
+	teamUrl?: string;
+	baseUrl: string;
+}) => (
 	<p
 		css={{
 			...headlineBold20Object,
@@ -398,7 +408,20 @@ const TeamName = (props: { name: string }) => (
 			[from.leftCol]: headlineBold24Object,
 		}}
 	>
-		{props.name}
+		{props.teamUrl ? (
+			<a
+				href={`${props.baseUrl}${props.teamUrl}`}
+				css={{
+					color: 'inherit',
+					textDecoration: 'none',
+					'&:hover': { textDecoration: 'underline' },
+				}}
+			>
+				{props.name}
+			</a>
+		) : (
+			props.name
+		)}
 	</p>
 );
 
