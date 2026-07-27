@@ -1,6 +1,8 @@
 name: DCR CICD
 
 on:
+  merge_group:
+    types: [checks_requested]
   push:
 
 jobs:
@@ -29,6 +31,9 @@ jobs:
   lint:
     uses: ./.github/workflows/lint.yml
 
+  islands:
+    uses: ./.github/workflows/check-islands.yml
+
   playwright:
     needs: [container]
     uses: ./.github/workflows/playwright.yml
@@ -40,7 +45,8 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write # required by riff-raff action
-    needs: [container, prettier, jest, lint, playwright]
+    needs: [container, islands, prettier, jest, lint, playwright]
+    if: github.event_name == 'push' # We don't need a riff-raff deployment for merge_group events
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}

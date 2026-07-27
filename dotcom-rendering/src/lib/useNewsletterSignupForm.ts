@@ -12,7 +12,7 @@ import {
 } from './newsletter-marketing-opt-in';
 import {
 	getErrorType,
-	getResponseErrorDescription,
+	getResponseFailureDetails,
 } from './newsletterSignupFailureDetails';
 import {
 	EVENT_DESCRIPTION_TO_ACTION,
@@ -379,11 +379,10 @@ export const useNewsletterSignupForm = (
 
 			if (!response.ok) {
 				trackingDetails.responseStatus = response.status;
-				const errorDescription =
-					await getResponseErrorDescription(response);
-				if (errorDescription) {
-					trackingDetails.errorDescription = errorDescription;
-				}
+				Object.assign(
+					trackingDetails,
+					await getResponseFailureDetails(response),
+				);
 			}
 
 			sendTracking(

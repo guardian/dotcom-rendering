@@ -34,7 +34,6 @@ interface WebProps extends BaseProps {
 export type Props = WebProps | AppProps;
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
-	const notSupported = <pre>Not supported</pre>;
 	const format = {
 		design: article.design,
 		display: article.display,
@@ -155,8 +154,14 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
-					// Should be NewsletterSignup once implemented for apps
-					return notSupported;
+					return (
+						<NewsletterSignupLayout
+							article={article.frontendData}
+							format={format}
+							renderingTarget={renderingTarget}
+							serverTime={serverTime}
+						/>
+					);
 				case ArticleDesign.Gallery:
 					return (
 						<GalleryLayout
