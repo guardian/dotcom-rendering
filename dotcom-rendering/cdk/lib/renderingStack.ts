@@ -17,6 +17,7 @@ import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
+import type { CfnService } from 'aws-cdk-lib/aws-ecs';
 import { ClusterSettings } from 'aws-cdk-lib/aws-ecs/mixins';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
@@ -311,12 +312,28 @@ export class RenderingCDKStack extends CDKStack {
 				);
 			}
 
-			// TODO enable this at the pattern level in GuCDK
-			app.ecsService?.cluster.with(
-				new ClusterSettings([
-					{ name: 'containerInsights', value: 'enhanced' },
-				]),
-			);
+			// TODO make these changes at the pattern level in GuCDK
+			if (app.ecsService) {
+				app.ecsService.cluster.with(
+					new ClusterSettings([
+						{ name: 'containerInsights', value: 'enhanced' },
+					]),
+				);
+
+				const cfnService = app.ecsService.node
+					.defaultChild as CfnService;
+				cfnService.addPropertyOverride('Monitoring', {
+					MetricConfigurations: [
+						{
+							MetricNames: [
+								'CPUUtilization',
+								'MemoryUtilization',
+							],
+							ResolutionSeconds: 20,
+						},
+					],
+				});
+			}
 		}
 
 		/**

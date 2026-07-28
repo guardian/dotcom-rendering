@@ -65,11 +65,24 @@ type Props = CricketMatchHeaderProps & {
 	refreshInterval: number;
 };
 
+export const getUrl = (
+	baseUrl: URL | undefined,
+	renderingTarget: RenderingTarget,
+): URL | undefined => {
+	if (!baseUrl) return undefined;
+
+	const url = new URL(baseUrl);
+	if (renderingTarget === 'Apps') {
+		url.searchParams.set('dcr', 'apps');
+	}
+	return url;
+};
+
 export const CricketMatchHeader = (props: Props) => {
 	const scorecardHashbang = '#scorecard';
 	const locationHash = useLocationHash();
 	const currentUrl = new URL(
-		`${props.article.guardianBaseURL}${props.article.pageId}`,
+		`${props.article.guardianBaseURL}/${props.article.pageId}`,
 	);
 
 	const { data, error } = useSWR<CricketHeaderData, Error>(
@@ -172,8 +185,8 @@ export const CricketMatchHeader = (props: Props) => {
 					sportKind="cricket"
 					matchKind={match.kind}
 					selected={selectedTab}
-					reportTab={tabs.reportURL}
-					liveTab={tabs.liveURL}
+					reportTab={getUrl(tabs.reportURL, props.renderingTarget)}
+					liveTab={getUrl(tabs.liveURL, props.renderingTarget)}
 					infoTab={onInfoTabClick}
 				/>
 			</div>
