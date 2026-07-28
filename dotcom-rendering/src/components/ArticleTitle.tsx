@@ -12,7 +12,7 @@ import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
 	format: ArticleFormat;
-	layoutType: LayoutType;
+	layoutType?: LayoutType;
 	sectionLabel: string;
 	tags: TagType[];
 	sectionUrl: string;

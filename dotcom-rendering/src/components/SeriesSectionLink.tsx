@@ -28,7 +28,7 @@ import { PulsingDot } from './PulsingDot.island';
 
 type Props = {
 	format: ArticleFormat;
-	layoutType: LayoutType;
+	layoutType?: LayoutType;
 	tags: TagType[];
 	sectionLabel: string;
 	sectionUrl: string;
