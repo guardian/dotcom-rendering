@@ -193,15 +193,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							renderingTarget={renderingTarget}
 						/>
 					);
-				case ArticleDesign.Audio:
-					return (
-						<StandardLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
 				default:
 					return (
 						<StandardLayout
@@ -351,16 +342,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							article={article.frontendData}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-				case ArticleDesign.Audio:
-					return (
-						<StandardLayout
-							article={article.frontendData}
-							format={format}
-							NAV={NAV}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
 						/>
