@@ -274,23 +274,23 @@ export const StandardLayoutArticleGrid = ({
 							starRating={article.starRating}
 						/>
 
-						<div>
-							{!!avatarUrl && (
+						{!!avatarUrl && (
+							<>
 								<div css={avatarPositionStyles}>
 									<ContributorAvatar
 										imageSrc={avatarUrl}
 										imageAlt={article.byline ?? ''}
 									/>
 								</div>
-							)}
-							<StraightLines
-								count={8}
-								cssOverrides={css`
-									display: block;
-								`}
-								color={themePalette('--straight-lines')}
-							/>
-						</div>
+								<StraightLines
+									count={8}
+									cssOverrides={css`
+										display: block;
+									`}
+									color={themePalette('--straight-lines')}
+								/>
+							</>
+						)}
 					</div>
 				</GridItem>
 			) : (
