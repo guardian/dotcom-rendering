@@ -37,7 +37,7 @@ import { PodcastMeta } from './PodcastMeta';
 
 type Props = {
 	format: ArticleFormat;
-	layoutType: LayoutType;
+	layoutType?: LayoutType;
 	byline?: string;
 	tags: TagType[];
 	primaryDateline: string;

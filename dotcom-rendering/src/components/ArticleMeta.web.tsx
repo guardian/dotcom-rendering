@@ -41,7 +41,7 @@ import { TimeDateline } from './TimeDateline';
 
 type Props = {
 	format: ArticleFormat;
-	layoutType: LayoutType;
+	layoutType?: LayoutType;
 	pageId: string;
 	webTitle: string;
 	byline?: string;
