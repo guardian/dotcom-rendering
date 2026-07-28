@@ -3,15 +3,28 @@ import {
 	getFeastSavedFromTheWebRecipes,
 } from './savedFromWeb';
 
+/**
+ * Regression tests guarding the architectural decision behind this module:
+ * the Feast API's `/v2/saved-from-web` endpoints do NOT support a browser
+ * calling them cross-origin. CORS preflight (`OPTIONS`) requests to that
+ * endpoint were confirmed (2026-07-28) to return `403` in both PROD and
+ * CODE, with no `access-control-allow-methods` header — unlike `/search`,
+ * which returns a full, successful CORS preflight response. Browsers treat
+ * a non-2xx preflight response as a failed preflight regardless of any
+ * other CORS headers present, so a direct browser → Feast API call for
+ * these endpoints will always fail with a CORS error.
+ *
+ * This means every request made by this module MUST go to our own relative,
+ * same-origin proxy path, never to a `guardianapis.com` origin directly. If
+ * that ever changes, it will very likely reintroduce the CORS failure this
+ * suite is designed to catch.
+ */
 describe('savedFromWeb', () => {
 	const originalFetch = global.fetch;
 
 	beforeEach(() => {
 		global.fetch = jest.fn();
 		jest.spyOn(console, 'error').mockImplementation(() => undefined);
-		window.guardian = {
-			config: { stage: 'CODE' },
-		} as unknown as typeof window.guardian;
 	});
 
 	afterEach(() => {
@@ -20,7 +33,7 @@ describe('savedFromWeb', () => {
 	});
 
 	describe('getFeastSavedFromTheWebRecipes', () => {
-		it('calls the Feast API directly using the CODE host when not on PROD', async () => {
+		it('calls the relative same-origin proxy, never the Feast API directly', async () => {
 			(global.fetch as jest.Mock).mockResolvedValue({
 				ok: true,
 				json: async () => [],
@@ -31,32 +44,8 @@ describe('savedFromWeb', () => {
 			]);
 
 			const [url]: [string] = (global.fetch as jest.Mock).mock.calls[0];
-			expect(
-				url.startsWith(
-					'https://recipes.code.dev-guardianapis.com/v2/saved-from-web',
-				),
-			).toBe(true);
-		});
-
-		it('calls the Feast API directly using the PROD host on PROD', async () => {
-			window.guardian = {
-				config: { stage: 'PROD' },
-			} as unknown as typeof window.guardian;
-			(global.fetch as jest.Mock).mockResolvedValue({
-				ok: true,
-				json: async () => [],
-			});
-
-			await getFeastSavedFromTheWebRecipes('user-a2', 'token-a2', [
-				'recipe-1',
-			]);
-
-			const [url]: [string] = (global.fetch as jest.Mock).mock.calls[0];
-			expect(
-				url.startsWith(
-					'https://recipes.guardianapis.com/v2/saved-from-web',
-				),
-			).toBe(true);
+			expect(url.startsWith('/api/feast-saved-recipes')).toBe(true);
+			expect(url).not.toContain('guardianapis.com');
 		});
 
 		it('sends the ids as a deduped, sorted, comma-separated query param', async () => {
@@ -73,7 +62,7 @@ describe('savedFromWeb', () => {
 
 			const [url]: [string] = (global.fetch as jest.Mock).mock.calls[0];
 			expect(url).toBe(
-				'https://recipes.code.dev-guardianapis.com/v2/saved-from-web?ids=recipe-a%2Crecipe-b',
+				'/api/feast-saved-recipes?ids=recipe-a%2Crecipe-b',
 			);
 		});
 
@@ -197,7 +186,7 @@ describe('savedFromWeb', () => {
 	});
 
 	describe('addFeastRecipeToSavedFromWebList', () => {
-		it('calls the Feast API directly with PUT', async () => {
+		it('calls the relative same-origin proxy with PUT, never the Feast API directly', async () => {
 			(global.fetch as jest.Mock).mockResolvedValue({ ok: true });
 
 			await addFeastRecipeToSavedFromWebList('token-j', 'recipe-1');
@@ -205,9 +194,8 @@ describe('savedFromWeb', () => {
 			const [url, requestInit]: [string, RequestInit | undefined] = (
 				global.fetch as jest.Mock
 			).mock.calls[0];
-			expect(url).toBe(
-				'https://recipes.code.dev-guardianapis.com/v2/saved-from-web/recipe-1',
-			);
+			expect(url).toBe('/api/feast-saved-recipes/recipe-1');
+			expect(url).not.toContain('guardianapis.com');
 			expect(requestInit?.method).toBe('PUT');
 		});
 

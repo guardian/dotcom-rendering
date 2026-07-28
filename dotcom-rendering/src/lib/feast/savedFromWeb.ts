@@ -1,18 +1,25 @@
 /**
- * Direct client for the Feast API's "Saved from web" endpoints
- * (`/v2/saved-from-web`). The browser calls the Feast API directly, sending
- * the reader's bearer token straight through, rather than going via a
- * Frontend-hosted proxy.
+ * Frontend's server-side proxy for the Feast API's "Saved from web"
+ * endpoints. The browser never talks to the Feast API directly: Frontend
+ * forwards the reader's bearer token straight through.
+ *
+ * This isn't just an optimisation to avoid an extra hop — the Feast API's
+ * `/v2/saved-from-web` endpoints do not support being called cross-origin
+ * from a browser at all. A CORS preflight (`OPTIONS`) request to these
+ * endpoints (confirmed 2026-07-28, both PROD and CODE) returns `403`, with
+ * no `access-control-allow-methods` header. Browsers treat any non-2xx
+ * preflight response as a failed preflight, so a direct browser fetch to
+ * these endpoints always fails with a CORS error, regardless of any other
+ * CORS headers present. (Contrast this with `/search` on the same API,
+ * which does return a full, successful CORS preflight response — CORS is
+ * configured per-route there, not API-wide.)
+ *
+ * This is a relative, same-origin fetch: the article page is served by
+ * Frontend, so this must be (and stay) a route Frontend itself handles, not
+ * one DCR proxies, since DCR is not on the reader-facing origin. See
+ * `savedFromWeb.test.ts` for regression tests guarding this.
  */
-const FEAST_API_BASE_URL_PROD = 'https://recipes.guardianapis.com';
-const FEAST_API_BASE_URL_CODE = 'https://recipes.code.dev-guardianapis.com';
-
-const FEAST_SAVED_RECIPES_PATH = '/v2/saved-from-web';
-
-const getFeastApiBaseUrl = (): string =>
-	window.guardian.config.stage === 'PROD'
-		? FEAST_API_BASE_URL_PROD
-		: FEAST_API_BASE_URL_CODE;
+const FEAST_SAVED_RECIPES_PATH = '/api/feast-saved-recipes';
 
 /**
  * Upper bound on how many recipe ids can be requested in one call. Mirrors
@@ -55,7 +62,7 @@ const fetchSavedFromWebRecipes = (
 	const promise = (async (): Promise<Set<string>> => {
 		try {
 			const response = await fetch(
-				`${getFeastApiBaseUrl()}${FEAST_SAVED_RECIPES_PATH}?ids=${encodeURIComponent(idsParam)}`,
+				`${FEAST_SAVED_RECIPES_PATH}?ids=${encodeURIComponent(idsParam)}`,
 				{
 					headers: {
 						Authorization: `Bearer ${accessToken}`,
@@ -148,7 +155,7 @@ export const addFeastRecipeToSavedFromWebList = async (
 ): Promise<boolean> => {
 	try {
 		const response = await fetch(
-			`${getFeastApiBaseUrl()}${FEAST_SAVED_RECIPES_PATH}/${encodeURIComponent(recipeId)}`,
+			`${FEAST_SAVED_RECIPES_PATH}/${encodeURIComponent(recipeId)}`,
 			{
 				method: 'PUT',
 				headers: {
