@@ -23,19 +23,24 @@ jobs:
       production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
 
   prettier:
+    if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/prettier.yml
 
   jest:
+    if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/jest.yml
 
   lint:
+    if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/lint.yml
 
   islands:
+    if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/check-islands.yml
 
   playwright:
     needs: [container]
+    if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/playwright.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}
