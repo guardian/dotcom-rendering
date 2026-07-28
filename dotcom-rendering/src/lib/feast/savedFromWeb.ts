@@ -1,14 +1,18 @@
 /**
- * Frontend's server-side proxy for the Feast API's "Saved from web"
- * endpoints. The browser never talks to the Feast API directly: Frontend
- * forwards the reader's bearer token straight through, which sidesteps
- * needing Feast API-side CORS configuration for browser origins.
- *
- * This is a relative, same-origin fetch: the article page is served by
- * Frontend, so this must be (and stay) a route Frontend itself handles, not
- * one DCR proxies, since DCR is not on the reader-facing origin.
+ * Direct client for the Feast API's "Saved from web" endpoints
+ * (`/v2/saved-from-web`). The browser calls the Feast API directly, sending
+ * the reader's bearer token straight through, rather than going via a
+ * Frontend-hosted proxy.
  */
-const FEAST_SAVED_RECIPES_PATH = '/api/feast-saved-recipes';
+const FEAST_API_BASE_URL_PROD = 'https://recipes.guardianapis.com';
+const FEAST_API_BASE_URL_CODE = 'https://recipes.code.dev-guardianapis.com';
+
+const FEAST_SAVED_RECIPES_PATH = '/v2/saved-from-web';
+
+const getFeastApiBaseUrl = (): string =>
+	window.guardian.config.stage === 'PROD'
+		? FEAST_API_BASE_URL_PROD
+		: FEAST_API_BASE_URL_CODE;
 
 /**
  * Upper bound on how many recipe ids can be requested in one call. Mirrors
@@ -51,7 +55,7 @@ const fetchSavedFromWebRecipes = (
 	const promise = (async (): Promise<Set<string>> => {
 		try {
 			const response = await fetch(
-				`${FEAST_SAVED_RECIPES_PATH}?ids=${encodeURIComponent(idsParam)}`,
+				`${getFeastApiBaseUrl()}${FEAST_SAVED_RECIPES_PATH}?ids=${encodeURIComponent(idsParam)}`,
 				{
 					headers: {
 						Authorization: `Bearer ${accessToken}`,
@@ -144,7 +148,7 @@ export const addFeastRecipeToSavedFromWebList = async (
 ): Promise<boolean> => {
 	try {
 		const response = await fetch(
-			`${FEAST_SAVED_RECIPES_PATH}/${encodeURIComponent(recipeId)}`,
+			`${getFeastApiBaseUrl()}${FEAST_SAVED_RECIPES_PATH}/${encodeURIComponent(recipeId)}`,
 			{
 				method: 'PUT',
 				headers: {
