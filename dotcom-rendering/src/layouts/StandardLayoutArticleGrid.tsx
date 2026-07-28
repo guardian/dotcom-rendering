@@ -13,7 +13,6 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { DecideLines } from '../components/DecideLines';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
-import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { Island } from '../components/Island';
 import { ListenToArticle } from '../components/ListenToArticle.island';
 import { MainMedia } from '../components/MainMedia';
@@ -187,16 +186,10 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem area="meta" layoutType={layoutType} element="aside">
 				{format.design !== ArticleDesign.Audio && (
 					<div css={stretchLines}>
-						{isWeb &&
-						format.theme === ArticleSpecial.Labs &&
-						format.design !== ArticleDesign.Video ? (
-							<GuardianLabsLines />
-						) : (
-							<DecideLines
-								format={format}
-								color={themePalette('--article-border')}
-							/>
-						)}
+						<DecideLines
+							format={format}
+							color={themePalette('--article-border')}
+						/>
 					</div>
 				)}
 				{isApps ? (

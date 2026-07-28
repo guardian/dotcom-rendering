@@ -4,8 +4,11 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import {
 	ArticleDesign,
 	type ArticleFormat,
+	ArticleSpecial,
 	Pillar,
 } from '../lib/articleFormat';
+import { useConfig } from './ConfigContext';
+import { GuardianLabsLines } from './GuardianLabsLines';
 
 type Props = {
 	format: ArticleFormat;
@@ -43,18 +46,31 @@ const DottedLines = ({
 export const DecideLines = ({ format, color }: Props) => {
 	const count = format.design === ArticleDesign.Comment ? 8 : 4;
 
-	switch (format.theme) {
-		case Pillar.Sport:
-			return <DottedLines count={count} color={color} />;
-		default:
-			return (
-				<StraightLines
-					cssOverrides={css`
-						display: block;
-					`}
-					count={count}
-					color={color}
-				/>
-			);
+	const { renderingTarget } = useConfig();
+	const isWeb = renderingTarget === 'Web';
+
+	if (
+		isWeb &&
+		format.theme === ArticleSpecial.Labs &&
+		format.design !== ArticleDesign.Video
+	) {
+		return <GuardianLabsLines />;
 	}
+
+	if (
+		format.theme === Pillar.Sport &&
+		format.design !== ArticleDesign.Picture
+	) {
+		return <DottedLines count={count} color={color} />;
+	}
+
+	return (
+		<StraightLines
+			cssOverrides={css`
+				display: block;
+			`}
+			count={count}
+			color={color}
+		/>
+	);
 };

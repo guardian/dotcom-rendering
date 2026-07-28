@@ -24,7 +24,6 @@ import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
-import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
@@ -556,17 +555,12 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							) : (
 								<div css={maxWidth}>
 									<div css={[stretchLines, linesMargin]}>
-										{format.theme ===
-										ArticleSpecial.Labs ? (
-											<GuardianLabsLines />
-										) : (
-											<DecideLines
-												format={format}
-												color={themePalette(
-													'--article-border',
-												)}
-											/>
-										)}
+										<DecideLines
+											format={format}
+											color={themePalette(
+												'--article-border',
+											)}
+										/>
 									</div>
 								</div>
 							)}
