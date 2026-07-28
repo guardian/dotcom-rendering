@@ -1995,6 +1995,17 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             },
           },
         ],
+        "Monitoring": {
+          "MetricConfigurations": [
+            {
+              "MetricNames": [
+                "CPUUtilization",
+                "MemoryUtilization",
+              ],
+              "ResolutionSeconds": 20,
+            },
+          ],
+        },
         "NetworkConfiguration": {
           "AwsvpcConfiguration": {
             "AssignPublicIp": "DISABLED",

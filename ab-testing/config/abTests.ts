@@ -83,31 +83,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-teads-prebid",
-		description:
-			"Test to measure the impact of adding Teads as a bidder in prebid .",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-06-11",
-		type: "client",
-		status: "OFF",
-		audienceSize: 0 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
-		name: "commercial-ozone-outstream",
-		description: "A test to ensure correct integration of Ozone outstream.",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-23",
-		type: "client",
-		status: "ON",
-		audienceSize: 0 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "newsletters-in-article-signup-preview",
 		description:
 			"Test in-article newsletter signup with illustrated preview CTA vs without preview CTA",
@@ -155,19 +130,6 @@ const ABTests: ABTest[] = [
 		audienceSize: 20 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
-		name: "feast-recipe-nudge-v2",
-		description:
-			"Measures the impact of showing the Feast contextual nudge on recipe article pages",
-		owners: ["feast@theguardian.com"],
-		status: "ON",
-		expirationDate: "2027-01-01",
-		type: "client",
-		audienceSize: 1,
-		audienceSpace: "B",
-		groups: ["control", "variant-1"],
 		shouldForceMetricsCollection: false,
 	},
 	{

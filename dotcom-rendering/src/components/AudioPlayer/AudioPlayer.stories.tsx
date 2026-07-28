@@ -1,7 +1,7 @@
 import { defaultFormats } from '../../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../../.storybook/modes';
 import preview from '../../../.storybook/preview';
-import { AudioPlayerWeb as Player } from './AudioPlayerWeb.island';
+import { AudioPlayerWeb as Player } from '../AudioPlayerWeb.island';
 // import audioFile from './stories/default_audio_test.mp3';
 
 const meta = preview.meta({

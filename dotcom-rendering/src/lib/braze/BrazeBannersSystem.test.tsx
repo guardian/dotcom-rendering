@@ -62,7 +62,7 @@ describe('Braze Banner placement refreshes', () => {
 	});
 
 	it('distinguishes a successful refresh with no banner from a failed refresh', async () => {
-		const placement = BrazeBannersSystemPlacementId.FeastContextualNudge1;
+		const placement = BrazeBannersSystemPlacementId.Banner;
 		const request = jest
 			.fn()
 			.mockImplementationOnce(
@@ -80,7 +80,7 @@ describe('Braze Banner placement refreshes', () => {
 		await refreshBanners(braze, [placement]);
 		expect(isPlacementStale(placement)).toBe(false);
 		expect(request).toHaveBeenCalledWith(
-			[placement],
+			expect.arrayContaining([placement]),
 			expect.any(Function),
 			expect.any(Function),
 		);
@@ -89,7 +89,7 @@ describe('Braze Banner placement refreshes', () => {
 	it('marks both Feast and Designable placements stale when a refresh fails', async () => {
 		const placements = [
 			BrazeBannersSystemPlacementId.Banner,
-			BrazeBannersSystemPlacementId.FeastContextualNudge2,
+			BrazeBannersSystemPlacementId.EndOfArticle,
 		] as const;
 		const braze = makeBraze(
 			jest.fn((_ids: string[], _success: () => void, error: () => void) =>

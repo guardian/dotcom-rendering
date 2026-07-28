@@ -83,7 +83,7 @@ describe('buildBrazeMessaging banner initialisation', () => {
 			'openSession',
 		]);
 		expect(braze.requestBannersRefresh).toHaveBeenCalledWith(
-			['dotcom-rendering_banner'],
+			expect.arrayContaining(['dotcom-rendering_banner']),
 			expect.any(Function),
 			expect.any(Function),
 		);

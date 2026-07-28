@@ -7,12 +7,12 @@ import {
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import {
 	BrazeBannersSystemDisplay,
 	BrazeBannersSystemPlacementId,
 	isPlacementStale,
 } from '../lib/braze/BrazeBannersSystem';
-import { useAB } from '../lib/useAB';
 import { useBraze } from '../lib/useBraze';
 import type { StageType } from '../types/config';
 import type { RecipeBlockElement } from '../types/content';
@@ -22,10 +22,8 @@ import { useConfig } from './ConfigContext';
 
 const FEAST_BG = '#F3F3E9';
 const FEAST_BG_DARK = '#2B2B26';
-const FEAST_TEXT = sourcePalette.neutral[10];
-const FEAST_TEXT_DARK = sourcePalette.neutral[100];
-const FEAST_SUBTEXT = sourcePalette.neutral[20];
-const FEAST_SUBTEXT_DARK = sourcePalette.neutral[93];
+const FEAST_TEXT = sourcePalette.neutral[20];
+const FEAST_TEXT_DARK = sourcePalette.neutral[93];
 const FEAST_GREEN = '#68773C';
 const FEAST_GREEN_HOVER = '#4d5c2b';
 const FEAST_BORDER = FEAST_GREEN;
@@ -35,15 +33,13 @@ const FEAST_BORDER_DARK = FEAST_GREEN;
 
 const lightVars = css`
 	--feast-nudge-bg: ${FEAST_BG};
-	--feast-nudge-heading: ${FEAST_TEXT};
-	--feast-nudge-subtext: ${FEAST_SUBTEXT};
+	--feast-nudge-text: ${FEAST_TEXT};
 	--feast-nudge-border: ${FEAST_BORDER};
 `;
 
 const darkVars = css`
 	--feast-nudge-bg: ${FEAST_BG_DARK};
-	--feast-nudge-heading: ${FEAST_TEXT_DARK};
-	--feast-nudge-subtext: ${FEAST_SUBTEXT_DARK};
+	--feast-nudge-text: ${FEAST_TEXT_DARK};
 	--feast-nudge-border: ${FEAST_BORDER_DARK};
 `;
 
@@ -52,16 +48,9 @@ const darkVars = css`
 const FEAST_ADJUST_TOKEN_PROD = '20wmhy68';
 const FEAST_ADJUST_TOKEN_CODE = '20o7ykck';
 
-const FEAST_BRAZE_PLACEMENTS = [
-	BrazeBannersSystemPlacementId.FeastContextualNudge1,
-	BrazeBannersSystemPlacementId.FeastContextualNudge2,
-	BrazeBannersSystemPlacementId.FeastContextualNudge3,
-	BrazeBannersSystemPlacementId.FeastContextualNudge4,
-	BrazeBannersSystemPlacementId.FeastContextualNudge5,
-] as const;
-
-const getAdjustToken = (stage: StageType): string =>
-	stage === 'PROD' ? FEAST_ADJUST_TOKEN_PROD : FEAST_ADJUST_TOKEN_CODE;
+const getAdjustToken = (stage: StageType): string => {
+	return stage === 'PROD' ? FEAST_ADJUST_TOKEN_PROD : FEAST_ADJUST_TOKEN_CODE;
+};
 
 const buildFeastLink = (recipeId: string, stage: StageType): string => {
 	const token = getAdjustToken(stage);
@@ -90,6 +79,40 @@ const cardGridStyles = css`
 			'image info' auto
 			'image buttons' 1fr
 			'details details' / 1fr 1fr;
+	}
+`;
+
+// ── CLS mitigation ────────────────────────────────────────────────────────────
+
+/**
+ * Reserves vertical space for the nudge so that the async swap between the
+ * native fallback card and a Braze banner (see the `useBraze` fetch below)
+ * doesn't shift surrounding content once the placement is already visible to
+ * the reader.
+ *
+ * Values are the rendered height of the native fallback card (fixed copy, so
+ * the height is deterministic), measured via Storybook at each named
+ * breakpoint where the description text wraps to a different number of
+ * lines:
+ * - < mobileMedium (375px): 3 lines  → 111px
+ * - mobileMedium–phablet (375–659px): 2 lines → 90px
+ * - >= phablet (660px): 1 line → 69px
+ *
+ * A small buffer is added to absorb minor font-metric differences (e.g.
+ * webfont vs. fallback font during load).
+ *
+ * This only guarantees no shift when a Braze banner is the same height or
+ * shorter. Braze banners can set their own `minHeight` custom property (see
+ * `BrazeBannersSystem.tsx`) to match or exceed these values so their content
+ * doesn't overflow the reserved space either.
+ */
+const nudgeMinHeightStyles = css`
+	min-height: 112px;
+	${from.mobileMedium} {
+		min-height: 92px;
+	}
+	${from.phablet} {
+		min-height: 72px;
 	}
 `;
 
@@ -125,7 +148,7 @@ const buttonWrapperStyles = css`
 
 const descriptionStyles = css`
 	${article15};
-	color: var(--feast-nudge-subtext);
+	color: var(--feast-nudge-text);
 	b {
 		font-weight: bold;
 	}
@@ -139,7 +162,7 @@ type FeastContextualNudgeProps = {
 	pageId: string;
 	isDev: boolean;
 	nudgeIndex: number;
-	idApiUrl?: string;
+	idApiUrl: string | undefined;
 };
 
 /**
@@ -163,12 +186,8 @@ export const FeastContextualNudge = ({
 	nudgeIndex,
 	idApiUrl,
 }: FeastContextualNudgeProps) => {
-	const abTests = useAB();
-	const isVariant =
-		abTests?.isUserInTestGroup('feast-recipe-nudge-v2', 'variant-1') ??
-		false;
-
 	const { darkModeAvailable, renderingTarget } = useConfig();
+
 	const { braze } = useBraze(idApiUrl ?? '', renderingTarget);
 
 	const [isStorybook, setIsStorybook] = useState(false);
@@ -185,50 +204,84 @@ export const FeastContextualNudge = ({
 	const title = recipe.title ?? recipeArticleTitle;
 	const feastId = recipe.id;
 
+	/**
+	 * Logs a CLICK event with Ophan when the reader taps the native
+	 * (non-Braze) "Download the app" install button.
+	 */
+	const handleDownloadClick = () => {
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'RETENTION_ENGAGEMENT_BANNER',
+					id: `feast-contextual-nudge-${nudgeIndex}`,
+				},
+				action: 'CLICK',
+			},
+			renderingTarget,
+		);
+	};
+
 	useEffect(() => {
-		if (isDev && isVariant) {
+		if (isDev) {
 			console.log(
 				`Contextual nudge for the Feast app, related to the recipe: ${title}. (id: ${feastId}; pageId: ${pageId})`,
 			);
 		}
-	}, [feastId, title, pageId, isDev, isVariant]);
+	}, [feastId, title, pageId, isDev]);
 
-	if (!isVariant) return null;
+	// If idApiUrl is defined and Braze has a banner for this placement slot,
+	// render the Braze banner instead of the native nudge.
+	if (idApiUrl !== undefined) {
+		const placementId =
+			BrazeBannersSystemPlacementId[
+				`FeastContextualNudge${nudgeIndex}` as keyof typeof BrazeBannersSystemPlacementId
+			];
 
-	const placementId = FEAST_BRAZE_PLACEMENTS[nudgeIndex - 1];
-	const banner =
-		idApiUrl && placementId && !isPlacementStale(placementId)
-			? braze?.getBanner(placementId)
+		// Guard against stale placements: if the last requestBannersRefresh
+		// was rate-limited AND this placement has suppressOnStale: true in
+		// PLACEMENT_SUPPRESS_ON_STALE, skip getBanner() and fall through to
+		// the native nudge below.
+		//
+		// Each FeastContextualNudge placement ID has its own entry in
+		// PLACEMENT_SUPPRESS_ON_STALE — change any individual one to `true`
+		// to suppress that specific nudge on a failed refresh.
+		const banner = !isPlacementStale(placementId)
+			? (braze?.getBanner(placementId) ?? null)
 			: null;
 
-	if (banner && braze && idApiUrl) {
-		return (
-			<div
-				aria-description={`Open the recipe ${title} in the Feast app`}
-				data-component="feast-contextual-nudge"
-				css={css`
-					margin: ${space[2]}px 0;
-				`}
-			>
-				<BrazeBannersSystemDisplay
-					meta={{
-						id: `feast-contextual-nudge-${nudgeIndex}`,
-						braze,
-						banner,
-					}}
-					idApiUrl={idApiUrl}
-					stage={stage}
-					context={{
-						recipe,
-						recipeArticleTitle,
-						pageId,
-						nudgeIndex,
-						darkMode: darkModeAvailable,
-						adjustToken: getAdjustToken(stage),
-					}}
-				/>
-			</div>
-		);
+		if (banner && braze) {
+			return (
+				<div
+					aria-description={`Open the recipe ${title} in the Feast app`}
+					data-component="feast-contextual-nudge"
+					css={[
+						nudgeMinHeightStyles,
+						css`
+							margin: ${space[2]}px 0;
+						`,
+					]}
+				>
+					<BrazeBannersSystemDisplay
+						meta={{
+							id: `feast-contextual-nudge-${nudgeIndex}`,
+							braze,
+							banner,
+						}}
+						idApiUrl={idApiUrl}
+						stage={stage}
+						context={{
+							recipe,
+							recipeArticleTitle,
+							pageId,
+							isDev,
+							nudgeIndex,
+							darkMode: darkModeAvailable,
+							adjustToken: getAdjustToken(stage),
+						}}
+					/>
+				</div>
+			);
+		}
 	}
 
 	return (
@@ -238,6 +291,7 @@ export const FeastContextualNudge = ({
 			css={[
 				showcaseCardStyles,
 				cardGridStyles,
+				nudgeMinHeightStyles,
 				darkModeAvailable &&
 					css`
 						@media (prefers-color-scheme: dark) {
@@ -273,6 +327,7 @@ export const FeastContextualNudge = ({
 					rel="noreferrer"
 					theme={primaryCtaTheme}
 					data-ignore="global-link-styling"
+					onClick={handleDownloadClick}
 				>
 					Download the app
 				</LinkButton>
