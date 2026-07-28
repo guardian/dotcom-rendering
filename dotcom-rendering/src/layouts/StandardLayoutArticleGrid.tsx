@@ -488,7 +488,8 @@ export const StandardLayoutArticleGrid = ({
 							}
 							starRating={article.starRating}
 						/>
-						{!!avatarUrl && isPicture && (
+
+						{!!avatarUrl && (
 							<>
 								<div css={avatarPositionStyles}>
 									<ContributorAvatar
