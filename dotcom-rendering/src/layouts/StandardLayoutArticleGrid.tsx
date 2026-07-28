@@ -486,10 +486,11 @@ export const StandardLayoutArticleGrid = ({
 							webPublicationDateDeprecated={
 								article.webPublicationDateDeprecated
 							}
+							hasAvatar={true}
 							starRating={article.starRating}
 						/>
 
-						{!!avatarUrl && (
+						{!!avatarUrl && isPicture && (
 							<>
 								<div css={avatarPositionStyles}>
 									<ContributorAvatar
@@ -539,11 +540,7 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
-				<Standfirst
-					format={format}
-					standfirst={article.standfirst}
-					layoutType={layoutType}
-				/>
+				<Standfirst format={format} standfirst={article.standfirst} />
 			</GridItem>
 			{isImmersive && (
 				<GridItem
