@@ -23,6 +23,7 @@ export const CricketScorecardNew = meta.story({
 			{
 				description: 'India first innings',
 				battingTeam: 'India',
+				order: 1,
 				declared: false,
 				forfeited: false,
 				inningsTotals: {
@@ -188,6 +189,7 @@ export const CricketScorecardNew = meta.story({
 			{
 				description: 'New Zealand first innings',
 				battingTeam: 'New Zealand',
+				order: 2,
 				declared: false,
 				forfeited: false,
 				inningsTotals: {

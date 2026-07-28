@@ -1,6 +1,8 @@
 name: DCR Schema Check
 on:
-  push:
+  merge_group:
+    types: [checks_requested]
+  pull_request:
     paths-ignore:
       - 'dotcom-rendering/docs/**'
 

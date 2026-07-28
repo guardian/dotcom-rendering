@@ -168,6 +168,7 @@ export const ArticleRenderer = ({
 		const MAX_NUDGES = 5;
 		const interval = Math.ceil(sections.length / MAX_NUDGES);
 
+<<<<<<< HEAD
 		const sectionsWithNudgeIndex = sections.map((section) => {
 			const position = section.index + 1; // 1-based
 			const nudgeIndex =
@@ -191,6 +192,13 @@ export const ArticleRenderer = ({
 			.map(({ section }) => section.recipe!.id);
 
 		for (const { section, nudgeIndex } of sectionsWithNudgeIndex) {
+=======
+		for (const section of sections) {
+			const position = section.index + 1; // 1-based
+			const nudgeIndex =
+				position % interval === 0 ? position / interval : null;
+
+>>>>>>> origin/main
 			result.push(
 				<Fragment key={`recipe-section-${section.index}`}>
 					{section.subheadingEl}
@@ -207,7 +215,10 @@ export const ArticleRenderer = ({
 								recipeArticleTitle={section.recipeArticleTitle}
 								nudgeIndex={nudgeIndex}
 								idApiUrl={idApiUrl}
+<<<<<<< HEAD
 								allNudgeRecipeIds={allNudgeRecipeIds}
+=======
+>>>>>>> origin/main
 							/>
 						</Island>
 					)}

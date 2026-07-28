@@ -7,14 +7,21 @@ import {
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
+<<<<<<< HEAD
+=======
+import { submitComponentEvent } from '../client/ophan/ophan';
+>>>>>>> origin/main
 import {
 	BrazeBannersSystemDisplay,
 	BrazeBannersSystemPlacementId,
 	isPlacementStale,
 } from '../lib/braze/BrazeBannersSystem';
+<<<<<<< HEAD
 import { getFeastSavedFromTheWebRecipes } from '../lib/feast/savedFromWeb';
 import { useAB } from '../lib/useAB';
 import { useAuthStatus } from '../lib/useAuthStatus';
+=======
+>>>>>>> origin/main
 import { useBraze } from '../lib/useBraze';
 import type { StageType } from '../types/config';
 import type { RecipeBlockElement } from '../types/content';
@@ -165,6 +172,7 @@ type FeastContextualNudgeProps = {
 	isDev: boolean;
 	nudgeIndex: number;
 	idApiUrl: string | undefined;
+<<<<<<< HEAD
 	/**
 	 * Every recipe id that will get a nudge on this page (at most 5). Shared
 	 * across all FeastContextualNudge instances so that whichever one
@@ -173,6 +181,8 @@ type FeastContextualNudgeProps = {
 	 * its own recipe id separately.
 	 */
 	allNudgeRecipeIds: string[];
+=======
+>>>>>>> origin/main
 };
 
 /**
@@ -195,6 +205,7 @@ export const FeastContextualNudge = ({
 	isDev,
 	nudgeIndex,
 	idApiUrl,
+<<<<<<< HEAD
 	allNudgeRecipeIds,
 }: FeastContextualNudgeProps) => {
 	const abTests = useAB();
@@ -208,6 +219,11 @@ export const FeastContextualNudge = ({
 
 	const { darkModeAvailable, renderingTarget } = useConfig();
 
+=======
+}: FeastContextualNudgeProps) => {
+	const { darkModeAvailable, renderingTarget } = useConfig();
+
+>>>>>>> origin/main
 	const { braze } = useBraze(idApiUrl ?? '', renderingTarget);
 
 	const [isStorybook, setIsStorybook] = useState(false);
@@ -224,14 +240,32 @@ export const FeastContextualNudge = ({
 	const title = recipe.title ?? recipeArticleTitle;
 	const feastId = recipe.id;
 
+	/**
+	 * Logs a CLICK event with Ophan when the reader taps the native
+	 * (non-Braze) "Download the app" install button.
+	 */
+	const handleDownloadClick = () => {
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'RETENTION_ENGAGEMENT_BANNER',
+					id: `feast-contextual-nudge-${nudgeIndex}`,
+				},
+				action: 'CLICK',
+			},
+			renderingTarget,
+		);
+	};
+
 	useEffect(() => {
-		if (isDev && isVariant) {
+		if (isDev) {
 			console.log(
 				`Contextual nudge for the Feast app, related to the recipe: ${title}. (id: ${feastId}; pageId: ${pageId})`,
 			);
 		}
-	}, [feastId, title, pageId, isDev, isVariant]);
+	}, [feastId, title, pageId, isDev]);
 
+<<<<<<< HEAD
 	// Whether this recipe is already in the reader's "Saved from web" list.
 	// `getFeastSavedFromTheWebRecipes` caches by user id + recipe ids, so no
 	// matter how many FeastContextualNudge islands on this page call it as
@@ -251,6 +285,62 @@ export const FeastContextualNudge = ({
 	}, [authStatus, feastId, allNudgeRecipeIds]);
 
 	if (!isVariant) return null;
+=======
+	// If idApiUrl is defined and Braze has a banner for this placement slot,
+	// render the Braze banner instead of the native nudge.
+	if (idApiUrl !== undefined) {
+		const placementId =
+			BrazeBannersSystemPlacementId[
+				`FeastContextualNudge${nudgeIndex}` as keyof typeof BrazeBannersSystemPlacementId
+			];
+
+		// Guard against stale placements: if the last requestBannersRefresh
+		// was rate-limited AND this placement has suppressOnStale: true in
+		// PLACEMENT_SUPPRESS_ON_STALE, skip getBanner() and fall through to
+		// the native nudge below.
+		//
+		// Each FeastContextualNudge placement ID has its own entry in
+		// PLACEMENT_SUPPRESS_ON_STALE — change any individual one to `true`
+		// to suppress that specific nudge on a failed refresh.
+		const banner = !isPlacementStale(placementId)
+			? (braze?.getBanner(placementId) ?? null)
+			: null;
+
+		if (banner && braze) {
+			return (
+				<div
+					aria-description={`Open the recipe ${title} in the Feast app`}
+					data-component="feast-contextual-nudge"
+					css={[
+						nudgeMinHeightStyles,
+						css`
+							margin: ${space[2]}px 0;
+						`,
+					]}
+				>
+					<BrazeBannersSystemDisplay
+						meta={{
+							id: `feast-contextual-nudge-${nudgeIndex}`,
+							braze,
+							banner,
+						}}
+						idApiUrl={idApiUrl}
+						stage={stage}
+						context={{
+							recipe,
+							recipeArticleTitle,
+							pageId,
+							isDev,
+							nudgeIndex,
+							darkMode: darkModeAvailable,
+							adjustToken: getAdjustToken(stage),
+						}}
+					/>
+				</div>
+			);
+		}
+	}
+>>>>>>> origin/main
 
 	// If idApiUrl is defined and Braze has a banner for this placement slot,
 	// render the Braze banner instead of the native nudge.
@@ -351,6 +441,7 @@ export const FeastContextualNudge = ({
 					rel="noreferrer"
 					theme={primaryCtaTheme}
 					data-ignore="global-link-styling"
+					onClick={handleDownloadClick}
 				>
 					Download the app
 				</LinkButton>

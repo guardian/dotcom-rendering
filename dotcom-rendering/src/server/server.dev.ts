@@ -32,6 +32,7 @@ import {
 import { handleAppsThrasher } from './handler.thrasher.apps';
 import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
+import { responseHeaderMiddleware } from './lib/header-middleware';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
 
@@ -109,6 +110,8 @@ const renderer = Router();
 renderer.use(getContentFromURLMiddleware);
 renderer.use(getABTestsFromQueryParams);
 renderer.use(requestLoggerMiddleware);
+renderer.use(responseHeaderMiddleware);
+
 renderer.get('/Article/*url', handleArticle);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);

@@ -37,6 +37,7 @@ export const FootballMatchHeaderWrapper = (props: Props) => (
 		matchNotificationsClient={getMatchNotificationsClient()}
 		environmentClient={getEnvironmentClient()}
 		liveActivitiesClient={getLiveActivitiesClient()}
+		baseUrl={props.baseUrl}
 	/>
 );
 

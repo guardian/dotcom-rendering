@@ -27,8 +27,17 @@ jest.mock('../HighlightsCardImage', () => ({
 
 jest.mock('./HighlightsNewsletterSignupModal', () => ({
 	HighlightsNewsletterSignupModal: jest.fn(
-		({ onClose }: { onClose: () => void }) => (
-			<div data-testid="highlights-newsletter-signup-modal">
+		({
+			onClose,
+			componentId,
+		}: {
+			onClose: () => void;
+			componentId: string;
+		}) => (
+			<div
+				data-testid="highlights-newsletter-signup-modal"
+				data-component-id={componentId}
+			>
 				<button type="button" onClick={onClose}>
 					Close signup form
 				</button>
@@ -106,7 +115,10 @@ describe('HighlightsNewsletterCard', () => {
 		fireEvent.click(link);
 		expect(
 			screen.getByTestId('highlights-newsletter-signup-modal'),
-		).toBeInTheDocument();
+		).toHaveAttribute(
+			'data-component-id',
+			`highlights-modal-${defaultProps.newsletter.identityName}`,
+		);
 
 		expect(sendNewsletterSignupEvent).toHaveBeenCalledWith(
 			expect.objectContaining({
@@ -238,12 +250,17 @@ describe('HighlightsNewsletterCard', () => {
 		);
 	});
 
-	it('sets data-modal-component-id on the link to match the Ophan modal component ID', () => {
+	it('sets card and modal component IDs on the link to match the Ophan component IDs', () => {
 		renderCard();
 
 		const link = screen.getByRole('link', {
 			name: defaultProps.headlineText,
 		});
+
+		expect(link).toHaveAttribute(
+			'data-card-component-id',
+			`highlights-card-${defaultProps.newsletter.identityName}`,
+		);
 
 		expect(link).toHaveAttribute(
 			'data-modal-component-id',

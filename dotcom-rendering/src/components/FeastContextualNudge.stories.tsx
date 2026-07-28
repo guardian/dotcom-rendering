@@ -1,30 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { mocked } from 'storybook/test';
 import { darkDecorator } from '../../.storybook/decorators/themeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { useAB } from '../lib/useAB';
 import type { RecipeBlockElement } from '../types/content';
 import { FeastContextualNudge } from './FeastContextualNudge.island';
-
-const mockBetaABVariant1 = () => {
-	mocked(useAB).mockReturnValue({
-		isUserInTestGroup: (_testId: string, group: string) =>
-			group === 'variant-1',
-		isUserInTest: () => true,
-		getParticipations: () => ({}),
-		trackABTests: () => ({}),
-	});
-};
-
-const mockBetaABControl = () => {
-	mocked(useAB).mockReturnValue({
-		isUserInTestGroup: (_testId: string, group: string) =>
-			group === 'control',
-		isUserInTest: () => true,
-		getParticipations: () => ({}),
-		trackABTests: () => ({}),
-	});
-};
 
 const recipeFormat = {
 	design: ArticleDesign.Recipe,
@@ -55,7 +33,10 @@ const meta = {
 		isDev: true,
 		nudgeIndex: 1,
 		idApiUrl: undefined,
+<<<<<<< HEAD
 		allNudgeRecipeIds: [mockRecipe.id],
+=======
+>>>>>>> origin/main
 	},
 	parameters: {
 		chromatic: { viewports: [375, 740, 980] },
@@ -66,23 +47,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /** Default — recipe name + CTAs */
-export const Default: Story = {
-	beforeEach() {
-		mockBetaABVariant1();
-	},
-};
+export const Default: Story = {};
 
 /** Dark mode */
 export const DefaultDark: Story = {
-	beforeEach() {
-		mockBetaABVariant1();
-	},
 	decorators: [darkDecorator([recipeFormat])],
-};
-
-/** Control — nudge is not shown */
-export const Control: Story = {
-	beforeEach() {
-		mockBetaABControl();
-	},
 };

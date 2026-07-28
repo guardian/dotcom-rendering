@@ -112,6 +112,118 @@ export enum BrazeBannersSystemPlacementId {
 	FeastContextualNudge3 = 'dotcom-rendering_feast-contextual-nudge-3',
 	FeastContextualNudge4 = 'dotcom-rendering_feast-contextual-nudge-4',
 	FeastContextualNudge5 = 'dotcom-rendering_feast-contextual-nudge-5',
+<<<<<<< HEAD
+}
+
+/**
+ * Maximum number of placements per refresh request, as per Braze documentation:
+ * https://www.braze.com/docs/developer_guide/banners/placements/#requestBannersRefresh
+ */
+const BRAZE_MAX_PLACEMENTS_PER_REFRESH = 10;
+
+/**
+ * Maps each gu-island component name to the Braze Banner placement IDs it is
+ * responsible for rendering. When a gu-island element is absent from the
+ * server-rendered DOM, its placements are excluded from the refresh request,
+ * keeping requests within Braze's 10-placement cap and avoiding wasted
+ * rate-limit tokens on placements that cannot appear on the current page.
+ */
+const ISLAND_PLACEMENT_MAP: Record<string, BrazeBannersSystemPlacementId[]> = {
+	StickyBottomBanner: [BrazeBannersSystemPlacementId.Banner],
+	SlotBodyEnd: [BrazeBannersSystemPlacementId.EndOfArticle],
+	FeastContextualNudge: [
+		BrazeBannersSystemPlacementId.FeastContextualNudge1,
+		BrazeBannersSystemPlacementId.FeastContextualNudge2,
+		BrazeBannersSystemPlacementId.FeastContextualNudge3,
+		BrazeBannersSystemPlacementId.FeastContextualNudge4,
+		BrazeBannersSystemPlacementId.FeastContextualNudge5,
+	],
+};
+
+/**
+ * Per-placement stale-suppression config.
+ *
+ * When requestBannersRefresh is rate-limited by Braze, getBanner() still
+ * returns the last-cached banner. For each placement ID listed here as `true`,
+ * DCR will actively hide the banner rather than risk showing outdated content.
+ * Placement IDs omitted from this map (or set to `false`) fall through to
+ * their component's own fallback behaviour.
+ *
+ * This is the single place to change suppression behaviour for any placement.
+ * Default for new placements: omit the entry (treated as `false`).
+ */
+const PLACEMENT_SUPPRESS_ON_STALE: Partial<
+	Record<BrazeBannersSystemPlacementId, boolean>
+> = {
+	// MRR placements: suppress on stale — avoid showing outdated campaigns
+	// that could mislead readers or contradict their current eligibility.
+	[BrazeBannersSystemPlacementId.Banner]: true,
+	[BrazeBannersSystemPlacementId.EndOfArticle]: true,
+	// Feast placements: not suppressed — FeastContextualNudge falls back to
+	// its native "Download the app" card when no Braze banner is available.
+	// Set any of these to `true` to suppress that specific nudge on stale.
+	[BrazeBannersSystemPlacementId.FeastContextualNudge1]: false,
+	[BrazeBannersSystemPlacementId.FeastContextualNudge2]: false,
+	[BrazeBannersSystemPlacementId.FeastContextualNudge3]: false,
+	[BrazeBannersSystemPlacementId.FeastContextualNudge4]: false,
+	[BrazeBannersSystemPlacementId.FeastContextualNudge5]: false,
+};
+
+/**
+ * Determines which Braze Banner placement IDs are needed on the current page
+ * by checking which gu-island elements were rendered into the DOM server-side.
+ * Only placements whose corresponding island is present are included.
+ */
+export function getPagePlacements(): BrazeBannersSystemPlacementId[] {
+	return Object.entries(ISLAND_PLACEMENT_MAP).flatMap(([islandName, ids]) =>
+		document.querySelector(`gu-island[name="${islandName}"]`) ? ids : [],
+	);
+}
+
+/**
+ * Pre-computed set of placement IDs that opt-in to stale suppression.
+ * Derived once at module load time from PLACEMENT_SUPPRESS_ON_STALE entries
+ * where the value is true — avoids re-computing on every refreshBanners call.
+ */
+const STALE_SUPPRESSABLE_PLACEMENTS = new Set<BrazeBannersSystemPlacementId>(
+	(
+		Object.entries(PLACEMENT_SUPPRESS_ON_STALE) as Array<
+			[BrazeBannersSystemPlacementId, boolean]
+		>
+	)
+		.filter(([, suppress]) => suppress)
+		.map(([id]) => id),
+);
+
+/**
+ * Tracks placement IDs whose most-recent requestBannersRefresh call failed
+ * due to Braze's rate-limiter. When a placement is in this set, getBanner()
+ * may still return cached data from a previous session — but we actively
+ * suppress rendering to avoid showing outdated campaigns.
+ *
+ * Only placements with suppressOnStale: true in ISLAND_PLACEMENT_MAP are ever
+ * added here. Entries are removed when a subsequent refresh succeeds.
+ *
+ * This is module-level state. DCR has no SPA navigation — every page visit
+ * is a full reload — so this set always starts empty on each page.
+ */
+const stalePlacements = new Set<BrazeBannersSystemPlacementId>();
+
+/**
+ * Returns true if the given placement was marked stale because its last
+ * requestBannersRefresh call was rate-limited by Braze. When true, consumers
+ * should skip getBanner() and not render the Braze banner.
+ *
+ * Note: with the current config, FeastContextualNudge placements have
+ * suppressOnStale: false and will never be stale. This function is exported
+ * for forward-compatibility if that config changes in a future iteration.
+ *
+ * @param id The placement ID to check.
+ */
+export function isPlacementStale(id: BrazeBannersSystemPlacementId): boolean {
+	return stalePlacements.has(id);
+=======
+>>>>>>> origin/main
 }
 
 /**
@@ -224,6 +336,11 @@ export function isPlacementStale(id: BrazeBannersSystemPlacementId): boolean {
 }
 
 /**
+ * All known Braze Banners System placement IDs, in enum declaration order.
+ */
+const ALL_PLACEMENT_IDS = Object.values(BrazeBannersSystemPlacementId);
+
+/**
  * Trigger a refresh of Braze Banners System banners
  * "Each call to requestBannersRefresh consumes one token. If you attempt a refresh
  * when no tokens are available, the SDK doesn’t make the request and logs an error
@@ -233,13 +350,25 @@ export function isPlacementStale(id: BrazeBannersSystemPlacementId): boolean {
  * logged, but note the necessary delay for Braze to ingest and process the event
  * before the user qualifies for a different Banner campaign."
  * https://www.braze.com/docs/developer_guide/banners/#rate-limiting-for-refresh-requests
+ *
+ * Stopgap while the number of known placements fits within Braze's
+ * per-request cap: request *all* known placements on every call, rather than
+ * just the ones the caller asked for. A refresh call costs the same one
+ * rate-limit token regardless of how many placement IDs it contains, so this
+ * is free in token terms, and it keeps every placement "warm" for whichever
+ * page happens to render it. Once the enum grows past
+ * `BRAZE_MAX_PLACEMENTS_PER_REFRESH`, this falls back to requesting only the
+ * placements passed in, and the placement-prioritisation problem will need a
+ * proper solution at that point.
  * @param braze The Braze instance
+ * @param placements The placements the current page actually needs
  * @returns A promise that resolves when the refresh is complete
  */
 export function refreshBanners(
 	braze: BrazeInstance,
 	placements: BrazeBannersSystemPlacementId[],
 ): Promise<void> {
+<<<<<<< HEAD
 	brazeBannersSystemLogger.info(
 		`🔄 Requesting ${placements.length} placement(s): ${placements.join(', ')}`,
 	);
@@ -247,6 +376,20 @@ export function refreshBanners(
 	if (placements.length > BRAZE_MAX_PLACEMENTS_PER_REFRESH) {
 		brazeBannersSystemLogger.warn(
 			`⚠️ ${placements.length} placements requested, but Braze only processes the first ${BRAZE_MAX_PLACEMENTS_PER_REFRESH} per refresh request. See https://www.braze.com/docs/developer_guide/banners/placements/#requestBannersRefresh`,
+=======
+	const placementsToRequest =
+		ALL_PLACEMENT_IDS.length <= BRAZE_MAX_PLACEMENTS_PER_REFRESH
+			? ALL_PLACEMENT_IDS
+			: placements;
+
+	brazeBannersSystemLogger.info(
+		`🔄 Requesting ${placementsToRequest.length} placement(s): ${placementsToRequest.join(', ')}`,
+	);
+
+	if (placementsToRequest.length > BRAZE_MAX_PLACEMENTS_PER_REFRESH) {
+		brazeBannersSystemLogger.warn(
+			`⚠️ ${placementsToRequest.length} placements requested, but Braze only processes the first ${BRAZE_MAX_PLACEMENTS_PER_REFRESH} per refresh request. See https://www.braze.com/docs/developer_guide/banners/placements/#requestBannersRefresh`,
+>>>>>>> origin/main
 		);
 	}
 
@@ -267,11 +410,19 @@ export function refreshBanners(
 	// Create the Braze Promise
 	const brazeRequest = new Promise<void>((resolve) => {
 		braze.requestBannersRefresh(
+<<<<<<< HEAD
 			placements,
 			() => {
 				// On success, lift stale status for any suppressable placements
 				// in this batch so a future re-refresh can restore them cleanly.
 				for (const id of placements) {
+=======
+			placementsToRequest,
+			() => {
+				// On success, lift stale status for any suppressable placements
+				// in this batch so a future re-refresh can restore them cleanly.
+				for (const id of placementsToRequest) {
+>>>>>>> origin/main
 					if (STALE_SUPPRESSABLE_PLACEMENTS.has(id)) {
 						stalePlacements.delete(id);
 					}
@@ -288,7 +439,11 @@ export function refreshBanners(
 				// canShowBrazeBannersSystem (and direct consumers like
 				// FeastContextualNudge) will not render the cached banner.
 				const markedStale: BrazeBannersSystemPlacementId[] = [];
+<<<<<<< HEAD
 				for (const id of placements) {
+=======
+				for (const id of placementsToRequest) {
+>>>>>>> origin/main
 					if (STALE_SUPPRESSABLE_PLACEMENTS.has(id)) {
 						stalePlacements.add(id);
 						markedStale.push(id);
@@ -484,7 +639,10 @@ enum BrazeBannersSystemMessageType {
 	NavigateToUrl = 'BRAZE_BANNERS_SYSTEM:NAVIGATE_TO_URL',
 	DismissBanner = 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
 	GetContext = 'BRAZE_BANNERS_SYSTEM:GET_CONTEXT',
+<<<<<<< HEAD
 	SaveFeastRecipeById = 'BRAZE_BANNERS_SYSTEM:SAVE_FEAST_RECIPE_BY_ID',
+=======
+>>>>>>> origin/main
 }
 
 /**
@@ -832,6 +990,31 @@ export const BrazeBannersSystemDisplay = ({
 	}, [meta.id, meta.braze, meta.banner]);
 
 	/**
+	 * Logs a CLICK event with Ophan when the reader taps a
+	 * "navigate to URL" button inside the Braze Banner.
+	 * @param url The URL the reader is being sent to
+	 */
+	const logNavigateToUrlClick = useCallback(
+		(url: string) => {
+			const ophanComponentId =
+				meta.banner.getStringProperty('ophanComponentId') ??
+				meta.banner.placementId;
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'RETENTION_ENGAGEMENT_BANNER',
+						id: ophanComponentId,
+					},
+					action: 'CLICK',
+					value: url,
+				},
+				renderingTarget,
+			);
+		},
+		[meta.banner, renderingTarget],
+	);
+
+	/**
 	 * Sets the background and foreground colors for wrapper mode based on a given background color.
 	 * @param backgroundColor The background color to use for the wrapper, which will also determine the foreground color for text and other elements to ensure sufficient contrast and accessibility.
 	 */
@@ -959,10 +1142,13 @@ export const BrazeBannersSystemDisplay = ({
 				| {
 						type: BrazeBannersSystemMessageType.GetContext;
 				  }
+<<<<<<< HEAD
 				| {
 						type: BrazeBannersSystemMessageType.SaveFeastRecipeById;
 						feastRecipeId?: string;
 				  }
+=======
+>>>>>>> origin/main
 			>,
 		) => {
 			if (
@@ -1078,6 +1264,7 @@ export const BrazeBannersSystemDisplay = ({
 								target,
 							},
 						);
+						logNavigateToUrlClick(url);
 						if (target === 'blank') {
 							window.open(url, '_blank');
 						} else {
@@ -1112,6 +1299,7 @@ export const BrazeBannersSystemDisplay = ({
 						},
 					);
 					break;
+<<<<<<< HEAD
 				case BrazeBannersSystemMessageType.SaveFeastRecipeById: {
 					meta.braze.logBannerClick(
 						meta.banner,
@@ -1140,6 +1328,8 @@ export const BrazeBannersSystemDisplay = ({
 					}
 					break;
 				}
+=======
+>>>>>>> origin/main
 			}
 		};
 
@@ -1155,9 +1345,13 @@ export const BrazeBannersSystemDisplay = ({
 		subscribeToNewsletter,
 		createReminder,
 		dismissBanner,
+		logNavigateToUrlClick,
 		postMessageToBrazeBanner,
 		context,
+<<<<<<< HEAD
 		saveFeastRecipeById,
+=======
+>>>>>>> origin/main
 	]);
 
 	// Log Impressions when the banner is seen, using the hasBeenSeen value from the useIsInView hook
