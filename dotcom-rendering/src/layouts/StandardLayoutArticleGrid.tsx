@@ -205,9 +205,9 @@ export const StandardLayoutArticleGrid = ({
 				area="media"
 				layoutType={layoutType}
 				css={
-					displayAvatarUrl
+					displayAvatarUrl && isPicture
 						? css`
-								margin-top: 8px;
+								margin-top: ${space[2]}px;
 							`
 						: undefined
 				}
@@ -247,20 +247,9 @@ export const StandardLayoutArticleGrid = ({
 					guardianBaseURL={article.guardianBaseURL}
 					isMatch={!!footballMatchUrl}
 				/>
-				{displayAvatarUrl && (
-					<Hide until="leftCol">
-						<StraightLines
-							count={8}
-							cssOverrides={css`
-								display: block;
-							`}
-							color={themePalette('--straight-lines')}
-						/>
-					</Hide>
-				)}
 			</GridItem>
-			{displayAvatarUrl ? (
-				<GridItem area="headline" layoutType={layoutType}>
+			<GridItem area="headline" layoutType={layoutType}>
+				{displayAvatarUrl && isPicture ? (
 					<div css={avatarHeadlineWrapper}>
 						<ArticleHeadline
 							format={format}
@@ -270,11 +259,11 @@ export const StandardLayoutArticleGrid = ({
 							webPublicationDateDeprecated={
 								article.webPublicationDateDeprecated
 							}
-							hasAvatar={displayAvatarUrl}
+							hasAvatar={true}
 							starRating={article.starRating}
 						/>
 
-						{!!avatarUrl && (
+						{!!avatarUrl && isPicture && (
 							<>
 								<div css={avatarPositionStyles}>
 									<ContributorAvatar
@@ -292,9 +281,7 @@ export const StandardLayoutArticleGrid = ({
 							</>
 						)}
 					</div>
-				</GridItem>
-			) : (
-				<GridItem area="headline" layoutType={layoutType}>
+				) : (
 					<ArticleHeadline
 						format={format}
 						headlineString={article.headline}
@@ -305,8 +292,8 @@ export const StandardLayoutArticleGrid = ({
 						}
 						starRating={article.starRating}
 					/>
-				</GridItem>
-			)}
+				)}
+			</GridItem>
 			<GridItem area="standfirst" layoutType={layoutType}>
 				<Standfirst format={format} standfirst={article.standfirst} />
 			</GridItem>
@@ -317,12 +304,12 @@ export const StandardLayoutArticleGrid = ({
 						format.theme === ArticleSpecial.Labs &&
 						format.design !== ArticleDesign.Video ? (
 							<GuardianLabsLines />
-						) : !displayAvatarUrl ? (
+						) : (
 							<DecideLines
 								format={format}
 								color={themePalette('--article-border')}
 							/>
-						) : null}
+						)}
 					</div>
 				)}
 				{isApps ? (

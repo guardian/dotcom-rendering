@@ -879,9 +879,7 @@ export const ArticleHeadline = ({
 									format,
 									hasAvatar,
 								}),
-								css`
-									max-width: 620px;
-								`,
+								maxWidth,
 							]}
 						>
 							<DesignTag format={format} />
