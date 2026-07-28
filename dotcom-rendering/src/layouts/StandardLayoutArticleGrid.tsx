@@ -11,7 +11,6 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Caption } from '../components/Caption';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
@@ -407,10 +406,11 @@ export const StandardLayoutArticleGrid = ({
 							webPublicationDateDeprecated={
 								article.webPublicationDateDeprecated
 							}
+							hasAvatar={true}
 							starRating={article.starRating}
 						/>
 
-						{!!avatarUrl && (
+						{!!avatarUrl && isPicture && (
 							<>
 								<div css={avatarPositionStyles}>
 									<ContributorAvatar
@@ -454,62 +454,23 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
-				<Standfirst
-					format={format}
-					standfirst={article.standfirst}
-					layoutType={layoutType}
-				/>
+				<Standfirst format={format} standfirst={article.standfirst} />
 			</GridItem>
-			{isImmersive && (
-				<GridItem
-					area="caption"
-					layoutType={layoutType}
-					css={css`
-						padding-top: ${space[2]}px;
-					`}
-				>
-					<Hide from="leftCol">
-						<Caption
-							captionText={captionText}
-							format={format}
-							shouldLimitWidth={false}
-							isLeftCol={true}
-							isMainMedia={true}
-							showIconBelowLeftCol={true}
-						/>
-					</Hide>
-				</GridItem>
-			)}
-			<GridItem
-				area="meta"
-				layoutType={layoutType}
-				element="aside"
-				css={
-					layoutType === 'immersivePortraitDefault'
-						? css`
-								${from.leftCol} {
-									margin-right: -10px;
-								}
-							`
-						: undefined
-				}
-			>
-				{format.display !== ArticleDisplay.Immersive &&
-					format.design !== ArticleDesign.Audio &&
-					layoutType !== 'immersivePortraitDefault' && (
-						<div css={stretchLines}>
-							{isWeb &&
-							format.theme === ArticleSpecial.Labs &&
-							format.design !== ArticleDesign.Video ? (
-								<GuardianLabsLines />
-							) : (
-								<DecideLines
-									format={format}
-									color={themePalette('--article-border')}
-								/>
-							)}
-						</div>
-					)}
+			<GridItem area="meta" layoutType={layoutType} element="aside">
+				{format.design !== ArticleDesign.Audio && (
+					<div css={stretchLines}>
+						{isWeb &&
+						format.theme === ArticleSpecial.Labs &&
+						format.design !== ArticleDesign.Video ? (
+							<GuardianLabsLines />
+						) : (
+							<DecideLines
+								format={format}
+								color={themePalette('--article-border')}
+							/>
+						)}
+					</div>
+				)}
 				{isApps ? (
 					<>
 						<Hide from="leftCol">
