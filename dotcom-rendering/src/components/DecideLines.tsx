@@ -43,20 +43,29 @@ const DottedLines = ({
 export const DecideLines = ({ format, color }: Props) => {
 	const count = format.design === ArticleDesign.Comment ? 8 : 4;
 
-	if (
-		format.theme === Pillar.Sport &&
-		format.design !== ArticleDesign.Picture
-	) {
-		return <DottedLines count={count} color={color} />;
+	switch (format.theme) {
+		case Pillar.Sport:
+			if (format.design !== ArticleDesign.Picture) {
+				return <DottedLines count={count} color={color} />;
+			}
+			return (
+				<StraightLines
+					cssOverrides={css`
+						display: block;
+					`}
+					count={count}
+					color={color}
+				/>
+			);
+		default:
+			return (
+				<StraightLines
+					cssOverrides={css`
+						display: block;
+					`}
+					count={count}
+					color={color}
+				/>
+			);
 	}
-
-	return (
-		<StraightLines
-			cssOverrides={css`
-				display: block;
-			`}
-			count={count}
-			color={color}
-		/>
-	);
 };
