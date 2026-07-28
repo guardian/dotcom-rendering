@@ -33,10 +33,7 @@ const meta = {
 		isDev: true,
 		nudgeIndex: 1,
 		idApiUrl: undefined,
-<<<<<<< HEAD
 		allNudgeRecipeIds: [mockRecipe.id],
-=======
->>>>>>> origin/main
 	},
 	parameters: {
 		chromatic: { viewports: [375, 740, 980] },
