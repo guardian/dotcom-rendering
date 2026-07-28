@@ -297,6 +297,7 @@ export const StandardLayoutArticleGrid = ({
 			>
 				<ArticleHeadline
 					format={format}
+					layoutType={layoutType}
 					headlineString={article.headline}
 					tags={article.tags}
 					byline={article.byline}
@@ -304,7 +305,6 @@ export const StandardLayoutArticleGrid = ({
 						article.webPublicationDateDeprecated
 					}
 					starRating={article.starRating}
-					isInverted={layoutType === 'immersiveLandscapeDefault'}
 				/>
 			</GridItem>
 			<GridItem

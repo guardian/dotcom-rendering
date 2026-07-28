@@ -18,6 +18,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
+import { type LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
 import {
@@ -38,13 +39,13 @@ import { StarRating } from './StarRating/StarRating';
 type Props = {
 	headlineString: string;
 	format: ArticleFormat;
+	layoutType?: LayoutType;
 	byline?: string;
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
 	hasAvatar?: boolean;
 	isMatch?: boolean;
 	starRating?: Rating;
-	isInverted?: boolean;
 };
 
 const topPadding = css`
@@ -393,17 +394,18 @@ const galleryStyles = css`
 export const ArticleHeadline = ({
 	headlineString,
 	format,
+	layoutType,
 	tags,
 	byline,
 	webPublicationDateDeprecated,
 	hasAvatar,
 	isMatch,
 	starRating,
-	isInverted,
 }: Props) => {
 	const isInverted =
 		format.display === ArticleDisplay.Immersive &&
-		format.design === ArticleDesign.Standard;
+		format.design === ArticleDesign.Standard &&
+		layoutType === 'immersiveLandscapeDefault';
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
