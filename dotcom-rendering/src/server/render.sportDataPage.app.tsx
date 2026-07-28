@@ -52,7 +52,6 @@ export const renderAppsSportPage = (sportData: FootballMatchInfoPage) => {
 		ajaxUrl: sportData.config.ajaxUrl,
 		googletagUrl: sportData.config.googletagUrl,
 		switches: sportData.config.switches,
-		abTests: sportData.config.abTests,
 		serverSideABTests: sportData.config.serverSideABTests,
 		isPaidContent: sportData.config.isPaidContent,
 		contentType: sportData.config.contentType,

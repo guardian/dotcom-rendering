@@ -34,7 +34,6 @@ type Props = {
 };
 
 type IconProps = {
-	format: ArticleFormat;
 	isMainMedia?: boolean;
 };
 
@@ -161,12 +160,6 @@ const bigLeftMargin = css`
 	}
 `;
 
-const hideIconBelowLeftCol = css`
-	${until.leftCol} {
-		display: none;
-	}
-`;
-
 const pictureRatio = (13 / 18) * 100;
 const videoRatio = (23 / 36) * 100;
 
@@ -251,30 +244,17 @@ const galleryStyles = css`
 	}
 `;
 
-const CameraIcon = ({ format, isMainMedia }: IconProps) => {
+const CameraIcon = ({ isMainMedia }: IconProps) => {
 	return (
-		<span
-			css={[
-				iconStyle(isMainMedia),
-				format.display === ArticleDisplay.Immersive &&
-					hideIconBelowLeftCol,
-			]}
-		>
+		<span css={[iconStyle(isMainMedia)]}>
 			<CameraSvg />
 		</span>
 	);
 };
 
-const VideoIcon = ({ format, isMainMedia }: IconProps) => {
+const VideoIcon = ({ isMainMedia }: IconProps) => {
 	return (
-		<span
-			css={[
-				iconStyle(isMainMedia),
-				format.display === ArticleDisplay.Immersive &&
-					hideIconBelowLeftCol,
-				videoIconStyle,
-			]}
-		>
+		<span css={[iconStyle(isMainMedia), videoIconStyle]}>
 			<VideoSvg />
 		</span>
 	);
@@ -325,9 +305,9 @@ export const Caption = ({
 			data-spacefinder-role="inline"
 		>
 			{mediaType === 'YoutubeVideo' || mediaType === 'SelfHostedVideo' ? (
-				<VideoIcon format={format} isMainMedia={isMainMedia} />
+				<VideoIcon isMainMedia={isMainMedia} />
 			) : (
-				<CameraIcon format={format} isMainMedia={isMainMedia} />
+				<CameraIcon isMainMedia={isMainMedia} />
 			)}
 			{!!captionText && (
 				<span

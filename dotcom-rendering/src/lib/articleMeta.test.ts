@@ -23,10 +23,6 @@ describe('shouldShowContributor', () => {
 		...standardFormat,
 		display: ArticleDisplay.NumberedList,
 	};
-	const immersive = {
-		...standardFormat,
-		display: ArticleDisplay.Immersive,
-	};
 
 	const immersivePortraitDefault = {
 		...immersive,

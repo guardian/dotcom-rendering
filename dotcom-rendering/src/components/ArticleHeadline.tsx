@@ -44,6 +44,7 @@ type Props = {
 	hasAvatar?: boolean;
 	isMatch?: boolean;
 	starRating?: Rating;
+	isInverted?: boolean;
 };
 
 const topPadding = css`
@@ -398,6 +399,7 @@ export const ArticleHeadline = ({
 	hasAvatar,
 	isMatch,
 	starRating,
+	isInverted,
 }: Props) => {
 	const isInverted =
 		format.display === ArticleDisplay.Immersive &&

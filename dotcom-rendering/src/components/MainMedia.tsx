@@ -9,7 +9,7 @@ import {
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 
 const mainMedia = css`
@@ -92,7 +92,6 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
 	shouldHideAds: boolean;
@@ -111,7 +110,6 @@ export const MainMedia = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
-	abTests,
 	switches,
 	editionId,
 	shouldHideAds,
@@ -134,7 +132,6 @@ export const MainMedia = ({
 					webTitle={webTitle}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					hideCaption={hideCaption}
 					editionId={editionId}

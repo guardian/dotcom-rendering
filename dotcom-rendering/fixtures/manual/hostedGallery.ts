@@ -2932,7 +2932,6 @@ export const hostedGallery: FEArticle = {
 			shouldLoadGoogletag: true,
 			inizio: true,
 		},
-		abTests: {},
 		serverSideABTests: {
 			'commercial-hosted-gallery': 'preview',
 		},

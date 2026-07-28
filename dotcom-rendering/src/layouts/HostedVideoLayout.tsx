@@ -215,7 +215,6 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 							pageId={frontendData.pageId}
 							webTitle={frontendData.webTitle}
 							ajaxUrl={frontendData.config.ajaxUrl}
-							abTests={frontendData.config.abTests}
 							switches={frontendData.config.switches}
 							isAdFreeUser={frontendData.isAdFreeUser}
 							isSensitive={frontendData.config.isSensitive}
@@ -292,7 +291,6 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 									}
 									isDev={!!frontendData.config.isDev}
 									keywordIds={frontendData.config.keywordIds}
-									abTests={frontendData.config.abTests}
 									shouldHideAds={frontendData.shouldHideAds}
 									lang={frontendData.lang}
 									isRightToLeftLang={

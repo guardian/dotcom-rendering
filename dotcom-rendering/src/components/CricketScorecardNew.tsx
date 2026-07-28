@@ -677,40 +677,48 @@ export const CricketScorecardNew = ({
 	matchResult,
 }: Props) => (
 	<div css={overallContainerStyles}>
-		{allInnings.map((innings, index) => {
-			const isHomeTeam = innings.battingTeam === homeTeam.name;
-			const isCurrentInnings =
-				!matchResult && index === allInnings.length - 1;
-			return (
-				<section key={innings.description} css={inningsContainerStyles}>
-					<div css={cardStyles}>
-						<h2
-							css={[
-								inningsHeadingStyles,
-								!isHomeTeam && secondTeamInningsHeadingStyles,
-							]}
-						>
-							{innings.description}
-						</h2>
-					</div>
-					<div css={[cardStyles, cardSectionStyles]}>
-						<Batting
-							batters={innings.batters}
-							extras={innings.extras}
-							inningsTotals={innings.inningsTotals}
-							isHomeTeam={isHomeTeam}
-							showBatIcons={isCurrentInnings}
-						/>
-					</div>
-					<div css={[cardStyles, cardSectionStyles]}>
-						<Bowling bowlers={innings.bowlers} />
-					</div>
-					<div css={[cardStyles, cardSectionStyles]}>
-						<FallOfWickets fallOfWickets={innings.fallOfWickets} />
-					</div>
-				</section>
-			);
-		})}
+		{allInnings
+			.sort((a, b) => b.order - a.order) // reverse order so that the most recent innings is displayed first
+			.map((innings, index) => {
+				const isHomeTeam = innings.battingTeam === homeTeam.name;
+				const isCurrentInnings =
+					!matchResult && index === allInnings.length - 1;
+				return (
+					<section
+						key={innings.description}
+						css={inningsContainerStyles}
+					>
+						<div css={cardStyles}>
+							<h2
+								css={[
+									inningsHeadingStyles,
+									!isHomeTeam &&
+										secondTeamInningsHeadingStyles,
+								]}
+							>
+								{innings.description}
+							</h2>
+						</div>
+						<div css={[cardStyles, cardSectionStyles]}>
+							<Batting
+								batters={innings.batters}
+								extras={innings.extras}
+								inningsTotals={innings.inningsTotals}
+								isHomeTeam={isHomeTeam}
+								showBatIcons={isCurrentInnings}
+							/>
+						</div>
+						<div css={[cardStyles, cardSectionStyles]}>
+							<Bowling bowlers={innings.bowlers} />
+						</div>
+						<div css={[cardStyles, cardSectionStyles]}>
+							<FallOfWickets
+								fallOfWickets={innings.fallOfWickets}
+							/>
+						</div>
+					</section>
+				);
+			})}
 
 		<section css={cardStyles}>
 			<h2 css={lineupsHeadingStyles}>Lineups</h2>

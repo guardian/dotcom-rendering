@@ -92,6 +92,8 @@ const getImages = (
 					event.body.flatMap(getImages),
 				),
 			);
+		case 'model.dotcomrendering.pageElements.ProductBlockElement':
+			return element.content.flatMap(getImages);
 
 		default:
 			return [];

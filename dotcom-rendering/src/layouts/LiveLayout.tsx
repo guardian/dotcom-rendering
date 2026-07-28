@@ -20,13 +20,13 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.island';
 import { CricketMatchHeaderWrapper } from '../components/CricketMatchHeaderWrapper.island';
+import { CricketMiniMatchStatsWrapper } from '../components/CricketMiniMatchStatsWrapper.island';
 import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.island';
 import { Footer } from '../components/Footer';
-import { GetCricketScoreboard } from '../components/GetCricketScoreboard.island';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -51,7 +51,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
-import { useAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -269,8 +268,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 		config: { isPaidContent, host, hasLiveBlogTopAd, hasSurveyAd },
 	} = article;
 
-	const ab = useAB();
-
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
@@ -295,8 +292,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			? article.matchStatsUrl
 			: undefined;
 
-	const cricketMatchUrl =
-		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
+	const cricketMatchStatsUrl =
+		article.matchType === 'CricketMatchType'
+			? article.matchStatsUrl
+			: undefined;
 
 	const hasKeyEvents = !!article.keyEvents.length;
 
@@ -588,23 +587,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							<LiveGrid>
 								<GridItem area="media">
 									<div css={maxWidth}>
-										{!!cricketMatchUrl &&
-											!ab?.isUserInTestGroup(
-												'webx-cricket-redesign',
-												'enable',
-											) && (
-												<Island
-													priority="critical"
-													defer={{ until: 'visible' }}
-												>
-													<GetCricketScoreboard
-														matchUrl={
-															cricketMatchUrl
-														}
-														format={format}
-													/>
-												</Island>
-											)}
 										<MainMedia
 											format={format}
 											elements={article.mainMediaElements}
@@ -612,7 +594,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											pageId={article.pageId}
 											webTitle={article.webTitle}
 											ajaxUrl={article.config.ajaxUrl}
-											abTests={article.config.abTests}
 											switches={article.config.switches}
 											isSensitive={
 												article.config.isSensitive
@@ -693,20 +674,14 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											</Island>
 										</Hide>
 									)}
-
-									{/* Match stats */}
-									{!!footballMatchStatsUrl && (
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<FootballMiniMatchStatsWrapper
-												matchStatsUrl={
-													footballMatchStatsUrl
-												}
-											/>
-										</Island>
-									)}
+									<MiniMatchStats
+										footballMatchStatsUrl={
+											footballMatchStatsUrl
+										}
+										cricketMatchStatsUrl={
+											cricketMatchStatsUrl
+										}
+									/>
 								</GridItem>
 								<GridItem area="body">
 									<div
@@ -746,7 +721,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												sectionId={
 													article.config.section
 												}
-												abTests={article.config.abTests}
 												switches={
 													article.config.switches
 												}
@@ -1134,6 +1108,33 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	);
 };
 
+const MiniMatchStats = (props: {
+	footballMatchStatsUrl: string | undefined;
+	cricketMatchStatsUrl: string | undefined;
+}) => {
+	if (props.footballMatchStatsUrl) {
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMiniMatchStatsWrapper
+					matchStatsUrl={props.footballMatchStatsUrl}
+				/>
+			</Island>
+		);
+	}
+
+	if (props.cricketMatchStatsUrl) {
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<CricketMiniMatchStatsWrapper
+					matchStatsUrl={props.cricketMatchStatsUrl}
+				/>
+			</Island>
+		);
+	}
+
+	return null;
+};
+
 const Header = (props: {
 	renderingTarget: RenderingTarget;
 	format: ArticleFormat;
@@ -1150,13 +1151,6 @@ const Header = (props: {
 		props.article.matchType === 'CricketMatchType'
 			? props.article.matchHeaderUrl
 			: undefined;
-
-	const ab = useAB();
-	const isCricketRedesignEnabled = Boolean(
-		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
-	);
-
-	const isApps = props.renderingTarget === 'Apps';
 
 	if (footballMatchHeaderUrl) {
 		return (
@@ -1177,13 +1171,14 @@ const Header = (props: {
 						renderingTarget={props.renderingTarget}
 						article={props.article}
 						format={props.format}
+						baseUrl={props.article.guardianBaseURL}
 					/>
 				</Island>
 			</>
 		);
 	}
 
-	if (!isApps && cricketMatchHeaderUrl && isCricketRedesignEnabled) {
+	if (cricketMatchHeaderUrl) {
 		return (
 			<>
 				<noscript>
@@ -1200,6 +1195,7 @@ const Header = (props: {
 						matchHeaderURL={cricketMatchHeaderUrl}
 						article={props.article}
 						format={props.format}
+						renderingTarget={props.renderingTarget}
 					/>
 				</Island>
 			</>

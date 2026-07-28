@@ -1638,11 +1638,6 @@
                 {
                     "type": "object",
                     "properties": {
-                        "abTests": {
-                            "description": "Server-side AB tests. Optional from `frontend`; a default of\n`{}` is applied by AJV during request validation (see `useDefaults` in\n`validate.ts`), so this is always present after enhancing.",
-                            "default": {},
-                            "type": "object"
-                        },
                         "adUnit": {
                             "type": "string"
                         },
@@ -1754,7 +1749,6 @@
                         }
                     },
                     "required": [
-                        "abTests",
                         "adUnit",
                         "ajaxUrl",
                         "commercialBundleUrl",

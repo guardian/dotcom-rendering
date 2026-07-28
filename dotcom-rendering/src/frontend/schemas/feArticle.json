@@ -892,7 +892,10 @@
                     "$ref": "#/definitions/ProductBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/ProductSummaryElement"
+                    "$ref": "#/definitions/ProductSummaryBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/EnhancedProductSummaryElement"
                 },
                 {
                     "$ref": "#/definitions/RecipeBlockElement"
@@ -4792,32 +4795,97 @@
             ],
             "type": "string"
         },
-        "ProductSummaryElement": {
+        "ProductSummaryBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
-                    "const": "model.dotcomrendering.pageElements.ProductSummaryElement"
+                    "const": "model.dotcomrendering.pageElements.ProductSummaryBlockElement"
                 },
-                "matchedProducts": {
+                "products": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/ProductBlockElement"
+                        "$ref": "#/definitions/SummaryProductRef"
                     }
                 },
-                "variant": {
-                    "enum": [
-                        "carousel",
-                        "stacked-default",
-                        "stacked-expanded"
-                    ],
+                "displayType": {
+                    "$ref": "#/definitions/ProductSummaryDisplayType"
+                },
+                "title": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "matchedProducts",
-                "variant"
+                "displayType",
+                "products",
+                "title"
+            ]
+        },
+        "SummaryProductRef": {
+            "type": "object",
+            "properties": {
+                "productId": {
+                    "type": "string"
+                },
+                "ctaIndex": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "ctaIndex",
+                "productId"
+            ]
+        },
+        "ProductSummaryDisplayType": {
+            "enum": [
+                "Carousel",
+                "CtaList",
+                "StackedCard",
+                "StackedCardExpanded"
+            ],
+            "type": "string"
+        },
+        "EnhancedProductSummaryElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.EnhancedProductSummaryElement"
+                },
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SummaryProduct"
+                    }
+                },
+                "displayType": {
+                    "$ref": "#/definitions/ProductSummaryDisplayType"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "displayType",
+                "products",
+                "title"
+            ]
+        },
+        "SummaryProduct": {
+            "type": "object",
+            "properties": {
+                "productBlock": {
+                    "$ref": "#/definitions/ProductBlockElement"
+                },
+                "ctaIndex": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "ctaIndex",
+                "productBlock"
             ]
         },
         "RecipeBlockElement": {
@@ -5163,11 +5231,6 @@
             "description": "the config model will contain useful app/site\nlevel data. Although currently derived from the config model\nconstructed in frontend and passed to dotcom-rendering\nthis data could eventually be defined in dotcom-rendering",
             "type": "object",
             "properties": {
-                "abTests": {
-                    "description": "Server-side AB tests. Optional from `frontend`; a default of\n`{}` is applied by AJV during request validation (see `useDefaults` in\n`validate.ts`), so this is always present after enhancing.",
-                    "default": {},
-                    "type": "object"
-                },
                 "adUnit": {
                     "type": "string"
                 },
@@ -5707,7 +5770,6 @@
                 }
             },
             "required": [
-                "abTests",
                 "adUnit",
                 "ajaxUrl",
                 "ampIframeUrl",

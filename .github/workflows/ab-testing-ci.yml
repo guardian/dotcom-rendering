@@ -4,6 +4,8 @@ permissions:
   contents: read
 
 on:
+  merge_group:
+    types: [checks_requested]
   push:
     paths:
       - 'ab-testing/**'
@@ -194,7 +196,7 @@ jobs:
         run: pnpm  --filter @guardian/ab-testing-cdk synth
 
       - name: Riff-Raff Upload
-        uses: guardian/actions-riff-raff@v4.3.3
+        uses: guardian/actions-riff-raff@v4.3.4
         with:
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}

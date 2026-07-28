@@ -1884,7 +1884,6 @@ export const cricketMatchData: FECricketMatchPage = {
 			shouldLoadGoogletag: true,
 			inizio: true,
 		},
-		abTests: {},
 		serverSideABTests: {},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		stage: 'PROD',

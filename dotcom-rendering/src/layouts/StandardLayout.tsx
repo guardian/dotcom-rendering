@@ -1,52 +1,24 @@
-import { css } from '@emotion/react';
-import { log } from '@guardian/libs';
-import {
-	from,
-	palette as sourcePalette,
-	space,
-	until,
-} from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { palette as sourcePalette } from '@guardian/source/foundations';
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
-import { AppsEpic } from '../components/AppsEpic.island';
 import { AppsFooter } from '../components/AppsFooter.island';
-import { ArticleBody } from '../components/ArticleBody';
-import { ArticleContainer } from '../components/ArticleContainer';
-import { ArticleHeadline } from '../components/ArticleHeadline';
-import { ArticleMetaApps } from '../components/ArticleMeta.apps';
-import { ArticleMeta } from '../components/ArticleMeta.web';
-import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.island';
 import { CricketMatchHeaderWrapper } from '../components/CricketMatchHeaderWrapper.island';
-import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
-import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
 import { Footer } from '../components/Footer';
-import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import { ListenToArticle } from '../components/ListenToArticle.island';
-import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MatchHeaderFallback } from '../components/MatchHeaderFallback';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.island';
 import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.island';
-import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
-import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.island';
-import { grid } from '../grid';
-import { getAgeWarning } from '../lib/age-warning';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -56,56 +28,13 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
-import { safeParseURL } from '../lib/parse';
-import { parse } from '../lib/slot-machine-flags';
-import { useAB } from '../lib/useAB';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import {
-	type Area,
-	getLayoutType,
-	gridItemCss,
-	type LayoutType,
-} from './lib/articleArrangements';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-
-const stretchLines = css`
-	${until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
-	}
-	${until.mobileLandscape} {
-		margin-left: -10px;
-		margin-right: -10px;
-	}
-`;
-
-interface GridItemProps {
-	area: Area;
-	layoutType: LayoutType;
-	element?: 'div' | 'aside';
-	className?: string;
-	children: React.ReactNode;
-}
-
-const GridItem = ({
-	area,
-	layoutType,
-	element: Element = 'div',
-	className,
-	children,
-}: GridItemProps) => (
-	<Element
-		data-gu-name={area}
-		css={gridItemCss(area, layoutType)}
-		className={className}
-	>
-		{children}
-	</Element>
-);
+import { StandardLayoutArticleGrid } from './StandardLayoutArticleGrid';
 
 interface Props {
 	article: ArticleDeprecated;
@@ -150,11 +79,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
-	const showBodyEndSlot =
-		isWeb &&
-		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
-			article.config.switches.slotBodyEnd);
-
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
@@ -164,34 +88,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			? article.matchUrl
 			: undefined;
 
-	const footballMatchStatsUrl =
-		article.matchType === 'FootballMatchType'
-			? article.matchStatsUrl
-			: undefined;
-
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
 	const cricketMatchUrl =
-		article.matchType === 'CricketMatchType'
-			? article.matchStatsUrl
-			: undefined;
+		article.matchType == 'CricketMatchType' ? article.matchUrl : undefined;
 
 	const isCricketMatchReport =
 		format.design === ArticleDesign.MatchReport && !!cricketMatchUrl;
 
-	const isMedia =
-		format.design === ArticleDesign.Video ||
-		format.design === ArticleDesign.Audio;
-	const isShowcase = format.display === ArticleDisplay.Showcase;
-	const isImmersive = format.display === ArticleDisplay.Immersive;
-	const isFeature = format.design === ArticleDesign.Feature;
-
-	const isVideo = format.design === ArticleDesign.Video;
-
 	const showComments = article.isCommentable && !isPaidContent;
-
-	const { branding } = article.commercialProperties[article.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
@@ -200,37 +106,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
 
 	const renderAds = canRenderAds(article);
-
-	const firstMainMediaElement = article.mainMediaElements[0];
-	const mainMediaUrl: string | undefined =
-		firstMainMediaElement?._type ===
-		'model.dotcomrendering.pageElements.ImageBlockElement'
-			? firstMainMediaElement.media.allImages[0]?.url
-			: undefined;
-
-	const mainMediaOrientation =
-		mainMediaUrl != null ? getImageOrientation(mainMediaUrl) : 'landscape';
-
-	const layoutType = getLayoutType({
-		isImmersive,
-		isFeature,
-		orientation: mainMediaOrientation,
-		isVideo,
-		isShowcase,
-	});
-	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
-
-	const isImmersivePortrait =
-		layoutType === 'immersivePortraitDefault' ||
-		layoutType === 'immersivePortraitFeature';
-	const isImmersiveLandscape =
-		layoutType === 'immersiveLandscapeDefault' ||
-		layoutType === 'immersiveLandscapeFeature';
-
-	const ageWarning = getAgeWarning(
-		article.tags,
-		article.webPublicationDateDeprecated,
-	);
 
 	return (
 		<>
@@ -258,7 +133,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={!isLabs && !isWorldCup2026}
-						showSlimNav={false}
+						showSlimNav={
+							format.display === ArticleDisplay.Immersive
+						}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
 						tagIds={article.tags.map((tag) => tag.id)}
@@ -306,442 +183,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					</Island>
 				)}
 
-				{/* GridItem order matters — mobile layout relies on DOM order for grid placement.
-    				See furnitureArrangements.ts if reordering. */}
 				{/* This element is used to replace the article with the scorecard when the scorecard tab is clicked */}
 				<div id="article">
-					<article
-						css={[
-							css`
-								background-color: ${themePalette(
-									'--article-background',
-								)};
-							`,
-							grid.container,
-							grid.outerRules(),
-							!isLabs &&
-								css`
-									${from.leftCol} {
-										${grid.centreRule(
-											isImmersivePortrait
-												? 4
-												: isImmersiveLandscape
-													? 3
-													: 1,
-										)}
-									}
-								`,
-							isImmersivePortrait &&
-								css`
-									grid-template-rows: 0.25fr 1fr auto;
-								`,
-							isImmersiveLandscape &&
-								css`
-									${from.desktop} {
-										grid-template-rows: auto auto ${ageWarning
-												? '130px'
-												: '90px'};
-									}
-								`,
-						]}
-					>
-						<GridItem
-							area="media"
-							layoutType={layoutType}
-							css={
-								isImmersiveLandscape
-									? css`
-											${from.desktop} {
-												margin-left: -20px;
-												margin-right: -20px;
-											}
-										`
-									: undefined
-							}
-						>
-							<MainMedia
-								format={format}
-								elements={article.mainMediaElements}
-								host={host}
-								pageId={article.pageId}
-								webTitle={article.webTitle}
-								ajaxUrl={article.config.ajaxUrl}
-								abTests={article.config.abTests}
-								switches={article.config.switches}
-								isAdFreeUser={article.isAdFreeUser}
-								isSensitive={article.config.isSensitive}
-								editionId={article.editionId}
-								hideCaption={isMedia}
-								shouldHideAds={article.shouldHideAds}
-								contentType={article.contentType}
-								contentLayout={contentLayoutName}
-								articleArrangement={layoutType}
-							/>
-						</GridItem>
-						<GridItem
-							area="title"
-							layoutType={layoutType}
-							element="aside"
-							css={css`
-								z-index: 100;
-							`}
-						>
-							<ArticleTitle
-								format={format}
-								layoutType={layoutType}
-								tags={article.tags}
-								sectionLabel={article.sectionLabel}
-								sectionUrl={article.sectionUrl}
-								guardianBaseURL={article.guardianBaseURL}
-								isMatch={!!footballMatchUrl}
-							/>
-						</GridItem>
-						<GridItem
-							area="headline"
-							layoutType={layoutType}
-							css={
-								layoutType === 'immersivePortraitDefault' ||
-								layoutType === 'immersivePortraitFeature'
-									? css`
-											${from.desktop} {
-												border-bottom: 1px solid
-													${themePalette(
-														'--article-border',
-													)};
-												border-top: 1px solid
-													${themePalette(
-														'--article-border',
-													)};
-											}
-										`
-									: css`
-											z-index: 20;
-										`
-							}
-						>
-							<ArticleHeadline
-								format={format}
-								headlineString={article.headline}
-								tags={article.tags}
-								byline={article.byline}
-								webPublicationDateDeprecated={
-									article.webPublicationDateDeprecated
-								}
-								starRating={article.starRating}
-							/>
-						</GridItem>
-						<GridItem area="standfirst" layoutType={layoutType}>
-							<Standfirst
-								format={format}
-								standfirst={article.standfirst}
-							/>
-						</GridItem>
-						<GridItem
-							area="meta"
-							layoutType={layoutType}
-							element="aside"
-							css={
-								layoutType === 'immersivePortraitDefault'
-									? css`
-											${from.leftCol} {
-												margin-right: -10px;
-											}
-										`
-									: undefined
-							}
-						>
-							{layoutType !== 'immersivePortraitDefault' &&
-								layoutType !== 'immersivePortraitFeature' &&
-								layoutType !== 'immersiveLandscapeDefault' &&
-								layoutType !== 'immersiveLandscapeFeature' && (
-									<div css={stretchLines}>
-										{isWeb &&
-										format.theme === ArticleSpecial.Labs &&
-										format.design !==
-											ArticleDesign.Video ? (
-											<GuardianLabsLines />
-										) : (
-											<DecideLines
-												format={format}
-												color={themePalette(
-													'--article-border',
-												)}
-											/>
-										)}
-									</div>
-								)}
-							{isApps ? (
-								<>
-									<Hide from="leftCol">
-										<ArticleMetaApps
-											branding={branding}
-											layoutType={layoutType}
-											format={format}
-											byline={article.byline}
-											tags={article.tags}
-											primaryDateline={
-												article.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												article.webPublicationSecondaryDateDisplay
-											}
-											isCommentable={
-												article.isCommentable
-											}
-											discussionApiUrl={
-												article.config.discussionApiUrl
-											}
-											shortUrlId={
-												article.config.shortUrlId
-											}
-											pageId={article.config.pageId}
-										></ArticleMetaApps>
-									</Hide>
-									<Hide until="leftCol">
-										<ArticleMeta
-											branding={branding}
-											layoutType={layoutType}
-											format={format}
-											pageId={article.pageId}
-											webTitle={article.webTitle}
-											byline={article.byline}
-											source={article.config.source}
-											tags={article.tags}
-											primaryDateline={
-												article.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												article.webPublicationSecondaryDateDisplay
-											}
-											webPublicationDate={
-												article.webPublicationDate
-											}
-											isCommentable={
-												article.isCommentable
-											}
-											discussionApiUrl={
-												article.config.discussionApiUrl
-											}
-											shortUrlId={
-												article.config.shortUrlId
-											}
-											mainMediaElements={
-												article.mainMediaElements
-											}
-										/>
-										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
-										)}
-									</Hide>
-								</>
-							) : (
-								<>
-									<ArticleMeta
-										branding={branding}
-										format={format}
-										layoutType={layoutType}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										byline={article.byline}
-										source={article.config.source}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										webPublicationDate={
-											article.webPublicationDate
-										}
-										isCommentable={article.isCommentable}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-										mainMediaElements={
-											article.mainMediaElements
-										}
-									/>
-									{!!article.affiliateLinksDisclaimer && (
-										<AffiliateDisclaimer />
-									)}
-								</>
-							)}
-						</GridItem>
-						<GridItem area="body" layoutType={layoutType}>
-							{/* Only show Listen to Article button on App landscape views */}
-							{isApps && (
-								<Hide until="leftCol">
-									{!isVideo && (
-										<div
-											css={css`
-												margin-top: ${space[2]}px;
-											`}
-										>
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<ListenToArticle
-													articleId={article.pageId}
-												/>
-											</Island>
-										</div>
-									)}
-								</Hide>
-							)}
-							<ArticleContainer format={format}>
-								<ArticleBody
-									format={format}
-									blocks={article.blocks}
-									pinnedPost={article.pinnedPost}
-									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									switches={article.config.switches}
-									isSensitive={article.config.isSensitive}
-									isAdFreeUser={article.isAdFreeUser}
-									sectionId={article.config.section}
-									shouldHideReaderRevenue={
-										article.shouldHideReaderRevenue
-									}
-									tags={article.tags}
-									isPaidContent={
-										!!article.config.isPaidContent
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									contentType={article.contentType}
-									isPreview={article.config.isPreview}
-									idUrl={article.config.idUrl ?? ''}
-									isDev={!!article.config.isDev}
-									keywordIds={article.config.keywordIds}
-									abTests={article.config.abTests}
-									tableOfContents={article.tableOfContents}
-									lang={article.lang}
-									isRightToLeftLang={
-										article.isRightToLeftLang
-									}
-									editionId={article.editionId}
-									shouldHideAds={article.shouldHideAds}
-									idApiUrl={article.config.idApiUrl}
-								/>
-								<MatchInfoContainer
-									isMatchReport={isFootballMatchReport}
-									footballMatchStatsUrl={
-										footballMatchStatsUrl
-									}
-								/>
-
-								{isApps && (
-									<Island
-										priority="critical"
-										defer={{ until: 'visible' }}
-									>
-										<AppsEpic />
-									</Island>
-								)}
-
-								{showBodyEndSlot && (
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<SlotBodyEnd
-											contentType={article.contentType}
-											contributionsServiceUrl={
-												contributionsServiceUrl
-											}
-											idApiUrl={article.config.idApiUrl}
-											isMinuteArticle={
-												article.pageType.isMinuteArticle
-											}
-											isPaidContent={
-												article.pageType.isPaidContent
-											}
-											pageId={article.pageId}
-											sectionId={article.config.section}
-											shouldHideReaderRevenue={
-												article.shouldHideReaderRevenue
-											}
-											tags={article.tags}
-											renderAds={renderAds}
-											isLabs={isLabs}
-											articleEndSlot={
-												!!article.config.switches
-													.articleEndSlot
-											}
-											isSensitive={
-												article.config.isSensitive
-											}
-										/>
-									</Island>
-								)}
-								<StraightLines
-									data-print-layout="hide"
-									count={4}
-									cssOverrides={css`
-										display: block;
-									`}
-									color={themePalette('--straight-lines')}
-								/>
-								<SubMeta
-									format={format}
-									subMetaKeywordLinks={
-										article.subMetaKeywordLinks
-									}
-									subMetaSectionLinks={
-										article.subMetaSectionLinks
-									}
-									pageId={article.pageId}
-									webUrl={article.webURL}
-									webTitle={article.webTitle}
-									showBottomSocialButtons={
-										article.showBottomSocialButtons &&
-										renderingTarget === 'Web'
-									}
-								/>
-							</ArticleContainer>
-						</GridItem>
-						<GridItem
-							area="right-column"
-							layoutType={layoutType}
-							css={css`
-								padding-top: ${isMedia ? 0 : 6}px;
-								${from.desktop} {
-									padding-bottom: ${isMedia ? 41 : 0}px;
-								}
-							`}
-						>
-							<Hide until="desktop">
-								<Island
-									priority="feature"
-									defer={{
-										until: 'visible',
-										// Provide a much higher value for the top margin for the intersection observer
-										// This is because the most viewed would otherwise only be lazy loaded when the
-										// bottom of the container intersects with the viewport
-										rootMargin: '700px 100px',
-									}}
-								>
-									<MostViewedRightWithAd
-										format={format}
-										isPaidContent={
-											article.pageType.isPaidContent
-										}
-										renderAds={isWeb && renderAds}
-										shouldHideReaderRevenue={
-											!!article.config
-												.shouldHideReaderRevenue
-										}
-									/>
-								</Island>
-							</Hide>
-						</GridItem>
-					</article>
+					<StandardLayoutArticleGrid
+						article={article}
+						format={format}
+						renderingTarget={renderingTarget}
+					/>
 				</div>
 
 				{isWeb && renderAds && !isLabs && (
@@ -997,11 +445,6 @@ const MatchHeaderContainer = ({
 			? article.matchHeaderUrl
 			: undefined;
 
-	const ab = useAB();
-	const isCricketRedesignEnabled = Boolean(
-		ab?.isUserInTestGroup('webx-cricket-redesign', 'enable'),
-	);
-
 	const isApps = renderingTarget === 'Apps';
 
 	if (isFootballMatchReport && footballMatchHeaderUrl) {
@@ -1020,18 +463,14 @@ const MatchHeaderContainer = ({
 						renderingTarget={renderingTarget}
 						article={article}
 						format={format}
+						baseUrl={article.guardianBaseURL}
 					/>
 				</Island>
 			</>
 		);
 	}
 
-	if (
-		!isApps &&
-		cricketMatchHeaderUrl &&
-		isCricketMatchReport &&
-		isCricketRedesignEnabled
-	) {
+	if (!isApps && cricketMatchHeaderUrl && isCricketMatchReport) {
 		return (
 			<>
 				<noscript>
@@ -1045,40 +484,10 @@ const MatchHeaderContainer = ({
 						tabContentId={'article'}
 						article={article}
 						format={format}
+						renderingTarget={renderingTarget}
 					/>
 				</Island>
 			</>
-		);
-	}
-
-	return null;
-};
-
-const MatchInfoContainer = ({
-	isMatchReport,
-	footballMatchStatsUrl,
-}: {
-	isMatchReport: boolean;
-	footballMatchStatsUrl: string | undefined;
-}) => {
-	if (isMatchReport && !!footballMatchStatsUrl) {
-		const parsedUrl = safeParseURL(footballMatchStatsUrl);
-		if (!parsedUrl.ok) {
-			log(
-				'dotcom',
-				new Error(
-					`Failed to parse match stats URL: ${footballMatchStatsUrl}`,
-				),
-			);
-
-			return null;
-		}
-		return (
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<FootballMatchInfoWrapper
-					matchStatsUrl={footballMatchStatsUrl}
-				/>
-			</Island>
 		);
 	}
 

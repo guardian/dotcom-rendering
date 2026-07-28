@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
 import { space, textSans15 } from '@guardian/source/foundations';
-import {
-	SvgCheckmark,
-	SvgNotificationsOff,
-	SvgNotificationsOn,
-	SvgPlus,
-} from '@guardian/source/react-components';
+import { SvgCheckmark, SvgPlus } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 import { palette } from '../palette';
 
@@ -65,12 +60,6 @@ const containerStyles = css`
 	column-gap: 0.2em;
 `;
 
-const notificationsTextSpan = ({
-	isFollowing,
-}: Pick<ButtonProps, 'isFollowing'>) => (
-	<span>Notifications {isFollowing ? 'on' : 'off'}</span>
-);
-
 const tagTextSpan = ({
 	isFollowing,
 	displayName,
@@ -88,29 +77,6 @@ const tagTextSpan = ({
 type ButtonProps = {
 	isFollowing: boolean;
 	onClickHandler: () => void;
-};
-
-export const FollowNotificationsButton = ({
-	isFollowing,
-	onClickHandler,
-	withExtraBottomMargin = false,
-}: ButtonProps & { withExtraBottomMargin?: boolean }) => {
-	return (
-		<button
-			onClick={onClickHandler}
-			type="button"
-			css={[buttonStyles(withExtraBottomMargin)]}
-		>
-			<span css={containerStyles}>
-				<FollowIcon
-					isFollowing={isFollowing}
-					iconIsFollowing={<SvgNotificationsOn size="xsmall" />}
-					iconIsNotFollowing={<SvgNotificationsOff size="xsmall" />}
-				/>
-				{notificationsTextSpan({ isFollowing })}
-			</span>
-		</button>
-	);
 };
 
 export const FollowTagButton = ({

@@ -30,11 +30,6 @@ const meta = preview.meta({
 	component: HostedArticleLayout,
 	parameters: {
 		config: { darkModeAvailable: true },
-		chromatic: {
-			modes: {
-				'light leftCol': allModes['light leftCol'],
-			},
-		},
 	},
 	render: (args) => {
 		global.fetch = mockOnwardsContentFetch;
@@ -79,6 +74,11 @@ export const Web = meta.story({
 	parameters: {
 		config: {
 			renderingTarget: 'Web',
+		},
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
 		},
 	},
 });
@@ -134,6 +134,11 @@ export const WithoutAccentColour = meta.story({
 		config: {
 			renderingTarget: 'Web',
 		},
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
+		},
 	},
 	decorators: hostedPaletteDecorator(''),
 });
@@ -172,6 +177,11 @@ export const WithoutMainMediaCaption = meta.story({
 	parameters: {
 		config: {
 			renderingTarget: 'Web',
+		},
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
 		},
 	},
 });

@@ -196,7 +196,7 @@ export const HighlightsNewsletterCard = ({
 					<HighlightsNewsletterSignupModal
 						newsletter={newsletter}
 						renderingTarget={renderingTarget}
-						componentId={componentId}
+						componentId={modalComponentId}
 						onClose={() => {
 							setIsModalOpen(false);
 							sendNewsletterSignupEvent({
@@ -218,6 +218,7 @@ export const HighlightsNewsletterCard = ({
 						css={linkOverlayStyles}
 						onClick={handleClick}
 						data-link-name={dataLinkName}
+						data-card-component-id={componentId}
 						data-modal-component-id={modalComponentId}
 						aria-label={headlineText}
 					/>

@@ -8,19 +8,18 @@ import {
 	bypassCoreWebVitalsSampling,
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
-import { isUndefined } from '@guardian/libs';
+import { getCookie, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useBrowserId } from '../lib/useBrowserId';
 import { useDetectAdBlock } from '../lib/useDetectAdBlock';
+import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
-import type { ServerSideTests } from '../types/config';
 import { useConfig } from './ConfigContext';
 
 type Props = {
 	commercialMetricsEnabled: boolean;
-	tests: ServerSideTests;
 };
 
 const sampling = 1 / 100;
@@ -52,6 +51,30 @@ const useDev = () => {
 	return isDev;
 };
 
+const logMvt = (mvtId: string | null, abTestCookie: string | null) => {
+	const logsEndpoint = window.guardian.config.page.isDev
+		? '//logs.code.dev-guardianapis.com/log'
+		: '//logs.guardianapis.com/log';
+
+	void fetch(logsEndpoint, {
+		method: 'POST',
+		body: JSON.stringify({
+			label: 'webx.ab-testing',
+			properties: [
+				{ name: 'mvtId', value: mvtId },
+				{
+					name: 'pageviewId',
+					value: window.guardian.config.ophan.pageViewId,
+				},
+				{ name: 'abTestCookie', value: abTestCookie },
+			],
+		}),
+		keepalive: true,
+		cache: 'no-store',
+		mode: 'no-cors',
+	});
+};
+
 /**
  * Record relevant metrics to our data warehouse:
  * - Core Web Vitals
@@ -66,7 +89,7 @@ const useDev = () => {
  *
  * (No visual story exists as this does not render anything)
  */
-export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
+export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 	const abTests = useAB();
 	const adBlockerInUse = useAdBlockInUse();
 	const detectedAdBlocker = useDetectAdBlock();
@@ -77,8 +100,6 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 	const isDev = useDev();
 
-	const userInServerSideTest = Object.keys(tests).length > 0;
-
 	const userParticipations = abTests?.getParticipations() ?? {};
 
 	const collectTestMetrics = shouldCollectMetricsForTests(
@@ -86,12 +107,12 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 	);
 
 	const shouldBypassSampling = useCallback(
-		() =>
-			willRecordCoreWebVitals ||
-			userInServerSideTest ||
-			collectTestMetrics,
+		() => willRecordCoreWebVitals || collectTestMetrics,
+		[collectTestMetrics],
+	);
 
-		[userInServerSideTest, collectTestMetrics],
+	const isInMonitoringTest = abTests?.isUserInTest(
+		'webx-monitor-group-contamination',
 	);
 
 	useEffect(
@@ -190,6 +211,25 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 			pageViewId,
 			shouldBypassSampling,
 		],
+	);
+
+	useOnce(
+		function reportMvtId() {
+			if (!isInMonitoringTest) return;
+
+			const mvtId = getCookie({
+				name: 'gu_v2_mvt_id',
+				shouldMemoize: true,
+			});
+
+			const rawClientABTests = getCookie({
+				name: 'gu_client_ab_tests',
+				shouldMemoize: true,
+			});
+
+			logMvt(mvtId, rawClientABTests);
+		},
+		[isInMonitoringTest],
 	);
 
 	// We don’t render anything
