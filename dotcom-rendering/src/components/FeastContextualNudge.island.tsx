@@ -14,7 +14,6 @@ import {
 	isPlacementStale,
 } from '../lib/braze/BrazeBannersSystem';
 import { getFeastSavedFromTheWebRecipes } from '../lib/feast/savedFromWeb';
-import { useAB } from '../lib/useAB';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import type { StageType } from '../types/config';
@@ -198,15 +197,6 @@ export const FeastContextualNudge = ({
 	idApiUrl,
 	allNudgeRecipeIds,
 }: FeastContextualNudgeProps) => {
-	const abTests = useAB();
-	let isVariant =
-		abTests?.isUserInTestGroup('feast-recipe-nudge-v2', 'variant-1') ??
-		false;
-
-	// TEMP ONLY FOR DEVELOPMENT: force the nudge to render for testing purposes, even if the user is not in the AB test variant.
-	isVariant = true;
-	// TEMP ONLY FOR DEVELOPMENT: force the nudge to render for testing purposes, even if the user is not in the AB test variant.
-
 	const { darkModeAvailable, renderingTarget } = useConfig();
 	const { braze } = useBraze(idApiUrl ?? '', renderingTarget);
 
@@ -266,8 +256,6 @@ export const FeastContextualNudge = ({
 			setIsRecipeSaved(savedRecipeIds.has(feastId));
 		});
 	}, [authStatus, feastId, allNudgeRecipeIds]);
-
-	if (!isVariant) return null;
 
 	// If idApiUrl is defined and Braze has a banner for this placement slot,
 	// render the Braze banner instead of the native nudge.
