@@ -113,7 +113,9 @@ export const StackedProducts = ({
 					theme={theme}
 					data-ignore="global-link-styling"
 				>
-					{isExpanded ? 'Show less' : `Show all (${products.length})`}
+					{isExpanded
+						? 'Show fewer'
+						: `Show all (${products.length})`}
 				</LinkButton>
 			)}
 		</div>
