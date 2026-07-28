@@ -118,6 +118,27 @@ const nudgeMinHeightStyles = css`
 	}
 `;
 
+/**
+ * Extra vertical margin applied around the reserved-height box, matching
+ * `showcaseCardStyles`' own margin so the placeholder shown while the
+ * "Saved from web" status is loading (see `isRecipeSaved` below) takes up
+ * exactly the same space as whichever of the Braze banner or native card
+ * replaces it, keeping the CLS mitigation consistent across all three
+ * states.
+ */
+const nudgeSpacingStyles = css`
+	margin: ${space[2]}px 0;
+`;
+
+/**
+ * Upper bound on how long to wait for `getFeastSavedFromTheWebRecipes` (see
+ * below) before giving up and treating the recipe as not-saved. Prevents an
+ * unusually slow/hanging request from blocking the nudge from rendering at
+ * all. Mirrors the timeout pattern used for `fetchEmail` in
+ * `BrazeBannersSystem.tsx`.
+ */
+const SAVED_FROM_WEB_TIMEOUT_MS = 2_000;
+
 // ── Card styles ───────────────────────────────────────────────────────────────
 
 const showcaseCardStyles = css`
@@ -244,18 +265,64 @@ export const FeastContextualNudge = ({
 	// matter how many FeastContextualNudge islands on this page call it as
 	// they hydrate (each is deferred `until: 'visible'`), only one network
 	// request for the batch of recipe ids on this page is ever made.
+	//
+	// `undefined` specifically means "not yet known" (auth status still
+	// pending, or the saved-from-web request is still in flight) as opposed
+	// to `false`, which means "known to not be saved". The Braze banner
+	// iframe reads `isRecipeSaved` from `context` only once, when it asks for
+	// context on load (see `GetContext` in `BrazeBannersSystem.tsx`) — so the
+	// banner must not be rendered until the real value is known, otherwise it
+	// would be permanently stuck showing the wrong saved state. See the
+	// render gate below, which holds off rendering anything (Braze banner
+	// *or* native fallback) until this resolves.
 	const authStatus = useAuthStatus();
-	const [isRecipeSaved, setIsRecipeSaved] = useState(false);
+	const [isRecipeSaved, setIsRecipeSaved] = useState<boolean | undefined>(
+		undefined,
+	);
 	useEffect(() => {
-		if (authStatus.kind !== 'SignedIn') return;
-		void getFeastSavedFromTheWebRecipes(
-			authStatus.idToken.claims.sub,
-			authStatus.accessToken.accessToken,
-			allNudgeRecipeIds,
-		).then((savedRecipeIds) => {
-			setIsRecipeSaved(savedRecipeIds.has(feastId));
+		if (authStatus.kind === 'Pending') return;
+		if (authStatus.kind !== 'SignedIn') {
+			setIsRecipeSaved(false);
+			return;
+		}
+
+		let cancelled = false;
+		const timeout = new Promise<Set<string>>((resolve) => {
+			setTimeout(() => resolve(new Set()), SAVED_FROM_WEB_TIMEOUT_MS);
 		});
+		void Promise.race([
+			getFeastSavedFromTheWebRecipes(
+				authStatus.idToken.claims.sub,
+				authStatus.accessToken.accessToken,
+				allNudgeRecipeIds,
+			),
+			timeout,
+		]).then((savedRecipeIds) => {
+			if (!cancelled) setIsRecipeSaved(savedRecipeIds.has(feastId));
+		});
+		return () => {
+			cancelled = true;
+		};
 	}, [authStatus, feastId, allNudgeRecipeIds]);
+
+	// Only the native fallback renders `isRecipeSaved`-free, so it's safe to
+	// show straight away when there's no Braze placement to wait on. When a
+	// Braze placement is possible, hold off on rendering anything until the
+	// saved-from-web status is known, so the native card never flashes before
+	// the Braze banner is ready to show with the correct context, and so the
+	// banner is never shown with a stale/incorrect `isRecipeSaved`. The
+	// reserved height/margin (`nudgeMinHeightStyles` + `nudgeSpacingStyles`)
+	// matches the Braze/native cards below, so this causes no layout shift
+	// once real content replaces it.
+	if (idApiUrl !== undefined && isRecipeSaved === undefined) {
+		return (
+			<div
+				data-component="feast-contextual-nudge"
+				aria-hidden="true"
+				css={[nudgeMinHeightStyles, nudgeSpacingStyles]}
+			/>
+		);
+	}
 
 	// If idApiUrl is defined and Braze has a banner for this placement slot,
 	// render the Braze banner instead of the native nudge.
@@ -282,12 +349,7 @@ export const FeastContextualNudge = ({
 				<div
 					aria-description={`Open the recipe ${title} in the Feast app`}
 					data-component="feast-contextual-nudge"
-					css={[
-						nudgeMinHeightStyles,
-						css`
-							margin: ${space[2]}px 0;
-						`,
-					]}
+					css={[nudgeMinHeightStyles, nudgeSpacingStyles]}
 				>
 					<BrazeBannersSystemDisplay
 						meta={{
