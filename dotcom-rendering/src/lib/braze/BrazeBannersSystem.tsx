@@ -679,7 +679,7 @@ export const BrazeBannersSystemDisplay = ({
 
 	/**
 	 * Save a Feast recipe by its Id on the "Saved from the Web" recipes list on the App.
-	 * Proxied through DCR's own server (`/api/saved-from-web/:recipeId`),
+	 * Proxied through Frontend's own server (`/api/feast-saved-recipes/:recipeId`),
 	 * which forwards the reader's bearer token to the Feast API. Idempotent:
 	 * saving the same recipe id twice has no extra effect.
 	 * @param feastRecipeId The ID of the Feast recipe to save

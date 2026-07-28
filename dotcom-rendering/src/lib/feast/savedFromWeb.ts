@@ -1,11 +1,14 @@
 /**
- * DCR's own server-side proxy for the Feast API's "Saved from web"
- * endpoints (see `handler.savedFromWeb.ts`). The browser never talks to the
- * Feast API directly: DCR's Node server forwards the reader's bearer token
- * straight through, which sidesteps needing Feast API-side CORS
- * configuration for browser origins.
+ * Frontend's server-side proxy for the Feast API's "Saved from web"
+ * endpoints. The browser never talks to the Feast API directly: Frontend
+ * forwards the reader's bearer token straight through, which sidesteps
+ * needing Feast API-side CORS configuration for browser origins.
+ *
+ * This is a relative, same-origin fetch: the article page is served by
+ * Frontend, so this must be (and stay) a route Frontend itself handles, not
+ * one DCR proxies, since DCR is not on the reader-facing origin.
  */
-const SAVED_FROM_WEB_PROXY_PATH = '/api/saved-from-web';
+const FEAST_SAVED_RECIPES_PATH = '/api/feast-saved-recipes';
 
 /**
  * Upper bound on how many recipe ids can be requested in one call. Mirrors
@@ -48,7 +51,7 @@ const fetchSavedFromWebRecipes = (
 	const promise = (async (): Promise<Set<string>> => {
 		try {
 			const response = await fetch(
-				`${SAVED_FROM_WEB_PROXY_PATH}?ids=${encodeURIComponent(idsParam)}`,
+				`${FEAST_SAVED_RECIPES_PATH}?ids=${encodeURIComponent(idsParam)}`,
 				{
 					headers: {
 						Authorization: `Bearer ${accessToken}`,
@@ -141,7 +144,7 @@ export const addFeastRecipeToSavedFromWebList = async (
 ): Promise<boolean> => {
 	try {
 		const response = await fetch(
-			`${SAVED_FROM_WEB_PROXY_PATH}/${encodeURIComponent(recipeId)}`,
+			`${FEAST_SAVED_RECIPES_PATH}/${encodeURIComponent(recipeId)}`,
 			{
 				method: 'PUT',
 				headers: {
