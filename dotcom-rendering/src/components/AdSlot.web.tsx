@@ -91,8 +91,11 @@ type Props = DefaultProps &
 
 const halfPageAdHeight = adSizes.halfPage.height;
 
-/** Calculates the minimum height for an ad slot. Used to avoid CLS */
-const getMinHeight = (adHeight: number, padding?: number): number =>
+/**
+ * Calculates the minimum height for an ad slot. Assumes an ad label of
+ * fixed height will be present above the advert. Used to avoid CLS.
+ */
+const getMinHeightOfAdSlot = (adHeight: number, padding?: number): number =>
 	adHeight + labelHeight + (padding ?? 0);
 
 const outOfPageStyles = css`
@@ -105,7 +108,7 @@ const hideBelowDesktop = css`
 	}
 `;
 
-const containerMinHeight = getMinHeight(250, space[5]);
+const topAboveNavPaddingHeight = space[5];
 
 const topAboveNavContainerStyles = css`
 	padding-bottom: ${space[5]}px;
@@ -114,7 +117,17 @@ const topAboveNavContainerStyles = css`
 	text-align: left;
 	display: block;
 	width: 100%;
-	min-height: ${containerMinHeight}px;
+
+	min-height: ${getMinHeightOfAdSlot(
+		adSizes.leaderboard.height,
+		topAboveNavPaddingHeight,
+	)}px;
+	${from.desktop} {
+		min-height: ${getMinHeightOfAdSlot(
+			adSizes.billboard.height,
+			topAboveNavPaddingHeight,
+		)}px;
+	}
 
 	/* Remove the min-height when the ad has rendered, so that the container can shrink if the ad is smaller */
 	&[top-above-nav-ad-rendered='true'] {
@@ -126,8 +139,8 @@ const topAboveNavContainerStyles = css`
 		::before {
 			content: '';
 			position: absolute;
-			height: 250px;
-			width: 728px;
+			height: ${adSizes.leaderboard.height}px;
+			width: ${adSizes.leaderboard.width}px;
 			top: ${labelHeight}px;
 			left: 50%;
 			transform: translateX(-50%);
@@ -135,7 +148,8 @@ const topAboveNavContainerStyles = css`
 		}
 		${from.desktop} {
 			::before {
-				width: 970px;
+				height: ${adSizes.billboard.height}px;
+				width: ${adSizes.billboard.width}px;
 			}
 		}
 	}
@@ -148,7 +162,7 @@ const topAboveNavContainerStyles = css`
  * render first, we need to reserve space for the ad to avoid CLS.
  */
 const showcaseRightColumnContainerStyles = css`
-	min-height: ${getMinHeight(halfPageAdHeight)}px;
+	min-height: ${getMinHeightOfAdSlot(halfPageAdHeight)}px;
 `;
 
 const showcaseRightColumnStyles = css`
@@ -178,7 +192,7 @@ const allowFullWidthAdContainerStyles = css`
 
 const merchandisingAdStyles = css`
 	position: relative;
-	min-height: ${getMinHeight(adSizes.billboard.height, space[3])}px;
+	min-height: ${getMinHeightOfAdSlot(adSizes.billboard.height, space[3])}px;
 	margin: ${space[3]}px auto;
 	max-width: ${breakpoints['wide']}px;
 	overflow: hidden;
@@ -187,7 +201,10 @@ const merchandisingAdStyles = css`
 	${from.desktop} {
 		margin: 0;
 		padding-bottom: ${space[5]}px;
-		min-height: ${getMinHeight(adSizes.billboard.height, space[5])}px;
+		min-height: ${getMinHeightOfAdSlot(
+			adSizes.billboard.height,
+			space[5],
+		)}px;
 	}
 
 	&:not(.ad-slot--fluid).ad-slot--rendered {
@@ -220,7 +237,7 @@ const liveblogInlineContainerStyles = css`
 
 const liveblogInlineAdStyles = css`
 	position: relative;
-	min-height: ${getMinHeight(adSizes.mpu.height)}px;
+	min-height: ${getMinHeightOfAdSlot(adSizes.mpu.height)}px;
 	background-color: ${schemedPalette('--ad-background-article-inner')};
 
 	${until.tablet} {
@@ -230,7 +247,7 @@ const liveblogInlineAdStyles = css`
 
 const liveblogInlineMobileAdStyles = css`
 	position: relative;
-	min-height: ${getMinHeight(adSizes.outstreamMobile.height)}px;
+	min-height: ${getMinHeightOfAdSlot(adSizes.outstreamMobile.height)}px;
 
 	${from.tablet} {
 		display: none;
@@ -239,7 +256,7 @@ const liveblogInlineMobileAdStyles = css`
 
 const mobileFrontAdStyles = css`
 	position: relative;
-	min-height: ${getMinHeight(adSizes.mpu.height, space[3])}px;
+	min-height: ${getMinHeightOfAdSlot(adSizes.mpu.height, space[3])}px;
 	min-width: 300px;
 	width: 300px;
 	margin: ${space[3]}px auto;
@@ -255,11 +272,17 @@ const frontsBannerAdTopContainerStyles = css`
 	${from.tablet} {
 		display: flex;
 		justify-content: center;
-		min-height: ${getMinHeight(adSizes.leaderboard.height, space[6])}px;
+		min-height: ${getMinHeightOfAdSlot(
+			adSizes.leaderboard.height,
+			space[6],
+		)}px;
 		background-color: ${schemedPalette('--ad-background')};
 	}
 	${from.desktop} {
-		min-height: ${getMinHeight(adSizes.billboard.height, space[6])}px;
+		min-height: ${getMinHeightOfAdSlot(
+			adSizes.billboard.height,
+			space[6],
+		)}px;
 	}
 `;
 
@@ -277,7 +300,7 @@ const frontsBannerCollapseStyles = css`
 
 const frontsBannerAdStyles = css`
 	position: relative;
-	min-height: ${getMinHeight(adSizes.leaderboard.height, space[6])}px;
+	min-height: ${getMinHeightOfAdSlot(adSizes.leaderboard.height, space[6])}px;
 	max-width: ${adSizes.leaderboard.width}px;
 	overflow: hidden;
 	padding-bottom: ${space[6]}px;
@@ -300,7 +323,7 @@ const articleEndAdStyles = css`
 
 const mostPopAdStyles = css`
 	position: relative;
-	min-height: ${getMinHeight(adSizes.mpu.height)}px;
+	min-height: ${getMinHeightOfAdSlot(adSizes.mpu.height)}px;
 	min-width: ${adSizes.mpu.width}px;
 	max-width: ${adSizes.mpu.width}px;
 	text-align: center;
@@ -314,7 +337,7 @@ const mostPopAdStyles = css`
 `;
 
 const mostPopContainerStyles = css`
-	min-height: ${getMinHeight(adSizes.mpu.height)}px;
+	min-height: ${getMinHeightOfAdSlot(adSizes.mpu.height)}px;
 	min-width: ${adSizes.mpu.width}px;
 	width: fit-content;
 	max-width: ${adSizes.mpu.width}px;
@@ -328,7 +351,7 @@ const mostPopContainerStyles = css`
 `;
 
 const liveBlogTopAdStyles = css`
-	min-height: ${getMinHeight(adSizes.mpu.height)}px;
+	min-height: ${getMinHeightOfAdSlot(adSizes.mpu.height)}px;
 	min-width: ${adSizes.mpu.width}px;
 	width: fit-content;
 	max-width: ${adSizes.mpu.width}px;
@@ -409,12 +432,12 @@ const mobileStickyAdStyles = css`
 `;
 
 const crosswordBannerMobileAdStyles = css`
-	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
+	min-height: ${getMinHeightOfAdSlot(adSizes.mobilesticky.height)}px;
 `;
 
 const galleryInlineAdStyles = css`
 	margin: ${space[3]}px auto;
-	min-height: ${getMinHeight(adSizes.mpu.height)}px;
+	min-height: ${getMinHeightOfAdSlot(adSizes.mpu.height)}px;
 
 	&.ad-slot--fluid {
 		margin: ${space[3]}px auto;
