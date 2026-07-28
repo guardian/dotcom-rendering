@@ -98,10 +98,12 @@ const GridItem = ({
 
 export const StandardLayoutArticleGrid = ({
 	article,
+	contentLayoutName,
 	format,
 	renderingTarget,
 }: {
 	article: ArticleDeprecated;
+	contentLayoutName: string;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }) => {
@@ -162,7 +164,6 @@ export const StandardLayoutArticleGrid = ({
 		isVideo,
 		isShowcase,
 	});
-	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
 	const isImmersivePortrait =
 		layoutType === 'immersivePortraitDefault' ||

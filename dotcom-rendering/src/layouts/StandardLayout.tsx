@@ -52,23 +52,6 @@ interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
 
-/**
- * Works out the orientation of an image from its Guardian media URL, which
- * encodes the crop dimensions in the path (e.g. `/1000_600_800_480/`).
- * Falls back to 'landscape' if the URL doesn't match the expected pattern.
- */
-const getImageOrientation = (
-	url: string,
-): 'portrait' | 'landscape' | 'square' => {
-	const match = url.match(/\/\d+_\d+_(\d+)_(\d+)\/\d+\.\w+$/);
-	if (!match) return 'landscape';
-	const [, width, height] = match.map(Number);
-	if (width == null || height == null) return 'landscape';
-	if (height > width) return 'portrait';
-	if (width > height) return 'landscape';
-	return 'square';
-};
-
 export const StandardLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget, serverTime } = props;
 	const {
@@ -78,6 +61,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
+
+	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -187,6 +172,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<div id="article">
 					<StandardLayoutArticleGrid
 						article={article}
+						contentLayoutName={contentLayoutName}
 						format={format}
 						renderingTarget={renderingTarget}
 					/>

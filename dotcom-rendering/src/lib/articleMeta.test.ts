@@ -24,6 +24,11 @@ describe('shouldShowContributor', () => {
 		display: ArticleDisplay.NumberedList,
 	};
 
+	const immersive = {
+		...standardFormat,
+		display: ArticleDisplay.Immersive,
+	};
+
 	const immersivePortraitDefault = {
 		...immersive,
 		layoutType: 'immersivePortraitDefault',
