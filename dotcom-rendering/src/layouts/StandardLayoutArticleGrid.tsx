@@ -159,7 +159,6 @@ export const StandardLayoutArticleGrid = ({
 	const isMedia =
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
-	const isShowcase = format.display === ArticleDisplay.Showcase;
 	const isPicture = format.design === ArticleDesign.Picture;
 
 	const footballMatchUrl =
@@ -170,13 +169,24 @@ export const StandardLayoutArticleGrid = ({
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	const layoutType: LayoutType = isMedia
-		? 'media'
-		: isPicture
-			? 'picture'
-			: isShowcase
-				? 'showcase'
-				: 'standard';
+	const getLayoutType = (articleFormat: ArticleFormat): LayoutType => {
+		switch (articleFormat.display) {
+			case ArticleDisplay.Showcase:
+				return 'showcase';
+			default:
+				switch (articleFormat.design) {
+					case ArticleDesign.Video:
+					case ArticleDesign.Audio:
+						return 'media';
+					case ArticleDesign.Picture:
+						return 'picture';
+					default:
+						return 'standard';
+				}
+		}
+	};
+
+	const layoutType: LayoutType = getLayoutType(format);
 
 	const avatarUrl = getSoleContributor(
 		article.tags,
