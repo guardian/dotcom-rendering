@@ -11,6 +11,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { Caption } from '../components/Caption';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
@@ -456,6 +457,26 @@ export const StandardLayoutArticleGrid = ({
 			>
 				<Standfirst format={format} standfirst={article.standfirst} />
 			</GridItem>
+			{isImmersive && (
+				<GridItem
+					area="caption"
+					layoutType={layoutType}
+					css={css`
+						padding-top: ${space[2]}px;
+					`}
+				>
+					<Hide from="leftCol">
+						<Caption
+							captionText={captionText}
+							format={format}
+							shouldLimitWidth={false}
+							isLeftCol={true}
+							isMainMedia={true}
+							showIconBelowLeftCol={true}
+						/>
+					</Hide>
+				</GridItem>
+			)}
 			<GridItem area="meta" layoutType={layoutType} element="aside">
 				{format.design !== ArticleDesign.Audio && (
 					<div css={stretchLines}>
