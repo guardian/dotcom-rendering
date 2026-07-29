@@ -402,7 +402,6 @@ export const ArticleHeadline = ({
 	hasAvatar,
 	isMatch,
 	starRating,
-	isInverted,
 }: Props) => {
 	const isInverted =
 		format.display === ArticleDisplay.Immersive &&
