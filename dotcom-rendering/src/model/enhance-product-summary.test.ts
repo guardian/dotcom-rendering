@@ -47,8 +47,8 @@ describe('enhanceProductSummary', () => {
 
 	it('enhances product summary elements with the correct CTA indices', () => {
 		const summaryProducts = [
-			{ productId: '1', ctaIndex: 0 },
 			{ productId: '3', ctaIndex: 1 },
+			{ productId: '1', ctaIndex: 0 },
 		];
 		const input = [
 			productElement(
@@ -82,6 +82,11 @@ describe('enhanceProductSummary', () => {
 			enhancedProductSummaryElement?.products.map(
 				(mapping) => mapping.ctaIndex,
 			),
-		).toEqual([0, 1]);
+		).toEqual([1, 0]);
+		expect(
+			enhancedProductSummaryElement?.products.map(
+				(mapping) => mapping.productBlock.id,
+			),
+		).toEqual(['3', '1']);
 	});
 });

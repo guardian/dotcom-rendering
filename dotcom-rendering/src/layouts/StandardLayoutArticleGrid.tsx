@@ -212,6 +212,30 @@ export const StandardLayoutArticleGrid = ({
 							grid-template-rows: auto auto ${ageWarning
 									? '130px'
 									: '90px'} auto auto auto auto auto;
+							${grid.centreRule(
+								isImmersivePortrait
+									? 4
+									: isImmersiveLandscape
+										? layoutType ===
+											'immersiveLandscapeFeature'
+											? 3
+											: 4
+										: 1,
+							)}
+						}
+					`,
+				isImmersivePortrait &&
+					css`
+						${from.desktop} {
+							grid-template-rows: 0.25fr 1fr auto;
+						}
+					`,
+				isImmersiveLandscape &&
+					css`
+						${from.desktop} {
+							grid-template-rows: auto auto ${ageWarning
+									? '130px'
+									: '90px'} auto auto auto auto auto;
 						}
 					`,
 			]}
@@ -229,11 +253,11 @@ export const StandardLayoutArticleGrid = ({
 							`
 						: undefined,
 					// Force portrait aspect ratio for local dev purposes
-					// isImmersivePortrait
-					// 	? css`
-					// 			aspect-ratio: 4 / 5;
-					// 		`
-					// 	: undefined,
+					isImmersivePortrait
+						? css`
+								aspect-ratio: 4 / 5;
+							`
+						: undefined,
 				]}
 			>
 				<MainMedia
@@ -307,6 +331,7 @@ export const StandardLayoutArticleGrid = ({
 						article.webPublicationDateDeprecated
 					}
 					starRating={article.starRating}
+					isInverted={layoutType === 'immersiveLandscapeDefault'}
 				/>
 			</GridItem>
 			<GridItem
@@ -462,7 +487,7 @@ export const StandardLayoutArticleGrid = ({
 				{/* Only show Listen to Article button on App landscape views */}
 				{isApps && (
 					<Hide until="leftCol">
-						{!isVideo && (
+						{!isMedia && (
 							<div
 								css={css`
 									margin-top: ${space[2]}px;
@@ -601,6 +626,9 @@ export const StandardLayoutArticleGrid = ({
 							renderAds={isWeb && renderAds}
 							shouldHideReaderRevenue={
 								!!article.config.shouldHideReaderRevenue
+							}
+							shouldHideMostViewed={
+								format.design === ArticleDesign.Audio
 							}
 						/>
 					</Island>
