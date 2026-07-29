@@ -16,7 +16,32 @@ const feFootballPlayerEventSchema = object({
 	eventType: string(),
 });
 
+const feFootballPlayerEventEnhancedSchema = object({
+	eventId: string(),
+	eventType: string(),
+	normalTime: string(),
+	addedTime: string(),
+});
+
 export type FEFootballPlayerEvent = Output<typeof feFootballPlayerEventSchema>;
+
+export type FEFootballPlayerEventEnhanced = Output<
+	typeof feFootballPlayerEventEnhancedSchema
+>;
+
+export const feFootballSubstitutionSchema = object({
+	eventId: string(),
+	name: string(),
+	lastName: string(),
+});
+
+export type FEFootballSubstitution = Output<
+	typeof feFootballSubstitutionSchema
+>;
+
+export const feFootballSubstitutionsSchema = array(
+	feFootballPlayerEventEnhancedSchema,
+);
 
 const feFootballPlayerSchema = object({
 	id: string(),
@@ -27,6 +52,7 @@ const feFootballPlayerSchema = object({
 	timeOnPitch: string(),
 	shirtNumber: string(),
 	events: array(feFootballPlayerEventSchema),
+	eventsEnhanced: array(feFootballPlayerEventEnhancedSchema),
 });
 
 export type FEFootballPlayer = Output<typeof feFootballPlayerSchema>;
@@ -45,6 +71,7 @@ const feFootballTeamSchema = object({
 	fouls: number(),
 	colours: string(),
 	crest: string(),
+	substitutions: array(feFootballSubstitutionSchema),
 });
 
 export type FEFootballTeam = Output<typeof feFootballTeamSchema>;
