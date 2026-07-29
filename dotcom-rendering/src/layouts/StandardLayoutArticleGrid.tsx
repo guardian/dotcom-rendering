@@ -229,11 +229,11 @@ export const StandardLayoutArticleGrid = ({
 							`
 						: undefined,
 					// Force portrait aspect ratio for local dev purposes
-					isImmersivePortrait
-						? css`
-								aspect-ratio: 4 / 5;
-							`
-						: undefined,
+					// isImmersivePortrait
+					// 	? css`
+					// 			aspect-ratio: 4 / 5;
+					// 		`
+					// 	: undefined,
 				]}
 			>
 				<MainMedia
@@ -264,6 +264,7 @@ export const StandardLayoutArticleGrid = ({
 			>
 				<ArticleTitle
 					format={format}
+					layoutType={layoutType}
 					tags={article.tags}
 					sectionLabel={article.sectionLabel}
 					sectionUrl={article.sectionUrl}
@@ -275,7 +276,8 @@ export const StandardLayoutArticleGrid = ({
 				area="headline"
 				layoutType={layoutType}
 				css={[
-					layoutType === 'immersivePortraitDefault'
+					layoutType === 'immersivePortraitDefault' ||
+					layoutType === 'immersivePortraitFeature'
 						? css`
 								${from.desktop} {
 									border-bottom: 1px solid
@@ -354,25 +356,29 @@ export const StandardLayoutArticleGrid = ({
 						: undefined
 				}
 			>
-				{layoutType !== 'immersivePortraitDefault' && (
-					<div css={stretchLines}>
-						{isWeb &&
-						format.theme === ArticleSpecial.Labs &&
-						format.design !== ArticleDesign.Video ? (
-							<GuardianLabsLines />
-						) : (
-							<DecideLines
-								format={format}
-								color={themePalette('--article-border')}
-							/>
-						)}
-					</div>
-				)}
+				{layoutType !== 'immersivePortraitDefault' &&
+					layoutType !== 'immersivePortraitFeature' &&
+					layoutType !== 'immersiveLandscapeDefault' &&
+					layoutType !== 'immersiveLandscapeFeature' && (
+						<div css={stretchLines}>
+							{isWeb &&
+							format.theme === ArticleSpecial.Labs &&
+							format.design !== ArticleDesign.Video ? (
+								<GuardianLabsLines />
+							) : (
+								<DecideLines
+									format={format}
+									color={themePalette('--article-border')}
+								/>
+							)}
+						</div>
+					)}
 				{isApps ? (
 					<>
 						<Hide from="leftCol">
 							<ArticleMetaApps
 								branding={branding}
+								layoutType={layoutType}
 								format={format}
 								byline={article.byline}
 								tags={article.tags}
@@ -393,6 +399,7 @@ export const StandardLayoutArticleGrid = ({
 						<Hide until="leftCol">
 							<ArticleMeta
 								branding={branding}
+								layoutType={layoutType}
 								format={format}
 								pageId={article.pageId}
 								webTitle={article.webTitle}
@@ -422,6 +429,7 @@ export const StandardLayoutArticleGrid = ({
 					<>
 						<ArticleMeta
 							branding={branding}
+							layoutType={layoutType}
 							format={format}
 							pageId={article.pageId}
 							webTitle={article.webTitle}
