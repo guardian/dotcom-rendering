@@ -136,8 +136,6 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isFeature = format.design === ArticleDesign.Feature;
 
-	const isVideo = format.design === ArticleDesign.Video;
-
 	const footballMatchUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchUrl
@@ -161,9 +159,10 @@ export const StandardLayoutArticleGrid = ({
 		isImmersive,
 		isFeature,
 		orientation: mainMediaOrientation,
-		isVideo,
+		isMedia,
 		isShowcase,
 	});
+	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
 	const isImmersivePortrait =
 		layoutType === 'immersivePortraitDefault' ||
@@ -331,6 +330,7 @@ export const StandardLayoutArticleGrid = ({
 						article.webPublicationDateDeprecated
 					}
 					starRating={article.starRating}
+					isInverted={layoutType === 'immersiveLandscapeDefault'}
 				/>
 			</GridItem>
 			<GridItem
@@ -380,10 +380,9 @@ export const StandardLayoutArticleGrid = ({
 						: undefined
 				}
 			>
-				{layoutType !== 'immersivePortraitDefault' &&
-					layoutType !== 'immersivePortraitFeature' &&
-					layoutType !== 'immersiveLandscapeDefault' &&
-					layoutType !== 'immersiveLandscapeFeature' && (
+				{format.display !== ArticleDisplay.Immersive &&
+					format.design !== ArticleDesign.Audio &&
+					layoutType !== 'immersivePortraitDefault' && (
 						<div css={stretchLines}>
 							{isWeb &&
 							format.theme === ArticleSpecial.Labs &&

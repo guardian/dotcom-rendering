@@ -384,13 +384,13 @@ export const getLayoutType = ({
 	isImmersive,
 	isFeature,
 	orientation,
-	isVideo,
+	isMedia,
 	isShowcase,
 }: {
 	isImmersive: boolean;
 	isFeature: boolean;
 	orientation: 'portrait' | 'landscape' | 'square';
-	isVideo: boolean;
+	isMedia: boolean;
 	isShowcase: boolean;
 }): LayoutType => {
 	if (isImmersive) {
@@ -404,7 +404,7 @@ export const getLayoutType = ({
 			? 'immersiveLandscapeFeature'
 			: 'immersiveLandscapeDefault';
 	}
-	if (isVideo) return 'media';
+	if (isMedia) return 'media';
 	if (isShowcase) return 'showcase';
 	return 'standard';
 };
