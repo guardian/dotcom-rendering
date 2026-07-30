@@ -39,6 +39,7 @@ export interface Front {
 	webURL: string;
 	guardianBaseURL: string;
 	serverTime?: number;
+	editorialAbTests?: EditorialAbTest[];
 }
 
 interface PressedPage {
@@ -191,4 +192,11 @@ export type Test = {
 	hasManuallyEndedOnThisTrail: boolean;
 	manuallyEndedOnThisTrailByName?: string;
 	manuallyEndedOnThisTrailByEmail?: string;
+};
+
+export type EditorialAbTest = {
+	testUuid: string;
+	expiryDate?: number;
+	frontsThisTestCanRunOn: string[];
+	hasManuallyEndedOnThisTrail: boolean;
 };
