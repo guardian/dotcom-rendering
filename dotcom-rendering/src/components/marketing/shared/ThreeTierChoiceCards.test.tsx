@@ -350,4 +350,136 @@ describe('ThreeTierChoiceCards', () => {
 
 		consoleErrorSpy.mockRestore();
 	});
+
+	it('selects the default card when selectedChoiceCard is a stale reference from a previous array identity', () => {
+		// Regression: useMatchMedia resolves after mount, so the banner/epic
+		// switches from mobileChoiceCards to choiceCards. The initial default
+		// (captured via useState from the first array) then no longer
+		// reference-matches any card, so reference-only selection leaves
+		// nothing selected. A structurally equal card must still be selected.
+		const staleSelected: ChoiceCard = {
+			product: { supportTier: 'SupporterPlus', ratePlan: 'Monthly' },
+			label: 'Support £12/month',
+			isDefault: true,
+			benefits: [
+				{ copy: 'Unlimited access to the Guardian app' },
+				{ copy: 'Ad-free reading on all your devices' },
+			],
+		};
+
+		render(
+			<ThreeTierChoiceCards
+				selectedChoiceCard={staleSelected}
+				setSelectedChoiceCard={() => {}}
+				choices={mockChoiceCards}
+				id="banner"
+			/>,
+		);
+
+		const radios = screen.getAllByRole('radio');
+		expect(radios[0]).not.toBeChecked(); // Contribution
+		expect(radios[1]).toBeChecked(); // SupporterPlus (value-matches stale ref)
+		expect(radios[2]).not.toBeChecked(); // OneOff
+	});
+
+	it('resolves a stale reference to the correct card when duplicates exist', () => {
+		// With two OneOff cards, a stale selectedChoiceCard must resolve by
+		// value (product + label) to the matching card only — not both.
+		const duplicateOneOffCards: Array<
+			ChoiceCard & { defaultExpanded?: boolean }
+		> = [
+			{
+				product: { supportTier: 'OneOff' },
+				label: 'One-time 1',
+				isDefault: true,
+				benefits: [
+					{ copy: 'We welcome support of any size, any time' },
+				],
+			},
+			{
+				product: { supportTier: 'OneOff' },
+				label: 'One-time 2',
+				isDefault: false,
+				benefits: [
+					{ copy: 'We welcome support of any size, any time' },
+				],
+			},
+		];
+
+		const staleSelected: ChoiceCard = {
+			// Matches the SECOND card by value — product alone cannot
+			// distinguish the duplicates, so this asserts the label
+			// participates in the structural match.
+			product: { supportTier: 'OneOff' },
+			label: 'One-time 2',
+			isDefault: false,
+			benefits: [{ copy: 'We welcome support of any size, any time' }],
+		};
+
+		render(
+			<ThreeTierChoiceCards
+				selectedChoiceCard={staleSelected}
+				setSelectedChoiceCard={() => {}}
+				choices={duplicateOneOffCards}
+				id="banner"
+			/>,
+		);
+
+		const radios = screen.getAllByRole('radio');
+		expect(radios[0]).not.toBeChecked(); // One-time 1
+		expect(radios[1]).toBeChecked(); // One-time 2
+	});
+
+	it('distinguishes cards with identical product and label by reference when clicked', () => {
+		// When duplicates are fully identical (same product AND label), value
+		// comparison cannot tell them apart — selection after a click must
+		// follow the clicked card only.
+		const identicalCards: Array<
+			ChoiceCard & { defaultExpanded?: boolean }
+		> = [
+			{
+				product: { supportTier: 'OneOff' },
+				label: 'One-time',
+				isDefault: true,
+				benefits: [
+					{ copy: 'We welcome support of any size, any time' },
+				],
+			},
+			{
+				product: { supportTier: 'OneOff' },
+				label: 'One-time',
+				isDefault: false,
+				benefits: [
+					{ copy: 'We welcome support of any size, any time' },
+				],
+			},
+		];
+
+		const TestComponent = () => {
+			const [selectedChoiceCard, setSelectedChoiceCard] = useState<
+				ChoiceCard | undefined
+			>(identicalCards[0]);
+
+			return (
+				<ThreeTierChoiceCards
+					selectedChoiceCard={selectedChoiceCard}
+					setSelectedChoiceCard={setSelectedChoiceCard}
+					choices={identicalCards}
+					id="banner"
+				/>
+			);
+		};
+
+		render(<TestComponent />);
+
+		const radios = screen.getAllByRole('radio');
+		expect(radios).toHaveLength(2);
+		const [firstRadio, secondRadio] = radios as [HTMLElement, HTMLElement];
+		expect(firstRadio).toBeChecked();
+		expect(secondRadio).not.toBeChecked();
+
+		fireEvent.click(secondRadio);
+		expect(secondRadio).toBeChecked();
+		expect(firstRadio).not.toBeChecked();
+	});
 });
