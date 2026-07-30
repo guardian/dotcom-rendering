@@ -150,6 +150,11 @@ export const StandardLayoutArticleGrid = ({
 		'model.dotcomrendering.pageElements.ImageBlockElement'
 			? mainMedia.media.allImages[0]?.url
 			: undefined;
+	const mainMediaAspectRatio =
+		mainMedia?._type ===
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+			? mainMedia.media.allImages[0]?.fields.aspectRatio
+			: undefined;
 
 	const mainMediaOrientation =
 		mainMediaUrl != null ? getImageOrientation(mainMediaUrl) : 'landscape';
@@ -207,18 +212,13 @@ export const StandardLayoutArticleGrid = ({
 				isImmersiveLandscape &&
 					css`
 						${from.desktop} {
-							grid-template-rows: auto auto ${ageWarning
+							grid-template-rows: auto auto ${ageWarning != null
 									? '130px'
 									: '90px'} auto auto auto auto auto;
 							${grid.centreRule(
-								isImmersivePortrait
-									? 4
-									: isImmersiveLandscape
-										? layoutType ===
-											'immersiveLandscapeFeature'
-											? 3
-											: 4
-										: 1,
+								layoutType === 'immersiveLandscapeFeature'
+									? 3
+									: 4,
 							)}
 						}
 					`,
@@ -228,11 +228,16 @@ export const StandardLayoutArticleGrid = ({
 				area="media"
 				layoutType={layoutType}
 				css={
-					isImmersiveLandscape
+					isImmersive
 						? css`
+								align-self: start;
+								${mainMediaAspectRatio != null &&
+								`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
+
 								${from.desktop} {
-									margin-left: -20px;
-									margin-right: -20px;
+									${isImmersiveLandscape &&
+									`margin-left: -20px;
+									margin-right: -20px;`}
 								}
 							`
 						: undefined
