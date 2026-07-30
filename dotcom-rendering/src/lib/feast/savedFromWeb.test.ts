@@ -33,7 +33,7 @@ describe('savedFromWeb', () => {
 			const [url]: [string] = (global.fetch as jest.Mock).mock.calls[0];
 			expect(
 				url.startsWith(
-					'https://recipes.code.dev-guardianapis.com/v2/saved-from-web',
+					'https://recipes.code.dev-guardianapis.com/persist/v2/saved-from-web',
 				),
 			).toBe(true);
 		});
@@ -54,7 +54,7 @@ describe('savedFromWeb', () => {
 			const [url]: [string] = (global.fetch as jest.Mock).mock.calls[0];
 			expect(
 				url.startsWith(
-					'https://recipes.guardianapis.com/v2/saved-from-web',
+					'https://recipes.guardianapis.com/persist/v2/saved-from-web',
 				),
 			).toBe(true);
 		});
@@ -73,7 +73,7 @@ describe('savedFromWeb', () => {
 
 			const [url]: [string] = (global.fetch as jest.Mock).mock.calls[0];
 			expect(url).toBe(
-				'https://recipes.code.dev-guardianapis.com/v2/saved-from-web?ids=recipe-a%2Crecipe-b',
+				'https://recipes.code.dev-guardianapis.com/persist/v2/saved-from-web?ids=recipe-a%2Crecipe-b',
 			);
 		});
 
@@ -206,7 +206,7 @@ describe('savedFromWeb', () => {
 				global.fetch as jest.Mock
 			).mock.calls[0];
 			expect(url).toBe(
-				'https://recipes.code.dev-guardianapis.com/v2/saved-from-web/recipe-1',
+				'https://recipes.code.dev-guardianapis.com/persist/v2/saved-from-web/recipe-1',
 			);
 			expect(requestInit?.method).toBe('PUT');
 		});
