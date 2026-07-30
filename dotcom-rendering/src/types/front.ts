@@ -193,6 +193,7 @@ export type EditorialTest = {
 export type EditorialAbTest = {
 	testUuid: string;
 	expiryDate?: number;
+	variantMeta: VariantMeta[];
 	frontsThisTestCanRunOn: string[];
 	hasManuallyEndedOnThisTrail: boolean;
 };
