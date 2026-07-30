@@ -3,7 +3,7 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import { adSizes, type SizeMapping } from '@guardian/commercial-core';
+import { adSizes } from '@guardian/commercial-core';
 import type { CountryCode } from '@guardian/libs';
 import { isUndefined } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
@@ -239,14 +239,11 @@ export const SlotBodyEnd = ({
 			pickMessageResult?.type === 'NoMessageSelected' &&
 			showArticleEndSlot
 		) {
-			const additionalSizes = (): SizeMapping => {
-				return { mobile: [adSizes.fluid] }; // Public Good additional ad slot sizes
-			};
 			document.dispatchEvent(
 				new CustomEvent('gu.commercial.slot.fill', {
 					detail: {
 						slotId: 'dfp-ad--article-end',
-						additionalSizes: additionalSizes(),
+						additionalSizes: { mobile: [adSizes.fluid] }, // Public Good additional ad slot sizes
 					},
 				}),
 			);
