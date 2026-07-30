@@ -160,6 +160,13 @@ export const StandardLayoutArticleGrid = ({
 					contentType={article.contentType}
 					contentLayout={`${ArticleDisplay[format.display]}Layout`}
 				/>
+				{!!article.affiliateLinksDisclaimer && (
+					<AffiliateDisclaimer
+						cssOverrides={css`
+							margin: ${space[4]}px 0;
+						`}
+					/>
+				)}
 			</GridItem>
 			<GridItem area="title" layoutType={layoutType} element="aside">
 				<ArticleTitle
@@ -244,9 +251,6 @@ export const StandardLayoutArticleGrid = ({
 								shortUrlId={article.config.shortUrlId}
 								mainMediaElements={article.mainMediaElements}
 							/>
-							{!!article.affiliateLinksDisclaimer && (
-								<AffiliateDisclaimer />
-							)}
 						</Hide>
 					</>
 				) : (
@@ -269,9 +273,6 @@ export const StandardLayoutArticleGrid = ({
 							mainMediaElements={article.mainMediaElements}
 							webPublicationDate={article.webPublicationDate}
 						/>
-						{!!article.affiliateLinksDisclaimer && (
-							<AffiliateDisclaimer />
-						)}
 					</>
 				)}
 			</GridItem>

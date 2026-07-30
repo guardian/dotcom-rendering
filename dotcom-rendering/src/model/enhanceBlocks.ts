@@ -12,7 +12,6 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
-import { enhanceDisclaimer } from './enhance-disclaimer';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
@@ -99,7 +98,6 @@ export const enhanceElements =
 				options.renderingTarget,
 				options.shouldHideAds,
 			),
-			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer, isNested),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,
