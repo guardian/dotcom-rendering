@@ -32,6 +32,7 @@ import {
 } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
+import { getZIndex } from '../lib/getZIndex';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
 import { palette as themePalette } from '../palette';
@@ -260,7 +261,7 @@ export const StandardLayoutArticleGrid = ({
 				layoutType={layoutType}
 				element="aside"
 				css={css`
-					z-index: 100;
+					z-index: ${getZIndex('articleHeadline')};
 				`}
 			>
 				<ArticleTitle
@@ -277,6 +278,9 @@ export const StandardLayoutArticleGrid = ({
 				area="headline"
 				layoutType={layoutType}
 				css={[
+					css`
+						z-index: ${getZIndex('articleHeadline')};
+					`,
 					layoutType === 'immersivePortraitDefault' ||
 					layoutType === 'immersivePortraitFeature'
 						? css`
@@ -287,9 +291,7 @@ export const StandardLayoutArticleGrid = ({
 										${themePalette('--article-border')};
 								}
 							`
-						: css`
-								z-index: 20;
-							`,
+						: undefined,
 					isImmersiveLandscape &&
 						css`
 							${from.desktop} {
@@ -455,7 +457,7 @@ export const StandardLayoutArticleGrid = ({
 				area="body"
 				layoutType={layoutType}
 				css={css`
-					z-index: 20;
+					z-index: ${getZIndex('bodyArea')};
 				`}
 			>
 				{/* Only show Listen to Article button on App landscape views */}
