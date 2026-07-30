@@ -23,7 +23,26 @@ const enhanceFront = (body: unknown): Front => {
 	const data: FEFront = validateAsFEFront(body);
 
 	const serverTime = Date.now();
-
+	const mockedEditorialAbTests = [
+		{
+			testUuid: '123',
+			expiryDate: Date.now() - 10 * 60 * 1000, // ten mins ago,
+			frontsThisTestCanRunOn: ['US'],
+			hasManuallyEndedOnThisTrail: false,
+		},
+		{
+			testUuid: '456',
+			expiryDate: Date.now() + 10 * 60 * 1000, // ten mins in the future,
+			frontsThisTestCanRunOn: ['UK'],
+			hasManuallyEndedOnThisTrail: false,
+		},
+		{
+			testUuid: '789',
+			expiryDate: Date.now() + 60 * 60 * 1000, // an hour in the future,
+			frontsThisTestCanRunOn: ['US'],
+			hasManuallyEndedOnThisTrail: true,
+		},
+	];
 	const collections = enhanceCollections({
 		collections: data.pressedPage.collections,
 		editionId: data.editionId,
@@ -54,6 +73,7 @@ const enhanceFront = (body: unknown): Front => {
 		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
 		canonicalUrl: data.canonicalUrl,
 		serverTime,
+		editorialAbTests: mockedEditorialAbTests,
 	};
 };
 
