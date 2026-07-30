@@ -7,7 +7,7 @@
 const FEAST_API_BASE_URL_PROD = 'https://recipes.guardianapis.com';
 const FEAST_API_BASE_URL_CODE = 'https://recipes.code.dev-guardianapis.com';
 
-const FEAST_SAVED_RECIPES_PATH = '/v2/saved-from-web';
+const FEAST_SAVED_RECIPES_PATH = '/persist/v2/saved-from-web';
 
 const getFeastApiBaseUrl = (): string =>
 	window.guardian.config.stage === 'PROD'
