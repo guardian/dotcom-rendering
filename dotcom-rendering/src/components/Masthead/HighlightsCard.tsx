@@ -61,17 +61,21 @@ const container = css`
 	${until.mobileMedium} {
 		min-height: 174px;
 	}
+
 	${between.mobileMedium.and.tablet} {
 		min-height: 194px;
 	}
+
 	${from.tablet} {
 		width: 160px;
 		padding: 10px 10px 0 10px;
 	}
+
 	${from.tablet} {
 		width: 280px;
 		flex-direction: row;
 	}
+
 	${from.desktop} {
 		width: 300px;
 	}
@@ -90,11 +94,13 @@ const hoverStyles = css`
 		width: 100%;
 		background-color: ${palette('--card-background-hover')};
 	}
+
 	:hover .circular {
 		border-radius: 100%;
 	}
 
 	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
+
 	:hover .card-headline .show-underline {
 		text-decoration: underline;
 	}
@@ -113,6 +119,7 @@ const content = css`
 	 * We're deliberately using a font-size that is not in Source so that
 	 * the headline doesn't exceed three lines across all mobile breakpoints
 	 */
+
 	${between.mobileMedium.and.mobileLandscape} {
 		.headline-text {
 			font-size: 1rem;
@@ -152,8 +159,6 @@ export const HighlightsCard = ({
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
 					isExternalLink={isExternalLink}
-					isLoopAndInLoopClickTest={false}
-					shouldRaiseZIndexForAbTest={false}
 				/>
 
 				<div css={[content, shouldJustifyContent && spaceBetween]}>

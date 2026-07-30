@@ -35,7 +35,6 @@ type Props = {
 	mediaPositionOnMobile: MediaPositionType;
 	isSmallCard: boolean;
 	padMedia?: boolean;
-	isLoopAndInLoopClickTestVariant?: boolean;
 };
 
 const mediaOverlayContainerStyles = css`
@@ -177,7 +176,6 @@ export const MediaWrapper = ({
 	mediaPositionOnMobile,
 	isSmallCard,
 	padMedia,
-	isLoopAndInLoopClickTestVariant,
 }: Props) => {
 	const isHorizontalOnMobile =
 		mediaPositionOnMobile === 'left' || mediaPositionOnMobile === 'right';
@@ -239,9 +237,7 @@ export const MediaWrapper = ({
 			<>
 				{children}
 				{/* This overlay is styled when the CardLink is hovered */}
-				{(mediaType === 'picture' ||
-					mediaType === 'cinemagraph' ||
-					isLoopAndInLoopClickTestVariant == true) && (
+				{(mediaType === 'picture' || mediaType === 'cinemagraph') && (
 					<div
 						css={[
 							mediaOverlayContainerStyles,

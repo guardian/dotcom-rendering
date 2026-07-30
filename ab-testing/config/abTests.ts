@@ -134,19 +134,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "fronts-and-curation-loop-click-through",
-		description:
-			"Test impact of click to article via loop videos on fronts",
-		owners: ["fronts.and.curation@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2026-07-19",
-		type: "server",
-		audienceSize: 5 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "fronts-and-curation-click-to-play",
 		description: "Test click to play longform videos vs autoplay",
 		owners: ["fronts.and.curation@guardian.co.uk"],

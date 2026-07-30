@@ -313,12 +313,6 @@ type Props = {
 	role?: RoleType;
 	preventAutoplay: boolean;
 	restrictHeightOnDesktop?: boolean;
-	cardLink?: {
-		headlineText: string;
-		dataLinkName?: string;
-		isExternalLink: boolean;
-	};
-	isInLoopClickTestVariant?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -349,8 +343,6 @@ export const SelfHostedVideo = ({
 	role,
 	preventAutoplay,
 	restrictHeightOnDesktop = false,
-	cardLink,
-	isInLoopClickTestVariant,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -394,9 +386,6 @@ export const SelfHostedVideo = ({
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
-
-	const isLoopClickThroughTestVariant =
-		videoStyle === 'Loop' && isInLoopClickTestVariant;
 
 	/**
 	 * The video will autoplay if all of the following are true:
@@ -1165,11 +1154,6 @@ export const SelfHostedVideo = ({
 						isInteractive={videoStyleSettings.isInteractive}
 						isFullscreen={isFullscreen}
 						isWebKitFullscreen={isWebKitFullscreen}
-						linkTo={linkTo}
-						cardLink={cardLink}
-						isLoopAndInLoopClickTestVariant={Boolean(
-							isLoopClickThroughTestVariant,
-						)}
 					/>
 				</div>
 			</div>
