@@ -216,9 +216,9 @@ describe('ThreeTierChoiceCards', () => {
 		// inner Radio label), so labelFors may repeat a valid id.
 		const labels = document.querySelectorAll('label[for]');
 		const labelFors = Array.from(labels).map((l) => l.getAttribute('for'));
-		labelFors.forEach((forAttr) => {
+		for (const forAttr of labelFors) {
 			expect(ids).toContain(forAttr);
-		});
+		}
 		expect(new Set(labelFors)).toEqual(new Set(ids));
 
 		// Only the default (card 1) is checked initially; card 2 is not
