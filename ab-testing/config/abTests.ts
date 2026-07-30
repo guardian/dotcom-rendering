@@ -70,19 +70,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-mobile-sticky-liveblog-us",
-		description:
-			"Holdback test, where variant is the 'holdback' group, to measure uplift in adding the mobile-sticky slot for Liveblogs articles in the US.",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-07-22",
-		type: "client",
-		status: "ON",
-		audienceSize: 5 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "newsletters-in-article-signup-preview",
 		description:
 			"Test in-article newsletter signup with illustrated preview CTA vs without preview CTA",
@@ -101,7 +88,7 @@ const ABTests: ABTest[] = [
 			"Test impact of click to article via loop videos on fronts",
 		owners: ["fronts.and.curation@guardian.co.uk"],
 		status: "ON",
-		expirationDate: "2026-07-19",
+		expirationDate: "2026-09-19",
 		type: "server",
 		audienceSize: 5 / 100,
 		audienceSpace: "A",
@@ -113,7 +100,7 @@ const ABTests: ABTest[] = [
 		description: "Test click to play longform videos vs autoplay",
 		owners: ["fronts.and.curation@guardian.co.uk"],
 		status: "OFF",
-		expirationDate: "2026-07-28",
+		expirationDate: "2026-09-28",
 		type: "server",
 		audienceSize: 0 / 100,
 		groups: ["control", "variant"],
