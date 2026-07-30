@@ -225,6 +225,7 @@ export const PuzzleArchiveCalendar = ({
 		year: 'numeric',
 		timeZone: 'UTC',
 	});
+	const archiveMonth = `${year}-${String(month + 1).padStart(2, '0')}`;
 
 	return (
 		<div css={calendarContentStyles}>
@@ -314,7 +315,7 @@ export const PuzzleArchiveCalendar = ({
 										' ',
 									)}`}
 									css={dayStyles(status, isToday, false)}
-									href={`/puzzles/${puzzleSlug}?date=${date}`}
+									href={`/puzzles/${puzzleSlug}?date=${date}#archiveMonth=${archiveMonth}`}
 								>
 									{day}
 								</a>

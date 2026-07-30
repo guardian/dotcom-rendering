@@ -38,8 +38,9 @@ const copyStyles = css`
 const getIframeHeights = (
 	puzzlePage: FEPuzzleIframePageType,
 ): { mobile: number; desktop: number } => {
-	if (puzzlePage.puzzle.slug === 'wordiply')
+	if (puzzlePage.puzzle.slug === 'wordiply') {
 		return { mobile: 1200, desktop: 1400 };
+	}
 	return { mobile: 760, desktop: 900 };
 };
 
