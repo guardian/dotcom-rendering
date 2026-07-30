@@ -221,26 +221,12 @@ export const StandardLayoutArticleGrid = ({
 							)}
 						}
 					`,
-				isImmersivePortrait &&
-					css`
-						${from.desktop} {
-							grid-template-rows: 0.25fr 1fr auto;
-						}
-					`,
-				isImmersiveLandscape &&
-					css`
-						${from.desktop} {
-							grid-template-rows: auto auto ${ageWarning
-									? '130px'
-									: '90px'} auto auto auto auto auto;
-						}
-					`,
 			]}
 		>
 			<GridItem
 				area="media"
 				layoutType={layoutType}
-				css={[
+				css={
 					isImmersiveLandscape
 						? css`
 								${from.desktop} {
@@ -248,14 +234,8 @@ export const StandardLayoutArticleGrid = ({
 									margin-right: -20px;
 								}
 							`
-						: undefined,
-					// Force portrait aspect ratio for local dev purposes
-					isImmersivePortrait
-						? css`
-								aspect-ratio: 4 / 5;
-							`
-						: undefined,
-				]}
+						: undefined
+				}
 			>
 				<MainMedia
 					format={format}
