@@ -269,7 +269,7 @@ export const ThreeTierChoiceCards = ({
 				`}
 			>
 				<Stack space={3}>
-					{choices.map((card) => {
+					{choices.map((card, index) => {
 						const {
 							product,
 							label,
@@ -279,37 +279,27 @@ export const ThreeTierChoiceCards = ({
 						} = card;
 						const { supportTier } = product;
 
-						const isSelected = (): boolean => {
-							if (!selectedChoiceCard) {
-								return false;
-							}
-							if (
-								product.supportTier ===
-								selectedChoiceCard.product.supportTier
-							) {
-								if (
-									product.supportTier !== 'OneOff' &&
-									selectedChoiceCard.product.supportTier !==
-										'OneOff'
-								) {
-									return (
-										product.ratePlan ===
-										selectedChoiceCard.product.ratePlan
-									);
-								} else {
-									return true;
-								}
-							} else {
-								return false;
-							}
-						};
-						const selected = isSelected();
+						// Compare by reference: selectedChoiceCard is always a
+						// stable object taken from this choices array (set via
+						// setSelectedChoiceCard(card) / onChoiceCardChange), so
+						// reference equality correctly identifies the chosen
+						// card even when two cards share the same supportTier
+						// (e.g. two OneOff cards). The previous
+						// supportTier/ratePlan comparison returned true for both
+						// duplicate cards.
+						const selected = card === selectedChoiceCard;
 
+						// Suffix with the array index so every radio gets a
+						// unique id and value even when two cards share the
+						// same supportTier (e.g. two OneOff cards). Without
+						// this, both OneOff cards produced
+						// id="choicecard-banner-OneOff", breaking <label
+						// htmlFor> association and React keys.
 						const radioId = `choicecard-${id}-${supportTier}${
 							supportTier !== 'OneOff'
 								? `-${product.ratePlan}`
 								: ''
-						}`;
+						}-${index}`;
 
 						const isExpanded =
 							selected ||
@@ -317,7 +307,7 @@ export const ThreeTierChoiceCards = ({
 
 						return (
 							<div
-								key={supportTier}
+								key={radioId}
 								css={css`
 									position: relative;
 									background-color: inherit;
