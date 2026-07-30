@@ -23,6 +23,9 @@ const enhanceFront = (body: unknown): Front => {
 	const data: FEFront = validateAsFEFront(body);
 
 	const serverTime = Date.now();
+	/**
+	 * mocked for spike purposes. In reality, we'd need to extract all tests available across all trails and then flatten into an array with the correct shape.
+	 */
 	const mockedEditorialAbTests = [
 		{
 			testUuid: '123',
