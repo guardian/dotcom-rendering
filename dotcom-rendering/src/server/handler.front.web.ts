@@ -43,6 +43,13 @@ const enhanceFront = (body: unknown): Front => {
 			hasManuallyEndedOnThisTrail: true,
 		},
 	];
+
+	const activeEditorialAbTests = mockedEditorialAbTests.filter(
+		(test) =>
+			!test.hasManuallyEndedOnThisTrail &&
+			(!test.expiryDate || test.expiryDate > Date.now()),
+	);
+
 	const collections = enhanceCollections({
 		collections: data.pressedPage.collections,
 		editionId: data.editionId,
@@ -73,7 +80,7 @@ const enhanceFront = (body: unknown): Front => {
 		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
 		canonicalUrl: data.canonicalUrl,
 		serverTime,
-		editorialAbTests: mockedEditorialAbTests,
+		editorialAbTests: activeEditorialAbTests,
 	};
 };
 
