@@ -52,7 +52,7 @@ const feFootballPlayerSchema = object({
 	timeOnPitch: string(),
 	shirtNumber: string(),
 	events: array(feFootballPlayerEventSchema),
-	eventsEnhanced: array(feFootballPlayerEventEnhancedSchema),
+	enhancedEvents: array(feFootballPlayerEventEnhancedSchema),
 });
 
 export type FEFootballPlayer = Output<typeof feFootballPlayerSchema>;

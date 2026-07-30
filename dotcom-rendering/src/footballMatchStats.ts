@@ -153,7 +153,7 @@ const parseSubstitutions = listParse(parseSubstitution);
 const parseFootballPlayer = (
 	feFootballMatchPlayer: FEFootballPlayer,
 ): Result<ParserError, FootballPlayer> =>
-	parseEvents(feFootballMatchPlayer.eventsEnhanced).flatMap((events) =>
+	parseEvents(feFootballMatchPlayer.enhancedEvents).flatMap((events) =>
 		parseIntResult(feFootballMatchPlayer.shirtNumber)
 			.mapError<ParserError>((message) => ({
 				kind: 'FootballInvalidShirtNumber',
@@ -173,10 +173,12 @@ const parsePlayers = listParse(parseFootballPlayer);
 
 const parseTeamWithStats = (
 	feFootballMatchTeam: FEFootballTeam,
-): Result<ParserError, FootballMatchTeamWithStats> =>
-	parseSubstitutions(feFootballMatchTeam.substitutions).flatMap(
-		(substitutions) =>
-			parsePlayers(feFootballMatchTeam.players).map((players) => ({
+): Result<ParserError, FootballMatchTeamWithStats> => {
+	// console.log(JSON.stringify(feFootballMatchTeam.players, null, 2));
+	return parseSubstitutions(feFootballMatchTeam.substitutions).flatMap(
+		(substitutions) => {
+			// console.log(substitutions);
+			return parsePlayers(feFootballMatchTeam.players).map((players) => ({
 				paID: feFootballMatchTeam.id,
 				name: cleanTeamName(feFootballMatchTeam.name),
 				abbreviatedName: feFootballMatchTeam.codename,
@@ -188,8 +190,10 @@ const parseTeamWithStats = (
 				players,
 				statsColour: feFootballMatchTeam.colours,
 				substitutions,
-			})),
+			}));
+		},
 	);
+};
 
 export const parseMatchStats = (
 	feFootballMatch: FEFootballMatchStats,

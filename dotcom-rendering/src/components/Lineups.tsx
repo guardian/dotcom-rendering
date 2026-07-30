@@ -81,11 +81,13 @@ const Event = ({
 	type,
 	time,
 	substitutions,
+	isSubstitute,
 }: {
 	eventId: string;
 	type: 'substitution' | 'dismissal' | 'booking';
 	time: string;
 	substitutions: Substitution[];
+	isSubstitute: boolean;
 }) => {
 	switch (type) {
 		case 'dismissal':
@@ -104,7 +106,7 @@ const Event = ({
 					aria-label="Yellow Card"
 				/>
 			);
-		case 'substitution':
+		case 'substitution': {
 			const substitutionEvent = substitutions.find(
 				(substitution) => substitution.eventId === eventId,
 			);
@@ -118,9 +120,10 @@ const Event = ({
 					css={substitute}
 				>
 					<Union />
-					{playerSubstitutedIn} {time}&apos;
+					{!isSubstitute && playerSubstitutedIn} {time}&apos;
 				</span>
 			);
+		}
 	}
 };
 
@@ -169,6 +172,7 @@ const PlayerList = ({
 								type={event.kind}
 								time={event.minute.toString()}
 								substitutions={team.substitutions}
+								isSubstitute={isSubstitute}
 							/>
 						))}
 					</li>
