@@ -98,10 +98,10 @@ export class ABTests implements ABTestAPI {
 		return (
 			this.editorialParticipations?.reduce<OphanABPayload>(
 				(eventLog, test) => {
-					eventLog[test.testUuid] = makeABEvent(
-						'editorial test',
-						false,
-					);
+					const variantId = test.variantMeta[0]?.id;
+
+					if (!variantId) return eventLog;
+					eventLog[test.testUuid] = makeABEvent(variantId, false);
 					return eventLog;
 				},
 				{},
