@@ -398,7 +398,6 @@ export const StandardLayoutArticleGrid = ({
 						<Hide from="leftCol">
 							<ArticleMetaApps
 								branding={branding}
-								layoutType={layoutType}
 								format={format}
 								byline={article.byline}
 								tags={article.tags}

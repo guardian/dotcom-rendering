@@ -315,7 +315,7 @@ export const ArticleMeta = ({
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
 
-	const avatarUrl = shouldShowAvatar(format, layoutType)
+	const avatarUrl = shouldShowAvatar(format)
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
