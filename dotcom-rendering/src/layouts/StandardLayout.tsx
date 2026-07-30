@@ -172,7 +172,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<div id="article">
 					<StandardLayoutArticleGrid
 						article={article}
-						contentLayoutName={contentLayoutName}
 						format={format}
 						renderingTarget={renderingTarget}
 					/>

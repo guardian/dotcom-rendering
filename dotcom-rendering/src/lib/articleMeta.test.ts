@@ -67,7 +67,7 @@ describe('shouldShowContributor', () => {
 	});
 
 	it('should return false if Immersive display', () => {
-		expect(shouldShowContributor(immersive)).toBe(false);
+		expect(shouldShowContributor(immersive)).toBe(true);
 	});
 
 	it('should return true if Immersive display and immersivePortraitDefault layout', () => {

@@ -331,7 +331,7 @@ export const ArticleMetaApps = ({
 					</MetaGridAvatar>
 				)}
 				<MetaGridByline isComment={isComment}>
-					{shouldShowContributor(format, layoutType) && !!byline && (
+					{shouldShowContributor(format) && !!byline && (
 						<Contributor
 							byline={byline}
 							tags={tags}

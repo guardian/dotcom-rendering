@@ -39,23 +39,11 @@ export const shouldShowAvatar = (
 	}
 };
 
-export const shouldShowContributor = (
-	format: ArticleFormat,
-	layoutType?: LayoutType,
-): boolean => {
+export const shouldShowContributor = (format: ArticleFormat): boolean => {
 	switch (format.display) {
 		case ArticleDisplay.NumberedList:
 			return true;
 		case ArticleDisplay.Immersive:
-			switch (layoutType) {
-				case 'immersivePortraitDefault':
-				case 'immersivePortraitFeature':
-				case 'immersiveLandscapeDefault':
-				case 'immersiveLandscapeFeature':
-					return true;
-				default:
-					return false;
-			}
 		case ArticleDisplay.Showcase:
 		case ArticleDisplay.Standard: {
 			switch (format.design) {

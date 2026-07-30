@@ -98,12 +98,10 @@ const GridItem = ({
 
 export const StandardLayoutArticleGrid = ({
 	article,
-	contentLayoutName,
 	format,
 	renderingTarget,
 }: {
 	article: ArticleDeprecated;
-	contentLayoutName: string;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }) => {
@@ -330,7 +328,6 @@ export const StandardLayoutArticleGrid = ({
 						article.webPublicationDateDeprecated
 					}
 					starRating={article.starRating}
-					isInverted={layoutType === 'immersiveLandscapeDefault'}
 				/>
 			</GridItem>
 			<GridItem

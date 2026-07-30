@@ -399,7 +399,7 @@ export const ArticleMeta = ({
 								/>
 							)}
 
-							{shouldShowContributor(format, layoutType) && (
+							{shouldShowContributor(format) && (
 								<Contributor
 									byline={byline}
 									tags={tags}
@@ -456,7 +456,7 @@ export const ArticleMeta = ({
 									/>
 								)}
 
-								{shouldShowContributor(format, layoutType) && (
+								{shouldShowContributor(format) && (
 									<Contributor
 										byline={byline}
 										tags={tags}
