@@ -359,9 +359,8 @@ const canInsertDesktopAd = (
 const getDesktopAdPositions = (
 	collections: AdCandidate[],
 	pageId: string,
+	maxAdsAllowed = MAX_FRONTS_BANNER_ADS,
 ): number[] => {
-	const maxAdsAllowed = MAX_FRONTS_BANNER_ADS;
-
 	const adPositionsFromReducer = collections.reduce<{
 		heightSinceAd: number;
 		adPositions: number[];
