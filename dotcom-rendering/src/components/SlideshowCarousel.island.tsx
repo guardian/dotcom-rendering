@@ -22,6 +22,24 @@ import { CardPicture } from './CardPicture';
 import { SlideshowCarouselScrollingDots } from './SlideshowCarouselScrollingDots';
 
 /**
+ * TEMPORARY SPIKE HACK — remove before merging.
+ *
+ * A hardcoded video slide so we can see what mixed media feels like on a real
+ * front locally. It gets injected as the third slide in every slideshow (see
+ * where `SPIKE_VIDEO_SLIDE` is spliced into the slides array below).
+ *
+ * This is the same asset used in the Storybook stories.
+ */
+const SPIKE_VIDEO_SLIDE: DCRSlideshowMedia = {
+	type: 'video',
+	videoSrc:
+		'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+	posterSrc:
+		'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+	caption: 'A self-hosted looping video slide (spike)',
+};
+
+/**
  * Spike helpers for supporting mixed media (images and videos) in a slideshow.
  * A slide is treated as an image unless it is explicitly typed as a video.
  */
@@ -240,7 +258,20 @@ export const SlideshowCarousel = ({
 	/**
 	 * Restrict slideshow to a maximum of 10 slides
 	 */
-	const slides = takeFirst(images, 10);
+	const passedSlides = takeFirst(images, 10);
+
+	/**
+	 * TEMPORARY SPIKE HACK — remove before merging.
+	 *
+	 * Inject the hardcoded video slide as the third slide (index 2) so we can
+	 * preview mixed media on a real front. Falls back to appending if there are
+	 * fewer than two passed slides.
+	 */
+	const slides: readonly DCRSlideshowMedia[] = [
+		...passedSlides.slice(0, 2),
+		SPIKE_VIDEO_SLIDE,
+		...passedSlides.slice(2),
+	];
 	const slideCount = slides.length;
 
 	return (
