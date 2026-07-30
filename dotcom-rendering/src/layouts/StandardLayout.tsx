@@ -380,7 +380,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer data-print-layout="hide" />
+					{renderAds && (
+						<MobileStickyContainer data-print-layout="hide" />
+					)}
 				</>
 			)}
 
