@@ -4,10 +4,12 @@ import { getOphan } from '../client/ophan/ophan';
 import { ABTests } from '../experiments/lib/ab-tests';
 import { isServer } from '../lib/isServer';
 import { setABTests } from '../lib/useAB';
+import type { EditorialAbTest } from '../types/front';
 import { useConfig } from './ConfigContext';
 
 type Props = {
 	serverSideABTests: Record<string, string>;
+	editorialAbTests?: EditorialAbTest[];
 };
 
 const errorReporter = (e: unknown) =>
@@ -27,7 +29,7 @@ const errorReporter = (e: unknown) =>
  *
  * Does not render **anything**.
  */
-export const SetABTests = ({ serverSideABTests }: Props) => {
+export const SetABTests = ({ serverSideABTests, editorialAbTests }: Props) => {
 	const { renderingTarget } = useConfig();
 	const [ophan, setOphan] = useState<Awaited<ReturnType<typeof getOphan>>>();
 
@@ -46,14 +48,15 @@ export const SetABTests = ({ serverSideABTests }: Props) => {
 		const abTests = new ABTests(
 			isServer
 				? {
+						editorialAbTests,
 						serverSideABTests,
 						isServer: true,
 					}
-				: { isServer: false },
+				: { editorialAbTests, isServer: false },
 		);
 		setABTests(abTests);
 		return abTests;
-	}, [serverSideABTests]);
+	}, [serverSideABTests, editorialAbTests]);
 
 	useEffect(() => {
 		if (!ophan) {
