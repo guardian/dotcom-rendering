@@ -62,6 +62,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
+	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
+
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
@@ -159,7 +161,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout={`${ArticleDisplay[format.display]}Layout`}>
+			<main data-layout={contentLayoutName}>
 				{isApps && renderAds && (
 					<Island priority="critical">
 						<AdPortals />
@@ -174,6 +176,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						renderingTarget={renderingTarget}
 					/>
 				</div>
+
 				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}

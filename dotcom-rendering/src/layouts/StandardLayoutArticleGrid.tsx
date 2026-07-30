@@ -209,6 +209,30 @@ export const StandardLayoutArticleGrid = ({
 							grid-template-rows: auto auto ${ageWarning
 									? '130px'
 									: '90px'} auto auto auto auto auto;
+							${grid.centreRule(
+								isImmersivePortrait
+									? 4
+									: isImmersiveLandscape
+										? layoutType ===
+											'immersiveLandscapeFeature'
+											? 3
+											: 4
+										: 1,
+							)}
+						}
+					`,
+				isImmersivePortrait &&
+					css`
+						${from.desktop} {
+							grid-template-rows: 0.25fr 1fr auto;
+						}
+					`,
+				isImmersiveLandscape &&
+					css`
+						${from.desktop} {
+							grid-template-rows: auto auto ${ageWarning
+									? '130px'
+									: '90px'} auto auto auto auto auto;
 						}
 					`,
 			]}
@@ -261,6 +285,7 @@ export const StandardLayoutArticleGrid = ({
 			>
 				<ArticleTitle
 					format={format}
+					layoutType={layoutType}
 					tags={article.tags}
 					sectionLabel={article.sectionLabel}
 					sectionUrl={article.sectionUrl}
@@ -272,7 +297,8 @@ export const StandardLayoutArticleGrid = ({
 				area="headline"
 				layoutType={layoutType}
 				css={[
-					layoutType === 'immersivePortraitDefault'
+					layoutType === 'immersivePortraitDefault' ||
+					layoutType === 'immersivePortraitFeature'
 						? css`
 								${from.desktop} {
 									border-bottom: 1px solid
@@ -294,6 +320,7 @@ export const StandardLayoutArticleGrid = ({
 			>
 				<ArticleHeadline
 					format={format}
+					layoutType={layoutType}
 					headlineString={article.headline}
 					tags={article.tags}
 					byline={article.byline}
@@ -301,7 +328,6 @@ export const StandardLayoutArticleGrid = ({
 						article.webPublicationDateDeprecated
 					}
 					starRating={article.starRating}
-					isInverted={layoutType === 'immersiveLandscapeDefault'}
 				/>
 			</GridItem>
 			<GridItem
@@ -351,7 +377,8 @@ export const StandardLayoutArticleGrid = ({
 						: undefined
 				}
 			>
-				{format.design !== ArticleDesign.Audio &&
+				{format.display !== ArticleDisplay.Immersive &&
+					format.design !== ArticleDesign.Audio &&
 					layoutType !== 'immersivePortraitDefault' && (
 						<div css={stretchLines}>
 							{isWeb &&
@@ -371,6 +398,7 @@ export const StandardLayoutArticleGrid = ({
 						<Hide from="leftCol">
 							<ArticleMetaApps
 								branding={branding}
+								layoutType={layoutType}
 								format={format}
 								byline={article.byline}
 								tags={article.tags}
@@ -391,6 +419,7 @@ export const StandardLayoutArticleGrid = ({
 						<Hide until="leftCol">
 							<ArticleMeta
 								branding={branding}
+								layoutType={layoutType}
 								format={format}
 								pageId={article.pageId}
 								webTitle={article.webTitle}
@@ -420,6 +449,7 @@ export const StandardLayoutArticleGrid = ({
 					<>
 						<ArticleMeta
 							branding={branding}
+							layoutType={layoutType}
 							format={format}
 							pageId={article.pageId}
 							webTitle={article.webTitle}

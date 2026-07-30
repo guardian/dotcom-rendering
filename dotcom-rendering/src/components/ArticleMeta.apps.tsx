@@ -4,6 +4,7 @@ import { from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
 import { grid } from '../grid';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -36,6 +37,7 @@ import { PodcastMeta } from './PodcastMeta';
 
 type Props = {
 	format: ArticleFormat;
+	layoutType?: LayoutType;
 	byline?: string;
 	tags: TagType[];
 	primaryDateline: string;
@@ -242,6 +244,7 @@ const galleryMetaContainer = css`
 export const ArticleMetaApps = ({
 	branding,
 	format,
+	layoutType,
 	byline,
 	tags,
 	primaryDateline,
@@ -255,7 +258,7 @@ export const ArticleMetaApps = ({
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
-	const avatarUrl = shouldShowAvatar(format)
+	const avatarUrl = shouldShowAvatar(format, layoutType)
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
 

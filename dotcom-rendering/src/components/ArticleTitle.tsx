@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -11,8 +12,9 @@ import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
 	format: ArticleFormat;
-	tags: TagType[];
+	layoutType?: LayoutType;
 	sectionLabel: string;
+	tags: TagType[];
 	sectionUrl: string;
 	guardianBaseURL: string;
 	isMatch?: boolean;
@@ -51,6 +53,7 @@ const galleryStyles = css`
 
 export const ArticleTitle = ({
 	format,
+	layoutType,
 	tags,
 	sectionLabel,
 	sectionUrl,
@@ -74,6 +77,7 @@ export const ArticleTitle = ({
 		>
 			<SeriesSectionLink
 				format={format}
+				layoutType={layoutType}
 				tags={tags}
 				sectionLabel={sectionLabel}
 				sectionUrl={sectionUrl}
