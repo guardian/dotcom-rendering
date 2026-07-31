@@ -5,6 +5,7 @@ const platformHostnames = [
 	'code.dev-theguardian.com',
 	'm.code.dev-theguardian.com',
 	// PROD
+	'theguardian.com',
 	'www.theguardian.com',
 ];
 
