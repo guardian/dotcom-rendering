@@ -20,19 +20,6 @@ export interface CommercialConfigType {
 	hasSurveyAd?: boolean;
 }
 
-/**
- * Narrowest representation of the server-side tests
- * object shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).
- *
- * **Note:** This type is not support by JSON-schema, it evaluates as `object`
- */
-export type ServerSideTests = {
-	[key: `${string}Variant`]: 'variant';
-	[key: `${string}Control`]: 'control';
-};
-
-export type ServerSideTestNames = keyof ServerSideTests;
-
 export interface Switches {
 	[key: string]: boolean | undefined;
 }
@@ -44,7 +31,6 @@ export interface Switches {
  * this data could eventually be defined in dotcom-rendering
  */
 export interface ConfigType extends CommercialConfigType, LegacyConfig {
-	abTests: ServerSideTests;
 	adUnit: string;
 	ajaxUrl: string;
 	brazeApiKey?: string;

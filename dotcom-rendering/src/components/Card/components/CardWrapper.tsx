@@ -13,6 +13,7 @@ type Props = {
 	showTopBarMobile: boolean;
 	containerPalette?: DCRContainerPalette;
 	topBarColour?: string;
+	isLoopAndInLoopClickTestVariant?: boolean;
 };
 
 const baseCardStyles = css`
@@ -41,7 +42,7 @@ const baseCardStyles = css`
 	text-decoration: none;
 `;
 
-const hoverStyles = css`
+const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 	:hover .media-overlay {
 		width: 100%;
 		height: 100%;
@@ -59,7 +60,11 @@ const hoverStyles = css`
 	*/
 	:has(
 		ul.sublinks:hover,
-		.video-container:not(.cinemagraph):hover,
+		.video-container:not(
+				${isLoopAndInLoopClickTestVariant
+					? `.cinemagraph, .loop`
+					: `.cinemagraph`}
+			):hover,
 		.slideshow-carousel-footer:hover,
 		.branding-logo:hover
 	) {
@@ -100,6 +105,7 @@ export const CardWrapper = ({
 	showTopBarMobile,
 	containerPalette,
 	topBarColour = palette('--card-border-top'),
+	isLoopAndInLoopClickTestVariant,
 }: Props) => {
 	return (
 		<FormatBoundary format={format}>
@@ -107,7 +113,7 @@ export const CardWrapper = ({
 				<div
 					css={[
 						baseCardStyles,
-						hoverStyles,
+						hoverStyles(isLoopAndInLoopClickTestVariant === true),
 						showTopBarDesktop && desktopTopBarStyles(topBarColour),
 						showTopBarMobile && mobileTopBarStyles(topBarColour),
 					]}

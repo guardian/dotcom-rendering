@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Automatically copy over required settings for vscode
 if [ ! -f .vscode/settings.json ] ;

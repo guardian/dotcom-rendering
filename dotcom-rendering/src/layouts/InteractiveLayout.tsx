@@ -336,7 +336,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										ajaxUrl={article.config.ajaxUrl}
-										abTests={article.config.abTests}
 										switches={article.config.switches}
 										isAdFreeUser={article.isAdFreeUser}
 										isSensitive={article.config.isSensitive}
@@ -495,7 +494,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										ajaxUrl={article.config.ajaxUrl}
-										abTests={article.config.abTests}
 										switches={article.config.switches}
 										isSensitive={article.config.isSensitive}
 										isAdFreeUser={article.isAdFreeUser}
@@ -810,11 +808,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer
-						data-print-layout="hide"
-						contentType={article.contentType}
-						pageId={article.pageId}
-					/>
+					{renderAds && (
+						<MobileStickyContainer data-print-layout="hide" />
+					)}
 				</>
 			)}
 			{isApps && (

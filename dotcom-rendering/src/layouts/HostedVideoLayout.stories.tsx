@@ -1,3 +1,4 @@
+import { hostedPaletteDecorator } from '../../.storybook/decorators/themeDecorator';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { hostedVideo } from '../../fixtures/manual/hostedVideo';
@@ -20,20 +21,20 @@ const mockOnwardsContentFetch = customMockFetch([
 	},
 ]);
 
+const { hostedCampaignColour = '' } =
+	hostedVideo.commercialProperties.UK.branding ?? {};
+
 const meta = preview.meta({
 	title: 'Layouts/HostedVideo',
 	component: HostedVideoLayout,
 	parameters: {
-		chromatic: {
-			modes: {
-				'light leftCol': allModes['light leftCol'],
-			},
-		},
+		config: { darkModeAvailable: true },
 	},
 	render: (args) => {
 		global.fetch = mockOnwardsContentFetch;
 		return <HostedVideoLayout {...args} />;
 	},
+	decorators: hostedPaletteDecorator(hostedCampaignColour),
 });
 
 const format = {
@@ -55,7 +56,7 @@ export const Apps = meta.story({
 		},
 		chromatic: {
 			modes: {
-				'light mobileMedium': allModes['light mobileMedium'],
+				'vertical mobileMedium': allModes['vertical mobileMedium'],
 			},
 		},
 	},
@@ -70,6 +71,11 @@ export const Web = meta.story({
 	parameters: {
 		config: {
 			renderingTarget: 'Web',
+		},
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
 		},
 	},
 });

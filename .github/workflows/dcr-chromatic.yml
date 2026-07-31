@@ -1,6 +1,8 @@
 name: DCR Chromatic 👓
 
 on:
+  merge_group:
+    types: [checks_requested]
   push:
     branches: [main]
   pull_request:
@@ -29,14 +31,14 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Checkout - On Push Event
         uses: actions/checkout@v6
-        if: ${{ github.event_name == 'push'}}
+        if: ${{ github.event_name == 'push' || github.event_name == 'merge_group' }}
         with:
           fetch-depth: 0
 
       - name: Set up Node environment
         # Only needed for a full Chromatic run.
         if: |
-          github.ref == 'refs/heads/main' ||
+          (github.event_name == 'push' || github.event_name == 'merge_group') ||
           (github.event_name == 'pull_request' &&
             contains(github.event.pull_request.labels.*.name, 'run_chromatic'))
         uses: ./.github/actions/setup-node-env
@@ -49,7 +51,7 @@ jobs:
           NODE_OPTIONS: '--max_old_space_size=4096'
         uses: chromaui/action@v17.4.1
         if: |
-          github.ref == 'refs/heads/main' ||
+          (github.event_name == 'push' || github.event_name == 'merge_group') ||
           (github.event_name == 'pull_request' &&
             contains(github.event.pull_request.labels.*.name, 'run_chromatic')) ||
           (github.event_name == 'pull_request' && needs.check-paths.outputs.relevant != 'true')
@@ -69,7 +71,7 @@ jobs:
   remove-label:
     # Only remove label when Chromatic actually ran (label present and relevant changes)
     if: |
-      github.ref != 'refs/heads/main' &&
+      github.event_name == 'pull_request' &&
       contains(github.event.pull_request.labels.*.name, 'run_chromatic') &&
       needs.check-paths.outputs.relevant == 'true'
     runs-on: ubuntu-latest

@@ -1,15 +1,15 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import type { ArticleFormat } from '../../lib/articleFormat';
-import { palette } from '../../palette';
-import type { ArticleDeprecated } from '../../types/article';
-import { ArticleHeadline } from '../ArticleHeadline';
-import { ArticleTitle } from '../ArticleTitle';
-import { Section } from '../Section';
-import { background, border } from './colours';
+import type { ArticleFormat } from '../lib/articleFormat';
+import { palette } from '../palette';
+import type { ArticleDeprecated } from '../types/article';
+import { ArticleHeadline } from './ArticleHeadline';
+import { ArticleTitle } from './ArticleTitle';
+import { background, border } from './FootballMatchHeader/colours';
+import { Section } from './Section';
 
-export const FootballMatchHeaderFallback = ({
+export const MatchHeaderFallback = ({
 	format,
 	article,
 }: {

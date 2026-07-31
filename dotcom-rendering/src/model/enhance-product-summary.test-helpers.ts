@@ -1,69 +1,34 @@
 import type {
+	EnhancedProductSummaryElement,
 	FEElement,
 	ProductBlockElement,
-	ProductSummaryElement,
+	ProductSummaryBlockElement,
+	SummaryProductRef,
 } from '../types/content';
 
-export const linkElement = (url: string, label: string): FEElement =>
+export const productSummaryElement = (
+	summaryProducts: SummaryProductRef[],
+): ProductSummaryBlockElement =>
 	({
-		_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
-		url,
-		label,
-	}) as FEElement;
+		_type: 'model.dotcomrendering.pageElements.ProductSummaryBlockElement',
+		products: summaryProducts,
+	}) as ProductSummaryBlockElement;
 
-export const productElement = (urls: string[]): ProductBlockElement =>
+export const productElement = (
+	urls: string[],
+	id: string,
+): ProductBlockElement =>
 	({
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 		productCtas: urls.map((url) => ({ url })),
+		id,
 	}) as ProductBlockElement;
 
-export const atAGlanceHeading = (): FEElement =>
-	({
-		_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-		text: 'At a glance',
-		html: 'At a glance',
-		elementId: 'at-a-glance',
-	}) as FEElement;
-
-export const dividerElement = (): FEElement =>
-	({
-		_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
-		elementId: 'divider',
-	}) as FEElement;
-
-export const textElement = (html: string): FEElement =>
-	({
-		_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-		html,
-		elementId: '4',
-	}) as FEElement;
-
-export const findCarousel = (
+export const findEnhancedProductSummary = (
 	elements: FEElement[],
-): ProductSummaryElement | undefined =>
+): EnhancedProductSummaryElement | undefined =>
 	elements.find(
-		(el): el is ProductSummaryElement =>
+		(el): el is EnhancedProductSummaryElement =>
 			el._type ===
-				'model.dotcomrendering.pageElements.ProductSummaryElement' &&
-			el.variant === 'carousel',
-	);
-
-export const findStackedDefault = (
-	elements: FEElement[],
-): ProductSummaryElement | undefined =>
-	elements.find(
-		(el): el is ProductSummaryElement =>
-			el._type ===
-				'model.dotcomrendering.pageElements.ProductSummaryElement' &&
-			el.variant === 'stacked-default',
-	);
-
-export const findStackedExpanded = (
-	elements: FEElement[],
-): ProductSummaryElement | undefined =>
-	elements.find(
-		(el): el is ProductSummaryElement =>
-			el._type ===
-				'model.dotcomrendering.pageElements.ProductSummaryElement' &&
-			el.variant === 'stacked-expanded',
+			'model.dotcomrendering.pageElements.EnhancedProductSummaryElement',
 	);

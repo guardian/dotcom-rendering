@@ -2,9 +2,12 @@ import { css } from '@emotion/react';
 import {
 	brandBackground,
 	brandText,
+	calculateHoverColour,
 	palette,
+	palette as sourcePalette,
 	textSansBold15,
 } from '@guardian/source/foundations';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 
 const iconHeight = '42px';
 
@@ -33,6 +36,18 @@ const link = css`
 	}
 `;
 
+const hostedGalleryLink = css`
+	:hover {
+		color: ${calculateHoverColour(sourcePalette.neutral[100])};
+
+		.icon-container {
+			background-color: ${calculateHoverColour(
+				sourcePalette.neutral[100],
+			)};
+		}
+	}
+`;
+
 const icon = css`
 	::before {
 		position: absolute;
@@ -56,11 +71,18 @@ const textStyles = css`
 	padding-right: 5px;
 `;
 
-export const BackToTop = () => (
-	<a css={link} href="#top" data-link-name="back to top">
-		<span css={textStyles}>Back to top</span>
-		<span css={iconContainer} className="icon-container">
-			<i css={icon} />
-		</span>
-	</a>
-);
+export const BackToTop = ({ format }: { format?: ArticleFormat }) => {
+	const isHostedGallery = format?.design === ArticleDesign.HostedGallery;
+	return (
+		<a
+			css={[link, isHostedGallery && hostedGalleryLink]}
+			href="#top"
+			data-link-name="back to top"
+		>
+			<span css={textStyles}>Back to top</span>
+			<span css={iconContainer} className="icon-container">
+				<i css={icon} />
+			</span>
+		</a>
+	);
+};

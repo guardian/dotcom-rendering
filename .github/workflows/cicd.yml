@@ -1,13 +1,26 @@
 name: DCR CICD
 
 on:
+  merge_group:
+    types: [checks_requested]
   push:
 
 jobs:
+  production-container:
+    permissions:
+      contents: read
+      id-token: write # Required to exchange for AWS credentials using OIDC
+    uses: ./.github/workflows/container-production.yml
+    secrets:
+      GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+
   container:
     permissions:
       packages: write
+    needs: [production-container]
     uses: ./.github/workflows/container.yml
+    with:
+      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
 
   prettier:
     uses: ./.github/workflows/prettier.yml
@@ -17,6 +30,9 @@ jobs:
 
   lint:
     uses: ./.github/workflows/lint.yml
+
+  islands:
+    uses: ./.github/workflows/check-islands.yml
 
   playwright:
     needs: [container]
@@ -29,7 +45,8 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write # required by riff-raff action
-    needs: [container, prettier, jest, lint, playwright]
+    needs: [container, islands, prettier, jest, lint, playwright]
+    if: github.event_name == 'push' # We don't need a riff-raff deployment for merge_group events
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}

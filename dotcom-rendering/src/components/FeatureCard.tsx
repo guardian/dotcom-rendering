@@ -83,7 +83,7 @@ const underlineOnHoverStyles = css`
 	}
 `;
 
-const hoverStyles = css`
+const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 	:hover .media-overlay {
 		position: absolute;
 		top: 0;
@@ -91,6 +91,8 @@ const hoverStyles = css`
 		width: 100%;
 		height: 100%;
 		background-color: ${palette('--card-background-hover')};
+
+		${isLoopAndInLoopClickTestVariant && loopClickThroughOverlayStyles}
 	}
 
 	${underlineOnHoverStyles}
@@ -104,6 +106,12 @@ const hoverStyles = css`
 			background-color: transparent;
 		}
 	}
+`;
+
+const loopClickThroughOverlayStyles = css`
+	z-index: ${getZIndex('mediaOverlay')};
+	cursor: pointer;
+	pointer-events: none;
 `;
 
 const contentStyles = css`
@@ -507,9 +515,15 @@ export const FeatureCard = ({
 
 	const aspectRatioNumber = isImmersive ? 5 / 3 : 4 / 5;
 
-	/* The whole card is clickable on cinemagraphs and pictures */
+	/** The whole card is clickable for:
+	 * - cinemagraphs
+	 * - pictures
+	 * - loops in the loop click test variant group
+	 * */
 	const allowLinkThroughOverlay =
-		media.style === 'cinemagraph' || media.type === 'picture';
+		media.style === 'cinemagraph' ||
+		media.type === 'picture' ||
+		isLoopAndInLoopClickTestVariant;
 
 	return (
 		<FormatBoundary format={format}>
@@ -517,7 +531,9 @@ export const FeatureCard = ({
 				<div
 					css={[
 						baseCardStyles,
-						!isSelfHostedVideoWithControls && hoverStyles,
+						(!isSelfHostedVideoWithControls ||
+							isLoopAndInLoopClickTestVariant) &&
+							hoverStyles(isLoopAndInLoopClickTestVariant),
 					]}
 				>
 					{!isYoutubeVideo && !isSelfHostedVideoWithControls && (
@@ -692,7 +708,8 @@ export const FeatureCard = ({
 								)}
 
 								{/* This overlay is styled when the CardLink is hovered */}
-								{!isSelfHostedVideoWithControls && (
+								{(!isSelfHostedVideoWithControls ||
+									isLoopAndInLoopClickTestVariant) && (
 									<div className="media-overlay" />
 								)}
 								<div

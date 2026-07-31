@@ -1,21 +1,14 @@
 import { css } from '@emotion/react';
 import { space, textSansBold15 } from '@guardian/source/foundations';
 import { getZIndex } from '../lib/getZIndex';
+import { generateImageURL } from '../lib/image';
 import { palette } from '../palette';
 import type { TrailType } from '../types/trails';
 
 type Props = {
 	trail: TrailType;
+	isGalleryPage?: boolean;
 };
-
-type CardPictureProps = {
-	image: string;
-	alt: string;
-};
-
-const imageStyles = css`
-	width: 120px;
-`;
 
 const mediaOverlayContainerStyles = css`
 	position: absolute;
@@ -61,28 +54,30 @@ const headingStyles = css`
 	color: ${palette('--card-headline')};
 `;
 
-const CardPicture = ({ image, alt }: CardPictureProps) => {
-	return (
-		<>
-			<picture>
-				<img alt={alt} src={image} css={imageStyles} />
-			</picture>
-			<div css={mediaOverlayContainerStyles}>
-				<div className="media-overlay" />
-			</div>
-		</>
-	);
-};
-
-export const HostedContentOnwardsCard = ({ trail }: Props) => {
+export const HostedContentOnwardsCard = ({
+	trail,
+	isGalleryPage = false,
+}: Props) => {
 	return (
 		<a href={trail.url} css={linkStyles}>
 			<h3 css={headingStyles}>{trail.headline}</h3>
 			{!!trail.image && (
-				<CardPicture
-					image={trail.image.src}
-					alt={trail.image.altText || ''}
-				/>
+				<>
+					<picture>
+						<img
+							alt={trail.image.altText}
+							src={generateImageURL({
+								mainImage: trail.image.src,
+								imageWidth: isGalleryPage ? 180 : 120,
+								resolution: 'low',
+								aspectRatio: '5:4',
+							})}
+						/>
+					</picture>
+					<div css={mediaOverlayContainerStyles}>
+						<div className="media-overlay" />
+					</div>
+				</>
 			)}
 		</a>
 	);

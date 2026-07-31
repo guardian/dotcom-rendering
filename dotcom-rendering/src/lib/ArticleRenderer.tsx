@@ -4,7 +4,7 @@ import { useConfig } from '../components/ConfigContext';
 import { FeastContextualNudge } from '../components/FeastContextualNudge.island';
 import { Island } from '../components/Island';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { FEElement, RecipeBlockElement } from '../types/content';
 import type { TagType } from '../types/tag';
 import { spacefinderAdStyles } from './adStyles';
@@ -35,7 +35,6 @@ type Props = {
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	editionId: EditionId;
 	contributionsServiceUrl: string;
 	shouldHideAds: boolean;
@@ -59,7 +58,6 @@ export const ArticleRenderer = ({
 	isAdFreeUser,
 	isSensitive,
 	isDev,
-	abTests,
 	editionId,
 	contributionsServiceUrl,
 	shouldHideAds,
@@ -87,7 +85,6 @@ export const ArticleRenderer = ({
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				switches={switches}
-				abTests={abTests}
 				editionId={editionId}
 				totalElements={length}
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
@@ -161,11 +158,25 @@ export const ArticleRenderer = ({
 
 		const result: (JSX.Element | null | undefined)[] = [...preSection];
 
+		/**
+		 * Distribute up to 5 Braze placement slots evenly across all sections.
+		 * interval = ceil(sections.length / 5)
+		 * A section at 0-based index i gets nudgeIndex = (i+1)/interval
+		 * only when (i+1) is an exact multiple of interval (and ≤ 5).
+		 * All other sections get nudgeIndex = null (no nudge rendered).
+		 */
+		const MAX_NUDGES = 5;
+		const interval = Math.ceil(sections.length / MAX_NUDGES);
+
 		for (const section of sections) {
+			const position = section.index + 1; // 1-based
+			const nudgeIndex =
+				position % interval === 0 ? position / interval : null;
+
 			result.push(
 				<Fragment key={`recipe-section-${section.index}`}>
 					{section.subheadingEl}
-					{section.recipe && (
+					{section.recipe && nudgeIndex !== null && (
 						<Island
 							priority="feature"
 							defer={{ until: 'visible' }}
@@ -176,6 +187,8 @@ export const ArticleRenderer = ({
 								pageId={pageId}
 								recipe={section.recipe}
 								recipeArticleTitle={section.recipeArticleTitle}
+								nudgeIndex={nudgeIndex}
+								idApiUrl={idApiUrl}
 							/>
 						</Island>
 					)}

@@ -76,7 +76,6 @@ export const VideoAsSecond = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
-				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
@@ -125,7 +124,6 @@ export const Title = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
-				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
@@ -195,7 +193,6 @@ export const Video = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
-				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
@@ -240,7 +237,6 @@ export const RichLink = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
-				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
@@ -276,7 +272,6 @@ export const FirstImage = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
-				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
@@ -336,7 +331,6 @@ export const ImageRoles = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
-				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
@@ -387,7 +381,6 @@ export const Thumbnail = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
-				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
@@ -426,7 +419,6 @@ export const ImageAndTitle = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
-				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
@@ -459,7 +451,6 @@ export const Updated = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
-				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				editionId={'UK'}
@@ -494,7 +485,6 @@ export const Contributor = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
-				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
@@ -529,7 +519,6 @@ export const NoAvatar = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
-				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
@@ -567,7 +556,6 @@ export const TitleAndContributor = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
-				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}

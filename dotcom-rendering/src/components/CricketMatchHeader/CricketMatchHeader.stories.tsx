@@ -6,6 +6,8 @@ import type {
 	FECricketInnings,
 	FECricketMatch,
 } from '../../frontend/feCricketMatchPage';
+import type { ArticleFormat } from '../../lib/articleFormat';
+import type { ArticleDeprecated } from '../../types/article';
 import { CricketMatchHeader } from './CricketMatchHeader';
 
 const meta = {
@@ -130,6 +132,12 @@ const baseArgs = {
 	refreshInterval: 3_000,
 	tabContentId: 'cricket-tab-content',
 	getHeaderData: () => getMockData(headerData(baseMatch)),
+	article: {
+		pageId: 'sport/2026/jan/27/australia-v-england-second-test-day-two-live-cricket',
+		guardianBaseURL: 'https://www.theguardian.com',
+	} as ArticleDeprecated,
+	format: {} as ArticleFormat,
+	renderingTarget: 'Web',
 } satisfies ComponentProps<typeof CricketMatchHeader>;
 
 const getMockData = (data: FECricketMatchHeader) =>

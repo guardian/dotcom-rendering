@@ -113,3 +113,13 @@ export type FECricketMatchPage = {
 	contributionsServiceUrl: string;
 	pageId: string;
 };
+
+export const feCricketMatchStatsSummarySchema = object({
+	status: string(),
+	currentBattingTeam: optional(string()),
+	notOutBatters: optional(array(feCricketBatterSchema)),
+});
+
+export type FECricketMatchStatsSummary = Output<
+	typeof feCricketMatchStatsSummarySchema
+>;

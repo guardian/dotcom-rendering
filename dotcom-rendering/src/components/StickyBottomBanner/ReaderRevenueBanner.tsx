@@ -232,8 +232,10 @@ export const canShowRRBanner: CanShowFunctionType<
 		signInBannerLastClosedAt === undefined;
 
 	const hasForceBannerParam = window.location.search.includes('force-banner');
+	const hasPreviewBannerParam =
+		window.location.search.includes('preview-banner');
 
-	if (!showSignInPrompt && !hasForceBannerParam) {
+	if (!showSignInPrompt && !hasForceBannerParam && !hasPreviewBannerParam) {
 		// Don't show a banner if one was closed recently. This is to improve user experience by not showing banners on consecutive pageviews
 		if (
 			recentlyClosedBanner(engagementBannerLastClosedAt) ||
