@@ -5,7 +5,6 @@ import type {
 	FEFootballMatchStats,
 	FEFootballMatchStatsSummary,
 	FEFootballPlayer,
-	FEFootballPlayerEvent,
 	FEFootballPlayerEventEnhanced,
 	FEFootballSubstitution,
 	FEFootballTeam,
