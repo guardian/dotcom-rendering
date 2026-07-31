@@ -2,7 +2,7 @@ name: DCR typescript 🕵‍♀
 on:
   merge_group:
     types: [checks_requested]
-  push:
+  pull_request:
     paths-ignore:
       - 'dotcom-rendering/docs/**'
 
