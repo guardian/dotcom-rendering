@@ -458,7 +458,6 @@ const Meta = ({
 	<div
 		css={{
 			'&': css(grid.column.centre),
-			// TODO investigate share button meta spacing
 			paddingBottom: space[6],
 			[from.tablet]: {
 				position: 'relative',
@@ -516,7 +515,7 @@ const Meta = ({
 		{!!frontendData.affiliateLinksDisclaimer && (
 			<AffiliateDisclaimer
 				cssOverrides={css`
-					margin-top: ${space[1]}px;
+					margin-top: ${space[4]}px;
 				`}
 			/>
 		)}
