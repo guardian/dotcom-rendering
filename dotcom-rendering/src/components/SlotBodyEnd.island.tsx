@@ -13,6 +13,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
+import { grid } from '../grid';
 import { getArticleCounts } from '../lib/articleCount';
 import {
 	BrazeBannersSystemPlacementId,
@@ -57,6 +58,10 @@ type Props = {
 
 const slotStyles = css`
 	color: ${palette.neutral[7]};
+	${grid.container};
+	& > *:first-child {
+		${grid.column.centre};
+	}
 `;
 
 const buildReaderRevenueEpicConfig = (
