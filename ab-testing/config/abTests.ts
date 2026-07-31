@@ -138,7 +138,7 @@ const ABTests: ABTest[] = [
 			"Test to measure the impact of not showing the consent RR and banner for US users",
 		owners: ["identitydev@theguardian.com", "martech.dev@guardian.co.uk"],
 		status: "ON",
-		expirationDate: "2027-01-01",
+		expirationDate: "2026-12-01",
 		type: "client",
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
