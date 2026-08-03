@@ -7,6 +7,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 } from '../lib/articleFormat';
+import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
@@ -70,6 +71,14 @@ const immersivePortraitStyles = css`
 	}
 `;
 
+const immersivePortraitSeriesSectionWrapperStyles = css`
+	padding: 3px 6px 4px;
+	margin-bottom: 0;
+	background-color: ${themePalette('--immersive-portrait-title-background')};
+	width: fit-content;
+	min-width: unset;
+`;
+
 export const ArticleTitle = ({
 	format,
 	layoutType,
@@ -95,7 +104,13 @@ export const ArticleTitle = ({
 				format.display === ArticleDisplay.Immersive
 					? layoutType == null
 						? legacyImmersiveMargins
-						: immersiveMargins
+						: layoutType === 'immersivePortraitDefault' ||
+							  layoutType === 'immersivePortraitFeature'
+							? [
+									immersiveMargins,
+									immersivePortraitSeriesSectionWrapperStyles,
+								]
+							: immersiveMargins
 					: undefined
 			}
 		>

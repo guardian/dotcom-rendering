@@ -387,7 +387,9 @@ export const SeriesSectionLink = ({
 						css={[
 							sectionLabelLink,
 							css`
-								color: ${titleColour};
+								color: ${themePalette(
+									'--immersive-portrait-title-text',
+								)};
 								background-color: ${themePalette(
 									'--section-title-background',
 								)};

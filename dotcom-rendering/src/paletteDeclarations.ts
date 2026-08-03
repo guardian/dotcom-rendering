@@ -14,6 +14,7 @@ import {
 	tabsDarkTheme,
 	tabsThemeDefault,
 } from '@guardian/source-development-kitchen/react-components';
+import format from 'ajv/dist/vocabularies/format/format';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -6058,6 +6059,7 @@ const immersivePortraitStandfirstLight: PaletteFunction = (format) => {
 			return sourcePalette.neutral[0];
 	}
 };
+
 const immersivePortraitStandfirstDark: PaletteFunction = (format) => {
 	switch (format.theme) {
 		case Pillar.Sport:
@@ -6068,6 +6070,38 @@ const immersivePortraitStandfirstDark: PaletteFunction = (format) => {
 			return sourcePalette.neutral[100];
 	}
 };
+
+const immersivePortraitTitleBackgroundLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+			return pillarPalette(format.theme, 400);
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
+
+const immersivePortraitTitleBackgroundDark: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+			return pillarPalette(format.theme, 500);
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+
+const immersivePortraitTitleTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const immersivePortraitTitleTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+
 const bioLinkUnderline: PaletteFunction = () => sourcePalette.neutral[86];
 
 const multiBylineNonLinkedTextLight: PaletteFunction = () =>
@@ -7519,6 +7553,14 @@ const paletteColours = {
 	'--immersive-portrait-standfirst-text': {
 		light: immersivePortraitStandfirstLight,
 		dark: immersivePortraitStandfirstDark,
+	},
+	'--immersive-portrait-title-background': {
+		light: immersivePortraitTitleBackgroundLight,
+		dark: immersivePortraitTitleBackgroundDark,
+	},
+	'--immersive-portrait-title-text': {
+		light: immersivePortraitTitleTextLight,
+		dark: immersivePortraitTitleTextDark,
 	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,
