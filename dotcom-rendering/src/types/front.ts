@@ -171,10 +171,7 @@ export type TreatType = {
 	pageId?: string;
 };
 
-enum VariantId {
-	A,
-	B,
-}
+export type VariantId = 'A' | 'B';
 
 export type VariantMeta = {
 	id: VariantId;
