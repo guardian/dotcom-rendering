@@ -229,14 +229,88 @@ export const AppsPictureShowcaseOpinionDark: Story = {
  *
  * Example: https://www.chromatic.com/test?appId=63e251470cfbe61776b0ef19&id=675aaa4f3aa384bd64bde3a1
  */
+const photoEssayImmersiveLabsArticle = enhanceArticleType(
+	PhotoEssayImmersiveLabsFixture,
+	'Web',
+);
+
+const portraitMainMedia = PhotoEssayImmersiveLabsFixture.blocks
+	.flatMap((block) => block.elements)
+	.find(
+		(element) =>
+			element._type ===
+				'model.dotcomrendering.pageElements.ImageBlockElement' &&
+			element.media.allImages[0]?.fields.aspectRatio === '4:5',
+	);
+
+if (portraitMainMedia == null) {
+	throw new Error('The Labs fixture must contain a portrait image');
+}
+
+const photoEssayImmersiveLabsPortraitArticle = enhanceArticleType(
+	{
+		...PhotoEssayImmersiveLabsFixture,
+		mainMediaElements: [{ ...portraitMainMedia, role: 'immersive' }],
+	},
+	'Web',
+);
+
+const labsImmersiveArticle = ({
+	orientation,
+	design,
+}: {
+	orientation: 'portrait' | 'landscape';
+	design: ArticleDesign.PhotoEssay | ArticleDesign.Feature;
+}): Article => ({
+	...(orientation === 'portrait'
+		? photoEssayImmersiveLabsPortraitArticle
+		: photoEssayImmersiveLabsArticle),
+	design,
+});
+
+const immersiveLabsParameters = {
+	...webParameters,
+	chromatic: { disableSnapshot: true },
+};
+
 export const WebPhotoEssayImmersiveLabsLight: Story = {
 	args: {
-		article: enhanceArticleType(PhotoEssayImmersiveLabsFixture, 'Web'),
+		article: labsImmersiveArticle({
+			orientation: 'landscape',
+			design: ArticleDesign.PhotoEssay,
+		}),
 	},
-	parameters: {
-		...webParameters,
-		chromatic: { disableSnapshot: true },
+	parameters: immersiveLabsParameters,
+};
+
+export const WebPhotoEssayImmersiveLabsPortraitLight: Story = {
+	args: {
+		article: labsImmersiveArticle({
+			orientation: 'portrait',
+			design: ArticleDesign.PhotoEssay,
+		}),
 	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebFeatureImmersiveLabsLandscapeLight: Story = {
+	args: {
+		article: labsImmersiveArticle({
+			orientation: 'landscape',
+			design: ArticleDesign.Feature,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebFeatureImmersiveLabsPortraitLight: Story = {
+	args: {
+		article: labsImmersiveArticle({
+			orientation: 'portrait',
+			design: ArticleDesign.Feature,
+		}),
+	},
+	parameters: immersiveLabsParameters,
 };
 
 const standardStandardLabsWebFixture: Article = {

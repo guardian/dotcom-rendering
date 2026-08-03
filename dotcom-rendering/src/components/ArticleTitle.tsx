@@ -38,6 +38,18 @@ const immersiveMargins = css`
 	}
 `;
 
+const legacyImmersiveMargins = css`
+	max-width: 400px;
+	min-width: 200px;
+	margin-bottom: 4px;
+	${from.tablet} {
+		margin-left: 16px;
+	}
+	${from.leftCol} {
+		margin-left: 25px;
+	}
+`;
+
 const galleryStyles = css`
 	${grid.column.all}
 
@@ -71,7 +83,9 @@ export const ArticleTitle = ({
 		<div
 			css={
 				format.display === ArticleDisplay.Immersive
-					? immersiveMargins
+					? layoutType == null
+						? legacyImmersiveMargins
+						: immersiveMargins
 					: undefined
 			}
 		>
