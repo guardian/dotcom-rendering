@@ -2025,6 +2025,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "PropagateTags": "SERVICE",
         "Tags": [
           {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -2153,6 +2157,26 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             },
             "Environment": [
               {
+                "Name": "STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "STAGE",
+                "Value": "CODE",
+              },
+              {
+                "Name": "APP",
+                "Value": "tag-page-rendering",
+              },
+              {
+                "Name": "TASK_NAME",
+                "Value": "tag-page-rendering",
+              },
+              {
+                "Name": "GU_REPO",
+                "Value": "guardian/dotcom-rendering",
+              },
+              {
                 "Name": "NODE_ENV",
                 "Value": "production",
               },
@@ -2271,6 +2295,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         ],
         "Tags": [
           {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -2316,6 +2344,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           "Version": "2012-10-17",
         },
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -2409,6 +2441,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "RetentionInDays": 1,
         "Tags": [
           {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -2444,6 +2480,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           "Version": "2012-10-17",
         },
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -3478,6 +3518,10 @@ systemctl start tag-page-rendering",
           },
         ],
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
