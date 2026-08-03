@@ -17,7 +17,7 @@ import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
-import type { CfnService } from 'aws-cdk-lib/aws-ecs';
+import type { CfnService, ScalableTaskCount } from 'aws-cdk-lib/aws-ecs';
 import { ClusterSettings } from 'aws-cdk-lib/aws-ecs/mixins';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
@@ -283,7 +283,7 @@ export class RenderingCDKStack extends CDKStack {
 							cpu: 512,
 							scaling: {
 								minimumTasks: 1,
-								maximumTasks: 2,
+								maximumTasks: 9,
 							},
 						},
 
@@ -331,6 +331,20 @@ export class RenderingCDKStack extends CDKStack {
 						},
 					],
 				});
+
+				// Until we make these changes in GuCDK, we have to be a bit hacky to set the CPU Scaling option.
+				const ecsScalableTarget = app.ecsService.node.tryFindChild(
+					'TaskCount',
+				) as ScalableTaskCount;
+				if (ecsScalableTarget) {
+					ecsScalableTarget.scaleOnCpuUtilization('CpuScaling', {
+						targetUtilizationPercent: 50,
+					});
+				} else {
+					throw new Error(
+						'Could not create CPU scaling policy for ECS',
+					);
+				}
 			}
 		}
 
