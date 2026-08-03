@@ -14,7 +14,6 @@ import {
 	tabsDarkTheme,
 	tabsThemeDefault,
 } from '@guardian/source-development-kitchen/react-components';
-import format from 'ajv/dist/vocabularies/format/format';
 import {
 	ArticleDesign,
 	ArticleDisplay,
