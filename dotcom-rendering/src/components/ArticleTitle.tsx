@@ -63,6 +63,11 @@ const galleryStyles = css`
 	}
 `;
 
+const immersivePortraitStyles = css`
+	height: 100%;
+	justify-content: flex-end;
+`;
+
 export const ArticleTitle = ({
 	format,
 	layoutType,
@@ -77,6 +82,9 @@ export const ArticleTitle = ({
 			[ArticleDesign.Gallery, ArticleDesign.HostedGallery].includes(
 				format.design,
 			) && galleryStyles,
+			(layoutType === 'immersivePortraitDefault' ||
+				layoutType === 'immersivePortraitFeature') &&
+				immersivePortraitStyles,
 			sectionStyles,
 		]}
 	>
