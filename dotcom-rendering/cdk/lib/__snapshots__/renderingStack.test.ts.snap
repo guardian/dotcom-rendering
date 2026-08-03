@@ -2052,7 +2052,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
-        "MaxCapacity": 2,
+        "MaxCapacity": 9,
         "MinCapacity": 1,
         "ResourceId": {
           "Fn::Join": [
@@ -2092,6 +2092,25 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "ServiceNamespace": "ecs",
       },
       "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+    },
+    "EcsServiceTaskCountTargetCpuScalingA9C91D4C": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "PolicyName": "TagPageRenderingCODEEcsServiceTaskCountTargetCpuScaling4DFA1A0F",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "EcsServiceTaskCountTarget02FCCE22",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilization",
+          },
+          "TargetValue": 50,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
     },
     "EcsTargetGroupTagpagerendering06213654": {
       "Properties": {
@@ -2256,7 +2275,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             "VersionConsistency": "disabled",
           },
         ],
-        "Cpu": "1024",
+        "Cpu": "512",
         "ExecutionRoleArn": {
           "Fn::GetAtt": [
             "EcsTaskDefinitionExecutionRoleBE450C73",
@@ -2264,7 +2283,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           ],
         },
         "Family": "TagPageRenderingCODEEcsTaskDefinition616FF027",
-        "Memory": "2048",
+        "Memory": "1024",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "FARGATE",
