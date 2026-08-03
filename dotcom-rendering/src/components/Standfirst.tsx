@@ -28,7 +28,7 @@ import { palette } from '../palette';
 type Props = {
 	format: ArticleFormat;
 	standfirst: string;
-	layoutType: LayoutType;
+	layoutType?: LayoutType;
 };
 
 const nestedStyles = (format: ArticleFormat) => {
