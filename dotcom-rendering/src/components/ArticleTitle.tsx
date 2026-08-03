@@ -64,8 +64,10 @@ const galleryStyles = css`
 `;
 
 const immersivePortraitStyles = css`
-	height: 100%;
-	justify-content: flex-end;
+	${from.desktop} {
+		height: 100%;
+		justify-content: flex-end;
+	}
 `;
 
 export const ArticleTitle = ({

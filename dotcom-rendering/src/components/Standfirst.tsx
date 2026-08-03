@@ -15,6 +15,7 @@ import {
 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
 import { grid } from '../../src/grid';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -27,6 +28,7 @@ import { palette } from '../palette';
 type Props = {
 	format: ArticleFormat;
 	standfirst: string;
+	layoutType: LayoutType;
 };
 
 const nestedStyles = (format: ArticleFormat) => {
@@ -79,8 +81,16 @@ const nestedStyles = (format: ArticleFormat) => {
 	`;
 };
 
-const decideFont = ({ display, design, theme }: ArticleFormat) => {
+const decideFont = (
+	{ display, design, theme }: ArticleFormat,
+	layoutType: LayoutType,
+) => {
 	const isLabs = theme === ArticleSpecial.Labs;
+	const isImmersivePortraitOrLandscape =
+		layoutType === 'immersiveLandscapeDefault' ||
+		layoutType === 'immersiveLandscapeFeature' ||
+		layoutType === 'immersivePortraitDefault' ||
+		layoutType === 'immersivePortraitFeature';
 	switch (design) {
 		case ArticleDesign.Gallery:
 			if (isLabs) {
@@ -107,6 +117,11 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 							${from.tablet} {
 								${textSans24};
 							}
+						`;
+					}
+					if (isImmersivePortraitOrLandscape) {
+						return css`
+							${headlineMedium20};
 						`;
 					}
 					return css`
@@ -143,6 +158,11 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 							${from.tablet} {
 								${textSans24};
 							}
+						`;
+					}
+					if (isImmersivePortraitOrLandscape) {
+						return css`
+							${headlineMedium20};
 						`;
 					}
 					return css`
@@ -386,8 +406,7 @@ const hoverStyles = css`
 		border-bottom: solid 1px ${palette('--standfirst-link-border')};
 	}
 `;
-
-export const Standfirst = ({ format, standfirst }: Props) => {
+export const Standfirst = ({ format, standfirst, layoutType }: Props) => {
 	if (standfirst.trim() === '') {
 		return null;
 	}
@@ -397,7 +416,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 				css={[
 					nestedStyles(format),
 					standfirstStyles(format),
-					decideFont(format),
+					decideFont(format, layoutType),
 					decidePadding(format),
 					hoverStyles,
 				]}
