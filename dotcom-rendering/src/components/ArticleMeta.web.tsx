@@ -570,7 +570,7 @@ export const ArticleMeta = ({
 					</div>
 				</div>
 				{showPreferredSource ? <PreferredSourceButton /> : null}
-				{isPortraitOrLandscapeImmersive && mainMediaElements?.[0] && (
+				{isImmersive && mainMediaElements?.[0] && (
 					<Hide until="leftCol">
 						<div
 							css={css`
