@@ -6042,6 +6042,32 @@ const lastUpdatedTextDark: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
+const immersivePortraitHeadlineLight: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const immersivePortraitHeadlineDark: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
+const immersivePortraitStandfirstLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+			return pillarPalette(format.theme, 200);
+		default:
+			return sourcePalette.neutral[0];
+	}
+};
+const immersivePortraitStandfirstDark: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+			return pillarPalette(format.theme, 600);
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
 const bioLinkUnderline: PaletteFunction = () => sourcePalette.neutral[86];
 
 const multiBylineNonLinkedTextLight: PaletteFunction = () =>
@@ -7485,6 +7511,14 @@ const paletteColours = {
 	'--image-title-background': {
 		light: imageTitleBackground,
 		dark: imageTitleBackground,
+	},
+	'--immersive-portrait-headline-text': {
+		light: immersivePortraitHeadlineLight,
+		dark: immersivePortraitHeadlineDark,
+	},
+	'--immersive-portrait-standfirst-text': {
+		light: immersivePortraitStandfirstLight,
+		dark: immersivePortraitStandfirstDark,
 	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,

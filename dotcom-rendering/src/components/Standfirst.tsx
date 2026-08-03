@@ -87,11 +87,7 @@ const decideFont = (
 ) => {
 	const isLabs = theme === ArticleSpecial.Labs;
 	const isImmersivePortraitOrLandscape =
-		layoutType &&
-		(layoutType === 'immersiveLandscapeDefault' ||
-			layoutType === 'immersiveLandscapeFeature' ||
-			layoutType === 'immersivePortraitDefault' ||
-			layoutType === 'immersivePortraitFeature');
+		layoutType?.startsWith('immersive') ?? false;
 	switch (design) {
 		case ArticleDesign.Gallery:
 			if (isLabs) {
@@ -275,7 +271,12 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 	}
 };
 
-const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
+const standfirstStyles = (
+	{ display, design, theme }: ArticleFormat,
+	layoutType?: LayoutType,
+) => {
+	const isImmersivePortraitOrLandscape =
+		layoutType?.startsWith('immersive') ?? false;
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (design) {
@@ -290,14 +291,15 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						${from.tablet} {
 							max-width: 460px;
 						}
-						color: ${palette('--standfirst-text')};
+						color: ${isImmersivePortraitOrLandscape
+							? palette('--immersive-portrait-standfirst-text')
+							: palette('--standfirst-text')};
 						li::before {
 							height: 17px;
 							width: 17px;
 						}
 					`;
 			}
-
 		case ArticleDisplay.NumberedList:
 			return css`
 				max-width: 540px;
@@ -416,7 +418,7 @@ export const Standfirst = ({ format, standfirst, layoutType }: Props) => {
 			<div
 				css={[
 					nestedStyles(format),
-					standfirstStyles(format),
+					standfirstStyles(format, layoutType),
 					decideFont(format, layoutType),
 					decidePadding(format),
 					hoverStyles,

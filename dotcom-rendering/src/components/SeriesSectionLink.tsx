@@ -379,12 +379,7 @@ export const SeriesSectionLink = ({
 				</div>
 			);
 		}
-		if (
-			layoutType === 'immersivePortraitDefault' ||
-			layoutType === 'immersivePortraitFeature' ||
-			layoutType === 'immersiveLandscapeDefault' ||
-			layoutType === 'immersiveLandscapeFeature'
-		) {
+		if (layoutType?.startsWith('immersive') ?? false) {
 			return (
 				<>
 					<a

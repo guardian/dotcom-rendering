@@ -478,6 +478,9 @@ export const ArticleHeadline = ({
 	starRating,
 }: Props) => {
 	const isInverted = layoutType === 'immersiveLandscapeDefault';
+	const isImmersivePortrait =
+		layoutType === 'immersivePortraitDefault' ||
+		layoutType === 'immersivePortraitFeature';
 	const isLegacyImmersive = layoutType == null;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -562,11 +565,17 @@ export const ArticleHeadline = ({
 											]
 										: isInverted
 											? [invertedText, darkBackground]
-											: css`
-													color: ${themePalette(
-														'--headline-colour',
-													)};
-												`,
+											: isImmersivePortrait
+												? css`
+														color: ${themePalette(
+															'--immersive-portrait-headline-text',
+														)};
+													`
+												: css`
+														color: ${themePalette(
+															'--headline-colour',
+														)};
+													`,
 								]}
 							>
 								<span
