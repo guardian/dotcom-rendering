@@ -141,7 +141,6 @@ export const design: ConfigurableDesign = {
 
 export const props: BannerProps = {
 	bannerChannel: 'contributions',
-	isSupporter: false,
 	countryCode: 'GB',
 	tracking,
 	content: contentWithHeading,
