@@ -1195,6 +1195,7 @@ const Header = (props: {
 						matchHeaderURL={cricketMatchHeaderUrl}
 						article={props.article}
 						format={props.format}
+						renderingTarget={props.renderingTarget}
 					/>
 				</Island>
 			</>

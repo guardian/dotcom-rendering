@@ -8,9 +8,10 @@ import {
 	textSansBold17,
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
+import { getProductLinkLabelWithoutPrice } from '../lib/affiliateLinksUtils';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { ProductBlockElement } from '../types/content';
+import type { SummaryProduct } from '../types/content';
 import { ProductLinkButton } from './Button/ProductLinkButton';
 import { ProductCardImage } from './ProductCardImage';
 
@@ -81,10 +82,11 @@ export const HorizontalSummaryProductCard = ({
 	product,
 	format,
 }: {
-	product: ProductBlockElement;
+	product: SummaryProduct;
 	format: ArticleFormat;
 }) => {
-	const cardCta = product.productCtas[0];
+	const { productBlock, ctaIndex } = product;
+	const cardCta = productBlock.productCtas[ctaIndex];
 	if (!cardCta) {
 		return null;
 	}
@@ -95,16 +97,20 @@ export const HorizontalSummaryProductCard = ({
 				<ProductCardImage
 					xCustComponentId={'horizontal-summary-card'}
 					format={format}
-					elementId={product.elementId}
-					image={product.image}
+					elementId={productBlock.elementId}
+					image={productBlock.image}
 					url={cardCta.url}
 				/>
 			</div>
 			<div css={informationContainer}>
-				<div css={productCardHeading}>{product.primaryHeadingText}</div>
-				<div css={secondaryHeading}>{product.secondaryHeadingText}</div>
+				<div css={productCardHeading}>
+					{productBlock.primaryHeadingText}
+				</div>
+				<div css={secondaryHeading}>
+					{productBlock.secondaryHeadingText}
+				</div>
 				<Link
-					href={`#${product.h2Id}`}
+					href={`#${productBlock.h2Id}`}
 					onFocus={(event) => event.stopPropagation()}
 					cssOverrides={readMore}
 					data-component="at-a-glance-stacked-card-read-more"
@@ -121,7 +127,7 @@ export const HorizontalSummaryProductCard = ({
 					xCustComponentId="horizontal-summary-card"
 					fullwidth={true}
 					minimisePadding={true}
-					label={'Buy at ' + cardCta.retailer}
+					label={getProductLinkLabelWithoutPrice(cardCta)}
 					url={cardCta.url}
 				/>
 			</div>

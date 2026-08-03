@@ -1,11 +1,7 @@
 import type { ThemeButton } from '@guardian/source/react-components';
+import { getProductLinkLabelWithPrice } from '../lib/affiliateLinksUtils';
 import type { ProductCta } from '../types/content';
 import { ProductLinkButton } from './Button/ProductLinkButton';
-
-const getLabel = (cta: ProductCta): string => {
-	const overrideLabel = cta.text.trim().length > 0;
-	return overrideLabel ? cta.text : `${cta.price} at ${cta.retailer}`;
-};
 
 export const ProductCardButtons = ({
 	productCtas,
@@ -18,7 +14,7 @@ export const ProductCardButtons = ({
 }) => (
 	<>
 		{productCtas.map((productCta, index) => {
-			const label = getLabel(productCta);
+			const label = getProductLinkLabelWithPrice(productCta);
 			return (
 				<ProductLinkButton
 					xCustComponentId={xCustComponentId}

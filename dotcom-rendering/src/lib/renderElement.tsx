@@ -1,6 +1,7 @@
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.island';
+import { AudioPlayer } from '../components/AudioPlayer/AudioPlayer';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.island';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.island';
@@ -980,15 +981,23 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
-		case 'model.dotcomrendering.pageElements.ProductSummaryElement':
+		case 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement':
 			return (
 				<ProductSummary
-					products={element.matchedProducts}
+					title={element.title}
+					products={element.products}
 					format={format}
-					variant={element.variant}
+					displayType={element.displayType}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
+			return (
+				<AudioPlayer
+					element={element}
+					isSensitive={isSensitive}
+					isAcastEnabled={!!switches.acast}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.VideoBlockElement':

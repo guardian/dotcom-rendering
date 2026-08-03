@@ -708,9 +708,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												contributionsServiceUrl
 											}
 											idApiUrl={article.config.idApiUrl}
-											isMinuteArticle={
-												article.pageType.isMinuteArticle
-											}
 											isPaidContent={
 												article.pageType.isPaidContent
 											}
