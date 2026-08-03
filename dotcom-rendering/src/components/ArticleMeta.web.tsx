@@ -566,26 +566,25 @@ export const ArticleMeta = ({
 					</div>
 				</div>
 				{showPreferredSource ? <PreferredSourceButton /> : null}
-				{format.display === ArticleDisplay.Immersive &&
-					mainMediaElements?.[0] && (
-						<Hide until="leftCol">
-							<div
-								css={css`
-									margin-top: ${space[2]}px;
-								`}
-							>
-								<Caption
-									captionText={decideMainMediaCaption(
-										mainMediaElements[0],
-									)}
-									format={format}
-									shouldLimitWidth={false}
-									isLeftCol={true}
-									isMainMedia={true}
-								/>
-							</div>
-						</Hide>
-					)}
+				{isPortraitOrLandscapeImmersive && mainMediaElements?.[0] && (
+					<Hide until="leftCol">
+						<div
+							css={css`
+								margin-top: ${space[2]}px;
+							`}
+						>
+							<Caption
+								captionText={decideMainMediaCaption(
+									mainMediaElements[0],
+								)}
+								format={format}
+								shouldLimitWidth={false}
+								isLeftCol={true}
+								isMainMedia={true}
+							/>
+						</div>
+					</Hide>
+				)}
 			</div>
 		</div>
 	);

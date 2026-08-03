@@ -199,7 +199,7 @@ export const StandardLayoutArticleGrid = ({
 											'immersiveLandscapeFeature'
 											? 3
 											: 4
-										: 1,
+										: 3,
 							)}
 						}
 					`,
@@ -329,7 +329,11 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
-				<Standfirst format={format} standfirst={article.standfirst} />
+				<Standfirst
+					format={format}
+					standfirst={article.standfirst}
+					layoutType={layoutType}
+				/>
 			</GridItem>
 			{isImmersive && (
 				<GridItem
