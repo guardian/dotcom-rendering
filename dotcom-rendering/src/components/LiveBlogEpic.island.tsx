@@ -134,10 +134,8 @@ const usePayload = ({
 
 	return {
 		targeting: {
-			contentType: 'LiveBlog',
 			sectionId,
 			shouldHideReaderRevenue,
-			isMinuteArticle: true,
 			isPaidContent,
 			tags,
 			showSupportMessaging: !hideSupportMessagingForUser,

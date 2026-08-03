@@ -414,7 +414,6 @@ describe('Island: server-side rendering', () => {
 						contentType={''}
 						sectionId={''}
 						shouldHideReaderRevenue={false}
-						isMinuteArticle={false}
 						isPaidContent={false}
 						tags={[]}
 						contributionsServiceUrl={''}

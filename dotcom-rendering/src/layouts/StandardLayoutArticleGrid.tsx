@@ -539,9 +539,6 @@ export const StandardLayoutArticleGrid = ({
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isMinuteArticle={
-									article.pageType.isMinuteArticle
-								}
 								isPaidContent={article.pageType.isPaidContent}
 								pageId={article.pageId}
 								sectionId={article.config.section}
