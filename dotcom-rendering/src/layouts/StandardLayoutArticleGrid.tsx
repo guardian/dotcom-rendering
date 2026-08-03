@@ -273,9 +273,13 @@ export const StandardLayoutArticleGrid = ({
 				area="title"
 				layoutType={layoutType}
 				element="aside"
-				css={css`
-					z-index: ${getZIndex('articleHeadline')};
-				`}
+				css={
+					isImmersive
+						? css`
+								z-index: ${getZIndex('articleHeadline')};
+							`
+						: undefined
+				}
 			>
 				<ArticleTitle
 					format={format}
@@ -291,9 +295,11 @@ export const StandardLayoutArticleGrid = ({
 				area="headline"
 				layoutType={layoutType}
 				css={[
-					css`
-						z-index: ${getZIndex('articleHeadline')};
-					`,
+					isImmersive
+						? css`
+								z-index: ${getZIndex('articleHeadline')};
+							`
+						: undefined,
 					layoutType === 'immersivePortraitDefault' ||
 					layoutType === 'immersivePortraitFeature'
 						? css`

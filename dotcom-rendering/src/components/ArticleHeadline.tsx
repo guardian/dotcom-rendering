@@ -545,7 +545,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated
 							}
 							format={format}
-							snapToInverted={true}
+							snapToInverted={isInverted}
 							isLegacyImmersive={isLegacyImmersive}
 						>
 							<h1
