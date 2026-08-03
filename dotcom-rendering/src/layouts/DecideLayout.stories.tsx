@@ -27,6 +27,7 @@ import {
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { type Article, enhanceArticleType } from '../types/article';
+import type { ImageBlockElement } from '../types/content';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
 
 export type HydratedLayoutDecoratorArgs = {
@@ -237,7 +238,7 @@ const photoEssayImmersiveLabsArticle = enhanceArticleType(
 const portraitMainMedia = PhotoEssayImmersiveLabsFixture.blocks
 	.flatMap((block) => block.elements)
 	.find(
-		(element) =>
+		(element): element is ImageBlockElement =>
 			element._type ===
 				'model.dotcomrendering.pageElements.ImageBlockElement' &&
 			element.media.allImages[0]?.fields.aspectRatio === '4:5',
@@ -250,7 +251,7 @@ if (portraitMainMedia == null) {
 const photoEssayImmersiveLabsPortraitArticle = enhanceArticleType(
 	{
 		...PhotoEssayImmersiveLabsFixture,
-		mainMediaElements: [{ ...portraitMainMedia, role: 'immersive' }],
+		mainMediaElements: [portraitMainMedia],
 	},
 	'Web',
 );
