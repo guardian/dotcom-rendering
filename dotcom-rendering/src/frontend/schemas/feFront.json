@@ -3397,11 +3397,11 @@
             ]
         },
         "VariantId": {
-            "type": "number",
             "enum": [
-                0,
-                1
-            ]
+                "A",
+                "B"
+            ],
+            "type": "string"
         },
         "FEFrontCardStyle": {
             "enum": [
