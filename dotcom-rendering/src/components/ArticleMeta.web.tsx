@@ -312,10 +312,11 @@ export const ArticleMeta = ({
 		renderingTarget,
 		format,
 	);
+	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
 
-	const avatarUrl = shouldShowAvatar(format)
+	const avatarUrl = shouldShowAvatar(format, isImmersiveGrid)
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
@@ -399,7 +400,7 @@ export const ArticleMeta = ({
 								/>
 							)}
 
-							{shouldShowContributor(format) && (
+							{shouldShowContributor(format, isImmersiveGrid) && (
 								<Contributor
 									byline={byline}
 									tags={tags}
@@ -456,7 +457,10 @@ export const ArticleMeta = ({
 									/>
 								)}
 
-								{shouldShowContributor(format) && (
+								{shouldShowContributor(
+									format,
+									isImmersiveGrid,
+								) && (
 									<Contributor
 										byline={byline}
 										tags={tags}

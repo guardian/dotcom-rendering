@@ -188,6 +188,14 @@ export const StandardLayoutArticleGrid = ({
 				`,
 				grid.container,
 				grid.outerRules(),
+				isLabs &&
+					isImmersive &&
+					css`
+						&::before,
+						&::after {
+							z-index: 10;
+						}
+					`,
 				!isLabs &&
 					css`
 						${from.leftCol} {
@@ -350,6 +358,7 @@ export const StandardLayoutArticleGrid = ({
 							shouldLimitWidth={false}
 							isLeftCol={true}
 							isMainMedia={true}
+							showIconBelowLeftCol={true}
 						/>
 					</Hide>
 				</GridItem>
@@ -390,6 +399,7 @@ export const StandardLayoutArticleGrid = ({
 							<ArticleMetaApps
 								branding={branding}
 								format={format}
+								layoutType={layoutType}
 								byline={article.byline}
 								tags={article.tags}
 								primaryDateline={
