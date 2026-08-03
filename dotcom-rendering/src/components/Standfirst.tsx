@@ -83,14 +83,15 @@ const nestedStyles = (format: ArticleFormat) => {
 
 const decideFont = (
 	{ display, design, theme }: ArticleFormat,
-	layoutType: LayoutType,
+	layoutType?: LayoutType,
 ) => {
 	const isLabs = theme === ArticleSpecial.Labs;
 	const isImmersivePortraitOrLandscape =
-		layoutType === 'immersiveLandscapeDefault' ||
-		layoutType === 'immersiveLandscapeFeature' ||
-		layoutType === 'immersivePortraitDefault' ||
-		layoutType === 'immersivePortraitFeature';
+		layoutType &&
+		(layoutType === 'immersiveLandscapeDefault' ||
+			layoutType === 'immersiveLandscapeFeature' ||
+			layoutType === 'immersivePortraitDefault' ||
+			layoutType === 'immersivePortraitFeature');
 	switch (design) {
 		case ArticleDesign.Gallery:
 			if (isLabs) {
