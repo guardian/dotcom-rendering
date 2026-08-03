@@ -2887,6 +2887,28 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           "Ref": "ListenerTagpagerendering92E57078",
         },
         "Priority": 10,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
       },
       "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
     },
@@ -2915,6 +2937,28 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           "Ref": "ListenerTagpagerendering92E57078",
         },
         "Priority": 11,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
       },
       "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
     },
