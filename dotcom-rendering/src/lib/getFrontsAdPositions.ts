@@ -1,5 +1,4 @@
 import { isUndefined } from '@guardian/libs';
-import type { ABTestAPI } from '../experiments/lib/ab-tests';
 import type { DCRCollectionType, DCRGroupedTrails } from '../types/front';
 import {
 	MAX_FRONTS_BANNER_ADS,
@@ -145,6 +144,7 @@ const isEvenIndex = (_collection: unknown, index: number): boolean =>
 const getMobileAdPositions = (
 	collections: AdCandidate[],
 	pageId: string,
+	maxMobileAds = MAX_FRONTS_MOBILE_ADS,
 ): number[] => {
 	const merchHighPosition = getMerchHighPosition(collections);
 	const hasSecondaryContainers = hasSecondaryLevelContainers(collections);
@@ -168,7 +168,7 @@ const getMobileAdPositions = (
 				: (acc: number[], el: number) => [...acc, el], // returns the original array
 			[],
 		)
-		.slice(0, MAX_FRONTS_MOBILE_ADS);
+		.slice(0, maxMobileAds);
 
 	return adPositions;
 };
@@ -410,17 +410,6 @@ const getDesktopAdPositions = (
 	).adPositions;
 
 	return adPositionsFromReducer;
-};
-
-export const getMaxFrontsBannerAds = (
-	abTests: ABTestAPI | undefined,
-): number => {
-	const isInVariantAdLimitGroup =
-		abTests?.isUserInTestGroup(
-			'commercial-fronts-ad-increase-ad-limit',
-			'variant',
-		) ?? false;
-	return isInVariantAdLimitGroup ? 16 : MAX_FRONTS_BANNER_ADS;
 };
 
 export {

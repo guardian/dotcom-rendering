@@ -31,17 +31,19 @@ import { SubNav } from '../components/SubNav.island';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
+import {
+	MAX_FRONTS_BANNER_ADS,
+	MAX_FRONTS_MOBILE_ADS,
+} from '../lib/commercial-constants';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
 import {
 	getDesktopAdPositions,
-	getMaxFrontsBannerAds,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import { ophanComponentId } from '../lib/ophan-helpers';
-import { useAB } from '../lib/useAB';
 import { worldCup2026PageIds } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
@@ -119,9 +121,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		editionId,
 	} = front;
 
-	const abTests = useAB();
+	const isInVariant =
+		front.config.serverSideABTests[
+			'commercial-fronts-ad-increase-ad-limit'
+		] === 'variant';
 
-	const maxAds = getMaxFrontsBannerAds(abTests);
+	const maxDesktopAds = isInVariant ? 16 : MAX_FRONTS_BANNER_ADS;
+	const maxMobileAds = isInVariant ? 20 : MAX_FRONTS_MOBILE_ADS;
 
 	const serverTime = front.serverTime;
 
@@ -138,11 +144,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const merchHighAdPosition = getMerchHighPosition(filteredCollections);
 
 	const mobileAdPositions = renderAds
-		? getMobileAdPositions(filteredCollections, pageId)
+		? getMobileAdPositions(filteredCollections, pageId, maxMobileAds)
 		: [];
 
 	const desktopAdPositions = renderAds
-		? getDesktopAdPositions(filteredCollections, pageId, maxAds)
+		? getDesktopAdPositions(filteredCollections, pageId, maxDesktopAds)
 		: [];
 
 	const showMostPopular =
