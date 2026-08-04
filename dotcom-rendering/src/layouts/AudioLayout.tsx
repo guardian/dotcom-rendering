@@ -325,9 +325,6 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 										}
 									/>
 								)}
-								{!!article.affiliateLinksDisclaimer && (
-									<AffiliateDisclaimer />
-								)}
 							</div>
 						</GridItem>
 						<GridItem area="media">
@@ -373,6 +370,13 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 								count={1}
 								color={themePalette('--straight-lines')}
 							/>
+							{!!article.affiliateLinksDisclaimer && (
+								<AffiliateDisclaimer
+									cssOverrides={css`
+										margin: ${space[4]}px 0;
+									`}
+								/>
+							)}
 						</GridItem>
 						<GridItem area="standfirst">
 							<Standfirst
