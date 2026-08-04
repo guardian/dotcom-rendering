@@ -10,7 +10,12 @@ import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 import { GuLoadBalancedAppExperimental } from '@guardian/cdk/lib/experimental/patterns/gu-load-balanced-app';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
-import { aws_cloudwatch, type App as CDKApp, Duration } from 'aws-cdk-lib';
+import {
+	aws_cloudwatch,
+	type App as CDKApp,
+	Duration,
+	RemovalPolicy,
+} from 'aws-cdk-lib';
 import type { ScalingInterval } from 'aws-cdk-lib/aws-applicationautoscaling';
 import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
 import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
@@ -19,6 +24,14 @@ import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
 import type { CfnService, ScalableTaskCount } from 'aws-cdk-lib/aws-ecs';
 import { ClusterSettings } from 'aws-cdk-lib/aws-ecs/mixins';
+import { Effect, PolicyStatement, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
+import {
+	CfnDelivery,
+	CfnDeliveryDestination,
+	CfnDeliverySource,
+	LogGroup,
+	RetentionDays,
+} from 'aws-cdk-lib/aws-logs';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
@@ -345,6 +358,53 @@ export class RenderingCDKStack extends CDKStack {
 						'Could not create CPU scaling policy for ECS',
 					);
 				}
+
+				// Add Action Logs
+				// This should provide infra level information such as how long it takes to pull an image
+				//
+				// https://docs.aws.amazon.com/AmazonECS/latest/developerguide/action-logs-getting-started.html
+				const ecsServiceName = `${guApp}-${stage}`;
+
+				const actionLogGroup = new LogGroup(this, 'EcsActionLogGroup', {
+					logGroupName: `/aws/vendedlogs/ecs/action-logs/${ecsServiceName}`,
+					retention: RetentionDays.ONE_WEEK,
+					removalPolicy: RemovalPolicy.DESTROY,
+				});
+
+				actionLogGroup.addToResourcePolicy(
+					new PolicyStatement({
+						effect: Effect.ALLOW,
+						principals: [
+							new ServicePrincipal('delivery.logs.amazonaws.com'),
+						],
+						actions: ['logs:CreateLogStream', 'logs:PutLogEvents'],
+						resources: [actionLogGroup.logGroupArn],
+					}),
+				);
+
+				const deliverySource = new CfnDeliverySource(
+					this,
+					'EcsActionDeliverySource',
+					{
+						name: `${ecsServiceName}-source`,
+						resourceArn: app.ecsService.cluster.clusterArn,
+						logType: 'ACTION_LOGS',
+					},
+				);
+
+				const deliveryDestination = new CfnDeliveryDestination(
+					this,
+					'EcsActionDeliveryDestination',
+					{
+						name: `${ecsServiceName}-destination`,
+						destinationResourceArn: actionLogGroup.logGroupArn,
+					},
+				);
+
+				new CfnDelivery(this, 'EcsActionDelivery', {
+					deliverySourceName: deliverySource.name,
+					deliveryDestinationArn: deliveryDestination.attrArn,
+				});
 			}
 		}
 

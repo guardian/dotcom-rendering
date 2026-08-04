@@ -1956,6 +1956,145 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       },
       "Type": "AWS::IAM::Policy",
     },
+    "EcsActionDelivery": {
+      "Properties": {
+        "DeliveryDestinationArn": {
+          "Fn::GetAtt": [
+            "EcsActionDeliveryDestination",
+            "Arn",
+          ],
+        },
+        "DeliverySourceName": "tag-page-rendering-CODE-source",
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::Delivery",
+    },
+    "EcsActionDeliveryDestination": {
+      "Properties": {
+        "DestinationResourceArn": {
+          "Fn::GetAtt": [
+            "EcsActionLogGroup559EC54A",
+            "Arn",
+          ],
+        },
+        "Name": "tag-page-rendering-CODE-destination",
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::DeliveryDestination",
+    },
+    "EcsActionDeliverySource": {
+      "Properties": {
+        "LogType": "ACTION_LOGS",
+        "Name": "tag-page-rendering-CODE-source",
+        "ResourceArn": {
+          "Fn::GetAtt": [
+            "tagpagerenderingEcsClusterE7696595",
+            "Arn",
+          ],
+        },
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::DeliverySource",
+    },
+    "EcsActionLogGroup559EC54A": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "LogGroupName": "/aws/vendedlogs/ecs/action-logs/tag-page-rendering-CODE",
+        "RetentionInDays": 7,
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "EcsActionLogGroupPolicyResourcePolicyD8381A26": {
+      "Properties": {
+        "PolicyDocument": {
+          "Fn::Join": [
+            "",
+            [
+              "{"Statement":[{"Action":["logs:CreateLogStream","logs:PutLogEvents"],"Effect":"Allow","Principal":{"Service":"delivery.logs.amazonaws.com"},"Resource":"",
+              {
+                "Fn::GetAtt": [
+                  "EcsActionLogGroup559EC54A",
+                  "Arn",
+                ],
+              },
+              ""}],"Version":"2012-10-17"}",
+            ],
+          ],
+        },
+        "PolicyName": "TagPageRenderingCODEEcsActionLogGroupPolicy1FA5FF4D",
+      },
+      "Type": "AWS::Logs::ResourcePolicy",
+    },
     "EcsService81FC6EF6": {
       "DependsOn": [
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
