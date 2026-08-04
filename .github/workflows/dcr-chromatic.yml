@@ -19,7 +19,7 @@ jobs:
     # reported. When skipping, Chromatic posts a passing status without building Storybook.
     steps:
       - name: Checkout - On Pull Request
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         if: ${{ github.event_name == 'pull_request'}}
         with:
           fetch-depth: 0
@@ -30,7 +30,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref || github.sha }}
 
       - name: Checkout - On Push Event
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         if: ${{ github.event_name == 'merge_group' }}
         with:
           fetch-depth: 0
