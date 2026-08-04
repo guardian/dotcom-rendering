@@ -1,5 +1,4 @@
 import guardian from '@guardian/eslint-config';
-import ts from '@typescript-eslint/eslint-plugin';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import customElements from 'eslint-plugin-custom-elements';
@@ -88,7 +87,6 @@ export default defineConfig([
 		 * They also must be the exact same version as the one used in the extended configs.
 		 */
 		plugins: {
-			'@typescript-eslint': ts,
 			react: react,
 			'react-hooks': hooks,
 			'jsx-a11y': jsxA11y,
