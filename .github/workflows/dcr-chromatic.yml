@@ -26,7 +26,9 @@ jobs:
           # By default the pull_request event will run on a ephermeral merge commit which simulates a merge between the pull request
           # and the target branch. This can cause issues with Chromatic https://www.chromatic.com/docs/turbosnap#github-pullrequest-triggers
           # Hopefully by checking out the HEAD commit of a PR instead of the merge commit we can avoid some of those issues.
-          ref: ${{ github.event.pull_request.head.sha }}
+          # We fallback to github.sha in case the workflow is triggered by a merge_group event, which doesn't have a pull_request object, see https://www.chromatic.com/docs/faq/merge-queue-ref/
+          ref: ${{ github.event.pull_request.head.ref || github.sha }}
+
       - name: Checkout - On Push Event
         uses: actions/checkout@v6
         if: ${{ github.event_name == 'merge_group' }}

@@ -41,10 +41,8 @@ const wrapperMargins = css`
 export type CanShowData = {
 	isSignedIn: boolean;
 	countryCode?: string;
-	contentType: string;
 	sectionId: string;
 	shouldHideReaderRevenue: boolean;
-	isMinuteArticle: boolean;
 	isPaidContent: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
@@ -62,10 +60,8 @@ const buildPayload = async (
 	data: CanShowData & { hideSupportMessagingForUser: boolean },
 ): Promise<EpicPayload> => ({
 	targeting: {
-		contentType: data.contentType,
 		sectionId: data.sectionId,
 		shouldHideReaderRevenue: data.shouldHideReaderRevenue,
-		isMinuteArticle: data.isMinuteArticle,
 		isPaidContent: data.isPaidContent,
 		tags: data.tags,
 		showSupportMessaging: !data.hideSupportMessagingForUser,

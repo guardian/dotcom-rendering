@@ -5,6 +5,7 @@ describe('isExternalLink', () => {
 		expect(isExternalLink('https://www.theguardian.com/a/path')).toBe(
 			false,
 		);
+		expect(isExternalLink('https://theguardian.com/a/path')).toBe(false);
 		expect(isExternalLink('https://code.dev-theguardian.com/dsa')).toBe(
 			false,
 		);
