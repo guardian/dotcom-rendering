@@ -225,6 +225,11 @@ export const SeriesSectionLink = ({
 		? themePalette('--series-title-match-text')
 		: themePalette('--series-title-text');
 
+	/** Used by the separate 'article section' link, kept distinct from the series tag's colour */
+	const sectionTitleColour = isMatch
+		? themePalette('--series-title-match-text')
+		: themePalette('--article-section-link-text');
+
 	if (
 		format.display === ArticleDisplay.Immersive &&
 		(format.design === ArticleDesign.Comment ||
@@ -274,9 +279,7 @@ export const SeriesSectionLink = ({
 								displayBlock,
 								breakWord,
 								css`
-									color: ${themePalette(
-										'--series-title-text',
-									)};
+									color: ${sectionTitleColour};
 									background-color: ${themePalette(
 										'--section-title-background',
 									)};
@@ -311,7 +314,7 @@ export const SeriesSectionLink = ({
 						fontStyles(format),
 						breakWord,
 						css`
-							color: ${titleColour};
+							color: ${sectionTitleColour};
 							background-color: ${themePalette(
 								'--section-title-background',
 							)};
@@ -392,7 +395,7 @@ export const SeriesSectionLink = ({
 						css={[
 							sectionLabelLink,
 							css`
-								color: ${titleColour};
+								color: ${sectionTitleColour};
 								background-color: ${themePalette(
 									'--section-title-background',
 								)};
@@ -473,7 +476,7 @@ export const SeriesSectionLink = ({
 							displayBlock,
 							breakWord,
 							css`
-								color: ${titleColour};
+								color: ${sectionTitleColour};
 								background-color: ${themePalette(
 									'--section-title-background',
 								)};
@@ -515,10 +518,7 @@ export const SeriesSectionLink = ({
 				css={[
 					sectionLabelLink,
 					css`
-						color: ${titleColour};
-						background-color: ${themePalette(
-							'--section-title-background',
-						)};
+						color: ${sectionTitleColour};
 					`,
 					marginRight,
 					fontStyles(format),
