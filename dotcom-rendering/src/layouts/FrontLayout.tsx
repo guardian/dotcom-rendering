@@ -31,11 +31,11 @@ import { SubNav } from '../components/SubNav.island';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
-import { getMaxFrontsBannerAds } from '../lib/commercial-constants';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
 import {
 	getDesktopAdPositions,
+	getMaxFrontsBannerAds,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';

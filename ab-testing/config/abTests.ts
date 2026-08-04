@@ -75,7 +75,7 @@ const ABTests: ABTest[] = [
 			"A test to understand the impact of changing page-level ad limit on fronts",
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-08-11",
-		type: "client",
+		type: "server",
 		status: "ON",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",

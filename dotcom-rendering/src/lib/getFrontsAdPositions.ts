@@ -1,4 +1,5 @@
 import { isUndefined } from '@guardian/libs';
+import type { ABTestAPI } from '../experiments/lib/ab-tests';
 import type { DCRCollectionType, DCRGroupedTrails } from '../types/front';
 import {
 	MAX_FRONTS_BANNER_ADS,
@@ -409,6 +410,17 @@ const getDesktopAdPositions = (
 	).adPositions;
 
 	return adPositionsFromReducer;
+};
+
+export const getMaxFrontsBannerAds = (
+	abTests: ABTestAPI | undefined,
+): number => {
+	const isInVariantAdLimitGroup =
+		abTests?.isUserInTestGroup(
+			'commercial-fronts-ad-increase-ad-limit',
+			'variant',
+		) ?? false;
+	return isInVariantAdLimitGroup ? 16 : MAX_FRONTS_BANNER_ADS;
 };
 
 export {
