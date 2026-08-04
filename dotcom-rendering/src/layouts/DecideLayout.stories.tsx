@@ -274,7 +274,6 @@ const labsImmersiveArticle = ({
 
 const immersiveLabsParameters = {
 	...webParameters,
-	chromatic: { disableSnapshot: true },
 };
 
 export const WebPhotoEssayImmersiveLabsLight: Story = {
