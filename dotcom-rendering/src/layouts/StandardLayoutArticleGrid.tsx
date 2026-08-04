@@ -164,6 +164,14 @@ export const StandardLayoutArticleGrid = ({
 					<AffiliateDisclaimer
 						cssOverrides={css`
 							margin: ${space[4]}px 0;
+							${until.tablet} {
+								margin-bottom: ${space[2]}px;
+							}
+							${from.leftCol} {
+								margin-bottom: ${isShowcase
+									? space[4]
+									: space[1]}px;
+							}
 						`}
 					/>
 				)}
