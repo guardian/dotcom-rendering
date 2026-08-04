@@ -51,11 +51,7 @@ const HydratedLayout: Decorator<
 		display: article.display,
 		theme: article.theme,
 	};
-	const colourScheme =
-		(isObject(context.parameters.config) &&
-		context.parameters.config.renderingTarget === 'Apps'
-			? context.args.colourScheme
-			: 'light') ?? 'light';
+	const colourScheme = context.args.colourScheme ?? 'light';
 	const paletteDecorator = colourSchemeDecorator(
 		colourScheme,
 	)<DecideLayoutProps>([format]);
@@ -116,6 +112,13 @@ const webParameters = {
 	config: {
 		renderingTarget: 'Web',
 		darkModeAvailable: false,
+	},
+};
+
+const webDarkParameters = {
+	config: {
+		renderingTarget: 'Web',
+		darkModeAvailable: true,
 	},
 };
 
@@ -284,6 +287,17 @@ export const WebPhotoEssayImmersiveLabsLight: Story = {
 	parameters: immersiveLabsParameters,
 };
 
+export const WebPhotoEssayImmersiveLabsDark: Story = {
+	args: {
+		article: WebPhotoEssayImmersiveLabsLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
+};
+
 export const WebPhotoEssayImmersiveLabsPortraitLight: Story = {
 	args: {
 		article: labsImmersiveArticle({
@@ -292,6 +306,17 @@ export const WebPhotoEssayImmersiveLabsPortraitLight: Story = {
 		}),
 	},
 	parameters: immersiveLabsParameters,
+};
+
+export const WebPhotoEssayImmersiveLabsPortraitDark: Story = {
+	args: {
+		article: WebPhotoEssayImmersiveLabsPortraitLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
 };
 
 export const WebFeatureImmersiveLabsLandscapeLight: Story = {
@@ -304,6 +329,17 @@ export const WebFeatureImmersiveLabsLandscapeLight: Story = {
 	parameters: immersiveLabsParameters,
 };
 
+export const WebFeatureImmersiveLabsLandscapeDark: Story = {
+	args: {
+		article: WebFeatureImmersiveLabsLandscapeLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
+};
+
 export const WebFeatureImmersiveLabsPortraitLight: Story = {
 	args: {
 		article: labsImmersiveArticle({
@@ -312,6 +348,17 @@ export const WebFeatureImmersiveLabsPortraitLight: Story = {
 		}),
 	},
 	parameters: immersiveLabsParameters,
+};
+
+export const WebFeatureImmersiveLabsPortraitDark: Story = {
+	args: {
+		article: WebFeatureImmersiveLabsPortraitLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
 };
 
 const standardStandardLabsWebFixture: Article = {
