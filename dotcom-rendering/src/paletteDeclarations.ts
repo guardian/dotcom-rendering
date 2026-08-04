@@ -88,7 +88,9 @@ const textblockTextDark: PaletteFunction = () => 'inherit';
 const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
-			return sourcePalette.neutral[97];
+			return theme === ArticleSpecial.Labs
+				? sourcePalette.neutral[7]
+				: sourcePalette.neutral[97];
 		default: {
 			switch (design) {
 				case ArticleDesign.Editorial:
@@ -203,6 +205,8 @@ const headlineBackgroundLight: PaletteFunction = ({
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (theme) {
+				case ArticleSpecial.Labs:
+					return 'transparent';
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				default:

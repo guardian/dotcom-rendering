@@ -31,11 +31,13 @@ type Props = {
 	mediaType?: MainMedia['type'];
 	isMainMedia?: boolean;
 	isImmersive?: boolean;
+	showIconBelowLeftCol?: boolean;
 };
 
 type IconProps = {
 	format: ArticleFormat;
 	isMainMedia?: boolean;
+	showIconBelowLeftCol: boolean;
 };
 
 const captionStyle = (isMainMedia: boolean) => css`
@@ -251,12 +253,17 @@ const galleryStyles = css`
 	}
 `;
 
-const CameraIcon = ({ format, isMainMedia }: IconProps) => {
+const CameraIcon = ({
+	format,
+	isMainMedia,
+	showIconBelowLeftCol,
+}: IconProps) => {
 	return (
 		<span
 			css={[
 				iconStyle(isMainMedia),
 				format.display === ArticleDisplay.Immersive &&
+					!showIconBelowLeftCol &&
 					hideIconBelowLeftCol,
 			]}
 		>
@@ -265,12 +272,17 @@ const CameraIcon = ({ format, isMainMedia }: IconProps) => {
 	);
 };
 
-const VideoIcon = ({ format, isMainMedia }: IconProps) => {
+const VideoIcon = ({
+	format,
+	isMainMedia,
+	showIconBelowLeftCol,
+}: IconProps) => {
 	return (
 		<span
 			css={[
 				iconStyle(isMainMedia),
 				format.display === ArticleDisplay.Immersive &&
+					!showIconBelowLeftCol &&
 					hideIconBelowLeftCol,
 				videoIconStyle,
 			]}
@@ -292,6 +304,7 @@ export const Caption = ({
 	mediaType = 'Gallery',
 	isMainMedia = false,
 	isImmersive = false,
+	showIconBelowLeftCol = false,
 }: Props) => {
 	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
 	const noCaption = !captionText?.trim();
@@ -325,9 +338,17 @@ export const Caption = ({
 			data-spacefinder-role="inline"
 		>
 			{mediaType === 'YoutubeVideo' || mediaType === 'SelfHostedVideo' ? (
-				<VideoIcon format={format} isMainMedia={isMainMedia} />
+				<VideoIcon
+					format={format}
+					isMainMedia={isMainMedia}
+					showIconBelowLeftCol={showIconBelowLeftCol}
+				/>
 			) : (
-				<CameraIcon format={format} isMainMedia={isMainMedia} />
+				<CameraIcon
+					format={format}
+					isMainMedia={isMainMedia}
+					showIconBelowLeftCol={showIconBelowLeftCol}
+				/>
 			)}
 			{!!captionText && (
 				<span
