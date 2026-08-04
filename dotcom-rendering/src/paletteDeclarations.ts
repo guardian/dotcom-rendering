@@ -1369,8 +1369,6 @@ const followIconFillLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.culture[400];
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[400];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1401,8 +1399,6 @@ const followIconFillLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.culture[400];
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[400];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1441,8 +1437,6 @@ const followIconFillDark: PaletteFunction = ({ theme, design }) => {
 			return sourcePalette.neutral[93];
 		case ArticleDesign.Standard:
 			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
 				case Pillar.Opinion:
 					return sourcePalette.opinion[500];
 				case Pillar.Sport:
@@ -1480,8 +1474,6 @@ const followIconFillDark: PaletteFunction = ({ theme, design }) => {
 					return sourcePalette.culture[500];
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[500];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[700];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1500,8 +1492,6 @@ const followIconFillDark: PaletteFunction = ({ theme, design }) => {
 					return sourcePalette.culture[500];
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[500];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[700];
 				case ArticleSpecial.SpecialReportAlt:
@@ -2496,12 +2486,7 @@ const standfirstTextLight: PaletteFunction = (format) => {
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[0];
-				default:
-					return sourcePalette.neutral[86];
-			}
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Gallery:
 		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
@@ -2531,12 +2516,7 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				default:
-					return sourcePalette.neutral[86];
-			}
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
 		case ArticleDesign.Explainer:
@@ -3960,20 +3940,13 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 		case ArticleDesign.Picture:
 		case ArticleDesign.HostedArticle:
 		case ArticleDesign.HostedVideo:
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				default:
-					return sourcePalette.neutral[86];
-			}
+			return sourcePalette.neutral[86];
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.news[400];
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
 				default:
 					return pillarPalette(theme, 400);
 			}
@@ -3981,8 +3954,6 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 			switch (theme) {
 				case Pillar.News:
 					return sourcePalette.news[300];
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -3992,8 +3963,6 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 			}
 		default:
 			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				default:
@@ -4031,16 +4000,9 @@ const shareButtonDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				default:
-					return sourcePalette.neutral[86];
-			}
+			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -5019,6 +4981,8 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 				case Pillar.Culture:
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 			}
@@ -5254,6 +5218,7 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[700];
 				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.Labs:
 					return sourcePalette.news[500];
 			}
 		case ArticleDesign.Standard:
@@ -5277,6 +5242,8 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[700];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
 			}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
@@ -5291,6 +5258,8 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
 			}
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
