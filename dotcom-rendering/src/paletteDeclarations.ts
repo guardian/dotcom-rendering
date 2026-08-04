@@ -88,7 +88,9 @@ const textblockTextDark: PaletteFunction = () => 'inherit';
 const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
-			return sourcePalette.neutral[7];
+			return theme === ArticleSpecial.Labs
+				? sourcePalette.neutral[7]
+				: sourcePalette.neutral[97];
 		default: {
 			switch (design) {
 				case ArticleDesign.Editorial:
@@ -195,8 +197,21 @@ const headlineMatchTextLight: PaletteFunction = (format) =>
 const headlineMatchTextDark: PaletteFunction = (format) =>
 	seriesTitleMatchTextDark(format);
 
-const headlineBackgroundLight: PaletteFunction = ({ display, design }) => {
+const headlineBackgroundLight: PaletteFunction = ({
+	display,
+	design,
+	theme,
+}) => {
 	switch (display) {
+		case ArticleDisplay.Immersive:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return 'transparent';
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				default:
+					return sourcePalette.neutral[7];
+			}
 		case ArticleDisplay.Showcase:
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Standard:
@@ -6027,6 +6042,65 @@ const lastUpdatedTextDark: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
+const immersivePortraitHeadlineLight: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const immersivePortraitHeadlineDark: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
+const immersivePortraitStandfirstLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+			return pillarPalette(format.theme, 200);
+		default:
+			return sourcePalette.neutral[0];
+	}
+};
+
+const immersivePortraitStandfirstDark: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+			return pillarPalette(format.theme, 600);
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
+
+const immersivePortraitTitleBackgroundLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+			return pillarPalette(format.theme, 400);
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
+
+const immersivePortraitTitleBackgroundDark: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+			return pillarPalette(format.theme, 500);
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+
+const immersivePortraitTitleTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const immersivePortraitTitleTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+
 const bioLinkUnderline: PaletteFunction = () => sourcePalette.neutral[86];
 
 const multiBylineNonLinkedTextLight: PaletteFunction = () =>
@@ -7470,6 +7544,22 @@ const paletteColours = {
 	'--image-title-background': {
 		light: imageTitleBackground,
 		dark: imageTitleBackground,
+	},
+	'--immersive-portrait-headline-text': {
+		light: immersivePortraitHeadlineLight,
+		dark: immersivePortraitHeadlineDark,
+	},
+	'--immersive-portrait-standfirst-text': {
+		light: immersivePortraitStandfirstLight,
+		dark: immersivePortraitStandfirstDark,
+	},
+	'--immersive-portrait-title-background': {
+		light: immersivePortraitTitleBackgroundLight,
+		dark: immersivePortraitTitleBackgroundDark,
+	},
+	'--immersive-portrait-title-text': {
+		light: immersivePortraitTitleTextLight,
+		dark: immersivePortraitTitleTextDark,
 	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,

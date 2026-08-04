@@ -71,7 +71,6 @@ export interface BannerRenderProps {
 	countryCode?: string;
 	fetchEmail?: () => Promise<string | null>;
 	tickerSettings?: TickerSettings;
-	isSupporter?: boolean;
 	articleCounts: ArticleCounts; // TODO - export
 	countType?: ArticleCountType;
 	separateArticleCount?: boolean;

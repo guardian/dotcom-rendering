@@ -15,6 +15,7 @@ import {
 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
 import { grid } from '../../src/grid';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -27,6 +28,7 @@ import { palette } from '../palette';
 type Props = {
 	format: ArticleFormat;
 	standfirst: string;
+	layoutType?: LayoutType;
 };
 
 const nestedStyles = (format: ArticleFormat) => {
@@ -79,8 +81,13 @@ const nestedStyles = (format: ArticleFormat) => {
 	`;
 };
 
-const decideFont = ({ display, design, theme }: ArticleFormat) => {
+const decideFont = (
+	{ display, design, theme }: ArticleFormat,
+	layoutType?: LayoutType,
+) => {
 	const isLabs = theme === ArticleSpecial.Labs;
+	const isImmersivePortraitOrLandscape =
+		layoutType?.startsWith('immersive') ?? false;
 	switch (design) {
 		case ArticleDesign.Gallery:
 			if (isLabs) {
@@ -107,6 +114,11 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 							${from.tablet} {
 								${textSans24};
 							}
+						`;
+					}
+					if (isImmersivePortraitOrLandscape) {
+						return css`
+							${headlineMedium20};
 						`;
 					}
 					return css`
@@ -143,6 +155,11 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 							${from.tablet} {
 								${textSans24};
 							}
+						`;
+					}
+					if (isImmersivePortraitOrLandscape) {
+						return css`
+							${headlineMedium20};
 						`;
 					}
 					return css`
@@ -254,7 +271,12 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 	}
 };
 
-const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
+const standfirstStyles = (
+	{ display, design, theme }: ArticleFormat,
+	layoutType?: LayoutType,
+) => {
+	const isImmersivePortraitOrLandscape =
+		layoutType?.startsWith('immersive') ?? false;
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (design) {
@@ -269,14 +291,15 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						${from.tablet} {
 							max-width: 460px;
 						}
-						color: ${palette('--standfirst-text')};
+						color: ${isImmersivePortraitOrLandscape
+							? palette('--immersive-portrait-standfirst-text')
+							: palette('--standfirst-text')};
 						li::before {
 							height: 17px;
 							width: 17px;
 						}
 					`;
 			}
-
 		case ArticleDisplay.NumberedList:
 			return css`
 				max-width: 540px;
@@ -386,8 +409,7 @@ const hoverStyles = css`
 		border-bottom: solid 1px ${palette('--standfirst-link-border')};
 	}
 `;
-
-export const Standfirst = ({ format, standfirst }: Props) => {
+export const Standfirst = ({ format, standfirst, layoutType }: Props) => {
 	if (standfirst.trim() === '') {
 		return null;
 	}
@@ -396,8 +418,8 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 			<div
 				css={[
 					nestedStyles(format),
-					standfirstStyles(format),
-					decideFont(format),
+					standfirstStyles(format, layoutType),
+					decideFont(format, layoutType),
 					decidePadding(format),
 					hoverStyles,
 				]}

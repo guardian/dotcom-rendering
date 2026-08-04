@@ -7,6 +7,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 } from '../lib/articleFormat';
+import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
@@ -38,6 +39,18 @@ const immersiveMargins = css`
 	}
 `;
 
+const legacyImmersiveMargins = css`
+	max-width: 400px;
+	min-width: 200px;
+	margin-bottom: 4px;
+	${from.tablet} {
+		margin-left: 16px;
+	}
+	${from.leftCol} {
+		margin-left: 25px;
+	}
+`;
+
 const galleryStyles = css`
 	${grid.column.all}
 
@@ -49,6 +62,21 @@ const galleryStyles = css`
 		${grid.between('centre-column-start', 'grid-end')};
 		margin-left: -10px;
 	}
+`;
+
+const immersivePortraitStyles = css`
+	${from.desktop} {
+		height: 100%;
+		justify-content: flex-end;
+	}
+`;
+
+const immersivePortraitSeriesSectionWrapperStyles = css`
+	padding: 3px 6px 4px;
+	margin-bottom: 0;
+	background-color: ${themePalette('--immersive-portrait-title-background')};
+	width: fit-content;
+	min-width: unset;
 `;
 
 export const ArticleTitle = ({
@@ -65,13 +93,24 @@ export const ArticleTitle = ({
 			[ArticleDesign.Gallery, ArticleDesign.HostedGallery].includes(
 				format.design,
 			) && galleryStyles,
+			(layoutType === 'immersivePortraitDefault' ||
+				layoutType === 'immersivePortraitFeature') &&
+				immersivePortraitStyles,
 			sectionStyles,
 		]}
 	>
 		<div
 			css={
 				format.display === ArticleDisplay.Immersive
-					? immersiveMargins
+					? layoutType == null
+						? legacyImmersiveMargins
+						: layoutType === 'immersivePortraitDefault' ||
+							  layoutType === 'immersivePortraitFeature'
+							? [
+									immersiveMargins,
+									immersivePortraitSeriesSectionWrapperStyles,
+								]
+							: immersiveMargins
 					: undefined
 			}
 		>

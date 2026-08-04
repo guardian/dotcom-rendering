@@ -32,6 +32,7 @@ import {
 } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
+import { getZIndex } from '../lib/getZIndex';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
 import { palette as themePalette } from '../palette';
@@ -149,6 +150,11 @@ export const StandardLayoutArticleGrid = ({
 		'model.dotcomrendering.pageElements.ImageBlockElement'
 			? mainMedia.media.allImages[0]?.url
 			: undefined;
+	const mainMediaAspectRatio =
+		mainMedia?._type ===
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+			? mainMedia.media.allImages[0]?.fields.aspectRatio
+			: undefined;
 
 	const mainMediaOrientation =
 		mainMediaUrl != null ? getImageOrientation(mainMediaUrl) : 'landscape';
@@ -206,33 +212,14 @@ export const StandardLayoutArticleGrid = ({
 				isImmersiveLandscape &&
 					css`
 						${from.desktop} {
-							grid-template-rows: auto auto ${ageWarning
+							grid-template-rows: auto auto ${ageWarning != null
 									? '130px'
 									: '90px'} auto auto auto auto auto;
 							${grid.centreRule(
-								isImmersivePortrait
-									? 4
-									: isImmersiveLandscape
-										? layoutType ===
-											'immersiveLandscapeFeature'
-											? 3
-											: 4
-										: 1,
+								layoutType === 'immersiveLandscapeFeature'
+									? 3
+									: 4,
 							)}
-						}
-					`,
-				isImmersivePortrait &&
-					css`
-						${from.desktop} {
-							grid-template-rows: 0.25fr 1fr auto;
-						}
-					`,
-				isImmersiveLandscape &&
-					css`
-						${from.desktop} {
-							grid-template-rows: auto auto ${ageWarning
-									? '130px'
-									: '90px'} auto auto auto auto auto;
 						}
 					`,
 			]}
@@ -240,22 +227,21 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="media"
 				layoutType={layoutType}
-				css={[
-					isImmersiveLandscape
+				css={
+					isImmersive
 						? css`
+								align-self: start;
+								${mainMediaAspectRatio != null &&
+								`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
+
 								${from.desktop} {
-									margin-left: -20px;
-									margin-right: -20px;
+									${isImmersiveLandscape &&
+									`margin-left: -20px;
+									margin-right: -20px;`}
 								}
 							`
-						: undefined,
-					// Force portrait aspect ratio for local dev purposes
-					isImmersivePortrait
-						? css`
-								aspect-ratio: 4 / 5;
-							`
-						: undefined,
-				]}
+						: undefined
+				}
 			>
 				<MainMedia
 					format={format}
@@ -280,7 +266,7 @@ export const StandardLayoutArticleGrid = ({
 				layoutType={layoutType}
 				element="aside"
 				css={css`
-					z-index: 100;
+					z-index: ${getZIndex('articleHeadline')};
 				`}
 			>
 				<ArticleTitle
@@ -297,6 +283,9 @@ export const StandardLayoutArticleGrid = ({
 				area="headline"
 				layoutType={layoutType}
 				css={[
+					css`
+						z-index: ${getZIndex('articleHeadline')};
+					`,
 					layoutType === 'immersivePortraitDefault' ||
 					layoutType === 'immersivePortraitFeature'
 						? css`
@@ -307,9 +296,7 @@ export const StandardLayoutArticleGrid = ({
 										${themePalette('--article-border')};
 								}
 							`
-						: css`
-								z-index: 20;
-							`,
+						: undefined,
 					isImmersiveLandscape &&
 						css`
 							${from.desktop} {
@@ -342,7 +329,11 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
-				<Standfirst format={format} standfirst={article.standfirst} />
+				<Standfirst
+					format={format}
+					standfirst={article.standfirst}
+					layoutType={layoutType}
+				/>
 			</GridItem>
 			{isImmersive && (
 				<GridItem
@@ -475,7 +466,7 @@ export const StandardLayoutArticleGrid = ({
 				area="body"
 				layoutType={layoutType}
 				css={css`
-					z-index: 20;
+					z-index: ${getZIndex('bodyArea')};
 				`}
 			>
 				{/* Only show Listen to Article button on App landscape views */}
@@ -552,9 +543,6 @@ export const StandardLayoutArticleGrid = ({
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isMinuteArticle={
-									article.pageType.isMinuteArticle
-								}
 								isPaidContent={article.pageType.isPaidContent}
 								pageId={article.pageId}
 								sectionId={article.config.section}

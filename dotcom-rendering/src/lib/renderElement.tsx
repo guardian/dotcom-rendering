@@ -180,6 +180,7 @@ export const renderElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	articleArrangement,
 	idApiUrl,
 }: Props) => {
 	const isBlog =
@@ -411,6 +412,7 @@ export const renderElement = ({
 					title={element.title}
 					isAvatar={element.isAvatar}
 					isTimeline={isTimeline}
+					articleArrangement={articleArrangement}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -1081,6 +1083,7 @@ export const RenderArticleElement = ({
 		shouldHideAds,
 		contentType,
 		contentLayout,
+		articleArrangement,
 		idApiUrl,
 	});
 

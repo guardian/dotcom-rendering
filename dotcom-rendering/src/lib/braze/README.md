@@ -35,10 +35,11 @@ The system is encapsulated primarily in `BrazeBannersSystem.tsx` and interacts w
 
 We map DCR-specific slots to Braze Placement IDs. This abstraction allows us to change the underlying ID without refactoring the components.
 
-| DCR Placement ID                             | Description                                                         |
-| :------------------------------------------- | :------------------------------------------------------------------ |
-| `BrazeBannersSystemPlacementId.EndOfArticle` | Appears at the bottom of the article body (Epic slot).              |
-| `BrazeBannersSystemPlacementId.Banner`       | Appears fixed at the bottom of the viewport (Sticky Bottom Banner). |
+| DCR Placement ID                                          | Description                                                         |
+| :-------------------------------------------------------- | :------------------------------------------------------------------ |
+| `BrazeBannersSystemPlacementId.EndOfArticle`              | Appears at the bottom of the article body (Epic slot).              |
+| `BrazeBannersSystemPlacementId.Banner`                    | Appears fixed at the bottom of the viewport (Sticky Bottom Banner). |
+| `BrazeBannersSystemPlacementId.FeastContextualNudge1`–`5` | Replaces up to five evenly distributed Feast contextual nudges.     |
 
 ### 2. Concurrency & Slot Priority
 
@@ -96,7 +97,8 @@ Braze enforces a "Token Bucket" algorithm for refreshing banners (re-checking el
 
 - **Capacity**: 5 tokens per session.
 - **Refill**: 1 token every 3 minutes.
-- **Implementation**: The `refreshBanners()` function creates a race condition with a timeout. If the network is slow or tokens are empty, DCR proceeds without blocking the render.
+- **Page-aware requests**: DCR requests only placements whose `gu-island` exists on the current page.
+- **Implementation**: The `refreshBanners()` function creates a race condition with a timeout. A failed or timed-out placement is marked stale so cached eligibility is not rendered. Designable slots continue through message-picker fallbacks; Feast slots render the native Feast card. A later successful refresh marks the placements fresh again.
 
 ### 6. Wrapper Mode & Styling
 
@@ -160,7 +162,7 @@ All user interactions with the banner are tracked with both a Braze banner click
 | Dismiss Banner       | `dismiss_button`              | `braze_banner_dismissed`             | `placementId`                                                                     |
 | CSS Validation Fail  | —                             | `braze_banner_css_validation_failed` | `placementId`                                                                     |
 
-> The Braze click (`logBannerClick`) feeds native Braze campaign reports, while the custom event (`logCustomEvent`) provides granular analytics available in Braze Data Export and BigQuery.
+> Dismissal also calls the Web SDK's `dismissBanner(banner)`. This records Braze's native dismissal and suppresses that Banner for the user. The Braze click and custom event remain for the existing reporting streams.
 
 ## Communication Protocol
 
@@ -168,15 +170,16 @@ The banner uses a `postMessage` protocol to interact with the host DCR page.
 
 ### Supported Message Types
 
-| Message Type                                       | Function                                              |
-| :------------------------------------------------- | :---------------------------------------------------- |
-| `BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS`             | Checks if user is `SignedIn`.                         |
-| `BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS`           | Requests email (if signed in).                        |
-| `BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE`        | Subscribes to a newsletter ID.                        |
-| `BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE`          | Creates a one-off reminder for contribution requests. |
-| `BRAZE_BANNERS_SYSTEM:NAVIGATE_TO_URL`             | Navigates the host page to a URL.                     |
-| `BRAZE_BANNERS_SYSTEM:DISMISS_BANNER`              | Removes the banner from the DOM.                      |
-| `BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE` | Reads Key-Value pairs from the Campaign config.       |
+| Message Type                                       | Function                                               |
+| :------------------------------------------------- | :----------------------------------------------------- |
+| `BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS`             | Checks if user is `SignedIn`.                          |
+| `BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS`           | Requests email (if signed in).                         |
+| `BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE`        | Subscribes to a newsletter ID.                         |
+| `BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE`          | Creates a one-off reminder for contribution requests.  |
+| `BRAZE_BANNERS_SYSTEM:NAVIGATE_TO_URL`             | Navigates the host page to a URL.                      |
+| `BRAZE_BANNERS_SYSTEM:DISMISS_BANNER`              | Removes the banner from the DOM.                       |
+| `BRAZE_BANNERS_SYSTEM:GET_CONTEXT`                 | Reads the page context supplied by the host component. |
+| `BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE` | Reads Key-Value pairs from the Campaign config.        |
 
 ### Feature Details
 
@@ -295,7 +298,7 @@ Removes the banner from the DOM.
 
 **Response**: None (the banner is immediately removed)
 
-**Description**: Programmatically dismisses the banner, removing it from the page. Use this when the user clicks a close button or completes an action that should hide the banner.
+**Description**: Programmatically dismisses the banner, removes it from the page, and calls Braze's native `dismissBanner` API so the Banner is suppressed for that user. Duplicate SDK dismissals are safe and ignored by Braze.
 
 ---
 

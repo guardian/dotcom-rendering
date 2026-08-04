@@ -325,10 +325,7 @@ export const ArticleMeta = ({
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 
 	const isPortraitOrLandscapeImmersive =
-		layoutType === 'immersiveLandscapeDefault' ||
-		layoutType === 'immersivePortraitDefault' ||
-		layoutType === 'immersiveLandscapeFeature' ||
-		layoutType === 'immersivePortraitFeature';
+		layoutType?.startsWith('immersive') ?? false;
 
 	const isAudio = format.design === ArticleDesign.Audio;
 

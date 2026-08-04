@@ -1,4 +1,8 @@
-import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -9,6 +13,7 @@ import { GalleryLayout } from './GalleryLayout';
 import { HostedArticleLayout } from './HostedArticleLayout';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { HostedVideoLayout } from './HostedVideoLayout';
+import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
@@ -53,8 +58,15 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 					);
 				}
 				default: {
-					return (
+					return article.theme === ArticleSpecial.Labs ? (
 						<StandardLayout
+							article={article.frontendData}
+							format={format}
+							renderingTarget={renderingTarget}
+							serverTime={serverTime}
+						/>
+					) : (
+						<ImmersiveLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -229,8 +241,16 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 					);
 				}
 				default: {
-					return (
+					return article.theme === ArticleSpecial.Labs ? (
 						<StandardLayout
+							article={article.frontendData}
+							format={format}
+							NAV={NAV}
+							renderingTarget={renderingTarget}
+							serverTime={serverTime}
+						/>
+					) : (
+						<ImmersiveLayout
 							article={article.frontendData}
 							format={format}
 							NAV={NAV}
