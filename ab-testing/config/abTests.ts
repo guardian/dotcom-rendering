@@ -145,6 +145,17 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "puzzles-new-hub",
+		description: "Rollout of the new Puzzles Hub experience",
+		owners: ["puzzles.team@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-12-31",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
