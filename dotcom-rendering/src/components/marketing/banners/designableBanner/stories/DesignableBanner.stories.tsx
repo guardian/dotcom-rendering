@@ -13,7 +13,6 @@ const meta: Meta<Props> = {
 	title: 'Components/marketing/DesignableBanner',
 	args: {
 		bannerChannel: 'contributions',
-		isSupporter: false,
 		countryCode: 'GB',
 		tracking,
 		content: {

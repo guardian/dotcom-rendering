@@ -1,4 +1,3 @@
-import { isUndefined } from '@guardian/libs';
 import type { FEFormat } from '../frontend/feArticle';
 import { getLargest, getMaster } from '../lib/image';
 import type { Block } from '../types/blocks';
@@ -7,6 +6,8 @@ import type {
 	FEElement,
 	ImageBlockElement,
 	ImageForLightbox,
+	ProductBlockElement,
+	ProductCta,
 } from '../types/content';
 import {
 	getCartoonImageForLightbox,
@@ -28,8 +29,20 @@ const THRESHOLD = 620;
 const isLightboxable = (width: number, height: number): boolean =>
 	Math.max(width, height) > THRESHOLD;
 
+/**
+ * Carried down through a product's content while looking for its images, so
+ * that every image belonging to a product (its own card photo and any images
+ * nested in its review body) can share the same CTAs and caption.
+ */
+type ProductContext = {
+	ctas?: ProductCta[];
+	/** Falls back to the product's own caption when a body image has none of its own */
+	caption?: string;
+};
+
 const buildLightboxImage = (
 	element: ImageBlockElement | CartoonBlockElement,
+	productContext?: ProductContext,
 ): Omit<ImageForLightbox, 'position'> | undefined => {
 	const allImages = isImage(element)
 		? element.media.allImages
@@ -49,14 +62,14 @@ const buildLightboxImage = (
 		? {
 				alt: element.data.alt,
 				credit: element.data.credit,
-				caption: element.data.caption,
+				caption: element.data.caption || productContext?.caption,
 				title: element.title,
 				starRating: element.starRating,
 			}
 		: {
 				alt: element.alt,
 				credit: element.credit,
-				caption: element.caption,
+				caption: element.caption || productContext?.caption,
 			};
 
 	return {
@@ -66,38 +79,90 @@ const buildLightboxImage = (
 		elementId: element.elementId,
 		displayCredit: element.displayCredit,
 		...data,
+		...(productContext?.ctas ? { productCtas: productContext.ctas } : {}),
 	};
 };
 
 const isBlog = (design: FEFormat['design']) =>
 	design === 'LiveBlogDesign' || design === 'DeadBlogDesign';
 
-const getImages = (
+/**
+ * Recursively finds every lightbox-eligible image reachable from an element,
+ * in document order.
+ *
+ * For a ProductBlockElement, this means its body content images followed by
+ * its own card photo (matching the order they render on the page), with both
+ * carrying that product's CTAs and (as a fallback) its caption — keeping a
+ * product's images adjacent to each other in the final lightbox order,
+ * rather than grouped by image "kind".
+ */
+const getLightboxImages = (
 	element: FEElement,
-): (ImageBlockElement | CartoonBlockElement)[] => {
+	productContext?: ProductContext,
+): Omit<ImageForLightbox, 'position'>[] => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
-			return [element];
-		case 'model.dotcomrendering.pageElements.CartoonBlockElement':
-			return [element];
+		case 'model.dotcomrendering.pageElements.CartoonBlockElement': {
+			const image = buildLightboxImage(element, productContext);
+			return image ? [image] : [];
+		}
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
-			return element.images;
+			return element.images.flatMap((image) =>
+				getLightboxImages(image, productContext),
+			);
 		case 'model.dotcomrendering.pageElements.ListBlockElement':
 			return element.items.flatMap((item) =>
-				item.elements.flatMap(getImages),
+				item.elements.flatMap((el) =>
+					getLightboxImages(el, productContext),
+				),
 			);
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return element.sections.flatMap((section) =>
 				section.events.flatMap((event) =>
-					event.body.flatMap(getImages),
+					event.body.flatMap((el) =>
+						getLightboxImages(el, productContext),
+					),
 				),
 			);
-		case 'model.dotcomrendering.pageElements.ProductBlockElement':
-			return element.content.flatMap(getImages);
+		case 'model.dotcomrendering.pageElements.ProductBlockElement': {
+			const ownContext: ProductContext = {
+				ctas:
+					element.productCtas.length > 0
+						? element.productCtas
+						: undefined,
+				caption: element.image?.caption,
+			};
+			const contentImages = element.content.flatMap((el) =>
+				getLightboxImages(el, ownContext),
+			);
+			const cardImage = buildProductLightboxImage(element);
+			return cardImage ? [...contentImages, cardImage] : contentImages;
+		}
 
 		default:
 			return [];
 	}
+};
+
+const buildProductLightboxImage = (
+	element: ProductBlockElement,
+): Omit<ImageForLightbox, 'position'> | undefined => {
+	const { image, productCtas } = element;
+	if (!image) return;
+
+	if (!isLightboxable(image.width, image.height)) return;
+
+	return {
+		masterUrl: image.url,
+		width: image.width,
+		height: image.height,
+		elementId: element.elementId,
+		displayCredit: image.displayCredit,
+		alt: image.alt,
+		credit: image.credit,
+		caption: image.caption,
+		...(productCtas.length > 0 ? { productCtas } : {}),
+	};
 };
 
 /**
@@ -130,17 +195,15 @@ export const buildLightboxImages = (
 		.concat(
 			blocks.flatMap((block) =>
 				block.elements.flatMap((element) =>
-					getImages(element).flatMap((multiImage) => {
-						const lightboxImage = buildLightboxImage(multiImage);
-						if (isUndefined(lightboxImage)) return [];
-						return isBlog(format.design)
+					getLightboxImages(element).map((lightboxImage) =>
+						isBlog(format.design)
 							? {
 									...lightboxImage,
 									blockId: block.id,
 									firstPublished: block.blockFirstPublished,
 								}
-							: lightboxImage;
-					}),
+							: lightboxImage,
+					),
 				),
 			),
 		)
