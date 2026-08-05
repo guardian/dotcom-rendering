@@ -87,12 +87,12 @@ const ABTests: ABTest[] = [
 		description:
 			"Test in-article newsletter signup with illustrated preview CTA vs without preview CTA",
 		owners: ["newsletters.dev@guardian.co.uk"],
-		expirationDate: "2026-07-21",
+		expirationDate: "2026-09-04",
 		type: "client",
 		status: "ON",
-		audienceSize: 50 / 100,
-		audienceSpace: "A",
-		groups: ["illustrated", "without-preview"],
+		audienceSize: 1,
+		audienceSpace: "B",
+		groups: ["without-preview"],
 		shouldForceMetricsCollection: false,
 	},
 	{
