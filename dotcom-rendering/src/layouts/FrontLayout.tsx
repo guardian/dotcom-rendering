@@ -121,7 +121,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		editionId,
 	} = front;
 
-	const isInVariant =
+    /** Test participation determines whether to increase the maximum number of ads shown on fronts */
+	const shouldIncreaseAdLimit =
 		front.config.serverSideABTests[
 			'commercial-fronts-ad-increase-ad-limit'
 		] === 'variant';
