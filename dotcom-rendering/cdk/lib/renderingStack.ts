@@ -17,7 +17,11 @@ import {
 	Duration,
 	RemovalPolicy,
 } from 'aws-cdk-lib';
-import type { ScalingInterval } from 'aws-cdk-lib/aws-applicationautoscaling';
+import type {
+	PredefinedMetric,
+	ScalingInterval,
+} from 'aws-cdk-lib/aws-applicationautoscaling';
+import { TargetTrackingScalingPolicy } from 'aws-cdk-lib/aws-applicationautoscaling';
 import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
 import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
@@ -353,8 +357,16 @@ export class RenderingCDKStack extends CDKStack {
 					'TaskCount',
 				) as ScalableTaskCount;
 				if (ecsScalableTarget) {
-					ecsScalableTarget.scaleOnCpuUtilization('CpuScaling', {
-						targetUtilizationPercent: 50,
+					// The high resolution predefined metric evaluates every 10s rather than 60s,
+					// so scaling reacts far faster. It isn't in the CDK `PredefinedMetric` enum yet.
+					// https://docs.aws.amazon.com/AmazonECS/latest/developerguide/target-tracking-faster-auto-scaling.html
+					new TargetTrackingScalingPolicy(this, 'CpuScaling', {
+						scalingTarget: ecsScalableTarget,
+						targetValue: 50,
+						predefinedMetric:
+							'ECSServiceAverageCPUUtilizationHighResolution' as unknown as PredefinedMetric,
+						scaleOutCooldown: Duration.seconds(60),
+						scaleInCooldown: Duration.seconds(60),
 					});
 				} else {
 					throw new Error(
