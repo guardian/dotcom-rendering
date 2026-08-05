@@ -70,6 +70,19 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
+		name: "commercial-fronts-ad-increase-ad-limit",
+		description:
+			"A test to understand the impact of changing page-level ad limit on fronts",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-08-27",
+		type: "server",
+		status: "ON",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
 		name: "newsletters-in-article-signup-preview",
 		description:
 			"Test in-article newsletter signup with illustrated preview CTA vs without preview CTA",

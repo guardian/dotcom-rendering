@@ -35,6 +35,7 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
 import {
 	getDesktopAdPositions,
+	getMaxFrontsAdCounts,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
@@ -117,6 +118,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		editionId,
 	} = front;
 
+	const { maxDesktopAds, maxMobileAds } = getMaxFrontsAdCounts(
+		front.config.serverSideABTests,
+	);
+
 	const serverTime = front.serverTime;
 
 	const renderAds = canRenderAds(front);
@@ -132,11 +137,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const merchHighAdPosition = getMerchHighPosition(filteredCollections);
 
 	const mobileAdPositions = renderAds
-		? getMobileAdPositions(filteredCollections, pageId)
+		? getMobileAdPositions(filteredCollections, pageId, maxMobileAds)
 		: [];
 
 	const desktopAdPositions = renderAds
-		? getDesktopAdPositions(filteredCollections, pageId)
+		? getDesktopAdPositions(filteredCollections, pageId, maxDesktopAds)
 		: [];
 
 	const showMostPopular =
