@@ -76,7 +76,7 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-08-27",
 		type: "server",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
