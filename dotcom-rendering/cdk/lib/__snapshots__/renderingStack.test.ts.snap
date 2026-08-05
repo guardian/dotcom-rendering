@@ -2414,7 +2414,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             "VersionConsistency": "disabled",
           },
         ],
-        "Cpu": "512",
+        "Cpu": "2048",
         "ExecutionRoleArn": {
           "Fn::GetAtt": [
             "EcsTaskDefinitionExecutionRoleBE450C73",
@@ -2422,7 +2422,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           ],
         },
         "Family": "TagPageRenderingCODEEcsTaskDefinition616FF027",
-        "Memory": "1024",
+        "Memory": "4096",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "FARGATE",

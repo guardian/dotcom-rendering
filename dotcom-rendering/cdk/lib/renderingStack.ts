@@ -295,8 +295,8 @@ export class RenderingCDKStack extends CDKStack {
 						ecsProps: {
 							repositoryName: 'guardian/dotcom-rendering',
 							imageIdentifier,
-							memoryLimitMiB: 1024,
-							cpu: 512,
+							memoryLimitMiB: 4096,
+							cpu: 2048,
 							scaling: {
 								minimumTasks: 1,
 								maximumTasks: 9,
