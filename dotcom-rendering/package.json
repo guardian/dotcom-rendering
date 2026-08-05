@@ -22,7 +22,7 @@
 	"dependencies": {
 		"@aws-sdk/client-cloudwatch": "3.995.0",
 		"@babel/helper-compilation-targets": "7.29.7",
-		"@braze/web-sdk": "6.5.0",
+		"@braze/web-sdk": "6.9.0",
 		"@creditkarma/thrift-server-core": "1.0.4",
 		"@emotion/cache": "11.14.0",
 		"@emotion/react": "11.14.0",
@@ -140,7 +140,7 @@
 		"rehype-stringify": "10.0.1",
 		"remark-parse": "11.0.0",
 		"remark-rehype": "11.1.2",
-		"sanitize-html": "2.17.4",
+		"sanitize-html": "2.17.5",
 		"screenfull": "6.0.2",
 		"semver": "7.5.4",
 		"source-map": "0.7.4",
