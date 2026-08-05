@@ -1,10 +1,6 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import {
-	NEWSLETTER_PREVIEW_AB_TEST_NAME,
-	NEWSLETTER_PREVIEW_VARIANT,
-} from '../lib/newsletterSignupAbTest';
 import { NEWSLETTER_SIGNUP_COMPONENT_ID } from '../lib/newsletterSignupTracking';
 import { NewsletterSignupCardContainer } from './NewsletterSignupCardContainer';
 
@@ -30,13 +26,18 @@ const renderContainer = (props = {}) =>
 			isSignedIn={true}
 			{...props}
 		>
-			{(previewAction) =>
-				previewAction?.behaviour === 'modal' ? (
-					<button type="button" onClick={previewAction.onClick}>
-						Preview latest
-					</button>
-				) : null
-			}
+			{(previewAction) => (
+				<button
+					type="button"
+					onClick={
+						previewAction?.behaviour === 'modal'
+							? previewAction.onClick
+							: undefined
+					}
+				>
+					Preview latest
+				</button>
+			)}
 		</NewsletterSignupCardContainer>,
 	);
 
@@ -62,12 +63,7 @@ describe('NewsletterSignupCardContainer', () => {
 
 	describe('preview tracking', () => {
 		it('fires an EXPAND event with the variant component id when the preview is opened', () => {
-			renderContainer({
-				abTest: {
-					name: NEWSLETTER_PREVIEW_AB_TEST_NAME,
-					variant: NEWSLETTER_PREVIEW_VARIANT.illustrated,
-				},
-			});
+			renderContainer();
 
 			fireEvent.click(
 				screen.getByRole('button', { name: 'Preview latest' }),
@@ -82,10 +78,6 @@ describe('NewsletterSignupCardContainer', () => {
 						),
 					},
 					action: 'EXPAND',
-					abTest: {
-						name: NEWSLETTER_PREVIEW_AB_TEST_NAME,
-						variant: NEWSLETTER_PREVIEW_VARIANT.illustrated,
-					},
 					value: expect.stringContaining(
 						'"eventDescription":"preview-open"',
 					),
@@ -141,16 +133,6 @@ describe('NewsletterSignupCardContainer', () => {
 				firstCallCount,
 			);
 		});
-
-		it('does not render any preview trigger when preview is disabled', () => {
-			renderContainer({ enablePreview: false });
-
-			expect(
-				screen.queryByRole('button', { name: 'Preview latest' }),
-			).not.toBeInTheDocument();
-			expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-			expect(submitComponentEvent).not.toHaveBeenCalled();
-		});
 	});
 
 	it('renders a preview link for apps and tracks the open event', () => {
@@ -202,38 +184,5 @@ describe('NewsletterSignupCardContainer', () => {
 			'Apps',
 		);
 		expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-	});
-
-	it('does not render a preview link for apps when preview is disabled', () => {
-		render(
-			<NewsletterSignupCardContainer
-				identityName="morning-briefing"
-				category="fronts-based"
-				exampleUrl="/world/newsletters/morning-mail"
-				renderingTarget="Apps"
-				theme="news"
-				name="Morning Briefing"
-				frequency="Every weekday"
-				description="Start your day with top stories."
-				isSignedIn={true}
-				enablePreview={false}
-			>
-				{(previewAction) =>
-					previewAction?.behaviour === 'link' ? (
-						<a
-							href={previewAction.href}
-							onClick={previewAction.onClick}
-						>
-							Preview latest
-						</a>
-					) : null
-				}
-			</NewsletterSignupCardContainer>,
-		);
-
-		expect(
-			screen.queryByRole('link', { name: 'Preview latest' }),
-		).not.toBeInTheDocument();
-		expect(submitComponentEvent).not.toHaveBeenCalled();
 	});
 });
