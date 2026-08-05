@@ -31,14 +31,11 @@ import { SubNav } from '../components/SubNav.island';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
-import {
-	MAX_FRONTS_BANNER_ADS,
-	MAX_FRONTS_MOBILE_ADS,
-} from '../lib/commercial-constants';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
 import {
 	getDesktopAdPositions,
+	getMaxFrontsAdCounts,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
@@ -121,14 +118,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		editionId,
 	} = front;
 
-    /** Test participation determines whether to increase the maximum number of ads shown on fronts */
-	const shouldIncreaseAdLimit =
-		front.config.serverSideABTests[
-			'commercial-fronts-ad-increase-ad-limit'
-		] === 'variant';
-
-	const maxDesktopAds = isInVariant ? 16 : MAX_FRONTS_BANNER_ADS;
-	const maxMobileAds = isInVariant ? 20 : MAX_FRONTS_MOBILE_ADS;
+	const { maxDesktopAds, maxMobileAds } = getMaxFrontsAdCounts(
+		front.config.serverSideABTests,
+	);
 
 	const serverTime = front.serverTime;
 

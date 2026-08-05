@@ -412,6 +412,18 @@ const getDesktopAdPositions = (
 	return adPositionsFromReducer;
 };
 
+export const getMaxFrontsAdCounts = (
+	serverSideAbTests: Record<string, string>,
+): { maxDesktopAds: number; maxMobileAds: number } => {
+	const shouldIncreaseAdLimit =
+		serverSideAbTests['commercial-fronts-ad-increase-ad-limit'] ===
+		'variant';
+	return {
+		maxDesktopAds: shouldIncreaseAdLimit ? 16 : MAX_FRONTS_BANNER_ADS,
+		maxMobileAds: shouldIncreaseAdLimit ? 20 : MAX_FRONTS_MOBILE_ADS,
+	};
+};
+
 export {
 	isEvenIndex,
 	getMerchHighPosition,
