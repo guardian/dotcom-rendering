@@ -2859,6 +2859,158 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       },
       "Type": "AWS::IAM::Policy",
     },
+    "HealthCheckLogDelivery": {
+      "DependsOn": [
+        "HealthCheckLogsDeliveryPolicy",
+        "HealthCheckLogSource",
+      ],
+      "Properties": {
+        "DeliveryDestinationArn": {
+          "Fn::GetAtt": [
+            "HealthCheckLogDestination",
+            "Arn",
+          ],
+        },
+        "DeliverySourceName": "tag-page-rendering-CODE-health-check",
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::Delivery",
+    },
+    "HealthCheckLogDestination": {
+      "Properties": {
+        "DestinationResourceArn": {
+          "Fn::GetAtt": [
+            "HealthCheckLogs807FF78A",
+            "Arn",
+          ],
+        },
+        "Name": "tag-page-rendering-CODE-health-check",
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::DeliveryDestination",
+    },
+    "HealthCheckLogSource": {
+      "Properties": {
+        "LogType": "ALB_HEALTH_CHECK_LOGS",
+        "Name": "tag-page-rendering-CODE-health-check",
+        "ResourceArn": {
+          "Ref": "LoadBalancerTagpagerenderingB0B7AC4E",
+        },
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::DeliverySource",
+    },
+    "HealthCheckLogs807FF78A": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "LogGroupName": "/aws/elasticloadbalancing/tag-page-rendering-CODE-health-check",
+        "RetentionInDays": 7,
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "HealthCheckLogsDeliveryPolicy": {
+      "Properties": {
+        "PolicyDocument": {
+          "Fn::Join": [
+            "",
+            [
+              "{"Version":"2012-10-17","Statement":[{"Sid":"AllowLogDeliveryWrite","Effect":"Allow","Principal":{"Service":"delivery.logs.amazonaws.com"},"Action":["logs:CreateLogStream","logs:PutLogEvents"],"Resource":"arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":logs:eu-west-1:",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":log-group:/aws/elasticloadbalancing/tag-page-rendering-CODE-health-check:log-stream:*","Condition":{"StringEquals":{"aws:SourceAccount":"",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ""},"ArnLike":{"aws:SourceArn":"",
+              {
+                "Fn::GetAtt": [
+                  "HealthCheckLogSource",
+                  "Arn",
+                ],
+              },
+              ""}}}]}",
+            ],
+          ],
+        },
+        "PolicyName": "tag-page-rendering-CODE-health-check-logs",
+      },
+      "Type": "AWS::Logs::ResourcePolicy",
+    },
     "InstanceRoleTagpagerendering171BC2F9": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -3397,6 +3549,126 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         },
       },
       "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "TaskStateChangeRule": {
+      "Properties": {
+        "EventPattern": {
+          "detail": {
+            "clusterArn": [
+              {
+                "Fn::GetAtt": [
+                  "tagpagerenderingEcsClusterE7696595",
+                  "Arn",
+                ],
+              },
+            ],
+          },
+          "detail-type": [
+            "ECS Task State Change",
+          ],
+          "source": [
+            "aws.ecs",
+          ],
+        },
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:",
+                  {
+                    "Ref": "AWS::Partition",
+                  },
+                  ":logs:eu-west-1:",
+                  {
+                    "Ref": "AWS::AccountId",
+                  },
+                  ":log-group:",
+                  {
+                    "Ref": "TaskStateEvents4E5081CA",
+                  },
+                ],
+              ],
+            },
+            "Id": "TaskStateEventsLog",
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+    "TaskStateEvents4E5081CA": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "LogGroupName": "/aws/events/tag-page-rendering-CODE-task-state",
+        "RetentionInDays": 7,
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "TaskStateEventsPolicy": {
+      "Properties": {
+        "PolicyDocument": {
+          "Fn::Join": [
+            "",
+            [
+              "{"Version":"2012-10-17","Statement":[{"Sid":"AllowEventBridgeToLog","Effect":"Allow","Principal":{"Service":"events.amazonaws.com"},"Action":["logs:CreateLogStream","logs:PutLogEvents"],"Resource":"",
+              {
+                "Fn::GetAtt": [
+                  "TaskStateEvents4E5081CA",
+                  "Arn",
+                ],
+              },
+              "","Condition":{"ArnEquals":{"aws:SourceArn":"",
+              {
+                "Fn::GetAtt": [
+                  "TaskStateChangeRule",
+                  "Arn",
+                ],
+              },
+              ""}}}]}",
+            ],
+          ],
+        },
+        "PolicyName": "tag-page-rendering-CODE-task-state-events",
+      },
+      "Type": "AWS::Logs::ResourcePolicy",
     },
     "frontendCODEtagpagerendering3C218821": {
       "DependsOn": [
