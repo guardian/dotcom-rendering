@@ -85,7 +85,7 @@ const ABTests: ABTest[] = [
 	{
 		name: "newsletters-in-article-signup-preview",
 		description:
-			"Test in-article newsletter signup with illustrated preview CTA vs without preview CTA",
+			"Force disable preview for in-article newsletter signup. 100% audience",
 		owners: ["newsletters.dev@guardian.co.uk"],
 		expirationDate: "2026-09-04",
 		type: "client",
