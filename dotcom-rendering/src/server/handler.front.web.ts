@@ -13,7 +13,7 @@ import {
 import { groupTrailsByDates } from '../model/groupTrailsByDates';
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
 import { validateAsFEFront, validateAsFETagPage } from '../model/validate';
-import type { Front } from '../types/front';
+import type { EditorialAbTest, Front } from '../types/front';
 import type { FETagType } from '../types/tag';
 import type { TagPage } from '../types/tagPage';
 import { makePrefetchHeader } from './lib/header';
@@ -23,6 +23,94 @@ const enhanceFront = (body: unknown): Front => {
 	const data: FEFront = validateAsFEFront(body);
 
 	const serverTime = Date.now();
+	/**
+	 * mocked for spike purposes. In reality, we'd need to extract all tests available across all trails and then flatten into an array with the correct shape.
+	 */
+	const mockedEditorialAbTests: EditorialAbTest[] = [
+		{
+			testUuid: '123',
+			expiryDate: Date.now() - 10 * 60 * 1000, // ten mins ago,
+			frontsThisTestCanRunOn: ['US'],
+			hasManuallyEndedOnThisTrail: false,
+			variantMeta: [
+				{
+					id: 'A',
+					meta: {
+						headline: 'headline A',
+					},
+				},
+				{
+					id: 'B',
+					meta: {
+						headline: 'headline B',
+					},
+				},
+			],
+		},
+		{
+			testUuid: '456',
+			expiryDate: Date.now() + 10 * 60 * 1000, // ten mins in the future,
+			frontsThisTestCanRunOn: ['UK'],
+			hasManuallyEndedOnThisTrail: false,
+			variantMeta: [
+				{
+					id: 'A',
+					meta: {
+						headline: 'An A headline',
+					},
+				},
+				{
+					id: 'B',
+					meta: {
+						headline: 'A B headline',
+					},
+				},
+			],
+		},
+		{
+			testUuid: '789',
+			expiryDate: Date.now() + 60 * 60 * 1000, // an hour in the future,
+			frontsThisTestCanRunOn: ['US'],
+			hasManuallyEndedOnThisTrail: true,
+			variantMeta: [
+				{
+					id: 'A',
+					meta: {
+						headline: 'Headline from field A',
+					},
+				},
+				{
+					id: 'B',
+					meta: {
+						headline: 'Headline from field B',
+					},
+				},
+			],
+		},
+	];
+
+	const editorialAbTestBucket = 'B'; // lets pretend this was from data.config.serverSideABTests.editorialAbTest;
+	const cleanedEdAbTests = mockedEditorialAbTests.reduce(
+		(cleanedTests: EditorialAbTest[], test) => {
+			const { variantMeta, ...restOfTest } = test;
+
+			const newTest = {
+				...restOfTest,
+				variantMeta: variantMeta.filter(
+					(variant) => variant.id === editorialAbTestBucket,
+				),
+			};
+
+			return [...cleanedTests, newTest];
+		},
+		[],
+	);
+
+	const activeEditorialAbTests = cleanedEdAbTests.filter(
+		(test) =>
+			!test.hasManuallyEndedOnThisTrail &&
+			(!test.expiryDate || test.expiryDate > Date.now()),
+	);
 
 	const collections = enhanceCollections({
 		collections: data.pressedPage.collections,
@@ -54,6 +142,7 @@ const enhanceFront = (body: unknown): Front => {
 		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
 		canonicalUrl: data.canonicalUrl,
 		serverTime,
+		editorialAbTests: activeEditorialAbTests,
 	};
 };
 

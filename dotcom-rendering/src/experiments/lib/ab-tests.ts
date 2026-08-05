@@ -1,6 +1,7 @@
 import { activeABtests } from '@guardian/ab-testing-config';
 import { isUndefined } from '@guardian/libs';
 import { getABTestParticipations } from '../../client/abTesting';
+import { EditorialAbTest } from '../../types/front';
 
 export interface ABTestAPI {
 	getParticipations: () => ABParticipations;
@@ -28,7 +29,9 @@ type OphanRecordFunction = (send: Record<string, OphanABPayload>) => void;
 
 type ErrorReporter = (e: unknown) => void;
 
-type ABTestsConfig =
+type ABTestsConfig = {
+	editorialAbTests?: EditorialAbTest[];
+} & (
 	| {
 			isServer: true;
 			serverSideABTests: Record<string, string>;
@@ -36,7 +39,8 @@ type ABTestsConfig =
 	| {
 			isServer: false;
 			serverSideABTests?: never;
-	  };
+	  }
+);
 
 /**
  * generate an A/B event for Ophan
@@ -52,8 +56,15 @@ const makeABEvent = (variantName: string, complete: boolean): OphanABEvent => {
 
 export class ABTests implements ABTestAPI {
 	private participations: ABParticipations;
+	private editorialParticipations: EditorialAbTest[] | undefined;
 
-	constructor({ isServer, serverSideABTests }: ABTestsConfig) {
+	constructor({
+		isServer,
+		serverSideABTests,
+		editorialAbTests,
+	}: ABTestsConfig) {
+		this.editorialParticipations = editorialAbTests;
+
 		if (isServer) {
 			this.participations = serverSideABTests;
 		} else {
@@ -79,7 +90,23 @@ export class ABTests implements ABTestAPI {
 	): void {
 		ophanRecord({
 			abTestRegister: this.buildOphanPayload(errorReporter),
+			editorialAbTestRegister: this.buildOphanEditorialPayload(),
 		});
+	}
+
+	private buildOphanEditorialPayload(): OphanABPayload {
+		return (
+			this.editorialParticipations?.reduce<OphanABPayload>(
+				(eventLog, test) => {
+					const variantId = test.variantMeta[0]?.id;
+
+					if (!variantId) return eventLog;
+					eventLog[test.testUuid] = makeABEvent(variantId, false);
+					return eventLog;
+				},
+				{},
+			) ?? {}
+		);
 	}
 
 	private shouldReportToOphan(testId: string): boolean {

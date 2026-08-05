@@ -79,6 +79,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			</Island>
 			<Island priority="critical">
 				<SetABTests
+					editorialAbTests={front.editorialAbTests}
 					serverSideABTests={front.config.serverSideABTests}
 				/>
 			</Island>
