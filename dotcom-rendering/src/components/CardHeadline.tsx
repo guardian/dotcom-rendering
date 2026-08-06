@@ -58,6 +58,7 @@ type Props = {
 	kickerColour?: string;
 	quoteColour?: string;
 	kickerImage?: PodcastSeriesImage;
+	allowHeadlineToBreakWords?: boolean;
 };
 
 const sublinkStyles = css`
@@ -218,6 +219,15 @@ const defaultFontSizes: ResponsiveFontSize = {
 	mobile: 'xxsmall',
 };
 
+const allowWordBreakStyles = css`
+	@supports (overflow-wrap: anywhere) {
+		overflow-wrap: anywhere;
+	}
+	@supports not (overflow-wrap: anywhere) {
+		word-wrap: break-word;
+	}
+`;
+
 export const CardHeadline = ({
 	headlineText,
 	format,
@@ -234,6 +244,7 @@ export const CardHeadline = ({
 	kickerColour = palette('--card-kicker-text'),
 	quoteColour = palette('--card-quote-icon'),
 	kickerImage,
+	allowHeadlineToBreakWords = false,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
@@ -247,6 +258,9 @@ export const CardHeadline = ({
 					isSublink ? 'card-sublink-headline' : 'card-headline'
 				}`}
 				css={[
+					allowHeadlineToBreakWords
+						? allowWordBreakStyles
+						: undefined,
 					isSublink
 						? css`
 								${textSans14}
