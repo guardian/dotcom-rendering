@@ -37,6 +37,36 @@ test.describe('Affiliate links', () => {
 			expect(skimlinkRelAttribute).toBe('sponsored noreferrer noopener');
 		});
 
+		test('skimlinks should open in a new tab', async ({ page }) => {
+			await loadPage({
+				page,
+				path: '/Article/https://www.theguardian.com/thefilter/2025/jun/17/best-fans-uk',
+			});
+			await cmpAcceptAll(page);
+
+			const skimlinkLocator = page
+				.locator('[href*="go.skimresources"]')
+				.first();
+			expect(await skimlinkLocator.getAttribute('target')).toBe('_blank');
+		});
+
+		test('in body links to the Guardian should not open in a new tab', async ({
+			page,
+		}) => {
+			await loadPage({
+				page,
+				path: '/Article/https://www.theguardian.com/thefilter/2025/jun/17/best-fans-uk',
+			});
+			await cmpAcceptAll(page);
+
+			const guardianLinkLocator = page
+				.locator(
+					'[data-link-name="in body link"][href*="www.theguardian.com"]',
+				)
+				.first();
+			expect(await guardianLinkLocator.getAttribute('target')).toBeNull();
+		});
+
 		test('skimlinks should contain the xcust URL parameter', async ({
 			page,
 		}) => {

@@ -79,7 +79,11 @@ const renderTextElement = (node: Node, key: number): ReactNode => {
 					 * Affiliate links must have the rel attribute set to "sponsored"
 					 * @see https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links
 					 */
-					rel={isSkimlink(href) ? SKIMLINK_REL : undefined}
+					rel={
+						isSkimlink(href)
+							? SKIMLINK_REL
+							: attrs?.getNamedItem('rel')?.value
+					}
 				>
 					{children}
 				</a>

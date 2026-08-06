@@ -98,6 +98,7 @@ const textElement =
 
 				return jsx('a', {
 					href,
+					target: getAttrs(node)?.getNamedItem('target')?.value,
 					/**
 					 * Affiliate links must have the rel attribute set to "sponsored"
 					 * @see https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links

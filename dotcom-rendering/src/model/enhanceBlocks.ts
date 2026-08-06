@@ -16,6 +16,7 @@ import { enhanceDisclaimer } from './enhance-disclaimer';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
+import { enhanceExternalLinks } from './enhance-external-links';
 import { enhanceH2s } from './enhance-H2s';
 import { enhanceElementsImages, enhanceImages } from './enhance-images';
 import { enhanceInteractiveAtomElements } from './enhance-interactive-atom';
@@ -100,6 +101,12 @@ export const enhanceElements =
 				format,
 				options.renderingTarget,
 				options.shouldHideAds,
+			),
+			/* Runs late so that we never perturb the html strings that the
+			enhancers above match against */
+			enhanceExternalLinks(
+				options.hasAffiliateLinksDisclaimer,
+				options.renderingTarget,
 			),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer, isNested),
 		].reduce(

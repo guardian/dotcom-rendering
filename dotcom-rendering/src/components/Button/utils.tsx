@@ -9,6 +9,12 @@ const platformHostnames = [
 	'www.theguardian.com',
 ];
 
+/**
+ * Note this uses an exact-match allowlist, so Guardian subdomains such as
+ * support.theguardian.com and profile.theguardian.com count as external. Where
+ * that isn’t wanted, use `isGuardianLink` instead.
+ * @see ../../lib/isGuardianLink.ts
+ */
 export const isExternalLink = (url: string) => {
 	try {
 		return !platformHostnames.includes(new URL(url).hostname);
