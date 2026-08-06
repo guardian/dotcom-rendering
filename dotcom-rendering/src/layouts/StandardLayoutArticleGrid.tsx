@@ -11,6 +11,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { Caption } from '../components/Caption';
 import { DecideLines } from '../components/DecideLines';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -22,6 +23,7 @@ import { SlotBodyEnd } from '../components/SlotBodyEnd.island';
 import { Standfirst } from '../components/Standfirst';
 import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
+import { getAgeWarning } from '../lib/age-warning';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -29,6 +31,8 @@ import {
 	ArticleSpecial,
 } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { decideMainMediaCaption } from '../lib/decide-caption';
+import { getZIndex } from '../lib/getZIndex';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
 import { palette as themePalette } from '../palette';
@@ -36,6 +40,7 @@ import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import {
 	type Area,
+	getLayoutType,
 	gridItemCss,
 	type LayoutType,
 } from './lib/articleArrangements';
@@ -58,6 +63,23 @@ interface GridItemProps {
 	className?: string;
 	children: React.ReactNode;
 }
+
+/**
+ * Works out the orientation of an image from its Guardian media URL, which
+ * encodes the crop dimensions in the path (e.g. `/1000_600_800_480/`).
+ * Falls back to 'landscape' if the URL doesn't match the expected pattern.
+ */
+const getImageOrientation = (
+	url: string,
+): 'portrait' | 'landscape' | 'square' => {
+	const match = url.match(/\/\d+_\d+_(\d+)_(\d+)\/\d+\.\w+$/);
+	if (!match) return 'landscape';
+	const [, width, height] = match.map(Number);
+	if (width == null || height == null) return 'landscape';
+	if (height > width) return 'portrait';
+	if (width > height) return 'landscape';
+	return 'square';
+};
 
 const GridItem = ({
 	area,
@@ -110,6 +132,8 @@ export const StandardLayoutArticleGrid = ({
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
 	const isShowcase = format.display === ArticleDisplay.Showcase;
+	const isImmersive = format.display === ArticleDisplay.Immersive;
+	const isFeature = format.design === ArticleDesign.Feature;
 
 	const footballMatchUrl =
 		article.matchType === 'FootballMatchType'
@@ -119,11 +143,42 @@ export const StandardLayoutArticleGrid = ({
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	const layoutType: LayoutType = isMedia
-		? 'media'
-		: isShowcase
-			? 'showcase'
-			: 'standard';
+	const mainMedia = article.mainMediaElements[0];
+	const captionText = decideMainMediaCaption(mainMedia);
+	const mainMediaUrl: string | undefined =
+		mainMedia?._type ===
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+			? mainMedia.media.allImages[0]?.url
+			: undefined;
+	const mainMediaAspectRatio =
+		mainMedia?._type ===
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+			? mainMedia.media.allImages[0]?.fields.aspectRatio
+			: undefined;
+
+	const mainMediaOrientation =
+		mainMediaUrl != null ? getImageOrientation(mainMediaUrl) : 'landscape';
+
+	const layoutType = getLayoutType({
+		isImmersive,
+		isFeature,
+		orientation: mainMediaOrientation,
+		isMedia,
+		isShowcase,
+	});
+	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
+
+	const isImmersivePortrait =
+		layoutType === 'immersivePortraitDefault' ||
+		layoutType === 'immersivePortraitFeature';
+	const isImmersiveLandscape =
+		layoutType === 'immersiveLandscapeDefault' ||
+		layoutType === 'immersiveLandscapeFeature';
+
+	const ageWarning = getAgeWarning(
+		article.tags,
+		article.webPublicationDateDeprecated,
+	);
 
 	return (
 		<article
@@ -133,15 +188,69 @@ export const StandardLayoutArticleGrid = ({
 				`,
 				grid.container,
 				grid.outerRules(),
+				isLabs &&
+					isImmersive &&
+					css`
+						&::before,
+						&::after {
+							z-index: 10;
+						}
+					`,
 				!isLabs &&
 					css`
 						${from.leftCol} {
-							${grid.centreRule(3)}
+							${grid.centreRule(
+								isImmersivePortrait
+									? 4
+									: isImmersiveLandscape
+										? layoutType ===
+											'immersiveLandscapeFeature'
+											? 3
+											: 4
+										: 3,
+							)}
+						}
+					`,
+				isImmersivePortrait &&
+					css`
+						${from.desktop} {
+							grid-template-rows: 0.25fr 1fr auto;
+						}
+					`,
+				isImmersiveLandscape &&
+					css`
+						${from.desktop} {
+							grid-template-rows: auto auto ${ageWarning != null
+									? '130px'
+									: '90px'} auto auto auto auto auto;
+							${grid.centreRule(
+								layoutType === 'immersiveLandscapeFeature'
+									? 3
+									: 4,
+							)}
 						}
 					`,
 			]}
 		>
-			<GridItem area="media" layoutType={layoutType}>
+			<GridItem
+				area="media"
+				layoutType={layoutType}
+				css={
+					isImmersive
+						? css`
+								align-self: start;
+								${mainMediaAspectRatio != null &&
+								`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
+
+								${from.desktop} {
+									${isImmersiveLandscape &&
+									`margin-left: -20px;
+									margin-right: -20px;`}
+								}
+							`
+						: undefined
+				}
+			>
 				<MainMedia
 					format={format}
 					elements={article.mainMediaElements}
@@ -156,12 +265,25 @@ export const StandardLayoutArticleGrid = ({
 					hideCaption={isMedia}
 					shouldHideAds={article.shouldHideAds}
 					contentType={article.contentType}
-					contentLayout={`${ArticleDisplay[format.display]}Layout`}
+					contentLayout={contentLayoutName}
+					articleArrangement={layoutType}
 				/>
 			</GridItem>
-			<GridItem area="title" layoutType={layoutType} element="aside">
+			<GridItem
+				area="title"
+				layoutType={layoutType}
+				element="aside"
+				css={
+					isImmersive
+						? css`
+								z-index: ${getZIndex('articleHeadline')};
+							`
+						: undefined
+				}
+			>
 				<ArticleTitle
 					format={format}
+					layoutType={layoutType}
 					tags={article.tags}
 					sectionLabel={article.sectionLabel}
 					sectionUrl={article.sectionUrl}
@@ -169,9 +291,37 @@ export const StandardLayoutArticleGrid = ({
 					isMatch={!!footballMatchUrl}
 				/>
 			</GridItem>
-			<GridItem area="headline" layoutType={layoutType}>
+			<GridItem
+				area="headline"
+				layoutType={layoutType}
+				css={[
+					isImmersive
+						? css`
+								z-index: ${getZIndex('articleHeadline')};
+							`
+						: undefined,
+					layoutType === 'immersivePortraitDefault' ||
+					layoutType === 'immersivePortraitFeature'
+						? css`
+								${from.desktop} {
+									border-bottom: 1px solid
+										${themePalette('--article-border')};
+									border-top: 1px solid
+										${themePalette('--article-border')};
+								}
+							`
+						: undefined,
+					isImmersiveLandscape &&
+						css`
+							${from.desktop} {
+								padding-bottom: ${space[8]}px;
+							}
+						`,
+				]}
+			>
 				<ArticleHeadline
 					format={format}
+					layoutType={layoutType}
 					headlineString={article.headline}
 					tags={article.tags}
 					byline={article.byline}
@@ -181,30 +331,81 @@ export const StandardLayoutArticleGrid = ({
 					starRating={article.starRating}
 				/>
 			</GridItem>
-			<GridItem area="standfirst" layoutType={layoutType}>
-				<Standfirst format={format} standfirst={article.standfirst} />
+			<GridItem
+				area="standfirst"
+				layoutType={layoutType}
+				css={[
+					isImmersiveLandscape &&
+						css`
+							${from.desktop} {
+								padding-bottom: ${space[8]}px;
+							}
+						`,
+				]}
+			>
+				<Standfirst
+					format={format}
+					standfirst={article.standfirst}
+					layoutType={layoutType}
+				/>
 			</GridItem>
-			<GridItem area="meta" layoutType={layoutType} element="aside">
-				{format.design !== ArticleDesign.Audio && (
-					<div css={stretchLines}>
-						{isWeb &&
-						format.theme === ArticleSpecial.Labs &&
-						format.design !== ArticleDesign.Video ? (
-							<GuardianLabsLines />
-						) : (
-							<DecideLines
-								format={format}
-								color={themePalette('--article-border')}
-							/>
-						)}
-					</div>
-				)}
+			{isImmersive && (
+				<GridItem
+					area="caption"
+					layoutType={layoutType}
+					css={css`
+						padding-top: ${space[2]}px;
+					`}
+				>
+					<Hide from="leftCol">
+						<Caption
+							captionText={captionText}
+							format={format}
+							shouldLimitWidth={false}
+							isLeftCol={true}
+							isMainMedia={true}
+							showIconBelowLeftCol={true}
+						/>
+					</Hide>
+				</GridItem>
+			)}
+			<GridItem
+				area="meta"
+				layoutType={layoutType}
+				element="aside"
+				css={
+					layoutType === 'immersivePortraitDefault'
+						? css`
+								${from.leftCol} {
+									margin-right: -10px;
+								}
+							`
+						: undefined
+				}
+			>
+				{format.display !== ArticleDisplay.Immersive &&
+					format.design !== ArticleDesign.Audio &&
+					layoutType !== 'immersivePortraitDefault' && (
+						<div css={stretchLines}>
+							{isWeb &&
+							format.theme === ArticleSpecial.Labs &&
+							format.design !== ArticleDesign.Video ? (
+								<GuardianLabsLines />
+							) : (
+								<DecideLines
+									format={format}
+									color={themePalette('--article-border')}
+								/>
+							)}
+						</div>
+					)}
 				{isApps ? (
 					<>
 						<Hide from="leftCol">
 							<ArticleMetaApps
 								branding={branding}
 								format={format}
+								layoutType={layoutType}
 								byline={article.byline}
 								tags={article.tags}
 								primaryDateline={
@@ -224,6 +425,7 @@ export const StandardLayoutArticleGrid = ({
 						<Hide until="leftCol">
 							<ArticleMeta
 								branding={branding}
+								layoutType={layoutType}
 								format={format}
 								pageId={article.pageId}
 								webTitle={article.webTitle}
@@ -253,6 +455,7 @@ export const StandardLayoutArticleGrid = ({
 					<>
 						<ArticleMeta
 							branding={branding}
+							layoutType={layoutType}
 							format={format}
 							pageId={article.pageId}
 							webTitle={article.webTitle}
@@ -263,11 +466,11 @@ export const StandardLayoutArticleGrid = ({
 							secondaryDateline={
 								article.webPublicationSecondaryDateDisplay
 							}
+							webPublicationDate={article.webPublicationDate}
 							isCommentable={article.isCommentable}
 							discussionApiUrl={article.config.discussionApiUrl}
 							shortUrlId={article.config.shortUrlId}
 							mainMediaElements={article.mainMediaElements}
-							webPublicationDate={article.webPublicationDate}
 						/>
 						{!!article.affiliateLinksDisclaimer && (
 							<AffiliateDisclaimer />
@@ -275,7 +478,13 @@ export const StandardLayoutArticleGrid = ({
 					</>
 				)}
 			</GridItem>
-			<GridItem area="body" layoutType={layoutType}>
+			<GridItem
+				area="body"
+				layoutType={layoutType}
+				css={css`
+					z-index: ${getZIndex('bodyArea')};
+				`}
+			>
 				{/* Only show Listen to Article button on App landscape views */}
 				{isApps && (
 					<Hide until="leftCol">

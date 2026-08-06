@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -11,8 +12,9 @@ import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
 	format: ArticleFormat;
-	tags: TagType[];
+	layoutType?: LayoutType;
 	sectionLabel: string;
+	tags: TagType[];
 	sectionUrl: string;
 	guardianBaseURL: string;
 	isMatch?: boolean;
@@ -28,12 +30,18 @@ const sectionStyles = css`
 `;
 
 const immersiveMargins = css`
+	max-width: 500px;
+	min-width: 200px;
+	margin-bottom: 4px;
+	${from.tablet} {
+		margin-left: -4px;
+	}
+`;
+
+const legacyImmersiveMargins = css`
 	max-width: 400px;
 	min-width: 200px;
 	margin-bottom: 4px;
-	/*
-        Make sure we vertically align the title font with the body font
-    */
 	${from.tablet} {
 		margin-left: 16px;
 	}
@@ -57,6 +65,7 @@ const galleryStyles = css`
 
 export const ArticleTitle = ({
 	format,
+	layoutType,
 	tags,
 	sectionLabel,
 	sectionUrl,
@@ -74,12 +83,15 @@ export const ArticleTitle = ({
 		<div
 			css={
 				format.display === ArticleDisplay.Immersive
-					? immersiveMargins
+					? layoutType == null
+						? legacyImmersiveMargins
+						: immersiveMargins
 					: undefined
 			}
 		>
 			<SeriesSectionLink
 				format={format}
+				layoutType={layoutType}
 				tags={tags}
 				sectionLabel={sectionLabel}
 				sectionUrl={sectionUrl}

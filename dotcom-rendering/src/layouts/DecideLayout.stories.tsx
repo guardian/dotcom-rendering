@@ -27,6 +27,7 @@ import {
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { type Article, enhanceArticleType } from '../types/article';
+import type { ImageBlockElement } from '../types/content';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
 
 export type HydratedLayoutDecoratorArgs = {
@@ -50,11 +51,7 @@ const HydratedLayout: Decorator<
 		display: article.display,
 		theme: article.theme,
 	};
-	const colourScheme =
-		(isObject(context.parameters.config) &&
-		context.parameters.config.renderingTarget === 'Apps'
-			? context.args.colourScheme
-			: 'light') ?? 'light';
+	const colourScheme = context.args.colourScheme ?? 'light';
 	const paletteDecorator = colourSchemeDecorator(
 		colourScheme,
 	)<DecideLayoutProps>([format]);
@@ -115,6 +112,13 @@ const webParameters = {
 	config: {
 		renderingTarget: 'Web',
 		darkModeAvailable: false,
+	},
+};
+
+const webDarkParameters = {
+	config: {
+		renderingTarget: 'Web',
+		darkModeAvailable: true,
 	},
 };
 
@@ -229,13 +233,130 @@ export const AppsPictureShowcaseOpinionDark: Story = {
  *
  * Example: https://www.chromatic.com/test?appId=63e251470cfbe61776b0ef19&id=675aaa4f3aa384bd64bde3a1
  */
+const photoEssayImmersiveLabsArticle = enhanceArticleType(
+	PhotoEssayImmersiveLabsFixture,
+	'Web',
+);
+
+const portraitMainMedia = PhotoEssayImmersiveLabsFixture.blocks
+	.flatMap((block) => block.elements)
+	.find(
+		(element): element is ImageBlockElement =>
+			element._type ===
+				'model.dotcomrendering.pageElements.ImageBlockElement' &&
+			element.media.allImages[0]?.fields.aspectRatio === '4:5',
+	);
+
+if (portraitMainMedia == null) {
+	throw new Error('The Labs fixture must contain a portrait image');
+}
+
+const photoEssayImmersiveLabsPortraitArticle = enhanceArticleType(
+	{
+		...PhotoEssayImmersiveLabsFixture,
+		mainMediaElements: [portraitMainMedia],
+	},
+	'Web',
+);
+
+const labsImmersiveArticle = ({
+	orientation,
+	design,
+}: {
+	orientation: 'portrait' | 'landscape';
+	design: ArticleDesign.PhotoEssay | ArticleDesign.Feature;
+}): Article => ({
+	...(orientation === 'portrait'
+		? photoEssayImmersiveLabsPortraitArticle
+		: photoEssayImmersiveLabsArticle),
+	design,
+});
+
+const immersiveLabsParameters = {
+	...webParameters,
+};
+
 export const WebPhotoEssayImmersiveLabsLight: Story = {
 	args: {
-		article: enhanceArticleType(PhotoEssayImmersiveLabsFixture, 'Web'),
+		article: labsImmersiveArticle({
+			orientation: 'landscape',
+			design: ArticleDesign.PhotoEssay,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebPhotoEssayImmersiveLabsDark: Story = {
+	args: {
+		article: WebPhotoEssayImmersiveLabsLight.args?.article,
+		colourScheme: 'dark',
 	},
 	parameters: {
-		...webParameters,
-		chromatic: { disableSnapshot: true },
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
+};
+
+export const WebPhotoEssayImmersiveLabsPortraitLight: Story = {
+	args: {
+		article: labsImmersiveArticle({
+			orientation: 'portrait',
+			design: ArticleDesign.PhotoEssay,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebPhotoEssayImmersiveLabsPortraitDark: Story = {
+	args: {
+		article: WebPhotoEssayImmersiveLabsPortraitLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
+};
+
+export const WebFeatureImmersiveLabsLandscapeLight: Story = {
+	args: {
+		article: labsImmersiveArticle({
+			orientation: 'landscape',
+			design: ArticleDesign.Feature,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebFeatureImmersiveLabsLandscapeDark: Story = {
+	args: {
+		article: WebFeatureImmersiveLabsLandscapeLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
+};
+
+export const WebFeatureImmersiveLabsPortraitLight: Story = {
+	args: {
+		article: labsImmersiveArticle({
+			orientation: 'portrait',
+			design: ArticleDesign.Feature,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebFeatureImmersiveLabsPortraitDark: Story = {
+	args: {
+		article: WebFeatureImmersiveLabsPortraitLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
 	},
 };
 

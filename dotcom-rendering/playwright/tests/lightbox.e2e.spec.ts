@@ -109,7 +109,7 @@ test.describe('Lightbox', () => {
 
 		// Open lightbox by clicking on the fourth image within the article body
 		// Lightbox should open at the fifth image as the first image is the main media image
-		await page.locator('article img').nth(3).click({ force: true });
+		await page.locator('button.open-lightbox').nth(4).click();
 
 		await expectToBeVisible(page, '#gu-lightbox');
 
