@@ -172,12 +172,10 @@ const parsePlayers = listParse(parseFootballPlayer);
 
 const parseTeamWithStats = (
 	feFootballMatchTeam: FEFootballTeam,
-): Result<ParserError, FootballMatchTeamWithStats> => {
-	// console.log(JSON.stringify(feFootballMatchTeam.players, null, 2));
-	return parseSubstitutions(feFootballMatchTeam.substitutions).flatMap(
-		(substitutions) => {
-			// console.log(substitutions);
-			return parsePlayers(feFootballMatchTeam.players).map((players) => ({
+): Result<ParserError, FootballMatchTeamWithStats> =>
+	parseSubstitutions(feFootballMatchTeam.substitutions).flatMap(
+		(substitutions) =>
+			parsePlayers(feFootballMatchTeam.players).map((players) => ({
 				paID: feFootballMatchTeam.id,
 				name: cleanTeamName(feFootballMatchTeam.name),
 				abbreviatedName: feFootballMatchTeam.codename,
@@ -189,10 +187,8 @@ const parseTeamWithStats = (
 				players,
 				statsColour: feFootballMatchTeam.colours,
 				substitutions,
-			}));
-		},
+			})),
 	);
-};
 
 export const parseMatchStats = (
 	feFootballMatch: FEFootballMatchStats,
