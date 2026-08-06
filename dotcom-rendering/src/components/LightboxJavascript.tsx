@@ -341,8 +341,10 @@ const initialiseLightbox = (
 		lightbox.querySelectorAll<HTMLImageElement>('li img'),
 	);
 
-	const captionLinks = lightbox.querySelectorAll<HTMLAnchorElement>(
-		'li aside a:not([data-ignore="global-link-styling"])',
+	const captionLinks = Array.from(
+		lightbox.querySelectorAll<HTMLAnchorElement>('li aside a'),
+	).filter(
+		(link) => !link.closest('[data-component="product-lightbox-link"]'),
 	);
 
 	if (!imageList) {
