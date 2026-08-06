@@ -45,7 +45,18 @@ export const DecideLines = ({ format, color }: Props) => {
 
 	switch (format.theme) {
 		case Pillar.Sport:
-			return <DottedLines count={count} color={color} />;
+			if (format.design !== ArticleDesign.Picture) {
+				return <DottedLines count={count} color={color} />;
+			}
+			return (
+				<StraightLines
+					cssOverrides={css`
+						display: block;
+					`}
+					count={count}
+					color={color}
+				/>
+			);
 		default:
 			return (
 				<StraightLines

@@ -75,6 +75,13 @@ const chooseWrapper = (format: ArticleFormat) => {
 					return noGutters;
 			}
 		}
+		case ArticleDisplay.Showcase:
+			switch (format.design) {
+				case ArticleDesign.Picture:
+					return '';
+				default:
+					return noGutters;
+			}
 		default:
 			return noGutters;
 	}
