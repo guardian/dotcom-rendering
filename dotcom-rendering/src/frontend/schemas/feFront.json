@@ -634,6 +634,71 @@
                                                         "successDescription",
                                                         "theme"
                                                     ]
+                                                },
+                                                "tests": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "testUuid": {
+                                                                "type": "string"
+                                                            },
+                                                            "variantMeta": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "$ref": "#/definitions/VariantId"
+                                                                        },
+                                                                        "meta": {
+                                                                            "type": "object",
+                                                                            "additionalProperties": {}
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "id",
+                                                                        "meta"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "createdByName": {
+                                                                "type": "string"
+                                                            },
+                                                            "createdByEmail": {
+                                                                "type": "string"
+                                                            },
+                                                            "startDate": {
+                                                                "type": "number"
+                                                            },
+                                                            "expiryDate": {
+                                                                "type": "number"
+                                                            },
+                                                            "frontsThisTestCanRunOn": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "hasManuallyEndedOnThisTrail": {
+                                                                "type": "boolean"
+                                                            },
+                                                            "manuallyEndedOnThisTrailByName": {
+                                                                "type": "string"
+                                                            },
+                                                            "manuallyEndedOnThisTrailByEmail": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "createdByEmail",
+                                                            "createdByName",
+                                                            "frontsThisTestCanRunOn",
+                                                            "hasManuallyEndedOnThisTrail",
+                                                            "testUuid",
+                                                            "variantMeta"
+                                                        ]
+                                                    }
                                                 }
                                             },
                                             "required": [
@@ -1469,6 +1534,71 @@
                                                         "successDescription",
                                                         "theme"
                                                     ]
+                                                },
+                                                "tests": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "testUuid": {
+                                                                "type": "string"
+                                                            },
+                                                            "variantMeta": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "$ref": "#/definitions/VariantId"
+                                                                        },
+                                                                        "meta": {
+                                                                            "type": "object",
+                                                                            "additionalProperties": {}
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "id",
+                                                                        "meta"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "createdByName": {
+                                                                "type": "string"
+                                                            },
+                                                            "createdByEmail": {
+                                                                "type": "string"
+                                                            },
+                                                            "startDate": {
+                                                                "type": "number"
+                                                            },
+                                                            "expiryDate": {
+                                                                "type": "number"
+                                                            },
+                                                            "frontsThisTestCanRunOn": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "hasManuallyEndedOnThisTrail": {
+                                                                "type": "boolean"
+                                                            },
+                                                            "manuallyEndedOnThisTrailByName": {
+                                                                "type": "string"
+                                                            },
+                                                            "manuallyEndedOnThisTrailByEmail": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "createdByEmail",
+                                                            "createdByName",
+                                                            "frontsThisTestCanRunOn",
+                                                            "hasManuallyEndedOnThisTrail",
+                                                            "testUuid",
+                                                            "variantMeta"
+                                                        ]
+                                                    }
                                                 }
                                             },
                                             "required": [
@@ -2304,6 +2434,71 @@
                                                         "successDescription",
                                                         "theme"
                                                     ]
+                                                },
+                                                "tests": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "testUuid": {
+                                                                "type": "string"
+                                                            },
+                                                            "variantMeta": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "$ref": "#/definitions/VariantId"
+                                                                        },
+                                                                        "meta": {
+                                                                            "type": "object",
+                                                                            "additionalProperties": {}
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "id",
+                                                                        "meta"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "createdByName": {
+                                                                "type": "string"
+                                                            },
+                                                            "createdByEmail": {
+                                                                "type": "string"
+                                                            },
+                                                            "startDate": {
+                                                                "type": "number"
+                                                            },
+                                                            "expiryDate": {
+                                                                "type": "number"
+                                                            },
+                                                            "frontsThisTestCanRunOn": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "hasManuallyEndedOnThisTrail": {
+                                                                "type": "boolean"
+                                                            },
+                                                            "manuallyEndedOnThisTrailByName": {
+                                                                "type": "string"
+                                                            },
+                                                            "manuallyEndedOnThisTrailByEmail": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "createdByEmail",
+                                                            "createdByName",
+                                                            "frontsThisTestCanRunOn",
+                                                            "hasManuallyEndedOnThisTrail",
+                                                            "testUuid",
+                                                            "variantMeta"
+                                                        ]
+                                                    }
                                                 }
                                             },
                                             "required": [
@@ -3200,6 +3395,13 @@
                 "mediaType",
                 "url"
             ]
+        },
+        "VariantId": {
+            "enum": [
+                "A",
+                "B"
+            ],
+            "type": "string"
         },
         "FEFrontCardStyle": {
             "enum": [
