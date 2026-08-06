@@ -1991,7 +1991,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             "ContainerName": "tag-page-rendering",
             "ContainerPort": 9000,
             "TargetGroupArn": {
-              "Ref": "EcsTargetGroupTagpagerendering06213654",
+              "Ref": "TagpagerenderingEcsTargetGroupTagpagerendering0976D2E5",
             },
           },
         ],
@@ -2096,55 +2096,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "ServiceNamespace": "ecs",
       },
       "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
-    },
-    "EcsTargetGroupTagpagerendering06213654": {
-      "Properties": {
-        "HealthCheckIntervalSeconds": 10,
-        "HealthCheckPath": "/_healthcheck",
-        "HealthCheckProtocol": "HTTP",
-        "HealthCheckTimeoutSeconds": 5,
-        "HealthyThresholdCount": 5,
-        "Port": 9000,
-        "Protocol": "HTTP",
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "tag-page-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "CODE",
-          },
-        ],
-        "TargetGroupAttributes": [
-          {
-            "Key": "deregistration_delay.timeout_seconds",
-            "Value": "30",
-          },
-          {
-            "Key": "stickiness.enabled",
-            "Value": "false",
-          },
-        ],
-        "TargetType": "ip",
-        "UnhealthyThresholdCount": 2,
-        "VpcId": {
-          "Ref": "VpcId",
-        },
-      },
-      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
     },
     "EcsTaskDefinition63157ED3": {
       "Properties": {
@@ -2884,7 +2835,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                 },
                 {
                   "TargetGroupArn": {
-                    "Ref": "EcsTargetGroupTagpagerendering06213654",
+                    "Ref": "TagpagerenderingEcsTargetGroupTagpagerendering0976D2E5",
                   },
                   "Weight": 0,
                 },
@@ -2957,7 +2908,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "Actions": [
           {
             "TargetGroupArn": {
-              "Ref": "EcsTargetGroupTagpagerendering06213654",
+              "Ref": "TagpagerenderingEcsTargetGroupTagpagerendering0976D2E5",
             },
             "Type": "forward",
           },
@@ -3274,6 +3225,55 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "TagpagerenderingEcsTargetGroupTagpagerendering0976D2E5": {
+      "Properties": {
+        "HealthCheckIntervalSeconds": 10,
+        "HealthCheckPath": "/_healthcheck",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 5,
+        "HealthyThresholdCount": 5,
+        "Port": 9000,
+        "Protocol": "HTTP",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "ip",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
     },
     "TargetGroupTagpagerendering42E428EE": {
       "Properties": {
