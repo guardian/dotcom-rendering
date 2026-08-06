@@ -3,7 +3,11 @@ import { breakpoints, space, textSans17 } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import type { ReactNode } from 'react';
 import { palette } from '../palette';
-import type { DCRContainerPalette, DCRSlideshowImage } from '../types/front';
+import type {
+	DCRContainerPalette,
+	DCRSlideshowImage,
+	DCRSlideshowMedia,
+} from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
 import { SlideshowCarousel } from './SlideshowCarousel.island';
 
@@ -45,6 +49,26 @@ const images = [
 			'https://media.guim.co.uk/ed66e9dc6a84de6bc0afe1965833f0fa4047c22d/0_324_3500_2100/3500.jpg',
 	},
 ] as const satisfies readonly DCRSlideshowImage[];
+
+/**
+ * Spike: video slides that can be mixed into a slideshow. Reuses the self-hosted
+ * loop video assets already used elsewhere on fronts.
+ */
+const videoSlide = {
+	type: 'video',
+	videoSrc:
+		'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+	posterSrc:
+		'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+	caption: 'A self-hosted looping video slide',
+} as const satisfies DCRSlideshowMedia;
+
+const mixedMedia = [
+	images[0],
+	videoSlide,
+	images[1],
+	images[2],
+] as const satisfies readonly DCRSlideshowMedia[];
 
 const Wrapper = ({
 	children,
@@ -117,6 +141,18 @@ export const WithThreeImages = {
 export const WithOneImage = {
 	args: {
 		images: images.slice(0, 1),
+	},
+} satisfies Story;
+
+export const WithVideoAndImages = {
+	args: {
+		images: mixedMedia,
+	},
+} satisfies Story;
+
+export const WithOneVideo = {
+	args: {
+		images: [videoSlide],
 	},
 } satisfies Story;
 
