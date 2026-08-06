@@ -20,6 +20,7 @@ type ProductLinkButtonProps = {
 	minimisePadding?: boolean;
 	dataComponent?: string;
 	xCustComponentId?: string;
+	themeOverrides?: Partial<ThemeButton>;
 };
 
 const fullWidthStyle = css`
@@ -56,6 +57,7 @@ export const ProductLinkButton = ({
 	priority = 'primary',
 	dataComponent,
 	xCustComponentId,
+	themeOverrides,
 }: ProductLinkButtonProps) => {
 	const cssOverrides: SerializedStyles[] = [
 		heightAutoStyle,
@@ -69,7 +71,7 @@ export const ProductLinkButton = ({
 			href={url}
 			rel={SKIMLINK_REL}
 			priority={priority}
-			theme={theme}
+			theme={{ ...theme, ...themeOverrides }}
 			data-component={dataComponent}
 			data-ignore="global-link-styling"
 			data-link-name={`product link button ${priority}`}

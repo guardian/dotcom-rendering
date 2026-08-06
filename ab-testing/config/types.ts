@@ -14,7 +14,8 @@ type Team =
 	| "fronts-and-curation"
 	| "growth"
 	| "feast"
-	| "martech";
+	| "martech"
+	| "puzzles";
 
 type TestName = `${Team}-${string}`;
 

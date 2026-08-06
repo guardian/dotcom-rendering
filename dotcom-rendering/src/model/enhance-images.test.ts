@@ -2,7 +2,11 @@ import { PhotoEssay } from '../../fixtures/generated/fe-articles/PhotoEssay';
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { images } from '../../fixtures/generated/images';
 import { decideFormat, Pillar } from '../lib/articleFormat';
-import type { FEElement } from '../types/content';
+import type {
+	FEElement,
+	ProductBlockElement,
+	ProductImage,
+} from '../types/content';
 import { enhanceElementsImages, enhanceImages } from './enhance-images';
 
 const exampleArticleFormat = decideFormat(ExampleArticle.format);
@@ -597,6 +601,112 @@ describe('Enhance Images', () => {
 					},
 				])(input),
 			).toEqual(expectedOutput);
+		});
+
+		it("adds the lightbox position to a product's own image", () => {
+			const productImage: ProductImage = {
+				url: 'https://media.guim.co.uk/product/725.jpg',
+				caption: 'Product image',
+				credit: 'Photograph: Test/The Guardian',
+				alt: 'A product',
+				displayCredit: false,
+				height: 725,
+				width: 725,
+			};
+
+			const productElement: ProductBlockElement = {
+				_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
+				elementId: 'product-1',
+				brandName: 'Acme',
+				starRating: '5',
+				productName: 'Widget',
+				image: productImage,
+				primaryHeadingHtml: '',
+				secondaryHeadingHtml: '',
+				customAttributes: [],
+				content: [],
+				id: '123',
+				displayType: 'InlineOnly',
+				productCtas: [],
+			};
+
+			const input: FEElement[] = [productElement];
+
+			const expectedOutput: FEElement[] = [
+				{
+					...productElement,
+					image: { ...productImage, position: 7 },
+				},
+			];
+
+			expect(
+				enhanceImages(exampleArticleFormat, [
+					{
+						masterUrl: productImage.url,
+						elementId: productElement.elementId,
+						width: productImage.width,
+						height: productImage.height,
+						position: 7,
+					},
+				])(input),
+			).toEqual(expectedOutput);
+		});
+
+		it('leaves a product element unchanged when its image has no lightbox match', () => {
+			const productImage: ProductImage = {
+				url: 'https://media.guim.co.uk/product/725.jpg',
+				caption: 'Product image',
+				credit: 'Photograph: Test/The Guardian',
+				alt: 'A product',
+				displayCredit: false,
+				height: 725,
+				width: 725,
+			};
+
+			const productElement: ProductBlockElement = {
+				_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
+				elementId: 'product-1',
+				brandName: 'Acme',
+				starRating: '5',
+				productName: 'Widget',
+				image: productImage,
+				primaryHeadingHtml: '',
+				secondaryHeadingHtml: '',
+				customAttributes: [],
+				content: [],
+				id: '123',
+				displayType: 'InlineOnly',
+				productCtas: [],
+			};
+
+			const input: FEElement[] = [productElement];
+
+			expect(enhanceImages(exampleArticleFormat, [])(input)).toEqual(
+				input,
+			);
+		});
+
+		it('leaves a product element with no image unchanged', () => {
+			const productElement: ProductBlockElement = {
+				_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
+				elementId: 'product-1',
+				brandName: 'Acme',
+				starRating: '5',
+				productName: 'Widget',
+				primaryHeadingHtml: '',
+				secondaryHeadingHtml: '',
+				customAttributes: [],
+				content: [],
+				id: '123',
+				displayType: 'InlineOnly',
+				productCtas: [],
+			};
+
+			const input: FEElement[] = [productElement];
+
+			expect(enhanceImages(exampleArticleFormat, [])(input)).toEqual(
+				input,
+			);
 		});
 
 		it('does not strip the captions from any preceding halfwidth images if the special caption is not placed immediately after them', () => {
