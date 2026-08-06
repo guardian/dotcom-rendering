@@ -362,7 +362,7 @@ export class RenderingCDKStack extends CDKStack {
 					// https://docs.aws.amazon.com/AmazonECS/latest/developerguide/target-tracking-faster-auto-scaling.html
 					new TargetTrackingScalingPolicy(this, 'CpuScaling', {
 						scalingTarget: ecsScalableTarget,
-						targetValue: 50,
+						targetValue: 20,
 						predefinedMetric:
 							'ECSServiceAverageCPUUtilizationHighResolution' as unknown as PredefinedMetric,
 						scaleOutCooldown: Duration.seconds(60),

@@ -1943,7 +1943,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           },
           "ScaleInCooldown": 60,
           "ScaleOutCooldown": 60,
-          "TargetValue": 50,
+          "TargetValue": 20,
         },
       },
       "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
