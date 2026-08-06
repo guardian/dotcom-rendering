@@ -82,6 +82,10 @@ module.exports = {
 				exclude: transpileExclude,
 				use: swcLoader,
 			},
+			{
+				test: /\.html$/i,
+				type: 'asset/source',
+			},
 			svgr,
 			{
 				test: /jsdom.*computed-style\.js$/,

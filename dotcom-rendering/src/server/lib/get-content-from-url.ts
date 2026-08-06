@@ -43,6 +43,20 @@ async function getContentFromURL(
 			throw error;
 		});
 
+	// TODO: HACK!
+	if (url.pathname.startsWith('/site')) {
+		return {
+			...config,
+			config: {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- poc
+				...config.config,
+				keywordIds: 'shell',
+				shortUrlId: '',
+				showRelatedContent: false,
+			},
+		};
+	}
+
 	return config;
 }
 
@@ -51,8 +65,11 @@ async function getContentFromURL(
  */
 export const parseURL = (requestUrl: string): URL | undefined => {
 	try {
+		const splitPos = requestUrl.toLocaleLowerCase().startsWith('/site/')
+			? 3
+			: 2;
 		return new URL(
-			decodeURIComponent(requestUrl.split('/').slice(2).join('/')),
+			decodeURIComponent(requestUrl.split('/').slice(splitPos).join('/')),
 		);
 	} catch (error) {
 		return undefined;
