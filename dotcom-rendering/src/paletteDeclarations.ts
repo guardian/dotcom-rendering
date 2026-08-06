@@ -4938,8 +4938,6 @@ const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) => {
 			return sourcePalette.neutral[20];
 		case ArticleDesign.Video:
 			return sourcePalette.neutral[20];
-		case ArticleDesign.Analysis:
-			return '#F2E8E6';
 		default:
 			return sourcePalette.neutral[97];
 	}

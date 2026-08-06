@@ -12,6 +12,8 @@ import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 
 const mainMedia = css`
+	height: 100%;
+
 	${until.tablet} {
 		margin: 0;
 		order: 2;
