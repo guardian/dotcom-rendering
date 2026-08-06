@@ -341,8 +341,9 @@ const initialiseLightbox = (
 		lightbox.querySelectorAll<HTMLImageElement>('li img'),
 	);
 
-	const captionLinks =
-		lightbox.querySelectorAll<HTMLAnchorElement>('li aside a');
+	const captionLinks = lightbox.querySelectorAll<HTMLAnchorElement>(
+		'li aside a:not([data-ignore="global-link-styling"])',
+	);
 
 	if (!imageList) {
 		return;
