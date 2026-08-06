@@ -4936,6 +4936,8 @@ const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) => {
 			return sourcePalette.neutral[20];
 		case ArticleDesign.Audio:
 			return sourcePalette.neutral[20];
+		case ArticleDesign.Video:
+			return sourcePalette.neutral[20];
 		case ArticleDesign.Analysis:
 			return '#F2E8E6';
 		default:
@@ -4950,6 +4952,8 @@ const affiliateDisclaimerTextLight: PaletteFunction = ({ design }) => {
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.Audio:
+			return sourcePalette.neutral[86];
+		case ArticleDesign.Video:
 			return sourcePalette.neutral[86];
 	}
 	return sourcePalette.neutral[7];
