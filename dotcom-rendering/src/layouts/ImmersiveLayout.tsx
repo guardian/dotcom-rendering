@@ -529,6 +529,16 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									byline={article.byline}
 								/>
 							)}
+							{!!article.affiliateLinksDisclaimer && (
+								<Hide when="below" breakpoint="leftCol">
+									<AffiliateDisclaimer
+										cssOverrides={css`
+											margin: ${space[4]}px 0
+												${space[1]}px 0;
+										`}
+									/>
+								</Hide>
+							)}
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
 								<Hide when="below" breakpoint="leftCol">
@@ -623,9 +633,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 													article.config.shortUrlId
 												}
 											/>
-											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
-											)}
 										</Hide>
 									</>
 								) : (
@@ -653,10 +660,17 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												article.config.shortUrlId
 											}
 										/>
-										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
-										)}
 									</>
+								)}
+								{!!article.affiliateLinksDisclaimer && (
+									<Hide when="above" breakpoint="leftCol">
+										<AffiliateDisclaimer
+											cssOverrides={css`
+												margin: ${space[4]}px 0
+													${space[1]}px 0;
+											`}
+										/>
+									</Hide>
 								)}
 							</div>
 						</GridItem>
