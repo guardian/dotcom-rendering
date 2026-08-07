@@ -83,6 +83,19 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
+		name: "commercial-spacefinder-highvalue-section",
+		description:
+			"Test to measure the impact on ad density after adding to high value sections in spacefinder",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-08-27",
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
 		name: "newsletters-in-article-signup-preview",
 		description:
 			"Test in-article newsletter signup with illustrated preview CTA vs without preview CTA",
