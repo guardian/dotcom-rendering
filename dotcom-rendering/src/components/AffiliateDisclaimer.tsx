@@ -20,6 +20,7 @@ const AffiliateDisclaimerText = () => (
 	</p>
 );
 
+const affiliateDisclaimerId = 'affiliate-disclaimer';
 const AffiliateDisclaimer = ({
 	cssOverrides,
 }: {
@@ -32,6 +33,8 @@ const AffiliateDisclaimer = ({
 			linkPrimary: palette('--article-section-title-lifestyle'),
 		}}
 		cssOverrides={cssOverrides}
+		data-testid={affiliateDisclaimerId}
+		data-component={affiliateDisclaimerId}
 	>
 		<AffiliateDisclaimerText />
 	</Disclaimer>
