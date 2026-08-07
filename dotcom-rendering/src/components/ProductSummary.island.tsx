@@ -1,48 +1,64 @@
 import type { ArticleFormat } from '../lib/articleFormat';
-import type { ABTestVariant } from '../model/enhance-product-summary';
-import type { ProductBlockElement } from '../types/content';
+import type {
+	ProductSummaryDisplayType,
+	SummaryProduct,
+} from '../types/content';
 import { Island } from './Island';
+import { ProductCtaList } from './ProductCtaList';
 import { ScrollableProduct } from './ScrollableProduct.island';
 import { StackedProducts } from './StackedProducts.island';
 
 export const ProductSummary = ({
+	title,
 	products,
 	format,
-	variant,
+	displayType,
 }: {
-	products: ProductBlockElement[];
+	title: string;
+	products: SummaryProduct[];
 	format: ArticleFormat;
-	variant: ABTestVariant;
+	displayType: ProductSummaryDisplayType;
 }) => {
-	if (variant === 'carousel') {
-		return (
-			<Island priority="feature" defer={{ until: 'idle' }}>
-				<ScrollableProduct products={products} format={format} />
-			</Island>
-		);
-	}
-
-	if (variant === 'stacked-default') {
-		return (
-			<Island priority="feature" defer={{ until: 'idle' }}>
-				<StackedProducts
+	switch (displayType) {
+		case 'Carousel':
+			return (
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<ScrollableProduct
+						title={title}
+						products={products}
+						format={format}
+					/>
+				</Island>
+			);
+		case 'StackedCard':
+			return (
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<StackedProducts
+						products={products}
+						title={title}
+						format={format}
+						showAllProducts={false}
+					/>
+				</Island>
+			);
+		case 'StackedCardExpanded':
+			return (
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<StackedProducts
+						products={products}
+						title={title}
+						format={format}
+						showAllProducts={true}
+					/>
+				</Island>
+			);
+		case 'CtaList':
+			return (
+				<ProductCtaList
 					products={products}
-					heading={'At a glance'}
+					title={title}
 					format={format}
-					showAllProducts={false}
 				/>
-			</Island>
-		);
+			);
 	}
-
-	return (
-		<Island priority="feature" defer={{ until: 'idle' }}>
-			<StackedProducts
-				products={products}
-				heading={'At a glance'}
-				format={format}
-				showAllProducts={true}
-			/>
-		</Island>
-	);
 };

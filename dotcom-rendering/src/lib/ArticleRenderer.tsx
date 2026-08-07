@@ -18,6 +18,33 @@ const commercialPosition = css`
 	position: relative;
 `;
 
+const MAX_FEAST_NUDGES = 5;
+
+/**
+ * Assigns up to five numbered Braze placements across recipe sections,
+ * including the first and last section when there are more than five.
+ */
+export const getFeastNudgeIndex = (
+	sectionIndex: number,
+	sectionCount: number,
+): number | null => {
+	if (sectionIndex < 0 || sectionIndex >= sectionCount || sectionCount < 1) {
+		return null;
+	}
+
+	const nudgeCount = Math.min(MAX_FEAST_NUDGES, sectionCount);
+	if (nudgeCount === sectionCount) return sectionIndex + 1;
+
+	for (let slot = 0; slot < nudgeCount; slot++) {
+		const targetIndex = Math.round(
+			(slot * (sectionCount - 1)) / (nudgeCount - 1),
+		);
+		if (targetIndex === sectionIndex) return slot + 1;
+	}
+
+	return null;
+};
+
 type Props = {
 	format: ArticleFormat;
 	elements: FEElement[];
@@ -159,10 +186,14 @@ export const ArticleRenderer = ({
 		const result: (JSX.Element | null | undefined)[] = [...preSection];
 
 		for (const section of sections) {
+			const nudgeIndex = getFeastNudgeIndex(
+				section.index,
+				sections.length,
+			);
 			result.push(
 				<Fragment key={`recipe-section-${section.index}`}>
 					{section.subheadingEl}
-					{section.recipe && (
+					{section.recipe && nudgeIndex !== null && (
 						<Island
 							priority="feature"
 							defer={{ until: 'visible' }}
@@ -173,6 +204,8 @@ export const ArticleRenderer = ({
 								pageId={pageId}
 								recipe={section.recipe}
 								recipeArticleTitle={section.recipeArticleTitle}
+								nudgeIndex={nudgeIndex}
+								idApiUrl={idApiUrl}
 							/>
 						</Island>
 					)}

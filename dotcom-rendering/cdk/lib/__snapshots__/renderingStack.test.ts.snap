@@ -1991,10 +1991,21 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             "ContainerName": "tag-page-rendering",
             "ContainerPort": 9000,
             "TargetGroupArn": {
-              "Ref": "EcsTargetGroupTagpagerendering06213654",
+              "Ref": "TagpagerenderingEcsTargetGroupTagpagerendering0976D2E5",
             },
           },
         ],
+        "Monitoring": {
+          "MetricConfigurations": [
+            {
+              "MetricNames": [
+                "CPUUtilization",
+                "MemoryUtilization",
+              ],
+              "ResolutionSeconds": 20,
+            },
+          ],
+        },
         "NetworkConfiguration": {
           "AwsvpcConfiguration": {
             "AssignPublicIp": "DISABLED",
@@ -2013,6 +2024,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         },
         "PropagateTags": "SERVICE",
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -2082,55 +2097,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       },
       "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
     },
-    "EcsTargetGroupTagpagerendering06213654": {
-      "Properties": {
-        "HealthCheckIntervalSeconds": 10,
-        "HealthCheckPath": "/_healthcheck",
-        "HealthCheckProtocol": "HTTP",
-        "HealthCheckTimeoutSeconds": 5,
-        "HealthyThresholdCount": 5,
-        "Port": 9000,
-        "Protocol": "HTTP",
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "tag-page-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "CODE",
-          },
-        ],
-        "TargetGroupAttributes": [
-          {
-            "Key": "deregistration_delay.timeout_seconds",
-            "Value": "30",
-          },
-          {
-            "Key": "stickiness.enabled",
-            "Value": "false",
-          },
-        ],
-        "TargetType": "ip",
-        "UnhealthyThresholdCount": 2,
-        "VpcId": {
-          "Ref": "VpcId",
-        },
-      },
-      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
-    },
     "EcsTaskDefinition63157ED3": {
       "Properties": {
         "ContainerDefinitions": [
@@ -2141,6 +2107,26 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
               },
             },
             "Environment": [
+              {
+                "Name": "STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "STAGE",
+                "Value": "CODE",
+              },
+              {
+                "Name": "APP",
+                "Value": "tag-page-rendering",
+              },
+              {
+                "Name": "TASK_NAME",
+                "Value": "tag-page-rendering",
+              },
+              {
+                "Name": "GU_REPO",
+                "Value": "guardian/dotcom-rendering",
+              },
               {
                 "Name": "NODE_ENV",
                 "Value": "production",
@@ -2260,6 +2246,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         ],
         "Tags": [
           {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -2305,6 +2295,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           "Version": "2012-10-17",
         },
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -2398,6 +2392,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "RetentionInDays": 1,
         "Tags": [
           {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -2433,6 +2431,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           "Version": "2012-10-17",
         },
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -2833,7 +2835,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                 },
                 {
                   "TargetGroupArn": {
-                    "Ref": "EcsTargetGroupTagpagerendering06213654",
+                    "Ref": "TagpagerenderingEcsTargetGroupTagpagerendering0976D2E5",
                   },
                   "Weight": 0,
                 },
@@ -2876,6 +2878,28 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           "Ref": "ListenerTagpagerendering92E57078",
         },
         "Priority": 10,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
       },
       "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
     },
@@ -2884,7 +2908,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "Actions": [
           {
             "TargetGroupArn": {
-              "Ref": "EcsTargetGroupTagpagerendering06213654",
+              "Ref": "TagpagerenderingEcsTargetGroupTagpagerendering0976D2E5",
             },
             "Type": "forward",
           },
@@ -2904,6 +2928,28 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           "Ref": "ListenerTagpagerendering92E57078",
         },
         "Priority": 11,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
       },
       "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
     },
@@ -3180,6 +3226,55 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       },
       "Type": "AWS::IAM::Policy",
     },
+    "TagpagerenderingEcsTargetGroupTagpagerendering0976D2E5": {
+      "Properties": {
+        "HealthCheckIntervalSeconds": 10,
+        "HealthCheckPath": "/_healthcheck",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 5,
+        "HealthyThresholdCount": 5,
+        "Port": 9000,
+        "Protocol": "HTTP",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "ip",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
     "TargetGroupTagpagerendering42E428EE": {
       "Properties": {
         "HealthCheckIntervalSeconds": 10,
@@ -3423,6 +3518,10 @@ systemctl start tag-page-rendering",
           },
         ],
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",

@@ -627,10 +627,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 												idApiUrl={
 													article.config.idApiUrl
 												}
-												isMinuteArticle={
-													article.pageType
-														.isMinuteArticle
-												}
 												isPaidContent={
 													article.pageType
 														.isPaidContent

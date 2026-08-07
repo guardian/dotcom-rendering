@@ -111,8 +111,6 @@ export const StandardLayoutArticleGrid = ({
 		format.design === ArticleDesign.Audio;
 	const isShowcase = format.display === ArticleDisplay.Showcase;
 
-	const isVideo = format.design === ArticleDesign.Video;
-
 	const footballMatchUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchUrl
@@ -196,18 +194,20 @@ export const StandardLayoutArticleGrid = ({
 				<Standfirst format={format} standfirst={article.standfirst} />
 			</GridItem>
 			<GridItem area="meta" layoutType={layoutType} element="aside">
-				<div css={stretchLines}>
-					{isWeb &&
-					format.theme === ArticleSpecial.Labs &&
-					format.design !== ArticleDesign.Video ? (
-						<GuardianLabsLines />
-					) : (
-						<DecideLines
-							format={format}
-							color={themePalette('--article-border')}
-						/>
-					)}
-				</div>
+				{format.design !== ArticleDesign.Audio && (
+					<div css={stretchLines}>
+						{isWeb &&
+						format.theme === ArticleSpecial.Labs &&
+						format.design !== ArticleDesign.Video ? (
+							<GuardianLabsLines />
+						) : (
+							<DecideLines
+								format={format}
+								color={themePalette('--article-border')}
+							/>
+						)}
+					</div>
+				)}
 				{isApps ? (
 					<>
 						<Hide from="leftCol">
@@ -282,7 +282,7 @@ export const StandardLayoutArticleGrid = ({
 				{/* Only show Listen to Article button on App landscape views */}
 				{isApps && (
 					<Hide until="leftCol">
-						{!isVideo && (
+						{!isMedia && (
 							<div
 								css={css`
 									margin-top: ${space[2]}px;
@@ -353,9 +353,6 @@ export const StandardLayoutArticleGrid = ({
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isMinuteArticle={
-									article.pageType.isMinuteArticle
-								}
 								isPaidContent={article.pageType.isPaidContent}
 								pageId={article.pageId}
 								sectionId={article.config.section}
@@ -421,6 +418,9 @@ export const StandardLayoutArticleGrid = ({
 							renderAds={isWeb && renderAds}
 							shouldHideReaderRevenue={
 								!!article.config.shouldHideReaderRevenue
+							}
+							shouldHideMostViewed={
+								format.design === ArticleDesign.Audio
 							}
 						/>
 					</Island>
