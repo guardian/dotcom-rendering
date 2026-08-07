@@ -142,22 +142,31 @@ export const StandardLayoutArticleGrid = ({
 			]}
 		>
 			<GridItem area="media" layoutType={layoutType}>
-				<MainMedia
-					format={format}
-					elements={article.mainMediaElements}
-					host={host}
-					pageId={article.pageId}
-					webTitle={article.webTitle}
-					ajaxUrl={article.config.ajaxUrl}
-					switches={article.config.switches}
-					isAdFreeUser={article.isAdFreeUser}
-					isSensitive={article.config.isSensitive}
-					editionId={article.editionId}
-					hideCaption={isMedia}
-					shouldHideAds={article.shouldHideAds}
-					contentType={article.contentType}
-					contentLayout={`${ArticleDisplay[format.display]}Layout`}
-				/>
+				<div>
+					<MainMedia
+						format={format}
+						elements={article.mainMediaElements}
+						host={host}
+						pageId={article.pageId}
+						webTitle={article.webTitle}
+						ajaxUrl={article.config.ajaxUrl}
+						switches={article.config.switches}
+						isAdFreeUser={article.isAdFreeUser}
+						isSensitive={article.config.isSensitive}
+						editionId={article.editionId}
+						hideCaption={isMedia}
+						shouldHideAds={article.shouldHideAds}
+						contentType={article.contentType}
+						contentLayout={`${ArticleDisplay[format.display]}Layout`}
+					/>
+					{!!article.affiliateLinksDisclaimer && (
+						<AffiliateDisclaimer
+							cssOverrides={css`
+								margin: ${space[4]}px 0;
+							`}
+						/>
+					)}
+				</div>
 			</GridItem>
 			<GridItem area="title" layoutType={layoutType} element="aside">
 				<ArticleTitle
@@ -244,9 +253,6 @@ export const StandardLayoutArticleGrid = ({
 								shortUrlId={article.config.shortUrlId}
 								mainMediaElements={article.mainMediaElements}
 							/>
-							{!!article.affiliateLinksDisclaimer && (
-								<AffiliateDisclaimer />
-							)}
 						</Hide>
 					</>
 				) : (
@@ -269,9 +275,6 @@ export const StandardLayoutArticleGrid = ({
 							mainMediaElements={article.mainMediaElements}
 							webPublicationDate={article.webPublicationDate}
 						/>
-						{!!article.affiliateLinksDisclaimer && (
-							<AffiliateDisclaimer />
-						)}
 					</>
 				)}
 			</GridItem>

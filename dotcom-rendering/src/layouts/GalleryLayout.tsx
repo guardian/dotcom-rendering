@@ -9,7 +9,7 @@ import { Hide } from '@guardian/source/react-components';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot } from '../components/AdSlot.web';
-import { AffiliateDisclaimerGallery } from '../components/AffiliateDisclaimer';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
@@ -513,7 +513,11 @@ const Meta = ({
 			/>
 		) : null}
 		{!!frontendData.affiliateLinksDisclaimer && (
-			<AffiliateDisclaimerGallery />
+			<AffiliateDisclaimer
+				cssOverrides={css`
+					margin-top: ${space[4]}px;
+				`}
+			/>
 		)}
 	</div>
 );
