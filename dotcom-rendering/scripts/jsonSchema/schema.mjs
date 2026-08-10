@@ -70,10 +70,6 @@ const schemas = [
 		file: `${root}/src/frontend/schemas/feFootballTablesPage.json`,
 	},
 	{
-		typeName: 'FECricketMatchPage',
-		file: `${root}/src/frontend/schemas/feCricketMatchPage.json`,
-	},
-	{
 		typeName: 'FEFootballMatchInfoPage',
 		file: `${root}/src/frontend/schemas/feFootballMatchInfoPage.json`,
 	},
