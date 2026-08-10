@@ -622,7 +622,6 @@ export const ArticleHeadline = ({
 														)};
 													`,
 									isImmersivePortrait && [
-										,
 										displayGrid,
 										paddingBottom,
 									],
