@@ -2514,6 +2514,7 @@ const standfirstTextLight: PaletteFunction = (format) => {
 		format.theme === ArticleSpecial.Labs &&
 		!keepsOriginalLabsColour(format.design, [
 			ArticleDesign.LiveBlog,
+			...labsMediaDesigns,
 			...labsHostedDesigns,
 		])
 	) {
@@ -2526,7 +2527,12 @@ const standfirstTextLight: PaletteFunction = (format) => {
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
-			return sourcePalette.neutral[86];
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[0];
+				default:
+					return sourcePalette.neutral[86];
+			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
