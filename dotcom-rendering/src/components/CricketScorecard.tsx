@@ -18,7 +18,7 @@ import type {
 	FallOfWicket,
 	Innings,
 	InningsTotals,
-} from '../cricketMatchV2';
+} from '../cricketMatch';
 import { palette } from '../palette';
 
 const visuallyHiddenStyles = css`

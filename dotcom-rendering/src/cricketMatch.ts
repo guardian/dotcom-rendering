@@ -314,7 +314,7 @@ const parseCricketResult = (
 	}
 };
 
-export const parseCricketMatchV2 = (
+export const parseCricketMatch = (
 	feMatch: FECricketMatch,
 ): Result<ParserError, CricketMatch> => {
 	const matchKind = paCricketStatusToMatchKind[feMatch.result];

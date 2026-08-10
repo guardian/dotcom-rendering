@@ -1,9 +1,9 @@
 import { cricketMatchData } from '../fixtures/generated/cricket-match';
-import { parseCricketMatchV2 } from './cricketMatchV2';
+import { parseCricketMatch } from './cricketMatch';
 
 describe('parseCricketMatchV2', () => {
 	it('parses a winner result cricket match correctly', () => {
-		const result = parseCricketMatchV2(
+		const result = parseCricketMatch(
 			cricketMatchData.cricketMatch,
 		).getOrThrow('Expected parsing cricket match to succeed');
 
@@ -21,7 +21,7 @@ describe('parseCricketMatchV2', () => {
 	});
 
 	it('parses a cricket match in pre-match status', () => {
-		const result = parseCricketMatchV2({
+		const result = parseCricketMatch({
 			...cricketMatchData.cricketMatch,
 			result: 'pre-match',
 			fullResult: undefined,
@@ -32,7 +32,7 @@ describe('parseCricketMatchV2', () => {
 	});
 
 	it('parses a cricket match in in-play status', () => {
-		const result = parseCricketMatchV2({
+		const result = parseCricketMatch({
 			...cricketMatchData.cricketMatch,
 			result: 'in-play',
 			fullResult: undefined,
@@ -43,7 +43,7 @@ describe('parseCricketMatchV2', () => {
 	});
 
 	it('parses an abandoned cricket match correctly', () => {
-		const result = parseCricketMatchV2({
+		const result = parseCricketMatch({
 			...cricketMatchData.cricketMatch,
 			fullResult: {
 				resultType: 'abandoned',
@@ -60,7 +60,7 @@ describe('parseCricketMatchV2', () => {
 	});
 
 	it('parses a cricket match with no winner', () => {
-		const result = parseCricketMatchV2({
+		const result = parseCricketMatch({
 			...cricketMatchData.cricketMatch,
 			fullResult: {
 				resultType: 'no-result',

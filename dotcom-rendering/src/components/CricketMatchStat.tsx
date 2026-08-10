@@ -8,7 +8,7 @@ import {
 	textSansBold15,
 	visuallyHidden,
 } from '@guardian/source/foundations';
-import type { Batter } from '../cricketMatchV2';
+import type { Batter } from '../cricketMatch';
 import { palette } from '../palette';
 
 const containerCss = css`

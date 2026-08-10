@@ -1,7 +1,7 @@
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
-import { CricketScorecardNew as CricketScorecardNewComponent } from './CricketScorecardNew';
+import { CricketScorecardNew as CricketScorecardNewComponent } from './CricketScorecard';
 
 const meta = preview.meta({
 	component: CricketScorecardNewComponent,
