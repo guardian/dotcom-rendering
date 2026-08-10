@@ -1,9 +1,9 @@
-import { liveMatch } from '../fixtures/manual/cricketMatch';
+import { liveMatch, resultMatch } from '../fixtures/manual/cricketMatch';
 import { parseCricketMatch } from './cricketMatch';
 
 describe('parseCricketMatchV2', () => {
 	it('parses a winner result cricket match correctly', () => {
-		const result = parseCricketMatch(liveMatch).getOrThrow(
+		const result = parseCricketMatch(resultMatch).getOrThrow(
 			'Expected parsing cricket match to succeed',
 		);
 
@@ -17,7 +17,7 @@ describe('parseCricketMatchV2', () => {
 				margin: 115,
 			},
 		});
-		expect(result.matchDate).toEqual(new Date('2026-06-04T10:00:00.000Z'));
+		expect(result.matchDate).toEqual(new Date('2026-06-17T10:00:00.000Z'));
 	});
 
 	it('parses a cricket match in pre-match status', () => {
