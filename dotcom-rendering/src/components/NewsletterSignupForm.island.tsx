@@ -194,9 +194,9 @@ const primaryButtonTheme: Partial<ThemeButton> = {
  * Used by the "Browse more newsletters" link.
  */
 export const tertiaryButtonTheme: Partial<ThemeButton> = {
-	textTertiary: palette('--newsletter-preview-button-text'),
-	borderTertiary: palette('--newsletter-preview-button-border'),
-	backgroundTertiaryHover: palette('--newsletter-preview-button-hover'),
+	textTertiary: palette('--newsletter-browse-more-button-text'),
+	borderTertiary: palette('--newsletter-browse-more-button-border'),
+	backgroundTertiaryHover: palette('--newsletter-browse-more-button-hover'),
 };
 
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
