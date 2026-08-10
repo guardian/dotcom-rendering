@@ -65,7 +65,7 @@ const galleryStyles = css`
 `;
 
 const immersivePortraitStyles = css`
-	${from.desktop} {
+	${from.leftCol} {
 		height: 100%;
 		justify-content: flex-end;
 	}

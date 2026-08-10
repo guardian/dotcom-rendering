@@ -267,6 +267,13 @@ export const StandardLayoutArticleGrid = ({
 				element="aside"
 				css={css`
 					z-index: ${getZIndex('articleHeadline')};
+
+					${from.desktop} {
+						margin: auto 0 0;
+					}
+					${from.leftCol} {
+						margin: 0;
+					}
 				`}
 			>
 				<ArticleTitle
