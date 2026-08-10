@@ -182,7 +182,7 @@ const immersivePortraitDefaultCss: LayoutCssMap = {
 	standfirst: {
 		mobile: 'grid-row: 4;',
 		tablet: 'grid-row: 4;',
-		desktop: `grid-row: 3; ${grid.between('centre-column-start', 7)};`,
+		desktop: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
 		wide: `grid-row: 3; ${grid.between('centre-column-start', 9)};`,
 	},
@@ -231,7 +231,7 @@ const immersivePortraitFeatureCss: LayoutCssMap = {
 	standfirst: {
 		mobile: 'grid-row: 4;',
 		tablet: 'grid-row: 4;',
-		desktop: `grid-row: 3; ${grid.between('centre-column-start', 7)};`,
+		desktop: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
 		wide: `grid-row: 3; ${grid.between('centre-column-start', 9)};`,
 	},

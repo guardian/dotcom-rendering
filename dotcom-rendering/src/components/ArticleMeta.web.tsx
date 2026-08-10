@@ -289,6 +289,22 @@ const metaNumbersExtrasLiveBlog = css`
 	}
 `;
 
+const borderTop = css`
+	border-top: 1px solid ${themePalette('--article-border')};
+
+	${from.desktop} {
+		border-top: none;
+	}
+`;
+
+const paddingTop = css`
+	padding-top: ${space[3]}px;
+
+	${from.leftCol} {
+		padding-top: 0;
+	}
+`;
+
 export const ArticleMeta = ({
 	branding,
 	format,
@@ -345,7 +361,11 @@ export const ArticleMeta = ({
 			className={
 				isInteractive ? interactiveLegacyClasses.metaContainer : ''
 			}
-			css={metaContainer(format)}
+			css={[
+				metaContainer(format),
+				isPortraitOrLandscapeImmersive && borderTop,
+				isPortraitOrLandscapeImmersive && paddingTop,
+			]}
 		>
 			<div css={meta(format)}>
 				{branding && (
