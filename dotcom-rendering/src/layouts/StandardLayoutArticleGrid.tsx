@@ -277,6 +277,9 @@ export const StandardLayoutArticleGrid = ({
 					isImmersive
 						? css`
 								z-index: ${getZIndex('articleHeadline')};
+								${isImmersivePortrait &&
+								`align-self: end;
+								margin-bottom: 2px;`}
 							`
 						: undefined
 				}
