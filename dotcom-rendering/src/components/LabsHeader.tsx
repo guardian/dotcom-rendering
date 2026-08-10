@@ -161,8 +161,8 @@ const Logo = ({ editionId }: { editionId: EditionId }) => (
 
 export const LabsHeader = ({
 	editionId,
-	textColour = palette.neutral[7],
-	backgroundColour = palette.labs[400],
+	textColour = palette.neutral[100],
+	backgroundColour = palette.labs[100],
 }: {
 	editionId: EditionId;
 	textColour?: string;
