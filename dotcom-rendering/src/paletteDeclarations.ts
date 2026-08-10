@@ -7157,6 +7157,14 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
 	},
+	'--election-tracker-button-background': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--election-tracker-button-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[7],
+	},
 	'--email-signup-button-background': {
 		light: emailSignupButtonBackgroundLight,
 		dark: emailSignupButtonBackgroundDark,
