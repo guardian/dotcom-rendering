@@ -2,9 +2,11 @@ import { css, Global } from '@emotion/react';
 import {
 	from,
 	palette as sourcePalette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';
@@ -298,6 +300,24 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 					/>
 				</article>
 			</Section>
+
+			{!!article.affiliateLinksDisclaimer && (
+				<Section
+					fullWidth={true}
+					padSides={true}
+					backgroundColour={themePalette('--article-background')}
+					element="div"
+					borderColour=""
+					showTopBorder={false}
+					showSideBorders={false}
+				>
+					<AffiliateDisclaimer
+						cssOverrides={css`
+							margin: ${space[4]}px 0;
+						`}
+					/>
+				</Section>
+			)}
 
 			{isWeb && props.NAV.subNavSections && (
 				<Section

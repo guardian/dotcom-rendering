@@ -2,12 +2,14 @@ import { css, Global } from '@emotion/react';
 import {
 	from,
 	palette as sourcePalette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type React from 'react';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -486,6 +488,13 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								</div>
 							</GridItem>
 							<GridItem area="body" element="article">
+								{!!article.affiliateLinksDisclaimer && (
+									<AffiliateDisclaimer
+										cssOverrides={css`
+											margin: ${space[4]}px 0;
+										`}
+									/>
+								)}
 								<ArticleContainer format={format}>
 									<ArticleBody
 										format={format}
