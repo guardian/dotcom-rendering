@@ -34,12 +34,8 @@ jest.mock('./NewsletterSignupCardContainer', () => ({
 	NewsletterSignupCardContainer: ({
 		children,
 	}: {
-		children: (openPreview: (() => void) | undefined) => React.ReactNode;
-	}) => (
-		<div data-testid="newsletter-signup-card-container">
-			{children(undefined)}
-		</div>
-	),
+		children: React.ReactNode;
+	}) => <div data-testid="newsletter-signup-card-container">{children}</div>,
 }));
 
 const defaultProps = {
