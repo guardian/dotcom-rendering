@@ -7153,6 +7153,10 @@ const paletteColours = {
 		light: editorialButtonText,
 		dark: editorialButtonTextDark,
 	},
+	'--election-tracker-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[20],
+	},
 	'--email-signup-button-background': {
 		light: emailSignupButtonBackgroundLight,
 		dark: emailSignupButtonBackgroundDark,
