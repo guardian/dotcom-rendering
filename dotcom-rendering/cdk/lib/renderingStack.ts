@@ -302,7 +302,7 @@ export class RenderingCDKStack extends CDKStack {
 							memoryLimitMiB: 4096,
 							cpu: 2048,
 							scaling: {
-								minimumTasks: 1,
+								minimumTasks: 9,
 								maximumTasks: 9,
 							},
 						},

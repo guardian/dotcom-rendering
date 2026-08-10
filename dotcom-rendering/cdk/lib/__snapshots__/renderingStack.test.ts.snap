@@ -1838,13 +1838,13 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             ],
           },
         },
-        "MaxSize": "3",
+        "MaxSize": "9",
         "MetricsCollection": [
           {
             "Granularity": "1Minute",
           },
         ],
-        "MinSize": "1",
+        "MinSize": "9",
         "Tags": [
           {
             "Key": "App",
@@ -2214,7 +2214,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       ],
       "Properties": {
         "MaxCapacity": 9,
-        "MinCapacity": 1,
+        "MinCapacity": 9,
         "ResourceId": {
           "Fn::Join": [
             "",
