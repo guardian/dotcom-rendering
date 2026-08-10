@@ -1,4 +1,4 @@
-const swcConfig = require('./webpack/.swcrc.json');
+const swcConfig = require('./.swcrc.jest.json');
 
 const esModules = [
 	'@guardian/',
@@ -27,6 +27,7 @@ module.exports = {
 	moduleNameMapper: {
 		'^svgs/(.*)$': '<rootDir>/__mocks__/svgMock.tsx',
 		'^(.*)\\.svg$': '<rootDir>/__mocks__/svgMock.tsx',
+		'(.*)/islandRegistry': '<rootDir>/__mocks__/islandRegistry.ts',
 	},
 	transformIgnorePatterns: [`/node_modules/.pnpm/(?!${esModules})`],
 	collectCoverageFrom: ['src/**/*.{ts,tsx}'],

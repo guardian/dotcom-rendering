@@ -1,6 +1,5 @@
 import { isAdBlockInUse } from '@guardian/commercial-core';
 import { log, startPerformanceMeasure } from '@guardian/libs';
-import '../webpackPublicPath';
 import type { ReportError } from '../../types/sentry';
 
 type ReportErrorError = Parameters<ReportError>[0];
@@ -69,10 +68,7 @@ const loadSentryCreator = () => {
 		/**
 		 * Dynamically load sentry.ts
 		 */
-		const { reportError } = await import(
-			/* webpackChunkName: "lazy" */
-			/* webpackChunkName: "sentry" */ './sentry'
-		);
+		const { reportError } = await import('./sentry');
 
 		/**
 		 * Replace the lazy loader stub with our custom error reporting function

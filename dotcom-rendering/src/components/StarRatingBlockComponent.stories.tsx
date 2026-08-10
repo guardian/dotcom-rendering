@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { StarRating as Rating, RatingSizeType } from '../types/content';
 import { StarRatingBlockComponent } from './StarRatingBlockComponent';
 
