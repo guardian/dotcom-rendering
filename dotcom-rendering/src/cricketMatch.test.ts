@@ -1,86 +1,78 @@
-import { cricketMatchData } from '../fixtures/generated/cricket-match';
-import { parse } from './cricketMatch';
-import type { FECricketMatch } from './frontend/feCricketMatchPage';
+import { liveMatch } from '../fixtures/manual/cricketMatch';
+import { parseCricketMatch } from './cricketMatch';
 
-describe('parse', () => {
-	it('parses cricket match correctly', () => {
-		const parsedResult = parse(cricketMatchData.cricketMatch).getOrThrow(
-			'Expected parsing cricket match to succeed',
-		);
-		expect(parsedResult.awayTeam.lineup.length).toBe(11);
-		expect(parsedResult.innings.length).toBe(
-			cricketMatchData.cricketMatch.innings.length,
-		);
-	});
-
-	it('reverses the innings for display', () => {
-		const parsedResult = parse(cricketMatchData.cricketMatch).getOrThrow(
+describe('parseCricketMatchV2', () => {
+	it('parses a winner result cricket match correctly', () => {
+		const result = parseCricketMatch(liveMatch).getOrThrow(
 			'Expected parsing cricket match to succeed',
 		);
 
-		const secondToLastInning =
-			cricketMatchData.cricketMatch.innings[
-				cricketMatchData.cricketMatch.innings.length - 2
-			];
-		const parsedSecondInning = parsedResult.innings[1];
-
-		expect(parsedSecondInning?.description).toBe(
-			secondToLastInning?.description,
-		);
-
-		const lastInning =
-			cricketMatchData.cricketMatch.innings[
-				cricketMatchData.cricketMatch.innings.length - 1
-			];
-		const parsedFirstInning = parsedResult.innings[0];
-
-		expect(parsedFirstInning?.fallOfWickets.length).toBe(
-			lastInning?.fallOfWicket.length,
-		);
-		expect(parsedFirstInning?.inningsTotals.wickets).toBe(
-			lastInning?.fallOfWicket.length,
-		);
+		expect(result.kind).toEqual('Result');
+		expect(result.result).toEqual({
+			type: 'home-win',
+			description: 'England win by 115 runs',
+			winner: {
+				type: 'runs',
+				team: 'England',
+				margin: 115,
+			},
+		});
+		expect(result.matchDate).toEqual(new Date('2026-06-04T10:00:00.000Z'));
 	});
 
-	it('calculates the number of wickets fallen', () => {
-		const parsedResult = parse(cricketMatchData.cricketMatch).getOrThrow(
-			'Expected parsing cricket match to succeed',
-		);
+	it('parses a cricket match in pre-match status', () => {
+		const result = parseCricketMatch({
+			...liveMatch,
+			result: 'pre-match',
+			fullResult: undefined,
+		}).getOrThrow('Expected parsing cricket match to succeed');
 
-		const inning =
-			cricketMatchData.cricketMatch.innings[
-				cricketMatchData.cricketMatch.innings.length - 1
-			];
-		const parsedInning = parsedResult.innings[0];
-
-		expect(parsedInning?.fallOfWickets.length).toBe(
-			inning?.fallOfWicket.length,
-		);
-		expect(parsedInning?.inningsTotals.wickets).toBe(
-			inning?.fallOfWicket.length,
-		);
+		expect(result.kind).toEqual('Fixture');
+		expect(result.result).toEqual(undefined);
 	});
 
-	it('returns an error if home and away team cannot be determined', () => {
-		const cricketMatch: FECricketMatch = {
-			...cricketMatchData.cricketMatch,
-			teams: [
-				{
-					name: '',
-					lineup: [],
-					home: true,
-					id: '',
-				},
-				{
-					name: '',
-					lineup: [],
-					home: true,
-					id: '2',
-				},
-			],
-		};
+	it('parses a cricket match in in-play status', () => {
+		const result = parseCricketMatch({
+			...liveMatch,
+			result: 'in-play',
+			fullResult: undefined,
+		}).getOrThrow('Expected parsing cricket match to succeed');
 
-		const parsedResult = parse(cricketMatch);
-		expect(parsedResult.ok).toBe(false);
+		expect(result.kind).toEqual('Live');
+		expect(result.result).toEqual(undefined);
+	});
+
+	it('parses an abandoned cricket match correctly', () => {
+		const result = parseCricketMatch({
+			...liveMatch,
+			fullResult: {
+				resultType: 'abandoned',
+				description: 'Match abandoned due to rain',
+				winner: undefined,
+			},
+		}).getOrThrow('Expected parsing cricket match to succeed');
+
+		expect(result.result).toEqual({
+			type: 'abandoned',
+			description: 'Match abandoned due to rain',
+			winner: undefined,
+		});
+	});
+
+	it('parses a cricket match with no winner', () => {
+		const result = parseCricketMatch({
+			...liveMatch,
+			fullResult: {
+				resultType: 'no-result',
+				description: 'No result',
+				winner: undefined,
+			},
+		}).getOrThrow('Expected parsing cricket match to succeed');
+
+		expect(result.result).toEqual({
+			type: 'no-result',
+			description: 'No result',
+			winner: undefined,
+		});
 	});
 });

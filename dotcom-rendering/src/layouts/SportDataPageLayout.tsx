@@ -1,7 +1,6 @@
 import { palette } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.island';
-import { CricketScorecardPage } from '../components/CricketScorecardPage';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.island';
 import { FootballMatchInfoPage } from '../components/FootballMatchInfoPage';
 import { FootballTablesPage } from '../components/FootballTablesPage';
@@ -62,13 +61,6 @@ const SportsPage = ({
 					pageId={sportData.config.pageId}
 					tableCompetitions={sportData.tables}
 					renderAds={renderAds}
-					guardianBaseUrl={sportData.guardianBaseURL}
-				/>
-			);
-		case 'CricketMatch':
-			return (
-				<CricketScorecardPage
-					match={sportData.match}
 					guardianBaseUrl={sportData.guardianBaseURL}
 				/>
 			);

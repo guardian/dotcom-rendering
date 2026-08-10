@@ -5,7 +5,7 @@ import type { FECricketMatchHeader } from '../../frontend/feCricketMatchHeader';
 import type {
 	FECricketInnings,
 	FECricketMatch,
-} from '../../frontend/feCricketMatchPage';
+} from '../../frontend/feCricketMatchData';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import type { ArticleDeprecated } from '../../types/article';
 import { CricketMatchHeader } from './CricketMatchHeader';
