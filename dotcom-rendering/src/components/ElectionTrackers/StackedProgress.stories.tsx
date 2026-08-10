@@ -68,15 +68,17 @@ export const UKGeneral = meta.story({
 	},
 	async play({ args, canvasElement }) {
 		const canvas = within(canvasElement);
-		const bar = canvas.getByRole('progressbar');
+		const bars = canvas.getAllByRole('progressbar');
 
-		// Label
-		const label = bar.parentElement;
-		await expect(label?.nodeName).toBe('LABEL');
-		await expect(label?.textContent).toBe(`326 ${args.label}`);
+		for (const bar of bars) {
+			// Label
+			const label = bar.parentElement;
+			await expect(label?.nodeName).toBe('LABEL');
+			await expect(label?.textContent).toBe(`326 ${args.label}`);
 
-		// Sections
-		await expect(bar.children).toHaveLength(args.sections.length + 1);
+			// Sections
+			await expect(bar.children).toHaveLength(args.sections.length + 1);
+		}
 	},
 });
 
@@ -105,9 +107,13 @@ export const USPresidential = meta.story({
 	},
 });
 
+/**
+ * Results from 2024:
+ * https://www.theguardian.com/us-news/ng-interactive/2024/nov/14/us-house-senate-and-governor-elections-2024-results-from-all-50-states
+ */
 export const USSenate = meta.story({
 	args: {
-		total: 35,
+		total: 34,
 		label: '50',
 		calculateWinner: false,
 		excludedCopy: 'No election',
@@ -115,28 +121,28 @@ export const USSenate = meta.story({
 			{
 				name: 'Democrats',
 				colour: palette('--us-elections-democrats-alt'),
-				value: 30,
+				value: 28,
 				align: 'left',
 				exclude: true,
 			},
 			{
 				name: 'Democrats',
 				colour: palette('--us-elections-democrats'),
-				value: 20,
+				value: 19,
 				align: 'left',
 				exclude: false,
 			},
 			{
 				name: 'Republicans',
 				colour: palette('--us-elections-republicans-alt'),
-				value: 35,
+				value: 38,
 				align: 'right',
 				exclude: true,
 			},
 			{
 				name: 'Republicans',
 				colour: palette('--us-elections-republicans'),
-				value: 12,
+				value: 15,
 				align: 'right',
 				exclude: false,
 			},
@@ -144,31 +150,33 @@ export const USSenate = meta.story({
 	},
 	async play({ args, canvasElement }) {
 		const canvas = within(canvasElement);
-		const bar = canvas.getByRole('progressbar');
+		const bars = canvas.getAllByRole('progressbar');
 
-		// Progress bar
-		await expect(bar.ariaLabel).toBe(
-			`Progress to ${args.total.toString()}`,
-		);
-		await expect(bar).toHaveValue(
-			args.sections[1]!.value + args.sections[3]!.value,
-		);
-		await expect(bar).toHaveAttribute(
-			'aria-valuemax',
-			args.total.toString(),
-		);
-		await expect(bar).toHaveAttribute(
-			'aria-valuetext',
-			`Progress so far: 32, values: Democrats ${args.sections[1]?.value}, Republicans ${args.sections[3]?.value}, No election: Democrats ${args.sections[0]?.value}, Republicans ${args.sections[2]?.value}.`,
-		);
+		for (const bar of bars) {
+			// Progress bar
+			await expect(bar.ariaLabel).toBe(
+				`Progress to ${args.total.toString()}`,
+			);
+			await expect(bar).toHaveValue(
+				args.sections[1]!.value + args.sections[3]!.value,
+			);
+			await expect(bar).toHaveAttribute(
+				'aria-valuemax',
+				args.total.toString(),
+			);
+			await expect(bar).toHaveAttribute(
+				'aria-valuetext',
+				`Progress so far: 34, values: Democrats ${args.sections[1]?.value}, Republicans ${args.sections[3]?.value}, No election: Democrats ${args.sections[0]?.value}, Republicans ${args.sections[2]?.value}.`,
+			);
 
-		// Label
-		const label = bar.parentElement;
-		await expect(label?.nodeName).toBe('LABEL');
-		await expect(label?.textContent).toBe(args.label);
+			// Label
+			const label = bar.parentElement;
+			await expect(label?.nodeName).toBe('LABEL');
+			await expect(label?.textContent).toBe(args.label);
 
-		// Sections
-		await expect(bar.children).toHaveLength(args.sections.length + 1);
+			// Sections
+			await expect(bar.children).toHaveLength(args.sections.length + 1);
+		}
 	},
 });
 
@@ -246,14 +254,16 @@ export const EUParliament = meta.story({
 	},
 	async play({ args, canvasElement }) {
 		const canvas = within(canvasElement);
-		const bar = canvas.getByRole('progressbar');
+		const bars = canvas.getAllByRole('progressbar');
 
-		// No label
-		const noLabel = bar.parentElement;
-		await expect(noLabel?.nodeName).toBe('DIV');
-		await expect(noLabel?.textContent).toBe('');
+		for (const bar of bars) {
+			// No label
+			const noLabel = bar.parentElement;
+			await expect(noLabel?.nodeName).toBe('DIV');
+			await expect(noLabel?.textContent).toBe('');
 
-		// Sections
-		await expect(bar.children).toHaveLength(args.sections.length + 1);
+			// Sections
+			await expect(bar.children).toHaveLength(args.sections.length + 1);
+		}
 	},
 });
