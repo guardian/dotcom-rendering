@@ -8226,6 +8226,10 @@ const paletteColours = {
 		 */
 		dark: () => '#606060',
 	},
+	'--stacked-progress-excluded-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--stacked-progress-to-win': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
@@ -8502,9 +8506,17 @@ const paletteColours = {
 		light: () => '#093CA3',
 		dark: () => '#3261DB',
 	},
+	'--us-elections-democrats-alt': {
+		light: () => '#DAD7F5',
+		dark: () => '#DAD7F5',
+	},
 	'--us-elections-republicans': {
 		light: () => sourcePalette.news[400],
 		dark: () => '#DC2E1C',
+	},
+	'--us-elections-republicans-alt': {
+		light: () => '#FFDBD4',
+		dark: () => '#FFDBD4',
 	},
 	'--values-with-change-border': {
 		light: () => sourcePalette.neutral[86],
