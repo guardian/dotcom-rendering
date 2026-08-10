@@ -102,11 +102,9 @@ export const doHydration = async (
 		})
 		.catch((error) => {
 			element.dataset.islandStatus = undefined; // remove any island status
-			if (name && error.message.includes(name)) {
-				console.error(
-					`🚨 Error importing ${name}. Islands must live in the root of /components and follow the [MyComponent].island.tsx naming convention 🚨`,
-				);
-			}
+			console.error(
+				`🚨 Error importing ${name}. Islands must live in the root of /components and follow the [MyComponent].island.tsx naming convention 🚨`,
+			);
 			throw error;
 		});
 };
