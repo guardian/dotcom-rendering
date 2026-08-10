@@ -1,11 +1,11 @@
-import { cricketMatchData } from '../fixtures/generated/cricket-match';
+import { liveMatch } from '../fixtures/manual/cricketMatch';
 import { parseCricketMatch } from './cricketMatch';
 
 describe('parseCricketMatchV2', () => {
 	it('parses a winner result cricket match correctly', () => {
-		const result = parseCricketMatch(
-			cricketMatchData.cricketMatch,
-		).getOrThrow('Expected parsing cricket match to succeed');
+		const result = parseCricketMatch(liveMatch).getOrThrow(
+			'Expected parsing cricket match to succeed',
+		);
 
 		expect(result.kind).toEqual('Result');
 		expect(result.result).toEqual({
@@ -22,7 +22,7 @@ describe('parseCricketMatchV2', () => {
 
 	it('parses a cricket match in pre-match status', () => {
 		const result = parseCricketMatch({
-			...cricketMatchData.cricketMatch,
+			...liveMatch,
 			result: 'pre-match',
 			fullResult: undefined,
 		}).getOrThrow('Expected parsing cricket match to succeed');
@@ -33,7 +33,7 @@ describe('parseCricketMatchV2', () => {
 
 	it('parses a cricket match in in-play status', () => {
 		const result = parseCricketMatch({
-			...cricketMatchData.cricketMatch,
+			...liveMatch,
 			result: 'in-play',
 			fullResult: undefined,
 		}).getOrThrow('Expected parsing cricket match to succeed');
@@ -44,7 +44,7 @@ describe('parseCricketMatchV2', () => {
 
 	it('parses an abandoned cricket match correctly', () => {
 		const result = parseCricketMatch({
-			...cricketMatchData.cricketMatch,
+			...liveMatch,
 			fullResult: {
 				resultType: 'abandoned',
 				description: 'Match abandoned due to rain',
@@ -61,7 +61,7 @@ describe('parseCricketMatchV2', () => {
 
 	it('parses a cricket match with no winner', () => {
 		const result = parseCricketMatch({
-			...cricketMatchData.cricketMatch,
+			...liveMatch,
 			fullResult: {
 				resultType: 'no-result',
 				description: 'No result',

@@ -10,7 +10,7 @@ import useSWR from 'swr';
 import { safeParse } from 'valibot';
 import type { CricketMatchStatsSummary } from '../cricketMatch';
 import { parseMatchStatsSummary } from '../cricketMatch';
-import { feCricketMatchStatsSummarySchema } from '../frontend/feCricketMatchPage';
+import { feCricketMatchStatsSummarySchema } from '../frontend/feCricketMatchData';
 import type { Result } from '../lib/result';
 import { error, fromValibot, ok } from '../lib/result';
 import { palette } from '../palette';

@@ -7,7 +7,7 @@ import type {
 	FECricketMatchResultWinnerStatus,
 	FECricketMatchStatsSummary,
 	FECricketTeam,
-} from './frontend/feCricketMatchPage';
+} from './frontend/feCricketMatchData';
 import { parseDate, parseIntResult } from './lib/parse';
 import type { Result } from './lib/result';
 import { error, ok } from './lib/result';
