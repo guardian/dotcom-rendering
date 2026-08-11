@@ -31,7 +31,7 @@
 		"@guardian/braze-components": "23.0.2",
 		"@guardian/bridget": "8.13.1",
 		"@guardian/browserslist-config": "6.1.0",
-		"@guardian/cdk": "catalog:",
+		"@guardian/cdk": "0.0.0-canary-20260811101348",
 		"@guardian/commercial-core": "34.0.0",
 		"@guardian/consent-manager": "1.0.0",
 		"@guardian/core-web-vitals": "7.0.0",

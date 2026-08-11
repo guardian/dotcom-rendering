@@ -13,8 +13,8 @@ catalogs:
       specifier: 3.995.0
       version: 3.995.0
     '@guardian/cdk':
-      specifier: 0.0.0-canary-20260811101348
-      version: 0.0.0-canary-20260811101348
+      specifier: 64.3.0
+      version: 64.3.0
     '@guardian/eslint-config':
       specifier: 14.0.1
       version: 14.0.1
@@ -121,7 +121,7 @@ importers:
         version: 3.995.0
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 0.0.0-canary-20260811101348(aws-cdk-lib@2.263.0(constructs@10.8.1))(aws-cdk@2.1135.0)(constructs@10.8.1)
+        version: 64.3.0(aws-cdk-lib@2.263.0(constructs@10.8.1))(aws-cdk@2.1135.0)(constructs@10.8.1)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -324,7 +324,7 @@ importers:
         specifier: 6.1.0
         version: 6.1.0(browserslist@4.24.4)(tslib@2.6.2)
       '@guardian/cdk':
-        specifier: 'catalog:'
+        specifier: 0.0.0-canary-20260811101348
         version: 0.0.0-canary-20260811101348(aws-cdk-lib@2.263.0(constructs@10.8.1))(aws-cdk@2.1135.0)(constructs@10.8.1)
       '@guardian/commercial-core':
         specifier: 34.0.0
@@ -2579,6 +2579,14 @@ packages:
 
   '@guardian/cdk@0.0.0-canary-20260811101348':
     resolution: {integrity: sha512-CPMWeeOgc0Px/IJkdiYEI4NGyPTSF7qpzuyv+fhg3LVtz36Tot2ScYEAXZ9MMQO4Ei7+1IJX/mbpT+KBSGSxUQ==}
+    hasBin: true
+    peerDependencies:
+      aws-cdk: ^2.1135.0
+      aws-cdk-lib: ^2.263.0
+      constructs: ^10.8.1
+
+  '@guardian/cdk@64.3.0':
+    resolution: {integrity: sha512-Lfkac9pqB0meaVLLyg26c4+imgCyXeAaCJcWSUgm450REsn3xXkREsD4D7NqsPjGk7J0T9QrwljQZ93hTeNYow==}
     hasBin: true
     peerDependencies:
       aws-cdk: ^2.1135.0
@@ -12079,6 +12087,21 @@ snapshots:
       read-pkg-up: 7.0.1
       yargs: 17.7.2
 
+  '@guardian/cdk@64.3.0(aws-cdk-lib@2.263.0(constructs@10.8.1))(aws-cdk@2.1135.0)(constructs@10.8.1)':
+    dependencies:
+      '@aws-sdk/client-ec2': 3.1101.0
+      '@aws-sdk/client-ssm': 3.1101.0
+      '@aws-sdk/credential-providers': 3.1101.0
+      aws-cdk: 2.1135.0
+      aws-cdk-lib: 2.263.0(constructs@10.8.1)
+      chalk: 4.1.2
+      codemaker: 1.139.0
+      constructs: 10.8.1
+      git-url-parse: 16.1.0
+      js-yaml: 4.3.1
+      read-pkg-up: 7.0.1
+      yargs: 17.7.2
+
   '@guardian/commercial-core@34.0.0(@guardian/consent-manager@1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3))':
     dependencies:
       '@guardian/consent-manager': 1.0.0(@guardian/ophan-tracker-js@4.0.2)(tslib@2.6.2)(typescript@6.0.3)
@@ -15273,7 +15296,7 @@ snapshots:
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
-      js-yaml: 4.1.1
+      js-yaml: 4.3.1
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 6.0.3
