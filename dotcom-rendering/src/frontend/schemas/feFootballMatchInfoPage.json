@@ -246,9 +246,6 @@
                 "competitionName": {
                     "type": "string"
                 },
-                "matchUrl": {
-                    "type": "string"
-                },
                 "matchHeaderUrl": {
                     "type": "string"
                 }
@@ -257,8 +254,7 @@
                 "competitionName",
                 "matchHeaderUrl",
                 "matchInfo",
-                "matchStats",
-                "matchUrl"
+                "matchStats"
             ]
         }
     ],
