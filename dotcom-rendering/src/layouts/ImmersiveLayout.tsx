@@ -54,6 +54,7 @@ import { decideMainMediaCaption } from '../lib/decide-caption';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { requiresAffiliateDisclaimer } from '../lib/requiresAffiliateDisclaimer';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -529,7 +530,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									byline={article.byline}
 								/>
 							)}
-							{!!article.affiliateLinksDisclaimer && (
+							{requiresAffiliateDisclaimer(
+								article.affiliateLinksDisclaimer,
+							) && (
 								<Hide when="below" breakpoint="leftCol">
 									<AffiliateDisclaimer
 										cssOverrides={css`
@@ -662,7 +665,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										/>
 									</>
 								)}
-								{!!article.affiliateLinksDisclaimer && (
+								{requiresAffiliateDisclaimer(
+									article.affiliateLinksDisclaimer,
+								) && (
 									<Hide when="above" breakpoint="leftCol">
 										<AffiliateDisclaimer
 											cssOverrides={css`

@@ -30,6 +30,7 @@ import {
 } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { safeParseURL } from '../lib/parse';
+import { requiresAffiliateDisclaimer } from '../lib/requiresAffiliateDisclaimer';
 import { parse } from '../lib/slot-machine-flags';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -159,7 +160,9 @@ export const StandardLayoutArticleGrid = ({
 						contentType={article.contentType}
 						contentLayout={`${ArticleDisplay[format.display]}Layout`}
 					/>
-					{!!article.affiliateLinksDisclaimer && (
+					{requiresAffiliateDisclaimer(
+						article.affiliateLinksDisclaimer,
+					) && (
 						<AffiliateDisclaimer
 							cssOverrides={css`
 								margin: ${space[4]}px 0;
