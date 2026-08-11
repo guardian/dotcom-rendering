@@ -2,7 +2,6 @@ import { css, Global } from '@emotion/react';
 import {
 	from,
 	palette as sourcePalette,
-	space,
 	until,
 } from '@guardian/source/foundations';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -23,6 +22,7 @@ import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { renderElement } from '../lib/renderElement';
+import { requiresAffiliateDisclaimer } from '../lib/requiresAffiliateDisclaimer';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -184,6 +184,9 @@ const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 				sectionId={article.config.section}
 				contentType={article.contentType}
 			/>
+			{requiresAffiliateDisclaimer(article.affiliateLinksDisclaimer) && (
+				<AffiliateDisclaimer />
+			)}
 		</section>
 	);
 };
@@ -300,24 +303,6 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 					/>
 				</article>
 			</Section>
-
-			{!!article.affiliateLinksDisclaimer && (
-				<Section
-					fullWidth={true}
-					padSides={true}
-					backgroundColour={themePalette('--article-background')}
-					element="div"
-					borderColour=""
-					showTopBorder={false}
-					showSideBorders={false}
-				>
-					<AffiliateDisclaimer
-						cssOverrides={css`
-							margin: ${space[4]}px 0;
-						`}
-					/>
-				</Section>
-			)}
 
 			{isWeb && props.NAV.subNavSections && (
 				<Section
