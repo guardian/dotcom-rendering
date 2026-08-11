@@ -29,7 +29,7 @@ const sectionStyles = css`
 	}
 `;
 
-const immersiveMargins = css`
+const immersiveGridMargins = css`
 	max-width: 500px;
 	min-width: 200px;
 	margin-bottom: 4px;
@@ -85,7 +85,7 @@ export const ArticleTitle = ({
 				format.display === ArticleDisplay.Immersive
 					? layoutType == null
 						? legacyImmersiveMargins
-						: immersiveMargins
+						: immersiveGridMargins
 					: undefined
 			}
 		>

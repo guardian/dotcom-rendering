@@ -325,12 +325,6 @@ export const ArticleMeta = ({
 
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 
-	const isPortraitOrLandscapeImmersive =
-		layoutType === 'immersiveLandscapeDefault' ||
-		layoutType === 'immersivePortraitDefault' ||
-		layoutType === 'immersiveLandscapeFeature' ||
-		layoutType === 'immersivePortraitFeature';
-
 	const isAudio = format.design === ArticleDesign.Audio;
 
 	const seriesTag = getSeriesTag(tags);
@@ -373,7 +367,7 @@ export const ArticleMeta = ({
 				) : (
 					''
 				)}
-				{isImmersive && isPortraitOrLandscapeImmersive ? (
+				{isImmersiveGrid ? (
 					<div
 						css={css`
 							display: flex;
