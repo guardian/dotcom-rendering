@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
+import { Disclaimer } from '@guardian/source-development-kitchen/react-components';
 import { palette } from '../palette';
-import { Disclaimer } from './disclaimer/Disclaimer';
 
 const AffiliateDisclaimerText = () => (
 	<p
