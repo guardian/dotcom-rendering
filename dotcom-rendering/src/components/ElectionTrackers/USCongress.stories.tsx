@@ -33,7 +33,19 @@ export const Empty = meta.story({
 				value: 0,
 				change: 0,
 			},
+			caucusWithDemocrats: {
+				value: 0,
+				change: 0,
+			},
 			republicans: {
+				value: 0,
+				change: 0,
+			},
+			caucusWithRepublicans: {
+				value: 0,
+				change: 0,
+			},
+			others: {
 				value: 0,
 				change: 0,
 			},
@@ -45,10 +57,25 @@ export const Empty = meta.story({
 				change: 0,
 				holdovers: 28,
 			},
+			caucusWithDemocrats: {
+				value: 0,
+				change: 0,
+				holdovers: 0,
+			},
 			republicans: {
 				value: 0,
 				change: 0,
 				holdovers: 38,
+			},
+			caucusWithRepublicans: {
+				value: 0,
+				change: 0,
+				holdovers: 0,
+			},
+			others: {
+				value: 0,
+				change: 0,
+				holdovers: 0,
 			},
 		},
 		link: new URL('https://www.theguardian.com'),
@@ -64,22 +91,51 @@ export const Final = Empty.extend({
 				value: 215,
 				change: 1,
 			},
+			caucusWithDemocrats: {
+				value: 0,
+				change: 0,
+			},
 			republicans: {
 				value: 220,
 				change: -1,
+			},
+			caucusWithRepublicans: {
+				value: 0,
+				change: 0,
+			},
+			others: {
+				value: 0,
+				change: 0,
 			},
 		},
 		senate: {
 			total: Empty.composed.args.senate.total,
 			democrats: {
-				value: 19,
-				change: -4,
+				value: 17,
+				change: -2,
 				holdovers: Empty.composed.args.senate.democrats.holdovers,
+			},
+			caucusWithDemocrats: {
+				value: 2,
+				change: -2,
+				holdovers:
+					Empty.composed.args.senate.caucusWithDemocrats.holdovers,
 			},
 			republicans: {
 				value: 15,
 				change: 4,
 				holdovers: Empty.composed.args.senate.republicans.holdovers,
+			},
+			caucusWithRepublicans: {
+				value: 0,
+				change: 0,
+				holdovers:
+					Empty.composed.args.senate.caucusWithRepublicans.holdovers,
+			},
+			others: {
+				value: 0,
+				change: 0,
+				holdovers: Empty.composed.args.senate.others.holdovers,
 			},
 		},
 	},

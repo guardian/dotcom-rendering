@@ -9,26 +9,22 @@ type Props = {
 	 * The total number of seats up for election.
 	 */
 	total: number;
-	democrats: {
-		/**
-		 * The number of races called for the Democrats so far.
-		 */
-		value: number;
-		/**
-		 * The net change in seats for the Democrats so far.
-		 */
-		change: number;
-	};
-	republicans: {
-		/**
-		 * The number of races called for the Republicans so far.
-		 */
-		value: number;
-		/**
-		 * The net change in seats for the Republicans so far.
-		 */
-		change: number;
-	};
+	democrats: Group;
+	caucusWithDemocrats: Group;
+	republicans: Group;
+	caucusWithRepublicans: Group;
+	others: Group;
+};
+
+type Group = {
+	/**
+	 * The number of races called for this group so far.
+	 */
+	value: number;
+	/**
+	 * The net change in seats for this group so far.
+	 */
+	change: number;
 };
 
 /**
@@ -40,18 +36,22 @@ export const USHouse = (props: Props) => (
 	<>
 		<Versus
 			left={{
-				name: 'Democrats',
-				abbreviation: 'Democrats',
-				value: props.democrats.value,
-				change: props.democrats.change,
+				name: `Democrats${democratIndependents(props) ? '*' : ''}`,
+				abbreviation: `Democrats${democratIndependents(props) ? '*' : ''}`,
+				value: props.democrats.value + props.caucusWithDemocrats.value,
+				change:
+					props.democrats.change + props.caucusWithDemocrats.change,
 				image: undefined,
 				colour: palette('--us-elections-democrats'),
 			}}
 			right={{
-				name: 'Republicans',
-				abbreviation: 'Republicans',
-				value: props.republicans.value,
-				change: props.republicans.change,
+				name: `Republicans${republicanIndependents(props) ? '*' : ''}`,
+				abbreviation: `Republicans${republicanIndependents(props) ? '*' : ''}`,
+				value:
+					props.republicans.value + props.caucusWithRepublicans.value,
+				change:
+					props.republicans.change +
+					props.caucusWithRepublicans.change,
 				image: undefined,
 				colour: palette('--us-elections-republicans'),
 			}}
@@ -68,14 +68,24 @@ export const USHouse = (props: Props) => (
 				{
 					name: 'Democrats',
 					colour: palette('--us-elections-democrats'),
-					value: props.democrats.value,
+					value:
+						props.democrats.value + props.caucusWithDemocrats.value,
+					align: 'left',
+					exclude: false,
+				},
+				{
+					name: 'Others',
+					colour: palette('--us-elections-others'),
+					value: props.others.value,
 					align: 'left',
 					exclude: false,
 				},
 				{
 					name: 'Republicans',
 					colour: palette('--us-elections-republicans'),
-					value: props.republicans.value,
+					value:
+						props.republicans.value +
+						props.caucusWithRepublicans.value,
 					align: 'right',
 					exclude: false,
 				},
@@ -85,10 +95,26 @@ export const USHouse = (props: Props) => (
 			}}
 		/>
 		<ProgressNumber
-			progress={props.democrats.value + props.republicans.value}
+			progress={
+				props.democrats.value +
+				props.caucusWithDemocrats.value +
+				props.republicans.value +
+				props.caucusWithRepublicans.value +
+				props.others.value
+			}
 			total={props.total}
 			copy="races called"
-			additionalCopy={undefined}
+			additionalCopy={
+				democratIndependents(props) || republicanIndependents(props)
+					? '*includes independents'
+					: undefined
+			}
 		/>
 	</>
 );
+
+const democratIndependents = (props: Props) =>
+	props.caucusWithDemocrats.value > 0;
+
+const republicanIndependents = (props: Props) =>
+	props.caucusWithRepublicans.value > 0;
