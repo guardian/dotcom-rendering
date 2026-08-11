@@ -17,7 +17,7 @@ import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
-import type { CfnService, CfnTaskDefinition } from 'aws-cdk-lib/aws-ecs';
+import type { CfnService } from 'aws-cdk-lib/aws-ecs';
 import { ClusterSettings } from 'aws-cdk-lib/aws-ecs/mixins';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
@@ -318,15 +318,6 @@ export class RenderingCDKStack extends CDKStack {
 					new ClusterSettings([
 						{ name: 'containerInsights', value: 'enhanced' },
 					]),
-				);
-
-				// GuCDK's `ecsProps` doesn't expose `runtimePlatform`, which otherwise defaults to X86_64.
-				// The container image is built for arm64 only, so the two must be kept in sync.
-				const cfnTaskDefinition = app.ecsService.taskDefinition.node
-					.defaultChild as CfnTaskDefinition;
-				cfnTaskDefinition.addPropertyOverride(
-					'RuntimePlatform.CpuArchitecture',
-					'ARM64',
 				);
 
 				const cfnService = app.ecsService.node

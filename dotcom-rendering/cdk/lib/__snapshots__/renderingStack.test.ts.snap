@@ -2246,6 +2246,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         ],
         "RuntimePlatform": {
           "CpuArchitecture": "ARM64",
+          "OperatingSystemFamily": "LINUX",
         },
         "Tags": [
           {
