@@ -68,12 +68,6 @@ const labsHostedDesigns: ArticleDesign[] = [
 	ArticleDesign.HostedGallery,
 ];
 
-/** Whether a Labs theme-wide colour override should be skipped for this design */
-const keepsOriginalLabsColour = (
-	design: ArticleDesign,
-	excludedDesigns: readonly ArticleDesign[],
-): boolean => excludedDesigns.includes(design);
-
 const textblockBulletLight: PaletteFunction = ({ theme, design }) => {
 	switch (theme) {
 		case Pillar.News: {
@@ -1311,10 +1305,7 @@ const followIconBackgroundLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 const followIconBackgroundDark: PaletteFunction = ({ theme, design }) => {
-	if (
-		theme === ArticleSpecial.Labs &&
-		!keepsOriginalLabsColour(design, [ArticleDesign.LiveBlog])
-	) {
+	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
 		return sourcePalette.neutral[7];
 	}
 
@@ -1347,10 +1338,7 @@ const followIconBackgroundDark: PaletteFunction = ({ theme, design }) => {
 };
 
 const followIconFillLight: PaletteFunction = ({ design, theme }) => {
-	if (
-		theme === ArticleSpecial.Labs &&
-		!keepsOriginalLabsColour(design, [ArticleDesign.LiveBlog])
-	) {
+	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
 		return sourcePalette.labs[200];
 	}
 
@@ -1459,10 +1447,7 @@ const followIconFillLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 const followIconFillDark: PaletteFunction = ({ theme, design }) => {
-	if (
-		theme === ArticleSpecial.Labs &&
-		!keepsOriginalLabsColour(design, [ArticleDesign.LiveBlog])
-	) {
+	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
 		return sourcePalette.labs[500];
 	}
 
@@ -2512,11 +2497,11 @@ const standfirstLinkTextDark: PaletteFunction = ({ design, theme }) => {
 const standfirstTextLight: PaletteFunction = (format) => {
 	if (
 		format.theme === ArticleSpecial.Labs &&
-		!keepsOriginalLabsColour(format.design, [
+		![
 			ArticleDesign.LiveBlog,
 			...labsMediaDesigns,
 			...labsHostedDesigns,
-		])
+		].includes(format.design)
 	) {
 		return sourcePalette.labs[100];
 	}
@@ -2550,10 +2535,7 @@ const standfirstTextLight: PaletteFunction = (format) => {
 const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 	if (
 		theme === ArticleSpecial.Labs &&
-		!keepsOriginalLabsColour(design, [
-			ArticleDesign.LiveBlog,
-			...labsHostedDesigns,
-		])
+		![ArticleDesign.LiveBlog, ...labsHostedDesigns].includes(design)
 	) {
 		return sourcePalette.labs[500];
 	}
@@ -3981,13 +3963,13 @@ const shareButtonCopiedDark: PaletteFunction = () => sourcePalette.neutral[86];
 const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 	if (
 		theme === ArticleSpecial.Labs &&
-		!keepsOriginalLabsColour(design, [
+		![
 			ArticleDesign.LiveBlog,
 			...labsGalleryDesigns,
 			...labsMediaDesigns,
 			ArticleDesign.HostedArticle,
 			ArticleDesign.HostedVideo,
-		])
+		].includes(design)
 	) {
 		return sourcePalette.labs[200];
 	}
@@ -4061,13 +4043,13 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 const shareButtonDark: PaletteFunction = ({ design, theme }) => {
 	if (
 		theme === ArticleSpecial.Labs &&
-		!keepsOriginalLabsColour(design, [
+		![
 			ArticleDesign.LiveBlog,
 			...labsGalleryDesigns,
 			...labsMediaDesigns,
 			ArticleDesign.HostedArticle,
 			ArticleDesign.HostedVideo,
-		])
+		].includes(design)
 	) {
 		return sourcePalette.labs[500];
 	}
@@ -5055,11 +5037,11 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 	}
 	if (
 		theme === ArticleSpecial.Labs &&
-		!keepsOriginalLabsColour(design, [
+		![
 			ArticleDesign.LiveBlog,
 			...labsGalleryDesigns,
 			...labsMediaDesigns,
-		])
+		].includes(design)
 	) {
 		return sourcePalette.labs[200];
 	}
@@ -5130,10 +5112,7 @@ const seriesTitleBackgroundDark: PaletteFunction = ({
 			}
 			if (
 				theme === ArticleSpecial.Labs &&
-				!keepsOriginalLabsColour(design, [
-					ArticleDesign.LiveBlog,
-					...labsMediaDesigns,
-				])
+				![ArticleDesign.LiveBlog, ...labsMediaDesigns].includes(design)
 			) {
 				return sourcePalette.labs[500];
 			}
@@ -5299,10 +5278,7 @@ const seriesOrSectionTitleTextLight: PaletteFunction = ({
 const seriesTitleTextLight: PaletteFunction = (format) => {
 	if (
 		format.theme === ArticleSpecial.Labs &&
-		!keepsOriginalLabsColour(format.design, [
-			ArticleDesign.LiveBlog,
-			...labsMediaDesigns,
-		])
+		![ArticleDesign.LiveBlog, ...labsMediaDesigns].includes(format.design)
 	) {
 		return sourcePalette.neutral[100];
 	}
@@ -5408,11 +5384,11 @@ const seriesOrSectionTitleTextDark: PaletteFunction = ({
 const seriesTitleTextDark: PaletteFunction = (format) => {
 	if (
 		format.theme === ArticleSpecial.Labs &&
-		!keepsOriginalLabsColour(format.design, [
+		![
 			ArticleDesign.LiveBlog,
 			...labsGalleryDesigns,
 			...labsMediaDesigns,
-		])
+		].includes(format.design)
 	) {
 		return sourcePalette.neutral[7];
 	}

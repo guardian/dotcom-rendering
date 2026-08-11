@@ -174,6 +174,16 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersiveLandscape =
 		layoutType === 'immersiveLandscapeDefault' ||
 		layoutType === 'immersiveLandscapeFeature';
+	const centreRuleColumn = (() => {
+		switch (layoutType) {
+			case 'immersivePortraitDefault':
+			case 'immersivePortraitFeature':
+			case 'immersiveLandscapeDefault':
+				return 4;
+			default:
+				return 3;
+		}
+	})();
 
 	const ageWarning = getAgeWarning(
 		article.tags,
@@ -193,22 +203,13 @@ export const StandardLayoutArticleGrid = ({
 					css`
 						&::before,
 						&::after {
-							z-index: 10;
+							z-index: ${getZIndex('immersiveGridOuterRules')};
 						}
 					`,
 				!isLabs &&
 					css`
 						${from.leftCol} {
-							${grid.centreRule(
-								isImmersivePortrait
-									? 4
-									: isImmersiveLandscape
-										? layoutType ===
-											'immersiveLandscapeFeature'
-											? 3
-											: 4
-										: 3,
-							)}
+							${grid.centreRule(centreRuleColumn)}
 						}
 					`,
 				isImmersivePortrait &&
@@ -273,16 +274,17 @@ export const StandardLayoutArticleGrid = ({
 				area="title"
 				layoutType={layoutType}
 				element="aside"
-				css={
-					isImmersive
-						? css`
-								z-index: ${getZIndex('articleHeadline')};
-								${isImmersivePortrait &&
-								`align-self: end;
-								margin-bottom: 2px;`}
-							`
-						: undefined
-				}
+				css={[
+					isImmersive &&
+						css`
+							z-index: ${getZIndex('articleHeadline')};
+						`,
+					isImmersivePortrait &&
+						css`
+							align-self: end;
+							margin-bottom: 2px;
+						`,
+				]}
 			>
 				<ArticleTitle
 					format={format}
