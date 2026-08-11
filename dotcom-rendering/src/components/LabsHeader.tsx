@@ -153,6 +153,10 @@ const Logo = ({ editionId }: { editionId: EditionId }) => (
 			svg {
 				fill: currentColor;
 			}
+
+			&:hover {
+				color: inherit;
+			}
 		`}
 	>
 		<LabsLogo />
