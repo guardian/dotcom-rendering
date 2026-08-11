@@ -45,6 +45,7 @@ import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
+import { requiresAffiliateDisclaimer } from '../lib/requiresAffiliateDisclaimer';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -487,14 +488,18 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									)}
 								</div>
 							</GridItem>
-							<GridItem area="body" element="article">
-								{!!article.affiliateLinksDisclaimer && (
+							{requiresAffiliateDisclaimer(
+								article.affiliateLinksDisclaimer,
+							) && (
+								<GridItem area="meta" element="aside">
 									<AffiliateDisclaimer
 										cssOverrides={css`
-											margin: ${space[4]}px 0;
+											margin-top: ${space[4]}px;
 										`}
 									/>
-								)}
+								</GridItem>
+							)}
+							<GridItem area="body" element="article">
 								<ArticleContainer format={format}>
 									<ArticleBody
 										format={format}
