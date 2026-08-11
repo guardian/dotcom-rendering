@@ -298,22 +298,20 @@ export const StandardLayoutArticleGrid = ({
 				area="headline"
 				layoutType={layoutType}
 				css={[
-					isImmersive
-						? css`
-								z-index: ${getZIndex('articleHeadline')};
-							`
-						: undefined,
-					layoutType === 'immersivePortraitDefault' ||
-					layoutType === 'immersivePortraitFeature'
-						? css`
-								${from.desktop} {
-									border-bottom: 1px solid
-										${themePalette('--article-border')};
-									border-top: 1px solid
-										${themePalette('--article-border')};
-								}
-							`
-						: undefined,
+					isImmersive &&
+						css`
+							z-index: ${getZIndex('articleHeadline')};
+						`,
+					(layoutType === 'immersivePortraitDefault' ||
+						layoutType === 'immersivePortraitFeature') &&
+						css`
+							${from.desktop} {
+								border-bottom: 1px solid
+									${themePalette('--article-border')};
+								border-top: 1px solid
+									${themePalette('--article-border')};
+							}
+						`,
 					isImmersiveLandscape &&
 						css`
 							${from.desktop} {
