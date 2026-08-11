@@ -111,13 +111,8 @@ export const StandardLayoutArticleGrid = ({
 		format.design === ArticleDesign.Audio;
 	const isShowcase = format.display === ArticleDisplay.Showcase;
 
-	const footballMatchUrl =
-		article.matchType === 'FootballMatchType'
-			? article.matchUrl
-			: undefined;
-
 	const isFootballMatchReport =
-		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
+		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
 
 	const layoutType: LayoutType = isMedia
 		? 'media'
@@ -166,7 +161,7 @@ export const StandardLayoutArticleGrid = ({
 					sectionLabel={article.sectionLabel}
 					sectionUrl={article.sectionUrl}
 					guardianBaseURL={article.guardianBaseURL}
-					isMatch={!!footballMatchUrl}
+					isMatch={isFootballMatchReport}
 				/>
 			</GridItem>
 			<GridItem area="headline" layoutType={layoutType}>
