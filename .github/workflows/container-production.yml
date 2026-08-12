@@ -21,7 +21,7 @@ jobs:
         id: get-build-facts
 
   build-production-image:
-    # ARM runner so the arm64 image builds natively rather than under QEMU emulation
+    # ECS tasks run on ARM, so we use the arm runner to natively build the containaer image (rather than rely on emulation)
     runs-on: ubuntu-24.04-arm
     needs:
       - facts
