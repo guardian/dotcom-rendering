@@ -1,7 +1,6 @@
 import type { StoryObj } from '@storybook/react-webpack5';
 import { footballData } from '../../fixtures/generated/football-live';
 import { initialDays, regions } from '../../fixtures/manual/footballData';
-import { CricketScorecard } from '../components/CricketScorecard.stories';
 import { FootballTableList as TableListDefault } from '../components/FootballTableList.stories';
 import { extractNAV } from '../model/extract-nav';
 import { SportDataPageLayout } from './SportDataPageLayout';
@@ -60,23 +59,6 @@ export const Tables = {
 			...Results.args.sportData,
 			kind: 'FootballTables',
 			tables: TableListDefault.args.competitions,
-		},
-	},
-} satisfies Story;
-
-export const CricketMatch = {
-	args: {
-		...Results.args,
-		sportData: {
-			...Results.args.sportData,
-			kind: 'CricketMatch',
-			match: {
-				...CricketScorecard.input.args,
-				innings: CricketScorecard.input.args.allInnings,
-				venueName: 'The Oval',
-				competitionName: 'World Cup',
-				result: 'result',
-			},
 		},
 	},
 } satisfies Story;

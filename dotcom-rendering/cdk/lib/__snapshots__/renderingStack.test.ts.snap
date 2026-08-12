@@ -2244,6 +2244,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "RequiresCompatibilities": [
           "FARGATE",
         ],
+        "RuntimePlatform": {
+          "CpuArchitecture": "ARM64",
+          "OperatingSystemFamily": "LINUX",
+        },
         "Tags": [
           {
             "Key": "App",
