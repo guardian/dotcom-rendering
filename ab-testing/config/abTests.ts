@@ -178,9 +178,22 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-09-30",
 		type: "client",
 		status: "ON",
+		audienceSize: 50 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "identity-and-trust-consent-rr-banner-us",
+		description:
+			"Test to measure the impact of not showing the consent RR and banner for US users",
+		owners: ["identitydev@theguardian.com", "martech.dev@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-12-01",
+		type: "client",
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
-		groups: ["control", "variant"],
+		groups: ["control", "variant-1", "variant-2"],
 		shouldForceMetricsCollection: false,
 	},
 ];
