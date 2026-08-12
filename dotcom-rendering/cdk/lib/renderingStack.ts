@@ -312,28 +312,6 @@ export class RenderingCDKStack extends CDKStack {
 				);
 			}
 
-			// TODO make these changes at the pattern level in GuCDK
-			if (app.ecsService) {
-				app.ecsService.cluster.with(
-					new ClusterSettings([
-						{ name: 'containerInsights', value: 'enhanced' },
-					]),
-				);
-
-				const cfnService = app.ecsService.node
-					.defaultChild as CfnService;
-				cfnService.addPropertyOverride('Monitoring', {
-					MetricConfigurations: [
-						{
-							MetricNames: [
-								'CPUUtilization',
-								'MemoryUtilization',
-							],
-							ResolutionSeconds: 20,
-						},
-					],
-				});
-			}
 		}
 
 		/**
