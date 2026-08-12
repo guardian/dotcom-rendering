@@ -96,19 +96,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "newsletters-in-article-signup-preview",
-		description:
-			"Test in-article newsletter signup with illustrated preview CTA vs without preview CTA",
-		owners: ["newsletters.dev@guardian.co.uk"],
-		expirationDate: "2026-07-21",
-		type: "client",
-		status: "ON",
-		audienceSize: 50 / 100,
-		audienceSpace: "A",
-		groups: ["illustrated", "without-preview"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "fronts-and-curation-loop-click-through",
 		description:
 			"Test impact of click to article via loop videos on fronts",
