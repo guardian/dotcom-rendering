@@ -6,7 +6,6 @@ import type {
 	FEFootballMatchStatsSummary,
 	FEFootballPlayer,
 	FEFootballPlayerEventEnhanced,
-	FEFootballSubstitution,
 	FEFootballTeam,
 	FEFootballTeamSummary,
 } from './frontend/feFootballMatchInfoPage';
@@ -139,15 +138,22 @@ const parsePlayerEvent = (
 const parseEvents = listParse(parsePlayerEvent);
 
 const parseSubstitution = (
-	feFootballMatchSubstitution: FEFootballSubstitution,
-): Result<ParserError, Substitution> =>
-	ok({
-		eventId: feFootballMatchSubstitution.eventId,
-		name: feFootballMatchSubstitution.name,
-		lastName: feFootballMatchSubstitution.lastName,
-	});
+	feFootballMatchSubstitution: FEFootballPlayer,
+): Substitution[] => {
+	const substitutions = feFootballMatchSubstitution.enhancedEvents
+		.filter((event) => event.eventType === 'substitution')
+		.map((event) => ({
+			eventId: event.eventId,
+			name: feFootballMatchSubstitution.name,
+			lastName: feFootballMatchSubstitution.lastName,
+		}));
 
-const parseSubstitutions = listParse(parseSubstitution);
+	return substitutions;
+};
+const parseSubstitutions = (players: FEFootballPlayer[]) =>
+	players
+		.map((player) => (player.substitute ? parseSubstitution(player) : []))
+		.flat();
 
 const parseFootballPlayer = (
 	feFootballMatchPlayer: FEFootballPlayer,
@@ -173,22 +179,19 @@ const parsePlayers = listParse(parseFootballPlayer);
 const parseTeamWithStats = (
 	feFootballMatchTeam: FEFootballTeam,
 ): Result<ParserError, FootballMatchTeamWithStats> =>
-	parseSubstitutions(feFootballMatchTeam.substitutions).flatMap(
-		(substitutions) =>
-			parsePlayers(feFootballMatchTeam.players).map((players) => ({
-				paID: feFootballMatchTeam.id,
-				name: cleanTeamName(feFootballMatchTeam.name),
-				abbreviatedName: feFootballMatchTeam.codename,
-				possession: feFootballMatchTeam.possession,
-				shotsOnTarget: feFootballMatchTeam.shotsOn,
-				shotsOffTarget: feFootballMatchTeam.shotsOff,
-				corners: feFootballMatchTeam.corners,
-				fouls: feFootballMatchTeam.fouls,
-				players,
-				statsColour: feFootballMatchTeam.colours,
-				substitutions,
-			})),
-	);
+	parsePlayers(feFootballMatchTeam.players).map((players) => ({
+		paID: feFootballMatchTeam.id,
+		name: cleanTeamName(feFootballMatchTeam.name),
+		abbreviatedName: feFootballMatchTeam.codename,
+		possession: feFootballMatchTeam.possession,
+		shotsOnTarget: feFootballMatchTeam.shotsOn,
+		shotsOffTarget: feFootballMatchTeam.shotsOff,
+		corners: feFootballMatchTeam.corners,
+		fouls: feFootballMatchTeam.fouls,
+		players,
+		statsColour: feFootballMatchTeam.colours,
+		substitutions: parseSubstitutions(feFootballMatchTeam.players),
+	}));
 
 export const parseMatchStats = (
 	feFootballMatch: FEFootballMatchStats,

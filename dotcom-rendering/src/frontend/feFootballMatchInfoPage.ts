@@ -29,20 +29,6 @@ export type FEFootballPlayerEventEnhanced = Output<
 	typeof feFootballPlayerEventEnhancedSchema
 >;
 
-export const feFootballSubstitutionSchema = object({
-	eventId: string(),
-	name: string(),
-	lastName: string(),
-});
-
-export type FEFootballSubstitution = Output<
-	typeof feFootballSubstitutionSchema
->;
-
-export const feFootballSubstitutionsSchema = array(
-	feFootballPlayerEventEnhancedSchema,
-);
-
 const feFootballPlayerSchema = object({
 	id: string(),
 	name: string(),
@@ -71,7 +57,6 @@ const feFootballTeamSchema = object({
 	fouls: number(),
 	colours: string(),
 	crest: string(),
-	substitutions: array(feFootballSubstitutionSchema),
 });
 
 export type FEFootballTeam = Output<typeof feFootballTeamSchema>;
