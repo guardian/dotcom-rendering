@@ -180,7 +180,7 @@ export type VariantMeta = {
 	};
 };
 
-export type Test = {
+export type EditorialTest = {
 	testUuid: string;
 	variantMeta: VariantMeta[];
 	createdByName: string;
