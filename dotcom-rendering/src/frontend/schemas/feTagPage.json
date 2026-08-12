@@ -505,12 +505,6 @@
                                                 ]
                                             }
                                         },
-                                        "createdByName": {
-                                            "type": "string"
-                                        },
-                                        "createdByEmail": {
-                                            "type": "string"
-                                        },
                                         "startDate": {
                                             "type": "number"
                                         },
@@ -525,17 +519,9 @@
                                         },
                                         "hasManuallyEndedOnThisTrail": {
                                             "type": "boolean"
-                                        },
-                                        "manuallyEndedOnThisTrailByName": {
-                                            "type": "string"
-                                        },
-                                        "manuallyEndedOnThisTrailByEmail": {
-                                            "type": "string"
                                         }
                                     },
                                     "required": [
-                                        "createdByEmail",
-                                        "createdByName",
                                         "frontsThisTestCanRunOn",
                                         "hasManuallyEndedOnThisTrail",
                                         "testUuid",

@@ -183,12 +183,8 @@ export type VariantMeta = {
 export type EditorialTest = {
 	testUuid: string;
 	variantMeta: VariantMeta[];
-	createdByName: string;
-	createdByEmail: string;
 	startDate?: number;
 	expiryDate?: number;
 	frontsThisTestCanRunOn: string[];
 	hasManuallyEndedOnThisTrail: boolean;
-	manuallyEndedOnThisTrailByName?: string;
-	manuallyEndedOnThisTrailByEmail?: string;
 };
