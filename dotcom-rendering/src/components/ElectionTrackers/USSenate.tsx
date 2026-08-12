@@ -18,7 +18,7 @@ type Props = {
 
 type Group = {
 	/**
-	 * The number of races called for the this group so far.
+	 * The number of races called for this group so far.
 	 */
 	value: number;
 	/**

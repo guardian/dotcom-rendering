@@ -1,3 +1,4 @@
+import { expect, within } from 'storybook/test';
 import { allModes } from '../../../.storybook/modes';
 import preview from '../../../.storybook/preview';
 import { palette } from '../../palette';
@@ -81,6 +82,36 @@ export const Empty = meta.story({
 		link: new URL('https://www.theguardian.com'),
 		linkText: 'Full results',
 	},
+	async play({ args, canvasElement }) {
+		const canvas = within(canvasElement);
+
+		// Numbers
+		const p = canvas.getAllByRole('paragraph');
+		await expect(p[0]?.textContent).toBe('DemocratsDemocrats280');
+		await expect(p[1]?.textContent).toBe('RepublicansRepublicans380');
+		await expect(p[2]?.textContent).toBe('0/34 races called');
+		await expect(p[3]?.textContent).toBe('DemocratsDemocrats00');
+		await expect(p[4]?.textContent).toBe('RepublicansRepublicans00');
+		await expect(p[5]?.textContent).toBe('0/435 races called');
+
+		// Progress bars
+		const bars = canvas.getAllByRole('progressbar');
+		await expect(bars[0]).toHaveValue(0);
+		await expect(bars[0]).toHaveAttribute(
+			'aria-valuemax',
+			args.senate.total.toString(),
+		);
+		await expect(bars[1]).toHaveValue(0);
+		await expect(bars[1]).toHaveAttribute(
+			'aria-valuemax',
+			args.house.total.toString(),
+		);
+
+		// Link
+		const link = canvas.getByRole('link');
+		await expect(link.textContent).toBe(args.linkText);
+		await expect(link).toHaveAttribute('href', args.link.href);
+	},
 });
 
 export const Final = Empty.extend({
@@ -138,5 +169,36 @@ export const Final = Empty.extend({
 				holdovers: Empty.composed.args.senate.others.holdovers,
 			},
 		},
+	},
+	async play({ args, canvasElement }) {
+		const canvas = within(canvasElement);
+
+		// Numbers
+		const p = canvas.getAllByRole('paragraph');
+		await expect(p[0]?.textContent).toBe('Democrats*Democrats*47-4');
+		await expect(p[1]?.textContent).toBe('RepublicansRepublicans53+4');
+		await expect(p[2]?.textContent).toBe('*includes independents');
+		await expect(p[3]?.textContent).toBe('34/34 races called');
+		await expect(p[4]?.textContent).toBe('DemocratsDemocrats215+1');
+		await expect(p[5]?.textContent).toBe('RepublicansRepublicans220-1');
+		await expect(p[6]?.textContent).toBe('435/435 races called');
+
+		// Progress bars
+		const bars = canvas.getAllByRole('progressbar');
+		await expect(bars[0]).toHaveValue(args.senate.total);
+		await expect(bars[0]).toHaveAttribute(
+			'aria-valuemax',
+			args.senate.total.toString(),
+		);
+		await expect(bars[1]).toHaveValue(args.house.total);
+		await expect(bars[1]).toHaveAttribute(
+			'aria-valuemax',
+			args.house.total.toString(),
+		);
+
+		// Link
+		const link = canvas.getByRole('link');
+		await expect(link.textContent).toBe(args.linkText);
+		await expect(link).toHaveAttribute('href', args.link.href);
 	},
 });
