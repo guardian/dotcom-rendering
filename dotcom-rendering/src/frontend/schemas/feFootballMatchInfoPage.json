@@ -46,7 +46,7 @@
             "type": "object",
             "properties": {
                 "matchStats": {
-                    "$ref": "#/definitions/{id:string;status:string;homeTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;lastName:string;position:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;substitutions:{name:string;eventId:string;lastName:string;}[];score?:number;};awayTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;lastName:string;position:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;substitutions:{name:string;eventId:string;lastName:string;}[];score?:number;};comments?:string;}"
+                    "$ref": "#/definitions/{id:string;status:string;homeTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};awayTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};comments?:string;}"
                 },
                 "matchInfo": {
                     "anyOf": [
@@ -823,7 +823,7 @@
                 "url"
             ]
         },
-        "{id:string;status:string;homeTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;lastName:string;position:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;substitutions:{name:string;eventId:string;lastName:string;}[];score?:number;};awayTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;lastName:string;position:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;substitutions:{name:string;eventId:string;lastName:string;}[];score?:number;};comments?:string;}": {
+        "{id:string;status:string;homeTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};awayTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};comments?:string;}": {
             "type": "object",
             "properties": {
                 "id": {
@@ -833,10 +833,10 @@
                     "type": "string"
                 },
                 "homeTeam": {
-                    "$ref": "#/definitions/{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;lastName:string;position:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;substitutions:{name:string;eventId:string;lastName:string;}[];score?:number;}"
+                    "$ref": "#/definitions/{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;}"
                 },
                 "awayTeam": {
-                    "$ref": "#/definitions/{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;lastName:string;position:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;substitutions:{name:string;eventId:string;lastName:string;}[];score?:number;}"
+                    "$ref": "#/definitions/{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;}"
                 },
                 "comments": {
                     "type": "string"
@@ -849,7 +849,7 @@
                 "status"
             ]
         },
-        "{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;lastName:string;position:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;substitutions:{name:string;eventId:string;lastName:string;}[];score?:number;}": {
+        "{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;}": {
             "type": "object",
             "properties": {
                 "name": {
@@ -870,7 +870,7 @@
                 "players": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/{name:string;id:string;lastName:string;position:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}"
+                        "$ref": "#/definitions/{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}"
                     }
                 },
                 "possession": {
@@ -894,12 +894,6 @@
                 "crest": {
                     "type": "string"
                 },
-                "substitutions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/{name:string;eventId:string;lastName:string;}"
-                    }
-                },
                 "score": {
                     "type": "number"
                 }
@@ -916,11 +910,10 @@
                 "possession",
                 "scorers",
                 "shotsOff",
-                "shotsOn",
-                "substitutions"
+                "shotsOn"
             ]
         },
-        "{name:string;id:string;lastName:string;position:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}": {
+        "{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];enhancedEvents:{eventType:string;eventId:string;normalTime:string;addedTime:string;}[];}": {
             "type": "object",
             "properties": {
                 "name": {
@@ -929,10 +922,10 @@
                 "id": {
                     "type": "string"
                 },
-                "lastName": {
+                "position": {
                     "type": "string"
                 },
-                "position": {
+                "lastName": {
                     "type": "string"
                 },
                 "substitute": {
@@ -1005,25 +998,6 @@
                 "eventId",
                 "eventType",
                 "normalTime"
-            ]
-        },
-        "{name:string;eventId:string;lastName:string;}": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "eventId": {
-                    "type": "string"
-                },
-                "lastName": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "eventId",
-                "lastName",
-                "name"
             ]
         },
         "{stage:{stageNumber:string;};id:string;type:\"LiveMatch\";status:string;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}": {
