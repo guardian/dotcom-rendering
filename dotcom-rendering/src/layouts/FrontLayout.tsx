@@ -246,7 +246,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={sourcePalette.labs[100]}
+						backgroundColour={sourcePalette.labs[400]}
 						borderColour={sourcePalette.neutral[60]}
 						sectionId="labs-header"
 					>

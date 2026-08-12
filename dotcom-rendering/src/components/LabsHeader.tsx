@@ -17,13 +17,7 @@ import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
 import { Details } from './Details';
 
-const FlexWrapper = ({
-	children,
-	textColour,
-}: {
-	children: React.ReactNode;
-	textColour: string;
-}) => (
+const FlexWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			position: relative;
@@ -31,7 +25,7 @@ const FlexWrapper = ({
 			display: flex;
 			justify-content: space-between;
 
-			color: ${textColour};
+			color: ${palette.neutral[7]};
 		`}
 	>
 		{children}
@@ -96,17 +90,11 @@ const Title = () => (
 	</div>
 );
 
-const About = ({
-	backgroundColour,
-	textColour,
-}: {
-	backgroundColour: string;
-	textColour: string;
-}) => (
+const About = () => (
 	<div
 		css={css`
 			${textSans15};
-			background-color: ${backgroundColour};
+			background-color: ${palette.labs[400]};
 			border-top: 1px solid ${palette.neutral[60]};
 
 			width: 100vw;
@@ -122,6 +110,10 @@ const About = ({
 			${from.mobileLandscape} {
 				padding: ${space[3]}px 20px;
 			}
+
+			> a {
+				color: black;
+			}
 		`}
 	>
 		<p>
@@ -133,7 +125,6 @@ const About = ({
 			iconSide="right"
 			size="xsmall"
 			priority="subdued"
-			theme={{ textSubdued: textColour }}
 			icon={<SvgArrowRightStraight />}
 			href="https://www.theguardian.com/info/2016/jan/25/content-funding"
 		>
@@ -147,32 +138,13 @@ const Logo = ({ editionId }: { editionId: EditionId }) => (
 		href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
 			editionId,
 		)}`}
-		cssOverrides={css`
-			display: flex;
-			color: inherit;
-			svg {
-				fill: currentColor;
-			}
-
-			&:hover {
-				color: inherit;
-			}
-		`}
 	>
 		<LabsLogo />
 	</Link>
 );
 
-export const LabsHeader = ({
-	editionId,
-	textColour = palette.neutral[100],
-	backgroundColour = palette.labs[100],
-}: {
-	editionId: EditionId;
-	textColour?: string;
-	backgroundColour?: string;
-}) => (
-	<FlexWrapper textColour={textColour}>
+export const LabsHeader = ({ editionId }: { editionId: EditionId }) => (
+	<FlexWrapper>
 		<Left>
 			<HeaderSection isFirst={true}>
 				<Title />
@@ -194,10 +166,7 @@ export const LabsHeader = ({
 						}
 					`}
 				>
-					<About
-						backgroundColour={backgroundColour}
-						textColour={textColour}
-					/>
+					<About />
 				</Details>
 			</HeaderSection>
 		</Left>
