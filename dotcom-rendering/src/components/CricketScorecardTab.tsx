@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
 import { useEffect, useRef } from 'react';
-import type { CricketMatch } from '../cricketMatchV2';
+import type { CricketMatch } from '../cricketMatch';
 import { grid } from '../grid';
 import { palette } from '../palette';
-import { CricketScorecardNew } from './CricketScorecardNew';
+import { CricketScorecardNew } from './CricketScorecard';
 
 export type CricketScorecardTabProps = Pick<
 	CricketMatch,

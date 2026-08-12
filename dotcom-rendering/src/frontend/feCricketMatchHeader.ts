@@ -1,5 +1,5 @@
 import { object, optional, type Output, string } from 'valibot';
-import { feCricketMatchSchema } from './feCricketMatchPage';
+import { feCricketMatchSchema } from './feCricketMatchData';
 
 export const feCricketMatchHeaderSchema = object({
 	cricketMatch: feCricketMatchSchema,
