@@ -17,8 +17,6 @@ import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
-import type { CfnService } from 'aws-cdk-lib/aws-ecs';
-import { ClusterSettings } from 'aws-cdk-lib/aws-ecs/mixins';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
@@ -311,7 +309,6 @@ export class RenderingCDKStack extends CDKStack {
 					value,
 				);
 			}
-
 		}
 
 		/**
