@@ -9,7 +9,6 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center as layoutCenterStyles } from '../lib/center';
@@ -646,25 +645,23 @@ export const AdSlot = ({
 		}
 		case 'mostpop': {
 			return (
-				<Hide until="tablet">
-					<AdSlotWrapper css={mostPopContainerStyles}>
-						<div
-							id="dfp-ad--mostpop"
-							className={[
-								'js-ad-slot',
-								'ad-slot',
-								'ad-slot--mostpop',
-								'ad-slot--mpu-banner-ad',
-								'ad-slot--rendered',
-							].join(' ')}
-							css={[mostPopAdStyles]}
-							data-link-name="ad slot mostpop"
-							data-name="mostpop"
-							data-testid="slot"
-							aria-hidden="true"
-						/>
-					</AdSlotWrapper>
-				</Hide>
+				<AdSlotWrapper css={mostPopContainerStyles}>
+					<div
+						id="dfp-ad--mostpop"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--mostpop',
+							'ad-slot--mpu-banner-ad',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={mostPopAdStyles}
+						data-link-name="ad slot mostpop"
+						data-name="mostpop"
+						data-testid="slot"
+						aria-hidden="true"
+					/>
+				</AdSlotWrapper>
 			);
 		}
 		case 'merchandising-high': {
