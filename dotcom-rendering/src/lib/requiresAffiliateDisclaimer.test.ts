@@ -20,12 +20,12 @@ describe('requiresAffiliateDisclaimer', () => {
 			expect(requiresAffiliateDisclaimer('false')).toBe(false);
 		});
 
-		it('returns false for a differently-cased string (no normalisation)', () => {
-			expect(requiresAffiliateDisclaimer('True')).toBe(false);
-			expect(requiresAffiliateDisclaimer('TRUE')).toBe(false);
+		it('returns true for a differently-cased string (normalisation)', () => {
+			expect(requiresAffiliateDisclaimer('True')).toBe(true);
+			expect(requiresAffiliateDisclaimer('TRUE')).toBe(true);
 		});
 
-		it('returns false for surrounding whitespace (no trimming)', () => {
+		it('returns false for surrounding whitespace', () => {
 			expect(requiresAffiliateDisclaimer(' true ')).toBe(false);
 		});
 

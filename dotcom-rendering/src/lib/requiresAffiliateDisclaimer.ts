@@ -6,7 +6,7 @@ export const requiresAffiliateDisclaimer = (
 	affiliateLinksDisclaimer: FEArticle['affiliateLinksDisclaimer'] | boolean,
 ): boolean => {
 	if (typeof affiliateLinksDisclaimer === 'string') {
-		return affiliateLinksDisclaimer === 'true';
+		return affiliateLinksDisclaimer.toLowerCase() === 'true';
 	}
 	return affiliateLinksDisclaimer === true;
 };
