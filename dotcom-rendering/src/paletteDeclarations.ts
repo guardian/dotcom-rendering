@@ -53,10 +53,6 @@ const pillarPalette = (
  * Design groups that keep their pre-existing colours rather than the
  * Labs theme wide overrides used elsewhere in this file.
  */
-const labsGalleryDesigns: ArticleDesign[] = [
-	ArticleDesign.Gallery,
-	ArticleDesign.HostedGallery,
-];
 const labsMediaDesigns: ArticleDesign[] = [
 	ArticleDesign.Video,
 	ArticleDesign.Audio,
@@ -3963,10 +3959,9 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 		theme === ArticleSpecial.Labs &&
 		![
 			ArticleDesign.LiveBlog,
-			...labsGalleryDesigns,
+			ArticleDesign.Gallery,
 			...labsMediaDesigns,
-			ArticleDesign.HostedArticle,
-			ArticleDesign.HostedVideo,
+			...labsHostedDesigns,
 		].includes(design)
 	) {
 		return sourcePalette.labs[200];
@@ -4043,10 +4038,9 @@ const shareButtonDark: PaletteFunction = ({ design, theme }) => {
 		theme === ArticleSpecial.Labs &&
 		![
 			ArticleDesign.LiveBlog,
-			...labsGalleryDesigns,
+			ArticleDesign.Gallery,
 			...labsMediaDesigns,
-			ArticleDesign.HostedArticle,
-			ArticleDesign.HostedVideo,
+			...labsHostedDesigns,
 		].includes(design)
 	) {
 		return sourcePalette.labs[500];
