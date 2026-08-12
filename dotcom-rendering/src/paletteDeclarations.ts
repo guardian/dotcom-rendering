@@ -7724,6 +7724,18 @@ const paletteColours = {
 		light: navSearchBarText,
 		dark: navSearchBarText,
 	},
+	'--newsletter-browse-more-button-border': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-browse-more-button-hover': {
+		light: () => sourcePalette.brand[800],
+		dark: () => sourcePalette.brand[300],
+	},
+	'--newsletter-browse-more-button-text': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
 	'--newsletter-card-background': {
 		light: () => '#F3F7FF',
 		dark: () => sourcePalette.brand[100],
@@ -7745,18 +7757,6 @@ const paletteColours = {
 		dark: () => sourcePalette.neutral[100],
 	},
 	'--newsletter-highlights-card-headline': {
-		light: () => sourcePalette.brand[400],
-		dark: () => sourcePalette.neutral[100],
-	},
-	'--newsletter-preview-button-border': {
-		light: () => sourcePalette.brand[400],
-		dark: () => sourcePalette.neutral[46],
-	},
-	'--newsletter-preview-button-hover': {
-		light: () => sourcePalette.brand[800],
-		dark: () => sourcePalette.brand[300],
-	},
-	'--newsletter-preview-button-text': {
 		light: () => sourcePalette.brand[400],
 		dark: () => sourcePalette.neutral[100],
 	},
