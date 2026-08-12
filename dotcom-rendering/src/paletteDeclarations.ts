@@ -49,6 +49,25 @@ const pillarPalette = (
 	}
 };
 
+/**
+ * Design groups that keep their pre-existing colours rather than the
+ * Labs theme wide overrides used elsewhere in this file.
+ */
+const labsGalleryDesigns: ArticleDesign[] = [
+	ArticleDesign.Gallery,
+	ArticleDesign.HostedGallery,
+];
+const labsMediaDesigns: ArticleDesign[] = [
+	ArticleDesign.Video,
+	ArticleDesign.Audio,
+	ArticleDesign.Picture,
+];
+const labsHostedDesigns: ArticleDesign[] = [
+	ArticleDesign.HostedArticle,
+	ArticleDesign.HostedVideo,
+	ArticleDesign.HostedGallery,
+];
+
 const textblockBulletLight: PaletteFunction = ({ theme, design }) => {
 	switch (theme) {
 		case Pillar.News: {
@@ -1282,6 +1301,10 @@ const followIconBackgroundLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 const followIconBackgroundDark: PaletteFunction = ({ theme, design }) => {
+	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
+		return sourcePalette.neutral[7];
+	}
+
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[7];
@@ -1311,6 +1334,10 @@ const followIconBackgroundDark: PaletteFunction = ({ theme, design }) => {
 };
 
 const followIconFillLight: PaletteFunction = ({ design, theme }) => {
+	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
+		return sourcePalette.labs[200];
+	}
+
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.HostedGallery:
@@ -1357,8 +1384,6 @@ const followIconFillLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.culture[400];
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[400];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1389,8 +1414,6 @@ const followIconFillLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.culture[400];
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[400];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1420,13 +1443,15 @@ const followIconFillLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 const followIconFillDark: PaletteFunction = ({ theme, design }) => {
+	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
+		return sourcePalette.labs[500];
+	}
+
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[93];
 		case ArticleDesign.Standard:
 			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
 				case Pillar.Opinion:
 					return sourcePalette.opinion[500];
 				case Pillar.Sport:
@@ -1464,8 +1489,6 @@ const followIconFillDark: PaletteFunction = ({ theme, design }) => {
 					return sourcePalette.culture[500];
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[500];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[700];
 				case ArticleSpecial.SpecialReportAlt:
@@ -2470,6 +2493,17 @@ const standfirstLinkTextDark: PaletteFunction = ({ design, theme }) => {
 };
 
 const standfirstTextLight: PaletteFunction = (format) => {
+	if (
+		format.theme === ArticleSpecial.Labs &&
+		![
+			ArticleDesign.LiveBlog,
+			...labsMediaDesigns,
+			...labsHostedDesigns,
+		].includes(format.design)
+	) {
+		return sourcePalette.labs[100];
+	}
+
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[100];
@@ -2497,6 +2531,13 @@ const standfirstTextLight: PaletteFunction = (format) => {
 };
 
 const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
+	if (
+		theme === ArticleSpecial.Labs &&
+		![ArticleDesign.LiveBlog, ...labsHostedDesigns].includes(design)
+	) {
+		return sourcePalette.labs[500];
+	}
+
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
@@ -2507,12 +2548,7 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				default:
-					return sourcePalette.neutral[86];
-			}
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
 		case ArticleDesign.Explainer:
@@ -3923,6 +3959,19 @@ const shareButtonCopiedLight: PaletteFunction = ({ design }) => {
 const shareButtonCopiedDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
+	if (
+		theme === ArticleSpecial.Labs &&
+		![
+			ArticleDesign.LiveBlog,
+			...labsGalleryDesigns,
+			...labsMediaDesigns,
+			ArticleDesign.HostedArticle,
+			ArticleDesign.HostedVideo,
+		].includes(design)
+	) {
+		return sourcePalette.labs[200];
+	}
+
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.HostedGallery:
@@ -3953,12 +4002,12 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 			switch (theme) {
 				case Pillar.News:
 					return sourcePalette.news[300];
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[100];
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
 				default:
 					return pillarPalette(theme, 400);
 			}
@@ -3990,6 +4039,19 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 };
 
 const shareButtonDark: PaletteFunction = ({ design, theme }) => {
+	if (
+		theme === ArticleSpecial.Labs &&
+		![
+			ArticleDesign.LiveBlog,
+			...labsGalleryDesigns,
+			...labsMediaDesigns,
+			ArticleDesign.HostedArticle,
+			ArticleDesign.HostedVideo,
+		].includes(design)
+	) {
+		return sourcePalette.labs[500];
+	}
+
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.HostedArticle:
