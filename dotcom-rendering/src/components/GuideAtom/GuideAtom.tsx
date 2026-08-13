@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import { useConfig } from '../ConfigContext';
 import { Body } from '../ExpandableAtom/Body';

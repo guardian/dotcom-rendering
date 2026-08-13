@@ -191,7 +191,7 @@ const getOptimisedPosterImage = (
 	mainImage: string,
 	aspectRatio: string,
 	isTabletOrAbove: boolean,
-	measurementRef?: RefObject<HTMLElement>,
+	measurementRef?: RefObject<HTMLElement | null>,
 ): string => {
 	// This only runs on the client
 	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';

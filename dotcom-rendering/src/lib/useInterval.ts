@@ -8,7 +8,7 @@ export const useInterval = (
 	callback: CallbackFunction,
 	delay: number,
 ): void => {
-	const savedCallback = useRef<CallbackFunction>();
+	const savedCallback = useRef<CallbackFunction>(undefined);
 
 	// Remember the latest callback.
 	useEffect(() => {

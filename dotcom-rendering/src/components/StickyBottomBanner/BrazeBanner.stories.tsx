@@ -20,7 +20,7 @@ export default {
 // ---------------------------------------
 export const BrazeStyleableBannerWithLinkComponent = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeBannerComponentType>();
 
@@ -134,7 +134,7 @@ BrazeStyleableBannerWithLinkComponent.storyName = 'StyleableBannerWithLink';
 // ---------------------------------------
 export const BrazeBannerWithLinkComponent = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeBannerComponentType>();
 
@@ -206,7 +206,7 @@ BrazeBannerWithLinkComponent.storyName = 'BannerWithLink';
 // ---------------------------------------
 export const BrazeAppBannerComponent = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeBannerComponentType>();
 
@@ -270,7 +270,7 @@ BrazeAppBannerComponent.storyName = 'AppBanner';
 // ---------------------------------------
 export const BrazeStyleableBannerNewsletterComponent = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeBannerComponentType>();
 
@@ -376,7 +376,7 @@ BrazeStyleableBannerNewsletterComponent.storyName = 'StyleableBannerNewsletter';
 // ---------------------------------------
 export const BrazeBannerNewsletterComponent = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeBannerComponentType>();
 

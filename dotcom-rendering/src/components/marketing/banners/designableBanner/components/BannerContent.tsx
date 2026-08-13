@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
+import type { JSX } from 'react';
 import type { BannerData } from '../BannerProps';
 
 const phabletContentMaxWidth = '492px';

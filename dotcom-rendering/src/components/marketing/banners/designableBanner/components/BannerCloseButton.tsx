@@ -6,6 +6,7 @@ import {
 	SvgChevronUpSingle,
 	SvgCross,
 } from '@guardian/source/react-components';
+import type { JSX } from 'react';
 import type { BannerData } from '../BannerProps';
 import { buttonStyles, buttonThemes } from '../styles/buttonStyles';
 

@@ -43,7 +43,7 @@ interface SlimDirectoryPageNavConfig {
 	textHoverColor: PlatformColor;
 	backgroundColor: PlatformColor;
 	borderColor: PlatformColor;
-	titleIcon?: React.ReactElement;
+	titleIcon?: React.ReactElement<any>;
 	title: { label: string; id: string };
 	links: Array<{ label: string; id: string }>;
 	slimNav: true;
@@ -54,7 +54,7 @@ interface FullDirectoryPageNavConfig {
 	tagIds: string[];
 	textColor: PlatformColor;
 	backgroundColor: PlatformColor;
-	titleIcon?: React.ReactElement;
+	titleIcon?: React.ReactElement<any>;
 	title: { label: string; id: string };
 	links: Array<{ label: string; id: string }>;
 	backgroundImages: {

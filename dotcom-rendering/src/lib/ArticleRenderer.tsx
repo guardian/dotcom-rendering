@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Fragment } from 'react';
+import { Fragment, type JSX } from 'react';
 import { useConfig } from '../components/ConfigContext';
 import { FeastContextualNudge } from '../components/FeastContextualNudge.island';
 import { Island } from '../components/Island';

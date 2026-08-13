@@ -1,7 +1,7 @@
 import { from } from '@guardian/source/foundations';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types/props/epic';
-import { useState } from 'react';
+import { type JSX, useState } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,

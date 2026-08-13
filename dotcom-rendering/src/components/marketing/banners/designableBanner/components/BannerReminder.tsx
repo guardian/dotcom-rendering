@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
+import type { JSX } from 'react';
 import { useContributionsReminderSignup } from '../../../hooks/useContributionsReminderSignup';
 import type { BannerData } from '../BannerProps';
 import { DesignableBannerReminderSignedOut } from './DesignableBannerReminderSignedOut';

@@ -1,4 +1,5 @@
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
+import type { JSX } from 'react';
 import type { BannerData } from '../BannerProps';
 import { templateSpacing } from '../styles/templateStyles';
 

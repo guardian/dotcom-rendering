@@ -46,7 +46,7 @@ jest.mock('./renderElement', () => ({
  * which bypasses the withSignInGateSlot path and keeps tests focused on
  * augmentedElements logic.
  */
-const renderWithConfig = (ui: React.ReactElement) =>
+const renderWithConfig = (ui: React.ReactElement<any>) =>
 	render(
 		<ConfigProvider
 			value={{

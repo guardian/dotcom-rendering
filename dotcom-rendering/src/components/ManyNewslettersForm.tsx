@@ -28,7 +28,7 @@ export interface FormProps {
 	useReCaptcha?: boolean;
 	captchaSiteKey?: string;
 	visibleRecaptcha?: boolean;
-	reCaptchaRef?: React.RefObject<ReactGoogleRecaptcha>;
+	reCaptchaRef?: React.RefObject<ReactGoogleRecaptcha | null>;
 	handleCaptchaError?: ReactEventHandler<HTMLDivElement>;
 }
 

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, textSans15 } from '@guardian/source/foundations';
+import type { JSX } from 'react';
 import type { BannerData } from '../BannerProps';
 import { createBannerBodyCopy } from './BannerText';
 

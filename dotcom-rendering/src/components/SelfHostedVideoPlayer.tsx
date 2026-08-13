@@ -118,7 +118,7 @@ export type Props = {
 	height?: number;
 	width?: number;
 	aspectRatio: number;
-	FallbackImageComponent: ReactElement;
+	FallbackImageComponent: ReactElement<any>;
 	currentTime: number;
 	duration?: number;
 	hasAudio: boolean;
