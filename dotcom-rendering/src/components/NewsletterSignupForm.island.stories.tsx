@@ -5,7 +5,6 @@ import preview from '../../.storybook/preview';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
 import type { NewsletterSignupFormState } from '../lib/useNewsletterSignupForm';
-import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
 import { NewsletterSignupCard } from './NewsletterSignupCard';
 import { NewsletterSignupForm } from './NewsletterSignupForm.island';
 import { Section } from './Section';
@@ -17,10 +16,8 @@ const meta = preview.meta({
 		(
 			Story,
 			{
-				args,
 				parameters,
 			}: {
-				args: { previewAction?: NewsletterPreviewAction };
 				parameters: { isSignedIn?: boolean };
 			},
 		) => (
@@ -35,7 +32,6 @@ const meta = preview.meta({
 					frequency="Weekly"
 					description="An exclusive roundup of the week's best Guardian journalism from the editor-in-chief, Katharine Viner, free to your inbox every Saturday."
 					illustrationSquare="https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3"
-					previewAction={args.previewAction}
 					isSignedIn={parameters.isSignedIn === true}
 				>
 					<Story />
@@ -49,7 +45,6 @@ const defaultArgs = {
 	newsletterId: 'saturday-edition',
 	newsletterName: 'Saturday Edition',
 	frequency: 'every Saturday',
-	previewAction: { behaviour: 'modal' as const, onClick: fn() },
 	componentId: 'AR NewsletterSignupForm saturday-edition',
 };
 
@@ -157,7 +152,7 @@ export const Loading = meta.story({
 
 /** Subscription confirmed. */
 export const Success = meta.story({
-	args: { ...defaultArgs, previewAction: undefined },
+	args: { ...defaultArgs },
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(
 			mockForm({ responseOk: true }),
@@ -167,7 +162,7 @@ export const Success = meta.story({
 
 /** Server returned a non-2xx response — error message and "Try again" button. */
 export const SubmissionFailed = meta.story({
-	args: { ...defaultArgs, previewAction: undefined },
+	args: { ...defaultArgs },
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(
 			mockForm({ responseOk: false }),
@@ -213,14 +208,6 @@ export const CaptchaError = meta.story({
 				isValidationError: false,
 			}),
 		);
-	},
-});
-
-/** Form without a preview button (no `previewAction` prop). */
-export const WithoutPreview = meta.story({
-	args: { ...defaultArgs, previewAction: undefined },
-	beforeEach() {
-		mocked(useNewsletterSignupForm).mockReturnValue(mockForm({}));
 	},
 });
 

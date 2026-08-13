@@ -46,18 +46,18 @@
             "type": "object",
             "properties": {
                 "matchStats": {
-                    "$ref": "#/definitions/{id:string;status:string;homeTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};awayTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};comments?:string;}"
+                    "$ref": "#/definitions/{id:string;homeTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};awayTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};status:string;comments?:string;}"
                 },
                 "matchInfo": {
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/{stage:{stageNumber:string;};id:string;type:\"LiveMatch\";status:string;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}"
+                            "$ref": "#/definitions/{stage:{stageNumber:string;};id:string;type:\"LiveMatch\";date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};status:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}"
                         },
                         {
                             "$ref": "#/definitions/{stage:{stageNumber:string;};id:string;type:\"Fixture\";date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};venue?:{name:string;id:string;};comments?:string;competition?:{name:string;id:string;};}"
                         },
                         {
-                            "$ref": "#/definitions/{stage:{stageNumber:string;};id:string;type:\"MatchDay\";result:boolean;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};liveMatch:boolean;previewAvailable:boolean;reportAvailable:boolean;lineupsAvailable:boolean;matchStatus:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};competition?:{name:string;id:string;};}"
+                            "$ref": "#/definitions/{stage:{stageNumber:string;};id:string;type:\"MatchDay\";date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};liveMatch:boolean;result:boolean;previewAvailable:boolean;reportAvailable:boolean;lineupsAvailable:boolean;matchStatus:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};competition?:{name:string;id:string;};}"
                         },
                         {
                             "$ref": "#/definitions/{stage:{stageNumber:string;};id:string;type:\"Result\";date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};reportAvailable:boolean;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}"
@@ -823,13 +823,10 @@
                 "url"
             ]
         },
-        "{id:string;status:string;homeTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};awayTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};comments?:string;}": {
+        "{id:string;homeTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};awayTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};status:string;comments?:string;}": {
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "string"
-                },
-                "status": {
                     "type": "string"
                 },
                 "homeTeam": {
@@ -837,6 +834,9 @@
                 },
                 "awayTeam": {
                     "$ref": "#/definitions/{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;}"
+                },
+                "status": {
+                    "type": "string"
                 },
                 "comments": {
                     "type": "string"
@@ -970,7 +970,7 @@
                 "eventType"
             ]
         },
-        "{stage:{stageNumber:string;};id:string;type:\"LiveMatch\";status:string;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}": {
+        "{stage:{stageNumber:string;};id:string;type:\"LiveMatch\";date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};status:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}": {
             "type": "object",
             "properties": {
                 "stage": {
@@ -982,9 +982,6 @@
                 "type": {
                     "type": "string",
                     "const": "LiveMatch"
-                },
-                "status": {
-                    "type": "string"
                 },
                 "date": {
                     "type": "string"
@@ -1000,6 +997,9 @@
                 },
                 "awayTeam": {
                     "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;}"
+                },
+                "status": {
+                    "type": "string"
                 },
                 "venue": {
                     "$ref": "#/definitions/{name:string;id:string;}"
@@ -1175,7 +1175,7 @@
                 "name"
             ]
         },
-        "{stage:{stageNumber:string;};id:string;type:\"MatchDay\";result:boolean;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};liveMatch:boolean;previewAvailable:boolean;reportAvailable:boolean;lineupsAvailable:boolean;matchStatus:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};competition?:{name:string;id:string;};}": {
+        "{stage:{stageNumber:string;};id:string;type:\"MatchDay\";date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;};liveMatch:boolean;result:boolean;previewAvailable:boolean;reportAvailable:boolean;lineupsAvailable:boolean;matchStatus:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};competition?:{name:string;id:string;};}": {
             "type": "object",
             "properties": {
                 "stage": {
@@ -1187,9 +1187,6 @@
                 "type": {
                     "type": "string",
                     "const": "MatchDay"
-                },
-                "result": {
-                    "type": "boolean"
                 },
                 "date": {
                     "type": "string"
@@ -1207,6 +1204,9 @@
                     "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;teamUrl?:string;}"
                 },
                 "liveMatch": {
+                    "type": "boolean"
+                },
+                "result": {
                     "type": "boolean"
                 },
                 "previewAvailable": {
