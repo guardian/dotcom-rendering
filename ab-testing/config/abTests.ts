@@ -186,7 +186,10 @@ const ABTests: ABTest[] = [
 	{
 		name: "fronts-and-curation-editorial-headline-test",
 		description: "Allow editorial headline A/B tests to run on web",
-		owners: ["fronts.and.curation@guardian.co.uk"],
+		owners: [
+			"fronts.and.curation@guardian.co.uk",
+			"ab.test.mission@guardian.co.uk",
+		],
 		status: "ON",
 		expirationDate: "2036-08-12",
 		type: "server",
