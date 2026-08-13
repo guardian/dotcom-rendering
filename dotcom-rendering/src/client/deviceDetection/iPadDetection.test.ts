@@ -4,6 +4,9 @@ describe('iPadDetection', () => {
 	const originalPlatform = navigator.platform;
 	const originalMaxTouchPoints = navigator.maxTouchPoints;
 	const originalSearch = window.location.search;
+	const setLocationSearch = (search: string) => {
+		window.history.replaceState({}, '', `${window.location.pathname}${search}`);
+	};
 
 	afterEach(() => {
 		Object.defineProperty(navigator, 'platform', {
@@ -14,10 +17,7 @@ describe('iPadDetection', () => {
 			value: originalMaxTouchPoints,
 			configurable: true,
 		});
-		Object.defineProperty(window, 'location', {
-			value: { search: originalSearch },
-			writable: true,
-		});
+		setLocationSearch(originalSearch);
 	});
 
 	describe('isIPad', () => {
@@ -94,10 +94,7 @@ describe('iPadDetection', () => {
 		});
 
 		it('returns true when forceiPad query parameter is set to true', () => {
-			Object.defineProperty(window, 'location', {
-				value: { search: '?forceiPad=true' },
-				writable: true,
-			});
+			setLocationSearch('?forceiPad=true');
 			Object.defineProperty(navigator, 'platform', {
 				value: 'Win32',
 				configurable: true,
@@ -110,10 +107,7 @@ describe('iPadDetection', () => {
 		});
 
 		it('returns false when forceiPad query parameter is set to false', () => {
-			Object.defineProperty(window, 'location', {
-				value: { search: '?forceiPad=false' },
-				writable: true,
-			});
+			setLocationSearch('?forceiPad=false');
 			Object.defineProperty(navigator, 'platform', {
 				value: 'Win32',
 				configurable: true,
@@ -126,10 +120,7 @@ describe('iPadDetection', () => {
 		});
 
 		it('returns false when forceiPad query parameter is not present', () => {
-			Object.defineProperty(window, 'location', {
-				value: { search: '?otherParam=value' },
-				writable: true,
-			});
+			setLocationSearch('?otherParam=value');
 			Object.defineProperty(navigator, 'platform', {
 				value: 'Win32',
 				configurable: true,
@@ -170,10 +161,7 @@ describe('iPadDetection', () => {
 		});
 
 		it('returns tablet when forceiPad query parameter is set to true', () => {
-			Object.defineProperty(window, 'location', {
-				value: { search: '?forceiPad=true' },
-				writable: true,
-			});
+			setLocationSearch('?forceiPad=true');
 			Object.defineProperty(navigator, 'platform', {
 				value: 'Win32',
 				configurable: true,

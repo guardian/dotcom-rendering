@@ -5,6 +5,8 @@ describe('PulsingDot', () => {
 	it('It should render pulsing dot as expected', () => {
 		const dotColour = 'blue';
 		const { container } = render(<PulsingDot colour={dotColour} />);
-		expect(container.firstChild).toHaveStyle(`color: ${dotColour}`);
+		expect(window.getComputedStyle(container.firstChild as Element).color).toBe(
+			'rgb(0, 0, 255)',
+		);
 	});
 });

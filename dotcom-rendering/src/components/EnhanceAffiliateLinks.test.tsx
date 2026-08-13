@@ -9,10 +9,15 @@ jest.mock('../lib/useAB', () => ({
 }));
 
 describe('EnhanceAffiliateLinks', () => {
+	const setLocationSearch = (search: string) => {
+		window.history.replaceState({}, '', `${window.location.pathname}${search}`);
+	};
+
 	beforeEach(() => {
 		// Clear the DOM before each test
 		document.body.innerHTML = '';
 		jest.restoreAllMocks();
+		setLocationSearch('');
 	});
 
 	it('should not modify links if no Skimlinks are present', () => {
@@ -83,12 +88,9 @@ describe('EnhanceAffiliateLinks', () => {
 	});
 
 	it('should use article URL UTM parameters when present', () => {
-		Object.defineProperty(window, 'location', {
-			value: new URL(
-				'https://example.test/this?utm_source=growth&utm_medium=epicuk&utm_campaign=q3_test&utm_content=filter_general',
-			),
-			configurable: true,
-		});
+		setLocationSearch(
+			'?utm_source=growth&utm_medium=epicuk&utm_campaign=q3_test&utm_content=filter_general',
+		);
 
 		document.body.innerHTML = `<a href="https://go.skimresources.com/?id=12345">Skimlink</a>`;
 
@@ -101,10 +103,7 @@ describe('EnhanceAffiliateLinks', () => {
 	});
 
 	it('should use UTM parameters from the referrer if the article URL has none', () => {
-		Object.defineProperty(window, 'location', {
-			value: new URL('https://example.test/page'),
-			configurable: true,
-		});
+		setLocationSearch('');
 
 		Object.defineProperty(document, 'referrer', {
 			value: 'https://foo.bar/some?utm_source=testsource&utm_medium=somemedium&utm_campaign=refcamp',
@@ -125,12 +124,7 @@ describe('EnhanceAffiliateLinks', () => {
 	});
 
 	it('should use UTM parameters from the article URL over the referrer if both exist', () => {
-		Object.defineProperty(window, 'location', {
-			value: new URL(
-				'https://example.test/page?utm_source=pagegrow&utm_medium=somemedium',
-			),
-			configurable: true,
-		});
+		setLocationSearch('?utm_source=pagegrow&utm_medium=somemedium');
 
 		Object.defineProperty(document, 'referrer', {
 			value: 'https://foo.bar?utm_source=refgrow&utm_medium=refmed',

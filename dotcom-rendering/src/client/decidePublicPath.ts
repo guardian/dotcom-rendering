@@ -3,9 +3,11 @@
  *
  * @returns The webpack public path to use
  */
-export const decidePublicPath = (): string => {
+export const decidePublicPath = (
+	hostname: string = window.location.hostname,
+): string => {
 	const isDev = process.env.NODE_ENV === 'development';
-	const isLocalHost = window.location.hostname === 'localhost';
+	const isLocalHost = hostname === 'localhost';
 	// Use relative path if running locally or in CI
 	return isDev || isLocalHost
 		? '/assets/'
