@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { breakpoints, from } from '@guardian/source/foundations';
 import preview from '../../.storybook/preview';
-import type { FECricketMatchStatsSummary } from '../frontend/feCricketMatchPage';
+import type { FECricketMatchStatsSummary } from '../frontend/feCricketMatchData';
 import { palette } from '../palette';
 import { CricketMiniMatchStats as CricketMiniMatchStatsComponent } from './CricketMiniMatchStats';
 

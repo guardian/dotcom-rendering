@@ -170,3 +170,21 @@ export type TreatType = {
 	 */
 	pageId?: string;
 };
+
+export type VariantId = 'A' | 'B';
+
+export type VariantMeta = {
+	id: VariantId;
+	meta: {
+		[key: string]: unknown;
+	};
+};
+
+export type EditorialTest = {
+	testUuid: string;
+	variantMeta: VariantMeta[];
+	startDate?: number;
+	expiryDate?: number;
+	frontsThisTestCanRunOn: string[];
+	hasManuallyEndedOnThisTrail: boolean;
+};
