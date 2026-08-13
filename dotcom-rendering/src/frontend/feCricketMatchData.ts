@@ -1,9 +1,5 @@
 import type { Output } from 'valibot';
 import { array, boolean, number, object, optional, string } from 'valibot';
-import type { EditionId } from '../lib/edition';
-import type { FooterType } from '../types/footer';
-import type { FENavType } from '../types/frontend';
-import type { FESportPageConfig } from './feFootballDataPage';
 
 const feCricketTeamSchema = object({
 	name: string(),
@@ -100,19 +96,6 @@ export const feCricketMatchSchema = object({
 });
 
 export type FECricketMatch = Output<typeof feCricketMatchSchema>;
-
-export type FECricketMatchPage = {
-	cricketMatch: FECricketMatch;
-	nav: FENavType;
-	editionId: EditionId;
-	guardianBaseURL: string;
-	config: FESportPageConfig;
-	pageFooter: FooterType;
-	isAdFreeUser: boolean;
-	canonicalUrl?: string;
-	contributionsServiceUrl: string;
-	pageId: string;
-};
 
 export const feCricketMatchStatsSummarySchema = object({
 	status: string(),

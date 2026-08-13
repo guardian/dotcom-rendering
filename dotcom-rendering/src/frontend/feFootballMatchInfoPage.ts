@@ -16,7 +16,18 @@ const feFootballPlayerEventSchema = object({
 	eventType: string(),
 });
 
+const feFootballPlayerEventEnhancedSchema = object({
+	eventId: string(),
+	eventType: string(),
+	normalTime: string(),
+	addedTime: string(),
+});
+
 export type FEFootballPlayerEvent = Output<typeof feFootballPlayerEventSchema>;
+
+export type FEFootballPlayerEventEnhanced = Output<
+	typeof feFootballPlayerEventEnhancedSchema
+>;
 
 const feFootballPlayerSchema = object({
 	id: string(),
@@ -27,6 +38,7 @@ const feFootballPlayerSchema = object({
 	timeOnPitch: string(),
 	shirtNumber: string(),
 	events: array(feFootballPlayerEventSchema),
+	enhancedEvents: array(feFootballPlayerEventEnhancedSchema),
 });
 
 export type FEFootballPlayer = Output<typeof feFootballPlayerSchema>;
