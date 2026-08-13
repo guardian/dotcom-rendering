@@ -22,6 +22,7 @@ import { ProductCardImage } from './ProductCardImage';
 
 export type InlineProductCardProps = {
 	format: ArticleFormat;
+	elementId: string;
 	brandName: string;
 	productName: string;
 	image?: ProductImage;
@@ -169,6 +170,7 @@ const CustomAttribute = ({ name, value }: ProductCustomAttribute) => (
 
 export const ProductCardInline = ({
 	format,
+	elementId,
 	brandName,
 	productName,
 	image,
@@ -194,6 +196,7 @@ export const ProductCardInline = ({
 			<div css={imageGridArea}>
 				<ProductCardImage
 					format={format}
+					elementId={elementId}
 					image={image}
 					url={productCtas[0]?.url}
 					xCustComponentId={'inline-image'}

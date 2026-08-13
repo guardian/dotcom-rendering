@@ -1,19 +1,18 @@
 import { css } from '@emotion/react';
 import {
-	article15,
-	articleBold15,
 	from,
-	headlineBold17,
 	space,
 	textSans14,
+	textSans15,
 	textSansBold14,
-	until,
+	textSansBold15,
+	visuallyHidden,
 } from '@guardian/source/foundations';
-import { Stack } from '@guardian/source/react-components';
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import type {
 	Batter,
 	Bowler,
+	CricketResult,
 	CricketTeam,
 	Extras,
 	FallOfWicket,
@@ -22,44 +21,139 @@ import type {
 } from '../cricketMatch';
 import { palette } from '../palette';
 
-const borderStyle = css`
-	border-top: 0.0625rem solid ${palette('--sport-list-border')};
+const visuallyHiddenStyles = css`
+	${visuallyHidden}
+`;
+
+const responsiveTextSans = css`
+	${textSans14}
+	${from.desktop} {
+		${textSans15}
+	}
+`;
+
+const responsiveTextSansBold = css`
+	${textSansBold14}
+	${from.desktop} {
+		${textSansBold15}
+	}
+`;
+
+const cardStyles = css`
+	border: 1px solid ${palette('--football-match-stat-border')};
+	border-radius: 6px;
+	overflow: hidden;
+	color: ${palette('--football-match-stat-text')};
+	background-color: ${palette('--football-match-info-background')};
+`;
+
+const cardSectionStyles = css`
+	padding: 0 ${space[3]}px ${space[3]}px;
+`;
+
+const sectionHeadingStyles = css`
+	border-bottom: 1px solid ${palette('--football-match-stat-border')};
+	color: ${palette('--football-match-stat-text')};
+	padding: ${space[2]}px 0 ${space[1]}px;
+	${responsiveTextSansBold}
+`;
+
+const inningsHeadingStyles = css`
+	padding: 6px ${space[3]}px;
+	background: ${palette('--cricket-scorecard-first-team-color')};
+	color: ${palette('--cricket-scorecard-innings-heading-text')};
+	${responsiveTextSansBold}
+`;
+
+const secondTeamInningsHeadingStyles = css`
+	background: ${palette('--cricket-scorecard-second-team-color')};
+`;
+
+const batIconWrapperStyles = css`
+	display: flex;
+	width: 24px;
+	justify-content: center;
+	align-items: center;
+	align-self: flex-start;
+	padding-top: 2px;
+	flex-shrink: 0;
+`;
+
+const batIconSvgStyles = css`
+	width: 28px;
+	height: 28px;
+	transform: rotate(-15deg);
+	flex-shrink: 0;
+`;
+
+const firstTeamBatFillStyles = css`
+	fill: ${palette('--cricket-scorecard-first-team-color')};
+`;
+
+const secondTeamBatFillStyles = css`
+	fill: ${palette('--cricket-scorecard-second-team-color')};
 `;
 
 const tableStyles = css`
 	width: 100%;
-	background: ${palette('--table-block-background')};
-	border-top: 0.0625rem solid ${palette('--sport-top-border')};
-	color: ${palette('--table-block-text')};
-	border-collapse: inherit;
-	${textSans14};
+	border-collapse: collapse;
+	${responsiveTextSans}
+`;
 
-	caption {
-		background: ${palette('--table-block-background')};
-		${textSansBold14}
-	}
+const cellBaseStyles = css`
+	padding: ${space[2]}px ${space[3]}px ${space[1]}px 0;
+	text-align: left;
+	vertical-align: middle;
+`;
 
-	tfoot,
-	thead > tr > th {
-		${textSansBold14}
-	}
+const tableHeadCellStyles = css`
+	${cellBaseStyles}
+	${responsiveTextSansBold}
+	color: ${palette('--football-match-stat-text')};
+`;
 
-	caption,
-	th,
-	td {
-		padding: ${space[3]}px ${space[3]}px ${space[2]}px ${space[3]}px;
-		text-align: left;
-	}
+const tableCellStyles = css`
+	${cellBaseStyles}
+	${responsiveTextSans}
+`;
 
-	tfoot > tr > *,
-	td {
-		${borderStyle}
+const tableRowHeaderStyles = css`
+	${cellBaseStyles}
+	display: flex;
+	align-items: center;
+	${responsiveTextSans}
+`;
+
+const batterNameTextStyles = css`
+	display: flex;
+	flex-direction: column;
+`;
+
+const tableRowStyles = css`
+	border-top: 1px solid ${palette('--football-match-stat-border')};
+`;
+
+const numericCellStyles = css`
+	white-space: nowrap;
+	text-align: left;
+`;
+
+const dimmedCellStyles = css`
+	opacity: 0.7;
+`;
+
+const footerRowStyles = css`
+	border-top: 1px solid ${palette('--football-match-stat-border')};
+	td,
+	th {
+		${responsiveTextSansBold}
 	}
 `;
 
 const hideUntilTabletStyle = css`
-	${until.tablet} {
-		display: none;
+	display: none;
+	${from.tablet} {
+		display: table-cell;
 	}
 `;
 
@@ -69,40 +163,120 @@ const hideFromTabletStyle = css`
 	}
 `;
 
-const cricketScorecardGridStyles = css`
+const extrasDashedRowStyles = css`
+	border-top: 1px dashed ${palette('--football-match-stat-border')};
+`;
+
+const fowOrderCellStyles = css`
+	width: ${space[5]}px;
+	text-align: right;
+`;
+
+const fowNameStyles = css`
+	min-width: 169px;
+`;
+
+const howOutStyles = css`
+	color: ${palette('--football-match-info-team-number')};
+`;
+
+const fixedColStyles = css`
+	flex-shrink: 0;
+`;
+
+const batColWidthStyles = css`
+	${fixedColStyles}
+	width: 42px;
+`;
+
+const bowlOColStyles = css`
+	${fixedColStyles}
+	width: 34px;
+`;
+
+const bowlStatColStyles = css`
+	${fixedColStyles}
+	width: 28px;
+`;
+
+const noFirstRowBorderStyles = css`
+	tbody tr:first-of-type {
+		border-top: none;
+	}
+`;
+
+const overallContainerStyles = css`
+	display: flex;
+	flex-direction: column;
+	gap: ${space[3]}px;
+`;
+
+const inningsContainerStyles = css`
+	display: flex;
+	flex-direction: column;
+	gap: ${space[3]}px;
+`;
+
+const lineupsHeadingStyles = css`
+	${sectionHeadingStyles}
+	margin: 0 ${space[3]}px;
+`;
+
+const lineupsGridStyles = css`
+	${cardSectionStyles}
 	display: grid;
-	grid-template-columns:
-		[centre-column-start] repeat(4, 1fr)
-		[centre-column-end];
-	column-gap: 10px;
-	${from.mobileLandscape} {
-		column-gap: 20px;
-	}
+	grid-template-columns: 1fr 1fr;
+	column-gap: ${space[5]}px;
+`;
 
-	${from.tablet} {
-		grid-template-columns:
-			[centre-column-start] repeat(12, 40px)
-			[centre-column-end];
-	}
+const teamContainerStyles = css`
+	padding: ${space[2]}px 0 2px 0;
+`;
 
-	${from.desktop} {
-		grid-template-columns:
-			[centre-column-start] repeat(8, 60px)
-			[centre-column-end];
+const awayTeamDividerStyles = css`
+	position: relative;
+	padding-left: ${space[5]}px;
+	&::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		background-color: ${palette('--football-match-stat-border')};
 	}
+`;
 
-	${from.leftCol} {
-		grid-template-columns:
-			[left-column-start] repeat(2, 60px)
-			[left-column-end centre-column-start] repeat(8, 60px)
-			[centre-column-end];
-	}
+const teamNameStyles = css`
+	${responsiveTextSansBold}
+	margin: 0 0 ${space[2]}px;
+`;
 
-	${from.wide} {
-		grid-template-columns:
-			[left-column-start] repeat(3, 60px)
-			[left-column-end centre-column-start] repeat(8, 60px)
-			[centre-column-end];
+const homeTeamNameStyles = css`
+	color: ${palette('--cricket-scorecard-first-team-lineup-color')};
+`;
+
+const awayTeamNameStyles = css`
+	color: ${palette('--cricket-scorecard-second-team-lineup-color')};
+`;
+
+const playerListStyles = css`
+	list-style: none;
+	margin: 0;
+	padding: 0;
+`;
+
+const playerItemStyles = css`
+	${responsiveTextSans}
+	color: ${palette('--football-match-stat-text')};
+`;
+
+const officialsListStyles = css`
+	list-style: none;
+	margin: 0;
+	padding: ${space[2]}px 0 2px 0;
+	li + li {
+		margin-top: ${space[2]}px;
 	}
 `;
 
@@ -113,7 +287,6 @@ const getExtrasDescription = ({
 	noBalls,
 	penalties,
 }: Extras): ReactNode => (
-	// Return HTML because we might be able to give these more accessible descriptions
 	<>
 		{byes > 0 && `${byes}b `}
 		{legByes > 0 && `${legByes}lb `}
@@ -123,123 +296,304 @@ const getExtrasDescription = ({
 	</>
 );
 
-const Bowling = ({ bowlers }: { bowlers: Bowler[] }) => (
-	<table css={tableStyles}>
-		<thead>
-			<tr>
-				<th>Bowler</th>
-				<th>O</th>
-				<th>M</th>
-				<th>R</th>
-				<th>W</th>
-			</tr>
-		</thead>
-		<tbody>
-			{bowlers.map((bowler) => (
-				<tr key={bowler.name}>
-					<th scope="row" css={borderStyle}>
-						{bowler.name}
-					</th>
-					<td>
-						{bowler.overs}.{bowler.balls % 6}
-					</td>
-					<td>{bowler.maidens}</td>
-					<td>{bowler.runs}</td>
-					<td>{bowler.wickets}</td>
-				</tr>
-			))}
-		</tbody>
-	</table>
+const SectionHeading = ({ children }: { children: ReactNode }) => (
+	<h3 css={sectionHeadingStyles}>{children}</h3>
+);
+
+const BatIcon = ({ isHomeTeam }: { isHomeTeam: boolean }) => (
+	<div css={batIconWrapperStyles}>
+		<svg
+			css={[
+				batIconSvgStyles,
+				isHomeTeam ? firstTeamBatFillStyles : secondTeamBatFillStyles,
+			]}
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 23 33"
+			aria-hidden="true"
+		>
+			<path d="M19.495 0.693989C19.878 0.0306164 20.7267 -0.196713 21.39 0.186208C22.0535 0.56923 22.2808 1.41786 21.8978 2.08127L16.6861 11.1068L18.0007 14.466C18.2217 15.0318 18.1727 15.6676 17.8692 16.1937L8.84804 31.8188C8.29575 32.7753 7.07192 33.1033 6.11534 32.551L16.1373 15.1938L14.7607 11.6713L14.4876 11.7121L6.61506 25.3491C6.45714 25.6225 6.10745 25.7162 5.83402 25.5584C5.56074 25.4005 5.46698 25.0507 5.62474 24.7773L13.0401 11.9321L11.0216 12.2394L1.99977 27.8657L7.11523 30.8191L6.11534 32.551L0.999874 29.5976C0.0433324 29.0453 -0.28428 27.8224 0.267901 26.8658L9.28878 11.2398C9.5546 10.7796 9.99141 10.4473 10.4985 10.3101L10.7204 10.2627L14.2842 9.71931L19.495 0.693989Z" />
+		</svg>
+	</div>
 );
 
 const Batting = ({
 	batters,
 	extras,
 	inningsTotals,
+	isHomeTeam,
+	showBatIcons,
 }: {
 	batters: Batter[];
 	extras: Extras;
 	inningsTotals: InningsTotals;
+	isHomeTeam: boolean;
+	showBatIcons: boolean;
 }) => (
-	<table
-		css={[
-			tableStyles,
-			css`
-				${until.leftCol} {
-					${borderStyle}
-				}
-			`,
-		]}
-	>
+	<table css={tableStyles}>
 		<thead>
 			<tr>
-				<th>Batter</th>
-				<th css={hideUntilTabletStyle}></th>
-				<th>Runs</th>
-				<th>Balls</th>
-				<th css={hideUntilTabletStyle}>4s</th>
-				<th css={hideUntilTabletStyle}>6s</th>
+				<th css={tableHeadCellStyles}>Batter</th>
+				<th css={[tableHeadCellStyles, hideUntilTabletStyle]}>
+					<span css={visuallyHiddenStyles}>How dismissed</span>
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						batColWidthStyles,
+					]}
+				>
+					Runs
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						batColWidthStyles,
+					]}
+				>
+					Balls
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						hideUntilTabletStyle,
+					]}
+				>
+					4s
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						hideUntilTabletStyle,
+					]}
+				>
+					6s
+				</th>
 			</tr>
 		</thead>
 		<tbody>
-			{batters.map((batter) => (
-				<tr key={batter.name}>
-					<th scope="row" css={borderStyle}>
-						<span
-							css={css`
-								${textSansBold14}
-							`}
+			{batters.map((batter) => {
+				const isAtCrease = showBatIcons && !batter.out;
+				return (
+					<tr key={batter.name} css={tableRowStyles}>
+						<th scope="row" css={tableRowHeaderStyles}>
+							{isAtCrease && (
+								<>
+									<BatIcon isHomeTeam={isHomeTeam} />
+									<span css={visuallyHiddenStyles}>
+										{batter.onStrike
+											? '(on strike)'
+											: '(at crease)'}
+									</span>
+								</>
+							)}
+							<div css={batterNameTextStyles}>
+								{batter.name}
+								<div css={[howOutStyles, hideFromTabletStyle]}>
+									{batter.howOut}
+								</div>
+							</div>
+						</th>
+						<td
+							css={[
+								tableCellStyles,
+								howOutStyles,
+								hideUntilTabletStyle,
+							]}
 						>
-							{batter.name}
-						</span>
-						<div css={hideFromTabletStyle}>{batter.howOut}</div>
-					</th>
-					<td css={hideUntilTabletStyle}>{batter.howOut}</td>
-					<td>{batter.runs}</td>
-					<td>{batter.ballsFaced}</td>
-					<td css={hideUntilTabletStyle}>{batter.fours}</td>
-					<td css={hideUntilTabletStyle}>{batter.sixes}</td>
-				</tr>
-			))}
-			<tr
-				css={css`
-					th,
-					td {
-						border-top: 0.0625rem dashed
-							${palette('--cricket-scorecard-divider')};
-					}
-				`}
-			>
-				<th
-					scope="row"
-					css={css`
-						${textSansBold14}
-					`}
-				>
-					Extras
+							{batter.howOut}
+						</td>
+						<td
+							css={[
+								tableCellStyles,
+								numericCellStyles,
+								batColWidthStyles,
+							]}
+						>
+							{batter.runs}
+						</td>
+						<td
+							css={[
+								tableCellStyles,
+								numericCellStyles,
+								batColWidthStyles,
+							]}
+						>
+							{batter.ballsFaced}
+						</td>
+						<td
+							css={[
+								tableCellStyles,
+								numericCellStyles,
+								hideUntilTabletStyle,
+							]}
+						>
+							{batter.fours}
+						</td>
+						<td
+							css={[
+								tableCellStyles,
+								numericCellStyles,
+								hideUntilTabletStyle,
+							]}
+						>
+							{batter.sixes}
+						</td>
+					</tr>
+				);
+			})}
+			<tr css={extrasDashedRowStyles}>
+				<th scope="row" css={tableRowHeaderStyles}>
+					<div css={batterNameTextStyles}>
+						Extras
+						<div css={[howOutStyles, hideFromTabletStyle]}>
+							{getExtrasDescription(extras)}
+						</div>
+					</div>
 				</th>
-				<td css={hideUntilTabletStyle}>
+				<td
+					css={[
+						tableCellStyles,
+						dimmedCellStyles,
+						hideUntilTabletStyle,
+					]}
+				>
 					{getExtrasDescription(extras)}
 				</td>
-				<td css={hideUntilTabletStyle} colSpan={4}>
+				<td css={[tableCellStyles, batColWidthStyles]}>
 					{inningsTotals.extras}
 				</td>
-				<td css={hideFromTabletStyle} colSpan={2}>
-					{inningsTotals.extras}
-				</td>
+				<td css={[batColWidthStyles, hideFromTabletStyle]}></td>
 			</tr>
 		</tbody>
 		<tfoot>
-			<tr>
-				<th scope="row">Total</th>
-				<td css={hideUntilTabletStyle}>for {inningsTotals.wickets}</td>
-				<td>{inningsTotals.runs}</td>
-				<td colSpan={3} css={hideUntilTabletStyle}>
+			<tr css={footerRowStyles}>
+				<th scope="row" css={tableRowHeaderStyles}>
+					<div css={batterNameTextStyles}>
+						Total
+						<div css={[howOutStyles, hideFromTabletStyle]}>
+							for {inningsTotals.wickets}
+						</div>
+					</div>
+				</th>
+				<td
+					css={[
+						tableCellStyles,
+						dimmedCellStyles,
+						hideUntilTabletStyle,
+					]}
+				>
+					for {inningsTotals.wickets}
+				</td>
+				<td css={[tableCellStyles, batColWidthStyles]}>
+					{inningsTotals.runs}
+				</td>
+				<td css={[batColWidthStyles, hideFromTabletStyle]}></td>
+				<td
+					css={[
+						tableCellStyles,
+						dimmedCellStyles,
+						hideUntilTabletStyle,
+					]}
+				>
 					{inningsTotals.overs} overs
 				</td>
-				<td css={hideFromTabletStyle}></td>
 			</tr>
 		</tfoot>
+	</table>
+);
+
+const Bowling = ({ bowlers }: { bowlers: Bowler[] }) => (
+	<table css={tableStyles}>
+		<thead>
+			<tr>
+				<th css={tableHeadCellStyles}>Bowler</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						bowlOColStyles,
+					]}
+				>
+					O
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						bowlStatColStyles,
+					]}
+				>
+					M
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						bowlStatColStyles,
+					]}
+				>
+					R
+				</th>
+				<th
+					css={[
+						tableHeadCellStyles,
+						numericCellStyles,
+						bowlStatColStyles,
+					]}
+				>
+					W
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{bowlers.map((bowler) => (
+				<tr key={bowler.name} css={tableRowStyles}>
+					<th scope="row" css={tableRowHeaderStyles}>
+						{bowler.name}
+					</th>
+					<td
+						css={[
+							tableCellStyles,
+							numericCellStyles,
+							bowlOColStyles,
+						]}
+					>
+						{bowler.overs}.{bowler.balls % 6}
+					</td>
+					<td
+						css={[
+							tableCellStyles,
+							numericCellStyles,
+							bowlStatColStyles,
+						]}
+					>
+						{bowler.maidens}
+					</td>
+					<td
+						css={[
+							tableCellStyles,
+							numericCellStyles,
+							bowlStatColStyles,
+						]}
+					>
+						{bowler.runs}
+					</td>
+					<td
+						css={[
+							tableCellStyles,
+							numericCellStyles,
+							bowlStatColStyles,
+						]}
+					>
+						{bowler.wickets}
+					</td>
+				</tr>
+			))}
+		</tbody>
 	</table>
 );
 
@@ -248,24 +602,63 @@ const FallOfWickets = ({
 }: {
 	fallOfWickets: FallOfWicket[];
 }) => (
-	<table css={tableStyles}>
-		<thead>
-			<tr>
-				<th colSpan={3}>Fall of wickets</th>
-			</tr>
-		</thead>
-		<tbody>
-			{fallOfWickets.map((fallOfWicket) => (
-				<tr key={fallOfWicket.order}>
-					<td>{fallOfWicket.order}</td>
-					<th css={borderStyle} scope="row">
-						{fallOfWicket.name}
-					</th>
-					<td>{fallOfWicket.runs}</td>
-				</tr>
+	<>
+		<SectionHeading>Fall of wickets</SectionHeading>
+		<table css={[tableStyles, noFirstRowBorderStyles]}>
+			<tbody>
+				{fallOfWickets.map((fow) => (
+					<tr key={fow.order} css={tableRowStyles}>
+						<td
+							css={[
+								tableCellStyles,
+								dimmedCellStyles,
+								fowOrderCellStyles,
+							]}
+						>
+							{fow.order}
+						</td>
+						<th scope="row" css={[tableCellStyles, fowNameStyles]}>
+							{fow.name}
+						</th>
+						<td css={tableCellStyles}>{fow.runs}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</>
+);
+
+const LineupTeam = ({
+	team,
+	teamType,
+}: {
+	team: CricketTeam;
+	teamType: 'homeTeam' | 'awayTeam';
+}) => (
+	<div
+		css={[
+			teamContainerStyles,
+			teamType === 'awayTeam' ? awayTeamDividerStyles : undefined,
+		]}
+	>
+		<h3
+			css={[
+				teamNameStyles,
+				teamType === 'homeTeam'
+					? homeTeamNameStyles
+					: awayTeamNameStyles,
+			]}
+		>
+			{team.name}
+		</h3>
+		<ul css={playerListStyles}>
+			{team.lineup.map((player) => (
+				<li key={player} css={playerItemStyles}>
+					{player}
+				</li>
 			))}
-		</tbody>
-	</table>
+		</ul>
+	</div>
 );
 
 type Props = {
@@ -273,77 +666,78 @@ type Props = {
 	officials: string[];
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
+	matchResult?: CricketResult;
 };
 
-export const CricketScorecard = ({
+export const CricketScorecardNew = ({
 	allInnings,
 	officials,
 	homeTeam,
 	awayTeam,
+	matchResult,
 }: Props) => (
-	<Stack space={9}>
-		{allInnings.map((innings) => (
-			<section css={cricketScorecardGridStyles} key={innings.description}>
-				<h2
-					css={css`
-						${textSansBold14}
-						grid-column: centre-column-start / centre-column-end;
-						border-top: 1px solid ${palette('--sport-top-border')};
-						padding: ${space[2]}px;
-						background-color: ${palette('--sport-list-background')};
+	<div css={overallContainerStyles}>
+		{allInnings
+			.sort((a, b) => b.order - a.order) // reverse order so that the most recent innings is displayed first
+			.map((innings, index) => {
+				const isHomeTeam = innings.battingTeam === homeTeam.name;
+				const isCurrentInnings =
+					!matchResult && index === allInnings.length - 1;
+				return (
+					<section
+						key={innings.description}
+						css={inningsContainerStyles}
+					>
+						<div css={cardStyles}>
+							<h2
+								css={[
+									inningsHeadingStyles,
+									!isHomeTeam &&
+										secondTeamInningsHeadingStyles,
+								]}
+							>
+								{innings.description}
+							</h2>
+						</div>
+						<div css={[cardStyles, cardSectionStyles]}>
+							<Batting
+								batters={innings.batters}
+								extras={innings.extras}
+								inningsTotals={innings.inningsTotals}
+								isHomeTeam={isHomeTeam}
+								showBatIcons={isCurrentInnings}
+							/>
+						</div>
+						<div css={[cardStyles, cardSectionStyles]}>
+							<Bowling bowlers={innings.bowlers} />
+						</div>
+						<div css={[cardStyles, cardSectionStyles]}>
+							<FallOfWickets
+								fallOfWickets={innings.fallOfWickets}
+							/>
+						</div>
+					</section>
+				);
+			})}
 
-						${from.leftCol} {
-							border-top-color: ${palette('--sport-list-border')};
-							background-color: transparent;
-							margin-top: 0;
-							padding: ${space[1]}px 0 0;
-							grid-column: left-column-start / left-column-end;
-							${headlineBold17}
-						}
-					`}
-				>
-					{innings.description}
-				</h2>
-				<Stack
-					space={9}
-					cssOverrides={css`
-						grid-column: centre-column-start / centre-column-end;
-					`}
-				>
-					<Batting
-						batters={innings.batters}
-						extras={innings.extras}
-						inningsTotals={innings.inningsTotals}
-					/>
-					<Bowling bowlers={innings.bowlers} />
-					<FallOfWickets fallOfWickets={innings.fallOfWickets} />{' '}
-				</Stack>
-			</section>
-		))}
-		<div css={cricketScorecardGridStyles}>
-			<dl
-				css={css`
-					grid-column: centre-column-start / centre-column-end;
+		<section css={cardStyles}>
+			<h2 css={lineupsHeadingStyles}>Lineups</h2>
 
-					dt {
-						${articleBold15}
-					}
+			<div css={lineupsGridStyles}>
+				<LineupTeam team={homeTeam} teamType="homeTeam" />
+				<LineupTeam team={awayTeam} teamType="awayTeam" />
+			</div>
 
-					dd {
-						${article15}
-						margin-inline-start: ${space[10]}px;
-					}
-				`}
-			>
-				<dt>Umpires</dt>
-				<dd>{officials.join(', ')}</dd>
-
-				<dt>{homeTeam.name}</dt>
-				<dd>{homeTeam.lineup.join(', ')}</dd>
-
-				<dt>{awayTeam.name}</dt>
-				<dd>{awayTeam.lineup.join(', ')}</dd>
-			</dl>
-		</div>
-	</Stack>
+			<div css={cardSectionStyles}>
+				<SectionHeading>Umpires</SectionHeading>
+				<ul css={officialsListStyles}>
+					{officials.map((official) => (
+						<li key={official} css={playerItemStyles}>
+							{official}
+						</li>
+					))}
+				</ul>
+			</div>
+		</section>
+	</div>
 );
