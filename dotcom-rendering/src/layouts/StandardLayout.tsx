@@ -131,12 +131,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={sourcePalette.labs[400]}
+						backgroundColour={sourcePalette.labs[100]}
 						borderColour={sourcePalette.neutral[60]}
 						sectionId="labs-header"
 						element="aside"
 					>
-						<LabsHeader editionId={editionId} />
+						<LabsHeader
+							editionId={editionId}
+							textColour={sourcePalette.neutral[100]}
+							backgroundColour={sourcePalette.labs[100]}
+						/>
 					</Section>
 				</Stuck>
 			)}
