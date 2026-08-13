@@ -9,6 +9,9 @@ import { Analysis as AnalysisStandardNewsFixture } from '../../fixtures/generate
 import { Comment as CommentStandardOpinionFixture } from '../../fixtures/generated/fe-articles/Comment';
 import { Feature as FeatureStandardCultureFixture } from '../../fixtures/generated/fe-articles/Feature';
 import { Labs as PhotoEssayImmersiveLabsFixture } from '../../fixtures/generated/fe-articles/Labs';
+import { LabsImmersiveGlobalX as LabsImmersiveGlobalXFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveGlobalX';
+import { LabsImmersiveParrtjima as LabsImmersiveParrtjimaFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveParrtjima';
+import { LabsImmersiveVictorianWater as LabsImmersiveVictorianWaterFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveVictorianWater';
 import { Live as LiveBlogStandardNewsFixture } from '../../fixtures/generated/fe-articles/Live';
 import { LiveBlogSingleContributor as LiveBlogSingleContributorFixture } from '../../fixtures/generated/fe-articles/LiveBlogSingleContributor';
 import { NewsletterSignup as NewsletterSignupStandardSportFixture } from '../../fixtures/generated/fe-articles/NewsletterSignup';
@@ -263,6 +266,24 @@ const photoEssayImmersiveLabsPortraitArticle = enhanceArticleType(
 	'Web',
 );
 
+/**
+ * Opts an article into the new grid layout regardless of the 0% production
+ * rollout.
+ */
+const enableLabsImmersiveGridTest = (article: Article): Article => ({
+	...article,
+	frontendData: {
+		...article.frontendData,
+		config: {
+			...article.frontendData.config,
+			serverSideABTests: {
+				...article.frontendData.config.serverSideABTests,
+				[LABS_IMMERSIVE_GRID_AB_TEST]: 'enable',
+			},
+		},
+	},
+});
+
 const labsImmersiveArticle = ({
 	orientation,
 	design,
@@ -274,26 +295,17 @@ const labsImmersiveArticle = ({
 		orientation === 'portrait'
 			? photoEssayImmersiveLabsPortraitArticle
 			: photoEssayImmersiveLabsArticle;
-	return {
-		...base,
-		design,
-		frontendData: {
-			...base.frontendData,
-			config: {
-				...base.frontendData.config,
-				// Opt these stories into the new layout regardless of the
-				// 0% production rollout, so they keep demonstrating it.
-				serverSideABTests: {
-					...base.frontendData.config.serverSideABTests,
-					[LABS_IMMERSIVE_GRID_AB_TEST]: 'enable',
-				},
-			},
-		},
-	};
+	return enableLabsImmersiveGridTest({ ...base, design });
 };
 
 const immersiveLabsParameters = {
 	...webParameters,
+};
+
+/** Snapshot real Labs immersive articles at mobile in addition to the default width, to catch small-breakpoint-only regressions */
+const immersiveLabsMobileParameters = {
+	...immersiveLabsParameters,
+	chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
 };
 
 export const WebPhotoEssayImmersiveLabsLight: Story = {
@@ -378,6 +390,36 @@ export const WebFeatureImmersiveLabsPortraitDark: Story = {
 		...immersiveLabsParameters,
 		...webDarkParameters,
 	},
+};
+
+/**
+ * Real Labs immersive articles tests.
+ */
+export const WebImmersiveLabsRealParrtjima: Story = {
+	args: {
+		article: enableLabsImmersiveGridTest(
+			enhanceArticleType(LabsImmersiveParrtjimaFixture, 'Web'),
+		),
+	},
+	parameters: immersiveLabsMobileParameters,
+};
+
+export const WebImmersiveLabsRealVictorianWater: Story = {
+	args: {
+		article: enableLabsImmersiveGridTest(
+			enhanceArticleType(LabsImmersiveVictorianWaterFixture, 'Web'),
+		),
+	},
+	parameters: immersiveLabsMobileParameters,
+};
+
+export const WebImmersiveLabsRealGlobalX: Story = {
+	args: {
+		article: enableLabsImmersiveGridTest(
+			enhanceArticleType(LabsImmersiveGlobalXFixture, 'Web'),
+		),
+	},
+	parameters: immersiveLabsMobileParameters,
 };
 
 const standardStandardLabsWebFixture: Article = {

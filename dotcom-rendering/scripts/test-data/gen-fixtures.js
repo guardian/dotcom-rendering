@@ -112,6 +112,18 @@ const articles = [
 		url: 'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 	},
 	{
+		name: 'LabsImmersiveParrtjima',
+		url: 'https://www.theguardian.com/parrtjima-2025-where-ancient-stories-come-to-light/2025/jan/15/ancient-stories-in-a-new-light-what-to-expect-as-parrtjima-returns-to-the-red-centre',
+	},
+	{
+		name: 'LabsImmersiveVictorianWater',
+		url: 'https://www.theguardian.com/victorian-government-make-every-drop-count/2026/mar/06/small-changes-big-wins-simple-ways-to-save-water-at-home',
+	},
+	{
+		name: 'LabsImmersiveGlobalX',
+		url: 'https://www.theguardian.com/global-x-invest-in-innovation/2026/apr/02/rare-earth-the-commodities-powering-our-ai-future',
+	},
+	{
 		name: 'NumberedList',
 		url: 'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 	},
