@@ -1,5 +1,6 @@
 import type { CountryCode } from '@guardian/libs';
 import { isObject, isOneOf, isString } from '@guardian/libs';
+import type { JSX } from 'react';
 import type { EditionId } from '../../lib/edition';
 import type { TagType } from '../../types/tag';
 import type { QueryParams } from '../AuthProviderButtons/types';

@@ -5,6 +5,7 @@ import {
 	headlineBold17,
 	space,
 } from '@guardian/source/foundations';
+import type { JSX } from 'react';
 import type { BannerData } from '../BannerProps';
 import { CustomArticleCountCopy } from './CustomArticleCountCopy';
 import { DesignableBannerArticleCountOptOut } from './DesignableBannerArticleCountOptOut';

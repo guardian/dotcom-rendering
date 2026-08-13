@@ -5,6 +5,7 @@ import {
 	space,
 	textSans34,
 } from '@guardian/source/foundations';
+import type { JSX } from 'react';
 import { Standard } from '../../fixtures/generated/fe-articles/Standard';
 import { Pillar } from '../lib/articleFormat';
 import { editionList } from '../lib/edition';

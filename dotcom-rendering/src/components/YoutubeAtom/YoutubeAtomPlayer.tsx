@@ -3,6 +3,7 @@ import { buildImaAdTagUrl } from '@guardian/commercial-core';
 import type { ConsentState } from '@guardian/consent-manager';
 import { log } from '@guardian/libs';
 import {
+	type JSX,
 	useCallback,
 	useEffect,
 	useLayoutEffect,
@@ -411,7 +412,7 @@ export const YoutubeAtomPlayer = ({
 	 * Provides mutable persistent state for the player across renders
 	 * Does not cause re-renders on update
 	 */
-	const player = useRef<YouTubePlayer>();
+	const player = useRef<YouTubePlayer>(undefined);
 	const sendOphanTrackingEvent = useCallback(
 		(event: VideoEventKey) => {
 			for (const eventEmitter of eventEmitters) {
@@ -440,7 +441,7 @@ export const YoutubeAtomPlayer = ({
 		Record<string, (event: CustomEventInit<CustomPlayEventDetail>) => void>
 	>({});
 
-	const adsManager = useRef<google.ima.AdsManager>();
+	const adsManager = useRef<google.ima.AdsManager>(undefined);
 
 	const id = `youtube-player-${uniqueId}`;
 

@@ -10,6 +10,7 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import type { JSX } from 'react';
 import { enrichSupportUrl, getChoiceCardUrl } from '../../../lib/tracking';
 import { ThreeTierChoiceCards } from '../../../shared/ThreeTierChoiceCards';
 import type { BannerData } from '../BannerProps';

@@ -29,91 +29,91 @@ interface PerformanceEntry {
 	renderTime: number;
 }
 
-declare namespace JSX {
-	interface IntrinsicElements {
-		/** Island {@link ./src/components/Island.tsx} */
-		'gu-island': import('./src/components/Island.tsx').GuIsland;
-	}
-
-	interface IntrinsicAttributes {
-		/**
-		 * **Rendered Components – Ophan**
-		 *
-		 * The Ophan client automatically tracks components on the page
-		 * that have the `data-component` attribute.
-		 * To avoid race conditions, it is best to add this attribute only
-		 * to server-rendered HTML.
-		 *
-		 * Add `data-component="component-name"` to the element you want
-		 * to track.
-		 *
-		 * The page views table will then contain `component-name` when the
-		 * element is present on the page.
-		 */
-		'data-component'?: string;
-		/**
-		 * **Component Clicks – Ophan**
-		 *
-		 * The Ophan client automatically tracks click interactions
-		 * on components that have the `data-link-name` attribute.
-		 * To avoid race conditions, it is best to add this attribute only
-		 * to server-rendered HTML.
-		 *
-		 * Some elements are not trackable, e.g. `div`, `span`.
-		 * Refer to the Ophan documentation for more information.
-		 * https://github.com/guardian/ophan/blob/0f365862682cd97cc50cf381299e0f4875e2996c/tracker-js/src/click-path-capture.js
-		 *
-		 * Add `data-component="component-name"` to the element you want
-		 * to track. Then `add data-link-name="link-name"` to the anchor for which
-		 * clicks will be tracked.
-		 *
-		 * The page views table will then contain `link-name` when the
-		 * link is clicked.
-		 */
-		'data-link-name'?: string;
-		/**
-		 * Ignore a DOM element in Chromatic builds with `data-chromatic="ignore"`.
-		 *
-		 * https://www.chromatic.com/docs/ignoring-elements/#ignore-dom-elements
-		 *
-		 * Note that if the dimensions of the ignored element
-		 * change, Chromatic will still capture the incoming changes.
-		 */
-		'data-chromatic'?: 'ignore';
-
-		/**
-		 * **Spacefinder Role**
-		 *
-		 * [Spacefinder](https://github.com/guardian/commercial/blob/7866c914573cb6352b4076683b7906b87a70da72/docs/spacefinder/readme.md)
-		 * is a part of the commercial bundle that is used to find positions
-		 * for ad slots within articles.
-		 *
-		 * Spacefinder has rules specified for elements with this data attribute
-		 * that it will use to find positions for ads.
-		 */
-		'data-spacefinder-role'?:
-			| 'nested'
-			| 'immersive'
-			| 'fullWidth'
-			| 'inline'
-			| 'richLink'
-			| 'thumbnail';
-
-		/**
-		 * **Spacefinder Type**
-		 *
-		 * [Spacefinder](https://github.com/guardian/commercial/blob/7866c914573cb6352b4076683b7906b87a70da72/docs/spacefinder/readme.md)
-		 * is a part of the commercial bundle that is used to find positions
-		 * for ad slots within articles.
-		 *
-		 * Spacefinder has rules specified for elements with this data attribute
-		 * that it will use to find positions for ads.
-		 */
-		'data-spacefinder-type'?: import('./src/types/content').FEElement['_type'];
-	}
-}
-
 declare namespace React {
+	namespace JSX {
+		interface IntrinsicElements {
+			/** Island {@link ./src/components/Island.tsx} */
+			'gu-island': import('./src/components/Island.tsx').GuIsland;
+		}
+
+		interface IntrinsicAttributes {
+			/**
+			 * **Rendered Components – Ophan**
+			 *
+			 * The Ophan client automatically tracks components on the page
+			 * that have the `data-component` attribute.
+			 * To avoid race conditions, it is best to add this attribute only
+			 * to server-rendered HTML.
+			 *
+			 * Add `data-component="component-name"` to the element you want
+			 * to track.
+			 *
+			 * The page views table will then contain `component-name` when the
+			 * element is present on the page.
+			 */
+			'data-component'?: string;
+			/**
+			 * **Component Clicks – Ophan**
+			 *
+			 * The Ophan client automatically tracks click interactions
+			 * on components that have the `data-link-name` attribute.
+			 * To avoid race conditions, it is best to add this attribute only
+			 * to server-rendered HTML.
+			 *
+			 * Some elements are not trackable, e.g. `div`, `span`.
+			 * Refer to the Ophan documentation for more information.
+			 * https://github.com/guardian/ophan/blob/0f365862682cd97cc50cf381299e0f4875e2996c/tracker-js/src/click-path-capture.js
+			 *
+			 * Add `data-component="component-name"` to the element you want
+			 * to track. Then `add data-link-name="link-name"` to the anchor for which
+			 * clicks will be tracked.
+			 *
+			 * The page views table will then contain `link-name` when the
+			 * link is clicked.
+			 */
+			'data-link-name'?: string;
+			/**
+			 * Ignore a DOM element in Chromatic builds with `data-chromatic="ignore"`.
+			 *
+			 * https://www.chromatic.com/docs/ignoring-elements/#ignore-dom-elements
+			 *
+			 * Note that if the dimensions of the ignored element
+			 * change, Chromatic will still capture the incoming changes.
+			 */
+			'data-chromatic'?: 'ignore';
+
+			/**
+			 * **Spacefinder Role**
+			 *
+			 * [Spacefinder](https://github.com/guardian/commercial/blob/7866c914573cb6352b4076683b7906b87a70da72/docs/spacefinder/readme.md)
+			 * is a part of the commercial bundle that is used to find positions
+			 * for ad slots within articles.
+			 *
+			 * Spacefinder has rules specified for elements with this data attribute
+			 * that it will use to find positions for ads.
+			 */
+			'data-spacefinder-role'?:
+				| 'nested'
+				| 'immersive'
+				| 'fullWidth'
+				| 'inline'
+				| 'richLink'
+				| 'thumbnail';
+
+			/**
+			 * **Spacefinder Type**
+			 *
+			 * [Spacefinder](https://github.com/guardian/commercial/blob/7866c914573cb6352b4076683b7906b87a70da72/docs/spacefinder/readme.md)
+			 * is a part of the commercial bundle that is used to find positions
+			 * for ad slots within articles.
+			 *
+			 * Spacefinder has rules specified for elements with this data attribute
+			 * that it will use to find positions for ads.
+			 */
+			'data-spacefinder-type'?: import('./src/types/content').FEElement['_type'];
+		}
+	}
+
 	interface CSSProperties {
 		// Allow custom properties to be passed to the style prop
 		[key: `--${string}`]: string | undefined;

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { type JSX, useContext } from 'react';
 import type { ScheduleOptions, SchedulePriority } from '../lib/scheduler';
 import { IslandContext, IslandProvider } from './IslandContext';
 

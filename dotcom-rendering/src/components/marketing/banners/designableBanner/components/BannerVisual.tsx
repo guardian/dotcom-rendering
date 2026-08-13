@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { between, from, space } from '@guardian/source/foundations';
 import type { Image as SupportImage } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { JSX } from 'react';
 import type { ImageAttrs } from '../../../shared/ResponsiveImage';
 import { ResponsiveImage } from '../../../shared/ResponsiveImage';
 import type { BannerData } from '../BannerProps';

@@ -1,5 +1,5 @@
 import type { ConsentState } from '@guardian/consent-manager';
-import { useCallback, useState } from 'react';
+import { type JSX, useCallback, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { useIsInView } from '../../lib/useIsInView';
 import type { AdTargeting } from '../../types/commercial';

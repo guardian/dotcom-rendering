@@ -5,6 +5,7 @@
  */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { JSX } from 'react';
 
 type BannerTextStyleableAreas =
 	| 'container'

@@ -185,7 +185,7 @@ export type NewsletterSignupFormState = {
 	isValidationError: boolean;
 
 	/** Ref to pass to the `<ReactGoogleRecaptcha>` widget. */
-	recaptchaRef: RefObject<ReactGoogleRecaptcha>;
+	recaptchaRef: RefObject<ReactGoogleRecaptcha | null>;
 	/** Site key for the reCAPTCHA widget — `undefined` until resolved. */
 	captchaSiteKey: string | undefined;
 	/** Pass to `ReactGoogleRecaptcha`'s `onChange` prop. */

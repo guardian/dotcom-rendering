@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { JSX } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import {
 	analysisStoryExpanded,

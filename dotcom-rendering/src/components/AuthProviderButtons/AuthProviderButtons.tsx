@@ -28,7 +28,7 @@ type AuthProviderButtonsProps = {
 
 type AuthProviderButtonProps = {
 	label: string;
-	icon: React.ReactElement;
+	icon: React.ReactElement<any>;
 	socialProvider: string;
 	queryParams: QueryParams;
 	onClick?: (provider: AuthButtonProvider) => void;
@@ -120,7 +120,7 @@ const authProviderButtonLabel = (label: string) => {
 	return `Sign in with ${capitalisedLabel}`;
 };
 
-const socialButtonIcon = (socialProvider: string): React.ReactElement => {
+const socialButtonIcon = (socialProvider: string): React.ReactElement<any> => {
 	switch (socialProvider) {
 		case 'google':
 			return <SvgGoogleBrand />;

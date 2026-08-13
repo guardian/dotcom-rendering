@@ -6,7 +6,7 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import { useEffect, useRef } from 'react';
+import { type JSX, useEffect, useRef } from 'react';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
 import { BannerArticleCount } from './components/BannerArticleCount';

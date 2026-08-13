@@ -100,8 +100,8 @@ const CarouselColours = ({
 	children,
 }: {
 	props: { format: ArticleFormat } | { palette: DCRContainerPalette };
-	children: React.ReactElement;
-}): React.ReactElement => {
+	children: React.ReactElement<any>;
+}): React.ReactElement<any> => {
 	if ('palette' in props) {
 		return (
 			<ContainerOverrides containerPalette={props.palette}>

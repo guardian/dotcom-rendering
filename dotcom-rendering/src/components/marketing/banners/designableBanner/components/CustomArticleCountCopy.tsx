@@ -10,6 +10,7 @@ import {
 	headlineBold17,
 	space,
 } from '@guardian/source/foundations';
+import type { JSX } from 'react';
 import type { BannerTemplateSettings } from '../settings';
 import { DesignableBannerArticleCountOptOut } from './DesignableBannerArticleCountOptOut';
 

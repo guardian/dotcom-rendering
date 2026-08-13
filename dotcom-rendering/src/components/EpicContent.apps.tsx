@@ -21,7 +21,7 @@ export function EpicContent({
 	body,
 	firstButton,
 	secondButton,
-}: EpicProps): React.ReactElement | null {
+}: EpicProps): React.ReactElement<any> | null {
 	const [impressionSeen, setImpressionSeenRef] = useIsInView({
 		debounce: true,
 	});

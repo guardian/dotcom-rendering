@@ -5,6 +5,7 @@ import {
 	space,
 	textSansBold12,
 } from '@guardian/source/foundations';
+import type { JSX } from 'react';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
 import type { ArticleMedia } from '../../../types/mainMedia';
 import { CardPill } from '../../CardPill';

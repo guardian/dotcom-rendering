@@ -16,7 +16,7 @@ const fetchEmail: () => Promise<string | null> = () =>
 // ---------------------------------------
 export const BrazeEpic_Default_Component = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeEndOfArticleComponent>();
 
@@ -95,7 +95,7 @@ BrazeEpic_Default_Component.storyName = 'Default Epic';
 // ---------------------------------------
 export const BrazeEpic_DefaultWithReminder_Component = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeEndOfArticleComponent>();
 
@@ -175,7 +175,7 @@ BrazeEpic_DefaultWithReminder_Component.storyName =
 // ---------------------------------------
 export const BrazeEpic_SpecialHeader_Component = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeEndOfArticleComponent>();
 
@@ -265,7 +265,7 @@ BrazeEpic_SpecialHeader_Component.storyName = 'Epic with special header';
 // ---------------------------------------
 export const BrazeEpicNewsletter_Generic_Component = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeEndOfArticleComponent>();
 
@@ -336,7 +336,7 @@ BrazeEpicNewsletter_Generic_Component.storyName = 'Newsletter - Generic';
 // ---------------------------------------
 export const BrazeNewsletterEpic_UK_MorningBriefing_Component = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeEndOfArticleComponent>();
 
@@ -403,7 +403,7 @@ BrazeNewsletterEpic_UK_MorningBriefing_Component.storyName =
 // ---------------------------------------
 export const BrazeEpicNewsletter_US_FirstThing_Component = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeEndOfArticleComponent>();
 
@@ -470,7 +470,7 @@ BrazeEpicNewsletter_US_FirstThing_Component.storyName =
 // ---------------------------------------
 export const BrazeEpicNewsletter_AUS_MorningMail_Component = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeEndOfArticleComponent>();
 
@@ -537,7 +537,7 @@ BrazeEpicNewsletter_AUS_MorningMail_Component.storyName =
 // ---------------------------------------
 export const BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeEndOfArticleComponent>();
 
@@ -604,7 +604,7 @@ BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component.storyName =
 // ---------------------------------------
 export const BrazeEpicNewsletter_DownToEarth_Component = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeEndOfArticleComponent>();
 
@@ -671,7 +671,7 @@ BrazeEpicNewsletter_DownToEarth_Component.storyName =
 // ---------------------------------------
 export const BrazeEpicNewsletter_TheGuide_Component = (
 	args: BrazeMessageProps & { componentName: string },
-): ReactElement => {
+): ReactElement<any> => {
 	const [BrazeMessage, setBrazeMessage] =
 		useState<typeof BrazeEndOfArticleComponent>();
 

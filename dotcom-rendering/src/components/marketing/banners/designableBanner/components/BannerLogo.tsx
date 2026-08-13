@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
 import { SvgGuardianLogo } from '@guardian/source/react-components';
 import { hexColourToString } from '@guardian/support-dotcom-components';
+import type { JSX } from 'react';
 import type { BannerData } from '../BannerProps';
 
 const styles = {

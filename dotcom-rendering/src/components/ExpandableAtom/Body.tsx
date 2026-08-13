@@ -5,6 +5,7 @@ import {
 	textSans14,
 } from '@guardian/source/foundations';
 import { SvgInfoRound } from '@guardian/source/react-components';
+import type { JSX } from 'react';
 import { palette as themePalette } from '../../palette';
 
 const imageStyling = css`

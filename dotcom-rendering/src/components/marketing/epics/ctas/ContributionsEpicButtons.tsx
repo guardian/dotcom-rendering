@@ -14,7 +14,7 @@ import type {
 	Cta,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
-import { useEffect } from 'react';
+import { type JSX, useEffect } from 'react';
 import { useIsInView } from '../../../../lib/useIsInView';
 import { hasSetReminder } from '../../lib/reminders';
 import {

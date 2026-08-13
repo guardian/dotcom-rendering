@@ -2,7 +2,7 @@
 import '@testing-library/jest-dom';
 import { ReadableStream } from 'node:stream/web';
 import { TextDecoder, TextEncoder } from 'node:util';
-import { MessagePort } from 'node:worker_threads';
+import { MessageChannel, MessagePort } from 'node:worker_threads';
 import { isServer } from '../../src/lib/isServer';
 import type { Guardian } from '../../src/model/guardian';
 
@@ -112,6 +112,8 @@ global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;
 global.ReadableStream =
 	ReadableStream as unknown as typeof global.ReadableStream;
 global.MessagePort = MessagePort as unknown as typeof global.MessagePort;
+global.MessageChannel =
+	MessageChannel as unknown as typeof global.MessageChannel;
 
 if (!isServer) {
 	Object.defineProperty(window, 'matchMedia', {
