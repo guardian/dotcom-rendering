@@ -52,7 +52,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
-import { requiresAffiliateDisclaimer } from '../lib/requiresAffiliateDisclaimer';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -607,9 +606,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											}
 											contentLayout="LiveblogLayout"
 										/>
-										{requiresAffiliateDisclaimer(
-											article.affiliateLinksDisclaimer,
-										) && (
+										{article.affiliateLinksDisclaimer && (
 											<AffiliateDisclaimer
 												cssOverrides={css`
 													margin: ${space[4]}px 0;

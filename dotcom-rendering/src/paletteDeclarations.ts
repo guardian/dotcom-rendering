@@ -4933,9 +4933,7 @@ const richLinkQuoteFillLight: PaletteFunction = ({ design, theme }) => {
 const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[20];
 		case ArticleDesign.Audio:
-			return sourcePalette.neutral[20];
 		case ArticleDesign.Video:
 			return sourcePalette.neutral[20];
 		default:
@@ -4948,13 +4946,12 @@ const affiliateDisclaimerBackgroundDark: PaletteFunction = () =>
 const affiliateDisclaimerTextLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[86];
 		case ArticleDesign.Audio:
-			return sourcePalette.neutral[86];
 		case ArticleDesign.Video:
 			return sourcePalette.neutral[86];
+		default:
+			return sourcePalette.neutral[7];
 	}
-	return sourcePalette.neutral[7];
 };
 
 const affiliateDisclaimerTextDark: PaletteFunction = () => {

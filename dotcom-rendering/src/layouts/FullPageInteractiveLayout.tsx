@@ -22,7 +22,6 @@ import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { renderElement } from '../lib/renderElement';
-import { requiresAffiliateDisclaimer } from '../lib/requiresAffiliateDisclaimer';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -184,9 +183,7 @@ const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 				sectionId={article.config.section}
 				contentType={article.contentType}
 			/>
-			{requiresAffiliateDisclaimer(article.affiliateLinksDisclaimer) && (
-				<AffiliateDisclaimer />
-			)}
+			{article.affiliateLinksDisclaimer && <AffiliateDisclaimer />}
 		</section>
 	);
 };

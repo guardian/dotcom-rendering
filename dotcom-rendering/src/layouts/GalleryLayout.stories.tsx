@@ -29,7 +29,7 @@ const addBrandingAndAffiliateDisclaimer = (gallery: Gallery): Gallery => ({
 	...gallery,
 	frontendData: {
 		...gallery.frontendData,
-		affiliateLinksDisclaimer: 'true',
+		affiliateLinksDisclaimer: true,
 		webPublicationDateDeprecated: '2020-03-28T07:27:19.000Z',
 		commercialProperties: {
 			...gallery.frontendData.commercialProperties,

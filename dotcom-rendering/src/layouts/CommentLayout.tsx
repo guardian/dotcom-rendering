@@ -45,7 +45,6 @@ import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
-import { requiresAffiliateDisclaimer } from '../lib/requiresAffiliateDisclaimer';
 import { parse } from '../lib/slot-machine-flags';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
@@ -384,9 +383,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 									editionId={article.editionId}
 									shouldHideAds={article.shouldHideAds}
 								/>
-								{requiresAffiliateDisclaimer(
-									article.affiliateLinksDisclaimer,
-								) && (
+								{article.affiliateLinksDisclaimer && (
 									<AffiliateDisclaimer
 										cssOverrides={css`
 											margin: ${space[4]}px 0;
