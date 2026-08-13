@@ -271,12 +271,13 @@ const darkBackground = css`
 `;
 
 const invertedText = css`
+	color: white;
+	background-color: black;
+	white-space: pre-wrap;
+	padding-bottom: ${space[1]}px;
+	padding-right: ${space[1]}px;
+
 	${from.desktop} {
-		color: white;
-		background-color: black;
-		white-space: pre-wrap;
-		padding-bottom: ${space[1]}px;
-		padding-right: ${space[1]}px;
 		margin-left: -10px;
 		padding-left: 10px;
 	}
