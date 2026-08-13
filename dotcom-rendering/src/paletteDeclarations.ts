@@ -207,6 +207,17 @@ const headlineMatchTextLight: PaletteFunction = (format) =>
 const headlineMatchTextDark: PaletteFunction = (format) =>
 	seriesTitleMatchTextDark(format);
 
+/**
+ * Only used by the non-inverted immersive grid layouts (portrait, and
+ * landscape feature), whose headlines sit on a plain or light blurred
+ * background rather than the solid dark box `--headline-colour` expects.
+ */
+const immersiveGridHeadlineTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+
+const immersiveGridHeadlineTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+
 const headlineBackgroundLight: PaletteFunction = ({
 	display,
 	design,
@@ -7572,6 +7583,10 @@ const paletteColours = {
 	'--image-title-background': {
 		light: imageTitleBackground,
 		dark: imageTitleBackground,
+	},
+	'--immersive-grid-headline-colour': {
+		light: immersiveGridHeadlineTextLight,
+		dark: immersiveGridHeadlineTextDark,
 	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,

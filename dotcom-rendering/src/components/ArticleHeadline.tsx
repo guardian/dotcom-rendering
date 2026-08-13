@@ -12,7 +12,6 @@ import {
 	headlineMedium28,
 	headlineMedium34,
 	headlineMedium50,
-	palette as sourcePalette,
 	space,
 	textSansBold28,
 	textSansBold34,
@@ -284,12 +283,12 @@ const invertedText = css`
 `;
 
 /**
- * Used only by the immersiveLandscapeFeature grid layout, the headline sits
- * over the blurred panel added in Figure.tsx, rather than the shared
- * --headline-colour used by the legacy immersive layout.
+ * Used by the non-inverted immersive grid layouts, whose headlines sit on a
+ * plain or light blurred background rather than the shared --headline-colour
+ * (used by the legacy immersive layout and the inverted grid layout).
  */
-const gridFeatureHeadlineText = css`
-	color: ${sourcePalette.neutral[7]};
+const gridHeadlineText = css`
+	color: ${themePalette('--immersive-grid-headline-colour')};
 `;
 
 const maxWidth = css`
@@ -488,7 +487,6 @@ export const ArticleHeadline = ({
 	starRating,
 }: Props) => {
 	const isInverted = layoutType === 'immersiveLandscapeDefault';
-	const isGridFeature = layoutType === 'immersiveLandscapeFeature';
 	const isLegacyImmersive = layoutType == null;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -526,13 +524,7 @@ export const ArticleHeadline = ({
 												]
 											: isInverted
 												? [invertedText, darkBackground]
-												: isGridFeature
-													? gridFeatureHeadlineText
-													: css`
-															color: ${themePalette(
-																'--headline-colour',
-															)};
-														`,
+												: gridHeadlineText,
 									]}
 								>
 									{headlineString}
@@ -575,13 +567,7 @@ export const ArticleHeadline = ({
 											]
 										: isInverted
 											? [invertedText, darkBackground]
-											: isGridFeature
-												? gridFeatureHeadlineText
-												: css`
-														color: ${themePalette(
-															'--headline-colour',
-														)};
-													`,
+											: gridHeadlineText,
 								]}
 							>
 								<span
