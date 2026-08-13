@@ -512,7 +512,7 @@ const Meta = ({
 				shortUrlId={frontendData.config.shortUrlId}
 			/>
 		) : null}
-		{frontendData.affiliateLinksDisclaimer && (
+		{frontendData.affiliateLinksDisclaimerRequired && (
 			<AffiliateDisclaimer
 				cssOverrides={css`
 					margin-top: ${space[4]}px;

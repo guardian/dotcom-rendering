@@ -159,7 +159,7 @@ export const StandardLayoutArticleGrid = ({
 						contentType={article.contentType}
 						contentLayout={`${ArticleDisplay[format.display]}Layout`}
 					/>
-					{article.affiliateLinksDisclaimer && (
+					{article.affiliateLinksDisclaimerRequired && (
 						<AffiliateDisclaimer
 							cssOverrides={css`
 								margin: ${space[4]}px 0;

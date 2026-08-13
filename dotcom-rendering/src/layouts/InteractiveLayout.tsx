@@ -487,7 +487,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									)}
 								</div>
 							</GridItem>
-							{article.affiliateLinksDisclaimer && (
+							{article.affiliateLinksDisclaimerRequired && (
 								<GridItem area="meta" element="aside">
 									<AffiliateDisclaimer
 										cssOverrides={css`

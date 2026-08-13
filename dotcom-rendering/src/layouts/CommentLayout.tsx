@@ -383,7 +383,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 									editionId={article.editionId}
 									shouldHideAds={article.shouldHideAds}
 								/>
-								{article.affiliateLinksDisclaimer && (
+								{article.affiliateLinksDisclaimerRequired && (
 									<AffiliateDisclaimer
 										cssOverrides={css`
 											margin: ${space[4]}px 0;

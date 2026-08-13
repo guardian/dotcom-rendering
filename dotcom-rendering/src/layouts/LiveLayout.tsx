@@ -606,7 +606,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											}
 											contentLayout="LiveblogLayout"
 										/>
-										{article.affiliateLinksDisclaimer && (
+										{article.affiliateLinksDisclaimerRequired && (
 											<AffiliateDisclaimer
 												cssOverrides={css`
 													margin: ${space[4]}px 0;

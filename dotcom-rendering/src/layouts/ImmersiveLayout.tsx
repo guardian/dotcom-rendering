@@ -529,7 +529,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									byline={article.byline}
 								/>
 							)}
-							{article.affiliateLinksDisclaimer && (
+							{article.affiliateLinksDisclaimerRequired && (
 								<Hide when="below" breakpoint="leftCol">
 									<AffiliateDisclaimer
 										cssOverrides={css`
@@ -662,7 +662,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										/>
 									</>
 								)}
-								{article.affiliateLinksDisclaimer && (
+								{article.affiliateLinksDisclaimerRequired && (
 									<Hide when="above" breakpoint="leftCol">
 										<AffiliateDisclaimer
 											cssOverrides={css`

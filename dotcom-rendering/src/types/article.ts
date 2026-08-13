@@ -37,7 +37,7 @@ export type ArticleDeprecated = Omit<FEArticle, 'affiliateLinksDisclaimer'> & {
 	imagesForLightbox: ImageForLightbox[];
 	imagesForAppsLightbox: ImageForAppsLightbox[];
 	tableOfContents?: TableOfContentsItem[];
-	affiliateLinksDisclaimer: boolean;
+	affiliateLinksDisclaimerRequired: boolean;
 };
 
 export type ArticleFields = {
@@ -148,7 +148,7 @@ export const enhanceArticleType = (
 		return {
 			frontendData: {
 				...data,
-				affiliateLinksDisclaimer: affiliateLinksDisclaimerRequired,
+				affiliateLinksDisclaimerRequired,
 				mainMediaElements,
 				blocks,
 				standfirst: enhanceStandfirst(data.standfirst),
@@ -194,7 +194,7 @@ export const enhanceArticleType = (
 		serverTime,
 		frontendData: {
 			...data,
-			affiliateLinksDisclaimer: affiliateLinksDisclaimerRequired,
+			affiliateLinksDisclaimerRequired,
 			mainMediaElements,
 			blocks,
 			pinnedPost: enhancePinnedPost(

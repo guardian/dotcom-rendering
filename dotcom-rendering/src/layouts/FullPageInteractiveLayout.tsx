@@ -183,7 +183,9 @@ const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 				sectionId={article.config.section}
 				contentType={article.contentType}
 			/>
-			{article.affiliateLinksDisclaimer && <AffiliateDisclaimer />}
+			{article.affiliateLinksDisclaimerRequired && (
+				<AffiliateDisclaimer />
+			)}
 		</section>
 	);
 };
