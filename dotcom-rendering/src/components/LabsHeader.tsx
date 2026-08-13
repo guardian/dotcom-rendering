@@ -132,8 +132,8 @@ const About = ({
 		<LinkButton
 			iconSide="right"
 			size="xsmall"
-			priority="subdued"
-			theme={{ textSubdued: textColour }}
+			priority="tertiary"
+			theme={{ textTertiary: textColour, borderTertiary: textColour }}
 			icon={<SvgArrowRightStraight />}
 			href="https://www.theguardian.com/info/2016/jan/25/content-funding"
 		>
