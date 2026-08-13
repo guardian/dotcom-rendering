@@ -234,7 +234,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 									fullWidth={true}
 									showTopBorder={false}
 									padSides={true}
-									backgroundColour={sourcePalette.labs[400]}
+									backgroundColour={sourcePalette.labs[100]}
 									borderColour={sourcePalette.neutral[60]}
 									sectionId="labs-header"
 								>
@@ -257,7 +257,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 							fullWidth={true}
 							showTopBorder={false}
 							padSides={true}
-							backgroundColour={sourcePalette.labs[400]}
+							backgroundColour={sourcePalette.labs[100]}
 							borderColour={sourcePalette.neutral[60]}
 							sectionId="labs-header"
 						>

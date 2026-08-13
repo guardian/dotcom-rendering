@@ -342,7 +342,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={sourcePalette.labs[400]}
+						backgroundColour={sourcePalette.labs[100]}
 						borderColour={sourcePalette.neutral[60]}
 						sectionId="labs-header"
 					>
