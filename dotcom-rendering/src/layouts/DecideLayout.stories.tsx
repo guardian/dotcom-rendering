@@ -28,7 +28,11 @@ import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { type Article, enhanceArticleType } from '../types/article';
 import type { ImageBlockElement } from '../types/content';
-import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
+import {
+	DecideLayout,
+	LABS_IMMERSIVE_GRID_AB_TEST,
+	type Props as DecideLayoutProps,
+} from './DecideLayout';
 
 export type HydratedLayoutDecoratorArgs = {
 	colourScheme?: 'light' | 'dark';
@@ -265,12 +269,28 @@ const labsImmersiveArticle = ({
 }: {
 	orientation: 'portrait' | 'landscape';
 	design: ArticleDesign.PhotoEssay | ArticleDesign.Feature;
-}): Article => ({
-	...(orientation === 'portrait'
-		? photoEssayImmersiveLabsPortraitArticle
-		: photoEssayImmersiveLabsArticle),
-	design,
-});
+}): Article => {
+	const base =
+		orientation === 'portrait'
+			? photoEssayImmersiveLabsPortraitArticle
+			: photoEssayImmersiveLabsArticle;
+	return {
+		...base,
+		design,
+		frontendData: {
+			...base.frontendData,
+			config: {
+				...base.frontendData.config,
+				// Opt these stories into the new layout regardless of the
+				// 0% production rollout, so they keep demonstrating it.
+				serverSideABTests: {
+					...base.frontendData.config.serverSideABTests,
+					[LABS_IMMERSIVE_GRID_AB_TEST]: 'enable',
+				},
+			},
+		},
+	};
+};
 
 const immersiveLabsParameters = {
 	...webParameters,
