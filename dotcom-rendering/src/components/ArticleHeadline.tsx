@@ -12,6 +12,7 @@ import {
 	headlineMedium28,
 	headlineMedium34,
 	headlineMedium50,
+	palette as sourcePalette,
 	space,
 	textSansBold28,
 	textSansBold34,
@@ -282,6 +283,15 @@ const invertedText = css`
 	}
 `;
 
+/**
+ * Used only by the immersiveLandscapeFeature grid layout, the headline sits
+ * over the blurred panel added in Figure.tsx, rather than the shared
+ * --headline-colour used by the legacy immersive layout.
+ */
+const gridFeatureHeadlineText = css`
+	color: ${sourcePalette.neutral[7]};
+`;
+
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 620px;
@@ -478,6 +488,7 @@ export const ArticleHeadline = ({
 	starRating,
 }: Props) => {
 	const isInverted = layoutType === 'immersiveLandscapeDefault';
+	const isGridFeature = layoutType === 'immersiveLandscapeFeature';
 	const isLegacyImmersive = layoutType == null;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -515,11 +526,13 @@ export const ArticleHeadline = ({
 												]
 											: isInverted
 												? [invertedText, darkBackground]
-												: css`
-														color: ${themePalette(
-															'--headline-colour',
-														)};
-													`,
+												: isGridFeature
+													? gridFeatureHeadlineText
+													: css`
+															color: ${themePalette(
+																'--headline-colour',
+															)};
+														`,
 									]}
 								>
 									{headlineString}
@@ -562,11 +575,13 @@ export const ArticleHeadline = ({
 											]
 										: isInverted
 											? [invertedText, darkBackground]
-											: css`
-													color: ${themePalette(
-														'--headline-colour',
-													)};
-												`,
+											: isGridFeature
+												? gridFeatureHeadlineText
+												: css`
+														color: ${themePalette(
+															'--headline-colour',
+														)};
+													`,
 								]}
 							>
 								<span

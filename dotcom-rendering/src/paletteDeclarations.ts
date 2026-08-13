@@ -49,15 +49,6 @@ const pillarPalette = (
 	}
 };
 
-/**
- * Design groups that keep their pre-existing colours rather than the
- * Labs theme-wide overrides used elsewhere in this file.
- */
-const labsGalleryDesigns: ArticleDesign[] = [
-	ArticleDesign.Gallery,
-	ArticleDesign.HostedGallery,
-];
-
 const labsMediaDesigns: ArticleDesign[] = [
 	ArticleDesign.Video,
 	ArticleDesign.Audio,
@@ -109,9 +100,7 @@ const textblockTextDark: PaletteFunction = () => 'inherit';
 const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
-			return theme === ArticleSpecial.Labs
-				? sourcePalette.neutral[7]
-				: sourcePalette.neutral[97];
+			return sourcePalette.neutral[97];
 		default: {
 			switch (design) {
 				case ArticleDesign.Editorial:
@@ -226,8 +215,6 @@ const headlineBackgroundLight: PaletteFunction = ({
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (theme) {
-				case ArticleSpecial.Labs:
-					return 'transparent';
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				default:
@@ -5037,16 +5024,6 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 	if (theme === ArticleSpecial.SpecialReport) {
 		return sourcePalette.brandAlt[400];
 	}
-	if (
-		theme === ArticleSpecial.Labs &&
-		![
-			ArticleDesign.LiveBlog,
-			...labsGalleryDesigns,
-			...labsMediaDesigns,
-		].includes(design)
-	) {
-		return sourcePalette.labs[200];
-	}
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (theme) {
@@ -5057,7 +5034,7 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
+					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 			}
@@ -5112,12 +5089,6 @@ const seriesTitleBackgroundDark: PaletteFunction = ({
 			if (theme === ArticleSpecial.SpecialReport) {
 				return sourcePalette.brandAlt[400];
 			}
-			if (
-				theme === ArticleSpecial.Labs &&
-				![ArticleDesign.LiveBlog, ...labsMediaDesigns].includes(design)
-			) {
-				return sourcePalette.labs[500];
-			}
 			switch (display) {
 				case ArticleDisplay.Immersive:
 					switch (theme) {
@@ -5128,7 +5099,7 @@ const seriesTitleBackgroundDark: PaletteFunction = ({
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[500];
+							return sourcePalette.labs[300];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.specialReportAlt[300];
 					}
@@ -5280,9 +5251,9 @@ const seriesOrSectionTitleTextLight: PaletteFunction = ({
 const seriesTitleTextLight: PaletteFunction = (format) => {
 	if (
 		format.theme === ArticleSpecial.Labs &&
-		![ArticleDesign.LiveBlog, ...labsMediaDesigns].includes(format.design)
+		format.design !== ArticleDesign.LiveBlog
 	) {
-		return sourcePalette.neutral[100];
+		return sourcePalette.neutral[7];
 	}
 	return seriesOrSectionTitleTextLight(format);
 };
@@ -5383,19 +5354,8 @@ const seriesOrSectionTitleTextDark: PaletteFunction = ({
 };
 
 /** Used by the series tag only; the article section link keeps `articleSectionLinkTextDark` */
-const seriesTitleTextDark: PaletteFunction = (format) => {
-	if (
-		format.theme === ArticleSpecial.Labs &&
-		![
-			ArticleDesign.LiveBlog,
-			...labsGalleryDesigns,
-			...labsMediaDesigns,
-		].includes(format.design)
-	) {
-		return sourcePalette.neutral[7];
-	}
-	return seriesOrSectionTitleTextDark(format);
-};
+const seriesTitleTextDark: PaletteFunction = (format) =>
+	seriesOrSectionTitleTextDark(format);
 
 const articleSectionLinkTextDark: PaletteFunction =
 	seriesOrSectionTitleTextDark;

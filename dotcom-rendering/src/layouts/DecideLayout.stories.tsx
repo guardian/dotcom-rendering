@@ -30,8 +30,8 @@ import { type Article, enhanceArticleType } from '../types/article';
 import type { ImageBlockElement } from '../types/content';
 import {
 	DecideLayout,
-	LABS_IMMERSIVE_GRID_AB_TEST,
 	type Props as DecideLayoutProps,
+	LABS_IMMERSIVE_GRID_AB_TEST,
 } from './DecideLayout';
 
 export type HydratedLayoutDecoratorArgs = {
