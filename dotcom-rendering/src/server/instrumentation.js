@@ -7,6 +7,8 @@ const { resourceFromAttributes } = require('@opentelemetry/resources');
 const { BatchSpanProcessor } = require('@opentelemetry/sdk-trace-base');
 const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node');
 
+// NodeTracerProvider reads OTEL_EXPORTER_OTLP_ENDPOINT from the environment,
+// but not OTEL_SERVICE_NAME, so the resource has to be set explicitly.
 const provider = new NodeTracerProvider({
 	resource: resourceFromAttributes({
 		'service.name': process.env.OTEL_SERVICE_NAME || 'dotcom-rendering',

@@ -8,7 +8,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuAllowPolicy",
-      "GuAllowPolicy",
       "GuVpcParameter",
       "GuSubnetListParameter",
       "GuSubnetListParameter",
@@ -183,30 +182,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           "Version": "2012-10-17",
         },
         "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
-        "Roles": [
-          {
-            "Ref": "InstanceRoleArticlerendering0D4717E8",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "AllowPolicyXRay6A9BDA0E": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "xray:PutTraceSegments",
-                "xray:PutTelemetryRecords",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "AllowPolicyXRay6A9BDA0E",
         "Roles": [
           {
             "Ref": "InstanceRoleArticlerendering0D4717E8",
@@ -1648,7 +1623,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuAllowPolicy",
-      "GuAllowPolicy",
       "GuVpcParameter",
       "GuSubnetListParameter",
       "GuSubnetListParameter",
@@ -1849,33 +1823,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       },
       "Type": "AWS::IAM::Policy",
     },
-    "AllowPolicyXRay6A9BDA0E": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "xray:PutTraceSegments",
-                "xray:PutTelemetryRecords",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "AllowPolicyXRay6A9BDA0E",
-        "Roles": [
-          {
-            "Ref": "InstanceRoleTagpagerendering171BC2F9",
-          },
-          {
-            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
     "AutoScalingGroupTagpagerenderingASG7F7E0748": {
       "Properties": {
         "HealthCheckGracePeriod": 120,
@@ -2011,6 +1958,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
     },
     "EcsService81FC6EF6": {
       "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
         "ListenerTagpagerenderingDeterministicRouteToEc2Rule1C5C95A4",
         "ListenerTagpagerenderingDeterministicRouteToEcsRuleAB05C756",
@@ -2106,6 +2054,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
     },
     "EcsServiceTaskCountTarget02FCCE22": {
       "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
@@ -2296,7 +2245,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
               "--config=/etc/ecs/ecs-default-config.yaml",
             ],
             "Cpu": 256,
-            "Essential": true,
+            "Essential": false,
             "Image": "public.ecr.aws/aws-observability/aws-otel-collector:v0.49.0",
             "LogConfiguration": {
               "LogDriver": "awslogs",
@@ -2558,6 +2507,30 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         ],
       },
       "Type": "AWS::IAM::Role",
+    },
+    "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "Roles": [
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
     },
     "EcsTaskDefinitionadotcollectorLogGroup9B99E580": {
       "DeletionPolicy": "Retain",
