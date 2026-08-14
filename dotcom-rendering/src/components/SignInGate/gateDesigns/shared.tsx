@@ -10,6 +10,29 @@ import {
 	textSans17,
 	textSansBold17,
 } from '@guardian/source/foundations';
+import { has } from '../../../lib/has-string';
+import {
+	addQueryParamsToUntypedPath,
+	buildUrlWithQueryParams,
+	PROFILE_SIGN_IN_URL,
+} from '../../../lib/routeUtils';
+import type { QueryParams } from '../../AuthProviderButtons/types';
+
+/**
+ * Build the "create an account" CTA href for an Auxia sign-in gate.
+ *
+ * If the treatment supplies a valid `first_cta_link`, append the auth
+ * queryParams (`returnUrl`, `componentEventParams`) to it. Otherwise fall
+ * back to the same `/signin` URL the email sign-in button uses, with the
+ * auth queryParams attached.
+ */
+export const buildRegisterHref = (
+	firstCtaLink: string | undefined,
+	queryParams: QueryParams,
+): string =>
+	has(firstCtaLink)
+		? addQueryParamsToUntypedPath(firstCtaLink, queryParams)
+		: buildUrlWithQueryParams(PROFILE_SIGN_IN_URL, {}, queryParams);
 
 export const signInGateContainer = css`
 	max-width: 617px;

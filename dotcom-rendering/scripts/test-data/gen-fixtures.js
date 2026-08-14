@@ -258,34 +258,6 @@ requests.push(
 		}),
 );
 
-// MatchReport fixtures
-requests.push(
-	// this URL may expire in the future; you can get a fresh one by finding a recent match
-	// from https://www.theguardian.com/tone/matchreports, then opening your network tab in
-	// your browser's devtools, and find a similar looking `api.nextgen` request, and copy
-	// that URL in here.
-	fetch(
-		'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2025/07/08/35854/7699.json?dcr=true&page=football%2F2025%2Fjul%2F08%2Fgermany-denmark-women-euro-2025-group-c-match-report',
-	)
-		.then((res) => res.json())
-		.then((json) => {
-			// Write the new fixture data
-			const contents = `${HEADER}
-import type { MatchReportType } from '../../src/types/matchReport';
-
-export const matchReport: MatchReportType = ${JSON.stringify(json, null, 4)}`;
-			return fs.writeFile(
-				`${root}/fixtures/generated/match-report.ts`,
-				contents,
-				'utf8',
-			);
-		})
-		.then(() => 'match-report.ts')
-		.catch((err) => {
-			throw new Error('Failed to create match-report.ts', { cause: err });
-		}),
-);
-
 // Series
 requests.push(
 	fetch(
