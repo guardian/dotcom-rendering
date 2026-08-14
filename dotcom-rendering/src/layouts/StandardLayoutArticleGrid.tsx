@@ -135,13 +135,8 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isFeature = format.design === ArticleDesign.Feature;
 
-	const footballMatchUrl =
-		article.matchType === 'FootballMatchType'
-			? article.matchUrl
-			: undefined;
-
 	const isFootballMatchReport =
-		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
+		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
 
 	const mainMedia = article.mainMediaElements[0];
 	const captionText = decideMainMediaCaption(mainMedia);
@@ -252,23 +247,32 @@ export const StandardLayoutArticleGrid = ({
 						: undefined
 				}
 			>
-				<MainMedia
-					format={format}
-					elements={article.mainMediaElements}
-					host={host}
-					pageId={article.pageId}
-					webTitle={article.webTitle}
-					ajaxUrl={article.config.ajaxUrl}
-					switches={article.config.switches}
-					isAdFreeUser={article.isAdFreeUser}
-					isSensitive={article.config.isSensitive}
-					editionId={article.editionId}
-					hideCaption={isMedia}
-					shouldHideAds={article.shouldHideAds}
-					contentType={article.contentType}
-					contentLayout={contentLayoutName}
-					articleArrangement={layoutType}
-				/>
+				<div>
+					<MainMedia
+						format={format}
+						elements={article.mainMediaElements}
+						host={host}
+						pageId={article.pageId}
+						webTitle={article.webTitle}
+						ajaxUrl={article.config.ajaxUrl}
+						switches={article.config.switches}
+						isAdFreeUser={article.isAdFreeUser}
+						isSensitive={article.config.isSensitive}
+						editionId={article.editionId}
+						hideCaption={isMedia}
+						shouldHideAds={article.shouldHideAds}
+						contentType={article.contentType}
+						contentLayout={contentLayoutName}
+						articleArrangement={layoutType}
+					/>
+					{article.affiliateLinksDisclaimerRequired && (
+						<AffiliateDisclaimer
+							cssOverrides={css`
+								margin: ${space[4]}px 0;
+							`}
+						/>
+					)}
+				</div>
 			</GridItem>
 			<GridItem
 				area="title"
@@ -293,7 +297,7 @@ export const StandardLayoutArticleGrid = ({
 					sectionLabel={article.sectionLabel}
 					sectionUrl={article.sectionUrl}
 					guardianBaseURL={article.guardianBaseURL}
-					isMatch={!!footballMatchUrl}
+					isMatch={isFootballMatchReport}
 				/>
 			</GridItem>
 			<GridItem
@@ -449,9 +453,6 @@ export const StandardLayoutArticleGrid = ({
 								shortUrlId={article.config.shortUrlId}
 								mainMediaElements={article.mainMediaElements}
 							/>
-							{!!article.affiliateLinksDisclaimer && (
-								<AffiliateDisclaimer />
-							)}
 						</Hide>
 					</>
 				) : (
@@ -475,9 +476,6 @@ export const StandardLayoutArticleGrid = ({
 							shortUrlId={article.config.shortUrlId}
 							mainMediaElements={article.mainMediaElements}
 						/>
-						{!!article.affiliateLinksDisclaimer && (
-							<AffiliateDisclaimer />
-						)}
 					</>
 				)}
 			</GridItem>

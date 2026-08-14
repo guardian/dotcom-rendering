@@ -93,7 +93,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
-			{!!frontendData.affiliateLinksDisclaimer && (
+			{frontendData.affiliateLinksDisclaimerRequired && (
 				<Island priority="feature" defer={{ until: 'idle' }}>
 					<EnhanceAffiliateLinks />
 				</Island>

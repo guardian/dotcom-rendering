@@ -76,7 +76,6 @@ export type FEFootballMatchInfoPage = FEFootballDataPage & {
 	matchInfo: FEFootballMatch;
 	group?: FEGroupSummary;
 	competitionName: string;
-	matchUrl: string;
 	matchHeaderUrl: string;
 };
 

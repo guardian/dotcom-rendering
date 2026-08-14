@@ -227,7 +227,6 @@ const parseFEFootballMatch = (
 		matchInfo: matchInfo.value,
 		competitionName: data.competitionName,
 		group: group?.value,
-		matchUrl: data.matchUrl,
 		matchHeaderUrl: headerUrl.value,
 		kind: 'FootballMatchSummary',
 		editionId: data.editionId,
