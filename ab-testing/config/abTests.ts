@@ -181,7 +181,7 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant-1", "variant-2"],
-		shouldForceMetricsCollection: false,
+		shouldForceMetricsCollection: true,
 	},
 	{
 		name: "fronts-and-curation-editorial-headline-test",
