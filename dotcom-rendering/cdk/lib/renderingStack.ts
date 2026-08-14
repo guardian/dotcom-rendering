@@ -20,6 +20,7 @@ import { Peer } from 'aws-cdk-lib/aws-ec2';
 import type { CfnService } from 'aws-cdk-lib/aws-ecs';
 import { ContainerImage, LogDrivers } from 'aws-cdk-lib/aws-ecs';
 import { ClusterSettings } from 'aws-cdk-lib/aws-ecs/mixins';
+import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
@@ -241,13 +242,6 @@ export class RenderingCDKStack extends CDKStack {
 					actions: ['cloudwatch:*', 'logs:*'],
 					resources: ['*'],
 				}),
-				new GuAllowPolicy(this, 'AllowPolicyXRay', {
-					actions: [
-						'xray:PutTraceSegments',
-						'xray:PutTelemetryRecords',
-					],
-					resources: ['*'],
-				}),
 				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
 					actions: ['kms:Decrypt', 'kms:DescribeKey'],
 					resources: [
@@ -323,11 +317,22 @@ export class RenderingCDKStack extends CDKStack {
 			}
 			// ADOT (AWS Distro for OpenTelemetry) sidecar to receive OTLP
 			// traces from the app and forward them to AWS X-Ray.
+			app.ecsService?.taskDefinition.addToTaskRolePolicy(
+				new PolicyStatement({
+					actions: [
+						'xray:PutTraceSegments',
+						'xray:PutTelemetryRecords',
+					],
+					resources: ['*'],
+				}),
+			);
 			app.ecsService?.taskDefinition.addContainer('adot-collector', {
 				image: ContainerImage.fromRegistry(
 					'public.ecr.aws/aws-observability/aws-otel-collector:v0.49.0',
 				),
 				command: ['--config=/etc/ecs/ecs-default-config.yaml'],
+				// Losing traces must never take the app down
+				essential: false,
 				logging: LogDrivers.awsLogs({
 					streamPrefix: `${guApp}-adot`,
 				}),
