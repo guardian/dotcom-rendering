@@ -1,3 +1,4 @@
+import { context, trace } from '@opentelemetry/api';
 import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
@@ -32,12 +33,23 @@ import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
 
+// Hand-rolled because @opentelemetry/instrumentation-express patches express at
+// require time, which webpack has already inlined by the time the server runs.
+const tracer = trace.getTracer('dotcom-rendering');
+
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
 
 	const app = express();
 
-	app.use(express.json({ limit: '50mb' }));
+	const parseJson = express.json({ limit: '50mb' });
+	app.use((req, res, next) => {
+		const span = tracer.startSpan('json parsing');
+		parseJson(req, res, (error?: unknown) => {
+			span.end();
+			next(error);
+		});
+	});
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
 	app.use(responseHeaderMiddleware);
@@ -52,6 +64,14 @@ export const prodServer = (): void => {
 
 		app.use('/assets', express.static(__dirname));
 	}
+
+	// Made the active span so that spans added inside handlers nest beneath it
+	app.use((req, res, next) => {
+		const span = tracer.startSpan('request handler');
+		// `close` rather than `finish` so the span ends even if the client disconnects
+		res.on('close', () => span.end());
+		context.with(trace.setSpan(context.active(), span), next);
+	});
 
 	app.post('/Article', handleArticle);
 	app.post('/Interactive', handleInteractive);
