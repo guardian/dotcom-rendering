@@ -265,12 +265,8 @@ export const StandardLayoutArticleGrid = ({
 						contentLayout={contentLayoutName}
 						articleArrangement={layoutType}
 					/>
-					{article.affiliateLinksDisclaimerRequired && (
-						<AffiliateDisclaimer
-							cssOverrides={css`
-								margin: ${space[4]}px 0;
-							`}
-						/>
+					{!!article.affiliateLinksDisclaimer && (
+						<AffiliateDisclaimer />
 					)}
 				</div>
 			</GridItem>
