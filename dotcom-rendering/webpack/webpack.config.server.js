@@ -27,7 +27,7 @@ const swcLoader = [
 module.exports = {
 	entry: {
 		server: './src/server/server.ts',
-		instrumentation: './src/server/instrumentation.js',
+		instrumentation: './src/server/instrumentation.ts',
 	},
 	output: {
 		filename: `[name].js`,
