@@ -2276,7 +2276,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             "Essential": false,
             "HealthCheck": {
               "Command": [
-                "CMD-SHELL",
+                "CMD",
                 "/healthcheck",
               ],
               "Interval": 5,

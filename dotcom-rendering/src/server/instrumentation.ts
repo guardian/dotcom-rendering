@@ -10,7 +10,15 @@ import { NodeSDK } from '@opentelemetry/sdk-node';
 // Note: we can't use auto instrumentation as it doesn't work natively with webpack, so we call the only module that works which is HttpInstrumentation
 const sdk = new NodeSDK({
 	traceExporter: new OTLPTraceExporter(),
-	instrumentations: [new HttpInstrumentation()],
+	instrumentations: [
+		new HttpInstrumentation({
+			// The load balancer polls this every few seconds
+			ignoreIncomingRequestHook: (request) =>
+				request.url === '/_healthcheck',
+			// Rendering makes no outbound calls, so all we'd trace is AWS SDK background chatter
+			ignoreOutgoingRequestHook: () => true,
+		}),
+	],
 });
 
 sdk.start();
