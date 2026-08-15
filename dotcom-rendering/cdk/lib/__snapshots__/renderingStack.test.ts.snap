@@ -2103,6 +2103,12 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "Properties": {
         "ContainerDefinitions": [
           {
+            "DependsOn": [
+              {
+                "Condition": "START",
+                "ContainerName": "aws-otel-collector",
+              },
+            ],
             "DockerLabels": {
               "RiffRaffDeploymentId": {
                 "Ref": "RiffRaffDeploymentId",
@@ -2246,25 +2252,28 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             ],
             "Cpu": 256,
             "Essential": false,
+            "HealthCheck": {
+              "Command": [
+                "CMD-SHELL",
+                "/healthcheck",
+              ],
+              "Interval": 5,
+              "Retries": 2,
+              "Timeout": 3,
+            },
             "Image": "public.ecr.aws/aws-observability/aws-otel-collector:v0.49.0",
             "LogConfiguration": {
               "LogDriver": "awslogs",
               "Options": {
                 "awslogs-group": {
-                  "Ref": "EcsTaskDefinitionadotcollectorLogGroup9B99E580",
+                  "Ref": "EcsTaskDefinitionawsotelcollectorLogGroup4477B845",
                 },
                 "awslogs-region": "eu-west-1",
-                "awslogs-stream-prefix": "tag-page-rendering-adot",
+                "awslogs-stream-prefix": "ecs",
               },
             },
-            "MemoryReservation": 256,
-            "Name": "adot-collector",
-            "PortMappings": [
-              {
-                "ContainerPort": 4318,
-                "Protocol": "tcp",
-              },
-            ],
+            "Memory": 512,
+            "Name": "aws-otel-collector",
           },
         ],
         "Cpu": "1024",
@@ -2422,7 +2431,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
               "Effect": "Allow",
               "Resource": {
                 "Fn::GetAtt": [
-                  "EcsTaskDefinitionadotcollectorLogGroup9B99E580",
+                  "EcsTaskDefinitionawsotelcollectorLogGroup4477B845",
                   "Arn",
                 ],
               },
@@ -2514,8 +2523,17 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           "Statement": [
             {
               "Action": [
+                "logs:PutLogEvents",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:DescribeLogGroups",
+                "logs:PutRetentionPolicy",
                 "xray:PutTraceSegments",
                 "xray:PutTelemetryRecords",
+                "xray:GetSamplingRules",
+                "xray:GetSamplingTargets",
+                "xray:GetSamplingStatisticSummaries",
               ],
               "Effect": "Allow",
               "Resource": "*",
@@ -2532,7 +2550,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       },
       "Type": "AWS::IAM::Policy",
     },
-    "EcsTaskDefinitionadotcollectorLogGroup9B99E580": {
+    "EcsTaskDefinitionawsotelcollectorLogGroup4477B845": {
       "DeletionPolicy": "Retain",
       "Properties": {
         "Tags": [
