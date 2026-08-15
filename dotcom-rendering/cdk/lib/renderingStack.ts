@@ -330,6 +330,9 @@ export class RenderingCDKStack extends CDKStack {
 			 *
 			 * @see https://github.com/aws-observability/aws-otel-collector/blob/v0.49.0/deployment-template/ecs/aws-otel-fargate-sidecar-deployment-cfn.yaml
 			 * @see https://aws-otel.github.io/docs/setup/ecs
+			 *
+			 * The default config.yaml used is also available on github
+			 * @see https://github.com/aws-observability/aws-otel-collector/blob/0771477f9db2879afad3ae3ff7811b5264a151a8/config/ecs/ecs-default-config.yaml
 			 */
 			if (app.ecsService) {
 				const { taskDefinition } = app.ecsService;
@@ -341,12 +344,13 @@ export class RenderingCDKStack extends CDKStack {
 						image: ContainerImage.fromRegistry(
 							'public.ecr.aws/aws-observability/aws-otel-collector:v0.49.0',
 						),
-						command: ['--config=/etc/ecs/ecs-default-config.yaml'], //TODO: link to config.yaml in the web
+						command: ['--config=/etc/ecs/ecs-default-config.yaml'],
 						cpu: 256,
 						memoryLimitMiB: 512,
 						logging: LogDrivers.awsLogs({ streamPrefix: 'ecs' }),
 						healthCheck: {
-							command: ['/healthcheck'],
+							// `CMD`, not `CMD-SHELL`, as the image is distroless and has no shell
+							command: ['CMD', '/healthcheck'],
 							interval: Duration.seconds(5),
 							retries: 2,
 							timeout: Duration.seconds(3),
