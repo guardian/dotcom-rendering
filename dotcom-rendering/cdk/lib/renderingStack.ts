@@ -18,7 +18,11 @@ import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
 import type { CfnService } from 'aws-cdk-lib/aws-ecs';
-import { ContainerImage, LogDrivers } from 'aws-cdk-lib/aws-ecs';
+import {
+	ContainerDependencyCondition,
+	ContainerImage,
+	LogDrivers,
+} from 'aws-cdk-lib/aws-ecs';
 import { ClusterSettings } from 'aws-cdk-lib/aws-ecs/mixins';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
@@ -315,31 +319,74 @@ export class RenderingCDKStack extends CDKStack {
 					value,
 				);
 			}
-			// ADOT (AWS Distro for OpenTelemetry) sidecar to receive OTLP
-			// traces from the app and forward them to AWS X-Ray.
-			app.ecsService?.taskDefinition.addToTaskRolePolicy(
-				new PolicyStatement({
-					actions: [
-						'xray:PutTraceSegments',
-						'xray:PutTelemetryRecords',
-					],
-					resources: ['*'],
-				}),
-			);
-			app.ecsService?.taskDefinition.addContainer('adot-collector', {
-				image: ContainerImage.fromRegistry(
-					'public.ecr.aws/aws-observability/aws-otel-collector:v0.49.0',
-				),
-				command: ['--config=/etc/ecs/ecs-default-config.yaml'],
-				// Losing traces must never take the app down
-				essential: false,
-				logging: LogDrivers.awsLogs({
-					streamPrefix: `${guApp}-adot`,
-				}),
-				portMappings: [{ containerPort: 4318 }],
-				cpu: 256,
-				memoryReservationMiB: 256,
-			});
+
+			/**
+			 * The ADOT (AWS Distro for OpenTelemetry) Collector, run as a
+			 * sidecar. The app exports OTLP traces to it over localhost, and it
+			 * forwards them to AWS X-Ray.
+			 *
+			 * Transcribed from the collector's own `awsvpc` sidecar deployment
+			 * template, at the version we run.
+			 *
+			 * @see https://github.com/aws-observability/aws-otel-collector/blob/v0.49.0/deployment-template/ecs/aws-otel-fargate-sidecar-deployment-cfn.yaml
+			 * @see https://aws-otel.github.io/docs/setup/ecs
+			 */
+			if (app.ecsService) {
+				const { taskDefinition } = app.ecsService;
+
+				const collector = taskDefinition.addContainer(
+					'aws-otel-collector',
+					{
+						// Pinned, where the template uses `latest`, so that deploys are immutable
+						image: ContainerImage.fromRegistry(
+							'public.ecr.aws/aws-observability/aws-otel-collector:v0.49.0',
+						),
+						command: ['--config=/etc/ecs/ecs-default-config.yaml'], //TODO: link to config.yaml in the web
+						cpu: 256,
+						memoryLimitMiB: 512,
+						logging: LogDrivers.awsLogs({ streamPrefix: 'ecs' }),
+						healthCheck: {
+							command: ['/healthcheck'],
+							interval: Duration.seconds(5),
+							retries: 2,
+							timeout: Duration.seconds(3),
+						},
+						// In the template the collector is the task; here it is a
+						// sidecar, and must not take the rendering app down with it
+						essential: false,
+					},
+				);
+
+				taskDefinition.defaultContainer?.addContainerDependencies({
+					container: collector,
+					condition: ContainerDependencyCondition.START,
+				});
+
+				/**
+				 * `AWSDistroOpenTelemetryPolicy`, less `ssm:GetParameters`, which
+				 * is only used when `--config` names an SSM parameter.
+				 *
+				 * @see https://aws-otel.github.io/docs/setup/permissions
+				 */
+				taskDefinition.addToTaskRolePolicy(
+					new PolicyStatement({
+						actions: [
+							'logs:PutLogEvents',
+							'logs:CreateLogGroup',
+							'logs:CreateLogStream',
+							'logs:DescribeLogStreams',
+							'logs:DescribeLogGroups',
+							'logs:PutRetentionPolicy',
+							'xray:PutTraceSegments',
+							'xray:PutTelemetryRecords',
+							'xray:GetSamplingRules',
+							'xray:GetSamplingTargets',
+							'xray:GetSamplingStatisticSummaries',
+						],
+						resources: ['*'],
+					}),
+				);
+			}
 
 			// TODO make these changes at the pattern level in GuCDK
 			if (app.ecsService) {

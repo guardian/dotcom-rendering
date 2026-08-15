@@ -47,7 +47,7 @@
 		"@guardian/support-dotcom-components": "11.0.0",
 		"@guardian/tsconfig": "catalog:",
 		"@opentelemetry/api": "1.9.1",
-		"@opentelemetry/exporter-trace-otlp-http": "0.219.0",
+		"@opentelemetry/exporter-trace-otlp-proto": "0.219.0",
 		"@opentelemetry/instrumentation-http": "0.219.0",
 		"@opentelemetry/sdk-node": "0.219.0",
 		"@playwright/test": "1.60.0",
