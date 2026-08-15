@@ -1,6 +1,11 @@
-import { context, trace } from '@opentelemetry/api';
+import { trace } from '@opentelemetry/api';
 import compression from 'compression';
-import type { ErrorRequestHandler, Request, Response } from 'express';
+import type {
+	ErrorRequestHandler,
+	Request,
+	RequestHandler,
+	Response,
+} from 'express';
 import express from 'express';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
@@ -33,8 +38,12 @@ import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
 
-// Hand-rolled because @opentelemetry/instrumentation-express patches express at
-// require time, which webpack has already inlined by the time the server runs.
+// Spans are hand-made because @opentelemetry/instrumentation-express hooks
+// `require`, and webpack has inlined express into the server bundle.
+// There is a community plugin for webpack that enables this auto-instrumentation
+// but we'd prefer to avoid using it.
+// @see https://github.com/open-telemetry/opentelemetry-js/blob/main/experimental/packages/opentelemetry-instrumentation/README.md#limitations
+// @see https://opentelemetry.io/docs/languages/js/instrumentation/#acquiring-a-tracer
 const tracer = trace.getTracer('dotcom-rendering');
 
 export const prodServer = (): void => {
@@ -42,14 +51,17 @@ export const prodServer = (): void => {
 
 	const app = express();
 
-	const parseJson = express.json({ limit: '50mb' });
-	app.use((req, res, next) => {
-		const span = tracer.startSpan('json parsing');
-		parseJson(req, res, (error?: unknown) => {
+	// Starts a span just before calling express.json, and ends it on its callback
+	const expressJson = express.json({ limit: '50mb' });
+	const expressJsonWrapper: RequestHandler = (req, res, next) => {
+		const span = tracer.startSpan('express.json');
+		expressJson(req, res, (error) => {
 			span.end();
 			next(error);
 		});
-	});
+	};
+
+	app.use(expressJsonWrapper);
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
 	app.use(responseHeaderMiddleware);
@@ -65,13 +77,16 @@ export const prodServer = (): void => {
 		app.use('/assets', express.static(__dirname));
 	}
 
-	// Made the active span so that spans added inside handlers nest beneath it
-	app.use((req, res, next) => {
+	// Starts a span until the http connection is closed
+	// Because it's the last middleware before the request handler,
+	// the span will effectively "wrap" the request handler
+	const requestHandlerWrapper: RequestHandler = (req, res, next) => {
 		const span = tracer.startSpan('request handler');
-		// `close` rather than `finish` so the span ends even if the client disconnects
 		res.on('close', () => span.end());
-		context.with(trace.setSpan(context.active(), span), next);
-	});
+		next();
+	};
+
+	app.use(requestHandlerWrapper);
 
 	app.post('/Article', handleArticle);
 	app.post('/Interactive', handleInteractive);
