@@ -4,10 +4,13 @@ import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
 // in webpack/webpack#21623 ships. See open-telemetry/opentelemetry-js#6981.
 import { NodeSDK } from '@opentelemetry/sdk-node';
 
-// This code is boilerplate.
-// - OpenTelemetry recommends using the NodeSDK https://opentelemetry.io/docs/languages/js/getting-started/nodejs/
-// - The NodeSDK README has an example instrumentation.ts that matches our use case better https://github.com/open-telemetry/opentelemetry-js/blob/main/experimental/packages/opentelemetry-sdk-node/README.md
-// Note: we can't use auto instrumentation as it doesn't work natively with webpack, so we call the only module that works which is HttpInstrumentation
+// This code is mostly boilerplate taken from the Node SDK README
+//
+// Note: we can't use auto instrumentation as it doesn't work natively with webpack,
+// so we call the only module that works which is HttpInstrumentation
+//
+// @see https://opentelemetry.io/docs/languages/js/getting-started/nodejs/
+// @see https://github.com/open-telemetry/opentelemetry-js/blob/main/experimental/packages/opentelemetry-sdk-node/README.md
 const sdk = new NodeSDK({
 	traceExporter: new OTLPTraceExporter(),
 	instrumentations: [
