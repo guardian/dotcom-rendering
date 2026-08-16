@@ -325,9 +325,6 @@ export class RenderingCDKStack extends CDKStack {
 			 * sidecar. The app exports OTLP traces to it over localhost, and it
 			 * forwards them to AWS X-Ray.
 			 *
-			 * Transcribed from the collector's own `awsvpc` sidecar deployment
-			 * template, at the version we run.
-			 *
 			 * @see https://github.com/aws-observability/aws-otel-collector/blob/v0.49.0/deployment-template/ecs/aws-otel-fargate-sidecar-deployment-cfn.yaml
 			 * @see https://aws-otel.github.io/docs/setup/ecs
 			 *
@@ -340,7 +337,6 @@ export class RenderingCDKStack extends CDKStack {
 				const collector = taskDefinition.addContainer(
 					'aws-otel-collector',
 					{
-						// Pinned, where the template uses `latest`, so that deploys are immutable
 						image: ContainerImage.fromRegistry(
 							'public.ecr.aws/aws-observability/aws-otel-collector:v0.49.0',
 						),
@@ -349,14 +345,13 @@ export class RenderingCDKStack extends CDKStack {
 						memoryLimitMiB: 512,
 						logging: LogDrivers.awsLogs({ streamPrefix: 'ecs' }),
 						healthCheck: {
-							// `CMD`, not `CMD-SHELL`, as the image is distroless and has no shell
 							command: ['CMD', '/healthcheck'],
 							interval: Duration.seconds(5),
 							retries: 2,
 							timeout: Duration.seconds(3),
 						},
-						// In the template the collector is the task; here it is a
-						// sidecar, and must not take the rendering app down with it
+						// If resources are constrained this container can be
+						// taken down to give room to the main app
 						essential: false,
 					},
 				);
