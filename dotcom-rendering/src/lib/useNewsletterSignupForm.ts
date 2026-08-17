@@ -22,6 +22,7 @@ import {
 import { clearSubscriptionCache } from './newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from './useAuthStatus';
 import { useBrowserId } from './useBrowserId';
+import { getNewslettersClient } from './bridgetApi';
 
 // ---------------------------------------------------------------------------
 // Helpers (kept local — not part of the public API)
@@ -305,17 +306,36 @@ export const useNewsletterSignupForm = (
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
 	}, []);
-	useEffect(() => {
-		if (emailFetchStartedRef.current) return;
-		if (isSignedIn === 'Pending') return;
-		emailFetchStartedRef.current = true;
 
-		void resolveUserEmail(isSignedIn).then((email) => {
-			if (!isString(email)) return;
-			setUserEmail(email);
-			setHasPrefilledEmail(true);
-			setIsInteracted(true);
-		});
+	useEffect(() => {
+		console.log('after useEffect fill in email');
+		if (renderingTarget === 'Apps') {
+			// Fill in email using apps bridget API
+			void getNewslettersClient()
+				.getLoggedInUserEmail()
+				.then((maybeEmail) => {
+					console.log('after getLoggedInUserEmail ', maybeEmail);
+					const email = maybeEmail.emailAddress;
+					if (!email) return;
+					setUserEmail(email);
+					setHasPrefilledEmail(true);
+					setIsInteracted(true);
+				})
+				.catch((reason) => {
+					console.log('after getLoggedInUserEmail catch ', reason);
+				});
+		} else {
+			if (emailFetchStartedRef.current) return;
+			if (isSignedIn === 'Pending') return;
+			emailFetchStartedRef.current = true;
+
+			void resolveUserEmail(isSignedIn).then((email) => {
+				if (!isString(email)) return;
+				setUserEmail(email);
+				setHasPrefilledEmail(true);
+				setIsInteracted(true);
+			});
+		}
 	}, [isSignedIn]);
 
 	const submitForm = useCallback(
