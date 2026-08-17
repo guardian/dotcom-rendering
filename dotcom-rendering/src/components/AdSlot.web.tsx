@@ -9,7 +9,6 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center as layoutCenterStyles } from '../lib/center';
@@ -289,13 +288,13 @@ const frontsBannerAdStyles = css`
 	}
 `;
 
+/**
+ * The article-end slot is used to display the Public Good advert in the US. However, this advert
+ * is not currently being used. Therefore, there is no minimum height on the slot, so that the
+ * slot does not expand (anticipating an advert) and then collapse (when no advert is served), causing CLS.
+ */
 const articleEndAdStyles = css`
 	position: relative;
-	min-height: 450px;
-
-	&.ad-slot--fluid {
-		min-height: 450px;
-	}
 `;
 
 const mostPopAdStyles = css`
@@ -646,25 +645,23 @@ export const AdSlot = ({
 		}
 		case 'mostpop': {
 			return (
-				<Hide until="tablet">
-					<AdSlotWrapper css={mostPopContainerStyles}>
-						<div
-							id="dfp-ad--mostpop"
-							className={[
-								'js-ad-slot',
-								'ad-slot',
-								'ad-slot--mostpop',
-								'ad-slot--mpu-banner-ad',
-								'ad-slot--rendered',
-							].join(' ')}
-							css={[mostPopAdStyles]}
-							data-link-name="ad slot mostpop"
-							data-name="mostpop"
-							data-testid="slot"
-							aria-hidden="true"
-						/>
-					</AdSlotWrapper>
-				</Hide>
+				<AdSlotWrapper css={mostPopContainerStyles}>
+					<div
+						id="dfp-ad--mostpop"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--mostpop',
+							'ad-slot--mpu-banner-ad',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={mostPopAdStyles}
+						data-link-name="ad slot mostpop"
+						data-name="mostpop"
+						data-testid="slot"
+						aria-hidden="true"
+					/>
+				</AdSlotWrapper>
 			);
 		}
 		case 'merchandising-high': {

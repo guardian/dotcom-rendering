@@ -93,6 +93,9 @@ const indices = [
 	// Media overlay
 	'mediaOverlay',
 
+	// Vertical grid rule lines, kept above the main media in Labs immersive articles
+	'immersiveGridOuterRules',
+
 	// Self-hosted video
 	'video-progress-bar-foreground',
 	'video-progress-bar-background',

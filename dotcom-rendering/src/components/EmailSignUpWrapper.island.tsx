@@ -11,19 +11,14 @@ import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { Island } from './Island';
 import { NewsletterSignupCardContainer } from './NewsletterSignupCardContainer';
 import { NewsletterSignupForm } from './NewsletterSignupForm.island';
-// When the next A/B experiment is added (e.g. preview-button test), import
-// useAB and AB_TEST_NAME from their respective modules and thread them through
-// sendNewsletterSignupEvent's `abTest` param and NewsletterSignupForm's `abTest` prop.
 
 interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	index: number;
 	listId: number;
 	identityName: string;
-	category?: string;
 	/** Illustration image URL (square crop) for the NewsletterSignupCard */
 	illustrationSquare?: string;
 	idApiUrl: string;
-	exampleUrl?: string;
 }
 
 /**
@@ -36,9 +31,7 @@ export const EmailSignUpWrapper = ({
 	index,
 	listId,
 	identityName,
-	category,
 	idApiUrl,
-	exampleUrl,
 	name,
 	description,
 	illustrationSquare,
@@ -90,24 +83,17 @@ export const EmailSignUpWrapper = ({
 				illustrationSquare={illustrationSquare}
 				frequency={frequency}
 				theme={theme}
-				identityName={identityName}
-				category={category}
-				exampleUrl={exampleUrl}
-				renderingTarget={renderingTarget}
 				isSignedIn={isSignedIn}
 			>
-				{(previewAction) => (
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<NewsletterSignupForm
-							newsletterId={identityName}
-							newsletterName={name}
-							frequency={frequency}
-							previewAction={previewAction}
-							componentId={componentId}
-							isAlreadySubscribed={isSubscribed}
-						/>
-					</Island>
-				)}
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<NewsletterSignupForm
+						newsletterId={identityName}
+						newsletterName={name}
+						frequency={frequency}
+						componentId={componentId}
+						isAlreadySubscribed={isSubscribed}
+					/>
+				</Island>
 			</NewsletterSignupCardContainer>
 		</InlineSkipToWrapper>
 	);

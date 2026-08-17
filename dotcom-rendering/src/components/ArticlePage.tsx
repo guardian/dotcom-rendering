@@ -4,6 +4,7 @@ import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
+import { isFilterPageId } from '../lib/theFilter';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -78,6 +79,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			<Lightbox
 				format={format}
 				switches={frontendData.config.switches}
+				isFilterArticle={isFilterPageId(frontendData.pageId)}
 				{...(renderingTarget === 'Web'
 					? {
 							lightboxImages: frontendData.imagesForLightbox,
@@ -91,7 +93,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
-			{!!frontendData.affiliateLinksDisclaimer && (
+			{frontendData.affiliateLinksDisclaimerRequired && (
 				<Island priority="feature" defer={{ until: 'idle' }}>
 					<EnhanceAffiliateLinks />
 				</Island>
@@ -113,7 +115,6 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							commercialMetricsEnabled={
 								!!frontendData.config.switches.commercialMetrics
 							}
-							tests={frontendData.config.abTests}
 						/>
 					</Island>
 					<Island priority="feature" defer={{ until: 'idle' }}>
@@ -136,10 +137,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							}
 						/>
 					</Island>
-					{isGoogleOneTapEnabled(
-						frontendData.config.abTests,
-						frontendData.config.switches,
-					) && (
+					{isGoogleOneTapEnabled(frontendData.config.switches) && (
 						<Island
 							priority="enhancement"
 							defer={{ until: 'idle' }}

@@ -1,4 +1,4 @@
-import { BUILD_VARIANT, dcrJavascriptBundle } from '../../../webpack/bundles';
+import { BUILD_VARIANT } from '../../../webpack/bundles';
 import { loadSentryOnError } from './loadSentry';
 
 type IsSentryEnabled = {
@@ -46,10 +46,9 @@ const stubSentry = (): void => {
 };
 
 export const sentryLoader = (): Promise<void> => {
-	const { switches, isDev, tests } = window.guardian.config;
+	const { switches, isDev } = window.guardian.config;
 	const enableSentryReporting = !!switches.enableSentryReporting;
-	const isInBrowserVariantTest =
-		BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant';
+	const isInBrowserVariantTest = BUILD_VARIANT;
 
 	const canLoadSentry = isSentryEnabled({
 		enableSentryReporting,

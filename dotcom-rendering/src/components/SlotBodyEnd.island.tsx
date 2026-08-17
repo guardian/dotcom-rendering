@@ -3,7 +3,7 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import { adSizes, type SizeMapping } from '@guardian/commercial-core';
+import { adSizes } from '@guardian/commercial-core';
 import type { CountryCode } from '@guardian/libs';
 import { isUndefined } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
@@ -43,7 +43,6 @@ type Props = {
 	contentType: string;
 	sectionId: string;
 	shouldHideReaderRevenue: boolean;
-	isMinuteArticle: boolean;
 	isPaidContent: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
@@ -110,7 +109,6 @@ export const SlotBodyEnd = ({
 	contentType,
 	sectionId,
 	shouldHideReaderRevenue,
-	isMinuteArticle,
 	isPaidContent,
 	tags,
 	contributionsServiceUrl,
@@ -160,10 +158,8 @@ export const SlotBodyEnd = ({
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({
 			isSignedIn,
 			countryCode,
-			contentType,
 			sectionId,
 			shouldHideReaderRevenue,
-			isMinuteArticle,
 			isPaidContent,
 			tags,
 			contributionsServiceUrl,
@@ -221,7 +217,6 @@ export const SlotBodyEnd = ({
 		contentType,
 		contributionsServiceUrl,
 		idApiUrl,
-		isMinuteArticle,
 		isPaidContent,
 		renderingTarget,
 		sectionId,
@@ -239,14 +234,11 @@ export const SlotBodyEnd = ({
 			pickMessageResult?.type === 'NoMessageSelected' &&
 			showArticleEndSlot
 		) {
-			const additionalSizes = (): SizeMapping => {
-				return { mobile: [adSizes.fluid] }; // Public Good additional ad slot sizes
-			};
 			document.dispatchEvent(
 				new CustomEvent('gu.commercial.slot.fill', {
 					detail: {
 						slotId: 'dfp-ad--article-end',
-						additionalSizes: additionalSizes(),
+						additionalSizes: { mobile: [adSizes.fluid] }, // Public Good additional ad slot sizes
 					},
 				}),
 			);

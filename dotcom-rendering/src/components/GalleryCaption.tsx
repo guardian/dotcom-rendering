@@ -55,13 +55,13 @@ const hostedGalleryStyles = css`
 	${textSansBold17}
 	align-self: end;
 
+	${from.tablet} {
+		padding-bottom: ${space[10]}px;
+	}
+
 	${between.tablet.and.desktop} {
 		padding-left: 0;
 		padding-right: 0;
-	}
-
-	${from.tablet} {
-		padding-bottom: ${space[10]}px;
 	}
 `;
 

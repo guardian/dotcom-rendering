@@ -9,7 +9,6 @@ import type { ProductBlockElement } from '../types/content';
 import { ProductElement } from './ProductElement';
 
 const ArticleElementComponent = getNestedArticleElement({
-	abTests: {},
 	ajaxUrl: '',
 	editionId: 'UK',
 	isAdFreeUser: false,

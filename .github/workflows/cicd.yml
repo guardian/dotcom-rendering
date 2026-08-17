@@ -1,14 +1,11 @@
 name: DCR CICD
 
 on:
+  merge_group:
+    types: [checks_requested]
   push:
 
 jobs:
-  container:
-    permissions:
-      packages: write
-    uses: ./.github/workflows/container.yml
-
   production-container:
     permissions:
       contents: read
@@ -17,17 +14,33 @@ jobs:
     secrets:
       GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
 
+  container:
+    permissions:
+      packages: write
+    needs: [production-container]
+    uses: ./.github/workflows/container.yml
+    with:
+      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
+
   prettier:
+    if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/prettier.yml
 
   jest:
+    if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/jest.yml
 
   lint:
+    if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/lint.yml
+
+  islands:
+    if: github.ref != 'refs/heads/main'
+    uses: ./.github/workflows/check-islands.yml
 
   playwright:
     needs: [container]
+    if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/playwright.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}
@@ -37,7 +50,17 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write # required by riff-raff action
-    needs: [container, prettier, jest, lint, playwright]
+    needs: [container, islands, prettier, jest, lint, playwright]
+    # We don't need a riff-raff deployment for merge_group events.
+    # `!cancelled()` forces this job to be evaluated even when some of the
+    # `needs` jobs are skipped (the checks are skipped on push to main), and
+    # `!contains(needs.*.result, 'failure')` still blocks publish if any needed
+    # job actually failed. Without a status-check function here, a skipped
+    # dependency would cause this job to be skipped as well.
+    if: >-
+      !cancelled() &&
+      !contains(needs.*.result, 'failure') &&
+      github.event_name == 'push'
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}

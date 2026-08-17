@@ -26,7 +26,7 @@ import {
 } from '../lib/newsletter-marketing-opt-in';
 import {
 	getErrorType,
-	getResponseErrorDescription,
+	getResponseFailureDetails,
 } from '../lib/newsletterSignupFailureDetails';
 import {
 	EVENT_DESCRIPTION_TO_ACTION,
@@ -394,11 +394,10 @@ export const SecureSignup = ({
 
 		if (!response.ok) {
 			trackingDetails.responseStatus = response.status;
-			const errorDescription =
-				await getResponseErrorDescription(response);
-			if (errorDescription) {
-				trackingDetails.errorDescription = errorDescription;
-			}
+			Object.assign(
+				trackingDetails,
+				await getResponseFailureDetails(response),
+			);
 		}
 
 		sendTracking(

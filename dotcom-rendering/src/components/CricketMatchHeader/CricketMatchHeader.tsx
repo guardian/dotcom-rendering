@@ -21,9 +21,10 @@ import type {
 	CricketMatch,
 	CricketResult,
 	CricketTeam,
-} from '../../cricketMatchV2';
+} from '../../cricketMatch';
 import { grid } from '../../grid';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import { getCommercialClient } from '../../lib/bridgetApi';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -34,6 +35,7 @@ import { useLocationHash } from '../../lib/useLocationHash';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import type { ArticleDeprecated } from '../../types/article';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { BigNumber } from '../BigNumber';
 import { CricketScorecardTabRemoteRender } from '../CricketScorecardTabRemoteRender';
 import {
@@ -55,6 +57,7 @@ export type CricketMatchHeaderProps = {
 	tabContentId: string;
 	format: ArticleFormat;
 	article: ArticleDeprecated;
+	renderingTarget: RenderingTarget;
 };
 
 type Props = CricketMatchHeaderProps & {
@@ -62,13 +65,29 @@ type Props = CricketMatchHeaderProps & {
 	refreshInterval: number;
 };
 
+export const getUrl = (
+	baseUrl: URL | undefined,
+	renderingTarget: RenderingTarget,
+): URL | undefined => {
+	if (!baseUrl) return undefined;
+
+	const url = new URL(baseUrl);
+	if (renderingTarget === 'Apps') {
+		url.searchParams.set('dcr', 'apps');
+	}
+	return url;
+};
+
 export const CricketMatchHeader = (props: Props) => {
 	const scorecardHashbang = '#scorecard';
 	const locationHash = useLocationHash();
+	const currentUrl = new URL(
+		`${props.article.guardianBaseURL}/${props.article.pageId}`,
+	);
 
 	const { data, error } = useSWR<CricketHeaderData, Error>(
 		props.matchHeaderURL,
-		fetcher(props.getHeaderData),
+		fetcher(props.getHeaderData, props.selectedTab, currentUrl),
 		swrOptions(props.refreshInterval),
 	);
 
@@ -126,6 +145,11 @@ export const CricketMatchHeader = (props: Props) => {
 	const onInfoTabClick = () => {
 		setSelectedTab('info');
 		window.location.hash = scorecardHashbang;
+
+		if (props.renderingTarget == 'Apps') {
+			// Remove ads by inserting a list of empty ad slots
+			void getCommercialClient().insertAdverts([]);
+		}
 	};
 
 	return (
@@ -161,8 +185,8 @@ export const CricketMatchHeader = (props: Props) => {
 					sportKind="cricket"
 					matchKind={match.kind}
 					selected={selectedTab}
-					reportTab={tabs.reportURL}
-					liveTab={tabs.liveURL}
+					reportTab={getUrl(tabs.reportURL, props.renderingTarget)}
+					liveTab={getUrl(tabs.liveURL, props.renderingTarget)}
 					infoTab={onInfoTabClick}
 				/>
 			</div>
@@ -193,10 +217,14 @@ const swrOptions = (
 });
 
 const fetcher =
-	(getHeaderData: Props['getHeaderData']) =>
+	(
+		getHeaderData: Props['getHeaderData'],
+		selectedTab: 'info' | 'live' | 'report',
+		currentUrl: URL,
+	) =>
 	(url: string): Promise<CricketHeaderData> =>
 		getHeaderData(url)
-			.then(parseHeaderData)
+			.then(parseHeaderData(selectedTab, currentUrl))
 			.then((result) => {
 				if (!result.ok) {
 					log('dotcom', result.error);
@@ -408,42 +436,47 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 			</span>
 			{props.match.kind !== 'Fixture' &&
 				(innings.length > 0 ? (
-					innings.map((inning, index) => (
-						<Fragment key={index}>
-							<Score
-								runs={inning.inningsTotals.runs}
-								fallOfWickets={inning.inningsTotals.wickets}
-								matchKind={props.match.kind}
-							/>
-							{!!inning.inningsTotals.overs && (
-								<>
-									<EndOfInningReason
-										inning={{
-											wickets:
-												inning.inningsTotals.wickets,
-											declared: inning.declared,
-											forfeited: inning.forfeited,
-										}}
-									/>
-									<span
-										css={{
-											...textSans12Object,
-											display: 'inline-block',
-											marginTop: space[2],
-											padding: `0 ${space[1]}px 1px ${space[1]}px`,
-											border: '1px solid',
-											borderRadius: 30,
-											color: palette(
-												secondaryText(props.match.kind),
-											),
-										}}
-									>
-										{inning.inningsTotals.overs} overs
-									</span>
-								</>
-							)}
-						</Fragment>
-					))
+					innings
+						.sort((a, b) => a.order - b.order)
+						.map((inning, index) => (
+							<Fragment key={index}>
+								<Score
+									runs={inning.inningsTotals.runs}
+									fallOfWickets={inning.inningsTotals.wickets}
+									matchKind={props.match.kind}
+								/>
+								{!!inning.inningsTotals.overs && (
+									<>
+										<EndOfInningReason
+											inning={{
+												wickets:
+													inning.inningsTotals
+														.wickets,
+												declared: inning.declared,
+												forfeited: inning.forfeited,
+											}}
+										/>
+										<span
+											css={{
+												...textSans12Object,
+												display: 'inline-block',
+												marginTop: space[2],
+												padding: `0 ${space[1]}px 1px ${space[1]}px`,
+												border: '1px solid',
+												borderRadius: 30,
+												color: palette(
+													secondaryText(
+														props.match.kind,
+													),
+												),
+											}}
+										>
+											{inning.inningsTotals.overs} overs
+										</span>
+									</>
+								)}
+							</Fragment>
+						))
 				) : (
 					<span
 						css={{

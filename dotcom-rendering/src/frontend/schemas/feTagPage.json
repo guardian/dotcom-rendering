@@ -477,6 +477,57 @@
                                     "successDescription",
                                     "theme"
                                 ]
+                            },
+                            "tests": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "testUuid": {
+                                            "type": "string"
+                                        },
+                                        "variantMeta": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "$ref": "#/definitions/VariantId"
+                                                    },
+                                                    "meta": {
+                                                        "type": "object",
+                                                        "additionalProperties": {}
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "meta"
+                                                ]
+                                            }
+                                        },
+                                        "startDate": {
+                                            "type": "number"
+                                        },
+                                        "expiryDate": {
+                                            "type": "number"
+                                        },
+                                        "frontsThisTestCanRunOn": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "hasManuallyEndedOnThisTrail": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "frontsThisTestCanRunOn",
+                                        "hasManuallyEndedOnThisTrail",
+                                        "testUuid",
+                                        "variantMeta"
+                                    ]
+                                }
                             }
                         },
                         "required": [
@@ -1429,6 +1480,13 @@
                 }
             ]
         },
+        "VariantId": {
+            "enum": [
+                "A",
+                "B"
+            ],
+            "type": "string"
+        },
         "FEFrontCardStyle": {
             "enum": [
                 "Analysis",
@@ -1638,11 +1696,6 @@
                 {
                     "type": "object",
                     "properties": {
-                        "abTests": {
-                            "description": "Server-side AB tests. Optional from `frontend`; a default of\n`{}` is applied by AJV during request validation (see `useDefaults` in\n`validate.ts`), so this is always present after enhancing.",
-                            "default": {},
-                            "type": "object"
-                        },
                         "adUnit": {
                             "type": "string"
                         },
@@ -1754,7 +1807,6 @@
                         }
                     },
                     "required": [
-                        "abTests",
                         "adUnit",
                         "ajaxUrl",
                         "commercialBundleUrl",

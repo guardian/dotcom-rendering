@@ -1,8 +1,11 @@
-import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { AudioLayout } from './AudioLayout';
 import { CommentLayout } from './CommentLayout';
 import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
@@ -33,8 +36,18 @@ interface WebProps extends BaseProps {
 
 export type Props = WebProps | AppProps;
 
+/**
+ * Guards the new grid-based immersive layout for Guardian Labs articles
+ * behind a 0% a/b test
+ */
+export const LABS_IMMERSIVE_GRID_AB_TEST = 'commercial-labs-immersive-grid';
+
+const isInLabsImmersiveGridTest = (article: Article): boolean =>
+	article.frontendData.config.serverSideABTests[
+		LABS_IMMERSIVE_GRID_AB_TEST
+	] === 'enable';
+
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
-	const notSupported = <pre>Not supported</pre>;
 	const format = {
 		design: article.design,
 		display: article.display,
@@ -56,7 +69,15 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 					);
 				}
 				default: {
-					return (
+					return article.theme === ArticleSpecial.Labs &&
+						isInLabsImmersiveGridTest(article) ? (
+						<StandardLayout
+							article={article.frontendData}
+							format={format}
+							renderingTarget={renderingTarget}
+							serverTime={serverTime}
+						/>
+					) : (
 						<ImmersiveLayout
 							article={article.frontendData}
 							format={format}
@@ -155,8 +176,14 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
-					// Should be NewsletterSignup once implemented for apps
-					return notSupported;
+					return (
+						<NewsletterSignupLayout
+							article={article.frontendData}
+							format={format}
+							renderingTarget={renderingTarget}
+							serverTime={serverTime}
+						/>
+					);
 				case ArticleDesign.Gallery:
 					return (
 						<GalleryLayout
@@ -187,15 +214,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							gallery={article}
 							format={format}
 							renderingTarget={renderingTarget}
-						/>
-					);
-				case ArticleDesign.Audio:
-					return (
-						<AudioLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				default:
@@ -235,7 +253,16 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 					);
 				}
 				default: {
-					return (
+					return article.theme === ArticleSpecial.Labs &&
+						isInLabsImmersiveGridTest(article) ? (
+						<StandardLayout
+							article={article.frontendData}
+							format={format}
+							NAV={NAV}
+							renderingTarget={renderingTarget}
+							serverTime={serverTime}
+						/>
+					) : (
 						<ImmersiveLayout
 							article={article.frontendData}
 							format={format}
@@ -347,16 +374,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							article={article.frontendData}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-				case ArticleDesign.Audio:
-					return (
-						<AudioLayout
-							article={article.frontendData}
-							format={format}
-							NAV={NAV}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
 						/>

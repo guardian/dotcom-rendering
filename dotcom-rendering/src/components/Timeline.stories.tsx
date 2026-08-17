@@ -73,7 +73,6 @@ const testYoutubeElement: YoutubeBlockElement = {
 };
 
 const ArticleElementComponent = getNestedArticleElement({
-	abTests: {},
 	/**
 	 * This is used for rich links. An empty string isn't technically valid,
 	 * but there are no rich links in this example.

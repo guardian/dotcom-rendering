@@ -33,10 +33,11 @@ import { type RenderingTarget } from './renderingTarget';
  *
  * @deprecated Replaced by {@linkcode Article}.
  */
-export type ArticleDeprecated = FEArticle & {
+export type ArticleDeprecated = Omit<FEArticle, 'affiliateLinksDisclaimer'> & {
 	imagesForLightbox: ImageForLightbox[];
 	imagesForAppsLightbox: ImageForAppsLightbox[];
 	tableOfContents?: TableOfContentsItem[];
+	affiliateLinksDisclaimerRequired: boolean;
 };
 
 export type ArticleFields = {
@@ -137,12 +138,17 @@ export const enhanceArticleType = (
 		format.design === ArticleDesign.Gallery,
 	);
 
+	const affiliateLinksDisclaimerRequired =
+		data.affiliateLinksDisclaimer === 'true' ||
+		(data.affiliateLinksDisclaimer as unknown) === true;
+
 	if (isGalleryPage(format.design)) {
 		const { design } = format;
 
 		return {
 			frontendData: {
 				...data,
+				affiliateLinksDisclaimerRequired,
 				mainMediaElements,
 				blocks,
 				standfirst: enhanceStandfirst(data.standfirst),
@@ -188,6 +194,7 @@ export const enhanceArticleType = (
 		serverTime,
 		frontendData: {
 			...data,
+			affiliateLinksDisclaimerRequired,
 			mainMediaElements,
 			blocks,
 			pinnedPost: enhancePinnedPost(

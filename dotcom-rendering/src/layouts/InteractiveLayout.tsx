@@ -2,12 +2,14 @@ import { css, Global } from '@emotion/react';
 import {
 	from,
 	palette as sourcePalette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type React from 'react';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -296,7 +298,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
-								backgroundColour={sourcePalette.labs[400]}
+								backgroundColour={sourcePalette.labs[100]}
 								borderColour={sourcePalette.neutral[60]}
 								sectionId="labs-header"
 							>
@@ -336,7 +338,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										ajaxUrl={article.config.ajaxUrl}
-										abTests={article.config.abTests}
 										switches={article.config.switches}
 										isAdFreeUser={article.isAdFreeUser}
 										isSensitive={article.config.isSensitive}
@@ -486,6 +487,15 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									)}
 								</div>
 							</GridItem>
+							{article.affiliateLinksDisclaimerRequired && (
+								<GridItem area="meta" element="aside">
+									<AffiliateDisclaimer
+										cssOverrides={css`
+											margin-top: ${space[4]}px;
+										`}
+									/>
+								</GridItem>
+							)}
 							<GridItem area="body" element="article">
 								<ArticleContainer format={format}>
 									<ArticleBody
@@ -495,7 +505,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										ajaxUrl={article.config.ajaxUrl}
-										abTests={article.config.abTests}
 										switches={article.config.switches}
 										isSensitive={article.config.isSensitive}
 										isAdFreeUser={article.isAdFreeUser}
@@ -553,9 +562,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isMinuteArticle={
-									article.pageType.isMinuteArticle
-								}
 								isPaidContent={article.pageType.isPaidContent}
 								pageId={article.pageId}
 								sectionId={article.config.section}

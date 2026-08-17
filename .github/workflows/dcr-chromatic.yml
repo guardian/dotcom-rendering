@@ -1,8 +1,8 @@
 name: DCR Chromatic 👓
 
 on:
-  push:
-    branches: [main]
+  merge_group:
+    types: [checks_requested]
   pull_request:
     types: [opened, labeled, synchronize]
 
@@ -19,24 +19,26 @@ jobs:
     # reported. When skipping, Chromatic posts a passing status without building Storybook.
     steps:
       - name: Checkout - On Pull Request
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         if: ${{ github.event_name == 'pull_request'}}
         with:
           fetch-depth: 0
           # By default the pull_request event will run on a ephermeral merge commit which simulates a merge between the pull request
           # and the target branch. This can cause issues with Chromatic https://www.chromatic.com/docs/turbosnap#github-pullrequest-triggers
           # Hopefully by checking out the HEAD commit of a PR instead of the merge commit we can avoid some of those issues.
-          ref: ${{ github.event.pull_request.head.sha }}
+          # We fallback to github.sha in case the workflow is triggered by a merge_group event, which doesn't have a pull_request object, see https://www.chromatic.com/docs/faq/merge-queue-ref/
+          ref: ${{ github.event.pull_request.head.ref || github.sha }}
+
       - name: Checkout - On Push Event
-        uses: actions/checkout@v6
-        if: ${{ github.event_name == 'push'}}
+        uses: actions/checkout@v7
+        if: ${{ github.event_name == 'merge_group' }}
         with:
           fetch-depth: 0
 
       - name: Set up Node environment
         # Only needed for a full Chromatic run.
         if: |
-          github.ref == 'refs/heads/main' ||
+          github.event_name == 'merge_group' ||
           (github.event_name == 'pull_request' &&
             contains(github.event.pull_request.labels.*.name, 'run_chromatic'))
         uses: ./.github/actions/setup-node-env
@@ -49,7 +51,7 @@ jobs:
           NODE_OPTIONS: '--max_old_space_size=4096'
         uses: chromaui/action@v17.4.1
         if: |
-          github.ref == 'refs/heads/main' ||
+          github.event_name == 'merge_group' ||
           (github.event_name == 'pull_request' &&
             contains(github.event.pull_request.labels.*.name, 'run_chromatic')) ||
           (github.event_name == 'pull_request' && needs.check-paths.outputs.relevant != 'true')
@@ -69,7 +71,7 @@ jobs:
   remove-label:
     # Only remove label when Chromatic actually ran (label present and relevant changes)
     if: |
-      github.ref != 'refs/heads/main' &&
+      github.event_name == 'pull_request' &&
       contains(github.event.pull_request.labels.*.name, 'run_chromatic') &&
       needs.check-paths.outputs.relevant == 'true'
     runs-on: ubuntu-latest

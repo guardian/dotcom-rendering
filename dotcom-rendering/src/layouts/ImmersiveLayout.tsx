@@ -342,7 +342,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={sourcePalette.labs[400]}
+						backgroundColour={sourcePalette.labs[100]}
 						borderColour={sourcePalette.neutral[60]}
 						sectionId="labs-header"
 					>
@@ -373,7 +373,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						pageId={article.pageId}
 						webTitle={article.webTitle}
 						ajaxUrl={article.config.ajaxUrl}
-						abTests={article.config.abTests}
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
@@ -530,6 +529,16 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									byline={article.byline}
 								/>
 							)}
+							{article.affiliateLinksDisclaimerRequired && (
+								<Hide when="below" breakpoint="leftCol">
+									<AffiliateDisclaimer
+										cssOverrides={css`
+											margin: ${space[4]}px 0
+												${space[1]}px 0;
+										`}
+									/>
+								</Hide>
+							)}
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
 								<Hide when="below" breakpoint="leftCol">
@@ -624,9 +633,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 													article.config.shortUrlId
 												}
 											/>
-											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
-											)}
 										</Hide>
 									</>
 								) : (
@@ -654,10 +660,17 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												article.config.shortUrlId
 											}
 										/>
-										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
-										)}
 									</>
+								)}
+								{article.affiliateLinksDisclaimerRequired && (
+									<Hide when="above" breakpoint="leftCol">
+										<AffiliateDisclaimer
+											cssOverrides={css`
+												margin: ${space[4]}px 0
+													${space[1]}px 0;
+											`}
+										/>
+									</Hide>
 								)}
 							</div>
 						</GridItem>
@@ -689,7 +702,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									isPreview={article.config.isPreview}
 									idUrl={article.config.idUrl ?? ''}
 									isDev={!!article.config.isDev}
-									abTests={article.config.abTests}
 									tableOfContents={article.tableOfContents}
 									lang={article.lang}
 									isRightToLeftLang={
@@ -710,9 +722,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												contributionsServiceUrl
 											}
 											idApiUrl={article.config.idApiUrl}
-											isMinuteArticle={
-												article.pageType.isMinuteArticle
-											}
 											isPaidContent={
 												article.pageType.isPaidContent
 											}

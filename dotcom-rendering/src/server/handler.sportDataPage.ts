@@ -1,5 +1,4 @@
 import type { RequestHandler } from 'express';
-import { parse as parseCricketMatch } from '../cricketMatch';
 import { parse as parseFootballMatch } from '../footballMatch';
 import {
 	getParserErrorMessage,
@@ -11,7 +10,6 @@ import {
 	parse as parseFootballTables,
 	parseTableSummary,
 } from '../footballTables';
-import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
 import type { FEFootballCompetition } from '../frontend/feFootballDataPage';
 import type { FEFootballMatchInfoPage } from '../frontend/feFootballMatchInfoPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
@@ -21,13 +19,11 @@ import { safeParseURL } from '../lib/parse';
 import type { NavType } from '../model/extract-nav';
 import { extractNAV } from '../model/extract-nav';
 import {
-	validateAsCricketMatchPageType,
 	validateAsFootballMatchListPage,
 	validateAsFootballMatchPageType,
 	validateAsFootballTablesPage,
 } from '../model/validate';
 import type {
-	CricketMatchPage,
 	FootballMatchInfoPage,
 	FootballMatchListPage,
 	FootballMatchListPageKind,
@@ -183,43 +179,6 @@ export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
-const parseFECricketMatch = (data: FECricketMatchPage): CricketMatchPage => {
-	const parsedCricketMatch = parseCricketMatch(data.cricketMatch);
-
-	if (!parsedCricketMatch.ok) {
-		throw new Error(
-			`Failed to parse cricket match: ${parsedCricketMatch.error.kind} ${parsedCricketMatch.error.message}`,
-		);
-	}
-
-	return {
-		match: parsedCricketMatch.value,
-		kind: 'CricketMatch',
-
-		editionId: data.editionId,
-		guardianBaseURL: data.guardianBaseURL,
-		config: data.config,
-		pageFooter: data.pageFooter,
-		isAdFreeUser: data.isAdFreeUser,
-		canonicalUrl: data.canonicalUrl,
-		contributionsServiceUrl: data.contributionsServiceUrl,
-	};
-};
-
-export const handleCricketMatchPage: RequestHandler = ({ body }, res) => {
-	const cricketMatchPageValidated: FECricketMatchPage =
-		validateAsCricketMatchPageType(body);
-
-	const parsedCricketMatchData = parseFECricketMatch(
-		cricketMatchPageValidated,
-	);
-	const { html, prefetchScripts } = renderSportPage({
-		sportData: parsedCricketMatchData,
-		nav: parseNav(cricketMatchPageValidated.nav),
-	});
-	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
-};
-
 const parseFEFootballMatch = (
 	data: FEFootballMatchInfoPage,
 ): FootballMatchInfoPage => {
@@ -268,7 +227,6 @@ const parseFEFootballMatch = (
 		matchInfo: matchInfo.value,
 		competitionName: data.competitionName,
 		group: group?.value,
-		matchUrl: data.matchUrl,
 		matchHeaderUrl: headerUrl.value,
 		kind: 'FootballMatchSummary',
 		editionId: data.editionId,

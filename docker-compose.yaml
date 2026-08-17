@@ -1,0 +1,53 @@
+# A Docker Compose file for running the production build locally.
+# Usage:
+#   docker compose up -d --build --force-recreate
+services:
+  tag-page-rendering:
+    build:
+      dockerfile: ./Production.dockerfile
+    environment:
+      NODE_ENV: production
+      GU_STAGE: PROD
+      GU_APP: tag-page-rendering
+      GU_STACK: frontend
+
+      # We configure Log4JS based on this environment variable. See `server/lib/logging.ts`.
+      AWS_EXECUTION_ENV: AWS_ECS_LOCAL
+
+      # Explicitly tell AWS SDK where to find credentials
+      AWS_SHARED_CREDENTIALS_FILE: /.aws/credentials
+    ports:
+      - '9000:9000'
+
+    # Share the host's AWS credentials with the container
+    volumes:
+      - ${HOME}/.aws/credentials:/.aws/credentials:ro
+
+    # In Production.dockerfile, we're deliberately using a minimal image that does not have `curl` installed.
+    # Therefore, we're using Node to make a request to the healthcheck endpoint instead of using `curl`.
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://localhost:9000/_healthcheck').then(_ => process.exit(0)).catch(_ => process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # This service is used to make a sample request to tag-page-rendering only after it has started and is healthy.
+  # It exits immediately after making the request, so it is not a long-running service.
+  # View the logs via:
+  #   docker logs "$(docker ps -aq --filter "name=sample-request" --latest)"
+  # The log output is the DCR response, so we can also pipe it through `jq` to pretty-print it, e.g.:
+  #   docker logs "$(docker ps -aq --filter "name=sample-request" --latest)" | jq .
+  sample-request:
+    image: curlimages/curl:8.21.0
+    depends_on:
+      tag-page-rendering:
+        condition: service_healthy
+    command: |
+      curl "https://www.theguardian.com/tone/minutebyminute.json?dcr=true" --silent > data.json && \
+        curl -X POST http://localhost:9000/TagPage -d @data.json -H "Content-Type: application/json"

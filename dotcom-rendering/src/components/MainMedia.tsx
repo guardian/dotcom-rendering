@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints, space, until } from '@guardian/source/foundations';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -8,10 +9,11 @@ import {
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 
 const mainMedia = css`
+	position: relative;
 	height: 100%;
 
 	${until.tablet} {
@@ -90,12 +92,12 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
 	shouldHideAds: boolean;
 	contentType?: string;
 	contentLayout?: string;
+	articleArrangement?: LayoutType;
 };
 
 export const MainMedia = ({
@@ -108,12 +110,12 @@ export const MainMedia = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
-	abTests,
 	switches,
 	editionId,
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	articleArrangement,
 }: Props) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
@@ -130,13 +132,13 @@ export const MainMedia = ({
 					webTitle={webTitle}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					hideCaption={hideCaption}
 					editionId={editionId}
 					shouldHideAds={shouldHideAds}
 					contentType={contentType}
 					contentLayout={contentLayout}
+					articleArrangement={articleArrangement}
 				/>
 			))}
 		</div>

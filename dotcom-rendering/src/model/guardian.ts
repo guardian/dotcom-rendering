@@ -1,10 +1,5 @@
 import type { EditionId } from '../lib/edition';
-import type {
-	ConfigType,
-	ServerSideTests,
-	StageType,
-	Switches,
-} from '../types/config';
+import type { ConfigType, StageType, Switches } from '../types/config';
 import type { ReportError } from '../types/sentry';
 
 export interface Guardian {
@@ -50,7 +45,6 @@ export interface Guardian {
 			googletag: string;
 		};
 		switches: Switches;
-		tests: ServerSideTests;
 		serverSideABTests: Record<string, string>;
 		ophan: {
 			pageViewId: string;
@@ -95,7 +89,6 @@ export const createGuardian = ({
 	isPaidContent,
 	googletagUrl,
 	switches,
-	abTests,
 	serverSideABTests,
 	editionId,
 	contentType,
@@ -115,7 +108,6 @@ export const createGuardian = ({
 	ajaxUrl: string;
 	googletagUrl: string;
 	switches: Switches;
-	abTests: ServerSideTests;
 	serverSideABTests: Record<string, string>;
 	editionId: EditionId;
 	shouldHideReaderRevenue?: boolean;
@@ -166,7 +158,6 @@ export const createGuardian = ({
 				googletag: googletagUrl,
 			},
 			switches,
-			tests: abTests,
 			serverSideABTests,
 			ophan: {
 				pageViewId: '',

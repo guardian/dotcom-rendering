@@ -21,13 +21,13 @@ import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
 import {
 	handleAppsFootballMatchPage,
-	handleCricketMatchPage,
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
 } from './handler.sportDataPage';
 import { handleAppsThrasher } from './handler.thrasher.apps';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
+import { responseHeaderMiddleware } from './lib/header-middleware';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
@@ -40,6 +40,7 @@ export const prodServer = (): void => {
 	app.use(express.json({ limit: '50mb' }));
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
+	app.use(responseHeaderMiddleware);
 
 	app.get('/_healthcheck', (req: Request, res: Response) => {
 		res.status(200).send('OKAY');
@@ -58,7 +59,6 @@ export const prodServer = (): void => {
 	app.post('/Front', handleFront);
 	app.post('/TagPage', handleTagPage);
 	app.post('/FootballMatchListPage', handleFootballMatchListPage);
-	app.post('/CricketMatchPage', handleCricketMatchPage);
 	app.post('/FootballTablesPage', handleFootballTablesPage);
 	app.post('/FootballMatchSummaryPage', handleFootballMatchPage);
 	app.post('/FootballMatchDayEmbed', handleFootballMatchDayEmbed);

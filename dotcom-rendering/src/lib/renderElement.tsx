@@ -1,6 +1,6 @@
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
-import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.island';
+import { AudioPlayer } from '../components/AudioPlayer/AudioPlayer';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.island';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.island';
@@ -68,11 +68,12 @@ import {
 } from '../components/WitnessBlockComponent';
 import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent.island';
 import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	interactiveLegacyFigureClasses,
 	isInteractive,
 } from '../layouts/lib/interactiveLegacyStyling';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
 import {
 	ArticleDesign,
@@ -97,7 +98,6 @@ type Props = {
 	isSensitive: boolean;
 	switches: Switches;
 	isPinnedPost?: boolean;
-	abTests: ServerSideTests;
 	editionId: EditionId;
 	forceDropCap?: 'on' | 'off';
 	isTimeline?: boolean;
@@ -107,6 +107,7 @@ type Props = {
 	shouldHideAds: boolean;
 	contentType?: string;
 	contentLayout?: string;
+	articleArrangement?: LayoutType;
 	idApiUrl?: string;
 };
 
@@ -169,7 +170,6 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
-	abTests,
 	editionId,
 	forceDropCap,
 	isTimeline = false,
@@ -179,6 +179,7 @@ export const renderElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	articleArrangement,
 	idApiUrl,
 }: Props) => {
 	const isBlog =
@@ -410,6 +411,7 @@ export const renderElement = ({
 					title={element.title}
 					isAvatar={element.isAvatar}
 					isTimeline={isTimeline}
+					articleArrangement={articleArrangement}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -491,7 +493,6 @@ export const renderElement = ({
 					pageId={pageId}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
@@ -550,7 +551,6 @@ export const renderElement = ({
 					pageId={pageId}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
@@ -568,7 +568,6 @@ export const renderElement = ({
 					pageId={pageId}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
@@ -644,7 +643,6 @@ export const renderElement = ({
 				<ProductElement
 					product={element}
 					ArticleElementComponent={getNestedArticleElement({
-						abTests,
 						ajaxUrl,
 						editionId,
 						isAdFreeUser,
@@ -692,7 +690,6 @@ export const renderElement = ({
 					pageId={pageId}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
@@ -813,7 +810,6 @@ export const renderElement = ({
 				<Timeline
 					timeline={element}
 					ArticleElementComponent={getNestedArticleElement({
-						abTests,
 						ajaxUrl,
 						editionId,
 						isAdFreeUser,
@@ -976,9 +972,6 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
-		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement': {
-			return <AffiliateDisclaimerInline />;
-		}
 		case 'model.dotcomrendering.pageElements.CrosswordElement':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
@@ -988,15 +981,23 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
-		case 'model.dotcomrendering.pageElements.ProductSummaryElement':
+		case 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement':
 			return (
 				<ProductSummary
-					products={element.matchedProducts}
+					title={element.title}
+					products={element.products}
 					format={format}
-					variant={element.variant}
+					displayType={element.displayType}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
+			return (
+				<AudioPlayer
+					element={element}
+					isSensitive={isSensitive}
+					isAcastEnabled={!!switches.acast}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.VideoBlockElement':
@@ -1040,7 +1041,6 @@ export const RenderArticleElement = ({
 	isSensitive,
 	switches,
 	isPinnedPost,
-	abTests,
 	editionId,
 	forceDropCap,
 	isTimeline,
@@ -1050,6 +1050,7 @@ export const RenderArticleElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	articleArrangement,
 	idApiUrl,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
@@ -1069,7 +1070,6 @@ export const RenderArticleElement = ({
 		isSensitive,
 		switches,
 		isPinnedPost,
-		abTests,
 		editionId,
 		forceDropCap,
 		isTimeline,
@@ -1079,6 +1079,7 @@ export const RenderArticleElement = ({
 		shouldHideAds,
 		contentType,
 		contentLayout,
+		articleArrangement,
 		idApiUrl,
 	});
 
@@ -1103,6 +1104,7 @@ export const RenderArticleElement = ({
 			type={element._type}
 			format={format}
 			isTimeline={isTimeline}
+			articleArrangement={articleArrangement}
 		>
 			{el}
 		</Figure>

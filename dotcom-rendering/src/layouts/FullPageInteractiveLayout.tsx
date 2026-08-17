@@ -5,6 +5,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';
@@ -24,7 +25,7 @@ import { renderElement } from '../lib/renderElement';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { temporaryBodyCopyColourOverride } from './InteractiveLayout';
@@ -61,7 +62,6 @@ type RendererProps = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
 	shouldHideAds: boolean;
@@ -76,7 +76,6 @@ const Renderer = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
-	abTests,
 	switches,
 	editionId,
 	shouldHideAds,
@@ -98,7 +97,6 @@ const Renderer = ({
 			ajaxUrl,
 			isAdFreeUser,
 			isSensitive,
-			abTests,
 			switches,
 			editionId,
 			shouldHideAds,
@@ -185,6 +183,9 @@ const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 				sectionId={article.config.section}
 				contentType={article.contentType}
 			/>
+			{article.affiliateLinksDisclaimerRequired && (
+				<AffiliateDisclaimer />
+			)}
 		</section>
 	);
 };
@@ -237,7 +238,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 									fullWidth={true}
 									showTopBorder={false}
 									padSides={true}
-									backgroundColour={sourcePalette.labs[400]}
+									backgroundColour={sourcePalette.labs[100]}
 									borderColour={sourcePalette.neutral[60]}
 									sectionId="labs-header"
 								>
@@ -260,7 +261,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 							fullWidth={true}
 							showTopBorder={false}
 							padSides={true}
-							backgroundColour={sourcePalette.labs[400]}
+							backgroundColour={sourcePalette.labs[100]}
 							borderColour={sourcePalette.neutral[60]}
 							sectionId="labs-header"
 						>
@@ -293,7 +294,6 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						pageId={article.pageId}
 						webTitle={article.webTitle}
 						ajaxUrl={article.config.ajaxUrl}
-						abTests={article.config.abTests}
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}

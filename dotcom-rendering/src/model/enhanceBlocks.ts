@@ -12,7 +12,6 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
-import { enhanceDisclaimer } from './enhance-disclaimer';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
@@ -21,6 +20,7 @@ import { enhanceElementsImages, enhanceImages } from './enhance-images';
 import { enhanceInteractiveAtomElements } from './enhance-interactive-atom';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
+import { enhanceProductSummary } from './enhance-product-summary';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceGuVideos } from './enhance-videos';
 import { enhanceLists } from './enhanceLists';
@@ -80,6 +80,7 @@ export const enhanceElements =
 			),
 			enhanceDividers,
 			enhanceH2s,
+			enhanceProductSummary,
 			enhanceInteractiveAtomElements(format),
 			enhanceInteractiveContentsElements,
 			enhanceBlockquotes(format),
@@ -99,7 +100,6 @@ export const enhanceElements =
 				options.renderingTarget,
 				options.shouldHideAds,
 			),
-			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer, isNested),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,

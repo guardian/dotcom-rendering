@@ -296,7 +296,7 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<WithConfig>
-					<Metrics commercialMetricsEnabled={true} tests={{}} />
+					<Metrics commercialMetricsEnabled={true} />
 				</WithConfig>,
 			),
 		).not.toThrow();
@@ -414,7 +414,6 @@ describe('Island: server-side rendering', () => {
 						contentType={''}
 						sectionId={''}
 						shouldHideReaderRevenue={false}
-						isMinuteArticle={false}
 						isPaidContent={false}
 						tags={[]}
 						contributionsServiceUrl={''}

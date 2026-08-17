@@ -49,7 +49,7 @@ export const SelfHostedVideoInArticle = ({
 	}
 
 	return (
-		<div css={containerStyles}>
+		<div css={containerStyles} data-spacefinder-role="inline">
 			<Island priority="critical" defer={{ until: 'visible' }}>
 				<SelfHostedVideo
 					atomId={element.id}

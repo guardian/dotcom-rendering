@@ -13,7 +13,6 @@ import { polyfillIO } from '../lib/polyfill.io';
 import type { NavType } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
 import type {
-	CricketMatchPage,
 	FootballDataWithRegionsPage,
 	SportDataPage,
 	SportPageKind,
@@ -34,8 +33,6 @@ export const decideDescription = (kind: SportPageKind) => {
 			return `Football fixtures ${fromTheGuardian}`;
 		case 'FootballTables':
 			return `Football tables ${fromTheGuardian}`;
-		case 'CricketMatch':
-			return `Cricket scores ${fromTheGuardian}`;
 		case 'FootballMatchSummary':
 			return `Football matches ${fromTheGuardian}`;
 	}
@@ -48,8 +45,6 @@ export const decideTitle = (sportPage: SportDataPage) => {
 		case 'FootballFixtures':
 		case 'FootballTables':
 			return decideFootballTitleWithCompetition(sportPage);
-		case 'CricketMatch':
-			return createCricketTitle(sportPage);
 		case 'FootballMatchSummary':
 			return createMatchSummaryTitle(sportPage.match);
 	}
@@ -94,10 +89,6 @@ const decideFootballTitleWithCompetition = (
 	}
 };
 
-const createCricketTitle = (sportPage: CricketMatchPage) => {
-	return `${sportPage.match.competitionName}, ${sportPage.match.venueName} | Cricket | The Guardian`;
-};
-
 type Props = {
 	sportData: SportDataPage;
 	nav: NavType;
@@ -128,10 +119,7 @@ export const renderSportPage = ({ sportData, nav }: Props) => {
 		</ConfigProvider>,
 	);
 
-	const build = getModulesBuild({
-		switches: sportData.config.switches,
-		tests: sportData.config.abTests,
-	});
+	const build = getModulesBuild();
 
 	/**
 	 * The highest priority scripts.
@@ -169,7 +157,6 @@ export const renderSportPage = ({ sportData, nav }: Props) => {
 			ajaxUrl: sportData.config.ajaxUrl,
 			googletagUrl: sportData.config.googletagUrl,
 			switches: sportData.config.switches,
-			abTests: sportData.config.abTests,
 			serverSideABTests: sportData.config.serverSideABTests,
 			brazeApiKey: sportData.config.brazeApiKey,
 			isPaidContent: sportData.config.isPaidContent,

@@ -2,7 +2,6 @@ import { isObject } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Decorator, StoryObj } from '@storybook/react-webpack5';
 import { useEffect } from 'react';
-import { mocked } from 'storybook/test';
 import { colourSchemeDecorator } from '../../.storybook/decorators/themeDecorator';
 import { AffiliateProductShowcase as AffiliateProductShowcaseFixture } from '../../fixtures/generated/fe-articles/AffiliateProductShowcase';
 import { AffiliateProductStandard as AffiliateProductStandardFixture } from '../../fixtures/generated/fe-articles/AffiliateProductStandard';
@@ -10,6 +9,9 @@ import { Analysis as AnalysisStandardNewsFixture } from '../../fixtures/generate
 import { Comment as CommentStandardOpinionFixture } from '../../fixtures/generated/fe-articles/Comment';
 import { Feature as FeatureStandardCultureFixture } from '../../fixtures/generated/fe-articles/Feature';
 import { Labs as PhotoEssayImmersiveLabsFixture } from '../../fixtures/generated/fe-articles/Labs';
+import { LabsImmersiveGlobalX as LabsImmersiveGlobalXFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveGlobalX';
+import { LabsImmersiveParrtjima as LabsImmersiveParrtjimaFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveParrtjima';
+import { LabsImmersiveVictorianWater as LabsImmersiveVictorianWaterFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveVictorianWater';
 import { Live as LiveBlogStandardNewsFixture } from '../../fixtures/generated/fe-articles/Live';
 import { LiveBlogSingleContributor as LiveBlogSingleContributorFixture } from '../../fixtures/generated/fe-articles/LiveBlogSingleContributor';
 import { NewsletterSignup as NewsletterSignupStandardSportFixture } from '../../fixtures/generated/fe-articles/NewsletterSignup';
@@ -26,10 +28,14 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
-import { useAB } from '../lib/useAB';
 import { extractNAV } from '../model/extract-nav';
 import { type Article, enhanceArticleType } from '../types/article';
-import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
+import type { ImageBlockElement } from '../types/content';
+import {
+	DecideLayout,
+	type Props as DecideLayoutProps,
+	LABS_IMMERSIVE_GRID_AB_TEST,
+} from './DecideLayout';
 
 export type HydratedLayoutDecoratorArgs = {
 	colourScheme?: 'light' | 'dark';
@@ -52,11 +58,7 @@ const HydratedLayout: Decorator<
 		display: article.display,
 		theme: article.theme,
 	};
-	const colourScheme =
-		(isObject(context.parameters.config) &&
-		context.parameters.config.renderingTarget === 'Apps'
-			? context.args.colourScheme
-			: 'light') ?? 'light';
+	const colourScheme = context.args.colourScheme ?? 'light';
 	const paletteDecorator = colourSchemeDecorator(
 		colourScheme,
 	)<DecideLayoutProps>([format]);
@@ -117,6 +119,13 @@ const webParameters = {
 	config: {
 		renderingTarget: 'Web',
 		darkModeAvailable: false,
+	},
+};
+
+const webDarkParameters = {
+	config: {
+		renderingTarget: 'Web',
+		darkModeAvailable: true,
 	},
 };
 
@@ -231,14 +240,186 @@ export const AppsPictureShowcaseOpinionDark: Story = {
  *
  * Example: https://www.chromatic.com/test?appId=63e251470cfbe61776b0ef19&id=675aaa4f3aa384bd64bde3a1
  */
+const photoEssayImmersiveLabsArticle = enhanceArticleType(
+	PhotoEssayImmersiveLabsFixture,
+	'Web',
+);
+
+const portraitMainMedia = PhotoEssayImmersiveLabsFixture.blocks
+	.flatMap((block) => block.elements)
+	.find(
+		(element): element is ImageBlockElement =>
+			element._type ===
+				'model.dotcomrendering.pageElements.ImageBlockElement' &&
+			element.media.allImages[0]?.fields.aspectRatio === '4:5',
+	);
+
+if (portraitMainMedia == null) {
+	throw new Error('The Labs fixture must contain a portrait image');
+}
+
+const photoEssayImmersiveLabsPortraitArticle = enhanceArticleType(
+	{
+		...PhotoEssayImmersiveLabsFixture,
+		mainMediaElements: [portraitMainMedia],
+	},
+	'Web',
+);
+
+/**
+ * Opts an article into the new grid layout regardless of the 0% production
+ * rollout.
+ */
+const enableLabsImmersiveGridTest = (article: Article): Article => ({
+	...article,
+	frontendData: {
+		...article.frontendData,
+		config: {
+			...article.frontendData.config,
+			serverSideABTests: {
+				...article.frontendData.config.serverSideABTests,
+				[LABS_IMMERSIVE_GRID_AB_TEST]: 'enable',
+			},
+		},
+	},
+});
+
+const labsImmersiveArticle = ({
+	orientation,
+	design,
+}: {
+	orientation: 'portrait' | 'landscape';
+	design: ArticleDesign.PhotoEssay | ArticleDesign.Feature;
+}): Article => {
+	const base =
+		orientation === 'portrait'
+			? photoEssayImmersiveLabsPortraitArticle
+			: photoEssayImmersiveLabsArticle;
+	return enableLabsImmersiveGridTest({ ...base, design });
+};
+
+const immersiveLabsParameters = {
+	...webParameters,
+};
+
+/** Snapshot real Labs immersive articles at mobile in addition to the default width, to catch small-breakpoint-only regressions */
+const immersiveLabsMobileParameters = {
+	...immersiveLabsParameters,
+	chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
+};
+
 export const WebPhotoEssayImmersiveLabsLight: Story = {
 	args: {
-		article: enhanceArticleType(PhotoEssayImmersiveLabsFixture, 'Web'),
+		article: labsImmersiveArticle({
+			orientation: 'landscape',
+			design: ArticleDesign.PhotoEssay,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebPhotoEssayImmersiveLabsDark: Story = {
+	args: {
+		article: WebPhotoEssayImmersiveLabsLight.args?.article,
+		colourScheme: 'dark',
 	},
 	parameters: {
-		...webParameters,
-		chromatic: { disableSnapshot: true },
+		...immersiveLabsParameters,
+		...webDarkParameters,
 	},
+};
+
+export const WebPhotoEssayImmersiveLabsPortraitLight: Story = {
+	args: {
+		article: labsImmersiveArticle({
+			orientation: 'portrait',
+			design: ArticleDesign.PhotoEssay,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebPhotoEssayImmersiveLabsPortraitDark: Story = {
+	args: {
+		article: WebPhotoEssayImmersiveLabsPortraitLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
+};
+
+export const WebFeatureImmersiveLabsLandscapeLight: Story = {
+	args: {
+		article: labsImmersiveArticle({
+			orientation: 'landscape',
+			design: ArticleDesign.Feature,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebFeatureImmersiveLabsLandscapeDark: Story = {
+	args: {
+		article: WebFeatureImmersiveLabsLandscapeLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
+};
+
+export const WebFeatureImmersiveLabsPortraitLight: Story = {
+	args: {
+		article: labsImmersiveArticle({
+			orientation: 'portrait',
+			design: ArticleDesign.Feature,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebFeatureImmersiveLabsPortraitDark: Story = {
+	args: {
+		article: WebFeatureImmersiveLabsPortraitLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
+};
+
+/**
+ * Real Labs immersive articles tests.
+ */
+export const WebImmersiveLabsRealParrtjima: Story = {
+	args: {
+		article: enableLabsImmersiveGridTest(
+			enhanceArticleType(LabsImmersiveParrtjimaFixture, 'Web'),
+		),
+	},
+	parameters: immersiveLabsMobileParameters,
+};
+
+export const WebImmersiveLabsRealVictorianWater: Story = {
+	args: {
+		article: enableLabsImmersiveGridTest(
+			enhanceArticleType(LabsImmersiveVictorianWaterFixture, 'Web'),
+		),
+	},
+	parameters: immersiveLabsMobileParameters,
+};
+
+export const WebImmersiveLabsRealGlobalX: Story = {
+	args: {
+		article: enableLabsImmersiveGridTest(
+			enhanceArticleType(LabsImmersiveGlobalXFixture, 'Web'),
+		),
+	},
+	parameters: immersiveLabsMobileParameters,
 };
 
 const standardStandardLabsWebFixture: Article = {
@@ -294,20 +475,7 @@ const recipeStandardLifestyleWebFixture: Article = enhanceArticleType(
 	'Web',
 );
 
-const mockBetaFeastContextualNudgeABVariant1 = () => {
-	mocked(useAB).mockReturnValue({
-		isUserInTestGroup: (_testId: string, group: string) =>
-			group === 'variant-1',
-		isUserInTest: () => true,
-		getParticipations: () => ({}),
-		trackABTests: () => {},
-	});
-};
-
 export const WebRecipeStandardLabsLight: Story = {
-	beforeEach() {
-		mockBetaFeastContextualNudgeABVariant1();
-	},
 	args: {
 		article: {
 			...recipeStandardLifestyleWebFixture,
@@ -318,9 +486,6 @@ export const WebRecipeStandardLabsLight: Story = {
 };
 
 export const AppsRecipeStandardLifestyleLight = {
-	beforeEach() {
-		mockBetaFeastContextualNudgeABVariant1();
-	},
 	args: {
 		article: enhanceArticleType(RecipeStandardLifestyleFixture, 'Apps'),
 		colourScheme: 'light',
@@ -329,9 +494,6 @@ export const AppsRecipeStandardLifestyleLight = {
 } satisfies Story;
 
 export const AppsRecipeStandardLifestyleDark: Story = {
-	beforeEach() {
-		mockBetaFeastContextualNudgeABVariant1();
-	},
 	args: {
 		article: AppsRecipeStandardLifestyleLight.args.article,
 		colourScheme: 'dark',

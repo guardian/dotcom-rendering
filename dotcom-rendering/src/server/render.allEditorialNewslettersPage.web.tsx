@@ -45,10 +45,7 @@ export const renderEditorialNewslettersPage = ({
 		</ConfigProvider>,
 	);
 
-	const build = getModulesBuild({
-		switches: newslettersPage.config.switches,
-		tests: newslettersPage.config.abTests,
-	});
+	const build = getModulesBuild();
 
 	/**
 	 * The highest priority scripts.
@@ -79,7 +76,6 @@ export const renderEditorialNewslettersPage = ({
 		ajaxUrl: newslettersPage.config.ajaxUrl,
 		googletagUrl: newslettersPage.config.googletagUrl,
 		switches: newslettersPage.config.switches,
-		abTests: newslettersPage.config.abTests,
 		serverSideABTests: newslettersPage.config.serverSideABTests,
 		brazeApiKey: newslettersPage.config.brazeApiKey,
 		contentType: newslettersPage.config.contentType,

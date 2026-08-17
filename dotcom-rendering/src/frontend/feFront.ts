@@ -1,7 +1,7 @@
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { EditionBranding } from '../types/branding';
-import type { ServerSideTests, StageType, Switches } from '../types/config';
+import type { StageType, Switches } from '../types/config';
 import type {
 	BoostLevel,
 	Image,
@@ -9,6 +9,7 @@ import type {
 	StarRating,
 } from '../types/content';
 import type { FooterType } from '../types/footer';
+import type { EditorialTest } from '../types/front';
 import type { FENavType } from '../types/frontend';
 import type { FETagType } from '../types/tag';
 import type { Territory } from '../types/territory';
@@ -205,6 +206,7 @@ export type FEFrontCard = {
 		href?: string;
 		embedUri?: string;
 		newsletterData?: Newsletter;
+		tests?: EditorialTest[];
 	};
 	header: {
 		isVideo: boolean;
@@ -322,14 +324,6 @@ export type FECollection = {
 };
 
 export type FEFrontConfig = {
-	/**
-	 * Server-side AB tests. Optional from `frontend`; a default of
-	 * `{}` is applied by AJV during request validation (see `useDefaults` in
-	 * `validate.ts`), so this is always present after enhancing.
-	 *
-	 * @default {}
-	 */
-	abTests: ServerSideTests;
 	adUnit: string;
 	ajaxUrl: string;
 	brazeApiKey?: string;

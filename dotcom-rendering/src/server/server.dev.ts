@@ -20,7 +20,6 @@ import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
 import {
 	handleAppsFootballMatchPage,
-	handleCricketMatchPage,
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
@@ -28,6 +27,7 @@ import {
 import { handleAppsThrasher } from './handler.thrasher.apps';
 import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
+import { responseHeaderMiddleware } from './lib/header-middleware';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
 
@@ -105,6 +105,8 @@ const renderer = Router();
 renderer.use(getContentFromURLMiddleware);
 renderer.use(getABTestsFromQueryParams);
 renderer.use(requestLoggerMiddleware);
+renderer.use(responseHeaderMiddleware);
+
 renderer.get('/Article/*url', handleArticle);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);
@@ -117,7 +119,6 @@ renderer.get('/AppsBlocks/*url', handleAppsBlocks);
 renderer.get('/EditionsCrossword/*url', handleEditionsCrossword);
 renderer.get('/FootballMatchListPage/*url', handleFootballMatchListPage);
 renderer.get('/FootballTablesPage/*url', handleFootballTablesPage);
-renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
 renderer.get('/AppsFootballMatchSummaryPage/*url', handleAppsFootballMatchPage);
 renderer.get('/HostedContent/*url', handleHostedContent);
@@ -138,7 +139,6 @@ renderer.post('/AppsBlocks', handleAppsBlocks);
 renderer.post('/EditionsCrossword', handleEditionsCrossword);
 renderer.post('/FootballMatchListPage', handleFootballMatchListPage);
 renderer.post('/FootballTablesPage', handleFootballTablesPage);
-renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
 renderer.post('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 renderer.post('/HostedContent', handleHostedContent);
