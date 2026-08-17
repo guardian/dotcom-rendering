@@ -130,6 +130,12 @@ export const YoutubeBlockComponent = ({
 			return posterImage;
 		}
 
+		// For Hosted Video Articles with a Video atom for
+		// their main media we need to display the poster image.
+		if (contentLayout?.toLowerCase() === 'hostedvideolayout') {
+			return posterImage;
+		}
+
 		// Default behaviour is to use the override image, if supplied
 		// otherwise use the poster image
 		return overrideImage ?? posterImage;
