@@ -5,6 +5,7 @@ import type React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { getNewslettersClient } from './bridgetApi';
 import { lazyFetchEmailWithTimeout } from './fetchEmail';
 import {
 	getEffectiveMarketingOptIn,
@@ -22,7 +23,6 @@ import {
 import { clearSubscriptionCache } from './newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from './useAuthStatus';
 import { useBrowserId } from './useBrowserId';
-import { getNewslettersClient } from './bridgetApi';
 
 // ---------------------------------------------------------------------------
 // Helpers (kept local — not part of the public API)
@@ -336,7 +336,7 @@ export const useNewsletterSignupForm = (
 				setIsInteracted(true);
 			});
 		}
-	}, [isSignedIn]);
+	}, [isSignedIn, renderingTarget]);
 
 	const submitForm = useCallback(
 		async (emailAddress: string, token: string): Promise<void> => {
