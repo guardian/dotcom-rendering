@@ -49,15 +49,12 @@ const pillarPalette = (
 	}
 };
 
-/**
- * Design groups that keep their pre-existing colours rather than the
- * Labs theme wide overrides used elsewhere in this file.
- */
 const labsMediaDesigns: ArticleDesign[] = [
 	ArticleDesign.Video,
 	ArticleDesign.Audio,
 	ArticleDesign.Picture,
 ];
+
 const labsHostedDesigns: ArticleDesign[] = [
 	ArticleDesign.HostedArticle,
 	ArticleDesign.HostedVideo,
@@ -209,6 +206,17 @@ const headlineMatchTextLight: PaletteFunction = (format) =>
 
 const headlineMatchTextDark: PaletteFunction = (format) =>
 	seriesTitleMatchTextDark(format);
+
+/**
+ * Only used by the non-inverted immersive grid layouts (portrait, and
+ * landscape feature), whose headlines sit on a plain or light blurred
+ * background rather than the solid dark box `--headline-colour` expects.
+ */
+const immersiveGridHeadlineTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+
+const immersiveGridHeadlineTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[97];
 
 const headlineBackgroundLight: PaletteFunction = ({
 	display,
@@ -5135,10 +5143,11 @@ const sectionTitleBackgroundLight: PaletteFunction = ({ theme, display }) => {
 			return 'transparent';
 	}
 };
-const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
-	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
-		return sourcePalette.neutral[7];
-	}
+const seriesOrSectionTitleTextLight: PaletteFunction = ({
+	theme,
+	display,
+	design,
+}) => {
 	if (
 		theme === ArticleSpecial.SpecialReportAlt &&
 		design !== ArticleDesign.LiveBlog &&
@@ -5243,7 +5252,32 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 			return sourcePalette.neutral[7];
 	}
 };
-const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
+
+/** Used by the series tag only; the article section link keeps `articleSectionLinkTextLight` */
+const seriesTitleTextLight: PaletteFunction = (format) => {
+	if (
+		format.theme === ArticleSpecial.Labs &&
+		format.design !== ArticleDesign.LiveBlog
+	) {
+		return sourcePalette.neutral[7];
+	}
+	return seriesOrSectionTitleTextLight(format);
+};
+
+const articleSectionLinkTextLight: PaletteFunction = (format) => {
+	if (
+		format.theme === ArticleSpecial.Labs &&
+		format.design !== ArticleDesign.LiveBlog
+	) {
+		return sourcePalette.neutral[7];
+	}
+	return seriesOrSectionTitleTextLight(format);
+};
+const seriesOrSectionTitleTextDark: PaletteFunction = ({
+	design,
+	theme,
+	display,
+}) => {
 	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[100];
 	switch (design) {
 		case ArticleDesign.Gallery:
@@ -5280,12 +5314,12 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Culture:
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[700];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
 			}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
@@ -5296,12 +5330,12 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Culture:
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
 			}
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
@@ -5324,6 +5358,14 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 			}
 	}
 };
+
+/** Used by the series tag only; the article section link keeps `articleSectionLinkTextDark` */
+const seriesTitleTextDark: PaletteFunction = (format) =>
+	seriesOrSectionTitleTextDark(format);
+
+const articleSectionLinkTextDark: PaletteFunction =
+	seriesOrSectionTitleTextDark;
+
 const seriesTitleMatchTextLight: PaletteFunction = (format) => {
 	if (
 		format.design === ArticleDesign.MatchReport ||
@@ -6668,6 +6710,10 @@ const paletteColours = {
 		light: articleSectionBorderLight,
 		dark: articleSectionBorderDark,
 	},
+	'--article-section-link-text': {
+		light: articleSectionLinkTextLight,
+		dark: articleSectionLinkTextDark,
+	},
 	'--article-section-secondary-title': {
 		light: articleSectionSecondaryTitleLight,
 		dark: articleSectionSecondaryTitleDark,
@@ -7524,6 +7570,10 @@ const paletteColours = {
 	'--image-title-background': {
 		light: imageTitleBackground,
 		dark: imageTitleBackground,
+	},
+	'--immersive-grid-headline-colour': {
+		light: immersiveGridHeadlineTextLight,
+		dark: immersiveGridHeadlineTextDark,
 	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,
