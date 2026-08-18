@@ -5,26 +5,29 @@ import { StackedProgress } from './StackedProgress';
 import { Versus } from './Versus';
 
 type Props = {
-	/**
-	 * The total number of seats up for election.
-	 */
-	total: number;
-	democrats: Group;
-	caucusWithDemocrats: Group;
-	republicans: Group;
-	caucusWithRepublicans: Group;
-	others: Group;
-};
-
-type Group = {
-	/**
-	 * The number of races called for this group so far.
-	 */
-	value: number;
-	/**
-	 * The net change in seats for this group so far.
-	 */
-	change: number;
+	versus: {
+		democrats: {
+			includesIndependents: boolean;
+			value: number;
+			change: number;
+		};
+		republicans: {
+			includesIndependents: boolean;
+			value: number;
+			change: number;
+		};
+	};
+	stackedProgress: {
+		total: number;
+		democratValue: number;
+		othersValue: number;
+		republicanValue: number;
+	};
+	progressNumber: {
+		progress: number;
+		total: number;
+		includesIndependents: boolean;
+	};
 };
 
 /**
@@ -36,22 +39,18 @@ export const USHouse = (props: Props) => (
 	<>
 		<Versus
 			left={{
-				name: `Democrats${democratIndependents(props) ? '*' : ''}`,
-				abbreviation: `Democrats${democratIndependents(props) ? '*' : ''}`,
-				value: props.democrats.value + props.caucusWithDemocrats.value,
-				change:
-					props.democrats.change + props.caucusWithDemocrats.change,
+				name: `Democrats${props.versus.democrats.includesIndependents ? '*' : ''}`,
+				abbreviation: `Democrats${props.versus.democrats.includesIndependents ? '*' : ''}`,
+				value: props.versus.democrats.value,
+				change: props.versus.democrats.change,
 				image: undefined,
 				colour: palette('--us-elections-democrats'),
 			}}
 			right={{
-				name: `Republicans${republicanIndependents(props) ? '*' : ''}`,
-				abbreviation: `Republicans${republicanIndependents(props) ? '*' : ''}`,
-				value:
-					props.republicans.value + props.caucusWithRepublicans.value,
-				change:
-					props.republicans.change +
-					props.caucusWithRepublicans.change,
+				name: `Republicans${props.versus.republicans.includesIndependents ? '*' : ''}`,
+				abbreviation: `Republicans${props.versus.republicans.includesIndependents ? '*' : ''}`,
+				value: props.versus.republicans.value,
+				change: props.versus.republicans.change,
 				image: undefined,
 				colour: palette('--us-elections-republicans'),
 			}}
@@ -60,7 +59,7 @@ export const USHouse = (props: Props) => (
 			banner={undefined}
 		/>
 		<StackedProgress
-			total={props.total}
+			total={props.stackedProgress.total}
 			label="to win"
 			calculateWinner={true}
 			excludedCopy={undefined}
@@ -68,24 +67,21 @@ export const USHouse = (props: Props) => (
 				{
 					name: 'Democrats',
 					colour: palette('--us-elections-democrats'),
-					value:
-						props.democrats.value + props.caucusWithDemocrats.value,
+					value: props.stackedProgress.democratValue,
 					align: 'left',
 					exclude: false,
 				},
 				{
 					name: 'Others',
 					colour: palette('--us-elections-others'),
-					value: props.others.value,
+					value: props.stackedProgress.othersValue,
 					align: 'left',
 					exclude: false,
 				},
 				{
 					name: 'Republicans',
 					colour: palette('--us-elections-republicans'),
-					value:
-						props.republicans.value +
-						props.caucusWithRepublicans.value,
+					value: props.stackedProgress.republicanValue,
 					align: 'right',
 					exclude: false,
 				},
@@ -95,26 +91,14 @@ export const USHouse = (props: Props) => (
 			}}
 		/>
 		<ProgressNumber
-			progress={
-				props.democrats.value +
-				props.caucusWithDemocrats.value +
-				props.republicans.value +
-				props.caucusWithRepublicans.value +
-				props.others.value
-			}
-			total={props.total}
+			progress={props.progressNumber.progress}
+			total={props.progressNumber.total}
 			copy="races called"
 			additionalCopy={
-				democratIndependents(props) || republicanIndependents(props)
+				props.progressNumber.includesIndependents
 					? '*includes independents'
 					: undefined
 			}
 		/>
 	</>
 );
-
-const democratIndependents = (props: Props) =>
-	props.caucusWithDemocrats.value > 0;
-
-const republicanIndependents = (props: Props) =>
-	props.caucusWithRepublicans.value > 0;

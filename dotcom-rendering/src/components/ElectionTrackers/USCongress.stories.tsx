@@ -29,54 +29,56 @@ const meta = preview.meta({
 export const Empty = meta.story({
 	args: {
 		house: {
-			total: 435,
-			democrats: {
-				value: 0,
-				change: 0,
+			versus: {
+				democrats: {
+					includesIndependents: false,
+					value: 0,
+					change: 0,
+				},
+				republicans: {
+					includesIndependents: false,
+					value: 0,
+					change: 0,
+				},
 			},
-			caucusWithDemocrats: {
-				value: 0,
-				change: 0,
+			stackedProgress: {
+				total: 435,
+				democratValue: 0,
+				othersValue: 0,
+				republicanValue: 0,
 			},
-			republicans: {
-				value: 0,
-				change: 0,
-			},
-			caucusWithRepublicans: {
-				value: 0,
-				change: 0,
-			},
-			others: {
-				value: 0,
-				change: 0,
+			progressNumber: {
+				progress: 0,
+				total: 435,
+				includesIndependents: false,
 			},
 		},
 		senate: {
-			total: 34,
-			democrats: {
-				value: 0,
-				change: 0,
-				holdovers: 28,
+			versus: {
+				democrats: {
+					includesIndependents: false,
+					value: 28,
+					change: 0,
+				},
+				republicans: {
+					includesIndependents: false,
+					value: 38,
+					change: 0,
+				},
 			},
-			caucusWithDemocrats: {
-				value: 0,
-				change: 0,
-				holdovers: 0,
+			stackedProgress: {
+				total: 34,
+				democratHoldovers: 28,
+				democratValue: 0,
+				othersHoldovers: 0,
+				othersValue: 0,
+				republicanHoldovers: 38,
+				republicanValue: 0,
 			},
-			republicans: {
-				value: 0,
-				change: 0,
-				holdovers: 38,
-			},
-			caucusWithRepublicans: {
-				value: 0,
-				change: 0,
-				holdovers: 0,
-			},
-			others: {
-				value: 0,
-				change: 0,
-				holdovers: 0,
+			progressNumber: {
+				progress: 0,
+				total: 34,
+				includesIndependents: false,
 			},
 		},
 		link: new URL('https://www.theguardian.com'),
@@ -99,12 +101,12 @@ export const Empty = meta.story({
 		await expect(bars[0]).toHaveValue(0);
 		await expect(bars[0]).toHaveAttribute(
 			'aria-valuemax',
-			args.senate.total.toString(),
+			args.senate.stackedProgress.total.toString(),
 		);
 		await expect(bars[1]).toHaveValue(0);
 		await expect(bars[1]).toHaveAttribute(
 			'aria-valuemax',
-			args.house.total.toString(),
+			args.house.stackedProgress.total.toString(),
 		);
 
 		// Link
@@ -119,56 +121,53 @@ export const Empty = meta.story({
 export const Final = Empty.extend({
 	args: {
 		house: {
-			total: Empty.composed.args.house.total,
-			democrats: {
-				value: 215,
-				change: 1,
+			versus: {
+				democrats: {
+					includesIndependents: false,
+					value: 215,
+					change: 1,
+				},
+				republicans: {
+					includesIndependents: false,
+					value: 220,
+					change: -1,
+				},
 			},
-			caucusWithDemocrats: {
-				value: 0,
-				change: 0,
+			stackedProgress: {
+				total: Empty.composed.args.house.stackedProgress.total,
+				democratValue: 215,
+				othersValue: 0,
+				republicanValue: 220,
 			},
-			republicans: {
-				value: 220,
-				change: -1,
-			},
-			caucusWithRepublicans: {
-				value: 0,
-				change: 0,
-			},
-			others: {
-				value: 0,
-				change: 0,
+			progressNumber: {
+				progress: 435,
+				total: Empty.composed.args.house.progressNumber.total,
+				includesIndependents: false,
 			},
 		},
 		senate: {
-			total: Empty.composed.args.senate.total,
-			democrats: {
-				value: 17,
-				change: -2,
-				holdovers: Empty.composed.args.senate.democrats.holdovers,
+			versus: {
+				democrats: {
+					includesIndependents: true,
+					value: 47,
+					change: -4,
+				},
+				republicans: {
+					includesIndependents: false,
+					value: 53,
+					change: 4,
+				},
 			},
-			caucusWithDemocrats: {
-				value: 2,
-				change: -2,
-				holdovers:
-					Empty.composed.args.senate.caucusWithDemocrats.holdovers,
+			stackedProgress: {
+				...Empty.composed.args.senate.stackedProgress,
+				democratValue: 19,
+				othersValue: 0,
+				republicanValue: 15,
 			},
-			republicans: {
-				value: 15,
-				change: 4,
-				holdovers: Empty.composed.args.senate.republicans.holdovers,
-			},
-			caucusWithRepublicans: {
-				value: 0,
-				change: 0,
-				holdovers:
-					Empty.composed.args.senate.caucusWithRepublicans.holdovers,
-			},
-			others: {
-				value: 0,
-				change: 0,
-				holdovers: Empty.composed.args.senate.others.holdovers,
+			progressNumber: {
+				progress: 34,
+				total: Empty.composed.args.senate.progressNumber.total,
+				includesIndependents: true,
 			},
 		},
 	},
@@ -187,15 +186,15 @@ export const Final = Empty.extend({
 
 		// Progress bars
 		const bars = canvas.getAllByRole('progressbar');
-		await expect(bars[0]).toHaveValue(args.senate.total);
+		await expect(bars[0]).toHaveValue(args.senate.stackedProgress.total);
 		await expect(bars[0]).toHaveAttribute(
 			'aria-valuemax',
-			args.senate.total.toString(),
+			args.senate.stackedProgress.total.toString(),
 		);
-		await expect(bars[1]).toHaveValue(args.house.total);
+		await expect(bars[1]).toHaveValue(args.house.stackedProgress.total);
 		await expect(bars[1]).toHaveAttribute(
 			'aria-valuemax',
-			args.house.total.toString(),
+			args.house.stackedProgress.total.toString(),
 		);
 
 		// Link
