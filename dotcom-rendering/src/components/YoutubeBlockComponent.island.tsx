@@ -227,7 +227,7 @@ export const YoutubeBlockComponent = ({
 				showByline={showByline}
 				isLive={isLive}
 				articleMedia={articleMedia}
-				isHosted={isHostedContentDesign(format.design)}
+				isHostedContent={isHostedContentDesign(format.design)}
 			/>
 			{!hideCaption && (
 				<Caption

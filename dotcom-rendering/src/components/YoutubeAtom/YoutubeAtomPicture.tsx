@@ -17,7 +17,7 @@ type Props = {
 	aspectRatio?: AspectRatio;
 	mobileAspectRatio?: AspectRatio;
 	isImmersive?: boolean;
-	isHosted?: boolean;
+	isHostedContent?: boolean;
 };
 
 export const YoutubeAtomPicture = ({
@@ -28,10 +28,10 @@ export const YoutubeAtomPicture = ({
 	aspectRatio,
 	mobileAspectRatio,
 	isImmersive = false,
-	isHosted = false,
+	isHostedContent = false,
 }: Props) => {
 	const mobileAspect = mobileAspectRatio ?? aspectRatio;
-	const imageWidths: [ImageWidthType, ...ImageWidthType[]] = isHosted
+	const imageWidths: [ImageWidthType, ...ImageWidthType[]] = isHostedContent
 		? [
 				{
 					breakpoint: breakpoints.mobile,
