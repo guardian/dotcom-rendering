@@ -62,23 +62,27 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
+	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
+
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
-	const footballMatchUrl =
+	const footballMatchStatsUrl =
 		article.matchType === 'FootballMatchType'
-			? article.matchUrl
+			? article.matchStatsUrl
 			: undefined;
 
 	const isFootballMatchReport =
-		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
+		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
 
-	const cricketMatchUrl =
-		article.matchType == 'CricketMatchType' ? article.matchUrl : undefined;
+	const cricketMatchHeaderUrl =
+		article.matchType == 'CricketMatchType'
+			? article.matchHeaderUrl
+			: undefined;
 
 	const isCricketMatchReport =
-		format.design === ArticleDesign.MatchReport && !!cricketMatchUrl;
+		format.design === ArticleDesign.MatchReport && !!cricketMatchHeaderUrl;
 
 	const showComments = article.isCommentable && !isPaidContent;
 
@@ -116,7 +120,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={!isLabs && !isWorldCup2026}
-						showSlimNav={false}
+						showSlimNav={
+							format.display === ArticleDisplay.Immersive
+						}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
 						tagIds={article.tags.map((tag) => tag.id)}
@@ -131,12 +137,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={sourcePalette.labs[400]}
+						backgroundColour={sourcePalette.labs[100]}
 						borderColour={sourcePalette.neutral[60]}
 						sectionId="labs-header"
 						element="aside"
 					>
-						<LabsHeader editionId={editionId} />
+						<LabsHeader
+							editionId={editionId}
+							textColour={sourcePalette.neutral[100]}
+							backgroundColour={sourcePalette.labs[100]}
+						/>
 					</Section>
 				</Stuck>
 			)}
@@ -157,7 +167,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout={`${ArticleDisplay[format.display]}Layout`}>
+			<main data-layout={contentLayoutName}>
 				{isApps && renderAds && (
 					<Island priority="critical">
 						<AdPortals />
@@ -172,6 +182,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						renderingTarget={renderingTarget}
 					/>
 				</div>
+
 				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}

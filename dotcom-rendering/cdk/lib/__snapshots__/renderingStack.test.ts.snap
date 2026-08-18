@@ -1010,6 +1010,28 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Port": 443,
         "Protocol": "HTTPS",
         "SslPolicy": "ELBSecurityPolicy-TLS13-1-2-2021-06",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
     },
@@ -2244,6 +2266,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "RequiresCompatibilities": [
           "FARGATE",
         ],
+        "RuntimePlatform": {
+          "CpuArchitecture": "ARM64",
+          "OperatingSystemFamily": "LINUX",
+        },
         "Tags": [
           {
             "Key": "App",
@@ -2850,6 +2876,28 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "Port": 443,
         "Protocol": "HTTPS",
         "SslPolicy": "ELBSecurityPolicy-TLS13-1-2-2021-06",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
     },

@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { CSSProperties } from 'react';
 import type { FEArticle } from '../frontend/feArticle';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -20,6 +22,7 @@ import {
 } from '../lib/articleMeta';
 import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
+import { decideMainMediaCaption } from '../lib/decide-caption';
 import { palette as themePalette } from '../palette';
 import { hasPreferredSourceButton } from '../preferredSource';
 import type { Branding as BrandingType } from '../types/branding';
@@ -27,6 +30,7 @@ import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.island';
+import { Caption } from './Caption';
 import { CommentCount } from './CommentCount.island';
 import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
@@ -40,6 +44,7 @@ import { TimeDateline } from './TimeDateline';
 
 type Props = {
 	format: ArticleFormat;
+	layoutType?: LayoutType;
 	pageId: string;
 	webTitle: string;
 	byline?: string;
@@ -106,11 +111,7 @@ const metaFlex = css`
 `;
 
 const preferredSourceMetaFlex = (hasButton: boolean): CSSProperties =>
-	hasButton
-		? {
-				marginBottom: 8,
-			}
-		: {};
+	hasButton ? { marginBottom: 8 } : {};
 
 const stretchLines = css`
 	display: block;
@@ -149,11 +150,7 @@ const metaExtras = (isPictureContent: boolean) => css`
 `;
 
 const preferredSourceMetaExtras = (hasButton: boolean): CSSProperties =>
-	hasButton
-		? {
-				paddingTop: 8,
-			}
-		: {};
+	hasButton ? { paddingTop: 8 } : {};
 
 const metaNumbers = (isPictureContent: boolean) => css`
 	border-top: 1px solid ${themePalette('--article-border')};
@@ -246,6 +243,25 @@ const MetaAvatarContainer = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const ImmersiveMetaAvatarContainer = ({
+	children,
+}: {
+	children: React.ReactNode;
+}) => (
+	<div
+		css={css`
+			width: 60px;
+			height: 60px;
+			margin-top: 3px;
+			margin-right: 10px;
+			margin-bottom: 12px;
+			margin-left: 0px;
+		`}
+	>
+		{children}
+	</div>
+);
+
 const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -276,6 +292,7 @@ const metaNumbersExtrasLiveBlog = css`
 export const ArticleMeta = ({
 	branding,
 	format,
+	layoutType,
 	pageId,
 	webTitle,
 	byline,
@@ -295,15 +312,18 @@ export const ArticleMeta = ({
 		renderingTarget,
 		format,
 	);
+	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
 
-	const avatarUrl = shouldShowAvatar(format)
+	const avatarUrl = shouldShowAvatar(format, isImmersiveGrid)
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
 	const isPictureContent = format.design === ArticleDesign.Picture;
+
+	const isImmersive = format.display === ArticleDisplay.Immersive;
 
 	const isAudio = format.design === ArticleDesign.Audio;
 
@@ -347,12 +367,17 @@ export const ArticleMeta = ({
 				) : (
 					''
 				)}
-				<RowBelowLeftCol>
-					<>
+				{isImmersiveGrid ? (
+					<div
+						css={css`
+							display: flex;
+							flex-direction: row;
+						`}
+					>
 						{!!avatarUrl && (
-							<MetaAvatarContainer>
+							<ImmersiveMetaAvatarContainer>
 								<Avatar src={avatarUrl} alt={authorName} />
-							</MetaAvatarContainer>
+							</ImmersiveMetaAvatarContainer>
 						)}
 						<div>
 							{isAudio && podcast && seriesTag && (
@@ -369,7 +394,7 @@ export const ArticleMeta = ({
 								/>
 							)}
 
-							{shouldShowContributor(format) && (
+							{shouldShowContributor(format, isImmersiveGrid) && (
 								<Contributor
 									byline={byline}
 									tags={tags}
@@ -400,9 +425,69 @@ export const ArticleMeta = ({
 								/>
 							)}
 						</div>
-					</>
-				</RowBelowLeftCol>
+					</div>
+				) : (
+					<RowBelowLeftCol>
+						<>
+							{!!avatarUrl && (
+								<MetaAvatarContainer>
+									<Avatar src={avatarUrl} alt={authorName} />
+								</MetaAvatarContainer>
+							)}
+							<div>
+								{isAudio && podcast && seriesTag && (
+									<PodcastMeta
+										series={seriesTag}
+										format={format}
+										image={podcast.image}
+										spotifyUrl={podcast.spotifyUrl}
+										subscriptionUrl={
+											podcast.subscriptionUrl
+										}
+										audioDownloadUrl={
+											audioData?.audioDownloadUrl
+										}
+										rssFeedUrl={rssFeedUrl}
+									/>
+								)}
 
+								{shouldShowContributor(
+									format,
+									isImmersiveGrid,
+								) && (
+									<Contributor
+										byline={byline}
+										tags={tags}
+										format={format}
+										source={source}
+									/>
+								)}
+
+								{crossword?.creator && (
+									<CrosswordSetter
+										setter={crossword.creator.name}
+										profileUrl={crossword.creator.webUrl}
+									/>
+								)}
+
+								{!isUndefined(webPublicationDate) &&
+								isFilterArticle ? (
+									<TimeDateline
+										primaryDateline={primaryDateline}
+										webPublicationDate={webPublicationDate}
+										format={format}
+									/>
+								) : (
+									<Dateline
+										primaryDateline={primaryDateline}
+										secondaryDateline={secondaryDateline}
+										format={format}
+									/>
+								)}
+							</div>
+						</>
+					</RowBelowLeftCol>
+				)}
 				<div
 					data-print-layout="hide"
 					css={metaFlex}
@@ -479,6 +564,25 @@ export const ArticleMeta = ({
 					</div>
 				</div>
 				{showPreferredSource ? <PreferredSourceButton /> : null}
+				{isImmersive && mainMediaElements?.[0] && (
+					<Hide until="leftCol">
+						<div
+							css={css`
+								margin-top: ${space[2]}px;
+							`}
+						>
+							<Caption
+								captionText={decideMainMediaCaption(
+									mainMediaElements[0],
+								)}
+								format={format}
+								shouldLimitWidth={false}
+								isLeftCol={true}
+								isMainMedia={true}
+							/>
+						</div>
+					</Hide>
+				)}
 			</div>
 		</div>
 	);

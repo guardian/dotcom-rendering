@@ -15,6 +15,7 @@ import {
 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
 import { grid } from '../../src/grid';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -27,6 +28,7 @@ import { palette } from '../palette';
 type Props = {
 	format: ArticleFormat;
 	standfirst: string;
+	layoutType?: LayoutType;
 };
 
 const nestedStyles = (format: ArticleFormat) => {
@@ -390,7 +392,16 @@ const hoverStyles = css`
 	}
 `;
 
-export const Standfirst = ({ format, standfirst }: Props) => {
+const immersiveGridOverrides = css`
+	padding-top: 0;
+	max-width: none;
+
+	${from.tablet} {
+		max-width: none;
+	}
+`;
+
+export const Standfirst = ({ format, standfirst, layoutType }: Props) => {
 	if (standfirst.trim() === '') {
 		return null;
 	}
@@ -403,6 +414,9 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 					decideFont(format),
 					decidePadding(format),
 					hoverStyles,
+					layoutType?.startsWith('immersive')
+						? immersiveGridOverrides
+						: undefined,
 				]}
 				className={
 					format.design === ArticleDesign.Interactive

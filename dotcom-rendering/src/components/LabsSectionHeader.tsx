@@ -175,11 +175,14 @@ export const LabsSectionHeader = ({
 							<LinkButton
 								iconSide="right"
 								size="xsmall"
-								priority="subdued"
+								priority="tertiary"
 								icon={<SvgArrowRightStraight />}
 								href="https://www.theguardian.com/info/2016/jan/25/content-funding"
 								theme={{
-									textSubdued: schemePalette(
+									textTertiary: schemePalette(
+										'--labs-about-dropdown-link',
+									),
+									borderTertiary: schemePalette(
 										'--labs-about-dropdown-link',
 									),
 								}}
