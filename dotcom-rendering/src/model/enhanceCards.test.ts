@@ -603,46 +603,74 @@ describe('Enhance Cards', () => {
 						] as VariantMeta[],
 						startDate: Date.now() - oneHourInMilliseconds,
 						expiryDate: Date.now() + oneHourInMilliseconds,
-						frontsThisTestCanRunOn: [],
+						frontsThisTestCanRunOn: ['test-front'],
 						hasManuallyEndedOnThisTrail: false,
 					},
 				],
 			},
 		};
 
-		it('returns the default headline if no editorial test exists on the card and user is not in a test bucket', () => {
-			expect(decideHeadline(cardWithNoEditorialTest, {})).toEqual(
-				'Headline',
-			);
-		});
-
-		it('returns the default headline if editorial test exists but user is not in a test bucket', () => {
-			expect(decideHeadline(cardWithEditorialTest, {})).toEqual(
-				'Headline',
-			);
-		});
-
-		it('returns the default headline if editorial test does not exist but user is in a test bucket', () => {
+		it('returns the default headline if no editorial test exists on the card, page is not in allowed fronts list, and user is not in a test bucket', () => {
 			expect(
-				decideHeadline(cardWithNoEditorialTest, {
-					'fronts-and-curation-editorial-headline-test': 'a',
-				}),
+				decideHeadline(
+					cardWithNoEditorialTest,
+					{},
+					'invalid-test-front',
+				),
 			).toEqual('Headline');
 		});
 
-		it('returns headline A if editorial test exists and user is in bucket A', () => {
+		it('returns the default headline if editorial test exists and page is in allowed fronts list, but user is not in a test bucket', () => {
 			expect(
-				decideHeadline(cardWithEditorialTest, {
-					'fronts-and-curation-editorial-headline-test': 'a',
-				}),
+				decideHeadline(cardWithEditorialTest, {}, 'test-front'),
+			).toEqual('Headline');
+		});
+
+		it('returns the default headline if user is in a test bucket and page is in allowed fronts list, but editorial test does not exist', () => {
+			expect(
+				decideHeadline(
+					cardWithNoEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'a',
+					},
+					'test-front',
+				),
+			).toEqual('Headline');
+		});
+
+		it('returns the default headline if editorial test exists and user is in a test bucket, but page is not in allowed fronts list', () => {
+			expect(
+				decideHeadline(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'a',
+					},
+					'invalid-test-front',
+				),
+			).toEqual('Headline');
+		});
+
+		it('returns headline A if editorial test exists, page is in allowed fronts list, and user is in bucket A', () => {
+			expect(
+				decideHeadline(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'a',
+					},
+					'test-front',
+				),
 			).toEqual('Headline A');
 		});
 
-		it('returns headline B if editorial test exists and user is in bucket B', () => {
+		it('returns headline B if editorial test exists, page is in allowed fronts list, and user is in bucket B', () => {
 			expect(
-				decideHeadline(cardWithEditorialTest, {
-					'fronts-and-curation-editorial-headline-test': 'b',
-				}),
+				decideHeadline(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'b',
+					},
+					'test-front',
+				),
 			).toEqual('Headline B');
 		});
 	});

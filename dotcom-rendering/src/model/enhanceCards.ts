@@ -210,28 +210,32 @@ const findActiveEditorialTest = (
 export const decideHeadline = (
 	faciaCard: FEFrontCard,
 	serverSideABTests: Record<string, string>,
+	pageId?: string,
 ): string => {
+	const defaultHeadline = faciaCard.header.headline;
+
 	const activeEditorialTest = findActiveEditorialTest(
 		faciaCard.properties.tests,
 	);
 
-	// return default headline if there is no editorial test on the card
-	if (!activeEditorialTest) {
-		return faciaCard.header.headline;
-	}
+	if (!activeEditorialTest) return defaultHeadline;
+
+	const testCanRunOnPage =
+		pageId !== undefined &&
+		activeEditorialTest.frontsThisTestCanRunOn.includes(pageId);
+
+	if (!testCanRunOnPage) return defaultHeadline;
 
 	const testBucket =
-		serverSideABTests?.['fronts-and-curation-editorial-headline-test'];
+		serverSideABTests['fronts-and-curation-editorial-headline-test'];
 
-	// return a different variant headline for each test bucket, or return the default
-	// headline if not in a test bucket
-	if (testBucket === 'a') {
-		return String(activeEditorialTest.variantMeta[0]?.meta.headline);
-	} else if (testBucket === 'b') {
-		return String(activeEditorialTest.variantMeta[1]?.meta.headline);
-	} else {
-		return faciaCard.header.headline;
-	}
+	const variantMeta = activeEditorialTest.variantMeta.find(
+		(variant) => variant.id.toLowerCase() === testBucket,
+	);
+
+	if (variantMeta === undefined) return defaultHeadline;
+
+	return String(variantMeta.meta.headline);
 };
 
 /**
@@ -501,8 +505,7 @@ export const enhanceCards = (
 			format,
 			dataLinkName,
 			url: decideUrl(faciaCard),
-			// TODO - respect value of frontsThisTestCanRunOn - compare value of pageId
-			headline: decideHeadline(faciaCard, serverSideABTests),
+			headline: decideHeadline(faciaCard, serverSideABTests, pageId),
 			trailText: faciaCard.card.trailText,
 			starRating: faciaCard.card.starRating,
 			webPublicationDate: !isUndefined(

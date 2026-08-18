@@ -131,10 +131,12 @@ export const enhanceCollections = ({
 				discussionApiUrl,
 				stripBrandingFromCards,
 				serverSideABTests,
+				pageId,
 			),
 			curated: enhanceCards(collection.curated, {
 				cardInTagPage: false,
 				editionId,
+				pageId,
 				discussionApiUrl,
 				stripBranding: stripBrandingFromCards,
 				serverSideABTests,
@@ -142,6 +144,7 @@ export const enhanceCollections = ({
 			backfill: enhanceCards(collection.backfill, {
 				cardInTagPage: false,
 				editionId,
+				pageId,
 				discussionApiUrl,
 				stripBranding: stripBrandingFromCards,
 				serverSideABTests,
