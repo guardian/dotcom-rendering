@@ -2,7 +2,12 @@ import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import { getSourceImageUrl } from '../../lib/getSourceImageUrl_temp_fix';
 import type { AspectRatio } from '../../types/front';
-import { generateSources, getFallbackSource, Sources } from '../Picture';
+import {
+	generateSources,
+	getFallbackSource,
+	type ImageWidthType,
+	Sources,
+} from '../Picture';
 
 type Props = {
 	image: string;
@@ -12,6 +17,7 @@ type Props = {
 	aspectRatio?: AspectRatio;
 	mobileAspectRatio?: AspectRatio;
 	isImmersive?: boolean;
+	isHosted?: boolean;
 };
 
 export const YoutubeAtomPicture = ({
@@ -22,37 +28,67 @@ export const YoutubeAtomPicture = ({
 	aspectRatio,
 	mobileAspectRatio,
 	isImmersive = false,
+	isHosted = false,
 }: Props) => {
 	const mobileAspect = mobileAspectRatio ?? aspectRatio;
-	const sources = generateSources(getSourceImageUrl(image), [
-		{
-			breakpoint: breakpoints.mobile,
-			width: 465,
-			aspectRatio: mobileAspect,
-		},
-		{
-			breakpoint: breakpoints.mobileLandscape,
-			width: 645,
-			aspectRatio: mobileAspect,
-		},
-		{
-			breakpoint: breakpoints.phablet,
-			width: 620,
-			aspectRatio: mobileAspect,
-		},
-		{
-			breakpoint: breakpoints.tablet,
-			width: 700,
-			aspectRatio,
-			cropOffset: isImmersive ? { x: 50, y: 0 } : undefined,
-		},
-		{
-			breakpoint: breakpoints.desktop,
-			width: 620,
-			aspectRatio,
-			cropOffset: isImmersive ? { x: 50, y: 0 } : undefined,
-		},
-	]);
+	const imageWidths: [ImageWidthType, ...ImageWidthType[]] = isHosted
+		? [
+				{
+					breakpoint: breakpoints.mobile,
+					width: breakpoints.mobileLandscape,
+					aspectRatio: mobileAspect,
+				},
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: breakpoints.phablet,
+					aspectRatio: mobileAspect,
+				},
+				{
+					breakpoint: breakpoints.phablet,
+					width: breakpoints.tablet,
+					aspectRatio: mobileAspect,
+				},
+				{
+					breakpoint: breakpoints.tablet,
+					width: breakpoints.desktop,
+					aspectRatio,
+				},
+				{
+					breakpoint: breakpoints.desktop,
+					width: breakpoints.leftCol,
+					aspectRatio,
+				},
+			]
+		: [
+				{
+					breakpoint: breakpoints.mobile,
+					width: 465,
+					aspectRatio: mobileAspect,
+				},
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 645,
+					aspectRatio: mobileAspect,
+				},
+				{
+					breakpoint: breakpoints.phablet,
+					width: 620,
+					aspectRatio: mobileAspect,
+				},
+				{
+					breakpoint: breakpoints.tablet,
+					width: 700,
+					aspectRatio,
+					cropOffset: isImmersive ? { x: 50, y: 0 } : undefined,
+				},
+				{
+					breakpoint: breakpoints.desktop,
+					width: 620,
+					aspectRatio,
+					cropOffset: isImmersive ? { x: 50, y: 0 } : undefined,
+				},
+			];
+	const sources = generateSources(getSourceImageUrl(image), [...imageWidths]);
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
