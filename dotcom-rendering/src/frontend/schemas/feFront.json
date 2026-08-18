@@ -57,6 +57,10 @@
         },
         "canonicalUrl": {
             "type": "string"
+        },
+        "subnav": {
+            "$ref": "#/definitions/CustomSubnav",
+            "description": "An optional custom subnav targeted at this front. Omitted entirely when\nno custom subnav targets the front."
         }
     },
     "required": [
@@ -4456,6 +4460,176 @@
                     ]
                 }
             ]
+        },
+        "CustomSubnav": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "header": {
+                    "$ref": "#/definitions/CustomSubnavHeader"
+                },
+                "format": {
+                    "$ref": "#/definitions/CustomSubnavFormat"
+                },
+                "links": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SubnavLink"
+                    }
+                },
+                "pages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TargetedPage"
+                    }
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SubnavImage"
+                    }
+                },
+                "palette": {
+                    "$ref": "#/definitions/Palettes"
+                },
+                "lastUpdated": {
+                    "type": "number"
+                },
+                "updatedBy": {
+                    "type": "string"
+                },
+                "updatedEmail": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "format",
+                "header",
+                "id",
+                "lastUpdated",
+                "links",
+                "pages",
+                "updatedBy",
+                "updatedEmail"
+            ]
+        },
+        "CustomSubnavHeader": {
+            "type": "object",
+            "properties": {
+                "headerText": {
+                    "type": "string"
+                },
+                "dotcomPath": {
+                    "type": "string"
+                },
+                "copy": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "copy",
+                "headerText"
+            ]
+        },
+        "CustomSubnavFormat": {
+            "enum": [
+                "compact",
+                "large"
+            ],
+            "type": "string"
+        },
+        "SubnavLink": {
+            "type": "object",
+            "properties": {
+                "linkText": {
+                    "type": "string"
+                },
+                "dotcomPath": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dotcomPath",
+                "linkText"
+            ]
+        },
+        "TargetedPage": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/TargetedPageType"
+                },
+                "path": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "path",
+                "type"
+            ]
+        },
+        "TargetedPageType": {
+            "description": "Types for the custom subnav that frontend can target at individual fronts.\n\nFrontend evaluates the targeting rules (`pages`) and forwards the already\nselected subnav in the `/Front` payload. It is omitted entirely when no\ncustom subnav targets the front, so DCR must treat it as optional.\n\nSerialized from the fapi `CustomSubnav` model. Enum values serialize as\nlowercase strings.",
+            "enum": [
+                "article",
+                "front",
+                "hasTag"
+            ],
+            "type": "string"
+        },
+        "SubnavImage": {
+            "type": "object",
+            "properties": {
+                "imageSrc": {
+                    "type": "string"
+                },
+                "breakpoint": {
+                    "$ref": "#/definitions/ImageBreakpoint"
+                }
+            },
+            "required": [
+                "breakpoint",
+                "imageSrc"
+            ]
+        },
+        "ImageBreakpoint": {
+            "enum": [
+                "mobile",
+                "tablet",
+                "web"
+            ],
+            "type": "string"
+        },
+        "Palettes": {
+            "type": "object",
+            "properties": {
+                "light": {
+                    "$ref": "#/definitions/Palette"
+                },
+                "dark": {
+                    "$ref": "#/definitions/Palette"
+                }
+            },
+            "required": [
+                "dark",
+                "light"
+            ]
+        },
+        "Palette": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "header": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                }
+            }
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"
