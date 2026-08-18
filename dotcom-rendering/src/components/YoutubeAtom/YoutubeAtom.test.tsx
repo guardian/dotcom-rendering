@@ -141,7 +141,7 @@ describe('YoutubeAtom', () => {
 
 		expect(
 			container.querySelector('source')?.getAttribute('srcset'),
-		).toContain('width=1140&dpr=2');
+		).toContain('width=980&dpr=2');
 	});
 
 	it('player div has correct title', () => {
