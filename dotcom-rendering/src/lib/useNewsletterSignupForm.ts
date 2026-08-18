@@ -308,13 +308,11 @@ export const useNewsletterSignupForm = (
 	}, []);
 
 	useEffect(() => {
-		console.log('after useEffect fill in email');
 		if (renderingTarget === 'Apps') {
 			// Fill in email using apps bridget API
 			void getNewslettersClient()
 				.getLoggedInUserEmail()
 				.then((maybeEmail) => {
-					console.log('after getLoggedInUserEmail ', maybeEmail);
 					const email = maybeEmail.emailAddress;
 					if (!email) return;
 					setUserEmail(email);
@@ -322,7 +320,10 @@ export const useNewsletterSignupForm = (
 					setIsInteracted(true);
 				})
 				.catch((reason) => {
-					console.log('after getLoggedInUserEmail catch ', reason);
+					console.log(
+						'Failed to getLoggedInUserEmail from bridget ',
+						reason,
+					);
 				});
 		} else {
 			if (emailFetchStartedRef.current) return;
