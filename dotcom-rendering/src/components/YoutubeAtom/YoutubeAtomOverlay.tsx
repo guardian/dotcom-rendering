@@ -85,7 +85,7 @@ export const YoutubeAtomOverlay = ({
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
-	const isHostedContent = format.design === ArticleDesign.HostedVideo;
+	const isHostedVideo = format.design === ArticleDesign.HostedVideo;
 
 	return (
 		<FormatBoundary format={format}>
@@ -103,7 +103,7 @@ export const YoutubeAtomOverlay = ({
 						height={height}
 						width={width}
 						aspectRatio={aspectRatio}
-						isHostedContent={isHostedContent}
+						isHostedVideo={isHostedVideo}
 					/>
 				)}
 				{isLive ? (

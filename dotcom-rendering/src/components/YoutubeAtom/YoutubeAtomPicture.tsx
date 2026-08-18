@@ -12,7 +12,7 @@ type Props = {
 	aspectRatio?: AspectRatio;
 	mobileAspectRatio?: AspectRatio;
 	isImmersive?: boolean;
-	isHostedContent?: boolean;
+	isHostedVideo?: boolean;
 };
 
 export const YoutubeAtomPicture = ({
@@ -23,34 +23,34 @@ export const YoutubeAtomPicture = ({
 	aspectRatio,
 	mobileAspectRatio,
 	isImmersive = false,
-	isHostedContent = false,
+	isHostedVideo = false,
 }: Props) => {
 	const mobileAspect = mobileAspectRatio ?? aspectRatio;
 	const sources = generateSources(getSourceImageUrl(image), [
 		{
 			breakpoint: breakpoints.mobile,
-			width: isHostedContent ? breakpoints.mobileLandscape : 465,
+			width: isHostedVideo ? breakpoints.mobileLandscape : 465,
 			aspectRatio: mobileAspect,
 		},
 		{
 			breakpoint: breakpoints.mobileLandscape,
-			width: isHostedContent ? breakpoints.phablet : 645,
+			width: isHostedVideo ? breakpoints.phablet : 645,
 			aspectRatio: mobileAspect,
 		},
 		{
 			breakpoint: breakpoints.phablet,
-			width: isHostedContent ? breakpoints.tablet : 620,
+			width: isHostedVideo ? breakpoints.tablet : 620,
 			aspectRatio: mobileAspect,
 		},
 		{
 			breakpoint: breakpoints.tablet,
-			width: isHostedContent ? breakpoints.desktop : 700,
+			width: isHostedVideo ? breakpoints.desktop : 700,
 			aspectRatio,
 			cropOffset: isImmersive ? { x: 50, y: 0 } : undefined,
 		},
 		{
 			breakpoint: breakpoints.desktop,
-			width: isHostedContent ? breakpoints.leftCol : 620,
+			width: isHostedVideo ? breakpoints.desktop : 620,
 			aspectRatio,
 			cropOffset: isImmersive ? { x: 50, y: 0 } : undefined,
 		},
