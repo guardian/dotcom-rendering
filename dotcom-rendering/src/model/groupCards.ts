@@ -25,6 +25,7 @@ export const groupCards = (
 	editionId: EditionId,
 	discussionApiUrl: string,
 	stripBranding: boolean = false,
+	serverSideABTests: Record<string, string>,
 ): DCRGroupedTrails => {
 	switch (container) {
 		case 'flexible/general': {
@@ -45,6 +46,7 @@ export const groupCards = (
 				discussionApiUrl,
 				offset,
 				stripBranding,
+				serverSideABTests,
 			});
 
 			return {
@@ -67,6 +69,7 @@ export const groupCards = (
 				discussionApiUrl,
 				offset,
 				stripBranding,
+				serverSideABTests,
 			});
 
 			return {

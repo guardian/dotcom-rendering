@@ -1,8 +1,14 @@
-import type { FEMediaAsset, FEMediaAtom } from '../frontend/feFront';
+import type {
+	FEFrontCardStyle,
+	FEMediaAsset,
+	FEMediaAtom,
+} from '../frontend/feFront';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import type { VariantMeta } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import {
 	decideArticleMedia,
+	decideHeadline,
 	decideReplacementMedia,
 	getActiveMediaAtom,
 	getMediaMetadata,
@@ -525,6 +531,119 @@ describe('Enhance Cards', () => {
 				subtitleSource: undefined,
 				videoStyle: 'Loop',
 			});
+		});
+	});
+
+	describe('decideHeadline', () => {
+		const cardWithNoEditorialTest = {
+			properties: {
+				isBreaking: false,
+				showKickerTag: false,
+				showByline: false,
+				isLiveBlog: false,
+				isCrossword: false,
+				webTitle: '',
+				editionBrandings: [],
+				tests: [],
+			},
+			header: {
+				isVideo: false,
+				isComment: false,
+				isGallery: false,
+				isAudio: false,
+				headline: 'Headline',
+				url: '',
+				hasMainVideoElement: false,
+			},
+			card: {
+				id: '',
+				cardStyle: {
+					type: 'DefaultCardstyle' as FEFrontCardStyle,
+				},
+				shortUrl: '',
+				group: '',
+				isLive: false,
+			},
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: false,
+			},
+			display: {
+				isBoosted: false,
+				showBoostedHeadline: false,
+				showQuotedHeadline: false,
+				imageHide: false,
+				showLivePlayable: false,
+			},
+			type: '',
+		};
+
+		const oneHourInMilliseconds = 60 * 60 * 1000;
+
+		const cardWithEditorialTest = {
+			...cardWithNoEditorialTest,
+			properties: {
+				...cardWithNoEditorialTest.properties,
+				tests: [
+					{
+						testUuid: 'uuid',
+						variantMeta: [
+							{
+								id: 'A',
+								meta: {
+									headline: 'Headline A',
+								},
+							},
+							{
+								id: 'B',
+								meta: {
+									headline: 'Headline B',
+								},
+							},
+						] as VariantMeta[],
+						startDate: Date.now() - oneHourInMilliseconds,
+						expiryDate: Date.now() + oneHourInMilliseconds,
+						frontsThisTestCanRunOn: [],
+						hasManuallyEndedOnThisTrail: false,
+					},
+				],
+			},
+		};
+
+		it('returns the default headline if no editorial test exists on the card and user is not in a test bucket', () => {
+			expect(decideHeadline(cardWithNoEditorialTest, {})).toEqual(
+				'Headline',
+			);
+		});
+
+		it('returns the default headline if editorial test exists but user is not in a test bucket', () => {
+			expect(decideHeadline(cardWithEditorialTest, {})).toEqual(
+				'Headline',
+			);
+		});
+
+		it('returns the default headline if editorial test does not exist but user is in a test bucket', () => {
+			expect(
+				decideHeadline(cardWithNoEditorialTest, {
+					'fronts-and-curation-editorial-headline-test': 'a',
+				}),
+			).toEqual('Headline');
+		});
+
+		it('returns headline A if editorial test exists and user is in bucket A', () => {
+			expect(
+				decideHeadline(cardWithEditorialTest, {
+					'fronts-and-curation-editorial-headline-test': 'a',
+				}),
+			).toEqual('Headline A');
+		});
+
+		it('returns headline B if editorial test exists and user is in bucket B', () => {
+			expect(
+				decideHeadline(cardWithEditorialTest, {
+					'fronts-and-curation-editorial-headline-test': 'b',
+				}),
+			).toEqual('Headline B');
 		});
 	});
 });

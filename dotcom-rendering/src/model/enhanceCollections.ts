@@ -54,6 +54,7 @@ export const enhanceCollections = ({
 	frontBranding,
 	onPageDescription,
 	isOnPaidContentFront,
+	serverSideABTests,
 }: {
 	collections: FECollection[];
 	editionId: EditionId;
@@ -62,6 +63,7 @@ export const enhanceCollections = ({
 	frontBranding: Branding | undefined;
 	onPageDescription?: string;
 	isOnPaidContentFront?: boolean;
+	serverSideABTests: Record<string, string>;
 }): DCRCollectionType[] => {
 	const indexToShowFrontBranding =
 		findCollectionSuitableForFrontBranding(collections);
@@ -128,18 +130,21 @@ export const enhanceCollections = ({
 				editionId,
 				discussionApiUrl,
 				stripBrandingFromCards,
+				serverSideABTests,
 			),
 			curated: enhanceCards(collection.curated, {
 				cardInTagPage: false,
 				editionId,
 				discussionApiUrl,
 				stripBranding: stripBrandingFromCards,
+				serverSideABTests,
 			}),
 			backfill: enhanceCards(collection.backfill, {
 				cardInTagPage: false,
 				editionId,
 				discussionApiUrl,
 				stripBranding: stripBrandingFromCards,
+				serverSideABTests,
 			}),
 			treats: enhanceTreats(
 				collection.treats,

@@ -25,6 +25,7 @@ import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
 	DCRSupportingContent,
+	EditorialTest,
 } from '../types/front';
 import type { ArticleMedia, MainMedia } from '../types/mainMedia';
 import type { PodcastSeriesImage, TagType } from '../types/tag';
@@ -181,6 +182,56 @@ const decideVideoAtomImage = (
 	}
 
 	return undefined;
+};
+
+/**
+ * Checks if an editorial test is active by making sure it has not been manually ended,
+ * that it has a valid expiry date, and that the expiry date is in the future
+ */
+const isActiveEditorialTest = (test: EditorialTest) =>
+	!test.hasManuallyEndedOnThisTrail &&
+	!!test.expiryDate &&
+	test.expiryDate > Date.now();
+
+/**
+ * Looks through a list of editorial tests to see if there is an active test. If no active
+ * test is found, return undefined
+ */
+const findActiveEditorialTest = (
+	tests: EditorialTest[] | undefined,
+): EditorialTest | undefined => {
+	return tests?.find((test) => isActiveEditorialTest(test));
+};
+
+/**
+ * Decide the headline to be shown for a given card. If there is an active editorial test on a card,
+ * return the variant headline matching the user test group. Otherwise, return the default headline
+ */
+export const decideHeadline = (
+	faciaCard: FEFrontCard,
+	serverSideABTests: Record<string, string>,
+): string => {
+	const activeEditorialTest = findActiveEditorialTest(
+		faciaCard.properties.tests,
+	);
+
+	// return default headline if there is no editorial test on the card
+	if (!activeEditorialTest) {
+		return faciaCard.header.headline;
+	}
+
+	const testBucket =
+		serverSideABTests?.['fronts-and-curation-editorial-headline-test'];
+
+	// return a different variant headline for each test bucket, or return the default
+	// headline if not in a test bucket
+	if (testBucket === 'a') {
+		return String(activeEditorialTest.variantMeta[0]?.meta.headline);
+	} else if (testBucket === 'b') {
+		return String(activeEditorialTest.variantMeta[1]?.meta.headline);
+	} else {
+		return faciaCard.header.headline;
+	}
 };
 
 /**
@@ -363,6 +414,7 @@ export const enhanceCards = (
 		pageId,
 		discussionApiUrl,
 		stripBranding = false,
+		serverSideABTests,
 	}: {
 		cardInTagPage: boolean;
 		/** Used for the data link name to indicate card position in container */
@@ -372,6 +424,7 @@ export const enhanceCards = (
 		discussionApiUrl: string;
 		/** We strip branding from cards if the branding will appear at the collection level instead */
 		stripBranding?: boolean;
+		serverSideABTests: Record<string, string>;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -448,7 +501,8 @@ export const enhanceCards = (
 			format,
 			dataLinkName,
 			url: decideUrl(faciaCard),
-			headline: faciaCard.header.headline,
+			// TODO - respect value of frontsThisTestCanRunOn - compare value of pageId
+			headline: decideHeadline(faciaCard, serverSideABTests),
 			trailText: faciaCard.card.trailText,
 			starRating: faciaCard.card.starRating,
 			webPublicationDate: !isUndefined(
@@ -507,5 +561,6 @@ export const enhanceCards = (
 							?.allImages[0]?.fields.altText ?? '',
 				},
 			}),
+			tests: faciaCard.properties.tests,
 		};
 	});
