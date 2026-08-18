@@ -108,9 +108,11 @@ export const Empty = meta.story({
 		);
 
 		// Link
-		const link = canvas.getByRole('link');
-		await expect(link.textContent).toBe(args.linkText);
-		await expect(link).toHaveAttribute('href', args.link.href);
+		const links = canvas.getAllByRole('link');
+		for (const link of links) {
+			await expect(link.textContent).toBe(args.linkText);
+			await expect(link).toHaveAttribute('href', args.link.href);
+		}
 	},
 });
 
@@ -197,8 +199,10 @@ export const Final = Empty.extend({
 		);
 
 		// Link
-		const link = canvas.getByRole('link');
-		await expect(link.textContent).toBe(args.linkText);
-		await expect(link).toHaveAttribute('href', args.link.href);
+		const links = canvas.getAllByRole('link');
+		for (const link of links) {
+			await expect(link.textContent).toBe(args.linkText);
+			await expect(link).toHaveAttribute('href', args.link.href);
+		}
 	},
 });
