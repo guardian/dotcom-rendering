@@ -68,7 +68,6 @@ export type Props = {
 	showByline?: boolean;
 	isLive?: boolean;
 	articleMedia?: ArticleMedia;
-	isHostedContent?: boolean;
 };
 
 /**
@@ -123,7 +122,6 @@ export const YoutubeAtom = ({
 	showByline,
 	isLive,
 	articleMedia,
-	isHostedContent,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -299,7 +297,6 @@ export const YoutubeAtom = ({
 								hidePillOnMobile={hidePillOnMobile}
 								aspectRatio={aspectRatio}
 								isLive={isLive}
-								isHostedContent={isHostedContent}
 							/>
 						))}
 					{showPlaceholder && (

@@ -135,7 +135,6 @@ describe('YoutubeAtom', () => {
 					abTestParticipations={{}}
 					hidePillOnMobile={false}
 					renderingTarget="Web"
-					isHostedContent={true}
 				/>
 			</ConfigProvider>,
 		);

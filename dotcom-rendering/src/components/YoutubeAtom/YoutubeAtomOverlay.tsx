@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
-import { type ArticleFormat } from '../../lib/articleFormat';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
@@ -67,7 +67,6 @@ type Props = {
 	duration?: number; // in seconds
 	aspectRatio?: AspectRatio;
 	isLive?: boolean;
-	isHostedContent?: boolean;
 };
 
 export const YoutubeAtomOverlay = ({
@@ -83,10 +82,10 @@ export const YoutubeAtomOverlay = ({
 	duration,
 	aspectRatio,
 	isLive,
-	isHostedContent,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
+	const isHostedContent = format.design === ArticleDesign.HostedVideo;
 
 	return (
 		<FormatBoundary format={format}>

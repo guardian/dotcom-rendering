@@ -1,9 +1,6 @@
 import type { ConsentState } from '@guardian/consent-manager';
 import { useEffect, useState } from 'react';
-import {
-	type ArticleFormat,
-	isHostedContentDesign,
-} from '../lib/articleFormat';
+import { type ArticleFormat } from '../lib/articleFormat';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import type { AdTargeting } from '../types/commercial';
@@ -227,7 +224,6 @@ export const YoutubeBlockComponent = ({
 				showByline={showByline}
 				isLive={isLive}
 				articleMedia={articleMedia}
-				isHostedContent={isHostedContentDesign(format.design)}
 			/>
 			{!hideCaption && (
 				<Caption
