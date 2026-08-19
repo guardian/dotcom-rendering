@@ -1,4 +1,3 @@
-import type { CricketMatch } from './cricketMatch';
 import type { FootballMatch } from './footballMatch';
 import type { FootballMatches } from './footballMatches';
 import { type FootballMatchStats } from './footballMatchStats';
@@ -46,18 +45,12 @@ export type FootballTablesPage = FootballData & {
 	kind: 'FootballTables';
 };
 
-export type CricketMatchPage = SportPageConfig & {
-	match: CricketMatch;
-	kind: 'CricketMatch';
-};
-
 export type FootballMatchInfoPage = SportPageConfig & {
 	match: FootballMatch;
 	matchStats: FootballMatchStats;
 	matchInfo: FootballMatchV2;
 	group?: FootballTableSummary;
 	competitionName: string;
-	matchUrl: string;
 	matchHeaderUrl: URL;
 	kind: 'FootballMatchSummary';
 };
@@ -70,10 +63,7 @@ export type FootballDataWithRegionsPage =
 
 export type FootballPageWithRegionsKind = FootballDataWithRegionsPage['kind'];
 
-export type SportDataPage =
-	| FootballDataWithRegionsPage
-	| CricketMatchPage
-	| FootballMatchInfoPage;
+export type SportDataPage = FootballDataWithRegionsPage | FootballMatchInfoPage;
 
 export type SportPageKind = SportDataPage['kind'];
 

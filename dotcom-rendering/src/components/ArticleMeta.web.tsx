@@ -312,10 +312,11 @@ export const ArticleMeta = ({
 		renderingTarget,
 		format,
 	);
+	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
 
-	const avatarUrl = shouldShowAvatar(format)
+	const avatarUrl = shouldShowAvatar(format, isImmersiveGrid)
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
@@ -323,12 +324,6 @@ export const ArticleMeta = ({
 	const isPictureContent = format.design === ArticleDesign.Picture;
 
 	const isImmersive = format.display === ArticleDisplay.Immersive;
-
-	const isPortraitOrLandscapeImmersive =
-		layoutType === 'immersiveLandscapeDefault' ||
-		layoutType === 'immersivePortraitDefault' ||
-		layoutType === 'immersiveLandscapeFeature' ||
-		layoutType === 'immersivePortraitFeature';
 
 	const isAudio = format.design === ArticleDesign.Audio;
 
@@ -372,7 +367,7 @@ export const ArticleMeta = ({
 				) : (
 					''
 				)}
-				{isImmersive && isPortraitOrLandscapeImmersive ? (
+				{isImmersiveGrid ? (
 					<div
 						css={css`
 							display: flex;
@@ -399,7 +394,7 @@ export const ArticleMeta = ({
 								/>
 							)}
 
-							{shouldShowContributor(format) && (
+							{shouldShowContributor(format, isImmersiveGrid) && (
 								<Contributor
 									byline={byline}
 									tags={tags}
@@ -456,7 +451,10 @@ export const ArticleMeta = ({
 									/>
 								)}
 
-								{shouldShowContributor(format) && (
+								{shouldShowContributor(
+									format,
+									isImmersiveGrid,
+								) && (
 									<Contributor
 										byline={byline}
 										tags={tags}
@@ -566,26 +564,25 @@ export const ArticleMeta = ({
 					</div>
 				</div>
 				{showPreferredSource ? <PreferredSourceButton /> : null}
-				{format.display === ArticleDisplay.Immersive &&
-					mainMediaElements?.[0] && (
-						<Hide until="leftCol">
-							<div
-								css={css`
-									margin-top: ${space[2]}px;
-								`}
-							>
-								<Caption
-									captionText={decideMainMediaCaption(
-										mainMediaElements[0],
-									)}
-									format={format}
-									shouldLimitWidth={false}
-									isLeftCol={true}
-									isMainMedia={true}
-								/>
-							</div>
-						</Hide>
-					)}
+				{isImmersive && mainMediaElements?.[0] && (
+					<Hide until="leftCol">
+						<div
+							css={css`
+								margin-top: ${space[2]}px;
+							`}
+						>
+							<Caption
+								captionText={decideMainMediaCaption(
+									mainMediaElements[0],
+								)}
+								format={format}
+								shouldLimitWidth={false}
+								isLeftCol={true}
+								isMainMedia={true}
+							/>
+						</div>
+					</Hide>
+				)}
 			</div>
 		</div>
 	);

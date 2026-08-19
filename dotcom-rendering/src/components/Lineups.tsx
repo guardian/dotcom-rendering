@@ -13,6 +13,7 @@ import type {
 	FootballMatchStats,
 	FootballMatchTeamWithStats,
 	PlayerEvent,
+	Substitution,
 } from '../footballMatchStats';
 import { palette } from '../palette';
 import Union from '../static/icons/Union.svg';
@@ -76,11 +77,17 @@ export const Lineups = ({ matchStats }: Props) => {
 };
 
 const Event = ({
+	eventId,
 	type,
 	time,
+	substitutions,
+	isSubstitute,
 }: {
+	eventId: string;
 	type: 'substitution' | 'dismissal' | 'booking';
 	time: string;
+	substitutions: Substitution[];
+	isSubstitute: boolean;
 }) => {
 	switch (type) {
 		case 'dismissal':
@@ -99,7 +106,13 @@ const Event = ({
 					aria-label="Yellow Card"
 				/>
 			);
-		case 'substitution':
+		case 'substitution': {
+			const substitutionEvent = substitutions.find(
+				(substitution) => substitution.eventId === eventId,
+			);
+
+			const playerSubstitutedIn = `${substitutionEvent?.name.charAt(0).toUpperCase()}. ${substitutionEvent?.lastName}`;
+
 			return (
 				<span
 					role="img"
@@ -107,9 +120,10 @@ const Event = ({
 					css={substitute}
 				>
 					<Union />
-					{time}
+					{!isSubstitute && playerSubstitutedIn} {time}&apos;
 				</span>
 			);
+		}
 	}
 };
 
@@ -154,8 +168,11 @@ const PlayerList = ({
 						{player.events.map((event: PlayerEvent) => (
 							<Event
 								key={event.minute + event.kind}
+								eventId={event.id}
 								type={event.kind}
 								time={event.minute.toString()}
+								substitutions={team.substitutions}
+								isSubstitute={isSubstitute}
 							/>
 						))}
 					</li>

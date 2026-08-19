@@ -1,4 +1,3 @@
-import { matchReport } from '../../fixtures/generated/match-report';
 import { series } from '../../fixtures/generated/series';
 import { storyPackage } from '../../fixtures/generated/story-package';
 import { comment } from '../../fixtures/manual/comment';
@@ -97,9 +96,6 @@ export const mockFetch: typeof global.fetch = (
 		// Get country code
 		case /.*api\.nextgen\.guardianapps\.co\.uk\/geolocation.*/.test(url):
 			return createMockResponse(200, { country: 'GB' });
-		// Match report data
-		case /.*api\.nextgen\.guardianapps\.co\.uk\/football\/api.*/.test(url):
-			return createMockResponse(200, matchReport);
 		// Get user discussion api (used for myAccount dropdown)
 		case url.includes(
 			'discussionApiUrl/profile/me?strict_sanctions_check=false',

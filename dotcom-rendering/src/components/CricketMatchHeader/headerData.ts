@@ -1,5 +1,5 @@
 import { safeParse } from 'valibot';
-import { type CricketMatch, parseCricketMatchV2 } from '../../cricketMatchV2';
+import { type CricketMatch, parseCricketMatch } from '../../cricketMatch';
 import type { FECricketMatchHeader } from '../../frontend/feCricketMatchHeader';
 import { feCricketMatchHeaderSchema } from '../../frontend/feCricketMatchHeader';
 import { safeParseURL } from '../../lib/parse';
@@ -22,7 +22,7 @@ export const parse =
 			return error('Failed to validate match header json');
 		}
 
-		const parsedMatch = parseCricketMatchV2(feData.value.cricketMatch);
+		const parsedMatch = parseCricketMatch(feData.value.cricketMatch);
 
 		if (!parsedMatch.ok) {
 			return error('Failed to parse the match from the header json');
