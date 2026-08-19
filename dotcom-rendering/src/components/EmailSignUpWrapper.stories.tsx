@@ -23,7 +23,6 @@ const defaultArgs = {
 	frequency: 'Weekly',
 	theme: 'sport',
 	idApiUrl: 'https://idapi.theguardian.com',
-	exampleUrl: 'https://www.theguardian.com/email/the-recap',
 	illustrationSquare:
 		'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
 } satisfies Story['args'];

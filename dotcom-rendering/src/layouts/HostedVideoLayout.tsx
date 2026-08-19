@@ -222,6 +222,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 							hideCaption={true}
 							shouldHideAds={true}
 							contentType={frontendData.contentType}
+							contentLayout="HostedVideoLayout"
 						/>
 					</div>
 
