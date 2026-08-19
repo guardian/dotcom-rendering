@@ -18,6 +18,7 @@ import { ProductCardButtons } from './ProductCardButtons';
 import { ProductCardImage } from './ProductCardImage';
 
 type LeftColProductCardProps = {
+	elementId: string;
 	brandName: string;
 	productName: string;
 	image?: ProductImage;
@@ -88,6 +89,7 @@ const CustomAttribute = ({ name, value }: ProductCustomAttribute) => (
 );
 
 export const ProductCardLeftCol = ({
+	elementId,
 	brandName,
 	productName,
 	image,
@@ -100,6 +102,7 @@ export const ProductCardLeftCol = ({
 		<div data-component="product-card-left-col" css={card}>
 			<ProductCardImage
 				format={format}
+				elementId={elementId}
 				image={image}
 				url={productCtas[0]?.url}
 				xCustComponentId={'left-col-image'}

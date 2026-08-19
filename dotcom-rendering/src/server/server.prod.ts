@@ -21,7 +21,6 @@ import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
 import {
 	handleAppsFootballMatchPage,
-	handleCricketMatchPage,
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
@@ -60,7 +59,6 @@ export const prodServer = (): void => {
 	app.post('/Front', handleFront);
 	app.post('/TagPage', handleTagPage);
 	app.post('/FootballMatchListPage', handleFootballMatchListPage);
-	app.post('/CricketMatchPage', handleCricketMatchPage);
 	app.post('/FootballTablesPage', handleFootballTablesPage);
 	app.post('/FootballMatchSummaryPage', handleFootballMatchPage);
 	app.post('/FootballMatchDayEmbed', handleFootballMatchDayEmbed);

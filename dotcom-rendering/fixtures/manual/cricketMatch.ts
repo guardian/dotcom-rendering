@@ -1,4 +1,4 @@
-import type { FECricketMatch } from '../../src/frontend/feCricketMatchPage';
+import type { FECricketMatch } from '../../src/frontend/feCricketMatchData';
 
 export const liveMatch: FECricketMatch = {
 	teams: [

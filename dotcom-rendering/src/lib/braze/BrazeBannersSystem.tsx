@@ -412,7 +412,7 @@ export const canShowBrazeBannersSystem = async (
 	 * campaigns. Only placements with suppressOnStale: true in
 	 * ISLAND_PLACEMENT_MAP can ever be stale (currently: Banner, EndOfArticle).
 	 */
-	if (stalePlacements.has(placementId)) {
+	if (isPlacementStale(placementId)) {
 		brazeBannersSystemLogger.info(
 			`Placement "${placementId}" is stale (last refresh was rate-limited). Not showing banner.`,
 		);
@@ -663,6 +663,7 @@ export const BrazeBannersSystemDisplay = ({
 	const [showBanner, setShowBanner] = useState(true);
 	// Tracks whether banner:open has been dispatched so we only fire banner:close if the open event was sent first.
 	const hasDispatchedOpenRef = useRef(false);
+	const hasDismissedRef = useRef(false);
 
 	const [minHeight, setMinHeight] = useState<string>('0px');
 	const [wrapperModeEnabled, setWrapperModeEnabled] =
@@ -838,7 +839,10 @@ export const BrazeBannersSystemDisplay = ({
 	 * commercial code can release the mobile sticky ad slot.
 	 */
 	const dismissBanner = useCallback(() => {
+		if (hasDismissedRef.current) return;
+		hasDismissedRef.current = true;
 		setShowBanner(false);
+		meta.braze.dismissBanner(meta.banner);
 		meta.braze.logBannerClick(meta.banner, 'dismiss_button');
 		if (hasDispatchedOpenRef.current) {
 			document.dispatchEvent(
@@ -1012,16 +1016,18 @@ export const BrazeBannersSystemDisplay = ({
 			>,
 		) => {
 			if (
-				event.origin === window.location.origin &&
-				Object.values(BrazeBannersSystemMessageType).includes(
-					event.data.type,
+				event.origin !== window.location.origin ||
+				!Object.values(BrazeBannersSystemMessageType).includes(
+					event.data?.type,
 				)
 			) {
-				brazeBannersSystemLogger.log(
-					'📥 Received message from Braze Banner:',
-					event.data,
-				);
+				return;
 			}
+
+			brazeBannersSystemLogger.log(
+				'📥 Received message from Braze Banner:',
+				event.data,
+			);
 			switch (event.data.type) {
 				case BrazeBannersSystemMessageType.GetAuthStatus:
 					postMessageToBrazeBanner(
@@ -1154,9 +1160,7 @@ export const BrazeBannersSystemDisplay = ({
 				case BrazeBannersSystemMessageType.GetContext:
 					postMessageToBrazeBanner(
 						BrazeBannersSystemMessageType.GetContext,
-						{
-							context,
-						},
+						{ context },
 					);
 					break;
 				case BrazeBannersSystemMessageType.SaveFeastRecipeById: {

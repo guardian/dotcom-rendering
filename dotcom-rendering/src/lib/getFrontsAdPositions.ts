@@ -144,6 +144,7 @@ const isEvenIndex = (_collection: unknown, index: number): boolean =>
 const getMobileAdPositions = (
 	collections: AdCandidate[],
 	pageId: string,
+	maxMobileAds = MAX_FRONTS_MOBILE_ADS,
 ): number[] => {
 	const merchHighPosition = getMerchHighPosition(collections);
 	const hasSecondaryContainers = hasSecondaryLevelContainers(collections);
@@ -167,7 +168,7 @@ const getMobileAdPositions = (
 				: (acc: number[], el: number) => [...acc, el], // returns the original array
 			[],
 		)
-		.slice(0, MAX_FRONTS_MOBILE_ADS);
+		.slice(0, maxMobileAds);
 
 	return adPositions;
 };
@@ -359,9 +360,8 @@ const canInsertDesktopAd = (
 const getDesktopAdPositions = (
 	collections: AdCandidate[],
 	pageId: string,
+	maxAdsAllowed = MAX_FRONTS_BANNER_ADS,
 ): number[] => {
-	const maxAdsAllowed = MAX_FRONTS_BANNER_ADS;
-
 	const adPositionsFromReducer = collections.reduce<{
 		heightSinceAd: number;
 		adPositions: number[];
@@ -410,6 +410,18 @@ const getDesktopAdPositions = (
 	).adPositions;
 
 	return adPositionsFromReducer;
+};
+
+export const getMaxFrontsAdCounts = (
+	serverSideAbTests: Record<string, string>,
+): { maxDesktopAds: number; maxMobileAds: number } => {
+	const shouldIncreaseAdLimit =
+		serverSideAbTests['commercial-fronts-ad-increase-ad-limit'] ===
+		'variant';
+	return {
+		maxDesktopAds: shouldIncreaseAdLimit ? 16 : MAX_FRONTS_BANNER_ADS,
+		maxMobileAds: shouldIncreaseAdLimit ? 20 : MAX_FRONTS_MOBILE_ADS,
+	};
 };
 
 export {

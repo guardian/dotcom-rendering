@@ -127,6 +127,21 @@ export const ValidRoutePathsArray = [
 export type RoutePaths = (typeof ValidRoutePathsArray)[number];
 
 /**
+ * The absolute URL of the Identity sign-in page (the "combined" sign-in and
+ * create-account flow). Prefer this over hardcoding the URL so there is a
+ * single place to update if the flow moves.
+ */
+export const PROFILE_SIGN_IN_URL =
+	'https://profile.theguardian.com/signin' satisfies RoutePaths;
+
+/**
+ * The absolute URL of the Identity social sign-in page, parameterised by
+ * provider (`:social`). Use with `buildUrlWithQueryParams`.
+ */
+export const PROFILE_SIGN_IN_SOCIAL_URL =
+	'https://profile.theguardian.com/signin/:social' satisfies RoutePaths;
+
+/**
  * These are all valid paths for the Identity API
  * New routes should be added below
  */
