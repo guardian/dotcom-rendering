@@ -282,6 +282,15 @@ export const StandardLayoutArticleGrid = ({
 
 	const displayAvatarUrl = avatarUrl ? true : false;
 
+	const pictureLeftColLines = (showingAvatar: boolean) => css`
+		margin-bottom: 4px;
+		${showingAvatar
+			? css`
+					margin-top: -29px;
+				`
+			: ''}
+	`;
+
 	return (
 		<article
 			css={[
@@ -591,7 +600,13 @@ export const StandardLayoutArticleGrid = ({
 				{format.display !== ArticleDisplay.Immersive &&
 					format.design !== ArticleDesign.Audio &&
 					layoutType !== 'immersivePortrait' && (
-						<div css={stretchLines}>
+						<div
+							css={[
+								isPicture &&
+									pictureLeftColLines(displayAvatarUrl),
+								stretchLines,
+							]}
+						>
 							{isWeb &&
 							format.theme === ArticleSpecial.Labs &&
 							format.design !== ArticleDesign.Video ? (
@@ -600,6 +615,9 @@ export const StandardLayoutArticleGrid = ({
 								<DecideLines
 									format={format}
 									color={themePalette('--article-border')}
+									displayingAvatar={
+										displayAvatarUrl && isPicture
+									}
 								/>
 							)}
 						</div>
