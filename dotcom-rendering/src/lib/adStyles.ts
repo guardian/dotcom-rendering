@@ -112,6 +112,10 @@ const adSlotStyles = css`
 			&[data-label-show='true'] {
 				min-height: calc(250px + ${labelHeight}px);
 			}
+
+			&.ad-slot--reset-height {
+				min-height: auto;
+			}
 		}
 	}
 `;

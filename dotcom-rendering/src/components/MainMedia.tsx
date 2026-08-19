@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints, space, until } from '@guardian/source/foundations';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -12,6 +13,7 @@ import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 
 const mainMedia = css`
+	position: relative;
 	height: 100%;
 
 	${until.tablet} {
@@ -95,6 +97,7 @@ type Props = {
 	shouldHideAds: boolean;
 	contentType?: string;
 	contentLayout?: string;
+	articleArrangement?: LayoutType;
 };
 
 export const MainMedia = ({
@@ -112,6 +115,7 @@ export const MainMedia = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	articleArrangement,
 }: Props) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
@@ -134,6 +138,7 @@ export const MainMedia = ({
 					shouldHideAds={shouldHideAds}
 					contentType={contentType}
 					contentLayout={contentLayout}
+					articleArrangement={articleArrangement}
 				/>
 			))}
 		</div>

@@ -8,18 +8,20 @@ export type Area =
 	| 'title'
 	| 'headline'
 	| 'standfirst'
+	| 'caption'
 	| 'media'
 	| 'meta'
 	| 'body'
 	| 'right-column';
 
-type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'leftCol';
+type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'leftCol' | 'wide';
 
 const breakpointQueries: Record<Breakpoint, string> = {
 	mobile: until.tablet,
 	tablet: from.tablet,
 	desktop: from.desktop,
 	leftCol: from.leftCol,
+	wide: from.wide,
 };
 
 // Raw CSS overrides per area per breakpoint. Entries are only needed when an area
@@ -224,4 +226,39 @@ export const gridItemCss = (
 		grid-column: centre-column-start / centre-column-end;
 		${breakpointCss}
 	`;
+};
+
+/**
+ * Determines which {@link LayoutType} to render. Immersive layouts are
+ * split by orientation (portrait vs. landscape/square) and by whether the
+ * format is a Feature, since each combination has a distinct grid
+ * arrangement. Non-immersive formats fall back to media/showcase/standard.
+ */
+export const getLayoutType = ({
+	isImmersive,
+	isFeature,
+	orientation,
+	isMedia,
+	isShowcase,
+}: {
+	isImmersive: boolean;
+	isFeature: boolean;
+	orientation: 'portrait' | 'landscape' | 'square';
+	isMedia: boolean;
+	isShowcase: boolean;
+}): LayoutType => {
+	if (isImmersive) {
+		if (orientation === 'portrait') {
+			return isFeature
+				? 'immersivePortraitFeature'
+				: 'immersivePortraitDefault';
+		}
+		// Square images are treated the same as landscape for immersive layouts.
+		return isFeature
+			? 'immersiveLandscapeFeature'
+			: 'immersiveLandscapeDefault';
+	}
+	if (isMedia) return 'media';
+	if (isShowcase) return 'showcase';
+	return 'standard';
 };

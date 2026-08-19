@@ -126,6 +126,20 @@ type ThreeTierChoiceCardsProps = {
 	choiceCardDesignSettings?: ChoiceCardDesignSettings;
 };
 
+/**
+ * Structural equality for choice cards: same product (supportTier and, where
+ * present, ratePlan) and same label. Used to re-resolve a stale
+ * selectedChoiceCard reference — e.g. when useMatchMedia switches the
+ * choices array between mobile and desktop configs after mount, the initial
+ * default (captured via useState from the first array) no longer
+ * reference-matches any card, but is still the same logical card.
+ */
+const isSameCard = (a: ChoiceCard, b: ChoiceCard): boolean =>
+	a.label === b.label &&
+	a.product.supportTier === b.product.supportTier &&
+	('ratePlan' in a.product ? a.product.ratePlan : undefined) ===
+		('ratePlan' in b.product ? b.product.ratePlan : undefined);
+
 export const ThreeTierChoiceCards = ({
 	selectedChoiceCard,
 	setSelectedChoiceCard,
@@ -269,111 +283,116 @@ export const ThreeTierChoiceCards = ({
 				`}
 			>
 				<Stack space={3}>
-					{choices.map((card) => {
-						const {
-							product,
-							label,
-							benefitsLabel,
-							benefits,
-							pill,
-						} = card;
-						const { supportTier } = product;
-
-						const isSelected = (): boolean => {
-							if (!selectedChoiceCard) {
-								return false;
+					{(() => {
+						// Identify the selected card by position so duplicate
+						// cards (e.g. two OneOff cards) can be told apart.
+						// Prefer reference equality — selectedChoiceCard is
+						// normally a stable object from this choices array (set
+						// via setSelectedChoiceCard(card)/onChoiceCardChange).
+						// Fall back to structural equality when the reference
+						// is stale, e.g. the array identity changes when
+						// useMatchMedia switches between mobile and desktop
+						// choice cards after mount.
+						let selectedIndex = -1;
+						if (selectedChoiceCard) {
+							selectedIndex = choices.indexOf(selectedChoiceCard);
+							if (selectedIndex === -1) {
+								selectedIndex = choices.findIndex((choice) =>
+									isSameCard(choice, selectedChoiceCard),
+								);
 							}
-							if (
-								product.supportTier ===
-								selectedChoiceCard.product.supportTier
-							) {
-								if (
-									product.supportTier !== 'OneOff' &&
-									selectedChoiceCard.product.supportTier !==
-										'OneOff'
-								) {
-									return (
-										product.ratePlan ===
-										selectedChoiceCard.product.ratePlan
-									);
-								} else {
-									return true;
-								}
-							} else {
-								return false;
-							}
-						};
-						const selected = isSelected();
+						}
 
-						const radioId = `choicecard-${id}-${supportTier}${
-							supportTier !== 'OneOff'
-								? `-${product.ratePlan}`
-								: ''
-						}`;
+						return choices.map((card, index) => {
+							const {
+								product,
+								label,
+								benefitsLabel,
+								benefits,
+								pill,
+							} = card;
+							const { supportTier } = product;
 
-						const isExpanded =
-							selected ||
-							(!selectedChoiceCard && card.defaultExpanded);
+							const selected = index === selectedIndex;
 
-						return (
-							<div
-								key={supportTier}
-								css={css`
-									position: relative;
-									background-color: inherit;
-								`}
-							>
-								{pill && <ChoiceCardPill pill={pill} />}
-								<label
-									css={supportTierChoiceCardStyles(selected)}
-									htmlFor={radioId}
+							// Suffix with the array index so every radio gets a
+							// unique id and value even when two cards share the
+							// same supportTier (e.g. two OneOff cards). Without
+							// this, both OneOff cards produced
+							// id="choicecard-banner-OneOff", breaking <label
+							// htmlFor> association and React keys.
+							const radioId = `choicecard-${id}-${supportTier}${
+								supportTier !== 'OneOff'
+									? `-${product.ratePlan}`
+									: ''
+							}-${index}`;
+
+							const isExpanded =
+								selected ||
+								(!selectedChoiceCard && card.defaultExpanded);
+
+							return (
+								<div
+									key={radioId}
+									css={css`
+										position: relative;
+										background-color: inherit;
+									`}
 								>
-									<Radio
-										label={
-											<span
-												dangerouslySetInnerHTML={{
-													__html: sanitise(label),
-												}}
-											/>
-										}
-										id={radioId}
-										value={radioId}
-										name={`choice-cards-${id}`}
-										cssOverrides={labelOverrideStyles(
+									{pill && <ChoiceCardPill pill={pill} />}
+									<label
+										css={supportTierChoiceCardStyles(
 											selected,
 										)}
-										supporting={
-											isExpanded && (
-												<SupportingBenefits
-													benefitsLabel={
-														benefitsLabel as
-															| string
-															| undefined
-													}
-													benefits={benefits}
-													benefitsTickColour={
-														pill
-															? getPillBackgroundColour(
-																	pill,
-																)
-															: undefined
-													}
-													choiceCardDesignSettings={
-														choiceCardDesignSettings
-													}
+										htmlFor={radioId}
+									>
+										<Radio
+											label={
+												<span
+													dangerouslySetInnerHTML={{
+														__html: sanitise(label),
+													}}
 												/>
-											)
-										}
-										checked={selected}
-										onChange={() => {
-											setSelectedChoiceCard(card);
-										}}
-										theme={customRadioTheme}
-									/>
-								</label>
-							</div>
-						);
-					})}
+											}
+											id={radioId}
+											value={radioId}
+											name={`choice-cards-${id}`}
+											cssOverrides={labelOverrideStyles(
+												selected,
+											)}
+											supporting={
+												isExpanded && (
+													<SupportingBenefits
+														benefitsLabel={
+															benefitsLabel as
+																| string
+																| undefined
+														}
+														benefits={benefits}
+														benefitsTickColour={
+															pill
+																? getPillBackgroundColour(
+																		pill,
+																	)
+																: undefined
+														}
+														choiceCardDesignSettings={
+															choiceCardDesignSettings
+														}
+													/>
+												)
+											}
+											checked={selected}
+											onChange={() => {
+												setSelectedChoiceCard(card);
+											}}
+											theme={customRadioTheme}
+										/>
+									</label>
+								</div>
+							);
+						});
+					})()}
 				</Stack>
 			</RadioGroup>
 		</div>

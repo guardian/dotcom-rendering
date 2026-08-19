@@ -44,7 +44,6 @@ type Props = {
 	contentType: string;
 	sectionId: string;
 	shouldHideReaderRevenue: boolean;
-	isMinuteArticle: boolean;
 	isPaidContent: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
@@ -115,7 +114,6 @@ export const SlotBodyEnd = ({
 	contentType,
 	sectionId,
 	shouldHideReaderRevenue,
-	isMinuteArticle,
 	isPaidContent,
 	tags,
 	contributionsServiceUrl,
@@ -165,10 +163,8 @@ export const SlotBodyEnd = ({
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({
 			isSignedIn,
 			countryCode,
-			contentType,
 			sectionId,
 			shouldHideReaderRevenue,
-			isMinuteArticle,
 			isPaidContent,
 			tags,
 			contributionsServiceUrl,
@@ -226,7 +222,6 @@ export const SlotBodyEnd = ({
 		contentType,
 		contributionsServiceUrl,
 		idApiUrl,
-		isMinuteArticle,
 		isPaidContent,
 		renderingTarget,
 		sectionId,

@@ -21,18 +21,12 @@ import { useHideMarketingToggleForCountry } from '../lib/useHideMarketingToggleF
 import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
-import {
-	NewsletterPreviewButton,
-	newsletterTertiaryButtonTheme,
-} from './NewsletterPreviewButton';
-import type { NewsletterPreviewAction } from './NewsletterPreviewButton';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
 type Props = {
 	newsletterId: string;
 	newsletterName: string;
 	frequency: string;
-	previewAction?: NewsletterPreviewAction;
 	/** When `true`, the success message is shown immediately (user is already subscribed). */
 	isAlreadySubscribed?: boolean;
 	/** Ophan component ID for tracking events. Derived by the caller from the active
@@ -193,6 +187,18 @@ const primaryButtonTheme: Partial<ThemeButton> = {
 	textPrimary: palette('--newsletter-signup-submit-text'),
 };
 
+/**
+ * Colour overrides for newsletter tertiary buttons so that they are visible
+ * in both light and dark mode, independent of the article theme.
+ *
+ * Used by the "Browse more newsletters" link.
+ */
+export const tertiaryButtonTheme: Partial<ThemeButton> = {
+	textTertiary: palette('--newsletter-browse-more-button-text'),
+	borderTertiary: palette('--newsletter-browse-more-button-border'),
+	backgroundTertiaryHover: palette('--newsletter-browse-more-button-hover'),
+};
+
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
 		<span>
@@ -230,7 +236,7 @@ const SuccessMessage = ({
 			<LinkButton
 				href="/email-newsletters?INTCMP=DOTCOM_NEWSLETTER_SIGNUP_CARD"
 				priority="tertiary"
-				theme={newsletterTertiaryButtonTheme}
+				theme={tertiaryButtonTheme}
 				cssOverrides={tryAgainButtonStyles}
 				data-ignore="global-link-styling"
 			>
@@ -292,7 +298,6 @@ const NewsletterSignupFormActive = ({
 	newsletterId,
 	newsletterName,
 	frequency,
-	previewAction,
 	componentId,
 	abTest,
 	isModal = false,
@@ -388,11 +393,6 @@ const NewsletterSignupFormActive = ({
 					</div>
 				)}
 				<div css={submitButtonContainerStyles}>
-					{isSignedIn && previewAction && (
-						<NewsletterPreviewButton
-							previewAction={previewAction}
-						/>
-					)}
 					<Button
 						cssOverrides={submitButtonStyles}
 						onClick={handleSubmitButtonClick}

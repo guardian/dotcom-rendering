@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import type { ComponentProps } from 'react';
 import { expect, waitFor, within } from 'storybook/test';
-import type { FECricketMatchHeader } from '../../frontend/feCricketMatchHeader';
 import type {
 	FECricketInnings,
 	FECricketMatch,
-} from '../../frontend/feCricketMatchPage';
+} from '../../frontend/feCricketMatchData';
+import type { FECricketMatchHeader } from '../../frontend/feCricketMatchHeader';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import type { ArticleDeprecated } from '../../types/article';
 import { CricketMatchHeader } from './CricketMatchHeader';

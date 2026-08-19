@@ -19,6 +19,33 @@ const commercialPosition = css`
 	position: relative;
 `;
 
+const MAX_FEAST_NUDGES = 5;
+
+/**
+ * Assigns up to five numbered Braze placements across recipe sections,
+ * including the first and last section when there are more than five.
+ */
+export const getFeastNudgeIndex = (
+	sectionIndex: number,
+	sectionCount: number,
+): number | null => {
+	if (sectionIndex < 0 || sectionIndex >= sectionCount || sectionCount < 1) {
+		return null;
+	}
+
+	const nudgeCount = Math.min(MAX_FEAST_NUDGES, sectionCount);
+	if (nudgeCount === sectionCount) return sectionIndex + 1;
+
+	for (let slot = 0; slot < nudgeCount; slot++) {
+		const targetIndex = Math.round(
+			(slot * (sectionCount - 1)) / (nudgeCount - 1),
+		);
+		if (targetIndex === sectionIndex) return slot + 1;
+	}
+
+	return null;
+};
+
 type Props = {
 	format: ArticleFormat;
 	elements: FEElement[];
@@ -161,21 +188,11 @@ export const ArticleRenderer = ({
 
 		const result: (JSX.Element | null | undefined)[] = [...preSection];
 
-		/**
-		 * Distribute up to 5 Braze placement slots evenly across all sections.
-		 * interval = ceil(sections.length / 5)
-		 * A section at 0-based index i gets nudgeIndex = (i+1)/interval
-		 * only when (i+1) is an exact multiple of interval (and ≤ 5).
-		 * All other sections get nudgeIndex = null (no nudge rendered).
-		 */
-		const MAX_NUDGES = 5;
-		const interval = Math.ceil(sections.length / MAX_NUDGES);
-
 		for (const section of sections) {
-			const position = section.index + 1; // 1-based
-			const nudgeIndex =
-				position % interval === 0 ? position / interval : null;
-
+			const nudgeIndex = getFeastNudgeIndex(
+				section.index,
+				sections.length,
+			);
 			result.push(
 				<Fragment key={`recipe-section-${section.index}`}>
 					{section.subheadingEl}
