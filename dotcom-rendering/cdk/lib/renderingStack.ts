@@ -3,11 +3,13 @@ import { AccessScope } from '@guardian/cdk/lib/constants';
 import type { NoMonitoring } from '@guardian/cdk/lib/constructs/cloudwatch';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import {
+	AppIdentity,
 	GuStack as CDKStack,
 	GuDistributionBucketParameter,
 } from '@guardian/cdk/lib/constructs/core';
 import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
+import { GuVpc, SubnetType } from '@guardian/cdk/lib/constructs/ec2';
 import { GuLoadBalancedAppExperimental } from '@guardian/cdk/lib/experimental/patterns/gu-load-balanced-app';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { aws_cloudwatch, type App as CDKApp, Duration } from 'aws-cdk-lib';
@@ -22,6 +24,8 @@ import { ClusterSettings } from 'aws-cdk-lib/aws-ecs/mixins';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
+import { HttpTrafficMirroring } from './HttpTrafficMirroring';
+import { log } from 'console';
 
 export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	guApp: `${'article' | 'facia' | 'interactive' | 'tag-page'}-rendering`;
@@ -221,6 +225,16 @@ export class RenderingCDKStack extends CDKStack {
 					} satisfies Alarms)
 				: ({ noMonitoring: true } satisfies NoMonitoring);
 
+		// Same as defaults in GuLoadBalancedAppExperimental, but we need reference to configure traffic mirroring
+		const vpc = GuVpc.fromIdParameter(
+			this,
+			AppIdentity.addAppToStringEnd({ app: guApp }, 'VPC'),
+		);
+		const privateSubnets = GuVpc.subnetsFromParameter(this, {
+			type: SubnetType.PRIVATE,
+			app: guApp,
+		});
+
 		const app = new GuLoadBalancedAppExperimental(this, {
 			app: guApp,
 			access: {
@@ -271,6 +285,9 @@ export class RenderingCDKStack extends CDKStack {
 					artifactsBucket,
 				}),
 			},
+
+			vpc,
+			privateSubnets,
 
 			// Provision ECS resources only when `imageIdentifier` has been provided
 			...(imageIdentifier == null
@@ -333,6 +350,20 @@ export class RenderingCDKStack extends CDKStack {
 						},
 					],
 				});
+
+				log(vpc);
+				log(privateSubnets);
+				const availabilityZones = this.availabilityZones;
+				log(availabilityZones);
+				if (!!app.autoScalingGroup) {
+					new HttpTrafficMirroring(this, 'Ec2ToEcsTrafficMirror', {
+						vpc: vpc,
+						privateSubnets: privateSubnets,
+						availabilityZone: availabilityZones[0],
+						trafficSource: app.autoScalingGroup,
+						trafficTarget: app.loadBalancer,
+					});
+				}
 			}
 		}
 
