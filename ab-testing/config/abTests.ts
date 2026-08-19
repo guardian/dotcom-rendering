@@ -108,6 +108,18 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
+		name: "commercial-ozone-hashed-email",
+		description:
+			"Pass hashed email to Ozone via pubProvidedId for audience matching",
+		owners: ["commercial.dev@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-09-30",
+		type: "client",
+		audienceSize: 0,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+	},
+	{
 		name: "fronts-and-curation-loop-click-through",
 		description:
 			"Test impact of click to article via loop videos on fronts",
