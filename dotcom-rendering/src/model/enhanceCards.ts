@@ -235,9 +235,10 @@ export const decideHeadline = (
 		(variant) => variant.id.toLowerCase() === testBucket,
 	);
 
-	if (variantMeta === undefined) return defaultHeadline;
+	// make sure the variant headline isn't undefined and that it is of type string
+	if (typeof variantMeta?.meta.headline !== 'string') return defaultHeadline;
 
-	return String(variantMeta.meta.headline);
+	return variantMeta.meta.headline;
 };
 
 /**
