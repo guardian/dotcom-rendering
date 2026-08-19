@@ -1,6 +1,6 @@
 import type { ConsentState } from '@guardian/consent-manager';
 import { useEffect, useState } from 'react';
-import type { ArticleFormat } from '../lib/articleFormat';
+import { type ArticleFormat } from '../lib/articleFormat';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import type { AdTargeting } from '../types/commercial';
@@ -121,11 +121,12 @@ export const YoutubeBlockComponent = ({
 			return posterImage;
 		}
 
-		// For Standard Articles and Liveblog Articles with a Video atom for
+		// For Standard Articles, Liveblog Articles and Hosted Video Articles with a Video atom for
 		// their main media we need to display the poster image.
 		if (
 			contentLayout?.toLowerCase() === 'standardlayout' ||
-			contentLayout?.toLowerCase() === 'livebloglayout'
+			contentLayout?.toLowerCase() === 'livebloglayout' ||
+			contentLayout?.toLowerCase() === 'hostedvideolayout'
 		) {
 			return posterImage;
 		}
