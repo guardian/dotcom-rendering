@@ -11,8 +11,8 @@ const AffiliateDisclaimerText = () => (
 			width: 'fit-content',
 		}}
 	>
-		The Guardian’s journalism is independent. We will earn a commission if
-		you buy something through an affiliate link.&nbsp;
+		Guardian journalism is independent. We earn a commission if you buy
+		something through an affiliate link.&nbsp;
 		<a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">
 			Learn more
 		</a>
