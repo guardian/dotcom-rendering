@@ -4,7 +4,7 @@ import type {
 	FEMediaAtom,
 } from '../frontend/feFront';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import type { VariantMeta } from '../types/front';
+import type { EditorialTest, VariantMeta } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import {
 	decideArticleMedia,
@@ -610,6 +610,52 @@ describe('Enhance Cards', () => {
 			},
 		};
 
+		const cardWithEditorialTestWithUndefinedVariantMeta = {
+			...cardWithEditorialTest,
+			properties: {
+				...cardWithEditorialTest.properties,
+				tests: [
+					{
+						...cardWithEditorialTest.properties.tests[0],
+						variantMeta: [
+							{
+								id: 'A',
+								meta: {
+									headline: undefined,
+								},
+							} as VariantMeta,
+						],
+					} as EditorialTest,
+				],
+			},
+		};
+
+		const cardWithExpiredEditorialTest = {
+			...cardWithEditorialTest,
+			properties: {
+				...cardWithEditorialTest.properties,
+				tests: [
+					{
+						...cardWithEditorialTest.properties.tests[0],
+						expiryDate: Date.now() - oneHourInMilliseconds,
+					} as EditorialTest,
+				],
+			},
+		};
+
+		const cardWithManuallyEndedEditorialTest = {
+			...cardWithEditorialTest,
+			properties: {
+				...cardWithEditorialTest.properties,
+				tests: [
+					{
+						...cardWithEditorialTest.properties.tests[0],
+						hasManuallyEndedOnThisTrail: true,
+					} as EditorialTest,
+				],
+			},
+		};
+
 		it('returns the default headline if no editorial test exists on the card, page is not in allowed fronts list, and user is not in a test bucket', () => {
 			expect(
 				decideHeadline(
@@ -672,6 +718,54 @@ describe('Enhance Cards', () => {
 					'test-front',
 				),
 			).toEqual('Headline B');
+		});
+
+		it('returns the default headline if the bucket name does not match a variant meta id', () => {
+			expect(
+				decideHeadline(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'c',
+					},
+					'test-front',
+				),
+			).toEqual('Headline');
+		});
+
+		it('returns the default headline if the variant headline is undefined', () => {
+			expect(
+				decideHeadline(
+					cardWithEditorialTestWithUndefinedVariantMeta,
+					{
+						'fronts-and-curation-editorial-headline-test': 'a',
+					},
+					'test-front',
+				),
+			).toEqual('Headline');
+		});
+
+		it('returns the default headline if an editorial test has expired', () => {
+			expect(
+				decideHeadline(
+					cardWithExpiredEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'a',
+					},
+					'test-front',
+				),
+			).toEqual('Headline');
+		});
+
+		it('returns the default headline if an editorial test has been manually ended', () => {
+			expect(
+				decideHeadline(
+					cardWithManuallyEndedEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'a',
+					},
+					'test-front',
+				),
+			).toEqual('Headline');
 		});
 	});
 });
