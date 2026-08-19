@@ -513,7 +513,11 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
-				<Standfirst format={format} standfirst={article.standfirst} />
+				<Standfirst
+					format={format}
+					standfirst={article.standfirst}
+					layoutType={layoutType}
+				/>
 			</GridItem>
 			{isImmersive && (
 				<GridItem
