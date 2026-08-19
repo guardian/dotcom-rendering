@@ -123,11 +123,22 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	}
 };
 
-const headlineFont = (format: ArticleFormat) => {
+const headlineFont = (format: ArticleFormat, layoutType?: LayoutType) => {
 	if (format.design === ArticleDesign.Gallery) {
 		return css`
 			${decideMobileHeadlineFont(format)}
 			${from.desktop} {
+				${decideHeadlineFont(format)}
+			}
+		`;
+	}
+	if (
+		layoutType === 'immersivePortraitDefault' ||
+		layoutType === 'immersivePortraitFeature'
+	) {
+		return css`
+			${decideMobileHeadlineFont(format)}
+			${from.leftCol} {
 				${decideHeadlineFont(format)}
 			}
 		`;
@@ -290,6 +301,45 @@ const invertedText = css`
  */
 const gridHeadlineText = css`
 	color: ${themePalette('--immersive-grid-headline-colour')};
+`;
+
+/** Headline colour specific to the immersive portrait grid layout */
+const immersivePortraitHeadlineText = css`
+	color: ${themePalette('--immersive-portrait-headline-text')};
+`;
+
+const gridColumns = css`
+	${from.desktop} {
+		grid-column: 1 / 6;
+	}
+	${from.leftCol} {
+		grid-column: 1 / 7;
+	}
+	${from.wide} {
+		grid-column: 1 / 8;
+	}
+`;
+
+const displayGrid = css`
+	${from.desktop} {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		grid-gap: 0.25fr;
+	}
+	${from.leftCol} {
+		grid-template-columns: repeat(7, 1fr);
+	}
+	${from.wide} {
+		grid-template-columns: repeat(8, 1fr);
+	}
+`;
+
+const paddingBottom = css`
+	padding-bottom: ${space[6]}px;
+
+	${from.desktop} {
+		padding-bottom: 0;
+	}
 `;
 
 const maxWidth = css`
@@ -488,6 +538,9 @@ export const ArticleHeadline = ({
 	starRating,
 }: Props) => {
 	const isInverted = layoutType === 'immersiveLandscapeDefault';
+	const isImmersivePortrait =
+		layoutType === 'immersivePortraitDefault' ||
+		layoutType === 'immersivePortraitFeature';
 	const isLegacyImmersive = layoutType == null;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -568,20 +621,27 @@ export const ArticleHeadline = ({
 											]
 										: isInverted
 											? [invertedText, darkBackground]
-											: gridHeadlineText,
+											: isImmersivePortrait
+												? immersivePortraitHeadlineText
+												: gridHeadlineText,
+									isImmersivePortrait && [
+										displayGrid,
+										paddingBottom,
+									],
 								]}
 							>
 								<span
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? jumboLabsFont
-											: headlineFont(format),
+											: headlineFont(format, layoutType),
 										maxWidth,
 										isLegacyImmersive && [
 											legacyInvertedStyles,
 											legacyImmersiveStyles,
 										],
 										displayBlock,
+										isImmersivePortrait && gridColumns,
 									]}
 								>
 									{headlineString}

@@ -218,6 +218,40 @@ const immersiveGridHeadlineTextLight: PaletteFunction = () =>
 const immersiveGridHeadlineTextDark: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 
+/** Headline colour for the immersive portrait grid layout specifically */
+const immersivePortraitHeadlineLight: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const immersivePortraitHeadlineDark: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
+/** Background for the series/section label on the immersive portrait grid layout */
+const immersivePortraitTitleBackgroundLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+			return pillarPalette(format.theme, 400);
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
+
+const immersivePortraitTitleBackgroundDark: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+			return pillarPalette(format.theme, 500);
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+
 const headlineBackgroundLight: PaletteFunction = ({
 	display,
 	design,
@@ -7574,6 +7608,14 @@ const paletteColours = {
 	'--immersive-grid-headline-colour': {
 		light: immersiveGridHeadlineTextLight,
 		dark: immersiveGridHeadlineTextDark,
+	},
+	'--immersive-portrait-headline-text': {
+		light: immersivePortraitHeadlineLight,
+		dark: immersivePortraitHeadlineDark,
+	},
+	'--immersive-portrait-title-background': {
+		light: immersivePortraitTitleBackgroundLight,
+		dark: immersivePortraitTitleBackgroundDark,
 	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,

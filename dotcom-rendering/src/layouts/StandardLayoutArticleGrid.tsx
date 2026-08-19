@@ -285,8 +285,12 @@ export const StandardLayoutArticleGrid = ({
 						`,
 					isImmersivePortrait &&
 						css`
-							align-self: end;
-							margin-bottom: 2px;
+							${from.desktop} {
+								margin: auto 0 0;
+							}
+							${from.leftCol} {
+								margin: 0;
+							}
 						`,
 				]}
 			>

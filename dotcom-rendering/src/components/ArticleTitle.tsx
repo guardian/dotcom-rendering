@@ -7,6 +7,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 } from '../lib/articleFormat';
+import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
@@ -63,6 +64,21 @@ const galleryStyles = css`
 	}
 `;
 
+const immersivePortraitStyles = css`
+	${from.leftCol} {
+		height: 100%;
+		justify-content: flex-end;
+	}
+`;
+
+const immersivePortraitSeriesSectionWrapperStyles = css`
+	padding: 3px 6px 4px;
+	margin-bottom: 0;
+	background-color: ${themePalette('--immersive-portrait-title-background')};
+	width: fit-content;
+	min-width: unset;
+`;
+
 export const ArticleTitle = ({
 	format,
 	layoutType,
@@ -77,6 +93,9 @@ export const ArticleTitle = ({
 			[ArticleDesign.Gallery, ArticleDesign.HostedGallery].includes(
 				format.design,
 			) && galleryStyles,
+			(layoutType === 'immersivePortraitDefault' ||
+				layoutType === 'immersivePortraitFeature') &&
+				immersivePortraitStyles,
 			sectionStyles,
 		]}
 	>
@@ -85,7 +104,13 @@ export const ArticleTitle = ({
 				format.display === ArticleDisplay.Immersive
 					? layoutType == null
 						? legacyImmersiveMargins
-						: immersiveGridMargins
+						: layoutType === 'immersivePortraitDefault' ||
+							  layoutType === 'immersivePortraitFeature'
+							? [
+									immersiveGridMargins,
+									immersivePortraitSeriesSectionWrapperStyles,
+								]
+							: immersiveGridMargins
 					: undefined
 			}
 		>
