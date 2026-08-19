@@ -10,6 +10,7 @@ import {
 type Props = {
 	format: ArticleFormat;
 	color?: string;
+	displayingAvatar?: boolean;
 };
 
 type DottedLinesProps = { color?: string; count: number };
@@ -40,8 +41,9 @@ const DottedLines = ({
 	></div>
 );
 
-export const DecideLines = ({ format, color }: Props) => {
-	const count = format.design === ArticleDesign.Comment ? 8 : 4;
+export const DecideLines = ({ format, color, displayingAvatar }: Props) => {
+	const count =
+		format.design === ArticleDesign.Comment || displayingAvatar ? 8 : 4;
 
 	switch (format.theme) {
 		case Pillar.Sport:
