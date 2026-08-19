@@ -112,7 +112,7 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 	);
 
 	const isInMonitoringTest = abTests?.isUserInTest(
-		'webx-monitor-group-contamination',
+		'webx-monitor-group-contamination-v2',
 	);
 
 	useEffect(
