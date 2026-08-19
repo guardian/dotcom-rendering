@@ -214,20 +214,22 @@ export const decideHeadline = (
 ): string => {
 	const defaultHeadline = faciaCard.header.headline;
 
+	const testBucket =
+		serverSideABTests['fronts-and-curation-editorial-headline-test'];
+
 	const activeEditorialTest = findActiveEditorialTest(
 		faciaCard.properties.tests,
 	);
 
-	if (!activeEditorialTest) return defaultHeadline;
+	if (testBucket === undefined || !activeEditorialTest) {
+		return defaultHeadline;
+	}
 
 	const testCanRunOnPage =
 		pageId !== undefined &&
 		activeEditorialTest.frontsThisTestCanRunOn.includes(pageId);
 
 	if (!testCanRunOnPage) return defaultHeadline;
-
-	const testBucket =
-		serverSideABTests['fronts-and-curation-editorial-headline-test'];
 
 	const variantMeta = activeEditorialTest.variantMeta.find(
 		(variant) => variant.id.toLowerCase() === testBucket,
