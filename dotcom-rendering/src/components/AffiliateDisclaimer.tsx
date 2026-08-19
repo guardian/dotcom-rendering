@@ -9,6 +9,7 @@ const AffiliateDisclaimerText = () => (
 			marginTop: 0,
 			marginBottom: 0,
 			width: 'fit-content',
+			textWrap: 'pretty',
 		}}
 	>
 		Guardian journalism is independent. We earn a commission if you buy
@@ -30,7 +31,7 @@ const AffiliateDisclaimer = ({
 		theme={{
 			backgroundPrimary: palette('--affiliate-disclaimer-background'),
 			textPrimary: palette('--affiliate-disclaimer-text'),
-			linkPrimary: palette('--article-section-title-lifestyle'),
+			linkPrimary: palette('--affiliate-disclaimer-link'),
 		}}
 		cssOverrides={cssOverrides}
 		data-testid={affiliateDisclaimerId}

@@ -4994,33 +4994,51 @@ const richLinkQuoteFillLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) => {
+const affiliateDisclaimerThemes = {
+	light: {
+		bg: sourcePalette.neutral[97],
+		text: sourcePalette.neutral[7],
+		link: sourcePalette.lifestyle[400],
+	},
+	dark: {
+		bg: sourcePalette.neutral[20],
+		text: sourcePalette.neutral[86],
+		link: sourcePalette.lifestyle[450],
+	},
+};
+
+const affiliateDisclaimerLightTheme = ({
+	design,
+}: {
+	design: ArticleDesign;
+}) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-			return sourcePalette.neutral[20];
+			return affiliateDisclaimerThemes.dark;
 		default:
-			return sourcePalette.neutral[97];
+			return affiliateDisclaimerThemes.light;
 	}
 };
+
+const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) =>
+	affiliateDisclaimerLightTheme({ design }).bg;
+
 const affiliateDisclaimerBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[20];
+	affiliateDisclaimerThemes.dark.bg;
 
-const affiliateDisclaimerTextLight: PaletteFunction = ({ design }) => {
-	switch (design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			return sourcePalette.neutral[86];
-		default:
-			return sourcePalette.neutral[7];
-	}
-};
+const affiliateDisclaimerTextLight: PaletteFunction = ({ design }) =>
+	affiliateDisclaimerLightTheme({ design }).text;
 
-const affiliateDisclaimerTextDark: PaletteFunction = () => {
-	return sourcePalette.neutral[86];
-};
+const affiliateDisclaimerTextDark: PaletteFunction = () =>
+	affiliateDisclaimerThemes.dark.text;
+
+const affiliateDisclaimerLinkLight: PaletteFunction = ({ design }) =>
+	affiliateDisclaimerLightTheme({ design }).link;
+
+const affiliateDisclaimerLinkDark: PaletteFunction = () =>
+	affiliateDisclaimerThemes.dark.link;
 
 const seriesTitleBackgroundLight: PaletteFunction = ({
 	theme,
@@ -6621,6 +6639,10 @@ const paletteColours = {
 	'--affiliate-disclaimer-background': {
 		light: affiliateDisclaimerBackgroundLight,
 		dark: affiliateDisclaimerBackgroundDark,
+	},
+	'--affiliate-disclaimer-link': {
+		light: affiliateDisclaimerLinkLight,
+		dark: affiliateDisclaimerLinkDark,
 	},
 	'--affiliate-disclaimer-text': {
 		light: affiliateDisclaimerTextLight,
