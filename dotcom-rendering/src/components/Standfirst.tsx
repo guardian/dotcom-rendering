@@ -81,13 +81,8 @@ const nestedStyles = (format: ArticleFormat) => {
 	`;
 };
 
-const decideFont = (
-	{ display, design, theme }: ArticleFormat,
-	layoutType?: LayoutType,
-) => {
+const decideFont = ({ display, design, theme }: ArticleFormat) => {
 	const isLabs = theme === ArticleSpecial.Labs;
-	const isImmersivePortraitOrLandscape =
-		layoutType?.startsWith('immersive') ?? false;
 	switch (design) {
 		case ArticleDesign.Gallery:
 			if (isLabs) {
@@ -114,11 +109,6 @@ const decideFont = (
 							${from.tablet} {
 								${textSans24};
 							}
-						`;
-					}
-					if (isImmersivePortraitOrLandscape) {
-						return css`
-							${headlineMedium20};
 						`;
 					}
 					return css`
@@ -155,11 +145,6 @@ const decideFont = (
 							${from.tablet} {
 								${textSans24};
 							}
-						`;
-					}
-					if (isImmersivePortraitOrLandscape) {
-						return css`
-							${headlineMedium20};
 						`;
 					}
 					return css`
@@ -230,6 +215,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 				case ArticleDisplay.Immersive:
 					return css`
 						padding-bottom: 0;
+						padding-top: ${space[2]}px;
 
 						${from.tablet} {
 							padding-bottom: 0;
@@ -254,6 +240,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 				case ArticleDisplay.Immersive:
 					return css`
 						padding-bottom: 0;
+						padding-top: ${space[2]}px;
 
 						${from.tablet} {
 							padding-bottom: 0;
@@ -271,12 +258,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 	}
 };
 
-const standfirstStyles = (
-	{ display, design, theme }: ArticleFormat,
-	layoutType?: LayoutType,
-) => {
-	const isImmersivePortraitOrLandscape =
-		layoutType?.startsWith('immersive') ?? false;
+const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (design) {
@@ -288,18 +270,18 @@ const standfirstStyles = (
 					`;
 				default:
 					return css`
+						max-width: 280px;
 						${from.tablet} {
 							max-width: 460px;
 						}
-						color: ${isImmersivePortraitOrLandscape
-							? palette('--immersive-portrait-standfirst-text')
-							: palette('--standfirst-text')};
+						color: ${palette('--standfirst-text')};
 						li::before {
 							height: 17px;
 							width: 17px;
 						}
 					`;
 			}
+
 		case ArticleDisplay.NumberedList:
 			return css`
 				max-width: 540px;
@@ -409,6 +391,16 @@ const hoverStyles = css`
 		border-bottom: solid 1px ${palette('--standfirst-link-border')};
 	}
 `;
+
+const immersiveGridOverrides = css`
+	padding-top: 0;
+	max-width: none;
+
+	${from.tablet} {
+		max-width: none;
+	}
+`;
+
 export const Standfirst = ({ format, standfirst, layoutType }: Props) => {
 	if (standfirst.trim() === '') {
 		return null;
@@ -418,10 +410,13 @@ export const Standfirst = ({ format, standfirst, layoutType }: Props) => {
 			<div
 				css={[
 					nestedStyles(format),
-					standfirstStyles(format, layoutType),
-					decideFont(format, layoutType),
+					standfirstStyles(format),
+					decideFont(format),
 					decidePadding(format),
 					hoverStyles,
+					layoutType?.startsWith('immersive')
+						? immersiveGridOverrides
+						: undefined,
 				]}
 				className={
 					format.design === ArticleDesign.Interactive

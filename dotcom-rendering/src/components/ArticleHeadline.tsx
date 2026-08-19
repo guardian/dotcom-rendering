@@ -282,14 +282,63 @@ const darkBackground = css`
 `;
 
 const invertedText = css`
+	color: white;
+	background-color: black;
+	white-space: pre-wrap;
+	padding-bottom: ${space[1]}px;
+	padding-right: ${space[1]}px;
+
 	${from.desktop} {
-		color: white;
-		background-color: black;
-		white-space: pre-wrap;
-		padding-bottom: ${space[1]}px;
-		padding-right: ${space[1]}px;
 		margin-left: -10px;
 		padding-left: 10px;
+	}
+`;
+
+/**
+ * Used by the non-inverted immersive grid layouts, whose headlines sit on a
+ * plain or light blurred background rather than the shared --headline-colour
+ * (used by the legacy immersive layout and the inverted grid layout).
+ */
+const gridHeadlineText = css`
+	color: ${themePalette('--immersive-grid-headline-colour')};
+`;
+
+/** Headline colour specific to the immersive portrait grid layout */
+const immersivePortraitHeadlineText = css`
+	color: ${themePalette('--immersive-portrait-headline-text')};
+`;
+
+const gridColumns = css`
+	${from.desktop} {
+		grid-column: 1 / 6;
+	}
+	${from.leftCol} {
+		grid-column: 1 / 7;
+	}
+	${from.wide} {
+		grid-column: 1 / 8;
+	}
+`;
+
+const displayGrid = css`
+	${from.desktop} {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		grid-gap: 0.25fr;
+	}
+	${from.leftCol} {
+		grid-template-columns: repeat(7, 1fr);
+	}
+	${from.wide} {
+		grid-template-columns: repeat(8, 1fr);
+	}
+`;
+
+const paddingBottom = css`
+	padding-bottom: ${space[6]}px;
+
+	${from.desktop} {
+		padding-bottom: 0;
 	}
 `;
 
@@ -353,40 +402,6 @@ const ageWarningMargins = (
 		}
 	`;
 };
-
-const gridColumns = css`
-	${from.desktop} {
-		grid-column: 1 / 6;
-	}
-	${from.leftCol} {
-		grid-column: 1 / 7;
-	}
-	${from.wide} {
-		grid-column: 1 / 8;
-	}
-`;
-
-const displayGrid = css`
-	${from.desktop} {
-		display: grid;
-		grid-template-columns: repeat(6, 1fr);
-		grid-gap: 0.25fr;
-	}
-	${from.leftCol} {
-		grid-template-columns: repeat(7, 1fr);
-	}
-	${from.wide} {
-		grid-template-columns: repeat(8, 1fr);
-	}
-`;
-
-const paddingBottom = css`
-	padding-bottom: ${space[6]}px;
-
-	${from.desktop} {
-		padding-bottom: 0;
-	}
-`;
 
 const WithAgeWarning = ({
 	tags,
@@ -563,11 +578,7 @@ export const ArticleHeadline = ({
 												]
 											: isInverted
 												? [invertedText, darkBackground]
-												: css`
-														color: ${themePalette(
-															'--headline-colour',
-														)};
-													`,
+												: gridHeadlineText,
 									]}
 								>
 									{headlineString}
@@ -593,7 +604,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated
 							}
 							format={format}
-							snapToInverted={true}
+							snapToInverted={isInverted}
 							isLegacyImmersive={isLegacyImmersive}
 						>
 							<h1
@@ -611,16 +622,8 @@ export const ArticleHeadline = ({
 										: isInverted
 											? [invertedText, darkBackground]
 											: isImmersivePortrait
-												? css`
-														color: ${themePalette(
-															'--immersive-portrait-headline-text',
-														)};
-													`
-												: css`
-														color: ${themePalette(
-															'--headline-colour',
-														)};
-													`,
+												? immersivePortraitHeadlineText
+												: gridHeadlineText,
 									isImmersivePortrait && [
 										displayGrid,
 										paddingBottom,

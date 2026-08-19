@@ -135,13 +135,8 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isFeature = format.design === ArticleDesign.Feature;
 
-	const footballMatchUrl =
-		article.matchType === 'FootballMatchType'
-			? article.matchUrl
-			: undefined;
-
 	const isFootballMatchReport =
-		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
+		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
 
 	const mainMedia = article.mainMediaElements[0];
 	const captionText = decideMainMediaCaption(mainMedia);
@@ -174,6 +169,16 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersiveLandscape =
 		layoutType === 'immersiveLandscapeDefault' ||
 		layoutType === 'immersiveLandscapeFeature';
+	const centreRuleColumn = (() => {
+		switch (layoutType) {
+			case 'immersivePortraitDefault':
+			case 'immersivePortraitFeature':
+			case 'immersiveLandscapeDefault':
+				return 4;
+			default:
+				return 3;
+		}
+	})();
 
 	const ageWarning = getAgeWarning(
 		article.tags,
@@ -188,19 +193,18 @@ export const StandardLayoutArticleGrid = ({
 				`,
 				grid.container,
 				grid.outerRules(),
+				isLabs &&
+					isImmersive &&
+					css`
+						&::before,
+						&::after {
+							z-index: ${getZIndex('immersiveGridOuterRules')};
+						}
+					`,
 				!isLabs &&
 					css`
 						${from.leftCol} {
-							${grid.centreRule(
-								isImmersivePortrait
-									? 4
-									: isImmersiveLandscape
-										? layoutType ===
-											'immersiveLandscapeFeature'
-											? 3
-											: 4
-										: 1,
-							)}
+							${grid.centreRule(centreRuleColumn)}
 						}
 					`,
 				isImmersivePortrait &&
@@ -243,38 +247,52 @@ export const StandardLayoutArticleGrid = ({
 						: undefined
 				}
 			>
-				<MainMedia
-					format={format}
-					elements={article.mainMediaElements}
-					host={host}
-					pageId={article.pageId}
-					webTitle={article.webTitle}
-					ajaxUrl={article.config.ajaxUrl}
-					switches={article.config.switches}
-					isAdFreeUser={article.isAdFreeUser}
-					isSensitive={article.config.isSensitive}
-					editionId={article.editionId}
-					hideCaption={isMedia}
-					shouldHideAds={article.shouldHideAds}
-					contentType={article.contentType}
-					contentLayout={contentLayoutName}
-					articleArrangement={layoutType}
-				/>
+				<div>
+					<MainMedia
+						format={format}
+						elements={article.mainMediaElements}
+						host={host}
+						pageId={article.pageId}
+						webTitle={article.webTitle}
+						ajaxUrl={article.config.ajaxUrl}
+						switches={article.config.switches}
+						isAdFreeUser={article.isAdFreeUser}
+						isSensitive={article.config.isSensitive}
+						editionId={article.editionId}
+						hideCaption={isMedia}
+						shouldHideAds={article.shouldHideAds}
+						contentType={article.contentType}
+						contentLayout={contentLayoutName}
+						articleArrangement={layoutType}
+					/>
+					{article.affiliateLinksDisclaimerRequired && (
+						<AffiliateDisclaimer
+							cssOverrides={css`
+								margin: ${space[4]}px 0;
+							`}
+						/>
+					)}
+				</div>
 			</GridItem>
 			<GridItem
 				area="title"
 				layoutType={layoutType}
 				element="aside"
-				css={css`
-					z-index: ${getZIndex('articleHeadline')};
-
-					${from.desktop} {
-						margin: auto 0 0;
-					}
-					${from.leftCol} {
-						margin: 0;
-					}
-				`}
+				css={[
+					isImmersive &&
+						css`
+							z-index: ${getZIndex('articleHeadline')};
+						`,
+					isImmersivePortrait &&
+						css`
+							${from.desktop} {
+								margin: auto 0 0;
+							}
+							${from.leftCol} {
+								margin: 0;
+							}
+						`,
+				]}
 			>
 				<ArticleTitle
 					format={format}
@@ -283,27 +301,27 @@ export const StandardLayoutArticleGrid = ({
 					sectionLabel={article.sectionLabel}
 					sectionUrl={article.sectionUrl}
 					guardianBaseURL={article.guardianBaseURL}
-					isMatch={!!footballMatchUrl}
+					isMatch={isFootballMatchReport}
 				/>
 			</GridItem>
 			<GridItem
 				area="headline"
 				layoutType={layoutType}
 				css={[
-					css`
-						z-index: ${getZIndex('articleHeadline')};
-					`,
-					layoutType === 'immersivePortraitDefault' ||
-					layoutType === 'immersivePortraitFeature'
-						? css`
-								${from.desktop} {
-									border-bottom: 1px solid
-										${themePalette('--article-border')};
-									border-top: 1px solid
-										${themePalette('--article-border')};
-								}
-							`
-						: undefined,
+					isImmersive &&
+						css`
+							z-index: ${getZIndex('articleHeadline')};
+						`,
+					(layoutType === 'immersivePortraitDefault' ||
+						layoutType === 'immersivePortraitFeature') &&
+						css`
+							${from.desktop} {
+								border-bottom: 1px solid
+									${themePalette('--article-border')};
+								border-top: 1px solid
+									${themePalette('--article-border')};
+							}
+						`,
 					isImmersiveLandscape &&
 						css`
 							${from.desktop} {
@@ -357,6 +375,7 @@ export const StandardLayoutArticleGrid = ({
 							shouldLimitWidth={false}
 							isLeftCol={true}
 							isMainMedia={true}
+							showIconBelowLeftCol={true}
 						/>
 					</Hide>
 				</GridItem>
@@ -397,6 +416,7 @@ export const StandardLayoutArticleGrid = ({
 							<ArticleMetaApps
 								branding={branding}
 								format={format}
+								layoutType={layoutType}
 								byline={article.byline}
 								tags={article.tags}
 								primaryDateline={
@@ -437,9 +457,6 @@ export const StandardLayoutArticleGrid = ({
 								shortUrlId={article.config.shortUrlId}
 								mainMediaElements={article.mainMediaElements}
 							/>
-							{!!article.affiliateLinksDisclaimer && (
-								<AffiliateDisclaimer />
-							)}
 						</Hide>
 					</>
 				) : (
@@ -463,9 +480,6 @@ export const StandardLayoutArticleGrid = ({
 							shortUrlId={article.config.shortUrlId}
 							mainMediaElements={article.mainMediaElements}
 						/>
-						{!!article.affiliateLinksDisclaimer && (
-							<AffiliateDisclaimer />
-						)}
 					</>
 				)}
 			</GridItem>

@@ -5,7 +5,14 @@ import {
 	type ArticleFormat,
 } from './articleFormat';
 
-export const shouldShowAvatar = (format: ArticleFormat): boolean => {
+export const shouldShowAvatar = (
+	format: ArticleFormat,
+	isImmersiveGrid = false,
+): boolean => {
+	if (format.display === ArticleDisplay.Immersive && !isImmersiveGrid) {
+		return false;
+	}
+
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 		case ArticleDisplay.Showcase:
@@ -26,7 +33,14 @@ export const shouldShowAvatar = (format: ArticleFormat): boolean => {
 	}
 };
 
-export const shouldShowContributor = (format: ArticleFormat): boolean => {
+export const shouldShowContributor = (
+	format: ArticleFormat,
+	isImmersiveGrid = false,
+): boolean => {
+	if (format.display === ArticleDisplay.Immersive && !isImmersiveGrid) {
+		return false;
+	}
+
 	switch (format.display) {
 		case ArticleDisplay.NumberedList:
 			return true;

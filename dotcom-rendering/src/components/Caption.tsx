@@ -31,10 +31,13 @@ type Props = {
 	mediaType?: MainMedia['type'];
 	isMainMedia?: boolean;
 	isImmersive?: boolean;
+	showIconBelowLeftCol?: boolean;
 };
 
 type IconProps = {
+	format: ArticleFormat;
 	isMainMedia?: boolean;
+	showIconBelowLeftCol: boolean;
 };
 
 const captionStyle = (isMainMedia: boolean) => css`
@@ -160,6 +163,12 @@ const bigLeftMargin = css`
 	}
 `;
 
+const hideIconBelowLeftCol = css`
+	${until.leftCol} {
+		display: none;
+	}
+`;
+
 const pictureRatio = (13 / 18) * 100;
 const videoRatio = (23 / 36) * 100;
 
@@ -244,17 +253,40 @@ const galleryStyles = css`
 	}
 `;
 
-const CameraIcon = ({ isMainMedia }: IconProps) => {
+const CameraIcon = ({
+	format,
+	isMainMedia,
+	showIconBelowLeftCol,
+}: IconProps) => {
 	return (
-		<span css={[iconStyle(isMainMedia)]}>
+		<span
+			css={[
+				iconStyle(isMainMedia),
+				format.display === ArticleDisplay.Immersive &&
+					!showIconBelowLeftCol &&
+					hideIconBelowLeftCol,
+			]}
+		>
 			<CameraSvg />
 		</span>
 	);
 };
 
-const VideoIcon = ({ isMainMedia }: IconProps) => {
+const VideoIcon = ({
+	format,
+	isMainMedia,
+	showIconBelowLeftCol,
+}: IconProps) => {
 	return (
-		<span css={[iconStyle(isMainMedia), videoIconStyle]}>
+		<span
+			css={[
+				iconStyle(isMainMedia),
+				format.display === ArticleDisplay.Immersive &&
+					!showIconBelowLeftCol &&
+					hideIconBelowLeftCol,
+				videoIconStyle,
+			]}
+		>
 			<VideoSvg />
 		</span>
 	);
@@ -272,6 +304,7 @@ export const Caption = ({
 	mediaType = 'Gallery',
 	isMainMedia = false,
 	isImmersive = false,
+	showIconBelowLeftCol = false,
 }: Props) => {
 	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
 	const noCaption = !captionText?.trim();
@@ -305,9 +338,17 @@ export const Caption = ({
 			data-spacefinder-role="inline"
 		>
 			{mediaType === 'YoutubeVideo' || mediaType === 'SelfHostedVideo' ? (
-				<VideoIcon isMainMedia={isMainMedia} />
+				<VideoIcon
+					format={format}
+					isMainMedia={isMainMedia}
+					showIconBelowLeftCol={showIconBelowLeftCol}
+				/>
 			) : (
-				<CameraIcon isMainMedia={isMainMedia} />
+				<CameraIcon
+					format={format}
+					isMainMedia={isMainMedia}
+					showIconBelowLeftCol={showIconBelowLeftCol}
+				/>
 			)}
 			{!!captionText && (
 				<span

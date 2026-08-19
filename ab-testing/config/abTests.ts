@@ -32,6 +32,18 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
+		name: "commercial-labs-immersive-grid",
+		description:
+			"New grid-based immersive layout for Guardian Labs articles",
+		owners: ["commercial.dev@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-08-31",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["enable"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "growth-holdback-group",
 		description:
 			"Test for 5% holdback group that does not qualify for any testing so long as the test is live in the RRCP",
@@ -87,10 +99,10 @@ const ABTests: ABTest[] = [
 		description:
 			"Test to measure the impact on ad density after adding to high value sections in spacefinder",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-08-27",
+		expirationDate: "2026-09-01",
 		type: "client",
 		status: "ON",
-		audienceSize: 0 / 100,
+		audienceSize: 10 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
@@ -181,6 +193,20 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant-1", "variant-2"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "fronts-and-curation-editorial-headline-test",
+		description: "Allow editorial headline A/B tests to run on web",
+		owners: [
+			"fronts.and.curation@guardian.co.uk",
+			"ab.test.mission@guardian.co.uk",
+		],
+		status: "ON",
+		expirationDate: "2036-08-12",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["a", "b"],
 		shouldForceMetricsCollection: false,
 	},
 ];

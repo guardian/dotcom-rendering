@@ -30,7 +30,7 @@ const sectionStyles = css`
 	}
 `;
 
-const immersiveMargins = css`
+const immersiveGridMargins = css`
 	max-width: 500px;
 	min-width: 200px;
 	margin-bottom: 4px;
@@ -107,10 +107,10 @@ export const ArticleTitle = ({
 						: layoutType === 'immersivePortraitDefault' ||
 							  layoutType === 'immersivePortraitFeature'
 							? [
-									immersiveMargins,
+									immersiveGridMargins,
 									immersivePortraitSeriesSectionWrapperStyles,
 								]
-							: immersiveMargins
+							: immersiveGridMargins
 					: undefined
 			}
 		>
