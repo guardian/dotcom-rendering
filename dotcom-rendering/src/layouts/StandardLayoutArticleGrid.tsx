@@ -455,7 +455,11 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
-				<Standfirst format={format} standfirst={article.standfirst} />
+				<Standfirst
+					format={format}
+					standfirst={article.standfirst}
+					layoutType={layoutType}
+				/>
 			</GridItem>
 			{isImmersive && (
 				<GridItem
@@ -477,21 +481,36 @@ export const StandardLayoutArticleGrid = ({
 					</Hide>
 				</GridItem>
 			)}
-			<GridItem area="meta" layoutType={layoutType} element="aside">
-				{format.design !== ArticleDesign.Audio && (
-					<div css={stretchLines}>
-						{isWeb &&
-						format.theme === ArticleSpecial.Labs &&
-						format.design !== ArticleDesign.Video ? (
-							<GuardianLabsLines />
-						) : (
-							<DecideLines
-								format={format}
-								color={themePalette('--article-border')}
-							/>
-						)}
-					</div>
-				)}
+			<GridItem
+				area="meta"
+				layoutType={layoutType}
+				element="aside"
+				css={
+					layoutType === 'immersivePortraitDefault'
+						? css`
+								${from.leftCol} {
+									margin-right: -10px;
+								}
+							`
+						: undefined
+				}
+			>
+				{format.display !== ArticleDisplay.Immersive &&
+					format.design !== ArticleDesign.Audio &&
+					layoutType !== 'immersivePortraitDefault' && (
+						<div css={stretchLines}>
+							{isWeb &&
+							format.theme === ArticleSpecial.Labs &&
+							format.design !== ArticleDesign.Video ? (
+								<GuardianLabsLines />
+							) : (
+								<DecideLines
+									format={format}
+									color={themePalette('--article-border')}
+								/>
+							)}
+						</div>
+					)}
 				{isApps ? (
 					<>
 						<Hide from="leftCol">
