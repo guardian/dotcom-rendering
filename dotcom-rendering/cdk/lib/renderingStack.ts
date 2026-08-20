@@ -10,15 +10,35 @@ import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 import { GuLoadBalancedAppExperimental } from '@guardian/cdk/lib/experimental/patterns/gu-load-balanced-app';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
-import { aws_cloudwatch, type App as CDKApp, Duration } from 'aws-cdk-lib';
-import type { ScalingInterval } from 'aws-cdk-lib/aws-applicationautoscaling';
+import {
+	ArnFormat,
+	aws_cloudwatch,
+	type App as CDKApp,
+	Duration,
+	RemovalPolicy,
+} from 'aws-cdk-lib';
+import type {
+	PredefinedMetric,
+	ScalingInterval,
+} from 'aws-cdk-lib/aws-applicationautoscaling';
+import { TargetTrackingScalingPolicy } from 'aws-cdk-lib/aws-applicationautoscaling';
 import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
 import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
-import type { CfnService } from 'aws-cdk-lib/aws-ecs';
+import type { CfnService, ScalableTaskCount } from 'aws-cdk-lib/aws-ecs';
 import { ClusterSettings } from 'aws-cdk-lib/aws-ecs/mixins';
+import { CfnRule } from 'aws-cdk-lib/aws-events';
+import { Effect, PolicyStatement, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
+import {
+	CfnDelivery,
+	CfnDeliveryDestination,
+	CfnDeliverySource,
+	CfnResourcePolicy,
+	LogGroup,
+	RetentionDays,
+} from 'aws-cdk-lib/aws-logs';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
@@ -279,13 +299,11 @@ export class RenderingCDKStack extends CDKStack {
 						ecsProps: {
 							repositoryName: 'guardian/dotcom-rendering',
 							imageIdentifier,
-
-							// TODO tune these values
-							memoryLimitMiB: 2048,
-							cpu: 1024,
+							memoryLimitMiB: 4096,
+							cpu: 2048,
 							scaling: {
-								minimumTasks: 1,
-								maximumTasks: 2,
+								minimumTasks: 9,
+								maximumTasks: 9,
 							},
 						},
 
@@ -332,6 +350,216 @@ export class RenderingCDKStack extends CDKStack {
 							ResolutionSeconds: 20,
 						},
 					],
+				});
+
+				// Until we make these changes in GuCDK, we have to be a bit hacky to set the CPU Scaling option.
+				const ecsScalableTarget = app.ecsService.node.tryFindChild(
+					'TaskCount',
+				) as ScalableTaskCount;
+				if (ecsScalableTarget) {
+					// The high resolution predefined metric evaluates every 10s rather than 60s,
+					// so scaling reacts far faster. It isn't in the CDK `PredefinedMetric` enum yet.
+					// https://docs.aws.amazon.com/AmazonECS/latest/developerguide/target-tracking-faster-auto-scaling.html
+					new TargetTrackingScalingPolicy(this, 'CpuScaling', {
+						scalingTarget: ecsScalableTarget,
+						targetValue: 20,
+						predefinedMetric:
+							'ECSServiceAverageCPUUtilizationHighResolution' as unknown as PredefinedMetric,
+						scaleOutCooldown: Duration.seconds(60),
+						scaleInCooldown: Duration.seconds(60),
+					});
+				} else {
+					throw new Error(
+						'Could not create CPU scaling policy for ECS',
+					);
+				}
+
+				// Add Action Logs
+				// This should provide infra level information such as how long it takes to pull an image
+				//
+				// https://docs.aws.amazon.com/AmazonECS/latest/developerguide/action-logs-getting-started.html
+				const ecsServiceName = `${guApp}-${stage}`;
+
+				const actionLogGroup = new LogGroup(this, 'EcsActionLogGroup', {
+					logGroupName: `/aws/vendedlogs/ecs/action-logs/${ecsServiceName}`,
+					retention: RetentionDays.ONE_WEEK,
+					removalPolicy: RemovalPolicy.DESTROY,
+				});
+
+				actionLogGroup.addToResourcePolicy(
+					new PolicyStatement({
+						effect: Effect.ALLOW,
+						principals: [
+							new ServicePrincipal('delivery.logs.amazonaws.com'),
+						],
+						actions: ['logs:CreateLogStream', 'logs:PutLogEvents'],
+						resources: [actionLogGroup.logGroupArn],
+					}),
+				);
+
+				const deliverySource = new CfnDeliverySource(
+					this,
+					'EcsActionDeliverySource',
+					{
+						name: `${ecsServiceName}-source`,
+						resourceArn: app.ecsService.cluster.clusterArn,
+						logType: 'ACTION_LOGS',
+					},
+				);
+
+				const deliveryDestination = new CfnDeliveryDestination(
+					this,
+					'EcsActionDeliveryDestination',
+					{
+						name: `${ecsServiceName}-destination`,
+						destinationResourceArn: actionLogGroup.logGroupArn,
+					},
+				);
+
+				new CfnDelivery(this, 'EcsActionDelivery', {
+					deliverySourceName: deliverySource.name,
+					deliveryDestinationArn: deliveryDestination.attrArn,
+				});
+
+				// Deliver per-health-check-attempt results (PASS/FAIL, latency, target
+				// IP:port, reason code) straight to CloudWatch Logs as vended logs, so we
+				// can query them alongside task-state events to reconstruct the
+				// registration → healthy phase of a task's lifecycle.
+				// See https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-cloudwatch-logs.html
+				const healthCheckLogsName = `/aws/elasticloadbalancing/${ecsServiceName}-health-check`;
+				const healthCheckLogs = new LogGroup(this, 'HealthCheckLogs', {
+					logGroupName: healthCheckLogsName,
+					retention: RetentionDays.ONE_WEEK,
+					removalPolicy: RemovalPolicy.DESTROY,
+				});
+
+				const healthCheckLogSource = new CfnDeliverySource(
+					this,
+					'HealthCheckLogSource',
+					{
+						name: `${ecsServiceName}-health-check`,
+						logType: 'ALB_HEALTH_CHECK_LOGS',
+						resourceArn: app.loadBalancer.loadBalancerArn,
+					},
+				);
+
+				const healthCheckLogDestination = new CfnDeliveryDestination(
+					this,
+					'HealthCheckLogDestination',
+					{
+						name: `${ecsServiceName}-health-check`,
+						destinationResourceArn: healthCheckLogs.logGroupArn,
+					},
+				);
+
+				// Allow the CloudWatch Logs delivery service to write to the log group.
+				const healthCheckLogsPolicy = new CfnResourcePolicy(
+					this,
+					'HealthCheckLogsDeliveryPolicy',
+					{
+						policyName: `${ecsServiceName}-health-check-logs`,
+						policyDocument: JSON.stringify({
+							Version: '2012-10-17',
+							Statement: [
+								{
+									Sid: 'AllowLogDeliveryWrite',
+									Effect: 'Allow',
+									Principal: {
+										Service: 'delivery.logs.amazonaws.com',
+									},
+									Action: [
+										'logs:CreateLogStream',
+										'logs:PutLogEvents',
+									],
+									Resource: this.formatArn({
+										service: 'logs',
+										resource: 'log-group',
+										resourceName: `${healthCheckLogsName}:log-stream:*`,
+										arnFormat:
+											ArnFormat.COLON_RESOURCE_NAME,
+									}),
+									Condition: {
+										StringEquals: {
+											'aws:SourceAccount': this.account,
+										},
+										ArnLike: {
+											'aws:SourceArn':
+												healthCheckLogSource.attrArn,
+										},
+									},
+								},
+							],
+						}),
+					},
+				);
+
+				const healthCheckLogDelivery = new CfnDelivery(
+					this,
+					'HealthCheckLogDelivery',
+					{
+						deliverySourceName: healthCheckLogSource.name,
+						deliveryDestinationArn:
+							healthCheckLogDestination.attrArn,
+					},
+				);
+				healthCheckLogDelivery.addDependency(healthCheckLogSource);
+				healthCheckLogDelivery.addDependency(healthCheckLogsPolicy);
+
+				// Record every ECS task lifecycle transition (PROVISIONING → ... → STOPPED)
+				// so we can reconstruct a per-state timeline for scale-out latency analysis.
+				const taskStateEvents = new LogGroup(this, 'TaskStateEvents', {
+					logGroupName: `/aws/events/${ecsServiceName}-task-state`,
+					retention: RetentionDays.ONE_WEEK,
+					removalPolicy: RemovalPolicy.DESTROY,
+				});
+
+				// Use a low-level CfnRule + native resource policy rather than the L2
+				// CloudWatchLogGroup target: the L2 target injects a Lambda-backed custom
+				// resource (an asset), which requires `cdk deploy`. This keeps the stack
+				// deployable via plain CloudFormation changesets.
+				const taskStateRule = new CfnRule(this, 'TaskStateChangeRule', {
+					eventPattern: {
+						source: ['aws.ecs'],
+						'detail-type': ['ECS Task State Change'],
+						detail: {
+							clusterArn: [app.ecsService.cluster.clusterArn],
+						},
+					},
+					targets: [
+						{
+							id: 'TaskStateEventsLog',
+							arn: this.formatArn({
+								service: 'logs',
+								resource: 'log-group',
+								resourceName: taskStateEvents.logGroupName,
+								arnFormat: ArnFormat.COLON_RESOURCE_NAME,
+							}),
+						},
+					],
+				});
+
+				new CfnResourcePolicy(this, 'TaskStateEventsPolicy', {
+					policyName: `${ecsServiceName}-task-state-events`,
+					policyDocument: JSON.stringify({
+						Version: '2012-10-17',
+						Statement: [
+							{
+								Sid: 'AllowEventBridgeToLog',
+								Effect: 'Allow',
+								Principal: { Service: 'events.amazonaws.com' },
+								Action: [
+									'logs:CreateLogStream',
+									'logs:PutLogEvents',
+								],
+								Resource: taskStateEvents.logGroupArn,
+								Condition: {
+									ArnEquals: {
+										'aws:SourceArn': taskStateRule.attrArn,
+									},
+								},
+							},
+						],
+					}),
 				});
 			}
 		}

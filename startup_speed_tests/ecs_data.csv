@@ -1,0 +1,10 @@
+name|startTime|readyTime
+arn:aws:ecs:eu-west-1:642631414762:task/frontend-tag-page-rendering-CODE-tagpagerenderingEcsClusterE7696595-TylfDV8MtwHi/335f73cc3d5a494d9b19160647009002|2026-08-10T11:42:53.902000+01:00|2026-08-10T10:43:21.806077Z
+arn:aws:ecs:eu-west-1:642631414762:task/frontend-tag-page-rendering-CODE-tagpagerenderingEcsClusterE7696595-TylfDV8MtwHi/3716bacda7d24158be3a5ec2c27eec99|2026-08-10T11:42:53.902000+01:00|2026-08-10T10:43:21.810286Z
+arn:aws:ecs:eu-west-1:642631414762:task/frontend-tag-page-rendering-CODE-tagpagerenderingEcsClusterE7696595-TylfDV8MtwHi/8f100ba08eb54c09a4fef11c7041cba4|2026-08-10T11:42:53.902000+01:00|2026-08-10T10:43:21.808961Z
+arn:aws:ecs:eu-west-1:642631414762:task/frontend-tag-page-rendering-CODE-tagpagerenderingEcsClusterE7696595-TylfDV8MtwHi/ba5a248a984647e28f97be02e7449b19|2026-08-10T11:42:53.902000+01:00|2026-08-10T10:43:21.809508Z
+arn:aws:ecs:eu-west-1:642631414762:task/frontend-tag-page-rendering-CODE-tagpagerenderingEcsClusterE7696595-TylfDV8MtwHi/cdad2a228ea8478da3f3b9eccabeafdb|2026-08-10T11:42:53.902000+01:00|2026-08-10T10:43:21.806751Z
+arn:aws:ecs:eu-west-1:642631414762:task/frontend-tag-page-rendering-CODE-tagpagerenderingEcsClusterE7696595-TylfDV8MtwHi/d90f6341594b4613897c6e20ec3de31d|2026-08-10T11:40:27.294000+01:00|2026-08-10T10:40:57.975687Z
+arn:aws:ecs:eu-west-1:642631414762:task/frontend-tag-page-rendering-CODE-tagpagerenderingEcsClusterE7696595-TylfDV8MtwHi/f0235eaabe0a472eb6c1afae5dedcbe0|2026-08-10T11:42:53.902000+01:00|2026-08-10T10:43:31.565310Z
+arn:aws:ecs:eu-west-1:642631414762:task/frontend-tag-page-rendering-CODE-tagpagerenderingEcsClusterE7696595-TylfDV8MtwHi/f5ff52fb9d98445d95dc410b49757385|2026-08-10T11:42:53.902000+01:00|2026-08-10T10:43:31.565995Z
+arn:aws:ecs:eu-west-1:642631414762:task/frontend-tag-page-rendering-CODE-tagpagerenderingEcsClusterE7696595-TylfDV8MtwHi/fd8cfa9cd5014df89f72af4b0022105f|2026-08-10T11:42:53.902000+01:00|2026-08-10T10:43:21.809905Z
