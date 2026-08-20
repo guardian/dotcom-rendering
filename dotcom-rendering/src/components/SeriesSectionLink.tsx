@@ -190,6 +190,12 @@ const sectionPadding = css`
 	}
 `;
 
+const immersiveGridTitleBelowDesktop = css`
+	${until.desktop} {
+		color: white;
+	}
+`;
+
 export const SeriesSectionLink = ({
 	format,
 	layoutType,
@@ -356,6 +362,9 @@ export const SeriesSectionLink = ({
 									'--series-title-background',
 								)};
 							`,
+							format.display === ArticleDisplay.Immersive &&
+								layoutType != null &&
+								immersiveGridTitleBelowDesktop,
 							format.design === ArticleDesign.Gallery &&
 								css`
 									position: relative;

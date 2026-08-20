@@ -21,11 +21,18 @@ export type Area =
 	| 'body'
 	| 'right-column';
 
-type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'leftCol' | 'wide';
+type Breakpoint =
+	| 'mobile'
+	| 'tablet'
+	| 'belowDesktop'
+	| 'desktop'
+	| 'leftCol'
+	| 'wide';
 
 const breakpointQueries: Record<Breakpoint, string> = {
 	mobile: until.tablet,
 	tablet: from.tablet,
+	belowDesktop: until.desktop,
 	desktop: from.desktop,
 	leftCol: from.leftCol,
 	wide: from.wide,
@@ -160,45 +167,39 @@ const mediaCss: LayoutCssMap = {
 
 const immersivePortraitDefaultCss: LayoutCssMap = {
 	title: {
-		mobile: 'grid-row: 1;',
-		tablet: 'grid-row: 1;',
+		belowDesktop: `${grid.column.all} grid-row: 2;`,
 		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 1; ${grid.between('left-column-start', 9)};`,
 	},
 	headline: {
-		mobile: 'grid-row: 2;',
-		tablet: 'grid-row: 2;',
+		belowDesktop: `${grid.column.all} grid-row: 3;`,
 		desktop: `grid-row: 2; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 2; ${grid.between('left-column-start', 9)};`,
 		wide: `grid-row: 2; ${grid.between('left-column-start', 10)};`,
 	},
 	media: {
-		mobile: 'grid-row: 3;',
-		tablet: 'grid-row: 3;',
+		belowDesktop: `${grid.column.all} grid-row: 1 / span 3;`,
 		desktop: `grid-row: 1 / span 4; ${grid.between(8, 'right-column-end')};`,
 		leftCol: `grid-row: 1 / span 3; ${grid.between(9, 'right-column-end')};`,
 		wide: `grid-row: 1 / span 3; ${grid.between(10, 'right-column-end')};`,
 	},
 	standfirst: {
-		mobile: 'grid-row: 4;',
-		tablet: 'grid-row: 4;',
+		belowDesktop: 'grid-row: 4;',
 		desktop: `grid-row: 3; ${grid.between('centre-column-start', 7)};`,
 		leftCol: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
 		wide: `grid-row: 3; ${grid.between('centre-column-start', 9)};`,
 	},
 	caption: {
-		mobile: 'grid-row: 5;',
-		tablet: 'grid-row: 5;',
+		belowDesktop: 'grid-row: 5;',
 		desktop: `grid-row: 5;`,
 	},
 	meta: {
-		mobile: 'grid-row: 6;',
-		tablet: 'grid-row: 6;',
+		belowDesktop: 'grid-row: 6;',
 		desktop: `grid-row: 4; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
 	},
 	body: {
-		mobile: 'grid-row: 7;',
+		belowDesktop: 'grid-row: 7;',
 		leftCol: 'grid-row: 4;',
 	},
 	'right-column': {
@@ -209,45 +210,39 @@ const immersivePortraitDefaultCss: LayoutCssMap = {
 
 const immersivePortraitFeatureCss: LayoutCssMap = {
 	title: {
-		mobile: 'grid-row: 2;',
-		tablet: 'grid-row: 2;',
+		belowDesktop: `${grid.column.all} grid-row: 2;`,
 		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 1; ${grid.between('left-column-start', 9)};`,
 	},
 	headline: {
-		mobile: 'grid-row: 3;',
-		tablet: 'grid-row: 3;',
+		belowDesktop: `${grid.column.all} grid-row: 3;`,
 		desktop: `grid-row: 2; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 2; ${grid.between('left-column-start', 9)};`,
 		wide: `grid-row: 2; ${grid.between('left-column-start', 10)};`,
 	},
 	media: {
-		mobile: 'grid-row: 1;',
-		tablet: 'grid-row: 1;',
+		belowDesktop: `${grid.column.all} grid-row: 1 / span 3;`,
 		desktop: `grid-row: 1 / span 4; ${grid.between(8, 'right-column-end')};`,
 		leftCol: `grid-row: 1 / span 3; ${grid.between(9, 'right-column-end')};`,
 		wide: `grid-row: 1 / span 3; ${grid.between(10, 'right-column-end')};`,
 	},
 	standfirst: {
-		mobile: 'grid-row: 4;',
-		tablet: 'grid-row: 4;',
+		belowDesktop: 'grid-row: 4;',
 		desktop: `grid-row: 3; ${grid.between('centre-column-start', 7)};`,
 		leftCol: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
 		wide: `grid-row: 3; ${grid.between('centre-column-start', 9)};`,
 	},
 	caption: {
-		mobile: 'grid-row: 5;',
-		tablet: 'grid-row: 5;',
+		belowDesktop: 'grid-row: 5;',
 		desktop: `grid-row: 5;`,
 	},
 	meta: {
-		mobile: 'grid-row: 6;',
-		tablet: 'grid-row: 6;',
+		belowDesktop: 'grid-row: 6;',
 		desktop: `grid-row: 4; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
 	},
 	body: {
-		mobile: 'grid-row: 7;',
+		belowDesktop: 'grid-row: 7;',
 		leftCol: 'grid-row: 4;',
 	},
 	'right-column': {
@@ -258,37 +253,34 @@ const immersivePortraitFeatureCss: LayoutCssMap = {
 
 const immersiveLandscapeDefaultCss: LayoutCssMap = {
 	title: {
-		mobile: 'grid-row: 1;',
-		tablet: 'grid-row: 1;',
+		belowDesktop: `${grid.column.all} grid-row: 2; align-self: end;`,
 		desktop: 'grid-row: 2;',
 	},
 	headline: {
-		mobile: 'grid-row: 2;',
-		tablet: 'grid-row: 2;',
+		belowDesktop: `${grid.column.all} grid-row: 3;`,
 		desktop: 'grid-row: 3 / span 2;',
 		wide: `${grid.between('centre-column-start', 14)};`,
 	},
 	media: {
-		mobile: 'grid-row: 3;',
-		tablet: 'grid-row: 3;',
+		belowDesktop: `${grid.column.all} grid-row: 1 / span 3;`,
 		desktop: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'right-column-end')};`,
 		leftCol: `grid-row: 1 / span 3; ${grid.between('left-column-start', 'right-column-end')};`,
 	},
 	standfirst: {
-		mobile: 'grid-row: 4;',
-		tablet: 'grid-row: 4;',
+		belowDesktop: 'grid-row: 4;',
 		desktop: 'grid-row: 5;',
 	},
 	caption: {
+		belowDesktop: 'grid-row: 5;',
 		desktop: 'grid-row: 6;',
 	},
 	meta: {
-		mobile: 'grid-row: 5;',
-		tablet: 'grid-row: 5;',
+		belowDesktop: 'grid-row: 6;',
 		desktop: `grid-row: 7;`,
 		leftCol: `grid-row: 5 / span 2; ${grid.column.left};`,
 	},
 	body: {
+		belowDesktop: 'grid-row: 7;',
 		leftCol: 'grid-row: 6;',
 	},
 	'right-column': {
@@ -298,27 +290,33 @@ const immersiveLandscapeDefaultCss: LayoutCssMap = {
 
 const immersiveLandscapeFeatureCss: LayoutCssMap = {
 	title: {
+		belowDesktop: `${grid.column.all} grid-row: 2; align-self: end;`,
 		desktop: 'grid-row: 2;',
 	},
 	headline: {
+		belowDesktop: `${grid.column.all} grid-row: 3;`,
 		desktop: 'grid-row: 3 / span 2;',
 	},
 	media: {
-		mobile: `${grid.column.all}`,
+		belowDesktop: `${grid.column.all} grid-row: 1 / span 3;`,
 		desktop: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'right-column-end')};`,
 		leftCol: `grid-row: 1 / span 3; ${grid.between('left-column-start', 'right-column-end')};`,
 	},
 	standfirst: {
+		belowDesktop: 'grid-row: 4;',
 		desktop: 'grid-row: 5;',
 	},
 	caption: {
+		belowDesktop: 'grid-row: 5;',
 		desktop: 'grid-row: 6;',
 	},
 	meta: {
+		belowDesktop: 'grid-row: 6;',
 		desktop: `grid-row: 7;`,
 		leftCol: `grid-row: 5 / span 2; ${grid.column.left};`,
 	},
 	body: {
+		belowDesktop: 'grid-row: 7;',
 		leftCol: 'grid-row: 6;',
 	},
 	'right-column': {

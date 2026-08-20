@@ -226,6 +226,13 @@ export const StandardLayoutArticleGrid = ({
 							)}
 						}
 					`,
+				(isImmersivePortrait || isImmersiveLandscape) &&
+					css`
+						${until.desktop} {
+							/* Anchor the title consistently while wrapped text extends the media below it. */
+							grid-template-rows: 60vw auto auto auto auto auto auto;
+						}
+					`,
 			]}
 		>
 			<GridItem
@@ -234,15 +241,44 @@ export const StandardLayoutArticleGrid = ({
 				css={
 					isImmersive
 						? css`
-								align-self: start;
-								${mainMediaAspectRatio != null &&
-								`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
-
 								${from.desktop} {
+									align-self: start;
+									${mainMediaAspectRatio != null &&
+									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
 									${isImmersiveLandscape &&
 									`margin-left: -20px;
 									margin-right: -20px;`}
 								}
+
+								${(isImmersivePortrait ||
+									isImmersiveLandscape) &&
+								css`
+									${until.desktop} {
+										position: relative;
+
+										> div {
+											height: 100%;
+										}
+
+										/* Fades the media to black at the bottom, behind the headline. */
+										&::after {
+											content: '';
+											position: absolute;
+											left: 0;
+											right: 0;
+											bottom: 0;
+											height: 45%;
+											z-index: ${getZIndex(
+												'mediaOverlay',
+											)};
+											background: linear-gradient(
+												transparent,
+												rgba(0, 0, 0, 0.92)
+											);
+											pointer-events: none;
+										}
+									}
+								`}
 							`
 						: undefined
 				}
@@ -287,6 +323,10 @@ export const StandardLayoutArticleGrid = ({
 						css`
 							align-self: end;
 							margin-bottom: 2px;
+
+							${until.desktop} {
+								margin-bottom: 0;
+							}
 						`,
 				]}
 			>
