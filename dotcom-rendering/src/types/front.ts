@@ -109,9 +109,36 @@ export type DCRFrontCard = {
 };
 
 export type DCRSlideshowImage = {
+	/**
+	 * Discriminant for slideshow media. Optional for backwards compatibility:
+	 * a slide without a `type` is treated as an image.
+	 */
+	type?: 'image';
 	imageSrc: string;
 	imageCaption?: string;
 };
+
+/**
+ * Spike: a video slide within a media slideshow.
+ *
+ * Kept intentionally lightweight while we explore supporting non-image media in
+ * slideshows. Videos autoplay muted and loop, matching the "loop video" style
+ * used elsewhere on fronts.
+ */
+export type DCRSlideshowVideo = {
+	type: 'video';
+	videoSrc: string;
+	/** MIME type of the video source, defaults to `video/mp4` when rendered. */
+	mimeType?: string;
+	/** Poster image shown before the video loads. */
+	posterSrc?: string;
+	caption?: string;
+};
+
+/**
+ * A single slide in a media slideshow, which may be an image or a video.
+ */
+export type DCRSlideshowMedia = DCRSlideshowImage | DCRSlideshowVideo;
 
 export type DCRSnapType = {
 	embedHtml?: string;
