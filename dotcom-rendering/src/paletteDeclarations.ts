@@ -4997,33 +4997,51 @@ const richLinkQuoteFillLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) => {
+const affiliateDisclaimerThemes = {
+	light: {
+		bg: sourcePalette.neutral[97],
+		text: sourcePalette.neutral[7],
+		link: sourcePalette.lifestyle[400],
+	},
+	dark: {
+		bg: sourcePalette.neutral[20],
+		text: sourcePalette.neutral[86],
+		link: sourcePalette.lifestyle[450],
+	},
+};
+
+const affiliateDisclaimerLightTheme = ({
+	design,
+}: {
+	design: ArticleDesign;
+}) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-			return sourcePalette.neutral[20];
+			return affiliateDisclaimerThemes.dark;
 		default:
-			return sourcePalette.neutral[97];
+			return affiliateDisclaimerThemes.light;
 	}
 };
+
+const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) =>
+	affiliateDisclaimerLightTheme({ design }).bg;
+
 const affiliateDisclaimerBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[20];
+	affiliateDisclaimerThemes.dark.bg;
 
-const affiliateDisclaimerTextLight: PaletteFunction = ({ design }) => {
-	switch (design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			return sourcePalette.neutral[86];
-		default:
-			return sourcePalette.neutral[7];
-	}
-};
+const affiliateDisclaimerTextLight: PaletteFunction = ({ design }) =>
+	affiliateDisclaimerLightTheme({ design }).text;
 
-const affiliateDisclaimerTextDark: PaletteFunction = () => {
-	return sourcePalette.neutral[86];
-};
+const affiliateDisclaimerTextDark: PaletteFunction = () =>
+	affiliateDisclaimerThemes.dark.text;
+
+const affiliateDisclaimerLinkLight: PaletteFunction = ({ design }) =>
+	affiliateDisclaimerLightTheme({ design }).link;
+
+const affiliateDisclaimerLinkDark: PaletteFunction = () =>
+	affiliateDisclaimerThemes.dark.link;
 
 const seriesTitleBackgroundLight: PaletteFunction = ({
 	theme,
@@ -6631,6 +6649,10 @@ const paletteColours = {
 		light: affiliateDisclaimerBackgroundLight,
 		dark: affiliateDisclaimerBackgroundDark,
 	},
+	'--affiliate-disclaimer-link': {
+		light: affiliateDisclaimerLinkLight,
+		dark: affiliateDisclaimerLinkDark,
+	},
 	'--affiliate-disclaimer-text': {
 		light: affiliateDisclaimerTextLight,
 		dark: affiliateDisclaimerTextDark,
@@ -7250,6 +7272,18 @@ const paletteColours = {
 	'--editorial-button-text': {
 		light: editorialButtonText,
 		dark: editorialButtonTextDark,
+	},
+	'--election-tracker-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--election-tracker-button-background': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--election-tracker-button-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[7],
 	},
 	'--email-signup-button-background': {
 		light: emailSignupButtonBackgroundLight,
@@ -8328,6 +8362,10 @@ const paletteColours = {
 		 */
 		dark: () => '#606060',
 	},
+	'--stacked-progress-excluded-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--stacked-progress-to-win': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
@@ -8604,9 +8642,17 @@ const paletteColours = {
 		light: () => '#093CA3',
 		dark: () => '#3261DB',
 	},
+	'--us-elections-democrats-alt': {
+		light: () => '#DAD7F5',
+		dark: () => '#DAD7F5',
+	},
 	'--us-elections-republicans': {
 		light: () => sourcePalette.news[400],
 		dark: () => '#DC2E1C',
+	},
+	'--us-elections-republicans-alt': {
+		light: () => '#FFDBD4',
+		dark: () => '#FFDBD4',
 	},
 	'--values-with-change-border': {
 		light: () => sourcePalette.neutral[86],

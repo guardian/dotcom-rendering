@@ -9,10 +9,11 @@ const AffiliateDisclaimerText = () => (
 			marginTop: 0,
 			marginBottom: 0,
 			width: 'fit-content',
+			textWrap: 'pretty',
 		}}
 	>
-		The Guardian’s journalism is independent. We will earn a commission if
-		you buy something through an affiliate link.&nbsp;
+		Guardian journalism is independent. We earn a commission if you buy
+		something through an affiliate link.&nbsp;
 		<a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">
 			Learn more
 		</a>
@@ -30,7 +31,7 @@ const AffiliateDisclaimer = ({
 		theme={{
 			backgroundPrimary: palette('--affiliate-disclaimer-background'),
 			textPrimary: palette('--affiliate-disclaimer-text'),
-			linkPrimary: palette('--article-section-title-lifestyle'),
+			linkPrimary: palette('--affiliate-disclaimer-link'),
 		}}
 		cssOverrides={cssOverrides}
 		data-testid={affiliateDisclaimerId}

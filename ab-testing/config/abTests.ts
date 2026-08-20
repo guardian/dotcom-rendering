@@ -51,7 +51,7 @@ const ABTests: ABTest[] = [
 		expirationDate: "2027-01-01",
 		type: "client",
 		status: "ON",
-		audienceSize: 5 / 100,
+		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control"],
 		shouldForceMetricsCollection: false,
@@ -208,6 +208,20 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		groups: ["a", "b"],
 		shouldForceMetricsCollection: false,
+	},
+
+	{
+		name: "commercial-prebid-failsafe-timeout",
+		description:
+			"Test to measure the impact of the Prebid failsafe timeout",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-09-30",
+		type: "client",
+		status: "OFF",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
 	},
 ];
 
