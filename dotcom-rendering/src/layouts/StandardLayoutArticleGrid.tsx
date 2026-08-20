@@ -241,6 +241,10 @@ export const StandardLayoutArticleGrid = ({
 				css={
 					isImmersive
 						? css`
+								${until.tablet} {
+									grid-row: 1 / span 2;
+								}
+
 								${from.desktop} {
 									align-self: start;
 									${mainMediaAspectRatio != null &&
