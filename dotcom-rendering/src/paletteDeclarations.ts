@@ -2041,18 +2041,23 @@ const clickToViewButtonHoverDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
 const brandingLabelLight: PaletteFunction = ({ design, theme }) => {
-	if (theme === ArticleSpecial.Labs) {
-		return sourcePalette.labs[100];
-	}
 	switch (design) {
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Picture:
-			return sourcePalette.neutral[7];
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[20];
+				default:
+					return sourcePalette.neutral[7];
+			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		default:
+			if (theme === ArticleSpecial.Labs) {
+				return sourcePalette.labs[100];
+			}
 			return sourcePalette.neutral[20];
 	}
 };
