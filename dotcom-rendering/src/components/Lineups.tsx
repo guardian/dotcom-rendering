@@ -84,7 +84,7 @@ const Event = ({
 	isSubstitute,
 }: {
 	eventId: string;
-	type: 'substitution' | 'dismissal' | 'booking';
+	type: 'substitution' | 'substitution-injury' | 'dismissal' | 'booking';
 	time: string;
 	substitutions: Substitution[];
 	isSubstitute: boolean;
@@ -106,7 +106,8 @@ const Event = ({
 					aria-label="Yellow Card"
 				/>
 			);
-		case 'substitution': {
+		case 'substitution':
+		case 'substitution-injury': {
 			const substitutionEvent = substitutions.find(
 				(substitution) => substitution.eventId === eventId,
 			);
