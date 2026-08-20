@@ -2055,6 +2055,9 @@ const brandingLabelLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		default:
+			if (theme === ArticleSpecial.Labs) {
+				return sourcePalette.labs[100];
+			}
 			return sourcePalette.neutral[20];
 	}
 };
@@ -5058,7 +5061,7 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 			}
@@ -5077,7 +5080,7 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.brandAlt[300];
 					}
@@ -5103,7 +5106,7 @@ const seriesTitleBackgroundDark: PaletteFunction = ({
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 				case ArticleSpecial.SpecialReport:
@@ -5123,7 +5126,7 @@ const seriesTitleBackgroundDark: PaletteFunction = ({
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[300];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.specialReportAlt[300];
 					}
@@ -5273,11 +5276,17 @@ const seriesOrSectionTitleTextLight: PaletteFunction = ({
 
 /** Used by the series tag only; the article section link keeps `articleSectionLinkTextLight` */
 const seriesTitleTextLight: PaletteFunction = (format) => {
-	if (
-		format.theme === ArticleSpecial.Labs &&
-		format.design !== ArticleDesign.LiveBlog
-	) {
-		return sourcePalette.neutral[7];
+	if (format.theme === ArticleSpecial.Labs) {
+		if (
+			format.display === ArticleDisplay.Immersive ||
+			format.design === ArticleDesign.Gallery ||
+			format.design === ArticleDesign.HostedGallery
+		) {
+			return sourcePalette.neutral[100];
+		}
+		if (format.design !== ArticleDesign.LiveBlog) {
+			return sourcePalette.neutral[7];
+		}
 	}
 	return seriesOrSectionTitleTextLight(format);
 };
