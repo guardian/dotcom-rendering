@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import { breakpoints, until } from '@guardian/source/foundations';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
@@ -11,7 +12,7 @@ export type Loading = NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 
 export type Props = {
 	imageSize: MediaSizeType;
-	mainImage: string;
+	mainImage?: string;
 	loading: Loading;
 	alt?: string;
 	isCircular?: boolean;
@@ -224,7 +225,7 @@ export const CardPicture = ({
 	aspectRatio = '5:3',
 	mobileAspectRatio,
 }: Props) => {
-	if (mainImage === '') {
+	if (isUndefined(mainImage) || mainImage === '') {
 		return null;
 	}
 
