@@ -72,6 +72,10 @@ const galleryLabelStyle = css`
 	${textSansBold12}
 `;
 
+const labsLabelStyle = css`
+	${textSansBold12}
+`;
+
 const brandingLogoAdvertisingPartnerStyle = css`
 	padding: 0;
 	& img {
@@ -214,6 +218,7 @@ export const Branding = ({ branding, format }: Props) => {
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const isGallery = format.design === ArticleDesign.Gallery;
+	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const { ophanComponentName, ophanComponentLink } = getOphanComponents({
 		branding,
@@ -242,6 +247,7 @@ export const Branding = ({ branding, format }: Props) => {
 				css={[
 					labelStyle,
 					isGallery && galleryLabelStyle,
+					isLabs && labsLabelStyle,
 					isAdvertisingPartnerOrExclusive &&
 						labelAdvertisingPartnerStyle,
 					isLiveBlog && liveBlogLabelStyle,
