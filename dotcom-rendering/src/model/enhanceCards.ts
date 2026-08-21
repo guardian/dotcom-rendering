@@ -567,6 +567,5 @@ export const enhanceCards = (
 							?.allImages[0]?.fields.altText ?? '',
 				},
 			}),
-			tests: faciaCard.properties.tests,
 		};
 	});
