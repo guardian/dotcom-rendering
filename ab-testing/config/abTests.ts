@@ -223,6 +223,18 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "webx-test-new-space",
+		description: "Test to measure the impact of a new audience space",
+		owners: ["dotcom.platform@theguardian.com"],
+		expirationDate: "2026-12-31",
+		type: "client",
+		status: "ON",
+		audienceSize: 50 / 100,
+		audienceSpace: "E",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
