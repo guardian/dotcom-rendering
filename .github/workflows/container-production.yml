@@ -38,7 +38,7 @@ jobs:
       - name: Build image
         run: docker buildx build --platform linux/arm64 -f Production.dockerfile -t ${{ github.repository }}:latest .
       - name: Publish Image
-        uses: guardian/actions-publish-image@v0.0.2
+        uses: guardian/actions-publish-image@v0.0.3
         id: publish-image
         with:
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
