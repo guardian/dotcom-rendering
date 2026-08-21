@@ -221,12 +221,12 @@ export const decideHeadline = (
 		faciaCard.properties.tests,
 	);
 
-	if (testBucket === undefined || !activeEditorialTest) {
+	if (isUndefined(testBucket) || !activeEditorialTest) {
 		return defaultHeadline;
 	}
 
 	const testCanRunOnPage =
-		pageId !== undefined &&
+		!isUndefined(pageId) &&
 		activeEditorialTest.frontsThisTestCanRunOn.includes(pageId);
 
 	if (!testCanRunOnPage) return defaultHeadline;
