@@ -2502,19 +2502,17 @@ const standfirstLinkTextDark: PaletteFunction = ({ design, theme }) => {
 const standfirstTextLight: PaletteFunction = (format) => {
 	if (
 		format.theme === ArticleSpecial.Labs &&
-		![ArticleDesign.LiveBlog, ...labsHostedDesigns].includes(format.design)
+		![
+			ArticleDesign.LiveBlog,
+			...labsMediaDesigns,
+			...labsHostedDesigns,
+		].includes(format.design)
 	) {
 		if (format.design === ArticleDesign.Gallery) {
 			return sourcePalette.labs[500];
 		}
 
 		return sourcePalette.labs[100];
-	}
-	if (
-		format.theme === ArticleSpecial.Labs &&
-		format.design === ArticleDesign.HostedGallery
-	) {
-		return sourcePalette.labs[500];
 	}
 
 	switch (format.design) {
@@ -2544,7 +2542,14 @@ const standfirstTextLight: PaletteFunction = (format) => {
 };
 
 const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
-	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
+	if (
+		theme === ArticleSpecial.Labs &&
+		![
+			ArticleDesign.LiveBlog,
+			...labsMediaDesigns,
+			...labsHostedDesigns,
+		].includes(design)
+	) {
 		return sourcePalette.labs[500];
 	}
 
