@@ -30,7 +30,7 @@ test("TestGroupMVTManager - constructor initializes with empty audience space", 
 		string,
 		{ name: string; type: string; exp: number }
 	>();
-	const manager = new TestGroupMVTManager(emptyAudienceSpace);
+	const manager = new TestGroupMVTManager("A", emptyAudienceSpace);
 
 	equal(manager.testGroups.size, 0);
 });
@@ -42,7 +42,7 @@ test("TestGroupMVTManager - constructor initializes with existing test groups", 
 		"test2:control": [6, 7],
 	};
 	const audienceSpace = createMockAudienceSpace(existingGroups);
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	equal(manager.testGroups.size, 3);
 	deepEqual(manager.getTestGroup("test1:control"), [0, 1, 2]);
@@ -55,7 +55,7 @@ test("TestGroupMVTManager - getTestGroup returns undefined for non-existent grou
 		string,
 		{ name: string; type: string; exp: number }
 	>();
-	const manager = new TestGroupMVTManager(emptyAudienceSpace);
+	const manager = new TestGroupMVTManager("A", emptyAudienceSpace);
 
 	equal(manager.getTestGroup("non-existent"), undefined);
 });
@@ -65,7 +65,7 @@ test("TestGroupMVTManager - addTestGroup successfully adds new test group", () =
 		string,
 		{ name: string; type: string; exp: number }
 	>();
-	const manager = new TestGroupMVTManager(emptyAudienceSpace);
+	const manager = new TestGroupMVTManager("A", emptyAudienceSpace);
 
 	manager.addTestGroup("test1:control", 3);
 
@@ -80,7 +80,7 @@ test("TestGroupMVTManager - addTestGroup throws error when test group already ex
 		"test1:control": [0, 1, 2],
 	};
 	const audienceSpace = createMockAudienceSpace(existingGroups);
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	throws(
 		() => manager.addTestGroup("test1:control", 2),
@@ -95,7 +95,7 @@ test("TestGroupMVTManager - addTestGroup throws error when not enough available 
 		"test1:control": Array.from({ length: 998 }, (_, i) => i),
 	};
 	const audienceSpace = createMockAudienceSpace(existingGroups);
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	throws(
 		() => manager.addTestGroup("test2:control", 5),
@@ -109,7 +109,7 @@ test("TestGroupMVTManager - resizeTestGroup increases group size", () => {
 		"test1:control": [0, 1, 2],
 	};
 	const audienceSpace = createMockAudienceSpace(existingGroups);
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	manager.resizeTestGroup("test1:control", 5);
 
@@ -124,7 +124,7 @@ test("TestGroupMVTManager - resizeTestGroup decreases group size", () => {
 		"test1:control": [0, 1, 2, 3, 4],
 	};
 	const audienceSpace = createMockAudienceSpace(existingGroups);
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	manager.resizeTestGroup("test1:control", 3);
 
@@ -138,7 +138,7 @@ test("TestGroupMVTManager - resizeTestGroup with same size does nothing", () => 
 		"test1:control": [0, 1, 2],
 	};
 	const audienceSpace = createMockAudienceSpace(existingGroups);
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	manager.resizeTestGroup("test1:control", 3);
 
@@ -152,7 +152,7 @@ test("TestGroupMVTManager - resizeTestGroup throws error for non-existent group"
 		string,
 		{ name: string; type: string; exp: number }
 	>();
-	const manager = new TestGroupMVTManager(emptyAudienceSpace);
+	const manager = new TestGroupMVTManager("A", emptyAudienceSpace);
 
 	throws(
 		() => manager.resizeTestGroup("non-existent", 5),
@@ -167,7 +167,7 @@ test("TestGroupMVTManager - resizeTestGroup throws error when not enough availab
 		"test2:control": Array.from({ length: 995 }, (_, i) => i + 3), // Occupy most MVTs
 	};
 	const audienceSpace = createMockAudienceSpace(existingGroups);
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	throws(
 		() => manager.resizeTestGroup("test1:control", 10),
@@ -182,7 +182,7 @@ test("TestGroupMVTManager - deleteTestGroup removes group and frees MVTs", () =>
 		"test2:control": [3, 4, 5],
 	};
 	const audienceSpace = createMockAudienceSpace(existingGroups);
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	manager.deleteTestGroup("test1:control");
 
@@ -192,7 +192,7 @@ test("TestGroupMVTManager - deleteTestGroup removes group and frees MVTs", () =>
 	// Should be able to create a new group with the freed MVTs
 	manager.addTestGroup("test3:control", 3);
 	const newTestGroup = manager.getTestGroup("test3:control");
-	deepEqual(newTestGroup, [0, 1, 2]);
+	deepEqual(newTestGroup, [6, 7, 8]);
 });
 
 test("TestGroupMVTManager - deleteTestGroup handles non-existent group gracefully", () => {
@@ -200,7 +200,7 @@ test("TestGroupMVTManager - deleteTestGroup handles non-existent group gracefull
 		string,
 		{ name: string; type: string; exp: number }
 	>();
-	const manager = new TestGroupMVTManager(emptyAudienceSpace);
+	const manager = new TestGroupMVTManager("A", emptyAudienceSpace);
 
 	// Should not throw an error
 	manager.deleteTestGroup("non-existent");
@@ -213,7 +213,7 @@ test("TestGroupMVTManager - complex scenario with multiple operations", () => {
 		"test1:variant": [3, 4, 5],
 	};
 	const audienceSpace = createMockAudienceSpace(existingGroups);
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	// Add a new test group
 	manager.addTestGroup("test2:control", 4);
@@ -240,7 +240,7 @@ test("TestGroupMVTManager - MVT allocation preserves low-to-high order", () => {
 		string,
 		{ name: string; type: string; exp: number }
 	>();
-	const manager = new TestGroupMVTManager(emptyAudienceSpace);
+	const manager = new TestGroupMVTManager("A", emptyAudienceSpace);
 
 	// Add first group - should get lowest MVTs
 	manager.addTestGroup("test1:control", 3);
@@ -270,7 +270,7 @@ test("TestGroupMVTManager - handles MVT parsing from key correctly", () => {
 		exp: Date.now() + 86400000,
 	});
 
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	equal(manager.testGroups.size, 1);
 	const testGroup = manager.getTestGroup("test1:control");
@@ -284,7 +284,7 @@ test("TestGroupMVTManager - addTestGroup with size 0", () => {
 		string,
 		{ name: string; type: string; exp: number }
 	>();
-	const manager = new TestGroupMVTManager(emptyAudienceSpace);
+	const manager = new TestGroupMVTManager("A", emptyAudienceSpace);
 
 	manager.addTestGroup("test1:control", 0);
 
@@ -298,7 +298,7 @@ test("TestGroupMVTManager - resizeTestGroup to size 0", () => {
 		"test1:control": [0, 1, 2],
 	};
 	const audienceSpace = createMockAudienceSpace(existingGroups);
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	manager.resizeTestGroup("test1:control", 0);
 
@@ -312,7 +312,7 @@ test("TestGroupMVTManager - available MVTs maintain sorted order after operation
 		"test1:control": [500, 600, 700],
 	};
 	const audienceSpace = createMockAudienceSpace(existingGroups);
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	// Delete the group to free MVTs
 	manager.deleteTestGroup("test1:control");
@@ -328,7 +328,7 @@ test("TestGroupMVTManager - stress test with maximum MVTs", () => {
 		string,
 		{ name: string; type: string; exp: number }
 	>();
-	const manager = new TestGroupMVTManager(emptyAudienceSpace);
+	const manager = new TestGroupMVTManager("A", emptyAudienceSpace);
 
 	// Add a group that uses all available MVTs
 	manager.addTestGroup("test1:control", 1000);
@@ -366,7 +366,7 @@ test("TestGroupMVTManager - constructor with invalid MVT key format", () => {
 	});
 
 	// Constructor should handle invalid keys gracefully
-	const manager = new TestGroupMVTManager(audienceSpace);
+	const manager = new TestGroupMVTManager("A", audienceSpace);
 
 	// The group should exist but only with valid MVTs
 	const testGroup = manager.getTestGroup("test1:control");

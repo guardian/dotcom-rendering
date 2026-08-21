@@ -4,7 +4,11 @@ import type {
 	AudienceSpace,
 	FastlyTestParams,
 } from "../../lib/types.ts";
-import { type ABTest, AudienceSpaces } from "../../types.ts";
+import {
+	type AudienceSpaceId,
+	AudienceSpaces,
+	type ABTest,
+} from "../../types.ts";
 import { TestGroupMVTManager } from "./test-group-mvt-manager.ts";
 
 const getTestGroupName = (
@@ -13,10 +17,14 @@ const getTestGroupName = (
 ) => `${test.name}:${group ?? test.group}`;
 
 const calculateSpaceUpdates = (
+	audienceSpaceId: AudienceSpaceId,
 	audienceSpace: AudienceSpace,
 	tests: ABTest[],
 ) => {
-	const testGroupMVTs = new TestGroupMVTManager(audienceSpace);
+	const testGroupMVTs = new TestGroupMVTManager(
+		audienceSpaceId,
+		audienceSpace,
+	);
 
 	const updateTestGroups = new Map(
 		tests.flatMap((test) =>
@@ -104,27 +112,40 @@ const calculateAllSpaceUpdates = (
 	mvtGroups: AllSpace,
 	tests: ABTest[],
 ): AllSpace => {
-	const updatedTestSpace: AudienceSpace[] = AudienceSpaces.map((space, i) => {
-		console.log(`Calculating updates for space: ${space}`);
-		const spaceTests = tests.filter(
-			(test) => (test.audienceSpace ?? "A") === space, // 'A' is the default space
-		);
+	const updatedTestSpaces: AudienceSpace[] = AudienceSpaces.map(
+		(space, i) => {
+			console.log(`Calculating updates for space: ${space}`);
+			const spaceTests = tests.filter(
+				(test) => (test.audienceSpace ?? "A") === space, // 'A' is the default space
+			);
 
-		if (spaceTests.length === 0) {
-			console.log(`No tests for space: ${space}`);
-			return new Map<string, FastlyTestParams>();
-		}
+			if (spaceTests.length === 0) {
+				console.log(`No tests for space: ${space}`);
+				return new Map<string, FastlyTestParams>();
+			}
 
-		const spaceMVTGroups = new Map(
-			mvtGroups
-				.entries()
-				.map(([key, value]) => [key, value[i] as FastlyTestParams]),
-		);
+			const spaceMVTGroups = new Map(
+				Array.from(mvtGroups.entries())
+					.map(([mvtId, tests]) => [
+						mvtId,
+						spaceTests.find((test) =>
+							tests.find(
+								(t) =>
+									t.name === test.name &&
+									t.type === test.type,
+							),
+						),
+					])
+					.filter(([_, test]) => test !== undefined) as Array<
+					[string, FastlyTestParams]
+				>,
+			);
 
-		return calculateSpaceUpdates(spaceMVTGroups, spaceTests);
-	});
+			return calculateSpaceUpdates(space, spaceMVTGroups, spaceTests);
+		},
+	);
 
-	return updatedTestSpace.reduce((acc, curr) => {
+	return updatedTestSpaces.reduce((acc, curr) => {
 		curr.forEach((value, key) => {
 			if (!acc.has(key)) {
 				acc.set(key, []);
