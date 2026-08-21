@@ -255,6 +255,7 @@ const SectionDiv = (props: {
 	<div
 		css={{
 			display: 'flex',
+			overflow: 'hidden',
 			'::before': {
 				...textSans12Object,
 				backgroundColor: palette(

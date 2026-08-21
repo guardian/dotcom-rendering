@@ -8646,6 +8646,10 @@ const paletteColours = {
 		light: () => '#DAD7F5',
 		dark: () => '#DAD7F5',
 	},
+	'--us-elections-others': {
+		light: () => '#848484',
+		dark: () => sourcePalette.neutral[46],
+	},
 	'--us-elections-republicans': {
 		light: () => sourcePalette.news[400],
 		dark: () => '#DC2E1C',
