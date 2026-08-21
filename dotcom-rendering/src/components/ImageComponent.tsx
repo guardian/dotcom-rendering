@@ -9,6 +9,7 @@ import {
 	palette as srcPalette,
 	until,
 } from '@guardian/source/foundations';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -34,6 +35,7 @@ type Props = {
 	title?: string;
 	isAvatar?: boolean;
 	isTimeline?: boolean;
+	articleArrangement?: LayoutType;
 };
 
 const timelineBulletStyles = css`
@@ -244,6 +246,7 @@ export const ImageComponent = ({
 	title,
 	isAvatar,
 	isTimeline = false,
+	articleArrangement,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
@@ -270,6 +273,8 @@ export const ImageComponent = ({
 	}
 
 	const isWeb = renderingTarget === 'Web';
+	const isGridImmersive =
+		articleArrangement?.startsWith('immersive') ?? false;
 
 	/**
 	 * We use height and width for two things.
@@ -303,10 +308,10 @@ export const ImageComponent = ({
                     always be used if display === 'immersive' */
 					height: 100%;
 					width: 100%;
-					min-height: 25rem;
+					min-height: ${isGridImmersive ? 0 : '25rem'};
 
 					${from.desktop} {
-						min-height: 31.25rem;
+						min-height: ${isGridImmersive ? 0 : '31.25rem'};
 					}
 
 					img {

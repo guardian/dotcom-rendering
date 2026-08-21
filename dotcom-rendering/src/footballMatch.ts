@@ -10,7 +10,12 @@ import type { Result } from './lib/result';
 import { error, ok } from './lib/result';
 import { cleanTeamName } from './sportDataPage';
 
-const eventTypes = ['substitution', 'dismissal', 'booking'] as const;
+const eventTypes = [
+	'substitution',
+	'substitution-injury',
+	'dismissal',
+	'booking',
+] as const;
 const isEventType = isOneOf(eventTypes);
 
 export type PlayerEvent = {

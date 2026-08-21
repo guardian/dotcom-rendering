@@ -20,7 +20,6 @@ import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
 import {
 	handleAppsFootballMatchPage,
-	handleCricketMatchPage,
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
@@ -120,7 +119,6 @@ renderer.get('/AppsBlocks/*url', handleAppsBlocks);
 renderer.get('/EditionsCrossword/*url', handleEditionsCrossword);
 renderer.get('/FootballMatchListPage/*url', handleFootballMatchListPage);
 renderer.get('/FootballTablesPage/*url', handleFootballTablesPage);
-renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
 renderer.get('/AppsFootballMatchSummaryPage/*url', handleAppsFootballMatchPage);
 renderer.get('/HostedContent/*url', handleHostedContent);
@@ -141,7 +139,6 @@ renderer.post('/AppsBlocks', handleAppsBlocks);
 renderer.post('/EditionsCrossword', handleEditionsCrossword);
 renderer.post('/FootballMatchListPage', handleFootballMatchListPage);
 renderer.post('/FootballTablesPage', handleFootballTablesPage);
-renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
 renderer.post('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 renderer.post('/HostedContent', handleHostedContent);

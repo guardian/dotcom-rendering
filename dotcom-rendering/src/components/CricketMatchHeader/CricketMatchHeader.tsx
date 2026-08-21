@@ -21,7 +21,7 @@ import type {
 	CricketMatch,
 	CricketResult,
 	CricketTeam,
-} from '../../cricketMatchV2';
+} from '../../cricketMatch';
 import { grid } from '../../grid';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { getCommercialClient } from '../../lib/bridgetApi';
