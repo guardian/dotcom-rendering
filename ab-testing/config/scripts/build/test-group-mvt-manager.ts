@@ -1,5 +1,6 @@
-import { MVT_COUNT } from "../../lib/constants.ts";
+import { getShuffledSpace } from "../../lib/shuffled-space.ts";
 import type { AudienceSpace } from "../../lib/types.ts";
+import type { AudienceSpaceId } from "../../types.ts";
 
 /**
  * A class to manage MVTs for test groups in a test space.
@@ -22,7 +23,7 @@ class TestGroupMVTManager {
 	 * Create a new TestGroupMVTs instance.
 	 * @param mvtGroups - An array of current MVT groups from the Fastly dictionary.
 	 */
-	constructor(mvtGroups: AudienceSpace) {
+	constructor(audienceSpaceId: AudienceSpaceId, mvtGroups: AudienceSpace) {
 		this.testGroups = new Map(
 			Object.entries(
 				mvtGroups
@@ -47,9 +48,11 @@ class TestGroupMVTManager {
 			Array.from(this.testGroups.values()).flat(),
 		);
 
-		this.availableMVTs = Array.from({ length: MVT_COUNT }, (_, i) => i)
-			.filter((i) => !this.occupiedMVTs.has(i))
-			.sort((a, b) => a - b);
+		const shuffledMVTs = getShuffledSpace(audienceSpaceId);
+
+		this.availableMVTs = shuffledMVTs.filter(
+			(i) => !this.occupiedMVTs.has(i),
+		);
 
 		console.log(
 			`Initialized TestGroupMVTs with ${this.availableMVTs.length} available MVTs`,
@@ -109,11 +112,14 @@ class TestGroupMVTManager {
 				throw new Error(`Not enough available MVTs for test ${name}`);
 			}
 			for (let i = 0; i < additionalMVTsNeeded; i++) {
-				const mvtIndex = this.availableMVTs.shift();
-				if (mvtIndex !== undefined) {
-					currentMVTs.push(mvtIndex);
-					this.occupiedMVTs.add(mvtIndex);
+				const mvtId = this.availableMVTs.shift();
+				if (mvtId === undefined) {
+					throw new Error(
+						`No available MVTs left to expand test ${name}`,
+					);
 				}
+				currentMVTs.push(mvtId);
+				this.occupiedMVTs.add(mvtId);
 			}
 		} else if (newSize < currentSize) {
 			const removedMVTs = currentMVTs.slice(newSize);
@@ -122,8 +128,6 @@ class TestGroupMVTManager {
 				this.availableMVTs.push(mvt);
 			});
 			currentMVTs.length = newSize;
-			// Keep available MVTs sorted in ascending order
-			this.availableMVTs.sort((a, b) => a - b);
 		}
 		this.testGroups.set(name, currentMVTs);
 	}
@@ -140,8 +144,6 @@ class TestGroupMVTManager {
 				this.availableMVTs.push(mvt);
 			});
 			this.testGroups.delete(name);
-			// Keep available MVTs sorted in ascending order
-			this.availableMVTs.sort((a, b) => a - b);
 		}
 	}
 }
