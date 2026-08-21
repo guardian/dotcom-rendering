@@ -1,8 +1,14 @@
-import type { FEMediaAsset, FEMediaAtom } from '../frontend/feFront';
+import type {
+	FEFrontCardStyle,
+	FEMediaAsset,
+	FEMediaAtom,
+} from '../frontend/feFront';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import type { EditorialTest, VariantMeta } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import {
 	decideArticleMedia,
+	decideHeadline,
 	decideReplacementMedia,
 	getActiveMediaAtom,
 	getMediaMetadata,
@@ -525,6 +531,241 @@ describe('Enhance Cards', () => {
 				subtitleSource: undefined,
 				videoStyle: 'Loop',
 			});
+		});
+	});
+
+	describe('decideHeadline', () => {
+		const cardWithNoEditorialTest = {
+			properties: {
+				isBreaking: false,
+				showKickerTag: false,
+				showByline: false,
+				isLiveBlog: false,
+				isCrossword: false,
+				webTitle: '',
+				editionBrandings: [],
+				tests: [],
+			},
+			header: {
+				isVideo: false,
+				isComment: false,
+				isGallery: false,
+				isAudio: false,
+				headline: 'Headline',
+				url: '',
+				hasMainVideoElement: false,
+			},
+			card: {
+				id: '',
+				cardStyle: {
+					type: 'DefaultCardstyle' as FEFrontCardStyle,
+				},
+				shortUrl: '',
+				group: '',
+				isLive: false,
+			},
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: false,
+			},
+			display: {
+				isBoosted: false,
+				showBoostedHeadline: false,
+				showQuotedHeadline: false,
+				imageHide: false,
+				showLivePlayable: false,
+			},
+			type: '',
+		};
+
+		const oneHourInMilliseconds = 60 * 60 * 1000;
+
+		const cardWithEditorialTest = {
+			...cardWithNoEditorialTest,
+			properties: {
+				...cardWithNoEditorialTest.properties,
+				tests: [
+					{
+						testUuid: 'uuid',
+						variantMeta: [
+							{
+								id: 'A',
+								meta: {
+									headline: 'Headline A',
+								},
+							},
+							{
+								id: 'B',
+								meta: {
+									headline: 'Headline B',
+								},
+							},
+						] as VariantMeta[],
+						startDate: Date.now() - oneHourInMilliseconds,
+						expiryDate: Date.now() + oneHourInMilliseconds,
+						frontsThisTestCanRunOn: ['test-front'],
+						hasManuallyEndedOnThisTrail: false,
+					},
+				],
+			},
+		};
+
+		const cardWithEditorialTestWithUndefinedVariantMeta = {
+			...cardWithEditorialTest,
+			properties: {
+				...cardWithEditorialTest.properties,
+				tests: [
+					{
+						...cardWithEditorialTest.properties.tests[0],
+						variantMeta: [
+							{
+								id: 'A',
+								meta: {
+									headline: undefined,
+								},
+							} as VariantMeta,
+						],
+					} as EditorialTest,
+				],
+			},
+		};
+
+		const cardWithExpiredEditorialTest = {
+			...cardWithEditorialTest,
+			properties: {
+				...cardWithEditorialTest.properties,
+				tests: [
+					{
+						...cardWithEditorialTest.properties.tests[0],
+						expiryDate: Date.now() - oneHourInMilliseconds,
+					} as EditorialTest,
+				],
+			},
+		};
+
+		const cardWithManuallyEndedEditorialTest = {
+			...cardWithEditorialTest,
+			properties: {
+				...cardWithEditorialTest.properties,
+				tests: [
+					{
+						...cardWithEditorialTest.properties.tests[0],
+						hasManuallyEndedOnThisTrail: true,
+					} as EditorialTest,
+				],
+			},
+		};
+
+		it('returns the default headline if no editorial test exists on the card, page is not in allowed fronts list, and user is not in a test bucket', () => {
+			expect(
+				decideHeadline(
+					cardWithNoEditorialTest,
+					{},
+					'invalid-test-front',
+				),
+			).toEqual('Headline');
+		});
+
+		it('returns the default headline if editorial test exists and page is in allowed fronts list, but user is not in a test bucket', () => {
+			expect(
+				decideHeadline(cardWithEditorialTest, {}, 'test-front'),
+			).toEqual('Headline');
+		});
+
+		it('returns the default headline if user is in a test bucket and page is in allowed fronts list, but editorial test does not exist', () => {
+			expect(
+				decideHeadline(
+					cardWithNoEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'a',
+					},
+					'test-front',
+				),
+			).toEqual('Headline');
+		});
+
+		it('returns the default headline if editorial test exists and user is in a test bucket, but page is not in allowed fronts list', () => {
+			expect(
+				decideHeadline(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'a',
+					},
+					'invalid-test-front',
+				),
+			).toEqual('Headline');
+		});
+
+		it('returns headline A if editorial test exists, page is in allowed fronts list, and user is in bucket A', () => {
+			expect(
+				decideHeadline(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'a',
+					},
+					'test-front',
+				),
+			).toEqual('Headline A');
+		});
+
+		it('returns headline B if editorial test exists, page is in allowed fronts list, and user is in bucket B', () => {
+			expect(
+				decideHeadline(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'b',
+					},
+					'test-front',
+				),
+			).toEqual('Headline B');
+		});
+
+		it('returns the default headline if the bucket name does not match a variant meta id', () => {
+			expect(
+				decideHeadline(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'c',
+					},
+					'test-front',
+				),
+			).toEqual('Headline');
+		});
+
+		it('returns the default headline if the variant headline is undefined', () => {
+			expect(
+				decideHeadline(
+					cardWithEditorialTestWithUndefinedVariantMeta,
+					{
+						'fronts-and-curation-editorial-headline-test': 'a',
+					},
+					'test-front',
+				),
+			).toEqual('Headline');
+		});
+
+		it('returns the default headline if an editorial test has expired', () => {
+			expect(
+				decideHeadline(
+					cardWithExpiredEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'a',
+					},
+					'test-front',
+				),
+			).toEqual('Headline');
+		});
+
+		it('returns the default headline if an editorial test has been manually ended', () => {
+			expect(
+				decideHeadline(
+					cardWithManuallyEndedEditorialTest,
+					{
+						'fronts-and-curation-editorial-headline-test': 'a',
+					},
+					'test-front',
+				),
+			).toEqual('Headline');
 		});
 	});
 });
