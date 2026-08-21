@@ -24,6 +24,10 @@ type Year = `${number}${number}${number}${number}`;
 type Month = `${number}${number}`;
 type Day = `${number}${number}`;
 
+const AudienceSpaces = ["A", "B", "C", "D", "E"] as const;
+
+type AudienceSpaceId = (typeof AudienceSpaces)[number];
+
 type ABTest = {
 	/** Name of the AB test */
 	name: TestName;
@@ -47,7 +51,7 @@ type ABTest = {
 	 * Having multiple test spaces allows deliberate overlapping of test audiences
 	 * Defaults to A
 	 */
-	audienceSpace?: "A" | "B" | "C";
+	audienceSpace?: AudienceSpaceId;
 	/** Test group definition */
 	groups: string[];
 	/**
@@ -69,4 +73,12 @@ type ABTest = {
 	shouldReportToOphan?: () => boolean;
 };
 
-export type { ABTest, FastlyTestParams, AudienceSpace, AllSpace };
+export { AudienceSpaces };
+
+export type {
+	ABTest,
+	FastlyTestParams,
+	AudienceSpace,
+	AllSpace,
+	AudienceSpaceId,
+};

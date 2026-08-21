@@ -1,4 +1,4 @@
-import { AUDIENCE_SPACES } from "./constants.ts";
+import { AudienceSpaces } from "../types.ts";
 import type { FastlyTestParams } from "./types.ts";
 
 const validateValue = (value: string | number, allowedColons: number): void => {
@@ -59,7 +59,7 @@ const parseFastlySubfield = (str: string): Record<string, string | number> => {
  */
 const parseMVTValue = (subfield: string): FastlyTestParams[] => {
 	const value = parseFastlySubfield(subfield);
-	return AUDIENCE_SPACES.map((_, i) => {
+	return AudienceSpaces.map((_, i) => {
 		return {
 			name: String(value[`group:${i}`]),
 			type: String(value[`group:${i}:type`]),
