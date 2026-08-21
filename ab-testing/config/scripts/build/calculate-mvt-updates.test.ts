@@ -82,7 +82,7 @@ test("calculateSpaceUpdates - handles empty audience space and tests", () => {
 	const emptyAudienceSpace = new Map<string, FastlyTestParams>();
 	const emptyTests: ABTest[] = [];
 
-	const result = calculateSpaceUpdates(emptyAudienceSpace, emptyTests);
+	const result = calculateSpaceUpdates("A", emptyAudienceSpace, emptyTests);
 
 	equal(result.size, 0);
 	equal(deleteTestGroupSpy.mock.callCount(), 0);
@@ -99,7 +99,7 @@ test("calculateSpaceUpdates - adds new test groups correctly", () => {
 		}),
 	];
 
-	const result = calculateSpaceUpdates(emptyAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", emptyAudienceSpace, tests);
 
 	// Should have 2 MVT entries (one for each group)
 	equal(result.size, 2);
@@ -137,7 +137,7 @@ test("calculateSpaceUpdates - removes tests no longer present", () => {
 		}),
 	];
 
-	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", existingAudienceSpace, tests);
 
 	// Should only have entries for test1
 	const testNames = new Set(
@@ -166,7 +166,7 @@ test("calculateSpaceUpdates - resizes existing test groups", () => {
 		}),
 	];
 
-	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", existingAudienceSpace, tests);
 
 	// Should have 4 MVT entries total (2 per group)
 	equal(result.size, 4);
@@ -189,7 +189,7 @@ test("calculateSpaceUpdates - handles fractional audience sizes correctly", () =
 		}),
 	];
 
-	const result = calculateSpaceUpdates(emptyAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", emptyAudienceSpace, tests);
 
 	// With 0.004 audience size and 2 groups, each group gets 0.002 * 1000 = 2 MVTs
 	equal(result.size, 4); // 2 * 2 groups
@@ -208,7 +208,7 @@ test("calculateSpaceUpdates - handles single group test", () => {
 		}),
 	];
 
-	const result = calculateSpaceUpdates(emptyAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", emptyAudienceSpace, tests);
 
 	// All audience size goes to the single group
 	equal(result.size, 2); // 0.002 * 1000 = 2 MVTs
@@ -234,7 +234,7 @@ test("calculateSpaceUpdates - handles multiple tests", () => {
 		}),
 	];
 
-	const result = calculateSpaceUpdates(emptyAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", emptyAudienceSpace, tests);
 
 	// test1: 2 MVTs (1 per group), test2: 1 MVT = 3 total
 	equal(result.size, 3);
@@ -263,7 +263,7 @@ test("calculateSpaceUpdates - preserves expiration dates", () => {
 		}),
 	];
 
-	const result = calculateSpaceUpdates(emptyAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", emptyAudienceSpace, tests);
 
 	const entry = result.get("mvt:0");
 	equal(entry?.exp, Math.floor(new Date(expirationDate).getTime() / 1000));
@@ -283,7 +283,7 @@ test("calculateSpaceUpdates - handles client-side tests", () => {
 		}),
 	];
 
-	const result = calculateSpaceUpdates(emptyAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", emptyAudienceSpace, tests);
 
 	const entry = result.get("mvt:0");
 	equal(entry?.type, "client");
@@ -475,7 +475,7 @@ test("calculateSpaceUpdates - resizes middle test with adjacent tests", () => {
 		}),
 	];
 
-	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", existingAudienceSpace, tests);
 
 	// Should have 14 MVT entries total (4 + 6 + 4)
 	equal(result.size, 14);
@@ -559,7 +559,7 @@ test("calculateSpaceUpdates - shrinks middle test with adjacent tests", () => {
 		}),
 	];
 
-	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", existingAudienceSpace, tests);
 
 	// Should have 10 MVT entries total (4 + 2 + 4)
 	equal(result.size, 10);
@@ -611,7 +611,7 @@ test("calculateSpaceUpdates - dividing tests into non integer group sizes should
 		}),
 	];
 
-	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", existingAudienceSpace, tests);
 
 	// Should have 198 MVT entries total
 	equal(result.size, 198);
@@ -686,7 +686,7 @@ test("calculateSpaceUpdates - handles insufficient MVTs when resizing middle tes
 	// This should throw an error because there aren't enough available MVTs
 	// to resize test2 from 4 MVTs to 20 MVTs (needs 16 additional MVTs but only 6 are available)
 	throws(
-		() => calculateSpaceUpdates(existingAudienceSpace, tests),
+		() => calculateSpaceUpdates("A", existingAudienceSpace, tests),
 		Error,
 		"Not enough available MVTs for test commercial-test2:control",
 	);
@@ -710,7 +710,7 @@ test("calculateSpaceUpdates - updates expiration date for existing test", () => 
 		}),
 	];
 
-	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", existingAudienceSpace, tests);
 
 	// Check that all entries have the updated expiration date
 	const controlEntry = result.get("mvt:0");
@@ -756,7 +756,7 @@ test("calculateSpaceUpdates - handles status change from ON to OFF by removing t
 		}),
 	];
 
-	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", existingAudienceSpace, tests);
 
 	// Should only have entries for test1
 	const testNames = new Set(
@@ -793,7 +793,7 @@ test("calculateSpaceUpdates - handles status change from OFF to ON by adding tes
 		}),
 	];
 
-	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", existingAudienceSpace, tests);
 
 	// Should have entries for both tests
 	const testNames = new Set(
@@ -827,7 +827,7 @@ test("calculateSpaceUpdates - updates both expiration and size simultaneously", 
 		}),
 	];
 
-	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+	const result = calculateSpaceUpdates("A", existingAudienceSpace, tests);
 
 	// Should have 4 MVT entries (2 per group) instead of 2
 	equal(result.size, 4);
