@@ -7,7 +7,7 @@ import { enoughSpace } from "./enoughSpace.ts";
 function createABTest(
 	name: string,
 	audienceSize: number,
-	audienceSpace?: "A" | "B" | "C",
+	audienceSpace?: "A" | "B" | "C" | "D" | "E",
 ): ABTest {
 	return {
 		name: `commercial-${name}` as const,
