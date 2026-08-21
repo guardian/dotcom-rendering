@@ -105,6 +105,45 @@ describe('YoutubeAtom', () => {
 		expect(playerDiv).toBeInTheDocument();
 	});
 
+	it('uses high-resolution HostedVideo image sources', () => {
+		const { container } = render(
+			<ConfigProvider
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
+			>
+				<YoutubeAtom
+					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
+					videoId="c_xtiZNDgGc"
+					uniqueId="c_xtiZNDgGc-1"
+					title="My Youtube video!"
+					alt=""
+					adTargeting={{ disableAds: true }}
+					eventEmitters={[]}
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.HostedVideo,
+						display: ArticleDisplay.Standard,
+					}}
+					consentState={consentStateCanTarget}
+					image={overlayImage}
+					shouldStick={false}
+					isMainMedia={true}
+					abTestParticipations={{}}
+					hidePillOnMobile={false}
+					renderingTarget="Web"
+				/>
+			</ConfigProvider>,
+		);
+
+		expect(
+			container.querySelector('source')?.getAttribute('srcset'),
+		).toContain('width=980&dpr=2');
+	});
+
 	it('player div has correct title', () => {
 		const title = 'My Youtube video!';
 
