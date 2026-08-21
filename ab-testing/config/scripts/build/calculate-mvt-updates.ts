@@ -4,7 +4,7 @@ import type {
 	AudienceSpace,
 	FastlyTestParams,
 } from "../../lib/types.ts";
-import { AudienceSpaces, type ABTest } from "../../types.ts";
+import { type ABTest, AudienceSpaces } from "../../types.ts";
 import { TestGroupMVTManager } from "./test-group-mvt-manager.ts";
 
 const getTestGroupName = (
