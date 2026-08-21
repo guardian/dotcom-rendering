@@ -68,13 +68,13 @@ export const MostViewedRightWithAd = ({
 				/>
 			) : null}
 
-			{!isPaidContent && !shouldHideMostViewed ? (
+			{!isPaidContent && !shouldHideMostViewed && (
 				<MostViewedRightWrapper
 					maxHeightPx={MAX_HEIGHT_PX}
 					componentDataAttribute={componentDataAttribute}
 					renderAds={renderAds}
 				/>
-			) : null}
+			)}
 
 			{isApps && <RightAdsPlaceholder />}
 		</div>

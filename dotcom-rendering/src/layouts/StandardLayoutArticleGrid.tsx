@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsEpic } from '../components/AppsEpic.island';
 import { ArticleBody } from '../components/ArticleBody';
@@ -132,58 +131,23 @@ export const StandardLayoutArticleGrid = ({
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
 	const isShowcase = format.display === ArticleDisplay.Showcase;
-	const isImmersive = format.display === ArticleDisplay.Immersive;
-	const isFeature = format.design === ArticleDesign.Feature;
+	const isInteractive = format.design === ArticleDesign.Interactive;
+
+	const footballMatchUrl =
+		article.matchType === 'FootballMatchType'
+			? article.matchUrl
+			: undefined;
 
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
 
-	const mainMedia = article.mainMediaElements[0];
-	const captionText = decideMainMediaCaption(mainMedia);
-	const mainMediaUrl: string | undefined =
-		mainMedia?._type ===
-		'model.dotcomrendering.pageElements.ImageBlockElement'
-			? mainMedia.media.allImages[0]?.url
-			: undefined;
-	const mainMediaAspectRatio =
-		mainMedia?._type ===
-		'model.dotcomrendering.pageElements.ImageBlockElement'
-			? mainMedia.media.allImages[0]?.fields.aspectRatio
-			: undefined;
-
-	const mainMediaOrientation =
-		mainMediaUrl != null ? getImageOrientation(mainMediaUrl) : 'landscape';
-
-	const layoutType = getLayoutType({
-		isImmersive,
-		isFeature,
-		orientation: mainMediaOrientation,
-		isMedia,
-		isShowcase,
-	});
-	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
-
-	const isImmersivePortrait =
-		layoutType === 'immersivePortraitDefault' ||
-		layoutType === 'immersivePortraitFeature';
-	const isImmersiveLandscape =
-		layoutType === 'immersiveLandscapeDefault' ||
-		layoutType === 'immersiveLandscapeFeature';
-	const centreRuleColumn = (() => {
-		switch (layoutType) {
-			case 'immersivePortraitDefault':
-			case 'immersivePortraitFeature':
-			case 'immersiveLandscapeDefault':
-				return 4;
-			default:
-				return 3;
-		}
-	})();
-
-	const ageWarning = getAgeWarning(
-		article.tags,
-		article.webPublicationDateDeprecated,
-	);
+	const layoutType: LayoutType = isMedia
+		? 'media'
+		: isShowcase
+			? 'showcase'
+			: isInteractive
+				? 'interactive'
+				: 'standard';
 
 	return (
 		<article
@@ -356,56 +320,31 @@ export const StandardLayoutArticleGrid = ({
 					layoutType={layoutType}
 				/>
 			</GridItem>
-			{isImmersive && (
-				<GridItem
-					area="caption"
-					layoutType={layoutType}
-					css={css`
-						padding-top: ${space[2]}px;
-					`}
-				>
-					<Hide from="leftCol">
-						<Caption
-							captionText={captionText}
-							format={format}
-							shouldLimitWidth={false}
-							isLeftCol={true}
-							isMainMedia={true}
-							showIconBelowLeftCol={true}
-						/>
-					</Hide>
-				</GridItem>
-			)}
 			<GridItem
 				area="meta"
 				layoutType={layoutType}
 				element="aside"
 				css={
-					layoutType === 'immersivePortraitDefault'
-						? css`
-								${from.leftCol} {
-									margin-right: -10px;
-								}
-							`
-						: undefined
+					isInteractive &&
+					css`
+						z-index: 10;
+					`
 				}
 			>
-				{format.display !== ArticleDisplay.Immersive &&
-					format.design !== ArticleDesign.Audio &&
-					layoutType !== 'immersivePortraitDefault' && (
-						<div css={stretchLines}>
-							{isWeb &&
-							format.theme === ArticleSpecial.Labs &&
-							format.design !== ArticleDesign.Video ? (
-								<GuardianLabsLines />
-							) : (
-								<DecideLines
-									format={format}
-									color={themePalette('--article-border')}
-								/>
-							)}
-						</div>
-					)}
+				{format.design !== ArticleDesign.Audio && (
+					<div css={stretchLines}>
+						{isWeb &&
+						format.theme === ArticleSpecial.Labs &&
+						format.design !== ArticleDesign.Video ? (
+							<GuardianLabsLines />
+						) : (
+							<DecideLines
+								format={format}
+								color={themePalette('--article-border')}
+							/>
+						)}
+					</div>
+				)}
 				{isApps ? (
 					<>
 						<Hide from="leftCol">
@@ -576,14 +515,6 @@ export const StandardLayoutArticleGrid = ({
 							/>
 						</Island>
 					)}
-					<StraightLines
-						data-print-layout="hide"
-						count={4}
-						cssOverrides={css`
-							display: block;
-						`}
-						color={themePalette('--straight-lines')}
-					/>
 					<SubMeta
 						format={format}
 						subMetaKeywordLinks={article.subMetaKeywordLinks}
@@ -627,7 +558,8 @@ export const StandardLayoutArticleGrid = ({
 								!!article.config.shouldHideReaderRevenue
 							}
 							shouldHideMostViewed={
-								format.design === ArticleDesign.Audio
+								format.design === ArticleDesign.Audio ||
+								format.design === ArticleDesign.Interactive
 							}
 						/>
 					</Island>
