@@ -237,6 +237,11 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 		theme: article.theme,
 	};
 
+	console.log({
+		design: ArticleDesign[format.design],
+		display: ArticleDisplay[format.display],
+	});
+
 	const serverTime = article.serverTime;
 
 	switch (article.display) {

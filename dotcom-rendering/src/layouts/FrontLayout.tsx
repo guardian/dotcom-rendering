@@ -10,6 +10,7 @@ import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.island';
+import { FilterSearchBar } from '../components/FilterSearchBar.island';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import {
@@ -344,6 +345,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 													trail.dataLinkName
 												}
 											/>
+											{index === 0 && (
+												<Island
+													priority="feature"
+													defer={{ until: 'visible' }}
+												>
+													<FilterSearchBar />
+												</Island>
+											)}
 										</Section>
 									</SnapCssSandbox>
 								)}
