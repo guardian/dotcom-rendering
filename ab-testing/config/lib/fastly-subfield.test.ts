@@ -277,6 +277,8 @@ test("round-trip compatibility", async (t) => {
 				{ name: "control", type: "control", exp: 50 },
 				{ name: "variant1", type: "variant", exp: 25 },
 				{ name: "variant2", type: "variant", exp: 25 },
+				{ name: "variant3", type: "variant", exp: 25 },
+				{ name: "variant4", type: "variant", exp: 25 },
 			];
 			const stringified = stringifyMVTValue(original);
 			const parsed = parseMVTValue(stringified);
