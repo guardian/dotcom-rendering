@@ -193,6 +193,16 @@ const sectionPadding = css`
 const immersiveGridTitleBelowDesktop = css`
 	${until.desktop} {
 		color: white;
+		padding-left: 6px;
+		padding-right: 6px;
+		box-shadow: none;
+	}
+`;
+
+const immersiveGridTitleWrapperBelowDesktop = css`
+	${until.desktop} {
+		padding-left: 6px;
+		padding-right: 6px;
 	}
 `;
 
@@ -348,7 +358,14 @@ export const SeriesSectionLink = ({
 			const title = tag?.title ? tag.title : sectionLabel;
 			const linkExt = tag?.id ? tag.id : sectionUrl;
 			return (
-				<div>
+				<div
+					css={
+						format.display === ArticleDisplay.Immersive &&
+						layoutType != null
+							? immersiveGridTitleWrapperBelowDesktop
+							: undefined
+					}
+				>
 					<a
 						css={[
 							sectionLabelLink,

@@ -302,7 +302,7 @@ const gridHeadlineTextBelowDesktop = css`
 
 	${until.desktop} {
 		color: white;
-		background-color: black;
+		background-color: ${themePalette('--headline-background')};
 		white-space: pre-wrap;
 		padding-bottom: ${space[1]}px;
 		padding-left: 12px;
