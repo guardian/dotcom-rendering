@@ -8,6 +8,7 @@ import type {
 	Newsletter,
 	StarRating,
 } from '../types/content';
+import type { CustomSubnav } from '../types/customSubnav';
 import type { FooterType } from '../types/footer';
 import type { EditorialTest } from '../types/front';
 import type { FENavType } from '../types/frontend';
@@ -34,6 +35,11 @@ export interface FEFront {
 	deeplyRead?: FETrailType[];
 	contributionsServiceUrl: string;
 	canonicalUrl?: string;
+	/**
+	 * An optional custom subnav targeted at this front. Omitted entirely when
+	 * no custom subnav targets the front.
+	 */
+	subnav?: CustomSubnav;
 }
 
 interface FEPressedPage {
