@@ -5,9 +5,9 @@ import type {
 	FastlyTestParams,
 } from "../../lib/types.ts";
 import {
+	type ABTest,
 	type AudienceSpaceId,
 	AudienceSpaces,
-	type ABTest,
 } from "../../types.ts";
 import { TestGroupMVTManager } from "./test-group-mvt-manager.ts";
 

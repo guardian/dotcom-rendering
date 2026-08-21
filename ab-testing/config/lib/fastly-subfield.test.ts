@@ -1,5 +1,6 @@
 import { deepEqual, equal, throws } from "node:assert";
 import test from "node:test";
+import { AudienceSpaces } from "../types.ts";
 import {
 	parseFastlySubfield,
 	parseMVTValue,
@@ -7,7 +8,6 @@ import {
 	stringifyMVTValue,
 } from "./fastly-subfield.ts";
 import type { FastlyTestParams } from "./types.ts";
-import { AudienceSpaces } from "../types.ts";
 
 test("stringifyFastlySubfield", async (t) => {
 	await t.test("should stringify object with string values", () => {
