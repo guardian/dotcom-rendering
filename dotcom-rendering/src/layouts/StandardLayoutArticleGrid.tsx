@@ -134,6 +134,7 @@ export const StandardLayoutArticleGrid = ({
 	const isShowcase = format.display === ArticleDisplay.Showcase;
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isFeature = format.design === ArticleDesign.Feature;
+	const headlineBackground = themePalette('--headline-background');
 
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
@@ -226,6 +227,13 @@ export const StandardLayoutArticleGrid = ({
 							)}
 						}
 					`,
+				(isImmersivePortrait || isImmersiveLandscape) &&
+					css`
+						${until.desktop} {
+							/* Anchor the title consistently while wrapped text extends the media below it. */
+							grid-template-rows: 60vw auto auto auto auto auto auto;
+						}
+					`,
 			]}
 		>
 			<GridItem
@@ -234,15 +242,51 @@ export const StandardLayoutArticleGrid = ({
 				css={
 					isImmersive
 						? css`
-								align-self: start;
-								${mainMediaAspectRatio != null &&
-								`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
-
 								${from.desktop} {
+									align-self: start;
+									${mainMediaAspectRatio != null &&
+									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
 									${isImmersiveLandscape &&
 									`margin-left: -20px;
 									margin-right: -20px;`}
 								}
+
+								${(isImmersivePortrait ||
+									isImmersiveLandscape) &&
+								css`
+									${until.desktop} {
+										position: relative;
+
+										> div {
+											height: 100%;
+										}
+
+										/* Fades the media to black at the bottom, behind the headline. */
+										&::after {
+											content: '';
+											position: absolute;
+											left: 0;
+											right: 0;
+											bottom: 0;
+											height: 60%;
+											z-index: ${getZIndex(
+												'mediaOverlay',
+											)};
+											background: linear-gradient(
+												to bottom,
+												rgba(0, 0, 0, 0.08),
+												${headlineBackground} 72%
+											);
+											backdrop-filter: blur(12px);
+											mask-image: linear-gradient(
+												to bottom,
+												transparent 40%,
+												black 60%
+											);
+											pointer-events: none;
+										}
+									}
+								`}
 							`
 						: undefined
 				}
@@ -282,11 +326,19 @@ export const StandardLayoutArticleGrid = ({
 					isImmersive &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
+
+							${until.desktop} {
+								padding-bottom: ${space[2]}px;
+							}
 						`,
 					isImmersivePortrait &&
 						css`
 							align-self: end;
 							margin-bottom: 2px;
+
+							${until.desktop} {
+								margin-bottom: 0;
+							}
 						`,
 				]}
 			>
@@ -307,6 +359,13 @@ export const StandardLayoutArticleGrid = ({
 					isImmersive &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
+
+							${until.desktop} {
+								margin-top: -1px;
+								background-color: ${headlineBackground};
+								padding-top: 1px;
+								padding-bottom: ${space[8]}px;
+							}
 						`,
 					(layoutType === 'immersivePortraitDefault' ||
 						layoutType === 'immersivePortraitFeature') &&
@@ -342,6 +401,12 @@ export const StandardLayoutArticleGrid = ({
 				area="standfirst"
 				layoutType={layoutType}
 				css={[
+					isImmersive &&
+						css`
+							${until.desktop} {
+								padding-top: ${space[2]}px;
+							}
+						`,
 					isImmersiveLandscape &&
 						css`
 							${from.desktop} {
@@ -380,15 +445,21 @@ export const StandardLayoutArticleGrid = ({
 				area="meta"
 				layoutType={layoutType}
 				element="aside"
-				css={
+				css={[
+					isImmersive &&
+						branding != null &&
+						captionText != null &&
+						css`
+							padding-top: ${space[3]}px;
+						`,
 					layoutType === 'immersivePortraitDefault'
 						? css`
 								${from.leftCol} {
 									margin-right: -10px;
 								}
 							`
-						: undefined
-				}
+						: undefined,
+				]}
 			>
 				{format.display !== ArticleDisplay.Immersive &&
 					format.design !== ArticleDesign.Audio &&

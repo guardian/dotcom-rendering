@@ -277,6 +277,11 @@ const invertedText = css`
 	padding-bottom: ${space[1]}px;
 	padding-right: ${space[1]}px;
 
+	${until.desktop} {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+
 	${from.desktop} {
 		margin-left: -10px;
 		padding-left: 10px;
@@ -290,6 +295,19 @@ const invertedText = css`
  */
 const gridHeadlineText = css`
 	color: ${themePalette('--immersive-grid-headline-colour')};
+`;
+
+const gridHeadlineTextBelowDesktop = css`
+	${gridHeadlineText};
+
+	${until.desktop} {
+		color: white;
+		background-color: ${themePalette('--headline-background')};
+		white-space: pre-wrap;
+		padding-bottom: ${space[1]}px;
+		padding-left: 12px;
+		padding-right: 12px;
+	}
 `;
 
 const maxWidth = css`
@@ -488,6 +506,10 @@ export const ArticleHeadline = ({
 	starRating,
 }: Props) => {
 	const isInverted = layoutType === 'immersiveLandscapeDefault';
+	const isGridLayout =
+		layoutType === 'immersivePortraitDefault' ||
+		layoutType === 'immersivePortraitFeature' ||
+		layoutType === 'immersiveLandscapeFeature';
 	const isLegacyImmersive = layoutType == null;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -568,7 +590,9 @@ export const ArticleHeadline = ({
 											]
 										: isInverted
 											? [invertedText, darkBackground]
-											: gridHeadlineText,
+											: isGridLayout
+												? gridHeadlineTextBelowDesktop
+												: gridHeadlineText,
 								]}
 							>
 								<span
