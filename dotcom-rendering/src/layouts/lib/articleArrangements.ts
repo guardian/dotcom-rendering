@@ -6,6 +6,7 @@ export type LayoutType =
 	| 'standard'
 	| 'showcase'
 	| 'media'
+	| 'picture'
 	| 'immersiveLandscapeDefault'
 	| 'immersiveLandscapeFeature'
 	| 'immersivePortraitDefault'
@@ -155,6 +156,42 @@ const mediaCss: LayoutCssMap = {
 	'right-column': {
 		desktop: `grid-row: 3 / span 4; ${grid.column.right};`,
 		leftCol: `grid-row: 2 / span 3; ${grid.column.right};`,
+	},
+};
+
+const pictureCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		leftCol: grid.column.left,
+	},
+	headline: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: 'grid-row: 1;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		leftCol: 'grid-row: 2;',
+	},
+	media: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: `grid-row: 3;`,
+	},
+	meta: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		tablet: 'grid-row: 6;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: `grid-row: 5;`,
 	},
 };
 
@@ -330,6 +367,7 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	standard: standardCss,
 	showcase: showcaseCss,
 	media: mediaCss,
+	picture: pictureCss,
 	immersiveLandscapeDefault: immersiveLandscapeDefaultCss,
 	immersiveLandscapeFeature: immersiveLandscapeFeatureCss,
 	immersivePortraitDefault: immersivePortraitDefaultCss,
@@ -385,12 +423,14 @@ export const getLayoutType = ({
 	isFeature,
 	orientation,
 	isMedia,
+	isPicture,
 	isShowcase,
 }: {
 	isImmersive: boolean;
 	isFeature: boolean;
 	orientation: 'portrait' | 'landscape' | 'square';
 	isMedia: boolean;
+	isPicture: boolean;
 	isShowcase: boolean;
 }): LayoutType => {
 	if (isImmersive) {
@@ -405,6 +445,7 @@ export const getLayoutType = ({
 			: 'immersiveLandscapeDefault';
 	}
 	if (isMedia) return 'media';
+	if (isPicture) return 'picture';
 	if (isShowcase) return 'showcase';
 	return 'standard';
 };
