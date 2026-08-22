@@ -17,7 +17,6 @@ import { appendLinkNameMedia } from '../lib/getDataLinkName';
 import { getZIndex } from '../lib/getZIndex';
 import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
-import { useAB } from '../lib/useAB';
 import { palette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { StarRating as Rating, RatingSizeType } from '../types/content';
@@ -83,7 +82,7 @@ const underlineOnHoverStyles = css`
 	}
 `;
 
-const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
+const hoverStyles = css`
 	:hover .media-overlay {
 		position: absolute;
 		top: 0;
@@ -91,8 +90,6 @@ const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 		width: 100%;
 		height: 100%;
 		background-color: ${palette('--card-background-hover')};
-
-		${isLoopAndInLoopClickTestVariant && loopClickThroughOverlayStyles}
 	}
 
 	${underlineOnHoverStyles}
@@ -106,12 +103,6 @@ const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 			background-color: transparent;
 		}
 	}
-`;
-
-const loopClickThroughOverlayStyles = css`
-	z-index: ${getZIndex('mediaOverlay')};
-	cursor: pointer;
-	pointer-events: none;
 `;
 
 const contentStyles = css`
@@ -446,20 +437,6 @@ export const FeatureCard = ({
 	starRatingSize,
 	articleMedia,
 }: Props) => {
-	const ab = useAB();
-	const isInLoopClickTestControl = Boolean(
-		ab?.isUserInTestGroup(
-			'fronts-and-curation-loop-click-through',
-			'control',
-		),
-	);
-	const isInLoopClickTestVariant = Boolean(
-		ab?.isUserInTestGroup(
-			'fronts-and-curation-loop-click-through',
-			'variant',
-		),
-	);
-
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
 	/**
@@ -476,15 +453,6 @@ export const FeatureCard = ({
 	if (!media) {
 		return null;
 	}
-
-	const isLoopAndInLoopClickTestControl = Boolean(
-		media.style === 'loop-video' && isInLoopClickTestControl,
-	);
-	const isLoopAndInLoopClickTestVariant = Boolean(
-		media.style === 'loop-video' && isInLoopClickTestVariant,
-	);
-	const isLoopAndInLoopClickTest =
-		isLoopAndInLoopClickTestControl || isLoopAndInLoopClickTestVariant;
 
 	const mediaType =
 		media.type === 'self-hosted-video' ? media.style : media.type;
@@ -521,19 +489,14 @@ export const FeatureCard = ({
 	 * - loops in the loop click test variant group
 	 * */
 	const allowLinkThroughOverlay =
-		media.style === 'cinemagraph' ||
-		media.type === 'picture' ||
-		isLoopAndInLoopClickTestVariant;
-
+		media.style === 'cinemagraph' || media.type === 'picture';
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
 				<div
 					css={[
 						baseCardStyles,
-						(!isSelfHostedVideoWithControls ||
-							isLoopAndInLoopClickTestVariant) &&
-							hoverStyles(isLoopAndInLoopClickTestVariant),
+						!isSelfHostedVideoWithControls && hoverStyles,
 					]}
 				>
 					{!isYoutubeVideo && !isSelfHostedVideoWithControls && (
@@ -542,10 +505,6 @@ export const FeatureCard = ({
 							headlineText={headlineText}
 							dataLinkName={resolvedDataLinkName}
 							isExternalLink={isExternalLink}
-							isLoopAndInLoopClickTest={isLoopAndInLoopClickTest}
-							shouldRaiseZIndexForAbTest={
-								isLoopAndInLoopClickTestVariant
-							}
 						/>
 					)}
 					<div css={contentStyles}>
@@ -655,15 +614,6 @@ export const FeatureCard = ({
 											minAspectRatio={aspectRatioNumber}
 											maxAspectRatio={aspectRatioNumber}
 											preventAutoplay={false}
-											cardLink={{
-												headlineText,
-												dataLinkName:
-													resolvedDataLinkName,
-												isExternalLink,
-											}}
-											isInLoopClickTestVariant={
-												isInLoopClickTestVariant
-											}
 										/>
 									</Island>
 								)}
@@ -708,8 +658,7 @@ export const FeatureCard = ({
 								)}
 
 								{/* This overlay is styled when the CardLink is hovered */}
-								{(!isSelfHostedVideoWithControls ||
-									isLoopAndInLoopClickTestVariant) && (
+								{!isSelfHostedVideoWithControls && (
 									<div className="media-overlay" />
 								)}
 								<div
@@ -763,12 +712,6 @@ export const FeatureCard = ({
 												headlineText={headlineText}
 												dataLinkName={dataLinkName}
 												isExternalLink={isExternalLink}
-												isLoopAndInLoopClickTest={
-													isLoopAndInLoopClickTest
-												}
-												shouldRaiseZIndexForAbTest={
-													isLoopAndInLoopClickTestVariant
-												}
 											/>
 										)}
 
