@@ -492,3 +492,28 @@ LabsWithLink.decorators = [
 		},
 	]),
 ];
+
+export const LabsGallery: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
+	return (
+		<Section fullWidth={true}>
+			<Standfirst
+				format={format}
+				standfirst="<p>From riding a steampunk elephant in Nantes to exploring a ghost fishing village, you’ll find no shortage of out-of-this-world experiences in Brittany and Normandy</p>"
+			/>
+		</Section>
+	);
+};
+LabsGallery.storyName = 'LabsGallery';
+LabsGallery.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Gallery,
+			theme: ArticleSpecial.Labs,
+		},
+	]),
+];

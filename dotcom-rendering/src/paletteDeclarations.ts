@@ -2508,6 +2508,10 @@ const standfirstTextLight: PaletteFunction = (format) => {
 			...labsHostedDesigns,
 		].includes(format.design)
 	) {
+		if (format.design === ArticleDesign.Gallery) {
+			return sourcePalette.labs[500];
+		}
+
 		return sourcePalette.labs[100];
 	}
 
@@ -2540,7 +2544,11 @@ const standfirstTextLight: PaletteFunction = (format) => {
 const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 	if (
 		theme === ArticleSpecial.Labs &&
-		![ArticleDesign.LiveBlog, ...labsHostedDesigns].includes(design)
+		![
+			ArticleDesign.LiveBlog,
+			...labsMediaDesigns,
+			...labsHostedDesigns,
+		].includes(design)
 	) {
 		return sourcePalette.labs[500];
 	}
