@@ -10,6 +10,7 @@ jobs:
     permissions:
       contents: read
       id-token: write # Required to exchange for AWS credentials using OIDC
+      pull-requests: write # Required by guardian/actions-publish-image to comment on PRs
     uses: ./.github/workflows/container-production.yml
     secrets:
       GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}

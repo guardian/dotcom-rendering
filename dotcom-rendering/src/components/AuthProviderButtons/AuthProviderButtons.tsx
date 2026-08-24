@@ -12,7 +12,11 @@ import {
 	SvgGoogleBrand,
 } from '@guardian/source/react-components';
 import type React from 'react';
-import { buildUrlWithQueryParams } from '../../lib/routeUtils';
+import {
+	buildUrlWithQueryParams,
+	PROFILE_SIGN_IN_SOCIAL_URL,
+	PROFILE_SIGN_IN_URL,
+} from '../../lib/routeUtils';
 import type { AuxiaGateVersion } from '../SignInGate/types';
 import type { IsNativeApp, QueryParams } from './types';
 
@@ -92,7 +96,7 @@ const SocialButton = ({
 				cssOverrides={secondaryButtonStyles()}
 				icon={icon}
 				href={buildUrlWithQueryParams(
-					'https://profile.theguardian.com/signin/:social',
+					PROFILE_SIGN_IN_SOCIAL_URL,
 					{
 						social: socialProvider,
 					},
@@ -176,7 +180,7 @@ export const AuthProviderButtons = ({
 					cssOverrides={secondaryButtonStyles()}
 					priority="tertiary"
 					href={buildUrlWithQueryParams(
-						'https://profile.theguardian.com/signin',
+						PROFILE_SIGN_IN_URL,
 						{},
 						queryParams,
 					)}

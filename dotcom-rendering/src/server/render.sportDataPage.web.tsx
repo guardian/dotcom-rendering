@@ -13,7 +13,6 @@ import { polyfillIO } from '../lib/polyfill.io';
 import type { NavType } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
 import type {
-	CricketMatchPage,
 	FootballDataWithRegionsPage,
 	SportDataPage,
 	SportPageKind,
@@ -34,8 +33,6 @@ export const decideDescription = (kind: SportPageKind) => {
 			return `Football fixtures ${fromTheGuardian}`;
 		case 'FootballTables':
 			return `Football tables ${fromTheGuardian}`;
-		case 'CricketMatch':
-			return `Cricket scores ${fromTheGuardian}`;
 		case 'FootballMatchSummary':
 			return `Football matches ${fromTheGuardian}`;
 	}
@@ -48,8 +45,6 @@ export const decideTitle = (sportPage: SportDataPage) => {
 		case 'FootballFixtures':
 		case 'FootballTables':
 			return decideFootballTitleWithCompetition(sportPage);
-		case 'CricketMatch':
-			return createCricketTitle(sportPage);
 		case 'FootballMatchSummary':
 			return createMatchSummaryTitle(sportPage.match);
 	}
@@ -92,10 +87,6 @@ const decideFootballTitleWithCompetition = (
 				competitionName ? `${competitionName} table` : 'All tables'
 			} ${footballTitle}`;
 	}
-};
-
-const createCricketTitle = (sportPage: CricketMatchPage) => {
-	return `${sportPage.match.competitionName}, ${sportPage.match.venueName} | Cricket | The Guardian`;
 };
 
 type Props = {

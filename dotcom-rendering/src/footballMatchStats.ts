@@ -5,7 +5,7 @@ import type {
 	FEFootballMatchStats,
 	FEFootballMatchStatsSummary,
 	FEFootballPlayer,
-	FEFootballPlayerEvent,
+	FEFootballPlayerEventEnhanced,
 	FEFootballTeam,
 	FEFootballTeamSummary,
 } from './frontend/feFootballMatchInfoPage';
@@ -45,6 +45,7 @@ export type FootballMatchTeamWithStats = FootballTeam & {
 	fouls: number;
 	players: FootballPlayer[];
 	statsColour: string;
+	substitutions: Substitution[];
 };
 
 /**
@@ -68,15 +69,28 @@ type FootballPlayer = {
 	events: PlayerEvent[];
 };
 
-const eventTypes = ['substitution', 'dismissal', 'booking'] as const;
+const eventTypes = [
+	'substitution',
+	'substitution-injury',
+	'dismissal',
+	'booking',
+] as const;
 const isEventType = isOneOf(eventTypes);
 
 /**
  * Events involving a particular player in a given football match.
  */
 export type PlayerEvent = {
+	id: string;
 	kind: (typeof eventTypes)[number];
 	minute: number;
+	addedTime: number;
+};
+
+export type Substitution = {
+	eventId: string;
+	name: string;
+	lastName: string;
 };
 
 type UnknownEventType = {
@@ -100,7 +114,7 @@ type ParserError =
 	| FootballInvalidShirtNumber;
 
 const parsePlayerEvent = (
-	feFootballMatchPlayerEvent: FEFootballPlayerEvent,
+	feFootballMatchPlayerEvent: FEFootballPlayerEventEnhanced,
 ): Result<ParserError, PlayerEvent> => {
 	if (!isEventType(feFootballMatchPlayerEvent.eventType)) {
 		return error({
@@ -111,25 +125,49 @@ const parsePlayerEvent = (
 
 	const eventType = feFootballMatchPlayerEvent.eventType;
 
-	return parseIntResult(feFootballMatchPlayerEvent.eventTime)
+	return parseIntResult(feFootballMatchPlayerEvent.normalTime)
 		.mapError<ParserError>((message) => ({
 			kind: 'FootballInvalidEventTime',
 			message,
 		}))
 		.flatMap<ParserError, PlayerEvent>((min) =>
 			ok({
+				id: feFootballMatchPlayerEvent.eventId,
 				kind: eventType,
-				minute: min,
+				minute: min + 1,
+				addedTime: parseInt(feFootballMatchPlayerEvent.addedTime),
 			}),
 		);
 };
 
 const parseEvents = listParse(parsePlayerEvent);
 
+const parseSubstitution = (
+	feFootballMatchSubstitution: FEFootballPlayer,
+): Substitution[] => {
+	const substitutions = feFootballMatchSubstitution.enhancedEvents
+		.filter(
+			(event) =>
+				event.eventType === 'substitution' ||
+				event.eventType === 'substitution-injury',
+		)
+		.map((event) => ({
+			eventId: event.eventId,
+			name: feFootballMatchSubstitution.name,
+			lastName: feFootballMatchSubstitution.lastName,
+		}));
+
+	return substitutions;
+};
+const parseSubstitutions = (players: FEFootballPlayer[]) =>
+	players
+		.map((player) => (player.substitute ? parseSubstitution(player) : []))
+		.flat();
+
 const parseFootballPlayer = (
 	feFootballMatchPlayer: FEFootballPlayer,
 ): Result<ParserError, FootballPlayer> =>
-	parseEvents(feFootballMatchPlayer.events).flatMap((events) =>
+	parseEvents(feFootballMatchPlayer.enhancedEvents).flatMap((events) =>
 		parseIntResult(feFootballMatchPlayer.shirtNumber)
 			.mapError<ParserError>((message) => ({
 				kind: 'FootballInvalidShirtNumber',
@@ -161,6 +199,7 @@ const parseTeamWithStats = (
 		fouls: feFootballMatchTeam.fouls,
 		players,
 		statsColour: feFootballMatchTeam.colours,
+		substitutions: parseSubstitutions(feFootballMatchTeam.players),
 	}));
 
 export const parseMatchStats = (

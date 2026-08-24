@@ -21,26 +21,29 @@ jobs:
         id: get-build-facts
 
   build-production-image:
-    runs-on: ubuntu-latest
+    # ECS tasks run on ARM, so we use the arm runner to natively build the containaer image (rather than rely on emulation)
+    runs-on: ubuntu-24.04-arm
     needs:
       - facts
     permissions:
       contents: read
       id-token: write # Required to exchange for AWS credentials using OIDC
+      pull-requests: write # Required by guardian/actions-publish-image to comment on PRs
     outputs:
       imageDigest: ${{ steps.publish-image.outputs.imageDigest }}
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v7
       - name: Add commit hash for PRout
         working-directory: dotcom-rendering
         run: echo 'export const GIT_COMMIT_HASH = "${{ needs.facts.outputs.commitSha }}";' > src/server/prout.ts
       - name: Build image
-        run: docker buildx build -f Production.dockerfile -t ${{ github.repository }}:latest .
+        run: docker buildx build --platform linux/arm64 -f Production.dockerfile -t ${{ github.repository }}:latest .
       - name: Publish Image
-        uses: guardian/actions-publish-image@v0.0.2
+        uses: guardian/actions-publish-image@v0.0.3
         id: publish-image
         with:
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           branchName: ${{ needs.facts.outputs.branchName }}
           buildNumber: ${{ needs.facts.outputs.buildNumber }}
           commitSha: ${{ needs.facts.outputs.commitSha }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
