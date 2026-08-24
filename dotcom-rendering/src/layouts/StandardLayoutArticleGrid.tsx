@@ -450,7 +450,9 @@ export const StandardLayoutArticleGrid = ({
 						branding != null &&
 						captionText != null &&
 						css`
-							padding-top: ${space[3]}px;
+							${until.desktop} {
+								padding-top: ${space[3]}px;
+							}
 						`,
 					layoutType === 'immersivePortraitDefault'
 						? css`
