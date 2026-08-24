@@ -196,7 +196,7 @@ export const FilterSearchBar = () => {
 				const response = await fetch(
 					`https://content.guardianapis.com/search?section=thefilter&show-elements=image&q=${encodeURIComponent(
 						trimmed,
-					)}&api-key=test`,
+					)}&api-key=`,
 				);
 				const data: GuardianSearchResponse = await response.json();
 				if (!cancelled) {
