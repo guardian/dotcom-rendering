@@ -279,7 +279,7 @@ const invertedText = css`
 
 	${until.desktop} {
 		padding-left: 12px;
-		padding-right: 12px;
+		padding-right: 18px;
 	}
 
 	${from.desktop} {
