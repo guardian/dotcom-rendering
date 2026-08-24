@@ -25,7 +25,7 @@ type Props = {
 	 * See the `UKGeneral` story for an example of `'name'`, and the
 	 * `USPresidential` story for an example of `'value'`.
 	 */
-	colour: 'name' | 'value';
+	colour: 'name' | 'value' | 'none';
 	/**
 	 * Whether to use a faded colour scheme for the component.
 	 *
@@ -64,10 +64,12 @@ type Group = {
 	 * Optimizer URLs. See {@linkcode generateImageURL} for more information,
 	 * and the `Versus` stories for examples.
 	 */
-	image: {
-		url: URL;
-		alt: string;
-	};
+	image:
+		| {
+				url: URL;
+				alt: string;
+		  }
+		| undefined;
 	/**
 	 * The colour used to represent the group. It expects a CSS `color` value
 	 * (e.g. a hex string). To ensure dark mode support a {@linkcode palette}
@@ -92,7 +94,7 @@ type Group = {
 	  }
 );
 
-export const Versus = ({ left, right, colour, faded, banner }: Props) => (
+export const Versus = (props: Props) => (
 	<div
 		css={{
 			display: 'flex',
@@ -100,31 +102,34 @@ export const Versus = ({ left, right, colour, faded, banner }: Props) => (
 		}}
 	>
 		<GroupComponent
-			group={left}
-			colour={colour}
+			group={props.left}
+			colour={props.colour}
 			align="left"
-			faded={faded}
+			faded={props.faded}
 		/>
 		<div css={{ position: 'relative' }}>
-			<Image image={left.image} align="left" banner={banner} />
-			<Banner banner={banner} />
-			<Image image={right.image} align="right" banner={banner} />
+			<Image
+				image={props.left.image}
+				align="left"
+				banner={props.banner}
+			/>
+			<Banner banner={props.banner} />
+			<Image
+				image={props.right.image}
+				align="right"
+				banner={props.banner}
+			/>
 		</div>
 		<GroupComponent
-			group={right}
-			colour={colour}
+			group={props.right}
+			colour={props.colour}
 			align="right"
-			faded={faded}
+			faded={props.faded}
 		/>
 	</div>
 );
 
-const GroupComponent = ({
-	group,
-	align,
-	colour,
-	faded,
-}: {
+const GroupComponent = (props: {
 	group: Group;
 	align: 'left' | 'right';
 	colour: Props['colour'];
@@ -132,8 +137,8 @@ const GroupComponent = ({
 }) => (
 	<p
 		style={{
-			alignItems: align === 'right' ? 'end' : undefined,
-			'--before-background-colour': group.colour,
+			alignItems: props.align === 'right' ? 'end' : undefined,
+			'--before-background-colour': props.group.colour,
 		}}
 		css={{
 			display: 'flex',
@@ -153,22 +158,30 @@ const GroupComponent = ({
 		}}
 	>
 		<Name
-			name={group.name}
-			abbreviation={group.abbreviation}
-			colour={colour === 'name' ? group.colour : textColour(faded)}
+			name={props.group.name}
+			abbreviation={props.group.abbreviation}
+			colour={
+				props.colour === 'name'
+					? props.group.colour
+					: textColour(props.faded)
+			}
 		/>
 		<Value
-			value={group.value}
-			colour={colour === 'value' ? group.colour : textColour(faded)}
-			faded={faded}
+			value={props.group.value}
+			colour={
+				props.colour === 'value'
+					? props.group.colour
+					: textColour(props.faded)
+			}
+			faded={props.faded}
 		/>
-		{'change' in group ? (
-			<Change change={group.change} />
+		{'change' in props.group ? (
+			<Change change={props.group.change} />
 		) : (
 			<Description
-				description={group.description}
-				align={align}
-				faded={faded}
+				description={props.group.description}
+				align={props.align}
+				faded={props.faded}
 			/>
 		)}
 	</p>
@@ -217,19 +230,15 @@ const Name = ({
 	</span>
 );
 
-const Value = ({
-	value,
-	colour,
-	faded,
-}: {
+const Value = (props: {
 	value: Group['value'];
 	colour: string;
 	faded: Props['faded'];
 }) => (
 	<span
 		style={{
-			opacity: faded ? 0.42 : undefined,
-			color: colour,
+			opacity: props.faded ? 0.42 : undefined,
+			color: props.colour,
 		}}
 		css={{
 			...headlineBold42Object,
@@ -244,7 +253,7 @@ const Value = ({
 			},
 		}}
 	>
-		{value}
+		{props.value}
 	</span>
 );
 
@@ -259,42 +268,38 @@ const Change = ({ change }: { change: number }) => (
 	</span>
 );
 
-const Description = ({
-	description,
-	align,
-	faded,
-}: {
+const Description = (props: {
 	description: string;
 	align: 'left' | 'right';
 	faded: Props['faded'];
 }) => (
 	<span
 		style={{
-			textAlign: align,
-			color: textColour(faded),
+			textAlign: props.align,
+			color: textColour(props.faded),
 		}}
 		css={textSans12Object}
 	>
-		{description}
+		{props.description}
 	</span>
 );
 
-const Image = ({
-	image,
-	align,
-	banner,
-}: {
+const Image = (props: {
 	image: Group['image'];
 	align: 'left' | 'right';
 	banner: Props['banner'];
 }) => {
+	if (props.image === undefined) {
+		return null;
+	}
+
 	const highRes = generateImageURL({
-		mainImage: image.url.href,
+		mainImage: props.image.url.href,
 		imageWidth: 75,
 		resolution: 'high',
 	});
 	const lowRes = generateImageURL({
-		mainImage: image.url.href,
+		mainImage: props.image.url.href,
 		imageWidth: 75,
 		resolution: 'low',
 	});
@@ -303,18 +308,18 @@ const Image = ({
 		<img
 			src={lowRes}
 			srcSet={`${highRes} 2x`}
-			alt={image.alt}
+			alt={props.image.alt}
 			style={
-				align === 'left'
+				props.align === 'left'
 					? {
 							'--margin': '0 55px 0 0',
-							'--wider-margin': banner
+							'--wider-margin': props.banner
 								? '0 90px 0 0'
 								: 'var(--margin)',
 						}
 					: {
 							'--margin': '0 0 0 55px',
-							'--wider-margin': banner
+							'--wider-margin': props.banner
 								? '0 0 0 90px'
 								: 'var(--margin)',
 						}
@@ -332,8 +337,8 @@ const Image = ({
 	);
 };
 
-const Banner = ({ banner }: { banner: string | undefined }) => {
-	if (banner === undefined) {
+const Banner = (props: { banner: string | undefined }) => {
+	if (props.banner === undefined) {
 		return null;
 	}
 
@@ -371,7 +376,7 @@ const Banner = ({ banner }: { banner: string | undefined }) => {
 					},
 				}}
 			>
-				{banner}
+				{props.banner}
 			</span>
 		</p>
 	);
