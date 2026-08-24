@@ -9,7 +9,7 @@ import { Hide } from '@guardian/source/react-components';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot } from '../components/AdSlot.web';
-import { AffiliateDisclaimerGallery } from '../components/AffiliateDisclaimer';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
@@ -436,7 +436,7 @@ const GalleryLabsHeader = (props: {
 			<Section
 				fullWidth={true}
 				showTopBorder={false}
-				backgroundColour={sourcePalette.labs[400]}
+				backgroundColour={sourcePalette.labs[100]}
 				borderColour={sourcePalette.neutral[60]}
 				sectionId="labs-header"
 				element="aside"
@@ -512,8 +512,12 @@ const Meta = ({
 				shortUrlId={frontendData.config.shortUrlId}
 			/>
 		) : null}
-		{!!frontendData.affiliateLinksDisclaimer && (
-			<AffiliateDisclaimerGallery />
+		{frontendData.affiliateLinksDisclaimerRequired && (
+			<AffiliateDisclaimer
+				cssOverrides={css`
+					margin-top: ${space[4]}px;
+				`}
+			/>
 		)}
 	</div>
 );

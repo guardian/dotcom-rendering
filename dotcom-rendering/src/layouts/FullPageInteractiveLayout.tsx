@@ -5,6 +5,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';
@@ -182,6 +183,9 @@ const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 				sectionId={article.config.section}
 				contentType={article.contentType}
 			/>
+			{article.affiliateLinksDisclaimerRequired && (
+				<AffiliateDisclaimer />
+			)}
 		</section>
 	);
 };
@@ -234,7 +238,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 									fullWidth={true}
 									showTopBorder={false}
 									padSides={true}
-									backgroundColour={sourcePalette.labs[400]}
+									backgroundColour={sourcePalette.labs[100]}
 									borderColour={sourcePalette.neutral[60]}
 									sectionId="labs-header"
 								>
@@ -257,7 +261,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 							fullWidth={true}
 							showTopBorder={false}
 							padSides={true}
-							backgroundColour={sourcePalette.labs[400]}
+							backgroundColour={sourcePalette.labs[100]}
 							borderColour={sourcePalette.neutral[60]}
 							sectionId="labs-header"
 						>

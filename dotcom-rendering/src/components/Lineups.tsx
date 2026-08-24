@@ -13,6 +13,7 @@ import type {
 	FootballMatchStats,
 	FootballMatchTeamWithStats,
 	PlayerEvent,
+	Substitution,
 } from '../footballMatchStats';
 import { palette } from '../palette';
 import Union from '../static/icons/Union.svg';
@@ -76,11 +77,17 @@ export const Lineups = ({ matchStats }: Props) => {
 };
 
 const Event = ({
+	eventId,
 	type,
 	time,
+	substitutions,
+	isSubstitute,
 }: {
-	type: 'substitution' | 'dismissal' | 'booking';
+	eventId: string;
+	type: 'substitution' | 'substitution-injury' | 'dismissal' | 'booking';
 	time: string;
+	substitutions: Substitution[];
+	isSubstitute: boolean;
 }) => {
 	switch (type) {
 		case 'dismissal':
@@ -100,6 +107,13 @@ const Event = ({
 				/>
 			);
 		case 'substitution':
+		case 'substitution-injury': {
+			const substitutionEvent = substitutions.find(
+				(substitution) => substitution.eventId === eventId,
+			);
+
+			const playerSubstitutedIn = `${substitutionEvent?.name.charAt(0).toUpperCase()}. ${substitutionEvent?.lastName}`;
+
 			return (
 				<span
 					role="img"
@@ -107,9 +121,10 @@ const Event = ({
 					css={substitute}
 				>
 					<Union />
-					{time}
+					{!isSubstitute && playerSubstitutedIn} {time}&apos;
 				</span>
 			);
+		}
 	}
 };
 
@@ -154,8 +169,11 @@ const PlayerList = ({
 						{player.events.map((event: PlayerEvent) => (
 							<Event
 								key={event.minute + event.kind}
+								eventId={event.id}
 								type={event.kind}
 								time={event.minute.toString()}
+								substitutions={team.substitutions}
+								isSubstitute={isSubstitute}
 							/>
 						))}
 					</li>

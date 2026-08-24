@@ -18,6 +18,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
+import { type LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
 import {
@@ -39,6 +40,7 @@ import { StarRating } from './StarRating/StarRating';
 type Props = {
 	headlineString: string;
 	format: ArticleFormat;
+	layoutType?: LayoutType;
 	byline?: string;
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
@@ -214,7 +216,16 @@ const invertedStyles = css`
 	box-decoration-break: clone;
 `;
 
-const immersiveStyles = css`
+const legacyInvertedStyles = css`
+	white-space: pre-wrap;
+	padding-right: ${space[1]}px;
+	padding-bottom: ${space[1]}px;
+	box-shadow: -6px 0 0 ${themePalette('--headline-background')};
+	/* Box decoration is required to push the box shadow out on Firefox */
+	box-decoration-break: clone;
+`;
+
+const legacyImmersiveStyles = css`
 	min-height: 112px;
 	padding-bottom: ${space[6]}px;
 	padding-left: ${space[1]}px;
@@ -230,14 +241,55 @@ const immersiveStyles = css`
 	margin-right: ${space[5]}px;
 `;
 
+const legacyImmersiveWrapper = css`
+	margin-left: 6px;
+
+	${from.tablet} {
+		margin-left: 16px;
+	}
+
+	${from.leftCol} {
+		margin-left: 25px;
+	}
+
+	flex-grow: 1;
+	z-index: ${getZIndex('articleHeadline')};
+
+	${until.mobileLandscape} {
+		margin-right: 40px;
+	}
+`;
+
+const legacyInvertedText = css`
+	white-space: pre-wrap;
+	padding-bottom: ${space[1]}px;
+	padding-right: ${space[1]}px;
+`;
+
 const darkBackground = css`
 	background-color: ${themePalette('--headline-background')};
 `;
 
 const invertedText = css`
+	color: white;
+	background-color: black;
 	white-space: pre-wrap;
 	padding-bottom: ${space[1]}px;
 	padding-right: ${space[1]}px;
+
+	${from.desktop} {
+		margin-left: -10px;
+		padding-left: 10px;
+	}
+`;
+
+/**
+ * Used by the non-inverted immersive grid layouts, whose headlines sit on a
+ * plain or light blurred background rather than the shared --headline-colour
+ * (used by the legacy immersive layout and the inverted grid layout).
+ */
+const gridHeadlineText = css`
+	color: ${themePalette('--immersive-grid-headline-colour')};
 `;
 
 const maxWidth = css`
@@ -255,35 +307,6 @@ const invertedWrapper = css`
 	margin-left: 6px;
 `;
 
-const immersiveWrapper = css`
-	/*
-        Make sure we vertically align the headline font with the body font
-    */
-	margin-left: 6px;
-
-	${from.tablet} {
-		margin-left: 16px;
-	}
-
-	${from.leftCol} {
-		margin-left: 25px;
-	}
-
-	/*
-        We need this grow to ensure the headline fills the main content column
-    */
-	flex-grow: 1;
-	/*
-        This z-index is what ensures the headline text shows above the pseudo black
-        box that extends the black background to the right
-    */
-	z-index: ${getZIndex('articleHeadline')};
-
-	${until.mobileLandscape} {
-		margin-right: 40px;
-	}
-`;
-
 // Due to MainMedia using position: relative, this seems to effect the rendering order
 // To mitigate we use z-index
 // TODO: find a cleaner solution
@@ -291,60 +314,83 @@ const zIndex = css`
 	z-index: 1;
 `;
 
-const ageWarningMargins = (format: ArticleFormat) => {
+const ageWarningMargins = (
+	format: ArticleFormat,
+	isLegacyImmersive: boolean,
+) => {
 	if (format.design === ArticleDesign.Gallery) {
 		return '';
 	}
-	return format.display === ArticleDisplay.Immersive
-		? css`
-				margin-left: 0px;
-				margin-bottom: 0px;
+	if (format.display === ArticleDisplay.Immersive) {
+		return isLegacyImmersive
+			? css`
+					margin-left: 0;
+					margin-bottom: 0;
 
-				${from.tablet} {
-					margin-left: 10px;
-				}
+					${from.tablet} {
+						margin-left: 10px;
+					}
 
-				${from.leftCol} {
-					margin-left: 20px;
-				}
-			`
-		: css`
-				margin-top: 12px;
-				margin-left: -10px;
-				margin-bottom: 6px;
+					${from.leftCol} {
+						margin-left: 20px;
+					}
+				`
+			: '';
+	}
+	return css`
+		margin-top: 12px;
+		margin-left: -10px;
+		margin-bottom: 6px;
 
-				${from.tablet} {
-					margin-left: -20px;
-				}
+		${from.tablet} {
+			margin-left: -20px;
+		}
 
-				${from.leftCol} {
-					margin-left: -10px;
-					margin-top: 0;
-				}
-			`;
+		${from.leftCol} {
+			margin-left: -10px;
+			margin-top: 0;
+		}
+	`;
 };
-
-const backgroundStyles = css`
-	background-color: ${themePalette('--age-warning-wrapper-background')};
-`;
 
 const WithAgeWarning = ({
 	tags,
 	webPublicationDateDeprecated,
 	format,
 	children,
+	snapToInverted = false,
+	isLegacyImmersive = false,
 }: {
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
 	format: ArticleFormat;
 	children: React.ReactNode;
+	snapToInverted?: boolean;
+	isLegacyImmersive?: boolean;
 }) => {
 	const age = getAgeWarning(tags, webPublicationDateDeprecated);
 
 	if (age) {
 		return (
 			<>
-				<div css={[backgroundStyles, ageWarningMargins(format)]}>
+				<div
+					css={[
+						ageWarningMargins(format, isLegacyImmersive),
+						isLegacyImmersive &&
+							css`
+								background-color: ${themePalette(
+									'--age-warning-wrapper-background',
+								)};
+							`,
+						snapToInverted && !isLegacyImmersive
+							? css`
+									${from.desktop} {
+										margin-left: -10px;
+									}
+								`
+							: '',
+					]}
+				>
 					<AgeWarning age={age} />
 				</div>
 				{children}
@@ -433,6 +479,7 @@ const galleryStyles = css`
 export const ArticleHeadline = ({
 	headlineString,
 	format,
+	layoutType,
 	tags,
 	byline,
 	webPublicationDateDeprecated,
@@ -440,6 +487,8 @@ export const ArticleHeadline = ({
 	isMatch,
 	starRating,
 }: Props) => {
+	const isInverted = layoutType === 'immersiveLandscapeDefault';
+	const isLegacyImmersive = layoutType == null;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
@@ -465,12 +514,18 @@ export const ArticleHeadline = ({
 										format.theme === ArticleSpecial.Labs
 											? labsFont
 											: headlineFont(format),
-										invertedText,
-										css`
-											color: ${themePalette(
-												'--headline-colour',
-											)};
-										`,
+										isLegacyImmersive
+											? [
+													legacyInvertedText,
+													css`
+														color: ${themePalette(
+															'--headline-colour',
+														)};
+													`,
+												]
+											: isInverted
+												? [invertedText, darkBackground]
+												: gridHeadlineText,
 									]}
 								>
 									{headlineString}
@@ -496,16 +551,24 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated
 							}
 							format={format}
+							snapToInverted={isInverted}
+							isLegacyImmersive={isLegacyImmersive}
 						>
 							<h1
 								css={[
-									immersiveWrapper,
-									darkBackground,
-									css`
-										color: ${themePalette(
-											'--headline-colour',
-										)};
-									`,
+									isLegacyImmersive
+										? [
+												legacyImmersiveWrapper,
+												darkBackground,
+												css`
+													color: ${themePalette(
+														'--headline-colour',
+													)};
+												`,
+											]
+										: isInverted
+											? [invertedText, darkBackground]
+											: gridHeadlineText,
 								]}
 							>
 								<span
@@ -514,8 +577,10 @@ export const ArticleHeadline = ({
 											? jumboLabsFont
 											: headlineFont(format),
 										maxWidth,
-										invertedStyles,
-										immersiveStyles,
+										isLegacyImmersive && [
+											legacyInvertedStyles,
+											legacyImmersiveStyles,
+										],
 										displayBlock,
 									]}
 								>
