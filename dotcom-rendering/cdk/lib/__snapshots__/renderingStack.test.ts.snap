@@ -5,11 +5,11 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
   "Metadata": {
     "gu:cdk:constructs": [
       "GuDistributionBucketParameter",
-      "GuAllowPolicy",
-      "GuAllowPolicy",
-      "GuAllowPolicy",
       "GuVpcParameter",
       "GuSubnetListParameter",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
       "GuSubnetListParameter",
       "GuLoadBalancedAppExperimental",
       "GuInstanceRole",
@@ -1620,11 +1620,11 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
   "Metadata": {
     "gu:cdk:constructs": [
       "GuDistributionBucketParameter",
-      "GuAllowPolicy",
-      "GuAllowPolicy",
-      "GuAllowPolicy",
       "GuVpcParameter",
       "GuSubnetListParameter",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
       "GuSubnetListParameter",
       "GuLoadBalancedAppExperimental",
       "GuInstanceRole",
@@ -1646,6 +1646,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "GuAccessLoggingBucketParameter",
       "GuHttpsApplicationListener",
       "GuSecurityGroup",
+      "GuHttpsEgressSecurityGroup",
       "GuCname",
     ],
     "gu:cdk:version": "TEST",
@@ -1955,6 +1956,694 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "Ec2ToEcsTrafficMirrorAllowAllInbound46A802A0": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "RuleAction": "accept",
+        "RuleNumber": 100,
+        "SourceCidrBlock": "0.0.0.0/0",
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TrafficDirection": "ingress",
+        "TrafficMirrorFilterId": {
+          "Fn::GetAtt": [
+            "Ec2ToEcsTrafficMirrorFilter8854C552",
+            "Id",
+          ],
+        },
+      },
+      "Type": "AWS::EC2::TrafficMirrorFilterRule",
+    },
+    "Ec2ToEcsTrafficMirrorAsgInstanceLaunchRule32C9EB6F": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "EventPattern": {
+          "detail": {
+            "AutoScalingGroupName": [
+              {
+                "Ref": "AutoScalingGroupTagpagerenderingASG7F7E0748",
+              },
+            ],
+          },
+          "detail-type": [
+            "EC2 Instance Launch Successful",
+          ],
+          "source": [
+            "aws.autoscaling",
+          ],
+        },
+        "State": "ENABLED",
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "Ec2ToEcsTrafficMirrorSessionAttacherLambdaCA9F6846",
+                "Arn",
+              ],
+            },
+            "Id": "Target0",
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+    "Ec2ToEcsTrafficMirrorAsgInstanceLaunchRuleAllowEventRuleTagPageRenderingCODEEc2ToEcsTrafficMirrorSessionAttacherLambda0B880B1929CEF922": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "Ec2ToEcsTrafficMirrorSessionAttacherLambdaCA9F6846",
+            "Arn",
+          ],
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "Ec2ToEcsTrafficMirrorAsgInstanceLaunchRule32C9EB6F",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "Ec2ToEcsTrafficMirrorFilter8854C552": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "Description": "Traffic mirror filter created by Ec2ToEcsTrafficMirror",
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::TrafficMirrorFilter",
+    },
+    "Ec2ToEcsTrafficMirrorMirroringHandlerEcsTaskDefinitionCCF3FF96": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Essential": true,
+            "Image": "nginx",
+            "Name": "MirroringHandlerHealthCheckContainer",
+            "PortMappings": [
+              {
+                "ContainerPort": 80,
+                "HostPort": 80,
+                "Protocol": "tcp",
+              },
+            ],
+            "ReadonlyRootFilesystem": true,
+          },
+          {
+            "Command": [
+              "--input-raw",
+              ":80",
+              "--input-raw-engine",
+              "vxlan",
+              "--output-http",
+              {
+                "Fn::Join": [
+                  "",
+                  [
+                    "http://",
+                    {
+                      "Fn::GetAtt": [
+                        "LoadBalancerTagpagerenderingB0B7AC4E",
+                        "DNSName",
+                      ],
+                    },
+                  ],
+                ],
+              },
+            ],
+            "Essential": true,
+            "Image": "jauderho/goreplay",
+            "Name": "MirroringHandlerContainer",
+            "PortMappings": [
+              {
+                "ContainerPort": 4789,
+                "HostPort": 4789,
+                "Protocol": "udp",
+              },
+            ],
+            "ReadonlyRootFilesystem": true,
+          },
+        ],
+        "Cpu": "1024",
+        "Family": "TagPageRenderingCODEEc2ToEcsTrafficMirrorMirroringHandlerEcsTaskDefinition7E6AD87A",
+        "Memory": "2048",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE",
+        ],
+        "RuntimePlatform": {
+          "CpuArchitecture": "ARM64",
+          "OperatingSystemFamily": "LINUX",
+        },
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "Ec2ToEcsTrafficMirrorMirroringHandlerEcsTaskDefinitionTaskRoleD1815E9F",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "Ec2ToEcsTrafficMirrorMirroringHandlerEcsTaskDefinitionTaskRoleD1815E9F": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "Ec2ToEcsTrafficMirrorMirroringHandlerFargateService6F2CB37C": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "Ec2ToEcsTrafficMirrorMirroringHandlerEcsTaskDefinitionTaskRoleD1815E9F",
+        "Ec2ToEcsTrafficMirrorMirroringHandlerNLBMirroringHandlerListenerECSHandlersGroupCB72232A",
+        "Ec2ToEcsTrafficMirrorMirroringHandlerNLBMirroringHandlerListenerDC91CFB0",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "Cluster": "MirroringHandlerEcsCluster",
+        "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
+          "DeploymentCircuitBreaker": {
+            "Enable": true,
+            "Rollback": true,
+          },
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 100,
+        },
+        "DeploymentController": {
+          "Type": "ECS",
+        },
+        "EnableECSManagedTags": false,
+        "HealthCheckGracePeriodSeconds": 60,
+        "LaunchType": "FARGATE",
+        "LoadBalancers": [
+          {
+            "ContainerName": "MirroringHandlerHealthCheckContainer",
+            "ContainerPort": 80,
+            "TargetGroupArn": {
+              "Ref": "Ec2ToEcsTrafficMirrorMirroringHandlerNLBMirroringHandlerListenerECSHandlersGroupCB72232A",
+            },
+          },
+        ],
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "GuHttpsEgressSecurityGroupUndefinedecs0AE96607",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": {
+              "Ref": "tagpagerenderingPrivateSubnets",
+            },
+          },
+        },
+        "PropagateTags": "SERVICE",
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TaskDefinition": {
+          "Ref": "Ec2ToEcsTrafficMirrorMirroringHandlerEcsTaskDefinitionCCF3FF96",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "Ec2ToEcsTrafficMirrorMirroringHandlerNLB41FDD9B0": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "LoadBalancerAttributes": [
+          {
+            "Key": "deletion_protection.enabled",
+            "Value": "false",
+          },
+        ],
+        "Scheme": "internal",
+        "Subnets": {
+          "Ref": "tagpagerenderingPrivateSubnets",
+        },
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "Type": "network",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    },
+    "Ec2ToEcsTrafficMirrorMirroringHandlerNLBMirroringHandlerListenerDC91CFB0": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "DefaultActions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Ec2ToEcsTrafficMirrorMirroringHandlerNLBMirroringHandlerListenerECSHandlersGroupCB72232A",
+            },
+            "Type": "forward",
+          },
+        ],
+        "LoadBalancerArn": {
+          "Ref": "Ec2ToEcsTrafficMirrorMirroringHandlerNLB41FDD9B0",
+        },
+        "Port": 4789,
+        "Protocol": "UDP",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "Ec2ToEcsTrafficMirrorMirroringHandlerNLBMirroringHandlerListenerECSHandlersGroupCB72232A": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "Port": 4789,
+        "Protocol": "UDP",
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TargetType": "ip",
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "Ec2ToEcsTrafficMirrorSessionAttacherLambdaCA9F6846": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "Ec2ToEcsTrafficMirrorSessionAttacherLambdaServiceRoleDefaultPolicyA9AD3ECB",
+        "Ec2ToEcsTrafficMirrorSessionAttacherLambdaServiceRoleBCEFCFAB",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "Code": {
+          "ZipFile": "
+		      const { EC2Client, DescribeInstancesCommand, CreateTrafficMirrorSessionCommand } = require('@aws-sdk/client-ec2');
+		      const ec2 = new EC2Client();
+
+		      exports.handler = async (event) => {
+		        const instanceId = event.detail.EC2InstanceId;
+		        const targetId = process.env.TARGET_ID;
+		        const filterId = process.env.FILTER_ID;
+
+		        console.log(\`Processing launch event for instance: \${instanceId}\`);
+
+		        // Fetch instance details to get primary ENI ID
+		        const describeRes = await ec2.send(new DescribeInstancesCommand({ InstanceIds: [instanceId] }));
+		        const instance = describeRes.Reservations?.[0]?.Instances?.[0];
+		        const primaryEniId = instance?.NetworkInterfaces?.[0]?.NetworkInterfaceId;
+
+		        if (!primaryEniId) {
+		          throw new Error(\`Unable to find primary ENI for instance: \${instanceId}\`);
+		        }
+
+		        // Attach Traffic Mirror Session (ASG instance ENI -> EC2 Worker Target ENI)
+		        const sessionRes = await ec2.send(new CreateTrafficMirrorSessionCommand({
+		          NetworkInterfaceId: primaryEniId,
+		          TrafficMirrorTargetId: targetId,
+		          TrafficMirrorFilterId: filterId,
+		          SessionNumber: 1,
+		          Description: \`Auto-attached traffic mirror for instance \${instanceId}\`,
+		        }));
+
+		        console.log(\`Successfully created session: \${sessionRes.TrafficMirrorSession.TrafficMirrorSessionId}\`);
+		      };
+		    ",
+        },
+        "Environment": {
+          "Variables": {
+            "FILTER_ID": {
+              "Fn::GetAtt": [
+                "Ec2ToEcsTrafficMirrorFilter8854C552",
+                "Id",
+              ],
+            },
+            "TARGET_ID": {
+              "Fn::GetAtt": [
+                "Ec2ToEcsTrafficMirrorTarget64F0FC7C",
+                "Id",
+              ],
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "Ec2ToEcsTrafficMirrorSessionAttacherLambdaServiceRoleBCEFCFAB",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs24.x",
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "Timeout": 30,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "Ec2ToEcsTrafficMirrorSessionAttacherLambdaServiceRoleBCEFCFAB": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "Ec2ToEcsTrafficMirrorSessionAttacherLambdaServiceRoleDefaultPolicyA9AD3ECB": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ec2:DescribeInstances",
+                "ec2:CreateTrafficMirrorSession",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "Ec2ToEcsTrafficMirrorSessionAttacherLambdaServiceRoleDefaultPolicyA9AD3ECB",
+        "Roles": [
+          {
+            "Ref": "Ec2ToEcsTrafficMirrorSessionAttacherLambdaServiceRoleBCEFCFAB",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "Ec2ToEcsTrafficMirrorTarget64F0FC7C": {
+      "DependsOn": [
+        "AutoScalingGroupTagpagerenderingASG7F7E0748",
+        "LoadBalancerTagpagerenderingB0B7AC4E",
+        "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerendering51E7AF38900020A4AE4F",
+        "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F",
+      ],
+      "Properties": {
+        "NetworkLoadBalancerArn": {
+          "Ref": "Ec2ToEcsTrafficMirrorMirroringHandlerNLB41FDD9B0",
+        },
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::TrafficMirrorTarget",
     },
     "EcsService81FC6EF6": {
       "DependsOn": [
@@ -2654,6 +3343,46 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "ToPort": 9000,
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupUndefinedecs0AE96607": {
+      "Properties": {
+        "GroupDescription": "Allow all outbound HTTPS traffic",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound HTTPS traffic",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "undefined-ecs",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
     },
     "GuLogShippingPolicy981BFE5A": {
       "Properties": {

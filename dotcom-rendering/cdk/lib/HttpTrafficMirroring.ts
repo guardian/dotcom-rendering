@@ -1,19 +1,38 @@
-import {
-	Duration,
-	aws_ec2 as ec2,
-	aws_events as events,
-	aws_events_targets as targets,
-	aws_iam as iam,
-	aws_lambda as lambda,
-} from 'aws-cdk-lib';
+import type { GuStack } from '@guardian/cdk/lib/constructs/core';
+import { GuHttpsEgressSecurityGroup } from '@guardian/cdk/lib/constructs/ec2/security-groups/base';
+import { Duration, type aws_ec2 as ec2 } from 'aws-cdk-lib';
 import type { AutoScalingGroup } from 'aws-cdk-lib/aws-autoscaling';
-import { Instance, ISubnet, IVpc } from 'aws-cdk-lib/aws-ec2';
-import type { ApplicationLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancingv2';
+import type { ISubnet, IVpc } from 'aws-cdk-lib/aws-ec2';
+import {
+	CfnTrafficMirrorFilter,
+	CfnTrafficMirrorFilterRule,
+	CfnTrafficMirrorTarget,
+} from 'aws-cdk-lib/aws-ec2';
+import {
+	Cluster,
+	ContainerImage,
+	CpuArchitecture,
+	Protocol as ECSProtocol,
+	FargateService,
+	FargateTaskDefinition,
+	OperatingSystemFamily,
+	PropagatedTagSource,
+} from 'aws-cdk-lib/aws-ecs';
+import {
+	type ApplicationLoadBalancer,
+	Protocol as ELBProtocol,
+	NetworkLoadBalancer,
+} from 'aws-cdk-lib/aws-elasticloadbalancingv2';
+import * as events from 'aws-cdk-lib/aws-events';
+import { LambdaFunction } from 'aws-cdk-lib/aws-events-targets';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 
 export interface HttpTrafficMirroringProps {
 	readonly vpc: IVpc;
 	readonly privateSubnets: ISubnet[];
+	readonly app: GuStack;
 	readonly availabilityZone?: string;
 	readonly trafficSource: AutoScalingGroup;
 	readonly trafficTarget: ApplicationLoadBalancer;
@@ -35,31 +54,27 @@ export class HttpTrafficMirroring extends Construct {
 		this.node.addDependency(props.trafficSource);
 		this.node.addDependency(props.trafficTarget);
 
-		const handlerInstance = this.createEc2Handler(
+		const handlerNlb = this.createHandler(
 			props.vpc,
 			props.privateSubnets,
+			props.app,
 			props.trafficTarget,
-			props.availabilityZone,
 		);
 
-		// Ensure the ASG instances can send VXLAN (UDP 4789) to the handler
-		handlerInstance.connections.allowFrom(
-			props.trafficSource,
-			ec2.Port.udp(4789),
-			'Allow VXLAN mirrored traffic from ASG instances',
+		const mirrorTarget: CfnTrafficMirrorTarget = new CfnTrafficMirrorTarget(
+			this,
+			'Target',
+			{
+				networkLoadBalancerArn: handlerNlb.loadBalancerArn,
+			},
 		);
-
-		const mirrorTarget: ec2.CfnTrafficMirrorTarget =
-			new ec2.CfnTrafficMirrorTarget(this, 'Target', {
-				networkInterfaceId: this.getENIId(handlerInstance),
-			});
 
 		const mirrorFilter: ec2.CfnTrafficMirrorFilter =
-			new ec2.CfnTrafficMirrorFilter(this, 'Filter', {
+			new CfnTrafficMirrorFilter(this, 'Filter', {
 				description: `Traffic mirror filter created by ${id}`,
 			});
 
-		new ec2.CfnTrafficMirrorFilterRule(this, 'AllowAllInbound', {
+		new CfnTrafficMirrorFilterRule(this, 'AllowAllInbound', {
 			trafficMirrorFilterId: mirrorFilter.attrId,
 			ruleAction: 'accept',
 			ruleNumber: 100,
@@ -69,45 +84,46 @@ export class HttpTrafficMirroring extends Construct {
 		});
 
 		// Lambda function to attach Mirror Session on ASG instance launch
+		// TODO: Will this always attach and run before the very first asg instances are created?
 		const attacherLambda = new lambda.Function(
 			this,
 			'SessionAttacherLambda',
 			{
-				runtime: lambda.Runtime.NODEJS_20_X,
+				runtime: lambda.Runtime.NODEJS_24_X,
 				handler: 'index.handler',
 				timeout: Duration.seconds(30),
 				code: lambda.Code.fromInline(`
-        const { EC2Client, DescribeInstancesCommand, CreateTrafficMirrorSessionCommand } = require('@aws-sdk/client-ec2');
-        const ec2 = new EC2Client();
+		      const { EC2Client, DescribeInstancesCommand, CreateTrafficMirrorSessionCommand } = require('@aws-sdk/client-ec2');
+		      const ec2 = new EC2Client();
 
-        exports.handler = async (event) => {
-          const instanceId = event.detail.EC2InstanceId;
-          const targetId = process.env.TARGET_ID;
-          const filterId = process.env.FILTER_ID;
+		      exports.handler = async (event) => {
+		        const instanceId = event.detail.EC2InstanceId;
+		        const targetId = process.env.TARGET_ID;
+		        const filterId = process.env.FILTER_ID;
 
-          console.log(\`Processing launch event for instance: \${instanceId}\`);
+		        console.log(\`Processing launch event for instance: \${instanceId}\`);
 
-          // Fetch instance details to get primary ENI ID
-          const describeRes = await ec2.send(new DescribeInstancesCommand({ InstanceIds: [instanceId] }));
-          const instance = describeRes.Reservations?.[0]?.Instances?.[0];
-          const primaryEniId = instance?.NetworkInterfaces?.[0]?.NetworkInterfaceId;
+		        // Fetch instance details to get primary ENI ID
+		        const describeRes = await ec2.send(new DescribeInstancesCommand({ InstanceIds: [instanceId] }));
+		        const instance = describeRes.Reservations?.[0]?.Instances?.[0];
+		        const primaryEniId = instance?.NetworkInterfaces?.[0]?.NetworkInterfaceId;
 
-          if (!primaryEniId) {
-            throw new Error(\`Unable to find primary ENI for instance: \${instanceId}\`);
-          }
+		        if (!primaryEniId) {
+		          throw new Error(\`Unable to find primary ENI for instance: \${instanceId}\`);
+		        }
 
-          // Attach Traffic Mirror Session (ASG instance ENI -> EC2 Worker Target ENI)
-          const sessionRes = await ec2.send(new CreateTrafficMirrorSessionCommand({
-            NetworkInterfaceId: primaryEniId,
-            TrafficMirrorTargetId: targetId,
-            TrafficMirrorFilterId: filterId,
-            SessionNumber: 1,
-            Description: \`Auto-attached traffic mirror for instance \${instanceId}\`,
-          }));
+		        // Attach Traffic Mirror Session (ASG instance ENI -> EC2 Worker Target ENI)
+		        const sessionRes = await ec2.send(new CreateTrafficMirrorSessionCommand({
+		          NetworkInterfaceId: primaryEniId,
+		          TrafficMirrorTargetId: targetId,
+		          TrafficMirrorFilterId: filterId,
+		          SessionNumber: 1,
+		          Description: \`Auto-attached traffic mirror for instance \${instanceId}\`,
+		        }));
 
-          console.log(\`Successfully created session: \${sessionRes.TrafficMirrorSession.TrafficMirrorSessionId}\`);
-        };
-      `),
+		        console.log(\`Successfully created session: \${sessionRes.TrafficMirrorSession.TrafficMirrorSessionId}\`);
+		      };
+		    `),
 				environment: {
 					TARGET_ID: mirrorTarget.attrId,
 					FILTER_ID: mirrorFilter.attrId,
@@ -126,7 +142,7 @@ export class HttpTrafficMirroring extends Construct {
 			}),
 		);
 
-		// 5. EventBridge Rule to trigger Lambda on ASG Instance Launch
+		// EventBridge Rule to trigger Lambda on ASG Instance Launch
 		const launchRule = new events.Rule(this, 'AsgInstanceLaunchRule', {
 			eventPattern: {
 				source: ['aws.autoscaling'],
@@ -139,95 +155,116 @@ export class HttpTrafficMirroring extends Construct {
 			},
 		});
 
-		launchRule.addTarget(new targets.LambdaFunction(attacherLambda));
+		launchRule.addTarget(new LambdaFunction(attacherLambda));
 	}
 
-	/**
-	 * Spawns an EC2 instance that strips VXLAN headers and replays HTTP payloads to the Target ALB.
-	 */
-	private createEc2Handler(
+	private createHandler(
 		vpc: ec2.IVpc,
 		subnets: ISubnet[],
-		targetAlb: ApplicationLoadBalancer,
-		availabilityZone?: string,
-	): ec2.Instance {
-		const worker = new ec2.Instance(this, 'VXLANHandler', {
-			vpc: vpc,
-			vpcSubnets: { subnets: subnets },
-			// availabilityZone: availabilityZone,
-			instanceType: ec2.InstanceType.of(
-				ec2.InstanceClass.T3,
-				ec2.InstanceSize.MEDIUM,
-			),
-			machineImage: ec2.MachineImage.latestAmazonLinux2023(),
-		});
-
-		// Write a UserData script to unwrap VXLAN on port 4789 and forward HTTP requests to the ALB
-		worker.userData.addCommands(
-			'yum update -y',
-			'yum install -y python3-pip gcc python3-devel',
-			'pip3 install scapy requests',
-
-			// Minimal Python daemon to capture UDP 4789 (VXLAN), strip frame headers, and fire non-blocking HTTP requests
-			"cat << 'EOF' > /opt/vxlan_unwrapper.py",
-			'import socket',
-			'import threading',
-			'import requests',
-			'from scapy.all import Ether, IP, TCP, Raw',
-			'',
-			`TARGET_ALB_URL = "http://${targetAlb.loadBalancerDnsName}"`,
-			'',
-			'def forward_request(method, path, headers, payload):',
-			'    try:',
-			'        # Send HTTP request to ALB, fire-and-forget (timeout=0.1 / ignore response)',
-			'        requests.request(method, TARGET_ALB_URL + path, headers=headers, data=payload, timeout=0.1)',
-			'    except Exception:',
-			'        pass',
-			'',
-			'def listen_vxlan():',
-			'    sock = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_UDP)',
-			'    sock.bind(("0.0.0.0", 4789))',
-			'    while True:',
-			'        data, _ = sock.recvfrom(65535)',
-			'        # Skip UDP header (8 bytes) & VXLAN header (8 bytes)',
-			'        inner_packet = data[16:]',
-			'        try:',
-			'            pkt = Ether(inner_packet)',
-			'            if pkt.haslayer(Raw) and pkt.haslayer(TCP):',
-			'                payload = pkt[Raw].load.decode("utf-8", errors="ignore")',
-			'                if payload.startswith(("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")):',
-			'                    lines = payload.split("\\r\\n")',
-			'                    parts = lines[0].split(" ")',
-			'                    if len(parts) >= 2:',
-			'                        method, path = parts[0], parts[1]',
-			'                        threading.Thread(target=forward_request, args=(method, path, {}, None)).start()',
-			'        except Exception:',
-			'            pass',
-			'',
-			'if __name__ == "__main__":',
-			'    listen_vxlan()',
-			'EOF',
-
-			// Run as a system service
-			"cat << 'EOF' > /etc/systemd/system/vxlan-worker.service",
-			'[Unit]',
-			'Description=VXLAN Unwrapper and HTTP Forwarder',
-			'After=network.target',
-			'[Service]',
-			'ExecStart=/usr/bin/python3 /opt/vxlan_unwrapper.py',
-			'Restart=always',
-			'[Install]',
-			'WantedBy=multi-user.target',
-			'EOF',
-
-			'systemctl daemon-reload',
-			'systemctl enable --now vxlan-worker',
+		stack: GuStack,
+		target: ApplicationLoadBalancer,
+	): NetworkLoadBalancer {
+		const cluster = Cluster.fromClusterAttributes(
+			this,
+			'MirroringHandlerEcsCluster',
+			{
+				clusterName: 'MirroringHandlerEcsCluster',
+				vpc,
+			},
 		);
 
-		return worker;
-	}
+		const taskDefinition = new FargateTaskDefinition(
+			this,
+			'MirroringHandlerEcsTaskDefinition',
+			{
+				memoryLimitMiB: 2048,
+				cpu: 1024,
+				runtimePlatform: {
+					cpuArchitecture: CpuArchitecture.ARM64,
+					operatingSystemFamily: OperatingSystemFamily.LINUX,
+				},
+			},
+		);
 
-	getENIId(instance: Instance): string {
-		return '';
+		// TCP for health check
+		// We have to add this first as the network load balancer will send health check traffic to the default container.
+		// If we don't add this first then we fail to add the ECS service to the target group as there is no tcp endpoint.
+		// Can not do health check over UDP.
+		//
+		// Nginx by default serves a simple welcome page on port 80, which can pass the health check.
+		taskDefinition.addContainer('MirroringHandlerHealthCheckContainer', {
+			image: ContainerImage.fromRegistry('nginx'),
+			portMappings: [
+				{ containerPort: 80, protocol: ECSProtocol.TCP, hostPort: 80 },
+			],
+			// TODO: logging: fireLensLogDriver,
+			readonlyRootFilesystem: true,
+		});
+
+		taskDefinition.addContainer('MirroringHandlerContainer', {
+			image: ContainerImage.fromRegistry('jauderho/goreplay'),
+			portMappings: [
+				{
+					containerPort: 4789,
+					protocol: ECSProtocol.UDP,
+					hostPort: 4789,
+				},
+			],
+			command: [
+				'--input-raw',
+				':80',
+				'--input-raw-engine',
+				'vxlan',
+				'--output-http',
+				`http://${target.loadBalancerDnsName}`,
+			],
+			// TODO: logging: fireLensLogDriver,
+			readonlyRootFilesystem: true,
+		});
+
+		const fargateService = new FargateService(
+			this,
+			'MirroringHandlerFargateService',
+			{
+				cluster,
+				taskDefinition,
+				vpcSubnets: { subnets },
+				// Important for service deployments; with the AWS defaults the service can be scaled down when deploying
+				minHealthyPercent: 100,
+				// Also important for service deployments; with the AWS defaults we don't get a fast failure when deploying a 'bad' build
+				circuitBreaker: { enable: true, rollback: true },
+				propagateTags: PropagatedTagSource.SERVICE,
+				// By default, AWS will create a new security group which allows all outbound traffic
+				// We don't want this so explicitly allow outbound HTTPS only
+				// This is what we do for the current GuEc2App pattern:
+				// https://github.com/guardian/cdk/blob/3b5688637024642055ed0bf576f668e56e40830d/src/constructs/autoscaling/asg.ts#L143-L145
+				securityGroups: [
+					GuHttpsEgressSecurityGroup.forVpc(stack, {
+						app: `${stack.app}-ecs`,
+						vpc,
+					}),
+				],
+			},
+		);
+
+		const nlb = new NetworkLoadBalancer(this, 'MirroringHandlerNLB', {
+			vpc,
+			internetFacing: false, // Don't think this is needed given the subnets, but i want to be safe
+			vpcSubnets: { subnets },
+		});
+
+		const listener = nlb.addListener('MirroringHandlerListener', {
+			port: 4789,
+			protocol: ELBProtocol.UDP,
+		});
+
+		const targetGroup = listener.addTargets('ECSHandlers', {
+			port: 4789,
+			protocol: ELBProtocol.UDP,
+		});
+
+		targetGroup.addTarget(fargateService);
+
+		return nlb;
 	}
 }
