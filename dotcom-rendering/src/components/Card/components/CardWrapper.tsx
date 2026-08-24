@@ -13,7 +13,6 @@ type Props = {
 	showTopBarMobile: boolean;
 	containerPalette?: DCRContainerPalette;
 	topBarColour?: string;
-	isLoopAndInLoopClickTestVariant?: boolean;
 };
 
 const baseCardStyles = css`
@@ -42,7 +41,7 @@ const baseCardStyles = css`
 	text-decoration: none;
 `;
 
-const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
+const hoverStyles = css`
 	:hover .media-overlay {
 		width: 100%;
 		height: 100%;
@@ -50,6 +49,7 @@ const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 	}
 
 	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
+
 	:hover .card-headline .show-underline {
 		text-decoration: underline;
 	}
@@ -58,19 +58,17 @@ const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 	  * We want to prevent the general hover styles applying when
 	  * a click won't result in navigating to the main article
 	*/
+
 	:has(
 		ul.sublinks:hover,
-		.video-container:not(
-				${isLoopAndInLoopClickTestVariant
-					? `.cinemagraph, .loop`
-					: `.cinemagraph`}
-			):hover,
+		.video-container:not(.cinemagraph):hover,
 		.slideshow-carousel-footer:hover,
 		.branding-logo:hover
 	) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
+
 		.media-overlay {
 			background-color: transparent;
 		}
@@ -105,7 +103,6 @@ export const CardWrapper = ({
 	showTopBarMobile,
 	containerPalette,
 	topBarColour = palette('--card-border-top'),
-	isLoopAndInLoopClickTestVariant,
 }: Props) => {
 	return (
 		<FormatBoundary format={format}>
@@ -113,7 +110,7 @@ export const CardWrapper = ({
 				<div
 					css={[
 						baseCardStyles,
-						hoverStyles(isLoopAndInLoopClickTestVariant === true),
+						hoverStyles,
 						showTopBarDesktop && desktopTopBarStyles(topBarColour),
 						showTopBarMobile && mobileTopBarStyles(topBarColour),
 					]}
