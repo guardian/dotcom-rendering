@@ -1,16 +1,13 @@
 import { palette as sourcePalette } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../../.storybook/modes';
+import preview from '../../../.storybook/preview';
 import { palette } from '../../palette';
 import { Versus } from './Versus';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Election Trackers/Versus',
 	component: Versus,
 	parameters: {
-		viewport: {
-			defaultViewport: 'mobileMedium',
-		},
 		colourSchemeBackground: {
 			dark: sourcePalette.neutral[20],
 		},
@@ -20,13 +17,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof Versus>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const UKGeneral = {
+export const UKGeneral = meta.story({
 	args: {
 		left: {
 			name: 'Labour',
@@ -56,23 +49,23 @@ export const UKGeneral = {
 		faded: false,
 		banner: undefined,
 	},
-} satisfies Story;
+});
 
-export const UKExitPoll = {
+export const UKExitPoll = meta.story({
 	args: {
 		left: {
-			name: UKGeneral.args.left.name,
-			abbreviation: UKGeneral.args.left.abbreviation,
-			image: UKGeneral.args.left.image,
-			colour: UKGeneral.args.left.colour,
+			name: UKGeneral.composed.args.left.name,
+			abbreviation: UKGeneral.composed.args.left.abbreviation,
+			image: UKGeneral.composed.args.left.image,
+			colour: UKGeneral.composed.args.left.colour,
 			value: 0,
 			description: 'seats declared',
 		},
 		right: {
-			name: UKGeneral.args.right.name,
-			abbreviation: UKGeneral.args.right.abbreviation,
-			image: UKGeneral.args.right.image,
-			colour: UKGeneral.args.right.colour,
+			name: UKGeneral.composed.args.right.name,
+			abbreviation: UKGeneral.composed.args.right.abbreviation,
+			image: UKGeneral.composed.args.right.image,
+			colour: UKGeneral.composed.args.right.colour,
 			value: 0,
 			description: 'seats declared',
 		},
@@ -85,9 +78,9 @@ export const UKExitPoll = {
 			<Story />
 		</div>
 	),
-} satisfies Story;
+});
 
-export const USPresidential = {
+export const USPresidential = meta.story({
 	args: {
 		left: {
 			name: 'Kamala Harris',
@@ -119,4 +112,32 @@ export const USPresidential = {
 		faded: false,
 		banner: undefined,
 	},
-} satisfies Story;
+});
+
+/**
+ * Results from 2024:
+ * https://www.theguardian.com/us-news/ng-interactive/2024/nov/14/us-house-senate-and-governor-elections-2024-results-from-all-50-states
+ */
+export const USHouse = meta.story({
+	args: {
+		left: {
+			name: 'Democrats',
+			abbreviation: 'Democrats',
+			value: 215,
+			change: 1,
+			image: undefined,
+			colour: palette('--us-elections-democrats'),
+		},
+		right: {
+			name: 'Republicans',
+			abbreviation: 'Republicans',
+			value: 220,
+			change: -1,
+			image: undefined,
+			colour: palette('--us-elections-republicans'),
+		},
+		colour: 'none',
+		faded: false,
+		banner: undefined,
+	},
+});
