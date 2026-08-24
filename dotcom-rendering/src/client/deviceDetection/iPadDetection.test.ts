@@ -5,7 +5,11 @@ describe('iPadDetection', () => {
 	const originalMaxTouchPoints = navigator.maxTouchPoints;
 	const originalSearch = window.location.search;
 	const setLocationSearch = (search: string) => {
-		window.history.replaceState({}, '', `${window.location.pathname}${search}`);
+		window.history.replaceState(
+			{},
+			'',
+			`${window.location.pathname}${search}`,
+		);
 	};
 
 	afterEach(() => {

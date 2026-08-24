@@ -10,7 +10,11 @@ jest.mock('../lib/useAB', () => ({
 
 describe('EnhanceAffiliateLinks', () => {
 	const setLocationSearch = (search: string) => {
-		window.history.replaceState({}, '', `${window.location.pathname}${search}`);
+		window.history.replaceState(
+			{},
+			'',
+			`${window.location.pathname}${search}`,
+		);
 	};
 
 	beforeEach(() => {

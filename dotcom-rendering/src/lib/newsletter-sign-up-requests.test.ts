@@ -4,38 +4,37 @@ import {
 	requestSingleSignUp,
 } from './newsletter-sign-up-requests';
 
-const FAKE_WINDOW = {
-	location: {
-		origin: 'www.example.com',
-		pathname: '/sample-page',
-	},
-	guardian: {
-		config: {
-			page: {
-				googleRecaptchaSiteKey: 'TEST_RECAPTCHA_SITE_KEY',
-				ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-			},
-			switches: {
-				emailSignupRecaptcha: true,
-			},
+const TEST_PATHNAME = '/sample-page';
+
+const FAKE_GUARDIAN = {
+	config: {
+		page: {
+			googleRecaptchaSiteKey: 'TEST_RECAPTCHA_SITE_KEY',
+			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		},
-		ophan: {
-			pageViewId: 'abc-123',
+		switches: {
+			emailSignupRecaptcha: true,
+		},
+	},
+	ophan: {
+		pageViewId: 'abc-123',
+	},
+};
+
+const FAKE_GUARDIAN_NO_RECAPTCHA = {
+	...FAKE_GUARDIAN,
+	config: {
+		...FAKE_GUARDIAN.config,
+		switches: {
+			emailSignupRecaptcha: false,
 		},
 	},
 };
 
-const FAKE_WINDOW_NO_RECAPTCHA = {
-	...FAKE_WINDOW,
-	guardian: {
-		...FAKE_WINDOW.guardian,
-		config: {
-			...FAKE_WINDOW.guardian.config,
-			switches: {
-				emailSignupRecaptcha: false,
-			},
-		},
-	},
+const originalGuardian = window.guardian;
+
+const setGuardian = (guardian: typeof FAKE_GUARDIAN) => {
+	window.guardian = guardian as unknown as typeof window.guardian;
 };
 
 const TEST_EMAIL = 'test@example.com';
@@ -43,22 +42,17 @@ const TEST_NEWSLETTER_IDS: [string, string] = ['id-one', 'id-two'];
 const TEST_RECAPTCHA_TOKEN = 'FAKE_TOKEN_FOR_PASSING';
 
 describe('requestMultipleSignUps', () => {
-	let windowSpy: jest.SpyInstance;
-
 	beforeEach(() => {
-		windowSpy = jest.spyOn(window, 'window', 'get');
+		window.history.replaceState({}, '', TEST_PATHNAME);
 		jestMockFetch();
 	});
 
 	afterEach(() => {
-		windowSpy.mockRestore();
+		window.guardian = originalGuardian;
 	});
 
-	const setWindow = (windowData: { [key: string]: unknown }) =>
-		windowSpy.mockImplementation(() => windowData);
-
 	it('makes a form-urlencoded POST request to /email/many', async () => {
-		setWindow(FAKE_WINDOW);
+		setGuardian(FAKE_GUARDIAN);
 		await requestMultipleSignUps(
 			TEST_EMAIL,
 			TEST_NEWSLETTER_IDS,
@@ -72,9 +66,7 @@ describe('requestMultipleSignUps', () => {
 		const method = requestInit?.method;
 		const headers = (requestInit?.headers ?? {}) as Record<string, unknown>;
 
-		expect(url).toBe(
-			`${FAKE_WINDOW.guardian.config.page.ajaxUrl}/email/many`,
-		);
+		expect(url).toBe(`${FAKE_GUARDIAN.config.page.ajaxUrl}/email/many`);
 		expect(method).toBe('POST');
 		expect(headers['Accept']).toEqual('application/json');
 		expect(headers['Content-Type']).toEqual(
@@ -83,7 +75,7 @@ describe('requestMultipleSignUps', () => {
 	});
 
 	it('encodes its arguments with the refViewId and page reference in the body', async () => {
-		setWindow(FAKE_WINDOW);
+		setGuardian(FAKE_GUARDIAN);
 
 		await requestMultipleSignUps(
 			TEST_EMAIL,
@@ -112,15 +104,15 @@ describe('requestMultipleSignUps', () => {
 			`g-recaptcha-response=${TEST_RECAPTCHA_TOKEN}`,
 		);
 		expect(decodedEntries).toContainEqual(
-			`refViewId=${FAKE_WINDOW.guardian.ophan.pageViewId}`,
+			`refViewId=${FAKE_GUARDIAN.ophan.pageViewId}`,
 		);
 		expect(decodedEntries).toContainEqual(
-			`ref=${FAKE_WINDOW.location.origin}${FAKE_WINDOW.location.pathname}`,
+			`ref=${window.location.origin}${TEST_PATHNAME}`,
 		);
 	});
 
 	it('will omit the recaptchaToken if the emailSignupRecaptcha is false', async () => {
-		setWindow(FAKE_WINDOW_NO_RECAPTCHA);
+		setGuardian(FAKE_GUARDIAN_NO_RECAPTCHA);
 
 		await requestMultipleSignUps(
 			TEST_EMAIL,
@@ -142,22 +134,17 @@ describe('requestMultipleSignUps', () => {
 });
 
 describe('requestSingleSignUp', () => {
-	let windowSpy: jest.SpyInstance;
-
 	beforeEach(() => {
-		windowSpy = jest.spyOn(window, 'window', 'get');
+		window.history.replaceState({}, '', TEST_PATHNAME);
 		jestMockFetch();
 	});
 
 	afterEach(() => {
-		windowSpy.mockRestore();
+		window.guardian = originalGuardian;
 	});
 
-	const setWindow = (windowData: { [key: string]: unknown }) =>
-		windowSpy.mockImplementation(() => windowData);
-
 	it('makes a form-urlencoded POST request to /email', async () => {
-		setWindow(FAKE_WINDOW);
+		setGuardian(FAKE_GUARDIAN);
 		await requestSingleSignUp(
 			TEST_EMAIL,
 			TEST_NEWSLETTER_IDS[0],
@@ -169,7 +156,7 @@ describe('requestSingleSignUp', () => {
 		const method = requestInit?.method;
 		const headers = (requestInit?.headers ?? {}) as Record<string, unknown>;
 
-		expect(url).toBe(`${FAKE_WINDOW.guardian.config.page.ajaxUrl}/email`);
+		expect(url).toBe(`${FAKE_GUARDIAN.config.page.ajaxUrl}/email`);
 		expect(method).toBe('POST');
 		expect(headers['Accept']).toEqual('application/json');
 		expect(headers['Content-Type']).toEqual(
@@ -178,7 +165,7 @@ describe('requestSingleSignUp', () => {
 	});
 
 	it('encodes its arguments with the refViewId and page reference in the body', async () => {
-		setWindow(FAKE_WINDOW);
+		setGuardian(FAKE_GUARDIAN);
 
 		await requestSingleSignUp(
 			TEST_EMAIL,
@@ -203,15 +190,15 @@ describe('requestSingleSignUp', () => {
 			`g-recaptcha-response=${TEST_RECAPTCHA_TOKEN}`,
 		);
 		expect(decodedEntries).toContainEqual(
-			`refViewId=${FAKE_WINDOW.guardian.ophan.pageViewId}`,
+			`refViewId=${FAKE_GUARDIAN.ophan.pageViewId}`,
 		);
 		expect(decodedEntries).toContainEqual(
-			`ref=${FAKE_WINDOW.location.origin}${FAKE_WINDOW.location.pathname}`,
+			`ref=${window.location.origin}${TEST_PATHNAME}`,
 		);
 	});
 
 	it('will omit the recaptchaToken if the emailSignupRecaptcha is false', async () => {
-		setWindow(FAKE_WINDOW_NO_RECAPTCHA);
+		setGuardian(FAKE_GUARDIAN_NO_RECAPTCHA);
 
 		await requestSingleSignUp(
 			TEST_EMAIL,
