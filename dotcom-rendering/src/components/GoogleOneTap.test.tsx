@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { submitComponentEvent as submitComponentEventMock } from '../client/ophan/ophan';
 import { error, ok } from '../lib/result';
 import {
