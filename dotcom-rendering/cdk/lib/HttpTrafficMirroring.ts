@@ -164,7 +164,7 @@ export class HttpTrafficMirroring extends Construct {
 		stack: GuStack,
 		target: ApplicationLoadBalancer,
 	): NetworkLoadBalancer {
-		const cluster = Cluster.fromClusterAttributes(
+		const ecsCluster = Cluster.fromClusterAttributes(
 			this,
 			'MirroringHandlerEcsCluster',
 			{
@@ -226,7 +226,7 @@ export class HttpTrafficMirroring extends Construct {
 			this,
 			'MirroringHandlerFargateService',
 			{
-				cluster,
+				cluster: ecsCluster,
 				taskDefinition,
 				vpcSubnets: { subnets },
 				// Important for service deployments; with the AWS defaults the service can be scaled down when deploying
