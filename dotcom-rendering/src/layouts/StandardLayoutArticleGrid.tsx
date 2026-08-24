@@ -56,6 +56,34 @@ const stretchLines = css`
 	}
 `;
 
+const immersiveMediaBelowDesktop = (headlineBackground: string) => css`
+	${until.desktop} {
+		position: relative;
+
+		> div {
+			height: 100%;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			height: min(60%, calc(100% - 60vw + 120px));
+			z-index: ${getZIndex('mediaOverlay')};
+			background: linear-gradient(
+				to bottom,
+				rgba(0, 0, 0, 0.08),
+				${headlineBackground} 72%
+			);
+			backdrop-filter: blur(12px);
+			mask-image: linear-gradient(to bottom, transparent 40%, black 60%);
+			pointer-events: none;
+		}
+	}
+`;
+
 interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
@@ -231,7 +259,7 @@ export const StandardLayoutArticleGrid = ({
 					css`
 						${until.desktop} {
 							/* Anchor the title consistently while wrapped text extends the media below it. */
-							grid-template-rows: 60vw auto auto auto auto auto auto;
+							grid-template-rows: 60vw repeat(6, auto);
 						}
 					`,
 			]}
@@ -253,40 +281,7 @@ export const StandardLayoutArticleGrid = ({
 
 								${(isImmersivePortrait ||
 									isImmersiveLandscape) &&
-								css`
-									${until.desktop} {
-										position: relative;
-
-										> div {
-											height: 100%;
-										}
-
-										/* Fades the media to black at the bottom, behind the headline. */
-										&::after {
-											content: '';
-											position: absolute;
-											left: 0;
-											right: 0;
-											bottom: 0;
-											height: 60%;
-											z-index: ${getZIndex(
-												'mediaOverlay',
-											)};
-											background: linear-gradient(
-												to bottom,
-												rgba(0, 0, 0, 0.08),
-												${headlineBackground} 72%
-											);
-											backdrop-filter: blur(12px);
-											mask-image: linear-gradient(
-												to bottom,
-												transparent 40%,
-												black 60%
-											);
-											pointer-events: none;
-										}
-									}
-								`}
+								immersiveMediaBelowDesktop(headlineBackground)}
 							`
 						: undefined
 				}
