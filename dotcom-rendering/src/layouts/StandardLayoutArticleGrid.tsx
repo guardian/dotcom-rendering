@@ -70,7 +70,7 @@ const immersiveMediaBelowDesktop = (headlineBackground: string) => css`
 			left: 0;
 			right: 0;
 			bottom: 0;
-			height: min(60%, calc(100% - 60vw + 120px));
+			height: min(60%, calc(200% - 120vw + 30px));
 			z-index: ${getZIndex('mediaOverlay')};
 			background: linear-gradient(
 				to bottom,
