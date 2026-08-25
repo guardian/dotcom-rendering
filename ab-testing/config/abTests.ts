@@ -88,7 +88,7 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-08-27",
 		type: "server",
-		status: "OFF",
+		status: "ON",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
@@ -106,6 +106,18 @@ const ABTests: ABTest[] = [
 		audienceSpace: "A",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-ozone-hashed-email",
+		description:
+			"Pass hashed email to Ozone via pubProvidedId for audience matching",
+		owners: ["commercial.dev@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-09-30",
+		type: "client",
+		audienceSize: 0,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
 	},
 	{
 		name: "fronts-and-curation-loop-click-through",
