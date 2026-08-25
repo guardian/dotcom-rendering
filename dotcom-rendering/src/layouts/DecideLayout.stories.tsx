@@ -309,18 +309,26 @@ const immersiveLabsMobileParameters = {
 	chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
 };
 
-const immersiveLabsEmbedParameters = {
-	...immersiveLabsParameters,
-	chromatic: {
-		viewports: [
-			breakpoints.mobile,
-			breakpoints.mobileMedium,
-			breakpoints.mobileLandscape,
-			breakpoints.phablet,
-			breakpoints.tablet,
-			breakpoints.wide,
-		],
-	},
+const fakeSpielbergMainMedia =
+	LabsImmersiveFakeSpielbergFixture.mainMediaElements[0];
+
+if (
+	fakeSpielbergMainMedia?._type !==
+	'model.dotcomrendering.pageElements.EmbedBlockElement'
+) {
+	throw new Error(
+		'The Fake Spielberg fixture must contain a main media embed',
+	);
+}
+
+const stableFakeSpielbergFixture = {
+	...LabsImmersiveFakeSpielbergFixture,
+	mainMediaElements: [
+		{
+			...fakeSpielbergMainMedia,
+			html: `<style>html, body { margin: 0; height: 100%; } img { display: block; width: 100%; height: 75%; object-fit: cover; } @media (min-width: 600px) { img { height: 100%; } }</style><img src="https://uploads.guim.co.uk/2026/06/29/audible-2-poster.jpg" alt="">`,
+		},
+	],
 };
 
 export const WebPhotoEssayImmersiveLabsLight: Story = {
@@ -440,10 +448,10 @@ export const WebImmersiveLabsRealGlobalX: Story = {
 export const WebImmersiveLabsRealFakeSpielberg: Story = {
 	args: {
 		article: enableLabsImmersiveGridTest(
-			enhanceArticleType(LabsImmersiveFakeSpielbergFixture, 'Web'),
+			enhanceArticleType(stableFakeSpielbergFixture, 'Web'),
 		),
 	},
-	parameters: immersiveLabsEmbedParameters,
+	parameters: immersiveLabsMobileParameters,
 };
 
 const standardStandardLabsWebFixture: Article = {
