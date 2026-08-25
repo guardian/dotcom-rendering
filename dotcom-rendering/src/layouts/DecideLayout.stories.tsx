@@ -9,6 +9,7 @@ import { Analysis as AnalysisStandardNewsFixture } from '../../fixtures/generate
 import { Comment as CommentStandardOpinionFixture } from '../../fixtures/generated/fe-articles/Comment';
 import { Feature as FeatureStandardCultureFixture } from '../../fixtures/generated/fe-articles/Feature';
 import { Labs as PhotoEssayImmersiveLabsFixture } from '../../fixtures/generated/fe-articles/Labs';
+import { LabsImmersiveFakeSpielberg as LabsImmersiveFakeSpielbergFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveFakeSpielberg';
 import { LabsImmersiveGlobalX as LabsImmersiveGlobalXFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveGlobalX';
 import { LabsImmersiveParrtjima as LabsImmersiveParrtjimaFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveParrtjima';
 import { LabsImmersiveVictorianWater as LabsImmersiveVictorianWaterFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveVictorianWater';
@@ -308,6 +309,20 @@ const immersiveLabsMobileParameters = {
 	chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
 };
 
+const immersiveLabsEmbedParameters = {
+	...immersiveLabsParameters,
+	chromatic: {
+		viewports: [
+			breakpoints.mobile,
+			breakpoints.mobileMedium,
+			breakpoints.mobileLandscape,
+			breakpoints.phablet,
+			breakpoints.tablet,
+			breakpoints.wide,
+		],
+	},
+};
+
 export const WebPhotoEssayImmersiveLabsLight: Story = {
 	args: {
 		article: labsImmersiveArticle({
@@ -420,6 +435,15 @@ export const WebImmersiveLabsRealGlobalX: Story = {
 		),
 	},
 	parameters: immersiveLabsMobileParameters,
+};
+
+export const WebImmersiveLabsRealFakeSpielberg: Story = {
+	args: {
+		article: enableLabsImmersiveGridTest(
+			enhanceArticleType(LabsImmersiveFakeSpielbergFixture, 'Web'),
+		),
+	},
+	parameters: immersiveLabsEmbedParameters,
 };
 
 const standardStandardLabsWebFixture: Article = {

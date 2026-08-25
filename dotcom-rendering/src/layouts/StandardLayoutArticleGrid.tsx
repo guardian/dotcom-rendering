@@ -18,6 +18,7 @@ import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { Island } from '../components/Island';
 import { ListenToArticle } from '../components/ListenToArticle.island';
 import { MainMedia } from '../components/MainMedia';
+import { minHeaderHeightPx } from '../components/Masthead/Titlepiece/constants';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.island';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.island';
 import { Standfirst } from '../components/Standfirst';
@@ -33,6 +34,7 @@ import {
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
 import { getZIndex } from '../lib/getZIndex';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
 import { palette as themePalette } from '../palette';
@@ -56,13 +58,20 @@ const stretchLines = css`
 	}
 `;
 
-const immersiveMediaBelowDesktop = (headlineBackground: string) => css`
+const immersiveMediaBelowDesktop = (
+	headlineBackground: string,
+	isMainMediaImage: boolean,
+) => css`
 	${until.desktop} {
 		position: relative;
 
 		> div {
-			height: 100%;
+			${isMainMediaImage
+				? 'height: 100%;'
+				: 'position: absolute; inset: 0;'}
 		}
+
+		${!isMainMediaImage && 'overflow: hidden;'}
 
 		&::after {
 			content: '';
@@ -70,7 +79,9 @@ const immersiveMediaBelowDesktop = (headlineBackground: string) => css`
 			left: 0;
 			right: 0;
 			bottom: 0;
-			height: min(60%, calc(200% - 120vw + 30px));
+			height: ${isMainMediaImage
+				? 'min(60%, calc(200% - 120vw + 30px))'
+				: 'min(60%, 144px)'};
 			z-index: ${getZIndex('mediaOverlay')};
 			background: linear-gradient(
 				to bottom,
@@ -169,19 +180,23 @@ export const StandardLayoutArticleGrid = ({
 
 	const mainMedia = article.mainMediaElements[0];
 	const captionText = decideMainMediaCaption(mainMedia);
-	const mainMediaUrl: string | undefined =
+	const isMainMediaImage =
 		mainMedia?._type ===
-		'model.dotcomrendering.pageElements.ImageBlockElement'
-			? mainMedia.media.allImages[0]?.url
-			: undefined;
-	const mainMediaAspectRatio =
-		mainMedia?._type ===
-		'model.dotcomrendering.pageElements.ImageBlockElement'
-			? mainMedia.media.allImages[0]?.fields.aspectRatio
-			: undefined;
+		'model.dotcomrendering.pageElements.ImageBlockElement';
+	const mainMediaUrl: string | undefined = isMainMediaImage
+		? mainMedia.media.allImages[0]?.url
+		: undefined;
+	const mainMediaAspectRatio = isMainMediaImage
+		? mainMedia.media.allImages[0]?.fields.aspectRatio
+		: undefined;
 
 	const mainMediaOrientation =
 		mainMediaUrl != null ? getImageOrientation(mainMediaUrl) : 'landscape';
+	const immersiveHeaderHeight =
+		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
+	const immersiveMediaRowHeight = isMainMediaImage
+		? '60vw'
+		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
 	const layoutType = getLayoutType({
 		isImmersive,
@@ -259,7 +274,10 @@ export const StandardLayoutArticleGrid = ({
 					css`
 						${until.desktop} {
 							/* Anchor the title consistently while wrapped text extends the media below it. */
-							grid-template-rows: 60vw repeat(6, auto);
+							grid-template-rows: ${immersiveMediaRowHeight} repeat(
+									6,
+									auto
+								);
 						}
 					`,
 			]}
@@ -281,7 +299,10 @@ export const StandardLayoutArticleGrid = ({
 
 								${(isImmersivePortrait ||
 									isImmersiveLandscape) &&
-								immersiveMediaBelowDesktop(headlineBackground)}
+								immersiveMediaBelowDesktop(
+									headlineBackground,
+									isMainMediaImage,
+								)}
 							`
 						: undefined
 				}
