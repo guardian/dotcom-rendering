@@ -2055,6 +2055,9 @@ const brandingLabelLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		default:
+			if (theme === ArticleSpecial.Labs) {
+				return sourcePalette.labs[100];
+			}
 			return sourcePalette.neutral[20];
 	}
 };
@@ -2505,6 +2508,10 @@ const standfirstTextLight: PaletteFunction = (format) => {
 			...labsHostedDesigns,
 		].includes(format.design)
 	) {
+		if (format.design === ArticleDesign.Gallery) {
+			return sourcePalette.labs[500];
+		}
+
 		return sourcePalette.labs[100];
 	}
 
@@ -2537,7 +2544,11 @@ const standfirstTextLight: PaletteFunction = (format) => {
 const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 	if (
 		theme === ArticleSpecial.Labs &&
-		![ArticleDesign.LiveBlog, ...labsHostedDesigns].includes(design)
+		![
+			ArticleDesign.LiveBlog,
+			...labsMediaDesigns,
+			...labsHostedDesigns,
+		].includes(design)
 	) {
 		return sourcePalette.labs[500];
 	}
@@ -4994,33 +5005,51 @@ const richLinkQuoteFillLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) => {
+const affiliateDisclaimerThemes = {
+	light: {
+		bg: sourcePalette.neutral[97],
+		text: sourcePalette.neutral[7],
+		link: sourcePalette.lifestyle[400],
+	},
+	dark: {
+		bg: sourcePalette.neutral[20],
+		text: sourcePalette.neutral[86],
+		link: sourcePalette.lifestyle[450],
+	},
+};
+
+const affiliateDisclaimerLightTheme = ({
+	design,
+}: {
+	design: ArticleDesign;
+}) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-			return sourcePalette.neutral[20];
+			return affiliateDisclaimerThemes.dark;
 		default:
-			return sourcePalette.neutral[97];
+			return affiliateDisclaimerThemes.light;
 	}
 };
+
+const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) =>
+	affiliateDisclaimerLightTheme({ design }).bg;
+
 const affiliateDisclaimerBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[20];
+	affiliateDisclaimerThemes.dark.bg;
 
-const affiliateDisclaimerTextLight: PaletteFunction = ({ design }) => {
-	switch (design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			return sourcePalette.neutral[86];
-		default:
-			return sourcePalette.neutral[7];
-	}
-};
+const affiliateDisclaimerTextLight: PaletteFunction = ({ design }) =>
+	affiliateDisclaimerLightTheme({ design }).text;
 
-const affiliateDisclaimerTextDark: PaletteFunction = () => {
-	return sourcePalette.neutral[86];
-};
+const affiliateDisclaimerTextDark: PaletteFunction = () =>
+	affiliateDisclaimerThemes.dark.text;
+
+const affiliateDisclaimerLinkLight: PaletteFunction = ({ design }) =>
+	affiliateDisclaimerLightTheme({ design }).link;
+
+const affiliateDisclaimerLinkDark: PaletteFunction = () =>
+	affiliateDisclaimerThemes.dark.link;
 
 const seriesTitleBackgroundLight: PaletteFunction = ({
 	theme,
@@ -5040,7 +5069,7 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 			}
@@ -5059,7 +5088,7 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.brandAlt[300];
 					}
@@ -5085,7 +5114,7 @@ const seriesTitleBackgroundDark: PaletteFunction = ({
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 				case ArticleSpecial.SpecialReport:
@@ -5105,7 +5134,7 @@ const seriesTitleBackgroundDark: PaletteFunction = ({
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[300];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.specialReportAlt[300];
 					}
@@ -5255,11 +5284,17 @@ const seriesOrSectionTitleTextLight: PaletteFunction = ({
 
 /** Used by the series tag only; the article section link keeps `articleSectionLinkTextLight` */
 const seriesTitleTextLight: PaletteFunction = (format) => {
-	if (
-		format.theme === ArticleSpecial.Labs &&
-		format.design !== ArticleDesign.LiveBlog
-	) {
-		return sourcePalette.neutral[7];
+	if (format.theme === ArticleSpecial.Labs) {
+		if (
+			format.display === ArticleDisplay.Immersive ||
+			format.design === ArticleDesign.Gallery ||
+			format.design === ArticleDesign.HostedGallery
+		) {
+			return sourcePalette.neutral[100];
+		}
+		if (format.design !== ArticleDesign.LiveBlog) {
+			return sourcePalette.neutral[7];
+		}
 	}
 	return seriesOrSectionTitleTextLight(format);
 };
@@ -6622,6 +6657,10 @@ const paletteColours = {
 		light: affiliateDisclaimerBackgroundLight,
 		dark: affiliateDisclaimerBackgroundDark,
 	},
+	'--affiliate-disclaimer-link': {
+		light: affiliateDisclaimerLinkLight,
+		dark: affiliateDisclaimerLinkDark,
+	},
 	'--affiliate-disclaimer-text': {
 		light: affiliateDisclaimerTextLight,
 		dark: affiliateDisclaimerTextDark,
@@ -7241,6 +7280,18 @@ const paletteColours = {
 	'--editorial-button-text': {
 		light: editorialButtonText,
 		dark: editorialButtonTextDark,
+	},
+	'--election-tracker-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--election-tracker-button-background': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--election-tracker-button-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[7],
 	},
 	'--email-signup-button-background': {
 		light: emailSignupButtonBackgroundLight,
@@ -8319,6 +8370,10 @@ const paletteColours = {
 		 */
 		dark: () => '#606060',
 	},
+	'--stacked-progress-excluded-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--stacked-progress-to-win': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
@@ -8595,9 +8650,21 @@ const paletteColours = {
 		light: () => '#093CA3',
 		dark: () => '#3261DB',
 	},
+	'--us-elections-democrats-alt': {
+		light: () => '#DAD7F5',
+		dark: () => '#DAD7F5',
+	},
+	'--us-elections-others': {
+		light: () => '#848484',
+		dark: () => sourcePalette.neutral[46],
+	},
 	'--us-elections-republicans': {
 		light: () => sourcePalette.news[400],
 		dark: () => '#DC2E1C',
+	},
+	'--us-elections-republicans-alt': {
+		light: () => '#FFDBD4',
+		dark: () => '#FFDBD4',
 	},
 	'--values-with-change-border': {
 		light: () => sourcePalette.neutral[86],

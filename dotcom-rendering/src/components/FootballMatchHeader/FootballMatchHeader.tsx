@@ -379,10 +379,7 @@ const Team = (props: {
 				isolation: 'isolate',
 			}}
 		>
-			<Crest
-				name={props.match[props.team].name}
-				paID={props.match[props.team].paID}
-			/>
+			<Crest paID={props.match[props.team].paID} />
 			{props.match.kind !== 'Fixture' ? (
 				<Score
 					score={props.match[props.team].score}
@@ -425,7 +422,7 @@ const TeamName = (props: {
 	</p>
 );
 
-const Crest = (props: { name: string; paID: string }) => (
+const Crest = (props: { paID: string }) => (
 	<picture
 		css={{
 			...circleStyles,
@@ -436,7 +433,7 @@ const Crest = (props: { name: string; paID: string }) => (
 	>
 		<FootballCrest
 			teamId={props.paID}
-			altText={`${props.name} football crest`}
+			altText=""
 			width={40}
 			css={{
 				maxWidth: 40,

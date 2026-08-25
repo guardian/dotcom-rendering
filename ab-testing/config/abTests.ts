@@ -51,7 +51,7 @@ const ABTests: ABTest[] = [
 		expirationDate: "2027-01-01",
 		type: "client",
 		status: "ON",
-		audienceSize: 5 / 100,
+		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control"],
 		shouldForceMetricsCollection: false,
@@ -88,7 +88,7 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-08-27",
 		type: "server",
-		status: "OFF",
+		status: "ON",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
@@ -145,12 +145,12 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "webx-monitor-group-contamination",
+		name: "webx-monitor-group-contamination-v2",
 		description:
-			"Test to measure the impact of contamination between groups in ab tests",
+			"V2 of test to measure the impact of contamination between groups in ab tests",
 		owners: ["dotcom.platform@theguardian.com"],
 		status: "ON",
-		expirationDate: "2026-08-31",
+		expirationDate: "2026-09-30",
 		type: "client",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
@@ -208,6 +208,20 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		groups: ["a", "b"],
 		shouldForceMetricsCollection: false,
+	},
+
+	{
+		name: "commercial-prebid-failsafe-timeout",
+		description:
+			"Test to measure the impact of the Prebid failsafe timeout",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-09-30",
+		type: "client",
+		status: "OFF",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
 	},
 ];
 
