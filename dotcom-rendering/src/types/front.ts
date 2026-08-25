@@ -14,6 +14,7 @@ import type {
 import type { EditionId } from '../lib/edition';
 import type { Branding, CollectionBranding } from './branding';
 import type { BoostLevel, Newsletter, StarRating } from './content';
+import type { CustomSubnav } from './customSubnav';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
 import type { ArticleMedia, MainMedia } from './mainMedia';
@@ -39,6 +40,11 @@ export interface Front {
 	webURL: string;
 	guardianBaseURL: string;
 	serverTime?: number;
+	/**
+	 * An optional custom subnav targeted at this front. Omitted entirely when
+	 * no custom subnav targets the front.
+	 */
+	subnav?: CustomSubnav;
 }
 
 interface PressedPage {
