@@ -2285,13 +2285,14 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             },
             "Image": "public.ecr.aws/aws-observability/aws-otel-collector:v0.49.0",
             "LogConfiguration": {
-              "LogDriver": "awslogs",
+              "LogDriver": "awsfirelens",
               "Options": {
-                "awslogs-group": {
-                  "Ref": "EcsTaskDefinitionawsotelcollectorLogGroup4477B845",
+                "Name": "kinesis_streams",
+                "region": "eu-west-1",
+                "retry_limit": "2",
+                "stream": {
+                  "Ref": "LoggingStreamName",
                 },
-                "awslogs-region": "eu-west-1",
-                "awslogs-stream-prefix": "ecs",
               },
             },
             "Memory": 512,
@@ -2445,19 +2446,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                 ],
               },
             },
-            {
-              "Action": [
-                "logs:CreateLogStream",
-                "logs:PutLogEvents",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "EcsTaskDefinitionawsotelcollectorLogGroup4477B845",
-                  "Arn",
-                ],
-              },
-            },
           ],
           "Version": "2012-10-17",
         },
@@ -2571,35 +2559,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-    "EcsTaskDefinitionawsotelcollectorLogGroup4477B845": {
-      "DeletionPolicy": "Retain",
-      "Properties": {
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "tag-page-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "CODE",
-          },
-        ],
-      },
-      "Type": "AWS::Logs::LogGroup",
-      "UpdateReplacePolicy": "Retain",
     },
     "GetDistributablePolicyTagpagerendering346128E3": {
       "Properties": {

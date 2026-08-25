@@ -20,7 +20,7 @@ import { Peer } from 'aws-cdk-lib/aws-ec2';
 import {
 	ContainerDependencyCondition,
 	ContainerImage,
-	LogDrivers,
+	FireLensLogDriver,
 } from 'aws-cdk-lib/aws-ecs';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
@@ -331,6 +331,14 @@ export class RenderingCDKStack extends CDKStack {
 			 */
 			if (app.ecsService) {
 				const { taskDefinition } = app.ecsService;
+				// Reuse the FireLens log options already wired by GuLoadBalancedAppExperimental,
+				// which registers GuLoggingStreamNameParameter as a singleton on this stack.
+				// This avoids re-introducing the parameter explicitly here.
+				const defaultContainerLogConfig =
+					taskDefinition.defaultContainer?.logDriverConfig;
+				const fireLensLogDriver = new FireLensLogDriver({
+					options: defaultContainerLogConfig?.options,
+				});
 
 				const collector = taskDefinition.addContainer(
 					'aws-otel-collector',
@@ -341,7 +349,7 @@ export class RenderingCDKStack extends CDKStack {
 						command: ['--config=/etc/ecs/ecs-default-config.yaml'],
 						cpu: 256,
 						memoryLimitMiB: 512,
-						logging: LogDrivers.awsLogs({ streamPrefix: 'ecs' }),
+						logging: fireLensLogDriver,
 						healthCheck: {
 							command: ['CMD', '/healthcheck'],
 							interval: Duration.seconds(5),
