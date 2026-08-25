@@ -10,7 +10,7 @@ type Props = {
 export const CustomSubNav = ({ customSubNav }: Props) => {
 	return (
 		<div data-component="custom-subnav" data-component-id={customSubNav.id}>
-			CustomSubNav: {customSubNav.header.headerText}
+			Test CustomSubNav: {customSubNav.header.headerText}
 			<ul>
 				{customSubNav.links.map((link) => (
 					<li key={`${link.linkText}-${link.dotcomPath}`}>
