@@ -7,7 +7,6 @@ import {
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { CPScottHeader } from '../components/CPScottHeader';
-import { CustomSubNav } from '../components/CustomSubNav';
 import { DecideContainer } from '../components/DecideContainer';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.island';
@@ -241,6 +240,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					contributionsServiceUrl={contributionsServiceUrl}
 					idApiUrl={front.config.idApiUrl}
 					showSubNav={showStandardSubNav}
+					customSubnav={NAV.customSubNav}
 					showSlimNav={false}
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}
@@ -251,20 +251,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					sectionId={front.config.section}
 					contentType={front.config.contentType}
 				/>
-
-				{NAV.customSubNav && (
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						padSides={false}
-						element="nav"
-						backgroundColour={schemePalette(
-							'--front-container-background',
-						)}
-					>
-						<CustomSubNav customSubNav={NAV.customSubNav} />
-					</Section>
-				)}
 
 				{isPaidContent && (
 					<Section

@@ -11,6 +11,7 @@ import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useEditionSwitcherBanner } from '../lib/useEditionSwitcherBanner';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
+import type { CustomSubnav } from '../types/customSubnav';
 import {
 	expandedMenuRootId,
 	navInputCheckboxId,
@@ -18,6 +19,7 @@ import {
 	smallMobilePageMargin,
 	veggieBurgerId,
 } from './Masthead/Titlepiece/constants';
+import { CustomSubNav } from './Masthead/Titlepiece/CustomSubNav';
 import { EditionDropdown } from './Masthead/Titlepiece/EditionDropdown';
 import { ExpandedNav } from './Masthead/Titlepiece/ExpandedNav/ExpandedNav';
 import { Grid } from './Masthead/Titlepiece/Grid';
@@ -30,6 +32,7 @@ interface Props {
 	nav: NavType;
 	editionId: EditionId;
 	showSubNav?: boolean;
+	customSubnav?: CustomSubnav;
 	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 	pageId?: string;
@@ -317,6 +320,7 @@ export const Titlepiece = ({
 	nav,
 	editionId,
 	showSubNav,
+	customSubnav,
 	showSlimNav,
 	hasPageSkin,
 	pageId = '',
@@ -581,6 +585,21 @@ export const Titlepiece = ({
 						currentNavLink={nav.currentNavLink}
 					/>
 					<div css={fadeStyles} />
+				</div>
+			)}
+
+			{customSubnav && (
+				<div
+					css={subNavWrapper}
+					data-print-layout="hide"
+					data-testid="sub-nav"
+					data-component="sub-nav"
+				>
+					<CustomSubNav
+						customSubNav={customSubnav}
+						currentNavLink={nav.currentNavLink}
+						hasPageSkin={hasPageSkin}
+					/>
 				</div>
 			)}
 		</Grid>
