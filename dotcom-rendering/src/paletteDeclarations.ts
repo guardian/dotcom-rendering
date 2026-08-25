@@ -343,7 +343,7 @@ const headlineBylineLight: PaletteFunction = ({ design, display, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.news[400];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				default:
 					return pillarPalette(theme, 400);
 			}
@@ -611,7 +611,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
