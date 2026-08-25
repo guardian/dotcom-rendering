@@ -36,6 +36,8 @@ export function ssrCjsPlugin(packages: string[]): Plugin {
 
 	return {
 		name: 'ssr-cjs-compat',
+		// Only apply this plugin on development builds
+		apply: 'serve',
 		enforce: 'pre',
 		resolveId(id, _importer, options) {
 			if (options.ssr && shouldWrap(id)) {
