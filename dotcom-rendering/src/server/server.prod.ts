@@ -27,14 +27,14 @@ import {
 } from './handler.sportDataPage';
 import { handleAppsThrasher } from './handler.thrasher.apps';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
+import { responseHeaderMiddleware } from './lib/header-middleware';
+import { logger } from './lib/logging';
+import { requestLoggerMiddleware } from './lib/logging-middleware';
+import { recordError } from './lib/logging-store';
 import {
 	createExpressJsonWrapper,
 	createRequestTracingMiddleware,
 } from './lib/request-handler-middleware';
-import { logger } from './lib/logging';
-import { requestLoggerMiddleware } from './lib/logging-middleware';
-import { recordError } from './lib/logging-store';
-import { responseHeaderMiddleware } from './lib/header-middleware';
 
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
