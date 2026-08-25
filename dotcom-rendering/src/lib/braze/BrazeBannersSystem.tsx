@@ -1015,8 +1015,11 @@ export const BrazeBannersSystemDisplay = ({
 				  }
 			>,
 		) => {
+			const iframe = containerRef.current?.querySelector('iframe');
 			if (
 				event.origin !== window.location.origin ||
+				// Ignore messages not sent by this instance's own iframe, so banners don't handle each other's messages when several are mounted at once.
+				event.source !== iframe?.contentWindow ||
 				!Object.values(BrazeBannersSystemMessageType).includes(
 					event.data?.type,
 				)
