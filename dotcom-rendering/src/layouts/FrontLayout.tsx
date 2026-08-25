@@ -7,6 +7,7 @@ import {
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { CPScottHeader } from '../components/CPScottHeader';
+import { CustomSubNav } from '../components/CustomSubNav';
 import { DecideContainer } from '../components/DecideContainer';
 import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.island';
@@ -130,6 +131,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const isWorldCup2026 = worldCup2026PageIds.includes(pageId);
 
+	// A custom subnav replaces the standard section subnav when present
+	const showStandardSubNav =
+		!isPaidContent && !isWorldCup2026 && !NAV.customSubNav;
+
 	const filteredCollections = front.pressedPage.collections.filter(
 		(collection) => !isHighlights(collection),
 	);
@@ -235,7 +240,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					discussionApiUrl={front.config.discussionApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
 					idApiUrl={front.config.idApiUrl}
-					showSubNav={!isPaidContent && !isWorldCup2026}
+					showSubNav={showStandardSubNav}
 					showSlimNav={false}
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}
@@ -246,6 +251,20 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					sectionId={front.config.section}
 					contentType={front.config.contentType}
 				/>
+
+				{NAV.customSubNav && (
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						padSides={false}
+						element="nav"
+						backgroundColour={schemePalette(
+							'--front-container-background',
+						)}
+					>
+						<CustomSubNav customSubNav={NAV.customSubNav} />
+					</Section>
+				)}
 
 				{isPaidContent && (
 					<Section

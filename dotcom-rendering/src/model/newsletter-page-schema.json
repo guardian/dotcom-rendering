@@ -328,6 +328,9 @@
                         "links"
                     ]
                 },
+                "customSubnav": {
+                    "$ref": "#/definitions/CustomSubnav"
+                },
                 "readerRevenueLinks": {
                     "$ref": "#/definitions/ReaderRevenuePositions"
                 }
@@ -390,6 +393,123 @@
                 "sport"
             ],
             "type": "string"
+        },
+        "CustomSubnav": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "header": {
+                    "$ref": "#/definitions/CustomSubnavHeader"
+                },
+                "format": {
+                    "enum": [
+                        "compact",
+                        "large"
+                    ],
+                    "type": "string"
+                },
+                "links": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavLink"
+                    }
+                },
+                "pages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavTargetedPage"
+                    }
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavImage"
+                    }
+                }
+            },
+            "required": [
+                "format",
+                "header",
+                "id",
+                "links",
+                "pages"
+            ]
+        },
+        "CustomSubnavHeader": {
+            "type": "object",
+            "properties": {
+                "headerText": {
+                    "type": "string"
+                },
+                "dotcomPath": {
+                    "type": "string"
+                },
+                "copy": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "copy",
+                "headerText"
+            ]
+        },
+        "CustomSubnavLink": {
+            "description": "A custom subnav that can appear on assigned pages (e.g. fronts, articles). It arrives inside the `nav` object of the request payload.",
+            "type": "object",
+            "properties": {
+                "linkText": {
+                    "type": "string"
+                },
+                "dotcomPath": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dotcomPath",
+                "linkText"
+            ]
+        },
+        "CustomSubnavTargetedPage": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "enum": [
+                        "article",
+                        "front",
+                        "hasTag"
+                    ],
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "path",
+                "type"
+            ]
+        },
+        "CustomSubnavImage": {
+            "type": "object",
+            "properties": {
+                "imageSrc": {
+                    "type": "string"
+                },
+                "breakpoint": {
+                    "enum": [
+                        "mobile",
+                        "tablet",
+                        "web"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "breakpoint",
+                "imageSrc"
+            ]
         },
         "ReaderRevenuePositions": {
             "type": "object",
