@@ -344,7 +344,7 @@ export class RenderingCDKStack extends CDKStack {
 					'aws-otel-collector',
 					{
 						image: ContainerImage.fromRegistry(
-							'public.ecr.aws/aws-observability/aws-otel-collector:v0.49.0',
+							'public.ecr.aws/aws-observability/aws-otel-collector@sha256:90b3180c21acb9497110480371a413ed91f2836077f8a8fb4507b019d3c481c0',
 						),
 						command: ['--config=/etc/ecs/ecs-default-config.yaml'],
 						cpu: 256,
