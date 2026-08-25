@@ -69,7 +69,12 @@ type FootballPlayer = {
 	events: PlayerEvent[];
 };
 
-const eventTypes = ['substitution', 'dismissal', 'booking'] as const;
+const eventTypes = [
+	'substitution',
+	'substitution-injury',
+	'dismissal',
+	'booking',
+] as const;
 const isEventType = isOneOf(eventTypes);
 
 /**
@@ -141,7 +146,11 @@ const parseSubstitution = (
 	feFootballMatchSubstitution: FEFootballPlayer,
 ): Substitution[] => {
 	const substitutions = feFootballMatchSubstitution.enhancedEvents
-		.filter((event) => event.eventType === 'substitution')
+		.filter(
+			(event) =>
+				event.eventType === 'substitution' ||
+				event.eventType === 'substitution-injury',
+		)
 		.map((event) => ({
 			eventId: event.eventId,
 			name: feFootballMatchSubstitution.name,
