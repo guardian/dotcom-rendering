@@ -7,7 +7,6 @@ type AllSpace = Map<string, FastlyTestParams[]>;
 type Team =
 	| "commercial"
 	// WebX in the canonical name for the team, when the last test using webex expires we should remove webex from this union type
-	| "webex"
 	| "webx"
 	| "thefilter"
 	| "newsletters"
@@ -24,6 +23,13 @@ type Year = `${number}${number}${number}${number}`;
 type Month = `${number}${number}`;
 type Day = `${number}${number}`;
 
+/**
+ * The available audience spaces for AB tests.
+ *
+ * DO NOT modify this list without discussing WebX.
+ * Updating this list alone will not be enough to add a new audience space.
+ *
+ */
 const AudienceSpaces = ["A", "B", "C", "D", "E"] as const;
 
 type AudienceSpaceId = (typeof AudienceSpaces)[number];
