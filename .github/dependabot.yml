@@ -64,6 +64,11 @@ updates:
           - '*-loader'
         exclude-patterns:
           - '@storybook/*'
+      opentelemetry:
+        patterns:
+          - '@opentelemetry/*'
+        exclude-patterns:
+          - '@opentelemetry/api'
   - package-ecosystem: 'github-actions'
     directories:
       - '/.github/workflows'
