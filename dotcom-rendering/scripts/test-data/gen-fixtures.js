@@ -124,6 +124,10 @@ const articles = [
 		url: 'https://www.theguardian.com/global-x-invest-in-innovation/2026/apr/02/rare-earth-the-commodities-powering-our-ai-future',
 	},
 	{
+		name: 'LabsImmersiveFakeSpielberg',
+		url: 'https://www.theguardian.com/audible-true-crime-and-investigations/2026/jul/10/the-fake-spielberg-the-story-of-a-hollywood-conman',
+	},
+	{
 		name: 'NumberedList',
 		url: 'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 	},
