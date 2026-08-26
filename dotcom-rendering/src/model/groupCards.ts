@@ -1,5 +1,6 @@
 import type { FEFrontCard } from '../frontend/feFront';
 import type { EditionId } from '../lib/edition';
+import type { Switches } from '../types/config';
 import type { DCRContainerType, DCRGroupedTrails } from '../types/front';
 import { enhanceCards } from './enhanceCards';
 
@@ -27,6 +28,7 @@ export const groupCards = (
 	stripBranding: boolean = false,
 	serverSideABTests: Record<string, string>,
 	pageId: string,
+	featureSwitches: Switches,
 ): DCRGroupedTrails => {
 	switch (container) {
 		case 'flexible/general': {
@@ -49,6 +51,7 @@ export const groupCards = (
 				offset,
 				stripBranding,
 				serverSideABTests,
+				featureSwitches,
 			});
 
 			return {
@@ -73,6 +76,7 @@ export const groupCards = (
 				offset,
 				stripBranding,
 				serverSideABTests,
+				featureSwitches,
 			});
 
 			return {

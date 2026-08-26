@@ -20,6 +20,7 @@ import {
 	extractValidSourcesFromAssets,
 	getAspectRatioFromSources,
 } from '../lib/video';
+import type { Switches } from '../types/config';
 import type { Image } from '../types/content';
 import type {
 	DCRFrontCard,
@@ -210,6 +211,7 @@ const findActiveEditorialTest = (
 export const decideHeadline = (
 	faciaCard: FEFrontCard,
 	serverSideABTests: Record<string, string>,
+	isEditorialABTestingEnabled: boolean,
 	pageId?: string,
 ): string => {
 	const defaultHeadline = faciaCard.header.headline;
@@ -221,7 +223,11 @@ export const decideHeadline = (
 		faciaCard.properties.tests,
 	);
 
-	if (isUndefined(testBucket) || !activeEditorialTest) {
+	if (
+		!isEditorialABTestingEnabled ||
+		isUndefined(testBucket) ||
+		!activeEditorialTest
+	) {
 		return defaultHeadline;
 	}
 
@@ -422,6 +428,7 @@ export const enhanceCards = (
 		discussionApiUrl,
 		stripBranding = false,
 		serverSideABTests,
+		featureSwitches,
 	}: {
 		cardInTagPage: boolean;
 		/** Used for the data link name to indicate card position in container */
@@ -432,6 +439,7 @@ export const enhanceCards = (
 		/** We strip branding from cards if the branding will appear at the collection level instead */
 		stripBranding?: boolean;
 		serverSideABTests: Record<string, string>;
+		featureSwitches: Switches;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -504,11 +512,19 @@ export const enhanceCards = (
 		const articleMedia =
 			articleMainMedia && getMediaMetadata(articleMainMedia);
 
+		const isEditorialABTestingEnabled =
+			featureSwitches['editorialAbTests'] === true;
+
 		return {
 			format,
 			dataLinkName,
 			url: decideUrl(faciaCard),
-			headline: decideHeadline(faciaCard, serverSideABTests, pageId),
+			headline: decideHeadline(
+				faciaCard,
+				serverSideABTests,
+				isEditorialABTestingEnabled,
+				pageId,
+			),
 			trailText: faciaCard.card.trailText,
 			starRating: faciaCard.card.starRating,
 			webPublicationDate: !isUndefined(
