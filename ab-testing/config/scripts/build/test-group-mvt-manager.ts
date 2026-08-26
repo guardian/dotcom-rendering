@@ -47,7 +47,10 @@ class TestGroupMVTManager {
 			Array.from(this.testGroups.values()).flat(),
 		);
 
-		// collect all available MVTs that are not currently occupied in a random order
+		/**
+		 * collect all available MVTs that are not currently occupied in a random order
+		 * so that new test mvts are assigned randomly.
+		 */
 		this.availableMVTs = Array.from({ length: MVT_COUNT }, (_, i) => i)
 			.filter((i) => !this.occupiedMVTs.has(i))
 			.sort(() => Math.random() - 0.5);
