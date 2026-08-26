@@ -36,17 +36,6 @@ interface WebProps extends BaseProps {
 
 export type Props = WebProps | AppProps;
 
-/**
- * Guards the new grid-based immersive layout for Guardian Labs articles
- * behind a 0% a/b test
- */
-export const LABS_IMMERSIVE_GRID_AB_TEST = 'commercial-labs-immersive-grid';
-
-const isInLabsImmersiveGridTest = (article: Article): boolean =>
-	article.frontendData.config.serverSideABTests[
-		LABS_IMMERSIVE_GRID_AB_TEST
-	] === 'enable';
-
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	const format = {
 		design: article.design,
@@ -69,8 +58,7 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 					);
 				}
 				default: {
-					return article.theme === ArticleSpecial.Labs &&
-						isInLabsImmersiveGridTest(article) ? (
+					return article.theme === ArticleSpecial.Labs ? (
 						<StandardLayout
 							article={article.frontendData}
 							format={format}
@@ -253,8 +241,7 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 					);
 				}
 				default: {
-					return article.theme === ArticleSpecial.Labs &&
-						isInLabsImmersiveGridTest(article) ? (
+					return article.theme === ArticleSpecial.Labs ? (
 						<StandardLayout
 							article={article.frontendData}
 							format={format}
