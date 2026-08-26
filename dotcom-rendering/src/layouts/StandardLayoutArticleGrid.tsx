@@ -350,10 +350,10 @@ export const StandardLayoutArticleGrid = ({
 					isImmersivePortrait &&
 						css`
 							align-self: end;
-							margin-bottom: 2px;
+							margin-bottom: 0;
 
-							${until.desktop} {
-								margin-bottom: 0;
+							${from.desktop} {
+								margin-bottom: 2px;
 							}
 						`,
 				]}

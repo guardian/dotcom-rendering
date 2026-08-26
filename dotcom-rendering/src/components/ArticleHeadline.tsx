@@ -275,16 +275,13 @@ const invertedText = css`
 	background-color: black;
 	white-space: pre-wrap;
 	padding-bottom: ${space[1]}px;
-	padding-right: ${space[1]}px;
-
-	${until.desktop} {
-		padding-left: 12px;
-		padding-right: 18px;
-	}
+	padding-left: 12px;
+	padding-right: 18px;
 
 	${from.desktop} {
 		margin-left: -10px;
 		padding-left: 10px;
+		padding-right: ${space[1]}px;
 	}
 `;
 

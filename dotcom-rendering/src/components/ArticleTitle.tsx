@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, until } from '@guardian/source/foundations';
+import { from } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
 import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
@@ -32,11 +32,9 @@ const sectionStyles = css`
 const immersiveGridMargins = css`
 	max-width: 500px;
 	min-width: 200px;
-	margin-bottom: 4px;
-	${until.desktop} {
-		margin-bottom: 0;
-	}
+	margin-bottom: 0;
 	${from.desktop} {
+		margin-bottom: 4px;
 		margin-left: -4px;
 	}
 `;
