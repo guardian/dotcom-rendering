@@ -39,7 +39,13 @@ import { BigNumber } from '../BigNumber';
 import { FootballCrest } from '../FootballCrest';
 import { MatchHeaderFallback } from '../MatchHeaderFallback';
 import { Placeholder } from '../Placeholder';
-import { background, border, primaryText, secondaryText } from './colours';
+import {
+	background,
+	border,
+	primaryText,
+	scoreSecondaryText,
+	secondaryText,
+} from './colours';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
 import { Hr } from './Hr';
 import { Notifications } from './Notifications';
@@ -531,14 +537,14 @@ const Scorers = (props: {
 						{name}
 						<span
 							css={css({
-								border: `1px solid ${palette(border(props.matchKind))}`,
 								...textSans12Object,
 								display: 'inline-block',
 								marginLeft: space[1],
 								padding: `1px ${space[1]}px`,
+								border: `1px solid ${palette(border(props.matchKind))}`,
 								borderRadius: 10,
 								minWidth: space[6],
-								color: `${palette(secondaryText(props.matchKind))}`,
+								color: `${palette(scoreSecondaryText(props.matchKind))}`,
 								textAlign: 'center',
 							})}
 						>
