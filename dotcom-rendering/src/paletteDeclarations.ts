@@ -7469,6 +7469,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[7],
 	},
+	'--football-match-header-scorer-text': {
+		light: () => `${sourcePalette.neutral[100]}99`,
+		dark: () => `${sourcePalette.neutral[100]}99`,
+	},
 	'--football-match-hover': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],

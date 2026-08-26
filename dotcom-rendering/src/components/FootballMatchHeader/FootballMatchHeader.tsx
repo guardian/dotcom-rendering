@@ -5,8 +5,10 @@ import {
 	headlineBold20Object,
 	headlineBold24Object,
 	space,
+	textSans12Object,
 	textSans14Object,
 	textSans15Object,
+	textSansBold12Object,
 	textSansBold14Object,
 	textSansBold17Object,
 	textSansItalic14Object,
@@ -16,7 +18,7 @@ import {
 import { useMemo } from 'react';
 import type { SWRConfiguration } from 'swr';
 import useSWR from 'swr';
-import type { FootballMatch } from '../../footballMatchV2';
+import type { FootballMatch, Scorer } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import type {
@@ -388,7 +390,10 @@ const Team = (props: {
 			) : null}
 		</span>
 		{props.match.kind !== 'Fixture' ? (
-			<Scorers scorers={props.match[props.team].scorers} />
+			<Scorers
+				scorers={props.match[props.team].scorers}
+				matchKind={props.match.kind}
+			/>
 		) : null}
 	</div>
 );
@@ -505,7 +510,10 @@ const ScoreNumber = (props: { score: number }) => {
 	}
 };
 
-const Scorers = (props: { scorers: string[] }) =>
+const Scorers = (props: {
+	scorers: Scorer[];
+	matchKind: FootballMatch['kind'];
+}) =>
 	props.scorers.length === 0 ? null : (
 		<ul
 			css={{
@@ -514,9 +522,40 @@ const Scorers = (props: { scorers: string[] }) =>
 				[from.leftCol]: textSans15Object,
 			}}
 		>
-			{props.scorers.map((scorer) => (
-				<li key={scorer}>{scorer}</li>
-			))}
+			{props.scorers.map(({ name, time, otherInfo }) => {
+				return (
+					<li
+						key={name + time + otherInfo}
+						css={{ paddingBottom: space[1] }}
+					>
+						{name}
+						<span
+							css={css({
+								border: `1px solid ${palette(border(props.matchKind))}`,
+								...textSans12Object,
+								display: 'inline-block',
+								marginLeft: space[1],
+								padding: `1px ${space[1]}px`,
+								borderRadius: 10,
+								minWidth: space[6],
+								color: `${palette(secondaryText(props.matchKind))}`,
+								textAlign: 'center',
+							})}
+						>
+							{time && (
+								<span
+									css={css({
+										...textSansBold12Object,
+									})}
+								>
+									{time}&apos;
+								</span>
+							)}
+							{otherInfo && ` ${otherInfo}`}
+						</span>
+					</li>
+				);
+			})}
 		</ul>
 	);
 

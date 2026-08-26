@@ -64,13 +64,19 @@ type MatchData = {
 	venue?: string;
 };
 
+export type Scorer = {
+	name: string;
+	time?: string;
+	otherInfo?: string;
+};
+
 /**
  * Once a match has started, we can bundle together information about a team,
  * such as its name, with its score and which players have scored.
  */
 type FootballMatchTeamWithScore = FootballTeam & {
 	score: number;
-	scorers: string[];
+	scorers: Scorer[];
 };
 
 type FootballDayInvalidDate = {
@@ -129,6 +135,24 @@ const parseMatchDate = (date: string): Result<string, Date> => {
 
 	return parseDate(isoDate);
 };
+
+const parseScorers = (scorers: string | undefined): Scorer[] =>
+	scorers?.split(',').map((scorer) => {
+		const [, name, time, otherInfo] =
+			scorer.match(/(.*) \((\d+)\s?(.*)?\)/) ?? [];
+
+		if (!name || !time) {
+			return {
+				name: scorer,
+			};
+		}
+
+		return {
+			name,
+			time,
+			otherInfo,
+		};
+	}) ?? [];
 
 const parseFixture = (
 	feFixture: FEFixture | FEMatchDay,
@@ -204,14 +228,14 @@ const parseMatchResult = (
 				name: cleanTeamName(feResult.homeTeam.name),
 				paID: feResult.homeTeam.id,
 				score: homeScore,
-				scorers: feResult.homeTeam.scorers?.split(',') ?? [],
+				scorers: parseScorers(feResult.homeTeam.scorers),
 				teamUrl: feResult.homeTeam.teamUrl,
 			},
 			awayTeam: {
 				name: cleanTeamName(feResult.awayTeam.name),
 				paID: feResult.awayTeam.id,
 				score: awayScore,
-				scorers: feResult.awayTeam.scorers?.split(',') ?? [],
+				scorers: parseScorers(feResult.homeTeam.scorers),
 				teamUrl: feResult.awayTeam.teamUrl,
 			},
 			comment: feResult.comments,
@@ -256,14 +280,14 @@ const parseLiveMatch = (
 				name: cleanTeamName(feMatchDay.homeTeam.name),
 				paID: feMatchDay.homeTeam.id,
 				score: homeScore,
-				scorers: feMatchDay.homeTeam.scorers?.split(',') ?? [],
+				scorers: parseScorers(feMatchDay.homeTeam.scorers),
 				teamUrl: feMatchDay.homeTeam.teamUrl,
 			},
 			awayTeam: {
 				name: cleanTeamName(feMatchDay.awayTeam.name),
 				paID: feMatchDay.awayTeam.id,
 				score: awayScore,
-				scorers: feMatchDay.awayTeam.scorers?.split(',') ?? [],
+				scorers: parseScorers(feMatchDay.awayTeam.scorers),
 				teamUrl: feMatchDay.awayTeam.teamUrl,
 			},
 			dateTimeISOString,
