@@ -1,6 +1,6 @@
 import { deepEqual, equal, throws } from "node:assert";
 import test from "node:test";
-import { AUDIENCE_SPACES } from "./constants.ts";
+import { AudienceSpaces } from "../types.ts";
 import {
 	parseFastlySubfield,
 	parseMVTValue,
@@ -136,7 +136,7 @@ test("parseMVTValue", async (t) => {
 			"group:0=test1,group:0:type=control,group:0:exp=50,group:1=test2,group:1:type=variant,group:1:exp=25,group:2=test3,group:2:type=variant,group:2:exp=75";
 		const result = parseMVTValue(subfield);
 
-		equal(result.length, AUDIENCE_SPACES.length);
+		equal(result.length, AudienceSpaces.length);
 		deepEqual(result[0], { name: "test1", type: "control", exp: 50 });
 		deepEqual(result[1], { name: "test2", type: "variant", exp: 25 });
 		deepEqual(result[2], { name: "test3", type: "variant", exp: 75 });
@@ -148,7 +148,7 @@ test("parseMVTValue", async (t) => {
 			const subfield = "group:0=test1,group:1:type=variant";
 			const result = parseMVTValue(subfield);
 
-			equal(result.length, AUDIENCE_SPACES.length);
+			equal(result.length, AudienceSpaces.length);
 			deepEqual(result[0], {
 				name: "test1",
 				type: "undefined",
@@ -171,7 +171,7 @@ test("parseMVTValue", async (t) => {
 		const subfield = "";
 		const result = parseMVTValue(subfield);
 
-		equal(result.length, AUDIENCE_SPACES.length);
+		equal(result.length, AudienceSpaces.length);
 		result.forEach((item) => {
 			deepEqual(item, {
 				name: "undefined",
@@ -277,6 +277,8 @@ test("round-trip compatibility", async (t) => {
 				{ name: "control", type: "control", exp: 50 },
 				{ name: "variant1", type: "variant", exp: 25 },
 				{ name: "variant2", type: "variant", exp: 25 },
+				{ name: "variant3", type: "variant", exp: 25 },
+				{ name: "variant4", type: "variant", exp: 25 },
 			];
 			const stringified = stringifyMVTValue(original);
 			const parsed = parseMVTValue(stringified);
