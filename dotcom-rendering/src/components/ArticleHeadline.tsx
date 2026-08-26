@@ -275,11 +275,13 @@ const invertedText = css`
 	background-color: black;
 	white-space: pre-wrap;
 	padding-bottom: ${space[1]}px;
-	padding-right: ${space[1]}px;
+	padding-left: 12px;
+	padding-right: 18px;
 
 	${from.desktop} {
 		margin-left: -10px;
 		padding-left: 10px;
+		padding-right: ${space[1]}px;
 	}
 `;
 
@@ -291,6 +293,40 @@ const invertedText = css`
 const gridHeadlineText = css`
 	color: ${themePalette('--immersive-grid-headline-colour')};
 `;
+
+const gridHeadlineTextBelowDesktop = css`
+	${gridHeadlineText};
+
+	${until.desktop} {
+		color: white;
+		background-color: ${themePalette('--headline-background')};
+		white-space: pre-wrap;
+		padding-bottom: ${space[1]}px;
+		padding-left: 12px;
+		padding-right: 18px;
+	}
+`;
+
+const immersiveHeadlineStyles = (
+	layoutType: LayoutType | undefined,
+	isLegacyImmersive: boolean,
+) => {
+	if (isLegacyImmersive) {
+		return [
+			legacyImmersiveWrapper,
+			darkBackground,
+			css`
+				color: ${themePalette('--headline-colour')};
+			`,
+		];
+	}
+
+	if (layoutType === 'immersiveLandscapeDefault') {
+		return [invertedText, darkBackground];
+	}
+
+	return gridHeadlineTextBelowDesktop;
+};
 
 const maxWidth = css`
 	${from.desktop} {
@@ -556,19 +592,10 @@ export const ArticleHeadline = ({
 						>
 							<h1
 								css={[
-									isLegacyImmersive
-										? [
-												legacyImmersiveWrapper,
-												darkBackground,
-												css`
-													color: ${themePalette(
-														'--headline-colour',
-													)};
-												`,
-											]
-										: isInverted
-											? [invertedText, darkBackground]
-											: gridHeadlineText,
+									immersiveHeadlineStyles(
+										layoutType,
+										isLegacyImmersive,
+									),
 								]}
 							>
 								<span

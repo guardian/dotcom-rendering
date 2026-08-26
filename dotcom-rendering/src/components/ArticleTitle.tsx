@@ -32,8 +32,9 @@ const sectionStyles = css`
 const immersiveGridMargins = css`
 	max-width: 500px;
 	min-width: 200px;
-	margin-bottom: 4px;
-	${from.tablet} {
+	margin-bottom: 0;
+	${from.desktop} {
+		margin-bottom: 4px;
 		margin-left: -4px;
 	}
 `;
