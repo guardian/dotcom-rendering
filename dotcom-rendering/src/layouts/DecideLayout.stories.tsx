@@ -32,7 +32,11 @@ import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { type Article, enhanceArticleType } from '../types/article';
 import type { ImageBlockElement } from '../types/content';
-import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
+import {
+	DecideLayout,
+	type Props as DecideLayoutProps,
+	LABS_IMMERSIVE_GRID_AB_TEST,
+} from './DecideLayout';
 
 export type HydratedLayoutDecoratorArgs = {
 	colourScheme?: 'light' | 'dark';
@@ -263,6 +267,24 @@ const photoEssayImmersiveLabsPortraitArticle = enhanceArticleType(
 	'Web',
 );
 
+/**
+ * Opts an article into the new grid layout regardless of the 0% production
+ * rollout.
+ */
+const enableLabsImmersiveGridTest = (article: Article): Article => ({
+	...article,
+	frontendData: {
+		...article.frontendData,
+		config: {
+			...article.frontendData.config,
+			serverSideABTests: {
+				...article.frontendData.config.serverSideABTests,
+				[LABS_IMMERSIVE_GRID_AB_TEST]: 'enable',
+			},
+		},
+	},
+});
+
 const labsImmersiveArticle = ({
 	orientation,
 	design,
@@ -274,7 +296,7 @@ const labsImmersiveArticle = ({
 		orientation === 'portrait'
 			? photoEssayImmersiveLabsPortraitArticle
 			: photoEssayImmersiveLabsArticle;
-	return { ...base, design };
+	return enableLabsImmersiveGridTest({ ...base, design });
 };
 
 const immersiveLabsParameters = {
@@ -398,28 +420,36 @@ export const WebFeatureImmersiveLabsPortraitDark: Story = {
  */
 export const WebImmersiveLabsRealParrtjima: Story = {
 	args: {
-		article: enhanceArticleType(LabsImmersiveParrtjimaFixture, 'Web'),
+		article: enableLabsImmersiveGridTest(
+			enhanceArticleType(LabsImmersiveParrtjimaFixture, 'Web'),
+		),
 	},
 	parameters: immersiveLabsMobileParameters,
 };
 
 export const WebImmersiveLabsRealVictorianWater: Story = {
 	args: {
-		article: enhanceArticleType(LabsImmersiveVictorianWaterFixture, 'Web'),
+		article: enableLabsImmersiveGridTest(
+			enhanceArticleType(LabsImmersiveVictorianWaterFixture, 'Web'),
+		),
 	},
 	parameters: immersiveLabsMobileParameters,
 };
 
 export const WebImmersiveLabsRealGlobalX: Story = {
 	args: {
-		article: enhanceArticleType(LabsImmersiveGlobalXFixture, 'Web'),
+		article: enableLabsImmersiveGridTest(
+			enhanceArticleType(LabsImmersiveGlobalXFixture, 'Web'),
+		),
 	},
 	parameters: immersiveLabsMobileParameters,
 };
 
 export const WebImmersiveLabsRealFakeSpielberg: Story = {
 	args: {
-		article: enhanceArticleType(stableFakeSpielbergFixture, 'Web'),
+		article: enableLabsImmersiveGridTest(
+			enhanceArticleType(stableFakeSpielbergFixture, 'Web'),
+		),
 	},
 	parameters: immersiveLabsMobileParameters,
 };
