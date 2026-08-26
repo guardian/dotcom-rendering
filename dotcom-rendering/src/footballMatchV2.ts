@@ -235,7 +235,7 @@ const parseMatchResult = (
 				name: cleanTeamName(feResult.awayTeam.name),
 				paID: feResult.awayTeam.id,
 				score: awayScore,
-				scorers: parseScorers(feResult.homeTeam.scorers),
+				scorers: parseScorers(feResult.awayTeam.scorers),
 				teamUrl: feResult.awayTeam.teamUrl,
 			},
 			comment: feResult.comments,
