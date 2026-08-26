@@ -5,6 +5,7 @@ import type {
 	ReaderRevenuePosition,
 	ReaderRevenuePositions,
 } from '../types/commercial';
+import type { CustomSubnav } from '../types/customSubnav';
 import type { FELinkType, FENavType } from '../types/frontend';
 import { findPillar } from './find-pillar';
 
@@ -40,6 +41,7 @@ interface BaseNavType {
 	brandExtensions: LinkType[];
 	currentNavLink: string;
 	subNavSections?: SubNavType;
+	customSubNav?: CustomSubnav;
 	readerRevenueLinks: ReaderRevenuePositions;
 }
 
@@ -105,6 +107,7 @@ export const extractNAV = (data: FENavType): NavType => {
 					links: subnav.links.map(getLink),
 				}
 			: undefined,
+		customSubNav: data.customSubnav,
 		readerRevenueLinks: buildRRLinkModel(data),
 	};
 };
