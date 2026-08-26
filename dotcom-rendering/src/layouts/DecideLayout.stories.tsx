@@ -419,9 +419,7 @@ export const WebImmersiveLabsRealGlobalX: Story = {
 
 export const WebImmersiveLabsRealFakeSpielberg: Story = {
 	args: {
-		article: enableLabsImmersiveGridTest(
-			enhanceArticleType(stableFakeSpielbergFixture, 'Web'),
-		),
+		article: enhanceArticleType(stableFakeSpielbergFixture, 'Web'),
 	},
 	parameters: immersiveLabsMobileParameters,
 };
