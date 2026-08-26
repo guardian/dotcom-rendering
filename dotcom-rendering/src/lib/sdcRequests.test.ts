@@ -4,19 +4,21 @@ describe('sdcRequests', () => {
 	const originalFetch = global.fetch;
 	const originalPlatform = navigator.platform;
 	const originalMaxTouchPoints = navigator.maxTouchPoints;
+	const originalSearch = window.location.search;
+	const setLocationSearch = (search: string) => {
+		window.history.replaceState(
+			{},
+			'',
+			`${window.location.pathname}${search}`,
+		);
+	};
 
 	beforeEach(() => {
 		global.fetch = jest.fn().mockResolvedValue({
 			ok: true,
 			json: () => Promise.resolve({ data: null }),
 		});
-		// Mock window.location.search
-		Object.defineProperty(window, 'location', {
-			value: {
-				search: '',
-			},
-			writable: true,
-		});
+		setLocationSearch('');
 	});
 
 	afterEach(() => {
@@ -28,6 +30,7 @@ describe('sdcRequests', () => {
 			value: originalMaxTouchPoints,
 			configurable: true,
 		});
+		setLocationSearch(originalSearch);
 		global.fetch = originalFetch;
 	});
 
@@ -87,12 +90,7 @@ describe('sdcRequests', () => {
 		});
 
 		it('appends force parameter when present in URL', async () => {
-			Object.defineProperty(window, 'location', {
-				value: {
-					search: '?force-epic=control',
-				},
-				writable: true,
-			});
+			setLocationSearch('?force-epic=control');
 
 			const { getEpic } = await import('./sdcRequests');
 			await getEpic('https://contributions.guardianapis.com', {
@@ -120,12 +118,7 @@ describe('sdcRequests', () => {
 				value: 1,
 				configurable: true,
 			});
-			Object.defineProperty(window, 'location', {
-				value: {
-					search: '?force-epic=variant',
-				},
-				writable: true,
-			});
+			setLocationSearch('?force-epic=variant');
 
 			const { getEpic } = await import('./sdcRequests');
 			await getEpic('https://contributions.guardianapis.com', {
@@ -145,12 +138,7 @@ describe('sdcRequests', () => {
 		});
 
 		it('appends preview parameter when present in URL', async () => {
-			Object.defineProperty(window, 'location', {
-				value: {
-					search: '?preview-epic=control',
-				},
-				writable: true,
-			});
+			setLocationSearch('?preview-epic=control');
 
 			const { getEpic } = await import('./sdcRequests');
 			await getEpic('https://contributions.guardianapis.com', {

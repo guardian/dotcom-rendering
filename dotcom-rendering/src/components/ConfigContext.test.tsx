@@ -15,7 +15,7 @@ const TestComponent = () => {
 describe('ConfigContext', () => {
 	describe('without ConfigProvider', () => {
 		it('does not allow use of the useConfig hook without being inside ConfigProvider', () => {
-			expect(() => TestComponent()).toThrowError();
+			expect(() => TestComponent()).toThrow();
 		});
 	});
 

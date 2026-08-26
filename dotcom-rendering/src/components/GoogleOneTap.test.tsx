@@ -1,3 +1,10 @@
+/**
+ * These tests replace the global `window` with a stub, which jsdom no longer
+ * allows because `window` and `window.location` are non-configurable. The node
+ * environment has no `window` of its own, so the stub can be installed freely.
+ *
+ * @jest-environment node
+ */
 import { submitComponentEvent as submitComponentEventMock } from '../client/ophan/ophan';
 import { error, ok } from '../lib/result';
 import {

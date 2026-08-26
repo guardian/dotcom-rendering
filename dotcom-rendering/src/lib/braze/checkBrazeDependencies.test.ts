@@ -16,14 +16,10 @@ jest.mock('./hasRequiredConsents', () => ({
 }));
 
 describe('checkBrazeDependecies', () => {
-	let windowSpy: jest.SpyInstance;
-
-	beforeEach(() => {
-		windowSpy = jest.spyOn(window, 'window', 'get');
-	});
+	const originalGuardian = window.guardian;
 
 	afterEach(() => {
-		windowSpy.mockRestore();
+		window.guardian = originalGuardian;
 
 		// Wait for any unsettled promises to complete at the end of each test. Once
 		// we encounter a failure in our list of checks we don't need to wait on
@@ -33,8 +29,9 @@ describe('checkBrazeDependecies', () => {
 		return flushPromises;
 	});
 
-	const setWindow = (windowData: { [key: string]: any }) =>
-		windowSpy.mockImplementation(() => windowData);
+	const setWindow = (windowData: { guardian: unknown }) => {
+		window.guardian = windowData.guardian as typeof window.guardian;
+	};
 
 	it('succeeds if all dependencies are fulfilled', async () => {
 		setWindow({
