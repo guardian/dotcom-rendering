@@ -5,9 +5,9 @@ import {
 	headlineBold20Object,
 	headlineBold24Object,
 	space,
-	textSans12Object,
 	textSans14Object,
 	textSans15Object,
+	textSansBold12Object,
 	textSansBold14Object,
 	textSansBold17Object,
 	textSansItalic14Object,
@@ -42,7 +42,7 @@ import {
 	background,
 	border,
 	primaryText,
-	secondaryText,
+	scoreSecondaryText,
 } from '../FootballMatchHeader/colours';
 import { Tabs } from '../FootballMatchHeader/Tabs';
 import { MatchHeaderFallback } from '../MatchHeaderFallback';
@@ -251,7 +251,7 @@ const StatusLine = (props: { match: CricketMatch; edition: EditionId }) => (
 			},
 		}}
 		style={{
-			color: palette(secondaryText(props.match.kind)),
+			color: palette(scoreSecondaryText(props.match.kind)),
 		}}
 	>
 		<SeriesName matchKind={props.match.kind}>
@@ -458,14 +458,14 @@ const Team = (props: { team: CricketTeam; match: CricketMatch }) => {
 										/>
 										<span
 											css={{
-												...textSans12Object,
+												...textSansBold12Object,
 												display: 'inline-block',
 												marginTop: space[2],
 												padding: `0 ${space[1]}px 1px ${space[1]}px`,
-												border: '1px solid',
+												border: `1px solid ${palette(border(props.match.kind))}`,
 												borderRadius: 30,
 												color: palette(
-													secondaryText(
+													scoreSecondaryText(
 														props.match.kind,
 													),
 												),
