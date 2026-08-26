@@ -71,3 +71,15 @@ updates:
     schedule:
       interval: 'daily'
     rebase-strategy: 'disabled'
+
+  # Keeps Production.dockerfile at repo root up-to-date
+  - package-ecosystem: 'docker'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+
+  # Keeps docker-compose.yaml at repo root up-to-date
+  - package-ecosystem: 'docker-compose'
+    directory: '/'
+    schedule:
+      interval: 'daily'
