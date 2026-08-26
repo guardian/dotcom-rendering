@@ -35,6 +35,7 @@ const enhanceFront = (body: unknown): Front => {
 			data.pressedPage.frontProperties.commercial.editionBrandings,
 			data.editionId,
 		),
+		serverSideABTests: data.config.serverSideABTests,
 	});
 
 	return {
@@ -122,6 +123,7 @@ const enhanceTagPage = (body: unknown): TagPage => {
 		discussionApiUrl: data.config.discussionApiUrl,
 		editionId: data.editionId,
 		stripBranding: !!tagPageBranding,
+		serverSideABTests: data.config.serverSideABTests,
 	});
 
 	const speed = getSpeedFromTrails(data.contents);
