@@ -47,9 +47,10 @@ class TestGroupMVTManager {
 			Array.from(this.testGroups.values()).flat(),
 		);
 
+		// collect all available MVTs that are not currently occupied in a random order
 		this.availableMVTs = Array.from({ length: MVT_COUNT }, (_, i) => i)
 			.filter((i) => !this.occupiedMVTs.has(i))
-			.sort((a, b) => a - b);
+			.sort(() => Math.random() - 0.5);
 
 		console.log(
 			`Initialized TestGroupMVTs with ${this.availableMVTs.length} available MVTs`,
@@ -109,11 +110,14 @@ class TestGroupMVTManager {
 				throw new Error(`Not enough available MVTs for test ${name}`);
 			}
 			for (let i = 0; i < additionalMVTsNeeded; i++) {
-				const mvtIndex = this.availableMVTs.shift();
-				if (mvtIndex !== undefined) {
-					currentMVTs.push(mvtIndex);
-					this.occupiedMVTs.add(mvtIndex);
+				const mvtId = this.availableMVTs.shift();
+				if (mvtId === undefined) {
+					throw new Error(
+						`No available MVTs left to expand test ${name}`,
+					);
 				}
+				currentMVTs.push(mvtId);
+				this.occupiedMVTs.add(mvtId);
 			}
 		} else if (newSize < currentSize) {
 			const removedMVTs = currentMVTs.slice(newSize);
@@ -122,8 +126,6 @@ class TestGroupMVTManager {
 				this.availableMVTs.push(mvt);
 			});
 			currentMVTs.length = newSize;
-			// Keep available MVTs sorted in ascending order
-			this.availableMVTs.sort((a, b) => a - b);
 		}
 		this.testGroups.set(name, currentMVTs);
 	}
@@ -140,8 +142,6 @@ class TestGroupMVTManager {
 				this.availableMVTs.push(mvt);
 			});
 			this.testGroups.delete(name);
-			// Keep available MVTs sorted in ascending order
-			this.availableMVTs.sort((a, b) => a - b);
 		}
 	}
 }
