@@ -113,7 +113,7 @@ const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 						case ArticleSpecial.SpecialReport:
 							return sourcePalette.specialReport[200];
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[200];
+							return sourcePalette.labs[100];
 						default:
 							return pillarPalette(theme, 200);
 					}
@@ -170,7 +170,7 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 						case ArticleSpecial.SpecialReport:
 							return sourcePalette.specialReport[500];
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[500];
 						default:
 							return pillarPalette(theme, 500);
 					}
@@ -343,7 +343,7 @@ const headlineBylineLight: PaletteFunction = ({ design, display, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.news[400];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[100];
 				default:
 					return pillarPalette(theme, 400);
 			}
@@ -367,7 +367,7 @@ const headlineBylineDark: PaletteFunction = ({ design, display, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[700];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				default:
 					return pillarPalette(theme, 500);
 			}
@@ -408,7 +408,7 @@ const bylineLight: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Opinion:
 					return sourcePalette.opinion[300];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[100];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -548,7 +548,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Opinion:
 					return sourcePalette.opinion[400];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.brandAlt[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -566,7 +566,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -587,7 +587,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[300];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReport:
 							return sourcePalette.specialReport[400];
 						case ArticleSpecial.SpecialReportAlt:
@@ -611,7 +611,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -635,7 +635,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -678,7 +678,7 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 500);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[500];
 						case ArticleSpecial.SpecialReport:
 							return sourcePalette.specialReport[500];
 						case ArticleSpecial.SpecialReportAlt:
@@ -702,7 +702,7 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -718,7 +718,7 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -729,7 +729,7 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 		case ArticleDesign.Audio:
 			switch (theme) {
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				default:
 					return sourcePalette.neutral[60];
 			}
@@ -742,7 +742,7 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -762,7 +762,7 @@ const bylineHoverLight: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 200);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
+					return sourcePalette.labs[100];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.brandAlt[200];
 				case ArticleSpecial.SpecialReportAlt:
@@ -863,7 +863,7 @@ const bylineHoverDark: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 600);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -879,7 +879,7 @@ const bylineHoverDark: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 600);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -894,7 +894,7 @@ const bylineHoverDark: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 600);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[700];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1202,7 +1202,7 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1512,7 +1512,7 @@ const followIconFillDark: PaletteFunction = ({ theme, design }) => {
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[500];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[700];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1744,7 +1744,7 @@ const blockQuoteLinkLight: PaletteFunction = (format: ArticleFormat) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[200];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
+			return sourcePalette.labs[200];
 	}
 };
 
@@ -1761,7 +1761,7 @@ const blockQuoteLinkDark: PaletteFunction = (format: ArticleFormat) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[300];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 	}
 };
 
@@ -2387,7 +2387,7 @@ const standfirstLinkTextLight: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[300];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -2405,7 +2405,7 @@ const standfirstLinkTextLight: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[300];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -2468,7 +2468,7 @@ const standfirstLinkTextDark: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Opinion:
 					return sourcePalette.opinion[500];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -2508,6 +2508,10 @@ const standfirstTextLight: PaletteFunction = (format) => {
 			...labsHostedDesigns,
 		].includes(format.design)
 	) {
+		if (format.design === ArticleDesign.Gallery) {
+			return sourcePalette.labs[500];
+		}
+
 		return sourcePalette.labs[100];
 	}
 
@@ -2540,7 +2544,11 @@ const standfirstTextLight: PaletteFunction = (format) => {
 const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 	if (
 		theme === ArticleSpecial.Labs &&
-		![ArticleDesign.LiveBlog, ...labsHostedDesigns].includes(design)
+		![
+			ArticleDesign.LiveBlog,
+			...labsMediaDesigns,
+			...labsHostedDesigns,
+		].includes(design)
 	) {
 		return sourcePalette.labs[500];
 	}
@@ -2703,7 +2711,7 @@ const cardKickerTextDark: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return pillarPalette(theme, 500);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.news[500];
 		case ArticleSpecial.SpecialReportAlt:
@@ -3000,7 +3008,7 @@ const keyEventTextLight: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return sourcePalette.opinion[300];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
+			return sourcePalette.labs[100];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
@@ -3022,7 +3030,7 @@ const keyEventTextDark: PaletteFunction = ({ theme }) => {
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[500];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[300];
 	}
@@ -3080,7 +3088,7 @@ const numberedListTitleDark: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return pillarPalette(theme, 500);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
@@ -3421,7 +3429,7 @@ const articleLinkTextDark: PaletteFunction = ({ display, theme }) => {
 				case Pillar.Opinion:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -3787,7 +3795,7 @@ const pullQuoteTextLight: PaletteFunction = ({
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 200);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
+					return sourcePalette.labs[100];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[200];
 				case ArticleSpecial.SpecialReportAlt:
@@ -3821,7 +3829,7 @@ const pullQuoteTextDark: PaletteFunction = ({
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -4075,7 +4083,7 @@ const shareButtonDark: PaletteFunction = ({ design, theme }) => {
 		default:
 			switch (theme) {
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -4124,7 +4132,7 @@ const liveBlockContainerBackgroundDark: PaletteFunction = () =>
 const liveBlockBorderTopLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
@@ -4333,7 +4341,7 @@ const subMetaTextDark: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.specialReport[700];
 
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[300];
@@ -4553,7 +4561,7 @@ const dropCapLight: PaletteFunction = ({ theme }) => {
 		case Pillar.Lifestyle:
 			return pillarPalette(theme, 200);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[200];
+			return sourcePalette.labs[100];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[200];
 		case ArticleSpecial.SpecialReportAlt:
@@ -4570,7 +4578,7 @@ const dropCapDark: PaletteFunction = ({ theme }) => {
 		case Pillar.News:
 			return pillarPalette(theme, 500);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
@@ -4677,7 +4685,7 @@ const linkKickerTextLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
 			}
@@ -4696,7 +4704,7 @@ const linkKickerTextLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
 			}
@@ -4714,7 +4722,7 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.news[500];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[200];
 	}
@@ -5209,7 +5217,7 @@ const seriesOrSectionTitleTextLight: PaletteFunction = ({
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.news[400];
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[300];
+							return sourcePalette.labs[200];
 					}
 
 				case ArticleDesign.Analysis:
@@ -5222,7 +5230,7 @@ const seriesOrSectionTitleTextLight: PaletteFunction = ({
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.specialReportAlt[200];
 					}
@@ -5251,7 +5259,7 @@ const seriesOrSectionTitleTextLight: PaletteFunction = ({
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 500);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.specialReportAlt[200];
 					}
@@ -5264,7 +5272,7 @@ const seriesOrSectionTitleTextLight: PaletteFunction = ({
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.specialReportAlt[200];
 					}
@@ -5346,7 +5354,7 @@ const seriesOrSectionTitleTextDark: PaletteFunction = ({
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[700];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 			}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
@@ -5362,7 +5370,7 @@ const seriesOrSectionTitleTextDark: PaletteFunction = ({
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 			}
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
@@ -5377,7 +5385,7 @@ const seriesOrSectionTitleTextDark: PaletteFunction = ({
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -5531,7 +5539,7 @@ const commentCountFillDark: PaletteFunction = ({ design, theme }) => {
 			case Pillar.Lifestyle:
 				return pillarPalette(theme, 500);
 			case ArticleSpecial.Labs:
-				return sourcePalette.labs[400];
+				return sourcePalette.labs[500];
 			case ArticleSpecial.SpecialReport:
 				return sourcePalette.specialReport[500];
 			case ArticleSpecial.SpecialReportAlt:
@@ -5603,7 +5611,7 @@ const explainerAtomAccentDark: PaletteFunction = () =>
 const signInLinkLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
+			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
@@ -5648,7 +5656,7 @@ const speechBubbleBackgroundLight: PaletteFunction = ({ theme, design }) => {
 		case Pillar.Lifestyle:
 			return pillarPalette(theme, 400);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
@@ -5785,7 +5793,7 @@ const discussionPrimaryButtonBackgroundLight: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return sourcePalette.opinion[400];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
+			return sourcePalette.labs[200];
 		default:
 			return sourcePalette.news[300];
 	}
@@ -5942,7 +5950,7 @@ const paginationTextLight: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return sourcePalette.opinion[300];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
+			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
@@ -6238,7 +6246,7 @@ const highlightsCardKickerTextDark: PaletteFunction = (format) => {
 		case Pillar.Lifestyle:
 			return pillarPalette(format.theme, 500);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[200];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.news[500];
@@ -7692,7 +7700,7 @@ const paletteColours = {
 	},
 	'--labs-about-dropdown-link': {
 		light: () => sourcePalette.labs[200],
-		dark: () => sourcePalette.labs[400],
+		dark: () => sourcePalette.labs[500],
 	},
 	'--labs-about-dropdown-text': {
 		light: () => sourcePalette.neutral[7],
@@ -7704,7 +7712,7 @@ const paletteColours = {
 	},
 	'--labs-header-label-text': {
 		light: () => sourcePalette.labs[100],
-		dark: () => sourcePalette.labs[700],
+		dark: () => sourcePalette.labs[500],
 	},
 	'--labs-header-title': {
 		light: () => sourcePalette.neutral[0],

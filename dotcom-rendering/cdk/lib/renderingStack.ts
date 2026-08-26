@@ -17,6 +17,12 @@ import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
+import {
+	ContainerDependencyCondition,
+	ContainerImage,
+	FireLensLogDriver,
+} from 'aws-cdk-lib/aws-ecs';
+import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
@@ -301,12 +307,89 @@ export class RenderingCDKStack extends CDKStack {
 				GU_STAGE: stage,
 				GU_APP: guApp,
 				GU_STACK: guStack,
+				OTEL_EXPORTER_OTLP_ENDPOINT: 'http://localhost:4318',
+				OTEL_SERVICE_NAME: guApp,
 			};
 
 			for (const [key, value] of Object.entries(ecsEnvVars)) {
 				app.ecsService?.taskDefinition.defaultContainer?.addEnvironment(
 					key,
 					value,
+				);
+			}
+
+			/**
+			 * The ADOT (AWS Distro for OpenTelemetry) Collector, run as a
+			 * sidecar. The app exports OTLP traces to it over localhost, and it
+			 * forwards them to AWS X-Ray.
+			 *
+			 * @see https://github.com/aws-observability/aws-otel-collector/blob/v0.49.0/deployment-template/ecs/aws-otel-fargate-sidecar-deployment-cfn.yaml
+			 * @see https://aws-otel.github.io/docs/setup/ecs
+			 *
+			 * The default config.yaml used is also available on github
+			 * @see https://github.com/aws-observability/aws-otel-collector/blob/0771477f9db2879afad3ae3ff7811b5264a151a8/config/ecs/ecs-default-config.yaml
+			 */
+			if (app.ecsService) {
+				const { taskDefinition } = app.ecsService;
+				// Reuse the FireLens log options already wired by GuLoadBalancedAppExperimental,
+				// which registers GuLoggingStreamNameParameter as a singleton on this stack.
+				// This avoids re-introducing the parameter explicitly here.
+				const defaultContainerLogConfig =
+					taskDefinition.defaultContainer?.logDriverConfig;
+				const fireLensLogDriver = new FireLensLogDriver({
+					options: defaultContainerLogConfig?.options,
+				});
+
+				const collector = taskDefinition.addContainer(
+					'aws-otel-collector',
+					{
+						image: ContainerImage.fromRegistry(
+							'public.ecr.aws/aws-observability/aws-otel-collector@sha256:90b3180c21acb9497110480371a413ed91f2836077f8a8fb4507b019d3c481c0',
+						),
+						command: ['--config=/etc/ecs/ecs-default-config.yaml'],
+						cpu: 256,
+						memoryLimitMiB: 512,
+						logging: fireLensLogDriver,
+						healthCheck: {
+							command: ['CMD', '/healthcheck'],
+							interval: Duration.seconds(5),
+							retries: 2,
+							timeout: Duration.seconds(3),
+						},
+						// If resources are constrained this container can be
+						// taken down to give room to the main app
+						essential: false,
+					},
+				);
+
+				taskDefinition.defaultContainer?.addContainerDependencies({
+					container: collector,
+					condition: ContainerDependencyCondition.START,
+				});
+
+				/**
+				 * `AWSDistroOpenTelemetryPolicy`, less `ssm:GetParameters`, which
+				 * is only used when `--config` names an SSM parameter.
+				 *
+				 * @see https://aws-otel.github.io/docs/setup/permissions
+				 */
+				taskDefinition.addToTaskRolePolicy(
+					new PolicyStatement({
+						actions: [
+							'logs:PutLogEvents',
+							'logs:CreateLogGroup',
+							'logs:CreateLogStream',
+							'logs:DescribeLogStreams',
+							'logs:DescribeLogGroups',
+							'logs:PutRetentionPolicy',
+							'xray:PutTraceSegments',
+							'xray:PutTelemetryRecords',
+							'xray:GetSamplingRules',
+							'xray:GetSamplingTargets',
+							'xray:GetSamplingStatisticSummaries',
+						],
+						resources: ['*'],
+					}),
 				);
 			}
 		}

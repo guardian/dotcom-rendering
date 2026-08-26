@@ -1980,6 +1980,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
     },
     "EcsService81FC6EF6": {
       "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
         "ListenerTagpagerenderingDeterministicRouteToEc2Rule1C5C95A4",
         "ListenerTagpagerenderingDeterministicRouteToEcsRuleAB05C756",
@@ -2075,6 +2076,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
     },
     "EcsServiceTaskCountTarget02FCCE22": {
       "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
@@ -2123,6 +2125,12 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "Properties": {
         "ContainerDefinitions": [
           {
+            "DependsOn": [
+              {
+                "Condition": "START",
+                "ContainerName": "aws-otel-collector",
+              },
+            ],
             "DockerLabels": {
               "RiffRaffDeploymentId": {
                 "Ref": "RiffRaffDeploymentId",
@@ -2164,6 +2172,14 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
               {
                 "Name": "GU_STACK",
                 "Value": "frontend",
+              },
+              {
+                "Name": "OTEL_EXPORTER_OTLP_ENDPOINT",
+                "Value": "http://localhost:4318",
+              },
+              {
+                "Name": "OTEL_SERVICE_NAME",
+                "Value": "tag-page-rendering",
               },
             ],
             "Essential": true,
@@ -2251,6 +2267,36 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             "Name": "LogShipping",
             "ReadonlyRootFilesystem": true,
             "VersionConsistency": "disabled",
+          },
+          {
+            "Command": [
+              "--config=/etc/ecs/ecs-default-config.yaml",
+            ],
+            "Cpu": 256,
+            "Essential": false,
+            "HealthCheck": {
+              "Command": [
+                "CMD",
+                "/healthcheck",
+              ],
+              "Interval": 5,
+              "Retries": 2,
+              "Timeout": 3,
+            },
+            "Image": "public.ecr.aws/aws-observability/aws-otel-collector@sha256:90b3180c21acb9497110480371a413ed91f2836077f8a8fb4507b019d3c481c0",
+            "LogConfiguration": {
+              "LogDriver": "awsfirelens",
+              "Options": {
+                "Name": "kinesis_streams",
+                "region": "eu-west-1",
+                "retry_limit": "2",
+                "stream": {
+                  "Ref": "LoggingStreamName",
+                },
+              },
+            },
+            "Memory": 512,
+            "Name": "aws-otel-collector",
           },
         ],
         "Cpu": "1024",
@@ -2480,6 +2526,39 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         ],
       },
       "Type": "AWS::IAM::Role",
+    },
+    "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:PutLogEvents",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:DescribeLogGroups",
+                "logs:PutRetentionPolicy",
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+                "xray:GetSamplingRules",
+                "xray:GetSamplingTargets",
+                "xray:GetSamplingStatisticSummaries",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "Roles": [
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
     },
     "GetDistributablePolicyTagpagerendering346128E3": {
       "Properties": {
