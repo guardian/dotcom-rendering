@@ -1,5 +1,5 @@
 import { trace } from '@opentelemetry/api';
-import type { RequestHandler } from 'express';
+import type { Request, RequestHandler } from 'express';
 
 // Spans are hand-made because @opentelemetry/instrumentation-express hooks
 // `require`, and webpack has inlined express into the server bundle.
@@ -8,6 +8,22 @@ import type { RequestHandler } from 'express';
 // @see https://github.com/open-telemetry/opentelemetry-js/blob/main/experimental/packages/opentelemetry-instrumentation/README.md#limitations
 // @see https://opentelemetry.io/docs/languages/js/instrumentation/#acquiring-a-tracer
 const tracer = trace.getTracer('dotcom-rendering');
+
+const getRouteTag = (req: Request): string => {
+	// Prefer the declared Express route template (e.g. /AppsComponent/thrasher/:name)
+	// and fall back to only the first URL segment to keep cardinality bounded.
+	const route = req.route as unknown;
+	const routeTemplate =
+		route &&
+		typeof route === 'object' &&
+		'path' in route &&
+		typeof route.path === 'string'
+			? route.path
+			: undefined;
+	const firstPathSegment = req.path.split('/').filter(Boolean)[0];
+
+	return routeTemplate ?? (firstPathSegment ? `/${firstPathSegment}` : '/');
+};
 
 export const createExpressJsonWrapper = (
 	expressJson: RequestHandler,
@@ -32,16 +48,7 @@ export const createRequestTracingMiddleware = (): RequestHandler => {
 			if (ended) return;
 			ended = true;
 
-			// Prefer the declared Express route template (e.g. /AppsComponent/thrasher/:name)
-			// and fall back to only the first URL segment to keep cardinality bounded.
-			const routeTemplate =
-				typeof req.route?.path === 'string'
-					? req.route.path
-					: undefined;
-			const firstPathSegment = req.path.split('/').filter(Boolean)[0];
-			const routeTag =
-				routeTemplate ??
-				(firstPathSegment ? `/${firstPathSegment}` : '/');
+			const routeTag = getRouteTag(req);
 
 			// Keep request metrics queryable by method/route/status while avoiding high-cardinality paths.
 			span.setAttribute('http.request.method', req.method);
