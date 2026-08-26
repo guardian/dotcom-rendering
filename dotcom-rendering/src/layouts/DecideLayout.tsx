@@ -58,7 +58,8 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 					);
 				}
 				default: {
-					return article.theme === ArticleSpecial.Labs ? (
+					return article.theme === ArticleSpecial.Labs &&
+						article.design === ArticleDesign.Standard ? (
 						<StandardLayout
 							article={article.frontendData}
 							format={format}
@@ -241,7 +242,8 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 					);
 				}
 				default: {
-					return article.theme === ArticleSpecial.Labs ? (
+					return article.theme === ArticleSpecial.Labs &&
+						article.design === ArticleDesign.Standard ? (
 						<StandardLayout
 							article={article.frontendData}
 							format={format}
