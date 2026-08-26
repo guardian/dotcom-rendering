@@ -190,6 +190,21 @@ const sectionPadding = css`
 	}
 `;
 
+const immersiveGridTitleBelowDesktop = css`
+	${until.desktop} {
+		color: white;
+		padding: 3px 6px 4px 6px;
+		box-shadow: none;
+	}
+`;
+
+const immersiveGridTitleWrapperBelowDesktop = css`
+	${until.desktop} {
+		padding-left: 9px;
+		padding-right: 9px;
+	}
+`;
+
 export const SeriesSectionLink = ({
 	format,
 	layoutType,
@@ -342,7 +357,14 @@ export const SeriesSectionLink = ({
 			const title = tag?.title ? tag.title : sectionLabel;
 			const linkExt = tag?.id ? tag.id : sectionUrl;
 			return (
-				<div>
+				<div
+					css={
+						format.display === ArticleDisplay.Immersive &&
+						layoutType !== undefined
+							? immersiveGridTitleWrapperBelowDesktop
+							: undefined
+					}
+				>
 					<a
 						css={[
 							sectionLabelLink,
@@ -356,6 +378,9 @@ export const SeriesSectionLink = ({
 									'--series-title-background',
 								)};
 							`,
+							format.display === ArticleDisplay.Immersive &&
+								layoutType !== undefined &&
+								immersiveGridTitleBelowDesktop,
 							format.design === ArticleDesign.Gallery &&
 								css`
 									position: relative;
