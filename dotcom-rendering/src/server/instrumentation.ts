@@ -44,11 +44,31 @@ const sdk = new NodeSDK({
 
 sdk.start();
 
+// Instrumentation is preloaded into the same process as the app server.
+// It should react to process SIGTERM, but not own process/server lifecycle.
+let shutdownPromise: Promise<void> | null = null;
+
+const shutdownInstrumentation = (): Promise<void> => {
+	if (shutdownPromise !== null) {
+		logger.error(
+			'SIGTERM received; Instrumentation SDK is already shutting down',
+		);
+		return shutdownPromise;
+	}
+
+	logger.info('SIGTERM received; Instrumentation SDK shutting down');
+	shutdownPromise = sdk.shutdown().then(
+		() => {
+			logger.info('Instrumentation SDK shut down successfully');
+		},
+		(err) => {
+			logger.error('Error shutting down Instrumentation SDK', err);
+		},
+	);
+
+	return shutdownPromise;
+};
+
 process.on('SIGTERM', () => {
-	sdk.shutdown()
-		.then(
-			() => console.log('SDK shut down successfully'),
-			(err) => console.log('Error shutting down SDK', err),
-		)
-		.finally(() => process.exit(0));
+	void shutdownInstrumentation();
 });
