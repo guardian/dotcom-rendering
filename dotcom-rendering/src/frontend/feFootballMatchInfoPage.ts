@@ -1,10 +1,10 @@
 import {
 	array,
 	boolean,
+	type InferOutput,
 	number,
 	object,
 	optional,
-	type Output,
 	string,
 } from 'valibot';
 import type { FEFootballDataPage } from './feFootballDataPage';
@@ -23,9 +23,11 @@ const feFootballPlayerEventEnhancedSchema = object({
 	addedTime: string(),
 });
 
-export type FEFootballPlayerEvent = Output<typeof feFootballPlayerEventSchema>;
+export type FEFootballPlayerEvent = InferOutput<
+	typeof feFootballPlayerEventSchema
+>;
 
-export type FEFootballPlayerEventEnhanced = Output<
+export type FEFootballPlayerEventEnhanced = InferOutput<
 	typeof feFootballPlayerEventEnhancedSchema
 >;
 
@@ -41,7 +43,7 @@ const feFootballPlayerSchema = object({
 	enhancedEvents: array(feFootballPlayerEventEnhancedSchema),
 });
 
-export type FEFootballPlayer = Output<typeof feFootballPlayerSchema>;
+export type FEFootballPlayer = InferOutput<typeof feFootballPlayerSchema>;
 
 const feFootballTeamSchema = object({
 	id: string(),
@@ -59,7 +61,7 @@ const feFootballTeamSchema = object({
 	crest: string(),
 });
 
-export type FEFootballTeam = Output<typeof feFootballTeamSchema>;
+export type FEFootballTeam = InferOutput<typeof feFootballTeamSchema>;
 
 export const feFootballMatchStatsSchema = object({
 	id: string(),
@@ -69,7 +71,9 @@ export const feFootballMatchStatsSchema = object({
 	comments: optional(string()),
 });
 
-export type FEFootballMatchStats = Output<typeof feFootballMatchStatsSchema>;
+export type FEFootballMatchStats = InferOutput<
+	typeof feFootballMatchStatsSchema
+>;
 
 export type FEFootballMatchInfoPage = FEFootballDataPage & {
 	matchStats: FEFootballMatchStats;
@@ -88,7 +92,9 @@ export const feFootballTeamSummarySchema = object({
 	colours: string(),
 });
 
-export type FEFootballTeamSummary = Output<typeof feFootballTeamSummarySchema>;
+export type FEFootballTeamSummary = InferOutput<
+	typeof feFootballTeamSummarySchema
+>;
 
 export const feFootballMatchStatsSummarySchema = object({
 	id: string(),
@@ -98,6 +104,6 @@ export const feFootballMatchStatsSummarySchema = object({
 	infoURL: string(),
 });
 
-export type FEFootballMatchStatsSummary = Output<
+export type FEFootballMatchStatsSummary = InferOutput<
 	typeof feFootballMatchStatsSummarySchema
 >;
