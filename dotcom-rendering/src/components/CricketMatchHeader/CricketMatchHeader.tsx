@@ -43,6 +43,7 @@ import {
 	border,
 	primaryText,
 	scoreSecondaryText,
+	secondaryText,
 } from '../FootballMatchHeader/colours';
 import { Tabs } from '../FootballMatchHeader/Tabs';
 import { MatchHeaderFallback } from '../MatchHeaderFallback';
@@ -251,7 +252,7 @@ const StatusLine = (props: { match: CricketMatch; edition: EditionId }) => (
 			},
 		}}
 		style={{
-			color: palette(scoreSecondaryText(props.match.kind)),
+			color: palette(secondaryText(props.match.kind)),
 		}}
 	>
 		<SeriesName matchKind={props.match.kind}>
