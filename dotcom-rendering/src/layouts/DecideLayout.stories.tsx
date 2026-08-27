@@ -230,12 +230,8 @@ export const AppsPictureShowcaseOpinionDark: Story = {
 };
 
 /**
- * Skipped (flaky).
- *
- * This story fails intermittently as an iframe is inserted into the page
- * which is sometimes registered by the snapshot.
- *
- * Example: https://www.chromatic.com/test?appId=63e251470cfbe61776b0ef19&id=675aaa4f3aa384bd64bde3a1
+ * Snapshots using this fixture are skipped because its iframe content causes
+ * intermittent layout shifts.
  */
 const photoEssayImmersiveLabsArticle = enhanceArticleType(
 	PhotoEssayImmersiveLabsFixture,
@@ -279,6 +275,7 @@ const labsImmersiveArticle = ({
 
 const immersiveLabsParameters = {
 	...webParameters,
+	chromatic: { disableSnapshot: true },
 };
 
 /** Snapshot real Labs immersive articles at mobile in addition to the default width, to catch small-breakpoint-only regressions */
