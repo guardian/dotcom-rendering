@@ -47,8 +47,8 @@ sdk.start();
 process.on('SIGTERM', () => {
 	sdk.shutdown()
 		.then(
-			() => console.log('SDK shut down successfully'),
-			(err) => console.log('Error shutting down SDK', err),
+			() => logger.info('SDK shut down successfully'),
+			(err) => logger.error('Error shutting down SDK', err),
 		)
 		.finally(() => process.exit(0));
 });
