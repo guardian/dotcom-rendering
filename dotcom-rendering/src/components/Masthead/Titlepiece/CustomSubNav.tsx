@@ -49,16 +49,27 @@ const subNavStylesFromLeftCol = css`
 const articleContainerStyles = css`
 	display: flex;
 	align-items: stretch;
+	/** Matches the regular subnav's total height (its margin-top + min-height) at each breakpoint. */
+	min-height: 36px;
+
+	${from.mobileMedium} {
+		min-height: 40px;
+	}
+	${from.tablet} {
+		min-height: 42px;
+	}
+	${from.leftCol} {
+		min-height: 44px;
+	}
 `;
 
 /**
  * On articles the links row sits inline next to the header. The stacked top margins are
- * removed and replaced with padding so the header divider spans the full component height.
+ * removed so the header divider spans the full component height set by the container.
  */
 const articleSubNavStyles = css`
 	margin-top: 0;
-	padding-top: ${space[2]}px;
-	padding-bottom: ${space[2]}px;
+	align-items: center;
 
 	${from.mobileMedium} {
 		margin-top: 0;
@@ -72,8 +83,8 @@ const articleHeaderStyles = css`
 	${textSansBold14}
 	color: ${themePalette('--custom-subnav-header-text')};
 	display: flex;
+	align-items: center;
 	white-space: nowrap;
-	padding-top: ${space[2]}px;
 	padding-right: ${space[2]}px;
 	margin-right: ${space[2]}px;
 	border-right: 1px solid ${themePalette('--masthead-nav-lines')};
@@ -111,7 +122,7 @@ const selectedLink = css`
 `;
 
 /**
- * Renders a custom subnav (header + links, images and further data to follow) targeted at a front.
+ * Renders a custom subnav (header + links, images and further data to follow) assigned to fronts or articles.
  */
 export const CustomSubNav = ({
 	customSubNav,
@@ -132,6 +143,9 @@ export const CustomSubNav = ({
 							headlineBold28,
 							css`
 								margin-top: ${space[2]}px;
+								color: ${themePalette(
+									'--masthead-nav-link-text',
+								)};
 							`,
 						]
 			}

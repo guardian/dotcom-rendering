@@ -6579,13 +6579,13 @@ const customSubnavHeaderTextLight: PaletteFunction = ({ theme }) => {
 		case Pillar.Sport:
 		case Pillar.Culture:
 		case Pillar.Lifestyle:
-			return pillarPalette(theme, 400);
+			return pillarPalette(theme, 500);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.specialReport[400];
+			return sourcePalette.specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[200];
+			return sourcePalette.specialReportAlt[300];
 	}
 };
 const customSubnavHeaderTextDark: PaletteFunction = ({ theme }) => {
