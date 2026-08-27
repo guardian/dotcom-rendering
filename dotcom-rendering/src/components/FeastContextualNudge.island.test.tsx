@@ -9,6 +9,9 @@ import { FeastContextualNudge } from './FeastContextualNudge.island';
 
 jest.mock('../lib/useAB');
 jest.mock('../lib/useBraze');
+jest.mock('../lib/useAuthStatus', () => ({
+	useAuthStatus: jest.fn().mockReturnValue({ kind: 'SignedOut' }),
+}));
 jest.mock('../lib/braze/BrazeBannersSystem', () => ({
 	BrazeBannersSystemPlacementId: {
 		FeastContextualNudge1: 'dotcom-rendering_feast-contextual-nudge-1',
@@ -50,6 +53,7 @@ const renderNudge = (idApiUrl: string | undefined) =>
 				isDev={false}
 				nudgeIndex={1}
 				idApiUrl={idApiUrl}
+				allNudgeRecipeIds={[recipe.id]}
 			/>
 		</ConfigProvider>,
 	);
