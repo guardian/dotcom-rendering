@@ -5,6 +5,7 @@ import {
 } from '../lib/branding';
 import type { EditionId } from '../lib/edition';
 import type { Branding } from '../types/branding';
+import type { Switches } from '../types/config';
 import type { DCRCollectionType } from '../types/front';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
@@ -55,6 +56,7 @@ export const enhanceCollections = ({
 	onPageDescription,
 	isOnPaidContentFront,
 	serverSideABTests,
+	featureSwitches,
 }: {
 	collections: FECollection[];
 	editionId: EditionId;
@@ -64,6 +66,7 @@ export const enhanceCollections = ({
 	onPageDescription?: string;
 	isOnPaidContentFront?: boolean;
 	serverSideABTests: Record<string, string>;
+	featureSwitches: Switches;
 }): DCRCollectionType[] => {
 	const indexToShowFrontBranding =
 		findCollectionSuitableForFrontBranding(collections);
@@ -132,6 +135,7 @@ export const enhanceCollections = ({
 				stripBrandingFromCards,
 				serverSideABTests,
 				pageId,
+				featureSwitches,
 			),
 			curated: enhanceCards(collection.curated, {
 				cardInTagPage: false,
@@ -140,6 +144,7 @@ export const enhanceCollections = ({
 				discussionApiUrl,
 				stripBranding: stripBrandingFromCards,
 				serverSideABTests,
+				featureSwitches,
 			}),
 			backfill: enhanceCards(collection.backfill, {
 				cardInTagPage: false,
@@ -148,6 +153,7 @@ export const enhanceCollections = ({
 				discussionApiUrl,
 				stripBranding: stripBrandingFromCards,
 				serverSideABTests,
+				featureSwitches,
 			}),
 			treats: enhanceTreats(
 				collection.treats,
