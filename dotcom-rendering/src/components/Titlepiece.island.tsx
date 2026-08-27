@@ -11,7 +11,7 @@ import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useEditionSwitcherBanner } from '../lib/useEditionSwitcherBanner';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { CustomSubnav } from '../types/customSubnav';
+import type { AssignedPage, CustomSubnav } from '../types/customSubnav';
 import {
 	expandedMenuRootId,
 	navInputCheckboxId,
@@ -33,6 +33,8 @@ interface Props {
 	editionId: EditionId;
 	showSubNav?: boolean;
 	customSubnav?: CustomSubnav;
+	/** The page type a custom subnav is rendered on, used to vary styling. */
+	assignedPage?: AssignedPage;
 	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 	pageId?: string;
@@ -321,6 +323,7 @@ export const Titlepiece = ({
 	editionId,
 	showSubNav,
 	customSubnav,
+	assignedPage,
 	showSlimNav,
 	hasPageSkin,
 	pageId = '',
@@ -598,6 +601,7 @@ export const Titlepiece = ({
 					<CustomSubNav
 						customSubNav={customSubnav}
 						currentNavLink={nav.currentNavLink}
+						assignedPage={assignedPage ?? 'front'}
 						hasPageSkin={hasPageSkin}
 					/>
 				</div>

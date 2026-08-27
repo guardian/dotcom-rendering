@@ -284,6 +284,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							contributionsServiceUrl={contributionsServiceUrl}
 							showSlimNav={true}
 							showSubNav={false}
+							customSubnav={props.NAV.customSubNav}
+							assignedPage="article"
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
 							pageId={article.pageId}

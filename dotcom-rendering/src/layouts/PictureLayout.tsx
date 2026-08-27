@@ -309,7 +309,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={!isWorldCup2026}
+						showSubNav={!isWorldCup2026 && !props.NAV.customSubNav}
+						customSubnav={props.NAV.customSubNav}
+						assignedPage="article"
 						showSlimNav={false}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}

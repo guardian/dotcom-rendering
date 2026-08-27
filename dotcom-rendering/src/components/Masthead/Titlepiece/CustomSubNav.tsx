@@ -12,11 +12,13 @@ import {
 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../palette';
-import type { CustomSubnav } from '../../../types/customSubnav';
+import type { AssignedPage, CustomSubnav } from '../../../types/customSubnav';
 
 type Props = {
 	customSubNav: CustomSubnav;
 	currentNavLink: string;
+	/** The page type this subnav is rendered on, used to vary styling. */
+	assignedPage: AssignedPage;
 	hasPageSkin?: boolean;
 };
 
@@ -41,6 +43,40 @@ const subNavStylesFromLeftCol = css`
 	${from.leftCol} {
 		margin-top: 14px;
 	}
+`;
+
+/** On articles the header and links sit on a single aligned row. */
+const articleContainerStyles = css`
+	display: flex;
+	align-items: stretch;
+`;
+
+/**
+ * On articles the links row sits inline next to the header. The stacked top margins are
+ * removed and replaced with padding so the header divider spans the full component height.
+ */
+const articleSubNavStyles = css`
+	margin-top: 0;
+	padding-top: ${space[2]}px;
+	padding-bottom: ${space[2]}px;
+
+	${from.mobileMedium} {
+		margin-top: 0;
+	}
+	${from.leftCol} {
+		margin-top: 0;
+	}
+`;
+
+const articleHeaderStyles = css`
+	${textSansBold14}
+	color: ${themePalette('--custom-subnav-header-text')};
+	display: flex;
+	white-space: nowrap;
+	padding-top: ${space[2]}px;
+	padding-right: ${space[2]}px;
+	margin-right: ${space[2]}px;
+	border-right: 1px solid ${themePalette('--masthead-nav-lines')};
 `;
 
 /** Sets horizontal scrolling behaviour and removes the scrollbar */
@@ -80,25 +116,39 @@ const selectedLink = css`
 export const CustomSubNav = ({
 	customSubNav,
 	currentNavLink,
+	assignedPage,
 	hasPageSkin,
 }: Props) => {
+	const isArticle = assignedPage === 'article';
 	return (
 		<div
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
-			css={[
-				headlineBold28,
-				css`
-					margin-top: ${space[2]}px;
-				`,
-			]}
+			data-assigned-page={assignedPage}
+			css={
+				isArticle
+					? articleContainerStyles
+					: [
+							headlineBold28,
+							css`
+								margin-top: ${space[2]}px;
+							`,
+						]
+			}
 		>
-			{customSubNav.header.headerText}
+			{isArticle ? (
+				<span css={articleHeaderStyles}>
+					{customSubNav.header.headerText}
+				</span>
+			) : (
+				customSubNav.header.headerText
+			)}
 			<ul
 				css={[
 					subNavStyles,
 					!hasPageSkin && subNavStylesFromLeftCol,
 					scrollableSubNavStyles,
+					isArticle && articleSubNavStyles,
 				]}
 				role="list"
 				style={{

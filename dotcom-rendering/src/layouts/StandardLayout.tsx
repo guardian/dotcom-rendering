@@ -94,6 +94,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	if (isWeb) {
+		console.log(
+			'nav test on ',
+			props.article.webTitle,
+			props.NAV.customSubNav,
+		);
+	}
+
 	return (
 		<>
 			{isWeb && (
@@ -119,7 +127,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={!isLabs && !isWorldCup2026}
+						showSubNav={
+							!isLabs &&
+							!isWorldCup2026 &&
+							!props.NAV.customSubNav
+						}
+						customSubnav={props.NAV.customSubNav}
+						assignedPage="article"
 						showSlimNav={
 							format.display === ArticleDisplay.Immersive
 						}
