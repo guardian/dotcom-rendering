@@ -6477,68 +6477,68 @@ const latestLinksDottedLineDark: PaletteFunction = () =>
 
 const editorialButtonBackground =
 	(weight: 500 | 300): PaletteFunction =>
-	(format: ArticleFormat) => {
-		switch (format.theme) {
-			case Pillar.News:
-				return sourcePalette.news[weight];
-			case Pillar.Culture:
-				return sourcePalette.culture[weight];
-			case Pillar.Lifestyle:
-				return sourcePalette.lifestyle[weight];
-			case Pillar.Sport:
-				return sourcePalette.sport[weight];
-			case Pillar.Opinion:
-				return sourcePalette.opinion[weight];
-			case ArticleSpecial.Labs:
-				return sourcePalette.labs[weight];
-			case ArticleSpecial.SpecialReport:
-			case ArticleSpecial.SpecialReportAlt:
-				return sourcePalette.specialReport[weight];
-		}
-	};
+		(format: ArticleFormat) => {
+			switch (format.theme) {
+				case Pillar.News:
+					return sourcePalette.news[weight];
+				case Pillar.Culture:
+					return sourcePalette.culture[weight];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[weight];
+				case Pillar.Sport:
+					return sourcePalette.sport[weight];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[weight];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[weight];
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReport[weight];
+			}
+		};
 const editorialButtonBackgroundHover =
 	(weight: 200 | 300 | 400 | 500): PaletteFunction =>
-	(format: ArticleFormat) => {
-		switch (format.theme) {
-			case Pillar.News:
-				return sourcePalette.news[weight];
-			case Pillar.Culture:
-				return sourcePalette.culture[weight];
-			case Pillar.Lifestyle:
-				return sourcePalette.lifestyle[weight];
-			case Pillar.Sport:
-				return sourcePalette.sport[weight];
-			case Pillar.Opinion:
-				return sourcePalette.opinion[weight];
-			case ArticleSpecial.Labs:
-				return sourcePalette.labs[weight];
-			case ArticleSpecial.SpecialReport:
-			case ArticleSpecial.SpecialReportAlt:
-				return sourcePalette.specialReport[weight];
-		}
-	};
+		(format: ArticleFormat) => {
+			switch (format.theme) {
+				case Pillar.News:
+					return sourcePalette.news[weight];
+				case Pillar.Culture:
+					return sourcePalette.culture[weight];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[weight];
+				case Pillar.Sport:
+					return sourcePalette.sport[weight];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[weight];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[weight];
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReport[weight];
+			}
+		};
 
 const editorialButtonBorderHover =
 	(weight: 200 | 400 | 500): PaletteFunction =>
-	(format: ArticleFormat) => {
-		switch (format.theme) {
-			case Pillar.News:
-				return sourcePalette.news[weight];
-			case Pillar.Culture:
-				return sourcePalette.culture[weight];
-			case Pillar.Lifestyle:
-				return sourcePalette.lifestyle[weight];
-			case Pillar.Sport:
-				return sourcePalette.sport[weight];
-			case Pillar.Opinion:
-				return sourcePalette.opinion[weight];
-			case ArticleSpecial.Labs:
-				return sourcePalette.labs[weight];
-			case ArticleSpecial.SpecialReport:
-			case ArticleSpecial.SpecialReportAlt:
-				return sourcePalette.specialReport[weight];
-		}
-	};
+		(format: ArticleFormat) => {
+			switch (format.theme) {
+				case Pillar.News:
+					return sourcePalette.news[weight];
+				case Pillar.Culture:
+					return sourcePalette.culture[weight];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[weight];
+				case Pillar.Sport:
+					return sourcePalette.sport[weight];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[weight];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[weight];
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReport[weight];
+			}
+		};
 
 const editorialButtonText: PaletteFunction = () => sourcePalette.neutral[100];
 const editorialButtonTextDark: PaletteFunction = () => sourcePalette.neutral[7];

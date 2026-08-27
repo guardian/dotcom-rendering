@@ -58,6 +58,7 @@ export const Masthead = ({
 	contributionsServiceUrl,
 	showSubNav = true,
 	customSubnav,
+	assignedPage,
 	showSlimNav = false,
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
@@ -122,6 +123,7 @@ export const Masthead = ({
 				editionId={editionId}
 				showSubNav={showSubNav}
 				customSubnav={customSubnav}
+				assignedPage={assignedPage}
 				showSlimNav={showSlimNav}
 				hasPageSkin={hasPageSkin}
 				pageId={pageId}
