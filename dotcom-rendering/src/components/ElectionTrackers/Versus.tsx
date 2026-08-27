@@ -7,6 +7,7 @@ import {
 	headlineMedium20Object,
 	headlineMedium24Object,
 	headlineMedium34Object,
+	space,
 	textSans12Object,
 } from '@guardian/source/foundations';
 import { generateImageURL } from '../../lib/image';
@@ -166,24 +167,19 @@ const GroupComponent = (props: {
 					: textColour(props.faded)
 			}
 		/>
-		<Value
-			value={props.group.value}
-			colour={
-				props.colour === 'value'
-					? props.group.colour
-					: textColour(props.faded)
-			}
+		<ValueWithChange
+			align={props.align}
+			colour={props.colour}
 			faded={props.faded}
+			group={props.group}
 		/>
-		{'change' in props.group ? (
-			<Change change={props.group.change} />
-		) : (
+		{'description' in props.group ? (
 			<Description
 				description={props.group.description}
 				align={props.align}
 				faded={props.faded}
 			/>
-		)}
+		) : null}
 	</p>
 );
 
@@ -229,6 +225,53 @@ const Name = ({
 		</span>
 	</span>
 );
+
+const ValueWithChange = (props: {
+	align: 'left' | 'right';
+	colour: Props['colour'];
+	faded: Props['faded'];
+	group: Group;
+}) => {
+	const value = (
+		<Value
+			value={props.group.value}
+			colour={
+				props.colour === 'value'
+					? props.group.colour
+					: textColour(props.faded)
+			}
+			faded={props.faded}
+		/>
+	);
+
+	const change =
+		'change' in props.group ? <Change change={props.group.change} /> : null;
+
+	if (props.group.image !== undefined) {
+		return (
+			<>
+				{value}
+				{change}
+			</>
+		);
+	}
+
+	return (
+		<span
+			css={{
+				display: 'flex',
+				alignItems: 'end',
+				gap: space[1],
+			}}
+			style={{
+				flexDirection: props.align === 'right' ? 'row-reverse' : 'row',
+			}}
+		>
+			{value}
+			{change}
+		</span>
+	);
+};
 
 const Value = (props: {
 	value: Group['value'];
