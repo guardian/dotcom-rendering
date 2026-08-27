@@ -36,7 +36,8 @@ export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 		emptyOutDir: false,
 		ssr: true,
 		target: `node${process.versions.node}`,
-		minify: !DEV,
+		// keepNames is required so island names and hence name attributes are preserved
+		minify: DEV ? false : { keepNames: true },
 		sourcemap: true,
 		rolldownOptions: {
 			input: {
