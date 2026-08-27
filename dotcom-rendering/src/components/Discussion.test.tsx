@@ -29,6 +29,7 @@ const createComment = (
 	isoDateTime: '2024-01-01T00:00:01Z',
 	numRecommends: 0,
 	status: 'visible',
+	responseTo: undefined,
 });
 
 const createReply = (id: string, body: string): ReplyType => ({
@@ -42,6 +43,7 @@ const createReply = (id: string, body: string): ReplyType => ({
 	isoDateTime: '2024-01-01T00:00:01Z',
 	numRecommends: 0,
 	status: 'visible',
+	responses: undefined,
 	responseTo: {
 		date: '',
 		isoDateTime: '',
