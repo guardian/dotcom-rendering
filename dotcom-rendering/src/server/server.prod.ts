@@ -31,13 +31,21 @@ import { responseHeaderMiddleware } from './lib/header-middleware';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
+import {
+	createExpressJsonWrapper,
+	createRequestTracingMiddleware,
+} from './lib/request-handler-middleware';
 
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
 
 	const app = express();
 
-	app.use(express.json({ limit: '50mb' }));
+	// Starts a span just before calling express.json, and ends it on its callback
+	const expressJson = express.json({ limit: '50mb' });
+	const expressJsonWrapper = createExpressJsonWrapper(expressJson);
+
+	app.use(expressJsonWrapper);
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
 	app.use(responseHeaderMiddleware);
@@ -52,6 +60,10 @@ export const prodServer = (): void => {
 
 		app.use('/assets', express.static(__dirname));
 	}
+
+	const requestTracingMiddleware = createRequestTracingMiddleware();
+
+	app.use(requestTracingMiddleware);
 
 	app.post('/Article', handleArticle);
 	app.post('/Interactive', handleInteractive);
