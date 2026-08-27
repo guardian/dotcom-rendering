@@ -42,7 +42,7 @@ jobs:
 
       - name: Build Container Image
         id: build_image
-        uses: redhat-actions/buildah-build@v2.13
+        uses: redhat-actions/buildah-build@v3
         with:
           image: dotcom-rendering
           # Commercial rely on a container image built from the main branch with the tag 'main'
