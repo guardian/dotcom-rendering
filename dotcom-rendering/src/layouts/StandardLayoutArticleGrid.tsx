@@ -263,6 +263,8 @@ export const StandardLayoutArticleGrid = ({
 							grid-template-rows: auto auto ${ageWarning != null
 									? '130px'
 									: '90px'} auto auto auto auto auto;
+						}
+						${from.leftCol} {
 							${grid.centreRule(
 								layoutType === 'immersiveLandscapeFeature'
 									? 3
