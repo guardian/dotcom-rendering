@@ -359,8 +359,7 @@ export const SeriesSectionLink = ({
 			return (
 				<div
 					css={
-						format.display === ArticleDisplay.Immersive &&
-						layoutType !== undefined
+						format.display === ArticleDisplay.Immersive
 							? immersiveGridTitleWrapperBelowDesktop
 							: undefined
 					}
@@ -379,7 +378,6 @@ export const SeriesSectionLink = ({
 								)};
 							`,
 							format.display === ArticleDisplay.Immersive &&
-								layoutType !== undefined &&
 								immersiveGridTitleBelowDesktop,
 							format.design === ArticleDesign.Gallery &&
 								css`

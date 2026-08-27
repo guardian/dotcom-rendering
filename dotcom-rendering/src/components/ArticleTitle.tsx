@@ -29,25 +29,13 @@ const sectionStyles = css`
 	}
 `;
 
-const immersiveGridMargins = css`
+const immersiveMargins = css`
 	max-width: 500px;
 	min-width: 200px;
 	margin-bottom: 0;
 	${from.desktop} {
 		margin-bottom: 4px;
 		margin-left: -4px;
-	}
-`;
-
-const legacyImmersiveMargins = css`
-	max-width: 400px;
-	min-width: 200px;
-	margin-bottom: 4px;
-	${from.tablet} {
-		margin-left: 16px;
-	}
-	${from.leftCol} {
-		margin-left: 25px;
 	}
 `;
 
@@ -84,9 +72,7 @@ export const ArticleTitle = ({
 		<div
 			css={
 				format.display === ArticleDisplay.Immersive
-					? layoutType == null
-						? legacyImmersiveMargins
-						: immersiveGridMargins
+					? immersiveMargins
 					: undefined
 			}
 		>

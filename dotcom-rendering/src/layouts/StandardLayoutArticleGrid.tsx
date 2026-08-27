@@ -237,12 +237,15 @@ export const StandardLayoutArticleGrid = ({
 				`,
 				grid.container,
 				grid.outerRules(),
-				isLabs &&
-					isImmersive &&
+				isImmersive &&
 					css`
-						&::before,
-						&::after {
-							z-index: ${getZIndex('immersiveGridOuterRules')};
+						${from.desktop} {
+							&::before,
+							&::after {
+								z-index: ${getZIndex(
+									'immersiveGridOuterRules',
+								)};
+							}
 						}
 					`,
 				!isLabs &&
@@ -263,11 +266,6 @@ export const StandardLayoutArticleGrid = ({
 							grid-template-rows: auto auto ${ageWarning != null
 									? '130px'
 									: '90px'} auto auto auto auto auto;
-							${grid.centreRule(
-								layoutType === 'immersiveLandscapeFeature'
-									? 3
-									: 4,
-							)}
 						}
 					`,
 				(isImmersivePortrait || isImmersiveLandscape) &&
