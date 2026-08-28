@@ -393,7 +393,7 @@ export const StickyBottomBanner = ({
 		} else if (
 			inConsentBannerTestV2 &&
 			isInUsStateForAbTest() &&
-			getAlreadyVisitedCount() == 1
+			getAlreadyVisitedCount() <= 1
 		) {
 			// Do not show a RR banner on the first pageview if in this test variant
 			candidates = [CMP, signInGate, brazeBannersSystem, brazeBanner];
