@@ -27,10 +27,10 @@ catalog:
   eslint: 9.39.1
   rollup: 4.59.0
   rollup-plugin-esbuild: 6.2.1
-  superstruct: 2.0.2
   tslib: 2.6.2
   type-fest: 4.21.0
   typescript: 6.0.3
+  valibot: 1.4.2
 minimumReleaseAge: 2880 # 2 day minimum package version age
 minimumReleaseAgeExclude:
   - '@guardian/*'
