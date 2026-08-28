@@ -239,13 +239,9 @@ export const StandardLayoutArticleGrid = ({
 				grid.outerRules(),
 				isImmersive &&
 					css`
-						${from.desktop} {
-							&::before,
-							&::after {
-								z-index: ${getZIndex(
-									'immersiveGridOuterRules',
-								)};
-							}
+						&::before,
+						&::after {
+							z-index: ${getZIndex('immersiveGridOuterRules')};
 						}
 					`,
 				!isLabs &&

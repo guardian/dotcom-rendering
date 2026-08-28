@@ -223,6 +223,17 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "articles-and-publishing-revamped-immersive-layout",
+		description: "New grid-based immersive layout for all articles",
+		owners: ["articles.and.publishing@guardian.co.uk "],
+		status: "ON",
+		expirationDate: "2027-08-31",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["enable"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");

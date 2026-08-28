@@ -9,6 +9,7 @@ import { GalleryLayout } from './GalleryLayout';
 import { HostedArticleLayout } from './HostedArticleLayout';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { HostedVideoLayout } from './HostedVideoLayout';
+import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
@@ -30,6 +31,18 @@ interface WebProps extends BaseProps {
 }
 
 export type Props = WebProps | AppProps;
+
+/**
+ * Guards the new grid-based immersive layout for all Guardian articles
+ * behind a 0% a/b test
+ */
+export const REVAMPED_IMMERSIVE_LAYOUT_AB_TEST =
+	'articles-and-publishing-revamped-immersive-layout';
+
+const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
+	article.frontendData.config.serverSideABTests[
+		REVAMPED_IMMERSIVE_LAYOUT_AB_TEST
+	] === 'enable';
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	const format = {
@@ -53,8 +66,15 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 					);
 				}
 				default: {
-					return (
+					return isInRevampedImmersiveLayoutTest(article) ? (
 						<StandardLayout
+							article={article.frontendData}
+							format={format}
+							renderingTarget={renderingTarget}
+							serverTime={serverTime}
+						/>
+					) : (
+						<ImmersiveLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -229,8 +249,16 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 					);
 				}
 				default: {
-					return (
+					return isInRevampedImmersiveLayoutTest(article) ? (
 						<StandardLayout
+							article={article.frontendData}
+							format={format}
+							NAV={NAV}
+							renderingTarget={renderingTarget}
+							serverTime={serverTime}
+						/>
+					) : (
+						<ImmersiveLayout
 							article={article.frontendData}
 							format={format}
 							NAV={NAV}
