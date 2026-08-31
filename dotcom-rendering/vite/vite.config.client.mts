@@ -161,7 +161,8 @@ export const createClientConfig = (build: Build): UserConfig => {
 										test: (id) => !id.includes('.island.'),
 										priority: 0,
 										minSize: 0,
-										maxSize: 500000,
+										// TODO FIXME
+										// maxSize: 500000,
 									},
 								],
 							},
