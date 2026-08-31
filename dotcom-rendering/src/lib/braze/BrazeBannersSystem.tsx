@@ -12,7 +12,10 @@ import { useConfig } from '../../components/ConfigContext';
 import { isProd } from '../../components/marketing/lib/stage';
 import type { StageType } from '../../types/config';
 import type { TagType } from '../../types/tag';
-import { addFeastRecipeToSavedFromWebList } from '../feast/savedFromWeb';
+import {
+	addFeastRecipeToSavedFromWebList,
+	removeFeastRecipeFromSavedFromWebList,
+} from '../feast/savedFromWeb';
 import { getAuthState, getOptionsHeaders } from '../identity';
 import type { CandidateConfig, CanShowResult } from '../messagePicker';
 import { useAuthStatus } from '../useAuthStatus';
@@ -506,6 +509,7 @@ enum BrazeBannersSystemMessageType {
 	DismissBanner = 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
 	GetContext = 'BRAZE_BANNERS_SYSTEM:GET_CONTEXT',
 	SaveFeastRecipeById = 'BRAZE_BANNERS_SYSTEM:SAVE_FEAST_RECIPE_BY_ID',
+	UnsaveFeastRecipeById = 'BRAZE_BANNERS_SYSTEM:UNSAVE_FEAST_RECIPE_BY_ID',
 }
 
 /**
@@ -702,6 +706,33 @@ export const BrazeBannersSystemDisplay = ({
 				} else {
 					brazeBannersSystemLogger.warn(
 						'Failed to save recipe to the "Saved from web" list:',
+						feastRecipeId,
+					);
+				}
+
+				return success;
+			}
+			return false;
+		},
+		[authStatus],
+	);
+
+	const unsaveFeastRecipeById = useCallback(
+		async (feastRecipeId: string): Promise<boolean> => {
+			if (authStatus.kind === 'SignedIn') {
+				const success = await removeFeastRecipeFromSavedFromWebList(
+					authStatus.accessToken.accessToken,
+					feastRecipeId,
+				);
+
+				if (success) {
+					brazeBannersSystemLogger.info(
+						'Successfully removed recipe from the "Saved from web" list:',
+						feastRecipeId,
+					);
+				} else {
+					brazeBannersSystemLogger.warn(
+						'Failed to remove recipe from the "Saved from web" list:',
 						feastRecipeId,
 					);
 				}
@@ -1013,6 +1044,10 @@ export const BrazeBannersSystemDisplay = ({
 						type: BrazeBannersSystemMessageType.SaveFeastRecipeById;
 						feastRecipeId?: string;
 				  }
+				| {
+						type: BrazeBannersSystemMessageType.UnsaveFeastRecipeById;
+						feastRecipeId?: string;
+				  }
 			>,
 		) => {
 			const iframe = containerRef.current?.querySelector('iframe');
@@ -1194,6 +1229,34 @@ export const BrazeBannersSystemDisplay = ({
 					}
 					break;
 				}
+				case BrazeBannersSystemMessageType.UnsaveFeastRecipeById: {
+					meta.braze.logBannerClick(
+						meta.banner,
+						'unsave_feast_recipe_button',
+					);
+					const { feastRecipeId } = event.data;
+					if (feastRecipeId !== undefined) {
+						void unsaveFeastRecipeById(feastRecipeId).then(
+							(success) => {
+								postMessageToBrazeBanner(
+									BrazeBannersSystemMessageType.UnsaveFeastRecipeById,
+									{
+										success,
+									},
+								);
+								meta.braze.logCustomEvent(
+									'braze_banner_unsave_feast_recipe',
+									{
+										placementId: meta.banner.placementId,
+										feastRecipeId,
+										success,
+									},
+								);
+							},
+						);
+					}
+					break;
+				}
 			}
 		};
 
@@ -1213,6 +1276,7 @@ export const BrazeBannersSystemDisplay = ({
 		postMessageToBrazeBanner,
 		context,
 		saveFeastRecipeById,
+		unsaveFeastRecipeById,
 	]);
 
 	// Log Impressions when the banner is seen, using the hasBeenSeen value from the useIsInView hook
