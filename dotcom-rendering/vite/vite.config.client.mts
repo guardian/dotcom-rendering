@@ -103,6 +103,7 @@ export const createClientConfig = (build: Build): UserConfig => {
 	const isSingleChunk = shouldInlineDynamicImports(build);
 
 	const clientConfig: UserConfig = {
+		base: './',
 		plugins: [
 			svgr({
 				include: '**/*.svg',
