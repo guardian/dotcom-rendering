@@ -13,8 +13,8 @@ catalogs:
       specifier: 3.995.0
       version: 3.995.0
     '@guardian/cdk':
-      specifier: 64.5.0
-      version: 64.5.0
+      specifier: 64.5.1
+      version: 64.5.1
     '@guardian/eslint-config':
       specifier: 14.0.1
       version: 14.0.1
@@ -121,7 +121,7 @@ importers:
         version: 3.995.0
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 64.5.0(aws-cdk-lib@2.266.0(constructs@10.8.1))(aws-cdk@2.1138.0)(constructs@10.8.1)
+        version: 64.5.1(aws-cdk-lib@2.266.0(constructs@10.8.1))(aws-cdk@2.1138.0)(constructs@10.8.1)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -325,7 +325,7 @@ importers:
         version: 6.1.0(browserslist@4.24.4)(tslib@2.6.2)
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 64.5.0(aws-cdk-lib@2.266.0(constructs@10.8.1))(aws-cdk@2.1138.0)(constructs@10.8.1)
+        version: 64.5.1(aws-cdk-lib@2.266.0(constructs@10.8.1))(aws-cdk@2.1138.0)(constructs@10.8.1)
       '@guardian/commercial-core':
         specifier: 34.0.0
         version: 34.0.0(@guardian/consent-manager@2.1.0(@guardian/ophan-tracker-js@5.1.1)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.1.1)(tslib@2.6.2)(typescript@6.0.3))
@@ -2615,8 +2615,8 @@ packages:
       browserslist: ^4.22.2
       tslib: ^2.6.2
 
-  '@guardian/cdk@64.5.0':
-    resolution: {integrity: sha512-XZIcMBbRpT4uFDrEWTXY9+PNd3kdSdA9JtfELMdYSj50KEEZ9yiPaZx/nEGRSUtJ2JLwxZaY3Iyi2opPaTy9PQ==}
+  '@guardian/cdk@64.5.1':
+    resolution: {integrity: sha512-5CxYfYhaAAz47OD+qWYqMycjPij+ewj5g7lNyK1mmMm7CICB9yTB8TNV5byFyBkXdCnWlvQlLmmg/XtsA8o1wQ==}
     hasBin: true
     peerDependencies:
       aws-cdk: ^2.1135.0
@@ -12609,7 +12609,7 @@ snapshots:
       browserslist: 4.24.4
       tslib: 2.6.2
 
-  '@guardian/cdk@64.5.0(aws-cdk-lib@2.266.0(constructs@10.8.1))(aws-cdk@2.1138.0)(constructs@10.8.1)':
+  '@guardian/cdk@64.5.1(aws-cdk-lib@2.266.0(constructs@10.8.1))(aws-cdk@2.1138.0)(constructs@10.8.1)':
     dependencies:
       '@aws-sdk/client-ec2': 3.1101.0
       '@aws-sdk/client-ssm': 3.1101.0
