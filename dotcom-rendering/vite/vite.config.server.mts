@@ -37,7 +37,7 @@ export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 		ssr: true,
 		target: `node${process.versions.node}`,
 		// keepNames is required so island names and hence name attributes are preserved
-		minify: DEV ? false : { keepNames: true },
+		minify: !DEV,
 		sourcemap: true,
 		rolldownOptions: {
 			input: {
@@ -50,6 +50,11 @@ export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 				// matching webpack's single-file output. This avoids
 				// server chunks colliding with client assets in dist/.
 				inlineDynamicImports: true,
+				minify: {
+					mangle: {
+						keepNames: true,
+					},
+				},
 			},
 		},
 	},
