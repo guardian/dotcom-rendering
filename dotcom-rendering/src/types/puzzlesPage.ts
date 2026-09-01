@@ -40,7 +40,6 @@ export type PuzzleContent = {
 };
 
 export type PuzzleContainer = {
-	id: string;
 	title: string;
 	variant?: PuzzleContainerVariant;
 	content: PuzzleContent;
