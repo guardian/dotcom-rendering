@@ -240,8 +240,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					contributionsServiceUrl={contributionsServiceUrl}
 					idApiUrl={front.config.idApiUrl}
 					showSubNav={showStandardSubNav}
-					customSubnav={NAV.customSubNav}
-					assignedPage="front"
+					customSubnav={
+						NAV.customSubNav && {
+							data: NAV.customSubNav,
+							renderingPage: 'front',
+						}
+					}
 					showSlimNav={false}
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}

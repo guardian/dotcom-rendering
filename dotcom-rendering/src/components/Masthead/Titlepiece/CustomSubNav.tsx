@@ -12,13 +12,12 @@ import {
 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../palette';
-import type { AssignedPage, CustomSubnav } from '../../../types/customSubnav';
+import type { CustomSubnav, RenderingPage } from '../../../types/customSubnav';
 
 type Props = {
 	customSubNav: CustomSubnav;
 	currentNavLink: string;
-	/** The page type this subnav is rendered on, used to vary styling. */
-	assignedPage: AssignedPage;
+	renderingPage: RenderingPage;
 	hasPageSkin?: boolean;
 };
 
@@ -49,7 +48,6 @@ const subNavStylesFromLeftCol = css`
 const articleContainerStyles = css`
 	display: flex;
 	align-items: stretch;
-	/** Matches the regular subnav's total height (its margin-top + min-height) at each breakpoint. */
 	min-height: 36px;
 
 	${from.mobileMedium} {
@@ -127,15 +125,15 @@ const selectedLink = css`
 export const CustomSubNav = ({
 	customSubNav,
 	currentNavLink,
-	assignedPage,
+	renderingPage,
 	hasPageSkin,
 }: Props) => {
-	const isArticle = assignedPage === 'article';
+	const isArticle = renderingPage === 'article';
 	return (
 		<div
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
-			data-assigned-page={assignedPage}
+			data-rendering-page={renderingPage}
 			css={
 				isArticle
 					? articleContainerStyles

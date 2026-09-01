@@ -416,8 +416,12 @@ const BannerAndMasthead = (props: {
 			idApiUrl={props.config.idApiUrl}
 			contributionsServiceUrl={props.contributionsServiceUrl}
 			showSubNav={false}
-			customSubnav={props.nav.customSubNav}
-			assignedPage="article"
+			customSubnav={
+				props.nav.customSubNav && {
+					data: props.nav.customSubNav,
+					renderingPage: 'article',
+				}
+			}
 			showSlimNav={props.showSlimNav ?? true}
 			hasPageSkin={false}
 			hasPageSkinContentSelfConstrain={false}

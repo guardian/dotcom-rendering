@@ -94,14 +94,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	if (isWeb) {
-		console.log(
-			'nav test on ',
-			props.article.webTitle,
-			props.NAV.customSubNav,
-		);
-	}
-
 	return (
 		<>
 			{isWeb && (
@@ -132,8 +124,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							!isWorldCup2026 &&
 							!props.NAV.customSubNav
 						}
-						customSubnav={props.NAV.customSubNav}
-						assignedPage="article"
+						customSubnav={
+							props.NAV.customSubNav && {
+								data: props.NAV.customSubNav,
+								renderingPage: 'article',
+							}
+						}
 						showSlimNav={
 							format.display === ArticleDisplay.Immersive
 						}

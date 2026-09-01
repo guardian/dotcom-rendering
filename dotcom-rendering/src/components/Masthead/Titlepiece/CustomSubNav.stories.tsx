@@ -61,11 +61,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Front = {
-	args: { assignedPage: 'front' },
+	args: { renderingPage: 'front' },
 } satisfies Story;
 
 export const Article = {
-	args: { assignedPage: 'article' },
+	args: { renderingPage: 'article' },
 	parameters: {
 		formats: [
 			{

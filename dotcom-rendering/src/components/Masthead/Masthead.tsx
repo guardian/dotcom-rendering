@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import type { EditionId } from '../../lib/edition';
 import type { NavType } from '../../model/extract-nav';
 import { palette as themePalette } from '../../palette';
-import type { AssignedPage, CustomSubnav } from '../../types/customSubnav';
+import type { CustomSubnavForPage } from '../../types/customSubnav';
 import { Island } from '../Island';
 import { Section } from '../Section';
 import { Titlepiece } from '../Titlepiece.island';
@@ -18,9 +18,7 @@ type Props = {
 	discussionApiUrl: string;
 	idApiUrl: string;
 	showSubNav?: boolean;
-	customSubnav?: CustomSubnav;
-	/** The page type a custom subnav is rendered on, used to vary styling. */
-	assignedPage?: AssignedPage;
+	customSubnav?: CustomSubnavForPage;
 	/** The slim nav is a slimmed down version of the Titlepiece usually used for Immersive articles */
 	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
@@ -60,7 +58,6 @@ export const Masthead = ({
 	contributionsServiceUrl,
 	showSubNav = true,
 	customSubnav,
-	assignedPage,
 	showSlimNav = false,
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
@@ -125,7 +122,6 @@ export const Masthead = ({
 				editionId={editionId}
 				showSubNav={showSubNav}
 				customSubnav={customSubnav}
-				assignedPage={assignedPage}
 				showSlimNav={showSlimNav}
 				hasPageSkin={hasPageSkin}
 				pageId={pageId}

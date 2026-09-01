@@ -175,8 +175,12 @@ const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 				idApiUrl={article.config.idApiUrl}
 				contributionsServiceUrl={article.contributionsServiceUrl}
 				showSubNav={false}
-				customSubnav={NAV.customSubNav}
-				assignedPage="article"
+				customSubnav={
+					NAV.customSubNav && {
+						data: NAV.customSubNav,
+						renderingPage: 'article',
+					}
+				}
 				showSlimNav={true}
 				hasPageSkin={false}
 				hasPageSkinContentSelfConstrain={false}

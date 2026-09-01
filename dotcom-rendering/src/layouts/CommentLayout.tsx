@@ -334,8 +334,12 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={!isWorldCup2026 && !props.NAV.customSubNav}
-						customSubnav={props.NAV.customSubNav}
-						assignedPage="article"
+						customSubnav={
+							props.NAV.customSubNav && {
+								data: props.NAV.customSubNav,
+								renderingPage: 'article',
+							}
+						}
 						showSlimNav={false}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}

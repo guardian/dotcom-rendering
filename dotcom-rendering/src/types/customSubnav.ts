@@ -3,7 +3,7 @@
  */
 
 /** The kind of page a custom subnav is rendered on, used to vary its styling. */
-export type AssignedPage = 'front' | 'article';
+export type RenderingPage = 'front' | 'article';
 
 export interface CustomSubnavLink {
 	linkText: string;
@@ -32,4 +32,10 @@ export interface CustomSubnav {
 	links: CustomSubnavLink[];
 	pages: CustomSubnavTargetedPage[];
 	images?: CustomSubnavImage[];
+}
+
+/** A custom subnav bundled with the type of page it's rendered on */
+export interface CustomSubnavForPage {
+	data: CustomSubnav;
+	renderingPage: RenderingPage;
 }
