@@ -13,8 +13,8 @@ catalogs:
       specifier: 3.995.0
       version: 3.995.0
     '@guardian/cdk':
-      specifier: 64.5.0
-      version: 64.5.0
+      specifier: 64.5.1
+      version: 64.5.1
     '@guardian/eslint-config':
       specifier: 14.0.1
       version: 14.0.1
@@ -37,11 +37,11 @@ catalogs:
       specifier: 24.12.4
       version: 24.12.4
     aws-cdk:
-      specifier: 2.1138.0
-      version: 2.1138.0
+      specifier: 2.1139.0
+      version: 2.1139.0
     aws-cdk-lib:
-      specifier: 2.266.0
-      version: 2.266.0
+      specifier: 2.267.0
+      version: 2.267.0
     constructs:
       specifier: 10.8.1
       version: 10.8.1
@@ -121,7 +121,7 @@ importers:
         version: 3.995.0
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 64.5.0(aws-cdk-lib@2.266.0(constructs@10.8.1))(aws-cdk@2.1138.0)(constructs@10.8.1)
+        version: 64.5.1(aws-cdk-lib@2.267.0(constructs@10.8.1))(aws-cdk@2.1139.0)(constructs@10.8.1)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -130,10 +130,10 @@ importers:
         version: 24.12.4
       aws-cdk:
         specifier: 'catalog:'
-        version: 2.1138.0
+        version: 2.1139.0
       aws-cdk-lib:
         specifier: 'catalog:'
-        version: 2.266.0(constructs@10.8.1)
+        version: 2.267.0(constructs@10.8.1)
       constructs:
         specifier: 'catalog:'
         version: 10.8.1
@@ -325,7 +325,7 @@ importers:
         version: 6.1.0(browserslist@4.24.4)(tslib@2.6.2)
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 64.5.0(aws-cdk-lib@2.266.0(constructs@10.8.1))(aws-cdk@2.1138.0)(constructs@10.8.1)
+        version: 64.5.1(aws-cdk-lib@2.267.0(constructs@10.8.1))(aws-cdk@2.1139.0)(constructs@10.8.1)
       '@guardian/commercial-core':
         specifier: 34.0.0
         version: 34.0.0(@guardian/consent-manager@2.1.0(@guardian/ophan-tracker-js@5.1.1)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.1.1)(tslib@2.6.2)(typescript@6.0.3))
@@ -520,10 +520,10 @@ importers:
         version: 2.1.1(ajv@8.18.0)
       aws-cdk:
         specifier: 'catalog:'
-        version: 2.1138.0
+        version: 2.1139.0
       aws-cdk-lib:
         specifier: 'catalog:'
-        version: 2.266.0(constructs@10.8.1)
+        version: 2.267.0(constructs@10.8.1)
       browserslist:
         specifier: 4.24.4
         version: 4.24.4
@@ -735,11 +735,11 @@ importers:
         specifier: 6.5.2
         version: 6.5.2(webpack@5.109.2)
       webpack-bundle-analyzer:
-        specifier: 5.3.1
-        version: 5.3.1
+        specifier: 5.3.2
+        version: 5.3.2
       webpack-cli:
         specifier: 7.2.2
-        version: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-bundle-analyzer@5.3.1)(webpack-dev-server@6.0.0)(webpack@5.109.2)
+        version: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-bundle-analyzer@5.3.2)(webpack-dev-server@6.0.0)(webpack@5.109.2)
       webpack-dev-server:
         specifier: 6.0.0
         version: 6.0.0(tslib@2.6.2)(webpack-cli@7.2.2)(webpack@5.109.2)
@@ -2615,8 +2615,8 @@ packages:
       browserslist: ^4.22.2
       tslib: ^2.6.2
 
-  '@guardian/cdk@64.5.0':
-    resolution: {integrity: sha512-XZIcMBbRpT4uFDrEWTXY9+PNd3kdSdA9JtfELMdYSj50KEEZ9yiPaZx/nEGRSUtJ2JLwxZaY3Iyi2opPaTy9PQ==}
+  '@guardian/cdk@64.5.1':
+    resolution: {integrity: sha512-5CxYfYhaAAz47OD+qWYqMycjPij+ewj5g7lNyK1mmMm7CICB9yTB8TNV5byFyBkXdCnWlvQlLmmg/XtsA8o1wQ==}
     hasBin: true
     peerDependencies:
       aws-cdk: ^2.1135.0
@@ -5409,8 +5409,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  aws-cdk-lib@2.266.0:
-    resolution: {integrity: sha512-sBQU42pEc9ud3yeVU2En2euQRUhCg63eaJIPEVpBtE5aPhJjN3d9MkzQ9eYGLVXP3fnohUE54BiVOdUrkEDUbg==}
+  aws-cdk-lib@2.267.0:
+    resolution: {integrity: sha512-ubmc2Th+XFjQAy6cnihRmH9Xxf9X2iZ5Vuf0g/4kBiBSoLahJy5cwJB5TmicEpitZ+fHBRyfoAZ4BkLk4G0Stg==}
     engines: {node: '>= 20.0.0'}
     peerDependencies:
       constructs: ^10.5.0
@@ -5428,8 +5428,8 @@ packages:
       - yaml
       - mime-types
 
-  aws-cdk@2.1138.0:
-    resolution: {integrity: sha512-gZ5F8rmh+qc7ZNWsbaXYoV+p7jSYynRRg70s7FAn3VmzRaSkTE31ijpQHYroxCbDEtKSzgN63ORR/WuZmvXAwA==}
+  aws-cdk@2.1139.0:
+    resolution: {integrity: sha512-JVvrVvY2fZasf4gW4fvF7x1QMXUtvvGjnTKDe6cppWR1FUG8XgRF/S7xOkcdPVcdEf4R5ss7QdEfNVI7xiDomQ==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
 
@@ -9931,8 +9931,8 @@ packages:
     peerDependencies:
       webpack: ^5.61.0
 
-  webpack-bundle-analyzer@5.3.1:
-    resolution: {integrity: sha512-wP2EusncRGL1tZyMHC/umLkjPdYMkTL9nPEKh8G8dkYCJ9TyF6xnXFqjhdqmv5J900irN/g0P5jMvLT22krEXQ==}
+  webpack-bundle-analyzer@5.3.2:
+    resolution: {integrity: sha512-IagCa/GrdxSz+ba9OMgK7UCfQp97HtXbgjXu7ObcqmRo9PTp0d+24rgY+mIFOx7JPQ9bo6FGsqZhA55rYRZrrQ==}
     engines: {node: '>= 20.9.0'}
     hasBin: true
 
@@ -12609,13 +12609,13 @@ snapshots:
       browserslist: 4.24.4
       tslib: 2.6.2
 
-  '@guardian/cdk@64.5.0(aws-cdk-lib@2.266.0(constructs@10.8.1))(aws-cdk@2.1138.0)(constructs@10.8.1)':
+  '@guardian/cdk@64.5.1(aws-cdk-lib@2.267.0(constructs@10.8.1))(aws-cdk@2.1139.0)(constructs@10.8.1)':
     dependencies:
       '@aws-sdk/client-ec2': 3.1101.0
       '@aws-sdk/client-ssm': 3.1101.0
       '@aws-sdk/credential-providers': 3.1101.0
-      aws-cdk: 2.1138.0
-      aws-cdk-lib: 2.266.0(constructs@10.8.1)
+      aws-cdk: 2.1139.0
+      aws-cdk-lib: 2.267.0(constructs@10.8.1)
       chalk: 4.1.2
       codemaker: 1.139.0
       constructs: 10.8.1
@@ -15706,14 +15706,14 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  aws-cdk-lib@2.266.0(constructs@10.8.1):
+  aws-cdk-lib@2.267.0(constructs@10.8.1):
     dependencies:
       '@aws-cdk/asset-awscli-v1': 2.2.292
       '@aws-cdk/asset-node-proxy-agent-v6': 2.1.2
       '@aws-cdk/cloud-assembly-schema': 54.15.0
       constructs: 10.8.1
 
-  aws-cdk@2.1138.0: {}
+  aws-cdk@2.1139.0: {}
 
   axe-core@4.11.1: {}
 
@@ -21075,7 +21075,7 @@ snapshots:
       tapable: 2.3.3
       webpack: 5.109.2(@swc/core@1.16.1)(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(postcss@8.5.25)(webpack-cli@7.2.2)
 
-  webpack-bundle-analyzer@5.3.1:
+  webpack-bundle-analyzer@5.3.2:
     dependencies:
       '@discoveryjs/json-ext': 0.6.3
       acorn: 8.18.0
@@ -21091,7 +21091,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  webpack-cli@7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-bundle-analyzer@5.3.1)(webpack-dev-server@6.0.0)(webpack@5.109.2):
+  webpack-cli@7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-bundle-analyzer@5.3.2)(webpack-dev-server@6.0.0)(webpack@5.109.2):
     dependencies:
       '@discoveryjs/json-ext': 1.1.0
       commander: 14.0.3
@@ -21105,7 +21105,7 @@ snapshots:
     optionalDependencies:
       js-yaml: 4.3.1
       json5: 2.2.3
-      webpack-bundle-analyzer: 5.3.1
+      webpack-bundle-analyzer: 5.3.2
       webpack-dev-server: 6.0.0(tslib@2.6.2)(webpack-cli@7.2.2)(webpack@5.109.2)
 
   webpack-dev-middleware@6.1.3(webpack@5.109.2):
@@ -21159,7 +21159,7 @@ snapshots:
       ws: 8.21.0
     optionalDependencies:
       webpack: 5.109.2(@swc/core@1.16.1)(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(postcss@8.5.25)(webpack-cli@7.2.2)
-      webpack-cli: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-bundle-analyzer@5.3.1)(webpack-dev-server@6.0.0)(webpack@5.109.2)
+      webpack-cli: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-bundle-analyzer@5.3.2)(webpack-dev-server@6.0.0)(webpack@5.109.2)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -21232,7 +21232,7 @@ snapshots:
       watchpack: 2.5.2
       webpack-sources: 3.5.1
     optionalDependencies:
-      webpack-cli: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-bundle-analyzer@5.3.1)(webpack-dev-server@6.0.0)(webpack@5.109.2)
+      webpack-cli: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-bundle-analyzer@5.3.2)(webpack-dev-server@6.0.0)(webpack@5.109.2)
     transitivePeerDependencies:
       - '@minify-html/node'
       - '@swc/core'
