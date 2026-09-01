@@ -48,7 +48,7 @@ const ABTests: ABTest[] = [
 		name: "growth-auxia-banner",
 		description: "Use Auxia API for deciding when to show a RR banner",
 		owners: ["growth.dev@guardian.co.uk"],
-		expirationDate: "2026-09-01",
+		expirationDate: "2026-12-01",
 		type: "client",
 		status: "ON",
 		audienceSize: 1,
