@@ -11,5 +11,5 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Run Jest
-        run: CI=true pnpm test
+        run: CI=true IMAGE_DIGEST=sha256:12345 pnpm test
         working-directory: dotcom-rendering
