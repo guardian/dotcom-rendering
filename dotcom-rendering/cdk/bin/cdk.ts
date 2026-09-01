@@ -142,6 +142,7 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
+	imageIdentifier: process.env.IMAGE_DIGEST!,
 };
 
 new RenderingCDKStack(

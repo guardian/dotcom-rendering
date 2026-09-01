@@ -56,7 +56,7 @@ describe('The RenderingCDKStack', () => {
 		expect(template.toJSON()).toMatchSnapshot();
 	});
 
-	it('matches the snapshot for Tag Page Rendering PROD (does not use ECS)', () => {
+	it('matches the snapshot for Tag Page Rendering PROD (now using ECS)', () => {
 		const app = new App();
 		const stack = new RenderingCDKStack(
 			app,
