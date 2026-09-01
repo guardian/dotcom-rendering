@@ -1,9 +1,9 @@
 import type {
-	BaseSchema,
-	BaseSchemaAsync,
-	Output,
+	GenericSchema,
+	GenericSchemaAsync,
+	InferIssue,
+	InferOutput,
 	SafeParseResult,
-	SchemaIssues,
 } from 'valibot';
 
 /**
@@ -183,9 +183,9 @@ const error = <E, A>(err: E): Result<E, A> => new Err(err);
  * const valibotResult = safeParse(schema, input);
  * const result = fromValibot(valibotResult);
  */
-export const fromValibot = <Schema extends BaseSchema | BaseSchemaAsync>(
+export const fromValibot = <Schema extends GenericSchema | GenericSchemaAsync>(
 	result: SafeParseResult<Schema>,
-): Result<SchemaIssues, Output<Schema>> =>
+): Result<InferIssue<Schema>[], InferOutput<Schema>> =>
 	result.success ? ok(result.output) : error(result.issues);
 
 export { Result, ok, error };
