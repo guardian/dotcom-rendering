@@ -1,4 +1,4 @@
-import { object, optional, type Output, string } from 'valibot';
+import { type InferOutput, object, optional, string } from 'valibot';
 import { feCricketMatchSchema } from './feCricketMatchData';
 
 export const feCricketMatchHeaderSchema = object({
@@ -7,4 +7,6 @@ export const feCricketMatchHeaderSchema = object({
 	reportURL: optional(string()),
 });
 
-export type FECricketMatchHeader = Output<typeof feCricketMatchHeaderSchema>;
+export type FECricketMatchHeader = InferOutput<
+	typeof feCricketMatchHeaderSchema
+>;

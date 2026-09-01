@@ -1,5 +1,5 @@
 import { isUndefined } from '@guardian/libs';
-import type { Output } from 'valibot';
+import type { InferOutput } from 'valibot';
 import { is, picklist } from 'valibot';
 import type {
 	FECricketMatch,
@@ -80,7 +80,7 @@ const winnerTypesSchema = picklist([
 	'forfeit',
 	'run-rate',
 ] as const);
-type WinnerType = Output<typeof winnerTypesSchema>;
+type WinnerType = InferOutput<typeof winnerTypesSchema>;
 
 const parseWinnerType = (type: string): Result<ParserError, WinnerType> => {
 	if (is(winnerTypesSchema, type)) {
