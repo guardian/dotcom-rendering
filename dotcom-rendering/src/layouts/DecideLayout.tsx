@@ -1,4 +1,8 @@
-import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -66,7 +70,9 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 					);
 				}
 				default: {
-					return isInRevampedImmersiveLayoutTest(article) ? (
+					return isInRevampedImmersiveLayoutTest(article) ||
+						(article.theme === ArticleSpecial.Labs &&
+							article.design === ArticleDesign.Standard) ? (
 						<StandardLayout
 							article={article.frontendData}
 							format={format}
@@ -249,7 +255,9 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 					);
 				}
 				default: {
-					return isInRevampedImmersiveLayoutTest(article) ? (
+					return isInRevampedImmersiveLayoutTest(article) ||
+						(article.theme === ArticleSpecial.Labs &&
+							article.design === ArticleDesign.Standard) ? (
 						<StandardLayout
 							article={article.frontendData}
 							format={format}
