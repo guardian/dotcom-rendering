@@ -1,7 +1,10 @@
 import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
-import { TagPageRenderingPropsCODE } from '../bin/cdk';
+import {
+	TagPageRenderingPropsCODE,
+	TagPageRenderingPropsPROD,
+} from '../bin/cdk';
 import { RenderingCDKStack } from './renderingStack';
 
 /**
@@ -53,13 +56,25 @@ describe('The RenderingCDKStack', () => {
 		expect(template.toJSON()).toMatchSnapshot();
 	});
 
+	it('matches the snapshot for Tag Page Rendering PROD (does not use ECS)', () => {
+		const app = new App();
+		const stack = new RenderingCDKStack(
+			app,
+			'TagPageRendering-PROD',
+			TagPageRenderingPropsPROD,
+		);
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
+	});
+
 	it('matches the snapshot for Tag Page Rendering CODE (uses ECS)', () => {
 		const app = new App();
 
-		const stack = new RenderingCDKStack(app, 'TagPageRendering-CODE', {
-			...TagPageRenderingPropsCODE,
-			imageIdentifier: 'sha256:12345',
-		});
+		const stack = new RenderingCDKStack(
+			app,
+			'TagPageRendering-CODE',
+			TagPageRenderingPropsCODE,
+		);
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();
 	});
