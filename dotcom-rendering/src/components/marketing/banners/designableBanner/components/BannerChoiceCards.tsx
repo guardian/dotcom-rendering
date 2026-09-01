@@ -161,9 +161,9 @@ export const BannerChoiceCards = ({
 			>
 				<LinkButton
 					href={enrichSupportUrl({
-						baseUrl: bannerData.selectedChoiceCard
-							? getChoiceCardUrl(bannerData.selectedChoiceCard)
-							: (copyForViewport.primaryCta?.ctaUrl ?? ''),
+						baseUrl: getChoiceCardUrl(
+							bannerData.selectedChoiceCard,
+						),
 						tracking: bannerData.tracking,
 						promoCodes: bannerData.promoCodes ?? [],
 						countryCode: bannerData.countryCode,

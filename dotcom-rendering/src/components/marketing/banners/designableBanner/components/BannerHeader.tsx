@@ -82,7 +82,6 @@ const getStyles = (
 
 			${from.desktop} {
 				padding-top: ${space[3]}px;
-				padding-right: ${space[5]}px;
 			}
 		`,
 		headerWithImageContainer: css`
