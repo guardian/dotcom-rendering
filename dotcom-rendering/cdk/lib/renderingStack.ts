@@ -359,6 +359,7 @@ export class RenderingCDKStack extends CDKStack {
 						// If resources are constrained this container can be
 						// taken down to give room to the main app
 						essential: false,
+						readonlyRootFilesystem: true,
 					},
 				);
 
