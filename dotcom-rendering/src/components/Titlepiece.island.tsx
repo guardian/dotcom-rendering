@@ -2,6 +2,7 @@ import { css, Global } from '@emotion/react';
 import {
 	from,
 	headlineBold14,
+	palette as sourcePalette,
 	space,
 	until,
 	visuallyHidden,
@@ -316,6 +317,14 @@ const fadeStyles = css`
 		${themePalette('--masthead-nav-background')} 100%
 	);
 `;
+
+/** For the image custom subnav the row is white and full-bleed; CustomSubNav
+ * centres its own blue padded container on top (mirrors DirectoryPageNav). */
+const customSubnavImageWrapper = css`
+	grid-column: viewport-start / viewport-end;
+	grid-row: 3;
+	background-color: ${sourcePalette.neutral[100]};
+`;
 export const Titlepiece = ({
 	nav,
 	editionId,
@@ -326,6 +335,10 @@ export const Titlepiece = ({
 	pageId = '',
 }: Props) => {
 	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
+
+	const hasCustomSubnavImage =
+		customSubnav?.renderingPage === 'front' &&
+		(customSubnav.data.images?.length ?? 0) > 0;
 
 	return (
 		<Grid
@@ -590,7 +603,11 @@ export const Titlepiece = ({
 
 			{customSubnav && (
 				<div
-					css={subNavWrapper}
+					css={
+						hasCustomSubnavImage
+							? customSubnavImageWrapper
+							: subNavWrapper
+					}
 					data-print-layout="hide"
 					data-testid="sub-nav"
 					data-component="sub-nav"
