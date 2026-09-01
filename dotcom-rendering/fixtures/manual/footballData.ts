@@ -29,13 +29,20 @@ export const footballMatchResultV2: FootballMatchV2 = {
 		name: 'Germany',
 		paID: '7699',
 		score: 2,
-		scorers: ['Sjoeke Nusken 56 Pen', 'Lea Schuller 66'],
+		scorers: [
+			{
+				name: 'Sjoeke Nusken',
+				time: '56',
+				otherInfo: 'Pen',
+			},
+			{ name: 'Lea Schuller', time: '66' },
+		],
 	},
 	awayTeam: {
 		name: 'Denmark',
 		paID: '35854',
 		score: 1,
-		scorers: ['Amalie Vangsgaard 26'],
+		scorers: [{ name: 'Amalie Vangsgaard', time: '26' }],
 	},
 	venue: 'St Jakob Park',
 	comment: undefined,
