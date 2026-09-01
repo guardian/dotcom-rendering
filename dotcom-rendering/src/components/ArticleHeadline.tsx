@@ -321,7 +321,7 @@ const immersiveHeadlineStyles = (
 		];
 	}
 
-	if (layoutType === 'immersiveLandscapeDefault') {
+	if (layoutType === 'immersiveLandscape') {
 		return [invertedText, darkBackground];
 	}
 
@@ -523,7 +523,7 @@ export const ArticleHeadline = ({
 	isMatch,
 	starRating,
 }: Props) => {
-	const isInverted = layoutType === 'immersiveLandscapeDefault';
+	const isInverted = layoutType === 'immersiveLandscape';
 	const isLegacyImmersive = layoutType == null;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {

@@ -1104,7 +1104,6 @@ export const RenderArticleElement = ({
 			type={element._type}
 			format={format}
 			isTimeline={isTimeline}
-			articleArrangement={articleArrangement}
 		>
 			{el}
 		</Figure>
