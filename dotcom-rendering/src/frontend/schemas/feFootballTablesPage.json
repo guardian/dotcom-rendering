@@ -312,7 +312,6 @@
             ]
         },
         "CustomSubnavLink": {
-            "description": "A custom subnav that can appear on assigned pages (e.g. fronts, articles). It arrives inside the `nav` object of the request payload.",
             "type": "object",
             "properties": {
                 "linkText": {
