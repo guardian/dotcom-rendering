@@ -206,6 +206,7 @@ const ABTests: ABTest[] = [
 		expirationDate: "2036-08-12",
 		type: "server",
 		audienceSize: 25 / 100,
+		audienceSpace: "E",
 		groups: ["a", "b"],
 		shouldForceMetricsCollection: false,
 	},
