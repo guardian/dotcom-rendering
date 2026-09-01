@@ -59,6 +59,11 @@ describe('enrichSupportUrl', () => {
 });
 
 describe('getChoiceCardUrl', () => {
+	it('returns the landing page url when choiceCard is undefined', () => {
+		const url = getChoiceCardUrl(undefined);
+		expect(url).toEqual('https://support.theguardian.com/contribute');
+	});
+
 	// One-time
 	it('builds landing page url for one-time choice', () => {
 		const url = getChoiceCardUrl({
