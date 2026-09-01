@@ -94,14 +94,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	if (isWeb) {
-		console.log(
-			'nav test on ',
-			props.article.webTitle,
-			props.NAV.customSubNav,
-		);
-	}
-
 	return (
 		<>
 			{isWeb && (

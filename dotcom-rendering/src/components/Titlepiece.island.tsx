@@ -321,7 +321,6 @@ export const Titlepiece = ({
 	editionId,
 	showSubNav,
 	customSubnav,
-	assignedPage,
 	showSlimNav,
 	hasPageSkin,
 	pageId = '',
