@@ -137,6 +137,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	showDefaultGate: ShowGateValues; // [3]
 	gateDisplayCount: number;
 	hideSupportMessagingTimestamp: number | undefined; // [4]
+	gandalfPageViewCount?: number; // [5] gandalfPageViewCount
 }
 
 // [1]
@@ -183,6 +184,23 @@ export interface AuxiaProxyGetTreatmentsPayload {
 // It is either undefined or return the timestamp carried by cookie `gu_hide_support_messaging`
 // See: https://github.com/guardian/support-frontend/blob/7a5c0f9209054c24934b876771392531c261f51c/support-frontend/assets/helpers/storage/contributionsCookies.ts#L11
 
+// [5] gandalfPageViewCount
+//
+// date: 2nd September 2026
+// comment group: gandalf
+//
+// "Gandalf" is the marketing name for the Guardian-managed sign-in gate
+// journey: a 100% rollout run entirely by Guardian rules with no Auxia
+// involvement, currently live for New Zealand and extendable to further
+// countries via the gandalfSignInGateCountries channel switch.
+//
+// `gandalfPageViewCount` is the 0-based number of eligible pageviews the
+// reader has already completed in the request's country under the active
+// Gandalf rules (see src/lib/gandalf.ts). Counters are per country, because
+// campaigns differ by country group. It is optional so older payloads and
+// traffic outside the Gandalf countries are unaffected; SDC treats a missing
+// value as 0.
+
 export interface AuxiaProxyGetTreatmentsResponse {
 	status: boolean;
 	data?: AuxiaProxyGetTreatmentsProxyResponseData;
@@ -191,6 +209,12 @@ export interface AuxiaProxyGetTreatmentsResponse {
 export interface AuxiaProxyGetTreatmentsProxyResponseData {
 	responseId: string;
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
+	// Set to true on responses produced by the active Gandalf rules, both
+	// when no gate should display (the pageview still counts towards the free
+	// allowance) and when the Guardian-managed non-dismissible popup is
+	// returned. When present, the client must not make any Auxia interaction
+	// call and reports to Ophan under the stable Gandalf identity.
+	gandalfSignInGate?: boolean;
 }
 
 // Log Treatment Interaction
@@ -235,6 +259,10 @@ export interface AuxiaGateReaderPersonalData {
 export interface AuxiaGateDisplayData {
 	browserId: string | undefined;
 	auxiaData: AuxiaProxyGetTreatmentsProxyResponseData;
+	// The country code the gate request was made for. Set by the client so the
+	// selector can build the per-country Gandalf Ophan variant
+	// (gandalf-<country>) without re-resolving geolocation.
+	gandalfCountryCode?: string;
 }
 
 export type SignInGatePropsAuxia = {

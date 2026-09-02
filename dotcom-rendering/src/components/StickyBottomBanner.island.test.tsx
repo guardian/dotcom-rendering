@@ -4,6 +4,7 @@ import { pickMessage } from '../lib/messagePicker';
 import { useAB } from '../lib/useAB';
 import { ConfigProvider } from './ConfigContext';
 import { isInUsStateForAbTest } from './marketing/lib/consentBannerTest';
+import { canShowSignInGatePortal } from './StickyBottomBanner/SignInGatePortal';
 import { StickyBottomBanner } from './StickyBottomBanner.island';
 
 jest.mock('../lib/messagePicker', () => ({
@@ -240,5 +241,34 @@ describe('StickyBottomBanner', () => {
 			(c) => c.candidate.id,
 		);
 		expect(candidateIds).toContain('reader-revenue-banner');
+	});
+
+	it('passes the pageview id and country to the sign-in gate candidate', async () => {
+		mockUseAB.mockReturnValue(undefined);
+		mockIsInUsState.mockReturnValue(false);
+		mockGetAlreadyVisitedCount.mockReturnValue(0);
+		// Invoke the candidates' canShow so the (mocked) sign-in gate portal
+		// receives its props, then resolve with no message.
+		mockPickMessage.mockImplementation(async (config) => {
+			await Promise.all(
+				config.candidates.map((candidateConfig) =>
+					candidateConfig.candidate.canShow().catch(() => undefined),
+				),
+			);
+			return { type: 'NoMessageSelected' };
+		});
+
+		renderStickyBottomBanner();
+
+		await waitFor(() => {
+			expect(canShowSignInGatePortal).toHaveBeenCalled();
+		});
+
+		expect(canShowSignInGatePortal).toHaveBeenCalledWith(
+			expect.objectContaining({
+				ophanPageViewId: 'test-page-view-id',
+				countryCode: 'GB',
+			}),
+		);
 	});
 });

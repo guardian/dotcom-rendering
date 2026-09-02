@@ -103,13 +103,71 @@ test.describe('Sign-in gate portal', function () {
 		await cmpAcceptAll(page);
 
 		await page.evaluate(() => {
-			// Set geolocation to IE to force the sign-in gate to appear
-			window.localStorage.setItem('gu.geo.override', 'IE');
+			// Set geolocation to IE to force the sign-in gate to appear.
+			// storage.local expects the { value } wrapper format.
+			window.localStorage.setItem(
+				'gu.geo.override',
+				JSON.stringify({ value: 'IE' }),
+			);
 		});
 
 		await page.reload({ waitUntil: 'domcontentloaded' });
 
 		await auxiaRequestPromise;
+	});
+
+	test('sends the Gandalf pageview counter for New Zealand readers', async ({
+		page,
+		context,
+	}) => {
+		await optOutOfArticleCountConsent(context);
+
+		const auxiaUrl =
+			'https://contributions.guardianapis.com/auxia/get-treatments';
+		const auxiaRequestPromise = page.waitForRequest((request) => {
+			if (!requestBodyHasProperties(request, auxiaUrl, ['isSupporter'])) {
+				return false;
+			}
+			const body = request.postDataJSON() as Record<string, unknown>;
+			// Match only the post-reload request: the first load runs with the
+			// default (GB) geolocation and also sends a count of 0.
+			return body.gandalfPageViewCount === 0 && body.countryCode === 'NZ';
+		});
+
+		await loadPage({
+			page,
+			path: ARTICLE_PATH,
+			waitUntil: 'domcontentloaded',
+			region: 'GB',
+			preventSupportBanner: false,
+			overrides: {
+				configOverrides: {
+					frontendAssetsFullURL: LOCAL_ASSET_ORIGIN,
+				},
+			},
+		});
+
+		await cmpAcceptAll(page);
+
+		// Set geolocation to NZ for the Gandalf proof of concept. This must be
+		// an init script (not page.evaluate) because loadPage registers its
+		// own init script that resets gu.geo.override to GB on every
+		// navigation, including the reload below; init scripts run in
+		// registration order, so this one runs last and wins. storage.local
+		// expects the { value } wrapper format that storage.local.set writes.
+		await page.addInitScript(() => {
+			window.localStorage.setItem(
+				'gu.geo.override',
+				JSON.stringify({ value: 'NZ' }),
+			);
+		});
+
+		await page.reload({ waitUntil: 'domcontentloaded' });
+
+		const auxiaRequest = await auxiaRequestPromise;
+		const body = auxiaRequest.postDataJSON() as Record<string, unknown>;
+		expect(body.countryCode).toBe('NZ');
+		expect(body.gandalfPageViewCount).toBe(0);
 	});
 });
 
