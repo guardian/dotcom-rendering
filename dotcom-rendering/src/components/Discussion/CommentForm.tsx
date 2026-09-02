@@ -182,6 +182,7 @@ const simulateNewComment = (
 	isHighlighted: false,
 	userProfile,
 	responses: [],
+	responseTo: undefined,
 });
 
 const simulateNewReply = (
@@ -200,6 +201,7 @@ const simulateNewReply = (
 	numRecommends: 0,
 	isHighlighted: false,
 	userProfile,
+	responses: undefined,
 	responseTo: {
 		displayName: commentBeingRepliedTo.userProfile.displayName,
 		commentApiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentBeingRepliedTo.id}`,
