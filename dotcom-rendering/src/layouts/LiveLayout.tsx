@@ -338,7 +338,13 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={!isWorldCup2026}
+						showSubNav={!isWorldCup2026 && !props.NAV.customSubNav}
+						customSubnav={
+							props.NAV.customSubNav && {
+								data: props.NAV.customSubNav,
+								renderingPage: 'article',
+							}
+						}
 						showSlimNav={false}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}

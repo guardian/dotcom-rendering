@@ -119,7 +119,17 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={!isLabs && !isWorldCup2026}
+						showSubNav={
+							!isLabs &&
+							!isWorldCup2026 &&
+							!props.NAV.customSubNav
+						}
+						customSubnav={
+							props.NAV.customSubNav && {
+								data: props.NAV.customSubNav,
+								renderingPage: 'article',
+							}
+						}
 						showSlimNav={
 							format.display === ArticleDisplay.Immersive
 						}

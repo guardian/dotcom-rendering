@@ -209,19 +209,28 @@ const ABTests: ABTest[] = [
 		groups: ["a", "b"],
 		shouldForceMetricsCollection: false,
 	},
-
 	{
 		name: "commercial-prebid-failsafe-timeout",
-		description:
-			"Test to measure the impact of the Prebid failsafe timeout",
+		description: "Gradually roll out the Prebid failsafe timeout feature",
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-09-30",
 		type: "client",
 		status: "ON",
-		audienceSize: 0 / 100,
+		audienceSize: 1 / 100,
 		audienceSpace: "B",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "articles-and-publishing-revamped-immersive-layout",
+		description: "New grid-based immersive layout for all articles",
+		owners: ["articles.and.publishing@guardian.co.uk "],
+		status: "ON",
+		expirationDate: "2027-08-31",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["enable"],
+		shouldForceMetricsCollection: false,
 	},
 ];
 

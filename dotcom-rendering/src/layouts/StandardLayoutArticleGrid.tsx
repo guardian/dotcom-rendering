@@ -207,23 +207,6 @@ export const StandardLayoutArticleGrid = ({
 	});
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
-	const isImmersivePortrait =
-		layoutType === 'immersivePortraitDefault' ||
-		layoutType === 'immersivePortraitFeature';
-	const isImmersiveLandscape =
-		layoutType === 'immersiveLandscapeDefault' ||
-		layoutType === 'immersiveLandscapeFeature';
-	const centreRuleColumn = (() => {
-		switch (layoutType) {
-			case 'immersivePortraitDefault':
-			case 'immersivePortraitFeature':
-			case 'immersiveLandscapeDefault':
-				return 4;
-			default:
-				return 3;
-		}
-	})();
-
 	const ageWarning = getAgeWarning(
 		article.tags,
 		article.webPublicationDateDeprecated,
@@ -237,8 +220,7 @@ export const StandardLayoutArticleGrid = ({
 				`,
 				grid.container,
 				grid.outerRules(),
-				isLabs &&
-					isImmersive &&
+				isImmersive &&
 					css`
 						&::before,
 						&::after {
@@ -248,29 +230,24 @@ export const StandardLayoutArticleGrid = ({
 				!isLabs &&
 					css`
 						${from.leftCol} {
-							${grid.centreRule(centreRuleColumn)}
+							${grid.centreRule(isImmersive ? 4 : 3)}
 						}
 					`,
-				isImmersivePortrait &&
+				layoutType === 'immersivePortrait' &&
 					css`
 						${from.desktop} {
 							grid-template-rows: 0.25fr 1fr auto;
 						}
 					`,
-				isImmersiveLandscape &&
+				layoutType === 'immersiveLandscape' &&
 					css`
 						${from.desktop} {
 							grid-template-rows: auto auto ${ageWarning != null
 									? '130px'
 									: '90px'} auto auto auto auto auto;
-							${grid.centreRule(
-								layoutType === 'immersiveLandscapeFeature'
-									? 3
-									: 4,
-							)}
 						}
 					`,
-				(isImmersivePortrait || isImmersiveLandscape) &&
+				isImmersive &&
 					css`
 						${until.desktop} {
 							/* Anchor the title consistently while wrapped text extends the media below it. */
@@ -292,14 +269,12 @@ export const StandardLayoutArticleGrid = ({
 									align-self: start;
 									${mainMediaAspectRatio != null &&
 									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
-									${isImmersiveLandscape &&
+									${layoutType === 'immersiveLandscape' &&
 									`margin-left: -20px;
 									margin-right: -20px;`}
 								}
 
-								${(isImmersivePortrait ||
-									isImmersiveLandscape) &&
-								immersiveMediaBelowDesktop(
+								${immersiveMediaBelowDesktop(
 									headlineBackground,
 									isMainMediaImage,
 								)}
@@ -347,7 +322,7 @@ export const StandardLayoutArticleGrid = ({
 								padding-bottom: ${space[2]}px;
 							}
 						`,
-					isImmersivePortrait &&
+					layoutType === 'immersivePortrait' &&
 						css`
 							align-self: end;
 							margin-bottom: 0;
@@ -383,8 +358,7 @@ export const StandardLayoutArticleGrid = ({
 								padding-bottom: ${space[8]}px;
 							}
 						`,
-					(layoutType === 'immersivePortraitDefault' ||
-						layoutType === 'immersivePortraitFeature') &&
+					layoutType === 'immersivePortrait' &&
 						css`
 							${from.desktop} {
 								border-bottom: 1px solid
@@ -393,7 +367,7 @@ export const StandardLayoutArticleGrid = ({
 									${themePalette('--article-border')};
 							}
 						`,
-					isImmersiveLandscape &&
+					layoutType === 'immersiveLandscape' &&
 						css`
 							${from.desktop} {
 								padding-bottom: ${space[8]}px;
@@ -423,7 +397,7 @@ export const StandardLayoutArticleGrid = ({
 								padding-top: ${space[2]}px;
 							}
 						`,
-					isImmersiveLandscape &&
+					layoutType === 'immersiveLandscape' &&
 						css`
 							${from.desktop} {
 								padding-bottom: ${space[8]}px;
@@ -470,7 +444,7 @@ export const StandardLayoutArticleGrid = ({
 								padding-top: ${space[3]}px;
 							}
 						`,
-					layoutType === 'immersivePortraitDefault'
+					layoutType === 'immersivePortrait'
 						? css`
 								${from.leftCol} {
 									margin-right: -10px;
@@ -481,7 +455,7 @@ export const StandardLayoutArticleGrid = ({
 			>
 				{format.display !== ArticleDisplay.Immersive &&
 					format.design !== ArticleDesign.Audio &&
-					layoutType !== 'immersivePortraitDefault' && (
+					layoutType !== 'immersivePortrait' && (
 						<div css={stretchLines}>
 							{isWeb &&
 							format.theme === ArticleSpecial.Labs &&
