@@ -132,13 +132,12 @@ export const createClientConfig = (build: Build): UserConfig => {
 						{ index: getEntryIndex(build) }
 					: {
 							index: getEntryIndex(build),
-							debug: './src/client/debug/debug.ts',
+							// debug: './src/client/debug/debug.ts',
 						},
 				external: getExternals(build),
 				output: {
 					// Naming: [name].[build].[hash].js — matches webpack output pattern
-					entryFileNames: (chunk) => {
-						if (chunk.name === 'debug') return 'debug.js';
+					entryFileNames: () => {
 						return DEV
 							? `[name].${build}.js`
 							: `[name].${build}.[hash].js`;
@@ -163,6 +162,12 @@ export const createClientConfig = (build: Build): UserConfig => {
 										minSize: 0,
 										// TODO FIXME
 										// maxSize: 500000,
+									},
+									{
+										name: 'debug',
+										test: (id) => id.includes('debug.js'),
+										priority: 2,
+										minSize: 0,
 									},
 								],
 							},
