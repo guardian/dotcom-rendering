@@ -211,8 +211,7 @@ const ABTests: ABTest[] = [
 	},
 	{
 		name: "commercial-prebid-failsafe-timeout",
-		description:
-			"Test to measure the impact of the Prebid failsafe timeout",
+		description: "Gradually roll out the Prebid failsafe timeout feature",
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-09-30",
 		type: "client",
