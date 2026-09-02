@@ -44,7 +44,7 @@ services:
   # The log output is the DCR response, so we can also pipe it through `jq` to pretty-print it, e.g.:
   #   docker logs "$(docker ps -aq --filter "name=sample-request" --latest)" | jq .
   sample-request:
-    image: curlimages/curl:8.21.0
+    image: curlimages/curl:8.22.0
     depends_on:
       tag-page-rendering:
         condition: service_healthy
