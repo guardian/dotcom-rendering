@@ -119,6 +119,13 @@ const selectedLink = css`
 	${textSansBold14}
 `;
 
+/** On fronts the header sits above the links as a large stacked heading. */
+const frontContainerStyles = css`
+	${headlineBold28}
+	margin-top: ${space[2]}px;
+	color: ${themePalette('--masthead-nav-link-text')};
+`;
+
 /**
  * Renders a custom subnav (header + links, images and further data to follow) assigned to fronts or articles.
  */
@@ -134,19 +141,7 @@ export const CustomSubNav = ({
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
 			data-rendering-page={renderingPage}
-			css={
-				isArticle
-					? articleContainerStyles
-					: [
-							headlineBold28,
-							css`
-								margin-top: ${space[2]}px;
-								color: ${themePalette(
-									'--masthead-nav-link-text',
-								)};
-							`,
-						]
-			}
+			css={isArticle ? articleContainerStyles : frontContainerStyles}
 		>
 			{isArticle ? (
 				<span css={articleHeaderStyles}>
