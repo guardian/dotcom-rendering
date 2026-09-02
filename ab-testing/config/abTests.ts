@@ -209,7 +209,6 @@ const ABTests: ABTest[] = [
 		groups: ["a", "b"],
 		shouldForceMetricsCollection: false,
 	},
-
 	{
 		name: "commercial-prebid-failsafe-timeout",
 		description:
@@ -218,7 +217,7 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-09-30",
 		type: "client",
 		status: "ON",
-		audienceSize: 0 / 100,
+		audienceSize: 1 / 100,
 		audienceSpace: "B",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
