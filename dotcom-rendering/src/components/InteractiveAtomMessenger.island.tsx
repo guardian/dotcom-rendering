@@ -1,13 +1,13 @@
 import { log } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
-import type { Output } from 'valibot';
+import type { InferOutput } from 'valibot';
 import { literal, number, object, safeParse, variant } from 'valibot';
 
 type Props = {
 	id: string;
 };
 
-type InteractiveMessage = Output<typeof interactiveMessageSchema>;
+type InteractiveMessage = InferOutput<typeof interactiveMessageSchema>;
 const interactiveMessageSchema = variant('kind', [
 	object({
 		kind: literal('interactive:scroll'),

@@ -1,6 +1,9 @@
 import { render, waitFor } from '@testing-library/react';
+import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import { pickMessage } from '../lib/messagePicker';
+import { useAB } from '../lib/useAB';
 import { ConfigProvider } from './ConfigContext';
+import { isInUsStateForAbTest } from './marketing/lib/consentBannerTest';
 import { StickyBottomBanner } from './StickyBottomBanner.island';
 
 jest.mock('../lib/messagePicker', () => ({
@@ -69,6 +72,14 @@ jest.mock('./StickyBottomBanner/SignInGatePortal', () => ({
 	SignInGatePortal: () => null,
 }));
 
+jest.mock('../lib/alreadyVisited', () => ({
+	getAlreadyVisitedCount: jest.fn().mockReturnValue(0),
+}));
+
+jest.mock('./marketing/lib/consentBannerTest', () => ({
+	isInUsStateForAbTest: jest.fn().mockReturnValue(false),
+}));
+
 const defaultProps = {
 	contentType: 'Article',
 	sectionId: 'news',
@@ -99,6 +110,9 @@ const renderStickyBottomBanner = (props: Partial<typeof defaultProps> = {}) =>
 	);
 
 const mockPickMessage = jest.mocked(pickMessage);
+const mockUseAB = jest.mocked(useAB);
+const mockIsInUsState = jest.mocked(isInUsStateForAbTest);
+const mockGetAlreadyVisitedCount = jest.mocked(getAlreadyVisitedCount);
 
 describe('StickyBottomBanner', () => {
 	afterEach(() => {
@@ -186,5 +200,45 @@ describe('StickyBottomBanner', () => {
 			([event]) => event.type === 'banner:sign-in-gate',
 		);
 		expect(signInGateEvents).toHaveLength(0);
+	});
+
+	it('excludes readerRevenue from candidates when in consent banner test, in US state, and first pageview', async () => {
+		mockUseAB.mockReturnValue({
+			isUserInTestGroup: (testId: string, variant: string) =>
+				testId === 'identity-and-trust-consent-rr-banner-us' &&
+				variant === 'variant-2',
+		} as ReturnType<typeof useAB>);
+		mockIsInUsState.mockReturnValue(true);
+		mockGetAlreadyVisitedCount.mockReturnValue(1);
+		mockPickMessage.mockResolvedValue({ type: 'NoMessageSelected' });
+
+		renderStickyBottomBanner();
+
+		await waitFor(() => {
+			expect(mockPickMessage).toHaveBeenCalled();
+		});
+
+		const candidateIds = mockPickMessage.mock.calls[0]![0].candidates.map(
+			(c) => c.candidate.id,
+		);
+		expect(candidateIds).not.toContain('reader-revenue-banner');
+	});
+
+	it('includes readerRevenue in candidates when not in consent banner test', async () => {
+		mockUseAB.mockReturnValue(undefined);
+		mockIsInUsState.mockReturnValue(false);
+		mockGetAlreadyVisitedCount.mockReturnValue(0);
+		mockPickMessage.mockResolvedValue({ type: 'NoMessageSelected' });
+
+		renderStickyBottomBanner();
+
+		await waitFor(() => {
+			expect(mockPickMessage).toHaveBeenCalled();
+		});
+
+		const candidateIds = mockPickMessage.mock.calls[0]![0].candidates.map(
+			(c) => c.candidate.id,
+		);
+		expect(candidateIds).toContain('reader-revenue-banner');
 	});
 });

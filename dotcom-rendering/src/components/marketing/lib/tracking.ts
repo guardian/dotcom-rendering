@@ -298,7 +298,11 @@ export const addTrackingParamsToProfileUrl = (
 
 const SupportUrl = 'https://support.theguardian.com';
 
-export const getChoiceCardUrl = (choiceCard: ChoiceCard): string => {
+export const getChoiceCardUrl = (choiceCard?: ChoiceCard): string => {
+	if (!choiceCard) {
+		// No choice selected, send to landing page
+		return `${SupportUrl}/contribute`;
+	}
 	const { product } = choiceCard;
 	const destination = choiceCard.destination ?? 'LandingPage';
 	const { destinationTest } = choiceCard;

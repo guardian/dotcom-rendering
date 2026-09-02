@@ -1,4 +1,4 @@
-import type { Output } from 'valibot';
+import type { InferOutput } from 'valibot';
 import { array, boolean, number, object, optional, string } from 'valibot';
 
 const feCricketTeamSchema = object({
@@ -9,7 +9,7 @@ const feCricketTeamSchema = object({
 	teamTagId: optional(string()),
 });
 
-export type FECricketTeam = Output<typeof feCricketTeamSchema>;
+export type FECricketTeam = InferOutput<typeof feCricketTeamSchema>;
 
 const feCricketBatterSchema = object({
 	name: string(),
@@ -60,7 +60,7 @@ const feCricketInningsSchema = object({
 	extras: number(),
 });
 
-export type FECricketInnings = Output<typeof feCricketInningsSchema>;
+export type FECricketInnings = InferOutput<typeof feCricketInningsSchema>;
 
 const matchWinnerStatusSchema = object({
 	winType: string(),
@@ -68,7 +68,7 @@ const matchWinnerStatusSchema = object({
 	team: string(),
 });
 
-export type FECricketMatchResultWinnerStatus = Output<
+export type FECricketMatchResultWinnerStatus = InferOutput<
 	typeof matchWinnerStatusSchema
 >;
 
@@ -78,7 +78,7 @@ const matchResultSchema = object({
 	winner: optional(matchWinnerStatusSchema),
 });
 
-export type FECricketMatchResult = Output<typeof matchResultSchema>;
+export type FECricketMatchResult = InferOutput<typeof matchResultSchema>;
 
 export const feCricketMatchSchema = object({
 	teams: array(feCricketTeamSchema),
@@ -95,7 +95,7 @@ export const feCricketMatchSchema = object({
 	fullResult: optional(matchResultSchema),
 });
 
-export type FECricketMatch = Output<typeof feCricketMatchSchema>;
+export type FECricketMatch = InferOutput<typeof feCricketMatchSchema>;
 
 export const feCricketMatchStatsSummarySchema = object({
 	status: string(),
@@ -103,6 +103,6 @@ export const feCricketMatchStatsSummarySchema = object({
 	notOutBatters: optional(array(feCricketBatterSchema)),
 });
 
-export type FECricketMatchStatsSummary = Output<
+export type FECricketMatchStatsSummary = InferOutput<
 	typeof feCricketMatchStatsSummarySchema
 >;

@@ -230,7 +230,7 @@ export const CommentContainer = ({
 							<CommentForm
 								shortUrl={shortUrl}
 								onAddComment={(response) => {
-									if ('responses' in response) {
+									if (response.responses !== undefined) {
 										return;
 									}
 									onAddReply(comment.id, response);

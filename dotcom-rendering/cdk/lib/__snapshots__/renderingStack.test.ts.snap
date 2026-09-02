@@ -2297,6 +2297,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             },
             "Memory": 512,
             "Name": "aws-otel-collector",
+            "ReadonlyRootFilesystem": true,
           },
         ],
         "Cpu": "1024",
