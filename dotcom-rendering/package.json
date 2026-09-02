@@ -101,7 +101,7 @@
 		"browserslist": "4.24.4",
 		"buffer": "6.0.3",
 		"clean-css": "5.3.3",
-		"compare-versions": "6.1.0",
+		"compare-versions": "6.1.1",
 		"compression": "1.7.4",
 		"constructs": "catalog:",
 		"cpy": "11.0.0",
