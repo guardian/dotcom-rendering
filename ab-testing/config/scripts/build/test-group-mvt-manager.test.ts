@@ -331,7 +331,8 @@ test("TestGroupMVTManager - stress test with maximum MVTs", () => {
 	const manager = new TestGroupMVTManager(emptyAudienceSpace);
 
 	// Add a group that uses all available MVTs
-	manager.addTestGroup("test1:control", 1000);
+	manager.addTestGroup("test1:control", 200);
+	manager.resizeTestGroup("test1:control", 1000);
 
 	const testGroup = manager.getTestGroup("test1:control");
 	equal(testGroup?.length, 1000);
@@ -377,5 +378,35 @@ test("TestGroupMVTManager - constructor with invalid MVT key format", () => {
 	equal(
 		testGroup?.some((mvt) => Number.isNaN(mvt)),
 		false,
+	);
+});
+
+test("TestGroupMVTManager - adding a test with size 1000 should throw an error", () => {
+	const emptyAudienceSpace = new Map<
+		string,
+		{ name: string; type: string; exp: number }
+	>();
+	const manager = new TestGroupMVTManager(emptyAudienceSpace);
+
+	throws(
+		() => manager.addTestGroup("test1:control", 1000),
+		Error,
+		"Size for for new test, test1:control, cannot be 100%, please add it as a 20-50% first and scale up to 100% after a few hours, see https://github.com/guardian/dotcom-rendering/blob/9370061e00535d4e280c573ea27cc3095d7e2b8a/dotcom-rendering/docs/development/ab-testing-in-dcr.md#L43 for details on why",
+	);
+});
+
+test("TestGroupMVTManager - resizing a test from 0 to 1000 should throw an error", () => {
+	const emptyAudienceSpace = new Map<
+		string,
+		{ name: string; type: string; exp: number }
+	>();
+	const manager = new TestGroupMVTManager(emptyAudienceSpace);
+
+	manager.addTestGroup("test1:control", 10);
+
+	throws(
+		() => manager.resizeTestGroup("test1:control", 1000),
+		Error,
+		"Cannot resize test test1:control from 10% to 100%, please scale it to 20-50% first then up to 100% after a few hours, see https://github.com/guardian/dotcom-rendering/blob/9370061e00535d4e280c573ea27cc3095d7e2b8a/dotcom-rendering/docs/development/ab-testing-in-dcr.md#L43 for details on why",
 	);
 });

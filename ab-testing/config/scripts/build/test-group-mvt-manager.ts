@@ -79,6 +79,11 @@ class TestGroupMVTManager {
 		if (!Number.isInteger(size)) {
 			throw new Error(`Size for test ${name} must be an integer`);
 		}
+		if (size === 1000) {
+			throw new Error(
+				`Size for for new test, ${name}, cannot be 100%, please add it as a 20-50% first and scale up to 100% after a few hours, see https://github.com/guardian/dotcom-rendering/blob/9370061e00535d4e280c573ea27cc3095d7e2b8a/dotcom-rendering/docs/development/ab-testing-in-dcr.md#L43 for details on why`,
+			);
+		}
 		const mvts = this.availableMVTs.splice(0, size);
 		this.testGroups.set(name, mvts);
 		mvts.forEach((mvt) => {
@@ -102,6 +107,12 @@ class TestGroupMVTManager {
 
 		const currentMVTs = this.testGroups.get(name) ?? [];
 		const currentSize = currentMVTs.length;
+
+		if (currentSize < 200 && newSize === 1000) {
+			throw new Error(
+				`Cannot resize test ${name} from ${Math.round((currentSize / 1000) * 100)}% to 100%, please scale it to 20-50% first then up to 100% after a few hours, see https://github.com/guardian/dotcom-rendering/blob/9370061e00535d4e280c573ea27cc3095d7e2b8a/dotcom-rendering/docs/development/ab-testing-in-dcr.md#L43 for details on why`,
+			);
+		}
 
 		if (newSize > currentSize) {
 			const additionalMVTsNeeded = newSize - currentSize;
