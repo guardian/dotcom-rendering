@@ -340,6 +340,9 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							editionId={frontendData.editionId}
 						/>
 					</Section>
+					{/* Mount point for the sign-in gate portal, which is not
+					    provided by an article body on galleries */}
+					<div id="sign-in-gate" data-print-layout="hide" />
 					<BannerWrapper data-print-layout="hide">
 						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner

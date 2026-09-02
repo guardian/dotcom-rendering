@@ -149,6 +149,7 @@ interface ShowSignInGateAuxiaProps {
 	browserId: string | undefined;
 	treatmentId: string;
 	renderingTarget: RenderingTarget;
+	isGandalf: boolean;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
 		actionName?: AuxiaInteractionActionName,
@@ -276,13 +277,33 @@ const SignInGateSelectorAuxia = ({
 		undefined,
 	);
 
+	// Gandalf (comment group: gandalf) — the Guardian-managed sign-in gate
+	// journey (marketing name). SDC marks responses produced by the active
+	// Gandalf rules. For those responses we report to Ophan under a stable
+	// Gandalf identity with a per-country variant instead of the Auxia
+	// experiment metadata, and we never call Auxia's LogTreatmentInteraction
+	// endpoint. This is reporting metadata only — there is no A/B test
+	// allocation behind it.
+	const isGandalf =
+		auxiaGateDisplayData?.auxiaData.gandalfSignInGate === true;
+	const gandalfCountryCode = auxiaGateDisplayData?.gandalfCountryCode;
+
 	// We are using CurrentSignInGateABTest, with the details of the Auxia experiment,
 	// to allow Ophan tracking
-	const abTest: CurrentSignInGateABTest = {
-		name: 'AuxiaSignInGate', // value of dataLinkNames
-		variant: 'auxia-signin-gate', // variant id
-		id: 'AuxiaSignInGate', // test id
-	};
+	const abTest: CurrentSignInGateABTest = isGandalf
+		? {
+				name: 'GandalfSignInGate', // value of dataLinkNames
+				variant:
+					gandalfCountryCode !== undefined
+						? `gandalf-${gandalfCountryCode.toLowerCase()}` // per-country variant
+						: 'gandalf-rollout', // variant id
+				id: 'GandalfSignInGate', // test id
+			}
+		: {
+				name: 'AuxiaSignInGate', // value of dataLinkNames
+				variant: 'auxia-signin-gate', // variant id
+				id: 'AuxiaSignInGate', // test id
+			};
 
 	const { renderingTarget } = useConfig();
 
@@ -292,7 +313,7 @@ const SignInGateSelectorAuxia = ({
 		// this hook will fire when the sign in gate is dismissed
 		// which will happen when the showGate state is set to false
 		// this only happens within the dismissGate method
-		if (isGateDismissed) {
+		if (isGateDismissed === true) {
 			document.dispatchEvent(
 				new CustomEvent('article:sign-in-gate-dismissed'),
 			);
@@ -330,16 +351,20 @@ const SignInGateSelectorAuxia = ({
 
 	return (
 		<>
-			{!isGateDismissed &&
+			{isGateDismissed !== true &&
 				auxiaGateDisplayData?.auxiaData.userTreatment !== undefined && (
 					<ShowSignInGateAuxia
 						host={host}
 						queryParams={queryParams}
 						setShowGate={(show) => setIsGateDismissed(!show)}
-						abTest={buildAbTestTrackingAuxiaVariant(
-							auxiaGateDisplayData.auxiaData.userTreatment
-								.treatmentId,
-						)}
+						abTest={
+							isGandalf
+								? abTest
+								: buildAbTestTrackingAuxiaVariant(
+										auxiaGateDisplayData.auxiaData
+											.userTreatment.treatmentId,
+									)
+						}
 						userTreatment={
 							auxiaGateDisplayData.auxiaData.userTreatment
 						}
@@ -350,10 +375,16 @@ const SignInGateSelectorAuxia = ({
 								.treatmentId
 						}
 						renderingTarget={renderingTarget}
+						isGandalf={isGandalf}
 						logTreatmentInteractionCall={async (
 							interactionType: AuxiaInteractionInteractionType,
 							actionName?: AuxiaInteractionActionName,
 						) => {
+							// Gandalf: never contact Auxia for
+							// Guardian-managed treatments.
+							if (isGandalf) {
+								return;
+							}
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
 								auxiaGateDisplayData.auxiaData.userTreatment!,
@@ -390,6 +421,7 @@ const ShowSignInGateAuxia = ({
 	browserId,
 	treatmentId,
 	renderingTarget,
+	isGandalf,
 	logTreatmentInteractionCall,
 	signInGateVersion,
 }: ShowSignInGateAuxiaProps) => {
@@ -413,26 +445,29 @@ const ShowSignInGateAuxia = ({
 	}, [setNode, setSignInGatePlaceholder]);
 
 	useEffect(() => {
-		if (hasBeenSeen) {
+		if (hasBeenSeen === true) {
 			// Tell Auxia
-			void auxiaLogTreatmentInteraction(
-				contributionsServiceUrl,
-				userTreatment,
-				'VIEWED',
-				'',
-				browserId,
-			).catch((error) => {
-				const errorReport = new Error(
-					`Failed to log treatment interaction`,
-					{
-						cause: error,
-					},
-				);
-				window.guardian.modules.sentry.reportError(
-					errorReport,
-					'sign-in-gate',
-				);
-			});
+			// Gandalf: never contact Auxia for Guardian-managed treatments.
+			if (!isGandalf) {
+				void auxiaLogTreatmentInteraction(
+					contributionsServiceUrl,
+					userTreatment,
+					'VIEWED',
+					'',
+					browserId,
+				).catch((error) => {
+					const errorReport = new Error(
+						`Failed to log treatment interaction`,
+						{
+							cause: error,
+						},
+					);
+					window.guardian.modules.sentry.reportError(
+						errorReport,
+						'sign-in-gate',
+					);
+				});
+			}
 
 			// Tell Ophan
 			void submitComponentEventTracking(
@@ -465,6 +500,7 @@ const ShowSignInGateAuxia = ({
 		hasBeenSeen,
 		browserId,
 		contributionsServiceUrl,
+		isGandalf,
 		renderingTarget,
 		treatmentId,
 		userTreatment,

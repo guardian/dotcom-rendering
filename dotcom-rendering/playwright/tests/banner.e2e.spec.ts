@@ -111,6 +111,50 @@ test.describe('Sign-in gate portal', function () {
 
 		await auxiaRequestPromise;
 	});
+
+	test('sends the Gandalf pageview counter for New Zealand readers', async ({
+		page,
+		context,
+	}) => {
+		await optOutOfArticleCountConsent(context);
+
+		const auxiaUrl =
+			'https://contributions.guardianapis.com/auxia/get-treatments';
+		const auxiaRequestPromise = page.waitForRequest((request) => {
+			if (!requestBodyHasProperties(request, auxiaUrl, ['isSupporter'])) {
+				return false;
+			}
+			const body = request.postDataJSON() as Record<string, unknown>;
+			return body.gandalfPageViewCount === 0;
+		});
+
+		await loadPage({
+			page,
+			path: ARTICLE_PATH,
+			waitUntil: 'domcontentloaded',
+			region: 'GB',
+			preventSupportBanner: false,
+			overrides: {
+				configOverrides: {
+					frontendAssetsFullURL: LOCAL_ASSET_ORIGIN,
+				},
+			},
+		});
+
+		await cmpAcceptAll(page);
+
+		await page.evaluate(() => {
+			// Set geolocation to NZ for the Gandalf proof of concept
+			window.localStorage.setItem('gu.geo.override', 'NZ');
+		});
+
+		await page.reload({ waitUntil: 'domcontentloaded' });
+
+		const auxiaRequest = await auxiaRequestPromise;
+		const body = auxiaRequest.postDataJSON() as Record<string, unknown>;
+		expect(body.countryCode).toBe('NZ');
+		expect(body.gandalfPageViewCount).toBe(0);
+	});
 });
 
 test.describe('Banner browserId targeting', function () {

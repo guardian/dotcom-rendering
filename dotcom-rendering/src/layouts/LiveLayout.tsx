@@ -1071,6 +1071,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						/>
 					</Section>
 
+					{/* Mount point for the sign-in gate portal: live blog bodies
+					    render through LiveBlogRenderer, which provides no slot */}
+					<div id="sign-in-gate" data-print-layout="hide" />
 					<BannerWrapper data-print-layout="hide">
 						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner
