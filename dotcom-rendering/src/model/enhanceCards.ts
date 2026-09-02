@@ -216,12 +216,6 @@ export const decideHeadline = (
 ): string => {
 	const defaultHeadline = faciaCard.header.headline;
 
-	/*
-	 * Initial rollout of Editorial AB testing will be limited to the US front only.
-	 * Removal of this front restriction will be covered by https://github.com/guardian/frontend/issues/29129
-	 */
-	if (pageId !== 'us') return defaultHeadline;
-
 	const testBucket =
 		serverSideABTests['fronts-and-curation-editorial-headline-test'];
 
