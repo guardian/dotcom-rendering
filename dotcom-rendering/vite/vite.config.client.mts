@@ -94,6 +94,16 @@ const shouldInlineDynamicImports = (build: Build): boolean =>
 	build === 'client.apps' || build === 'client.editionsCrossword';
 
 /**
+ * Returns the file format for the given build
+ *
+ * @param build
+ * @returns hash format
+ */
+const getHashFormat = (build: Build): string => {
+	return DEV ? `[name].${build}.js` : `[name].${build}.[hash].js`;
+};
+
+/**
  * Creates a Vite client config for the given build variant.
  *
  * This replaces webpack.config.client.js — called once per build variant
@@ -127,24 +137,11 @@ export const createClientConfig = (build: Build): UserConfig => {
 			target: getBuildTarget(build),
 			manifest: `manifest.${build}.json`,
 			rolldownOptions: {
-				input: isSingleChunk
-					? // Single-chunk builds can only have one entry
-						{ index: getEntryIndex(build) }
-					: {
-							index: getEntryIndex(build),
-							// debug: './src/client/debug/debug.ts',
-						},
+				input: { index: getEntryIndex(build) },
 				external: getExternals(build),
 				output: {
-					// Naming: [name].[build].[hash].js — matches webpack output pattern
-					entryFileNames: () => {
-						return DEV
-							? `[name].${build}.js`
-							: `[name].${build}.[hash].js`;
-					},
-					chunkFileNames: DEV
-						? `[name].${build}.js`
-						: `[name].${build}.[hash].js`,
+					entryFileNames: getHashFormat(build),
+					chunkFileNames: getHashFormat(build),
 					codeSplitting: isSingleChunk
 						? false
 						: {
