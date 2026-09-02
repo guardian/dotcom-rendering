@@ -173,7 +173,7 @@ export const StandardLayoutArticleGrid = ({
 	const isShowcase = format.display === ArticleDisplay.Showcase;
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isFeature = format.design === ArticleDesign.Feature;
-	const headlineBackground = themePalette('--headline-background');
+	const headlineBackground = themePalette('--headline-background-immersive');
 
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
@@ -220,12 +220,22 @@ export const StandardLayoutArticleGrid = ({
 				`,
 				grid.container,
 				grid.outerRules(),
-				isImmersive &&
+				isLabs &&
+					isImmersive &&
 					css`
-						&::before,
-						&::after {
-							z-index: ${getZIndex('immersiveGridOuterRules')};
+						${from.desktop} {
+							&::before,
+							&::after {
+								z-index: ${getZIndex(
+									'immersiveGridOuterRules',
+								)};
+							}
 						}
+						/* Anchor the title consistently while wrapped text extends the media below it. */
+						grid-template-rows: ${immersiveMediaRowHeight} repeat(
+								6,
+								auto
+							);
 					`,
 				!isLabs &&
 					css`
@@ -245,16 +255,6 @@ export const StandardLayoutArticleGrid = ({
 							grid-template-rows: auto auto ${ageWarning != null
 									? '130px'
 									: '90px'} auto auto auto auto auto;
-						}
-					`,
-				isImmersive &&
-					css`
-						${until.desktop} {
-							/* Anchor the title consistently while wrapped text extends the media below it. */
-							grid-template-rows: ${immersiveMediaRowHeight} repeat(
-									6,
-									auto
-								);
 						}
 					`,
 			]}
@@ -358,6 +358,12 @@ export const StandardLayoutArticleGrid = ({
 								padding-bottom: ${space[8]}px;
 							}
 						`,
+					layoutType === 'immersiveLandscape' &&
+						css`
+							${from.desktop} {
+								padding-bottom: ${space[8]}px;
+							}
+						`,
 					layoutType === 'immersivePortrait' &&
 						css`
 							${from.desktop} {
@@ -365,12 +371,6 @@ export const StandardLayoutArticleGrid = ({
 									${themePalette('--article-border')};
 								border-top: 1px solid
 									${themePalette('--article-border')};
-							}
-						`,
-					layoutType === 'immersiveLandscape' &&
-						css`
-							${from.desktop} {
-								padding-bottom: ${space[8]}px;
 							}
 						`,
 				]}
