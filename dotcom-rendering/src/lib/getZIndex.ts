@@ -82,13 +82,13 @@ const indices = [
 	// Sticky table of contents element
 	'tableOfContents',
 
-	// Article headline (should be above main media)
-	'articleHeadline',
-	'immersiveBlackBox',
-
 	// Body
 	'bodyArea',
 	'rightColumnArea',
+
+	// Article headline (should be above main media)
+	'articleHeadline',
+	'immersiveBlackBox',
 
 	// Media overlay
 	'mediaOverlay',

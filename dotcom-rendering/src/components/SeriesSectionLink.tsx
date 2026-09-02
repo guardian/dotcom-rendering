@@ -408,10 +408,8 @@ export const SeriesSectionLink = ({
 			);
 		}
 		if (
-			layoutType === 'immersivePortraitDefault' ||
-			layoutType === 'immersivePortraitFeature' ||
-			layoutType === 'immersiveLandscapeDefault' ||
-			layoutType === 'immersiveLandscapeFeature'
+			layoutType === 'immersivePortrait' ||
+			layoutType === 'immersiveLandscape'
 		) {
 			return (
 				<>
