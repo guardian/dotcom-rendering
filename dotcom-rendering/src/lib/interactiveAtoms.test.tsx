@@ -6,7 +6,7 @@ import { InteractiveLayoutAtom } from '../components/InteractiveLayoutAtom';
 const mockCustomData = JSON.stringify({ key: 'value' });
 
 describe('Interactive atom custom data attributes', () => {
-	it('should add custom data attribute to InteractiveAtom on web', () => {
+	it('should inject custom data into srcDoc for InteractiveAtom on web', () => {
 		const { container } = render(
 			<ConfigProvider
 				value={{
@@ -23,13 +23,13 @@ describe('Interactive atom custom data attributes', () => {
 				/>
 			</ConfigProvider>,
 		);
-		const el = container.querySelector(
-			`[data-atom-custom-data='${mockCustomData}']`,
+		const iframe = container.querySelector('iframe');
+		expect(iframe?.srcdoc).toContain(
+			`window.__atomCustomData = ${mockCustomData}`,
 		);
-		expect(el).toBeInTheDocument();
 	});
 
-	it('should add custom data attribute to InteractiveAtom on apps', () => {
+	it('should inject custom data into srcDoc for InteractiveAtom on apps', () => {
 		const { container } = render(
 			<ConfigProvider
 				value={{
@@ -46,10 +46,10 @@ describe('Interactive atom custom data attributes', () => {
 				/>
 			</ConfigProvider>,
 		);
-		const el = container.querySelector(
-			`[data-atom-custom-data='${mockCustomData}']`,
+		const iframe = container.querySelector('iframe');
+		expect(iframe?.srcdoc).toContain(
+			`window.__atomCustomData = ${mockCustomData}`,
 		);
-		expect(el).toBeInTheDocument();
 	});
 
 	it('should add custom data attribute to InteractiveLayoutAtom', () => {
