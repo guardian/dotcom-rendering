@@ -10,6 +10,7 @@ export type InteractiveLayoutAtomType = {
 	elementHtml?: string;
 	elementJs?: string;
 	elementCss?: string;
+	customData?: string;
 };
 
 export const InteractiveLayoutAtom = ({
@@ -17,12 +18,14 @@ export const InteractiveLayoutAtom = ({
 	elementHtml,
 	elementJs,
 	elementCss,
+	customData,
 }: InteractiveLayoutAtomType) => (
 	<div
 		className="interactive interactive-atom"
 		css={containerStyles}
 		data-atom-id={id}
 		data-atom-type="interactive-layout"
+		{...(customData ? { 'data-atom-custom-data': customData } : {})}
 	>
 		{!!elementCss && (
 			<style
