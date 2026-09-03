@@ -8,6 +8,7 @@ import { isString, isUndefined, storage } from '@guardian/libs';
 import type { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
+import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import type { ArticleCounts } from '../lib/articleCount';
 import { getArticleCounts } from '../lib/articleCount';
 import {
@@ -28,6 +29,7 @@ import { usePageViewId } from '../lib/usePageViewId';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
+import { isInUsStateForAbTest } from './marketing/lib/consentBannerTest';
 import type { AuxiaGateDisplayData } from './SignInGate/types';
 import {
 	BrazeBanner,
@@ -282,6 +284,11 @@ export const StickyBottomBanner = ({
 	const abTests = useAB();
 	const inAuxiaVariant =
 		abTests?.isUserInTestGroup('growth-auxia-banner', 'variant') ?? false;
+	const inConsentBannerTestV2 =
+		abTests?.isUserInTestGroup(
+			'identity-and-trust-consent-rr-banner-us',
+			'variant-2',
+		) ?? false;
 
 	const [pickMessageResult, setPickMessageResult] =
 		useState<PickMessageResult | null>(null);
@@ -383,6 +390,13 @@ export const StickyBottomBanner = ({
 			candidates = [CMP, readerRevenue];
 		} else if (hasForceBrazeMessageParam) {
 			candidates = [CMP, brazeBannersSystem, brazeBanner];
+		} else if (
+			inConsentBannerTestV2 &&
+			isInUsStateForAbTest() &&
+			getAlreadyVisitedCount() <= 1
+		) {
+			// Do not show a RR banner on the first pageview if in this test variant
+			candidates = [CMP, signInGate, brazeBannersSystem, brazeBanner];
 		} else {
 			candidates = [
 				CMP,
@@ -436,6 +450,7 @@ export const StickyBottomBanner = ({
 		braze,
 		abTests,
 		inAuxiaVariant,
+		inConsentBannerTestV2,
 	]);
 
 	/**

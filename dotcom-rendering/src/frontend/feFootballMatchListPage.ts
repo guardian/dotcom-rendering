@@ -1,10 +1,10 @@
 import {
 	boolean,
+	type InferOutput,
 	literal,
 	number,
 	object,
 	optional,
-	type Output,
 	string,
 	variant,
 } from 'valibot';
@@ -103,12 +103,12 @@ export const feFootballMatchSchema = variant('type', [
 	liveSchema,
 ]);
 
-export type FELive = Output<typeof liveSchema>;
-export type FEFixture = Output<typeof fixtureSchema>;
-export type FEMatchDay = Output<typeof matchDaySchema>;
-export type FEResult = Output<typeof resultSchema>;
-export type FEFootballMatch = Output<typeof feFootballMatchSchema>;
-export type FEMatchDayTeam = Output<typeof matchDayTeamSchema>;
+export type FELive = InferOutput<typeof liveSchema>;
+export type FEFixture = InferOutput<typeof fixtureSchema>;
+export type FEMatchDay = InferOutput<typeof matchDaySchema>;
+export type FEResult = InferOutput<typeof resultSchema>;
+export type FEFootballMatch = InferOutput<typeof feFootballMatchSchema>;
+export type FEMatchDayTeam = InferOutput<typeof matchDayTeamSchema>;
 
 export type FECompetitionMatch = {
 	competitionSummary: FECompetitionSummary;

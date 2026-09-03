@@ -35,9 +35,6 @@ const send = async (
 		Data: responseData,
 	});
 
-	console.log("Response body:\n", responseBody);
-	console.log("Sending response to:", event.ResponseURL);
-
 	try {
 		await fetch(event.ResponseURL, {
 			method: "PUT",

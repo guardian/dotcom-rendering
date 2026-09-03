@@ -6,7 +6,7 @@ import { storage } from '@guardian/libs';
  */
 const AlreadyVisitedKey = 'gu.alreadyVisited';
 
-const getAlreadyVisitedCount = (): number => {
+export const getAlreadyVisitedCount = (): number => {
 	const alreadyVisited = parseInt(
 		storage.local.getRaw(AlreadyVisitedKey) ?? '',
 		10,

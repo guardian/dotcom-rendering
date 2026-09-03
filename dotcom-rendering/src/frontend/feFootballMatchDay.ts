@@ -1,9 +1,9 @@
 import {
 	array,
+	type InferOutput,
 	literal,
 	number,
 	object,
-	type Output,
 	string,
 	union,
 } from 'valibot';
@@ -42,4 +42,4 @@ export const feFootballMatchDaySchema = object({
 	guardianBaseURL: string(),
 });
 
-export type FEFootballMatchDay = Output<typeof feFootballMatchDaySchema>;
+export type FEFootballMatchDay = InferOutput<typeof feFootballMatchDaySchema>;

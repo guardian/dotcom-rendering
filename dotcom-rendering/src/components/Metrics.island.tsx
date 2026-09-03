@@ -51,7 +51,11 @@ const useDev = () => {
 	return isDev;
 };
 
-const logMvt = (mvtId: string | null, abTestCookie: string | null) => {
+const logMvt = (
+	mvtId: string | null,
+	oldMvtId: string | null,
+	abTestCookie: string | null,
+) => {
 	const logsEndpoint = window.guardian.config.page.isDev
 		? '//logs.code.dev-guardianapis.com/log'
 		: '//logs.guardianapis.com/log';
@@ -62,6 +66,7 @@ const logMvt = (mvtId: string | null, abTestCookie: string | null) => {
 			label: 'webx.ab-testing',
 			properties: [
 				{ name: 'mvtId', value: mvtId },
+				{ name: 'oldMvtId', value: oldMvtId },
 				{
 					name: 'pageviewId',
 					value: window.guardian.config.ophan.pageViewId,
@@ -222,12 +227,17 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 				shouldMemoize: true,
 			});
 
+			const oldMvtId = getCookie({
+				name: 'GU_mvt_id',
+				shouldMemoize: true,
+			});
+
 			const rawClientABTests = getCookie({
 				name: 'gu_client_ab_tests',
 				shouldMemoize: true,
 			});
 
-			logMvt(mvtId, rawClientABTests);
+			logMvt(mvtId, oldMvtId, rawClientABTests);
 		},
 		[isInMonitoringTest],
 	);

@@ -6572,6 +6572,39 @@ const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const customSubnavHeaderTextLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
+const customSubnavHeaderTextDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -7129,6 +7162,10 @@ const paletteColours = {
 		light: crosswordTextLight,
 		dark: crosswordTextDark,
 	},
+	'--custom-subnav-header-text': {
+		light: customSubnavHeaderTextLight,
+		dark: customSubnavHeaderTextDark,
+	},
 	'--dateline': {
 		light: datelineLight,
 		dark: datelineDark,
@@ -7445,6 +7482,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
 	},
+	'--football-match-header-fixture-result-score-secondary-text': {
+		light: () => `${sourcePalette.neutral[100]}99`,
+		dark: () => `${sourcePalette.neutral[100]}99`,
+	},
 	'--football-match-header-fixture-result-secondary-text': {
 		light: () => sourcePalette.sport[700],
 		dark: () => sourcePalette.sport[700],
@@ -7464,6 +7505,10 @@ const paletteColours = {
 	'--football-match-header-live-primary-text': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[7],
+	},
+	'--football-match-header-live-score-secondary-text': {
+		light: () => `${sourcePalette.neutral[7]}ab`,
+		dark: () => `${sourcePalette.neutral[7]}ab`,
 	},
 	'--football-match-header-live-selected': {
 		light: () => sourcePalette.neutral[7],
