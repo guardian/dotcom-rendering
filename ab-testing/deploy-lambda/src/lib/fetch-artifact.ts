@@ -1,14 +1,14 @@
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import type { Infer } from "superstruct";
-import { array, create, object, string } from "superstruct";
+import type { InferOutput } from "valibot";
+import { array, parse, strictObject, string } from "valibot";
 import { REGION } from "./constants.ts";
 
-const fastlyKVStruct = object({
+const fastlyKVStruct = strictObject({
 	item_key: string(),
 	item_value: string(),
 });
 
-type KeyValue = Infer<typeof fastlyKVStruct>;
+type KeyValue = InferOutput<typeof fastlyKVStruct>;
 
 /**
  * Fetches the dictionary artifact from the given s3 location, using the AWS SDK.
@@ -37,7 +37,7 @@ const fetchDictionaryArtifact = async (
 		const bodyString = await response.Body.transformToString();
 		const parsed = JSON.parse(bodyString) as unknown;
 
-		const result = create(parsed, array(fastlyKVStruct));
+		const result = parse(array(fastlyKVStruct), parsed);
 
 		return result;
 	} catch (error) {

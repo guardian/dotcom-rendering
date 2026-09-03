@@ -57,9 +57,6 @@ catalogs:
     rollup-plugin-esbuild:
       specifier: 6.2.1
       version: 6.2.1
-    superstruct:
-      specifier: 2.0.2
-      version: 2.0.2
     tslib:
       specifier: 2.6.2
       version: 2.6.2
@@ -69,6 +66,9 @@ catalogs:
     typescript:
       specifier: 6.0.3
       version: 6.0.3
+    valibot:
+      specifier: 1.4.2
+      version: 1.4.2
 
 importers:
 
@@ -143,9 +143,9 @@ importers:
 
   ab-testing/config:
     dependencies:
-      superstruct:
+      valibot:
         specifier: 'catalog:'
-        version: 2.0.2
+        version: 1.4.2(typescript@6.0.3)
     devDependencies:
       '@aws-sdk/client-s3':
         specifier: 'catalog:'
@@ -174,9 +174,9 @@ importers:
       '@guardian/ab-testing-config':
         specifier: workspace:ab-testing-config
         version: link:../config
-      superstruct:
+      valibot:
         specifier: 'catalog:'
-        version: 2.0.2
+        version: 1.4.2(typescript@6.0.3)
     devDependencies:
       '@guardian/tsconfig':
         specifier: 'catalog:'
@@ -723,7 +723,7 @@ importers:
         specifier: 0.11.4
         version: 0.11.4
       valibot:
-        specifier: 1.4.2
+        specifier: 'catalog:'
         version: 1.4.2(typescript@6.0.3)
       web-vitals:
         specifier: 4.2.3
@@ -9216,10 +9216,6 @@ packages:
   super-regex@1.1.0:
     resolution: {integrity: sha512-WHkws2ZflZe41zj6AolvvmaTrWds/VuyeYr9iPVv/oQeaIoVxMKaushfFWpOGDT+GuBrM/sVqF8KUCYQlSSTdQ==}
     engines: {node: '>=18'}
-
-  superstruct@2.0.2:
-    resolution: {integrity: sha512-uV+TFRZdXsqXTL2pRvujROjdZQ4RAlBUS5BTh9IGm+jTqQntYThciG/qu57Gs69yjnVUSqdxF9YLmSnpupBW9A==}
-    engines: {node: '>=14.0.0'}
 
   supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
@@ -20270,8 +20266,6 @@ snapshots:
       function-timeout: 1.0.2
       make-asynchronous: 1.1.0
       time-span: 5.1.0
-
-  superstruct@2.0.2: {}
 
   supports-color@5.5.0:
     dependencies:
