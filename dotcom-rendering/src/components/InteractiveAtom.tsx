@@ -53,7 +53,6 @@ export const InteractiveAtom = ({
 			css={[containerStyles, !!isMainMedia && fullHeightStyles]}
 			data-atom-id={id}
 			data-atom-type="interactive"
-			{...(customData ? { 'data-atom-custom-data': customData } : {})}
 		>
 			<Island
 				priority="feature"
@@ -70,6 +69,7 @@ export const InteractiveAtom = ({
 					elementCss,
 					elementHtml,
 					renderingTarget,
+					customData,
 				})}
 				frameBorder="0"
 			/>
