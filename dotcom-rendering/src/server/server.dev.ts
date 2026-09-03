@@ -18,6 +18,7 @@ import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
+import { handlePuzzlesPage } from './handler.puzzlesPage.web';
 import {
 	handleAppsFootballMatchPage,
 	handleFootballMatchListPage,
@@ -112,6 +113,7 @@ renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);
 renderer.get('/Front/*url', handleFront);
 renderer.get('/TagPage/*url', handleTagPage);
+renderer.get('/PuzzlesPage/*url', handlePuzzlesPage);
 renderer.get('/EmailNewsletters/*url', handleAllEditorialNewslettersPage);
 renderer.get('/AppsArticle/*url', handleAppsArticle);
 renderer.get('/AppsInteractive/*url', handleAppsInteractive);
@@ -132,6 +134,7 @@ renderer.post('/Interactive', handleInteractive);
 renderer.post('/Blocks', handleBlocks);
 renderer.post('/Front', handleFront);
 renderer.post('/TagPage', handleTagPage);
+renderer.post('/PuzzlesPage', handlePuzzlesPage);
 renderer.post('/EmailNewsletters', handleAllEditorialNewslettersPage);
 renderer.post('/AppsArticle', handleAppsArticle);
 renderer.post('/AppsInteractive', handleAppsInteractive);
