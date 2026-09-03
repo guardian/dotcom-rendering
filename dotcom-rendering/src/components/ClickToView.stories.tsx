@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { textSans17 } from '@guardian/source/foundations';
-import type { StoryObj } from '@storybook/react-webpack5';
+import type { StoryObj } from '@storybook/react-vite';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,

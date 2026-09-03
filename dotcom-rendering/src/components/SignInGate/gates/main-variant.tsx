@@ -9,9 +9,7 @@ const SignInGateMain = React.lazy(() => {
 		'identity',
 		'SignInGateMain',
 	);
-	return import(
-		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateMain'
-	).then((module) => {
+	return import('../gateDesigns/SignInGateMain').then((module) => {
 		endPerformanceMeasure();
 		return { default: module.SignInGateMain };
 	});
@@ -22,12 +20,12 @@ const SignInGateMainCheckoutComplete = React.lazy(() => {
 		'identity',
 		'SignInGateMainCheckoutComplete',
 	);
-	return import(
-		/* webpackChunkName: "SignInGateMainCheckoutComplete" */ '../gateDesigns/SignInGateMainCheckoutComplete'
-	).then((module) => {
-		endPerformanceMeasure();
-		return { default: module.SignInGateMainCheckoutComplete };
-	});
+	return import('../gateDesigns/SignInGateMainCheckoutComplete').then(
+		(module) => {
+			endPerformanceMeasure();
+			return { default: module.SignInGateMainCheckoutComplete };
+		},
+	);
 });
 
 /**

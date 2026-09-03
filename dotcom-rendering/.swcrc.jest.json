@@ -12,9 +12,6 @@
 				"runtime": "automatic",
 				"importSource": "@emotion/react"
 			}
-		},
-		"experimental": {
-			"plugins": [["@swc/plugin-emotion", {}]]
 		}
 	},
 	"sourceMaps": true

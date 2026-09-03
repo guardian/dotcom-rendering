@@ -1,5 +1,5 @@
 import { storage } from '@guardian/libs';
-import type { StoryObj } from '@storybook/react-webpack5';
+import type { StoryObj } from '@storybook/react-vite';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { Section } from '../components/Section';
