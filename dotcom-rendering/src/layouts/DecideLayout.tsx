@@ -14,7 +14,6 @@ import { HostedArticleLayout } from './HostedArticleLayout';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { HostedVideoLayout } from './HostedVideoLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
-import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { PictureLayout } from './PictureLayout';
@@ -47,6 +46,7 @@ const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
 	article.frontendData.config.serverSideABTests[
 		REVAMPED_IMMERSIVE_LAYOUT_AB_TEST
 	] === 'enable';
+export const interactiveLayoutSwitchoverDate = new Date('2024-06-01T00:00:00Z');
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	const format = {
@@ -139,14 +139,12 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 			switch (article.design) {
 				case ArticleDesign.Interactive:
 					return (
-						<InteractiveLayout
+						<StandardLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
-
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
@@ -330,12 +328,11 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 			switch (article.design) {
 				case ArticleDesign.Interactive:
 					return (
-						<InteractiveLayout
+						<StandardLayout
 							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
