@@ -319,7 +319,7 @@ type Props = {
 		isExternalLink: boolean;
 	};
 	isInLoopClickTestVariant?: boolean;
-	isInArticle?: boolean;
+	hasBottomMargin?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -352,7 +352,7 @@ export const SelfHostedVideo = ({
 	restrictHeightOnDesktop = false,
 	cardLink,
 	isInLoopClickTestVariant,
-	isInArticle = false,
+	hasBottomMargin = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -1075,20 +1075,19 @@ export const SelfHostedVideo = ({
 
 	const videoStyleFormat = videoStyle.toLocaleLowerCase();
 
+	const bottomMarginStyles = css`
+		margin-bottom: ${space[3]}px;
+	`;
+
 	return (
 		<figure
-			css={
-				isInArticle
-					? css`
-							margin-bottom: ${space[3]}px;
-						`
-					: undefined
-			}
+			css={hasBottomMargin && bottomMarginStyles}
 			ref={videoContainerRef}
 			className={`video-container ${videoStyleFormat} ${
 				role === 'immersive' ? 'element-video-immersive' : ''
 			}`}
 			data-component={`gu-video-${videoStyleFormat}`}
+			data-spacefinder-role="inline"
 		>
 			<div
 				ref={setNode}
