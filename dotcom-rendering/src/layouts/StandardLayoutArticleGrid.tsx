@@ -282,13 +282,13 @@ export const StandardLayoutArticleGrid = ({
 
 	const displayAvatarUrl = avatarUrl ? true : false;
 
-	const pictureLeftColLines = (showingAvatar: boolean) => css`
+	const pictureLeftColLines = (avatarDisplayed: boolean) => css`
+		${avatarDisplayed && `display: none;`}
 		margin-bottom: 4px;
-		${showingAvatar
-			? css`
-					margin-top: -29px;
-				`
-			: ''}
+		${from.leftCol} {
+			display: block;
+			${avatarDisplayed && `margin-top: -28px;`}
+		}
 	`;
 
 	return (
