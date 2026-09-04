@@ -6,11 +6,13 @@ export const unifyPageContent = ({
 	elementJs,
 	elementHtml,
 	renderingTarget,
+	customData,
 }: {
 	elementCss?: string;
 	elementJs?: string;
 	elementHtml?: string;
 	renderingTarget: RenderingTarget;
+	customData?: string;
 }): string =>
 	renderToString(
 		<html lang="en">
@@ -29,6 +31,13 @@ export const unifyPageContent = ({
 					<div dangerouslySetInnerHTML={{ __html: elementHtml }} />
 				)}
 			</body>
+			{!!customData && (
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `window.__atomCustomData = ${customData};`,
+					}}
+				/>
+			)}
 			{/* JS need to load on body render */}
 			{!!elementJs && (
 				<script dangerouslySetInnerHTML={{ __html: elementJs }} />
