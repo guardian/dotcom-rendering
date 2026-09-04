@@ -173,7 +173,9 @@ export const StandardLayoutArticleGrid = ({
 	const isShowcase = format.display === ArticleDisplay.Showcase;
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isFeature = format.design === ArticleDesign.Feature;
-	const headlineBackground = themePalette('--headline-background-immersive');
+	const headlineBackgroundImmersive = themePalette(
+		'--headline-background-immersive',
+	);
 
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
@@ -275,7 +277,7 @@ export const StandardLayoutArticleGrid = ({
 								}
 
 								${immersiveMediaBelowDesktop(
-									headlineBackground,
+									headlineBackgroundImmersive,
 									isMainMediaImage,
 								)}
 							`
@@ -353,7 +355,7 @@ export const StandardLayoutArticleGrid = ({
 
 							${until.desktop} {
 								margin-top: -1px;
-								background-color: ${headlineBackground};
+								background-color: ${headlineBackgroundImmersive};
 								padding-top: 1px;
 								padding-bottom: ${space[8]}px;
 							}
