@@ -196,8 +196,8 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "fronts-and-curation-editorial-headline-test",
-		description: "Allow editorial headline A/B tests to run on web",
+		name: "fronts-and-curation-editorial-test",
+		description: "Allow editorial A/B tests to run on web",
 		owners: [
 			"fronts.and.curation@guardian.co.uk",
 			"ab.test.mission@guardian.co.uk",
@@ -205,7 +205,8 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		expirationDate: "2036-08-12",
 		type: "server",
-		audienceSize: 0 / 100,
+		audienceSize: 100 / 100,
+		audienceSpace: "E",
 		groups: ["a", "b"],
 		shouldForceMetricsCollection: false,
 	},
