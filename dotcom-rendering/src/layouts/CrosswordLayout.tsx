@@ -138,7 +138,7 @@ export const CrosswordLayout = (props: Props) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot />
+								<HeaderAdSlot slotName="puzzles-above-nav" />
 							</Section>
 						</div>
 					</Stuck>

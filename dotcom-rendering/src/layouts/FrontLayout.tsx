@@ -216,7 +216,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								'--article-section-background',
 							)}
 						>
-							<HeaderAdSlot />
+							<HeaderAdSlot
+								slotName={
+									front.config.section === 'crosswords'
+										? 'puzzles-above-nav'
+										: 'top-above-nav'
+								}
+							/>
 						</Section>
 					</Stuck>
 				)}

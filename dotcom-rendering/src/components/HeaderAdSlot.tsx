@@ -21,7 +21,13 @@ const headerAdWrapperStyles = css`
 	top: 0;
 `;
 
-export const HeaderAdSlot = () => {
+type HeaderAdSlotName = 'top-above-nav' | 'puzzles-above-nav';
+
+export const HeaderAdSlot = ({
+	slotName = 'top-above-nav',
+}: {
+	slotName?: HeaderAdSlotName;
+}) => {
 	return (
 		<div css={headerWrapper}>
 			<Global
@@ -37,6 +43,16 @@ export const HeaderAdSlot = () => {
 					}
 				`}
 			/>
+			{slotName === 'puzzles-above-nav' && (
+				<Hide when="above" breakpoint="tablet">
+					<div
+						css={headerAdWrapperStyles}
+						className="top-banner-ad-container"
+					>
+						<AdSlot position="puzzles-above-nav" />
+					</div>
+				</Hide>
+			)}
 			<Hide when="below" breakpoint="tablet">
 				<div
 					css={headerAdWrapperStyles}
