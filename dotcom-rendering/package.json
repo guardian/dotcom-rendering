@@ -157,7 +157,7 @@
 		"trusted-types": "2.0.0",
 		"ts-unused-exports": "10.1.0",
 		"tslib": "catalog:",
-		"tsx": "4.6.2",
+		"tsx": "4.23.13",
 		"type-fest": "catalog:",
 		"typescript": "catalog:",
 		"typescript-eslint": "8.57.1",
