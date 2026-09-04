@@ -219,7 +219,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							<HeaderAdSlot
 								slotName={
 									front.config.section === 'crosswords'
-										? 'puzzles-above-nav'
+										? 'mobile-above-nav'
 										: 'top-above-nav'
 								}
 							/>

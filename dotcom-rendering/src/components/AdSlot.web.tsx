@@ -72,7 +72,7 @@ type RightFootballProps = {
 };
 
 type RemainingProps = {
-	position: Exclude<ServerRenderedSlot, IndexedSlot> | 'puzzles-above-nav';
+	position: Exclude<ServerRenderedSlot, IndexedSlot> | 'mobile-above-nav';
 	colourScheme?: ColourScheme;
 	index?: never;
 	shouldHideReaderRevenue?: never;
@@ -115,12 +115,12 @@ const puzzlesAboveNavContainerStyles = css`
 	width: 100%;
 	min-height: ${containerMinHeight}px;
 
-	&[puzzles-above-nav-ad-rendered='true'] {
+	&[mobile-above-nav-ad-rendered='true'] {
 		min-height: auto;
 	}
 
 	/* Ad placeholder grey box rendered while loading the ad */
-	&:not([puzzles-above-nav-ad-rendered='true']) {
+	&:not([mobile-above-nav-ad-rendered='true']) {
 		::before {
 			content: '';
 			position: absolute;
@@ -671,18 +671,18 @@ export const AdSlot = ({
 				</AdSlotWrapper>
 			);
 		}
-		case 'puzzles-above-nav': {
+		case 'mobile-above-nav': {
 			return (
 				<AdSlotWrapper css={puzzlesAboveNavContainerStyles}>
 					<div
-						id="dfp-ad--puzzles-above-nav"
+						id="dfp-ad--mobile-above-nav"
 						className={[
 							'js-ad-slot',
 							'ad-slot',
 							'ad-slot--rendered',
 						].join(' ')}
-						data-link-name="ad slot puzzles-above-nav"
-						data-name="puzzles-above-nav"
+						data-link-name="ad slot mobile-above-nav"
+						data-name="mobile-above-nav"
 						data-testid="slot"
 						aria-hidden="true"
 					></div>
