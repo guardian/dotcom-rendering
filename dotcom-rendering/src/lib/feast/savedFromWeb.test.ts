@@ -1,6 +1,7 @@
 import {
 	addFeastRecipeToSavedFromWebList,
 	getFeastSavedFromTheWebRecipes,
+	removeFeastRecipeFromSavedFromWebList,
 } from './savedFromWeb';
 
 describe('savedFromWeb', () => {
@@ -263,6 +264,91 @@ describe('savedFromWeb', () => {
 			);
 
 			expect(result).toBe(false);
+		});
+	});
+
+	describe('removeFeastRecipeFromSavedFromWebList', () => {
+		it('calls the Feast API directly with DELETE and a bearer token', async () => {
+			(global.fetch as jest.Mock).mockResolvedValue({
+				ok: true,
+				status: 204,
+			});
+
+			const result = await removeFeastRecipeFromSavedFromWebList(
+				'token-o',
+				'recipe-1',
+			);
+
+			const [url, requestInit]: [string, RequestInit | undefined] = (
+				global.fetch as jest.Mock
+			).mock.calls[0];
+			expect(url).toBe(
+				'https://recipes.code.dev-guardianapis.com/persist/v2/saved-from-web/recipe-1',
+			);
+			expect(requestInit?.method).toBe('DELETE');
+			const headers = (requestInit?.headers ?? {}) as Record<
+				string,
+				string
+			>;
+			expect(headers.Authorization).toBe('Bearer token-o');
+			expect(result).toBe(true);
+		});
+
+		it('treats a 204 response for an already absent recipe as success', async () => {
+			(global.fetch as jest.Mock).mockResolvedValue({
+				ok: true,
+				status: 204,
+			});
+
+			const result = await removeFeastRecipeFromSavedFromWebList(
+				'token-p',
+				'absent-recipe',
+			);
+
+			expect(result).toBe(true);
+		});
+
+		it('retries a 503 response with exponential backoff', async () => {
+			(global.fetch as jest.Mock)
+				.mockResolvedValueOnce({
+					ok: false,
+					status: 503,
+					statusText: 'Unavailable',
+				})
+				.mockResolvedValueOnce({ ok: true, status: 204 });
+
+			const result = await removeFeastRecipeFromSavedFromWebList(
+				'token-q',
+				'recipe-1',
+			);
+
+			expect(result).toBe(true);
+			expect(global.fetch).toHaveBeenCalledTimes(2);
+		});
+
+		it('invalidates cached saved status after a successful removal', async () => {
+			(global.fetch as jest.Mock)
+				.mockResolvedValueOnce({
+					ok: true,
+					json: async () => [
+						{ recipeId: 'recipe-1', lastModified: '2026-01-01' },
+					],
+				})
+				.mockResolvedValueOnce({ ok: true, status: 204 })
+				.mockResolvedValueOnce({ ok: true, json: async () => [] });
+
+			await getFeastSavedFromTheWebRecipes('user-r', 'token-r', [
+				'recipe-1',
+			]);
+			await removeFeastRecipeFromSavedFromWebList('token-r', 'recipe-1');
+			const result = await getFeastSavedFromTheWebRecipes(
+				'user-r',
+				'token-r',
+				['recipe-1'],
+			);
+
+			expect(result).toEqual(new Set());
+			expect(global.fetch).toHaveBeenCalledTimes(3);
 		});
 	});
 });
