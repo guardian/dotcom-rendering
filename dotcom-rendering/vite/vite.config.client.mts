@@ -154,7 +154,8 @@ export const createClientConfig = (build: Build): UserConfig => {
 									},
 									{
 										name: 'common',
-										test: (id) => !id.includes('.island.'),
+										test: (id: string) =>
+											!id.includes('.island.'),
 										priority: 0,
 										minSize: 0,
 										// TODO FIXME
@@ -162,7 +163,8 @@ export const createClientConfig = (build: Build): UserConfig => {
 									},
 									{
 										name: 'debug',
-										test: (id) => id.includes('debug.js'),
+										test: (id: string) =>
+											id.includes('debug.js'),
 										priority: 2,
 										minSize: 0,
 									},
