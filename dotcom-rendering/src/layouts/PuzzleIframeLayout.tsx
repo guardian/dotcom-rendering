@@ -15,6 +15,10 @@ import { PuzzleBackLink } from '../components/PuzzleBackLink.island';
 import { PuzzleMeEmbed } from '../components/PuzzleMeEmbed.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
+import {
+	shouldShowSudokuPrintControls,
+	SudokuPrintControls,
+} from '../components/SudokuPrintControls.island';
 import { ArticleDisplay } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
 import type { FEPuzzleIframePageType } from '../types/puzzleIframePage';
@@ -27,6 +31,10 @@ type Props = {
 
 const mainStyles = css`
 	padding: ${space[6]}px 0 ${space[12]}px;
+
+	@media print {
+		padding: 0;
+	}
 `;
 
 const copyStyles = css`
@@ -53,6 +61,12 @@ const iframeWrapStyles = (puzzlePage: FEPuzzleIframePageType) => {
 		overflow: hidden;
 		background: white;
 
+		@media print {
+			border: 0;
+			border-radius: 0;
+			break-inside: avoid;
+		}
+
 		.puzzle-me-embed,
 		.pm-embed-div {
 			display: block;
@@ -77,6 +91,15 @@ const iframeWrapStyles = (puzzlePage: FEPuzzleIframePageType) => {
 				min-height: ${heights.desktop}px;
 			}
 		}
+
+		@media print {
+			iframe,
+			.puzzle-me-embed iframe,
+			.pm-embed-div iframe {
+				height: 760px !important;
+				min-height: 760px;
+			}
+		}
 	`;
 };
 
@@ -88,6 +111,10 @@ const iframePageGridStyles = css`
 	${from.wide} {
 		grid-template-columns: minmax(0, 1fr) 300px;
 		align-items: start;
+	}
+
+	@media print {
+		display: block;
 	}
 `;
 
@@ -103,6 +130,8 @@ const fallbackStyles = css`
 export const PuzzleIframeLayout = ({ puzzlePage, NAV }: Props) => {
 	const src = puzzlePage.puzzle.url;
 	const renderAds = !puzzlePage.isAdFreeUser;
+	const showPrintOptions = shouldShowSudokuPrintControls(puzzlePage.puzzle);
+	const puzzleTargetId = 'printable-sudoku';
 
 	return (
 		<>
@@ -142,17 +171,31 @@ export const PuzzleIframeLayout = ({ puzzlePage, NAV }: Props) => {
 					fullWidth={true}
 					showTopBorder={false}
 				>
-					<Island priority="critical">
+					<div data-print-layout="hide">
 						<PuzzleBackLink
 							archiveMonth={puzzlePage.archiveMonth}
 							puzzleSlug={puzzlePage.puzzle.slug}
 						/>
-					</Island>
+					</div>
 					{puzzlePage.description !== undefined && (
 						<p css={copyStyles}>{puzzlePage.description}</p>
 					)}
+					{showPrintOptions && (
+						<Island
+							priority="critical"
+							defer={{ until: 'interaction' }}
+						>
+							<SudokuPrintControls
+								targetId={puzzleTargetId}
+								title={puzzlePage.webTitle}
+							/>
+						</Island>
+					)}
 					<div css={iframePageGridStyles}>
-						<div css={iframeWrapStyles(puzzlePage)}>
+						<div
+							css={iframeWrapStyles(puzzlePage)}
+							id={showPrintOptions ? puzzleTargetId : undefined}
+						>
 							{src !== undefined ? (
 								<Island
 									priority="feature"

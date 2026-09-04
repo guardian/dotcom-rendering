@@ -16,6 +16,23 @@ module.exports = {
 		compress: false,
 		hot: false,
 		liveReload: true,
+		headers: (req) => {
+			// Frontend runs on port 9000 and loads DCR assets from port 3030.
+			// Apply cross-origin headers to both webpack chunks and static assets.
+			/** @type {Record<string, string>} */
+			const headers = {
+				'Cross-Origin-Resource-Policy': 'cross-origin',
+			};
+
+			if (
+				req.hostname === (process.env.HOSTNAME ?? 'localhost') &&
+				req.headers.origin
+			) {
+				headers['Access-Control-Allow-Origin'] = req.headers.origin;
+			}
+
+			return headers;
+		},
 		client: {
 			logging: 'warn',
 			overlay: true,
@@ -30,18 +47,6 @@ module.exports = {
 			publicPath: '/assets/',
 			serverSideRender: true,
 			writeToDisk: true,
-			headers: (req, res) => {
-				// Allow any localhost request from accessing the assets
-				if (
-					req.hostname === (process.env.HOSTNAME ?? 'localhost') &&
-					req.headers.origin
-				) {
-					res.setHeader(
-						'Access-Control-Allow-Origin',
-						req.headers.origin,
-					);
-				}
-			},
 		},
 		setupMiddlewares: (middlewares, devServer) => {
 			if (!devServer.app) {

@@ -14,6 +14,7 @@ export type PuzzleItem = {
 	variant?: string;
 	backgroundColour?: string;
 	filterId?: string;
+	printable?: boolean;
 };
 
 export type PuzzleContent = {

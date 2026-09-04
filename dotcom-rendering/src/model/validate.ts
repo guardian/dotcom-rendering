@@ -129,7 +129,8 @@ const isPuzzleItem = (data: unknown): boolean =>
 	(data.index === undefined || typeof data.index === 'number') &&
 	(data.variant === undefined || isString(data.variant)) &&
 	(data.backgroundColour === undefined || isString(data.backgroundColour)) &&
-	(data.filterId === undefined || isString(data.filterId));
+	(data.filterId === undefined || isString(data.filterId)) &&
+	(data.printable === undefined || typeof data.printable === 'boolean');
 
 const isPuzzleContainer = (data: unknown): boolean => {
 	if (
