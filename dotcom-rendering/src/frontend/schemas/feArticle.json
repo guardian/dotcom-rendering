@@ -2522,6 +2522,9 @@
                         "thumbnail"
                     ],
                     "type": "string"
+                },
+                "customData": {
+                    "type": "string"
                 }
             },
             "required": [

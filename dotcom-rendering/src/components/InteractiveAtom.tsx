@@ -34,6 +34,7 @@ type InteractiveAtomType = {
 	elementCss?: string;
 	isMainMedia?: boolean;
 	title: string;
+	customData?: string;
 };
 
 export const InteractiveAtom = ({
@@ -43,6 +44,7 @@ export const InteractiveAtom = ({
 	elementCss,
 	isMainMedia,
 	title,
+	customData,
 }: InteractiveAtomType) => {
 	const { renderingTarget } = useConfig();
 
@@ -67,6 +69,7 @@ export const InteractiveAtom = ({
 					elementCss,
 					elementHtml,
 					renderingTarget,
+					customData,
 				})}
 				frameBorder="0"
 			/>
