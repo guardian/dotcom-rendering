@@ -274,13 +274,12 @@ export const StandardLayoutArticleGrid = ({
 
 	const displayAvatarUrl = avatarUrl ? true : false;
 
-	const pictureLeftColLines = (showingAvatar: boolean) => css`
+	const pictureLeftColLines = css`
+		display: none;
 		margin-bottom: 4px;
-		${showingAvatar
-			? css`
-					margin-top: -29px;
-				`
-			: ''}
+		${from.leftCol} {
+			display: block;
+		}
 	`;
 
 	return (
@@ -575,8 +574,7 @@ export const StandardLayoutArticleGrid = ({
 					layoutType !== 'immersivePortrait' && (
 						<div
 							css={[
-								isPicture &&
-									pictureLeftColLines(displayAvatarUrl),
+								isPicture && pictureLeftColLines,
 								stretchLines,
 							]}
 						>
