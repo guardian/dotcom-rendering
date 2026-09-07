@@ -232,6 +232,19 @@ const ABTests: ABTest[] = [
 		groups: ["enable"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "commercial-mobile-above-nav-test",
+		description:
+			"Test adding the mobile-above-nav ad slot to mobile and tablet pages",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-30",
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");

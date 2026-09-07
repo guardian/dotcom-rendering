@@ -122,6 +122,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.config.serverSideABTests,
 	);
 
+	const isInMobileAboveNavTest =
+		front.config.serverSideABTests['commercial-mobile-above-nav-test'] ===
+		'variant';
+
 	const serverTime = front.serverTime;
 
 	const renderAds = canRenderAds(front);
@@ -218,7 +222,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						>
 							<HeaderAdSlot
 								includeMobile={
-									front.config.section === 'crosswords'
+									front.config.section === 'crosswords' &&
+									isInMobileAboveNavTest
 								}
 							/>
 						</Section>
