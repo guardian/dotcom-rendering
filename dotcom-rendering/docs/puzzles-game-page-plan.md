@@ -83,6 +83,23 @@ path in any way.
   does not need to send any particular value for it). The unknown-slug `404`
   behaviour is unaffected. If/when this page needs to be hidden again (e.g.
   ahead of a public rollout), re-introduce an equivalent gate at that point.
+- **Visual parity fixes** (post-Phase-1), found via side-by-side comparison
+  against the real DCR-rendered crossword page: added the missing "PDF
+  version" link (`CrosswordLinks`, rendered whenever the resolved
+  `GameConfig`'s `componentKey` is `'crossword'` and `instance.crosswordData`
+  is present) next to the title/meta header block, and made the puzzle
+  type/group label a real styled link to `/crosswords` for the `crosswords`
+  group (reusing the same font presets and `--article-section-link-text`
+  colour token as `SeriesSectionLink`'s "no tag" fallback, without reusing
+  that component directly). Other groups have no hub page yet, so their
+  label remains plain, non-linked text for now. See `src/layouts/GameLayout.tsx`.
+  **Important comparison note:** when comparing DCR's Game page against the
+  real crossword page locally, fetch
+  `http://localhost:9000/crosswords/quick/17578?dcr=true` — the plain
+  `/crosswords/quick/17578` URL (without `?dcr=true`) can fall back to a
+  legacy, non-DCR Play-rendered page if the `DCRCrosswords` switch is off
+  locally, which is **not** a valid comparison target. `?dcr=true` forces the
+  real `CrosswordLayout.tsx` render, which is the correct reference.
 
 ## Multi-phase plan
 
@@ -172,7 +189,8 @@ Files added:
 - `src/lib/gameComponents.ts`
 - `src/components/GameIframe.island.tsx`
 - `src/components/GamePage.tsx`
-- `src/layouts/GameLayout.tsx`
+- `src/layouts/GameLayout.tsx` (+ `GameLayout.test.tsx`, added post-Phase-1
+  covering the PDF link and section label link fixes)
 - `src/server/handler.gamePage.web.ts` (+ `.test.ts`)
 - `src/server/render.gamePage.web.tsx`
 - `fixtures/manual/gamePage.ts`

@@ -2,6 +2,8 @@ import { css } from '@emotion/react';
 import type { CrosswordProps } from '@guardian/react-crossword';
 import {
 	from,
+	headlineBold17,
+	headlineBold20,
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
@@ -9,6 +11,7 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { CommentCount } from '../components/CommentCount.island';
 import { CrosswordComponent } from '../components/CrosswordComponent.island';
+import { CrosswordLinks } from '../components/CrosswordLinks';
 import { CrosswordSetter } from '../components/CrosswordSetter';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -45,6 +48,16 @@ const gameGroupLabels: Record<GameConfig['gameGroup'], string> = {
 };
 
 /**
+ * Where a group's label should link to. Only `crosswords` has a real,
+ * content-backed destination today (`/crosswords`); other groups have no
+ * hub page yet, so their label is left as plain, non-linked text (see
+ * `puzzleTypeLabel` below) rather than linking somewhere speculative.
+ */
+const puzzleGroupHrefs: Partial<Record<GameConfig['gameGroup'], string>> = {
+	crosswords: '/crosswords',
+};
+
+/**
  * `ShareButton.island` and `DiscussionLayout` only need an `ArticleFormat` to
  * branch a handful of minor style decisions (e.g. LiveBlog-specific
  * spacing). Game pages have no equivalent concept, so a minimal, fixed
@@ -65,6 +78,7 @@ const headerGrid = css`
 	grid-template-areas:
 		'label'
 		'title'
+		'links'
 		'setter'
 		'meta'
 		'body';
@@ -75,6 +89,7 @@ const headerGrid = css`
 		column-gap: 20px;
 		grid-template-areas:
 			'label  title'
+			'.      links'
 			'.      setter'
 			'.      meta'
 			'body   body';
@@ -86,6 +101,28 @@ const puzzleTypeLabel = css`
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.02em;
+`;
+
+/**
+ * Matches the "no series tag" fallback kicker link styling in
+ * `SeriesSectionLink.tsx` (the sub-component `ArticleTitle` renders for its
+ * section label link) as closely as possible without reusing that component
+ * directly, since it requires a full `ArticleFormat` + `TagType[]` +
+ * `guardianBaseURL`. Reuses the same font presets and colour token
+ * (`--article-section-link-text`) rather than inventing new styling.
+ */
+const puzzleTypeLabelLink = css`
+	${headlineBold17}
+	${from.wide} {
+		${headlineBold20}
+	}
+	color: ${themePalette('--article-section-link-text')};
+	text-decoration: none;
+	word-break: break-word;
+
+	:hover {
+		text-decoration: underline;
+	}
 `;
 
 const metaRow = css`
@@ -142,11 +179,23 @@ const relatedRailHeading = css`
  */
 export type ResolvedGamePage = FEGamePageType & { gameConfig: GameConfig };
 
+/**
+ * Shared with both `GameContent` (deciding whether to render
+ * `CrosswordComponent`) and the header (deciding whether to render
+ * `CrosswordLinks`'s "PDF version" link), so both stay in sync on exactly
+ * which requests carry real crossword data.
+ */
+const hasCrosswordData = (
+	gameConfig: GameConfig,
+	instance: FEGamePageType['instance'],
+): boolean =>
+	gameConfig.componentKey === 'crossword' && !!instance.crosswordData;
+
 const GameContent = ({ gamePage }: { gamePage: ResolvedGamePage }) => {
 	const { instance, gameConfig } = gamePage;
 
 	if (gameConfig.renderMode === 'component') {
-		if (gameConfig.componentKey === 'crossword' && instance.crosswordData) {
+		if (hasCrosswordData(gameConfig, instance)) {
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
 					<CrosswordComponent
@@ -203,6 +252,10 @@ export const GameLayout = ({ gamePage, NAV }: Props) => {
 	const showShare = gameConfig.shareEnabled;
 	const showPrint = gameConfig.printEnabled;
 	const showRelated = !!instance.moreFromPuzzlesAndGames?.length;
+	const showCrosswordLinks = hasCrosswordData(gameConfig, instance);
+	const labelText =
+		instance.puzzleType ?? gameGroupLabels[gameConfig.gameGroup];
+	const labelHref = puzzleGroupHrefs[gameConfig.gameGroup];
 
 	return (
 		<>
@@ -246,14 +299,26 @@ export const GameLayout = ({ gamePage, NAV }: Props) => {
 				>
 					<div css={headerGrid}>
 						<GridItem area="label" element="aside">
-							<span css={puzzleTypeLabel}>
-								{instance.puzzleType ??
-									gameGroupLabels[gameConfig.gameGroup]}
-							</span>
+							{labelHref ? (
+								<a href={labelHref} css={puzzleTypeLabelLink}>
+									<span>{labelText}</span>
+								</a>
+							) : (
+								<span css={puzzleTypeLabel}>{labelText}</span>
+							)}
 						</GridItem>
 						<GridItem area="title">
 							<h1>{instance.title}</h1>
 						</GridItem>
+						{showCrosswordLinks && (
+							<GridItem area="links">
+								<CrosswordLinks
+									crossword={
+										instance.crosswordData as CrosswordProps['data']
+									}
+								/>
+							</GridItem>
+						)}
 						{showSetter && (
 							<GridItem area="setter">
 								<CrosswordSetter
