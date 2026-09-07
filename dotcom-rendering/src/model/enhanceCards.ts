@@ -216,8 +216,7 @@ export const decideHeadline = (
 ): string => {
 	const defaultHeadline = faciaCard.header.headline;
 
-	const testBucket =
-		serverSideABTests['fronts-and-curation-editorial-headline-test'];
+	const testBucket = serverSideABTests['fronts-and-curation-editorial-test'];
 
 	const activeEditorialTest = findActiveEditorialTest(
 		faciaCard.properties.tests,

@@ -678,7 +678,7 @@ describe('Enhance Cards', () => {
 				decideHeadline(
 					cardWithNoEditorialTest,
 					{
-						'fronts-and-curation-editorial-headline-test': 'a',
+						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
 					'test-front',
@@ -691,7 +691,7 @@ describe('Enhance Cards', () => {
 				decideHeadline(
 					cardWithEditorialTest,
 					{
-						'fronts-and-curation-editorial-headline-test': 'a',
+						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
 					'invalid-test-front',
@@ -704,7 +704,7 @@ describe('Enhance Cards', () => {
 				decideHeadline(
 					cardWithEditorialTest,
 					{
-						'fronts-and-curation-editorial-headline-test': 'a',
+						'fronts-and-curation-editorial-test': 'a',
 					},
 					false,
 					'test-front',
@@ -717,7 +717,7 @@ describe('Enhance Cards', () => {
 				decideHeadline(
 					cardWithEditorialTest,
 					{
-						'fronts-and-curation-editorial-headline-test': 'a',
+						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
 					'test-front',
@@ -730,7 +730,7 @@ describe('Enhance Cards', () => {
 				decideHeadline(
 					cardWithEditorialTest,
 					{
-						'fronts-and-curation-editorial-headline-test': 'b',
+						'fronts-and-curation-editorial-test': 'b',
 					},
 					true,
 					'test-front',
@@ -743,7 +743,7 @@ describe('Enhance Cards', () => {
 				decideHeadline(
 					cardWithEditorialTest,
 					{
-						'fronts-and-curation-editorial-headline-test': 'c',
+						'fronts-and-curation-editorial-test': 'c',
 					},
 					true,
 					'test-front',
@@ -756,7 +756,7 @@ describe('Enhance Cards', () => {
 				decideHeadline(
 					cardWithEditorialTestWithUndefinedVariantMeta,
 					{
-						'fronts-and-curation-editorial-headline-test': 'a',
+						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
 					'test-front',
@@ -769,7 +769,7 @@ describe('Enhance Cards', () => {
 				decideHeadline(
 					cardWithExpiredEditorialTest,
 					{
-						'fronts-and-curation-editorial-headline-test': 'a',
+						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
 					'test-front',
@@ -782,7 +782,7 @@ describe('Enhance Cards', () => {
 				decideHeadline(
 					cardWithManuallyEndedEditorialTest,
 					{
-						'fronts-and-curation-editorial-headline-test': 'a',
+						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
 					'test-front',
