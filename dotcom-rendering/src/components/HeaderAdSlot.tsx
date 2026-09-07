@@ -21,12 +21,10 @@ const headerAdWrapperStyles = css`
 	top: 0;
 `;
 
-type HeaderAdSlotName = 'top-above-nav' | 'mobile-above-nav';
-
 export const HeaderAdSlot = ({
-	slotName = 'top-above-nav',
+	includeMobile = false,
 }: {
-	slotName?: HeaderAdSlotName;
+	includeMobile?: boolean;
 }) => {
 	return (
 		<div css={headerWrapper}>
@@ -43,7 +41,7 @@ export const HeaderAdSlot = ({
 					}
 				`}
 			/>
-			{slotName === 'mobile-above-nav' && (
+			{includeMobile && (
 				<Hide when="above" breakpoint="tablet">
 					<div
 						css={headerAdWrapperStyles}

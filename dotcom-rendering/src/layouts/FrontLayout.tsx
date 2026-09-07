@@ -217,10 +217,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							)}
 						>
 							<HeaderAdSlot
-								slotName={
+								includeMobile={
 									front.config.section === 'crosswords'
-										? 'mobile-above-nav'
-										: 'top-above-nav'
 								}
 							/>
 						</Section>
