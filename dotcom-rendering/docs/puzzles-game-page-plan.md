@@ -9,9 +9,15 @@ based on the existing Crossword article layout (`CrosswordLayout.tsx`), which
 already visually matches the target design mockup.
 
 This must **not** touch or risk the existing `/crosswords` article rendering
-path in any way, and must be hidden from the general public in production
-behind the existing server-side AB test framework, testable by manually
-forcing participation.
+path in any way.
+
+> **Update (post-Phase-1):** the original plan called for this page to be
+> hidden behind a server-side AB test (`game-page-experiment`) until it was
+> ready for wider testing. Per explicit user request, that gate has since
+> been **removed**: routes will instead be mapped/exposed via a separate
+> project later, so gating in DCR was only adding friction to local testing
+> with no benefit. `POST /GamePage` now always renders for any known `slug`,
+> regardless of `serverSideABTests` content. See "Changelog" below.
 
 ## Context (condensed)
 
@@ -63,6 +69,21 @@ forcing participation.
     differing only by the `set=guardian-{slug}` query param — modelled as data,
     not near-duplicate code paths.
 
+## Changelog
+
+- **AB gate removed** (post-Phase-1): the `game-page-experiment` server-side
+  AB test gate (`src/lib/gamePageExperiment.ts`, `isGamePageEnabled`) was
+  removed from `handleGamePage` per explicit user request. Reasoning: the
+  `/GamePage` route will be mapped/exposed to real traffic via a **separate
+  project** later, so DCR gating it locally was only adding friction to
+  testing with no protective benefit at this stage. `POST /GamePage` now
+  always renders for any request with a known `slug`, regardless of
+  `config.serverSideABTests` content (the field itself is left in
+  `FEGamePageType`/`ConfigType` as harmless, unused-by-DCR data — frontend
+  does not need to send any particular value for it). The unknown-slug `404`
+  behaviour is unaffected. If/when this page needs to be hidden again (e.g.
+  ahead of a public rollout), re-introduce an equivalent gate at that point.
+
 ## Multi-phase plan
 
 ### Phase 1 — DCR generic Game page (this phase)
@@ -78,14 +99,14 @@ real content for each of the 12 game slugs and POSTs a `FEGamePageType`
 payload (see "Handoff contract for frontend" below) to DCR's `POST /GamePage`.
 That work is not visible to this session and is not attempted here.
 
-### Phase 3 — Wire the real AB test + production validation (future phase)
+### Phase 3 — Map/expose the route in a separate project (future phase, superseding the original "wire the real AB test" plan)
 
-Once phases 1 and 2 are integrated end-to-end in a test environment: create
-the real `game-page-experiment` server-side AB test in the AB testing
-framework/config used by `frontend`/Fastly, validate the header/participation
-flow end-to-end (request header → Play → `config.serverSideABTests` on the
-POST body → DCR gate), and validate visually against the target mockup in a
-non-prod environment before any public rollout.
+The route will be mapped/exposed to real traffic via a different project
+(rather than DCR/`frontend` gating it with an AB test, as originally
+planned). Once phases 1 and 2 are integrated end-to-end in a test
+environment: validate that project's routing/exposure mechanism end-to-end,
+and validate visually against the target mockup in a non-prod environment
+before any public rollout.
 
 ## Phase 1 detail — key design decisions
 
@@ -126,7 +147,7 @@ non-prod environment before any public rollout.
 - [x] Create this plan doc, commit as first commit
 - [x] `src/types/gamePage.ts` — `FEGamePageType`
 - [x] `src/model/games/gameConfigs.ts` — `GameConfig` type + registry for all 12 slugs
-- [x] `src/lib/gamePageExperiment.ts` — `isGamePageEnabled` gate (`game-page-experiment`)
+- [x] `src/lib/gamePageExperiment.ts` — ~~`isGamePageEnabled` gate (`game-page-experiment`)~~ **removed post-Phase-1** (see Changelog)
 - [x] `src/lib/gameComponents.ts` — componentKey → component registry (`crossword` → `CrosswordComponent.island`)
 - [x] `src/components/GameIframe.island.tsx` — generic sandboxed iframe island
 - [x] `src/layouts/GameLayout.tsx` — new generic layout
@@ -148,7 +169,6 @@ Files added:
 
 - `src/types/gamePage.ts`
 - `src/model/games/gameConfigs.ts` (+ `gameConfigs.test.ts`)
-- `src/lib/gamePageExperiment.ts` (+ `.test.ts`)
 - `src/lib/gameComponents.ts`
 - `src/components/GameIframe.island.tsx`
 - `src/components/GamePage.tsx`
@@ -157,6 +177,9 @@ Files added:
 - `src/server/render.gamePage.web.tsx`
 - `fixtures/manual/gamePage.ts`
 - `src/model/validate.gamePage.test.ts`
+
+> `src/lib/gamePageExperiment.ts` (+ its test) was added in the initial
+> Phase 1 commit and then **removed** in a follow-up commit — see Changelog.
 
 Files edited (purely additive, no existing exports/behaviour changed):
 
@@ -171,7 +194,7 @@ Files edited (purely additive, no existing exports/behaviour changed):
 Targeted test commands run and green:
 
 ```
-pnpm test -- --testPathPattern "gamePage|gameConfigs"     # 4 suites, 42 tests
+pnpm test -- --testPathPattern "gamePage|gameConfigs"     # 3 suites, 33 tests (post AB-gate removal)
 pnpm test -- --testPathPattern "puzzlesPage|puzzlesHubExperiment|validate\."  # confirms no regression: 5 suites, 61 tests
 pnpm tsc --noEmit                                          # clean
 pnpm exec eslint --quiet <all files listed above>          # clean
@@ -217,10 +240,10 @@ EOF
 pnpm exec tsx /tmp/dump-game-fixtures.ts
 ```
 
-This writes one JSON file per slug to `/tmp/game-fixtures/<slug>.json`. Each
-fixture's `config.serverSideABTests` is already set to
-`{ "game-page-experiment": "variant" }`, i.e. the AB gate is **on** by
-default in these fixtures.
+This writes one JSON file per slug to `/tmp/game-fixtures/<slug>.json`. DCR no
+longer checks `config.serverSideABTests` for `/GamePage` (the AB gate was
+removed — see Changelog), so its content is irrelevant; these fixtures leave
+it as an empty object.
 
 ### 3. Request each slug and check the expected behaviour
 
@@ -264,27 +287,25 @@ done
 
 All should print `200`.
 
-### 4. Toggle the AB gate on/off
+### 4. No AB gate — `serverSideABTests` content is irrelevant
 
-The gate reads `config.serverSideABTests['game-page-experiment']`. To see the
-**404 (hidden)** behaviour, edit a copy of a fixture and set that value to
-anything other than `"variant"` (e.g. `"control"` or remove the key), then
-re-POST it — expect `404 Not Found`.
-
-Locally, you can also bypass/override participation via query params without
-editing the fixture at all, using DCR's existing generic dev-only AB-test
-query param middleware (`getABTestsFromQueryParams`, already wired into
-`server.dev.ts` for every route):
+There is no AB gate on `/GamePage` anymore (removed post-Phase-1, see
+Changelog). `POST /GamePage` renders successfully for a known `slug`
+regardless of `config.serverSideABTests` content — no header/query-param
+workaround is needed. You can confirm this directly:
 
 ```
-# force variant on (200, renders):
-curl -i -X POST "http://localhost:3030/GamePage?ab-game-page-experiment=variant" \
+# empty serverSideABTests still renders (200):
+curl -s -o /dev/null -w "%{http_code}\n" -X POST http://localhost:3030/GamePage \
   -H "Content-Type: application/json" --data @/tmp/game-fixtures/crossword.json
 
-# force control (404, hidden) even if the fixture itself says "variant":
-curl -i -X POST "http://localhost:3030/GamePage?ab-game-page-experiment=control" \
-  -H "Content-Type: application/json" --data @/tmp/game-fixtures/crossword.json
+# an arbitrary/unrelated serverSideABTests value still renders (200):
+curl -s -o /dev/null -w "%{http_code}\n" -X POST http://localhost:3030/GamePage \
+  -H "Content-Type: application/json" \
+  --data @<(python3 -c "import json; d=json.load(open('/tmp/game-fixtures/crossword.json')); d['config']['serverSideABTests']={'unrelated-test':'variant'}; print(json.dumps(d))")
 ```
+
+Both should print `200`.
 
 ### 5. Unknown slug
 
@@ -294,7 +315,8 @@ curl -i -X POST http://localhost:3030/GamePage \
   --data @<(python3 -c "import json; d=json.load(open('/tmp/game-fixtures/crossword.json')); d['slug']='not-a-real-game'; print(json.dumps(d))")
 ```
 
-Expect `404 Not Found` (unknown slugs are not in DCR's `GameConfig` registry).
+Expect `404 Not Found` (unknown slugs are not in DCR's `GameConfig` registry —
+this check is unrelated to the removed AB gate and still applies).
 
 ### 6. Automated checks
 
@@ -303,10 +325,9 @@ cd dotcom-rendering
 pnpm tsc --noEmit
 pnpm exec eslint --quiet src/model/validate.ts src/server/server.dev.ts src/server/server.prod.ts \
   fixtures/manual/gamePage.ts src/components/GameIframe.island.tsx src/components/GamePage.tsx \
-  src/layouts/GameLayout.tsx src/lib/gameComponents.ts src/lib/gamePageExperiment.ts \
-  src/lib/gamePageExperiment.test.ts src/model/games/ src/model/validate.gamePage.test.ts \
-  src/server/handler.gamePage.web.test.ts src/server/handler.gamePage.web.ts \
-  src/server/render.gamePage.web.tsx src/types/gamePage.ts
+  src/layouts/GameLayout.tsx src/lib/gameComponents.ts src/model/games/ \
+  src/model/validate.gamePage.test.ts src/server/handler.gamePage.web.test.ts \
+  src/server/handler.gamePage.web.ts src/server/render.gamePage.web.tsx src/types/gamePage.ts
 pnpm test -- --testPathPattern "gamePage|gameConfigs"
 ```
 
@@ -325,9 +346,11 @@ interface FEGamePageType {
 	// (an unknown slug gets a 404 from DCR)
 	webTitle: string;
 	config: ConfigType; // the same shape frontend already sends for /Article,
-	// /PuzzlesPage etc. — MUST include
-	// config.serverSideABTests['game-page-experiment'] = 'variant'
-	// for DCR to render the page at all (otherwise 404)
+	// /PuzzlesPage etc. `config.serverSideABTests` can be included for
+	// forward-compatibility but DCR does NOT check it for /GamePage — there
+	// is no AB gate on this route (removed post-Phase-1, see Changelog).
+	// Any value (including an empty object) works; the page always renders
+	// for a known `slug`.
 	nav: FENavType; // same shape as for /Article, /PuzzlesPage
 	pageFooter: FooterType; // same shape as for /Article, /PuzzlesPage
 	canonicalUrl: string;
@@ -363,8 +386,7 @@ Notes for frontend:
   branch at `fixtures/manual/gamePage.ts` (`createGamePage(slug)` /
   `gamePageFixtures`) and can be dumped to JSON with the `tsx` script in
   step 2 above — use these as the ground truth for the exact JSON shape.
-- The real `game-page-experiment` AB test does not exist yet in the AB
-  testing framework/config frontend reads from — that is Phase 3. Until then,
-  frontend can hard-code `serverSideABTests: { 'game-page-experiment':
-'variant' }` in its own local/test environment to exercise the integration
-  end-to-end.
+- There is no AB test to satisfy for `/GamePage` to render — frontend does
+  not need to send any particular `serverSideABTests` value. (The route will
+  instead be mapped/exposed to real traffic via a separate project later; see
+  Changelog and Phase 3.)

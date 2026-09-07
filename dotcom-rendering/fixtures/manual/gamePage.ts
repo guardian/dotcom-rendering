@@ -72,7 +72,11 @@ export const createGamePage = (
 		config: {
 			...Standard.config,
 			contentType: 'Game',
-			serverSideABTests: { 'game-page-experiment': 'variant' },
+			// DCR no longer gates /GamePage on any AB test participation (the
+			// former 'game-page-experiment' gate was removed; routes will be
+			// mapped/exposed via a different project instead), so this is left
+			// empty rather than implying any particular value is required.
+			serverSideABTests: {},
 		},
 		nav: Standard.nav,
 		pageFooter: Standard.pageFooter,
