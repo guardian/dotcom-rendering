@@ -301,22 +301,33 @@ export class RenderingCDKStack extends CDKStack {
 					}),
 		});
 
-		if (imageIdentifier != null) {
+		if (app.ecsService) {
+			const { taskDefinition } = app.ecsService;
+
 			const ecsEnvVars: Record<string, string> = {
+				// Custom environment variables needed by the application
 				NODE_ENV: 'production',
 				GU_STAGE: stage,
 				GU_APP: guApp,
 				GU_STACK: guStack,
+
+				// Controlling where traces ship (AWS X-Ray)
 				OTEL_EXPORTER_OTLP_ENDPOINT: 'http://localhost:4318',
 				OTEL_SERVICE_NAME: guApp,
 			};
 
 			for (const [key, value] of Object.entries(ecsEnvVars)) {
-				app.ecsService?.taskDefinition.defaultContainer?.addEnvironment(
-					key,
-					value,
-				);
+				taskDefinition.defaultContainer?.addEnvironment(key, value);
 			}
+
+			// Reuse the FireLens log options already wired by GuLoadBalancedAppExperimental,
+			// which registers GuLoggingStreamNameParameter as a singleton on this stack.
+			// This avoids re-introducing the parameter explicitly here.
+			const defaultContainerLogConfig =
+				taskDefinition.defaultContainer?.logDriverConfig;
+			const fireLensLogDriver = new FireLensLogDriver({
+				options: defaultContainerLogConfig?.options,
+			});
 
 			/**
 			 * The ADOT (AWS Distro for OpenTelemetry) Collector, run as a
@@ -329,70 +340,58 @@ export class RenderingCDKStack extends CDKStack {
 			 * The default config.yaml used is also available on github
 			 * @see https://github.com/aws-observability/aws-otel-collector/blob/0771477f9db2879afad3ae3ff7811b5264a151a8/config/ecs/ecs-default-config.yaml
 			 */
-			if (app.ecsService) {
-				const { taskDefinition } = app.ecsService;
-				// Reuse the FireLens log options already wired by GuLoadBalancedAppExperimental,
-				// which registers GuLoggingStreamNameParameter as a singleton on this stack.
-				// This avoids re-introducing the parameter explicitly here.
-				const defaultContainerLogConfig =
-					taskDefinition.defaultContainer?.logDriverConfig;
-				const fireLensLogDriver = new FireLensLogDriver({
-					options: defaultContainerLogConfig?.options,
-				});
-
-				const collector = taskDefinition.addContainer(
-					'aws-otel-collector',
-					{
-						image: ContainerImage.fromRegistry(
-							'public.ecr.aws/aws-observability/aws-otel-collector@sha256:90b3180c21acb9497110480371a413ed91f2836077f8a8fb4507b019d3c481c0',
-						),
-						command: ['--config=/etc/ecs/ecs-default-config.yaml'],
-						cpu: 256,
-						memoryLimitMiB: 512,
-						logging: fireLensLogDriver,
-						healthCheck: {
-							command: ['CMD', '/healthcheck'],
-							interval: Duration.seconds(5),
-							retries: 2,
-							timeout: Duration.seconds(3),
-						},
-						// If resources are constrained this container can be
-						// taken down to give room to the main app
-						essential: false,
-						readonlyRootFilesystem: true,
+			const collector = taskDefinition.addContainer(
+				'aws-otel-collector',
+				{
+					image: ContainerImage.fromRegistry(
+						'public.ecr.aws/aws-observability/aws-otel-collector@sha256:90b3180c21acb9497110480371a413ed91f2836077f8a8fb4507b019d3c481c0',
+					),
+					command: ['--config=/etc/ecs/ecs-default-config.yaml'],
+					cpu: 256,
+					memoryLimitMiB: 512,
+					logging: fireLensLogDriver,
+					healthCheck: {
+						command: ['CMD', '/healthcheck'],
+						interval: Duration.seconds(5),
+						retries: 2,
+						timeout: Duration.seconds(3),
 					},
-				);
+					// If resources are constrained this container can be
+					// taken down to give room to the main app
+					essential: false,
+					readonlyRootFilesystem: true,
+				},
+			);
 
-				taskDefinition.defaultContainer?.addContainerDependencies({
-					container: collector,
-					condition: ContainerDependencyCondition.START,
-				});
+			taskDefinition.defaultContainer?.addContainerDependencies({
+				container: collector,
+				condition: ContainerDependencyCondition.START,
+			});
 
-				/**
-				 * `AWSDistroOpenTelemetryPolicy`, less `ssm:GetParameters`, which
-				 * is only used when `--config` names an SSM parameter.
-				 *
-				 * @see https://aws-otel.github.io/docs/setup/permissions
-				 */
-				taskDefinition.addToTaskRolePolicy(
-					new PolicyStatement({
-						actions: [
-							'logs:PutLogEvents',
-							'logs:CreateLogGroup',
-							'logs:CreateLogStream',
-							'logs:DescribeLogStreams',
-							'logs:DescribeLogGroups',
-							'logs:PutRetentionPolicy',
-							'xray:PutTraceSegments',
-							'xray:PutTelemetryRecords',
-							'xray:GetSamplingRules',
-							'xray:GetSamplingTargets',
-							'xray:GetSamplingStatisticSummaries',
-						],
-						resources: ['*'],
-					}),
-				);
-			}
+			/**
+			 * `AWSDistroOpenTelemetryPolicy`, less `ssm:GetParameters`, which
+			 * is only used when `--config` names an SSM parameter.
+			 *
+			 * @see https://aws-otel.github.io/docs/setup/permissions
+			 */
+			taskDefinition.addToTaskRolePolicy(
+				new PolicyStatement({
+					actions: [
+						'logs:PutLogEvents',
+						'logs:CreateLogGroup',
+						'logs:CreateLogStream',
+						'logs:DescribeLogStreams',
+						'logs:DescribeLogGroups',
+						'logs:PutRetentionPolicy',
+						'xray:PutTraceSegments',
+						'xray:PutTelemetryRecords',
+						'xray:GetSamplingRules',
+						'xray:GetSamplingTargets',
+						'xray:GetSamplingStatisticSummaries',
+					],
+					resources: ['*'],
+				}),
+			);
 		}
 
 		/**
