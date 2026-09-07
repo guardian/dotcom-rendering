@@ -43,25 +43,25 @@ forcing participation.
    exactly as the target design mockup groups them ("Crosswords", "Logic
    puzzles", "Word games", "Quizzes and Trivia"):
 
-   | slug | group | renderMode | provider/notes | setter | comments | print | archive |
-   |---|---|---|---|---|---|---|---|
-   | crossword (mini/quick/cryptic/quick-cryptic/sunday-quick/prize/everyman/azed/special/genius/speedy/weekend) | crosswords | component | existing `@guardian/react-crossword`, reuse `CrosswordComponent.island.tsx` | ✅ | ✅ | ✅ | ✅ |
-   | sudoku-easy | logic-puzzles | iframe | AmuseLabs: `set=guardian-sudoku-easy` | ❌ | ❌ | ✅ | ✅ |
-   | sudoku-medium | logic-puzzles | iframe | AmuseLabs: `set=guardian-sudoku-medium` | ❌ | ❌ | ✅ | ✅ |
-   | sudoku-hard | logic-puzzles | iframe | AmuseLabs: `set=guardian-sudoku-hard` | ❌ | ❌ | ✅ | ✅ |
-   | sudoku-killer | logic-puzzles | iframe | AmuseLabs: `set=guardian-sudoku-killer` | ❌ | ❌ | ✅ | ✅ |
-   | futoshiki | logic-puzzles | iframe | AmuseLabs: `set=guardian-futoshiki` | ❌ | ❌ | ✅ | ✅ |
-   | suguru | logic-puzzles | iframe | AmuseLabs: `set=guardian-suguru` | ❌ | ❌ | ✅ | ✅ |
-   | word-wheel | word-games | iframe | AmuseLabs: `set=guardian-word-wheel` | ❌ | ❌ | ✅ | ✅ |
-   | codeword | word-games | iframe | AmuseLabs: `set=guardian-codeword` | ❌ | ❌ | ✅ | ✅ |
-   | wordiply | word-games | iframe | bespoke: `https://www.wordiply.com/` | ❌ | ❌ | ✅ | ✅ |
-   | on-the-ball | trivia-and-quizzes | iframe | bespoke: `https://sportsreveal.io/guardian` | ❌ | ❌ | ✅ | ✅ |
-   | film-reveal | trivia-and-quizzes | iframe | bespoke: `https://moviegrid.io/guardian` | ❌ | ❌ | ✅ | ✅ |
+    | slug                                                                                                        | group              | renderMode | provider/notes                                                              | setter | comments | print | archive |
+    | ----------------------------------------------------------------------------------------------------------- | ------------------ | ---------- | --------------------------------------------------------------------------- | ------ | -------- | ----- | ------- |
+    | crossword (mini/quick/cryptic/quick-cryptic/sunday-quick/prize/everyman/azed/special/genius/speedy/weekend) | crosswords         | component  | existing `@guardian/react-crossword`, reuse `CrosswordComponent.island.tsx` | ✅     | ✅       | ✅    | ✅      |
+    | sudoku-easy                                                                                                 | logic-puzzles      | iframe     | AmuseLabs: `set=guardian-sudoku-easy`                                       | ❌     | ❌       | ✅    | ✅      |
+    | sudoku-medium                                                                                               | logic-puzzles      | iframe     | AmuseLabs: `set=guardian-sudoku-medium`                                     | ❌     | ❌       | ✅    | ✅      |
+    | sudoku-hard                                                                                                 | logic-puzzles      | iframe     | AmuseLabs: `set=guardian-sudoku-hard`                                       | ❌     | ❌       | ✅    | ✅      |
+    | sudoku-killer                                                                                               | logic-puzzles      | iframe     | AmuseLabs: `set=guardian-sudoku-killer`                                     | ❌     | ❌       | ✅    | ✅      |
+    | futoshiki                                                                                                   | logic-puzzles      | iframe     | AmuseLabs: `set=guardian-futoshiki`                                         | ❌     | ❌       | ✅    | ✅      |
+    | suguru                                                                                                      | logic-puzzles      | iframe     | AmuseLabs: `set=guardian-suguru`                                            | ❌     | ❌       | ✅    | ✅      |
+    | word-wheel                                                                                                  | word-games         | iframe     | AmuseLabs: `set=guardian-word-wheel`                                        | ❌     | ❌       | ✅    | ✅      |
+    | codeword                                                                                                    | word-games         | iframe     | AmuseLabs: `set=guardian-codeword`                                          | ❌     | ❌       | ✅    | ✅      |
+    | wordiply                                                                                                    | word-games         | iframe     | bespoke: `https://www.wordiply.com/`                                        | ❌     | ❌       | ✅    | ✅      |
+    | on-the-ball                                                                                                 | trivia-and-quizzes | iframe     | bespoke: `https://sportsreveal.io/guardian`                                 | ❌     | ❌       | ✅    | ✅      |
+    | film-reveal                                                                                                 | trivia-and-quizzes | iframe     | bespoke: `https://moviegrid.io/guardian`                                    | ❌     | ❌       | ✅    | ✅      |
 
-   All AmuseLabs games share the exact same URL template
-   (`https://tg.amuselabs.com/guardian/date-picker?set=guardian-{slug}&embed=1&idx=1`),
-   differing only by the `set=guardian-{slug}` query param — modelled as data,
-   not near-duplicate code paths.
+    All AmuseLabs games share the exact same URL template
+    (`https://tg.amuselabs.com/guardian/date-picker?set=guardian-{slug}&embed=1&idx=1`),
+    differing only by the `set=guardian-{slug}` query param — modelled as data,
+    not near-duplicate code paths.
 
 ## Multi-phase plan
 
@@ -124,24 +124,247 @@ non-prod environment before any public rollout.
 ## Progress tracker
 
 - [x] Create this plan doc, commit as first commit
-- [ ] `src/types/gamePage.ts` — `FEGamePageType`
-- [ ] `src/model/games/gameConfigs.ts` — `GameConfig` type + registry for all 12 slugs
-- [ ] `src/lib/gamePageExperiment.ts` — `isGamePageEnabled` gate (`game-page-experiment`)
-- [ ] `src/lib/gameComponents.ts` — componentKey → component registry (`crossword` → `CrosswordComponent.island`)
-- [ ] `src/components/GameIframe.island.tsx` — generic sandboxed iframe island
-- [ ] `src/layouts/GameLayout.tsx` — new generic layout
-- [ ] `src/server/handler.gamePage.web.ts` + `src/server/render.gamePage.web.tsx`
-- [ ] Register `POST /GamePage` in `server.prod.ts` and `server.dev.ts` (+ dev `GET` passthrough route)
-- [ ] `fixtures/manual/gamePage.ts` — fixtures for all 12 slugs
-- [ ] Tests: handler, gate, registry validation (mirroring `handler.puzzlesPage.web.test.ts` / `validate.puzzlesPage.test.ts` patterns)
-- [ ] Lint / typecheck / targeted tests green
-- [ ] Manual validation steps + frontend handoff contract written up below
-- [ ] Mark this phase done in this doc
+- [x] `src/types/gamePage.ts` — `FEGamePageType`
+- [x] `src/model/games/gameConfigs.ts` — `GameConfig` type + registry for all 12 slugs
+- [x] `src/lib/gamePageExperiment.ts` — `isGamePageEnabled` gate (`game-page-experiment`)
+- [x] `src/lib/gameComponents.ts` — componentKey → component registry (`crossword` → `CrosswordComponent.island`)
+- [x] `src/components/GameIframe.island.tsx` — generic sandboxed iframe island
+- [x] `src/layouts/GameLayout.tsx` — new generic layout
+- [x] `src/server/handler.gamePage.web.ts` + `src/server/render.gamePage.web.tsx`
+- [x] Register `POST /GamePage` in `server.prod.ts` and `server.dev.ts` (+ dev `GET` passthrough route)
+- [x] `fixtures/manual/gamePage.ts` — fixtures for all 12 slugs
+- [x] Tests: handler, gate, registry validation (mirroring `handler.puzzlesPage.web.test.ts` / `validate.puzzlesPage.test.ts` patterns)
+- [x] Lint / typecheck / targeted tests green
+- [x] Manual validation steps + frontend handoff contract written up below
+- [x] Mark this phase done in this doc
+
+**Phase 1 (DCR) is complete.** All items above are implemented, committed
+locally to `afs/puzzles-game-page`, and verified with `tsc --noEmit`,
+`eslint`, and the targeted Jest suites below (no full-suite/unrelated runs
+were needed). The existing Crossword article path and Puzzles Hub files were
+not modified in any way beyond the two purely-additive edits noted below.
+
+Files added:
+
+- `src/types/gamePage.ts`
+- `src/model/games/gameConfigs.ts` (+ `gameConfigs.test.ts`)
+- `src/lib/gamePageExperiment.ts` (+ `.test.ts`)
+- `src/lib/gameComponents.ts`
+- `src/components/GameIframe.island.tsx`
+- `src/components/GamePage.tsx`
+- `src/layouts/GameLayout.tsx`
+- `src/server/handler.gamePage.web.ts` (+ `.test.ts`)
+- `src/server/render.gamePage.web.tsx`
+- `fixtures/manual/gamePage.ts`
+- `src/model/validate.gamePage.test.ts`
+
+Files edited (purely additive, no existing exports/behaviour changed):
+
+- `src/model/validate.ts` — added `validateAsGamePageType`, reusing the
+  module's existing private helpers (`isRecord`, `isNonEmptyString`,
+  `isOptionalString`, `isPuzzlesConfig`, `isPuzzleItem`, `editions`); no
+  existing validator touched.
+- `src/server/server.prod.ts` / `src/server/server.dev.ts` — added the
+  `/GamePage` route registrations alongside (not instead of) the existing
+  ones.
+
+Targeted test commands run and green:
+
+```
+pnpm test -- --testPathPattern "gamePage|gameConfigs"     # 4 suites, 42 tests
+pnpm test -- --testPathPattern "puzzlesPage|puzzlesHubExperiment|validate\."  # confirms no regression: 5 suites, 61 tests
+pnpm tsc --noEmit                                          # clean
+pnpm exec eslint --quiet <all files listed above>          # clean
+```
 
 ## Manual validation steps
 
-_(to be filled in as the final step of this phase, once the implementation is complete)_
+These steps use only this branch (`afs/puzzles-game-page`) — no `frontend`
+repo required.
+
+### 1. Start the DCR dev server
+
+From the `dotcom-rendering` sub-directory:
+
+```
+make dev
+```
+
+This starts webpack-dev-server on **http://localhost:3030** (per
+`webpack/webpack.config.dev-server.js`). Wait for `DEV server running on
+http://localhost:3030` and the initial bundle build to finish (first build
+can take a couple of minutes).
+
+> If port 3030 is already in use by another process on your machine, stop it
+> first (`make dev` will fail with `EADDRINUSE` otherwise).
+
+### 2. Generate fixture JSON files for all 12 slugs
+
+From the `dotcom-rendering` sub-directory, run (uses the `tsx` devDependency
+already in the project, no extra install needed):
+
+```
+cat > /tmp/dump-game-fixtures.ts <<'EOF'
+import * as fs from 'fs';
+import { gamePageFixtures } from './fixtures/manual/gamePage';
+
+fs.mkdirSync('/tmp/game-fixtures', { recursive: true });
+for (const [slug, page] of Object.entries(gamePageFixtures)) {
+	fs.writeFileSync(`/tmp/game-fixtures/${slug}.json`, JSON.stringify(page, null, 2));
+}
+console.log('wrote', Object.keys(gamePageFixtures).length, 'fixtures to /tmp/game-fixtures');
+EOF
+pnpm exec tsx /tmp/dump-game-fixtures.ts
+```
+
+This writes one JSON file per slug to `/tmp/game-fixtures/<slug>.json`. Each
+fixture's `config.serverSideABTests` is already set to
+`{ "game-page-experiment": "variant" }`, i.e. the AB gate is **on** by
+default in these fixtures.
+
+### 3. Request each slug and check the expected behaviour
+
+**Component-rendered slug (`crossword`)** — expect `200 OK` and, once the
+page hydrates in a browser, an interactive crossword grid (via
+`CrosswordComponent.island.tsx`), a setter byline, working share/print
+buttons, and a comment count:
+
+```
+curl -i -X POST http://localhost:3030/GamePage \
+  -H "Content-Type: application/json" \
+  --data @/tmp/game-fixtures/crossword.json
+```
+
+To view it rendered in a browser rather than just curl the HTML, use the dev
+server's GET-with-fixture convention, e.g. open:
+`http://localhost:3030/GamePage/https://www.theguardian.com/games/crossword`
+is **not** applicable here (that convention fetches real prod content by
+URL); for a local fixture, `POST` the JSON with a tool like Postman/Insomnia,
+or use a tiny local HTML form / `fetch()` in the browser console pointed at
+`http://localhost:3030/GamePage` with the JSON body — the response is a full
+HTML document you can save and open directly in a browser to inspect
+visually.
+
+**iframe-rendered slugs** (11 remaining: `sudoku-easy`, `sudoku-medium`,
+`sudoku-hard`, `sudoku-killer`, `futoshiki`, `suguru`, `word-wheel`,
+`codeword`, `wordiply`, `on-the-ball`, `film-reveal`) — expect `200 OK` and,
+once hydrated, a sandboxed `<iframe>` pointing at the resolved provider URL
+(AmuseLabs URL with `set=guardian-<slug>` for the first 8, or the bespoke
+provider URL for the last 3), no setter byline, no comments, but share/print
+controls present:
+
+```
+for slug in sudoku-easy sudoku-medium sudoku-hard sudoku-killer futoshiki suguru word-wheel codeword wordiply on-the-ball film-reveal; do
+  echo "=== $slug ==="
+  curl -s -o /dev/null -w "%{http_code}\n" -X POST http://localhost:3030/GamePage \
+    -H "Content-Type: application/json" \
+    --data @/tmp/game-fixtures/$slug.json
+done
+```
+
+All should print `200`.
+
+### 4. Toggle the AB gate on/off
+
+The gate reads `config.serverSideABTests['game-page-experiment']`. To see the
+**404 (hidden)** behaviour, edit a copy of a fixture and set that value to
+anything other than `"variant"` (e.g. `"control"` or remove the key), then
+re-POST it — expect `404 Not Found`.
+
+Locally, you can also bypass/override participation via query params without
+editing the fixture at all, using DCR's existing generic dev-only AB-test
+query param middleware (`getABTestsFromQueryParams`, already wired into
+`server.dev.ts` for every route):
+
+```
+# force variant on (200, renders):
+curl -i -X POST "http://localhost:3030/GamePage?ab-game-page-experiment=variant" \
+  -H "Content-Type: application/json" --data @/tmp/game-fixtures/crossword.json
+
+# force control (404, hidden) even if the fixture itself says "variant":
+curl -i -X POST "http://localhost:3030/GamePage?ab-game-page-experiment=control" \
+  -H "Content-Type: application/json" --data @/tmp/game-fixtures/crossword.json
+```
+
+### 5. Unknown slug
+
+```
+curl -i -X POST http://localhost:3030/GamePage \
+  -H "Content-Type: application/json" \
+  --data @<(python3 -c "import json; d=json.load(open('/tmp/game-fixtures/crossword.json')); d['slug']='not-a-real-game'; print(json.dumps(d))")
+```
+
+Expect `404 Not Found` (unknown slugs are not in DCR's `GameConfig` registry).
+
+### 6. Automated checks
+
+```
+cd dotcom-rendering
+pnpm tsc --noEmit
+pnpm exec eslint --quiet src/model/validate.ts src/server/server.dev.ts src/server/server.prod.ts \
+  fixtures/manual/gamePage.ts src/components/GameIframe.island.tsx src/components/GamePage.tsx \
+  src/layouts/GameLayout.tsx src/lib/gameComponents.ts src/lib/gamePageExperiment.ts \
+  src/lib/gamePageExperiment.test.ts src/model/games/ src/model/validate.gamePage.test.ts \
+  src/server/handler.gamePage.web.test.ts src/server/handler.gamePage.web.ts \
+  src/server/render.gamePage.web.tsx src/types/gamePage.ts
+pnpm test -- --testPathPattern "gamePage|gameConfigs"
+```
 
 ## Handoff contract for frontend
 
-_(to be filled in as the final step of this phase — exact `FEGamePageType` JSON shape to `POST` to `/GamePage`)_
+Frontend (Play/Scala) should `POST` a JSON body matching `FEGamePageType`
+(`src/types/gamePage.ts`) to DCR's `POST /GamePage`. Field-by-field:
+
+```ts
+interface FEGamePageType {
+	id: string; // any stable identifier for this page instance
+	slug: string; // MUST be one of the 12 slugs DCR's registry knows about:
+	// crossword, sudoku-easy, sudoku-medium, sudoku-hard,
+	// sudoku-killer, futoshiki, suguru, word-wheel, codeword,
+	// wordiply, on-the-ball, film-reveal
+	// (an unknown slug gets a 404 from DCR)
+	webTitle: string;
+	config: ConfigType; // the same shape frontend already sends for /Article,
+	// /PuzzlesPage etc. — MUST include
+	// config.serverSideABTests['game-page-experiment'] = 'variant'
+	// for DCR to render the page at all (otherwise 404)
+	nav: FENavType; // same shape as for /Article, /PuzzlesPage
+	pageFooter: FooterType; // same shape as for /Article, /PuzzlesPage
+	canonicalUrl: string;
+	editionId: EditionId; // 'UK' | 'US' | 'AU' | 'INT' | 'EUR'
+	instance: {
+		title: string; // required
+		puzzleType?: string; // e.g. "Quick crossword" — the red label
+		setterName?: string; // only meaningful if the slug's GameConfig has setterEnabled
+		date?: string; // free-form display date string
+		specialInstructions?: string;
+		discussionId?: string; // only meaningful if the slug's GameConfig has commentsEnabled
+		crosswordData?: unknown; // ONLY for slug: 'crossword' — the raw crossword
+		// element JSON, same shape as today's
+		// model.dotcomrendering.pageElements.CrosswordElement
+		// (a CAPICrossword: crosswordType, date, dimensions,
+		// entries[], id, name, number, solutionAvailable, ...)
+		moreFromPuzzlesAndGames?: PuzzleItem[]; // same PuzzleItem shape as src/types/puzzlesPage.ts
+	};
+}
+```
+
+Notes for frontend:
+
+- DCR owns which slugs exist and how each one is rendered/gated (setter,
+  comments, share, print, archive) via its own `GameConfig` registry — frontend
+  does not need to send any of that structural metadata, only `slug` plus the
+  per-instance content in `instance`.
+- For all 11 non-crossword slugs, `instance.crosswordData` should be omitted;
+  DCR resolves the iframe `src` itself from its registry (AmuseLabs URL
+  template with `set=guardian-<slug>`, or the bespoke provider URL) — frontend
+  does not need to construct or send any iframe URL.
+- A concrete, realistic example fixture for every slug is available in this
+  branch at `fixtures/manual/gamePage.ts` (`createGamePage(slug)` /
+  `gamePageFixtures`) and can be dumped to JSON with the `tsx` script in
+  step 2 above — use these as the ground truth for the exact JSON shape.
+- The real `game-page-experiment` AB test does not exist yet in the AB
+  testing framework/config frontend reads from — that is Phase 3. Until then,
+  frontend can hard-code `serverSideABTests: { 'game-page-experiment':
+'variant' }` in its own local/test environment to exercise the integration
+  end-to-end.
