@@ -603,7 +603,7 @@ describe('Enhance Cards', () => {
 						] as VariantMeta[],
 						startDate: Date.now() - oneHourInMilliseconds,
 						expiryDate: Date.now() + oneHourInMilliseconds,
-						frontsThisTestCanRunOn: ['test-front'],
+						frontsThisTestCanRunOn: ['us'],
 						hasManuallyEndedOnThisTrail: false,
 					},
 				],
@@ -669,7 +669,7 @@ describe('Enhance Cards', () => {
 
 		it('returns the default headline if editorial test exists and page is in allowed fronts list, but user is not in a test bucket', () => {
 			expect(
-				decideHeadline(cardWithEditorialTest, {}, true, 'test-front'),
+				decideHeadline(cardWithEditorialTest, {}, true, 'us'),
 			).toEqual('Headline');
 		});
 
@@ -681,7 +681,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-headline-test': 'a',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual('Headline');
 		});
@@ -707,7 +707,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-headline-test': 'a',
 					},
 					false,
-					'test-front',
+					'us',
 				),
 			).toEqual('Headline');
 		});
@@ -720,7 +720,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-headline-test': 'a',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual('Headline A');
 		});
@@ -733,7 +733,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-headline-test': 'b',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual('Headline B');
 		});
@@ -746,7 +746,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-headline-test': 'c',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual('Headline');
 		});
@@ -759,7 +759,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-headline-test': 'a',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual('Headline');
 		});
@@ -772,7 +772,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-headline-test': 'a',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual('Headline');
 		});
@@ -785,7 +785,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-headline-test': 'a',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual('Headline');
 		});
