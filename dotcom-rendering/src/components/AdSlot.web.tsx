@@ -106,14 +106,16 @@ const hideBelowDesktop = css`
 
 const containerMinHeight = getMinHeight(250, space[5]);
 
-const puzzlesAboveNavContainerStyles = css`
+const mobileAboveNavMinHeight = getMinHeight(100, space[5]);
+
+const mobileAboveNavContainerStyles = css`
 	padding-bottom: ${space[5]}px;
 	position: relative;
 	margin: 0 auto;
 	text-align: left;
 	display: block;
 	width: 100%;
-	min-height: ${containerMinHeight}px;
+	min-height: ${mobileAboveNavMinHeight}px;
 
 	&[mobile-above-nav-ad-rendered='true'] {
 		min-height: auto;
@@ -124,7 +126,7 @@ const puzzlesAboveNavContainerStyles = css`
 		::before {
 			content: '';
 			position: absolute;
-			height: 250px;
+			height: 100px;
 			width: 100%;
 			top: ${labelHeight}px;
 			left: 50%;
@@ -673,7 +675,7 @@ export const AdSlot = ({
 		}
 		case 'mobile-above-nav': {
 			return (
-				<AdSlotWrapper css={puzzlesAboveNavContainerStyles}>
+				<AdSlotWrapper css={mobileAboveNavContainerStyles}>
 					<div
 						id="dfp-ad--mobile-above-nav"
 						className={[
