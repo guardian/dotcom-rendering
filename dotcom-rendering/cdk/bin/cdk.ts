@@ -1,4 +1,4 @@
-import { App } from 'aws-cdk-lib';
+import { App, Duration } from 'aws-cdk-lib';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import type { RenderingCDKStackProps } from '../lib/renderingStack';
 import { RenderingCDKStack } from '../lib/renderingStack';
@@ -115,6 +115,15 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 		imageIdentifier: getImageIdentifier(),
 		taskCpu: 1024,
 		taskMemoryLimitMiB: 2048,
+		scaling: {
+			minimumTasks: 1,
+			maximumTasks: 9,
+			cpuScaling: {
+				targetValue: 20,
+				scaleInCooldown: Duration.seconds(60),
+				scaleOutCooldown: Duration.seconds(60),
+			},
+		},
 	},
 };
 
@@ -158,6 +167,17 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 		imageIdentifier: getImageIdentifier(),
 		taskCpu: 2048,
 		taskMemoryLimitMiB: 4096,
+		scaling: {
+			minimumTasks: 9,
+			maximumTasks: 90,
+			cpuScaling: {
+				targetValue: 20,
+				// TODO: Tune cooldown values.
+				// https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown
+				scaleInCooldown: Duration.seconds(60),
+				scaleOutCooldown: Duration.seconds(60),
+			},
+		},
 	},
 };
 
