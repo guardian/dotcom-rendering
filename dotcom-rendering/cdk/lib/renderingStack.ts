@@ -290,6 +290,7 @@ export class RenderingCDKStack extends CDKStack {
 							scaling: {
 								minimumTasks: 1,
 								maximumTasks: 2,
+								cpuAvgUtilisationTarget: 20,
 							},
 						},
 

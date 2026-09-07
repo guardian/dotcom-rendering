@@ -13,8 +13,8 @@ catalogs:
       specifier: 3.995.0
       version: 3.995.0
     '@guardian/cdk':
-      specifier: 64.5.1
-      version: 64.5.1
+      specifier: 0.0.0-canary-20260907130225
+      version: 0.0.0-canary-20260907130225
     '@guardian/eslint-config':
       specifier: 14.0.1
       version: 14.0.1
@@ -121,7 +121,7 @@ importers:
         version: 3.995.0
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 64.5.1(aws-cdk-lib@2.267.0(constructs@10.8.1))(aws-cdk@2.1139.0)(constructs@10.8.1)
+        version: 0.0.0-canary-20260907130225(aws-cdk-lib@2.267.0(constructs@10.8.1))(aws-cdk@2.1139.0)(constructs@10.8.1)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -325,7 +325,7 @@ importers:
         version: 6.1.0(browserslist@4.28.8)(tslib@2.6.2)
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 64.5.1(aws-cdk-lib@2.267.0(constructs@10.8.1))(aws-cdk@2.1139.0)(constructs@10.8.1)
+        version: 0.0.0-canary-20260907130225(aws-cdk-lib@2.267.0(constructs@10.8.1))(aws-cdk@2.1139.0)(constructs@10.8.1)
       '@guardian/commercial-core':
         specifier: 34.0.0
         version: 34.0.0(@guardian/consent-manager@2.1.0(@guardian/ophan-tracker-js@5.1.1)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.1.1)(tslib@2.6.2)(typescript@6.0.3))
@@ -2615,8 +2615,8 @@ packages:
       browserslist: ^4.22.2
       tslib: ^2.6.2
 
-  '@guardian/cdk@64.5.1':
-    resolution: {integrity: sha512-5CxYfYhaAAz47OD+qWYqMycjPij+ewj5g7lNyK1mmMm7CICB9yTB8TNV5byFyBkXdCnWlvQlLmmg/XtsA8o1wQ==}
+  '@guardian/cdk@0.0.0-canary-20260907130225':
+    resolution: {integrity: sha512-DEXPgYim8sidtc8mgkVosA3Efi+OSenfe4L4F4e3GBjxnADUwB3dUIo3522/5t2GOmFQeGhI8OE0KgST2ZJMjw==}
     hasBin: true
     peerDependencies:
       aws-cdk: ^2.1135.0
@@ -12502,7 +12502,7 @@ snapshots:
       browserslist: 4.28.8
       tslib: 2.6.2
 
-  '@guardian/cdk@64.5.1(aws-cdk-lib@2.267.0(constructs@10.8.1))(aws-cdk@2.1139.0)(constructs@10.8.1)':
+  '@guardian/cdk@0.0.0-canary-20260907130225(aws-cdk-lib@2.267.0(constructs@10.8.1))(aws-cdk@2.1139.0)(constructs@10.8.1)':
     dependencies:
       '@aws-sdk/client-ec2': 3.1101.0
       '@aws-sdk/client-ssm': 3.1101.0
@@ -14396,7 +14396,7 @@ snapshots:
       flat-cache: 3.2.0
       micromatch: 4.0.8
       react-docgen-typescript: 2.4.0(typescript@6.0.3)
-      tslib: 2.6.2
+      tslib: 2.8.1
       typescript: 6.0.3
       webpack: 5.110.2(@swc/core@1.16.1)(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(postcss@8.5.26)(webpack-cli@7.2.3)
     transitivePeerDependencies:
@@ -16373,7 +16373,7 @@ snapshots:
   dot-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   dunder-proto@1.0.1:
     dependencies:
@@ -19134,7 +19134,7 @@ snapshots:
   pascal-case@3.1.2:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   path-equal@1.2.5: {}
 
@@ -19951,7 +19951,7 @@ snapshots:
   snake-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   sort-keys-length@1.0.1:
     dependencies:
