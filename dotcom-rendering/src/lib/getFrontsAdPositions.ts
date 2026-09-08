@@ -412,16 +412,6 @@ const getDesktopAdPositions = (
 	return adPositionsFromReducer;
 };
 
-export const getMaxFrontsAdCounts = (): {
-	maxDesktopAds: number;
-	maxMobileAds: number;
-} => {
-	return {
-		maxDesktopAds: MAX_FRONTS_BANNER_ADS,
-		maxMobileAds: MAX_FRONTS_MOBILE_ADS,
-	};
-};
-
 export {
 	isEvenIndex,
 	getMerchHighPosition,
