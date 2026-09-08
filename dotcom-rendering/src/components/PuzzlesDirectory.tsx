@@ -98,6 +98,7 @@ const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => css`
 const cardStyles = (
 	variant: PuzzleItem['cardVariant'],
 	hasImage: boolean,
+	isFeatured: boolean,
 ) => css`
 	position: relative;
 	display: grid;
@@ -125,6 +126,13 @@ const cardStyles = (
 				: 190}px;
 	}
 
+	${isFeatured &&
+	css`
+		${from.leftCol} {
+			display: block;
+		}
+	`}
+
 	:hover .puzzle-card-title {
 		text-decoration: underline;
 	}
@@ -135,7 +143,9 @@ const cardStyles = (
 	}
 `;
 
-const cardTextStyles = css`
+const cardTextStyles = (isFeatured: boolean) => css`
+	position: relative;
+	z-index: ${isFeatured ? 1 : 'auto'};
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
@@ -152,11 +162,22 @@ const cadenceStyles = css`
 	${textSans12};
 `;
 
-const cardImageStyles = css`
+const cardImageStyles = (isFeatured: boolean) => css`
 	width: 100%;
 	height: 100%;
 	min-height: 0;
 	object-fit: cover;
+
+	${isFeatured &&
+	css`
+		${from.leftCol} {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			width: 75%;
+			height: 75%;
+		}
+	`}
 `;
 
 const nestedGridStyles = css`
@@ -214,7 +235,13 @@ const externalProps = (url: string) =>
 		? { rel: 'noopener noreferrer', target: '_blank' as const }
 		: {};
 
-const PuzzleCard = ({ item }: { item: PuzzleItem }) => {
+const PuzzleCard = ({
+	isFeatured,
+	item,
+}: {
+	isFeatured: boolean;
+	item: PuzzleItem;
+}) => {
 	const url = getPuzzleUrl(item);
 	const hasImage =
 		item.image !== undefined &&
@@ -222,7 +249,7 @@ const PuzzleCard = ({ item }: { item: PuzzleItem }) => {
 		item.cardVariant !== 'compact';
 	const contents = (
 		<>
-			<div css={cardTextStyles}>
+			<div css={cardTextStyles(isFeatured)}>
 				<span className="puzzle-card-title" css={cardTitleStyles}>
 					{item.title}
 				</span>
@@ -230,7 +257,13 @@ const PuzzleCard = ({ item }: { item: PuzzleItem }) => {
 					<span css={cadenceStyles}>{item.cadence}</span>
 				)}
 			</div>
-			{hasImage && <img alt="" css={cardImageStyles} src={item.image} />}
+			{hasImage && (
+				<img
+					alt=""
+					css={cardImageStyles(isFeatured)}
+					src={item.image}
+				/>
+			)}
 		</>
 	);
 	const style =
@@ -239,7 +272,7 @@ const PuzzleCard = ({ item }: { item: PuzzleItem }) => {
 			: undefined;
 	return url !== undefined ? (
 		<a
-			css={cardStyles(item.cardVariant, hasImage)}
+			css={cardStyles(item.cardVariant, hasImage, isFeatured)}
 			href={url}
 			style={style}
 			{...externalProps(url)}
@@ -247,7 +280,10 @@ const PuzzleCard = ({ item }: { item: PuzzleItem }) => {
 			{contents}
 		</a>
 	) : (
-		<article css={cardStyles(item.cardVariant, hasImage)} style={style}>
+		<article
+			css={cardStyles(item.cardVariant, hasImage, isFeatured)}
+			style={style}
+		>
 			{contents}
 		</article>
 	);
@@ -267,7 +303,13 @@ const Archive = ({ container }: { container: PuzzleContainer }) => {
 	return null;
 };
 
-const Rows = ({ rows }: { rows: PuzzleItem[][] }) => (
+const Rows = ({
+	isFeatured = false,
+	rows,
+}: {
+	isFeatured?: boolean;
+	rows: PuzzleItem[][];
+}) => (
 	<div css={rowsStyles}>
 		{rows
 			.filter((row) => row.length > 0)
@@ -281,7 +323,7 @@ const Rows = ({ rows }: { rows: PuzzleItem[][] }) => (
 				>
 					{row.map((item) => (
 						<li key={item.id}>
-							<PuzzleCard item={item} />
+							<PuzzleCard isFeatured={isFeatured} item={item} />
 						</li>
 					))}
 				</ul>
@@ -307,7 +349,10 @@ const DirectorySection = ({ container }: { container: PuzzleContainer }) => {
 				{container.title}
 			</h2>
 			<div css={contentStyles}>
-				<Rows rows={container.content.items} />
+				<Rows
+					isFeatured={container.variant === 'featured'}
+					rows={container.content.items}
+				/>
 				{container.content.nestedContainers.length > 0 && (
 					<div css={nestedGridStyles}>
 						{container.content.nestedContainers
@@ -332,6 +377,12 @@ const DirectorySection = ({ container }: { container: PuzzleContainer }) => {
 export const PuzzlesDirectory = ({ layout, renderAds }: Props) => (
 	<>
 		{layout.containers.map((container) => {
+			if (
+				container.variant === 'featured' &&
+				container.enabled === false
+			) {
+				return null;
+			}
 			if (container.variant === 'supporting') {
 				if (container.supporting === undefined) {
 					return null;

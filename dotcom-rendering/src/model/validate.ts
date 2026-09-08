@@ -245,6 +245,7 @@ const isPuzzleContainer = (data: unknown): data is PuzzleContainer => {
 		(data.variant !== undefined &&
 			(!isString(data.variant) ||
 				!containerVariants.has(data.variant))) ||
+		(data.enabled !== undefined && typeof data.enabled !== 'boolean') ||
 		(data.desktopSpan !== undefined &&
 			(!Number.isInteger(data.desktopSpan) ||
 				(data.desktopSpan as number) < 1 ||
@@ -291,7 +292,8 @@ const isPuzzleContainer = (data: unknown): data is PuzzleContainer => {
 			content.nestedContainers.length === 0 &&
 			content.archive === undefined &&
 			content.archiveChoices === undefined &&
-			data.supporting === undefined
+			data.supporting === undefined &&
+			data.enabled === undefined
 		: isSupporting
 			? data.title === '' &&
 				data.supporting !== undefined &&
@@ -301,9 +303,11 @@ const isPuzzleContainer = (data: unknown): data is PuzzleContainer => {
 				Array.isArray(content.nestedContainers) &&
 				content.nestedContainers.length === 0 &&
 				content.archive === undefined &&
-				content.archiveChoices === undefined
+				content.archiveChoices === undefined &&
+				data.enabled === undefined
 			: data.adSlot === undefined &&
 				data.supporting === undefined &&
+				(data.enabled === undefined || data.variant === 'featured') &&
 				data.title.trim().length > 0;
 
 	return itemsValid && nestedValid && archiveValid && adValid;

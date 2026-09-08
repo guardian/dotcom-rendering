@@ -38,6 +38,28 @@ const section = (
 });
 
 describe('PuzzlesDirectory', () => {
+	it('does not render a disabled featured container', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							enabled: false,
+							id: 'featured',
+							title: 'Today’s featured puzzles',
+							variant: 'featured',
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+
+		expect(
+			screen.queryByRole('heading', { name: 'Today’s featured puzzles' }),
+		).not.toBeInTheDocument();
+	});
+
 	it('uses JSON ordering, rows, variants, cadence and configured spans', () => {
 		const nested = section({
 			id: 'nested',
@@ -80,6 +102,9 @@ describe('PuzzlesDirectory', () => {
 		expect(
 			screen.getByText('Compact').closest('article'),
 		).toBeInTheDocument();
+		expect(
+			screen.queryByRole('heading', { name: 'Nested' }),
+		).not.toBeInTheDocument();
 	});
 
 	it('resolves internal and external URLs safely and never emits a hash fallback', () => {

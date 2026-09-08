@@ -32,6 +32,7 @@ export type PuzzleContainer = {
 	title: string;
 	variant?: 'featured' | 'standard' | 'ad' | 'supporting';
 	content: PuzzleContent;
+	enabled?: boolean;
 	desktopSpan?: number;
 	adSlot?: string;
 	supporting?: PuzzlesSupportingContent;

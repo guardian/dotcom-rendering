@@ -44,6 +44,17 @@ describe('validateAsPuzzlesPageType', () => {
 		).toBe('word-games');
 	});
 
+	it('accepts enabled on featured containers and rejects it elsewhere', () => {
+		const featuredPage = validPage();
+		featuredPage.layout.containers[0]!.variant = 'featured';
+		(featuredPage.layout.containers[0] as { enabled?: boolean }).enabled =
+			true;
+		expect(validateAsPuzzlesPageType(featuredPage)).toBeDefined();
+
+		featuredPage.layout.containers[0]!.variant = 'standard';
+		expect(() => validateAsPuzzlesPageType(featuredPage)).toThrow();
+	});
+
 	it.each([
 		[
 			'unknown card variant',

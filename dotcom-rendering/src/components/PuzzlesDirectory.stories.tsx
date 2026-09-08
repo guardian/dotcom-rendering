@@ -2,12 +2,16 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { PuzzlesLayoutType } from '../types/puzzlesPage';
 import { PuzzlesDirectory } from './PuzzlesDirectory';
 
+const previewImage =
+	'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=600&dpr=1&s=none&crop=5%3A3';
+
 const layout: PuzzlesLayoutType = {
 	containers: [
 		{
 			id: 'featured',
 			title: 'Today’s featured puzzles',
 			variant: 'featured',
+			enabled: true,
 			content: {
 				nestedContainers: [],
 				items: [
@@ -19,6 +23,7 @@ const layout: PuzzlesLayoutType = {
 							set: 'all',
 							cardVariant: 'large',
 							cadence: 'Daily',
+							image: previewImage,
 							slug: 'on-the-ball',
 							variant: 'iframe-page',
 							backgroundColour: '#e5e5e5',
@@ -30,6 +35,7 @@ const layout: PuzzlesLayoutType = {
 							set: 'all',
 							cardVariant: 'large',
 							cadence: 'Daily',
+							image: previewImage,
 							slug: 'film-reveal',
 							variant: 'iframe-page',
 							backgroundColour: '#e5e5e5',
@@ -99,7 +105,16 @@ export default {
 	component: PuzzlesDirectory,
 	parameters: {
 		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.tablet, 1300],
+			viewports: [
+				320,
+				breakpoints.mobileMedium,
+				breakpoints.mobileLandscape,
+				breakpoints.phablet,
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
 		},
 	},
 };
