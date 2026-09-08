@@ -377,6 +377,11 @@ export const InteractiveBlockComponent = ({
 		const requiresDarkMode =
 			darkModeAvailable && prefersDarkScheme ? true : false;
 
+		// Manually disable spacefinder for testing!
+		window.document
+			.querySelector('.article-body-commercial-selector')
+			?.setAttribute('data-spacefinder-disabled', 'true');
+
 		if (url && scriptUrlIsBoot && placeholderLinkRef.current) {
 			// Prepare for graphic url dynamic updates
 			const graphicUrl = new URL(url);
