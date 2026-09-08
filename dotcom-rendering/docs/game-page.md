@@ -116,6 +116,37 @@ curl -i -X POST http://localhost:3030/GamePage \
   --data @<(python3 -c "import json; d=json.load(open('/tmp/game-fixtures/crossword.json')); d['slug']='not-a-real-game'; print(json.dumps(d))")
 ```
 
+### All 12 slugs, one by one
+
+Once you've run the fixture-dump script above (`/tmp/game-fixtures/<slug>.json`
+for each of the 12 slugs), here is the exact local command to hit each one
+individually. **These are DCR's own local `POST` endpoint, not a real,
+browsable end-user URL** — `/GamePage` only accepts `POST` requests with a
+JSON body; DCR is not directly browsable by real users without `frontend` in
+front of it constructing and sending that body (see the `frontend` repo's
+`docs/game-page.md` for the real, user-facing routes it exposes).
+
+| `slug`          | `gameGroup`          | `renderMode` | local command                                                                                                                      |
+| --------------- | -------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `crossword`     | `crosswords`         | `component`  | `curl -i -X POST http://localhost:3030/GamePage -H "Content-Type: application/json" --data @/tmp/game-fixtures/crossword.json`     |
+| `sudoku-easy`   | `logic-puzzles`      | `iframe`     | `curl -i -X POST http://localhost:3030/GamePage -H "Content-Type: application/json" --data @/tmp/game-fixtures/sudoku-easy.json`   |
+| `sudoku-medium` | `logic-puzzles`      | `iframe`     | `curl -i -X POST http://localhost:3030/GamePage -H "Content-Type: application/json" --data @/tmp/game-fixtures/sudoku-medium.json` |
+| `sudoku-hard`   | `logic-puzzles`      | `iframe`     | `curl -i -X POST http://localhost:3030/GamePage -H "Content-Type: application/json" --data @/tmp/game-fixtures/sudoku-hard.json`   |
+| `sudoku-killer` | `logic-puzzles`      | `iframe`     | `curl -i -X POST http://localhost:3030/GamePage -H "Content-Type: application/json" --data @/tmp/game-fixtures/sudoku-killer.json` |
+| `futoshiki`     | `logic-puzzles`      | `iframe`     | `curl -i -X POST http://localhost:3030/GamePage -H "Content-Type: application/json" --data @/tmp/game-fixtures/futoshiki.json`     |
+| `suguru`        | `logic-puzzles`      | `iframe`     | `curl -i -X POST http://localhost:3030/GamePage -H "Content-Type: application/json" --data @/tmp/game-fixtures/suguru.json`        |
+| `word-wheel`    | `word-games`         | `iframe`     | `curl -i -X POST http://localhost:3030/GamePage -H "Content-Type: application/json" --data @/tmp/game-fixtures/word-wheel.json`    |
+| `codeword`      | `word-games`         | `iframe`     | `curl -i -X POST http://localhost:3030/GamePage -H "Content-Type: application/json" --data @/tmp/game-fixtures/codeword.json`      |
+| `wordiply`      | `word-games`         | `iframe`     | `curl -i -X POST http://localhost:3030/GamePage -H "Content-Type: application/json" --data @/tmp/game-fixtures/wordiply.json`      |
+| `on-the-ball`   | `trivia-and-quizzes` | `iframe`     | `curl -i -X POST http://localhost:3030/GamePage -H "Content-Type: application/json" --data @/tmp/game-fixtures/on-the-ball.json`   |
+| `film-reveal`   | `trivia-and-quizzes` | `iframe`     | `curl -i -X POST http://localhost:3030/GamePage -H "Content-Type: application/json" --data @/tmp/game-fixtures/film-reveal.json`   |
+
+All twelve should return `200`. For the `component` row (`crossword`) the
+response HTML hydrates into an interactive crossword grid; for every
+`iframe` row it hydrates into a sandboxed `<iframe>` pointed at that slug's
+resolved provider URL (see `GameConfig.iframe`/`resolveIframeUrl()` in the
+"Field reference" section below).
+
 `docs/puzzles-game-page-plan.md` has a longer, step-by-step version of this
 (all 12 slugs, expected behaviour per `renderMode`), written during initial
 implementation — this doc is the ongoing reference, that one is a
