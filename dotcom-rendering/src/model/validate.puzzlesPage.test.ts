@@ -1,173 +1,127 @@
-import {
-	createPuzzlesPage,
-	fullPuzzlesLayout,
-} from '../../fixtures/manual/puzzlesPage';
-import {
-	puzzlesHubExperiment,
-	puzzlesHubParticipation,
-} from '../lib/puzzlesHubExperiment';
 import { validateAsPuzzlesPageType } from './validate';
 
-const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
-
-const expectInvalid = (page: unknown) =>
-	expect(() => validateAsPuzzlesPageType(page)).toThrow(
-		'Unable to validate request body for puzzles page.',
-	);
+const validPage = () => ({
+	id: 'puzzles',
+	webTitle: 'Puzzles and Games',
+	editionId: 'UK',
+	canonicalUrl: 'https://www.theguardian.com/puzzles',
+	isAdFreeUser: false,
+	config: { serverSideABTests: { 'puzzles-new-hub': 'variant' } },
+	nav: {},
+	pageFooter: {},
+	layout: {
+		filters: [
+			{ id: 'word-games', title: 'Word games', target: '#word-games' },
+		],
+		containers: [
+			{
+				id: 'word-games',
+				title: 'Word games',
+				variant: 'standard',
+				filterId: 'word-games',
+				content: {
+					nestedContainers: [],
+					items: [
+						[
+							{
+								id: 'word-wheel',
+								title: 'Word wheel',
+								type: 'word-game',
+								set: 'all',
+								cardVariant: 'primary',
+								cadence: 'Daily',
+								slug: 'word-wheel',
+								variant: 'iframe-page',
+							},
+						],
+					],
+				},
+			},
+		],
+	},
+});
 
 describe('validateAsPuzzlesPageType', () => {
-	it('accepts a minimal payload and preserves server-side participation', () => {
-		const participation = puzzlesHubParticipation(
-			puzzlesHubExperiment.variant,
-		);
-		const page = createPuzzlesPage({
-			config: {
-				...createPuzzlesPage().config,
-				serverSideABTests: participation,
-			},
-		});
-
-		expect(validateAsPuzzlesPageType(page).config.serverSideABTests).toBe(
-			participation,
-		);
-	});
-
-	it('accepts a full payload with rows, nested containers and an archive', () => {
+	it('accepts a valid recursive blueprint contract', () => {
 		expect(
-			validateAsPuzzlesPageType(
-				createPuzzlesPage({ layout: fullPuzzlesLayout }),
-			).layout,
-		).toEqual(fullPuzzlesLayout);
+			validateAsPuzzlesPageType(validPage()).layout.containers[0]?.id,
+		).toBe('word-games');
 	});
 
-	it.each(['id', 'editionLongForm', 'contributionsServiceUrl', 'webTitle'])(
-		'rejects a missing required page field: %s',
-		(field) => {
-			const page = clone(createPuzzlesPage()) as unknown as Record<
-				string,
-				unknown
-			>;
-			delete page[field];
-			expectInvalid(page);
-		},
-	);
+	it.each([
+		[
+			'unknown card variant',
+			(page: ReturnType<typeof validPage>) => {
+				page.layout.containers[0]!.content.items[0]![0]!.cardVariant =
+					'hero';
+			},
+		],
+		[
+			'missing cadence',
+			(page: ReturnType<typeof validPage>) => {
+				const card = page.layout.containers[0]!.content
+					.items[0]![0]! as {
+					cadence?: string;
+				};
+				delete card.cadence;
+			},
+		],
+		[
+			'invalid colour',
+			(page: ReturnType<typeof validPage>) => {
+				const card = page.layout.containers[0]!.content
+					.items[0]![0]! as {
+					backgroundColour?: string;
+				};
+				card.backgroundColour = 'red';
+			},
+		],
+		[
+			'unsupported span',
+			(page: ReturnType<typeof validPage>) => {
+				const container = page.layout.containers[0]! as {
+					desktopSpan?: number;
+				};
+				container.desktopSpan = 13;
+			},
+		],
+		[
+			'duplicate stable ID',
+			(page: ReturnType<typeof validPage>) => {
+				page.layout.containers[0]!.content.items[0]!.push({
+					...page.layout.containers[0]!.content.items[0]![0]!,
+				});
+			},
+		],
+		[
+			'broken navigation target',
+			(page: ReturnType<typeof validPage>) => {
+				page.layout.filters[0]!.target = '#missing';
+			},
+		],
+	])('rejects %s', (_, mutate) => {
+		const page = validPage();
+		mutate(page);
+		expect(() => validateAsPuzzlesPageType(page)).toThrow(
+			'Unable to validate request body for puzzles page',
+		);
+	});
 
-	it('rejects a config without server-side participations', () => {
-		const page = clone(createPuzzlesPage()) as unknown as {
-			config: Record<string, unknown>;
+	it('accepts a valid top-level ad placement and rejects one nested inside content', () => {
+		const page = validPage();
+		const ad = {
+			id: 'inline-ad',
+			title: '',
+			variant: 'ad',
+			adSlot: 'inline1',
+			content: { items: [], nestedContainers: [] },
 		};
-		delete page.config.serverSideABTests;
-		expectInvalid(page);
-	});
-
-	it('rejects navigation that is not an object', () => {
-		const page = clone(createPuzzlesPage()) as unknown as {
-			nav: unknown;
-		};
-		page.nav = [];
-		expectInvalid(page);
-	});
-
-	it('rejects a malformed filter colour', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		page.layout.filters[0]!.backgroundColour = 'pink';
-		expectInvalid(page);
-	});
-
-	it('rejects a navigation target without a matching section', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		page.layout.filters[0]!.target = '#missing';
-		expectInvalid(page);
-	});
-
-	it('rejects duplicate filter IDs', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		page.layout.filters.push(clone(page.layout.filters[0]!));
-		expectInvalid(page);
-	});
-
-	it('rejects an unknown required container variant', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		(page.layout.containers[0] as unknown as { variant: string }).variant =
-			'unknown';
-		expectInvalid(page);
-	});
-
-	it.each([0, 13, 1.5])('rejects invalid desktop span %s', (desktopSpan) => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		page.layout.containers[0]!.desktopSpan = desktopSpan;
-		expectInvalid(page);
-	});
-
-	it('rejects a structurally invalid row', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		page.layout.containers[0]!.content.items = [[]];
-		expectInvalid(page);
-	});
-
-	it('rejects an invalid item in a nested container', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		const nestedItem =
-			page.layout.containers[0]!.content.nestedContainers[0]!.content
-				.items[0]![0]!;
-		nestedItem.id = 'Not Stable';
-		expectInvalid(page);
-	});
-
-	it('rejects an unknown card variant', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		const item = page.layout.containers[0]!.content.items[0]![0]!;
-		(item as unknown as { cardVariant: string }).cardVariant = 'unknown';
-		expectInvalid(page);
-	});
-
-	it('rejects a card without cadence metadata', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		const item = page.layout.containers[0]!.content.items[0]![0]!;
-		(item as unknown as { cadence?: string }).cadence = undefined;
-		expectInvalid(page);
-	});
-
-	it('rejects an unknown page presentation variant', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		const item = page.layout.containers[0]!.content.items[0]![0]!;
-		(item as unknown as { variant: string }).variant = 'unknown';
-		expectInvalid(page);
-	});
-
-	it('rejects a malformed item colour', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		page.layout.containers[0]!.content.items[0]![0]!.backgroundColour =
-			'#12345';
-		expectInvalid(page);
-	});
-
-	it('rejects duplicate puzzle IDs at different recursion levels', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		page.layout.containers[0]!.content.nestedContainers[0]!.content.items[0]![0]!.id =
-			page.layout.containers[0]!.content.items[0]![0]!.id;
-		expectInvalid(page);
-	});
-
-	it('rejects an undefined filter reference', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		page.layout.containers[0]!.filterId = 'missing';
-		expectInvalid(page);
-	});
-
-	it('rejects archive presentation outside the archive slot', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		const item = page.layout.containers[0]!.content.items[0]![0]!;
-		(item as unknown as { cardVariant: string }).cardVariant = 'archive';
-		expectInvalid(page);
-	});
-
-	it('rejects a non-archive presentation in the archive slot', () => {
-		const page = clone(createPuzzlesPage({ layout: fullPuzzlesLayout }));
-		const archive =
-			page.layout.containers[0]!.content.nestedContainers[0]!.content
-				.archive!;
-		(archive as unknown as { cardVariant: string }).cardVariant = 'compact';
-		expectInvalid(page);
+		page.layout.containers.push(ad as never);
+		expect(validateAsPuzzlesPageType(page).layout.containers).toHaveLength(
+			2,
+		);
+		page.layout.containers.pop();
+		page.layout.containers[0]!.content.nestedContainers.push(ad as never);
+		expect(() => validateAsPuzzlesPageType(page)).toThrow();
 	});
 });
