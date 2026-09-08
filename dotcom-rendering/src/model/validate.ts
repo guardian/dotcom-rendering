@@ -174,7 +174,9 @@ export const validateAsFootballMatchPageType = (
 const identifier = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const colour = /^#[0-9a-f]{6}$/i;
 const cardVariants = new Set(['large', 'primary', 'compact', 'archive']);
-const containerVariants = new Set(['featured', 'standard', 'ad']);
+const containerVariants = new Set(['featured', 'standard', 'ad', 'supporting']);
+const isPuzzleDestination = (url: string) =>
+	url.startsWith('/puzzles') || /^https?:\/\//.test(url);
 
 const isPuzzleItem = (data: unknown): data is PuzzleItem =>
 	isObject(data) &&
@@ -194,8 +196,45 @@ const isPuzzleItem = (data: unknown): data is PuzzleItem =>
 	(data.variant === undefined || isString(data.variant)) &&
 	(data.backgroundColour === undefined ||
 		(isString(data.backgroundColour) &&
-			colour.test(data.backgroundColour))) &&
-	(data.filterId === undefined || isString(data.filterId));
+			colour.test(data.backgroundColour)));
+
+const isSupportingContent = (data: unknown): boolean =>
+	isObject(data) &&
+	isString(data.usefulLinksTitle) &&
+	data.usefulLinksTitle.trim().length > 0 &&
+	Array.isArray(data.usefulLinks) &&
+	data.usefulLinks.every(
+		(link) =>
+			isObject(link) &&
+			isString(link.title) &&
+			link.title.trim().length > 0 &&
+			isString(link.url) &&
+			isPuzzleDestination(link.url),
+	) &&
+	(data.newsletter === undefined ||
+		(isObject(data.newsletter) &&
+			isString(data.newsletter.identityName) &&
+			data.newsletter.identityName.trim().length > 0 &&
+			isString(data.newsletter.name) &&
+			data.newsletter.name.trim().length > 0 &&
+			isString(data.newsletter.frequency) &&
+			data.newsletter.frequency.trim().length > 0 &&
+			isString(data.newsletter.description) &&
+			data.newsletter.description.trim().length > 0 &&
+			(data.newsletter.illustrationSquare === undefined ||
+				isString(data.newsletter.illustrationSquare)))) &&
+	isString(data.popularTitle) &&
+	data.popularTitle.trim().length > 0 &&
+	Array.isArray(data.popularGroups) &&
+	data.popularGroups.every(
+		(group) =>
+			isObject(group) &&
+			isString(group.title) &&
+			group.title.trim().length > 0 &&
+			Array.isArray(group.itemIds) &&
+			group.itemIds.length > 0 &&
+			group.itemIds.every(isString),
+	);
 
 const isPuzzleContainer = (data: unknown): data is PuzzleContainer => {
 	if (
@@ -210,10 +249,12 @@ const isPuzzleContainer = (data: unknown): data is PuzzleContainer => {
 			(!Number.isInteger(data.desktopSpan) ||
 				(data.desktopSpan as number) < 1 ||
 				(data.desktopSpan as number) > 12)) ||
-		(data.filterId !== undefined && !isString(data.filterId)) ||
 		(data.adSlot !== undefined &&
 			(!isString(data.adSlot) ||
-				!/^inline[1-9][0-9]*$/.test(data.adSlot))) ||
+				(!/^inline[1-9][0-9]*$/.test(data.adSlot) &&
+					data.adSlot !== 'mostpop'))) ||
+		(data.supporting !== undefined &&
+			!isSupportingContent(data.supporting)) ||
 		!isObject(data.content)
 	) {
 		return false;
@@ -239,16 +280,31 @@ const isPuzzleContainer = (data: unknown): data is PuzzleContainer => {
 			content.archiveChoices !== undefined
 		);
 	const isAd = data.variant === 'ad';
+	const isSupporting = data.variant === 'supporting';
 	const adValid = isAd
 		? data.adSlot !== undefined &&
+			/^inline[1-9][0-9]*$/.test(data.adSlot) &&
 			data.title === '' &&
 			Array.isArray(content.items) &&
 			content.items.length === 0 &&
 			Array.isArray(content.nestedContainers) &&
 			content.nestedContainers.length === 0 &&
 			content.archive === undefined &&
-			content.archiveChoices === undefined
-		: data.adSlot === undefined && data.title.trim().length > 0;
+			content.archiveChoices === undefined &&
+			data.supporting === undefined
+		: isSupporting
+			? data.title === '' &&
+				data.supporting !== undefined &&
+				(data.adSlot === undefined || data.adSlot === 'mostpop') &&
+				Array.isArray(content.items) &&
+				content.items.length === 0 &&
+				Array.isArray(content.nestedContainers) &&
+				content.nestedContainers.length === 0 &&
+				content.archive === undefined &&
+				content.archiveChoices === undefined
+			: data.adSlot === undefined &&
+				data.supporting === undefined &&
+				data.title.trim().length > 0;
 
 	return itemsValid && nestedValid && archiveValid && adValid;
 };
@@ -275,23 +331,7 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 		typeof data.isAdFreeUser !== 'boolean' ||
 		!isObject(data.layout) ||
 		!Array.isArray(data.layout.containers) ||
-		!data.layout.containers.every(isPuzzleContainer) ||
-		(data.layout.filters !== undefined &&
-			(!Array.isArray(data.layout.filters) ||
-				!data.layout.filters.every(
-					(filter) =>
-						isObject(filter) &&
-						isString(filter.id) &&
-						identifier.test(filter.id) &&
-						isString(filter.title) &&
-						filter.title.trim().length > 0 &&
-						isString(filter.target) &&
-						(filter.target.startsWith('#') ||
-							filter.target.startsWith('/puzzles')) &&
-						(filter.backgroundColour === undefined ||
-							(isString(filter.backgroundColour) &&
-								colour.test(filter.backgroundColour))),
-				)))
+		!data.layout.containers.every(isPuzzleContainer)
 	) {
 		throw new TypeError(
 			'Unable to validate request body for puzzles page.',
@@ -307,26 +347,21 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 	]);
 	const unique = (values: string[]) => new Set(values).size === values.length;
 	const containerIds = containers.map(({ id }) => id);
-	const filterIds = page.layout.filters?.map(({ id }) => id) ?? [];
-	const targetsValid = (page.layout.filters ?? []).every(
-		({ target }) =>
-			!target.startsWith('#') || containerIds.includes(target.slice(1)),
+	const itemIds = items.map(({ id }) => id);
+	const popularReferencesValid = containers.every((container) =>
+		(container.supporting?.popularGroups ?? []).every((group) =>
+			group.itemIds.every((id) => itemIds.includes(id)),
+		),
 	);
-	const filtersValid = containers.every(
-		({ filterId }) =>
-			filterId === undefined || filterIds.includes(filterId),
-	);
-	const nestedAdsValid = containers
+	const topLevelOnlyContainersValid = containers
 		.slice(page.layout.containers.length)
-		.every(({ variant }) => variant !== 'ad');
+		.every(({ variant }) => variant !== 'ad' && variant !== 'supporting');
 
 	if (
 		!unique(containerIds) ||
-		!unique(filterIds) ||
-		!unique(items.map(({ id }) => id)) ||
-		!targetsValid ||
-		!filtersValid ||
-		!nestedAdsValid
+		!unique(itemIds) ||
+		!popularReferencesValid ||
+		!topLevelOnlyContainersValid
 	) {
 		throw new TypeError(
 			'Unable to validate request body for puzzles page.',

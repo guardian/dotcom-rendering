@@ -18,7 +18,6 @@ export type PuzzleItem = {
 	index?: number;
 	variant?: string;
 	backgroundColour?: string;
-	filterId?: string;
 };
 
 export type PuzzleContent = {
@@ -31,23 +30,41 @@ export type PuzzleContent = {
 export type PuzzleContainer = {
 	id: string;
 	title: string;
-	variant?: 'featured' | 'standard' | 'ad';
+	variant?: 'featured' | 'standard' | 'ad' | 'supporting';
 	content: PuzzleContent;
-	filterId?: string;
 	desktopSpan?: number;
 	adSlot?: string;
+	supporting?: PuzzlesSupportingContent;
 };
 
-export type PuzzleFilter = {
-	id: string;
+export type PuzzleLink = {
 	title: string;
-	target: string;
-	backgroundColour?: string;
+	url: string;
+};
+
+export type PuzzlesNewsletter = {
+	identityName: string;
+	name: string;
+	frequency: string;
+	description: string;
+	illustrationSquare?: string;
+};
+
+export type PuzzlePopularityGroup = {
+	title: string;
+	itemIds: string[];
+};
+
+export type PuzzlesSupportingContent = {
+	usefulLinksTitle: string;
+	usefulLinks: PuzzleLink[];
+	newsletter?: PuzzlesNewsletter;
+	popularTitle: string;
+	popularGroups: PuzzlePopularityGroup[];
 };
 
 export type PuzzlesLayoutType = {
 	containers: PuzzleContainer[];
-	filters?: PuzzleFilter[];
 };
 
 export interface FEPuzzlesPageType {

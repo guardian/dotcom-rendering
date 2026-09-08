@@ -4,7 +4,6 @@ import {
 	headlineBold50,
 	palette,
 	space,
-	textSansBold14,
 } from '@guardian/source/foundations';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -17,8 +16,8 @@ import { Stuck } from './lib/stickiness';
 
 const mainStyles = css`
 	padding-bottom: ${space[12]}px;
-	background: #ffffff;
-	color: #121212;
+	background: ${palette.neutral[100]};
+	color: ${palette.neutral[7]};
 	color-scheme: light;
 `;
 
@@ -26,9 +25,9 @@ const brandStyles = css`
 	max-width: 1300px;
 	margin: 0 auto;
 	padding: ${space[6]}px ${space[3]}px ${space[8]}px;
-	border-right: 1px solid #dcdcdc;
-	border-left: 1px solid #dcdcdc;
-	background: #f1f1f1;
+	border-right: 1px solid ${palette.neutral[86]};
+	border-left: 1px solid ${palette.neutral[86]};
+	background: ${palette.neutral[97]};
 `;
 
 const titleStyles = css`
@@ -40,45 +39,6 @@ const titleStyles = css`
 
 	${from.tablet} {
 		font-size: 64px;
-	}
-`;
-
-const navStyles = css`
-	max-width: 1300px;
-	margin: 0 auto ${space[8]}px;
-	padding: 0 ${space[3]}px;
-	border-right: 1px solid #dcdcdc;
-	border-left: 1px solid #dcdcdc;
-	background: ${palette.brand[400]};
-	overflow-x: auto;
-`;
-
-const navListStyles = css`
-	display: flex;
-	min-width: max-content;
-	gap: ${space[5]}px;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-`;
-
-const navLinkStyles = css`
-	display: flex;
-	min-height: 44px;
-	align-items: center;
-	border-bottom: 4px solid transparent;
-	color: #ffffff;
-	text-decoration: none;
-	${textSansBold14};
-
-	:hover,
-	&[aria-current='location'] {
-		border-bottom-color: #ffffff;
-	}
-
-	:focus-visible {
-		outline: 3px solid #ffeb3b;
-		outline-offset: -3px;
 	}
 `;
 
@@ -134,30 +94,6 @@ export const PuzzlesLayout = ({
 						&amp; Games
 					</h1>
 				</header>
-				{puzzlesPage.layout.filters &&
-					puzzlesPage.layout.filters.length > 0 && (
-						<nav aria-label="Puzzles categories" css={navStyles}>
-							<ul css={navListStyles}>
-								{puzzlesPage.layout.filters.map(
-									(filter, index) => (
-										<li key={filter.id}>
-											<a
-												aria-current={
-													index === 0
-														? 'location'
-														: undefined
-												}
-												css={navLinkStyles}
-												href={filter.target}
-											>
-												{filter.title}
-											</a>
-										</li>
-									),
-								)}
-							</ul>
-						</nav>
-					)}
 				<PuzzlesDirectory
 					layout={puzzlesPage.layout}
 					renderAds={renderAds}

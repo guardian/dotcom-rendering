@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import { PuzzlesLayout } from './PuzzlesLayout';
 
@@ -29,33 +29,22 @@ const page = (isAdFreeUser = false) => ({
 	config: { switches: {} },
 	pageFooter: {},
 	layout: {
-		filters: [
-			{ id: 'logic', title: 'Logic', target: '#logic-puzzles' },
-			{ id: 'words', title: 'Word games', target: '#word-games' },
-		],
+		containers: [],
 	},
 });
 
 describe('PuzzlesLayout', () => {
 	const nav = { pillars: [], readerRevenueLinks: { footer: [] } } as never;
 
-	it('renders one branded page title and navigation in blueprint order', () => {
+	it('renders one branded page title without category filters', () => {
 		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
 		expect(
 			screen.getByRole('heading', { level: 1, name: 'Puzzles & Games' }),
 		).toBeInTheDocument();
 		expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
-		const navElement = screen.getByRole('navigation', {
-			name: 'Puzzles categories',
-		});
 		expect(
-			within(navElement)
-				.getAllByRole('link')
-				.map(({ textContent }) => textContent),
-		).toEqual(['Logic', 'Word games']);
-		expect(
-			within(navElement).getByRole('link', { name: 'Logic' }),
-		).toHaveAttribute('aria-current', 'location');
+			screen.queryByRole('navigation', { name: 'Puzzles categories' }),
+		).not.toBeInTheDocument();
 	});
 
 	it('keeps global chrome while respecting ad-free input', () => {

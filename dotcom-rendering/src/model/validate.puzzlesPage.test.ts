@@ -10,15 +10,11 @@ const validPage = () => ({
 	nav: {},
 	pageFooter: {},
 	layout: {
-		filters: [
-			{ id: 'word-games', title: 'Word games', target: '#word-games' },
-		],
 		containers: [
 			{
 				id: 'word-games',
 				title: 'Word games',
 				variant: 'standard',
-				filterId: 'word-games',
 				content: {
 					nestedContainers: [],
 					items: [
@@ -93,18 +89,55 @@ describe('validateAsPuzzlesPageType', () => {
 				});
 			},
 		],
-		[
-			'broken navigation target',
-			(page: ReturnType<typeof validPage>) => {
-				page.layout.filters[0]!.target = '#missing';
-			},
-		],
 	])('rejects %s', (_, mutate) => {
 		const page = validPage();
 		mutate(page);
 		expect(() => validateAsPuzzlesPageType(page)).toThrow(
 			'Unable to validate request body for puzzles page',
 		);
+	});
+
+	it('accepts supporting content with valid puzzle references', () => {
+		const page = validPage();
+		page.layout.containers.push({
+			id: 'supporting',
+			title: '',
+			variant: 'supporting',
+			adSlot: 'mostpop',
+			content: { items: [], nestedContainers: [] },
+			supporting: {
+				usefulLinksTitle: 'Useful links',
+				usefulLinks: [
+					{ title: 'Archive', url: '/puzzles/word-wheel/archive' },
+				],
+				popularTitle: 'Most popular puzzles',
+				popularGroups: [
+					{ title: 'Most played', itemIds: ['word-wheel'] },
+				],
+			},
+		} as never);
+
+		expect(validateAsPuzzlesPageType(page).layout.containers).toHaveLength(
+			2,
+		);
+	});
+
+	it('rejects supporting content which references an unknown puzzle', () => {
+		const page = validPage();
+		page.layout.containers.push({
+			id: 'supporting',
+			title: '',
+			variant: 'supporting',
+			content: { items: [], nestedContainers: [] },
+			supporting: {
+				usefulLinksTitle: 'Useful links',
+				usefulLinks: [],
+				popularTitle: 'Most popular puzzles',
+				popularGroups: [{ title: 'Most played', itemIds: ['missing'] }],
+			},
+		} as never);
+
+		expect(() => validateAsPuzzlesPageType(page)).toThrow();
 	});
 
 	it('accepts a valid top-level ad placement and rejects one nested inside content', () => {
