@@ -412,15 +412,13 @@ const getDesktopAdPositions = (
 	return adPositionsFromReducer;
 };
 
-export const getMaxFrontsAdCounts = (
-	serverSideAbTests: Record<string, string>,
-): { maxDesktopAds: number; maxMobileAds: number } => {
-	const shouldIncreaseAdLimit =
-		serverSideAbTests['commercial-fronts-ad-increase-ad-limit'] ===
-		'variant';
+export const getMaxFrontsAdCounts = (): {
+	maxDesktopAds: number;
+	maxMobileAds: number;
+} => {
 	return {
-		maxDesktopAds: shouldIncreaseAdLimit ? 16 : MAX_FRONTS_BANNER_ADS,
-		maxMobileAds: shouldIncreaseAdLimit ? 20 : MAX_FRONTS_MOBILE_ADS,
+		maxDesktopAds: MAX_FRONTS_BANNER_ADS,
+		maxMobileAds: MAX_FRONTS_MOBILE_ADS,
 	};
 };
 
