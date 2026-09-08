@@ -4,7 +4,7 @@ import {
 	headlineMedium20,
 	space,
 	textSans14,
-	textSans15,
+	textSansBold15,
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
@@ -55,23 +55,48 @@ const titleStyles = css`
 const frequencyTagStyles = css`
 	display: flex;
 	align-items: center;
+	gap: 6px;
 	color: ${themePalette('--newsletter-card-frequency-tag')};
-	${textSans15};
-	margin-left: -1px;
-	margin-top: -1px;
-	margin-bottom: ${space[1]}px;
+	${textSansBold15};
+	margin-bottom: ${space[2]}px;
+`;
+
+const frequencyTextStyles = css`
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: ${space[1]}px;
+`;
+
+const frequencyLabelStyles = css`
+	white-space: nowrap;
+`;
+
+const badgeStyles = css`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	background-color: ${themePalette('--newsletter-card-badge-background')};
 
 	svg {
-		fill: currentColor;
-		height: 20px;
-		width: 20px;
+		fill: ${themePalette('--newsletter-card-badge-icon')};
+		height: 18px;
+		width: 18px;
 	}
+`;
+
+const innerDividerStyles = css`
+	border: none;
+	border-top: 1px solid ${themePalette('--newsletter-card-divider')};
+	margin: 0 0 ${space[2]}px;
 `;
 
 const descriptionStyles = css`
 	${textSans14};
 	line-height: 1.15;
-	margin-bottom: ${space[2]}px;
 	clear: both;
 	color: ${themePalette('--newsletter-card-description')};
 `;
@@ -92,27 +117,35 @@ const illustrationStyles = css`
 const NewsletterSignupHeader = (
 	props: Omit<NewsletterSignupCardProps, 'children'>,
 ) => (
-	<div css={headerStyles}>
-		<div css={titleAndMetaStyles}>
-			<div css={frequencyTagStyles}>
+	<>
+		<div css={frequencyTagStyles}>
+			<span css={badgeStyles}>
 				<SvgNewsletterFilled />
-				Free newsletter | {props.frequency}
-			</div>
-			<p css={titleStyles}>
-				Sign up to <span>{props.name}</span>
-			</p>
-			<p css={descriptionStyles}>{props.description}</p>
+			</span>
+			<span css={frequencyTextStyles}>
+				<span css={frequencyLabelStyles}>Free newsletter |</span>
+				<span css={frequencyLabelStyles}>{props.frequency}</span>
+			</span>
 		</div>
-		{!!props.illustrationSquare && (
-			<img
-				css={illustrationStyles}
-				src={props.illustrationSquare}
-				alt=""
-				loading="lazy"
-				decoding="async"
-			/>
-		)}
-	</div>
+		<hr css={innerDividerStyles} />
+		<div css={headerStyles}>
+			<div css={titleAndMetaStyles}>
+				<p css={titleStyles}>
+					Sign up to <span>{props.name}</span>
+				</p>
+				<p css={descriptionStyles}>{props.description}</p>
+			</div>
+			{!!props.illustrationSquare && (
+				<img
+					css={illustrationStyles}
+					src={props.illustrationSquare}
+					alt=""
+					loading="lazy"
+					decoding="async"
+				/>
+			)}
+		</div>
+	</>
 );
 
 export const NewsletterSignupCard = ({
