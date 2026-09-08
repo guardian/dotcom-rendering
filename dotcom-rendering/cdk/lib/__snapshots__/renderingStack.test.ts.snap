@@ -1693,8 +1693,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "Description": "S3 bucket to store your access logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "DeployToolsAccountIdParameter": {
-      "Default": "/organisation/accounts/deployTools",
+    "ArtifactAccountIdParameter": {
+      "Default": "/organisation/accounts/artifacts",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "DistributionBucketName": {
@@ -2188,7 +2188,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                 "",
                 [
                   {
-                    "Ref": "DeployToolsAccountIdParameter",
+                    "Ref": "ArtifactAccountIdParameter",
                   },
                   ".dkr.ecr.eu-west-1.",
                   {
@@ -2413,7 +2413,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                     },
                     ":ecr:eu-west-1:",
                     {
-                      "Ref": "DeployToolsAccountIdParameter",
+                      "Ref": "ArtifactAccountIdParameter",
                     },
                     ":repository/guardian/dotcom-rendering",
                   ],
@@ -3636,6 +3636,24 @@ systemctl start tag-page-rendering",
         ],
       },
       "Type": "AWS::IAM::InstanceProfile",
+    },
+    "tagpagerenderingCpuScaling1742C101": {
+      "Properties": {
+        "PolicyName": "TagPageRenderingCODEtagpagerenderingCpuScalingAFEBC723",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "EcsServiceTaskCountTarget02FCCE22",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilizationHighResolution",
+          },
+          "ScaleInCooldown": 60,
+          "ScaleOutCooldown": 60,
+          "TargetValue": 20,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
     },
     "tagpagerenderingEcsClusterE7696595": {
       "Properties": {
