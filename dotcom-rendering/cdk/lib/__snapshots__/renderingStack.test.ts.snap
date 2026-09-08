@@ -3732,8 +3732,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       "Description": "S3 bucket to store your access logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "DeployToolsAccountIdParameter": {
-      "Default": "/organisation/accounts/deployTools",
+    "ArtifactAccountIdParameter": {
+      "Default": "/organisation/accounts/artifacts",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "DistributionBucketName": {
@@ -4330,7 +4330,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
                 "",
                 [
                   {
-                    "Ref": "DeployToolsAccountIdParameter",
+                    "Ref": "ArtifactAccountIdParameter",
                   },
                   ".dkr.ecr.eu-west-1.",
                   {
@@ -4555,7 +4555,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
                     },
                     ":ecr:eu-west-1:",
                     {
-                      "Ref": "DeployToolsAccountIdParameter",
+                      "Ref": "ArtifactAccountIdParameter",
                     },
                     ":repository/guardian/dotcom-rendering",
                   ],
