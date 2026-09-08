@@ -3,10 +3,6 @@ import type { PuzzlesLayoutType } from '../types/puzzlesPage';
 import { PuzzlesDirectory } from './PuzzlesDirectory';
 
 const layout: PuzzlesLayoutType = {
-	filters: [
-		{ id: 'crosswords', title: 'Crosswords', target: '#crosswords' },
-		{ id: 'logic', title: 'Logic', target: '#logic-puzzles' },
-	],
 	containers: [
 		{
 			id: 'featured',
@@ -85,14 +81,14 @@ const layout: PuzzlesLayoutType = {
 						backgroundColour: '#f1f1f1',
 					})),
 				],
-				archive: {
-					id: 'archive',
-					title: 'Crossword archive',
+				archiveChoices: ['Mini', 'Quick', 'Cryptic'].map((title) => ({
+					id: `archive-${title.toLowerCase()}`,
+					title,
 					type: 'crossword',
-					set: 'all',
-					cardVariant: 'archive',
-					url: '/puzzles/crosswords/archive',
-				},
+					set: title.toLowerCase(),
+					cardVariant: 'archive' as const,
+					url: `/puzzles/crosswords/archive?type=${title.toLowerCase()}`,
+				})),
 			},
 		},
 	],

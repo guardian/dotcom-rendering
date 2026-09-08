@@ -156,7 +156,7 @@ describe('PuzzlesDirectory', () => {
 		expect(screen.getByTestId('ad-2')).toBeInTheDocument();
 	});
 
-	it('renders one archive as a link and multiple archives as a keyboard-dismissible disclosure', async () => {
+	it('renders the archive dropdown and closes it with Escape or an outside click', async () => {
 		const archives = [
 			item({
 				id: 'archive-a',
@@ -178,15 +178,6 @@ describe('PuzzlesDirectory', () => {
 				layout={{
 					containers: [
 						section({
-							id: 'single',
-							title: 'Single',
-							content: {
-								items: [[item({ id: 'single-card' })]],
-								nestedContainers: [],
-								archive: archives[0],
-							},
-						}),
-						section({
 							id: 'multiple',
 							title: 'Multiple',
 							content: {
@@ -200,16 +191,18 @@ describe('PuzzlesDirectory', () => {
 				renderAds={false}
 			/>,
 		);
-		expect(
-			screen.getAllByRole('link', { name: /Archive A/ })[0],
-		).toHaveAttribute('href', '/puzzles/a');
-		const summary = screen.getByText('Puzzle archives').closest('summary');
+		const summary = screen.getByText('Multiple archive').closest('summary');
 		expect(summary).not.toBeNull();
 		fireEvent.click(summary!);
 		await waitFor(() =>
 			expect(summary!.closest('details')).toHaveAttribute('open'),
 		);
 		fireEvent.keyDown(document, { key: 'Escape' });
+		await waitFor(() =>
+			expect(summary!.closest('details')).not.toHaveAttribute('open'),
+		);
+		fireEvent.click(summary!);
+		fireEvent.mouseDown(document.body);
 		await waitFor(() =>
 			expect(summary!.closest('details')).not.toHaveAttribute('open'),
 		);

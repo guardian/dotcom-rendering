@@ -1,57 +1,75 @@
 import { css } from '@emotion/react';
-import {
-	space,
-	textSans14,
-	textSansBold14,
-} from '@guardian/source/foundations';
+import { from, palette, space, textSans14 } from '@guardian/source/foundations';
 import { useEffect, useRef } from 'react';
 import type { PuzzleItem } from '../types/puzzlesPage';
 
 type Props = {
 	archives: PuzzleItem[];
+	label?: string;
 };
 
 const getArchiveUrl = (item: PuzzleItem): string | undefined => {
-	if (item.variant === 'archive-page' && item.slug) {
-		return `/puzzles/${item.slug}/archive`;
-	}
+	const slug = item.slug;
 	if (
-		item?.url?.startsWith('/puzzles') ||
-		/^https?:\/\//.test(item.url ?? '')
+		item.variant === 'archive-page' &&
+		slug !== undefined &&
+		slug.length > 0
 	) {
-		return item.url;
+		return `/puzzles/${slug}/archive`;
+	}
+	const url = item.url;
+	if (
+		url !== undefined &&
+		(url.startsWith('/puzzles') || /^https?:\/\//.test(url))
+	) {
+		return url;
 	}
 	return undefined;
 };
 
 const wrapperStyles = css`
 	position: relative;
-	display: inline-block;
-	margin-top: ${space[3]}px;
+	display: block;
+	width: max-content;
+	margin-top: ${space[1]}px;
+	margin-left: auto;
+
+	${from.tablet} {
+		margin-left: 0;
+	}
+
+	&[open] .archive-arrow {
+		transform: rotate(90deg);
+	}
 `;
 
 const summaryStyles = css`
 	display: inline-flex;
-	min-height: 32px;
+	min-height: 44px;
 	align-items: center;
 	gap: ${space[2]}px;
-	padding: 0 ${space[2]}px;
-	border: 1px solid #121212;
-	border-radius: 18px;
-	background: #ffffff;
-	color: #121212;
+	padding: 0;
+	border: 0;
+	background: ${palette.neutral[100]};
+	color: ${palette.neutral[7]};
 	cursor: pointer;
 	list-style: none;
-	${textSansBold14};
+	${textSans14};
 
 	::-webkit-details-marker {
 		display: none;
 	}
 
 	:focus-visible {
-		outline: 3px solid #0077b6;
-		outline-offset: 2px;
+		outline: none;
+		text-decoration: underline;
+		text-decoration-thickness: 2px;
 	}
+`;
+
+const arrowStyles = css`
+	display: inline-block;
+	transition: transform 0.1s ease-out;
 `;
 
 const menuStyles = css`
@@ -59,46 +77,58 @@ const menuStyles = css`
 	z-index: 20;
 	top: calc(100% + ${space[1]}px);
 	left: 0;
-	min-width: 220px;
+	min-width: 256px;
 	margin: 0;
-	padding: ${space[1]}px 0;
-	border: 1px solid #707070;
-	background: #ffffff;
-	box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
+	padding: 0;
+	border: 1px solid ${palette.neutral[86]};
+	background: ${palette.neutral[100]};
 	list-style: none;
 `;
 
 const linkStyles = css`
-	display: block;
-	padding: ${space[2]}px ${space[3]}px;
-	color: #121212;
+	display: flex;
+	min-height: 60px;
+	align-items: center;
+	padding: 0 ${space[5]}px;
+	border-bottom: 1px solid ${palette.neutral[86]};
+	color: ${palette.neutral[7]};
 	text-decoration: none;
 	${textSans14};
 
 	:hover,
 	:focus-visible {
-		background: #e5e5e5;
+		background: ${palette.neutral[93]};
 		text-decoration: underline;
+	}
+
+	li:last-child & {
+		border-bottom: 0;
 	}
 `;
 
-export const PuzzlesArchiveMenu = ({ archives }: Props) => {
+export const PuzzlesArchiveMenu = ({
+	archives,
+	label = 'Puzzle archives',
+}: Props) => {
 	const detailsRef = useRef<HTMLDetailsElement>(null);
 	const summaryRef = useRef<HTMLElement>(null);
 
 	useEffect(() => {
 		const close = (event: MouseEvent | KeyboardEvent) => {
-			if (!detailsRef.current?.open) return;
+			const details = detailsRef.current;
+			if (details?.open !== true) {
+				return;
+			}
 			if (event instanceof KeyboardEvent && event.key !== 'Escape') {
 				return;
 			}
 			if (
 				event instanceof MouseEvent &&
-				detailsRef.current?.contains(event.target as Node)
+				details.contains(event.target as Node)
 			) {
 				return;
 			}
-			if (detailsRef.current) detailsRef.current.open = false;
+			details.open = false;
 			if (event instanceof KeyboardEvent) summaryRef.current?.focus();
 		};
 		document.addEventListener('mousedown', close);
@@ -111,16 +141,25 @@ export const PuzzlesArchiveMenu = ({ archives }: Props) => {
 
 	const validArchives = archives.flatMap((archive) => {
 		const url = getArchiveUrl(archive);
-		return url ? [{ archive, url }] : [];
+		return url !== undefined ? [{ archive, url }] : [];
 	});
-	if (validArchives.length < 2) return null;
+	if (validArchives.length < 2) {
+		return null;
+	}
 
 	return (
 		<details css={wrapperStyles} ref={detailsRef}>
 			<summary css={summaryStyles} ref={summaryRef}>
-				Puzzle archives <span aria-hidden="true">⌄</span>
+				{label}{' '}
+				<span
+					aria-hidden="true"
+					className="archive-arrow"
+					css={arrowStyles}
+				>
+					{'>'}
+				</span>
 			</summary>
-			<ul aria-label="Puzzle archives" css={menuStyles}>
+			<ul aria-label={label} css={menuStyles}>
 				{validArchives.map(({ archive, url }) => (
 					<li key={archive.id}>
 						<a
