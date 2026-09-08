@@ -3,19 +3,7 @@ import type { ConfigType } from './config';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
 
-export const puzzleCardVariants = [
-	'large',
-	'primary',
-	'compact',
-	'archive',
-] as const;
-export type PuzzleCardVariant = (typeof puzzleCardVariants)[number];
-
-export const puzzleContainerVariants = ['featured', 'standard'] as const;
-export type PuzzleContainerVariant = (typeof puzzleContainerVariants)[number];
-
-export const puzzlePageVariants = ['iframe-page', 'archive-page'] as const;
-export type PuzzlePageVariant = (typeof puzzlePageVariants)[number];
+export type PuzzleCardVariant = 'large' | 'primary' | 'compact' | 'archive';
 
 export type PuzzleItem = {
 	id: string;
@@ -28,7 +16,7 @@ export type PuzzleItem = {
 	image?: string;
 	slug?: string;
 	index?: number;
-	variant?: PuzzlePageVariant;
+	variant?: string;
 	backgroundColour?: string;
 	filterId?: string;
 };
@@ -37,14 +25,17 @@ export type PuzzleContent = {
 	items: PuzzleItem[][];
 	nestedContainers: PuzzleContainer[];
 	archive?: PuzzleItem;
+	archiveChoices?: PuzzleItem[];
 };
 
 export type PuzzleContainer = {
+	id: string;
 	title: string;
-	variant?: PuzzleContainerVariant;
+	variant?: 'featured' | 'standard' | 'ad';
 	content: PuzzleContent;
 	filterId?: string;
 	desktopSpan?: number;
+	adSlot?: string;
 };
 
 export type PuzzleFilter = {
@@ -56,7 +47,7 @@ export type PuzzleFilter = {
 
 export type PuzzlesLayoutType = {
 	containers: PuzzleContainer[];
-	filters: PuzzleFilter[];
+	filters?: PuzzleFilter[];
 };
 
 export interface FEPuzzlesPageType {
@@ -69,8 +60,8 @@ export interface FEPuzzlesPageType {
 	config: ConfigType;
 	nav: FENavType;
 	pageFooter: FooterType;
-	commercialProperties: Record<string, unknown>;
-	isAdFreeUser: boolean;
 	canonicalUrl: string;
+	isAdFreeUser: boolean;
 	layout: PuzzlesLayoutType;
+	commercialProperties?: Record<string, unknown>;
 }
