@@ -1,4 +1,4 @@
-import { assert, object, string } from "superstruct";
+import { assert, strictObject, string } from "valibot";
 
 const getEnv = (key: string): string => {
 	const value = process.env[key];
@@ -8,7 +8,7 @@ const getEnv = (key: string): string => {
 	return value;
 };
 
-const configStruct = object({
+const configStruct = strictObject({
 	serviceName: string(),
 	serviceId: string(),
 	mvtDictionaryId: string(),
@@ -19,7 +19,7 @@ const configStruct = object({
 
 const getConfigFromEnv = () => {
 	const config = JSON.parse(getEnv("FASTLY_AB_TESTING_CONFIG")) as unknown;
-	assert(config, configStruct);
+	assert(configStruct, config);
 
 	return config;
 };

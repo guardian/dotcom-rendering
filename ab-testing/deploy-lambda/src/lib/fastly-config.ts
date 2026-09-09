@@ -1,6 +1,6 @@
 import { GetParameterCommand, SSMClient } from "@aws-sdk/client-ssm";
 import { configStruct } from "@guardian/ab-testing-config/lib/config.ts";
-import { assert } from "superstruct";
+import { assert } from "valibot";
 import { REGION } from "./constants.ts";
 
 const getSecureString = async (name: string) => {
@@ -34,7 +34,7 @@ export const getFastlyConfig = async () => {
 	// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- empty string is invalid JSON too
 	const json = JSON.parse(stringParam || "{}") as unknown;
 
-	assert(json, configStruct);
+	assert(configStruct, json);
 
 	return json;
 };
