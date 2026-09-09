@@ -8,11 +8,11 @@ import {
 	textSansBold17,
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
-import { getProductLinkLabelWithoutPrice } from '../lib/affiliateLinksUtils';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { SummaryProduct } from '../types/content';
 import { ProductLinkButton } from './Button/ProductLinkButton';
+import { getProductLinkLabelWithoutPrice } from './Button/productUtils';
 import { ProductCardImage } from './ProductCardImage';
 
 const horizontalCard = css`

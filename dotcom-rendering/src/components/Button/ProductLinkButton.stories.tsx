@@ -34,3 +34,9 @@ export const WithLongLabel = {
 		label: '£10.99 for a 5 x 5 x 50cm sheet at Amazon',
 	},
 } satisfies Story;
+
+export const WithStruckThroughLabel = {
+	args: {
+		label: '~£10~ £5 at Amazon',
+	},
+} satisfies Story;

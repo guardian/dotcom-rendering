@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { article17, palette, remSpace } from '@guardian/source/foundations';
-import { getProductLinkLabelWithPrice } from '../lib/affiliateLinksUtils';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { SummaryProduct } from '../types/content';
 import { ProductLinkButton } from './Button/ProductLinkButton';
+import { getProductLinkLabelWithPrice } from './Button/productUtils';
 import { Subheading } from './Subheading';
 
 const listStyles = css`

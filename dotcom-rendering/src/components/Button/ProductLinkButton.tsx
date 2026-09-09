@@ -7,6 +7,10 @@ import type {
 import { LinkButton } from '@guardian/source/react-components';
 import { SKIMLINK_REL } from '../../lib/affiliateLinksUtils';
 import { palette } from '../../palette';
+import {
+	createAccessibleProductLabel,
+	createStrikeThroughProductLabel,
+} from './productUtils';
 import { heightAutoStyle, wrapButtonTextStyle } from './styles';
 import { getPropsForLinkUrl } from './utils';
 
@@ -34,6 +38,12 @@ const minimisePaddingStyle = css`
 	}
 	> svg {
 		margin-left: -2px;
+	}
+`;
+
+const strikeThroughStyle = css`
+	s {
+		font-weight: normal;
 	}
 `;
 
@@ -67,7 +77,7 @@ export const ProductLinkButton = ({
 
 	return (
 		<LinkButton
-			{...getPropsForLinkUrl(label)}
+			{...getPropsForLinkUrl(createAccessibleProductLabel(label))}
 			href={url}
 			rel={SKIMLINK_REL}
 			priority={priority}
@@ -82,9 +92,9 @@ export const ProductLinkButton = ({
 		>
 			<span
 				style={fullWidthText ? { width: '100%' } : {}}
-				css={wrapButtonTextStyle}
+				css={[wrapButtonTextStyle, strikeThroughStyle]}
 			>
-				{label}
+				{createStrikeThroughProductLabel(label)}
 			</span>
 		</LinkButton>
 	);
