@@ -681,12 +681,12 @@ export const AdSlot = ({
 				<AdSlotWrapper css={mobileAboveNavContainerStyles}>
 					<div
 						id="dfp-ad--mobile-above-nav"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--mobile-above-nav',
-						'ad-slot--rendered',
-					].join(' ')}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--mobile-above-nav',
+							'ad-slot--rendered',
+						].join(' ')}
 						data-link-name="ad slot mobile-above-nav"
 						data-name="mobile-above-nav"
 						data-testid="slot"
