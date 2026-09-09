@@ -70,19 +70,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-fronts-ad-increase-ad-limit",
-		description:
-			"A test to understand the impact of changing page-level ad limit on fronts",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-10",
-		type: "server",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-spacefinder-highvalue-section",
 		description:
 			"Test to measure the impact on ad density after adding to high value sections in spacefinder",
@@ -170,19 +157,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-prebid-transaction-ids",
-		description:
-			"Test to measure the impact of submitting Prebid transaction IDs",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-30",
-		type: "client",
-		status: "ON",
-		audienceSize: 50 / 100,
-		audienceSpace: "B",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "identity-and-trust-consent-rr-banner-us",
 		description:
 			"Test to measure the impact of not showing the consent RR and banner for US users",
@@ -196,8 +170,8 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "fronts-and-curation-editorial-headline-test",
-		description: "Allow editorial headline A/B tests to run on web",
+		name: "fronts-and-curation-editorial-test",
+		description: "Allow editorial A/B tests to run on web",
 		owners: [
 			"fronts.and.curation@guardian.co.uk",
 			"ab.test.mission@guardian.co.uk",
@@ -216,7 +190,7 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-09-30",
 		type: "client",
 		status: "ON",
-		audienceSize: 1 / 100,
+		audienceSize: 10 / 100,
 		audienceSpace: "B",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,

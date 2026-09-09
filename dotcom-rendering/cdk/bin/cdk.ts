@@ -97,13 +97,21 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 });
 
 /** Tag pages */
+function getImageIdentifier(): string {
+	const imageIdentifier: string | undefined = process.env.IMAGE_DIGEST;
+	if (!imageIdentifier) {
+		throw new Error('Image identifier must be provided');
+	}
+	return imageIdentifier;
+}
+
 export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 	guApp: 'tag-page-rendering',
 	stage: 'CODE',
 	domainName: 'tag-page-rendering.code.dev-guardianapis.com',
 	scaling: { minimumInstances: 1, maximumInstances: 3 },
 	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
-	imageIdentifier: process.env.IMAGE_DIGEST ?? 'DEV',
+	imageIdentifier: getImageIdentifier(),
 };
 
 new RenderingCDKStack(
@@ -142,6 +150,7 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
+	imageIdentifier: getImageIdentifier(),
 };
 
 new RenderingCDKStack(
