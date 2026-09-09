@@ -230,19 +230,19 @@ const puzzleUrl = (item: PuzzleItem): string | undefined => {
 		slug !== undefined &&
 		slug.length > 0
 	) {
-		return `/puzzles/${slug}/archive`;
+		return `/puzzles-and-games/${slug}/archive`;
 	}
 	if (
 		item.variant === 'iframe-page' &&
 		slug !== undefined &&
 		slug.length > 0
 	) {
-		return `/puzzles/${slug}`;
+		return `/puzzles-and-games/${slug}`;
 	}
 	const url = item.url;
 	if (
 		url !== undefined &&
-		(url.startsWith('/puzzles') || /^https?:\/\//.test(url))
+		(url.startsWith('/puzzles-and-games') || /^https?:\/\//.test(url))
 	) {
 		return url;
 	}

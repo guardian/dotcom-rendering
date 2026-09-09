@@ -176,7 +176,9 @@ const colour = /^#[0-9a-f]{6}$/i;
 const cardVariants = new Set(['large', 'primary', 'compact', 'archive']);
 const containerVariants = new Set(['featured', 'standard', 'ad', 'supporting']);
 const isPuzzleDestination = (url: string) =>
-	url.startsWith('/puzzles') || /^https?:\/\//.test(url);
+	url.startsWith('/puzzles-and-games') ||
+	url.startsWith('/crosswords/series/') ||
+	/^https?:\/\//.test(url);
 
 const isPuzzleItem = (data: unknown): data is PuzzleItem =>
 	isObject(data) &&

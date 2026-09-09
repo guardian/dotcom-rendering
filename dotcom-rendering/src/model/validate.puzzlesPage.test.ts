@@ -119,7 +119,10 @@ describe('validateAsPuzzlesPageType', () => {
 			supporting: {
 				usefulLinksTitle: 'Useful links',
 				usefulLinks: [
-					{ title: 'Archive', url: '/puzzles/word-wheel/archive' },
+					{
+						title: 'Archive',
+						url: '/puzzles-and-games/word-wheel/archive',
+					},
 				],
 				popularTitle: 'Most popular puzzles',
 				popularGroups: [

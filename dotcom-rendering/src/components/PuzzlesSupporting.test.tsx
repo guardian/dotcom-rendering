@@ -43,7 +43,7 @@ const layout: PuzzlesLayoutType = {
 							set: 'quick',
 							cardVariant: 'primary',
 							cadence: 'Daily',
-							url: '/puzzles/crosswords/quick/1',
+							url: '/puzzles-and-games/crosswords/quick/1',
 						},
 						{
 							id: 'wordiply',
@@ -65,7 +65,10 @@ const layout: PuzzlesLayoutType = {
 const supporting: PuzzlesSupportingContent = {
 	usefulLinksTitle: 'Useful links',
 	usefulLinks: [
-		{ title: 'Crossword archive', url: '/puzzles/crosswords/archive' },
+		{
+			title: 'Crossword archive',
+			url: '/puzzles-and-games/crosswords/archive',
+		},
 		{ title: 'Crossword blog', url: 'https://example.com/blog' },
 	],
 	newsletter: {
@@ -94,7 +97,7 @@ describe('PuzzlesSupporting', () => {
 
 		expect(
 			screen.getByRole('link', { name: 'Crossword archive' }),
-		).toHaveAttribute('href', '/puzzles/crosswords/archive');
+		).toHaveAttribute('href', '/puzzles-and-games/crosswords/archive');
 		expect(
 			screen.getByRole('link', { name: 'Crossword blog' }),
 		).toHaveAttribute('target', '_blank');

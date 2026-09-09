@@ -15,12 +15,14 @@ const getArchiveUrl = (item: PuzzleItem): string | undefined => {
 		slug !== undefined &&
 		slug.length > 0
 	) {
-		return `/puzzles/${slug}/archive`;
+		return `/puzzles-and-games/${slug}/archive`;
 	}
 	const url = item.url;
 	if (
 		url !== undefined &&
-		(url.startsWith('/puzzles') || /^https?:\/\//.test(url))
+		(url.startsWith('/puzzles-and-games') ||
+			url.startsWith('/crosswords/series/') ||
+			/^https?:\/\//.test(url))
 	) {
 		return url;
 	}

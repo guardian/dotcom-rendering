@@ -110,10 +110,10 @@ describe('PuzzlesDirectory', () => {
 	it('resolves internal and external URLs safely and never emits a hash fallback', () => {
 		expect(
 			getPuzzleUrl(item({ slug: 'word-wheel', variant: 'iframe-page' })),
-		).toBe('/puzzles/word-wheel');
+		).toBe('/puzzles-and-games/word-wheel');
 		expect(
 			getPuzzleUrl(item({ slug: 'word-wheel', variant: 'archive-page' })),
-		).toBe('/puzzles/word-wheel/archive');
+		).toBe('/puzzles-and-games/word-wheel/archive');
 		expect(getPuzzleUrl(item({ url: 'https://example.com/play' }))).toBe(
 			'https://example.com/play',
 		);
@@ -188,14 +188,14 @@ describe('PuzzlesDirectory', () => {
 				title: 'Archive A',
 				cardVariant: 'archive',
 				cadence: undefined,
-				url: '/puzzles/a',
+				url: '/crosswords/series/quick',
 			}),
 			item({
 				id: 'archive-b',
 				title: 'Archive B',
 				cardVariant: 'archive',
 				cadence: undefined,
-				url: '/puzzles/b',
+				url: '/crosswords/series/cryptic',
 			}),
 		];
 		render(
@@ -219,6 +219,10 @@ describe('PuzzlesDirectory', () => {
 		const summary = screen.getByText('Multiple archive').closest('summary');
 		expect(summary).not.toBeNull();
 		fireEvent.click(summary!);
+		expect(screen.getByRole('link', { name: 'Archive A' })).toHaveAttribute(
+			'href',
+			'/crosswords/series/quick',
+		);
 		await waitFor(() =>
 			expect(summary!.closest('details')).toHaveAttribute('open'),
 		);
