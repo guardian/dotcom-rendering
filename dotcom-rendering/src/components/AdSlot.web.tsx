@@ -106,7 +106,10 @@ const hideBelowDesktop = css`
 
 const containerMinHeight = getMinHeight(250, space[5]);
 
-const mobileAboveNavMinHeight = getMinHeight(100, space[5]);
+const mobileAboveNavMinHeight = getMinHeight(
+	adSizes.mobileLeaderboardXl.height,
+	space[5],
+);
 
 const mobileAboveNavContainerStyles = css`
 	padding-bottom: ${space[5]}px;
