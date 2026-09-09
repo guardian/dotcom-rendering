@@ -80,6 +80,7 @@ export const StaticFeatureTwo = ({
 							showQuotes={card.showQuotedHeadline}
 							starRatingSize={'medium'}
 							articleMedia={card.articleMedia}
+							headlineTestUuid={card.headlineTestUuid}
 						/>
 					</LI>
 				);

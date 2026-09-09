@@ -33,6 +33,7 @@ type Props = {
 	 * Refers to the AB test with name: fronts-and-curation-loop-click-through
 	 */
 	shouldRaiseZIndexForAbTest: boolean;
+	headlineTestUuid?: string;
 };
 
 const InternalLink = ({
@@ -40,11 +41,13 @@ const InternalLink = ({
 	headlineText,
 	dataLinkName,
 	shouldRaiseZIndexForAbTest,
+	headlineTestUuid,
 }: {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
 	shouldRaiseZIndexForAbTest: boolean;
+	headlineTestUuid?: string;
 }) => {
 	return (
 		<a
@@ -54,6 +57,9 @@ const InternalLink = ({
 				shouldRaiseZIndexForAbTest ? abTestZIndexStyles : zIndexStyles,
 			]}
 			data-link-name={dataLinkName}
+			{...(headlineTestUuid != undefined && {
+				'data-fronts-test-uuid': headlineTestUuid,
+			})}
 			aria-label={headlineText}
 		/>
 	);
@@ -64,11 +70,13 @@ const ExternalLink = ({
 	headlineText,
 	dataLinkName,
 	shouldRaiseZIndexForAbTest,
+	headlineTestUuid,
 }: {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
 	shouldRaiseZIndexForAbTest: boolean;
+	headlineTestUuid?: string;
 }) => {
 	return (
 		<a
@@ -78,6 +86,9 @@ const ExternalLink = ({
 				shouldRaiseZIndexForAbTest ? abTestZIndexStyles : zIndexStyles,
 			]}
 			data-link-name={dataLinkName}
+			{...(headlineTestUuid != undefined && {
+				'data-fronts-test-uuid': headlineTestUuid,
+			})}
 			aria-label={headlineText + ' (opens in new tab)'}
 			target="_blank"
 			rel="noreferrer"
@@ -92,6 +103,7 @@ export const CardLink = ({
 	isExternalLink,
 	isLoopAndInLoopClickTest,
 	shouldRaiseZIndexForAbTest,
+	headlineTestUuid,
 }: Props) => {
 	/**
 	 * If we are in the loop click through test, we add a unique string to the data link name
@@ -109,6 +121,7 @@ export const CardLink = ({
 					headlineText={headlineText}
 					dataLinkName={clickThroughLinkName}
 					shouldRaiseZIndexForAbTest={shouldRaiseZIndexForAbTest}
+					headlineTestUuid={headlineTestUuid}
 				/>
 			)}
 			{!isExternalLink && (
@@ -117,6 +130,7 @@ export const CardLink = ({
 					headlineText={headlineText}
 					dataLinkName={clickThroughLinkName}
 					shouldRaiseZIndexForAbTest={shouldRaiseZIndexForAbTest}
+					headlineTestUuid={headlineTestUuid}
 				/>
 			)}
 		</>
