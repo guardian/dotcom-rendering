@@ -72,7 +72,7 @@ type RightFootballProps = {
 };
 
 type RemainingProps = {
-	position: Exclude<ServerRenderedSlot, IndexedSlot> | 'mobile-above-nav';
+	position: Exclude<ServerRenderedSlot, IndexedSlot>;
 	colourScheme?: ColourScheme;
 	index?: never;
 	shouldHideReaderRevenue?: never;
