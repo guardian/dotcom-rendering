@@ -4,7 +4,7 @@ const validPage = () => ({
 	id: 'puzzles',
 	webTitle: 'Puzzles and Games',
 	editionId: 'UK',
-	canonicalUrl: 'https://www.theguardian.com/puzzles',
+	canonicalUrl: 'https://www.theguardian.com/puzzles-and-games',
 	isAdFreeUser: false,
 	config: { serverSideABTests: { 'puzzles-new-hub': 'variant' } },
 	nav: {},
