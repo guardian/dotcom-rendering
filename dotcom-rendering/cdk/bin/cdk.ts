@@ -112,7 +112,7 @@ new RenderingCDKStack(
 	TagPageRenderingPropsCODE,
 );
 
-new RenderingCDKStack(cdkApp, 'TagPageRendering-PROD', {
+export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 	guApp: 'tag-page-rendering',
 	stage: 'PROD',
 	domainName: 'tag-page-rendering.guardianapis.com',
@@ -142,7 +142,13 @@ new RenderingCDKStack(cdkApp, 'TagPageRendering-PROD', {
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
-});
+};
+
+new RenderingCDKStack(
+	cdkApp,
+	'TagPageRendering-PROD',
+	TagPageRenderingPropsPROD,
+);
 
 /** Interactive */
 new RenderingCDKStack(cdkApp, 'InteractiveRendering-CODE', {
