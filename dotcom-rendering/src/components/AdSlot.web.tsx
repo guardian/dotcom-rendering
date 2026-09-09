@@ -431,14 +431,14 @@ const mobileStickyAdStyles = css`
 		content: 'Advertisement';
 		display: block;
 		position: relative;
-		padding-left: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
-		padding-right: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
+		padding-left: calc((100% - ${adSizes.mobileLeaderboard.width}px) / 2);
+		padding-right: calc((100% - ${adSizes.mobileLeaderboard.width}px) / 2);
 		${labelBoxStyles}
 	}
 `;
 
 const crosswordBannerMobileAdStyles = css`
-	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
+	min-height: ${getMinHeight(adSizes.mobileLeaderboard.height)}px;
 `;
 
 const galleryInlineAdStyles = css`
