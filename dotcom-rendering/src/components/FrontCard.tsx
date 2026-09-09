@@ -59,6 +59,7 @@ export const FrontCard = (props: Props) => {
 		starRating: trail.starRating,
 		uniqueId: trail.uniqueId,
 		webPublicationDate: trail.webPublicationDate,
+		headlineTestUuid: trail.headlineTestUuid,
 	};
 
 	return Card({ ...defaultProps, ...cardProps });

@@ -54,6 +54,12 @@ const enhanceSupportingContent = (
 			url: decideUrl(subLink),
 			kickerText:
 				!kickerText && supportingContentIsLive ? 'Live' : kickerText,
+			// headlineTestUuid: findHeadlineTestUuid(
+			// 	subLink,
+			// 	serverSideABTests,
+			// 	isEditorialABTestingEnabled,
+			// 	pageId,
+			// ),
 		};
 	});
 };
@@ -244,6 +250,38 @@ export const decideHeadline = (
 	if (typeof variantMeta?.meta.headline !== 'string') return defaultHeadline;
 
 	return variantMeta.meta.headline;
+};
+
+/**
+ * Find the UUID of a headline test if one is running on the card
+ */
+export const findHeadlineTestUuid = (
+	faciaCard: FEFrontCard,
+	serverSideABTests: Record<string, string>,
+	isEditorialABTestingEnabled: boolean,
+	pageId?: string,
+): string | undefined => {
+	const testBucket = serverSideABTests['fronts-and-curation-editorial-test'];
+
+	const activeEditorialTest = findActiveEditorialTest(
+		faciaCard.properties.tests,
+	);
+
+	if (
+		!isEditorialABTestingEnabled ||
+		isUndefined(testBucket) ||
+		!activeEditorialTest
+	) {
+		return undefined;
+	}
+
+	const testCanRunOnPage =
+		!isUndefined(pageId) &&
+		activeEditorialTest.frontsThisTestCanRunOn.includes(pageId);
+
+	if (!testCanRunOnPage) return undefined;
+
+	return activeEditorialTest.testUuid;
 };
 
 /**
@@ -582,5 +620,11 @@ export const enhanceCards = (
 							?.allImages[0]?.fields.altText ?? '',
 				},
 			}),
+			headlineTestUuid: findHeadlineTestUuid(
+				faciaCard,
+				serverSideABTests,
+				isEditorialABTestingEnabled,
+				pageId,
+			),
 		};
 	});

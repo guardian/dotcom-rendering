@@ -407,6 +407,7 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	starRatingSize: RatingSizeType;
+	headlineTestUuid?: string;
 };
 
 export const FeatureCard = ({
@@ -445,6 +446,7 @@ export const FeatureCard = ({
 	isImmersive = false,
 	starRatingSize,
 	articleMedia,
+	headlineTestUuid,
 }: Props) => {
 	const ab = useAB();
 	const isInLoopClickTestControl = Boolean(
@@ -546,6 +548,7 @@ export const FeatureCard = ({
 							shouldRaiseZIndexForAbTest={
 								isLoopAndInLoopClickTestVariant
 							}
+							headlineTestUuid={headlineTestUuid}
 						/>
 					)}
 					<div css={contentStyles}>
@@ -768,6 +771,9 @@ export const FeatureCard = ({
 												}
 												shouldRaiseZIndexForAbTest={
 													isLoopAndInLoopClickTestVariant
+												}
+												headlineTestUuid={
+													headlineTestUuid
 												}
 											/>
 										)}
