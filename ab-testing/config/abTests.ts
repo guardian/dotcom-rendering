@@ -208,8 +208,7 @@ const ABTests: ABTest[] = [
 	},
 	{
 		name: "commercial-mobile-above-nav-test",
-		description:
-			"Test adding the mobile-above-nav ad slot to mobile and tablet pages",
+		description: "Test adding the mobile-above-nav ad slot to mobile pages",
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-10-30",
 		type: "server",
