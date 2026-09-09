@@ -14,7 +14,11 @@ import {
 import { grid } from '../../../grid';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../palette';
-import type { CustomSubnav, RenderingPage } from '../../../types/customSubnav';
+import type {
+	CustomSubnav,
+	CustomSubnavImage,
+	RenderingPage,
+} from '../../../types/customSubnav';
 
 type Props = {
 	customSubNav: CustomSubnav;
@@ -90,9 +94,6 @@ const articleHeaderStyles = css`
 	border-right: 1px solid ${themePalette('--masthead-nav-lines')};
 `;
 
-/** Served from `src/static`; temporary test assets until real images arrive in the payload. */
-const headerImageBasePath = '/static/frontend/customsubnav';
-
 /**
  * On fronts, when an image is present the subnav mirrors DirectoryPageNav: a
  * fixed-width, centred grid (blue) with the image spanning the full width on the
@@ -150,28 +151,30 @@ const imageListStyles = css`
 	}
 `;
 
-/** Temporary breakpoint-specific header images; swap for payload images later. */
-const HeaderImage = () => (
-	<picture>
-		<source
-			media={`(min-width: ${breakpoints.wide}px)`}
-			srcSet={`${headerImageBasePath}/wc-wide.png`}
-		/>
-		<source
-			media={`(min-width: ${breakpoints.desktop}px)`}
-			srcSet={`${headerImageBasePath}/wc-desktop.png`}
-		/>
-		<source
-			media={`(min-width: ${breakpoints.tablet}px)`}
-			srcSet={`${headerImageBasePath}/wc-tablet.png`}
-		/>
-		<img
-			src={`${headerImageBasePath}/wc-mobile.png`}
-			alt=""
-			css={headerImageStyles}
-		/>
-	</picture>
-);
+/** Largest breakpoints first so the <source> media queries cascade correctly. */
+const byBreakpointWidthDesc = (a: CustomSubnavImage, b: CustomSubnavImage) =>
+	breakpoints[b.breakpoint] - breakpoints[a.breakpoint];
+
+const HeaderImage = ({ images }: { images: CustomSubnavImage[] }) => {
+	const sorted = [...images].sort(byBreakpointWidthDesc);
+	/** Smallest breakpoint is the <img> fallback; the rest become <source>s. */
+	const fallback = sorted.at(-1);
+	if (!fallback) {
+		return null;
+	}
+	return (
+		<picture>
+			{sorted.slice(0, -1).map((image) => (
+				<source
+					key={image.breakpoint}
+					media={`(min-width: ${breakpoints[image.breakpoint]}px)`}
+					srcSet={image.imageSrc}
+				/>
+			))}
+			<img src={fallback.imageSrc} alt="" css={headerImageStyles} />
+		</picture>
+	);
+};
 
 /** Sets horizontal scrolling behaviour and removes the scrollbar */
 const scrollableSubNavStyles = css`
@@ -221,7 +224,11 @@ export const CustomSubNav = ({
 	hasPageSkin,
 }: Props) => {
 	const isArticle = renderingPage === 'article';
-	const hasHeaderImage = !isArticle && (customSubNav.images?.length ?? 0) > 0;
+	/** DCR receives images for all platforms; only web images are rendered here. */
+	const webImages = (customSubNav.images ?? []).filter((image) =>
+		image.platforms.includes('web'),
+	);
+	const hasHeaderImage = !isArticle && webImages.length > 0;
 
 	const linkItems = customSubNav.links.map(({ linkText, dotcomPath }) => (
 		<li key={dotcomPath} css={subnavListItemStyles}>
@@ -253,7 +260,7 @@ export const CustomSubNav = ({
 				css={imageNavStyles}
 			>
 				<div css={imageWrapperStyles}>
-					<HeaderImage />
+					<HeaderImage images={webImages} />
 					<span css={imageHeaderTextStyles}>
 						{customSubNav.header.headerText}
 					</span>

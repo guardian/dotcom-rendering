@@ -338,7 +338,10 @@ export const Titlepiece = ({
 
 	const hasCustomSubnavImage =
 		customSubnav?.renderingPage === 'front' &&
-		(customSubnav.data.images?.length ?? 0) > 0;
+		(customSubnav.data.images?.some((image) =>
+			image.platforms.includes('web'),
+		) ??
+			false);
 
 	return (
 		<Grid

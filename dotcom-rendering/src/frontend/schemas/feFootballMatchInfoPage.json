@@ -478,18 +478,41 @@
                     "type": "string"
                 },
                 "breakpoint": {
-                    "enum": [
-                        "mobile",
-                        "tablet",
-                        "web"
-                    ],
-                    "type": "string"
+                    "$ref": "#/definitions/CustomSubnavImageBreakpoint"
+                },
+                "platforms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavImagePlatform"
+                    }
                 }
             },
             "required": [
                 "breakpoint",
-                "imageSrc"
+                "imageSrc",
+                "platforms"
             ]
+        },
+        "CustomSubnavImageBreakpoint": {
+            "enum": [
+                "desktop",
+                "leftCol",
+                "mobile",
+                "mobileLandscape",
+                "mobileMedium",
+                "phablet",
+                "tablet",
+                "wide"
+            ],
+            "type": "string"
+        },
+        "CustomSubnavImagePlatform": {
+            "enum": [
+                "android",
+                "ios",
+                "web"
+            ],
+            "type": "string"
         },
         "ReaderRevenuePositions": {
             "type": "object",
