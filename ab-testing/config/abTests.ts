@@ -70,19 +70,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-fronts-ad-increase-ad-limit",
-		description:
-			"A test to understand the impact of changing page-level ad limit on fronts",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-10",
-		type: "server",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-spacefinder-highvalue-section",
 		description:
 			"Test to measure the impact on ad density after adding to high value sections in spacefinder",
