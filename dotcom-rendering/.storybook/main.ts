@@ -62,26 +62,46 @@ export default defineMain({
 				}),
 			},
 			resolve: {
-				alias: {
-					Buffer: 'buffer',
-					react: 'react',
-					'react-dom': 'react-dom',
-					// Mock JSDOM for storybook - it relies on native node.js packages
-					jsdom$: path.resolve(__dirname, './mocks/jsdom.ts'),
-					// log4js tries to call "fs" in storybook -- we can ignore it
-					[`${path.resolve(
-						__dirname,
-						'../src/server/lib/logging',
-					)}$`]: path.resolve(__dirname, './mocks/log4js.ts'),
-					// Mock BridgetApi for storybook
-					[`${path.resolve(__dirname, '../src/lib/bridgetApi')}$`]:
-						path.resolve(__dirname, './mocks/bridgetApi.ts'),
-					// Mock identity auth frontend to prevent Storybook components from hanging in Pending
-					'@guardian/identity-auth-frontend': path.resolve(
-						__dirname,
-						'./mocks/identityAuthFrontend.ts',
-					),
-				},
+				alias: [
+					// Mock imports that rely on node.js modules that are not available in the browser
+					{ find: /^Buffer$/, replacement: 'buffer' },
+					{ find: /^react$/, replacement: 'react' },
+					{ find: /^react-dom$/, replacement: 'react-dom' },
+					// Mock identity auth frontend to prevent components from hanging in pending
+					{
+						find: /^@guardian\/identity-auth-frontend$/,
+						replacement: path.resolve(
+							__dirname,
+							'./mocks/identityAuthFrontend.ts',
+						),
+					},
+					// Mock JSDOM - it relies on native node.js modules that are not available in the browser
+					{
+						find: /^jsdom$/,
+						replacement: path.resolve(
+							__dirname,
+							'./mocks/jsdom.ts',
+						),
+					},
+					// Mock custom code
+					// Be careful with the find regexes
+					// Mock logger as log4js as tries to call "fs"
+					{
+						find: /.*\/logging$/,
+						replacement: path.resolve(
+							__dirname,
+							'./mocks/log4js.ts',
+						),
+					},
+					// Mock BridgetApi
+					{
+						find: /.*bridgetApi$/,
+						replacement: path.resolve(
+							__dirname,
+							'./mocks/bridgetApi.ts',
+						),
+					},
+				],
 			},
 			// Add dependencies to pre-optimization
 			optimizeDeps: {
