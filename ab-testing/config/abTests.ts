@@ -157,19 +157,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-prebid-transaction-ids",
-		description:
-			"Test to measure the impact of submitting Prebid transaction IDs",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-30",
-		type: "client",
-		status: "ON",
-		audienceSize: 50 / 100,
-		audienceSpace: "B",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "identity-and-trust-consent-rr-banner-us",
 		description:
 			"Test to measure the impact of not showing the consent RR and banner for US users",
