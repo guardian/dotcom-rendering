@@ -436,6 +436,7 @@ export const renderElement = ({
 						elementHtml={element.html}
 						elementJs={element.js}
 						elementCss={element.css}
+						customData={element.customData}
 					/>
 				);
 			}
@@ -447,6 +448,7 @@ export const renderElement = ({
 					elementJs={element.js}
 					elementCss={element.css}
 					title={element.title}
+					customData={element.customData}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement': {
