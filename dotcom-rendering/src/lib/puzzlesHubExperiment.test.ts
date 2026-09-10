@@ -1,29 +1,34 @@
 import {
 	isPuzzlesHubEnabled,
-	puzzlesHubExperiment,
-	puzzlesHubParticipation,
+	isPuzzlesHubVariant,
 } from './puzzlesHubExperiment';
 
-describe('isPuzzlesHubEnabled', () => {
-	it('enables only the configured variant', () => {
-		expect(
-			isPuzzlesHubEnabled({
-				serverSideABTests: puzzlesHubParticipation(
-					puzzlesHubExperiment.variant,
-				),
-			}),
-		).toBe(true);
+describe('isPuzzlesHubVariant', () => {
+	it.each([
+		['control', { 'puzzles-new-hub': 'control' }],
+		['missing', {}],
+		['unknown group', { 'puzzles-new-hub': 'other' }],
+		['unrelated participation', { another: 'variant' }],
+	])('rejects %s', (_, participations) => {
+		expect(isPuzzlesHubVariant(participations)).toBe(false);
 	});
 
-	it.each([
-		puzzlesHubParticipation(puzzlesHubExperiment.control),
-		puzzlesHubParticipation('unknown'),
-		puzzlesHubParticipation('variant:extra'),
-		{},
-		{ 'another-test': 'variant' },
-	])('returns false for non-variant participation %#', (participations) => {
-		expect(isPuzzlesHubEnabled({ serverSideABTests: participations })).toBe(
-			false,
+	it('accepts only puzzles-new-hub:variant', () => {
+		expect(isPuzzlesHubVariant({ 'puzzles-new-hub': 'variant' })).toBe(
+			true,
 		);
+	});
+});
+
+describe('isPuzzlesHubEnabled', () => {
+	it('allow local development without an experiment participation', () => {
+		expect(isPuzzlesHubEnabled({}, true)).toBe(true);
+	});
+
+	it('requires the variant outside local development', () => {
+		expect(isPuzzlesHubEnabled({}, false)).toBe(false);
+		expect(
+			isPuzzlesHubEnabled({ 'puzzles-new-hub': 'variant' }, false),
+		).toBe(true);
 	});
 });
