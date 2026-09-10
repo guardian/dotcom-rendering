@@ -1,86 +1,112 @@
-import type { Breakpoint } from '@guardian/source/foundations';
-import type { ComponentProps } from 'react';
+import { log } from '@guardian/libs';
+import useSWR from 'swr';
+import { safeParse, summarize } from 'valibot';
+import { fromValibot } from '../../lib/result';
 import { ChangeBars } from './ChangeBars';
+import {
+	type ElectionComponent,
+	ElectionComponents,
+} from './electionComponent';
 import { OnwardLink } from './OnwardLink';
 import { ProgressNumber } from './ProgressNumber';
+import { Refresh } from './Refresh';
 import { SideBySide } from './SideBySide';
 import { StackedProgress } from './StackedProgress';
+import { useCountdown } from './useCountdown';
 import { ValuesWithChange } from './ValuesWithChange';
 import { Versus } from './Versus';
 
 type Props = {
-	components: Component[];
+	/**
+	 * The URL from which to retrieve the election data via
+	 * {@linkcode Props.getElectionData|getElectionData}.
+	 */
+	electionDataUrl: URL;
+	/**
+	 * A potentially side-effectful function used to retrieve election data from
+	 * the given URL. The result is a JS object of unknown shape.
+	 */
+	getElectionData: (url: string) => Promise<unknown>;
+	/**
+	 * The initial election data, available on the server before client-side
+	 * polling begins.
+	 */
+	initialData: ElectionComponent[];
+	/**
+	 * How often to update the data, in seconds.
+	 */
+	refreshInterval: number;
 };
 
-type Component = Layout | ElectionElement;
+export const ElectionTracker = (props: Props) => {
+	const [remaining, reset] = useCountdown(props.refreshInterval);
+	const { data, error } = useSWR<ElectionComponent[], Error>(
+		props.electionDataUrl.toString(),
+		fetcher(props.getElectionData),
+		{
+			errorRetryCount: 1,
+			refreshInterval: props.refreshInterval * 1_000,
+			fallbackData: props.initialData,
+			onSuccess: reset,
+		},
+	);
 
-type Layout = {
-	kind: 'sideBySide';
-	from: Breakpoint;
-	left: {
-		heading: string;
-		children: ElectionElement[];
-	};
-	right: {
-		heading: string;
-		children: ElectionElement[];
-	};
+	const components =
+		error !== undefined || data === undefined ? props.initialData : data;
+
+	return (
+		<>
+			<Refresh remaining={remaining} />
+			<Components components={components} />
+		</>
+	);
 };
 
-type ElectionElement =
-	| {
-			kind: 'changeBars';
-			props: ComponentProps<typeof ChangeBars>;
-	  }
-	| {
-			kind: 'onwardLink';
-			props: ComponentProps<typeof OnwardLink>;
-	  }
-	| {
-			kind: 'progressNumber';
-			props: ComponentProps<typeof ProgressNumber>;
-	  }
-	| {
-			kind: 'stackedProgress';
-			props: ComponentProps<typeof StackedProgress>;
-	  }
-	| {
-			kind: 'valuesWithChange';
-			props: ComponentProps<typeof ValuesWithChange>;
-	  }
-	| {
-			kind: 'versus';
-			props: ComponentProps<typeof Versus>;
-	  };
+const fetcher = (getElectionData: Props['getElectionData']) => (url: string) =>
+	getElectionData(url)
+		.then(parseElectionData)
+		.then((result) => {
+			if (!result.ok) {
+				log('dotcom', result.error);
+				throw new Error(summarize(result.error));
+			} else {
+				return result.value;
+			}
+		})
+		.catch(() => {
+			log('dotcom', 'Failed to fetch election data json');
+			throw new Error();
+		});
 
-export const ElectionTracker = (props: Props) => (
+const parseElectionData = (data: unknown) =>
+	fromValibot(safeParse(ElectionComponents, data)).map(
+		(value) => value.components,
+	);
+
+const Components = ({ components }: { components: ElectionComponent[] }) => (
 	<>
-		{props.components.map((component) => (
-			<ElectionComponent key={component.kind} component={component} />
+		{components.map((component) => (
+			<Component key={component.kind} component={component} />
 		))}
 	</>
 );
 
-const ElectionComponent = ({ component }: { component: Component }) => {
+const Component = ({ component }: { component: ElectionComponent }) => {
 	switch (component.kind) {
 		case 'sideBySide':
 			return (
 				<SideBySide
-					from={component.from}
+					from="tablet"
 					left={{
 						heading: component.left.heading,
 						children: (
-							<ElectionTracker
-								components={component.left.children}
-							/>
+							<Components components={component.left.children} />
 						),
 					}}
 					right={{
 						heading: component.right.heading,
 						children: (
-							<ElectionTracker
-								components={component.right.children}
-							/>
+							<Components components={component.right.children} />
 						),
 					}}
 				/>
