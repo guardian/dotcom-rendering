@@ -2,7 +2,7 @@ import { validateAsPuzzlesPageType } from './validate';
 
 const validPage = () => ({
 	id: 'puzzles',
-	webTitle: 'Puzzles and Games',
+	webTitle: 'Puzzles and games',
 	editionId: 'UK',
 	canonicalUrl: 'https://www.theguardian.com/puzzles-and-games',
 	isAdFreeUser: false,

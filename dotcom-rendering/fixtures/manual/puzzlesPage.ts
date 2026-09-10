@@ -66,7 +66,7 @@ export const createPuzzlesPage = (
 	editionId: Standard.editionId,
 	editionLongForm: Standard.editionLongForm,
 	contributionsServiceUrl: Standard.contributionsServiceUrl,
-	webTitle: 'Puzzles & Games',
+	webTitle: 'Puzzles and games',
 	description: 'Play the Guardian’s daily puzzles and games.',
 	config: {
 		...Standard.config,
@@ -77,7 +77,7 @@ export const createPuzzlesPage = (
 	pageFooter: Standard.pageFooter,
 	commercialProperties: Standard.commercialProperties,
 	isAdFreeUser: false,
-	canonicalUrl: 'https://www.theguardian.com/puzzles',
+	canonicalUrl: 'https://www.theguardian.com/puzzles-and-games',
 	layout: minimalPuzzlesLayout,
 	...overrides,
 });
