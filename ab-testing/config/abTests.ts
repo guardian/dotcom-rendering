@@ -206,6 +206,19 @@ const ABTests: ABTest[] = [
 		groups: ["enable"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "commercial-rich-links",
+		description:
+			"Test to measure the impact of fixing rich links insert behaviour and reduced restrictions on ad insertion around rich links.",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-28",
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
