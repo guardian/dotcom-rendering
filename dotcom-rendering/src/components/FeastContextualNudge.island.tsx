@@ -373,6 +373,17 @@ export const FeastContextualNudge = ({
 				</div>
 			);
 		}
+
+		// A signed-in reader with no Braze banner for this placement is (by
+		// definition) not part of any Canvas targeting this nudge. Rather
+		// than falling back to the generic native "Download the app" card —
+		// which isn't personalised and could be shown to a reader who has
+		// been deliberately excluded from Feast messaging — show nothing.
+		// Signed-out/pending readers aren't Braze-targetable at all, so they
+		// still fall through to the native nudge below.
+		if (authStatus.kind === 'SignedIn') {
+			return null;
+		}
 	}
 
 	return (
