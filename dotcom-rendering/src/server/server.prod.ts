@@ -19,7 +19,7 @@ import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
-import { handleGamePage } from './handler.gamePage.web';
+import { handlePuzzlePage } from './handler.puzzlePage.web';
 import { handlePuzzlesPage } from './handler.puzzlesPage.web';
 import {
 	handleAppsFootballMatchPage,
@@ -73,7 +73,7 @@ export const prodServer = (): void => {
 	app.post('/Front', handleFront);
 	app.post('/TagPage', handleTagPage);
 	app.post('/PuzzlesPage', handlePuzzlesPage);
-	app.post('/GamePage', handleGamePage);
+	app.post('/PuzzlePage', handlePuzzlePage);
 	app.post('/FootballMatchListPage', handleFootballMatchListPage);
 	app.post('/FootballTablesPage', handleFootballTablesPage);
 	app.post('/FootballMatchSummaryPage', handleFootballMatchPage);

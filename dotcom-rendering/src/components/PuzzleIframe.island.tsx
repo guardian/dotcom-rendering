@@ -14,10 +14,10 @@ const frameStyles = css`
 
 /**
  * Generic sandboxed iframe wrapper for third-party (or in-house, non-React)
- * puzzle/game providers, such as AmuseLabs-hosted games or bespoke providers
- * like wordiply.com. Used for any `GameConfig` with `renderMode: 'iframe'`.
+ * puzzle providers, such as AmuseLabs-hosted puzzles or bespoke providers
+ * like wordiply.com. Used for every `PuzzleConfig` entry (all iframe-based).
  */
-export const GameIframe = ({ src, title }: Props) => (
+export const PuzzleIframe = ({ src, title }: Props) => (
 	<iframe
 		css={frameStyles}
 		src={src}

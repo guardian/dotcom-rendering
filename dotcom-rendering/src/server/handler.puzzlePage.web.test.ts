@@ -1,13 +1,13 @@
 import type { Request, Response } from 'express';
-import { createGamePage } from '../../fixtures/manual/gamePage';
-import { handleGamePage } from './handler.gamePage.web';
-import { renderGamePage } from './render.gamePage.web';
+import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { handlePuzzlePage } from './handler.puzzlePage.web';
+import { renderPuzzlePage } from './render.puzzlePage.web';
 
-jest.mock('./render.gamePage.web', () => ({
-	renderGamePage: jest.fn(),
+jest.mock('./render.puzzlePage.web', () => ({
+	renderPuzzlePage: jest.fn(),
 }));
 
-const mockedRenderGamePage = jest.mocked(renderGamePage);
+const mockedRenderPuzzlePage = jest.mocked(renderPuzzlePage);
 
 const response = () => {
 	const res = {
@@ -24,27 +24,33 @@ const response = () => {
 };
 
 const invokeHandler = (body: unknown, res: ReturnType<typeof response>) =>
-	handleGamePage({ body } as Request, res as unknown as Response, jest.fn());
+	handlePuzzlePage(
+		{ body } as Request,
+		res as unknown as Response,
+		jest.fn(),
+	);
 
-describe('handleGamePage', () => {
+describe('handlePuzzlePage', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
-		mockedRenderGamePage.mockReturnValue({
-			html: '<html>Game</html>',
+		mockedRenderPuzzlePage.mockReturnValue({
+			html: '<html>Puzzle</html>',
 			prefetchScripts: ['/assets/index.js'],
 		});
 	});
 
 	it('renders the page for a known slug regardless of serverSideABTests', () => {
 		const res = response();
-		const page = createGamePage('sudoku-easy');
+		const page = createPuzzlePage('sudoku-easy');
 
 		invokeHandler(page, res);
 
-		expect(mockedRenderGamePage).toHaveBeenCalledWith({
-			gamePage: {
+		expect(mockedRenderPuzzlePage).toHaveBeenCalledWith({
+			puzzlePage: {
 				...page,
-				gameConfig: expect.objectContaining({ slug: 'sudoku-easy' }),
+				puzzleConfig: expect.objectContaining({
+					slug: 'sudoku-easy',
+				}),
 			},
 		});
 		expect(res.status).toHaveBeenCalledWith(200);
@@ -52,7 +58,7 @@ describe('handleGamePage', () => {
 			'Link',
 			expect.stringContaining('/assets/index.js'),
 		);
-		expect(res.send).toHaveBeenCalledWith('<html>Game</html>');
+		expect(res.send).toHaveBeenCalledWith('<html>Puzzle</html>');
 	});
 
 	it.each([
@@ -69,11 +75,11 @@ describe('handleGamePage', () => {
 		'film-reveal',
 	])('renders iframe-based slug %s', (slug) => {
 		const res = response();
-		const page = createGamePage(slug);
+		const page = createPuzzlePage(slug);
 
 		invokeHandler(page, res);
 
-		expect(mockedRenderGamePage).toHaveBeenCalled();
+		expect(mockedRenderPuzzlePage).toHaveBeenCalled();
 		expect(res.status).toHaveBeenCalledWith(200);
 	});
 
@@ -84,9 +90,9 @@ describe('handleGamePage', () => {
 		'renders the page regardless of serverSideABTests content (%s)',
 		(_, serverSideABTests) => {
 			const res = response();
-			const page = createGamePage('sudoku-easy', {
+			const page = createPuzzlePage('sudoku-easy', {
 				config: {
-					...createGamePage('sudoku-easy').config,
+					...createPuzzlePage('sudoku-easy').config,
 					serverSideABTests,
 				},
 			});
@@ -94,30 +100,29 @@ describe('handleGamePage', () => {
 			invokeHandler(page, res);
 
 			expect(res.status).toHaveBeenCalledWith(200);
-			expect(mockedRenderGamePage).toHaveBeenCalled();
+			expect(mockedRenderPuzzlePage).toHaveBeenCalled();
 		},
 	);
 
 	it('returns 404 for an unknown slug', () => {
 		const res = response();
-		const page = createGamePage('sudoku-easy');
-		page.slug = 'not-a-real-game';
+		const page = createPuzzlePage('sudoku-easy');
+		page.slug = 'not-a-real-puzzle';
 
 		invokeHandler(page, res);
 
 		expect(res.sendStatus).toHaveBeenCalledWith(404);
-		expect(mockedRenderGamePage).not.toHaveBeenCalled();
+		expect(mockedRenderPuzzlePage).not.toHaveBeenCalled();
 	});
 
 	it('rejects an invalid payload without invoking the renderer', () => {
 		const res = response();
-		const invalidPage = createGamePage('sudoku-easy') as unknown as Record<
-			string,
-			unknown
-		>;
+		const invalidPage = createPuzzlePage(
+			'sudoku-easy',
+		) as unknown as Record<string, unknown>;
 		delete invalidPage.instance;
 
 		expect(() => invokeHandler(invalidPage, res)).toThrow(TypeError);
-		expect(mockedRenderGamePage).not.toHaveBeenCalled();
+		expect(mockedRenderPuzzlePage).not.toHaveBeenCalled();
 	});
 });

@@ -1,5 +1,5 @@
-import { gameConfigs } from '../../src/model/games/gameConfigs';
-import type { FEGamePageType } from '../../src/types/gamePage';
+import { puzzleConfigs } from '../../src/model/puzzles/puzzleConfigs';
+import type { FEPuzzlePageType } from '../../src/types/puzzlePage';
 import type { PuzzleItem } from '../../src/types/puzzlesPage';
 import { Standard } from '../generated/fe-articles/Standard';
 
@@ -25,31 +25,32 @@ const sampleMoreFromPuzzlesAndGames: PuzzleItem[] = [
 ];
 
 /**
- * Builds a `FEGamePageType` fixture for the given `slug`, defaulting to a
- * generic instance for that slug's `GameConfig`. Pass `overrides` to
+ * Builds a `FEPuzzlePageType` fixture for the given `slug`, defaulting to a
+ * generic instance for that slug's `PuzzleConfig`. Pass `overrides` to
  * customise individual fields (deep-merged only one level for `instance`).
  */
-export const createGamePage = (
+export const createPuzzlePage = (
 	slug: string,
-	overrides: Partial<FEGamePageType> = {},
-): FEGamePageType => {
-	const gameConfig = gameConfigs[slug];
+	overrides: Partial<FEPuzzlePageType> = {},
+): FEPuzzlePageType => {
+	const puzzleConfig = puzzleConfigs[slug];
 
-	if (!gameConfig) {
-		throw new Error(`Unknown game slug in fixture: ${slug}`);
+	if (!puzzleConfig) {
+		throw new Error(`Unknown puzzle slug in fixture: ${slug}`);
 	}
 
 	return {
-		id: `game-page-${slug}`,
+		id: `puzzle-page-${slug}`,
 		slug,
 		webTitle: `${slug} | The Guardian`,
 		config: {
 			...Standard.config,
 			contentType: 'Game',
-			// DCR no longer gates /GamePage on any AB test participation (the
-			// former 'game-page-experiment' gate was removed; routes will be
-			// mapped/exposed via a different project instead), so this is left
-			// empty rather than implying any particular value is required.
+			// DCR no longer gates /PuzzlePage on any AB test participation
+			// (the former 'game-page-experiment' gate was removed; routes
+			// will be mapped/exposed via a different project instead), so
+			// this is left empty rather than implying any particular value
+			// is required.
 			serverSideABTests: {},
 		},
 		nav: Standard.nav,
@@ -65,9 +66,9 @@ export const createGamePage = (
 };
 
 /** One fixture per supported slug, for local dev preview and tests. */
-export const gamePageFixtures: Record<string, FEGamePageType> = Object.keys(
-	gameConfigs,
-).reduce<Record<string, FEGamePageType>>((acc, slug) => {
-	acc[slug] = createGamePage(slug);
+export const puzzlePageFixtures: Record<string, FEPuzzlePageType> = Object.keys(
+	puzzleConfigs,
+).reduce<Record<string, FEPuzzlePageType>>((acc, slug) => {
+	acc[slug] = createPuzzlePage(slug);
 	return acc;
 }, {});

@@ -1,6 +1,9 @@
 import { Global } from '@emotion/react';
 import { StrictMode } from 'react';
-import { GameLayout, type ResolvedGamePage } from '../layouts/GameLayout';
+import {
+	PuzzlePageLayout,
+	type ResolvedPuzzlePage,
+} from '../layouts/PuzzlePageLayout';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import type { NavType } from '../model/extract-nav';
@@ -14,11 +17,11 @@ import { SetABTests } from './SetABTests.island';
 import { SkipTo } from './SkipTo';
 
 type Props = {
-	gamePage: ResolvedGamePage;
+	puzzlePage: ResolvedPuzzlePage;
 	NAV: NavType;
 };
 
-export const GamePage = ({ gamePage, NAV }: Props) => {
+export const PuzzlePage = ({ puzzlePage, NAV }: Props) => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
@@ -43,16 +46,16 @@ export const GamePage = ({ gamePage, NAV }: Props) => {
 			<Island priority="critical">
 				<Metrics
 					commercialMetricsEnabled={
-						!!gamePage.config.switches.commercialMetrics
+						!!puzzlePage.config.switches.commercialMetrics
 					}
 				/>
 			</Island>
 			<Island priority="critical">
 				<SetABTests
-					serverSideABTests={gamePage.config.serverSideABTests}
+					serverSideABTests={puzzlePage.config.serverSideABTests}
 				/>
 			</Island>
-			<GameLayout gamePage={gamePage} NAV={NAV} />
+			<PuzzlePageLayout puzzlePage={puzzlePage} NAV={NAV} />
 		</StrictMode>
 	);
 };

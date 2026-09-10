@@ -1,13 +1,13 @@
 import {
-	gameConfigs,
-	getGameConfig,
+	getPuzzleConfig,
+	puzzleConfigs,
 	resolveIframeUrl,
-	validateGameConfigs,
-} from './gameConfigs';
+	validatePuzzleConfigs,
+} from './puzzleConfigs';
 
-describe('gameConfigs registry', () => {
+describe('puzzleConfigs registry', () => {
 	it('has an entry for every documented slug', () => {
-		expect(Object.keys(gameConfigs).sort()).toEqual(
+		expect(Object.keys(puzzleConfigs).sort()).toEqual(
 			[
 				'codeword',
 				'film-reveal',
@@ -25,25 +25,25 @@ describe('gameConfigs registry', () => {
 	});
 
 	it('does not throw for the current registry', () => {
-		expect(() => validateGameConfigs(gameConfigs)).not.toThrow();
+		expect(() => validatePuzzleConfigs(puzzleConfigs)).not.toThrow();
 	});
 
 	it('rejects a registry entry whose slug does not match its key', () => {
 		expect(() =>
-			validateGameConfigs({
-				...gameConfigs,
-				wordiply: { ...gameConfigs.wordiply!, slug: 'not-wordiply' },
+			validatePuzzleConfigs({
+				...puzzleConfigs,
+				wordiply: { ...puzzleConfigs.wordiply!, slug: 'not-wordiply' },
 			}),
 		).toThrow(TypeError);
 	});
 
-	it('rejects an entry with an unknown gameGroup', () => {
+	it('rejects an entry with an unknown puzzleGroup', () => {
 		expect(() =>
-			validateGameConfigs({
-				...gameConfigs,
+			validatePuzzleConfigs({
+				...puzzleConfigs,
 				wordiply: {
-					...gameConfigs.wordiply!,
-					gameGroup: 'not-a-real-group' as never,
+					...puzzleConfigs.wordiply!,
+					puzzleGroup: 'not-a-real-group' as never,
 				},
 			}),
 		).toThrow(TypeError);
@@ -51,12 +51,12 @@ describe('gameConfigs registry', () => {
 
 	it('rejects an entry with an empty iframe urlTemplate', () => {
 		expect(() =>
-			validateGameConfigs({
-				...gameConfigs,
+			validatePuzzleConfigs({
+				...puzzleConfigs,
 				wordiply: {
-					...gameConfigs.wordiply!,
+					...puzzleConfigs.wordiply!,
 					iframe: {
-						...gameConfigs.wordiply!.iframe,
+						...puzzleConfigs.wordiply!.iframe,
 						urlTemplate: '',
 					},
 				},
@@ -64,27 +64,27 @@ describe('gameConfigs registry', () => {
 		).toThrow(TypeError);
 	});
 
-	describe('getGameConfig', () => {
+	describe('getPuzzleConfig', () => {
 		it('returns the config for a known slug', () => {
-			expect(getGameConfig('sudoku-easy')?.gameGroup).toBe(
+			expect(getPuzzleConfig('sudoku-easy')?.puzzleGroup).toBe(
 				'logic-puzzles',
 			);
 		});
 
 		it('returns undefined for an unknown slug', () => {
-			expect(getGameConfig('not-a-real-game')).toBeUndefined();
+			expect(getPuzzleConfig('not-a-real-puzzle')).toBeUndefined();
 		});
 	});
 
 	describe('resolveIframeUrl', () => {
 		it('substitutes the slug into the AmuseLabs URL template', () => {
-			expect(resolveIframeUrl(gameConfigs['sudoku-easy']!)).toBe(
+			expect(resolveIframeUrl(puzzleConfigs['sudoku-easy']!)).toBe(
 				'https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-easy&embed=1&idx=1',
 			);
 		});
 
 		it('returns the bespoke provider URL unchanged when it has no placeholder', () => {
-			expect(resolveIframeUrl(gameConfigs.wordiply!)).toBe(
+			expect(resolveIframeUrl(puzzleConfigs.wordiply!)).toBe(
 				'https://www.wordiply.com/',
 			);
 		});

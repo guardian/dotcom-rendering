@@ -7,38 +7,41 @@ import {
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
-import { GameIframe } from '../components/GameIframe.island';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
+import { PuzzleIframe } from '../components/PuzzleIframe.island';
 import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.island';
 import { SubNav } from '../components/SubNav.island';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
-import { type GameConfig, resolveIframeUrl } from '../model/games/gameConfigs';
+import {
+	type PuzzleConfig,
+	resolveIframeUrl,
+} from '../model/puzzles/puzzleConfigs';
 import { palette as themePalette } from '../palette';
-import type { FEGamePageType } from '../types/gamePage';
+import type { FEPuzzlePageType } from '../types/puzzlePage';
 
 /**
- * A fresh, self-contained layout for generic Game pages. It intentionally
+ * A fresh, self-contained layout for generic Puzzle Pages. It intentionally
  * does not reuse Article-domain composite components (`ArticleMeta`,
  * `ArticleTitle`, `ArticleBody`) as those require a full `ArticleFormat` +
  * `TagType[]` + branding/podcast/avatar machinery that doesn't apply to a
- * generic game page. It does directly reuse existing generic building
+ * generic puzzle page. It does directly reuse existing generic building
  * blocks (Masthead, Section, Footer, AdSlot, ShareButton.island) rather than
  * duplicating them.
  *
- * Game Page is scoped to iframe-based games only — crosswords remain on
+ * Puzzle Page is scoped to iframe-based puzzles only — crosswords remain on
  * their existing, separate `/crosswords/*` flow
  * (`ArticleDesign.Crossword` / `src/layouts/CrosswordLayout.tsx`), which is
  * unrelated to this layout. There is accordingly no setter byline, PDF
- * link, or comments rendering here — none of the current `GameConfig`
+ * link, or comments rendering here — none of the current `PuzzleConfig`
  * registry entries have any equivalent concept.
  */
 
-const gameGroupLabels: Record<GameConfig['gameGroup'], string> = {
+const puzzleGroupLabels: Record<PuzzleConfig['puzzleGroup'], string> = {
 	crosswords: 'Crosswords',
 	'logic-puzzles': 'Logic puzzles',
 	'word-games': 'Word games',
@@ -47,14 +50,14 @@ const gameGroupLabels: Record<GameConfig['gameGroup'], string> = {
 
 /**
  * `ShareButton.island` only needs an `ArticleFormat` to branch a handful of
- * minor style decisions (e.g. LiveBlog-specific spacing). Game pages have no
- * equivalent concept, so a minimal, fixed format value is used to satisfy
+ * minor style decisions (e.g. LiveBlog-specific spacing). Puzzle pages have
+ * no equivalent concept, so a minimal, fixed format value is used to satisfy
  * its prop contract without fabricating article-specific data (tags,
  * branding, etc.). This is read-only reuse of existing exported enum
  * values — it does not modify `articleFormat.ts` or any crossword decision
  * logic.
  */
-const gamePageFormat = {
+const puzzlePageFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
 	theme: Pillar.News,
@@ -134,30 +137,36 @@ const relatedRailHeading = css`
 `;
 
 /**
- * The `/GamePage` handler resolves and validates the `GameConfig` for the
- * request's `slug` before rendering; it is passed alongside the raw payload
- * rather than re-derived here so `GameLayout` has a single, already-narrowed
- * source of truth for rendering decisions.
+ * The `/PuzzlePage` handler resolves and validates the `PuzzleConfig` for
+ * the request's `slug` before rendering; it is passed alongside the raw
+ * payload rather than re-derived here so `PuzzlePageLayout` has a single,
+ * already-narrowed source of truth for rendering decisions.
  */
-export type ResolvedGamePage = FEGamePageType & { gameConfig: GameConfig };
+export type ResolvedPuzzlePage = FEPuzzlePageType & {
+	puzzleConfig: PuzzleConfig;
+};
 
-const GameContent = ({ gamePage }: { gamePage: ResolvedGamePage }) => {
-	const { instance, gameConfig } = gamePage;
+const PuzzlePageContent = ({
+	puzzlePage,
+}: {
+	puzzlePage: ResolvedPuzzlePage;
+}) => {
+	const { instance, puzzleConfig } = puzzlePage;
 
 	return (
 		<Island priority="critical" defer={{ until: 'visible' }}>
-			<GameIframe
-				src={resolveIframeUrl(gameConfig)}
+			<PuzzleIframe
+				src={resolveIframeUrl(puzzleConfig)}
 				title={instance.title}
 			/>
 		</Island>
 	);
 };
 
-const RelatedGamesRail = ({
+const RelatedPuzzlesRail = ({
 	items,
 }: {
-	items: NonNullable<FEGamePageType['instance']['moreFromPuzzlesAndGames']>;
+	items: NonNullable<FEPuzzlePageType['instance']['moreFromPuzzlesAndGames']>;
 }) => (
 	<div css={relatedRailStyles}>
 		<h2 css={relatedRailHeading}>More from Puzzles &amp; games</h2>
@@ -176,17 +185,17 @@ const RelatedGamesRail = ({
 );
 
 interface Props {
-	gamePage: ResolvedGamePage;
+	puzzlePage: ResolvedPuzzlePage;
 	NAV: NavType;
 }
 
-export const GameLayout = ({ gamePage, NAV }: Props) => {
-	const { config, instance, editionId, gameConfig } = gamePage;
+export const PuzzlePageLayout = ({ puzzlePage, NAV }: Props) => {
+	const { config, instance, editionId, puzzleConfig } = puzzlePage;
 
-	const showShare = gameConfig.shareEnabled;
-	const showPrint = gameConfig.printEnabled;
+	const showShare = puzzleConfig.shareEnabled;
+	const showPrint = puzzleConfig.printEnabled;
 	const showRelated = !!instance.moreFromPuzzlesAndGames?.length;
-	const labelText = gameGroupLabels[gameConfig.gameGroup];
+	const labelText = puzzleGroupLabels[puzzleConfig.puzzleGroup];
 
 	return (
 		<>
@@ -213,14 +222,14 @@ export const GameLayout = ({ gamePage, NAV }: Props) => {
 					showSlimNav={false}
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
-					pageId={gamePage.id}
+					pageId={puzzlePage.id}
 					tagIds={[]}
 					sectionId={config.section}
 					contentType="Game"
 				/>
 			</div>
 
-			<main data-layout="GameLayout">
+			<main data-layout="PuzzlePageLayout">
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -239,9 +248,9 @@ export const GameLayout = ({ gamePage, NAV }: Props) => {
 							<div css={metaRow}>
 								{showShare && (
 									<ShareButton
-										pageId={gamePage.id}
-										webTitle={gamePage.webTitle}
-										format={gamePageFormat}
+										pageId={puzzlePage.id}
+										webTitle={puzzlePage.webTitle}
+										format={puzzlePageFormat}
 										context="ArticleMeta"
 									/>
 								)}
@@ -249,7 +258,7 @@ export const GameLayout = ({ gamePage, NAV }: Props) => {
 							</div>
 						</GridItem>
 						<GridItem area="body" element="article">
-							<GameContent gamePage={gamePage} />
+							<PuzzlePageContent puzzlePage={puzzlePage} />
 						</GridItem>
 					</div>
 				</Section>
@@ -276,7 +285,7 @@ export const GameLayout = ({ gamePage, NAV }: Props) => {
 						showTopBorder={false}
 						backgroundColour={themePalette('--article-background')}
 					>
-						<RelatedGamesRail
+						<RelatedPuzzlesRail
 							items={instance.moreFromPuzzlesAndGames ?? []}
 						/>
 					</Section>
@@ -329,7 +338,7 @@ export const GameLayout = ({ gamePage, NAV }: Props) => {
 				element="footer"
 			>
 				<Footer
-					pageFooter={gamePage.pageFooter}
+					pageFooter={puzzlePage.pageFooter}
 					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={NAV.readerRevenueLinks.footer}

@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { createGamePage } from '../../fixtures/manual/gamePage';
+import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import { extractNAV } from '../model/extract-nav';
-import { getGameConfig } from '../model/games/gameConfigs';
-import { GameLayout } from './GameLayout';
+import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
+import { PuzzlePageLayout } from './PuzzlePageLayout';
 
 jest.mock('../lib/bridgetApi', () => jest.fn());
 jest.mock('../lib/useMatchMedia', () => ({
@@ -11,13 +11,13 @@ jest.mock('../lib/useMatchMedia', () => ({
 	useMatchMedia: jest.fn(() => true),
 }));
 
-const renderGameLayout = (
+const renderPuzzlePageLayout = (
 	slug: string,
-	overrides: Parameters<typeof createGamePage>[1] = {},
+	overrides: Parameters<typeof createPuzzlePage>[1] = {},
 ) => {
-	const gamePage = createGamePage(slug, overrides);
-	const gameConfig = getGameConfig(slug);
-	if (!gameConfig) throw new Error(`missing config for ${slug}`);
+	const puzzlePage = createPuzzlePage(slug, overrides);
+	const puzzleConfig = getPuzzleConfig(slug);
+	if (!puzzleConfig) throw new Error(`missing config for ${slug}`);
 
 	return render(
 		<ConfigProvider
@@ -28,17 +28,17 @@ const renderGameLayout = (
 				editionId: 'UK',
 			}}
 		>
-			<GameLayout
-				gamePage={{ ...gamePage, gameConfig }}
-				NAV={extractNAV(gamePage.nav)}
+			<PuzzlePageLayout
+				puzzlePage={{ ...puzzlePage, puzzleConfig }}
+				NAV={extractNAV(puzzlePage.nav)}
 			/>
 		</ConfigProvider>,
 	);
 };
 
-describe('GameLayout', () => {
+describe('PuzzlePageLayout', () => {
 	it('renders the page title', () => {
-		renderGameLayout('sudoku-easy');
+		renderPuzzlePageLayout('sudoku-easy');
 
 		expect(
 			screen.getByRole('heading', {
@@ -48,8 +48,8 @@ describe('GameLayout', () => {
 		).toBeInTheDocument();
 	});
 
-	it('renders the gameGroup label as plain, non-linked text', () => {
-		renderGameLayout('sudoku-easy');
+	it('renders the puzzleGroup label as plain, non-linked text', () => {
+		renderPuzzlePageLayout('sudoku-easy');
 
 		expect(
 			screen.queryByRole('link', { name: 'Logic puzzles' }),
@@ -58,7 +58,7 @@ describe('GameLayout', () => {
 	});
 
 	it('renders a "More from Puzzles & games" rail when moreFromPuzzlesAndGames is present', () => {
-		renderGameLayout('sudoku-easy');
+		renderPuzzlePageLayout('sudoku-easy');
 
 		expect(
 			screen.getByText('More from Puzzles & games'),
@@ -66,9 +66,9 @@ describe('GameLayout', () => {
 	});
 
 	it('does not render the related rail when moreFromPuzzlesAndGames is empty', () => {
-		renderGameLayout('sudoku-easy', {
+		renderPuzzlePageLayout('sudoku-easy', {
 			instance: {
-				...createGamePage('sudoku-easy').instance,
+				...createPuzzlePage('sudoku-easy').instance,
 				moreFromPuzzlesAndGames: [],
 			},
 		});
