@@ -17,7 +17,6 @@ import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 import type { FENewslettersPageType } from '../types/newslettersPage';
-import type { FEPuzzlePageType } from '../types/puzzlePage';
 import {
 	type FEPuzzlesPageType,
 	puzzleCardVariants,
@@ -175,12 +174,12 @@ export const validateAsFootballMatchPageType = (
 };
 const stableIdPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const colourPattern = /^#[0-9a-f]{6}$/i;
-const editions = new Set(['UK', 'US', 'AU', 'INT', 'EUR']);
+export const editions = new Set(['UK', 'US', 'AU', 'INT', 'EUR']);
 
-const isRecord = (value: unknown): value is Record<string, unknown> =>
+export const isRecord = (value: unknown): value is Record<string, unknown> =>
 	typeof value === 'object' && value !== null && !Array.isArray(value);
 
-const isNonEmptyString = (value: unknown): value is string =>
+export const isNonEmptyString = (value: unknown): value is string =>
 	typeof value === 'string' && value.trim().length > 0;
 
 const isOptionalString = (value: unknown): boolean =>
@@ -193,10 +192,10 @@ const isOptionalColour = (value: unknown): boolean =>
 const isStringRecord = (value: unknown): boolean =>
 	isRecord(value) && Object.values(value).every(isString);
 
-const isPuzzlesConfig = (value: unknown): boolean =>
+export const isPuzzlesConfig = (value: unknown): boolean =>
 	isRecord(value) && isStringRecord(value.serverSideABTests);
 
-const isPuzzleItem = (value: unknown, archiveSlot: boolean): boolean => {
+export const isPuzzleItem = (value: unknown, archiveSlot: boolean): boolean => {
 	if (!isRecord(value)) return false;
 	const cardVariant = value.cardVariant;
 	const pageVariant = value.variant;
@@ -377,37 +376,4 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 	}
 
 	throw new TypeError('Unable to validate request body for puzzles page.');
-};
-
-const isPuzzlePageInstance = (value: unknown): boolean => {
-	if (!isRecord(value)) return false;
-
-	return (
-		isNonEmptyString(value.title) &&
-		(value.moreFromPuzzlesAndGames === undefined ||
-			(Array.isArray(value.moreFromPuzzlesAndGames) &&
-				value.moreFromPuzzlesAndGames.every((item) =>
-					isPuzzleItem(item, false),
-				)))
-	);
-};
-
-export const validateAsPuzzlePageType = (data: unknown): FEPuzzlePageType => {
-	if (
-		isRecord(data) &&
-		isNonEmptyString(data.id) &&
-		isNonEmptyString(data.slug) &&
-		isNonEmptyString(data.webTitle) &&
-		isPuzzlesConfig(data.config) &&
-		isRecord(data.nav) &&
-		isRecord(data.pageFooter) &&
-		isNonEmptyString(data.canonicalUrl) &&
-		isString(data.editionId) &&
-		editions.has(String(data.editionId)) &&
-		isPuzzlePageInstance(data.instance)
-	) {
-		return data as unknown as FEPuzzlePageType;
-	}
-
-	throw new TypeError('Unable to validate request body for puzzle page.');
 };

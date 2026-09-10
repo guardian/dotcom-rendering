@@ -1,5 +1,5 @@
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
-import { validateAsPuzzlePageType } from './validate';
+import { validateAsPuzzlePageType } from './validate.puzzlePage';
 
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
 

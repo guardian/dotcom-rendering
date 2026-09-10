@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
-import { validateAsPuzzlePageType } from '../model/validate';
+import { validateAsPuzzlePageType } from '../model/validate.puzzlePage';
 import { makePrefetchHeader } from './lib/header';
 import { renderPuzzlePage } from './render.puzzlePage.web';
 
