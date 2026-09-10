@@ -66,13 +66,8 @@ describe('handlePuzzlePage', () => {
 		'sudoku-medium',
 		'sudoku-hard',
 		'sudoku-killer',
-		'futoshiki',
-		'suguru',
 		'word-wheel',
-		'codeword',
 		'wordiply',
-		'on-the-ball',
-		'film-reveal',
 	])('renders iframe-based slug %s', (slug) => {
 		const res = response();
 		const page = createPuzzlePage(slug);

@@ -8,18 +8,19 @@
  * unrelated to this registry and is not unified into Puzzle Page. See
  * `docs/puzzle-page.md` for the full picture.
  *
+ * This registry currently only contains the V0 puzzle set (per PR #16700
+ * review feedback): sudoku (4 difficulties), word wheel, and wordiply.
+ * Codeword, futoshiki, suguru, and the trivia/quizzes puzzles
+ * (on-the-ball, film-reveal) were removed for V0 and may return later once
+ * the team is ready to support them.
+ *
  * This registry is deliberately data-driven: all AmuseLabs-hosted puzzles
- * (sudoku variants, futoshiki, suguru, word-wheel, codeword) share the exact
- * same iframe URL template and differ only by the `{slug}` substitution, so
- * they are modelled as data rather than near-duplicate code paths.
+ * (the sudoku variants, and word-wheel) share the exact same iframe URL
+ * template and differ only by the `{slug}` substitution, so they are
+ * modelled as data rather than near-duplicate code paths.
  */
 
-export const puzzleGroups = [
-	'crosswords',
-	'logic-puzzles',
-	'word-games',
-	'trivia-and-quizzes',
-] as const;
+export const puzzleGroups = ['logic-puzzles', 'word-games'] as const;
 
 export type PuzzleGroup = (typeof puzzleGroups)[number];
 
@@ -65,38 +66,13 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 	'sudoku-medium': amuseLabsPuzzle('sudoku-medium', 'logic-puzzles'),
 	'sudoku-hard': amuseLabsPuzzle('sudoku-hard', 'logic-puzzles'),
 	'sudoku-killer': amuseLabsPuzzle('sudoku-killer', 'logic-puzzles'),
-	futoshiki: amuseLabsPuzzle('futoshiki', 'logic-puzzles'),
-	suguru: amuseLabsPuzzle('suguru', 'logic-puzzles'),
 	'word-wheel': amuseLabsPuzzle('word-wheel', 'word-games'),
-	codeword: amuseLabsPuzzle('codeword', 'word-games'),
 	wordiply: {
 		slug: 'wordiply',
 		puzzleGroup: 'word-games',
 		iframe: {
 			provider: 'wordiply',
 			urlTemplate: 'https://www.wordiply.com/',
-		},
-		shareEnabled: true,
-		printEnabled: true,
-		hasArchive: true,
-	},
-	'on-the-ball': {
-		slug: 'on-the-ball',
-		puzzleGroup: 'trivia-and-quizzes',
-		iframe: {
-			provider: 'sportsreveal',
-			urlTemplate: 'https://sportsreveal.io/guardian',
-		},
-		shareEnabled: true,
-		printEnabled: true,
-		hasArchive: true,
-	},
-	'film-reveal': {
-		slug: 'film-reveal',
-		puzzleGroup: 'trivia-and-quizzes',
-		iframe: {
-			provider: 'moviegrid',
-			urlTemplate: 'https://moviegrid.io/guardian',
 		},
 		shareEnabled: true,
 		printEnabled: true,

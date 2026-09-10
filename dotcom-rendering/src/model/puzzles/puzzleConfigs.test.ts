@@ -9,15 +9,10 @@ describe('puzzleConfigs registry', () => {
 	it('has an entry for every documented slug', () => {
 		expect(Object.keys(puzzleConfigs).sort()).toEqual(
 			[
-				'codeword',
-				'film-reveal',
-				'futoshiki',
-				'on-the-ball',
 				'sudoku-easy',
 				'sudoku-hard',
 				'sudoku-killer',
 				'sudoku-medium',
-				'suguru',
 				'word-wheel',
 				'wordiply',
 			].sort(),

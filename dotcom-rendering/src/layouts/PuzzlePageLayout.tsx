@@ -42,10 +42,8 @@ import type { FEPuzzlePageType } from '../types/puzzlePage';
  */
 
 const puzzleGroupLabels: Record<PuzzleConfig['puzzleGroup'], string> = {
-	crosswords: 'Crosswords',
 	'logic-puzzles': 'Logic puzzles',
 	'word-games': 'Word games',
-	'trivia-and-quizzes': 'Quizzes and Trivia',
 };
 
 /**
