@@ -37,54 +37,44 @@ const renderGameLayout = (
 };
 
 describe('GameLayout', () => {
-	it('renders a working PDF version link when crosswordData.pdf is present', () => {
-		renderGameLayout('crossword', {
-			instance: {
-				...createGamePage('crossword').instance,
-				crosswordData: {
-					...(createGamePage('crossword').instance
-						.crosswordData as Record<string, unknown>),
-					pdf: 'https://example.com/crossword.pdf',
-				},
-			},
-		});
-
-		const pdfLink = screen.getByRole('link', { name: 'PDF version' });
-		expect(pdfLink).toHaveAttribute(
-			'href',
-			'https://example.com/crossword.pdf',
-		);
-	});
-
-	it('does not render a PDF version link when crosswordData.pdf is absent', () => {
-		renderGameLayout('crossword');
-
-		expect(
-			screen.queryByRole('link', { name: 'PDF version' }),
-		).not.toBeInTheDocument();
-	});
-
-	it('does not render CrosswordLinks for a non-crossword slug', () => {
+	it('renders the page title', () => {
 		renderGameLayout('sudoku-easy');
 
 		expect(
-			screen.queryByRole('link', { name: 'PDF version' }),
-		).not.toBeInTheDocument();
+			screen.getByRole('heading', {
+				level: 1,
+				name: 'sudoku-easy puzzle',
+			}),
+		).toBeInTheDocument();
 	});
 
-	it('renders the crosswords group label as a styled link to /crosswords', () => {
-		renderGameLayout('crossword');
-
-		const label = screen.getByRole('link', { name: 'Quick crossword' });
-		expect(label).toHaveAttribute('href', '/crosswords');
-	});
-
-	it('renders a non-crosswords group label as plain, non-linked text', () => {
+	it('renders the gameGroup label as plain, non-linked text', () => {
 		renderGameLayout('sudoku-easy');
 
 		expect(
 			screen.queryByRole('link', { name: 'Logic puzzles' }),
 		).not.toBeInTheDocument();
 		expect(screen.getByText('Logic puzzles')).toBeInTheDocument();
+	});
+
+	it('renders a "More from Puzzles & games" rail when moreFromPuzzlesAndGames is present', () => {
+		renderGameLayout('sudoku-easy');
+
+		expect(
+			screen.getByText('More from Puzzles & games'),
+		).toBeInTheDocument();
+	});
+
+	it('does not render the related rail when moreFromPuzzlesAndGames is empty', () => {
+		renderGameLayout('sudoku-easy', {
+			instance: {
+				...createGamePage('sudoku-easy').instance,
+				moreFromPuzzlesAndGames: [],
+			},
+		});
+
+		expect(
+			screen.queryByText('More from Puzzles & games'),
+		).not.toBeInTheDocument();
 	});
 });

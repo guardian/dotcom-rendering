@@ -1,4 +1,3 @@
-import type { CrosswordProps } from '@guardian/react-crossword';
 import { gameConfigs } from '../../src/model/games/gameConfigs';
 import type { FEGamePageType } from '../../src/types/gamePage';
 import type { PuzzleItem } from '../../src/types/puzzlesPage';
@@ -25,29 +24,6 @@ const sampleMoreFromPuzzlesAndGames: PuzzleItem[] = [
 	},
 ];
 
-const sampleCrosswordData: CrosswordProps['data'] = {
-	crosswordType: 'quick',
-	date: Date.now(),
-	dimensions: { cols: 3, rows: 1 },
-	id: 'quick/1',
-	name: 'Quick crossword No 1',
-	number: 1,
-	solutionAvailable: false,
-	entries: [
-		{
-			id: '1-across',
-			number: 1,
-			humanNumber: '1',
-			clue: 'Sample clue (3)',
-			direction: 'across',
-			position: { x: 0, y: 0 },
-			separatorLocations: {},
-			length: 3,
-			group: ['1-across'],
-		},
-	],
-};
-
 /**
  * Builds a `FEGamePageType` fixture for the given `slug`, defaulting to a
  * generic instance for that slug's `GameConfig`. Pass `overrides` to
@@ -62,8 +38,6 @@ export const createGamePage = (
 	if (!gameConfig) {
 		throw new Error(`Unknown game slug in fixture: ${slug}`);
 	}
-
-	const isCrossword = gameConfig.componentKey === 'crossword';
 
 	return {
 		id: `game-page-${slug}`,
@@ -83,14 +57,7 @@ export const createGamePage = (
 		canonicalUrl: `https://www.theguardian.com/games/${slug}`,
 		editionId: Standard.editionId,
 		instance: {
-			title: isCrossword ? 'Quick crossword No 1' : `${slug} puzzle`,
-			puzzleType: isCrossword ? 'Quick crossword' : undefined,
-			setterName: gameConfig.setterEnabled ? 'Sample Setter' : undefined,
-			date: '1 January 2025',
-			discussionId: gameConfig.commentsEnabled
-				? `game/${slug}`
-				: undefined,
-			crosswordData: isCrossword ? sampleCrosswordData : undefined,
+			title: `${slug} puzzle`,
 			moreFromPuzzlesAndGames: sampleMoreFromPuzzlesAndGames,
 		},
 		...overrides,

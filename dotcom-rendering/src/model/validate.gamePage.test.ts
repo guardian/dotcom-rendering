@@ -9,11 +9,6 @@ const expectInvalid = (page: unknown) =>
 	);
 
 describe('validateAsGamePageType', () => {
-	it('accepts a valid component (crossword) payload', () => {
-		const page = createGamePage('crossword');
-		expect(validateAsGamePageType(page).slug).toBe('crossword');
-	});
-
 	it('accepts a valid iframe payload', () => {
 		const page = createGamePage('sudoku-easy');
 		expect(validateAsGamePageType(page).slug).toBe('sudoku-easy');
@@ -27,7 +22,7 @@ describe('validateAsGamePageType', () => {
 		'editionId',
 		'instance',
 	])('rejects a missing required page field: %s', (field) => {
-		const page = clone(createGamePage('crossword')) as unknown as Record<
+		const page = clone(createGamePage('sudoku-easy')) as unknown as Record<
 			string,
 			unknown
 		>;
@@ -36,7 +31,7 @@ describe('validateAsGamePageType', () => {
 	});
 
 	it('rejects a config without server-side participations', () => {
-		const page = clone(createGamePage('crossword')) as unknown as {
+		const page = clone(createGamePage('sudoku-easy')) as unknown as {
 			config: Record<string, unknown>;
 		};
 		delete page.config.serverSideABTests;
@@ -44,7 +39,7 @@ describe('validateAsGamePageType', () => {
 	});
 
 	it('rejects navigation that is not an object', () => {
-		const page = clone(createGamePage('crossword')) as unknown as {
+		const page = clone(createGamePage('sudoku-easy')) as unknown as {
 			nav: unknown;
 		};
 		page.nav = [];
@@ -52,7 +47,7 @@ describe('validateAsGamePageType', () => {
 	});
 
 	it('rejects an unknown edition id', () => {
-		const page = clone(createGamePage('crossword')) as unknown as {
+		const page = clone(createGamePage('sudoku-easy')) as unknown as {
 			editionId: string;
 		};
 		page.editionId = 'NOT_AN_EDITION';
@@ -60,13 +55,13 @@ describe('validateAsGamePageType', () => {
 	});
 
 	it('rejects an instance missing its required title', () => {
-		const page = clone(createGamePage('crossword'));
+		const page = clone(createGamePage('sudoku-easy'));
 		(page.instance as unknown as { title?: string }).title = undefined;
 		expectInvalid(page);
 	});
 
 	it('rejects an invalid item in moreFromPuzzlesAndGames', () => {
-		const page = clone(createGamePage('crossword'));
+		const page = clone(createGamePage('sudoku-easy'));
 		page.instance.moreFromPuzzlesAndGames = [
 			{ id: 'bad' },
 		] as unknown as typeof page.instance.moreFromPuzzlesAndGames;

@@ -10,7 +10,6 @@ describe('gameConfigs registry', () => {
 		expect(Object.keys(gameConfigs).sort()).toEqual(
 			[
 				'codeword',
-				'crossword',
 				'film-reveal',
 				'futoshiki',
 				'on-the-ball',
@@ -33,39 +32,33 @@ describe('gameConfigs registry', () => {
 		expect(() =>
 			validateGameConfigs({
 				...gameConfigs,
-				crossword: { ...gameConfigs.crossword!, slug: 'not-crossword' },
+				wordiply: { ...gameConfigs.wordiply!, slug: 'not-wordiply' },
 			}),
 		).toThrow(TypeError);
 	});
 
-	it('rejects a component entry missing componentKey', () => {
-		expect(() =>
-			validateGameConfigs({
-				...gameConfigs,
-				crossword: {
-					...gameConfigs.crossword!,
-					componentKey: undefined,
-				},
-			}),
-		).toThrow(TypeError);
-	});
-
-	it('rejects an iframe entry missing its iframe config', () => {
-		expect(() =>
-			validateGameConfigs({
-				...gameConfigs,
-				wordiply: { ...gameConfigs.wordiply!, iframe: undefined },
-			}),
-		).toThrow(TypeError);
-	});
-
-	it('rejects an entry that mixes componentKey and iframe', () => {
+	it('rejects an entry with an unknown gameGroup', () => {
 		expect(() =>
 			validateGameConfigs({
 				...gameConfigs,
 				wordiply: {
 					...gameConfigs.wordiply!,
-					componentKey: 'crossword',
+					gameGroup: 'not-a-real-group' as never,
+				},
+			}),
+		).toThrow(TypeError);
+	});
+
+	it('rejects an entry with an empty iframe urlTemplate', () => {
+		expect(() =>
+			validateGameConfigs({
+				...gameConfigs,
+				wordiply: {
+					...gameConfigs.wordiply!,
+					iframe: {
+						...gameConfigs.wordiply!.iframe,
+						urlTemplate: '',
+					},
 				},
 			}),
 		).toThrow(TypeError);
@@ -73,7 +66,9 @@ describe('gameConfigs registry', () => {
 
 	describe('getGameConfig', () => {
 		it('returns the config for a known slug', () => {
-			expect(getGameConfig('crossword')?.gameGroup).toBe('crosswords');
+			expect(getGameConfig('sudoku-easy')?.gameGroup).toBe(
+				'logic-puzzles',
+			);
 		});
 
 		it('returns undefined for an unknown slug', () => {
@@ -91,12 +86,6 @@ describe('gameConfigs registry', () => {
 		it('returns the bespoke provider URL unchanged when it has no placeholder', () => {
 			expect(resolveIframeUrl(gameConfigs.wordiply!)).toBe(
 				'https://www.wordiply.com/',
-			);
-		});
-
-		it('throws for a component-rendered game with no iframe config', () => {
-			expect(() => resolveIframeUrl(gameConfigs.crossword!)).toThrow(
-				TypeError,
 			);
 		});
 	});

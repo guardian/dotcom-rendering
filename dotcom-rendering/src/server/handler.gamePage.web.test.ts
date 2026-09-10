@@ -37,14 +37,14 @@ describe('handleGamePage', () => {
 
 	it('renders the page for a known slug regardless of serverSideABTests', () => {
 		const res = response();
-		const page = createGamePage('crossword');
+		const page = createGamePage('sudoku-easy');
 
 		invokeHandler(page, res);
 
 		expect(mockedRenderGamePage).toHaveBeenCalledWith({
 			gamePage: {
 				...page,
-				gameConfig: expect.objectContaining({ slug: 'crossword' }),
+				gameConfig: expect.objectContaining({ slug: 'sudoku-easy' }),
 			},
 		});
 		expect(res.status).toHaveBeenCalledWith(200);
@@ -55,18 +55,27 @@ describe('handleGamePage', () => {
 		expect(res.send).toHaveBeenCalledWith('<html>Game</html>');
 	});
 
-	it.each(['sudoku-easy', 'wordiply', 'on-the-ball', 'film-reveal'])(
-		'renders iframe-based slug %s',
-		(slug) => {
-			const res = response();
-			const page = createGamePage(slug);
+	it.each([
+		'sudoku-easy',
+		'sudoku-medium',
+		'sudoku-hard',
+		'sudoku-killer',
+		'futoshiki',
+		'suguru',
+		'word-wheel',
+		'codeword',
+		'wordiply',
+		'on-the-ball',
+		'film-reveal',
+	])('renders iframe-based slug %s', (slug) => {
+		const res = response();
+		const page = createGamePage(slug);
 
-			invokeHandler(page, res);
+		invokeHandler(page, res);
 
-			expect(mockedRenderGamePage).toHaveBeenCalled();
-			expect(res.status).toHaveBeenCalledWith(200);
-		},
-	);
+		expect(mockedRenderGamePage).toHaveBeenCalled();
+		expect(res.status).toHaveBeenCalledWith(200);
+	});
 
 	it.each([
 		['absent', {}],
@@ -75,9 +84,9 @@ describe('handleGamePage', () => {
 		'renders the page regardless of serverSideABTests content (%s)',
 		(_, serverSideABTests) => {
 			const res = response();
-			const page = createGamePage('crossword', {
+			const page = createGamePage('sudoku-easy', {
 				config: {
-					...createGamePage('crossword').config,
+					...createGamePage('sudoku-easy').config,
 					serverSideABTests,
 				},
 			});
@@ -91,7 +100,7 @@ describe('handleGamePage', () => {
 
 	it('returns 404 for an unknown slug', () => {
 		const res = response();
-		const page = createGamePage('crossword');
+		const page = createGamePage('sudoku-easy');
 		page.slug = 'not-a-real-game';
 
 		invokeHandler(page, res);
@@ -102,7 +111,7 @@ describe('handleGamePage', () => {
 
 	it('rejects an invalid payload without invoking the renderer', () => {
 		const res = response();
-		const invalidPage = createGamePage('crossword') as unknown as Record<
+		const invalidPage = createGamePage('sudoku-easy') as unknown as Record<
 			string,
 			unknown
 		>;
