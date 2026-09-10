@@ -436,6 +436,12 @@ const ShowSignInGateAuxia = ({
 		threshold: 0,
 	});
 
+	// The non-dismissible popup is a modal, so it must appear immediately
+	// rather than waiting for the reader to scroll to the inline host
+	// element, which on long pages sits far below the viewport.
+	const isMandatoryPopup =
+		userTreatment.treatmentType === 'NONDISMISSIBLE_SIGN_IN_GATE_POPUP';
+
 	useEffect(() => {
 		const signInGate = document.getElementById('sign-in-gate');
 		if (signInGate) {
@@ -445,7 +451,9 @@ const ShowSignInGateAuxia = ({
 	}, [setNode, setSignInGatePlaceholder]);
 
 	useEffect(() => {
-		if (hasBeenSeen === true) {
+		// The mandatory popup is shown on mount (see shouldShowV2Gate), so
+		// its view is recorded immediately instead of waiting for scroll.
+		if (hasBeenSeen === true || isMandatoryPopup) {
 			// Tell Auxia
 			// Gandalf: never contact Auxia for Guardian-managed treatments.
 			if (!isGandalf) {
@@ -498,6 +506,7 @@ const ShowSignInGateAuxia = ({
 		}
 	}, [
 		hasBeenSeen,
+		isMandatoryPopup,
 		browserId,
 		contributionsServiceUrl,
 		isGandalf,
@@ -533,7 +542,7 @@ const ShowSignInGateAuxia = ({
 		setHasScroll(scrollHeight > viewportHeight);
 	}, []);
 
-	const shouldShowV2Gate = hasBeenSeen ?? !hasScroll;
+	const shouldShowV2Gate = isMandatoryPopup || (hasBeenSeen ?? !hasScroll);
 
 	return (
 		<>
