@@ -8910,4 +8910,7 @@ const paletteDeclarations = (
 			`${colourName}: ${colour[colourScheme](format)};`,
 	);
 
-export { type ColourName, paletteDeclarations };
+const isColourName = (s: string): s is ColourName =>
+	Object.prototype.hasOwnProperty.call(paletteColours, s);
+
+export { type ColourName, paletteDeclarations, isColourName };
