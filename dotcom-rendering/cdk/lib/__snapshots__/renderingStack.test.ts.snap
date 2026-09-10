@@ -4442,7 +4442,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
             "ReadonlyRootFilesystem": true,
           },
         ],
-        "Cpu": "1024",
+        "Cpu": "2048",
         "ExecutionRoleArn": {
           "Fn::GetAtt": [
             "EcsTaskDefinitionExecutionRoleBE450C73",
@@ -4450,7 +4450,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
           ],
         },
         "Family": "TagPageRenderingPRODEcsTaskDefinition12224835",
-        "Memory": "2048",
+        "Memory": "4096",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "FARGATE",
