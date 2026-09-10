@@ -16,6 +16,7 @@ import frontSchema from '../frontend/schemas/feFront.json';
 import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
+import type { FEGamePageType } from '../types/gamePage';
 import type { FENewslettersPageType } from '../types/newslettersPage';
 import {
 	type FEPuzzlesPageType,
@@ -376,4 +377,37 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 	}
 
 	throw new TypeError('Unable to validate request body for puzzles page.');
+};
+
+const isGamePageInstance = (value: unknown): boolean => {
+	if (!isRecord(value)) return false;
+
+	return (
+		isNonEmptyString(value.title) &&
+		(value.moreFromPuzzlesAndGames === undefined ||
+			(Array.isArray(value.moreFromPuzzlesAndGames) &&
+				value.moreFromPuzzlesAndGames.every((item) =>
+					isPuzzleItem(item, false),
+				)))
+	);
+};
+
+export const validateAsGamePageType = (data: unknown): FEGamePageType => {
+	if (
+		isRecord(data) &&
+		isNonEmptyString(data.id) &&
+		isNonEmptyString(data.slug) &&
+		isNonEmptyString(data.webTitle) &&
+		isPuzzlesConfig(data.config) &&
+		isRecord(data.nav) &&
+		isRecord(data.pageFooter) &&
+		isNonEmptyString(data.canonicalUrl) &&
+		isString(data.editionId) &&
+		editions.has(String(data.editionId)) &&
+		isGamePageInstance(data.instance)
+	) {
+		return data as unknown as FEGamePageType;
+	}
+
+	throw new TypeError('Unable to validate request body for game page.');
 };
