@@ -36,6 +36,27 @@ const savedFromWebCache = new Map<string, Promise<Set<string>>>();
 
 type SavedFromWebItem = { recipeId: string; lastModified: string };
 
+const MAX_503_RETRIES = 3;
+const INITIAL_RETRY_DELAY_MS = 100;
+
+const fetchWith503Retry = async (
+	input: RequestInfo | URL,
+	init?: RequestInit,
+): Promise<Response> => {
+	for (let attempt = 0; attempt <= MAX_503_RETRIES; attempt += 1) {
+		const response = await fetch(input, init);
+		if (response.status !== 503 || attempt === MAX_503_RETRIES) {
+			return response;
+		}
+
+		await new Promise<void>((resolve) => {
+			setTimeout(resolve, INITIAL_RETRY_DELAY_MS * 2 ** attempt);
+		});
+	}
+
+	throw new Error('Unreachable');
+};
+
 /**
  * Performs (and caches) the underlying request for a given cache key. The
  * cache entry is written synchronously, before the fetch resolves, so
@@ -54,7 +75,7 @@ const fetchSavedFromWebRecipes = (
 
 	const promise = (async (): Promise<Set<string>> => {
 		try {
-			const response = await fetch(
+			const response = await fetchWith503Retry(
 				`${getFeastApiBaseUrl()}${FEAST_SAVED_RECIPES_PATH}?ids=${encodeURIComponent(idsParam)}`,
 				{
 					headers: {
@@ -147,7 +168,7 @@ export const addFeastRecipeToSavedFromWebList = async (
 	recipeId: string,
 ): Promise<boolean> => {
 	try {
-		const response = await fetch(
+		const response = await fetchWith503Retry(
 			`${getFeastApiBaseUrl()}${FEAST_SAVED_RECIPES_PATH}/${encodeURIComponent(recipeId)}`,
 			{
 				method: 'PUT',
@@ -167,10 +188,51 @@ export const addFeastRecipeToSavedFromWebList = async (
 			return false;
 		}
 
+		savedFromWebCache.clear();
 		return true;
 	} catch (error) {
 		console.error(
 			'[addFeastRecipeToSavedFromWebList] Error saving recipe:',
+			error,
+		);
+		return false;
+	}
+};
+
+/**
+ * Removes a recipe from the reader's "Saved from web" list. Idempotent:
+ * removing an absent recipe succeeds without creating a list.
+ */
+export const removeFeastRecipeFromSavedFromWebList = async (
+	accessToken: string,
+	recipeId: string,
+): Promise<boolean> => {
+	try {
+		const response = await fetchWith503Retry(
+			`${getFeastApiBaseUrl()}${FEAST_SAVED_RECIPES_PATH}/${encodeURIComponent(recipeId)}`,
+			{
+				method: 'DELETE',
+				headers: {
+					Authorization: `Bearer ${accessToken}`,
+					'X-GU-IS-OAUTH': 'true',
+				},
+			},
+		);
+
+		if (!response.ok) {
+			console.error(
+				'[removeFeastRecipeFromSavedFromWebList] Failed to remove saved recipe:',
+				response.status,
+				response.statusText,
+			);
+			return false;
+		}
+
+		savedFromWebCache.clear();
+		return true;
+	} catch (error) {
+		console.error(
+			'[removeFeastRecipeFromSavedFromWebList] Error removing saved recipe:',
 			error,
 		);
 		return false;
