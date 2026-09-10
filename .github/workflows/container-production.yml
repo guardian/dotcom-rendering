@@ -2,7 +2,7 @@ name: Production container
 on:
   workflow_call:
     secrets:
-      GU_RIFF_RAFF_ROLE_ARN:
+      GU_ARTIFACTS_ROLE_ARN:
         required: true
     outputs:
       imageDigest:
@@ -39,10 +39,10 @@ jobs:
       - name: Build image
         run: docker buildx build --platform linux/arm64 -f Production.dockerfile -t ${{ github.repository }}:latest .
       - name: Publish Image
-        uses: guardian/actions-publish-image@v0.0.3
+        uses: guardian/actions-publish-image@v0.0.7
         id: publish-image
         with:
-          roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+          roleArn: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
           branchName: ${{ needs.facts.outputs.branchName }}
           buildNumber: ${{ needs.facts.outputs.buildNumber }}
           commitSha: ${{ needs.facts.outputs.commitSha }}
