@@ -73,6 +73,7 @@ describe('FeastContextualNudge Braze fallback', () => {
 			braze,
 			brazeCards: undefined,
 			brazeMessages: undefined,
+			isLoading: false,
 		});
 		jest.mocked(isPlacementStale).mockReturnValue(false);
 		jest.mocked(braze.getBanner).mockReset();
@@ -136,5 +137,39 @@ describe('FeastContextualNudge Braze fallback', () => {
 			expect(container).toBeEmptyDOMElement();
 		});
 		expect(screen.queryByText('Download the app')).not.toBeInTheDocument();
+	});
+
+	it('reserves layout space while Braze is still loading, for a signed-in reader', () => {
+		jest.mocked(useAuthStatus).mockReturnValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'token' } as never,
+			idToken: { claims: { sub: 'user-id' } } as never,
+		});
+		jest.mocked(
+			savedFromWeb.getFeastSavedFromTheWebRecipes,
+		).mockReturnValue(
+			new Promise(() => {
+				// Deliberately never resolves: this test only cares about the
+				// Braze-loading gate, so the saved-from-web fetch is left
+				// permanently in flight to avoid an unrelated act() warning
+				// from its resolution racing the test's assertions.
+			}),
+		);
+		jest.mocked(useBraze).mockReturnValue({
+			braze: null,
+			brazeCards: undefined,
+			brazeMessages: undefined,
+			isLoading: true,
+		});
+
+		const { container } = renderNudge('https://id.test');
+
+		expect(
+			container.querySelector(
+				'[data-component="feast-contextual-nudge"]',
+			),
+		).toBeInTheDocument();
+		expect(screen.queryByText('Download the app')).not.toBeInTheDocument();
+		expect(braze.getBanner).not.toHaveBeenCalled();
 	});
 });

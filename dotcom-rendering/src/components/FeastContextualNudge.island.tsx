@@ -219,7 +219,10 @@ export const FeastContextualNudge = ({
 	allNudgeRecipeIds,
 }: FeastContextualNudgeProps) => {
 	const { darkModeAvailable, renderingTarget } = useConfig();
-	const { braze } = useBraze(idApiUrl ?? '', renderingTarget);
+	const { braze, isLoading: isBrazeLoading } = useBraze(
+		idApiUrl ?? '',
+		renderingTarget,
+	);
 
 	const [isStorybook, setIsStorybook] = useState(false);
 	useEffect(() => {
@@ -273,8 +276,8 @@ export const FeastContextualNudge = ({
 	// context on load (see `GetContext` in `BrazeBannersSystem.tsx`) — so the
 	// banner must not be rendered until the real value is known, otherwise it
 	// would be permanently stuck showing the wrong saved state. See the
-	// render gate below, which holds off rendering anything (Braze banner
-	// *or* native fallback) until this resolves.
+	// render gate below, which holds off rendering the banner until this
+	// resolves.
 	const authStatus = useAuthStatus();
 	const [isRecipeSaved, setIsRecipeSaved] = useState<boolean | undefined>(
 		undefined,
@@ -305,16 +308,54 @@ export const FeastContextualNudge = ({
 		};
 	}, [authStatus, feastId, allNudgeRecipeIds]);
 
-	// Only the native fallback renders `isRecipeSaved`-free, so it's safe to
-	// show straight away when there's no Braze placement to wait on. When a
-	// Braze placement is possible, hold off on rendering anything until the
-	// saved-from-web status is known, so the native card never flashes before
-	// the Braze banner is ready to show with the correct context, and so the
-	// banner is never shown with a stale/incorrect `isRecipeSaved`. The
-	// reserved height/margin (`nudgeMinHeightStyles` + `nudgeSpacingStyles`)
-	// matches the Braze/native cards below, so this causes no layout shift
-	// once real content replaces it.
-	if (idApiUrl !== undefined && isRecipeSaved === undefined) {
+	// Whether Braze has a banner for this placement slot. This only depends
+	// on `braze`/`isPlacementStale`, not on `isRecipeSaved`, so it can be
+	// worked out independently of (and typically well before) the
+	// saved-from-web fetch above resolves.
+	const placementId =
+		idApiUrl !== undefined
+			? BrazeBannersSystemPlacementId[
+					`FeastContextualNudge${nudgeIndex}` as keyof typeof BrazeBannersSystemPlacementId
+				]
+			: undefined;
+
+	// Guard against stale placements: if the last requestBannersRefresh was
+	// rate-limited AND this placement has suppressOnStale: true in
+	// PLACEMENT_SUPPRESS_ON_STALE, skip getBanner() and treat this as "no
+	// banner", falling through to the native nudge below.
+	//
+	// Each FeastContextualNudge placement ID has its own entry in
+	// PLACEMENT_SUPPRESS_ON_STALE — change any individual one to `true` to
+	// suppress that specific nudge on a failed refresh.
+	const banner =
+		placementId !== undefined && !isPlacementStale(placementId)
+			? (braze?.getBanner(placementId) ?? null)
+			: null;
+
+	// Hold off rendering anything until:
+	//  - auth status is known (not `Pending`) — otherwise a signed-in
+	//    reader with no banner could briefly flash the native fallback
+	//    before we find out they're signed in and should see nothing; and
+	//  - Braze has finished loading (`isBrazeLoading` is false) — otherwise
+	//    "no banner yet" (still loading) could be mistaken for "no banner"
+	//    (Braze has decided this reader isn't targeted); and
+	//  - if there *is* a banner, `isRecipeSaved` is known — so the banner is
+	//    never shown with a stale/incorrect saved state.
+	//
+	// The reserved height/margin (`nudgeMinHeightStyles` +
+	// `nudgeSpacingStyles`) matches the Braze/native cards below, so this
+	// causes no layout shift once real content replaces it. Note this does
+	// *not* wait on the saved-from-web fetch when there's no banner to show
+	// (signed-in + no banner resolves to nothing as soon as Braze is ready,
+	// without waiting up to `SAVED_FROM_WEB_TIMEOUT_MS` for a fetch whose
+	// result wouldn't be used anyway), which keeps the reserved box on
+	// screen for as short a time as possible before it collapses away.
+	if (
+		idApiUrl !== undefined &&
+		(authStatus.kind === 'Pending' ||
+			isBrazeLoading ||
+			(banner !== null && isRecipeSaved === undefined))
+	) {
 		return (
 			<div
 				data-component="feast-contextual-nudge"
@@ -326,64 +367,45 @@ export const FeastContextualNudge = ({
 
 	// If idApiUrl is defined and Braze has a banner for this placement slot,
 	// render the Braze banner instead of the native nudge.
-	if (idApiUrl !== undefined) {
-		const placementId =
-			BrazeBannersSystemPlacementId[
-				`FeastContextualNudge${nudgeIndex}` as keyof typeof BrazeBannersSystemPlacementId
-			];
+	if (idApiUrl !== undefined && banner && braze) {
+		return (
+			<div
+				aria-description={`Open the recipe ${title} in the Feast app`}
+				data-component="feast-contextual-nudge"
+				css={[nudgeMinHeightStyles, nudgeSpacingStyles]}
+			>
+				<BrazeBannersSystemDisplay
+					meta={{
+						id: `feast-contextual-nudge-${nudgeIndex}`,
+						braze,
+						banner,
+					}}
+					idApiUrl={idApiUrl}
+					stage={stage}
+					context={{
+						recipe,
+						recipeArticleTitle,
+						pageId,
+						isDev,
+						nudgeIndex,
+						darkMode: darkModeAvailable,
+						adjustToken: getAdjustToken(stage),
+						isRecipeSaved,
+					}}
+				/>
+			</div>
+		);
+	}
 
-		// Guard against stale placements: if the last requestBannersRefresh
-		// was rate-limited AND this placement has suppressOnStale: true in
-		// PLACEMENT_SUPPRESS_ON_STALE, skip getBanner() and fall through to
-		// the native nudge below.
-		//
-		// Each FeastContextualNudge placement ID has its own entry in
-		// PLACEMENT_SUPPRESS_ON_STALE — change any individual one to `true`
-		// to suppress that specific nudge on a failed refresh.
-		const banner = !isPlacementStale(placementId)
-			? (braze?.getBanner(placementId) ?? null)
-			: null;
-
-		if (banner && braze) {
-			return (
-				<div
-					aria-description={`Open the recipe ${title} in the Feast app`}
-					data-component="feast-contextual-nudge"
-					css={[nudgeMinHeightStyles, nudgeSpacingStyles]}
-				>
-					<BrazeBannersSystemDisplay
-						meta={{
-							id: `feast-contextual-nudge-${nudgeIndex}`,
-							braze,
-							banner,
-						}}
-						idApiUrl={idApiUrl}
-						stage={stage}
-						context={{
-							recipe,
-							recipeArticleTitle,
-							pageId,
-							isDev,
-							nudgeIndex,
-							darkMode: darkModeAvailable,
-							adjustToken: getAdjustToken(stage),
-							isRecipeSaved,
-						}}
-					/>
-				</div>
-			);
-		}
-
-		// A signed-in reader with no Braze banner for this placement is (by
-		// definition) not part of any Canvas targeting this nudge. Rather
-		// than falling back to the generic native "Download the app" card —
-		// which isn't personalised and could be shown to a reader who has
-		// been deliberately excluded from Feast messaging — show nothing.
-		// Signed-out/pending readers aren't Braze-targetable at all, so they
-		// still fall through to the native nudge below.
-		if (authStatus.kind === 'SignedIn') {
-			return null;
-		}
+	// A signed-in reader with no Braze banner for this placement is (by
+	// definition) not part of any Canvas targeting this nudge. Rather than
+	// falling back to the generic native "Download the app" card — which
+	// isn't personalised and could be shown to a reader who has been
+	// deliberately excluded from Feast messaging — show nothing.
+	// Signed-out readers aren't Braze-targetable at all, so they still fall
+	// through to the native nudge below.
+	if (idApiUrl !== undefined && authStatus.kind === 'SignedIn') {
+		return null;
 	}
 
 	return (
