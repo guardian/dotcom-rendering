@@ -111,7 +111,11 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 	domainName: 'tag-page-rendering.code.dev-guardianapis.com',
 	scaling: { minimumInstances: 1, maximumInstances: 3 },
 	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
-	imageIdentifier: getImageIdentifier(),
+	ecsProps: {
+		imageIdentifier: getImageIdentifier(),
+		taskCpu: 1024,
+		taskMemoryLimitMiB: 2048,
+	},
 };
 
 new RenderingCDKStack(
@@ -150,7 +154,11 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
-	imageIdentifier: getImageIdentifier(),
+	ecsProps: {
+		imageIdentifier: getImageIdentifier(),
+		taskCpu: 2048,
+		taskMemoryLimitMiB: 4096,
+	},
 };
 
 new RenderingCDKStack(
