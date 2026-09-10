@@ -6,28 +6,15 @@ import type { PuzzleItem } from './puzzlesPage';
 
 /**
  * The instance-specific data for a single Game page: the concrete content
- * (title, setter, date, etc.) resolved by frontend for a given game `slug`.
+ * (currently just the title, plus optional related-content links) resolved
+ * by frontend for a given game `slug`.
  *
- * `crosswordData` carries the raw crossword element JSON (the same shape as
- * today's `model.dotcomrendering.pageElements.CrosswordElement`) and is only
- * present when the resolved `GameConfig` for `slug` has
- * `renderMode: 'component'` with `componentKey: 'crossword'`.
+ * Game Page is scoped to iframe-based games only — there is no
+ * component-rendered case (crosswords remain on their existing, separate
+ * `/crosswords/*` flow), so this type carries no crossword-specific fields.
  */
 export interface GamePageInstance {
 	title: string;
-	/** e.g. "Quick crossword" — the red label shown in the mockup. */
-	puzzleType?: string;
-	setterName?: string;
-	date?: string;
-	specialInstructions?: string;
-	/** Only relevant when the resolved `GameConfig.commentsEnabled` is true. */
-	discussionId?: string;
-	/**
-	 * Raw crossword element JSON. Only present when `slug` resolves to the
-	 * crossword game. Left as `unknown` here as DCR's `GameConfig` registry
-	 * (not this payload type) is the source of truth for how to interpret it.
-	 */
-	crosswordData?: unknown;
 	moreFromPuzzlesAndGames?: PuzzleItem[];
 }
 

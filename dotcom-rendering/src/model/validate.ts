@@ -384,11 +384,6 @@ const isGamePageInstance = (value: unknown): boolean => {
 
 	return (
 		isNonEmptyString(value.title) &&
-		isOptionalString(value.puzzleType) &&
-		isOptionalString(value.setterName) &&
-		isOptionalString(value.date) &&
-		isOptionalString(value.specialInstructions) &&
-		isOptionalString(value.discussionId) &&
 		(value.moreFromPuzzlesAndGames === undefined ||
 			(Array.isArray(value.moreFromPuzzlesAndGames) &&
 				value.moreFromPuzzlesAndGames.every((item) =>
