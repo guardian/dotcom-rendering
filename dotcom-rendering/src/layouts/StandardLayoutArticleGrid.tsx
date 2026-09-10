@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsEpic } from '../components/AppsEpic.island';
 import { ArticleBody } from '../components/ArticleBody';
@@ -176,6 +175,7 @@ export const StandardLayoutArticleGrid = ({
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
 	);
+	const isInteractive = format.design === ArticleDesign.Interactive;
 
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
@@ -206,6 +206,7 @@ export const StandardLayoutArticleGrid = ({
 		orientation: mainMediaOrientation,
 		isMedia,
 		isShowcase,
+		isInteractive,
 	});
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
@@ -453,6 +454,10 @@ export const StandardLayoutArticleGrid = ({
 								}
 							`
 						: undefined,
+					isInteractive &&
+						css`
+							z-index: 10;
+						`,
 				]}
 			>
 				{format.display !== ArticleDisplay.Immersive &&
@@ -641,14 +646,6 @@ export const StandardLayoutArticleGrid = ({
 							/>
 						</Island>
 					)}
-					<StraightLines
-						data-print-layout="hide"
-						count={4}
-						cssOverrides={css`
-							display: block;
-						`}
-						color={themePalette('--straight-lines')}
-					/>
 					<SubMeta
 						format={format}
 						subMetaKeywordLinks={article.subMetaKeywordLinks}
@@ -692,7 +689,8 @@ export const StandardLayoutArticleGrid = ({
 								!!article.config.shouldHideReaderRevenue
 							}
 							shouldHideMostViewed={
-								format.design === ArticleDesign.Audio
+								format.design === ArticleDesign.Audio ||
+								format.design === ArticleDesign.Interactive
 							}
 						/>
 					</Island>
