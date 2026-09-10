@@ -91,7 +91,7 @@ const badgeStyles = css`
 const innerDividerStyles = css`
 	border: none;
 	border-top: 1px solid ${themePalette('--newsletter-card-divider')};
-	margin: 0 0 ${space[2]}px;
+	margin: 0 -${space[3]}px ${space[2]}px;
 `;
 
 const descriptionStyles = css`
@@ -103,10 +103,15 @@ const descriptionStyles = css`
 
 const illustrationStyles = css`
 	flex-shrink: 0;
-	width: 90px;
-	height: 90px;
+	width: 70px;
+	height: 70px;
 	border-radius: 50%;
 	object-fit: cover;
+
+	${from.mobileMedium} {
+		width: 90px;
+		height: 90px;
+	}
 
 	${from.tablet} {
 		width: 100px;
