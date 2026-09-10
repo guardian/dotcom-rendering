@@ -4,15 +4,21 @@
  */
 import { css } from '@emotion/react';
 import {
+	breakpoints,
 	from,
 	headlineBold28,
 	space,
 	textSans14,
 	textSansBold14,
 } from '@guardian/source/foundations';
+import { grid } from '../../../grid';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../palette';
-import type { CustomSubnav, RenderingPage } from '../../../types/customSubnav';
+import type {
+	CustomSubnav,
+	CustomSubnavImage,
+	RenderingPage,
+} from '../../../types/customSubnav';
 
 type Props = {
 	customSubNav: CustomSubnav;
@@ -88,6 +94,88 @@ const articleHeaderStyles = css`
 	border-right: 1px solid ${themePalette('--masthead-nav-lines')};
 `;
 
+/**
+ * On fronts, when an image is present the subnav mirrors DirectoryPageNav: a
+ * fixed-width, centred grid (blue) with the image spanning the full width on the
+ * top row and the links beneath it. The surrounding row is white (set by the
+ * Titlepiece wrapper), so only this padded container shows blue.
+ */
+const imageNavStyles = css`
+	${grid.paddedContainer}
+	position: relative;
+	background-color: ${themePalette('--masthead-nav-background')};
+`;
+
+const imageWrapperStyles = css`
+	${grid.column.all}
+	grid-row: 1;
+	position: relative;
+	display: block;
+	border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
+`;
+
+const headerImageStyles = css`
+	display: block;
+	width: 100%;
+	height: 140px;
+	object-fit: cover;
+`;
+
+const imageHeaderTextStyles = css`
+	${headlineBold28}
+	position: absolute;
+	left: ${space[3]}px;
+	bottom: ${space[1]}px;
+	color: ${themePalette('--masthead-nav-link-text')};
+
+	${from.mobileLandscape} {
+		left: ${space[5]}px;
+	}
+`;
+
+const imageListStyles = css`
+	${grid.column.all}
+	grid-row: 2;
+	${textSans14}
+	display: flex;
+	align-items: center;
+	column-gap: ${space[2]}px;
+	min-height: 28px;
+	padding: 0 ${space[3]}px;
+
+	${from.mobileLandscape} {
+		padding: 0 ${space[5]}px;
+	}
+	${from.tablet} {
+		min-height: 30px;
+	}
+`;
+
+/** Largest breakpoints first so the <source> media queries cascade correctly. */
+const byBreakpointWidthDesc = (a: CustomSubnavImage, b: CustomSubnavImage) =>
+	breakpoints[b.breakpoint] - breakpoints[a.breakpoint];
+
+const HeaderImage = ({ images }: { images: CustomSubnavImage[] }) => {
+	const sorted = [...images].sort(byBreakpointWidthDesc);
+	/** Smallest breakpoint is the <img> fallback; the rest become <source>s. */
+	const fallback = sorted.at(-1);
+	if (!fallback) {
+		return null;
+	}
+	return (
+		<picture>
+			{sorted.slice(0, -1).map((image) => (
+				<source
+					key={image.breakpoint}
+					media={`(min-width: ${breakpoints[image.breakpoint]}px)`}
+					srcSet={image.imageSrc}
+				/>
+			))}
+			<img src={fallback.imageSrc} alt="" css={headerImageStyles} />
+		</picture>
+	);
+};
+
 /** Sets horizontal scrolling behaviour and removes the scrollbar */
 const scrollableSubNavStyles = css`
 	overflow-x: scroll;
@@ -136,6 +224,60 @@ export const CustomSubNav = ({
 	hasPageSkin,
 }: Props) => {
 	const isArticle = renderingPage === 'article';
+	/** DCR receives images for all platforms; only web images are rendered here. */
+	const webImages = (customSubNav.images ?? []).filter((image) =>
+		image.platforms.includes('web'),
+	);
+	const hasHeaderImage = !isArticle && webImages.length > 0;
+
+	const linkItems = customSubNav.links.map(({ linkText, dotcomPath }) => (
+		<li key={dotcomPath} css={subnavListItemStyles}>
+			<a
+				css={subnavLinkStyles}
+				data-src-focus-disabled={true}
+				href={dotcomPath}
+				data-link-name={nestedOphanComponents(
+					'header',
+					'custom subnav',
+					linkText,
+				)}
+			>
+				{linkText === currentNavLink ? (
+					<span css={selectedLink}>{linkText}</span>
+				) : (
+					linkText
+				)}
+			</a>
+		</li>
+	));
+
+	if (hasHeaderImage) {
+		return (
+			<div
+				data-component={`custom-subnav-${customSubNav.header.headerText}`}
+				data-component-id={customSubNav.id}
+				data-rendering-page={renderingPage}
+				css={imageNavStyles}
+			>
+				<div css={imageWrapperStyles}>
+					<HeaderImage images={webImages} />
+					<span css={imageHeaderTextStyles}>
+						{customSubNav.header.headerText}
+					</span>
+				</div>
+				<ul
+					css={[imageListStyles, scrollableSubNavStyles]}
+					role="list"
+					style={{
+						'--sub-nav-link': themePalette('--sub-nav-link-header'),
+					}}
+				>
+					{linkItems}
+				</ul>
+			</div>
+		);
+	}
+
 	return (
 		<div
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
@@ -162,26 +304,7 @@ export const CustomSubNav = ({
 					'--sub-nav-link': themePalette('--sub-nav-link-header'),
 				}}
 			>
-				{customSubNav.links.map(({ linkText, dotcomPath }) => (
-					<li key={dotcomPath} css={subnavListItemStyles}>
-						<a
-							css={subnavLinkStyles}
-							data-src-focus-disabled={true}
-							href={dotcomPath}
-							data-link-name={nestedOphanComponents(
-								'header',
-								'custom subnav',
-								linkText,
-							)}
-						>
-							{linkText === currentNavLink ? (
-								<span css={selectedLink}>{linkText}</span>
-							) : (
-								linkText
-							)}
-						</a>
-					</li>
-				))}
+				{linkItems}
 			</ul>
 		</div>
 	);
