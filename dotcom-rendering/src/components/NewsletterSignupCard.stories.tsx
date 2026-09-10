@@ -39,3 +39,25 @@ export const Default = meta.story({
 		children: <></>,
 	},
 });
+
+/**
+ * Demonstrates a longer frequency string in a narrow container, to show that
+ * the text breaks after the "|" divider rather than wrapping mid-word.
+ */
+export const LongFrequencyNarrow = meta.story({
+	args: {
+		name: 'Breaking News US',
+		description: 'Get the most important news as it breaks.',
+		frequency: 'Around 2-3 times a day',
+		illustrationSquare:
+			'https://media.guim.co.uk/10b4e02333ee97ecf51d5e814fd324a88832fb17/1177_0_2998_3000/2998.jpg',
+		children: <></>,
+	},
+	decorators: [
+		(Story) => (
+			<div css={{ maxWidth: 300 }}>
+				<Story />
+			</div>
+		),
+	],
+});
