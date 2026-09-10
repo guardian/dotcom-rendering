@@ -74,3 +74,30 @@ export const getAuthStatus = async (): Promise<AuthStatus> => {
 	const authState = await getAuthState();
 	return getSignedInStatus(authState);
 };
+
+/**
+ * Subscribes to auth state changes (sign-in/sign-out) via the underlying
+ * `@guardian/identity-auth` client's own `authStateManager`, so callers can
+ * react when a reader signs in/out while already on the page (e.g. via a
+ * sign-in modal or another tab), rather than only being able to check the
+ * auth state once on mount.
+ *
+ * This wraps `getIdentityAuth().authStateManager.subscribe`/`unsubscribe`,
+ * which is the identity-auth library's own public, documented mechanism for
+ * this (see its `AuthStateManager`/`Emitter` types) - not a bespoke event
+ * bus invented for this purpose. At the time of writing this is its first
+ * use anywhere in this codebase (existing DCR call sites only ever check
+ * auth status once, e.g. `useAuthStatus`), so treat it as a new pattern
+ * that hasn't yet been proven out elsewhere here.
+ *
+ * @returns an unsubscribe function
+ */
+export const subscribeToAuthStateChange = (
+	callback: () => void,
+): (() => void) => {
+	const auth = getIdentityAuth();
+	auth.authStateManager.subscribe(callback);
+	return () => {
+		auth.authStateManager.unsubscribe(callback);
+	};
+};
