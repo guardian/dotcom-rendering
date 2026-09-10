@@ -2,6 +2,7 @@ import type {
 	FEFrontCardStyle,
 	FEMediaAsset,
 	FEMediaAtom,
+	FESupportingContent,
 } from '../frontend/feFront';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { EditorialTest, VariantMeta } from '../types/front';
@@ -656,6 +657,16 @@ describe('Enhance Cards', () => {
 			},
 		};
 
+		const cardWithSublinkWithEditorialTest = {
+			...cardWithNoEditorialTest,
+			supportingContent: [cardWithEditorialTest],
+		};
+
+		const cardWithSublinkWithExpiredEditorialTest = {
+			...cardWithNoEditorialTest,
+			supportingContent: [cardWithExpiredEditorialTest],
+		};
+
 		it('returns the default headline if no editorial test exists on the card, page is not in allowed fronts list, and user is not in a test bucket', () => {
 			expect(
 				decideHeadline(
@@ -781,6 +792,34 @@ describe('Enhance Cards', () => {
 			expect(
 				decideHeadline(
 					cardWithManuallyEndedEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'test-front',
+				),
+			).toEqual('Headline');
+		});
+
+		it('returns the variant headline if an editorial test is present on a sublink', () => {
+			expect(
+				decideHeadline(
+					cardWithSublinkWithEditorialTest
+						.supportingContent[0] as FESupportingContent,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'test-front',
+				),
+			).toEqual('Headline A');
+		});
+
+		it('returns the default headline for a sublink if an editorial test is expired on a sublink', () => {
+			expect(
+				decideHeadline(
+					cardWithSublinkWithExpiredEditorialTest
+						.supportingContent[0] as FESupportingContent,
 					{
 						'fronts-and-curation-editorial-test': 'a',
 					},
