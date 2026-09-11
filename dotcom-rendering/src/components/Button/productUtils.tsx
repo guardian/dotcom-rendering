@@ -52,7 +52,7 @@ export const createAccessibleProductLabel = (label: string): string => {
 	if (isUndefined(parsedLabel)) {
 		return label;
 	} else {
-		return `Was ${parsedLabel.struckThrough}, now ${parsedLabel.restOfLabel}`;
+		return `Was ${parsedLabel.struckThrough}, now ${parsedLabel.restOfLabel.trimStart()}`;
 	}
 };
 

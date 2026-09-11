@@ -31,7 +31,7 @@ describe('createAccessibleProductLabel', () => {
 
 	it('describes the old and new prices accessibly', () => {
 		expect(createAccessibleProductLabel('~£10~ £5 at Shop')).toBe(
-			'Was £10, now  £5 at Shop',
+			'Was £10, now £5 at Shop',
 		);
 	});
 });
