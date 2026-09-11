@@ -1,21 +1,14 @@
 import type { ConfigType } from '../types/config';
 
-export const puzzlesHubExperiment = {
-	name: 'puzzles-new-hub',
-	variant: 'variant',
-	control: 'control',
-} as const;
+export const PUZZLES_HUB_EXPERIMENT = 'puzzles-new-hub';
+export const PUZZLES_HUB_VARIANT = 'variant';
 
-type PuzzlesExperimentConfig = Pick<ConfigType, 'serverSideABTests'>;
+export const isPuzzlesHubVariant = (
+	serverSideABTests: ConfigType['serverSideABTests'] | undefined,
+): boolean =>
+	serverSideABTests?.[PUZZLES_HUB_EXPERIMENT] === PUZZLES_HUB_VARIANT;
 
-export const isPuzzlesHubEnabled = ({
-	serverSideABTests,
-}: PuzzlesExperimentConfig): boolean =>
-	serverSideABTests[puzzlesHubExperiment.name] ===
-	puzzlesHubExperiment.variant;
-
-export const puzzlesHubParticipation = (
-	group: string,
-): Record<string, string> => ({
-	[puzzlesHubExperiment.name]: group,
-});
+export const isPuzzlesHubEnabled = (
+	serverSideABTests: ConfigType['serverSideABTests'] | undefined,
+	isDevelopment = process.env.NODE_ENV === 'development',
+): boolean => isDevelopment || isPuzzlesHubVariant(serverSideABTests);

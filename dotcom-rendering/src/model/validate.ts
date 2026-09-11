@@ -17,11 +17,10 @@ import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 import type { FENewslettersPageType } from '../types/newslettersPage';
-import {
-	type FEPuzzlesPageType,
-	puzzleCardVariants,
-	puzzleContainerVariants,
-	puzzlePageVariants,
+import type {
+	FEPuzzlesPageType,
+	PuzzleContainer,
+	PuzzleItem,
 } from '../types/puzzlesPage';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
@@ -172,208 +171,208 @@ export const validateAsFootballMatchPageType = (
             ${JSON.stringify(validateFootballMatchInfoPage.errors, null, 2)}`,
 	);
 };
-const stableIdPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const colourPattern = /^#[0-9a-f]{6}$/i;
-const editions = new Set(['UK', 'US', 'AU', 'INT', 'EUR']);
+const identifier = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const colour = /^#[0-9a-f]{6}$/i;
+const cardVariants = new Set(['large', 'primary', 'compact', 'archive']);
+const containerVariants = new Set(['featured', 'standard', 'ad', 'supporting']);
+const isPuzzleDestination = (url: string) =>
+	url.startsWith('/puzzles-and-games') ||
+	url.startsWith('/crosswords/series/') ||
+	/^https?:\/\//.test(url);
 
-const isRecord = (value: unknown): value is Record<string, unknown> =>
-	typeof value === 'object' && value !== null && !Array.isArray(value);
+const isPuzzleItem = (data: unknown): data is PuzzleItem =>
+	isObject(data) &&
+	isString(data.id) &&
+	identifier.test(data.id) &&
+	isString(data.title) &&
+	isString(data.type) &&
+	isString(data.set) &&
+	isString(data.cardVariant) &&
+	cardVariants.has(data.cardVariant) &&
+	(data.cardVariant === 'archive' ||
+		(isString(data.cadence) && data.cadence.trim().length > 0)) &&
+	(data.url === undefined || isString(data.url)) &&
+	(data.image === undefined || isString(data.image)) &&
+	(data.slug === undefined || isString(data.slug)) &&
+	(data.index === undefined || Number.isInteger(data.index)) &&
+	(data.variant === undefined || isString(data.variant)) &&
+	(data.backgroundColour === undefined ||
+		(isString(data.backgroundColour) &&
+			colour.test(data.backgroundColour)));
 
-const isNonEmptyString = (value: unknown): value is string =>
-	typeof value === 'string' && value.trim().length > 0;
-
-const isOptionalString = (value: unknown): boolean =>
-	value === undefined || typeof value === 'string';
-
-const isOptionalColour = (value: unknown): boolean =>
-	value === undefined ||
-	(typeof value === 'string' && colourPattern.test(value));
-
-const isStringRecord = (value: unknown): boolean =>
-	isRecord(value) && Object.values(value).every(isString);
-
-const isPuzzlesConfig = (value: unknown): boolean =>
-	isRecord(value) && isStringRecord(value.serverSideABTests);
-
-const isPuzzleItem = (value: unknown, archiveSlot: boolean): boolean => {
-	if (!isRecord(value)) return false;
-	const cardVariant = value.cardVariant;
-	const pageVariant = value.variant;
-
-	return (
-		isNonEmptyString(value.id) &&
-		stableIdPattern.test(value.id) &&
-		isNonEmptyString(value.title) &&
-		isNonEmptyString(value.type) &&
-		isNonEmptyString(value.set) &&
-		isString(cardVariant) &&
-		puzzleCardVariants.includes(
-			cardVariant as (typeof puzzleCardVariants)[number],
-		) &&
-		(archiveSlot
-			? cardVariant === 'archive'
-			: cardVariant !== 'archive' && isNonEmptyString(value.cadence)) &&
-		isOptionalString(value.cadence) &&
-		isOptionalString(value.url) &&
-		isOptionalString(value.image) &&
-		isOptionalString(value.slug) &&
-		(value.index === undefined || Number.isInteger(value.index)) &&
-		(pageVariant === undefined ||
-			(isString(pageVariant) &&
-				puzzlePageVariants.includes(
-					pageVariant as (typeof puzzlePageVariants)[number],
-				))) &&
-		isOptionalColour(value.backgroundColour) &&
-		isOptionalString(value.filterId)
+const isSupportingContent = (data: unknown): boolean =>
+	isObject(data) &&
+	isString(data.usefulLinksTitle) &&
+	data.usefulLinksTitle.trim().length > 0 &&
+	Array.isArray(data.usefulLinks) &&
+	data.usefulLinks.every(
+		(link) =>
+			isObject(link) &&
+			isString(link.title) &&
+			link.title.trim().length > 0 &&
+			isString(link.url) &&
+			isPuzzleDestination(link.url),
+	) &&
+	(data.newsletter === undefined ||
+		(isObject(data.newsletter) &&
+			isString(data.newsletter.identityName) &&
+			data.newsletter.identityName.trim().length > 0 &&
+			isString(data.newsletter.name) &&
+			data.newsletter.name.trim().length > 0 &&
+			isString(data.newsletter.frequency) &&
+			data.newsletter.frequency.trim().length > 0 &&
+			isString(data.newsletter.description) &&
+			data.newsletter.description.trim().length > 0 &&
+			(data.newsletter.illustrationSquare === undefined ||
+				isString(data.newsletter.illustrationSquare)))) &&
+	isString(data.popularTitle) &&
+	data.popularTitle.trim().length > 0 &&
+	Array.isArray(data.popularGroups) &&
+	data.popularGroups.every(
+		(group) =>
+			isObject(group) &&
+			isString(group.title) &&
+			group.title.trim().length > 0 &&
+			Array.isArray(group.itemIds) &&
+			group.itemIds.length > 0 &&
+			group.itemIds.every(isString),
 	);
+
+const isPuzzleContainer = (data: unknown): data is PuzzleContainer => {
+	if (
+		!isObject(data) ||
+		!isString(data.id) ||
+		!identifier.test(data.id) ||
+		!isString(data.title) ||
+		(data.variant !== undefined &&
+			(!isString(data.variant) ||
+				!containerVariants.has(data.variant))) ||
+		(data.enabled !== undefined && typeof data.enabled !== 'boolean') ||
+		(data.desktopSpan !== undefined &&
+			(!Number.isInteger(data.desktopSpan) ||
+				(data.desktopSpan as number) < 1 ||
+				(data.desktopSpan as number) > 12)) ||
+		(data.adSlot !== undefined &&
+			(!isString(data.adSlot) ||
+				(!/^inline[1-9][0-9]*$/.test(data.adSlot) &&
+					data.adSlot !== 'mostpop'))) ||
+		(data.supporting !== undefined &&
+			!isSupportingContent(data.supporting)) ||
+		!isObject(data.content)
+	) {
+		return false;
+	}
+
+	const { content } = data;
+	const itemsValid =
+		Array.isArray(content.items) &&
+		content.items.every(
+			(row) => Array.isArray(row) && row.every(isPuzzleItem),
+		);
+	const nestedValid =
+		Array.isArray(content.nestedContainers) &&
+		content.nestedContainers.every(isPuzzleContainer);
+	const archiveValid =
+		(content.archive === undefined || isPuzzleItem(content.archive)) &&
+		(content.archiveChoices === undefined ||
+			(Array.isArray(content.archiveChoices) &&
+				content.archiveChoices.length >= 2 &&
+				content.archiveChoices.every(isPuzzleItem))) &&
+		!(
+			content.archive !== undefined &&
+			content.archiveChoices !== undefined
+		);
+	const isAd = data.variant === 'ad';
+	const isSupporting = data.variant === 'supporting';
+	const adValid = isAd
+		? data.adSlot !== undefined &&
+			/^inline[1-9][0-9]*$/.test(data.adSlot) &&
+			data.title === '' &&
+			Array.isArray(content.items) &&
+			content.items.length === 0 &&
+			Array.isArray(content.nestedContainers) &&
+			content.nestedContainers.length === 0 &&
+			content.archive === undefined &&
+			content.archiveChoices === undefined &&
+			data.supporting === undefined &&
+			data.enabled === undefined
+		: isSupporting
+			? data.title === '' &&
+				data.supporting !== undefined &&
+				(data.adSlot === undefined || data.adSlot === 'mostpop') &&
+				Array.isArray(content.items) &&
+				content.items.length === 0 &&
+				Array.isArray(content.nestedContainers) &&
+				content.nestedContainers.length === 0 &&
+				content.archive === undefined &&
+				content.archiveChoices === undefined &&
+				data.enabled === undefined
+			: data.adSlot === undefined &&
+				data.supporting === undefined &&
+				(data.enabled === undefined || data.variant === 'featured') &&
+				data.title.trim().length > 0;
+
+	return itemsValid && nestedValid && archiveValid && adValid;
 };
 
-type LayoutIds = {
-	itemIds: string[];
-	sectionIds: string[];
-	referencedFilterIds: string[];
-};
-
-const validateContainer = (value: unknown, ids: LayoutIds): boolean => {
-	if (!isRecord(value) || !isRecord(value.content)) return false;
-	if (
-		!isNonEmptyString(value.title) ||
-		(value.variant !== undefined &&
-			(!isString(value.variant) ||
-				!puzzleContainerVariants.includes(
-					value.variant as (typeof puzzleContainerVariants)[number],
-				))) ||
-		(value.desktopSpan !== undefined &&
-			(!Number.isInteger(value.desktopSpan) ||
-				Number(value.desktopSpan) < 1 ||
-				Number(value.desktopSpan) > 12)) ||
-		!isOptionalString(value.filterId)
-	) {
-		return false;
-	}
-
-	if (isString(value.filterId)) {
-		ids.referencedFilterIds.push(value.filterId);
-		ids.sectionIds.push(value.filterId);
-	}
-
-	const { items, nestedContainers, archive } = value.content;
-	if (!Array.isArray(items) || !Array.isArray(nestedContainers)) return false;
-	if (
-		!items.every(
-			(row) =>
-				Array.isArray(row) &&
-				row.length > 0 &&
-				row.every((item) => {
-					if (!isPuzzleItem(item, false) || !isRecord(item)) {
-						return false;
-					}
-					ids.itemIds.push(item.id as string);
-					if (isString(item.filterId)) {
-						ids.referencedFilterIds.push(item.filterId);
-					}
-					return true;
-				}),
-		)
-	) {
-		return false;
-	}
-
-	if (
-		!nestedContainers.every((container) =>
-			validateContainer(container, ids),
-		)
-	) {
-		return false;
-	}
-
-	if (archive !== undefined) {
-		if (!isPuzzleItem(archive, true) || !isRecord(archive)) {
-			return false;
-		}
-		ids.itemIds.push(archive.id as string);
-		if (isString(archive.filterId)) {
-			ids.referencedFilterIds.push(archive.filterId);
-		}
-	}
-
-	return true;
-};
-
-const hasDuplicates = (values: string[]): boolean =>
-	new Set(values).size !== values.length;
-
-const isPuzzlesLayout = (value: unknown): boolean => {
-	if (
-		!isRecord(value) ||
-		!Array.isArray(value.filters) ||
-		!Array.isArray(value.containers)
-	) {
-		return false;
-	}
-
-	const filterIds: string[] = [];
-	const anchorTargets: string[] = [];
-	for (const filter of value.filters) {
-		if (
-			!isRecord(filter) ||
-			!isNonEmptyString(filter.id) ||
-			!stableIdPattern.test(filter.id) ||
-			!isNonEmptyString(filter.title) ||
-			!isNonEmptyString(filter.target) ||
-			(!filter.target.startsWith('#') &&
-				!filter.target.startsWith('/puzzles')) ||
-			!isOptionalColour(filter.backgroundColour)
-		) {
-			return false;
-		}
-		filterIds.push(filter.id);
-		if (filter.target.startsWith('#')) {
-			anchorTargets.push(filter.target.slice(1));
-		}
-	}
-
-	const ids: LayoutIds = {
-		itemIds: [],
-		sectionIds: [],
-		referencedFilterIds: [],
-	};
-	if (
-		!value.containers.every((container) =>
-			validateContainer(container, ids),
-		)
-	) {
-		return false;
-	}
-
-	return (
-		!hasDuplicates(filterIds) &&
-		!hasDuplicates(ids.itemIds) &&
-		anchorTargets.every((target) => ids.sectionIds.includes(target)) &&
-		ids.referencedFilterIds.every((id) => filterIds.includes(id))
-	);
-};
+const flattenPuzzleContainers = (
+	containers: PuzzleContainer[],
+): PuzzleContainer[] => [
+	...containers,
+	...containers.flatMap((container) =>
+		flattenPuzzleContainers(container.content.nestedContainers),
+	),
+];
 
 export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 	if (
-		isRecord(data) &&
-		isNonEmptyString(data.id) &&
-		isString(data.editionId) &&
-		editions.has(String(data.editionId)) &&
-		isNonEmptyString(data.editionLongForm) &&
-		isNonEmptyString(data.contributionsServiceUrl) &&
-		isNonEmptyString(data.webTitle) &&
-		isOptionalString(data.description) &&
-		isPuzzlesConfig(data.config) &&
-		isRecord(data.nav) &&
-		isRecord(data.pageFooter) &&
-		isRecord(data.commercialProperties) &&
-		typeof data.isAdFreeUser === 'boolean' &&
-		isNonEmptyString(data.canonicalUrl) &&
-		isPuzzlesLayout(data.layout)
+		!isObject(data) ||
+		!isString(data.id) ||
+		!isString(data.webTitle) ||
+		!isString(data.editionId) ||
+		!isObject(data.config) ||
+		!isObject(data.nav) ||
+		!isObject(data.pageFooter) ||
+		!isString(data.canonicalUrl) ||
+		typeof data.isAdFreeUser !== 'boolean' ||
+		!isObject(data.layout) ||
+		!Array.isArray(data.layout.containers) ||
+		!data.layout.containers.every(isPuzzleContainer)
 	) {
-		return data as unknown as FEPuzzlesPageType;
+		throw new TypeError(
+			'Unable to validate request body for puzzles page.',
+		);
 	}
 
-	throw new TypeError('Unable to validate request body for puzzles page.');
+	const page = data as unknown as FEPuzzlesPageType;
+	const containers = flattenPuzzleContainers(page.layout.containers);
+	const items = containers.flatMap((container) => [
+		...container.content.items.flat(),
+		...(container.content.archive ? [container.content.archive] : []),
+		...(container.content.archiveChoices ?? []),
+	]);
+	const unique = (values: string[]) => new Set(values).size === values.length;
+	const containerIds = containers.map(({ id }) => id);
+	const itemIds = items.map(({ id }) => id);
+	const popularReferencesValid = containers.every((container) =>
+		(container.supporting?.popularGroups ?? []).every((group) =>
+			group.itemIds.every((id) => itemIds.includes(id)),
+		),
+	);
+	const topLevelOnlyContainersValid = containers
+		.slice(page.layout.containers.length)
+		.every(({ variant }) => variant !== 'ad' && variant !== 'supporting');
+
+	if (
+		!unique(containerIds) ||
+		!unique(itemIds) ||
+		!popularReferencesValid ||
+		!topLevelOnlyContainersValid
+	) {
+		throw new TypeError(
+			'Unable to validate request body for puzzles page.',
+		);
+	}
+
+	return page;
 };
