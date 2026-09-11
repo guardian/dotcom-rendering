@@ -20,6 +20,18 @@ entirely on their existing, separate `/crosswords/*` flow
 Article pipeline) — that flow is unrelated to Puzzle Page and is not
 described further in this file.
 
+Readers reach these puzzles via `frontend`'s public
+`/puzzles-and-games/...` URLs (e.g. `/puzzles-and-games/sudoku/easy`,
+`/puzzles-and-games/word-wheel`) — this is `frontend`'s own routing and
+does not affect DCR's `/PuzzlePage` endpoint/contract at all; it's
+mentioned here only so example URLs elsewhere in this doc stay accurate.
+
+**Access control lives entirely on the `frontend` side, not here.** DCR's
+own `/PuzzlePage` endpoint is, and remains, ungated (see "Hitting it
+locally" below). `frontend` gates reader access to these routes via its
+existing `PuzzlesHubExperiment`/`puzzles-new-hub` AB test before it ever
+POSTs to DCR — DCR does not re-implement or duplicate that gating.
+
 ### The V0 puzzle set
 
 The `PuzzleConfig` registry (`src/model/puzzles/puzzleConfigs.ts`) currently
@@ -119,18 +131,19 @@ iframe-based slug:
 (`src/types/puzzlePage.ts`, validated by `validateAsPuzzlePageType` in
 `src/model/validate.puzzlePage.ts`):
 
-| Field                              | Type                                                   | Notes                                                                                                                                                                              |
-| ---------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                               | `string`                                               | Any stable identifier for the page instance.                                                                                                                                       |
-| `slug`                             | `string`                                               | Looked up in the `PuzzleConfig` registry; unknown slug → `404`.                                                                                                                    |
-| `webTitle`                         | `string`                                               | Page `<title>` / share text.                                                                                                                                                       |
-| `config`                           | `ConfigType`                                           | Same shape frontend sends for `/Article`, `/PuzzlesPage`, etc. Only checked for a `serverSideABTests: Record<string, string>` shape — content otherwise unused (no AB gate today). |
-| `nav`                              | `FENavType`                                            | Same shape as other routes.                                                                                                                                                        |
-| `pageFooter`                       | `FooterType`                                           | Same shape as other routes.                                                                                                                                                        |
-| `canonicalUrl`                     | `string`                                               | Canonical link tag.                                                                                                                                                                |
-| `editionId`                        | `EditionId` (`'UK' \| 'US' \| 'AU' \| 'INT' \| 'EUR'`) | Validated against the known edition set.                                                                                                                                           |
-| `instance.title`                   | `string` (required)                                    | Rendered as the page `<h1>` and the iframe `title` attribute.                                                                                                                      |
-| `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)      | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                   |
+| Field                              | Type                                                   | Notes                                                                                                                                                                                                                                                                                                      |
+| ---------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                               | `string`                                               | Any stable identifier for the page instance.                                                                                                                                                                                                                                                               |
+| `slug`                             | `string`                                               | Looked up in the `PuzzleConfig` registry; unknown slug → `404`.                                                                                                                                                                                                                                            |
+| `webTitle`                         | `string`                                               | Page `<title>` / share text.                                                                                                                                                                                                                                                                               |
+| `config`                           | `ConfigType`                                           | Same shape frontend sends for `/Article`, `/PuzzlesPage`, etc. Only checked for a `serverSideABTests: Record<string, string>` shape — content otherwise unused (no AB gate today).                                                                                                                         |
+| `nav`                              | `FENavType`                                            | Same shape as other routes.                                                                                                                                                                                                                                                                                |
+| `pageFooter`                       | `FooterType`                                           | Same shape as other routes.                                                                                                                                                                                                                                                                                |
+| `canonicalUrl`                     | `string`                                               | Canonical link tag.                                                                                                                                                                                                                                                                                        |
+| `editionId`                        | `EditionId` (`'UK' \| 'US' \| 'AU' \| 'INT' \| 'EUR'`) | Validated against the known edition set.                                                                                                                                                                                                                                                                   |
+| `instance.title`                   | `string` (required)                                    | Rendered as the page `<h1>` and the iframe `title` attribute.                                                                                                                                                                                                                                              |
+| `instance.puzzleDate`              | `string?` (e.g. `"2026-09-11"`)                        | Which day's puzzle the reader wants to see. Accepted and validated as an optional string only — **not yet wired into any rendering or the iframe URL** (see "Open questions"). Prep work for a future V1 calendar-navigation feature; unrelated to the removed crossword-only `date` display-string field. |
+| `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)      | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                                                                                                                                           |
 
 ### User identity passed to the puzzle iframe
 
@@ -210,13 +223,25 @@ the browser treats as a fresh navigation — no manual reload call needed. The
 - **Responsive/mobile layout has not been explicitly verified** for Puzzle
   Page or the puzzle iframes themselves (which are entirely provider-
   controlled content).
-- **No access control / kill-switch that doesn't require a code change and
-  redeploy.** The AB gate (`game-page-experiment`) that originally hid this
-  page was removed entirely (see git history) since the route is expected
-  to be exposed to real traffic via a separate project. There is currently
-  no way to disable `/PuzzlePage` (e.g. in an incident) without a code
-  change and deploy in this repo or the routing project in front of it —
-  a proper kill-switch mechanism is still needed before wider rollout.
+- **`instance.puzzleDate` is accepted but not yet used for anything.** It is
+  validated as an optional string and otherwise ignored — DCR always shows
+  whichever puzzle the resolved `slug`'s provider iframe URL happens to
+  serve "live" today, regardless of `puzzleDate`. Wiring this into the
+  actual iframe URL (so a specific past date's puzzle is shown) is deferred
+  to V1, pending investigation into whether/how each provider's iframe URL
+  scheme (AmuseLabs, Wordiply) supports requesting a specific historical
+  date at all.
+- **DCR's `/PuzzlePage` endpoint itself has no access control or
+  kill-switch that doesn't require a code change and redeploy.** The AB
+  gate (`game-page-experiment`) that originally hid this page in DCR was
+  removed entirely (see git history). Reader-facing access control now
+  lives on the `frontend` side instead, via its existing
+  `PuzzlesHubExperiment`/`puzzles-new-hub` AB test gating which readers
+  ever reach a `/puzzles-and-games/...` URL in the first place — DCR itself
+  still has no equivalent gate or kill-switch of its own in front of
+  `/PuzzlePage`. If DCR's endpoint is ever exposed to traffic that bypasses
+  `frontend`'s gating (e.g. hit directly), there is currently nothing
+  stopping it from rendering.
 - **The Puzzles Hub (`src/layouts/PuzzlesLayout.tsx` and friends) is a
   separate, unrelated feature** (a directory/listing page) and is not
   documented in this file.

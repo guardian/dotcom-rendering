@@ -55,7 +55,7 @@ export const createPuzzlePage = (
 		},
 		nav: Standard.nav,
 		pageFooter: Standard.pageFooter,
-		canonicalUrl: `https://www.theguardian.com/games/${slug}`,
+		canonicalUrl: `https://www.theguardian.com/puzzles-and-games/${slug}`,
 		editionId: Standard.editionId,
 		instance: {
 			title: `${slug} puzzle`,
