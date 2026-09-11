@@ -1,8 +1,10 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import type { DropdownLinkType } from '../components/Dropdown.island';
 import { linkNotificationCount } from './linkNotificationCount';
 
-describe('linksNotificationCount', () => {
-	it('returns the sum of notifications across all links', () => {
+void nodeDescribe('linksNotificationCount', () => {
+	void nodeIt('returns the sum of notifications across all links', () => {
 		const links: DropdownLinkType[] = [
 			{
 				id: 'one',
@@ -40,12 +42,10 @@ describe('linksNotificationCount', () => {
 			},
 		];
 
-		const notificationCount = linkNotificationCount(links);
-
-		expect(notificationCount).toEqual(3);
+		assert.equal(linkNotificationCount(links), 3);
 	});
 
-	it('returns 0 when there are no notifications', () => {
+	void nodeIt('returns 0 when there are no notifications', () => {
 		const links = [
 			{
 				id: 'one',
@@ -61,8 +61,6 @@ describe('linksNotificationCount', () => {
 			},
 		];
 
-		const notificationCount = linkNotificationCount(links);
-
-		expect(notificationCount).toEqual(0);
+		assert.equal(linkNotificationCount(links), 0);
 	});
 });

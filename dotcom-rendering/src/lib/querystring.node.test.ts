@@ -1,7 +1,9 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import { constructQuery } from './querystring';
 
-describe('constructQuery', () => {
-	it('constructs the correct query string from an object', () => {
+void nodeDescribe('constructQuery', () => {
+	void nodeIt('constructs the correct query string from an object', () => {
 		const testParams = {
 			sens: 'f',
 			si: 'f',
@@ -16,6 +18,6 @@ describe('constructQuery', () => {
 			a: undefined,
 		};
 		const expectedQuery = `sens=f&si=f&vl=333&cc=UK&s=sport&inskin=f&ct=article&url=%2Fsport%2F2017%2Fsep%2F30%2Ftest-article&su=0&pa=f&a=undefined`;
-		expect(constructQuery(testParams)).toBe(expectedQuery);
+		assert.equal(constructQuery(testParams), expectedQuery);
 	});
 });

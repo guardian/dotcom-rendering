@@ -23,6 +23,7 @@ module.exports = {
 		'^.+\\.(mjs|js|ts|tsx)$': ['@swc/jest', swcConfig],
 	},
 	testMatch: ['**/*.test.+(ts|tsx|js)'],
+	testPathIgnorePatterns: ['\\.node\\.test\\.'],
 	setupFilesAfterEnv: ['<rootDir>/scripts/jest/setup.ts'],
 	moduleNameMapper: {
 		'^svgs/(.*)$': '<rootDir>/__mocks__/svgMock.tsx',

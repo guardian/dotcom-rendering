@@ -10,6 +10,7 @@
 		"lint:stats": "pnpm lint --format node_modules/eslint-stats/byError.js",
 		"tsc": "tsc",
 		"test": "IMAGE_DIGEST=sha256:12345 jest --maxWorkers=50%",
+		"test:node": "IMAGE_DIGEST=sha256:12345 node --import=tsx --test \"src/**/*.node.test.ts\"",
 		"test:watch": "IMAGE_DIGEST=sha256:12345 jest --watch --maxWorkers=25%",
 		"test:ci": "IMAGE_DIGEST=sha256:12345 jest --runInBand",
 		"playwright:open": "playwright test --ui",
