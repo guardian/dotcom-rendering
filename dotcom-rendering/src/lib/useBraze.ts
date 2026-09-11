@@ -28,6 +28,17 @@ export const useBraze = (
 	brazeMessages: BrazeMessagesInterface | undefined;
 	brazeCards: BrazeCardsInterface | undefined;
 	braze: BrazeInstance | null;
+	/**
+	 * Whether the underlying `buildBrazeMessaging` fetch (SDK init + the
+	 * Banners System `requestBannersRefresh` call — see
+	 * `buildBrazeMessaging.ts`) is still in flight. `false` once it has
+	 * settled, whether that's with a usable `braze` instance or with
+	 * `error`/a null `braze`. Consumers that need to know whether Braze has
+	 * had a real chance to return banner data (as opposed to just not having
+	 * one) — e.g. to avoid mistaking "not loaded yet" for "no banner" —
+	 * should check this rather than relying on `braze` being non-null.
+	 */
+	isLoading: boolean;
 } => {
 	const authStatus = useAuthStatus();
 	const isSignedIn = authStatus.kind === 'SignedIn';
@@ -37,11 +48,16 @@ export const useBraze = (
 		() => buildBrazeMessaging(idApiUrl, isSignedIn, renderingTarget),
 	);
 
+	// SWR 1.x doesn't expose an `isLoading` flag directly, so derive it: once
+	// the fetch settles, either `data` or `error` is populated.
+	const isLoading = data === undefined && error === undefined;
+
 	if (error) {
 		return {
 			brazeMessages: new NullBrazeMessages(),
 			brazeCards: new NullBrazeCards(),
 			braze: null,
+			isLoading,
 		};
 	}
 
@@ -49,5 +65,6 @@ export const useBraze = (
 		brazeMessages: data?.brazeMessages,
 		brazeCards: data?.brazeCards,
 		braze: data?.braze ? data?.braze : null,
+		isLoading,
 	};
 };
