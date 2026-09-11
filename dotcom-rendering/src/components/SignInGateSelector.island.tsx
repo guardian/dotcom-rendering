@@ -1,5 +1,5 @@
 import { getCookie, isUndefined, storage } from '@guardian/libs';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { constructQuery } from '../lib/querystring';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
@@ -441,6 +441,7 @@ const ShowSignInGateAuxia = ({
 	// element, which on long pages sits far below the viewport.
 	const isMandatoryPopup =
 		userTreatment.treatmentType === 'NONDISMISSIBLE_SIGN_IN_GATE_POPUP';
+	const lastRecordedView = useRef<string>();
 
 	useEffect(() => {
 		const signInGate = document.getElementById('sign-in-gate');
@@ -454,6 +455,17 @@ const ShowSignInGateAuxia = ({
 		// The mandatory popup is shown on mount (see shouldShowV2Gate), so
 		// its view is recorded immediately instead of waiting for scroll.
 		if (hasBeenSeen === true || isMandatoryPopup) {
+			const viewIdentity = JSON.stringify([
+				treatmentId,
+				userTreatment.treatmentTrackingId,
+			]);
+			// Visibility changes and equivalent treatment objects must not
+			// record the same display again. A new treatment or mount can.
+			if (lastRecordedView.current === viewIdentity) {
+				return;
+			}
+			lastRecordedView.current = viewIdentity;
+
 			// Tell Auxia
 			// Gandalf: never contact Auxia for Guardian-managed treatments.
 			if (!isGandalf) {
