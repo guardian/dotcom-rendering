@@ -9,12 +9,12 @@ const SignInGateCustomizableText = React.lazy(() => {
 		'identity',
 		'SignInGateCustomizableText',
 	);
-	return import(
-		/* webpackChunkName: "SignInGateCustomizableText" */ '../gateDesigns/SignInGateCustomizableText'
-	).then((module) => {
-		endPerformanceMeasure();
-		return { default: module.SignInGateCustomizableText };
-	});
+	return import('../gateDesigns/SignInGateCustomizableText').then(
+		(module) => {
+			endPerformanceMeasure();
+			return { default: module.SignInGateCustomizableText };
+		},
+	);
 });
 
 export const signInGateComponent: SignInGateComponent = {

@@ -15,8 +15,9 @@ ENV NODE_ENV=production
 
 # Build the application
 FROM dependencies AS builder
-RUN webpack --config webpack/webpack.config.js --progress
-RUN node scripts/islands/island-descriptions.mjs
+RUN node vite/build.mts
+# TODO VITE FIXME
+# RUN node scripts/islands/island-descriptions.mjs
 
 # Finally, create the production image with only the necessary files
 FROM dhi.io/node:24-alpine3.23 AS application

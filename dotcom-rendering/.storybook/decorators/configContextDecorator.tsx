@@ -1,6 +1,6 @@
-import type { Decorator } from '@storybook/react-webpack5';
 import { ConfigProvider } from '../../src/components/ConfigContext';
-import type { Config } from '../../src/types/configContext';
+import type { Decorator } from '@storybook/react-vite';
+import { Config } from '../../src/types/configContext';
 
 const defaultConfig = {
 	renderingTarget: 'Web',

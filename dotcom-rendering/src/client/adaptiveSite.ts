@@ -17,9 +17,7 @@ export const shouldAdapt = async (): Promise<boolean> => {
 	if (window.location.host !== 'www.theguardian.com') return false;
 
 	// only evaluate this code if we want to adapt in response to page performance
-	const { isPerformingPoorly } = await import(
-		/* webpackMode: "eager" */ './poorPerformanceMonitoring'
-	);
+	const { isPerformingPoorly } = await import('./poorPerformanceMonitoring');
 
 	return isPerformingPoorly();
 };
