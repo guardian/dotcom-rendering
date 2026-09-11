@@ -1,5 +1,4 @@
 import type { ABParticipations } from '../experiments/lib/ab-tests';
-import type { ProductCta } from '../types/content';
 
 export const SKIMLINK_REL = 'sponsored noreferrer noopener';
 
@@ -137,15 +136,4 @@ export const buildXcustParamForAffiliateLink = ({
 		utmParamsString,
 		xcustComponentId,
 	});
-};
-
-export const getProductLinkLabelWithoutPrice = (
-	cardCta: ProductCta,
-): string => {
-	return cardCta.text !== '' ? cardCta.text : `Buy at ${cardCta.retailer}`;
-};
-
-export const getProductLinkLabelWithPrice = (cta: ProductCta): string => {
-	const overrideLabel = cta.text.trim().length > 0;
-	return overrideLabel ? cta.text : `${cta.price} at ${cta.retailer}`;
 };
