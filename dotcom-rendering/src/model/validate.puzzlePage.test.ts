@@ -66,4 +66,32 @@ describe('validateAsPuzzlePageType', () => {
 		] as unknown as typeof page.instance.moreFromPuzzlesAndGames;
 		expectInvalid(page);
 	});
+
+	it('accepts a payload with puzzleDate present', () => {
+		const page = createPuzzlePage('sudoku-easy', {
+			instance: {
+				...createPuzzlePage('sudoku-easy').instance,
+				puzzleDate: '2026-09-11',
+			},
+		});
+		expect(validateAsPuzzlePageType(page).instance.puzzleDate).toBe(
+			'2026-09-11',
+		);
+	});
+
+	it('accepts a payload with puzzleDate absent', () => {
+		const page = clone(createPuzzlePage('sudoku-easy'));
+		delete (page.instance as { puzzleDate?: string }).puzzleDate;
+		expect(
+			validateAsPuzzlePageType(page).instance.puzzleDate,
+		).toBeUndefined();
+	});
+
+	it('rejects a non-string puzzleDate', () => {
+		const page = clone(createPuzzlePage('sudoku-easy')) as unknown as {
+			instance: { puzzleDate?: unknown };
+		};
+		page.instance.puzzleDate = 20260911;
+		expectInvalid(page);
+	});
 });

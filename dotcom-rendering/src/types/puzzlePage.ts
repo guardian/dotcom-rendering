@@ -15,6 +15,20 @@ import type { PuzzleItem } from './puzzlesPage';
  */
 export interface PuzzlePageInstance {
 	title: string;
+	/**
+	 * Which day's puzzle the reader wants to see, as a plain date string
+	 * (e.g. `"2026-09-11"`). This is prep work for a future V1
+	 * calendar-navigation feature (the reader will be able to navigate from
+	 * a calendar to a specific past puzzle, so the page won't always show
+	 * "today's" puzzle) — DCR currently accepts and validates this field
+	 * but does **not** yet wire it into any rendering logic or the iframe
+	 * URL. See "Open questions" in `docs/puzzle-page.md`.
+	 *
+	 * Unrelated to the removed crossword-only `date` field this type used
+	 * to have (a formatted *display* string like "Mon 7 Sep 2026"):
+	 * `puzzleDate` is a *request/selection* input, not display text.
+	 */
+	puzzleDate?: string;
 	moreFromPuzzlesAndGames?: PuzzleItem[];
 }
 

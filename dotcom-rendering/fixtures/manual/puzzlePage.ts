@@ -59,6 +59,7 @@ export const createPuzzlePage = (
 		editionId: Standard.editionId,
 		instance: {
 			title: `${slug} puzzle`,
+			puzzleDate: '2026-09-11',
 			moreFromPuzzlesAndGames: sampleMoreFromPuzzlesAndGames,
 		},
 		...overrides,

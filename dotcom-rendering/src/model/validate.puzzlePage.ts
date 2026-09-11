@@ -3,6 +3,7 @@ import type { FEPuzzlePageType } from '../types/puzzlePage';
 import {
 	editions,
 	isNonEmptyString,
+	isOptionalString,
 	isPuzzleItem,
 	isPuzzlesConfig,
 	isRecord,
@@ -30,6 +31,7 @@ const isPuzzlePageInstance = (value: unknown): boolean => {
 
 	return (
 		isNonEmptyString(value.title) &&
+		isOptionalString(value.puzzleDate) &&
 		(value.moreFromPuzzlesAndGames === undefined ||
 			(Array.isArray(value.moreFromPuzzlesAndGames) &&
 				value.moreFromPuzzlesAndGames.every((item) =>

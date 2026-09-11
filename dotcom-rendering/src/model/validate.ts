@@ -182,7 +182,7 @@ export const isRecord = (value: unknown): value is Record<string, unknown> =>
 export const isNonEmptyString = (value: unknown): value is string =>
 	typeof value === 'string' && value.trim().length > 0;
 
-const isOptionalString = (value: unknown): boolean =>
+export const isOptionalString = (value: unknown): boolean =>
 	value === undefined || typeof value === 'string';
 
 const isOptionalColour = (value: unknown): boolean =>
