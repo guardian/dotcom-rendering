@@ -1,7 +1,12 @@
+import type { CountryCode } from '@guardian/libs';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { buildAuxiaGateDisplayData } from '../../lib/auxia';
 import type { EditionId } from '../../lib/edition';
+import {
+	getGandalfPageViewCount,
+	incrementGandalfPageViewCount,
+} from '../../lib/gandalf';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { TagType } from '../../types/tag';
@@ -150,6 +155,8 @@ export interface CanShowSignInGateProps {
 	contentType?: string;
 	sectionId?: string;
 	tags?: TagType[];
+	ophanPageViewId: string;
+	countryCode?: CountryCode;
 }
 export const canShowSignInGatePortal = async ({
 	isSignedIn,
@@ -161,8 +168,10 @@ export const canShowSignInGatePortal = async ({
 	contentType,
 	sectionId,
 	tags,
+	ophanPageViewId,
+	countryCode,
 }: CanShowSignInGateProps): Promise<CanShowResult<AuxiaGateDisplayData>> => {
-	if (!window.guardian.config.switches.signInGate) {
+	if (window.guardian.config.switches.signInGate !== true) {
 		// Gates are disabled from the Frontend switchboard
 		return Promise.resolve({ show: false });
 	}
@@ -174,7 +183,7 @@ export const canShowSignInGatePortal = async ({
 		return Promise.resolve({ show: false });
 	}
 
-	if (isPaidContent || isPreview || isSignedIn) {
+	if (isPaidContent || isPreview || isSignedIn === true) {
 		return Promise.resolve({ show: false });
 	}
 
@@ -195,17 +204,39 @@ export const canShowSignInGatePortal = async ({
 	try {
 		const auxiaData = await buildAuxiaGateDisplayData(
 			contributionsServiceUrl,
-			pageId ?? '',
+			pageId,
 			editionId,
 			contentType,
 			sectionId,
 			tags,
 			retrieveLastGateDismissedCount('AuxiaSignInGate'),
+			// 0-based count of previously completed eligible pageviews for this
+			// country. SDC only consumes this for active Gandalf traffic; the
+			// counter itself is advanced below once SDC confirms the pageview
+			// counted.
+			getGandalfPageViewCount(countryCode ?? ''),
 		);
+
+		// Gandalf (the Guardian-managed sign-in gate journey): SDC marks
+		// responses produced by the active Gandalf rules. The pageview counted
+		// towards the country's free allowance even when no gate is displayed,
+		// so record it exactly once per pageview.
+		if (auxiaData?.auxiaData.gandalfSignInGate === true) {
+			incrementGandalfPageViewCount(countryCode ?? '', ophanPageViewId);
+		}
+
+		const meta = (
+			auxiaData
+				? {
+						...auxiaData,
+						gandalfCountryCode: countryCode,
+					}
+				: auxiaData
+		) as AuxiaGateDisplayData;
 
 		return {
 			show: auxiaData?.auxiaData.userTreatment !== undefined,
-			meta: auxiaData as AuxiaGateDisplayData,
+			meta,
 		};
 	} catch (e) {
 		const message = `SignInGatePortal canShowSignInGatePortal - error: ${String(
