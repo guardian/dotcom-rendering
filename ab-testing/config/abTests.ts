@@ -215,10 +215,10 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		audienceSize: 0 / 100,
 		audienceSpace: "B",
-    groups: ["control", "variant"],
+		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
-  },
-  {
+	},
+	{
 		name: "commercial-rich-links",
 		description:
 			"Test to measure the impact of fixing rich links insert behaviour and reduced restrictions on ad insertion around rich links.",
@@ -228,6 +228,8 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
 	},
 ];
 
