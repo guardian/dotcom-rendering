@@ -1,3 +1,5 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import { validateAsPuzzlesPageType } from './validate';
 
 const validPage = () => ({
@@ -55,7 +57,7 @@ describe('validateAsPuzzlesPageType', () => {
 		expect(() => validateAsPuzzlesPageType(featuredPage)).toThrow();
 	});
 
-	it.each([
+	for (const [name, mutate] of [
 		[
 			'unknown card variant',
 			(page: ReturnType<typeof validPage>) => {
@@ -100,13 +102,15 @@ describe('validateAsPuzzlesPageType', () => {
 				});
 			},
 		],
-	])('rejects %s', (_, mutate) => {
-		const page = validPage();
-		mutate(page);
-		expect(() => validateAsPuzzlesPageType(page)).toThrow(
-			'Unable to validate request body for puzzles page',
-		);
-	});
+	] as const) {
+		void nodeIt(`rejects ${name}`, () => {
+			const page = validPage();
+			mutate(page);
+			expect(() => validateAsPuzzlesPageType(page)).toThrow(
+				'Unable to validate request body for puzzles page',
+			);
+		});
+	}
 
 	it('accepts supporting content with valid puzzle references', () => {
 		const page = validPage();

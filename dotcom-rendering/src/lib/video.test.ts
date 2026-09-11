@@ -1,3 +1,5 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import type { FEMediaAsset } from '../frontend/feFront';
 import type { VideoAssets } from '../types/content';
 import type { Source } from './video';
@@ -336,28 +338,32 @@ describe('video', () => {
 	});
 
 	describe('convertCurrentTimeToProgressPercentage', () => {
-		it.each([
+		for (const testCase of [
 			{ currentTime: 0, duration: 23, expectedPercentage: 0 },
 			{ currentTime: 24, duration: 32, expectedPercentage: 75 },
 			{ currentTime: 56, duration: 56, expectedPercentage: 100 },
 			{ currentTime: 12, duration: 11, expectedPercentage: 100 },
 			{ currentTime: -5, duration: 10, expectedPercentage: null },
 			{ currentTime: 5, duration: -10, expectedPercentage: null },
-		])(
-			'should return the correct progress percentage based on the current time and duration',
-			({ currentTime, duration, expectedPercentage }) => {
-				expect(
-					convertCurrentTimeToProgressPercentage(
-						currentTime,
-						duration,
-					),
-				).toEqual(expectedPercentage);
-			},
-		);
+		]) {
+			void nodeIt(
+				'should return the correct progress percentage based on the current time and duration',
+				() => {
+					const { currentTime, duration, expectedPercentage } =
+						testCase;
+					expect(
+						convertCurrentTimeToProgressPercentage(
+							currentTime,
+							duration,
+						),
+					).toEqual(expectedPercentage);
+				},
+			);
+		}
 	});
 
 	describe('convertProgressPercentageToCurrentTime', () => {
-		it.each([
+		for (const testCase of [
 			{ progressPercentage: 0, duration: 23, expectedCurrentTime: 0 },
 			{ progressPercentage: 75, duration: 32, expectedCurrentTime: 24 },
 			{ progressPercentage: 100, duration: 56, expectedCurrentTime: 56 },
@@ -369,21 +375,28 @@ describe('video', () => {
 				duration: 10,
 				expectedCurrentTime: 0,
 			},
-		])(
-			'should return the correct current time based on the progress percentage and duration',
-			({ progressPercentage, duration, expectedCurrentTime }) => {
-				expect(
-					convertProgressPercentageToCurrentTime(
+		]) {
+			void nodeIt(
+				'should return the correct current time based on the progress percentage and duration',
+				() => {
+					const {
 						progressPercentage,
 						duration,
-					),
-				).toEqual(expectedCurrentTime);
-			},
-		);
+						expectedCurrentTime,
+					} = testCase;
+					expect(
+						convertProgressPercentageToCurrentTime(
+							progressPercentage,
+							duration,
+						),
+					).toEqual(expectedCurrentTime);
+				},
+			);
+		}
 	});
 
 	describe('formatTimeForDisplay', () => {
-		it.each([
+		for (const testCase of [
 			{ timeInSeconds: -1.24, expectedFormattedTime: '0:00' },
 			{ timeInSeconds: 0, expectedFormattedTime: '0:00' },
 			{ timeInSeconds: 59, expectedFormattedTime: '0:59' },
@@ -392,28 +405,35 @@ describe('video', () => {
 			{ timeInSeconds: 92.5, expectedFormattedTime: '1:32' },
 			{ timeInSeconds: 1000, expectedFormattedTime: '16:40' },
 			{ timeInSeconds: 10000, expectedFormattedTime: '166:40' },
-		])(
-			'should return the correct formatted time based on the time in seconds',
-			({ timeInSeconds, expectedFormattedTime }) => {
-				expect(formatTimeForDisplay(timeInSeconds)).toEqual(
-					expectedFormattedTime,
-				);
-			},
-		);
+		]) {
+			void nodeIt(
+				'should return the correct formatted time based on the time in seconds',
+				() => {
+					const { timeInSeconds, expectedFormattedTime } = testCase;
+					expect(formatTimeForDisplay(timeInSeconds)).toEqual(
+						expectedFormattedTime,
+					);
+				},
+			);
+		}
 	});
 	describe('roundAspectRatio', () => {
-		it.each([
+		for (const testCase of [
 			{ aspectRatio: 0.56938445, expectedRoundedAspectRatio: 0.569 },
 			{ aspectRatio: 1.277777, expectedRoundedAspectRatio: 1.278 },
 			{ aspectRatio: 1.25, expectedRoundedAspectRatio: 1.25 },
 			{ aspectRatio: 0.8, expectedRoundedAspectRatio: 0.8 },
-		])(
-			'should return the correct aspect ratio rounded to 3 decimal places',
-			({ aspectRatio, expectedRoundedAspectRatio }) => {
-				expect(roundAspectRatio(aspectRatio)).toEqual(
-					expectedRoundedAspectRatio,
-				);
-			},
-		);
+		]) {
+			void nodeIt(
+				'should return the correct aspect ratio rounded to 3 decimal places',
+				() => {
+					const { aspectRatio, expectedRoundedAspectRatio } =
+						testCase;
+					expect(roundAspectRatio(aspectRatio)).toEqual(
+						expectedRoundedAspectRatio,
+					);
+				},
+			);
+		}
 	});
 });

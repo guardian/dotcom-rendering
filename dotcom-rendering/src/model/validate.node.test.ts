@@ -53,21 +53,27 @@ const hostedContentArticles = [
 	},
 ];
 
-describe('validate', () => {
-	it('throws on invalid data', () => {
+void nodeDescribe('validate', () => {
+	void nodeIt('throws on invalid data', () => {
 		const data = { foo: 'bar' };
-		expect(() => validateAsFEArticle(data)).toThrow(TypeError);
+		assert.throws(() => validateAsFEArticle(data), TypeError);
 	});
 
 	for (const article of articles) {
-		it(`validates data for a ${article.name} article`, () => {
-			expect(validateAsFEArticle(article.data)).toBe(article.data);
+		void nodeIt(`validates data for a ${article.name} article`, () => {
+			assert.equal(validateAsFEArticle(article.data), article.data);
 		});
 	}
 
 	for (const hostedItem of hostedContentArticles) {
-		it(`validates data for hosted ${hostedItem.name} content`, () => {
-			expect(validateAsFEArticle(hostedItem.data)).toBe(hostedItem.data);
-		});
+		void nodeIt(
+			`validates data for hosted ${hostedItem.name} content`,
+			() => {
+				assert.equal(
+					validateAsFEArticle(hostedItem.data),
+					hostedItem.data,
+				);
+			},
+		);
 	}
 });

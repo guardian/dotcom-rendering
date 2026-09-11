@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import { images } from '../../fixtures/generated/images';
 import type { FEElement } from '../../src/types/content';
 import { enhanceTimeline } from './enhanceTimeline';
@@ -140,8 +141,8 @@ const elementsWithMultipleSections: FEElement[] = [
 	},
 ];
 
-describe('enhanceTimeline', () => {
-	it('keeps a main media with a role that is valid', () => {
+void nodeDescribe('enhanceTimeline', () => {
+	void nodeIt('keeps a main media with a role that is valid', () => {
 		const enhanced = enhanceTimeline(identity)(elementsWithNoSections);
 		assert.equal(
 			enhanced[0]?._type,
@@ -150,10 +151,10 @@ describe('enhanceTimeline', () => {
 
 		const timelineEvent = enhanced[0].events[0];
 		assert.notEqual(timelineEvent, undefined);
-		expect(timelineEvent?.main).toBeDefined();
+		assert.notEqual(timelineEvent?.main, undefined);
 	});
 
-	it('drops a main media with a role that is not valid', () => {
+	void nodeIt('drops a main media with a role that is not valid', () => {
 		const enhanced = enhanceTimeline(identity)(elementsWithNoSections);
 		assert.equal(
 			enhanced[0]?._type,
@@ -162,10 +163,10 @@ describe('enhanceTimeline', () => {
 
 		const timelineEvent = enhanced[0].events[1];
 		assert.notEqual(timelineEvent, undefined);
-		expect(timelineEvent?.main).toBeUndefined();
+		assert.equal(timelineEvent?.main, undefined);
 	});
 
-	it('keeps a main media without a role', () => {
+	void nodeIt('keeps a main media without a role', () => {
 		const enhanced = enhanceTimeline(identity)(elementsWithNoSections);
 		assert.equal(
 			enhanced[0]?._type,
@@ -174,9 +175,9 @@ describe('enhanceTimeline', () => {
 
 		const timelineEvent = enhanced[0].events[2];
 		assert.notEqual(timelineEvent, undefined);
-		expect(timelineEvent?.main).toBeDefined();
+		assert.notEqual(timelineEvent?.main, undefined);
 	});
-	it('keeps a body element with a role that is valid', () => {
+	void nodeIt('keeps a body element with a role that is valid', () => {
 		const enhanced = enhanceTimeline(identity)(elementsWithNoSections);
 		assert.equal(
 			enhanced[0]?._type,
@@ -185,10 +186,10 @@ describe('enhanceTimeline', () => {
 
 		const timelineEvent = enhanced[0].events[3];
 		assert.notEqual(timelineEvent, undefined);
-		expect(timelineEvent?.body).toEqual([images[1]]);
+		assert.deepEqual(timelineEvent?.body, [images[1]]);
 	});
 
-	it('drops a body element with a role that is not valid', () => {
+	void nodeIt('drops a body element with a role that is not valid', () => {
 		const enhanced = enhanceTimeline(identity)(elementsWithNoSections);
 		assert.equal(
 			enhanced[0]?._type,
@@ -197,10 +198,10 @@ describe('enhanceTimeline', () => {
 
 		const timelineEvent = enhanced[0].events[4];
 		assert.notEqual(timelineEvent, undefined);
-		expect(timelineEvent?.body).toEqual([]);
+		assert.deepEqual(timelineEvent?.body, []);
 	});
 
-	it('keeps a body element without a role', () => {
+	void nodeIt('keeps a body element without a role', () => {
 		const enhanced = enhanceTimeline(identity)(elementsWithNoSections);
 		assert.equal(
 			enhanced[0]?._type,
@@ -209,7 +210,7 @@ describe('enhanceTimeline', () => {
 
 		const timelineEvent = enhanced[0].events[5];
 		assert.notEqual(timelineEvent, undefined);
-		expect(timelineEvent?.body).toEqual([
+		assert.deepEqual(timelineEvent?.body, [
 			{
 				_type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement',
 				elementId: 'mock-id',
@@ -219,7 +220,7 @@ describe('enhanceTimeline', () => {
 		]);
 	});
 
-	it('enhances a timeline with one section appropriately', () => {
+	void nodeIt('enhances a timeline with one section appropriately', () => {
 		const enhanced = enhanceTimeline(identity)(elementsWithOneSection);
 		assert.equal(
 			enhanced[0]?._type,
@@ -228,19 +229,22 @@ describe('enhanceTimeline', () => {
 
 		const timelineSection = enhanced[0].sections[0];
 		assert.notEqual(timelineSection, undefined);
-		expect(timelineSection?.title).toEqual('Section 1');
+		assert.deepEqual(timelineSection?.title, 'Section 1');
 	});
 
-	it('enhances a timeline with multiple sections appropriately', () => {
-		const enhanced = enhanceTimeline(identity)(
-			elementsWithMultipleSections,
-		);
-		assert.equal(
-			enhanced[0]?._type,
-			'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
-		);
+	void nodeIt(
+		'enhances a timeline with multiple sections appropriately',
+		() => {
+			const enhanced = enhanceTimeline(identity)(
+				elementsWithMultipleSections,
+			);
+			assert.equal(
+				enhanced[0]?._type,
+				'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
+			);
 
-		const timelineSections = enhanced[0].sections;
-		expect(timelineSections).toHaveLength(2);
-	});
+			const timelineSections = enhanced[0].sections;
+			assert.equal(timelineSections.length, 2);
+		},
+	);
 });

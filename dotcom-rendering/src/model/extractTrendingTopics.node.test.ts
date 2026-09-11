@@ -1,3 +1,5 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import type { FETagType } from '../types/tag';
 import type {
 	NarrowedFECollectionType,
@@ -43,8 +45,8 @@ const tagD = tag('d');
 const tagE = tag('e');
 const tagF = tag('f');
 
-describe('extractTrendingTopics', () => {
-	it('returns tags in correct order with normal input', () => {
+void nodeDescribe('extractTrendingTopics', () => {
+	void nodeIt('returns tags in correct order with normal input', () => {
 		const collection: NarrowedFECollectionType = {
 			curated: [
 				card('a', [tagA]),
@@ -58,12 +60,13 @@ describe('extractTrendingTopics', () => {
 			],
 		};
 
-		expect(
+		assert.deepEqual(
 			extractTrendingTopicsFomFront([collection], 'au/environment'),
-		).toEqual([tagA, tagB, tagC, tagD, tagE, tagF]);
+			[tagA, tagB, tagC, tagD, tagE, tagF],
+		);
 	});
 
-	it('deduplicates cards', () => {
+	void nodeIt('deduplicates cards', () => {
 		const collection: NarrowedFECollectionType = {
 			curated: [
 				card('a', [tagA]),
@@ -82,15 +85,16 @@ describe('extractTrendingTopics', () => {
 			curated: [card('g', [tagF])],
 			backfill: [card('g', [tagF])],
 		};
-		expect(
+		assert.deepEqual(
 			extractTrendingTopicsFomFront(
 				[collection, secondCollection],
 				'au/environment',
 			),
-		).toEqual([tagA, tagB, tagC, tagD, tagE, tagF]);
+			[tagA, tagB, tagC, tagD, tagE, tagF],
+		);
 	});
 
-	it('removes cards with id matching pageId', () => {
+	void nodeIt('removes cards with id matching pageId', () => {
 		const tagWithPageId = tag('au/environment');
 		const collection: NarrowedFECollectionType = {
 			curated: [
@@ -104,56 +108,61 @@ describe('extractTrendingTopics', () => {
 				card('f', [tagWithPageId, tagA, tagB, tagC, tagD, tagE, tagF]),
 			],
 		};
-		expect(
+		assert.deepEqual(
 			extractTrendingTopicsFomFront([collection], 'au/environment'),
-		).toEqual([tagA, tagB, tagC, tagD, tagE, tagF]);
+			[tagA, tagB, tagC, tagD, tagE, tagF],
+		);
 	});
 
-	it('removes cards without paidContentType or tagType being Keyword or Topics', () => {
-		const tagWithTopicsPaidContentType = tag(
-			'tagWithTopicsPaidContentType',
-			'',
-			'Topics',
-		);
-		const tagWithKeywordPaidContentType = tag(
-			'tagWithKeywordPaidContentType',
-			'',
-			'Keyword',
-		);
-		const tagWithKeywordTagType = tag('tagWithKeywordTagType');
-		const tagWithNoneOfTheAbove = tag(
-			'tagWithNoneOfTheAbove',
-			'Series',
-			'Series',
-		);
-		const collection: NarrowedFECollectionType = {
-			curated: [
-				card('a', [tagWithNoneOfTheAbove]),
-				card('b', [
-					tagWithNoneOfTheAbove,
-					tagWithTopicsPaidContentType,
-				]),
-			],
-			backfill: [
-				card('c', [
-					tagWithNoneOfTheAbove,
-					tagWithTopicsPaidContentType,
-					tagWithKeywordPaidContentType,
-				]),
-				card('d', [
-					tagWithNoneOfTheAbove,
+	void nodeIt(
+		'removes cards without paidContentType or tagType being Keyword or Topics',
+		() => {
+			const tagWithTopicsPaidContentType = tag(
+				'tagWithTopicsPaidContentType',
+				'',
+				'Topics',
+			);
+			const tagWithKeywordPaidContentType = tag(
+				'tagWithKeywordPaidContentType',
+				'',
+				'Keyword',
+			);
+			const tagWithKeywordTagType = tag('tagWithKeywordTagType');
+			const tagWithNoneOfTheAbove = tag(
+				'tagWithNoneOfTheAbove',
+				'Series',
+				'Series',
+			);
+			const collection: NarrowedFECollectionType = {
+				curated: [
+					card('a', [tagWithNoneOfTheAbove]),
+					card('b', [
+						tagWithNoneOfTheAbove,
+						tagWithTopicsPaidContentType,
+					]),
+				],
+				backfill: [
+					card('c', [
+						tagWithNoneOfTheAbove,
+						tagWithTopicsPaidContentType,
+						tagWithKeywordPaidContentType,
+					]),
+					card('d', [
+						tagWithNoneOfTheAbove,
+						tagWithTopicsPaidContentType,
+						tagWithKeywordPaidContentType,
+						tagWithKeywordTagType,
+					]),
+				],
+			};
+			assert.deepEqual(
+				extractTrendingTopicsFomFront([collection], 'au/environment'),
+				[
 					tagWithTopicsPaidContentType,
 					tagWithKeywordPaidContentType,
 					tagWithKeywordTagType,
-				]),
-			],
-		};
-		expect(
-			extractTrendingTopicsFomFront([collection], 'au/environment'),
-		).toEqual([
-			tagWithTopicsPaidContentType,
-			tagWithKeywordPaidContentType,
-			tagWithKeywordTagType,
-		]);
-	});
+				],
+			);
+		},
+	);
 });

@@ -60,7 +60,6 @@ void nodeDescribe('parseCricketMatchV2', () => {
 		assert.deepEqual(result.result, {
 			type: 'abandoned',
 			description: 'Match abandoned due to rain',
-			winner: undefined,
 		});
 	});
 
@@ -77,7 +76,6 @@ void nodeDescribe('parseCricketMatchV2', () => {
 		assert.deepEqual(result.result, {
 			type: 'no-result',
 			description: 'No result',
-			winner: undefined,
 		});
 	});
 });

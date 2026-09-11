@@ -1,3 +1,5 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import {
 	brandedTestCollections,
 	largeFlexibleGeneralCollection,

@@ -1,0 +1,289 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { getBylineComponentsFromTokens, getSoleContributor } from './byline';
+
+void nodeDescribe('Byline utilities', () => {
+	void nodeIt(
+		'should link a single tag by linking name tokens with Contributor tag titles',
+		() => {
+			const bylineTokens = ['Eva Smith', 'and friends'];
+			const tags = [
+				{
+					id: 'eva-smith',
+					type: 'Contributor',
+					title: 'Eva Smith',
+				},
+			];
+
+			const bylineComponents = getBylineComponentsFromTokens(
+				bylineTokens,
+				tags,
+			);
+
+			assert.deepEqual(bylineComponents, [
+				{ tag: tags[0], token: 'Eva Smith' },
+				'and friends',
+			]);
+		},
+	);
+
+	void nodeIt(
+		'should link multiple tags by linking name tokens with Contributor tag titles',
+		() => {
+			const bylineTokens = ['Eva Smith', ' and ', 'Duncan Campbell'];
+			const tags = [
+				{
+					id: 'eva-smith',
+					type: 'Contributor',
+					title: 'Eva Smith',
+				},
+				{
+					id: 'duncan-campbell',
+					type: 'Contributor',
+					title: 'Duncan Campbell',
+				},
+			];
+			const bylineComponents = getBylineComponentsFromTokens(
+				bylineTokens,
+				tags,
+			);
+
+			assert.deepEqual(bylineComponents, [
+				{ tag: tags[0], token: 'Eva Smith' },
+				' and ',
+				{ tag: tags[1], token: 'Duncan Campbell' },
+			]);
+		},
+	);
+
+	void nodeIt(
+		'should not reuse a contributor tag, to successfully disambiguate identical names',
+		() => {
+			const bylineTokens = [
+				'Duncan Campbell',
+				' and ',
+				'Duncan Campbell',
+			];
+			const tags = [
+				{
+					id: 'duncan-campbell',
+					type: 'Contributor',
+					title: 'Duncan Campbell',
+				},
+				{
+					id: 'duncan-campbell-1',
+					type: 'Contributor',
+					title: 'Duncan Campbell',
+				},
+			];
+
+			const bylineComponents = getBylineComponentsFromTokens(
+				bylineTokens,
+				tags,
+			);
+
+			assert.deepEqual(bylineComponents, [
+				{ tag: tags[0], token: 'Duncan Campbell' },
+				' and ',
+				{ tag: tags[1], token: 'Duncan Campbell' },
+			]);
+		},
+	);
+
+	void nodeDescribe('getSoleContributor', () => {
+		void nodeDescribe('returns a contributor', () => {
+			void nodeIt('Sebastian Köhn, as told to Wilfried Chan', () => {
+				// https://www.theguardian.com/world/2022/jul/23/i-literally-screamed-out-loud-in-pain-my-two-weeks-of-monkeypox-hell
+
+				const soleContributor = getSoleContributor(
+					[
+						{
+							id: 'profile/wilfred-chan',
+							type: 'Contributor',
+							title: 'Wilfred Chan',
+						},
+					],
+					'Sebastian Köhn, as told to Wilfred Chan',
+				);
+
+				assert.equal(soleContributor?.title, 'Wilfred Chan');
+			});
+
+			void nodeIt('Jim Waterson Media editor', () => {
+				// https://www.theguardian.com/media/2021/nov/17/geordie-greig-ousted-as-editor-of-the-daily-mail
+
+				const soleContributor = getSoleContributor(
+					[
+						{
+							id: 'media/geordie-greig',
+							type: 'Keyword',
+							title: 'Geordie Greig',
+						},
+						{
+							id: 'profile/jim-waterson',
+							type: 'Contributor',
+							title: 'Jim Waterson',
+							twitterHandle: 'jimwaterson',
+							bylineImageUrl:
+								'https://i.guim.co.uk/img/uploads/2019/01/21/Jim_Waterson.jpg?width=300&quality=85&auto=format&fit=max&s=70dd40e52d9cbe5053f58ad8c4421664',
+						},
+					],
+					'Jim Waterson Media editor',
+				);
+
+				assert.equal(soleContributor?.title, 'Jim Waterson');
+			});
+
+			void nodeIt('First Dog on the Moon', () => {
+				// https://www.theguardian.com/commentisfree/2022/jul/22/europe-is-ablaze-italian-glaciers-are-collapsing-the-climate-crisis-is-here
+
+				const soleContributor = getSoleContributor(
+					[
+						{
+							id: 'profile/first-dog-on-the-moon',
+							type: 'Contributor',
+							title: 'First Dog on the Moon',
+						},
+					],
+					'First Dog on the Moon',
+				);
+
+				assert.equal(soleContributor?.title, 'First Dog on the Moon');
+			});
+
+			void nodeIt('Sam Levine in New York', () => {
+				// https://www.theguardian.com/us-news/2022/jul/22/january-6-panel-american-democracy-nose-dive
+
+				const soleContributor = getSoleContributor(
+					[
+						{
+							id: 'profile/sam-levine',
+							type: 'Contributor',
+							title: 'Sam Levine',
+						},
+					],
+					'Sam Levine in New York',
+				);
+
+				assert.equal(soleContributor?.title, 'Sam Levine');
+			});
+		});
+
+		void nodeDescribe('returns `undefined`', () => {
+			void nodeIt(
+				'Sam Levin in Los Angeles and Sam Levine in New York',
+				() => {
+					// https://www.theguardian.com/us-news/2020/oct/12/republicans-election-2020-unauthorized-ballot-boxes
+
+					const soleContributor = getSoleContributor(
+						[
+							{
+								id: 'profile/sam-levin',
+								type: 'Contributor',
+								title: 'Sam Levin',
+								twitterHandle: 'SamTLevin',
+							},
+							{
+								id: 'profile/sam-levine',
+								type: 'Contributor',
+								title: 'Sam Levine',
+							},
+						],
+						'Sam Levin in Los Angeles and Sam Levine in New York',
+					);
+					assert.equal(soleContributor, undefined);
+				},
+			);
+
+			void nodeIt('Gabriel Smith', () => {
+				const soleContributor = getSoleContributor(
+					[
+						{
+							id: 'profile/ben-beaumont-thomas',
+							type: 'Contributor',
+							title: 'Ben Beaumont-Thomas',
+							twitterHandle: 'ben_bt',
+						},
+					],
+					'Gabriel Smith',
+				);
+				assert.equal(soleContributor, undefined);
+			});
+
+			void nodeIt('Zoe Williams and others', () => {
+				// https://www.theguardian.com/commentisfree/2022/jul/20/britain-next-prime-minister-rishi-sunak-liz-truss-conservative-leader
+
+				const soleContributor = getSoleContributor(
+					[
+						{
+							id: 'profile/zoewilliams',
+							type: 'Contributor',
+							title: 'Zoe Williams',
+							twitterHandle: 'zoesqwilliams',
+						},
+						{
+							id: 'profile/sahil-dutta',
+							type: 'Contributor',
+							title: 'Sahil Dutta',
+						},
+						{
+							id: 'profile/henry-hill',
+							type: 'Contributor',
+							title: 'Henry Hill',
+						},
+						{
+							id: 'profile/simonjenkins',
+							type: 'Contributor',
+							title: 'Simon Jenkins',
+						},
+						{
+							id: 'profile/moya-lothian-mclean',
+							type: 'Contributor',
+							title: 'Moya Lothian-McLean',
+						},
+					],
+					'Zoe Williams and others',
+				);
+
+				assert.equal(soleContributor, undefined);
+			});
+
+			void nodeIt(
+				'Paul MacInnes, Nesrine Malik, Julie Bindel, Peter Preston',
+				() => {
+					// https://www.theguardian.com/commentisfree/2011/dec/30/person-of-2011-writers-verdict
+
+					const soleContributor = getSoleContributor(
+						[
+							{
+								id: 'profile/paulmacinnes',
+								type: 'Contributor',
+								title: 'Paul MacInnes',
+								twitterHandle: 'PaulMac',
+							},
+							{
+								id: 'profile/peterpreston',
+								type: 'Contributor',
+								title: 'Peter Preston',
+							},
+							{
+								id: 'profile/nesrinemalik',
+								type: 'Contributor',
+								title: 'Nesrine Malik',
+							},
+							{
+								id: 'profile/juliebindel',
+								type: 'Contributor',
+								title: 'Julie Bindel',
+								twitterHandle: 'bindelj',
+							},
+						],
+						'Paul MacInnes, Nesrine Malik, Julie Bindel, Peter Preston',
+					);
+
+					assert.equal(soleContributor, undefined);
+				},
+			);
+		});
+	});
+});

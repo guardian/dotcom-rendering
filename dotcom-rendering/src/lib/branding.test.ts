@@ -1,8 +1,22 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import type { Branding } from '../types/branding';
 import { decideCollectionBranding, decideTagPageBranding } from './branding';
 
 // For the purpose of these tests we don't care about the contents of the logo objects
 const logo = {} as Branding['logo'];
+
+const assertMatchObject = (actual: unknown, expected: unknown): void => {
+	if (expected === null || typeof expected !== 'object') {
+		assert.deepEqual(actual, expected);
+		return;
+	}
+
+	assert.ok(actual !== null && typeof actual === 'object');
+	for (const [key, value] of Object.entries(expected)) {
+		assertMatchObject((actual as Record<string, unknown>)[key], value);
+	}
+};
 
 describe('decideCollectionBranding', () => {
 	it('picks branding from a card by their edition', () => {

@@ -1,3 +1,5 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRFrontCard } from '../types/front';
 import { groupTrailsByDates } from './groupTrailsByDates';

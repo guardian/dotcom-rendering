@@ -1,0 +1,198 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { validateAsPuzzlesPageType } from './validate';
+
+const validPage = () => ({
+	id: 'puzzles',
+	webTitle: 'Puzzles and games',
+	editionId: 'UK',
+	canonicalUrl: 'https://www.theguardian.com/puzzles-and-games',
+	isAdFreeUser: false,
+	config: { serverSideABTests: { 'puzzles-new-hub': 'variant' } },
+	nav: {},
+	pageFooter: {},
+	layout: {
+		containers: [
+			{
+				id: 'word-games',
+				title: 'Word games',
+				variant: 'standard',
+				content: {
+					nestedContainers: [],
+					items: [
+						[
+							{
+								id: 'word-wheel',
+								title: 'Word wheel',
+								type: 'word-game',
+								set: 'all',
+								cardVariant: 'primary',
+								cadence: 'Daily',
+								slug: 'word-wheel',
+								variant: 'iframe-page',
+							},
+						],
+					],
+				},
+			},
+		],
+	},
+});
+
+void nodeDescribe('validateAsPuzzlesPageType', () => {
+	void nodeIt('accepts a valid recursive blueprint contract', () => {
+		assert.equal(
+			validateAsPuzzlesPageType(validPage()).layout.containers[0]?.id,
+			'word-games',
+		);
+	});
+
+	void nodeIt(
+		'accepts enabled on featured containers and rejects it elsewhere',
+		() => {
+			const featuredPage = validPage();
+			featuredPage.layout.containers[0]!.variant = 'featured';
+			(
+				featuredPage.layout.containers[0] as { enabled?: boolean }
+			).enabled = true;
+			assert.notEqual(validateAsPuzzlesPageType(featuredPage), undefined);
+
+			featuredPage.layout.containers[0]!.variant = 'standard';
+			assert.throws(() => validateAsPuzzlesPageType(featuredPage));
+		},
+	);
+
+	for (const [name, mutate] of [
+		[
+			'unknown card variant',
+			(page: ReturnType<typeof validPage>) => {
+				page.layout.containers[0]!.content.items[0]![0]!.cardVariant =
+					'hero';
+			},
+		],
+		[
+			'missing cadence',
+			(page: ReturnType<typeof validPage>) => {
+				const card = page.layout.containers[0]!.content
+					.items[0]![0]! as {
+					cadence?: string;
+				};
+				delete card.cadence;
+			},
+		],
+		[
+			'invalid colour',
+			(page: ReturnType<typeof validPage>) => {
+				const card = page.layout.containers[0]!.content
+					.items[0]![0]! as {
+					backgroundColour?: string;
+				};
+				card.backgroundColour = 'red';
+			},
+		],
+		[
+			'unsupported span',
+			(page: ReturnType<typeof validPage>) => {
+				const container = page.layout.containers[0]! as {
+					desktopSpan?: number;
+				};
+				container.desktopSpan = 13;
+			},
+		],
+		[
+			'duplicate stable ID',
+			(page: ReturnType<typeof validPage>) => {
+				page.layout.containers[0]!.content.items[0]!.push({
+					...page.layout.containers[0]!.content.items[0]![0]!,
+				});
+			},
+		],
+	] as const) {
+		void nodeIt(`rejects ${name}`, () => {
+			const page = validPage();
+			mutate(page);
+			assert.throws(() => validateAsPuzzlesPageType(page), {
+				message: 'Unable to validate request body for puzzles page.',
+			});
+		});
+	}
+
+	void nodeIt(
+		'accepts supporting content with valid puzzle references',
+		() => {
+			const page = validPage();
+			page.layout.containers.push({
+				id: 'supporting',
+				title: '',
+				variant: 'supporting',
+				adSlot: 'mostpop',
+				content: { items: [], nestedContainers: [] },
+				supporting: {
+					usefulLinksTitle: 'Useful links',
+					usefulLinks: [
+						{
+							title: 'Archive',
+							url: '/puzzles-and-games/word-wheel/archive',
+						},
+					],
+					popularTitle: 'Most popular puzzles',
+					popularGroups: [
+						{ title: 'Most played', itemIds: ['word-wheel'] },
+					],
+				},
+			} as never);
+
+			assert.equal(
+				validateAsPuzzlesPageType(page).layout.containers.length,
+				2,
+			);
+		},
+	);
+
+	void nodeIt(
+		'rejects supporting content which references an unknown puzzle',
+		() => {
+			const page = validPage();
+			page.layout.containers.push({
+				id: 'supporting',
+				title: '',
+				variant: 'supporting',
+				content: { items: [], nestedContainers: [] },
+				supporting: {
+					usefulLinksTitle: 'Useful links',
+					usefulLinks: [],
+					popularTitle: 'Most popular puzzles',
+					popularGroups: [
+						{ title: 'Most played', itemIds: ['missing'] },
+					],
+				},
+			} as never);
+
+			assert.throws(() => validateAsPuzzlesPageType(page));
+		},
+	);
+
+	void nodeIt(
+		'accepts a valid top-level ad placement and rejects one nested inside content',
+		() => {
+			const page = validPage();
+			const ad = {
+				id: 'inline-ad',
+				title: '',
+				variant: 'ad',
+				adSlot: 'inline1',
+				content: { items: [], nestedContainers: [] },
+			};
+			page.layout.containers.push(ad as never);
+			assert.equal(
+				validateAsPuzzlesPageType(page).layout.containers.length,
+				2,
+			);
+			page.layout.containers.pop();
+			page.layout.containers[0]!.content.nestedContainers.push(
+				ad as never,
+			);
+			assert.throws(() => validateAsPuzzlesPageType(page));
+		},
+	);
+});
