@@ -207,6 +207,18 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
+		name: "commercial-mobile-above-nav-test",
+		description: "Test adding the mobile-above-nav ad slot to mobile pages",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-30",
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
 		name: "commercial-rich-links",
 		description:
 			"Test to measure the impact of fixing rich links insert behaviour and reduced restrictions on ad insertion around rich links.",

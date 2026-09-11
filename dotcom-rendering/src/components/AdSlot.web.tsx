@@ -106,6 +106,39 @@ const hideBelowDesktop = css`
 
 const containerMinHeight = getMinHeight(250, space[5]);
 
+const mobileAboveNavMinHeight = getMinHeight(
+	adSizes.mobileLeaderboardXl.height,
+	space[5],
+);
+
+const mobileAboveNavContainerStyles = css`
+	padding-bottom: ${space[5]}px;
+	position: relative;
+	margin: 0 auto;
+	text-align: left;
+	display: block;
+	width: 100%;
+	min-height: ${mobileAboveNavMinHeight}px;
+
+	&[mobile-above-nav-ad-rendered='true'] {
+		min-height: auto;
+	}
+
+	/* Ad placeholder grey box rendered while loading the ad */
+	&:not([mobile-above-nav-ad-rendered='true']) {
+		::before {
+			content: '';
+			position: absolute;
+			height: 100px;
+			width: 100%;
+			top: ${labelHeight}px;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: ${palette.neutral[93]};
+		}
+	}
+`;
+
 const topAboveNavContainerStyles = css`
 	padding-bottom: ${space[5]}px;
 	position: relative;
@@ -401,14 +434,14 @@ const mobileStickyAdStyles = css`
 		content: 'Advertisement';
 		display: block;
 		position: relative;
-		padding-left: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
-		padding-right: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
+		padding-left: calc((100% - ${adSizes.mobileLeaderboard.width}px) / 2);
+		padding-right: calc((100% - ${adSizes.mobileLeaderboard.width}px) / 2);
 		${labelBoxStyles}
 	}
 `;
 
 const crosswordBannerMobileAdStyles = css`
-	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
+	min-height: ${getMinHeight(adSizes.mobileLeaderboard.height)}px;
 `;
 
 const galleryInlineAdStyles = css`
@@ -637,6 +670,25 @@ export const AdSlot = ({
 						].join(' ')}
 						data-link-name="ad slot top-above-nav"
 						data-name="top-above-nav"
+						data-testid="slot"
+						aria-hidden="true"
+					></div>
+				</AdSlotWrapper>
+			);
+		}
+		case 'mobile-above-nav': {
+			return (
+				<AdSlotWrapper css={mobileAboveNavContainerStyles}>
+					<div
+						id="dfp-ad--mobile-above-nav"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--mobile-above-nav',
+							'ad-slot--rendered',
+						].join(' ')}
+						data-link-name="ad slot mobile-above-nav"
+						data-name="mobile-above-nav"
 						data-testid="slot"
 						aria-hidden="true"
 					></div>

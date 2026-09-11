@@ -21,7 +21,11 @@ const headerAdWrapperStyles = css`
 	top: 0;
 `;
 
-export const HeaderAdSlot = () => {
+export const HeaderAdSlot = ({
+	includeMobile = false,
+}: {
+	includeMobile?: boolean;
+}) => {
 	return (
 		<div css={headerWrapper}>
 			<Global
@@ -37,6 +41,16 @@ export const HeaderAdSlot = () => {
 					}
 				`}
 			/>
+			{includeMobile && (
+				<Hide when="above" breakpoint="tablet">
+					<div
+						css={headerAdWrapperStyles}
+						className="top-banner-ad-container"
+					>
+						<AdSlot position="mobile-above-nav" />
+					</div>
+				</Hide>
+			)}
 			<Hide when="below" breakpoint="tablet">
 				<div
 					css={headerAdWrapperStyles}
