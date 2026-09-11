@@ -5,24 +5,15 @@ import type {
 import { Standard } from '../generated/fe-articles/Standard';
 
 export const minimalPuzzlesLayout: PuzzlesLayoutType = {
-	filters: [],
 	containers: [],
 };
 
 export const fullPuzzlesLayout: PuzzlesLayoutType = {
-	filters: [
+	containers: [
 		{
 			id: 'word-games',
 			title: 'Word games',
-			target: '#word-games',
-			backgroundColour: '#f9d4e8',
-		},
-	],
-	containers: [
-		{
-			title: 'Word games',
 			variant: 'standard',
-			filterId: 'word-games',
 			content: {
 				items: [
 					[
@@ -37,12 +28,12 @@ export const fullPuzzlesLayout: PuzzlesLayoutType = {
 							url: 'https://www.wordiply.com/',
 							variant: 'iframe-page',
 							backgroundColour: '#f9d4e8',
-							filterId: 'word-games',
 						},
 					],
 				],
 				nestedContainers: [
 					{
+						id: 'word-wheel',
 						title: 'Word wheel',
 						desktopSpan: 6,
 						content: {
@@ -60,16 +51,6 @@ export const fullPuzzlesLayout: PuzzlesLayoutType = {
 								],
 							],
 							nestedContainers: [],
-							archive: {
-								id: 'word-wheel-archive',
-								title: 'Word wheel archive',
-								type: 'word-wheel',
-								set: 'all',
-								cardVariant: 'archive',
-								slug: 'word-wheel',
-								url: '/puzzles/word-wheel/archive',
-								variant: 'archive-page',
-							},
 						},
 					},
 				],
@@ -85,7 +66,7 @@ export const createPuzzlesPage = (
 	editionId: Standard.editionId,
 	editionLongForm: Standard.editionLongForm,
 	contributionsServiceUrl: Standard.contributionsServiceUrl,
-	webTitle: 'Puzzles & Games',
+	webTitle: 'Puzzles and games',
 	description: 'Play the Guardian’s daily puzzles and games.',
 	config: {
 		...Standard.config,
@@ -96,7 +77,7 @@ export const createPuzzlesPage = (
 	pageFooter: Standard.pageFooter,
 	commercialProperties: Standard.commercialProperties,
 	isAdFreeUser: false,
-	canonicalUrl: 'https://www.theguardian.com/puzzles',
+	canonicalUrl: 'https://www.theguardian.com/puzzles-and-games',
 	layout: minimalPuzzlesLayout,
 	...overrides,
 });

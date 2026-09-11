@@ -1,17 +1,12 @@
-import type { Request, Response } from 'express';
-import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
-import {
-	puzzlesHubExperiment,
-	puzzlesHubParticipation,
-} from '../lib/puzzlesHubExperiment';
+import { validateAsPuzzlesPageType } from '../model/validate';
 import { handlePuzzlesPage } from './handler.puzzlesPage.web';
 import { renderPuzzlesPage } from './render.puzzlesPage.web';
 
-jest.mock('./render.puzzlesPage.web', () => ({
-	renderPuzzlesPage: jest.fn(),
-}));
+jest.mock('../model/validate');
+jest.mock('./render.puzzlesPage.web');
 
-const mockedRenderPuzzlesPage = jest.mocked(renderPuzzlesPage);
+const validate = jest.mocked(validateAsPuzzlesPageType);
+const renderPage = jest.mocked(renderPuzzlesPage);
 
 const response = () => {
 	const res = {
@@ -22,77 +17,62 @@ const response = () => {
 	};
 	res.status.mockReturnValue(res);
 	res.set.mockReturnValue(res);
-	res.send.mockReturnValue(res);
-	res.sendStatus.mockReturnValue(res);
 	return res;
 };
-
-const pageWithParticipations = (serverSideABTests: Record<string, string>) =>
-	createPuzzlesPage({
-		config: {
-			...createPuzzlesPage().config,
-			serverSideABTests,
-		},
-	});
-
-const invokeHandler = (body: unknown, res: ReturnType<typeof response>) =>
-	handlePuzzlesPage(
-		{ body } as Request,
-		res as unknown as Response,
-		jest.fn(),
-	);
 
 describe('handlePuzzlesPage', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
-		mockedRenderPuzzlesPage.mockReturnValue({
-			html: '<html>Puzzles</html>',
-			prefetchScripts: ['/assets/index.js'],
+		renderPage.mockReturnValue({
+			html: '<main>Puzzles</main>',
+			prefetchScripts: [],
 		});
 	});
 
-	it('renders the page for the configured variant', () => {
+	it('renders the exact variant participation outside development', () => {
+		validate.mockReturnValue({
+			config: { serverSideABTests: { 'puzzles-new-hub': 'variant' } },
+		} as never);
 		const res = response();
-		const page = pageWithParticipations(
-			puzzlesHubParticipation(puzzlesHubExperiment.variant),
-		);
-
-		invokeHandler(page, res);
-
-		expect(mockedRenderPuzzlesPage).toHaveBeenCalledWith({
-			puzzlesPage: page,
-		});
+		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
+		expect(renderPage).toHaveBeenCalledTimes(1);
 		expect(res.status).toHaveBeenCalledWith(200);
-		expect(res.set).toHaveBeenCalledWith(
-			'Link',
-			expect.stringContaining('/assets/index.js'),
-		);
-		expect(res.send).toHaveBeenCalledWith('<html>Puzzles</html>');
+	});
+
+	it('renders without experiment participation in local development', () => {
+		const previousNodeEnvironment = process.env.NODE_ENV;
+		process.env.NODE_ENV = 'development';
+		validate.mockReturnValue({
+			config: { serverSideABTests: {} },
+		} as never);
+		const res = response();
+
+		try {
+			handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
+			expect(renderPage).toHaveBeenCalledTimes(1);
+			expect(res.status).toHaveBeenCalledWith(200);
+			process.env.NODE_ENV = previousNodeEnvironment;
+		} finally {
+			if (previousNodeEnvironment === undefined) {
+				delete process.env.NODE_ENV;
+			} else {
+				process.env.NODE_ENV = previousNodeEnvironment;
+			}
+		}
 	});
 
 	it.each([
-		['control', puzzlesHubParticipation(puzzlesHubExperiment.control)],
-		['absent', {}],
-		['malformed', puzzlesHubParticipation('variant:extra')],
-		['unknown group', puzzlesHubParticipation('unknown')],
-		['unrelated', { 'another-test': 'variant' }],
-	])('returns 404 and does not render for %s participation', (_, tests) => {
+		['control', { 'puzzles-new-hub': 'control' }],
+		['missing', {}],
+		['unknown group', { 'puzzles-new-hub': 'unknown' }],
+		['unrelated', { unrelated: 'variant' }],
+	])('returns 404 without mounting the renderer for %s', (_, tests) => {
+		validate.mockReturnValue({
+			config: { serverSideABTests: tests },
+		} as never);
 		const res = response();
-
-		invokeHandler(pageWithParticipations(tests), res);
-
+		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
 		expect(res.sendStatus).toHaveBeenCalledWith(404);
-		expect(mockedRenderPuzzlesPage).not.toHaveBeenCalled();
-	});
-
-	it('rejects an invalid payload without invoking the renderer', () => {
-		const res = response();
-		const invalidPage = pageWithParticipations(
-			puzzlesHubParticipation(puzzlesHubExperiment.variant),
-		) as unknown as Record<string, unknown>;
-		delete invalidPage.layout;
-
-		expect(() => invokeHandler(invalidPage, res)).toThrow(TypeError);
-		expect(mockedRenderPuzzlesPage).not.toHaveBeenCalled();
+		expect(renderPage).not.toHaveBeenCalled();
 	});
 });

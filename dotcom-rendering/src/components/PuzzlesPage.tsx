@@ -44,7 +44,7 @@ export const PuzzlesPage = ({ puzzlesPage, NAV }: Props) => {
 			<Island priority="critical">
 				<Metrics
 					commercialMetricsEnabled={
-						!!puzzlesPage.config.switches.commercialMetrics
+						puzzlesPage.config.switches.commercialMetrics === true
 					}
 				/>
 			</Island>

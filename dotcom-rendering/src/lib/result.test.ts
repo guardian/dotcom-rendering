@@ -180,6 +180,6 @@ describe('fromValibot', () => {
 		const result = fromValibot(valibotResult);
 		const err = result.getErrorOrThrow('Expected an Err');
 
-		expect(err[0]!.expected).toBe('"string literal"');
+		expect(err[0].expected).toBe('"string literal"');
 	});
 });
