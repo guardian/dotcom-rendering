@@ -1,8 +1,10 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import type { FETagType } from '../types/tag';
 import { enhanceTags } from './enhanceTags';
 
-describe('enhanceTags', () => {
-	it('maps a list of FETagType to TagType', () => {
+void nodeDescribe('enhanceTags', () => {
+	void nodeIt('maps a list of FETagType to TagType', () => {
 		const feTags: FETagType[] = [
 			{
 				properties: {
@@ -20,7 +22,7 @@ describe('enhanceTags', () => {
 
 		const tags = enhanceTags(feTags);
 
-		expect(tags).toEqual([
+		assert.deepEqual(tags, [
 			{
 				id: 'profile/morwennaferrier',
 				type: 'Contributor',

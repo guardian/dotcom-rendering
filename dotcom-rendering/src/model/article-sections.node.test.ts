@@ -1,6 +1,8 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import { findBySubsection } from './article-sections';
 
-describe('returns section for each subsection', () => {
+void nodeDescribe('returns section for each subsection', () => {
 	const testCases = [
 		[[], 'Guardian'],
 		[['books', 'childrens-books-site'], 'Books'],
@@ -89,10 +91,10 @@ describe('returns section for each subsection', () => {
 		[['tv-and-radio'], 'TvRadio'],
 	] as const;
 
-	it('returns correct Section for each test case', () => {
+	void nodeIt('returns correct Section for each test case', () => {
 		for (const [subsections, section] of testCases) {
 			for (const subsection of subsections) {
-				expect(findBySubsection(subsection).name).toEqual(section);
+				assert.equal(findBySubsection(subsection).name, section);
 			}
 		}
 	});

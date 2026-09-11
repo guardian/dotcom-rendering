@@ -1,3 +1,5 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import { Labs } from '../../fixtures/generated/fe-articles/Labs';
 import { Standard } from '../../fixtures/generated/fe-articles/Standard';
 import type { CommercialProperties } from '../types/commercial';
@@ -5,15 +7,16 @@ import { enhanceCommercialProperties } from './enhanceCommercialProperties';
 
 const isNumber = (width: unknown): width is number => typeof width === 'number';
 
-describe('Enhance Branding', () => {
-	it('does not change properties if they have no branding', () => {
+void nodeDescribe('Enhance Branding', () => {
+	void nodeIt('does not change properties if they have no branding', () => {
 		const { commercialProperties } = Standard;
-		expect(enhanceCommercialProperties(commercialProperties)).toEqual(
+		assert.deepEqual(
+			enhanceCommercialProperties(commercialProperties),
 			commercialProperties,
 		);
 	});
 
-	it('should have no widths above 140', () => {
+	void nodeIt('should have no widths above 140', () => {
 		const { commercialProperties: partial } = Labs;
 		const commercialProperties: CommercialProperties = {
 			...partial,
@@ -43,7 +46,7 @@ describe('Enhance Branding', () => {
 			.map((p) => p.branding?.logo.dimensions.width)
 			.filter(isNumber);
 
-		expect(Math.max(...dimensionsFail)).toBeGreaterThan(140);
+		assert.ok(Math.max(...dimensionsFail) > 140);
 
 		const dimensionsPass = Object.values(
 			enhanceCommercialProperties(commercialProperties),
@@ -51,6 +54,6 @@ describe('Enhance Branding', () => {
 			.map((p) => p.branding?.logo.dimensions.width)
 			.filter(isNumber);
 
-		expect(Math.max(...dimensionsPass)).toBeLessThanOrEqual(140);
+		assert.ok(Math.max(...dimensionsPass) <= 140);
 	});
 });

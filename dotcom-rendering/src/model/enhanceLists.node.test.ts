@@ -1,9 +1,11 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
 import { enhanceLists } from './enhanceLists';
 
-describe('Enhance lists', () => {
-	it('enhances a multi-byline element correctly', () => {
+void nodeDescribe('Enhance lists', () => {
+	void nodeIt('enhances a multi-byline element correctly', () => {
 		const elementsEnhancer = (elements: FEElement[]): FEElement[] =>
 			elements;
 
@@ -92,7 +94,8 @@ describe('Enhance lists', () => {
 			},
 		];
 
-		expect(enhanceLists(elementsEnhancer, tags)(inputElements)).toEqual(
+		assert.deepEqual(
+			enhanceLists(elementsEnhancer, tags)(inputElements),
 			outputElements,
 		);
 	});

@@ -1,14 +1,16 @@
-import { resultMatch, liveMatch } from '../fixtures/manual/cricketMatch';
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { liveMatch, resultMatch } from '../fixtures/manual/cricketMatch';
 import { parseCricketMatch } from './cricketMatch';
 
-describe('parseCricketMatchV2', () => {
-	it('parses a winner result cricket match correctly', () => {
+void nodeDescribe('parseCricketMatchV2', () => {
+	void nodeIt('parses a winner result cricket match correctly', () => {
 		const result = parseCricketMatch(resultMatch).getOrThrow(
 			'Expected parsing cricket match to succeed',
 		);
 
-		expect(result.kind).toEqual('Result');
-		expect(result.result).toEqual({
+		assert.equal(result.kind, 'Result');
+		assert.deepEqual(result.result, {
 			type: 'home-win',
 			description: 'England win by 115 runs',
 			winner: {
@@ -17,32 +19,35 @@ describe('parseCricketMatchV2', () => {
 				margin: 115,
 			},
 		});
-		expect(result.matchDate).toEqual(new Date('2026-06-17T10:00:00.000Z'));
+		assert.deepEqual(
+			result.matchDate,
+			new Date('2026-06-17T10:00:00.000Z'),
+		);
 	});
 
-	it('parses a cricket match in pre-match status', () => {
+	void nodeIt('parses a cricket match in pre-match status', () => {
 		const result = parseCricketMatch({
 			...liveMatch,
 			result: 'pre-match',
 			fullResult: undefined,
 		}).getOrThrow('Expected parsing cricket match to succeed');
 
-		expect(result.kind).toEqual('Fixture');
-		expect(result.result).toEqual(undefined);
+		assert.equal(result.kind, 'Fixture');
+		assert.equal(result.result, undefined);
 	});
 
-	it('parses a cricket match in in-play status', () => {
+	void nodeIt('parses a cricket match in in-play status', () => {
 		const result = parseCricketMatch({
 			...liveMatch,
 			result: 'in-play',
 			fullResult: undefined,
 		}).getOrThrow('Expected parsing cricket match to succeed');
 
-		expect(result.kind).toEqual('Live');
-		expect(result.result).toEqual(undefined);
+		assert.equal(result.kind, 'Live');
+		assert.equal(result.result, undefined);
 	});
 
-	it('parses an abandoned cricket match correctly', () => {
+	void nodeIt('parses an abandoned cricket match correctly', () => {
 		const result = parseCricketMatch({
 			...liveMatch,
 			fullResult: {
@@ -52,14 +57,14 @@ describe('parseCricketMatchV2', () => {
 			},
 		}).getOrThrow('Expected parsing cricket match to succeed');
 
-		expect(result.result).toEqual({
+		assert.deepEqual(result.result, {
 			type: 'abandoned',
 			description: 'Match abandoned due to rain',
 			winner: undefined,
 		});
 	});
 
-	it('parses a cricket match with no winner', () => {
+	void nodeIt('parses a cricket match with no winner', () => {
 		const result = parseCricketMatch({
 			...liveMatch,
 			fullResult: {
@@ -69,7 +74,7 @@ describe('parseCricketMatchV2', () => {
 			},
 		}).getOrThrow('Expected parsing cricket match to succeed');
 
-		expect(result.result).toEqual({
+		assert.deepEqual(result.result, {
 			type: 'no-result',
 			description: 'No result',
 			winner: undefined,

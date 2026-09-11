@@ -1,3 +1,4 @@
+import { it as nodeIt } from 'node:test';
 import { parse } from 'valibot';
 import { euParliament } from '../../../fixtures/manual/electionTrackers/euParliament';
 import { ukGeneralExitPoll } from '../../../fixtures/manual/electionTrackers/ukGeneralExitPoll';
@@ -7,26 +8,26 @@ import { usCongressEmpty } from '../../../fixtures/manual/electionTrackers/usCon
 import { usPresidential } from '../../../fixtures/manual/electionTrackers/usPresidential';
 import { ElectionComponents } from './electionComponent';
 
-it('validates US Congress data', () => {
+void nodeIt('validates US Congress data', () => {
 	parse(ElectionComponents, usCongressEmpty);
 });
 
-it('validates UK General data', () => {
+void nodeIt('validates UK General data', () => {
 	parse(ElectionComponents, ukGeneralFinal);
 });
 
-it('validates UK General Exit Poll data', () => {
+void nodeIt('validates UK General Exit Poll data', () => {
 	parse(ElectionComponents, ukGeneralExitPoll);
 });
 
-it('validates UK Local data', () => {
+void nodeIt('validates UK Local data', () => {
 	parse(ElectionComponents, ukLocal);
 });
 
-it('validates US Presidential data', () => {
+void nodeIt('validates US Presidential data', () => {
 	parse(ElectionComponents, usPresidential);
 });
 
-it('validates EU Parliament data', () => {
+void nodeIt('validates EU Parliament data', () => {
 	parse(ElectionComponents, euParliament);
 });

@@ -1,7 +1,9 @@
+import assert from 'node:assert/strict';
+import { describe as nodeDescribe, it as nodeIt } from 'node:test';
 import type { DCRContainerPalette } from '../types/front';
 import { cardHasDarkBackground } from './cardHelpers';
 
-describe('cardHasDarkBackground', () => {
+void nodeDescribe('cardHasDarkBackground', () => {
 	const testCases = [
 		{
 			containerPalette: undefined,
@@ -32,12 +34,15 @@ describe('cardHasDarkBackground', () => {
 		expectedResult: boolean;
 	}[];
 
-	it.each(testCases)(
-		'returns $expectedResult for $format format, $containerPalette containerPalette',
-		({ containerPalette, expectedResult }) => {
-			expect(cardHasDarkBackground(containerPalette)).toBe(
-				expectedResult,
-			);
-		},
-	);
+	for (const { containerPalette, expectedResult } of testCases) {
+		void nodeIt(
+			`returns ${expectedResult} for $format format, ${containerPalette} containerPalette`,
+			() => {
+				assert.equal(
+					cardHasDarkBackground(containerPalette),
+					expectedResult,
+				);
+			},
+		);
+	}
 });
