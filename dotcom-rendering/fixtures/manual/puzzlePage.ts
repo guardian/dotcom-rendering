@@ -25,6 +25,20 @@ const sampleMoreFromPuzzlesAndGames: PuzzleItem[] = [
 ];
 
 /**
+ * Illustrative canonical URL matching `frontend`'s public URL shape for
+ * puzzle pages (top-level, mirroring crosswords, distinct from the
+ * `/puzzles-and-games` hub) — purely a fixture value, not something DCR
+ * validates or enforces the shape of.
+ */
+const canonicalUrlForSlug = (slug: string): string => {
+	const sudokuMatch = /^sudoku-(.+)$/.exec(slug);
+	if (sudokuMatch) {
+		return `https://www.theguardian.com/sudoku/${sudokuMatch[1]}`;
+	}
+	return `https://www.theguardian.com/${slug}`;
+};
+
+/**
  * Builds a `FEPuzzlePageType` fixture for the given `slug`, defaulting to a
  * generic instance for that slug's `PuzzleConfig`. Pass `overrides` to
  * customise individual fields (deep-merged only one level for `instance`).
@@ -55,7 +69,7 @@ export const createPuzzlePage = (
 		},
 		nav: Standard.nav,
 		pageFooter: Standard.pageFooter,
-		canonicalUrl: `https://www.theguardian.com/puzzles-and-games/${slug}`,
+		canonicalUrl: canonicalUrlForSlug(slug),
 		editionId: Standard.editionId,
 		instance: {
 			title: `${slug} puzzle`,

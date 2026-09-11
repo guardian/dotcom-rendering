@@ -20,11 +20,15 @@ entirely on their existing, separate `/crosswords/*` flow
 Article pipeline) — that flow is unrelated to Puzzle Page and is not
 described further in this file.
 
-Readers reach these puzzles via `frontend`'s public
-`/puzzles-and-games/...` URLs (e.g. `/puzzles-and-games/sudoku/easy`,
-`/puzzles-and-games/word-wheel`) — this is `frontend`'s own routing and
-does not affect DCR's `/PuzzlePage` endpoint/contract at all; it's
-mentioned here only so example URLs elsewhere in this doc stay accurate.
+Readers reach individual puzzles via `frontend`'s public, top-level URLs —
+mirroring how crosswords are already routed — e.g. `/sudoku/easy`,
+`/word-wheel`, `/wordiply` (nested only where the puzzle itself has
+variants, like sudoku's difficulty levels). This is separate from the
+Puzzles Hub (the directory/listing page, unrelated to Puzzle Page), which
+stays at `/puzzles-and-games`. None of this is DCR's own routing — it's
+`frontend`'s public URL structure, and does not affect DCR's `/PuzzlePage`
+endpoint/contract at all; it's mentioned here only so example URLs
+elsewhere in this doc stay accurate.
 
 **Access control lives entirely on the `frontend` side, not here.** DCR's
 own `/PuzzlePage` endpoint is, and remains, ungated (see "Hitting it
@@ -237,7 +241,7 @@ the browser treats as a fresh navigation — no manual reload call needed. The
   removed entirely (see git history). Reader-facing access control now
   lives on the `frontend` side instead, via its existing
   `PuzzlesHubExperiment`/`puzzles-new-hub` AB test gating which readers
-  ever reach a `/puzzles-and-games/...` URL in the first place — DCR itself
+  ever reach one of these puzzle-page URLs in the first place — DCR itself
   still has no equivalent gate or kill-switch of its own in front of
   `/PuzzlePage`. If DCR's endpoint is ever exposed to traffic that bypasses
   `frontend`'s gating (e.g. hit directly), there is currently nothing
