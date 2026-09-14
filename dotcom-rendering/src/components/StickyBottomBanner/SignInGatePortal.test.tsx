@@ -224,7 +224,7 @@ describe('SignInGatePortal', () => {
 	});
 
 	describe('Gandalf (Guardian-managed sign-in gate journey)', () => {
-		it('sends the current per-country pageview count to SDC', async () => {
+		it('sends the current pageview count to SDC', async () => {
 			mockGetElementById.mockReturnValue(document.createElement('div'));
 			(
 				buildAuxiaGateDisplayData as jest.MockedFunction<
@@ -266,7 +266,6 @@ describe('SignInGatePortal', () => {
 				},
 			});
 			expect(mockIncrementGandalfPageViewCount).toHaveBeenCalledWith(
-				'NZ',
 				'test-page-view-id',
 			);
 		});
@@ -290,7 +289,6 @@ describe('SignInGatePortal', () => {
 				meta: { ...auxiaReturn, gandalfCountryCode: 'NZ' },
 			});
 			expect(mockIncrementGandalfPageViewCount).toHaveBeenCalledWith(
-				'NZ',
 				'test-page-view-id',
 			);
 		});

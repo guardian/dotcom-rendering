@@ -210,19 +210,19 @@ export const canShowSignInGatePortal = async ({
 			sectionId,
 			tags,
 			retrieveLastGateDismissedCount('AuxiaSignInGate'),
-			// 0-based count of previously completed eligible pageviews for this
-			// country. SDC only consumes this for active Gandalf traffic; the
-			// counter itself is advanced below once SDC confirms the pageview
+			// 0-based count of previously completed eligible pageviews. SDC
+			// only consumes this for active Gandalf traffic; the counter
+			// itself is advanced below once SDC confirms the pageview
 			// counted.
-			getGandalfPageViewCount(countryCode ?? ''),
+			getGandalfPageViewCount(),
 		);
 
 		// Gandalf (the Guardian-managed sign-in gate journey): SDC marks
 		// responses produced by the active Gandalf rules. The pageview counted
-		// towards the country's free allowance even when no gate is displayed,
-		// so record it exactly once per pageview.
+		// towards the free allowance even when no gate is displayed, so record
+		// it exactly once per pageview.
 		if (auxiaData?.auxiaData.gandalfSignInGate === true) {
-			incrementGandalfPageViewCount(countryCode ?? '', ophanPageViewId);
+			incrementGandalfPageViewCount(ophanPageViewId);
 		}
 
 		const meta = (

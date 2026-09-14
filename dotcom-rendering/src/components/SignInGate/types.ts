@@ -195,11 +195,9 @@ export interface AuxiaProxyGetTreatmentsPayload {
 // countries via the gandalfSignInGateCountries channel switch.
 //
 // `gandalfPageViewCount` is the 0-based number of eligible pageviews the
-// reader has already completed in the request's country under the active
-// Gandalf rules (see src/lib/gandalf.ts). Counters are per country, because
-// campaigns differ by country group. It is optional so older payloads and
-// traffic outside the Gandalf countries are unaffected; SDC treats a missing
-// value as 0.
+// reader has already completed under the active Gandalf rules (see
+// src/lib/gandalf.ts). It is optional so older payloads and traffic outside
+// the Gandalf countries are unaffected; SDC treats a missing value as 0.
 
 export interface AuxiaProxyGetTreatmentsResponse {
 	status: boolean;
