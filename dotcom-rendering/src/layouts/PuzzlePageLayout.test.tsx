@@ -31,6 +31,7 @@ const renderPuzzlePageLayout = (
 			<PuzzlePageLayout
 				puzzlePage={{ ...puzzlePage, puzzleConfig }}
 				NAV={extractNAV(puzzlePage.nav)}
+				darkModeAvailable={false}
 			/>
 		</ConfigProvider>,
 	);

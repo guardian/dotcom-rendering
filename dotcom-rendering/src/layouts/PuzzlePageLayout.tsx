@@ -146,8 +146,10 @@ export type ResolvedPuzzlePage = FEPuzzlePageType & {
 
 const PuzzlePageContent = ({
 	puzzlePage,
+	darkModeAvailable,
 }: {
 	puzzlePage: ResolvedPuzzlePage;
+	darkModeAvailable: boolean;
 }) => {
 	const { instance, puzzleConfig } = puzzlePage;
 
@@ -156,6 +158,7 @@ const PuzzlePageContent = ({
 			<PuzzleIframe
 				src={resolveIframeUrl(puzzleConfig)}
 				title={instance.title}
+				darkModeAvailable={darkModeAvailable}
 			/>
 		</Island>
 	);
@@ -185,9 +188,14 @@ const RelatedPuzzlesRail = ({
 interface Props {
 	puzzlePage: ResolvedPuzzlePage;
 	NAV: NavType;
+	darkModeAvailable: boolean;
 }
 
-export const PuzzlePageLayout = ({ puzzlePage, NAV }: Props) => {
+export const PuzzlePageLayout = ({
+	puzzlePage,
+	NAV,
+	darkModeAvailable,
+}: Props) => {
 	const { config, instance, editionId, puzzleConfig } = puzzlePage;
 
 	const showShare = puzzleConfig.shareEnabled;
@@ -256,7 +264,10 @@ export const PuzzlePageLayout = ({ puzzlePage, NAV }: Props) => {
 							</div>
 						</GridItem>
 						<GridItem area="body" element="article">
-							<PuzzlePageContent puzzlePage={puzzlePage} />
+							<PuzzlePageContent
+								puzzlePage={puzzlePage}
+								darkModeAvailable={darkModeAvailable}
+							/>
 						</GridItem>
 					</div>
 				</Section>

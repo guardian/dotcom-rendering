@@ -55,7 +55,11 @@ export const PuzzlePage = ({ puzzlePage, NAV }: Props) => {
 					serverSideABTests={puzzlePage.config.serverSideABTests}
 				/>
 			</Island>
-			<PuzzlePageLayout puzzlePage={puzzlePage} NAV={NAV} />
+			<PuzzlePageLayout
+				puzzlePage={puzzlePage}
+				NAV={NAV}
+				darkModeAvailable={darkModeAvailable}
+			/>
 		</StrictMode>
 	);
 };

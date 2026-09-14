@@ -1,11 +1,20 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
+import { useMatchMedia } from '../lib/useMatchMedia';
 
 interface Props {
 	/** The already-resolved iframe src URL (with `{slug}` substituted). */
 	src: string;
 	title: string;
+	/**
+	 * Whether dark mode is available for this page/request at all (the
+	 * `webx-dark-mode-web` server-side AB test flag, already threaded down
+	 * from `PuzzlePage.tsx`/`useConfig()` the same way it reaches
+	 * `rootStyles()`). Combined client-side with the reader's real OS/browser
+	 * preference (`prefers-color-scheme`) to decide `PuzzleContext.darkMode`.
+	 */
+	darkModeAvailable: boolean;
 }
 
 const frameStyles = css`
@@ -15,25 +24,38 @@ const frameStyles = css`
 `;
 
 /**
- * The shape posted to the puzzle iframe once it has loaded, carrying the
- * current Guardian user's identity so puzzle providers (AmuseLabs,
- * Wordiply) can personalise / save progress against a real account rather
- * than an anonymous session.
- *
- * `userId` is the reader's `idToken.claims.legacy_identity_id` (their
- * Guardian "identity ID", the same identifier already used to build
- * MyAccount links elsewhere in DCR - see `TopBarMyAccount.tsx`) - not the
- * OIDC `sub` claim some newer API integrations elsewhere in DCR use
- * instead. `undefined` when the reader is signed out (or the auth check
- * hasn't resolved yet).
- *
- * Whether `legacy_identity_id` is actually the ID format AmuseLabs/Wordiply
- * expect has not been confirmed with those providers - see the "Open
- * questions" section of docs/puzzle-page.md.
+ * The context posted to (and encoded in the URL of) the puzzle iframe,
+ * carrying enough about the current Guardian reader for puzzle providers
+ * (AmuseLabs, Wordiply) to personalise/save progress against a real
+ * account and render consistently with the reader's colour scheme, rather
+ * than guessing at either.
  */
-export interface PuzzleUserMessage {
-	type: 'guardian-puzzle-user';
-	userId: string | undefined;
+export interface PuzzleContext {
+	/**
+	 * The reader's `idToken.claims.legacy_identity_id` (their Guardian
+	 * "identity ID", the same identifier already used to build MyAccount
+	 * links elsewhere in DCR - see `TopBarMyAccount.tsx`) - not the OIDC
+	 * `sub` claim some newer API integrations elsewhere in DCR use instead.
+	 * `null` when the reader is signed out (or the auth check hasn't
+	 * resolved yet).
+	 *
+	 * Whether `legacy_identity_id` is actually the ID format
+	 * AmuseLabs/Wordiply expect has not been confirmed with those providers
+	 * - see the "Open questions" section of docs/puzzle-page.md.
+	 */
+	userId: string | null;
+	/**
+	 * Whether dark mode is currently actually active for this reader: both
+	 * `darkModeAvailable` (the server-side AB flag for this page/request)
+	 * AND the reader's OS/browser actually preferring dark
+	 * (`prefers-color-scheme: dark`) must be true. See `usePuzzleDarkMode`.
+	 */
+	darkMode: boolean;
+}
+
+export interface PuzzleContextMessage {
+	type: 'guardian-puzzle-context';
+	context: PuzzleContext;
 }
 
 /**
@@ -73,33 +95,60 @@ const usePuzzleUserId = (): string | undefined => {
 };
 
 /**
- * Appends `userId` as a query parameter to `src`, preserving any existing
- * query parameters (e.g. AmuseLabs' `?set=...&embed=1&idx=1`). Returns
- * `src` unchanged when there is no signed-in user, or if `src` cannot be
- * parsed as an absolute URL.
+ * Reactively resolves whether dark mode is currently actually active:
+ * returns `false` immediately (without touching `matchMedia` at all) when
+ * `darkModeAvailable` is `false` for this page/request; otherwise reuses
+ * the existing, generic `useMatchMedia` hook (already used elsewhere in DCR
+ * for `prefers-color-scheme` and other media queries) to check - and stay
+ * reactively subscribed to - the reader's real OS/browser preference, so
+ * this updates live if the reader switches their OS theme while the page
+ * is open.
  */
-export const buildPuzzleIframeSrc = (
-	src: string,
-	userId: string | undefined,
-): string => {
-	if (!userId) return src;
+const usePuzzleDarkMode = (darkModeAvailable: boolean): boolean => {
+	const prefersDark = useMatchMedia('(prefers-color-scheme: dark)');
+	return darkModeAvailable && prefersDark;
+};
 
+const buildPuzzleContext = (
+	userId: string | undefined,
+	darkMode: boolean,
+): PuzzleContext => ({
+	userId: userId ?? null,
+	darkMode,
+});
+
+/**
+ * Encodes `context` as JSON into a `guardian-puzzle-context` query
+ * parameter on `src`, preserving any existing query parameters (e.g.
+ * AmuseLabs' `?set=...&embed=1&idx=1`). Always includes the parameter -
+ * unlike the previous `userId`-only mechanism, the context shape itself
+ * always carries both fields, so there's no "nothing to add" case to omit
+ * it for. Returns `src` unchanged if it cannot be parsed as an absolute
+ * URL.
+ */
+export const buildPuzzleIframeSrcWithContext = (
+	src: string,
+	context: PuzzleContext,
+): string => {
 	try {
 		const url = new URL(src);
-		url.searchParams.set('userId', userId);
+		url.searchParams.set(
+			'guardian-puzzle-context',
+			JSON.stringify(context),
+		);
 		return url.toString();
 	} catch {
 		return src;
 	}
 };
 
-const postUserMessage = (
+const postContextMessage = (
 	iframe: HTMLIFrameElement,
-	userId: string | undefined,
+	context: PuzzleContext,
 ) => {
-	const message: PuzzleUserMessage = {
-		type: 'guardian-puzzle-user',
-		userId,
+	const message: PuzzleContextMessage = {
+		type: 'guardian-puzzle-context',
+		context,
 	};
 	iframe.contentWindow?.postMessage(message, '*');
 };
@@ -109,20 +158,24 @@ const postUserMessage = (
  * puzzle providers, such as AmuseLabs-hosted puzzles or bespoke providers
  * like wordiply.com. Used for every `PuzzleConfig` entry (all iframe-based).
  *
- * Passes the current signed-in user's identity to the puzzle provider two
- * ways: as a `userId` query parameter on the iframe `src` (so it is present
- * from the very first request the iframe makes), and via `postMessage` once
- * the iframe has loaded (`{ type: 'guardian-puzzle-user', userId }` - see
- * `PuzzleUserMessage`). Because `src` is derived from the reactive
- * `usePuzzleUserId()` result, the iframe is automatically reloaded by the
- * browser (a fresh `src` triggers a new navigation) whenever the reader's
- * sign-in state changes while on the page - no manual reload/`postMessage`
- * fallback is needed for that case, though the `onLoad` `postMessage` still
- * fires again after each such reload too.
+ * Passes a `PuzzleContext` (the current signed-in user's identity, and
+ * whether dark mode is currently active) to the puzzle provider two ways:
+ * as a `guardian-puzzle-context` query parameter (JSON-encoded) on the
+ * iframe `src` (so it is present from the very first request the iframe
+ * makes), and via `postMessage` once the iframe has loaded (`{ type:
+ * 'guardian-puzzle-context', context }` - see `PuzzleContextMessage`).
+ * Because `src` is derived from the reactive `usePuzzleUserId()`/
+ * `usePuzzleDarkMode()` results, the iframe is automatically reloaded by
+ * the browser (a fresh `src` triggers a new navigation) whenever the
+ * reader's sign-in state or OS colour-scheme preference changes while on
+ * the page - no manual reload fallback is needed for that case, though the
+ * `onLoad` `postMessage` still fires again after each such reload too.
  */
-export const PuzzleIframe = ({ src, title }: Props) => {
+export const PuzzleIframe = ({ src, title, darkModeAvailable }: Props) => {
 	const userId = usePuzzleUserId();
-	const iframeSrc = buildPuzzleIframeSrc(src, userId);
+	const darkMode = usePuzzleDarkMode(darkModeAvailable);
+	const context = buildPuzzleContext(userId, darkMode);
+	const iframeSrc = buildPuzzleIframeSrcWithContext(src, context);
 
 	return (
 		<iframe
@@ -131,7 +184,7 @@ export const PuzzleIframe = ({ src, title }: Props) => {
 			title={title}
 			loading="lazy"
 			sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-			onLoad={(event) => postUserMessage(event.currentTarget, userId)}
+			onLoad={(event) => postContextMessage(event.currentTarget, context)}
 		/>
 	);
 };
