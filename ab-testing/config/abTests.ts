@@ -239,7 +239,7 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-10-28",
 		type: "client",
 		status: "ON",
-		audienceSize: 0 / 100,
+		audienceSize: 2.1 / 100, // 0.35% in each variant
 		audienceSpace: "A",
 		groups: [
 			"variant-500",
