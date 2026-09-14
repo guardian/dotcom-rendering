@@ -211,7 +211,7 @@ export const StandardLayoutArticleGrid = ({
 	const layoutType = getLayoutType({
 		isImmersive,
 		isFeature,
-		orientation: isFixedHeightImage ? 'landscape' : mainMediaOrientation,
+		orientation: mainMediaOrientation,
 		isMedia,
 		isShowcase,
 	});
@@ -276,8 +276,7 @@ export const StandardLayoutArticleGrid = ({
 						? css`
 								${from.desktop} {
 									align-self: start;
-									${!isFixedHeightImage &&
-									mainMediaAspectRatio != null &&
+									${mainMediaAspectRatio != null &&
 									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
 									${layoutType === 'immersiveLandscape' &&
 									`margin-left: -20px;
@@ -292,14 +291,16 @@ export const StandardLayoutArticleGrid = ({
 
 								${isFixedHeightImage &&
 								css`
-									position: relative;
-									height: 469px;
-									overflow: hidden;
-									background-color: ${headlineBackgroundImmersive};
+									${until.desktop} {
+										position: relative;
+										height: 469px;
+										overflow: hidden;
+										background-color: ${headlineBackgroundImmersive};
 
-									> div {
-										position: absolute;
-										inset: 0;
+										> div {
+											position: absolute;
+											inset: 0;
+										}
 									}
 								`}
 							`
