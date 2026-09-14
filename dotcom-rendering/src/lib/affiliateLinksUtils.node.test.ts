@@ -70,11 +70,11 @@ void describe('buildXcustValueForAffiliateLink', () => {
 			xcustComponentId: null,
 		});
 
-		assert.ok(xcustResult.includes('|abTestParticipations|'));
-		assert.ok(xcustResult.includes('existingTest:control'));
-		assert.ok(xcustResult.includes('newTest:variantB'));
-		assert.ok(xcustResult.includes('abTest1:oldVariant'));
-		assert.ok(!xcustResult.includes('abTest1:variantA'));
+		assert(xcustResult.includes('|abTestParticipations|'));
+		assert(xcustResult.includes('existingTest:control'));
+		assert(xcustResult.includes('newTest:variantB'));
+		assert(xcustResult.includes('abTest1:oldVariant'));
+		assert(!xcustResult.includes('abTest1:variantA'));
 	});
 
 	void it('preserves existing AB participations when url already has xcust', () => {
@@ -88,11 +88,11 @@ void describe('buildXcustValueForAffiliateLink', () => {
 			xcustComponentId: null,
 		});
 
-		assert.ok(
+		assert(
 			xcustResult.includes('referrer|www.theguardian.com|accountId|1111'),
 		);
-		assert.ok(xcustResult.includes('newTest:newVariant'));
-		assert.ok(xcustResult.includes('oldTest:oldVariant'));
+		assert(xcustResult.includes('newTest:newVariant'));
+		assert(xcustResult.includes('oldTest:oldVariant'));
 	});
 });
 

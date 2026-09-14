@@ -46,7 +46,7 @@ void describe('Enhance Branding', () => {
 			.map((p) => p.branding?.logo.dimensions.width)
 			.filter(isNumber);
 
-		assert.ok(Math.max(...dimensionsFail) > 140);
+		assert(Math.max(...dimensionsFail) > 140);
 
 		const dimensionsPass = Object.values(
 			enhanceCommercialProperties(commercialProperties),
@@ -54,6 +54,6 @@ void describe('Enhance Branding', () => {
 			.map((p) => p.branding?.logo.dimensions.width)
 			.filter(isNumber);
 
-		assert.ok(Math.max(...dimensionsPass) <= 140);
+		assert(Math.max(...dimensionsPass) <= 140);
 	});
 });

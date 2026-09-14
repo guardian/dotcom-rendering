@@ -43,7 +43,7 @@ void describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
-		assert.ok(!mobileAdPositions.includes(0));
+		assert(!mobileAdPositions.includes(0));
 	});
 
 	void it(`should not insert an ad in the merchandising-high position`, () => {
@@ -52,7 +52,7 @@ void describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'news/most-popular' },
 		] satisfies AdCandidate[];
 		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
-		assert.ok(!mobileAdPositions.includes(3));
+		assert(!mobileAdPositions.includes(3));
 	});
 
 	void it('Should not insert ad before a thrasher container', () => {
@@ -68,8 +68,8 @@ void describe('Mobile Ads', () => {
 
 		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
-		assert.ok(!mobileAdPositions.includes(6));
-		assert.ok(!mobileAdPositions.includes(8));
+		assert(!mobileAdPositions.includes(6));
+		assert(!mobileAdPositions.includes(8));
 	});
 
 	void it(`Should allow inserting an ad before a thrasher container if it's a filter page`, () => {
@@ -88,8 +88,8 @@ void describe('Mobile Ads', () => {
 			'uk/thefilter',
 		);
 
-		assert.ok(mobileAdPositions.includes(6));
-		assert.ok(mobileAdPositions.includes(8));
+		assert(mobileAdPositions.includes(6));
+		assert(mobileAdPositions.includes(8));
 	});
 
 	// We used https://www.theguardian.com/uk/commentisfree as a blueprint
@@ -429,8 +429,8 @@ void describe('inserting an ad after the first collection', () => {
 				'uk',
 			);
 
-			assert.ok(adPositions.includes(0));
-			assert.ok(!adPositions.includes(1));
+			assert(adPositions.includes(0));
+			assert(!adPositions.includes(1));
 		});
 
 		void it('inserts an ad after the first collection if it is a LARGE flexible special container', () => {
@@ -451,8 +451,8 @@ void describe('inserting an ad after the first collection', () => {
 				'uk',
 			);
 
-			assert.ok(adPositions.includes(0));
-			assert.ok(!adPositions.includes(1));
+			assert(adPositions.includes(0));
+			assert(!adPositions.includes(1));
 		});
 
 		void it('does NOT insert an ad after the first collection if it is a SMALL flexible general container', () => {
@@ -468,7 +468,7 @@ void describe('inserting an ad after the first collection', () => {
 				'uk',
 			);
 
-			assert.ok(!adPositions.includes(0));
+			assert(!adPositions.includes(0));
 		});
 
 		void it('does NOT insert an ad after the first collection if it is a SMALL flexible special container', () => {
@@ -484,7 +484,7 @@ void describe('inserting an ad after the first collection', () => {
 				'uk',
 			);
 
-			assert.ok(!adPositions.includes(0));
+			assert(!adPositions.includes(0));
 		});
 	});
 
@@ -507,8 +507,8 @@ void describe('inserting an ad after the first collection', () => {
 				'uk',
 			);
 
-			assert.ok(adPositions.includes(1));
-			assert.ok(!adPositions.includes(2));
+			assert(adPositions.includes(1));
+			assert(!adPositions.includes(2));
 		});
 
 		void it('inserts an ad before the second collection if it is preceded by a LARGE flexible special container', () => {
@@ -529,8 +529,8 @@ void describe('inserting an ad after the first collection', () => {
 				'uk',
 			);
 
-			assert.ok(adPositions.includes(1));
-			assert.ok(!adPositions.includes(2));
+			assert(adPositions.includes(1));
+			assert(!adPositions.includes(2));
 		});
 
 		void it('does NOT insert an ad before the second collection if it is preceded by a SMALL flexible general container', () => {
@@ -551,7 +551,7 @@ void describe('inserting an ad after the first collection', () => {
 				'uk',
 			);
 
-			assert.ok(!adPositions.includes(1));
+			assert(!adPositions.includes(1));
 		});
 
 		void it('does NOT insert an ad before the second collection if it is preceded by a SMALL flexible special container', () => {
@@ -572,7 +572,7 @@ void describe('inserting an ad after the first collection', () => {
 				'uk',
 			);
 
-			assert.ok(!adPositions.includes(1));
+			assert(!adPositions.includes(1));
 		});
 	});
 });

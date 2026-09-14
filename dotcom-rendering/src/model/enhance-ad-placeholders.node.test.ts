@@ -311,7 +311,7 @@ void describe('enhanceAdPlaceholders', () => {
 			)(input);
 			const outputPlaceholders = output.filter(elementIsAdPlaceholder);
 
-			assert.ok(outputPlaceholders.length > 0);
+			assert(outputPlaceholders.length > 0);
 		});
 	});
 });

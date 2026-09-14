@@ -157,7 +157,7 @@ void describe('shouldDisplayAd', () => {
 					isMobile,
 				);
 
-				assert.ok(!result);
+				assert(!result);
 			});
 		}
 	});
@@ -179,7 +179,7 @@ void describe('shouldDisplayAd', () => {
 					isMobile,
 				);
 
-				assert.ok(!result);
+				assert(!result);
 			});
 		}
 	});
@@ -201,7 +201,7 @@ void describe('shouldDisplayAd', () => {
 					isMobile,
 				);
 
-				assert.ok(result);
+				assert(result);
 			});
 		}
 	});
@@ -226,7 +226,7 @@ void describe('shouldDisplayAd', () => {
 					isMobile,
 				);
 
-				assert.ok(result);
+				assert(result);
 			});
 		}
 
@@ -249,7 +249,7 @@ void describe('shouldDisplayAd', () => {
 					isMobile,
 				);
 
-				assert.ok(!result);
+				assert(!result);
 			});
 		}
 	});

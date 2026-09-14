@@ -4,18 +4,18 @@ import { getZIndex } from './getZIndex';
 
 void describe('getZIndex', () => {
 	void it('gets the correct zindex for group and sibling', () => {
-		assert.ok(getZIndex('sticky-video-button') > getZIndex('sticky-video'));
-		assert.ok(
+		assert(getZIndex('sticky-video-button') > getZIndex('sticky-video'));
+		assert(
 			getZIndex('expanded-veggie-menu-wrapper') >
 				getZIndex('expanded-veggie-menu'),
 		);
-		assert.ok(
+		assert(
 			getZIndex('stickyAdWrapperLabsHeader') >
 				getZIndex('stickyAdWrapper'),
 		);
-		assert.ok(getZIndex('tableOfContents') > getZIndex('articleHeadline'));
-		assert.ok(getZIndex('subNavBanner') > getZIndex('articleHeadline'));
-		assert.ok(getZIndex('subNavBanner') > getZIndex('bodyArea'));
-		assert.ok(getZIndex('card-nested-link') > getZIndex('card-link'));
+		assert(getZIndex('tableOfContents') > getZIndex('articleHeadline'));
+		assert(getZIndex('subNavBanner') > getZIndex('articleHeadline'));
+		assert(getZIndex('subNavBanner') > getZIndex('bodyArea'));
+		assert(getZIndex('card-nested-link') > getZIndex('card-link'));
 	});
 });

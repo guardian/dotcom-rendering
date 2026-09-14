@@ -34,9 +34,9 @@ void describe('unwrapHtml', () => {
 			unwrapHtml(pUnwrap);
 
 		// Testy test
-		assert.ok(bqIsUnwrapped);
+		assert(bqIsUnwrapped);
 		assert.equal(bqUnwrappedHtml, '<p>inner</p>');
-		assert.ok(pIsUnwrapped);
+		assert(pIsUnwrapped);
 		assert.equal(pUnwrappedHtml, 'inner');
 	});
 
@@ -52,7 +52,7 @@ void describe('unwrapHtml', () => {
 		};
 		const { willUnwrap: isUnwrapped, unwrappedHtml } = unwrapHtml(bqUnwrap);
 
-		assert.ok(!isUnwrapped);
+		assert(!isUnwrapped);
 		assert.equal(unwrappedHtml, bqUnwrap.html);
 	});
 
@@ -123,15 +123,15 @@ void describe('unwrapHtml', () => {
 			unwrappedElement: ulUnwrappedElement,
 		} = unwrapHtml(ulUnwrap);
 
-		assert.ok(bqIsUnwrapped);
+		assert(bqIsUnwrapped);
 		assert.equal(bqUnwrappedHtml, '<p>inner</p>');
 		assert.equal(bqUnwrappedElement, 'blockquote');
 
-		assert.ok(pIsUnwrapped);
+		assert(pIsUnwrapped);
 		assert.equal(pUnwrappedHtml, 'inner');
 		assert.equal(pUnwrappedElement, 'p');
 
-		assert.ok(ulIsUnwrapped);
+		assert(ulIsUnwrapped);
 		assert.equal(ulUnwrappedHtml, '<li>Test</li><li>test2</li>');
 		assert.equal(ulUnwrappedElement, 'ul');
 	});
