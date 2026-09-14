@@ -1,18 +1,14 @@
+import { parse } from 'valibot';
 import preview from '../../../.storybook/preview';
+import { euParliament } from '../../../fixtures/manual/electionTrackers/euParliament';
+import { ukGeneralExitPoll } from '../../../fixtures/manual/electionTrackers/ukGeneralExitPoll';
+import { ukGeneralFinal } from '../../../fixtures/manual/electionTrackers/ukGeneralFinal';
+import { ukLocal } from '../../../fixtures/manual/electionTrackers/ukLocal';
+import { usCongressEmpty } from '../../../fixtures/manual/electionTrackers/usCongressEmpty';
+import { usPresidential } from '../../../fixtures/manual/electionTrackers/usPresidential';
 import { palette } from '../../palette';
-import { UKLocal as ChangeBarsUKLocal } from './ChangeBars.stories';
+import { ElectionComponents } from './electionComponent';
 import { ElectionTracker } from './ElectionTracker';
-import {
-	UKGeneral as StackedProgressUKGeneral,
-	USPresidential as StackedProgressUSPresidential,
-} from './StackedProgress.stories';
-import { EUParliament as StackedProgressEUParliament } from './StackedProgress.stories';
-import { EUParliament as ValuesWithChangeEUParliament } from './ValuesWithChange.stories';
-import {
-	UKExitPoll as VersusUKExitPoll,
-	UKGeneral as VersusUKGeneral,
-	USPresidential as VersusUSPresidential,
-} from './Versus.stories';
 
 const meta = preview.meta({
 	title: 'Components/Election Trackers/Election Tracker',
@@ -21,330 +17,61 @@ const meta = preview.meta({
 
 export const USCongressEmpty = meta.story({
 	args: {
-		components: [
-			{
-				kind: 'sideBySide',
-				from: 'tablet',
-				left: {
-					heading: 'Senate',
-					children: [
-						{
-							kind: 'versus',
-							props: {
-								left: {
-									name: 'Democrats',
-									abbreviation: 'Democrats',
-									value: 28,
-									change: 0,
-									colour: palette('--us-elections-democrats'),
-									image: undefined,
-								},
-								right: {
-									name: 'Republicans',
-									abbreviation: 'Republicans',
-									value: 38,
-									change: 0,
-									colour: palette(
-										'--us-elections-republicans',
-									),
-									image: undefined,
-								},
-								colour: 'none',
-								faded: false,
-								banner: undefined,
-							},
-						},
-						{
-							kind: 'stackedProgress',
-							props: {
-								total: 34,
-								label: '50',
-								calculateWinner: false,
-								excludedCopy: 'No election',
-								sections: [
-									{
-										name: 'Democrats',
-										colour: palette(
-											'--us-elections-democrats-alt',
-										),
-										value: 28,
-										align: 'left',
-										exclude: true,
-									},
-									{
-										name: 'Democrats',
-										colour: palette(
-											'--us-elections-democrats',
-										),
-										value: 0,
-										align: 'left',
-										exclude: false,
-									},
-									{
-										name: 'Others',
-										colour: palette(
-											'--us-elections-others',
-										),
-										value: 0,
-										align: 'left',
-										exclude: true,
-									},
-									{
-										name: 'Others',
-										colour: palette(
-											'--us-elections-others',
-										),
-										value: 0,
-										align: 'left',
-										exclude: false,
-									},
-									{
-										name: 'Republicans',
-										colour: palette(
-											'--us-elections-republicans-alt',
-										),
-										value: 38,
-										align: 'right',
-										exclude: true,
-									},
-									{
-										name: 'Republicans',
-										colour: palette(
-											'--us-elections-republicans',
-										),
-										value: 0,
-										align: 'right',
-										exclude: false,
-									},
-								],
-							},
-						},
-						{
-							kind: 'progressNumber',
-							props: {
-								additionalCopy: undefined,
-								copy: 'races called',
-								progress: 0,
-								total: 34,
-							},
-						},
-					],
-				},
-				right: {
-					heading: 'House',
-					children: [
-						{
-							kind: 'versus',
-							props: {
-								left: {
-									name: 'Democrats',
-									abbreviation: 'Democrats',
-									value: 0,
-									change: 0,
-									colour: palette('--us-elections-democrats'),
-									image: undefined,
-								},
-								right: {
-									name: 'Republicans',
-									abbreviation: 'Republicans',
-									value: 0,
-									change: 0,
-									colour: palette(
-										'--us-elections-republicans',
-									),
-									image: undefined,
-								},
-								colour: 'none',
-								faded: false,
-								banner: undefined,
-							},
-						},
-						{
-							kind: 'stackedProgress',
-							props: {
-								total: 435,
-								label: 'to win',
-								calculateWinner: true,
-								excludedCopy: undefined,
-								sections: [
-									{
-										name: 'Democrats',
-										colour: palette(
-											'--us-elections-democrats',
-										),
-										value: 0,
-										align: 'left',
-										exclude: false,
-									},
-									{
-										name: 'Others',
-										colour: palette(
-											'--us-elections-others',
-										),
-										value: 0,
-										align: 'left',
-										exclude: false,
-									},
-									{
-										name: 'Republicans',
-										colour: palette(
-											'--us-elections-republicans',
-										),
-										value: 0,
-										align: 'right',
-										exclude: false,
-									},
-								],
-							},
-						},
-						{
-							kind: 'progressNumber',
-							props: {
-								additionalCopy: undefined,
-								copy: 'races called',
-								progress: 0,
-								total: 435,
-							},
-						},
-					],
-				},
-			},
-			{
-				kind: 'onwardLink',
-				props: {
-					text: 'Full results',
-					link: new URL('https://www.theguardian.com'),
-				},
-			},
-		],
+		initialData: parse(ElectionComponents, usCongressEmpty).components,
+		electionDataUrl: new URL(
+			'https://www.theguardian.com/us-congress-empty',
+		),
+		getElectionData: () => Promise.resolve(usCongressEmpty),
+		refreshInterval: 5,
+	},
+	parameters: {
+		colourSchemeBackground: {
+			light: palette('--front-container-background'),
+			dark: palette('--front-container-background'),
+		},
 	},
 });
 
-export const UKGeneralFinal = meta.story({
+export const UKGeneralFinal = USCongressEmpty.extend({
 	args: {
-		components: [
-			{
-				kind: 'versus',
-				props: VersusUKGeneral.composed.args,
-			},
-			{
-				kind: 'stackedProgress',
-				props: StackedProgressUKGeneral.composed.args,
-			},
-			{
-				kind: 'progressNumber',
-				props: {
-					progress: 650,
-					total: 650,
-					copy: 'seats declared',
-					additionalCopy: undefined,
-				},
-			},
-			{
-				kind: 'onwardLink',
-				props: {
-					text: 'See full results',
-					link: new URL('https://www.theguardian.com'),
-				},
-			},
-		],
+		electionDataUrl: new URL(
+			'https://www.theguardian.com/uk-general-final',
+		),
+		initialData: parse(ElectionComponents, ukGeneralFinal).components,
+		getElectionData: () => Promise.resolve(ukGeneralFinal),
 	},
 });
 
-export const UKGeneralExitPoll = meta.story({
+export const UKGeneralExitPoll = USCongressEmpty.extend({
 	args: {
-		components: [
-			{
-				kind: 'versus',
-				props: VersusUKExitPoll.composed.args,
-			},
-			{
-				kind: 'onwardLink',
-				props: {
-					text: 'View results page',
-					link: new URL('https://www.theguardian.com'),
-				},
-			},
-		],
+		electionDataUrl: new URL(
+			'https://www.theguardian.com/uk-general-exit-poll',
+		),
+		initialData: parse(ElectionComponents, ukGeneralExitPoll).components,
+		getElectionData: () => Promise.resolve(ukGeneralExitPoll),
 	},
 });
 
-export const UKLocal = meta.story({
+export const UKLocal = USCongressEmpty.extend({
 	args: {
-		components: [
-			{
-				kind: 'changeBars',
-				props: ChangeBarsUKLocal.args,
-			},
-			{
-				kind: 'progressNumber',
-				props: {
-					progress: 200,
-					total: 200,
-					copy: 'councils declared',
-					additionalCopy: undefined,
-				},
-			},
-			{
-				kind: 'onwardLink',
-				props: {
-					text: 'See full results',
-					link: new URL('https://www.theguardian.com'),
-				},
-			},
-		],
+		electionDataUrl: new URL('https://www.theguardian.com/uk-local'),
+		initialData: parse(ElectionComponents, ukLocal).components,
+		getElectionData: () => Promise.resolve(ukLocal),
 	},
 });
 
-export const USPresidential = meta.story({
+export const USPresidential = USCongressEmpty.extend({
 	args: {
-		components: [
-			{
-				kind: 'progressNumber',
-				props: {
-					progress: 51,
-					total: 51,
-					copy: 'states called (includes DC)',
-					additionalCopy: 'Latest results',
-				},
-			},
-			{
-				kind: 'versus',
-				props: VersusUSPresidential.composed.args,
-			},
-			{
-				kind: 'stackedProgress',
-				props: StackedProgressUSPresidential.composed.args,
-			},
-			{
-				kind: 'onwardLink',
-				props: {
-					text: 'Full US election results',
-					link: new URL('https://www.theguardian.com'),
-				},
-			},
-		],
+		electionDataUrl: new URL('https://www.theguardian.com/us-presidential'),
+		initialData: parse(ElectionComponents, usPresidential).components,
+		getElectionData: () => Promise.resolve(usPresidential),
 	},
 });
 
-export const EUParliament = meta.story({
+export const EUParliament = USCongressEmpty.extend({
 	args: {
-		components: [
-			{
-				kind: 'stackedProgress',
-				props: StackedProgressEUParliament.composed.args,
-			},
-			{
-				kind: 'valuesWithChange',
-				props: ValuesWithChangeEUParliament.args,
-			},
-			{
-				kind: 'onwardLink',
-				props: {
-					text: 'See full results',
-					link: new URL('https://www.theguardian.com'),
-				},
-			},
-		],
+		electionDataUrl: new URL('https://www.theguardian.com/eu-parliament'),
+		initialData: parse(ElectionComponents, euParliament).components,
+		getElectionData: () => Promise.resolve(euParliament),
 	},
 });
