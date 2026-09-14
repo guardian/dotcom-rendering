@@ -33,6 +33,31 @@ const customSubNav: CustomSubnav = {
 	pages: [],
 };
 
+/** Distinct images per breakpoint so it's obvious which one is being served. */
+const customSubNavWithImages: CustomSubnav = {
+	...customSubNav,
+	images: [
+		{
+			breakpoint: 'mobile',
+			platforms: ['web'],
+			imageSrc:
+				'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg?width=740&height=140&quality=85&fit=crop&s=none',
+		},
+		{
+			breakpoint: 'tablet',
+			platforms: ['web'],
+			imageSrc:
+				'https://media.guim.co.uk/56b42eef576bc04c820da710459acd91082bb37b/0_0_6720_4480/6720.jpg?width=980&height=140&quality=85&fit=crop&s=none',
+		},
+		{
+			breakpoint: 'desktop',
+			platforms: ['web'],
+			imageSrc:
+				'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/2000.jpg?width=1300&height=140&quality=85&fit=crop&s=none',
+		},
+	],
+};
+
 const meta = {
 	component: CustomSubNav,
 	title: 'Components/Masthead/Titlepiece/CustomSubNav',
@@ -62,6 +87,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Front = {
 	args: { renderingPage: 'front' },
+} satisfies Story;
+
+/** On fronts, a web image is shown per breakpoint; resize the viewport to switch between mobile/tablet/desktop. */
+export const FrontWithImage = {
+	args: {
+		renderingPage: 'front',
+		customSubNav: customSubNavWithImages,
+	},
 } satisfies Story;
 
 export const Article = {
