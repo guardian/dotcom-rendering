@@ -293,6 +293,8 @@ export const StandardLayoutArticleGrid = ({
 								css`
 									${until.desktop} {
 										position: relative;
+										width: 100%;
+										min-width: 0;
 										min-height: 469px;
 										${mainMediaAspectRatio != null &&
 										`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
