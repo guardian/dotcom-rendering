@@ -28,7 +28,6 @@ import { Snap } from '../components/Snap';
 import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubNav } from '../components/SubNav.island';
-import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -36,6 +35,7 @@ import {
 	MAX_FRONTS_BANNER_ADS as maxDesktopAds,
 	MAX_FRONTS_MOBILE_ADS as maxMobileAds,
 } from '../lib/commercial-constants';
+import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
 import {
