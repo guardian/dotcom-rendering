@@ -46,14 +46,28 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	};
 
 	/**
-	 * Which image to run.
-	 * This should be the image digest (e.g. 'sha256:abc123') to ensure immutable deployments.
-	 *
-	 * @note Currently optional to control which services run in an EC2-ECS hybrid mode, or EC2-only.
-	 *
-	 * @see https://docs.docker.com/dhi/core-concepts/digests
+	 * ECS configuration including image identifier and instance sizing.
+	 * Optional to control which services run in an EC2-ECS hybrid mode, or EC2-only.
 	 */
-	imageIdentifier?: string;
+	ecsProps?: {
+		/**
+		 * Which image to run.
+		 * This should be the image digest (e.g. 'sha256:abc123') to ensure immutable deployments.
+		 *
+		 * @see https://docs.docker.com/dhi/core-concepts/digests
+		 */
+		imageIdentifier: string;
+
+		/**
+		 * vCPU units for the ECS task
+		 */
+		taskCpu: number;
+
+		/**
+		 * Memory in MB for ECS task
+		 */
+		taskMemoryLimitMiB: number;
+	};
 }
 
 const addCPUStepScalingPolicy = (
@@ -200,14 +214,8 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		const { stack: guStack, region, account } = this;
-		const {
-			guApp,
-			stage,
-			instanceType,
-			scaling,
-			domainName,
-			imageIdentifier,
-		} = props;
+		const { guApp, stage, instanceType, scaling, domainName, ecsProps } =
+			props;
 
 		const artifactsBucket =
 			GuDistributionBucketParameter.getInstance(this).valueAsString;
@@ -276,17 +284,16 @@ export class RenderingCDKStack extends CDKStack {
 				}),
 			},
 
-			// Provision ECS resources only when `imageIdentifier` has been provided
-			...(imageIdentifier == null
+			// Provision ECS resources only when `ecsProps` has been provided
+			...(ecsProps == null
 				? {}
 				: {
 						ecsProps: {
 							repositoryName: 'guardian/dotcom-rendering',
-							imageIdentifier,
+							imageIdentifier: ecsProps.imageIdentifier,
 
-							// TODO tune these values
-							memoryLimitMiB: 2048,
-							cpu: 1024,
+							memoryLimitMiB: ecsProps.taskMemoryLimitMiB,
+							cpu: ecsProps.taskCpu,
 							scaling: {
 								minimumTasks: 1,
 								maximumTasks: 2,
