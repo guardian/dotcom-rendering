@@ -6,12 +6,10 @@ import { renderPuzzlesPage } from './render.puzzlesPage.web';
 
 export const handlePuzzlesPage: RequestHandler = ({ body }, res) => {
 	const puzzlesPage = validateAsPuzzlesPageType(body);
-
-	if (!isPuzzlesHubEnabled(puzzlesPage.config)) {
+	if (!isPuzzlesHubEnabled(puzzlesPage.config.serverSideABTests)) {
 		res.sendStatus(404);
 		return;
 	}
-
 	const { html, prefetchScripts } = renderPuzzlesPage({ puzzlesPage });
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
