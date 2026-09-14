@@ -1,6 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { ConfigProvider } from '../components/ConfigContext';
+import {
+	puzzlesHubExperiment,
+	puzzlesHubParticipation,
+} from '../lib/puzzlesHubExperiment';
+import {
+	puzzlesHubV1Experiment,
+	puzzlesHubV1Participation,
+} from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { PuzzlePageLayout } from './PuzzlePageLayout';
@@ -10,6 +18,11 @@ jest.mock('../lib/useMatchMedia', () => ({
 	...jest.requireActual('../lib/useMatchMedia'),
 	useMatchMedia: jest.fn(() => true),
 }));
+
+const v0AndV1On = {
+	...puzzlesHubParticipation(puzzlesHubExperiment.variant),
+	...puzzlesHubV1Participation(puzzlesHubV1Experiment.variant),
+};
 
 const renderPuzzlePageLayout = (
 	slug: string,
@@ -58,24 +71,73 @@ describe('PuzzlePageLayout', () => {
 		expect(screen.getByText('Logic puzzles')).toBeInTheDocument();
 	});
 
-	it('renders a "More from Puzzles & games" rail when moreFromPuzzlesAndGames is present', () => {
-		renderPuzzlePageLayout('sudoku-easy');
+	describe('"More from Puzzles & Games" rail (v1-scoped feature)', () => {
+		it('renders the rail when data is present AND v0+v1 are both enabled', () => {
+			renderPuzzlePageLayout('sudoku-easy', {
+				config: {
+					...createPuzzlePage('sudoku-easy').config,
+					serverSideABTests: v0AndV1On,
+				},
+			});
 
-		expect(
-			screen.getByText('More from Puzzles & games'),
-		).toBeInTheDocument();
-	});
-
-	it('does not render the related rail when moreFromPuzzlesAndGames is empty', () => {
-		renderPuzzlePageLayout('sudoku-easy', {
-			instance: {
-				...createPuzzlePage('sudoku-easy').instance,
-				moreFromPuzzlesAndGames: [],
-			},
+			expect(
+				screen.getByText('More from Puzzles & games'),
+			).toBeInTheDocument();
 		});
 
-		expect(
-			screen.queryByText('More from Puzzles & games'),
-		).not.toBeInTheDocument();
+		it('does not render the rail when moreFromPuzzlesAndGames is empty, even with v0+v1 enabled', () => {
+			renderPuzzlePageLayout('sudoku-easy', {
+				config: {
+					...createPuzzlePage('sudoku-easy').config,
+					serverSideABTests: v0AndV1On,
+				},
+				instance: {
+					...createPuzzlePage('sudoku-easy').instance,
+					moreFromPuzzlesAndGames: [],
+				},
+			});
+
+			expect(
+				screen.queryByText('More from Puzzles & games'),
+			).not.toBeInTheDocument();
+		});
+
+		it('does not render the rail when data is present but neither v0 nor v1 is enabled (default fixture state)', () => {
+			renderPuzzlePageLayout('sudoku-easy');
+
+			expect(
+				screen.queryByText('More from Puzzles & games'),
+			).not.toBeInTheDocument();
+		});
+
+		it('does not render the rail when data is present and v1 is enabled but v0 is not', () => {
+			renderPuzzlePageLayout('sudoku-easy', {
+				config: {
+					...createPuzzlePage('sudoku-easy').config,
+					serverSideABTests: puzzlesHubV1Participation(
+						puzzlesHubV1Experiment.variant,
+					),
+				},
+			});
+
+			expect(
+				screen.queryByText('More from Puzzles & games'),
+			).not.toBeInTheDocument();
+		});
+
+		it('does not render the rail when data is present and v0 is enabled but v1 is not', () => {
+			renderPuzzlePageLayout('sudoku-easy', {
+				config: {
+					...createPuzzlePage('sudoku-easy').config,
+					serverSideABTests: puzzlesHubParticipation(
+						puzzlesHubExperiment.variant,
+					),
+				},
+			});
+
+			expect(
+				screen.queryByText('More from Puzzles & games'),
+			).not.toBeInTheDocument();
+		});
 	});
 });

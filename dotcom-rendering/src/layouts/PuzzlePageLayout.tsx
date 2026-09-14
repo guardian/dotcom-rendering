@@ -16,6 +16,7 @@ import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.island';
 import { SubNav } from '../components/SubNav.island';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { isPuzzlesHubV1Enabled } from '../lib/puzzlesHubVersionExperiment';
 import type { NavType } from '../model/extract-nav';
 import {
 	type PuzzleConfig,
@@ -200,7 +201,16 @@ export const PuzzlePageLayout = ({
 
 	const showShare = puzzleConfig.shareEnabled;
 	const showPrint = puzzleConfig.printEnabled;
-	const showRelated = !!instance.moreFromPuzzlesAndGames?.length;
+	// The "More from Puzzles & Games" rail is a v1-scoped feature (per the
+	// Puzzles & Games rollout plan - see abTests.ts's puzzles-new-hub-v1
+	// JSDoc), not a v0 one - so it must not render just because
+	// instance.moreFromPuzzlesAndGames happens to be non-empty. Gating on
+	// isPuzzlesHubV1Enabled too means the rail can be reliably kept hidden
+	// before v1 launches even if frontend ever populates this field early
+	// (accidentally or during testing).
+	const showRelated =
+		!!instance.moreFromPuzzlesAndGames?.length &&
+		isPuzzlesHubV1Enabled(config);
 	const labelText = puzzleGroupLabels[puzzleConfig.puzzleGroup];
 
 	return (
