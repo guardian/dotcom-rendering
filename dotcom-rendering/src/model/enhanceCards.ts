@@ -62,12 +62,12 @@ const enhanceSupportingContent = (
 			url: decideUrl(subLink),
 			kickerText:
 				!kickerText && supportingContentIsLive ? 'Live' : kickerText,
-			// headlineTestUuid: findHeadlineTestUuid(
-			// 	subLink,
-			// 	serverSideABTests,
-			// 	isEditorialABTestingEnabled,
-			// 	pageId,
-			// ),
+			headlineTestUuid: findHeadlineTestUuid(
+				subLink,
+				serverSideABTests,
+				isEditorialABTestingEnabled,
+				pageId,
+			),
 		};
 	});
 };
@@ -264,7 +264,7 @@ export const decideHeadline = (
  * Find the UUID of a headline test if one is running on the card
  */
 export const findHeadlineTestUuid = (
-	faciaCard: FEFrontCard,
+	faciaCard: FEFrontCard | FESupportingContent,
 	serverSideABTests: Record<string, string>,
 	isEditorialABTestingEnabled: boolean,
 	pageId?: string,
