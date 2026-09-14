@@ -185,7 +185,9 @@ const error = <E, A>(err: E): Result<E, A> => new Err(err);
  */
 export const fromValibot = <Schema extends GenericSchema | GenericSchemaAsync>(
 	result: SafeParseResult<Schema>,
-): Result<InferIssue<Schema>[], InferOutput<Schema>> =>
-	result.success ? ok(result.output) : error(result.issues);
+): Result<
+	[InferIssue<Schema>, ...InferIssue<Schema>[]],
+	InferOutput<Schema>
+> => (result.success ? ok(result.output) : error(result.issues));
 
 export { Result, ok, error };

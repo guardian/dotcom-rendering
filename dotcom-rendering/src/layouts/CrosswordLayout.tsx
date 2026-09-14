@@ -138,7 +138,13 @@ export const CrosswordLayout = (props: Props) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot />
+								<HeaderAdSlot
+									includeMobile={
+										article.config.serverSideABTests[
+											'commercial-mobile-above-nav-test'
+										] === 'variant'
+									}
+								/>
 							</Section>
 						</div>
 					</Stuck>
