@@ -95,7 +95,7 @@
 		"@types/youtube": "0.0.50",
 		"@typescript-eslint/eslint-plugin": "8.57.1",
 		"ajv": "8.18.0",
-		"ajv-formats": "2.1.1",
+		"ajv-formats": "3.0.1",
 		"aws-cdk": "catalog:",
 		"aws-cdk-lib": "catalog:",
 		"browserslist": "4.28.8",
