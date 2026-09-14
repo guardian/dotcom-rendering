@@ -7352,6 +7352,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[7],
 	},
+	'--election-tracker-refresh': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[86],
+	},
 	'--email-signup-button-background': {
 		light: emailSignupButtonBackgroundLight,
 		dark: emailSignupButtonBackgroundDark,
@@ -8906,4 +8910,7 @@ const paletteDeclarations = (
 			`${colourName}: ${colour[colourScheme](format)};`,
 	);
 
-export { type ColourName, paletteDeclarations };
+const isColourName = (s: string): s is ColourName =>
+	Object.prototype.hasOwnProperty.call(paletteColours, s);
+
+export { type ColourName, paletteDeclarations, isColourName };
