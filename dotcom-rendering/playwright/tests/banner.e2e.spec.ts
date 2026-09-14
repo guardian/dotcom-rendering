@@ -116,7 +116,7 @@ test.describe('Sign-in gate portal', function () {
 		await auxiaRequestPromise;
 	});
 
-	test('sends the Gandalf pageview counter for New Zealand readers', async ({
+	test('sends the daily view count for New Zealand readers', async ({
 		page,
 		context,
 	}) => {
@@ -130,8 +130,8 @@ test.describe('Sign-in gate portal', function () {
 			}
 			const body = request.postDataJSON() as Record<string, unknown>;
 			// Match only the post-reload request: the first load runs with the
-			// default (GB) geolocation and also sends a count of 0.
-			return body.gandalfPageViewCount === 0 && body.countryCode === 'NZ';
+			// default (GB) geolocation.
+			return body.countryCode === 'NZ';
 		});
 
 		await loadPage({
@@ -167,7 +167,9 @@ test.describe('Sign-in gate portal', function () {
 		const auxiaRequest = await auxiaRequestPromise;
 		const body = auxiaRequest.postDataJSON() as Record<string, unknown>;
 		expect(body.countryCode).toBe('NZ');
-		expect(body.gandalfPageViewCount).toBe(0);
+		// Two article loads today (each increments gu.history.dailyArticleCount),
+		// sent 0-based, so the second load sends 1.
+		expect(body.gandalfPageViewCount).toBe(1);
 	});
 });
 

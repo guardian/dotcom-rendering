@@ -2,11 +2,8 @@ import type { CountryCode } from '@guardian/libs';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { buildAuxiaGateDisplayData } from '../../lib/auxia';
+import { getDailyArticleCount, getToday } from '../../lib/dailyArticleCount';
 import type { EditionId } from '../../lib/edition';
-import {
-	getGandalfPageViewCount,
-	incrementGandalfPageViewCount,
-} from '../../lib/gandalf';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { TagType } from '../../types/tag';
@@ -155,7 +152,6 @@ export interface CanShowSignInGateProps {
 	contentType?: string;
 	sectionId?: string;
 	tags?: TagType[];
-	ophanPageViewId: string;
 	countryCode?: CountryCode;
 }
 export const canShowSignInGatePortal = async ({
@@ -168,7 +164,6 @@ export const canShowSignInGatePortal = async ({
 	contentType,
 	sectionId,
 	tags,
-	ophanPageViewId,
 	countryCode,
 }: CanShowSignInGateProps): Promise<CanShowResult<AuxiaGateDisplayData>> => {
 	if (window.guardian.config.switches.signInGate !== true) {
@@ -202,6 +197,17 @@ export const canShowSignInGatePortal = async ({
 	}
 
 	try {
+		// Today's view count (gu.history.dailyArticleCount). The count is
+		// incremented for the current pageview before the banner flow runs,
+		// so it is 1-based: the 4th view of the day sends 3. SDC only
+		// consumes this for active Gandalf traffic.
+		const dailyHistory = getDailyArticleCount();
+		const latestDay = dailyHistory?.[0];
+		const viewCountToday =
+			latestDay?.day === getToday()
+				? Math.max(latestDay.count - 1, 0)
+				: 0;
+
 		const auxiaData = await buildAuxiaGateDisplayData(
 			contributionsServiceUrl,
 			pageId,
@@ -210,20 +216,8 @@ export const canShowSignInGatePortal = async ({
 			sectionId,
 			tags,
 			retrieveLastGateDismissedCount('AuxiaSignInGate'),
-			// 0-based count of previously completed eligible pageviews. SDC
-			// only consumes this for active Gandalf traffic; the counter
-			// itself is advanced below once SDC confirms the pageview
-			// counted.
-			getGandalfPageViewCount(),
+			viewCountToday,
 		);
-
-		// Gandalf (the Guardian-managed sign-in gate journey): SDC marks
-		// responses produced by the active Gandalf rules. The pageview counted
-		// towards the free allowance even when no gate is displayed, so record
-		// it exactly once per pageview.
-		if (auxiaData?.auxiaData.gandalfSignInGate === true) {
-			incrementGandalfPageViewCount(ophanPageViewId);
-		}
 
 		const meta = (
 			auxiaData

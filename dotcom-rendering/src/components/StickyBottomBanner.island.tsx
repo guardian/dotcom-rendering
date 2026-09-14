@@ -372,7 +372,6 @@ export const StickyBottomBanner = ({
 				pageId,
 				contributionsServiceUrl,
 				editionId,
-				ophanPageViewId,
 				countryCode,
 			},
 			host,

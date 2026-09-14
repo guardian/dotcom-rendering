@@ -243,7 +243,7 @@ describe('StickyBottomBanner', () => {
 		expect(candidateIds).toContain('reader-revenue-banner');
 	});
 
-	it('passes the pageview id and country to the sign-in gate candidate', async () => {
+	it('passes the country to the sign-in gate candidate', async () => {
 		mockUseAB.mockReturnValue(undefined);
 		mockIsInUsState.mockReturnValue(false);
 		mockGetAlreadyVisitedCount.mockReturnValue(0);
@@ -266,7 +266,6 @@ describe('StickyBottomBanner', () => {
 
 		expect(canShowSignInGatePortal).toHaveBeenCalledWith(
 			expect.objectContaining({
-				ophanPageViewId: 'test-page-view-id',
 				countryCode: 'GB',
 			}),
 		);

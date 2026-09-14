@@ -1,7 +1,7 @@
 // Mock the auxia module before imports so the mock is applied when the module
 // under test is evaluated.
 import { buildAuxiaGateDisplayData } from '../../lib/auxia';
-import { incrementGandalfPageViewCount } from '../../lib/gandalf';
+import { getDailyArticleCount, getToday } from '../../lib/dailyArticleCount';
 import type { AuxiaAPIResponseDataUserTreatment } from '../SignInGate/types';
 import type { AuxiaGateDisplayData } from '../SignInGate/types';
 import type { CanShowSignInGateProps } from './SignInGatePortal';
@@ -12,9 +12,9 @@ jest.mock('../../lib/auxia', () => ({
 	buildAuxiaGateDisplayData: jest.fn(),
 }));
 
-jest.mock('../../lib/gandalf', () => ({
-	getGandalfPageViewCount: jest.fn().mockReturnValue(0),
-	incrementGandalfPageViewCount: jest.fn(),
+jest.mock('../../lib/dailyArticleCount', () => ({
+	getDailyArticleCount: jest.fn().mockReturnValue(undefined),
+	getToday: jest.fn().mockReturnValue(200),
 }));
 
 // Mock document.getElementById
@@ -22,6 +22,9 @@ const mockGetElementById = jest.fn();
 Object.defineProperty(document, 'getElementById', {
 	value: mockGetElementById,
 });
+
+const mockGetDailyArticleCount = jest.mocked(getDailyArticleCount);
+const mockGetToday = jest.mocked(getToday);
 
 const canShowProps: CanShowSignInGateProps = {
 	isSignedIn: false,
@@ -33,13 +36,8 @@ const canShowProps: CanShowSignInGateProps = {
 	contentType: 'Article',
 	sectionId: 'section',
 	tags: [],
-	ophanPageViewId: 'test-page-view-id',
 	countryCode: 'NZ',
 };
-
-const mockIncrementGandalfPageViewCount = jest.mocked(
-	incrementGandalfPageViewCount,
-);
 
 const makeUserTreatment = (
 	treatmentType: AuxiaAPIResponseDataUserTreatment['treatmentType'],
@@ -224,8 +222,36 @@ describe('SignInGatePortal', () => {
 	});
 
 	describe('Gandalf (Guardian-managed sign-in gate journey)', () => {
-		it('sends the current pageview count to SDC', async () => {
+		it('sends today’s view count (0-based) to SDC', async () => {
 			mockGetElementById.mockReturnValue(document.createElement('div'));
+			// 4 views today: the current pageview is included, so the portal
+			// sends 3 (0-based).
+			mockGetDailyArticleCount.mockReturnValue([{ day: 200, count: 4 }]);
+			mockGetToday.mockReturnValue(200);
+			(
+				buildAuxiaGateDisplayData as jest.MockedFunction<
+					typeof buildAuxiaGateDisplayData
+				>
+			).mockResolvedValue(makeAuxiaReturn(undefined, true));
+
+			await canShowSignInGatePortal(canShowProps);
+
+			expect(buildAuxiaGateDisplayData).toHaveBeenCalledWith(
+				'https://contributions.local',
+				'page-id',
+				'UK',
+				'Article',
+				'section',
+				[],
+				0,
+				3,
+			);
+		});
+
+		it('sends 0 when the latest daily count is not from today', async () => {
+			mockGetElementById.mockReturnValue(document.createElement('div'));
+			mockGetDailyArticleCount.mockReturnValue([{ day: 199, count: 9 }]);
+			mockGetToday.mockReturnValue(200);
 			(
 				buildAuxiaGateDisplayData as jest.MockedFunction<
 					typeof buildAuxiaGateDisplayData
@@ -246,7 +272,7 @@ describe('SignInGatePortal', () => {
 			);
 		});
 
-		it('counts the pageview when SDC returns the active Gandalf marker without a treatment', async () => {
+		it('returns no gate but carries the marker metadata on a free Gandalf pageview', async () => {
 			mockGetElementById.mockReturnValue(document.createElement('div'));
 			(
 				buildAuxiaGateDisplayData as jest.MockedFunction<
@@ -256,8 +282,8 @@ describe('SignInGatePortal', () => {
 
 			const result = await canShowSignInGatePortal(canShowProps);
 
-			// No gate on a free pageview, but the pageview counted. The meta
-			// carries the country so the selector can build the Ophan variant.
+			// No gate on a free pageview. The meta carries the country so the
+			// selector can build the Ophan variant.
 			expect(result).toEqual({
 				show: false,
 				meta: {
@@ -265,12 +291,9 @@ describe('SignInGatePortal', () => {
 					gandalfCountryCode: 'NZ',
 				},
 			});
-			expect(mockIncrementGandalfPageViewCount).toHaveBeenCalledWith(
-				'test-page-view-id',
-			);
 		});
 
-		it('counts the pageview when SDC returns the Gandalf popup treatment', async () => {
+		it('shows the gate when SDC returns the Gandalf popup treatment', async () => {
 			mockGetElementById.mockReturnValue(document.createElement('div'));
 			const auxiaReturn = makeAuxiaReturn(
 				makeUserTreatment('NONDISMISSIBLE_SIGN_IN_GATE_POPUP'),
@@ -288,46 +311,6 @@ describe('SignInGatePortal', () => {
 				show: true,
 				meta: { ...auxiaReturn, gandalfCountryCode: 'NZ' },
 			});
-			expect(mockIncrementGandalfPageViewCount).toHaveBeenCalledWith(
-				'test-page-view-id',
-			);
-		});
-
-		it('does not count the pageview without the Gandalf marker', async () => {
-			mockGetElementById.mockReturnValue(document.createElement('div'));
-			const auxiaReturn = makeAuxiaReturn(
-				makeUserTreatment('DISMISSABLE_SIGN_IN_GATE'),
-			);
-			(
-				buildAuxiaGateDisplayData as jest.MockedFunction<
-					typeof buildAuxiaGateDisplayData
-				>
-			).mockResolvedValue(auxiaReturn);
-
-			const result = await canShowSignInGatePortal(canShowProps);
-
-			expect(result).toEqual({
-				show: true,
-				meta: { ...auxiaReturn, gandalfCountryCode: 'NZ' },
-			});
-			expect(mockIncrementGandalfPageViewCount).not.toHaveBeenCalled();
-		});
-
-		it('does not count the pageview when the marker is explicitly false', async () => {
-			mockGetElementById.mockReturnValue(document.createElement('div'));
-			const auxiaReturn = makeAuxiaReturn(
-				makeUserTreatment('DISMISSABLE_SIGN_IN_GATE'),
-				false,
-			);
-			(
-				buildAuxiaGateDisplayData as jest.MockedFunction<
-					typeof buildAuxiaGateDisplayData
-				>
-			).mockResolvedValue(auxiaReturn);
-
-			await canShowSignInGatePortal(canShowProps);
-
-			expect(mockIncrementGandalfPageViewCount).not.toHaveBeenCalled();
 		});
 	});
 });
