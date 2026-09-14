@@ -416,6 +416,7 @@ export const PuzzlesDirectory = ({ layout, renderAds }: Props) => (
 							index={index}
 							position="fronts-banner"
 						/>
+						<AdSlot position="mobile-front" index={index} />
 					</div>
 				);
 			}

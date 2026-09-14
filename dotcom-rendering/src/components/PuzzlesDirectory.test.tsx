@@ -8,11 +8,6 @@ import type {
 } from '../types/puzzlesPage';
 import { getPuzzleUrl, PuzzlesDirectory } from './PuzzlesDirectory';
 
-jest.mock('./AdSlot.web', () => ({
-	AdSlot: ({ index }: { index: number }) => (
-		<div data-testid={`ad-${index}`} />
-	),
-}));
 jest.mock('./Island', () => ({
 	Island: ({ children }: { children: ReactNode }) => children,
 }));
@@ -38,6 +33,36 @@ const section = (
 });
 
 describe('PuzzlesDirectory', () => {
+	it('renders unique desktop and mobile IDs for multiple blueprint slots', () => {
+		const layout: PuzzlesLayoutType = {
+			containers: ['inline1', 'inline2'].map((adSlot) =>
+				section({
+					id: adSlot,
+					title: '',
+					variant: 'ad',
+					adSlot,
+					content: { items: [], nestedContainers: [] },
+				}),
+			),
+		};
+		const { rerender } = render(
+			<PuzzlesDirectory layout={layout} renderAds={true} />,
+		);
+		const ids = Array.from(
+			document.querySelectorAll('.js-ad-slot'),
+			({ id }) => id,
+		);
+		expect(ids).toEqual([
+			'dfp-ad--fronts-banner-1',
+			'dfp-ad--inline1--mobile',
+			'dfp-ad--fronts-banner-2',
+			'dfp-ad--inline2--mobile',
+		]);
+		expect(new Set(ids).size).toBe(ids.length);
+		rerender(<PuzzlesDirectory layout={layout} renderAds={false} />);
+		expect(document.querySelector('.js-ad-slot')).not.toBeInTheDocument();
+	});
+
 	it('does not render a disabled featured container', () => {
 		render(
 			<PuzzlesDirectory
@@ -176,9 +201,14 @@ describe('PuzzlesDirectory', () => {
 			screen.queryByRole('heading', { name: 'Empty' }),
 		).not.toBeInTheDocument();
 		expect(document.querySelector('img')).not.toBeInTheDocument();
-		expect(screen.queryByTestId('ad-2')).not.toBeInTheDocument();
+		expect(document.querySelector('.js-ad-slot')).not.toBeInTheDocument();
 		rerender(<PuzzlesDirectory layout={layout} renderAds={true} />);
-		expect(screen.getByTestId('ad-2')).toBeInTheDocument();
+		expect(
+			document.getElementById('dfp-ad--fronts-banner-2'),
+		).toHaveAttribute('data-name', 'fronts-banner-2');
+		expect(
+			document.getElementById('dfp-ad--inline2--mobile'),
+		).toHaveAttribute('data-name', 'inline2');
 	});
 
 	it('renders the archive dropdown and closes it with Escape or an outside click', async () => {

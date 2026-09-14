@@ -354,6 +354,9 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 	const unique = (values: string[]) => new Set(values).size === values.length;
 	const containerIds = containers.map(({ id }) => id);
 	const itemIds = items.map(({ id }) => id);
+	const adSlots = containers.flatMap(({ adSlot }) =>
+		adSlot === undefined ? [] : [adSlot],
+	);
 	const popularReferencesValid = containers.every((container) =>
 		(container.supporting?.popularGroups ?? []).every((group) =>
 			group.itemIds.every((id) => itemIds.includes(id)),
@@ -366,6 +369,7 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 	if (
 		!unique(containerIds) ||
 		!unique(itemIds) ||
+		!unique(adSlots) ||
 		!popularReferencesValid ||
 		!topLevelOnlyContainersValid
 	) {
