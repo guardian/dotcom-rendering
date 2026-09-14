@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import type { FEElement } from '../types/content';
 import {
 	calculateApproximateBlockHeight,
 	shouldDisplayAd,
 } from './liveblogAdSlots';
 
-void nodeDescribe('calculateApproximateBlockHeight', () => {
+void describe('calculateApproximateBlockHeight', () => {
 	const textElementOneLineDesktop: FEElement[] = [
 		{
 			elementId: '1',
@@ -65,22 +65,19 @@ void nodeDescribe('calculateApproximateBlockHeight', () => {
 
 	const defaultBlockSpacing = 75;
 
-	void nodeDescribe('zero elements', () => {
+	void describe('zero elements', () => {
 		for (const screenSize of ['mobile', 'desktop']) {
-			void nodeIt(
-				`should return zero when there are zero elements on ${screenSize}`,
-				() => {
-					const isMobile = screenSize === 'mobile';
-					assert.deepEqual(
-						calculateApproximateBlockHeight([], isMobile),
-						0,
-					);
-				},
-			);
+			void it(`should return zero when there are zero elements on ${screenSize}`, () => {
+				const isMobile = screenSize === 'mobile';
+				assert.deepEqual(
+					calculateApproximateBlockHeight([], isMobile),
+					0,
+				);
+			});
 		}
 	});
 
-	void nodeDescribe('text block elements', () => {
+	void describe('text block elements', () => {
 		const textLineHeight = 23.8;
 		const margin = 14;
 
@@ -88,199 +85,172 @@ void nodeDescribe('calculateApproximateBlockHeight', () => {
 			['mobile', textElementOneLineMobile, textElementTwoLinesMobile],
 			['desktop', textElementOneLineDesktop, textElementTwoLinesDestkop],
 		] as const) {
-			void nodeIt(
-				`should return the correct height for varying line length on ${screenSize}`,
-				() => {
-					const isMobile = screenSize === 'mobile';
+			void it(`should return the correct height for varying line length on ${screenSize}`, () => {
+				const isMobile = screenSize === 'mobile';
 
-					assert.deepEqual(
-						calculateApproximateBlockHeight(
-							textElementOneLine,
-							isMobile,
-						),
-						textLineHeight + margin + defaultBlockSpacing,
-					);
-					assert.deepEqual(
-						calculateApproximateBlockHeight(
-							textElementTwoLines,
-							isMobile,
-						),
-						2 * textLineHeight + margin + defaultBlockSpacing,
-					);
-				},
-			);
+				assert.deepEqual(
+					calculateApproximateBlockHeight(
+						textElementOneLine,
+						isMobile,
+					),
+					textLineHeight + margin + defaultBlockSpacing,
+				);
+				assert.deepEqual(
+					calculateApproximateBlockHeight(
+						textElementTwoLines,
+						isMobile,
+					),
+					2 * textLineHeight + margin + defaultBlockSpacing,
+				);
+			});
 		}
 
 		for (const screenSize of ['mobile', 'desktop']) {
-			void nodeIt(
-				`should return the correct height when there are multiple elements on ${screenSize}`,
-				() => {
-					const isMobile = screenSize === 'mobile';
+			void it(`should return the correct height when there are multiple elements on ${screenSize}`, () => {
+				const isMobile = screenSize === 'mobile';
 
-					assert.deepEqual(
-						calculateApproximateBlockHeight(
-							multipleTextElements,
-							isMobile,
-						),
-						2 * textLineHeight + 2 * margin + defaultBlockSpacing,
-					);
-				},
-			);
+				assert.deepEqual(
+					calculateApproximateBlockHeight(
+						multipleTextElements,
+						isMobile,
+					),
+					2 * textLineHeight + 2 * margin + defaultBlockSpacing,
+				);
+			});
 		}
 	});
 
-	void nodeDescribe('youtube block elements', () => {
+	void describe('youtube block elements', () => {
 		for (const [screenSize, heightExcludingText] of [
 			['mobile', 195],
 			['desktop', 350],
 		] as const) {
-			void nodeIt(
-				`should return the correct height on ${screenSize}`,
-				() => {
-					const isMobile = screenSize === 'mobile';
-					const margin = 12;
+			void it(`should return the correct height on ${screenSize}`, () => {
+				const isMobile = screenSize === 'mobile';
+				const margin = 12;
 
-					assert.deepEqual(
-						calculateApproximateBlockHeight(
-							youtubeElement,
-							isMobile,
-						),
-						heightExcludingText + margin + defaultBlockSpacing,
-					);
-				},
-			);
+				assert.deepEqual(
+					calculateApproximateBlockHeight(youtubeElement, isMobile),
+					heightExcludingText + margin + defaultBlockSpacing,
+				);
+			});
 		}
 	});
 });
 
-void nodeDescribe('shouldDisplayAd', () => {
-	void nodeDescribe('The final block of content', () => {
+void describe('shouldDisplayAd', () => {
+	void describe('The final block of content', () => {
 		for (const screenSize of ['mobile', 'desktop']) {
-			void nodeIt(
-				`should NOT display an ad if this is the final block on ${screenSize}`,
-				() => {
-					const isMobile = screenSize === 'mobile';
+			void it(`should NOT display an ad if this is the final block on ${screenSize}`, () => {
+				const isMobile = screenSize === 'mobile';
 
-					const block = 5;
-					const totalBlocks = 5;
-					const numAdsInserted = 1;
-					const numPixelsWithoutAdvert = 5000;
+				const block = 5;
+				const totalBlocks = 5;
+				const numAdsInserted = 1;
+				const numPixelsWithoutAdvert = 5000;
 
-					const result = shouldDisplayAd(
-						block,
-						totalBlocks,
-						numAdsInserted,
-						numPixelsWithoutAdvert,
-						isMobile,
-					);
+				const result = shouldDisplayAd(
+					block,
+					totalBlocks,
+					numAdsInserted,
+					numPixelsWithoutAdvert,
+					isMobile,
+				);
 
-					assert.ok(!result);
-				},
-			);
+				assert.ok(!result);
+			});
 		}
 	});
 
-	void nodeDescribe('Reaching the ad limit', () => {
+	void describe('Reaching the ad limit', () => {
 		for (const screenSize of ['mobile', 'desktop']) {
-			void nodeIt(
-				`should NOT insert another ad slot if we have reached the limit on ${screenSize}.`,
-				() => {
-					const isMobile = screenSize === 'mobile';
-					const block = 5;
-					const totalBlocks = 10;
-					const numAdsInserted = 8;
-					const numPixelsWithoutAdvert = 5000;
+			void it(`should NOT insert another ad slot if we have reached the limit on ${screenSize}.`, () => {
+				const isMobile = screenSize === 'mobile';
+				const block = 5;
+				const totalBlocks = 10;
+				const numAdsInserted = 8;
+				const numPixelsWithoutAdvert = 5000;
 
-					const result = shouldDisplayAd(
-						block,
-						totalBlocks,
-						numAdsInserted,
-						numPixelsWithoutAdvert,
-						isMobile,
-					);
+				const result = shouldDisplayAd(
+					block,
+					totalBlocks,
+					numAdsInserted,
+					numPixelsWithoutAdvert,
+					isMobile,
+				);
 
-					assert.ok(!result);
-				},
-			);
+				assert.ok(!result);
+			});
 		}
 	});
 
-	void nodeDescribe('inserting the first ad slot', () => {
+	void describe('inserting the first ad slot', () => {
 		for (const screenSize of ['mobile', 'desktop']) {
-			void nodeIt(
-				`should display ad if this is the first block on ${screenSize}.`,
-				() => {
-					const isMobile = screenSize === 'mobile';
-					const block = 1;
-					const totalBlocks = 10;
-					const numAdsInserted = 0;
-					const numPixelsWithoutAdvert = 550;
+			void it(`should display ad if this is the first block on ${screenSize}.`, () => {
+				const isMobile = screenSize === 'mobile';
+				const block = 1;
+				const totalBlocks = 10;
+				const numAdsInserted = 0;
+				const numPixelsWithoutAdvert = 550;
 
-					const result = shouldDisplayAd(
-						block,
-						totalBlocks,
-						numAdsInserted,
-						numPixelsWithoutAdvert,
-						isMobile,
-					);
+				const result = shouldDisplayAd(
+					block,
+					totalBlocks,
+					numAdsInserted,
+					numPixelsWithoutAdvert,
+					isMobile,
+				);
 
-					assert.ok(result);
-				},
-			);
+				assert.ok(result);
+			});
 		}
 	});
 
-	void nodeDescribe('inserting further ad slots', () => {
+	void describe('inserting further ad slots', () => {
 		for (const [pixels, screenSize] of [
 			[1200, 'mobile'],
 			[1500, 'desktop'],
 		] as const) {
-			void nodeIt(
-				`should display ad if number of pixels without an ad is more than ${pixels} on ${screenSize}`,
-				() => {
-					const isMobile = screenSize === 'mobile';
-					const block = 5;
-					const totalBlocks = 10;
-					const numAdsInserted = 1;
-					const numPixelsWithoutAdvert = pixels + 50;
+			void it(`should display ad if number of pixels without an ad is more than ${pixels} on ${screenSize}`, () => {
+				const isMobile = screenSize === 'mobile';
+				const block = 5;
+				const totalBlocks = 10;
+				const numAdsInserted = 1;
+				const numPixelsWithoutAdvert = pixels + 50;
 
-					const result = shouldDisplayAd(
-						block,
-						totalBlocks,
-						numAdsInserted,
-						numPixelsWithoutAdvert,
-						isMobile,
-					);
+				const result = shouldDisplayAd(
+					block,
+					totalBlocks,
+					numAdsInserted,
+					numPixelsWithoutAdvert,
+					isMobile,
+				);
 
-					assert.ok(result);
-				},
-			);
+				assert.ok(result);
+			});
 		}
 
 		for (const [pixels, screenSize] of [
 			[1200, 'mobile'],
 			[1500, 'desktop'],
 		] as const) {
-			void nodeIt(
-				`should NOT display ad if number of pixels without an ad is less than ${pixels} on ${screenSize}`,
-				() => {
-					const isMobile = screenSize === 'mobile';
-					const block = 5;
-					const totalBlocks = 10;
-					const numAdsInserted = 1;
-					const numPixelsWithoutAdvert = pixels - 50;
+			void it(`should NOT display ad if number of pixels without an ad is less than ${pixels} on ${screenSize}`, () => {
+				const isMobile = screenSize === 'mobile';
+				const block = 5;
+				const totalBlocks = 10;
+				const numAdsInserted = 1;
+				const numPixelsWithoutAdvert = pixels - 50;
 
-					const result = shouldDisplayAd(
-						block,
-						totalBlocks,
-						numAdsInserted,
-						numPixelsWithoutAdvert,
-						isMobile,
-					);
+				const result = shouldDisplayAd(
+					block,
+					totalBlocks,
+					numAdsInserted,
+					numPixelsWithoutAdvert,
+					isMobile,
+				);
 
-					assert.ok(!result);
-				},
-			);
+				assert.ok(!result);
+			});
 		}
 	});
 });

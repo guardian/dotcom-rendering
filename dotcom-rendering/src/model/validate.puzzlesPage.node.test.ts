@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { validateAsPuzzlesPageType } from './validate';
 
 const validPage = () => ({
@@ -39,28 +39,24 @@ const validPage = () => ({
 	},
 });
 
-void nodeDescribe('validateAsPuzzlesPageType', () => {
-	void nodeIt('accepts a valid recursive blueprint contract', () => {
+void describe('validateAsPuzzlesPageType', () => {
+	void it('accepts a valid recursive blueprint contract', () => {
 		assert.equal(
 			validateAsPuzzlesPageType(validPage()).layout.containers[0]?.id,
 			'word-games',
 		);
 	});
 
-	void nodeIt(
-		'accepts enabled on featured containers and rejects it elsewhere',
-		() => {
-			const featuredPage = validPage();
-			featuredPage.layout.containers[0]!.variant = 'featured';
-			(
-				featuredPage.layout.containers[0] as { enabled?: boolean }
-			).enabled = true;
-			assert.notEqual(validateAsPuzzlesPageType(featuredPage), undefined);
+	void it('accepts enabled on featured containers and rejects it elsewhere', () => {
+		const featuredPage = validPage();
+		featuredPage.layout.containers[0]!.variant = 'featured';
+		(featuredPage.layout.containers[0] as { enabled?: boolean }).enabled =
+			true;
+		assert.notEqual(validateAsPuzzlesPageType(featuredPage), undefined);
 
-			featuredPage.layout.containers[0]!.variant = 'standard';
-			assert.throws(() => validateAsPuzzlesPageType(featuredPage));
-		},
-	);
+		featuredPage.layout.containers[0]!.variant = 'standard';
+		assert.throws(() => validateAsPuzzlesPageType(featuredPage));
+	});
 
 	for (const [name, mutate] of [
 		[
@@ -108,7 +104,7 @@ void nodeDescribe('validateAsPuzzlesPageType', () => {
 			},
 		],
 	] as const) {
-		void nodeIt(`rejects ${name}`, () => {
+		void it(`rejects ${name}`, () => {
 			const page = validPage();
 			mutate(page);
 			assert.throws(() => validateAsPuzzlesPageType(page), {
@@ -117,82 +113,69 @@ void nodeDescribe('validateAsPuzzlesPageType', () => {
 		});
 	}
 
-	void nodeIt(
-		'accepts supporting content with valid puzzle references',
-		() => {
-			const page = validPage();
-			page.layout.containers.push({
-				id: 'supporting',
-				title: '',
-				variant: 'supporting',
-				adSlot: 'mostpop',
-				content: { items: [], nestedContainers: [] },
-				supporting: {
-					usefulLinksTitle: 'Useful links',
-					usefulLinks: [
-						{
-							title: 'Archive',
-							url: '/puzzles-and-games/word-wheel/archive',
-						},
-					],
-					popularTitle: 'Most popular puzzles',
-					popularGroups: [
-						{ title: 'Most played', itemIds: ['word-wheel'] },
-					],
-				},
-			} as never);
+	void it('accepts supporting content with valid puzzle references', () => {
+		const page = validPage();
+		page.layout.containers.push({
+			id: 'supporting',
+			title: '',
+			variant: 'supporting',
+			adSlot: 'mostpop',
+			content: { items: [], nestedContainers: [] },
+			supporting: {
+				usefulLinksTitle: 'Useful links',
+				usefulLinks: [
+					{
+						title: 'Archive',
+						url: '/puzzles-and-games/word-wheel/archive',
+					},
+				],
+				popularTitle: 'Most popular puzzles',
+				popularGroups: [
+					{ title: 'Most played', itemIds: ['word-wheel'] },
+				],
+			},
+		} as never);
 
-			assert.equal(
-				validateAsPuzzlesPageType(page).layout.containers.length,
-				2,
-			);
-		},
-	);
+		assert.equal(
+			validateAsPuzzlesPageType(page).layout.containers.length,
+			2,
+		);
+	});
 
-	void nodeIt(
-		'rejects supporting content which references an unknown puzzle',
-		() => {
-			const page = validPage();
-			page.layout.containers.push({
-				id: 'supporting',
-				title: '',
-				variant: 'supporting',
-				content: { items: [], nestedContainers: [] },
-				supporting: {
-					usefulLinksTitle: 'Useful links',
-					usefulLinks: [],
-					popularTitle: 'Most popular puzzles',
-					popularGroups: [
-						{ title: 'Most played', itemIds: ['missing'] },
-					],
-				},
-			} as never);
+	void it('rejects supporting content which references an unknown puzzle', () => {
+		const page = validPage();
+		page.layout.containers.push({
+			id: 'supporting',
+			title: '',
+			variant: 'supporting',
+			content: { items: [], nestedContainers: [] },
+			supporting: {
+				usefulLinksTitle: 'Useful links',
+				usefulLinks: [],
+				popularTitle: 'Most popular puzzles',
+				popularGroups: [{ title: 'Most played', itemIds: ['missing'] }],
+			},
+		} as never);
 
-			assert.throws(() => validateAsPuzzlesPageType(page));
-		},
-	);
+		assert.throws(() => validateAsPuzzlesPageType(page));
+	});
 
-	void nodeIt(
-		'accepts a valid top-level ad placement and rejects one nested inside content',
-		() => {
-			const page = validPage();
-			const ad = {
-				id: 'inline-ad',
-				title: '',
-				variant: 'ad',
-				adSlot: 'inline1',
-				content: { items: [], nestedContainers: [] },
-			};
-			page.layout.containers.push(ad as never);
-			assert.equal(
-				validateAsPuzzlesPageType(page).layout.containers.length,
-				2,
-			);
-			page.layout.containers.pop();
-			page.layout.containers[0]!.content.nestedContainers.push(
-				ad as never,
-			);
-			assert.throws(() => validateAsPuzzlesPageType(page));
-		},
-	);
+	void it('accepts a valid top-level ad placement and rejects one nested inside content', () => {
+		const page = validPage();
+		const ad = {
+			id: 'inline-ad',
+			title: '',
+			variant: 'ad',
+			adSlot: 'inline1',
+			content: { items: [], nestedContainers: [] },
+		};
+		page.layout.containers.push(ad as never);
+		assert.equal(
+			validateAsPuzzlesPageType(page).layout.containers.length,
+			2,
+		);
+		page.layout.containers.pop();
+		page.layout.containers[0]!.content.nestedContainers.push(ad as never);
+		assert.throws(() => validateAsPuzzlesPageType(page));
+	});
 });

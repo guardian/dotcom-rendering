@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type {
 	AdPlaceholderBlockElement,
@@ -75,8 +75,8 @@ const elementIsAdPlaceholder = (
 	'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 
 // Tests
-void nodeDescribe('enhanceAdPlaceholders', () => {
-	void nodeDescribe('for general articles', () => {
+void describe('enhanceAdPlaceholders', () => {
+	void describe('for general articles', () => {
 		const testCases = [
 			{ paragraphs: 0, expectedPositions: [] },
 			{ paragraphs: 1, expectedPositions: [] },
@@ -110,168 +110,136 @@ void nodeDescribe('enhanceAdPlaceholders', () => {
 		] satisfies Array<{ paragraphs: number; expectedPositions: number[] }>;
 
 		for (const { paragraphs, expectedPositions } of testCases) {
-			void nodeDescribe(
-				`for ${paragraphs} paragraph(s) in an article`,
-				() => {
-					const elements = getTestParagraphElements(paragraphs);
-					const expectedPlaceholders = expectedPositions.length;
-					const input: FEElement[] = elements;
+			void describe(`for ${paragraphs} paragraph(s) in an article`, () => {
+				const elements = getTestParagraphElements(paragraphs);
+				const expectedPlaceholders = expectedPositions.length;
+				const input: FEElement[] = elements;
 
-					const output = enhanceAdPlaceholders(
-						exampleFormat,
-						'Apps',
-						false,
-					)(input);
-					const placeholderIndices = output.flatMap((el, idx) =>
-						elementIsAdPlaceholder(el) ? [idx] : [],
+				const output = enhanceAdPlaceholders(
+					exampleFormat,
+					'Apps',
+					false,
+				)(input);
+				const placeholderIndices = output.flatMap((el, idx) =>
+					elementIsAdPlaceholder(el) ? [idx] : [],
+				);
+
+				void it(`should insert ${expectedPlaceholders} ad placeholder(s)`, () => {
+					assert.deepEqual(
+						placeholderIndices.length,
+						expectedPlaceholders,
 					);
+				});
 
-					void nodeIt(
-						`should insert ${expectedPlaceholders} ad placeholder(s)`,
-						() => {
-							assert.deepEqual(
-								placeholderIndices.length,
-								expectedPlaceholders,
-							);
-						},
-					);
-
-					if (expectedPlaceholders > 0) {
-						void nodeIt(
-							`should insert ad placeholder(s) in the expected position(s): ${expectedPositions.join(
-								',',
-							)}`,
-							() => {
-								assert.deepEqual(
-									placeholderIndices,
-									expectedPositions,
-								);
-							},
-						);
-					}
-				},
-			);
+				if (expectedPlaceholders > 0) {
+					void it(`should insert ad placeholder(s) in the expected position(s): ${expectedPositions.join(
+						',',
+					)}`, () => {
+						assert.deepEqual(placeholderIndices, expectedPositions);
+					});
+				}
+			});
 		}
 
-		void nodeIt(
-			'should not insert an ad placeholder before an inline image element, but can insert it after the image',
-			() => {
-				const threeParagraphs = getTestParagraphElements(3);
+		void it('should not insert an ad placeholder before an inline image element, but can insert it after the image', () => {
+			const threeParagraphs = getTestParagraphElements(3);
 
-				const elements = [
-					...threeParagraphs,
-					getInlineImageElement(),
-					...threeParagraphs,
-				];
+			const elements = [
+				...threeParagraphs,
+				getInlineImageElement(),
+				...threeParagraphs,
+			];
 
-				const input: FEElement[] = elements;
+			const input: FEElement[] = elements;
 
-				const output = enhanceAdPlaceholders(
-					exampleFormat,
-					'Apps',
-					false,
-				)(input);
-				const outputPlaceholders = output.filter(
-					elementIsAdPlaceholder,
-				);
+			const output = enhanceAdPlaceholders(
+				exampleFormat,
+				'Apps',
+				false,
+			)(input);
+			const outputPlaceholders = output.filter(elementIsAdPlaceholder);
 
-				assert.deepEqual(outputPlaceholders.length, 1);
+			assert.deepEqual(outputPlaceholders.length, 1);
 
-				const placeholderIndices = output.flatMap((el, idx) =>
-					elementIsAdPlaceholder(el) ? [idx] : [],
-				);
+			const placeholderIndices = output.flatMap((el, idx) =>
+				elementIsAdPlaceholder(el) ? [idx] : [],
+			);
 
-				// Expect one placeholder to be present after the fourth element only
-				assert.deepEqual(placeholderIndices, [4]);
-			},
-		);
+			// Expect one placeholder to be present after the fourth element only
+			assert.deepEqual(placeholderIndices, [4]);
+		});
 
-		void nodeIt(
-			'should not insert an ad placeholder after a thumbnail image element',
-			() => {
-				const threeParagraphs = getTestParagraphElements(3);
+		void it('should not insert an ad placeholder after a thumbnail image element', () => {
+			const threeParagraphs = getTestParagraphElements(3);
 
-				const elements = [
-					...threeParagraphs,
-					getThumbnailImageElement(),
-					...threeParagraphs,
-				];
+			const elements = [
+				...threeParagraphs,
+				getThumbnailImageElement(),
+				...threeParagraphs,
+			];
 
-				const input: FEElement[] = elements;
+			const input: FEElement[] = elements;
 
-				const output = enhanceAdPlaceholders(
-					exampleFormat,
-					'Apps',
-					false,
-				)(input);
-				const outputPlaceholders = output.filter(
-					elementIsAdPlaceholder,
-				);
+			const output = enhanceAdPlaceholders(
+				exampleFormat,
+				'Apps',
+				false,
+			)(input);
+			const outputPlaceholders = output.filter(elementIsAdPlaceholder);
 
-				assert.deepEqual(outputPlaceholders.length, 1);
+			assert.deepEqual(outputPlaceholders.length, 1);
 
-				const placeholderIndices = output.flatMap((el, idx) =>
-					elementIsAdPlaceholder(el) ? [idx] : [],
-				);
+			const placeholderIndices = output.flatMap((el, idx) =>
+				elementIsAdPlaceholder(el) ? [idx] : [],
+			);
 
-				// Expect one placeholder to be present after the fifth element only
-				assert.deepEqual(placeholderIndices, [5]);
-			},
-		);
+			// Expect one placeholder to be present after the fifth element only
+			assert.deepEqual(placeholderIndices, [5]);
+		});
 
-		void nodeIt(
-			'should not insert an ad placeholder after an element which is not an image or text',
-			() => {
-				const threeParagraphs = getTestParagraphElements(3);
+		void it('should not insert an ad placeholder after an element which is not an image or text', () => {
+			const threeParagraphs = getTestParagraphElements(3);
 
-				const elements = [
-					...threeParagraphs,
-					getSubheadingElement(),
-					...threeParagraphs,
-				];
+			const elements = [
+				...threeParagraphs,
+				getSubheadingElement(),
+				...threeParagraphs,
+			];
 
-				const input: FEElement[] = elements;
+			const input: FEElement[] = elements;
 
-				const output = enhanceAdPlaceholders(
-					exampleFormat,
-					'Apps',
-					false,
-				)(input);
-				const outputPlaceholders = output.filter(
-					elementIsAdPlaceholder,
-				);
+			const output = enhanceAdPlaceholders(
+				exampleFormat,
+				'Apps',
+				false,
+			)(input);
+			const outputPlaceholders = output.filter(elementIsAdPlaceholder);
 
-				assert.deepEqual(outputPlaceholders.length, 1);
+			assert.deepEqual(outputPlaceholders.length, 1);
 
-				const placeholderIndices = output.flatMap((el, idx) =>
-					elementIsAdPlaceholder(el) ? [idx] : [],
-				);
+			const placeholderIndices = output.flatMap((el, idx) =>
+				elementIsAdPlaceholder(el) ? [idx] : [],
+			);
 
-				// Expect one placeholder to be present after the fifth element only
-				assert.deepEqual(placeholderIndices, [5]);
-			},
-		);
+			// Expect one placeholder to be present after the fifth element only
+			assert.deepEqual(placeholderIndices, [5]);
+		});
 
-		void nodeIt(
-			'should not insert ad placeholders if shouldHideAds is true',
-			() => {
-				const input: FEElement[] = getTestParagraphElements(6);
+		void it('should not insert ad placeholders if shouldHideAds is true', () => {
+			const input: FEElement[] = getTestParagraphElements(6);
 
-				const output = enhanceAdPlaceholders(
-					exampleFormat,
-					'Apps',
-					true,
-				)(input);
-				const outputPlaceholders = output.filter(
-					elementIsAdPlaceholder,
-				);
+			const output = enhanceAdPlaceholders(
+				exampleFormat,
+				'Apps',
+				true,
+			)(input);
+			const outputPlaceholders = output.filter(elementIsAdPlaceholder);
 
-				assert.deepEqual(outputPlaceholders.length, 0);
-			},
-		);
+			assert.deepEqual(outputPlaceholders.length, 0);
+		});
 	});
 
-	void nodeDescribe('for gallery articles', () => {
+	void describe('for gallery articles', () => {
 		const testCases = [
 			{ images: 0, expectedPositions: [] },
 			{ images: 1, expectedPositions: [] },
@@ -289,83 +257,61 @@ void nodeDescribe('enhanceAdPlaceholders', () => {
 		] satisfies Array<{ images: number; expectedPositions: number[] }>;
 
 		for (const { images, expectedPositions } of testCases) {
-			void nodeDescribe(
-				`for ${images} images(s) in a gallery article`,
-				() => {
-					const elements = getTestImageBlockElements(images);
-					const expectedPlaceholders = expectedPositions.length;
-					const input: FEElement[] = elements;
-
-					const output = enhanceAdPlaceholders(
-						galleryFormat,
-						'Apps',
-						false,
-					)(input);
-					const placeholderIndices = output.flatMap((el, idx) =>
-						elementIsAdPlaceholder(el) ? [idx] : [],
-					);
-
-					void nodeIt(
-						`should insert ${expectedPlaceholders} ad placeholder(s)`,
-						() => {
-							assert.deepEqual(
-								placeholderIndices.length,
-								expectedPlaceholders,
-							);
-						},
-					);
-
-					if (expectedPlaceholders > 0) {
-						void nodeIt(
-							`should insert ad placeholder(s) in the expected position(s): ${expectedPositions.join(
-								',',
-							)}`,
-							() => {
-								assert.deepEqual(
-									placeholderIndices,
-									expectedPositions,
-								);
-							},
-						);
-					}
-				},
-			);
-		}
-
-		void nodeIt(
-			'should not insert ad placeholders if shouldHideAds is true',
-			() => {
-				const input: FEElement[] = getTestParagraphElements(6);
+			void describe(`for ${images} images(s) in a gallery article`, () => {
+				const elements = getTestImageBlockElements(images);
+				const expectedPlaceholders = expectedPositions.length;
+				const input: FEElement[] = elements;
 
 				const output = enhanceAdPlaceholders(
 					galleryFormat,
 					'Apps',
-					true,
-				)(input);
-				const outputPlaceholders = output.filter(
-					elementIsAdPlaceholder,
-				);
-
-				assert.deepEqual(outputPlaceholders.length, 0);
-			},
-		);
-
-		void nodeIt(
-			'should still insert ad placeholders if renderingTarget is web',
-			() => {
-				const input: FEElement[] = getTestParagraphElements(6);
-
-				const output = enhanceAdPlaceholders(
-					galleryFormat,
-					'Web',
 					false,
 				)(input);
-				const outputPlaceholders = output.filter(
-					elementIsAdPlaceholder,
+				const placeholderIndices = output.flatMap((el, idx) =>
+					elementIsAdPlaceholder(el) ? [idx] : [],
 				);
 
-				assert.ok(outputPlaceholders.length > 0);
-			},
-		);
+				void it(`should insert ${expectedPlaceholders} ad placeholder(s)`, () => {
+					assert.deepEqual(
+						placeholderIndices.length,
+						expectedPlaceholders,
+					);
+				});
+
+				if (expectedPlaceholders > 0) {
+					void it(`should insert ad placeholder(s) in the expected position(s): ${expectedPositions.join(
+						',',
+					)}`, () => {
+						assert.deepEqual(placeholderIndices, expectedPositions);
+					});
+				}
+			});
+		}
+
+		void it('should not insert ad placeholders if shouldHideAds is true', () => {
+			const input: FEElement[] = getTestParagraphElements(6);
+
+			const output = enhanceAdPlaceholders(
+				galleryFormat,
+				'Apps',
+				true,
+			)(input);
+			const outputPlaceholders = output.filter(elementIsAdPlaceholder);
+
+			assert.deepEqual(outputPlaceholders.length, 0);
+		});
+
+		void it('should still insert ad placeholders if renderingTarget is web', () => {
+			const input: FEElement[] = getTestParagraphElements(6);
+
+			const output = enhanceAdPlaceholders(
+				galleryFormat,
+				'Web',
+				false,
+			)(input);
+			const outputPlaceholders = output.filter(elementIsAdPlaceholder);
+
+			assert.ok(outputPlaceholders.length > 0);
+		});
 	});
 });

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { generateAlternateLangLinks } from './alternate-lang-links';
 import { editionalisedPages, editionList } from './edition';
 
@@ -23,42 +23,36 @@ const everyEditionWithNoEditionalisedPages = editionList
 		editionalisedPages.map((page) => `${edition.pageId}/${page}`),
 	);
 
-void nodeDescribe('alternate lang links', () => {
-	void nodeIt(
-		'generate hreflang links for network fronts with a lang locale',
-		() => {
-			for (const edition of everyEditionWithLangLocale) {
-				const langLinks = generateAlternateLangLinks(
+void describe('alternate lang links', () => {
+	void it('generate hreflang links for network fronts with a lang locale', () => {
+		for (const edition of everyEditionWithLangLocale) {
+			const langLinks = generateAlternateLangLinks(
+				'https://www.theguardian.com',
+				edition.pageId,
+			);
+			assert.deepEqual(langLinks, [
+				'<link rel="alternate" href="https://www.theguardian.com/uk" hreflang="en-GB" />',
+				'<link rel="alternate" href="https://www.theguardian.com/us" hreflang="en-US" />',
+				'<link rel="alternate" href="https://www.theguardian.com/au" hreflang="en-AU" />',
+				'<link rel="alternate" href="https://www.theguardian.com/europe" hreflang="en-EU" />',
+				'<link rel="alternate" href="https://www.theguardian.com/international" hreflang="en" />',
+			]);
+		}
+	});
+
+	void it('do NOT generate hreflang links for network fronts with NO lang locale', () => {
+		for (const edition of everyEditionWithNoLangLocale) {
+			assert.deepEqual(
+				generateAlternateLangLinks(
 					'https://www.theguardian.com',
 					edition.pageId,
-				);
-				assert.deepEqual(langLinks, [
-					'<link rel="alternate" href="https://www.theguardian.com/uk" hreflang="en-GB" />',
-					'<link rel="alternate" href="https://www.theguardian.com/us" hreflang="en-US" />',
-					'<link rel="alternate" href="https://www.theguardian.com/au" hreflang="en-AU" />',
-					'<link rel="alternate" href="https://www.theguardian.com/europe" hreflang="en-EU" />',
-					'<link rel="alternate" href="https://www.theguardian.com/international" hreflang="en" />',
-				]);
-			}
-		},
-	);
+				),
+				[],
+			);
+		}
+	});
 
-	void nodeIt(
-		'do NOT generate hreflang links for network fronts with NO lang locale',
-		() => {
-			for (const edition of everyEditionWithNoLangLocale) {
-				assert.deepEqual(
-					generateAlternateLangLinks(
-						'https://www.theguardian.com',
-						edition.pageId,
-					),
-					[],
-				);
-			}
-		},
-	);
-
-	void nodeIt('generate hreflang links for editionalised pages', () => {
+	void it('generate hreflang links for editionalised pages', () => {
 		for (const pageId of everyEditionWithEditionalisedPages) {
 			const langLinks = generateAlternateLangLinks(
 				'https://www.theguardian.com',
@@ -73,40 +67,34 @@ void nodeDescribe('alternate lang links', () => {
 		}
 	});
 
-	void nodeIt(
-		'do NOT generate hreflang links for editions with NO editionalised pages',
-		() => {
-			for (const pageId of everyEditionWithNoEditionalisedPages) {
-				assert.deepEqual(
-					generateAlternateLangLinks(
-						'https://www.theguardian.com',
-						pageId,
-					),
-					[],
-				);
-			}
-		},
-	);
+	void it('do NOT generate hreflang links for editions with NO editionalised pages', () => {
+		for (const pageId of everyEditionWithNoEditionalisedPages) {
+			assert.deepEqual(
+				generateAlternateLangLinks(
+					'https://www.theguardian.com',
+					pageId,
+				),
+				[],
+			);
+		}
+	});
 
-	void nodeIt(
-		'do NOT generate hreflang links for NON editionalised pages',
-		() => {
-			const pageIdsNotEditionalisedPages = [
-				'uk/something',
-				'us/something',
-				'au/something',
-				'international/something',
-				'uk/business/something',
-			];
-			for (const pageId of pageIdsNotEditionalisedPages) {
-				assert.deepEqual(
-					generateAlternateLangLinks(
-						'https://www.theguardian.com',
-						pageId,
-					),
-					[],
-				);
-			}
-		},
-	);
+	void it('do NOT generate hreflang links for NON editionalised pages', () => {
+		const pageIdsNotEditionalisedPages = [
+			'uk/something',
+			'us/something',
+			'au/something',
+			'international/something',
+			'uk/business/something',
+		];
+		for (const pageId of pageIdsNotEditionalisedPages) {
+			assert.deepEqual(
+				generateAlternateLangLinks(
+					'https://www.theguardian.com',
+					pageId,
+				),
+				[],
+			);
+		}
+	});
 });

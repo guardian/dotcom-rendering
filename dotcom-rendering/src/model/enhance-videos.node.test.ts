@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { FEElement } from '../types/content';
 import { enhanceGuVideos } from './enhance-videos';
 
-void nodeDescribe('Enhance Videos', () => {
-	void nodeDescribe('for GuVideoElement', () => {
-		void nodeIt('sets the html of the GuVideoBlockElement', () => {
+void describe('Enhance Videos', () => {
+	void describe('for GuVideoElement', () => {
+		void it('sets the html of the GuVideoBlockElement', () => {
 			const html = '<video></video>';
 
 			const videoElement: FEElement = {

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { footballData } from '../fixtures/generated/football-live';
 import {
 	emptyMatches,
@@ -27,8 +27,8 @@ const withMatches = (
 		})),
 	}));
 
-void nodeDescribe('footballMatches', () => {
-	void nodeIt('should parse match fixtures correctly', () => {
+void describe('footballMatches', () => {
+	void it('should parse match fixtures correctly', () => {
 		const result = parse(footballData.matchesList).getOrThrow(
 			'Expected football match parsing to succeed',
 		);
@@ -45,75 +45,66 @@ void nodeDescribe('footballMatches', () => {
 		assert.equal(competition?.tag, 'football/serieafootball');
 	});
 
-	void nodeIt(
-		'should return an error when football days have invalid dates',
-		() => {
-			const invalidDate: FEMatchByDateAndCompetition[] = emptyMatches.map(
-				(day) => ({
-					...day,
-					date: 'foo',
-				}),
-			);
+	void it('should return an error when football days have invalid dates', () => {
+		const invalidDate: FEMatchByDateAndCompetition[] = emptyMatches.map(
+			(day) => ({
+				...day,
+				date: 'foo',
+			}),
+		);
 
-			const result = parse(invalidDate).getErrorOrThrow(
-				'Expected football match parsing to fail',
-			);
+		const result = parse(invalidDate).getErrorOrThrow(
+			'Expected football match parsing to fail',
+		);
 
-			assert.equal(result.kind, 'FootballDayInvalidDate');
-		},
-	);
+		assert.equal(result.kind, 'FootballDayInvalidDate');
+	});
 
-	void nodeIt(
-		'should return an error when football matches have an invalid date',
-		() => {
-			const invalidMatchResult: FEMatchByDateAndCompetition[] =
-				withMatches([
-					matchFixture,
-					{ ...matchResult, date: '' },
-					matchDayLive,
-				]);
-			const invalidMatchFixture: FEMatchByDateAndCompetition[] =
-				withMatches([
-					{ ...matchFixture, date: '' },
-					matchResult,
-					matchDayLive,
-				]);
-			const invalidLiveMatch: FEMatchByDateAndCompetition[] = withMatches(
-				[matchResult, matchFixture, { ...matchDayLive, date: '' }],
-			);
+	void it('should return an error when football matches have an invalid date', () => {
+		const invalidMatchResult: FEMatchByDateAndCompetition[] = withMatches([
+			matchFixture,
+			{ ...matchResult, date: '' },
+			matchDayLive,
+		]);
+		const invalidMatchFixture: FEMatchByDateAndCompetition[] = withMatches([
+			{ ...matchFixture, date: '' },
+			matchResult,
+			matchDayLive,
+		]);
+		const invalidLiveMatch: FEMatchByDateAndCompetition[] = withMatches([
+			matchResult,
+			matchFixture,
+			{ ...matchDayLive, date: '' },
+		]);
 
-			const resultOne = parse(invalidMatchResult).getErrorOrThrow(
-				'Expected football match parsing to fail',
-			);
-			const resultTwo = parse(invalidMatchFixture).getErrorOrThrow(
-				'Expected football match parsing to fail',
-			);
-			const resultThree = parse(invalidLiveMatch).getErrorOrThrow(
-				'Expected football match parsing to fail',
-			);
+		const resultOne = parse(invalidMatchResult).getErrorOrThrow(
+			'Expected football match parsing to fail',
+		);
+		const resultTwo = parse(invalidMatchFixture).getErrorOrThrow(
+			'Expected football match parsing to fail',
+		);
+		const resultThree = parse(invalidLiveMatch).getErrorOrThrow(
+			'Expected football match parsing to fail',
+		);
 
-			assert.equal(resultOne.kind, 'FootballMatchInvalidDate');
-			assert.equal(resultTwo.kind, 'FootballMatchInvalidDate');
+		assert.equal(resultOne.kind, 'FootballMatchInvalidDate');
+		assert.equal(resultTwo.kind, 'FootballMatchInvalidDate');
 
-			if (resultThree.kind !== 'InvalidMatchDay') {
-				throw new Error('Expected an invalid match day error');
-			}
+		if (resultThree.kind !== 'InvalidMatchDay') {
+			throw new Error('Expected an invalid match day error');
+		}
 
-			assert.equal(
-				resultThree.errors[0]!.kind,
-				'FootballMatchInvalidDate',
-			);
-		},
-	);
+		assert.equal(resultThree.errors[0]!.kind, 'FootballMatchInvalidDate');
+	});
 
-	void nodeIt('should return an error when it receives a live match', () => {
+	void it('should return an error when it receives a live match', () => {
 		const result = parse(withMatches([liveMatch])).getErrorOrThrow(
 			'Expected football match parsing to fail',
 		);
 
 		assert.equal(result.kind, 'UnexpectedLiveMatch');
 	});
-	void nodeIt('should return a clean team name', () => {
+	void it('should return a clean team name', () => {
 		const matchesListWithTeamName = (teamName: string): FEResult => {
 			return {
 				...matchResult,
@@ -150,39 +141,33 @@ void nodeDescribe('footballMatches', () => {
 			assert.equal(match.homeTeam.name, cleanName);
 		}
 	});
-	void nodeIt(
-		'should replace known live match status with our status',
-		() => {
-			const matchDay = parse(
-				withMatches([matchDayLiveSecondHalf]),
-			).getOrThrow('Expected football live match parsing to succeed');
+	void it('should replace known live match status with our status', () => {
+		const matchDay = parse(
+			withMatches([matchDayLiveSecondHalf]),
+		).getOrThrow('Expected football live match parsing to succeed');
 
-			const match = matchDay[0]!.competitions[0]!.matches[0];
-			if (match?.kind !== 'Live') {
-				throw new Error('Expected live match');
-			}
+		const match = matchDay[0]!.competitions[0]!.matches[0];
+		if (match?.kind !== 'Live') {
+			throw new Error('Expected live match');
+		}
 
-			assert.equal(match.status, '2nd');
-		},
-	);
-	void nodeIt(
-		'should replace unknown live match status with first two characters',
-		() => {
-			const matchDayLiveUnknownStatus = {
-				...matchDayLiveSecondHalf,
-				matchStatus: 'Something odd',
-			};
+		assert.equal(match.status, '2nd');
+	});
+	void it('should replace unknown live match status with first two characters', () => {
+		const matchDayLiveUnknownStatus = {
+			...matchDayLiveSecondHalf,
+			matchStatus: 'Something odd',
+		};
 
-			const matchDay = parse(
-				withMatches([matchDayLiveUnknownStatus]),
-			).getOrThrow('Expected football live match parsing to succeed');
+		const matchDay = parse(
+			withMatches([matchDayLiveUnknownStatus]),
+		).getOrThrow('Expected football live match parsing to succeed');
 
-			const match = matchDay[0]!.competitions[0]!.matches[0];
-			if (match?.kind !== 'Live') {
-				throw new Error('Expected live match');
-			}
+		const match = matchDay[0]!.competitions[0]!.matches[0];
+		if (match?.kind !== 'Live') {
+			throw new Error('Expected live match');
+		}
 
-			assert.equal(match.status, 'So');
-		},
-	);
+		assert.equal(match.status, 'So');
+	});
 });

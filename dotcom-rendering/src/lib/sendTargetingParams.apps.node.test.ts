@@ -1,80 +1,74 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { getTargetingParams } from './sendTargetingParams.apps';
 
-void nodeDescribe('getTargetingParams', () => {
-	void nodeIt(
-		'extracts ad targeting params from editionCommercialProperties in the format Bridget consumes',
-		() => {
-			const testEditionCommercialProperties = {
-				adTargeting: [
-					{
-						name: 'su',
-						value: ['0'],
-					},
-					{
-						name: 'k',
-						value: [
-							'us-politics',
-							'state-of-georgia',
-							'us-crime',
-							'us-news',
-							'donaldtrump',
-						],
-					},
-					{
-						name: 'edition',
-						value: 'uk',
-					},
-					{
-						name: 'tn',
-						value: ['news'],
-					},
-					{
-						name: 'co',
-						value: ['sam-levin', 'hugo-lowell'],
-					},
-					{
-						name: 'sh',
-						value: 'https://www.theguardian.com/p/zm6gk',
-					},
-					{
-						name: 'p',
-						value: 'ng',
-					},
-					{
-						name: 'ct',
-						value: 'article',
-					},
-					{
-						name: 'url',
-						value: '/us-news/2023/aug/24/trump-surrender-georgia-jail-overturn-2020-election',
-					},
-				],
-			};
+void describe('getTargetingParams', () => {
+	void it('extracts ad targeting params from editionCommercialProperties in the format Bridget consumes', () => {
+		const testEditionCommercialProperties = {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'k',
+					value: [
+						'us-politics',
+						'state-of-georgia',
+						'us-crime',
+						'us-news',
+						'donaldtrump',
+					],
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'tn',
+					value: ['news'],
+				},
+				{
+					name: 'co',
+					value: ['sam-levin', 'hugo-lowell'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/zm6gk',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/us-news/2023/aug/24/trump-surrender-georgia-jail-overturn-2020-election',
+				},
+			],
+		};
 
-			const expectedValue = new Map<string, string>([
-				['ct', 'article'],
-				['co', 'sam-levin,hugo-lowell'],
-				[
-					'url',
-					'/us-news/2023/aug/24/trump-surrender-georgia-jail-overturn-2020-election',
-				],
-				['su', '0'],
-				['edition', 'uk'],
-				['tn', 'news'],
-				['p', 'app'],
-				['rp', 'dotcom-rendering'],
-				[
-					'k',
-					'us-politics,state-of-georgia,us-crime,us-news,donaldtrump',
-				],
-			]);
+		const expectedValue = new Map<string, string>([
+			['ct', 'article'],
+			['co', 'sam-levin,hugo-lowell'],
+			[
+				'url',
+				'/us-news/2023/aug/24/trump-surrender-georgia-jail-overturn-2020-election',
+			],
+			['su', '0'],
+			['edition', 'uk'],
+			['tn', 'news'],
+			['p', 'app'],
+			['rp', 'dotcom-rendering'],
+			['k', 'us-politics,state-of-georgia,us-crime,us-news,donaldtrump'],
+		]);
 
-			assert.deepEqual(
-				getTargetingParams(testEditionCommercialProperties),
-				expectedValue,
-			);
-		},
-	);
+		assert.deepEqual(
+			getTargetingParams(testEditionCommercialProperties),
+			expectedValue,
+		);
+	});
 });

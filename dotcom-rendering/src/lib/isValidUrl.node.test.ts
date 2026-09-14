@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { isValidUrl } from './isValidUrl';
 
-void nodeDescribe('isValidUrl', () => {
-	void nodeDescribe('invalidInputs', () => {
+void describe('isValidUrl', () => {
+	void describe('invalidInputs', () => {
 		const invalidInputs = [
 			'',
 			'guardian.co',
@@ -13,16 +13,13 @@ void nodeDescribe('isValidUrl', () => {
 		];
 
 		for (const input of invalidInputs) {
-			void nodeIt(
-				`returns false for invalid input of \`${input}\``,
-				() => {
-					assert.equal(isValidUrl(input), false);
-				},
-			);
+			void it(`returns false for invalid input of \`${input}\``, () => {
+				assert.equal(isValidUrl(input), false);
+			});
 		}
 	});
 
-	void nodeDescribe('validInputs', () => {
+	void describe('validInputs', () => {
 		const validInputs = [
 			'https://guardian.co.uk/australia-news/series/guardian-australia-s-morning-mail',
 			'https://regexr.com/39nr7',
@@ -30,7 +27,7 @@ void nodeDescribe('isValidUrl', () => {
 		];
 
 		for (const input of validInputs) {
-			void nodeIt(`returns true for valid input of \`${input}\``, () => {
+			void it(`returns true for valid input of \`${input}\``, () => {
 				assert.equal(isValidUrl(input), true);
 			});
 		}

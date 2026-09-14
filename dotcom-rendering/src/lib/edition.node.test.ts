@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import {
 	editionalisedPages,
 	editionList,
@@ -15,14 +15,14 @@ const everyEditionalisedPage = editionList
 	)
 	.flat();
 
-void nodeDescribe('is network front', () => {
-	void nodeIt('returns true if pageId is a network front', () => {
+void describe('is network front', () => {
+	void it('returns true if pageId is a network front', () => {
 		assert.equal(
 			everyNetworkFront.every((page) => isNetworkFront(page)),
 			true,
 		);
 	});
-	void nodeIt('returns false if pageId is NOT a network front', () => {
+	void it('returns false if pageId is NOT a network front', () => {
 		assert.equal(everyEditionalisedPage.every(isNetworkFront), false);
 		assert.equal(isNetworkFront('eu'), false);
 		assert.equal(isNetworkFront('int'), false);
@@ -30,14 +30,14 @@ void nodeDescribe('is network front', () => {
 	});
 });
 
-void nodeDescribe('is editionalised page', () => {
-	void nodeIt('returns true if pageId is editionalised', () => {
+void describe('is editionalised page', () => {
+	void it('returns true if pageId is editionalised', () => {
 		assert.equal(
 			everyEditionalisedPage.every((page) => isEditionalisedPage(page)),
 			true,
 		);
 	});
-	void nodeIt('returns false if pageId is NOT editionalised', () => {
+	void it('returns false if pageId is NOT editionalised', () => {
 		assert.equal(
 			everyNetworkFront.every((page) => isEditionalisedPage(page)),
 			false,

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { Labs } from '../../fixtures/generated/fe-articles/Labs';
 import { Standard } from '../../fixtures/generated/fe-articles/Standard';
 import type { CommercialProperties } from '../types/commercial';
@@ -7,8 +7,8 @@ import { enhanceCommercialProperties } from './enhanceCommercialProperties';
 
 const isNumber = (width: unknown): width is number => typeof width === 'number';
 
-void nodeDescribe('Enhance Branding', () => {
-	void nodeIt('does not change properties if they have no branding', () => {
+void describe('Enhance Branding', () => {
+	void it('does not change properties if they have no branding', () => {
 		const { commercialProperties } = Standard;
 		assert.deepEqual(
 			enhanceCommercialProperties(commercialProperties),
@@ -16,7 +16,7 @@ void nodeDescribe('Enhance Branding', () => {
 		);
 	});
 
-	void nodeIt('should have no widths above 140', () => {
+	void it('should have no widths above 140', () => {
 		const { commercialProperties: partial } = Labs;
 		const commercialProperties: CommercialProperties = {
 			...partial,

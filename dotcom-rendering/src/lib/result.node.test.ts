@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { literal, safeParse } from 'valibot';
 import { error, fromValibot, ok, type Result } from './result';
 
-void nodeDescribe('ok', () => {
-	void nodeIt('creates an instance of Ok', () => {
+void describe('ok', () => {
+	void it('creates an instance of Ok', () => {
 		const result = ok(3);
 		const value = result.getOrThrow('Expected an Ok');
 
@@ -13,8 +13,8 @@ void nodeDescribe('ok', () => {
 	});
 });
 
-void nodeDescribe('error', () => {
-	void nodeIt('creates an instance of Err', () => {
+void describe('error', () => {
+	void it('creates an instance of Err', () => {
 		const result = error('An error');
 		const err = result.getErrorOrThrow('Expected an Err');
 
@@ -23,22 +23,19 @@ void nodeDescribe('error', () => {
 	});
 });
 
-void nodeDescribe('flatMap', () => {
+void describe('flatMap', () => {
 	const f = (a: number): Result<unknown, number> => ok(a + 1);
 	const h = (): Result<string, number> => error('h error');
 
-	void nodeIt(
-		'runs the function and unwraps the result when both Results are Ok',
-		() => {
-			const result = ok(3).flatMap(f);
-			const value = result.getOrThrow('Expected an Ok');
+	void it('runs the function and unwraps the result when both Results are Ok', () => {
+		const result = ok(3).flatMap(f);
+		const value = result.getOrThrow('Expected an Ok');
 
-			assert.equal(result.ok, true);
-			assert.equal(value, 4);
-		},
-	);
+		assert.equal(result.ok, true);
+		assert.equal(value, 4);
+	});
 
-	void nodeIt('passes through the Err when the first Result is Err', () => {
+	void it('passes through the Err when the first Result is Err', () => {
 		const result = error<string, number>('error message').flatMap(f);
 		const err = result.getErrorOrThrow('Expected an Err');
 
@@ -46,7 +43,7 @@ void nodeDescribe('flatMap', () => {
 		assert.equal(err, 'error message');
 	});
 
-	void nodeIt('passes through the Err when the second Result is Err', () => {
+	void it('passes through the Err when the second Result is Err', () => {
 		const result = ok(3).flatMap(h);
 		const err = result.getErrorOrThrow('Expected an Err');
 
@@ -54,7 +51,7 @@ void nodeDescribe('flatMap', () => {
 		assert.equal(err, 'h error');
 	});
 
-	void nodeIt('passes through the first Err when both are Err', () => {
+	void it('passes through the first Err when both are Err', () => {
 		const result = error<string, number>('error message').flatMap(h);
 		const err = result.getErrorOrThrow('Expected an Err');
 
@@ -62,19 +59,19 @@ void nodeDescribe('flatMap', () => {
 		assert.equal(err, 'error message');
 	});
 
-	void nodeIt('obeys left identity law', () => {
+	void it('obeys left identity law', () => {
 		const value = 3;
 
 		assert.deepEqual(ok(value).flatMap(f), f(value));
 	});
 
-	void nodeIt('obeys right identity law', () => {
+	void it('obeys right identity law', () => {
 		const result = ok(3);
 
 		assert.deepEqual(result.flatMap(ok), result);
 	});
 
-	void nodeIt('obeys associativity law', () => {
+	void it('obeys associativity law', () => {
 		const result = ok(3);
 		const g = (a: number): Result<unknown, number> => ok(a * 3);
 
@@ -85,10 +82,10 @@ void nodeDescribe('flatMap', () => {
 	});
 });
 
-void nodeDescribe('map', () => {
+void describe('map', () => {
 	const f = (a: number): number => a + 1;
 
-	void nodeIt('runs the function when Result is Ok', () => {
+	void it('runs the function when Result is Ok', () => {
 		const result = ok(3).map(f);
 		const value = result.getOrThrow('Expected an Ok');
 
@@ -96,7 +93,7 @@ void nodeDescribe('map', () => {
 		assert.equal(value, 4);
 	});
 
-	void nodeIt('passes the error through when Result is Err', () => {
+	void it('passes the error through when Result is Err', () => {
 		const result = error<string, number>('error message').map(f);
 		const err = result.getErrorOrThrow('Expected an Err');
 
@@ -104,7 +101,7 @@ void nodeDescribe('map', () => {
 		assert.equal(err, 'error message');
 	});
 
-	void nodeIt('obeys identity', () => {
+	void it('obeys identity', () => {
 		const identity = <A>(a: A): A => a;
 		const value = 3;
 		const result = ok(value);
@@ -112,7 +109,7 @@ void nodeDescribe('map', () => {
 		assert.deepEqual(result.map(identity), result);
 	});
 
-	void nodeIt('obeys composition', () => {
+	void it('obeys composition', () => {
 		const g = (a: number): number => a * 3;
 		const result = ok(3);
 
@@ -123,30 +120,30 @@ void nodeDescribe('map', () => {
 	});
 });
 
-void nodeDescribe('mapError', () => {
+void describe('mapError', () => {
 	const f = (err: string): string => `An error: ${err}`;
 
-	void nodeIt('produces a new error if Err', () => {
+	void it('produces a new error if Err', () => {
 		const err = error('error details');
 
 		assert.deepEqual(err.mapError(f), error('An error: error details'));
 	});
 
-	void nodeIt('does nothing if Ok', () => {
+	void it('does nothing if Ok', () => {
 		const result = ok<string, number>(3);
 
 		assert.deepEqual(result.mapError(f), result);
 	});
 });
 
-void nodeDescribe('getOrThrow', () => {
-	void nodeIt('gets the value if Ok', () => {
+void describe('getOrThrow', () => {
+	void it('gets the value if Ok', () => {
 		const value = ok(3).getOrThrow('Expected an Ok');
 
 		assert.equal(value, 3);
 	});
 
-	void nodeIt('throws if Err', () => {
+	void it('throws if Err', () => {
 		const result = error('An error');
 
 		assert.throws(
@@ -156,14 +153,14 @@ void nodeDescribe('getOrThrow', () => {
 	});
 });
 
-void nodeDescribe('getErrorOrThrow', () => {
-	void nodeIt('gets the value if Err', () => {
+void describe('getErrorOrThrow', () => {
+	void it('gets the value if Err', () => {
 		const err = error('An error').getErrorOrThrow('Expected an Err');
 
 		assert.equal(err, 'An error');
 	});
 
-	void nodeIt('throws if Ok', () => {
+	void it('throws if Ok', () => {
 		const result = ok(3);
 
 		assert.throws(
@@ -173,10 +170,10 @@ void nodeDescribe('getErrorOrThrow', () => {
 	});
 });
 
-void nodeDescribe('fromValibot', () => {
+void describe('fromValibot', () => {
 	const schema = literal('string literal');
 
-	void nodeIt('creates an Ok from a successful parse result', () => {
+	void it('creates an Ok from a successful parse result', () => {
 		const valibotResult = safeParse(schema, 'string literal');
 
 		const result = fromValibot(valibotResult);
@@ -185,7 +182,7 @@ void nodeDescribe('fromValibot', () => {
 		assert.equal(value, 'string literal');
 	});
 
-	void nodeIt('creates an Err from an unsuccessful parse result', () => {
+	void it('creates an Err from an unsuccessful parse result', () => {
 		const valibotResult = safeParse(schema, 'invalid literal');
 
 		const result = fromValibot(valibotResult);

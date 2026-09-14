@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { transparentColour } from './transparentColour';
 
-void nodeDescribe('transparentColour', () => {
+void describe('transparentColour', () => {
 	const validHexColours = [
 		['#000000', 'rgba(0, 0, 0, 0.5)'],
 		['#C70000', 'rgba(199, 0, 0, 0.5)'],
@@ -11,7 +11,7 @@ void nodeDescribe('transparentColour', () => {
 	] as const;
 
 	for (const [hex, output] of validHexColours) {
-		void nodeIt(`For valid hex ${hex}, return ${output}`, () => {
+		void it(`For valid hex ${hex}, return ${output}`, () => {
 			assert.equal(transparentColour(hex), output);
 		});
 	}
@@ -24,7 +24,7 @@ void nodeDescribe('transparentColour', () => {
 	] as const;
 
 	for (const [hex, output] of shortHexColours) {
-		void nodeIt(`For short hex ${hex}, return ${output}`, () => {
+		void it(`For short hex ${hex}, return ${output}`, () => {
 			assert.equal(transparentColour(hex), output);
 		});
 	}
@@ -39,14 +39,8 @@ void nodeDescribe('transparentColour', () => {
 	];
 
 	for (const hex of invalidHexColours) {
-		void nodeIt(
-			`For invalid hex ${hex}, return rgba(127, 127, 127, 0.5)`,
-			() => {
-				assert.equal(
-					transparentColour(hex),
-					'rgba(127, 127, 127, 0.5)',
-				);
-			},
-		);
+		void it(`For invalid hex ${hex}, return rgba(127, 127, 127, 0.5)`, () => {
+			assert.equal(transparentColour(hex), 'rgba(127, 127, 127, 0.5)');
+		});
 	}
 });

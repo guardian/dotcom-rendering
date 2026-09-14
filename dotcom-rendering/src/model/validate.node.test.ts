@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { Comment } from '../../fixtures/generated/fe-articles/Comment';
 import { Feature } from '../../fixtures/generated/fe-articles/Feature';
 import { Live } from '../../fixtures/generated/fe-articles/Live';
@@ -53,27 +53,21 @@ const hostedContentArticles = [
 	},
 ];
 
-void nodeDescribe('validate', () => {
-	void nodeIt('throws on invalid data', () => {
+void describe('validate', () => {
+	void it('throws on invalid data', () => {
 		const data = { foo: 'bar' };
 		assert.throws(() => validateAsFEArticle(data), TypeError);
 	});
 
 	for (const article of articles) {
-		void nodeIt(`validates data for a ${article.name} article`, () => {
+		void it(`validates data for a ${article.name} article`, () => {
 			assert.equal(validateAsFEArticle(article.data), article.data);
 		});
 	}
 
 	for (const hostedItem of hostedContentArticles) {
-		void nodeIt(
-			`validates data for hosted ${hostedItem.name} content`,
-			() => {
-				assert.equal(
-					validateAsFEArticle(hostedItem.data),
-					hostedItem.data,
-				);
-			},
-		);
+		void it(`validates data for hosted ${hostedItem.name} content`, () => {
+			assert.equal(validateAsFEArticle(hostedItem.data), hostedItem.data);
+		});
 	}
 });

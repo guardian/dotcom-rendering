@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import type { FEMediaAsset } from '../frontend/feFront';
 import type { VideoAssets } from '../types/content';
 import type { Source } from './video';
@@ -90,9 +90,9 @@ const m3u8Src720h: Source = {
 	hasAudio: true,
 };
 
-void nodeDescribe('video', () => {
-	void nodeDescribe('extractValidSourcesFromAssets', () => {
-		void nodeIt('should drop unsupported assets', () => {
+void describe('video', () => {
+	void describe('extractValidSourcesFromAssets', () => {
+		void it('should drop unsupported assets', () => {
 			const assets = [mp4Asset480w, m3u8Asset720h, unsupportedAsset];
 			const expected = [mp4Src480w, m3u8Src720h];
 
@@ -102,57 +102,48 @@ void nodeDescribe('video', () => {
 			);
 		});
 
-		void nodeIt(
-			'should reorder sources by supportedVideoFileTypes order',
-			() => {
-				const assets = [
-					m3u8Asset720h,
-					mp4Asset480w,
-					m3u8Asset720h,
-					mp4Asset720h,
-					m3u8Asset720h,
-				];
-				const expected = [
-					mp4Src480w,
-					mp4Src720h,
-					m3u8Src720h,
-					m3u8Src720h,
-					m3u8Src720h,
-				];
-				assert.deepEqual(
-					extractValidSourcesFromAssets(assets, 'Loop'),
-					expected,
-				);
-			},
-		);
+		void it('should reorder sources by supportedVideoFileTypes order', () => {
+			const assets = [
+				m3u8Asset720h,
+				mp4Asset480w,
+				m3u8Asset720h,
+				mp4Asset720h,
+				m3u8Asset720h,
+			];
+			const expected = [
+				mp4Src480w,
+				mp4Src720h,
+				m3u8Src720h,
+				m3u8Src720h,
+				m3u8Src720h,
+			];
+			assert.deepEqual(
+				extractValidSourcesFromAssets(assets, 'Loop'),
+				expected,
+			);
+		});
 
-		void nodeIt(
-			'should prefer M3U8 sources for long videos with Default video style',
-			() => {
-				const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
-				const expected = [m3u8Src720h, mp4Src480w, mp4Src720h];
+		void it('should prefer M3U8 sources for long videos with Default video style', () => {
+			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
+			const expected = [m3u8Src720h, mp4Src480w, mp4Src720h];
 
-				assert.deepEqual(
-					extractValidSourcesFromAssets(assets, 'Default', 37),
-					expected,
-				);
-			},
-		);
+			assert.deepEqual(
+				extractValidSourcesFromAssets(assets, 'Default', 37),
+				expected,
+			);
+		});
 
-		void nodeIt(
-			'should prefer MP4 sources for short videos with Default video style',
-			() => {
-				const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
-				const expected = [mp4Src480w, mp4Src720h, m3u8Src720h];
+		void it('should prefer MP4 sources for short videos with Default video style', () => {
+			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
+			const expected = [mp4Src480w, mp4Src720h, m3u8Src720h];
 
-				assert.deepEqual(
-					extractValidSourcesFromAssets(assets, 'Default', 12),
-					expected,
-				);
-			},
-		);
+			assert.deepEqual(
+				extractValidSourcesFromAssets(assets, 'Default', 12),
+				expected,
+			);
+		});
 
-		void nodeIt('should prefer MP4 sources with Loop video style', () => {
+		void it('should prefer MP4 sources with Loop video style', () => {
 			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
 			const expected = [mp4Src480w, mp4Src720h, m3u8Src720h];
 
@@ -162,21 +153,18 @@ void nodeDescribe('video', () => {
 			);
 		});
 
-		void nodeIt(
-			'should prefer MP4 sources with Cinemagraph video style',
-			() => {
-				const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
-				const expected = [mp4Src480w, mp4Src720h, m3u8Src720h];
+		void it('should prefer MP4 sources with Cinemagraph video style', () => {
+			const assets = [mp4Asset480w, m3u8Asset720h, mp4Asset720h];
+			const expected = [mp4Src480w, mp4Src720h, m3u8Src720h];
 
-				assert.deepEqual(
-					extractValidSourcesFromAssets(assets, 'Cinemagraph'),
-					expected,
-				);
-			},
-		);
+			assert.deepEqual(
+				extractValidSourcesFromAssets(assets, 'Cinemagraph'),
+				expected,
+			);
+		});
 	});
 
-	void nodeDescribe('convertFEMediaAssetsToVideoAssets', () => {
+	void describe('convertFEMediaAssetsToVideoAssets', () => {
 		const feMediaAsset480w: FEMediaAsset = {
 			id: 'https://guim-example.co.uk/atomID-1_480w.mp4',
 			version: 1,
@@ -202,7 +190,7 @@ void nodeDescribe('video', () => {
 			hasAudio: true,
 		};
 
-		void nodeIt('should convert FE media assets to video assets', () => {
+		void it('should convert FE media assets to video assets', () => {
 			assert.deepEqual(
 				convertFEMediaAssetsToVideoAssets([
 					feMediaAsset480w,
@@ -233,91 +221,70 @@ void nodeDescribe('video', () => {
 			);
 		});
 
-		void nodeIt(
-			'should return an empty array when given an empty array',
-			() => {
-				assert.deepEqual(convertFEMediaAssetsToVideoAssets([]), []);
-			},
-		);
+		void it('should return an empty array when given an empty array', () => {
+			assert.deepEqual(convertFEMediaAssetsToVideoAssets([]), []);
+		});
 	});
 
-	void nodeDescribe('getAspectRatioFromSources', () => {
-		void nodeIt(
-			'should return the aspect ratio from the first source if it is defined',
-			() => {
-				const testSource: Source = {
-					...mp4Src480w,
-					height: 720,
-					width: 480,
-					aspectRatio: '5:3',
-					hasAudio: true,
-				};
+	void describe('getAspectRatioFromSources', () => {
+		void it('should return the aspect ratio from the first source if it is defined', () => {
+			const testSource: Source = {
+				...mp4Src480w,
+				height: 720,
+				width: 480,
+				aspectRatio: '5:3',
+				hasAudio: true,
+			};
 
-				const fiveThreeAspectRatio = 1.667;
+			const fiveThreeAspectRatio = 1.667;
 
-				assert.deepEqual(
-					getAspectRatioFromSources([testSource]),
-					fiveThreeAspectRatio,
-				);
-			},
-		);
+			assert.deepEqual(
+				getAspectRatioFromSources([testSource]),
+				fiveThreeAspectRatio,
+			);
+		});
 
-		void nodeIt(
-			'should calculate the aspect ratio from the width and height if aspect ratio is missing',
-			() => {
-				const testSource: Source = {
-					...mp4Src480w,
-					height: 720,
-					width: 480,
-					aspectRatio: undefined,
-					hasAudio: true,
-				};
+		void it('should calculate the aspect ratio from the width and height if aspect ratio is missing', () => {
+			const testSource: Source = {
+				...mp4Src480w,
+				height: 720,
+				width: 480,
+				aspectRatio: undefined,
+				hasAudio: true,
+			};
 
-				const twoThreeAspectRatio = 0.667;
+			const twoThreeAspectRatio = 0.667;
 
-				assert.deepEqual(
-					getAspectRatioFromSources([testSource]),
-					twoThreeAspectRatio,
-				);
-			},
-		);
+			assert.deepEqual(
+				getAspectRatioFromSources([testSource]),
+				twoThreeAspectRatio,
+			);
+		});
 
-		void nodeIt(
-			'should return the default aspect ratio if the aspect ratio is undefined and width is 0',
-			() => {
-				const testSource: Source = {
-					...mp4Src480w,
-					height: 720,
-					width: 0,
-					aspectRatio: undefined,
-					hasAudio: true,
-				};
-				assert.deepEqual(
-					getAspectRatioFromSources([testSource]),
-					5 / 4,
-				);
-			},
-		);
+		void it('should return the default aspect ratio if the aspect ratio is undefined and width is 0', () => {
+			const testSource: Source = {
+				...mp4Src480w,
+				height: 720,
+				width: 0,
+				aspectRatio: undefined,
+				hasAudio: true,
+			};
+			assert.deepEqual(getAspectRatioFromSources([testSource]), 5 / 4);
+		});
 
-		void nodeIt(
-			'should return the default aspect ratio if the aspect ratio is undefined and height is 0',
-			() => {
-				const testSource: Source = {
-					...mp4Src480w,
-					height: 0,
-					width: 480,
-					aspectRatio: undefined,
-					hasAudio: true,
-				};
-				assert.deepEqual(
-					getAspectRatioFromSources([testSource]),
-					5 / 4,
-				);
-			},
-		);
+		void it('should return the default aspect ratio if the aspect ratio is undefined and height is 0', () => {
+			const testSource: Source = {
+				...mp4Src480w,
+				height: 0,
+				width: 480,
+				aspectRatio: undefined,
+				hasAudio: true,
+			};
+			assert.deepEqual(getAspectRatioFromSources([testSource]), 5 / 4);
+		});
 	});
 
-	void nodeDescribe('findOptimisedSourcePerMimeType', () => {
+	void describe('findOptimisedSourcePerMimeType', () => {
 		const testSources: Source[] = [
 			mp4Src480w,
 			mp4Src720h,
@@ -325,78 +292,63 @@ void nodeDescribe('video', () => {
 			m3u8Src720h,
 		];
 
-		void nodeIt(
-			'selects the smaller videos when there are multiple and all are larger than the screen width.',
-			() => {
-				const screenWidth = 400;
+		void it('selects the smaller videos when there are multiple and all are larger than the screen width.', () => {
+			const screenWidth = 400;
 
-				const sources = findOptimisedSourcePerMimeType(
-					testSources,
-					screenWidth,
-				);
+			const sources = findOptimisedSourcePerMimeType(
+				testSources,
+				screenWidth,
+			);
 
-				assert.deepEqual(sources, [mp4Src480w, m3u8Src480w]);
-			},
-		);
+			assert.deepEqual(sources, [mp4Src480w, m3u8Src480w]);
+		});
 
-		void nodeIt(
-			'selects the larger videos when there are two and one is larger than the screen width and one is smaller.',
-			() => {
-				const screenWidth = 600;
+		void it('selects the larger videos when there are two and one is larger than the screen width and one is smaller.', () => {
+			const screenWidth = 600;
 
-				const sources = findOptimisedSourcePerMimeType(
-					testSources,
-					screenWidth,
-				);
+			const sources = findOptimisedSourcePerMimeType(
+				testSources,
+				screenWidth,
+			);
 
-				assert.deepEqual(sources, [mp4Src720h, m3u8Src720h]);
-			},
-		);
+			assert.deepEqual(sources, [mp4Src720h, m3u8Src720h]);
+		});
 
-		void nodeIt(
-			'selects the larger videos when there are multiple and all are smaller than the screen width.',
-			() => {
-				const screenWidth = 800;
+		void it('selects the larger videos when there are multiple and all are smaller than the screen width.', () => {
+			const screenWidth = 800;
 
-				const sources = findOptimisedSourcePerMimeType(
-					testSources,
-					screenWidth,
-				);
+			const sources = findOptimisedSourcePerMimeType(
+				testSources,
+				screenWidth,
+			);
 
-				assert.deepEqual(sources, [mp4Src720h, m3u8Src720h]);
-			},
-		);
+			assert.deepEqual(sources, [mp4Src720h, m3u8Src720h]);
+		});
 
-		void nodeIt(
-			'selects the smaller videos when some are equal to the screen width and others are larger.',
-			() => {
-				const screenWidth = 480;
+		void it('selects the smaller videos when some are equal to the screen width and others are larger.', () => {
+			const screenWidth = 480;
 
-				const sources = findOptimisedSourcePerMimeType(
-					testSources,
-					screenWidth,
-				);
+			const sources = findOptimisedSourcePerMimeType(
+				testSources,
+				screenWidth,
+			);
 
-				assert.deepEqual(sources, [mp4Src480w, m3u8Src480w]);
-			},
-		);
+			assert.deepEqual(sources, [mp4Src480w, m3u8Src480w]);
+		});
 
-		void nodeIt(
-			'selects the larger videos when some are equal to the screen width and others are smaller.',
-			() => {
-				const screenWidth = 720;
+		void it('selects the larger videos when some are equal to the screen width and others are smaller.', () => {
+			const screenWidth = 720;
 
-				const sources = findOptimisedSourcePerMimeType(
-					testSources,
-					screenWidth,
-				);
+			const sources = findOptimisedSourcePerMimeType(
+				testSources,
+				screenWidth,
+			);
 
-				assert.deepEqual(sources, [mp4Src720h, m3u8Src720h]);
-			},
-		);
+			assert.deepEqual(sources, [mp4Src720h, m3u8Src720h]);
+		});
 	});
 
-	void nodeDescribe('convertCurrentTimeToProgressPercentage', () => {
+	void describe('convertCurrentTimeToProgressPercentage', () => {
 		for (const testCase of [
 			{ currentTime: 0, duration: 23, expectedPercentage: 0 },
 			{ currentTime: 24, duration: 32, expectedPercentage: 75 },
@@ -405,24 +357,20 @@ void nodeDescribe('video', () => {
 			{ currentTime: -5, duration: 10, expectedPercentage: null },
 			{ currentTime: 5, duration: -10, expectedPercentage: null },
 		]) {
-			void nodeIt(
-				'should return the correct progress percentage based on the current time and duration',
-				() => {
-					const { currentTime, duration, expectedPercentage } =
-						testCase;
-					assert.deepEqual(
-						convertCurrentTimeToProgressPercentage(
-							currentTime,
-							duration,
-						),
-						expectedPercentage,
-					);
-				},
-			);
+			void it('should return the correct progress percentage based on the current time and duration', () => {
+				const { currentTime, duration, expectedPercentage } = testCase;
+				assert.deepEqual(
+					convertCurrentTimeToProgressPercentage(
+						currentTime,
+						duration,
+					),
+					expectedPercentage,
+				);
+			});
 		}
 	});
 
-	void nodeDescribe('convertProgressPercentageToCurrentTime', () => {
+	void describe('convertProgressPercentageToCurrentTime', () => {
 		for (const testCase of [
 			{ progressPercentage: 0, duration: 23, expectedCurrentTime: 0 },
 			{ progressPercentage: 75, duration: 32, expectedCurrentTime: 24 },
@@ -436,27 +384,21 @@ void nodeDescribe('video', () => {
 				expectedCurrentTime: 0,
 			},
 		]) {
-			void nodeIt(
-				'should return the correct current time based on the progress percentage and duration',
-				() => {
-					const {
+			void it('should return the correct current time based on the progress percentage and duration', () => {
+				const { progressPercentage, duration, expectedCurrentTime } =
+					testCase;
+				assert.deepEqual(
+					convertProgressPercentageToCurrentTime(
 						progressPercentage,
 						duration,
-						expectedCurrentTime,
-					} = testCase;
-					assert.deepEqual(
-						convertProgressPercentageToCurrentTime(
-							progressPercentage,
-							duration,
-						),
-						expectedCurrentTime,
-					);
-				},
-			);
+					),
+					expectedCurrentTime,
+				);
+			});
 		}
 	});
 
-	void nodeDescribe('formatTimeForDisplay', () => {
+	void describe('formatTimeForDisplay', () => {
 		for (const testCase of [
 			{ timeInSeconds: -1.24, expectedFormattedTime: '0:00' },
 			{ timeInSeconds: 0, expectedFormattedTime: '0:00' },
@@ -467,36 +409,29 @@ void nodeDescribe('video', () => {
 			{ timeInSeconds: 1000, expectedFormattedTime: '16:40' },
 			{ timeInSeconds: 10000, expectedFormattedTime: '166:40' },
 		]) {
-			void nodeIt(
-				'should return the correct formatted time based on the time in seconds',
-				() => {
-					const { timeInSeconds, expectedFormattedTime } = testCase;
-					assert.deepEqual(
-						formatTimeForDisplay(timeInSeconds),
-						expectedFormattedTime,
-					);
-				},
-			);
+			void it('should return the correct formatted time based on the time in seconds', () => {
+				const { timeInSeconds, expectedFormattedTime } = testCase;
+				assert.deepEqual(
+					formatTimeForDisplay(timeInSeconds),
+					expectedFormattedTime,
+				);
+			});
 		}
 	});
-	void nodeDescribe('roundAspectRatio', () => {
+	void describe('roundAspectRatio', () => {
 		for (const testCase of [
 			{ aspectRatio: 0.56938445, expectedRoundedAspectRatio: 0.569 },
 			{ aspectRatio: 1.277777, expectedRoundedAspectRatio: 1.278 },
 			{ aspectRatio: 1.25, expectedRoundedAspectRatio: 1.25 },
 			{ aspectRatio: 0.8, expectedRoundedAspectRatio: 0.8 },
 		]) {
-			void nodeIt(
-				'should return the correct aspect ratio rounded to 3 decimal places',
-				() => {
-					const { aspectRatio, expectedRoundedAspectRatio } =
-						testCase;
-					assert.deepEqual(
-						roundAspectRatio(aspectRatio),
-						expectedRoundedAspectRatio,
-					);
-				},
-			);
+			void it('should return the correct aspect ratio rounded to 3 decimal places', () => {
+				const { aspectRatio, expectedRoundedAspectRatio } = testCase;
+				assert.deepEqual(
+					roundAspectRatio(aspectRatio),
+					expectedRoundedAspectRatio,
+				);
+			});
 		}
 	});
 });

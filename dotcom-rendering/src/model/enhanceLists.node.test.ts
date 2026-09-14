@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
 import { enhanceLists } from './enhanceLists';
 
-void nodeDescribe('Enhance lists', () => {
-	void nodeIt('enhances a multi-byline element correctly', () => {
+void describe('Enhance lists', () => {
+	void it('enhances a multi-byline element correctly', () => {
 		const elementsEnhancer = (elements: FEElement[]): FEElement[] =>
 			elements;
 

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import type {
 	EmbedBlockElement,
 	ImageBlockElement,
@@ -7,12 +7,12 @@ import type {
 } from '../types/content';
 import { decideMainMediaCaption } from './decide-caption';
 
-void nodeDescribe('decideMainMediaCaption', () => {
-	void nodeDescribe('when mainMedia is not supported', () => {
-		void nodeIt('undefined returns an empty string', () => {
+void describe('decideMainMediaCaption', () => {
+	void describe('when mainMedia is not supported', () => {
+		void it('undefined returns an empty string', () => {
 			assert.deepEqual(decideMainMediaCaption(undefined), '');
 		});
-		void nodeIt('a text block returns an empty string', () => {
+		void it('a text block returns an empty string', () => {
 			assert.deepEqual(
 				decideMainMediaCaption({
 					elementId: 'test-id',
@@ -24,7 +24,7 @@ void nodeDescribe('decideMainMediaCaption', () => {
 		});
 	});
 
-	void nodeDescribe('ImageBlockElement', () => {
+	void describe('ImageBlockElement', () => {
 		const mockImageBlockElement = {
 			elementId: 'mock-element-id',
 			data: {},
@@ -32,17 +32,11 @@ void nodeDescribe('decideMainMediaCaption', () => {
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 		} as ImageBlockElement;
 
-		void nodeIt(
-			'returns an empty string if there is no caption, displayCredit, or credit',
-			() => {
-				assert.deepEqual(
-					decideMainMediaCaption(mockImageBlockElement),
-					'',
-				);
-			},
-		);
+		void it('returns an empty string if there is no caption, displayCredit, or credit', () => {
+			assert.deepEqual(decideMainMediaCaption(mockImageBlockElement), '');
+		});
 
-		void nodeIt('includes the caption, if it exists', () => {
+		void it('includes the caption, if it exists', () => {
 			assert.deepEqual(
 				decideMainMediaCaption({
 					...mockImageBlockElement,
@@ -54,7 +48,7 @@ void nodeDescribe('decideMainMediaCaption', () => {
 			);
 		});
 
-		void nodeIt('includes the credit, if it should be displayed', () => {
+		void it('includes the credit, if it should be displayed', () => {
 			assert.deepEqual(
 				decideMainMediaCaption({
 					...mockImageBlockElement,
@@ -67,42 +61,36 @@ void nodeDescribe('decideMainMediaCaption', () => {
 			);
 		});
 
-		void nodeIt(
-			'does not include the credit, if it should not be displayed',
-			() => {
-				assert.deepEqual(
-					decideMainMediaCaption({
-						...mockImageBlockElement,
-						displayCredit: false,
-						data: {
-							credit: 'image block display credit',
-						},
-					}),
-					'',
-				);
-			},
-		);
+		void it('does not include the credit, if it should not be displayed', () => {
+			assert.deepEqual(
+				decideMainMediaCaption({
+					...mockImageBlockElement,
+					displayCredit: false,
+					data: {
+						credit: 'image block display credit',
+					},
+				}),
+				'',
+			);
+		});
 
-		void nodeIt(
-			'includes both the credit and caption, if they exist',
-			() => {
-				assert.deepEqual(
-					decideMainMediaCaption({
-						...mockImageBlockElement,
-						displayCredit: true,
-						data: {
-							caption: 'mock caption',
-							credit: 'mock display credit',
-						},
-					}),
-					'mock caption mock display credit',
-				);
-			},
-		);
+		void it('includes both the credit and caption, if they exist', () => {
+			assert.deepEqual(
+				decideMainMediaCaption({
+					...mockImageBlockElement,
+					displayCredit: true,
+					data: {
+						caption: 'mock caption',
+						credit: 'mock display credit',
+					},
+				}),
+				'mock caption mock display credit',
+			);
+		});
 	});
 
-	void nodeDescribe('EmbedBlockElement', () => {
-		void nodeIt('returns an empty string if there is no caption', () => {
+	void describe('EmbedBlockElement', () => {
+		void it('returns an empty string if there is no caption', () => {
 			assert.deepEqual(
 				decideMainMediaCaption({
 					elementId: 'test-id',
@@ -114,7 +102,7 @@ void nodeDescribe('decideMainMediaCaption', () => {
 			);
 		});
 
-		void nodeIt('returns the correct caption, if exists', () => {
+		void it('returns the correct caption, if exists', () => {
 			assert.deepEqual(
 				decideMainMediaCaption({
 					elementId: 'test-id',

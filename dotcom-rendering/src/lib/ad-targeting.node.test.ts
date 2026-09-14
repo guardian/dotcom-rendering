@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { buildAdTargeting } from './ad-targeting';
 
 const sharedAdTargeting = {
@@ -14,7 +14,7 @@ const sharedAdTargeting = {
 	url: '/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 };
 
-void nodeDescribe('buildAdTargeting', () => {
+void describe('buildAdTargeting', () => {
 	const expectedAdTargeting = {
 		adUnit: '/59666047/theguardian.com/money/article/ng',
 		customParams: {
@@ -40,7 +40,7 @@ void nodeDescribe('buildAdTargeting', () => {
 		},
 	};
 
-	void nodeIt('builds adTargeting correctly', () => {
+	void it('builds adTargeting correctly', () => {
 		assert.deepEqual(
 			buildAdTargeting({
 				isAdFreeUser: false,

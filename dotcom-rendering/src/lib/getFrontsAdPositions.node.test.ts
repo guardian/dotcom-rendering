@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import {
 	brandedTestCollections,
 	largeFlexibleGeneralCollection,
@@ -34,40 +34,28 @@ const defaultTestCollections: AdCandidate[] = [...Array<number>(12)].map(
 	() => ({ ...testCollection }),
 );
 
-void nodeDescribe('Mobile Ads', () => {
-	void nodeIt(
-		`Should not insert ad after container if it's the first one and it's a thrasher`,
-		() => {
-			const testCollections = [
-				{ ...testCollection, collectionType: 'fixed/thrasher' },
-				...defaultTestCollections,
-			] satisfies AdCandidate[];
+void describe('Mobile Ads', () => {
+	void it(`Should not insert ad after container if it's the first one and it's a thrasher`, () => {
+		const testCollections = [
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			...defaultTestCollections,
+		] satisfies AdCandidate[];
 
-			const mobileAdPositions = getMobileAdPositions(
-				testCollections,
-				'uk',
-			);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
-			assert.ok(!mobileAdPositions.includes(0));
-		},
-	);
+		assert.ok(!mobileAdPositions.includes(0));
+	});
 
-	void nodeIt(
-		`should not insert an ad in the merchandising-high position`,
-		() => {
-			const testCollections = [
-				...defaultTestCollections.slice(0, 3),
-				{ ...testCollection, collectionType: 'news/most-popular' },
-			] satisfies AdCandidate[];
-			const mobileAdPositions = getMobileAdPositions(
-				testCollections,
-				'uk',
-			);
-			assert.ok(!mobileAdPositions.includes(3));
-		},
-	);
+	void it(`should not insert an ad in the merchandising-high position`, () => {
+		const testCollections = [
+			...defaultTestCollections.slice(0, 3),
+			{ ...testCollection, collectionType: 'news/most-popular' },
+		] satisfies AdCandidate[];
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
+		assert.ok(!mobileAdPositions.includes(3));
+	});
 
-	void nodeIt('Should not insert ad before a thrasher container', () => {
+	void it('Should not insert ad before a thrasher container', () => {
 		const testCollections = [...defaultTestCollections];
 		testCollections.splice(5, 0, {
 			...testCollection,
@@ -84,373 +72,322 @@ void nodeDescribe('Mobile Ads', () => {
 		assert.ok(!mobileAdPositions.includes(8));
 	});
 
-	void nodeIt(
-		`Should allow inserting an ad before a thrasher container if it's a filter page`,
-		() => {
-			const testCollections = [...defaultTestCollections];
-			testCollections.splice(5, 0, {
-				...testCollection,
-				collectionType: 'fixed/thrasher',
-			});
-			testCollections.splice(9, 0, {
-				...testCollection,
-				collectionType: 'fixed/thrasher',
-			});
+	void it(`Should allow inserting an ad before a thrasher container if it's a filter page`, () => {
+		const testCollections = [...defaultTestCollections];
+		testCollections.splice(5, 0, {
+			...testCollection,
+			collectionType: 'fixed/thrasher',
+		});
+		testCollections.splice(9, 0, {
+			...testCollection,
+			collectionType: 'fixed/thrasher',
+		});
 
-			const mobileAdPositions = getMobileAdPositions(
-				testCollections,
-				'uk/thefilter',
-			);
+		const mobileAdPositions = getMobileAdPositions(
+			testCollections,
+			'uk/thefilter',
+		);
 
-			assert.ok(mobileAdPositions.includes(6));
-			assert.ok(mobileAdPositions.includes(8));
-		},
-	);
+		assert.ok(mobileAdPositions.includes(6));
+		assert.ok(mobileAdPositions.includes(8));
+	});
 
 	// We used https://www.theguardian.com/uk/commentisfree as a blueprint
-	void nodeIt(
-		'Non-network front, with more than 4 collections, without thrashers',
-		() => {
-			const testCollections: AdCandidate[] = [
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (2)
-				{ ...testCollection, collectionType: 'static/medium/4' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (4)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (6)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (8)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is before merch high position
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
-				{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
-			];
+	void it('Non-network front, with more than 4 collections, without thrashers', () => {
+		const testCollections: AdCandidate[] = [
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'static/medium/4' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (4)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (6)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (8)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is before merch high position
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		];
 
-			const mobileAdPositions = getMobileAdPositions(
-				testCollections,
-				'uk',
-			);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
-			assert.deepEqual(mobileAdPositions, [0, 2, 4, 6, 8]);
-		},
-	);
+		assert.deepEqual(mobileAdPositions, [0, 2, 4, 6, 8]);
+	});
 
 	// We used https://www.theguardian.com/uk as a blueprint
-	void nodeIt(
-		'UK Network Front, with more than 4 collections, with thrashers at various places',
-		() => {
-			const testCollections: AdCandidate[] = [
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
-				{ ...testCollection, collectionType: 'static/medium/4' },
-				{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (2)
-				{ ...testCollection, collectionType: 'flexible/special' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (4)
-				{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (8)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (14)
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' },
-				{ ...testCollection, collectionType: 'scrollable/feature' }, // Ad position (17)
-				{ ...testCollection, collectionType: 'static/medium/4' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (19)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - is before merch high position
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
-				{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
-			];
+	void it('UK Network Front, with more than 4 collections, with thrashers at various places', () => {
+		const testCollections: AdCandidate[] = [
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'static/medium/4' },
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'flexible/special' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (4)
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (8)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (14)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'scrollable/feature' }, // Ad position (17)
+			{ ...testCollection, collectionType: 'static/medium/4' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (19)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - is before merch high position
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		];
 
-			const mobileAdPositions = getMobileAdPositions(
-				testCollections,
-				'uk',
-			);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
-			assert.deepEqual(mobileAdPositions, [0, 2, 4, 8, 11, 14, 17, 19]);
-		},
-	);
+		assert.deepEqual(mobileAdPositions, [0, 2, 4, 8, 11, 14, 17, 19]);
+	});
 
 	// We used https://www.theguardian.com/international as a blueprint
-	void nodeIt(
-		'International Network Front, with more than 4 collections, with thrashers at various places',
-		() => {
-			const testCollections: AdCandidate[] = [
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
-				{ ...testCollection, collectionType: 'static/medium/4' },
-				{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (2)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (5)
-				{ ...testCollection, collectionType: 'static/medium/4' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (7)
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (14)
-				{ ...testCollection, collectionType: 'static/medium/4' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (16)
-				{ ...testCollection, collectionType: 'scrollable/feature' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
-				{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
-			];
+	void it('International Network Front, with more than 4 collections, with thrashers at various places', () => {
+		const testCollections: AdCandidate[] = [
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'static/medium/4' },
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (5)
+			{ ...testCollection, collectionType: 'static/medium/4' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (7)
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (14)
+			{ ...testCollection, collectionType: 'static/medium/4' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (16)
+			{ ...testCollection, collectionType: 'scrollable/feature' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		];
 
-			const mobileAdPositions = getMobileAdPositions(
-				testCollections,
-				'uk',
-			);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
-			assert.deepEqual(mobileAdPositions, [0, 2, 5, 7, 11, 14, 16]);
-		},
-	);
+		assert.deepEqual(mobileAdPositions, [0, 2, 5, 7, 11, 14, 16]);
+	});
 
 	// We used https://www.theguardian.com/us as a blueprint
-	void nodeIt(
-		'US Network Front, with more than 4 collections, with thrashers at various places',
-		() => {
-			const testCollections: AdCandidate[] = [
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
-				{ ...testCollection, collectionType: 'static/medium/4' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (2)
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' },
-				{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (5)
-				{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (9)
-				{ ...testCollection, collectionType: 'static/medium/4' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (14)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (16)
-				{ ...testCollection, collectionType: 'scrollable/feature' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is merch high position
-				{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
-			];
+	void it('US Network Front, with more than 4 collections, with thrashers at various places', () => {
+		const testCollections: AdCandidate[] = [
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'static/medium/4' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (5)
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (9)
+			{ ...testCollection, collectionType: 'static/medium/4' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (14)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (16)
+			{ ...testCollection, collectionType: 'scrollable/feature' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		];
 
-			const mobileAdPositions = getMobileAdPositions(
-				testCollections,
-				'uk',
-			);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
-			assert.deepEqual(mobileAdPositions, [0, 2, 5, 9, 12, 14, 16]);
-		},
-	);
+		assert.deepEqual(mobileAdPositions, [0, 2, 5, 9, 12, 14, 16]);
+	});
 
 	// We used https://www.theguardian.com/uk/lifeandstyle as a blueprint
-	void nodeIt(
-		'Lifeandstyle front, with more than 4 collections, with thrashers at various places',
-		() => {
-			const testCollections: AdCandidate[] = [
-				{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (0)
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (3)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (6)
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (9)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
-				{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
-			];
+	void it('Lifeandstyle front, with more than 4 collections, with thrashers at various places', () => {
+		const testCollections: AdCandidate[] = [
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (3)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (6)
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (9)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		];
 
-			const mobileAdPositions = getMobileAdPositions(
-				testCollections,
-				'uk',
-			);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
-			assert.deepEqual(mobileAdPositions, [0, 3, 6, 9, 12]);
-		},
-	);
+		assert.deepEqual(mobileAdPositions, [0, 3, 6, 9, 12]);
+	});
 
 	// We used https://www.theguardian.com/tone/recipes as a blueprint
-	void nodeIt(
-		'Recipes front, with more than 4 collections, with thrasher at the first position',
-		() => {
-			const testCollections: AdCandidate[] = [
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is first container and thrasher
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (1)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (3)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (5)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (7)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (9)
-				{ ...testCollection, collectionType: 'flexible/general' },
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is before merch high position
-				{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
-				{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
-			];
+	void it('Recipes front, with more than 4 collections, with thrasher at the first position', () => {
+		const testCollections: AdCandidate[] = [
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is first container and thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (1)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (3)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (5)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (7)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (9)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is before merch high position
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		];
 
-			const mobileAdPositions = getMobileAdPositions(
-				testCollections,
-				'uk',
-			);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
-			assert.deepEqual(mobileAdPositions, [1, 3, 5, 7, 9]);
-		},
-	);
+		assert.deepEqual(mobileAdPositions, [1, 3, 5, 7, 9]);
+	});
 
-	void nodeIt(
-		'Europe Network Front, with more than 4 collections and thrashers in various places',
-		() => {
-			const testCollections: AdCandidate[] = [
-				{
-					...testCollection,
-					collectionType: 'flexible/general',
-					containerLevel: 'Primary',
-				}, // Ignored - is before secondary container and is not large enough
-				{
-					...testCollection,
-					collectionType: 'scrollable/small',
-					containerLevel: 'Secondary',
-				}, // Ignored - is before secondary container
-				{
-					...testCollection,
-					collectionType: 'scrollable/small',
-					containerLevel: 'Secondary',
-				}, // Ignored - is before secondary container
-				{
-					...testCollection,
-					collectionType: 'scrollable/medium',
-					containerLevel: 'Secondary',
-				}, // Ignored - is before secondary container
-				{
-					...testCollection,
-					collectionType: 'scrollable/feature',
-					containerLevel: 'Secondary',
-				}, // Ad position (4)
-				{
-					...testCollection,
-					collectionType: 'static/feature/2',
-					containerLevel: 'Primary',
-				}, // Ignored - is before secondary container
-				{
-					...testCollection,
-					collectionType: 'scrollable/medium',
-					containerLevel: 'Secondary',
-				}, // Ad position (6)
-				{
-					...testCollection,
-					collectionType: 'flexible/special',
-					containerLevel: 'Primary',
-				}, // Ignored - is before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (8)
-				{
-					...testCollection,
-					collectionType: 'flexible/general',
-					containerLevel: 'Primary',
-				}, // Ignored is consecutive ad after position 8
-				{
-					...testCollection,
-					collectionType: 'static/feature/2',
-					containerLevel: 'Primary',
-				}, // Ignored - is before secondary container
-				{
-					...testCollection,
-					collectionType: 'scrollable/small',
-					containerLevel: 'Secondary',
-				}, // Ignored - is before secondary container
-				{
-					...testCollection,
-					collectionType: 'scrollable/small',
-					containerLevel: 'Secondary',
-				}, // Ignored - is before secondary container
-				{
-					...testCollection,
-					collectionType: 'scrollable/small',
-					containerLevel: 'Secondary',
-				}, // Ad position (13)
-				{
-					...testCollection,
-					collectionType: 'static/feature/2',
-					containerLevel: 'Primary',
-				}, // Ignored - is before secondary container
-				{
-					...testCollection,
-					collectionType: 'scrollable/medium',
-					containerLevel: 'Secondary',
-				}, // Ignored - is before secondary container
-				{
-					...testCollection,
-					collectionType: 'scrollable/medium',
-					containerLevel: 'Secondary',
-				}, // Ignored - is before secondary container
-				{
-					...testCollection,
-					collectionType: 'scrollable/small',
-					containerLevel: 'Secondary',
-				}, // Ignored - is before thrasher
-				{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (18)
-				{
-					...testCollection,
-					collectionType: 'flexible/general',
-					containerLevel: 'Primary',
-				}, // Ignored - is before secondary container
-				{
-					...testCollection,
-					collectionType: 'scrollable/feature',
-					containerLevel: 'Secondary',
-				}, // Ignored - is merch high position
-				{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
-			];
+	void it('Europe Network Front, with more than 4 collections and thrashers in various places', () => {
+		const testCollections: AdCandidate[] = [
+			{
+				...testCollection,
+				collectionType: 'flexible/general',
+				containerLevel: 'Primary',
+			}, // Ignored - is before secondary container and is not large enough
+			{
+				...testCollection,
+				collectionType: 'scrollable/small',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/small',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/feature',
+				containerLevel: 'Secondary',
+			}, // Ad position (4)
+			{
+				...testCollection,
+				collectionType: 'static/feature/2',
+				containerLevel: 'Primary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			}, // Ad position (6)
+			{
+				...testCollection,
+				collectionType: 'flexible/special',
+				containerLevel: 'Primary',
+			}, // Ignored - is before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (8)
+			{
+				...testCollection,
+				collectionType: 'flexible/general',
+				containerLevel: 'Primary',
+			}, // Ignored is consecutive ad after position 8
+			{
+				...testCollection,
+				collectionType: 'static/feature/2',
+				containerLevel: 'Primary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/small',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/small',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/small',
+				containerLevel: 'Secondary',
+			}, // Ad position (13)
+			{
+				...testCollection,
+				collectionType: 'static/feature/2',
+				containerLevel: 'Primary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/medium',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/small',
+				containerLevel: 'Secondary',
+			}, // Ignored - is before thrasher
+			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (18)
+			{
+				...testCollection,
+				collectionType: 'flexible/general',
+				containerLevel: 'Primary',
+			}, // Ignored - is before secondary container
+			{
+				...testCollection,
+				collectionType: 'scrollable/feature',
+				containerLevel: 'Secondary',
+			}, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
+		];
 
-			const mobileAdPositions = getMobileAdPositions(
-				testCollections,
-				'uk',
-			);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
-			assert.deepEqual(mobileAdPositions, [4, 6, 8, 13, 18]);
-		},
-	);
+		assert.deepEqual(mobileAdPositions, [4, 6, 8, 13, 18]);
+	});
 });
 
-void nodeDescribe('Desktop Ads', () => {
-	void nodeIt(
-		'calculates ad positions correctly for an example of the UK network front',
-		() => {
-			const adPositions = getDesktopAdPositions(testCollectionsUk, 'uk');
+void describe('Desktop Ads', () => {
+	void it('calculates ad positions correctly for an example of the UK network front', () => {
+		const adPositions = getDesktopAdPositions(testCollectionsUk, 'uk');
 
-			assert.deepEqual(adPositions, [3, 6, 8, 14, 17]);
-		},
-	);
+		assert.deepEqual(adPositions, [3, 6, 8, 14, 17]);
+	});
 
-	void nodeIt(
-		'calculates ad positions correctly for an example of the US network front',
-		() => {
-			const adPositions = getDesktopAdPositions(testCollectionsUs, 'us');
+	void it('calculates ad positions correctly for an example of the US network front', () => {
+		const adPositions = getDesktopAdPositions(testCollectionsUs, 'us');
 
-			assert.deepEqual(adPositions, [3, 6, 10, 12, 19]);
-		},
-	);
+		assert.deepEqual(adPositions, [3, 6, 10, 12, 19]);
+	});
 
-	void nodeIt('does NOT insert ads above or below branded content', () => {
+	void it('does NOT insert ads above or below branded content', () => {
 		const adPositions = getDesktopAdPositions(brandedTestCollections, 'uk');
 
 		assert.deepEqual(adPositions, []);
 	});
 
-	void nodeIt('does NOT insert ads above secondary level containers', () => {
+	void it('does NOT insert ads above secondary level containers', () => {
 		const adPositions = getDesktopAdPositions(
 			testCollectionsWithSecondaryLevel,
 			'europe',
@@ -459,7 +396,7 @@ void nodeDescribe('Desktop Ads', () => {
 		assert.deepEqual(adPositions, []);
 	});
 
-	void nodeIt('inserts a maximum of 8 ads for fronts', () => {
+	void it('inserts a maximum of 8 ads for fronts', () => {
 		const adPositions = getDesktopAdPositions(
 			// 10x number of test collections in fixture to reach maximum level
 			new Array<DCRCollectionType[]>(10)
@@ -472,218 +409,188 @@ void nodeDescribe('Desktop Ads', () => {
 	});
 });
 
-void nodeDescribe('inserting an ad after the first collection', () => {
-	void nodeDescribe('on mobile', () => {
-		void nodeIt(
-			'inserts an ad after the first collection if it is a LARGE flexible general container',
-			() => {
-				const adPositions = getMobileAdPositions(
-					[
-						...largeFlexibleGeneralCollection,
-						{
-							...testCollection,
-							collectionType: 'scrollable/small',
-							containerLevel: 'Secondary',
-						},
-						{
-							...testCollection,
-							collectionType: 'scrollable/medium',
-							containerLevel: 'Secondary',
-						},
-					],
-					'uk',
-				);
+void describe('inserting an ad after the first collection', () => {
+	void describe('on mobile', () => {
+		void it('inserts an ad after the first collection if it is a LARGE flexible general container', () => {
+			const adPositions = getMobileAdPositions(
+				[
+					...largeFlexibleGeneralCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+					{
+						...testCollection,
+						collectionType: 'scrollable/medium',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
 
-				assert.ok(adPositions.includes(0));
-				assert.ok(!adPositions.includes(1));
-			},
-		);
+			assert.ok(adPositions.includes(0));
+			assert.ok(!adPositions.includes(1));
+		});
 
-		void nodeIt(
-			'inserts an ad after the first collection if it is a LARGE flexible special container',
-			() => {
-				const adPositions = getMobileAdPositions(
-					[
-						...largeFlexibleSpecialCollection,
-						{
-							...testCollection,
-							collectionType: 'scrollable/small',
-							containerLevel: 'Secondary',
-						},
-						{
-							...testCollection,
-							collectionType: 'scrollable/medium',
-							containerLevel: 'Secondary',
-						},
-					],
-					'uk',
-				);
+		void it('inserts an ad after the first collection if it is a LARGE flexible special container', () => {
+			const adPositions = getMobileAdPositions(
+				[
+					...largeFlexibleSpecialCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+					{
+						...testCollection,
+						collectionType: 'scrollable/medium',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
 
-				assert.ok(adPositions.includes(0));
-				assert.ok(!adPositions.includes(1));
-			},
-		);
+			assert.ok(adPositions.includes(0));
+			assert.ok(!adPositions.includes(1));
+		});
 
-		void nodeIt(
-			'does NOT insert an ad after the first collection if it is a SMALL flexible general container',
-			() => {
-				const adPositions = getMobileAdPositions(
-					[
-						...smallFlexibleGeneralCollection,
-						{
-							...testCollection,
-							collectionType: 'scrollable/small',
-							containerLevel: 'Secondary',
-						},
-					],
-					'uk',
-				);
+		void it('does NOT insert an ad after the first collection if it is a SMALL flexible general container', () => {
+			const adPositions = getMobileAdPositions(
+				[
+					...smallFlexibleGeneralCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
 
-				assert.ok(!adPositions.includes(0));
-			},
-		);
+			assert.ok(!adPositions.includes(0));
+		});
 
-		void nodeIt(
-			'does NOT insert an ad after the first collection if it is a SMALL flexible special container',
-			() => {
-				const adPositions = getMobileAdPositions(
-					[
-						...smallFlexibleSpecialCollection,
-						{
-							...testCollection,
-							collectionType: 'scrollable/small',
-							containerLevel: 'Secondary',
-						},
-					],
-					'uk',
-				);
+		void it('does NOT insert an ad after the first collection if it is a SMALL flexible special container', () => {
+			const adPositions = getMobileAdPositions(
+				[
+					...smallFlexibleSpecialCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
 
-				assert.ok(!adPositions.includes(0));
-			},
-		);
+			assert.ok(!adPositions.includes(0));
+		});
 	});
 
-	void nodeDescribe('on desktop', () => {
-		void nodeIt(
-			'inserts an ad before the second collection if it is preceded by a LARGE flexible general container',
-			() => {
-				const adPositions = getDesktopAdPositions(
-					[
-						...largeFlexibleGeneralCollection,
-						{
-							...testCollection,
-							collectionType: 'scrollable/small',
-							containerLevel: 'Secondary',
-						},
-						{
-							...testCollection,
-							collectionType: 'scrollable/medium',
-							containerLevel: 'Secondary',
-						},
-					],
-					'uk',
-				);
+	void describe('on desktop', () => {
+		void it('inserts an ad before the second collection if it is preceded by a LARGE flexible general container', () => {
+			const adPositions = getDesktopAdPositions(
+				[
+					...largeFlexibleGeneralCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+					{
+						...testCollection,
+						collectionType: 'scrollable/medium',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
 
-				assert.ok(adPositions.includes(1));
-				assert.ok(!adPositions.includes(2));
-			},
-		);
+			assert.ok(adPositions.includes(1));
+			assert.ok(!adPositions.includes(2));
+		});
 
-		void nodeIt(
-			'inserts an ad before the second collection if it is preceded by a LARGE flexible special container',
-			() => {
-				const adPositions = getDesktopAdPositions(
-					[
-						...largeFlexibleSpecialCollection,
-						{
-							...testCollection,
-							collectionType: 'scrollable/small',
-							containerLevel: 'Secondary',
-						},
-						{
-							...testCollection,
-							collectionType: 'scrollable/medium',
-							containerLevel: 'Secondary',
-						},
-					],
-					'uk',
-				);
+		void it('inserts an ad before the second collection if it is preceded by a LARGE flexible special container', () => {
+			const adPositions = getDesktopAdPositions(
+				[
+					...largeFlexibleSpecialCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+					{
+						...testCollection,
+						collectionType: 'scrollable/medium',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
 
-				assert.ok(adPositions.includes(1));
-				assert.ok(!adPositions.includes(2));
-			},
-		);
+			assert.ok(adPositions.includes(1));
+			assert.ok(!adPositions.includes(2));
+		});
 
-		void nodeIt(
-			'does NOT insert an ad before the second collection if it is preceded by a SMALL flexible general container',
-			() => {
-				const adPositions = getDesktopAdPositions(
-					[
-						...smallFlexibleGeneralCollection,
-						{
-							...testCollection,
-							collectionType: 'scrollable/small',
-							containerLevel: 'Secondary',
-						},
-						{
-							...testCollection,
-							collectionType: 'scrollable/medium',
-							containerLevel: 'Secondary',
-						},
-					],
-					'uk',
-				);
+		void it('does NOT insert an ad before the second collection if it is preceded by a SMALL flexible general container', () => {
+			const adPositions = getDesktopAdPositions(
+				[
+					...smallFlexibleGeneralCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+					{
+						...testCollection,
+						collectionType: 'scrollable/medium',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
 
-				assert.ok(!adPositions.includes(1));
-			},
-		);
+			assert.ok(!adPositions.includes(1));
+		});
 
-		void nodeIt(
-			'does NOT insert an ad before the second collection if it is preceded by a SMALL flexible special container',
-			() => {
-				const adPositions = getDesktopAdPositions(
-					[
-						...smallFlexibleSpecialCollection,
-						{
-							...testCollection,
-							collectionType: 'scrollable/small',
-							containerLevel: 'Secondary',
-						},
-						{
-							...testCollection,
-							collectionType: 'scrollable/medium',
-							containerLevel: 'Secondary',
-						},
-					],
-					'uk',
-				);
+		void it('does NOT insert an ad before the second collection if it is preceded by a SMALL flexible special container', () => {
+			const adPositions = getDesktopAdPositions(
+				[
+					...smallFlexibleSpecialCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+					{
+						...testCollection,
+						collectionType: 'scrollable/medium',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
 
-				assert.ok(!adPositions.includes(1));
-			},
-		);
+			assert.ok(!adPositions.includes(1));
+		});
 	});
 });
 
-void nodeDescribe('removeConsecutiveAdSlotsReducer', () => {
-	void nodeIt(
-		'removes consecutive slots from array of all consecutive numbers',
-		() => {
-			const arr = [0, 1, 2, 3, 4, 5];
-			const result = arr.reduce(removeConsecutiveAdSlotsReducer, []);
-			assert.deepEqual(result, [0, 2, 4]);
-		},
-	);
+void describe('removeConsecutiveAdSlotsReducer', () => {
+	void it('removes consecutive slots from array of all consecutive numbers', () => {
+		const arr = [0, 1, 2, 3, 4, 5];
+		const result = arr.reduce(removeConsecutiveAdSlotsReducer, []);
+		assert.deepEqual(result, [0, 2, 4]);
+	});
 
-	void nodeIt(
-		'removes consecutive slots from array of some consecutive numbers',
-		() => {
-			const arr = [0, 3, 7, 11, 12, 13, 19, 20];
-			const result = arr.reduce(removeConsecutiveAdSlotsReducer, []);
-			assert.deepEqual(result, [0, 3, 7, 11, 13, 19]);
-		},
-	);
+	void it('removes consecutive slots from array of some consecutive numbers', () => {
+		const arr = [0, 3, 7, 11, 12, 13, 19, 20];
+		const result = arr.reduce(removeConsecutiveAdSlotsReducer, []);
+		assert.deepEqual(result, [0, 3, 7, 11, 13, 19]);
+	});
 
-	void nodeIt('handles empty array', () => {
+	void it('handles empty array', () => {
 		const arr: number[] = [];
 		const result = arr.reduce(removeConsecutiveAdSlotsReducer, []);
 		assert.deepEqual(result, []);

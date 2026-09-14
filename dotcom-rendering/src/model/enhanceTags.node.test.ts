@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import type { FETagType } from '../types/tag';
 import { enhanceTags } from './enhanceTags';
 
-void nodeDescribe('enhanceTags', () => {
-	void nodeIt('maps a list of FETagType to TagType', () => {
+void describe('enhanceTags', () => {
+	void it('maps a list of FETagType to TagType', () => {
 		const feTags: FETagType[] = [
 			{
 				properties: {

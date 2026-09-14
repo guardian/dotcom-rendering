@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { addTrackingCodesToUrl } from './acquisitions';
 
-void nodeDescribe('acquisitions', () => {
-	void nodeIt('should addTrackingCodesToUrl', () => {
+void describe('acquisitions', () => {
+	void it('should addTrackingCodesToUrl', () => {
 		const result = addTrackingCodesToUrl({
 			base: `https://support.theguardian.com/contribute`,
 			componentType: 'ACQUISITIONS_HEADER',

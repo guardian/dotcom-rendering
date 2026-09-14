@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRFrontCard } from '../types/front';
 import { groupTrailsByDates } from './groupTrailsByDates';
@@ -11,54 +11,51 @@ const datesToTrails = (dates: Date[]): DCRFrontCard[] => {
 	}));
 };
 
-void nodeDescribe('groupTrailsByDates', () => {
-	void nodeIt(
-		'Will split trails into days & months depending on the frequency',
-		() => {
-			const dates = [
-				// SHOULD BE GROUPED BY DAY
-				// 3 on the 23rd of June
-				new Date(2023, 5, 23, 12),
-				new Date(2023, 5, 23, 12),
-				new Date(2023, 5, 23, 12),
-				// 5 on the 25th of June
-				new Date(2023, 5, 25, 12),
-				new Date(2023, 5, 25, 12),
-				new Date(2023, 5, 25, 12),
-				new Date(2023, 5, 25, 12),
-				new Date(2023, 5, 25, 12),
-				// 7 on the 26th of June
-				new Date(2023, 5, 26, 12),
-				new Date(2023, 5, 26, 12),
-				new Date(2023, 5, 26, 12),
-				new Date(2023, 5, 26, 12),
-				new Date(2023, 5, 26, 12),
-				new Date(2023, 5, 26, 12),
+void describe('groupTrailsByDates', () => {
+	void it('Will split trails into days & months depending on the frequency', () => {
+		const dates = [
+			// SHOULD BE GROUPED BY DAY
+			// 3 on the 23rd of June
+			new Date(2023, 5, 23, 12),
+			new Date(2023, 5, 23, 12),
+			new Date(2023, 5, 23, 12),
+			// 5 on the 25th of June
+			new Date(2023, 5, 25, 12),
+			new Date(2023, 5, 25, 12),
+			new Date(2023, 5, 25, 12),
+			new Date(2023, 5, 25, 12),
+			new Date(2023, 5, 25, 12),
+			// 7 on the 26th of June
+			new Date(2023, 5, 26, 12),
+			new Date(2023, 5, 26, 12),
+			new Date(2023, 5, 26, 12),
+			new Date(2023, 5, 26, 12),
+			new Date(2023, 5, 26, 12),
+			new Date(2023, 5, 26, 12),
 
-				// SHOULD BE GROUPED BY MONTH
-				// 1 on the 2nd of May
-				new Date(2023, 4, 2, 12),
-				// 3 on 3rd of May
-				new Date(2023, 4, 3, 12),
-				new Date(2023, 4, 3, 12),
-				// 1 on 4th of May
-				new Date(2023, 4, 4, 12),
-				// 1 on 5th of May
-				new Date(2023, 4, 5, 12),
-			];
+			// SHOULD BE GROUPED BY MONTH
+			// 1 on the 2nd of May
+			new Date(2023, 4, 2, 12),
+			// 3 on 3rd of May
+			new Date(2023, 4, 3, 12),
+			new Date(2023, 4, 3, 12),
+			// 1 on 4th of May
+			new Date(2023, 4, 4, 12),
+			// 1 on 5th of May
+			new Date(2023, 4, 5, 12),
+		];
 
-			const result = groupTrailsByDates(datesToTrails(dates), 'UK');
+		const result = groupTrailsByDates(datesToTrails(dates), 'UK');
 
-			assert.deepEqual(result[0]?.day, '26');
-			assert.deepEqual(result[1]?.day, '25');
-			assert.deepEqual(result[2]?.day, '23');
+		assert.deepEqual(result[0]?.day, '26');
+		assert.deepEqual(result[1]?.day, '25');
+		assert.deepEqual(result[2]?.day, '23');
 
-			assert.deepEqual(result[3]?.day, undefined);
-			assert.deepEqual(result[3]?.month, 'May');
-		},
-	);
+		assert.deepEqual(result[3]?.day, undefined);
+		assert.deepEqual(result[3]?.month, 'May');
+	});
 
-	void nodeIt('Will handle all editions', () => {
+	void it('Will handle all editions', () => {
 		const dates = [
 			// The whole of the last day of June (months are 0-indexed)
 			'2024-06-30T00:00:00Z',
@@ -115,7 +112,7 @@ void nodeDescribe('groupTrailsByDates', () => {
 		assert.equal(us[0]?.trails.length, 20);
 	});
 
-	void nodeIt('Will respect "forceDay" being set to true', () => {
+	void it('Will respect "forceDay" being set to true', () => {
 		const dates = [
 			// This would be grouped by month if left to the pop out frequency
 			// 1 on the 2nd of May

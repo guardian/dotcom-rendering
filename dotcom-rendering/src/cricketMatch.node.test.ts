@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { liveMatch, resultMatch } from '../fixtures/manual/cricketMatch';
 import { parseCricketMatch } from './cricketMatch';
 
-void nodeDescribe('parseCricketMatchV2', () => {
-	void nodeIt('parses a winner result cricket match correctly', () => {
+void describe('parseCricketMatchV2', () => {
+	void it('parses a winner result cricket match correctly', () => {
 		const result = parseCricketMatch(resultMatch).getOrThrow(
 			'Expected parsing cricket match to succeed',
 		);
@@ -25,7 +25,7 @@ void nodeDescribe('parseCricketMatchV2', () => {
 		);
 	});
 
-	void nodeIt('parses a cricket match in pre-match status', () => {
+	void it('parses a cricket match in pre-match status', () => {
 		const result = parseCricketMatch({
 			...liveMatch,
 			result: 'pre-match',
@@ -36,7 +36,7 @@ void nodeDescribe('parseCricketMatchV2', () => {
 		assert.equal(result.result, undefined);
 	});
 
-	void nodeIt('parses a cricket match in in-play status', () => {
+	void it('parses a cricket match in in-play status', () => {
 		const result = parseCricketMatch({
 			...liveMatch,
 			result: 'in-play',
@@ -47,7 +47,7 @@ void nodeDescribe('parseCricketMatchV2', () => {
 		assert.equal(result.result, undefined);
 	});
 
-	void nodeIt('parses an abandoned cricket match correctly', () => {
+	void it('parses an abandoned cricket match correctly', () => {
 		const result = parseCricketMatch({
 			...liveMatch,
 			fullResult: {
@@ -63,7 +63,7 @@ void nodeDescribe('parseCricketMatchV2', () => {
 		});
 	});
 
-	void nodeIt('parses a cricket match with no winner', () => {
+	void it('parses a cricket match with no winner', () => {
 		const result = parseCricketMatch({
 			...liveMatch,
 			fullResult: {

@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { getZIndex } from './getZIndex';
 
-void nodeDescribe('getZIndex', () => {
-	void nodeIt('gets the correct zindex for group and sibling', () => {
+void describe('getZIndex', () => {
+	void it('gets the correct zindex for group and sibling', () => {
 		assert.ok(getZIndex('sticky-video-button') > getZIndex('sticky-video'));
 		assert.ok(
 			getZIndex('expanded-veggie-menu-wrapper') >

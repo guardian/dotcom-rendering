@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { constructQuery } from './querystring';
 
-void nodeDescribe('constructQuery', () => {
-	void nodeIt('constructs the correct query string from an object', () => {
+void describe('constructQuery', () => {
+	void it('constructs the correct query string from an object', () => {
 		const testParams = {
 			sens: 'f',
 			si: 'f',

@@ -1,35 +1,29 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { parseCheckoutCompleteCookieData } from './parseCheckoutOutCookieData';
 
-void nodeDescribe('parseCheckoutCompleteCookieData', () => {
+void describe('parseCheckoutCompleteCookieData', () => {
 	const encodeCheckoutCompleteCookieDataObj = (
 		userType: string,
 		product: string,
 	) =>
 		encodeURIComponent(`{"userType":"${userType}","product":"${product}"}`);
 
-	void nodeDescribe('successful parse', () => {
-		void nodeIt(
-			'should successfully parse a url encoded json object with a valid userType and product valid field',
-			() => {
-				const cookieString = encodeCheckoutCompleteCookieDataObj(
-					'new',
-					'SupporterPlus',
-				);
-				assert.deepEqual(
-					parseCheckoutCompleteCookieData(cookieString),
-					{
-						userType: 'new',
-						product: 'SupporterPlus',
-					},
-				);
-			},
-		);
+	void describe('successful parse', () => {
+		void it('should successfully parse a url encoded json object with a valid userType and product valid field', () => {
+			const cookieString = encodeCheckoutCompleteCookieDataObj(
+				'new',
+				'SupporterPlus',
+			);
+			assert.deepEqual(parseCheckoutCompleteCookieData(cookieString), {
+				userType: 'new',
+				product: 'SupporterPlus',
+			});
+		});
 	});
 
-	void nodeDescribe('unsuccessful parse should return undefined', () => {
-		void nodeIt('invalid user type', () => {
+	void describe('unsuccessful parse should return undefined', () => {
+		void it('invalid user type', () => {
 			const cookieString = encodeCheckoutCompleteCookieDataObj(
 				'invalid',
 				'SupporterPlus',
@@ -39,7 +33,7 @@ void nodeDescribe('parseCheckoutCompleteCookieData', () => {
 				undefined,
 			);
 		});
-		void nodeIt('invalid product type', () => {
+		void it('invalid product type', () => {
 			const cookieString = encodeCheckoutCompleteCookieDataObj(
 				'new',
 				'undefined',
@@ -49,7 +43,7 @@ void nodeDescribe('parseCheckoutCompleteCookieData', () => {
 				undefined,
 			);
 		});
-		void nodeIt('invalid field', () => {
+		void it('invalid field', () => {
 			const cookieString = encodeURIComponent(
 				`{"invalid":"new", "product": "SupporterPlus"}`,
 			);
@@ -58,7 +52,7 @@ void nodeDescribe('parseCheckoutCompleteCookieData', () => {
 				undefined,
 			);
 		});
-		void nodeIt('invalid json structure', () => {
+		void it('invalid json structure', () => {
 			const cookieString = encodeURIComponent(
 				`{"userType":"new", "product": "SupporterPlus"`,
 			);
@@ -67,7 +61,7 @@ void nodeDescribe('parseCheckoutCompleteCookieData', () => {
 				undefined,
 			);
 		});
-		void nodeIt('plain string', () => {
+		void it('plain string', () => {
 			const cookieString = `{"userType":"new", "product": "SupporterPlus"}`;
 			assert.equal(
 				parseCheckoutCompleteCookieData(cookieString),

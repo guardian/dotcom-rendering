@@ -1,98 +1,85 @@
 import assert from 'node:assert/strict';
-import { describe as nodeDescribe, it as nodeIt } from 'node:test';
+import { describe, it } from 'node:test';
 import { getBylineComponentsFromTokens, getSoleContributor } from './byline';
 
-void nodeDescribe('Byline utilities', () => {
-	void nodeIt(
-		'should link a single tag by linking name tokens with Contributor tag titles',
-		() => {
-			const bylineTokens = ['Eva Smith', 'and friends'];
-			const tags = [
-				{
-					id: 'eva-smith',
-					type: 'Contributor',
-					title: 'Eva Smith',
-				},
-			];
+void describe('Byline utilities', () => {
+	void it('should link a single tag by linking name tokens with Contributor tag titles', () => {
+		const bylineTokens = ['Eva Smith', 'and friends'];
+		const tags = [
+			{
+				id: 'eva-smith',
+				type: 'Contributor',
+				title: 'Eva Smith',
+			},
+		];
 
-			const bylineComponents = getBylineComponentsFromTokens(
-				bylineTokens,
-				tags,
-			);
+		const bylineComponents = getBylineComponentsFromTokens(
+			bylineTokens,
+			tags,
+		);
 
-			assert.deepEqual(bylineComponents, [
-				{ tag: tags[0], token: 'Eva Smith' },
-				'and friends',
-			]);
-		},
-	);
+		assert.deepEqual(bylineComponents, [
+			{ tag: tags[0], token: 'Eva Smith' },
+			'and friends',
+		]);
+	});
 
-	void nodeIt(
-		'should link multiple tags by linking name tokens with Contributor tag titles',
-		() => {
-			const bylineTokens = ['Eva Smith', ' and ', 'Duncan Campbell'];
-			const tags = [
-				{
-					id: 'eva-smith',
-					type: 'Contributor',
-					title: 'Eva Smith',
-				},
-				{
-					id: 'duncan-campbell',
-					type: 'Contributor',
-					title: 'Duncan Campbell',
-				},
-			];
-			const bylineComponents = getBylineComponentsFromTokens(
-				bylineTokens,
-				tags,
-			);
+	void it('should link multiple tags by linking name tokens with Contributor tag titles', () => {
+		const bylineTokens = ['Eva Smith', ' and ', 'Duncan Campbell'];
+		const tags = [
+			{
+				id: 'eva-smith',
+				type: 'Contributor',
+				title: 'Eva Smith',
+			},
+			{
+				id: 'duncan-campbell',
+				type: 'Contributor',
+				title: 'Duncan Campbell',
+			},
+		];
+		const bylineComponents = getBylineComponentsFromTokens(
+			bylineTokens,
+			tags,
+		);
 
-			assert.deepEqual(bylineComponents, [
-				{ tag: tags[0], token: 'Eva Smith' },
-				' and ',
-				{ tag: tags[1], token: 'Duncan Campbell' },
-			]);
-		},
-	);
+		assert.deepEqual(bylineComponents, [
+			{ tag: tags[0], token: 'Eva Smith' },
+			' and ',
+			{ tag: tags[1], token: 'Duncan Campbell' },
+		]);
+	});
 
-	void nodeIt(
-		'should not reuse a contributor tag, to successfully disambiguate identical names',
-		() => {
-			const bylineTokens = [
-				'Duncan Campbell',
-				' and ',
-				'Duncan Campbell',
-			];
-			const tags = [
-				{
-					id: 'duncan-campbell',
-					type: 'Contributor',
-					title: 'Duncan Campbell',
-				},
-				{
-					id: 'duncan-campbell-1',
-					type: 'Contributor',
-					title: 'Duncan Campbell',
-				},
-			];
+	void it('should not reuse a contributor tag, to successfully disambiguate identical names', () => {
+		const bylineTokens = ['Duncan Campbell', ' and ', 'Duncan Campbell'];
+		const tags = [
+			{
+				id: 'duncan-campbell',
+				type: 'Contributor',
+				title: 'Duncan Campbell',
+			},
+			{
+				id: 'duncan-campbell-1',
+				type: 'Contributor',
+				title: 'Duncan Campbell',
+			},
+		];
 
-			const bylineComponents = getBylineComponentsFromTokens(
-				bylineTokens,
-				tags,
-			);
+		const bylineComponents = getBylineComponentsFromTokens(
+			bylineTokens,
+			tags,
+		);
 
-			assert.deepEqual(bylineComponents, [
-				{ tag: tags[0], token: 'Duncan Campbell' },
-				' and ',
-				{ tag: tags[1], token: 'Duncan Campbell' },
-			]);
-		},
-	);
+		assert.deepEqual(bylineComponents, [
+			{ tag: tags[0], token: 'Duncan Campbell' },
+			' and ',
+			{ tag: tags[1], token: 'Duncan Campbell' },
+		]);
+	});
 
-	void nodeDescribe('getSoleContributor', () => {
-		void nodeDescribe('returns a contributor', () => {
-			void nodeIt('Sebastian Köhn, as told to Wilfried Chan', () => {
+	void describe('getSoleContributor', () => {
+		void describe('returns a contributor', () => {
+			void it('Sebastian Köhn, as told to Wilfried Chan', () => {
 				// https://www.theguardian.com/world/2022/jul/23/i-literally-screamed-out-loud-in-pain-my-two-weeks-of-monkeypox-hell
 
 				const soleContributor = getSoleContributor(
@@ -109,7 +96,7 @@ void nodeDescribe('Byline utilities', () => {
 				assert.equal(soleContributor?.title, 'Wilfred Chan');
 			});
 
-			void nodeIt('Jim Waterson Media editor', () => {
+			void it('Jim Waterson Media editor', () => {
 				// https://www.theguardian.com/media/2021/nov/17/geordie-greig-ousted-as-editor-of-the-daily-mail
 
 				const soleContributor = getSoleContributor(
@@ -134,7 +121,7 @@ void nodeDescribe('Byline utilities', () => {
 				assert.equal(soleContributor?.title, 'Jim Waterson');
 			});
 
-			void nodeIt('First Dog on the Moon', () => {
+			void it('First Dog on the Moon', () => {
 				// https://www.theguardian.com/commentisfree/2022/jul/22/europe-is-ablaze-italian-glaciers-are-collapsing-the-climate-crisis-is-here
 
 				const soleContributor = getSoleContributor(
@@ -151,7 +138,7 @@ void nodeDescribe('Byline utilities', () => {
 				assert.equal(soleContributor?.title, 'First Dog on the Moon');
 			});
 
-			void nodeIt('Sam Levine in New York', () => {
+			void it('Sam Levine in New York', () => {
 				// https://www.theguardian.com/us-news/2022/jul/22/january-6-panel-american-democracy-nose-dive
 
 				const soleContributor = getSoleContributor(
@@ -169,33 +156,30 @@ void nodeDescribe('Byline utilities', () => {
 			});
 		});
 
-		void nodeDescribe('returns `undefined`', () => {
-			void nodeIt(
-				'Sam Levin in Los Angeles and Sam Levine in New York',
-				() => {
-					// https://www.theguardian.com/us-news/2020/oct/12/republicans-election-2020-unauthorized-ballot-boxes
+		void describe('returns `undefined`', () => {
+			void it('Sam Levin in Los Angeles and Sam Levine in New York', () => {
+				// https://www.theguardian.com/us-news/2020/oct/12/republicans-election-2020-unauthorized-ballot-boxes
 
-					const soleContributor = getSoleContributor(
-						[
-							{
-								id: 'profile/sam-levin',
-								type: 'Contributor',
-								title: 'Sam Levin',
-								twitterHandle: 'SamTLevin',
-							},
-							{
-								id: 'profile/sam-levine',
-								type: 'Contributor',
-								title: 'Sam Levine',
-							},
-						],
-						'Sam Levin in Los Angeles and Sam Levine in New York',
-					);
-					assert.equal(soleContributor, undefined);
-				},
-			);
+				const soleContributor = getSoleContributor(
+					[
+						{
+							id: 'profile/sam-levin',
+							type: 'Contributor',
+							title: 'Sam Levin',
+							twitterHandle: 'SamTLevin',
+						},
+						{
+							id: 'profile/sam-levine',
+							type: 'Contributor',
+							title: 'Sam Levine',
+						},
+					],
+					'Sam Levin in Los Angeles and Sam Levine in New York',
+				);
+				assert.equal(soleContributor, undefined);
+			});
 
-			void nodeIt('Gabriel Smith', () => {
+			void it('Gabriel Smith', () => {
 				const soleContributor = getSoleContributor(
 					[
 						{
@@ -210,7 +194,7 @@ void nodeDescribe('Byline utilities', () => {
 				assert.equal(soleContributor, undefined);
 			});
 
-			void nodeIt('Zoe Williams and others', () => {
+			void it('Zoe Williams and others', () => {
 				// https://www.theguardian.com/commentisfree/2022/jul/20/britain-next-prime-minister-rishi-sunak-liz-truss-conservative-leader
 
 				const soleContributor = getSoleContributor(
@@ -248,42 +232,39 @@ void nodeDescribe('Byline utilities', () => {
 				assert.equal(soleContributor, undefined);
 			});
 
-			void nodeIt(
-				'Paul MacInnes, Nesrine Malik, Julie Bindel, Peter Preston',
-				() => {
-					// https://www.theguardian.com/commentisfree/2011/dec/30/person-of-2011-writers-verdict
+			void it('Paul MacInnes, Nesrine Malik, Julie Bindel, Peter Preston', () => {
+				// https://www.theguardian.com/commentisfree/2011/dec/30/person-of-2011-writers-verdict
 
-					const soleContributor = getSoleContributor(
-						[
-							{
-								id: 'profile/paulmacinnes',
-								type: 'Contributor',
-								title: 'Paul MacInnes',
-								twitterHandle: 'PaulMac',
-							},
-							{
-								id: 'profile/peterpreston',
-								type: 'Contributor',
-								title: 'Peter Preston',
-							},
-							{
-								id: 'profile/nesrinemalik',
-								type: 'Contributor',
-								title: 'Nesrine Malik',
-							},
-							{
-								id: 'profile/juliebindel',
-								type: 'Contributor',
-								title: 'Julie Bindel',
-								twitterHandle: 'bindelj',
-							},
-						],
-						'Paul MacInnes, Nesrine Malik, Julie Bindel, Peter Preston',
-					);
+				const soleContributor = getSoleContributor(
+					[
+						{
+							id: 'profile/paulmacinnes',
+							type: 'Contributor',
+							title: 'Paul MacInnes',
+							twitterHandle: 'PaulMac',
+						},
+						{
+							id: 'profile/peterpreston',
+							type: 'Contributor',
+							title: 'Peter Preston',
+						},
+						{
+							id: 'profile/nesrinemalik',
+							type: 'Contributor',
+							title: 'Nesrine Malik',
+						},
+						{
+							id: 'profile/juliebindel',
+							type: 'Contributor',
+							title: 'Julie Bindel',
+							twitterHandle: 'bindelj',
+						},
+					],
+					'Paul MacInnes, Nesrine Malik, Julie Bindel, Peter Preston',
+				);
 
-					assert.equal(soleContributor, undefined);
-				},
-			);
+				assert.equal(soleContributor, undefined);
+			});
 		});
 	});
 });
