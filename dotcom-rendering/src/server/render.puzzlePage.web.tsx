@@ -68,13 +68,25 @@ export const renderPuzzlePage = ({
 		unknownConfig: puzzlePage.config,
 	});
 
+	const description = puzzlePage.puzzleConfig.description;
+	const openGraphData = {
+		'og:title': puzzlePage.webTitle,
+		'og:description': description,
+	};
+	const twitterData = {
+		'twitter:title': puzzlePage.webTitle,
+		'twitter:description': description,
+	};
+
 	return {
 		html: htmlPageTemplate({
 			scriptTags,
 			css: extractedCss,
 			html,
 			title: puzzlePage.webTitle,
-			description: '',
+			description,
+			openGraphData,
+			twitterData,
 			guardian,
 			section: puzzlePage.config.section,
 			renderingTarget: 'Web',
