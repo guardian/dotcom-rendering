@@ -215,7 +215,7 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		audienceSize: 0 / 100,
 		audienceSpace: "B",
-		groups: ["control", "variant"],
+		groups: ["control", "variant", "variant2"],
 		shouldForceMetricsCollection: true,
 	},
 	{
