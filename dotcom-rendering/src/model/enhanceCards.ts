@@ -218,7 +218,7 @@ const findActiveEditorialTest = (
 	return tests?.find((test) => isActiveEditorialTest(test));
 };
 
-type TestData = {
+type EditorialTestData = {
 	headline: string;
 	uuid: string;
 };
@@ -233,7 +233,7 @@ export const getEditorialTestData = (
 	serverSideABTests: Record<string, string>,
 	isEditorialABTestingEnabled: boolean,
 	pageId?: string,
-): TestData | undefined => {
+): EditorialTestData | undefined => {
 	const activeEditorialTest = findActiveEditorialTest(
 		faciaCard.properties.tests,
 	);
@@ -280,16 +280,16 @@ export const decideHeadline = (
 	isEditorialABTestingEnabled: boolean,
 	pageId?: string,
 ): string => {
-	const testData = getEditorialTestData(
+	const editorialTestData = getEditorialTestData(
 		faciaCard,
 		serverSideABTests,
 		isEditorialABTestingEnabled,
 		pageId,
 	);
 
-	if (isUndefined(testData)) return faciaCard.header.headline;
+	if (isUndefined(editorialTestData)) return faciaCard.header.headline;
 
-	return testData.headline;
+	return editorialTestData.headline;
 };
 
 /**
@@ -301,16 +301,16 @@ export const findHeadlineTestUuid = (
 	isEditorialABTestingEnabled: boolean,
 	pageId?: string,
 ): string | undefined => {
-	const testData = getEditorialTestData(
+	const editorialTestData = getEditorialTestData(
 		faciaCard,
 		serverSideABTests,
 		isEditorialABTestingEnabled,
 		pageId,
 	);
 
-	if (isUndefined(testData)) return undefined;
+	if (isUndefined(editorialTestData)) return undefined;
 
-	return testData.uuid;
+	return editorialTestData.uuid;
 };
 
 /**
