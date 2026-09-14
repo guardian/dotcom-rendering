@@ -22,7 +22,7 @@ export type NewsletterSignupCardProps = {
 const containerStyles = css`
 	clear: left;
 	background-color: ${themePalette('--newsletter-card-background')};
-	padding: ${space[3]}px ${space[3]}px ${space[4]}px ${space[3]}px;
+	padding: ${space[2]}px ${space[3]}px ${space[4]}px ${space[3]}px;
 `;
 
 const dividerStyles = css`
