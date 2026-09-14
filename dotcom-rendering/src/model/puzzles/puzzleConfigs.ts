@@ -54,6 +54,18 @@ export interface PuzzleConfig {
 	 * only the slug swapped in.
 	 */
 	description: string;
+	/**
+	 * An optional, full preview/share image URL for this puzzle, used to
+	 * populate `og:image`/`twitter:image` in `render.puzzlePage.web.tsx`.
+	 * Deliberately optional and unset on every current registry entry - DCR
+	 * has no site-wide default/fallback share image for pages without one
+	 * (confirmed by investigation; see docs/puzzle-page.md), so an unset
+	 * `image` simply omits `og:image`/`twitter:image` entirely, matching
+	 * existing sitewide behaviour rather than needing a placeholder. Leave
+	 * unset until a real, licensed preview image is provided for a given
+	 * puzzle - do not invent a placeholder URL here.
+	 */
+	image?: string;
 }
 
 const amuseLabsUrlTemplate =
@@ -138,14 +150,15 @@ const isValidPuzzleConfig = (key: string, config: PuzzleConfig): boolean => {
 	if (!puzzleGroups.includes(config.puzzleGroup)) return false;
 	if (!config.iframe.provider || !config.iframe.urlTemplate) return false;
 	if (!config.description.trim()) return false;
+	if (config.image !== undefined && !config.image.trim()) return false;
 	return true;
 };
 
 /**
  * Fail fast if the registry itself is malformed (e.g. a mismatched slug key,
- * a missing/empty `iframe` config, or a missing/empty `description`). Run
- * once at module load so a bad registry entry surfaces immediately rather
- * than at request time.
+ * a missing/empty `iframe` config, a missing/empty `description`, or a
+ * present-but-empty `image`). Run once at module load so a bad registry
+ * entry surfaces immediately rather than at request time.
  */
 export const validatePuzzleConfigs = (
 	configs: Record<string, PuzzleConfig>,

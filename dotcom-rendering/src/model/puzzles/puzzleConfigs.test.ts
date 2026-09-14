@@ -92,6 +92,44 @@ describe('puzzleConfigs registry', () => {
 		).toThrow(TypeError);
 	});
 
+	it('allows every entry to have no image configured (the current state)', () => {
+		expect(
+			Object.values(puzzleConfigs).every(
+				(config) => config.image === undefined,
+			),
+		).toBe(true);
+	});
+
+	it('does not throw when an entry has a valid, non-empty image set', () => {
+		expect(() =>
+			validatePuzzleConfigs({
+				...puzzleConfigs,
+				wordiply: {
+					...puzzleConfigs.wordiply!,
+					image: 'https://example.com/wordiply.jpg',
+				},
+			}),
+		).not.toThrow();
+	});
+
+	it('rejects an entry with an empty-string image', () => {
+		expect(() =>
+			validatePuzzleConfigs({
+				...puzzleConfigs,
+				wordiply: { ...puzzleConfigs.wordiply!, image: '' },
+			}),
+		).toThrow(TypeError);
+	});
+
+	it('rejects an entry with a whitespace-only image', () => {
+		expect(() =>
+			validatePuzzleConfigs({
+				...puzzleConfigs,
+				wordiply: { ...puzzleConfigs.wordiply!, image: '   ' },
+			}),
+		).toThrow(TypeError);
+	});
+
 	describe('getPuzzleConfig', () => {
 		it('returns the config for a known slug', () => {
 			expect(getPuzzleConfig('sudoku-easy')?.puzzleGroup).toBe(
