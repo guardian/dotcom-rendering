@@ -65,7 +65,11 @@ const rulesToEnforce = {
 
 export default defineConfig([
 	...guardian.configs.recommended,
-	...guardian.configs.jest,
+	...guardian.configs.jest.map((config) => ({
+		...config,
+		// Don't apply Jest globals to Node test files
+		ignores: [...(config.ignores ?? []), '**/*.node.test.ts'],
+	})),
 	...guardian.configs.react,
 	...guardian.configs.storybook,
 	// eslint-plugin-prettier/recommended should be the last item in the configuration array so that eslint-config-prettier has the opportunity to override other configs
