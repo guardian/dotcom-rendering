@@ -61,7 +61,7 @@ const stretchLines = css`
 const immersiveMediaBelowDesktop = (
 	headlineBackground: string,
 	isMainMediaImage: boolean,
-	isFixedHeightImage: boolean,
+	hasMinimumImageHeight: boolean,
 ) => css`
 	${until.desktop} {
 		position: relative;
@@ -79,8 +79,8 @@ const immersiveMediaBelowDesktop = (
 			position: absolute;
 			left: 0;
 			right: 0;
-			bottom: ${isFixedHeightImage ? '-1px' : '0'};
-			height: ${isFixedHeightImage
+			bottom: ${hasMinimumImageHeight ? '-1px' : '0'};
+			height: ${hasMinimumImageHeight
 				? '180px'
 				: isMainMediaImage
 					? 'min(60%, calc(200% - 120vw + 30px))'
@@ -88,13 +88,13 @@ const immersiveMediaBelowDesktop = (
 			z-index: ${getZIndex('mediaOverlay')};
 			background: linear-gradient(
 				to bottom,
-				rgba(0, 0, 0, ${isFixedHeightImage ? '0' : '0.08'}),
-				${headlineBackground} ${isFixedHeightImage ? '100%' : '72%'}
+				rgba(0, 0, 0, ${hasMinimumImageHeight ? '0' : '0.08'}),
+				${headlineBackground} ${hasMinimumImageHeight ? '100%' : '72%'}
 			);
 			backdrop-filter: blur(12px);
 			mask-image: linear-gradient(
 				to bottom,
-				transparent ${isFixedHeightImage ? '0%' : '40%'},
+				transparent ${hasMinimumImageHeight ? '0%' : '40%'},
 				black 60%
 			);
 			pointer-events: none;
@@ -192,7 +192,7 @@ export const StandardLayoutArticleGrid = ({
 	const isMainMediaImage =
 		mainMedia?._type ===
 		'model.dotcomrendering.pageElements.ImageBlockElement';
-	const isFixedHeightImage = isLabs && isImmersive && isMainMediaImage;
+	const hasMinimumImageHeight = isLabs && isImmersive && isMainMediaImage;
 	const mainMediaUrl: string | undefined = isMainMediaImage
 		? mainMedia.media.allImages[0]?.url
 		: undefined;
@@ -286,14 +286,16 @@ export const StandardLayoutArticleGrid = ({
 								${immersiveMediaBelowDesktop(
 									headlineBackgroundImmersive,
 									isMainMediaImage,
-									isFixedHeightImage,
+									hasMinimumImageHeight,
 								)}
 
-								${isFixedHeightImage &&
+								${hasMinimumImageHeight &&
 								css`
 									${until.desktop} {
 										position: relative;
-										height: 469px;
+										min-height: 469px;
+										${mainMediaAspectRatio != null &&
+										`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
 										overflow: hidden;
 										background-color: ${headlineBackgroundImmersive};
 
