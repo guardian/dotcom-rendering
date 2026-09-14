@@ -215,7 +215,7 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		audienceSize: 0 / 100,
 		audienceSpace: "B",
-		groups: ["control", "variant", "variant2"],
+		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
 	{
@@ -229,6 +229,26 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-header-bidder-timeouts",
+		description:
+			"Test to measure the impact of changing the Prebid and APS timeout value.",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-28",
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: [
+			"variant-500",
+			"variant-750",
+			"variant-1000",
+			"variant-1250",
+			"control", // 1500ms timeout
+			"variant-1650",
+		],
 		shouldForceMetricsCollection: true,
 	},
 ];
