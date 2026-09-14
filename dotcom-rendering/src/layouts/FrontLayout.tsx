@@ -28,6 +28,7 @@ import { Snap } from '../components/Snap';
 import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubNav } from '../components/SubNav.island';
+import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -218,9 +219,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							<HeaderAdSlot
 								includeMobile={
 									front.config.section === 'crosswords' &&
-									front.config.serverSideABTests[
-										'commercial-mobile-above-nav-test'
-									] === 'variant'
+									shouldShowMobileAboveNavSlot(
+										front.config.serverSideABTests[
+											'commercial-mobile-above-nav-test'
+										],
+									)
 								}
 							/>
 						</Section>
