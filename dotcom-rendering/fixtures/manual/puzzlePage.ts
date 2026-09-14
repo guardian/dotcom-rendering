@@ -28,7 +28,7 @@ const sampleMoreFromPuzzlesAndGames: PuzzleItem[] = [
 /**
  * Illustrative canonical URL matching `frontend`'s public URL shape for
  * puzzle pages (top-level, mirroring crosswords, distinct from the
- * `/puzzles-and-games` hub) — purely a fixture value, not something DCR
+ * `/puzzles-and-games` hub), purely a fixture value, not something DCR
  * validates or enforces the shape of.
  */
 const canonicalUrlForSlug = (slug: string): string => {

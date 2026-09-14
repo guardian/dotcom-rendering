@@ -9,7 +9,7 @@ import type { PuzzleItem } from './puzzlesPage';
  * (currently just the title, plus optional related-content links) resolved
  * by frontend for a given puzzle `slug`.
  *
- * Puzzle Page is scoped to iframe-based puzzles only — there is no
+ * Puzzle Page is scoped to iframe-based puzzles only, there is no
  * component-rendered case (crosswords remain on their existing, separate
  * `/crosswords/*` flow), so this type carries no crossword-specific fields.
  */
@@ -20,7 +20,7 @@ export interface PuzzlePageInstance {
 	 * (e.g. `"2026-09-11"`). This is prep work for a future V1
 	 * calendar-navigation feature (the reader will be able to navigate from
 	 * a calendar to a specific past puzzle, so the page won't always show
-	 * "today's" puzzle) — DCR currently accepts and validates this field
+	 * "today's" puzzle). DCR currently accepts and validates this field
 	 * but does **not** yet wire it into any rendering logic or the iframe
 	 * URL. See "Open questions" in `docs/puzzle-page.md`.
 	 *

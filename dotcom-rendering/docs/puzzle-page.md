@@ -8,7 +8,7 @@ Puzzle Page is a single, generic page template for the Guardian's
 endpoint, the `PuzzleConfig` registry that decides how each puzzle behaves
 and renders, and the `PuzzlePageLayout` layout/styling. The `frontend`
 (Play/Scala) repo is responsible for fetching/assembling per-instance
-content and POSTing it to this endpoint as JSON — see the `frontend` repo's
+content and POSTing it to this endpoint as JSON. See the `frontend` repo's
 `docs/puzzle-page.md` (formerly `docs/game-page.md`; its standalone
 `GamePageController` no longer exists either, having been merged into
 `PuzzlesPageController` there) for the exact JSON payload it sends and how
@@ -17,15 +17,15 @@ to wire up a new puzzle from the content-fetching side.
 **Crosswords are explicitly out of scope**, by product decision, and remain
 entirely on their existing, separate `/crosswords/*` flow
 (`ArticleDesign.Crossword` / `src/layouts/CrosswordLayout.tsx` / the generic
-Article pipeline) — that flow is unrelated to Puzzle Page and is not
+Article pipeline). That flow is unrelated to Puzzle Page and is not
 described further in this file.
 
-Readers reach individual puzzles via `frontend`'s public, top-level URLs —
-mirroring how crosswords are already routed — e.g. `/sudoku/easy`,
+Readers reach individual puzzles via `frontend`'s public, top-level URLs,
+mirroring how crosswords are already routed, e.g. `/sudoku/easy`,
 `/word-wheel`, `/wordiply` (nested only where the puzzle itself has
 variants, like sudoku's difficulty levels). This is separate from the
 Puzzles Hub (the directory/listing page, unrelated to Puzzle Page), which
-stays at `/puzzles-and-games`. None of this is DCR's own routing — it's
+stays at `/puzzles-and-games`. None of this is DCR's own routing, it's
 `frontend`'s public URL structure, and does not affect DCR's `/PuzzlePage`
 endpoint/contract at all; it's mentioned here only so example URLs
 elsewhere in this doc stay accurate.
@@ -34,7 +34,7 @@ elsewhere in this doc stay accurate.
 own `/PuzzlePage` endpoint is, and remains, ungated (see "Hitting it
 locally" below). `frontend` gates reader access to these routes via its
 existing `PuzzlesHubExperiment`/`puzzles-new-hub` AB test before it ever
-POSTs to DCR — DCR does not re-implement or duplicate that gating.
+POSTs to DCR. DCR does not re-implement or duplicate that gating.
 
 ### The V0 puzzle set
 
@@ -71,7 +71,7 @@ This starts webpack-dev-server on `http://localhost:3030`
 There is currently **no AB gate** on this route.
 `src/server/handler.puzzlePage.web.ts` validates the body
 (`validateAsPuzzlePageType`), looks up the `PuzzleConfig` for the request's
-`slug` (`404` if unknown), and renders unconditionally otherwise — no
+`slug` (`404` if unknown), and renders unconditionally otherwise, with no
 `serverSideABTests`/participation check of any kind (see "Open questions"
 below for the AB-gate/kill-switch situation).
 
@@ -94,7 +94,7 @@ pnpm exec tsx /tmp/dump-puzzle-fixtures.ts
 ```
 
 Then hit the route directly. **This is DCR's own local `POST` endpoint, not
-a real, browsable end-user URL** — `/PuzzlePage` only accepts `POST`
+a real, browsable end-user URL.** `/PuzzlePage` only accepts `POST`
 requests with a JSON body; DCR is not directly browsable by real users
 without `frontend` in front of it constructing and sending that body.
 
@@ -113,7 +113,7 @@ to something else in the request body) returns `404`.
 
 ### How to configure/add a new puzzle
 
-Both steps are config-only — the layout does not need any changes for a new
+Both steps are config-only. The layout does not need any changes for a new
 iframe-based slug:
 
 1. Add a new key to `src/model/puzzles/puzzleConfigs.ts`'s `puzzleConfigs`
@@ -121,13 +121,13 @@ iframe-based slug:
    `shareEnabled`, `printEnabled`, `hasArchive`, `description`, optional
    `image`). If it's another AmuseLabs-hosted puzzle, reuse the
    `amuseLabsPuzzle(slug, puzzleGroup, description)` helper (note: this
-   helper doesn't take `image` — set it afterwards on the returned object
+   helper doesn't take `image`, set it afterwards on the returned object
    if/when a real image is available for that puzzle).
    `validatePuzzleConfigs` runs once at module load and throws immediately
    if the entry is malformed (mismatched `slug`, unknown `puzzleGroup`,
    empty `iframe.provider`/`iframe.urlTemplate`, empty `description`, or a
    present-but-empty `image`).
-   **Write real, distinct, human-quality copy for `description`** — it
+   **Write real, distinct, human-quality copy for `description`.** It
    becomes the page's `<meta name="description">` and its derived Open
    Graph/Twitter description (see "SEO" below); don't copy-paste one
    template string across entries with only the slug swapped in.
@@ -140,7 +140,7 @@ iframe-based slug:
 ### SEO: meta description, Open Graph, Twitter card
 
 Each `PuzzleConfig` entry carries a curated `description` (a short,
-genuinely-written meta description, distinct per puzzle — see step 1
+genuinely-written meta description, distinct per puzzle, see step 1
 above) and an optional `image` (a full preview/share image URL).
 `render.puzzlePage.web.tsx` derives the page's SEO metadata from these via
 a small, pure, directly-unit-tested function,
@@ -148,7 +148,7 @@ a small, pure, directly-unit-tested function,
 (`src/server/render.puzzlePage.web.test.ts`):
 
 - The page's `<meta name="description">` (previously hardcoded to `''`,
-  which silently fell back to DCR's generic, site-wide description — a
+  which silently fell back to DCR's generic, site-wide description, a
   real SEO gap, since a generic/absent description risks Google or social
   previews auto-generating a snippet from page content instead of showing
   clean, curated copy).
@@ -158,16 +158,16 @@ a small, pure, directly-unit-tested function,
   plus `'twitter:image': image` **only when `puzzleConfig.image` is set**.
 
 **When `image` is unset, `og:image`/`twitter:image` are omitted entirely**
-(not sent empty, not defaulted to a placeholder) — `htmlPageTemplate`'s
+(not sent empty, not defaulted to a placeholder). `htmlPageTemplate`'s
 `generateMetaTags()` only emits a `<meta>` tag for keys actually present in
 the object it's given, so an absent key simply produces no tag. This is a
 deliberate, confirmed decision, not an oversight: **DCR has no site-wide
 default/fallback share image anywhere** for pages without one (checked
-`frontend`'s `MetaData.opengraphProperties`/`SimplePage` — no image is set
+`frontend`'s `MetaData.opengraphProperties`/`SimplePage`, no image is set
 by default there either, only via explicit per-page overrides), so an
 unset `image` here matches existing sitewide behaviour rather than needing
 a new default asset. **None of the 6 current V0 puzzles have a real image
-configured** — this is a placeholder capability for whenever real,
+configured.** This is a placeholder capability for whenever real,
 licensed preview images are provided by the team, not filled in as part of
 adding the field.
 
@@ -182,19 +182,19 @@ than requiring bespoke copy per field.
 (`src/types/puzzlePage.ts`, validated by `validateAsPuzzlePageType` in
 `src/model/validate.puzzlePage.ts`):
 
-| Field                              | Type                                                   | Notes                                                                                                                                                                                                                                                                                                      |
-| ---------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                               | `string`                                               | Any stable identifier for the page instance.                                                                                                                                                                                                                                                               |
-| `slug`                             | `string`                                               | Looked up in the `PuzzleConfig` registry; unknown slug → `404`.                                                                                                                                                                                                                                            |
-| `webTitle`                         | `string`                                               | Page `<title>` / share text.                                                                                                                                                                                                                                                                               |
-| `config`                           | `ConfigType`                                           | Same shape frontend sends for `/Article`, `/PuzzlesPage`, etc. Only checked for a `serverSideABTests: Record<string, string>` shape — content otherwise unused (no AB gate today).                                                                                                                         |
-| `nav`                              | `FENavType`                                            | Same shape as other routes.                                                                                                                                                                                                                                                                                |
-| `pageFooter`                       | `FooterType`                                           | Same shape as other routes.                                                                                                                                                                                                                                                                                |
-| `canonicalUrl`                     | `string`                                               | Canonical link tag.                                                                                                                                                                                                                                                                                        |
-| `editionId`                        | `EditionId` (`'UK' \| 'US' \| 'AU' \| 'INT' \| 'EUR'`) | Validated against the known edition set.                                                                                                                                                                                                                                                                   |
-| `instance.title`                   | `string` (required)                                    | Rendered as the page `<h1>` and the iframe `title` attribute.                                                                                                                                                                                                                                              |
-| `instance.puzzleDate`              | `string?` (e.g. `"2026-09-11"`)                        | Which day's puzzle the reader wants to see. Accepted and validated as an optional string only — **not yet wired into any rendering or the iframe URL** (see "Open questions"). Prep work for a future V1 calendar-navigation feature; unrelated to the removed crossword-only `date` display-string field. |
-| `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)      | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                                                                                                                                           |
+| Field                              | Type                                                   | Notes                                                                                                                                                                                                                                                                                                     |
+| ---------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                               | `string`                                               | Any stable identifier for the page instance.                                                                                                                                                                                                                                                              |
+| `slug`                             | `string`                                               | Looked up in the `PuzzleConfig` registry; unknown slug → `404`.                                                                                                                                                                                                                                           |
+| `webTitle`                         | `string`                                               | Page `<title>` / share text.                                                                                                                                                                                                                                                                              |
+| `config`                           | `ConfigType`                                           | Same shape frontend sends for `/Article`, `/PuzzlesPage`, etc. Only checked for a `serverSideABTests: Record<string, string>` shape, content otherwise unused (no AB gate today).                                                                                                                         |
+| `nav`                              | `FENavType`                                            | Same shape as other routes.                                                                                                                                                                                                                                                                               |
+| `pageFooter`                       | `FooterType`                                           | Same shape as other routes.                                                                                                                                                                                                                                                                               |
+| `canonicalUrl`                     | `string`                                               | Canonical link tag.                                                                                                                                                                                                                                                                                       |
+| `editionId`                        | `EditionId` (`'UK' \| 'US' \| 'AU' \| 'INT' \| 'EUR'`) | Validated against the known edition set.                                                                                                                                                                                                                                                                  |
+| `instance.title`                   | `string` (required)                                    | Rendered as the page `<h1>` and the iframe `title` attribute.                                                                                                                                                                                                                                             |
+| `instance.puzzleDate`              | `string?` (e.g. `"2026-09-11"`)                        | Which day's puzzle the reader wants to see. Accepted and validated as an optional string only. **Not yet wired into any rendering or the iframe URL** (see "Open questions"). Prep work for a future V1 calendar-navigation feature; unrelated to the removed crossword-only `date` display-string field. |
+| `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)      | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                                                                                                                                          |
 
 ### User/context info passed to the puzzle iframe
 
@@ -206,7 +206,7 @@ about the current reader to the puzzle provider two ways:
   `?set=guardian-sudoku-easy&embed=1&idx=1&guardian-puzzle-context=%7B%22userId%22%3Anull%2C%22darkMode%22%3Afalse%7D`,
   which decodes to `{"userId":null,"darkMode":false}`), present from the
   iframe's very first request. Unlike the parameter's previous `userId`-only
-  form, this is always included — the context shape always carries both
+  form, this is always included: the context shape always carries both
   fields, so there's no "nothing to add" case to omit it for.
 - Via `window.postMessage({ type: 'guardian-puzzle-context', context }, '*')`
   (the `PuzzleContextMessage` shape), sent to the iframe once it has loaded.
@@ -221,27 +221,28 @@ interface PuzzleContext {
 - **`userId`** is the reader's `idToken.claims.legacy_identity_id` (resolved
   via `src/lib/identity.ts`'s `getAuthStatus()`), the same identifier
   already used to build MyAccount links elsewhere in DCR
-  (`TopBarMyAccount.tsx`) — **not** the OIDC `sub` claim some other, newer
-  API integrations in DCR use instead. `null` when the reader is signed out.
+  (`TopBarMyAccount.tsx`). This is **not** the OIDC `sub` claim some other,
+  newer API integrations in DCR use instead. `null` when the reader is
+  signed out.
 - **`darkMode`** is whether dark mode is currently actually active for this
-  reader — both of the following must be true:
+  reader. Both of the following must be true:
     1. `darkModeAvailable`, the existing server-side `webx-dark-mode-web` AB
        test flag for this page/request, already read via `useConfig()` in
        `PuzzlePage.tsx` and threaded down through `PuzzlePageLayout.tsx` to
        `PuzzleIframe` the same way it already reaches `rootStyles()` for the
-       page chrome's own dark mode support (see `src/lib/rootStyles.ts`) — no
+       page chrome's own dark mode support (see `src/lib/rootStyles.ts`). No
        new source of truth was introduced for this.
     2. The reader's OS/browser actually preferring dark
        (`prefers-color-scheme: dark`), checked reactively via DCR's existing,
        generic `src/lib/useMatchMedia.ts` hook (already used elsewhere in DCR,
-       e.g. `ArticleMeta.web.tsx`) — not a new media-query mechanism.
+       e.g. `ArticleMeta.web.tsx`). Not a new media-query mechanism.
 
     When `darkModeAvailable` is `false`, `darkMode` is always `false` and the
     media query isn't even consulted.
 
 The iframe reloads automatically whenever either half of the context
-changes while the reader is already on the page — sign in, sign out,
-switching accounts, or the reader's OS switching light/dark theme: the
+changes while the reader is already on the page: sign in, sign out,
+switching accounts, or the reader's OS switching light/dark theme. The
 component subscribes to both auth state changes
 (`src/lib/identity.ts`'s `subscribeToAuthStateChange()`, a thin wrapper
 around the `@guardian/identity-auth` client's own
@@ -249,8 +250,8 @@ around the `@guardian/identity-auth` client's own
 `useMatchMedia`'s own reactivity), and since the iframe's `src` is derived
 directly from the current context, React gives the `<iframe>` a new `src`
 value whenever either changes, which the browser treats as a fresh
-navigation — no manual reload call needed. The `postMessage` above fires
-again after every such reload too.
+navigation, so no manual reload call is needed. The `postMessage` above
+fires again after every such reload too.
 
 ## Open questions / known limitations
 
@@ -260,7 +261,7 @@ again after every such reload too.
 darkMode: boolean } }` and the `?guardian-puzzle-context=<JSON>` query
   parameter are DCR's proposal, documented in code
   (`src/components/PuzzleIframe.island.tsx`), but neither has been confirmed
-  against what AmuseLabs or Wordiply actually expect to receive — including
+  against what AmuseLabs or Wordiply actually expect to receive, including
   whether `legacy_identity_id` (rather than the OIDC `sub` claim) is the
   right identifier format for them, and whether either provider's iframe
   even supports a dark-mode signal in the first place (see the dark-mode
@@ -270,13 +271,13 @@ darkMode: boolean } }` and the `?guardian-puzzle-context=<JSON>` query
   codebase.** `subscribeToAuthStateChange()` uses the underlying
   `@guardian/identity-auth` client's own public `authStateManager.subscribe`
   API (not an invented event bus), but this is its first use anywhere in
-  DCR — every other existing call site only checks auth status once, on
+  DCR. Every other existing call site only checks auth status once, on
   mount. It has unit test coverage but has not been validated against a
   real sign-in flow in a running browser; treat it as unproven until that
   happens.
 - **Whether the `userId` passthrough is actually useful to
   AmuseLabs/Wordiply for anything (personalisation, analytics, save state)
-  has not been validated end-to-end** — this ships the plumbing DCR can
+  has not been validated end-to-end.** This ships the plumbing DCR can
   control (URL param + postMessage), not a confirmed integration.
 - **No saved puzzle state / progress persistence.** There is no API today
   for a puzzle's in-progress state to be saved against a Guardian account
@@ -284,7 +285,7 @@ darkMode: boolean } }` and the `?guardian-puzzle-context=<JSON>` query
   This has been deliberately deferred until such an API exists.
 - **The real AmuseLabs archive URL is still unknown.** `PuzzleConfig.hasArchive`
   exists on every registry entry (currently always `true`) but is **not
-  consumed anywhere in rendering** — there is no archive-link UI, and no
+  consumed anywhere in rendering.** There is no archive-link UI, and no
   archive URL field exists in the registry at all. A URL seen during the
   original proof-of-concept was only there as an illustrative example, not
   a verified production AmuseLabs archive URL. The correct URL needs to be
@@ -300,7 +301,7 @@ darkMode: boolean } }` and the `?guardian-puzzle-context=<JSON>` query
   masthead/footer/text/background chrome should follow dark mode correctly
   when that flag is enabled. `PuzzleIframe` also now sends `darkMode` (see
   "User/context info passed to the puzzle iframe" above) via the
-  `guardian-puzzle-context` query parameter and `postMessage` — but whether
+  `guardian-puzzle-context` query parameter and `postMessage`, but whether
   AmuseLabs or Wordiply actually read or honour that signal at all is
   unconfirmed (see the `PuzzleContextMessage` open question above). This has
   not been visually verified in either light or dark mode.
@@ -308,7 +309,7 @@ darkMode: boolean } }` and the `?guardian-puzzle-context=<JSON>` query
   Page or the puzzle iframes themselves (which are entirely provider-
   controlled content).
 - **`instance.puzzleDate` is accepted but not yet used for anything.** It is
-  validated as an optional string and otherwise ignored — DCR always shows
+  validated as an optional string and otherwise ignored. DCR always shows
   whichever puzzle the resolved `slug`'s provider iframe URL happens to
   serve "live" today, regardless of `puzzleDate`. Wiring this into the
   actual iframe URL (so a specific past date's puzzle is shown) is deferred
@@ -316,13 +317,13 @@ darkMode: boolean } }` and the `?guardian-puzzle-context=<JSON>` query
   scheme (AmuseLabs, Wordiply) supports requesting a specific historical
   date at all.
 - **DCR's `/PuzzlePage` endpoint itself still has no route-level access
-  control** (unchanged from before) — `frontend`'s existing
+  control** (unchanged from before). `frontend`'s existing
   `PuzzlesHubExperiment`/`puzzles-new-hub` AB test gate decides whether a
   reader ever reaches one of these puzzle-page URLs in the first place;
   DCR's endpoint renders unconditionally for any request with a known
   `slug`. **What has changed**: DCR now has a real, cumulative,
   code-change-free kill-switch for individual _feature tiers_ within the
-  rendered page — see "Feature-tier rollout gating (v0/v1/v2)" below. This
+  rendered page, see "Feature-tier rollout gating (v0/v1/v2)" below. This
   addresses the previous "no kill-switch" limitation for feature-level
   rollback; it does not add route-level gating to `/PuzzlePage` itself
   (that remains `frontend`'s responsibility, unchanged).
@@ -334,24 +335,24 @@ darkMode: boolean } }` and the `?guardian-puzzle-context=<JSON>` query
 
 The Puzzles & Games rollout uses a 3-tier, **cumulative** AB-test/
 kill-switch structure (`ab-testing/config/abTests.ts`), so any rollout
-phase can be turned on/off — or rolled back to an earlier phase — without
+phase can be turned on/off, or rolled back to an earlier phase, without
 a DCR code change or redeploy. This is per the product rollout plan (v0 =
 w/c 5 Oct launch, v1 = w/c 12 Oct launch, v2 = no date confirmed yet).
 
 - **`puzzles-new-hub` (v0, the master switch)**: gates the baseline
-  experience — the new Puzzles Hub page, and the 6 V0 puzzle pages (sudoku
+  experience, the new Puzzles Hub page, and the 6 V0 puzzle pages (sudoku
   x4, word-wheel, wordiply) with no archive, no calendar, no progress
   indicators, no sign-in prompt, no related-content rail, and a hub
   sub-nav with no links yet. Turning this off hides everything, including
   every later tier.
-- **`puzzles-new-hub-v1`**: the w/c 12 Oct layer, **on top of v0** — does
+- **`puzzles-new-hub-v1`**: the w/c 12 Oct layer, **on top of v0**. It does
   nothing unless `puzzles-new-hub` is _also_ enabled. Activates: full hub
   sub-nav links, a sign-in-to-track-progress message, a calendar/archive
   view for crosswords/logic-puzzles/word-games (not Wordiply), progress
   indicators, the "More from Puzzles & Games" rail, newsletter signup, and
   changes to the existing crossword page (print CTA repositioning, "play
   other puzzles" container).
-- **`puzzles-new-hub-v2`**: a future layer, **on top of v0+v1** — does
+- **`puzzles-new-hub-v2`**: a future layer, **on top of v0+v1**. It does
   nothing unless both `puzzles-new-hub` and `puzzles-new-hub-v1` are
   _also_ enabled. Activates: On the Ball/Film Reveal (Trivia and Quizzes),
   a "Most played" container, EventKit-driven navigation, migrating
@@ -368,18 +369,18 @@ from v1 to v0, turn off `puzzles-new-hub-v1` only).
 
 The corresponding gate-check helpers live in DCR:
 
-- `isPuzzlesHubEnabled` (`src/lib/puzzlesHubExperiment.ts`) — v0 only.
+- `isPuzzlesHubEnabled` (`src/lib/puzzlesHubExperiment.ts`), v0 only.
 - `isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled`
-  (`src/lib/puzzlesHubVersionExperiment.ts`) — cumulative, as described
+  (`src/lib/puzzlesHubVersionExperiment.ts`), cumulative, as described
   above.
 
-**Current state**: all three tiers sit at `audienceSize: 0/100` — hidden
+**Current state**: all three tiers sit at `audienceSize: 0/100`, hidden
 from the public entirely, same as before this structure existed. Today,
 only one DCR-rendered feature actually checks a tier gate:
 `PuzzlePageLayout.tsx`'s "More from Puzzles & Games" rail, gated behind
 `isPuzzlesHubV1Enabled` (since that rail is v1-scoped, not v0). Every
 other v0-scoped feature currently in this codebase renders unconditionally
-at the DCR level — v0's "gating" today is really just `frontend`'s
+at the DCR level. v0's "gating" today is really just `frontend`'s
 route-level `PuzzlesHubExperiment` check deciding whether a request
 reaches `/PuzzlePage` at all, not a DCR-side render-time check. When
 future v1/v2 work is implemented (calendar, progress indicators, sign-in
@@ -392,7 +393,7 @@ doesn't render Puzzle Page UI itself, so feature-tier gating naturally
 lives entirely on the DCR side. `frontend`'s existing route-level
 `PuzzlesHubExperiment` gate (already reusing `puzzles-new-hub`) is
 unaffected by `puzzles-new-hub-v1`/`puzzles-new-hub-v2` and doesn't need
-to check them — it only ever needed to decide whether a reader reaches
+to check them. It only ever needed to decide whether a reader reaches
 `/PuzzlePage` at all, which is still governed by v0 alone.
 
 ### SEO risks to revisit before shipping calendar/archive features
@@ -400,15 +401,15 @@ to check them — it only ever needed to decide whether a reader reaches
 **Read this before adding date-specific URLs (V1 calendar navigation) or
 any archive/pagination UI to Puzzle Page.** No page in Puzzle Page today
 creates unbounded or paginated URLs (there is no archive UI yet, despite
-`PuzzleConfig.hasArchive` existing — see above), so this isn't an active
+`PuzzleConfig.hasArchive` existing, see above), so this isn't an active
 problem yet. It becomes one the moment calendar or archive work begins, and
 should be raised as an explicit design question at the _start_ of that
 work, not discovered after launch.
 
 - **Date-specific URLs risk creating duplicate/thin indexable pages.**
   Once `instance.puzzleDate` (or a real calendar UI) lets readers reach a
-  specific past date's puzzle via a URL — whether a query param or a path
-  segment — every such URL must either (a) carry a `canonical` pointing
+  specific past date's puzzle via a URL, whether a query param or a path
+  segment, every such URL must either (a) carry a `canonical` pointing
   back to the puzzle's main/"today" URL, if individual dates aren't meant
   to be indexed separately, or (b) be a deliberate, explicit decision to
   index each date individually with genuinely distinct content/copy per
@@ -420,11 +421,11 @@ work, not discovered after launch.
   currently indexed by Google with a generic, unhelpful title
   ("Crossword | Page 2 of 1082") and a garbled, listing-style meta
   description auto-scraped from page content (a concatenated list of
-  puzzle names) rather than a clean, curated one — a direct consequence of
+  puzzle names) rather than a clean, curated one, a direct consequence of
   paginated listing pages being indexed individually without proper
   `canonical`/`noindex`/curated-metadata handling. Any future Puzzle Page
   archive feature must avoid this from the start: genuinely curated
   titles/descriptions per archive page (never auto-generated from a list of
   contents, the same principle behind `PuzzleConfig.description` above),
   and an explicit `canonical`/`noindex`/pagination-indexing strategy decided
-  upfront — not defaulting to "index everything" and finding out later.
+  upfront, not defaulting to "index everything" and finding out later.

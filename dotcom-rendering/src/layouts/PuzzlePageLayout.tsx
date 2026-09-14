@@ -34,11 +34,11 @@ import type { FEPuzzlePageType } from '../types/puzzlePage';
  * blocks (Masthead, Section, Footer, AdSlot, ShareButton.island) rather than
  * duplicating them.
  *
- * Puzzle Page is scoped to iframe-based puzzles only — crosswords remain on
+ * Puzzle Page is scoped to iframe-based puzzles only, crosswords remain on
  * their existing, separate `/crosswords/*` flow
  * (`ArticleDesign.Crossword` / `src/layouts/CrosswordLayout.tsx`), which is
  * unrelated to this layout. There is accordingly no setter byline, PDF
- * link, or comments rendering here — none of the current `PuzzleConfig`
+ * link, or comments rendering here, none of the current `PuzzleConfig`
  * registry entries have any equivalent concept.
  */
 
@@ -53,7 +53,7 @@ const puzzleGroupLabels: Record<PuzzleConfig['puzzleGroup'], string> = {
  * no equivalent concept, so a minimal, fixed format value is used to satisfy
  * its prop contract without fabricating article-specific data (tags,
  * branding, etc.). This is read-only reuse of existing exported enum
- * values — it does not modify `articleFormat.ts` or any crossword decision
+ * values, it does not modify `articleFormat.ts` or any crossword decision
  * logic.
  */
 const puzzlePageFormat = {

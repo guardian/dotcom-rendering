@@ -18,7 +18,7 @@ import {
  * `editions`) exported from `validate.ts` rather than duplicating them.
  *
  * Note: unlike some other DCR page types, there was no pre-existing
- * `validate.<pageType>.ts` file to mirror here — every other page type's
+ * `validate.<pageType>.ts` file to mirror here, every other page type's
  * validator (including the unrelated Puzzles Hub's `validateAsPuzzlesPageType`)
  * still lives in the shared `validate.ts`, only their *tests* are split
  * into per-page-type files (e.g. `validate.puzzlesPage.test.ts`). This file

@@ -2,7 +2,7 @@
  * DCR's single source of truth for the structural/rendering behaviour of
  * each supported Puzzle Page slug.
  *
- * Puzzle Page is scoped to iframe-based puzzles only — crosswords remain on
+ * Puzzle Page is scoped to iframe-based puzzles only, crosswords remain on
  * their existing, separate `/crosswords/*` flow
  * (`ArticleDesign.Crossword` / `src/layouts/CrosswordLayout.tsx`), which is
  * unrelated to this registry and is not unified into Puzzle Page. See

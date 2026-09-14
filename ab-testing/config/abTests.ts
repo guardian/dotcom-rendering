@@ -158,7 +158,7 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	/**
-	 * Puzzles & Games rollout — tier v0 (the master switch).
+	 * Puzzles & Games rollout, tier v0 (the master switch).
 	 *
 	 * Gates the baseline Puzzles & Games experience: the new Puzzles Hub
 	 * page, and the 6 V0 puzzle pages (sudoku easy/medium/hard/killer,
@@ -167,7 +167,7 @@ const ABTests: ABTest[] = [
 	 * from puzzles" rail, and the hub's sub-nav has no links yet.
 	 *
 	 * This is the master switch for the whole Puzzles & Games experience:
-	 * turning it off (or down to 0%) hides everything — the hub, the V0
+	 * turning it off (or down to 0%) hides everything: the hub, the V0
 	 * puzzle pages, and (by the cumulative design below) every later tier
 	 * too, since v1/v2 only take effect when this is also enabled.
 	 *
@@ -190,10 +190,10 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	/**
-	 * Puzzles & Games rollout — tier v1 (w/c 12 Oct launch).
+	 * Puzzles & Games rollout, tier v1 (w/c 12 Oct launch).
 	 *
 	 * Only takes effect when `puzzles-new-hub` (v0) is ALSO enabled for the
-	 * reader — this test does nothing on its own, by design, so the
+	 * reader. This test does nothing on its own, by design, so the
 	 * rollout can never end up in an inconsistent state (e.g. v1 features
 	 * showing while the v0 baseline they build on is switched off).
 	 *
@@ -224,11 +224,11 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	/**
-	 * Puzzles & Games rollout — tier v2 (future, no launch date confirmed
+	 * Puzzles & Games rollout, tier v2 (future, no launch date confirmed
 	 * yet as of this writing).
 	 *
 	 * Only takes effect when BOTH `puzzles-new-hub` (v0) AND
-	 * `puzzles-new-hub-v1` are ALSO enabled for the reader — same
+	 * `puzzles-new-hub-v1` are ALSO enabled for the reader, same
 	 * cumulative-by-design principle as v1 above, applied one tier further.
 	 *
 	 * On top of v0+v1, this tier activates: the On the Ball and Film Reveal
