@@ -118,12 +118,15 @@ iframe-based slug:
 
 1. Add a new key to `src/model/puzzles/puzzleConfigs.ts`'s `puzzleConfigs`
    record (`slug`, `puzzleGroup`, `iframe: { provider, urlTemplate }`,
-   `shareEnabled`, `printEnabled`, `hasArchive`, `description`). If it's
-   another AmuseLabs-hosted puzzle, reuse the
-   `amuseLabsPuzzle(slug, puzzleGroup, description)` helper.
+   `shareEnabled`, `printEnabled`, `hasArchive`, `description`, optional
+   `image`). If it's another AmuseLabs-hosted puzzle, reuse the
+   `amuseLabsPuzzle(slug, puzzleGroup, description)` helper (note: this
+   helper doesn't take `image` — set it afterwards on the returned object
+   if/when a real image is available for that puzzle).
    `validatePuzzleConfigs` runs once at module load and throws immediately
    if the entry is malformed (mismatched `slug`, unknown `puzzleGroup`,
-   empty `iframe.provider`/`iframe.urlTemplate`, or empty `description`).
+   empty `iframe.provider`/`iframe.urlTemplate`, empty `description`, or a
+   present-but-empty `image`).
    **Write real, distinct, human-quality copy for `description`** — it
    becomes the page's `<meta name="description">` and its derived Open
    Graph/Twitter description (see "SEO" below); don't copy-paste one
@@ -138,22 +141,40 @@ iframe-based slug:
 
 Each `PuzzleConfig` entry carries a curated `description` (a short,
 genuinely-written meta description, distinct per puzzle — see step 1
-above). `render.puzzlePage.web.tsx` uses
-`puzzlePage.puzzleConfig.description` (the config already resolved by
-`handler.puzzlePage.web.ts`, not a fresh lookup) for three things:
+above) and an optional `image` (a full preview/share image URL).
+`render.puzzlePage.web.tsx` derives the page's SEO metadata from these via
+a small, pure, directly-unit-tested function,
+`buildPuzzlePageMetaData(webTitle, puzzleConfig)`
+(`src/server/render.puzzlePage.web.test.ts`):
 
 - The page's `<meta name="description">` (previously hardcoded to `''`,
   which silently fell back to DCR's generic, site-wide description — a
   real SEO gap, since a generic/absent description risks Google or social
   previews auto-generating a snippet from page content instead of showing
   clean, curated copy).
-- `openGraphData: { 'og:title': webTitle, 'og:description': description }`.
-- `twitterData: { 'twitter:title': webTitle, 'twitter:description': description }`.
+- `openGraphData: { 'og:title': webTitle, 'og:description': description }`,
+  plus `'og:image': image` **only when `puzzleConfig.image` is set**.
+- `twitterData: { 'twitter:title': webTitle, 'twitter:description': description }`,
+  plus `'twitter:image': image` **only when `puzzleConfig.image` is set**.
+
+**When `image` is unset, `og:image`/`twitter:image` are omitted entirely**
+(not sent empty, not defaulted to a placeholder) — `htmlPageTemplate`'s
+`generateMetaTags()` only emits a `<meta>` tag for keys actually present in
+the object it's given, so an absent key simply produces no tag. This is a
+deliberate, confirmed decision, not an oversight: **DCR has no site-wide
+default/fallback share image anywhere** for pages without one (checked
+`frontend`'s `MetaData.opengraphProperties`/`SimplePage` — no image is set
+by default there either, only via explicit per-page overrides), so an
+unset `image` here matches existing sitewide behaviour rather than needing
+a new default asset. **None of the 6 current V0 puzzles have a real image
+configured** — this is a placeholder capability for whenever real,
+licensed preview images are provided by the team, not filled in as part of
+adding the field.
 
 Puzzle Page has no separate source of Open Graph/Twitter copy (unlike
 Article, where `frontend` sends its own `openGraphData`/`twitterData`), so
-these are derived directly from `webTitle`/`description` rather than
-requiring bespoke copy per field.
+these are derived directly from `webTitle`/`description`/`image` rather
+than requiring bespoke copy per field.
 
 ### The `FEPuzzlePageType` request contract
 
