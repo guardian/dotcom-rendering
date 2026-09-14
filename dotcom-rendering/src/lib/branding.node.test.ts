@@ -6,18 +6,6 @@ import { decideCollectionBranding, decideTagPageBranding } from './branding';
 // For the purpose of these tests we don't care about the contents of the logo objects
 const logo = {} as Branding['logo'];
 
-const assertMatchObject = (actual: unknown, expected: unknown): void => {
-	if (expected === null || typeof expected !== 'object') {
-		assert.deepEqual(actual, expected);
-		return;
-	}
-
-	assert.ok(actual !== null && typeof actual === 'object');
-	for (const [key, value] of Object.entries(expected)) {
-		assertMatchObject((actual as Record<string, unknown>)[key], value);
-	}
-};
-
 void describe('decideCollectionBranding', () => {
 	void it('picks branding from a card by their edition', () => {
 		const cards = [
@@ -53,7 +41,7 @@ void describe('decideCollectionBranding', () => {
 			editionId: 'UK',
 			isContainerBranding: false,
 		});
-		assertMatchObject(ukBranding, {
+		assert.deepEqual(ukBranding, {
 			kind: 'paid-content',
 			isFrontBranding: false,
 			branding: {
@@ -72,7 +60,7 @@ void describe('decideCollectionBranding', () => {
 			editionId: 'US',
 			isContainerBranding: false,
 		});
-		assertMatchObject(usBranding, {
+		assert.deepEqual(usBranding, {
 			kind: 'sponsored',
 			isFrontBranding: false,
 			branding: {
@@ -131,10 +119,12 @@ void describe('decideCollectionBranding', () => {
 			editionId: 'UK',
 			isContainerBranding: false,
 		});
-		assertMatchObject(collectionBranding, {
+		assert.deepEqual(collectionBranding, {
 			kind: 'paid-content',
 			isFrontBranding: false,
 			branding: cardBranding,
+			isContainerBranding: false,
+			hasMultipleBranding: false,
 		});
 	});
 
@@ -657,13 +647,14 @@ void describe('decideTagPageBranding', () => {
 			branding,
 		});
 
-		assertMatchObject(tagPageBranding, {
+		assert.deepEqual(tagPageBranding, {
 			kind: 'sponsored',
 			isFrontBranding: true,
 			branding: {
 				brandingType: { name: 'sponsored' },
 				sponsorName: 'Guardian.org',
 				aboutThisLink: '',
+				logo,
 			},
 			isContainerBranding: false,
 			hasMultipleBranding: false,
