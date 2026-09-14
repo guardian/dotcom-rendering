@@ -118,16 +118,42 @@ iframe-based slug:
 
 1. Add a new key to `src/model/puzzles/puzzleConfigs.ts`'s `puzzleConfigs`
    record (`slug`, `puzzleGroup`, `iframe: { provider, urlTemplate }`,
-   `shareEnabled`, `printEnabled`, `hasArchive`). If it's another
-   AmuseLabs-hosted puzzle, reuse the `amuseLabsPuzzle(slug, puzzleGroup)`
-   helper. `validatePuzzleConfigs` runs once at module load and throws
-   immediately if the entry is malformed (mismatched `slug`, unknown
-   `puzzleGroup`, or empty `iframe.provider`/`iframe.urlTemplate`).
+   `shareEnabled`, `printEnabled`, `hasArchive`, `description`). If it's
+   another AmuseLabs-hosted puzzle, reuse the
+   `amuseLabsPuzzle(slug, puzzleGroup, description)` helper.
+   `validatePuzzleConfigs` runs once at module load and throws immediately
+   if the entry is malformed (mismatched `slug`, unknown `puzzleGroup`,
+   empty `iframe.provider`/`iframe.urlTemplate`, or empty `description`).
+   **Write real, distinct, human-quality copy for `description`** — it
+   becomes the page's `<meta name="description">` and its derived Open
+   Graph/Twitter description (see "SEO" below); don't copy-paste one
+   template string across entries with only the slug swapped in.
 2. Nothing else changes on the DCR side: `PuzzlePageLayout.tsx`'s
    `PuzzlePageContent` unconditionally renders `PuzzleIframe` pointed at
    `resolveIframeUrl(puzzleConfig)` for every registry entry. The only thing
    needed from `frontend` is a request whose `slug` matches the new
    registry key exactly (see the `frontend` repo's `docs/puzzle-page.md`).
+
+### SEO: meta description, Open Graph, Twitter card
+
+Each `PuzzleConfig` entry carries a curated `description` (a short,
+genuinely-written meta description, distinct per puzzle — see step 1
+above). `render.puzzlePage.web.tsx` uses
+`puzzlePage.puzzleConfig.description` (the config already resolved by
+`handler.puzzlePage.web.ts`, not a fresh lookup) for three things:
+
+- The page's `<meta name="description">` (previously hardcoded to `''`,
+  which silently fell back to DCR's generic, site-wide description — a
+  real SEO gap, since a generic/absent description risks Google or social
+  previews auto-generating a snippet from page content instead of showing
+  clean, curated copy).
+- `openGraphData: { 'og:title': webTitle, 'og:description': description }`.
+- `twitterData: { 'twitter:title': webTitle, 'twitter:description': description }`.
+
+Puzzle Page has no separate source of Open Graph/Twitter copy (unlike
+Article, where `frontend` sends its own `openGraphData`/`twitterData`), so
+these are derived directly from `webTitle`/`description` rather than
+requiring bespoke copy per field.
 
 ### The `FEPuzzlePageType` request contract
 
@@ -282,3 +308,37 @@ darkMode: boolean } }` and the `?guardian-puzzle-context=<JSON>` query
 - **The Puzzles Hub (`src/layouts/PuzzlesLayout.tsx` and friends) is a
   separate, unrelated feature** (a directory/listing page) and is not
   documented in this file.
+
+### SEO risks to revisit before shipping calendar/archive features
+
+**Read this before adding date-specific URLs (V1 calendar navigation) or
+any archive/pagination UI to Puzzle Page.** No page in Puzzle Page today
+creates unbounded or paginated URLs (there is no archive UI yet, despite
+`PuzzleConfig.hasArchive` existing — see above), so this isn't an active
+problem yet. It becomes one the moment calendar or archive work begins, and
+should be raised as an explicit design question at the _start_ of that
+work, not discovered after launch.
+
+- **Date-specific URLs risk creating duplicate/thin indexable pages.**
+  Once `instance.puzzleDate` (or a real calendar UI) lets readers reach a
+  specific past date's puzzle via a URL — whether a query param or a path
+  segment — every such URL must either (a) carry a `canonical` pointing
+  back to the puzzle's main/"today" URL, if individual dates aren't meant
+  to be indexed separately, or (b) be a deliberate, explicit decision to
+  index each date individually with genuinely distinct content/copy per
+  date. This must be decided explicitly before shipping, not left as an
+  accidental side effect of adding date-awareness to the URL.
+- **Archive/pagination features carry a known, real risk of poor search
+  indexing if built carelessly.** A concrete, existing cautionary example
+  elsewhere on the Guardian site: the crossword archive/search listing is
+  currently indexed by Google with a generic, unhelpful title
+  ("Crossword | Page 2 of 1082") and a garbled, listing-style meta
+  description auto-scraped from page content (a concatenated list of
+  puzzle names) rather than a clean, curated one — a direct consequence of
+  paginated listing pages being indexed individually without proper
+  `canonical`/`noindex`/curated-metadata handling. Any future Puzzle Page
+  archive feature must avoid this from the start: genuinely curated
+  titles/descriptions per archive page (never auto-generated from a list of
+  contents, the same principle behind `PuzzleConfig.description` above),
+  and an explicit `canonical`/`noindex`/pagination-indexing strategy decided
+  upfront — not defaulting to "index everything" and finding out later.
