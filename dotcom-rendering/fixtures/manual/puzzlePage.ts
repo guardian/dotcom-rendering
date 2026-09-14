@@ -1,3 +1,4 @@
+import type { PuzzleConfig } from '../../src/model/puzzles/puzzleConfigs';
 import { puzzleConfigs } from '../../src/model/puzzles/puzzleConfigs';
 import type { FEPuzzlePageType } from '../../src/types/puzzlePage';
 import type { PuzzleItem } from '../../src/types/puzzlesPage';
@@ -87,3 +88,29 @@ export const puzzlePageFixtures: Record<string, FEPuzzlePageType> = Object.keys(
 	acc[slug] = createPuzzlePage(slug);
 	return acc;
 }, {});
+
+/**
+ * A fixture-only illustrative preview/share image URL. None of the real
+ * `puzzleConfigs` registry entries have a real image configured yet (see
+ * docs/puzzle-page.md) - this exists purely so both the with-image and
+ * without-image branches of Puzzle Page's OG/Twitter metadata have fixture
+ * and test coverage, without inventing a placeholder image for the real
+ * registry itself.
+ */
+export const samplePuzzleImageUrl =
+	'https://i.guim.co.uk/img/media/fixture-only-example/puzzle-preview.jpg?width=1200&height=630&quality=85';
+
+/**
+ * Returns a copy of `slug`'s real `PuzzleConfig` with `image` set to
+ * `samplePuzzleImageUrl` - a fixture-only variant for exercising the
+ * with-image branch (the real registry entry itself is left untouched).
+ */
+export const createPuzzleConfigWithImage = (slug: string): PuzzleConfig => {
+	const puzzleConfig = puzzleConfigs[slug];
+
+	if (!puzzleConfig) {
+		throw new Error(`Unknown puzzle slug in fixture: ${slug}`);
+	}
+
+	return { ...puzzleConfig, image: samplePuzzleImageUrl };
+};

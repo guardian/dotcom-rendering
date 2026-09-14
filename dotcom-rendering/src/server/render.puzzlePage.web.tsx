@@ -11,10 +11,54 @@ import { renderToStringWithEmotion } from '../lib/emotion';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
+import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import type { Config } from '../types/configContext';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 type Props = { puzzlePage: ResolvedPuzzlePage };
+
+/**
+ * Builds the SEO metadata for a Puzzle Page from its resolved
+ * `PuzzleConfig` and `webTitle`: the `<meta name="description">` value,
+ * plus `openGraphData`/`twitterData` for `htmlPageTemplate`'s
+ * `generateMetaTags()`. Pulled out as a small, pure function (rather than
+ * inlined in `renderPuzzlePage`) specifically so it's directly unit
+ * testable without needing to invoke the full render pipeline (which
+ * requires a webpack build manifest not present in the test environment -
+ * there is no existing render.*.web.tsx unit test convention in this repo
+ * to extend).
+ *
+ * `og:image`/`twitter:image` are only included when `puzzleConfig.image`
+ * is set - DCR has no site-wide default/fallback share image for pages
+ * without one (confirmed by investigation - see docs/puzzle-page.md), so
+ * when `image` is unset these keys are omitted entirely rather than sent
+ * empty or with a placeholder, matching `generateMetaTags()`'s behaviour
+ * of only emitting a `<meta>` tag for keys actually present in the object.
+ */
+export const buildPuzzlePageMetaData = (
+	webTitle: string,
+	puzzleConfig: PuzzleConfig,
+): {
+	description: string;
+	openGraphData: Record<string, string>;
+	twitterData: Record<string, string>;
+} => {
+	const { description, image } = puzzleConfig;
+
+	return {
+		description,
+		openGraphData: {
+			'og:title': webTitle,
+			'og:description': description,
+			...(image ? { 'og:image': image } : {}),
+		},
+		twitterData: {
+			'twitter:title': webTitle,
+			'twitter:description': description,
+			...(image ? { 'twitter:image': image } : {}),
+		},
+	};
+};
 
 export const renderPuzzlePage = ({
 	puzzlePage,
@@ -68,15 +112,10 @@ export const renderPuzzlePage = ({
 		unknownConfig: puzzlePage.config,
 	});
 
-	const description = puzzlePage.puzzleConfig.description;
-	const openGraphData = {
-		'og:title': puzzlePage.webTitle,
-		'og:description': description,
-	};
-	const twitterData = {
-		'twitter:title': puzzlePage.webTitle,
-		'twitter:description': description,
-	};
+	const { description, openGraphData, twitterData } = buildPuzzlePageMetaData(
+		puzzlePage.webTitle,
+		puzzlePage.puzzleConfig,
+	);
 
 	return {
 		html: htmlPageTemplate({
