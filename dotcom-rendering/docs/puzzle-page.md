@@ -315,20 +315,85 @@ darkMode: boolean } }` and the `?guardian-puzzle-context=<JSON>` query
   to V1, pending investigation into whether/how each provider's iframe URL
   scheme (AmuseLabs, Wordiply) supports requesting a specific historical
   date at all.
-- **DCR's `/PuzzlePage` endpoint itself has no access control or
-  kill-switch that doesn't require a code change and redeploy.** The AB
-  gate (`game-page-experiment`) that originally hid this page in DCR was
-  removed entirely (see git history). Reader-facing access control now
-  lives on the `frontend` side instead, via its existing
-  `PuzzlesHubExperiment`/`puzzles-new-hub` AB test gating which readers
-  ever reach one of these puzzle-page URLs in the first place — DCR itself
-  still has no equivalent gate or kill-switch of its own in front of
-  `/PuzzlePage`. If DCR's endpoint is ever exposed to traffic that bypasses
-  `frontend`'s gating (e.g. hit directly), there is currently nothing
-  stopping it from rendering.
+- **DCR's `/PuzzlePage` endpoint itself still has no route-level access
+  control** (unchanged from before) — `frontend`'s existing
+  `PuzzlesHubExperiment`/`puzzles-new-hub` AB test gate decides whether a
+  reader ever reaches one of these puzzle-page URLs in the first place;
+  DCR's endpoint renders unconditionally for any request with a known
+  `slug`. **What has changed**: DCR now has a real, cumulative,
+  code-change-free kill-switch for individual _feature tiers_ within the
+  rendered page — see "Feature-tier rollout gating (v0/v1/v2)" below. This
+  addresses the previous "no kill-switch" limitation for feature-level
+  rollback; it does not add route-level gating to `/PuzzlePage` itself
+  (that remains `frontend`'s responsibility, unchanged).
 - **The Puzzles Hub (`src/layouts/PuzzlesLayout.tsx` and friends) is a
   separate, unrelated feature** (a directory/listing page) and is not
   documented in this file.
+
+### Feature-tier rollout gating (v0/v1/v2)
+
+The Puzzles & Games rollout uses a 3-tier, **cumulative** AB-test/
+kill-switch structure (`ab-testing/config/abTests.ts`), so any rollout
+phase can be turned on/off — or rolled back to an earlier phase — without
+a DCR code change or redeploy. This is per the product rollout plan (v0 =
+w/c 5 Oct launch, v1 = w/c 12 Oct launch, v2 = no date confirmed yet).
+
+- **`puzzles-new-hub` (v0, the master switch)**: gates the baseline
+  experience — the new Puzzles Hub page, and the 6 V0 puzzle pages (sudoku
+  x4, word-wheel, wordiply) with no archive, no calendar, no progress
+  indicators, no sign-in prompt, no related-content rail, and a hub
+  sub-nav with no links yet. Turning this off hides everything, including
+  every later tier.
+- **`puzzles-new-hub-v1`**: the w/c 12 Oct layer, **on top of v0** — does
+  nothing unless `puzzles-new-hub` is _also_ enabled. Activates: full hub
+  sub-nav links, a sign-in-to-track-progress message, a calendar/archive
+  view for crosswords/logic-puzzles/word-games (not Wordiply), progress
+  indicators, the "More from Puzzles & Games" rail, newsletter signup, and
+  changes to the existing crossword page (print CTA repositioning, "play
+  other puzzles" container).
+- **`puzzles-new-hub-v2`**: a future layer, **on top of v0+v1** — does
+  nothing unless both `puzzles-new-hub` and `puzzles-new-hub-v1` are
+  _also_ enabled. Activates: On the Ball/Film Reveal (Trivia and Quizzes),
+  a "Most played" container, EventKit-driven navigation, migrating
+  existing crossword pages onto the Puzzle Page template, and
+  search-engine mobile app nudges. No launch date confirmed yet; kept at
+  0% until that work begins.
+
+The cumulative design is deliberate: it's impossible to end up with, say,
+v2 features showing while v0 is switched off, since each tier's gate
+function requires every tier below it to also pass. To roll back a single
+phase without a deploy, flip only that tier's `audienceSize`/`status` in
+`abTests.ts` and leave the tier(s) below it untouched (e.g. to roll back
+from v1 to v0, turn off `puzzles-new-hub-v1` only).
+
+The corresponding gate-check helpers live in DCR:
+
+- `isPuzzlesHubEnabled` (`src/lib/puzzlesHubExperiment.ts`) — v0 only.
+- `isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled`
+  (`src/lib/puzzlesHubVersionExperiment.ts`) — cumulative, as described
+  above.
+
+**Current state**: all three tiers sit at `audienceSize: 0/100` — hidden
+from the public entirely, same as before this structure existed. Today,
+only one DCR-rendered feature actually checks a tier gate:
+`PuzzlePageLayout.tsx`'s "More from Puzzles & Games" rail, gated behind
+`isPuzzlesHubV1Enabled` (since that rail is v1-scoped, not v0). Every
+other v0-scoped feature currently in this codebase renders unconditionally
+at the DCR level — v0's "gating" today is really just `frontend`'s
+route-level `PuzzlesHubExperiment` check deciding whether a request
+reaches `/PuzzlePage` at all, not a DCR-side render-time check. When
+future v1/v2 work is implemented (calendar, progress indicators, sign-in
+message, on-the-ball/film-reveal, etc.), it should be gated behind
+`isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled` respectively, using the
+helpers above, the same way the related-content rail already is.
+
+**No `frontend` repo changes are needed for any of this.** `frontend`
+doesn't render Puzzle Page UI itself, so feature-tier gating naturally
+lives entirely on the DCR side. `frontend`'s existing route-level
+`PuzzlesHubExperiment` gate (already reusing `puzzles-new-hub`) is
+unaffected by `puzzles-new-hub-v1`/`puzzles-new-hub-v2` and doesn't need
+to check them — it only ever needed to decide whether a reader reaches
+`/PuzzlePage` at all, which is still governed by v0 alone.
 
 ### SEO risks to revisit before shipping calendar/archive features
 
