@@ -40,6 +40,20 @@ export interface PuzzleConfig {
 	shareEnabled: boolean;
 	printEnabled: boolean;
 	hasArchive: boolean;
+	/**
+	 * A short, curated, human-written meta description for this puzzle,
+	 * used as the page's `<meta name="description">` (and, derived from
+	 * it, its Open Graph/Twitter card description) - see
+	 * `render.puzzlePage.web.tsx`. This exists specifically so every Puzzle
+	 * Page has a clean, distinct description rather than falling back to
+	 * DCR's generic, site-wide description (which risks Google/social
+	 * previews auto-generating a snippet from page content instead - see
+	 * "SEO risks to revisit..." in docs/puzzle-page.md for a concrete
+	 * example of that failure mode elsewhere on the site). Each entry's
+	 * copy is written specifically for that puzzle, not a template with
+	 * only the slug swapped in.
+	 */
+	description: string;
 }
 
 const amuseLabsUrlTemplate =
@@ -48,6 +62,7 @@ const amuseLabsUrlTemplate =
 const amuseLabsPuzzle = (
 	slug: string,
 	puzzleGroup: PuzzleGroup,
+	description: string,
 ): PuzzleConfig => ({
 	slug,
 	puzzleGroup,
@@ -55,6 +70,7 @@ const amuseLabsPuzzle = (
 	shareEnabled: true,
 	printEnabled: true,
 	hasArchive: true,
+	description,
 });
 
 /**
@@ -62,11 +78,31 @@ const amuseLabsPuzzle = (
  * `slug` field (validated at load time by `validatePuzzleConfigs` below).
  */
 export const puzzleConfigs: Record<string, PuzzleConfig> = {
-	'sudoku-easy': amuseLabsPuzzle('sudoku-easy', 'logic-puzzles'),
-	'sudoku-medium': amuseLabsPuzzle('sudoku-medium', 'logic-puzzles'),
-	'sudoku-hard': amuseLabsPuzzle('sudoku-hard', 'logic-puzzles'),
-	'sudoku-killer': amuseLabsPuzzle('sudoku-killer', 'logic-puzzles'),
-	'word-wheel': amuseLabsPuzzle('word-wheel', 'word-games'),
+	'sudoku-easy': amuseLabsPuzzle(
+		'sudoku-easy',
+		'logic-puzzles',
+		'Play easy Sudoku online for free with the Guardian. A gentle, relaxed number puzzle perfect for beginners or a quick warm-up between the harder grids.',
+	),
+	'sudoku-medium': amuseLabsPuzzle(
+		'sudoku-medium',
+		'logic-puzzles',
+		'Play medium Sudoku online for free with the Guardian. A step up from easy, this classic number puzzle offers just enough challenge to keep you thinking.',
+	),
+	'sudoku-hard': amuseLabsPuzzle(
+		'sudoku-hard',
+		'logic-puzzles',
+		'Play hard Sudoku online for free with the Guardian. A tough, testing number puzzle for experienced solvers who want a real workout for their logic.',
+	),
+	'sudoku-killer': amuseLabsPuzzle(
+		'sudoku-killer',
+		'logic-puzzles',
+		'Play Killer Sudoku online for free with the Guardian. This fiendish variant adds coloured cages and hidden sums to the classic grid for a tougher challenge.',
+	),
+	'word-wheel': amuseLabsPuzzle(
+		'word-wheel',
+		'word-games',
+		'Play Word Wheel online for free with the Guardian. Find as many words as you can from nine letters, then try to crack the nine-letter word that uses them all.',
+	),
 	wordiply: {
 		slug: 'wordiply',
 		puzzleGroup: 'word-games',
@@ -77,6 +113,8 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		shareEnabled: true,
 		printEnabled: true,
 		hasArchive: true,
+		description:
+			'Play Wordiply online for free with the Guardian. Build the longest word you can from a short string of letters, then see how your vocabulary stacks up.',
 	},
 };
 
@@ -99,13 +137,15 @@ const isValidPuzzleConfig = (key: string, config: PuzzleConfig): boolean => {
 	if (config.slug !== key) return false;
 	if (!puzzleGroups.includes(config.puzzleGroup)) return false;
 	if (!config.iframe.provider || !config.iframe.urlTemplate) return false;
+	if (!config.description.trim()) return false;
 	return true;
 };
 
 /**
  * Fail fast if the registry itself is malformed (e.g. a mismatched slug key,
- * or a missing/empty `iframe` config). Run once at module load so a bad
- * registry entry surfaces immediately rather than at request time.
+ * a missing/empty `iframe` config, or a missing/empty `description`). Run
+ * once at module load so a bad registry entry surfaces immediately rather
+ * than at request time.
  */
 export const validatePuzzleConfigs = (
 	configs: Record<string, PuzzleConfig>,

@@ -59,6 +59,39 @@ describe('puzzleConfigs registry', () => {
 		).toThrow(TypeError);
 	});
 
+	it('requires every entry to have a non-empty description', () => {
+		expect(
+			Object.values(puzzleConfigs).every(
+				(config) => config.description.trim().length > 0,
+			),
+		).toBe(true);
+	});
+
+	it('requires every entry to have a distinct description (not a templated copy)', () => {
+		const descriptions = Object.values(puzzleConfigs).map(
+			(config) => config.description,
+		);
+		expect(new Set(descriptions).size).toBe(descriptions.length);
+	});
+
+	it('rejects an entry with an empty description', () => {
+		expect(() =>
+			validatePuzzleConfigs({
+				...puzzleConfigs,
+				wordiply: { ...puzzleConfigs.wordiply!, description: '' },
+			}),
+		).toThrow(TypeError);
+	});
+
+	it('rejects an entry with a whitespace-only description', () => {
+		expect(() =>
+			validatePuzzleConfigs({
+				...puzzleConfigs,
+				wordiply: { ...puzzleConfigs.wordiply!, description: '   ' },
+			}),
+		).toThrow(TypeError);
+	});
+
 	describe('getPuzzleConfig', () => {
 		it('returns the config for a known slug', () => {
 			expect(getPuzzleConfig('sudoku-easy')?.puzzleGroup).toBe(
