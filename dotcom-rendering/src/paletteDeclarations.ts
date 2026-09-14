@@ -7969,6 +7969,14 @@ const paletteColours = {
 		light: () => '#F3F7FF',
 		dark: () => sourcePalette.brand[100],
 	},
+	'--newsletter-card-badge-background': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.brand[600],
+	},
+	'--newsletter-card-badge-icon': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
 	'--newsletter-card-description': {
 		light: () => sourcePalette.neutral[20],
 		dark: () => sourcePalette.neutral[86],
@@ -7978,8 +7986,8 @@ const paletteColours = {
 		dark: () => sourcePalette.neutral[46],
 	},
 	'--newsletter-card-frequency-tag': {
-		light: () => sourcePalette.neutral[38],
-		dark: () => sourcePalette.neutral[73],
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--newsletter-card-title': {
 		light: () => sourcePalette.neutral[7],
