@@ -36,6 +36,9 @@ import { enhanceTags } from './enhanceTags';
 const enhanceSupportingContent = (
 	supportingContent: FESupportingContent[],
 	parentFormat: ArticleFormat,
+	serverSideABTests: Record<string, string>,
+	isEditorialABTestingEnabled: boolean,
+	pageId?: string,
 ): DCRSupportingContent[] => {
 	return supportingContent.map((subLink) => {
 		/** Use link format where available and fallback to parent otherwise */
@@ -50,7 +53,12 @@ const enhanceSupportingContent = (
 
 		return {
 			format: linkFormat,
-			headline: subLink.header.headline,
+			headline: decideHeadline(
+				subLink,
+				serverSideABTests,
+				isEditorialABTestingEnabled,
+				pageId,
+			),
 			url: decideUrl(subLink),
 			kickerText:
 				!kickerText && supportingContentIsLive ? 'Live' : kickerText,
@@ -209,7 +217,7 @@ const findActiveEditorialTest = (
  * return the variant headline matching the user test group. Otherwise, return the default headline
  */
 export const decideHeadline = (
-	faciaCard: FEFrontCard,
+	faciaCard: FEFrontCard | FESupportingContent,
 	serverSideABTests: Record<string, string>,
 	isEditorialABTestingEnabled: boolean,
 	pageId?: string,
@@ -535,7 +543,13 @@ export const enhanceCards = (
 				: undefined,
 			kickerText: decideKicker(faciaCard, cardInTagPage, pageId),
 			supportingContent: faciaCard.supportingContent
-				? enhanceSupportingContent(faciaCard.supportingContent, format)
+				? enhanceSupportingContent(
+						faciaCard.supportingContent,
+						format,
+						serverSideABTests,
+						isEditorialABTestingEnabled,
+						pageId,
+					)
 				: undefined,
 			discussionApiUrl,
 			discussionId: faciaCard.discussion.isCommentable
