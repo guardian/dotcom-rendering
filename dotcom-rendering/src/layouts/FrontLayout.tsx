@@ -215,7 +215,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								'--article-section-background',
 							)}
 						>
-							<HeaderAdSlot />
+							<HeaderAdSlot
+								includeMobile={
+									front.config.section === 'crosswords' &&
+									front.config.serverSideABTests[
+										'commercial-mobile-above-nav-test'
+									] === 'variant'
+								}
+							/>
 						</Section>
 					</Stuck>
 				)}
