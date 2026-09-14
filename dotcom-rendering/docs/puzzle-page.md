@@ -149,44 +149,76 @@ iframe-based slug:
 | `instance.puzzleDate`              | `string?` (e.g. `"2026-09-11"`)                        | Which day's puzzle the reader wants to see. Accepted and validated as an optional string only — **not yet wired into any rendering or the iframe URL** (see "Open questions"). Prep work for a future V1 calendar-navigation feature; unrelated to the removed crossword-only `date` display-string field. |
 | `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)      | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                                                                                                                                           |
 
-### User identity passed to the puzzle iframe
+### User/context info passed to the puzzle iframe
 
-`src/components/PuzzleIframe.island.tsx` passes the current signed-in
-reader's identity to the puzzle provider two ways:
+`src/components/PuzzleIframe.island.tsx` passes a combined `PuzzleContext`
+about the current reader to the puzzle provider two ways:
 
-- As a `userId` query parameter on the iframe `src` (e.g.
-  `?set=guardian-sudoku-easy&embed=1&idx=1&userId=<id>`), present from the
-  iframe's very first request.
-- Via `window.postMessage({ type: 'guardian-puzzle-user', userId }, '*')`,
-  sent to the iframe once it has loaded.
+- As a single JSON-encoded `guardian-puzzle-context` query parameter on the
+  iframe `src` (e.g.
+  `?set=guardian-sudoku-easy&embed=1&idx=1&guardian-puzzle-context=%7B%22userId%22%3Anull%2C%22darkMode%22%3Afalse%7D`,
+  which decodes to `{"userId":null,"darkMode":false}`), present from the
+  iframe's very first request. Unlike the parameter's previous `userId`-only
+  form, this is always included — the context shape always carries both
+  fields, so there's no "nothing to add" case to omit it for.
+- Via `window.postMessage({ type: 'guardian-puzzle-context', context }, '*')`
+  (the `PuzzleContextMessage` shape), sent to the iframe once it has loaded.
 
-`userId` is the reader's `idToken.claims.legacy_identity_id` (resolved via
-`src/lib/identity.ts`'s `getAuthStatus()`), the same identifier already used
-to build MyAccount links elsewhere in DCR (`TopBarMyAccount.tsx`) — **not**
-the OIDC `sub` claim some other, newer API integrations in DCR use instead.
-`userId` is omitted (both from the URL and the message) when the reader is
-signed out.
+```ts
+interface PuzzleContext {
+	userId: string | null;
+	darkMode: boolean;
+}
+```
 
-The iframe reloads automatically when the reader's sign-in state changes
-while already on the page (sign in, sign out, or switching accounts): the
-component subscribes to auth state changes via
-`src/lib/identity.ts`'s `subscribeToAuthStateChange()` (a thin wrapper
-around the `@guardian/identity-auth` client's own `authStateManager.subscribe`),
-and since the iframe's `src` is derived directly from the current user ID,
-React gives the `<iframe>` a new `src` value whenever that changes, which
-the browser treats as a fresh navigation — no manual reload call needed. The
-`postMessage` above fires again after every such reload too.
+- **`userId`** is the reader's `idToken.claims.legacy_identity_id` (resolved
+  via `src/lib/identity.ts`'s `getAuthStatus()`), the same identifier
+  already used to build MyAccount links elsewhere in DCR
+  (`TopBarMyAccount.tsx`) — **not** the OIDC `sub` claim some other, newer
+  API integrations in DCR use instead. `null` when the reader is signed out.
+- **`darkMode`** is whether dark mode is currently actually active for this
+  reader — both of the following must be true:
+    1. `darkModeAvailable`, the existing server-side `webx-dark-mode-web` AB
+       test flag for this page/request, already read via `useConfig()` in
+       `PuzzlePage.tsx` and threaded down through `PuzzlePageLayout.tsx` to
+       `PuzzleIframe` the same way it already reaches `rootStyles()` for the
+       page chrome's own dark mode support (see `src/lib/rootStyles.ts`) — no
+       new source of truth was introduced for this.
+    2. The reader's OS/browser actually preferring dark
+       (`prefers-color-scheme: dark`), checked reactively via DCR's existing,
+       generic `src/lib/useMatchMedia.ts` hook (already used elsewhere in DCR,
+       e.g. `ArticleMeta.web.tsx`) — not a new media-query mechanism.
+
+    When `darkModeAvailable` is `false`, `darkMode` is always `false` and the
+    media query isn't even consulted.
+
+The iframe reloads automatically whenever either half of the context
+changes while the reader is already on the page — sign in, sign out,
+switching accounts, or the reader's OS switching light/dark theme: the
+component subscribes to both auth state changes
+(`src/lib/identity.ts`'s `subscribeToAuthStateChange()`, a thin wrapper
+around the `@guardian/identity-auth` client's own
+`authStateManager.subscribe`) and colour-scheme changes (via
+`useMatchMedia`'s own reactivity), and since the iframe's `src` is derived
+directly from the current context, React gives the `<iframe>` a new `src`
+value whenever either changes, which the browser treats as a fresh
+navigation — no manual reload call needed. The `postMessage` above fires
+again after every such reload too.
 
 ## Open questions / known limitations
 
-- **The `PuzzleUserMessage` shape needs confirming with AmuseLabs/Wordiply.**
-  `{ type: 'guardian-puzzle-user', userId: string | undefined }` and the
-  `?userId=<id>` query parameter are DCR's proposal, documented in code
+- **The `PuzzleContextMessage` shape needs confirming with
+  AmuseLabs/Wordiply.**
+  `{ type: 'guardian-puzzle-context', context: { userId: string | null,
+darkMode: boolean } }` and the `?guardian-puzzle-context=<JSON>` query
+  parameter are DCR's proposal, documented in code
   (`src/components/PuzzleIframe.island.tsx`), but neither has been confirmed
   against what AmuseLabs or Wordiply actually expect to receive — including
   whether `legacy_identity_id` (rather than the OIDC `sub` claim) is the
-  right identifier format for them. This needs external coordination before
-  relying on it for anything beyond best-effort personalisation.
+  right identifier format for them, and whether either provider's iframe
+  even supports a dark-mode signal in the first place (see the dark-mode
+  bullet below). This needs external coordination before relying on it for
+  anything beyond best-effort personalisation.
 - **The auth-state-change subscription is a new mechanism in this
   codebase.** `subscribeToAuthStateChange()` uses the underlying
   `@guardian/identity-auth` client's own public `authStateManager.subscribe`
@@ -211,19 +243,20 @@ the browser treats as a fresh navigation — no manual reload call needed. The
   a verified production AmuseLabs archive URL. The correct URL needs to be
   sourced from the team before an archive feature can be built on top of
   `hasArchive`; do not guess or reuse the POC URL as-is.
-- **Dark mode: the page chrome supports it, but the puzzle content is
-  unverified and possibly unstyled.** DCR has genuine, pre-existing dark
-  mode support (`src/lib/rootStyles.ts`, gated behind the
-  `webx-dark-mode-web` server-side AB test flag via `darkModeAvailable`),
-  and Puzzle Page wires this through identically to every other DCR page
-  type (`render.puzzlePage.web.tsx` → `PuzzlePage.tsx` → `rootStyles()`), so
-  the masthead/footer/text/background chrome should follow dark mode
-  correctly when that flag is enabled. However: the actual puzzle content
-  is a third-party iframe (AmuseLabs/Wordiply) that DCR has no control over
-  and no visibility into — whether either provider supports dark mode, and
-  if so how to request it (e.g. a documented URL parameter), is unconfirmed
-  and not wired up here. This has not been visually verified in either
-  light or dark mode.
+- **Dark mode: the page chrome supports it, and a dark-mode signal is now
+  sent to the puzzle iframe, but whether the provider actually honours it is
+  unverified.** DCR has genuine, pre-existing dark mode support
+  (`src/lib/rootStyles.ts`, gated behind the `webx-dark-mode-web`
+  server-side AB test flag via `darkModeAvailable`), and Puzzle Page wires
+  this through identically to every other DCR page type
+  (`render.puzzlePage.web.tsx` → `PuzzlePage.tsx` → `rootStyles()`), so the
+  masthead/footer/text/background chrome should follow dark mode correctly
+  when that flag is enabled. `PuzzleIframe` also now sends `darkMode` (see
+  "User/context info passed to the puzzle iframe" above) via the
+  `guardian-puzzle-context` query parameter and `postMessage` — but whether
+  AmuseLabs or Wordiply actually read or honour that signal at all is
+  unconfirmed (see the `PuzzleContextMessage` open question above). This has
+  not been visually verified in either light or dark mode.
 - **Responsive/mobile layout has not been explicitly verified** for Puzzle
   Page or the puzzle iframes themselves (which are entirely provider-
   controlled content).
