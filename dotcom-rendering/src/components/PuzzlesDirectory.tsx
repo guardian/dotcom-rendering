@@ -162,6 +162,12 @@ const cadenceStyles = css`
 	${textSans12};
 `;
 
+const setterStyles = css`
+	margin-top: ${space[1]}px;
+	color: ${palette.error[400]};
+	${textSans12};
+`;
+
 const cardImageStyles = (isFeatured: boolean) => css`
 	width: 100%;
 	height: 100%;
@@ -245,6 +251,7 @@ const PuzzleCard = ({
 	item: PuzzleItem;
 }) => {
 	const url = getPuzzleUrl(item);
+	const setter = item.type === 'crossword' ? item.setter?.trim() : undefined;
 	const hasImage =
 		item.image !== undefined &&
 		item.image.length > 0 &&
@@ -258,10 +265,12 @@ const PuzzleCard = ({
 				{item.cadence !== undefined && item.cadence.length > 0 && (
 					<span css={cadenceStyles}>{item.cadence}</span>
 				)}
+				{setter && <span css={setterStyles}>By: {setter}</span>}
 			</div>
 			{hasImage && (
 				<img
-					alt=""
+					alt={item.imageAlt?.trim() || `${item.title} illustration`}
+					aria-hidden="true"
 					css={cardImageStyles(isFeatured)}
 					src={item.image}
 				/>

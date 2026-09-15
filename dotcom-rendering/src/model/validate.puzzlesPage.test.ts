@@ -38,6 +38,26 @@ const validPage = () => ({
 });
 
 describe('validateAsPuzzlesPageType', () => {
+	it('accepts artwork descriptions and crossword setter names', () => {
+		const page = validPage();
+		Object.assign(page.layout.containers[0]!.content.items[0]![0]!, {
+			imageAlt: 'Word wheel illustration',
+			setter: 'Example setter',
+		});
+		expect(validateAsPuzzlesPageType(page)).toBeDefined();
+	});
+
+	it.each(['imageAlt', 'setter'])(
+		'rejects non-string %s metadata',
+		(field) => {
+			const page = validPage();
+			Object.assign(page.layout.containers[0]!.content.items[0]![0]!, {
+				[field]: 123,
+			});
+			expect(() => validateAsPuzzlesPageType(page)).toThrow();
+		},
+	);
+
 	it.each(['inline1', 'mostpop'])(
 		'rejects repeated %s slot names',
 		(adSlot) => {

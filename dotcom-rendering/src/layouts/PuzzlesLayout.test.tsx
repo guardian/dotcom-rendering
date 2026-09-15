@@ -98,6 +98,10 @@ describe('PuzzlesLayout', () => {
 			'src',
 			'https://i.guim.co.uk/img/uploads/2026/09/15/header-mobile-360px.png?width=440&dpr=2&s=none',
 		);
-		expect(picture.querySelector('img')).toHaveAttribute('alt', '');
+		expect(picture.querySelector('img')).toHaveAttribute(
+			'alt',
+			'An owl carrying a crossword grid beside an octopus reading a puzzle',
+		);
+		expect(picture.querySelector('img')).not.toHaveAttribute('aria-hidden');
 	});
 });

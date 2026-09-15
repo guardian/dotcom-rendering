@@ -33,6 +33,119 @@ const section = (
 });
 
 describe('PuzzlesDirectory', () => {
+	it('describes card artwork without adding it to screen-reader link names', () => {
+		const { container } = render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							content: {
+								items: [
+									[
+										item({
+											image: '/word-wheel.png',
+											imageAlt: 'Word wheel illustration',
+											url: '/puzzles-and-games/word-wheel',
+										}),
+									],
+								],
+								nestedContainers: [],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+		const image = container.querySelector('img');
+		expect(image).toHaveAttribute('alt', 'Word wheel illustration');
+		expect(image).toHaveAttribute('aria-hidden', 'true');
+		expect(screen.queryByRole('img')).not.toBeInTheDocument();
+		expect(
+			screen.getByRole('link', { name: 'Daily puzzle Daily' }),
+		).toBeInTheDocument();
+	});
+
+	it('provides fallback alt text and keeps compact cards text-only', () => {
+		const { container } = render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							content: {
+								items: [
+									[item({ image: '/puzzle.png' })],
+									[
+										item({
+											id: 'compact',
+											cardVariant: 'compact',
+											image: '/compact.png',
+										}),
+									],
+								],
+								nestedContainers: [],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+		expect(container.querySelectorAll('img')).toHaveLength(1);
+		expect(container.querySelector('img')).toHaveAttribute(
+			'alt',
+			'Daily puzzle illustration',
+		);
+	});
+
+	it('shows setters on crossword cards across variants but not on other puzzles', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							variant: 'featured',
+							content: {
+								items: [
+									...(
+										['large', 'primary', 'compact'] as const
+									).map((cardVariant) => [
+										item({
+											id: cardVariant,
+											type: 'crossword',
+											cardVariant,
+											setter: '  Example setter  ',
+										}),
+									]),
+									[
+										item({
+											id: 'word-wheel',
+											setter: 'Ignored setter',
+										}),
+									],
+									[
+										item({
+											id: 'blank-setter',
+											type: 'crossword',
+											setter: '  ',
+										}),
+									],
+								],
+								nestedContainers: [],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+		expect(screen.getAllByText('By: Example setter')).toHaveLength(3);
+		expect(
+			screen.queryByText('By: Ignored setter'),
+		).not.toBeInTheDocument();
+		expect(screen.queryByText('By:')).not.toBeInTheDocument();
+		expect(screen.queryByText('Played')).not.toBeInTheDocument();
+	});
 	it('renders unique desktop and mobile IDs for multiple blueprint slots', () => {
 		const layout: PuzzlesLayoutType = {
 			containers: ['inline1', 'inline2'].map((adSlot) =>

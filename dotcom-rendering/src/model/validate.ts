@@ -193,6 +193,8 @@ const isPuzzleItem = (data: unknown): data is PuzzleItem =>
 		(isString(data.cadence) && data.cadence.trim().length > 0)) &&
 	(data.url === undefined || isString(data.url)) &&
 	(data.image === undefined || isString(data.image)) &&
+	(data.imageAlt === undefined || isString(data.imageAlt)) &&
+	(data.setter === undefined || isString(data.setter)) &&
 	(data.slug === undefined || isString(data.slug)) &&
 	(data.index === undefined || Number.isInteger(data.index)) &&
 	(data.variant === undefined || isString(data.variant)) &&

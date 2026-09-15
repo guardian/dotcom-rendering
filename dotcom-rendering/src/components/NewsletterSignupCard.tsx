@@ -4,7 +4,7 @@ import {
 	headlineMedium20,
 	space,
 	textSans14,
-	textSansBold15,
+	textSans15,
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
@@ -14,6 +14,8 @@ export type NewsletterSignupCardProps = {
 	frequency: string;
 	description: string;
 	illustrationSquare?: string;
+	illustrationAlt?: string;
+	hideIllustrationFromScreenReaders?: boolean;
 	children?: React.ReactNode;
 	isSignedIn?: boolean | 'Pending';
 	isModal?: boolean;
@@ -22,7 +24,7 @@ export type NewsletterSignupCardProps = {
 const containerStyles = css`
 	clear: left;
 	background-color: ${themePalette('--newsletter-card-background')};
-	padding: ${space[2]}px ${space[3]}px ${space[4]}px ${space[3]}px;
+	padding: ${space[3]}px ${space[3]}px ${space[4]}px ${space[3]}px;
 `;
 
 const dividerStyles = css`
@@ -55,63 +57,33 @@ const titleStyles = css`
 const frequencyTagStyles = css`
 	display: flex;
 	align-items: center;
-	gap: 6px;
 	color: ${themePalette('--newsletter-card-frequency-tag')};
-	${textSansBold15};
-	margin-bottom: ${space[2]}px;
-`;
-
-const frequencyTextStyles = css`
-	display: flex;
-	flex-wrap: wrap;
-	column-gap: ${space[1]}px;
-`;
-
-const frequencyLabelStyles = css`
-	white-space: nowrap;
-`;
-
-const badgeStyles = css`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-shrink: 0;
-	width: 24px;
-	height: 24px;
-	border-radius: 50%;
-	background-color: ${themePalette('--newsletter-card-badge-background')};
+	${textSans15};
+	margin-left: -1px;
+	margin-top: -1px;
+	margin-bottom: ${space[1]}px;
 
 	svg {
-		fill: ${themePalette('--newsletter-card-badge-icon')};
-		height: 18px;
-		width: 18px;
+		fill: currentColor;
+		height: 20px;
+		width: 20px;
 	}
-`;
-
-const innerDividerStyles = css`
-	border: none;
-	border-top: 1px solid ${themePalette('--newsletter-card-divider')};
-	margin: 0 -${space[3]}px ${space[2]}px;
 `;
 
 const descriptionStyles = css`
 	${textSans14};
 	line-height: 1.15;
+	margin-bottom: ${space[2]}px;
 	clear: both;
 	color: ${themePalette('--newsletter-card-description')};
 `;
 
 const illustrationStyles = css`
 	flex-shrink: 0;
-	width: 70px;
-	height: 70px;
+	width: 90px;
+	height: 90px;
 	border-radius: 50%;
 	object-fit: cover;
-
-	${from.mobileMedium} {
-		width: 90px;
-		height: 90px;
-	}
 
 	${from.tablet} {
 		width: 100px;
@@ -122,35 +94,30 @@ const illustrationStyles = css`
 const NewsletterSignupHeader = (
 	props: Omit<NewsletterSignupCardProps, 'children'>,
 ) => (
-	<>
-		<div css={frequencyTagStyles}>
-			<span css={badgeStyles}>
+	<div css={headerStyles}>
+		<div css={titleAndMetaStyles}>
+			<div css={frequencyTagStyles}>
 				<SvgNewsletterFilled />
-			</span>
-			<span css={frequencyTextStyles}>
-				<span css={frequencyLabelStyles}>Free newsletter |</span>
-				<span css={frequencyLabelStyles}>{props.frequency}</span>
-			</span>
-		</div>
-		<hr css={innerDividerStyles} />
-		<div css={headerStyles}>
-			<div css={titleAndMetaStyles}>
-				<p css={titleStyles}>
-					Sign up to <span>{props.name}</span>
-				</p>
-				<p css={descriptionStyles}>{props.description}</p>
+				Free newsletter | {props.frequency}
 			</div>
-			{!!props.illustrationSquare && (
-				<img
-					css={illustrationStyles}
-					src={props.illustrationSquare}
-					alt=""
-					loading="lazy"
-					decoding="async"
-				/>
-			)}
+			<p css={titleStyles}>
+				Sign up to <span>{props.name}</span>
+			</p>
+			<p css={descriptionStyles}>{props.description}</p>
 		</div>
-	</>
+		{!!props.illustrationSquare && (
+			<img
+				css={illustrationStyles}
+				src={props.illustrationSquare}
+				alt={props.illustrationAlt ?? ''}
+				aria-hidden={
+					props.hideIllustrationFromScreenReaders || undefined
+				}
+				loading="lazy"
+				decoding="async"
+			/>
+		)}
+	</div>
 );
 
 export const NewsletterSignupCard = ({
@@ -158,6 +125,8 @@ export const NewsletterSignupCard = ({
 	frequency,
 	description,
 	illustrationSquare,
+	illustrationAlt,
+	hideIllustrationFromScreenReaders,
 	children,
 	isSignedIn,
 	isModal = false,
@@ -169,6 +138,10 @@ export const NewsletterSignupCard = ({
 				name={name}
 				description={description}
 				illustrationSquare={illustrationSquare}
+				illustrationAlt={illustrationAlt}
+				hideIllustrationFromScreenReaders={
+					hideIllustrationFromScreenReaders
+				}
 				isSignedIn={isSignedIn}
 			/>
 			{children}

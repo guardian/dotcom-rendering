@@ -295,6 +295,8 @@ export const PuzzlesSupporting = ({
 								illustrationSquare={
 									newsletter.illustrationSquare
 								}
+								illustrationAlt={`${newsletter.name} newsletter illustration`}
+								hideIllustrationFromScreenReaders={true}
 								isModal={true}
 								name={newsletter.name}
 							>

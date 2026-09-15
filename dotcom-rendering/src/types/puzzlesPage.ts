@@ -14,6 +14,8 @@ export type PuzzleItem = {
 	cadence?: string;
 	url?: string;
 	image?: string;
+	imageAlt?: string;
+	setter?: string;
 	slug?: string;
 	index?: number;
 	variant?: string;
