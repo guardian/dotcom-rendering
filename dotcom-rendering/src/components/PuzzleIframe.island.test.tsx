@@ -1,6 +1,7 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import { useMatchMedia } from '../lib/useMatchMedia';
+import { puzzleConfigs } from '../model/puzzles/puzzleConfigs';
 import {
 	buildPuzzleIframeSrc,
 	type PuzzleContext,
@@ -35,79 +36,65 @@ const signedOut = () => ({ kind: 'SignedOut' as const });
 const contextParam = (context: PuzzleContext) =>
 	`guardian-puzzle-context=${encodeURIComponent(JSON.stringify(context))}`;
 
+const sudokuEasyConfig = puzzleConfigs['sudoku-easy']!;
+const wordiplyConfig = puzzleConfigs.wordiply!;
+
 describe('buildPuzzleIframeSrc', () => {
-	it('appends the context as a JSON query param when the src has none', () => {
+	it('resolves the provider URL then appends guardian-puzzle-context on top', () => {
 		const context: PuzzleContext = {
 			userId: null,
 			darkMode: false,
 			puzzleDate: null,
 		};
-		expect(
-			buildPuzzleIframeSrc('https://example.com/puzzle', context),
-		).toBe(`https://example.com/puzzle?${contextParam(context)}`);
+		expect(buildPuzzleIframeSrc(sudokuEasyConfig, context)).toBe(
+			`https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-easy&embed=1&idx=1&darkMode=0&${contextParam(context)}`,
+		);
 	});
 
-	it('preserves existing query params when appending the context', () => {
+	it('preserves the provider-resolved uid/darkMode params when appending guardian-puzzle-context', () => {
 		const context: PuzzleContext = {
 			userId: 'abc123',
 			darkMode: true,
 			puzzleDate: '2026-09-15',
 		};
-		expect(
-			buildPuzzleIframeSrc(
-				'https://example.com/puzzle?set=guardian-sudoku-easy&embed=1',
-				context,
-			),
-		).toBe(
-			`https://example.com/puzzle?set=guardian-sudoku-easy&embed=1&${contextParam(context)}&uid=abc123`,
+		const src = buildPuzzleIframeSrc(sudokuEasyConfig, context);
+		const url = new URL(src);
+
+		expect(url.searchParams.get('uid')).toBe('abc123');
+		expect(url.searchParams.get('darkMode')).toBe('1');
+		expect(url.searchParams.get('guardian-puzzle-context')).toBe(
+			JSON.stringify(context),
 		);
 	});
 
-	it('always includes the context, even when signed out and dark mode is off', () => {
+	it('always includes guardian-puzzle-context, even when signed out and dark mode is off', () => {
 		const context: PuzzleContext = {
 			userId: null,
 			darkMode: false,
 			puzzleDate: null,
 		};
-		expect(
-			buildPuzzleIframeSrc('https://example.com/puzzle', context),
-		).toContain('guardian-puzzle-context=');
+		expect(buildPuzzleIframeSrc(sudokuEasyConfig, context)).toContain(
+			'guardian-puzzle-context=',
+		);
 	});
 
-	it('returns the src unchanged if it cannot be parsed as an absolute URL', () => {
-		expect(
-			buildPuzzleIframeSrc('not-a-url', {
-				userId: null,
-				darkMode: false,
-				puzzleDate: null,
-			}),
-		).toBe('not-a-url');
-	});
-
-	it('appends uid alongside guardian-puzzle-context when the reader is signed in', () => {
+	it('applies guardian-puzzle-context uniformly to a non-AmuseLabs provider too (wordiply)', () => {
 		const context: PuzzleContext = {
-			userId: 'user-123',
-			darkMode: false,
+			userId: 'abc123',
+			darkMode: true,
 			puzzleDate: null,
 		};
-		const src = buildPuzzleIframeSrc('https://example.com/puzzle', context);
+		const src = buildPuzzleIframeSrc(wordiplyConfig, context);
 		const url = new URL(src);
 
-		expect(url.searchParams.get('uid')).toBe('user-123');
-		expect(url.searchParams.has('guardian-puzzle-context')).toBe(true);
-	});
-
-	it('omits uid entirely when the reader is signed out (not uid=null or empty)', () => {
-		const context: PuzzleContext = {
-			userId: null,
-			darkMode: false,
-			puzzleDate: null,
-		};
-		const src = buildPuzzleIframeSrc('https://example.com/puzzle', context);
-		const url = new URL(src);
-
+		expect(url.origin + url.pathname).toBe('https://www.wordiply.com/');
+		expect(url.searchParams.get('guardian-puzzle-context')).toBe(
+			JSON.stringify(context),
+		);
+		// Wordiply has no confirmed uid/darkMode query param support, so
+		// neither is provider-added, only DCR's own generic context blob is.
 		expect(url.searchParams.has('uid')).toBe(false);
-		expect(url.searchParams.has('guardian-puzzle-context')).toBe(true);
+		expect(url.searchParams.has('darkMode')).toBe(false);
 	});
 });
 
@@ -131,12 +118,15 @@ describe('PuzzleIframe', () => {
 	const getUidFromSrc = (src: string): string | null =>
 		new URL(src).searchParams.get('uid');
 
+	const getDarkModeParamFromSrc = (src: string): string | null =>
+		new URL(src).searchParams.get('darkMode');
+
 	it('renders userId: null and darkMode: false while signed out with dark mode unavailable', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedOut());
 
 		render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={false}
 				puzzleDate={null}
@@ -158,7 +148,7 @@ describe('PuzzleIframe', () => {
 
 		render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={false}
 				puzzleDate={null}
@@ -181,7 +171,7 @@ describe('PuzzleIframe', () => {
 
 		render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={false}
 				puzzleDate={null}
@@ -200,7 +190,7 @@ describe('PuzzleIframe', () => {
 
 		render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={true}
 				puzzleDate={null}
@@ -219,7 +209,7 @@ describe('PuzzleIframe', () => {
 
 		const { rerender } = render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={true}
 				puzzleDate={null}
@@ -239,7 +229,7 @@ describe('PuzzleIframe', () => {
 		mockedUseMatchMedia.mockReturnValue(true);
 		rerender(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={true}
 				puzzleDate={null}
@@ -257,7 +247,7 @@ describe('PuzzleIframe', () => {
 
 		render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={true}
 				puzzleDate={null}
@@ -293,7 +283,7 @@ describe('PuzzleIframe', () => {
 
 		render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={false}
 				puzzleDate={null}
@@ -324,7 +314,7 @@ describe('PuzzleIframe', () => {
 
 		const { unmount } = render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={false}
 				puzzleDate={null}
@@ -342,7 +332,7 @@ describe('PuzzleIframe', () => {
 
 		render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={false}
 				puzzleDate="2026-09-15"
@@ -360,7 +350,7 @@ describe('PuzzleIframe', () => {
 
 		render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={false}
 				puzzleDate={null}
@@ -373,31 +363,33 @@ describe('PuzzleIframe', () => {
 		);
 	});
 
-	it('includes uid alongside guardian-puzzle-context once signed in', async () => {
+	it('includes uid and darkMode=1 (AmuseLabs-specific) alongside guardian-puzzle-context once signed in with dark mode on', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedIn('user-123'));
+		mockedUseMatchMedia.mockReturnValue(true);
 
 		render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
-				darkModeAvailable={false}
+				darkModeAvailable={true}
 				puzzleDate={null}
 			/>,
 		);
 
 		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
 		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBe('user-123'));
+		expect(getDarkModeParamFromSrc(iframe.src)).toBe('1');
 		expect(
 			new URL(iframe.src).searchParams.has('guardian-puzzle-context'),
 		).toBe(true);
 	});
 
-	it('omits uid entirely while signed out (not uid=null or empty)', async () => {
+	it('omits uid entirely while signed out, but still sends darkMode=0 (AmuseLabs-specific)', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedOut());
 
 		render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={false}
 				puzzleDate={null}
@@ -409,6 +401,7 @@ describe('PuzzleIframe', () => {
 			expect(getContextFromSrc(iframe.src).userId).toBeNull(),
 		);
 		expect(new URL(iframe.src).searchParams.has('uid')).toBe(false);
+		expect(getDarkModeParamFromSrc(iframe.src)).toBe('0');
 		expect(
 			new URL(iframe.src).searchParams.has('guardian-puzzle-context'),
 		).toBe(true);
@@ -419,7 +412,7 @@ describe('PuzzleIframe', () => {
 
 		render(
 			<PuzzleIframe
-				src="https://example.com/puzzle"
+				puzzleConfig={sudokuEasyConfig}
 				title="Puzzle"
 				darkModeAvailable={false}
 				puzzleDate={null}
@@ -437,5 +430,29 @@ describe('PuzzleIframe', () => {
 		});
 
 		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBeNull());
+	});
+
+	it('does not add uid/darkMode query params for a non-AmuseLabs provider (wordiply)', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('user-123'));
+		mockedUseMatchMedia.mockReturnValue(true);
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={wordiplyConfig}
+				title="Puzzle"
+				darkModeAvailable={true}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(
+				new URL(iframe.src).searchParams.has('guardian-puzzle-context'),
+			).toBe(true),
+		);
+		expect(new URL(iframe.src).searchParams.has('uid')).toBe(false);
+		expect(new URL(iframe.src).searchParams.has('darkMode')).toBe(false);
+		expect(iframe.src.startsWith('https://www.wordiply.com/')).toBe(true);
 	});
 });
