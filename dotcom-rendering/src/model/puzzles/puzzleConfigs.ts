@@ -16,10 +16,12 @@ import { formatPuzzleDateShort } from '../../lib/puzzleDate';
  * (on-the-ball, film-reveal) were removed for V0 and may return later once
  * the team is ready to support them.
  *
- * This registry is deliberately data-driven: all AmuseLabs-hosted puzzles
- * (the sudoku variants, and word-wheel) share the exact same iframe URL
- * template and differ only by the `{slug}` substitution, so they are
- * modelled as data rather than near-duplicate code paths.
+ * Every entry's `iframe.url` is a complete, explicit, hardcoded URL string,
+ * there is deliberately no shared URL template or `{slug}`-style
+ * substitution mechanism here (there used to be one; see the "why no
+ * template" note on `PuzzleIframeConfig.url` below for why it was
+ * removed). Even though most AmuseLabs-hosted entries happen to share the
+ * same URL *shape*, each is still written out independently in full.
  */
 
 export const puzzleGroups = ['logic-puzzles', 'word-games'] as const;
@@ -29,10 +31,27 @@ export type PuzzleGroup = (typeof puzzleGroups)[number];
 export interface PuzzleIframeConfig {
 	provider: string;
 	/**
-	 * The iframe src URL. May contain a `{slug}` placeholder token, which is
-	 * substituted with the puzzle's `slug` at render time.
+	 * The complete, final iframe src URL for this specific puzzle, written
+	 * out explicitly and independently, e.g.
+	 * `https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-easy&embed=1&idx=1`.
+	 *
+	 * Why no shared URL template: this registry used to build every
+	 * AmuseLabs-hosted entry's URL from one shared template, substituting
+	 * DCR's own `slug` in for AmuseLabs' `set=guardian-{slug}` query param.
+	 * That was an unsafe assumption, nothing guarantees a provider's own
+	 * naming convention matches our internal slug, and it already silently
+	 * didn't for killer sudoku (AmuseLabs' real, confirmed set for it is
+	 * `killer-sudoku-medium`, not `sudoku-killer`, a different word order,
+	 * plus an unexplained "-medium" suffix that is genuinely part of the
+	 * real, working identifier, not a mistake to "fix"). Rather than patch
+	 * that one instance, every entry now specifies its own complete,
+	 * independent URL, confirmed against the actual provider (or, here,
+	 * the native Android/iOS apps' own real, working AmuseLabs
+	 * integration), so a future change to one entry can never silently or
+	 * accidentally affect another, and there is no shared assumption left
+	 * to be wrong about. See docs/puzzle-page.md.
 	 */
-	urlTemplate: string;
+	url: string;
 }
 
 export interface PuzzleConfig {
@@ -86,18 +105,16 @@ export interface PuzzleConfig {
 	image?: string;
 }
 
-const amuseLabsUrlTemplate =
-	'https://tg.amuselabs.com/guardian/date-picker?set=guardian-{slug}&embed=1&idx=1';
-
 const amuseLabsPuzzle = (
 	slug: string,
 	puzzleGroup: PuzzleGroup,
 	title: string,
 	description: string,
+	url: string,
 ): PuzzleConfig => ({
 	slug,
 	puzzleGroup,
-	iframe: { provider: 'amuselabs', urlTemplate: amuseLabsUrlTemplate },
+	iframe: { provider: 'amuselabs', url },
 	shareEnabled: true,
 	printEnabled: true,
 	hasArchive: true,
@@ -118,6 +135,12 @@ const amuseLabsPuzzle = (
  * a `<meta name="keywords">` tag (major search engines ignore that tag
  * entirely, so it provides no real SEO benefit today, see
  * docs/puzzle-page.md).
+ *
+ * Every entry's `iframe.url` is its own complete, independently-written
+ * URL, confirmed against the native (Android/iOS) apps' own real, working
+ * AmuseLabs integration (`remote_config_defaults.xml`/
+ * `PuzzleGameViewModel.kt`). Do not derive any of these from `slug` or
+ * from each other, see `PuzzleIframeConfig.url`'s doc comment for why.
  */
 export const puzzleConfigs: Record<string, PuzzleConfig> = {
 	// Target search terms (reference only, not implemented as a meta tag):
@@ -127,6 +150,7 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'logic-puzzles',
 		'Easy sudoku {date} - logic puzzle | The Guardian',
 		'Easy sudoku {date}. Ease yourself in with this easy sudoku. Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
+		'https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-easy&embed=1&idx=1',
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// medium sudoku
@@ -135,6 +159,7 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'logic-puzzles',
 		'Medium sudoku {date} - logic puzzle | The Guardian',
 		'Medium sudoku {date}. Ready to master the medium sudoku? Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
+		'https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-medium&embed=1&idx=1',
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// hard sudoku
@@ -143,14 +168,24 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'logic-puzzles',
 		'Hard sudoku {date} - logic puzzle | The Guardian',
 		'Hard sudoku {date}. Ready to take on the hard sudoku? Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
+		'https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-hard&embed=1&idx=1',
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// killer sudoku
+	//
+	// This URL's `set=guardian-killer-sudoku-medium` is NOT
+	// `set=guardian-sudoku-killer` (this DCR slug, template-derived). It is
+	// confirmed from the native (Android/iOS) apps' real, working AmuseLabs
+	// integration: a different word order, plus an unexplained "-medium"
+	// suffix that is genuinely part of the real identifier, not a mistake.
+	// This was previously a live bug (built from a shared, slug-derived URL
+	// template), see docs/puzzle-page.md.
 	'sudoku-killer': amuseLabsPuzzle(
 		'sudoku-killer',
 		'logic-puzzles',
 		'Killer sudoku {date} - logic puzzle | The Guardian',
 		'Killer sudoku {date}. Killer sudoku adds a twist. Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
+		'https://tg.amuselabs.com/guardian/date-picker?set=guardian-killer-sudoku-medium&embed=1&idx=1',
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// daily word wheel, word wheel puzzle, word wheel online, word wheel
@@ -161,6 +196,7 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'word-games',
 		'Word wheel {date} - word game | The Guardian',
 		'Word wheel {date}. See how many words you can make out of the nine-letter daily word wheel, including the panagram.',
+		'https://tg.amuselabs.com/guardian/date-picker?set=guardian-word-wheel&embed=1&idx=1',
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// guardian wordiply, wordiply today
@@ -169,7 +205,7 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		puzzleGroup: 'word-games',
 		iframe: {
 			provider: 'wordiply',
-			urlTemplate: 'https://www.wordiply.com/',
+			url: 'https://www.wordiply.com/',
 		},
 		shareEnabled: true,
 		printEnabled: true,
@@ -189,11 +225,14 @@ export const getPuzzleConfig = (slug: string): PuzzleConfig | undefined =>
 	puzzleConfigs[slug];
 
 /**
- * Resolve the final iframe src URL for a puzzle, expanding the `{slug}`
- * placeholder token in `PuzzleIframeConfig.urlTemplate`.
+ * Resolve the iframe src URL for a puzzle. There is nothing to substitute
+ * any more, every entry's `iframe.url` is already its own complete, final
+ * URL, this exists purely so callers have one stable access point rather
+ * than reaching into `config.iframe.url` directly, matching the shape of
+ * the other `resolvePuzzle*` helpers below.
  */
 export const resolveIframeUrl = (config: PuzzleConfig): string =>
-	config.iframe.urlTemplate.replaceAll('{slug}', config.slug);
+	config.iframe.url;
 
 /**
  * Substitutes `{date}` in a `title`/`description` template with the given
@@ -234,10 +273,22 @@ export const resolvePuzzleDescription = (
 	puzzleDate: string | undefined,
 ): string => resolveDateTemplate(config.description, puzzleDate);
 
+const isAbsoluteUrl = (value: string): boolean => {
+	try {
+		new URL(value);
+		return true;
+	} catch {
+		return false;
+	}
+};
+
 const isValidPuzzleConfig = (key: string, config: PuzzleConfig): boolean => {
 	if (config.slug !== key) return false;
 	if (!puzzleGroups.includes(config.puzzleGroup)) return false;
-	if (!config.iframe.provider || !config.iframe.urlTemplate) return false;
+	if (!config.iframe.provider) return false;
+	if (!config.iframe.url.trim() || !isAbsoluteUrl(config.iframe.url)) {
+		return false;
+	}
 	if (!config.title.trim()) return false;
 	if (!config.description.trim()) return false;
 	if (config.image !== undefined && !config.image.trim()) return false;
@@ -246,9 +297,10 @@ const isValidPuzzleConfig = (key: string, config: PuzzleConfig): boolean => {
 
 /**
  * Fail fast if the registry itself is malformed (e.g. a mismatched slug key,
- * a missing/empty `iframe` config, a missing/empty `title`/`description`,
- * or a present-but-empty `image`). Run once at module load so a bad
- * registry entry surfaces immediately rather than at request time.
+ * a missing `iframe.provider`, a missing/empty/non-absolute `iframe.url`, a
+ * missing/empty `title`/`description`, or a present-but-empty `image`). Run
+ * once at module load so a bad registry entry surfaces immediately rather
+ * than at request time.
  */
 export const validatePuzzleConfigs = (
 	configs: Record<string, PuzzleConfig>,

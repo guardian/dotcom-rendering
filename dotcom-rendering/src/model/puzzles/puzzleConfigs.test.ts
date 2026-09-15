@@ -46,7 +46,7 @@ describe('puzzleConfigs registry', () => {
 		).toThrow(TypeError);
 	});
 
-	it('rejects an entry with an empty iframe urlTemplate', () => {
+	it('rejects an entry with an empty iframe url', () => {
 		expect(() =>
 			validatePuzzleConfigs({
 				...puzzleConfigs,
@@ -54,7 +54,37 @@ describe('puzzleConfigs registry', () => {
 					...puzzleConfigs.wordiply!,
 					iframe: {
 						...puzzleConfigs.wordiply!.iframe,
-						urlTemplate: '',
+						url: '',
+					},
+				},
+			}),
+		).toThrow(TypeError);
+	});
+
+	it('rejects an entry with a non-absolute iframe url', () => {
+		expect(() =>
+			validatePuzzleConfigs({
+				...puzzleConfigs,
+				wordiply: {
+					...puzzleConfigs.wordiply!,
+					iframe: {
+						...puzzleConfigs.wordiply!.iframe,
+						url: '/not-absolute',
+					},
+				},
+			}),
+		).toThrow(TypeError);
+	});
+
+	it('rejects an entry with a missing iframe provider', () => {
+		expect(() =>
+			validatePuzzleConfigs({
+				...puzzleConfigs,
+				wordiply: {
+					...puzzleConfigs.wordiply!,
+					iframe: {
+						...puzzleConfigs.wordiply!.iframe,
+						provider: '',
 					},
 				},
 			}),
@@ -178,13 +208,45 @@ describe('puzzleConfigs registry', () => {
 	});
 
 	describe('resolveIframeUrl', () => {
-		it('substitutes the slug into the AmuseLabs URL template', () => {
+		// Each of these hardcodes and checks a single entry's own, complete,
+		// expected real URL independently, this is deliberately what would
+		// have caught the original killer-sudoku bug (a shared, slug-derived
+		// URL template silently produced the wrong AmuseLabs "set" for it),
+		// rather than testing a substitution mechanism in the abstract.
+		it('resolves sudoku-easy to its exact, confirmed AmuseLabs URL', () => {
 			expect(resolveIframeUrl(puzzleConfigs['sudoku-easy']!)).toBe(
 				'https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-easy&embed=1&idx=1',
 			);
 		});
 
-		it('returns the bespoke provider URL unchanged when it has no placeholder', () => {
+		it('resolves sudoku-medium to its exact, confirmed AmuseLabs URL', () => {
+			expect(resolveIframeUrl(puzzleConfigs['sudoku-medium']!)).toBe(
+				'https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-medium&embed=1&idx=1',
+			);
+		});
+
+		it('resolves sudoku-hard to its exact, confirmed AmuseLabs URL', () => {
+			expect(resolveIframeUrl(puzzleConfigs['sudoku-hard']!)).toBe(
+				'https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-hard&embed=1&idx=1',
+			);
+		});
+
+		it('resolves sudoku-killer to its exact, confirmed AmuseLabs URL (killer-sudoku-medium, not sudoku-killer)', () => {
+			expect(resolveIframeUrl(puzzleConfigs['sudoku-killer']!)).toBe(
+				'https://tg.amuselabs.com/guardian/date-picker?set=guardian-killer-sudoku-medium&embed=1&idx=1',
+			);
+			expect(
+				resolveIframeUrl(puzzleConfigs['sudoku-killer']!),
+			).not.toContain('guardian-sudoku-killer');
+		});
+
+		it('resolves word-wheel to its exact, confirmed AmuseLabs URL', () => {
+			expect(resolveIframeUrl(puzzleConfigs['word-wheel']!)).toBe(
+				'https://tg.amuselabs.com/guardian/date-picker?set=guardian-word-wheel&embed=1&idx=1',
+			);
+		});
+
+		it('resolves wordiply to its exact, own explicit (non-AmuseLabs) URL', () => {
 			expect(resolveIframeUrl(puzzleConfigs.wordiply!)).toBe(
 				'https://www.wordiply.com/',
 			);
