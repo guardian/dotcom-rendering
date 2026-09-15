@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineBold20,
 	headlineBold24,
 	palette,
 	space,
@@ -84,7 +85,7 @@ const usefulLinkStyles = css`
 	border-right: 1px solid ${borderColour};
 	color: ${palette.neutral[7]};
 	text-decoration: none;
-	${textSansBold14};
+	${headlineBold20};
 
 	:hover {
 		text-decoration: underline;
