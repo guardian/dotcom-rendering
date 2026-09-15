@@ -2,7 +2,7 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import {
-	buildPuzzleIframeSrcWithContext,
+	buildPuzzleIframeSrc,
 	type PuzzleContext,
 	PuzzleIframe,
 } from './PuzzleIframe.island';
@@ -35,7 +35,7 @@ const signedOut = () => ({ kind: 'SignedOut' as const });
 const contextParam = (context: PuzzleContext) =>
 	`guardian-puzzle-context=${encodeURIComponent(JSON.stringify(context))}`;
 
-describe('buildPuzzleIframeSrcWithContext', () => {
+describe('buildPuzzleIframeSrc', () => {
 	it('appends the context as a JSON query param when the src has none', () => {
 		const context: PuzzleContext = {
 			userId: null,
@@ -43,10 +43,7 @@ describe('buildPuzzleIframeSrcWithContext', () => {
 			puzzleDate: null,
 		};
 		expect(
-			buildPuzzleIframeSrcWithContext(
-				'https://example.com/puzzle',
-				context,
-			),
+			buildPuzzleIframeSrc('https://example.com/puzzle', context),
 		).toBe(`https://example.com/puzzle?${contextParam(context)}`);
 	});
 
@@ -57,12 +54,12 @@ describe('buildPuzzleIframeSrcWithContext', () => {
 			puzzleDate: '2026-09-15',
 		};
 		expect(
-			buildPuzzleIframeSrcWithContext(
+			buildPuzzleIframeSrc(
 				'https://example.com/puzzle?set=guardian-sudoku-easy&embed=1',
 				context,
 			),
 		).toBe(
-			`https://example.com/puzzle?set=guardian-sudoku-easy&embed=1&${contextParam(context)}`,
+			`https://example.com/puzzle?set=guardian-sudoku-easy&embed=1&${contextParam(context)}&uid=abc123`,
 		);
 	});
 
@@ -73,21 +70,44 @@ describe('buildPuzzleIframeSrcWithContext', () => {
 			puzzleDate: null,
 		};
 		expect(
-			buildPuzzleIframeSrcWithContext(
-				'https://example.com/puzzle',
-				context,
-			),
+			buildPuzzleIframeSrc('https://example.com/puzzle', context),
 		).toContain('guardian-puzzle-context=');
 	});
 
 	it('returns the src unchanged if it cannot be parsed as an absolute URL', () => {
 		expect(
-			buildPuzzleIframeSrcWithContext('not-a-url', {
+			buildPuzzleIframeSrc('not-a-url', {
 				userId: null,
 				darkMode: false,
 				puzzleDate: null,
 			}),
 		).toBe('not-a-url');
+	});
+
+	it('appends uid alongside guardian-puzzle-context when the reader is signed in', () => {
+		const context: PuzzleContext = {
+			userId: 'user-123',
+			darkMode: false,
+			puzzleDate: null,
+		};
+		const src = buildPuzzleIframeSrc('https://example.com/puzzle', context);
+		const url = new URL(src);
+
+		expect(url.searchParams.get('uid')).toBe('user-123');
+		expect(url.searchParams.has('guardian-puzzle-context')).toBe(true);
+	});
+
+	it('omits uid entirely when the reader is signed out (not uid=null or empty)', () => {
+		const context: PuzzleContext = {
+			userId: null,
+			darkMode: false,
+			puzzleDate: null,
+		};
+		const src = buildPuzzleIframeSrc('https://example.com/puzzle', context);
+		const url = new URL(src);
+
+		expect(url.searchParams.has('uid')).toBe(false);
+		expect(url.searchParams.has('guardian-puzzle-context')).toBe(true);
 	});
 });
 
@@ -107,6 +127,9 @@ describe('PuzzleIframe', () => {
 			url.searchParams.get('guardian-puzzle-context') ?? '{}',
 		) as PuzzleContext;
 	};
+
+	const getUidFromSrc = (src: string): string | null =>
+		new URL(src).searchParams.get('uid');
 
 	it('renders userId: null and darkMode: false while signed out with dark mode unavailable', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedOut());
@@ -348,5 +371,71 @@ describe('PuzzleIframe', () => {
 		await waitFor(() =>
 			expect(getContextFromSrc(iframe.src).puzzleDate).toBeNull(),
 		);
+	});
+
+	it('includes uid alongside guardian-puzzle-context once signed in', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('user-123'));
+
+		render(
+			<PuzzleIframe
+				src="https://example.com/puzzle"
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBe('user-123'));
+		expect(
+			new URL(iframe.src).searchParams.has('guardian-puzzle-context'),
+		).toBe(true);
+	});
+
+	it('omits uid entirely while signed out (not uid=null or empty)', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+
+		render(
+			<PuzzleIframe
+				src="https://example.com/puzzle"
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src).userId).toBeNull(),
+		);
+		expect(new URL(iframe.src).searchParams.has('uid')).toBe(false);
+		expect(
+			new URL(iframe.src).searchParams.has('guardian-puzzle-context'),
+		).toBe(true);
+	});
+
+	it('removes uid again if the reader signs back out', async () => {
+		mockedGetAuthStatus.mockResolvedValueOnce(signedIn('user-123'));
+
+		render(
+			<PuzzleIframe
+				src="https://example.com/puzzle"
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBe('user-123'));
+
+		const onAuthStateChange =
+			mockedSubscribeToAuthStateChange.mock.calls[0]![0];
+		mockedGetAuthStatus.mockResolvedValueOnce(signedOut());
+		await act(async () => {
+			onAuthStateChange();
+		});
+
+		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBeNull());
 	});
 });

@@ -4,7 +4,7 @@ import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import { useMatchMedia } from '../lib/useMatchMedia';
 
 interface Props {
-	/** The already-resolved iframe src URL (with `{slug}` substituted). */
+	/** The already-resolved iframe src URL for this puzzle. */
 	src: string;
 	title: string;
 	/**
@@ -137,14 +137,33 @@ const buildPuzzleContext = (
 
 /**
  * Encodes `context` as JSON into a `guardian-puzzle-context` query
- * parameter on `src`, preserving any existing query parameters (e.g.
- * AmuseLabs' `?set=...&embed=1&idx=1`). Always includes the parameter -
- * unlike the previous `userId`-only mechanism, the context shape itself
- * always carries both fields, so there's no "nothing to add" case to omit
- * it for. Returns `src` unchanged if it cannot be parsed as an absolute
- * URL.
+ * parameter on `src` (preserving any existing query parameters, e.g.
+ * AmuseLabs' `?set=...&embed=1&idx=1`), and, separately, appends a plain
+ * `uid=<userId>` query parameter when the reader is signed in.
+ *
+ * `uid` is a genuinely different, independently-confirmed mechanism from
+ * `guardian-puzzle-context`: the native (Android/iOS) apps' own real,
+ * working AmuseLabs integration appends `&uid=<value>` as a plain query
+ * parameter when the user is authenticated, and omits it entirely when
+ * signed out (their own words: "If the user is authenticated, we add
+ * &uid=<puzzleId>"). It is added here *alongside*, not instead of,
+ * `guardian-puzzle-context` (which still carries dark mode and puzzle
+ * date, for which there is no separately-confirmed mechanism yet). `uid`'s
+ * value is sourced identically to `context.userId`
+ * (`idToken.claims.legacy_identity_id`), the native apps call their
+ * equivalent value a "puzzleId", but there is no independent confirmation
+ * that identifier format matches ours, only that this exact query
+ * parameter name/pattern is what they use for their own equivalent value,
+ * see the "Open questions" section of docs/puzzle-page.md.
+ *
+ * Always includes `guardian-puzzle-context` - unlike the previous
+ * `userId`-only mechanism, the context shape itself always carries all
+ * three fields, so there's no "nothing to add" case to omit it for. `uid`
+ * is the only conditional part, present only when `context.userId` is
+ * non-null, and never sent as `uid=null` or empty. Returns `src` unchanged
+ * if it cannot be parsed as an absolute URL.
  */
-export const buildPuzzleIframeSrcWithContext = (
+export const buildPuzzleIframeSrc = (
 	src: string,
 	context: PuzzleContext,
 ): string => {
@@ -154,6 +173,9 @@ export const buildPuzzleIframeSrcWithContext = (
 			'guardian-puzzle-context',
 			JSON.stringify(context),
 		);
+		if (context.userId !== null) {
+			url.searchParams.set('uid', context.userId);
+		}
 		return url.toString();
 	} catch {
 		return src;
@@ -183,12 +205,16 @@ const postContextMessage = (
  * iframe `src` (so it is present from the very first request the iframe
  * makes), and via `postMessage` once the iframe has loaded (`{ type:
  * 'guardian-puzzle-context', context }` - see `PuzzleContextMessage`).
- * Because `src` is derived from the reactive `usePuzzleUserId()`/
- * `usePuzzleDarkMode()` results, the iframe is automatically reloaded by
- * the browser (a fresh `src` triggers a new navigation) whenever the
- * reader's sign-in state or OS colour-scheme preference changes while on
- * the page - no manual reload fallback is needed for that case, though the
- * `onLoad` `postMessage` still fires again after each such reload too.
+ * When the reader is signed in, also appends a plain `uid=<userId>` query
+ * parameter alongside `guardian-puzzle-context` (see
+ * `buildPuzzleIframeSrc`'s doc comment), a separately-confirmed mechanism
+ * from the native apps' real AmuseLabs integration. Because `src` is
+ * derived from the reactive `usePuzzleUserId()`/`usePuzzleDarkMode()`
+ * results, the iframe is automatically reloaded by the browser (a fresh
+ * `src` triggers a new navigation) whenever the reader's sign-in state or
+ * OS colour-scheme preference changes while on the page - no manual
+ * reload fallback is needed for that case, though the `onLoad`
+ * `postMessage` still fires again after each such reload too.
  */
 export const PuzzleIframe = ({
 	src,
@@ -199,7 +225,7 @@ export const PuzzleIframe = ({
 	const userId = usePuzzleUserId();
 	const darkMode = usePuzzleDarkMode(darkModeAvailable);
 	const context = buildPuzzleContext(userId, darkMode, puzzleDate);
-	const iframeSrc = buildPuzzleIframeSrcWithContext(src, context);
+	const iframeSrc = buildPuzzleIframeSrc(src, context);
 
 	return (
 		<iframe
