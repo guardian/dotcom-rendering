@@ -19,10 +19,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import { isPuzzlesHubV1Enabled } from '../lib/puzzlesHubVersionExperiment';
 import type { NavType } from '../model/extract-nav';
-import {
-	type PuzzleConfig,
-	resolveIframeUrl,
-} from '../model/puzzles/puzzleConfigs';
+import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { palette as themePalette } from '../palette';
 import type { FEPuzzlePageType } from '../types/puzzlePage';
 
@@ -164,7 +161,7 @@ const PuzzlePageContent = ({
 	return (
 		<Island priority="critical" defer={{ until: 'visible' }}>
 			<PuzzleIframe
-				src={resolveIframeUrl(puzzleConfig)}
+				puzzleConfig={puzzleConfig}
 				title={instance.title}
 				darkModeAvailable={darkModeAvailable}
 				puzzleDate={instance.puzzleDate ?? null}
