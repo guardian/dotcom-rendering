@@ -1,10 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { ConfigProvider } from '../components/ConfigContext';
-import {
-	puzzlesHubExperiment,
-	puzzlesHubParticipation,
-} from '../lib/puzzlesHubExperiment';
+import { PUZZLES_HUB_EXPERIMENT } from '../lib/puzzlesHubExperiment';
 import {
 	puzzlesHubV1Experiment,
 	puzzlesHubV1Participation,
@@ -20,7 +17,7 @@ jest.mock('../lib/useMatchMedia', () => ({
 }));
 
 const v0AndV1On = {
-	...puzzlesHubParticipation(puzzlesHubExperiment.variant),
+	[PUZZLES_HUB_EXPERIMENT]: 'variant',
 	...puzzlesHubV1Participation(puzzlesHubV1Experiment.variant),
 };
 
@@ -172,9 +169,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: puzzlesHubParticipation(
-						puzzlesHubExperiment.variant,
-					),
+					serverSideABTests: { [PUZZLES_HUB_EXPERIMENT]: 'variant' },
 				},
 			});
 

@@ -1,7 +1,4 @@
-import {
-	puzzlesHubExperiment,
-	puzzlesHubParticipation,
-} from './puzzlesHubExperiment';
+import { PUZZLES_HUB_EXPERIMENT } from './puzzlesHubExperiment';
 import {
 	isPuzzlesHubV1Enabled,
 	isPuzzlesHubV2Enabled,
@@ -11,8 +8,8 @@ import {
 	puzzlesHubV2Participation,
 } from './puzzlesHubVersionExperiment';
 
-const v0On = puzzlesHubParticipation(puzzlesHubExperiment.variant);
-const v0Off = puzzlesHubParticipation(puzzlesHubExperiment.control);
+const v0On = { [PUZZLES_HUB_EXPERIMENT]: 'variant' };
+const v0Off = { [PUZZLES_HUB_EXPERIMENT]: 'control' };
 const v1On = puzzlesHubV1Participation(puzzlesHubV1Experiment.variant);
 const v1Off = puzzlesHubV1Participation(puzzlesHubV1Experiment.control);
 const v2On = puzzlesHubV2Participation(puzzlesHubV2Experiment.variant);

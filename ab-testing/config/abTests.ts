@@ -70,19 +70,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-fronts-ad-increase-ad-limit",
-		description:
-			"A test to understand the impact of changing page-level ad limit on fronts",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-10",
-		type: "server",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-spacefinder-highvalue-section",
 		description:
 			"Test to measure the impact on ad density after adding to high value sections in spacefinder",
@@ -252,19 +239,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-prebid-transaction-ids",
-		description:
-			"Test to measure the impact of submitting Prebid transaction IDs",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-30",
-		type: "client",
-		status: "ON",
-		audienceSize: 50 / 100,
-		audienceSpace: "B",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "identity-and-trust-consent-rr-banner-us",
 		description:
 			"Test to measure the impact of not showing the consent RR and banner for US users",
@@ -278,8 +252,8 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "fronts-and-curation-editorial-headline-test",
-		description: "Allow editorial headline A/B tests to run on web",
+		name: "fronts-and-curation-editorial-test",
+		description: "Allow editorial A/B tests to run on web",
 		owners: [
 			"fronts.and.curation@guardian.co.uk",
 			"ab.test.mission@guardian.co.uk",
@@ -295,10 +269,10 @@ const ABTests: ABTest[] = [
 		name: "commercial-prebid-failsafe-timeout",
 		description: "Gradually roll out the Prebid failsafe timeout feature",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-30",
+		expirationDate: "2026-10-28",
 		type: "client",
 		status: "ON",
-		audienceSize: 1 / 100,
+		audienceSize: 0 / 100,
 		audienceSpace: "B",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
@@ -313,6 +287,51 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		groups: ["enable"],
 		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "commercial-mobile-above-nav-test",
+		description: "Test adding the mobile-above-nav ad slot to mobile pages",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-30",
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-rich-links",
+		description:
+			"Test to measure the impact of fixing rich links insert behaviour and reduced restrictions on ad insertion around rich links.",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-28",
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-header-bidder-timeouts",
+		description:
+			"Test to measure the impact of changing the Prebid and APS timeout value.",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-28",
+		type: "client",
+		status: "ON",
+		audienceSize: 2.1 / 100, // 0.35% in each variant
+		audienceSpace: "A",
+		groups: [
+			"variant-500",
+			"variant-750",
+			"variant-1000",
+			"variant-1250",
+			"control", // 1500ms timeout
+			"variant-1650",
+		],
+		shouldForceMetricsCollection: true,
 	},
 ];
 

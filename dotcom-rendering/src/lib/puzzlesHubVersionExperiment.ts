@@ -1,5 +1,8 @@
 import type { ConfigType } from '../types/config';
-import { puzzlesHubExperiment } from './puzzlesHubExperiment';
+import {
+	PUZZLES_HUB_EXPERIMENT,
+	PUZZLES_HUB_VARIANT,
+} from './puzzlesHubExperiment';
 
 /**
  * The v1/v2 tiers of the Puzzles & Games rollout, layered cumulatively on
@@ -46,11 +49,7 @@ const isInVariant = (
 export const isPuzzlesHubV1Enabled = (
 	config: PuzzlesVersionExperimentConfig,
 ): boolean =>
-	isInVariant(
-		config,
-		puzzlesHubExperiment.name,
-		puzzlesHubExperiment.variant,
-	) &&
+	isInVariant(config, PUZZLES_HUB_EXPERIMENT, PUZZLES_HUB_VARIANT) &&
 	isInVariant(
 		config,
 		puzzlesHubV1Experiment.name,

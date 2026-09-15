@@ -31,11 +31,14 @@ import { SubNav } from '../components/SubNav.island';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
+import {
+	MAX_FRONTS_BANNER_ADS as maxDesktopAds,
+	MAX_FRONTS_MOBILE_ADS as maxMobileAds,
+} from '../lib/commercial-constants';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
 import {
 	getDesktopAdPositions,
-	getMaxFrontsAdCounts,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
@@ -117,10 +120,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		},
 		editionId,
 	} = front;
-
-	const { maxDesktopAds, maxMobileAds } = getMaxFrontsAdCounts(
-		front.config.serverSideABTests,
-	);
 
 	const serverTime = front.serverTime;
 
@@ -216,7 +215,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								'--article-section-background',
 							)}
 						>
-							<HeaderAdSlot />
+							<HeaderAdSlot
+								includeMobile={
+									front.config.section === 'crosswords' &&
+									front.config.serverSideABTests[
+										'commercial-mobile-above-nav-test'
+									] === 'variant'
+								}
+							/>
 						</Section>
 					</Stuck>
 				)}
