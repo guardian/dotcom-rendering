@@ -417,15 +417,6 @@ export const Standfirst = ({ format, standfirst, layoutType }: Props) => {
 					layoutType?.startsWith('immersive')
 						? immersiveGridOverrides
 						: undefined,
-					layoutType?.startsWith('immersive') === true &&
-						format.theme === ArticleSpecial.Labs &&
-						css`
-							font-weight: 500;
-
-							${from.tablet} {
-								font-weight: 500;
-							}
-						`,
 				]}
 				className={
 					format.design === ArticleDesign.Interactive
