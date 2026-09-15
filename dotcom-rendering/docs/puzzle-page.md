@@ -118,44 +118,75 @@ iframe-based slug:
 
 1. Add a new key to `src/model/puzzles/puzzleConfigs.ts`'s `puzzleConfigs`
    record (`slug`, `puzzleGroup`, `iframe: { provider, urlTemplate }`,
-   `shareEnabled`, `printEnabled`, `hasArchive`, `description`, optional
-   `image`). If it's another AmuseLabs-hosted puzzle, reuse the
-   `amuseLabsPuzzle(slug, puzzleGroup, description)` helper (note: this
-   helper doesn't take `image`, set it afterwards on the returned object
-   if/when a real image is available for that puzzle).
+   `shareEnabled`, `printEnabled`, `hasArchive`, `title`, `description`,
+   optional `image`). If it's another AmuseLabs-hosted puzzle, reuse the
+   `amuseLabsPuzzle(slug, puzzleGroup, title, description)` helper (note:
+   this helper doesn't take `image`, set it afterwards on the returned
+   object if/when a real image is available for that puzzle).
    `validatePuzzleConfigs` runs once at module load and throws immediately
    if the entry is malformed (mismatched `slug`, unknown `puzzleGroup`,
-   empty `iframe.provider`/`iframe.urlTemplate`, empty `description`, or a
-   present-but-empty `image`).
-   **Write real, distinct, human-quality copy for `description`.** It
-   becomes the page's `<meta name="description">` and its derived Open
-   Graph/Twitter description (see "SEO" below); don't copy-paste one
-   template string across entries with only the slug swapped in.
+   empty `iframe.provider`/`iframe.urlTemplate`, empty `title`/
+   `description`, or a present-but-empty `image`).
+   **Write real, curated copy for `title`/`description`**, sourced from
+   the product team's SEO spreadsheet for that puzzle (see "SEO" below for
+   the exact `{date}` templating mechanism). It becomes the page's
+   `<title>` and `<meta name="description">` and their derived Open
+   Graph/Twitter equivalents, don't copy-paste one template string across
+   entries with only the slug swapped in.
 2. Nothing else changes on the DCR side: `PuzzlePageLayout.tsx`'s
    `PuzzlePageContent` unconditionally renders `PuzzleIframe` pointed at
    `resolveIframeUrl(puzzleConfig)` for every registry entry. The only thing
    needed from `frontend` is a request whose `slug` matches the new
    registry key exactly (see the `frontend` repo's `docs/puzzle-page.md`).
 
-### SEO: meta description, Open Graph, Twitter card
+### SEO: title, meta description, Open Graph, Twitter card
 
-Each `PuzzleConfig` entry carries a curated `description` (a short,
-genuinely-written meta description, distinct per puzzle, see step 1
-above) and an optional `image` (a full preview/share image URL).
+Each `PuzzleConfig` entry carries `title` and `description` templates
+(sourced verbatim from the product team's SEO spreadsheet, confirmed
+against per-field character budgets, title max 60 characters, description
+max 157 characters, both accounting for the date's length) and an
+optional `image` (a full preview/share image URL). Both `title` and
+`description` may contain a `{date}` placeholder token, substituted at
+render time with `instance.puzzleDate` formatted as a short "d MMM yy"
+date (e.g. `"2026-09-15" -> "15 Sep 26"`, via `formatPuzzleDateShort` in
+`src/lib/puzzleDate.ts`, deliberately distinct from `formatPuzzleDate`'s
+long, human-readable on-page display form, e.g. "15 September 2026").
+For example, `sudoku-easy`'s `title` template
+`"Easy sudoku {date} - logic puzzle | The Guardian"` resolves, for
+`puzzleDate: "2026-09-15"`, to
+`"Easy sudoku 15 Sep 26 - logic puzzle | The Guardian"`. If `puzzleDate`
+is absent, the placeholder and any now-redundant surrounding
+whitespace/punctuation are tidied up automatically (see
+`resolvePuzzleTitle`/`resolvePuzzleDescription`'s implementation), rather
+than leaving a literal double space or a stray space before a full stop.
+
 `render.puzzlePage.web.tsx` derives the page's SEO metadata from these via
 a small, pure, directly-unit-tested function,
-`buildPuzzlePageMetaData(webTitle, puzzleConfig)`
+`buildPuzzlePageMetaData(puzzleConfig, puzzleDate)`
 (`src/server/render.puzzlePage.web.test.ts`):
 
-- The page's `<meta name="description">` (previously hardcoded to `''`,
-  which silently fell back to DCR's generic, site-wide description, a
-  real SEO gap, since a generic/absent description risks Google or social
-  previews auto-generating a snippet from page content instead of showing
-  clean, curated copy).
-- `openGraphData: { 'og:title': webTitle, 'og:description': description }`,
+- The resolved `title` becomes the page's `<title>` tag.
+- The resolved `description` becomes the page's
+  `<meta name="description">` (previously hardcoded to `''`, which
+  silently fell back to DCR's generic, site-wide description, a real SEO
+  gap, since a generic/absent description risks Google or social previews
+  auto-generating a snippet from page content instead of showing clean,
+  curated copy).
+- `openGraphData: { 'og:title': title, 'og:description': description }`,
   plus `'og:image': image` **only when `puzzleConfig.image` is set**.
-- `twitterData: { 'twitter:title': webTitle, 'twitter:description': description }`,
+- `twitterData: { 'twitter:title': title, 'twitter:description': description }`,
   plus `'twitter:image': image` **only when `puzzleConfig.image` is set**.
+
+**`webTitle` (the plain string `frontend` sends, e.g. `"Sudoku (easy)"`)
+is _not_ used for the `<title>` tag or `og:title`/`twitter:title` any
+more.** It has no date and no SEO suffix, so it can't satisfy the
+spreadsheet's exact copy. Investigating its other uses in the render
+pipeline before this change confirmed exactly one other real use:
+`PuzzlePageLayout.tsx` still passes `webTitle` to `ShareButton.island.tsx`
+for the share button's pre-filled share text/subject (native share sheet
+title/text, email subject line), which is unrelated to SEO metadata and
+is unaffected by this change. `webTitle` remains a required field in the
+`FEPuzzlePageType` contract for that reason.
 
 **When `image` is unset, `og:image`/`twitter:image` are omitted entirely**
 (not sent empty, not defaulted to a placeholder). `htmlPageTemplate`'s
@@ -173,8 +204,42 @@ adding the field.
 
 Puzzle Page has no separate source of Open Graph/Twitter copy (unlike
 Article, where `frontend` sends its own `openGraphData`/`twitterData`), so
-these are derived directly from `webTitle`/`description`/`image` rather
-than requiring bespoke copy per field.
+these are derived directly from `title`/`description`/`image` rather than
+requiring bespoke copy per field.
+
+**Target search terms are documented, not implemented as a meta tag.**
+The product spreadsheet also includes a "Search terms" column per puzzle
+(e.g. for `word-wheel`: "daily word wheel, word wheel puzzle, word wheel
+online, word wheel game, guardian word wheel, word wheel for today,
+guardian word wheel today"). This is content/SEO-strategy reference, the
+search terms the copy should naturally support, not a literal meta tag:
+major search engines ignore `<meta name="keywords">` entirely today, so it
+provides no real SEO benefit. Each puzzle's search-term list is recorded
+as a code comment directly above its registry entry in
+`puzzleConfigs.ts`, for content-team/future-maintainer traceability, and
+is **not** rendered as a `<meta name="keywords">` tag anywhere.
+
+**Crawl/index behaviour already matches the product requirement (no code
+change needed).** The spreadsheet asks for all 6 V0 puzzle pages to allow
+robots.txt and be indexed. `htmlPageTemplate.ts`'s `doNotIndex()` only
+forces `noindex` outside `PROD`, or for canonical URLs containing
+`tracking/commissioningdesk` (an unrelated, allow-listed exception for a
+couple of specific URLs). None of the 6 puzzle pages' canonical URLs match
+that pattern, so none of them hit the `noindex` branch in production;
+they are indexed normally, as required.
+
+**Out of scope for this registry, not implemented:** the product
+spreadsheet includes SEO copy for several other pages, the Puzzles & Games
+hub page, a "Word games" landing page, a "Logic puzzles" landing page, a
+"Trivia and quizzes" landing page, a generic "Sudoku" landing page, and
+Crosswords/Word games/Logic puzzles archive pages. None of these pages
+exist in this codebase yet (no routes, no controllers), some are
+explicitly future V1/V2 work per the rollout plan (see "Feature-tier
+rollout gating" below). Their SEO copy is not implementable here until
+those pages are actually built (elsewhere, e.g. the separate, existing
+Puzzles Hub feature for the hub page, or future archive/landing page
+work), this doc note exists so that work isn't discovered as a surprise
+gap later.
 
 ### The `FEPuzzlePageType` request contract
 
@@ -182,19 +247,19 @@ than requiring bespoke copy per field.
 (`src/types/puzzlePage.ts`, validated by `validateAsPuzzlePageType` in
 `src/model/validate.puzzlePage.ts`):
 
-| Field                              | Type                                                   | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| ---------------------------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                               | `string`                                               | Any stable identifier for the page instance.                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `slug`                             | `string`                                               | Looked up in the `PuzzleConfig` registry; unknown slug → `404`.                                                                                                                                                                                                                                                                                                                                                                                    |
-| `webTitle`                         | `string`                                               | Page `<title>` / share text.                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `config`                           | `ConfigType`                                           | Same shape frontend sends for `/Article`, `/PuzzlesPage`, etc. Only checked for a `serverSideABTests: Record<string, string>` shape, content otherwise unused (no AB gate today).                                                                                                                                                                                                                                                                  |
-| `nav`                              | `FENavType`                                            | Same shape as other routes.                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `pageFooter`                       | `FooterType`                                           | Same shape as other routes.                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `canonicalUrl`                     | `string`                                               | Canonical link tag.                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `editionId`                        | `EditionId` (`'UK' \| 'US' \| 'AU' \| 'INT' \| 'EUR'`) | Validated against the known edition set.                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `instance.title`                   | `string` (required)                                    | Rendered as the page `<h1>` and the iframe `title` attribute.                                                                                                                                                                                                                                                                                                                                                                                      |
-| `instance.puzzleDate`              | `string?` (e.g. `"2026-09-11"`)                        | Which day's puzzle the reader wants to see. Rendered as a human-readable date (e.g. "11 September 2026") next to the page title, and passed through unformatted as `PuzzleContext.puzzleDate` to the puzzle iframe (see below). `frontend` now always resolves and sends this for every request (its Puzzle Page URLs carry a date segment), though DCR still treats the field as optional and simply omits the display/context value when absent. |
-| `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)      | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                                                                                                                                                                                                                                                                                   |
+| Field                              | Type                                                   | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ---------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                               | `string`                                               | Any stable identifier for the page instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `slug`                             | `string`                                               | Looked up in the `PuzzleConfig` registry; unknown slug → `404`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `webTitle`                         | `string`                                               | Used for the share button's pre-filled share text/subject only. **Not** used for the `<title>` tag or `og:title`/`twitter:title` (see "SEO" above), those come from the resolved `PuzzleConfig.title` instead.                                                                                                                                                                                                                                                                                                                                                                       |
+| `config`                           | `ConfigType`                                           | Same shape frontend sends for `/Article`, `/PuzzlesPage`, etc. Only checked for a `serverSideABTests: Record<string, string>` shape, content otherwise unused (no AB gate today).                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `nav`                              | `FENavType`                                            | Same shape as other routes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `pageFooter`                       | `FooterType`                                           | Same shape as other routes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `canonicalUrl`                     | `string`                                               | Canonical link tag.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `editionId`                        | `EditionId` (`'UK' \| 'US' \| 'AU' \| 'INT' \| 'EUR'`) | Validated against the known edition set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `instance.title`                   | `string` (required)                                    | Rendered as the page `<h1>` and the iframe `title` attribute.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `instance.puzzleDate`              | `string?` (e.g. `"2026-09-11"`)                        | Which day's puzzle the reader wants to see. Rendered as a human-readable date (e.g. "11 September 2026") next to the page title, passed through unformatted as `PuzzleContext.puzzleDate` to the puzzle iframe (see below), and used (short-formatted) to resolve the `{date}` placeholder in `PuzzleConfig.title`/`description` (see "SEO" above). `frontend` now always resolves and sends this for every request (its Puzzle Page URLs carry a date segment), though DCR still treats the field as optional and simply omits/tidies up the display/context/SEO value when absent. |
+| `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)      | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ### User/context info passed to the puzzle iframe
 
