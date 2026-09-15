@@ -182,19 +182,19 @@ than requiring bespoke copy per field.
 (`src/types/puzzlePage.ts`, validated by `validateAsPuzzlePageType` in
 `src/model/validate.puzzlePage.ts`):
 
-| Field                              | Type                                                   | Notes                                                                                                                                                                                                                                                                                                     |
-| ---------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                               | `string`                                               | Any stable identifier for the page instance.                                                                                                                                                                                                                                                              |
-| `slug`                             | `string`                                               | Looked up in the `PuzzleConfig` registry; unknown slug → `404`.                                                                                                                                                                                                                                           |
-| `webTitle`                         | `string`                                               | Page `<title>` / share text.                                                                                                                                                                                                                                                                              |
-| `config`                           | `ConfigType`                                           | Same shape frontend sends for `/Article`, `/PuzzlesPage`, etc. Only checked for a `serverSideABTests: Record<string, string>` shape, content otherwise unused (no AB gate today).                                                                                                                         |
-| `nav`                              | `FENavType`                                            | Same shape as other routes.                                                                                                                                                                                                                                                                               |
-| `pageFooter`                       | `FooterType`                                           | Same shape as other routes.                                                                                                                                                                                                                                                                               |
-| `canonicalUrl`                     | `string`                                               | Canonical link tag.                                                                                                                                                                                                                                                                                       |
-| `editionId`                        | `EditionId` (`'UK' \| 'US' \| 'AU' \| 'INT' \| 'EUR'`) | Validated against the known edition set.                                                                                                                                                                                                                                                                  |
-| `instance.title`                   | `string` (required)                                    | Rendered as the page `<h1>` and the iframe `title` attribute.                                                                                                                                                                                                                                             |
-| `instance.puzzleDate`              | `string?` (e.g. `"2026-09-11"`)                        | Which day's puzzle the reader wants to see. Accepted and validated as an optional string only. **Not yet wired into any rendering or the iframe URL** (see "Open questions"). Prep work for a future V1 calendar-navigation feature; unrelated to the removed crossword-only `date` display-string field. |
-| `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)      | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                                                                                                                                          |
+| Field                              | Type                                                   | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                               | `string`                                               | Any stable identifier for the page instance.                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `slug`                             | `string`                                               | Looked up in the `PuzzleConfig` registry; unknown slug → `404`.                                                                                                                                                                                                                                                                                                                                                                                    |
+| `webTitle`                         | `string`                                               | Page `<title>` / share text.                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `config`                           | `ConfigType`                                           | Same shape frontend sends for `/Article`, `/PuzzlesPage`, etc. Only checked for a `serverSideABTests: Record<string, string>` shape, content otherwise unused (no AB gate today).                                                                                                                                                                                                                                                                  |
+| `nav`                              | `FENavType`                                            | Same shape as other routes.                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `pageFooter`                       | `FooterType`                                           | Same shape as other routes.                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `canonicalUrl`                     | `string`                                               | Canonical link tag.                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `editionId`                        | `EditionId` (`'UK' \| 'US' \| 'AU' \| 'INT' \| 'EUR'`) | Validated against the known edition set.                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `instance.title`                   | `string` (required)                                    | Rendered as the page `<h1>` and the iframe `title` attribute.                                                                                                                                                                                                                                                                                                                                                                                      |
+| `instance.puzzleDate`              | `string?` (e.g. `"2026-09-11"`)                        | Which day's puzzle the reader wants to see. Rendered as a human-readable date (e.g. "11 September 2026") next to the page title, and passed through unformatted as `PuzzleContext.puzzleDate` to the puzzle iframe (see below). `frontend` now always resolves and sends this for every request (its Puzzle Page URLs carry a date segment), though DCR still treats the field as optional and simply omits the display/context value when absent. |
+| `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)      | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                                                                                                                                                                                                                                                                                   |
 
 ### User/context info passed to the puzzle iframe
 
@@ -203,11 +203,12 @@ about the current reader to the puzzle provider two ways:
 
 - As a single JSON-encoded `guardian-puzzle-context` query parameter on the
   iframe `src` (e.g.
-  `?set=guardian-sudoku-easy&embed=1&idx=1&guardian-puzzle-context=%7B%22userId%22%3Anull%2C%22darkMode%22%3Afalse%7D`,
-  which decodes to `{"userId":null,"darkMode":false}`), present from the
-  iframe's very first request. Unlike the parameter's previous `userId`-only
-  form, this is always included: the context shape always carries both
-  fields, so there's no "nothing to add" case to omit it for.
+  `?set=guardian-sudoku-easy&embed=1&idx=1&guardian-puzzle-context=%7B%22userId%22%3Anull%2C%22darkMode%22%3Afalse%2C%22puzzleDate%22%3Anull%7D`,
+  which decodes to `{"userId":null,"darkMode":false,"puzzleDate":null}`),
+  present from the iframe's very first request. Unlike the parameter's
+  previous `userId`-only form, this is always included: the context shape
+  always carries all three fields, so there's no "nothing to add" case to
+  omit it for.
 - Via `window.postMessage({ type: 'guardian-puzzle-context', context }, '*')`
   (the `PuzzleContextMessage` shape), sent to the iframe once it has loaded.
 
@@ -215,6 +216,7 @@ about the current reader to the puzzle provider two ways:
 interface PuzzleContext {
 	userId: string | null;
 	darkMode: boolean;
+	puzzleDate: string | null;
 }
 ```
 
@@ -239,6 +241,16 @@ interface PuzzleContext {
 
     When `darkModeAvailable` is `false`, `darkMode` is always `false` and the
     media query isn't even consulted.
+
+- **`puzzleDate`** is `instance.puzzleDate` passed straight through
+  unformatted (the raw `YYYY-MM-DD` string, not the "11 September 2026"
+  display text rendered next to the title), so third-party providers get
+  the machine-readable form. `null` when `instance.puzzleDate` is absent.
+  DCR does not parse the Puzzle Page URL or own the date-in-path/
+  redirect-to-archive logic itself: it purely receives whatever date
+  `frontend` resolved and sent in the request payload, and passes it on. See
+  `frontend`'s own documentation for how it resolves and redirects on the
+  date-in-URL structure.
 
 The iframe reloads automatically whenever either half of the context
 changes while the reader is already on the page: sign in, sign out,
@@ -308,14 +320,14 @@ darkMode: boolean } }` and the `?guardian-puzzle-context=<JSON>` query
 - **Responsive/mobile layout has not been explicitly verified** for Puzzle
   Page or the puzzle iframes themselves (which are entirely provider-
   controlled content).
-- **`instance.puzzleDate` is accepted but not yet used for anything.** It is
-  validated as an optional string and otherwise ignored. DCR always shows
-  whichever puzzle the resolved `slug`'s provider iframe URL happens to
-  serve "live" today, regardless of `puzzleDate`. Wiring this into the
-  actual iframe URL (so a specific past date's puzzle is shown) is deferred
-  to V1, pending investigation into whether/how each provider's iframe URL
-  scheme (AmuseLabs, Wordiply) supports requesting a specific historical
-  date at all.
+- **DCR does not validate that `puzzleDate` is a real, sensible calendar
+  date.** Beyond the existing shape check (a non-empty string), nothing in
+  DCR confirms `puzzleDate` is an actual calendar date (e.g. rejecting a
+  nonexistent `"2026-02-30"`) or a sensible one (e.g. rejecting a wildly
+  out-of-range date). Deeper, format-level validation of the date-in-URL
+  value is `frontend`'s responsibility at the route level (per its own
+  task); true calendar/business-logic validity (e.g. "did this puzzle
+  actually exist on this date") is not validated anywhere in the stack yet.
 - **DCR's `/PuzzlePage` endpoint itself still has no route-level access
   control** (unchanged from before). `frontend`'s existing
   `PuzzlesHubExperiment`/`puzzles-new-hub` AB test gate decides whether a
