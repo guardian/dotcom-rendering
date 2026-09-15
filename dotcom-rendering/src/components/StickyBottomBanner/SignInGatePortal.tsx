@@ -2,7 +2,6 @@ import type { CountryCode } from '@guardian/libs';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { buildAuxiaGateDisplayData } from '../../lib/auxia';
-import { getDailyArticleCount, getToday } from '../../lib/dailyArticleCount';
 import type { EditionId } from '../../lib/edition';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { useAuthStatus } from '../../lib/useAuthStatus';
@@ -197,17 +196,6 @@ export const canShowSignInGatePortal = async ({
 	}
 
 	try {
-		// Today's view count (gu.history.dailyArticleCount). The count is
-		// incremented for the current pageview before the banner flow runs,
-		// so it is 1-based: the 4th view of the day sends 3. SDC only
-		// consumes this for active Gandalf traffic.
-		const dailyHistory = getDailyArticleCount();
-		const latestDay = dailyHistory?.[0];
-		const viewCountToday =
-			latestDay?.day === getToday()
-				? Math.max(latestDay.count - 1, 0)
-				: 0;
-
 		const auxiaData = await buildAuxiaGateDisplayData(
 			contributionsServiceUrl,
 			pageId,
@@ -216,7 +204,6 @@ export const canShowSignInGatePortal = async ({
 			sectionId,
 			tags,
 			retrieveLastGateDismissedCount('AuxiaSignInGate'),
-			viewCountToday,
 		);
 
 		const meta = (

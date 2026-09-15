@@ -125,7 +125,6 @@ const fetchProxyGetTreatments = async (
 	showDefaultGate: ShowGateValues,
 	gateDisplayCount: number,
 	hideSupportMessagingTimestamp: number | undefined,
-	gandalfPageViewCount?: number,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
 	const url = `${contributionsServiceUrl}/auxia/get-treatments`;
@@ -148,7 +147,6 @@ const fetchProxyGetTreatments = async (
 		showDefaultGate,
 		gateDisplayCount,
 		hideSupportMessagingTimestamp,
-		gandalfPageViewCount,
 	};
 
 	const params = { method: 'POST', headers, body: JSON.stringify(payload) };
@@ -217,7 +215,6 @@ export const buildAuxiaGateDisplayData = async (
 	sectionId: string,
 	tags: TagType[],
 	gateDismissCount: number,
-	gandalfPageViewCount?: number,
 ): Promise<AuxiaGateDisplayData | undefined> => {
 	const readerPersonalData = await decideAuxiaProxyReaderPersonalData();
 	const tagIds = tags.map((tag) => tag.id);
@@ -245,7 +242,6 @@ export const buildAuxiaGateDisplayData = async (
 		showDefaultGate,
 		gateDisplayCount,
 		hideSupportMessagingTimestamp,
-		gandalfPageViewCount,
 	);
 
 	if (response.status && response.data) {

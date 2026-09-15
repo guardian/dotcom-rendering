@@ -1,7 +1,6 @@
 // Mock the auxia module before imports so the mock is applied when the module
 // under test is evaluated.
 import { buildAuxiaGateDisplayData } from '../../lib/auxia';
-import { getDailyArticleCount, getToday } from '../../lib/dailyArticleCount';
 import type { AuxiaAPIResponseDataUserTreatment } from '../SignInGate/types';
 import type { AuxiaGateDisplayData } from '../SignInGate/types';
 import type { CanShowSignInGateProps } from './SignInGatePortal';
@@ -12,19 +11,11 @@ jest.mock('../../lib/auxia', () => ({
 	buildAuxiaGateDisplayData: jest.fn(),
 }));
 
-jest.mock('../../lib/dailyArticleCount', () => ({
-	getDailyArticleCount: jest.fn().mockReturnValue(undefined),
-	getToday: jest.fn().mockReturnValue(200),
-}));
-
 // Mock document.getElementById
 const mockGetElementById = jest.fn();
 Object.defineProperty(document, 'getElementById', {
 	value: mockGetElementById,
 });
-
-const mockGetDailyArticleCount = jest.mocked(getDailyArticleCount);
-const mockGetToday = jest.mocked(getToday);
 
 const canShowProps: CanShowSignInGateProps = {
 	isSignedIn: false,
@@ -222,56 +213,6 @@ describe('SignInGatePortal', () => {
 	});
 
 	describe('Gandalf (Guardian-managed sign-in gate journey)', () => {
-		it('sends today’s view count (0-based) to SDC', async () => {
-			mockGetElementById.mockReturnValue(document.createElement('div'));
-			// 4 views today: the current pageview is included, so the portal
-			// sends 3 (0-based).
-			mockGetDailyArticleCount.mockReturnValue([{ day: 200, count: 4 }]);
-			mockGetToday.mockReturnValue(200);
-			(
-				buildAuxiaGateDisplayData as jest.MockedFunction<
-					typeof buildAuxiaGateDisplayData
-				>
-			).mockResolvedValue(makeAuxiaReturn(undefined, true));
-
-			await canShowSignInGatePortal(canShowProps);
-
-			expect(buildAuxiaGateDisplayData).toHaveBeenCalledWith(
-				'https://contributions.local',
-				'page-id',
-				'UK',
-				'Article',
-				'section',
-				[],
-				0,
-				3,
-			);
-		});
-
-		it('sends 0 when the latest daily count is not from today', async () => {
-			mockGetElementById.mockReturnValue(document.createElement('div'));
-			mockGetDailyArticleCount.mockReturnValue([{ day: 199, count: 9 }]);
-			mockGetToday.mockReturnValue(200);
-			(
-				buildAuxiaGateDisplayData as jest.MockedFunction<
-					typeof buildAuxiaGateDisplayData
-				>
-			).mockResolvedValue(makeAuxiaReturn(undefined, true));
-
-			await canShowSignInGatePortal(canShowProps);
-
-			expect(buildAuxiaGateDisplayData).toHaveBeenCalledWith(
-				'https://contributions.local',
-				'page-id',
-				'UK',
-				'Article',
-				'section',
-				[],
-				0,
-				0,
-			);
-		});
-
 		it('returns no gate but carries the marker metadata on a free Gandalf pageview', async () => {
 			mockGetElementById.mockReturnValue(document.createElement('div'));
 			(

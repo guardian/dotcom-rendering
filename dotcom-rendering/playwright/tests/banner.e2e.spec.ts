@@ -167,9 +167,9 @@ test.describe('Sign-in gate portal', function () {
 		const auxiaRequest = await auxiaRequestPromise;
 		const body = auxiaRequest.postDataJSON() as Record<string, unknown>;
 		expect(body.countryCode).toBe('NZ');
-		// Two article loads today (each increments gu.history.dailyArticleCount),
-		// sent 0-based, so the second load sends 1.
-		expect(body.gandalfPageViewCount).toBe(1);
+		// Two article loads today, each increments gu.history.dailyArticleCount
+		// including the current pageview, so the second load sends 2.
+		expect(body.dailyArticleCount).toBe(2);
 	});
 });
 
