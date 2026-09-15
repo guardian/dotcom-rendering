@@ -1,7 +1,6 @@
 import {
 	getPuzzleConfig,
 	puzzleConfigs,
-	resolveIframeUrl,
 	resolvePuzzleDescription,
 	resolvePuzzleTitle,
 	validatePuzzleConfigs,
@@ -46,46 +45,64 @@ describe('puzzleConfigs registry', () => {
 		).toThrow(TypeError);
 	});
 
-	it('rejects an entry with an empty iframe url', () => {
+	it('rejects an amuselabs entry with an empty set', () => {
 		expect(() =>
 			validatePuzzleConfigs({
 				...puzzleConfigs,
-				wordiply: {
-					...puzzleConfigs.wordiply!,
-					iframe: {
-						...puzzleConfigs.wordiply!.iframe,
-						url: '',
-					},
+				'sudoku-easy': {
+					...puzzleConfigs['sudoku-easy']!,
+					iframe: { provider: 'amuselabs', set: '' },
 				},
 			}),
 		).toThrow(TypeError);
 	});
 
-	it('rejects an entry with a non-absolute iframe url', () => {
+	it('rejects an amuselabs entry with a whitespace-only set', () => {
 		expect(() =>
 			validatePuzzleConfigs({
 				...puzzleConfigs,
-				wordiply: {
-					...puzzleConfigs.wordiply!,
-					iframe: {
-						...puzzleConfigs.wordiply!.iframe,
-						url: '/not-absolute',
-					},
+				'sudoku-easy': {
+					...puzzleConfigs['sudoku-easy']!,
+					iframe: { provider: 'amuselabs', set: '   ' },
 				},
 			}),
 		).toThrow(TypeError);
 	});
 
-	it('rejects an entry with a missing iframe provider', () => {
+	it('rejects a wordiply entry with an empty baseUrl', () => {
+		expect(() =>
+			validatePuzzleConfigs({
+				...puzzleConfigs,
+				wordiply: {
+					...puzzleConfigs.wordiply!,
+					iframe: { provider: 'wordiply', baseUrl: '' },
+				},
+			}),
+		).toThrow(TypeError);
+	});
+
+	it('rejects a wordiply entry with a non-absolute baseUrl', () => {
+		expect(() =>
+			validatePuzzleConfigs({
+				...puzzleConfigs,
+				wordiply: {
+					...puzzleConfigs.wordiply!,
+					iframe: { provider: 'wordiply', baseUrl: '/not-absolute' },
+				},
+			}),
+		).toThrow(TypeError);
+	});
+
+	it('rejects an entry with an unrecognised iframe provider', () => {
 		expect(() =>
 			validatePuzzleConfigs({
 				...puzzleConfigs,
 				wordiply: {
 					...puzzleConfigs.wordiply!,
 					iframe: {
-						...puzzleConfigs.wordiply!.iframe,
-						provider: '',
-					},
+						provider: 'not-a-real-provider',
+						baseUrl: 'https://example.com',
+					} as never,
 				},
 			}),
 		).toThrow(TypeError);
@@ -207,49 +224,53 @@ describe('puzzleConfigs registry', () => {
 		});
 	});
 
-	describe('resolveIframeUrl', () => {
-		// Each of these hardcodes and checks a single entry's own, complete,
-		// expected real URL independently, this is deliberately what would
-		// have caught the original killer-sudoku bug (a shared, slug-derived
-		// URL template silently produced the wrong AmuseLabs "set" for it),
-		// rather than testing a substitution mechanism in the abstract.
-		it('resolves sudoku-easy to its exact, confirmed AmuseLabs URL', () => {
-			expect(resolveIframeUrl(puzzleConfigs['sudoku-easy']!)).toBe(
-				'https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-easy&embed=1&idx=1',
-			);
+	describe('registry iframe config shape', () => {
+		// Each of these hardcodes and checks a single entry's own, exact
+		// provider-specific identity data independently, this is
+		// deliberately what would have caught the original killer-sudoku bug
+		// (a shared, slug-derived URL template silently produced the wrong
+		// AmuseLabs "set" for it), rather than testing a substitution
+		// mechanism in the abstract.
+		it('sudoku-easy has its exact, confirmed AmuseLabs set', () => {
+			expect(puzzleConfigs['sudoku-easy']!.iframe).toEqual({
+				provider: 'amuselabs',
+				set: 'guardian-sudoku-easy',
+			});
 		});
 
-		it('resolves sudoku-medium to its exact, confirmed AmuseLabs URL', () => {
-			expect(resolveIframeUrl(puzzleConfigs['sudoku-medium']!)).toBe(
-				'https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-medium&embed=1&idx=1',
-			);
+		it('sudoku-medium has its exact, confirmed AmuseLabs set', () => {
+			expect(puzzleConfigs['sudoku-medium']!.iframe).toEqual({
+				provider: 'amuselabs',
+				set: 'guardian-sudoku-medium',
+			});
 		});
 
-		it('resolves sudoku-hard to its exact, confirmed AmuseLabs URL', () => {
-			expect(resolveIframeUrl(puzzleConfigs['sudoku-hard']!)).toBe(
-				'https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-hard&embed=1&idx=1',
-			);
+		it('sudoku-hard has its exact, confirmed AmuseLabs set', () => {
+			expect(puzzleConfigs['sudoku-hard']!.iframe).toEqual({
+				provider: 'amuselabs',
+				set: 'guardian-sudoku-hard',
+			});
 		});
 
-		it('resolves sudoku-killer to its exact, confirmed AmuseLabs URL (killer-sudoku-medium, not sudoku-killer)', () => {
-			expect(resolveIframeUrl(puzzleConfigs['sudoku-killer']!)).toBe(
-				'https://tg.amuselabs.com/guardian/date-picker?set=guardian-killer-sudoku-medium&embed=1&idx=1',
-			);
-			expect(
-				resolveIframeUrl(puzzleConfigs['sudoku-killer']!),
-			).not.toContain('guardian-sudoku-killer');
+		it('sudoku-killer has its exact, confirmed AmuseLabs set (killer-sudoku-medium, not sudoku-killer)', () => {
+			expect(puzzleConfigs['sudoku-killer']!.iframe).toEqual({
+				provider: 'amuselabs',
+				set: 'guardian-killer-sudoku-medium',
+			});
 		});
 
-		it('resolves word-wheel to its exact, confirmed AmuseLabs URL', () => {
-			expect(resolveIframeUrl(puzzleConfigs['word-wheel']!)).toBe(
-				'https://tg.amuselabs.com/guardian/date-picker?set=guardian-word-wheel&embed=1&idx=1',
-			);
+		it('word-wheel has its exact, confirmed AmuseLabs set', () => {
+			expect(puzzleConfigs['word-wheel']!.iframe).toEqual({
+				provider: 'amuselabs',
+				set: 'guardian-word-wheel',
+			});
 		});
 
-		it('resolves wordiply to its exact, own explicit (non-AmuseLabs) URL', () => {
-			expect(resolveIframeUrl(puzzleConfigs.wordiply!)).toBe(
-				'https://www.wordiply.com/',
-			);
+		it('wordiply has its own explicit (non-AmuseLabs) base URL', () => {
+			expect(puzzleConfigs.wordiply!.iframe).toEqual({
+				provider: 'wordiply',
+				baseUrl: 'https://www.wordiply.com/',
+			});
 		});
 	});
 
