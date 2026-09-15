@@ -53,22 +53,58 @@ contains exactly 6 slugs, all rendered via the generic sandboxed
 
 Codeword, futoshiki, suguru, and the trivia/quizzes puzzles (on-the-ball,
 film-reveal) were removed from the registry for V0 and may return later.
-**Each entry's `iframe.url` is its own complete, independently-written URL,
-there is deliberately no shared URL template or `{slug}`-style
-substitution mechanism.** There used to be one: every AmuseLabs-hosted
-entry's URL was built from a shared template
-(`https://tg.amuselabs.com/guardian/date-picker?set=guardian-{slug}&embed=1&idx=1`)
-by substituting DCR's own `slug` in for AmuseLabs' `set=guardian-*` query
-param. That was a real, live bug: nothing guarantees a provider's own
-naming convention matches our internal slug, and it already silently
-didn't for `sudoku-killer` (its real, confirmed AmuseLabs `set` is
-`killer-sudoku-medium`, not `sudoku-killer`, a different word order plus
-an unexplained "-medium" suffix that is genuinely part of the real,
-working identifier). The fix (confirmed against the native Android/iOS
-apps' own real, working AmuseLabs integration) was to remove the shared
-template entirely, not just patch that one instance: every entry now
-specifies its own complete, independent, hardcoded URL, so a future
-change to one entry can never silently or accidentally affect another.
+**`iframe` is a discriminated union keyed by `provider`
+(`PuzzleProvider = 'amuselabs' | 'wordiply'`), each entry holds only the
+minimal, provider-specific identity data needed to build its iframe URL,
+not a pre-baked final URL string.** AmuseLabs entries carry a `set`
+identifier (e.g. `'guardian-sudoku-easy'`, `'guardian-killer-sudoku-medium'`);
+Wordiply carries its `baseUrl`. Building the actual URL, including which
+query params a given provider does or doesn't accept, is the job of a
+per-provider strategy module, `src/lib/puzzleIframeUrl.ts`, not this
+registry:
+
+- `buildAmuseLabsUrl(config, context)` builds `set`/`embed=1`/`idx=1`,
+  then conditionally `uid` (only when signed in, confirmed against the
+  native apps' real AmuseLabs integration) and always `darkMode=0|1` (a
+  plain literal query value, also confirmed, unlike `uid` this is never
+  conditionally omitted).
+- `buildWordiplyUrl(config, context)` returns `config.baseUrl` unmodified,
+  deliberately minimal pending confirmation of what query params Wordiply
+  actually supports (none today).
+- `resolvePuzzleIframeUrl(config, context)` dispatches on
+  `config.iframe.provider` to the right builder, and is the single entry
+  point callers should use. It is exhaustively type-checked (a `never`
+  check in the switch's default branch), so adding a new `PuzzleProvider`
+  to the union without also adding its builder is a compile error, not a
+  silent runtime gap.
+
+This replaces an earlier design that blindly applied the same query
+params (`uid`, and DCR's own `guardian-puzzle-context` JSON blob) to
+every provider regardless of what it actually supports. That was
+fragile, and already conceptually wrong even though harmless in practice
+with only 2 V0 providers (one of which happens to ignore unknown params).
+It also replaces an even earlier design where every AmuseLabs-hosted
+entry's URL was built from one shared template, substituting DCR's own
+`slug` in for AmuseLabs' `set=guardian-*` query param, a real, live bug:
+nothing guarantees a provider's own naming convention matches our
+internal slug, and it already silently didn't for `sudoku-killer` (its
+real, confirmed AmuseLabs `set` is `guardian-killer-sudoku-medium`, not
+`guardian-sudoku-killer`, a different word order plus an unexplained
+"-medium" suffix that is genuinely part of the real, working identifier).
+Every AmuseLabs entry's `set` is now written out independently in the
+registry, confirmed against the native Android/iOS apps' own real,
+working AmuseLabs integration, so a future change to one entry can never
+silently or accidentally affect another.
+
+`guardian-puzzle-context` (DCR's own JSON-encoded context blob, unrelated
+to any one provider) deliberately stays **outside** this per-provider
+strategy: it is applied uniformly to every provider regardless of
+`iframe.provider`, by `buildPuzzleIframeSrc` in
+`PuzzleIframe.island.tsx`, layered on top of whatever
+`resolvePuzzleIframeUrl` already resolved. This is DCR's own additional
+channel, not a provider-specific mechanism, providers that don't
+understand it simply ignore it, so it is correctly generic where `uid`/
+`darkMode` are correctly provider-specific.
 
 ### Hitting it locally
 
@@ -127,37 +163,50 @@ to something else in the request body) returns `404`.
 ### How to configure/add a new puzzle
 
 Both steps are config-only. The layout does not need any changes for a new
-iframe-based slug:
+iframe-based slug already using a supported provider:
 
 1. Add a new key to `src/model/puzzles/puzzleConfigs.ts`'s `puzzleConfigs`
-   record (`slug`, `puzzleGroup`, `iframe: { provider, url }`,
-   `shareEnabled`, `printEnabled`, `hasArchive`, `title`, `description`,
-   optional `image`). If it's another AmuseLabs-hosted puzzle, reuse the
-   `amuseLabsPuzzle(slug, puzzleGroup, title, description, url)` helper
-   (note: this helper doesn't take `image`, set it afterwards on the
-   returned object if/when a real image is available for that puzzle).
-   **`iframe.url` must be that puzzle's own complete, explicit iframe URL,
-   confirmed against the actual provider (or a source that has itself
-   confirmed it against the provider, e.g. the native apps' own working
-   integration), not derived from `slug` or copied from another entry.**
-   Never assume a provider's own naming convention matches our internal
-   slug: the killer-sudoku incident above is a direct, confirmed example
-   of that assumption silently being wrong. `validatePuzzleConfigs` runs
-   once at module load and throws immediately if the entry is malformed
-   (mismatched `slug`, unknown `puzzleGroup`, missing `iframe.provider`,
-   a missing/empty/non-absolute `iframe.url`, empty `title`/`description`,
-   or a present-but-empty `image`).
-   **Write real, curated copy for `title`/`description`**, sourced from
-   the product team's SEO spreadsheet for that puzzle (see "SEO" below for
-   the exact `{date}` templating mechanism). It becomes the page's
-   `<title>` and `<meta name="description">` and their derived Open
-   Graph/Twitter equivalents, don't copy-paste one template string across
-   entries with only the slug swapped in.
-2. Nothing else changes on the DCR side: `PuzzlePageLayout.tsx`'s
-   `PuzzlePageContent` unconditionally renders `PuzzleIframe` pointed at
-   `resolveIframeUrl(puzzleConfig)` for every registry entry. The only thing
-   needed from `frontend` is a request whose `slug` matches the new
-   registry key exactly (see the `frontend` repo's `docs/puzzle-page.md`).
+   record (`slug`, `puzzleGroup`, `iframe`, `shareEnabled`, `printEnabled`,
+   `hasArchive`, `title`, `description`, optional `image`). What `iframe`
+   needs depends on the provider:
+    - **Another AmuseLabs-hosted puzzle** (the common case): reuse the
+      `amuseLabsPuzzle(slug, puzzleGroup, title, description, set)` helper,
+      supplying that puzzle's own confirmed AmuseLabs `set` identifier.
+      `buildAmuseLabsUrl` (`src/lib/puzzleIframeUrl.ts`) is reused
+      automatically, no new builder needed. **`set` must be confirmed
+      against the actual provider (or a source that has itself confirmed
+      it, e.g. the native apps' own working integration), not derived
+      from `slug` or copied from another entry.** Never assume AmuseLabs'
+      own naming convention matches our internal slug: the killer-sudoku
+      incident is a direct, confirmed example of that assumption silently
+      being wrong.
+    - **A genuinely new provider** (e.g. MovieGrid, returning in a future
+      version, not in the V0 registry today): needs its own
+      `PuzzleIframeConfig` union variant, its own builder function in
+      `src/lib/puzzleIframeUrl.ts`, and a new case in
+      `resolvePuzzleIframeUrl`'s dispatcher (the `never` exhaustiveness
+      check will fail to compile until this is done). This is a new,
+      additive strategy, not a blind copy-paste of `buildAmuseLabsUrl`'s
+      logic, a new provider's confirmed query param support may differ
+      (see the iframe URL strategy description in "The V0 puzzle set"
+      above).
+      `validatePuzzleConfigs` runs once at module load and throws
+      immediately if the entry is malformed (mismatched `slug`, unknown
+      `puzzleGroup`, an invalid provider-specific `iframe` config, empty
+      `title`/`description`, or a present-but-empty `image`).
+      **Write real, curated copy for `title`/`description`**, sourced from
+      the product team's SEO spreadsheet for that puzzle (see "SEO" below for
+      the exact `{date}` templating mechanism). It becomes the page's
+      `<title>` and `<meta name="description">` and their derived Open
+      Graph/Twitter equivalents, don't copy-paste one template string across
+      entries with only the slug swapped in.
+2. Nothing else changes on the DCR side: `PuzzlePageLayout.tsx` passes the
+   resolved `puzzleConfig` straight to `PuzzleIframe`, which resolves the
+   iframe URL itself (client-side, since it needs the reader's live
+   sign-in/dark-mode state, see "User/context info passed to the puzzle
+   iframe" below). The only thing needed from `frontend` is a request whose
+   `slug` matches the new registry key exactly (see the `frontend` repo's
+   `docs/puzzle-page.md`).
 
 ### SEO: title, meta description, Open Graph, Twitter card
 
@@ -287,8 +336,9 @@ gap later.
 about the current reader to the puzzle provider two ways:
 
 - As a single JSON-encoded `guardian-puzzle-context` query parameter on the
-  iframe `src` (e.g.
-  `?set=guardian-sudoku-easy&embed=1&idx=1&guardian-puzzle-context=%7B%22userId%22%3Anull%2C%22darkMode%22%3Afalse%2C%22puzzleDate%22%3Anull%7D`,
+  iframe `src` (e.g., for an AmuseLabs entry, whose builder also adds
+  `darkMode`, see below:
+  `?set=guardian-sudoku-easy&embed=1&idx=1&darkMode=0&guardian-puzzle-context=%7B%22userId%22%3Anull%2C%22darkMode%22%3Afalse%2C%22puzzleDate%22%3Anull%7D`,
   which decodes to `{"userId":null,"darkMode":false,"puzzleDate":null}`),
   present from the iframe's very first request. Unlike the parameter's
   previous `userId`-only form, this is always included: the context shape
@@ -337,28 +387,34 @@ interface PuzzleContext {
   `frontend`'s own documentation for how it resolves and redirects on the
   date-in-URL structure.
 
-**A separate, plain `uid=<userId>` query parameter is also appended
-alongside `guardian-puzzle-context`**, only when the reader is signed in
-(omitted entirely, not sent as `uid=null` or empty, when signed out). This
-is a genuinely different, independently-confirmed mechanism from
-`guardian-puzzle-context` above: the native (Android/iOS) apps' own real,
-working AmuseLabs integration appends `&uid=<value>` as a plain query
-parameter when the user is authenticated ("If the user is authenticated,
-we add &uid=<puzzleId>"), and DCR adopted the same query parameter
-name/pattern once confirmed. It is additive, not a replacement,
-`guardian-puzzle-context` still carries dark mode and puzzle date, for
-which there is no separately-confirmed mechanism yet. `uid`'s value is
-sourced identically to `guardian-puzzle-context.userId`
-(`idToken.claims.legacy_identity_id`); the native apps call their
-equivalent value a "puzzleId", but there is no independent confirmation
-that identifier format matches ours, only that this exact query parameter
-name/pattern is what they use for their own equivalent value (see "Open
-questions" below).
+**A separate, plain `uid=<userId>` query parameter, and a plain
+`darkMode=0|1` query parameter, are also appended by AmuseLabs' own
+builder (`buildAmuseLabsUrl`, see "The V0 puzzle set" above), alongside
+`guardian-puzzle-context`.** `uid` is only appended when the reader is
+signed in (omitted entirely, not sent as `uid=null` or empty, when signed
+out); `darkMode=0|1` is always appended (never conditionally omitted,
+unlike `uid`). Both are genuinely different, independently-confirmed
+mechanisms from `guardian-puzzle-context` above, and are AmuseLabs-specific,
+**not** sent to Wordiply (which has no confirmed query param support of
+any kind yet): the native (Android/iOS) apps' own real, working AmuseLabs
+integration appends `&uid=<value>` as a plain query parameter when the
+user is authenticated ("If the user is authenticated, we add
+&uid=<puzzleId>") and a `darkMode=0|1` literal value, and DCR adopted the
+same query parameter names/patterns once confirmed. Both are additive,
+not a replacement, `guardian-puzzle-context` still carries its own
+`darkMode`/`puzzleDate` fields too, applied uniformly to every provider
+regardless of what that provider's own builder adds (see "The V0 puzzle
+set" above for why this split exists). `uid`'s value is sourced identically
+to `guardian-puzzle-context.userId` (`idToken.claims.legacy_identity_id`);
+the native apps call their equivalent value a "puzzleId", but there is no
+independent confirmation that identifier format matches ours, only that
+this exact query parameter name/pattern is what they use for their own
+equivalent value (see "Open questions" below).
 
-The iframe reloads automatically whenever any part of the context or `uid`
-changes while the reader is already on the page: sign in, sign out,
-switching accounts, or the reader's OS switching light/dark theme. The
-component subscribes to both auth state changes
+The iframe reloads automatically whenever any part of the context, `uid`,
+or `darkMode` changes while the reader is already on the page: sign in,
+sign out, switching accounts, or the reader's OS switching light/dark
+theme. The component subscribes to both auth state changes
 (`src/lib/identity.ts`'s `subscribeToAuthStateChange()`, a thin wrapper
 around the `@guardian/identity-auth` client's own
 `authStateManager.subscribe`) and colour-scheme changes (via
@@ -421,47 +477,53 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   (confirmed against native app behaviour): "The apps currently use
   `idx=1` for the latest puzzle. Archive URLs should use the stable `id`
   instead... Do not add `idx=1`, as that selects the latest puzzle instead
-  of the archived one." All 5 of our AmuseLabs entries hardcode `&idx=1`
-  in their `iframe.url`, which is correct only for "today's puzzle" (V0's
-  only real use case), it is **not** valid for showing a specific past
-  date's puzzle. Building calendar/archive functionality (V1) will require
-  each AmuseLabs entry to swap `idx=1` for `id={realProviderPuzzleId}`,
-  where that real per-puzzle id must come from a not-yet-built archive
-  API, it cannot be derived or guessed from a date locally. Treat sourcing
-  that real archive URL/id mechanism from the team as a hard blocker for
-  calendar/archive work, not a nice-to-have. **A related, current gap
-  worth being explicit about**: `instance.puzzleDate` is accepted,
-  displayed next to the title, and passed through to the iframe context
-  (see above), but it does **not** actually change which puzzle instance
-  the iframe shows. The iframe always shows the provider's own "latest"
-  puzzle via `idx=1`, regardless of `puzzleDate`'s value, so the date
-  shown on the page and the puzzle actually embedded can silently diverge
-  once `puzzleDate` ever points anywhere other than today.
-- **Today's hardcoded `PuzzleConfig` URLs are a deliberate V0-only
-  stopgap, expected to be superseded by a future "Puzzles Server".** Per
-  direct guidance from the product/design lead, the long-term architecture
-  intends for puzzle URLs (and progress data) to come from a server-side
-  "Puzzles Server"/API layer (not yet built), which `frontend` would call
-  to get puzzle metadata including URLs, rather than DCR statically
-  hardcoding them in a registry file. A shared internal architecture
-  document ("Puzzles hub 3P API requirements") describes this in more
-  detail: a future Archive API (returning puzzle date/URL/id/title per
-  puzzle), a future Progress API (tracking user completion/score/state per
-  puzzle, phased: local-device-only first, then a thin API wrapper, then a
+  of the archived one." All 5 of our AmuseLabs entries' `buildAmuseLabsUrl`
+  builder (`src/lib/puzzleIframeUrl.ts`) hardcodes `idx=1`, which is
+  correct only for "today's puzzle" (V0's only real use case), it is
+  **not** valid for showing a specific past date's puzzle. Building
+  calendar/archive functionality (V1) will require swapping `idx=1` for
+  `id={realProviderPuzzleId}` in that one shared builder function (a
+  small, contained change, not a per-entry rewrite, since the builder is
+  the single place that assembles the AmuseLabs URL), where that real
+  per-puzzle id must come from a not-yet-built archive API, it cannot be
+  derived or guessed from a date locally. Treat sourcing that real archive
+  URL/id mechanism from the team as a hard blocker for calendar/archive
+  work, not a nice-to-have. **A related, current gap worth being explicit
+  about**: `instance.puzzleDate` is accepted, displayed next to the title,
+  and passed through to the iframe context (see above), but it does
+  **not** actually change which puzzle instance the iframe shows. The
+  iframe always shows the provider's own "latest" puzzle via `idx=1`,
+  regardless of `puzzleDate`'s value, so the date shown on the page and
+  the puzzle actually embedded can silently diverge once `puzzleDate`
+  ever points anywhere other than today.
+- **Today's `puzzleConfigs.ts` registry (with its explicit, per-entry
+  `set`/`baseUrl` identity data, resolved into a URL by
+  `src/lib/puzzleIframeUrl.ts`) is a deliberate V0-only stopgap, expected
+  to be superseded by a future "Puzzles Server".** Per direct guidance
+  from the product/design lead, the long-term architecture intends for
+  puzzle URLs (and progress data) to come from a server-side "Puzzles
+  Server"/API layer (not yet built), which `frontend` would call to get
+  puzzle metadata including URLs, rather than DCR statically hardcoding
+  them in a registry file. A shared internal architecture document
+  ("Puzzles hub 3P API requirements") describes this in more detail: a
+  future Archive API (returning puzzle date/URL/id/title per puzzle), a
+  future Progress API (tracking user completion/score/state per puzzle,
+  phased: local-device-only first, then a thin API wrapper, then a
   backing database), and confirms the exact real AmuseLabs URL parameter
   conventions already implemented here (`set`, `id` vs `idx=1`, `embed=1`,
   `uid`, `darkMode=0|1`), plus MovieGrid/sportsreveal's simpler convention
   (base URL plus a client-added `darkMode` param only, no confirmed `uid`
   support for those two providers). `puzzleConfigs.ts`'s current registry,
-  with its hardcoded, explicit-per-entry URLs, is a deliberate,
+  with its explicit, per-entry identity data, is a deliberate,
   correct-for-now V0 solution, not the intended final architecture. When
-  the Puzzles Server/Archive API materialises, this registry's static
-  URLs are expected to be replaced or supplemented by dynamically-fetched
-  values, at minimum for archive/calendar navigation, likely eventually
-  for the "today" URL too. This is a known, anticipated future refactor,
-  not a surprise to discover later. **Do not attempt to build against this
-  future API now, it does not exist yet**, this bullet exists purely so a
-  future reader/maintainer has this context without needing it
+  the Puzzles Server/Archive API materialises, this registry's statically
+  configured values are expected to be replaced or supplemented by
+  dynamically-fetched values, at minimum for archive/calendar navigation,
+  likely eventually for the "today" URL too. This is a known, anticipated
+  future refactor, not a surprise to discover later. **Do not attempt to
+  build against this future API now, it does not exist yet**, this bullet
+  exists purely so a future reader/maintainer has this context without
+  needing it
   rediscovered from scratch.
 - **Dark mode: the page chrome supports it, and a dark-mode signal is now
   sent to the puzzle iframe, but whether the provider actually honours it is
