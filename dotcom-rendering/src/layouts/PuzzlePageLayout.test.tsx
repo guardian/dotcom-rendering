@@ -88,6 +88,32 @@ describe('PuzzlePageLayout', () => {
 		expect(screen.getByText('Logic puzzles')).toBeInTheDocument();
 	});
 
+	describe('print button (Sudoku-only, per PR #16700 review)', () => {
+		it('renders the print button for a sudoku puzzle', () => {
+			renderPuzzlePageLayout('sudoku-easy');
+
+			expect(
+				screen.getByRole('button', { name: 'Print' }),
+			).toBeInTheDocument();
+		});
+
+		it('does not render the print button for word-wheel', () => {
+			renderPuzzlePageLayout('word-wheel');
+
+			expect(
+				screen.queryByRole('button', { name: 'Print' }),
+			).not.toBeInTheDocument();
+		});
+
+		it('does not render the print button for wordiply', () => {
+			renderPuzzlePageLayout('wordiply');
+
+			expect(
+				screen.queryByRole('button', { name: 'Print' }),
+			).not.toBeInTheDocument();
+		});
+	});
+
 	describe('"More from Puzzles & Games" rail (v1-scoped feature)', () => {
 		it('renders the rail when data is present AND v0+v1 are both enabled', () => {
 			renderPuzzlePageLayout('sudoku-easy', {

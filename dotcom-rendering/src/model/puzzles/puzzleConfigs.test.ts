@@ -224,6 +224,20 @@ describe('puzzleConfigs registry', () => {
 		});
 	});
 
+	describe('printEnabled (Sudoku-only, per PR #16700 review)', () => {
+		it('is true for all 4 sudoku entries', () => {
+			expect(puzzleConfigs['sudoku-easy']!.printEnabled).toBe(true);
+			expect(puzzleConfigs['sudoku-medium']!.printEnabled).toBe(true);
+			expect(puzzleConfigs['sudoku-hard']!.printEnabled).toBe(true);
+			expect(puzzleConfigs['sudoku-killer']!.printEnabled).toBe(true);
+		});
+
+		it('is false for word-wheel and wordiply', () => {
+			expect(puzzleConfigs['word-wheel']!.printEnabled).toBe(false);
+			expect(puzzleConfigs.wordiply!.printEnabled).toBe(false);
+		});
+	});
+
 	describe('registry iframe config shape', () => {
 		// Each of these hardcodes and checks a single entry's own, exact
 		// provider-specific identity data independently, this is

@@ -75,6 +75,17 @@ export interface PuzzleConfig {
 	puzzleGroup: PuzzleGroup;
 	iframe: PuzzleIframeConfig;
 	shareEnabled: boolean;
+	/**
+	 * Whether the "Print" button is shown for this puzzle. Currently
+	 * `true` only for the 4 sudoku entries, by explicit product decision
+	 * (PR #16700 review): existing readers rely on printing to play
+	 * Sudoku, since there isn't really another way to do that on the web,
+	 * and the plan is to retire the current static Sudoku page once V0
+	 * ships. No other puzzle in this registry currently needs print, this
+	 * is a deliberate, puzzle-specific decision, not a generic per-puzzle
+	 * toggle without rationale, don't default new entries to `true`
+	 * without a similar, explicit product reason.
+	 */
 	printEnabled: boolean;
 	hasArchive: boolean;
 	/**
@@ -127,12 +138,13 @@ const amuseLabsPuzzle = (
 	title: string,
 	description: string,
 	set: string,
+	printEnabled: boolean,
 ): PuzzleConfig => ({
 	slug,
 	puzzleGroup,
 	iframe: { provider: 'amuselabs', set },
 	shareEnabled: true,
-	printEnabled: true,
+	printEnabled,
 	hasArchive: true,
 	title,
 	description,
@@ -166,6 +178,7 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'Easy sudoku {date} - logic puzzle | The Guardian',
 		'Easy sudoku {date}. Ease yourself in with this easy sudoku. Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
 		'guardian-sudoku-easy',
+		true,
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// medium sudoku
@@ -175,6 +188,7 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'Medium sudoku {date} - logic puzzle | The Guardian',
 		'Medium sudoku {date}. Ready to master the medium sudoku? Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
 		'guardian-sudoku-medium',
+		true,
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// hard sudoku
@@ -184,6 +198,7 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'Hard sudoku {date} - logic puzzle | The Guardian',
 		'Hard sudoku {date}. Ready to take on the hard sudoku? Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
 		'guardian-sudoku-hard',
+		true,
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// killer sudoku
@@ -201,17 +216,23 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'Killer sudoku {date} - logic puzzle | The Guardian',
 		'Killer sudoku {date}. Killer sudoku adds a twist. Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
 		'guardian-killer-sudoku-medium',
+		true,
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// daily word wheel, word wheel puzzle, word wheel online, word wheel
 	// game, guardian word wheel, word wheel for today, guardian word wheel
 	// today
+	//
+	// printEnabled: false - print is Sudoku-only for V0 by explicit
+	// product decision (PR #16700 review), see PuzzleConfig.printEnabled's
+	// doc comment.
 	'word-wheel': amuseLabsPuzzle(
 		'word-wheel',
 		'word-games',
 		'Word wheel {date} - word game | The Guardian',
 		'Word wheel {date}. See how many words you can make out of the nine-letter daily word wheel, including the panagram.',
 		'guardian-word-wheel',
+		false,
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// guardian wordiply, wordiply today
@@ -223,7 +244,9 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 			baseUrl: 'https://www.wordiply.com/',
 		},
 		shareEnabled: true,
-		printEnabled: true,
+		// print is Sudoku-only for V0 by explicit product decision (PR
+		// #16700 review), see PuzzleConfig.printEnabled's doc comment.
+		printEnabled: false,
 		hasArchive: true,
 		title: 'Wordiply {date} - word game | The Guardian',
 		description:
