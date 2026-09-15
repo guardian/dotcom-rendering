@@ -39,10 +39,6 @@ const wrapperStyles = css`
 	${from.tablet} {
 		margin-left: 0;
 	}
-
-	&[open] .archive-arrow {
-		transform: rotate(90deg);
-	}
 `;
 
 const summaryStyles = css`
@@ -77,8 +73,8 @@ const summaryStyles = css`
 `;
 
 const arrowStyles = css`
-	display: inline-block;
-	transition: transform 0.1s ease-out;
+	display: block;
+	flex-shrink: 0;
 `;
 
 const menuStyles = css`
@@ -123,27 +119,27 @@ export const PuzzlesArchiveMenu = ({
 	const summaryRef = useRef<HTMLElement>(null);
 
 	useEffect(() => {
-		const close = (event: MouseEvent | KeyboardEvent) => {
+		const close = (event: Event) => {
 			const details = detailsRef.current;
 			if (details?.open !== true) {
 				return;
 			}
-			if (event instanceof KeyboardEvent && event.key !== 'Escape') {
-				return;
-			}
-			if (
-				event instanceof MouseEvent &&
-				details.contains(event.target as Node)
-			) {
+			if (event instanceof KeyboardEvent) {
+				if (event.key !== 'Escape') return;
+			} else if (event.composedPath().includes(details)) {
 				return;
 			}
 			details.open = false;
 			if (event instanceof KeyboardEvent) summaryRef.current?.focus();
 		};
-		document.addEventListener('mousedown', close);
+		document.addEventListener('pointerdown', close, true);
+		document.addEventListener('mousedown', close, true);
+		document.addEventListener('click', close, true);
 		document.addEventListener('keydown', close);
 		return () => {
-			document.removeEventListener('mousedown', close);
+			document.removeEventListener('pointerdown', close, true);
+			document.removeEventListener('mousedown', close, true);
+			document.removeEventListener('click', close, true);
 			document.removeEventListener('keydown', close);
 		};
 	}, []);
@@ -160,13 +156,23 @@ export const PuzzlesArchiveMenu = ({
 		<details css={wrapperStyles} ref={detailsRef}>
 			<summary css={summaryStyles} ref={summaryRef}>
 				{label}{' '}
-				<span
+				<svg
+					width="9"
+					height="5"
+					viewBox="0 0 9 5"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
 					aria-hidden="true"
-					className="archive-arrow"
+					focusable="false"
 					css={arrowStyles}
 				>
-					→
-				</span>
+					<path
+						fillRule="evenodd"
+						clipRule="evenodd"
+						d="M3.05176e-05 0.712324L3.82876 5H4.55936L8.38813 0.712328L7.69406 0L4.19403 3L0.694092 0L3.05176e-05 0.712324Z"
+						fill="black"
+					/>
+				</svg>
 			</summary>
 			<ul aria-label={label} css={menuStyles}>
 				{validArchives.map(({ archive, url }) => (

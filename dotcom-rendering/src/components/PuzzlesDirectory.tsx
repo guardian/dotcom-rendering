@@ -59,9 +59,39 @@ const titleStyles = css`
 		padding: ${space[2]}px 20px ${space[3]}px;
 		${headlineBold24};
 	}
+`;
 
+const headingColumnStyles = css`
 	${from.leftCol} {
+		display: flex;
+		flex-direction: column;
 		border-right: 1px solid ${palette.neutral[86]};
+	}
+`;
+
+const crosswordLinksStyles = css`
+	display: none;
+	${from.leftCol} {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		margin-top: auto;
+		padding: 0 20px 24px;
+	}
+	a {
+		min-height: 24px;
+		padding: 4px 8px;
+		border-top: 1px solid ${palette.neutral[86]};
+		border-left: 1px solid ${palette.neutral[86]};
+		color: ${palette.neutral[7]};
+		text-decoration: none;
+		${textSans14};
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	a:focus-visible {
+		outline: 3px solid ${palette.brand[500]};
 	}
 `;
 
@@ -379,7 +409,7 @@ const PuzzleCard = ({
 const Archive = ({ container }: { container: PuzzleContainer }) => {
 	if (container.content.archiveChoices !== undefined) {
 		return (
-			<Island priority="feature" defer={{ until: 'interaction' }}>
+			<Island priority="critical">
 				<PuzzlesArchiveMenu
 					archives={container.content.archiveChoices}
 					label={`${container.title} archive`}
@@ -432,9 +462,34 @@ const DirectorySection = ({ container }: { container: PuzzleContainer }) => {
 			css={sectionStyles}
 			id={container.id}
 		>
-			<h2 css={titleStyles} id={`${container.id}-title`}>
-				{container.title}
-			</h2>
+			<div css={headingColumnStyles}>
+				<h2 css={titleStyles} id={`${container.id}-title`}>
+					{container.title}
+				</h2>
+				{container.id === 'crosswords' && (
+					<nav
+						css={crosswordLinksStyles}
+						aria-label="Crossword links"
+					>
+						<a
+							href="https://support.theguardian.com"
+							{...externalProps(
+								'https://support.theguardian.com',
+							)}
+						>
+							Support the Guardian
+						</a>
+						<a
+							href="https://www.theguardian.com/crosswords/crossword-blog"
+							{...externalProps(
+								'https://www.theguardian.com/crosswords/crossword-blog',
+							)}
+						>
+							Blog
+						</a>
+					</nav>
+				)}
+			</div>
 			<div css={contentStyles}>
 				<Rows
 					isFeatured={container.variant === 'featured'}

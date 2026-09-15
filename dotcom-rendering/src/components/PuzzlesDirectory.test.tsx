@@ -7,9 +7,15 @@ import type {
 	PuzzlesLayoutType,
 } from '../types/puzzlesPage';
 import { getPuzzleUrl, PuzzlesDirectory } from './PuzzlesDirectory';
+import { Island } from './Island';
 
+jest.mock('./AdSlot.web', () => ({
+	AdSlot: ({ index }: { index: number }) => (
+		<div data-testid={`ad-${index}`} />
+	),
+}));
 jest.mock('./Island', () => ({
-	Island: ({ children }: { children: ReactNode }) => children,
+	Island: jest.fn(({ children }: { children: ReactNode }) => children),
 }));
 
 const item = (overrides: Partial<PuzzleItem> = {}): PuzzleItem => ({
@@ -33,6 +39,35 @@ const section = (
 });
 
 describe('PuzzlesDirectory', () => {
+	it('keeps the crossword sidebar links hidden below leftCol and scoped to crosswords', () => {
+		const { container } = render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({ id: 'crosswords', title: 'Crosswords' }),
+						section({
+							id: 'logic-puzzles',
+							title: 'Logic puzzles',
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+		const links = container.querySelector(
+			'nav[aria-label="Crossword links"]',
+		)!;
+		expect(links).not.toBeVisible();
+		expect(
+			links.querySelector('a[href="https://support.theguardian.com"]'),
+		).toHaveTextContent('Support the Guardian');
+		expect(
+			links.querySelector(
+				'a[href="https://www.theguardian.com/crosswords/crossword-blog"]',
+			),
+		).toHaveTextContent('Blog');
+		expect(container.querySelector('#logic-puzzles nav')).toBeNull();
+	});
 	it.each([
 		['crossword', '#fff4f2', '#ab0613'],
 		['sudoku', '#f1f8fc', '#0077b6'],
@@ -399,7 +434,18 @@ describe('PuzzlesDirectory', () => {
 			/>,
 		);
 		const summary = screen.getByText('Multiple archive').closest('summary');
+		const islandProps = jest.mocked(Island).mock.calls.at(-1)?.[0];
+		expect(islandProps).toMatchObject({ priority: 'critical' });
+		expect(islandProps).not.toHaveProperty('defer');
 		expect(summary).not.toBeNull();
+		expect(summary!.querySelector('svg')).toHaveAttribute(
+			'viewBox',
+			'0 0 9 5',
+		);
+		expect(summary!.querySelector('svg')).toHaveAttribute(
+			'aria-hidden',
+			'true',
+		);
 		fireEvent.click(summary!);
 		expect(screen.getByRole('link', { name: 'Archive A' })).toHaveAttribute(
 			'href',
@@ -413,9 +459,19 @@ describe('PuzzlesDirectory', () => {
 			expect(summary!.closest('details')).not.toHaveAttribute('open'),
 		);
 		fireEvent.click(summary!);
+		fireEvent.click(document.body);
+		await waitFor(() =>
+			expect(summary!.closest('details')).not.toHaveAttribute('open'),
+		);
+		fireEvent.click(summary!);
 		fireEvent.mouseDown(document.body);
 		await waitFor(() =>
 			expect(summary!.closest('details')).not.toHaveAttribute('open'),
 		);
+		fireEvent.click(summary!);
+		fireEvent.pointerDown(summary!.querySelector('svg')!);
+		expect(summary!.closest('details')).toHaveAttribute('open');
+		fireEvent.pointerDown(document.body);
+		expect(summary!.closest('details')).not.toHaveAttribute('open');
 	});
 });
