@@ -337,7 +337,7 @@ export const PuzzlesSupporting = ({
 						<div css={popularGroupsStyles}>
 							{supporting.popularGroups.map((group) => {
 								const items = group.itemIds
-									.map((id) => itemsById.get(id))
+									.map((_id) => itemsById.get(_id))
 									.filter(
 										(item): item is PuzzleItem =>
 											item !== undefined,
