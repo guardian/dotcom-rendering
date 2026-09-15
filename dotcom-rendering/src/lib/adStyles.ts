@@ -126,6 +126,8 @@ const spacefinderAdSlotContainerStyles = css`
 		text-align: center;
 		display: flex;
 		justify-content: center;
+		/* TODO: Revisit ads positioning/sizing nicely in interactive body grid */
+		width: 100%;
 		max-width: 620px;
 		margin-left: 0;
 
