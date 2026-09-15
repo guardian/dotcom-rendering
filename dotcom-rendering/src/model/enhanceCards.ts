@@ -26,7 +26,7 @@ import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
 	DCRSupportingContent,
-	EditorialTest,
+	FrontEditorialTest,
 } from '../types/front';
 import type { ArticleMedia, MainMedia } from '../types/mainMedia';
 import type { PodcastSeriesImage, TagType } from '../types/tag';
@@ -203,7 +203,7 @@ const decideVideoAtomImage = (
  * Checks if an editorial test is active by making sure it has not been manually ended,
  * that it has a valid expiry date, and that the expiry date is in the future
  */
-const isActiveEditorialTest = (test: EditorialTest) =>
+const isActiveEditorialTest = (test: FrontEditorialTest) =>
 	!test.hasManuallyEndedOnThisTrail &&
 	!!test.expiryDate &&
 	test.expiryDate > Date.now();
@@ -213,8 +213,8 @@ const isActiveEditorialTest = (test: EditorialTest) =>
  * test is found, return undefined
  */
 const findActiveEditorialTest = (
-	tests: EditorialTest[] | undefined,
-): EditorialTest | undefined => {
+	tests: FrontEditorialTest[] | undefined,
+): FrontEditorialTest | undefined => {
 	return tests?.find((test) => isActiveEditorialTest(test));
 };
 

@@ -5,7 +5,7 @@ import type {
 	FESupportingContent,
 } from '../frontend/feFront';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import type { EditorialTest, VariantMeta } from '../types/front';
+import type { FrontEditorialTest, VariantMeta } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import {
 	decideArticleMedia,
@@ -626,7 +626,7 @@ describe('Enhance Cards', () => {
 								},
 							} as VariantMeta,
 						],
-					} as EditorialTest,
+					} as FrontEditorialTest,
 				],
 			},
 		};
@@ -639,7 +639,7 @@ describe('Enhance Cards', () => {
 					{
 						...cardWithEditorialTest.properties.tests[0],
 						expiryDate: Date.now() - oneHourInMilliseconds,
-					} as EditorialTest,
+					} as FrontEditorialTest,
 				],
 			},
 		};
@@ -652,7 +652,7 @@ describe('Enhance Cards', () => {
 					{
 						...cardWithEditorialTest.properties.tests[0],
 						hasManuallyEndedOnThisTrail: true,
-					} as EditorialTest,
+					} as FrontEditorialTest,
 				],
 			},
 		};
