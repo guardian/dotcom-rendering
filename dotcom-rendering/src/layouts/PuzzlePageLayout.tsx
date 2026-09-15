@@ -16,6 +16,7 @@ import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.island';
 import { SubNav } from '../components/SubNav.island';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { formatPuzzleDate } from '../lib/puzzleDate';
 import { isPuzzlesHubV1Enabled } from '../lib/puzzlesHubVersionExperiment';
 import type { NavType } from '../model/extract-nav';
 import {
@@ -89,6 +90,12 @@ const puzzleTypeLabel = css`
 	letter-spacing: 0.02em;
 `;
 
+const puzzleDateStyles = css`
+	display: block;
+	color: ${themePalette('--sub-meta-text')};
+	font-weight: 400;
+`;
+
 const metaRow = css`
 	display: flex;
 	align-items: center;
@@ -160,6 +167,7 @@ const PuzzlePageContent = ({
 				src={resolveIframeUrl(puzzleConfig)}
 				title={instance.title}
 				darkModeAvailable={darkModeAvailable}
+				puzzleDate={instance.puzzleDate ?? null}
 			/>
 		</Island>
 	);
@@ -212,6 +220,7 @@ export const PuzzlePageLayout = ({
 		!!instance.moreFromPuzzlesAndGames?.length &&
 		isPuzzlesHubV1Enabled(config);
 	const labelText = puzzleGroupLabels[puzzleConfig.puzzleGroup];
+	const displayDate = formatPuzzleDate(instance.puzzleDate);
 
 	return (
 		<>
@@ -259,6 +268,11 @@ export const PuzzlePageLayout = ({
 						</GridItem>
 						<GridItem area="title">
 							<h1>{instance.title}</h1>
+							{displayDate && (
+								<span css={puzzleDateStyles}>
+									{displayDate}
+								</span>
+							)}
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={metaRow}>

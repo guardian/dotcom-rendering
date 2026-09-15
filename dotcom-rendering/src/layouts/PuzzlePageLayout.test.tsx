@@ -62,6 +62,23 @@ describe('PuzzlePageLayout', () => {
 		).toBeInTheDocument();
 	});
 
+	it('renders a human-readable puzzleDate next to the title when present', () => {
+		renderPuzzlePageLayout('sudoku-easy');
+
+		expect(screen.getByText('11 September 2026')).toBeInTheDocument();
+	});
+
+	it('does not render a date when puzzleDate is absent', () => {
+		renderPuzzlePageLayout('sudoku-easy', {
+			instance: {
+				...createPuzzlePage('sudoku-easy').instance,
+				puzzleDate: undefined,
+			},
+		});
+
+		expect(screen.queryByText('11 September 2026')).not.toBeInTheDocument();
+	});
+
 	it('renders the puzzleGroup label as plain, non-linked text', () => {
 		renderPuzzlePageLayout('sudoku-easy');
 
