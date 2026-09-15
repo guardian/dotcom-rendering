@@ -62,16 +62,22 @@ const meta = {
 	component: CustomSubNav,
 	title: 'Components/Masthead/Titlepiece/CustomSubNav',
 	decorators: [
-		(Story) => (
-			<div
-				css={css`
-					background-color: ${sourcePalette.brand[400]};
-					padding: ${space[3]}px;
-				`}
-			>
-				<Story />
-			</div>
-		),
+		(Story, context) => {
+			const hasImage =
+				(context.args.customSubNav.images?.length ?? 0) > 0;
+			return (
+				<div
+					css={css`
+						background-color: ${hasImage
+							? sourcePalette.neutral[100]
+							: sourcePalette.brand[400]};
+						padding: ${hasImage ? 0 : space[2]}px;
+					`}
+				>
+					<Story />
+				</div>
+			);
+		},
 	],
 	render: (args) => <CustomSubNav {...args} />,
 	args: {

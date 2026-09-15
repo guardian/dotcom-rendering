@@ -118,8 +118,12 @@ const imageWrapperStyles = css`
 const headerImageStyles = css`
 	display: block;
 	width: 100%;
-	height: 140px;
+	height: 210px;
 	object-fit: cover;
+
+	${from.tablet} {
+		height: 140px;
+	}
 `;
 
 const imageHeaderTextStyles = css`
