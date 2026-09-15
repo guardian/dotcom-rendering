@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	from,
-	headlineBold50,
+	breakpoints,
 	palette,
 	space,
+	visuallyHidden,
 } from '@guardian/source/foundations';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -22,25 +22,53 @@ const mainStyles = css`
 `;
 
 const brandStyles = css`
+	box-sizing: border-box;
 	max-width: 1300px;
+	height: 230px;
 	margin: 0 auto;
-	padding: ${space[6]}px ${space[3]}px ${space[8]}px;
+	overflow: hidden;
 	border-right: 1px solid ${palette.neutral[86]};
 	border-left: 1px solid ${palette.neutral[86]};
-	background: ${palette.neutral[97]};
+	/* The artwork is transparent and uses this illustrated-header background. */
+	background: #fff7f0;
 `;
 
-const titleStyles = css`
-	max-width: 10ch;
-	margin: 0;
-	${headlineBold50};
-	font-size: 48px;
-	line-height: 0.9;
-
-	${from.tablet} {
-		font-size: 64px;
-	}
+const brandImageStyles = css`
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 `;
+
+const brandPictureStyles = css`
+	display: block;
+	height: 100%;
+`;
+
+const headerArtwork = (filename: string) =>
+	`https://i.guim.co.uk/img/uploads/2026/09/15/${filename}.png?width=440&dpr=2&s=none`;
+
+// Descending media queries ensure that the browser chooses the largest match.
+const headerSources = [
+	{ breakpoint: 1728, filename: 'header-desktop-1728px' },
+	{ breakpoint: breakpoints.wide, filename: 'header-wide-1440px' },
+	{ breakpoint: breakpoints.leftCol, filename: 'header-leftcol-1280px' },
+	{ breakpoint: breakpoints.desktop, filename: 'header-desktop-1024px' },
+	{ breakpoint: 768, filename: 'header-tablet-979px' },
+	{ breakpoint: breakpoints.tablet, filename: 'header-tablet-768px' },
+	{
+		breakpoint: breakpoints.phablet,
+		filename: 'header-mobile-phablet-669px',
+	},
+	{
+		breakpoint: breakpoints.mobileLandscape,
+		filename: 'header-mobile-landscape-480px',
+	},
+	{
+		breakpoint: breakpoints.mobileMedium,
+		filename: 'header-mobile-medium-393px',
+	},
+];
 
 export const PuzzlesLayout = ({
 	puzzlesPage,
@@ -88,11 +116,21 @@ export const PuzzlesLayout = ({
 				id="maincontent"
 			>
 				<header css={brandStyles}>
-					<h1 css={titleStyles}>
-						Puzzles
-						<br />
-						&amp; Games
-					</h1>
+					<h1 css={visuallyHidden}>Puzzles and Games</h1>
+					<picture css={brandPictureStyles}>
+						{headerSources.map(({ breakpoint, filename }) => (
+							<source
+								key={filename}
+								media={`(min-width: ${breakpoint}px)`}
+								srcSet={headerArtwork(filename)}
+							/>
+						))}
+						<img
+							alt=""
+							css={brandImageStyles}
+							src={headerArtwork('header-mobile-360px')}
+						/>
+					</picture>
 				</header>
 				<PuzzlesDirectory
 					layout={puzzlesPage.layout}
