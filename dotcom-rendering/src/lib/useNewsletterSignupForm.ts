@@ -5,6 +5,7 @@ import type React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { getNewslettersClient } from './bridgetApi';
 import { lazyFetchEmailWithTimeout } from './fetchEmail';
 import {
 	getEffectiveMarketingOptIn,
@@ -305,18 +306,38 @@ export const useNewsletterSignupForm = (
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
 	}, []);
-	useEffect(() => {
-		if (emailFetchStartedRef.current) return;
-		if (isSignedIn === 'Pending') return;
-		emailFetchStartedRef.current = true;
 
-		void resolveUserEmail(isSignedIn).then((email) => {
-			if (!isString(email)) return;
-			setUserEmail(email);
-			setHasPrefilledEmail(true);
-			setIsInteracted(true);
-		});
-	}, [isSignedIn]);
+	useEffect(() => {
+		if (renderingTarget === 'Apps') {
+			// Fill in email using apps bridget API
+			void getNewslettersClient()
+				.getLoggedInUserEmail()
+				.then((maybeEmail) => {
+					const email = maybeEmail.emailAddress;
+					if (!email) return;
+					setUserEmail(email);
+					setHasPrefilledEmail(true);
+					setIsInteracted(true);
+				})
+				.catch((reason) => {
+					console.log(
+						'Failed to getLoggedInUserEmail from bridget ',
+						reason,
+					);
+				});
+		} else {
+			if (emailFetchStartedRef.current) return;
+			if (isSignedIn === 'Pending') return;
+			emailFetchStartedRef.current = true;
+
+			void resolveUserEmail(isSignedIn).then((email) => {
+				if (!isString(email)) return;
+				setUserEmail(email);
+				setHasPrefilledEmail(true);
+				setIsInteracted(true);
+			});
+		}
+	}, [isSignedIn, renderingTarget]);
 
 	const submitForm = useCallback(
 		async (emailAddress: string, token: string): Promise<void> => {
