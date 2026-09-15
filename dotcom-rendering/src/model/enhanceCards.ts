@@ -62,6 +62,12 @@ const enhanceSupportingContent = (
 			url: decideUrl(subLink),
 			kickerText:
 				!kickerText && supportingContentIsLive ? 'Live' : kickerText,
+			headlineTestUuid: findHeadlineTestUuid(
+				subLink,
+				serverSideABTests,
+				isEditorialABTestingEnabled,
+				pageId,
+			),
 		};
 	});
 };
@@ -212,6 +218,58 @@ const findActiveEditorialTest = (
 	return tests?.find((test) => isActiveEditorialTest(test));
 };
 
+type EditorialTestData = {
+	headline: string;
+	uuid: string;
+};
+
+/**
+ * Centralises the logic used by both the decideHeadline and findHeadlineTestUuid functions. Makes sure that
+ * the the testing switch is enabled, the page is in the test bucket, the test can run on the given front,
+ * and that a valid variant headline is defined before returning the variant headline and test UUID.
+ */
+export const getEditorialTestData = (
+	faciaCard: FEFrontCard | FESupportingContent,
+	serverSideABTests: Record<string, string>,
+	isEditorialABTestingEnabled: boolean,
+	pageId?: string,
+): EditorialTestData | undefined => {
+	const activeEditorialTest = findActiveEditorialTest(
+		faciaCard.properties.tests,
+	);
+
+	// don't return data if there is no active test on the card or editorial testing is switched off
+	if (!activeEditorialTest || !isEditorialABTestingEnabled) {
+		return undefined;
+	}
+
+	const testCanRunOnPage =
+		!isUndefined(pageId) &&
+		activeEditorialTest.frontsThisTestCanRunOn.includes(pageId);
+
+	// don't return data if test cannot run on the current front
+	if (!testCanRunOnPage) return undefined;
+
+	const testBucket = serverSideABTests['fronts-and-curation-editorial-test'];
+
+	// don't return data if the pageview is not in the editorial test bucket
+	if (isUndefined(testBucket)) {
+		return undefined;
+	}
+
+	const variantMeta = activeEditorialTest.variantMeta.find(
+		(variant) => variant.id.toLowerCase() === testBucket,
+	);
+
+	// make sure the variant headline isn't undefined and that it is of type string
+	if (typeof variantMeta?.meta.headline !== 'string') return undefined;
+
+	return {
+		headline: variantMeta.meta.headline,
+		uuid: activeEditorialTest.testUuid,
+	};
+};
+
 /**
  * Decide the headline to be shown for a given card. If there is an active editorial test on a card,
  * return the variant headline matching the user test group. Otherwise, return the default headline
@@ -222,36 +280,37 @@ export const decideHeadline = (
 	isEditorialABTestingEnabled: boolean,
 	pageId?: string,
 ): string => {
-	const defaultHeadline = faciaCard.header.headline;
-
-	const testBucket = serverSideABTests['fronts-and-curation-editorial-test'];
-
-	const activeEditorialTest = findActiveEditorialTest(
-		faciaCard.properties.tests,
+	const editorialTestData = getEditorialTestData(
+		faciaCard,
+		serverSideABTests,
+		isEditorialABTestingEnabled,
+		pageId,
 	);
 
-	if (
-		!isEditorialABTestingEnabled ||
-		isUndefined(testBucket) ||
-		!activeEditorialTest
-	) {
-		return defaultHeadline;
-	}
+	if (isUndefined(editorialTestData)) return faciaCard.header.headline;
 
-	const testCanRunOnPage =
-		!isUndefined(pageId) &&
-		activeEditorialTest.frontsThisTestCanRunOn.includes(pageId);
+	return editorialTestData.headline;
+};
 
-	if (!testCanRunOnPage) return defaultHeadline;
-
-	const variantMeta = activeEditorialTest.variantMeta.find(
-		(variant) => variant.id.toLowerCase() === testBucket,
+/**
+ * Find the UUID of a headline test if one is running on the card
+ */
+export const findHeadlineTestUuid = (
+	faciaCard: FEFrontCard | FESupportingContent,
+	serverSideABTests: Record<string, string>,
+	isEditorialABTestingEnabled: boolean,
+	pageId?: string,
+): string | undefined => {
+	const editorialTestData = getEditorialTestData(
+		faciaCard,
+		serverSideABTests,
+		isEditorialABTestingEnabled,
+		pageId,
 	);
 
-	// make sure the variant headline isn't undefined and that it is of type string
-	if (typeof variantMeta?.meta.headline !== 'string') return defaultHeadline;
+	if (isUndefined(editorialTestData)) return undefined;
 
-	return variantMeta.meta.headline;
+	return editorialTestData.uuid;
 };
 
 /**
@@ -596,5 +655,11 @@ export const enhanceCards = (
 							?.allImages[0]?.fields.altText ?? '',
 				},
 			}),
+			headlineTestUuid: findHeadlineTestUuid(
+				faciaCard,
+				serverSideABTests,
+				isEditorialABTestingEnabled,
+				pageId,
+			),
 		};
 	});

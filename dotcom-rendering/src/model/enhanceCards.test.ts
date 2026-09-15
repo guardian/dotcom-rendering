@@ -9,9 +9,9 @@ import type { EditorialTest, VariantMeta } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import {
 	decideArticleMedia,
-	decideHeadline,
 	decideReplacementMedia,
 	getActiveMediaAtom,
+	getEditorialTestData,
 	getMediaMetadata,
 } from './enhanceCards';
 
@@ -535,7 +535,7 @@ describe('Enhance Cards', () => {
 		});
 	});
 
-	describe('decideHeadline', () => {
+	describe('getEditorialTestData', () => {
 		const cardWithNoEditorialTest = {
 			properties: {
 				isBreaking: false,
@@ -667,26 +667,31 @@ describe('Enhance Cards', () => {
 			supportingContent: [cardWithExpiredEditorialTest],
 		};
 
-		it('returns the default headline if no editorial test exists on the card, page is not in allowed fronts list, and user is not in a test bucket', () => {
+		it('returns undefined if no editorial test exists on the card, page is not in allowed fronts list, and user is not in a test bucket', () => {
 			expect(
-				decideHeadline(
+				getEditorialTestData(
 					cardWithNoEditorialTest,
 					{},
 					true,
 					'invalid-test-front',
 				),
-			).toEqual('Headline');
+			).toEqual(undefined);
 		});
 
-		it('returns the default headline if editorial test exists and page is in allowed fronts list, but user is not in a test bucket', () => {
+		it('returns undefined if editorial test exists and page is in allowed fronts list, but user is not in a test bucket', () => {
 			expect(
-				decideHeadline(cardWithEditorialTest, {}, true, 'test-front'),
-			).toEqual('Headline');
+				getEditorialTestData(
+					cardWithEditorialTest,
+					{},
+					true,
+					'test-front',
+				),
+			).toEqual(undefined);
 		});
 
-		it('returns the default headline if user is in a test bucket and page is in allowed fronts list, but editorial test does not exist', () => {
+		it('returns undefined if user is in a test bucket and page is in allowed fronts list, but editorial test does not exist', () => {
 			expect(
-				decideHeadline(
+				getEditorialTestData(
 					cardWithNoEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -694,12 +699,12 @@ describe('Enhance Cards', () => {
 					true,
 					'test-front',
 				),
-			).toEqual('Headline');
+			).toEqual(undefined);
 		});
 
-		it('returns the default headline if editorial test exists and user is in a test bucket, but page is not in allowed fronts list', () => {
+		it('returns undefined if editorial test exists and user is in a test bucket, but page is not in allowed fronts list', () => {
 			expect(
-				decideHeadline(
+				getEditorialTestData(
 					cardWithEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -707,12 +712,12 @@ describe('Enhance Cards', () => {
 					true,
 					'invalid-test-front',
 				),
-			).toEqual('Headline');
+			).toEqual(undefined);
 		});
 
-		it('returns the default headline if editorial test exists, page is in allowed fronts list, user is in a variant bucket, but the feature switch is turned off ', () => {
+		it('returns undefined if editorial test exists, page is in allowed fronts list, user is in a variant bucket, but the feature switch is turned off ', () => {
 			expect(
-				decideHeadline(
+				getEditorialTestData(
 					cardWithEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -720,12 +725,12 @@ describe('Enhance Cards', () => {
 					false,
 					'test-front',
 				),
-			).toEqual('Headline');
+			).toEqual(undefined);
 		});
 
-		it('returns headline A if editorial test exists, page is in allowed fronts list, and user is in bucket A', () => {
+		it('returns headline A & test uuid if editorial test exists, page is in allowed fronts list, and user is in bucket A', () => {
 			expect(
-				decideHeadline(
+				getEditorialTestData(
 					cardWithEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -733,12 +738,12 @@ describe('Enhance Cards', () => {
 					true,
 					'test-front',
 				),
-			).toEqual('Headline A');
+			).toEqual({ headline: 'Headline A', uuid: 'uuid' });
 		});
 
-		it('returns headline B if editorial test exists, page is in allowed fronts list, and user is in bucket B', () => {
+		it('returns headline B & test uuid if editorial test exists, page is in allowed fronts list, and user is in bucket B', () => {
 			expect(
-				decideHeadline(
+				getEditorialTestData(
 					cardWithEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'b',
@@ -746,12 +751,12 @@ describe('Enhance Cards', () => {
 					true,
 					'test-front',
 				),
-			).toEqual('Headline B');
+			).toEqual({ headline: 'Headline B', uuid: 'uuid' });
 		});
 
-		it('returns the default headline if the bucket name does not match a variant meta id', () => {
+		it('returns undefined if the bucket name does not match a variant meta id', () => {
 			expect(
-				decideHeadline(
+				getEditorialTestData(
 					cardWithEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'c',
@@ -759,12 +764,12 @@ describe('Enhance Cards', () => {
 					true,
 					'test-front',
 				),
-			).toEqual('Headline');
+			).toEqual(undefined);
 		});
 
-		it('returns the default headline if the variant headline is undefined', () => {
+		it('returns undefined if the variant headline is undefined', () => {
 			expect(
-				decideHeadline(
+				getEditorialTestData(
 					cardWithEditorialTestWithUndefinedVariantMeta,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -772,12 +777,12 @@ describe('Enhance Cards', () => {
 					true,
 					'test-front',
 				),
-			).toEqual('Headline');
+			).toEqual(undefined);
 		});
 
-		it('returns the default headline if an editorial test has expired', () => {
+		it('returns undefined if an editorial test has expired', () => {
 			expect(
-				decideHeadline(
+				getEditorialTestData(
 					cardWithExpiredEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -785,12 +790,12 @@ describe('Enhance Cards', () => {
 					true,
 					'test-front',
 				),
-			).toEqual('Headline');
+			).toEqual(undefined);
 		});
 
-		it('returns the default headline if an editorial test has been manually ended', () => {
+		it('returns undefined if an editorial test has been manually ended', () => {
 			expect(
-				decideHeadline(
+				getEditorialTestData(
 					cardWithManuallyEndedEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -798,12 +803,12 @@ describe('Enhance Cards', () => {
 					true,
 					'test-front',
 				),
-			).toEqual('Headline');
+			).toEqual(undefined);
 		});
 
-		it('returns the variant headline if an editorial test is present on a sublink', () => {
+		it('returns the variant headline & test uuid if an editorial test is present on a sublink', () => {
 			expect(
-				decideHeadline(
+				getEditorialTestData(
 					cardWithSublinkWithEditorialTest
 						.supportingContent[0] as FESupportingContent,
 					{
@@ -812,12 +817,12 @@ describe('Enhance Cards', () => {
 					true,
 					'test-front',
 				),
-			).toEqual('Headline A');
+			).toEqual({ headline: 'Headline A', uuid: 'uuid' });
 		});
 
-		it('returns the default headline for a sublink if an editorial test is expired on a sublink', () => {
+		it('returns undefined for a sublink if an editorial test is expired on a sublink', () => {
 			expect(
-				decideHeadline(
+				getEditorialTestData(
 					cardWithSublinkWithExpiredEditorialTest
 						.supportingContent[0] as FESupportingContent,
 					{
@@ -826,7 +831,7 @@ describe('Enhance Cards', () => {
 					true,
 					'test-front',
 				),
-			).toEqual('Headline');
+			).toEqual(undefined);
 		});
 	});
 });
