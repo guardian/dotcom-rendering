@@ -70,6 +70,7 @@ describe('PuzzlesLayout', () => {
 			})
 			.closest('header')!;
 		expect(header).toHaveStyle({ height: '230px' });
+		expect(header).toHaveStyle({ background: '#fef9f5' });
 		const picture = header.querySelector('picture')!;
 		const sources = Array.from(picture.querySelectorAll('source'));
 		const expected = [

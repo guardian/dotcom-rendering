@@ -33,6 +33,45 @@ const section = (
 });
 
 describe('PuzzlesDirectory', () => {
+	it.each([
+		['crossword', '#fff4f2', '#ab0613'],
+		['sudoku', '#f1f8fc', '#0077b6'],
+		['wordiply', '#fef9f5', '#c74600'],
+		['word-wheel', '#fef9f5', '#c74600'],
+	])(
+		'uses the %s type colours instead of legacy configured colours',
+		(type, background, title) => {
+			const { container } = render(
+				<PuzzlesDirectory
+					layout={{
+						containers: [
+							section({
+								content: {
+									items: [
+										[
+											item({
+												type,
+												backgroundColour: '#000000',
+											}),
+										],
+									],
+									nestedContainers: [],
+								},
+							}),
+						],
+					}}
+					renderAds={false}
+				/>,
+			);
+			expect(container.querySelector('article')).toHaveStyle({
+				backgroundColor: background,
+			});
+			expect(container.querySelector('.puzzle-card-title')).toHaveStyle({
+				color: title,
+			});
+		},
+	);
+
 	it('describes card artwork without adding it to screen-reader link names', () => {
 		const { container } = render(
 			<PuzzlesDirectory
@@ -58,6 +97,10 @@ describe('PuzzlesDirectory', () => {
 			/>,
 		);
 		const image = container.querySelector('img');
+		expect(image).toHaveStyle({ width: '181px', height: '145px' });
+		expect(
+			screen.getByRole('link', { name: 'Daily puzzle Daily' }),
+		).toHaveStyle({ height: '145px' });
 		expect(image).toHaveAttribute('alt', 'Word wheel illustration');
 		expect(image).toHaveAttribute('aria-hidden', 'true');
 		expect(screen.queryByRole('img')).not.toBeInTheDocument();

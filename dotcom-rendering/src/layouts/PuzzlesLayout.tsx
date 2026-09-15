@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	breakpoints,
+	from,
 	palette,
 	space,
 	visuallyHidden,
@@ -15,6 +16,7 @@ import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import { Stuck } from './lib/stickiness';
 
 const mainStyles = css`
+	overflow-x: clip;
 	padding-bottom: ${space[12]}px;
 	background: ${palette.neutral[100]};
 	color: ${palette.neutral[7]};
@@ -23,14 +25,11 @@ const mainStyles = css`
 
 const brandStyles = css`
 	box-sizing: border-box;
-	max-width: 1300px;
 	height: 230px;
 	margin: 0 auto;
 	overflow: hidden;
-	border-right: 1px solid ${palette.neutral[86]};
-	border-left: 1px solid ${palette.neutral[86]};
 	/* The artwork is transparent and uses this illustrated-header background. */
-	background: #fff7f0;
+	background: ${palette.opinion[800]};
 `;
 
 const brandImageStyles = css`
@@ -38,11 +37,31 @@ const brandImageStyles = css`
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	object-position: center;
+	${from.leftCol} {
+		object-position: left center;
+	}
 `;
 
 const brandPictureStyles = css`
 	display: block;
 	height: 100%;
+	width: 100%;
+	margin: 0 auto;
+	${from.leftCol} {
+		/* This asset already includes the 254px trailing artwork margin. */
+		width: 1280px;
+		margin-left: 0;
+	}
+	${from.wide} {
+		/* The asset's 70px inset aligns the artwork with the 1300px subnav. */
+		width: 1440px;
+		margin-left: calc((100% - 1440px) / 2);
+	}
+	@media (min-width: 1728px) {
+		width: 1728px;
+		margin-left: calc((100% - 1728px) / 2);
+	}
 `;
 
 const headerArtwork = (filename: string) =>

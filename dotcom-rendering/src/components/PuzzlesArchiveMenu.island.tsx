@@ -33,7 +33,7 @@ const wrapperStyles = css`
 	position: relative;
 	display: block;
 	width: max-content;
-	margin-top: ${space[1]}px;
+	margin-top: ${space[2]}px;
 	margin-left: auto;
 
 	${from.tablet} {
@@ -46,8 +46,9 @@ const wrapperStyles = css`
 `;
 
 const summaryStyles = css`
+	position: relative;
 	display: inline-flex;
-	min-height: 44px;
+	min-height: 24px;
 	align-items: center;
 	gap: ${space[2]}px;
 	padding: 0;
@@ -57,6 +58,12 @@ const summaryStyles = css`
 	cursor: pointer;
 	list-style: none;
 	${textSans14};
+	/* Preserve a 44px pointer target around the 24px archive label. */
+	::before {
+		position: absolute;
+		inset: -10px 0;
+		content: '';
+	}
 
 	::-webkit-details-marker {
 		display: none;
@@ -158,7 +165,7 @@ export const PuzzlesArchiveMenu = ({
 					className="archive-arrow"
 					css={arrowStyles}
 				>
-					{'>'}
+					→
 				</span>
 			</summary>
 			<ul aria-label={label} css={menuStyles}>

@@ -3,9 +3,10 @@ import {
 	from,
 	headlineBold20,
 	headlineBold24,
+	headlineBold28,
 	palette,
 	space,
-	textSans12,
+	textSans14,
 } from '@guardian/source/foundations';
 import { ArticleDisplay } from '../lib/articleFormat';
 import type {
@@ -24,13 +25,22 @@ type Props = {
 };
 
 const sectionStyles = css`
+	position: relative;
 	display: grid;
 	max-width: 1300px;
 	margin: 0 auto;
-	border-top: 1px solid ${palette.neutral[46]};
 	border-right: 1px solid ${palette.neutral[86]};
 	border-left: 1px solid ${palette.neutral[86]};
 	background: ${palette.neutral[100]};
+	::before {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: 100vw;
+		border-top: 2px solid ${palette.neutral[7]};
+		content: '';
+		transform: translateX(-50%);
+	}
 
 	${from.leftCol} {
 		grid-template-columns: 160px minmax(0, 1fr);
@@ -59,10 +69,20 @@ const titleStyles = css`
 
 const contentStyles = css`
 	min-width: 0;
-	padding: ${space[1]}px ${space[1]}px ${space[3]}px;
+	padding: 8px 10px 32px;
+	${from.mobileMedium} {
+		padding-right: 20px;
+		padding-left: 20px;
+	}
 
 	${from.tablet} {
-		padding: ${space[2]}px ${space[3]}px ${space[5]}px;
+		padding-top: 8px;
+	}
+	${from.desktop} {
+		padding-bottom: 40px;
+	}
+	&:has(details) {
+		padding-bottom: 24px;
 	}
 `;
 
@@ -70,10 +90,13 @@ const rowsStyles = css`
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
-	gap: ${space[1]}px;
+	gap: 16px;
+	${from.phablet} {
+		gap: 24px;
+	}
 
 	${from.tablet} {
-		gap: ${space[3]}px;
+		gap: 20px;
 	}
 `;
 
@@ -82,7 +105,10 @@ const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => css`
 	grid-template-columns: ${variant === 'compact'
 		? 'repeat(2, minmax(0, 1fr))'
 		: '1fr'};
-	gap: ${space[1]}px;
+	gap: 16px;
+	${from.phablet} {
+		gap: 24px;
+	}
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -91,7 +117,11 @@ const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => css`
 		grid-template-columns: ${variant === 'compact'
 			? `repeat(${Math.min(count, 4)}, minmax(0, 1fr))`
 			: `repeat(${Math.min(count, 2)}, minmax(0, 1fr))`};
-		gap: ${space[3]}px;
+		gap: 20px;
+		max-width: 700px;
+	}
+	${from.desktop} {
+		max-width: 940px;
 	}
 `;
 
@@ -101,35 +131,39 @@ const cardStyles = (
 	isFeatured: boolean,
 ) => css`
 	position: relative;
-	display: grid;
+	display: block;
+	width: 100%;
 	min-width: 0;
-	min-height: ${variant === 'compact' ? 104 : 144}px;
-	grid-template-columns: ${hasImage
-		? 'minmax(0, 1fr) minmax(0, 1fr)'
-		: '1fr'};
+	min-height: ${variant === 'compact' ? 104 : 145}px;
+	height: ${variant === 'compact' ? 'auto' : '145px'};
+	${hasImage &&
+	css`
+		padding-right: 181px;
+	`}
+	box-sizing: border-box;
 	color: ${palette.neutral[7]};
 	text-decoration: none;
 
 	${from.tablet} {
-		min-height: ${variant === 'large'
-			? 190
-			: variant === 'compact'
-				? 104
-				: 170}px;
+		max-width: ${variant === 'compact' ? 'none' : '340px'};
 	}
 
-	${from.wide} {
-		min-height: ${variant === 'large'
-			? 270
-			: variant === 'compact'
-				? 104
-				: 190}px;
+	${from.desktop} {
+		max-width: ${variant === 'compact' ? 'none' : '460px'};
+		min-height: ${variant === 'compact' ? 104 : 176}px;
+		height: ${variant === 'compact' ? 'auto' : '176px'};
+		${hasImage &&
+		css`
+			padding-right: 220px;
+		`}
 	}
 
 	${isFeatured &&
 	css`
 		${from.leftCol} {
-			display: block;
+			min-height: 368px;
+			height: 368px;
+			padding-right: 0;
 		}
 	`}
 
@@ -153,26 +187,39 @@ const cardTextStyles = (isFeatured: boolean) => css`
 `;
 
 const cardTitleStyles = css`
-	${headlineBold20};
-	line-height: 1.05;
+	${headlineBold24};
+	line-height: 1.15;
+	${from.leftCol} {
+		${headlineBold28};
+		line-height: 1.15;
+	}
 `;
 
 const cadenceStyles = css`
 	margin-top: ${space[1]}px;
-	${textSans12};
+	${textSans14};
+	line-height: 1.3;
 `;
 
 const setterStyles = css`
 	margin-top: ${space[1]}px;
-	color: ${palette.error[400]};
-	${textSans12};
+	color: #ab0613;
+	${textSans14};
+	line-height: 1.3;
 `;
 
 const cardImageStyles = (isFeatured: boolean) => css`
-	width: 100%;
-	height: 100%;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 181px;
+	height: 145px;
 	min-height: 0;
-	object-fit: cover;
+	object-fit: contain;
+	${from.desktop} {
+		width: 220px;
+		height: 176px;
+	}
 
 	${isFeatured &&
 	css`
@@ -180,8 +227,9 @@ const cardImageStyles = (isFeatured: boolean) => css`
 			position: absolute;
 			right: 0;
 			bottom: 0;
-			width: 75%;
-			height: 75%;
+			width: 345px;
+			max-width: 75%;
+			height: 276px;
 		}
 	`}
 `;
@@ -189,10 +237,18 @@ const cardImageStyles = (isFeatured: boolean) => css`
 const nestedGridStyles = css`
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: ${space[3]}px;
+	gap: 16px;
+	${from.phablet} {
+		gap: 24px;
+	}
 
 	${from.tablet} {
 		grid-template-columns: repeat(12, minmax(0, 1fr));
+		gap: 20px;
+		max-width: 700px;
+	}
+	${from.desktop} {
+		max-width: 940px;
 	}
 `;
 
@@ -243,6 +299,23 @@ const externalProps = (url: string) =>
 		? { rel: 'noopener noreferrer', target: '_blank' as const }
 		: {};
 
+const puzzleColours = (item: PuzzleItem) => {
+	switch (item.type) {
+		case 'crossword':
+			return { background: '#fff4f2', title: '#ab0613' };
+		case 'sudoku':
+			return { background: '#f1f8fc', title: '#0077b6' };
+		case 'wordiply':
+		case 'word-wheel':
+			return { background: palette.opinion[800], title: '#c74600' };
+		default:
+			return {
+				background: item.backgroundColour,
+				title: palette.neutral[7],
+			};
+	}
+};
+
 const PuzzleCard = ({
 	isFeatured,
 	item,
@@ -251,6 +324,7 @@ const PuzzleCard = ({
 	item: PuzzleItem;
 }) => {
 	const url = getPuzzleUrl(item);
+	const colours = puzzleColours(item);
 	const setter = item.type === 'crossword' ? item.setter?.trim() : undefined;
 	const hasImage =
 		item.image !== undefined &&
@@ -259,7 +333,11 @@ const PuzzleCard = ({
 	const contents = (
 		<>
 			<div css={cardTextStyles(isFeatured)}>
-				<span className="puzzle-card-title" css={cardTitleStyles}>
+				<span
+					className="puzzle-card-title"
+					css={cardTitleStyles}
+					style={{ color: colours.title }}
+				>
 					{item.title}
 				</span>
 				{item.cadence !== undefined && item.cadence.length > 0 && (
@@ -277,10 +355,7 @@ const PuzzleCard = ({
 			)}
 		</>
 	);
-	const style =
-		item.backgroundColour !== undefined
-			? { backgroundColor: item.backgroundColour }
-			: undefined;
+	const style = { backgroundColor: colours.background };
 	return url !== undefined ? (
 		<a
 			css={cardStyles(item.cardVariant, hasImage, isFeatured)}
