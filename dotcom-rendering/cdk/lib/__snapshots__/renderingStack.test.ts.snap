@@ -2109,7 +2109,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
-        "MaxCapacity": 2,
+        "MaxCapacity": 9,
         "MinCapacity": 1,
         "ResourceId": {
           "Fn::Join": [
@@ -3667,6 +3667,24 @@ systemctl start tag-page-rendering",
       },
       "Type": "AWS::IAM::InstanceProfile",
     },
+    "tagpagerenderingCpuScaling1742C101": {
+      "Properties": {
+        "PolicyName": "TagPageRenderingCODEtagpagerenderingCpuScalingAFEBC723",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "EcsServiceTaskCountTarget02FCCE22",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilizationHighResolution",
+          },
+          "ScaleInCooldown": 60,
+          "ScaleOutCooldown": 60,
+          "TargetValue": 20,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    },
     "tagpagerenderingEcsClusterE7696595": {
       "Properties": {
         "ClusterSettings": [
@@ -4260,8 +4278,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
-        "MaxCapacity": 2,
-        "MinCapacity": 1,
+        "MaxCapacity": 90,
+        "MinCapacity": 9,
         "ResourceId": {
           "Fn::Join": [
             "",
@@ -6260,6 +6278,24 @@ systemctl start tag-page-rendering",
         ],
       },
       "Type": "AWS::IAM::InstanceProfile",
+    },
+    "tagpagerenderingCpuScaling1742C101": {
+      "Properties": {
+        "PolicyName": "TagPageRenderingPRODtagpagerenderingCpuScaling4582D272",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "EcsServiceTaskCountTarget02FCCE22",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilizationHighResolution",
+          },
+          "ScaleInCooldown": 60,
+          "ScaleOutCooldown": 60,
+          "TargetValue": 20,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
     },
     "tagpagerenderingEcsClusterE7696595": {
       "Properties": {
