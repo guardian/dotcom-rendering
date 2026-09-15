@@ -110,6 +110,19 @@ declare namespace JSX {
 		 * that it will use to find positions for ads.
 		 */
 		'data-spacefinder-type'?: import('./src/types/content').FEElement['_type'];
+
+		/**
+		 * Spacefinder Disabled
+		 *
+		 * [Spacefinder](https://github.com/guardian/commercial/blob/7866c914573cb6352b4076683b7906b87a70da72/docs/spacefinder/readme.md)
+		 * is a part of the commercial bundle that is used to find positions
+		 * for ad slots within articles.
+		 *
+		 * This attribute allows Spacefinder to be turned off for an article if it is added
+		 * to the article body root element. This is only intended for use with certain Interactive
+		 * articles which are not compatible with Spacefinder
+		 */
+		'data-spacefinder-disabled'?: string;
 	}
 }
 
