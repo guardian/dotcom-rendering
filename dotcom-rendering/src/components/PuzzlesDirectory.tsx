@@ -115,23 +115,54 @@ const contentStyles = css`
 	&:has(details) {
 		padding-bottom: 24px;
 	}
+	@media (max-width: 739px) {
+		position: relative;
+		::before {
+			position: absolute;
+			top: 0;
+			right: 10px;
+			left: 10px;
+			border-top: 1px solid #d9d9d9;
+			content: '';
+			pointer-events: none;
+		}
+		${from.mobileMedium} {
+			::before {
+				right: 20px;
+				left: 20px;
+			}
+		}
+	}
 `;
 
 const rowsStyles = css`
+	--puzzles-gap: 16px;
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
 	gap: 16px;
 	${from.phablet} {
+		--puzzles-gap: 24px;
 		gap: 24px;
 	}
 
 	${from.tablet} {
+		--puzzles-gap: 20px;
 		gap: 20px;
+	}
+	> ul ~ ul::before {
+		position: absolute;
+		top: calc(var(--puzzles-gap) / -2);
+		right: 0;
+		left: 0;
+		border-top: 1px solid #d9d9d9;
+		content: '';
+		pointer-events: none;
 	}
 `;
 
 const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => css`
+	position: relative;
 	display: grid;
 	grid-template-columns: ${variant === 'compact'
 		? 'repeat(2, minmax(0, 1fr))'
@@ -143,6 +174,30 @@ const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => css`
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	> li {
+		position: relative;
+	}
+	> li:nth-child(n + ${variant === 'compact' ? 3 : 2})::before {
+		position: absolute;
+		top: calc(var(--puzzles-gap) / -2);
+		right: 0;
+		left: 0;
+		border-top: 1px solid #d9d9d9;
+		content: '';
+		pointer-events: none;
+	}
+	${variant === 'compact' &&
+	css`
+		> li:nth-child(2n)::after {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: calc(var(--puzzles-gap) / -2);
+			border-left: 1px solid #d9d9d9;
+			content: '';
+			pointer-events: none;
+		}
+	`}
 
 	${from.tablet} {
 		grid-template-columns: ${variant === 'compact'
@@ -150,6 +205,28 @@ const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => css`
 			: `repeat(${Math.min(count, 2)}, minmax(0, 1fr))`};
 		gap: 20px;
 		max-width: 700px;
+		> li:nth-child(n + ${variant === 'compact' ? 3 : 2})::before,
+		> li:nth-child(2n)::after {
+			content: none;
+		}
+		> li:nth-child(
+				n + ${Math.min(count, variant === 'compact' ? 4 : 2) + 1}
+			)::before {
+			content: '';
+		}
+		> li:not(
+				:nth-child(
+					${Math.min(count, variant === 'compact' ? 4 : 2)}n + 1
+				)
+			)::after {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: calc(var(--puzzles-gap) / -2);
+			border-left: 1px solid #d9d9d9;
+			content: '';
+			pointer-events: none;
+		}
 	}
 	${from.desktop} {
 		max-width: 940px;
@@ -266,16 +343,19 @@ const cardImageStyles = (isFeatured: boolean) => css`
 `;
 
 const nestedGridStyles = css`
+	--puzzles-gap: 16px;
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 16px;
 	${from.phablet} {
+		--puzzles-gap: 24px;
 		gap: 24px;
 	}
 
 	${from.tablet} {
 		grid-template-columns: repeat(12, minmax(0, 1fr));
 		gap: 20px;
+		--puzzles-gap: 20px;
 		max-width: 700px;
 	}
 	${from.desktop} {
@@ -284,9 +364,33 @@ const nestedGridStyles = css`
 `;
 
 const nestedStyles = (span: number) => css`
+	position: relative;
 	min-width: 0;
+	& ~ &::before {
+		position: absolute;
+		top: calc(var(--puzzles-gap) / -2);
+		right: 0;
+		left: 0;
+		border-top: 1px solid #d9d9d9;
+		content: '';
+		pointer-events: none;
+	}
 	${from.tablet} {
 		grid-column: span ${Math.max(1, Math.min(12, span))};
+		& ~ &::before {
+			${span < 12
+				? css`
+						top: 0;
+						bottom: 0;
+						right: auto;
+						left: calc(var(--puzzles-gap) / -2);
+						border-top: 0;
+						border-left: 1px solid #d9d9d9;
+					`
+				: css`
+						border-top: 1px solid #d9d9d9;
+					`}
+		}
 	}
 `;
 
