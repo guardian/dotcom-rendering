@@ -78,3 +78,18 @@ export const ProductCardOnlyDisplayCredit = meta.story({
 		image: { ...productImage, displayCredit: true },
 	},
 });
+
+export const WithStrikeThroughPrice = meta.story({
+	args: {
+		...meta.input.args,
+		productCtas: [
+			{
+				url: 'https://www.theguardian.com',
+				retailer: 'Amazon',
+				text: '',
+				price: '~£95.99~ £89.99',
+			},
+			...meta.input.args.productCtas.slice(1),
+		],
+	},
+});
