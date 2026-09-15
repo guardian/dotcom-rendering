@@ -182,7 +182,7 @@ export type VariantMeta = {
 	};
 };
 
-export type EditorialTest = {
+export type FrontEditorialTest = {
 	testUuid: string;
 	variantMeta: VariantMeta[];
 	startDate?: number;
