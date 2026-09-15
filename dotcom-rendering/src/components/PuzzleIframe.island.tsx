@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { until } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import { resolvePuzzleIframeUrl } from '../lib/puzzleIframeUrl';
@@ -33,10 +34,34 @@ interface Props {
 	puzzleDate: string | null;
 }
 
-const frameStyles = css`
+/**
+ * `min-height` is a best-effort estimate, NOT a confirmed value from
+ * AmuseLabs. Per PR #16700 review (Gustavo): "the iframe has its own
+ * responsive behaviour... the required height can change at smaller
+ * screen sizes on AmuseLabs. Some puzzles have a menu on the right that
+ * moves below the puzzle on smaller screens, so we need to make sure the
+ * iframe has enough height to accommodate that." AmuseLabs' actual
+ * reflowed height at narrower viewports has not been measured against a
+ * real embed (platform access is being arranged separately), so `900px`
+ * below `until.tablet` is a generous guess intended to avoid clipping the
+ * reflowed side menu, not a verified figure. There is no existing
+ * postMessage-based auto-resize mechanism usable here: this codebase's
+ * `iframeMessenger.enableAutoResize()` convention (see
+ * `UnsafeEmbedBlockComponent.island.tsx`/`InstagramBlockComponent.island.tsx`)
+ * requires Guardian's own script to run *inside* the iframe's content,
+ * which isn't possible for a third-party-controlled AmuseLabs/Wordiply
+ * page, so it doesn't apply here. Revisit both breakpoint and value once
+ * the team can test against a real AmuseLabs embed on a real mobile
+ * device. See docs/puzzle-page.md.
+ */
+export const frameStyles = css`
 	width: 100%;
 	min-height: 500px;
 	border: none;
+
+	${until.tablet} {
+		min-height: 900px;
+	}
 `;
 
 /**
