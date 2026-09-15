@@ -167,11 +167,20 @@ iframe-based slug already using a supported provider:
 
 1. Add a new key to `src/model/puzzles/puzzleConfigs.ts`'s `puzzleConfigs`
    record (`slug`, `puzzleGroup`, `iframe`, `shareEnabled`, `printEnabled`,
-   `hasArchive`, `title`, `description`, optional `image`). What `iframe`
+   `hasArchive`, `title`, `description`, optional `image`).
+   **`printEnabled` is currently `true` only for the 4 sudoku entries, by
+   explicit product decision (PR #16700 review): existing readers rely on
+   printing to play Sudoku, since there isn't really another way to do
+   that on the web, and the current static Sudoku page is being retired
+   once V0 ships. No other puzzle currently needs print.** Don't default a
+   new entry to `printEnabled: true` without a similarly explicit product
+   reason, see `PuzzleConfig.printEnabled`'s doc comment.
+   What `iframe`
    needs depends on the provider:
     - **Another AmuseLabs-hosted puzzle** (the common case): reuse the
-      `amuseLabsPuzzle(slug, puzzleGroup, title, description, set)` helper,
-      supplying that puzzle's own confirmed AmuseLabs `set` identifier.
+      `amuseLabsPuzzle(slug, puzzleGroup, title, description, set, printEnabled)`
+      helper, supplying that puzzle's own confirmed AmuseLabs `set`
+      identifier and whether it should show the print button (see above).
       `buildAmuseLabsUrl` (`src/lib/puzzleIframeUrl.ts`) is reused
       automatically, no new builder needed. **`set` must be confirmed
       against the actual provider (or a source that has itself confirmed
@@ -424,6 +433,44 @@ value whenever either changes, which the browser treats as a fresh
 navigation, so no manual reload call is needed. The `postMessage` above
 fires again after every such reload too.
 
+### Iframe height at narrower viewports
+
+The puzzle iframe's `frameStyles` (`PuzzleIframe.island.tsx`) increases its
+`min-height` below the `tablet` breakpoint (via this codebase's existing
+`from`/`until` breakpoint mixins from `@guardian/source/foundations`, the
+same convention already used in `PuzzlePageLayout.tsx`), rather than a
+single fixed height at every viewport width. This exists because AmuseLabs'
+own iframe content has its own internal responsive behaviour, independent
+of the iframe element's own dimensions: per PR #16700 review (Gustavo),
+some puzzles have a menu that sits to the side of the puzzle grid on wider
+screens, but moves _below_ the grid at narrower screen sizes, needing
+noticeably more vertical space than the desktop layout does. Without
+enough `min-height` at those narrower widths, that reflowed menu risks
+being clipped or requiring an extra scroll the reader doesn't expect.
+
+**The exact extra height needed is genuinely unconfirmed, not just an
+unverified guess dressed up as a fact.** There is no confirmed, exact pixel
+value from AmuseLabs for how much taller the reflowed layout actually is,
+and this has not yet been tested against a real AmuseLabs embed on a real
+mobile device (platform access is being arranged separately). The current
+value (`900px` below `until.tablet`, versus `500px` at wider viewports) is
+a deliberately generous best-effort estimate, intended to avoid
+under-shooting and clipping content, not a confirmed figure. **This must be
+revisited once the team can actually test against the real embed**, both
+the breakpoint chosen and the exact height value may need adjusting once
+real data is available.
+
+This codebase does have an existing generic postMessage-based iframe
+auto-resize convention (`iframeMessenger.enableAutoResize()`, used by
+`UnsafeEmbedBlockComponent.island.tsx`/`InstagramBlockComponent.island.tsx`
+for Guardian-authored interactive/embed content), but it does not apply
+here: it requires Guardian's own `iframe-messenger` script to run _inside_
+the iframe's own content, which is only possible for content DCR itself
+controls, not a third-party-hosted AmuseLabs/Wordiply page. A real,
+provider-confirmed auto-resize mechanism (if AmuseLabs offers one) would
+need separate external confirmation before adopting; this was not invented
+here.
+
 ## Open questions / known limitations
 
 - **The `PuzzleContextMessage` shape (`guardian-puzzle-context`) is still
@@ -541,7 +588,11 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   not been visually verified in either light or dark mode.
 - **Responsive/mobile layout has not been explicitly verified** for Puzzle
   Page or the puzzle iframes themselves (which are entirely provider-
-  controlled content).
+  controlled content). This includes the puzzle iframe's own `min-height`
+  at narrower viewports (see "Iframe height at narrower viewports" above):
+  the current, generously-estimated value has not been tested against a
+  real AmuseLabs embed on a real mobile device, and must be revisited once
+  that testing is possible.
 - **DCR does not validate that `puzzleDate` is a real, sensible calendar
   date.** Beyond the existing shape check (a non-empty string), nothing in
   DCR confirms `puzzleDate` is an actual calendar date (e.g. rejecting a
