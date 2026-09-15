@@ -53,9 +53,22 @@ contains exactly 6 slugs, all rendered via the generic sandboxed
 
 Codeword, futoshiki, suguru, and the trivia/quizzes puzzles (on-the-ball,
 film-reveal) were removed from the registry for V0 and may return later.
-All AmuseLabs-hosted entries share one URL template
-(`https://tg.amuselabs.com/guardian/date-picker?set=guardian-{slug}&embed=1&idx=1`),
-differing only by the `{slug}` substitution.
+**Each entry's `iframe.url` is its own complete, independently-written URL,
+there is deliberately no shared URL template or `{slug}`-style
+substitution mechanism.** There used to be one: every AmuseLabs-hosted
+entry's URL was built from a shared template
+(`https://tg.amuselabs.com/guardian/date-picker?set=guardian-{slug}&embed=1&idx=1`)
+by substituting DCR's own `slug` in for AmuseLabs' `set=guardian-*` query
+param. That was a real, live bug: nothing guarantees a provider's own
+naming convention matches our internal slug, and it already silently
+didn't for `sudoku-killer` (its real, confirmed AmuseLabs `set` is
+`killer-sudoku-medium`, not `sudoku-killer`, a different word order plus
+an unexplained "-medium" suffix that is genuinely part of the real,
+working identifier). The fix (confirmed against the native Android/iOS
+apps' own real, working AmuseLabs integration) was to remove the shared
+template entirely, not just patch that one instance: every entry now
+specifies its own complete, independent, hardcoded URL, so a future
+change to one entry can never silently or accidentally affect another.
 
 ### Hitting it locally
 
@@ -117,16 +130,23 @@ Both steps are config-only. The layout does not need any changes for a new
 iframe-based slug:
 
 1. Add a new key to `src/model/puzzles/puzzleConfigs.ts`'s `puzzleConfigs`
-   record (`slug`, `puzzleGroup`, `iframe: { provider, urlTemplate }`,
+   record (`slug`, `puzzleGroup`, `iframe: { provider, url }`,
    `shareEnabled`, `printEnabled`, `hasArchive`, `title`, `description`,
    optional `image`). If it's another AmuseLabs-hosted puzzle, reuse the
-   `amuseLabsPuzzle(slug, puzzleGroup, title, description)` helper (note:
-   this helper doesn't take `image`, set it afterwards on the returned
-   object if/when a real image is available for that puzzle).
-   `validatePuzzleConfigs` runs once at module load and throws immediately
-   if the entry is malformed (mismatched `slug`, unknown `puzzleGroup`,
-   empty `iframe.provider`/`iframe.urlTemplate`, empty `title`/
-   `description`, or a present-but-empty `image`).
+   `amuseLabsPuzzle(slug, puzzleGroup, title, description, url)` helper
+   (note: this helper doesn't take `image`, set it afterwards on the
+   returned object if/when a real image is available for that puzzle).
+   **`iframe.url` must be that puzzle's own complete, explicit iframe URL,
+   confirmed against the actual provider (or a source that has itself
+   confirmed it against the provider, e.g. the native apps' own working
+   integration), not derived from `slug` or copied from another entry.**
+   Never assume a provider's own naming convention matches our internal
+   slug: the killer-sudoku incident above is a direct, confirmed example
+   of that assumption silently being wrong. `validatePuzzleConfigs` runs
+   once at module load and throws immediately if the entry is malformed
+   (mismatched `slug`, unknown `puzzleGroup`, missing `iframe.provider`,
+   a missing/empty/non-absolute `iframe.url`, empty `title`/`description`,
+   or a present-but-empty `image`).
    **Write real, curated copy for `title`/`description`**, sourced from
    the product team's SEO spreadsheet for that puzzle (see "SEO" below for
    the exact `{date}` templating mechanism). It becomes the page's
@@ -317,7 +337,25 @@ interface PuzzleContext {
   `frontend`'s own documentation for how it resolves and redirects on the
   date-in-URL structure.
 
-The iframe reloads automatically whenever either half of the context
+**A separate, plain `uid=<userId>` query parameter is also appended
+alongside `guardian-puzzle-context`**, only when the reader is signed in
+(omitted entirely, not sent as `uid=null` or empty, when signed out). This
+is a genuinely different, independently-confirmed mechanism from
+`guardian-puzzle-context` above: the native (Android/iOS) apps' own real,
+working AmuseLabs integration appends `&uid=<value>` as a plain query
+parameter when the user is authenticated ("If the user is authenticated,
+we add &uid=<puzzleId>"), and DCR adopted the same query parameter
+name/pattern once confirmed. It is additive, not a replacement,
+`guardian-puzzle-context` still carries dark mode and puzzle date, for
+which there is no separately-confirmed mechanism yet. `uid`'s value is
+sourced identically to `guardian-puzzle-context.userId`
+(`idToken.claims.legacy_identity_id`); the native apps call their
+equivalent value a "puzzleId", but there is no independent confirmation
+that identifier format matches ours, only that this exact query parameter
+name/pattern is what they use for their own equivalent value (see "Open
+questions" below).
+
+The iframe reloads automatically whenever any part of the context or `uid`
 changes while the reader is already on the page: sign in, sign out,
 switching accounts, or the reader's OS switching light/dark theme. The
 component subscribes to both auth state changes
@@ -332,18 +370,30 @@ fires again after every such reload too.
 
 ## Open questions / known limitations
 
-- **The `PuzzleContextMessage` shape needs confirming with
-  AmuseLabs/Wordiply.**
+- **The `PuzzleContextMessage` shape (`guardian-puzzle-context`) is still
+  unconfirmed with AmuseLabs/Wordiply; `uid` specifically is now
+  confirmed.**
   `{ type: 'guardian-puzzle-context', context: { userId: string | null,
-darkMode: boolean } }` and the `?guardian-puzzle-context=<JSON>` query
-  parameter are DCR's proposal, documented in code
-  (`src/components/PuzzleIframe.island.tsx`), but neither has been confirmed
-  against what AmuseLabs or Wordiply actually expect to receive, including
-  whether `legacy_identity_id` (rather than the OIDC `sub` claim) is the
-  right identifier format for them, and whether either provider's iframe
-  even supports a dark-mode signal in the first place (see the dark-mode
-  bullet below). This needs external coordination before relying on it for
-  anything beyond best-effort personalisation.
+darkMode: boolean, puzzleDate: string | null } }` and the
+  `?guardian-puzzle-context=<JSON>` query parameter remain DCR's own
+  proposal, documented in code (`src/components/PuzzleIframe.island.tsx`),
+  neither has been confirmed against what AmuseLabs or Wordiply actually
+  expect to receive, including whether `legacy_identity_id` (rather than
+  the OIDC `sub` claim) is the right identifier format for the `userId`
+  field within it, and whether either provider's iframe even supports a
+  dark-mode signal in the first place (see the dark-mode bullet below).
+  The separate, plain `uid=<userId>` query parameter (see "User/context
+  info passed to the puzzle iframe" above), by contrast, **is** confirmed:
+  sourced from the native (Android/iOS) apps' own real, working AmuseLabs
+  integration, which uses this exact query parameter name/pattern for
+  their own equivalent identity value. That confirmation does not extend
+  to the identifier _format_: the native apps call their value a
+  "puzzleId", and there is no independent confirmation that
+  `legacy_identity_id` is the same format as whatever they send, only that
+  the `uid` query parameter itself, and the pattern of "include only when
+  signed in, omit entirely when signed out", is confirmed correct. This
+  needs external coordination before relying on `guardian-puzzle-context`
+  for anything beyond best-effort personalisation.
 - **The auth-state-change subscription is a new mechanism in this
   codebase.** `subscribeToAuthStateChange()` uses the underlying
   `@guardian/identity-auth` client's own public `authStateManager.subscribe`
