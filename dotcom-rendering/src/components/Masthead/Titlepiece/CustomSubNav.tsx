@@ -12,6 +12,7 @@ import {
 	textSansBold14,
 } from '@guardian/source/foundations';
 import { grid } from '../../../grid';
+import { generateImageURL } from '../../../lib/image';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../palette';
 import type {
@@ -155,7 +156,28 @@ const imageListStyles = css`
 const byBreakpointWidthDesc = (a: CustomSubnavImage, b: CustomSubnavImage) =>
 	breakpoints[b.breakpoint] - breakpoints[a.breakpoint];
 
-const HeaderImage = ({ images }: { images: CustomSubnavImage[] }) => {
+/**
+ * Builds a `1x, 2x` srcSet via the Fastly Image Optimiser so each breakpoint's
+ * image is served at the right width and pixel density (mirrors DirectoryPageNav).
+ */
+const buildSrcSet = ({ imageSrc, breakpoint }: CustomSubnavImage) =>
+	`${generateImageURL({
+		mainImage: imageSrc,
+		imageWidth: breakpoints[breakpoint],
+		resolution: 'low',
+	})}, ${generateImageURL({
+		mainImage: imageSrc,
+		imageWidth: breakpoints[breakpoint],
+		resolution: 'high',
+	})} 2x`;
+
+const HeaderImage = ({
+	images,
+	headerText,
+}: {
+	images: CustomSubnavImage[];
+	headerText: string;
+}) => {
 	const sorted = [...images].sort(byBreakpointWidthDesc);
 	/** Smallest breakpoint is the <img> fallback; the rest become <source>s. */
 	const fallback = sorted.at(-1);
@@ -168,10 +190,19 @@ const HeaderImage = ({ images }: { images: CustomSubnavImage[] }) => {
 				<source
 					key={image.breakpoint}
 					media={`(min-width: ${breakpoints[image.breakpoint]}px)`}
-					srcSet={image.imageSrc}
+					srcSet={buildSrcSet(image)}
 				/>
 			))}
-			<img src={fallback.imageSrc} alt="" css={headerImageStyles} />
+			<img
+				src={generateImageURL({
+					mainImage: fallback.imageSrc,
+					imageWidth: breakpoints[fallback.breakpoint],
+					resolution: 'low',
+				})}
+				srcSet={buildSrcSet(fallback)}
+				alt={`${headerText} subnav`}
+				css={headerImageStyles}
+			/>
 		</picture>
 	);
 };
@@ -260,7 +291,10 @@ export const CustomSubNav = ({
 				css={imageNavStyles}
 			>
 				<div css={imageWrapperStyles}>
-					<HeaderImage images={webImages} />
+					<HeaderImage
+						images={webImages}
+						headerText={customSubNav.header.headerText}
+					/>
 					<span css={imageHeaderTextStyles}>
 						{customSubNav.header.headerText}
 					</span>
