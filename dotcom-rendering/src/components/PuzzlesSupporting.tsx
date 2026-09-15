@@ -22,6 +22,8 @@ type Props = {
 	adSlot?: string;
 	id: string;
 	layout: PuzzlesLayoutType;
+	showNewsletter?: boolean;
+	showPopular?: boolean;
 	renderAds: boolean;
 	supporting: PuzzlesSupportingContent;
 };
@@ -61,7 +63,7 @@ const sectionTitleStyles = css`
 	}
 `;
 
-const usefulContentStyles = css`
+const usefulContentStyles = (showNewsletter: boolean) => css`
 	display: grid;
 	width: 100%;
 	min-width: 0;
@@ -69,7 +71,10 @@ const usefulContentStyles = css`
 	border-top: 1px solid ${borderColour};
 
 	${from.desktop} {
-		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-template-columns: repeat(
+			${showNewsletter ? 4 : 2},
+			minmax(0, 1fr)
+		);
 	}
 `;
 
@@ -259,6 +264,9 @@ export const PuzzlesSupporting = ({
 	id,
 	layout,
 	renderAds,
+	// Keep these sections available, but hide them from the hub for now.
+	showNewsletter = false,
+	showPopular = false,
 	supporting,
 }: Props) => {
 	const itemsById = new Map(
@@ -276,7 +284,7 @@ export const PuzzlesSupporting = ({
 				<h2 css={sectionTitleStyles} id={`${id}-useful-links-title`}>
 					{supporting.usefulLinksTitle}
 				</h2>
-				<div css={usefulContentStyles}>
+				<div css={usefulContentStyles(showNewsletter)}>
 					{supporting.usefulLinks.map((link) => (
 						<a
 							css={usefulLinkStyles}
@@ -287,7 +295,7 @@ export const PuzzlesSupporting = ({
 							{link.title}
 						</a>
 					))}
-					{newsletter !== undefined && (
+					{showNewsletter && newsletter !== undefined && (
 						<div css={newsletterStyles}>
 							<NewsletterSignupCard
 								description={newsletter.description}
@@ -316,99 +324,105 @@ export const PuzzlesSupporting = ({
 					)}
 				</div>
 			</section>
-
-			<section
-				css={sectionStyles}
-				aria-labelledby={`${id}-popular-title`}
-			>
-				<h2 css={sectionTitleStyles} id={`${id}-popular-title`}>
-					{supporting.popularTitle}
-				</h2>
-				<div css={popularContentStyles}>
-					<div css={popularGroupsStyles}>
-						{supporting.popularGroups.map((group) => {
-							const items = group.itemIds
-								.map((_id) => itemsById.get(_id))
-								.filter(
-									(item): item is PuzzleItem =>
-										item !== undefined,
-								);
-							if (items.length === 0) {
-								return null;
-							}
-							return (
-								<section
-									css={popularGroupStyles}
-									key={group.title}
-								>
-									<h3 css={popularGroupTitleStyles}>
-										{group.title}
-									</h3>
-									<ol css={popularListStyles}>
-										{items.map((item, index) => {
-											const url = puzzleUrl(item);
-											const contents = (
-												<>
-													<strong>
-														{item.title}
-													</strong>
-													{item.cadence !==
-														undefined &&
-														item.cadence.length >
-															0 && (
-															<span>
-																{item.cadence}
-															</span>
-														)}
-												</>
-											);
-											return (
-												<li
-													css={popularItemStyles}
-													key={item.id}
-												>
-													<span
-														aria-hidden="true"
-														css={rankStyles}
-													>
-														{index + 1}
-													</span>
-													{url !== undefined ? (
-														<a
-															css={
-																popularLinkStyles
-															}
-															href={url}
-															{...externalProps(
-																url,
+			{showPopular && (
+				<section
+					css={sectionStyles}
+					aria-labelledby={`${id}-popular-title`}
+				>
+					<h2 css={sectionTitleStyles} id={`${id}-popular-title`}>
+						{supporting.popularTitle}
+					</h2>
+					<div css={popularContentStyles}>
+						<div css={popularGroupsStyles}>
+							{supporting.popularGroups.map((group) => {
+								const items = group.itemIds
+									.map((id) => itemsById.get(id))
+									.filter(
+										(item): item is PuzzleItem =>
+											item !== undefined,
+									);
+								if (items.length === 0) {
+									return null;
+								}
+								return (
+									<section
+										css={popularGroupStyles}
+										key={group.title}
+									>
+										<h3 css={popularGroupTitleStyles}>
+											{group.title}
+										</h3>
+										<ol css={popularListStyles}>
+											{items.map((item, index) => {
+												const url = puzzleUrl(item);
+												const contents = (
+													<>
+														<strong>
+															{item.title}
+														</strong>
+														{item.cadence !==
+															undefined &&
+															item.cadence
+																.length > 0 && (
+																<span>
+																	{
+																		item.cadence
+																	}
+																</span>
 															)}
+													</>
+												);
+												return (
+													<li
+														css={popularItemStyles}
+														key={item.id}
+													>
+														<span
+															aria-hidden="true"
+															css={rankStyles}
 														>
-															{contents}
-														</a>
-													) : (
-														<div
-															css={
-																popularLinkStyles
-															}
-														>
-															{contents}
-														</div>
-													)}
-												</li>
-											);
-										})}
-									</ol>
-								</section>
-							);
-						})}
-					</div>
-					{hasMostPopAd && (
-						<div css={mostPopAdStyles} data-puzzles-ad="mostpop">
-							<AdSlot position="mostpop" />
+															{index + 1}
+														</span>
+														{url !== undefined ? (
+															<a
+																css={
+																	popularLinkStyles
+																}
+																href={url}
+																{...externalProps(
+																	url,
+																)}
+															>
+																{contents}
+															</a>
+														) : (
+															<div
+																css={
+																	popularLinkStyles
+																}
+															>
+																{contents}
+															</div>
+														)}
+													</li>
+												);
+											})}
+										</ol>
+									</section>
+								);
+							})}
 						</div>
-					)}
-				</div>
-			</section>
+						{hasMostPopAd && (
+							<div
+								css={mostPopAdStyles}
+								data-puzzles-ad="mostpop"
+							>
+								<AdSlot position="mostpop" />
+							</div>
+						)}
+					</div>
+				</section>
+			)}
 		</>
 	);
 };
