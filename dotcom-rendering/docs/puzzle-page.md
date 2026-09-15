@@ -410,14 +410,59 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   for a puzzle's in-progress state to be saved against a Guardian account
   and restored later (e.g. via `postMessage` round-tripping progress data).
   This has been deliberately deferred until such an API exists.
-- **The real AmuseLabs archive URL is still unknown.** `PuzzleConfig.hasArchive`
-  exists on every registry entry (currently always `true`) but is **not
-  consumed anywhere in rendering.** There is no archive-link UI, and no
-  archive URL field exists in the registry at all. A URL seen during the
-  original proof-of-concept was only there as an illustrative example, not
-  a verified production AmuseLabs archive URL. The correct URL needs to be
-  sourced from the team before an archive feature can be built on top of
-  `hasArchive`; do not guess or reuse the POC URL as-is.
+- **The real AmuseLabs archive URL is still unknown, and today's `idx=1`
+  is a "today only" hack that cannot show a specific past puzzle.**
+  `PuzzleConfig.hasArchive` exists on every registry entry (currently
+  always `true`) but is **not consumed anywhere in rendering.** There is
+  no archive-link UI, and no archive URL field exists in the registry at
+  all. A URL seen during the original proof-of-concept was only there as
+  an illustrative example, not a verified production AmuseLabs archive
+  URL. Per the AmuseLabs integration doc shared by the product team
+  (confirmed against native app behaviour): "The apps currently use
+  `idx=1` for the latest puzzle. Archive URLs should use the stable `id`
+  instead... Do not add `idx=1`, as that selects the latest puzzle instead
+  of the archived one." All 5 of our AmuseLabs entries hardcode `&idx=1`
+  in their `iframe.url`, which is correct only for "today's puzzle" (V0's
+  only real use case), it is **not** valid for showing a specific past
+  date's puzzle. Building calendar/archive functionality (V1) will require
+  each AmuseLabs entry to swap `idx=1` for `id={realProviderPuzzleId}`,
+  where that real per-puzzle id must come from a not-yet-built archive
+  API, it cannot be derived or guessed from a date locally. Treat sourcing
+  that real archive URL/id mechanism from the team as a hard blocker for
+  calendar/archive work, not a nice-to-have. **A related, current gap
+  worth being explicit about**: `instance.puzzleDate` is accepted,
+  displayed next to the title, and passed through to the iframe context
+  (see above), but it does **not** actually change which puzzle instance
+  the iframe shows. The iframe always shows the provider's own "latest"
+  puzzle via `idx=1`, regardless of `puzzleDate`'s value, so the date
+  shown on the page and the puzzle actually embedded can silently diverge
+  once `puzzleDate` ever points anywhere other than today.
+- **Today's hardcoded `PuzzleConfig` URLs are a deliberate V0-only
+  stopgap, expected to be superseded by a future "Puzzles Server".** Per
+  direct guidance from the product/design lead, the long-term architecture
+  intends for puzzle URLs (and progress data) to come from a server-side
+  "Puzzles Server"/API layer (not yet built), which `frontend` would call
+  to get puzzle metadata including URLs, rather than DCR statically
+  hardcoding them in a registry file. A shared internal architecture
+  document ("Puzzles hub 3P API requirements") describes this in more
+  detail: a future Archive API (returning puzzle date/URL/id/title per
+  puzzle), a future Progress API (tracking user completion/score/state per
+  puzzle, phased: local-device-only first, then a thin API wrapper, then a
+  backing database), and confirms the exact real AmuseLabs URL parameter
+  conventions already implemented here (`set`, `id` vs `idx=1`, `embed=1`,
+  `uid`, `darkMode=0|1`), plus MovieGrid/sportsreveal's simpler convention
+  (base URL plus a client-added `darkMode` param only, no confirmed `uid`
+  support for those two providers). `puzzleConfigs.ts`'s current registry,
+  with its hardcoded, explicit-per-entry URLs, is a deliberate,
+  correct-for-now V0 solution, not the intended final architecture. When
+  the Puzzles Server/Archive API materialises, this registry's static
+  URLs are expected to be replaced or supplemented by dynamically-fetched
+  values, at minimum for archive/calendar navigation, likely eventually
+  for the "today" URL too. This is a known, anticipated future refactor,
+  not a surprise to discover later. **Do not attempt to build against this
+  future API now, it does not exist yet**, this bullet exists purely so a
+  future reader/maintainer has this context without needing it
+  rediscovered from scratch.
 - **Dark mode: the page chrome supports it, and a dark-mode signal is now
   sent to the puzzle iframe, but whether the provider actually honours it is
   unverified.** DCR has genuine, pre-existing dark mode support
