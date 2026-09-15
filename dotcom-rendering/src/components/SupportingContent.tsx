@@ -186,9 +186,7 @@ export const SupportingContent = ({
 								: verticalSublinkStyles,
 						]}
 						data-link-name={`sublinks | ${index + 1}`}
-						{...(subLink.headlineTestUuid != undefined && {
-							'data-fronts-test-uuid': subLink.headlineTestUuid,
-						})}
+						data-fronts-test-uuid={subLink.headlineTestUuid}
 					>
 						<FormatBoundary format={subLinkFormat}>
 							<ContainerOverrides

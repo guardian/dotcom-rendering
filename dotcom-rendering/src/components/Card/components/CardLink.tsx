@@ -57,9 +57,7 @@ const InternalLink = ({
 				shouldRaiseZIndexForAbTest ? abTestZIndexStyles : zIndexStyles,
 			]}
 			data-link-name={dataLinkName}
-			{...(headlineTestUuid != undefined && {
-				'data-fronts-test-uuid': headlineTestUuid,
-			})}
+			data-fronts-test-uuid={headlineTestUuid}
 			aria-label={headlineText}
 		/>
 	);
@@ -86,9 +84,7 @@ const ExternalLink = ({
 				shouldRaiseZIndexForAbTest ? abTestZIndexStyles : zIndexStyles,
 			]}
 			data-link-name={dataLinkName}
-			{...(headlineTestUuid != undefined && {
-				'data-fronts-test-uuid': headlineTestUuid,
-			})}
+			data-fronts-test-uuid={headlineTestUuid}
 			aria-label={headlineText + ' (opens in new tab)'}
 			target="_blank"
 			rel="noreferrer"
