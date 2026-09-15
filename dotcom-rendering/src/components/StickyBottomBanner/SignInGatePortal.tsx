@@ -1,3 +1,4 @@
+import type { CountryCode } from '@guardian/libs';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { buildAuxiaGateDisplayData } from '../../lib/auxia';
@@ -150,6 +151,7 @@ export interface CanShowSignInGateProps {
 	contentType?: string;
 	sectionId?: string;
 	tags?: TagType[];
+	countryCode?: CountryCode;
 }
 export const canShowSignInGatePortal = async ({
 	isSignedIn,
@@ -161,8 +163,9 @@ export const canShowSignInGatePortal = async ({
 	contentType,
 	sectionId,
 	tags,
+	countryCode,
 }: CanShowSignInGateProps): Promise<CanShowResult<AuxiaGateDisplayData>> => {
-	if (!window.guardian.config.switches.signInGate) {
+	if (window.guardian.config.switches.signInGate !== true) {
 		// Gates are disabled from the Frontend switchboard
 		return Promise.resolve({ show: false });
 	}
@@ -174,7 +177,7 @@ export const canShowSignInGatePortal = async ({
 		return Promise.resolve({ show: false });
 	}
 
-	if (isPaidContent || isPreview || isSignedIn) {
+	if (isPaidContent || isPreview || isSignedIn === true) {
 		return Promise.resolve({ show: false });
 	}
 
@@ -195,7 +198,7 @@ export const canShowSignInGatePortal = async ({
 	try {
 		const auxiaData = await buildAuxiaGateDisplayData(
 			contributionsServiceUrl,
-			pageId ?? '',
+			pageId,
 			editionId,
 			contentType,
 			sectionId,
@@ -203,9 +206,18 @@ export const canShowSignInGatePortal = async ({
 			retrieveLastGateDismissedCount('AuxiaSignInGate'),
 		);
 
+		const meta = (
+			auxiaData
+				? {
+						...auxiaData,
+						gandalfCountryCode: countryCode,
+					}
+				: auxiaData
+		) as AuxiaGateDisplayData;
+
 		return {
 			show: auxiaData?.auxiaData.userTreatment !== undefined,
-			meta: auxiaData as AuxiaGateDisplayData,
+			meta,
 		};
 	} catch (e) {
 		const message = `SignInGatePortal canShowSignInGatePortal - error: ${String(
