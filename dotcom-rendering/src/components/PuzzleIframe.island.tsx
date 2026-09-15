@@ -15,6 +15,14 @@ interface Props {
 	 * preference (`prefers-color-scheme`) to decide `PuzzleContext.darkMode`.
 	 */
 	darkModeAvailable: boolean;
+	/**
+	 * Which day's puzzle is being shown, as the raw `YYYY-MM-DD` string
+	 * `frontend` resolved (`instance.puzzleDate`), or `null` if not
+	 * provided. Passed straight through to `PuzzleContext.puzzleDate`
+	 * unformatted, third-party providers need the machine-readable form,
+	 * not the human-readable display text rendered next to the title.
+	 */
+	puzzleDate: string | null;
 }
 
 const frameStyles = css`
@@ -51,6 +59,14 @@ export interface PuzzleContext {
 	 * (`prefers-color-scheme: dark`) must be true. See `usePuzzleDarkMode`.
 	 */
 	darkMode: boolean;
+	/**
+	 * Which day's puzzle is being shown, as the raw `YYYY-MM-DD` string
+	 * `frontend` resolved (`instance.puzzleDate`). `null` when not provided.
+	 * DCR does not parse the Puzzle Page URL or own the date-in-path/
+	 * redirect-to-archive logic itself, it simply passes through whatever
+	 * `frontend` resolved and sent (see `docs/puzzle-page.md`).
+	 */
+	puzzleDate: string | null;
 }
 
 export interface PuzzleContextMessage {
@@ -112,9 +128,11 @@ const usePuzzleDarkMode = (darkModeAvailable: boolean): boolean => {
 const buildPuzzleContext = (
 	userId: string | undefined,
 	darkMode: boolean,
+	puzzleDate: string | null,
 ): PuzzleContext => ({
 	userId: userId ?? null,
 	darkMode,
+	puzzleDate,
 });
 
 /**
@@ -158,8 +176,9 @@ const postContextMessage = (
  * puzzle providers, such as AmuseLabs-hosted puzzles or bespoke providers
  * like wordiply.com. Used for every `PuzzleConfig` entry (all iframe-based).
  *
- * Passes a `PuzzleContext` (the current signed-in user's identity, and
- * whether dark mode is currently active) to the puzzle provider two ways:
+ * Passes a `PuzzleContext` (the current signed-in user's identity, whether
+ * dark mode is currently active, and which day's puzzle is being shown) to
+ * the puzzle provider two ways:
  * as a `guardian-puzzle-context` query parameter (JSON-encoded) on the
  * iframe `src` (so it is present from the very first request the iframe
  * makes), and via `postMessage` once the iframe has loaded (`{ type:
@@ -171,10 +190,15 @@ const postContextMessage = (
  * the page - no manual reload fallback is needed for that case, though the
  * `onLoad` `postMessage` still fires again after each such reload too.
  */
-export const PuzzleIframe = ({ src, title, darkModeAvailable }: Props) => {
+export const PuzzleIframe = ({
+	src,
+	title,
+	darkModeAvailable,
+	puzzleDate,
+}: Props) => {
 	const userId = usePuzzleUserId();
 	const darkMode = usePuzzleDarkMode(darkModeAvailable);
-	const context = buildPuzzleContext(userId, darkMode);
+	const context = buildPuzzleContext(userId, darkMode, puzzleDate);
 	const iframeSrc = buildPuzzleIframeSrcWithContext(src, context);
 
 	return (
