@@ -51,7 +51,7 @@ const brandPictureStyles = css`
 	${from.leftCol} {
 		/* This asset already includes the 254px trailing artwork margin. */
 		width: 1280px;
-		margin-left: 0;
+		margin-left: max(0px, calc((100% - 1140px) / 2));
 	}
 	${from.wide} {
 		/* The asset's 70px inset aligns the artwork with the 1300px subnav. */
@@ -64,9 +64,11 @@ const brandPictureStyles = css`
 	}
 `;
 
-const headerArtwork = (filename: string) =>
-	`https://i.guim.co.uk/img/uploads/2026/09/15/${filename}.png?width=440&dpr=2&s=none`;
-
+const headerArtwork = (filename: string) => {
+	// Request the artwork's design width, rather than stretching a card-sized image.
+	const width = filename.match(/-(\d+)px$/)?.[1] ?? '360';
+	return `https://i.guim.co.uk/img/uploads/2026/09/15/${filename}.png?width=${width}&dpr=2&s=none`;
+};
 // Descending media queries ensure that the browser chooses the largest match.
 const headerSources = [
 	{ breakpoint: 1728, filename: 'header-desktop-1728px' },

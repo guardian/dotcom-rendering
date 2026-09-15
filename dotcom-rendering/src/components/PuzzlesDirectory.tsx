@@ -9,6 +9,7 @@ import {
 	textSans14,
 } from '@guardian/source/foundations';
 import { ArticleDisplay } from '../lib/articleFormat';
+import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import type {
 	PuzzleContainer,
 	PuzzleItem,
@@ -27,10 +28,7 @@ type Props = {
 const sectionStyles = css`
 	position: relative;
 	display: grid;
-	max-width: 1300px;
-	margin: 0 auto;
-	border-right: 1px solid ${palette.neutral[86]};
-	border-left: 1px solid ${palette.neutral[86]};
+	${puzzlesContainerStyles};
 	background: ${palette.neutral[100]};
 	::before {
 		position: absolute;
@@ -58,7 +56,7 @@ const titleStyles = css`
 	line-height: 1;
 
 	${from.tablet} {
-		padding: ${space[2]}px ${space[3]}px ${space[3]}px;
+		padding: ${space[2]}px 20px ${space[3]}px;
 		${headlineBold24};
 	}
 
@@ -79,6 +77,9 @@ const contentStyles = css`
 		padding-top: 8px;
 	}
 	${from.desktop} {
+		/* Include the 1px side borders in the 20px content inset. */
+		padding-right: 19px;
+		padding-left: 19px;
 		padding-bottom: 40px;
 	}
 	&:has(details) {

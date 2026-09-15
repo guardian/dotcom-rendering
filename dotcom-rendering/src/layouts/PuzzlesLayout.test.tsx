@@ -74,30 +74,33 @@ describe('PuzzlesLayout', () => {
 		const picture = header.querySelector('picture')!;
 		const sources = Array.from(picture.querySelectorAll('source'));
 		const expected = [
-			[1728, 'header-desktop-1728px'],
-			[1300, 'header-wide-1440px'],
-			[1140, 'header-leftcol-1280px'],
-			[980, 'header-desktop-1024px'],
-			[768, 'header-tablet-979px'],
-			[740, 'header-tablet-768px'],
-			[660, 'header-mobile-phablet-669px'],
-			[480, 'header-mobile-landscape-480px'],
-			[375, 'header-mobile-medium-393px'],
+			[1728, 'header-desktop-1728px', 1728],
+			[1300, 'header-wide-1440px', 1440],
+			[1140, 'header-leftcol-1280px', 1280],
+			[980, 'header-desktop-1024px', 1024],
+			[768, 'header-tablet-979px', 979],
+			[740, 'header-tablet-768px', 768],
+			[660, 'header-mobile-phablet-669px', 669],
+			[480, 'header-mobile-landscape-480px', 480],
+			[375, 'header-mobile-medium-393px', 393],
 		];
 		expect(sources).toHaveLength(expected.length);
-		for (const [index, [width, filename]] of expected.entries()) {
+		for (const [
+			index,
+			[width, filename, imageWidth],
+		] of expected.entries()) {
 			expect(sources[index]).toHaveAttribute(
 				'media',
 				`(min-width: ${width}px)`,
 			);
 			expect(sources[index]).toHaveAttribute(
 				'srcset',
-				`https://i.guim.co.uk/img/uploads/2026/09/15/${filename}.png?width=440&dpr=2&s=none`,
+				`https://i.guim.co.uk/img/uploads/2026/09/15/${filename}.png?width=${imageWidth}&dpr=2&s=none`,
 			);
 		}
 		expect(picture.querySelector('img')).toHaveAttribute(
 			'src',
-			'https://i.guim.co.uk/img/uploads/2026/09/15/header-mobile-360px.png?width=440&dpr=2&s=none',
+			'https://i.guim.co.uk/img/uploads/2026/09/15/header-mobile-360px.png?width=360&dpr=2&s=none',
 		);
 		expect(picture.querySelector('img')).toHaveAttribute(
 			'alt',

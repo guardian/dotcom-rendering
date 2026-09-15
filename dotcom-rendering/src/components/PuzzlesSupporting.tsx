@@ -8,6 +8,7 @@ import {
 	textSans12,
 	textSansBold14,
 } from '@guardian/source/foundations';
+import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import type {
 	PuzzleContainer,
 	PuzzleItem,
@@ -23,9 +24,9 @@ type Props = {
 	adSlot?: string;
 	id: string;
 	layout: PuzzlesLayoutType;
+	renderAds: boolean;
 	showNewsletter?: boolean;
 	showPopular?: boolean;
-	renderAds: boolean;
 	supporting: PuzzlesSupportingContent;
 };
 
@@ -33,10 +34,7 @@ const borderColour = palette.neutral[86];
 
 const sectionStyles = css`
 	display: grid;
-	max-width: 1300px;
-	margin: 0 auto;
-	border-right: 1px solid ${borderColour};
-	border-left: 1px solid ${borderColour};
+	${puzzlesContainerStyles};
 	background: ${palette.neutral[100]};
 
 	${from.leftCol} {
