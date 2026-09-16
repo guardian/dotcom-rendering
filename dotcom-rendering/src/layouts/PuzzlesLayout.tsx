@@ -75,7 +75,6 @@ const headerSources = [
 	{ breakpoint: breakpoints.wide, filename: 'header-wide-1440px' },
 	{ breakpoint: breakpoints.leftCol, filename: 'header-leftcol-1280px' },
 	{ breakpoint: breakpoints.desktop, filename: 'header-desktop-1024px' },
-	{ breakpoint: 768, filename: 'header-tablet-979px' },
 	{ breakpoint: breakpoints.tablet, filename: 'header-tablet-768px' },
 	{
 		breakpoint: breakpoints.phablet,
