@@ -53,6 +53,9 @@ const layout: PuzzlesLayoutType = {
 							cardVariant: 'primary',
 							cadence: 'Daily',
 							url: 'https://www.wordiply.com/',
+							slug: 'word-games/wordiply',
+							variant: 'iframe-page',
+							date: '2026-09-16',
 						},
 					],
 				],
@@ -85,11 +88,54 @@ const supporting: PuzzlesSupportingContent = {
 };
 
 describe('PuzzlesSupporting', () => {
+	it('shows only useful links by default, even when ads are enabled', () => {
+		render(
+			<PuzzlesSupporting
+				id="puzzles-supporting"
+				adSlot="mostpop"
+				layout={layout}
+				renderAds={true}
+				supporting={{
+					...supporting,
+					usefulLinks: [
+						{
+							title: 'Support the Guardian',
+							url: 'https://support.theguardian.com',
+						},
+						{
+							title: 'Help Centre',
+							url: 'https://help.theguardian.com',
+						},
+					],
+				}}
+			/>,
+		);
+		expect(
+			screen.getByRole('heading', { name: 'Useful links' }),
+		).toBeInTheDocument();
+		expect(
+			screen.getByRole('link', { name: 'Support the Guardian' }),
+		).toHaveAttribute('href', 'https://support.theguardian.com');
+		expect(
+			screen.getByRole('link', { name: 'Help Centre' }),
+		).toHaveAttribute('href', 'https://help.theguardian.com');
+		expect(screen.getAllByRole('link')).toHaveLength(2);
+		expect(
+			screen.queryByTestId('newsletter-form-saturday-edition'),
+		).not.toBeInTheDocument();
+		expect(
+			screen.queryByRole('heading', { name: 'Most popular puzzles' }),
+		).not.toBeInTheDocument();
+		expect(screen.queryByTestId('mostpop-ad')).not.toBeInTheDocument();
+	});
+
 	it('renders configured links, newsletter and ranked puzzle groups', () => {
 		render(
 			<PuzzlesSupporting
 				id="puzzles-supporting"
 				layout={layout}
+				showNewsletter={true}
+				showPopular={true}
 				renderAds={false}
 				supporting={supporting}
 			/>,
@@ -109,6 +155,14 @@ describe('PuzzlesSupporting', () => {
 		}).parentElement;
 		expect(played).not.toBeNull();
 		expect(within(played!).getAllByRole('listitem')).toHaveLength(2);
+		for (const link of screen.getAllByRole('link', {
+			name: 'Wordiply Daily',
+		})) {
+			expect(link).toHaveAttribute(
+				'href',
+				'/puzzles-and-games/word-games/wordiply/2026-09-16',
+			);
+		}
 		expect(screen.queryByText('missing')).not.toBeInTheDocument();
 	});
 
@@ -119,6 +173,7 @@ describe('PuzzlesSupporting', () => {
 				adSlot="mostpop"
 				layout={layout}
 				renderAds={false}
+				showPopular={true}
 				supporting={supporting}
 			/>,
 		);
@@ -129,6 +184,7 @@ describe('PuzzlesSupporting', () => {
 				adSlot="mostpop"
 				layout={layout}
 				renderAds={true}
+				showPopular={true}
 				supporting={supporting}
 			/>,
 		);

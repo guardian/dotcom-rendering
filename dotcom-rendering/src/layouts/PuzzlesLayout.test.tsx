@@ -36,7 +36,10 @@ describe('PuzzlesLayout', () => {
 	it('renders one branded page title without category filters', () => {
 		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
 		expect(
-			screen.getByRole('heading', { level: 1, name: 'Puzzles & Games' }),
+			screen.getByRole('heading', {
+				level: 1,
+				name: 'Puzzles and Games',
+			}),
 		).toBeInTheDocument();
 		expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
 		expect(
@@ -60,5 +63,51 @@ describe('PuzzlesLayout', () => {
 		expect(
 			document.getElementById('dfp-ad--mobile-above-nav'),
 		).not.toBeInTheDocument();
+	});
+	it('renders the illustrated header with responsive sources and a fixed height', () => {
+		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
+		const header = screen
+			.getByRole('heading', {
+				level: 1,
+				name: 'Puzzles and Games',
+			})
+			.closest('header')!;
+		expect(header).toHaveStyle({ height: '230px' });
+		expect(header).toHaveStyle({ background: '#fef9f5' });
+		const picture = header.querySelector('picture')!;
+		const sources = Array.from(picture.querySelectorAll('source'));
+		const expected = [
+			[1728, 'header-desktop-1728px', 1728],
+			[1300, 'header-wide-1440px', 1440],
+			[1140, 'header-leftcol-1280px', 1280],
+			[980, 'header-desktop-1024px', 1024],
+			[740, 'header-tablet-768px', 768],
+			[660, 'header-mobile-phablet-669px', 669],
+			[480, 'header-mobile-landscape-480px', 480],
+			[375, 'header-mobile-medium-393px', 393],
+		];
+		expect(sources).toHaveLength(expected.length);
+		for (const [
+			index,
+			[width, filename, imageWidth],
+		] of expected.entries()) {
+			expect(sources[index]).toHaveAttribute(
+				'media',
+				`(min-width: ${width}px)`,
+			);
+			expect(sources[index]).toHaveAttribute(
+				'srcset',
+				`https://i.guim.co.uk/img/uploads/2026/09/15/${filename}.png?width=${imageWidth}&dpr=2&s=none`,
+			);
+		}
+		expect(picture.querySelector('img')).toHaveAttribute(
+			'src',
+			'https://i.guim.co.uk/img/uploads/2026/09/15/header-mobile-360px.png?width=360&dpr=2&s=none',
+		);
+		expect(picture.querySelector('img')).toHaveAttribute(
+			'alt',
+			'An owl carrying a crossword grid beside an octopus reading a puzzle',
+		);
+		expect(picture.querySelector('img')).not.toHaveAttribute('aria-hidden');
 	});
 });

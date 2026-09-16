@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
 import {
+	breakpoints,
 	from,
-	headlineBold50,
 	palette,
 	space,
+	visuallyHidden,
 } from '@guardian/source/foundations';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -15,6 +16,7 @@ import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import { Stuck } from './lib/stickiness';
 
 const mainStyles = css`
+	overflow-x: clip;
 	padding-bottom: ${space[12]}px;
 	background: ${palette.neutral[100]};
 	color: ${palette.neutral[7]};
@@ -22,25 +24,71 @@ const mainStyles = css`
 `;
 
 const brandStyles = css`
-	max-width: 1300px;
+	box-sizing: border-box;
+	height: 230px;
 	margin: 0 auto;
-	padding: ${space[6]}px ${space[3]}px ${space[8]}px;
-	border-right: 1px solid ${palette.neutral[86]};
-	border-left: 1px solid ${palette.neutral[86]};
-	background: ${palette.neutral[97]};
+	overflow: hidden;
+	/* The artwork is transparent and uses this illustrated-header background. */
+	background: ${palette.opinion[800]};
 `;
 
-const titleStyles = css`
-	max-width: 10ch;
-	margin: 0;
-	${headlineBold50};
-	font-size: 48px;
-	line-height: 0.9;
-
-	${from.tablet} {
-		font-size: 64px;
+const brandImageStyles = css`
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	${from.leftCol} {
+		object-position: left center;
 	}
 `;
+
+const brandPictureStyles = css`
+	display: block;
+	height: 100%;
+	width: 100%;
+	margin: 0 auto;
+	${from.leftCol} {
+		/* This asset already includes the 254px trailing artwork margin. */
+		width: 1280px;
+		margin-left: max(0px, calc((100% - 1140px) / 2));
+	}
+	${from.wide} {
+		/* The asset's 70px inset aligns the artwork with the 1300px subnav. */
+		width: 1440px;
+		margin-left: calc((100% - 1440px) / 2);
+	}
+	@media (min-width: 1728px) {
+		width: 1728px;
+		margin-left: calc((100% - 1728px) / 2);
+	}
+`;
+
+const headerArtwork = (filename: string) => {
+	// Request the artwork's design width, rather than stretching a card-sized image.
+	const width = filename.match(/-(\d+)px$/)?.[1] ?? '360';
+	return `https://i.guim.co.uk/img/uploads/2026/09/15/${filename}.png?width=${width}&dpr=2&s=none`;
+};
+// Descending media queries ensure that the browser chooses the largest match.
+const headerSources = [
+	{ breakpoint: 1728, filename: 'header-desktop-1728px' },
+	{ breakpoint: breakpoints.wide, filename: 'header-wide-1440px' },
+	{ breakpoint: breakpoints.leftCol, filename: 'header-leftcol-1280px' },
+	{ breakpoint: breakpoints.desktop, filename: 'header-desktop-1024px' },
+	{ breakpoint: breakpoints.tablet, filename: 'header-tablet-768px' },
+	{
+		breakpoint: breakpoints.phablet,
+		filename: 'header-mobile-phablet-669px',
+	},
+	{
+		breakpoint: breakpoints.mobileLandscape,
+		filename: 'header-mobile-landscape-480px',
+	},
+	{
+		breakpoint: breakpoints.mobileMedium,
+		filename: 'header-mobile-medium-393px',
+	},
+];
 
 export const PuzzlesLayout = ({
 	puzzlesPage,
@@ -88,11 +136,21 @@ export const PuzzlesLayout = ({
 				id="maincontent"
 			>
 				<header css={brandStyles}>
-					<h1 css={titleStyles}>
-						Puzzles
-						<br />
-						&amp; Games
-					</h1>
+					<h1 css={visuallyHidden}>Puzzles and Games</h1>
+					<picture css={brandPictureStyles}>
+						{headerSources.map(({ breakpoint, filename }) => (
+							<source
+								key={filename}
+								media={`(min-width: ${breakpoint}px)`}
+								srcSet={headerArtwork(filename)}
+							/>
+						))}
+						<img
+							alt="An owl carrying a crossword grid beside an octopus reading a puzzle"
+							css={brandImageStyles}
+							src={headerArtwork('header-mobile-360px')}
+						/>
+					</picture>
 				</header>
 				<PuzzlesDirectory
 					layout={puzzlesPage.layout}
