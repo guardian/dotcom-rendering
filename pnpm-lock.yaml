@@ -219,8 +219,8 @@ catalogs:
       specifier: 2.6.2
       version: 2.6.2
     type-fest:
-      specifier: 4.21.0
-      version: 4.21.0
+      specifier: 5.9.0
+      version: 5.9.0
     typescript:
       specifier: 6.0.3
       version: 6.0.3
@@ -365,7 +365,7 @@ importers:
         version: 6.2.1(esbuild@0.28.1)(rollup@4.59.0)(supports-color@8.1.1)
       type-fest:
         specifier: 'catalog:'
-        version: 4.21.0
+        version: 5.9.0
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -441,7 +441,7 @@ importers:
         version: 6.2.1(esbuild@0.28.1)(rollup@4.59.0)(supports-color@8.1.1)
       type-fest:
         specifier: 'catalog:'
-        version: 4.21.0
+        version: 5.9.0
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -864,7 +864,7 @@ importers:
         version: 4.23.13
       type-fest:
         specifier: 'catalog:'
-        version: 4.21.0
+        version: 5.9.0
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
