@@ -15,9 +15,22 @@ export interface CustomSubnavHeader {
 	dotcomPath?: string;
 	copy: string;
 }
+export type CustomSubnavImageBreakpoint =
+	| 'mobile'
+	| 'mobileMedium'
+	| 'mobileLandscape'
+	| 'phablet'
+	| 'tablet'
+	| 'desktop'
+	| 'leftCol'
+	| 'wide';
+
+export type CustomSubnavImagePlatform = 'ios' | 'web' | 'android';
+
 export interface CustomSubnavImage {
 	imageSrc: string;
-	breakpoint: 'mobile' | 'tablet' | 'web';
+	breakpoint: CustomSubnavImageBreakpoint;
+	platforms: CustomSubnavImagePlatform[];
 }
 
 export interface CustomSubnavTargetedPage {

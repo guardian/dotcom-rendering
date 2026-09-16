@@ -125,6 +125,7 @@ const buildRRBannerConfigWith = ({
 		pageId,
 		inHoldbackGroup,
 		inAuxiaVariant,
+		inNoShowMobileAboveNavVariant,
 	}: {
 		isSignedIn: boolean;
 		countryCode: CountryCode;
@@ -144,6 +145,7 @@ const buildRRBannerConfigWith = ({
 		pageId?: string;
 		inHoldbackGroup?: boolean;
 		inAuxiaVariant?: boolean;
+		inNoShowMobileAboveNavVariant?: boolean;
 	}): CandidateConfig<ModuleData<BannerProps>> => {
 		return {
 			candidate: {
@@ -182,6 +184,7 @@ const buildRRBannerConfigWith = ({
 						pageId,
 						inHoldbackGroup,
 						inAuxiaVariant,
+						inNoShowMobileAboveNavVariant,
 					}),
 				show: ({ name, props }: ModuleData<BannerProps>) => (
 					<BannerComponent name={name} props={props} />
@@ -339,6 +342,11 @@ export const StickyBottomBanner = ({
 					'control',
 				) ?? false,
 			inAuxiaVariant,
+			inNoShowMobileAboveNavVariant:
+				abTests?.isUserInTestGroup(
+					'commercial-mobile-above-nav-test',
+					'variant2',
+				) ?? false,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
