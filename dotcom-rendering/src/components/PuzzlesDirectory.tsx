@@ -395,8 +395,7 @@ const nestedStyles = (span: number) => css`
 `;
 
 const adStyles = css`
-	max-width: 1300px;
-	margin: 0 auto;
+	width: 100%;
 	overflow: hidden;
 	background: ${palette.neutral[97]};
 `;
