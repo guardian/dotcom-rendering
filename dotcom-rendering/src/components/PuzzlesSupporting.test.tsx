@@ -43,7 +43,7 @@ const layout: PuzzlesLayoutType = {
 							set: 'quick',
 							cardVariant: 'primary',
 							cadence: 'Daily',
-							url: '/puzzles-and-games/crosswords/quick/1',
+							url: '/crosswords/quick/1',
 						},
 						{
 							id: 'wordiply',

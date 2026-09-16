@@ -423,7 +423,7 @@ export const getPuzzleUrl = (item: PuzzleItem): string | undefined => {
 	if (
 		url !== undefined &&
 		(url.startsWith('/puzzles-and-games') ||
-			url.startsWith('/crosswords/series/') ||
+			url.startsWith('/crosswords/') ||
 			/^https?:\/\//.test(url))
 	) {
 		return url;
