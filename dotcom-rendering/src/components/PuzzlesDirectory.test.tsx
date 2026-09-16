@@ -6,10 +6,11 @@ import type {
 	PuzzleItem,
 	PuzzlesLayoutType,
 } from '../types/puzzlesPage';
+import { Island } from './Island';
 import { getPuzzleUrl, PuzzlesDirectory } from './PuzzlesDirectory';
 
 jest.mock('./Island', () => ({
-	Island: ({ children }: { children: ReactNode }) => children,
+	Island: jest.fn(({ children }: { children: ReactNode }) => children),
 }));
 
 const item = (overrides: Partial<PuzzleItem> = {}): PuzzleItem => ({
@@ -33,6 +34,191 @@ const section = (
 });
 
 describe('PuzzlesDirectory', () => {
+	it('keeps the crossword sidebar links hidden below leftCol and scoped to crosswords', () => {
+		const { container } = render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({ id: 'crosswords', title: 'Crosswords' }),
+						section({
+							id: 'logic-puzzles',
+							title: 'Logic puzzles',
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+		const links = container.querySelector(
+			'nav[aria-label="Crossword links"]',
+		)!;
+		expect(links).not.toBeVisible();
+		expect(
+			links.querySelector('a[href="https://support.theguardian.com"]'),
+		).toHaveTextContent('Support the Guardian');
+		expect(
+			links.querySelector(
+				'a[href="https://www.theguardian.com/crosswords/crossword-blog"]',
+			),
+		).toHaveTextContent('Blog');
+		expect(container.querySelector('#logic-puzzles nav')).toBeNull();
+	});
+	it.each([
+		['crossword', '#fff4f2', '#ab0613'],
+		['sudoku', '#f1f8fc', '#0077b6'],
+		['wordiply', '#fef9f5', '#c74600'],
+		['word-wheel', '#fef9f5', '#c74600'],
+	])(
+		'uses the %s type colours instead of legacy configured colours',
+		(type, background, title) => {
+			const { container } = render(
+				<PuzzlesDirectory
+					layout={{
+						containers: [
+							section({
+								content: {
+									items: [
+										[
+											item({
+												type,
+												backgroundColour: '#000000',
+											}),
+										],
+									],
+									nestedContainers: [],
+								},
+							}),
+						],
+					}}
+					renderAds={false}
+				/>,
+			);
+			expect(container.querySelector('article')).toHaveStyle({
+				backgroundColor: background,
+			});
+			expect(container.querySelector('.puzzle-card-title')).toHaveStyle({
+				color: title,
+			});
+		},
+	);
+
+	it('describes card artwork without adding it to screen-reader link names', () => {
+		const { container } = render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							content: {
+								items: [
+									[
+										item({
+											image: '/word-wheel.png',
+											imageAlt: 'Word wheel illustration',
+											url: '/puzzles-and-games/word-wheel',
+										}),
+									],
+								],
+								nestedContainers: [],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+		const image = container.querySelector('img');
+		expect(image).toHaveStyle({ width: '181px', height: '145px' });
+		expect(
+			screen.getByRole('link', { name: 'Daily puzzle Daily' }),
+		).toHaveStyle({ height: '145px' });
+		expect(image).toHaveAttribute('alt', 'Word wheel illustration');
+		expect(image).toHaveAttribute('aria-hidden', 'true');
+		expect(screen.queryByRole('img')).not.toBeInTheDocument();
+		expect(
+			screen.getByRole('link', { name: 'Daily puzzle Daily' }),
+		).toBeInTheDocument();
+	});
+
+	it('provides fallback alt text and keeps compact cards text-only', () => {
+		const { container } = render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							content: {
+								items: [
+									[item({ image: '/puzzle.png' })],
+									[
+										item({
+											id: 'compact',
+											cardVariant: 'compact',
+											image: '/compact.png',
+										}),
+									],
+								],
+								nestedContainers: [],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+		expect(container.querySelectorAll('img')).toHaveLength(1);
+		expect(container.querySelector('img')).toHaveAttribute(
+			'alt',
+			'Daily puzzle illustration',
+		);
+	});
+
+	it('shows setters on crossword cards across variants but not on other puzzles', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							variant: 'featured',
+							content: {
+								items: [
+									...(
+										['large', 'primary', 'compact'] as const
+									).map((cardVariant) => [
+										item({
+											id: cardVariant,
+											type: 'crossword',
+											cardVariant,
+											setter: '  Example setter  ',
+										}),
+									]),
+									[
+										item({
+											id: 'word-wheel',
+											setter: 'Ignored setter',
+										}),
+									],
+									[
+										item({
+											id: 'blank-setter',
+											type: 'crossword',
+											setter: '  ',
+										}),
+									],
+								],
+								nestedContainers: [],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+		expect(screen.getAllByText('By: Example setter')).toHaveLength(3);
+		expect(
+			screen.queryByText('By: Ignored setter'),
+		).not.toBeInTheDocument();
+		expect(screen.queryByText('By:')).not.toBeInTheDocument();
+		expect(screen.queryByText('Played')).not.toBeInTheDocument();
+	});
 	it('renders unique desktop and mobile IDs for multiple blueprint slots', () => {
 		const layout: PuzzlesLayoutType = {
 			containers: ['inline1', 'inline2'].map((adSlot) =>
@@ -134,8 +320,22 @@ describe('PuzzlesDirectory', () => {
 
 	it('resolves internal and external URLs safely and never emits a hash fallback', () => {
 		expect(
-			getPuzzleUrl(item({ slug: 'word-wheel', variant: 'iframe-page' })),
-		).toBe('/puzzles-and-games/word-wheel');
+			getPuzzleUrl(
+				item({
+					slug: 'word-games/word-wheel',
+					variant: 'iframe-page',
+					date: '2026-09-16',
+				}),
+			),
+		).toBe('/puzzles-and-games/word-games/word-wheel/2026-09-16');
+		expect(
+			getPuzzleUrl(
+				item({
+					slug: 'logic-puzzles/sudoku-easy',
+					variant: 'iframe-page',
+				}),
+			),
+		).toBe('/puzzles-and-games/logic-puzzles/sudoku-easy');
 		expect(
 			getPuzzleUrl(item({ slug: 'word-wheel', variant: 'archive-page' })),
 		).toBe('/puzzles-and-games/word-wheel/archive');
@@ -247,7 +447,18 @@ describe('PuzzlesDirectory', () => {
 			/>,
 		);
 		const summary = screen.getByText('Multiple archive').closest('summary');
+		const islandProps = jest.mocked(Island).mock.calls.at(-1)?.[0];
+		expect(islandProps).toMatchObject({ priority: 'critical' });
+		expect(islandProps).not.toHaveProperty('defer');
 		expect(summary).not.toBeNull();
+		expect(summary!.querySelector('svg')).toHaveAttribute(
+			'viewBox',
+			'0 0 9 5',
+		);
+		expect(summary!.querySelector('svg')).toHaveAttribute(
+			'aria-hidden',
+			'true',
+		);
 		fireEvent.click(summary!);
 		expect(screen.getByRole('link', { name: 'Archive A' })).toHaveAttribute(
 			'href',
@@ -261,9 +472,19 @@ describe('PuzzlesDirectory', () => {
 			expect(summary!.closest('details')).not.toHaveAttribute('open'),
 		);
 		fireEvent.click(summary!);
+		fireEvent.click(document.body);
+		await waitFor(() =>
+			expect(summary!.closest('details')).not.toHaveAttribute('open'),
+		);
+		fireEvent.click(summary!);
 		fireEvent.mouseDown(document.body);
 		await waitFor(() =>
 			expect(summary!.closest('details')).not.toHaveAttribute('open'),
 		);
+		fireEvent.click(summary!);
+		fireEvent.pointerDown(summary!.querySelector('svg')!);
+		expect(summary!.closest('details')).toHaveAttribute('open');
+		fireEvent.pointerDown(document.body);
+		expect(summary!.closest('details')).not.toHaveAttribute('open');
 	});
 });

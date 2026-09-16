@@ -50,7 +50,9 @@ const getServiceFromUrl = (url: URL): string => {
 	}
 };
 
-const isCodeGridUrl = (url: URL) => url.hostname === 'media.guimcode.co.uk';
+const isCodeGridUrl = (url: URL) =>
+	url.hostname === 'media.guimcode.co.uk' ||
+	url.hostname === 'uploads.guimcode.co.uk';
 
 /**
  * Generates a URL for calling the Fastly Image Optimiser.
