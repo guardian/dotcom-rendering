@@ -3,17 +3,17 @@ import { getCookie } from '@guardian/libs';
 const AB_TEST_GEO_REGION_COOKIE = 'GU_geo_country_region';
 const AB_TEST_US_STATES = [
 	'SC', // South Carolina
-	// 'WA', // Washington
-	// 'NC', // North Carolina
-	// 'OH', // Ohio
-	// 'MI', // Michigan
-	// 'AZ', // Arizona
-	// 'MO', // Missouri
-	// 'WI', // Wisconsin
-	// 'DC', // District of Columbia
-	// 'KS', // Kansas
-	// 'NM', // New Mexico
-	// 'ME', // Maine
+	'WA', // Washington
+	'NC', // North Carolina
+	'OH', // Ohio
+	'MI', // Michigan
+	'AZ', // Arizona
+	'MO', // Missouri
+	'WI', // Wisconsin
+	'DC', // District of Columbia
+	'KS', // Kansas
+	'NM', // New Mexico
+	'ME', // Maine
 ];
 
 export const isInUsStateForAbTest = (): boolean => {
