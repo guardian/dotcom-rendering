@@ -213,6 +213,26 @@ describe('SignInGatePortal', () => {
 	});
 
 	describe('Gandalf (Guardian-managed sign-in gate journey)', () => {
+		it('makes no request to SDC for surfaces that can never display the gate', async () => {
+			mockGetElementById.mockReturnValue(document.createElement('div'));
+			(
+				buildAuxiaGateDisplayData as jest.MockedFunction<
+					typeof buildAuxiaGateDisplayData
+				>
+			).mockResolvedValue(makeAuxiaReturn(undefined, true));
+
+			// A front in GB: not an article, not a Gandalf country. The gate
+			// decision is predetermined, so SDC is not contacted at all.
+			const result = await canShowSignInGatePortal({
+				...canShowProps,
+				contentType: 'Network Front',
+				countryCode: 'GB',
+			});
+
+			expect(result).toEqual({ show: false });
+			expect(buildAuxiaGateDisplayData).not.toHaveBeenCalled();
+		});
+
 		it('returns no gate but carries the marker metadata on a free Gandalf pageview', async () => {
 			mockGetElementById.mockReturnValue(document.createElement('div'));
 			(

@@ -195,6 +195,14 @@ export const canShowSignInGatePortal = async ({
 		return Promise.resolve({ show: false });
 	}
 
+	// Gandalf (comment group: gandalf) — the Guardian-managed sign-in gate
+	// journey is currently New Zealand only, and every other country gates on
+	// articles only. Surfaces that can never display the gate (e.g. a front in
+	// GB) are filtered out here so they make no request to SDC at all.
+	if (contentType !== 'Article' && countryCode !== 'NZ') {
+		return Promise.resolve({ show: false });
+	}
+
 	try {
 		const auxiaData = await buildAuxiaGateDisplayData(
 			contributionsServiceUrl,
