@@ -122,7 +122,7 @@ const contentStyles = css`
 			top: 0;
 			right: 10px;
 			left: 10px;
-			border-top: 1px solid #d9d9d9;
+			border-top: 1px solid ${palette.neutral[86]};
 			content: '';
 			pointer-events: none;
 		}
@@ -155,7 +155,7 @@ const rowsStyles = css`
 		top: calc(var(--puzzles-gap) / -2);
 		right: 0;
 		left: 0;
-		border-top: 1px solid #d9d9d9;
+		border-top: 1px solid ${palette.neutral[86]};
 		content: '';
 		pointer-events: none;
 	}
@@ -182,7 +182,7 @@ const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => css`
 		top: calc(var(--puzzles-gap) / -2);
 		right: 0;
 		left: 0;
-		border-top: 1px solid #d9d9d9;
+		border-top: 1px solid ${palette.neutral[86]};
 		content: '';
 		pointer-events: none;
 	}
@@ -193,7 +193,7 @@ const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => css`
 			top: 0;
 			bottom: 0;
 			left: calc(var(--puzzles-gap) / -2);
-			border-left: 1px solid #d9d9d9;
+			border-left: 1px solid ${palette.neutral[86]};
 			content: '';
 			pointer-events: none;
 		}
@@ -223,7 +223,7 @@ const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => css`
 			top: 0;
 			bottom: 0;
 			left: calc(var(--puzzles-gap) / -2);
-			border-left: 1px solid #d9d9d9;
+			border-left: 1px solid ${palette.neutral[86]};
 			content: '';
 			pointer-events: none;
 		}
@@ -311,7 +311,7 @@ const cadenceStyles = css`
 
 const setterStyles = css`
 	margin-top: ${space[1]}px;
-	color: #ab0613;
+	color: ${palette.news[300]};
 	${textSans14};
 	line-height: 1.3;
 `;
@@ -371,7 +371,7 @@ const nestedStyles = (span: number) => css`
 		top: calc(var(--puzzles-gap) / -2);
 		right: 0;
 		left: 0;
-		border-top: 1px solid #d9d9d9;
+		border-top: 1px solid ${palette.neutral[86]};
 		content: '';
 		pointer-events: none;
 	}
@@ -385,10 +385,10 @@ const nestedStyles = (span: number) => css`
 						right: auto;
 						left: calc(var(--puzzles-gap) / -2);
 						border-top: 0;
-						border-left: 1px solid #d9d9d9;
+						border-left: 1px solid ${palette.neutral[86]};
 					`
 				: css`
-						border-top: 1px solid #d9d9d9;
+						border-top: 1px solid ${palette.neutral[86]};
 					`}
 		}
 	}
@@ -437,12 +437,18 @@ const externalProps = (url: string) =>
 const puzzleColours = (item: PuzzleItem) => {
 	switch (item.type) {
 		case 'crossword':
-			return { background: '#fff4f2', title: '#ab0613' };
+			return { background: palette.news[800], title: palette.news[300] };
 		case 'sudoku':
-			return { background: '#f1f8fc', title: '#0077b6' };
+			return {
+				background: palette.sport[800],
+				title: palette.sport[400],
+			};
 		case 'wordiply':
 		case 'word-wheel':
-			return { background: palette.opinion[800], title: '#c74600' };
+			return {
+				background: palette.opinion[800],
+				title: palette.opinion[400],
+			};
 		default:
 			return {
 				background: item.backgroundColour,
