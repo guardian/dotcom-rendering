@@ -339,6 +339,9 @@ describe('PuzzlesDirectory', () => {
 		expect(
 			getPuzzleUrl(item({ slug: 'word-wheel', variant: 'archive-page' })),
 		).toBe('/puzzles-and-games/word-wheel/archive');
+		expect(getPuzzleUrl(item({ url: '/crosswords/quick/123' }))).toBe(
+			'/crosswords/quick/123',
+		);
 		expect(getPuzzleUrl(item({ url: 'https://example.com/play' }))).toBe(
 			'https://example.com/play',
 		);
