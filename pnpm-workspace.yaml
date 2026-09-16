@@ -15,7 +15,7 @@ catalog:
   '@guardian/cdk': 64.7.0
   '@guardian/eslint-config': 14.0.1
   '@guardian/tsconfig': 1.0.1
-  '@rollup/plugin-commonjs': 29.0.0
+  '@rollup/plugin-commonjs': 29.0.3
   '@rollup/plugin-json': 6.1.0
   '@rollup/plugin-node-resolve': 16.0.3
   '@types/aws-lambda': 8.10.158
