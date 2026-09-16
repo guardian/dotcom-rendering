@@ -302,8 +302,9 @@ export const PuzzlesSupporting = ({
 								illustrationSquare={
 									newsletter.illustrationSquare
 								}
-								illustrationAlt={`${newsletter.name} newsletter illustration`}
-								hideIllustrationFromScreenReaders={true}
+								// TODO hide ilustrations when we implement this
+								// illustrationAlt={`${newsletter.name} newsletter illustration`}
+								// hideIllustrationFromScreenReaders={true}
 								isModal={true}
 								name={newsletter.name}
 							>
