@@ -76,13 +76,12 @@ describe('PuzzlePageLayout', () => {
 		expect(screen.queryByText('11 September 2026')).not.toBeInTheDocument();
 	});
 
-	it('renders the puzzleGroup label as plain, non-linked text', () => {
+	it('renders the puzzleGroup label as a real section link, exactly like CrosswordLayout/ArticleTitle', () => {
 		renderPuzzlePageLayout('sudoku-easy');
 
 		expect(
-			screen.queryByRole('link', { name: 'Logic puzzles' }),
-		).not.toBeInTheDocument();
-		expect(screen.getByText('Logic puzzles')).toBeInTheDocument();
+			screen.getByRole('link', { name: 'Logic puzzles' }),
+		).toBeInTheDocument();
 	});
 
 	describe('print button (Sudoku-only, per PR #16700 review)', () => {
