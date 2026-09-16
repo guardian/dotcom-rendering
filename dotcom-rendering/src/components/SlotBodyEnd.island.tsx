@@ -132,8 +132,17 @@ export const SlotBodyEnd = ({
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 
 	const isInUS = countryCode === 'US';
+	const isInArticleEndHeaderBiddingTest = abTests?.isUserInTestGroup(
+		'commercial-article-end-header-bidding',
+		'variant',
+	);
 
-	const showArticleEndSlot = renderAds && !isLabs && isInUS && articleEndSlot;
+	const showArticleEndSlot =
+		renderAds &&
+		!isLabs &&
+		isInUS &&
+		articleEndSlot &&
+		isInArticleEndHeaderBiddingTest;
 
 	useEffect(() => {
 		setAsyncArticleCount(
