@@ -434,6 +434,7 @@ export type FESupportingContent = {
 	properties: {
 		href?: string;
 		webUrl?: string;
+		tests?: EditorialTest[];
 	};
 	header: {
 		kicker?: {

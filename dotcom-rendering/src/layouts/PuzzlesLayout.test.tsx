@@ -6,9 +6,6 @@ import { PuzzlesLayout } from './PuzzlesLayout';
 jest.mock('../components/Masthead/Masthead', () => ({
 	Masthead: () => <header data-testid="masthead" />,
 }));
-jest.mock('../components/HeaderAdSlot', () => ({
-	HeaderAdSlot: () => <div data-testid="header-ad" />,
-}));
 jest.mock('../components/Footer', () => ({
 	Footer: () => <div data-testid="footer" />,
 }));
@@ -51,12 +48,17 @@ describe('PuzzlesLayout', () => {
 		const { rerender } = render(
 			<PuzzlesLayout NAV={nav} puzzlesPage={page(true) as never} />,
 		);
-		expect(screen.queryByTestId('header-ad')).not.toBeInTheDocument();
+		expect(document.querySelector('.js-ad-slot')).not.toBeInTheDocument();
 		expect(screen.getByTestId('masthead')).toBeInTheDocument();
 		expect(screen.getByTestId('footer')).toBeInTheDocument();
 		rerender(
 			<PuzzlesLayout NAV={nav} puzzlesPage={page(false) as never} />,
 		);
-		expect(screen.getByTestId('header-ad')).toBeInTheDocument();
+		expect(
+			document.getElementById('dfp-ad--top-above-nav'),
+		).toBeInTheDocument();
+		expect(
+			document.getElementById('dfp-ad--mobile-above-nav'),
+		).not.toBeInTheDocument();
 	});
 });

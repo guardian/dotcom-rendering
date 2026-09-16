@@ -24,7 +24,9 @@ type Props = {
 	electionDataUrl: URL;
 	/**
 	 * A potentially side-effectful function used to retrieve election data from
-	 * the given URL. The result is a JS object of unknown shape.
+	 * the given URL, allowing for different effects to be passed in different
+	 * environments. The result is a JS object of unknown shape, which will be
+	 * parsed here.
 	 */
 	getElectionData: (url: string) => Promise<unknown>;
 	/**

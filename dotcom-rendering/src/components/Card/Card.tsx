@@ -164,6 +164,7 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	starRatingSize?: RatingSizeType;
 	contentSpacing?: 'small' | 'large';
+	headlineTestUuid?: string;
 };
 
 const waveformWrapper = (
@@ -410,6 +411,7 @@ export const Card = ({
 	starRatingSize = 'small',
 	articleMedia,
 	contentSpacing,
+	headlineTestUuid,
 }: Props) => {
 	const ab = useAB();
 	const isInLoopClickTestControl = Boolean(
@@ -830,6 +832,7 @@ export const Card = ({
 				isExternalLink={isExternalLink}
 				isLoopAndInLoopClickTest={isLoopAndInLoopClickTest}
 				shouldRaiseZIndexForAbTest={false} // The z-index is raised in a new CardLink in the SelfHostedVideo island.
+				headlineTestUuid={headlineTestUuid}
 			/>
 			{headlinePosition === 'outer' && (
 				<div

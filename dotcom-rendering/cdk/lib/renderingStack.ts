@@ -205,17 +205,19 @@ const addLatencyStepScalingPolicy = (
 /** DCR infrastructure provisioning via CDK */
 export class RenderingCDKStack extends CDKStack {
 	constructor(scope: CDKApp, id: string, props: RenderingCDKStackProps) {
+		const { guApp, stage, instanceType, scaling, domainName, ecsProps } =
+			props;
+
 		super(scope, id, {
-			...props,
 			// Any version of this app should run in the eu-west-1 region
 			env: { region: 'eu-west-1' },
 			// Set the stack within the constructor as this won't vary between apps
 			stack: 'frontend',
+			stage,
+			app: guApp,
 		});
 
 		const { stack: guStack, region, account } = this;
-		const { guApp, stage, instanceType, scaling, domainName, ecsProps } =
-			props;
 
 		const artifactsBucket =
 			GuDistributionBucketParameter.getInstance(this).valueAsString;
