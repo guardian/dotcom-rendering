@@ -14,6 +14,11 @@ const esModules = [
 	'storybook',
 	'parse5',
 	'entities',
+	'htmlparser2',
+	'domhandler',
+	'domelementtype',
+	'domutils',
+	'dom-serializer',
 ].join('|');
 
 module.exports = {
