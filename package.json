@@ -25,5 +25,5 @@
 		"prettier": "3.8.3",
 		"tslib": "catalog:"
 	},
-	"packageManager": "pnpm@12.4.1"
+	"packageManager": "pnpm@12.4.2"
 }
