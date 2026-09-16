@@ -113,7 +113,6 @@ const newsletterStyles = css`
 `;
 
 const popularContentStyles = css`
-	position: relative;
 	display: block;
 	width: 100%;
 	min-width: 0;
@@ -121,8 +120,9 @@ const popularContentStyles = css`
 	border-top: 1px solid ${borderColour};
 
 	${from.desktop} {
-		&:has(.ad-slot__content) {
-			padding-right: 320px;
+		&:has([data-puzzles-ad='mostpop']) {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) 320px;
 		}
 	}
 `;
@@ -213,17 +213,9 @@ const mostPopAdStyles = css`
 
 	${from.desktop} {
 		display: block;
-		position: absolute;
-		top: 0;
-		right: 0;
 		width: 320px;
 		box-sizing: border-box;
 		padding: ${space[6]}px ${space[3]}px;
-		pointer-events: none;
-
-		&:has(.ad-slot__content) {
-			pointer-events: auto;
-		}
 	}
 `;
 
