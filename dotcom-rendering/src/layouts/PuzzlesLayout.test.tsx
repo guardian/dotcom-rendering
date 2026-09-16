@@ -36,7 +36,10 @@ describe('PuzzlesLayout', () => {
 	it('renders one branded page title without category filters', () => {
 		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
 		expect(
-			screen.getByRole('heading', { level: 1, name: 'Puzzles & Games' }),
+			screen.getByRole('heading', {
+				level: 1,
+				name: 'Puzzles and Games',
+			}),
 		).toBeInTheDocument();
 		expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
 		expect(
@@ -66,7 +69,7 @@ describe('PuzzlesLayout', () => {
 		const header = screen
 			.getByRole('heading', {
 				level: 1,
-				name: 'Puzzles & Games',
+				name: 'Puzzles and Games',
 			})
 			.closest('header')!;
 		expect(header).toHaveStyle({ height: '230px' });
@@ -78,7 +81,7 @@ describe('PuzzlesLayout', () => {
 			[1300, 'header-wide-1440px', 1440],
 			[1140, 'header-leftcol-1280px', 1280],
 			[980, 'header-desktop-1024px', 1024],
-			[768, 'header-tablet-979px', 979],
+			[740, 'header-tablet-768px', 768],
 			[660, 'header-mobile-phablet-669px', 669],
 			[480, 'header-mobile-landscape-480px', 480],
 			[375, 'header-mobile-medium-393px', 393],

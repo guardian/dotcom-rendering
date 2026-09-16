@@ -6,14 +6,9 @@ import type {
 	PuzzleItem,
 	PuzzlesLayoutType,
 } from '../types/puzzlesPage';
-import { getPuzzleUrl, PuzzlesDirectory } from './PuzzlesDirectory';
 import { Island } from './Island';
+import { getPuzzleUrl, PuzzlesDirectory } from './PuzzlesDirectory';
 
-jest.mock('./AdSlot.web', () => ({
-	AdSlot: ({ index }: { index: number }) => (
-		<div data-testid={`ad-${index}`} />
-	),
-}));
 jest.mock('./Island', () => ({
 	Island: jest.fn(({ children }: { children: ReactNode }) => children),
 }));
@@ -394,8 +389,12 @@ describe('PuzzlesDirectory', () => {
 		expect(document.querySelector('img')).not.toBeInTheDocument();
 		expect(document.querySelector('.js-ad-slot')).not.toBeInTheDocument();
 		rerender(<PuzzlesDirectory layout={layout} renderAds={true} />);
-		// Desktop and mobile placements share the configured slot index.
-		expect(screen.getAllByTestId('ad-2')).toHaveLength(2);
+		expect(
+			document.getElementById('dfp-ad--fronts-banner-2'),
+		).toHaveAttribute('data-name', 'fronts-banner-2');
+		expect(
+			document.getElementById('dfp-ad--inline2--mobile'),
+		).toHaveAttribute('data-name', 'inline2');
 	});
 
 	it('renders the archive dropdown and closes it with Escape or an outside click', async () => {

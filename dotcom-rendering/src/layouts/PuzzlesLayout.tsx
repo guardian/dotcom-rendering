@@ -146,7 +146,7 @@ export const PuzzlesLayout = ({
 							/>
 						))}
 						<img
-							alt=""
+							alt="An owl carrying a crossword grid beside an octopus reading a puzzle"
 							css={brandImageStyles}
 							src={headerArtwork('header-mobile-360px')}
 						/>
