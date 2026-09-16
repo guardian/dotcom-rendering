@@ -75,6 +75,12 @@ const usefulContentStyles = (showNewsletter: boolean) => css`
 			minmax(0, 1fr)
 		);
 	}
+
+	${from.wide} {
+		grid-template-columns: ${showNewsletter
+			? 'repeat(4, minmax(0, 1fr))'
+			: 'repeat(2, minmax(0, 490px))'};
+	}
 `;
 
 const usefulLinkStyles = css`
