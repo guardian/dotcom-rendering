@@ -16,6 +16,7 @@ export type PuzzleItem = {
 	image?: string;
 	imageAlt?: string;
 	setter?: string;
+	date?: string;
 	slug?: string;
 	index?: number;
 	variant?: string;

@@ -320,8 +320,22 @@ describe('PuzzlesDirectory', () => {
 
 	it('resolves internal and external URLs safely and never emits a hash fallback', () => {
 		expect(
-			getPuzzleUrl(item({ slug: 'word-wheel', variant: 'iframe-page' })),
-		).toBe('/puzzles-and-games/word-wheel');
+			getPuzzleUrl(
+				item({
+					slug: 'word-games/word-wheel',
+					variant: 'iframe-page',
+					date: '2026-09-16',
+				}),
+			),
+		).toBe('/puzzles-and-games/word-games/word-wheel/2026-09-16');
+		expect(
+			getPuzzleUrl(
+				item({
+					slug: 'logic-puzzles/sudoku-easy',
+					variant: 'iframe-page',
+				}),
+			),
+		).toBe('/puzzles-and-games/logic-puzzles/sudoku-easy');
 		expect(
 			getPuzzleUrl(item({ slug: 'word-wheel', variant: 'archive-page' })),
 		).toBe('/puzzles-and-games/word-wheel/archive');

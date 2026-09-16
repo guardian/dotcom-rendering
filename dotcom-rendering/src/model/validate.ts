@@ -173,6 +173,7 @@ export const validateAsFootballMatchPageType = (
 };
 const identifier = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const colour = /^#[0-9a-f]{6}$/i;
+const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 const cardVariants = new Set(['large', 'primary', 'compact', 'archive']);
 const containerVariants = new Set(['featured', 'standard', 'ad', 'supporting']);
 const isPuzzleDestination = (url: string) =>
@@ -195,6 +196,8 @@ const isPuzzleItem = (data: unknown): data is PuzzleItem =>
 	(data.image === undefined || isString(data.image)) &&
 	(data.imageAlt === undefined || isString(data.imageAlt)) &&
 	(data.setter === undefined || isString(data.setter)) &&
+	(data.date === undefined ||
+		(isString(data.date) && isoDate.test(data.date))) &&
 	(data.slug === undefined || isString(data.slug)) &&
 	(data.index === undefined || Number.isInteger(data.index)) &&
 	(data.variant === undefined || isString(data.variant)) &&

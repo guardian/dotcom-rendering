@@ -53,6 +53,9 @@ const layout: PuzzlesLayoutType = {
 							cardVariant: 'primary',
 							cadence: 'Daily',
 							url: 'https://www.wordiply.com/',
+							slug: 'word-games/wordiply',
+							variant: 'iframe-page',
+							date: '2026-09-16',
 						},
 					],
 				],
@@ -152,6 +155,14 @@ describe('PuzzlesSupporting', () => {
 		}).parentElement;
 		expect(played).not.toBeNull();
 		expect(within(played!).getAllByRole('listitem')).toHaveLength(2);
+		for (const link of screen.getAllByRole('link', {
+			name: 'Wordiply Daily',
+		})) {
+			expect(link).toHaveAttribute(
+				'href',
+				'/puzzles-and-games/word-games/wordiply/2026-09-16',
+			);
+		}
 		expect(screen.queryByText('missing')).not.toBeInTheDocument();
 	});
 

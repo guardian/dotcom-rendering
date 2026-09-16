@@ -247,7 +247,9 @@ const puzzleUrl = (item: PuzzleItem): string | undefined => {
 		slug !== undefined &&
 		slug.length > 0
 	) {
-		return `/puzzles-and-games/${slug}`;
+		return item.date !== undefined && item.date.length > 0
+			? `/puzzles-and-games/${slug}/${item.date}`
+			: `/puzzles-and-games/${slug}`;
 	}
 	const url = item.url;
 	if (

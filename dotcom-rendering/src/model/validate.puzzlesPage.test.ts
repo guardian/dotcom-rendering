@@ -28,6 +28,7 @@ const validPage = () => ({
 								cadence: 'Daily',
 								slug: 'word-wheel',
 								variant: 'iframe-page',
+								date: '2026-09-16',
 							},
 						],
 					],
@@ -57,6 +58,12 @@ describe('validateAsPuzzlesPageType', () => {
 			expect(() => validateAsPuzzlesPageType(page)).toThrow();
 		},
 	);
+
+	it('rejects malformed iframe dates', () => {
+		const page = validPage();
+		page.layout.containers[0]!.content.items[0]![0]!.date = '16-09-2026';
+		expect(() => validateAsPuzzlesPageType(page)).toThrow();
+	});
 
 	it.each(['inline1', 'mostpop'])(
 		'rejects repeated %s slot names',
