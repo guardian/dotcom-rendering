@@ -48,13 +48,13 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
-	it('renders the page title', () => {
+	it('renders the design-provided headline text, not raw instance.title', () => {
 		renderPuzzlePageLayout('sudoku-easy');
 
 		expect(
 			screen.getByRole('heading', {
 				level: 1,
-				name: 'sudoku-easy puzzle',
+				name: 'Easy sudoku',
 			}),
 		).toBeInTheDocument();
 	});
@@ -76,12 +76,31 @@ describe('PuzzlePageLayout', () => {
 		expect(screen.queryByText('11 September 2026')).not.toBeInTheDocument();
 	});
 
-	it('renders the puzzleGroup label as a real section link, exactly like CrosswordLayout/ArticleTitle', () => {
-		renderPuzzlePageLayout('sudoku-easy');
+	it('renders the puzzle family name as the series kicker, and the puzzleGroup label as the section link below it', () => {
+		const { container } = renderPuzzlePageLayout('sudoku-easy');
 
 		expect(
-			screen.getByRole('link', { name: 'Logic puzzles' }),
-		).toBeInTheDocument();
+			container.querySelector('a[data-component="series"]'),
+		).toHaveTextContent('Sudoku');
+		expect(
+			container.querySelector('a[data-component="section"]'),
+		).toHaveTextContent('Logic puzzles');
+	});
+
+	it('renders the hardcoded Puzzles & Games sub-nav row', () => {
+		renderPuzzlePageLayout('sudoku-easy');
+
+		for (const name of [
+			'Puzzles & games',
+			'Crosswords',
+			'Word games',
+			'Logic puzzles',
+			'Trivia & quizzes',
+		]) {
+			expect(
+				screen.getAllByRole('link', { name }).length,
+			).toBeGreaterThan(0);
+		}
 	});
 
 	describe('print button (Sudoku-only, per PR #16700 review)', () => {

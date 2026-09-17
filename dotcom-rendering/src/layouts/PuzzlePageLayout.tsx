@@ -29,10 +29,11 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import { isPuzzlesHubV1Enabled } from '../lib/puzzlesHubVersionExperiment';
-import type { NavType } from '../model/extract-nav';
+import type { LinkType, NavType, SubNavType } from '../model/extract-nav';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { palette as themePalette } from '../palette';
 import type { FEPuzzlePageType } from '../types/puzzlePage';
+import type { TagType } from '../types/tag';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 /**
@@ -74,6 +75,45 @@ const puzzleGroupLabels: Record<PuzzleConfig['puzzleGroup'], string> = {
 };
 
 /**
+ * The puzzle *family* name (e.g. "Sudoku" for every sudoku variant), used
+ * as the `ArticleTitle`/`SeriesSectionLink` "series" kicker - the same
+ * design pattern the real crossword page already uses for its own series
+ * tag (e.g. "Quick"), stacked above the section link (`puzzleGroupLabels`
+ * above, e.g. "Logic puzzles"). Neither `FEPuzzlePageType` nor
+ * `PuzzleConfig` carries a dedicated "family name" field distinct from the
+ * per-variant `instance.title`/SEO `title` template, so this is a small,
+ * explicit, hardcoded map instead, mirroring `puzzleGroupLabels`.
+ */
+const puzzleFamilyNames: Record<string, string> = {
+	'sudoku-easy': 'Sudoku',
+	'sudoku-medium': 'Sudoku',
+	'sudoku-hard': 'Sudoku',
+	'sudoku-killer': 'Sudoku',
+	'word-wheel': 'Word wheel',
+	wordiply: 'Wordiply',
+};
+
+/**
+ * The headline (`<h1>`) text for each puzzle, per explicit design
+ * direction: e.g. "Easy sudoku", not `instance.title`'s "Sudoku (easy)".
+ * This intentionally matches the word order already used in each entry's
+ * SEO `title` template in `puzzleConfigs.ts` (e.g. `"Easy sudoku {date} -
+ * logic puzzle | The Guardian"`) - just the plain noun phrase, without the
+ * date/suffix - rather than introducing a second, differently-worded copy
+ * source. Falls back to `instance.title` (the value `frontend` actually
+ * sends) for any slug not in this map, so an unrecognised/future slug
+ * still renders something instead of `undefined`.
+ */
+const puzzleHeadlineNames: Record<string, string> = {
+	'sudoku-easy': 'Easy sudoku',
+	'sudoku-medium': 'Medium sudoku',
+	'sudoku-hard': 'Hard sudoku',
+	'sudoku-killer': 'Killer sudoku',
+	'word-wheel': 'Word wheel',
+	wordiply: 'Wordiply',
+};
+
+/**
  * Puzzle Page has no real equivalent of `ArticleDeprecated.guardianBaseURL`
  * (see `docs/puzzle-page.md`'s contract table - it isn't part of
  * `FEPuzzlePageType`). `ArticleTitle` only uses it to build the tag/section
@@ -81,6 +121,75 @@ const puzzleGroupLabels: Record<PuzzleConfig['puzzleGroup'], string> = {
  * hardcoded here rather than leaving it blank.
  */
 const GUARDIAN_BASE_URL = 'https://www.theguardian.com';
+
+/**
+ * A hardcoded replica of the real crossword page's header sub-nav row
+ * (`Masthead`/`Titlepiece/SubNav.tsx`, fed by `NAV.subNavSections` there -
+ * e.g. "Crosswords / Blog / Quick / Sunday quick / ..."), per explicit
+ * design direction: the same visual row/pattern, but with Puzzles & Games'
+ * own top-level categories instead of Crosswords' own series list.
+ *
+ * `NAV.subNavSections` (as sent by `frontend`) reflects generic,
+ * page-specific navigation `frontend` resolves for its own pages; Puzzle
+ * Page requests don't carry a meaningful equivalent of the crossword
+ * page's series sub-nav, so this is a fixed, design-provided list instead
+ * of anything derived from `NAV`/`FEPuzzlePageType`.
+ *
+ * "Word games"/"Logic puzzles"/"Trivia & quizzes" link to their hub
+ * sub-section paths; per `docs/puzzle-page.md`, those landing pages don't
+ * exist yet (they're V1/V2 work) and "Trivia & quizzes" has no puzzles in
+ * the current V0 registry at all - these links are included now on
+ * explicit design direction, and are expected to 404 until that work
+ * ships, exactly like this layout's other pre-existing "not built yet"
+ * placeholder links (e.g. the archive-redirect targets documented
+ * elsewhere in `docs/puzzle-page.md`).
+ */
+const PUZZLES_SUBNAV_PARENT: LinkType = {
+	title: 'Puzzles & games',
+	longTitle: 'Puzzles & games',
+	url: '/puzzles-and-games',
+};
+
+const PUZZLES_SUBNAV_LINKS: LinkType[] = [
+	{ title: 'Crosswords', longTitle: 'Crosswords', url: '/crosswords' },
+	{
+		title: 'Word games',
+		longTitle: 'Word games',
+		url: '/puzzles-and-games/word-games',
+	},
+	{
+		title: 'Logic puzzles',
+		longTitle: 'Logic puzzles',
+		url: '/puzzles-and-games/logic-puzzles',
+	},
+	{
+		title: 'Trivia & quizzes',
+		longTitle: 'Trivia & quizzes',
+		url: '/puzzles-and-games/trivia-and-quizzes',
+	},
+];
+
+const PUZZLES_SUBNAV: SubNavType = {
+	parent: PUZZLES_SUBNAV_PARENT,
+	links: PUZZLES_SUBNAV_LINKS,
+};
+
+/**
+ * `ArticleHeadline`'s "This article is more than X (days/months/years)
+ * old" age warning (`getAgeWarning`, `src/lib/age-warning.ts`) is meant for
+ * genuinely stale news content; it doesn't make sense for Puzzle Page,
+ * whose "publication date" isn't a real one at all (`instance.puzzleDate`
+ * is *which day's puzzle to show*, formatted for display, not when the
+ * page itself was published). `getAgeWarning` already special-cases
+ * exactly this situation for the closest existing content type,
+ * crosswords, by excluding any content tagged `type/crossword` - reused
+ * here verbatim, passed only to `ArticleHeadline` (the only place that
+ * warning is computed), rather than modifying that shared, generic
+ * article-domain logic.
+ */
+const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
+	{ id: 'type/crossword', type: 'type', title: 'Crosswords' },
+];
 
 /**
  * `ArticleTitle`/`ArticleHeadline`/`ArticleMeta`/`SubMeta`/`DiscussionLayout`/
@@ -96,11 +205,29 @@ const GUARDIAN_BASE_URL = 'https://www.theguardian.com';
  * desktop max-width) - exactly the behaviour `PuzzleIframe`'s own
  * `width: 100%` styling needs too, so this reuses that existing,
  * documented case rather than inventing a new one.
+ *
+ * `theme: Pillar.Lifestyle` matches the real crossword page (Crosswords
+ * sits under the Lifestyle pillar/section) - this is what makes
+ * `pillarPalette`-driven colours (the share button, print button border,
+ * etc, see `paletteDeclarations.ts`) resolve to the pink/purple
+ * "lifestyle 400" the design expects, not `Pillar.News`'s red.
+ *
+ * **Exported** so `PuzzlePage.tsx` can pass this exact same value to
+ * `rootStyles()` for its page-wide `<Global>` styles. `themePalette()`
+ * (`src/palette.ts`) only ever emits a `var(--some-colour)` reference; the
+ * actual colour each CSS custom property resolves to is computed once,
+ * globally, by `rootStyles()`/`paletteDeclarations()` from whichever
+ * `ArticleFormat` `PuzzlePage.tsx` gives it - a separate, independent
+ * format value from this one. Before this was exported and reused, that
+ * `<Global>` format had its own, unsynchronised copy hardcoded to
+ * `Pillar.News`, which silently overrode every colour decision made here
+ * with red instead of Lifestyle pink, regardless of what `puzzlePageFormat`
+ * itself said.
  */
-const puzzlePageFormat = {
+export const puzzlePageFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Crossword,
-	theme: Pillar.News,
+	theme: Pillar.Lifestyle,
 } as const;
 
 /**
@@ -290,6 +417,43 @@ export const PuzzlePageLayout = ({
 
 	const labelText = puzzleGroupLabels[puzzleConfig.puzzleGroup];
 	const displayDate = formatPuzzleDate(instance.puzzleDate);
+	const puzzleFamilyName =
+		puzzleFamilyNames[puzzleConfig.slug] ?? instance.title;
+	const puzzleHeadlineText =
+		puzzleHeadlineNames[puzzleConfig.slug] ?? instance.title;
+	/**
+	 * A single synthetic "Series"-type tag, existing purely to trigger
+	 * `SeriesSectionLink`'s already-existing "series name stacked above
+	 * section link" pattern (`if (tag) { ... }`, `hasSeriesTag` etc in
+	 * `SeriesSectionLink.tsx`) - the exact same two-tier kicker the real
+	 * crossword page gets from its own `Series`-type tags (e.g. "Quick"
+	 * stacked above "Crosswords"). `FEPuzzlePageType` has no real tag
+	 * data at all, so this is fabricated purely to reuse that existing
+	 * rendering branch rather than duplicating its markup/styles here.
+	 */
+	const puzzleFamilyTag: TagType[] = [
+		{
+			id: `puzzles-and-games/${puzzleConfig.puzzleGroup}/${puzzleConfig.slug}`,
+			type: 'Series',
+			title: puzzleFamilyName,
+		},
+	];
+
+	/**
+	 * `NAV` (`extractNAV(puzzlePage.nav)`) carries whatever generic
+	 * navigation `frontend` resolved for this request; its
+	 * `subNavSections` has no real Puzzle Page equivalent (see
+	 * `PUZZLES_SUBNAV`'s doc comment above). `Masthead`/`Titlepiece`
+	 * (header) and the footer's own `SubNav.island` both read
+	 * `subNavSections`/`currentNavLink` straight off the `NavType` they're
+	 * given, so this single override is reused for both, rather than
+	 * duplicating the hardcoded sub-nav in two places.
+	 */
+	const puzzleNAV: NavType = {
+		...NAV,
+		subNavSections: PUZZLES_SUBNAV,
+		currentNavLink: labelText,
+	};
 
 	return (
 		<>
@@ -317,7 +481,7 @@ export const PuzzlePageLayout = ({
 				)}
 
 				<Masthead
-					nav={NAV}
+					nav={puzzleNAV}
 					editionId={editionId}
 					idUrl={config.idUrl}
 					mmaUrl={config.mmaUrl}
@@ -359,9 +523,9 @@ export const PuzzlePageLayout = ({
 								<div data-print-layout="hide">
 									<ArticleTitle
 										format={puzzlePageFormat}
-										tags={[]}
+										tags={puzzleFamilyTag}
 										sectionLabel={labelText}
-										sectionUrl={`/puzzles-and-games/${puzzleConfig.puzzleGroup}`}
+										sectionUrl={`puzzles-and-games/${puzzleConfig.puzzleGroup}`}
 										guardianBaseURL={GUARDIAN_BASE_URL}
 									/>
 								</div>
@@ -370,8 +534,8 @@ export const PuzzlePageLayout = ({
 								<div css={maxWidth}>
 									<ArticleHeadline
 										format={puzzlePageFormat}
-										headlineString={instance.title}
-										tags={[]}
+										headlineString={puzzleHeadlineText}
+										tags={AGE_WARNING_SUPPRESSION_TAGS}
 										webPublicationDateDeprecated={
 											displayDate ?? ''
 										}
@@ -606,12 +770,12 @@ export const PuzzlePageLayout = ({
 				)}
 			</main>
 
-			{NAV.subNavSections && (
+			{puzzleNAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
+							subNavSections={puzzleNAV.subNavSections}
+							currentNavLink={puzzleNAV.currentNavLink}
 							position="footer"
 						/>
 					</Island>
