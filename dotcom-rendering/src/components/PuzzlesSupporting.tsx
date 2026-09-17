@@ -1,12 +1,14 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineBold20,
 	headlineBold24,
 	palette,
 	space,
 	textSans12,
 	textSansBold14,
 } from '@guardian/source/foundations';
+import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import type {
 	PuzzleContainer,
 	PuzzleItem,
@@ -23,6 +25,8 @@ type Props = {
 	id: string;
 	layout: PuzzlesLayoutType;
 	renderAds: boolean;
+	showNewsletter?: boolean;
+	showPopular?: boolean;
 	supporting: PuzzlesSupportingContent;
 };
 
@@ -30,10 +34,7 @@ const borderColour = palette.neutral[86];
 
 const sectionStyles = css`
 	display: grid;
-	max-width: 1300px;
-	margin: 0 auto;
-	border-right: 1px solid ${borderColour};
-	border-left: 1px solid ${borderColour};
+	${puzzlesContainerStyles};
 	background: ${palette.neutral[100]};
 
 	${from.leftCol} {
@@ -61,7 +62,7 @@ const sectionTitleStyles = css`
 	}
 `;
 
-const usefulContentStyles = css`
+const usefulContentStyles = (showNewsletter: boolean) => css`
 	display: grid;
 	width: 100%;
 	min-width: 0;
@@ -69,7 +70,16 @@ const usefulContentStyles = css`
 	border-top: 1px solid ${borderColour};
 
 	${from.desktop} {
-		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-template-columns: repeat(
+			${showNewsletter ? 4 : 2},
+			minmax(0, 1fr)
+		);
+	}
+
+	${from.wide} {
+		grid-template-columns: ${showNewsletter
+			? 'repeat(4, minmax(0, 1fr))'
+			: 'repeat(2, minmax(0, 490px))'};
 	}
 `;
 
@@ -79,7 +89,7 @@ const usefulLinkStyles = css`
 	border-right: 1px solid ${borderColour};
 	color: ${palette.neutral[7]};
 	text-decoration: none;
-	${textSansBold14};
+	${headlineBold20};
 
 	:hover {
 		text-decoration: underline;
@@ -103,7 +113,6 @@ const newsletterStyles = css`
 `;
 
 const popularContentStyles = css`
-	position: relative;
 	display: block;
 	width: 100%;
 	min-width: 0;
@@ -111,8 +120,9 @@ const popularContentStyles = css`
 	border-top: 1px solid ${borderColour};
 
 	${from.desktop} {
-		&:has(.ad-slot__content) {
-			padding-right: 320px;
+		&:has([data-puzzles-ad='mostpop']) {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) 320px;
 		}
 	}
 `;
@@ -203,17 +213,9 @@ const mostPopAdStyles = css`
 
 	${from.desktop} {
 		display: block;
-		position: absolute;
-		top: 0;
-		right: 0;
 		width: 320px;
 		box-sizing: border-box;
 		padding: ${space[6]}px ${space[3]}px;
-		pointer-events: none;
-
-		&:has(.ad-slot__content) {
-			pointer-events: auto;
-		}
 	}
 `;
 
@@ -237,7 +239,9 @@ const puzzleUrl = (item: PuzzleItem): string | undefined => {
 		slug !== undefined &&
 		slug.length > 0
 	) {
-		return `/puzzles-and-games/${slug}`;
+		return item.date !== undefined && item.date.length > 0
+			? `/puzzles-and-games/${slug}/${item.date}`
+			: `/puzzles-and-games/${slug}`;
 	}
 	const url = item.url;
 	if (
@@ -259,6 +263,9 @@ export const PuzzlesSupporting = ({
 	id,
 	layout,
 	renderAds,
+	// Keep these sections available, but hide them from the hub for now.
+	showNewsletter = false,
+	showPopular = false,
 	supporting,
 }: Props) => {
 	const itemsById = new Map(
@@ -276,7 +283,7 @@ export const PuzzlesSupporting = ({
 				<h2 css={sectionTitleStyles} id={`${id}-useful-links-title`}>
 					{supporting.usefulLinksTitle}
 				</h2>
-				<div css={usefulContentStyles}>
+				<div css={usefulContentStyles(showNewsletter)}>
 					{supporting.usefulLinks.map((link) => (
 						<a
 							css={usefulLinkStyles}
@@ -287,7 +294,7 @@ export const PuzzlesSupporting = ({
 							{link.title}
 						</a>
 					))}
-					{newsletter !== undefined && (
+					{showNewsletter && newsletter !== undefined && (
 						<div css={newsletterStyles}>
 							<NewsletterSignupCard
 								description={newsletter.description}
@@ -295,6 +302,9 @@ export const PuzzlesSupporting = ({
 								illustrationSquare={
 									newsletter.illustrationSquare
 								}
+								// TODO hide ilustrations when we implement this
+								// illustrationAlt={`${newsletter.name} newsletter illustration`}
+								// hideIllustrationFromScreenReaders={true}
 								isModal={true}
 								name={newsletter.name}
 							>
@@ -314,99 +324,105 @@ export const PuzzlesSupporting = ({
 					)}
 				</div>
 			</section>
-
-			<section
-				css={sectionStyles}
-				aria-labelledby={`${id}-popular-title`}
-			>
-				<h2 css={sectionTitleStyles} id={`${id}-popular-title`}>
-					{supporting.popularTitle}
-				</h2>
-				<div css={popularContentStyles}>
-					<div css={popularGroupsStyles}>
-						{supporting.popularGroups.map((group) => {
-							const items = group.itemIds
-								.map((_id) => itemsById.get(_id))
-								.filter(
-									(item): item is PuzzleItem =>
-										item !== undefined,
-								);
-							if (items.length === 0) {
-								return null;
-							}
-							return (
-								<section
-									css={popularGroupStyles}
-									key={group.title}
-								>
-									<h3 css={popularGroupTitleStyles}>
-										{group.title}
-									</h3>
-									<ol css={popularListStyles}>
-										{items.map((item, index) => {
-											const url = puzzleUrl(item);
-											const contents = (
-												<>
-													<strong>
-														{item.title}
-													</strong>
-													{item.cadence !==
-														undefined &&
-														item.cadence.length >
-															0 && (
-															<span>
-																{item.cadence}
-															</span>
-														)}
-												</>
-											);
-											return (
-												<li
-													css={popularItemStyles}
-													key={item.id}
-												>
-													<span
-														aria-hidden="true"
-														css={rankStyles}
-													>
-														{index + 1}
-													</span>
-													{url !== undefined ? (
-														<a
-															css={
-																popularLinkStyles
-															}
-															href={url}
-															{...externalProps(
-																url,
+			{showPopular && (
+				<section
+					css={sectionStyles}
+					aria-labelledby={`${id}-popular-title`}
+				>
+					<h2 css={sectionTitleStyles} id={`${id}-popular-title`}>
+						{supporting.popularTitle}
+					</h2>
+					<div css={popularContentStyles}>
+						<div css={popularGroupsStyles}>
+							{supporting.popularGroups.map((group) => {
+								const items = group.itemIds
+									.map((_id) => itemsById.get(_id))
+									.filter(
+										(item): item is PuzzleItem =>
+											item !== undefined,
+									);
+								if (items.length === 0) {
+									return null;
+								}
+								return (
+									<section
+										css={popularGroupStyles}
+										key={group.title}
+									>
+										<h3 css={popularGroupTitleStyles}>
+											{group.title}
+										</h3>
+										<ol css={popularListStyles}>
+											{items.map((item, index) => {
+												const url = puzzleUrl(item);
+												const contents = (
+													<>
+														<strong>
+															{item.title}
+														</strong>
+														{item.cadence !==
+															undefined &&
+															item.cadence
+																.length > 0 && (
+																<span>
+																	{
+																		item.cadence
+																	}
+																</span>
 															)}
+													</>
+												);
+												return (
+													<li
+														css={popularItemStyles}
+														key={item.id}
+													>
+														<span
+															aria-hidden="true"
+															css={rankStyles}
 														>
-															{contents}
-														</a>
-													) : (
-														<div
-															css={
-																popularLinkStyles
-															}
-														>
-															{contents}
-														</div>
-													)}
-												</li>
-											);
-										})}
-									</ol>
-								</section>
-							);
-						})}
-					</div>
-					{hasMostPopAd && (
-						<div css={mostPopAdStyles} data-puzzles-ad="mostpop">
-							<AdSlot position="mostpop" />
+															{index + 1}
+														</span>
+														{url !== undefined ? (
+															<a
+																css={
+																	popularLinkStyles
+																}
+																href={url}
+																{...externalProps(
+																	url,
+																)}
+															>
+																{contents}
+															</a>
+														) : (
+															<div
+																css={
+																	popularLinkStyles
+																}
+															>
+																{contents}
+															</div>
+														)}
+													</li>
+												);
+											})}
+										</ol>
+									</section>
+								);
+							})}
 						</div>
-					)}
-				</div>
-			</section>
+						{hasMostPopAd && (
+							<div
+								css={mostPopAdStyles}
+								data-puzzles-ad="mostpop"
+							>
+								<AdSlot position="mostpop" />
+							</div>
+						)}
+					</div>
+				</section>
+			)}
 		</>
 	);
 };

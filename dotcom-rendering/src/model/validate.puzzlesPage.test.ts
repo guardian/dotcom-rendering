@@ -28,6 +28,7 @@ const validPage = () => ({
 								cadence: 'Daily',
 								slug: 'word-wheel',
 								variant: 'iframe-page',
+								date: '2026-09-16',
 							},
 						],
 					],
@@ -38,6 +39,94 @@ const validPage = () => ({
 });
 
 describe('validateAsPuzzlesPageType', () => {
+	it('accepts artwork descriptions and crossword setter names', () => {
+		const page = validPage();
+		Object.assign(page.layout.containers[0]!.content.items[0]![0]!, {
+			imageAlt: 'Word wheel illustration',
+			setter: 'Example setter',
+		});
+		expect(validateAsPuzzlesPageType(page)).toBeDefined();
+	});
+
+	it.each(['imageAlt', 'setter'])(
+		'rejects non-string %s metadata',
+		(field) => {
+			const page = validPage();
+			Object.assign(page.layout.containers[0]!.content.items[0]![0]!, {
+				[field]: 123,
+			});
+			expect(() => validateAsPuzzlesPageType(page)).toThrow();
+		},
+	);
+
+	it('rejects malformed iframe dates', () => {
+		const page = validPage();
+		page.layout.containers[0]!.content.items[0]![0]!.date = '16-09-2026';
+		expect(() => validateAsPuzzlesPageType(page)).toThrow();
+	});
+
+	it.each(['inline1', 'mostpop'])(
+		'rejects repeated %s slot names',
+		(adSlot) => {
+			const page = validPage();
+			const container = {
+				id: 'first-ad',
+				title: '',
+				variant: adSlot === 'mostpop' ? 'supporting' : 'ad',
+				adSlot,
+				content: { items: [], nestedContainers: [] },
+				...(adSlot === 'mostpop'
+					? {
+							supporting: {
+								usefulLinksTitle: 'Useful links',
+								usefulLinks: [],
+								popularTitle: 'Most popular puzzles',
+								popularGroups: [],
+							},
+						}
+					: {}),
+			};
+			page.layout.containers.push(container as never);
+			expect(validateAsPuzzlesPageType(page)).toBeDefined();
+			page.layout.containers.push({
+				...container,
+				id: 'second-ad',
+			} as never);
+			expect(() => validateAsPuzzlesPageType(page)).toThrow(
+				'Unable to validate request body for puzzles page',
+			);
+		},
+	);
+
+	it.each(['inline0', 'inline-1', 'hub-inline', 'inline1junk', undefined])(
+		'rejects an unsupported ad slot: %s',
+		(adSlot) => {
+			const page = validPage();
+			page.layout.containers.push({
+				id: 'invalid-ad',
+				title: '',
+				variant: 'ad',
+				adSlot,
+				content: { items: [], nestedContainers: [] },
+			} as never);
+			expect(() => validateAsPuzzlesPageType(page)).toThrow();
+		},
+	);
+
+	it('accepts distinct inline slot names', () => {
+		const page = validPage();
+		for (const adSlot of ['inline1', 'inline2']) {
+			page.layout.containers.push({
+				id: adSlot,
+				title: '',
+				variant: 'ad',
+				adSlot,
+				content: { items: [], nestedContainers: [] },
+			} as never);
+		}
+		expect(validateAsPuzzlesPageType(page)).toBeDefined();
+	});
+
 	it('accepts a valid recursive blueprint contract', () => {
 		expect(
 			validateAsPuzzlesPageType(validPage()).layout.containers[0]?.id,

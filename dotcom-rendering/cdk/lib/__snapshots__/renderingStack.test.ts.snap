@@ -289,6 +289,10 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Period": 30,
         "Tags": [
           {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -345,6 +349,10 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
     "CPUScalingAlertsTopic9D0083F7": {
       "Properties": {
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -678,6 +686,10 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         ],
         "Tags": [
           {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -836,6 +848,10 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Statistic": "Average",
         "Tags": [
           {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -912,6 +928,10 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Statistic": "Average",
         "Tags": [
           {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -967,6 +987,10 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
     "LatencyScalingAlertsTopic1A322157": {
       "Properties": {
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -1238,6 +1262,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Description": "The rendering base URL for frontend to call the article-rendering app in the PROD environment",
         "Name": "/frontend/prod/article-rendering.baseURL",
         "Tags": {
+          "App": "article-rendering",
           "Stack": "frontend",
           "Stage": "PROD",
           "gu:cdk:version": "TEST",
@@ -1426,6 +1451,10 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Period": 60,
         "Statistic": "Maximum",
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -2080,7 +2109,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
-        "MaxCapacity": 2,
+        "MaxCapacity": 9,
         "MinCapacity": 1,
         "ResourceId": {
           "Fn::Join": [
@@ -3308,6 +3337,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "Description": "The rendering base URL for frontend to call the tag-page-rendering app in the CODE environment",
         "Name": "/frontend/code/tag-page-rendering.baseURL",
         "Tags": {
+          "App": "tag-page-rendering",
           "Stack": "frontend",
           "Stage": "CODE",
           "gu:cdk:version": "TEST",
@@ -3636,6 +3666,24 @@ systemctl start tag-page-rendering",
         ],
       },
       "Type": "AWS::IAM::InstanceProfile",
+    },
+    "tagpagerenderingCpuScaling1742C101": {
+      "Properties": {
+        "PolicyName": "TagPageRenderingCODEtagpagerenderingCpuScalingAFEBC723",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "EcsServiceTaskCountTarget02FCCE22",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilizationHighResolution",
+          },
+          "ScaleInCooldown": 60,
+          "ScaleOutCooldown": 60,
+          "TargetValue": 20,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
     },
     "tagpagerenderingEcsClusterE7696595": {
       "Properties": {
@@ -3983,6 +4031,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         "Period": 30,
         "Tags": [
           {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -4039,6 +4091,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
     "CPUScalingAlertsTopic9D0083F7": {
       "Properties": {
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -4222,8 +4278,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
-        "MaxCapacity": 2,
-        "MinCapacity": 1,
+        "MaxCapacity": 90,
+        "MinCapacity": 9,
         "ResourceId": {
           "Fn::Join": [
             "",
@@ -5040,6 +5096,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         ],
         "Tags": [
           {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -5219,6 +5279,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         "Statistic": "Average",
         "Tags": [
           {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -5295,6 +5359,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         "Statistic": "Average",
         "Tags": [
           {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -5350,6 +5418,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
     "LatencyScalingAlertsTopic1A322157": {
       "Properties": {
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -5758,6 +5830,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         "Description": "The rendering base URL for frontend to call the tag-page-rendering app in the PROD environment",
         "Name": "/frontend/prod/tag-page-rendering.baseURL",
         "Tags": {
+          "App": "tag-page-rendering",
           "Stack": "frontend",
           "Stage": "PROD",
           "gu:cdk:version": "TEST",
@@ -5996,6 +6069,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         "Statistic": "Maximum",
         "Tags": [
           {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
@@ -6201,6 +6278,24 @@ systemctl start tag-page-rendering",
         ],
       },
       "Type": "AWS::IAM::InstanceProfile",
+    },
+    "tagpagerenderingCpuScaling1742C101": {
+      "Properties": {
+        "PolicyName": "TagPageRenderingPRODtagpagerenderingCpuScaling4582D272",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "EcsServiceTaskCountTarget02FCCE22",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilizationHighResolution",
+          },
+          "ScaleInCooldown": 60,
+          "ScaleOutCooldown": 60,
+          "TargetValue": 20,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
     },
     "tagpagerenderingEcsClusterE7696595": {
       "Properties": {

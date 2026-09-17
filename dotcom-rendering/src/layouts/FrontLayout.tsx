@@ -35,6 +35,7 @@ import {
 	MAX_FRONTS_BANNER_ADS as maxDesktopAds,
 	MAX_FRONTS_MOBILE_ADS as maxMobileAds,
 } from '../lib/commercial-constants';
+import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
 import {
@@ -218,9 +219,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							<HeaderAdSlot
 								includeMobile={
 									front.config.section === 'crosswords' &&
-									front.config.serverSideABTests[
-										'commercial-mobile-above-nav-test'
-									] === 'variant'
+									shouldShowMobileAboveNavSlot(
+										front.config.serverSideABTests[
+											'commercial-mobile-above-nav-test'
+										],
+									)
 								}
 							/>
 						</Section>

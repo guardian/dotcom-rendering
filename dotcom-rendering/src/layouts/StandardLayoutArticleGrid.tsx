@@ -61,6 +61,7 @@ const stretchLines = css`
 const immersiveMediaBelowDesktop = (
 	headlineBackground: string,
 	isMainMediaImage: boolean,
+	hasMinimumImageHeight: boolean,
 ) => css`
 	${until.desktop} {
 		position: relative;
@@ -78,18 +79,24 @@ const immersiveMediaBelowDesktop = (
 			position: absolute;
 			left: 0;
 			right: 0;
-			bottom: 0;
-			height: ${isMainMediaImage
-				? 'min(60%, calc(200% - 120vw + 30px))'
-				: 'min(60%, 144px)'};
+			bottom: ${hasMinimumImageHeight ? '-1px' : '0'};
+			height: ${hasMinimumImageHeight
+				? '180px'
+				: isMainMediaImage
+					? 'min(60%, calc(200% - 120vw + 30px))'
+					: 'min(60%, 144px)'};
 			z-index: ${getZIndex('mediaOverlay')};
 			background: linear-gradient(
 				to bottom,
-				rgba(0, 0, 0, 0.08),
-				${headlineBackground} 72%
+				rgba(0, 0, 0, ${hasMinimumImageHeight ? '0' : '0.08'}),
+				${headlineBackground} ${hasMinimumImageHeight ? '100%' : '72%'}
 			);
 			backdrop-filter: blur(12px);
-			mask-image: linear-gradient(to bottom, transparent 40%, black 60%);
+			mask-image: linear-gradient(
+				to bottom,
+				transparent ${hasMinimumImageHeight ? '0%' : '40%'},
+				black 60%
+			);
 			pointer-events: none;
 		}
 	}
@@ -185,6 +192,7 @@ export const StandardLayoutArticleGrid = ({
 	const isMainMediaImage =
 		mainMedia?._type ===
 		'model.dotcomrendering.pageElements.ImageBlockElement';
+	const hasMinimumImageHeight = isLabs && isImmersive && isMainMediaImage;
 	const mainMediaUrl: string | undefined = isMainMediaImage
 		? mainMedia.media.allImages[0]?.url
 		: undefined;
@@ -197,7 +205,7 @@ export const StandardLayoutArticleGrid = ({
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
 	const immersiveMediaRowHeight = isMainMediaImage
-		? '60vw'
+		? 'auto'
 		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
 	const layoutType = getLayoutType({
@@ -233,7 +241,6 @@ export const StandardLayoutArticleGrid = ({
 								)};
 							}
 						}
-						/* Anchor the title consistently while wrapped text extends the media below it. */
 						grid-template-rows: ${immersiveMediaRowHeight} repeat(
 								6,
 								auto
@@ -279,7 +286,27 @@ export const StandardLayoutArticleGrid = ({
 								${immersiveMediaBelowDesktop(
 									headlineBackgroundImmersive,
 									isMainMediaImage,
+									hasMinimumImageHeight,
 								)}
+
+								${hasMinimumImageHeight &&
+								css`
+									${until.desktop} {
+										position: relative;
+										width: 100%;
+										min-width: 0;
+										min-height: 469px;
+										${mainMediaAspectRatio != null &&
+										`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
+										overflow: hidden;
+										background-color: ${headlineBackgroundImmersive};
+
+										> div {
+											position: absolute;
+											inset: 0;
+										}
+									}
+								`}
 							`
 						: undefined
 				}

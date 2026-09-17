@@ -106,6 +106,7 @@ export type DCRFrontCard = {
 	uniqueId?: string;
 	serverTime?: number;
 	articleMedia?: ArticleMedia;
+	headlineTestUuid?: string;
 };
 
 export type DCRSlideshowImage = {
@@ -153,6 +154,7 @@ export type DCRSupportingContent = {
 	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
+	headlineTestUuid?: string;
 };
 
 export type TreatType = {

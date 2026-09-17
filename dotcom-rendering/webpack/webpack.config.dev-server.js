@@ -55,15 +55,9 @@ module.exports = {
 			devServer.app.use(express.json({ limit: '10mb' }));
 
 			devServer.app.get('/', (req, res) => {
-				res.sendFile(
-					path.join(
-						__dirname,
-						'..',
-						'src',
-						'server',
-						'dev-index.html',
-					),
-				);
+				res.sendFile('dev-index.html', {
+					root: path.join(__dirname, '..', 'src', 'server'),
+				});
 			});
 
 			// webpack-hot-server-middleware needs to run after webpack-dev-middleware

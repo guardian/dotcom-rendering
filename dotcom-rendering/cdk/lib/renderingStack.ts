@@ -8,6 +8,7 @@ import {
 } from '@guardian/cdk/lib/constructs/core';
 import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
+import type { GuLoadBalancedAppExperimentalProps } from '@guardian/cdk/lib/experimental/patterns/gu-load-balanced-app';
 import { GuLoadBalancedAppExperimental } from '@guardian/cdk/lib/experimental/patterns/gu-load-balanced-app';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { aws_cloudwatch, type App as CDKApp, Duration } from 'aws-cdk-lib';
@@ -67,6 +68,10 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 		 * Memory in MB for ECS task
 		 */
 		taskMemoryLimitMiB: number;
+
+		scaling: NonNullable<
+			GuLoadBalancedAppExperimentalProps['ecsProps']
+		>['scaling'];
 	};
 }
 
@@ -205,17 +210,19 @@ const addLatencyStepScalingPolicy = (
 /** DCR infrastructure provisioning via CDK */
 export class RenderingCDKStack extends CDKStack {
 	constructor(scope: CDKApp, id: string, props: RenderingCDKStackProps) {
+		const { guApp, stage, instanceType, scaling, domainName, ecsProps } =
+			props;
+
 		super(scope, id, {
-			...props,
 			// Any version of this app should run in the eu-west-1 region
 			env: { region: 'eu-west-1' },
 			// Set the stack within the constructor as this won't vary between apps
 			stack: 'frontend',
+			stage,
+			app: guApp,
 		});
 
 		const { stack: guStack, region, account } = this;
-		const { guApp, stage, instanceType, scaling, domainName, ecsProps } =
-			props;
 
 		const artifactsBucket =
 			GuDistributionBucketParameter.getInstance(this).valueAsString;
@@ -294,10 +301,7 @@ export class RenderingCDKStack extends CDKStack {
 
 							memoryLimitMiB: ecsProps.taskMemoryLimitMiB,
 							cpu: ecsProps.taskCpu,
-							scaling: {
-								minimumTasks: 1,
-								maximumTasks: 2,
-							},
+							scaling: ecsProps.scaling,
 						},
 
 						// Route all traffic to EC2
@@ -310,7 +314,6 @@ export class RenderingCDKStack extends CDKStack {
 
 		if (app.ecsService) {
 			const { taskDefinition } = app.ecsService;
-
 			const ecsEnvVars: Record<string, string> = {
 				// Custom environment variables needed by the application
 				NODE_ENV: 'production',
