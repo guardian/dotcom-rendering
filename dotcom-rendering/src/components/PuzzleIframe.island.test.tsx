@@ -108,16 +108,16 @@ describe('buildFrameStyles', () => {
 	// CSS testing.
 	it('uses the hardcoded default min-height for a known slug', () => {
 		expect(buildFrameStyles('sudoku-easy').styles).toContain(
-			'min-height:700px;',
+			'min-height:620px;',
 		);
 	});
 
-	it('increases min-height between the tablet and desktop breakpoints for a known slug', () => {
+	it('changes min-height between the tablet and desktop breakpoints for a known slug', () => {
 		expect(buildFrameStyles('sudoku-easy').styles).toMatch(
 			/max-width:\s*979\.9px/,
 		);
 		expect(buildFrameStyles('sudoku-easy').styles).toContain(
-			'min-height:850px;',
+			'min-height:520px;',
 		);
 	});
 
@@ -126,7 +126,7 @@ describe('buildFrameStyles', () => {
 			/max-width:\s*739\.9px/,
 		);
 		expect(buildFrameStyles('sudoku-easy').styles).toContain(
-			'min-height:1000px;',
+			'min-height:630px;',
 		);
 	});
 
@@ -146,6 +146,42 @@ describe('buildFrameStyles', () => {
 		expect(buildFrameStyles('sudoku-easy').styles).toMatch(
 			/border:1px solid var\(--article-border\);/,
 		);
+	});
+
+	it('does not add a pointer:coarse override for a slug with no touch-specific heights', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).not.toContain(
+			'pointer: coarse',
+		);
+	});
+
+	it('uses the non-touch min-heights for wordiply by default', () => {
+		expect(buildFrameStyles('wordiply').styles).toContain(
+			'min-height:600px;',
+		);
+	});
+
+	it('adds a pointer:coarse override with the touch-specific min-heights for wordiply', () => {
+		const styles = buildFrameStyles('wordiply').styles;
+		// Whitespace/newlines inside the nested `@media (pointer: coarse)`
+		// block vary depending on how Emotion serialises the nested
+		// template literal, so this normalises whitespace before matching
+		// rather than asserting on an exact, brittle substring.
+		const normalisedStyles = styles.replace(/\s+/g, ' ');
+
+		expect(normalisedStyles).toContain('@media (pointer: coarse)');
+
+		// The pointer:coarse block is written last, so its min-height
+		// values (800/600/500) appear after the non-touch ones (600/600/560)
+		// in the generated CSS text - later source order wins the cascade
+		// for a touch device.
+		const touchBlockStart = normalisedStyles.indexOf(
+			'@media (pointer: coarse)',
+		);
+		const touchBlock = normalisedStyles.slice(touchBlockStart);
+
+		expect(touchBlock).toContain('min-height: 800px;');
+		expect(touchBlock).toContain('min-height: 600px;');
+		expect(touchBlock).toContain('min-height: 500px;');
 	});
 });
 
