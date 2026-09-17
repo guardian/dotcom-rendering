@@ -3,8 +3,8 @@ import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import { puzzleConfigs } from '../model/puzzles/puzzleConfigs';
 import {
+	buildFrameStyles,
 	buildPuzzleIframeSrc,
-	frameStyles,
 	type PuzzleContext,
 	PuzzleIframe,
 } from './PuzzleIframe.island';
@@ -99,22 +99,53 @@ describe('buildPuzzleIframeSrc', () => {
 	});
 });
 
-describe('frameStyles', () => {
-	// A generous, best-effort estimate (unconfirmed against a real
-	// AmuseLabs embed) for the extra height needed once AmuseLabs' own
-	// internal responsive layout reflows a side menu below the puzzle at
-	// narrower viewports, see the doc comment above frameStyles and
-	// docs/puzzle-page.md. This only asserts the CSS text is present, not
-	// real browser layout/rendering (jsdom does not evaluate media
-	// queries), there is no existing convention in this codebase for
-	// deeper breakpoint-driven CSS testing.
-	it('keeps the default min-height for wider viewports', () => {
-		expect(frameStyles.styles).toContain('min-height:500px;');
+describe('buildFrameStyles', () => {
+	// Per-slug min-height overrides, hardcoded in PUZZLE_MIN_HEIGHTS - see
+	// the doc comment above buildFrameStyles and docs/puzzle-page.md. This
+	// only asserts the CSS text is present, not real browser layout/
+	// rendering (jsdom does not evaluate media queries), there is no
+	// existing convention in this codebase for deeper breakpoint-driven
+	// CSS testing.
+	it('uses the hardcoded default min-height for a known slug', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).toContain(
+			'min-height:700px;',
+		);
 	});
 
-	it('increases min-height below the tablet breakpoint for AmuseLabs\u2019 menu reflow', () => {
-		expect(frameStyles.styles).toMatch(/max-width:\s*739\.9px/);
-		expect(frameStyles.styles).toContain('min-height:900px;');
+	it('increases min-height between the tablet and desktop breakpoints for a known slug', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).toMatch(
+			/max-width:\s*979\.9px/,
+		);
+		expect(buildFrameStyles('sudoku-easy').styles).toContain(
+			'min-height:850px;',
+		);
+	});
+
+	it('increases min-height further below the tablet breakpoint for a known slug', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).toMatch(
+			/max-width:\s*739\.9px/,
+		);
+		expect(buildFrameStyles('sudoku-easy').styles).toContain(
+			'min-height:1000px;',
+		);
+	});
+
+	it('falls back to the default min-heights for an unrecognised slug', () => {
+		expect(buildFrameStyles('unknown-slug').styles).toContain(
+			'min-height:500px;',
+		);
+		expect(buildFrameStyles('unknown-slug').styles).toContain(
+			'min-height:700px;',
+		);
+		expect(buildFrameStyles('unknown-slug').styles).toContain(
+			'min-height:900px;',
+		);
+	});
+
+	it('includes a visible border around the iframe', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).toMatch(
+			/border:1px solid var\(--article-border\);/,
+		);
 	});
 });
 
