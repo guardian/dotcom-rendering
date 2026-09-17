@@ -77,6 +77,7 @@ export const createPuzzlePage = (
 			puzzleDate: '2026-09-11',
 			moreFromPuzzlesAndGames: sampleMoreFromPuzzlesAndGames,
 		},
+		isAdFreeUser: false,
 		...overrides,
 	};
 };

@@ -23,8 +23,8 @@ import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
-import { SubMeta } from '../components/SubMeta';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import { isPuzzlesHubV1Enabled } from '../lib/puzzlesHubVersionExperiment';
@@ -56,13 +56,17 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
  * Everywhere else, `FEPuzzlePageType` (`src/types/puzzlePage.ts`) simply
  * doesn't carry the same fields `ArticleDeprecated` does (no `tags`,
  * `byline`, `crossword`, `blocks`, `isCommentable`, `subMetaKeywordLinks`/
- * `subMetaSectionLinks`, `pageType`, `isAdFreeUser`, `shouldHideAds`,
- * `guardianBaseURL`, etc. - see `docs/puzzle-page.md`'s "The
- * `FEPuzzlePageType` request contract"). Rather than dropping those
- * components, each is still rendered with the closest real data Puzzle
- * Page actually has, and a **hardcoded, explicitly-commented fallback**
- * (an empty array, `undefined`, or a `false` gate) everywhere a genuine
- * Puzzle-Page equivalent doesn't exist - e.g. comments are permanently
+ * `subMetaSectionLinks`, `pageType`, `shouldHideAds`, `guardianBaseURL`,
+ * etc. - see `docs/puzzle-page.md`'s "The `FEPuzzlePageType` request
+ * contract"). It does carry `isAdFreeUser`, though (see that field's own
+ * doc comment): ads are gated on `canRenderAds(puzzlePage)`, the same
+ * shared helper every other ad-supported DCR page type uses, rather than
+ * being hardcoded on. Rather than dropping every component with no real
+ * Puzzle Page data source, each is still rendered with the closest real
+ * data Puzzle Page actually has, and a **hardcoded, explicitly-commented
+ * fallback** (an empty array, `undefined`, or a `false` gate) everywhere a
+ * genuine Puzzle-Page equivalent doesn't exist - e.g. comments are
+ * permanently
  * disabled below via `const showComments = false`, mirroring exactly how
  * `CrosswordLayout` itself gates its own `showComments` Section, just with
  * a fixed value instead of a derived one.
@@ -408,11 +412,13 @@ export const PuzzlePageLayout = ({
 		!!instance.moreFromPuzzlesAndGames?.length &&
 		isPuzzlesHubV1Enabled(config);
 
-	// `canRenderAds`/`ArticleDeprecated.isAdFreeUser` have no Puzzle Page
-	// equivalent (`FEPuzzlePageType` models no ad-free-user concept at
-	// all), so ads are hardcoded on, matching every current Puzzle Page
-	// instance's real behaviour.
-	const renderAds = false;
+	// `FEPuzzlePageType` now carries `isAdFreeUser` (see that field's doc
+	// comment), so `canRenderAds` (the same shared helper every other
+	// ad-supported DCR page type already uses - `ArticleDeprecated`/
+	// `Front`/`TagPage`/`SportDataPage`) can gate ads here too, instead of
+	// rendering them unconditionally regardless of whether the reader has
+	// actually paid for an ad-free subscription.
+	const renderAds = canRenderAds(puzzlePage);
 
 	// `getContributionsServiceUrl` reads `config.contributionsServiceUrl`,
 	// a field `ConfigType` doesn't carry for Puzzle Page requests. Hardcoded
@@ -697,22 +703,6 @@ export const PuzzlePageLayout = ({
 					</Section>
 				)}
 
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					backgroundColour={themePalette('--article-background')}
-				>
-					<SubMeta
-						format={puzzlePageFormat}
-						subMetaKeywordLinks={[]}
-						subMetaSectionLinks={[]}
-						pageId={puzzlePage.id}
-						webUrl={puzzlePage.canonicalUrl}
-						webTitle={puzzlePage.webTitle}
-						showBottomSocialButtons={true}
-					/>
-				</Section>
-
 				{renderAds && (
 					<Section
 						fullWidth={true}
@@ -753,7 +743,7 @@ export const PuzzlePageLayout = ({
 							enableDiscussionSwitch={
 								!!config.switches.enableDiscussionSwitch
 							}
-							isAdFreeUser={false}
+							isAdFreeUser={!!puzzlePage.isAdFreeUser}
 							shouldHideAds={!renderAds}
 							idApiUrl={config.idApiUrl}
 						/>

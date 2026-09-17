@@ -196,4 +196,35 @@ describe('PuzzlePageLayout', () => {
 			).not.toBeInTheDocument();
 		});
 	});
+
+	describe('ads (isAdFreeUser, canRenderAds)', () => {
+		it('renders ad slots for a non-ad-free reader', () => {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
+				isAdFreeUser: false,
+			});
+
+			expect(
+				container.querySelector('#dfp-ad--merchandising-high'),
+			).toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--merchandising'),
+			).toBeInTheDocument();
+		});
+
+		it('does not render any ad slots for an ad-free reader', () => {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
+				isAdFreeUser: true,
+			});
+
+			expect(
+				container.querySelector('#dfp-ad--merchandising-high'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--merchandising'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--right'),
+			).not.toBeInTheDocument();
+		});
+	});
 });
