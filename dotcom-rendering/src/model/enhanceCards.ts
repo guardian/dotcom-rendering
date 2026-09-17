@@ -26,7 +26,7 @@ import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
 	DCRSupportingContent,
-	EditorialTest,
+	FrontEditorialTest,
 } from '../types/front';
 import type { ArticleMedia, MainMedia } from '../types/mainMedia';
 import type { PodcastSeriesImage, TagType } from '../types/tag';
@@ -203,7 +203,7 @@ const decideVideoAtomImage = (
  * Checks if an editorial test is active by making sure it has not been manually ended,
  * that it has a valid expiry date, and that the expiry date is in the future
  */
-const isActiveEditorialTest = (test: EditorialTest) =>
+const isActiveFrontEditorialTest = (test: FrontEditorialTest) =>
 	!test.hasManuallyEndedOnThisTrail &&
 	!!test.expiryDate &&
 	test.expiryDate > Date.now();
@@ -212,13 +212,13 @@ const isActiveEditorialTest = (test: EditorialTest) =>
  * Looks through a list of editorial tests to see if there is an active test. If no active
  * test is found, return undefined
  */
-const findActiveEditorialTest = (
-	tests: EditorialTest[] | undefined,
-): EditorialTest | undefined => {
-	return tests?.find((test) => isActiveEditorialTest(test));
+const findActiveFrontEditorialTest = (
+	tests: FrontEditorialTest[] | undefined,
+): FrontEditorialTest | undefined => {
+	return tests?.find((test) => isActiveFrontEditorialTest(test));
 };
 
-type EditorialTestData = {
+type FrontEditorialTestData = {
 	headline: string;
 	uuid: string;
 };
@@ -228,24 +228,24 @@ type EditorialTestData = {
  * the the testing switch is enabled, the page is in the test bucket, the test can run on the given front,
  * and that a valid variant headline is defined before returning the variant headline and test UUID.
  */
-export const getEditorialTestData = (
+export const getFrontEditorialTestData = (
 	faciaCard: FEFrontCard | FESupportingContent,
 	serverSideABTests: Record<string, string>,
 	isEditorialABTestingEnabled: boolean,
 	pageId?: string,
-): EditorialTestData | undefined => {
-	const activeEditorialTest = findActiveEditorialTest(
+): FrontEditorialTestData | undefined => {
+	const activeFrontEditorialTest = findActiveFrontEditorialTest(
 		faciaCard.properties.tests,
 	);
 
 	// don't return data if there is no active test on the card or editorial testing is switched off
-	if (!activeEditorialTest || !isEditorialABTestingEnabled) {
+	if (!activeFrontEditorialTest || !isEditorialABTestingEnabled) {
 		return undefined;
 	}
 
 	const testCanRunOnPage =
 		!isUndefined(pageId) &&
-		activeEditorialTest.frontsThisTestCanRunOn.includes(pageId);
+		activeFrontEditorialTest.frontsThisTestCanRunOn.includes(pageId);
 
 	// don't return data if test cannot run on the current front
 	if (!testCanRunOnPage) return undefined;
@@ -257,7 +257,7 @@ export const getEditorialTestData = (
 		return undefined;
 	}
 
-	const variantMeta = activeEditorialTest.variantMeta.find(
+	const variantMeta = activeFrontEditorialTest.variantMeta.find(
 		(variant) => variant.id.toLowerCase() === testBucket,
 	);
 
@@ -266,7 +266,7 @@ export const getEditorialTestData = (
 
 	return {
 		headline: variantMeta.meta.headline,
-		uuid: activeEditorialTest.testUuid,
+		uuid: activeFrontEditorialTest.testUuid,
 	};
 };
 
@@ -280,16 +280,16 @@ export const decideHeadline = (
 	isEditorialABTestingEnabled: boolean,
 	pageId?: string,
 ): string => {
-	const editorialTestData = getEditorialTestData(
+	const frontEditorialTestData = getFrontEditorialTestData(
 		faciaCard,
 		serverSideABTests,
 		isEditorialABTestingEnabled,
 		pageId,
 	);
 
-	if (isUndefined(editorialTestData)) return faciaCard.header.headline;
+	if (isUndefined(frontEditorialTestData)) return faciaCard.header.headline;
 
-	return editorialTestData.headline;
+	return frontEditorialTestData.headline;
 };
 
 /**
@@ -301,16 +301,16 @@ export const findHeadlineTestUuid = (
 	isEditorialABTestingEnabled: boolean,
 	pageId?: string,
 ): string | undefined => {
-	const editorialTestData = getEditorialTestData(
+	const frontEditorialTestData = getFrontEditorialTestData(
 		faciaCard,
 		serverSideABTests,
 		isEditorialABTestingEnabled,
 		pageId,
 	);
 
-	if (isUndefined(editorialTestData)) return undefined;
+	if (isUndefined(frontEditorialTestData)) return undefined;
 
-	return editorialTestData.uuid;
+	return frontEditorialTestData.uuid;
 };
 
 /**
