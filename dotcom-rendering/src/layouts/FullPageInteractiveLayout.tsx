@@ -346,6 +346,9 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						/>
 					</Section>
 
+					{/* Mount point for the sign-in gate portal, which is not
+					    provided by an article body on full page interactives */}
+					<div id="sign-in-gate" data-print-layout="hide" />
 					<BannerWrapper>
 						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner

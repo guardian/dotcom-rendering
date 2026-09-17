@@ -741,6 +741,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						/>
 					</Section>
 
+					{/* Mount point for the sign-in gate portal, which is not
+					    provided by an article body on picture pages */}
+					<div id="sign-in-gate" data-print-layout="hide" />
 					<BannerWrapper>
 						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner

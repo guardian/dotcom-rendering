@@ -201,6 +201,9 @@ export const pageIdIsAllowedForGating = (pageId: string): boolean => {
 	const denyPaths = [
 		'tips',
 		'help/ng-interactive/2017/mar/17/contact-the-guardian-securely',
+		'info/privacy',
+		'info/complaints-and-corrections',
+		'the-whole-picture',
 	];
 
 	return !denyPaths.some((denyPath) => pageId.startsWith(denyPath));

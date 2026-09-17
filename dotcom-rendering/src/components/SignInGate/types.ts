@@ -183,6 +183,18 @@ export interface AuxiaProxyGetTreatmentsPayload {
 // It is either undefined or return the timestamp carried by cookie `gu_hide_support_messaging`
 // See: https://github.com/guardian/support-frontend/blob/7a5c0f9209054c24934b876771392531c261f51c/support-frontend/assets/helpers/storage/contributionsCookies.ts#L11
 
+// [5] (comment group: gandalf)
+//
+// date: 2nd September 2026
+//
+// "Gandalf" is the marketing name for the Guardian-managed sign-in gate
+// journey: a 100% rollout run entirely by Guardian rules with no Auxia
+// involvement, currently live for New Zealand and extendable to further
+// countries via the gandalfSignInGateCountries channel switch. SDC drives
+// the journey from the standard dailyArticleCount field (the reader's
+// pageview count for the current day, including this pageview) — see
+// gandalfSignInGate on AuxiaProxyGetTreatmentsProxyResponseData below.
+
 export interface AuxiaProxyGetTreatmentsResponse {
 	status: boolean;
 	data?: AuxiaProxyGetTreatmentsProxyResponseData;
@@ -191,6 +203,12 @@ export interface AuxiaProxyGetTreatmentsResponse {
 export interface AuxiaProxyGetTreatmentsProxyResponseData {
 	responseId: string;
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
+	// Set to true on responses produced by the active Gandalf rules, both
+	// when no gate should display and when the Guardian-managed
+	// non-dismissible popup is returned. When present, the client must not
+	// make any Auxia interaction call and reports to Ophan under the stable
+	// Gandalf identity.
+	gandalfSignInGate?: boolean;
 }
 
 // Log Treatment Interaction
