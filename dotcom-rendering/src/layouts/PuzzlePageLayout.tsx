@@ -408,6 +408,17 @@ export const PuzzlePageLayout = ({
 	// Puzzles & Games rollout plan - see abTests.ts's puzzles-new-hub-v1
 	// JSDoc), not a v0 one - so it must not render just because
 	// instance.moreFromPuzzlesAndGames happens to be non-empty.
+	// if (instance.moreFromPuzzlesAndGames?.length === 0) {
+	// 	instance.moreFromPuzzlesAndGames = [
+	// 		{
+	// 			id: 'placeholder',
+	// 			title: 'More puzzles coming soon',
+	// 			type: 'Placeholder',
+	// 			set: 'placeholder',
+	// 			cardVariant: 'primary',
+	// 		},
+	// 	];
+	// }
 	const showRelated =
 		!!instance.moreFromPuzzlesAndGames?.length &&
 		isPuzzlesHubV1Enabled(config);
