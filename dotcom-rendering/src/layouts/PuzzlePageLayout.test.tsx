@@ -59,10 +59,10 @@ describe('PuzzlePageLayout', () => {
 		).toBeInTheDocument();
 	});
 
-	it('renders a human-readable puzzleDate next to the title when present', () => {
+	it('renders a dateline-style puzzleDate next to the title when present', () => {
 		renderPuzzlePageLayout('sudoku-easy');
 
-		expect(screen.getByText('11 September 2026')).toBeInTheDocument();
+		expect(screen.getByText('Fri 11 Sep 2026')).toBeInTheDocument();
 	});
 
 	it('does not render a date when puzzleDate is absent', () => {
@@ -73,7 +73,7 @@ describe('PuzzlePageLayout', () => {
 			},
 		});
 
-		expect(screen.queryByText('11 September 2026')).not.toBeInTheDocument();
+		expect(screen.queryByText('Fri 11 Sep 2026')).not.toBeInTheDocument();
 	});
 
 	it('renders the puzzle family name as the series kicker, and the puzzleGroup label as the section link below it', () => {

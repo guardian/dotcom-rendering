@@ -5,6 +5,7 @@ import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import { resolvePuzzleIframeUrl } from '../lib/puzzleIframeUrl';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
+import { palette as themePalette } from '../palette';
 
 interface Props {
 	/**
@@ -58,8 +59,7 @@ export const frameStyles = css`
 	width: 100%;
 	min-height: 500px;
 	border: none;
-
-	${until.tablet} {
+	border: ${themePalette('--article-border')} ${until.tablet} {
 		min-height: 900px;
 	}
 `;

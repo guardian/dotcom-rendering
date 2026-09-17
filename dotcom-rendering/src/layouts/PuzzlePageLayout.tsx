@@ -24,7 +24,6 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
-import { SubNav } from '../components/SubNav.island';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { formatPuzzleDate } from '../lib/puzzleDate';
@@ -291,6 +290,10 @@ const maxWidth = css`
 	${from.desktop} {
 		max-width: 620px;
 	}
+`;
+
+const frameContainerStyles = css`
+	margin-top: 16px;
 `;
 
 const stretchLines = css`
@@ -619,23 +622,25 @@ export const PuzzlePageLayout = ({
 							 * derived one.
 							 */}
 							<GridItem area="body" element="article">
-								<ArticleContainer format={puzzlePageFormat}>
-									<Island
-										priority="critical"
-										defer={{ until: 'visible' }}
-									>
-										<PuzzleIframe
-											puzzleConfig={puzzleConfig}
-											title={instance.title}
-											darkModeAvailable={
-												darkModeAvailable
-											}
-											puzzleDate={
-												instance.puzzleDate ?? null
-											}
-										/>
-									</Island>
-								</ArticleContainer>
+								<div css={frameContainerStyles}>
+									<ArticleContainer format={puzzlePageFormat}>
+										<Island
+											priority="critical"
+											defer={{ until: 'visible' }}
+										>
+											<PuzzleIframe
+												puzzleConfig={puzzleConfig}
+												title={instance.title}
+												darkModeAvailable={
+													darkModeAvailable
+												}
+												puzzleDate={
+													instance.puzzleDate ?? null
+												}
+											/>
+										</Island>
+									</ArticleContainer>
+								</div>
 							</GridItem>
 							<GridItem area="right-column">
 								<RightColumn showFrom="wide">
@@ -770,17 +775,17 @@ export const PuzzlePageLayout = ({
 				)}
 			</main>
 
-			{puzzleNAV.subNavSections && (
-				<Section fullWidth={true} padSides={false} element="aside">
-					<Island priority="enhancement" defer={{ until: 'visible' }}>
-						<SubNav
-							subNavSections={puzzleNAV.subNavSections}
-							currentNavLink={puzzleNAV.currentNavLink}
-							position="footer"
-						/>
-					</Island>
-				</Section>
-			)}
+			{/*
+			 * `CrosswordLayout` also renders `NAV.subNavSections` again
+			 * here, just above its footer, via `SubNav.island` - a second,
+			 * scrollable copy of the same sub-nav row already shown in the
+			 * header (`Masthead`/`Titlepiece`). Per explicit product
+			 * feedback, that duplicate footer row doesn't make sense for
+			 * Puzzle Page's hardcoded `PUZZLES_SUBNAV` (see its doc
+			 * comment above): the header copy is enough, so this second
+			 * rendering is intentionally omitted here rather than blindly
+			 * replicating every `CrosswordLayout` slot.
+			 */}
 
 			<Section
 				fullWidth={true}
