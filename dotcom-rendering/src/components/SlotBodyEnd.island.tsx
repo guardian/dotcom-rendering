@@ -56,6 +56,7 @@ type Props = {
 
 const slotStyles = css`
 	color: ${palette.neutral[7]};
+	margin: 12px auto;
 `;
 
 const buildReaderRevenueEpicConfig = (
@@ -130,10 +131,18 @@ export const SlotBodyEnd = ({
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 
-	const showPublicGood = countryCode === 'US';
+	const isInUS = countryCode === 'US';
+	const isInArticleEndHeaderBiddingTest = abTests?.isUserInTestGroup(
+		'commercial-article-end-header-bidding',
+		'variant',
+	);
 
 	const showArticleEndSlot =
-		renderAds && !isLabs && showPublicGood && articleEndSlot;
+		renderAds &&
+		!isLabs &&
+		isInUS &&
+		articleEndSlot &&
+		isInArticleEndHeaderBiddingTest;
 
 	useEffect(() => {
 		setAsyncArticleCount(
@@ -238,7 +247,9 @@ export const SlotBodyEnd = ({
 				new CustomEvent('gu.commercial.slot.fill', {
 					detail: {
 						slotId: 'dfp-ad--article-end',
-						additionalSizes: { mobile: [adSizes.fluid] }, // Public Good additional ad slot sizes
+						additionalSizes: {
+							mobile: [adSizes.mpu],
+						},
 					},
 				}),
 			);

@@ -333,6 +333,19 @@ const ABTests: ABTest[] = [
 		],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "commercial-article-end-header-bidding",
+		description:
+			"Test opening up the article-end ad slot in the US region for HeaderBidding",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-01",
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
