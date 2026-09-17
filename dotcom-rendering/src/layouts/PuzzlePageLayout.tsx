@@ -398,7 +398,7 @@ export const PuzzlePageLayout = ({
 	// Hardcoded permanently off, mirroring exactly how `CrosswordLayout`
 	// gates its own (there, real) `showComments` Section, just with a
 	// fixed value instead of a derived one.
-	const showComments = false;
+	const showComments = true;
 
 	// The "More from Puzzles & Games" rail is a v1-scoped feature (per the
 	// Puzzles & Games rollout plan - see abTests.ts's puzzles-new-hub-v1
@@ -412,7 +412,7 @@ export const PuzzlePageLayout = ({
 	// equivalent (`FEPuzzlePageType` models no ad-free-user concept at
 	// all), so ads are hardcoded on, matching every current Puzzle Page
 	// instance's real behaviour.
-	const renderAds = true;
+	const renderAds = false;
 
 	// `getContributionsServiceUrl` reads `config.contributionsServiceUrl`,
 	// a field `ConfigType` doesn't carry for Puzzle Page requests. Hardcoded
@@ -712,6 +712,7 @@ export const PuzzlePageLayout = ({
 						showBottomSocialButtons={true}
 					/>
 				</Section>
+
 				{renderAds && (
 					<Section
 						fullWidth={true}
@@ -753,13 +754,13 @@ export const PuzzlePageLayout = ({
 								!!config.switches.enableDiscussionSwitch
 							}
 							isAdFreeUser={false}
-							shouldHideAds={false}
+							shouldHideAds={!renderAds}
 							idApiUrl={config.idApiUrl}
 						/>
 					</Section>
 				)}
 
-				{renderAds && (
+				{showComments && renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}
