@@ -75,6 +75,11 @@ const summaryStyles = css`
 const arrowStyles = css`
 	display: block;
 	flex-shrink: 0;
+	transform-origin: center;
+
+	details[open] & {
+		transform: rotate(180deg);
+	}
 `;
 
 const menuStyles = css`
