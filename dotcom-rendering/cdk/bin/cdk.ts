@@ -124,6 +124,12 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+
+		// Route all traffic to ECS
+		targetGroupWeights: {
+			ec2: 0,
+			ecs: 1,
+		},
 	},
 };
 
@@ -177,6 +183,12 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleInCooldown: Duration.seconds(60),
 				scaleOutCooldown: Duration.seconds(60),
 			},
+		},
+
+		// Route 90% traffic to EC2, 10% to ECS
+		targetGroupWeights: {
+			ec2: 9,
+			ecs: 1,
 		},
 	},
 };
