@@ -704,35 +704,20 @@ export const PuzzlePageLayout = ({
 				)}
 
 				{renderAds && (
-					<>
-						<Section
-							fullWidth={true}
-							padSides={true}
-							showTopBorder={false}
-							showSideBorders={true}
-							element="aside"
-						>
-							<div
-								css={css`
-									height: 20px;
-								`}
-							></div>
-						</Section>
-						<Section
-							fullWidth={true}
-							padSides={false}
-							showTopBorder={false}
-							showSideBorders={false}
-							backgroundColour={themePalette('--ad-background')}
-							element="aside"
-						>
-							<AdSlot
-								data-print-layout="hide"
-								position="merchandising-high"
-								display={puzzlePageFormat.display}
-							/>
-						</Section>
-					</>
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={themePalette('--ad-background')}
+						element="aside"
+					>
+						<AdSlot
+							data-print-layout="hide"
+							position="merchandising-high"
+							display={puzzlePageFormat.display}
+						/>
+					</Section>
 				)}
 
 				{showComments && (
@@ -777,11 +762,6 @@ export const PuzzlePageLayout = ({
 								idApiUrl={config.idApiUrl}
 							/>
 						</Section>
-					</>
-				)}
-
-				{showComments && renderAds && (
-					<>
 						<Section
 							fullWidth={true}
 							padSides={true}
@@ -795,20 +775,23 @@ export const PuzzlePageLayout = ({
 								`}
 							></div>
 						</Section>
-						<Section
-							fullWidth={true}
-							padSides={false}
-							showTopBorder={false}
-							showSideBorders={false}
-							backgroundColour={themePalette('--ad-background')}
-							element="aside"
-						>
-							<AdSlot
-								position="merchandising"
-								display={puzzlePageFormat.display}
-							/>
-						</Section>
 					</>
+				)}
+
+				{showComments && renderAds && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={themePalette('--ad-background')}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={puzzlePageFormat.display}
+						/>
+					</Section>
 				)}
 			</main>
 
