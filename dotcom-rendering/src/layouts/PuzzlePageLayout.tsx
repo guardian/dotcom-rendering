@@ -18,6 +18,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
+import { PrintButton } from '../components/PrintButton.island';
 import { PuzzleIframe } from '../components/PuzzleIframe.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -307,39 +308,6 @@ const stretchLines = css`
 	}
 `;
 
-const printButtonStyles = css`
-	background: none;
-	border: 1px solid currentColor;
-	border-radius: 100px;
-	padding: 4px 12px;
-	margin: ${remSpace[2]}px 0;
-	cursor: pointer;
-	font-size: inherit;
-	color: inherit;
-
-	@media print {
-		display: none;
-	}
-`;
-
-/**
- * Occupies the exact same `standfirst`-area slot `CrosswordLinks`' "PDF
- * version" link uses in `CrosswordLayout`, but a plain print button
- * instead: iframe-based puzzles have no `crossword.pdf` concept, but
- * `PuzzleConfig.printEnabled` (Sudoku only, per explicit product decision -
- * PR #16700 review, see `puzzleConfigs.ts`) is the real Puzzle Page
- * equivalent of "give the reader an offline/printable copy".
- */
-const PrintButton = () => (
-	<button
-		type="button"
-		css={printButtonStyles}
-		onClick={() => window.print()}
-	>
-		Print
-	</button>
-);
-
 const relatedRailStyles = css`
 	display: flex;
 	flex-direction: column;
@@ -581,23 +549,6 @@ export const PuzzlePageLayout = ({
 											}
 										/>
 									</Hide>
-									{/*
-									 * `CrosswordLinks`' one job is a
-									 * `crossword.pdf` "PDF version" link -
-									 * a crossword-only concept with no
-									 * Puzzle Page equivalent
-									 * (`FEPuzzlePageType` has no `crossword`
-									 * field at all). It occupies this same
-									 * grid slot, but with the real Puzzle
-									 * Page equivalent instead: a print
-									 * button, gated on
-									 * `puzzleConfig.printEnabled` (Sudoku
-									 * only, see `PrintButton`'s doc
-									 * comment).
-									 */}
-									{puzzleConfig.printEnabled && (
-										<PrintButton />
-									)}
 								</div>
 							</GridItem>
 							<GridItem area="meta" element="aside">
@@ -626,6 +577,28 @@ export const PuzzlePageLayout = ({
 										}
 										shortUrlId={config.shortUrlId}
 									/>
+									{/*
+									 * `CrosswordLinks`' one job is a
+									 * `crossword.pdf` "PDF version" link -
+									 * a crossword-only concept with no
+									 * Puzzle Page equivalent
+									 * (`FEPuzzlePageType` has no `crossword`
+									 * field at all). It occupies this same
+									 * grid slot, but with the real Puzzle
+									 * Page equivalent instead: a print
+									 * button, gated on
+									 * `puzzleConfig.printEnabled` (Sudoku
+									 * only, see `PrintButton`'s doc
+									 * comment).
+									 */}
+									{puzzleConfig.printEnabled && (
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<PrintButton />
+										</Island>
+									)}
 								</div>
 							</GridItem>
 							{/*
