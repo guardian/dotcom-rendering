@@ -15,13 +15,13 @@ catalog:
   '@guardian/cdk': 64.7.0
   '@guardian/eslint-config': 14.0.1
   '@guardian/tsconfig': 1.0.1
-  '@rollup/plugin-commonjs': 29.0.0
+  '@rollup/plugin-commonjs': 29.0.3
   '@rollup/plugin-json': 6.1.0
   '@rollup/plugin-node-resolve': 16.0.3
-  '@types/aws-lambda': 8.10.158
+  '@types/aws-lambda': 8.10.163
   '@types/node': 24.12.4
-  aws-cdk: 2.1139.0
-  aws-cdk-lib: 2.267.0
+  aws-cdk: 2.1141.0
+  aws-cdk-lib: 2.269.0
   constructs: 10.8.1
   esbuild: 0.28.1
   eslint: 9.39.1

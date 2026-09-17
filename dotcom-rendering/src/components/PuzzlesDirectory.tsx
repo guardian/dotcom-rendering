@@ -395,8 +395,7 @@ const nestedStyles = (span: number) => css`
 `;
 
 const adStyles = css`
-	max-width: 1300px;
-	margin: 0 auto;
+	width: 100%;
 	overflow: hidden;
 	background: ${palette.neutral[97]};
 `;
@@ -423,7 +422,7 @@ export const getPuzzleUrl = (item: PuzzleItem): string | undefined => {
 	if (
 		url !== undefined &&
 		(url.startsWith('/puzzles-and-games') ||
-			url.startsWith('/crosswords/series/') ||
+			url.startsWith('/crosswords/') ||
 			/^https?:\/\//.test(url))
 	) {
 		return url;

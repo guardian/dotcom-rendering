@@ -246,7 +246,9 @@ const puzzleUrl = (item: PuzzleItem): string | undefined => {
 	const url = item.url;
 	if (
 		url !== undefined &&
-		(url.startsWith('/puzzles-and-games') || /^https?:\/\//.test(url))
+		(url.startsWith('/puzzles-and-games') ||
+			url.startsWith('/crosswords/') ||
+			/^https?:\/\//.test(url))
 	) {
 		return url;
 	}
