@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
-import { Button, SvgShareWeb } from '@guardian/source/react-components';
+import { Button, SvgDocument } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 
-const buttonStyles = (sizeXSmall: boolean) => css`
+const buttonStyles = css`
 	transition: none;
 	border: 1px solid ${themePalette('--share-button-border')};
 	color: ${themePalette('--share-button')};
-	padding: ${sizeXSmall && '0 10px'};
 	svg {
 		fill: ${themePalette('--share-button')};
 	}
@@ -17,6 +16,9 @@ const buttonStyles = (sizeXSmall: boolean) => css`
 		svg {
 			fill: ${themePalette('--share-button-hover')};
 		}
+	}
+	:focus {
+		outline: 0 !important;
 	}
 `;
 
@@ -33,8 +35,8 @@ export const PrintButton = () => {
 			type="button"
 			priority="tertiary"
 			iconSide="left"
-			icon={<SvgShareWeb />}
-			cssOverrides={css([buttonStyles(true)])}
+			icon={<SvgDocument />}
+			cssOverrides={css(buttonStyles)}
 		>
 			Print version
 		</Button>
