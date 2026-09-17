@@ -171,7 +171,7 @@ describe('SignInGatePortal', () => {
 
 			expect(result).toEqual({
 				show: true,
-				meta: { ...auxiaReturn, gandalfCountryCode: 'NZ' },
+				meta: auxiaReturn,
 			});
 		});
 
@@ -207,7 +207,7 @@ describe('SignInGatePortal', () => {
 
 			expect(result).toEqual({
 				show: true,
-				meta: { ...auxiaReturn, gandalfCountryCode: 'NZ' },
+				meta: auxiaReturn,
 			});
 		});
 	});
@@ -247,10 +247,7 @@ describe('SignInGatePortal', () => {
 			// selector can build the Ophan variant.
 			expect(result).toEqual({
 				show: false,
-				meta: {
-					...makeAuxiaReturn(undefined, true),
-					gandalfCountryCode: 'NZ',
-				},
+				meta: makeAuxiaReturn(undefined, true),
 			});
 		});
 
@@ -270,7 +267,7 @@ describe('SignInGatePortal', () => {
 
 			expect(result).toEqual({
 				show: true,
-				meta: { ...auxiaReturn, gandalfCountryCode: 'NZ' },
+				meta: auxiaReturn,
 			});
 		});
 	});

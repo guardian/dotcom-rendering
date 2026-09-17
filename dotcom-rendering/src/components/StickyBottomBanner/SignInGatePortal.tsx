@@ -29,6 +29,7 @@ export const SignInGatePortal = ({
 	pageId,
 	contributionsServiceUrl,
 	auxiaGateDisplayData,
+	contentType,
 }: {
 	host?: string;
 	isPaidContent: boolean;
@@ -36,6 +37,7 @@ export const SignInGatePortal = ({
 	pageId: string;
 	contributionsServiceUrl: string;
 	auxiaGateDisplayData: AuxiaGateDisplayData;
+	contentType?: string;
 }) => {
 	const [shouldShowGate, setShouldShowGate] = useState<boolean>(false);
 	const [targetElement, setTargetElement] = useState<HTMLElement | null>(
@@ -130,6 +132,7 @@ export const SignInGatePortal = ({
 				pageId={pageId}
 				contributionsServiceUrl={contributionsServiceUrl}
 				auxiaGateDisplayData={auxiaGateDisplayData}
+				contentType={contentType}
 			/>
 		</Island>,
 		targetElement,
@@ -214,18 +217,13 @@ export const canShowSignInGatePortal = async ({
 			retrieveLastGateDismissedCount('AuxiaSignInGate'),
 		);
 
-		const meta = (
-			auxiaData
-				? {
-						...auxiaData,
-						gandalfCountryCode: countryCode,
-					}
-				: auxiaData
-		) as AuxiaGateDisplayData;
+		if (auxiaData === undefined) {
+			return { show: false };
+		}
 
 		return {
-			show: auxiaData?.auxiaData.userTreatment !== undefined,
-			meta,
+			show: auxiaData.auxiaData.userTreatment !== undefined,
+			meta: auxiaData,
 		};
 	} catch (e) {
 		const message = `SignInGatePortal canShowSignInGatePortal - error: ${String(

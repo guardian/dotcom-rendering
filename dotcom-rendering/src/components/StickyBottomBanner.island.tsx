@@ -212,6 +212,7 @@ const buildSignInGateConfig = (
 				pageId={canShowProps.pageId}
 				contributionsServiceUrl={canShowProps.contributionsServiceUrl}
 				auxiaGateDisplayData={meta}
+				contentType={canShowProps.contentType}
 			/>
 		),
 	},

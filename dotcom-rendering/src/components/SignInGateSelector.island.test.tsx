@@ -39,14 +39,15 @@ const makeTreatment = (
 const makeProps = (
 	userTreatment = makeTreatment(),
 	gandalfSignInGate = true,
+	contentType = 'Network Front',
 ) => ({
 	isPaidContent: false,
 	isPreview: false,
 	pageId: 'crosswords/quick/16914',
+	contentType,
 	contributionsServiceUrl: 'https://contributions.example.com',
 	auxiaGateDisplayData: {
 		browserId: undefined,
-		gandalfCountryCode: 'NZ',
 		auxiaData: {
 			responseId: 'test-response',
 			gandalfSignInGate,
@@ -107,6 +108,20 @@ describe('SignInGateSelector view tracking', () => {
 		expect(testScreen.getByTestId('v2-gate')).toBeInTheDocument();
 		expectViews(1);
 		expect(mockFetch).not.toHaveBeenCalled();
+	});
+
+	it('keeps a mandatory Article popup deferred until visibility', () => {
+		const props = makeProps(makeTreatment(), true, 'Article');
+		const { rerender } = render(<SignInGateSelector {...props} />);
+
+		expect(testScreen.queryByTestId('v2-gate')).not.toBeInTheDocument();
+		expectViews(0);
+
+		mockUseIsInView.mockReturnValue([true, mockSetNode]);
+		rerender(<SignInGateSelector {...props} />);
+
+		expect(testScreen.getByTestId('v2-gate')).toBeInTheDocument();
+		expectViews(1);
 	});
 
 	it('does not recount an equivalent treatment supplied as a new object', () => {

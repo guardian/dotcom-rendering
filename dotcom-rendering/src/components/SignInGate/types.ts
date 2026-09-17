@@ -253,10 +253,6 @@ export interface AuxiaGateReaderPersonalData {
 export interface AuxiaGateDisplayData {
 	browserId: string | undefined;
 	auxiaData: AuxiaProxyGetTreatmentsProxyResponseData;
-	// The country code the gate request was made for. Set by the client so the
-	// selector can build the per-country Gandalf Ophan variant
-	// (gandalf-<country>) without re-resolving geolocation.
-	gandalfCountryCode?: string;
 }
 
 export type SignInGatePropsAuxia = {

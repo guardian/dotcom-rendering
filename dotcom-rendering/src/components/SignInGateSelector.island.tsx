@@ -34,6 +34,7 @@ type Props = {
 	pageId: string;
 	contributionsServiceUrl: string;
 	auxiaGateDisplayData?: AuxiaGateDisplayData | undefined;
+	contentType?: string;
 };
 
 // function to generate the params for use by the profile.theguardian.com url
@@ -81,6 +82,7 @@ export const SignInGateSelector = ({
 	pageId, // pageId is the path without starting slash
 	contributionsServiceUrl,
 	auxiaGateDisplayData,
+	contentType,
 }: Props) => {
 	if (!pageIdIsAllowedForGating(pageId)) {
 		return <></>;
@@ -99,6 +101,7 @@ export const SignInGateSelector = ({
 			isPaidContent={isPaidContent}
 			auxiaGateDisplayData={auxiaGateDisplayData}
 			signInGateVersion={signInGateVersion}
+			contentType={contentType}
 		/>
 	);
 };
@@ -134,6 +137,7 @@ type PropsAuxia = {
 	isPaidContent: boolean;
 	auxiaGateDisplayData?: AuxiaGateDisplayData;
 	signInGateVersion: AuxiaGateVersion;
+	contentType?: string;
 };
 
 // [1] If true, it indicates that we are using the component for the regular Auxia share of the Audience
@@ -150,6 +154,7 @@ interface ShowSignInGateAuxiaProps {
 	treatmentId: string;
 	renderingTarget: RenderingTarget;
 	isGandalf: boolean;
+	contentType?: string;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
 		actionName?: AuxiaInteractionActionName,
@@ -272,6 +277,7 @@ const SignInGateSelectorAuxia = ({
 	isPaidContent,
 	auxiaGateDisplayData,
 	signInGateVersion,
+	contentType,
 }: PropsAuxia) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
@@ -280,23 +286,18 @@ const SignInGateSelectorAuxia = ({
 	// Gandalf (comment group: gandalf) — the Guardian-managed sign-in gate
 	// journey (marketing name). SDC marks responses produced by the active
 	// Gandalf rules. For those responses we report to Ophan under a stable
-	// Gandalf identity with a per-country variant instead of the Auxia
-	// experiment metadata, and we never call Auxia's LogTreatmentInteraction
-	// endpoint. This is reporting metadata only — there is no A/B test
-	// allocation behind it.
+	// Gandalf identity instead of the Auxia experiment metadata, and we never
+	// call Auxia's LogTreatmentInteraction endpoint. This is reporting metadata
+	// only — there is no A/B test allocation behind it.
 	const isGandalf =
 		auxiaGateDisplayData?.auxiaData.gandalfSignInGate === true;
-	const gandalfCountryCode = auxiaGateDisplayData?.gandalfCountryCode;
 
 	// We are using CurrentSignInGateABTest, with the details of the Auxia experiment,
 	// to allow Ophan tracking
 	const abTest: CurrentSignInGateABTest = isGandalf
 		? {
 				name: 'GandalfSignInGate', // value of dataLinkNames
-				variant:
-					gandalfCountryCode !== undefined
-						? `gandalf-${gandalfCountryCode.toLowerCase()}` // per-country variant
-						: 'gandalf-rollout', // variant id
+				variant: 'gandalf-nz', // variant id
 				id: 'GandalfSignInGate', // test id
 			}
 		: {
@@ -376,6 +377,7 @@ const SignInGateSelectorAuxia = ({
 						}
 						renderingTarget={renderingTarget}
 						isGandalf={isGandalf}
+						contentType={contentType}
 						logTreatmentInteractionCall={async (
 							interactionType: AuxiaInteractionInteractionType,
 							actionName?: AuxiaInteractionActionName,
@@ -422,6 +424,7 @@ const ShowSignInGateAuxia = ({
 	treatmentId,
 	renderingTarget,
 	isGandalf,
+	contentType,
 	logTreatmentInteractionCall,
 	signInGateVersion,
 }: ShowSignInGateAuxiaProps) => {
@@ -436,11 +439,12 @@ const ShowSignInGateAuxia = ({
 		threshold: 0,
 	});
 
-	// The non-dismissible popup is a modal, so it must appear immediately
-	// rather than waiting for the reader to scroll to the inline host
-	// element, which on long pages sits far below the viewport.
+	// Non-article mandatory popups use the portal as a modal and should appear
+	// immediately. Articles retain the existing visibility-based behaviour so
+	// the gate waits until the reader reaches the article gate position.
 	const isMandatoryPopup =
 		userTreatment.treatmentType === 'NONDISMISSIBLE_SIGN_IN_GATE_POPUP';
+	const shouldShowImmediately = isMandatoryPopup && contentType !== 'Article';
 	const lastRecordedView = useRef<string>();
 
 	useEffect(() => {
@@ -452,9 +456,10 @@ const ShowSignInGateAuxia = ({
 	}, [setNode, setSignInGatePlaceholder]);
 
 	useEffect(() => {
-		// The mandatory popup is shown on mount (see shouldShowV2Gate), so
-		// its view is recorded immediately instead of waiting for scroll.
-		if (hasBeenSeen === true || isMandatoryPopup) {
+		// Non-article mandatory popups are shown on mount (see
+		// shouldShowV2Gate), so their view is recorded immediately. Articles
+		// wait for the gate position to become visible.
+		if (hasBeenSeen === true || shouldShowImmediately) {
 			const viewIdentity = JSON.stringify([
 				treatmentId,
 				userTreatment.treatmentTrackingId,
@@ -518,7 +523,7 @@ const ShowSignInGateAuxia = ({
 		}
 	}, [
 		hasBeenSeen,
-		isMandatoryPopup,
+		shouldShowImmediately,
 		browserId,
 		contributionsServiceUrl,
 		isGandalf,
@@ -554,7 +559,8 @@ const ShowSignInGateAuxia = ({
 		setHasScroll(scrollHeight > viewportHeight);
 	}, []);
 
-	const shouldShowV2Gate = isMandatoryPopup || (hasBeenSeen ?? !hasScroll);
+	const shouldShowV2Gate =
+		shouldShowImmediately || (hasBeenSeen ?? !hasScroll);
 
 	return (
 		<>
