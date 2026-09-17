@@ -294,6 +294,7 @@ const maxWidth = css`
 
 const frameContainerStyles = css`
 	margin-top: 16px;
+	margin-bottom: 16px;
 `;
 
 const stretchLines = css`
@@ -676,7 +677,7 @@ export const PuzzlePageLayout = ({
 					hideFromPrintLayout={true}
 				>
 					<StraightLines
-						count={4}
+						count={1}
 						color={themePalette('--straight-lines')}
 						cssOverrides={css`
 							display: block;
