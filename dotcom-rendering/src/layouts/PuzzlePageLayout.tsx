@@ -549,6 +549,35 @@ export const PuzzlePageLayout = ({
 											}
 										/>
 									</Hide>
+									{/*
+									 * `CrosswordLinks`' one job is a
+									 * `crossword.pdf` "PDF version" link -
+									 * a crossword-only concept with no
+									 * Puzzle Page equivalent
+									 * (`FEPuzzlePageType` has no `crossword`
+									 * field at all). It occupies this same
+									 * grid slot, but with the real Puzzle
+									 * Page equivalent instead: a print
+									 * button, gated on
+									 * `puzzleConfig.printEnabled` (Sudoku
+									 * only, see `PrintButton`'s doc
+									 * comment).
+									 */}
+									{puzzleConfig.printEnabled && (
+										<div
+											css={css`
+												margin-top: ${remSpace[2]};
+												margin-bottom: ${remSpace[2]};
+											`}
+										>
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<PrintButton />
+											</Island>
+										</div>
+									)}
 								</div>
 							</GridItem>
 							<GridItem area="meta" element="aside">
@@ -577,28 +606,6 @@ export const PuzzlePageLayout = ({
 										}
 										shortUrlId={config.shortUrlId}
 									/>
-									{/*
-									 * `CrosswordLinks`' one job is a
-									 * `crossword.pdf` "PDF version" link -
-									 * a crossword-only concept with no
-									 * Puzzle Page equivalent
-									 * (`FEPuzzlePageType` has no `crossword`
-									 * field at all). It occupies this same
-									 * grid slot, but with the real Puzzle
-									 * Page equivalent instead: a print
-									 * button, gated on
-									 * `puzzleConfig.printEnabled` (Sudoku
-									 * only, see `PrintButton`'s doc
-									 * comment).
-									 */}
-									{puzzleConfig.printEnabled && (
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<PrintButton />
-										</Island>
-									)}
 								</div>
 							</GridItem>
 							{/*

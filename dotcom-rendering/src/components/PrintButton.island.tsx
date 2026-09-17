@@ -1,18 +1,22 @@
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/source/foundations';
+import { Button, SvgShareWeb } from '@guardian/source/react-components';
+import { palette as themePalette } from '../palette';
 
-const printButtonStyles = css`
-	background: none;
-	border: 1px solid currentColor;
-	border-radius: 100px;
-	padding: 4px 12px;
-	margin: ${remSpace[2]}px 0;
-	cursor: pointer;
-	font-size: inherit;
-	color: inherit;
-
-	@media print {
-		display: none;
+const buttonStyles = (sizeXSmall: boolean) => css`
+	transition: none;
+	border: 1px solid ${themePalette('--share-button-border')};
+	color: ${themePalette('--share-button')};
+	padding: ${sizeXSmall && '0 10px'};
+	svg {
+		fill: ${themePalette('--share-button')};
+	}
+	:hover {
+		background-color: ${themePalette('--share-button')};
+		border-color: ${themePalette('--share-button')};
+		color: ${themePalette('--share-button-hover')};
+		svg {
+			fill: ${themePalette('--share-button-hover')};
+		}
 	}
 `;
 
@@ -21,12 +25,18 @@ const printButtonStyles = css`
  * `Island` (see `PuzzlePageLayout.tsx`) rather than rendered inline - a
  * plain server-rendered `onClick` never gets attached in the browser.
  */
-export const PrintButton = () => (
-	<button
-		type="button"
-		css={printButtonStyles}
-		onClick={() => alert('window.print()')}
-	>
-		Print
-	</button>
-);
+export const PrintButton = () => {
+	return (
+		<Button
+			onClick={() => window.print()}
+			size="small"
+			type="button"
+			priority="tertiary"
+			iconSide="left"
+			icon={<SvgShareWeb />}
+			cssOverrides={css([buttonStyles(true)])}
+		>
+			Print version
+		</Button>
+	);
+};
