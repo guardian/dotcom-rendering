@@ -35,6 +35,8 @@ interface Props {
 	puzzleDate: string | null;
 }
 
+type MinHeightTiers = { default: number; tablet: number; mobile: number };
+
 /**
  * Per-slug min-height overrides, hardcoded rather than guessed generically:
  * each puzzle's actual required height differs (a 4x4 killer sudoku grid
@@ -55,39 +57,41 @@ interface Props {
  * - `mobile`: below `tablet` (740px), where AmuseLabs' side menu reflows
  *   below the puzzle grid, needing the most vertical space.
  *
+ * These are the values used for non-touch (mouse/trackpad) devices. See
+ * `PUZZLE_MIN_HEIGHTS_TOUCH` below for the touch-device override (applied
+ * via `@media (pointer: coarse)`, regardless of viewport width, since a
+ * touch tablet can still be as wide as a `desktop`-tier viewport).
+ *
  * Falls back to `DEFAULT_MIN_HEIGHT`/`DEFAULT_MIN_HEIGHT_TABLET`/
  * `DEFAULT_MIN_HEIGHT_MOBILE` for any slug not listed here.
- *
- * All values were based on the iPhone SE viewport dimensions of 375x667 pixels.
  */
-const PUZZLE_MIN_HEIGHTS: Record<
-	string,
-	{ default: number; tablet: number; mobile: number }
-> = {
+const PUZZLE_MIN_HEIGHTS: Record<string, MinHeightTiers> = {
 	'sudoku-easy': { default: 620, tablet: 520, mobile: 630 },
 	'sudoku-medium': { default: 620, tablet: 520, mobile: 630 },
 	'sudoku-hard': { default: 620, tablet: 520, mobile: 630 },
 	'sudoku-killer': { default: 620, tablet: 520, mobile: 630 },
 	'word-wheel': { default: 600, tablet: 750, mobile: 500 },
+	wordiply: { default: 600, tablet: 600, mobile: 560 },
+};
+
+/**
+ * Touch-device-only min-height overrides, keyed by slug: only puzzles that
+ * actually need a different height on a touch device (currently just
+ * Wordiply) have an entry here. Applied on top of `PUZZLE_MIN_HEIGHTS`
+ * above via `@media (pointer: coarse)` in `buildFrameStyles` - a pure-CSS
+ * check for "is this a touch device", with no JS/`useMatchMedia` needed,
+ * since `pointer: coarse` is exactly the standard media feature for "the
+ * primary input mechanism cannot easily/precisely point" (touchscreens),
+ * as opposed to `pointer: fine` (mouse/trackpad). A slug not listed here
+ * simply keeps its `PUZZLE_MIN_HEIGHTS` value on touch devices too.
+ */
+const PUZZLE_MIN_HEIGHTS_TOUCH: Partial<Record<string, MinHeightTiers>> = {
 	wordiply: { default: 800, tablet: 600, mobile: 500 },
 };
 
 const DEFAULT_MIN_HEIGHT = 500;
 const DEFAULT_MIN_HEIGHT_TABLET = 700;
 const DEFAULT_MIN_HEIGHT_MOBILE = 900;
-
-/**
- * Resolves the `default`/`tablet`/`mobile` min-height trio for a given
- * puzzle slug, from the hardcoded `PUZZLE_MIN_HEIGHTS` map above.
- */
-const getPuzzleMinHeights = (
-	slug: string,
-): { default: number; tablet: number; mobile: number } =>
-	PUZZLE_MIN_HEIGHTS[slug] ?? {
-		default: DEFAULT_MIN_HEIGHT,
-		tablet: DEFAULT_MIN_HEIGHT_TABLET,
-		mobile: DEFAULT_MIN_HEIGHT_MOBILE,
-	};
 
 /**
  * Builds the iframe's `frameStyles`, with a `min-height` tuned per puzzle
@@ -97,13 +101,25 @@ const getPuzzleMinHeights = (
  * reflows at each of these widths, needing progressively more vertical
  * space the narrower the viewport gets. Also applies a visible border
  * around the iframe matching the page's own article border colour.
+ *
+ * When `PUZZLE_MIN_HEIGHTS_TOUCH` has an entry for this slug, its values
+ * override the three tiers above for touch devices, via
+ * `@media (pointer: coarse)`. That block is written after the base rules,
+ * so on a touch device it wins the CSS cascade (same specificity, later
+ * source order) for whichever tier's width also matches - no JS feature
+ * detection needed.
  */
 export const buildFrameStyles = (slug: string) => {
 	const {
 		default: defaultMinHeight,
 		tablet: tabletMinHeight,
 		mobile: mobileMinHeight,
-	} = getPuzzleMinHeights(slug);
+	} = PUZZLE_MIN_HEIGHTS[slug] ?? {
+		default: DEFAULT_MIN_HEIGHT,
+		tablet: DEFAULT_MIN_HEIGHT_TABLET,
+		mobile: DEFAULT_MIN_HEIGHT_MOBILE,
+	};
+	const touchOverride = PUZZLE_MIN_HEIGHTS_TOUCH[slug];
 
 	return css`
 		width: 100%;
@@ -118,6 +134,21 @@ export const buildFrameStyles = (slug: string) => {
 		${until.tablet} {
 			min-height: ${mobileMinHeight}px;
 		}
+
+		${touchOverride &&
+		css`
+			@media (pointer: coarse) {
+				min-height: ${touchOverride.default}px;
+
+				${until.desktop} {
+					min-height: ${touchOverride.tablet}px;
+				}
+
+				${until.tablet} {
+					min-height: ${touchOverride.mobile}px;
+				}
+			}
+		`}
 	`;
 };
 
