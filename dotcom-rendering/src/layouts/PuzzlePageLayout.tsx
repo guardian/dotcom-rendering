@@ -402,7 +402,7 @@ export const PuzzlePageLayout = ({
 	// Hardcoded permanently off, mirroring exactly how `CrosswordLayout`
 	// gates its own (there, real) `showComments` Section, just with a
 	// fixed value instead of a derived one.
-	const showComments = true;
+	const showComments = false;
 
 	// The "More from Puzzles & Games" rail is a v1-scoped feature (per the
 	// Puzzles & Games rollout plan - see abTests.ts's puzzles-new-hub-v1
@@ -704,66 +704,111 @@ export const PuzzlePageLayout = ({
 				)}
 
 				{renderAds && (
-					<Section
-						fullWidth={true}
-						padSides={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						backgroundColour={themePalette('--ad-background')}
-						element="aside"
-					>
-						<AdSlot
-							data-print-layout="hide"
-							position="merchandising-high"
-							display={puzzlePageFormat.display}
-						/>
-					</Section>
+					<>
+						<Section
+							fullWidth={true}
+							padSides={true}
+							showTopBorder={false}
+							showSideBorders={true}
+							element="aside"
+						>
+							<div
+								css={css`
+									height: 20px;
+								`}
+							></div>
+						</Section>
+						<Section
+							fullWidth={true}
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={themePalette('--ad-background')}
+							element="aside"
+						>
+							<AdSlot
+								data-print-layout="hide"
+								position="merchandising-high"
+								display={puzzlePageFormat.display}
+							/>
+						</Section>
+					</>
 				)}
 
 				{showComments && (
-					<Section
-						fullWidth={true}
-						sectionId="comments"
-						element="section"
-						backgroundColour={themePalette(
-							'--discussion-section-background',
-						)}
-						borderColour={themePalette('--article-border')}
-						fontColour={themePalette('--discussion-text')}
-						hideFromPrintLayout={true}
-					>
-						<DiscussionLayout
-							discussionApiUrl={config.discussionApiUrl}
-							shortUrlId={config.shortUrlId}
-							format={puzzlePageFormat}
-							discussionD2Uid={config.discussionD2Uid}
-							discussionApiClientHeader={
-								config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={
-								!!config.switches.enableDiscussionSwitch
-							}
-							isAdFreeUser={!!puzzlePage.isAdFreeUser}
-							shouldHideAds={!renderAds}
-							idApiUrl={config.idApiUrl}
-						/>
-					</Section>
+					<>
+						<Section
+							fullWidth={true}
+							padSides={true}
+							showTopBorder={false}
+							showSideBorders={true}
+							element="aside"
+						>
+							<div
+								css={css`
+									height: 20px;
+								`}
+							></div>
+						</Section>
+						<Section
+							fullWidth={true}
+							sectionId="comments"
+							element="section"
+							backgroundColour={themePalette(
+								'--discussion-section-background',
+							)}
+							borderColour={themePalette('--article-border')}
+							fontColour={themePalette('--discussion-text')}
+							hideFromPrintLayout={true}
+						>
+							<DiscussionLayout
+								discussionApiUrl={config.discussionApiUrl}
+								shortUrlId={config.shortUrlId}
+								format={puzzlePageFormat}
+								discussionD2Uid={config.discussionD2Uid}
+								discussionApiClientHeader={
+									config.discussionApiClientHeader
+								}
+								enableDiscussionSwitch={
+									!!config.switches.enableDiscussionSwitch
+								}
+								isAdFreeUser={!!puzzlePage.isAdFreeUser}
+								shouldHideAds={!renderAds}
+								idApiUrl={config.idApiUrl}
+							/>
+						</Section>
+					</>
 				)}
 
 				{showComments && renderAds && (
-					<Section
-						fullWidth={true}
-						padSides={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						backgroundColour={themePalette('--ad-background')}
-						element="aside"
-					>
-						<AdSlot
-							position="merchandising"
-							display={puzzlePageFormat.display}
-						/>
-					</Section>
+					<>
+						<Section
+							fullWidth={true}
+							padSides={true}
+							showTopBorder={false}
+							showSideBorders={true}
+							element="aside"
+						>
+							<div
+								css={css`
+									height: 20px;
+								`}
+							></div>
+						</Section>
+						<Section
+							fullWidth={true}
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={themePalette('--ad-background')}
+							element="aside"
+						>
+							<AdSlot
+								position="merchandising"
+								display={puzzlePageFormat.display}
+							/>
+						</Section>
+					</>
 				)}
 			</main>
 
