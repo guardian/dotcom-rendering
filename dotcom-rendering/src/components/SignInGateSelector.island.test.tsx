@@ -99,7 +99,14 @@ describe('SignInGateSelector view tracking', () => {
 		expect(testScreen.getByTestId('v2-gate')).toBeInTheDocument();
 		expectViews(1);
 		expect(mockTrack).toHaveBeenCalledWith(
-			expect.objectContaining({ action: 'VIEW' }),
+			expect.objectContaining({
+				action: 'VIEW',
+				abTest: {
+					name: 'GandalfSignInGate',
+					variant: 'gandalf-nz',
+					id: 'GandalfSignInGate',
+				},
+			}),
 			'Web',
 		);
 

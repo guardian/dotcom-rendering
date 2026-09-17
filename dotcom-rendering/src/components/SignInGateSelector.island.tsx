@@ -146,7 +146,7 @@ type PropsAuxia = {
 interface ShowSignInGateAuxiaProps {
 	host: string;
 	queryParams: QueryParams;
-	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
+	setShowGate: (show: boolean) => void;
 	abTest: CurrentSignInGateABTest;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	contributionsServiceUrl: string;
@@ -413,6 +413,21 @@ const SignInGateSelectorAuxia = ({
 	);
 };
 
+const getHasScroll = (): boolean => {
+	if (typeof window === 'undefined' || typeof document === 'undefined') {
+		return false;
+	}
+
+	const scrollHeight = Math.max(
+		document.body.scrollHeight,
+		document.documentElement.scrollHeight,
+	);
+	const viewportHeight =
+		window.innerHeight || document.documentElement.clientHeight;
+
+	return scrollHeight > viewportHeight;
+};
+
 const ShowSignInGateAuxia = ({
 	host,
 	queryParams,
@@ -431,8 +446,10 @@ const ShowSignInGateAuxia = ({
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
-	const [signInGatePlaceholder, setSignInGatePlaceholder] =
-		useState<HTMLElement | null>(null);
+	const signInGatePlaceholder =
+		typeof document === 'undefined'
+			? null
+			: document.getElementById('sign-in-gate');
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -448,12 +465,10 @@ const ShowSignInGateAuxia = ({
 	const lastRecordedView = useRef<string>();
 
 	useEffect(() => {
-		const signInGate = document.getElementById('sign-in-gate');
-		if (signInGate) {
-			setSignInGatePlaceholder(signInGate);
-			setNode(signInGate);
+		if (signInGatePlaceholder) {
+			setNode(signInGatePlaceholder);
 		}
-	}, [setNode, setSignInGatePlaceholder]);
+	}, [setNode, signInGatePlaceholder]);
 
 	useEffect(() => {
 		// Non-article mandatory popups are shown on mount (see
@@ -503,7 +518,7 @@ const ShowSignInGateAuxia = ({
 						labels: [userTreatment.treatmentType],
 					},
 					action: 'VIEW',
-					abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
+					abTest,
 				},
 				renderingTarget,
 			);
@@ -529,6 +544,7 @@ const ShowSignInGateAuxia = ({
 		isGandalf,
 		renderingTarget,
 		treatmentId,
+		abTest,
 		userTreatment,
 		signInGateVersion,
 	]);
@@ -548,16 +564,7 @@ const ShowSignInGateAuxia = ({
 		logTreatmentInteractionCall,
 	};
 
-	const [hasScroll, setHasScroll] = useState(false);
-	useEffect(() => {
-		const scrollHeight = Math.max(
-			document.body.scrollHeight,
-			document.documentElement.scrollHeight,
-		);
-		const viewportHeight =
-			window.innerHeight || document.documentElement.clientHeight;
-		setHasScroll(scrollHeight > viewportHeight);
-	}, []);
+	const [hasScroll] = useState(getHasScroll);
 
 	const shouldShowV2Gate =
 		shouldShowImmediately || (hasBeenSeen ?? !hasScroll);
