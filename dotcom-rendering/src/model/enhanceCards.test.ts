@@ -5,13 +5,13 @@ import type {
 	FESupportingContent,
 } from '../frontend/feFront';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import type { EditorialTest, VariantMeta } from '../types/front';
+import type { FrontEditorialTest, VariantMeta } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import {
 	decideArticleMedia,
 	decideReplacementMedia,
 	getActiveMediaAtom,
-	getEditorialTestData,
+	getFrontEditorialTestData,
 	getMediaMetadata,
 } from './enhanceCards';
 
@@ -535,7 +535,7 @@ describe('Enhance Cards', () => {
 		});
 	});
 
-	describe('getEditorialTestData', () => {
+	describe('getFrontEditorialTestData', () => {
 		const cardWithNoEditorialTest = {
 			properties: {
 				isBreaking: false,
@@ -626,7 +626,7 @@ describe('Enhance Cards', () => {
 								},
 							} as VariantMeta,
 						],
-					} as EditorialTest,
+					} as FrontEditorialTest,
 				],
 			},
 		};
@@ -639,7 +639,7 @@ describe('Enhance Cards', () => {
 					{
 						...cardWithEditorialTest.properties.tests[0],
 						expiryDate: Date.now() - oneHourInMilliseconds,
-					} as EditorialTest,
+					} as FrontEditorialTest,
 				],
 			},
 		};
@@ -652,7 +652,7 @@ describe('Enhance Cards', () => {
 					{
 						...cardWithEditorialTest.properties.tests[0],
 						hasManuallyEndedOnThisTrail: true,
-					} as EditorialTest,
+					} as FrontEditorialTest,
 				],
 			},
 		};
@@ -669,7 +669,7 @@ describe('Enhance Cards', () => {
 
 		it('returns undefined if no editorial test exists on the card, page is not in allowed fronts list, and user is not in a test bucket', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithNoEditorialTest,
 					{},
 					true,
@@ -680,7 +680,7 @@ describe('Enhance Cards', () => {
 
 		it('returns undefined if editorial test exists and page is in allowed fronts list, but user is not in a test bucket', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithEditorialTest,
 					{},
 					true,
@@ -691,7 +691,7 @@ describe('Enhance Cards', () => {
 
 		it('returns undefined if user is in a test bucket and page is in allowed fronts list, but editorial test does not exist', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithNoEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -704,7 +704,7 @@ describe('Enhance Cards', () => {
 
 		it('returns undefined if editorial test exists and user is in a test bucket, but page is not in allowed fronts list', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -717,7 +717,7 @@ describe('Enhance Cards', () => {
 
 		it('returns undefined if editorial test exists, page is in allowed fronts list, user is in a variant bucket, but the feature switch is turned off ', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -730,7 +730,7 @@ describe('Enhance Cards', () => {
 
 		it('returns headline A & test uuid if editorial test exists, page is in allowed fronts list, and user is in bucket A', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -743,7 +743,7 @@ describe('Enhance Cards', () => {
 
 		it('returns headline B & test uuid if editorial test exists, page is in allowed fronts list, and user is in bucket B', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'b',
@@ -756,7 +756,7 @@ describe('Enhance Cards', () => {
 
 		it('returns undefined if the bucket name does not match a variant meta id', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'c',
@@ -769,7 +769,7 @@ describe('Enhance Cards', () => {
 
 		it('returns undefined if the variant headline is undefined', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithEditorialTestWithUndefinedVariantMeta,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -782,7 +782,7 @@ describe('Enhance Cards', () => {
 
 		it('returns undefined if an editorial test has expired', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithExpiredEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -795,7 +795,7 @@ describe('Enhance Cards', () => {
 
 		it('returns undefined if an editorial test has been manually ended', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithManuallyEndedEditorialTest,
 					{
 						'fronts-and-curation-editorial-test': 'a',
@@ -808,7 +808,7 @@ describe('Enhance Cards', () => {
 
 		it('returns the variant headline & test uuid if an editorial test is present on a sublink', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithSublinkWithEditorialTest
 						.supportingContent[0] as FESupportingContent,
 					{
@@ -822,7 +822,7 @@ describe('Enhance Cards', () => {
 
 		it('returns undefined for a sublink if an editorial test is expired on a sublink', () => {
 			expect(
-				getEditorialTestData(
+				getFrontEditorialTestData(
 					cardWithSublinkWithExpiredEditorialTest
 						.supportingContent[0] as FESupportingContent,
 					{
