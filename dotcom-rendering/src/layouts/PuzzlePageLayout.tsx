@@ -312,17 +312,30 @@ const stretchLines = css`
 `;
 
 const relatedRailStyles = css`
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
+	display: grid;
+	gap: 16px;
 	padding: 16px 0;
+	${from.leftCol} {
+		grid-template-columns: 160px minmax(0, 1fr);
+		gap: 20px;
+	}
 `;
 
 const relatedRailHeading = css`
 	margin: 0;
 	${headlineBold20};
+	line-height: 1.15;
 	${from.tablet} {
 		${headlineBold24};
+	}
+`;
+
+const relatedRailHeadingLink = css`
+	display: block;
+	color: ${themePalette('--article-section-link-text')};
+	text-decoration: none;
+	:hover {
+		text-decoration: underline;
 	}
 `;
 
@@ -332,6 +345,12 @@ const relatedRailHeading = css`
  * Puzzles Hub listing page uses for its own card rows, per explicit design
  * direction that this rail must look identical to the Hub - rather than a
  * second, independent styling of `PuzzleItem`.
+ *
+ * The heading itself ("More from" / "Puzzles & games") reuses
+ * `--article-section-link-text` - the same pink/lifestyle-pillar token this
+ * page's own `ArticleTitle` section link ("Logic puzzles" etc, see
+ * `puzzleFamilyTag`) already resolves to - rather than a second, hardcoded
+ * colour, so the two pink links on this page can never drift apart.
  */
 const RelatedPuzzlesRail = ({
 	items,
@@ -339,7 +358,12 @@ const RelatedPuzzlesRail = ({
 	items: NonNullable<FEPuzzlePageType['instance']['moreFromPuzzlesAndGames']>;
 }) => (
 	<div css={relatedRailStyles}>
-		<h2 css={relatedRailHeading}>More from Puzzles &amp; games</h2>
+		<h2 css={relatedRailHeading}>
+			More from{' '}
+			<a css={relatedRailHeadingLink} href={PUZZLES_SUBNAV_PARENT.url}>
+				Puzzles &amp; games
+			</a>
+		</h2>
 		<Rows rows={[items]} />
 	</div>
 );

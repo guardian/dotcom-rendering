@@ -139,7 +139,9 @@ describe('PuzzlePageLayout', () => {
 			});
 
 			expect(
-				screen.getByText('More from Puzzles & games'),
+				screen.getByRole('heading', {
+					name: 'More from Puzzles & games',
+				}),
 			).toBeInTheDocument();
 		});
 
@@ -156,7 +158,9 @@ describe('PuzzlePageLayout', () => {
 			});
 
 			expect(
-				screen.queryByText('More from Puzzles & games'),
+				screen.queryByRole('heading', {
+					name: 'More from Puzzles & games',
+				}),
 			).not.toBeInTheDocument();
 		});
 
@@ -164,7 +168,9 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('sudoku-easy');
 
 			expect(
-				screen.queryByText('More from Puzzles & games'),
+				screen.queryByRole('heading', {
+					name: 'More from Puzzles & games',
+				}),
 			).not.toBeInTheDocument();
 		});
 
@@ -179,7 +185,9 @@ describe('PuzzlePageLayout', () => {
 			});
 
 			expect(
-				screen.queryByText('More from Puzzles & games'),
+				screen.queryByRole('heading', {
+					name: 'More from Puzzles & games',
+				}),
 			).not.toBeInTheDocument();
 		});
 
@@ -192,7 +200,9 @@ describe('PuzzlePageLayout', () => {
 			});
 
 			expect(
-				screen.queryByText('More from Puzzles & games'),
+				screen.queryByRole('heading', {
+					name: 'More from Puzzles & games',
+				}),
 			).not.toBeInTheDocument();
 		});
 	});
