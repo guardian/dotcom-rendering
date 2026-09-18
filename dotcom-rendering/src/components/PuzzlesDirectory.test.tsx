@@ -19,7 +19,7 @@ const item = (overrides: Partial<PuzzleItem> = {}): PuzzleItem => ({
 	type: 'word-game',
 	set: 'all',
 	cardVariant: 'primary',
-	cadence: 'Daily',
+	cadence: 'Today',
 	...overrides,
 });
 
@@ -129,13 +129,13 @@ describe('PuzzlesDirectory', () => {
 		const image = container.querySelector('img');
 		expect(image).toHaveStyle({ width: '181px', height: '145px' });
 		expect(
-			screen.getByRole('link', { name: 'Daily puzzle Daily' }),
+			screen.getByRole('link', { name: 'Daily puzzle Today' }),
 		).toHaveStyle({ height: '145px' });
 		expect(image).toHaveAttribute('alt', 'Word wheel illustration');
 		expect(image).toHaveAttribute('aria-hidden', 'true');
 		expect(screen.queryByRole('img')).not.toBeInTheDocument();
 		expect(
-			screen.getByRole('link', { name: 'Daily puzzle Daily' }),
+			screen.getByRole('link', { name: 'Daily puzzle Today' }),
 		).toBeInTheDocument();
 	});
 
