@@ -30,11 +30,14 @@ stays at `/puzzles-and-games`. None of this is DCR's own routing, it's
 endpoint/contract at all; it's mentioned here only so example URLs
 elsewhere in this doc stay accurate.
 
-**Access control lives entirely on the `frontend` side, not here.** DCR's
-own `/PuzzlePage` endpoint is, and remains, ungated (see "Hitting it
-locally" below). `frontend` gates reader access to these routes via its
-existing `PuzzlesHubExperiment`/`puzzles-new-hub` AB test before it ever
-POSTs to DCR. DCR does not re-implement or duplicate that gating.
+**Access control is enforced on both sides.** `frontend` gates reader
+access to these routes via its existing `PuzzlesHubExperiment`/
+`puzzles-new-hub` AB test before it ever POSTs to DCR. DCR's own
+`/PuzzlePage` endpoint additionally checks the same `puzzles-new-hub`
+participation itself (via `isPuzzlesHubEnabled`, mirroring
+`/PuzzlesPage`'s hub gate) and returns `404` when it isn't enabled for the
+request, so the endpoint isn't left relying solely on `frontend` never
+calling it (see "Hitting it locally" below).
 
 ### The V0 puzzle set
 
@@ -117,12 +120,13 @@ make dev
 This starts webpack-dev-server on `http://localhost:3030`
 (`webpack/webpack.config.dev-server.js`).
 
-There is currently **no AB gate** on this route.
 `src/server/handler.puzzlePage.web.ts` validates the body
-(`validateAsPuzzlePageType`), looks up the `PuzzleConfig` for the request's
-`slug` (`404` if unknown), and renders unconditionally otherwise, with no
-`serverSideABTests`/participation check of any kind (see "Open questions"
-below for the AB-gate/kill-switch situation).
+(`validateAsPuzzlePageType`), checks the request's `puzzles-new-hub`
+participation via `isPuzzlesHubEnabled` (`404` if not enabled), looks up
+the `PuzzleConfig` for the request's `slug` (`404` if unknown), and only
+then renders. Fixtures generated below set `serverSideABTests` to
+`{ 'puzzles-new-hub': 'variant' }` so they pass this gate; `NODE_ENV=development`
+also bypasses it locally.
 
 Generate fixture JSON for all 6 slugs using the `tsx` devDependency (no
 extra install needed) and `fixtures/manual/puzzlePage.ts`'s
@@ -601,17 +605,15 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   value is `frontend`'s responsibility at the route level (per its own
   task); true calendar/business-logic validity (e.g. "did this puzzle
   actually exist on this date") is not validated anywhere in the stack yet.
-- **DCR's `/PuzzlePage` endpoint itself still has no route-level access
-  control** (unchanged from before). `frontend`'s existing
-  `PuzzlesHubExperiment`/`puzzles-new-hub` AB test gate decides whether a
-  reader ever reaches one of these puzzle-page URLs in the first place;
-  DCR's endpoint renders unconditionally for any request with a known
-  `slug`. **What has changed**: DCR now has a real, cumulative,
-  code-change-free kill-switch for individual _feature tiers_ within the
-  rendered page, see "Feature-tier rollout gating (v0/v1/v2)" below. This
-  addresses the previous "no kill-switch" limitation for feature-level
-  rollback; it does not add route-level gating to `/PuzzlePage` itself
-  (that remains `frontend`'s responsibility, unchanged).
+- **DCR's `/PuzzlePage` endpoint now has its own route-level access
+  control**, checking `puzzles-new-hub` participation via
+  `isPuzzlesHubEnabled` and returning `404` when it isn't enabled, in
+  addition to (not instead of) `frontend`'s existing
+  `PuzzlesHubExperiment`/`puzzles-new-hub` gate that decides whether a
+  reader ever reaches one of these puzzle-page URLs in the first place.
+  DCR also has a real, cumulative, code-change-free kill-switch for
+  individual _feature tiers_ within the rendered page, see "Feature-tier
+  rollout gating (v0/v1/v2)" below.
 - **The Puzzles Hub (`src/layouts/PuzzlesLayout.tsx` and friends) is a
   separate, unrelated feature** (a directory/listing page) and is not
   documented in this file.
@@ -660,26 +662,22 @@ The corresponding gate-check helpers live in DCR:
   above.
 
 **Current state**: all three tiers sit at `audienceSize: 0/100`, hidden
-from the public entirely, same as before this structure existed. Today,
-only one DCR-rendered feature actually checks a tier gate:
-`PuzzlePageLayout.tsx`'s "More from Puzzles & Games" rail, gated behind
-`isPuzzlesHubV1Enabled` (since that rail is v1-scoped, not v0). Every
-other v0-scoped feature currently in this codebase renders unconditionally
-at the DCR level. v0's "gating" today is really just `frontend`'s
-route-level `PuzzlesHubExperiment` check deciding whether a request
-reaches `/PuzzlePage` at all, not a DCR-side render-time check. When
-future v1/v2 work is implemented (calendar, progress indicators, sign-in
-message, on-the-ball/film-reveal, etc.), it should be gated behind
+from the public entirely. v0 is now enforced at both layers: `frontend`'s
+route-level `PuzzlesHubExperiment` check decides whether a request reaches
+`/PuzzlePage` at all, and DCR's `handlePuzzlePage` independently checks
+`isPuzzlesHubEnabled` before rendering, so the endpoint isn't left relying
+solely on `frontend` never calling it. On top of that v0 gate,
+`PuzzlePageLayout.tsx`'s "More from Puzzles & Games" rail is further gated
+behind `isPuzzlesHubV1Enabled` (since that rail is v1-scoped, not v0).
+When future v1/v2 work is implemented (calendar, progress indicators,
+sign-in message, on-the-ball/film-reveal, etc.), it should be gated behind
 `isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled` respectively, using the
 helpers above, the same way the related-content rail already is.
 
-**No `frontend` repo changes are needed for any of this.** `frontend`
-doesn't render Puzzle Page UI itself, so feature-tier gating naturally
-lives entirely on the DCR side. `frontend`'s existing route-level
-`PuzzlesHubExperiment` gate (already reusing `puzzles-new-hub`) is
-unaffected by `puzzles-new-hub-v1`/`puzzles-new-hub-v2` and doesn't need
-to check them. It only ever needed to decide whether a reader reaches
-`/PuzzlePage` at all, which is still governed by v0 alone.
+**No `frontend` repo changes are needed for any of this.** `frontend`'s
+existing route-level `PuzzlesHubExperiment` gate (already reusing
+`puzzles-new-hub`) is unaffected by `puzzles-new-hub-v1`/
+`puzzles-new-hub-v2` and doesn't need to check them.
 
 ### SEO risks to revisit before shipping calendar/archive features
 
