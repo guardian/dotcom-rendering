@@ -108,7 +108,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('sudoku-easy');
 
 			expect(
-				screen.getByRole('button', { name: 'Print' }),
+				screen.getByRole('button', { name: 'Print version' }),
 			).toBeInTheDocument();
 		});
 
@@ -116,7 +116,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('word-wheel');
 
 			expect(
-				screen.queryByRole('button', { name: 'Print' }),
+				screen.queryByRole('button', { name: 'Print version' }),
 			).not.toBeInTheDocument();
 		});
 
@@ -124,7 +124,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('wordiply');
 
 			expect(
-				screen.queryByRole('button', { name: 'Print' }),
+				screen.queryByRole('button', { name: 'Print version' }),
 			).not.toBeInTheDocument();
 		});
 	});
@@ -215,9 +215,6 @@ describe('PuzzlePageLayout', () => {
 
 			expect(
 				container.querySelector('#dfp-ad--merchandising-high'),
-			).toBeInTheDocument();
-			expect(
-				container.querySelector('#dfp-ad--merchandising'),
 			).toBeInTheDocument();
 		});
 

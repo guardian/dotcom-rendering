@@ -18,6 +18,7 @@ const buttonStyles = css`
 		}
 	}
 	:focus {
+		/* stylelint-disable-next-line declaration-no-important */
 		outline: 0 !important;
 	}
 `;
