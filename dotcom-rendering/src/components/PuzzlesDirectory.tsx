@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	headlineBold20,
 	headlineBold24,
@@ -25,7 +26,9 @@ type Props = {
 	renderAds: boolean;
 };
 
-const sectionStyles = css`
+const sectionStyles = (isFeatured: boolean) => css`
+	--puzzles-content-top: ${isFeatured ? 16 : 8}px;
+	--puzzles-content-bottom: 32px;
 	position: relative;
 	display: grid;
 	${puzzlesContainerStyles};
@@ -44,6 +47,14 @@ const sectionStyles = css`
 		grid-template-columns: 160px minmax(0, 1fr);
 	}
 
+	${from.desktop} {
+		--puzzles-content-bottom: 40px;
+	}
+
+	&:has(details) {
+		--puzzles-content-bottom: 24px;
+	}
+
 	${from.wide} {
 		grid-template-columns: 240px minmax(0, 1fr);
 	}
@@ -59,13 +70,30 @@ const titleStyles = css`
 		padding: ${space[2]}px 20px ${space[3]}px;
 		${headlineBold24};
 	}
+
+	${between.tablet.and.desktop} {
+		padding-top: 6px;
+	}
+
+	${from.leftCol} {
+		padding-top: var(--puzzles-content-top);
+	}
 `;
 
 const headingColumnStyles = css`
 	${from.leftCol} {
+		position: relative;
 		display: flex;
 		flex-direction: column;
-		border-right: 1px solid ${palette.neutral[86]};
+		::after {
+			position: absolute;
+			top: var(--puzzles-content-top);
+			right: 0;
+			bottom: var(--puzzles-content-bottom);
+			border-right: 1px solid ${palette.neutral[86]};
+			content: '';
+			pointer-events: none;
+		}
 	}
 `;
 
@@ -97,23 +125,15 @@ const crosswordLinksStyles = css`
 
 const contentStyles = css`
 	min-width: 0;
-	padding: 8px 10px 32px;
+	padding: var(--puzzles-content-top) 10px var(--puzzles-content-bottom);
 	${from.mobileMedium} {
 		padding-right: 20px;
 		padding-left: 20px;
-	}
-
-	${from.tablet} {
-		padding-top: 8px;
 	}
 	${from.desktop} {
 		/* Include the 1px side borders in the 20px content inset. */
 		padding-right: 19px;
 		padding-left: 19px;
-		padding-bottom: 40px;
-	}
-	&:has(details) {
-		padding-bottom: 24px;
 	}
 	@media (max-width: 739px) {
 		position: relative;
@@ -291,7 +311,7 @@ const cardTextStyles = (isFeatured: boolean) => css`
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
-	padding: ${space[2]}px;
+	padding: ${space[1]}px ${space[2]}px ${space[2]}px;
 `;
 
 const cardTitleStyles = css`
@@ -570,7 +590,7 @@ const DirectorySection = ({ container }: { container: PuzzleContainer }) => {
 	return (
 		<section
 			aria-labelledby={`${container.id}-title`}
-			css={sectionStyles}
+			css={sectionStyles(container.variant === 'featured')}
 			id={container.id}
 		>
 			<div css={headingColumnStyles}>
