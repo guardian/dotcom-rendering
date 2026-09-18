@@ -496,7 +496,7 @@ export const PuzzlePageLayout = ({
 				</Stuck>
 			)}
 
-			<div data-print-layout="show-background">
+			<div data-print-layout="masthead-print-mono">
 				<Masthead
 					nav={puzzleNAV}
 					editionId={editionId}
@@ -542,7 +542,7 @@ export const PuzzlePageLayout = ({
 					<div>
 						<PuzzleGrid>
 							<GridItem area="title" element="aside">
-								<div data-print-layout="show-background">
+								<div data-print-layout="masthead-print-mono">
 									<ArticleTitle
 										format={puzzlePageFormat}
 										tags={puzzleFamilyTag}

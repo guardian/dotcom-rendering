@@ -7,3 +7,18 @@
 	print-color-adjust: exact;
 	-webkit-print-color-adjust: exact;
 }
+
+/*
+ * The Masthead's logo/top-bar/nav text is white by design, meant to sit on
+ * the dark blue masthead background. Browsers don't print background
+ * colours by default (ink-saving "economy" print mode), so without this
+ * override the white text/logo would be invisible on the white page - this
+ * swaps those tokens to black for print instead of forcing the blue
+ * background to print (product direction: no ink-heavy background, just a
+ * legible black logo/nav on white).
+ */
+[data-print-layout='masthead-print-mono'] {
+	--masthead-top-bar-text: #000000;
+	--masthead-top-bar-link-text: #000000;
+	--masthead-nav-link-text: #000000;
+}
