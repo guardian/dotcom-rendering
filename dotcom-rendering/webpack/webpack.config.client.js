@@ -1,3 +1,4 @@
+const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const swcConfig = require('./.swcrc.json');
@@ -19,6 +20,24 @@ const swcLoader = (targets) => [
 		},
 	},
 ];
+
+/**
+ * Client bundles must parse on every browser we support, including Safari
+ * < 13.4 (iOS 13). Several dependencies publish modern syntax in their built
+ * output — @sentry/core ships `integration?.afterAllSetup`, screenfull ships
+ * `n?.[1]` — and any one of them landing in an initial chunk is a parse error
+ * that aborts all client JS before it runs, including the CMP.
+ *
+ * Maintaining an allowlist of "packages that happen to ship modern syntax" is
+ * unwinnable: it silently breaks whenever a dependency modernises. So for the
+ * client we transpile everything and let swc downlevel to our browser targets.
+ *
+ * The server build deliberately keeps `transpileExclude` below, since it runs
+ * on a current Node and gains nothing from transpiling node_modules.
+ *
+ * `undefined` means "exclude nothing".
+ */
+const clientTranspileExclude = undefined;
 
 /** @typedef {import('../src/lib/assets').Build} Build*/
 
@@ -70,10 +89,38 @@ module.exports = ({ build }) => ({
 		index: getEntryIndex(build),
 		debug: './src/client/debug/debug.ts',
 	},
-	optimization:
+	optimization: {
+		/**
+		 * Terser rewrites already-transpiled output back into modern syntax
+		 * when it assumes a modern target, e.g.
+		 *
+		 *   `x == null ? a : x`  ->  `x ?? a`
+		 *   `a && a.b()`         ->  `a?.b()`
+		 *
+		 * Neither preact nor lodash ship `??` in their published source — the
+		 * minifier introduces it after swc has correctly transpiled it away.
+		 * That is a *parse* error on Safari < 13.4 (e.g. iOS 13 on an iPhone
+		 * 11), and because it lands in initial chunks the whole bundle dies
+		 * before any of our code runs — including the CMP, which is compiled
+		 * into the entry chunk via `webpackMode: "eager"`.
+		 *
+		 * Pinning `ecma` keeps minified output within a grammar our supported
+		 * browsers can parse. `safari10` additionally guards against known
+		 * Safari 10 let/const and for-loop miscompilations.
+		 */
+		minimizer: [
+			new TerserPlugin({
+				terserOptions: {
+					ecma: 2019,
+					safari10: true,
+					compress: { ecma: 2019 },
+					format: { ecma: 2019, safari10: true },
+				},
+			}),
+		],
 		// We don't need chunk optimization for apps as we use the 'LimitChunkCountPlugin' to produce just 1 chunk
-		build === 'client.apps' || build === 'client.editionsCrossword'
-			? undefined
+		...(build === 'client.apps' || build === 'client.editionsCrossword'
+			? {}
 			: {
 					splitChunks: {
 						cacheGroups: {
@@ -99,7 +146,8 @@ module.exports = ({ build }) => ({
 							},
 						},
 					},
-				},
+				}),
+	},
 	output: {
 		filename: (data) => {
 			// We don't want to hash the debug script so it can be used in bookmarklets
@@ -161,7 +209,7 @@ module.exports = ({ build }) => ({
 		rules: [
 			{
 				test: /\.[jt]sx?|mjs$/,
-				exclude: module.exports.transpileExclude,
+				exclude: clientTranspileExclude,
 				use: getLoaders(build),
 			},
 			{
@@ -190,6 +238,19 @@ module.exports.transpileExclude = {
 		// Include the dynamic-import-polyfill
 		/dynamic-import-polyfill/,
 		/valibot/,
+		/**
+		 * @sentry/* publish optional chaining in their built output, e.g.
+		 * `integration?.afterAllSetup` in @sentry/core's ESM build. That is a
+		 * parse error on Safari < 13.4 (iOS 13), which would otherwise take out
+		 * the apps bundle entirely — and, on web, silently break the very
+		 * thing meant to report the failure.
+		 *
+		 * Terser's `ecma` ceiling does not help here: it prevents the minifier
+		 * *introducing* modern syntax, but does not down-level syntax already
+		 * present in the source. Only swc can do that, so these packages must
+		 * be transpiled rather than excluded.
+		 */
+		/@sentry\//,
 	],
 };
 
