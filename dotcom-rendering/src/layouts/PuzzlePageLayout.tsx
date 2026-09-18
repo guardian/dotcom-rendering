@@ -574,7 +574,6 @@ export const PuzzlePageLayout = ({
 									 */}
 									{puzzleConfig.printEnabled && (
 										<div
-											data-print-layout="hide"
 											css={css`
 												margin-top: ${remSpace[2]};
 												margin-bottom: ${remSpace[2]};
@@ -591,11 +590,8 @@ export const PuzzlePageLayout = ({
 								</div>
 							</GridItem>
 							<GridItem area="meta" element="aside">
-								<div css={maxWidth}>
-									<div
-										data-print-layout="hide"
-										css={stretchLines}
-									>
+								<div css={maxWidth} data-print-layout="hide">
+									<div css={stretchLines}>
 										<DecideLines
 											format={puzzlePageFormat}
 											color={themePalette(
