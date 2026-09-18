@@ -20,6 +20,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
+import { Logo } from '../components/Masthead/Titlepiece/Logo';
 import { PrintButton } from '../components/PrintButton.island';
 import { Rows } from '../components/PuzzleCard';
 import { PuzzleIframe } from '../components/PuzzleIframe.island';
@@ -300,6 +301,32 @@ const maxWidth = css`
 	}
 `;
 
+/**
+ * The real `Masthead` (sign-in state, edition switcher, pillar nav links)
+ * is hidden entirely for print (see `data-print-layout="hide"` below) -
+ * none of that is meaningful on a printed page, and its blue background
+ * would waste ink. This is a standalone, print-only stand-in: just the
+ * logo, in black, on white. `display: none` on screen; `print.css` flips
+ * it to visible only for `@media print`.
+ */
+const printOnlyLogoContainerStyles = css`
+	display: none;
+	padding: ${remSpace[2]} 0;
+
+	svg {
+		width: 180px;
+		fill: #000000;
+	}
+`;
+
+const printOnlyLogoStyles = css`
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
+	padding-top: ${remSpace[6]};
+`;
+
 const frameContainerStyles = css`
 	margin-top: 16px;
 	margin-bottom: 16px;
@@ -496,7 +523,7 @@ export const PuzzlePageLayout = ({
 				</Stuck>
 			)}
 
-			<div data-print-layout="masthead-print-mono">
+			<div data-print-layout="hide">
 				<Masthead
 					nav={puzzleNAV}
 					editionId={editionId}
@@ -522,6 +549,15 @@ export const PuzzlePageLayout = ({
 				/>
 			</div>
 
+			<div
+				data-print-layout="print-only"
+				css={printOnlyLogoContainerStyles}
+			>
+				<div css={printOnlyLogoStyles}>
+					<Logo />
+				</div>
+			</div>
+
 			<div data-print-layout="hide">
 				{renderAds && hasSurveyAd && (
 					<AdSlot
@@ -542,15 +578,13 @@ export const PuzzlePageLayout = ({
 					<div>
 						<PuzzleGrid>
 							<GridItem area="title" element="aside">
-								<div data-print-layout="masthead-print-mono">
-									<ArticleTitle
-										format={puzzlePageFormat}
-										tags={puzzleFamilyTag}
-										sectionLabel={labelText}
-										sectionUrl={`puzzles-and-games/${puzzleConfig.puzzleGroup}`}
-										guardianBaseURL={GUARDIAN_BASE_URL}
-									/>
-								</div>
+								<ArticleTitle
+									format={puzzlePageFormat}
+									tags={puzzleFamilyTag}
+									sectionLabel={labelText}
+									sectionUrl={`puzzles-and-games/${puzzleConfig.puzzleGroup}`}
+									guardianBaseURL={GUARDIAN_BASE_URL}
+								/>
 							</GridItem>
 							<GridItem area="headline">
 								<div css={maxWidth}>
