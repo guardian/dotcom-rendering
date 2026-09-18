@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineBold20,
+	headlineBold24,
 	remSpace,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
@@ -19,6 +21,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { PrintButton } from '../components/PrintButton.island';
+import { Rows } from '../components/PuzzleCard';
 import { PuzzleIframe } from '../components/PuzzleIframe.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -316,9 +319,20 @@ const relatedRailStyles = css`
 `;
 
 const relatedRailHeading = css`
-	font-weight: 700;
+	margin: 0;
+	${headlineBold20};
+	${from.tablet} {
+		${headlineBold24};
+	}
 `;
 
+/**
+ * Renders `moreFromPuzzlesAndGames` with the exact same card/grid
+ * implementation (`Rows`/`PuzzleCard`, `src/components/PuzzleCard.tsx`) the
+ * Puzzles Hub listing page uses for its own card rows, per explicit design
+ * direction that this rail must look identical to the Hub - rather than a
+ * second, independent styling of `PuzzleItem`.
+ */
 const RelatedPuzzlesRail = ({
 	items,
 }: {
@@ -326,17 +340,7 @@ const RelatedPuzzlesRail = ({
 }) => (
 	<div css={relatedRailStyles}>
 		<h2 css={relatedRailHeading}>More from Puzzles &amp; games</h2>
-		<ul>
-			{items.map((item) => (
-				<li key={item.id}>
-					{item.url ? (
-						<a href={item.url}>{item.title}</a>
-					) : (
-						item.title
-					)}
-				</li>
-			))}
-		</ul>
+		<Rows rows={[items]} />
 	</div>
 );
 
@@ -494,9 +498,14 @@ export const PuzzlePageLayout = ({
 				/>
 			</div>
 
-			{renderAds && hasSurveyAd && (
-				<AdSlot position="survey" display={puzzlePageFormat.display} />
-			)}
+			<div data-print-layout="hide">
+				{renderAds && hasSurveyAd && (
+					<AdSlot
+						position="survey"
+						display={puzzlePageFormat.display}
+					/>
+				)}
+			</div>
 
 			<main data-layout="PuzzlePageLayout">
 				<Section
@@ -565,6 +574,7 @@ export const PuzzlePageLayout = ({
 									 */}
 									{puzzleConfig.printEnabled && (
 										<div
+											data-print-layout="hide"
 											css={css`
 												margin-top: ${remSpace[2]};
 												margin-bottom: ${remSpace[2]};
