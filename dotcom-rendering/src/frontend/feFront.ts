@@ -9,7 +9,7 @@ import type {
 	StarRating,
 } from '../types/content';
 import type { FooterType } from '../types/footer';
-import type { EditorialTest } from '../types/front';
+import type { FrontEditorialTest } from '../types/front';
 import type { FENavType } from '../types/frontend';
 import type { FETagType } from '../types/tag';
 import type { Territory } from '../types/territory';
@@ -206,7 +206,7 @@ export type FEFrontCard = {
 		href?: string;
 		embedUri?: string;
 		newsletterData?: Newsletter;
-		tests?: EditorialTest[];
+		tests?: FrontEditorialTest[];
 	};
 	header: {
 		isVideo: boolean;
@@ -434,7 +434,7 @@ export type FESupportingContent = {
 	properties: {
 		href?: string;
 		webUrl?: string;
-		tests?: EditorialTest[];
+		tests?: FrontEditorialTest[];
 	};
 	header: {
 		kicker?: {

@@ -72,6 +72,10 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 		scaling: NonNullable<
 			GuLoadBalancedAppExperimentalProps['ecsProps']
 		>['scaling'];
+
+		targetGroupWeights: NonNullable<
+			GuLoadBalancedAppExperimentalProps['targetGroupWeights']
+		>;
 	};
 }
 
@@ -303,12 +307,7 @@ export class RenderingCDKStack extends CDKStack {
 							cpu: ecsProps.taskCpu,
 							scaling: ecsProps.scaling,
 						},
-
-						// Route all traffic to EC2
-						targetGroupWeights: {
-							ec2: 1,
-							ecs: 0,
-						},
+						targetGroupWeights: ecsProps.targetGroupWeights,
 					}),
 		});
 

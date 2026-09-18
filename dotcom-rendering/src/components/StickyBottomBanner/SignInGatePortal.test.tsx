@@ -1,6 +1,7 @@
 // Mock the auxia module before imports so the mock is applied when the module
 // under test is evaluated.
 import { buildAuxiaGateDisplayData } from '../../lib/auxia';
+import type { AuxiaAPIResponseDataUserTreatment } from '../SignInGate/types';
 import type { AuxiaGateDisplayData } from '../SignInGate/types';
 import type { CanShowSignInGateProps } from './SignInGatePortal';
 import { canShowSignInGatePortal } from './SignInGatePortal';
@@ -26,7 +27,32 @@ const canShowProps: CanShowSignInGateProps = {
 	contentType: 'Article',
 	sectionId: 'section',
 	tags: [],
+	countryCode: 'NZ',
 };
+
+const makeUserTreatment = (
+	treatmentType: AuxiaAPIResponseDataUserTreatment['treatmentType'],
+): AuxiaAPIResponseDataUserTreatment => ({
+	treatmentId: 't1',
+	treatmentTrackingId: 'tt1',
+	rank: '1',
+	contentLanguageCode: 'en',
+	treatmentContent: 'content',
+	treatmentType,
+	surface: 'surface',
+});
+
+const makeAuxiaReturn = (
+	userTreatment: AuxiaAPIResponseDataUserTreatment | undefined,
+	gandalfSignInGate?: boolean,
+): AuxiaGateDisplayData => ({
+	browserId: 'browser-1',
+	auxiaData: {
+		responseId: 'resp1',
+		userTreatment,
+		...(gandalfSignInGate !== undefined ? { gandalfSignInGate } : {}),
+	},
+});
 
 describe('SignInGatePortal', () => {
 	beforeEach(() => {
@@ -143,7 +169,10 @@ describe('SignInGatePortal', () => {
 
 			const result = await canShowSignInGatePortal(canShowProps);
 
-			expect(result).toEqual({ show: true, meta: auxiaReturn });
+			expect(result).toEqual({
+				show: true,
+				meta: auxiaReturn,
+			});
 		});
 
 		it('should return true when isSignedIn is undefined but other params allow gate', async () => {
@@ -176,7 +205,70 @@ describe('SignInGatePortal', () => {
 				isSignedIn: undefined,
 			});
 
-			expect(result).toEqual({ show: true, meta: auxiaReturn });
+			expect(result).toEqual({
+				show: true,
+				meta: auxiaReturn,
+			});
+		});
+	});
+
+	describe('Gandalf (Guardian-managed sign-in gate journey)', () => {
+		it('makes no request to SDC for surfaces that can never display the gate', async () => {
+			mockGetElementById.mockReturnValue(document.createElement('div'));
+			(
+				buildAuxiaGateDisplayData as jest.MockedFunction<
+					typeof buildAuxiaGateDisplayData
+				>
+			).mockResolvedValue(makeAuxiaReturn(undefined, true));
+
+			// A front in GB: not an article, not a Gandalf country. The gate
+			// decision is predetermined, so SDC is not contacted at all.
+			const result = await canShowSignInGatePortal({
+				...canShowProps,
+				contentType: 'Network Front',
+				countryCode: 'GB',
+			});
+
+			expect(result).toEqual({ show: false });
+			expect(buildAuxiaGateDisplayData).not.toHaveBeenCalled();
+		});
+
+		it('returns no gate but carries the marker metadata on a free Gandalf pageview', async () => {
+			mockGetElementById.mockReturnValue(document.createElement('div'));
+			(
+				buildAuxiaGateDisplayData as jest.MockedFunction<
+					typeof buildAuxiaGateDisplayData
+				>
+			).mockResolvedValue(makeAuxiaReturn(undefined, true));
+
+			const result = await canShowSignInGatePortal(canShowProps);
+
+			// No gate on a free pageview. The meta carries the country so the
+			// selector can build the Ophan variant.
+			expect(result).toEqual({
+				show: false,
+				meta: makeAuxiaReturn(undefined, true),
+			});
+		});
+
+		it('shows the gate when SDC returns the Gandalf popup treatment', async () => {
+			mockGetElementById.mockReturnValue(document.createElement('div'));
+			const auxiaReturn = makeAuxiaReturn(
+				makeUserTreatment('NONDISMISSIBLE_SIGN_IN_GATE_POPUP'),
+				true,
+			);
+			(
+				buildAuxiaGateDisplayData as jest.MockedFunction<
+					typeof buildAuxiaGateDisplayData
+				>
+			).mockResolvedValue(auxiaReturn);
+
+			const result = await canShowSignInGatePortal(canShowProps);
+
+			expect(result).toEqual({
+				show: true,
+				meta: auxiaReturn,
+			});
 		});
 	});
 });

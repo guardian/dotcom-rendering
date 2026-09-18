@@ -1,5 +1,5 @@
 import { getCookie, isUndefined, storage } from '@guardian/libs';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { constructQuery } from '../lib/querystring';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
@@ -34,6 +34,7 @@ type Props = {
 	pageId: string;
 	contributionsServiceUrl: string;
 	auxiaGateDisplayData?: AuxiaGateDisplayData | undefined;
+	contentType?: string;
 };
 
 // function to generate the params for use by the profile.theguardian.com url
@@ -81,6 +82,7 @@ export const SignInGateSelector = ({
 	pageId, // pageId is the path without starting slash
 	contributionsServiceUrl,
 	auxiaGateDisplayData,
+	contentType,
 }: Props) => {
 	if (!pageIdIsAllowedForGating(pageId)) {
 		return <></>;
@@ -99,6 +101,7 @@ export const SignInGateSelector = ({
 			isPaidContent={isPaidContent}
 			auxiaGateDisplayData={auxiaGateDisplayData}
 			signInGateVersion={signInGateVersion}
+			contentType={contentType}
 		/>
 	);
 };
@@ -134,6 +137,7 @@ type PropsAuxia = {
 	isPaidContent: boolean;
 	auxiaGateDisplayData?: AuxiaGateDisplayData;
 	signInGateVersion: AuxiaGateVersion;
+	contentType?: string;
 };
 
 // [1] If true, it indicates that we are using the component for the regular Auxia share of the Audience
@@ -142,13 +146,15 @@ type PropsAuxia = {
 interface ShowSignInGateAuxiaProps {
 	host: string;
 	queryParams: QueryParams;
-	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
+	setShowGate: (show: boolean) => void;
 	abTest: CurrentSignInGateABTest;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	contributionsServiceUrl: string;
 	browserId: string | undefined;
 	treatmentId: string;
 	renderingTarget: RenderingTarget;
+	isGandalf: boolean;
+	contentType?: string;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
 		actionName?: AuxiaInteractionActionName,
@@ -271,18 +277,34 @@ const SignInGateSelectorAuxia = ({
 	isPaidContent,
 	auxiaGateDisplayData,
 	signInGateVersion,
+	contentType,
 }: PropsAuxia) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
 
+	// Gandalf (comment group: gandalf) — the Guardian-managed sign-in gate
+	// journey (marketing name). SDC marks responses produced by the active
+	// Gandalf rules. For those responses we report to Ophan under a stable
+	// Gandalf identity instead of the Auxia experiment metadata, and we never
+	// call Auxia's LogTreatmentInteraction endpoint. This is reporting metadata
+	// only — there is no A/B test allocation behind it.
+	const isGandalf =
+		auxiaGateDisplayData?.auxiaData.gandalfSignInGate === true;
+
 	// We are using CurrentSignInGateABTest, with the details of the Auxia experiment,
 	// to allow Ophan tracking
-	const abTest: CurrentSignInGateABTest = {
-		name: 'AuxiaSignInGate', // value of dataLinkNames
-		variant: 'auxia-signin-gate', // variant id
-		id: 'AuxiaSignInGate', // test id
-	};
+	const abTest: CurrentSignInGateABTest = isGandalf
+		? {
+				name: 'GandalfSignInGate', // value of dataLinkNames
+				variant: 'gandalf-nz', // variant id
+				id: 'GandalfSignInGate', // test id
+			}
+		: {
+				name: 'AuxiaSignInGate', // value of dataLinkNames
+				variant: 'auxia-signin-gate', // variant id
+				id: 'AuxiaSignInGate', // test id
+			};
 
 	const { renderingTarget } = useConfig();
 
@@ -292,7 +314,7 @@ const SignInGateSelectorAuxia = ({
 		// this hook will fire when the sign in gate is dismissed
 		// which will happen when the showGate state is set to false
 		// this only happens within the dismissGate method
-		if (isGateDismissed) {
+		if (isGateDismissed === true) {
 			document.dispatchEvent(
 				new CustomEvent('article:sign-in-gate-dismissed'),
 			);
@@ -330,16 +352,20 @@ const SignInGateSelectorAuxia = ({
 
 	return (
 		<>
-			{!isGateDismissed &&
+			{isGateDismissed !== true &&
 				auxiaGateDisplayData?.auxiaData.userTreatment !== undefined && (
 					<ShowSignInGateAuxia
 						host={host}
 						queryParams={queryParams}
 						setShowGate={(show) => setIsGateDismissed(!show)}
-						abTest={buildAbTestTrackingAuxiaVariant(
-							auxiaGateDisplayData.auxiaData.userTreatment
-								.treatmentId,
-						)}
+						abTest={
+							isGandalf
+								? abTest
+								: buildAbTestTrackingAuxiaVariant(
+										auxiaGateDisplayData.auxiaData
+											.userTreatment.treatmentId,
+									)
+						}
 						userTreatment={
 							auxiaGateDisplayData.auxiaData.userTreatment
 						}
@@ -350,10 +376,17 @@ const SignInGateSelectorAuxia = ({
 								.treatmentId
 						}
 						renderingTarget={renderingTarget}
+						isGandalf={isGandalf}
+						contentType={contentType}
 						logTreatmentInteractionCall={async (
 							interactionType: AuxiaInteractionInteractionType,
 							actionName?: AuxiaInteractionActionName,
 						) => {
+							// Gandalf: never contact Auxia for
+							// Guardian-managed treatments.
+							if (isGandalf) {
+								return;
+							}
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
 								auxiaGateDisplayData.auxiaData.userTreatment!,
@@ -380,6 +413,21 @@ const SignInGateSelectorAuxia = ({
 	);
 };
 
+const getHasScroll = (): boolean => {
+	if (typeof window === 'undefined' || typeof document === 'undefined') {
+		return false;
+	}
+
+	const scrollHeight = Math.max(
+		document.body.scrollHeight,
+		document.documentElement.scrollHeight,
+	);
+	const viewportHeight =
+		window.innerHeight || document.documentElement.clientHeight;
+
+	return scrollHeight > viewportHeight;
+};
+
 const ShowSignInGateAuxia = ({
 	host,
 	queryParams,
@@ -390,49 +438,76 @@ const ShowSignInGateAuxia = ({
 	browserId,
 	treatmentId,
 	renderingTarget,
+	isGandalf,
+	contentType,
 	logTreatmentInteractionCall,
 	signInGateVersion,
 }: ShowSignInGateAuxiaProps) => {
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
-	const [signInGatePlaceholder, setSignInGatePlaceholder] =
-		useState<HTMLElement | null>(null);
+	const signInGatePlaceholder =
+		typeof document === 'undefined'
+			? null
+			: document.getElementById('sign-in-gate');
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 		threshold: 0,
 	});
 
-	useEffect(() => {
-		const signInGate = document.getElementById('sign-in-gate');
-		if (signInGate) {
-			setSignInGatePlaceholder(signInGate);
-			setNode(signInGate);
-		}
-	}, [setNode, setSignInGatePlaceholder]);
+	// Non-article mandatory popups use the portal as a modal and should appear
+	// immediately. Articles retain the existing visibility-based behaviour so
+	// the gate waits until the reader reaches the article gate position.
+	const isMandatoryPopup =
+		userTreatment.treatmentType === 'NONDISMISSIBLE_SIGN_IN_GATE_POPUP';
+	const shouldShowImmediately = isMandatoryPopup && contentType !== 'Article';
+	const lastRecordedView = useRef<string>();
 
 	useEffect(() => {
-		if (hasBeenSeen) {
+		if (signInGatePlaceholder) {
+			setNode(signInGatePlaceholder);
+		}
+	}, [setNode, signInGatePlaceholder]);
+
+	useEffect(() => {
+		// Non-article mandatory popups are shown on mount (see
+		// shouldShowV2Gate), so their view is recorded immediately. Articles
+		// wait for the gate position to become visible.
+		if (hasBeenSeen === true || shouldShowImmediately) {
+			const viewIdentity = JSON.stringify([
+				treatmentId,
+				userTreatment.treatmentTrackingId,
+			]);
+			// Visibility changes and equivalent treatment objects must not
+			// record the same display again. A new treatment or mount can.
+			if (lastRecordedView.current === viewIdentity) {
+				return;
+			}
+			lastRecordedView.current = viewIdentity;
+
 			// Tell Auxia
-			void auxiaLogTreatmentInteraction(
-				contributionsServiceUrl,
-				userTreatment,
-				'VIEWED',
-				'',
-				browserId,
-			).catch((error) => {
-				const errorReport = new Error(
-					`Failed to log treatment interaction`,
-					{
-						cause: error,
-					},
-				);
-				window.guardian.modules.sentry.reportError(
-					errorReport,
-					'sign-in-gate',
-				);
-			});
+			// Gandalf: never contact Auxia for Guardian-managed treatments.
+			if (!isGandalf) {
+				void auxiaLogTreatmentInteraction(
+					contributionsServiceUrl,
+					userTreatment,
+					'VIEWED',
+					'',
+					browserId,
+				).catch((error) => {
+					const errorReport = new Error(
+						`Failed to log treatment interaction`,
+						{
+							cause: error,
+						},
+					);
+					window.guardian.modules.sentry.reportError(
+						errorReport,
+						'sign-in-gate',
+					);
+				});
+			}
 
 			// Tell Ophan
 			void submitComponentEventTracking(
@@ -443,7 +518,7 @@ const ShowSignInGateAuxia = ({
 						labels: [userTreatment.treatmentType],
 					},
 					action: 'VIEW',
-					abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
+					abTest,
 				},
 				renderingTarget,
 			);
@@ -463,10 +538,13 @@ const ShowSignInGateAuxia = ({
 		}
 	}, [
 		hasBeenSeen,
+		shouldShowImmediately,
 		browserId,
 		contributionsServiceUrl,
+		isGandalf,
 		renderingTarget,
 		treatmentId,
+		abTest,
 		userTreatment,
 		signInGateVersion,
 	]);
@@ -486,18 +564,10 @@ const ShowSignInGateAuxia = ({
 		logTreatmentInteractionCall,
 	};
 
-	const [hasScroll, setHasScroll] = useState(false);
-	useEffect(() => {
-		const scrollHeight = Math.max(
-			document.body.scrollHeight,
-			document.documentElement.scrollHeight,
-		);
-		const viewportHeight =
-			window.innerHeight || document.documentElement.clientHeight;
-		setHasScroll(scrollHeight > viewportHeight);
-	}, []);
+	const [hasScroll] = useState(getHasScroll);
 
-	const shouldShowV2Gate = hasBeenSeen ?? !hasScroll;
+	const shouldShowV2Gate =
+		shouldShowImmediately || (hasBeenSeen ?? !hasScroll);
 
 	return (
 		<>

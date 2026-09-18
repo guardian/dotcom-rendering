@@ -212,6 +212,7 @@ const buildSignInGateConfig = (
 				pageId={canShowProps.pageId}
 				contributionsServiceUrl={canShowProps.contributionsServiceUrl}
 				auxiaGateDisplayData={meta}
+				contentType={canShowProps.contentType}
 			/>
 		),
 	},
@@ -380,6 +381,7 @@ export const StickyBottomBanner = ({
 				pageId,
 				contributionsServiceUrl,
 				editionId,
+				countryCode,
 			},
 			host,
 		);
