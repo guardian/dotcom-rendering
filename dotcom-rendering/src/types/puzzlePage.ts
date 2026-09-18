@@ -52,4 +52,29 @@ export interface FEPuzzlePageType {
 	canonicalUrl: string;
 	editionId: EditionId;
 	instance: PuzzlePageInstance;
+	/**
+	 * Whether the requesting reader has paid for an ad-free subscription,
+	 * mirroring the same top-level field every other DCR page contract
+	 * carries (`ArticleDeprecated`/`Front`/`TagPage`/`SportDataPage`/
+	 * `FEPuzzlesPageType`, the sibling Puzzles Hub type - see
+	 * `PuzzlesLayout.tsx`'s `!puzzlesPage.isAdFreeUser` and
+	 * `src/lib/canRenderAds.ts`). Puzzle Page's contract did not carry this
+	 * field until now, a real gap: ads were rendered unconditionally,
+	 * risking showing them to a reader who has actually paid not to see
+	 * them. `PuzzlePageLayout.tsx` now gates every ad slot on
+	 * `canRenderAds(puzzlePage)` (reusing the shared, generic helper) the
+	 * same way every other ad-supported page type already does.
+	 *
+	 * **Optional**, not required: unlike `FEPuzzlesPageType` (a page type
+	 * `frontend` was already sending this field for), `frontend`'s existing
+	 * `/PuzzlePage` requests do not send it yet - `frontend` needs its own,
+	 * coordinated follow-up change to start doing so (see
+	 * `docs/puzzle-page.md`'s note on cross-repo contract changes). Making
+	 * it required here would have broken every real request in the
+	 * meantime with a `500`/validation failure. Treated as `false`
+	 * (ads-eligible) when absent via `puzzlePage.isAdFreeUser ?? false` in
+	 * `PuzzlePageLayout.tsx`, matching this contract's pre-existing
+	 * behaviour (ads always rendered) until `frontend` is updated.
+	 */
+	isAdFreeUser?: boolean;
 }
