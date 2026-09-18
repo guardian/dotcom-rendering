@@ -110,6 +110,36 @@ module.exports = ({ build }) => ({
 		},
 		chunkFilename: generateName(build),
 		publicPath: '',
+		/**
+		 * Constrains the syntax webpack is allowed to emit.
+		 *
+		 * Two things read this:
+		 *
+		 * 1. Webpack's own generated runtime (chunk loading, module wrappers),
+		 *    which is NOT processed by swc-loader and therefore ignores our
+		 *    browser targets entirely.
+		 * 2. Terse OrPlugin, which otherwise "optimises" transpiled output back
+		 *    into modern syntax, e.g. rewriting `x == null ? a : x` to
+		 *    `x ?? a` and `a && a.b()` to `a?.b()`.
+		 *
+		 * Both produce optional chaining / nullish coalescing, which is a
+		 * *parse* error on Safari < 13.4 (e.g. iOS 13 on an iPhone 11). Because
+		 * these land in initial chunks, the whole bundle fails before any of our
+		 * code runs — including the CMP, which is compiled into the entry chunk
+		 * via `webpackMode: "eager"`.
+		 *
+		 * @see https://webpack.js.org/configuration/output/#outputenvironment
+		 */
+		environment: {
+			arrowFunction: true,
+			const: true,
+			destructuring: true,
+			dynamicImport: true,
+			forOf: true,
+			module: false,
+			optionalChaining: false,
+			templateLiteral: true,
+		},
 	},
 	plugins: [
 		new WebpackManifestPlugin({
