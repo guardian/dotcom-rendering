@@ -2,3 +2,8 @@
 	display: none !important;
 	color: #000000;
 }
+
+[data-print-layout='show-background'] {
+	print-color-adjust: exact;
+	-webkit-print-color-adjust: exact;
+}
