@@ -474,53 +474,51 @@ export const PuzzlePageLayout = ({
 
 	return (
 		<>
-			<div data-print-layout="hide">
-				{renderAds && (
-					<Stuck>
-						<div data-print-layout="hide">
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								shouldCenter={false}
-							>
-								<HeaderAdSlot
-									includeMobile={shouldShowMobileAboveNavSlot(
-										config.serverSideABTests[
-											'commercial-mobile-above-nav-test'
-										],
-									)}
-								/>
-							</Section>
-						</div>
-					</Stuck>
-				)}
+			{renderAds && (
+				<Stuck>
+					<div data-print-layout="hide">
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot
+								includeMobile={shouldShowMobileAboveNavSlot(
+									config.serverSideABTests[
+										'commercial-mobile-above-nav-test'
+									],
+								)}
+							/>
+						</Section>
+					</div>
+				</Stuck>
+			)}
 
-				<Masthead
-					nav={puzzleNAV}
-					editionId={editionId}
-					idUrl={config.idUrl}
-					mmaUrl={config.mmaUrl}
-					discussionApiUrl={config.discussionApiUrl}
-					idApiUrl={config.idApiUrl}
-					contributionsServiceUrl={contributionsServiceUrl}
-					// `puzzlePageFormat.theme` is always `Pillar.News`
-					// (never `ArticleSpecial.Labs`), so `CrosswordLayout`'s
-					// derived `format.theme !== ArticleSpecial.Labs` check
-					// always evaluates `true` here - hardcoded directly
-					// rather than keeping a comparison TypeScript can prove
-					// is always true.
-					showSubNav={true}
-					showSlimNav={false}
-					hasPageSkin={false}
-					hasPageSkinContentSelfConstrain={false}
-					pageId={puzzlePage.id}
-					tagIds={[]}
-					sectionId={config.section}
-					contentType="Game"
-				/>
-			</div>
+			<Masthead
+				nav={puzzleNAV}
+				editionId={editionId}
+				idUrl={config.idUrl}
+				mmaUrl={config.mmaUrl}
+				discussionApiUrl={config.discussionApiUrl}
+				idApiUrl={config.idApiUrl}
+				contributionsServiceUrl={contributionsServiceUrl}
+				// `puzzlePageFormat.theme` is always `Pillar.News`
+				// (never `ArticleSpecial.Labs`), so `CrosswordLayout`'s
+				// derived `format.theme !== ArticleSpecial.Labs` check
+				// always evaluates `true` here - hardcoded directly
+				// rather than keeping a comparison TypeScript can prove
+				// is always true.
+				showSubNav={true}
+				showSlimNav={false}
+				hasPageSkin={false}
+				hasPageSkinContentSelfConstrain={false}
+				pageId={puzzlePage.id}
+				tagIds={[]}
+				sectionId={config.section}
+				contentType="Game"
+			/>
 
 			<div data-print-layout="hide">
 				{renderAds && hasSurveyAd && (
@@ -542,15 +540,13 @@ export const PuzzlePageLayout = ({
 					<div>
 						<PuzzleGrid>
 							<GridItem area="title" element="aside">
-								<div data-print-layout="hide">
-									<ArticleTitle
-										format={puzzlePageFormat}
-										tags={puzzleFamilyTag}
-										sectionLabel={labelText}
-										sectionUrl={`puzzles-and-games/${puzzleConfig.puzzleGroup}`}
-										guardianBaseURL={GUARDIAN_BASE_URL}
-									/>
-								</div>
+								<ArticleTitle
+									format={puzzlePageFormat}
+									tags={puzzleFamilyTag}
+									sectionLabel={labelText}
+									sectionUrl={`puzzles-and-games/${puzzleConfig.puzzleGroup}`}
+									guardianBaseURL={GUARDIAN_BASE_URL}
+								/>
 							</GridItem>
 							<GridItem area="headline">
 								<div css={maxWidth}>
@@ -614,7 +610,7 @@ export const PuzzlePageLayout = ({
 								</div>
 							</GridItem>
 							<GridItem area="meta" element="aside">
-								<div css={maxWidth} data-print-layout="hide">
+								<div css={maxWidth}>
 									<div css={stretchLines}>
 										<DecideLines
 											format={puzzlePageFormat}
@@ -635,6 +631,7 @@ export const PuzzlePageLayout = ({
 											config.discussionApiUrl
 										}
 										shortUrlId={config.shortUrlId}
+										hidePreferredSourceOnPrint={true}
 									/>
 								</div>
 							</GridItem>
@@ -713,15 +710,19 @@ export const PuzzlePageLayout = ({
 				</Section>
 
 				{showRelated && (
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						backgroundColour={themePalette('--article-background')}
-					>
-						<RelatedPuzzlesRail
-							items={instance.moreFromPuzzlesAndGames ?? []}
-						/>
-					</Section>
+					<div data-print-layout="hide">
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
+						>
+							<RelatedPuzzlesRail
+								items={instance.moreFromPuzzlesAndGames ?? []}
+							/>
+						</Section>
+					</div>
 				)}
 
 				{renderAds && (
