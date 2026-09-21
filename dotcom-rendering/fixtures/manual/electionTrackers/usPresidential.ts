@@ -1,4 +1,6 @@
-export const usPresidential = {
+import type { ElectionComponentsJson } from '../../../src/components/ElectionTrackers/electionComponent';
+
+export const usPresidential: ElectionComponentsJson = {
 	components: [
 		{
 			kind: 'progressNumber',

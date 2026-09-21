@@ -1,4 +1,6 @@
-export const ukGeneralExitPoll = {
+import type { ElectionComponentsJson } from '../../../src/components/ElectionTrackers/electionComponent';
+
+export const ukGeneralExitPoll: ElectionComponentsJson = {
 	components: [
 		{
 			kind: 'versus',
