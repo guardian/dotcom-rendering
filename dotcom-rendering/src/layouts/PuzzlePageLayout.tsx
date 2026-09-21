@@ -315,7 +315,7 @@ const printOnlyLogoContainerStyles = css`
 
 	svg {
 		width: 180px;
-		fill: #000000;
+		fill: ${sourcePalette.neutral[0]};
 	}
 `;
 
