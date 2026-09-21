@@ -1,4 +1,3 @@
-import { description } from "valibot";
 import type { ABTest } from "./types.ts";
 
 /**
