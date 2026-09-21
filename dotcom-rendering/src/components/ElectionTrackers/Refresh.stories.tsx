@@ -21,13 +21,14 @@ const meta = preview.meta({
 export const Countdown = meta.story({
 	args: {
 		remaining: 20,
+		error: false,
 	},
 	render: function Render(props) {
 		const [remaining, reset] = useCountdown(props.remaining);
 
 		return (
 			<>
-				<Refresh remaining={remaining} />
+				<Refresh {...props} remaining={remaining} />
 				<button onClick={reset}>Reset</button>
 			</>
 		);
@@ -42,11 +43,18 @@ export const Countdown = meta.story({
 export const Remaining = meta.story({
 	args: {
 		remaining: 5,
+		error: false,
 	},
 });
 
-export const Refreshing = meta.story({
+export const Refreshing = Remaining.extend({
 	args: {
 		remaining: 0,
+	},
+});
+
+export const ErrorMessage = Remaining.extend({
+	args: {
+		error: true,
 	},
 });
