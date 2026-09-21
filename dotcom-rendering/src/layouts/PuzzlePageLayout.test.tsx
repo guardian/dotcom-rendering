@@ -48,21 +48,21 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
-	it('renders the page title', () => {
+	it('renders the design-provided headline text, not raw instance.title', () => {
 		renderPuzzlePageLayout('sudoku-easy');
 
 		expect(
 			screen.getByRole('heading', {
 				level: 1,
-				name: 'sudoku-easy puzzle',
+				name: 'Easy sudoku',
 			}),
 		).toBeInTheDocument();
 	});
 
-	it('renders a human-readable puzzleDate next to the title when present', () => {
+	it('renders a dateline-style puzzleDate next to the title when present', () => {
 		renderPuzzlePageLayout('sudoku-easy');
 
-		expect(screen.getByText('11 September 2026')).toBeInTheDocument();
+		expect(screen.getByText('Fri 11 Sep 2026')).toBeInTheDocument();
 	});
 
 	it('does not render a date when puzzleDate is absent', () => {
@@ -73,16 +73,34 @@ describe('PuzzlePageLayout', () => {
 			},
 		});
 
-		expect(screen.queryByText('11 September 2026')).not.toBeInTheDocument();
+		expect(screen.queryByText('Fri 11 Sep 2026')).not.toBeInTheDocument();
 	});
 
-	it('renders the puzzleGroup label as plain, non-linked text', () => {
-		renderPuzzlePageLayout('sudoku-easy');
+	it('renders the puzzle family name as the series kicker, and the puzzleGroup label as the section link below it', () => {
+		const { container } = renderPuzzlePageLayout('sudoku-easy');
 
 		expect(
-			screen.queryByRole('link', { name: 'Logic puzzles' }),
-		).not.toBeInTheDocument();
-		expect(screen.getByText('Logic puzzles')).toBeInTheDocument();
+			container.querySelector('a[data-component="series"]'),
+		).toHaveTextContent('Sudoku');
+		expect(
+			container.querySelector('a[data-component="section"]'),
+		).toHaveTextContent('Logic puzzles');
+	});
+
+	it('renders the hardcoded Puzzles & Games sub-nav row', () => {
+		renderPuzzlePageLayout('sudoku-easy');
+
+		for (const name of [
+			'Puzzles & games',
+			'Crosswords',
+			'Word games',
+			'Logic puzzles',
+			'Trivia & quizzes',
+		]) {
+			expect(
+				screen.getAllByRole('link', { name }).length,
+			).toBeGreaterThan(0);
+		}
 	});
 
 	describe('print button (Sudoku-only, per PR #16700 review)', () => {
@@ -90,7 +108,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('sudoku-easy');
 
 			expect(
-				screen.getByRole('button', { name: 'Print' }),
+				screen.getByRole('button', { name: 'Print version' }),
 			).toBeInTheDocument();
 		});
 
@@ -98,7 +116,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('word-wheel');
 
 			expect(
-				screen.queryByRole('button', { name: 'Print' }),
+				screen.queryByRole('button', { name: 'Print version' }),
 			).not.toBeInTheDocument();
 		});
 
@@ -106,7 +124,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('wordiply');
 
 			expect(
-				screen.queryByRole('button', { name: 'Print' }),
+				screen.queryByRole('button', { name: 'Print version' }),
 			).not.toBeInTheDocument();
 		});
 	});
@@ -121,7 +139,9 @@ describe('PuzzlePageLayout', () => {
 			});
 
 			expect(
-				screen.getByText('More from Puzzles & games'),
+				screen.getByRole('heading', {
+					name: 'More from Puzzles & games',
+				}),
 			).toBeInTheDocument();
 		});
 
@@ -138,7 +158,9 @@ describe('PuzzlePageLayout', () => {
 			});
 
 			expect(
-				screen.queryByText('More from Puzzles & games'),
+				screen.queryByRole('heading', {
+					name: 'More from Puzzles & games',
+				}),
 			).not.toBeInTheDocument();
 		});
 
@@ -146,7 +168,9 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('sudoku-easy');
 
 			expect(
-				screen.queryByText('More from Puzzles & games'),
+				screen.queryByRole('heading', {
+					name: 'More from Puzzles & games',
+				}),
 			).not.toBeInTheDocument();
 		});
 
@@ -161,7 +185,9 @@ describe('PuzzlePageLayout', () => {
 			});
 
 			expect(
-				screen.queryByText('More from Puzzles & games'),
+				screen.queryByRole('heading', {
+					name: 'More from Puzzles & games',
+				}),
 			).not.toBeInTheDocument();
 		});
 
@@ -174,7 +200,37 @@ describe('PuzzlePageLayout', () => {
 			});
 
 			expect(
-				screen.queryByText('More from Puzzles & games'),
+				screen.queryByRole('heading', {
+					name: 'More from Puzzles & games',
+				}),
+			).not.toBeInTheDocument();
+		});
+	});
+
+	describe('ads (isAdFreeUser, canRenderAds)', () => {
+		it('renders ad slots for a non-ad-free reader', () => {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
+				isAdFreeUser: false,
+			});
+
+			expect(
+				container.querySelector('#dfp-ad--merchandising-high'),
+			).toBeInTheDocument();
+		});
+
+		it('does not render any ad slots for an ad-free reader', () => {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
+				isAdFreeUser: true,
+			});
+
+			expect(
+				container.querySelector('#dfp-ad--merchandising-high'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--merchandising'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--right'),
 			).not.toBeInTheDocument();
 		});
 	});

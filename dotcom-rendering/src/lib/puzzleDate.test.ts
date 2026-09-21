@@ -1,12 +1,16 @@
 import { formatPuzzleDate, formatPuzzleDateShort } from './puzzleDate';
 
 describe('formatPuzzleDate', () => {
-	it('formats a YYYY-MM-DD string as a human-readable date', () => {
-		expect(formatPuzzleDate('2026-09-15')).toBe('15 September 2026');
+	it('formats a YYYY-MM-DD string as a dateline-style date', () => {
+		expect(formatPuzzleDate('2026-09-16')).toBe('Wed 16 Sep 2026');
 	});
 
 	it('formats single-digit days/months correctly', () => {
-		expect(formatPuzzleDate('2026-01-05')).toBe('5 January 2026');
+		expect(formatPuzzleDate('2026-01-05')).toBe('Mon 5 Jan 2026');
+	});
+
+	it('uses a three-letter month abbreviation for September', () => {
+		expect(formatPuzzleDate('2026-09-01')).toBe('Tue 1 Sep 2026');
 	});
 
 	it('returns null when puzzleDate is undefined', () => {
