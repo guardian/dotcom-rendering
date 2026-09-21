@@ -10,6 +10,7 @@ import {
 	textSansBold17,
 	until,
 } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import type { SignedIn } from '../lib/identity';
@@ -36,6 +37,7 @@ interface MyAccountProps {
 	discussionApiUrl: string;
 	idApiUrl: string;
 	authStatus: AuthStatusOrPending;
+	showSignInTextOnMobile: boolean;
 }
 
 // when SignedIn, authStatus can only be one of the two SignedIn states
@@ -143,7 +145,13 @@ export const buildIdentityLinks = (
 	}));
 };
 
-const SignIn = ({ idUrl }: { idUrl: string }) => (
+const SignIn = ({
+	idUrl,
+	showSignInTextOnMobile,
+}: {
+	idUrl: string;
+	showSignInTextOnMobile: boolean;
+}) => (
 	<a
 		css={myAccountLinkStyles}
 		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
@@ -151,7 +159,22 @@ const SignIn = ({ idUrl }: { idUrl: string }) => (
 		)}`}
 		data-link-name={nestedOphanComponents('header', 'topbar', 'signin')}
 	>
-		<ProfileIcon /> Sign in
+		{showSignInTextOnMobile && (
+			<>
+				<ProfileIcon /> Sign in{' '}
+			</>
+		)}
+		{!showSignInTextOnMobile && (
+			<>
+				<Hide until="tablet">
+					<ProfileIcon /> Sign in
+				</Hide>
+
+				<Hide from="tablet">
+					<ProfileIcon />
+				</Hide>
+			</>
+		)}
 	</a>
 );
 
@@ -190,6 +213,7 @@ interface SignedInWithNotificationsProps {
 	idUrl: string;
 	notifications: Notification[];
 	authStatus: SignedIn;
+	showSignInTextOnMobile: boolean;
 }
 
 const SignedInWithNotifications = ({
@@ -197,11 +221,17 @@ const SignedInWithNotifications = ({
 	idUrl,
 	notifications,
 	authStatus,
+	showSignInTextOnMobile,
 }: SignedInWithNotificationsProps) => {
 	const userId = authStatus.idToken.claims.legacy_identity_id;
 
 	if (!userId) {
-		return <SignIn idUrl={idUrl} />;
+		return (
+			<SignIn
+				idUrl={idUrl}
+				showSignInTextOnMobile={showSignInTextOnMobile}
+			/>
+		);
 	}
 
 	const identityLinks = buildIdentityLinks(mmaUrl, idUrl, userId);
@@ -215,14 +245,10 @@ const SignedInWithNotifications = ({
 		<div css={myAccountLinkStyles}>
 			<ProfileIcon />
 			<Dropdown
-				label="My account"
+				label=""
 				links={identityLinksWithNotifications}
 				id="topbar-my-account"
-				dataLinkName={nestedOphanComponents(
-					'header',
-					'topbar',
-					'my account',
-				)}
+				dataLinkName={nestedOphanComponents('header', 'topbar', '')}
 				cssOverrides={dropDownOverrides}
 			/>
 		</div>
@@ -265,6 +291,7 @@ export const TopBarMyAccount = ({
 	discussionApiUrl,
 	idApiUrl,
 	authStatus,
+	showSignInTextOnMobile,
 }: MyAccountProps) => {
 	const { renderingTarget } = useConfig();
 
@@ -278,9 +305,13 @@ export const TopBarMyAccount = ({
 					idApiUrl={idApiUrl}
 					authStatus={authStatus}
 					renderingTarget={renderingTarget}
+					showSignInTextOnMobile={showSignInTextOnMobile}
 				/>
 			) : (
-				<SignIn idUrl={idUrl} />
+				<SignIn
+					idUrl={idUrl}
+					showSignInTextOnMobile={showSignInTextOnMobile}
+				/>
 			)}
 		</>
 	);

@@ -146,6 +146,49 @@ export const SignedInText = () => {
 					accessToken: mockAccessToken as AccessToken<never>,
 					idToken: mockIdToken,
 				}}
+				showSignInTextOnMobile={true}
+			/>
+		</div>
+	);
+};
+
+export const SignedOutText = () => {
+	return (
+		<div
+			style={{
+				backgroundColor: themePalette('--masthead-top-bar-background'),
+			}}
+		>
+			<TopBarMyAccount
+				mmaUrl={''}
+				idUrl={''}
+				discussionApiUrl={''}
+				idApiUrl={''}
+				authStatus={{
+					kind: 'SignedOut',
+				}}
+				showSignInTextOnMobile={true}
+			/>
+		</div>
+	);
+};
+
+export const SignedOutNoText = () => {
+	return (
+		<div
+			style={{
+				backgroundColor: themePalette('--masthead-top-bar-background'),
+			}}
+		>
+			<TopBarMyAccount
+				mmaUrl={''}
+				idUrl={''}
+				discussionApiUrl={''}
+				idApiUrl={''}
+				authStatus={{
+					kind: 'SignedOut',
+				}}
+				showSignInTextOnMobile={false}
 			/>
 		</div>
 	);
