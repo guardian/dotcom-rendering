@@ -3947,13 +3947,13 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
             ],
           },
         },
-        "MaxSize": "90",
+        "MaxSize": "30",
         "MetricsCollection": [
           {
             "Granularity": "1Minute",
           },
         ],
-        "MinSize": "9",
+        "MinSize": "3",
         "Tags": [
           {
             "Key": "App",

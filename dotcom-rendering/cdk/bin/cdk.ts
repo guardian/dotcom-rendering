@@ -144,8 +144,8 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 	stage: 'PROD',
 	domainName: 'tag-page-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 9,
-		maximumInstances: 90,
+		minimumInstances: 3,
+		maximumInstances: 30,
 		policies: {
 			step: {
 				cpu: cpuScalingSteps,
