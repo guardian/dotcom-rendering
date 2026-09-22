@@ -44,6 +44,6 @@ jobs:
         with:
           roleArn: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
           branchName: ${{ needs.facts.outputs.branchName }}
-          buildNumber: ${{ needs.facts.outputs.buildNumber }}
+          buildNumber: ${{ github.run_attempt == 1 && needs.facts.outputs.buildNumber || format('{0}-{1}', needs.facts.outputs.buildNumber, github.run_attempt) }}
           commitSha: ${{ needs.facts.outputs.commitSha }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
