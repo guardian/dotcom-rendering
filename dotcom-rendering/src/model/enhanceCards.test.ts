@@ -604,7 +604,7 @@ describe('Enhance Cards', () => {
 						] as VariantMeta[],
 						startDate: Date.now() - oneHourInMilliseconds,
 						expiryDate: Date.now() + oneHourInMilliseconds,
-						frontsThisTestCanRunOn: ['test-front'],
+						frontsThisTestCanRunOn: ['us'],
 						hasManuallyEndedOnThisTrail: false,
 					},
 				],
@@ -684,7 +684,7 @@ describe('Enhance Cards', () => {
 					cardWithEditorialTest,
 					{},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual(undefined);
 		});
@@ -697,7 +697,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual(undefined);
 		});
@@ -723,7 +723,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-test': 'a',
 					},
 					false,
-					'test-front',
+					'us',
 				),
 			).toEqual(undefined);
 		});
@@ -736,7 +736,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual({ headline: 'Headline A', uuid: 'uuid' });
 		});
@@ -749,7 +749,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-test': 'b',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual({ headline: 'Headline B', uuid: 'uuid' });
 		});
@@ -762,7 +762,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-test': 'c',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual(undefined);
 		});
@@ -775,7 +775,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual(undefined);
 		});
@@ -788,7 +788,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual(undefined);
 		});
@@ -801,7 +801,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual(undefined);
 		});
@@ -815,7 +815,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual({ headline: 'Headline A', uuid: 'uuid' });
 		});
@@ -829,7 +829,7 @@ describe('Enhance Cards', () => {
 						'fronts-and-curation-editorial-test': 'a',
 					},
 					true,
-					'test-front',
+					'us',
 				),
 			).toEqual(undefined);
 		});
