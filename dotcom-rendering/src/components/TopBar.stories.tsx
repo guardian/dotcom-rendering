@@ -151,6 +151,28 @@ export const SignedInText = () => {
 		</div>
 	);
 };
+export const SignedInNoText = () => {
+	return (
+		<div
+			style={{
+				backgroundColor: themePalette('--masthead-top-bar-background'),
+			}}
+		>
+			<TopBarMyAccount
+				mmaUrl={''}
+				idUrl={''}
+				discussionApiUrl={''}
+				idApiUrl={''}
+				authStatus={{
+					kind: 'SignedIn',
+					accessToken: mockAccessToken as AccessToken<never>,
+					idToken: mockIdToken,
+				}}
+				showSignInTextOnMobile={false}
+			/>
+		</div>
+	);
+};
 
 export const SignedOutText = () => {
 	return (

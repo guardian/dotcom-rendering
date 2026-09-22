@@ -36,7 +36,7 @@ export interface DropdownLinkType {
 
 interface Props {
 	id: string;
-	label: string;
+	label: React.ReactNode;
 	links: DropdownLinkType[];
 	dataLinkName: string;
 	cssOverrides?: SerializedStyles;

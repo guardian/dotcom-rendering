@@ -178,7 +178,7 @@ const SignIn = ({
 	</a>
 );
 
-export const dropDownOverrides = css`
+export const dropDownOverrides = (showSignInTextOnMobile: boolean) => css`
 	color: ${themePalette('--masthead-top-bar-link-text')};
 	padding-right: 0;
 	padding-bottom: 0;
@@ -206,6 +206,14 @@ export const dropDownOverrides = css`
 			top: 56px;
 		}
 	}
+	${!showSignInTextOnMobile &&
+	css`
+		${until.tablet} {
+			&::after {
+				display: none;
+			}
+		}
+	`}
 `;
 
 interface SignedInWithNotificationsProps {
@@ -243,13 +251,29 @@ const SignedInWithNotifications = ({
 
 	return (
 		<div css={myAccountLinkStyles}>
-			<ProfileIcon />
 			<Dropdown
-				label=""
+				label={
+					showSignInTextOnMobile ? (
+						<>
+							<ProfileIcon />
+							My account
+						</>
+					) : (
+						<>
+							<Hide until="tablet">
+								<ProfileIcon /> My account
+							</Hide>
+
+							<Hide from="tablet">
+								<ProfileIcon />
+							</Hide>
+						</>
+					)
+				}
 				links={identityLinksWithNotifications}
 				id="topbar-my-account"
 				dataLinkName={nestedOphanComponents('header', 'topbar', '')}
-				cssOverrides={dropDownOverrides}
+				cssOverrides={dropDownOverrides(showSignInTextOnMobile)}
 			/>
 		</div>
 	);
