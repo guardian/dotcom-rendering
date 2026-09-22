@@ -394,16 +394,16 @@ describe('Desktop Ads', () => {
 		expect(adPositions).toEqual([]);
 	});
 
-	it('inserts a maximum of 8 ads for fronts', () => {
+	it('inserts a maximum of 16 ads for fronts', () => {
 		const adPositions = getDesktopAdPositions(
-			// 10x number of test collections in fixture to reach maximum level
-			new Array<DCRCollectionType[]>(10)
+			// 18x number of test collections in fixture to reach maximum level
+			new Array<DCRCollectionType[]>(18)
 				.fill(testCollectionsWithSecondaryLevel)
 				.flat(),
 			'europe',
 		);
 
-		expect(adPositions.length).toEqual(8);
+		expect(adPositions.length).toEqual(16);
 	});
 });
 
