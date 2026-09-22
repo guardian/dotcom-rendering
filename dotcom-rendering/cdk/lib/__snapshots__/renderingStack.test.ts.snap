@@ -1689,8 +1689,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "GuHttpsEgressSecurityGroup",
       "GuAutoScalingGroup",
       "GuApplicationTargetGroup",
-      "GuRiffRaffDeploymentIdParameterExperimental",
       "GuHttpsEgressSecurityGroup",
+      "GuRiffRaffDeploymentIdParameterExperimental",
       "GuApplicationTargetGroup",
       "GuCertificate",
       "GuApplicationLoadBalancer",
@@ -2016,6 +2016,14 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "ListenerTagpagerendering92E57078",
       ],
       "Properties": {
+        "CapacityProviderStrategy": [
+          {
+            "CapacityProvider": {
+              "Ref": "tagpagerenderingManagedInstancesCapacityProvider7BA0962E",
+            },
+            "Weight": 1,
+          },
+        ],
         "Cluster": {
           "Ref": "tagpagerenderingEcsClusterE7696595",
         },
@@ -2037,7 +2045,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         },
         "EnableECSManagedTags": false,
         "HealthCheckGracePeriodSeconds": 60,
-        "LaunchType": "FARGATE",
         "LoadBalancers": [
           {
             "ContainerName": "tag-page-rendering",
@@ -2340,12 +2347,9 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "Memory": "2048",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
-          "FARGATE",
+          "EC2",
+          "MANAGED_INSTANCES",
         ],
-        "RuntimePlatform": {
-          "CpuArchitecture": "ARM64",
-          "OperatingSystemFamily": "LINUX",
-        },
         "Tags": [
           {
             "Key": "App",
@@ -3700,6 +3704,269 @@ systemctl start tag-page-rendering",
       },
       "Type": "AWS::ECS::Cluster",
     },
+    "tagpagerenderingManagedInstancesCapacityProvider7BA0962E": {
+      "Properties": {
+        "ClusterName": {
+          "Ref": "tagpagerenderingEcsClusterE7696595",
+        },
+        "ManagedInstancesProvider": {
+          "InfrastructureRoleArn": {
+            "Fn::GetAtt": [
+              "tagpagerenderingManagedInstancesCapacityProviderManagedInstancesCapacityProviderRole4D665705",
+              "Arn",
+            ],
+          },
+          "InstanceLaunchTemplate": {
+            "Ec2InstanceProfileArn": {
+              "Fn::GetAtt": [
+                "tagpagerenderingManagedInstancesCapacityProviderInstanceProfileCC9EF9C0",
+                "Arn",
+              ],
+            },
+            "InstanceRequirements": {
+              "CpuManufacturers": [
+                "amazon-web-services",
+              ],
+              "InstanceGenerations": [
+                "current",
+              ],
+              "MemoryMiB": {
+                "Min": 2048,
+              },
+              "VCpuCount": {
+                "Min": 1024,
+              },
+            },
+            "NetworkConfiguration": {
+              "SecurityGroups": [
+                {
+                  "Fn::GetAtt": [
+                    "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+                    "GroupId",
+                  ],
+                },
+              ],
+              "Subnets": {
+                "Ref": "tagpagerenderingPrivateSubnets",
+              },
+            },
+          },
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::CapacityProvider",
+    },
+    "tagpagerenderingManagedInstancesCapacityProviderInstanceProfileCC9EF9C0": {
+      "Properties": {
+        "InstanceProfileName": "ecsInstanceRoleTagPageRenderingCODEncesCapacityProvider9B320F1D",
+        "Roles": [
+          {
+            "Ref": "tagpagerenderingManagedInstancesCapacityProviderInstanceRoleB6EB2C92",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "tagpagerenderingManagedInstancesCapacityProviderInstanceRoleB6EB2C92": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": "ecs:DiscoverPollEndpoint",
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "ECSAgentDiscoverPollEndpointPermissions",
+                },
+                {
+                  "Action": "ecs:RegisterContainerInstance",
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "tagpagerenderingEcsClusterE7696595",
+                      "Arn",
+                    ],
+                  },
+                  "Sid": "ECSAgentRegisterPermissions",
+                },
+                {
+                  "Action": "ecs:Poll",
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":ecs:eu-west-1:",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":container-instance/*",
+                      ],
+                    ],
+                  },
+                  "Sid": "ECSAgentPollPermissions",
+                },
+                {
+                  "Action": [
+                    "ecs:StartTelemetrySession",
+                    "ecs:PutSystemLogEvents",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":ecs:eu-west-1:",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":container-instance/*",
+                      ],
+                    ],
+                  },
+                  "Sid": "ECSAgentTelemetryPermissions",
+                },
+                {
+                  "Action": [
+                    "ecs:SubmitAttachmentStateChanges",
+                    "ecs:SubmitTaskStateChange",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "tagpagerenderingEcsClusterE7696595",
+                      "Arn",
+                    ],
+                  },
+                  "Sid": "ECSAgentStateChangePermissions",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "ECSInstancePolicy",
+          },
+        ],
+        "RoleName": "ecsInstanceRoleTagPageRenderingCODEncesCapacityProvider9B320F1D",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "tagpagerenderingManagedInstancesCapacityProviderManagedInstancesCapacityProviderRole4D665705": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonECSInfrastructureRolePolicyForManagedInstances",
+              ],
+            ],
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
   },
 }
 `;
@@ -3727,8 +3994,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       "GuHttpsEgressSecurityGroup",
       "GuAutoScalingGroup",
       "GuApplicationTargetGroup",
-      "GuRiffRaffDeploymentIdParameterExperimental",
       "GuHttpsEgressSecurityGroup",
+      "GuRiffRaffDeploymentIdParameterExperimental",
       "GuApplicationTargetGroup",
       "GuCertificate",
       "GuApplicationLoadBalancer",
@@ -4167,6 +4434,14 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         "ListenerTagpagerendering92E57078",
       ],
       "Properties": {
+        "CapacityProviderStrategy": [
+          {
+            "CapacityProvider": {
+              "Ref": "tagpagerenderingManagedInstancesCapacityProvider7BA0962E",
+            },
+            "Weight": 1,
+          },
+        ],
         "Cluster": {
           "Ref": "tagpagerenderingEcsClusterE7696595",
         },
@@ -4188,7 +4463,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         },
         "EnableECSManagedTags": false,
         "HealthCheckGracePeriodSeconds": 60,
-        "LaunchType": "FARGATE",
         "LoadBalancers": [
           {
             "ContainerName": "tag-page-rendering",
@@ -4491,12 +4765,9 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         "Memory": "4096",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
-          "FARGATE",
+          "EC2",
+          "MANAGED_INSTANCES",
         ],
-        "RuntimePlatform": {
-          "CpuArchitecture": "ARM64",
-          "OperatingSystemFamily": "LINUX",
-        },
         "Tags": [
           {
             "Key": "App",
@@ -6293,6 +6564,269 @@ systemctl start tag-page-rendering",
         ],
       },
       "Type": "AWS::ECS::Cluster",
+    },
+    "tagpagerenderingManagedInstancesCapacityProvider7BA0962E": {
+      "Properties": {
+        "ClusterName": {
+          "Ref": "tagpagerenderingEcsClusterE7696595",
+        },
+        "ManagedInstancesProvider": {
+          "InfrastructureRoleArn": {
+            "Fn::GetAtt": [
+              "tagpagerenderingManagedInstancesCapacityProviderManagedInstancesCapacityProviderRole4D665705",
+              "Arn",
+            ],
+          },
+          "InstanceLaunchTemplate": {
+            "Ec2InstanceProfileArn": {
+              "Fn::GetAtt": [
+                "tagpagerenderingManagedInstancesCapacityProviderInstanceProfileCC9EF9C0",
+                "Arn",
+              ],
+            },
+            "InstanceRequirements": {
+              "CpuManufacturers": [
+                "amazon-web-services",
+              ],
+              "InstanceGenerations": [
+                "current",
+              ],
+              "MemoryMiB": {
+                "Min": 4096,
+              },
+              "VCpuCount": {
+                "Min": 2048,
+              },
+            },
+            "NetworkConfiguration": {
+              "SecurityGroups": [
+                {
+                  "Fn::GetAtt": [
+                    "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+                    "GroupId",
+                  ],
+                },
+              ],
+              "Subnets": {
+                "Ref": "tagpagerenderingPrivateSubnets",
+              },
+            },
+          },
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::CapacityProvider",
+    },
+    "tagpagerenderingManagedInstancesCapacityProviderInstanceProfileCC9EF9C0": {
+      "Properties": {
+        "InstanceProfileName": "ecsInstanceRoleTagPageRenderingPRODncesCapacityProviderA8927F63",
+        "Roles": [
+          {
+            "Ref": "tagpagerenderingManagedInstancesCapacityProviderInstanceRoleB6EB2C92",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "tagpagerenderingManagedInstancesCapacityProviderInstanceRoleB6EB2C92": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": "ecs:DiscoverPollEndpoint",
+                  "Effect": "Allow",
+                  "Resource": "*",
+                  "Sid": "ECSAgentDiscoverPollEndpointPermissions",
+                },
+                {
+                  "Action": "ecs:RegisterContainerInstance",
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "tagpagerenderingEcsClusterE7696595",
+                      "Arn",
+                    ],
+                  },
+                  "Sid": "ECSAgentRegisterPermissions",
+                },
+                {
+                  "Action": "ecs:Poll",
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":ecs:eu-west-1:",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":container-instance/*",
+                      ],
+                    ],
+                  },
+                  "Sid": "ECSAgentPollPermissions",
+                },
+                {
+                  "Action": [
+                    "ecs:StartTelemetrySession",
+                    "ecs:PutSystemLogEvents",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":ecs:eu-west-1:",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":container-instance/*",
+                      ],
+                    ],
+                  },
+                  "Sid": "ECSAgentTelemetryPermissions",
+                },
+                {
+                  "Action": [
+                    "ecs:SubmitAttachmentStateChanges",
+                    "ecs:SubmitTaskStateChange",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "tagpagerenderingEcsClusterE7696595",
+                      "Arn",
+                    ],
+                  },
+                  "Sid": "ECSAgentStateChangePermissions",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "ECSInstancePolicy",
+          },
+        ],
+        "RoleName": "ecsInstanceRoleTagPageRenderingPRODncesCapacityProviderA8927F63",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "tagpagerenderingManagedInstancesCapacityProviderManagedInstancesCapacityProviderRole4D665705": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonECSInfrastructureRolePolicyForManagedInstances",
+              ],
+            ],
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
     },
   },
 }
