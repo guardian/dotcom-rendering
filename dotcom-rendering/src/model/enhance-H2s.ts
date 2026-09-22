@@ -1,5 +1,6 @@
 import { JSDOM } from 'jsdom';
 import type { FEElement } from '../types/content';
+import { isH2Subheading } from './isH2Subheading';
 import { isLegacyTableOfContents } from './isLegacyTableOfContents';
 
 const shouldUseLegacyIDs = (elements: FEElement[]): boolean => {
@@ -71,7 +72,8 @@ export const enhanceH2s = (elements: FEElement[]): FEElement[] => {
 	return elements.map<FEElement>((element) => {
 		if (
 			element._type ===
-			'model.dotcomrendering.pageElements.SubheadingBlockElement'
+				'model.dotcomrendering.pageElements.SubheadingBlockElement' &&
+			isH2Subheading(element.html)
 		) {
 			const id = shouldUseElementId
 				? element.elementId

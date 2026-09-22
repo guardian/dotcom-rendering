@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineBold20,
 	headlineBold24,
 	headlineBold28,
 	headlineLight24,
@@ -9,6 +10,7 @@ import {
 	headlineMedium24,
 	headlineMedium28,
 	space,
+	textEgyptianBold17,
 	textSans24,
 	textSans28,
 	textSans34,
@@ -130,6 +132,30 @@ export const paddingStyles = (topPadding: boolean) => css`
 	}
 `;
 
+/**
+ * H3s in body copy. Guardian Headline bold 20, in the pillar colour.
+ *
+ * Spacing mirrors {@link paddingStyles}, with a smaller top step.
+ */
+export const subheadingLevel3Styles = css`
+	${headlineBold20};
+	color: ${palette('--subheading-level-3-text')};
+	padding-top: ${space[1]}px;
+	padding-bottom: ${space[0]}px;
+	${from.tablet} {
+		padding-bottom: ${space[1]}px;
+	}
+`;
+
+/**
+ * H4s in body copy. Guardian Text Egyptian bold 17, in the body text colour,
+ * with no additional spacing of its own.
+ */
+export const subheadingLevel4Styles = css`
+	${textEgyptianBold17};
+	color: ${palette('--textblock-text')};
+`;
+
 export const subheadingStyles = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
@@ -168,13 +194,43 @@ interface Props {
 	id?: string;
 	format: ArticleFormat;
 	topPadding: boolean;
+	/**
+	 * The heading level to render. Body copy can contain h3s and h4s as well as
+	 * h2s; only h2s take part in the design and display specific styling, and
+	 * only they are used for navigation. Defaults to 2.
+	 */
+	level?: 2 | 3 | 4;
 	children: ReactNode;
 }
 
-export const Subheading = ({ id, format, topPadding, children }: Props) => {
-	return (
-		<h2 id={id} css={[subheadingStyles(format), paddingStyles(topPadding)]}>
-			{children}
-		</h2>
-	);
+export const Subheading = ({
+	id,
+	format,
+	topPadding,
+	level = 2,
+	children,
+}: Props) => {
+	switch (level) {
+		case 3:
+			return (
+				<h3 id={id} css={subheadingLevel3Styles}>
+					{children}
+				</h3>
+			);
+		case 4:
+			return (
+				<h4 id={id} css={subheadingLevel4Styles}>
+					{children}
+				</h4>
+			);
+		default:
+			return (
+				<h2
+					id={id}
+					css={[subheadingStyles(format), paddingStyles(topPadding)]}
+				>
+					{children}
+				</h2>
+			);
+	}
 };

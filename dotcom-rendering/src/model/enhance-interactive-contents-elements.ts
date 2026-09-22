@@ -1,4 +1,5 @@
 import type { FEElement, SubheadingBlockElement } from '../types/content';
+import { isH2Subheading } from './isH2Subheading';
 import { isLegacyTableOfContents } from './isLegacyTableOfContents';
 import { stripHTML } from './sanitise';
 
@@ -16,7 +17,8 @@ export const enhanceInteractiveContentsElements = (
 			(element): element is SubheadingBlockElement => {
 				return (
 					element._type ===
-					'model.dotcomrendering.pageElements.SubheadingBlockElement'
+						'model.dotcomrendering.pageElements.SubheadingBlockElement' &&
+					isH2Subheading(element.html)
 				);
 			},
 		);
