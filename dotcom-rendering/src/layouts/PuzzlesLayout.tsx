@@ -110,7 +110,7 @@ export const PuzzlesLayout = ({
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot includeMobile={true} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
