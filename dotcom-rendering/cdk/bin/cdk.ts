@@ -185,10 +185,10 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 			},
 		},
 
-		// Route 90% traffic to EC2, 10% to ECS
+		// Route 100% traffic to EC2
 		targetGroupWeights: {
-			ec2: 9,
-			ecs: 1,
+			ec2: 1,
+			ecs: 0,
 		},
 	},
 };
