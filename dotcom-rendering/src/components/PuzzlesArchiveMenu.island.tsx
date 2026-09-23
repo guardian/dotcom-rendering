@@ -33,11 +33,16 @@ const wrapperStyles = css`
 	position: relative;
 	display: block;
 	width: max-content;
-	margin-top: ${space[2]}px;
+	margin-top: 20px;
 	margin-left: auto;
 
 	${from.tablet} {
+		margin-top: 28px;
 		margin-left: 0;
+	}
+
+	${from.desktop} {
+		margin-top: 40px;
 	}
 `;
 

@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineBold20,
 	headlineBold24,
-	headlineBold28,
 	palette,
 	space,
 	textSans14,
@@ -136,13 +136,9 @@ const cardTextStyles = (isFeatured: boolean) => css`
 	padding: ${space[1]}px ${space[2]}px ${space[2]}px;
 `;
 
-const cardTitleStyles = css`
-	${headlineBold24};
+const cardTitleStyles = (variant: PuzzleItem['cardVariant']) => css`
+	${variant === 'compact' ? headlineBold20 : headlineBold24};
 	line-height: 1.15;
-	${from.leftCol} {
-		${headlineBold28};
-		line-height: 1.15;
-	}
 `;
 
 const cadenceStyles = css`
@@ -203,7 +199,7 @@ export const PuzzleCard = ({
 			<div css={cardTextStyles(isFeatured)}>
 				<span
 					className="puzzle-card-title"
-					css={cardTitleStyles}
+					css={cardTitleStyles(item.cardVariant)}
 					style={{ color: colours.title }}
 				>
 					{item.title}
@@ -257,6 +253,14 @@ export const rowsStyles = css`
 	${from.tablet} {
 		--puzzles-gap: 20px;
 		gap: 20px;
+		/*
+		 * Add 6px above each subsequent card group so its separator sits
+		 * 16px below the preceding cards and 10px above this row. This is
+		 * the separator immediately above the compact crossword cards.
+		 */
+		> ul ~ ul {
+			margin-top: 6px;
+		}
 	}
 	> ul ~ ul::before {
 		position: absolute;
@@ -305,7 +309,8 @@ export const rowStyles = (
 		grid-template-columns: ${variant === 'compact'
 			? `repeat(${Math.min(count, 4)}, minmax(0, 1fr))`
 			: `repeat(${Math.min(count, 2)}, minmax(0, 1fr))`};
-		gap: 20px;
+		column-gap: 20px;
+		row-gap: 26px;
 		max-width: 700px;
 		> li:nth-child(n + 2)::before {
 			content: none;
