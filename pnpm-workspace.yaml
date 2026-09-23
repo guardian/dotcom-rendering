@@ -20,8 +20,8 @@ catalog:
   '@rollup/plugin-node-resolve': 16.0.3
   '@types/aws-lambda': 8.10.163
   '@types/node': 24.12.4
-  aws-cdk: 2.1141.0
-  aws-cdk-lib: 2.269.0
+  aws-cdk: 2.1142.0
+  aws-cdk-lib: 2.270.0
   constructs: 10.8.1
   esbuild: 0.28.1
   eslint: 9.39.1
