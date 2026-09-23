@@ -135,16 +135,12 @@ export const paddingStyles = (topPadding: boolean) => css`
 /**
  * H3s in body copy. Guardian Headline bold 20, in the pillar colour.
  *
- * Spacing mirrors {@link paddingStyles}, with a smaller top step.
+ * Spaced below only, matching the space an h2 leaves beneath itself.
  */
 export const subheadingLevel3Styles = css`
 	${headlineBold20};
 	color: ${palette('--subheading-level-3-text')};
-	padding-top: ${space[1]}px;
-	padding-bottom: ${space[0]}px;
-	${from.tablet} {
-		padding-bottom: ${space[1]}px;
-	}
+	${paddingStyles(false)}
 `;
 
 /**
