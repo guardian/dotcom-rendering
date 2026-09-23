@@ -31,6 +31,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.island';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
+import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -138,7 +139,13 @@ export const CrosswordLayout = (props: Props) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot />
+								<HeaderAdSlot
+									includeMobile={shouldShowMobileAboveNavSlot(
+										article.config.serverSideABTests[
+											'commercial-mobile-above-nav-test'
+										],
+									)}
+								/>
 							</Section>
 						</div>
 					</Stuck>

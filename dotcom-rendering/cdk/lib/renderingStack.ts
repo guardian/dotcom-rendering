@@ -8,6 +8,7 @@ import {
 } from '@guardian/cdk/lib/constructs/core';
 import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
+import type { GuLoadBalancedAppExperimentalProps } from '@guardian/cdk/lib/experimental/patterns/gu-load-balanced-app';
 import { GuLoadBalancedAppExperimental } from '@guardian/cdk/lib/experimental/patterns/gu-load-balanced-app';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { aws_cloudwatch, type App as CDKApp, Duration } from 'aws-cdk-lib';
@@ -46,14 +47,36 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	};
 
 	/**
-	 * Which image to run.
-	 * This should be the image digest (e.g. 'sha256:abc123') to ensure immutable deployments.
-	 *
-	 * @note Currently optional to control which services run in an EC2-ECS hybrid mode, or EC2-only.
-	 *
-	 * @see https://docs.docker.com/dhi/core-concepts/digests
+	 * ECS configuration including image identifier and instance sizing.
+	 * Optional to control which services run in an EC2-ECS hybrid mode, or EC2-only.
 	 */
-	imageIdentifier?: string;
+	ecsProps?: {
+		/**
+		 * Which image to run.
+		 * This should be the image digest (e.g. 'sha256:abc123') to ensure immutable deployments.
+		 *
+		 * @see https://docs.docker.com/dhi/core-concepts/digests
+		 */
+		imageIdentifier: string;
+
+		/**
+		 * vCPU units for the ECS task
+		 */
+		taskCpu: number;
+
+		/**
+		 * Memory in MB for ECS task
+		 */
+		taskMemoryLimitMiB: number;
+
+		scaling: NonNullable<
+			GuLoadBalancedAppExperimentalProps['ecsProps']
+		>['scaling'];
+
+		targetGroupWeights: NonNullable<
+			GuLoadBalancedAppExperimentalProps['targetGroupWeights']
+		>;
+	};
 }
 
 const addCPUStepScalingPolicy = (
@@ -191,23 +214,19 @@ const addLatencyStepScalingPolicy = (
 /** DCR infrastructure provisioning via CDK */
 export class RenderingCDKStack extends CDKStack {
 	constructor(scope: CDKApp, id: string, props: RenderingCDKStackProps) {
+		const { guApp, stage, instanceType, scaling, domainName, ecsProps } =
+			props;
+
 		super(scope, id, {
-			...props,
 			// Any version of this app should run in the eu-west-1 region
 			env: { region: 'eu-west-1' },
 			// Set the stack within the constructor as this won't vary between apps
 			stack: 'frontend',
+			stage,
+			app: guApp,
 		});
 
 		const { stack: guStack, region, account } = this;
-		const {
-			guApp,
-			stage,
-			instanceType,
-			scaling,
-			domainName,
-			imageIdentifier,
-		} = props;
 
 		const artifactsBucket =
 			GuDistributionBucketParameter.getInstance(this).valueAsString;
@@ -276,34 +295,24 @@ export class RenderingCDKStack extends CDKStack {
 				}),
 			},
 
-			// Provision ECS resources only when `imageIdentifier` has been provided
-			...(imageIdentifier == null
+			// Provision ECS resources only when `ecsProps` has been provided
+			...(ecsProps == null
 				? {}
 				: {
 						ecsProps: {
 							repositoryName: 'guardian/dotcom-rendering',
-							imageIdentifier,
+							imageIdentifier: ecsProps.imageIdentifier,
 
-							// TODO tune these values
-							memoryLimitMiB: 2048,
-							cpu: 1024,
-							scaling: {
-								minimumTasks: 1,
-								maximumTasks: 2,
-							},
+							memoryLimitMiB: ecsProps.taskMemoryLimitMiB,
+							cpu: ecsProps.taskCpu,
+							scaling: ecsProps.scaling,
 						},
-
-						// Route all traffic to EC2
-						targetGroupWeights: {
-							ec2: 1,
-							ecs: 0,
-						},
+						targetGroupWeights: ecsProps.targetGroupWeights,
 					}),
 		});
 
 		if (app.ecsService) {
 			const { taskDefinition } = app.ecsService;
-
 			const ecsEnvVars: Record<string, string> = {
 				// Custom environment variables needed by the application
 				NODE_ENV: 'production',

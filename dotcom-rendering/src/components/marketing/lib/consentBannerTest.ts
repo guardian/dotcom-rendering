@@ -2,10 +2,10 @@ import { getCookie } from '@guardian/libs';
 
 const AB_TEST_GEO_REGION_COOKIE = 'GU_geo_country_region';
 const AB_TEST_US_STATES = [
+	'SC', // South Carolina
 	'WA', // Washington
 	'NC', // North Carolina
 	'OH', // Ohio
-	'SC', // South Carolina
 	'MI', // Michigan
 	'AZ', // Arizona
 	'MO', // Missouri

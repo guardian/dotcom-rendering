@@ -1,5 +1,6 @@
 import { render, waitFor } from '@testing-library/react';
 import { pickMessage } from '../lib/messagePicker';
+import { useAB } from '../lib/useAB';
 import { useCountryCode } from '../lib/useCountryCode';
 import { ConfigProvider } from './ConfigContext';
 import { SlotBodyEnd } from './SlotBodyEnd.island';
@@ -34,7 +35,9 @@ jest.mock('../lib/useBraze', () => ({
 }));
 
 jest.mock('../lib/useAB', () => ({
-	useAB: jest.fn().mockReturnValue(null),
+	useAB: jest.fn().mockReturnValue({
+		isUserInTestGroup: jest.fn().mockReturnValue(false),
+	}),
 }));
 
 jest.mock('../lib/braze/BrazeBannersSystem', () => ({
@@ -95,6 +98,15 @@ const renderSlotBodyEnd = (props: Partial<typeof defaultProps> = {}) =>
 
 const mockPickMessage = jest.mocked(pickMessage);
 const mockUseCountryCode = jest.mocked(useCountryCode);
+const mockUseAB = jest.mocked(useAB);
+
+const mockInArticleEndHeaderBiddingTest = () => {
+	mockUseAB.mockReturnValue({
+		isUserInTestGroup: (testId: string, groupId: string) =>
+			testId === 'commercial-article-end-header-bidding' &&
+			groupId === 'variant',
+	} as ReturnType<typeof useAB>);
+};
 
 describe('SlotBodyEnd', () => {
 	afterEach(() => {
@@ -134,8 +146,8 @@ describe('SlotBodyEnd', () => {
 			type: 'NoMessageSelected',
 		});
 
-		// showPublicGood requires countryCode === 'US'
 		mockUseCountryCode.mockReturnValue('US');
+		mockInArticleEndHeaderBiddingTest();
 
 		const { findByTestId } = renderSlotBodyEnd({
 			renderAds: true,
@@ -151,6 +163,7 @@ describe('SlotBodyEnd', () => {
 		});
 
 		mockUseCountryCode.mockReturnValue('US');
+		mockInArticleEndHeaderBiddingTest();
 
 		const dispatchEventSpy = jest.spyOn(document, 'dispatchEvent');
 

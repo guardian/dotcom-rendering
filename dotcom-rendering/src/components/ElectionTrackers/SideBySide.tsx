@@ -68,7 +68,6 @@ const Heading = (props: { children: string; from: Breakpoint }) => (
 		css={{
 			...headlineBold20Object,
 			paddingBottom: space[2],
-			paddingTop: space[4],
 			[from[props.from]]: {
 				...headlineBold24Object,
 				paddingTop: 0,

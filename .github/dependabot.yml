@@ -16,6 +16,9 @@ updates:
       - dependency-name: '@types/node'
         update-types:
           - 'version-update:semver-major'
+      - dependency-name: 'eslint'
+        update-types:
+          - 'version-update:semver-major'
 
     open-pull-requests-limit: 10
     groups:

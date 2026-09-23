@@ -52,6 +52,7 @@ type BaseProps = {
 	pageId?: string;
 	inHoldbackGroup?: boolean;
 	inAuxiaVariant?: boolean;
+	inNoShowMobileAboveNavVariant?: boolean;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -75,6 +76,19 @@ type CanShowProps = BaseProps & {
 export type CanShowFunctionType<T> = (
 	props: CanShowProps,
 ) => Promise<CanShowResult<T>>;
+
+// the test includes the crossword pages (tag type/crossword) and the crosswords front (pageId === 'crosswords')
+const isInMobileAboveNavTest = (
+	tags: TagType[],
+	renderingTarget: RenderingTarget,
+	pageId?: string,
+): boolean => {
+	return (
+		(tags.some((tag) => tag.id === 'type/crossword') ||
+			pageId === 'crosswords') &&
+		renderingTarget === 'Web'
+	);
+};
 
 const getArticleCountToday = (
 	articleCounts: ArticleCounts | undefined,
@@ -209,7 +223,15 @@ export const canShowRRBanner: CanShowFunctionType<
 	pageId,
 	inHoldbackGroup,
 	inAuxiaVariant,
+	inNoShowMobileAboveNavVariant,
 }) => {
+	if (
+		inNoShowMobileAboveNavVariant === true &&
+		isInMobileAboveNavTest(tags, renderingTarget, pageId)
+	) {
+		return { show: false };
+	}
+
 	if (!remoteBannerConfig) {
 		return { show: false };
 	}

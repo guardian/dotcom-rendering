@@ -13,7 +13,7 @@ jobs:
       pull-requests: write # Required by guardian/actions-publish-image to comment on PRs
     uses: ./.github/workflows/container-production.yml
     secrets:
-      GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+      GU_ARTIFACTS_ROLE_ARN: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
 
   container:
     permissions:

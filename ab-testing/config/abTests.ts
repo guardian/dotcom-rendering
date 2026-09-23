@@ -70,19 +70,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-fronts-ad-increase-ad-limit",
-		description:
-			"A test to understand the impact of changing page-level ad limit on fronts",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-10",
-		type: "server",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-spacefinder-highvalue-section",
 		description:
 			"Test to measure the impact on ad density after adding to high value sections in spacefinder",
@@ -157,6 +144,26 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
+	/**
+	 * Puzzles & Games rollout, tier v0 (the master switch).
+	 *
+	 * Gates the baseline Puzzles & Games experience: the new Puzzles Hub
+	 * page, and the 6 V0 puzzle pages (sudoku easy/medium/hard/killer,
+	 * word-wheel, wordiply). At v0, there is no archive, no calendar, no
+	 * progress indicators, no sign-in-to-track-progress prompt, no "more
+	 * from puzzles" rail, and the hub's sub-nav has no links yet.
+	 *
+	 * This is the master switch for the whole Puzzles & Games experience:
+	 * turning it off (or down to 0%) hides everything: the hub, the V0
+	 * puzzle pages, and (by the cumulative design below) every later tier
+	 * too, since v1/v2 only take effect when this is also enabled.
+	 *
+	 * See `puzzles-new-hub-v1`/`puzzles-new-hub-v2` below for the later
+	 * rollout tiers, and `src/lib/puzzlesHubVersionExperiment.ts` /
+	 * `src/lib/puzzlesHubExperiment.ts` in dotcom-rendering for the
+	 * corresponding cumulative gate-check helpers
+	 * (`isPuzzlesHubEnabled`/`isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled`).
+	 */
 	{
 		name: "puzzles-new-hub",
 		description: "Rollout of the new Puzzles Hub experience",
@@ -169,16 +176,65 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
+	/**
+	 * Puzzles & Games rollout, tier v1 (w/c 12 Oct launch).
+	 *
+	 * Only takes effect when `puzzles-new-hub` (v0) is ALSO enabled for the
+	 * reader. This test does nothing on its own, by design, so the
+	 * rollout can never end up in an inconsistent state (e.g. v1 features
+	 * showing while the v0 baseline they build on is switched off).
+	 *
+	 * On top of v0, this tier activates: the full hub sub-nav links (to
+	 * /word-games, /logic-puzzles, /trivia-and-quizzes), a
+	 * sign-in-to-track-progress message, a calendar/archive view for
+	 * crosswords/logic-puzzles/word-games (not Wordiply, which has no
+	 * archive), progress indicators (Available/Completed), the "More from
+	 * Puzzles & Games" related-content rail, newsletter signup, and
+	 * changes to the existing crossword page (print CTA repositioning, a
+	 * "play other puzzles" container).
+	 *
+	 * To roll back from v1 to v0 without a deploy: flip this test's
+	 * `audienceSize` to `0 / 100` (or `status` to `"OFF"`) while leaving
+	 * `puzzles-new-hub` untouched.
+	 */
 	{
-		name: "commercial-prebid-transaction-ids",
+		name: "puzzles-new-hub-v1",
 		description:
-			"Test to measure the impact of submitting Prebid transaction IDs",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-30",
-		type: "client",
+			"Rollout of the v1 Puzzles & Games features (w/c 12 Oct), on top of the puzzles-new-hub v0 baseline",
+		owners: ["puzzles.team@guardian.co.uk"],
 		status: "ON",
-		audienceSize: 50 / 100,
-		audienceSpace: "B",
+		expirationDate: "2026-12-31",
+		type: "server",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	/**
+	 * Puzzles & Games rollout, tier v2 (future, no launch date confirmed
+	 * yet as of this writing).
+	 *
+	 * Only takes effect when BOTH `puzzles-new-hub` (v0) AND
+	 * `puzzles-new-hub-v1` are ALSO enabled for the reader, same
+	 * cumulative-by-design principle as v1 above, applied one tier further.
+	 *
+	 * On top of v0+v1, this tier activates: the On the Ball and Film Reveal
+	 * iframe games (Trivia and Quizzes group), a "Most played" container,
+	 * EventKit-driven navigation, migrating existing crossword pages onto
+	 * the new Puzzle Page template, and search-engine mobile app nudges.
+	 *
+	 * Kept at 0% until that work begins; there is nothing to roll back yet.
+	 */
+	{
+		name: "puzzles-new-hub-v2",
+		description:
+			"Rollout of the v2 Puzzles & Games features (no date confirmed yet), on top of the puzzles-new-hub/puzzles-new-hub-v1 baseline",
+		owners: ["puzzles.team@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-12-31",
+		type: "server",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
@@ -214,10 +270,10 @@ const ABTests: ABTest[] = [
 		name: "commercial-prebid-failsafe-timeout",
 		description: "Gradually roll out the Prebid failsafe timeout feature",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-30",
+		expirationDate: "2026-10-28",
 		type: "client",
 		status: "ON",
-		audienceSize: 1 / 100,
+		audienceSize: 0 / 100,
 		audienceSpace: "B",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
@@ -232,6 +288,64 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		groups: ["enable"],
 		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "commercial-mobile-above-nav-test",
+		description: "Test adding the mobile-above-nav ad slot to mobile pages",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-30",
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant", "variant2"],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-rich-links",
+		description:
+			"Test to measure the impact of fixing rich links insert behaviour and reduced restrictions on ad insertion around rich links.",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-28",
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-header-bidder-timeouts",
+		description:
+			"Test to measure the impact of changing the Prebid and APS timeout value.",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-28",
+		type: "client",
+		status: "ON",
+		audienceSize: 2.1 / 100, // 0.35% in each variant
+		audienceSpace: "A",
+		groups: [
+			"variant-500",
+			"variant-750",
+			"variant-1000",
+			"variant-1250",
+			"control", // 1500ms timeout
+			"variant-1650",
+		],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-article-end-header-bidding",
+		description:
+			"Test opening up the article-end ad slot in the US region for HeaderBidding",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-01",
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
 	},
 ];
 
