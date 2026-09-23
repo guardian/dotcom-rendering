@@ -117,11 +117,14 @@ describe('footballMatches', () => {
 			Ladies: '',
 			Holland: 'The Netherlands',
 			'Ivory Coast': 'Côte d’Ivoire',
+			Bialystock: 'Białystok',
 			'Union Saint Gilloise': 'Union Saint-Gilloise',
 			'Bosnia-Herzegovina': 'Bosnia and Herzegovina',
 			'Congo DR': 'DR Congo',
 			Curacao: 'Curaçao',
 			'Czech Republic': 'Czechia',
+			'Inter Milan Women': 'Inter Women',
+			'HB Koge Women': 'HB Køge Women',
 		};
 
 		for (const [uncleanName, cleanName] of Object.entries(

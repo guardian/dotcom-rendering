@@ -47,7 +47,7 @@ describe('PuzzlesLayout', () => {
 		).not.toBeInTheDocument();
 	});
 
-	it('renders both header slots without experiment participation and respects ad-free input', () => {
+	it('renders only the desktop header slot and respects ad-free input', () => {
 		const { rerender } = render(
 			<PuzzlesLayout NAV={nav} puzzlesPage={page(true) as never} />,
 		);
@@ -62,7 +62,7 @@ describe('PuzzlesLayout', () => {
 		).toBeInTheDocument();
 		expect(
 			document.getElementById('dfp-ad--mobile-above-nav'),
-		).toBeInTheDocument();
+		).not.toBeInTheDocument();
 	});
 	it('renders the illustrated header with responsive sources and a fixed height', () => {
 		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);

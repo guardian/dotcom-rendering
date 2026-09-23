@@ -5459,13 +5459,13 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
                   "TargetGroupArn": {
                     "Ref": "TargetGroupTagpagerendering42E428EE",
                   },
-                  "Weight": 9,
+                  "Weight": 1,
                 },
                 {
                   "TargetGroupArn": {
                     "Ref": "TagpagerenderingEcsTargetGroupTagpagerendering0976D2E5",
                   },
-                  "Weight": 1,
+                  "Weight": 0,
                 },
               ],
             },
