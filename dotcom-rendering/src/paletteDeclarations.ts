@@ -1220,7 +1220,9 @@ const subheadingTextLight: PaletteFunction = (format) => {
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
-			return subheadingLevel3TextLight(format);
+			return (
+				subheadingLevel3TextLight(format) ?? sourcePalette.neutral[7]
+			);
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
@@ -1242,7 +1244,9 @@ const subheadingTextDark: PaletteFunction = (format) => {
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
-			return subheadingLevel3TextDark(format);
+			return (
+				subheadingLevel3TextDark(format) ?? sourcePalette.neutral[86]
+			);
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
