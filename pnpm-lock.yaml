@@ -667,9 +667,6 @@ importers:
       '@types/youtube':
         specifier: 0.0.50
         version: 0.0.50
-      '@typescript-eslint/eslint-plugin':
-        specifier: 8.57.1
-        version: 8.57.1(@typescript-eslint/parser@8.57.1(eslint@9.39.1(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@9.39.1(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       ajv:
         specifier: 8.18.0
         version: 8.18.0

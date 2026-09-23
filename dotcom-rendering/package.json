@@ -93,7 +93,6 @@
 		"@types/webpack-env": "1.18.8",
 		"@types/webpack-node-externals": "3.0.4",
 		"@types/youtube": "0.0.50",
-		"@typescript-eslint/eslint-plugin": "8.57.1",
 		"ajv": "8.18.0",
 		"ajv-formats": "2.1.1",
 		"aws-cdk": "catalog:",
