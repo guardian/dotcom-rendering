@@ -92,7 +92,7 @@ const invertedStyle = css`
 	padding-right: ${space[1]}px;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[2]}px;
-	${from.wide} {
+	${from.leftCol} {
 		line-height: 28px;
 	}
 `;
