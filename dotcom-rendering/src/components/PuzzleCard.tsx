@@ -279,12 +279,9 @@ export const rowStyles = (
 ) => css`
 	position: relative;
 	display: grid;
-	/*
-	 * Below the "tablet" breakpoint (740px), every variant is a single
-	 * column - the two-per-row "compact" grid only kicks in from tablet
-	 * up, per explicit design direction.
-	 */
-	grid-template-columns: 1fr;
+	grid-template-columns: ${variant === 'compact'
+		? `repeat(${Math.min(count, 2)}, minmax(0, 1fr))`
+		: '1fr'};
 	gap: 16px;
 	${from.phablet} {
 		gap: 24px;
@@ -295,7 +292,7 @@ export const rowStyles = (
 	> li {
 		position: relative;
 	}
-	> li:nth-child(n + 2)::before {
+	> li:nth-child(n + ${variant === 'compact' ? 3 : 2})::before {
 		position: absolute;
 		top: calc(var(--puzzles-gap) / -2);
 		right: 0;
@@ -304,6 +301,18 @@ export const rowStyles = (
 		content: '';
 		pointer-events: none;
 	}
+	${variant === 'compact' &&
+	css`
+		> li:nth-child(2n)::after {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: calc(var(--puzzles-gap) / -2);
+			border-left: 1px solid ${palette.neutral[86]};
+			content: '';
+			pointer-events: none;
+		}
+	`}
 
 	${from.tablet} {
 		grid-template-columns: ${variant === 'compact'
