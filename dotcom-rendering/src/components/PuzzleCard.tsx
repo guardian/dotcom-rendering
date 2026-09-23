@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	headlineBold20,
 	headlineBold24,
@@ -254,10 +255,10 @@ export const rowsStyles = css`
 		--puzzles-gap: 20px;
 		gap: 20px;
 		/*
-		 * Add 6px above each subsequent card group so its separator sits
-		 * 16px below the preceding cards and 10px above this row. This is
-		 * the separator immediately above the compact crossword cards.
-		 */
+     * Add 6px above each subsequent card group so its separator sits
+     * 16px below the preceding cards and 10px above this row. This is
+     * the separator immediately above the compact crossword cards.
+     */
 		> ul ~ ul {
 			margin-top: 6px;
 		}
@@ -273,26 +274,18 @@ export const rowsStyles = css`
 	}
 `;
 
-export const rowStyles = (
-	variant: PuzzleItem['cardVariant'],
-	count: number,
-) => css`
-	position: relative;
-	display: grid;
-	grid-template-columns: ${variant === 'compact'
-		? `repeat(${Math.min(count, 2)}, minmax(0, 1fr))`
-		: '1fr'};
-	gap: 16px;
-	${from.phablet} {
-		gap: 24px;
-	}
-	margin: 0;
-	padding: 0;
-	list-style: none;
+const cardGridStyles = (columns: number, tracks = columns) => css`
+	grid-template-columns: repeat(${tracks}, minmax(0, 1fr));
 	> li {
-		position: relative;
+		grid-column: auto;
 	}
-	> li:nth-child(n + ${variant === 'compact' ? 3 : 2})::before {
+	> li::before,
+	> li::after,
+	> li:not(:first-child)::before,
+	> li:not(:first-child)::after {
+		content: none;
+	}
+	> li:nth-child(n + ${columns + 1})::before {
 		position: absolute;
 		top: calc(var(--puzzles-gap) / -2);
 		right: 0;
@@ -301,9 +294,9 @@ export const rowStyles = (
 		content: '';
 		pointer-events: none;
 	}
-	${variant === 'compact' &&
+	${columns > 1 &&
 	css`
-		> li:nth-child(2n)::after {
+		> li:not(:nth-child(${columns}n + 1))::after {
 			position: absolute;
 			top: 0;
 			bottom: 0;
@@ -313,40 +306,77 @@ export const rowStyles = (
 			pointer-events: none;
 		}
 	`}
-
-	${from.tablet} {
-		grid-template-columns: ${variant === 'compact'
-			? `repeat(${Math.min(count, 4)}, minmax(0, 1fr))`
-			: `repeat(${Math.min(count, 2)}, minmax(0, 1fr))`};
-		column-gap: 20px;
-		row-gap: 26px;
-		max-width: 700px;
-		> li:nth-child(n + 2)::before {
-			content: none;
-		}
-		> li:nth-child(
-				n + ${Math.min(count, variant === 'compact' ? 4 : 2) + 1}
-			)::before {
-			content: '';
-		}
-		> li:not(
-				:nth-child(
-					${Math.min(count, variant === 'compact' ? 4 : 2)}n + 1
-				)
-			)::after {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: calc(var(--puzzles-gap) / -2);
-			border-left: 1px solid ${palette.neutral[86]};
-			content: '';
-			pointer-events: none;
-		}
-	}
-	${from.desktop} {
-		max-width: 940px;
-	}
 `;
+
+const tabletCompactGridStyles = (count: number) => {
+	const columns = Math.min(count, 3);
+	const remainder = count % 3;
+
+	return css`
+		${cardGridStyles(columns, 6)};
+		> li {
+			grid-column: span ${count < 3 ? 6 / columns : 2};
+		}
+		${count > 3 &&
+		remainder === 2 &&
+		css`
+			> li:nth-last-child(-n + 2) {
+				grid-column: span 3;
+			}
+		`}
+		${count > 3 &&
+		remainder === 1 &&
+		css`
+			> li:last-child {
+				grid-column: span 6;
+			}
+		`}
+	`;
+};
+
+export const rowStyles = (
+	variant: PuzzleItem['cardVariant'],
+	count: number,
+) => {
+	const mobileColumns = variant === 'compact' ? Math.min(count, 2) : 1;
+	const tabletColumns =
+		variant === 'compact' ? Math.min(count, 3) : Math.min(count, 2);
+	const desktopColumns =
+		variant === 'compact' ? Math.min(count, 5) : Math.min(count, 2);
+
+	return css`
+		position: relative;
+		display: grid;
+		${cardGridStyles(mobileColumns)};
+		gap: 16px;
+		${from.phablet} {
+			gap: 24px;
+		}
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		> li {
+			position: relative;
+		}
+
+		${from.tablet} {
+			${cardGridStyles(tabletColumns)};
+			column-gap: 20px;
+			row-gap: 26px;
+			max-width: 700px;
+		}
+		${variant === 'compact' &&
+		css`
+			${between.tablet.and.desktop} {
+				${tabletCompactGridStyles(count)};
+			}
+		`}
+		${from.desktop} {
+			${cardGridStyles(desktopColumns)};
+			max-width: 940px;
+		}
+	`;
+};
 
 export const Rows = ({
 	isFeatured = false,
