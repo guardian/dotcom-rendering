@@ -70,19 +70,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-spacefinder-highvalue-section",
-		description:
-			"Test to measure the impact on ad density after adding to high value sections in spacefinder",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-09-01",
-		type: "client",
-		status: "OFF",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-ozone-hashed-email",
 		description:
 			"Pass hashed email to Ozone via pubProvidedId for audience matching",
