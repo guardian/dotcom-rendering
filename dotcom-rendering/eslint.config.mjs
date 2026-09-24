@@ -295,7 +295,7 @@ export default defineConfig([
 		},
 	},
 	{
-		files: ['**/**.stories.tsx', '**/**.stories.jsx'],
+		files: ['**/**.stories.tsx'],
 
 		rules: {
 			'import/prefer-default-export': 'off',
