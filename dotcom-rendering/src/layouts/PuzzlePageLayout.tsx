@@ -124,11 +124,17 @@ const puzzleHeadlineNames: Record<string, string> = {
 /**
  * Puzzle Page has no real equivalent of `ArticleDeprecated.guardianBaseURL`
  * (see `docs/puzzle-page.md`'s contract table - it isn't part of
- * `FEPuzzlePageType`). `ArticleTitle` only uses it to build the tag/section
- * link's absolute href, so the real, stable production base URL is
- * hardcoded here rather than leaving it blank.
+ * `FEPuzzlePageType`). `ArticleTitle`/`SeriesSectionLink` build the
+ * series/section link's href as `${guardianBaseURL}/${...}`, so this is
+ * deliberately left empty rather than hardcoded to the production origin:
+ * the series ("Sudoku") and section ("Logic puzzles") links then resolve to
+ * root-relative paths (e.g. `/puzzles-and-games/logic-puzzles`), same-origin
+ * on every environment, exactly like this layout's own hardcoded
+ * `PUZZLES_SUBNAV_LINKS` above - rather than always pointing at
+ * `https://www.theguardian.com` and hijacking local/test environments into
+ * navigating to production.
  */
-const GUARDIAN_BASE_URL = 'https://www.theguardian.com';
+const GUARDIAN_BASE_URL = '';
 
 /**
  * A hardcoded replica of the real crossword page's header sub-nav row

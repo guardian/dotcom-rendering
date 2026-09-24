@@ -87,6 +87,20 @@ describe('PuzzlePageLayout', () => {
 		).toHaveTextContent('Logic puzzles');
 	});
 
+	it('renders the series/section links as root-relative paths, not absolute production URLs', () => {
+		const { container } = renderPuzzlePageLayout('sudoku-easy');
+
+		expect(
+			container.querySelector('a[data-component="series"]'),
+		).toHaveAttribute(
+			'href',
+			'/puzzles-and-games/logic-puzzles/sudoku-easy',
+		);
+		expect(
+			container.querySelector('a[data-component="section"]'),
+		).toHaveAttribute('href', '/puzzles-and-games/logic-puzzles');
+	});
+
 	it('renders the hardcoded Puzzles & Games sub-nav row', () => {
 		renderPuzzlePageLayout('sudoku-easy');
 
