@@ -95,12 +95,63 @@ describe('PuzzlePageLayout', () => {
 			'Crosswords',
 			'Word games',
 			'Logic puzzles',
-			'Trivia & quizzes',
 		]) {
 			expect(
 				screen.getAllByRole('link', { name }).length,
 			).toBeGreaterThan(0);
 		}
+	});
+
+	describe('"Trivia & quizzes" sub-nav link (v1-scoped feature)', () => {
+		it('does not render when neither v0 nor v1 is enabled (default fixture state)', () => {
+			renderPuzzlePageLayout('sudoku-easy');
+
+			expect(
+				screen.queryByRole('link', { name: 'Trivia & quizzes' }),
+			).not.toBeInTheDocument();
+		});
+
+		it('does not render when v1 is enabled but v0 is not', () => {
+			renderPuzzlePageLayout('sudoku-easy', {
+				config: {
+					...createPuzzlePage('sudoku-easy').config,
+					serverSideABTests: puzzlesHubV1Participation(
+						puzzlesHubV1Experiment.variant,
+					),
+				},
+			});
+
+			expect(
+				screen.queryByRole('link', { name: 'Trivia & quizzes' }),
+			).not.toBeInTheDocument();
+		});
+
+		it('does not render when v0 is enabled but v1 is not', () => {
+			renderPuzzlePageLayout('sudoku-easy', {
+				config: {
+					...createPuzzlePage('sudoku-easy').config,
+					serverSideABTests: { [PUZZLES_HUB_EXPERIMENT]: 'variant' },
+				},
+			});
+
+			expect(
+				screen.queryByRole('link', { name: 'Trivia & quizzes' }),
+			).not.toBeInTheDocument();
+		});
+
+		it('renders when both v0 and v1 are enabled', () => {
+			renderPuzzlePageLayout('sudoku-easy', {
+				config: {
+					...createPuzzlePage('sudoku-easy').config,
+					serverSideABTests: v0AndV1On,
+				},
+			});
+
+			expect(
+				screen.getAllByRole('link', { name: 'Trivia & quizzes' })
+					.length,
+			).toBeGreaterThan(0);
+		});
 	});
 
 	describe('print button (Sudoku-only, per PR #16700 review)', () => {

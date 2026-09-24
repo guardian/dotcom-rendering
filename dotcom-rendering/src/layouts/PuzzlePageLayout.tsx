@@ -143,14 +143,19 @@ const GUARDIAN_BASE_URL = 'https://www.theguardian.com';
  * page's series sub-nav, so this is a fixed, design-provided list instead
  * of anything derived from `NAV`/`FEPuzzlePageType`.
  *
- * "Word games"/"Logic puzzles"/"Trivia & quizzes" link to their hub
- * sub-section paths; per `docs/puzzle-page.md`, those landing pages don't
- * exist yet (they're V1/V2 work) and "Trivia & quizzes" has no puzzles in
- * the current V0 registry at all - these links are included now on
- * explicit design direction, and are expected to 404 until that work
- * ships, exactly like this layout's other pre-existing "not built yet"
- * placeholder links (e.g. the archive-redirect targets documented
- * elsewhere in `docs/puzzle-page.md`).
+ * "Word games"/"Logic puzzles" link to their hub sub-section paths; per
+ * `docs/puzzle-page.md`, those landing pages don't exist yet (they're
+ * V1/V2 work) - these links are included now on explicit design
+ * direction, and are expected to 404 until that work ships, exactly like
+ * this layout's other pre-existing "not built yet" placeholder links
+ * (e.g. the archive-redirect targets documented elsewhere in
+ * `docs/puzzle-page.md`).
+ *
+ * "Trivia & quizzes" has no puzzles in the current V0 registry at all, so
+ * per explicit design direction it's only included once the v1 rollout
+ * tier is active for this request (`isPuzzlesHubV1Enabled`, the same flag
+ * gating the "More from Puzzles & Games" rail below) - hidden entirely
+ * otherwise, rather than linking to an empty hub.
  */
 const PUZZLES_SUBNAV_PARENT: LinkType = {
 	title: 'Puzzles & games',
@@ -158,7 +163,13 @@ const PUZZLES_SUBNAV_PARENT: LinkType = {
 	url: '/puzzles-and-games',
 };
 
-const PUZZLES_SUBNAV_LINKS: LinkType[] = [
+const TRIVIA_AND_QUIZZES_LINK: LinkType = {
+	title: 'Trivia & quizzes',
+	longTitle: 'Trivia & quizzes',
+	url: '/puzzles-and-games/trivia-and-quizzes',
+};
+
+const getPuzzlesSubNavLinks = (isV1Enabled: boolean): LinkType[] => [
 	{ title: 'Crosswords', longTitle: 'Crosswords', url: '/crosswords' },
 	{
 		title: 'Word games',
@@ -170,17 +181,8 @@ const PUZZLES_SUBNAV_LINKS: LinkType[] = [
 		longTitle: 'Logic puzzles',
 		url: '/puzzles-and-games/logic-puzzles',
 	},
-	{
-		title: 'Trivia & quizzes',
-		longTitle: 'Trivia & quizzes',
-		url: '/puzzles-and-games/trivia-and-quizzes',
-	},
+	...(isV1Enabled ? [TRIVIA_AND_QUIZZES_LINK] : []),
 ];
-
-const PUZZLES_SUBNAV: SubNavType = {
-	parent: PUZZLES_SUBNAV_PARENT,
-	links: PUZZLES_SUBNAV_LINKS,
-};
 
 /**
  * `ArticleHeadline`'s "This article is more than X (days/months/years)
@@ -452,9 +454,10 @@ export const PuzzlePageLayout = ({
 	// 		},
 	// 	];
 	// }
+	const isV1Enabled = isPuzzlesHubV1Enabled(config);
+
 	const showRelated =
-		!!instance.moreFromPuzzlesAndGames?.length &&
-		isPuzzlesHubV1Enabled(config);
+		!!instance.moreFromPuzzlesAndGames?.length && isV1Enabled;
 
 	// `FEPuzzlePageType` now carries `isAdFreeUser` (see that field's doc
 	// comment), so `canRenderAds` (the same shared helper every other
@@ -497,15 +500,20 @@ export const PuzzlePageLayout = ({
 	 * `NAV` (`extractNAV(puzzlePage.nav)`) carries whatever generic
 	 * navigation `frontend` resolved for this request; its
 	 * `subNavSections` has no real Puzzle Page equivalent (see
-	 * `PUZZLES_SUBNAV`'s doc comment above). `Masthead`/`Titlepiece`
+	 * `getPuzzlesSubNavLinks`'s doc comment above). `Masthead`/`Titlepiece`
 	 * (header) and the footer's own `SubNav.island` both read
 	 * `subNavSections`/`currentNavLink` straight off the `NavType` they're
 	 * given, so this single override is reused for both, rather than
 	 * duplicating the hardcoded sub-nav in two places.
 	 */
+	const puzzlesSubNav: SubNavType = {
+		parent: PUZZLES_SUBNAV_PARENT,
+		links: getPuzzlesSubNavLinks(isV1Enabled),
+	};
+
 	const puzzleNAV: NavType = {
 		...NAV,
-		subNavSections: PUZZLES_SUBNAV,
+		subNavSections: puzzlesSubNav,
 		currentNavLink: labelText,
 	};
 
@@ -868,8 +876,8 @@ export const PuzzlePageLayout = ({
 			 * scrollable copy of the same sub-nav row already shown in the
 			 * header (`Masthead`/`Titlepiece`). Per explicit product
 			 * feedback, that duplicate footer row doesn't make sense for
-			 * Puzzle Page's hardcoded `PUZZLES_SUBNAV` (see its doc
-			 * comment above): the header copy is enough, so this second
+			 * Puzzle Page's hardcoded sub-nav (see `getPuzzlesSubNavLinks`'s
+			 * doc comment above): the header copy is enough, so this second
 			 * rendering is intentionally omitted here rather than blindly
 			 * replicating every `CrosswordLayout` slot.
 			 */}
