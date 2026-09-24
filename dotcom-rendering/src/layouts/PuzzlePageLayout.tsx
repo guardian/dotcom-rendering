@@ -387,13 +387,22 @@ const relatedRailHeading = css`
 	line-height: 1.15;
 `;
 
+/**
+ * Below "leftCol", the heading has the full content width to itself (it
+ * stacks above the cards rather than sitting in the narrow 140/220px
+ * column - see `relatedRailStyles`), so "More from"/"Puzzles & games" sit
+ * on one line there; `display: block` only kicks in from "leftCol" up,
+ * where that column width forces them onto their own lines.
+ */
 const relatedRailHeadingLink = css`
 	${headlineBold20};
-	display: block;
 	color: ${themePalette('--article-section-link-text')};
 	text-decoration: none;
 	:hover {
 		text-decoration: underline;
+	}
+	${from.leftCol} {
+		display: block;
 	}
 `;
 
