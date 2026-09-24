@@ -306,8 +306,14 @@ const maxWidth = css`
  * is hidden entirely for print (see `data-print-layout="hide"` below) -
  * none of that is meaningful on a printed page, and its blue background
  * would waste ink. This is a standalone, print-only stand-in: just the
- * logo, in black, on white. `display: none` on screen; `print.css` flips
- * it to visible only for `@media print`.
+ * logo, in black, on white.
+ *
+ * The `display: none` / `@media print` toggle lives here, in the
+ * component's own (hashed, bundle-invalidated) styles, rather than in the
+ * static `print.css` - a fixed, unhashed filename that is cached by the
+ * CDN/browsers for a year (see `riff-raff.yaml`) and won't pick up changes
+ * on deploy. See commit 500e9f543e ("Relocate due to print stylesheet
+ * caching") for the same issue hit previously.
  */
 const printOnlyLogoContainerStyles = css`
 	display: none;
@@ -316,6 +322,10 @@ const printOnlyLogoContainerStyles = css`
 	svg {
 		width: 180px;
 		fill: ${sourcePalette.neutral[0]};
+	}
+
+	@media print {
+		display: block;
 	}
 `;
 
@@ -549,10 +559,7 @@ export const PuzzlePageLayout = ({
 				/>
 			</div>
 
-			<div
-				data-print-layout="print-only"
-				css={printOnlyLogoContainerStyles}
-			>
+			<div css={printOnlyLogoContainerStyles}>
 				<div css={printOnlyLogoStyles}>
 					<Logo />
 				</div>
