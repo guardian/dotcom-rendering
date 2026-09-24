@@ -149,19 +149,18 @@ const GUARDIAN_BASE_URL = '';
  * page's series sub-nav, so this is a fixed, design-provided list instead
  * of anything derived from `NAV`/`FEPuzzlePageType`.
  *
- * "Word games"/"Logic puzzles" link to their hub sub-section paths; per
- * `docs/puzzle-page.md`, those landing pages don't exist yet (they're
- * V1/V2 work) - these links are included now on explicit design
- * direction, and are expected to 404 until that work ships, exactly like
- * this layout's other pre-existing "not built yet" placeholder links
- * (e.g. the archive-redirect targets documented elsewhere in
- * `docs/puzzle-page.md`).
- *
- * "Trivia & quizzes" has no puzzles in the current V0 registry at all, so
- * per explicit design direction it's only included once the v1 rollout
- * tier is active for this request (`isPuzzlesHubV1Enabled`, the same flag
- * gating the "More from Puzzles & Games" rail below) - hidden entirely
- * otherwise, rather than linking to an empty hub.
+ * None of "Crosswords"/"Word games"/"Logic puzzles"/"Trivia & quizzes" have
+ * a real V0 equivalent (per explicit design direction, V0 is scoped to the
+ * single puzzle instance itself), so the whole row of child links is only
+ * shown once the v1 rollout tier is active for this request
+ * (`isPuzzlesHubV1Enabled`, the same flag gating the "More from Puzzles &
+ * Games" rail below) - the `PUZZLES_SUBNAV_PARENT` "Puzzles & games" link
+ * is the only one still shown on V0. "Crosswords"/"Word games"/"Logic
+ * puzzles" link to their existing production archive pages (`frontend`,
+ * not DCR), per explicit design direction; "Trivia & quizzes" links to its
+ * (not yet built) DCR hub instead, and is expected to 404 until that work
+ * ships, exactly like this layout's other pre-existing "not built yet"
+ * placeholder links (see `docs/puzzle-page.md`).
  */
 const PUZZLES_SUBNAV_PARENT: LinkType = {
 	title: 'Puzzles & games',
@@ -169,26 +168,31 @@ const PUZZLES_SUBNAV_PARENT: LinkType = {
 	url: '/puzzles-and-games',
 };
 
-const TRIVIA_AND_QUIZZES_LINK: LinkType = {
-	title: 'Trivia & quizzes',
-	longTitle: 'Trivia & quizzes',
-	url: '/puzzles-and-games/trivia-and-quizzes',
-};
-
-const getPuzzlesSubNavLinks = (isV1Enabled: boolean): LinkType[] => [
-	{ title: 'Crosswords', longTitle: 'Crosswords', url: '/crosswords' },
+const PUZZLES_SUBNAV_LINKS: LinkType[] = [
+	{
+		title: 'Crosswords',
+		longTitle: 'Crosswords',
+		url: 'https://www.theguardian.com/puzzles-and-games/crosswords/archive',
+	},
 	{
 		title: 'Word games',
 		longTitle: 'Word games',
-		url: '/puzzles-and-games/word-games',
+		url: 'https://www.theguardian.com/puzzles-and-games/word-games/archive',
 	},
 	{
 		title: 'Logic puzzles',
 		longTitle: 'Logic puzzles',
-		url: '/puzzles-and-games/logic-puzzles',
+		url: 'https://www.theguardian.com/puzzles-and-games/logic-puzzles/archive',
 	},
-	...(isV1Enabled ? [TRIVIA_AND_QUIZZES_LINK] : []),
+	{
+		title: 'Trivia & quizzes',
+		longTitle: 'Trivia & quizzes',
+		url: '/puzzles-and-games/trivia-and-quizzes',
+	},
 ];
+
+const getPuzzlesSubNavLinks = (isV1Enabled: boolean): LinkType[] =>
+	isV1Enabled ? PUZZLES_SUBNAV_LINKS : [];
 
 /**
  * `ArticleHeadline`'s "This article is more than X (days/months/years)

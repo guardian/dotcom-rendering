@@ -101,32 +101,41 @@ describe('PuzzlePageLayout', () => {
 		).toHaveAttribute('href', '/puzzles-and-games/logic-puzzles');
 	});
 
-	it('renders the hardcoded Puzzles & Games sub-nav row', () => {
-		renderPuzzlePageLayout('sudoku-easy');
+	/**
+	 * "Logic puzzles" is ambiguous by accessible name alone: the
+	 * `ArticleTitle` section kicker link (`data-component="section"`,
+	 * relative href, always rendered - see the test above) has the exact
+	 * same text as this sub-nav child link. Sub-nav child links are looked
+	 * up by their (unique) href instead of by role/name to avoid matching
+	 * the wrong element.
+	 */
+	const subNavChildHrefs = {
+		Crosswords:
+			'https://www.theguardian.com/puzzles-and-games/crosswords/archive',
+		'Word games':
+			'https://www.theguardian.com/puzzles-and-games/word-games/archive',
+		'Logic puzzles':
+			'https://www.theguardian.com/puzzles-and-games/logic-puzzles/archive',
+		'Trivia & quizzes': '/puzzles-and-games/trivia-and-quizzes',
+	};
 
-		for (const name of [
-			'Puzzles & games',
-			'Crosswords',
-			'Word games',
-			'Logic puzzles',
-		]) {
+	it('renders only the "Puzzles & games" parent sub-nav link on V0 (default fixture state)', () => {
+		const { container } = renderPuzzlePageLayout('sudoku-easy');
+
+		expect(
+			screen.getAllByRole('link', { name: 'Puzzles & games' }).length,
+		).toBeGreaterThan(0);
+
+		for (const href of Object.values(subNavChildHrefs)) {
 			expect(
-				screen.getAllByRole('link', { name }).length,
-			).toBeGreaterThan(0);
+				container.querySelector(`a[href="${href}"]`),
+			).not.toBeInTheDocument();
 		}
 	});
 
-	describe('"Trivia & quizzes" sub-nav link (v1-scoped feature)', () => {
-		it('does not render when neither v0 nor v1 is enabled (default fixture state)', () => {
-			renderPuzzlePageLayout('sudoku-easy');
-
-			expect(
-				screen.queryByRole('link', { name: 'Trivia & quizzes' }),
-			).not.toBeInTheDocument();
-		});
-
+	describe('sub-nav child links (Crosswords/Word games/Logic puzzles/Trivia & quizzes, v1-scoped feature)', () => {
 		it('does not render when v1 is enabled but v0 is not', () => {
-			renderPuzzlePageLayout('sudoku-easy', {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
 					serverSideABTests: puzzlesHubV1Participation(
@@ -135,36 +144,41 @@ describe('PuzzlePageLayout', () => {
 				},
 			});
 
-			expect(
-				screen.queryByRole('link', { name: 'Trivia & quizzes' }),
-			).not.toBeInTheDocument();
+			for (const href of Object.values(subNavChildHrefs)) {
+				expect(
+					container.querySelector(`a[href="${href}"]`),
+				).not.toBeInTheDocument();
+			}
 		});
 
 		it('does not render when v0 is enabled but v1 is not', () => {
-			renderPuzzlePageLayout('sudoku-easy', {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
 					serverSideABTests: { [PUZZLES_HUB_EXPERIMENT]: 'variant' },
 				},
 			});
 
-			expect(
-				screen.queryByRole('link', { name: 'Trivia & quizzes' }),
-			).not.toBeInTheDocument();
+			for (const href of Object.values(subNavChildHrefs)) {
+				expect(
+					container.querySelector(`a[href="${href}"]`),
+				).not.toBeInTheDocument();
+			}
 		});
 
-		it('renders when both v0 and v1 are enabled', () => {
-			renderPuzzlePageLayout('sudoku-easy', {
+		it('renders all four, with the production archive URLs for Crosswords/Word games/Logic puzzles, when both v0 and v1 are enabled', () => {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
 					serverSideABTests: v0AndV1On,
 				},
 			});
 
-			expect(
-				screen.getAllByRole('link', { name: 'Trivia & quizzes' })
-					.length,
-			).toBeGreaterThan(0);
+			for (const [name, href] of Object.entries(subNavChildHrefs)) {
+				const link = container.querySelector(`a[href="${href}"]`);
+				expect(link).toBeInTheDocument();
+				expect(link).toHaveTextContent(name);
+			}
 		});
 	});
 
