@@ -20,8 +20,8 @@ import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
+import type { Graphic } from './DecideContainer';
 import { ElectionTracker } from './ElectionTracker.island';
-import type { ElectionComponentsJson } from './ElectionTrackers/electionComponent';
 import { FrontCard } from './FrontCard';
 import { Island } from './Island';
 import type { SubtitleSize } from './SelfHostedVideoPlayer';
@@ -48,13 +48,6 @@ type BoostProperties = {
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
 	subtitleSize: SubtitleSize;
-};
-
-type Graphic = {
-	kind: 'electionTracker';
-	electionDataUrl: URL;
-	electionComponents: ElectionComponentsJson;
-	liveEffects: boolean;
 };
 
 /**
