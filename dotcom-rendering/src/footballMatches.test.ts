@@ -11,7 +11,6 @@ import { parse } from './footballMatches';
 import type {
 	FEFootballMatch,
 	FEMatchByDateAndCompetition,
-	FEResult,
 } from './frontend/feFootballMatchListPage';
 
 const withMatches = (
