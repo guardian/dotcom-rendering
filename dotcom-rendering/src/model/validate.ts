@@ -329,6 +329,44 @@ const flattenPuzzleContainers = (
 	),
 ];
 
+const isArchivePuzzle = (value: unknown): boolean =>
+	isObject(value) &&
+	isString(value.id) &&
+	isString(value.title) &&
+	isString(value.puzzleType) &&
+	(value.slug === undefined || isString(value.slug)) &&
+	isString(value.set);
+
+const isArchiveItem = (value: unknown): boolean =>
+	isObject(value) &&
+	isString(value.puzzleId) &&
+	isString(value.puzzleType) &&
+	/^\d{4}-\d{2}-\d{2}$/.test(String(value.date)) &&
+	typeof value.progress === 'number' &&
+	(value.setterName === undefined || isString(value.setterName)) &&
+	isString(value.url);
+
+const isPuzzlesArchive = (value: unknown): boolean =>
+	isObject(value) &&
+	['crosswords', 'word-games', 'logic-puzzles'].includes(
+		String(value.category),
+	) &&
+	isString(value.title) &&
+	isString(value.description) &&
+	isArchivePuzzle(value.selectedPuzzle) &&
+	Array.isArray(value.puzzles) &&
+	value.puzzles.every(isArchivePuzzle) &&
+	Number.isInteger(value.year) &&
+	Number.isInteger(value.month) &&
+	Number(value.month) >= 1 &&
+	Number(value.month) <= 12 &&
+	Array.isArray(value.items) &&
+	value.items.every(isArchiveItem) &&
+	isString(value.dataUrl) &&
+	typeof value.hasError === 'boolean' &&
+	Array.isArray(value.moreFrom) &&
+	value.moreFrom.every((item) => isPuzzleItem(item));
+
 export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 	if (
 		!isObject(data) ||
@@ -342,7 +380,8 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 		typeof data.isAdFreeUser !== 'boolean' ||
 		!isObject(data.layout) ||
 		!Array.isArray(data.layout.containers) ||
-		!data.layout.containers.every(isPuzzleContainer)
+		!data.layout.containers.every(isPuzzleContainer) ||
+		(data.archive !== undefined && !isPuzzlesArchive(data.archive))
 	) {
 		throw new TypeError(
 			'Unable to validate request body for puzzles page.',

@@ -70,6 +70,36 @@ export type PuzzlesSupportingContent = {
 export type PuzzlesLayoutType = {
 	containers: PuzzleContainer[];
 };
+export type PuzzlesArchivePuzzle = {
+	id: string;
+	title: string;
+	puzzleType: string;
+	slug?: string;
+	set: string;
+};
+
+export type PuzzlesArchiveItem = {
+	puzzleId: string;
+	puzzleType: string;
+	date: string;
+	progress: number;
+	setterName?: string;
+	url: string;
+};
+
+export type PuzzlesArchive = {
+	category: 'crosswords' | 'word-games' | 'logic-puzzles';
+	title: string;
+	description: string;
+	selectedPuzzle: PuzzlesArchivePuzzle;
+	puzzles: PuzzlesArchivePuzzle[];
+	year: number;
+	month: number;
+	items: PuzzlesArchiveItem[];
+	dataUrl: string;
+	hasError: boolean;
+	moreFrom: PuzzleItem[];
+};
 
 export interface FEPuzzlesPageType {
 	id: string;
@@ -84,5 +114,6 @@ export interface FEPuzzlesPageType {
 	canonicalUrl: string;
 	isAdFreeUser: boolean;
 	layout: PuzzlesLayoutType;
+	archive?: PuzzlesArchive;
 	commercialProperties?: Record<string, unknown>;
 }
