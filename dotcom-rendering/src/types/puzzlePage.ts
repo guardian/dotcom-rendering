@@ -15,6 +15,7 @@ import type { PuzzleItem } from './puzzlesPage';
  */
 export interface PuzzlePageInstance {
 	title: string;
+	puzzleId?: string;
 	/**
 	 * Which day's puzzle the reader wants to see, as a plain date string
 	 * (e.g. `"2026-09-11"`). `frontend` now always resolves and sends this
