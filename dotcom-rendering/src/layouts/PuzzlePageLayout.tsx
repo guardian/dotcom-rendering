@@ -359,13 +359,25 @@ const stretchLines = css`
 	}
 `;
 
+/**
+ * The heading column's width matches `PuzzleGrid`'s own `title`/`meta`
+ * column exactly (140px from "leftCol", 220px from "wide" - see
+ * `PuzzleGrid` above), so "More from" lines up with the "Puzzle/quiz type"
+ * column above it, per the Figma design. Below "leftCol", `PuzzleGrid`
+ * itself drops that left column entirely (single-column layout), which is
+ * why this rail switches to the same stacked-heading layout at that exact
+ * breakpoint too, rather than a breakpoint of its own.
+ */
 const relatedRailStyles = css`
 	display: grid;
 	gap: 16px;
 	padding: 16px 0;
 	${from.leftCol} {
-		grid-template-columns: 160px minmax(0, 1fr);
+		grid-template-columns: 140px minmax(0, 1fr);
 		gap: 20px;
+	}
+	${from.wide} {
+		grid-template-columns: 220px minmax(0, 1fr);
 	}
 `;
 
