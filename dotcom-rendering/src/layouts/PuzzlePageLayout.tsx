@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import {
 	from,
 	headlineBold20,
-	headlineBold24,
 	remSpace,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
@@ -374,12 +373,10 @@ const relatedRailHeading = css`
 	margin: 0;
 	${headlineBold20};
 	line-height: 1.15;
-	${from.tablet} {
-		${headlineBold24};
-	}
 `;
 
 const relatedRailHeadingLink = css`
+	${headlineBold20};
 	display: block;
 	color: ${themePalette('--article-section-link-text')};
 	text-decoration: none;
