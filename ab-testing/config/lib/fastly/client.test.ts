@@ -26,8 +26,7 @@ describe("FastlyClient", async () => {
 		deepEqual(result, mockResponse);
 		equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
 		equal(
-			(globalThis.fetch as MockedFetch).mock.calls[0]
-				?.arguments[0] as string,
+			(globalThis.fetch as MockedFetch).mock.calls[0]?.arguments[0],
 			"https://api.fastly.com/test-endpoint",
 		);
 	});

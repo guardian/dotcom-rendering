@@ -1,8 +1,4 @@
-import type {
-	EmbedBlockElement,
-	ImageBlockElement,
-	TextBlockElement,
-} from '../types/content';
+import type { EmbedBlockElement, ImageBlockElement } from '../types/content';
 import { decideMainMediaCaption } from './decide-caption';
 
 describe('decideMainMediaCaption', () => {
@@ -16,7 +12,7 @@ describe('decideMainMediaCaption', () => {
 					elementId: 'test-id',
 					html: '<p>test</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				} as TextBlockElement),
+				}),
 			).toEqual('');
 		});
 	});
