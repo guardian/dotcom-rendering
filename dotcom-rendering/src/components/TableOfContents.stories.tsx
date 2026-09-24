@@ -107,3 +107,67 @@ numberedList.decorators = [
 		},
 	]),
 ];
+
+const tableItemsLong = [
+	headline1,
+	headline2,
+	headline3,
+	{ id: 'fourth-h2-text', title: 'Fourth h2 text' },
+	{ id: 'fifth-h2-text', title: 'Fifth h2 text' },
+	{ id: 'sixth-h2-text', title: 'Sixth h2 text' },
+];
+
+export const filter: StoryObj = ({ format }: { format: ArticleFormat }) => {
+	return (
+		<Wrapper>
+			<TableOfContents
+				tableOfContents={tableItems}
+				format={format}
+				isFilterArticle={true}
+			/>
+		</Wrapper>
+	);
+};
+
+filter.storyName = 'filter';
+filter.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
+
+/**
+ * Six items, so that the disclosure starts closed and the collapsed bar can be
+ * seen at rest. The pinned state, where the label is replaced by the current
+ * section, needs a scrolling page and is covered by the unit tests instead.
+ */
+export const filterCollapsed: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
+	return (
+		<Wrapper>
+			<TableOfContents
+				tableOfContents={tableItemsLong}
+				format={format}
+				isFilterArticle={true}
+			/>
+		</Wrapper>
+	);
+};
+
+filterCollapsed.storyName = 'filterCollapsed';
+filterCollapsed.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];

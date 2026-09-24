@@ -15,6 +15,7 @@ import { ArticleRenderer } from '../lib/ArticleRenderer';
 import type { EditionId } from '../lib/edition';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
+import { isFilterPageId } from '../lib/theFilter';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette as themePalette } from '../palette';
 import type { Block } from '../types/blocks';
@@ -22,7 +23,10 @@ import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
-import { TableOfContents } from './TableOfContents.island';
+import {
+	FILTER_TOC_STICKY_HEIGHT,
+	TableOfContents,
+} from './TableOfContents.island';
 import { textBlockStyles } from './TextBlockComponent';
 
 type Props = {
@@ -115,6 +119,17 @@ const globalLinkStyles = () => css`
 	}
 `;
 
+/**
+ * Stops subheadings landing underneath The Filter's sticky "Jump to" bar when
+ * a reader follows one of its links. Native fragment navigation honours
+ * `scroll-margin-top`, so this needs no JavaScript.
+ */
+const filterSubheadingOffset = css`
+	h2[id] {
+		scroll-margin-top: calc(${FILTER_TOC_STICKY_HEIGHT}px + ${remSpace[2]});
+	}
+`;
+
 export const ArticleBody = ({
 	format,
 	blocks,
@@ -153,6 +168,7 @@ export const ArticleBody = ({
 		format.design === ArticleDesign.HostedArticle ||
 		format.design === ArticleDesign.HostedVideo ||
 		format.design === ArticleDesign.HostedGallery;
+	const isFilterArticle = isFilterPageId(pageId);
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 	const hasObserverPublicationTag = tags.find(
@@ -228,6 +244,7 @@ export const ArticleBody = ({
 					<TableOfContents
 						tableOfContents={tableOfContents}
 						format={format}
+						isFilterArticle={isFilterArticle}
 					></TableOfContents>
 				</Island>
 			)}
@@ -241,6 +258,7 @@ export const ArticleBody = ({
 					globalStrongStyles,
 					globalLinkStyles(),
 					isHostedContent && [hostedContentH2Styles],
+					isFilterArticle && filterSubheadingOffset,
 				]}
 				lang={language}
 				dir={languageDirection}

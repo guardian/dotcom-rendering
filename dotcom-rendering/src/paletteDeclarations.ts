@@ -1928,6 +1928,57 @@ const tableBlockBorderTopDark: PaletteFunction = () =>
 
 const tableOfContentsLight: PaletteFunction = () => sourcePalette.neutral[7];
 const tableOfContentsDark: PaletteFunction = () => sourcePalette.neutral[86];
+/**
+ * The pillar accent used throughout The Filter's "Jump to" bar: its label,
+ * chevron, rules and the item for the section currently being read. Mirrors
+ * `--article-link-text`, the established treatment for pillar-tinted text,
+ * with the two steps adjusted where they fall short of AA on this surface.
+ */
+const tableOfContentsAccentLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		/** `lifestyle[400]` is too light to sit on the bar's surface. */
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[7];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+const tableOfContentsAccentDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		/**
+		 * `news[500]` only reaches 4.07:1 against the bar's dark surface, so
+		 * the label would fall below AA. The next step up clears it at 7.89:1.
+		 */
+		case Pillar.News:
+			return sourcePalette.news[600];
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
+/**
+ * A raised surface for The Filter's sticky "Jump to" bar. Only the filter
+ * variant of the table of contents uses this; the default table of contents
+ * sits directly on `--article-background`.
+ */
+const tableOfContentsBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const tableOfContentsBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
 const tableOfContentsBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const tableOfContentsBorderDark: PaletteFunction = () =>
@@ -8608,6 +8659,14 @@ const paletteColours = {
 	'--table-of-contents': {
 		light: tableOfContentsLight,
 		dark: tableOfContentsDark,
+	},
+	'--table-of-contents-accent': {
+		light: tableOfContentsAccentLight,
+		dark: tableOfContentsAccentDark,
+	},
+	'--table-of-contents-background': {
+		light: tableOfContentsBackgroundLight,
+		dark: tableOfContentsBackgroundDark,
 	},
 	'--table-of-contents-border': {
 		light: tableOfContentsBorderLight,
