@@ -56,24 +56,24 @@ const AMUSELABS_BASE_URL = 'https://tg.amuselabs.com/guardian/date-picker';
  * confirmed mechanism, unlike `uid` this is always included, never
  * conditionally omitted).
  *
- * `idx=1` is a "today only" hack, confirmed against the AmuseLabs
- * integration doc ("The apps currently use idx=1 for the latest puzzle.
- * Archive URLs should use the stable id instead... Do not add idx=1, as
- * that selects the latest puzzle instead of the archived one."). Swapping
- * `idx=1` for `id={realProviderPuzzleId}` to support a specific past
- * puzzle (archive/calendar, V1) is future work, not something to build
- * now, this function is structured so that swap will be a small, contained
- * change here later (e.g. an optional `id` parameter on this function),
- * not a rewrite. See docs/puzzle-page.md.
+ * Uses `id={realProviderPuzzleId}` for archive/calendar links and omits
+ * `idx=1` in that case, because `idx=1` always selects the latest puzzle.
+ * Requests without a stable puzzle ID preserve the V0 latest-puzzle
+ * behaviour.
  */
 export const buildAmuseLabsUrl = (
 	config: AmuseLabsIframeConfig,
 	context: PuzzleUrlContext,
+	puzzleId?: string,
 ): string => {
 	const url = new URL(AMUSELABS_BASE_URL);
 	url.searchParams.set('set', config.set);
 	url.searchParams.set('embed', '1');
-	url.searchParams.set('idx', '1');
+	if (puzzleId) {
+		url.searchParams.set('id', puzzleId);
+	} else {
+		url.searchParams.set('idx', '1');
+	}
 	if (context.userId !== null) {
 		url.searchParams.set('uid', context.userId);
 	}
@@ -104,11 +104,12 @@ export const buildWordiplyUrl = (
 export const resolvePuzzleIframeUrl = (
 	config: PuzzleConfig,
 	context: PuzzleUrlContext,
+	puzzleId?: string,
 ): string => {
 	const { iframe } = config;
 	switch (iframe.provider) {
 		case 'amuselabs':
-			return buildAmuseLabsUrl(iframe, context);
+			return buildAmuseLabsUrl(iframe, context, puzzleId);
 		case 'wordiply':
 			return buildWordiplyUrl(iframe, context);
 		default: {

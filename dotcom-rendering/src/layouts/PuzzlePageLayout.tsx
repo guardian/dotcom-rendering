@@ -773,6 +773,7 @@ export const PuzzlePageLayout = ({
 												puzzleDate={
 													instance.puzzleDate ?? null
 												}
+												puzzleId={instance.puzzleId}
 											/>
 										</Island>
 									</ArticleContainer>

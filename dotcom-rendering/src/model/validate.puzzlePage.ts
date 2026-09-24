@@ -102,6 +102,7 @@ const isPuzzlePageInstance = (value: unknown): boolean => {
 
 	return (
 		isNonEmptyString(value.title) &&
+		isOptionalString(value.puzzleId) &&
 		isOptionalString(value.puzzleDate) &&
 		(value.moreFromPuzzlesAndGames === undefined ||
 			(Array.isArray(value.moreFromPuzzlesAndGames) &&

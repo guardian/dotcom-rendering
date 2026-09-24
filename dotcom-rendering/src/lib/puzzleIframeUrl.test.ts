@@ -6,6 +6,17 @@ import {
 } from './puzzleIframeUrl';
 
 describe('buildAmuseLabsUrl', () => {
+	it('uses a stable archive puzzle id instead of the latest-puzzle index', () => {
+		const url = new URL(
+			buildAmuseLabsUrl(
+				{ provider: 'amuselabs', set: 'guardian-sudoku-easy' },
+				{ userId: null, darkMode: false },
+				'archive-id-42',
+			),
+		);
+		expect(url.searchParams.get('id')).toBe('archive-id-42');
+		expect(url.searchParams.has('idx')).toBe(false);
+	});
 	it('builds the base URL with set/embed/idx when signed out and dark mode off', () => {
 		expect(
 			buildAmuseLabsUrl(
