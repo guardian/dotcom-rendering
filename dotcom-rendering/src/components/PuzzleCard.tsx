@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	headlineBold24,
 	headlineBold28,
@@ -291,7 +292,7 @@ export const rowStyles = (
 	> li {
 		position: relative;
 	}
-	> li:nth-child(n + 2)::before {
+	> li::before {
 		position: absolute;
 		top: calc(var(--puzzles-gap) / -2);
 		right: 0;
@@ -307,19 +308,10 @@ export const rowStyles = (
 			: `repeat(${Math.min(count, 2)}, minmax(0, 1fr))`};
 		gap: 20px;
 		max-width: 700px;
-		> li:nth-child(n + 2)::before {
+		> li::before {
 			content: none;
 		}
-		> li:nth-child(
-				n + ${Math.min(count, variant === 'compact' ? 4 : 2) + 1}
-			)::before {
-			content: '';
-		}
-		> li:not(
-				:nth-child(
-					${Math.min(count, variant === 'compact' ? 4 : 2)}n + 1
-				)
-			)::after {
+		> li::after {
 			position: absolute;
 			top: 0;
 			bottom: 0;
@@ -331,6 +323,20 @@ export const rowStyles = (
 	}
 	${from.desktop} {
 		max-width: 940px;
+	}
+	/*
+	 * Below "leftCol", callers (e.g. PuzzlePageLayout's "More from Puzzles
+	 * & games" rail) stack their own heading above this grid rather than
+	 * beside it, so the very first card's leading divider has nothing to
+	 * its left to separate from and reads as a stray line - hidden in just
+	 * that range. From "leftCol" up, callers move the heading into its own
+	 * column beside the grid (e.g. that same rail, PuzzlesDirectory.tsx's
+	 * headingColumnStyles), so the divider is reinstated there.
+	 */
+	${between.tablet.and.leftCol} {
+		> li:first-child::after {
+			content: none;
+		}
 	}
 `;
 
