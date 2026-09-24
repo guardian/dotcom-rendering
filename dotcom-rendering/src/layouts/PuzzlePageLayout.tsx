@@ -431,7 +431,7 @@ const RelatedPuzzlesRail = ({
 				Puzzles &amp; games
 			</a>
 		</h2>
-		<Rows rows={[items]} />
+		<Rows rows={[items]} smallTitle={true} />
 	</div>
 );
 

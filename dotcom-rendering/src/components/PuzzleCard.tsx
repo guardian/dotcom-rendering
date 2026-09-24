@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	between,
 	from,
+	headlineBold20,
 	headlineBold24,
 	headlineBold28,
 	palette,
@@ -137,13 +138,24 @@ const cardTextStyles = (isFeatured: boolean) => css`
 	padding: ${space[1]}px ${space[2]}px ${space[2]}px;
 `;
 
-const cardTitleStyles = css`
-	${headlineBold24};
+/**
+ * `smallTitle` keeps the title at a flat `headlineBold20` (no bump from
+ * "leftCol"), for PuzzlePageLayout's "More from Puzzles & games" rail only
+ * - the Hub's own card grid (PuzzlesDirectory.tsx) keeps its original
+ * `headlineBold24`/28-from-"leftCol" sizing, since `PuzzleCard`/`Rows` is
+ * shared between the two and a flat change here would otherwise resize the
+ * Hub's cards too.
+ */
+const cardTitleStyles = (smallTitle: boolean) => css`
+	${smallTitle ? headlineBold20 : headlineBold24};
 	line-height: 1.15;
-	${from.leftCol} {
-		${headlineBold28};
-		line-height: 1.15;
-	}
+	${!smallTitle &&
+	css`
+		${from.leftCol} {
+			${headlineBold28};
+			line-height: 1.15;
+		}
+	`}
 `;
 
 const cadenceStyles = css`
@@ -188,9 +200,11 @@ const cardImageStyles = (isFeatured: boolean) => css`
 export const PuzzleCard = ({
 	isFeatured,
 	item,
+	smallTitle = false,
 }: {
 	isFeatured: boolean;
 	item: PuzzleItem;
+	smallTitle?: boolean;
 }) => {
 	const url = getPuzzleUrl(item);
 	const colours = puzzleColours(item);
@@ -204,7 +218,7 @@ export const PuzzleCard = ({
 			<div css={cardTextStyles(isFeatured)}>
 				<span
 					className="puzzle-card-title"
-					css={cardTitleStyles}
+					css={cardTitleStyles(smallTitle)}
 					style={{ color: colours.title }}
 				>
 					{item.title}
@@ -342,9 +356,11 @@ export const rowStyles = (
 
 export const Rows = ({
 	isFeatured = false,
+	smallTitle = false,
 	rows,
 }: {
 	isFeatured?: boolean;
+	smallTitle?: boolean;
 	rows: PuzzleItem[][];
 }) => (
 	<div css={rowsStyles}>
@@ -360,7 +376,11 @@ export const Rows = ({
 				>
 					{row.map((item) => (
 						<li key={item.id}>
-							<PuzzleCard isFeatured={isFeatured} item={item} />
+							<PuzzleCard
+								isFeatured={isFeatured}
+								smallTitle={smallTitle}
+								item={item}
+							/>
 						</li>
 					))}
 				</ul>
