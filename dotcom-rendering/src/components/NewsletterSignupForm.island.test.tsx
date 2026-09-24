@@ -183,7 +183,7 @@ describe('NewsletterSignupForm', () => {
 		if (window.guardian.ophan) {
 			window.guardian.ophan.pageViewId = 'test-page-view-id';
 		}
-		global.fetch = jest.fn().mockResolvedValue({ ok: true } as Response);
+		global.fetch = jest.fn().mockResolvedValue({ ok: true });
 	});
 
 	it('submits for a signed-out user and includes marketing/browser fields', async () => {
@@ -406,9 +406,7 @@ describe('NewsletterSignupForm', () => {
 
 	it('shows failure UI with retry', async () => {
 		const testUser = user.setup();
-		global.fetch = jest
-			.fn()
-			.mockResolvedValue({ ok: false, status: 500 } as Response);
+		global.fetch = jest.fn().mockResolvedValue({ ok: false, status: 500 });
 
 		renderForm();
 

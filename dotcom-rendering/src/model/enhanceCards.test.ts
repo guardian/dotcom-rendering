@@ -624,7 +624,7 @@ describe('Enhance Cards', () => {
 								meta: {
 									headline: undefined,
 								},
-							} as VariantMeta,
+							},
 						],
 					} as FrontEditorialTest,
 				],

@@ -248,7 +248,7 @@ export const buildAuxiaGateDisplayData = async (
 		return {
 			browserId: readerPersonalData.browserId,
 			auxiaData: response.data,
-		} as AuxiaGateDisplayData;
+		};
 	}
 	return undefined;
 };
