@@ -4,7 +4,6 @@ import {
 	from,
 	headlineBold20,
 	headlineBold24,
-	headlineBold28,
 	palette,
 	space,
 	textSans14,
@@ -139,23 +138,19 @@ const cardTextStyles = (isFeatured: boolean) => css`
 `;
 
 /**
- * `smallTitle` keeps the title at a flat `headlineBold20` (no bump from
- * "leftCol"), for PuzzlePageLayout's "More from Puzzles & games" rail only
- * - the Hub's own card grid (PuzzlesDirectory.tsx) keeps its original
- * `headlineBold24`/28-from-"leftCol" sizing, since `PuzzleCard`/`Rows` is
- * shared between the two and a flat change here would otherwise resize the
- * Hub's cards too.
+ * `smallTitle` forces the title down to a flat `headlineBold20` regardless
+ * of `variant`, for PuzzlePageLayout's "More from Puzzles & games" rail
+ * only - the Hub's own card grid (PuzzlesDirectory.tsx) keeps its
+ * variant-based sizing (`compact` -> `headlineBold20`, else ->
+ * `headlineBold24`), since `PuzzleCard`/`Rows` is shared between the two
+ * and a flat change here would otherwise resize the Hub's cards too.
  */
-const cardTitleStyles = (smallTitle: boolean) => css`
-	${smallTitle ? headlineBold20 : headlineBold24};
+const cardTitleStyles = (
+	variant: PuzzleItem['cardVariant'],
+	smallTitle: boolean,
+) => css`
+	${smallTitle || variant === 'compact' ? headlineBold20 : headlineBold24};
 	line-height: 1.15;
-	${!smallTitle &&
-	css`
-		${from.leftCol} {
-			${headlineBold28};
-			line-height: 1.15;
-		}
-	`}
 `;
 
 const cadenceStyles = css`
@@ -218,7 +213,7 @@ export const PuzzleCard = ({
 			<div css={cardTextStyles(isFeatured)}>
 				<span
 					className="puzzle-card-title"
-					css={cardTitleStyles(smallTitle)}
+					css={cardTitleStyles(item.cardVariant, smallTitle)}
 					style={{ color: colours.title }}
 				>
 					{item.title}
@@ -272,6 +267,14 @@ export const rowsStyles = css`
 	${from.tablet} {
 		--puzzles-gap: 20px;
 		gap: 20px;
+		/*
+     * Add 6px above each subsequent card group so its separator sits
+     * 16px below the preceding cards and 10px above this row. This is
+     * the separator immediately above the compact crossword cards.
+     */
+		> ul ~ ul {
+			margin-top: 6px;
+		}
 	}
 	> ul ~ ul::before {
 		position: absolute;
@@ -284,27 +287,28 @@ export const rowsStyles = css`
 	}
 `;
 
-export const rowStyles = (
-	variant: PuzzleItem['cardVariant'],
-	count: number,
-) => css`
-	position: relative;
-	display: grid;
-	/*
-	 * Below the "tablet" breakpoint (740px), every variant is a single
-	 * column - the two-per-row "compact" grid only kicks in from tablet
-	 * up, per explicit design direction.
-	 */
-	grid-template-columns: 1fr;
-	gap: 16px;
-	${from.phablet} {
-		gap: 24px;
-	}
-	margin: 0;
-	padding: 0;
-	list-style: none;
+/**
+ * The divider precedes every card (including the first row/column), not
+ * just the ones after it - per explicit design direction, this replaces
+ * the "skip the first row/column" `nth-child` exclusions this helper used
+ * to have. `rowStyles` below hides the very first card's divider again,
+ * but only in the narrow "tablet"-to-"leftCol" range where its own caller's
+ * heading has nowhere to sit beside it (see `rowStyles`'s own comment).
+ *
+ * Each property is reset to `content: none` immediately before being
+ * (re)enabled, because `rowStyles` calls this at "tablet"/"desktop" too via
+ * `min-width` media queries that stack rather than replace - without the
+ * reset, a divider a lower breakpoint's call turned on can otherwise keep
+ * matching after a higher breakpoint changes `columns` underneath it.
+ */
+const cardGridStyles = (columns: number, tracks = columns) => css`
+	grid-template-columns: repeat(${tracks}, minmax(0, 1fr));
 	> li {
-		position: relative;
+		grid-column: auto;
+	}
+	> li::before,
+	> li::after {
+		content: none;
 	}
 	> li::before {
 		position: absolute;
@@ -315,13 +319,8 @@ export const rowStyles = (
 		content: '';
 		pointer-events: none;
 	}
-
-	${from.tablet} {
-		grid-template-columns: ${variant === 'compact'
-			? `repeat(${Math.min(count, 4)}, minmax(0, 1fr))`
-			: `repeat(${Math.min(count, 2)}, minmax(0, 1fr))`};
-		gap: 20px;
-		max-width: 700px;
+	${columns > 1 &&
+	css`
 		> li::before {
 			content: none;
 		}
@@ -334,25 +333,94 @@ export const rowStyles = (
 			content: '';
 			pointer-events: none;
 		}
-	}
-	${from.desktop} {
-		max-width: 940px;
-	}
-	/*
-	 * Below "leftCol", callers (e.g. PuzzlePageLayout's "More from Puzzles
-	 * & games" rail) stack their own heading above this grid rather than
-	 * beside it, so the very first card's leading divider has nothing to
-	 * its left to separate from and reads as a stray line - hidden in just
-	 * that range. From "leftCol" up, callers move the heading into its own
-	 * column beside the grid (e.g. that same rail, PuzzlesDirectory.tsx's
-	 * headingColumnStyles), so the divider is reinstated there.
-	 */
-	${between.tablet.and.leftCol} {
-		> li:first-child::after {
-			content: none;
-		}
-	}
+	`}
 `;
+
+const tabletCompactGridStyles = (count: number) => {
+	const columns = Math.min(count, 3);
+	const remainder = count % 3;
+
+	return css`
+		${cardGridStyles(columns, 6)};
+		> li {
+			grid-column: span ${count < 3 ? 6 / columns : 2};
+		}
+		${count > 3 &&
+		remainder === 2 &&
+		css`
+			> li:nth-last-child(-n + 2) {
+				grid-column: span 3;
+			}
+		`}
+		${count > 3 &&
+		remainder === 1 &&
+		css`
+			> li:last-child {
+				grid-column: span 6;
+			}
+		`}
+	`;
+};
+
+export const rowStyles = (
+	variant: PuzzleItem['cardVariant'],
+	count: number,
+) => {
+	const mobileColumns = variant === 'compact' ? Math.min(count, 2) : 1;
+	const tabletColumns =
+		variant === 'compact' ? Math.min(count, 3) : Math.min(count, 2);
+	const desktopColumns =
+		variant === 'compact' ? Math.min(count, 5) : Math.min(count, 2);
+
+	return css`
+		position: relative;
+		display: grid;
+		${cardGridStyles(mobileColumns)};
+		gap: 16px;
+		${from.phablet} {
+			gap: 24px;
+		}
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		> li {
+			position: relative;
+		}
+
+		${from.tablet} {
+			${cardGridStyles(tabletColumns)};
+			column-gap: 20px;
+			row-gap: 26px;
+			max-width: 700px;
+		}
+		${variant === 'compact' &&
+		css`
+			${between.tablet.and.desktop} {
+				${tabletCompactGridStyles(count)};
+			}
+		`}
+		${from.desktop} {
+			${cardGridStyles(desktopColumns)};
+			max-width: 940px;
+		}
+		/*
+		 * Below "leftCol", callers (e.g. PuzzlePageLayout's "More from
+		 * Puzzles & games" rail) stack their own heading above this grid
+		 * rather than beside it, so the very first card's leading divider
+		 * has nothing to its left/above to separate from and reads as a
+		 * stray line - hidden in just that range. From "leftCol" up,
+		 * callers move the heading into its own column beside the grid
+		 * (e.g. that same rail, PuzzlesDirectory.tsx's
+		 * headingColumnStyles), so the divider is reinstated there.
+		 */
+		${between.tablet.and.leftCol} {
+			> li:first-child::before,
+			> li:first-child::after {
+				content: none;
+			}
+		}
+	`;
+};
 
 export const Rows = ({
 	isFeatured = false,

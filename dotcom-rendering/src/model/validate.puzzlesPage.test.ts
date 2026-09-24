@@ -86,12 +86,12 @@ describe('validateAsPuzzlesPageType', () => {
 						}
 					: {}),
 			};
-			page.layout.containers.push(container as never);
+			page.layout.containers.push(container);
 			expect(validateAsPuzzlesPageType(page)).toBeDefined();
 			page.layout.containers.push({
 				...container,
 				id: 'second-ad',
-			} as never);
+			});
 			expect(() => validateAsPuzzlesPageType(page)).toThrow(
 				'Unable to validate request body for puzzles page',
 			);
@@ -252,7 +252,7 @@ describe('validateAsPuzzlesPageType', () => {
 			adSlot: 'inline1',
 			content: { items: [], nestedContainers: [] },
 		};
-		page.layout.containers.push(ad as never);
+		page.layout.containers.push(ad);
 		expect(validateAsPuzzlesPageType(page).layout.containers).toHaveLength(
 			2,
 		);
