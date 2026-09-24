@@ -1,4 +1,6 @@
+import { isUndefined } from '@guardian/libs';
 import type { ImgHTMLAttributes } from 'react';
+import * as v from 'valibot';
 import type {
 	AspectRatio,
 	DCRContainerLevel,
@@ -7,6 +9,7 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
+import { ElectionComponents } from './ElectionTrackers/electionComponent';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
@@ -31,6 +34,51 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
+};
+
+export const ElectionComponentsJsonSchema = v.custom<
+	v.InferInput<typeof ElectionComponents>
+>((input) => v.is(ElectionComponents, input));
+
+export const GraphicSchema = v.object({
+	kind: v.literal('electionTracker'),
+	electionDataUrl: v.pipe(
+		v.string(),
+		v.url(),
+		v.transform((url) => new URL(url)),
+	),
+	electionComponents: ElectionComponentsJsonSchema,
+	liveEffects: v.boolean(),
+});
+
+export type Graphic = v.InferOutput<typeof GraphicSchema>;
+
+const extractGraphic = (
+	groupedTrails: DCRGroupedTrails,
+): Graphic | undefined => {
+	const graphicCard = [
+		...groupedTrails.snap,
+		...groupedTrails.splash,
+		...groupedTrails.standard,
+	].find(
+		(card) =>
+			!isUndefined(card.dataUrl) &&
+			!isUndefined(card.graphicKind) &&
+			!isUndefined(card.eventData),
+	);
+
+	if (isUndefined(graphicCard)) {
+		return undefined;
+	}
+
+	const result = v.safeParse(GraphicSchema, {
+		electionDataUrl: graphicCard.dataUrl,
+		kind: graphicCard.graphicKind,
+		electionComponents: graphicCard.eventData,
+		liveEffects: true,
+	});
+
+	return result.success ? result.output : undefined;
 };
 
 export const DecideContainer = ({
@@ -68,6 +116,7 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					graphic={extractGraphic(groupedTrails)}
 				/>
 			);
 		case 'flexible/general':
