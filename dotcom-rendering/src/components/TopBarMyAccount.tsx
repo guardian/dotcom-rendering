@@ -10,7 +10,7 @@ import {
 	textSansBold17,
 	until,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
+import { Hide, SvgCross, SvgPerson } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import type { SignedIn } from '../lib/identity';
@@ -153,25 +153,29 @@ const SignIn = ({
 	showSignInTextOnMobile: boolean;
 }) => (
 	<a
-		css={myAccountLinkStyles}
+		css={[
+			myAccountLinkStyles,
+			!showSignInTextOnMobile && signInAccountStyles,
+		]}
 		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
 			'guardian_signin_header',
 		)}`}
 		data-link-name={nestedOphanComponents('header', 'topbar', 'signin')}
 	>
-		{showSignInTextOnMobile && (
+		{showSignInTextOnMobile ? (
 			<>
 				<ProfileIcon /> Sign in{' '}
 			</>
-		)}
-		{!showSignInTextOnMobile && (
+		) : (
 			<>
 				<Hide until="tablet">
 					<ProfileIcon /> Sign in
 				</Hide>
 
 				<Hide from="tablet">
-					<ProfileIcon />
+					<div css={signInCircleStyle}>
+						<SvgPerson />
+					</div>
 				</Hide>
 			</>
 		)}
@@ -212,8 +216,33 @@ export const dropDownOverrides = (showSignInTextOnMobile: boolean) => css`
 			&::after {
 				display: none;
 			}
+			&:not(button) {
+				top: 52px;
+			}
+			padding: 0;
 		}
 	`}
+`;
+
+const signInCircleStyle = css`
+	display: flex;
+	width: 36px;
+	height: 36px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	border: 1px solid var(--Neutral-neutral-neutral-100, #fff);
+	background-color: ${themePalette('--masthead-top-bar-background')};
+
+	svg {
+		margin-right: 0 !important;
+		width: 22px !important;
+		height: 22px !important;
+	}
+`;
+
+const signInAccountStyles = css`
+	padding: 8px 10px;
 `;
 
 interface SignedInWithNotificationsProps {
@@ -250,7 +279,12 @@ const SignedInWithNotifications = ({
 	);
 
 	return (
-		<div css={myAccountLinkStyles}>
+		<div
+			css={[
+				myAccountLinkStyles,
+				!showSignInTextOnMobile && signInAccountStyles,
+			]}
+		>
 			<Dropdown
 				label={
 					showSignInTextOnMobile ? (
@@ -265,10 +299,21 @@ const SignedInWithNotifications = ({
 							</Hide>
 
 							<Hide from="tablet">
-								<ProfileIcon />
+								<div css={signInCircleStyle}>
+									<SvgPerson />
+								</div>
 							</Hide>
 						</>
 					)
+				}
+				renderTrigger={
+					!showSignInTextOnMobile
+						? (isExpanded) => (
+								<div css={signInCircleStyle}>
+									{isExpanded ? <SvgCross /> : <SvgPerson />}
+								</div>
+							)
+						: undefined
 				}
 				links={identityLinksWithNotifications}
 				id="topbar-my-account"

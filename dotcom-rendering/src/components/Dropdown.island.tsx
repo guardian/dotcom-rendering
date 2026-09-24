@@ -41,6 +41,7 @@ interface Props {
 	dataLinkName: string;
 	cssOverrides?: SerializedStyles;
 	children?: React.ReactNode;
+	renderTrigger?: (isExpanded: boolean) => React.ReactNode;
 }
 
 const ulStyles = css`
@@ -396,6 +397,7 @@ export const Dropdown = ({
 	dataLinkName,
 	cssOverrides,
 	children,
+	renderTrigger,
 }: Props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [noJS, setNoJS] = useState(true);
@@ -516,7 +518,7 @@ export const Dropdown = ({
 						type="button"
 						ref={setButtonRef}
 					>
-						{label}
+						{renderTrigger ? renderTrigger(isExpanded) : label}
 						{notificationCount > 0 && (
 							<div css={dropdownButtonNotificationBadgeStyles}>
 								<NotificationBadge diameter={18} />
