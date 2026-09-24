@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	between,
 	from,
-	headlineBold20,
 	headlineBold24,
+	headlineBold28,
 	palette,
-	space,
 	textSans14,
 } from '@guardian/source/foundations';
 import { ArticleDisplay } from '../lib/articleFormat';
@@ -25,7 +23,7 @@ type Props = {
 };
 
 const sectionStyles = (isFeatured: boolean) => css`
-	--puzzles-content-top: ${isFeatured ? 16 : 8}px;
+	--puzzles-content-top: 8px;
 	--puzzles-content-bottom: 32px;
 	position: relative;
 	display: grid;
@@ -42,7 +40,8 @@ const sectionStyles = (isFeatured: boolean) => css`
 	}
 
 	${from.leftCol} {
-		grid-template-columns: 160px minmax(0, 1fr);
+		--puzzles-content-top: ${isFeatured ? 16 : 8}px;
+		grid-template-columns: 170px minmax(0, 1fr);
 	}
 
 	${from.desktop} {
@@ -51,26 +50,30 @@ const sectionStyles = (isFeatured: boolean) => css`
 
 	&:has(details) {
 		--puzzles-content-bottom: 24px;
+		${from.tablet} {
+			--puzzles-content-bottom: 40px;
+		}
 	}
 
 	${from.wide} {
-		grid-template-columns: 240px minmax(0, 1fr);
+		grid-template-columns: 250px minmax(0, 1fr);
 	}
 `;
 
 const titleStyles = css`
+	min-width: 0;
 	margin: 0;
-	padding: ${space[1]}px ${space[1]}px ${space[2]}px;
-	${headlineBold20};
+	padding: 6px 10px 12px;
+	${headlineBold24};
 	line-height: 1;
-
-	${from.tablet} {
-		padding: ${space[2]}px 20px ${space[3]}px;
-		${headlineBold24};
+	overflow-wrap: break-word;
+	${from.mobileMedium} {
+		padding-right: 20px;
+		padding-left: 20px;
 	}
 
-	${between.tablet.and.desktop} {
-		padding-top: 6px;
+	${from.tablet} {
+		${headlineBold28};
 	}
 
 	${from.leftCol} {
@@ -133,6 +136,10 @@ const contentStyles = css`
 		padding-right: 19px;
 		padding-left: 19px;
 	}
+	${from.leftCol} {
+		/* The left-column hairline sits at the centre of the standard gutter. */
+		padding-left: 9px;
+	}
 	@media (max-width: 739px) {
 		position: relative;
 		::before {
@@ -165,7 +172,8 @@ const nestedGridStyles = css`
 
 	${from.tablet} {
 		grid-template-columns: repeat(12, minmax(0, 1fr));
-		gap: 20px;
+		column-gap: 20px;
+		row-gap: 26px;
 		--puzzles-gap: 20px;
 		max-width: 700px;
 	}
