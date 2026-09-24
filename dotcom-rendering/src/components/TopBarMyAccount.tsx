@@ -155,8 +155,9 @@ const SignIn = ({
 	<a
 		css={[
 			myAccountLinkStyles,
-			!showSignInTextOnMobile && signInAccountStyles,
+			!showSignInTextOnMobile && iconInAccountStyles,
 		]}
+		aria-label={!showSignInTextOnMobile ? 'Sign in' : undefined}
 		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
 			'guardian_signin_header',
 		)}`}
@@ -231,17 +232,18 @@ const signInCircleStyle = css`
 	justify-content: center;
 	align-items: center;
 	border-radius: 50%;
-	border: 1px solid var(--Neutral-neutral-neutral-100, #fff);
+	border: 1px solid var(--masthead-nav-link-text);
 	background-color: ${themePalette('--masthead-top-bar-background')};
 
 	svg {
-		margin-right: 0 !important;
-		width: 22px !important;
-		height: 22px !important;
+		margin-right: 0;
+		width: 22px;
+		height: 22px;
+		pointer-events: none;
 	}
 `;
 
-const signInAccountStyles = css`
+const iconInAccountStyles = css`
 	padding: 8px 10px;
 `;
 
@@ -282,7 +284,7 @@ const SignedInWithNotifications = ({
 		<div
 			css={[
 				myAccountLinkStyles,
-				!showSignInTextOnMobile && signInAccountStyles,
+				!showSignInTextOnMobile && iconInAccountStyles,
 			]}
 		>
 			<Dropdown
@@ -309,12 +311,25 @@ const SignedInWithNotifications = ({
 				renderTrigger={
 					!showSignInTextOnMobile
 						? (isExpanded) => (
-								<div css={signInCircleStyle}>
-									{isExpanded ? <SvgCross /> : <SvgPerson />}
-								</div>
+								<>
+									<Hide until="tablet">
+										<ProfileIcon /> My account
+									</Hide>
+
+									<Hide from="tablet">
+										<div css={signInCircleStyle}>
+											{isExpanded ? (
+												<SvgCross />
+											) : (
+												<SvgPerson />
+											)}
+										</div>
+									</Hide>
+								</>
 							)
 						: undefined
 				}
+				ariaLabel="My account"
 				links={identityLinksWithNotifications}
 				id="topbar-my-account"
 				dataLinkName={nestedOphanComponents('header', 'topbar', '')}
