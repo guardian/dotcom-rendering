@@ -148,7 +148,6 @@ const onwardContentStyles = css`
 `;
 
 const ctaStyles = css`
-	z-index: 1;
 	${grid.column.all}
 
 	overflow: hidden;
