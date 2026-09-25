@@ -38,7 +38,7 @@ import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { palette as themePalette } from '../palette';
 import type { FEPuzzlePageType } from '../types/puzzlePage';
 import type { TagType } from '../types/tag';
-import { BannerWrapper, Stuck } from './lib/stickiness';
+import { BannerWrapper } from './lib/stickiness';
 
 /**
  * A deliberate, near-verbatim structural replica of `CrosswordLayout.tsx`
@@ -502,25 +502,23 @@ export const PuzzlePageLayout = ({
 	return (
 		<>
 			{renderAds && (
-				<Stuck>
-					<div data-print-layout="hide">
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot
-								includeMobile={shouldShowMobileAboveNavSlot(
-									config.serverSideABTests[
-										'commercial-mobile-above-nav-test'
-									],
-								)}
-							/>
-						</Section>
-					</div>
-				</Stuck>
+				<div data-print-layout="hide">
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						showSideBorders={false}
+						padSides={false}
+						shouldCenter={false}
+					>
+						<HeaderAdSlot
+							includeMobile={shouldShowMobileAboveNavSlot(
+								config.serverSideABTests[
+									'commercial-mobile-above-nav-test'
+								],
+							)}
+						/>
+					</Section>
+				</div>
 			)}
 
 			<div data-print-layout="hide">
@@ -730,6 +728,22 @@ export const PuzzlePageLayout = ({
 						</PuzzleGrid>
 					</div>
 				</Section>
+
+				{renderAds && (
+					<Hide from="tablet">
+						<Section
+							fullWidth={true}
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={themePalette('--ad-background')}
+							element="aside"
+							hideFromPrintLayout={true}
+						>
+							<AdSlot position="crossword-banner-mobile" />
+						</Section>
+					</Hide>
+				)}
 
 				<Section
 					fullWidth={true}
