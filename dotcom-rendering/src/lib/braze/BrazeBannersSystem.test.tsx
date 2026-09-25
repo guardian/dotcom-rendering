@@ -23,6 +23,30 @@ jest.mock('../../client/ophan/ophan', () => ({
 	submitComponentEvent: jest.fn(),
 }));
 
+/**
+ * `isDevelopmentDomain()` (`BrazeBannersSystem.tsx`) checks
+ * `window.location.hostname` against a hardcoded list that includes
+ * "localhost" - jsdom's default test hostname - so `brazeBannersSystemLogger`'s
+ * `log`/`info`/`warn` calls fire real, verbose `console.*` output on every
+ * test in this file, as if running on a real dev domain. Overridden here to
+ * a real production hostname instead, so this suite exercises the same
+ * (silent) logging behaviour the code actually has outside development -
+ * not a change to production behaviour, and not console suppression: a
+ * genuine `console.error` (e.g. from `brazeBannersSystemLogger.error`,
+ * which isn't gated by `isDevelopmentDomain()` at all) still prints here,
+ * same as any other test in this codebase.
+ */
+beforeEach(() => {
+	Object.defineProperty(window, 'location', {
+		value: { hostname: 'www.theguardian.com' },
+		writable: true,
+	});
+});
+
+afterEach(() => {
+	jest.restoreAllMocks();
+});
+
 const makeBraze = (requestBannersRefresh = jest.fn()): BrazeInstance =>
 	({ requestBannersRefresh }) as unknown as BrazeInstance;
 

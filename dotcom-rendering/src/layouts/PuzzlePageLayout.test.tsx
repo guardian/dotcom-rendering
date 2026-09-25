@@ -15,6 +15,38 @@ jest.mock('../lib/useMatchMedia', () => ({
 	...jest.requireActual('../lib/useMatchMedia'),
 	useMatchMedia: jest.fn(() => true),
 }));
+/**
+ * `Masthead`'s `TopBar`/`TopBarSupport`/`ReaderRevenueLinks`/
+ * `StickyBottomBanner` all read these two hooks, which fetch real
+ * ophan/identity state in a `useEffect` and only resolve after this
+ * file's `render()` calls have already returned - React then warns "not
+ * wrapped in act(...)" for every one of them, on every test, since nothing
+ * here awaits that later, unmocked async resolution. Mocked to return a
+ * fixed value synchronously instead, matching `useMatchMedia`'s mock
+ * above - not a `PuzzlePageLayout`-specific concern, just this suite's own
+ * async noise.
+ */
+jest.mock('../lib/usePageViewId', () => ({
+	usePageViewId: jest.fn(() => 'test-page-view-id'),
+}));
+jest.mock('../lib/useAuthStatus', () => ({
+	useAuthStatus: jest.fn(() => ({ kind: 'SignedOut' })),
+	useIsSignedIn: jest.fn(() => false),
+}));
+/**
+ * `StickyBottomBanner` also reads these two (both backed by `swr`), same
+ * mock shape its own `StickyBottomBanner.island.test.tsx` already uses.
+ */
+jest.mock('../lib/useBraze', () => ({
+	useBraze: jest.fn().mockReturnValue({
+		brazeMessages: {},
+		brazeCards: undefined,
+		braze: null,
+	}),
+}));
+jest.mock('../lib/useAB', () => ({
+	useAB: jest.fn().mockReturnValue(null),
+}));
 
 const v0AndV1On = {
 	[PUZZLES_HUB_EXPERIMENT]: 'variant',
@@ -87,20 +119,99 @@ describe('PuzzlePageLayout', () => {
 		).toHaveTextContent('Logic puzzles');
 	});
 
-	it('renders the hardcoded Puzzles & Games sub-nav row', () => {
-		renderPuzzlePageLayout('sudoku-easy');
+	it('renders the series/section links as root-relative paths, not absolute production URLs', () => {
+		const { container } = renderPuzzlePageLayout('sudoku-easy');
 
-		for (const name of [
-			'Puzzles & games',
-			'Crosswords',
-			'Word games',
-			'Logic puzzles',
-			'Trivia & quizzes',
-		]) {
+		expect(
+			container.querySelector('a[data-component="series"]'),
+		).toHaveAttribute(
+			'href',
+			'/puzzles-and-games/logic-puzzles/sudoku-easy',
+		);
+		expect(
+			container.querySelector('a[data-component="section"]'),
+		).toHaveAttribute('href', '/puzzles-and-games/logic-puzzles');
+	});
+
+	/**
+	 * "Logic puzzles" is ambiguous by accessible name alone: the
+	 * `ArticleTitle` section kicker link (`data-component="section"`,
+	 * relative href, always rendered - see the test above) has the exact
+	 * same text as this sub-nav child link. Sub-nav child links are looked
+	 * up by their (unique) href instead of by role/name to avoid matching
+	 * the wrong element.
+	 */
+	const subNavChildHrefs = {
+		Crosswords:
+			'https://www.theguardian.com/puzzles-and-games/crosswords/archive',
+		'Word games':
+			'https://www.theguardian.com/puzzles-and-games/word-games/archive',
+		'Logic puzzles':
+			'https://www.theguardian.com/puzzles-and-games/logic-puzzles/archive',
+		'Trivia & quizzes': '/puzzles-and-games/trivia-and-quizzes',
+	};
+
+	it('renders only the "Puzzles & games" parent sub-nav link on V0 (default fixture state)', () => {
+		const { container } = renderPuzzlePageLayout('sudoku-easy');
+
+		expect(
+			screen.getAllByRole('link', { name: 'Puzzles & games' }).length,
+		).toBeGreaterThan(0);
+
+		for (const href of Object.values(subNavChildHrefs)) {
 			expect(
-				screen.getAllByRole('link', { name }).length,
-			).toBeGreaterThan(0);
+				container.querySelector(`a[href="${href}"]`),
+			).not.toBeInTheDocument();
 		}
+	});
+
+	describe('sub-nav child links (Crosswords/Word games/Logic puzzles/Trivia & quizzes, v1-scoped feature)', () => {
+		it('does not render when v1 is enabled but v0 is not', () => {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
+				config: {
+					...createPuzzlePage('sudoku-easy').config,
+					serverSideABTests: puzzlesHubV1Participation(
+						puzzlesHubV1Experiment.variant,
+					),
+				},
+			});
+
+			for (const href of Object.values(subNavChildHrefs)) {
+				expect(
+					container.querySelector(`a[href="${href}"]`),
+				).not.toBeInTheDocument();
+			}
+		});
+
+		it('does not render when v0 is enabled but v1 is not', () => {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
+				config: {
+					...createPuzzlePage('sudoku-easy').config,
+					serverSideABTests: { [PUZZLES_HUB_EXPERIMENT]: 'variant' },
+				},
+			});
+
+			for (const href of Object.values(subNavChildHrefs)) {
+				expect(
+					container.querySelector(`a[href="${href}"]`),
+				).not.toBeInTheDocument();
+			}
+		});
+
+		it('renders all four, with the production archive URLs for Crosswords/Word games/Logic puzzles, when both v0 and v1 are enabled', () => {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
+				config: {
+					...createPuzzlePage('sudoku-easy').config,
+					serverSideABTests: v0AndV1On,
+				},
+			});
+
+			for (const [name, href] of Object.entries(subNavChildHrefs)) {
+				const link = container.querySelector(`a[href="${href}"]`);
+				expect(link).toBeInTheDocument();
+				expect(link).toHaveTextContent(name);
+			}
+		});
 	});
 
 	describe('print button (Sudoku-only, per PR #16700 review)', () => {

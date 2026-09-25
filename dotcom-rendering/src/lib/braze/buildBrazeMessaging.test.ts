@@ -66,6 +66,20 @@ describe('buildBrazeMessaging banner initialisation', () => {
 			record: jest.fn(),
 		} as never);
 		window.guardian.config.switches.brazeContentCards = false;
+		/**
+		 * `buildBrazeMessaging` calls into the real, unmocked
+		 * `BrazeBannersSystem.tsx`, whose `isDevelopmentDomain()` treats
+		 * jsdom's default test hostname ("localhost") as a development
+		 * domain and logs verbosely as a result - see the same override in
+		 * `BrazeBannersSystem.test.tsx` for the full explanation. Overridden
+		 * to a real production hostname so this suite exercises the same
+		 * (silent) logging behaviour the code actually has outside
+		 * development.
+		 */
+		Object.defineProperty(window, 'location', {
+			value: { hostname: 'www.theguardian.com' },
+			writable: true,
+		});
 	});
 
 	it('orders changeUser, banner refresh, then openSession', async () => {
