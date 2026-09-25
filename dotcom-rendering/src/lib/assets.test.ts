@@ -38,6 +38,12 @@ describe('regular expression to match files', () => {
 		expect('/assets/index.client.web.DKLwwO4p.js').toMatch(WEB);
 	});
 
+	it('should handle URL-safe hash characters', () => {
+		expect('/assets/index.client.web.DO-jjWnP.js').toMatch(WEB);
+		expect('/assets/index.client.web.DKLw_O4p.js').toMatch(WEB);
+		expect('/assets/index.client.web.DKLw_O4p42.js').toMatch(WEB);
+	});
+
 	it('should handle DEV environment', () => {
 		expect('/assets/index.client.web.variant.js').toMatch(
 			WEB_VARIANT_SCRIPT,
