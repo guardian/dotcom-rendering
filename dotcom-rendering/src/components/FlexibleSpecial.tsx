@@ -1,3 +1,4 @@
+import { from, space } from '@guardian/source/foundations';
 import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
 import { isWithinTwelveHours } from '../lib/formatTime';
@@ -19,7 +20,10 @@ import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
+import { ElectionTracker } from './ElectionTracker.island';
+import type { ElectionComponentsJson } from './ElectionTrackers/electionComponent';
 import { FrontCard } from './FrontCard';
+import { Island } from './Island';
 import type { SubtitleSize } from './SelfHostedVideoPlayer';
 import type { Alignment } from './SupportingContent';
 
@@ -32,6 +36,7 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
+	graphic?: Graphic;
 };
 
 type BoostProperties = {
@@ -43,6 +48,13 @@ type BoostProperties = {
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
 	subtitleSize: SubtitleSize;
+};
+
+type Graphic = {
+	kind: 'electionTracker';
+	electionDataUrl: URL;
+	electionComponents: ElectionComponentsJson;
+	liveEffects: boolean;
 };
 
 /**
@@ -141,7 +153,7 @@ type OneCardLayoutProps = {
 	isSplashCard?: boolean;
 };
 
-export const OneCardLayout = ({
+const OneCardLayout = ({
 	cards,
 	containerPalette,
 	hideAge,
@@ -308,6 +320,41 @@ const TwoOrFourCardLayout = ({
 	);
 };
 
+type EventGraphicProps = {
+	graphic: Graphic | undefined;
+};
+
+const EventGraphic = (props: EventGraphicProps) => {
+	if (props.graphic === undefined) {
+		return null;
+	}
+
+	switch (props.graphic.kind) {
+		case 'electionTracker':
+			return (
+				<article
+					css={{
+						paddingBottom: space[4],
+						[from.tablet]: {
+							paddingLeft: 10,
+							paddingRight: 10,
+						},
+					}}
+				>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<ElectionTracker
+							electionDataUrl={props.graphic.electionDataUrl.href}
+							electionComponents={
+								props.graphic.electionComponents
+							}
+							liveEffects={props.graphic.liveEffects}
+						/>
+					</Island>
+				</article>
+			);
+	}
+};
+
 export const FlexibleSpecial = ({
 	groupedTrails,
 	containerPalette,
@@ -317,11 +364,15 @@ export const FlexibleSpecial = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
+	graphic,
 }: Props) => {
-	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
-		...snap,
-		uniqueId: `collection-${collectionId}-snap-0`,
-	}));
+	const snaps =
+		graphic === undefined
+			? [...groupedTrails.snap].slice(0, 1).map((snap) => ({
+					...snap,
+					uniqueId: `collection-${collectionId}-snap-0`,
+				}))
+			: [];
 	const splash = [...groupedTrails.standard].slice(0, 1).map((snap) => ({
 		...snap,
 		uniqueId: `collection-${collectionId}-splash-0`,
@@ -333,6 +384,7 @@ export const FlexibleSpecial = ({
 
 	return (
 		<>
+			<EventGraphic graphic={graphic} />
 			{isNonEmptyArray(snaps) && (
 				<OneCardLayout
 					cards={snaps}

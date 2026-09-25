@@ -172,9 +172,11 @@ export const Layout = v.variant('kind', [
 ]);
 
 export const ElectionComponent = v.variant('kind', [Layout, ElectionElement]);
+export type ElectionComponent = v.InferOutput<typeof ElectionComponent>;
 
 export const ElectionComponents = v.object({
 	components: v.array(ElectionComponent),
 });
 
-export type ElectionComponent = v.InferOutput<typeof ElectionComponent>;
+export type ElectionComponents = v.InferOutput<typeof ElectionComponents>;
+export type ElectionComponentsJson = v.InferInput<typeof ElectionComponents>;
