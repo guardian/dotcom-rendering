@@ -156,7 +156,7 @@
 		"tsx": "4.23.13",
 		"type-fest": "catalog:",
 		"typescript": "catalog:",
-		"typescript-eslint": "8.70.0",
+		"typescript-eslint": "8.70.1",
 		"typescript-json-schema": "0.64.0",
 		"unified": "11.0.5",
 		"url": "0.11.4",
