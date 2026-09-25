@@ -153,6 +153,7 @@
 		"trusted-types": "2.0.0",
 		"ts-unused-exports": "10.1.0",
 		"tslib": "catalog:",
+		"terser-webpack-plugin": "5.6.1",
 		"tsx": "4.23.13",
 		"type-fest": "catalog:",
 		"typescript": "catalog:",
