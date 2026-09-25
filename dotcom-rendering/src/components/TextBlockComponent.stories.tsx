@@ -45,6 +45,13 @@ const nestedParagraphs =
 const wigglyStrong =
 	'<p>The YouTube clip I return to most often is David Bowie being interviewed by Jeremy Paxman on Newsnight in 1999. Bowie is talking about what the internet might do: “I don’t think we’ve even seen the tip of the iceberg. I<strong> </strong>think that the potential of what the internet is going to do to society, both good and bad, is unimaginable. I think we’re on the cusp of something exhilarating and terrifying.”</p>';
 
+const headings =
+	'<p>Body copy before the h3. Nulla commodo sagittis erat a malesuada. Ut iaculis interdum eros, et tristique ex.</p>' +
+	'<h3>An h3 inside a text block</h3>' +
+	'<p>Body copy after the h3. In vel dignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eu eros.</p>' +
+	'<h4>An h4 inside a text block</h4>' +
+	'<p>Body copy after the h4. Proin imperdiet pellentesque turpis sed luctus. Donec dignissim lacus in risus fermentum maximus eu vel justo.</p>';
+
 const containerStyles = css`
 	max-width: 620px;
 	margin: 20px;
@@ -256,6 +263,32 @@ export const SubSupscript = () => {
 	);
 };
 SubSupscript.storyName = 'with a sub and sup';
+
+export const Headings = () => {
+	return (
+		<div css={containerStyles}>
+			<TextBlockComponent
+				html={headings}
+				format={{
+					theme: Pillar.Culture,
+					design: ArticleDesign.Feature,
+					display: ArticleDisplay.Standard,
+				}}
+				isFirstParagraph={false}
+			/>
+		</div>
+	);
+};
+Headings.storyName = 'with h3 and h4 headings';
+Headings.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Culture,
+			design: ArticleDesign.Feature,
+			display: ArticleDisplay.Standard,
+		},
+	]),
+];
 
 export const dotStory = () => {
 	return (

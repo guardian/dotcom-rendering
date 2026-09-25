@@ -1172,8 +1172,47 @@ const headingLineDark: PaletteFunction = (format: ArticleFormat) => {
 	}
 };
 
-const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
-	switch (design) {
+/**
+ * H3 subheadings in body copy always take the pillar colour, regardless of
+ * design. H2 subheadings only do so for some designs, so
+ * {@link subheadingTextLight} reuses this for those.
+ */
+const subheadingLevel3TextLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 200);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[100];
+	}
+};
+
+const subheadingLevel3TextDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[800];
+	}
+};
+
+const subheadingTextLight: PaletteFunction = (format) => {
+	switch (format.design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
@@ -1181,20 +1220,9 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
-			switch (theme) {
-				case Pillar.News:
-				case Pillar.Opinion:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-					return pillarPalette(theme, 200);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[200];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[100];
-			}
+			return (
+				subheadingLevel3TextLight(format) ?? sourcePalette.neutral[7]
+			);
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
@@ -1207,8 +1235,8 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 	}
 };
 
-const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
-	switch (design) {
+const subheadingTextDark: PaletteFunction = (format) => {
+	switch (format.design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
@@ -1216,20 +1244,9 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
-			switch (theme) {
-				case Pillar.News:
-				case Pillar.Opinion:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-					return pillarPalette(theme, 500);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[500];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[500];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[800];
-			}
+			return (
+				subheadingLevel3TextDark(format) ?? sourcePalette.neutral[86]
+			);
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
@@ -8560,6 +8577,10 @@ const paletteColours = {
 	'--sub-nav-more': {
 		light: subNavMoreLight,
 		dark: subNavMoreDark,
+	},
+	'--subheading-level-3-text': {
+		light: subheadingLevel3TextLight,
+		dark: subheadingLevel3TextDark,
 	},
 	'--subheading-text': {
 		light: subheadingTextLight,

@@ -22,6 +22,7 @@ import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
 import { palette as themePalette } from '../palette';
 import { logger } from '../server/lib/logging';
 import { DropCap } from './DropCap';
+import { subheadingLevel3Styles, subheadingLevel4Styles } from './Subheading';
 
 type Props = {
 	html: string;
@@ -355,12 +356,22 @@ const buildElementTree =
 					key,
 					children,
 				});
+			case 'H3':
+				return jsx('h3', {
+					css: subheadingLevel3Styles,
+					key,
+					children,
+				});
+			case 'H4':
+				return jsx('h4', {
+					css: subheadingLevel4Styles,
+					key,
+					children,
+				});
 			case 'FOOTER':
 			case 'SUB':
 			case 'SUP':
 			case 'H2':
-			case 'H3':
-			case 'H4':
 			case 'B':
 			case 'UL':
 			case 'LI':
