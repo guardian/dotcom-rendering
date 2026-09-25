@@ -7,7 +7,7 @@ import type {
 	FEMatchDay,
 	FEResult,
 } from './frontend/feFootballMatchListPage';
-import { oneOf, parseDate } from './lib/parse';
+import { oneOf, parseDate, parseIntResult } from './lib/parse';
 import { error, type Result } from './lib/result';
 import { cleanTeamName } from './sportDataPage';
 
@@ -150,9 +150,31 @@ const parseScorers = (scorers: string | undefined): Scorer[] =>
 		return {
 			name,
 			time,
-			otherInfo,
+			otherInfo: formatScorerOtherInfo(otherInfo),
 		};
 	}) ?? [];
+
+/**
+ * When a goal is scored in injury time PA returns it in brackets
+ * in +mm:ss form. This converts it to +{xth minute} form
+ */
+export const formatScorerOtherInfo = (
+	otherInfo: string | undefined,
+): string | undefined => {
+	const [, cardinalMinute, detail] =
+		otherInfo?.match(/\+(\d+):\d+(\s.*)?/) ?? [];
+	if (isUndefined(cardinalMinute)) {
+		return otherInfo;
+	}
+
+	const parsedCardinalMinute = parseIntResult(cardinalMinute);
+
+	if (parsedCardinalMinute.ok) {
+		const ordinalMinute = parsedCardinalMinute.value + 1;
+		return `+${ordinalMinute}${detail ?? ''}`;
+	}
+	return otherInfo;
+};
 
 const parseFixture = (
 	feFixture: FEFixture | FEMatchDay,
