@@ -15,6 +15,38 @@ jest.mock('../lib/useMatchMedia', () => ({
 	...jest.requireActual('../lib/useMatchMedia'),
 	useMatchMedia: jest.fn(() => true),
 }));
+/**
+ * `Masthead`'s `TopBar`/`TopBarSupport`/`ReaderRevenueLinks`/
+ * `StickyBottomBanner` all read these two hooks, which fetch real
+ * ophan/identity state in a `useEffect` and only resolve after this
+ * file's `render()` calls have already returned - React then warns "not
+ * wrapped in act(...)" for every one of them, on every test, since nothing
+ * here awaits that later, unmocked async resolution. Mocked to return a
+ * fixed value synchronously instead, matching `useMatchMedia`'s mock
+ * above - not a `PuzzlePageLayout`-specific concern, just this suite's own
+ * async noise.
+ */
+jest.mock('../lib/usePageViewId', () => ({
+	usePageViewId: jest.fn(() => 'test-page-view-id'),
+}));
+jest.mock('../lib/useAuthStatus', () => ({
+	useAuthStatus: jest.fn(() => ({ kind: 'SignedOut' })),
+	useIsSignedIn: jest.fn(() => false),
+}));
+/**
+ * `StickyBottomBanner` also reads these two (both backed by `swr`), same
+ * mock shape its own `StickyBottomBanner.island.test.tsx` already uses.
+ */
+jest.mock('../lib/useBraze', () => ({
+	useBraze: jest.fn().mockReturnValue({
+		brazeMessages: {},
+		brazeCards: undefined,
+		braze: null,
+	}),
+}));
+jest.mock('../lib/useAB', () => ({
+	useAB: jest.fn().mockReturnValue(null),
+}));
 
 const v0AndV1On = {
 	[PUZZLES_HUB_EXPERIMENT]: 'variant',
