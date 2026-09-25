@@ -23,6 +23,25 @@ jest.mock('../../client/ophan/ophan', () => ({
 	submitComponentEvent: jest.fn(),
 }));
 
+/**
+ * `isDevelopmentDomain()` treats jsdom's default test hostname
+ * ("localhost") as a development domain, so `brazeBannersSystemLogger`'s
+ * `log`/`info`/`warn` calls (called internally within `BrazeBannersSystem.tsx`,
+ * so mocking that module's exports from here wouldn't intercept them) fire
+ * real `console.*` output on every test run in this file. Spied on and
+ * silenced so this suite's own log/rate-limit/staleness scenarios don't
+ * spam CI output - not a change to production behaviour.
+ */
+beforeEach(() => {
+	jest.spyOn(console, 'log').mockImplementation(() => undefined);
+	jest.spyOn(console, 'info').mockImplementation(() => undefined);
+	jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+});
+
+afterEach(() => {
+	jest.restoreAllMocks();
+});
+
 const makeBraze = (requestBannersRefresh = jest.fn()): BrazeInstance =>
 	({ requestBannersRefresh }) as unknown as BrazeInstance;
 
