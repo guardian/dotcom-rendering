@@ -12,7 +12,6 @@ import type {
 import { parseIntResult } from './lib/parse';
 import type { Result } from './lib/result';
 import { error, ok } from './lib/result';
-import { cleanTeamName } from './sportDataPage';
 
 /**
  * The stats for each team in a given football match.
@@ -190,7 +189,7 @@ const parseTeamWithStats = (
 ): Result<ParserError, FootballMatchTeamWithStats> =>
 	parsePlayers(feFootballMatchTeam.players).map((players) => ({
 		paID: feFootballMatchTeam.id,
-		name: cleanTeamName(feFootballMatchTeam.name),
+		name: feFootballMatchTeam.name,
 		abbreviatedName: feFootballMatchTeam.codename,
 		possession: feFootballMatchTeam.possession,
 		shotsOnTarget: feFootballMatchTeam.shotsOn,
@@ -217,7 +216,7 @@ const parseTeamWithStatsSummary = (
 ): Result<ParserError, FootballMatchTeamWithStatsSummary> =>
 	ok({
 		paID: feFootballMatchTeam.id,
-		name: cleanTeamName(feFootballMatchTeam.name),
+		name: feFootballMatchTeam.name,
 		possession: feFootballMatchTeam.possession,
 		shotsTotal: feFootballMatchTeam.shotsOn + feFootballMatchTeam.shotsOff,
 		statsColour: feFootballMatchTeam.colours,

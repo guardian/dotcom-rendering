@@ -81,18 +81,3 @@ export interface WebSportDataPage extends BaseSportDataPage {
 	nav: NavType;
 	renderingTarget: 'Web';
 }
-
-export const cleanTeamName = (teamName: string): string => {
-	return teamName
-		.replace('Ladies', '')
-		.replace('Holland', 'The Netherlands')
-		.replace('Ivory Coast', 'Côte d’Ivoire')
-		.replace('Bialystock', 'Białystok')
-		.replace('Union Saint Gilloise', 'Union Saint-Gilloise')
-		.replace('Bosnia-Herzegovina', 'Bosnia and Herzegovina')
-		.replace('Congo DR', 'DR Congo')
-		.replace('Curacao', 'Curaçao')
-		.replace('Czech Republic', 'Czechia')
-		.replace('Inter Milan Women', 'Inter Women')
-		.replace('HB Koge Women', 'HB Køge Women');
-};
