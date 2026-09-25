@@ -1,4 +1,3 @@
-import './webpackPublicPath';
 import { adaptSite, shouldAdapt } from './adaptiveSite';
 import { startup } from './startup';
 import { maybeSIndicatorCapiKey } from './userFeatures/cookies/sIndicatorCapiKey';
@@ -18,10 +17,7 @@ void (async () => {
 
 	void startup(
 		'bootCmp',
-		() =>
-			import(/* webpackMode: "eager" */ './bootCmp').then(({ bootCmp }) =>
-				bootCmp('Web'),
-			),
+		() => import('./bootCmp').then(({ bootCmp }) => bootCmp('Web')),
 		{
 			priority: 'critical',
 		},
@@ -30,10 +26,8 @@ void (async () => {
 	void startup(
 		'recordInitialPageEvents',
 		() =>
-			import(
-				/* webpackMode: "eager" */ './ophan/recordInitialPageEvents'
-			).then(({ recordInitialPageEvents }) =>
-				recordInitialPageEvents('Web'),
+			import('./ophan/recordInitialPageEvents').then(
+				({ recordInitialPageEvents }) => recordInitialPageEvents('Web'),
 			),
 		{
 			priority: 'critical',
@@ -43,9 +37,9 @@ void (async () => {
 	void startup(
 		'sentryLoader',
 		() =>
-			import(
-				/* webpackMode: "eager" */ './sentryLoader/sentryLoader'
-			).then(({ sentryLoader }) => sentryLoader()),
+			import('./sentryLoader/sentryLoader').then(({ sentryLoader }) =>
+				sentryLoader(),
+			),
 		{
 			priority: 'critical',
 		},
@@ -60,29 +54,15 @@ void (async () => {
 	void startup(
 		'abTesting',
 		() =>
-			import(/* webpackMode: 'eager' */ './abTesting').then(
-				({ initWindowABTesting }) => initWindowABTesting(),
+			import('./abTesting').then(({ initWindowABTesting }) =>
+				initWindowABTesting(),
 			),
 		{ priority: 'critical' },
 	);
 
 	void startup(
-		'dynamicImport',
-		() =>
-			import(/* webpackMode: "eager" */ './dynamicImport').then(
-				({ dynamicImport }) => dynamicImport(),
-			),
-		{
-			priority: 'critical',
-		},
-	);
-
-	void startup(
 		'islands',
-		() =>
-			import(/* webpackMode: "eager" */ './islands/islands').then(
-				({ islands }) => islands(),
-			),
+		() => import('./islands/islands').then(({ islands }) => islands()),
 		{
 			priority: 'critical',
 		},
@@ -91,9 +71,9 @@ void (async () => {
 	void startup(
 		'poorPerformanceMonitoring',
 		() =>
-			import(
-				/* webpackMode: "eager" */ './poorPerformanceMonitoring'
-			).then(({ recordPoorPerformance }) => recordPoorPerformance('Web')),
+			import('./poorPerformanceMonitoring').then(
+				({ recordPoorPerformance }) => recordPoorPerformance('Web'),
+			),
 		{
 			priority: 'critical',
 		},
@@ -102,9 +82,9 @@ void (async () => {
 	void startup(
 		'userFeatures',
 		() =>
-			import(
-				/* webpackMode: 'eager' */ './userFeatures/user-features'
-			).then(({ refresh }) => refresh()),
+			import('./userFeatures/user-features').then(({ refresh }) =>
+				refresh(),
+			),
 		{ priority: 'critical' },
 	);
 
@@ -114,59 +94,39 @@ void (async () => {
 	 * because they are lower priority and do not want to block
 	 * the modules above on loading these.
 	 *
-	 * We are not assigning chunk name to allow Webpack
-	 * to optimise chunking based on its algorithm.
-	 *
 	 *************************************************************/
 
 	void startup(
 		'atomIframe',
-		() =>
-			import(
-				/* webpackMode: 'lazy' */
-				'./atomIframe'
-			).then(({ atomIframe }) => atomIframe()),
+		() => import('./atomIframe').then(({ atomIframe }) => atomIframe()),
 		{ priority: 'feature' },
 	);
 
 	void startup(
 		'embedIframe',
-		() =>
-			import(
-				/* webpackMode: 'lazy' */
-				'./embedIframe'
-			).then(({ embedIframe }) => embedIframe()),
+		() => import('./embedIframe').then(({ embedIframe }) => embedIframe()),
 		{ priority: 'feature' },
 	);
 
 	void startup(
 		'newsletterEmbedIframe',
 		() =>
-			import(
-				/* webpackMode: 'lazy' */
-				'./newsletterEmbedIframe'
-			).then(({ newsletterEmbedIframe }) => newsletterEmbedIframe()),
+			import('./newsletterEmbedIframe').then(
+				({ newsletterEmbedIframe }) => newsletterEmbedIframe(),
+			),
 		{ priority: 'feature' },
 	);
 
 	void startup(
 		'initDiscussion',
-		() =>
-			import(
-				/* webpackMode: 'lazy' */
-				'./discussion'
-			).then(({ discussion }) => discussion()),
+		() => import('./discussion').then(({ discussion }) => discussion()),
 		{ priority: 'feature' },
 	);
 
 	if (maybeSIndicatorCapiKey) {
 		void startup(
 			'sIndicator',
-			() =>
-				import(
-					/* webpackMode: 'lazy' */
-					'./sIndicator'
-				).then(({ sIndicator }) => sIndicator()),
+			() => import('./sIndicator').then(({ sIndicator }) => sIndicator()),
 			{ priority: 'feature' },
 		);
 	}
