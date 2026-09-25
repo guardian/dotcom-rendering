@@ -1,4 +1,5 @@
 import { css, Global } from '@emotion/react';
+import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import { AdSlot } from './AdSlot.web';
 import { Hide } from './Hide';
@@ -8,7 +9,7 @@ const headerWrapper = css`
 `;
 
 const headerAdWrapperStyles = css`
-	z-index: 1080;
+	z-index: ${getZIndex('stickyAdWrapper')};
 	width: 100%;
 	background-color: ${palette('--ad-background')};
 	border-bottom: 1px solid ${palette('--ad-border')};
