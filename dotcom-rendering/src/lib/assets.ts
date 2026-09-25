@@ -137,7 +137,7 @@ export const getPathFromManifest = (
  *   Dev:  assets/src/client/main.web.ts
  */
 const getScriptRegex = (build: Build) => {
-	const prodPattern = `assets\\/\\w+\\.${build}\\.(\\w{8}\\.)?js(\\?.*)?$`;
+	const prodPattern = `assets\\/\\w+\\.${build}\\.([A-Za-z0-9_-]+\\.)?js(\\?.*)?$`;
 	const sourcePath = entrySourcePaths[build];
 	const devPattern = sourcePath.replace(/[/.]/g, '\\$&');
 	return new RegExp(`(${prodPattern})|(${devPattern})`);
