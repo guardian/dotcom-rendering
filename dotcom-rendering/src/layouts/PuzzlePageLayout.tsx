@@ -20,8 +20,8 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Logo } from '../components/Masthead/Titlepiece/Logo';
+import { MorePuzzlesRows } from '../components/MorePuzzlesCard';
 import { PrintButton } from '../components/PrintButton.island';
-import { Rows } from '../components/PuzzleCard';
 import { PuzzleIframe } from '../components/PuzzleIframe.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -407,11 +407,14 @@ const relatedRailHeadingLink = css`
 `;
 
 /**
- * Renders `moreFromPuzzlesAndGames` with the exact same card/grid
- * implementation (`Rows`/`PuzzleCard`, `src/components/PuzzleCard.tsx`) the
- * Puzzles Hub listing page uses for its own card rows, per explicit design
- * direction that this rail must look identical to the Hub - rather than a
- * second, independent styling of `PuzzleItem`.
+ * Renders `moreFromPuzzlesAndGames` with `MorePuzzlesCard.tsx`'s
+ * `MorePuzzlesRows` - a deliberately independent copy of the Puzzles Hub
+ * listing page's own card/grid implementation (`Rows`/`PuzzleCard`,
+ * `src/components/PuzzleCard.tsx`), not that shared implementation itself:
+ * per explicit direction, `PuzzleCard.tsx` (owned by the Puzzles Hub team)
+ * must not be modified for this rail's needs, so this rail no longer
+ * shares it - see `MorePuzzlesCard.tsx`'s own doc comment for what that
+ * means for the two staying visually in sync.
  *
  * The heading itself ("More from" / "Puzzles & games") reuses
  * `--article-section-link-text` - the same pink/lifestyle-pillar token this
@@ -431,7 +434,7 @@ const RelatedPuzzlesRail = ({
 				Puzzles &amp; games
 			</a>
 		</h2>
-		<Rows rows={[items]} smallTitle={true} />
+		<MorePuzzlesRows items={items} />
 	</div>
 );
 

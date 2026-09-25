@@ -3,55 +3,41 @@ import {
 	between,
 	from,
 	headlineBold20,
-	headlineBold24,
 	palette,
 	space,
 	textSans14,
 } from '@guardian/source/foundations';
 import type { PuzzleItem } from '../types/puzzlesPage';
+import { externalProps, getPuzzleUrl } from './PuzzleCard';
 
 /**
- * Shared with `PuzzlesDirectory.tsx` (the Puzzles Hub listing page): both the
- * Hub's own card grid and any other surface that needs to render `PuzzleItem`s
- * in the same visual style (e.g. `PuzzlePageLayout`'s "More from Puzzles &
- * games" rail) render through this one card/row implementation, so the two
- * surfaces can never visually drift apart.
+ * A deliberate, independent copy of `PuzzleCard.tsx`'s card/grid rendering,
+ * for `PuzzlePageLayout`'s "More from Puzzles & games" rail only - per
+ * explicit direction, `PuzzleCard.tsx` (owned by the Puzzles Hub team) must
+ * not be modified for this rail's needs, so this rail no longer shares that
+ * implementation and the two can drift apart without cross-impact. Only the
+ * two small, data-only helpers with no styling/layout concerns
+ * (`getPuzzleUrl`, `externalProps`) are still imported from there rather
+ * than duplicated.
+ *
+ * Simplified relative to `PuzzleCard.tsx` in the ways this rail's own
+ * caller (`RelatedPuzzlesRail`) actually constrains, not in ways the
+ * `PuzzleItem` data itself could vary:
+ * - `isFeatured` and the small-title/`cardVariant` title-size split are
+ *   dropped entirely (this rail never marks a card "featured", and its
+ *   title is always the smaller size).
+ * - Renders a single flat list of cards (`items: PuzzleItem[]`) instead of
+ *   `PuzzleCard`'s `rows: PuzzleItem[][]` groups - this rail never renders
+ *   more than one group, so the "divider between groups" styling for a
+ *   second `<ul>` is dropped too.
+ *
+ * Deliberately NOT simplified, since `moreFromPuzzlesAndGames` is typed
+ * (`docs/puzzle-page.md`) as the same general `PuzzleItem[]` the Hub uses,
+ * with no narrower contract: `cardVariant`-driven grid/typography sizing,
+ * image rendering, and the crossword `setter` byline are all kept exactly
+ * as `PuzzleCard.tsx` has them, since nothing rules out `frontend` sending
+ * this rail a non-"compact", image-bearing, or crossword item in future.
  */
-
-export const getPuzzleUrl = (item: PuzzleItem): string | undefined => {
-	const slug = item.slug;
-	if (
-		item.variant === 'archive-page' &&
-		slug !== undefined &&
-		slug.length > 0
-	) {
-		return `/puzzles-and-games/${slug}/archive`;
-	}
-	if (
-		item.variant === 'iframe-page' &&
-		slug !== undefined &&
-		slug.length > 0
-	) {
-		return item.date !== undefined && item.date.length > 0
-			? `/puzzles-and-games/${slug}/${item.date}`
-			: `/puzzles-and-games/${slug}`;
-	}
-	const url = item.url;
-	if (
-		url !== undefined &&
-		(url.startsWith('/puzzles-and-games') ||
-			url.startsWith('/crosswords/') ||
-			/^https?:\/\//.test(url))
-	) {
-		return url;
-	}
-	return undefined;
-};
-
-export const externalProps = (url: string) =>
-	/^https?:\/\//.test(url)
-		? { rel: 'noopener noreferrer', target: '_blank' as const }
-		: {};
 
 const puzzleColours = (item: PuzzleItem) => {
 	switch (item.type) {
@@ -79,7 +65,6 @@ const puzzleColours = (item: PuzzleItem) => {
 const cardStyles = (
 	variant: PuzzleItem['cardVariant'],
 	hasImage: boolean,
-	isFeatured: boolean,
 ) => css`
 	position: relative;
 	display: block;
@@ -109,15 +94,6 @@ const cardStyles = (
 		`}
 	}
 
-	${isFeatured &&
-	css`
-		${from.leftCol} {
-			min-height: 368px;
-			height: 368px;
-			padding-right: 0;
-		}
-	`}
-
 	:hover .puzzle-card-title {
 		text-decoration: underline;
 	}
@@ -128,17 +104,16 @@ const cardStyles = (
 	}
 `;
 
-const cardTextStyles = (isFeatured: boolean) => css`
+const cardTextStyles = css`
 	position: relative;
-	z-index: ${isFeatured ? 1 : 'auto'};
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
 	padding: ${space[1]}px ${space[2]}px ${space[2]}px;
 `;
 
-const cardTitleStyles = (variant: PuzzleItem['cardVariant']) => css`
-	${variant === 'compact' ? headlineBold20 : headlineBold24};
+const cardTitleStyles = css`
+	${headlineBold20};
 	line-height: 1.15;
 `;
 
@@ -155,7 +130,7 @@ const setterStyles = css`
 	line-height: 1.3;
 `;
 
-const cardImageStyles = (isFeatured: boolean) => css`
+const cardImageStyles = css`
 	position: absolute;
 	right: 0;
 	bottom: 0;
@@ -167,27 +142,9 @@ const cardImageStyles = (isFeatured: boolean) => css`
 		width: 220px;
 		height: 176px;
 	}
-
-	${isFeatured &&
-	css`
-		${from.leftCol} {
-			position: absolute;
-			right: 0;
-			bottom: 0;
-			width: 345px;
-			max-width: 75%;
-			height: 276px;
-		}
-	`}
 `;
 
-export const PuzzleCard = ({
-	isFeatured,
-	item,
-}: {
-	isFeatured: boolean;
-	item: PuzzleItem;
-}) => {
+const MorePuzzlesCard = ({ item }: { item: PuzzleItem }) => {
 	const url = getPuzzleUrl(item);
 	const colours = puzzleColours(item);
 	const setter = item.type === 'crossword' ? item.setter?.trim() : undefined;
@@ -197,10 +154,10 @@ export const PuzzleCard = ({
 		item.cardVariant !== 'compact';
 	const contents = (
 		<>
-			<div css={cardTextStyles(isFeatured)}>
+			<div css={cardTextStyles}>
 				<span
 					className="puzzle-card-title"
-					css={cardTitleStyles(item.cardVariant)}
+					css={cardTitleStyles}
 					style={{ color: colours.title }}
 				>
 					{item.title}
@@ -214,7 +171,7 @@ export const PuzzleCard = ({
 				<img
 					alt={item.imageAlt?.trim() || `${item.title} illustration`}
 					aria-hidden="true"
-					css={cardImageStyles(isFeatured)}
+					css={cardImageStyles}
 					src={item.image}
 				/>
 			)}
@@ -223,7 +180,7 @@ export const PuzzleCard = ({
 	const style = { backgroundColor: colours.background };
 	return url !== undefined ? (
 		<a
-			css={cardStyles(item.cardVariant, hasImage, isFeatured)}
+			css={cardStyles(item.cardVariant, hasImage)}
 			href={url}
 			style={style}
 			{...externalProps(url)}
@@ -231,61 +188,49 @@ export const PuzzleCard = ({
 			{contents}
 		</a>
 	) : (
-		<article
-			css={cardStyles(item.cardVariant, hasImage, isFeatured)}
-			style={style}
-		>
+		<article css={cardStyles(item.cardVariant, hasImage)} style={style}>
 			{contents}
 		</article>
 	);
 };
 
-export const rowsStyles = css`
+const rowsStyles = css`
 	--puzzles-gap: 16px;
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
-	gap: 16px;
 	${from.phablet} {
 		--puzzles-gap: 24px;
-		gap: 24px;
 	}
-
 	${from.tablet} {
 		--puzzles-gap: 20px;
-		gap: 20px;
-		/*
-     * Add 6px above each subsequent card group so its separator sits
-     * 16px below the preceding cards and 10px above this row. This is
-     * the separator immediately above the compact crossword cards.
-     */
-		> ul ~ ul {
-			margin-top: 6px;
-		}
-	}
-	> ul ~ ul::before {
-		position: absolute;
-		top: calc(var(--puzzles-gap) / -2);
-		right: 0;
-		left: 0;
-		border-top: 1px solid ${palette.neutral[86]};
-		content: '';
-		pointer-events: none;
 	}
 `;
 
+/**
+ * The divider precedes every card (including the first row/column), not
+ * just the ones after it - per explicit design direction. `rowStyles`
+ * below hides the very first card's divider again, but only in the narrow
+ * "tablet"-to-"leftCol" range where this rail's own heading has nowhere to
+ * sit beside it (see `rowStyles`'s own comment).
+ *
+ * Each property is reset to `content: none` immediately before being
+ * (re)enabled, because `rowStyles` calls this at "tablet"/"desktop" too via
+ * `min-width` media queries that stack rather than replace - without the
+ * reset, a divider a lower breakpoint's call turned on can otherwise keep
+ * matching after a higher breakpoint changes `columns` underneath it.
+ */
 const cardGridStyles = (columns: number, tracks = columns) => css`
 	grid-template-columns: repeat(${tracks}, minmax(0, 1fr));
 	> li {
 		grid-column: auto;
+		position: relative;
 	}
 	> li::before,
-	> li::after,
-	> li:not(:first-child)::before,
-	> li:not(:first-child)::after {
+	> li::after {
 		content: none;
 	}
-	> li:nth-child(n + ${columns + 1})::before {
+	> li::before {
 		position: absolute;
 		top: calc(var(--puzzles-gap) / -2);
 		right: 0;
@@ -296,7 +241,10 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 	}
 	${columns > 1 &&
 	css`
-		> li:not(:nth-child(${columns}n + 1))::after {
+		> li::before {
+			content: none;
+		}
+		> li::after {
 			position: absolute;
 			top: 0;
 			bottom: 0;
@@ -308,6 +256,11 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 	`}
 `;
 
+/**
+ * Copied verbatim from `PuzzleCard.tsx`'s own helper of the same name: the
+ * irregular tablet-only "compact" arrangement (a 6-track grid, items
+ * spanning 2 or 3 tracks so uneven counts still balance across rows).
+ */
 const tabletCompactGridStyles = (count: number) => {
 	const columns = Math.min(count, 3);
 	const remainder = count % 3;
@@ -334,10 +287,7 @@ const tabletCompactGridStyles = (count: number) => {
 	`;
 };
 
-export const rowStyles = (
-	variant: PuzzleItem['cardVariant'],
-	count: number,
-) => {
+const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => {
 	const mobileColumns = variant === 'compact' ? Math.min(count, 2) : 1;
 	const tabletColumns =
 		variant === 'compact' ? Math.min(count, 3) : Math.min(count, 2);
@@ -355,9 +305,6 @@ export const rowStyles = (
 		margin: 0;
 		padding: 0;
 		list-style: none;
-		> li {
-			position: relative;
-		}
 
 		${from.tablet} {
 			${cardGridStyles(tabletColumns)};
@@ -375,33 +322,31 @@ export const rowStyles = (
 			${cardGridStyles(desktopColumns)};
 			max-width: 940px;
 		}
+		/*
+		 * Below "leftCol", RelatedPuzzlesRail stacks its own heading
+		 * above this grid rather than beside it, so the very first card's
+		 * leading divider has nothing to its left/above to separate from
+		 * and reads as a stray line - hidden in just that range. From
+		 * "leftCol" up, the heading moves into its own column beside the
+		 * grid, so the divider is reinstated there.
+		 */
+		${between.tablet.and.leftCol} {
+			> li:first-child::before,
+			> li:first-child::after {
+				content: none;
+			}
+		}
 	`;
 };
 
-export const Rows = ({
-	isFeatured = false,
-	rows,
-}: {
-	isFeatured?: boolean;
-	rows: PuzzleItem[][];
-}) => (
+export const MorePuzzlesRows = ({ items }: { items: PuzzleItem[] }) => (
 	<div css={rowsStyles}>
-		{rows
-			.filter((row) => row.length > 0)
-			.map((row) => (
-				<ul
-					css={rowStyles(
-						row[0]?.cardVariant ?? 'primary',
-						row.length,
-					)}
-					key={row.map(({ id }) => id).join('-')}
-				>
-					{row.map((item) => (
-						<li key={item.id}>
-							<PuzzleCard isFeatured={isFeatured} item={item} />
-						</li>
-					))}
-				</ul>
+		<ul css={rowStyles(items[0]?.cardVariant ?? 'primary', items.length)}>
+			{items.map((item) => (
+				<li key={item.id}>
+					<MorePuzzlesCard item={item} />
+				</li>
 			))}
+		</ul>
 	</div>
 );
