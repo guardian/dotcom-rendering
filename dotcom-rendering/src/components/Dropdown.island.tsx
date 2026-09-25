@@ -36,11 +36,13 @@ export interface DropdownLinkType {
 
 interface Props {
 	id: string;
-	label: string;
+	label: React.ReactNode;
 	links: DropdownLinkType[];
 	dataLinkName: string;
 	cssOverrides?: SerializedStyles;
 	children?: React.ReactNode;
+	renderTrigger?: (isExpanded: boolean) => React.ReactNode;
+	ariaLabel?: string;
 }
 
 const ulStyles = css`
@@ -396,6 +398,8 @@ export const Dropdown = ({
 	dataLinkName,
 	cssOverrides,
 	children,
+	renderTrigger,
+	ariaLabel,
 }: Props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [noJS, setNoJS] = useState(true);
@@ -428,7 +432,7 @@ export const Dropdown = ({
 			// If the source of the click is the button, do nothing as the
 			// button's click handler will have already toggled the isExpanded
 			// state
-			if (buttonRef === event.target) {
+			if (buttonRef?.contains(event.target as Node)) {
 				return;
 			}
 			event.stopPropagation();
@@ -510,13 +514,14 @@ export const Dropdown = ({
 							cssOverrides,
 							isExpanded && buttonExpanded,
 						]}
+						aria-label={ariaLabel}
 						aria-expanded={isExpanded ? 'true' : 'false'}
 						data-link-name={dataLinkName}
 						data-testid="dropdown-button"
 						type="button"
 						ref={setButtonRef}
 					>
-						{label}
+						{renderTrigger ? renderTrigger(isExpanded) : label}
 						{notificationCount > 0 && (
 							<div css={dropdownButtonNotificationBadgeStyles}>
 								<NotificationBadge diameter={18} />

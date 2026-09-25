@@ -10,6 +10,7 @@ import {
 	textSansBold17,
 	until,
 } from '@guardian/source/foundations';
+import { Hide, SvgCross, SvgPerson } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import type { SignedIn } from '../lib/identity';
@@ -36,6 +37,7 @@ interface MyAccountProps {
 	discussionApiUrl: string;
 	idApiUrl: string;
 	authStatus: AuthStatusOrPending;
+	showSignInTextOnMobile: boolean;
 }
 
 // when SignedIn, authStatus can only be one of the two SignedIn states
@@ -143,19 +145,45 @@ export const buildIdentityLinks = (
 	}));
 };
 
-const SignIn = ({ idUrl }: { idUrl: string }) => (
+const SignIn = ({
+	idUrl,
+	showSignInTextOnMobile,
+}: {
+	idUrl: string;
+	showSignInTextOnMobile: boolean;
+}) => (
 	<a
-		css={myAccountLinkStyles}
+		css={[
+			myAccountLinkStyles,
+			!showSignInTextOnMobile && iconInAccountStyles,
+		]}
+		aria-label={!showSignInTextOnMobile ? 'Sign in' : undefined}
 		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
 			'guardian_signin_header',
 		)}`}
 		data-link-name={nestedOphanComponents('header', 'topbar', 'signin')}
 	>
-		<ProfileIcon /> Sign in
+		{showSignInTextOnMobile ? (
+			<>
+				<ProfileIcon /> Sign in{' '}
+			</>
+		) : (
+			<>
+				<Hide until="tablet">
+					<ProfileIcon /> Sign in
+				</Hide>
+
+				<Hide from="tablet">
+					<div css={signInCircleStyle}>
+						<SvgPerson />
+					</div>
+				</Hide>
+			</>
+		)}
 	</a>
 );
 
-export const dropDownOverrides = css`
+export const dropDownOverrides = (showSignInTextOnMobile: boolean) => css`
 	color: ${themePalette('--masthead-top-bar-link-text')};
 	padding-right: 0;
 	padding-bottom: 0;
@@ -183,6 +211,40 @@ export const dropDownOverrides = css`
 			top: 56px;
 		}
 	}
+	${!showSignInTextOnMobile &&
+	css`
+		${until.tablet} {
+			&::after {
+				display: none;
+			}
+			&:not(button) {
+				top: 52px;
+			}
+			padding: 0;
+		}
+	`}
+`;
+
+const signInCircleStyle = css`
+	display: flex;
+	width: 36px;
+	height: 36px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	border: 1px solid var(--masthead-nav-link-text);
+	background-color: ${themePalette('--masthead-top-bar-background')};
+
+	svg {
+		margin-right: 0;
+		width: 22px;
+		height: 22px;
+		pointer-events: none;
+	}
+`;
+
+const iconInAccountStyles = css`
+	padding: 8px 10px;
 `;
 
 interface SignedInWithNotificationsProps {
@@ -190,6 +252,7 @@ interface SignedInWithNotificationsProps {
 	idUrl: string;
 	notifications: Notification[];
 	authStatus: SignedIn;
+	showSignInTextOnMobile: boolean;
 }
 
 const SignedInWithNotifications = ({
@@ -197,11 +260,17 @@ const SignedInWithNotifications = ({
 	idUrl,
 	notifications,
 	authStatus,
+	showSignInTextOnMobile,
 }: SignedInWithNotificationsProps) => {
 	const userId = authStatus.idToken.claims.legacy_identity_id;
 
 	if (!userId) {
-		return <SignIn idUrl={idUrl} />;
+		return (
+			<SignIn
+				idUrl={idUrl}
+				showSignInTextOnMobile={showSignInTextOnMobile}
+			/>
+		);
 	}
 
 	const identityLinks = buildIdentityLinks(mmaUrl, idUrl, userId);
@@ -212,18 +281,59 @@ const SignedInWithNotifications = ({
 	);
 
 	return (
-		<div css={myAccountLinkStyles}>
-			<ProfileIcon />
+		<div
+			css={[
+				myAccountLinkStyles,
+				!showSignInTextOnMobile && iconInAccountStyles,
+			]}
+		>
 			<Dropdown
-				label="My account"
+				label={
+					showSignInTextOnMobile ? (
+						<>
+							<ProfileIcon />
+							My account
+						</>
+					) : (
+						<>
+							<Hide until="tablet">
+								<ProfileIcon /> My account
+							</Hide>
+
+							<Hide from="tablet">
+								<div css={signInCircleStyle}>
+									<SvgPerson />
+								</div>
+							</Hide>
+						</>
+					)
+				}
+				renderTrigger={
+					!showSignInTextOnMobile
+						? (isExpanded) => (
+								<>
+									<Hide until="tablet">
+										<ProfileIcon /> My account
+									</Hide>
+
+									<Hide from="tablet">
+										<div css={signInCircleStyle}>
+											{isExpanded ? (
+												<SvgCross />
+											) : (
+												<SvgPerson />
+											)}
+										</div>
+									</Hide>
+								</>
+							)
+						: undefined
+				}
+				ariaLabel="My account"
 				links={identityLinksWithNotifications}
 				id="topbar-my-account"
-				dataLinkName={nestedOphanComponents(
-					'header',
-					'topbar',
-					'my account',
-				)}
-				cssOverrides={dropDownOverrides}
+				dataLinkName={nestedOphanComponents('header', 'topbar', '')}
+				cssOverrides={dropDownOverrides(showSignInTextOnMobile)}
 			/>
 		</div>
 	);
@@ -265,6 +375,7 @@ export const TopBarMyAccount = ({
 	discussionApiUrl,
 	idApiUrl,
 	authStatus,
+	showSignInTextOnMobile,
 }: MyAccountProps) => {
 	const { renderingTarget } = useConfig();
 
@@ -278,9 +389,13 @@ export const TopBarMyAccount = ({
 					idApiUrl={idApiUrl}
 					authStatus={authStatus}
 					renderingTarget={renderingTarget}
+					showSignInTextOnMobile={showSignInTextOnMobile}
 				/>
 			) : (
-				<SignIn idUrl={idUrl} />
+				<SignIn
+					idUrl={idUrl}
+					showSignInTextOnMobile={showSignInTextOnMobile}
+				/>
 			)}
 		</>
 	);
