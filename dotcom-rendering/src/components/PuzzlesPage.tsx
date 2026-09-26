@@ -1,5 +1,6 @@
 import { Global } from '@emotion/react';
 import { StrictMode } from 'react';
+import { PuzzlesArchiveLayout } from '../layouts/PuzzlesArchiveLayout';
 import { PuzzlesLayout } from '../layouts/PuzzlesLayout';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
@@ -53,7 +54,11 @@ export const PuzzlesPage = ({ puzzlesPage, NAV }: Props) => {
 					serverSideABTests={puzzlesPage.config.serverSideABTests}
 				/>
 			</Island>
-			<PuzzlesLayout puzzlesPage={puzzlesPage} NAV={NAV} />
+			{puzzlesPage.archive ? (
+				<PuzzlesArchiveLayout puzzlesPage={puzzlesPage} NAV={NAV} />
+			) : (
+				<PuzzlesLayout puzzlesPage={puzzlesPage} NAV={NAV} />
+			)}
 		</StrictMode>
 	);
 };
