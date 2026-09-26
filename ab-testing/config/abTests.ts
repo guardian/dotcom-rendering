@@ -334,6 +334,30 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "webx-test-test",
+		description: "Test for webx test",
+		owners: ["dotcom.platform@theguardian.com"],
+		status: "ON",
+		expirationDate: "2026-08-31",
+		type: "client",
+		audienceSize: 10 / 100,
+		audienceSpace: "D",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "webx-test-test-2",
+		description: "Test for webx test",
+		owners: ["dotcom.platform@theguardian.com"],
+		status: "ON",
+		expirationDate: "2026-08-31",
+		type: "client",
+		audienceSize: 50 / 100,
+		audienceSpace: "E",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
