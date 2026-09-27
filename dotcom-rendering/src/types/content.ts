@@ -544,6 +544,24 @@ export interface ProductSummaryBlockElement {
 	title: string;
 }
 
+/**
+ * The slice of a product needed to render it in the product popout.
+ *
+ * Deliberately narrow: this is serialised into the page as island props, and a
+ * whole {@linkcode ProductBlockElement} carries the entire body of that
+ * product's section in `content`.
+ */
+export interface PopoutProduct {
+	elementId: string;
+	/** Anchor of the product's heading in the article body */
+	anchorId: string;
+	primaryHeadingText?: string;
+	secondaryHeadingText?: string;
+	productName: string;
+	image?: ProductImage;
+	productCtas: ProductCta[];
+}
+
 export interface EnhancedProductSummaryElement {
 	_type: 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement';
 	products: SummaryProduct[];

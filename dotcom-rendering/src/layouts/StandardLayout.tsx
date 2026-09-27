@@ -16,6 +16,7 @@ import { MatchHeaderFallback } from '../components/MatchHeaderFallback';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { OnwardsUpper } from '../components/OnwardsUpper.island';
+import { ProductPopout } from '../components/ProductPopout.island';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubNav } from '../components/SubNav.island';
@@ -28,6 +29,7 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
+import { isFilterPageId } from '../lib/theFilter';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -93,6 +95,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
 
 	const renderAds = canRenderAds(article);
+
+	/**
+	 * The popout is a floating, page-level affordance, so it only makes sense
+	 * on The Filter, and only where there is a product list to float over.
+	 */
+	const showProductPopout =
+		isFilterPageId(article.pageId) && !!article.productsForPopout?.length;
 
 	return (
 		<>
@@ -398,6 +407,20 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					</BannerWrapper>
 					{renderAds && (
 						<MobileStickyContainer data-print-layout="hide" />
+					)}
+					{showProductPopout && (
+						<Island
+							priority="feature"
+							defer={{ until: 'idle' }}
+							role="product-popout"
+						>
+							<ProductPopout
+								products={article.productsForPopout ?? []}
+								format={format}
+								title="Everything we recommend"
+								triggerLabel="Jump to our picks"
+							/>
+						</Island>
 					)}
 				</>
 			)}

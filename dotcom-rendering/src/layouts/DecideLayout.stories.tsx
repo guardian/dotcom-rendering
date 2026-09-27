@@ -6,6 +6,7 @@ import { colourSchemeDecorator } from '../../.storybook/decorators/themeDecorato
 import { AffiliateProductShowcase as AffiliateProductShowcaseFixture } from '../../fixtures/generated/fe-articles/AffiliateProductShowcase';
 import { AffiliateProductStandard as AffiliateProductStandardFixture } from '../../fixtures/generated/fe-articles/AffiliateProductStandard';
 import { Analysis as AnalysisStandardNewsFixture } from '../../fixtures/generated/fe-articles/Analysis';
+import { exampleAtAGlanceProductArray } from '../../fixtures/manual/productBlockElement';
 import { Comment as CommentStandardOpinionFixture } from '../../fixtures/generated/fe-articles/Comment';
 import { Feature as FeatureStandardCultureFixture } from '../../fixtures/generated/fe-articles/Feature';
 import { Labs as PhotoEssayImmersiveLabsFixture } from '../../fixtures/generated/fe-articles/Labs';
@@ -527,6 +528,45 @@ export const AffiliateProductStandardLight: Story = {
 export const AffiliateProductShowcaseLight: Story = {
 	args: {
 		article: enhanceArticleType(AffiliateProductShowcaseFixture, 'Web'),
+	},
+	parameters: webParameters,
+};
+
+/**
+ * The generated affiliate fixtures predate product elements, so we graft a
+ * product summary and its products onto one to exercise the product popout on
+ * a whole page: the model derives the popout list from these blocks. The
+ * fixture's pageId is already a Filter one, which is what gates the popout.
+ */
+const affiliateProductFixtureWithPopout = {
+	...AffiliateProductStandardFixture,
+	blocks: AffiliateProductStandardFixture.blocks.map((block, index) =>
+		index === 0
+			? {
+					...block,
+					elements: [
+						{
+							_type: 'model.dotcomrendering.pageElements.ProductSummaryBlockElement',
+							title: 'At a glance',
+							displayType: 'StackedCard',
+							products: exampleAtAGlanceProductArray.map(
+								(product) => ({
+									productId: product.id,
+									ctaIndex: 0,
+								}),
+							),
+						},
+						...exampleAtAGlanceProductArray,
+						...block.elements,
+					],
+				}
+			: block,
+	),
+} as typeof AffiliateProductStandardFixture;
+
+export const AffiliateProductWithPopoutLight: Story = {
+	args: {
+		article: enhanceArticleType(affiliateProductFixtureWithPopout, 'Web'),
 	},
 	parameters: webParameters,
 };

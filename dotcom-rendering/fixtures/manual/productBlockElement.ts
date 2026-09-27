@@ -1,5 +1,8 @@
 import { extractHeadingText } from '../../src/model/enhanceProductElement';
+import { enhanceProductPopout } from '../../src/model/enhanceProductPopout';
+import type { Block } from '../../src/types/blocks';
 import type {
+	PopoutProduct,
 	ProductBlockElement,
 	SummaryProduct,
 } from '../../src/types/content';
@@ -250,7 +253,7 @@ export const exampleProduct: ProductBlockElement = {
 	],
 };
 
-const exampleAtAGlanceProductArray: ProductBlockElement[] = [
+export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 	{
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 		elementId: 'b85ec38b-091b-40c2-8902-a9114df3cfe3',
@@ -534,6 +537,12 @@ const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		id: '098',
 	},
 ];
+
+/** Derived through the real model code, so the fixture cannot drift from it. */
+export const examplePopoutProducts: PopoutProduct[] =
+	enhanceProductPopout([
+		{ id: 'block-1', elements: exampleAtAGlanceProductArray },
+	] as Block[]) ?? [];
 
 export const exampleSummaryProducts: SummaryProduct[] =
 	exampleAtAGlanceProductArray.map((p) => ({

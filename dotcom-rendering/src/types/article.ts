@@ -12,6 +12,7 @@ import { buildCrosswordBlock } from '../model/buildCrosswordBlock';
 import { buildLightboxImages } from '../model/buildLightboxImages';
 import { enhanceBlocks, enhanceMainMedia } from '../model/enhanceBlocks';
 import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties';
+import { enhanceProductPopout } from '../model/enhanceProductPopout';
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
 import {
 	enhanceTableOfContents,
@@ -25,6 +26,7 @@ import type {
 	FEElement,
 	ImageBlockElement,
 	ImageForLightbox,
+	PopoutProduct,
 } from './content';
 import { type RenderingTarget } from './renderingTarget';
 
@@ -37,6 +39,7 @@ export type ArticleDeprecated = Omit<FEArticle, 'affiliateLinksDisclaimer'> & {
 	imagesForLightbox: ImageForLightbox[];
 	imagesForAppsLightbox: ImageForAppsLightbox[];
 	tableOfContents?: TableOfContentsItem[];
+	productsForPopout?: PopoutProduct[];
 	affiliateLinksDisclaimerRequired: boolean;
 };
 
@@ -210,6 +213,7 @@ export const enhanceArticleType = (
 			tableOfContents: data.showTableOfContents
 				? enhanceTableOfContents(enhancedBlocks)
 				: undefined,
+			productsForPopout: enhanceProductPopout(enhancedBlocks),
 			/**
 			 * This function needs to run at a higher level to most other enhancers
 			 * because it needs both mainMediaElements and blocks in scope
