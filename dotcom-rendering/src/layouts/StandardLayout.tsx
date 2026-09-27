@@ -101,7 +101,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	 * on The Filter, and only where there is a product list to float over.
 	 */
 	const showProductPopout =
-		isFilterPageId(article.pageId) && !!article.productsForPopout?.length;
+		isFilterPageId(article.pageId) &&
+		(article.productsForPopout?.length ?? 0) > 0;
 
 	return (
 		<>

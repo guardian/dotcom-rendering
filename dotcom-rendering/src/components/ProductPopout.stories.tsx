@@ -1,7 +1,7 @@
-import { Global, css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
-import preview from '../../.storybook/preview';
 import { storybookPaletteDeclarations } from '../../.storybook/mocks/paletteDeclarations';
+import preview from '../../.storybook/preview';
 import { examplePopoutProducts } from '../../fixtures/manual/productBlockElement';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { ProductPopout } from './ProductPopout.island';

@@ -6,7 +6,6 @@ import { colourSchemeDecorator } from '../../.storybook/decorators/themeDecorato
 import { AffiliateProductShowcase as AffiliateProductShowcaseFixture } from '../../fixtures/generated/fe-articles/AffiliateProductShowcase';
 import { AffiliateProductStandard as AffiliateProductStandardFixture } from '../../fixtures/generated/fe-articles/AffiliateProductStandard';
 import { Analysis as AnalysisStandardNewsFixture } from '../../fixtures/generated/fe-articles/Analysis';
-import { exampleAtAGlanceProductArray } from '../../fixtures/manual/productBlockElement';
 import { Comment as CommentStandardOpinionFixture } from '../../fixtures/generated/fe-articles/Comment';
 import { Feature as FeatureStandardCultureFixture } from '../../fixtures/generated/fe-articles/Feature';
 import { Labs as PhotoEssayImmersiveLabsFixture } from '../../fixtures/generated/fe-articles/Labs';
@@ -21,6 +20,7 @@ import { Picture as PictureShowcaseOpinionFixture } from '../../fixtures/generat
 import { Recipe as RecipeStandardLifestyleFixture } from '../../fixtures/generated/fe-articles/Recipe';
 import { Standard as StandardStandardNewsFixture } from '../../fixtures/generated/fe-articles/Standard';
 import { Video as VideoStandardNewsFixture } from '../../fixtures/generated/fe-articles/Video';
+import { exampleAtAGlanceProductArray } from '../../fixtures/manual/productBlockElement';
 import { embedIframe } from '../client/embedIframe';
 import {
 	ArticleDesign,
@@ -32,7 +32,10 @@ import {
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { type Article, enhanceArticleType } from '../types/article';
-import type { ImageBlockElement } from '../types/content';
+import type {
+	ImageBlockElement,
+	ProductSummaryBlockElement,
+} from '../types/content';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
 
 export type HydratedLayoutDecoratorArgs = {
@@ -538,6 +541,16 @@ export const AffiliateProductShowcaseLight: Story = {
  * a whole page: the model derives the popout list from these blocks. The
  * fixture's pageId is already a Filter one, which is what gates the popout.
  */
+const popoutSummaryElement: ProductSummaryBlockElement = {
+	_type: 'model.dotcomrendering.pageElements.ProductSummaryBlockElement',
+	title: 'At a glance',
+	displayType: 'StackedCard',
+	products: exampleAtAGlanceProductArray.map((product) => ({
+		productId: product.id,
+		ctaIndex: 0,
+	})),
+};
+
 const affiliateProductFixtureWithPopout = {
 	...AffiliateProductStandardFixture,
 	blocks: AffiliateProductStandardFixture.blocks.map((block, index) =>
@@ -545,24 +558,14 @@ const affiliateProductFixtureWithPopout = {
 			? {
 					...block,
 					elements: [
-						{
-							_type: 'model.dotcomrendering.pageElements.ProductSummaryBlockElement',
-							title: 'At a glance',
-							displayType: 'StackedCard',
-							products: exampleAtAGlanceProductArray.map(
-								(product) => ({
-									productId: product.id,
-									ctaIndex: 0,
-								}),
-							),
-						},
+						popoutSummaryElement,
 						...exampleAtAGlanceProductArray,
 						...block.elements,
 					],
 				}
 			: block,
 	),
-} as typeof AffiliateProductStandardFixture;
+};
 
 export const AffiliateProductWithPopoutLight: Story = {
 	args: {

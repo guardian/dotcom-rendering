@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ConfigProvider } from './ConfigContext';
 import { examplePopoutProducts } from '../../fixtures/manual/productBlockElement';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { ConfigProvider } from './ConfigContext';
 import { ProductPopout } from './ProductPopout.island';
 
 const format = {
