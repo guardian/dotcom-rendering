@@ -213,9 +213,35 @@ describe('PuzzlePageLayout', () => {
 				isAdFreeUser: false,
 			});
 
+			const headerSlot = container.querySelector(
+				'#dfp-ad--top-above-nav',
+			);
+			expect(headerSlot).toBeInTheDocument();
+			expect(
+				headerSlot?.closest('[data-print-layout="hide"]')
+					?.parentElement,
+			).toBe(container);
 			expect(
 				container.querySelector('#dfp-ad--merchandising-high'),
 			).toBeInTheDocument();
+			const game = container.querySelector(
+				'[data-layout="PuzzlePageLayout"] article',
+			);
+			const mobileSlot = container.querySelector(
+				'#dfp-ad--crossword-banner-mobile',
+			);
+			expect(game).toBeInTheDocument();
+			expect(mobileSlot).toHaveClass(
+				'js-ad-slot',
+				'ad-slot--crossword-banner-mobile',
+			);
+			expect(mobileSlot).toHaveAttribute(
+				'data-name',
+				'crossword-banner-mobile',
+			);
+			expect(game?.compareDocumentPosition(mobileSlot as Node)).toBe(
+				Node.DOCUMENT_POSITION_FOLLOWING,
+			);
 		});
 
 		it('does not render any ad slots for an ad-free reader', () => {
@@ -231,6 +257,9 @@ describe('PuzzlePageLayout', () => {
 			).not.toBeInTheDocument();
 			expect(
 				container.querySelector('#dfp-ad--right'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--crossword-banner-mobile'),
 			).not.toBeInTheDocument();
 		});
 	});

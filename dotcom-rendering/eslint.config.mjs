@@ -152,8 +152,8 @@ export default defineConfig([
 			// need to be explicitely added because it is disabled by extending `prettier`
 			curly: ['error', 'multi-line', 'consistent'],
 
-			/** @see https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-array-for-each.md */
-			'unicorn/no-array-for-each': 'error',
+			/** @see https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-for-each.md */
+			'unicorn/no-for-each': 'error',
 
 			'import/no-extraneous-dependencies': [
 				'error',

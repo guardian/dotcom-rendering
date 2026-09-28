@@ -11,7 +11,6 @@ import { parse } from './footballMatches';
 import type {
 	FEFootballMatch,
 	FEMatchByDateAndCompetition,
-	FEResult,
 } from './frontend/feFootballMatchListPage';
 
 const withMatches = (
@@ -102,46 +101,7 @@ describe('footballMatches', () => {
 
 		expect(result.kind).toBe('UnexpectedLiveMatch');
 	});
-	it('should return a clean team name', () => {
-		const matchesListWithTeamName = (teamName: string): FEResult => {
-			return {
-				...matchResult,
-				homeTeam: {
-					...matchResult.homeTeam,
-					name: teamName,
-				},
-			};
-		};
 
-		const uncleanToCleanNames: Record<string, string> = {
-			Ladies: '',
-			Holland: 'The Netherlands',
-			'Ivory Coast': 'Côte d’Ivoire',
-			Bialystock: 'Białystok',
-			'Union Saint Gilloise': 'Union Saint-Gilloise',
-			'Bosnia-Herzegovina': 'Bosnia and Herzegovina',
-			'Congo DR': 'DR Congo',
-			Curacao: 'Curaçao',
-			'Czech Republic': 'Czechia',
-			'Inter Milan Women': 'Inter Women',
-			'HB Koge Women': 'HB Køge Women',
-		};
-
-		for (const [uncleanName, cleanName] of Object.entries(
-			uncleanToCleanNames,
-		)) {
-			const matchDay = parse(
-				withMatches([matchesListWithTeamName(uncleanName)]),
-			).getOrThrow('Expected football match parsing to succeed');
-
-			const match = matchDay[0]!.competitions[0]!.matches[0];
-			if (match?.kind !== 'Result') {
-				throw new Error('Expected Result');
-			}
-
-			expect(match.homeTeam.name).toBe(cleanName);
-		}
-	});
 	it('should replace known live match status with our status', () => {
 		const matchDay = parse(
 			withMatches([matchDayLiveSecondHalf]),

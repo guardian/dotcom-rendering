@@ -1,4 +1,6 @@
-export const ukLocal = {
+import type { ElectionComponentsJson } from '../../../src/components/ElectionTrackers/electionComponent';
+
+export const ukLocal: ElectionComponentsJson = {
 	components: [
 		{
 			kind: 'changeBars',

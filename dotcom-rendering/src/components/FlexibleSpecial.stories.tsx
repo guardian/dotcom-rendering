@@ -1,6 +1,7 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
+import { ukGeneralFinal } from '../../fixtures/manual/electionTrackers/ukGeneralFinal';
 import {
 	getSublinks,
 	opinionTrails,
@@ -330,6 +331,23 @@ export const SnapCard: Story = {
 		collectionId: 1,
 	},
 };
+
+export const EventGraphic = {
+	args: {
+		frontSectionTitle: 'Event graphic example',
+		graphic: {
+			kind: 'electionTracker',
+			electionDataUrl: new URL('https://www.theguardian.com'),
+			electionComponents: ukGeneralFinal,
+			liveEffects: false,
+		},
+		groupedTrails: {
+			...emptyGroupedTrails,
+			standard: trails.slice(4, 9),
+		},
+		collectionId: 1,
+	},
+} satisfies Story;
 
 export const Slideshow: Story = {
 	name: 'With a slideshow',
