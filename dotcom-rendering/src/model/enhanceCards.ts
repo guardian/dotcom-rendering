@@ -667,5 +667,8 @@ export const enhanceCards = (
 				isEditorialABTestingEnabled,
 				pageId,
 			),
+			dataUrl: faciaCard.dataUrl,
+			graphicKind: faciaCard.graphicKind,
+			eventData: faciaCard.eventData,
 		};
 	});
