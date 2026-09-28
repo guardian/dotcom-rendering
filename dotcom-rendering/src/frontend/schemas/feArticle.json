@@ -304,7 +304,15 @@
             "$ref": "#/definitions/CommercialProperties"
         },
         "starRating": {
-            "$ref": "#/definitions/StarRating"
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "type": "number"
         },
         "audioArticleImage": {
             "$ref": "#/definitions/ImageBlockElement"
@@ -375,7 +383,12 @@
             "type": "string"
         },
         "matchType": {
-            "$ref": "#/definitions/MatchType"
+            "description": "General",
+            "enum": [
+                "CricketMatchType",
+                "FootballMatchType"
+            ],
+            "type": "string"
         },
         "isSpecialReport": {
             "type": "boolean"
@@ -761,105 +774,10 @@
                     "$ref": "#/definitions/FETimelineBlockElement"
                 },
                 {
-                    "type": "object",
-                    "properties": {
-                        "_type": {
-                            "type": "string",
-                            "const": "model.dotcomrendering.pageElements.DCRTimelineBlockElement"
-                        },
-                        "events": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "date": {
-                                        "type": "string"
-                                    },
-                                    "title": {
-                                        "type": "string"
-                                    },
-                                    "label": {
-                                        "type": "string"
-                                    },
-                                    "main": {
-                                        "$ref": "#/definitions/FEElement"
-                                    },
-                                    "body": {
-                                        "type": "array",
-                                        "items": {
-                                            "$ref": "#/definitions/FEElement"
-                                        }
-                                    }
-                                },
-                                "required": [
-                                    "body",
-                                    "date"
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "_type",
-                        "events"
-                    ]
+                    "$ref": "#/definitions/DCRTimelineBlockElement"
                 },
                 {
-                    "type": "object",
-                    "properties": {
-                        "_type": {
-                            "type": "string",
-                            "const": "model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement"
-                        },
-                        "sections": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "title": {
-                                        "type": "string"
-                                    },
-                                    "events": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "date": {
-                                                    "type": "string"
-                                                },
-                                                "title": {
-                                                    "type": "string"
-                                                },
-                                                "label": {
-                                                    "type": "string"
-                                                },
-                                                "main": {
-                                                    "$ref": "#/definitions/FEElement"
-                                                },
-                                                "body": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "$ref": "#/definitions/FEElement"
-                                                    }
-                                                }
-                                            },
-                                            "required": [
-                                                "body",
-                                                "date"
-                                            ]
-                                        }
-                                    }
-                                },
-                                "required": [
-                                    "events",
-                                    "title"
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "_type",
-                        "sections"
-                    ]
+                    "$ref": "#/definitions/DCRSectionedTimelineBlockElement"
                 },
                 {
                     "$ref": "#/definitions/TweetBlockElement"
@@ -947,7 +865,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -959,18 +886,6 @@
                 "kicker",
                 "trackUrl"
             ]
-        },
-        "RoleType": {
-            "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
-            "enum": [
-                "halfWidth",
-                "immersive",
-                "inline",
-                "showcase",
-                "supporting",
-                "thumbnail"
-            ],
-            "type": "string"
         },
         "AudioBlockElement": {
             "type": "object",
@@ -1130,7 +1045,16 @@
                     }
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -1523,7 +1447,16 @@
                     }
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isNonCollapsible": {
                     "type": "boolean"
@@ -1636,7 +1569,16 @@
                     "type": "boolean"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "title": {
                     "type": "string"
@@ -1740,6 +1682,18 @@
                 "variants"
             ]
         },
+        "RoleType": {
+            "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+            "enum": [
+                "halfWidth",
+                "immersive",
+                "inline",
+                "showcase",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
+        },
         "Image": {
             "type": "object",
             "properties": {
@@ -1819,7 +1773,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "placeholderUrl": {
                     "type": "string"
@@ -1890,7 +1853,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -1938,7 +1910,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -1996,7 +1977,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -2028,7 +2018,16 @@
                     "type": "boolean"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "alt": {
                     "type": "string"
@@ -2086,7 +2085,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -2161,7 +2169,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -2200,7 +2217,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "imageMedia": {
                     "type": "object",
@@ -2364,7 +2390,15 @@
                     "type": "string"
                 },
                 "starRating": {
-                    "$ref": "#/definitions/StarRating"
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "type": "number"
                 },
                 "isAvatar": {
                     "type": "boolean"
@@ -2428,17 +2462,6 @@
                 "width"
             ]
         },
-        "StarRating": {
-            "enum": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5
-            ],
-            "type": "number"
-        },
         "InstagramBlockElement": {
             "type": "object",
             "properties": {
@@ -2459,7 +2482,16 @@
                     "type": "boolean"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -2604,7 +2636,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "caption": {
                     "type": "string"
@@ -2811,7 +2852,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -2878,10 +2928,24 @@
                     "type": "number"
                 },
                 "videoPlayerFormat": {
-                    "$ref": "#/definitions/VideoPlayerFormat"
+                    "enum": [
+                        "Cinemagraph",
+                        "Default",
+                        "Loop"
+                    ],
+                    "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "caption": {
                     "type": "string"
@@ -2893,14 +2957,6 @@
                 "elementId",
                 "id"
             ]
-        },
-        "VideoPlayerFormat": {
-            "enum": [
-                "Cinemagraph",
-                "Default",
-                "Loop"
-            ],
-            "type": "string"
         },
         "MiniProfilesBlockElement": {
             "type": "object",
@@ -3019,7 +3075,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3151,7 +3216,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3256,7 +3330,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3467,7 +3550,16 @@
                     "type": "boolean"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -3515,7 +3607,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -3557,6 +3658,17 @@
                 "size"
             ]
         },
+        "StarRating": {
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "type": "number"
+        },
         "RatingSizeType": {
             "enum": [
                 "large",
@@ -3582,7 +3694,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3645,7 +3766,16 @@
                     }
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3717,7 +3847,212 @@
                                             "type": "string"
                                         },
                                         "main": {
-                                            "$ref": "#/definitions/FEElement"
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "#/definitions/AdPlaceholderBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/AudioAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/AudioBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/BlockquoteBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CaptionBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CalloutBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CalloutBlockElementV2"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CallToActionAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ReporterCalloutBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CartoonBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ChartAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CodeBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CommentBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ContentAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/DisclaimerBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/DividerBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/DocumentBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/EmbedBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ExplainerAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/GenericAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/GuideAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/GuVideoBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/HighlightBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ImageBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/InstagramBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/InteractiveAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/InteractiveContentsBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/InteractiveBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ItemLinkBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/KeyTakeawaysBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/LinkBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ListBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/MapBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/MediaAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/MiniProfilesBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/MultiBylinesBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/MultiImageBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/NumberedTitleBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/NewsletterSignupBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ProfileAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/PullquoteBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/QAndAExplainerBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/QABlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/QuizAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/RichLinkBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/SoundcloudBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/SpotifyBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/StarRatingBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/SubheadingBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/TableBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/TextBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/TimelineAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/FETimelineBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/DCRTimelineBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/DCRSectionedTimelineBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/TweetBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/VideoBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/VideoFacebookBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/VideoVimeoBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/VideoYoutubeBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/VineBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/YoutubeBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/WitnessTypeBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CrosswordElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ProductBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ProductSummaryBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/EnhancedProductSummaryElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/RecipeBlockElement"
+                                                }
+                                            ]
                                         },
                                         "body": {
                                             "type": "array",
@@ -3744,6 +4079,288 @@
                 "sections"
             ]
         },
+        "DCRTimelineBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.DCRTimelineBlockElement"
+                },
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DCRTimelineEvent"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "events"
+            ]
+        },
+        "DCRTimelineEvent": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "main": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/AdPlaceholderBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/AudioAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/AudioBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/BlockquoteBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CaptionBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CalloutBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CalloutBlockElementV2"
+                        },
+                        {
+                            "$ref": "#/definitions/CallToActionAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ReporterCalloutBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CartoonBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ChartAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CodeBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CommentBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ContentAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/DisclaimerBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/DividerBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/DocumentBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/EmbedBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ExplainerAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/GenericAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/GuideAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/GuVideoBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/HighlightBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ImageBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/InstagramBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/InteractiveAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/InteractiveContentsBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/InteractiveBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ItemLinkBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/KeyTakeawaysBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/LinkBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ListBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/MapBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/MediaAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/MiniProfilesBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/MultiBylinesBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/MultiImageBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/NumberedTitleBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/NewsletterSignupBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ProfileAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/PullquoteBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/QAndAExplainerBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/QABlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/QuizAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/RichLinkBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/SoundcloudBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/SpotifyBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/StarRatingBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/SubheadingBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/TableBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/TextBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/TimelineAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/FETimelineBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/DCRTimelineBlockElement"
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "_type": {
+                                    "type": "string",
+                                    "const": "model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement"
+                                },
+                                "sections": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "title": {
+                                                "type": "string"
+                                            },
+                                            "events": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/definitions/DCRTimelineEvent"
+                                                }
+                                            }
+                                        },
+                                        "required": [
+                                            "events",
+                                            "title"
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "_type",
+                                "sections"
+                            ]
+                        },
+                        {
+                            "$ref": "#/definitions/TweetBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/VideoBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/VideoFacebookBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/VideoVimeoBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/VideoYoutubeBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/VineBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/YoutubeBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/WitnessTypeBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CrosswordElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ProductBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ProductSummaryBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/EnhancedProductSummaryElement"
+                        },
+                        {
+                            "$ref": "#/definitions/RecipeBlockElement"
+                        }
+                    ]
+                },
+                "body": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FEElement"
+                    }
+                }
+            },
+            "required": [
+                "body",
+                "date"
+            ]
+        },
         "TweetBlockElement": {
             "type": "object",
             "properties": {
@@ -3767,7 +4384,16 @@
                     "type": "boolean"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -3800,7 +4426,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -3844,7 +4479,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -3900,7 +4544,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -3956,7 +4609,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -4077,7 +4739,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "caption": {
                     "type": "string"
@@ -4962,6 +5633,43 @@
                 "url"
             ]
         },
+        "DCRSectionedTimelineBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement"
+                },
+                "sections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DCRTimelineSection"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "sections"
+            ]
+        },
+        "DCRTimelineSection": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DCRTimelineEvent"
+                    }
+                }
+            },
+            "required": [
+                "events",
+                "title"
+            ]
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -5216,7 +5924,15 @@
                     }
                 },
                 "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
+                    "enum": [
+                        "culture",
+                        "labs",
+                        "lifestyle",
+                        "news",
+                        "opinion",
+                        "sport"
+                    ],
+                    "type": "string"
                 },
                 "more": {
                     "type": "boolean"
@@ -5903,7 +6619,15 @@
                     "type": "number"
                 },
                 "starRating": {
-                    "$ref": "#/definitions/StarRating"
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "type": "number"
                 },
                 "linkText": {
                     "type": "string"
@@ -5953,7 +6677,21 @@
                     ]
                 },
                 "mainMedia": {
-                    "$ref": "#/definitions/MainMedia"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/YoutubeVideo",
+                            "description": "For displaying embedded, playable videos directly in cards"
+                        },
+                        {
+                            "$ref": "#/definitions/SelfHostedVideo"
+                        },
+                        {
+                            "$ref": "#/definitions/Audio"
+                        },
+                        {
+                            "$ref": "#/definitions/Gallery"
+                        }
+                    ]
                 },
                 "trailText": {
                     "type": "string"
@@ -5972,7 +6710,44 @@
             "type": "object",
             "properties": {
                 "brandingType": {
-                    "$ref": "#/definitions/BrandingType"
+                    "anyOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "paid-content"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "foundation"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "sponsored"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        }
+                    ]
                 },
                 "sponsorName": {
                     "type": "string"
@@ -6059,63 +6834,6 @@
                 "aboutThisLink",
                 "logo",
                 "sponsorName"
-            ]
-        },
-        "BrandingType": {
-            "anyOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "paid-content"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "foundation"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "sponsored"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                }
-            ]
-        },
-        "MainMedia": {
-            "anyOf": [
-                {
-                    "$ref": "#/definitions/YoutubeVideo",
-                    "description": "For displaying embedded, playable videos directly in cards"
-                },
-                {
-                    "$ref": "#/definitions/SelfHostedVideo"
-                },
-                {
-                    "$ref": "#/definitions/Audio"
-                },
-                {
-                    "$ref": "#/definitions/Gallery"
-                }
             ]
         },
         "YoutubeVideo": {
@@ -6290,6 +7008,14 @@
                     ]
                 }
             ]
+        },
+        "VideoPlayerFormat": {
+            "enum": [
+                "Cinemagraph",
+                "Default",
+                "Loop"
+            ],
+            "type": "string"
         },
         "SupportedVideoFileType": {
             "enum": [
@@ -6526,6 +7252,7 @@
                     }
                 },
                 "currentNavLink": {
+                    "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                     "$ref": "#/definitions/FELinkType"
                 },
                 "currentNavLinkTitle": {
@@ -6538,6 +7265,7 @@
                     "type": "object",
                     "properties": {
                         "parent": {
+                            "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                             "$ref": "#/definitions/FELinkType"
                         },
                         "links": {
@@ -6796,14 +7524,6 @@
                 "text",
                 "url"
             ]
-        },
-        "MatchType": {
-            "description": "General",
-            "enum": [
-                "CricketMatchType",
-                "FootballMatchType"
-            ],
-            "type": "string"
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"
