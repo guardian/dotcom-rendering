@@ -18,6 +18,14 @@ const enhanceProductBlockElement = (
 	secondaryHeadingText: extractHeadingText(element.secondaryHeadingHtml),
 });
 
+const parsePrice = (price: string): number | undefined => {
+	const match = price.match(/[\d,.]+/);
+	if (!match) return undefined;
+
+	const value = Number.parseFloat(match[0].replace(/,/g, ''));
+	return Number.isNaN(value) ? undefined : value;
+};
+
 /**
  * Gets the lowest price from an array of product CTAs.
  *
@@ -35,43 +43,29 @@ const enhanceProductBlockElement = (
  * @returns {string | undefined} The lowest price string, or `undefined` if no valid prices are found.
  */
 const getLowestPrice = (ctas: ProductCta[]): string | undefined => {
-	if (ctas.length === 0) {
-		return undefined;
-	}
+	const candidates = ctas.flatMap(({ price, latestPrice }) => {
+		const ctaValue = parsePrice(price);
+		const latestValue = latestPrice
+			? parsePrice(latestPrice.price)
+			: undefined;
 
-	let lowestCta: ProductCta | null = null;
-	let lowestPrice: number | null = null;
-	let livePriceIsLowest: boolean = false;
+		return [
+			...(ctaValue === undefined
+				? []
+				: [{ value: ctaValue, display: price }]),
+			...(latestValue === undefined || !latestPrice
+				? []
+				: [{ value: latestValue, display: latestPrice.price }]),
+		];
+	});
 
-	for (const cta of ctas) {
-		const priceMatch = cta.price.match(/[\d,.]+/);
-		if (priceMatch) {
-			const priceNumber = parseFloat(priceMatch[0].replace(/,/g, ''));
-			if (Number.isNaN(priceNumber)) {
-				continue;
-			}
-
-			if (lowestPrice === null || priceNumber < lowestPrice) {
-				lowestPrice = priceNumber;
-				lowestCta = cta;
-				livePriceIsLowest = false;
-			}
-		}
-		const latestPrice = cta.latestPrice;
-		if (latestPrice) {
-			const latestPriceNumber = parseFloat(latestPrice.price);
-			if (Number.isNaN(latestPriceNumber)) {
-				continue;
-			}
-			if (lowestPrice === null || latestPriceNumber < lowestPrice) {
-				lowestPrice = latestPriceNumber;
-				lowestCta = cta;
-				livePriceIsLowest = true;
-			}
-		}
-	}
-
-	return livePriceIsLowest ? lowestCta?.latestPrice?.price : lowestCta?.price;
+	return candidates.reduce<(typeof candidates)[number] | undefined>(
+		(lowest, candidate) =>
+			lowest === undefined || candidate.value < lowest.value
+				? candidate
+				: lowest,
+		undefined,
+	)?.display;
 };
 
 const enhance =
