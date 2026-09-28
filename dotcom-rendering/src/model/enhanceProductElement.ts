@@ -33,6 +33,9 @@ const parsePrice = (price: string): number | undefined => {
  * Prices are validated upstream in Flexible Content:
  * https://github.com/guardian/flexible-content/blob/4e6097d3d23412432a9d8f50f2415a1ae622dc5b/composer/src/js/prosemirror-setup/elements/product/ProductSpec.tsx#L31
  *
+ * Each CTA may also contain a live 'latestPrice' inserted on the server
+ * This latest price is retrieved from an external API and will be shown instead of the CTA price
+ *
  * Implementation details:
  * - Extracts the floating-point number from the price string (e.g. "$26.99" → 26.99).
  * - Removes commas to handle formatted prices like "1,299.99".
@@ -44,19 +47,10 @@ const parsePrice = (price: string): number | undefined => {
  */
 const getLowestPrice = (ctas: ProductCta[]): string | undefined => {
 	const candidates = ctas.flatMap(({ price, latestPrice }) => {
-		const ctaValue = parsePrice(price);
-		const latestValue = latestPrice
-			? parsePrice(latestPrice.price)
-			: undefined;
+		const display = latestPrice?.price ?? price;
+		const value = parsePrice(display);
 
-		return [
-			...(ctaValue === undefined
-				? []
-				: [{ value: ctaValue, display: price }]),
-			...(latestValue === undefined || !latestPrice
-				? []
-				: [{ value: latestValue, display: latestPrice.price }]),
-		];
+		return value === undefined ? [] : [{ value, display }];
 	});
 
 	return candidates.reduce<(typeof candidates)[number] | undefined>(

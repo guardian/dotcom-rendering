@@ -208,6 +208,36 @@ describe('enhanceProductBlockElements', () => {
 		expect(enhanced.lowestPrice).toBe('19.99');
 	});
 
+	it('uses the latest price even when it is higher than the CTA price', () => {
+		const productBlockWithLatestPrice: ProductBlockElement = {
+			...productBlockElement,
+			productCtas: [
+				{
+					...productBlockElement.productCtas[0]!,
+					price: '£19.99',
+					latestPrice: {
+						currencySymbol: '£',
+						price: '25.99',
+					},
+				},
+				...productBlockElement.productCtas,
+			],
+		};
+
+		const [enhanced] = enhanceProductElement(elementsEnhancer)([
+			productBlockWithLatestPrice,
+		]);
+
+		if (
+			enhanced?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error('Expected a ProductBlockElement');
+		}
+
+		expect(enhanced.lowestPrice).toBe('25.99');
+	});
+
 	it('ignores an invalid latest price and still considers the CTA price', () => {
 		const productBlockWithInvalidLatestPrice: ProductBlockElement = {
 			...productBlockElement,
