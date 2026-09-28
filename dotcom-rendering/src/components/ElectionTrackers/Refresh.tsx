@@ -11,6 +11,10 @@ type Props = {
 	 * The number of seconds remaining until refresh.
 	 */
 	remaining: number;
+	/**
+	 * Whether to show text explaining that there has been an error.
+	 */
+	error: boolean;
 };
 
 export const Refresh = (props: Props) => {
@@ -29,7 +33,12 @@ export const Refresh = (props: Props) => {
 			role="timer"
 		>
 			<PulsingDot />
-			<b css={textSansBold14Object}>LIVE</b> {refreshing}
+			<b css={textSansBold14Object}>LIVE</b>{' '}
+			<ErrorMessage show={props.error} />
+			{refreshing}
 		</p>
 	);
 };
+
+const ErrorMessage = (props: { show: boolean }) =>
+	props.show ? 'error fetching data, ' : null;

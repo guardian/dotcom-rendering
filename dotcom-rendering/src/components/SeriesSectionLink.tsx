@@ -84,7 +84,7 @@ const marginRight = css`
 	}
 `;
 
-const invertedStyle = css`
+const invertedStyle = (format: ArticleFormat) => css`
 	/* Handle text wrapping onto a new line */
 	white-space: pre-wrap;
 	box-decoration-break: clone;
@@ -92,7 +92,7 @@ const invertedStyle = css`
 	padding-right: ${space[1]}px;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[2]}px;
-	${from.wide} {
+	${format.display === ArticleDisplay.Immersive ? from.leftCol : from.wide} {
 		line-height: 28px;
 	}
 `;
@@ -369,7 +369,7 @@ export const SeriesSectionLink = ({
 						css={[
 							sectionLabelLink,
 							fontStyles(format),
-							invertedStyle,
+							invertedStyle(format),
 							breakWord,
 							sectionPadding,
 							css`

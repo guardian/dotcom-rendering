@@ -111,6 +111,9 @@ const isPuzzlePageInstance = (value: unknown): boolean => {
 	);
 };
 
+const isOptionalBoolean = (value: unknown): boolean =>
+	value === undefined || typeof value === 'boolean';
+
 export const validateAsPuzzlePageType = (data: unknown): FEPuzzlePageType => {
 	if (
 		isRecord(data) &&
@@ -123,7 +126,13 @@ export const validateAsPuzzlePageType = (data: unknown): FEPuzzlePageType => {
 		isNonEmptyString(data.canonicalUrl) &&
 		isString(data.editionId) &&
 		editions.has(String(data.editionId)) &&
-		isPuzzlePageInstance(data.instance)
+		isPuzzlePageInstance(data.instance) &&
+		// `isAdFreeUser` is optional, not required: `frontend` does not
+		// send it yet on real `/PuzzlePage` requests (needs its own,
+		// coordinated follow-up change - see `FEPuzzlePageType.isAdFreeUser`'s
+		// doc comment), so requiring it here would 500 every real request
+		// until then.
+		isOptionalBoolean(data.isAdFreeUser)
 	) {
 		return data as unknown as FEPuzzlePageType;
 	}

@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold20,
 	headlineBold24,
+	headlineBold28,
+	headlineMedium20,
 	palette,
 	space,
 	textSans12,
@@ -38,26 +39,34 @@ const sectionStyles = css`
 	background: ${palette.neutral[100]};
 
 	${from.leftCol} {
-		grid-template-columns: 160px minmax(0, 1fr);
+		grid-template-columns: 170px minmax(0, 1fr);
 	}
 
 	${from.wide} {
-		grid-template-columns: 240px minmax(0, 1fr);
+		grid-template-columns: 250px minmax(0, 1fr);
 	}
 `;
 
 const sectionTitleStyles = css`
+	min-width: 0;
 	margin: 0;
-	padding: ${space[1]}px ${space[1]}px ${space[2]}px;
+	padding: 6px 10px 12px;
 	border-top: 1px solid ${borderColour};
 	${headlineBold24};
 	line-height: 1;
+	overflow-wrap: break-word;
+
+	${from.mobileMedium} {
+		padding-right: 20px;
+		padding-left: 20px;
+	}
 
 	${from.tablet} {
-		padding: ${space[2]}px ${space[3]}px ${space[3]}px;
+		${headlineBold28};
 	}
 
 	${from.leftCol} {
+		padding-top: ${space[2]}px;
 		border-right: 1px solid ${borderColour};
 	}
 `;
@@ -89,7 +98,7 @@ const usefulLinkStyles = css`
 	border-right: 1px solid ${borderColour};
 	color: ${palette.neutral[7]};
 	text-decoration: none;
-	${headlineBold20};
+	${headlineMedium20};
 
 	:hover {
 		text-decoration: underline;

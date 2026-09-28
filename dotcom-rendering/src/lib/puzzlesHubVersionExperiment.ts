@@ -38,7 +38,9 @@ const isInVariant = (
 	{ serverSideABTests }: PuzzlesVersionExperimentConfig,
 	testName: string,
 	variant: string,
-): boolean => serverSideABTests[testName] === variant;
+): boolean =>
+	serverSideABTests[testName] === variant ||
+	process.env.NODE_ENV === 'development';
 
 /**
  * True only when BOTH `puzzles-new-hub` (v0) AND `puzzles-new-hub-v1` are

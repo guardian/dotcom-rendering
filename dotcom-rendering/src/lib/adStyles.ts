@@ -121,7 +121,7 @@ const adSlotStyles = css`
 `;
 
 const spacefinderAdSlotContainerStyles = css`
-	.ad-slot-container {
+	.ad-slot-container-sf {
 		margin: 12px auto;
 		text-align: center;
 		display: flex;

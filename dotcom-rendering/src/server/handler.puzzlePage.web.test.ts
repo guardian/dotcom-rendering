@@ -39,9 +39,19 @@ describe('handlePuzzlePage', () => {
 		});
 	});
 
-	it('renders the page for a known slug regardless of serverSideABTests', () => {
+	const withServerSideABTests = (
+		page: ReturnType<typeof createPuzzlePage>,
+		serverSideABTests: Record<string, string>,
+	) => ({
+		...page,
+		config: { ...page.config, serverSideABTests },
+	});
+
+	it('renders the page for a known slug when the puzzles-new-hub variant is active', () => {
 		const res = response();
-		const page = createPuzzlePage('sudoku-easy');
+		const page = withServerSideABTests(createPuzzlePage('sudoku-easy'), {
+			'puzzles-new-hub': 'variant',
+		});
 
 		invokeHandler(page, res);
 
@@ -68,9 +78,11 @@ describe('handlePuzzlePage', () => {
 		'sudoku-killer',
 		'word-wheel',
 		'wordiply',
-	])('renders iframe-based slug %s', (slug) => {
+	])('renders iframe-based slug %s when in variant', (slug) => {
 		const res = response();
-		const page = createPuzzlePage(slug);
+		const page = withServerSideABTests(createPuzzlePage(slug), {
+			'puzzles-new-hub': 'variant',
+		});
 
 		invokeHandler(page, res);
 
@@ -78,30 +90,51 @@ describe('handlePuzzlePage', () => {
 		expect(res.status).toHaveBeenCalledWith(200);
 	});
 
+	it('renders without experiment participation in local development', () => {
+		const previousNodeEnvironment = process.env.NODE_ENV;
+		process.env.NODE_ENV = 'development';
+		const res = response();
+		const page = withServerSideABTests(createPuzzlePage('sudoku-easy'), {});
+
+		try {
+			invokeHandler(page, res);
+			expect(mockedRenderPuzzlePage).toHaveBeenCalled();
+			expect(res.status).toHaveBeenCalledWith(200);
+		} finally {
+			if (previousNodeEnvironment === undefined) {
+				delete process.env.NODE_ENV;
+			} else {
+				process.env.NODE_ENV = previousNodeEnvironment;
+			}
+		}
+	});
+
 	it.each([
-		['absent', {}],
+		['control', { 'puzzles-new-hub': 'control' }],
+		['missing', {}],
+		['unknown group', { 'puzzles-new-hub': 'unknown' }],
 		['unrelated', { 'another-test': 'variant' }],
 	])(
-		'renders the page regardless of serverSideABTests content (%s)',
+		'returns 404 without mounting the renderer for %s',
 		(_, serverSideABTests) => {
 			const res = response();
-			const page = createPuzzlePage('sudoku-easy', {
-				config: {
-					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests,
-				},
-			});
+			const page = withServerSideABTests(
+				createPuzzlePage('sudoku-easy'),
+				serverSideABTests,
+			);
 
 			invokeHandler(page, res);
 
-			expect(res.status).toHaveBeenCalledWith(200);
-			expect(mockedRenderPuzzlePage).toHaveBeenCalled();
+			expect(res.sendStatus).toHaveBeenCalledWith(404);
+			expect(mockedRenderPuzzlePage).not.toHaveBeenCalled();
 		},
 	);
 
-	it('returns 404 for an unknown slug', () => {
+	it('returns 404 for an unknown slug even when in variant', () => {
 		const res = response();
-		const page = createPuzzlePage('sudoku-easy');
+		const page = withServerSideABTests(createPuzzlePage('sudoku-easy'), {
+			'puzzles-new-hub': 'variant',
+		});
 		page.slug = 'not-a-real-puzzle';
 
 		invokeHandler(page, res);

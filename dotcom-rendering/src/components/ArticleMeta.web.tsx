@@ -59,6 +59,7 @@ type Props = {
 	isCommentable: boolean;
 	mainMediaElements?: FEElement[];
 	crossword?: FEArticle['crossword'];
+	hidePreferredSourceOnPrint?: boolean;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -306,6 +307,7 @@ export const ArticleMeta = ({
 	isCommentable,
 	mainMediaElements,
 	crossword,
+	hidePreferredSourceOnPrint,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const showPreferredSource = hasPreferredSourceButton(
@@ -563,7 +565,11 @@ export const ArticleMeta = ({
 						</div>
 					</div>
 				</div>
-				{showPreferredSource ? <PreferredSourceButton /> : null}
+				{showPreferredSource ? (
+					<PreferredSourceButton
+						hidePreferredSourceOnPrint={hidePreferredSourceOnPrint}
+					/>
+				) : null}
 				{isImmersive && mainMediaElements?.[0] && (
 					<Hide until="leftCol">
 						<div

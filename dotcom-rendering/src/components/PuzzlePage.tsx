@@ -1,10 +1,10 @@
 import { Global } from '@emotion/react';
 import { StrictMode } from 'react';
 import {
+	puzzlePageFormat,
 	PuzzlePageLayout,
 	type ResolvedPuzzlePage,
 } from '../layouts/PuzzlePageLayout';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import type { NavType } from '../model/extract-nav';
 import { AdmiralScript } from './AdmiralScript.island';
@@ -22,16 +22,11 @@ type Props = {
 };
 
 export const PuzzlePage = ({ puzzlePage, NAV }: Props) => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
 	const { darkModeAvailable } = useConfig();
 
 	return (
 		<StrictMode>
-			<Global styles={rootStyles(format, darkModeAvailable)} />
+			<Global styles={rootStyles(puzzlePageFormat, darkModeAvailable)} />
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
 			<Island priority="feature" defer={{ until: 'idle' }}>

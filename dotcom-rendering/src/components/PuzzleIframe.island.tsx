@@ -5,6 +5,7 @@ import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import { resolvePuzzleIframeUrl } from '../lib/puzzleIframeUrl';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
+import { palette as themePalette } from '../palette';
 
 interface Props {
 	/**
@@ -34,35 +35,122 @@ interface Props {
 	puzzleDate: string | null;
 }
 
-/**
- * `min-height` is a best-effort estimate, NOT a confirmed value from
- * AmuseLabs. Per PR #16700 review (Gustavo): "the iframe has its own
- * responsive behaviour... the required height can change at smaller
- * screen sizes on AmuseLabs. Some puzzles have a menu on the right that
- * moves below the puzzle on smaller screens, so we need to make sure the
- * iframe has enough height to accommodate that." AmuseLabs' actual
- * reflowed height at narrower viewports has not been measured against a
- * real embed (platform access is being arranged separately), so `900px`
- * below `until.tablet` is a generous guess intended to avoid clipping the
- * reflowed side menu, not a verified figure. There is no existing
- * postMessage-based auto-resize mechanism usable here: this codebase's
- * `iframeMessenger.enableAutoResize()` convention (see
- * `UnsafeEmbedBlockComponent.island.tsx`/`InstagramBlockComponent.island.tsx`)
- * requires Guardian's own script to run *inside* the iframe's content,
- * which isn't possible for a third-party-controlled AmuseLabs/Wordiply
- * page, so it doesn't apply here. Revisit both breakpoint and value once
- * the team can test against a real AmuseLabs embed on a real mobile
- * device. See docs/puzzle-page.md.
- */
-export const frameStyles = css`
-	width: 100%;
-	min-height: 500px;
-	border: none;
+type MinHeightTiers = { default: number; tablet: number; mobile: number };
 
-	${until.tablet} {
-		min-height: 900px;
-	}
-`;
+/**
+ * Per-slug min-height overrides, hardcoded rather than guessed generically:
+ * each puzzle's actual required height differs (a 4x4 killer sudoku grid
+ * needs more vertical space than a plain word wheel, for example), so a
+ * single shared constant can't fit every puzzle without either clipping
+ * some or wasting space on others. These are still best-effort estimates,
+ * not confirmed pixel-for-pixel against a real AmuseLabs/Wordiply embed
+ * (see docs/puzzle-page.md's "Iframe height at narrower viewports" -
+ * platform access for real measurement is being arranged separately), but
+ * are deliberately tuned per puzzle instead of one generic guess for all
+ * six.
+ *
+ * Three tiers, matching AmuseLabs' own responsive reflow breakpoints:
+ * - `default`: from `desktop` (980px) up.
+ * - `tablet`: from `tablet` (740px) up to `desktop` (980px) - a second,
+ *   intermediate breakpoint below 980px, distinct from the narrower
+ *   `mobile` tier below.
+ * - `mobile`: below `tablet` (740px), where AmuseLabs' side menu reflows
+ *   below the puzzle grid, needing the most vertical space.
+ *
+ * These are the values used for non-touch (mouse/trackpad) devices. See
+ * `PUZZLE_MIN_HEIGHTS_TOUCH` below for the touch-device override (applied
+ * via `@media (pointer: coarse)`, regardless of viewport width, since a
+ * touch tablet can still be as wide as a `desktop`-tier viewport).
+ *
+ * Falls back to `DEFAULT_MIN_HEIGHT`/`DEFAULT_MIN_HEIGHT_TABLET`/
+ * `DEFAULT_MIN_HEIGHT_MOBILE` for any slug not listed here.
+ */
+const PUZZLE_MIN_HEIGHTS: Record<string, MinHeightTiers> = {
+	'sudoku-easy': { default: 620, tablet: 520, mobile: 630 },
+	'sudoku-medium': { default: 620, tablet: 520, mobile: 630 },
+	'sudoku-hard': { default: 620, tablet: 520, mobile: 630 },
+	'sudoku-killer': { default: 620, tablet: 520, mobile: 630 },
+	'word-wheel': { default: 600, tablet: 750, mobile: 500 },
+	wordiply: { default: 600, tablet: 600, mobile: 560 },
+};
+
+/**
+ * Touch-device-only min-height overrides, keyed by slug: only puzzles that
+ * actually need a different height on a touch device (currently just
+ * Wordiply) have an entry here. Applied on top of `PUZZLE_MIN_HEIGHTS`
+ * above via `@media (pointer: coarse)` in `buildFrameStyles` - a pure-CSS
+ * check for "is this a touch device", with no JS/`useMatchMedia` needed,
+ * since `pointer: coarse` is exactly the standard media feature for "the
+ * primary input mechanism cannot easily/precisely point" (touchscreens),
+ * as opposed to `pointer: fine` (mouse/trackpad). A slug not listed here
+ * simply keeps its `PUZZLE_MIN_HEIGHTS` value on touch devices too.
+ */
+const PUZZLE_MIN_HEIGHTS_TOUCH: Partial<Record<string, MinHeightTiers>> = {
+	wordiply: { default: 800, tablet: 600, mobile: 500 },
+};
+
+const DEFAULT_MIN_HEIGHT = 500;
+const DEFAULT_MIN_HEIGHT_TABLET = 700;
+const DEFAULT_MIN_HEIGHT_MOBILE = 900;
+
+/**
+ * Builds the iframe's `frameStyles`, with a `min-height` tuned per puzzle
+ * via `PUZZLE_MIN_HEIGHTS` across three tiers (see that constant's doc
+ * comment: `default` from `desktop` up, `tablet` between `tablet` and
+ * `desktop`, `mobile` below `tablet`), since AmuseLabs' own iframe content
+ * reflows at each of these widths, needing progressively more vertical
+ * space the narrower the viewport gets. Also applies a visible border
+ * around the iframe matching the page's own article border colour.
+ *
+ * When `PUZZLE_MIN_HEIGHTS_TOUCH` has an entry for this slug, its values
+ * override the three tiers above for touch devices, via
+ * `@media (pointer: coarse)`. That block is written after the base rules,
+ * so on a touch device it wins the CSS cascade (same specificity, later
+ * source order) for whichever tier's width also matches - no JS feature
+ * detection needed.
+ */
+export const buildFrameStyles = (slug: string) => {
+	const {
+		default: defaultMinHeight,
+		tablet: tabletMinHeight,
+		mobile: mobileMinHeight,
+	} = PUZZLE_MIN_HEIGHTS[slug] ?? {
+		default: DEFAULT_MIN_HEIGHT,
+		tablet: DEFAULT_MIN_HEIGHT_TABLET,
+		mobile: DEFAULT_MIN_HEIGHT_MOBILE,
+	};
+	const touchOverride = PUZZLE_MIN_HEIGHTS_TOUCH[slug];
+
+	return css`
+		width: 100%;
+		min-height: ${defaultMinHeight}px;
+		border: 1px solid ${themePalette('--article-border')};
+		overflow: hidden;
+
+		${until.desktop} {
+			min-height: ${tabletMinHeight}px;
+		}
+
+		${until.tablet} {
+			min-height: ${mobileMinHeight}px;
+		}
+
+		${touchOverride &&
+		css`
+			@media (pointer: coarse) {
+				min-height: ${touchOverride.default}px;
+
+				${until.desktop} {
+					min-height: ${touchOverride.tablet}px;
+				}
+
+				${until.tablet} {
+					min-height: ${touchOverride.mobile}px;
+				}
+			}
+		`}
+	`;
+};
 
 /**
  * The context posted to (and encoded in the URL of) the puzzle iframe,
@@ -245,6 +333,10 @@ const postContextMessage = (
  * preference changes while on the page - no manual reload fallback is
  * needed for that case, though the `onLoad` `postMessage` still fires
  * again after each such reload too.
+ *
+ * `frameStyles` is built per-slug via `buildFrameStyles(puzzleConfig.slug)`,
+ * giving each puzzle a tailored `min-height` (see `PUZZLE_MIN_HEIGHTS`
+ * above) instead of one generic guess for every puzzle.
  */
 export const PuzzleIframe = ({
 	puzzleConfig,
@@ -259,7 +351,7 @@ export const PuzzleIframe = ({
 
 	return (
 		<iframe
-			css={frameStyles}
+			css={buildFrameStyles(puzzleConfig.slug)}
 			src={iframeSrc}
 			title={title}
 			loading="lazy"

@@ -29,6 +29,27 @@ describe('validateAsPuzzlePageType', () => {
 		expectInvalid(page);
 	});
 
+	it('accepts a payload with isAdFreeUser absent, matching frontend\u2019s current /PuzzlePage requests (frontend does not send this field yet)', () => {
+		const page = clone(
+			createPuzzlePage('sudoku-easy'),
+		) as unknown as Record<string, unknown>;
+		delete page.isAdFreeUser;
+		expect(validateAsPuzzlePageType(page).isAdFreeUser).toBeUndefined();
+	});
+
+	it('rejects a non-boolean isAdFreeUser', () => {
+		const page = clone(createPuzzlePage('sudoku-easy')) as unknown as {
+			isAdFreeUser: unknown;
+		};
+		page.isAdFreeUser = 'true';
+		expectInvalid(page);
+	});
+
+	it('accepts isAdFreeUser: true', () => {
+		const page = createPuzzlePage('sudoku-easy', { isAdFreeUser: true });
+		expect(validateAsPuzzlePageType(page).isAdFreeUser).toBe(true);
+	});
+
 	it('rejects a config without server-side participations', () => {
 		const page = clone(createPuzzlePage('sudoku-easy')) as unknown as {
 			config: Record<string, unknown>;

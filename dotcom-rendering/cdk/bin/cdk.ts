@@ -174,8 +174,8 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 		taskCpu: 2048,
 		taskMemoryLimitMiB: 4096,
 		scaling: {
-			minimumTasks: 9,
-			maximumTasks: 90,
+			minimumTasks: 3,
+			maximumTasks: 30,
 			cpuScaling: {
 				targetValue: 20,
 				// TODO: Tune cooldown values.
@@ -185,10 +185,10 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 			},
 		},
 
-		// Route 90% traffic to EC2, 10% to ECS
+		// Route 100% traffic to EC2
 		targetGroupWeights: {
-			ec2: 9,
-			ecs: 1,
+			ec2: 1,
+			ecs: 0,
 		},
 	},
 };

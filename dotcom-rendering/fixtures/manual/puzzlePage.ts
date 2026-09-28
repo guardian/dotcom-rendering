@@ -61,12 +61,7 @@ export const createPuzzlePage = (
 		config: {
 			...Standard.config,
 			contentType: 'Game',
-			// DCR no longer gates /PuzzlePage on any AB test participation
-			// (the former 'game-page-experiment' gate was removed; routes
-			// will be mapped/exposed via a different project instead), so
-			// this is left empty rather than implying any particular value
-			// is required.
-			serverSideABTests: {},
+			serverSideABTests: { 'puzzles-new-hub': 'variant' },
 		},
 		nav: Standard.nav,
 		pageFooter: Standard.pageFooter,
@@ -77,6 +72,7 @@ export const createPuzzlePage = (
 			puzzleDate: '2026-09-11',
 			moreFromPuzzlesAndGames: sampleMoreFromPuzzlesAndGames,
 		},
+		isAdFreeUser: false,
 		...overrides,
 	};
 };

@@ -162,7 +162,7 @@ describe('SecureSignup — US marketing toggle hiding', () => {
 		if (window.guardian.ophan) {
 			window.guardian.ophan.pageViewId = 'test-page-view-id';
 		}
-		global.fetch = jest.fn().mockResolvedValue({ ok: true } as Response);
+		global.fetch = jest.fn().mockResolvedValue({ ok: true });
 	});
 
 	// captchaSiteKey is set in a useEffect — wait for the reCAPTCHA widget
@@ -320,7 +320,7 @@ describe('SecureSignup tracking component id', () => {
 		(useCountryCode as jest.Mock).mockReturnValue('GB');
 
 		window.guardian.config.switches['usSignupHideMarketingToggle'] = false;
-		global.fetch = jest.fn().mockResolvedValue({ ok: true } as Response);
+		global.fetch = jest.fn().mockResolvedValue({ ok: true });
 	});
 
 	it('always uses the secureSignup component id regardless of abTest variant', async () => {

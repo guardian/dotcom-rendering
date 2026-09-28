@@ -53,13 +53,10 @@ export const ElectionTracker = (props: Props) => {
 		},
 	);
 
-	const components =
-		error !== undefined || data === undefined ? props.initialData : data;
-
 	return (
 		<>
-			<Refresh remaining={remaining} />
-			<Components components={components} />
+			<Refresh remaining={remaining} error={error !== undefined} />
+			<Components components={data ?? props.initialData} />
 		</>
 	);
 };

@@ -158,7 +158,7 @@ export const Default: Story = {
 		},
 		tracking: {
 			...tracking,
-			componentType: 'ACQUISITIONS_ENGAGEMENT_BANNER' as any,
+			componentType: 'ACQUISITIONS_ENGAGEMENT_BANNER',
 		},
 		articleCounts: {
 			forTargetedWeeks: 12,

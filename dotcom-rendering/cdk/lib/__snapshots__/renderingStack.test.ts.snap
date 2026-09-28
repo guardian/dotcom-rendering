@@ -4278,8 +4278,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
-        "MaxCapacity": 90,
-        "MinCapacity": 9,
+        "MaxCapacity": 30,
+        "MinCapacity": 3,
         "ResourceId": {
           "Fn::Join": [
             "",
@@ -5459,13 +5459,13 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
                   "TargetGroupArn": {
                     "Ref": "TargetGroupTagpagerendering42E428EE",
                   },
-                  "Weight": 9,
+                  "Weight": 1,
                 },
                 {
                   "TargetGroupArn": {
                     "Ref": "TagpagerenderingEcsTargetGroupTagpagerendering0976D2E5",
                   },
-                  "Weight": 1,
+                  "Weight": 0,
                 },
               ],
             },

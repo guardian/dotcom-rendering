@@ -3,8 +3,8 @@ import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import { puzzleConfigs } from '../model/puzzles/puzzleConfigs';
 import {
+	buildFrameStyles,
 	buildPuzzleIframeSrc,
-	frameStyles,
 	type PuzzleContext,
 	PuzzleIframe,
 } from './PuzzleIframe.island';
@@ -99,22 +99,89 @@ describe('buildPuzzleIframeSrc', () => {
 	});
 });
 
-describe('frameStyles', () => {
-	// A generous, best-effort estimate (unconfirmed against a real
-	// AmuseLabs embed) for the extra height needed once AmuseLabs' own
-	// internal responsive layout reflows a side menu below the puzzle at
-	// narrower viewports, see the doc comment above frameStyles and
-	// docs/puzzle-page.md. This only asserts the CSS text is present, not
-	// real browser layout/rendering (jsdom does not evaluate media
-	// queries), there is no existing convention in this codebase for
-	// deeper breakpoint-driven CSS testing.
-	it('keeps the default min-height for wider viewports', () => {
-		expect(frameStyles.styles).toContain('min-height:500px;');
+describe('buildFrameStyles', () => {
+	// Per-slug min-height overrides, hardcoded in PUZZLE_MIN_HEIGHTS - see
+	// the doc comment above buildFrameStyles and docs/puzzle-page.md. This
+	// only asserts the CSS text is present, not real browser layout/
+	// rendering (jsdom does not evaluate media queries), there is no
+	// existing convention in this codebase for deeper breakpoint-driven
+	// CSS testing.
+	it('uses the hardcoded default min-height for a known slug', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).toContain(
+			'min-height:620px;',
+		);
 	});
 
-	it('increases min-height below the tablet breakpoint for AmuseLabs\u2019 menu reflow', () => {
-		expect(frameStyles.styles).toMatch(/max-width:\s*739\.9px/);
-		expect(frameStyles.styles).toContain('min-height:900px;');
+	it('changes min-height between the tablet and desktop breakpoints for a known slug', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).toMatch(
+			/max-width:\s*979\.9px/,
+		);
+		expect(buildFrameStyles('sudoku-easy').styles).toContain(
+			'min-height:520px;',
+		);
+	});
+
+	it('increases min-height further below the tablet breakpoint for a known slug', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).toMatch(
+			/max-width:\s*739\.9px/,
+		);
+		expect(buildFrameStyles('sudoku-easy').styles).toContain(
+			'min-height:630px;',
+		);
+	});
+
+	it('falls back to the default min-heights for an unrecognised slug', () => {
+		expect(buildFrameStyles('unknown-slug').styles).toContain(
+			'min-height:500px;',
+		);
+		expect(buildFrameStyles('unknown-slug').styles).toContain(
+			'min-height:700px;',
+		);
+		expect(buildFrameStyles('unknown-slug').styles).toContain(
+			'min-height:900px;',
+		);
+	});
+
+	it('includes a visible border around the iframe', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).toMatch(
+			/border:1px solid var\(--article-border\);/,
+		);
+	});
+
+	it('does not add a pointer:coarse override for a slug with no touch-specific heights', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).not.toContain(
+			'pointer: coarse',
+		);
+	});
+
+	it('uses the non-touch min-heights for wordiply by default', () => {
+		expect(buildFrameStyles('wordiply').styles).toContain(
+			'min-height:600px;',
+		);
+	});
+
+	it('adds a pointer:coarse override with the touch-specific min-heights for wordiply', () => {
+		const styles = buildFrameStyles('wordiply').styles;
+		// Whitespace/newlines inside the nested `@media (pointer: coarse)`
+		// block vary depending on how Emotion serialises the nested
+		// template literal, so this normalises whitespace before matching
+		// rather than asserting on an exact, brittle substring.
+		const normalisedStyles = styles.replace(/\s+/g, ' ');
+
+		expect(normalisedStyles).toContain('@media (pointer: coarse)');
+
+		// The pointer:coarse block is written last, so its min-height
+		// values (800/600/500) appear after the non-touch ones (600/600/560)
+		// in the generated CSS text - later source order wins the cascade
+		// for a touch device.
+		const touchBlockStart = normalisedStyles.indexOf(
+			'@media (pointer: coarse)',
+		);
+		const touchBlock = normalisedStyles.slice(touchBlockStart);
+
+		expect(touchBlock).toContain('min-height: 800px;');
+		expect(touchBlock).toContain('min-height: 600px;');
+		expect(touchBlock).toContain('min-height: 500px;');
 	});
 });
 
