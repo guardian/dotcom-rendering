@@ -96,13 +96,17 @@ export const extractPriceFromLabel = (
 	| undefined => {
 	const [entireMatch, currencySymbol, price] = label.match(priceRegex) ?? [];
 
-	if (!entireMatch || !currencySymbol || !price) {
+	if (
+		isUndefined(entireMatch) ||
+		isUndefined(currencySymbol) ||
+		isUndefined(price)
+	) {
 		return undefined;
 	}
 
 	return {
 		entireMatch,
-		numericPrice: Number.parseFloat(price),
+		numericPrice: Number.parseFloat(price.replace(/,/g, '')),
 		currencySymbol,
 		priceAsString: price,
 	};
