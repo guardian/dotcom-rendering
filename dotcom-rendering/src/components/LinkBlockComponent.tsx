@@ -1,4 +1,4 @@
-import { AffiliateProductPrice } from '../types/content';
+import type { AffiliateProductPrice } from '../types/content';
 import { EditorialLinkButton } from './Button/EditorialLinkButton';
 import { ProductLinkButton } from './Button/ProductLinkButton';
 import { heightAutoStyle, wrapButtonTextStyle } from './Button/styles';
