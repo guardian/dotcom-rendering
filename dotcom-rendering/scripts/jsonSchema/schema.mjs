@@ -21,6 +21,7 @@ const program = TJS.getProgramFromFiles(
 	],
 	{
 		skipLibCheck: true,
+		strictNullChecks: true,
 	},
 );
 
