@@ -638,6 +638,7 @@ export const renderElement = ({
 					url={element.url}
 					linkType={element.linkType}
 					priority={element.priority}
+					latestPrice={element.latestPrice}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ProductBlockElement':
