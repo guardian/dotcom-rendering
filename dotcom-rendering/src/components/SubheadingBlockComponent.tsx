@@ -8,6 +8,8 @@ import { Subheading } from './Subheading';
 
 type Props = { html: string; format: ArticleFormat };
 
+const headingLevels = { H2: 2, H3: 3, H4: 4 } as const;
+
 export const buildElementTree =
 	(format: ArticleFormat) =>
 	(node: Node): ReactNode => {
@@ -28,17 +30,22 @@ export const buildElementTree =
 					);
 
 				case 'H2':
+				case 'H3':
+				case 'H4': {
+					const level = headingLevels[node.nodeName];
 					return (
 						<Subheading
 							id={attributes.getNamedItem('id')?.value}
 							format={format}
 							topPadding={true}
+							level={level}
 						>
 							{Array.from(node.childNodes).map(
 								buildElementTree(format),
 							)}
 						</Subheading>
 					);
+				}
 
 				case 'BR':
 					// <br> is a void element and cannot have children
