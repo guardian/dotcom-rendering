@@ -15,6 +15,7 @@ import {
 } from './productUtils';
 import { heightAutoStyle, wrapButtonTextStyle } from './styles';
 import { getPropsForLinkUrl } from './utils';
+import { AffiliateProductPrice } from '../../types/content';
 
 type ProductLinkButtonProps = {
 	label: string;
