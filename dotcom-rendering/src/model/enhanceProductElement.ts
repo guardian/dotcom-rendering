@@ -41,6 +41,7 @@ const getLowestPrice = (ctas: ProductCta[]): string | undefined => {
 
 	let lowestCta: ProductCta | null = null;
 	let lowestPrice: number | null = null;
+	let livePriceIsLowest: boolean = false;
 
 	for (const cta of ctas) {
 		const priceMatch = cta.price.match(/[\d,.]+/);
@@ -49,14 +50,28 @@ const getLowestPrice = (ctas: ProductCta[]): string | undefined => {
 			if (Number.isNaN(priceNumber)) {
 				continue;
 			}
+
 			if (lowestPrice === null || priceNumber < lowestPrice) {
 				lowestPrice = priceNumber;
 				lowestCta = cta;
+				livePriceIsLowest = false;
+			}
+		}
+		const latestPrice = cta.latestPrice;
+		if (latestPrice) {
+			const latestPriceNumber = parseFloat(latestPrice.price);
+			if (Number.isNaN(latestPriceNumber)) {
+				continue;
+			}
+			if (lowestPrice === null || latestPriceNumber < lowestPrice) {
+				lowestPrice = latestPriceNumber;
+				lowestCta = cta;
+				livePriceIsLowest = true;
 			}
 		}
 	}
 
-	return lowestCta?.price;
+	return livePriceIsLowest ? lowestCta?.latestPrice?.price : lowestCta?.price;
 };
 
 const enhance =

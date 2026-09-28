@@ -26,6 +26,7 @@ export const ProductCardButtons = ({
 					priority={index === 0 ? 'primary' : 'tertiary'}
 					fullwidth={true}
 					themeOverrides={themeOverrides}
+					latestPrice={productCta.latestPrice}
 				/>
 			);
 		})}
