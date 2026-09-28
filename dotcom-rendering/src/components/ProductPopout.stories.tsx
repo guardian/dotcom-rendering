@@ -1,5 +1,9 @@
 import { css, Global } from '@emotion/react';
-import { breakpoints } from '@guardian/source/foundations';
+import {
+	breakpoints,
+	palette as sourcePalette,
+	textSans12,
+} from '@guardian/source/foundations';
 import { storybookPaletteDeclarations } from '../../.storybook/mocks/paletteDeclarations';
 import preview from '../../.storybook/preview';
 import { examplePopoutProducts } from '../../fixtures/manual/productBlockElement';
@@ -67,7 +71,6 @@ export const Mobile = meta.story({
 	globals: { viewport: { value: 'mobileMedium' } },
 });
 
-/** Alternative wordings for the trigger, to compare side by side. */
 /**
  * Mimics the US mobile sticky ad slot so we can check the trigger sits above it
  * rather than over it.
@@ -83,13 +86,12 @@ const mobileStickyAdDecorator = (Story: () => JSX.Element) => (
 				left: 0;
 				right: 0;
 				height: 100px;
-				background-color: #dcdcdc;
+				background-color: ${sourcePalette.neutral[86]};
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				font-family: sans-serif;
-				font-size: 12px;
-				color: #666;
+				${textSans12};
+				color: ${sourcePalette.neutral[46]};
 			`}
 		>
 			ADVERTISEMENT
@@ -102,6 +104,7 @@ export const WithMobileStickyAd = meta.story({
 	globals: { viewport: { value: 'mobileMedium' } },
 });
 
+/** Alternative wordings for the trigger, to compare side by side. */
 export const CtaWordingJumpToPicks = meta.story({
 	args: { triggerLabel: 'Jump to our picks' },
 });
