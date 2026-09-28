@@ -7,6 +7,7 @@ import type {
 import { LinkButton } from '@guardian/source/react-components';
 import { SKIMLINK_REL } from '../../lib/affiliateLinksUtils';
 import { palette } from '../../palette';
+import type { AffiliateProductPrice } from '../../types/content';
 import {
 	createAccessibleProductLabel,
 	createStrikeThroughProductLabel,
@@ -14,7 +15,6 @@ import {
 } from './productUtils';
 import { heightAutoStyle, wrapButtonTextStyle } from './styles';
 import { getPropsForLinkUrl } from './utils';
-import { AffiliateProductPrice } from '../../types/content';
 
 type ProductLinkButtonProps = {
 	label: string;

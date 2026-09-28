@@ -69,7 +69,9 @@ export const getProductLinkLabelWithPrice = (cta: ProductCta): string => {
 
 // ToDo: add the logic of how much discount should result in replacing vs adding old price struck through
 const shouldPutOldPriceInStrikethrough = (
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- see ToDo
 	_latestPrice: number,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- see ToDo
 	_articlePrice: number,
 ) => true;
 
