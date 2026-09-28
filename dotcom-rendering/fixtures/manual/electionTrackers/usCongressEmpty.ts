@@ -1,4 +1,6 @@
-export const usCongressEmpty = {
+import type { ElectionComponentsJson } from '../../../src/components/ElectionTrackers/electionComponent';
+
+export const usCongressEmpty: ElectionComponentsJson = {
 	components: [
 		{
 			kind: 'sideBySide',
