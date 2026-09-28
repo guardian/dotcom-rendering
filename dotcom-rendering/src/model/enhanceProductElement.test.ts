@@ -166,7 +166,7 @@ describe('enhanceProductBlockElements', () => {
 		expect(enhancedElementWithNaN.lowestPrice).toEqual('£29.99');
 	});
 
-	it('uses the latest price when it is lower than the CTA price', () => {
+	it('uses latestPrice for lowest price', () => {
 		const productBlockWithLatestPrice: ProductBlockElement = {
 			...productBlockElement,
 			productCtas: [
@@ -208,7 +208,7 @@ describe('enhanceProductBlockElements', () => {
 		expect(enhanced.lowestPrice).toBe('19.99');
 	});
 
-	it('uses the latest price even when it is higher than the CTA price', () => {
+	it('uses the latestPrice for lowest price even when it is higher than the CTA price', () => {
 		const productBlockWithLatestPrice: ProductBlockElement = {
 			...productBlockElement,
 			productCtas: [
