@@ -74,7 +74,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Pass hashed email to Ozone via pubProvidedId for audience matching",
 		owners: ["commercial.dev@guardian.co.uk"],
-		status: "ON",
+		status: "OFF",
 		expirationDate: "2026-09-30",
 		type: "client",
 		audienceSize: 0,
