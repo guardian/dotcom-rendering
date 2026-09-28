@@ -148,7 +148,7 @@ const ABTests: ABTest[] = [
 		name: "martech-header-sign-in-header-optimisation",
 		description: "Test removing the sign in wording from mobile",
 		owners: ["martech.dev@guardian.co.uk"],
-		status: "OFF",
+		status: "ON",
 		expirationDate: "2026-10-01",
 		type: "client",
 		audienceSize: 100 / 100,
