@@ -129,6 +129,7 @@ export const HorizontalSummaryProductCard = ({
 					minimisePadding={true}
 					label={getProductLinkLabelWithoutPrice(cardCta)}
 					url={cardCta.url}
+					latestPrice={cardCta.latestPrice}
 				/>
 			</div>
 		</div>
