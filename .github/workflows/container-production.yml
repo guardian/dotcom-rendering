@@ -37,7 +37,7 @@ jobs:
         working-directory: dotcom-rendering
         run: echo 'export const GIT_COMMIT_HASH = "${{ needs.facts.outputs.commitSha }}";' > src/server/prout.ts
       - name: Build image
-        run: docker buildx build --platform linux/arm64 -f Production.dockerfile -t ${{ github.repository }}:latest .
+        run: docker buildx build --platform linux/arm64,linux/amd64 -f Production.dockerfile -t ${{ github.repository }}:latest .
       - name: Publish Image
         uses: guardian/actions-publish-image@v0.0.7
         id: publish-image
