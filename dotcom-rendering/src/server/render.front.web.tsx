@@ -10,11 +10,10 @@ import {
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { applyCustomSubnavTest } from '../lib/customSubnavTest';
 import { polyfillIO } from '../lib/polyfill.io';
 import { themeToPillar } from '../lib/themeToPillar';
 import type { NavType } from '../model/extract-nav';
-import { extractNAV } from '../model/extract-nav';
+import { applyCustomSubnavTest, extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import type { Front } from '../types/front';
