@@ -82,6 +82,17 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 	},
 	{
+		name: "commercial-ozone-au-nz-adunit-ids",
+		description: "0% test to prove ad units for Ozone in Aus and NZ",
+		owners: ["commercial.dev@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-10-14",
+		type: "client",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+	},
+	{
 		name: "fronts-and-curation-loop-click-through",
 		description:
 			"Test impact of click to article via loop videos on fronts",
