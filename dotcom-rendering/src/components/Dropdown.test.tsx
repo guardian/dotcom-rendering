@@ -137,7 +137,7 @@ describe('Dropdown', () => {
 	});
 
 	it('should pass the expanded state to a nested trigger and toggle once per click', () => {
-		const renderTrigger = jest.fn((_isExpanded: boolean) => (
+		const renderTrigger = jest.fn(() => (
 			<span>
 				<span>Nested trigger</span>
 			</span>
