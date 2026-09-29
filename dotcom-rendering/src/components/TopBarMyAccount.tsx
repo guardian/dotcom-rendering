@@ -244,7 +244,9 @@ const signInCircleStyle = css`
 `;
 
 const iconInAccountStyles = css`
-	padding: 8px 10px;
+	${until.tablet} {
+		padding: 8px 10px;
+	}
 `;
 
 interface SignedInWithNotificationsProps {
@@ -332,7 +334,11 @@ const SignedInWithNotifications = ({
 				ariaLabel="My account"
 				links={identityLinksWithNotifications}
 				id="topbar-my-account"
-				dataLinkName={nestedOphanComponents('header', 'topbar', '')}
+				dataLinkName={nestedOphanComponents(
+					'header',
+					'topbar',
+					'my account',
+				)}
 				cssOverrides={dropDownOverrides(showSignInTextOnMobile)}
 			/>
 		</div>

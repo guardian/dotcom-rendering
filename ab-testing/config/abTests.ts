@@ -136,7 +136,7 @@ const ABTests: ABTest[] = [
 		description: "Test removing the sign in wording from mobile",
 		owners: ["martech.dev@guardian.co.uk"],
 		status: "ON",
-		expirationDate: "2026-10-01",
+		expirationDate: "2026-11-10",
 		type: "client",
 		audienceSize: 50 / 100,
 		audienceSpace: "B",
