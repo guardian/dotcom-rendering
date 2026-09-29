@@ -40,11 +40,16 @@ jobs:
     uses: ./.github/workflows/check-islands.yml
 
   playwright:
-    needs: [container]
+    needs: [production-container]
     if: github.ref != 'refs/heads/main'
+    permissions:
+      contents: read
+      id-token: write # Required to exchange for AWS credentials using OIDC
     uses: ./.github/workflows/playwright.yml
+    secrets:
+      GU_ARTIFACTS_ROLE_ARN: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
     with:
-      container-image: ${{ needs.container.outputs.container-image }}
+      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
 
   publish:
     permissions:
