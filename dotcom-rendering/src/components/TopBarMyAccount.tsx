@@ -237,15 +237,15 @@ const signInCircleStyle = css`
 
 	svg {
 		margin-right: 0;
-		width: 22px;
-		height: 22px;
+		width: 22.5px;
+		height: 22.6px;
 		pointer-events: none;
 	}
 `;
 
 const iconInAccountStyles = css`
 	${until.tablet} {
-		padding: 8px 10px;
+		padding: 8px 0 8px;
 	}
 `;
 
