@@ -1,13 +1,13 @@
-import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
-import { allModes } from '../../.storybook/modes';
-import preview from '../../.storybook/preview';
-import { productImage } from '../../fixtures/manual/productImage';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { centreColumnDecorator } from '../../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../../.storybook/modes';
+import preview from '../../../.storybook/preview';
+import { productImage } from '../../../fixtures/manual/productImage';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import { ProductCardInline } from './ProductCardInline';
 
 const meta = preview.meta({
 	component: ProductCardInline,
-	title: 'Components/ProductCardInline',
+	title: 'Components/Affiliate Products/ProductCardInline',
 	parameters: {
 		chromatic: {
 			modes: {
@@ -79,7 +79,7 @@ export const ProductCardOnlyDisplayCredit = meta.story({
 	},
 });
 
-export const WithStrikeThroughPrice = meta.story({
+export const WithManualStrikeThroughPrice = meta.story({
 	args: {
 		...meta.input.args,
 		productCtas: [
@@ -88,6 +88,25 @@ export const WithStrikeThroughPrice = meta.story({
 				retailer: 'Amazon',
 				text: '',
 				price: '~£95.99~ £89.99',
+			},
+			...meta.input.args.productCtas.slice(1),
+		],
+	},
+});
+
+export const WithLivePrice = meta.story({
+	args: {
+		...meta.input.args,
+		productCtas: [
+			{
+				url: 'https://www.theguardian.com',
+				retailer: 'Amazon',
+				text: '',
+				price: '£95.99',
+				latestPrice: {
+					currencySymbol: '£',
+					price: '89.99',
+				},
 			},
 			...meta.input.args.productCtas.slice(1),
 		],

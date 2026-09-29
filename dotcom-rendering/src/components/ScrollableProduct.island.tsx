@@ -8,9 +8,9 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import type { SummaryProduct } from '../types/content';
+import { ProductCarouselCard } from './AffiliateProducts/ProductCarouselCard';
 import { CarouselCount } from './CarouselCount';
 import { CarouselNavigationButtons } from './CarouselNavigationButtons';
-import { ProductCarouselCard } from './ProductCarouselCard';
 import { Subheading } from './Subheading';
 
 const carouselHeader = css`

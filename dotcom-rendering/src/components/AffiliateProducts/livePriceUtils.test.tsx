@@ -4,7 +4,7 @@ import {
 	createStrikeThroughProductLabel,
 	formatPrice,
 	rewriteLabelWithLatestPrice,
-} from './productUtils';
+} from './livePriceUtils';
 
 describe('createStrikeThroughProductLabel', () => {
 	it('returns the label unchanged when there is no struck-through text', () => {

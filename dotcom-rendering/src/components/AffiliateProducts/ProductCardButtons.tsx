@@ -1,7 +1,7 @@
 import type { ThemeButton } from '@guardian/source/react-components';
-import type { ProductCta } from '../types/content';
-import { ProductLinkButton } from './Button/ProductLinkButton';
-import { getProductLinkLabelWithPrice } from './Button/productUtils';
+import type { ProductCta } from '../../types/content';
+import { ProductLinkButton } from '../Button/ProductLinkButton';
+import { getProductLinkLabelWithPrice } from './livePriceUtils';
 
 export const ProductCardButtons = ({
 	productCtas,

@@ -1,13 +1,16 @@
 import { css } from '@emotion/react';
-import preview from '../../.storybook/preview';
-import { exampleProduct } from '../../fixtures/manual/productBlockElement';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { extractHeadingText } from '../model/enhanceProductElement';
+import preview from '../../../.storybook/preview';
+import {
+	exampleLivePricingProduct,
+	exampleProduct,
+} from '../../../fixtures/manual/productBlockElement';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
+import { extractHeadingText } from '../../model/enhanceProductElement';
 import { ProductCarouselCard } from './ProductCarouselCard';
 
 const meta = preview.meta({
 	component: ProductCarouselCard,
-	title: 'Components/ProductCarouselCard',
+	title: 'Components/Affiliate Products/ProductCarouselCard',
 	args: {
 		product: {
 			productBlock: { ...exampleProduct, h2Id: 'h2-id' },
@@ -53,6 +56,16 @@ export const WithLongHeadingProductNameAndCTA = meta.story({
 					},
 				],
 			},
+			ctaIndex: 0,
+		},
+	},
+});
+
+export const WithLivePrice = meta.story({
+	args: {
+		...meta.input.args,
+		product: {
+			productBlock: { ...exampleLivePricingProduct },
 			ctaIndex: 0,
 		},
 	},
