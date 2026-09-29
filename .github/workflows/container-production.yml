@@ -33,6 +33,16 @@ jobs:
       imageDigest: ${{ steps.publish-image.outputs.imageDigest }}
     steps:
       - uses: actions/checkout@v7
+
+      - name: Set up Docker
+        uses: docker/setup-docker-action@v5
+        with:
+          daemon-config: |
+            {
+              "features": {
+                "containerd-snapshotter": true
+              }
+            }
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
       - name: Set up Docker Buildx
