@@ -33,6 +33,8 @@ jobs:
       imageDigest: ${{ steps.publish-image.outputs.imageDigest }}
     steps:
       - uses: actions/checkout@v7
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v4
       - name: Add commit hash for PRout
         working-directory: dotcom-rendering
         run: echo 'export const GIT_COMMIT_HASH = "${{ needs.facts.outputs.commitSha }}";' > src/server/prout.ts
