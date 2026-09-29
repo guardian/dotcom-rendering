@@ -10,6 +10,7 @@ import {
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
+import { applyCustomSubnavTest } from '../lib/customSubnavTest';
 import { polyfillIO } from '../lib/polyfill.io';
 import { themeToPillar } from '../lib/themeToPillar';
 import type { NavType } from '../model/extract-nav';
@@ -80,7 +81,10 @@ export const renderFront = ({
 	const title = front.isNetworkFront
 		? 'Latest news, sport and opinion from the Guardian'
 		: front.webTitle;
-	const NAV = extractNAV(front.nav);
+	const NAV = applyCustomSubnavTest(
+		extractNAV(front.nav),
+		front.config.serverSideABTests,
+	);
 	const enhancedNAV = enhanceNav(NAV);
 
 	const darkModeAvailable =
