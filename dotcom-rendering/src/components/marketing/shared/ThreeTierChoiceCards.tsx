@@ -27,6 +27,8 @@ import type { ChoiceCardDesignSettings } from '../banners/designableBanner/setti
 
 export type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
 
+const choiceCardTransition = '0.35s cubic-bezier(0.27, 1.06, 0.18, 1.00)';
+
 const benefitsStyles = css`
 	${textSans15};
 	color: ${palette.neutral[7]};
@@ -155,12 +157,13 @@ export const ThreeTierChoiceCards = ({
 
 	const supportTierChoiceCardStyles = (selected: boolean) => css`
 		display: block;
-		border: ${selected
-			? `2px solid ${
+		border: none;
+		box-shadow: ${selected
+			? `inset 0 0 0 2px ${
 					choiceCardDesignSettings?.buttonSelectBorderColour ??
 					palette.brand['400']
 				}`
-			: `1px solid ${
+			: `inset 0 0 0 1px ${
 					choiceCardDesignSettings?.buttonBorderColour ??
 					palette.neutral[46]
 				}`};
@@ -175,6 +178,8 @@ export const ThreeTierChoiceCards = ({
 		padding: ${selected
 			? `6px ${space[5]}px 10px ${space[5]}px`
 			: `6px ${space[5]}px`};
+		transition: ${choiceCardTransition};
+		transition-property: color, background-color, box-shadow, padding;
 	`;
 
 	const labelOverrideStyles = (isSelected: boolean) => css`
@@ -361,26 +366,41 @@ export const ThreeTierChoiceCards = ({
 												selected,
 											)}
 											supporting={
-												isExpanded && (
-													<SupportingBenefits
-														benefitsLabel={
-															benefitsLabel as
-																| string
-																| undefined
-														}
-														benefits={benefits}
-														benefitsTickColour={
-															pill
-																? getPillBackgroundColour(
-																		pill,
-																	)
-																: undefined
-														}
-														choiceCardDesignSettings={
-															choiceCardDesignSettings
-														}
-													/>
-												)
+												<div
+													css={css`
+														display: grid;
+														grid-template-rows: ${isExpanded
+															? '1fr'
+															: '0fr'};
+														transition: ${choiceCardTransition};
+														transition-property: grid-template-rows;
+													`}
+												>
+													<div
+														css={css`
+															overflow: hidden;
+														`}
+													>
+														<SupportingBenefits
+															benefitsLabel={
+																benefitsLabel as
+																	| string
+																	| undefined
+															}
+															benefits={benefits}
+															benefitsTickColour={
+																pill
+																	? getPillBackgroundColour(
+																			pill,
+																		)
+																	: undefined
+															}
+															choiceCardDesignSettings={
+																choiceCardDesignSettings
+															}
+														/>
+													</div>
+												</div>
 											}
 											checked={selected}
 											onChange={() => {
