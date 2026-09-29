@@ -112,6 +112,7 @@ export const extractPriceFromLabel = (
 	};
 };
 
+// Matches the conventional retailer CTA label of {price} at {retailerName}
 const priceAtRetailerRegex = new RegExp(`^${priceRegex.source} at .+$`);
 
 export const rewriteLabelWithLatestPrice = (
