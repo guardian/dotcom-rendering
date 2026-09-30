@@ -3,7 +3,10 @@ name: DCR CICD
 on:
   merge_group:
     types: [checks_requested]
+  pull_request:
   push:
+    branches:
+      - 'main'
 
 jobs:
   production-container:
