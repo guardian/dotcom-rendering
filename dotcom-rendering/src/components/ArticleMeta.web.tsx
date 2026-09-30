@@ -171,7 +171,10 @@ const metaNumbers = (isPictureContent: boolean) => css`
 	}
 `;
 
-export const metaContainer = (format: ArticleFormat) => {
+export const metaContainer = (
+	format: ArticleFormat,
+	layoutType?: LayoutType,
+) => {
 	const defaultMargins = css`
 		${until.phablet} {
 			margin-left: -20px;
@@ -189,7 +192,9 @@ export const metaContainer = (format: ArticleFormat) => {
 		case ArticleDisplay.Standard: {
 			switch (format.design) {
 				case ArticleDesign.PhotoEssay:
-					return format.theme === ArticleSpecial.Labs
+					return ((format.theme === ArticleSpecial.Labs ||
+						layoutType?.startsWith('immersive')) ??
+						false)
 						? defaultMargins
 						: css`
 								${until.phablet} {
@@ -345,7 +350,7 @@ export const ArticleMeta = ({
 			className={
 				isInteractive ? interactiveLegacyClasses.metaContainer : ''
 			}
-			css={metaContainer(format)}
+			css={metaContainer(format, layoutType)}
 		>
 			<div css={meta(format)}>
 				{branding && (
@@ -402,6 +407,7 @@ export const ArticleMeta = ({
 									tags={tags}
 									format={format}
 									source={source}
+									layoutType={layoutType}
 								/>
 							)}
 
@@ -585,6 +591,7 @@ export const ArticleMeta = ({
 								shouldLimitWidth={false}
 								isLeftCol={true}
 								isMainMedia={true}
+								layoutType={layoutType}
 							/>
 						</div>
 					</Hide>
