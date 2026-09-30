@@ -140,8 +140,16 @@ const articles = [
 		url: 'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 	},
 	{
-		name: 'Picture',
+		name: 'PictureWithAvatarNoStandfirst',
 		url: 'https://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
+	},
+	{
+		name: 'PictureWithAvatarAndStandfirst',
+		url: 'https://www.theguardian.com/commentisfree/picture/2026/aug/12/making-fun-of-the-english-is-an-australian-national-pastime-but-the-drought-in-britain-isnt-funny-at-all',
+	},
+	{
+		name: 'PictureWithStandfirstNoAvatar',
+		url: 'https://www.theguardian.com/football/picture/2026/sep/29/david-squires-on-manchester-city-verdict-nations-league-israel-republic-of-ireland',
 	},
 	{
 		name: 'Video',
