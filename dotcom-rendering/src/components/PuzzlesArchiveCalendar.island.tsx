@@ -52,7 +52,6 @@ const isArchiveItem = (value: unknown): value is PuzzlesArchiveItem => {
 	if (typeof value !== 'object' || value === null) return false;
 	const item = value as Record<string, unknown>;
 	return (
-		typeof item.puzzleId === 'string' &&
 		typeof item.puzzleType === 'string' &&
 		typeof item.date === 'string' &&
 		typeof item.progress === 'number' &&
@@ -309,7 +308,7 @@ export const PuzzlesArchiveCalendar = ({
 			<h2>{archive.selectedPuzzle.title}</h2>
 			<div css={recentStyles}>
 				{recent.map((item, index) => (
-					<a href={item.url} key={`${item.date}-${item.puzzleId}`}>
+					<a href={item.url} key={`${item.date}-${item.puzzleType}`}>
 						<strong>
 							{index === 0
 								? `Latest ${archive.selectedPuzzle.title}`

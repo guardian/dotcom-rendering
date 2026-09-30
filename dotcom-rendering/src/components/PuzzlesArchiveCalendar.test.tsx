@@ -24,11 +24,10 @@ const archive: PuzzlesArchive = {
 	month: 9,
 	items: [
 		{
-			puzzleId: 'guardian-sudoku-20260902',
 			puzzleType: 'SUDOKU_EASY',
 			date: '2026-09-02',
 			progress: 50,
-			url: '/puzzles-and-games/logic-puzzles/sudoku-easy/2026-09-02?puzzleId=guardian-sudoku-20260902',
+			url: '/puzzles-and-games/logic-puzzles/sudoku-easy/2026-09-02',
 		},
 	],
 	dataUrl:

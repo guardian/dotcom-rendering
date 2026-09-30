@@ -339,7 +339,6 @@ const isArchivePuzzle = (value: unknown): boolean =>
 
 const isArchiveItem = (value: unknown): boolean =>
 	isObject(value) &&
-	isString(value.puzzleId) &&
 	isString(value.puzzleType) &&
 	/^\d{4}-\d{2}-\d{2}$/.test(String(value.date)) &&
 	typeof value.progress === 'number' &&
