@@ -5,7 +5,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { StackedProducts } from './StackedProducts.island';
 
 const meta = preview.meta({
-	title: 'Components/Stacked Horizontal Summary Product Cards',
+	title: 'Components/Affiliate Products/Stacked Horizontal Summary Product Cards',
 	component: StackedProducts,
 	args: {
 		products: exampleSummaryProducts,

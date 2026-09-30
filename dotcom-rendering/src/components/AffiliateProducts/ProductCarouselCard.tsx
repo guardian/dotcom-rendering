@@ -9,11 +9,14 @@ import {
 	textSansBold17,
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
-import type { ArticleFormat } from '../lib/articleFormat';
-import { palette } from '../palette';
-import type { SummaryProduct } from '../types/content';
-import { ProductLinkButton } from './Button/ProductLinkButton';
-import { getProductLinkLabelWithoutPrice } from './Button/productUtils';
+import type { ArticleFormat } from '../../lib/articleFormat';
+import { palette } from '../../palette';
+import type { SummaryProduct } from '../../types/content';
+import { ProductLinkButton } from '../Button/ProductLinkButton';
+import {
+	getProductCtaLivePrice,
+	getProductLinkLabelWithoutPrice,
+} from './livePriceUtils';
 import { ProductCardImage } from './ProductCardImage';
 
 export type ProductCarouselCardProps = {
@@ -142,7 +145,9 @@ export const ProductCarouselCard = ({
 				)}
 				{cardCta && (
 					<>
-						<div css={priceStyle}>{cardCta.price}</div>
+						<div css={priceStyle}>
+							{getProductCtaLivePrice(cardCta)}
+						</div>
 						<div css={buttonWrapper}>
 							<ProductLinkButton
 								xCustComponentId={'carousel-card'}
