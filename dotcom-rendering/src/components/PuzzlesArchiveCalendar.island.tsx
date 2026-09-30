@@ -2,10 +2,17 @@ import { css } from '@emotion/react';
 import {
 	from,
 	headlineBold20,
+	headlineBold34,
 	palette,
 	space,
 	textSans14,
+	textSans17,
 } from '@guardian/source/foundations';
+import {
+	SvgArrowLeftStraight,
+	SvgArrowRightStraight,
+	SvgCheckmark,
+} from '@guardian/source/react-components';
 import { useRef, useState } from 'react';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
@@ -70,20 +77,44 @@ const isArchive = (value: unknown): value is PuzzlesArchive => {
 	);
 };
 
+const sectionStyles = css`
+	position: relative;
+	min-width: 0;
+	${from.leftCol} {
+		padding-bottom: ${space[8]}px;
+	}
+`;
+
+const linesStyles = css`
+	height: 10px;
+	margin-bottom: ${space[4]}px;
+	background: repeating-linear-gradient(
+		to bottom,
+		${palette.neutral[86]} 0,
+		${palette.neutral[86]} 1px,
+		transparent 1px,
+		transparent 3px
+	);
+`;
+
 const tabsStyles = css`
 	display: flex;
-	gap: ${space[2]}px;
+	gap: ${space[3]}px;
 	overflow-x: auto;
-	padding: ${space[2]}px 0;
-	border-top: 1px solid ${palette.neutral[86]};
-	border-bottom: 1px solid ${palette.neutral[86]};
+	padding: 0 0 ${space[3]}px;
+	scrollbar-width: none;
 	white-space: nowrap;
+	::-webkit-scrollbar {
+		display: none;
+	}
 	a {
 		${textSans14};
 		border: 1px solid ${palette.news[400]};
-		border-radius: 16px;
-		padding: 2px ${space[2]}px;
+		border-radius: 18px;
+		padding: 2px ${space[3]}px;
 		color: ${palette.news[400]};
+		font-weight: bold;
+		line-height: 18px;
 		text-decoration: none;
 	}
 	a[aria-current='page'] {
@@ -93,17 +124,24 @@ const tabsStyles = css`
 	}
 `;
 
+const titleStyles = css`
+	${headlineBold34};
+	margin: ${space[3]}px 0 ${space[3]}px;
+	line-height: 1.05;
+`;
+
 const recentStyles = css`
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 1px;
-	margin: ${space[2]}px 0 ${space[4]}px;
+	margin: 0 0 ${space[6]}px;
 	background: ${palette.neutral[86]};
-	${from.tablet} {
+	${from.phablet} {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 	a {
-		min-height: 72px;
+		box-sizing: border-box;
+		min-height: 104px;
 		padding: ${space[2]}px;
 		background: ${palette.news[800]};
 		color: ${palette.neutral[7]};
@@ -121,47 +159,60 @@ const recentStyles = css`
 
 const controlsStyles = css`
 	display: grid;
-	grid-template-columns: 36px 1fr 36px;
+	grid-template-columns: 44px 1fr 44px;
 	align-items: center;
 	border-top: 1px solid ${palette.neutral[86]};
-	padding-top: ${space[2]}px;
+	padding-top: ${space[3]}px;
 	button {
-		width: 32px;
-		height: 32px;
+		display: flex;
+		width: 40px;
+		height: 40px;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
 		border: 1px solid ${palette.neutral[20]};
 		border-radius: 50%;
-		background: transparent;
-		font-size: 20px;
+		background: ${palette.neutral[100]};
 		cursor: pointer;
+		svg {
+			width: 26px;
+			height: 26px;
+		}
+		:last-of-type {
+			justify-self: end;
+		}
 	}
 	strong {
 		text-align: center;
-		${textSans14};
+		${textSans17};
 	}
 `;
 
 const calendarStyles = css`
-	--calendar-gap: 6px;
+	--calendar-gap: 8px;
 	display: grid;
 	grid-template-columns: repeat(7, minmax(0, 1fr));
-	gap: var(--calendar-gap);
-	margin-top: ${space[3]}px;
+	column-gap: var(--calendar-gap);
+	row-gap: ${space[3]}px;
+	margin-top: ${space[5]}px;
 	.weekday {
 		${textSans14};
-		padding-bottom: ${space[1]}px;
+		padding-bottom: ${space[2]}px;
 		text-align: center;
-		font-weight: bold;
 	}
 	.empty,
 	.day {
-		aspect-ratio: 1 / 0.78;
+		aspect-ratio: 1;
 	}
 	.day {
 		position: relative;
 		display: flex;
-		align-items: center;
+		box-sizing: border-box;
+		align-items: flex-end;
 		justify-content: center;
-		min-height: 42px;
+		min-width: 0;
+		padding-bottom: ${space[1]}px;
+		border: 1px solid ${palette.neutral[93]};
 		background: ${palette.neutral[97]};
 		color: ${palette.neutral[7]};
 		text-decoration: none;
@@ -179,46 +230,80 @@ const calendarStyles = css`
 	}
 	.day[data-status='completed'] {
 		border: 1px solid ${palette.success[400]};
-		background: #d7f5e2;
+		background: #c3f1d5;
 	}
-	.day[data-status='completed']::after {
+	.completed-icon {
 		position: absolute;
-		top: 4px;
-		right: 4px;
-		content: '✓';
-		color: ${palette.success[400]};
-		font-weight: bold;
+		top: ${space[1]}px;
+		left: 50%;
+		display: flex;
+		width: clamp(12px, 3.5vw, 18px);
+		height: clamp(12px, 3.5vw, 18px);
+		transform: translateX(-50%);
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background: ${palette.success[400]};
+		color: ${palette.neutral[100]};
+		svg {
+			width: 75%;
+			height: 75%;
+			fill: currentColor;
+		}
 	}
 	.day[data-status='unavailable'] {
+		border-color: transparent;
 		background: transparent;
 		color: ${palette.neutral[60]};
 	}
+	${from.phablet} {
+		grid-template-columns: repeat(7, 60px);
+		justify-content: space-between;
+	}
 	${from.tablet} {
-		--calendar-gap: 10px;
-		.day {
-			min-height: 54px;
-		}
+		grid-template-columns: repeat(7, 68px);
+	}
+	${from.desktop} {
+		grid-template-columns: repeat(7, 78px);
 	}
 `;
 
 const legendStyles = css`
 	display: flex;
 	gap: ${space[4]}px;
-	margin-top: ${space[3]}px;
+	margin-top: ${space[8]}px;
 	${textSans14};
 	span::before {
-		display: inline-block;
-		width: 8px;
-		height: 8px;
+		display: inline-flex;
+		width: 16px;
+		height: 16px;
+		align-items: center;
+		justify-content: center;
 		margin-right: 5px;
 		border-radius: 50%;
 		content: '';
+		vertical-align: -3px;
 	}
 	.available::before {
 		background: ${palette.brand[500]};
 	}
 	.completed::before {
 		background: ${palette.success[400]};
+		color: ${palette.neutral[100]};
+		content: '✓';
+		font-size: 11px;
+		font-weight: bold;
+	}
+	${from.leftCol} {
+		position: absolute;
+		bottom: 0;
+		left: -160px;
+		margin-top: 0;
+		flex-direction: column;
+		gap: ${space[1]}px;
+	}
+	${from.wide} {
+		left: -240px;
 	}
 `;
 
@@ -289,7 +374,11 @@ export const PuzzlesArchiveCalendar = ({
 	};
 
 	return (
-		<section aria-label={`${archive.selectedPuzzle.title} archive`}>
+		<section
+			aria-label={`${archive.selectedPuzzle.title} archive`}
+			css={sectionStyles}
+		>
+			<div aria-hidden="true" css={linesStyles} />
 			<nav aria-label="Puzzle types" css={tabsStyles}>
 				{archive.puzzles.map((puzzle) => (
 					<a
@@ -305,7 +394,7 @@ export const PuzzlesArchiveCalendar = ({
 					</a>
 				))}
 			</nav>
-			<h2>{archive.selectedPuzzle.title}</h2>
+			<h2 css={titleStyles}>{archive.selectedPuzzle.title}</h2>
 			<div css={recentStyles}>
 				{recent.map((item, index) => (
 					<a href={item.url} key={`${item.date}-${item.puzzleType}`}>
@@ -328,7 +417,7 @@ export const PuzzlesArchiveCalendar = ({
 					onClick={() => void selectMonth(-1)}
 					type="button"
 				>
-					←
+					<SvgArrowLeftStraight />
 				</button>
 				<strong aria-live="polite">
 					{monthName(archive.year, archive.month)}
@@ -338,7 +427,7 @@ export const PuzzlesArchiveCalendar = ({
 					onClick={() => void selectMonth(1)}
 					type="button"
 				>
-					→
+					<SvgArrowRightStraight />
 				</button>
 			</div>
 			{loading && <p role="status">Loading archive…</p>}
@@ -370,6 +459,14 @@ export const PuzzlesArchiveCalendar = ({
 							key={cell.date}
 						>
 							{cell.day}
+							{status === 'completed' && (
+								<span
+									aria-hidden="true"
+									className="completed-icon"
+								>
+									<SvgCheckmark />
+								</span>
+							)}
 						</a>
 					) : (
 						<span
