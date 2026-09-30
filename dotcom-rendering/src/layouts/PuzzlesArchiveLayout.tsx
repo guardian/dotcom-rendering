@@ -16,6 +16,7 @@ import { MorePuzzlesRows } from '../components/MorePuzzlesCard';
 import { PuzzlesArchiveCalendar } from '../components/PuzzlesArchiveCalendar.island';
 import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
+import { center } from '../lib/center';
 import type { NavType } from '../model/extract-nav';
 import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import { Stuck } from './lib/stickiness';
@@ -27,10 +28,8 @@ const mainStyles = css`
 `;
 
 const pageStyles = css`
-	position: relative;
+	${center};
 	box-sizing: border-box;
-	max-width: 1300px;
-	margin: 0 auto;
 	padding: 0 ${space[3]}px;
 	border-left: 1px solid ${palette.neutral[86]};
 	border-right: 1px solid ${palette.neutral[86]};
@@ -42,7 +41,7 @@ const pageStyles = css`
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			left: 170px;
+			left: 160px;
 			width: 1px;
 			background: ${palette.neutral[86]};
 			content: '';
@@ -51,7 +50,7 @@ const pageStyles = css`
 	}
 	${from.wide} {
 		::before {
-			left: 250px;
+			left: 240px;
 		}
 	}
 `;
@@ -74,6 +73,7 @@ const headingStyles = css`
 		${headlineBold34};
 		margin: 0;
 		padding-top: ${space[2]}px;
+		overflow-wrap: anywhere;
 	}
 	p {
 		${textEgyptian17};
