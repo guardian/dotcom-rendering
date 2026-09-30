@@ -40,6 +40,7 @@ interface Props {
 	links: DropdownLinkType[];
 	dataLinkName: string;
 	cssOverrides?: SerializedStyles;
+	linkCssOverrides?: SerializedStyles;
 	children?: React.ReactNode;
 	renderTrigger?: (isExpanded: boolean) => React.ReactNode;
 	ariaLabel?: string;
@@ -281,8 +282,9 @@ const NotificationMessage = ({ notification }: NotificationMessageProps) => {
 type DropdownLinkProps = {
 	link: DropdownLinkType;
 	index: number;
+	linkCssOverrides?: SerializedStyles;
 };
-const DropdownLink = ({ link, index }: DropdownLinkProps) => {
+const DropdownLink = ({ link, index, linkCssOverrides }: DropdownLinkProps) => {
 	const ophanComponent = useMemo(
 		() => buildOphanComponentWithNotifications(link),
 		[link],
@@ -359,6 +361,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				href={url}
 				css={[
 					linkStyles,
+					linkCssOverrides,
 					!!link.isActive && linkActive,
 					index === 0 && linkFirst,
 				]}
@@ -397,6 +400,7 @@ export const Dropdown = ({
 	links,
 	dataLinkName,
 	cssOverrides,
+	linkCssOverrides,
 	children,
 	renderTrigger,
 	ariaLabel,
@@ -494,6 +498,7 @@ export const Dropdown = ({
 									href={l.url}
 									css={[
 										linkStyles,
+										linkCssOverrides,
 										!!l.isActive && linkActive,
 										index === 0 && linkFirst,
 									]}
@@ -542,6 +547,7 @@ export const Dropdown = ({
 										key={link.id}
 										link={link}
 										index={index}
+										linkCssOverrides={linkCssOverrides}
 									/>
 								))}
 							</ul>

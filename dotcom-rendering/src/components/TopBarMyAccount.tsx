@@ -249,6 +249,15 @@ const iconInAccountStyles = css`
 	}
 `;
 
+const dropdownLinkStyles = (showSignInTextOnMobile: boolean) => css`
+	${!showSignInTextOnMobile &&
+	css`
+		${until.tablet} {
+			padding: 16px 0 16px 24px;
+		}
+	`}
+`;
+
 interface SignedInWithNotificationsProps {
 	mmaUrl: string;
 	idUrl: string;
@@ -340,6 +349,7 @@ const SignedInWithNotifications = ({
 					'my account',
 				)}
 				cssOverrides={dropDownOverrides(showSignInTextOnMobile)}
+				linkCssOverrides={dropdownLinkStyles(showSignInTextOnMobile)}
 			/>
 		</div>
 	);
