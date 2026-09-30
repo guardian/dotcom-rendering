@@ -76,16 +76,7 @@ const copyApp = (guAppName) => {
 		},
 	);
 
-	log(` - ${guAppName}: copying scripts`);
-	const scriptsJob = cpy(
-		path.resolve(dirname, '../../scripts/**'),
-		path.resolve(target, guAppName, 'scripts'),
-		{
-			nodir: true,
-		},
-	);
-
-	return [cfnJob, makefileJob, serverDistJob, scriptsJob];
+	return [cfnJob, makefileJob, serverDistJob];
 };
 
 /**
