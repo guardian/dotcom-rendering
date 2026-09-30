@@ -33,7 +33,6 @@ interface Props {
 	 * not the human-readable display text rendered next to the title.
 	 */
 	puzzleDate: string | null;
-	puzzleId?: string;
 }
 
 type MinHeightTiers = { default: number; tablet: number; mobile: number };
@@ -288,9 +287,8 @@ const buildPuzzleContext = (
 export const buildPuzzleIframeSrc = (
 	puzzleConfig: PuzzleConfig,
 	context: PuzzleContext,
-	puzzleId?: string,
 ): string => {
-	const providerUrl = resolvePuzzleIframeUrl(puzzleConfig, context, puzzleId);
+	const providerUrl = resolvePuzzleIframeUrl(puzzleConfig, context);
 	try {
 		const url = new URL(providerUrl);
 		url.searchParams.set(
@@ -345,12 +343,11 @@ export const PuzzleIframe = ({
 	title,
 	darkModeAvailable,
 	puzzleDate,
-	puzzleId,
 }: Props) => {
 	const userId = usePuzzleUserId();
 	const darkMode = usePuzzleDarkMode(darkModeAvailable);
 	const context = buildPuzzleContext(userId, darkMode, puzzleDate);
-	const iframeSrc = buildPuzzleIframeSrc(puzzleConfig, context, puzzleId);
+	const iframeSrc = buildPuzzleIframeSrc(puzzleConfig, context);
 
 	return (
 		<iframe

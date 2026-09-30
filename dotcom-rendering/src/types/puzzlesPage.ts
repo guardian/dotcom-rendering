@@ -79,7 +79,6 @@ export type PuzzlesArchivePuzzle = {
 };
 
 export type PuzzlesArchiveItem = {
-	puzzleId: string;
 	puzzleType: string;
 	date: string;
 	progress: number;

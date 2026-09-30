@@ -504,15 +504,15 @@ export const PuzzlePageLayout = ({
 	// JSDoc), not a v0 one - so it must not render just because
 	// instance.moreFromPuzzlesAndGames happens to be non-empty.
 	// if (instance.moreFromPuzzlesAndGames?.length === 0) {
-	// 	instance.moreFromPuzzlesAndGames = [
-	// 		{
-	// 			id: 'placeholder',
-	// 			title: 'More puzzles coming soon',
-	// 			type: 'Placeholder',
-	// 			set: 'placeholder',
-	// 			cardVariant: 'primary',
-	// 		},
-	// 	];
+	//  instance.moreFromPuzzlesAndGames = [
+	//    {
+	//      id: 'placeholder',
+	//      title: 'More puzzles coming soon',
+	//      type: 'Placeholder',
+	//      set: 'placeholder',
+	//      cardVariant: 'primary',
+	//    },
+	//  ];
 	// }
 	const isV1Enabled = isPuzzlesHubV1Enabled(config);
 
@@ -773,7 +773,6 @@ export const PuzzlePageLayout = ({
 												puzzleDate={
 													instance.puzzleDate ?? null
 												}
-												puzzleId={instance.puzzleId}
 											/>
 										</Island>
 									</ArticleContainer>
