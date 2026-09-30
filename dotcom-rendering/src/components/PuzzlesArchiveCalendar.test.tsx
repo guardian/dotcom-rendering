@@ -27,6 +27,7 @@ const archive: PuzzlesArchive = {
 			puzzleType: 'SUDOKU_EASY',
 			date: '2026-09-02',
 			progress: 50,
+			setterName: 'Philistine',
 			url: '/puzzles-and-games/logic-puzzles/sudoku-easy/2026-09-02',
 		},
 	],
@@ -79,6 +80,12 @@ describe('PuzzlesArchiveCalendar', () => {
 			'href',
 			archive.items[0]?.url,
 		);
+	});
+
+	it('shows the setter name inside an available date', () => {
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+
+		expect(screen.getByTitle('Philistine')).toBeInTheDocument();
 	});
 
 	it('loads the previous month without navigating or reloading', async () => {
