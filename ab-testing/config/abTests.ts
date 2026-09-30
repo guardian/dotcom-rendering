@@ -308,7 +308,7 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-10-28",
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 2.1 / 100, // 0.35% in each variant
 		audienceSpace: "A",
 		groups: [
