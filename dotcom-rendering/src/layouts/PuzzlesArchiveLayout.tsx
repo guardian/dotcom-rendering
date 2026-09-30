@@ -5,7 +5,7 @@ import {
 	headlineBold34,
 	palette,
 	space,
-	textSans17,
+	textEgyptian17,
 } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
@@ -36,42 +36,88 @@ const pageStyles = css`
 	${from.tablet} {
 		padding: 0 ${space[5]}px;
 	}
+`;
+
+const archiveGridStyles = css`
+	display: grid;
+	grid-template-columns: minmax(0, 760px);
+	column-gap: ${space[5]}px;
+	${from.leftCol} {
+		grid-template-columns: 140px minmax(0, 760px) minmax(0, 1fr);
+	}
+	${from.wide} {
+		grid-template-columns: 220px minmax(0, 1fr) 300px;
+	}
+`;
+
+const headingStyles = css`
+	${archiveGridStyles};
 	h1 {
 		${headlineBold34};
 		margin: 0;
 		padding-top: ${space[2]}px;
 	}
-	> p {
-		${textSans17};
+	p {
+		${textEgyptian17};
 		max-width: 620px;
 		margin: 0 0 ${space[6]}px;
+		color: ${palette.neutral[46]};
+	}
+	${from.leftCol} {
+		h1 {
+			grid-column: 1;
+		}
+		p {
+			grid-column: 2;
+			padding-top: ${space[2]}px;
+		}
 	}
 `;
 
 const contentStyles = css`
-	display: grid;
-	grid-template-columns: minmax(0, 1fr);
-	gap: ${space[6]}px;
-	${from.desktop} {
-		grid-template-columns: minmax(0, 760px) 300px;
+	${archiveGridStyles};
+	> div:first-of-type {
+		min-width: 0;
+	}
+	${from.leftCol} {
+		> div:first-of-type {
+			grid-column: 2;
+		}
 	}
 `;
 
 const sideAdStyles = css`
 	display: none;
-	${from.desktop} {
+	${from.wide} {
 		display: block;
+		grid-column: 3;
 		padding-top: 110px;
 	}
 `;
 
 const moreStyles = css`
-	margin-top: ${space[8]}px;
+	${archiveGridStyles};
+	margin-top: ${space[5]}px;
 	padding-top: ${space[2]}px;
 	border-top: 1px solid ${palette.neutral[20]};
 	h2 {
 		${headlineBold24};
-		margin: 0 0 ${space[3]}px;
+		margin: 0 0 ${space[2]}px;
+		line-height: 1;
+		span {
+			color: ${palette.news[400]};
+		}
+	}
+	${from.leftCol} {
+		h2 {
+			grid-column: 1;
+			span {
+				display: block;
+			}
+		}
+		> div {
+			grid-column: 2;
+		}
 	}
 `;
 
@@ -126,8 +172,10 @@ export const PuzzlesArchiveLayout = ({
 			</div>
 			<main css={mainStyles} id="maincontent">
 				<div css={pageStyles}>
-					<h1>{archive.title}</h1>
-					<p>{archive.description}</p>
+					<header css={headingStyles}>
+						<h1>{archive.title}</h1>
+						<p>{archive.description}</p>
+					</header>
 					<div css={contentStyles}>
 						<Island priority="critical">
 							<PuzzlesArchiveCalendar initialArchive={archive} />
@@ -143,8 +191,17 @@ export const PuzzlesArchiveLayout = ({
 					</div>
 					{archive.moreFrom.length > 0 && (
 						<section css={moreStyles}>
-							<h2>More from Puzzles &amp; games</h2>
-							<Rows rows={[archive.moreFrom]} />
+							<h2>
+								More from <span>Puzzles &amp; games</span>
+							</h2>
+							<Rows
+								rows={[
+									archive.moreFrom.map((item) => ({
+										...item,
+										cardVariant: 'archive',
+									})),
+								]}
+							/>
 						</section>
 					)}
 					{renderAds && (
