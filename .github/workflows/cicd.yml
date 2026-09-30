@@ -17,14 +17,6 @@ jobs:
     secrets:
       GU_ARTIFACTS_ROLE_ARN: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
 
-  container:
-    permissions:
-      packages: write
-    needs: [production-container]
-    uses: ./.github/workflows/container.yml
-    with:
-      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
-
   prettier:
     if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/prettier.yml
