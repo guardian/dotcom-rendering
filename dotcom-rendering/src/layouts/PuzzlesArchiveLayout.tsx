@@ -12,7 +12,7 @@ import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
-import { Rows } from '../components/PuzzleCard';
+import { MorePuzzlesRows } from '../components/MorePuzzlesCard';
 import { PuzzlesArchiveCalendar } from '../components/PuzzlesArchiveCalendar.island';
 import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
@@ -27,6 +27,7 @@ const mainStyles = css`
 `;
 
 const pageStyles = css`
+	position: relative;
 	box-sizing: border-box;
 	max-width: 1300px;
 	margin: 0 auto;
@@ -35,6 +36,23 @@ const pageStyles = css`
 	border-right: 1px solid ${palette.neutral[86]};
 	${from.tablet} {
 		padding: 0 ${space[5]}px;
+	}
+	${from.leftCol} {
+		::before {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 170px;
+			width: 1px;
+			background: ${palette.neutral[86]};
+			content: '';
+			pointer-events: none;
+		}
+	}
+	${from.wide} {
+		::before {
+			left: 250px;
+		}
 	}
 `;
 
@@ -76,13 +94,12 @@ const headingStyles = css`
 
 const contentStyles = css`
 	${archiveGridStyles};
-	> div:first-of-type {
-		min-width: 0;
-	}
+`;
+
+const calendarColumnStyles = css`
+	min-width: 0;
 	${from.leftCol} {
-		> div:first-of-type {
-			grid-column: 2;
-		}
+		grid-column: 2;
 	}
 `;
 
@@ -177,9 +194,13 @@ export const PuzzlesArchiveLayout = ({
 						<p>{archive.description}</p>
 					</header>
 					<div css={contentStyles}>
-						<Island priority="critical">
-							<PuzzlesArchiveCalendar initialArchive={archive} />
-						</Island>
+						<div css={calendarColumnStyles}>
+							<Island priority="critical">
+								<PuzzlesArchiveCalendar
+									initialArchive={archive}
+								/>
+							</Island>
+						</div>
 						{renderAds && (
 							<aside css={sideAdStyles}>
 								<AdSlot
@@ -194,14 +215,7 @@ export const PuzzlesArchiveLayout = ({
 							<h2>
 								More from <span>Puzzles &amp; games</span>
 							</h2>
-							<Rows
-								rows={[
-									archive.moreFrom.map((item) => ({
-										...item,
-										cardVariant: 'archive',
-									})),
-								]}
-							/>
+							<MorePuzzlesRows items={archive.moreFrom} />
 						</section>
 					)}
 					{renderAds && (
