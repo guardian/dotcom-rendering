@@ -429,7 +429,7 @@ export const StandardLayoutArticleGrid = ({
 					layoutType === 'immersiveLandscape' &&
 						css`
 							${from.desktop} {
-								padding-bottom: ${space[8]}px;
+								padding-bottom: 14px;
 							}
 						`,
 				]}
