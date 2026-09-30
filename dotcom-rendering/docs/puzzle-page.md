@@ -487,8 +487,15 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   neither has been confirmed against what AmuseLabs or Wordiply actually
   expect to receive, including whether `legacy_identity_id` (rather than
   the OIDC `sub` claim) is the right identifier format for the `userId`
-  field within it, and whether either provider's iframe even supports a
-  dark-mode signal in the first place (see the dark-mode bullet below).
+  field within it. On dark mode specifically: AmuseLabs does document a
+  real, confirmed postMessage-based dark-mode API of its own
+  (`{ type: 'updateDarkMode', darkMode: boolean }`) - but it is a
+  completely separate message shape from `guardian-puzzle-context`, isn't
+  sent by DCR today, and needs to be explicitly enabled per series by
+  AmuseLabs before it does anything (see the dark-mode bullet below for
+  detail). Whether `guardian-puzzle-context`'s own `darkMode` field (or
+  anything else in it) does anything at all remains exactly as unconfirmed
+  as before.
   The separate, plain `uid=<userId>` query parameter (see "User/context
   info passed to the puzzle iframe" above), by contrast, **is** confirmed:
   sourced from the native (Android/iOS) apps' own real, working AmuseLabs
@@ -590,6 +597,41 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   AmuseLabs or Wordiply actually read or honour that signal at all is
   unconfirmed (see the `PuzzleContextMessage` open question above). This has
   not been visually verified in either light or dark mode.
+
+    **AmuseLabs' own, separate, real light/dark-mode API is now confirmed, and
+    DCR does not use it.** Per AmuseLabs' public integration docs
+    (<https://amuselabs.com/docs/integration/iframe-communication/#switching-lightdark-mode>,
+    read 2026-09-25): the parent page can switch an already-loaded puzzle's
+    theme live, without reloading the iframe, by posting
+    `{ type: 'updateDarkMode', darkMode: true | false }` to
+    `iframe.contentWindow`. This is a **different, AmuseLabs-owned message
+    shape**, entirely separate from DCR's own `guardian-puzzle-context`
+    blob above - AmuseLabs' docs don't mention `guardian-puzzle-context` at
+    all, which is consistent with that shape still being unconfirmed. Two
+    things to know before anyone relies on this:
+    1. **It requires prior enablement per series**: AmuseLabs' docs state
+       "Dark mode syncing via `postMessage` must be enabled for your
+       series. Contact us to enable it." - there's no evidence in this
+       codebase or its docs that this has been requested/confirmed for any
+       of the Guardian's series.
+    2. **DCR does not currently send this message at all.** Today, when the
+       reader's OS theme changes while on the page, `PuzzleIframe` instead
+       gives the `<iframe>` a fresh `src` (a new `darkMode=0|1` query
+       param), which the browser treats as a full reload - see "The iframe
+       reloads automatically..." above. That achieves the same
+       reader-visible outcome (correct theme shown) through a different,
+       already-working mechanism, not through this API. Adopting
+       `updateDarkMode` instead (to avoid the reload) would be a genuinely
+       new, separately-scoped change, not something already covered by the
+       existing reload behaviour.
+
+    The same AmuseLabs docs page also documents several iframe→parent
+    message types not currently consumed anywhere in this codebase,
+    including `PUZZLE_PROGRESS` and `PUZZLE_COMPLETE` - worth checking first
+    if "No saved puzzle state / progress persistence" (below) is ever picked
+    up, since it may already be the API that bullet says doesn't exist yet
+    (unconfirmed either way; not read in detail here beyond their names).
+
 - **Responsive/mobile layout has not been explicitly verified** for Puzzle
   Page or the puzzle iframes themselves (which are entirely provider-
   controlled content). This includes the puzzle iframe's own `min-height`

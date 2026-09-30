@@ -82,6 +82,17 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 	},
 	{
+		name: "commercial-ozone-au-nz-adunit-ids",
+		description: "0% test to prove ad units for Ozone in Aus and NZ",
+		owners: ["commercial.dev@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-10-14",
+		type: "client",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+	},
+	{
 		name: "fronts-and-curation-loop-click-through",
 		description:
 			"Test impact of click to article via loop videos on fronts",
@@ -124,7 +135,7 @@ const ABTests: ABTest[] = [
 			"V2 of test to measure the impact of contamination between groups in ab tests",
 		owners: ["dotcom.platform@theguardian.com"],
 		status: "ON",
-		expirationDate: "2026-09-30",
+		expirationDate: "2026-10-14",
 		type: "client",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
@@ -308,7 +319,7 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-10-28",
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 2.1 / 100, // 0.35% in each variant
 		audienceSpace: "A",
 		groups: [
@@ -326,7 +337,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Test opening up the article-end ad slot in the US region for HeaderBidding",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-10-01",
+		expirationDate: "2026-10-28",
 		type: "client",
 		status: "ON",
 		audienceSize: 0 / 100,
@@ -341,6 +352,19 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-10-28",
 		type: "client",
+		status: "ON",
+		audienceSize: 0,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "webx-display-custom-subnavs",
+		description:
+			"Show the custom subnav in place of the standard subnav, opt-in only",
+		owners: ["dotcom.platform@guardian.co.uk"],
+		expirationDate: "2026-11-30",
+		type: "server",
 		status: "ON",
 		audienceSize: 0,
 		audienceSpace: "A",
