@@ -99,16 +99,6 @@ const getFormattedLatestPrice = (
 	};
 };
 
-export const maybeGetFormattedLivePrice = (
-	latestPrice?: AffiliateProductPrice,
-): string | undefined => {
-	if (isUndefined(latestPrice)) {
-		return undefined;
-	}
-
-	return getFormattedLatestPrice(latestPrice)?.formattedPrice;
-};
-
 export const formatPrice = (price: number): string =>
 	priceFormatter.format(price).replace(/\.00$/, '');
 
