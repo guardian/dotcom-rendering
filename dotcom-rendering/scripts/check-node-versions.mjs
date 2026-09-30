@@ -35,6 +35,11 @@ if (!nodeVersion) {
 const requiredNodeVersionMatches =
 	/** @type {const} @satisfies {ReadonlyArray<{filepath: string, pattern: RegExp, matchLevel: MatchLevel}>}*/ ([
 		{
+			filepath: '../Production.dockerfile',
+			pattern: /^FROM dhi\.io\/node:(\d+)/m,
+			matchLevel: 'major',
+		},
+		{
 			filepath: 'Containerfile',
 			pattern: /^FROM node:(\d+)/m,
 			matchLevel: 'major',
