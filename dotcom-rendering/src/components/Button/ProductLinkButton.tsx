@@ -7,9 +7,11 @@ import type {
 import { LinkButton } from '@guardian/source/react-components';
 import { SKIMLINK_REL } from '../../lib/affiliateLinksUtils';
 import { palette } from '../../palette';
+import type { AffiliateProductPrice } from '../../types/content';
 import {
 	createAccessibleProductLabel,
 	createStrikeThroughProductLabel,
+	rewriteLabelWithLatestPrice,
 } from './productUtils';
 import { heightAutoStyle, wrapButtonTextStyle } from './styles';
 import { getPropsForLinkUrl } from './utils';
@@ -17,6 +19,7 @@ import { getPropsForLinkUrl } from './utils';
 type ProductLinkButtonProps = {
 	label: string;
 	url: string;
+	latestPrice?: AffiliateProductPrice;
 	size?: 'default' | 'small';
 	fullwidth?: boolean;
 	fullWidthText?: boolean;
@@ -60,6 +63,7 @@ export const theme: Partial<ThemeButton> = {
 export const ProductLinkButton = ({
 	label,
 	url,
+	latestPrice,
 	size = 'default',
 	fullwidth = false,
 	minimisePadding = false,
@@ -75,9 +79,16 @@ export const ProductLinkButton = ({
 		...(minimisePadding ? [minimisePaddingStyle] : []),
 	];
 
+	const labelWithLatestPrice = rewriteLabelWithLatestPrice(
+		latestPrice,
+		label,
+	);
+
 	return (
 		<LinkButton
-			{...getPropsForLinkUrl(createAccessibleProductLabel(label))}
+			{...getPropsForLinkUrl(
+				createAccessibleProductLabel(labelWithLatestPrice),
+			)}
 			href={url}
 			rel={SKIMLINK_REL}
 			priority={priority}
@@ -94,7 +105,7 @@ export const ProductLinkButton = ({
 				style={fullWidthText ? { width: '100%' } : {}}
 				css={[wrapButtonTextStyle, strikeThroughStyle]}
 			>
-				{createStrikeThroughProductLabel(label)}
+				{createStrikeThroughProductLabel(labelWithLatestPrice)}
 			</span>
 		</LinkButton>
 	);

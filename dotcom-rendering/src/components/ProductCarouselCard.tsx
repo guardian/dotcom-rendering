@@ -150,6 +150,7 @@ export const ProductCarouselCard = ({
 								url={cardCta.url}
 								fullwidth={true}
 								minimisePadding={true}
+								latestPrice={cardCta.latestPrice}
 							/>
 						</div>
 					</>

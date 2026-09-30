@@ -59,6 +59,7 @@ const ListItem = ({ product }: { product: SummaryProduct }) => {
 					label={getProductLinkLabelWithPrice(cta)}
 					url={cta.url}
 					minimisePadding={true}
+					latestPrice={cta.latestPrice}
 				/>
 			)}
 		</li>

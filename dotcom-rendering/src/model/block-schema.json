@@ -2178,6 +2178,21 @@
                         "Tertiary"
                     ],
                     "type": "string"
+                },
+                "latestPrice": {
+                    "type": "object",
+                    "properties": {
+                        "currencySymbol": {
+                            "type": "string"
+                        },
+                        "price": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "currencySymbol",
+                        "price"
+                    ]
                 }
             },
             "required": [
@@ -4191,6 +4206,21 @@
                             },
                             "price": {
                                 "type": "string"
+                            },
+                            "latestPrice": {
+                                "type": "object",
+                                "properties": {
+                                    "currencySymbol": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "currencySymbol",
+                                    "price"
+                                ]
                             }
                         },
                         "required": [
