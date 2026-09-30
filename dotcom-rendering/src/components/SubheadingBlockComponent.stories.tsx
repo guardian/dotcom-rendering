@@ -46,6 +46,11 @@ const subheadingHtmlStrings = [
 	"<h2>Subheading <a href='/'>with anchor</a></h2>",
 	'<h2>Subheading with HTML comment<!-- HTML comment--></h2>',
 	'Subheading text only (no HTML)',
+	'<h3>Basic h3 subheading</h3>',
+	'<h3>An h3 with <strong>strong</strong> tags</h3>',
+	"<h3>An h3 <a href='/'>with anchor</a></h3>",
+	'<h4>Basic h4 subheading</h4>',
+	'<h4>An h4 with <strong>strong</strong> tags</h4>',
 ];
 
 const meta = preview.meta({

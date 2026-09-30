@@ -9,7 +9,6 @@ import type {
 } from './frontend/feFootballMatchListPage';
 import { oneOf, parseDate } from './lib/parse';
 import { error, type Result } from './lib/result';
-import { cleanTeamName } from './sportDataPage';
 
 /**
  * There are three states a football match can be in.
@@ -178,12 +177,12 @@ const parseFixture = (
 			kickOff: dateTimeISOString,
 			venue: feFixture.venue?.name,
 			homeTeam: {
-				name: cleanTeamName(feFixture.homeTeam.name),
+				name: feFixture.homeTeam.name,
 				paID: feFixture.homeTeam.id,
 				teamUrl: feFixture.homeTeam.teamUrl,
 			},
 			awayTeam: {
-				name: cleanTeamName(feFixture.awayTeam.name),
+				name: feFixture.awayTeam.name,
 				paID: feFixture.awayTeam.id,
 				teamUrl: feFixture.awayTeam.teamUrl,
 			},
@@ -225,14 +224,14 @@ const parseMatchResult = (
 			kickOff: dateTimeISOString,
 			venue: feResult.venue?.name,
 			homeTeam: {
-				name: cleanTeamName(feResult.homeTeam.name),
+				name: feResult.homeTeam.name,
 				paID: feResult.homeTeam.id,
 				score: homeScore,
 				scorers: parseScorers(feResult.homeTeam.scorers),
 				teamUrl: feResult.homeTeam.teamUrl,
 			},
 			awayTeam: {
-				name: cleanTeamName(feResult.awayTeam.name),
+				name: feResult.awayTeam.name,
 				paID: feResult.awayTeam.id,
 				score: awayScore,
 				scorers: parseScorers(feResult.awayTeam.scorers),
@@ -277,21 +276,21 @@ const parseLiveMatch = (
 			kickOff: dateTimeISOString,
 			venue: feMatchDay.venue?.name,
 			homeTeam: {
-				name: cleanTeamName(feMatchDay.homeTeam.name),
+				name: feMatchDay.homeTeam.name,
 				paID: feMatchDay.homeTeam.id,
 				score: homeScore,
 				scorers: parseScorers(feMatchDay.homeTeam.scorers),
 				teamUrl: feMatchDay.homeTeam.teamUrl,
 			},
 			awayTeam: {
-				name: cleanTeamName(feMatchDay.awayTeam.name),
+				name: feMatchDay.awayTeam.name,
 				paID: feMatchDay.awayTeam.id,
 				score: awayScore,
 				scorers: parseScorers(feMatchDay.awayTeam.scorers),
 				teamUrl: feMatchDay.awayTeam.teamUrl,
 			},
 			dateTimeISOString,
-			comment: cleanTeamName(feMatchDay.comments ?? ''),
+			comment: feMatchDay.comments ?? '',
 			status: replaceLiveMatchStatus(feMatchDay.matchStatus),
 		}));
 };

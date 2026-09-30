@@ -5,7 +5,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';

@@ -8,7 +8,6 @@ import type {
 	FEResult,
 } from './frontend/feFootballMatchListPage';
 import { error, ok, type Result } from './lib/result';
-import { cleanTeamName } from './sportDataPage';
 
 export type Team = {
 	name: string;
@@ -206,11 +205,11 @@ const parseFixture = (
 		.map((dateTimeISOString) => ({
 			kind: 'Fixture',
 			homeTeam: {
-				name: cleanTeamName(feFixture.homeTeam.name),
+				name: feFixture.homeTeam.name,
 				id: feFixture.homeTeam.id,
 			},
 			awayTeam: {
-				name: cleanTeamName(feFixture.awayTeam.name),
+				name: feFixture.awayTeam.name,
 				id: feFixture.awayTeam.id,
 			},
 			dateTimeISOString,
@@ -236,18 +235,18 @@ const parseMatchResult = (
 		.map((dateTimeISOString) => ({
 			kind: 'Result',
 			homeTeam: {
-				name: cleanTeamName(feResult.homeTeam.name),
+				name: feResult.homeTeam.name,
 				score: feResult.homeTeam.score,
 				id: feResult.homeTeam.id,
 			},
 			awayTeam: {
-				name: cleanTeamName(feResult.awayTeam.name),
+				name: feResult.awayTeam.name,
 				score: feResult.awayTeam.score,
 				id: feResult.awayTeam.id,
 			},
 			dateTimeISOString,
 			paId: feResult.id,
-			comment: cleanTeamName(feResult.comments ?? ''),
+			comment: feResult.comments ?? '',
 		}));
 };
 
@@ -269,18 +268,18 @@ const parseLiveMatch = (
 		.map((dateTimeISOString) => ({
 			kind: 'Live',
 			homeTeam: {
-				name: cleanTeamName(feMatchDay.homeTeam.name),
+				name: feMatchDay.homeTeam.name,
 				score: feMatchDay.homeTeam.score,
 				id: feMatchDay.homeTeam.id,
 			},
 			awayTeam: {
-				name: cleanTeamName(feMatchDay.awayTeam.name),
+				name: feMatchDay.awayTeam.name,
 				score: feMatchDay.awayTeam.score,
 				id: feMatchDay.awayTeam.id,
 			},
 			dateTimeISOString,
 			paId: feMatchDay.id,
-			comment: cleanTeamName(feMatchDay.comments ?? ''),
+			comment: feMatchDay.comments ?? '',
 			status: replaceLiveMatchStatus(feMatchDay.matchStatus),
 		}));
 };

@@ -4,6 +4,10 @@ export const getIdentityAuth = (): {
 		accessToken?: string;
 		idToken?: string;
 	}>;
+	authStateManager: {
+		subscribe: (callback: () => void) => void;
+		unsubscribe: (callback: () => void) => void;
+	};
 } => ({
 	isSignedInWithAuthState: () =>
 		Promise.resolve({
@@ -11,4 +15,8 @@ export const getIdentityAuth = (): {
 			accessToken: undefined,
 			idToken: undefined,
 		}),
+	authStateManager: {
+		subscribe: () => {},
+		unsubscribe: () => {},
+	},
 });
