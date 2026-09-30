@@ -25,7 +25,7 @@ cdk-synth:
 cdk-diff:
 	@pnpm cdk diff --path-metadata false --version-reporting false --profile frontend
 
-riffraff-bundle: clean-dist build cdk-synth
+riffraff-bundle: cdk-synth
 	$(call log, "creating riffraff bundle")
 	@node ./scripts/deploy/build-riffraff-bundle.mjs
 
