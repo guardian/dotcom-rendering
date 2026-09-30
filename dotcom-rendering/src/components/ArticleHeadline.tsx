@@ -626,6 +626,7 @@ export const ArticleHeadline = ({
 									rating={starRating}
 									paddingSize={'large'}
 									size={'large'}
+									layoutType={layoutType}
 								/>
 							)}
 						</WithAgeWarning>
