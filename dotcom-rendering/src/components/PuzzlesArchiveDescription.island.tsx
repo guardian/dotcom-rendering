@@ -15,13 +15,13 @@ const linkStyles = css`
 export const PuzzlesArchiveDescription = ({ idUrl }: { idUrl: string }) => {
 	const isSignedIn = useIsSignedIn();
 
-	if (isSignedIn === false) {
+	if (isSignedIn !== true) {
 		return (
 			<>
 				<a css={linkStyles} href={getHeaderSignInUrl(idUrl)}>
 					Sign in or create an account
 				</a>{' '}
-				to keep track of your progress
+				to keep track of your progress.
 			</>
 		);
 	}

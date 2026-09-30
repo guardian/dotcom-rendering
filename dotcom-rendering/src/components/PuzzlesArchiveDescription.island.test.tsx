@@ -40,4 +40,16 @@ describe('PuzzlesArchiveDescription', () => {
 			testingScreen.getByText(/to keep track of your progress/),
 		).toBeInTheDocument();
 	});
+
+	it('shows the sign-in message while authentication is pending', () => {
+		jest.mocked(useIsSignedIn).mockReturnValue('Pending');
+
+		render(<PuzzlesArchiveDescription idUrl={idUrl} />);
+
+		expect(
+			testingScreen.getByRole('link', {
+				name: 'Sign in or create an account',
+			}),
+		).toBeInTheDocument();
+	});
 });
