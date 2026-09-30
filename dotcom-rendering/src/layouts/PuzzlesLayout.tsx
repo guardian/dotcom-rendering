@@ -98,6 +98,20 @@ export const PuzzlesLayout = ({
 	NAV: NavType;
 }) => {
 	const renderAds = !puzzlesPage.isAdFreeUser;
+	const puzzlesNav = {
+		...NAV,
+		currentNavLink: 'Puzzles & games',
+		subNavSections: NAV.subNavSections
+			? {
+					links: [
+						...(NAV.subNavSections.parent
+							? [NAV.subNavSections.parent]
+							: []),
+						...NAV.subNavSections.links,
+					],
+				}
+			: undefined,
+	};
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -115,7 +129,7 @@ export const PuzzlesLayout = ({
 					</Stuck>
 				)}
 				<Masthead
-					nav={NAV}
+					nav={puzzlesNav}
 					editionId={puzzlesPage.editionId}
 					idUrl={puzzlesPage.config.idUrl}
 					mmaUrl={puzzlesPage.config.mmaUrl}
