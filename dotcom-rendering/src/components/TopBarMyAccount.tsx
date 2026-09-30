@@ -255,6 +255,10 @@ const dropdownLinkStyles = (showSignInTextOnMobile: boolean) => css`
 		${until.tablet} {
 			padding: 16px 0 16px 24px;
 		}
+		&::before {
+			left: 24px;
+			right: 0;
+		}
 	`}
 `;
 
