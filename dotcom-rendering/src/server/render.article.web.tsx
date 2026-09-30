@@ -20,7 +20,7 @@ import { isEditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { polyfillIO } from '../lib/polyfill.io';
-import { extractNAV } from '../model/extract-nav';
+import { applyCustomSubnavTest, extractNAV } from '../model/extract-nav';
 import { createGuardian as createWindowGuardian } from '../model/guardian';
 import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';
@@ -43,10 +43,13 @@ export const renderArticle = ({
 	article,
 }: Props): { html: string; prefetchScripts: string[] } => {
 	const { design, frontendData, theme } = article;
-	const NAV = {
-		...extractNAV(frontendData.nav),
-		selectedPillar: getCurrentPillar(frontendData),
-	};
+	const NAV = applyCustomSubnavTest(
+		{
+			...extractNAV(frontendData.nav),
+			selectedPillar: getCurrentPillar(frontendData),
+		},
+		frontendData.config.serverSideABTests,
+	);
 
 	const title = decideTitle(article);
 	const linkedData = frontendData.linkedData;
