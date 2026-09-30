@@ -251,7 +251,11 @@ const calendarStyles = css`
 	}
 	.day[data-status='completed'] {
 		border: 1px solid ${palette.success[400]};
-		background: #c3f1d5;
+		background: color-mix(
+			in srgb,
+			${palette.success[500]} 35%,
+			${palette.neutral[100]}
+		);
 	}
 	.setter-name {
 		position: absolute;

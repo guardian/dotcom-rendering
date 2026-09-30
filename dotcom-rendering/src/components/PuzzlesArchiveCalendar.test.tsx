@@ -93,7 +93,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		const fetchMock = jest.fn().mockResolvedValue({
 			ok: true,
 			json: async () => previous,
-		} as Response);
+		});
 		Object.defineProperty(global, 'fetch', {
 			configurable: true,
 			value: fetchMock,
@@ -118,7 +118,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		const fetchMock = jest.fn().mockResolvedValue({
 			ok: true,
 			json: async () => next,
-		} as Response);
+		});
 		Object.defineProperty(global, 'fetch', {
 			configurable: true,
 			value: fetchMock,
