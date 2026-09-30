@@ -318,6 +318,15 @@ const rowStyles = (
 		}
 		${mobileScrollable &&
 		css`
+			> li + li::after {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: calc(var(--puzzles-gap) / -2);
+				border-left: 1px solid ${palette.neutral[86]};
+				content: '';
+				pointer-events: none;
+			}
 			${until.phablet} {
 				display: flex;
 				overflow-x: auto;
