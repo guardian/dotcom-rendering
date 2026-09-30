@@ -387,12 +387,6 @@ export const StandardLayoutArticleGrid = ({
 								padding-bottom: ${space[8]}px;
 							}
 						`,
-					layoutType === 'immersiveLandscape' &&
-						css`
-							${from.desktop} {
-								padding-bottom: ${space[8]}px;
-							}
-						`,
 					layoutType === 'immersivePortrait' &&
 						css`
 							${from.desktop} {
@@ -429,6 +423,10 @@ export const StandardLayoutArticleGrid = ({
 					layoutType === 'immersiveLandscape' &&
 						css`
 							${from.desktop} {
+								padding-top: ${space[8]}px;
+							}
+
+							${from.leftCol} {
 								padding-bottom: 14px;
 							}
 						`,
@@ -480,6 +478,12 @@ export const StandardLayoutArticleGrid = ({
 								}
 							`
 						: undefined,
+					layoutType === 'immersiveLandscape' &&
+						css`
+							${from.leftCol} {
+								padding-top: ${space[8]}px;
+							}
+						`,
 				]}
 			>
 				{format.display !== ArticleDisplay.Immersive &&
