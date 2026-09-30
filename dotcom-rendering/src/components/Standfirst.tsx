@@ -400,6 +400,7 @@ const immersiveGridOverrides = css`
 
 	${from.tablet} {
 		max-width: none;
+		${headlineMedium20};
 	}
 `;
 
