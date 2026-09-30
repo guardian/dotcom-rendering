@@ -272,6 +272,7 @@ const darkBackground = css`
 
 const immersiveDarkBackground = css`
 	background-color: ${themePalette('--headline-background-immersive')};
+	padding-bottom: ${space[6]}px;
 `;
 
 const invertedText = css`
