@@ -73,9 +73,13 @@ jobs:
           CONTAINER_ID=$(docker create ${{ steps.ecr-pull.outputs.IMAGE }})
           docker cp $CONTAINER_ID:/app/. dist
 
-      - name: Construct EC2 artifacts
+      - name: CDK synth
         env:
           IMAGE_DIGEST: ${{ inputs.production-image-digest }}
+        working-directory: dotcom-rendering
+        run: make cdk-synth
+
+      - name: Construct EC2 artifacts
         working-directory: dotcom-rendering
         run: make riffraff-bundle
 
