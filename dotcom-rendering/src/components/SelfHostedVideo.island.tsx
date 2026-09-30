@@ -7,7 +7,7 @@ import {
 	submitClickComponentEvent,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
-import type { ArticleFormat } from '../lib/articleFormat';
+import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
@@ -1173,14 +1173,19 @@ export const SelfHostedVideo = ({
 					/>
 				</div>
 			</div>
-			{caption !== undefined && caption !== '' && format && (
-				<Caption
-					captionText={caption}
-					format={format}
-					isMainMedia={isMainMedia}
-					mediaType="SelfHostedVideo"
-				/>
-			)}
+			{caption !== undefined &&
+				caption !== '' &&
+				format &&
+				!(
+					format.display === ArticleDisplay.Immersive && isMainMedia
+				) && (
+					<Caption
+						captionText={caption}
+						format={format}
+						isMainMedia={isMainMedia}
+						mediaType="SelfHostedVideo"
+					/>
+				)}
 		</figure>
 	);
 };

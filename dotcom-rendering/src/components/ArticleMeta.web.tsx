@@ -345,6 +345,23 @@ export const ArticleMeta = ({
 			tag.id === 'tracking/commissioningdesk/filter-us',
 	);
 
+	const mediaType:
+		| 'YouTubeVideo'
+		| 'SelfHostedVideo'
+		| 'Audio'
+		| 'Gallery'
+		| undefined =
+		mainMediaElements?.[0]?._type ===
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+			? 'Gallery'
+			: mainMediaElements?.[0]?._type ===
+				  'model.dotcomrendering.pageElements.AudioBlockElement'
+				? 'Audio'
+				: mainMediaElements?.[0]?._type ===
+					  'model.dotcomrendering.pageElements.MediaAtomBlockElement'
+					? 'SelfHostedVideo'
+					: undefined;
+
 	return (
 		<div
 			className={
@@ -592,6 +609,7 @@ export const ArticleMeta = ({
 								isLeftCol={true}
 								isMainMedia={true}
 								layoutType={layoutType}
+								mediaType={mediaType}
 							/>
 						</div>
 					</Hide>

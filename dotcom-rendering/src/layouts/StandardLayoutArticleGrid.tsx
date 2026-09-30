@@ -67,9 +67,7 @@ const immersiveMediaBelowDesktop = (
 		position: relative;
 
 		> div {
-			${isMainMediaImage
-				? 'height: 100%;'
-				: 'position: absolute; inset: 0;'}
+			height: 100%;
 		}
 
 		${!isMainMediaImage && 'overflow: hidden;'}
