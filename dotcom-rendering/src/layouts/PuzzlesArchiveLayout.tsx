@@ -14,6 +14,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MorePuzzlesRows } from '../components/MorePuzzlesCard';
 import { PuzzlesArchiveCalendar } from '../components/PuzzlesArchiveCalendar.island';
+import { PuzzlesArchiveDescription } from '../components/PuzzlesArchiveDescription.island';
 import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center } from '../lib/center';
@@ -154,6 +155,7 @@ export const PuzzlesArchiveLayout = ({
 	const archive = puzzlesPage.archive;
 	if (!archive) return null;
 	const renderAds = !puzzlesPage.isAdFreeUser;
+	const archiveNav = { ...NAV, currentNavLink: archive.title };
 
 	return (
 		<>
@@ -172,7 +174,7 @@ export const PuzzlesArchiveLayout = ({
 					</Stuck>
 				)}
 				<Masthead
-					nav={NAV}
+					nav={archiveNav}
 					editionId={puzzlesPage.editionId}
 					idUrl={puzzlesPage.config.idUrl}
 					mmaUrl={puzzlesPage.config.mmaUrl}
@@ -191,7 +193,16 @@ export const PuzzlesArchiveLayout = ({
 				<div css={pageStyles}>
 					<header css={headingStyles}>
 						<h1>{archive.title}</h1>
-						<p>{archive.description}</p>
+						<p>
+							<Island priority="critical">
+								<PuzzlesArchiveDescription
+									idUrl={
+										puzzlesPage.config.idUrl ??
+										'https://profile.theguardian.com'
+									}
+								/>
+							</Island>
+						</p>
 					</header>
 					<div css={contentStyles}>
 						<div css={calendarColumnStyles}>
@@ -215,7 +226,10 @@ export const PuzzlesArchiveLayout = ({
 							<h2>
 								More from <span>Puzzles &amp; games</span>
 							</h2>
-							<MorePuzzlesRows items={archive.moreFrom} />
+							<MorePuzzlesRows
+								items={archive.moreFrom}
+								mobileScrollable={true}
+							/>
 						</section>
 					)}
 					{renderAds && (
