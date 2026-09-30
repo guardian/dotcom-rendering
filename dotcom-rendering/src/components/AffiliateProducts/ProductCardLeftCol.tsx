@@ -7,13 +7,13 @@ import {
 	textSans17,
 	textSansBold17,
 } from '@guardian/source/foundations';
-import type { ArticleFormat } from '../lib/articleFormat';
-import { palette } from '../palette';
+import type { ArticleFormat } from '../../lib/articleFormat';
+import { palette } from '../../palette';
 import type {
 	ProductCta,
 	ProductCustomAttribute,
 	ProductImage,
-} from '../types/content';
+} from '../../types/content';
 import { ProductCardButtons } from './ProductCardButtons';
 import { ProductCardImage } from './ProductCardImage';
 

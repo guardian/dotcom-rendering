@@ -166,6 +166,110 @@ describe('enhanceProductBlockElements', () => {
 		expect(enhancedElementWithNaN.lowestPrice).toEqual('£29.99');
 	});
 
+	it('uses latestPrice for lowest price', () => {
+		const productBlockWithLatestPrice: ProductBlockElement = {
+			...productBlockElement,
+			productCtas: [
+				{
+					url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
+					text: 'Buy now',
+					retailer: 'John Lewis',
+					price: '£29.99',
+					latestPrice: {
+						currencySymbol: '£',
+						price: '19.99',
+					},
+				},
+				{
+					url: 'https://www.johnlewis.com/bosch-xyz',
+					text: 'Buy now',
+					retailer: 'John Lewis',
+					price: '£26.99',
+					latestPrice: {
+						currencySymbol: '£',
+						price: '25.99',
+					},
+				},
+				...productBlockElement.productCtas,
+			],
+		};
+
+		const [enhanced] = enhanceProductElement(elementsEnhancer)([
+			productBlockWithLatestPrice,
+		]);
+
+		if (
+			enhanced?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error('Expected a ProductBlockElement');
+		}
+
+		expect(enhanced.lowestPrice).toBe('19.99');
+	});
+
+	it('uses the latestPrice for lowest price even when it is higher than the CTA price', () => {
+		const productBlockWithLatestPrice: ProductBlockElement = {
+			...productBlockElement,
+			productCtas: [
+				{
+					...productBlockElement.productCtas[0]!,
+					price: '£19.99',
+					latestPrice: {
+						currencySymbol: '£',
+						price: '25.99',
+					},
+				},
+				...productBlockElement.productCtas,
+			],
+		};
+
+		const [enhanced] = enhanceProductElement(elementsEnhancer)([
+			productBlockWithLatestPrice,
+		]);
+
+		if (
+			enhanced?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error('Expected a ProductBlockElement');
+		}
+
+		expect(enhanced.lowestPrice).toBe('25.99');
+	});
+
+	it('ignores an invalid latest price and still considers the CTA price', () => {
+		const productBlockWithInvalidLatestPrice: ProductBlockElement = {
+			...productBlockElement,
+			productCtas: [
+				{
+					url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
+					text: 'Buy now',
+					retailer: 'John Lewis',
+					price: '£29.99',
+					latestPrice: {
+						currencySymbol: '£',
+						price: 'Fifteen',
+					},
+				},
+				...productBlockElement.productCtas,
+			],
+		};
+
+		const [enhanced] = enhanceProductElement(elementsEnhancer)([
+			productBlockWithInvalidLatestPrice,
+		]);
+
+		if (
+			enhanced?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error('Expected a ProductBlockElement');
+		}
+
+		expect(enhanced.lowestPrice).toBe('£29.99');
+	});
+
 	it('extracts all html from primary heading and removes trailing `:` only', () => {
 		enhanceProductElement(elementsEnhancer)(inputElements);
 		expect(enhancedElements.primaryHeadingText).toEqual(

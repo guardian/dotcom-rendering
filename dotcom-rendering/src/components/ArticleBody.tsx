@@ -79,11 +79,19 @@ const hostedContentH2Styles = css`
 	}
 `;
 
+/**
+ * Numbered lists build their own faux h3s (see `addH3s` in
+ * enhance-numbered-lists), which predate the body copy h3 styling and must keep
+ * their own type, colour and spacing. Every property set by
+ * `subheadingLevel3Styles` is restated here so none of it leaks through.
+ */
 const globalH3Styles = (display: ArticleDisplay) => css`
 	${display === ArticleDisplay.NumberedList &&
 	`
 		h3 {
 			${headlineBold24};
+			color: ${themePalette('--textblock-text')};
+			padding: 0;
 			margin-bottom: ${remSpace[2]};
 		}
 	`}

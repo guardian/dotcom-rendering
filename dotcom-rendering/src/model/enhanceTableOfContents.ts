@@ -5,6 +5,7 @@ import type {
 	SubheadingBlockElement,
 } from '../types/content';
 import { slugify } from './enhance-H2s';
+import { isH2Subheading } from './isH2Subheading';
 
 export interface TableOfContentsItem {
 	id: string;
@@ -99,10 +100,11 @@ export const enhanceTableOfContents = (
 					});
 				}
 			} else if (
-				element._type ===
+				(element._type ===
 					'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
-				element._type ===
-					'model.dotcomrendering.pageElements.NumberedTitleBlockElement'
+					element._type ===
+						'model.dotcomrendering.pageElements.NumberedTitleBlockElement') &&
+				isH2Subheading(element.html)
 			) {
 				tocItems.push({
 					id: extractID(element),

@@ -663,7 +663,15 @@
                                 "type": "string"
                             },
                             "starRating": {
-                                "$ref": "#/definitions/StarRating"
+                                "enum": [
+                                    0,
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5
+                                ],
+                                "type": "number"
                             },
                             "shortUrlPath": {
                                 "type": "string"
@@ -717,7 +725,13 @@
                                 "type": "boolean"
                             },
                             "boostLevel": {
-                                "$ref": "#/definitions/BoostLevel"
+                                "enum": [
+                                    "boost",
+                                    "default",
+                                    "gigaboost",
+                                    "megaboost"
+                                ],
+                                "type": "string"
                             },
                             "isImmersive": {
                                 "type": "boolean"
@@ -926,6 +940,16 @@
                     },
                     "type": {
                         "type": "string"
+                    },
+                    "dataUrl": {
+                        "type": "string"
+                    },
+                    "graphicKind": {
+                        "const": "electionTracker",
+                        "type": "string"
+                    },
+                    "eventData": {
+                        "$ref": "#/definitions/{components:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}|{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};})[];}"
                     }
                 },
                 "required": [
@@ -1402,7 +1426,44 @@
             "type": "object",
             "properties": {
                 "brandingType": {
-                    "$ref": "#/definitions/BrandingType"
+                    "anyOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "paid-content"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "foundation"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "sponsored"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        }
+                    ]
                 },
                 "sponsorName": {
                     "type": "string"
@@ -1491,46 +1552,6 @@
                 "sponsorName"
             ]
         },
-        "BrandingType": {
-            "anyOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "paid-content"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "foundation"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "sponsored"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                }
-            ]
-        },
         "VariantId": {
             "enum": [
                 "A",
@@ -1556,25 +1577,580 @@
             ],
             "type": "string"
         },
-        "StarRating": {
-            "enum": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5
-            ],
-            "type": "number"
+        "{components:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}|{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};})[];}": {
+            "type": "object",
+            "properties": {
+                "components": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/{kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"onwardLink\";props:{link:string;text:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};}"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "components"
+            ]
         },
-        "BoostLevel": {
-            "enum": [
-                "boost",
-                "default",
-                "gigaboost",
-                "megaboost"
-            ],
-            "type": "string"
+        "{kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "changeBars"
+                },
+                "props": {
+                    "$ref": "#/definitions/{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];}": {
+            "type": "object",
+            "properties": {
+                "changes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{name:string;abbreviation:string;change:number;colour:{name:string;};}"
+                    }
+                }
+            },
+            "required": [
+                "changes"
+            ]
+        },
+        "{name:string;abbreviation:string;change:number;colour:{name:string;};}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "abbreviation": {
+                    "type": "string"
+                },
+                "change": {
+                    "type": "number"
+                },
+                "colour": {
+                    "$ref": "#/definitions/{name:string;}"
+                }
+            },
+            "required": [
+                "abbreviation",
+                "change",
+                "colour",
+                "name"
+            ]
+        },
+        "{name:string;}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "{kind:\"onwardLink\";props:{link:string;text:string;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "onwardLink"
+                },
+                "props": {
+                    "$ref": "#/definitions/{link:string;text:string;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{link:string;text:string;}": {
+            "type": "object",
+            "properties": {
+                "link": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "link",
+                "text"
+            ]
+        },
+        "{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "progressNumber"
+                },
+                "props": {
+                    "$ref": "#/definitions/{progress:number;total:number;copy:string;additionalCopy:string|null;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{progress:number;total:number;copy:string;additionalCopy:string|null;}": {
+            "type": "object",
+            "properties": {
+                "progress": {
+                    "type": "number"
+                },
+                "total": {
+                    "type": "number"
+                },
+                "copy": {
+                    "type": "string"
+                },
+                "additionalCopy": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "additionalCopy",
+                "copy",
+                "progress",
+                "total"
+            ]
+        },
+        "{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "stackedProgress"
+                },
+                "props": {
+                    "$ref": "#/definitions/{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;}": {
+            "type": "object",
+            "properties": {
+                "sections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}"
+                    }
+                },
+                "total": {
+                    "type": "number"
+                },
+                "label": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "calculateWinner": {
+                    "type": "boolean"
+                },
+                "excludedCopy": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "calculateWinner",
+                "excludedCopy",
+                "label",
+                "sections",
+                "total"
+            ]
+        },
+        "{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}": {
+            "type": "object",
+            "properties": {
+                "colour": {
+                    "$ref": "#/definitions/{name:string;}"
+                },
+                "value": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "align": {
+                    "enum": [
+                        "left",
+                        "right"
+                    ],
+                    "type": "string"
+                },
+                "exclude": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "align",
+                "colour",
+                "exclude",
+                "name",
+                "value"
+            ]
+        },
+        "{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "valuesWithChange"
+                },
+                "props": {
+                    "$ref": "#/definitions/{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;}": {
+            "type": "object",
+            "properties": {
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{name:string;value:number;change:number;colour:{name:string;};}"
+                    }
+                },
+                "valueDescription": {
+                    "type": "string"
+                },
+                "changeDescription": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "changeDescription",
+                "valueDescription",
+                "values"
+            ]
+        },
+        "{name:string;value:number;change:number;colour:{name:string;};}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number"
+                },
+                "change": {
+                    "type": "number"
+                },
+                "colour": {
+                    "$ref": "#/definitions/{name:string;}"
+                }
+            },
+            "required": [
+                "change",
+                "colour",
+                "name",
+                "value"
+            ]
+        },
+        "{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "versus"
+                },
+                "props": {
+                    "$ref": "#/definitions/{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;}": {
+            "type": "object",
+            "properties": {
+                "left": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
+                                },
+                                {
+                                    "$ref": "#/definitions/{change:number;}"
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
+                                },
+                                {
+                                    "$ref": "#/definitions/{description:string;}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "right": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
+                                },
+                                {
+                                    "$ref": "#/definitions/{change:number;}"
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
+                                },
+                                {
+                                    "$ref": "#/definitions/{description:string;}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "colour": {
+                    "enum": [
+                        "name",
+                        "none",
+                        "value"
+                    ],
+                    "type": "string"
+                },
+                "faded": {
+                    "type": "boolean"
+                },
+                "banner": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "banner",
+                "colour",
+                "faded",
+                "left",
+                "right"
+            ]
+        },
+        "{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "abbreviation": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number"
+                },
+                "image": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/{url:string;alt:string;}"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "colour": {
+                    "$ref": "#/definitions/{name:string;}"
+                }
+            },
+            "required": [
+                "abbreviation",
+                "colour",
+                "image",
+                "name",
+                "value"
+            ]
+        },
+        "{url:string;alt:string;}": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "alt": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "alt",
+                "url"
+            ]
+        },
+        "{change:number;}": {
+            "type": "object",
+            "properties": {
+                "change": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "change"
+            ]
+        },
+        "{description:string;}": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description"
+            ]
+        },
+        "{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "sideBySide"
+                },
+                "left": {
+                    "$ref": "#/definitions/{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}"
+                },
+                "right": {
+                    "$ref": "#/definitions/{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}_1"
+                }
+            },
+            "required": [
+                "kind",
+                "left",
+                "right"
+            ]
+        },
+        "{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}": {
+            "type": "object",
+            "properties": {
+                "heading": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/{kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"onwardLink\";props:{link:string;text:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "children",
+                "heading"
+            ]
+        },
+        "{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}_1": {
+            "type": "object",
+            "properties": {
+                "heading": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/{kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"onwardLink\";props:{link:string;text:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "children",
+                "heading"
+            ]
         },
         "FENavType": {
             "type": "object",
@@ -1601,6 +2177,7 @@
                     }
                 },
                 "currentNavLink": {
+                    "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                     "$ref": "#/definitions/FELinkType"
                 },
                 "currentNavLinkTitle": {
@@ -1613,6 +2190,7 @@
                     "type": "object",
                     "properties": {
                         "parent": {
+                            "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                             "$ref": "#/definitions/FELinkType"
                         },
                         "links": {
@@ -1664,7 +2242,15 @@
                     }
                 },
                 "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
+                    "enum": [
+                        "culture",
+                        "labs",
+                        "lifestyle",
+                        "news",
+                        "opinion",
+                        "sport"
+                    ],
+                    "type": "string"
                 },
                 "more": {
                     "type": "boolean"
@@ -1680,17 +2266,6 @@
                 "title",
                 "url"
             ]
-        },
-        "LegacyPillar": {
-            "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
-            ],
-            "type": "string"
         },
         "CustomSubnav": {
             "type": "object",

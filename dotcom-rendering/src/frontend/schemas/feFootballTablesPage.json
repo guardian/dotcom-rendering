@@ -159,6 +159,7 @@
                     }
                 },
                 "currentNavLink": {
+                    "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                     "$ref": "#/definitions/FELinkType"
                 },
                 "currentNavLinkTitle": {
@@ -171,6 +172,7 @@
                     "type": "object",
                     "properties": {
                         "parent": {
+                            "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                             "$ref": "#/definitions/FELinkType"
                         },
                         "links": {
@@ -222,7 +224,15 @@
                     }
                 },
                 "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
+                    "enum": [
+                        "culture",
+                        "labs",
+                        "lifestyle",
+                        "news",
+                        "opinion",
+                        "sport"
+                    ],
+                    "type": "string"
                 },
                 "more": {
                     "type": "boolean"
@@ -238,17 +248,6 @@
                 "title",
                 "url"
             ]
-        },
-        "LegacyPillar": {
-            "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
-            ],
-            "type": "string"
         },
         "CustomSubnav": {
             "type": "object",

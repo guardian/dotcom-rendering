@@ -9,7 +9,6 @@ import type {
 	FETeamResult,
 } from './frontend/feFootballTablesPage';
 import { error, ok, type Result } from './lib/result';
-import { cleanTeamName } from './sportDataPage';
 
 type TeamScore = {
 	name: string;
@@ -109,12 +108,12 @@ const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> => {
 		matchId: result.matchId,
 		self: {
 			id: result.self.id,
-			name: cleanTeamName(result.self.name),
+			name: result.self.name,
 			score: result.self.score,
 		},
 		foe: {
 			id: result.foe.id,
-			name: cleanTeamName(result.foe.name),
+			name: result.foe.name,
 			score: result.foe.score,
 		},
 	});
@@ -130,7 +129,7 @@ const mapBaseEntryFields = (
 	return {
 		position: team.rank,
 		team: {
-			name: cleanTeamName(team.name),
+			name: team.name,
 			id: team.id,
 			url: teamUrl,
 		},

@@ -1,11 +1,11 @@
-import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
-import { allModes } from '../../.storybook/modes';
-import preview from '../../.storybook/preview';
-import { productImage } from '../../fixtures/manual/productImage';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { getNestedArticleElement } from '../lib/renderElement';
-import { extractHeadingText } from '../model/enhanceProductElement';
-import type { ProductBlockElement } from '../types/content';
+import { centreColumnDecorator } from '../../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../../.storybook/modes';
+import preview from '../../../.storybook/preview';
+import { productImage } from '../../../fixtures/manual/productImage';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
+import { getNestedArticleElement } from '../../lib/renderElement';
+import { extractHeadingText } from '../../model/enhanceProductElement';
+import type { ProductBlockElement } from '../../types/content';
 import { ProductElement } from './ProductElement';
 
 const ArticleElementComponent = getNestedArticleElement({
@@ -268,7 +268,7 @@ const product = {
 
 const meta = preview.meta({
 	component: ProductElement,
-	title: 'Components/ProductElement',
+	title: 'Components/Affiliate Products/ProductElement',
 	parameters: {
 		chromatic: {
 			modes: {

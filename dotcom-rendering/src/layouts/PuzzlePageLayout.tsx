@@ -381,39 +381,10 @@ const relatedRailStyles = css`
 	}
 `;
 
-/**
- * From "leftCol" up, the heading sits beside the cards (see
- * `relatedRailStyles`), so it gets its own divider on its right edge to
- * separate it from them - the lateral equivalent of the vertical dividers
- * between the cards themselves (`MorePuzzlesCard.tsx`). Below "leftCol"
- * the heading stacks above the cards instead, and per explicit design
- * direction there is no horizontal divider anywhere in this rail, so no
- * divider is drawn there at all.
- *
- * `right: -10px` (half of `relatedRailStyles`'s own 20px column gap from
- * "leftCol" up) centres the line in that gap, the same distance from the
- * heading as from the first card - matching how the card-to-card dividers
- * centre themselves in their own gap (`left: calc(var(--puzzles-gap) / -2)`
- * in `MorePuzzlesCard.tsx`) rather than sitting flush against the
- * heading's own edge, which left it visibly further from the card than
- * from the heading.
- */
 const relatedRailHeading = css`
 	margin: 0;
 	${headlineBold20};
 	line-height: 1.15;
-	${from.leftCol} {
-		position: relative;
-		::after {
-			position: absolute;
-			top: 0;
-			right: -10px;
-			bottom: 0;
-			border-right: 1px solid ${sourcePalette.neutral[86]};
-			content: '';
-			pointer-events: none;
-		}
-	}
 `;
 
 /**

@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
-import type { ArticleFormat } from '../lib/articleFormat';
-import type { NestedArticleElement } from '../lib/renderElement';
-import type { ProductBlockElement } from '../types/content';
+import type { ArticleFormat } from '../../lib/articleFormat';
+import type { NestedArticleElement } from '../../lib/renderElement';
+import type { ProductBlockElement } from '../../types/content';
+import { Subheading } from '../Subheading';
 import { ProductCardInline } from './ProductCardInline';
 import { ProductCardLeftCol } from './ProductCardLeftCol';
-import { Subheading } from './Subheading';
 
 const contentContainer = css`
 	position: relative;
