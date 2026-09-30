@@ -253,6 +253,21 @@ const calendarStyles = css`
 		border: 1px solid ${palette.success[400]};
 		background: #c3f1d5;
 	}
+	.setter-name {
+		position: absolute;
+		top: 13px;
+		left: 2px;
+		right: 2px;
+		overflow: hidden;
+		font-size: 8px;
+		line-height: 10px;
+		text-align: center;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.day[data-status='completed'] .setter-name {
+		top: 19px;
+	}
 	.completed-icon {
 		position: absolute;
 		top: ${space[1]}px;
@@ -280,6 +295,14 @@ const calendarStyles = css`
 	${from.phablet} {
 		grid-template-columns: repeat(7, 60px);
 		justify-content: space-between;
+		.setter-name {
+			top: 20px;
+			font-size: 10px;
+			line-height: 12px;
+		}
+		.day[data-status='completed'] .setter-name {
+			top: 28px;
+		}
 	}
 	${from.tablet} {
 		grid-template-columns: repeat(7, 68px);
@@ -483,6 +506,16 @@ export const PuzzlesArchiveCalendar = ({
 							href={cell.item.url}
 							key={cell.date}
 						>
+							{cell.item.setterName !== undefined &&
+								cell.item.setterName !== '' && (
+									<span
+										aria-hidden="true"
+										className="setter-name"
+										title={cell.item.setterName}
+									>
+										{cell.item.setterName}
+									</span>
+								)}
 							{cell.day}
 							{status === 'completed' && (
 								<span
