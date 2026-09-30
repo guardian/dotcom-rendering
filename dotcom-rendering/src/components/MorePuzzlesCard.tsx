@@ -6,6 +6,7 @@ import {
 	palette,
 	space,
 	textSans14,
+	until,
 } from '@guardian/source/foundations';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { externalProps, getPuzzleUrl } from './PuzzleCard';
@@ -276,7 +277,11 @@ const tabletCompactGridStyles = (count: number) => {
 	`;
 };
 
-const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => {
+const rowStyles = (
+	variant: PuzzleItem['cardVariant'],
+	count: number,
+	mobileScrollable: boolean,
+) => {
 	const mobileColumns = variant === 'compact' ? Math.min(count, 2) : 1;
 	const tabletColumns =
 		variant === 'compact' ? Math.min(count, 3) : Math.min(count, 2);
@@ -311,12 +316,39 @@ const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => {
 			${cardGridStyles(desktopColumns)};
 			max-width: 940px;
 		}
+		${mobileScrollable &&
+		css`
+			${until.phablet} {
+				display: flex;
+				overflow-x: auto;
+				scrollbar-width: none;
+				::-webkit-scrollbar {
+					display: none;
+				}
+				> li {
+					flex: 0 0 calc((100% - 16px) / 2);
+					grid-column: auto;
+				}
+			}
+		`}
 	`;
 };
 
-export const MorePuzzlesRows = ({ items }: { items: PuzzleItem[] }) => (
+export const MorePuzzlesRows = ({
+	items,
+	mobileScrollable = false,
+}: {
+	items: PuzzleItem[];
+	mobileScrollable?: boolean;
+}) => (
 	<div css={rowsStyles}>
-		<ul css={rowStyles(items[0]?.cardVariant ?? 'primary', items.length)}>
+		<ul
+			css={rowStyles(
+				items[0]?.cardVariant ?? 'primary',
+				items.length,
+				mobileScrollable,
+			)}
+		>
 			{items.map((item) => (
 				<li key={item.id}>
 					<MorePuzzlesCard item={item} />

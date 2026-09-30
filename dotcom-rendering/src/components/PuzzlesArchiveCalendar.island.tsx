@@ -131,21 +131,31 @@ const titleStyles = css`
 `;
 
 const recentStyles = css`
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+	display: flex;
 	gap: 1px;
 	margin: 0 0 ${space[6]}px;
 	background: ${palette.neutral[86]};
+	overflow-x: auto;
+	scrollbar-width: none;
+	::-webkit-scrollbar {
+		display: none;
+	}
 	${from.phablet} {
+		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
+		overflow: visible;
 	}
 	a {
 		box-sizing: border-box;
+		flex: 0 0 calc((100% - 1px) / 2);
 		min-height: 104px;
 		padding: ${space[2]}px;
 		background: ${palette.news[800]};
 		color: ${palette.neutral[7]};
 		text-decoration: none;
+		${from.phablet} {
+			min-width: 0;
+		}
 	}
 	strong {
 		display: block;
@@ -273,16 +283,20 @@ const legendStyles = css`
 	gap: ${space[4]}px;
 	margin-top: ${space[8]}px;
 	${textSans14};
+	span {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+	}
 	span::before {
 		display: inline-flex;
+		flex: 0 0 auto;
 		width: 16px;
 		height: 16px;
 		align-items: center;
 		justify-content: center;
-		margin-right: 5px;
 		border-radius: 50%;
 		content: '';
-		vertical-align: -3px;
 	}
 	.available::before {
 		background: ${palette.brand[500]};
