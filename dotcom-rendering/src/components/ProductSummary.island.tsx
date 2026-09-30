@@ -3,8 +3,8 @@ import type {
 	ProductSummaryDisplayType,
 	SummaryProduct,
 } from '../types/content';
+import { ProductCtaList } from './AffiliateProducts/ProductCtaList';
 import { Island } from './Island';
-import { ProductCtaList } from './ProductCtaList';
 import { ScrollableProduct } from './ScrollableProduct.island';
 import { StackedProducts } from './StackedProducts.island';
 

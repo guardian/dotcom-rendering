@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import type { AffiliateProductPrice, ProductCta } from '../../types/content';
 
@@ -7,6 +8,10 @@ type ParsedProductLabel = {
 	struckThrough: string;
 	restOfLabel: string;
 };
+
+const strikeThroughStyle = css`
+	font-weight: normal;
+`;
 
 const parseProductLabel = (label: string): ParsedProductLabel | undefined => {
 	const match = label.match(strikeThroughRegex);
@@ -34,7 +39,7 @@ export const createStrikeThroughProductLabel = (label: string) => {
 	} else {
 		return (
 			<>
-				<s>{parsedLabel.struckThrough}</s>
+				<s css={strikeThroughStyle}>{parsedLabel.struckThrough}</s>
 				{parsedLabel.restOfLabel}
 			</>
 		);
@@ -80,6 +85,20 @@ const priceFormatter = new Intl.NumberFormat('en-GB', {
 	maximumFractionDigits: 2,
 });
 
+const getFormattedLatestPrice = (
+	latestPrice: AffiliateProductPrice,
+): { numericPrice: number; formattedPrice: string } | undefined => {
+	const numericPrice = Number.parseFloat(latestPrice.price);
+	if (Number.isNaN(numericPrice)) {
+		return undefined;
+	}
+
+	return {
+		numericPrice,
+		formattedPrice: `${latestPrice.currencySymbol}${formatPrice(numericPrice)}`,
+	};
+};
+
 export const formatPrice = (price: number): string =>
 	priceFormatter.format(price).replace(/\.00$/, '');
 
@@ -123,31 +142,64 @@ export const rewriteLabelWithLatestPrice = (
 		return label;
 	}
 
-	const numericLatestPrice = Number.parseFloat(latestPrice.price);
+	const formattedLatestPrice = getFormattedLatestPrice(latestPrice);
 	const extractedPrice = extractPriceFromLabel(label);
 
 	if (
 		isUndefined(extractedPrice) ||
-		Number.isNaN(numericLatestPrice) ||
+		isUndefined(formattedLatestPrice) ||
 		Number.isNaN(extractedPrice.numericPrice) ||
 		extractedPrice.currencySymbol !== latestPrice.currencySymbol
 	) {
 		return label;
 	}
 
-	const formattedLatestPrice = `${latestPrice.currencySymbol}${formatPrice(numericLatestPrice)}`;
-
 	if (
 		shouldPutOldPriceInStrikethrough(
-			numericLatestPrice,
+			formattedLatestPrice.numericPrice,
 			extractedPrice.numericPrice,
 		)
 	) {
 		return label.replace(
 			extractedPrice.entireMatch,
-			`~${extractedPrice.entireMatch}~ ${formattedLatestPrice}`,
+			`~${extractedPrice.entireMatch}~ ${formattedLatestPrice.formattedPrice}`,
 		);
 	} else {
-		return label.replace(extractedPrice.entireMatch, formattedLatestPrice);
+		return label.replace(
+			extractedPrice.entireMatch,
+			formattedLatestPrice.formattedPrice,
+		);
 	}
+};
+
+export const getProductCtaLivePrice = ({ price, latestPrice }: ProductCta) => {
+	if (isUndefined(latestPrice)) {
+		return price;
+	}
+
+	const formattedLatestPrice = getFormattedLatestPrice(latestPrice);
+	const numericArticlePrice = Number.parseFloat(price.replace(/£|$/, ''));
+
+	if (
+		Number.isNaN(numericArticlePrice) ||
+		isUndefined(formattedLatestPrice)
+	) {
+		return price;
+	}
+
+	if (
+		shouldPutOldPriceInStrikethrough(
+			formattedLatestPrice.numericPrice,
+			numericArticlePrice,
+		)
+	) {
+		return (
+			<>
+				<s css={strikeThroughStyle}>{price}</s>{' '}
+				{formattedLatestPrice.formattedPrice}
+			</>
+		);
+	}
+
+	return formattedLatestPrice.formattedPrice;
 };

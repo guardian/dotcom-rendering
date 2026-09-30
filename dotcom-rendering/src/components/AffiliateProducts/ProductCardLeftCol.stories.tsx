@@ -1,8 +1,8 @@
-import { allModes } from '../../.storybook/modes';
-import preview from '../../.storybook/preview';
-import { productImage } from '../../fixtures/manual/productImage';
-import type { ArticleFormat } from '../lib/articleFormat';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { allModes } from '../../../.storybook/modes';
+import preview from '../../../.storybook/preview';
+import { productImage } from '../../../fixtures/manual/productImage';
+import type { ArticleFormat } from '../../lib/articleFormat';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import { ProductCardLeftCol } from './ProductCardLeftCol';
 
 const format: ArticleFormat = {
@@ -13,7 +13,7 @@ const format: ArticleFormat = {
 
 const meta = preview.meta({
 	component: ProductCardLeftCol,
-	title: 'Components/ProductCardLeftCol',
+	title: 'Components/Affiliate Products/ProductCardLeftCol',
 	parameters: {
 		layout: 'padded',
 		chromatic: {

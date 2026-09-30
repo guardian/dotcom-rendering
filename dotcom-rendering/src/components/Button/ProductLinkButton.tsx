@@ -12,7 +12,7 @@ import {
 	createAccessibleProductLabel,
 	createStrikeThroughProductLabel,
 	rewriteLabelWithLatestPrice,
-} from './productUtils';
+} from '../AffiliateProducts/livePriceUtils';
 import { heightAutoStyle, wrapButtonTextStyle } from './styles';
 import { getPropsForLinkUrl } from './utils';
 
@@ -41,12 +41,6 @@ const minimisePaddingStyle = css`
 	}
 	> svg {
 		margin-left: -2px;
-	}
-`;
-
-const strikeThroughStyle = css`
-	s {
-		font-weight: normal;
 	}
 `;
 
@@ -103,7 +97,7 @@ export const ProductLinkButton = ({
 		>
 			<span
 				style={fullWidthText ? { width: '100%' } : {}}
-				css={[wrapButtonTextStyle, strikeThroughStyle]}
+				css={[wrapButtonTextStyle]}
 			>
 				{createStrikeThroughProductLabel(labelWithLatestPrice)}
 			</span>
