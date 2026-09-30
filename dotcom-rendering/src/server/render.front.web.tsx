@@ -13,7 +13,7 @@ import { renderToStringWithEmotion } from '../lib/emotion';
 import { polyfillIO } from '../lib/polyfill.io';
 import { themeToPillar } from '../lib/themeToPillar';
 import type { NavType } from '../model/extract-nav';
-import { extractNAV } from '../model/extract-nav';
+import { applyCustomSubnavTest, extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import type { Front } from '../types/front';
@@ -80,7 +80,10 @@ export const renderFront = ({
 	const title = front.isNetworkFront
 		? 'Latest news, sport and opinion from the Guardian'
 		: front.webTitle;
-	const NAV = extractNAV(front.nav);
+	const NAV = applyCustomSubnavTest(
+		extractNAV(front.nav),
+		front.config.serverSideABTests,
+	);
 	const enhancedNAV = enhanceNav(NAV);
 
 	const darkModeAvailable =

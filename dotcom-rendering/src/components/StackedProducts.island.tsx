@@ -8,7 +8,7 @@ import { useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { SummaryProduct } from '../types/content';
-import { HorizontalSummaryProductCard } from './HorizontalSummaryProductCard';
+import { HorizontalSummaryProductCard } from './AffiliateProducts/HorizontalSummaryProductCard';
 import { Subheading } from './Subheading';
 
 const cardsShownByDefault = 4;

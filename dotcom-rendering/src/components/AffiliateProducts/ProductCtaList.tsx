@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { article17, palette, remSpace } from '@guardian/source/foundations';
-import type { ArticleFormat } from '../lib/articleFormat';
-import type { SummaryProduct } from '../types/content';
-import { ProductLinkButton } from './Button/ProductLinkButton';
-import { getProductLinkLabelWithPrice } from './Button/productUtils';
-import { Subheading } from './Subheading';
+import type { ArticleFormat } from '../../lib/articleFormat';
+import type { SummaryProduct } from '../../types/content';
+import { ProductLinkButton } from '../Button/ProductLinkButton';
+import { Subheading } from '../Subheading';
+import { getProductLinkLabelWithPrice } from './livePriceUtils';
 
 const listStyles = css`
 	li {
@@ -59,6 +59,7 @@ const ListItem = ({ product }: { product: SummaryProduct }) => {
 					label={getProductLinkLabelWithPrice(cta)}
 					url={cta.url}
 					minimisePadding={true}
+					latestPrice={cta.latestPrice}
 				/>
 			)}
 		</li>
