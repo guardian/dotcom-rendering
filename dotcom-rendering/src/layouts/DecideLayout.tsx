@@ -43,12 +43,20 @@ export type Props = WebProps | AppProps;
 export const REVAMPED_IMMERSIVE_LAYOUT_AB_TEST =
 	'articles-and-publishing-revamped-immersive-layout';
 
+export const ARTICLES_AB_TEST = 'fronts-and-curation-editorial-test';
+
 const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
 	article.frontendData.config.serverSideABTests[
 		REVAMPED_IMMERSIVE_LAYOUT_AB_TEST
 	] === 'enable';
 
+const isInArticleAbTest = (article: Article): boolean =>
+	article.frontendData.config.serverSideABTests[
+		REVAMPED_IMMERSIVE_LAYOUT_AB_TEST
+	] === 'enable';
+
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
+	console.log(isInArticleAbTest);
 	const format = {
 		design: article.design,
 		display: article.display,
