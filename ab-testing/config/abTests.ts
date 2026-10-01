@@ -237,19 +237,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "identity-and-trust-consent-rr-banner-us",
-		description:
-			"Test to measure the impact of not showing the consent RR and banner for US users",
-		owners: ["identitydev@theguardian.com", "martech.dev@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2026-12-01",
-		type: "client",
-		audienceSize: 100 / 100,
-		audienceSpace: "D",
-		groups: ["control", "variant-1", "variant-2"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "fronts-and-curation-editorial-test",
 		description: "Allow editorial A/B tests to run on web",
 		owners: [
