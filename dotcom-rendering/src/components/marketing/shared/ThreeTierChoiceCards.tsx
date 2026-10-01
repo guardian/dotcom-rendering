@@ -185,7 +185,6 @@ export const ThreeTierChoiceCards = ({
 
 	const labelOverrideStyles = (isSelected: boolean) => css`
 		+ label div {
-			${isSelected ? 'font-weight: bold;' : ''}
 			color: ${isSelected
 				? (choiceCardDesignSettings?.buttonSelectTextColour ??
 					'inherit')
@@ -355,10 +354,44 @@ export const ThreeTierChoiceCards = ({
 										<Radio
 											label={
 												<span
-													dangerouslySetInnerHTML={{
-														__html: sanitise(label),
-													}}
-												/>
+													css={css`
+														display: grid;
+														/* Stack children in the same grid cell */
+														& > span {
+															grid-area: 1 / 1;
+															transition: opacity
+																${choiceCardTransition};
+														}
+													`}
+												>
+													{/* Regular weight (fades out when selected) */}
+													<span
+														css={css`
+															opacity: ${selected
+																? 0
+																: 1};
+														`}
+														dangerouslySetInnerHTML={{
+															__html: sanitise(
+																label,
+															),
+														}}
+													/>
+													{/* Bold weight (fades in when selected) */}
+													<span
+														css={css`
+															font-weight: bold;
+															opacity: ${selected
+																? 1
+																: 0};
+														`}
+														dangerouslySetInnerHTML={{
+															__html: sanitise(
+																label,
+															),
+														}}
+													/>
+												</span>
 											}
 											id={radioId}
 											value={radioId}
