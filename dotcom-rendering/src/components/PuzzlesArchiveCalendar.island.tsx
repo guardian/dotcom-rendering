@@ -7,8 +7,10 @@ import {
 	space,
 	textSans14,
 	textSans17,
+	visuallyHidden,
 } from '@guardian/source/foundations';
 import {
+	Spinner,
 	SvgArrowLeftStraight,
 	SvgArrowRightStraight,
 	SvgCheckmark,
@@ -331,6 +333,32 @@ const calendarStyles = css`
 	}
 `;
 
+const monthLabelStyles = css`
+	position: relative;
+	justify-self: center;
+	padding: 0 28px;
+	text-align: center;
+`;
+
+const loadingIndicatorStyles = css`
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	width: 20px;
+	height: 20px;
+`;
+
+const emptyMonthStyles = css`
+	${textSans14};
+	margin-top: ${space[4]}px;
+	a {
+		color: ${palette.news[400]};
+		text-decoration: underline;
+	}
+`;
+
 const legendStyles = css`
 	display: flex;
 	gap: ${space[4]}px;
@@ -435,6 +463,11 @@ export const PuzzlesArchiveCalendar = ({
 		archive.month,
 		archive.items,
 	);
+	const hasItemsInMonth = cells.some((cell) => cell?.item !== undefined);
+	const puzzleLabel =
+		archive.category === 'crosswords'
+			? `${archive.selectedPuzzle.title.replace(/ crosswords?$/i, '')} crosswords`
+			: `${archive.selectedPuzzle.title} puzzles`;
 	const recent = [...archive.items]
 		.sort((left, right) => right.date.localeCompare(left.date))
 		.slice(0, 3);
@@ -631,10 +664,11 @@ export const PuzzlesArchiveCalendar = ({
 								: archive.selectedPuzzle.title}
 						</strong>
 						<span>
-							{item.setterName
-								? `By: ${item.setterName}`
-								: item.date}
+							<time dateTime={item.date}>{item.date}</time>
 						</span>
+						{item.setterName && (
+							<span> · By: {item.setterName}</span>
+						)}
 					</a>
 				))}
 			</div>
@@ -663,9 +697,25 @@ export const PuzzlesArchiveCalendar = ({
 				>
 					<SvgArrowLeftStraight />
 				</a>
-				<strong aria-live="polite">
-					{monthName(archive.year, archive.month)}
-				</strong>
+				<div css={monthLabelStyles}>
+					<strong aria-live="polite">
+						{monthName(archive.year, archive.month)}
+					</strong>
+					<span css={loadingIndicatorStyles} role="status">
+						<span
+							css={css`
+								${visuallyHidden}
+							`}
+						>
+							{loading ? 'Loading archive…' : ''}
+						</span>
+						{loading && (
+							<span aria-hidden="true">
+								<Spinner size="small" />
+							</span>
+						)}
+					</span>
+				</div>
 				{canSelectNextMonth ? (
 					<a
 						aria-label="Next month"
@@ -701,13 +751,11 @@ export const PuzzlesArchiveCalendar = ({
 					</button>
 				)}
 			</div>
-			{loading && <p role="status">Loading archive…</p>}
-			{error && (
-				<p role="alert">
-					The archive could not be loaded. Please try another month.
-				</p>
-			)}
-			<div css={calendarStyles} data-testid="archive-calendar">
+			<div
+				css={calendarStyles}
+				data-testid="archive-calendar"
+				aria-busy={loading}
+			>
 				{['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => (
 					<div className="weekday" key={day}>
 						{day}
@@ -762,6 +810,41 @@ export const PuzzlesArchiveCalendar = ({
 					);
 				})}
 			</div>
+			{error && (
+				<p role="alert">
+					The archive could not be loaded. Please try another month.
+				</p>
+			)}
+			{!hasItemsInMonth && !archive.hasError && (
+				<div
+					css={emptyMonthStyles}
+					hidden={error}
+					style={{ visibility: loading ? 'hidden' : 'visible' }}
+				>
+					<p>
+						No {puzzleLabel} are available for{' '}
+						{monthName(archive.year, archive.month)}.
+					</p>
+					<a
+						href={previousMonthUrl}
+						onClick={(event) => {
+							if (
+								event.button !== 0 ||
+								event.metaKey ||
+								event.ctrlKey ||
+								event.shiftKey ||
+								event.altKey
+							) {
+								return;
+							}
+							event.preventDefault();
+							void selectMonth(-1, previousMonthUrl);
+						}}
+					>
+						View previous month
+					</a>
+				</div>
+			)}
 			<div css={legendStyles}>
 				<span className="available">Available</span>
 				<span className="completed">Played</span>

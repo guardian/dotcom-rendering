@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import {
+	act,
+	fireEvent,
+	render,
+	screen,
+	waitFor,
+} from '@testing-library/react';
 import type { PuzzlesArchive } from '../types/puzzlesPage';
 import {
 	archivePageUrl,
@@ -33,8 +39,6 @@ const archive: PuzzlesArchive = {
 			url: '/puzzles-and-games/logic-puzzles/sudoku-easy/2026-09-02',
 		},
 	],
-	dataUrl:
-		'/puzzles-and-games/archive-data?category=logic-puzzles&puzzle=sudoku-easy',
 	hasError: false,
 	moreFrom: [],
 };
@@ -115,6 +119,113 @@ describe('PuzzlesArchiveCalendar', () => {
 		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
 
 		expect(screen.getByTitle('Philistine')).toBeInTheDocument();
+	});
+
+	it('keeps the calendar mounted and announces loading in the month controls', async () => {
+		let resolveResponse!: (value: unknown) => void;
+		const fetchMock = jest.fn().mockReturnValue(
+			new Promise((resolve) => {
+				resolveResponse = resolve;
+			}),
+		);
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+		const calendar = screen.getByTestId('archive-calendar');
+		const previous = screen.getByRole('link', { name: 'Previous month' });
+		const status = screen.getByRole('status');
+		expect(status).not.toHaveTextContent('Loading archive…');
+		fireEvent.click(previous);
+		expect(calendar).toHaveAttribute('aria-busy', 'true');
+		expect(
+			screen.getByLabelText('2026-09-02, available'),
+		).toBeInTheDocument();
+		expect(status).toHaveTextContent('Loading archive…');
+		expect(previous.parentElement).toContainElement(status);
+		await act(async () =>
+			resolveResponse({
+				ok: true,
+				json: async () => ({ ...archive, month: 8, items: [] }),
+			}),
+		);
+		await screen.findByText('August 2026');
+		expect(screen.getByTestId('archive-calendar')).toBe(calendar);
+		expect(calendar).toHaveAttribute('aria-busy', 'false');
+		expect(status).not.toHaveTextContent('Loading archive…');
+	});
+
+	it('keeps the selected month and shows recent cards when only earlier publications exist', async () => {
+		const weekend: PuzzlesArchive = {
+			...archive,
+			category: 'crosswords',
+			month: 10,
+			selectedPuzzle: {
+				id: 'archive-weekend',
+				title: 'Weekend',
+				set: 'weekend',
+				puzzleType: 'CROSSWORD_WEEKEND',
+			},
+			items: [
+				{
+					...archive.items[0]!,
+					date: '2026-09-26',
+					url: '/crosswords/weekend/820',
+				},
+			],
+		};
+		const fetchMock = jest.fn().mockResolvedValue({
+			ok: true,
+			json: async () => ({ ...weekend, month: 9 }),
+		});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={weekend} />);
+		expect(screen.getByText('October 2026')).toBeInTheDocument();
+		expect(
+			screen.getByText(
+				'No Weekend crosswords are available for October 2026.',
+			),
+		).toBeInTheDocument();
+		expect(
+			screen.getByRole('link', { name: /Latest Weekend/ }),
+		).toHaveTextContent('2026-09-26');
+		expect(
+			screen.getByRole('link', { name: /Latest Weekend/ }),
+		).toHaveTextContent('By: Philistine');
+		expect(fetchMock).not.toHaveBeenCalled();
+		fireEvent.click(
+			screen.getByRole('link', { name: 'View previous month' }),
+		);
+		await screen.findByText('September 2026');
+		expect(
+			screen.getByLabelText('2026-09-26, available'),
+		).toBeInTheDocument();
+		expect(
+			screen.queryByText(/No Weekend crosswords/),
+		).not.toBeInTheDocument();
+	});
+
+	it('does not describe an API failure as an empty month', async () => {
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: jest.fn().mockRejectedValue(new Error('Unavailable')),
+		});
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{ ...archive, items: [], hasError: true }}
+			/>,
+		);
+		await screen.findByRole('alert');
+		expect(
+			screen.queryByRole('link', { name: 'View previous month' }),
+		).not.toBeInTheDocument();
+		expect(
+			screen.queryByText(/No .* are available for/),
+		).not.toBeInTheDocument();
 	});
 
 	it('loads the previous month without navigating or reloading', async () => {
