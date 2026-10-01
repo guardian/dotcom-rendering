@@ -134,7 +134,6 @@ export const PuzzlesArchiveMenu = ({
 			if (details?.open !== true) {
 				return;
 			}
-
 			if (event instanceof KeyboardEvent) {
 				if (event.key !== 'Escape') return;
 			} else if (event.composedPath().includes(details)) {
