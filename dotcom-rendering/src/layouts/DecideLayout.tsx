@@ -40,12 +40,20 @@ export type Props = WebProps | AppProps;
  */
 export const REVAMPED_IMMERSIVE_LAYOUT_AB_TEST =
 	'articles-and-publishing-revamped-immersive-layout';
-
 const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
 	article.frontendData.config.serverSideABTests[
 		REVAMPED_IMMERSIVE_LAYOUT_AB_TEST
 	] === 'enable';
-export const interactiveLayoutSwitchoverDate = new Date('2024-06-01T00:00:00Z');
+
+/**
+ * Guards grid-based interactive layout behind a 0% a/b test
+ */
+export const INTERACTIVE_LAYOUT_AB_TEST =
+	'articles-and-publishing-migrate-interactive-layout';
+const isInInteractiveLayoutTest = (article: Article): boolean =>
+	article.frontendData.config.serverSideABTests[
+		INTERACTIVE_LAYOUT_AB_TEST
+	] === 'enable';
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	const format = {
@@ -133,6 +141,9 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
+							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
+								article,
+							)}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
@@ -313,6 +324,9 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
+							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
+								article,
+							)}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
