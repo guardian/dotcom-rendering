@@ -46,7 +46,7 @@ export const REVAMPED_IMMERSIVE_LAYOUT_AB_TEST =
 const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
 	article.frontendData.config.serverSideABTests[
 		REVAMPED_IMMERSIVE_LAYOUT_AB_TEST
-	] === 'enable';
+	] === 'disabled';
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	const format = {
