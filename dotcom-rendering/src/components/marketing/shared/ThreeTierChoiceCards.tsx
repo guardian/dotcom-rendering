@@ -6,6 +6,7 @@ import {
 	textSans15,
 	textSansBold14,
 	textSansBold15,
+	transitions,
 	until,
 } from '@guardian/source/foundations';
 import {
@@ -27,7 +28,7 @@ import type { ChoiceCardDesignSettings } from '../banners/designableBanner/setti
 
 export type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
 
-const choiceCardTransition = '0.2s cubic-bezier(0.64, 0.57, 0.67, 1.53)';
+const choiceCardTransition = transitions.short;
 
 const benefitsStyles = css`
 	${textSans15};
@@ -379,6 +380,9 @@ export const ThreeTierChoiceCards = ({
 													<div
 														css={css`
 															overflow: hidden;
+															/* Widen the hidden bounding box to prevent clipping negative margins */
+															padding: 0 8px;
+															margin: 0 -8px;
 														`}
 													>
 														<SupportingBenefits
