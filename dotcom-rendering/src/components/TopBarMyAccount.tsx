@@ -155,6 +155,7 @@ const SignIn = ({
 	<a
 		css={[
 			myAccountLinkStyles,
+			desktopAccountLabelStyles,
 			!showSignInTextOnMobile && iconInAccountStyles,
 		]}
 		aria-label={!showSignInTextOnMobile ? 'Sign in' : undefined}
@@ -249,6 +250,14 @@ const iconInAccountStyles = css`
 	}
 `;
 
+const desktopAccountLabelStyles = css`
+	${from.tablet} {
+		> span:first-child {
+			display: contents;
+		}
+	}
+`;
+
 const dropdownLinkStyles = (showSignInTextOnMobile: boolean) => css`
 	${!showSignInTextOnMobile &&
 	css`
@@ -299,6 +308,7 @@ const SignedInWithNotifications = ({
 		<div
 			css={[
 				myAccountLinkStyles,
+				desktopAccountLabelStyles,
 				!showSignInTextOnMobile && iconInAccountStyles,
 			]}
 		>

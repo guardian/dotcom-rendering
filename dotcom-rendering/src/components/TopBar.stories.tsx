@@ -1,4 +1,5 @@
 import type { AccessToken, IDToken } from '@guardian/identity-auth';
+import { breakpoints } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react-webpack5';
 import {
 	contributionsHeaderResponse,
@@ -173,6 +174,11 @@ export const SignedInNoText = () => {
 		</div>
 	);
 };
+SignedInNoText.parameters = {
+	chromatic: {
+		viewports: [breakpoints.mobile][breakpoints.desktop],
+	},
+};
 
 export const SignedOutText = () => {
 	return (
@@ -214,4 +220,9 @@ export const SignedOutNoText = () => {
 			/>
 		</div>
 	);
+};
+SignedOutNoText.parameters = {
+	chromatic: {
+		viewports: [breakpoints.mobile][breakpoints.desktop],
+	},
 };
