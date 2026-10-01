@@ -798,6 +798,14 @@ export const StandardLayoutArticleGrid = ({
 							/>
 						</Island>
 					)}
+					<StraightLines
+						data-print-layout="hide"
+						count={4}
+						cssOverrides={css`
+							display: block;
+						`}
+						color={themePalette('--straight-lines')}
+					/>
 					<SubMeta
 						format={format}
 						subMetaKeywordLinks={article.subMetaKeywordLinks}
