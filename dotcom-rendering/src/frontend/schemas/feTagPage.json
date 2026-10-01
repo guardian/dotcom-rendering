@@ -663,7 +663,15 @@
                                 "type": "string"
                             },
                             "starRating": {
-                                "$ref": "#/definitions/StarRating"
+                                "enum": [
+                                    0,
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5
+                                ],
+                                "type": "number"
                             },
                             "shortUrlPath": {
                                 "type": "string"
@@ -717,7 +725,13 @@
                                 "type": "boolean"
                             },
                             "boostLevel": {
-                                "$ref": "#/definitions/BoostLevel"
+                                "enum": [
+                                    "boost",
+                                    "default",
+                                    "gigaboost",
+                                    "megaboost"
+                                ],
+                                "type": "string"
                             },
                             "isImmersive": {
                                 "type": "boolean"
@@ -931,11 +945,11 @@
                         "type": "string"
                     },
                     "graphicKind": {
-                        "type": "string",
-                        "const": "electionTracker"
+                        "const": "electionTracker",
+                        "type": "string"
                     },
                     "eventData": {
-                        "$ref": "#/definitions/{components:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};}|{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};})[];};})[];}"
+                        "$ref": "#/definitions/{components:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}|{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};})[];}"
                     }
                 },
                 "required": [
@@ -1412,7 +1426,44 @@
             "type": "object",
             "properties": {
                 "brandingType": {
-                    "$ref": "#/definitions/BrandingType"
+                    "anyOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "paid-content"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "foundation"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "sponsored"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        }
+                    ]
                 },
                 "sponsorName": {
                     "type": "string"
@@ -1501,46 +1552,6 @@
                 "sponsorName"
             ]
         },
-        "BrandingType": {
-            "anyOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "paid-content"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "foundation"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "sponsored"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                }
-            ]
-        },
         "VariantId": {
             "enum": [
                 "A",
@@ -1566,27 +1577,7 @@
             ],
             "type": "string"
         },
-        "StarRating": {
-            "enum": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5
-            ],
-            "type": "number"
-        },
-        "BoostLevel": {
-            "enum": [
-                "boost",
-                "default",
-                "gigaboost",
-                "megaboost"
-            ],
-            "type": "string"
-        },
-        "{components:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};}|{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};})[];};})[];}": {
+        "{components:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}|{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};})[];}": {
             "type": "object",
             "properties": {
                 "components": {
@@ -1600,19 +1591,19 @@
                                 "$ref": "#/definitions/{kind:\"onwardLink\";props:{link:string;text:string;};}"
                             },
                             {
-                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}"
+                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}"
                             },
                             {
-                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}"
+                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}"
                             },
                             {
                                 "$ref": "#/definitions/{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}"
                             },
                             {
-                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};}"
+                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}"
                             },
                             {
-                                "$ref": "#/definitions/{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};})[];};}"
+                                "$ref": "#/definitions/{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};}"
                             }
                         ]
                     }
@@ -1717,7 +1708,7 @@
                 "text"
             ]
         },
-        "{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}": {
+        "{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}": {
             "type": "object",
             "properties": {
                 "kind": {
@@ -1725,7 +1716,7 @@
                     "const": "progressNumber"
                 },
                 "props": {
-                    "$ref": "#/definitions/{progress:number;total:number;copy:string;additionalCopy:string;}"
+                    "$ref": "#/definitions/{progress:number;total:number;copy:string;additionalCopy:string|null;}"
                 }
             },
             "required": [
@@ -1733,7 +1724,7 @@
                 "props"
             ]
         },
-        "{progress:number;total:number;copy:string;additionalCopy:string;}": {
+        "{progress:number;total:number;copy:string;additionalCopy:string|null;}": {
             "type": "object",
             "properties": {
                 "progress": {
@@ -1746,7 +1737,10 @@
                     "type": "string"
                 },
                 "additionalCopy": {
-                    "type": "string"
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 }
             },
             "required": [
@@ -1756,7 +1750,7 @@
                 "total"
             ]
         },
-        "{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}": {
+        "{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}": {
             "type": "object",
             "properties": {
                 "kind": {
@@ -1764,7 +1758,7 @@
                     "const": "stackedProgress"
                 },
                 "props": {
-                    "$ref": "#/definitions/{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;}"
+                    "$ref": "#/definitions/{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;}"
                 }
             },
             "required": [
@@ -1772,7 +1766,7 @@
                 "props"
             ]
         },
-        "{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;}": {
+        "{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;}": {
             "type": "object",
             "properties": {
                 "sections": {
@@ -1785,13 +1779,19 @@
                     "type": "number"
                 },
                 "label": {
-                    "type": "string"
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 },
                 "calculateWinner": {
                     "type": "boolean"
                 },
                 "excludedCopy": {
-                    "type": "string"
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 }
             },
             "required": [
@@ -1894,7 +1894,7 @@
                 "value"
             ]
         },
-        "{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};}": {
+        "{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}": {
             "type": "object",
             "properties": {
                 "kind": {
@@ -1902,7 +1902,7 @@
                     "const": "versus"
                 },
                 "props": {
-                    "$ref": "#/definitions/{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;}"
+                    "$ref": "#/definitions/{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;}"
                 }
             },
             "required": [
@@ -1910,7 +1910,7 @@
                 "props"
             ]
         },
-        "{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;}": {
+        "{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;}": {
             "type": "object",
             "properties": {
                 "left": {
@@ -1918,7 +1918,7 @@
                         {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}"
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
                                 },
                                 {
                                     "$ref": "#/definitions/{change:number;}"
@@ -1928,7 +1928,7 @@
                         {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}"
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
                                 },
                                 {
                                     "$ref": "#/definitions/{description:string;}"
@@ -1942,7 +1942,7 @@
                         {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}"
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
                                 },
                                 {
                                     "$ref": "#/definitions/{change:number;}"
@@ -1952,7 +1952,7 @@
                         {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}"
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
                                 },
                                 {
                                     "$ref": "#/definitions/{description:string;}"
@@ -1973,7 +1973,10 @@
                     "type": "boolean"
                 },
                 "banner": {
-                    "type": "string"
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 }
             },
             "required": [
@@ -1984,7 +1987,7 @@
                 "right"
             ]
         },
-        "{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}": {
+        "{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}": {
             "type": "object",
             "properties": {
                 "name": {
@@ -1997,7 +2000,14 @@
                     "type": "number"
                 },
                 "image": {
-                    "$ref": "#/definitions/{url:string;alt:string;}"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/{url:string;alt:string;}"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
                 },
                 "colour": {
                     "$ref": "#/definitions/{name:string;}"
@@ -2048,7 +2058,7 @@
                 "description"
             ]
         },
-        "{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};})[];};}": {
+        "{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};}": {
             "type": "object",
             "properties": {
                 "kind": {
@@ -2056,10 +2066,10 @@
                     "const": "sideBySide"
                 },
                 "left": {
-                    "$ref": "#/definitions/{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};})[];}"
+                    "$ref": "#/definitions/{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}"
                 },
                 "right": {
-                    "$ref": "#/definitions/{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};})[];}_1"
+                    "$ref": "#/definitions/{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}_1"
                 }
             },
             "required": [
@@ -2068,7 +2078,7 @@
                 "right"
             ]
         },
-        "{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};})[];}": {
+        "{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}": {
             "type": "object",
             "properties": {
                 "heading": {
@@ -2085,16 +2095,16 @@
                                 "$ref": "#/definitions/{kind:\"onwardLink\";props:{link:string;text:string;};}"
                             },
                             {
-                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}"
+                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}"
                             },
                             {
-                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}"
+                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}"
                             },
                             {
                                 "$ref": "#/definitions/{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}"
                             },
                             {
-                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};}"
+                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}"
                             }
                         ]
                     }
@@ -2105,7 +2115,7 @@
                 "heading"
             ]
         },
-        "{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};})[];}_1": {
+        "{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}_1": {
             "type": "object",
             "properties": {
                 "heading": {
@@ -2122,16 +2132,16 @@
                                 "$ref": "#/definitions/{kind:\"onwardLink\";props:{link:string;text:string;};}"
                             },
                             {
-                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string;};}"
+                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}"
                             },
                             {
-                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string;calculateWinner:boolean;excludedCopy:string;};}"
+                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}"
                             },
                             {
                                 "$ref": "#/definitions/{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}"
                             },
                             {
-                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;};colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string;};}"
+                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}"
                             }
                         ]
                     }
@@ -2167,6 +2177,7 @@
                     }
                 },
                 "currentNavLink": {
+                    "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                     "$ref": "#/definitions/FELinkType"
                 },
                 "currentNavLinkTitle": {
@@ -2179,6 +2190,7 @@
                     "type": "object",
                     "properties": {
                         "parent": {
+                            "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                             "$ref": "#/definitions/FELinkType"
                         },
                         "links": {
@@ -2230,7 +2242,15 @@
                     }
                 },
                 "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
+                    "enum": [
+                        "culture",
+                        "labs",
+                        "lifestyle",
+                        "news",
+                        "opinion",
+                        "sport"
+                    ],
+                    "type": "string"
                 },
                 "more": {
                     "type": "boolean"
@@ -2246,17 +2266,6 @@
                 "title",
                 "url"
             ]
-        },
-        "LegacyPillar": {
-            "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
-            ],
-            "type": "string"
         },
         "CustomSubnav": {
             "type": "object",
