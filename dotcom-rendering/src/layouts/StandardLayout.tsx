@@ -42,6 +42,7 @@ interface Props {
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 	serverTime?: number;
+	isInInteractiveLayoutTest?: boolean;
 }
 
 export interface WebProps extends Props {
@@ -54,7 +55,13 @@ export interface AppProps extends Props {
 }
 
 export const StandardLayout = (props: WebProps | AppProps) => {
-	const { article, format, renderingTarget, serverTime } = props;
+	const {
+		article,
+		format,
+		renderingTarget,
+		serverTime,
+		isInInteractiveLayoutTest,
+	} = props;
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
@@ -85,11 +92,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isCricketMatchReport =
 		format.design === ArticleDesign.MatchReport && !!cricketMatchHeaderUrl;
 
-	const interactiveLayoutSwitchoverDate = new Date('2024-06-01T00:00:00Z');
+	const interactiveLayoutSwitchoverDate = new Date('2024-10-01T00:00:00Z');
 	const publicationDate = new Date(article.webPublicationDate);
+	const isInteractive = format.design === ArticleDesign.Interactive;
 	const isLegacyInteractive =
-		publicationDate < interactiveLayoutSwitchoverDate &&
-		format.design === ArticleDesign.Interactive;
+		publicationDate < interactiveLayoutSwitchoverDate && isInteractive;
 
 	const showComments = article.isCommentable && !isPaidContent;
 
@@ -193,7 +200,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 				{/* This element is used to replace the article with the scorecard when the scorecard tab is clicked */}
 				<div id="article">
-					{isLegacyInteractive ? (
+					{isLegacyInteractive ||
+					(isInteractive && !isInInteractiveLayoutTest) ? (
 						<InteractiveArticleGridDeprecated {...props} />
 					) : (
 						<StandardLayoutArticleGrid
