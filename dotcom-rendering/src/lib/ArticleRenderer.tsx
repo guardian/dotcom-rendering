@@ -67,7 +67,7 @@ type Props = {
 	contributionsServiceUrl: string;
 	shouldHideAds: boolean;
 	idApiUrl?: string;
-	isOldInteractive?: boolean;
+	isInDeprecatedInteractiveLayout?: boolean;
 };
 
 export const ArticleRenderer = ({
@@ -91,7 +91,7 @@ export const ArticleRenderer = ({
 	contributionsServiceUrl,
 	shouldHideAds,
 	idApiUrl,
-	isOldInteractive = false,
+	isInDeprecatedInteractiveLayout = false,
 }: Props) => {
 	const isSectionedMiniProfilesArticle =
 		elements.filter(
@@ -120,6 +120,9 @@ export const ArticleRenderer = ({
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
 				shouldHideAds={shouldHideAds}
 				idApiUrl={idApiUrl}
+				isInDeprecatedInteractiveLayout={
+					isInDeprecatedInteractiveLayout
+				}
 			/>
 		);
 	});
@@ -258,7 +261,8 @@ export const ArticleRenderer = ({
 
 				// Note, this class MUST be on the *direct parent* of the
 				// elements for some legacy interactive styling to work.
-				format.design === ArticleDesign.Interactive && isOldInteractive
+				format.design === ArticleDesign.Interactive &&
+				isInDeprecatedInteractiveLayout
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}
@@ -267,7 +271,7 @@ export const ArticleRenderer = ({
 				commercialPosition,
 				spacefinderAdStyles,
 				format.design === ArticleDesign.Interactive &&
-					!isOldInteractive &&
+					!isInDeprecatedInteractiveLayout &&
 					interactiveLayoutCSS,
 			]}
 		>

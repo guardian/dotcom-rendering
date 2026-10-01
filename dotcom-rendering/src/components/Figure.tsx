@@ -12,6 +12,7 @@ type Props = {
 	className?: string;
 	type?: FEElement['_type'];
 	isTimeline?: boolean;
+	isInDeprecatedInteractiveLayout?: boolean;
 };
 
 const roleCss = {
@@ -207,7 +208,7 @@ export const defaultRoleStyles = (
 	role: RoleType | 'richLink' | 'fullWidth',
 	format: ArticleFormat,
 	isTimeline = false,
-	usesDeprecatedInteractiveLayout = false,
+	isInDeprecatedInteractiveLayout = false,
 ) => {
 	switch (role) {
 		case 'inline':
@@ -217,7 +218,7 @@ export const defaultRoleStyles = (
 		case 'immersive':
 			return roleCss.immersive;
 		case 'fullWidth':
-			if (usesDeprecatedInteractiveLayout) {
+			if (isInDeprecatedInteractiveLayout) {
 				return roleCss.fullWidthDeprecated;
 			}
 			return roleCss.fullWidth;
@@ -274,6 +275,7 @@ export const Figure = ({
 	className = '',
 	type,
 	isTimeline = false,
+	isInDeprecatedInteractiveLayout = false,
 }: Props) => {
 	if (isMainMedia && !isTimeline) {
 		// Don't add in-body styles for main media elements
@@ -291,7 +293,12 @@ export const Figure = ({
 	return (
 		<figure
 			id={id}
-			css={defaultRoleStyles(role, format, isTimeline)}
+			css={defaultRoleStyles(
+				role,
+				format,
+				isTimeline,
+				isInDeprecatedInteractiveLayout,
+			)}
 			data-spacefinder-role={role}
 			data-spacefinder-type={type}
 			className={className}

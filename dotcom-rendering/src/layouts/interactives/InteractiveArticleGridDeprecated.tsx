@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { AppsEpic } from '../../components/AppsEpic.island';
 import { ArticleBody } from '../../components/ArticleBody';
 import { ArticleContainer } from '../../components/ArticleContainer';
 import { ArticleHeadline } from '../../components/ArticleHeadline';
@@ -10,11 +11,15 @@ import { ArticleTitle } from '../../components/ArticleTitle';
 import { Border } from '../../components/Border';
 import { DecideLines } from '../../components/DecideLines';
 import { GridItem } from '../../components/GridItem';
+import { Island } from '../../components/Island';
 import { MainMedia } from '../../components/MainMedia';
 import { Section } from '../../components/Section';
+import { SlotBodyEnd } from '../../components/SlotBodyEnd.island';
 import { Standfirst } from '../../components/Standfirst';
+import { SubMeta } from '../../components/SubMeta';
 import { type ArticleFormat, ArticleSpecial } from '../../lib/articleFormat';
 import { getContributionsServiceUrl } from '../../lib/contributions';
+import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
 import { palette as themePalette } from '../../palette';
 import type { ArticleDeprecated } from '../../types/article';
@@ -179,10 +184,17 @@ export const InteractiveArticleGridDeprecated = (
 		config: { host },
 	} = article;
 	const isApps = renderingTarget === 'Apps';
+	const isWeb = renderingTarget === 'Web';
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const { branding } = article.commercialProperties[article.editionId];
+
+	const renderAds = isWeb && !article.shouldHideAds;
+	const showBodyEndSlot =
+		isWeb &&
+		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
+			article.config.switches.slotBodyEnd);
 
 	return (
 		<Section
@@ -371,7 +383,62 @@ export const InteractiveArticleGridDeprecated = (
 								editionId={article.editionId}
 								shouldHideAds={article.shouldHideAds}
 								idApiUrl={article.config.idApiUrl}
-								isOldInteractive={true}
+								isInDeprecatedInteractiveLayout={true}
+							/>
+							{isApps && (
+								<Island
+									priority="critical"
+									defer={{ until: 'visible' }}
+								>
+									<AppsEpic />
+								</Island>
+							)}
+
+							{showBodyEndSlot && (
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<SlotBodyEnd
+										contentType={article.contentType}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+										idApiUrl={article.config.idApiUrl}
+										isPaidContent={
+											article.pageType.isPaidContent
+										}
+										pageId={article.pageId}
+										sectionId={article.config.section}
+										shouldHideReaderRevenue={
+											article.shouldHideReaderRevenue
+										}
+										tags={article.tags}
+										renderAds={renderAds}
+										isLabs={false}
+										articleEndSlot={
+											!!article.config.switches
+												.articleEndSlot
+										}
+										isSensitive={article.config.isSensitive}
+									/>
+								</Island>
+							)}
+							<SubMeta
+								format={format}
+								subMetaKeywordLinks={
+									article.subMetaKeywordLinks
+								}
+								subMetaSectionLinks={
+									article.subMetaSectionLinks
+								}
+								pageId={article.pageId}
+								webUrl={article.webURL}
+								webTitle={article.webTitle}
+								showBottomSocialButtons={
+									article.showBottomSocialButtons &&
+									renderingTarget === 'Web'
+								}
 							/>
 						</ArticleContainer>
 					</GridItem>
