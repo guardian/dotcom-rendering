@@ -51,9 +51,17 @@ const renderedCss = (darkModeAvailable: boolean): string => {
 	].join('\n');
 };
 
+// Emotion does not re-insert a rule it already inserted, so the dark mode
+// render happens once and its CSS is shared by the tests below.
+let cachedDarkCss: string | undefined;
+const darkCss = (): string => {
+	cachedDarkCss ??= renderedCss(true);
+	return cachedDarkCss;
+};
+
 describe('MorePuzzlesCard dark mode', () => {
 	it('gives every card the same #333333 background in dark mode when dark mode is available', () => {
-		const css = renderedCss(true);
+		const css = darkCss();
 
 		expect(css).toContain('prefers-color-scheme: dark');
 		// Exactly the dark rule per card, scoped to the card itself (not "<card>:root ... <card>").
@@ -68,5 +76,21 @@ describe('MorePuzzlesCard dark mode', () => {
 
 		expect(css).not.toContain('#333333');
 		expect(css).not.toContain('prefers-color-scheme');
+	});
+});
+
+describe('MorePuzzlesCard dark mode title colours', () => {
+	const titleDarkColours = (): string[] => {
+		const css = darkCss();
+		return Array.from(
+			css.matchAll(
+				/html:not\(\[data-color-scheme='light'\]\) \.css-[\w-]+ \{color: (#[0-9A-Fa-f]{6});\}/g,
+			),
+		).map((match) => match[1] ?? '');
+	};
+
+	it('maps each group title to its lighter dark mode tint', () => {
+		// sudoku: sport[600]; crossword: news[550]
+		expect(titleDarkColours()).toEqual(['#90DCFF', '#FF9081']);
 	});
 });
