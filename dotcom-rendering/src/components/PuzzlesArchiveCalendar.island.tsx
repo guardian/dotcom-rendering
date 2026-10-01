@@ -13,7 +13,7 @@ import {
 	SvgArrowRightStraight,
 	SvgCheckmark,
 } from '@guardian/source/react-components';
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
 export type CalendarCell = {
@@ -72,6 +72,12 @@ const isArchive = (value: unknown): value is PuzzlesArchive => {
 	return (
 		typeof archive.year === 'number' &&
 		typeof archive.month === 'number' &&
+		typeof archive.selectedPuzzle === 'object' &&
+		archive.selectedPuzzle !== null &&
+		'id' in archive.selectedPuzzle &&
+		typeof archive.selectedPuzzle.id === 'string' &&
+		Array.isArray(archive.puzzles) &&
+		typeof archive.hasError === 'boolean' &&
 		Array.isArray(archive.items) &&
 		archive.items.every(isArchiveItem)
 	);
@@ -202,10 +208,11 @@ const controlsStyles = css`
 			width: 26px;
 			height: 26px;
 		}
-		:last-of-type {
+		:last-child {
 			justify-self: end;
 		}
-		:disabled {
+		:disabled,
+		&[aria-disabled='true'] {
 			border-color: ${palette.neutral[86]};
 			color: ${palette.neutral[60]};
 			cursor: not-allowed;
@@ -410,6 +417,7 @@ export const PuzzlesArchiveCalendar = ({
 	const [archive, setArchive] = useState(initialArchive);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(initialArchive.hasError);
+	const requests = useRef({ id: 0 });
 	const cache = useRef(
 		new Map([
 			[
@@ -435,47 +443,105 @@ export const PuzzlesArchiveCalendar = ({
 		archive.month,
 	);
 
-	const loadArchive = async (
-		year: number,
-		month: number,
-		puzzleId: string,
-	): Promise<PuzzlesArchive | undefined> => {
-		const key = cacheKey(puzzleId, year, month);
-		const cached = cache.current.get(key);
-		if (cached) {
-			setArchive(cached);
-			setError(cached.hasError);
-			return cached;
-		}
-
-		setLoading(true);
-		setError(false);
-		try {
-			const url = new URL(archive.dataUrl, window.location.origin);
-			url.searchParams.set('puzzle', puzzleId);
-			url.searchParams.set('year', String(year));
-			url.searchParams.set('month', String(month));
-			const response = await fetch(url, { credentials: 'same-origin' });
-			if (!response.ok) {
-				throw new Error(`Archive request failed: ${response.status}`);
+	const loadArchive = useCallback(
+		async (
+			year: number,
+			month: number,
+			puzzleId: string,
+		): Promise<PuzzlesArchive | undefined> => {
+			const currentRequest = ++requests.current.id;
+			const key = cacheKey(puzzleId, year, month);
+			const cached = cache.current.get(key);
+			if (cached && !cached.hasError) {
+				setArchive(cached);
+				setError(cached.hasError);
+				setLoading(false);
+				return cached;
 			}
-			const value: unknown = await response.json();
-			if (!isArchive(value)) {
-				throw new Error('Invalid archive response');
-			}
-			cache.current.set(key, value);
-			setArchive(value);
-			setError(value.hasError);
-			return value;
-		} catch {
-			setError(true);
-			return undefined;
-		} finally {
-			setLoading(false);
-		}
-	};
 
-	const selectMonth = async (delta: number, fallbackUrl: string) => {
+			setLoading(true);
+			setError(false);
+			try {
+				// Query parameters are stripped by the CDN in CODE/PROD.
+				const url = new URL(
+					`/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
+					window.location.origin,
+				);
+				const response = await fetch(url, {
+					credentials: 'same-origin',
+				});
+				if (!response.ok) {
+					throw new Error(
+						`Archive request failed: ${response.status}`,
+					);
+				}
+				const value: unknown = await response.json();
+				if (
+					!isArchive(value) ||
+					value.category !== initialArchive.category ||
+					value.selectedPuzzle.id !== puzzleId ||
+					value.year !== year ||
+					value.month !== month ||
+					value.hasError
+				) {
+					throw new Error('Invalid archive response');
+				}
+				if (currentRequest !== requests.current.id) return undefined;
+				cache.current.set(key, value);
+				setArchive(value);
+				setError(value.hasError);
+				return value;
+			} catch {
+				if (currentRequest === requests.current.id) setError(true);
+				return undefined;
+			} finally {
+				if (currentRequest === requests.current.id) setLoading(false);
+			}
+		},
+		[initialArchive.category],
+	);
+
+	useEffect(() => {
+		const pendingRequests = requests.current;
+		// The browser retains the query even when the CDN removes it upstream.
+		// Restore deep links after hydration, and Back/Forward without a reload.
+		const restoreSelection = () => {
+			const params = new URLSearchParams(window.location.search);
+			const puzzle = params.get('puzzle');
+			const selectedPuzzle =
+				initialArchive.puzzles.find(
+					(candidate) =>
+						candidate.id === puzzle ||
+						candidate.set === puzzle ||
+						candidate.slug?.split('/').pop() === puzzle,
+				) ?? initialArchive.selectedPuzzle;
+			const year = Number(params.get('year'));
+			const month = Number(params.get('month'));
+			const today = new Date();
+			const validMonth =
+				Number.isInteger(year) &&
+				year > 0 &&
+				Number.isInteger(month) &&
+				month >= 1 &&
+				month <= 12 &&
+				(year < today.getFullYear() ||
+					(year === today.getFullYear() &&
+						month <= today.getMonth() + 1));
+			void loadArchive(
+				validMonth ? year : initialArchive.year,
+				validMonth ? month : initialArchive.month,
+				selectedPuzzle.id,
+			);
+		};
+		restoreSelection();
+		window.addEventListener('popstate', restoreSelection);
+		return () => {
+			window.removeEventListener('popstate', restoreSelection);
+			++pendingRequests.id;
+		};
+	}, [initialArchive, loadArchive]);
+
+	const selectMonth = async (delta: number, pageUrl: string) => {
 		if (delta > 0 && !canSelectNextMonth) return;
 		const next = moveMonth(archive.year, archive.month, delta);
 		const selected = await loadArchive(
@@ -483,26 +549,19 @@ export const PuzzlesArchiveCalendar = ({
 			next.month,
 			archive.selectedPuzzle.id,
 		);
-		if (!selected) {
-			window.location.assign(fallbackUrl);
-			return;
-		}
-		window.history.pushState({}, '', fallbackUrl);
+		if (selected) window.history.pushState({}, '', pageUrl);
 	};
 
-	const selectPuzzle = async (puzzleId: string, fallbackUrl: string) => {
-		if (puzzleId === archive.selectedPuzzle.id) return;
+	const selectPuzzle = async (puzzleId: string, pageUrl: string) => {
+		if (puzzleId === archive.selectedPuzzle.id && !error && !loading) {
+			return;
+		}
 		const selected = await loadArchive(
 			archive.year,
 			archive.month,
 			puzzleId,
 		);
-		if (!selected) {
-			window.location.assign(fallbackUrl);
-			return;
-		}
-
-		window.history.pushState({}, '', fallbackUrl);
+		if (selected) window.history.pushState({}, '', pageUrl);
 	};
 
 	const previousMonth = moveMonth(archive.year, archive.month, -1);

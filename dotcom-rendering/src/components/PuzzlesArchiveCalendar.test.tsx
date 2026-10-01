@@ -90,6 +90,19 @@ describe('archive calendar helpers', () => {
 });
 
 describe('PuzzlesArchiveCalendar', () => {
+	beforeEach(() => {
+		window.history.replaceState(
+			{},
+			'',
+			'/puzzles-and-games/logic-puzzles/archive',
+		);
+	});
+
+	afterEach(() => {
+		jest.restoreAllMocks();
+		Reflect.deleteProperty(global, 'fetch');
+	});
+
 	it('links an available date to the API-derived exact puzzle destination', () => {
 		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
 		expect(screen.getByLabelText('2026-09-02, available')).toHaveAttribute(
@@ -122,7 +135,9 @@ describe('PuzzlesArchiveCalendar', () => {
 		);
 		expect(fetchMock).toHaveBeenCalledWith(
 			expect.objectContaining({
-				search: expect.stringContaining('month=8'),
+				pathname:
+					'/puzzles-and-games/logic-puzzles/archive-data/sudoku-easy/2026/8',
+				search: '',
 			}),
 			{ credentials: 'same-origin' },
 		);
@@ -208,9 +223,9 @@ describe('PuzzlesArchiveCalendar', () => {
 		);
 		expect(fetchMock).toHaveBeenCalledWith(
 			expect.objectContaining({
-				search: expect.stringMatching(
-					/puzzle=sudoku-medium.*year=2026.*month=9/,
-				),
+				pathname:
+					'/puzzles-and-games/logic-puzzles/archive-data/sudoku-medium/2026/9',
+				search: '',
 			}),
 			{ credentials: 'same-origin' },
 		);
@@ -223,4 +238,106 @@ describe('PuzzlesArchiveCalendar', () => {
 		pushState.mockRestore();
 		Reflect.deleteProperty(global, 'fetch');
 	});
+
+	it('restores the browser selection when SSR received no query parameters', async () => {
+		const medium = {
+			...archive.selectedPuzzle,
+			id: 'sudoku-medium',
+			title: 'Medium sudoku',
+		};
+		const initialArchive = {
+			...archive,
+			puzzles: [archive.selectedPuzzle, medium],
+		};
+		const fetchMock = jest.fn().mockResolvedValue({
+			ok: true,
+			json: async () => ({
+				...initialArchive,
+				selectedPuzzle: medium,
+				year: 2020,
+				month: 8,
+				items: [],
+			}),
+		});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		window.history.replaceState(
+			{},
+			'',
+			'?puzzle=sudoku-medium&year=2020&month=8',
+		);
+		render(<PuzzlesArchiveCalendar initialArchive={initialArchive} />);
+		await waitFor(() =>
+			expect(screen.getByText('August 2020')).toBeInTheDocument(),
+		);
+		expect(
+			screen.getByRole('link', { name: 'Medium sudoku' }),
+		).toHaveAttribute('aria-current', 'page');
+		expect(fetchMock).toHaveBeenCalledWith(
+			expect.objectContaining({
+				pathname:
+					'/puzzles-and-games/logic-puzzles/archive-data/sudoku-medium/2020/8',
+				search: '',
+			}),
+			{ credentials: 'same-origin' },
+		);
+		window.history.replaceState(
+			{},
+			'',
+			'/puzzles-and-games/logic-puzzles/archive',
+		);
+		fireEvent(window, new PopStateEvent('popstate'));
+		await waitFor(() =>
+			expect(screen.getByText('September 2026')).toBeInTheDocument(),
+		);
+		expect(
+			screen.getByRole('link', { name: 'Easy sudoku' }),
+		).toHaveAttribute('aria-current', 'page');
+	});
+
+	it.each(['network', 'wrong selection', 'api error'])(
+		'keeps the page and allows retry after %s',
+		async (failure) => {
+			const fetchMock = jest.fn();
+			if (failure === 'network') {
+				fetchMock.mockRejectedValueOnce(new Error('Offline'));
+			} else {
+				fetchMock.mockResolvedValueOnce({
+					ok: true,
+					json: async () =>
+						failure === 'api error'
+							? { ...archive, month: 8, hasError: true }
+							: archive,
+				});
+			}
+			fetchMock.mockResolvedValueOnce({
+				ok: true,
+				json: async () => ({ ...archive, month: 8, items: [] }),
+			});
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+			const consoleError = jest
+				.spyOn(console, 'error')
+				.mockImplementation(() => undefined);
+			render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+			expect(
+				fireEvent.click(
+					screen.getByRole('link', { name: 'Previous month' }),
+				),
+			).toBe(false);
+			await screen.findByRole('alert');
+			expect(screen.getByText('September 2026')).toBeInTheDocument();
+			expect(window.location.search).toBe('');
+			expect(consoleError).not.toHaveBeenCalled();
+			fireEvent.click(
+				screen.getByRole('link', { name: 'Previous month' }),
+			);
+			await screen.findByText('August 2026');
+			expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+		},
+	);
 });
