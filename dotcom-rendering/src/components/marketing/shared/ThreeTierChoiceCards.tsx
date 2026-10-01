@@ -27,7 +27,7 @@ import type { ChoiceCardDesignSettings } from '../banners/designableBanner/setti
 
 export type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
 
-const choiceCardTransition = '0.2s cubic-bezier(0.27, 1.06, 0.18, 1.00)';
+const choiceCardTransition = '0.2s cubic-bezier(0.64, 0.57, 0.67, 1.53)';
 
 const benefitsStyles = css`
 	${textSans15};
