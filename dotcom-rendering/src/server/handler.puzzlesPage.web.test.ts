@@ -39,6 +39,32 @@ describe('handlePuzzlesPage', () => {
 		expect(res.status).toHaveBeenCalledWith(200);
 	});
 
+	it('requires the cumulative V0 and V1 variants for an archive payload', () => {
+		validate.mockReturnValue({
+			archive: {},
+			config: {
+				serverSideABTests: {
+					'puzzles-new-hub': 'variant',
+					'puzzles-new-hub-v1': 'variant',
+				},
+			},
+		} as never);
+		const res = response();
+		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
+		expect(renderPage).toHaveBeenCalledTimes(1);
+	});
+
+	it('does not render an archive when V1 is absent', () => {
+		validate.mockReturnValue({
+			archive: {},
+			config: { serverSideABTests: { 'puzzles-new-hub': 'variant' } },
+		} as never);
+		const res = response();
+		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
+		expect(res.sendStatus).toHaveBeenCalledWith(404);
+		expect(renderPage).not.toHaveBeenCalled();
+	});
+
 	it('renders without experiment participation in local development', () => {
 		const previousNodeEnvironment = process.env.NODE_ENV;
 		process.env.NODE_ENV = 'development';

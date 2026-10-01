@@ -6,6 +6,7 @@ export type LayoutType =
 	| 'standard'
 	| 'showcase'
 	| 'media'
+	| 'picture'
 	| 'immersiveLandscape'
 	| 'immersivePortrait';
 
@@ -163,6 +164,42 @@ const mediaCss: LayoutCssMap = {
 	},
 };
 
+const pictureCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		leftCol: grid.column.left,
+	},
+	headline: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: 'grid-row: 1;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		leftCol: 'grid-row: 2;',
+	},
+	media: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: `grid-row: 3;`,
+	},
+	meta: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		tablet: 'grid-row: 6;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: `grid-row: 5;`,
+	},
+};
+
 const immersivePortraitCss: LayoutCssMap = {
 	title: {
 		belowDesktop: `${grid.column.all} grid-row: 2;`,
@@ -247,6 +284,7 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	standard: standardCss,
 	showcase: showcaseCss,
 	media: mediaCss,
+	picture: pictureCss,
 	immersiveLandscape: immersiveLandscapeCss,
 	immersivePortrait: immersivePortraitCss,
 };
@@ -299,12 +337,14 @@ export const getLayoutType = ({
 	isImmersive,
 	orientation,
 	isMedia,
+	isPicture,
 	isShowcase,
 }: {
 	isImmersive: boolean;
 	isFeature: boolean;
 	orientation: 'portrait' | 'landscape' | 'square';
 	isMedia: boolean;
+	isPicture: boolean;
 	isShowcase: boolean;
 }): LayoutType => {
 	if (isImmersive) {
@@ -315,6 +355,7 @@ export const getLayoutType = ({
 		return 'immersiveLandscape';
 	}
 	if (isMedia) return 'media';
+	if (isPicture) return 'picture';
 	if (isShowcase) return 'showcase';
 	return 'standard';
 };

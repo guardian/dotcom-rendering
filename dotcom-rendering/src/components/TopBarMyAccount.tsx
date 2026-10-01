@@ -13,8 +13,8 @@ import {
 import { Hide, SvgCross, SvgPerson } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
+import { getHeaderSignInUrl } from '../lib/headerSignInUrl';
 import type { SignedIn } from '../lib/identity';
-import { createAuthenticationEventParams } from '../lib/identity-component-event';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import {
 	addNotificationsToDropdownLinks,
@@ -159,9 +159,7 @@ const SignIn = ({
 			!showSignInTextOnMobile && iconInAccountStyles,
 		]}
 		aria-label={!showSignInTextOnMobile ? 'Sign in' : undefined}
-		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
-			'guardian_signin_header',
-		)}`}
+		href={getHeaderSignInUrl(idUrl)}
 		data-link-name={nestedOphanComponents('header', 'topbar', 'signin')}
 	>
 		{showSignInTextOnMobile ? (

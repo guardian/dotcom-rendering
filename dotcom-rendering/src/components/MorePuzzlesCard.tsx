@@ -6,6 +6,7 @@ import {
 	palette,
 	space,
 	textSans14,
+	until,
 } from '@guardian/source/foundations';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { externalProps, getPuzzleUrl } from './PuzzleCard';
@@ -208,17 +209,19 @@ const rowsStyles = css`
 `;
 
 /**
- * The divider precedes every card (including the first row/column), not
- * just the ones after it - per explicit design direction. `rowStyles`
- * below hides the very first card's divider again, but only in the narrow
- * "tablet"-to-"leftCol" range where this rail's own heading has nowhere to
- * sit beside it (see `rowStyles`'s own comment).
+ * The divider is vertical only, and only between cards that genuinely sit
+ * side by side in the same row - never horizontal, and never before a
+ * card that has nothing to its own left (the first card of a row,
+ * including a card left on its own when the count doesn't divide evenly
+ * into full rows). Per explicit design direction: no top/bottom divider
+ * exists at any breakpoint or column count; rows are separated purely by
+ * the grid's own `gap`, with no line drawn between them.
  *
- * Each property is reset to `content: none` immediately before being
- * (re)enabled, because `rowStyles` calls this at "tablet"/"desktop" too via
- * `min-width` media queries that stack rather than replace - without the
- * reset, a divider a lower breakpoint's call turned on can otherwise keep
- * matching after a higher breakpoint changes `columns` underneath it.
+ * Reset to `content: none` immediately before being re-enabled, because
+ * `rowStyles` calls this at "tablet"/"desktop" too via `min-width` media
+ * queries that stack rather than replace - without the reset, a divider a
+ * lower breakpoint's call turned on can otherwise keep matching after a
+ * higher breakpoint changes `columns` underneath it.
  */
 const cardGridStyles = (columns: number, tracks = columns) => css`
 	grid-template-columns: repeat(${tracks}, minmax(0, 1fr));
@@ -226,25 +229,12 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 		grid-column: auto;
 		position: relative;
 	}
-	> li::before,
 	> li::after {
 		content: none;
 	}
-	> li::before {
-		position: absolute;
-		top: calc(var(--puzzles-gap) / -2);
-		right: 0;
-		left: 0;
-		border-top: 1px solid ${palette.neutral[86]};
-		content: '';
-		pointer-events: none;
-	}
 	${columns > 1 &&
 	css`
-		> li::before {
-			content: none;
-		}
-		> li::after {
+		> li:not(:nth-child(${columns}n + 1))::after {
 			position: absolute;
 			top: 0;
 			bottom: 0;
@@ -287,7 +277,11 @@ const tabletCompactGridStyles = (count: number) => {
 	`;
 };
 
-const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => {
+const rowStyles = (
+	variant: PuzzleItem['cardVariant'],
+	count: number,
+	mobileScrollable: boolean,
+) => {
 	const mobileColumns = variant === 'compact' ? Math.min(count, 2) : 1;
 	const tabletColumns =
 		variant === 'compact' ? Math.min(count, 3) : Math.min(count, 2);
@@ -322,26 +316,48 @@ const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => {
 			${cardGridStyles(desktopColumns)};
 			max-width: 940px;
 		}
-		/*
-		 * Below "leftCol", RelatedPuzzlesRail stacks its own heading
-		 * above this grid rather than beside it, so the very first card's
-		 * leading divider has nothing to its left/above to separate from
-		 * and reads as a stray line - hidden in just that range. From
-		 * "leftCol" up, the heading moves into its own column beside the
-		 * grid, so the divider is reinstated there.
-		 */
-		${between.tablet.and.leftCol} {
-			> li:first-child::before,
-			> li:first-child::after {
-				content: none;
+		${mobileScrollable &&
+		css`
+			> li + li::after {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: calc(var(--puzzles-gap) / -2);
+				border-left: 1px solid ${palette.neutral[86]};
+				content: '';
+				pointer-events: none;
 			}
-		}
+			${until.phablet} {
+				display: flex;
+				overflow-x: auto;
+				scrollbar-width: none;
+				::-webkit-scrollbar {
+					display: none;
+				}
+				> li {
+					flex: 0 0 calc((100% - 16px) / 2);
+					grid-column: auto;
+				}
+			}
+		`}
 	`;
 };
 
-export const MorePuzzlesRows = ({ items }: { items: PuzzleItem[] }) => (
+export const MorePuzzlesRows = ({
+	items,
+	mobileScrollable = false,
+}: {
+	items: PuzzleItem[];
+	mobileScrollable?: boolean;
+}) => (
 	<div css={rowsStyles}>
-		<ul css={rowStyles(items[0]?.cardVariant ?? 'primary', items.length)}>
+		<ul
+			css={rowStyles(
+				items[0]?.cardVariant ?? 'primary',
+				items.length,
+				mobileScrollable,
+			)}
+		>
 			{items.map((item) => (
 				<li key={item.id}>
 					<MorePuzzlesCard item={item} />
