@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import { breakpoints, from, space, until } from '@guardian/source/foundations';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { FEElement, RoleType } from '../types/content';
 
@@ -75,6 +75,53 @@ const roleCss = {
 		margin-bottom: ${space[3]}px;
 
 		grid-column: 1 / -1;
+	`,
+
+	fullWidthDeprecated: css`
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+
+		${until.tablet} {
+			margin-left: -20px;
+			margin-right: -20px;
+		}
+		${until.mobileLandscape} {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+		${from.tablet} {
+			--scrollbar-width-fallback: 15px;
+			--half-scrollbar-width-fallback: 7.5px;
+
+			width: calc(
+				100vw - var(--scrollbar-width, var(--scrollbar-width-fallback))
+			);
+			max-width: calc(
+				100vw - var(--scrollbar-width, var(--scrollbar-width-fallback))
+			);
+
+			--grid-container-max-width: 740px;
+			--grid-container-left-margin: calc(
+				((-100vw + (var(--grid-container-max-width) - 42px)) / 2) +
+					var(
+						--half-scrollbar-width,
+						var(--half-scrollbar-width-fallback)
+					)
+			);
+
+			margin-left: var(--grid-container-left-margin);
+		}
+		${from.desktop} {
+			--grid-container-max-width: ${breakpoints.desktop}px;
+		}
+		${from.leftCol} {
+			--grid-container-max-width: ${breakpoints.leftCol}px;
+			--grid-left-col-width: 140px;
+		}
+		${from.wide} {
+			--grid-container-max-width: ${breakpoints.wide}px;
+			--grid-left-col-width: 219px;
+		}
 	`,
 
 	showcase: css`
@@ -160,6 +207,7 @@ export const defaultRoleStyles = (
 	role: RoleType | 'richLink' | 'fullWidth',
 	format: ArticleFormat,
 	isTimeline = false,
+	usesDeprecatedInteractiveLayout = false,
 ) => {
 	switch (role) {
 		case 'inline':
@@ -169,6 +217,9 @@ export const defaultRoleStyles = (
 		case 'immersive':
 			return roleCss.immersive;
 		case 'fullWidth':
+			if (usesDeprecatedInteractiveLayout) {
+				return roleCss.fullWidthDeprecated;
+			}
 			return roleCss.fullWidth;
 		case 'showcase':
 			if (isTimeline) {
