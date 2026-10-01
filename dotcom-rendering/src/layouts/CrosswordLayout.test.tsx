@@ -151,3 +151,50 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 		).not.toBeInTheDocument();
 	});
 });
+
+describe('CrosswordLayout Puzzle Page design (v0 + v1)', () => {
+	it('uses the puzzles sub-nav instead of the crosswords one', () => {
+		renderCrosswordLayout({ serverSideABTests: v0AndV1On });
+
+		expect(screen.getAllByText('Word games').length).toBeGreaterThan(0);
+		expect(screen.getAllByText('Logic puzzles').length).toBeGreaterThan(0);
+	});
+
+	it('hides SubMeta (topics, share, reuse) and the footer sub-nav', () => {
+		const { container } = renderCrosswordLayout({
+			serverSideABTests: v0AndV1On,
+		});
+
+		expect(
+			screen.queryByText('Explore more on these topics'),
+		).not.toBeInTheDocument();
+		expect(
+			screen.queryByText('Reuse this content'),
+		).not.toBeInTheDocument();
+		expect(container.querySelectorAll('aside nav').length).toBe(0);
+	});
+
+	it('keeps the original design when v1 is disabled', () => {
+		renderCrosswordLayout({
+			serverSideABTests: { [PUZZLES_HUB_EXPERIMENT]: 'variant' },
+		});
+
+		expect(screen.queryAllByText('Word games')).toHaveLength(0);
+		expect(
+			screen.getByText('Explore more on these topics'),
+		).toBeInTheDocument();
+	});
+
+	it('applies the new design even when there is no rail data', () => {
+		renderCrosswordLayout({ serverSideABTests: v0AndV1On });
+
+		expect(
+			screen.queryByRole('heading', {
+				name: 'More from Puzzles & games',
+			}),
+		).not.toBeInTheDocument();
+		expect(
+			screen.queryByText('Explore more on these topics'),
+		).not.toBeInTheDocument();
+	});
+});

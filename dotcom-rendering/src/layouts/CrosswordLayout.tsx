@@ -35,6 +35,10 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { isPuzzlesHubV1Enabled } from '../lib/puzzlesHubVersionExperiment';
+import {
+	getPuzzlesSubNavLinks,
+	PUZZLES_SUBNAV_PARENT,
+} from '../lib/puzzlesSubNav';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -128,9 +132,28 @@ export const CrosswordLayout = (props: Props) => {
 
 	const renderAds = canRenderAds(article);
 
+	/**
+	 * With the puzzles hub v0 and v1 tiers both on, this page takes on the
+	 * Puzzle Page's design (see `PuzzlePageLayout`): its sub-nav, a single
+	 * straight line, no `SubMeta` (topic links, share buttons, "Reuse this
+	 * content") and no second sub-nav above the footer. Independent of
+	 * whether the rail has data, so the page design never depends on CAPI.
+	 */
+	const isPuzzlesHubV1 = isPuzzlesHubV1Enabled(article.config);
+
 	const showRelatedPuzzles =
-		!!article.moreFromPuzzlesAndGames?.length &&
-		isPuzzlesHubV1Enabled(article.config);
+		isPuzzlesHubV1 && !!article.moreFromPuzzlesAndGames?.length;
+
+	const NAV: NavType = isPuzzlesHubV1
+		? {
+				...props.NAV,
+				subNavSections: {
+					parent: PUZZLES_SUBNAV_PARENT,
+					links: getPuzzlesSubNavLinks(true),
+				},
+				currentNavLink: 'Crosswords',
+			}
+		: props.NAV;
 
 	return (
 		<>
@@ -158,7 +181,7 @@ export const CrosswordLayout = (props: Props) => {
 				)}
 
 				<Masthead
-					nav={props.NAV}
+					nav={NAV}
 					editionId={article.editionId}
 					idUrl={article.config.idUrl}
 					mmaUrl={article.config.mmaUrl}
@@ -384,7 +407,7 @@ export const CrosswordLayout = (props: Props) => {
 					hideFromPrintLayout={true}
 				>
 					<StraightLines
-						count={4}
+						count={isPuzzlesHubV1 ? 1 : 4}
 						color={themePalette('--straight-lines')}
 						cssOverrides={css`
 							display: block;
@@ -408,23 +431,25 @@ export const CrosswordLayout = (props: Props) => {
 					</div>
 				)}
 
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					backgroundColour={themePalette('--article-background')}
-				>
-					<SubMeta
-						format={format}
-						subMetaKeywordLinks={article.subMetaKeywordLinks}
-						subMetaSectionLinks={article.subMetaSectionLinks}
-						pageId={article.pageId}
-						webUrl={article.webURL}
-						webTitle={article.webTitle}
-						showBottomSocialButtons={
-							article.showBottomSocialButtons
-						}
-					/>
-				</Section>
+				{!isPuzzlesHubV1 && (
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={themePalette('--article-background')}
+					>
+						<SubMeta
+							format={format}
+							subMetaKeywordLinks={article.subMetaKeywordLinks}
+							subMetaSectionLinks={article.subMetaSectionLinks}
+							pageId={article.pageId}
+							webUrl={article.webURL}
+							webTitle={article.webTitle}
+							showBottomSocialButtons={
+								article.showBottomSocialButtons
+							}
+						/>
+					</Section>
+				)}
 				{renderAds && (
 					<Section
 						fullWidth={true}
@@ -489,7 +514,7 @@ export const CrosswordLayout = (props: Props) => {
 				)}
 			</main>
 
-			{props.NAV.subNavSections && (
+			{!isPuzzlesHubV1 && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
@@ -511,8 +536,8 @@ export const CrosswordLayout = (props: Props) => {
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					selectedPillar={props.NAV.selectedPillar}
-					pillars={props.NAV.pillars}
+					selectedPillar={NAV.selectedPillar}
+					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.footer}
 					editionId={article.editionId}
 				/>

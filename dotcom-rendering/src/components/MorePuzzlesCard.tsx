@@ -8,6 +8,7 @@ import {
 	textSans14,
 } from '@guardian/source/foundations';
 import type { PuzzleItem } from '../types/puzzlesPage';
+import { useConfig } from './ConfigContext';
 import { externalProps, getPuzzleUrl } from './PuzzleCard';
 
 /**
@@ -61,6 +62,47 @@ const puzzleColours = (item: PuzzleItem) => {
 			};
 	}
 };
+
+/**
+ * In dark mode every card in the rail shares one neutral background, in
+ * place of the per-type light-mode colours (`puzzleColours`), with the text
+ * lightened to stay readable on it. Only applied when dark mode is available
+ * for the page (`darkModeAvailable`), mirroring how the page's own dark
+ * palette is gated (`rootStyles`), and not when the reader has forced the
+ * light scheme.
+ */
+const DARK_MODE_CARD_BACKGROUND = '#333333';
+
+const cardColourStyles = (
+	colours: ReturnType<typeof puzzleColours>,
+	darkModeAvailable: boolean,
+) => css`
+	background-color: ${colours.background};
+	${darkModeAvailable &&
+	css`
+		@media (prefers-color-scheme: dark) {
+			html:not([data-color-scheme='light']) & {
+				background-color: ${DARK_MODE_CARD_BACKGROUND};
+				color: ${palette.neutral[86]};
+			}
+		}
+	`}
+`;
+
+const cardTitleColourStyles = (
+	colours: ReturnType<typeof puzzleColours>,
+	darkModeAvailable: boolean,
+) => css`
+	color: ${colours.title};
+	${darkModeAvailable &&
+	css`
+		@media (prefers-color-scheme: dark) {
+			html:not([data-color-scheme='light']) & {
+				color: ${palette.neutral[93]};
+			}
+		}
+	`}
+`;
 
 const cardStyles = (
 	variant: PuzzleItem['cardVariant'],
@@ -146,6 +188,7 @@ const cardImageStyles = css`
 
 const MorePuzzlesCard = ({ item }: { item: PuzzleItem }) => {
 	const url = getPuzzleUrl(item);
+	const { darkModeAvailable } = useConfig();
 	const colours = puzzleColours(item);
 	const setter = item.type === 'crossword' ? item.setter?.trim() : undefined;
 	const hasImage =
@@ -157,8 +200,10 @@ const MorePuzzlesCard = ({ item }: { item: PuzzleItem }) => {
 			<div css={cardTextStyles}>
 				<span
 					className="puzzle-card-title"
-					css={cardTitleStyles}
-					style={{ color: colours.title }}
+					css={[
+						cardTitleStyles,
+						cardTitleColourStyles(colours, darkModeAvailable),
+					]}
 				>
 					{item.title}
 				</span>
@@ -177,20 +222,16 @@ const MorePuzzlesCard = ({ item }: { item: PuzzleItem }) => {
 			)}
 		</>
 	);
-	const style = { backgroundColor: colours.background };
+	const styles = [
+		cardStyles(item.cardVariant, hasImage),
+		cardColourStyles(colours, darkModeAvailable),
+	];
 	return url !== undefined ? (
-		<a
-			css={cardStyles(item.cardVariant, hasImage)}
-			href={url}
-			style={style}
-			{...externalProps(url)}
-		>
+		<a css={styles} href={url} {...externalProps(url)}>
 			{contents}
 		</a>
 	) : (
-		<article css={cardStyles(item.cardVariant, hasImage)} style={style}>
-			{contents}
-		</article>
+		<article css={styles}>{contents}</article>
 	);
 };
 
