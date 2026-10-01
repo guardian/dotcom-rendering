@@ -202,6 +202,11 @@ const controlsStyles = css`
 		:last-of-type {
 			justify-self: end;
 		}
+		:disabled {
+			border-color: ${palette.neutral[86]};
+			color: ${palette.neutral[60]};
+			cursor: not-allowed;
+		}
 	}
 	strong {
 		text-align: center;
@@ -369,6 +374,17 @@ const moveMonth = (year: number, month: number, delta: number) => {
 	return { year: value.getUTCFullYear(), month: value.getUTCMonth() + 1 };
 };
 
+export const canNavigateToNextMonth = (
+	year: number,
+	month: number,
+	today = new Date(),
+): boolean =>
+	year < today.getFullYear() ||
+	(year === today.getFullYear() && month < today.getMonth() + 1);
+
+const cacheKey = (puzzleId: string, year: number, month: number): string =>
+	`${puzzleId}-${year}-${month}`;
+
 export const PuzzlesArchiveCalendar = ({
 	initialArchive,
 }: {
@@ -379,7 +395,14 @@ export const PuzzlesArchiveCalendar = ({
 	const [error, setError] = useState(initialArchive.hasError);
 	const cache = useRef(
 		new Map([
-			[`${initialArchive.year}-${initialArchive.month}`, initialArchive],
+			[
+				cacheKey(
+					initialArchive.selectedPuzzle.id,
+					initialArchive.year,
+					initialArchive.month,
+				),
+				initialArchive,
+			],
 		]),
 	);
 	const cells = buildCalendarCells(
@@ -390,23 +413,31 @@ export const PuzzlesArchiveCalendar = ({
 	const recent = [...archive.items]
 		.sort((left, right) => right.date.localeCompare(left.date))
 		.slice(0, 3);
+	const canSelectNextMonth = canNavigateToNextMonth(
+		archive.year,
+		archive.month,
+	);
 
-	const selectMonth = async (delta: number) => {
-		const next = moveMonth(archive.year, archive.month, delta);
-		const key = `${next.year}-${next.month}`;
+	const loadArchive = async (
+		year: number,
+		month: number,
+		puzzleId: string,
+	): Promise<PuzzlesArchive | undefined> => {
+		const key = cacheKey(puzzleId, year, month);
 		const cached = cache.current.get(key);
 		if (cached) {
 			setArchive(cached);
 			setError(cached.hasError);
-			return;
+			return cached;
 		}
 
 		setLoading(true);
 		setError(false);
 		try {
 			const url = new URL(archive.dataUrl, window.location.origin);
-			url.searchParams.set('year', String(next.year));
-			url.searchParams.set('month', String(next.month));
+			url.searchParams.set('puzzle', puzzleId);
+			url.searchParams.set('year', String(year));
+			url.searchParams.set('month', String(month));
 			const response = await fetch(url, { credentials: 'same-origin' });
 			if (!response.ok) {
 				throw new Error(`Archive request failed: ${response.status}`);
@@ -418,11 +449,33 @@ export const PuzzlesArchiveCalendar = ({
 			cache.current.set(key, value);
 			setArchive(value);
 			setError(value.hasError);
+			return value;
 		} catch {
 			setError(true);
+			return undefined;
 		} finally {
 			setLoading(false);
 		}
+	};
+
+	const selectMonth = async (delta: number) => {
+		if (delta > 0 && !canSelectNextMonth) return;
+		const next = moveMonth(archive.year, archive.month, delta);
+		await loadArchive(next.year, next.month, archive.selectedPuzzle.id);
+	};
+
+	const selectPuzzle = async (puzzleId: string) => {
+		if (puzzleId === archive.selectedPuzzle.id) return;
+		const selected = await loadArchive(
+			archive.year,
+			archive.month,
+			puzzleId,
+		);
+		if (!selected) return;
+
+		const url = new URL(window.location.href);
+		url.searchParams.set('puzzle', puzzleId);
+		window.history.pushState({}, '', url);
 	};
 
 	return (
@@ -441,6 +494,19 @@ export const PuzzlesArchiveCalendar = ({
 						}
 						href={`/puzzles-and-games/${archive.category}/archive?puzzle=${encodeURIComponent(puzzle.id)}`}
 						key={puzzle.id}
+						onClick={(event) => {
+							if (
+								event.button !== 0 ||
+								event.metaKey ||
+								event.ctrlKey ||
+								event.shiftKey ||
+								event.altKey
+							) {
+								return;
+							}
+							event.preventDefault();
+							void selectPuzzle(puzzle.id);
+						}}
 					>
 						{puzzle.title}
 					</a>
@@ -466,6 +532,7 @@ export const PuzzlesArchiveCalendar = ({
 			<div css={controlsStyles}>
 				<button
 					aria-label="Previous month"
+					disabled={loading}
 					onClick={() => void selectMonth(-1)}
 					type="button"
 				>
@@ -476,6 +543,7 @@ export const PuzzlesArchiveCalendar = ({
 				</strong>
 				<button
 					aria-label="Next month"
+					disabled={loading || !canSelectNextMonth}
 					onClick={() => void selectMonth(1)}
 					type="button"
 				>

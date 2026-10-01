@@ -3,6 +3,7 @@ import type { PuzzlesArchive } from '../types/puzzlesPage';
 import {
 	archiveStatus,
 	buildCalendarCells,
+	canNavigateToNextMonth,
 	daysInMonth,
 	mondayFirstOffset,
 	PuzzlesArchiveCalendar,
@@ -71,6 +72,14 @@ describe('archive calendar helpers', () => {
 				.every((cell) => cell?.date.startsWith('2026-09')),
 		).toBe(true);
 	});
+
+	it('only allows navigating forward from a month before the current month', () => {
+		const today = new Date(2026, 9, 1);
+
+		expect(canNavigateToNextMonth(2026, 9, today)).toBe(true);
+		expect(canNavigateToNextMonth(2026, 10, today)).toBe(false);
+		expect(canNavigateToNextMonth(2026, 11, today)).toBe(false);
+	});
 });
 
 describe('PuzzlesArchiveCalendar', () => {
@@ -114,7 +123,8 @@ describe('PuzzlesArchiveCalendar', () => {
 	});
 
 	it('loads the next month without navigating or reloading', async () => {
-		const next = { ...archive, year: 2026, month: 10, items: [] };
+		const pastArchive = { ...archive, year: 2020, month: 9 };
+		const next = { ...pastArchive, month: 10, items: [] };
 		const fetchMock = jest.fn().mockResolvedValue({
 			ok: true,
 			json: async () => next,
@@ -123,12 +133,88 @@ describe('PuzzlesArchiveCalendar', () => {
 			configurable: true,
 			value: fetchMock,
 		});
-		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+		render(<PuzzlesArchiveCalendar initialArchive={pastArchive} />);
 
 		fireEvent.click(screen.getByRole('button', { name: 'Next month' }));
 		await waitFor(() =>
-			expect(screen.getByText('October 2026')).toBeInTheDocument(),
+			expect(screen.getByText('October 2020')).toBeInTheDocument(),
 		);
+		Reflect.deleteProperty(global, 'fetch');
+	});
+
+	it('does not allow navigating beyond the current month', () => {
+		const today = new Date();
+		const current = {
+			...archive,
+			year: today.getFullYear(),
+			month: today.getMonth() + 1,
+		};
+		const fetchMock = jest.fn();
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={current} />);
+
+		const nextButton = screen.getByRole('button', { name: 'Next month' });
+		expect(nextButton).toBeDisabled();
+		fireEvent.click(nextButton);
+		expect(fetchMock).not.toHaveBeenCalled();
+		Reflect.deleteProperty(global, 'fetch');
+	});
+
+	it('loads another puzzle without reloading the page', async () => {
+		const otherPuzzle: PuzzlesArchive['selectedPuzzle'] = {
+			id: 'sudoku-medium',
+			title: 'Medium sudoku',
+			puzzleType: 'SUDOKU_MEDIUM',
+			slug: 'logic-puzzles/sudoku-medium',
+			set: 'medium',
+		};
+		const initialArchive = {
+			...archive,
+			puzzles: [archive.selectedPuzzle, otherPuzzle],
+		};
+		const selectedArchive = {
+			...initialArchive,
+			selectedPuzzle: otherPuzzle,
+			items: [],
+		};
+		const fetchMock = jest.fn().mockResolvedValue({
+			ok: true,
+			json: async () => selectedArchive,
+		});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		const pushState = jest.spyOn(window.history, 'pushState');
+		render(<PuzzlesArchiveCalendar initialArchive={initialArchive} />);
+
+		fireEvent.click(screen.getByRole('link', { name: 'Medium sudoku' }));
+
+		await waitFor(() =>
+			expect(
+				screen.getByRole('heading', { name: 'Medium sudoku' }),
+			).toBeInTheDocument(),
+		);
+		expect(fetchMock).toHaveBeenCalledWith(
+			expect.objectContaining({
+				search: expect.stringMatching(
+					/puzzle=sudoku-medium.*year=2026.*month=9/,
+				),
+			}),
+			{ credentials: 'same-origin' },
+		);
+		expect(pushState).toHaveBeenCalledWith(
+			{},
+			'',
+			expect.objectContaining({
+				search: expect.stringContaining('puzzle=sudoku-medium'),
+			}),
+		);
+
+		pushState.mockRestore();
 		Reflect.deleteProperty(global, 'fetch');
 	});
 });
