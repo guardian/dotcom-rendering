@@ -184,7 +184,8 @@ const controlsStyles = css`
 	align-items: center;
 	border-top: 1px solid ${palette.neutral[86]};
 	padding-top: ${space[3]}px;
-	button {
+	button,
+	a {
 		display: flex;
 		width: 40px;
 		height: 40px;
@@ -194,7 +195,9 @@ const controlsStyles = css`
 		border: 1px solid ${palette.neutral[20]};
 		border-radius: 50%;
 		background: ${palette.neutral[100]};
+		color: ${palette.neutral[7]};
 		cursor: pointer;
+		text-decoration: none;
 		svg {
 			width: 26px;
 			height: 26px;
@@ -385,6 +388,20 @@ export const canNavigateToNextMonth = (
 const cacheKey = (puzzleId: string, year: number, month: number): string =>
 	`${puzzleId}-${year}-${month}`;
 
+export const archivePageUrl = (
+	category: PuzzlesArchive['category'],
+	puzzleId: string,
+	year: number,
+	month: number,
+): string => {
+	const search = new URLSearchParams({
+		puzzle: puzzleId,
+		year: String(year),
+		month: String(month),
+	});
+	return `/puzzles-and-games/${category}/archive?${search.toString()}`;
+};
+
 export const PuzzlesArchiveCalendar = ({
 	initialArchive,
 }: {
@@ -458,25 +475,50 @@ export const PuzzlesArchiveCalendar = ({
 		}
 	};
 
-	const selectMonth = async (delta: number) => {
+	const selectMonth = async (delta: number, fallbackUrl: string) => {
 		if (delta > 0 && !canSelectNextMonth) return;
 		const next = moveMonth(archive.year, archive.month, delta);
-		await loadArchive(next.year, next.month, archive.selectedPuzzle.id);
+		const selected = await loadArchive(
+			next.year,
+			next.month,
+			archive.selectedPuzzle.id,
+		);
+		if (!selected) {
+			window.location.assign(fallbackUrl);
+			return;
+		}
+		window.history.pushState({}, '', fallbackUrl);
 	};
 
-	const selectPuzzle = async (puzzleId: string) => {
+	const selectPuzzle = async (puzzleId: string, fallbackUrl: string) => {
 		if (puzzleId === archive.selectedPuzzle.id) return;
 		const selected = await loadArchive(
 			archive.year,
 			archive.month,
 			puzzleId,
 		);
-		if (!selected) return;
+		if (!selected) {
+			window.location.assign(fallbackUrl);
+			return;
+		}
 
-		const url = new URL(window.location.href);
-		url.searchParams.set('puzzle', puzzleId);
-		window.history.pushState({}, '', url);
+		window.history.pushState({}, '', fallbackUrl);
 	};
+
+	const previousMonth = moveMonth(archive.year, archive.month, -1);
+	const previousMonthUrl = archivePageUrl(
+		archive.category,
+		archive.selectedPuzzle.id,
+		previousMonth.year,
+		previousMonth.month,
+	);
+	const nextMonth = moveMonth(archive.year, archive.month, 1);
+	const nextMonthUrl = archivePageUrl(
+		archive.category,
+		archive.selectedPuzzle.id,
+		nextMonth.year,
+		nextMonth.month,
+	);
 
 	return (
 		<section
@@ -485,32 +527,40 @@ export const PuzzlesArchiveCalendar = ({
 		>
 			<div aria-hidden="true" css={linesStyles} />
 			<nav aria-label="Puzzle types" css={tabsStyles}>
-				{archive.puzzles.map((puzzle) => (
-					<a
-						aria-current={
-							puzzle.id === archive.selectedPuzzle.id
-								? 'page'
-								: undefined
-						}
-						href={`/puzzles-and-games/${archive.category}/archive?puzzle=${encodeURIComponent(puzzle.id)}`}
-						key={puzzle.id}
-						onClick={(event) => {
-							if (
-								event.button !== 0 ||
-								event.metaKey ||
-								event.ctrlKey ||
-								event.shiftKey ||
-								event.altKey
-							) {
-								return;
+				{archive.puzzles.map((puzzle) => {
+					const href = archivePageUrl(
+						archive.category,
+						puzzle.id,
+						archive.year,
+						archive.month,
+					);
+					return (
+						<a
+							aria-current={
+								puzzle.id === archive.selectedPuzzle.id
+									? 'page'
+									: undefined
 							}
-							event.preventDefault();
-							void selectPuzzle(puzzle.id);
-						}}
-					>
-						{puzzle.title}
-					</a>
-				))}
+							href={href}
+							key={puzzle.id}
+							onClick={(event) => {
+								if (
+									event.button !== 0 ||
+									event.metaKey ||
+									event.ctrlKey ||
+									event.shiftKey ||
+									event.altKey
+								) {
+									return;
+								}
+								event.preventDefault();
+								void selectPuzzle(puzzle.id, href);
+							}}
+						>
+							{puzzle.title}
+						</a>
+					);
+				})}
 			</nav>
 			<h2 css={titleStyles}>{archive.selectedPuzzle.title}</h2>
 			<div css={recentStyles}>
@@ -530,25 +580,67 @@ export const PuzzlesArchiveCalendar = ({
 				))}
 			</div>
 			<div css={controlsStyles}>
-				<button
+				<a
 					aria-label="Previous month"
-					disabled={loading}
-					onClick={() => void selectMonth(-1)}
-					type="button"
+					aria-disabled={loading}
+					href={previousMonthUrl}
+					onClick={(event) => {
+						if (loading) {
+							event.preventDefault();
+							return;
+						}
+						if (
+							event.button !== 0 ||
+							event.metaKey ||
+							event.ctrlKey ||
+							event.shiftKey ||
+							event.altKey
+						) {
+							return;
+						}
+						event.preventDefault();
+						void selectMonth(-1, previousMonthUrl);
+					}}
 				>
 					<SvgArrowLeftStraight />
-				</button>
+				</a>
 				<strong aria-live="polite">
 					{monthName(archive.year, archive.month)}
 				</strong>
-				<button
-					aria-label="Next month"
-					disabled={loading || !canSelectNextMonth}
-					onClick={() => void selectMonth(1)}
-					type="button"
-				>
-					<SvgArrowRightStraight />
-				</button>
+				{canSelectNextMonth ? (
+					<a
+						aria-label="Next month"
+						aria-disabled={loading}
+						href={nextMonthUrl}
+						onClick={(event) => {
+							if (loading) {
+								event.preventDefault();
+								return;
+							}
+							if (
+								event.button !== 0 ||
+								event.metaKey ||
+								event.ctrlKey ||
+								event.shiftKey ||
+								event.altKey
+							) {
+								return;
+							}
+							event.preventDefault();
+							void selectMonth(1, nextMonthUrl);
+						}}
+					>
+						<SvgArrowRightStraight />
+					</a>
+				) : (
+					<button
+						aria-label="Next month"
+						disabled={true}
+						type="button"
+					>
+						<SvgArrowRightStraight />
+					</button>
+				)}
 			</div>
 			{loading && <p role="status">Loading archive…</p>}
 			{error && (

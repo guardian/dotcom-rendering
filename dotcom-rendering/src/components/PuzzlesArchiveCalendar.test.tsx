@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import type { PuzzlesArchive } from '../types/puzzlesPage';
 import {
+	archivePageUrl,
 	archiveStatus,
 	buildCalendarCells,
 	canNavigateToNextMonth,
@@ -39,6 +40,12 @@ const archive: PuzzlesArchive = {
 };
 
 describe('archive calendar helpers', () => {
+	it('builds an archive URL that preserves the puzzle and month', () => {
+		expect(archivePageUrl('crosswords', 'archive-mini', 2026, 8)).toBe(
+			'/puzzles-and-games/crosswords/archive?puzzle=archive-mini&year=2026&month=8',
+		);
+	});
+
 	it('maps completed, available, in-progress and missing dates', () => {
 		expect(archiveStatus({ ...archive.items[0]!, progress: 100 })).toBe(
 			'completed',
@@ -109,7 +116,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		});
 		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
 
-		fireEvent.click(screen.getByRole('button', { name: 'Previous month' }));
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
 		await waitFor(() =>
 			expect(screen.getByText('August 2026')).toBeInTheDocument(),
 		);
@@ -119,6 +126,7 @@ describe('PuzzlesArchiveCalendar', () => {
 			}),
 			{ credentials: 'same-origin' },
 		);
+		expect(window.location.search).toContain('month=8');
 		Reflect.deleteProperty(global, 'fetch');
 	});
 
@@ -135,7 +143,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		});
 		render(<PuzzlesArchiveCalendar initialArchive={pastArchive} />);
 
-		fireEvent.click(screen.getByRole('button', { name: 'Next month' }));
+		fireEvent.click(screen.getByRole('link', { name: 'Next month' }));
 		await waitFor(() =>
 			expect(screen.getByText('October 2020')).toBeInTheDocument(),
 		);
@@ -209,9 +217,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(pushState).toHaveBeenCalledWith(
 			{},
 			'',
-			expect.objectContaining({
-				search: expect.stringContaining('puzzle=sudoku-medium'),
-			}),
+			expect.stringContaining('puzzle=sudoku-medium'),
 		);
 
 		pushState.mockRestore();
