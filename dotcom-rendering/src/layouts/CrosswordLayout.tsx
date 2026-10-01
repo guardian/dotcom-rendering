@@ -23,6 +23,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
+import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
@@ -33,6 +34,7 @@ import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { isPuzzlesHubV1Enabled } from '../lib/puzzlesHubVersionExperiment';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -125,6 +127,10 @@ export const CrosswordLayout = (props: Props) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const renderAds = canRenderAds(article);
+
+	const showRelatedPuzzles =
+		!!article.moreFromPuzzlesAndGames?.length &&
+		isPuzzlesHubV1Enabled(article.config);
 
 	return (
 		<>
@@ -385,6 +391,22 @@ export const CrosswordLayout = (props: Props) => {
 						`}
 					/>
 				</Section>
+
+				{showRelatedPuzzles && article.moreFromPuzzlesAndGames && (
+					<div data-print-layout="hide">
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
+						>
+							<RelatedPuzzlesRail
+								items={article.moreFromPuzzlesAndGames}
+							/>
+						</Section>
+					</div>
+				)}
 
 				<Section
 					fullWidth={true}
