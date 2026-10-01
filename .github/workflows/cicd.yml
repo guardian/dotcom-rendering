@@ -3,10 +3,9 @@ name: DCR CICD
 on:
   merge_group:
     types: [checks_requested]
-  pull_request:
   push:
-    branches:
-      - 'main'
+    branches-ignore:
+      - 'gh-readonly-queue/*'
 
 jobs:
   production-container:
