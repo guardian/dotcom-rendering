@@ -7,6 +7,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import ssrFriendly from 'eslint-plugin-ssr-friendly';
 import unicorn from 'eslint-plugin-unicorn';
+import { noUnmanagedZIndex } from './scripts/eslint-rules/no-unmanaged-z-index.mjs';
 
 const rulesToOverrideGuardianConfig = {
 	// use `string[]` for simple arrays, `Array<string>` for complex ones
@@ -91,11 +92,17 @@ export default defineConfig([
 		plugins: {
 			'jsx-a11y': jsxA11y,
 			'custom-elements': customElements,
+			local: {
+				rules: {
+					'no-unmanaged-z-index': noUnmanagedZIndex,
+				},
+			},
 			unicorn,
 			'ssr-friendly': ssrFriendly,
 		},
 
 		rules: {
+			'local/no-unmanaged-z-index': 'error',
 			// React, Hooks & JSX
 			'react-hooks/exhaustive-deps': 'error',
 			'react-hooks/rules-of-hooks': 'error',
