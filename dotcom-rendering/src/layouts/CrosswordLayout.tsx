@@ -34,7 +34,10 @@ import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { isPuzzlesHubV1Enabled } from '../lib/puzzlesHubVersionExperiment';
+import {
+	isPuzzlesHubV1Enabled,
+	isPuzzlesHubV2Enabled,
+} from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -176,7 +179,10 @@ export const CrosswordLayout = (props: Props) => {
 				...props.NAV,
 				subNavSections: {
 					parent: PUZZLES_SUBNAV_PARENT,
-					links: getPuzzlesSubNavLinks(true),
+					links: getPuzzlesSubNavLinks(
+						true,
+						isPuzzlesHubV2Enabled(article.config),
+					),
 				},
 				currentNavLink: 'Crosswords',
 			}

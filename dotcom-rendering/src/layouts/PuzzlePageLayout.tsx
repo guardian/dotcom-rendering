@@ -30,7 +30,10 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { formatPuzzleDate } from '../lib/puzzleDate';
-import { isPuzzlesHubV1Enabled } from '../lib/puzzlesHubVersionExperiment';
+import {
+	isPuzzlesHubV1Enabled,
+	isPuzzlesHubV2Enabled,
+} from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -405,7 +408,10 @@ export const PuzzlePageLayout = ({
 	 */
 	const puzzlesSubNav: SubNavType = {
 		parent: PUZZLES_SUBNAV_PARENT,
-		links: getPuzzlesSubNavLinks(isV1Enabled),
+		links: getPuzzlesSubNavLinks(
+			isV1Enabled,
+			isPuzzlesHubV2Enabled(config),
+		),
 	};
 
 	const puzzleNAV: NavType = {

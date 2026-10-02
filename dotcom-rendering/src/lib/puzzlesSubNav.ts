@@ -21,7 +21,7 @@ import type { LinkType } from '../model/extract-nav';
  * Games" rail) - the `PUZZLES_SUBNAV_PARENT` "Puzzles & games" link
  * is the only one still shown on V0. "Crosswords"/"Word games"/"Logic
  * puzzles" link to their existing production archive pages (`frontend`,
- * not DCR), per explicit design direction; "Trivia & quizzes" links to its
+ * not DCR), per explicit design direction; "Trivia & quizzes" is only added with v2 and links to its
  * (not yet built) DCR hub instead, and is expected to 404 until that work
  * ships, exactly like this layout's other pre-existing "not built yet"
  * placeholder links (see `docs/puzzle-page.md`).
@@ -48,12 +48,21 @@ const PUZZLES_SUBNAV_LINKS: LinkType[] = [
 		longTitle: 'Logic puzzles',
 		url: '/puzzles-and-games/logic-puzzles/archive',
 	},
-	{
-		title: 'Trivia & quizzes',
-		longTitle: 'Trivia & quizzes',
-		url: '/puzzles-and-games/trivia-and-quizzes/archive',
-	},
 ];
 
-export const getPuzzlesSubNavLinks = (isV1Enabled: boolean): LinkType[] =>
-	isV1Enabled ? PUZZLES_SUBNAV_LINKS : [];
+/** Only shown once the v2 tier is on (`isPuzzlesHubV2Enabled`). */
+const TRIVIA_SUBNAV_LINK: LinkType = {
+	title: 'Trivia & quizzes',
+	longTitle: 'Trivia & quizzes',
+	url: '/puzzles-and-games/trivia-and-quizzes/archive',
+};
+
+export const getPuzzlesSubNavLinks = (
+	isV1Enabled: boolean,
+	isV2Enabled: boolean,
+): LinkType[] => {
+	if (!isV1Enabled) return [];
+	return isV2Enabled
+		? [...PUZZLES_SUBNAV_LINKS, TRIVIA_SUBNAV_LINK]
+		: PUZZLES_SUBNAV_LINKS;
+};

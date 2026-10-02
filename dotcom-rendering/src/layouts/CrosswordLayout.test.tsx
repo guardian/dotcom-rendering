@@ -5,6 +5,8 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import {
 	puzzlesHubV1Experiment,
 	puzzlesHubV1Participation,
+	puzzlesHubV2Experiment,
+	puzzlesHubV2Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { enhanceArticleType } from '../types/article';
@@ -35,6 +37,10 @@ jest.mock('../lib/useAB', () => ({
 }));
 
 const v1On = puzzlesHubV1Participation(puzzlesHubV1Experiment.variant);
+const v1AndV2On = {
+	...v1On,
+	...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
+};
 
 const relatedPuzzles: PuzzleItem[] = [
 	{
@@ -169,6 +175,19 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 
 		expect(screen.getAllByText('Word games').length).toBeGreaterThan(0);
 		expect(screen.getAllByText('Logic puzzles').length).toBeGreaterThan(0);
+	});
+
+	it('shows Trivia & quizzes in the sub-nav only when v2 is enabled', () => {
+		const { unmount } = renderCrosswordLayout({
+			serverSideABTests: v1On,
+		});
+		expect(screen.queryAllByText('Trivia & quizzes')).toHaveLength(0);
+		unmount();
+
+		renderCrosswordLayout({ serverSideABTests: v1AndV2On });
+		expect(screen.getAllByText('Trivia & quizzes').length).toBeGreaterThan(
+			0,
+		);
 	});
 
 	it('hides SubMeta (topics, share, reuse) and the footer sub-nav', () => {

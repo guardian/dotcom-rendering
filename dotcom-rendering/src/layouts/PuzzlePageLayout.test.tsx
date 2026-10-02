@@ -4,6 +4,8 @@ import { ConfigProvider } from '../components/ConfigContext';
 import {
 	puzzlesHubV1Experiment,
 	puzzlesHubV1Participation,
+	puzzlesHubV2Experiment,
+	puzzlesHubV2Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
@@ -48,6 +50,10 @@ jest.mock('../lib/useAB', () => ({
 }));
 
 const v1On = puzzlesHubV1Participation(puzzlesHubV1Experiment.variant);
+const v1AndV2On = {
+	...v1On,
+	...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
+};
 
 const renderPuzzlePageLayout = (
 	slug: string,
@@ -142,8 +148,8 @@ describe('PuzzlePageLayout', () => {
 		Crosswords: '/puzzles-and-games/crosswords/archive',
 		'Word games': '/puzzles-and-games/word-games/archive',
 		'Logic puzzles': '/puzzles-and-games/logic-puzzles/archive',
-		'Trivia & quizzes': '/puzzles-and-games/trivia-and-quizzes/archive',
 	};
+	const triviaHref = '/puzzles-and-games/trivia-and-quizzes/archive';
 
 	it('renders only the "Puzzles & games" parent sub-nav link on V0 (default fixture state)', () => {
 		const { container } = renderPuzzlePageLayout('sudoku-easy');
@@ -179,7 +185,7 @@ describe('PuzzlePageLayout', () => {
 			}
 		});
 
-		it('renders all four, with the archive paths for Crosswords/Word games/Logic puzzles, when v1 is enabled', () => {
+		it('renders Crosswords/Word games/Logic puzzles, but not Trivia & quizzes, when only v1 is enabled', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
@@ -194,6 +200,22 @@ describe('PuzzlePageLayout', () => {
 				expect(link).toBeInTheDocument();
 				expect(link).toHaveTextContent(name);
 			}
+			expect(
+				container.querySelector(`a[href="${triviaHref}"]`),
+			).not.toBeInTheDocument();
+		});
+
+		it('also renders Trivia & quizzes when v2 is enabled', () => {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
+				config: {
+					...createPuzzlePage('sudoku-easy').config,
+					serverSideABTests: v1AndV2On,
+				},
+			});
+
+			expect(
+				container.querySelector(`a[href="${triviaHref}"]`),
+			).toHaveTextContent('Trivia & quizzes');
 		});
 	});
 
