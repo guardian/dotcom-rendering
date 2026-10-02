@@ -31,10 +31,10 @@ endpoint/contract at all; it's mentioned here only so example URLs
 elsewhere in this doc stay accurate.
 
 **Access control is enforced on both sides.** `frontend` gates reader
-access to these routes via its existing `PuzzlesHubExperiment`/
-`puzzles-new-hub` AB test before it ever POSTs to DCR. DCR's own
-`/PuzzlePage` endpoint additionally checks the same `puzzles-new-hub`
-participation itself (via `isPuzzlesHubEnabled`, mirroring
+access to these routes via its existing `PuzzlesHubV1Experiment`/
+`puzzles-new-hub-v1` AB test before it ever POSTs to DCR. DCR's own
+`/PuzzlePage` endpoint additionally checks the same `puzzles-new-hub-v1`
+participation itself (via `isPuzzlesHubV1Enabled`, mirroring
 `/PuzzlesPage`'s hub gate) and returns `404` when it isn't enabled for the
 request, so the endpoint isn't left relying solely on `frontend` never
 calling it (see "Hitting it locally" below).
@@ -121,11 +121,11 @@ This starts webpack-dev-server on `http://localhost:3030`
 (`webpack/webpack.config.dev-server.js`).
 
 `src/server/handler.puzzlePage.web.ts` validates the body
-(`validateAsPuzzlePageType`), checks the request's `puzzles-new-hub`
-participation via `isPuzzlesHubEnabled` (`404` if not enabled), looks up
+(`validateAsPuzzlePageType`), checks the request's `puzzles-new-hub-v1`
+participation via `isPuzzlesHubV1Enabled` (`404` if not enabled), looks up
 the `PuzzleConfig` for the request's `slug` (`404` if unknown), and only
 then renders. Fixtures generated below set `serverSideABTests` to
-`{ 'puzzles-new-hub': 'variant' }` so they pass this gate; `NODE_ENV=development`
+`{ 'puzzles-new-hub-v1': 'variant' }` so they pass this gate; `NODE_ENV=development`
 also bypasses it locally.
 
 Generate fixture JSON for all 6 slugs using the `tsx` devDependency (no
@@ -648,78 +648,54 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   task); true calendar/business-logic validity (e.g. "did this puzzle
   actually exist on this date") is not validated anywhere in the stack yet.
 - **DCR's `/PuzzlePage` endpoint now has its own route-level access
-  control**, checking `puzzles-new-hub` participation via
-  `isPuzzlesHubEnabled` and returning `404` when it isn't enabled, in
+  control**, checking `puzzles-new-hub-v1` participation via
+  `isPuzzlesHubV1Enabled` and returning `404` when it isn't enabled, in
   addition to (not instead of) `frontend`'s existing
-  `PuzzlesHubExperiment`/`puzzles-new-hub` gate that decides whether a
+  `PuzzlesHubV1Experiment`/`puzzles-new-hub-v1` gate that decides whether a
   reader ever reaches one of these puzzle-page URLs in the first place.
   DCR also has a real, cumulative, code-change-free kill-switch for
   individual _feature tiers_ within the rendered page, see "Feature-tier
-  rollout gating (v0/v1/v2)" below.
+  rollout gating (v1/v2)" below.
 - **The Puzzles Hub (`src/layouts/PuzzlesLayout.tsx` and friends) is a
   separate, unrelated feature** (a directory/listing page) and is not
   documented in this file.
 
-### Feature-tier rollout gating (v0/v1/v2)
+### Feature-tier rollout gating (v1/v2)
 
-The Puzzles & Games rollout uses a 3-tier, **cumulative** AB-test/
+The Puzzles & Games rollout uses a 2-tier, **cumulative** AB-test/
 kill-switch structure (`ab-testing/config/abTests.ts`), so any rollout
-phase can be turned on/off, or rolled back to an earlier phase, without
-a DCR code change or redeploy. This is per the product rollout plan (v0 =
-w/c 5 Oct launch, v1 = w/c 12 Oct launch, v2 = no date confirmed yet).
+phase can be turned on/off without a DCR code change or redeploy. The
+former `puzzles-new-hub` (v0) test was removed: everything it gated is now
+gated by `puzzles-new-hub-v1`.
 
-- **`puzzles-new-hub` (v0, the master switch)**: gates the baseline
-  experience, the new Puzzles Hub page, and the 6 V0 puzzle pages (sudoku
-  x4, word-wheel, wordiply) with no archive, no calendar, no progress
-  indicators, no sign-in prompt, no related-content rail, and a hub
-  sub-nav with no links yet. Turning this off hides everything, including
-  every later tier.
-- **`puzzles-new-hub-v1`**: the w/c 12 Oct layer, **on top of v0**. It does
-  nothing unless `puzzles-new-hub` is _also_ enabled. Activates: full hub
-  sub-nav links, a sign-in-to-track-progress message, a calendar/archive
-  view for crosswords/logic-puzzles/word-games (not Wordiply), progress
-  indicators, the "More from Puzzles & Games" rail, newsletter signup, and
-  changes to the existing crossword page (print CTA repositioning, "play
-  other puzzles" container).
-- **`puzzles-new-hub-v2`**: a future layer, **on top of v0+v1**. It does
-  nothing unless both `puzzles-new-hub` and `puzzles-new-hub-v1` are
-  _also_ enabled. Activates: On the Ball/Film Reveal (Trivia and Quizzes),
-  a "Most played" container, EventKit-driven navigation, migrating
-  existing crossword pages onto the Puzzle Page template, and
-  search-engine mobile app nudges. No launch date confirmed yet; kept at
-  0% until that work begins.
+- **`puzzles-new-hub-v1`** (the master switch, w/c 12 Oct launch): gates
+  the Puzzles Hub page, the 6 puzzle pages (sudoku x4, word-wheel,
+  wordiply), full hub sub-nav links, a sign-in-to-track-progress message, a
+  calendar/archive view for crosswords/logic-puzzles/word-games (not
+  Wordiply), progress indicators, the "More from Puzzles & Games" rail,
+  newsletter signup, and changes to the existing crossword page (print CTA
+  repositioning, "play other puzzles" container). Turning this off hides
+  everything, including every later tier.
+- **`puzzles-new-hub-v2`**: a future layer, **on top of v1**. It does
+  nothing unless `puzzles-new-hub-v1` is _also_ enabled. Activates: On the
+  Ball/Film Reveal (Trivia and Quizzes), a "Most played" container,
+  EventKit-driven navigation, migrating existing crossword pages onto the
+  Puzzle Page template, and search-engine mobile app nudges. No launch date
+  confirmed yet; kept at 0% until that work begins.
 
-The cumulative design is deliberate: it's impossible to end up with, say,
-v2 features showing while v0 is switched off, since each tier's gate
-function requires every tier below it to also pass. To roll back a single
-phase without a deploy, flip only that tier's `audienceSize`/`status` in
-`abTests.ts` and leave the tier(s) below it untouched (e.g. to roll back
-from v1 to v0, turn off `puzzles-new-hub-v1` only).
+To roll back a single phase without a deploy, flip only that tier's
+`audienceSize`/`status` in `abTests.ts`.
 
 The corresponding gate-check helpers live in DCR:
+`isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled`
+(`src/lib/puzzlesHubVersionExperiment.ts`), cumulative, as described above.
 
-- `isPuzzlesHubEnabled` (`src/lib/puzzlesHubExperiment.ts`), v0 only.
-- `isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled`
-  (`src/lib/puzzlesHubVersionExperiment.ts`), cumulative, as described
-  above.
-
-**Current state**: all three tiers sit at `audienceSize: 0/100`, hidden
-from the public entirely. v0 is now enforced at both layers: `frontend`'s
-route-level `PuzzlesHubExperiment` check decides whether a request reaches
+**Current state**: both tiers sit at `audienceSize: 0/100`, hidden from the
+public entirely. The v1 gate is enforced at both layers: `frontend`'s
+route-level `PuzzlesHubV1Experiment` check decides whether a request reaches
 `/PuzzlePage` at all, and DCR's `handlePuzzlePage` independently checks
-`isPuzzlesHubEnabled` before rendering, so the endpoint isn't left relying
-solely on `frontend` never calling it. On top of that v0 gate,
-`PuzzlePageLayout.tsx`'s "More from Puzzles & Games" rail is further gated
-behind `isPuzzlesHubV1Enabled` (since that rail is v1-scoped, not v0).
-When future v1/v2 work is implemented (calendar, progress indicators,
-sign-in message, on-the-ball/film-reveal, etc.), it should be gated behind
-`isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled` respectively, using the
-helpers above, the same way the related-content rail already is.
-
-**No `frontend` repo changes are needed for any of this.** `frontend`'s
-existing route-level `PuzzlesHubExperiment` gate (already reusing
-`puzzles-new-hub`) is unaffected by `puzzles-new-hub-v1`/
-`puzzles-new-hub-v2` and doesn't need to check them.
+`isPuzzlesHubV1Enabled` before rendering. Future v2 work should be gated
+behind `isPuzzlesHubV2Enabled`.
 
 ### SEO risks to revisit before shipping calendar/archive features
 
