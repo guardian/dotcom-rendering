@@ -22,7 +22,7 @@ type Props = {
  * Wires up side-effects for the {@linkcode ElectionTrackerComponent}. In this
  * case, the Fetch API.
  */
-export const ElectionTracker = (props: Props) => {
+export const ElectionTrackerWrapper = (props: Props) => {
 	const url = safeParseURL(props.electionDataUrl);
 
 	if (!url.ok) {
