@@ -409,6 +409,9 @@ const rowStyles = (
 			}
 			${until.tablet} {
 				display: flex;
+				/* Bleed to the screen edge: undo the host's side padding on the right. */
+				margin-right: calc(var(--puzzles-edge-padding, 10px) * -1);
+				padding-right: var(--puzzles-edge-padding, 10px);
 				overflow-x: auto;
 				scrollbar-width: none;
 				::-webkit-scrollbar {

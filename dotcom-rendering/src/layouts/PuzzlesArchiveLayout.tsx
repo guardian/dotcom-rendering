@@ -136,6 +136,7 @@ const sideAdStyles = css`
  * with the rest of the content.
  */
 const moreStyles = css`
+	--puzzles-edge-padding: ${space[3]}px;
 	margin: 0 -${space[3]}px;
 	padding: 0 ${space[3]}px;
 	border-top: 1px solid ${palette.neutral[86]};
