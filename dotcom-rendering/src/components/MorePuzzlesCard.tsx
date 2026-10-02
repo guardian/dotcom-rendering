@@ -489,7 +489,7 @@ const rowStyles = (
 					display: none;
 				}
 				> li {
-					flex: 0 0 calc((100% - var(--puzzles-gap)) / 2);
+					flex: 0 0 max(220px, calc((100% - var(--puzzles-gap)) / 2));
 					grid-column: auto;
 				}
 			}
