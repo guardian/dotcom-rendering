@@ -234,8 +234,11 @@ const signInCircleStyle = css`
 	border: 1px solid var(--masthead-nav-link-text);
 	background-color: ${themePalette('--masthead-top-bar-background')};
 
-	svg {
-		margin-right: 0;
+	&& > svg {
+		margin: 0;
+		float: none;
+		flex-shrink: 0;
+		transform: none;
 		width: 22.5px;
 		height: 22.6px;
 		pointer-events: none;
@@ -257,14 +260,18 @@ const desktopSignInLabelStyles = css`
 `;
 
 const myAccountButtonStyles = css`
-	padding-left: 0;
-	svg {
-		transform: translateY(1px);
+	${from.tablet} {
+		padding-left: 0;
+		svg {
+			transform: translateY(1px);
+		}
 	}
 `;
 
 const myAccountLabelStyles = css`
-	margin-left: 5px;
+	${from.tablet} {
+		margin-left: 5px;
+	}
 `;
 const dropdownLinkStyles = (showSignInTextOnMobile: boolean) => css`
 	${!showSignInTextOnMobile &&
