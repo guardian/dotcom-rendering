@@ -11,9 +11,7 @@ export const ReaderRevenueDev = ({ shouldHideReaderRevenue }: Props) => {
 		const loadAndRun =
 			<K extends keyof ReaderRevenueDevUtils>(key: K) =>
 			(asExistingSupporter: boolean) =>
-				import(
-					/* webpackChunkName: "readerRevenueDevUtils" */ '../lib/readerRevenueDevUtils'
-				)
+				import('../lib/readerRevenueDevUtils')
 					.then((utils) =>
 						utils[key](
 							asExistingSupporter,

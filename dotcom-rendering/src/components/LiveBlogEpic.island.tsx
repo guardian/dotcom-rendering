@@ -43,9 +43,7 @@ const useEpic = ({ name }: { name: string }) => {
 	const [Epic, setEpic] = useState<React.ElementType<EpicProps>>();
 
 	useEffect(() => {
-		import(
-			/* webpackChunkName: "contributions-liveblog-epic" */ `./marketing/epics/ContributionsLiveblogEpic`
-		)
+		import(`./marketing/epics/ContributionsLiveblogEpic`)
 			.then((epicModule) => {
 				setEpic(() => epicModule.ContributionsLiveblogEpic);
 			})
