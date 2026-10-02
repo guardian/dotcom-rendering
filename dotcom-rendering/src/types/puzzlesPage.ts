@@ -95,7 +95,6 @@ export type PuzzlesArchive = {
 	year: number;
 	month: number;
 	items: PuzzlesArchiveItem[];
-	dataUrl: string;
 	hasError: boolean;
 	moreFrom: PuzzleItem[];
 };

@@ -7,13 +7,15 @@ import {
 	space,
 	textSans14,
 	textSans17,
+	visuallyHidden,
 } from '@guardian/source/foundations';
 import {
+	Spinner,
 	SvgArrowLeftStraight,
 	SvgArrowRightStraight,
 	SvgCheckmark,
 } from '@guardian/source/react-components';
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
 export type CalendarCell = {
@@ -72,6 +74,12 @@ const isArchive = (value: unknown): value is PuzzlesArchive => {
 	return (
 		typeof archive.year === 'number' &&
 		typeof archive.month === 'number' &&
+		typeof archive.selectedPuzzle === 'object' &&
+		archive.selectedPuzzle !== null &&
+		'id' in archive.selectedPuzzle &&
+		typeof archive.selectedPuzzle.id === 'string' &&
+		Array.isArray(archive.puzzles) &&
+		typeof archive.hasError === 'boolean' &&
 		Array.isArray(archive.items) &&
 		archive.items.every(isArchiveItem)
 	);
@@ -184,7 +192,8 @@ const controlsStyles = css`
 	align-items: center;
 	border-top: 1px solid ${palette.neutral[86]};
 	padding-top: ${space[3]}px;
-	button {
+	button,
+	a {
 		display: flex;
 		width: 40px;
 		height: 40px;
@@ -194,13 +203,21 @@ const controlsStyles = css`
 		border: 1px solid ${palette.neutral[20]};
 		border-radius: 50%;
 		background: ${palette.neutral[100]};
+		color: ${palette.neutral[7]};
 		cursor: pointer;
+		text-decoration: none;
 		svg {
 			width: 26px;
 			height: 26px;
 		}
-		:last-of-type {
+		:last-child {
 			justify-self: end;
+		}
+		:disabled,
+		&[aria-disabled='true'] {
+			border-color: ${palette.neutral[86]};
+			color: ${palette.neutral[60]};
+			cursor: not-allowed;
 		}
 	}
 	strong {
@@ -316,6 +333,32 @@ const calendarStyles = css`
 	}
 `;
 
+const monthLabelStyles = css`
+	position: relative;
+	justify-self: center;
+	padding: 0 28px;
+	text-align: center;
+`;
+
+const loadingIndicatorStyles = css`
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	width: 20px;
+	height: 20px;
+`;
+
+const emptyMonthStyles = css`
+	${textSans14};
+	margin-top: ${space[4]}px;
+	a {
+		color: ${palette.news[400]};
+		text-decoration: underline;
+	}
+`;
+
 const legendStyles = css`
 	display: flex;
 	gap: ${space[4]}px;
@@ -369,6 +412,31 @@ const moveMonth = (year: number, month: number, delta: number) => {
 	return { year: value.getUTCFullYear(), month: value.getUTCMonth() + 1 };
 };
 
+export const canNavigateToNextMonth = (
+	year: number,
+	month: number,
+	today = new Date(),
+): boolean =>
+	year < today.getFullYear() ||
+	(year === today.getFullYear() && month < today.getMonth() + 1);
+
+const cacheKey = (puzzleId: string, year: number, month: number): string =>
+	`${puzzleId}-${year}-${month}`;
+
+export const archivePageUrl = (
+	category: PuzzlesArchive['category'],
+	puzzleId: string,
+	year: number,
+	month: number,
+): string => {
+	const search = new URLSearchParams({
+		puzzle: puzzleId,
+		year: String(year),
+		month: String(month),
+	});
+	return `/puzzles-and-games/${category}/archive?${search.toString()}`;
+};
+
 export const PuzzlesArchiveCalendar = ({
 	initialArchive,
 }: {
@@ -377,9 +445,17 @@ export const PuzzlesArchiveCalendar = ({
 	const [archive, setArchive] = useState(initialArchive);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(initialArchive.hasError);
+	const requests = useRef({ id: 0 });
 	const cache = useRef(
 		new Map([
-			[`${initialArchive.year}-${initialArchive.month}`, initialArchive],
+			[
+				cacheKey(
+					initialArchive.selectedPuzzle.id,
+					initialArchive.year,
+					initialArchive.month,
+				),
+				initialArchive,
+			],
 		]),
 	);
 	const cells = buildCalendarCells(
@@ -387,43 +463,154 @@ export const PuzzlesArchiveCalendar = ({
 		archive.month,
 		archive.items,
 	);
+	const hasItemsInMonth = cells.some((cell) => cell?.item !== undefined);
+	const puzzleLabel =
+		archive.category === 'crosswords'
+			? `${archive.selectedPuzzle.title.replace(/ crosswords?$/i, '')} crosswords`
+			: `${archive.selectedPuzzle.title} puzzles`;
 	const recent = [...archive.items]
 		.sort((left, right) => right.date.localeCompare(left.date))
 		.slice(0, 3);
+	const canSelectNextMonth = canNavigateToNextMonth(
+		archive.year,
+		archive.month,
+	);
 
-	const selectMonth = async (delta: number) => {
+	const loadArchive = useCallback(
+		async (
+			year: number,
+			month: number,
+			puzzleId: string,
+		): Promise<PuzzlesArchive | undefined> => {
+			const currentRequest = ++requests.current.id;
+			const key = cacheKey(puzzleId, year, month);
+			const cached = cache.current.get(key);
+			if (cached && !cached.hasError) {
+				setArchive(cached);
+				setError(cached.hasError);
+				setLoading(false);
+				return cached;
+			}
+
+			setLoading(true);
+			setError(false);
+			try {
+				// Query parameters are stripped by the CDN in CODE/PROD.
+				const url = new URL(
+					`/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
+					window.location.origin,
+				);
+				const response = await fetch(url, {
+					credentials: 'same-origin',
+				});
+				if (!response.ok) {
+					throw new Error(
+						`Archive request failed: ${response.status}`,
+					);
+				}
+				const value: unknown = await response.json();
+				if (
+					!isArchive(value) ||
+					value.category !== initialArchive.category ||
+					value.selectedPuzzle.id !== puzzleId ||
+					value.year !== year ||
+					value.month !== month ||
+					value.hasError
+				) {
+					throw new Error('Invalid archive response');
+				}
+				if (currentRequest !== requests.current.id) return undefined;
+				cache.current.set(key, value);
+				setArchive(value);
+				setError(value.hasError);
+				return value;
+			} catch {
+				if (currentRequest === requests.current.id) setError(true);
+				return undefined;
+			} finally {
+				if (currentRequest === requests.current.id) setLoading(false);
+			}
+		},
+		[initialArchive.category],
+	);
+
+	useEffect(() => {
+		const pendingRequests = requests.current;
+		// The browser retains the query even when the CDN removes it upstream.
+		// Restore deep links after hydration, and Back/Forward without a reload.
+		const restoreSelection = () => {
+			const params = new URLSearchParams(window.location.search);
+			const puzzle = params.get('puzzle');
+			const selectedPuzzle =
+				initialArchive.puzzles.find(
+					(candidate) =>
+						candidate.id === puzzle ||
+						candidate.set === puzzle ||
+						candidate.slug?.split('/').pop() === puzzle,
+				) ?? initialArchive.selectedPuzzle;
+			const year = Number(params.get('year'));
+			const month = Number(params.get('month'));
+			const today = new Date();
+			const validMonth =
+				Number.isInteger(year) &&
+				year > 0 &&
+				Number.isInteger(month) &&
+				month >= 1 &&
+				month <= 12 &&
+				(year < today.getFullYear() ||
+					(year === today.getFullYear() &&
+						month <= today.getMonth() + 1));
+			void loadArchive(
+				validMonth ? year : initialArchive.year,
+				validMonth ? month : initialArchive.month,
+				selectedPuzzle.id,
+			);
+		};
+		restoreSelection();
+		window.addEventListener('popstate', restoreSelection);
+		return () => {
+			window.removeEventListener('popstate', restoreSelection);
+			++pendingRequests.id;
+		};
+	}, [initialArchive, loadArchive]);
+
+	const selectMonth = async (delta: number, pageUrl: string) => {
+		if (delta > 0 && !canSelectNextMonth) return;
 		const next = moveMonth(archive.year, archive.month, delta);
-		const key = `${next.year}-${next.month}`;
-		const cached = cache.current.get(key);
-		if (cached) {
-			setArchive(cached);
-			setError(cached.hasError);
+		const selected = await loadArchive(
+			next.year,
+			next.month,
+			archive.selectedPuzzle.id,
+		);
+		if (selected) window.history.pushState({}, '', pageUrl);
+	};
+
+	const selectPuzzle = async (puzzleId: string, pageUrl: string) => {
+		if (puzzleId === archive.selectedPuzzle.id && !error && !loading) {
 			return;
 		}
-
-		setLoading(true);
-		setError(false);
-		try {
-			const url = new URL(archive.dataUrl, window.location.origin);
-			url.searchParams.set('year', String(next.year));
-			url.searchParams.set('month', String(next.month));
-			const response = await fetch(url, { credentials: 'same-origin' });
-			if (!response.ok) {
-				throw new Error(`Archive request failed: ${response.status}`);
-			}
-			const value: unknown = await response.json();
-			if (!isArchive(value)) {
-				throw new Error('Invalid archive response');
-			}
-			cache.current.set(key, value);
-			setArchive(value);
-			setError(value.hasError);
-		} catch {
-			setError(true);
-		} finally {
-			setLoading(false);
-		}
+		const selected = await loadArchive(
+			archive.year,
+			archive.month,
+			puzzleId,
+		);
+		if (selected) window.history.pushState({}, '', pageUrl);
 	};
+
+	const previousMonth = moveMonth(archive.year, archive.month, -1);
+	const previousMonthUrl = archivePageUrl(
+		archive.category,
+		archive.selectedPuzzle.id,
+		previousMonth.year,
+		previousMonth.month,
+	);
+	const nextMonth = moveMonth(archive.year, archive.month, 1);
+	const nextMonthUrl = archivePageUrl(
+		archive.category,
+		archive.selectedPuzzle.id,
+		nextMonth.year,
+		nextMonth.month,
+	);
 
 	return (
 		<section
@@ -432,19 +619,40 @@ export const PuzzlesArchiveCalendar = ({
 		>
 			<div aria-hidden="true" css={linesStyles} />
 			<nav aria-label="Puzzle types" css={tabsStyles}>
-				{archive.puzzles.map((puzzle) => (
-					<a
-						aria-current={
-							puzzle.id === archive.selectedPuzzle.id
-								? 'page'
-								: undefined
-						}
-						href={`/puzzles-and-games/${archive.category}/archive?puzzle=${encodeURIComponent(puzzle.id)}`}
-						key={puzzle.id}
-					>
-						{puzzle.title}
-					</a>
-				))}
+				{archive.puzzles.map((puzzle) => {
+					const href = archivePageUrl(
+						archive.category,
+						puzzle.id,
+						archive.year,
+						archive.month,
+					);
+					return (
+						<a
+							aria-current={
+								puzzle.id === archive.selectedPuzzle.id
+									? 'page'
+									: undefined
+							}
+							href={href}
+							key={puzzle.id}
+							onClick={(event) => {
+								if (
+									event.button !== 0 ||
+									event.metaKey ||
+									event.ctrlKey ||
+									event.shiftKey ||
+									event.altKey
+								) {
+									return;
+								}
+								event.preventDefault();
+								void selectPuzzle(puzzle.id, href);
+							}}
+						>
+							{puzzle.title}
+						</a>
+					);
+				})}
 			</nav>
 			<h2 css={titleStyles}>{archive.selectedPuzzle.title}</h2>
 			<div css={recentStyles}>
@@ -456,39 +664,98 @@ export const PuzzlesArchiveCalendar = ({
 								: archive.selectedPuzzle.title}
 						</strong>
 						<span>
-							{item.setterName
-								? `By: ${item.setterName}`
-								: item.date}
+							<time dateTime={item.date}>{item.date}</time>
 						</span>
+						{item.setterName && (
+							<span> · By: {item.setterName}</span>
+						)}
 					</a>
 				))}
 			</div>
 			<div css={controlsStyles}>
-				<button
+				<a
 					aria-label="Previous month"
-					onClick={() => void selectMonth(-1)}
-					type="button"
+					aria-disabled={loading}
+					href={previousMonthUrl}
+					onClick={(event) => {
+						if (loading) {
+							event.preventDefault();
+							return;
+						}
+						if (
+							event.button !== 0 ||
+							event.metaKey ||
+							event.ctrlKey ||
+							event.shiftKey ||
+							event.altKey
+						) {
+							return;
+						}
+						event.preventDefault();
+						void selectMonth(-1, previousMonthUrl);
+					}}
 				>
 					<SvgArrowLeftStraight />
-				</button>
-				<strong aria-live="polite">
-					{monthName(archive.year, archive.month)}
-				</strong>
-				<button
-					aria-label="Next month"
-					onClick={() => void selectMonth(1)}
-					type="button"
-				>
-					<SvgArrowRightStraight />
-				</button>
+				</a>
+				<div css={monthLabelStyles}>
+					<strong aria-live="polite">
+						{monthName(archive.year, archive.month)}
+					</strong>
+					<span css={loadingIndicatorStyles} role="status">
+						<span
+							css={css`
+								${visuallyHidden}
+							`}
+						>
+							{loading ? 'Loading archive…' : ''}
+						</span>
+						{loading && (
+							<span aria-hidden="true">
+								<Spinner size="small" />
+							</span>
+						)}
+					</span>
+				</div>
+				{canSelectNextMonth ? (
+					<a
+						aria-label="Next month"
+						aria-disabled={loading}
+						href={nextMonthUrl}
+						onClick={(event) => {
+							if (loading) {
+								event.preventDefault();
+								return;
+							}
+							if (
+								event.button !== 0 ||
+								event.metaKey ||
+								event.ctrlKey ||
+								event.shiftKey ||
+								event.altKey
+							) {
+								return;
+							}
+							event.preventDefault();
+							void selectMonth(1, nextMonthUrl);
+						}}
+					>
+						<SvgArrowRightStraight />
+					</a>
+				) : (
+					<button
+						aria-label="Next month"
+						disabled={true}
+						type="button"
+					>
+						<SvgArrowRightStraight />
+					</button>
+				)}
 			</div>
-			{loading && <p role="status">Loading archive…</p>}
-			{error && (
-				<p role="alert">
-					The archive could not be loaded. Please try another month.
-				</p>
-			)}
-			<div css={calendarStyles} data-testid="archive-calendar">
+			<div
+				css={calendarStyles}
+				data-testid="archive-calendar"
+				aria-busy={loading}
+			>
 				{['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => (
 					<div className="weekday" key={day}>
 						{day}
@@ -543,6 +810,41 @@ export const PuzzlesArchiveCalendar = ({
 					);
 				})}
 			</div>
+			{error && (
+				<p role="alert">
+					The archive could not be loaded. Please try another month.
+				</p>
+			)}
+			{!hasItemsInMonth && !archive.hasError && (
+				<div
+					css={emptyMonthStyles}
+					hidden={error}
+					style={{ visibility: loading ? 'hidden' : 'visible' }}
+				>
+					<p>
+						No {puzzleLabel} are available for{' '}
+						{monthName(archive.year, archive.month)}.
+					</p>
+					<a
+						href={previousMonthUrl}
+						onClick={(event) => {
+							if (
+								event.button !== 0 ||
+								event.metaKey ||
+								event.ctrlKey ||
+								event.shiftKey ||
+								event.altKey
+							) {
+								return;
+							}
+							event.preventDefault();
+							void selectMonth(-1, previousMonthUrl);
+						}}
+					>
+						View previous month
+					</a>
+				</div>
+			)}
 			<div css={legendStyles}>
 				<span className="available">Available</span>
 				<span className="completed">Played</span>
