@@ -29,7 +29,7 @@ catalog:
   rollup-plugin-esbuild: 6.2.1
   tslib: 2.6.2
   type-fest: 5.9.0
-  typescript: 6.0.3
+  typescript: 7.0.2
   valibot: 1.4.2
 minimumReleaseAge: 2880 # 2 day minimum package version age
 minimumReleaseAgeExclude:
