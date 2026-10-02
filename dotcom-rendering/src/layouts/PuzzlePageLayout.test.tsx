@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { ConfigProvider } from '../components/ConfigContext';
-import { PUZZLES_HUB_EXPERIMENT } from '../lib/puzzlesHubExperiment';
 import {
 	puzzlesHubV1Experiment,
 	puzzlesHubV1Participation,
@@ -48,10 +47,7 @@ jest.mock('../lib/useAB', () => ({
 	useAB: jest.fn().mockReturnValue(null),
 }));
 
-const v0AndV1On = {
-	[PUZZLES_HUB_EXPERIMENT]: 'variant',
-	...puzzlesHubV1Participation(puzzlesHubV1Experiment.variant),
-};
+const v1On = puzzlesHubV1Participation(puzzlesHubV1Experiment.variant);
 
 const renderPuzzlePageLayout = (
 	slug: string,
@@ -166,13 +162,11 @@ describe('PuzzlePageLayout', () => {
 	});
 
 	describe('sub-nav child links (Crosswords/Word games/Logic puzzles/Trivia & quizzes, v1-scoped feature)', () => {
-		it('does not render when v1 is enabled but v0 is not', () => {
+		it('does not render when v1 is not enabled', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: puzzlesHubV1Participation(
-						puzzlesHubV1Experiment.variant,
-					),
+					serverSideABTests: {},
 				},
 			});
 
@@ -183,26 +177,11 @@ describe('PuzzlePageLayout', () => {
 			}
 		});
 
-		it('does not render when v0 is enabled but v1 is not', () => {
+		it('renders all four, with the production archive URLs for Crosswords/Word games/Logic puzzles, when v1 is enabled', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: { [PUZZLES_HUB_EXPERIMENT]: 'variant' },
-				},
-			});
-
-			for (const href of Object.values(subNavChildHrefs)) {
-				expect(
-					container.querySelector(`a[href="${href}"]`),
-				).not.toBeInTheDocument();
-			}
-		});
-
-		it('renders all four, with the production archive URLs for Crosswords/Word games/Logic puzzles, when both v0 and v1 are enabled', () => {
-			const { container } = renderPuzzlePageLayout('sudoku-easy', {
-				config: {
-					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v0AndV1On,
+					serverSideABTests: v1On,
 				},
 			});
 
@@ -241,11 +220,11 @@ describe('PuzzlePageLayout', () => {
 	});
 
 	describe('"More from Puzzles & Games" rail (v1-scoped feature)', () => {
-		it('renders the rail when data is present AND v0+v1 are both enabled', () => {
+		it('renders the rail when data is present AND v1 is enabled', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v0AndV1On,
+					serverSideABTests: v1On,
 				},
 			});
 
@@ -256,11 +235,11 @@ describe('PuzzlePageLayout', () => {
 			).toBeInTheDocument();
 		});
 
-		it('does not render the rail when moreFromPuzzlesAndGames is empty, even with v0+v1 enabled', () => {
+		it('does not render the rail when moreFromPuzzlesAndGames is empty, even with v1 enabled', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v0AndV1On,
+					serverSideABTests: v1On,
 				},
 				instance: {
 					...createPuzzlePage('sudoku-easy').instance,
@@ -275,7 +254,7 @@ describe('PuzzlePageLayout', () => {
 			).not.toBeInTheDocument();
 		});
 
-		it('does not render the rail when data is present but neither v0 nor v1 is enabled (default fixture state)', () => {
+		it('does not render the rail when data is present but v1 is not enabled (default fixture state)', () => {
 			renderPuzzlePageLayout('sudoku-easy');
 
 			expect(
@@ -285,28 +264,11 @@ describe('PuzzlePageLayout', () => {
 			).not.toBeInTheDocument();
 		});
 
-		it('does not render the rail when data is present and v1 is enabled but v0 is not', () => {
+		it('does not render the rail when data is present and v1 is not enabled', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: puzzlesHubV1Participation(
-						puzzlesHubV1Experiment.variant,
-					),
-				},
-			});
-
-			expect(
-				screen.queryByRole('heading', {
-					name: 'More from Puzzles & games',
-				}),
-			).not.toBeInTheDocument();
-		});
-
-		it('does not render the rail when data is present and v0 is enabled but v1 is not', () => {
-			renderPuzzlePageLayout('sudoku-easy', {
-				config: {
-					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: { [PUZZLES_HUB_EXPERIMENT]: 'variant' },
+					serverSideABTests: {},
 				},
 			});
 

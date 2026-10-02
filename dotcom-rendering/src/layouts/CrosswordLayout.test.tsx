@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import { Standard as StandardFixture } from '../../fixtures/generated/fe-articles/Standard';
 import { ConfigProvider } from '../components/ConfigContext';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { PUZZLES_HUB_EXPERIMENT } from '../lib/puzzlesHubExperiment';
 import {
 	puzzlesHubV1Experiment,
 	puzzlesHubV1Participation,
@@ -35,10 +34,7 @@ jest.mock('../lib/useAB', () => ({
 	useAB: jest.fn().mockReturnValue(null),
 }));
 
-const v0AndV1On = {
-	[PUZZLES_HUB_EXPERIMENT]: 'variant',
-	...puzzlesHubV1Participation(puzzlesHubV1Experiment.variant),
-};
+const v1On = puzzlesHubV1Participation(puzzlesHubV1Experiment.variant);
 
 const relatedPuzzles: PuzzleItem[] = [
 	{
@@ -102,10 +98,10 @@ const renderCrosswordLayout = ({
 };
 
 describe('CrosswordLayout "More from Puzzles & games" rail', () => {
-	it('renders the rail when data is present and v0+v1 are enabled', () => {
+	it('renders the rail when data is present and v1 is enabled', () => {
 		renderCrosswordLayout({
 			moreFromPuzzlesAndGames: relatedPuzzles,
-			serverSideABTests: v0AndV1On,
+			serverSideABTests: v1On,
 		});
 
 		expect(
@@ -115,8 +111,8 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 		expect(screen.getByText('Mini crossword')).toBeInTheDocument();
 	});
 
-	it('does not render the rail when the data is absent, even with v0+v1 enabled', () => {
-		renderCrosswordLayout({ serverSideABTests: v0AndV1On });
+	it('does not render the rail when the data is absent, even with v1 enabled', () => {
+		renderCrosswordLayout({ serverSideABTests: v1On });
 
 		expect(
 			screen.queryByRole('heading', {
@@ -125,10 +121,10 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 		).not.toBeInTheDocument();
 	});
 
-	it('does not render the rail when the data is empty, even with v0+v1 enabled', () => {
+	it('does not render the rail when the data is empty, even with v1 enabled', () => {
 		renderCrosswordLayout({
 			moreFromPuzzlesAndGames: [],
-			serverSideABTests: v0AndV1On,
+			serverSideABTests: v1On,
 		});
 
 		expect(
@@ -141,7 +137,7 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 	it('does not render the rail when v1 is disabled, even with data present', () => {
 		renderCrosswordLayout({
 			moreFromPuzzlesAndGames: relatedPuzzles,
-			serverSideABTests: { [PUZZLES_HUB_EXPERIMENT]: 'variant' },
+			serverSideABTests: {},
 		});
 
 		expect(
@@ -152,9 +148,9 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 	});
 });
 
-describe('CrosswordLayout Puzzle Page design (v0 + v1)', () => {
+describe('CrosswordLayout Puzzle Page design (v1)', () => {
 	it('uses the puzzles sub-nav instead of the crosswords one', () => {
-		renderCrosswordLayout({ serverSideABTests: v0AndV1On });
+		renderCrosswordLayout({ serverSideABTests: v1On });
 
 		expect(screen.getAllByText('Word games').length).toBeGreaterThan(0);
 		expect(screen.getAllByText('Logic puzzles').length).toBeGreaterThan(0);
@@ -162,7 +158,7 @@ describe('CrosswordLayout Puzzle Page design (v0 + v1)', () => {
 
 	it('hides SubMeta (topics, share, reuse) and the footer sub-nav', () => {
 		const { container } = renderCrosswordLayout({
-			serverSideABTests: v0AndV1On,
+			serverSideABTests: v1On,
 		});
 
 		expect(
@@ -176,7 +172,7 @@ describe('CrosswordLayout Puzzle Page design (v0 + v1)', () => {
 
 	it('keeps the original design when v1 is disabled', () => {
 		renderCrosswordLayout({
-			serverSideABTests: { [PUZZLES_HUB_EXPERIMENT]: 'variant' },
+			serverSideABTests: {},
 		});
 
 		expect(screen.queryAllByText('Word games')).toHaveLength(0);
@@ -186,7 +182,7 @@ describe('CrosswordLayout Puzzle Page design (v0 + v1)', () => {
 	});
 
 	it('applies the new design even when there is no rail data', () => {
-		renderCrosswordLayout({ serverSideABTests: v0AndV1On });
+		renderCrosswordLayout({ serverSideABTests: v1On });
 
 		expect(
 			screen.queryByRole('heading', {
