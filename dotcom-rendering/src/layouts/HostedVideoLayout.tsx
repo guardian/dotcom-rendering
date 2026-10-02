@@ -54,8 +54,6 @@ const mainMediaStyles = css`
 	${grid.column.all}
 	grid-row-start: 1;
 	background-color: ${palette.neutral[10]};
-
-	z-index: 1;
 	overflow: hidden;
 	max-height: 600px;
 `;
@@ -135,7 +133,6 @@ const onwardContentStyles = css`
 `;
 
 const ctaStyles = css`
-	z-index: 1;
 	${grid.column.all}
 	grid-row-start: 7;
 
