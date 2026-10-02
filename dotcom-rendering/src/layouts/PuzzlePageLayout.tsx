@@ -130,7 +130,7 @@ const puzzleHeadlineNames: Record<string, string> = {
  * series/section link's href as `${guardianBaseURL}/${...}`, so this is
  * deliberately left empty rather than hardcoded to the production origin:
  * the series ("Sudoku") and section ("Logic puzzles") links then resolve to
- * root-relative paths (e.g. `/puzzles-and-games/logic-puzzles`), same-origin
+ * root-relative paths (e.g. `/puzzles-and-games/logic-puzzles/archive`), same-origin
  * on every environment, exactly like this layout's own hardcoded
  * `PUZZLES_SUBNAV_LINKS` above - rather than always pointing at
  * `https://www.theguardian.com` and hijacking local/test environments into
@@ -492,7 +492,7 @@ export const PuzzlePageLayout = ({
 									format={puzzlePageFormat}
 									tags={puzzleFamilyTag}
 									sectionLabel={labelText}
-									sectionUrl={`puzzles-and-games/${puzzleConfig.puzzleGroup}`}
+									sectionUrl={`puzzles-and-games/${puzzleConfig.puzzleGroup}/archive`}
 									guardianBaseURL={GUARDIAN_BASE_URL}
 								/>
 							</GridItem>

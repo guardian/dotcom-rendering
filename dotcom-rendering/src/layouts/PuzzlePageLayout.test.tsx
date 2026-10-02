@@ -126,15 +126,16 @@ describe('PuzzlePageLayout', () => {
 		);
 		expect(
 			container.querySelector('a[data-component="section"]'),
-		).toHaveAttribute('href', '/puzzles-and-games/logic-puzzles');
+		).toHaveAttribute('href', '/puzzles-and-games/logic-puzzles/archive');
 	});
 
 	/**
 	 * "Logic puzzles" is ambiguous by accessible name alone: the
 	 * `ArticleTitle` section kicker link (`data-component="section"`,
 	 * relative href, always rendered - see the test above) has the exact
-	 * same text as this sub-nav child link. Sub-nav child links are looked
-	 * up by their (unique) href instead of by role/name to avoid matching
+	 * same text (and, for Logic puzzles/Word games, the same archive href) as
+	 * this sub-nav child link. Sub-nav child links are looked
+	 * up by href, excluding the section kicker, instead of by role/name to avoid matching
 	 * the wrong element.
 	 */
 	const subNavChildHrefs = {
@@ -153,7 +154,9 @@ describe('PuzzlePageLayout', () => {
 
 		for (const href of Object.values(subNavChildHrefs)) {
 			expect(
-				container.querySelector(`a[href="${href}"]`),
+				container.querySelector(
+					`a[href="${href}"]:not([data-component="section"])`,
+				),
 			).not.toBeInTheDocument();
 		}
 	});
@@ -169,7 +172,9 @@ describe('PuzzlePageLayout', () => {
 
 			for (const href of Object.values(subNavChildHrefs)) {
 				expect(
-					container.querySelector(`a[href="${href}"]`),
+					container.querySelector(
+						`a[href="${href}"]:not([data-component="section"])`,
+					),
 				).not.toBeInTheDocument();
 			}
 		});
@@ -183,7 +188,9 @@ describe('PuzzlePageLayout', () => {
 			});
 
 			for (const [name, href] of Object.entries(subNavChildHrefs)) {
-				const link = container.querySelector(`a[href="${href}"]`);
+				const link = container.querySelector(
+					`a[href="${href}"]:not([data-component="section"])`,
+				);
 				expect(link).toBeInTheDocument();
 				expect(link).toHaveTextContent(name);
 			}
