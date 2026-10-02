@@ -9,22 +9,9 @@ on:
         description: 'The digest of the generated container image'
         value: ${{ jobs.build-production-image.outputs.imageDigest }}
 jobs:
-  facts:
-    runs-on: ubuntu-slim
-    permissions: {} # This job doesn't need any permissions. Explicitly set it to an empty object to avoid inheriting any default permissions of the workflow.
-    outputs:
-      branchName: ${{ steps.get-build-facts.outputs.branchName }}
-      buildNumber: ${{ steps.get-build-facts.outputs.buildNumber }}
-      commitSha: ${{ steps.get-build-facts.outputs.commitSha }}
-    steps:
-      - uses: guardian/actions-build-facts@v0.0.1
-        id: get-build-facts
-
   build-production-image:
     # ECS tasks run on ARM, so we use the arm runner to natively build the containaer image (rather than rely on emulation)
     runs-on: ubuntu-24.04-arm
-    needs:
-      - facts
     permissions:
       contents: read
       id-token: write # Required to exchange for AWS credentials using OIDC
@@ -35,15 +22,13 @@ jobs:
       - uses: actions/checkout@v7
       - name: Add commit hash for PRout
         working-directory: dotcom-rendering
-        run: echo 'export const GIT_COMMIT_HASH = "${{ needs.facts.outputs.commitSha }}";' > src/server/prout.ts
+        run: echo 'export const GIT_COMMIT_HASH = "${{ github.sha }}";' > src/server/prout.ts
       - name: Build image
         run: docker buildx build --platform linux/arm64 -f Production.dockerfile -t ${{ github.repository }}:latest .
       - name: Publish Image
-        uses: guardian/actions-publish-image@v0.0.8
+        uses: guardian/actions-publish-image/push@multi-action
         id: publish-image
         with:
           roleArn: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
-          branchName: ${{ needs.facts.outputs.branchName }}
-          buildNumber: ${{ needs.facts.outputs.buildNumber }}
-          commitSha: ${{ needs.facts.outputs.commitSha }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
+          appName: dotcom-rendering
