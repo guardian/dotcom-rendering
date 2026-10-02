@@ -41,6 +41,7 @@ interface Props {
 	dataLinkName: string;
 	cssOverrides?: SerializedStyles;
 	linkCssOverrides?: SerializedStyles;
+	buttonCssOverrides?: SerializedStyles;
 	children?: React.ReactNode;
 	renderTrigger?: (isExpanded: boolean) => React.ReactNode;
 	ariaLabel?: string;
@@ -401,6 +402,7 @@ export const Dropdown = ({
 	dataLinkName,
 	cssOverrides,
 	linkCssOverrides,
+	buttonCssOverrides,
 	children,
 	renderTrigger,
 	ariaLabel,
@@ -517,6 +519,7 @@ export const Dropdown = ({
 						css={[
 							buttonStyles,
 							cssOverrides,
+							buttonCssOverrides,
 							isExpanded && buttonExpanded,
 						]}
 						aria-label={ariaLabel}

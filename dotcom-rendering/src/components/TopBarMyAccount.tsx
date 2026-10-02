@@ -256,6 +256,18 @@ const desktopAccountLabelStyles = css`
 	}
 `;
 
+const myAccountButtonStyles = css`
+	> span:first-child {
+		display: contents;
+	}
+	padding-left: 0;
+
+	> span:first-child > svg {
+		margin-right: calc(${space[1]}px + 5px);
+		transform: translateY(1px);
+	}
+`;
+
 const dropdownLinkStyles = (showSignInTextOnMobile: boolean) => css`
 	${!showSignInTextOnMobile &&
 	css`
@@ -306,7 +318,6 @@ const SignedInWithNotifications = ({
 		<div
 			css={[
 				myAccountLinkStyles,
-				desktopAccountLabelStyles,
 				!showSignInTextOnMobile && iconInAccountStyles,
 			]}
 		>
@@ -361,6 +372,7 @@ const SignedInWithNotifications = ({
 					'my account',
 				)}
 				cssOverrides={dropDownOverrides(showSignInTextOnMobile)}
+				buttonCssOverrides={myAccountButtonStyles}
 				linkCssOverrides={dropdownLinkStyles(showSignInTextOnMobile)}
 			/>
 		</div>

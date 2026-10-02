@@ -176,7 +176,7 @@ export const SignedInNoText = () => {
 };
 SignedInNoText.parameters = {
 	chromatic: {
-		viewports: [breakpoints.mobile][breakpoints.desktop],
+		viewports: [breakpoints.mobile, breakpoints.desktop, breakpoints.wide],
 	},
 };
 
@@ -223,6 +223,6 @@ export const SignedOutNoText = () => {
 };
 SignedOutNoText.parameters = {
 	chromatic: {
-		viewports: [breakpoints.mobile][breakpoints.desktop],
+		viewports: [breakpoints.mobile, breakpoints.desktop, breakpoints.wide],
 	},
 };
