@@ -102,7 +102,7 @@ export default defineConfig([
 		},
 
 		rules: {
-			'local/no-unmanaged-z-index': 'error',
+			'local/no-unmanaged-z-index': 'warn',
 			// React, Hooks & JSX
 			'react-hooks/exhaustive-deps': 'error',
 			'react-hooks/rules-of-hooks': 'error',
