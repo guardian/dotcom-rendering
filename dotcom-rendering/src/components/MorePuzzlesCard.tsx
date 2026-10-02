@@ -407,7 +407,7 @@ const rowStyles = (
 				content: '';
 				pointer-events: none;
 			}
-			${until.phablet} {
+			${until.tablet} {
 				display: flex;
 				overflow-x: auto;
 				scrollbar-width: none;
@@ -415,7 +415,7 @@ const rowStyles = (
 					display: none;
 				}
 				> li {
-					flex: 0 0 calc((100% - 16px) / 2);
+					flex: 0 0 calc((100% - var(--puzzles-gap)) / 2);
 					grid-column: auto;
 				}
 			}
