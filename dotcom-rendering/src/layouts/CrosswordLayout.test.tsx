@@ -62,14 +62,29 @@ const relatedPuzzles: PuzzleItem[] = [
 const renderCrosswordLayout = ({
 	moreFromPuzzlesAndGames,
 	serverSideABTests = {},
+	withQuickSeries = false,
 }: {
 	moreFromPuzzlesAndGames?: PuzzleItem[];
 	serverSideABTests?: Record<string, string>;
+	withQuickSeries?: boolean;
 }) => {
 	const article = enhanceArticleType(
 		{
 			...StandardFixture,
 			moreFromPuzzlesAndGames,
+			...(withQuickSeries && {
+				tags: [
+					{
+						id: 'crosswords/series/quick',
+						type: 'Series',
+						title: 'Quick',
+					},
+				],
+				crossword: {
+					crosswordType: 'quick',
+					entries: [],
+				} as unknown as typeof StandardFixture.crossword,
+			}),
 			config: { ...StandardFixture.config, serverSideABTests },
 		},
 		'Web',
@@ -179,6 +194,54 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 		expect(
 			screen.getByText('Explore more on these topics'),
 		).toBeInTheDocument();
+	});
+
+	it('points the title section link at the relative crosswords archive', () => {
+		const { container } = renderCrosswordLayout({
+			serverSideABTests: v1On,
+		});
+
+		expect(
+			container.querySelector('a[data-component="section"]'),
+		).toHaveAttribute('href', '/puzzles-and-games/crosswords/archive');
+	});
+
+	it('points the title series link at the archive filtered to the crossword type', () => {
+		const { container } = renderCrosswordLayout({
+			serverSideABTests: v1On,
+			withQuickSeries: true,
+		});
+
+		expect(
+			container.querySelector('a[data-component="series"]'),
+		).toHaveAttribute(
+			'href',
+			'/puzzles-and-games/crosswords/archive?puzzle=quick',
+		);
+	});
+
+	it('keeps the original title series link when v1 is disabled', () => {
+		const { container } = renderCrosswordLayout({
+			serverSideABTests: {},
+			withQuickSeries: true,
+		});
+
+		expect(
+			container.querySelector('a[data-component="series"]'),
+		).toHaveAttribute(
+			'href',
+			expect.stringMatching(/crosswords\/series\/quick$/),
+		);
+	});
+
+	it('keeps the original title section link when v1 is disabled', () => {
+		const { container } = renderCrosswordLayout({
+			serverSideABTests: {},
+		});
+
+		expect(
+			container.querySelector('a[data-component="section"]'),
+		).not.toHaveAttribute('href', '/puzzles-and-games/crosswords/archive');
 	});
 
 	it('applies the new design even when there is no rail data', () => {

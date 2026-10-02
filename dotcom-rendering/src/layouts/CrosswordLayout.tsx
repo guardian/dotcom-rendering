@@ -141,6 +141,33 @@ export const CrosswordLayout = (props: Props) => {
 	 */
 	const isPuzzlesHubV1 = isPuzzlesHubV1Enabled(article.config);
 
+	/**
+	 * With v1 on, the title's series ("Quick") and section ("Crosswords")
+	 * links resolve to root-relative paths (empty base URL), so they follow
+	 * the current domain on every environment, and both point at the Puzzles
+	 * & games crosswords archive ("Quick" filtered to its crossword type, see
+	 * `titleTags`). Without v1 both are unchanged.
+	 */
+	const PUZZLES_CROSSWORDS_ARCHIVE_PATH =
+		'puzzles-and-games/crosswords/archive';
+
+	/**
+	 * The series tag ("Quick") links to that crossword type's archive page,
+	 * `SeriesSectionLink` builds the href as `${guardianBaseURL}/${tag.id}`.
+	 */
+	const crosswordType = article.crossword?.crosswordType;
+	const titleTags =
+		isPuzzlesHubV1 && crosswordType
+			? article.tags.map((tag) =>
+					tag.type === 'Series'
+						? {
+								...tag,
+								id: `${PUZZLES_CROSSWORDS_ARCHIVE_PATH}?puzzle=${crosswordType}`,
+							}
+						: tag,
+				)
+			: article.tags;
+
 	const showRelatedPuzzles =
 		isPuzzlesHubV1 && !!article.moreFromPuzzlesAndGames?.length;
 
@@ -217,11 +244,17 @@ export const CrosswordLayout = (props: Props) => {
 								<div data-print-layout="hide">
 									<ArticleTitle
 										format={format}
-										tags={article.tags}
+										tags={titleTags}
 										sectionLabel={article.sectionLabel}
-										sectionUrl={article.sectionUrl}
+										sectionUrl={
+											isPuzzlesHubV1
+												? PUZZLES_CROSSWORDS_ARCHIVE_PATH
+												: article.sectionUrl
+										}
 										guardianBaseURL={
-											article.guardianBaseURL
+											isPuzzlesHubV1
+												? ''
+												: article.guardianBaseURL
 										}
 									/>
 								</div>
