@@ -290,7 +290,10 @@ export const StandardLayoutArticleGrid = ({
 				!isLabs &&
 					css`
 						${from.leftCol} {
-							${grid.centreRule(isImmersive ? 4 : 3)}
+							${grid.centreRule(
+								isImmersive ? 4 : 3,
+								isInteractive ? { clip: false } : {},
+							)}
 						}
 					`,
 				layoutType === 'immersivePortrait' &&
