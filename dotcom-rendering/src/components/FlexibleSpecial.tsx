@@ -366,10 +366,13 @@ export const FlexibleSpecial = ({
 					uniqueId: `collection-${collectionId}-snap-0`,
 				}))
 			: [];
-	const splash = [...groupedTrails.standard].slice(0, 1).map((snap) => ({
-		...snap,
-		uniqueId: `collection-${collectionId}-splash-0`,
-	}));
+	const splash =
+		graphic === undefined
+			? [...groupedTrails.standard].slice(0, 1).map((snap) => ({
+					...snap,
+					uniqueId: `collection-${collectionId}-splash-0`,
+				}))
+			: [];
 	const cards = [...groupedTrails.standard].slice(1, 5).map((snap, i) => ({
 		...snap,
 		uniqueId: `collection-${collectionId}-standard-${i}`,
