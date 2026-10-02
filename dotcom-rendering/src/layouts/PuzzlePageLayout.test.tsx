@@ -138,13 +138,10 @@ describe('PuzzlePageLayout', () => {
 	 * the wrong element.
 	 */
 	const subNavChildHrefs = {
-		Crosswords:
-			'https://www.theguardian.com/puzzles-and-games/crosswords/archive',
-		'Word games':
-			'https://www.theguardian.com/puzzles-and-games/word-games/archive',
-		'Logic puzzles':
-			'https://www.theguardian.com/puzzles-and-games/logic-puzzles/archive',
-		'Trivia & quizzes': '/puzzles-and-games/trivia-and-quizzes',
+		Crosswords: '/puzzles-and-games/crosswords/archive',
+		'Word games': '/puzzles-and-games/word-games/archive',
+		'Logic puzzles': '/puzzles-and-games/logic-puzzles/archive',
+		'Trivia & quizzes': '/puzzles-and-games/trivia-and-quizzes/archive',
 	};
 
 	it('renders only the "Puzzles & games" parent sub-nav link on V0 (default fixture state)', () => {
@@ -177,7 +174,7 @@ describe('PuzzlePageLayout', () => {
 			}
 		});
 
-		it('renders all four, with the production archive URLs for Crosswords/Word games/Logic puzzles, when v1 is enabled', () => {
+		it('renders all four, with the archive paths for Crosswords/Word games/Logic puzzles, when v1 is enabled', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,

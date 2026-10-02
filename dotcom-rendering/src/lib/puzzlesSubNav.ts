@@ -36,22 +36,22 @@ const PUZZLES_SUBNAV_LINKS: LinkType[] = [
 	{
 		title: 'Crosswords',
 		longTitle: 'Crosswords',
-		url: 'https://www.theguardian.com/puzzles-and-games/crosswords/archive',
+		url: '/puzzles-and-games/crosswords/archive',
 	},
 	{
 		title: 'Word games',
 		longTitle: 'Word games',
-		url: 'https://www.theguardian.com/puzzles-and-games/word-games/archive',
+		url: '/puzzles-and-games/word-games/archive',
 	},
 	{
 		title: 'Logic puzzles',
 		longTitle: 'Logic puzzles',
-		url: 'https://www.theguardian.com/puzzles-and-games/logic-puzzles/archive',
+		url: '/puzzles-and-games/logic-puzzles/archive',
 	},
 	{
 		title: 'Trivia & quizzes',
 		longTitle: 'Trivia & quizzes',
-		url: '/puzzles-and-games/trivia-and-quizzes',
+		url: '/puzzles-and-games/trivia-and-quizzes/archive',
 	},
 ];
 
