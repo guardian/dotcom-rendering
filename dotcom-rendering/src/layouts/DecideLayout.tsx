@@ -14,7 +14,6 @@ import { HostedArticleLayout } from './HostedArticleLayout';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { HostedVideoLayout } from './HostedVideoLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
-import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { StandardLayout } from './StandardLayout';
@@ -41,10 +40,19 @@ export type Props = WebProps | AppProps;
  */
 export const REVAMPED_IMMERSIVE_LAYOUT_AB_TEST =
 	'articles-and-publishing-revamped-immersive-layout';
-
 const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
 	article.frontendData.config.serverSideABTests[
 		REVAMPED_IMMERSIVE_LAYOUT_AB_TEST
+	] === 'enable';
+
+/**
+ * Guards grid-based interactive layout behind a 0% a/b test
+ */
+export const INTERACTIVE_LAYOUT_AB_TEST =
+	'articles-and-publishing-migrate-interactive-layout';
+const isInInteractiveLayoutTest = (article: Article): boolean =>
+	article.frontendData.config.serverSideABTests[
+		INTERACTIVE_LAYOUT_AB_TEST
 	] === 'enable';
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
@@ -129,14 +137,15 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 			switch (article.design) {
 				case ArticleDesign.Interactive:
 					return (
-						<InteractiveLayout
+						<StandardLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
+							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
+								article,
+							)}
 						/>
 					);
-
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
@@ -310,12 +319,14 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 			switch (article.design) {
 				case ArticleDesign.Interactive:
 					return (
-						<InteractiveLayout
+						<StandardLayout
 							article={article.frontendData}
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
+							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
+								article,
+							)}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {

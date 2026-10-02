@@ -235,6 +235,7 @@ export const StandardLayoutArticleGrid = ({
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
 	);
+	const isInteractive = format.design === ArticleDesign.Interactive;
 
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
@@ -267,6 +268,7 @@ export const StandardLayoutArticleGrid = ({
 		isMedia,
 		isPicture,
 		isShowcase,
+		isInteractive,
 	});
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
@@ -318,7 +320,10 @@ export const StandardLayoutArticleGrid = ({
 				!isLabs &&
 					css`
 						${from.leftCol} {
-							${grid.centreRule(isImmersive ? 4 : 3)}
+							${grid.centreRule(
+								isImmersive ? 4 : 3,
+								isInteractive ? { clip: false } : {},
+							)}
 						}
 					`,
 				layoutType === 'immersivePortrait' &&
@@ -595,6 +600,10 @@ export const StandardLayoutArticleGrid = ({
 								}
 							`
 						: undefined,
+					isInteractive &&
+						css`
+							z-index: 10;
+						`,
 				]}
 			>
 				{format.display !== ArticleDisplay.Immersive &&
@@ -844,7 +853,8 @@ export const StandardLayoutArticleGrid = ({
 									!!article.config.shouldHideReaderRevenue
 								}
 								shouldHideMostViewed={
-									format.design === ArticleDesign.Audio
+									format.design === ArticleDesign.Audio ||
+									format.design === ArticleDesign.Interactive
 								}
 							/>
 						</Island>
