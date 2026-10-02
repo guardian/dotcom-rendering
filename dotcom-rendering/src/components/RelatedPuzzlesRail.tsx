@@ -87,7 +87,11 @@ const relatedRailHeadingLink = css`
 `;
 
 /**
- * Renders `moreFromPuzzlesAndGames` with `MorePuzzlesCard.tsx`'s
+ * The "More from Puzzles & games" rail shared by the Puzzle Page, the
+ * crosswords page and the Puzzles & games archive pages. On mobile the cards
+ * scroll horizontally (`mobileScrollable`).
+ *
+ * Renders the cards with `MorePuzzlesCard.tsx`'s
  * `MorePuzzlesRows` - a deliberately independent copy of the Puzzles Hub
  * listing page's own card/grid implementation (`Rows`/`PuzzleCard`,
  * `src/components/PuzzleCard.tsx`), not that shared implementation itself:
@@ -110,6 +114,6 @@ export const RelatedPuzzlesRail = ({ items }: { items: PuzzleItem[] }) => (
 				Puzzles &amp; games
 			</a>
 		</h2>
-		<MorePuzzlesRows items={items} />
+		<MorePuzzlesRows items={items} mobileScrollable={true} />
 	</div>
 );
