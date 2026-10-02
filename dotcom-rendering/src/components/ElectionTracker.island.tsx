@@ -41,11 +41,16 @@ export const ElectionTracker = (props: Props) => {
 			getElectionData={
 				props.liveEffects
 					? getElectionData
-					: () => Promise.resolve(props.electionComponents)
+					: () => {
+							console.log('Testing');
+							return Promise.resolve(props.electionComponents);
+						}
 			}
 		/>
 	);
 };
 
-const getElectionData = (url: string): Promise<unknown> =>
-	fetch(url).then((res) => res.json());
+const getElectionData = (url: string): Promise<unknown> => {
+	console.log('Fetching election data from URL:', url);
+	return fetch(url).then((res) => res.json());
+};

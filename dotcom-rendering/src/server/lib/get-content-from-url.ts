@@ -17,7 +17,7 @@ async function getContentFromURL(
 	const searchparams = url.searchParams.toString();
 
 	// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
-	const jsonUrl = `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
+	const jsonUrl = `${url.origin}${url.pathname}.json?dcr=apps&${searchparams}`;
 
 	// Explicitly pass through GU headers - this enables us to override properties such as region in CI
 	const headers: HeadersInit = Object.fromEntries(
@@ -72,11 +72,12 @@ export const getContentFromURLMiddleware: Handler = async (req, res, next) => {
 			console.error(error);
 			next(error);
 		}
-	} else if (req.path.startsWith('/AppsComponent/')) {
-		// No data to be fetched for this path
-		next();
+		// } else if (req.path.startsWith('/AppsComponent/')) {
+		// 	// No data to be fetched for this path
+		// 	next();
 	} else {
 		const sourceURL = parseURL(req.originalUrl);
+		console.log(sourceURL);
 		if (sourceURL) {
 			try {
 				req.body = await getContentFromURL(sourceURL, req.headers);

@@ -12,6 +12,7 @@ import articleSchema from '../frontend/schemas/feArticle.json';
 import footballMatchInfoPageSchema from '../frontend/schemas/feFootballMatchInfoPage.json';
 import footballMatchListPageSchema from '../frontend/schemas/feFootballMatchListPage.json';
 import footballTablesPageSchema from '../frontend/schemas/feFootballTablesPage.json';
+import feAppComponentEventGraphicSchema from '../frontend/schemas/feAppComponentEventGraphic.json';
 import frontSchema from '../frontend/schemas/feFront.json';
 import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
@@ -25,6 +26,7 @@ import type {
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
+import { FEAppComponentEventGraphic } from '../frontend/feAppComponentEventGraphic';
 
 const options: Options = {
 	verbose: false,
@@ -57,6 +59,9 @@ const validateFootballTablesPage = ajv.compile<FEFootballTablesPage>(
 const validateFootballMatchInfoPage = ajv.compile<FEFootballMatchInfoPage>(
 	footballMatchInfoPageSchema,
 );
+
+const validateFEAppComponentEventGraphic =
+	ajv.compile<FEAppComponentEventGraphic>(feAppComponentEventGraphicSchema);
 
 export const validateAsFEArticle = (data: unknown): FEArticle => {
 	if (validateArticle(data)) return data;
@@ -171,6 +176,21 @@ export const validateAsFootballMatchPageType = (
             ${JSON.stringify(validateFootballMatchInfoPage.errors, null, 2)}`,
 	);
 };
+
+export const validateAsFEAppComponentEventGraphic = (
+	data: unknown,
+): FEAppComponentEventGraphic => {
+	if (validateFEAppComponentEventGraphic(data)) return data;
+
+	const url =
+		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateFEAppComponentEventGraphic.errors, null, 2)}`,
+	);
+};
+
 const identifier = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const colour = /^#[0-9a-f]{6}$/i;
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;

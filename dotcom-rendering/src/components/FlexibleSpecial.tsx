@@ -1,4 +1,3 @@
-import { from, space } from '@guardian/source/foundations';
 import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
 import { isWithinTwelveHours } from '../lib/formatTime';
@@ -21,11 +20,10 @@ import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import type { Graphic } from './DecideContainer';
-import { ElectionTracker } from './ElectionTracker.island';
 import { FrontCard } from './FrontCard';
-import { Island } from './Island';
 import type { SubtitleSize } from './SelfHostedVideoPlayer';
 import type { Alignment } from './SupportingContent';
+import { EventGraphic } from './EventGraphic';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;
@@ -311,41 +309,6 @@ const TwoOrFourCardLayout = ({
 			})}
 		</UL>
 	);
-};
-
-type EventGraphicProps = {
-	graphic: Graphic | undefined;
-};
-
-const EventGraphic = (props: EventGraphicProps) => {
-	if (props.graphic === undefined) {
-		return null;
-	}
-
-	switch (props.graphic.kind) {
-		case 'electionTracker':
-			return (
-				<article
-					css={{
-						paddingBottom: space[4],
-						[from.tablet]: {
-							paddingLeft: 10,
-							paddingRight: 10,
-						},
-					}}
-				>
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<ElectionTracker
-							electionDataUrl={props.graphic.electionDataUrl.href}
-							electionComponents={
-								props.graphic.electionComponents
-							}
-							liveEffects={props.graphic.liveEffects}
-						/>
-					</Island>
-				</article>
-			);
-	}
 };
 
 export const FlexibleSpecial = ({

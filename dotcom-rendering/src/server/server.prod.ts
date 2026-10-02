@@ -17,6 +17,7 @@ import {
 } from './handler.article.web';
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
+import { handleAppsEventGraphic } from './handler.eventGraphic.apps';
 import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
 import { handlePuzzlePage } from './handler.puzzlePage.web';
@@ -87,6 +88,7 @@ export const prodServer = (): void => {
 	app.post('/EditionsCrossword', handleEditionsCrossword);
 	app.post('/AppsHostedContent', handleAppsHostedContent);
 	app.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
+	app.post('/AppsComponent/event-graphic/*name', handleAppsEventGraphic);
 	app.post('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 
 	app.get('/assets/rendered-items-assets', handleAppsAssets);
