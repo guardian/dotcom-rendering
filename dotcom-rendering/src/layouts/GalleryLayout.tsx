@@ -115,7 +115,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const showMerchandisingHigh = isWeb && renderAds && !isLabs;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
-
+	console.log('test');
 	const showComments =
 		frontendData.isCommentable && !frontendData.config.isPaidContent;
 

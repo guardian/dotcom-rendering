@@ -5,8 +5,8 @@
 	"license": "Apache-2.0",
 	"private": true,
 	"scripts": {
-		"lint:fix": "eslint --quiet --cache --fix .",
-		"lint:check": "eslint --quiet --cache .",
+		"lint:fix": "eslint --cache --fix .",
+		"lint:check": "eslint --cache .",
 		"lint:stats": "pnpm lint --format node_modules/eslint-stats/byError.js",
 		"tsc": "tsc",
 		"test": "IMAGE_DIGEST=sha256:12345 jest --maxWorkers=50%",
