@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import {
 	between,
 	from,
@@ -8,6 +8,7 @@ import {
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
+import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { useConfig } from './ConfigContext';
 import { externalProps, getPuzzleUrl } from './PuzzleCard';
@@ -276,6 +277,9 @@ const MorePuzzlesCard = ({ item }: { item: PuzzleItem }) => {
 };
 
 const rowsStyles = css`
+	position: relative;
+	/* Lets the fades below follow the scroll position of the cards. */
+	timeline-scope: --puzzles-rail-scroll;
 	--puzzles-gap: 16px;
 	display: flex;
 	min-width: 0;
@@ -357,6 +361,70 @@ const tabletCompactGridStyles = (count: number) => {
 	`;
 };
 
+const FADE_WIDTH = space[10];
+
+/**
+ * Same mechanism as the sub-nav (`Titlepiece.island.tsx`'s `fadeStyles`): an
+ * overlay on the right edge of the scrolling cards that fades them into the
+ * page background to hint there is more to scroll to, with extra padding on
+ * the list (`rowStyles`) so the last card can scroll clear of it.
+ */
+const fadeRightStyles = css`
+	display: none;
+	${until.tablet} {
+		display: block;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: calc(var(--puzzles-edge-padding, 10px) * -1);
+		width: ${FADE_WIDTH}px;
+		background: linear-gradient(
+			to right,
+			transparent 0%,
+			${themePalette('--article-background')} 100%
+		);
+		pointer-events: none;
+	}
+`;
+
+/**
+ * The matching fade on the left edge. Unlike the right one it must not cover
+ * the first card at rest, so it is driven by the cards' scroll position (a
+ * scroll-driven animation) and only appears once the reader has scrolled.
+ * Browsers without scroll-driven animations don't show it.
+ */
+const fadeInKeyframes = keyframes`
+	from { opacity: 0; }
+	to { opacity: 1; }
+`;
+
+const fadeLeftStyles = css`
+	display: none;
+	@supports (animation-timeline: scroll()) {
+		${until.tablet} {
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: calc(var(--puzzles-edge-padding, 10px) * -1);
+			width: ${FADE_WIDTH}px;
+			background: linear-gradient(
+				to left,
+				transparent 0%,
+				${themePalette('--article-background')} 100%
+			);
+			opacity: 0;
+			pointer-events: none;
+			animation-name: ${fadeInKeyframes};
+			animation-duration: 1ms;
+			animation-timing-function: linear;
+			animation-fill-mode: both;
+			animation-timeline: --puzzles-rail-scroll;
+			animation-range: 0 ${FADE_WIDTH}px;
+		}
+	}
+`;
+
 const rowStyles = (
 	variant: PuzzleItem['cardVariant'],
 	count: number,
@@ -411,9 +479,11 @@ const rowStyles = (
 				display: flex;
 				/* Bleed to both screen edges: undo the host's side padding. */
 				margin: 0 calc(var(--puzzles-edge-padding, 10px) * -1);
-				padding: 0 var(--puzzles-edge-padding, 10px);
-				scroll-padding: 0 var(--puzzles-edge-padding, 10px);
+				padding: 0 ${space[10]}px 0 var(--puzzles-edge-padding, 10px);
+				scroll-padding: 0 ${space[10]}px 0
+					var(--puzzles-edge-padding, 10px);
 				overflow-x: auto;
+				scroll-timeline: --puzzles-rail-scroll inline;
 				scrollbar-width: none;
 				::-webkit-scrollbar {
 					display: none;
@@ -448,5 +518,11 @@ export const MorePuzzlesRows = ({
 				</li>
 			))}
 		</ul>
+		{mobileScrollable && (
+			<>
+				<div aria-hidden="true" css={fadeLeftStyles} />
+				<div aria-hidden="true" css={fadeRightStyles} />
+			</>
+		)}
 	</div>
 );
