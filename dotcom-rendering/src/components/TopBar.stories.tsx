@@ -1,4 +1,5 @@
 import type { AccessToken, IDToken } from '@guardian/identity-auth';
+import { breakpoints } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react-webpack5';
 import {
 	contributionsHeaderResponse,
@@ -146,7 +147,82 @@ export const SignedInText = () => {
 					accessToken: mockAccessToken as AccessToken<never>,
 					idToken: mockIdToken,
 				}}
+				showSignInTextOnMobile={true}
 			/>
 		</div>
 	);
+};
+export const SignedInNoText = () => {
+	return (
+		<div
+			style={{
+				backgroundColor: themePalette('--masthead-top-bar-background'),
+			}}
+		>
+			<TopBarMyAccount
+				mmaUrl={''}
+				idUrl={''}
+				discussionApiUrl={''}
+				idApiUrl={''}
+				authStatus={{
+					kind: 'SignedIn',
+					accessToken: mockAccessToken as AccessToken<never>,
+					idToken: mockIdToken,
+				}}
+				showSignInTextOnMobile={false}
+			/>
+		</div>
+	);
+};
+SignedInNoText.parameters = {
+	chromatic: {
+		viewports: [breakpoints.mobile, breakpoints.desktop, breakpoints.wide],
+	},
+};
+
+export const SignedOutText = () => {
+	return (
+		<div
+			style={{
+				backgroundColor: themePalette('--masthead-top-bar-background'),
+			}}
+		>
+			<TopBarMyAccount
+				mmaUrl={''}
+				idUrl={''}
+				discussionApiUrl={''}
+				idApiUrl={''}
+				authStatus={{
+					kind: 'SignedOut',
+				}}
+				showSignInTextOnMobile={true}
+			/>
+		</div>
+	);
+};
+
+export const SignedOutNoText = () => {
+	return (
+		<div
+			style={{
+				backgroundColor: themePalette('--masthead-top-bar-background'),
+			}}
+		>
+			<TopBarMyAccount
+				mmaUrl={''}
+				idUrl={''}
+				discussionApiUrl={''}
+				idApiUrl={''}
+				authStatus={{
+					kind: 'SignedOut',
+				}}
+				showSignInTextOnMobile={false}
+			/>
+		</div>
+	);
+};
+SignedOutNoText.parameters = {
+	chromatic: {
+		viewports: [breakpoints.mobile, breakpoints.desktop, breakpoints.wide],
+	},
 };
