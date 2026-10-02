@@ -155,7 +155,7 @@ const SignIn = ({
 	<a
 		css={[
 			myAccountLinkStyles,
-			desktopAccountLabelStyles,
+			desktopSignInLabelStyles,
 			!showSignInTextOnMobile && iconInAccountStyles,
 		]}
 		aria-label={!showSignInTextOnMobile ? 'Sign in' : undefined}
@@ -248,7 +248,7 @@ const iconInAccountStyles = css`
 	}
 `;
 
-const desktopAccountLabelStyles = css`
+const desktopSignInLabelStyles = css`
 	${from.tablet} {
 		> span:first-child {
 			display: contents;
@@ -257,17 +257,15 @@ const desktopAccountLabelStyles = css`
 `;
 
 const myAccountButtonStyles = css`
-	> span:first-child {
-		display: contents;
-	}
 	padding-left: 0;
-
-	> span:first-child > svg {
-		margin-right: calc(${space[1]}px + 5px);
+	svg {
 		transform: translateY(1px);
 	}
 `;
 
+const myAccountLabelStyles = css`
+	margin-left: 5px;
+`;
 const dropdownLinkStyles = (showSignInTextOnMobile: boolean) => css`
 	${!showSignInTextOnMobile &&
 	css`
@@ -347,7 +345,10 @@ const SignedInWithNotifications = ({
 						? (isExpanded) => (
 								<>
 									<Hide until="tablet">
-										<ProfileIcon /> My account
+										<ProfileIcon />
+										<span css={myAccountLabelStyles}>
+											My account
+										</span>
 									</Hide>
 
 									<Hide from="tablet">
