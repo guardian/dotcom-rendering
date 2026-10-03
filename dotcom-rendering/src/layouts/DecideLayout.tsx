@@ -6,7 +6,6 @@ import {
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { CommentLayout } from './CommentLayout';
 import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { GalleryLayout } from './GalleryLayout';
@@ -102,17 +101,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							serverTime={serverTime}
 						/>
 					);
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return (
-						<CommentLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
 				default:
 					return (
 						<StandardLayout
@@ -150,17 +138,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return (
-						<CommentLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -281,18 +258,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							serverTime={serverTime}
 						/>
 					);
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return (
-						<CommentLayout
-							article={article.frontendData}
-							NAV={NAV}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
 				default:
 					return (
 						<StandardLayout
@@ -332,18 +297,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
-							article={article.frontendData}
-							NAV={NAV}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return (
-						<CommentLayout
 							article={article.frontendData}
 							NAV={NAV}
 							format={format}

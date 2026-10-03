@@ -110,35 +110,21 @@ const avatarHeadlineWrapper = css`
 	justify-content: space-between;
 `;
 
-// This styling taken from the similar approach in CommentLayout.tsx
-// If in mobile increase the margin top and margin right deficit
-const avatarPositionStyles = css`
+const avatarPositionStyles = (isPicture: boolean) => css`
 	display: flex;
 	justify-content: flex-end;
 	position: relative;
 	margin-bottom: -29px;
 	pointer-events: none;
+
+	${!isPicture && 'margin-top: -50px;'}
+
 	${from.desktop} {
 		margin-top: -50px;
 	}
 	${until.tablet} {
 		overflow: hidden;
 	}
-
-	/*  Why target img element?
-
-        Because only in this context, where we have overflow: hidden
-        and the margin-bottom and margin-top of avatarPositionStyles
-        do we also want to apply our margin-right. These styles
-        are tightly coupled in this context, and so it does not
-        make sense to move them to the avatar component.
-
-        It's imperfect from the perspective of DCR, the alternative is to bust
-        the combined elements into a separate component (with the
-        relevant stories) and couple them that way, which might be what
-        you want to do if you find yourself adding more styles
-        to this section. For now, this works without making me 🤢.
-    */
 
 	${from.mobile} {
 		img {
@@ -231,6 +217,11 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isFeature = format.design === ArticleDesign.Feature;
 	const isPicture = format.design === ArticleDesign.Picture;
+	const isComment = format.design === ArticleDesign.Comment;
+	const isEditorial = format.design === ArticleDesign.Editorial;
+	const isLetter = format.design === ArticleDesign.Letter;
+
+	const usesCommentGridLayout = isComment || isEditorial || isLetter;
 
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
@@ -267,6 +258,9 @@ export const StandardLayoutArticleGrid = ({
 		isMedia,
 		isPicture,
 		isShowcase,
+		isComment,
+		isEditorial,
+		isLetter,
 	});
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
@@ -484,7 +478,7 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
-				{displayAvatarUrl && isPicture ? (
+				{displayAvatarUrl && (isPicture || usesCommentGridLayout) ? (
 					<div css={avatarHeadlineWrapper}>
 						<ArticleHeadline
 							format={format}
@@ -499,23 +493,24 @@ export const StandardLayoutArticleGrid = ({
 							starRating={article.starRating}
 						/>
 
-						{!!avatarUrl && isPicture && (
-							<>
-								<div css={avatarPositionStyles}>
-									<ContributorAvatar
-										imageSrc={avatarUrl}
-										imageAlt={article.byline ?? ''}
+						{!!avatarUrl &&
+							(isPicture || usesCommentGridLayout) && (
+								<>
+									<div css={avatarPositionStyles(isPicture)}>
+										<ContributorAvatar
+											imageSrc={avatarUrl}
+											imageAlt={article.byline ?? ''}
+										/>
+									</div>
+									<StraightLines
+										count={8}
+										cssOverrides={css`
+											display: block;
+										`}
+										color={themePalette('--straight-lines')}
 									/>
-								</div>
-								<StraightLines
-									count={8}
-									cssOverrides={css`
-										display: block;
-									`}
-									color={themePalette('--straight-lines')}
-								/>
-							</>
-						)}
+								</>
+							)}
 					</div>
 				) : (
 					<ArticleHeadline
@@ -602,7 +597,7 @@ export const StandardLayoutArticleGrid = ({
 					layoutType !== 'immersivePortrait' && (
 						<div
 							css={[
-								isPicture &&
+								(isPicture || usesCommentGridLayout) &&
 									pictureLeftColLines(displayAvatarUrl),
 								stretchLines,
 							]}
@@ -616,7 +611,8 @@ export const StandardLayoutArticleGrid = ({
 									format={format}
 									color={themePalette('--article-border')}
 									displayingAvatar={
-										displayAvatarUrl && isPicture
+										displayAvatarUrl &&
+										(isPicture || usesCommentGridLayout)
 									}
 								/>
 							)}

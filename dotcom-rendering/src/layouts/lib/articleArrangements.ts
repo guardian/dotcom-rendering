@@ -7,6 +7,7 @@ export type LayoutType =
 	| 'showcase'
 	| 'media'
 	| 'picture'
+	| 'comment'
 	| 'immersiveLandscape'
 	| 'immersivePortrait';
 
@@ -200,6 +201,43 @@ const pictureCss: LayoutCssMap = {
 	},
 };
 
+const commentCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		leftCol: `grid-row: 1; ${grid.column.left}`,
+	},
+	headline: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		leftCol: 'grid-row: 1;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+		leftCol: 'grid-row: 2;',
+	},
+	media: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		leftCol: 'grid-row: 3;',
+	},
+	meta: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		leftCol: `grid-row: 2 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		mobile: 'grid-row: 6;',
+		tablet: 'grid-row: 6;',
+		leftCol: 'grid-row: 4;',
+	},
+	'right-column': {
+		desktop: `grid-row: 1 / span 6; ${grid.column.right};`,
+		leftCol: `grid-row: 1 / span 4; ${grid.column.right};`,
+	},
+};
+
 const immersivePortraitCss: LayoutCssMap = {
 	title: {
 		belowDesktop: `${grid.column.all} grid-row: 2;`,
@@ -285,6 +323,7 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	showcase: showcaseCss,
 	media: mediaCss,
 	picture: pictureCss,
+	comment: commentCss,
 	immersiveLandscape: immersiveLandscapeCss,
 	immersivePortrait: immersivePortraitCss,
 };
@@ -339,6 +378,9 @@ export const getLayoutType = ({
 	isMedia,
 	isPicture,
 	isShowcase,
+	isComment,
+	isEditorial,
+	isLetter,
 }: {
 	isImmersive: boolean;
 	isFeature: boolean;
@@ -346,6 +388,9 @@ export const getLayoutType = ({
 	isMedia: boolean;
 	isPicture: boolean;
 	isShowcase: boolean;
+	isComment: boolean;
+	isEditorial: boolean;
+	isLetter: boolean;
 }): LayoutType => {
 	if (isImmersive) {
 		if (orientation === 'portrait') {
@@ -357,5 +402,6 @@ export const getLayoutType = ({
 	if (isMedia) return 'media';
 	if (isPicture) return 'picture';
 	if (isShowcase) return 'showcase';
+	if (isComment || isEditorial || isLetter) return 'comment';
 	return 'standard';
 };
