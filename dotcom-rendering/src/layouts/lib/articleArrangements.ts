@@ -1,6 +1,11 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
 import { grid } from '../../grid';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../../lib/articleFormat';
 
 export type LayoutType =
 	| 'standard'
@@ -372,36 +377,31 @@ export const gridItemCss = (
  * format is a Feature, since each combination has a distinct grid
  * arrangement. Non-immersive formats fall back to media/showcase/standard.
  */
-export const getLayoutType = ({
-	isImmersive,
-	orientation,
-	isMedia,
-	isPicture,
-	isShowcase,
-	isComment,
-	isEditorial,
-	isLetter,
-}: {
-	isImmersive: boolean;
-	isFeature: boolean;
-	orientation: 'portrait' | 'landscape' | 'square';
-	isMedia: boolean;
-	isPicture: boolean;
-	isShowcase: boolean;
-	isComment: boolean;
-	isEditorial: boolean;
-	isLetter: boolean;
-}): LayoutType => {
-	if (isImmersive) {
-		if (orientation === 'portrait') {
+export const getLayoutType = (
+	format: ArticleFormat,
+	mainMediaOrientation: 'portrait' | 'landscape' | 'square',
+): LayoutType => {
+	if (format.display === ArticleDisplay.Immersive) {
+		if (mainMediaOrientation === 'portrait') {
 			return 'immersivePortrait';
 		}
 		// Square images are treated the same as landscape for immersive layouts.
 		return 'immersiveLandscape';
 	}
-	if (isMedia) return 'media';
-	if (isPicture) return 'picture';
-	if (isShowcase) return 'showcase';
-	if (isComment || isEditorial || isLetter) return 'comment';
+	if (
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Audio
+	) {
+		return 'media';
+	}
+	if (format.design === ArticleDesign.Picture) return 'picture';
+	if (format.display === ArticleDisplay.Showcase) return 'showcase';
+	if (
+		format.design === ArticleDesign.Comment ||
+		format.design === ArticleDesign.Editorial ||
+		format.design === ArticleDesign.Letter
+	) {
+		return 'comment';
+	}
 	return 'standard';
 };

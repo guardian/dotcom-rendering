@@ -210,18 +210,7 @@ export const StandardLayoutArticleGrid = ({
 			: undefined;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
-	const isMedia =
-		format.design === ArticleDesign.Video ||
-		format.design === ArticleDesign.Audio;
-	const isShowcase = format.display === ArticleDisplay.Showcase;
 	const isImmersive = format.display === ArticleDisplay.Immersive;
-	const isFeature = format.design === ArticleDesign.Feature;
-	const isPicture = format.design === ArticleDesign.Picture;
-	const isComment = format.design === ArticleDesign.Comment;
-	const isEditorial = format.design === ArticleDesign.Editorial;
-	const isLetter = format.design === ArticleDesign.Letter;
-
-	const usesCommentGridLayout = isComment || isEditorial || isLetter;
 
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
@@ -251,17 +240,7 @@ export const StandardLayoutArticleGrid = ({
 		? 'auto'
 		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
-	const layoutType = getLayoutType({
-		isImmersive,
-		isFeature,
-		orientation: mainMediaOrientation,
-		isMedia,
-		isPicture,
-		isShowcase,
-		isComment,
-		isEditorial,
-		isLetter,
-	});
+	const layoutType = getLayoutType(format, mainMediaOrientation);
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
 	const ageWarning = getAgeWarning(
@@ -372,7 +351,7 @@ export const StandardLayoutArticleGrid = ({
 								`}
 							`
 						: undefined,
-					displayAvatarUrl && isPicture
+					displayAvatarUrl && layoutType === 'picture'
 						? css`
 								margin-top: ${space[2]}px;
 							`
@@ -391,7 +370,7 @@ export const StandardLayoutArticleGrid = ({
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
 						editionId={article.editionId}
-						hideCaption={isMedia}
+						hideCaption={layoutType === 'media'}
 						shouldHideAds={article.shouldHideAds}
 						contentType={article.contentType}
 						contentLayout={contentLayoutName}
@@ -428,7 +407,7 @@ export const StandardLayoutArticleGrid = ({
 								margin-bottom: 2px;
 							}
 						`,
-					isPicture &&
+					layoutType === 'picture' &&
 						css`
 							display: flex;
 							flex-direction: column;
@@ -478,7 +457,8 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
-				{displayAvatarUrl && (isPicture || usesCommentGridLayout) ? (
+				{displayAvatarUrl &&
+				(layoutType === 'picture' || layoutType === 'comment') ? (
 					<div css={avatarHeadlineWrapper}>
 						<ArticleHeadline
 							format={format}
@@ -494,9 +474,14 @@ export const StandardLayoutArticleGrid = ({
 						/>
 
 						{!!avatarUrl &&
-							(isPicture || usesCommentGridLayout) && (
+							(layoutType === 'picture' ||
+								layoutType === 'comment') && (
 								<>
-									<div css={avatarPositionStyles(isPicture)}>
+									<div
+										css={avatarPositionStyles(
+											layoutType === 'picture',
+										)}
+									>
 										<ContributorAvatar
 											imageSrc={avatarUrl}
 											imageAlt={article.byline ?? ''}
@@ -597,7 +582,8 @@ export const StandardLayoutArticleGrid = ({
 					layoutType !== 'immersivePortrait' && (
 						<div
 							css={[
-								(isPicture || usesCommentGridLayout) &&
+								(layoutType === 'picture' ||
+									layoutType === 'comment') &&
 									pictureLeftColLines(displayAvatarUrl),
 								stretchLines,
 							]}
@@ -612,7 +598,8 @@ export const StandardLayoutArticleGrid = ({
 									color={themePalette('--article-border')}
 									displayingAvatar={
 										displayAvatarUrl &&
-										(isPicture || usesCommentGridLayout)
+										(layoutType === 'picture' ||
+											layoutType === 'comment')
 									}
 								/>
 							)}
@@ -701,7 +688,7 @@ export const StandardLayoutArticleGrid = ({
 				{/* Only show Listen to Article button on App landscape views */}
 				{isApps && (
 					<Hide until="leftCol">
-						{!isMedia && (
+						{layoutType !== 'media' && (
 							<div
 								css={css`
 									margin-top: ${space[2]}px;
@@ -814,13 +801,13 @@ export const StandardLayoutArticleGrid = ({
 				area="right-column"
 				layoutType={layoutType}
 				css={css`
-					padding-top: ${isMedia ? 0 : 6}px;
+					padding-top: ${layoutType === 'media' ? 0 : 6}px;
 					${from.desktop} {
-						padding-bottom: ${isMedia ? 41 : 0}px;
+						padding-bottom: ${layoutType === 'media' ? 41 : 0}px;
 					}
 				`}
 			>
-				{!isPicture && (
+				{layoutType !== 'picture' && (
 					<Hide until="desktop">
 						<Island
 							priority="feature"
