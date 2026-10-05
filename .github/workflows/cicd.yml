@@ -17,14 +17,6 @@ jobs:
     secrets:
       GU_ARTIFACTS_ROLE_ARN: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
 
-  container:
-    permissions:
-      packages: write
-    needs: [production-container]
-    uses: ./.github/workflows/container.yml
-    with:
-      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
-
   prettier:
     if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/prettier.yml
@@ -58,7 +50,7 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write # required by riff-raff action
-    needs: [container, islands, prettier, jest, lint, playwright]
+    needs: [production-container, islands, prettier, jest, lint, playwright]
     # We don't need a riff-raff deployment for merge_group events.
     # `!cancelled()` forces this job to be evaluated even when some of the
     # `needs` jobs are skipped (the checks are skipped on push to main), and
@@ -71,6 +63,7 @@ jobs:
       github.event_name == 'push'
     uses: ./.github/workflows/publish.yml
     with:
-      container-image: ${{ needs.container.outputs.container-image }}
+      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
     secrets:
       GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+      GU_ARTIFACTS_ROLE_ARN: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}

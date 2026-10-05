@@ -40,11 +40,6 @@ const requiredNodeVersionMatches =
 			matchLevel: 'major',
 		},
 		{
-			filepath: 'Containerfile',
-			pattern: /^FROM node:(\d+)/m,
-			matchLevel: 'major',
-		},
-		{
 			filepath: 'scripts/deploy/riff-raff.yaml',
 			pattern: /^ +Recipe: dotcom-rendering.*-node-(\d+).*?$/m,
 			matchLevel: 'major',
