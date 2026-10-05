@@ -3,8 +3,7 @@ import { isString } from '@guardian/libs';
 import { resets } from '@guardian/source/foundations';
 import CleanCSS from 'clean-css';
 import { ConfigProvider } from '../components/ConfigContext';
-import { type Graphic } from '../components/DecideContainer';
-import { EventGraphic } from '../components/EventGraphic';
+import { EventGraphic, type Graphic } from '../components/EventGraphic';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,

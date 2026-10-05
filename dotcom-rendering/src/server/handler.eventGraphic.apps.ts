@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
 import * as v from 'valibot';
-import { GraphicSchema } from '../components/DecideContainer';
+import { GraphicSchema } from '../components/EventGraphic';
 import {
 	type FEAppsComponentEventGraphic,
 	isEventGraphic,

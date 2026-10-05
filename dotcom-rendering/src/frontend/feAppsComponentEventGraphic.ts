@@ -1,5 +1,5 @@
-import type { ElectionComponentsJson } from '../components/ElectionTrackers/electionComponent';
-import type { FEFrontConfig } from './feFront';
+import { type ElectionComponentsJson } from '../components/ElectionTrackers/electionComponent';
+import { type FEFrontConfig } from './feFront';
 
 export type FEAppsComponentConfig = Omit<
 	FEFrontConfig,
