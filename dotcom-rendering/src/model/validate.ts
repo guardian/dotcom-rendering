@@ -2,14 +2,14 @@ import { isObject, isString } from '@guardian/libs';
 import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import type { FEAppComponentEventGraphic } from '../frontend/feAppComponentEventGraphic';
+import type { FEAppsComponentEventGraphic } from '../frontend/feAppsComponentEventGraphic';
 import type { FEArticle } from '../frontend/feArticle';
 import type { FEFootballMatchInfoPage } from '../frontend/feFootballMatchInfoPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
-import feAppComponentEventGraphicSchema from '../frontend/schemas/feAppComponentEventGraphic.json';
+import feAppsComponentEventGraphicSchema from '../frontend/schemas/feAppsComponentEventGraphic.json';
 import articleSchema from '../frontend/schemas/feArticle.json';
 import footballMatchInfoPageSchema from '../frontend/schemas/feFootballMatchInfoPage.json';
 import footballMatchListPageSchema from '../frontend/schemas/feFootballMatchListPage.json';
@@ -60,8 +60,8 @@ const validateFootballMatchInfoPage = ajv.compile<FEFootballMatchInfoPage>(
 	footballMatchInfoPageSchema,
 );
 
-const validateFEAppComponentEventGraphic =
-	ajv.compile<FEAppComponentEventGraphic>(feAppComponentEventGraphicSchema);
+const validateFEAppsComponentEventGraphic =
+	ajv.compile<FEAppsComponentEventGraphic>(feAppsComponentEventGraphicSchema);
 
 export const validateAsFEArticle = (data: unknown): FEArticle => {
 	if (validateArticle(data)) return data;
@@ -177,17 +177,17 @@ export const validateAsFootballMatchPageType = (
 	);
 };
 
-export const validateAsFEAppComponentEventGraphic = (
+export const validateAsFEAppsComponentEventGraphic = (
 	data: unknown,
-): FEAppComponentEventGraphic => {
-	if (validateFEAppComponentEventGraphic(data)) return data;
+): FEAppsComponentEventGraphic => {
+	if (validateFEAppsComponentEventGraphic(data)) return data;
 
 	const url =
 		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
 
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateFEAppComponentEventGraphic.errors, null, 2)}`,
+            ${JSON.stringify(validateFEAppsComponentEventGraphic.errors, null, 2)}`,
 	);
 };
 

@@ -2,17 +2,17 @@ import type { RequestHandler } from 'express';
 import * as v from 'valibot';
 import { GraphicSchema } from '../components/DecideContainer';
 import {
-	type FEAppComponentEventGraphic,
+	type FEAppsComponentEventGraphic,
 	isEventGraphic,
-} from '../frontend/feAppComponentEventGraphic';
+} from '../frontend/feAppsComponentEventGraphic';
 import { isEditionId } from '../lib/edition';
-import { validateAsFEAppComponentEventGraphic } from '../model/validate';
+import { validateAsFEAppsComponentEventGraphic } from '../model/validate';
 import { makePrefetchHeader } from './lib/header';
 import { renderEventGraphic } from './render.eventGraphic.apps';
 
 export const handleAppsEventGraphic: RequestHandler = ({ body }, res) => {
-	const data: FEAppComponentEventGraphic =
-		validateAsFEAppComponentEventGraphic(body);
+	const data: FEAppsComponentEventGraphic =
+		validateAsFEAppsComponentEventGraphic(body);
 
 	const editionId = isEditionId(data.config.edition)
 		? data.config.edition
