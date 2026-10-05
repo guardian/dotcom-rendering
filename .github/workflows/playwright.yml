@@ -28,48 +28,18 @@ jobs:
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
 
-      # TODO abstract this into a reusable GitHub Action e.g. https://github.com/guardian/actions-publish-image
-      - name: AWS ECR configure credentials
-        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+      - name: Pull Image
+        uses: guardian/actions-ecr/pull@v1.0.0
+        id: pull-image
         with:
-          role-to-assume: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
-          aws-region: eu-west-1
-          mask-aws-account-id: 'true'
-
-      # TODO abstract this into a reusable GitHub Action e.g. https://github.com/guardian/actions-publish-image
-      - name: AWS ECR login
-        id: ecr-login
-        uses: aws-actions/amazon-ecr-login@03f1aad4c6c7ffd436567f42f9384779290529bd # v2.1.7
-        with:
-          mask-password: 'true'
-
-      # Clear AWS credentials (stored in environment variables) to avoid leaking them to any subsequent steps
-      # See https://github.com/aws-actions/configure-aws-credentials/issues/1308
-      # TODO abstract this into a reusable GitHub Action e.g. https://github.com/guardian/actions-publish-image
-      - name: AWS ECR clear credentials
-        if: always()
-        shell: bash
-        run: |
-          echo "AWS_ACCESS_KEY_ID=''" >>"$GITHUB_ENV"
-          echo "AWS_SECRET_ACCESS_KEY=''" >>"$GITHUB_ENV"
-          echo "AWS_SESSION_TOKEN=''" >>"$GITHUB_ENV"
-          echo "AWS_DEFAULT_REGION=''" >>"$GITHUB_ENV"
-          echo "AWS_REGION=''" >>"$GITHUB_ENV"
-
-      # TODO abstract this into a reusable GitHub Action e.g. https://github.com/guardian/actions-publish-image
-      - name: AWS ECR pull image
-        id: ecr-pull
-        env:
-          REGISTRY: ${{ steps.ecr-login.outputs.registry }}
-        run: |
-          IMAGE="$REGISTRY/guardian/dotcom-rendering@${{ inputs.production-image-digest }}"
-          docker pull $IMAGE
-          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
+          app: dotcom-rendering
+          imageIdentifier: ${{ inputs.production-image-digest }}
+          roleArn: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
 
       # `GU_STAGE=CI` defaults DCR to reference JS assets from the local server, rather than the CDN.
       - name: Start DCR in a container
         env:
-          IMAGE: ${{ env.IMAGE }}
+          IMAGE: ${{ steps.pull-image.outputs.imageUri }}
         run: |
           docker run -d \
             -p 9000:9000 \
