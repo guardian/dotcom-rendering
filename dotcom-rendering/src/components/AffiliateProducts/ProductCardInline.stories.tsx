@@ -102,7 +102,7 @@ export const WithLivePrice = meta.story({
 				url: 'https://www.theguardian.com',
 				retailer: 'Amazon',
 				text: '',
-				price: '£95.99',
+				price: '£99.99',
 				latestPrice: {
 					currencySymbol: '£',
 					price: '89.99',
