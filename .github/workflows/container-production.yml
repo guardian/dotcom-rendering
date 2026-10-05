@@ -28,7 +28,7 @@ jobs:
     permissions:
       contents: read
       id-token: write # Required to exchange for AWS credentials using OIDC
-      pull-requests: write # Required by guardian/actions-publish-image to comment on PRs
+      pull-requests: write # Required by guardian/actions-ecr to comment on PRs
     outputs:
       imageDigest: ${{ steps.publish-image.outputs.imageDigest }}
     steps:
