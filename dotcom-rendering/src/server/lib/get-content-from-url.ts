@@ -72,7 +72,7 @@ export const getContentFromURLMiddleware: Handler = async (req, res, next) => {
 			console.error(error);
 			next(error);
 		}
-	} else if (req.path.startsWith('/AppsComponent/')) {
+	} else if (req.path.startsWith('/AppsComponent/thrasher')) {
 		// No data to be fetched for this path
 		next();
 	} else {
