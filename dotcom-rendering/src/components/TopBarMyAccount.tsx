@@ -247,7 +247,7 @@ const signInCircleStyle = css`
 
 const iconInAccountStyles = css`
 	${until.tablet} {
-		padding: 8px 0 8px;
+		padding: 8px 0 8px 0;
 	}
 `;
 
@@ -260,18 +260,14 @@ const desktopSignInLabelStyles = css`
 `;
 
 const myAccountButtonStyles = css`
-	${from.tablet} {
-		padding-left: 0;
-		svg {
-			transform: translateY(1px);
-		}
+	padding-left: 0;
+	svg {
+		transform: translateY(1px);
 	}
 `;
 
 const myAccountLabelStyles = css`
-	${from.tablet} {
-		margin-left: 5px;
-	}
+	margin-left: 5px;
 `;
 const dropdownLinkStyles = (showSignInTextOnMobile: boolean) => css`
 	${!showSignInTextOnMobile &&
@@ -327,49 +323,29 @@ const SignedInWithNotifications = ({
 			]}
 		>
 			<Dropdown
-				label={
+				label="My account"
+				renderTrigger={(isExpanded) =>
 					showSignInTextOnMobile ? (
 						<>
 							<ProfileIcon />
-							My account
+							<span css={myAccountLabelStyles}>My account</span>
 						</>
 					) : (
 						<>
 							<Hide until="tablet">
-								<ProfileIcon /> My account
+								<ProfileIcon />
+								<span css={myAccountLabelStyles}>
+									My account
+								</span>
 							</Hide>
 
 							<Hide from="tablet">
 								<div css={signInCircleStyle}>
-									<SvgPerson />
+									{isExpanded ? <SvgCross /> : <SvgPerson />}
 								</div>
 							</Hide>
 						</>
 					)
-				}
-				renderTrigger={
-					!showSignInTextOnMobile
-						? (isExpanded) => (
-								<>
-									<Hide until="tablet">
-										<ProfileIcon />
-										<span css={myAccountLabelStyles}>
-											My account
-										</span>
-									</Hide>
-
-									<Hide from="tablet">
-										<div css={signInCircleStyle}>
-											{isExpanded ? (
-												<SvgCross />
-											) : (
-												<SvgPerson />
-											)}
-										</div>
-									</Hide>
-								</>
-							)
-						: undefined
 				}
 				ariaLabel="My account"
 				links={identityLinksWithNotifications}
