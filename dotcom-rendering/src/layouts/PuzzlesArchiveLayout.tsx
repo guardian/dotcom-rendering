@@ -95,6 +95,15 @@ const headingStyles = css`
 
 const contentStyles = css`
 	${archiveGridStyles};
+	${from.desktop} {
+		grid-template-columns: minmax(0, 1fr) 300px;
+	}
+	${from.leftCol} {
+		grid-template-columns: 140px minmax(0, 1fr) 300px;
+	}
+	${from.wide} {
+		grid-template-columns: 220px minmax(0, 1fr) 300px;
+	}
 `;
 
 const calendarColumnStyles = css`
@@ -106,10 +115,12 @@ const calendarColumnStyles = css`
 
 const sideAdStyles = css`
 	display: none;
-	${from.wide} {
+	${from.desktop} {
 		display: block;
+		grid-column: 2;
+	}
+	${from.leftCol} {
 		grid-column: 3;
-		padding-top: 110px;
 	}
 `;
 
@@ -139,10 +150,12 @@ const moreStyles = css`
 	}
 `;
 
-const bottomAdStyles = css`
+const mobileAdStyles = css`
 	margin-top: ${space[8]}px;
-	padding: ${space[4]}px 0;
-	border-top: 1px solid ${palette.neutral[86]};
+	background: ${palette.neutral[97]};
+	${from.tablet} {
+		display: none;
+	}
 `;
 
 export const PuzzlesArchiveLayout = ({
@@ -169,7 +182,7 @@ export const PuzzlesArchiveLayout = ({
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot includeMobile={true} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -215,6 +228,7 @@ export const PuzzlesArchiveLayout = ({
 						{renderAds && (
 							<aside css={sideAdStyles}>
 								<AdSlot
+									display={ArticleDisplay.Standard}
 									position="right"
 									shouldHideReaderRevenue={false}
 								/>
@@ -233,16 +247,19 @@ export const PuzzlesArchiveLayout = ({
 						</section>
 					)}
 					{renderAds && (
-						<div css={bottomAdStyles}>
-							<AdSlot
-								display={ArticleDisplay.Standard}
-								index={1}
-								position="fronts-banner"
-							/>
+						<div css={mobileAdStyles}>
+							<AdSlot position="mobile-front" index={1} />
 						</div>
 					)}
 				</div>
 			</main>
+			{renderAds && (
+				<AdSlot
+					display={ArticleDisplay.Standard}
+					index={1}
+					position="fronts-banner"
+				/>
+			)}
 			<Section
 				fullWidth={true}
 				padSides={false}
