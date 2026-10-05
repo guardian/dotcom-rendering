@@ -181,30 +181,17 @@ export const TopBar = ({
 				<Hide until="desktop">
 					<TopBarLinkContainer>
 						{
-							/** We replace "Search jobs" with "Newsletters" for AU and US editions */
-							['AU', 'US'].includes(editionId) ? (
-								<TopBarLink
-									dataLinkName={nestedOphanComponents(
-										'header',
-										'topbar',
-										'newsletters',
-									)}
-									href="/email-newsletters"
-								>
-									Newsletters
-								</TopBarLink>
-							) : (
-								<TopBarLink
-									dataLinkName={nestedOphanComponents(
-										'header',
-										'topbar',
-										'job-cta',
-									)}
-									href="https://jobs.theguardian.com"
-								>
-									Search jobs
-								</TopBarLink>
-							)
+							/** We replace "Search jobs" with "Newsletters" for all editions as the UK no longer supports jobs */
+							<TopBarLink
+								dataLinkName={nestedOphanComponents(
+									'header',
+									'topbar',
+									'newsletters',
+								)}
+								href="/email-newsletters"
+							>
+								Newsletters
+							</TopBarLink>
 						}
 					</TopBarLinkContainer>
 				</Hide>
