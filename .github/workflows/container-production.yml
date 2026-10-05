@@ -39,11 +39,9 @@ jobs:
       - name: Build image
         run: docker buildx build --platform linux/arm64 -f Production.dockerfile -t ${{ github.repository }}:latest .
       - name: Publish Image
-        uses: guardian/actions-publish-image@v0.0.8
+        uses: guardian/actions-ecr/push@v1.0.0
         id: publish-image
         with:
+          app: dotcom-rendering
           roleArn: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
-          branchName: ${{ needs.facts.outputs.branchName }}
-          buildNumber: ${{ needs.facts.outputs.buildNumber }}
-          commitSha: ${{ needs.facts.outputs.commitSha }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
