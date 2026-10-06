@@ -157,6 +157,29 @@ describe('validateAsPuzzlesPageType', () => {
 		).toBe('word-games');
 	});
 
+	it('accepts a single archive choice', () => {
+		const page = validPage();
+		const content = page.layout.containers[0]!
+			.content as (typeof page.layout.containers)[0]['content'] & {
+			archiveChoices?: unknown[];
+		};
+		content.archiveChoices = [
+			{
+				id: 'archive-word-games',
+				title: 'Word games',
+				type: 'word-game',
+				set: 'all',
+				cardVariant: 'archive',
+				url: '/puzzles-and-games/word-games/archive',
+			},
+		];
+
+		expect(
+			validateAsPuzzlesPageType(page).layout.containers[0]?.content
+				.archiveChoices,
+		).toHaveLength(1);
+	});
+
 	it('accepts enabled on featured containers and rejects it elsewhere', () => {
 		const featuredPage = validPage();
 		featuredPage.layout.containers[0]!.variant = 'featured';
@@ -174,16 +197,6 @@ describe('validateAsPuzzlesPageType', () => {
 			(page: ReturnType<typeof validPage>) => {
 				page.layout.containers[0]!.content.items[0]![0]!.cardVariant =
 					'hero';
-			},
-		],
-		[
-			'missing cadence',
-			(page: ReturnType<typeof validPage>) => {
-				const card = page.layout.containers[0]!.content
-					.items[0]![0]! as {
-					cadence?: string;
-				};
-				delete card.cadence;
 			},
 		],
 		[
@@ -219,6 +232,16 @@ describe('validateAsPuzzlesPageType', () => {
 		expect(() => validateAsPuzzlesPageType(page)).toThrow(
 			'Unable to validate request body for puzzles page',
 		);
+	});
+
+	it('accepts a puzzle card without a static cadence', () => {
+		const page = validPage();
+		const card = page.layout.containers[0]!.content.items[0]![0]! as {
+			cadence?: string;
+		};
+		delete card.cadence;
+
+		expect(validateAsPuzzlesPageType(page)).toBeDefined();
 	});
 
 	it('accepts supporting content with valid puzzle references', () => {
