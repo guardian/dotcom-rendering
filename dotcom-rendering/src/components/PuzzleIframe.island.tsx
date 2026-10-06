@@ -1,8 +1,14 @@
 import { css } from '@emotion/react';
 import { until } from '@guardian/source/foundations';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import { resolvePuzzleIframeUrl } from '../lib/puzzleIframeUrl';
+import {
+	AMUSELABS_ORIGIN,
+	createAmuseLabsAdapter,
+	handleAmuseLabsMessage,
+} from '../lib/puzzleProgress/adapters/amuseLabs';
+import { reportPuzzleProgress } from '../lib/puzzleProgress/reporter';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { palette as themePalette } from '../palette';
@@ -301,6 +307,36 @@ export const buildPuzzleIframeSrc = (
 	}
 };
 
+/**
+ * Reports the reader's progress to the Puzzles API (through the `frontend`
+ * proxy) from the messages an AmuseLabs iframe posts to this window. Only
+ * messages from the AmuseLabs origin AND from this component's own iframe are
+ * considered. Other providers have no adapter yet.
+ */
+const usePuzzleProgressReporting = (
+	puzzleConfig: PuzzleConfig,
+	iframeRef: React.RefObject<HTMLIFrameElement>,
+) => {
+	const isAmuseLabs = puzzleConfig.iframe.provider === 'amuselabs';
+
+	useEffect(() => {
+		if (!isAmuseLabs) return;
+
+		const adapter = createAmuseLabsAdapter();
+
+		const onMessage = (event: MessageEvent<unknown>) => {
+			if (event.origin !== AMUSELABS_ORIGIN) return;
+			if (event.source !== iframeRef.current?.contentWindow) return;
+
+			const progress = handleAmuseLabsMessage(adapter, event.data);
+			if (progress) void reportPuzzleProgress(progress);
+		};
+
+		window.addEventListener('message', onMessage);
+		return () => window.removeEventListener('message', onMessage);
+	}, [isAmuseLabs, iframeRef]);
+};
+
 const postContextMessage = (
 	iframe: HTMLIFrameElement,
 	context: PuzzleContext,
@@ -348,9 +384,13 @@ export const PuzzleIframe = ({
 	const darkMode = usePuzzleDarkMode(darkModeAvailable);
 	const context = buildPuzzleContext(userId, darkMode, puzzleDate);
 	const iframeSrc = buildPuzzleIframeSrc(puzzleConfig, context);
+	const iframeRef = useRef<HTMLIFrameElement>(null);
+
+	usePuzzleProgressReporting(puzzleConfig, iframeRef);
 
 	return (
 		<iframe
+			ref={iframeRef}
 			css={buildFrameStyles(puzzleConfig.slug)}
 			src={iframeSrc}
 			title={title}
