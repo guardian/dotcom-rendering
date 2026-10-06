@@ -54,6 +54,20 @@ export type PuzzleProvider = 'amuselabs' | 'wordiply';
 export interface AmuseLabsIframeConfig {
 	provider: 'amuselabs';
 	set: string;
+	/**
+	 * Prefix of AmuseLabs' stable per-day puzzle id, which is
+	 * `{idPrefix}-{YYYYMMDD}` (e.g. `guardian-sudoku-medium-20261004`).
+	 * Confirmed from the real AmuseLabs picker's tiles. Like `set`, it is
+	 * not always derivable from it: killer sudoku's is `guardian-ksudoku-
+	 * medium` and word wheel's is `guardian-wordwheel`.
+	 */
+	idPrefix: string;
+	/**
+	 * The AmuseLabs player path a dated puzzle is loaded from (e.g.
+	 * `sudoku`, `wordf`), i.e. `/guardian/{playerPath}?id=...`. Confirmed
+	 * from the picker's own tile click behaviour (its `data-puzzle-type`).
+	 */
+	playerPath: string;
 }
 
 /**
@@ -139,10 +153,11 @@ const amuseLabsPuzzle = (
 	description: string,
 	set: string,
 	printEnabled: boolean,
+	archive: Pick<AmuseLabsIframeConfig, 'idPrefix' | 'playerPath'>,
 ): PuzzleConfig => ({
 	slug,
 	puzzleGroup,
-	iframe: { provider: 'amuselabs', set },
+	iframe: { provider: 'amuselabs', set, ...archive },
 	shareEnabled: true,
 	printEnabled,
 	hasArchive: true,
@@ -179,6 +194,7 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'Easy sudoku {date}. Ease yourself in with this easy sudoku. Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
 		'guardian-sudoku-easy',
 		true,
+		{ idPrefix: 'guardian-sudoku-easy', playerPath: 'sudoku' },
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// medium sudoku
@@ -189,6 +205,7 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'Medium sudoku {date}. Ready to master the medium sudoku? Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
 		'guardian-sudoku-medium',
 		true,
+		{ idPrefix: 'guardian-sudoku-medium', playerPath: 'sudoku' },
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// hard sudoku
@@ -199,6 +216,7 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'Hard sudoku {date}. Ready to take on the hard sudoku? Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
 		'guardian-sudoku-hard',
 		true,
+		{ idPrefix: 'guardian-sudoku-hard', playerPath: 'sudoku' },
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// killer sudoku
@@ -217,6 +235,7 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'Killer sudoku {date}. Killer sudoku adds a twist. Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
 		'guardian-killer-sudoku-medium',
 		true,
+		{ idPrefix: 'guardian-ksudoku-medium', playerPath: 'sudoku' },
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// daily word wheel, word wheel puzzle, word wheel online, word wheel
@@ -233,6 +252,7 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		'Word wheel {date}. See how many words you can make out of the nine-letter daily word wheel, including the panagram.',
 		'guardian-word-wheel',
 		false,
+		{ idPrefix: 'guardian-wordwheel', playerPath: 'wordf' },
 	),
 	// Target search terms (reference only, not implemented as a meta tag):
 	// guardian wordiply, wordiply today

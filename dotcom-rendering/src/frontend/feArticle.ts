@@ -14,6 +14,7 @@ import type { FooterType } from '../types/footer';
 import type { FELinkType, FENavType, LegacyPillar } from '../types/frontend';
 import type { PaginationType } from '../types/liveBlog';
 import type { FEOnwards } from '../types/onwards';
+import type { PuzzleItem } from '../types/puzzlesPage';
 import type { MatchType } from '../types/sport';
 import type { TagType } from '../types/tag';
 import type { FETrailType } from '../types/trails';
@@ -123,6 +124,8 @@ export interface FEArticle {
 	lang?: string;
 	isRightToLeftLang?: boolean;
 	crossword?: CrosswordProps['data'];
+	/** "More from Puzzles & games" rail, only sent for crossword pages. */
+	moreFromPuzzlesAndGames?: PuzzleItem[];
 }
 
 type PageType = {
