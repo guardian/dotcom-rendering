@@ -31,8 +31,8 @@ interface LightGuardian {
 }
 
 // Minimal html page for the event graphic component.
-// The `overflow: hidden` on the body fixes an issue on the iOS app where it scrolls within the webview.
-// The `margin-top: 0` on the body fixes an issue on iOS where the border is clipped.
+// The `padding-inline: 8px` Compensates for the native web view's 8pt
+// negative horizontal padding, keeping content within the visible bounds.
 const eventGraphicTemplate = ({
 	html,
 	css,
@@ -58,7 +58,7 @@ const eventGraphicTemplate = ({
 				<meta name="robots" content="noindex">
                 <style class="webfont">${minifiedFontsCss}</style>
 				<style>${resets.resetCSS}</style>
-                <style>body { overflow: hidden; margin-top: 0; }</style>
+
 				${css}
 
 				<script>
