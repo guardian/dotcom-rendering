@@ -82,11 +82,22 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 	},
 	{
+		name: "commercial-ozone-au-nz-adunit-ids",
+		description: "0% test to prove ad units for Ozone in Aus and NZ",
+		owners: ["commercial.dev@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-10-14",
+		type: "client",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+	},
+	{
 		name: "fronts-and-curation-loop-click-through",
 		description:
 			"Test impact of click to article via loop videos on fronts",
 		owners: ["fronts.and.curation@guardian.co.uk"],
-		status: "ON",
+		status: "OFF",
 		expirationDate: "2026-09-19",
 		type: "server",
 		audienceSize: 5 / 100,
@@ -124,7 +135,7 @@ const ABTests: ABTest[] = [
 			"V2 of test to measure the impact of contamination between groups in ab tests",
 		owners: ["dotcom.platform@theguardian.com"],
 		status: "ON",
-		expirationDate: "2026-09-30",
+		expirationDate: "2026-10-14",
 		type: "client",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
@@ -132,46 +143,15 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	/**
-	 * Puzzles & Games rollout, tier v0 (the master switch).
-	 *
-	 * Gates the baseline Puzzles & Games experience: the new Puzzles Hub
-	 * page, and the 6 V0 puzzle pages (sudoku easy/medium/hard/killer,
-	 * word-wheel, wordiply). At v0, there is no archive, no calendar, no
-	 * progress indicators, no sign-in-to-track-progress prompt, no "more
-	 * from puzzles" rail, and the hub's sub-nav has no links yet.
-	 *
-	 * This is the master switch for the whole Puzzles & Games experience:
-	 * turning it off (or down to 0%) hides everything: the hub, the V0
-	 * puzzle pages, and (by the cumulative design below) every later tier
-	 * too, since v1/v2 only take effect when this is also enabled.
-	 *
-	 * See `puzzles-new-hub-v1`/`puzzles-new-hub-v2` below for the later
-	 * rollout tiers, and `src/lib/puzzlesHubVersionExperiment.ts` /
-	 * `src/lib/puzzlesHubExperiment.ts` in dotcom-rendering for the
-	 * corresponding cumulative gate-check helpers
-	 * (`isPuzzlesHubEnabled`/`isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled`).
-	 */
-	{
-		name: "puzzles-new-hub",
-		description: "Rollout of the new Puzzles Hub experience",
-		owners: ["puzzles.team@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2026-12-31",
-		type: "server",
-		audienceSize: 0 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	/**
 	 * Puzzles & Games rollout, tier v1 (w/c 12 Oct launch).
 	 *
-	 * Only takes effect when `puzzles-new-hub` (v0) is ALSO enabled for the
-	 * reader. This test does nothing on its own, by design, so the
-	 * rollout can never end up in an inconsistent state (e.g. v1 features
-	 * showing while the v0 baseline they build on is switched off).
+	 * This is the master switch for the Puzzles & Games experience: the new
+	 * Puzzles Hub page, the V0 puzzle pages (sudoku easy/medium/hard/killer,
+	 * word-wheel, wordiply) and everything below. Turning it off (or down to
+	 * 0%) hides all of it, and (by the cumulative design) every later tier
+	 * too.
 	 *
-	 * On top of v0, this tier activates: the full hub sub-nav links (to
+	 * This tier activates: the full hub sub-nav links (to
 	 * /word-games, /logic-puzzles, /trivia-and-quizzes), a
 	 * sign-in-to-track-progress message, a calendar/archive view for
 	 * crosswords/logic-puzzles/word-games (not Wordiply, which has no
@@ -180,14 +160,12 @@ const ABTests: ABTest[] = [
 	 * changes to the existing crossword page (print CTA repositioning, a
 	 * "play other puzzles" container).
 	 *
-	 * To roll back from v1 to v0 without a deploy: flip this test's
-	 * `audienceSize` to `0 / 100` (or `status` to `"OFF"`) while leaving
-	 * `puzzles-new-hub` untouched.
+	 * To roll back without a deploy: flip this test's `audienceSize` to
+	 * `0 / 100` (or `status` to `"OFF"`).
 	 */
 	{
 		name: "puzzles-new-hub-v1",
-		description:
-			"Rollout of the v1 Puzzles & Games features (w/c 12 Oct), on top of the puzzles-new-hub v0 baseline",
+		description: "Rollout of the v1 Puzzles & Games features (w/c 12 Oct)",
 		owners: ["puzzles.team@guardian.co.uk"],
 		status: "ON",
 		expirationDate: "2026-12-31",
@@ -201,11 +179,10 @@ const ABTests: ABTest[] = [
 	 * Puzzles & Games rollout, tier v2 (future, no launch date confirmed
 	 * yet as of this writing).
 	 *
-	 * Only takes effect when BOTH `puzzles-new-hub` (v0) AND
-	 * `puzzles-new-hub-v1` are ALSO enabled for the reader, same
-	 * cumulative-by-design principle as v1 above, applied one tier further.
+	 * Only takes effect when `puzzles-new-hub-v1` is ALSO enabled for the
+	 * reader, so the rollout can never end up in an inconsistent state.
 	 *
-	 * On top of v0+v1, this tier activates: the On the Ball and Film Reveal
+	 * On top of v1, this tier activates: the On the Ball and Film Reveal
 	 * iframe games (Trivia and Quizzes group), a "Most played" container,
 	 * EventKit-driven navigation, migrating existing crossword pages onto
 	 * the new Puzzle Page template, and search-engine mobile app nudges.
@@ -215,7 +192,7 @@ const ABTests: ABTest[] = [
 	{
 		name: "puzzles-new-hub-v2",
 		description:
-			"Rollout of the v2 Puzzles & Games features (no date confirmed yet), on top of the puzzles-new-hub/puzzles-new-hub-v1 baseline",
+			"Rollout of the v2 Puzzles & Games features (no date confirmed yet), on top of the puzzles-new-hub-v1 baseline",
 		owners: ["puzzles.team@guardian.co.uk"],
 		status: "ON",
 		expirationDate: "2026-12-31",
@@ -223,19 +200,6 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
-		name: "identity-and-trust-consent-rr-banner-us",
-		description:
-			"Test to measure the impact of not showing the consent RR and banner for US users",
-		owners: ["identitydev@theguardian.com", "martech.dev@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2026-12-01",
-		type: "client",
-		audienceSize: 100 / 100,
-		audienceSpace: "D",
-		groups: ["control", "variant-1", "variant-2"],
 		shouldForceMetricsCollection: false,
 	},
 	{
@@ -308,7 +272,7 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-10-28",
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 2.1 / 100, // 0.35% in each variant
 		audienceSpace: "A",
 		groups: [
@@ -326,11 +290,50 @@ const ABTests: ABTest[] = [
 		description:
 			"Test opening up the article-end ad slot in the US region for HeaderBidding",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-10-01",
+		expirationDate: "2026-10-14",
 		type: "client",
 		status: "ON",
-		audienceSize: 0 / 100,
+		audienceSize: 40 / 100,
 		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-spacefinder-highvalue-sections-set2",
+		description:
+			"Test to measure the impact on ad density after adding to high value sections in spacefinder globally excluding AUS and NZ",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-28",
+		type: "client",
+		status: "ON",
+		audienceSize: 100 / 100,
+		audienceSpace: "D",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "webx-display-custom-subnavs",
+		description:
+			"Show the custom subnav in place of the standard subnav, opt-in only",
+		owners: ["dotcom.platform@guardian.co.uk"],
+		expirationDate: "2026-11-30",
+		type: "server",
+		status: "ON",
+		audienceSize: 0,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-spacefinder-highvalue-sections-aus-nz",
+		description:
+			"Test the impact on ad density of regionalising Spacefinder for high value sections in Australia and New Zealand",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-10-28",
+		type: "client",
+		status: "ON",
+		audienceSize: 0,
+		audienceSpace: "C",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},

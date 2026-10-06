@@ -3,7 +3,7 @@ import { log } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
 import { AppsEpic } from '../components/AppsEpic.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -12,6 +12,7 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
+import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -31,6 +32,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { getSoleContributor } from '../lib/byline';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
 import { getZIndex } from '../lib/getZIndex';
@@ -67,9 +69,7 @@ const immersiveMediaBelowDesktop = (
 		position: relative;
 
 		> div {
-			${isMainMediaImage
-				? 'height: 100%;'
-				: 'position: absolute; inset: 0;'}
+			height: 100%;
 		}
 
 		${!isMainMediaImage && 'overflow: hidden;'}
@@ -102,6 +102,54 @@ const immersiveMediaBelowDesktop = (
 	}
 `;
 
+const avatarHeadlineWrapper = css`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`;
+
+// This styling taken from the similar approach in CommentLayout.tsx
+// If in mobile increase the margin top and margin right deficit
+const avatarPositionStyles = css`
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+	margin-bottom: -29px;
+	pointer-events: none;
+	${from.desktop} {
+		margin-top: -50px;
+	}
+	${until.tablet} {
+		overflow: hidden;
+	}
+
+	/*  Why target img element?
+
+        Because only in this context, where we have overflow: hidden
+        and the margin-bottom and margin-top of avatarPositionStyles
+        do we also want to apply our margin-right. These styles
+        are tightly coupled in this context, and so it does not
+        make sense to move them to the avatar component.
+
+        It's imperfect from the perspective of DCR, the alternative is to bust
+        the combined elements into a separate component (with the
+        relevant stories) and couple them that way, which might be what
+        you want to do if you find yourself adding more styles
+        to this section. For now, this works without making me 🤢.
+    */
+
+	${from.mobile} {
+		img {
+			margin-right: -1.85rem;
+		}
+	}
+	${from.mobileLandscape} {
+		img {
+			margin-right: -1.25rem;
+		}
+	}
+`;
+
 interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
@@ -110,17 +158,10 @@ interface GridItemProps {
 	children: React.ReactNode;
 }
 
-/**
- * Works out the orientation of an image from its Guardian media URL, which
- * encodes the crop dimensions in the path (e.g. `/1000_600_800_480/`).
- * Falls back to 'landscape' if the URL doesn't match the expected pattern.
- */
 const getImageOrientation = (
-	url: string,
+	aspectRatio: string,
 ): 'portrait' | 'landscape' | 'square' => {
-	const match = url.match(/\/\d+_\d+_(\d+)_(\d+)\/\d+\.\w+$/);
-	if (!match) return 'landscape';
-	const [, width, height] = match.map(Number);
+	const [width, height] = aspectRatio.split(':').map(Number);
 	if (width == null || height == null) return 'landscape';
 	if (height > width) return 'portrait';
 	if (width > height) return 'landscape';
@@ -180,6 +221,8 @@ export const StandardLayoutArticleGrid = ({
 	const isShowcase = format.display === ArticleDisplay.Showcase;
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isFeature = format.design === ArticleDesign.Feature;
+	const isPicture = format.design === ArticleDesign.Picture;
+
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
 	);
@@ -188,20 +231,28 @@ export const StandardLayoutArticleGrid = ({
 		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
 
 	const mainMedia = article.mainMediaElements[0];
+	const mainMediaType = mainMedia?._type;
+
 	const captionText = decideMainMediaCaption(mainMedia);
 	const isMainMediaImage =
-		mainMedia?._type ===
+		mainMediaType ===
 		'model.dotcomrendering.pageElements.ImageBlockElement';
+	const isMainMediaAtom =
+		mainMediaType ===
+		'model.dotcomrendering.pageElements.MediaAtomBlockElement';
+
 	const hasMinimumImageHeight = isLabs && isImmersive && isMainMediaImage;
-	const mainMediaUrl: string | undefined = isMainMediaImage
-		? mainMedia.media.allImages[0]?.url
-		: undefined;
+
 	const mainMediaAspectRatio = isMainMediaImage
 		? mainMedia.media.allImages[0]?.fields.aspectRatio
-		: undefined;
+		: isMainMediaAtom
+			? mainMedia.assets[0]?.aspectRatio
+			: undefined;
 
 	const mainMediaOrientation =
-		mainMediaUrl != null ? getImageOrientation(mainMediaUrl) : 'landscape';
+		mainMediaAspectRatio != null
+			? getImageOrientation(mainMediaAspectRatio)
+			: 'landscape';
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
 	const immersiveMediaRowHeight = isMainMediaImage
@@ -213,6 +264,7 @@ export const StandardLayoutArticleGrid = ({
 		isFeature,
 		orientation: mainMediaOrientation,
 		isMedia,
+		isPicture,
 		isShowcase,
 	});
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
@@ -221,6 +273,22 @@ export const StandardLayoutArticleGrid = ({
 		article.tags,
 		article.webPublicationDateDeprecated,
 	);
+
+	const avatarUrl = getSoleContributor(
+		article.tags,
+		article.byline,
+	)?.bylineLargeImageUrl;
+
+	const displayAvatarUrl = avatarUrl ? true : false;
+
+	const pictureLeftColLines = (avatarDisplayed: boolean) => css`
+		${avatarDisplayed && `display: none;`}
+		margin-bottom: 4px;
+		${from.leftCol} {
+			display: block;
+			${avatarDisplayed && `margin-top: -28px;`}
+		}
+	`;
 
 	return (
 		<article
@@ -271,7 +339,7 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="media"
 				layoutType={layoutType}
-				css={
+				css={[
 					isImmersive
 						? css`
 								${from.desktop} {
@@ -308,8 +376,13 @@ export const StandardLayoutArticleGrid = ({
 									}
 								`}
 							`
-						: undefined
-				}
+						: undefined,
+					displayAvatarUrl && isPicture
+						? css`
+								margin-top: ${space[2]}px;
+							`
+						: undefined,
+				]}
 			>
 				<div>
 					<MainMedia
@@ -360,6 +433,12 @@ export const StandardLayoutArticleGrid = ({
 								margin-bottom: 2px;
 							}
 						`,
+					isPicture &&
+						css`
+							display: flex;
+							flex-direction: column;
+							justify-content: space-between;
+						`,
 				]}
 			>
 				<ArticleTitle
@@ -387,12 +466,6 @@ export const StandardLayoutArticleGrid = ({
 								padding-bottom: ${space[8]}px;
 							}
 						`,
-					layoutType === 'immersiveLandscape' &&
-						css`
-							${from.desktop} {
-								padding-bottom: ${space[8]}px;
-							}
-						`,
 					layoutType === 'immersivePortrait' &&
 						css`
 							${from.desktop} {
@@ -404,17 +477,52 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
-				<ArticleHeadline
-					format={format}
-					layoutType={layoutType}
-					headlineString={article.headline}
-					tags={article.tags}
-					byline={article.byline}
-					webPublicationDateDeprecated={
-						article.webPublicationDateDeprecated
-					}
-					starRating={article.starRating}
-				/>
+				{displayAvatarUrl && isPicture ? (
+					<div css={avatarHeadlineWrapper}>
+						<ArticleHeadline
+							format={format}
+							layoutType={layoutType}
+							headlineString={article.headline}
+							tags={article.tags}
+							byline={article.byline}
+							webPublicationDateDeprecated={
+								article.webPublicationDateDeprecated
+							}
+							hasAvatar={true}
+							starRating={article.starRating}
+						/>
+
+						{!!avatarUrl && isPicture && (
+							<>
+								<div css={avatarPositionStyles}>
+									<ContributorAvatar
+										imageSrc={avatarUrl}
+										imageAlt={article.byline ?? ''}
+									/>
+								</div>
+								<StraightLines
+									count={8}
+									cssOverrides={css`
+										display: block;
+									`}
+									color={themePalette('--straight-lines')}
+								/>
+							</>
+						)}
+					</div>
+				) : (
+					<ArticleHeadline
+						format={format}
+						layoutType={layoutType}
+						headlineString={article.headline}
+						tags={article.tags}
+						byline={article.byline}
+						webPublicationDateDeprecated={
+							article.webPublicationDateDeprecated
+						}
+						starRating={article.starRating}
+					/>
+				)}
 			</GridItem>
 			<GridItem
 				area="standfirst"
@@ -429,7 +537,11 @@ export const StandardLayoutArticleGrid = ({
 					layoutType === 'immersiveLandscape' &&
 						css`
 							${from.desktop} {
-								padding-bottom: ${space[8]}px;
+								padding-top: ${space[8]}px;
+							}
+
+							${from.leftCol} {
+								padding-bottom: 14px;
 							}
 						`,
 				]}
@@ -480,12 +592,24 @@ export const StandardLayoutArticleGrid = ({
 								}
 							`
 						: undefined,
+					layoutType === 'immersiveLandscape' &&
+						css`
+							${from.leftCol} {
+								padding-top: ${space[8]}px;
+							}
+						`,
 				]}
 			>
 				{format.display !== ArticleDisplay.Immersive &&
 					format.design !== ArticleDesign.Audio &&
 					layoutType !== 'immersivePortrait' && (
-						<div css={stretchLines}>
+						<div
+							css={[
+								isPicture &&
+									pictureLeftColLines(displayAvatarUrl),
+								stretchLines,
+							]}
+						>
 							{isWeb &&
 							format.theme === ArticleSpecial.Labs &&
 							format.design !== ArticleDesign.Video ? (
@@ -494,6 +618,9 @@ export const StandardLayoutArticleGrid = ({
 								<DecideLines
 									format={format}
 									color={themePalette('--article-border')}
+									displayingAvatar={
+										displayAvatarUrl && isPicture
+									}
 								/>
 							)}
 						</div>
@@ -700,30 +827,32 @@ export const StandardLayoutArticleGrid = ({
 					}
 				`}
 			>
-				<Hide until="desktop">
-					<Island
-						priority="feature"
-						defer={{
-							until: 'visible',
-							// Provide a much higher value for the top margin for the intersection observer
-							// This is because the most viewed would otherwise only be lazy loaded when the
-							// bottom of the container intersects with the viewport
-							rootMargin: '700px 100px',
-						}}
-					>
-						<MostViewedRightWithAd
-							format={format}
-							isPaidContent={article.pageType.isPaidContent}
-							renderAds={isWeb && renderAds}
-							shouldHideReaderRevenue={
-								!!article.config.shouldHideReaderRevenue
-							}
-							shouldHideMostViewed={
-								format.design === ArticleDesign.Audio
-							}
-						/>
-					</Island>
-				</Hide>
+				{!isPicture && (
+					<Hide until="desktop">
+						<Island
+							priority="feature"
+							defer={{
+								until: 'visible',
+								// Provide a much higher value for the top margin for the intersection observer
+								// This is because the most viewed would otherwise only be lazy loaded when the
+								// bottom of the container intersects with the viewport
+								rootMargin: '700px 100px',
+							}}
+						>
+							<MostViewedRightWithAd
+								format={format}
+								isPaidContent={article.pageType.isPaidContent}
+								renderAds={isWeb && renderAds}
+								shouldHideReaderRevenue={
+									!!article.config.shouldHideReaderRevenue
+								}
+								shouldHideMostViewed={
+									format.design === ArticleDesign.Audio
+								}
+							/>
+						</Island>
+					</Hide>
+				)}
 			</GridItem>
 		</article>
 	);

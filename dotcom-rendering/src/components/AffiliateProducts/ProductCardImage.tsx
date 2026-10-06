@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { focusHalo } from '@guardian/source/foundations';
 import type { HTMLAttributes } from 'react';
-import type { ArticleFormat } from '../lib/articleFormat';
-import type { ProductImage } from '../types/content';
-import { Caption } from './Caption';
-import { useConfig } from './ConfigContext';
-import { LightboxLink } from './LightboxLink';
-import { Picture } from './Picture';
+import type { ArticleFormat } from '../../lib/articleFormat';
+import type { ProductImage } from '../../types/content';
+import { Caption } from '../Caption';
+import { useConfig } from '../ConfigContext';
+import { LightboxLink } from '../LightboxLink';
+import { Picture } from '../Picture';
 
 interface ProductCardImageProps extends HTMLAttributes<HTMLDivElement> {
 	format: ArticleFormat;

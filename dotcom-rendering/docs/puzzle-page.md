@@ -31,10 +31,10 @@ endpoint/contract at all; it's mentioned here only so example URLs
 elsewhere in this doc stay accurate.
 
 **Access control is enforced on both sides.** `frontend` gates reader
-access to these routes via its existing `PuzzlesHubExperiment`/
-`puzzles-new-hub` AB test before it ever POSTs to DCR. DCR's own
-`/PuzzlePage` endpoint additionally checks the same `puzzles-new-hub`
-participation itself (via `isPuzzlesHubEnabled`, mirroring
+access to these routes via its existing `PuzzlesHubV1Experiment`/
+`puzzles-new-hub-v1` AB test before it ever POSTs to DCR. DCR's own
+`/PuzzlePage` endpoint additionally checks the same `puzzles-new-hub-v1`
+participation itself (via `isPuzzlesHubV1Enabled`, mirroring
 `/PuzzlesPage`'s hub gate) and returns `404` when it isn't enabled for the
 request, so the endpoint isn't left relying solely on `frontend` never
 calling it (see "Hitting it locally" below).
@@ -66,7 +66,7 @@ query params a given provider does or doesn't accept, is the job of a
 per-provider strategy module, `src/lib/puzzleIframeUrl.ts`, not this
 registry:
 
-- `buildAmuseLabsUrl(config, context)` builds `set`/`embed=1`/`idx=1`,
+- `buildAmuseLabsUrl(config, context)` builds `set`/`embed=1`/`idx=1` (or `id=` when a puzzle date is given, see Open questions),
   then conditionally `uid` (only when signed in, confirmed against the
   native apps' real AmuseLabs integration) and always `darkMode=0|1` (a
   plain literal query value, also confirmed, unlike `uid` this is never
@@ -121,11 +121,11 @@ This starts webpack-dev-server on `http://localhost:3030`
 (`webpack/webpack.config.dev-server.js`).
 
 `src/server/handler.puzzlePage.web.ts` validates the body
-(`validateAsPuzzlePageType`), checks the request's `puzzles-new-hub`
-participation via `isPuzzlesHubEnabled` (`404` if not enabled), looks up
+(`validateAsPuzzlePageType`), checks the request's `puzzles-new-hub-v1`
+participation via `isPuzzlesHubV1Enabled` (`404` if not enabled), looks up
 the `PuzzleConfig` for the request's `slug` (`404` if unknown), and only
 then renders. Fixtures generated below set `serverSideABTests` to
-`{ 'puzzles-new-hub': 'variant' }` so they pass this gate; `NODE_ENV=development`
+`{ 'puzzles-new-hub-v1': 'variant' }` so they pass this gate; `NODE_ENV=development`
 also bypasses it locally.
 
 Generate fixture JSON for all 6 slugs using the `tsx` devDependency (no
@@ -487,8 +487,15 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   neither has been confirmed against what AmuseLabs or Wordiply actually
   expect to receive, including whether `legacy_identity_id` (rather than
   the OIDC `sub` claim) is the right identifier format for the `userId`
-  field within it, and whether either provider's iframe even supports a
-  dark-mode signal in the first place (see the dark-mode bullet below).
+  field within it. On dark mode specifically: AmuseLabs does document a
+  real, confirmed postMessage-based dark-mode API of its own
+  (`{ type: 'updateDarkMode', darkMode: boolean }`) - but it is a
+  completely separate message shape from `guardian-puzzle-context`, isn't
+  sent by DCR today, and needs to be explicitly enabled per series by
+  AmuseLabs before it does anything (see the dark-mode bullet below for
+  detail). Whether `guardian-puzzle-context`'s own `darkMode` field (or
+  anything else in it) does anything at all remains exactly as unconfirmed
+  as before.
   The separate, plain `uid=<userId>` query parameter (see "User/context
   info passed to the puzzle iframe" above), by contrast, **is** confirmed:
   sourced from the native (Android/iOS) apps' own real, working AmuseLabs
@@ -517,36 +524,22 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   for a puzzle's in-progress state to be saved against a Guardian account
   and restored later (e.g. via `postMessage` round-tripping progress data).
   This has been deliberately deferred until such an API exists.
-- **The real AmuseLabs archive URL is still unknown, and today's `idx=1`
-  is a "today only" hack that cannot show a specific past puzzle.**
-  `PuzzleConfig.hasArchive` exists on every registry entry (currently
-  always `true`) but is **not consumed anywhere in rendering.** There is
-  no archive-link UI, and no archive URL field exists in the registry at
-  all. A URL seen during the original proof-of-concept was only there as
-  an illustrative example, not a verified production AmuseLabs archive
-  URL. Per the AmuseLabs integration doc shared by the product team
-  (confirmed against native app behaviour): "The apps currently use
-  `idx=1` for the latest puzzle. Archive URLs should use the stable `id`
-  instead... Do not add `idx=1`, as that selects the latest puzzle instead
-  of the archived one." All 5 of our AmuseLabs entries' `buildAmuseLabsUrl`
-  builder (`src/lib/puzzleIframeUrl.ts`) hardcodes `idx=1`, which is
-  correct only for "today's puzzle" (V0's only real use case), it is
-  **not** valid for showing a specific past date's puzzle. Building
-  calendar/archive functionality (V1) will require swapping `idx=1` for
-  `id={realProviderPuzzleId}` in that one shared builder function (a
-  small, contained change, not a per-entry rewrite, since the builder is
-  the single place that assembles the AmuseLabs URL), where that real
-  per-puzzle id must come from a not-yet-built archive API, it cannot be
-  derived or guessed from a date locally. Treat sourcing that real archive
-  URL/id mechanism from the team as a hard blocker for calendar/archive
-  work, not a nice-to-have. **A related, current gap worth being explicit
-  about**: `instance.puzzleDate` is accepted, displayed next to the title,
-  and passed through to the iframe context (see above), but it does
-  **not** actually change which puzzle instance the iframe shows. The
-  iframe always shows the provider's own "latest" puzzle via `idx=1`,
-  regardless of `puzzleDate`'s value, so the date shown on the page and
-  the puzzle actually embedded can silently diverge once `puzzleDate`
-  ever points anywhere other than today.
+- **AmuseLabs archive: dated puzzles are loaded by stable id.** When
+  `instance.puzzleDate` is a valid `YYYY-MM-DD`, `buildAmuseLabsUrl`
+  (`src/lib/puzzleIframeUrl.ts`) loads that day's puzzle straight from the
+  player: `https://tg.amuselabs.com/guardian/{playerPath}?id={idPrefix}-{YYYYMMDD}&set={set}&embed=1`
+  (e.g. `.../sudoku?id=guardian-sudoku-medium-20261004&set=guardian-sudoku-medium&embed=1`),
+  never combined with `idx=1` (per the AmuseLabs integration doc that
+  would select the latest puzzle instead). The id pattern, `idPrefix` and
+  `playerPath` were confirmed from the real AmuseLabs date-picker's tiles
+  (`data-id`/`data-puzzle-type`) and its click behaviour; they are stored
+  per entry in `AmuseLabsIframeConfig` because they are not always
+  derivable from `set` (killer sudoku: `guardian-ksudoku-medium`; word
+  wheel: `guardian-wordwheel`, player `wordf`). Without a valid date the
+  URL falls back to `date-picker?...&idx=1` ("latest"). Known limits: a
+  date with no published puzzle (e.g. a future date) shows AmuseLabs' own
+  error page, and how far back the archive goes is unverified.
+  `PuzzleConfig.hasArchive` is still not consumed anywhere in rendering.
 - **Today's `puzzleConfigs.ts` registry (with its explicit, per-entry
   `set`/`baseUrl` identity data, resolved into a URL by
   `src/lib/puzzleIframeUrl.ts`) is a deliberate V0-only stopgap, expected
@@ -590,6 +583,41 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   AmuseLabs or Wordiply actually read or honour that signal at all is
   unconfirmed (see the `PuzzleContextMessage` open question above). This has
   not been visually verified in either light or dark mode.
+
+    **AmuseLabs' own, separate, real light/dark-mode API is now confirmed, and
+    DCR does not use it.** Per AmuseLabs' public integration docs
+    (<https://amuselabs.com/docs/integration/iframe-communication/#switching-lightdark-mode>,
+    read 2026-09-25): the parent page can switch an already-loaded puzzle's
+    theme live, without reloading the iframe, by posting
+    `{ type: 'updateDarkMode', darkMode: true | false }` to
+    `iframe.contentWindow`. This is a **different, AmuseLabs-owned message
+    shape**, entirely separate from DCR's own `guardian-puzzle-context`
+    blob above - AmuseLabs' docs don't mention `guardian-puzzle-context` at
+    all, which is consistent with that shape still being unconfirmed. Two
+    things to know before anyone relies on this:
+    1. **It requires prior enablement per series**: AmuseLabs' docs state
+       "Dark mode syncing via `postMessage` must be enabled for your
+       series. Contact us to enable it." - there's no evidence in this
+       codebase or its docs that this has been requested/confirmed for any
+       of the Guardian's series.
+    2. **DCR does not currently send this message at all.** Today, when the
+       reader's OS theme changes while on the page, `PuzzleIframe` instead
+       gives the `<iframe>` a fresh `src` (a new `darkMode=0|1` query
+       param), which the browser treats as a full reload - see "The iframe
+       reloads automatically..." above. That achieves the same
+       reader-visible outcome (correct theme shown) through a different,
+       already-working mechanism, not through this API. Adopting
+       `updateDarkMode` instead (to avoid the reload) would be a genuinely
+       new, separately-scoped change, not something already covered by the
+       existing reload behaviour.
+
+    The same AmuseLabs docs page also documents several iframe→parent
+    message types not currently consumed anywhere in this codebase,
+    including `PUZZLE_PROGRESS` and `PUZZLE_COMPLETE` - worth checking first
+    if "No saved puzzle state / progress persistence" (below) is ever picked
+    up, since it may already be the API that bullet says doesn't exist yet
+    (unconfirmed either way; not read in detail here beyond their names).
+
 - **Responsive/mobile layout has not been explicitly verified** for Puzzle
   Page or the puzzle iframes themselves (which are entirely provider-
   controlled content). This includes the puzzle iframe's own `min-height`
@@ -606,78 +634,54 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   task); true calendar/business-logic validity (e.g. "did this puzzle
   actually exist on this date") is not validated anywhere in the stack yet.
 - **DCR's `/PuzzlePage` endpoint now has its own route-level access
-  control**, checking `puzzles-new-hub` participation via
-  `isPuzzlesHubEnabled` and returning `404` when it isn't enabled, in
+  control**, checking `puzzles-new-hub-v1` participation via
+  `isPuzzlesHubV1Enabled` and returning `404` when it isn't enabled, in
   addition to (not instead of) `frontend`'s existing
-  `PuzzlesHubExperiment`/`puzzles-new-hub` gate that decides whether a
+  `PuzzlesHubV1Experiment`/`puzzles-new-hub-v1` gate that decides whether a
   reader ever reaches one of these puzzle-page URLs in the first place.
   DCR also has a real, cumulative, code-change-free kill-switch for
   individual _feature tiers_ within the rendered page, see "Feature-tier
-  rollout gating (v0/v1/v2)" below.
+  rollout gating (v1/v2)" below.
 - **The Puzzles Hub (`src/layouts/PuzzlesLayout.tsx` and friends) is a
   separate, unrelated feature** (a directory/listing page) and is not
   documented in this file.
 
-### Feature-tier rollout gating (v0/v1/v2)
+### Feature-tier rollout gating (v1/v2)
 
-The Puzzles & Games rollout uses a 3-tier, **cumulative** AB-test/
+The Puzzles & Games rollout uses a 2-tier, **cumulative** AB-test/
 kill-switch structure (`ab-testing/config/abTests.ts`), so any rollout
-phase can be turned on/off, or rolled back to an earlier phase, without
-a DCR code change or redeploy. This is per the product rollout plan (v0 =
-w/c 5 Oct launch, v1 = w/c 12 Oct launch, v2 = no date confirmed yet).
+phase can be turned on/off without a DCR code change or redeploy. The
+former `puzzles-new-hub` (v0) test was removed: everything it gated is now
+gated by `puzzles-new-hub-v1`.
 
-- **`puzzles-new-hub` (v0, the master switch)**: gates the baseline
-  experience, the new Puzzles Hub page, and the 6 V0 puzzle pages (sudoku
-  x4, word-wheel, wordiply) with no archive, no calendar, no progress
-  indicators, no sign-in prompt, no related-content rail, and a hub
-  sub-nav with no links yet. Turning this off hides everything, including
-  every later tier.
-- **`puzzles-new-hub-v1`**: the w/c 12 Oct layer, **on top of v0**. It does
-  nothing unless `puzzles-new-hub` is _also_ enabled. Activates: full hub
-  sub-nav links, a sign-in-to-track-progress message, a calendar/archive
-  view for crosswords/logic-puzzles/word-games (not Wordiply), progress
-  indicators, the "More from Puzzles & Games" rail, newsletter signup, and
-  changes to the existing crossword page (print CTA repositioning, "play
-  other puzzles" container).
-- **`puzzles-new-hub-v2`**: a future layer, **on top of v0+v1**. It does
-  nothing unless both `puzzles-new-hub` and `puzzles-new-hub-v1` are
-  _also_ enabled. Activates: On the Ball/Film Reveal (Trivia and Quizzes),
-  a "Most played" container, EventKit-driven navigation, migrating
-  existing crossword pages onto the Puzzle Page template, and
-  search-engine mobile app nudges. No launch date confirmed yet; kept at
-  0% until that work begins.
+- **`puzzles-new-hub-v1`** (the master switch, w/c 12 Oct launch): gates
+  the Puzzles Hub page, the 6 puzzle pages (sudoku x4, word-wheel,
+  wordiply), full hub sub-nav links, a sign-in-to-track-progress message, a
+  calendar/archive view for crosswords/logic-puzzles/word-games (not
+  Wordiply), progress indicators, the "More from Puzzles & Games" rail,
+  newsletter signup, and changes to the existing crossword page (print CTA
+  repositioning, "play other puzzles" container). Turning this off hides
+  everything, including every later tier.
+- **`puzzles-new-hub-v2`**: a future layer, **on top of v1**. It does
+  nothing unless `puzzles-new-hub-v1` is _also_ enabled. Activates: On the
+  Ball/Film Reveal (Trivia and Quizzes), a "Most played" container,
+  EventKit-driven navigation, migrating existing crossword pages onto the
+  Puzzle Page template, and search-engine mobile app nudges. No launch date
+  confirmed yet; kept at 0% until that work begins.
 
-The cumulative design is deliberate: it's impossible to end up with, say,
-v2 features showing while v0 is switched off, since each tier's gate
-function requires every tier below it to also pass. To roll back a single
-phase without a deploy, flip only that tier's `audienceSize`/`status` in
-`abTests.ts` and leave the tier(s) below it untouched (e.g. to roll back
-from v1 to v0, turn off `puzzles-new-hub-v1` only).
+To roll back a single phase without a deploy, flip only that tier's
+`audienceSize`/`status` in `abTests.ts`.
 
 The corresponding gate-check helpers live in DCR:
+`isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled`
+(`src/lib/puzzlesHubVersionExperiment.ts`), cumulative, as described above.
 
-- `isPuzzlesHubEnabled` (`src/lib/puzzlesHubExperiment.ts`), v0 only.
-- `isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled`
-  (`src/lib/puzzlesHubVersionExperiment.ts`), cumulative, as described
-  above.
-
-**Current state**: all three tiers sit at `audienceSize: 0/100`, hidden
-from the public entirely. v0 is now enforced at both layers: `frontend`'s
-route-level `PuzzlesHubExperiment` check decides whether a request reaches
+**Current state**: both tiers sit at `audienceSize: 0/100`, hidden from the
+public entirely. The v1 gate is enforced at both layers: `frontend`'s
+route-level `PuzzlesHubV1Experiment` check decides whether a request reaches
 `/PuzzlePage` at all, and DCR's `handlePuzzlePage` independently checks
-`isPuzzlesHubEnabled` before rendering, so the endpoint isn't left relying
-solely on `frontend` never calling it. On top of that v0 gate,
-`PuzzlePageLayout.tsx`'s "More from Puzzles & Games" rail is further gated
-behind `isPuzzlesHubV1Enabled` (since that rail is v1-scoped, not v0).
-When future v1/v2 work is implemented (calendar, progress indicators,
-sign-in message, on-the-ball/film-reveal, etc.), it should be gated behind
-`isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled` respectively, using the
-helpers above, the same way the related-content rail already is.
-
-**No `frontend` repo changes are needed for any of this.** `frontend`'s
-existing route-level `PuzzlesHubExperiment` gate (already reusing
-`puzzles-new-hub`) is unaffected by `puzzles-new-hub-v1`/
-`puzzles-new-hub-v2` and doesn't need to check them.
+`isPuzzlesHubV1Enabled` before rendering. Future v2 work should be gated
+behind `isPuzzlesHubV2Enabled`.
 
 ### SEO risks to revisit before shipping calendar/archive features
 

@@ -4,24 +4,18 @@ on:
   merge_group:
     types: [checks_requested]
   push:
+    branches-ignore:
+      - 'gh-readonly-queue/*'
 
 jobs:
   production-container:
     permissions:
       contents: read
       id-token: write # Required to exchange for AWS credentials using OIDC
-      pull-requests: write # Required by guardian/actions-publish-image to comment on PRs
+      pull-requests: write # Required by guardian/actions-ecr to comment on PRs
     uses: ./.github/workflows/container-production.yml
     secrets:
       GU_ARTIFACTS_ROLE_ARN: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
-
-  container:
-    permissions:
-      packages: write
-    needs: [production-container]
-    uses: ./.github/workflows/container.yml
-    with:
-      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
 
   prettier:
     if: github.ref != 'refs/heads/main'
@@ -40,18 +34,23 @@ jobs:
     uses: ./.github/workflows/check-islands.yml
 
   playwright:
-    needs: [container]
+    needs: [production-container]
     if: github.ref != 'refs/heads/main'
+    permissions:
+      contents: read
+      id-token: write # Required to exchange for AWS credentials using OIDC
     uses: ./.github/workflows/playwright.yml
+    secrets:
+      GU_ARTIFACTS_ROLE_ARN: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
     with:
-      container-image: ${{ needs.container.outputs.container-image }}
+      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
 
   publish:
     permissions:
       id-token: write
       contents: read
       pull-requests: write # required by riff-raff action
-    needs: [container, islands, prettier, jest, lint, playwright]
+    needs: [production-container, islands, prettier, jest, lint, playwright]
     # We don't need a riff-raff deployment for merge_group events.
     # `!cancelled()` forces this job to be evaluated even when some of the
     # `needs` jobs are skipped (the checks are skipped on push to main), and
@@ -64,6 +63,7 @@ jobs:
       github.event_name == 'push'
     uses: ./.github/workflows/publish.yml
     with:
-      container-image: ${{ needs.container.outputs.container-image }}
+      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
     secrets:
       GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+      GU_ARTIFACTS_ROLE_ARN: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}

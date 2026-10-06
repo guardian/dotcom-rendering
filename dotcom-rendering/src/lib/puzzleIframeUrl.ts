@@ -45,35 +45,48 @@ import type {
 export interface PuzzleUrlContext {
 	userId: string | null;
 	darkMode: boolean;
+	/**
+	 * `YYYY-MM-DD` of the puzzle the reader wants. Optional: when absent or
+	 * malformed, AmuseLabs' "latest puzzle" is shown instead.
+	 */
+	puzzleDate?: string | null;
 }
 
-const AMUSELABS_BASE_URL = 'https://tg.amuselabs.com/guardian/date-picker';
+const AMUSELABS_BASE_URL = 'https://tg.amuselabs.com/guardian';
+const PUZZLE_DATE_PATTERN = /^(\d{4})-(\d{2})-(\d{2})$/;
 
 /**
- * Builds an AmuseLabs iframe URL: `set`, `embed=1`, and `idx=1` (today's
- * puzzle), then conditionally `uid` (only when signed in, confirmed
- * mechanism), then always `darkMode=0|1` (a plain literal query value,
- * confirmed mechanism, unlike `uid` this is always included, never
- * conditionally omitted).
+ * Builds an AmuseLabs iframe URL. `uid` is only added when signed in, and
+ * `darkMode=0|1` is always added (a plain literal query value).
  *
- * `idx=1` is a "today only" hack, confirmed against the AmuseLabs
- * integration doc ("The apps currently use idx=1 for the latest puzzle.
- * Archive URLs should use the stable id instead... Do not add idx=1, as
- * that selects the latest puzzle instead of the archived one."). Swapping
- * `idx=1` for `id={realProviderPuzzleId}` to support a specific past
- * puzzle (archive/calendar, V1) is future work, not something to build
- * now, this function is structured so that swap will be a small, contained
- * change here later (e.g. an optional `id` parameter on this function),
- * not a rewrite. See docs/puzzle-page.md.
+ * With a valid `context.puzzleDate`, loads that day's puzzle straight from
+ * the player by AmuseLabs' stable id, `{idPrefix}-{YYYYMMDD}`:
+ * `/guardian/{playerPath}?id=...&set=...&embed=1`. Per the AmuseLabs
+ * integration doc, `idx=1` must not be combined with an id, as it would
+ * select the latest puzzle instead. A date with no published puzzle (e.g. a
+ * future date) makes AmuseLabs show its own error page.
+ *
+ * Without a valid date, falls back to the date picker with `idx=1`
+ * ("today's puzzle").
  */
 export const buildAmuseLabsUrl = (
 	config: AmuseLabsIframeConfig,
 	context: PuzzleUrlContext,
 ): string => {
-	const url = new URL(AMUSELABS_BASE_URL);
-	url.searchParams.set('set', config.set);
-	url.searchParams.set('embed', '1');
-	url.searchParams.set('idx', '1');
+	const dateMatch = PUZZLE_DATE_PATTERN.exec(context.puzzleDate ?? '');
+	const url = dateMatch
+		? new URL(`${AMUSELABS_BASE_URL}/${config.playerPath}`)
+		: new URL(`${AMUSELABS_BASE_URL}/date-picker`);
+	if (dateMatch) {
+		const [, year, month, day] = dateMatch;
+		url.searchParams.set('id', `${config.idPrefix}-${year}${month}${day}`);
+		url.searchParams.set('set', config.set);
+		url.searchParams.set('embed', '1');
+	} else {
+		url.searchParams.set('set', config.set);
+		url.searchParams.set('embed', '1');
+		url.searchParams.set('idx', '1');
+	}
 	if (context.userId !== null) {
 		url.searchParams.set('uid', context.userId);
 	}
