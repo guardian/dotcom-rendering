@@ -8,8 +8,8 @@ import {
 } from '@guardian/source/foundations';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { Masthead } from '../components/Masthead/Masthead';
 import { Island } from '../components/Island';
+import { Masthead } from '../components/Masthead/Masthead';
 import { PuzzlesDirectoryProgress } from '../components/PuzzlesDirectoryProgress.island';
 import { Section } from '../components/Section';
 import type { NavType } from '../model/extract-nav';
