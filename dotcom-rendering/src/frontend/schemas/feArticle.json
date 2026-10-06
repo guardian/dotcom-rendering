@@ -558,6 +558,67 @@
                 "number",
                 "solutionAvailable"
             ]
+        },
+        "moreFromPuzzlesAndGames": {
+            "description": "\"More from Puzzles & games\" rail, only sent for crossword pages.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "set": {
+                        "type": "string"
+                    },
+                    "cardVariant": {
+                        "$ref": "#/definitions/PuzzleCardVariant"
+                    },
+                    "cadence": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "image": {
+                        "type": "string"
+                    },
+                    "imageAlt": {
+                        "type": "string"
+                    },
+                    "setter": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string"
+                    },
+                    "slug": {
+                        "type": "string"
+                    },
+                    "index": {
+                        "type": "number"
+                    },
+                    "variant": {
+                        "type": "string"
+                    },
+                    "backgroundColour": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "cardVariant",
+                    "id",
+                    "set",
+                    "title",
+                    "type"
+                ]
+            }
         }
     },
     "required": [
@@ -7554,6 +7615,15 @@
                 "text",
                 "url"
             ]
+        },
+        "PuzzleCardVariant": {
+            "enum": [
+                "archive",
+                "compact",
+                "large",
+                "primary"
+            ],
+            "type": "string"
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

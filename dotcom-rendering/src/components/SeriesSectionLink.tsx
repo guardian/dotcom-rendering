@@ -407,35 +407,6 @@ export const SeriesSectionLink = ({
 				</div>
 			);
 		}
-		if (
-			layoutType === 'immersivePortrait' ||
-			layoutType === 'immersiveLandscape'
-		) {
-			return (
-				<>
-					<a
-						href={`${guardianBaseURL}/${sectionUrl}`}
-						css={[
-							sectionLabelLink,
-							css`
-								color: ${sectionTitleColour};
-								background-color: ${themePalette(
-									'--section-title-background',
-								)};
-							`,
-							marginRight,
-							fontStyles(format),
-							breakWord,
-						]}
-						data-component="section"
-						data-link-name="article section"
-						className={interactiveLegacyClasses.labelLink}
-					>
-						<span>{sectionLabel}</span>
-					</a>
-				</>
-			);
-		}
 		// Other types of immersives show nothing at all if there's no series tag
 		return null;
 	}
