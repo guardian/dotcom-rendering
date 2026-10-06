@@ -16,6 +16,7 @@ import {
 	SvgCheckmark,
 } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { getAuthStatus } from '../lib/identity';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
 export type CalendarCell = {
@@ -481,11 +482,12 @@ export const PuzzlesArchiveCalendar = ({
 			year: number,
 			month: number,
 			puzzleId: string,
+			force = false,
 		): Promise<PuzzlesArchive | undefined> => {
 			const currentRequest = ++requests.current.id;
 			const key = cacheKey(puzzleId, year, month);
 			const cached = cache.current.get(key);
-			if (cached && !cached.hasError) {
+			if (!force && cached && !cached.hasError) {
 				setArchive(cached);
 				setError(cached.hasError);
 				setLoading(false);
@@ -500,8 +502,17 @@ export const PuzzlesArchiveCalendar = ({
 					`/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
 					window.location.origin,
 				);
+				const authStatus = await getAuthStatus();
+				const headers: Record<string, string> = {
+					Accept: 'application/json',
+				};
+				if (authStatus.kind === 'SignedIn') {
+					headers.Authorization = `Bearer ${authStatus.accessToken.accessToken}`;
+				}
 				const response = await fetch(url, {
+					cache: 'no-store',
 					credentials: 'same-origin',
+					headers,
 				});
 				if (!response.ok) {
 					throw new Error(
@@ -538,7 +549,8 @@ export const PuzzlesArchiveCalendar = ({
 		const pendingRequests = requests.current;
 		// The browser retains the query even when the CDN removes it upstream.
 		// Restore deep links after hydration, and Back/Forward without a reload.
-		const restoreSelection = () => {
+		const restoreSelection = async () => {
+			const requestAtStart = requests.current.id;
 			const params = new URLSearchParams(window.location.search);
 			const puzzle = params.get('puzzle');
 			const selectedPuzzle =
@@ -560,16 +572,20 @@ export const PuzzlesArchiveCalendar = ({
 				(year < today.getFullYear() ||
 					(year === today.getFullYear() &&
 						month <= today.getMonth() + 1));
+			const authStatus = await getAuthStatus();
+			if (requestAtStart !== requests.current.id) return;
 			void loadArchive(
 				validMonth ? year : initialArchive.year,
 				validMonth ? month : initialArchive.month,
 				selectedPuzzle.id,
+				authStatus.kind === 'SignedIn',
 			);
 		};
-		restoreSelection();
-		window.addEventListener('popstate', restoreSelection);
+		void restoreSelection();
+		const onPopState = () => void restoreSelection();
+		window.addEventListener('popstate', onPopState);
 		return () => {
-			window.removeEventListener('popstate', restoreSelection);
+			window.removeEventListener('popstate', onPopState);
 			++pendingRequests.id;
 		};
 	}, [initialArchive, loadArchive]);
