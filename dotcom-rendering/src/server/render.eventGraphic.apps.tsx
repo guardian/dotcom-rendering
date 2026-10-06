@@ -48,7 +48,7 @@ const eventGraphicTemplate = ({
 				<meta name="robots" content="noindex">
                 <style class="webfont">${minifiedFontsCss}</style>
 				<style>${resets.resetCSS}</style>
-
+				<style>body { padding-inline: 8px; }</style>
 				${css}
 
 				<script>
