@@ -2223,7 +2223,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                   {
                     "Ref": "AWS::URLSuffix",
                   },
-                  "/guardian/dotcom-rendering@sha256:12345",
+                  "/guardian/dotcom-rendering/dotcom-rendering@sha256:12345",
                 ],
               ],
             },
@@ -2444,7 +2444,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                     {
                       "Ref": "ArtifactAccountIdParameter",
                     },
-                    ":repository/guardian/dotcom-rendering",
+                    ":repository/guardian/dotcom-rendering/dotcom-rendering",
                   ],
                 ],
               },
@@ -4392,7 +4392,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
                   {
                     "Ref": "AWS::URLSuffix",
                   },
-                  "/guardian/dotcom-rendering@sha256:12345",
+                  "/guardian/dotcom-rendering/dotcom-rendering@sha256:12345",
                 ],
               ],
             },
@@ -4613,7 +4613,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
                     {
                       "Ref": "ArtifactAccountIdParameter",
                     },
-                    ":repository/guardian/dotcom-rendering",
+                    ":repository/guardian/dotcom-rendering/dotcom-rendering",
                   ],
                 ],
               },

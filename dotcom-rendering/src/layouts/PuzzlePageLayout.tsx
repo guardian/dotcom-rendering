@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold20,
 	remSpace,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
@@ -20,9 +19,9 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Logo } from '../components/Masthead/Titlepiece/Logo';
-import { MorePuzzlesRows } from '../components/MorePuzzlesCard';
 import { PrintButton } from '../components/PrintButton.island';
 import { PuzzleIframe } from '../components/PuzzleIframe.island';
+import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
@@ -31,8 +30,15 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { formatPuzzleDate } from '../lib/puzzleDate';
-import { isPuzzlesHubV1Enabled } from '../lib/puzzlesHubVersionExperiment';
-import type { LinkType, NavType, SubNavType } from '../model/extract-nav';
+import {
+	isPuzzlesHubV1Enabled,
+	isPuzzlesHubV2Enabled,
+} from '../lib/puzzlesHubVersionExperiment';
+import {
+	getPuzzlesSubNavLinks,
+	PUZZLES_SUBNAV_PARENT,
+} from '../lib/puzzlesSubNav';
+import type { NavType, SubNavType } from '../model/extract-nav';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { palette as themePalette } from '../palette';
 import type { FEPuzzlePageType } from '../types/puzzlePage';
@@ -127,71 +133,13 @@ const puzzleHeadlineNames: Record<string, string> = {
  * series/section link's href as `${guardianBaseURL}/${...}`, so this is
  * deliberately left empty rather than hardcoded to the production origin:
  * the series ("Sudoku") and section ("Logic puzzles") links then resolve to
- * root-relative paths (e.g. `/puzzles-and-games/logic-puzzles`), same-origin
+ * root-relative paths (e.g. `/puzzles-and-games/logic-puzzles/archive`), same-origin
  * on every environment, exactly like this layout's own hardcoded
  * `PUZZLES_SUBNAV_LINKS` above - rather than always pointing at
  * `https://www.theguardian.com` and hijacking local/test environments into
  * navigating to production.
  */
 const GUARDIAN_BASE_URL = '';
-
-/**
- * A hardcoded replica of the real crossword page's header sub-nav row
- * (`Masthead`/`Titlepiece/SubNav.tsx`, fed by `NAV.subNavSections` there -
- * e.g. "Crosswords / Blog / Quick / Sunday quick / ..."), per explicit
- * design direction: the same visual row/pattern, but with Puzzles & Games'
- * own top-level categories instead of Crosswords' own series list.
- *
- * `NAV.subNavSections` (as sent by `frontend`) reflects generic,
- * page-specific navigation `frontend` resolves for its own pages; Puzzle
- * Page requests don't carry a meaningful equivalent of the crossword
- * page's series sub-nav, so this is a fixed, design-provided list instead
- * of anything derived from `NAV`/`FEPuzzlePageType`.
- *
- * None of "Crosswords"/"Word games"/"Logic puzzles"/"Trivia & quizzes" have
- * a real V0 equivalent (per explicit design direction, V0 is scoped to the
- * single puzzle instance itself), so the whole row of child links is only
- * shown once the v1 rollout tier is active for this request
- * (`isPuzzlesHubV1Enabled`, the same flag gating the "More from Puzzles &
- * Games" rail below) - the `PUZZLES_SUBNAV_PARENT` "Puzzles & games" link
- * is the only one still shown on V0. "Crosswords"/"Word games"/"Logic
- * puzzles" link to their existing production archive pages (`frontend`,
- * not DCR), per explicit design direction; "Trivia & quizzes" links to its
- * (not yet built) DCR hub instead, and is expected to 404 until that work
- * ships, exactly like this layout's other pre-existing "not built yet"
- * placeholder links (see `docs/puzzle-page.md`).
- */
-const PUZZLES_SUBNAV_PARENT: LinkType = {
-	title: 'Puzzles & games',
-	longTitle: 'Puzzles & games',
-	url: '/puzzles-and-games',
-};
-
-const PUZZLES_SUBNAV_LINKS: LinkType[] = [
-	{
-		title: 'Crosswords',
-		longTitle: 'Crosswords',
-		url: 'https://www.theguardian.com/puzzles-and-games/crosswords/archive',
-	},
-	{
-		title: 'Word games',
-		longTitle: 'Word games',
-		url: 'https://www.theguardian.com/puzzles-and-games/word-games/archive',
-	},
-	{
-		title: 'Logic puzzles',
-		longTitle: 'Logic puzzles',
-		url: 'https://www.theguardian.com/puzzles-and-games/logic-puzzles/archive',
-	},
-	{
-		title: 'Trivia & quizzes',
-		longTitle: 'Trivia & quizzes',
-		url: '/puzzles-and-games/trivia-and-quizzes',
-	},
-];
-
-const getPuzzlesSubNavLinks = (isV1Enabled: boolean): LinkType[] =>
-	isV1Enabled ? PUZZLES_SUBNAV_LINKS : [];
 
 /**
  * `ArticleHeadline`'s "This article is more than X (days/months/years)
@@ -360,114 +308,6 @@ const stretchLines = css`
 `;
 
 /**
- * The heading column's width matches `PuzzleGrid`'s own `title`/`meta`
- * column exactly (140px from "leftCol", 220px from "wide" - see
- * `PuzzleGrid` above), so "More from" lines up with the "Puzzle/quiz type"
- * column above it, per the Figma design. Below "leftCol", `PuzzleGrid`
- * itself drops that left column entirely (single-column layout), which is
- * why this rail switches to the same stacked-heading layout at that exact
- * breakpoint too, rather than a breakpoint of its own.
- */
-const relatedRailStyles = css`
-	display: grid;
-	gap: 16px;
-	padding: 16px 0;
-	${from.leftCol} {
-		grid-template-columns: 140px minmax(0, 1fr);
-		gap: 20px;
-	}
-	${from.wide} {
-		grid-template-columns: 220px minmax(0, 1fr);
-	}
-`;
-
-/**
- * From "leftCol" up, the heading sits beside the cards (see
- * `relatedRailStyles`), so it gets its own divider on its right edge to
- * separate it from them - the lateral equivalent of the vertical dividers
- * between the cards themselves (`MorePuzzlesCard.tsx`). Below "leftCol"
- * the heading stacks above the cards instead, and per explicit design
- * direction there is no horizontal divider anywhere in this rail, so no
- * divider is drawn there at all.
- *
- * `right: -10px` (half of `relatedRailStyles`'s own 20px column gap from
- * "leftCol" up) centres the line in that gap, the same distance from the
- * heading as from the first card - matching how the card-to-card dividers
- * centre themselves in their own gap (`left: calc(var(--puzzles-gap) / -2)`
- * in `MorePuzzlesCard.tsx`) rather than sitting flush against the
- * heading's own edge, which left it visibly further from the card than
- * from the heading.
- */
-const relatedRailHeading = css`
-	margin: 0;
-	${headlineBold20};
-	line-height: 1.15;
-	${from.leftCol} {
-		position: relative;
-		::after {
-			position: absolute;
-			top: 0;
-			right: -10px;
-			bottom: 0;
-			border-right: 1px solid ${sourcePalette.neutral[86]};
-			content: '';
-			pointer-events: none;
-		}
-	}
-`;
-
-/**
- * Below "leftCol", the heading has the full content width to itself (it
- * stacks above the cards rather than sitting in the narrow 140/220px
- * column - see `relatedRailStyles`), so "More from"/"Puzzles & games" sit
- * on one line there; `display: block` only kicks in from "leftCol" up,
- * where that column width forces them onto their own lines.
- */
-const relatedRailHeadingLink = css`
-	${headlineBold20};
-	color: ${themePalette('--article-section-link-text')};
-	text-decoration: none;
-	:hover {
-		text-decoration: underline;
-	}
-	${from.leftCol} {
-		display: block;
-	}
-`;
-
-/**
- * Renders `moreFromPuzzlesAndGames` with `MorePuzzlesCard.tsx`'s
- * `MorePuzzlesRows` - a deliberately independent copy of the Puzzles Hub
- * listing page's own card/grid implementation (`Rows`/`PuzzleCard`,
- * `src/components/PuzzleCard.tsx`), not that shared implementation itself:
- * per explicit direction, `PuzzleCard.tsx` (owned by the Puzzles Hub team)
- * must not be modified for this rail's needs, so this rail no longer
- * shares it - see `MorePuzzlesCard.tsx`'s own doc comment for what that
- * means for the two staying visually in sync.
- *
- * The heading itself ("More from" / "Puzzles & games") reuses
- * `--article-section-link-text` - the same pink/lifestyle-pillar token this
- * page's own `ArticleTitle` section link ("Logic puzzles" etc, see
- * `puzzleFamilyTag`) already resolves to - rather than a second, hardcoded
- * colour, so the two pink links on this page can never drift apart.
- */
-const RelatedPuzzlesRail = ({
-	items,
-}: {
-	items: NonNullable<FEPuzzlePageType['instance']['moreFromPuzzlesAndGames']>;
-}) => (
-	<div css={relatedRailStyles}>
-		<h2 css={relatedRailHeading}>
-			More from{' '}
-			<a css={relatedRailHeadingLink} href={PUZZLES_SUBNAV_PARENT.url}>
-				Puzzles &amp; games
-			</a>
-		</h2>
-		<MorePuzzlesRows items={items} />
-	</div>
-);
-
-/**
  * The `/PuzzlePage` handler resolves and validates the `PuzzleConfig` for
  * the request's `slug` before rendering; it is passed alongside the raw
  * payload rather than re-derived here so `PuzzlePageLayout` has a single,
@@ -568,7 +408,10 @@ export const PuzzlePageLayout = ({
 	 */
 	const puzzlesSubNav: SubNavType = {
 		parent: PUZZLES_SUBNAV_PARENT,
-		links: getPuzzlesSubNavLinks(isV1Enabled),
+		links: getPuzzlesSubNavLinks(
+			isV1Enabled,
+			isPuzzlesHubV2Enabled(config),
+		),
 	};
 
 	const puzzleNAV: NavType = {
@@ -655,7 +498,7 @@ export const PuzzlePageLayout = ({
 									format={puzzlePageFormat}
 									tags={puzzleFamilyTag}
 									sectionLabel={labelText}
-									sectionUrl={`puzzles-and-games/${puzzleConfig.puzzleGroup}`}
+									sectionUrl={`puzzles-and-games/${puzzleConfig.puzzleGroup}/archive`}
 									guardianBaseURL={GUARDIAN_BASE_URL}
 								/>
 							</GridItem>

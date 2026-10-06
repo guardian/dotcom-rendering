@@ -8,6 +8,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -32,6 +33,7 @@ type Props = {
 	isMainMedia?: boolean;
 	isImmersive?: boolean;
 	showIconBelowLeftCol?: boolean;
+	layoutType?: LayoutType;
 };
 
 type IconProps = {
@@ -305,6 +307,7 @@ export const Caption = ({
 	isMainMedia = false,
 	isImmersive = false,
 	showIconBelowLeftCol = false,
+	layoutType,
 }: Props) => {
 	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
 	const noCaption = !captionText?.trim();
@@ -365,7 +368,11 @@ export const Caption = ({
 
 	switch (format.design) {
 		case ArticleDesign.PhotoEssay:
-			if (format.theme === ArticleSpecial.Labs && isLeftCol) {
+			if (
+				((format.theme === ArticleSpecial.Labs && isLeftCol) ||
+					layoutType?.startsWith('immersive')) ??
+				false
+			) {
 				return defaultCaption;
 			}
 			return (
