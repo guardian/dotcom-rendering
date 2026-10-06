@@ -299,6 +299,7 @@ export const CrosswordLayout = (props: Props) => {
 									{article.crossword && (
 										<CrosswordLinks
 											crossword={article.crossword}
+											isPuzzlesHubV1={isPuzzlesHubV1}
 										/>
 									)}
 								</div>
