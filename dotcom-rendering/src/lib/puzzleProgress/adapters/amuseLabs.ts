@@ -230,8 +230,6 @@ export const handleAmuseLabsMessage = (
 	const message = parseAmuseLabsMessage(raw);
 	if (!message) return null;
 
-	console.debug('Received AmuseLabs message:', message);
-
 	switch (message.type) {
 		case 'PUZZLE_LOAD':
 			return adapter.start(message);
