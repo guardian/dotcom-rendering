@@ -31,7 +31,7 @@ describe('handlePuzzlesPage', () => {
 
 	it('renders the exact variant participation outside development', () => {
 		validate.mockReturnValue({
-			config: { serverSideABTests: { 'puzzles-new-hub': 'variant' } },
+			config: { serverSideABTests: { 'puzzles-new-hub-v1': 'variant' } },
 		} as never);
 		const res = response();
 		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
@@ -39,12 +39,11 @@ describe('handlePuzzlesPage', () => {
 		expect(res.status).toHaveBeenCalledWith(200);
 	});
 
-	it('requires the cumulative V0 and V1 variants for an archive payload', () => {
+	it('renders an archive payload for the V1 variant', () => {
 		validate.mockReturnValue({
 			archive: {},
 			config: {
 				serverSideABTests: {
-					'puzzles-new-hub': 'variant',
 					'puzzles-new-hub-v1': 'variant',
 				},
 			},
@@ -57,7 +56,7 @@ describe('handlePuzzlesPage', () => {
 	it('does not render an archive when V1 is absent', () => {
 		validate.mockReturnValue({
 			archive: {},
-			config: { serverSideABTests: { 'puzzles-new-hub': 'variant' } },
+			config: { serverSideABTests: {} },
 		} as never);
 		const res = response();
 		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
@@ -88,9 +87,9 @@ describe('handlePuzzlesPage', () => {
 	});
 
 	it.each([
-		['control', { 'puzzles-new-hub': 'control' }],
+		['control', { 'puzzles-new-hub-v1': 'control' }],
 		['missing', {}],
-		['unknown group', { 'puzzles-new-hub': 'unknown' }],
+		['unknown group', { 'puzzles-new-hub-v1': 'unknown' }],
 		['unrelated', { unrelated: 'variant' }],
 	])('returns 404 without mounting the renderer for %s', (_, tests) => {
 		validate.mockReturnValue({
