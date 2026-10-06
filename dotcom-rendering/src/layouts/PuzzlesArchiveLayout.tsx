@@ -118,6 +118,7 @@ const sideAdStyles = css`
 	${from.desktop} {
 		display: block;
 		grid-column: 2;
+		padding-top: 122px;
 	}
 	${from.leftCol} {
 		grid-column: 3;
