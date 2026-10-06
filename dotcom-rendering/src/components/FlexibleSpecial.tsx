@@ -21,7 +21,7 @@ import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import type { Graphic } from './DecideContainer';
-import { ElectionTracker } from './ElectionTracker.island';
+import { ElectionTrackerWrapper } from './ElectionTrackerWrapper.island';
 import { FrontCard } from './FrontCard';
 import { Island } from './Island';
 import type { SubtitleSize } from './SelfHostedVideoPlayer';
@@ -335,7 +335,7 @@ const EventGraphic = (props: EventGraphicProps) => {
 					}}
 				>
 					<Island priority="feature" defer={{ until: 'visible' }}>
-						<ElectionTracker
+						<ElectionTrackerWrapper
 							electionDataUrl={props.graphic.electionDataUrl.href}
 							electionComponents={
 								props.graphic.electionComponents

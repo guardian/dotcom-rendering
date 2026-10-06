@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { SvgStar, SvgStarOutline } from '@guardian/source/react-components';
+import type { LayoutType } from '../../layouts/lib/articleArrangements';
 import { palette } from '../../palette';
 import type { StarRating as Rating, RatingSizeType } from '../../types/content';
 
@@ -118,6 +119,7 @@ export type Props = {
 	 *  The alternative theme ensures we meet AA accessibility standards.
 	 */
 	useAlternativeTheme?: boolean;
+	layoutType?: LayoutType;
 };
 
 export const StarRating = ({
@@ -125,9 +127,20 @@ export const StarRating = ({
 	size,
 	paddingSize = 'small',
 	useAlternativeTheme = false,
+	layoutType,
 }: Props) => (
 	<div
-		css={[determineSize(size), determinePaddingTop(paddingSize), container]}
+		css={[
+			determineSize(size),
+			determinePaddingTop(paddingSize),
+			container,
+			layoutType === 'immersiveLandscape' &&
+				css`
+					${until.desktop} {
+						padding-left: ${space[3]}px;
+					}
+				`,
+		]}
 	>
 		{Array.from({ length: 5 }, (_, i) =>
 			i < rating ? (
