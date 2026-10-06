@@ -2,7 +2,7 @@
  * @file
  * This file was largely copied from https://github.com/guardian/dotcom-rendering/blob/016de51dc294d3a2895b52091258de0adbadcef5/dotcom-rendering/src/components/SubNav.importable.tsx
  */
-import { css } from '@emotion/react';
+import { css, type SerializedStyles } from '@emotion/react';
 import {
 	breakpoints,
 	from,
@@ -17,6 +17,7 @@ import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../palette';
 import type {
 	CustomSubnav,
+	CustomSubnavHeader,
 	CustomSubnavImage,
 	RenderingPage,
 } from '../../../types/customSubnav';
@@ -242,6 +243,39 @@ const selectedLink = css`
 	${textSansBold14}
 `;
 
+const headerLinkStyles = css`
+	color: inherit;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
+const HeaderText = ({
+	header: { headerText, dotcomPath },
+	cssOverrides,
+}: {
+	header: CustomSubnavHeader;
+	cssOverrides?: SerializedStyles;
+}) =>
+	dotcomPath ? (
+		<a
+			css={[headerLinkStyles, cssOverrides]}
+			data-src-focus-disabled={true}
+			href={dotcomPath}
+			data-link-name={nestedOphanComponents(
+				'header',
+				'custom subnav',
+				headerText,
+			)}
+		>
+			{headerText}
+		</a>
+	) : (
+		<span css={cssOverrides}>{headerText}</span>
+	);
+
 /** On fronts the header sits above the links as a large stacked heading. */
 const frontContainerStyles = css`
 	${headlineBold28}
@@ -299,9 +333,10 @@ export const CustomSubNav = ({
 						images={webImages}
 						headerText={customSubNav.header.headerText}
 					/>
-					<span css={imageHeaderTextStyles}>
-						{customSubNav.header.headerText}
-					</span>
+					<HeaderText
+						header={customSubNav.header}
+						cssOverrides={imageHeaderTextStyles}
+					/>
 				</div>
 				<ul
 					css={[imageListStyles, scrollableSubNavStyles]}
@@ -323,13 +358,10 @@ export const CustomSubNav = ({
 			data-rendering-page={renderingPage}
 			css={isArticle ? articleContainerStyles : frontContainerStyles}
 		>
-			{isArticle ? (
-				<span css={articleHeaderStyles}>
-					{customSubNav.header.headerText}
-				</span>
-			) : (
-				customSubNav.header.headerText
-			)}
+			<HeaderText
+				header={customSubNav.header}
+				cssOverrides={isArticle ? articleHeaderStyles : undefined}
+			/>
 			<ul
 				css={[
 					subNavStyles,
