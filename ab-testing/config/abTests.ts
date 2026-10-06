@@ -290,10 +290,10 @@ const ABTests: ABTest[] = [
 		description:
 			"Test opening up the article-end ad slot in the US region for HeaderBidding",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-10-28",
+		expirationDate: "2026-10-14",
 		type: "client",
 		status: "ON",
-		audienceSize: 0 / 100,
+		audienceSize: 40 / 100,
 		audienceSpace: "B",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
