@@ -255,7 +255,7 @@ export const StandardLayoutArticleGrid = ({
 
 	const displayAvatarUrl = avatarUrl ? true : false;
 
-	const pictureLeftColLines = (avatarDisplayed: boolean) => css`
+	const picAndCommentLeftColLines = (avatarDisplayed: boolean) => css`
 		${avatarDisplayed && `display: none;`}
 		margin-bottom: 4px;
 		${from.leftCol} {
@@ -457,8 +457,7 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
-				{displayAvatarUrl &&
-				(layoutType === 'picture' || layoutType === 'comment') ? (
+				{layoutType === 'picture' || layoutType === 'comment' ? (
 					<div css={avatarHeadlineWrapper}>
 						<ArticleHeadline
 							format={format}
@@ -469,33 +468,35 @@ export const StandardLayoutArticleGrid = ({
 							webPublicationDateDeprecated={
 								article.webPublicationDateDeprecated
 							}
-							hasAvatar={true}
+							hasAvatar={!!avatarUrl}
 							starRating={article.starRating}
 						/>
 
-						{!!avatarUrl &&
-							(layoutType === 'picture' ||
-								layoutType === 'comment') && (
-								<>
-									<div
-										css={avatarPositionStyles(
-											layoutType === 'picture',
-										)}
-									>
-										<ContributorAvatar
-											imageSrc={avatarUrl}
-											imageAlt={article.byline ?? ''}
-										/>
-									</div>
-									<StraightLines
-										count={8}
-										cssOverrides={css`
-											display: block;
-										`}
-										color={themePalette('--straight-lines')}
+						<>
+							{displayAvatarUrl && !!avatarUrl && (
+								<div
+									css={avatarPositionStyles(
+										layoutType === 'picture',
+									)}
+								>
+									<ContributorAvatar
+										imageSrc={avatarUrl}
+										imageAlt={article.byline ?? ''}
 									/>
-								</>
+								</div>
 							)}
+							{!(
+								layoutType === 'picture' && !displayAvatarUrl
+							) && (
+								<StraightLines
+									count={8}
+									cssOverrides={css`
+										display: block;
+									`}
+									color={themePalette('--straight-lines')}
+								/>
+							)}
+						</>
 					</div>
 				) : (
 					<ArticleHeadline
@@ -584,7 +585,10 @@ export const StandardLayoutArticleGrid = ({
 							css={[
 								(layoutType === 'picture' ||
 									layoutType === 'comment') &&
-									pictureLeftColLines(displayAvatarUrl),
+									picAndCommentLeftColLines(
+										displayAvatarUrl ||
+											layoutType === 'comment',
+									),
 								stretchLines,
 							]}
 						>
