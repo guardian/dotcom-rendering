@@ -1,4 +1,5 @@
 import type { Meta } from '@storybook/react-webpack5';
+import isChromatic from 'chromatic/isChromatic';
 import type { CSSProperties } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
@@ -42,7 +43,12 @@ const meta = {
 		<div style={kickerWrapperStyles}>
 			<Kicker {...args} text="Standard kicker" />
 
-			<Kicker {...args} text="Live kicker" showPulsingDot={true} />
+			<Kicker
+				{...args}
+				text="Live kicker"
+				// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unsafe-call -- allowing the disable of pulsing dot in Chromatic environment
+				showPulsingDot={isChromatic() ? false : true}
+			/>
 		</div>
 	),
 } satisfies Meta<typeof Kicker>;
