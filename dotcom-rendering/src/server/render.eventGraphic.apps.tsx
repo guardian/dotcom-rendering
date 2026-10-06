@@ -1,10 +1,10 @@
 import { Global } from '@emotion/react';
 import { isString } from '@guardian/libs';
-import type { Guardian } from '../model/guardian';
 import { resets } from '@guardian/source/foundations';
 import CleanCSS from 'clean-css';
 import { ConfigProvider } from '../components/ConfigContext';
 import { EventGraphic, type Graphic } from '../components/EventGraphic';
+import type { FEAppsComponentConfig } from '../frontend/feAppsComponentEventGraphic';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,
@@ -16,9 +16,9 @@ import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
 import { rawFontsCss } from '../lib/fonts-css';
 import { rootStyles } from '../lib/rootStyles';
-import type { Config } from '../types/configContext';
-import { FEAppsComponentConfig } from '../frontend/feAppsComponentEventGraphic';
+import type { Guardian } from '../model/guardian';
 import { createGuardian } from '../model/guardian';
+import type { Config } from '../types/configContext';
 
 // Minimal html page for the event graphic component.
 // The `padding-inline: 8px` Compensates for the native web view's 8pt
@@ -111,7 +111,7 @@ export const renderEventGraphic = (
 	const scriptTags = generateScriptTags(clientScripts);
 
 	const guardian = createGuardian({
-		editionId: editionId,
+		editionId,
 		stage: frontendConfig.stage,
 		frontendAssetsFullURL: frontendConfig.frontendAssetsFullURL,
 		revisionNumber: frontendConfig.revisionNumber,
