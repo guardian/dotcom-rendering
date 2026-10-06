@@ -38,8 +38,6 @@ const eventGraphicTemplate = ({
 }): string => {
 	const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
 	const serialisedGuardian = escapeData(JSON.stringify(guardian));
-	// TODO: do we need source resetCSS?
-	// TODO: do we need overflow hidden & margin-top 0? Check in iOS
 	return `<!doctype html>
 		<html lang="en">
             <head>
