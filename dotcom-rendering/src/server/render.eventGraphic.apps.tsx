@@ -1,5 +1,6 @@
 import { Global } from '@emotion/react';
 import { isString } from '@guardian/libs';
+import type { Guardian } from '../model/guardian';
 import { resets } from '@guardian/source/foundations';
 import CleanCSS from 'clean-css';
 import { ConfigProvider } from '../components/ConfigContext';
@@ -16,19 +17,8 @@ import { escapeData } from '../lib/escapeData';
 import { rawFontsCss } from '../lib/fonts-css';
 import { rootStyles } from '../lib/rootStyles';
 import type { Config } from '../types/configContext';
-
-interface LightGuardian {
-	config: {
-		frontendAssetsFullURL: string;
-		isDev: boolean;
-		switches: {
-			enableSentryReporting: boolean;
-		};
-	};
-	modules: {
-		sentry: Record<string, never>;
-	};
-}
+import { FEAppsComponentConfig } from '../frontend/feAppsComponentEventGraphic';
+import { createGuardian } from '../model/guardian';
 
 // Minimal html page for the event graphic component.
 // The `padding-inline: 8px` Compensates for the native web view's 8pt
@@ -44,7 +34,7 @@ const eventGraphicTemplate = ({
 	css: string;
 	config: Config;
 	scriptTags: string[];
-	guardian: LightGuardian;
+	guardian: Guardian;
 }): string => {
 	const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
 	const serialisedGuardian = escapeData(JSON.stringify(guardian));
@@ -91,6 +81,7 @@ const eventGraphicTemplate = ({
 export const renderEventGraphic = (
 	graphic: Graphic,
 	editionId: EditionId,
+	frontendConfig: FEAppsComponentConfig,
 ): { html: string; prefetchScripts: string[] } => {
 	const config: Config = {
 		renderingTarget: 'Apps',
@@ -119,18 +110,24 @@ export const renderEventGraphic = (
 
 	const scriptTags = generateScriptTags(clientScripts);
 
-	const guardian: LightGuardian = {
-		config: {
-			frontendAssetsFullURL: ASSET_ORIGIN,
-			isDev: process.env.NODE_ENV !== 'production',
-			switches: {
-				enableSentryReporting: false,
-			},
-		},
-		modules: {
-			sentry: {},
-		},
-	};
+	const guardian = createGuardian({
+		editionId: editionId,
+		stage: frontendConfig.stage,
+		frontendAssetsFullURL: frontendConfig.frontendAssetsFullURL,
+		revisionNumber: frontendConfig.revisionNumber,
+		sentryPublicApiKey: frontendConfig.sentryPublicApiKey,
+		sentryHost: frontendConfig.sentryHost,
+		dfpAccountId: frontendConfig.dfpAccountId,
+		adUnit: frontendConfig.adUnit,
+		ajaxUrl: frontendConfig.ajaxUrl,
+		googletagUrl: frontendConfig.googletagUrl,
+		switches: frontendConfig.switches,
+		serverSideABTests: frontendConfig.serverSideABTests,
+		isPaidContent: frontendConfig.isPaidContent,
+		contentType: frontendConfig.contentType,
+		googleRecaptchaSiteKey: frontendConfig.googleRecaptchaSiteKey,
+		unknownConfig: frontendConfig,
+	});
 
 	const pageHtml = eventGraphicTemplate({
 		html,

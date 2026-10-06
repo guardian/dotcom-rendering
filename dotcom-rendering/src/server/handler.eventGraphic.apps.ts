@@ -41,6 +41,7 @@ export const handleAppsEventGraphic: RequestHandler = ({ body }, res) => {
 	const { html, prefetchScripts } = renderEventGraphic(
 		eventGraphic.output,
 		editionId,
+		data.config,
 	);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
