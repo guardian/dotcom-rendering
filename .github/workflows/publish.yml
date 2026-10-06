@@ -1,53 +1,86 @@
 on:
   workflow_call:
     inputs:
-      container-image:
-        description: 'Image used by DCR service'
+      production-image-digest:
+        description: 'Digest of DCR image in AWS ECR'
         required: true
         type: string
     secrets:
       GU_RIFF_RAFF_ROLE_ARN:
+        required: true
+      GU_ARTIFACTS_ROLE_ARN:
         required: true
 
 permissions:
   # Allow GitHub to request an OIDC JWT ID token, and to comment on pull requests as required by guardian/actions-riff-raff
   id-token: write
   pull-requests: write
+  contents: read
 jobs:
   riffraff:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
+
+      - name: Pull Image
+        uses: guardian/actions-ecr/pull@v1.0.0
+        id: pull-image
+        with:
+          app: dotcom-rendering
+          imageIdentifier: ${{ inputs.production-image-digest }}
+          roleArn: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
+
       # Annoyingly we can't _easily_ access an Images filesystem without creating a container from the image.
       # we don't necessarily have to start the container, but we do need to create it.
-      - name: Create DCR Container
-        id: create-container
-        run: echo "CONTAINER_ID=$(docker create ${{ inputs.container-image }})" >> "$GITHUB_OUTPUT"
-      - name: Move container files into GHA Workspace
-        run: docker cp ${{ steps.create-container.outputs.CONTAINER_ID }}:/opt/app/dotcom-rendering/dotcom-rendering/. ${{ github.workspace }}
+      - name: Copy container files into GHA Workspace
+        working-directory: dotcom-rendering
+        env:
+          IMAGE: ${{ steps.pull-image.outputs.imageUri }}
+        run: |
+          CONTAINER_ID=$(docker create $IMAGE)
+          docker cp $CONTAINER_ID:/app/. dist
+
+      - name: CDK synth
+        env:
+          IMAGE_DIGEST: ${{ inputs.production-image-digest }}
+        working-directory: dotcom-rendering
+        run: make cdk-synth
+
+      - name: Construct EC2 artifacts
+        working-directory: dotcom-rendering
+        run: make riffraff-bundle
 
       # We want to avoid uploading the uncompressed files to our riffraff bucket
       # so we create our tarball outside the folder, then delete the contents of
       # the folder, and finally move the tarball into the folder.
       - name: Compress article-rendering app server files
+        working-directory: dotcom-rendering/target
         run: |
           tar -zcf article-rendering.tar.gz article-rendering
           rm -r article-rendering/*
           mv article-rendering.tar.gz article-rendering/
 
       - name: Compress facia-rendering app server files
+        working-directory: dotcom-rendering/target
         run: |
           tar -zcf facia-rendering.tar.gz facia-rendering
           rm -r facia-rendering/*
           mv facia-rendering.tar.gz facia-rendering/
 
       - name: Compress tag-page-rendering app server files
+        working-directory: dotcom-rendering/target
         run: |
           tar -zcf tag-page-rendering.tar.gz tag-page-rendering
           rm -r tag-page-rendering/*
           mv tag-page-rendering.tar.gz tag-page-rendering/
 
       - name: Compress interactive-rendering app server files
+        working-directory: dotcom-rendering/target
         run: |
           tar -zcf interactive-rendering.tar.gz interactive-rendering
           rm -r interactive-rendering/*
@@ -60,23 +93,23 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           projectName: dotcom:rendering-all
-          configPath: riff-raff.yaml
+          configPath: dotcom-rendering/target/riff-raff.yaml
           contentDirectories: |
             article-rendering-cfn:
-              - article-rendering-cfn
+              - dotcom-rendering/target/article-rendering-cfn
             article-rendering:
-              - article-rendering
+              - dotcom-rendering/target/article-rendering
             facia-rendering-cfn:
-              - facia-rendering-cfn
+              - dotcom-rendering/target/facia-rendering-cfn
             facia-rendering:
-              - facia-rendering
+              - dotcom-rendering/target/facia-rendering
             tag-page-rendering-cfn:
-              - tag-page-rendering-cfn
+              - dotcom-rendering/target/tag-page-rendering-cfn
             tag-page-rendering:
-              - tag-page-rendering
+              - dotcom-rendering/target/tag-page-rendering
             interactive-rendering-cfn:
-              - interactive-rendering-cfn
+              - dotcom-rendering/target/interactive-rendering-cfn
             interactive-rendering:
-              - interactive-rendering
+              - dotcom-rendering/target/interactive-rendering
             frontend-static:
-              - frontend-static
+              - dotcom-rendering/target/frontend-static

@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { Button, SvgDocument } from '@guardian/source/react-components';
+import {
+	Button,
+	LinkButton,
+	SvgDocument,
+} from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 
 const buttonStyles = css`
@@ -24,11 +28,32 @@ const buttonStyles = css`
 `;
 
 /**
- * `window.print()` only runs client-side, so this must be hydrated via
- * `Island` (see `PuzzlePageLayout.tsx`) rather than rendered inline - a
- * plain server-rendered `onClick` never gets attached in the browser.
+ * Without `href`, `window.print()` only runs client-side, so this must be
+ * hydrated via `Island` (see `PuzzlePageLayout.tsx`) rather than rendered
+ * inline - a plain server-rendered `onClick` never gets attached in the
+ * browser.
+ *
+ * With `href` (e.g. a crossword's PDF) it renders as a plain link, which
+ * needs no hydration.
  */
-export const PrintButton = () => {
+export const PrintButton = ({ href }: { href?: string }) => {
+	if (href !== undefined) {
+		return (
+			<LinkButton
+				href={href}
+				target="_blank"
+				rel="noreferrer"
+				size="small"
+				priority="tertiary"
+				iconSide="left"
+				icon={<SvgDocument />}
+				cssOverrides={css(buttonStyles)}
+			>
+				Print version
+			</LinkButton>
+		);
+	}
+
 	return (
 		<Button
 			onClick={() => window.print()}
