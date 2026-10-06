@@ -6,6 +6,7 @@ import {
 	textSansItalic17,
 	until,
 } from '@guardian/source/foundations';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -102,37 +103,50 @@ type Props = {
 	source?: string;
 	tags: TagType[];
 	format: ArticleFormat;
+	layoutType?: LayoutType;
 };
 
-export const Contributor = ({ byline, tags, format, source }: Props) => (
-	<address
-		data-component="meta-byline"
-		data-link-name="byline"
-		data-gu-name="byline"
-	>
-		{format.design !== ArticleDesign.Interview && (
-			<div
-				className={
-					format.design === ArticleDesign.Interactive
-						? interactiveLegacyClasses.byline
-						: ''
-				}
-				css={[
-					bylineStyles(format),
-					format.theme === ArticleSpecial.Labs &&
-						labsBylineStyles(format.design),
-					format.design === ArticleDesign.LiveBlog &&
-						standfirstColourBelowDesktop,
-				]}
-			>
-				<BylineLink
-					byline={byline}
-					tags={tags}
-					source={source}
-					format={format}
-					isHeadline={false}
-				/>
-			</div>
-		)}
-	</address>
-);
+export const Contributor = ({
+	byline,
+	tags,
+	format,
+	source,
+	layoutType,
+}: Props) => {
+	const shouldHide =
+		format.design === ArticleDesign.Interview &&
+		// Hide the contributor for interviews unless it's in the new immersive layout
+		!(layoutType?.startsWith('immersive') ?? false);
+	return (
+		<address
+			data-component="meta-byline"
+			data-link-name="byline"
+			data-gu-name="byline"
+		>
+			{!shouldHide && (
+				<div
+					className={
+						format.design === ArticleDesign.Interactive
+							? interactiveLegacyClasses.byline
+							: ''
+					}
+					css={[
+						bylineStyles(format),
+						format.theme === ArticleSpecial.Labs &&
+							labsBylineStyles(format.design),
+						format.design === ArticleDesign.LiveBlog &&
+							standfirstColourBelowDesktop,
+					]}
+				>
+					<BylineLink
+						byline={byline}
+						tags={tags}
+						source={source}
+						format={format}
+						isHeadline={false}
+					/>
+				</div>
+			)}
+		</address>
+	);
+};
