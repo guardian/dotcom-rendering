@@ -66,7 +66,7 @@ query params a given provider does or doesn't accept, is the job of a
 per-provider strategy module, `src/lib/puzzleIframeUrl.ts`, not this
 registry:
 
-- `buildAmuseLabsUrl(config, context)` builds `set`/`embed=1`/`idx=1`,
+- `buildAmuseLabsUrl(config, context)` builds `set`/`embed=1`/`idx=1` (or `id=` when a puzzle date is given, see Open questions),
   then conditionally `uid` (only when signed in, confirmed against the
   native apps' real AmuseLabs integration) and always `darkMode=0|1` (a
   plain literal query value, also confirmed, unlike `uid` this is never
@@ -524,36 +524,22 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   for a puzzle's in-progress state to be saved against a Guardian account
   and restored later (e.g. via `postMessage` round-tripping progress data).
   This has been deliberately deferred until such an API exists.
-- **The real AmuseLabs archive URL is still unknown, and today's `idx=1`
-  is a "today only" hack that cannot show a specific past puzzle.**
-  `PuzzleConfig.hasArchive` exists on every registry entry (currently
-  always `true`) but is **not consumed anywhere in rendering.** There is
-  no archive-link UI, and no archive URL field exists in the registry at
-  all. A URL seen during the original proof-of-concept was only there as
-  an illustrative example, not a verified production AmuseLabs archive
-  URL. Per the AmuseLabs integration doc shared by the product team
-  (confirmed against native app behaviour): "The apps currently use
-  `idx=1` for the latest puzzle. Archive URLs should use the stable `id`
-  instead... Do not add `idx=1`, as that selects the latest puzzle instead
-  of the archived one." All 5 of our AmuseLabs entries' `buildAmuseLabsUrl`
-  builder (`src/lib/puzzleIframeUrl.ts`) hardcodes `idx=1`, which is
-  correct only for "today's puzzle" (V0's only real use case), it is
-  **not** valid for showing a specific past date's puzzle. Building
-  calendar/archive functionality (V1) will require swapping `idx=1` for
-  `id={realProviderPuzzleId}` in that one shared builder function (a
-  small, contained change, not a per-entry rewrite, since the builder is
-  the single place that assembles the AmuseLabs URL), where that real
-  per-puzzle id must come from a not-yet-built archive API, it cannot be
-  derived or guessed from a date locally. Treat sourcing that real archive
-  URL/id mechanism from the team as a hard blocker for calendar/archive
-  work, not a nice-to-have. **A related, current gap worth being explicit
-  about**: `instance.puzzleDate` is accepted, displayed next to the title,
-  and passed through to the iframe context (see above), but it does
-  **not** actually change which puzzle instance the iframe shows. The
-  iframe always shows the provider's own "latest" puzzle via `idx=1`,
-  regardless of `puzzleDate`'s value, so the date shown on the page and
-  the puzzle actually embedded can silently diverge once `puzzleDate`
-  ever points anywhere other than today.
+- **AmuseLabs archive: dated puzzles are loaded by stable id.** When
+  `instance.puzzleDate` is a valid `YYYY-MM-DD`, `buildAmuseLabsUrl`
+  (`src/lib/puzzleIframeUrl.ts`) loads that day's puzzle straight from the
+  player: `https://tg.amuselabs.com/guardian/{playerPath}?id={idPrefix}-{YYYYMMDD}&set={set}&embed=1`
+  (e.g. `.../sudoku?id=guardian-sudoku-medium-20261004&set=guardian-sudoku-medium&embed=1`),
+  never combined with `idx=1` (per the AmuseLabs integration doc that
+  would select the latest puzzle instead). The id pattern, `idPrefix` and
+  `playerPath` were confirmed from the real AmuseLabs date-picker's tiles
+  (`data-id`/`data-puzzle-type`) and its click behaviour; they are stored
+  per entry in `AmuseLabsIframeConfig` because they are not always
+  derivable from `set` (killer sudoku: `guardian-ksudoku-medium`; word
+  wheel: `guardian-wordwheel`, player `wordf`). Without a valid date the
+  URL falls back to `date-picker?...&idx=1` ("latest"). Known limits: a
+  date with no published puzzle (e.g. a future date) shows AmuseLabs' own
+  error page, and how far back the archive goes is unverified.
+  `PuzzleConfig.hasArchive` is still not consumed anywhere in rendering.
 - **Today's `puzzleConfigs.ts` registry (with its explicit, per-entry
   `set`/`baseUrl` identity data, resolved into a URL by
   `src/lib/puzzleIframeUrl.ts`) is a deliberate V0-only stopgap, expected
