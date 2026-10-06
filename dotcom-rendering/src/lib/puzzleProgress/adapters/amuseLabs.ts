@@ -21,7 +21,8 @@ import type {
  * - Word wheel is an AmuseLabs Word Flower (`puzzleType: "wordf"`), the only
  *   type that sends `PUZZLE_PROGRESS` (`wordsFound`, `totalWords`,
  *   `isPangram`, `progress: "puzzleInProgress"`), verified on a real embed
- *   on 2026-10-06. It is NOT handled yet: see `update` below.
+ *   on 2026-10-06. It fires when the player finds a valid word, and is
+ *   reported as `in-progress`: see `update` below.
  * - `PUZZLE_COMPLETE` (documented, not yet observed): `score`, `timeTaken`,
  *   `completedCorrectly`.
  */
@@ -115,12 +116,42 @@ export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
 			return null;
 		},
 
-		update: () => {
-			// Not reported yet. Sudoku sends no per-move or percentage message
-			// (verified on a real embed). Word wheel does send
-			// `PUZZLE_PROGRESS` (`wordsFound` / `totalWords`), which could be
-			// reported as `in-progress`, but that is not wired up yet and
-			// `handleAmuseLabsMessage` does not route it. Options for sudoku:
+		update: (raw) => {
+			const message = parseAmuseLabsMessage(raw);
+			if (!message) return null;
+
+			// Word wheel (an AmuseLabs Word Flower) sends `PUZZLE_PROGRESS` each
+			// time the player finds a valid word, as documented at
+			// https://amuselabs.com/docs/integration/iframe-communication/
+			if (message.type === 'PUZZLE_PROGRESS') {
+				const { wordsFound, totalWords } = message;
+				if (
+					typeof wordsFound !== 'number' ||
+					typeof totalWords !== 'number' ||
+					!Number.isFinite(wordsFound) ||
+					!Number.isFinite(totalWords) ||
+					totalWords <= 0
+				) {
+					return null;
+				}
+
+				const identity = identityOf(message) ?? loaded;
+				if (!identity) return null;
+
+				// Open question: finding every word is still reported as
+				// `in-progress` (at 100) until `PUZZLE_COMPLETE` arrives. Not
+				// yet observed whether that message is sent for the word wheel,
+				// or whether the pangram is needed to complete it.
+				const progress = Math.min(
+					100,
+					Math.max(0, Math.round((wordsFound / totalWords) * 100)),
+				);
+				return { ...identity, gameStatus: 'in-progress', progress };
+			}
+
+			// Not reported for the `event` message. Sudoku sends no per-move or
+			// percentage message (verified on a real embed), only `event` (the
+			// first interaction, documented as a scroll hint). Options for sudoku:
 			// - treat the first `event` (a click, not a move) as "in-progress"
 			//   with a placeholder progress (needs a product decision);
 			// - read `progressValue` through the PuzzleMe server-side API
@@ -163,6 +194,7 @@ export const handleAmuseLabsMessage = (
 		case 'PUZZLE_LOAD':
 			return adapter.start(message);
 		case 'event':
+		case 'PUZZLE_PROGRESS':
 			return adapter.update(message);
 		case 'PUZZLE_COMPLETE':
 			return adapter.complete(message);

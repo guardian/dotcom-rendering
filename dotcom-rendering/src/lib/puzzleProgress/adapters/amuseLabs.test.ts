@@ -152,4 +152,107 @@ describe('AmuseLabs adapter', () => {
 			).toBeNull();
 		},
 	);
+
+	describe('word wheel PUZZLE_PROGRESS', () => {
+		// Shape observed on a real word wheel embed on 2026-10-06.
+		const wordWheelProgress = {
+			id: 'guardian-wordwheel-20261006',
+			series: 'guardian-word-wheel',
+			puzzleType: 'wordf',
+			pageSrc: 'puzzleme-player',
+			type: 'PUZZLE_PROGRESS',
+			date: 1791244800000,
+			progress: 'puzzleInProgress',
+			wordsFound: 3,
+			totalWords: 15,
+			isPangram: false,
+		};
+
+		it('reports the share of words found as in-progress', () => {
+			const adapter = createAmuseLabsAdapter();
+
+			expect(
+				handleAmuseLabsMessage(
+					adapter,
+					JSON.stringify(wordWheelProgress),
+				),
+			).toEqual({
+				puzzleId: 'guardian-wordwheel-20261006',
+				puzzleType: 'WORDWHEEL',
+				publishDate: '2026-10-06T00:00:00Z',
+				gameStatus: 'in-progress',
+				progress: 20,
+			});
+		});
+
+		it('rounds the percentage', () => {
+			const adapter = createAmuseLabsAdapter();
+
+			expect(
+				handleAmuseLabsMessage(adapter, {
+					...wordWheelProgress,
+					wordsFound: 1,
+				}),
+			).toMatchObject({ progress: 7 });
+		});
+
+		it('keeps finding every word as in-progress until the puzzle completes', () => {
+			const adapter = createAmuseLabsAdapter();
+
+			expect(
+				handleAmuseLabsMessage(adapter, {
+					...wordWheelProgress,
+					wordsFound: 15,
+				}),
+			).toMatchObject({ gameStatus: 'in-progress', progress: 100 });
+		});
+
+		it('falls back to the identity remembered from the load', () => {
+			const adapter = createAmuseLabsAdapter();
+			handleAmuseLabsMessage(adapter, {
+				...wordWheelProgress,
+				type: 'PUZZLE_LOAD',
+			});
+
+			expect(
+				handleAmuseLabsMessage(adapter, {
+					type: 'PUZZLE_PROGRESS',
+					wordsFound: 5,
+					totalWords: 10,
+				}),
+			).toMatchObject({
+				puzzleId: 'guardian-wordwheel-20261006',
+				progress: 50,
+			});
+		});
+
+		it.each([
+			{ wordsFound: undefined },
+			{ totalWords: undefined },
+			{ totalWords: 0 },
+			{ wordsFound: '3' },
+			{ totalWords: Number.NaN },
+		])('does not report invalid counts %p', (override) => {
+			const adapter = createAmuseLabsAdapter();
+
+			expect(
+				handleAmuseLabsMessage(adapter, {
+					...wordWheelProgress,
+					...override,
+				}),
+			).toBeNull();
+		});
+
+		it('does not report a message it cannot attribute to a puzzle', () => {
+			const adapter = createAmuseLabsAdapter();
+
+			expect(
+				handleAmuseLabsMessage(adapter, {
+					type: 'PUZZLE_PROGRESS',
+					wordsFound: 1,
+					totalWords: 10,
+				}),
+			).toBeNull();
+		});
+	});
 });
