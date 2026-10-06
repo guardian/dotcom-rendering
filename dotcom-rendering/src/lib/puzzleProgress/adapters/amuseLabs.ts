@@ -21,8 +21,9 @@ import type {
  * - Word wheel is an AmuseLabs Word Flower (`puzzleType: "wordf"`), the only
  *   type that sends `PUZZLE_PROGRESS` (`wordsFound`, `totalWords`,
  *   `isPangram`, `progress: "puzzleInProgress"`), verified on a real embed
- *   on 2026-10-06. It fires when the player finds a valid word, and is
- *   reported as `in-progress`: see `update` below.
+ *   on 2026-10-06. It fires when the player finds a valid word. It is
+ *   reported as `in-progress` with the share of words found, or as
+ *   `completed` once every word has been found: see `update` below.
  * - `PUZZLE_COMPLETE` (documented, not yet observed): `score`, `timeTaken`,
  *   `completedCorrectly`.
  */
@@ -98,10 +99,31 @@ const identityOf = (message: Record<string, unknown>): Identity | undefined => {
 	return { puzzleId: id, puzzleType, publishDate };
 };
 
+/**
+ * The progress reported for the first interaction, before there is anything
+ * to measure. Deliberately not 0, so that consumers which only look at
+ * `progress` still see the puzzle as started.
+ */
+export const FIRST_INTERACTION_PROGRESS = 1;
+
+const clampPercentage = (value: number): number =>
+	Math.min(100, Math.max(0, Math.round(value)));
+
 export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
-	// `PUZZLE_COMPLETE` is documented without the puzzle id, so remember the
+	// `PUZZLE_COMPLETE` is documented with the puzzle id, but the other
+	// messages are not guaranteed to carry a usable one, so remember the
 	// identity from `PUZZLE_LOAD` as a fallback.
 	let loaded: Identity | undefined;
+
+	// Whether anything has been reported for this puzzle during this page
+	// view. The first interaction (`event`) must never overwrite a more
+	// advanced status that has already been reported.
+	let reported = false;
+
+	const report = (event: PuzzleProgressEvent): PuzzleProgressEvent => {
+		reported = true;
+		return event;
+	};
 
 	return {
 		start: (raw) => {
@@ -111,8 +133,8 @@ export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
 
 			// Deliberately not reported. `PUZZLE_LOAD` fires on every page view
 			// whether or not the reader plays, so reporting `in-progress` here
-			// would mark every visited puzzle as started.
-			// Open question for product: is opening a puzzle "in progress"?
+			// would mark every visited puzzle as started. The first interaction
+			// (`event`, see `update`) is used instead.
 			return null;
 		},
 
@@ -138,26 +160,41 @@ export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
 				const identity = identityOf(message) ?? loaded;
 				if (!identity) return null;
 
-				// Open question: finding every word is still reported as
-				// `in-progress` (at 100) until `PUZZLE_COMPLETE` arrives. Not
-				// yet observed whether that message is sent for the word wheel,
-				// or whether the pangram is needed to complete it.
-				const progress = Math.min(
-					100,
-					Math.max(0, Math.round((wordsFound / totalWords) * 100)),
-				);
-				return { ...identity, gameStatus: 'in-progress', progress };
+				// Finding every word completes the word wheel. The pangram is one
+				// of those words, so `isPangram` adds nothing to this decision.
+				if (wordsFound >= totalWords) {
+					return report({
+						...identity,
+						gameStatus: 'completed',
+						progress: 100,
+					});
+				}
+
+				return report({
+					...identity,
+					gameStatus: 'in-progress',
+					progress: clampPercentage((wordsFound / totalWords) * 100),
+				});
 			}
 
-			// Not reported for the `event` message. Sudoku sends no per-move or
-			// percentage message (verified on a real embed), only `event` (the
-			// first interaction, documented as a scroll hint). Options for sudoku:
-			// - treat the first `event` (a click, not a move) as "in-progress"
-			//   with a placeholder progress (needs a product decision);
-			// - read `progressValue` through the PuzzleMe server-side API
-			//   (`Plays` / `User Stats`) and reconcile on the server;
-			// - move to the AmuseLabs JS embed, the only method for which
-			//   AmuseLabs documents robust progress saving.
+			// The first interaction with the puzzle (sudoku and word wheel). The
+			// documentation describes it as a hint for the parent page to scroll
+			// the puzzle into view, "at first interaction", but it is the only
+			// signal that the reader has started a sudoku, which sends no
+			// per-move or percentage message (verified on a real embed).
+			if (message.type === 'event') {
+				if (reported) return null;
+
+				const identity = identityOf(message) ?? loaded;
+				if (!identity) return null;
+
+				return report({
+					...identity,
+					gameStatus: 'in-progress',
+					progress: FIRST_INTERACTION_PROGRESS,
+				});
+			}
+
 			return null;
 		},
 
@@ -165,14 +202,19 @@ export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
 			const message = parseAmuseLabsMessage(raw);
 			if (!message) return null;
 
-			// Open question: should `completedCorrectly: false` (finished, but
-			// not solved) count as completed? Not reported until decided.
+			// Finishing with errors is not completing: `completedCorrectly:
+			// false` is a wrong solution, not a finished puzzle. The reader
+			// stays `in-progress`, already reported at the first interaction.
 			if (message.completedCorrectly === false) return null;
 
 			const identity = identityOf(message) ?? loaded;
 			if (!identity) return null;
 
-			return { ...identity, gameStatus: 'completed', progress: 100 };
+			return report({
+				...identity,
+				gameStatus: 'completed',
+				progress: 100,
+			});
 		},
 	};
 };

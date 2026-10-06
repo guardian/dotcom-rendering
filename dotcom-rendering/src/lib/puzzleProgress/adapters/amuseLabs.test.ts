@@ -1,5 +1,6 @@
 import {
 	createAmuseLabsAdapter,
+	FIRST_INTERACTION_PROGRESS,
 	handleAmuseLabsMessage,
 	parseAmuseLabsMessage,
 } from './amuseLabs';
@@ -48,15 +49,65 @@ describe('AmuseLabs adapter', () => {
 		expect(handleAmuseLabsMessage(adapter, puzzleLoad)).toBeNull();
 	});
 
-	it('does not report interactions yet', () => {
-		const adapter = createAmuseLabsAdapter();
-		expect(
-			handleAmuseLabsMessage(adapter, {
-				...puzzleLoad,
-				type: 'event',
-				gridOffset: 10,
-			}),
-		).toBeNull();
+	describe('first interaction', () => {
+		const interaction = {
+			id: 'guardian-sudoku-easy-20261002',
+			series: 'guardian-sudoku-easy',
+			puzzleType: 'sudoku',
+			src: 'crossword',
+			type: 'event',
+			gridOffset: 0,
+		};
+
+		it('reports in-progress with a placeholder progress', () => {
+			const adapter = createAmuseLabsAdapter();
+
+			expect(handleAmuseLabsMessage(adapter, interaction)).toEqual({
+				puzzleId: 'guardian-sudoku-easy-20261002',
+				puzzleType: 'SUDOKU_EASY',
+				publishDate: '2026-10-02T00:00:00Z',
+				gameStatus: 'in-progress',
+				progress: FIRST_INTERACTION_PROGRESS,
+			});
+		});
+
+		it('reports it only once per page view', () => {
+			const adapter = createAmuseLabsAdapter();
+			handleAmuseLabsMessage(adapter, interaction);
+
+			expect(handleAmuseLabsMessage(adapter, interaction)).toBeNull();
+		});
+
+		it('never follows a more advanced status, so progress is not overwritten', () => {
+			const adapter = createAmuseLabsAdapter();
+			handleAmuseLabsMessage(adapter, puzzleLoad);
+			handleAmuseLabsMessage(adapter, puzzleComplete);
+
+			expect(handleAmuseLabsMessage(adapter, interaction)).toBeNull();
+		});
+
+		it('falls back to the identity remembered from the load', () => {
+			const adapter = createAmuseLabsAdapter();
+			handleAmuseLabsMessage(adapter, puzzleLoad);
+
+			expect(
+				handleAmuseLabsMessage(adapter, {
+					type: 'event',
+					gridOffset: 0,
+				}),
+			).toMatchObject({ puzzleId: 'guardian-sudoku-easy-20261002' });
+		});
+
+		it('does not report an interaction it cannot attribute to a puzzle', () => {
+			const adapter = createAmuseLabsAdapter();
+
+			expect(
+				handleAmuseLabsMessage(adapter, {
+					type: 'event',
+					gridOffset: 0,
+				}),
+			).toBeNull();
+		});
 	});
 
 	it('reports completion using the identity remembered from the load', () => {
@@ -131,7 +182,7 @@ describe('AmuseLabs adapter', () => {
 		).toBeNull();
 	});
 
-	it('does not report a puzzle that finished incorrectly', () => {
+	it('does not report a wrongly solved puzzle as completed', () => {
 		const adapter = createAmuseLabsAdapter();
 		handleAmuseLabsMessage(adapter, puzzleLoad);
 
@@ -196,7 +247,7 @@ describe('AmuseLabs adapter', () => {
 			).toMatchObject({ progress: 7 });
 		});
 
-		it('keeps finding every word as in-progress until the puzzle completes', () => {
+		it('reports completed once every word has been found', () => {
 			const adapter = createAmuseLabsAdapter();
 
 			expect(
@@ -204,7 +255,46 @@ describe('AmuseLabs adapter', () => {
 					...wordWheelProgress,
 					wordsFound: 15,
 				}),
-			).toMatchObject({ gameStatus: 'in-progress', progress: 100 });
+			).toMatchObject({ gameStatus: 'completed', progress: 100 });
+		});
+
+		it('does not depend on isPangram to complete', () => {
+			const adapter = createAmuseLabsAdapter();
+
+			expect(
+				handleAmuseLabsMessage(adapter, {
+					...wordWheelProgress,
+					wordsFound: 15,
+					isPangram: false,
+				}),
+			).toMatchObject({ gameStatus: 'completed' });
+		});
+
+		it('does not let the first interaction overwrite word progress', () => {
+			const adapter = createAmuseLabsAdapter();
+			handleAmuseLabsMessage(adapter, wordWheelProgress);
+
+			expect(
+				handleAmuseLabsMessage(adapter, {
+					...wordWheelProgress,
+					type: 'event',
+				}),
+			).toBeNull();
+		});
+
+		it('reports the first interaction before any word is found', () => {
+			const adapter = createAmuseLabsAdapter();
+
+			expect(
+				handleAmuseLabsMessage(adapter, {
+					...wordWheelProgress,
+					type: 'event',
+				}),
+			).toMatchObject({
+				puzzleType: 'WORDWHEEL',
+				gameStatus: 'in-progress',
+				progress: FIRST_INTERACTION_PROGRESS,
+			});
 		});
 
 		it('falls back to the identity remembered from the load', () => {
