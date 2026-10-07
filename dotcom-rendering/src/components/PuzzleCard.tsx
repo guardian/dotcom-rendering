@@ -8,6 +8,7 @@ import {
 	space,
 	textSans14,
 } from '@guardian/source/foundations';
+import { SvgCheckmark } from '@guardian/source/react-components';
 import type { PuzzleItem } from '../types/puzzlesPage';
 
 /**
@@ -155,6 +156,34 @@ const setterStyles = css`
 	line-height: 1.3;
 `;
 
+const playedStyles = css`
+	position: absolute;
+	z-index: 1;
+	bottom: ${space[2]}px;
+	left: ${space[2]}px;
+	display: inline-flex;
+	align-items: center;
+	gap: ${space[1]}px;
+	${textSans14};
+	font-weight: bold;
+	line-height: 1;
+	.completed-icon {
+		display: inline-flex;
+		width: 14px;
+		height: 14px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background: ${palette.success[400]};
+		color: ${palette.neutral[100]};
+	}
+	svg {
+		width: 11px;
+		height: 11px;
+		fill: currentColor;
+	}
+`;
+
 const cardImageStyles = (isFeatured: boolean) => css`
 	position: absolute;
 	right: 0;
@@ -217,6 +246,14 @@ export const PuzzleCard = ({
 					css={cardImageStyles(isFeatured)}
 					src={item.image}
 				/>
+			)}
+			{item.progress === 100 && (
+				<span css={playedStyles}>
+					Played
+					<span aria-hidden="true" className="completed-icon">
+						<SvgCheckmark />
+					</span>
+				</span>
 			)}
 		</>
 	);

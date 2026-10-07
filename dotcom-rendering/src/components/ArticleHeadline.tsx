@@ -272,6 +272,9 @@ const darkBackground = css`
 
 const immersiveDarkBackground = css`
 	background-color: ${themePalette('--headline-background-immersive')};
+	${from.desktop} {
+		padding-bottom: ${space[6]}px;
+	}
 `;
 
 const invertedText = css`
@@ -626,6 +629,7 @@ export const ArticleHeadline = ({
 									rating={starRating}
 									paddingSize={'large'}
 									size={'large'}
+									layoutType={layoutType}
 								/>
 							)}
 						</WithAgeWarning>

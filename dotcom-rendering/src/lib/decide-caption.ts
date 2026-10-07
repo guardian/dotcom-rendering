@@ -22,6 +22,12 @@ export const decideMainMediaCaption = (
 			}
 			return caption.join(' ');
 
+		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
+			if (mainMedia.caption) {
+				caption.push(mainMedia.caption);
+			}
+			return caption.join(' ');
+
 		default:
 			return caption.join(' ');
 	}
