@@ -480,7 +480,7 @@ export const ImageComponent = ({
 					<div css={timelineBulletStyles} aria-hidden="true" />
 				)}
 
-				{isMainMedia && (
+				{isMainMedia && element.data.caption !== undefined && (
 					// Below tablet, main media images show an info toggle at the bottom right of
 					// the image which, when clicked, toggles the caption as an overlay
 					<Hide when="above" breakpoint="tablet">
@@ -533,16 +533,18 @@ export const ImageComponent = ({
 					/>
 				)}
 			</div>
-			{isMainMedia ? (
+			{element.data.caption === undefined ? null : isMainMedia ? (
 				<Hide when="below" breakpoint="tablet">
-					<Caption
-						captionText={element.data.caption ?? ''}
-						format={format}
-						credit={element.data.credit}
-						displayCredit={element.displayCredit}
-						shouldLimitWidth={shouldLimitWidth}
-						isMainMedia={isMainMedia}
-					/>
+					{
+						<Caption
+							captionText={element.data.caption}
+							format={format}
+							credit={element.data.credit}
+							displayCredit={element.displayCredit}
+							shouldLimitWidth={shouldLimitWidth}
+							isMainMedia={isMainMedia}
+						/>
+					}
 				</Hide>
 			) : (
 				<Caption
