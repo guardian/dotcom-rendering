@@ -158,7 +158,7 @@ export const PuzzlesArchiveMenu = ({
 		const url = getArchiveUrl(archive);
 		return url !== undefined ? [{ archive, url }] : [];
 	});
-	if (validArchives.length < 2) {
+	if (validArchives.length === 0) {
 		return null;
 	}
 
