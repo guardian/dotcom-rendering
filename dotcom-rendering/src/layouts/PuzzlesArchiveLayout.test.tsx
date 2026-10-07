@@ -12,8 +12,8 @@ jest.mock('../components/Footer', () => ({
 jest.mock('../components/Island', () => ({
 	Island: () => null,
 }));
-jest.mock('../components/MorePuzzlesCard', () => ({
-	MorePuzzlesRows: () => <div data-testid="more-puzzles" />,
+jest.mock('../components/RelatedPuzzlesRail', () => ({
+	RelatedPuzzlesRail: () => <div data-testid="more-puzzles" />,
 }));
 jest.mock('../components/Section', () => ({
 	Section: ({ children }: { children: ReactNode }) => <div>{children}</div>,

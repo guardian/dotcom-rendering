@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold24,
 	headlineBold34,
 	palette,
 	space,
@@ -12,19 +11,24 @@ import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
-import { MorePuzzlesRows } from '../components/MorePuzzlesCard';
 import { PuzzlesArchiveCalendar } from '../components/PuzzlesArchiveCalendar.island';
 import { PuzzlesArchiveDescription } from '../components/PuzzlesArchiveDescription.island';
+import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
 import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center } from '../lib/center';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import { Stuck } from './lib/stickiness';
 
 const mainStyles = css`
 	background: ${palette.neutral[100]};
 	color: ${palette.neutral[7]};
+`;
+
+/** Without the bottom ad, the page keeps its own space above the footer. */
+const mainBottomSpaceStyles = css`
 	padding-bottom: ${space[12]}px;
 `;
 
@@ -37,12 +41,24 @@ const pageStyles = css`
 	${from.tablet} {
 		padding: 0 ${space[5]}px;
 	}
+`;
+
+/**
+ * Wraps the heading and the calendar (not the "More from" rail) so the
+ * vertical line between the left column and the content starts 6px below
+ * the sub-nav and ends 28px above the rail's own top border. It sits in the
+ * middle of the gap between the two columns (`column-gap` below), where the
+ * rail draws its own divider, so the two read as one line.
+ */
+const topStyles = css`
+	position: relative;
+	padding-bottom: ${space[5]}px;
 	${from.leftCol} {
 		::before {
 			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 160px;
+			top: 6px;
+			bottom: 28px;
+			left: 150px;
 			width: 1px;
 			background: ${palette.neutral[86]};
 			content: '';
@@ -51,7 +67,7 @@ const pageStyles = css`
 	}
 	${from.wide} {
 		::before {
-			left: 240px;
+			left: 230px;
 		}
 	}
 `;
@@ -125,29 +141,20 @@ const sideAdStyles = css`
 	}
 `;
 
+/**
+ * The rail's top line is light grey and runs the full width of the page
+ * frame, as on the crosswords page: the negative margin cancels the page's
+ * own side padding (`pageStyles`) and the padding puts the rail back in line
+ * with the rest of the content.
+ */
 const moreStyles = css`
-	${archiveGridStyles};
-	margin-top: ${space[5]}px;
-	padding-top: ${space[2]}px;
-	border-top: 1px solid ${palette.neutral[20]};
-	h2 {
-		${headlineBold24};
-		margin: 0 0 ${space[2]}px;
-		line-height: 1;
-		span {
-			color: ${palette.news[400]};
-		}
-	}
-	${from.leftCol} {
-		h2 {
-			grid-column: 1;
-			span {
-				display: block;
-			}
-		}
-		> div {
-			grid-column: 2;
-		}
+	--puzzles-edge-padding: ${space[3]}px;
+	margin: 0 -${space[3]}px;
+	padding: 0 ${space[3]}px;
+	border-top: 1px solid ${palette.neutral[86]};
+	${from.tablet} {
+		margin: 0 -${space[5]}px;
+		padding: 0 ${space[5]}px;
 	}
 `;
 
@@ -203,48 +210,47 @@ export const PuzzlesArchiveLayout = ({
 					hasPageSkinContentSelfConstrain={false}
 				/>
 			</div>
-			<main css={mainStyles} id="maincontent">
+			<main
+				css={[mainStyles, !renderAds && mainBottomSpaceStyles]}
+				id="maincontent"
+			>
 				<div css={pageStyles}>
-					<header css={headingStyles}>
-						<h1>{archive.title}</h1>
-						<p>
-							<Island priority="critical">
-								<PuzzlesArchiveDescription
-									idUrl={
-										puzzlesPage.config.idUrl ??
-										'https://profile.theguardian.com'
-									}
-								/>
-							</Island>
-						</p>
-					</header>
-					<div css={contentStyles}>
-						<div css={calendarColumnStyles}>
-							<Island priority="critical">
-								<PuzzlesArchiveCalendar
-									initialArchive={archive}
-								/>
-							</Island>
+					<div css={topStyles}>
+						<header css={headingStyles}>
+							<h1>{archive.title}</h1>
+							<p>
+								<Island priority="critical">
+									<PuzzlesArchiveDescription
+										idUrl={
+											puzzlesPage.config.idUrl ??
+											'https://profile.theguardian.com'
+										}
+									/>
+								</Island>
+							</p>
+						</header>
+						<div css={contentStyles}>
+							<div css={calendarColumnStyles}>
+								<Island priority="critical">
+									<PuzzlesArchiveCalendar
+										initialArchive={archive}
+									/>
+								</Island>
+							</div>
+							{renderAds && (
+								<aside css={sideAdStyles}>
+									<AdSlot
+										display={ArticleDisplay.Standard}
+										position="right"
+										shouldHideReaderRevenue={false}
+									/>
+								</aside>
+							)}
 						</div>
-						{renderAds && (
-							<aside css={sideAdStyles}>
-								<AdSlot
-									display={ArticleDisplay.Standard}
-									position="right"
-									shouldHideReaderRevenue={false}
-								/>
-							</aside>
-						)}
 					</div>
 					{archive.moreFrom.length > 0 && (
 						<section css={moreStyles}>
-							<h2>
-								More from <span>Puzzles &amp; games</span>
-							</h2>
-							<MorePuzzlesRows
-								items={archive.moreFrom}
-								mobileScrollable={true}
-							/>
+							<RelatedPuzzlesRail items={archive.moreFrom} />
 						</section>
 					)}
 					{renderAds && (
@@ -255,11 +261,20 @@ export const PuzzlesArchiveLayout = ({
 				</div>
 			</main>
 			{renderAds && (
-				<AdSlot
-					display={ArticleDisplay.Standard}
-					index={1}
-					position="fronts-banner"
-				/>
+				<Section
+					fullWidth={true}
+					padSides={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={themePalette('--ad-background')}
+					element="aside"
+				>
+					<AdSlot
+						display={ArticleDisplay.Standard}
+						index={1}
+						position="fronts-banner"
+					/>
+				</Section>
 			)}
 			<Section
 				fullWidth={true}

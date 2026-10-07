@@ -69,9 +69,7 @@ const immersiveMediaBelowDesktop = (
 		position: relative;
 
 		> div {
-			${isMainMediaImage
-				? 'height: 100%;'
-				: 'position: absolute; inset: 0;'}
+			height: 100%;
 		}
 
 		${!isMainMediaImage && 'overflow: hidden;'}
@@ -160,17 +158,10 @@ interface GridItemProps {
 	children: React.ReactNode;
 }
 
-/**
- * Works out the orientation of an image from its Guardian media URL, which
- * encodes the crop dimensions in the path (e.g. `/1000_600_800_480/`).
- * Falls back to 'landscape' if the URL doesn't match the expected pattern.
- */
 const getImageOrientation = (
-	url: string,
+	aspectRatio: string,
 ): 'portrait' | 'landscape' | 'square' => {
-	const match = url.match(/\/\d+_\d+_(\d+)_(\d+)\/\d+\.\w+$/);
-	if (!match) return 'landscape';
-	const [, width, height] = match.map(Number);
+	const [width, height] = aspectRatio.split(':').map(Number);
 	if (width == null || height == null) return 'landscape';
 	if (height > width) return 'portrait';
 	if (width > height) return 'landscape';
@@ -240,20 +231,28 @@ export const StandardLayoutArticleGrid = ({
 		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
 
 	const mainMedia = article.mainMediaElements[0];
+	const mainMediaType = mainMedia?._type;
+
 	const captionText = decideMainMediaCaption(mainMedia);
 	const isMainMediaImage =
-		mainMedia?._type ===
+		mainMediaType ===
 		'model.dotcomrendering.pageElements.ImageBlockElement';
+	const isMainMediaAtom =
+		mainMediaType ===
+		'model.dotcomrendering.pageElements.MediaAtomBlockElement';
+
 	const hasMinimumImageHeight = isLabs && isImmersive && isMainMediaImage;
-	const mainMediaUrl: string | undefined = isMainMediaImage
-		? mainMedia.media.allImages[0]?.url
-		: undefined;
+
 	const mainMediaAspectRatio = isMainMediaImage
 		? mainMedia.media.allImages[0]?.fields.aspectRatio
-		: undefined;
+		: isMainMediaAtom
+			? mainMedia.assets[0]?.aspectRatio
+			: undefined;
 
 	const mainMediaOrientation =
-		mainMediaUrl != null ? getImageOrientation(mainMediaUrl) : 'landscape';
+		mainMediaAspectRatio != null
+			? getImageOrientation(mainMediaAspectRatio)
+			: 'landscape';
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
 	const immersiveMediaRowHeight = isMainMediaImage
@@ -467,12 +466,6 @@ export const StandardLayoutArticleGrid = ({
 								padding-bottom: ${space[8]}px;
 							}
 						`,
-					layoutType === 'immersiveLandscape' &&
-						css`
-							${from.desktop} {
-								padding-bottom: ${space[8]}px;
-							}
-						`,
 					layoutType === 'immersivePortrait' &&
 						css`
 							${from.desktop} {
@@ -544,7 +537,11 @@ export const StandardLayoutArticleGrid = ({
 					layoutType === 'immersiveLandscape' &&
 						css`
 							${from.desktop} {
-								padding-bottom: ${space[8]}px;
+								padding-top: ${space[8]}px;
+							}
+
+							${from.leftCol} {
+								padding-bottom: 14px;
 							}
 						`,
 				]}
@@ -595,6 +592,12 @@ export const StandardLayoutArticleGrid = ({
 								}
 							`
 						: undefined,
+					layoutType === 'immersiveLandscape' &&
+						css`
+							${from.leftCol} {
+								padding-top: ${space[8]}px;
+							}
+						`,
 				]}
 			>
 				{format.display !== ArticleDisplay.Immersive &&
