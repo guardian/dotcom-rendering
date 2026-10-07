@@ -75,25 +75,15 @@ export const getProductLinkLabelWithPrice = (cta: ProductCta): string => {
 /*
 	The logic in this function decides whether or not to silently replace an old price
 	with a live one, or to show the old price in strikethrough
+
+	Always silently replace the price if it goes up
+
+	If the price drops by at least 10% and at least £5/$5 show in strikethrough
 */
 export const shouldPutOldPriceInStrikethrough = (
 	latestPrice: number,
 	articlePrice: number,
-) => {
-	// Always replace the price if it goes up
-	if (latestPrice > articlePrice) {
-		return false;
-	}
-	// If the price drops by at least 10% and at least £5/$5 show in strikethrough
-	else if (
-		latestPrice <= articlePrice * 0.9 &&
-		articlePrice - latestPrice >= 5
-	) {
-		return true;
-	} else {
-		return false;
-	}
-};
+) => latestPrice <= articlePrice * 0.9 && articlePrice - latestPrice >= 5;
 
 const priceFormatter = new Intl.NumberFormat('en-GB', {
 	minimumFractionDigits: 2,
