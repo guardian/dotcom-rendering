@@ -1,5 +1,9 @@
+import { css } from '@emotion/react';
 import type { AccessToken, IDToken } from '@guardian/identity-auth';
+import { breakpoints, from } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react-webpack5';
+import type { PropsWithChildren } from 'react';
+import { expect, userEvent, within } from 'storybook/test';
 import {
 	contributionsHeaderResponse,
 	contributionsSignInPromptHeaderResponse,
@@ -87,6 +91,33 @@ const mockIdToken: IDToken<CustomIdTokenClaims> = {
 	},
 };
 
+const accountStoryFrameStyles = css`
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
+	box-sizing: border-box;
+	height: 52px;
+	background-color: ${themePalette('--masthead-top-bar-background')};
+
+	${from.tablet} {
+		height: 60px;
+	}
+
+	${from.desktop} {
+		height: 64px;
+	}
+`;
+
+const AccountStoryFrame = ({ children }: PropsWithChildren) => (
+	<div css={accountStoryFrameStyles}>{children}</div>
+);
+
+const accountStoryParameters = {
+	chromatic: {
+		viewports: [breakpoints.mobile, breakpoints.desktop, breakpoints.wide],
+	},
+};
+
 const meta = {
 	component: TopBar,
 	title: 'Components/Masthead/TopBar',
@@ -131,11 +162,7 @@ export const OnAUEdition = {
 
 export const SignedInText = () => {
 	return (
-		<div
-			style={{
-				backgroundColor: themePalette('--masthead-top-bar-background'),
-			}}
-		>
+		<AccountStoryFrame>
 			<TopBarMyAccount
 				mmaUrl={''}
 				idUrl={''}
@@ -146,7 +173,88 @@ export const SignedInText = () => {
 					accessToken: mockAccessToken as AccessToken<never>,
 					idToken: mockIdToken,
 				}}
+				showSignInTextOnMobile={true}
 			/>
-		</div>
+		</AccountStoryFrame>
 	);
 };
+SignedInText.parameters = accountStoryParameters;
+
+export const SignedInNoText = () => {
+	return (
+		<AccountStoryFrame>
+			<TopBarMyAccount
+				mmaUrl={''}
+				idUrl={''}
+				discussionApiUrl={''}
+				idApiUrl={''}
+				authStatus={{
+					kind: 'SignedIn',
+					accessToken: mockAccessToken as AccessToken<never>,
+					idToken: mockIdToken,
+				}}
+				showSignInTextOnMobile={false}
+			/>
+		</AccountStoryFrame>
+	);
+};
+SignedInNoText.parameters = accountStoryParameters;
+
+export const SignedInNoTextExpanded = () => <SignedInNoText />;
+SignedInNoTextExpanded.parameters = accountStoryParameters;
+SignedInNoTextExpanded.play = async ({
+	canvasElement,
+}: {
+	canvasElement: HTMLElement;
+}) => {
+	const canvas = within(canvasElement);
+	const button = await canvas.findByTestId('dropdown-button');
+
+	await userEvent.click(button);
+	await expect(button).toHaveAttribute('aria-expanded', 'true');
+
+	const billingLink = await canvas.findByRole('link', { name: 'Billing' });
+	await expect(billingLink).toBeVisible();
+
+	const expectedDividerLeft =
+		window.innerWidth < breakpoints.tablet ? '24px' : '30px';
+	await expect(window.getComputedStyle(billingLink, '::before').left).toBe(
+		expectedDividerLeft,
+	);
+};
+
+export const SignedOutText = () => {
+	return (
+		<AccountStoryFrame>
+			<TopBarMyAccount
+				mmaUrl={''}
+				idUrl={''}
+				discussionApiUrl={''}
+				idApiUrl={''}
+				authStatus={{
+					kind: 'SignedOut',
+				}}
+				showSignInTextOnMobile={true}
+			/>
+		</AccountStoryFrame>
+	);
+};
+SignedOutText.parameters = accountStoryParameters;
+
+export const SignedOutNoText = () => {
+	return (
+		<AccountStoryFrame>
+			<TopBarMyAccount
+				mmaUrl={''}
+				idUrl={''}
+				discussionApiUrl={''}
+				idApiUrl={''}
+				authStatus={{
+					kind: 'SignedOut',
+				}}
+				showSignInTextOnMobile={false}
+			/>
+		</AccountStoryFrame>
+	);
+};
+SignedOutNoText.parameters = accountStoryParameters;
