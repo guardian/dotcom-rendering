@@ -20,7 +20,7 @@ type Props = {
 	frontId?: string;
 	/** Indicates if the page has a page skin advert. When true, this container
 	 * is constrained to the `desktop` max-width by its ancestor, so the extra
-	 * padding/scroll-padding added above `desktop` needsto be skipped to avoid
+	 * 	 padding/scroll-padding added above `desktop` needs to be skipped to avoid
 	 * the carousel appearing off-centre with wasted space. */
 	hasPageSkin?: boolean;
 };
@@ -32,23 +32,13 @@ const containerStyles = css`
 	}
 `;
 
+/**
+ * Reserves space for the page's right gutter above the `wide` breakpoint.
+ * Not applied when the page has a page skin.
+ */
 const containerRightGutterStyles = css`
 	${from.wide} {
 		padding-right: 100px;
-	}
-`;
-
-const carouselLeftColumnAlignmentStyles = css`
-	${from.desktop} {
-		scroll-padding-left: 240px;
-	}
-	${from.leftCol} {
-		scroll-padding-left: 160px;
-		padding-left: 160px;
-	}
-	${from.wide} {
-		scroll-padding-left: 240px;
-		padding-left: 240px;
 	}
 `;
 
@@ -89,6 +79,24 @@ const carouselStyles = css`
 	}
 	scrollbar-width: none; /* Firefox */
 	position: relative;
+`;
+
+/**
+ * Aligns the carousel with the page's left column from the `desktop`
+ * breakpoint upwards. Not applied when the page has a page skin.
+ */
+const carouselLeftColumnAlignmentStyles = css`
+	${from.desktop} {
+		scroll-padding-left: 240px;
+	}
+	${from.leftCol} {
+		scroll-padding-left: 160px;
+		padding-left: 160px;
+	}
+	${from.wide} {
+		scroll-padding-left: 240px;
+		padding-left: 240px;
+	}
 `;
 
 const itemStyles = css`
