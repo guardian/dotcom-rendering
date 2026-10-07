@@ -18,15 +18,18 @@ import { HighlightsNewsletterCard } from './Masthead/Newsletter/HighlightsNewsle
 type Props = {
 	trails: DCRFrontCard[];
 	frontId?: string;
-	/** Indicates if the page has a page skin advert. When true, this container
-	 * is constrained to the `desktop` max-width by its ancestor, so the extra
-	 * 	 padding/scroll-padding added above `desktop` needs to be skipped to avoid
-	 * the carousel appearing off-centre with wasted space. */
+	/**
+	 * Indicates if the page has a page skin advert
+	 * When a page skin advert is active:
+	 * - containers are constrained to a max width of 'desktop'
+	 * - media queries above desktop are not applied
+	 */
 	hasPageSkin?: boolean;
 };
 
 const containerStyles = css`
 	padding: ${space[2]}px 0 ${space[3]}px;
+
 	${from.tablet} {
 		padding: ${space[2]}px ${space[5]}px;
 	}
