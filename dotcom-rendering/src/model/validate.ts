@@ -190,7 +190,7 @@ const isPuzzleItem = (data: unknown): data is PuzzleItem =>
 	isString(data.set) &&
 	isString(data.cardVariant) &&
 	cardVariants.has(data.cardVariant) &&
-	(data.cardVariant === 'archive' ||
+	(data.cadence === undefined ||
 		(isString(data.cadence) && data.cadence.trim().length > 0)) &&
 	(data.url === undefined || isString(data.url)) &&
 	(data.image === undefined || isString(data.image)) &&
@@ -281,7 +281,7 @@ const isPuzzleContainer = (data: unknown): data is PuzzleContainer => {
 		(content.archive === undefined || isPuzzleItem(content.archive)) &&
 		(content.archiveChoices === undefined ||
 			(Array.isArray(content.archiveChoices) &&
-				content.archiveChoices.length >= 2 &&
+				content.archiveChoices.length >= 1 &&
 				content.archiveChoices.every(isPuzzleItem))) &&
 		!(
 			content.archive !== undefined &&

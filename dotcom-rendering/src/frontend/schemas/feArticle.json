@@ -595,6 +595,9 @@
                     "setter": {
                         "type": "string"
                     },
+                    "progress": {
+                        "type": "number"
+                    },
                     "date": {
                         "type": "string"
                     },
