@@ -179,15 +179,6 @@ const overlayStyles = css`
 	text-align: start;
 	gap: ${space[1]}px;
 	padding: ${space[9]}px ${space[2]}px ${space[2]}px;
-
-	/*
-	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
-	 * Links define their own z-index.
-	 */
-
-	> :not(.waveform):not(a) {
-		z-index: 1;
-	}
 `;
 
 const immersiveOverlayStyles = css`
@@ -258,7 +249,6 @@ const waveformStyles = css`
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	z-index: 0;
 	height: 40px;
 	max-width: 100%;
 	overflow: hidden;

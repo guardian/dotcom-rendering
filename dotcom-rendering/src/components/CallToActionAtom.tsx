@@ -68,7 +68,6 @@ const textAndButtonWrapperStyles = css`
 	justify-content: end;
 	align-items: start;
 	padding: ${space[3]}px ${space[2]}px ${space[6]}px;
-	z-index: 1;
 
 	${from.tablet} {
 		flex-direction: row;
