@@ -159,7 +159,7 @@ const moreStyles = css`
 `;
 
 const mobileAdStyles = css`
-	margin-top: ${space[8]}px;
+	margin: ${space[8]}px 0 ${space[5]}px;
 	background: ${palette.neutral[97]};
 	${from.tablet} {
 		display: none;
