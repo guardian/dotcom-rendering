@@ -111,6 +111,15 @@ const headingStyles = css`
 
 const contentStyles = css`
 	${archiveGridStyles};
+	${from.desktop} {
+		grid-template-columns: minmax(0, 1fr) 300px;
+	}
+	${from.leftCol} {
+		grid-template-columns: 140px minmax(0, 1fr) 300px;
+	}
+	${from.wide} {
+		grid-template-columns: 220px minmax(0, 1fr) 300px;
+	}
 `;
 
 const calendarColumnStyles = css`
@@ -122,10 +131,13 @@ const calendarColumnStyles = css`
 
 const sideAdStyles = css`
 	display: none;
-	${from.wide} {
+	${from.desktop} {
 		display: block;
+		grid-column: 2;
+		padding-top: 122px;
+	}
+	${from.leftCol} {
 		grid-column: 3;
-		padding-top: 110px;
 	}
 `;
 
@@ -143,6 +155,14 @@ const moreStyles = css`
 	${from.tablet} {
 		margin: 0 -${space[5]}px;
 		padding: 0 ${space[5]}px;
+	}
+`;
+
+const mobileAdStyles = css`
+	margin: ${space[8]}px 0 ${space[5]}px;
+	background: ${palette.neutral[97]};
+	${from.tablet} {
+		display: none;
 	}
 `;
 
@@ -170,7 +190,7 @@ export const PuzzlesArchiveLayout = ({
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot includeMobile={true} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -220,6 +240,7 @@ export const PuzzlesArchiveLayout = ({
 							{renderAds && (
 								<aside css={sideAdStyles}>
 									<AdSlot
+										display={ArticleDisplay.Standard}
 										position="right"
 										shouldHideReaderRevenue={false}
 									/>
@@ -231,6 +252,11 @@ export const PuzzlesArchiveLayout = ({
 						<section css={moreStyles}>
 							<RelatedPuzzlesRail items={archive.moreFrom} />
 						</section>
+					)}
+					{renderAds && (
+						<div css={mobileAdStyles}>
+							<AdSlot position="mobile-front" index={1} />
+						</div>
 					)}
 				</div>
 			</main>
