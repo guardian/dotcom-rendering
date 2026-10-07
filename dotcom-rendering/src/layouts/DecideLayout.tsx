@@ -123,17 +123,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 		case ArticleDisplay.Standard:
 		default: {
 			switch (article.design) {
-				case ArticleDesign.Interactive:
-					return (
-						<StandardLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
-								article,
-							)}
-						/>
-					);
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
@@ -201,6 +190,9 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							format={format}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
+							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
+								article,
+							)}
 						/>
 					);
 			}
@@ -282,18 +274,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 		case ArticleDisplay.Standard:
 		default: {
 			switch (article.design) {
-				case ArticleDesign.Interactive:
-					return (
-						<StandardLayout
-							article={article.frontendData}
-							NAV={NAV}
-							format={format}
-							renderingTarget={renderingTarget}
-							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
-								article,
-							)}
-						/>
-					);
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
@@ -374,6 +354,9 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							format={format}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
+							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
+								article,
+							)}
 						/>
 					);
 			}
