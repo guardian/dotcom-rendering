@@ -9,6 +9,7 @@ import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
+	DCRSnapType,
 } from '../types/front';
 import type { Position } from './Card/Card';
 import { LI } from './Card/components/LI';
@@ -23,6 +24,8 @@ import type { Loading } from './CardPicture';
 import { FeatureCard } from './FeatureCard';
 import { FrontCard } from './FrontCard';
 import type { SubtitleSize } from './SelfHostedVideoPlayer';
+import { Snap } from './Snap';
+import { SnapCssSandbox } from './SnapCssSandbox';
 import type { Alignment } from './SupportingContent';
 
 type Props = {
@@ -80,6 +83,24 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 			return [...acc, createNewRow('oneCardHalfWidth', card)];
 		}
 	}, []);
+};
+
+const SnapLinkLayout = ({
+	snapData,
+	dataLinkName,
+}: {
+	snapData: DCRSnapType;
+	dataLinkName: string;
+}) => {
+	return (
+		<UL padBottom={true}>
+			<LI padSides={true}>
+				<SnapCssSandbox snapData={snapData}>
+					<Snap snapData={snapData} dataLinkName={dataLinkName} />
+				</SnapCssSandbox>
+			</LI>
+		</UL>
+	);
 };
 
 type ImmersiveCardLayoutProps = {
@@ -267,6 +288,15 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 }: SplashCardLayoutProps) => {
+	const isSnapLink = card.snapData?.embedHtml;
+	if (isSnapLink != null) {
+		return (
+			<SnapLinkLayout
+				snapData={card.snapData as DCRSnapType}
+				dataLinkName={card.dataLinkName}
+			/>
+		);
+	}
 	const shouldShowImmersive = card.isImmersive;
 	if (shouldShowImmersive) {
 		return (
