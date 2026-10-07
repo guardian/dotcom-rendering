@@ -1,3 +1,5 @@
+/** @jest-environment node */
+
 import { RuleTester } from 'eslint';
 import { noUnmanagedZIndex } from './no-unmanaged-z-index.mjs';
 
