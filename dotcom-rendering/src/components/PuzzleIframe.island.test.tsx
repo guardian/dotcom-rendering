@@ -208,6 +208,32 @@ describe('PuzzleIframe', () => {
 	const getDarkModeParamFromSrc = (src: string): string | null =>
 		new URL(src).searchParams.get('darkMode');
 
+	it('has no src until the auth check resolves, then loads once with the uid', async () => {
+		let resolveAuth: (status: ReturnType<typeof signedIn>) => void = () =>
+			undefined;
+		mockedGetAuthStatus.mockReturnValue(
+			new Promise((resolve) => {
+				resolveAuth = resolve;
+			}),
+		);
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
+		expect(iframe.getAttribute('src')).toBeNull();
+
+		resolveAuth(signedIn('user-123'));
+
+		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBe('user-123'));
+	});
+
 	it('renders userId: null and darkMode: false while signed out with dark mode unavailable', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedOut());
 

@@ -211,13 +211,22 @@ export interface PuzzleContextMessage {
 
 /**
  * Reactively resolves the current signed-in user's Guardian identity ID (or
- * `undefined` if signed out/unknown), re-checking whenever the underlying
+ * `undefined` if signed out), re-checking whenever the underlying
  * identity-auth client reports an auth state change (e.g. the reader signs
  * in or out while already on this page, via a sign-in modal or another
  * tab) - not just once on mount.
+ *
+ * `isResolved` is `false` until the first auth check has finished, so that
+ * "not signed in" can be told apart from "not known yet": the iframe must
+ * not be given a `src` before that, or it would load once without the `uid`
+ * and then again with it.
  */
-const usePuzzleUserId = (): string | undefined => {
+const usePuzzleUserId = (): {
+	userId: string | undefined;
+	isResolved: boolean;
+} => {
 	const [userId, setUserId] = useState<string | undefined>(undefined);
+	const [isResolved, setIsResolved] = useState(false);
 
 	useEffect(() => {
 		let isMounted = true;
@@ -230,6 +239,7 @@ const usePuzzleUserId = (): string | undefined => {
 						? authStatus.idToken.claims.legacy_identity_id
 						: undefined,
 				);
+				setIsResolved(true);
 			});
 		};
 
@@ -242,7 +252,7 @@ const usePuzzleUserId = (): string | undefined => {
 		};
 	}, []);
 
-	return userId;
+	return { userId, isResolved };
 };
 
 /**
@@ -358,7 +368,8 @@ const postContextMessage = (
  * the puzzle provider two ways:
  * as a `guardian-puzzle-context` query parameter (JSON-encoded) on the
  * iframe `src` (so it is present from the very first request the iframe
- * makes), and via `postMessage` once the iframe has loaded (`{ type:
+ * makes: the iframe has no `src` until the first auth check has resolved,
+ * so it never loads without the reader's `uid` and then again with it), and via `postMessage` once the iframe has loaded (`{ type:
  * 'guardian-puzzle-context', context }` - see `PuzzleContextMessage`).
  * The provider-specific portion of the URL (e.g. AmuseLabs' `uid`/
  * `darkMode=0|1` query params) is resolved separately per provider, see
@@ -380,7 +391,7 @@ export const PuzzleIframe = ({
 	darkModeAvailable,
 	puzzleDate,
 }: Props) => {
-	const userId = usePuzzleUserId();
+	const { userId, isResolved } = usePuzzleUserId();
 	const darkMode = usePuzzleDarkMode(darkModeAvailable);
 	const context = buildPuzzleContext(userId, darkMode, puzzleDate);
 	const iframeSrc = buildPuzzleIframeSrc(puzzleConfig, context);
@@ -392,11 +403,18 @@ export const PuzzleIframe = ({
 		<iframe
 			ref={iframeRef}
 			css={buildFrameStyles(puzzleConfig.slug)}
-			src={iframeSrc}
+			// No `src` until the reader is known, so the puzzle loads once, with
+			// the right `uid`, instead of loading anonymously and then again.
+			// The frame keeps its `min-height`, so nothing shifts when it loads.
+			src={isResolved ? iframeSrc : undefined}
 			title={title}
 			loading="lazy"
 			sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-			onLoad={(event) => postContextMessage(event.currentTarget, context)}
+			onLoad={(event) => {
+				if (isResolved) {
+					postContextMessage(event.currentTarget, context);
+				}
+			}}
 		/>
 	);
 };
