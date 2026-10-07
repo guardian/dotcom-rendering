@@ -81,7 +81,6 @@ const topBarStyles = (colour: string) => css`
 	::before {
 		border-top: 1px solid ${colour};
 		content: '';
-		z-index: 2;
 		width: 100%;
 		padding-bottom: ${space[2]}px;
 		background-color: unset;
