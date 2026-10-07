@@ -408,6 +408,7 @@ export type Props = {
 	isImmersive?: boolean;
 	starRatingSize: RatingSizeType;
 	headlineTestUuid?: string;
+	isStorylines?: boolean;
 };
 
 export const FeatureCard = ({
@@ -447,6 +448,7 @@ export const FeatureCard = ({
 	starRatingSize,
 	articleMedia,
 	headlineTestUuid,
+	isStorylines = false,
 }: Props) => {
 	const ab = useAB();
 	const isInLoopClickTestControl = Boolean(
@@ -869,6 +871,9 @@ export const FeatureCard = ({
 														}
 														showClock={!!showClock}
 														serverTime={serverTime}
+														isStorylines={
+															isStorylines
+														}
 													/>
 												) : undefined
 											}

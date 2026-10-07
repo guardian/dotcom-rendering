@@ -102,7 +102,7 @@ function parseArticleDataToFrontCard(
 			? {
 					src: article.image.src,
 					altText: article.image.altText || '',
-			  }
+				}
 			: undefined,
 	};
 }
@@ -143,7 +143,7 @@ function parseKeyStoriesToFrontCard(
 			? {
 					src: category.articles[0]?.image.src,
 					altText: category.articles[0]?.image.altText || '',
-			  }
+				}
 			: undefined,
 	};
 }

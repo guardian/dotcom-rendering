@@ -244,6 +244,7 @@ export const hostedVideo: FEArticle = {
 			filterAtAGlance: true,
 			ampArticleSwitch: false,
 			remarketing: true,
+			tagPageStorylines: false,
 			articleEndSlot: true,
 			keyEventsCarousel: false,
 			registerWithPhone: true,
