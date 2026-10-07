@@ -292,7 +292,9 @@ export const StandardLayoutArticleGrid = ({
 						${from.leftCol} {
 							${grid.centreRule(
 								isImmersive ? 4 : 3,
-								isInteractive ? { clip: false } : {},
+								layoutType === 'interactive'
+									? { clip: false }
+									: {},
 							)}
 						}
 					`,
