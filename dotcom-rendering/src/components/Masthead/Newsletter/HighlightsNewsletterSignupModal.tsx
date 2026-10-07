@@ -45,7 +45,6 @@ const closeButtonWrapperStyles = css`
 	position: absolute;
 	top: ${space[2]}px;
 	right: ${space[2]}px;
-	z-index: 1;
 `;
 
 const heroStyles = (imageSrc?: string) => css`
