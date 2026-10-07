@@ -15,6 +15,7 @@ import footballTablesPageSchema from '../frontend/schemas/feFootballTablesPage.j
 import frontSchema from '../frontend/schemas/feFront.json';
 import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
+import type { CommercialProperties } from '../types/commercial';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 import type { FENewslettersPageType } from '../types/newslettersPage';
 import type {
@@ -57,6 +58,16 @@ const validateFootballTablesPage = ajv.compile<FEFootballTablesPage>(
 const validateFootballMatchInfoPage = ajv.compile<FEFootballMatchInfoPage>(
 	footballMatchInfoPageSchema,
 );
+
+// Reuses the generated article definitions; the hub may send a subset of editions.
+const validatePuzzlesCommercialProperties = ajv.compile<
+	Partial<CommercialProperties>
+>({
+	...articleSchema.definitions.CommercialProperties,
+	required: [],
+	additionalProperties: false,
+	definitions: articleSchema.definitions,
+});
 
 export const validateAsFEArticle = (data: unknown): FEArticle => {
 	if (validateArticle(data)) return data;
@@ -379,7 +390,9 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 		!isObject(data.layout) ||
 		!Array.isArray(data.layout.containers) ||
 		!data.layout.containers.every(isPuzzleContainer) ||
-		(data.archive !== undefined && !isPuzzlesArchive(data.archive))
+		(data.archive !== undefined && !isPuzzlesArchive(data.archive)) ||
+		(data.commercialProperties !== undefined &&
+			!validatePuzzlesCommercialProperties(data.commercialProperties))
 	) {
 		throw new TypeError(
 			'Unable to validate request body for puzzles page.',

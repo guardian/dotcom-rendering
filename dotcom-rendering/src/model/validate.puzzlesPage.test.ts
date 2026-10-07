@@ -1,3 +1,4 @@
+import { puzzlesCommercialProperties } from '../../fixtures/manual/puzzlesBranding';
 import { validateAsPuzzlesPageType } from './validate';
 
 const validPage = () => ({
@@ -283,5 +284,36 @@ describe('validateAsPuzzlesPageType', () => {
 		page.layout.containers.pop();
 		page.layout.containers[0]!.content.nestedContainers.push(ad as never);
 		expect(() => validateAsPuzzlesPageType(page)).toThrow();
+	});
+
+	it('accepts commercial properties for a subset of editions', () => {
+		const page = {
+			...validPage(),
+			commercialProperties: {
+				...puzzlesCommercialProperties,
+				UK: { adTargeting: [] },
+			},
+		};
+		expect(
+			validateAsPuzzlesPageType(page).commercialProperties?.AU?.branding
+				?.sponsorName,
+		).toBe('Example sponsor');
+	});
+
+	it.each([
+		[
+			'branding without a logo',
+			{
+				AU: {
+					adTargeting: [],
+					branding: { sponsorName: 'x', aboutThisLink: '' },
+				},
+			},
+		],
+		['an unknown edition', { XX: { adTargeting: [] } }],
+	])('rejects commercial properties with %s', (_, commercialProperties) => {
+		expect(() =>
+			validateAsPuzzlesPageType({ ...validPage(), commercialProperties }),
+		).toThrow();
 	});
 });
