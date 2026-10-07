@@ -34,6 +34,7 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
+	hasPageSkin?: boolean;
 };
 
 export const ElectionComponentsJsonSchema = v.custom<
@@ -94,6 +95,7 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
+	hasPageSkin,
 }: Props) => {
 	switch (containerType) {
 		case 'nav/list':
@@ -103,7 +105,11 @@ export const DecideContainer = ({
 		case 'scrollable/highlights':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<ScrollableHighlights trails={trails} frontId={frontId} />
+					<ScrollableHighlights
+						trails={trails}
+						frontId={frontId}
+						hasPageSkin={hasPageSkin}
+					/>
 				</Island>
 			);
 		case 'flexible/special':

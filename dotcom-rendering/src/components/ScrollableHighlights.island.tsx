@@ -18,6 +18,11 @@ import { HighlightsNewsletterCard } from './Masthead/Newsletter/HighlightsNewsle
 type Props = {
 	trails: DCRFrontCard[];
 	frontId?: string;
+	/** Indicates if the page has a page skin advert. When true, this container
+	 * is constrained to the `desktop` max-width by its ancestor, so the extra
+	 * padding/scroll-padding added above `desktop` needsto be skipped to avoid
+	 * the carousel appearing off-centre with wasted space. */
+	hasPageSkin?: boolean;
 };
 
 const containerStyles = css`
@@ -25,8 +30,25 @@ const containerStyles = css`
 	${from.tablet} {
 		padding: ${space[2]}px ${space[5]}px;
 	}
+`;
+
+const containerRightGutterStyles = css`
 	${from.wide} {
 		padding-right: 100px;
+	}
+`;
+
+const carouselLeftColumnAlignmentStyles = css`
+	${from.desktop} {
+		scroll-padding-left: 240px;
+	}
+	${from.leftCol} {
+		scroll-padding-left: 160px;
+		padding-left: 160px;
+	}
+	${from.wide} {
+		scroll-padding-left: 240px;
+		padding-left: 240px;
 	}
 `;
 
@@ -56,17 +78,6 @@ const carouselStyles = css`
 		padding: 0;
 		scroll-padding-left: 120px;
 		gap: ${space[5]}px;
-	}
-	${from.desktop} {
-		scroll-padding-left: 240px;
-	}
-	${from.leftCol} {
-		scroll-padding-left: 160px;
-		padding-left: 160px;
-	}
-	${from.wide} {
-		scroll-padding-left: 240px;
-		padding-left: 240px;
 	}
 
 	/**
@@ -211,7 +222,11 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-export const ScrollableHighlights = ({ trails, frontId }: Props) => {
+export const ScrollableHighlights = ({
+	trails,
+	frontId,
+	hasPageSkin = false,
+}: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 
 	const visibleTrails = trails.filter((trail) => {
@@ -286,7 +301,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 
 	return (
 		<div
-			css={containerStyles}
+			css={[containerStyles, !hasPageSkin && containerRightGutterStyles]}
 			data-link-name={ophanFrontName}
 			role="region"
 			aria-roledescription="carousel"
@@ -297,6 +312,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				ref={carouselRef}
 				css={[
 					carouselStyles,
+					!hasPageSkin && carouselLeftColumnAlignmentStyles,
 					generateCarouselColumnStyles(carouselLength),
 				]}
 				data-link-name={ophanComponentLink}
