@@ -6639,6 +6639,12 @@ const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const storylinesBackground: PaletteFunction = () => sourcePalette.neutral[93];
+const storylinesBorder: PaletteFunction = () => sourcePalette.neutral[86];
+const storylinesTitles: PaletteFunction = () => sourcePalette.brand[400];
+const storylinesActiveTab: PaletteFunction = () => sourcePalette.neutral[60];
+const storylinesInactiveTab: PaletteFunction = () => sourcePalette.neutral[38];
+
 const customSubnavHeaderTextLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -8565,6 +8571,26 @@ const paletteColours = {
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,
 		dark: starRatingFillColourDark,
+	},
+	'--storylines-active-tab': {
+		light: storylinesActiveTab,
+		dark: storylinesActiveTab,
+	},
+	'--storylines-background': {
+		light: storylinesBackground,
+		dark: storylinesBackground,
+	},
+	'--storylines-border': {
+		light: storylinesBorder,
+		dark: storylinesBorder,
+	},
+	'--storylines-inactive-tab': {
+		light: storylinesInactiveTab,
+		dark: storylinesInactiveTab,
+	},
+	'--storylines-titles': {
+		light: storylinesTitles,
+		dark: storylinesTitles,
 	},
 	'--straight-lines': {
 		light: straightLinesLight,
