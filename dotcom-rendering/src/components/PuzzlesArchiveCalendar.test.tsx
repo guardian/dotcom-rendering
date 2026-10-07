@@ -5,6 +5,7 @@ import {
 	screen,
 	waitFor,
 } from '@testing-library/react';
+import { getAuthStatus } from '../lib/identity';
 import type { PuzzlesArchive } from '../types/puzzlesPage';
 import {
 	archivePageUrl,
@@ -15,6 +16,12 @@ import {
 	mondayFirstOffset,
 	PuzzlesArchiveCalendar,
 } from './PuzzlesArchiveCalendar.island';
+
+jest.mock('../lib/identity', () => ({
+	getAuthStatus: jest.fn(),
+}));
+
+const mockedGetAuthStatus = jest.mocked(getAuthStatus);
 
 const archive: PuzzlesArchive = {
 	category: 'logic-puzzles',
@@ -95,6 +102,7 @@ describe('archive calendar helpers', () => {
 
 describe('PuzzlesArchiveCalendar', () => {
 	beforeEach(() => {
+		mockedGetAuthStatus.mockResolvedValue({ kind: 'SignedOut' });
 		window.history.replaceState(
 			{},
 			'',
@@ -119,6 +127,45 @@ describe('PuzzlesArchiveCalendar', () => {
 		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
 
 		expect(screen.getByTitle('Philistine')).toBeInTheDocument();
+	});
+
+	it('refreshes the initial archive with authenticated progress after hydration', async () => {
+		mockedGetAuthStatus.mockResolvedValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'access-token' },
+			idToken: {},
+		} as never);
+		const authenticatedArchive = {
+			...archive,
+			items: [{ ...archive.items[0]!, progress: 100 }],
+		};
+		const fetchMock = jest.fn().mockResolvedValue({
+			ok: true,
+			json: async () => authenticatedArchive,
+		});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+
+		await waitFor(() =>
+			expect(
+				screen.getByLabelText('2026-09-02, completed'),
+			).toBeInTheDocument(),
+		);
+		expect(fetchMock).toHaveBeenCalledWith(
+			expect.objectContaining({
+				pathname:
+					'/puzzles-and-games/logic-puzzles/archive-data/sudoku-easy/2026/9',
+			}),
+			expect.objectContaining({
+				headers: expect.objectContaining({
+					Authorization: 'Bearer access-token',
+				}),
+			}),
+		);
 	});
 
 	it('keeps the calendar mounted and announces loading in the month controls', async () => {
@@ -239,6 +286,11 @@ describe('PuzzlesArchiveCalendar', () => {
 			value: fetchMock,
 		});
 		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+		mockedGetAuthStatus.mockResolvedValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'access-token' },
+			idToken: {},
+		} as never);
 
 		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
 		await waitFor(() =>
@@ -250,7 +302,14 @@ describe('PuzzlesArchiveCalendar', () => {
 					'/puzzles-and-games/logic-puzzles/archive-data/sudoku-easy/2026/8',
 				search: '',
 			}),
-			{ credentials: 'same-origin' },
+			expect.objectContaining({
+				cache: 'no-store',
+				credentials: 'same-origin',
+				headers: {
+					Accept: 'application/json',
+					Authorization: 'Bearer access-token',
+				},
+			}),
 		);
 		expect(window.location.search).toContain('month=8');
 		Reflect.deleteProperty(global, 'fetch');
@@ -338,7 +397,7 @@ describe('PuzzlesArchiveCalendar', () => {
 					'/puzzles-and-games/logic-puzzles/archive-data/sudoku-medium/2026/9',
 				search: '',
 			}),
-			{ credentials: 'same-origin' },
+			expect.objectContaining({ credentials: 'same-origin' }),
 		);
 		expect(pushState).toHaveBeenCalledWith(
 			{},
@@ -392,7 +451,7 @@ describe('PuzzlesArchiveCalendar', () => {
 					'/puzzles-and-games/logic-puzzles/archive-data/sudoku-medium/2020/8',
 				search: '',
 			}),
-			{ credentials: 'same-origin' },
+			expect.objectContaining({ credentials: 'same-origin' }),
 		);
 		window.history.replaceState(
 			{},

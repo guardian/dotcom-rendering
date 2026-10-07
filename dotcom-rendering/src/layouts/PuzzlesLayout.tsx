@@ -8,9 +8,10 @@ import {
 } from '@guardian/source/foundations';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { PuzzlesBranding } from '../components/PuzzlesBranding';
-import { PuzzlesDirectory } from '../components/PuzzlesDirectory';
+import { PuzzlesDirectoryProgress } from '../components/PuzzlesDirectoryProgress.island';
 import { Section } from '../components/Section';
 import type { NavType } from '../model/extract-nav';
 import type { FEPuzzlesPageType } from '../types/puzzlesPage';
@@ -176,10 +177,12 @@ export const PuzzlesLayout = ({
 					</picture>
 				</header>
 				{branding && <PuzzlesBranding branding={branding} />}
-				<PuzzlesDirectory
-					layout={puzzlesPage.layout}
-					renderAds={renderAds}
-				/>
+				<Island priority="critical">
+					<PuzzlesDirectoryProgress
+						layout={puzzlesPage.layout}
+						renderAds={renderAds}
+					/>
+				</Island>
 			</main>
 			<Section
 				fullWidth={true}

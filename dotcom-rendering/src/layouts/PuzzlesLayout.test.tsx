@@ -10,8 +10,8 @@ jest.mock('../components/Masthead/Masthead', () => ({
 jest.mock('../components/Footer', () => ({
 	Footer: () => <div data-testid="footer" />,
 }));
-jest.mock('../components/PuzzlesDirectory', () => ({
-	PuzzlesDirectory: () => <div data-testid="directory" />,
+jest.mock('../components/PuzzlesDirectoryProgress.island', () => ({
+	PuzzlesDirectoryProgress: () => <div data-testid="directory" />,
 }));
 jest.mock('../components/Section', () => ({
 	Section: ({ children }: { children: ReactNode }) => <div>{children}</div>,
