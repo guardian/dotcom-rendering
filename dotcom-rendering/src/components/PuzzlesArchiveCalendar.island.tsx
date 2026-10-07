@@ -99,8 +99,8 @@ const linesStyles = css`
 	margin-bottom: ${space[4]}px;
 	background: repeating-linear-gradient(
 		to bottom,
-		${palette.neutral[86]} 0,
-		${palette.neutral[86]} 1px,
+		var(--puzzles-border-colour, ${palette.neutral[86]}) 0,
+		var(--puzzles-border-colour, ${palette.neutral[86]}) 1px,
 		transparent 1px,
 		transparent 3px
 	);
@@ -136,6 +136,7 @@ const tabsStyles = css`
 const titleStyles = css`
 	${headlineBold34};
 	margin: ${space[3]}px 0 ${space[3]}px;
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
 	line-height: 1.05;
 `;
 
@@ -160,9 +161,9 @@ const recentStyles = css`
 		box-sizing: border-box;
 		flex: 0 0 calc((100% - var(--recent-gap)) / 2);
 		min-height: 104px;
-		padding: ${space[2]}px;
-		background: ${palette.news[800]};
-		color: ${palette.neutral[7]};
+		padding: ${space[2]}px ${space[2]}px 30px;
+		background: var(--puzzles-card-background, ${palette.news[800]});
+		color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
 		text-decoration: none;
 		${from.phablet} {
 			min-width: 0;
@@ -173,17 +174,43 @@ const recentStyles = css`
 		top: 0;
 		bottom: 0;
 		left: calc(var(--recent-gap) / -2);
-		border-left: 1px solid ${palette.neutral[86]};
+		border-left: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
 		content: '';
 		pointer-events: none;
 	}
 	strong {
 		display: block;
-		color: ${palette.news[400]};
+		color: var(--puzzles-card-headline-colour, ${palette.news[400]});
 		${headlineBold20};
 	}
 	span {
 		${textSans14};
+	}
+	.played {
+		position: absolute;
+		bottom: ${space[2]}px;
+		left: ${space[2]}px;
+		display: inline-flex;
+		align-items: center;
+		gap: ${space[1]}px;
+		font-weight: bold;
+		line-height: 1;
+	}
+	.completed-icon {
+		display: inline-flex;
+		width: 14px;
+		height: 14px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background: ${palette.success[400]};
+		color: ${palette.neutral[100]};
+		svg {
+			width: 11px;
+			height: 11px;
+			fill: currentColor;
+		}
 	}
 `;
 
@@ -191,7 +218,7 @@ const controlsStyles = css`
 	display: grid;
 	grid-template-columns: 44px 1fr 44px;
 	align-items: center;
-	border-top: 1px solid ${palette.neutral[86]};
+	border-top: 1px solid var(--puzzles-border-colour, ${palette.neutral[86]});
 	padding-top: ${space[3]}px;
 	button,
 	a {
@@ -203,8 +230,8 @@ const controlsStyles = css`
 		padding: 0;
 		border: 1px solid ${palette.neutral[20]};
 		border-radius: 50%;
-		background: ${palette.neutral[100]};
-		color: ${palette.neutral[7]};
+		background: var(--puzzles-card-background, ${palette.neutral[100]});
+		color: var(--puzzles-text-colour, ${palette.neutral[7]});
 		cursor: pointer;
 		text-decoration: none;
 		svg {
@@ -216,7 +243,7 @@ const controlsStyles = css`
 		}
 		:disabled,
 		&[aria-disabled='true'] {
-			border-color: ${palette.neutral[86]};
+			border-color: var(--puzzles-border-colour, ${palette.neutral[86]});
 			color: ${palette.neutral[60]};
 			cursor: not-allowed;
 		}
@@ -224,6 +251,8 @@ const controlsStyles = css`
 	strong {
 		text-align: center;
 		${textSans17};
+		color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+		font-weight: bold;
 	}
 `;
 
@@ -239,6 +268,9 @@ const calendarStyles = css`
 		padding-bottom: ${space[2]}px;
 		text-align: center;
 	}
+	.weekday.is-today {
+		font-weight: bold;
+	}
 	.empty,
 	.day {
 		aspect-ratio: 1;
@@ -251,9 +283,9 @@ const calendarStyles = css`
 		justify-content: center;
 		min-width: 0;
 		padding-bottom: ${space[1]}px;
-		border: 1px solid ${palette.neutral[93]};
-		background: ${palette.neutral[97]};
-		color: ${palette.neutral[7]};
+		border: 1px solid var(--puzzles-border-colour, ${palette.neutral[93]});
+		background: var(--puzzles-card-background, ${palette.neutral[97]});
+		color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
 		text-decoration: none;
 		${textSans14};
 	}
@@ -272,7 +304,7 @@ const calendarStyles = css`
 		background: color-mix(
 			in srgb,
 			${palette.success[500]} 35%,
-			${palette.neutral[100]}
+			var(--puzzles-page-background, ${palette.neutral[100]})
 		);
 	}
 	.setter-name {
@@ -408,6 +440,62 @@ const monthName = (year: number, month: number) =>
 		new Date(Date.UTC(year, month - 1, 1)),
 	);
 
+const londonDateFormatter = new Intl.DateTimeFormat('en-GB', {
+	timeZone: 'Europe/London',
+	year: 'numeric',
+	month: '2-digit',
+	day: '2-digit',
+});
+
+const archiveDateFormatter = new Intl.DateTimeFormat('en-GB', {
+	timeZone: 'Europe/London',
+	weekday: 'short',
+	month: 'short',
+	day: 'numeric',
+});
+
+const datePart = (
+	parts: Intl.DateTimeFormatPart[],
+	type: 'year' | 'month' | 'day' | 'weekday',
+) => parts.find((part) => part.type === type)?.value;
+
+const londonDate = (date: Date): string | undefined => {
+	const parts = londonDateFormatter.formatToParts(date);
+	const year = datePart(parts, 'year');
+	const month = datePart(parts, 'month');
+	const day = datePart(parts, 'day');
+	return year && month && day ? `${year}-${month}-${day}` : undefined;
+};
+
+const previousDate = (date: string): string | undefined => {
+	const value = new Date(`${date}T12:00:00Z`);
+	if (Number.isNaN(value.getTime())) return undefined;
+	value.setUTCDate(value.getUTCDate() - 1);
+	return value.toISOString().slice(0, 10);
+};
+
+export const archiveCardDate = (date: string, today = new Date()): string => {
+	const todayDate = londonDate(today);
+	if (date === todayDate) return 'Today';
+	if (todayDate && date === previousDate(todayDate)) return 'Yesterday';
+
+	const value = new Date(`${date}T12:00:00Z`);
+	if (Number.isNaN(value.getTime())) return date;
+	const parts = archiveDateFormatter.formatToParts(value);
+	const weekday = datePart(parts, 'weekday');
+	const day = datePart(parts, 'day');
+	const month = datePart(parts, 'month')?.slice(0, 3);
+	return weekday && day && month ? `${weekday} ${day} ${month}` : date;
+};
+
+export const currentWeekdayLabel = (today = new Date()): string =>
+	new Intl.DateTimeFormat('en-GB', {
+		timeZone: 'Europe/London',
+		weekday: 'short',
+	})
+		.format(today)
+		.slice(0, 2);
+
 const moveMonth = (year: number, month: number, delta: number) => {
 	const value = new Date(Date.UTC(year, month - 1 + delta, 1));
 	return { year: value.getUTCFullYear(), month: value.getUTCMonth() + 1 };
@@ -476,6 +564,8 @@ export const PuzzlesArchiveCalendar = ({
 		archive.year,
 		archive.month,
 	);
+	const today = new Date();
+	const todayWeekday = currentWeekdayLabel(today);
 
 	const loadArchive = useCallback(
 		async (
@@ -562,16 +652,16 @@ export const PuzzlesArchiveCalendar = ({
 				) ?? initialArchive.selectedPuzzle;
 			const year = Number(params.get('year'));
 			const month = Number(params.get('month'));
-			const today = new Date();
+			const selectionDate = new Date();
 			const validMonth =
 				Number.isInteger(year) &&
 				year > 0 &&
 				Number.isInteger(month) &&
 				month >= 1 &&
 				month <= 12 &&
-				(year < today.getFullYear() ||
-					(year === today.getFullYear() &&
-						month <= today.getMonth() + 1));
+				(year < selectionDate.getFullYear() ||
+					(year === selectionDate.getFullYear() &&
+						month <= selectionDate.getMonth() + 1));
 			const authStatus = await getAuthStatus();
 			if (requestAtStart !== requests.current.id) return;
 			void loadArchive(
@@ -680,10 +770,23 @@ export const PuzzlesArchiveCalendar = ({
 								: archive.selectedPuzzle.title}
 						</strong>
 						<span>
-							<time dateTime={item.date}>{item.date}</time>
+							<time dateTime={item.date}>
+								{archiveCardDate(item.date, today)}
+							</time>
 						</span>
 						{item.setterName && (
 							<span> · By: {item.setterName}</span>
+						)}
+						{item.progress === 100 && (
+							<span className="played">
+								Played
+								<span
+									aria-hidden="true"
+									className="completed-icon"
+								>
+									<SvgCheckmark />
+								</span>
+							</span>
 						)}
 					</a>
 				))}
@@ -773,7 +876,10 @@ export const PuzzlesArchiveCalendar = ({
 				aria-busy={loading}
 			>
 				{['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => (
-					<div className="weekday" key={day}>
+					<div
+						className={`weekday${day === todayWeekday ? ' is-today' : ''}`}
+						key={day}
+					>
 						{day}
 					</div>
 				))}

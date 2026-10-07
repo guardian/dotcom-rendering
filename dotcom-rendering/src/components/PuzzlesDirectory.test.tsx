@@ -94,10 +94,10 @@ describe('PuzzlesDirectory', () => {
 				/>,
 			);
 			expect(container.querySelector('article')).toHaveStyle({
-				backgroundColor: background,
+				backgroundColor: `var(--puzzles-card-background, ${background})`,
 			});
 			expect(container.querySelector('.puzzle-card-title')).toHaveStyle({
-				color: title,
+				color: `var(--puzzles-card-headline-colour, ${title})`,
 			});
 		},
 	);
@@ -283,7 +283,7 @@ describe('PuzzlesDirectory', () => {
 						section({
 							enabled: false,
 							id: 'featured',
-							title: 'Today’s featured puzzles',
+							title: 'Featured today',
 							variant: 'featured',
 						}),
 					],
@@ -293,7 +293,7 @@ describe('PuzzlesDirectory', () => {
 		);
 
 		expect(
-			screen.queryByRole('heading', { name: 'Today’s featured puzzles' }),
+			screen.queryByRole('heading', { name: 'Featured today' }),
 		).not.toBeInTheDocument();
 	});
 
