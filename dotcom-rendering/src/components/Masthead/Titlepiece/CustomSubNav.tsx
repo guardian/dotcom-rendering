@@ -288,6 +288,15 @@ const frontContainerStyles = css`
 	color: ${themePalette('--masthead-nav-link-text')};
 `;
 
+const CustomHeader = (
+	customSubNav: CustomSubnav,
+	cssOverrides: SerializedStyles | undefined,
+) => {
+	return customSubNav.header.showHeaderText ? (
+		<HeaderText header={customSubNav.header} cssOverrides={cssOverrides} />
+	) : undefined;
+};
+
 /**
  * Renders a custom subnav (header + links, images and further data to follow) assigned to fronts or articles.
  */
@@ -325,19 +334,6 @@ export const CustomSubNav = ({
 		</li>
 	));
 
-	const headerElement = customSubNav.header.showHeaderText ? (
-		<HeaderText
-			header={customSubNav.header}
-			cssOverrides={
-				hasHeaderImage
-					? imageHeaderTextStyles
-					: isArticle
-						? articleHeaderStyles
-						: undefined
-			}
-		/>
-	) : undefined;
-
 	if (hasHeaderImage) {
 		return (
 			<div
@@ -351,7 +347,7 @@ export const CustomSubNav = ({
 						images={webImages}
 						headerText={customSubNav.header.headerText}
 					/>
-					{headerElement}
+					{CustomHeader(customSubNav, imageHeaderTextStyles)}
 				</div>
 				<ul
 					css={[imageListStyles, scrollableSubNavStyles]}
@@ -373,7 +369,10 @@ export const CustomSubNav = ({
 			data-rendering-page={renderingPage}
 			css={isArticle ? articleContainerStyles : frontContainerStyles}
 		>
-			{headerElement}
+			{CustomHeader(
+				customSubNav,
+				isArticle ? articleHeaderStyles : undefined,
+			)}
 			<ul
 				css={[
 					subNavStyles,
