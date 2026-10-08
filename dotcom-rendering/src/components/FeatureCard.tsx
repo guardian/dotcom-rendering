@@ -790,11 +790,20 @@ export const FeatureCard = ({
 												</div>
 											)}
 
+										{!isImmersive &&
+											mainMedia?.type === 'Audio' &&
+											renderWaveform(
+												mainMedia.duration,
+												233,
+											)}
+
 										{/**
 										 * Without the wrapping div the headline and byline would have space
 										 * inserted between them due to being direct children of the flex container
+										 *
+										 * relative positioning ensures that the headline appears on top of the absolutely positioned waveform.
 										 */}
-										<div>
+										<div css={{ position: 'relative' }}>
 											<CardHeadline
 												headlineText={headlineText}
 												format={format}
@@ -849,12 +858,6 @@ export const FeatureCard = ({
 											</div>
 										)}
 
-										{!isImmersive &&
-											mainMedia?.type === 'Audio' &&
-											renderWaveform(
-												mainMedia.duration,
-												233,
-											)}
 										<CardFooter
 											format={format}
 											age={
