@@ -63,7 +63,7 @@ type Props = {
 	media?: ArticleMedia;
 	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
-	isStorylines?: boolean;
+	isStorylines: boolean;
 };
 
 export const CardFooter = ({
