@@ -385,15 +385,17 @@ const Team = (props: {
 				display: 'flex',
 				// Creates a new stacking context for z-index.
 				isolation: 'isolate',
+				flexDirection: 'row-reverse',
+				justifyContent: 'start',
 			}}
 		>
-			<Crest paID={props.match[props.team].paID} />
 			{props.match.kind !== 'Fixture' ? (
 				<Score
 					score={props.match[props.team].score}
 					matchKind={props.match.kind}
 				/>
 			) : null}
+			<Crest paID={props.match[props.team].paID} />
 		</span>
 		{props.match.kind !== 'Fixture' ? (
 			<Scorers
@@ -439,7 +441,8 @@ const Crest = (props: { paID: string }) => (
 			...circleStyles,
 			backgroundColor: 'white',
 			padding: space[1],
-			zIndex: 1,
+			// Ensures the crest is rendered on top of the score
+			transform: 'translateX(0)',
 		}}
 	>
 		<FootballCrest
@@ -472,7 +475,6 @@ const Score = (props: { score: number; matchKind: FootballMatch['kind'] }) => (
 			borderWidth: 1,
 			borderStyle: 'solid',
 			transform: 'translateX(-10px)',
-			zIndex: 0,
 			svg: {
 				fill: 'var(--svg-fill)',
 				height: 30,
