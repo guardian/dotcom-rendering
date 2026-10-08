@@ -193,13 +193,25 @@ describe('PuzzlesArchiveCalendar', () => {
 		);
 	});
 
-	it('bolds the current London weekday in light and dark mode', () => {
+	it('bolds the current weekday only in the current month', () => {
 		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const currentMonthArchive = {
+			...archive,
+			year: 2026,
+			month: 10,
+		};
 
-		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+		const { unmount } = render(
+			<PuzzlesArchiveCalendar initialArchive={currentMonthArchive} />,
+		);
 
 		expect(screen.getByText('We')).toHaveClass('is-today');
 		expect(screen.getByText('Mo')).not.toHaveClass('is-today');
+
+		unmount();
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+
+		expect(screen.getByText('We')).not.toHaveClass('is-today');
 	});
 
 	it('labels the three recent cards with relative and short dates', () => {

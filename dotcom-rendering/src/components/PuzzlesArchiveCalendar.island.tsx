@@ -564,8 +564,14 @@ export const PuzzlesArchiveCalendar = ({
 		archive.year,
 		archive.month,
 	);
+
 	const today = new Date();
-	const todayWeekday = currentWeekdayLabel(today);
+	const todayDate = londonDate(today);
+	const displayedMonth = `${archive.year}-${String(archive.month).padStart(2, '0')}`;
+	const todayWeekday =
+		todayDate?.startsWith(`${displayedMonth}-`) === true
+			? currentWeekdayLabel(today)
+			: undefined;
 
 	const loadArchive = useCallback(
 		async (
