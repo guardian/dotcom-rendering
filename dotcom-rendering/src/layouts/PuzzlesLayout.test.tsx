@@ -68,6 +68,7 @@ describe('PuzzlesLayout', () => {
 
 		expect(css).toContain('prefers-color-scheme: dark');
 		expect(css).toContain('--puzzles-page-background: #1A1A1A');
+		expect(css).toContain('--puzzles-header-background: #333333');
 		expect(css).toContain('--puzzles-card-background: #333333');
 		expect(css).toContain('--puzzles-headline-colour: #F6F6F6');
 		expect(css).toContain('--puzzles-text-colour: #DCDCDC');
@@ -99,7 +100,9 @@ describe('PuzzlesLayout', () => {
 			})
 			.closest('header')!;
 		expect(header).toHaveStyle({ height: '230px' });
-		expect(header).toHaveStyle({ background: '#fef9f5' });
+		expect(header).toHaveStyle({
+			background: 'var(--puzzles-header-background, #fef9f5)',
+		});
 		const picture = header.querySelector('picture')!;
 		const sources = Array.from(picture.querySelectorAll('source'));
 		const expected = [

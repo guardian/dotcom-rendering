@@ -29,7 +29,7 @@ const brandStyles = css`
 	margin: 0 auto;
 	overflow: hidden;
 	/* The artwork is transparent and uses this illustrated-header background. */
-	background: ${palette.opinion[800]};
+	background: var(--puzzles-header-background, ${palette.opinion[800]});
 `;
 
 const brandImageStyles = css`

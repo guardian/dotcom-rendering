@@ -10,6 +10,7 @@ export const puzzlesPageTheme = (
 	darkModeAvailable: boolean,
 ): SerializedStyles => css`
 	--puzzles-page-background: ${palette.neutral[100]};
+	--puzzles-header-background: ${palette.opinion[800]};
 	--puzzles-headline-colour: ${palette.neutral[7]};
 	--puzzles-text-colour: ${palette.neutral[7]};
 	--puzzles-border-colour: ${palette.neutral[86]};
@@ -22,6 +23,7 @@ export const puzzlesPageTheme = (
 		@media (prefers-color-scheme: dark) {
 			html:not([data-color-scheme='light']) & {
 				--puzzles-page-background: ${palette.neutral[10]};
+				--puzzles-header-background: ${palette.neutral[20]};
 				--puzzles-card-background: ${palette.neutral[20]};
 				--puzzles-card-cadence-colour: ${palette.neutral[97]};
 				--puzzles-card-headline-colour: ${palette.neutral[97]};
