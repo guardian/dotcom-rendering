@@ -86,6 +86,49 @@ describe('PuzzlesDirectoryProgress', () => {
 		expect(original).not.toHaveProperty('progress');
 	});
 
+	it.each([
+		['Mini', 'mini', 'CROSSWORD_MINI', '295', 'mini-crossword'],
+		['Weekend', 'weekend', 'CROSSWORD_WEEKEND', '821', 'weekend-crossword'],
+	])(
+		'uses the canonical route for %s crossword URLs',
+		(title, set, puzzleType, number, apiPath) => {
+			const quick = layout.containers[0]!.content.items[0]![0]!;
+			const crosswordLayout: PuzzlesLayoutType = {
+				containers: [
+					{
+						...layout.containers[0]!,
+						content: {
+							items: [
+								[
+									{
+										...quick,
+										id: set,
+										title,
+										set,
+									},
+								],
+							],
+							nestedContainers: [],
+						},
+					},
+				],
+			};
+
+			const enriched = enrichLayoutWithProgress(crosswordLayout, [
+				{
+					puzzleType,
+					publishDate: '2026-10-08T00:00:00Z',
+					progress: 0,
+					gameUrl: `/crosswords/${apiPath}/${number}`,
+				},
+			]);
+
+			expect(enriched.containers[0]!.content.items[0]![0]!.url).toBe(
+				`/crosswords/${set}/${number}`,
+			);
+		},
+	);
+
 	it('uses Today for the current London date and formats older publication dates', () => {
 		expect(
 			puzzleCardCadence(
