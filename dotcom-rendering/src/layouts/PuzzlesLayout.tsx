@@ -10,6 +10,7 @@ import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
+import { PuzzlesBranding } from '../components/PuzzlesBranding';
 import { PuzzlesDirectoryProgress } from '../components/PuzzlesDirectoryProgress.island';
 import { Section } from '../components/Section';
 import type { NavType } from '../model/extract-nav';
@@ -99,6 +100,8 @@ export const PuzzlesLayout = ({
 	NAV: NavType;
 }) => {
 	const renderAds = !puzzlesPage.isAdFreeUser;
+	const branding =
+		puzzlesPage.commercialProperties?.[puzzlesPage.editionId]?.branding;
 	const puzzlesNav = {
 		...NAV,
 		currentNavLink: 'Puzzles & games',
@@ -151,7 +154,13 @@ export const PuzzlesLayout = ({
 				id="maincontent"
 			>
 				<header css={brandStyles}>
-					<h1 css={visuallyHidden}>Puzzles and Games</h1>
+					<h1
+						css={css`
+							${visuallyHidden}
+						`}
+					>
+						Puzzles and Games
+					</h1>
 					<picture css={brandPictureStyles}>
 						{headerSources.map(({ breakpoint, filename }) => (
 							<source
@@ -167,6 +176,7 @@ export const PuzzlesLayout = ({
 						/>
 					</picture>
 				</header>
+				{branding && <PuzzlesBranding branding={branding} />}
 				<Island priority="critical">
 					<PuzzlesDirectoryProgress
 						layout={puzzlesPage.layout}

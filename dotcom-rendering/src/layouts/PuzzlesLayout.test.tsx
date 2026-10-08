@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { puzzlesCommercialProperties } from '../../fixtures/manual/puzzlesBranding';
 import { PuzzlesLayout } from './PuzzlesLayout';
 
 jest.mock('../components/Masthead/Masthead', () => ({
@@ -64,6 +65,38 @@ describe('PuzzlesLayout', () => {
 			document.getElementById('dfp-ad--mobile-above-nav'),
 		).not.toBeInTheDocument();
 	});
+	it('renders a sponsorship strip below the header for the matching edition only', () => {
+		const sponsored = (editionId: string, isAdFreeUser = false) =>
+			({
+				...page(isAdFreeUser),
+				editionId,
+				commercialProperties: puzzlesCommercialProperties,
+			}) as never;
+		const { rerender } = render(
+			<PuzzlesLayout NAV={nav} puzzlesPage={sponsored('AU')} />,
+		);
+		const header = screen
+			.getByRole('heading', { level: 1, name: 'Puzzles and Games' })
+			.closest('header')!;
+		expect(header).not.toHaveTextContent('Supported by');
+		expect(header).toHaveStyle({ height: '230px' });
+		expect(screen.getByText('Supported by')).toBeInTheDocument();
+		expect(
+			screen.getByRole('link', {
+				name: 'Visit the Example sponsor website',
+			}),
+		).toHaveAttribute('href', 'https://example.com');
+		expect(
+			screen.getByRole('link', { name: 'About this content' }),
+		).toHaveAttribute('href', 'https://example.com/about');
+		rerender(
+			<PuzzlesLayout NAV={nav} puzzlesPage={sponsored('AU', true)} />,
+		);
+		expect(screen.getByText('Supported by')).toBeInTheDocument();
+		rerender(<PuzzlesLayout NAV={nav} puzzlesPage={sponsored('UK')} />);
+		expect(screen.queryByText('Supported by')).not.toBeInTheDocument();
+	});
+
 	it('renders the illustrated header with responsive sources and a fixed height', () => {
 		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
 		const header = screen
