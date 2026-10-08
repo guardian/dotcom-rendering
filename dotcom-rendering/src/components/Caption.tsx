@@ -318,7 +318,6 @@ const Row = ({ children }: { children: React.ReactNode }) => (
 
 const CaptionToggle = () => (
 	<>
-		{}
 		<label
 			htmlFor="the-checkbox"
 			css={css`
