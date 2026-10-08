@@ -399,6 +399,13 @@ export const PuzzleIframe = ({
 
 	usePuzzleProgressReporting(puzzleConfig, iframeRef);
 
+	// In development the islands do not hydrate when the page is opened
+	// straight from the local `frontend` (its `/assets/` cannot serve this
+	// repo's chunks), so the server-rendered `src` is all there is. Waiting
+	// for the auth check there would leave the puzzle blank. The one extra
+	// load this allows is accepted locally: CODE and PROD wait as below.
+	const shouldLoad = isResolved || process.env.NODE_ENV === 'development';
+
 	return (
 		<iframe
 			ref={iframeRef}
@@ -406,12 +413,12 @@ export const PuzzleIframe = ({
 			// No `src` until the reader is known, so the puzzle loads once, with
 			// the right `uid`, instead of loading anonymously and then again.
 			// The frame keeps its `min-height`, so nothing shifts when it loads.
-			src={isResolved ? iframeSrc : undefined}
+			src={shouldLoad ? iframeSrc : undefined}
 			title={title}
 			loading="lazy"
 			sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
 			onLoad={(event) => {
-				if (isResolved) {
+				if (shouldLoad) {
 					postContextMessage(event.currentTarget, context);
 				}
 			}}
