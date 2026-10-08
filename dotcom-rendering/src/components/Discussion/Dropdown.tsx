@@ -7,6 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import type { DropdownOptionType } from '../../lib/discussion';
+import { getZIndex } from '../../lib/getZIndex';
 import { palette as schemedPalette } from '../../palette';
 
 type Props = {
@@ -21,7 +22,7 @@ const containerStyles = css`
 `;
 
 const ulStyles = css`
-	z-index: 2;
+	z-index: ${getZIndex('minimum')};
 	list-style: none;
 	border: 1px solid ${schemedPalette('--discussion-border')};
 	margin-left: -8px;

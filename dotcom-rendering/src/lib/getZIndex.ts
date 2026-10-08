@@ -115,6 +115,9 @@ const indices = [
 	'card-nested-link',
 	'card-link',
 	'card-podcast-image',
+
+	// often a small z-index is needed to appear over positioned elements https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioned_layout/Stacking_without_z-index
+	'minimum',
 ] as const;
 
 // Implementation code - you don't need to change this to get a new index
