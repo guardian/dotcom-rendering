@@ -10,6 +10,8 @@ import type { ArticleMedia } from '../../../types/mainMedia';
 import { CardPill } from '../../CardPill';
 
 const contentStyles = css`
+	// Ensures the footer is a positioned element so it can appear on top of other positioned elements
+	position: relative;
 	margin-top: auto;
 	display: flex;
 	justify-content: flex-start;
