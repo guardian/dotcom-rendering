@@ -350,13 +350,6 @@ const invertedWrapper = css`
 	margin-left: 6px;
 `;
 
-// Due to MainMedia using position: relative, this seems to effect the rendering order
-// To mitigate we use z-index
-// TODO: find a cleaner solution
-const zIndex = css`
-	z-index: 1;
-`;
-
 const ageWarningMargins = (
 	format: ArticleFormat,
 	isLegacyImmersive: boolean,
@@ -825,7 +818,6 @@ export const ArticleHeadline = ({
 											: headlineFont(format),
 										invertedWrapper,
 										invertedFontLineHeight,
-										zIndex,
 										css`
 											color: ${themePalette(
 												'--headline-colour',
