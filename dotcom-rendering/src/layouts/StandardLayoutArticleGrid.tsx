@@ -65,6 +65,9 @@ const immersiveMediaBelowDesktop = (
 	isMainMediaImage: boolean,
 	hasMinimumImageHeight: boolean,
 ) => css`
+	${until.tablet} {
+		aspect-ratio: 4 / 5;
+	}
 	${until.desktop} {
 		position: relative;
 
@@ -83,7 +86,7 @@ const immersiveMediaBelowDesktop = (
 			height: ${hasMinimumImageHeight
 				? '180px'
 				: isMainMediaImage
-					? 'min(60%, calc(200% - 120vw + 30px))'
+					? 'min(20%, calc(200% - 120vw + 30px))'
 					: 'min(60%, 144px)'};
 			z-index: ${getZIndex('mediaOverlay')};
 			background: linear-gradient(
@@ -433,7 +436,7 @@ export const StandardLayoutArticleGrid = ({
 							z-index: ${getZIndex('articleHeadline')};
 
 							${until.desktop} {
-								margin-top: -1px;
+								margin-top: -3px;
 								background-color: ${headlineBackgroundImmersive};
 								padding-top: 1px;
 								padding-bottom: ${space[8]}px;
