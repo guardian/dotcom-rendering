@@ -337,6 +337,19 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "newsroom-ai-tag-page-storylines",
+		description:
+			"Testing the AI generated storylines component on tag pages",
+		owners: ["ai.dev@guardian.co.uk"],
+		expirationDate: `2026-11-30`,
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");

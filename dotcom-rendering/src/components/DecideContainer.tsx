@@ -130,6 +130,7 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isStorylines={false}
 				/>
 			);
 		case 'scrollable/small':

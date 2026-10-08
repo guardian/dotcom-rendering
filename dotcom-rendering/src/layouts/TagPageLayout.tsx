@@ -16,6 +16,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
+import { StorylinesSectionContent } from '../components/StorylinesSectionContent.island';
 import { SubNav } from '../components/SubNav.island';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
@@ -142,9 +143,12 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							)
 						: undefined;
 
-					/**
-					 * The pagination should appear at the bottom of the page; this is done by passing to FrontSection.
-					 */
+					// Storylines logic to determine where to insert the section
+					const insertStorylinesSection =
+						tagPage.storylinesContent &&
+						(!tagPage.pagination ||
+							tagPage.pagination.currentPage === 1) && // Only on the first page
+						index === 0; // Only after the first section
 
 					const isLastGroup =
 						index === tagPage.groupedTrails.length - 1;
@@ -181,7 +185,16 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								toggleable={false}
 								pageId={tagPage.pageId}
 								editionId={tagPage.editionId}
-								pagination={tagPagePagination}
+								/**
+								 * The pagination should appear at the bottom of the page; usually this is done by passing to FrontSection.
+								 * If the storylines section is being inserted when there's only one other container on the page,
+								 * we want to attach the pagination to it instead of the last trails section.
+								 */
+								pagination={
+									insertStorylinesSection
+										? undefined
+										: tagPagePagination
+								}
 							>
 								<DecideContainerByTrails
 									trails={groupedTrails.trails}
@@ -190,6 +203,20 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									aspectRatio="5:4"
 								/>
 							</FrontSection>
+							{insertStorylinesSection &&
+								tagPage.storylinesContent && (
+									<Island priority="critical">
+										<StorylinesSectionContent
+											index={1}
+											editionId={tagPage.editionId}
+											storylinesContent={
+												tagPage.storylinesContent
+											}
+											containerId="storylines"
+											pagination={tagPagePagination}
+										/>
+									</Island>
+								)}
 							{mobileAdPositions.includes(index) && (
 								<MobileAdSlot
 									renderAds={renderAds}

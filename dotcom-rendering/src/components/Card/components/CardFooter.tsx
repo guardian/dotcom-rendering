@@ -61,6 +61,7 @@ type Props = {
 	media?: ArticleMedia;
 	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
+	isStorylines: boolean;
 };
 
 export const CardFooter = ({
@@ -71,6 +72,7 @@ export const CardFooter = ({
 	media,
 	isNewsletter,
 	shouldReserveSpace,
+	isStorylines,
 }: Props) => {
 	const shouldShowBranding =
 		format.theme === ArticleSpecial.Labs && !!cardBranding;
@@ -86,6 +88,13 @@ export const CardFooter = ({
 		return (
 			<footer css={contentStyles}>
 				{shouldShowBranding && cardBranding}
+
+				{/**
+				 * Usually, we either display the pill or the footer,
+				 * but if the card appears in the storylines section on tag pages
+				 * then we do want to display the date on these cards as well as the media pill.
+				 * */}
+				{isStorylines && age}
 
 				<CardPill
 					media={media}

@@ -22,6 +22,7 @@ export const WithAge = meta.story({
 	args: {
 		format: defaultFormat,
 		age: <p>19h ago</p>,
+		isStorylines: false,
 	},
 });
 
@@ -32,6 +33,7 @@ export const WithGallery = meta.story({
 			type: 'Gallery',
 			count: '14',
 		},
+		isStorylines: false,
 	},
 });
 
@@ -42,6 +44,7 @@ export const WithAudio = meta.story({
 			type: 'Audio',
 			duration: '12:34',
 		},
+		isStorylines: false,
 	},
 });
 
@@ -53,6 +56,7 @@ export const WithYoutubeVideo = meta.story({
 			duration: 972,
 			isLive: false,
 		},
+		isStorylines: false,
 	},
 });
 
@@ -63,6 +67,7 @@ export const WithSelfHostedVideo = meta.story({
 			type: 'SelfHostedVideo',
 			duration: 254,
 		},
+		isStorylines: false,
 	},
 });
 
@@ -70,6 +75,7 @@ export const WithNewsletter = meta.story({
 	args: {
 		format: defaultFormat,
 		isNewsletter: true,
+		isStorylines: false,
 	},
 });
 
@@ -80,5 +86,6 @@ export const WithBranding = meta.story({
 			theme: ArticleSpecial.Labs,
 		},
 		cardBranding: <p>Card branding</p>,
+		isStorylines: false,
 	},
 });

@@ -271,6 +271,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 									webPublicationDate={webPublicationDate}
 									showClock={!!showClock}
 									serverTime={serverTime}
+									isStorylines={false}
 								/>
 							) : undefined
 						}
@@ -284,6 +285,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 							) : undefined
 						}
 						media={articleMedia}
+						isStorylines={false}
 					/>
 				</div>
 			</button>

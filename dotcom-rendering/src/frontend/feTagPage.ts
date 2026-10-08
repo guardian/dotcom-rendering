@@ -2,6 +2,7 @@ import type { EditionId } from '../lib/edition';
 import type { CommercialProperties } from '../types/commercial';
 import type { FooterType } from '../types/footer';
 import type { FENavType } from '../types/frontend';
+import type { StorylinesContent } from '../types/storylinesContent';
 import type { FEPagination, FETagType } from '../types/tag';
 import type { FEFrontCard, FEFrontConfig } from './feFront';
 
@@ -25,4 +26,7 @@ export type FETagPage = {
 	forceDay: boolean;
 	canonicalUrl?: string;
 	contributionsServiceUrl: string;
+	// This comment is needed to ensure null is recognised properly in the schema
+	/** @nullable true */
+	storylinesContent?: StorylinesContent | null;
 };
