@@ -10,6 +10,7 @@ import type { ArticleMedia } from '../../../types/mainMedia';
 import { CardPill } from '../../CardPill';
 
 const contentStyles = css`
+	position: relative;
 	margin-top: auto;
 	display: flex;
 	justify-content: flex-start;
