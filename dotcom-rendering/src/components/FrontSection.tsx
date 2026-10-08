@@ -359,6 +359,8 @@ const sectionContentBorderFromLeftCol = css`
 			bottom: 0;
 			border-left: 1px solid ${schemePalette('--section-border')};
 			transform: translateX(-50%);
+			/** Keeps the vertical divider on top of carousel item dividers */
+			z-index: 1;
 		}
 	}
 `;
