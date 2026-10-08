@@ -24,9 +24,19 @@ const change = (filledCells: number, isComplete = false) => ({
 	isComplete,
 });
 
+const setExperiment = (group: string | undefined) => {
+	window.guardian = {
+		config: {
+			serverSideABTests:
+				group === undefined ? {} : { 'puzzles-new-hub-v1': group },
+		},
+	} as unknown as typeof window.guardian;
+};
+
 beforeEach(() => {
 	jest.useFakeTimers();
 	mockedReport.mockClear();
+	setExperiment('variant');
 });
 
 afterEach(() => {
@@ -95,6 +105,23 @@ describe('useCrosswordProgressReporting', () => {
 			expect.objectContaining({ gameStatus: 'in-progress', progress: 7 }),
 		);
 	});
+
+	it.each([['control'], ['unknown'], [undefined]])(
+		'reports nothing for a reader who is not in the puzzles-new-hub-v1 variant (%p)',
+		(group) => {
+			setExperiment(group);
+			const { result, unmount } = renderHook(() =>
+				useCrosswordProgressReporting(data),
+			);
+
+			result.current(change(10));
+			result.current(change(100, true));
+			unmount();
+			jest.advanceTimersByTime(IN_PROGRESS_DEBOUNCE_MS);
+
+			expect(mockedReport).not.toHaveBeenCalled();
+		},
+	);
 
 	it('reports nothing for a crossword type the API does not know', () => {
 		const { result } = renderHook(() =>
