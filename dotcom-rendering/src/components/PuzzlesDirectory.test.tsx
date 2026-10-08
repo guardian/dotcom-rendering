@@ -34,6 +34,38 @@ const section = (
 });
 
 describe('PuzzlesDirectory', () => {
+	it('renders puzzle tile titles as H3s with descriptive crossword text', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							content: {
+								items: [
+									[
+										item({
+											title: 'Mini',
+											type: 'crossword',
+										}),
+									],
+								],
+								nestedContainers: [],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+
+		expect(
+			screen.getByRole('heading', {
+				level: 3,
+				name: 'Mini crossword',
+			}),
+		).toBeInTheDocument();
+	});
+
 	it('keeps the crossword sidebar links hidden below leftCol and scoped to crosswords', () => {
 		const { container } = render(
 			<PuzzlesDirectory

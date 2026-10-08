@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import { PuzzlesArchiveLayout } from './PuzzlesArchiveLayout';
 
@@ -52,6 +52,22 @@ describe('PuzzlesArchiveLayout', () => {
 			'dfp-ad--inline1--mobile',
 			'dfp-ad--fronts-banner-1',
 		]);
+	});
+
+	it('renders the archive category as the page H1', () => {
+		render(
+			<PuzzlesArchiveLayout
+				NAV={nav}
+				puzzlesPage={page(true) as never}
+			/>,
+		);
+
+		expect(
+			screen.getByRole('heading', {
+				level: 1,
+				name: 'Word games archive',
+			}),
+		).toBeInTheDocument();
 	});
 
 	it('does not render ad slots for ad-free users', () => {

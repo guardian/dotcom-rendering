@@ -7,6 +7,7 @@ import {
 	palette,
 	space,
 	textSans14,
+	visuallyHidden,
 } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
 import type { PuzzleItem } from '../types/puzzlesPage';
@@ -150,9 +151,14 @@ const cardTitleStyles = (
 	variant: PuzzleItem['cardVariant'],
 	lightColour: string,
 ) => css`
+	margin: 0;
 	${variant === 'compact' ? headlineBold20 : headlineBold24};
 	color: var(--puzzles-card-headline-colour, ${lightColour});
 	line-height: 1.15;
+`;
+
+const hiddenCrosswordSuffixStyles = css`
+	${visuallyHidden};
 `;
 
 const cadenceStyles = css`
@@ -237,15 +243,23 @@ export const PuzzleCard = ({
 		item.image !== undefined &&
 		item.image.length > 0 &&
 		item.cardVariant !== 'compact';
+	const needsCrosswordSuffix =
+		item.type === 'crossword' && !/\bcrossword\b/i.test(item.title);
 	const contents = (
 		<>
 			<div css={cardTextStyles(isFeatured)}>
-				<span
+				<h3
 					className="puzzle-card-title"
 					css={cardTitleStyles(item.cardVariant, colours.title)}
 				>
 					{item.title}
-				</span>
+					{needsCrosswordSuffix && (
+						<span css={hiddenCrosswordSuffixStyles}>
+							{' '}
+							crossword
+						</span>
+					)}
+				</h3>
 				{item.cadence !== undefined && item.cadence.length > 0 && (
 					<span css={cadenceStyles}>{item.cadence}</span>
 				)}

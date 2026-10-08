@@ -147,6 +147,28 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(screen.getByTitle('Philistine')).toBeInTheDocument();
 	});
 
+	it('uses the full crossword name for the archive H2', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{
+					...archive,
+					category: 'crosswords',
+					selectedPuzzle: {
+						...archive.selectedPuzzle,
+						title: 'Mini',
+					},
+				}}
+			/>,
+		);
+
+		expect(
+			screen.getByRole('heading', {
+				level: 2,
+				name: 'Mini crossword',
+			}),
+		).toBeInTheDocument();
+	});
+
 	it('uses the outlined check icon in the Played legend', () => {
 		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
 

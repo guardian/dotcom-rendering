@@ -598,6 +598,11 @@ export const PuzzlesArchiveCalendar = ({
 		archive.category === 'crosswords'
 			? `${archive.selectedPuzzle.title.replace(/ crosswords?$/i, '')} crosswords`
 			: `${archive.selectedPuzzle.title} puzzles`;
+	const puzzleHeading =
+		archive.category === 'crosswords' &&
+		!/\bcrosswords?\b/i.test(archive.selectedPuzzle.title)
+			? `${archive.selectedPuzzle.title} crossword`
+			: archive.selectedPuzzle.title;
 	const recent = [...archive.items]
 		.sort((left, right) => right.date.localeCompare(left.date))
 		.slice(0, 3);
@@ -805,7 +810,7 @@ export const PuzzlesArchiveCalendar = ({
 					);
 				})}
 			</nav>
-			<h2 css={titleStyles}>{archive.selectedPuzzle.title}</h2>
+			<h2 css={titleStyles}>{puzzleHeading}</h2>
 			<div css={recentStyles}>
 				{recent.map((item, index) => (
 					<a href={item.url} key={`${item.date}-${item.puzzleType}`}>

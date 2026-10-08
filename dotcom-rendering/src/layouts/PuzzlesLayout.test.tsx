@@ -47,7 +47,7 @@ describe('PuzzlesLayout', () => {
 		expect(
 			screen.getByRole('heading', {
 				level: 1,
-				name: 'Puzzles and Games',
+				name: 'Puzzles & games',
 			}),
 		).toBeInTheDocument();
 		expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
@@ -96,7 +96,7 @@ describe('PuzzlesLayout', () => {
 		const header = screen
 			.getByRole('heading', {
 				level: 1,
-				name: 'Puzzles and Games',
+				name: 'Puzzles & games',
 			})
 			.closest('header')!;
 		expect(header).toHaveStyle({ height: '230px' });

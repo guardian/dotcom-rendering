@@ -111,6 +111,11 @@ const usefulLinkStyles = css`
 	}
 `;
 
+const usefulLinkTitleStyles = css`
+	margin: 0;
+	font: inherit;
+`;
+
 const newsletterStyles = css`
 	grid-column: 1 / -1;
 	min-width: 0;
@@ -304,7 +309,7 @@ export const PuzzlesSupporting = ({
 							key={`${link.title}-${link.url}`}
 							{...externalProps(link.url)}
 						>
-							{link.title}
+							<h3 css={usefulLinkTitleStyles}>{link.title}</h3>
 						</a>
 					))}
 					{showNewsletter && newsletter !== undefined && (
