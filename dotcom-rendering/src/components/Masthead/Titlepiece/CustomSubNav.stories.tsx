@@ -15,6 +15,7 @@ const customSubNav: CustomSubnav = {
 		headerText: 'US politics',
 		copy: '',
 		dotcomPath: '/us-news/us-politics',
+		showHeaderText: true,
 	},
 	format: 'large',
 	links: [
@@ -95,11 +96,37 @@ export const Front = {
 	args: { renderingPage: 'front' },
 } satisfies Story;
 
+export const FrontWithHiddenHeader = {
+	args: {
+		renderingPage: 'front',
+		customSubNav: {
+			...customSubNav,
+			header: {
+				...customSubNav.header,
+				showHeaderText: false,
+			},
+		},
+	},
+} satisfies Story;
+
 /** On fronts, a web image is shown per breakpoint; resize the viewport to switch between mobile/tablet/desktop. */
 export const FrontWithImage = {
 	args: {
 		renderingPage: 'front',
 		customSubNav: customSubNavWithImages,
+	},
+} satisfies Story;
+
+export const FrontWithImageHiddenHeader = {
+	args: {
+		renderingPage: 'front',
+		customSubNav: {
+			...customSubNavWithImages,
+			header: {
+				...customSubNavWithImages.header,
+				showHeaderText: false,
+			},
+		},
 	},
 } satisfies Story;
 

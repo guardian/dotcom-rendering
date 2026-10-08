@@ -41,6 +41,7 @@ const subNavStyles = css`
 	${from.mobileMedium} {
 		margin-top: ${space[3]}px;
 	}
+
 	${from.tablet} {
 		min-height: 30px;
 	}
@@ -61,9 +62,11 @@ const articleContainerStyles = css`
 	${from.mobileMedium} {
 		min-height: 40px;
 	}
+
 	${from.tablet} {
 		min-height: 42px;
 	}
+
 	${from.leftCol} {
 		min-height: 44px;
 	}
@@ -80,6 +83,7 @@ const articleSubNavStyles = css`
 	${from.mobileMedium} {
 		margin-top: 0;
 	}
+
 	${from.leftCol} {
 		margin-top: 0;
 	}
@@ -152,6 +156,7 @@ const imageListStyles = css`
 	${from.mobileLandscape} {
 		padding: 0 ${space[5]}px;
 	}
+
 	${from.tablet} {
 		min-height: 30px;
 	}
@@ -348,9 +353,11 @@ export const CustomSubNav = ({
 		</li>
 	));
 
+	console.log(`potato ${customSubNav.header.showHeaderText}`);
+
 	const headerElement = customSubNav.header.showHeaderText
-		? SubNavHeader(customSubNav, hasHeaderImage, isArticle, webImages)
-		: null;
+		? SubNavHeader(customSubNav, isArticle, hasHeaderImage, webImages)
+		: undefined;
 
 	if (hasHeaderImage) {
 		return (
@@ -360,7 +367,7 @@ export const CustomSubNav = ({
 				data-rendering-page={renderingPage}
 				css={imageNavStyles}
 			>
-				headerElement
+				{headerElement}
 				<ul
 					css={[imageListStyles, scrollableSubNavStyles]}
 					role="list"
@@ -381,7 +388,7 @@ export const CustomSubNav = ({
 			data-rendering-page={renderingPage}
 			css={isArticle ? articleContainerStyles : frontContainerStyles}
 		>
-			headerElement
+			{headerElement}
 			<ul
 				css={[
 					subNavStyles,
