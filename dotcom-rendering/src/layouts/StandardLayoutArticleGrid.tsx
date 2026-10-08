@@ -327,6 +327,11 @@ export const StandardLayoutArticleGrid = ({
 									margin-right: -20px;`}
 								}
 
+								${layoutType === 'immersivePortrait' &&
+								css`
+									aspect-ratio: 4/5;
+								`}
+
 								${immersiveMediaBelowDesktop(
 									headlineBackgroundImmersive,
 									isMainMediaImage,
