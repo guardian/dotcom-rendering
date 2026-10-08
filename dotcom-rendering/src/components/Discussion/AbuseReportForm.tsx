@@ -13,6 +13,7 @@ import {
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
 import type { reportAbuse } from '../../lib/discussionApi';
+import { getZIndex } from '../../lib/getZIndex';
 import { palette as schemedPalette } from '../../palette';
 
 type FormData = {
@@ -22,7 +23,8 @@ type FormData = {
 };
 
 const formWrapper = css`
-	z-index: 1;
+	z-index: ${getZIndex('minimum')};
+
 	border: 1px solid ${schemedPalette('--discussion-border')};
 	position: absolute;
 	width: 300px;

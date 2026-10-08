@@ -18,6 +18,7 @@ const Header = ({ children }: { children: React.ReactNode }) => (
 
 const Nav = ({ children }: { children: React.ReactNode }) => (
 	<div
+		/* eslint-disable-next-line local/no-unmanaged-z-index -- z-index for story */
 		css={css`
 			height: 20px;
 			position: absolute;
