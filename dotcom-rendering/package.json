@@ -123,7 +123,6 @@
 		"is-mobile": "3.1.1",
 		"jest": "29.7.0",
 		"jest-environment-jsdom": "29.7.0",
-		"jest-runner-eslint": "2.3.0",
 		"jsdom": "29.1.1",
 		"lodash.debounce": "4.0.8",
 		"log4js": "6.9.1",
