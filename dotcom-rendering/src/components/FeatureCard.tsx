@@ -408,7 +408,7 @@ export type Props = {
 	isImmersive?: boolean;
 	starRatingSize: RatingSizeType;
 	headlineTestUuid?: string;
-	isStorylines?: boolean;
+	isStorylines: boolean;
 };
 
 export const FeatureCard = ({
@@ -448,7 +448,7 @@ export const FeatureCard = ({
 	starRatingSize,
 	articleMedia,
 	headlineTestUuid,
-	isStorylines = false,
+	isStorylines,
 }: Props) => {
 	const ab = useAB();
 	const isInLoopClickTestControl = Boolean(
@@ -892,6 +892,7 @@ export const FeatureCard = ({
 											}
 											isNewsletter={isNewsletter}
 											media={articleMedia}
+											isStorylines={isStorylines}
 										/>
 
 										{!isImmersive &&

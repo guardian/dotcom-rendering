@@ -150,12 +150,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							tagPage.pagination.currentPage === 1) && // Only on the first page
 						index === 0; // Only after the first section
 
-					/**
-					 * The pagination should appear at the bottom of the page; usually this is done by passing to FrontSection.
-					 * If the storylines section is being inserted when there's only one other container on the page,
-					 * we want to attach the pagination to it instead of the last trails section.
-					 */
-
 					const isLastGroup =
 						index === tagPage.groupedTrails.length - 1;
 					const hasPagination = !!tagPage.pagination;
@@ -191,6 +185,11 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								toggleable={false}
 								pageId={tagPage.pageId}
 								editionId={tagPage.editionId}
+								/**
+								 * The pagination should appear at the bottom of the page; usually this is done by passing to FrontSection.
+								 * If the storylines section is being inserted when there's only one other container on the page,
+								 * we want to attach the pagination to it instead of the last trails section.
+								 */
 								pagination={
 									insertStorylinesSection
 										? undefined

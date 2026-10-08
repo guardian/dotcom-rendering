@@ -41,6 +41,7 @@ const cardProps: CardProps = {
 	collectionId: 1,
 	starRatingSize: 'medium',
 	uniqueId: `collection-1-feature-0`,
+	isStorylines: false,
 };
 
 const aBasicLink = {

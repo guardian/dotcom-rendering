@@ -285,6 +285,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 							) : undefined
 						}
 						media={articleMedia}
+						isStorylines={false}
 					/>
 				</div>
 			</button>
