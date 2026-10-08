@@ -66,8 +66,10 @@ export const createPuzzlesPage = (
 	editionId: Standard.editionId,
 	editionLongForm: Standard.editionLongForm,
 	contributionsServiceUrl: Standard.contributionsServiceUrl,
-	webTitle: 'Puzzles and games',
-	description: 'Play the Guardian’s daily puzzles and games.',
+	webTitle: 'Puzzles & games | The Guardian',
+	description:
+		"The Guardian's puzzles & games page, where you can play free online daily crosswords, word games, logic puzzles and more",
+
 	config: {
 		...Standard.config,
 		contentType: 'Puzzles',

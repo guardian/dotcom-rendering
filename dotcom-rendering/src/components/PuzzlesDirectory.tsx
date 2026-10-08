@@ -28,13 +28,14 @@ const sectionStyles = (isFeatured: boolean) => css`
 	position: relative;
 	display: grid;
 	${puzzlesContainerStyles};
-	background: ${palette.neutral[100]};
+	background: var(--puzzles-page-background, ${palette.neutral[100]});
 	::before {
 		position: absolute;
 		top: 0;
 		left: 50%;
 		width: 100vw;
-		border-top: 2px solid ${palette.neutral[7]};
+		border-top: 2px solid
+			var(--puzzles-headline-colour, ${palette.neutral[7]});
 		content: '';
 		transform: translateX(-50%);
 	}
@@ -65,6 +66,7 @@ const titleStyles = css`
 	margin: 0;
 	padding: 6px 10px 12px;
 	${headlineBold24};
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
 	line-height: 1;
 	overflow-wrap: break-word;
 	${from.mobileMedium} {
@@ -91,7 +93,8 @@ const headingColumnStyles = css`
 			top: var(--puzzles-content-top);
 			right: 0;
 			bottom: var(--puzzles-content-bottom);
-			border-right: 1px solid ${palette.neutral[86]};
+			border-right: 1px solid
+				var(--puzzles-border-colour, ${palette.neutral[86]});
 			content: '';
 			pointer-events: none;
 		}
@@ -110,9 +113,11 @@ const crosswordLinksStyles = css`
 	a {
 		min-height: 24px;
 		padding: 4px 8px;
-		border-top: 1px solid ${palette.neutral[86]};
-		border-left: 1px solid ${palette.neutral[86]};
-		color: ${palette.neutral[7]};
+		border-top: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
+		border-left: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
+		color: var(--puzzles-text-colour, ${palette.neutral[7]});
 		text-decoration: none;
 		${textSans14};
 	}
@@ -147,7 +152,8 @@ const contentStyles = css`
 			top: 0;
 			right: 10px;
 			left: 10px;
-			border-top: 1px solid ${palette.neutral[86]};
+			border-top: 1px solid
+				var(--puzzles-border-colour, ${palette.neutral[86]});
 			content: '';
 			pointer-events: none;
 		}
@@ -190,7 +196,8 @@ const nestedStyles = (span: number) => css`
 		top: calc(var(--puzzles-gap) / -2);
 		right: 0;
 		left: 0;
-		border-top: 1px solid ${palette.neutral[86]};
+		border-top: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
 		content: '';
 		pointer-events: none;
 	}
@@ -204,10 +211,12 @@ const nestedStyles = (span: number) => css`
 						right: auto;
 						left: calc(var(--puzzles-gap) / -2);
 						border-top: 0;
-						border-left: 1px solid ${palette.neutral[86]};
+						border-left: 1px solid
+							var(--puzzles-border-colour, ${palette.neutral[86]});
 					`
 				: css`
-						border-top: 1px solid ${palette.neutral[86]};
+						border-top: 1px solid
+							var(--puzzles-border-colour, ${palette.neutral[86]});
 					`}
 		}
 	}
