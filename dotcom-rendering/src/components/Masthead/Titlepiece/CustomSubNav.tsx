@@ -353,8 +353,6 @@ export const CustomSubNav = ({
 		</li>
 	));
 
-	console.log(`potato ${customSubNav.header.showHeaderText}`);
-
 	const headerElement = customSubNav.header.showHeaderText
 		? SubNavHeader(customSubNav, isArticle, hasHeaderImage, webImages)
 		: undefined;
