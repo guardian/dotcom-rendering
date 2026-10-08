@@ -30,15 +30,10 @@ const styles = {
 		}
 		${from.desktop} {
 			justify-self: end;
-			padding-right: ${space[8]}px;
-			width: 299px;
-		}
-		${between.desktop.and.wide} {
-			width: 380px;
+			width: 100%;
 		}
 		${from.wide} {
 			align-self: start;
-			width: 380px;
 		}
 	`,
 	ctaContainer: (isCollapsed: boolean, backgroundColor: string) => css`
