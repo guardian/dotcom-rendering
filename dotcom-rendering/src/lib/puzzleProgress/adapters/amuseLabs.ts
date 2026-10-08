@@ -115,16 +115,6 @@ export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
 	// identity from `PUZZLE_LOAD` as a fallback.
 	let loaded: Identity | undefined;
 
-	// Whether anything has been reported for this puzzle during this page
-	// view. The first interaction (`event`) must never overwrite a more
-	// advanced status that has already been reported.
-	let reported = false;
-
-	const report = (event: PuzzleProgressEvent): PuzzleProgressEvent => {
-		reported = true;
-		return event;
-	};
-
 	return {
 		start: (raw) => {
 			const message = parseAmuseLabsMessage(raw);
@@ -163,18 +153,18 @@ export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
 				// Finding every word completes the word wheel. The pangram is one
 				// of those words, so `isPangram` adds nothing to this decision.
 				if (wordsFound >= totalWords) {
-					return report({
+					return {
 						...identity,
 						gameStatus: 'completed',
 						progress: 100,
-					});
+					};
 				}
 
-				return report({
+				return {
 					...identity,
 					gameStatus: 'in-progress',
 					progress: clampPercentage((wordsFound / totalWords) * 100),
-				});
+				};
 			}
 
 			// The first interaction with the puzzle (sudoku and word wheel). The
@@ -182,17 +172,20 @@ export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
 			// the puzzle into view, "at first interaction", but it is the only
 			// signal that the reader has started a sudoku, which sends no
 			// per-move or percentage message (verified on a real embed).
+			//
+			// It is reported every time it arrives, with no memory of what was
+			// reported before: a reader who restarts, or whose first click was
+			// ignored because they were signed out, must be able to move back to
+			// `in-progress`. The reporter drops an update that has not changed.
 			if (message.type === 'event') {
-				if (reported) return null;
-
 				const identity = identityOf(message) ?? loaded;
 				if (!identity) return null;
 
-				return report({
+				return {
 					...identity,
 					gameStatus: 'in-progress',
 					progress: FIRST_INTERACTION_PROGRESS,
-				});
+				};
 			}
 
 			return null;
@@ -210,11 +203,11 @@ export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
 			const identity = identityOf(message) ?? loaded;
 			if (!identity) return null;
 
-			return report({
+			return {
 				...identity,
 				gameStatus: 'completed',
 				progress: 100,
-			});
+			};
 		},
 	};
 };

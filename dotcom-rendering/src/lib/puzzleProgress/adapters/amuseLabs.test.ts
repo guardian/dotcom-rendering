@@ -71,19 +71,23 @@ describe('AmuseLabs adapter', () => {
 			});
 		});
 
-		it('reports it only once per page view', () => {
+		it('reports every interaction, so one that was not accepted can be sent again', () => {
 			const adapter = createAmuseLabsAdapter();
-			handleAmuseLabsMessage(adapter, interaction);
+			const first = handleAmuseLabsMessage(adapter, interaction);
 
-			expect(handleAmuseLabsMessage(adapter, interaction)).toBeNull();
+			expect(first).not.toBeNull();
+			expect(handleAmuseLabsMessage(adapter, interaction)).toEqual(first);
 		});
 
-		it('never follows a more advanced status, so progress is not overwritten', () => {
+		it('moves back to in-progress after a completion, as when the reader restarts', () => {
 			const adapter = createAmuseLabsAdapter();
 			handleAmuseLabsMessage(adapter, puzzleLoad);
 			handleAmuseLabsMessage(adapter, puzzleComplete);
 
-			expect(handleAmuseLabsMessage(adapter, interaction)).toBeNull();
+			expect(handleAmuseLabsMessage(adapter, interaction)).toMatchObject({
+				gameStatus: 'in-progress',
+				progress: FIRST_INTERACTION_PROGRESS,
+			});
 		});
 
 		it('falls back to the identity remembered from the load', () => {
@@ -268,18 +272,6 @@ describe('AmuseLabs adapter', () => {
 					isPangram: false,
 				}),
 			).toMatchObject({ gameStatus: 'completed' });
-		});
-
-		it('does not let the first interaction overwrite word progress', () => {
-			const adapter = createAmuseLabsAdapter();
-			handleAmuseLabsMessage(adapter, wordWheelProgress);
-
-			expect(
-				handleAmuseLabsMessage(adapter, {
-					...wordWheelProgress,
-					type: 'event',
-				}),
-			).toBeNull();
 		});
 
 		it('reports the first interaction before any word is found', () => {
