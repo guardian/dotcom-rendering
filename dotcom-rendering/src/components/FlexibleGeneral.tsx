@@ -642,7 +642,7 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 }: Props) => {
-	const splashes = [...groupedTrails.splash].map((card, i) => ({
+	const splashCards = [...groupedTrails.splash].map((card, i) => ({
 		...card,
 		uniqueId: `collection-${collectionId}-splash-${i}`,
 	}));
@@ -656,8 +656,8 @@ export const FlexibleGeneral = ({
 
 	return (
 		<>
-			{splashes.length > 0 &&
-				splashes.map((card, i) => {
+			{splashCards.length > 0 &&
+				splashCards.map((card, i) => {
 					return (
 						<SplashCardLayout
 							key={card.uniqueId}
@@ -686,7 +686,7 @@ export const FlexibleGeneral = ({
 								serverTime={serverTime}
 								imageLoading={imageLoading}
 								aspectRatio={aspectRatio}
-								isFirstRow={!splashes.length && i === 0}
+								isFirstRow={!splashCards.length && i === 0}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								collectionId={collectionId}
@@ -704,7 +704,7 @@ export const FlexibleGeneral = ({
 								hideAge={hideAge}
 								serverTime={serverTime}
 								imageLoading={imageLoading}
-								isFirstRow={!splashes.length && i === 0}
+								isFirstRow={!splashCards.length && i === 0}
 								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
 								isLastRow={i === groupedCards.length - 1}
