@@ -7,7 +7,7 @@ import type { PuzzleProgressEvent, PuzzleProgressUpdate } from './types';
  * must stay server-side. The reader's own `Authorization` header is forwarded
  * and the Puzzles API derives the identity from it.
  */
-export const PUZZLE_PROGRESS_ENDPOINT = '/puzzles-and-games/progress';
+export const PUZZLE_PROGRESS_ENDPOINT = '/puzzles-and-games/progress/save';
 
 /** `YYYY-MM-DDTHH:mm:ssZ`, as the Puzzles API expects (no milliseconds). */
 export const toApiTimestamp = (date: Date): string =>
