@@ -292,20 +292,13 @@ const SubNavHeader = (
 	customSubNav: CustomSubnav,
 	isArticle: boolean,
 	hasHeaderImage: boolean,
-	webImages: CustomSubnavImage[],
 ) => {
 	if (hasHeaderImage) {
 		return (
-			<div css={imageWrapperStyles}>
-				<HeaderImage
-					images={webImages}
-					headerText={customSubNav.header.headerText}
-				/>
-				<HeaderText
-					header={customSubNav.header}
-					cssOverrides={imageHeaderTextStyles}
-				/>
-			</div>
+			<HeaderText
+				header={customSubNav.header}
+				cssOverrides={imageHeaderTextStyles}
+			/>
 		);
 	}
 	return (
@@ -353,8 +346,8 @@ export const CustomSubNav = ({
 		</li>
 	));
 
-	const headerElement = customSubNav.header.showHeaderText
-		? SubNavHeader(customSubNav, isArticle, hasHeaderImage, webImages)
+	const headerText = customSubNav.header.showHeaderText
+		? SubNavHeader(customSubNav, isArticle, hasHeaderImage)
 		: undefined;
 
 	if (hasHeaderImage) {
@@ -365,7 +358,13 @@ export const CustomSubNav = ({
 				data-rendering-page={renderingPage}
 				css={imageNavStyles}
 			>
-				{headerElement}
+				<div css={imageWrapperStyles}>
+					<HeaderImage
+						images={webImages}
+						headerText={customSubNav.header.headerText}
+					/>
+					{headerText}
+				</div>
 				<ul
 					css={[imageListStyles, scrollableSubNavStyles]}
 					role="list"
@@ -386,7 +385,7 @@ export const CustomSubNav = ({
 			data-rendering-page={renderingPage}
 			css={isArticle ? articleContainerStyles : frontContainerStyles}
 		>
-			{headerElement}
+			{headerText}
 			<ul
 				css={[
 					subNavStyles,
