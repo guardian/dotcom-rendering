@@ -5,7 +5,8 @@ import type { PuzzleProgressEvent, PuzzleProgressUpdate } from './types';
  * The `frontend` proxy for the Puzzles API's `PUT /progress`. The browser
  * never talks to the Puzzles API directly: `frontend` adds the API key, which
  * must stay server-side. The reader's own `Authorization` header is forwarded
- * and the Puzzles API derives the identity from it.
+ * and the Puzzles API derives the identity from it. The browser sends a `POST`
+ * and the proxy forwards it to the API as a `PUT`.
  */
 export const PUZZLE_PROGRESS_ENDPOINT = '/puzzles-and-games/progress/save';
 
@@ -48,7 +49,7 @@ export const reportPuzzleProgress = async (
 		headers.set('Content-Type', 'application/json');
 
 		const response = await fetch(PUZZLE_PROGRESS_ENDPOINT, {
-			method: 'PUT',
+			method: 'POST',
 			headers,
 			body: JSON.stringify([update]),
 		});
