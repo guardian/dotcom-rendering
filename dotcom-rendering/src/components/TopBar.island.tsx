@@ -12,6 +12,7 @@ import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import type { EditionId } from '../lib/edition';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
+import { useAB } from '../lib/useAB';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { usePageViewId } from '../lib/usePageViewId';
 import { palette as themePalette } from '../palette';
@@ -127,6 +128,14 @@ export const TopBar = ({
 
 	const [referrerUrl, setReferrerUrl] = useState('');
 
+	const abTests = useAB();
+
+	const isSignInMobileVariant =
+		abTests?.isUserInTestGroup(
+			'martech-header-sign-in-header-optimisation',
+			'variant',
+		) ?? false;
+
 	useEffect(() => {
 		setReferrerUrl(window.location.origin + window.location.pathname);
 	}, []);
@@ -216,6 +225,7 @@ export const TopBar = ({
 						discussionApiUrl={discussionApiUrl}
 						idApiUrl={idApiUrl}
 						authStatus={authStatus}
+						showSignInTextOnMobile={!isSignInMobileVariant}
 					/>
 				</TopBarLinkContainer>
 			</div>

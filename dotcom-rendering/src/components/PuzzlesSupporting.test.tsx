@@ -119,6 +119,18 @@ describe('PuzzlesSupporting', () => {
 		expect(
 			screen.getByRole('link', { name: 'Help Centre' }),
 		).toHaveAttribute('href', 'https://help.theguardian.com');
+		expect(
+			screen.getByRole('heading', {
+				level: 3,
+				name: 'Support the Guardian',
+			}),
+		).toBeInTheDocument();
+		expect(
+			screen.getByRole('heading', {
+				level: 3,
+				name: 'Help Centre',
+			}),
+		).toBeInTheDocument();
 		expect(screen.getAllByRole('link')).toHaveLength(2);
 		expect(
 			screen.queryByTestId('newsletter-form-saturday-edition'),

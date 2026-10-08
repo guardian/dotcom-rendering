@@ -54,8 +54,8 @@ const summaryStyles = css`
 	gap: ${space[2]}px;
 	padding: 0;
 	border: 0;
-	background: ${palette.neutral[100]};
-	color: ${palette.neutral[7]};
+	background: var(--puzzles-page-background, ${palette.neutral[100]});
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
 	cursor: pointer;
 	list-style: none;
 	${textSans14};
@@ -95,8 +95,8 @@ const menuStyles = css`
 	min-width: 256px;
 	margin: 0;
 	padding: 0;
-	border: 1px solid ${palette.neutral[86]};
-	background: ${palette.neutral[100]};
+	border: 1px solid var(--puzzles-border-colour, ${palette.neutral[86]});
+	background: var(--puzzles-card-background, ${palette.neutral[100]});
 	list-style: none;
 `;
 
@@ -105,8 +105,9 @@ const linkStyles = css`
 	min-height: 60px;
 	align-items: center;
 	padding: 0 ${space[5]}px;
-	border-bottom: 1px solid ${palette.neutral[86]};
-	color: ${palette.neutral[7]};
+	border-bottom: 1px solid
+		var(--puzzles-border-colour, ${palette.neutral[86]});
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
 	text-decoration: none;
 	${textSans14};
 
@@ -180,7 +181,7 @@ export const PuzzlesArchiveMenu = ({
 						fillRule="evenodd"
 						clipRule="evenodd"
 						d="M3.05176e-05 0.712324L3.82876 5H4.55936L8.38813 0.712328L7.69406 0L4.19403 3L0.694092 0L3.05176e-05 0.712324Z"
-						fill="black"
+						fill="currentColor"
 					/>
 				</svg>
 			</summary>

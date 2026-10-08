@@ -32,19 +32,46 @@ const page = (isAdFreeUser = false) => ({
 
 describe('PuzzlesLayout', () => {
 	const nav = { pillars: [], readerRevenueLinks: { footer: [] } } as never;
+	const renderedCss = () =>
+		[
+			...Array.from(document.querySelectorAll('style')).map(
+				(style) => style.textContent ?? '',
+			),
+			...Array.from(document.styleSheets).flatMap((sheet) =>
+				Array.from(sheet.cssRules).map((rule) => rule.cssText),
+			),
+		].join('\n');
 
 	it('renders one branded page title without category filters', () => {
 		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
 		expect(
 			screen.getByRole('heading', {
 				level: 1,
-				name: 'Puzzles and Games',
+				name: 'Puzzles & games',
 			}),
 		).toBeInTheDocument();
 		expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
 		expect(
 			screen.queryByRole('navigation', { name: 'Puzzles categories' }),
 		).not.toBeInTheDocument();
+	});
+
+	it('uses the requested puzzle palette when dark mode is available', () => {
+		render(
+			<PuzzlesLayout
+				darkModeAvailable={true}
+				NAV={nav}
+				puzzlesPage={page() as never}
+			/>,
+		);
+		const css = renderedCss();
+
+		expect(css).toContain('prefers-color-scheme: dark');
+		expect(css).toContain('--puzzles-page-background: #1A1A1A');
+		expect(css).toContain('--puzzles-header-background: #333333');
+		expect(css).toContain('--puzzles-card-background: #333333');
+		expect(css).toContain('--puzzles-headline-colour: #F6F6F6');
+		expect(css).toContain('--puzzles-text-colour: #DCDCDC');
 	});
 
 	it('renders only the desktop header slot and respects ad-free input', () => {
@@ -69,11 +96,13 @@ describe('PuzzlesLayout', () => {
 		const header = screen
 			.getByRole('heading', {
 				level: 1,
-				name: 'Puzzles and Games',
+				name: 'Puzzles & games',
 			})
 			.closest('header')!;
 		expect(header).toHaveStyle({ height: '230px' });
-		expect(header).toHaveStyle({ background: '#fef9f5' });
+		expect(header).toHaveStyle({
+			background: 'var(--puzzles-header-background, #fef9f5)',
+		});
 		const picture = header.querySelector('picture')!;
 		const sources = Array.from(picture.querySelectorAll('source'));
 		const expected = [

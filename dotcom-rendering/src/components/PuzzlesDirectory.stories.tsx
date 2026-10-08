@@ -6,7 +6,7 @@ const layout: PuzzlesLayoutType = {
 	containers: [
 		{
 			id: 'featured',
-			title: 'Today’s featured puzzles',
+			title: 'Featured today',
 			variant: 'featured',
 			enabled: true,
 			content: {
