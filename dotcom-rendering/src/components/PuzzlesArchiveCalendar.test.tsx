@@ -144,7 +144,11 @@ describe('PuzzlesArchiveCalendar', () => {
 	it('shows the setter name inside an available date', () => {
 		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
 
-		expect(screen.getByTitle('Philistine')).toBeInTheDocument();
+		expect(screen.getByTitle('Philistine')).toHaveStyle({
+			top: '50%',
+			textAlign: 'center',
+			transform: 'translateY(-50%)',
+		});
 	});
 
 	it('uses the full crossword name for the archive H2', () => {

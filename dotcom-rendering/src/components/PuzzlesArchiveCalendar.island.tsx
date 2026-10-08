@@ -356,7 +356,7 @@ const calendarStyles = css`
 	}
 	.setter-name {
 		position: absolute;
-		top: 13px;
+		top: 50%;
 		left: 2px;
 		right: 2px;
 		overflow: hidden;
@@ -364,10 +364,8 @@ const calendarStyles = css`
 		line-height: 10px;
 		text-align: center;
 		text-overflow: ellipsis;
+		transform: translateY(-50%);
 		white-space: nowrap;
-	}
-	.day[data-status='completed'] .setter-name {
-		top: 19px;
 	}
 	.completed-icon {
 		position: absolute;
@@ -391,12 +389,8 @@ const calendarStyles = css`
 		grid-template-columns: repeat(7, 60px);
 		justify-content: space-between;
 		.setter-name {
-			top: 20px;
 			font-size: 10px;
 			line-height: 12px;
-		}
-		.day[data-status='completed'] .setter-name {
-			top: 28px;
 		}
 	}
 	${from.tablet} {
