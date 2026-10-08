@@ -147,6 +147,24 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(screen.getByTitle('Philistine')).toBeInTheDocument();
 	});
 
+	it('uses the outlined check icon in the Played legend', () => {
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+
+		const playedLegend = screen.getByText('Played', {
+			selector: 'span.completed',
+		});
+		const playedIcon = playedLegend.querySelector('svg');
+
+		expect(playedIcon).toHaveAttribute('width', '13.3');
+		expect(playedIcon).toHaveAttribute('height', '13.3');
+		expect(playedIcon).toHaveAttribute('viewBox', '0 0 14 14');
+		expect(playedIcon?.querySelectorAll('path')).toHaveLength(3);
+		expect(playedIcon?.querySelectorAll('path')[2]).toHaveAttribute(
+			'fill',
+			'#22874D',
+		);
+	});
+
 	it('refreshes the initial archive with authenticated progress after hydration', async () => {
 		mockedGetAuthStatus.mockResolvedValue({
 			kind: 'SignedIn',
@@ -173,6 +191,17 @@ describe('PuzzlesArchiveCalendar', () => {
 				screen.getByLabelText('2026-09-02, completed'),
 			).toBeInTheDocument(),
 		);
+		const completedCell = screen.getByLabelText('2026-09-02, completed');
+		const completedIcon = completedCell.querySelector(
+			'.completed-icon svg',
+		);
+		expect(completedIcon).toHaveAttribute('width', '18');
+		expect(completedIcon).toHaveAttribute('height', '15');
+		expect(completedIcon).toHaveAttribute('viewBox', '0 0 18 15');
+		expect(completedIcon?.querySelector('path')).toHaveAttribute(
+			'fill',
+			'#22874D',
+		);
 		const recentCard = screen.getByRole('link', {
 			name: /Latest Easy sudoku/,
 		});
@@ -193,7 +222,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		);
 	});
 
-	it('bolds the current weekday only in the current month', () => {
+	it('bolds the current London weekday only in the current month', () => {
 		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
 		const currentMonthArchive = {
 			...archive,
@@ -212,6 +241,22 @@ describe('PuzzlesArchiveCalendar', () => {
 		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
 
 		expect(screen.getByText('We')).not.toHaveClass('is-today');
+	});
+
+	it('marks only the current London date in the calendar', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{ ...archive, year: 2026, month: 10 }}
+			/>,
+		);
+
+		expect(document.querySelector('[data-date="2026-10-07"]')).toHaveClass(
+			'is-today',
+		);
+		expect(
+			document.querySelector('[data-date="2026-10-06"]'),
+		).not.toHaveClass('is-today');
 	});
 
 	it('labels the three recent cards with relative and short dates', () => {

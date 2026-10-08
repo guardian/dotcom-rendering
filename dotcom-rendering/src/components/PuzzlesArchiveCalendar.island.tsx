@@ -25,6 +25,46 @@ export type CalendarCell = {
 	item?: PuzzlesArchiveItem;
 };
 
+const CalendarCompletedIcon = () => (
+	<svg
+		width="18"
+		height="15"
+		viewBox="0 0 18 15"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			d="M1.35439 6.91457L5.20392 10.7352L16.6088 0L18 1.40926L5.36046 15H4.59147L0 8.32169L1.35439 6.91457Z"
+			fill="#22874D"
+		/>
+	</svg>
+);
+
+const PlayedLegendIcon = () => (
+	<svg
+		aria-hidden="true"
+		width="13.3"
+		height="13.3"
+		viewBox="0 0 14 14"
+		fill="none"
+		focusable="false"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<mask id="puzzles-played-icon-mask" fill="white">
+			<path d="M6.65039 0C10.3229 0.000211049 13.2998 2.97783 13.2998 6.65039C13.2996 10.3228 10.3228 13.2996 6.65039 13.2998C2.97783 13.2998 0.000211052 10.3229 0 6.65039C0 2.9777 2.9777 0 6.65039 0Z" />
+		</mask>
+		<path
+			d="M6.65039 0L6.65045 -1H6.65039V0ZM13.2998 6.65039L14.2998 6.65045V6.65039H13.2998ZM6.65039 13.2998V14.2998H6.65045L6.65039 13.2998ZM0 6.65039H-1V6.65045L0 6.65039ZM6.65039 0L6.65033 1C9.77047 1.00018 12.2998 3.52998 12.2998 6.65039H13.2998H14.2998C14.2998 2.42568 10.8753 -0.999757 6.65045 -1L6.65039 0ZM13.2998 6.65039L12.2998 6.65033C12.2996 9.77048 9.77048 12.2996 6.65033 12.2998L6.65039 13.2998L6.65045 14.2998C10.8751 14.2996 14.2996 10.8751 14.2998 6.65045L13.2998 6.65039ZM6.65039 13.2998V12.2998C3.52998 12.2998 1.00018 9.77047 1 6.65033L0 6.65039L-1 6.65045C-0.999757 10.8753 2.42568 14.2998 6.65039 14.2998V13.2998ZM0 6.65039H1C1 3.52998 3.52998 1 6.65039 1V0V-1C2.42541 -1 -1 2.42541 -1 6.65039H0Z"
+			fill="#22874D"
+			mask="url(#puzzles-played-icon-mask)"
+		/>
+		<path
+			d="M10.5 4.56348L5.58496 10H5.28516L3.5 7.3291L4.02637 6.76562L5.52344 8.29395L9.95898 4L10.5 4.56348Z"
+			fill="#22874D"
+		/>
+	</svg>
+);
+
 export const daysInMonth = (year: number, month: number): number =>
 	new Date(Date.UTC(year, month, 0)).getUTCDate();
 
@@ -258,6 +298,8 @@ const controlsStyles = css`
 
 const calendarStyles = css`
 	--calendar-gap: 8px;
+	--calendar-day-padding-block: 3px;
+	--calendar-day-padding-inline: 6px;
 	display: grid;
 	grid-template-columns: repeat(7, minmax(0, 1fr));
 	column-gap: var(--calendar-gap);
@@ -277,17 +319,22 @@ const calendarStyles = css`
 	}
 	.day {
 		position: relative;
-		display: flex;
 		box-sizing: border-box;
-		align-items: flex-end;
-		justify-content: center;
 		min-width: 0;
-		padding-bottom: ${space[1]}px;
+		padding: var(--calendar-day-padding-block)
+			var(--calendar-day-padding-inline);
 		border: 1px solid var(--puzzles-border-colour, ${palette.neutral[93]});
 		background: var(--puzzles-card-background, ${palette.neutral[97]});
 		color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
 		text-decoration: none;
 		${textSans14};
+	}
+	.day-number {
+		display: block;
+		font-size: 10px;
+	}
+	.day.is-today .day-number {
+		font-weight: 700;
 	}
 	.day[data-status='available']::after {
 		position: absolute;
@@ -324,21 +371,15 @@ const calendarStyles = css`
 	}
 	.completed-icon {
 		position: absolute;
-		top: ${space[1]}px;
-		left: 50%;
+		right: ${space[1]}px;
+		bottom: ${space[1]}px;
 		display: flex;
-		width: clamp(12px, 3.5vw, 18px);
-		height: clamp(12px, 3.5vw, 18px);
-		transform: translateX(-50%);
+		width: 18px;
+		height: 15px;
 		align-items: center;
 		justify-content: center;
-		border-radius: 50%;
-		background: ${palette.success[400]};
-		color: ${palette.neutral[100]};
 		svg {
-			width: 75%;
-			height: 75%;
-			fill: currentColor;
+			display: block;
 		}
 	}
 	.day[data-status='unavailable'] {
@@ -359,7 +400,12 @@ const calendarStyles = css`
 		}
 	}
 	${from.tablet} {
+		--calendar-day-padding-block: 4px;
+		--calendar-day-padding-inline: 4px;
 		grid-template-columns: repeat(7, 68px);
+		.day-number {
+			font-size: 12px;
+		}
 	}
 	${from.desktop} {
 		grid-template-columns: repeat(7, 78px);
@@ -402,25 +448,20 @@ const legendStyles = css`
 		align-items: center;
 		gap: 5px;
 	}
-	span::before {
+	.available::before {
 		display: inline-flex;
 		flex: 0 0 auto;
-		width: 16px;
-		height: 16px;
+		width: 13.3px;
+		height: 13.3px;
 		align-items: center;
 		justify-content: center;
 		border-radius: 50%;
 		content: '';
-	}
-	.available::before {
 		background: ${palette.brand[500]};
 	}
-	.completed::before {
-		background: ${palette.success[400]};
-		color: ${palette.neutral[100]};
-		content: '✓';
-		font-size: 11px;
-		font-weight: bold;
+	.completed svg {
+		display: block;
+		flex: 0 0 auto;
 	}
 	${from.leftCol} {
 		position: absolute;
@@ -564,14 +605,12 @@ export const PuzzlesArchiveCalendar = ({
 		archive.year,
 		archive.month,
 	);
-
 	const today = new Date();
 	const todayDate = londonDate(today);
 	const displayedMonth = `${archive.year}-${String(archive.month).padStart(2, '0')}`;
-	const todayWeekday =
-		todayDate?.startsWith(`${displayedMonth}-`) === true
-			? currentWeekdayLabel(today)
-			: undefined;
+	const todayWeekday = todayDate?.startsWith(`${displayedMonth}-`)
+		? currentWeekdayLabel(today)
+		: undefined;
 
 	const loadArchive = useCallback(
 		async (
@@ -896,10 +935,11 @@ export const PuzzlesArchiveCalendar = ({
 						);
 					}
 					const status = archiveStatus(cell.item);
+					const isToday = cell.date === todayDate;
 					return cell.item ? (
 						<a
 							aria-label={`${cell.date}, ${status}`}
-							className="day"
+							className={`day${isToday ? ' is-today' : ''}`}
 							data-date={cell.date}
 							data-status={status}
 							href={cell.item.url}
@@ -915,25 +955,25 @@ export const PuzzlesArchiveCalendar = ({
 										{cell.item.setterName}
 									</span>
 								)}
-							{cell.day}
+							<span className="day-number">{cell.day}</span>
 							{status === 'completed' && (
 								<span
 									aria-hidden="true"
 									className="completed-icon"
 								>
-									<SvgCheckmark />
+									<CalendarCompletedIcon />
 								</span>
 							)}
 						</a>
 					) : (
 						<span
 							aria-disabled="true"
-							className="day"
+							className={`day${isToday ? ' is-today' : ''}`}
 							data-date={cell.date}
 							data-status="unavailable"
 							key={cell.date}
 						>
-							{cell.day}
+							<span className="day-number">{cell.day}</span>
 						</span>
 					);
 				})}
@@ -975,7 +1015,10 @@ export const PuzzlesArchiveCalendar = ({
 			)}
 			<div css={legendStyles}>
 				<span className="available">Available</span>
-				<span className="completed">Played</span>
+				<span className="completed">
+					<PlayedLegendIcon />
+					Played
+				</span>
 			</div>
 		</section>
 	);
