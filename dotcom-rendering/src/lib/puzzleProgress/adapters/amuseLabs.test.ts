@@ -79,14 +79,26 @@ describe('AmuseLabs adapter', () => {
 			expect(handleAmuseLabsMessage(adapter, interaction)).toEqual(first);
 		});
 
-		it('moves back to in-progress after a completion, as when the reader restarts', () => {
+		it('does not move a completed puzzle back to in-progress, e.g. when the reader closes the "well done" dialog of a puzzle they reopened', () => {
 			const adapter = createAmuseLabsAdapter();
 			handleAmuseLabsMessage(adapter, puzzleLoad);
-			handleAmuseLabsMessage(adapter, puzzleComplete);
+			expect(
+				handleAmuseLabsMessage(adapter, puzzleComplete),
+			).toMatchObject({ gameStatus: 'completed' });
+
+			expect(handleAmuseLabsMessage(adapter, interaction)).toBeNull();
+		});
+
+		it('still reports the first interaction of a puzzle that was not completed', () => {
+			const adapter = createAmuseLabsAdapter();
+			handleAmuseLabsMessage(adapter, puzzleLoad);
+			handleAmuseLabsMessage(adapter, {
+				...puzzleComplete,
+				completedCorrectly: false,
+			});
 
 			expect(handleAmuseLabsMessage(adapter, interaction)).toMatchObject({
 				gameStatus: 'in-progress',
-				progress: FIRST_INTERACTION_PROGRESS,
 			});
 		});
 
@@ -260,6 +272,21 @@ describe('AmuseLabs adapter', () => {
 					wordsFound: 15,
 				}),
 			).toMatchObject({ gameStatus: 'completed', progress: 100 });
+		});
+
+		it('does not move a completed word wheel back to in-progress on the next interaction', () => {
+			const adapter = createAmuseLabsAdapter();
+			handleAmuseLabsMessage(adapter, {
+				...wordWheelProgress,
+				wordsFound: 15,
+			});
+
+			expect(
+				handleAmuseLabsMessage(adapter, {
+					...wordWheelProgress,
+					type: 'event',
+				}),
+			).toBeNull();
 		});
 
 		it('does not depend on isPangram to complete', () => {
