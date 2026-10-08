@@ -183,6 +183,38 @@ export const AppsStandardImmersiveNewsDark: Story = {
 	parameters: appsParameters,
 };
 
+const standardShowcaseNewsAppsFixture: Article = {
+	...AppsStandardStandardNewsLight.args.article,
+	display: ArticleDisplay.Showcase,
+};
+
+export const WebStandardShowcaseNewsLight: Story = {
+	args: {
+		article: {
+			...WebStandardStandardNewsLight.args.article,
+			display: ArticleDisplay.Showcase,
+		},
+		colourScheme: 'light',
+	},
+	parameters: webParameters,
+};
+
+export const AppsStandardShowcaseNewsLight: Story = {
+	args: {
+		article: standardShowcaseNewsAppsFixture,
+		colourScheme: 'light',
+	},
+	parameters: appsParameters,
+};
+
+export const AppsStandardShowcaseNewsDark: Story = {
+	args: {
+		article: standardShowcaseNewsAppsFixture,
+		colourScheme: 'dark',
+	},
+	parameters: appsParameters,
+};
+
 export const WebNewsletterSignupStandardSportLight: Story = {
 	args: {
 		article: enhanceArticleType(
