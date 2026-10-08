@@ -156,6 +156,17 @@ const standardImmersiveNewsAppsFixture: Article = {
 	display: ArticleDisplay.Immersive,
 };
 
+export const WebStandardImmersiveNewsLight: Story = {
+	args: {
+		article: {
+			...WebStandardStandardNewsLight.args.article,
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: webParameters,
+};
+
 export const AppsStandardImmersiveNewsLight: Story = {
 	args: {
 		article: standardImmersiveNewsAppsFixture,
