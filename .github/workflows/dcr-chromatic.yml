@@ -3,6 +3,8 @@ name: DCR Chromatic 👓
 on:
   merge_group:
     types: [checks_requested]
+  push:
+    branches: [main]
   pull_request:
     types: [opened, labeled, synchronize]
 
@@ -31,19 +33,20 @@ jobs:
 
       - name: Checkout - On Push Event
         uses: actions/checkout@v7
-        if: ${{ github.event_name == 'merge_group' }}
+        if: ${{ github.event_name == 'push' || github.event_name == 'merge_group' }}
         with:
           fetch-depth: 0
 
       - name: Set up Node environment
         # Only needed for a full Chromatic run.
         if: |
-          github.event_name == 'merge_group' ||
+          github.event_name == 'push' ||
           (github.event_name == 'pull_request' &&
             contains(github.event.pull_request.labels.*.name, 'run_chromatic'))
         uses: ./.github/actions/setup-node-env
 
         # If on push to main, always run the Chromatic step.
+        # If on merge_group, run the Chromatic step with skip: true, so the required check is reported without a duplicate build.
         # If on a PR and the run_chromatic label is present, run the Chromatic step.
         # If on a PR and no relevant files have been touched, run the Chromatic step with skip: true, so the check appears as skipped instead of absent.
       - name: Chromatic - DCR
@@ -51,7 +54,7 @@ jobs:
           NODE_OPTIONS: '--max_old_space_size=4096'
         uses: chromaui/action@v18.11.0
         if: |
-          github.event_name == 'merge_group' ||
+          (github.event_name == 'push' || github.event_name == 'merge_group') ||
           (github.event_name == 'pull_request' &&
             contains(github.event.pull_request.labels.*.name, 'run_chromatic')) ||
           (github.event_name == 'pull_request' && needs.check-paths.outputs.relevant != 'true')
@@ -66,7 +69,7 @@ jobs:
           exitOnceUploaded: true
           # Skip on PRs when no relevant UI files changed and the run_chromatic label isn't present (so that chromatic can still be run even if it's not required)
           # Chromatic will post a passing status without building Storybook.
-          skip: ${{ github.event_name == 'pull_request' && needs.check-paths.outputs.relevant != 'true' && !contains(github.event.pull_request.labels.*.name, 'run_chromatic') }}
+          skip: ${{ github.event_name == 'merge_group' || (github.event_name == 'pull_request' && needs.check-paths.outputs.relevant != 'true' && !contains(github.event.pull_request.labels.*.name, 'run_chromatic')) }}
 
   remove-label:
     # Only remove label when Chromatic actually ran (label present and relevant changes)
