@@ -17,6 +17,7 @@ import {
 	selfHostedLoopVideo54Card,
 	selfHostedLoopVideo916Card,
 	slideshowCard,
+	snapLink,
 	trails,
 	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
@@ -407,6 +408,22 @@ export const SplashWithLiveUpdates: Story = {
 				<Section title="Giga boosted" boostLevel="gigaboost" />
 			</>
 		);
+	},
+};
+
+export const SplashWithSnapLinkAndStandards: Story = {
+	name: 'Splash with snap link and big and standard cards',
+	args: {
+		frontSectionTitle: 'Splash with snap link and standards',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			splash: [{ ...snapLink }, { ...splashCard, supportingContent: [] }],
+			standard: standardCards.map((card, index) => ({
+				...card,
+				isBoosted: index === 0,
+				boostLevel: index === 0 ? 'boost' : 'default',
+			})),
+		},
 	},
 };
 
