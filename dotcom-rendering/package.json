@@ -94,7 +94,7 @@
 		"@types/webpack-node-externals": "3.0.4",
 		"@types/youtube": "0.0.50",
 		"ajv": "8.18.0",
-		"ajv-formats": "2.1.1",
+		"ajv-formats": "3.0.1",
 		"aws-cdk": "catalog:",
 		"aws-cdk-lib": "catalog:",
 		"browserslist": "4.28.8",
