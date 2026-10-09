@@ -2,12 +2,14 @@ import { isObject, isString } from '@guardian/libs';
 import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+import type { FEAppsComponentEventGraphic } from '../frontend/feAppsComponentEventGraphic';
 import type { FEArticle } from '../frontend/feArticle';
 import type { FEFootballMatchInfoPage } from '../frontend/feFootballMatchInfoPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
+import feAppsComponentEventGraphicSchema from '../frontend/schemas/feAppsComponentEventGraphic.json';
 import articleSchema from '../frontend/schemas/feArticle.json';
 import footballMatchInfoPageSchema from '../frontend/schemas/feFootballMatchInfoPage.json';
 import footballMatchListPageSchema from '../frontend/schemas/feFootballMatchListPage.json';
@@ -57,6 +59,9 @@ const validateFootballTablesPage = ajv.compile<FEFootballTablesPage>(
 const validateFootballMatchInfoPage = ajv.compile<FEFootballMatchInfoPage>(
 	footballMatchInfoPageSchema,
 );
+
+const validateFEAppsComponentEventGraphic =
+	ajv.compile<FEAppsComponentEventGraphic>(feAppsComponentEventGraphicSchema);
 
 export const validateAsFEArticle = (data: unknown): FEArticle => {
 	if (validateArticle(data)) return data;
@@ -171,6 +176,21 @@ export const validateAsFootballMatchPageType = (
             ${JSON.stringify(validateFootballMatchInfoPage.errors, null, 2)}`,
 	);
 };
+
+export const validateAsFEAppsComponentEventGraphic = (
+	data: unknown,
+): FEAppsComponentEventGraphic => {
+	if (validateFEAppsComponentEventGraphic(data)) return data;
+
+	const url =
+		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateFEAppsComponentEventGraphic.errors, null, 2)}`,
+	);
+};
+
 const identifier = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const colour = /^#[0-9a-f]{6}$/i;
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
