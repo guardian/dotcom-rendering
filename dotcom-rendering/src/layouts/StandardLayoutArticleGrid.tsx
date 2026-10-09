@@ -293,7 +293,12 @@ export const StandardLayoutArticleGrid = ({
 				!isLabs &&
 					css`
 						${from.leftCol} {
-							${grid.centreRule(isImmersive ? 4 : 3)}
+							${grid.centreRule(
+								isImmersive ? 4 : 3,
+								layoutType === 'interactive'
+									? { clip: false }
+									: {},
+							)}
 						}
 					`,
 				layoutType === 'immersivePortrait' &&
@@ -587,6 +592,10 @@ export const StandardLayoutArticleGrid = ({
 								padding-top: ${space[8]}px;
 							}
 						`,
+					layoutType === 'interactive' &&
+						css`
+							z-index: ${getZIndex('meta')};
+						`,
 				]}
 			>
 				{format.display !== ArticleDisplay.Immersive &&
@@ -842,7 +851,8 @@ export const StandardLayoutArticleGrid = ({
 									!!article.config.shouldHideReaderRevenue
 								}
 								shouldHideMostViewed={
-									format.design === ArticleDesign.Audio
+									format.design === ArticleDesign.Audio ||
+									format.design === ArticleDesign.Interactive
 								}
 							/>
 						</Island>

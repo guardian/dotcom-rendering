@@ -33,6 +33,7 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { InteractiveArticleGridDeprecated } from './interactives/InteractiveArticleGridDeprecated';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 import { StandardLayoutArticleGrid } from './StandardLayoutArticleGrid';
 
@@ -41,6 +42,7 @@ interface Props {
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 	serverTime?: number;
+	isInInteractiveLayoutTest?: boolean;
 }
 
 interface WebProps extends Props {
@@ -53,7 +55,13 @@ interface AppProps extends Props {
 }
 
 export const StandardLayout = (props: WebProps | AppProps) => {
-	const { article, format, renderingTarget, serverTime } = props;
+	const {
+		article,
+		format,
+		renderingTarget,
+		serverTime,
+		isInInteractiveLayoutTest,
+	} = props;
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
@@ -83,6 +91,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isCricketMatchReport =
 		format.design === ArticleDesign.MatchReport && !!cricketMatchHeaderUrl;
+
+	const interactiveLayoutSwitchoverDate = new Date('2026-10-01T00:00:00Z');
+	const firstPublicationDate = new Date(
+		article.firstPublicationDate ?? article.webPublicationDate,
+	);
+	const isInteractive = format.design === ArticleDesign.Interactive;
+	const isLegacyInteractive =
+		firstPublicationDate < interactiveLayoutSwitchoverDate && isInteractive;
 
 	const showComments = article.isCommentable && !isPaidContent;
 
@@ -121,6 +137,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={
 							!isLabs &&
+							!isInteractive &&
 							!isWorldCup2026 &&
 							!props.NAV.customSubNav
 						}
@@ -131,7 +148,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							}
 						}
 						showSlimNav={
-							format.display === ArticleDisplay.Immersive
+							format.display === ArticleDisplay.Immersive ||
+							isInteractive
 						}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
@@ -186,11 +204,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 				{/* This element is used to replace the article with the scorecard when the scorecard tab is clicked */}
 				<div id="article">
-					<StandardLayoutArticleGrid
-						article={article}
-						format={format}
-						renderingTarget={renderingTarget}
-					/>
+					{isLegacyInteractive ||
+					(isInteractive && !isInInteractiveLayoutTest) ? (
+						<InteractiveArticleGridDeprecated {...props} />
+					) : (
+						<StandardLayoutArticleGrid
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					)}
 				</div>
 
 				{isWeb && renderAds && !isLabs && (

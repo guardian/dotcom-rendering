@@ -19,6 +19,7 @@ type Props = {
 	className?: string;
 	type?: FEElement['_type'];
 	isTimeline?: boolean;
+	isInDeprecatedInteractiveLayout?: boolean;
 	articleArrangement?: LayoutType;
 };
 
@@ -79,6 +80,13 @@ const roleCss = {
 	`,
 
 	fullWidth: css`
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+
+		grid-column: 1 / -1;
+	`,
+
+	fullWidthDeprecated: css`
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[3]}px;
 
@@ -208,6 +216,7 @@ export const defaultRoleStyles = (
 	role: RoleType | 'richLink' | 'fullWidth',
 	format: ArticleFormat,
 	isTimeline = false,
+	isInDeprecatedInteractiveLayout = false,
 ) => {
 	switch (role) {
 		case 'inline':
@@ -217,6 +226,9 @@ export const defaultRoleStyles = (
 		case 'immersive':
 			return roleCss.immersive;
 		case 'fullWidth':
+			if (isInDeprecatedInteractiveLayout) {
+				return roleCss.fullWidthDeprecated;
+			}
 			return roleCss.fullWidth;
 		case 'showcase':
 			if (isTimeline) {
@@ -292,6 +304,7 @@ export const Figure = ({
 	className = '',
 	type,
 	isTimeline = false,
+	isInDeprecatedInteractiveLayout = false,
 	articleArrangement,
 }: Props) => {
 	if (isMainMedia && !isTimeline) {
@@ -317,7 +330,12 @@ export const Figure = ({
 	return (
 		<figure
 			id={id}
-			css={defaultRoleStyles(role, format, isTimeline)}
+			css={defaultRoleStyles(
+				role,
+				format,
+				isTimeline,
+				isInDeprecatedInteractiveLayout,
+			)}
 			data-spacefinder-role={role}
 			data-spacefinder-type={type}
 			className={className}
