@@ -33,11 +33,25 @@ jobs:
       imageDigest: ${{ steps.publish-image.outputs.imageDigest }}
     steps:
       - uses: actions/checkout@v7
+
+      - name: Set up Docker
+        uses: docker/setup-docker-action@v5
+        with:
+          daemon-config: |
+            {
+              "features": {
+                "containerd-snapshotter": true
+              }
+            }
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
       - name: Add commit hash for PRout
         working-directory: dotcom-rendering
         run: echo 'export const GIT_COMMIT_HASH = "${{ needs.facts.outputs.commitSha }}";' > src/server/prout.ts
       - name: Build image
-        run: docker buildx build --platform linux/arm64 -f Production.dockerfile -t ${{ github.repository }}:latest .
+        run: docker buildx build --load --platform linux/arm64,linux/amd64 -f Production.dockerfile -t ${{ github.repository }}:latest .
       - name: Publish Image
         uses: guardian/actions-ecr/push@v1.0.1
         id: publish-image
