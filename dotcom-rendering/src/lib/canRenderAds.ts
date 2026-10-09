@@ -1,3 +1,4 @@
+import type { FEShell } from '../frontend/feShell';
 import type { SportDataPage } from '../sportDataPage';
 import type { ArticleDeprecated } from '../types/article';
 import type { Front } from '../types/front';
@@ -14,7 +15,8 @@ export const canRenderAds = (
 		| Front
 		| TagPage
 		| SportDataPage
-		| FEPuzzlePageType,
+		| FEPuzzlePageType
+		| FEShell,
 ): boolean => {
 	if (pageData.isAdFreeUser) {
 		return false;

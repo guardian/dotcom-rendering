@@ -43,6 +43,20 @@ async function getContentFromURL(
 			throw error;
 		});
 
+	// TODO: HACK!
+	if (url.pathname.startsWith('/shell')) {
+		return {
+			...config,
+			config: {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- poc
+				...config.config,
+				keywordIds: 'shell',
+				shortUrlId: '',
+				showRelatedContent: false,
+			},
+		};
+	}
+
 	return config;
 }
 
