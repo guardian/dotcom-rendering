@@ -11,8 +11,10 @@ export const puzzlesContainerStyles = css`
 	}
 	${from.desktop} {
 		max-width: 980px;
-		border-right: 1px solid ${palette.neutral[86]};
-		border-left: 1px solid ${palette.neutral[86]};
+		border-right: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
+		border-left: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
 	}
 	${from.leftCol} {
 		max-width: 1140px;

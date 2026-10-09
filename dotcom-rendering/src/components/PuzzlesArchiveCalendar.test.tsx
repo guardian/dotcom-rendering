@@ -4,14 +4,17 @@ import {
 	render,
 	screen,
 	waitFor,
+	within,
 } from '@testing-library/react';
 import { getAuthStatus } from '../lib/identity';
 import type { PuzzlesArchive } from '../types/puzzlesPage';
 import {
+	archiveCardDate,
 	archivePageUrl,
 	archiveStatus,
 	buildCalendarCells,
 	canNavigateToNextMonth,
+	currentWeekdayLabel,
 	daysInMonth,
 	mondayFirstOffset,
 	PuzzlesArchiveCalendar,
@@ -98,6 +101,20 @@ describe('archive calendar helpers', () => {
 		expect(canNavigateToNextMonth(2026, 10, today)).toBe(false);
 		expect(canNavigateToNextMonth(2026, 11, today)).toBe(false);
 	});
+
+	it('formats recent card dates relative to the current London date', () => {
+		const today = new Date('2026-10-07T12:00:00Z');
+
+		expect(archiveCardDate('2026-10-07', today)).toBe('Today');
+		expect(archiveCardDate('2026-10-06', today)).toBe('Yesterday');
+		expect(archiveCardDate('2026-10-03', today)).toBe('Sat 3 Oct');
+	});
+
+	it('resolves the current weekday in London', () => {
+		expect(currentWeekdayLabel(new Date('2026-10-07T12:00:00Z'))).toBe(
+			'We',
+		);
+	});
 });
 
 describe('PuzzlesArchiveCalendar', () => {
@@ -111,6 +128,7 @@ describe('PuzzlesArchiveCalendar', () => {
 	});
 
 	afterEach(() => {
+		jest.useRealTimers();
 		jest.restoreAllMocks();
 		Reflect.deleteProperty(global, 'fetch');
 	});
@@ -126,7 +144,51 @@ describe('PuzzlesArchiveCalendar', () => {
 	it('shows the setter name inside an available date', () => {
 		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
 
-		expect(screen.getByTitle('Philistine')).toBeInTheDocument();
+		expect(screen.getByTitle('Philistine')).toHaveStyle({
+			top: '50%',
+			textAlign: 'center',
+			transform: 'translateY(-50%)',
+		});
+	});
+
+	it('uses the full crossword name for the archive H2', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{
+					...archive,
+					category: 'crosswords',
+					selectedPuzzle: {
+						...archive.selectedPuzzle,
+						title: 'Mini',
+					},
+				}}
+			/>,
+		);
+
+		expect(
+			screen.getByRole('heading', {
+				level: 2,
+				name: 'Mini crossword',
+			}),
+		).toBeInTheDocument();
+	});
+
+	it('uses the outlined check icon in the Played legend', () => {
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+
+		const playedLegend = screen.getByText('Played', {
+			selector: 'span.completed',
+		});
+		const playedIcon = playedLegend.querySelector('svg');
+
+		expect(playedIcon).toHaveAttribute('width', '13.3');
+		expect(playedIcon).toHaveAttribute('height', '13.3');
+		expect(playedIcon).toHaveAttribute('viewBox', '0 0 14 14');
+		expect(playedIcon?.querySelectorAll('path')).toHaveLength(3);
+		expect(playedIcon?.querySelectorAll('path')[2]).toHaveAttribute(
+			'fill',
+			'#22874D',
+		);
 	});
 
 	it('refreshes the initial archive with authenticated progress after hydration', async () => {
@@ -155,6 +217,24 @@ describe('PuzzlesArchiveCalendar', () => {
 				screen.getByLabelText('2026-09-02, completed'),
 			).toBeInTheDocument(),
 		);
+		const completedCell = screen.getByLabelText('2026-09-02, completed');
+		const completedIcon = completedCell.querySelector(
+			'.completed-icon svg',
+		);
+		expect(completedIcon).toHaveAttribute('width', '18');
+		expect(completedIcon).toHaveAttribute('height', '15');
+		expect(completedIcon).toHaveAttribute('viewBox', '0 0 18 15');
+		expect(completedIcon?.querySelector('path')).toHaveAttribute(
+			'fill',
+			'#22874D',
+		);
+		const recentCard = screen.getByRole('link', {
+			name: /Latest Easy sudoku/,
+		});
+		expect(within(recentCard).getByText('Played')).toBeInTheDocument();
+		expect(
+			within(recentCard).getByText('Played').querySelector('svg'),
+		).toBeInTheDocument();
 		expect(fetchMock).toHaveBeenCalledWith(
 			expect.objectContaining({
 				pathname:
@@ -166,6 +246,63 @@ describe('PuzzlesArchiveCalendar', () => {
 				}),
 			}),
 		);
+	});
+
+	it('bolds the current London weekday only in the current month', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const currentMonthArchive = {
+			...archive,
+			year: 2026,
+			month: 10,
+		};
+
+		const { unmount } = render(
+			<PuzzlesArchiveCalendar initialArchive={currentMonthArchive} />,
+		);
+
+		expect(screen.getByText('We')).toHaveClass('is-today');
+		expect(screen.getByText('Mo')).not.toHaveClass('is-today');
+
+		unmount();
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+
+		expect(screen.getByText('We')).not.toHaveClass('is-today');
+	});
+
+	it('marks only the current London date in the calendar', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{ ...archive, year: 2026, month: 10 }}
+			/>,
+		);
+
+		expect(document.querySelector('[data-date="2026-10-07"]')).toHaveClass(
+			'is-today',
+		);
+		expect(
+			document.querySelector('[data-date="2026-10-06"]'),
+		).not.toHaveClass('is-today');
+	});
+
+	it('labels the three recent cards with relative and short dates', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const recentArchive: PuzzlesArchive = {
+			...archive,
+			year: 2026,
+			month: 10,
+			items: ['2026-10-07', '2026-10-06', '2026-10-03'].map((date) => ({
+				...archive.items[0]!,
+				date,
+				url: `/puzzles-and-games/logic-puzzles/sudoku-easy/${date}`,
+			})),
+		};
+
+		render(<PuzzlesArchiveCalendar initialArchive={recentArchive} />);
+
+		expect(screen.getByText('Today')).toBeInTheDocument();
+		expect(screen.getByText('Yesterday')).toBeInTheDocument();
+		expect(screen.getByText('Sat 3 Oct')).toBeInTheDocument();
 	});
 
 	it('keeps the calendar mounted and announces loading in the month controls', async () => {
@@ -239,7 +376,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		).toBeInTheDocument();
 		expect(
 			screen.getByRole('link', { name: /Latest Weekend/ }),
-		).toHaveTextContent('2026-09-26');
+		).toHaveTextContent('Sat 26 Sep');
 		expect(
 			screen.getByRole('link', { name: /Latest Weekend/ }),
 		).toHaveTextContent('By: Philistine');

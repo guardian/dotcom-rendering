@@ -7,6 +7,7 @@ import {
 	palette,
 	space,
 	textSans14,
+	visuallyHidden,
 } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
 import type { PuzzleItem } from '../types/puzzlesPage';
@@ -93,7 +94,7 @@ const cardStyles = (
 		padding-right: 181px;
 	`}
 	box-sizing: border-box;
-	color: ${palette.neutral[7]};
+	color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
 	text-decoration: none;
 
 	${from.tablet} {
@@ -129,6 +130,14 @@ const cardStyles = (
 	}
 `;
 
+const cardColourStyles = (background: string | undefined) => {
+	const lightBackground = background ?? palette.neutral[100];
+	return css`
+		background-color: ${lightBackground};
+		background-color: var(--puzzles-card-background, ${lightBackground});
+	`;
+};
+
 const cardTextStyles = (isFeatured: boolean) => css`
 	position: relative;
 	z-index: ${isFeatured ? 1 : 'auto'};
@@ -138,20 +147,30 @@ const cardTextStyles = (isFeatured: boolean) => css`
 	padding: ${space[1]}px ${space[2]}px ${space[2]}px;
 `;
 
-const cardTitleStyles = (variant: PuzzleItem['cardVariant']) => css`
+const cardTitleStyles = (
+	variant: PuzzleItem['cardVariant'],
+	lightColour: string,
+) => css`
+	margin: 0;
 	${variant === 'compact' ? headlineBold20 : headlineBold24};
+	color: var(--puzzles-card-headline-colour, ${lightColour});
 	line-height: 1.15;
+`;
+
+const hiddenCrosswordSuffixStyles = css`
+	${visuallyHidden};
 `;
 
 const cadenceStyles = css`
 	margin-top: ${space[1]}px;
+	color: var(--puzzles-card-cadence-colour, ${palette.neutral[7]});
 	${textSans14};
 	line-height: 1.3;
 `;
 
 const setterStyles = css`
 	margin-top: ${space[1]}px;
-	color: ${palette.news[300]};
+	color: var(--puzzles-card-text-colour, ${palette.news[300]});
 	${textSans14};
 	line-height: 1.3;
 `;
@@ -224,16 +243,23 @@ export const PuzzleCard = ({
 		item.image !== undefined &&
 		item.image.length > 0 &&
 		item.cardVariant !== 'compact';
+	const needsCrosswordSuffix =
+		item.type === 'crossword' && !/\bcrossword\b/i.test(item.title);
 	const contents = (
 		<>
 			<div css={cardTextStyles(isFeatured)}>
-				<span
+				<h3
 					className="puzzle-card-title"
-					css={cardTitleStyles(item.cardVariant)}
-					style={{ color: colours.title }}
+					css={cardTitleStyles(item.cardVariant, colours.title)}
 				>
 					{item.title}
-				</span>
+					{needsCrosswordSuffix && (
+						<span css={hiddenCrosswordSuffixStyles}>
+							{' '}
+							crossword
+						</span>
+					)}
+				</h3>
 				{item.cadence !== undefined && item.cadence.length > 0 && (
 					<span css={cadenceStyles}>{item.cadence}</span>
 				)}
@@ -257,23 +283,16 @@ export const PuzzleCard = ({
 			)}
 		</>
 	);
-	const style = { backgroundColor: colours.background };
+	const styles = [
+		cardStyles(item.cardVariant, hasImage, isFeatured),
+		cardColourStyles(colours.background),
+	];
 	return url !== undefined ? (
-		<a
-			css={cardStyles(item.cardVariant, hasImage, isFeatured)}
-			href={url}
-			style={style}
-			{...externalProps(url)}
-		>
+		<a css={styles} href={url} {...externalProps(url)}>
 			{contents}
 		</a>
 	) : (
-		<article
-			css={cardStyles(item.cardVariant, hasImage, isFeatured)}
-			style={style}
-		>
-			{contents}
-		</article>
+		<article css={styles}>{contents}</article>
 	);
 };
 
@@ -305,7 +324,8 @@ export const rowsStyles = css`
 		top: calc(var(--puzzles-gap) / -2);
 		right: 0;
 		left: 0;
-		border-top: 1px solid ${palette.neutral[86]};
+		border-top: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
 		content: '';
 		pointer-events: none;
 	}
@@ -327,7 +347,8 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 		top: calc(var(--puzzles-gap) / -2);
 		right: 0;
 		left: 0;
-		border-top: 1px solid ${palette.neutral[86]};
+		border-top: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
 		content: '';
 		pointer-events: none;
 	}
@@ -338,7 +359,8 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 			top: 0;
 			bottom: 0;
 			left: calc(var(--puzzles-gap) / -2);
-			border-left: 1px solid ${palette.neutral[86]};
+			border-left: 1px solid
+				var(--puzzles-border-colour, ${palette.neutral[86]});
 			content: '';
 			pointer-events: none;
 		}

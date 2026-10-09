@@ -72,13 +72,18 @@ export const getProductLinkLabelWithPrice = (cta: ProductCta): string => {
 	return overrideLabel ? cta.text : `${cta.price} at ${cta.retailer}`;
 };
 
-// ToDo: add the logic of how much discount should result in replacing vs adding old price struck through
-const shouldPutOldPriceInStrikethrough = (
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- see ToDo
-	_latestPrice: number,
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- see ToDo
-	_articlePrice: number,
-) => true;
+/*
+	The logic in this function decides whether or not to silently replace an old price
+	with a live one, or to show the old price in strikethrough
+
+	Always silently replace the price if it goes up
+
+	If the price drops by at least 10% and at least £5/$5 show in strikethrough
+*/
+export const shouldPutOldPriceInStrikethrough = (
+	latestPrice: number,
+	articlePrice: number,
+) => latestPrice <= articlePrice * 0.9 && articlePrice - latestPrice >= 5;
 
 const priceFormatter = new Intl.NumberFormat('en-GB', {
 	minimumFractionDigits: 2,

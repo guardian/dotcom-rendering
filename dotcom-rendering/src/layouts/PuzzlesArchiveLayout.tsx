@@ -17,14 +17,14 @@ import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
 import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center } from '../lib/center';
+import { puzzlesPageTheme } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import { Stuck } from './lib/stickiness';
 
-const mainStyles = css`
-	background: ${palette.neutral[100]};
-	color: ${palette.neutral[7]};
+const mainStyles = (darkModeAvailable: boolean) => css`
+	${puzzlesPageTheme(darkModeAvailable)};
 `;
 
 /** Without the bottom ad, the page keeps its own space above the footer. */
@@ -36,8 +36,8 @@ const pageStyles = css`
 	${center};
 	box-sizing: border-box;
 	padding: 0 ${space[3]}px;
-	border-left: 1px solid ${palette.neutral[86]};
-	border-right: 1px solid ${palette.neutral[86]};
+	border-left: 1px solid var(--puzzles-border-colour);
+	border-right: 1px solid var(--puzzles-border-colour);
 	${from.tablet} {
 		padding: 0 ${space[5]}px;
 	}
@@ -60,7 +60,7 @@ const topStyles = css`
 			bottom: 28px;
 			left: 150px;
 			width: 1px;
-			background: ${palette.neutral[86]};
+			background: var(--puzzles-border-colour);
 			content: '';
 			pointer-events: none;
 		}
@@ -88,6 +88,7 @@ const headingStyles = css`
 	${archiveGridStyles};
 	h1 {
 		${headlineBold34};
+		color: var(--puzzles-headline-colour);
 		margin: 0;
 		padding-top: ${space[2]}px;
 		overflow-wrap: anywhere;
@@ -96,7 +97,7 @@ const headingStyles = css`
 		${textEgyptian17};
 		max-width: 620px;
 		margin: 0 0 ${space[6]}px;
-		color: ${palette.neutral[46]};
+		color: var(--puzzles-text-colour);
 	}
 	${from.leftCol} {
 		h1 {
@@ -111,6 +112,15 @@ const headingStyles = css`
 
 const contentStyles = css`
 	${archiveGridStyles};
+	${from.desktop} {
+		grid-template-columns: minmax(0, 1fr) 300px;
+	}
+	${from.leftCol} {
+		grid-template-columns: 140px minmax(0, 1fr) 300px;
+	}
+	${from.wide} {
+		grid-template-columns: 220px minmax(0, 1fr) 300px;
+	}
 `;
 
 const calendarColumnStyles = css`
@@ -122,10 +132,13 @@ const calendarColumnStyles = css`
 
 const sideAdStyles = css`
 	display: none;
-	${from.wide} {
+	${from.desktop} {
 		display: block;
+		grid-column: 2;
+		padding-top: 122px;
+	}
+	${from.leftCol} {
 		grid-column: 3;
-		padding-top: 110px;
 	}
 `;
 
@@ -139,17 +152,27 @@ const moreStyles = css`
 	--puzzles-edge-padding: ${space[3]}px;
 	margin: 0 -${space[3]}px;
 	padding: 0 ${space[3]}px;
-	border-top: 1px solid ${palette.neutral[86]};
+	border-top: 1px solid var(--puzzles-border-colour);
 	${from.tablet} {
 		margin: 0 -${space[5]}px;
 		padding: 0 ${space[5]}px;
 	}
 `;
 
+const mobileAdStyles = css`
+	margin: ${space[8]}px 0 ${space[5]}px;
+	background: ${palette.neutral[97]};
+	${from.tablet} {
+		display: none;
+	}
+`;
+
 export const PuzzlesArchiveLayout = ({
+	darkModeAvailable = false,
 	puzzlesPage,
 	NAV,
 }: {
+	darkModeAvailable?: boolean;
 	puzzlesPage: FEPuzzlesPageType;
 	NAV: NavType;
 }) => {
@@ -170,7 +193,7 @@ export const PuzzlesArchiveLayout = ({
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot includeMobile={true} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -191,13 +214,16 @@ export const PuzzlesArchiveLayout = ({
 				/>
 			</div>
 			<main
-				css={[mainStyles, !renderAds && mainBottomSpaceStyles]}
+				css={[
+					mainStyles(darkModeAvailable),
+					!renderAds && mainBottomSpaceStyles,
+				]}
 				id="maincontent"
 			>
 				<div css={pageStyles}>
 					<div css={topStyles}>
 						<header css={headingStyles}>
-							<h1>{archive.title}</h1>
+							<h1>{archive.title} archive</h1>
 							<p>
 								<Island priority="critical">
 									<PuzzlesArchiveDescription
@@ -220,6 +246,7 @@ export const PuzzlesArchiveLayout = ({
 							{renderAds && (
 								<aside css={sideAdStyles}>
 									<AdSlot
+										display={ArticleDisplay.Standard}
 										position="right"
 										shouldHideReaderRevenue={false}
 									/>
@@ -231,6 +258,11 @@ export const PuzzlesArchiveLayout = ({
 						<section css={moreStyles}>
 							<RelatedPuzzlesRail items={archive.moreFrom} />
 						</section>
+					)}
+					{renderAds && (
+						<div css={mobileAdStyles}>
+							<AdSlot position="mobile-front" index={1} />
+						</div>
 					)}
 				</div>
 			</main>
