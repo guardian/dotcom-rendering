@@ -7,6 +7,8 @@
 	"scripts": {
 		"postinstall": "./scripts/postinstall.sh",
 		"build:dcr": "cd dotcom-rendering && make build",
+		"storybook": "pnpm --filter @guardian/dotcom-rendering storybook",
+		"build-storybook": "pnpm --filter @guardian/dotcom-rendering build-storybook",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky",
 		"lint-staged": "lint-staged",
