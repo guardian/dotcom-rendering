@@ -68,7 +68,8 @@ const textAndButtonWrapperStyles = css`
 	justify-content: end;
 	align-items: start;
 	padding: ${space[3]}px ${space[2]}px ${space[6]}px;
-	z-index: 1;
+	/* Make this a positioned element so that it can render on top of the blur */
+	position: relative;
 
 	${from.tablet} {
 		flex-direction: row;
@@ -127,6 +128,8 @@ export const CallToActionAtom = ({
 				`}
 			/>
 			<div css={blurAndTextWrapperStyles}>
+				{/* blur overlay */}
+				<div aria-hidden="true" css={blurStyles} />
 				<div css={textAndButtonWrapperStyles}>
 					{!!text && <h2 css={textStyles}>{text}</h2>}
 					<CallToActionButton
@@ -135,8 +138,6 @@ export const CallToActionAtom = ({
 						accentColor={accentColor}
 					/>
 				</div>
-				{/* blur overlay */}
-				<div aria-hidden="true" css={blurStyles} />
 			</div>
 		</picture>
 	);
