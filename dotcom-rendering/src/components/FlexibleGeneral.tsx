@@ -9,6 +9,7 @@ import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
+	DCRSnapType,
 } from '../types/front';
 import type { Position } from './Card/Card';
 import { LI } from './Card/components/LI';
@@ -23,6 +24,8 @@ import type { Loading } from './CardPicture';
 import { FeatureCard } from './FeatureCard';
 import { FrontCard } from './FrontCard';
 import type { SubtitleSize } from './SelfHostedVideoPlayer';
+import { Snap } from './Snap';
+import { SnapCssSandbox } from './SnapCssSandbox';
 import type { Alignment } from './SupportingContent';
 
 type Props = {
@@ -80,6 +83,24 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 			return [...acc, createNewRow('oneCardHalfWidth', card)];
 		}
 	}, []);
+};
+
+const SnapLinkLayout = ({
+	snapData,
+	dataLinkName,
+}: {
+	snapData: DCRSnapType;
+	dataLinkName: string;
+}) => {
+	return (
+		<UL padBottom={true}>
+			<LI padSides={true}>
+				<SnapCssSandbox snapData={snapData}>
+					<Snap snapData={snapData} dataLinkName={dataLinkName} />
+				</SnapCssSandbox>
+			</LI>
+		</UL>
+	);
 };
 
 type ImmersiveCardLayoutProps = {
@@ -243,33 +264,39 @@ const decideSplashCardProperties = (
 };
 
 type SplashCardLayoutProps = {
-	cards: DCRFrontCard[];
+	card: DCRFrontCard;
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	hideAge: boolean;
 	serverTime?: number;
 	aspectRatio: AspectRatio;
+	isFirstRow: boolean;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 };
 
 const SplashCardLayout = ({
-	cards,
+	card,
 	containerPalette,
 	hideAge,
 	serverTime,
 	imageLoading,
 	aspectRatio,
+	isFirstRow,
 	isLastRow,
 	containerLevel,
 	collectionId,
 }: SplashCardLayoutProps) => {
-	const card = cards[0];
-	if (!card) {
-		return null;
+	const isSnapLink = card.snapData?.embedHtml;
+	if (isSnapLink != null) {
+		return (
+			<SnapLinkLayout
+				snapData={card.snapData as DCRSnapType}
+				dataLinkName={card.dataLinkName}
+			/>
+		);
 	}
-
 	const shouldShowImmersive = card.isImmersive;
 	if (shouldShowImmersive) {
 		return (
@@ -310,7 +337,7 @@ const SplashCardLayout = ({
 		<UL
 			padBottom={!isLastRow}
 			hasLargeSpacing={!isLastRow}
-			showTopBar={false}
+			showTopBar={!isFirstRow}
 		>
 			<LI
 				padSides={true}
@@ -615,9 +642,9 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 }: Props) => {
-	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
-		...snap,
-		uniqueId: `collection-${collectionId}-splash-0`,
+	const splashCards = [...groupedTrails.splash].map((card, i) => ({
+		...card,
+		uniqueId: `collection-${collectionId}-splash-${i}`,
 	}));
 
 	const cards = [...groupedTrails.standard].map((standard, i) => ({
@@ -629,19 +656,24 @@ export const FlexibleGeneral = ({
 
 	return (
 		<>
-			{splash.length > 0 && (
-				<SplashCardLayout
-					cards={splash}
-					containerPalette={containerPalette}
-					hideAge={hideAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-					aspectRatio={aspectRatio}
-					isLastRow={cards.length === 0}
-					containerLevel={containerLevel}
-					collectionId={collectionId}
-				/>
-			)}
+			{splashCards.length > 0 &&
+				splashCards.map((card, i) => {
+					return (
+						<SplashCardLayout
+							key={card.uniqueId}
+							card={card}
+							containerPalette={containerPalette}
+							hideAge={hideAge}
+							serverTime={serverTime}
+							imageLoading={imageLoading}
+							aspectRatio={aspectRatio}
+							isFirstRow={i === 0}
+							isLastRow={cards.length === 0}
+							containerLevel={containerLevel}
+							collectionId={collectionId}
+						/>
+					);
+				})}
 			{groupedCards.map((row, i) => {
 				switch (row.layout) {
 					case 'oneCardFullWidth':
@@ -654,7 +686,7 @@ export const FlexibleGeneral = ({
 								serverTime={serverTime}
 								imageLoading={imageLoading}
 								aspectRatio={aspectRatio}
-								isFirstRow={!splash.length && i === 0}
+								isFirstRow={!splashCards.length && i === 0}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								collectionId={collectionId}
@@ -672,7 +704,7 @@ export const FlexibleGeneral = ({
 								hideAge={hideAge}
 								serverTime={serverTime}
 								imageLoading={imageLoading}
-								isFirstRow={!splash.length && i === 0}
+								isFirstRow={!splashCards.length && i === 0}
 								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
 								isLastRow={i === groupedCards.length - 1}
