@@ -7,15 +7,37 @@ on:
   merge_group:
     types: [checks_requested]
   push:
-    paths:
-      - 'ab-testing/**'
-      - '.github/workflows/ab-testing-ci.yml'
-      - 'pnpm-workspace.yaml'
 
 jobs:
+  pre-check:
+    name: Can we skip AB testing CI?
+    runs-on: ubuntu-latest
+    outputs:
+      should-run-ci: ${{ steps.should-run.outputs.should-run-ci }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4
+        id: relevant-files-changed
+        with:
+          filters: |
+            relevant:
+              - 'ab-testing/**'
+              - '.github/workflows/ab-testing-ci.yml'
+              - 'pnpm-workspace.yaml'
+
+      - name: Should Run
+        id: should-run
+        run: >-
+          echo "should-run-ci=${{ github.event_name == 'merge_group' || (github.ref != 'refs/heads/main' && steps.relevant-files-changed.outputs.relevant == 'true') }}" >> "$GITHUB_OUTPUT"
+
   ab-testing-checks:
     runs-on: ubuntu-latest
     name: AB testing checks
+    needs: [pre-check]
+    if: ${{ needs.pre-check.outputs.should-run-ci == 'true' }}
     defaults:
       run:
         working-directory: ab-testing
@@ -34,13 +56,14 @@ jobs:
   config-ci:
     runs-on: ubuntu-latest
     name: Config CI
+    needs: [pre-check, ab-testing-checks]
+    if: ${{ needs.pre-check.outputs.should-run-ci == 'true' }}
     defaults:
       run:
         working-directory: ab-testing/config
     env:
       FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}
       FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
-    needs: [ab-testing-checks]
     steps:
       - uses: actions/checkout@v7
 
@@ -61,12 +84,13 @@ jobs:
   ui-ci:
     name: UI CI
     runs-on: ubuntu-latest
+    needs: [pre-check, ab-testing-checks]
+    if: ${{ needs.pre-check.outputs.should-run-ci == 'true' }}
     defaults:
       run:
         working-directory: ab-testing/frontend
     permissions:
       contents: read
-    needs: [ab-testing-checks]
     steps:
       - uses: actions/checkout@v7
 
@@ -86,12 +110,13 @@ jobs:
   deploy-lambda-ci:
     name: Lambda CI
     runs-on: ubuntu-latest
+    needs: [pre-check, ab-testing-checks]
+    if: ${{ needs.pre-check.outputs.should-run-ci == 'true' }}
     defaults:
       run:
         working-directory: ab-testing/deploy-lambda
     permissions:
       contents: read
-    needs: [ab-testing-checks]
     steps:
       - uses: actions/checkout@v7
 
@@ -116,12 +141,13 @@ jobs:
   notification-lambda-ci:
     name: Notification Lambda CI
     runs-on: ubuntu-latest
+    needs: [pre-check, ab-testing-checks]
+    if: ${{ needs.pre-check.outputs.should-run-ci == 'true' }}
     defaults:
       run:
         working-directory: ab-testing/notification-lambda
     permissions:
       contents: read
-    needs: [ab-testing-checks]
     steps:
       - uses: actions/checkout@v7
 
@@ -147,6 +173,10 @@ jobs:
     name: Riff-Raff Artifacts
     runs-on: ubuntu-latest
     needs: [config-ci, ui-ci, deploy-lambda-ci, notification-lambda-ci]
+    if: >-
+      !cancelled() &&
+      !contains(needs.*.result, 'failure') &&
+      github.event_name == 'push'
     permissions:
       id-token: write
       contents: read
