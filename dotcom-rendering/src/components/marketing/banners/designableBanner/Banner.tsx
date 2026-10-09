@@ -99,7 +99,9 @@ const styles = {
 		${from.wide} {
 			max-width: 1300px;
 			/* the vertical line aligns with that of standard article */
-			grid-template-columns: 219px 1px min(460px) min(380px) auto;
+			grid-template-columns:
+				219px 1px min(460px) min(${phabletContentMaxWidth})
+				auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
