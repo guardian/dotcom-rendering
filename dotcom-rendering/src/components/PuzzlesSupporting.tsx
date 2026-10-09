@@ -9,6 +9,7 @@ import {
 	textSans12,
 	textSansBold14,
 } from '@guardian/source/foundations';
+import { generateImageURL } from '../lib/image';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import type {
 	PuzzleContainer,
@@ -318,7 +319,15 @@ export const PuzzlesSupporting = ({
 								description={newsletter.description}
 								frequency={newsletter.frequency}
 								illustrationSquare={
-									newsletter.illustrationSquare
+									newsletter.illustrationSquare !== undefined
+										? generateImageURL({
+												mainImage:
+													newsletter.illustrationSquare,
+												imageWidth: 100,
+												resolution: 'high',
+												aspectRatio: '1:1',
+											})
+										: undefined
 								}
 								// TODO hide ilustrations when we implement this
 								// illustrationAlt={`${newsletter.name} newsletter illustration`}
