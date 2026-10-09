@@ -82,10 +82,12 @@ export const ArticleTitle = ({
 				format.design,
 			) && galleryStyles,
 			sectionStyles,
-			css`
-				position: relative;
-				min-height: 71px;
-			`,
+			layoutType === 'immersivePortrait' &&
+				isWeekendRead(tags) &&
+				css`
+					position: relative;
+					min-height: 71px;
+				`,
 		]}
 	>
 		<div
