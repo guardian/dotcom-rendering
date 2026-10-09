@@ -18,13 +18,28 @@ import { HighlightsNewsletterCard } from './Masthead/Newsletter/HighlightsNewsle
 type Props = {
 	trails: DCRFrontCard[];
 	frontId?: string;
+	/**
+	 * Indicates if the page has a page skin advert
+	 * When a page skin advert is active:
+	 * - containers are constrained to a max width of 'desktop'
+	 * - media queries above desktop are not applied
+	 */
+	hasPageSkin?: boolean;
 };
 
 const containerStyles = css`
 	padding: ${space[2]}px 0 ${space[3]}px;
+
 	${from.tablet} {
 		padding: ${space[2]}px ${space[5]}px;
 	}
+`;
+
+/**
+ * Reserves space for the page's right gutter above the `wide` breakpoint.
+ * Not applied when the page has a page skin.
+ */
+const containerRightGutterStyles = css`
 	${from.wide} {
 		padding-right: 100px;
 	}
@@ -57,6 +72,23 @@ const carouselStyles = css`
 		scroll-padding-left: 120px;
 		gap: ${space[5]}px;
 	}
+
+	/**
+	* Hide scrollbars
+	* See: https://stackoverflow.com/a/38994837
+	*/
+	::-webkit-scrollbar {
+		display: none; /* Safari and Chrome */
+	}
+	scrollbar-width: none; /* Firefox */
+	position: relative;
+`;
+
+/**
+ * Aligns the carousel with the page's left column from the `desktop`
+ * breakpoint upwards. Not applied when the page has a page skin.
+ */
+const carouselLeftColumnAlignmentStyles = css`
 	${from.desktop} {
 		scroll-padding-left: 240px;
 	}
@@ -68,16 +100,6 @@ const carouselStyles = css`
 		scroll-padding-left: 240px;
 		padding-left: 240px;
 	}
-
-	/**
-	* Hide scrollbars
-	* See: https://stackoverflow.com/a/38994837
-	*/
-	::-webkit-scrollbar {
-		display: none; /* Safari and Chrome */
-	}
-	scrollbar-width: none; /* Firefox */
-	position: relative;
 `;
 
 const itemStyles = css`
@@ -211,7 +233,11 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-export const ScrollableHighlights = ({ trails, frontId }: Props) => {
+export const ScrollableHighlights = ({
+	trails,
+	frontId,
+	hasPageSkin = false,
+}: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 
 	const visibleTrails = trails.filter((trail) => {
@@ -286,7 +312,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 
 	return (
 		<div
-			css={containerStyles}
+			css={[containerStyles, !hasPageSkin && containerRightGutterStyles]}
 			data-link-name={ophanFrontName}
 			role="region"
 			aria-roledescription="carousel"
@@ -297,6 +323,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				ref={carouselRef}
 				css={[
 					carouselStyles,
+					!hasPageSkin && carouselLeftColumnAlignmentStyles,
 					generateCarouselColumnStyles(carouselLength),
 				]}
 				data-link-name={ophanComponentLink}

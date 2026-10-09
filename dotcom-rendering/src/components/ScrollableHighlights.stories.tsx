@@ -115,3 +115,12 @@ export const withNewsletterCardVariant = meta.story({
 		trails: [newsletterSignupCard, ...Default.input.args.trails],
 	},
 });
+
+export const withPageSkinAdvert = meta.story({
+	...Default.input,
+	name: 'With page skin advert',
+	args: {
+		hasPageSkin: true,
+		trails: [...Default.input.args.trails],
+	},
+});
