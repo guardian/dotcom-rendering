@@ -23,6 +23,7 @@ import {
 import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
 import { decideMainMediaCaption } from '../lib/decide-caption';
+import { hasFilterTag } from '../lib/theFilter';
 import { palette as themePalette } from '../palette';
 import { hasPreferredSourceButton } from '../preferredSource';
 import type { Branding as BrandingType } from '../types/branding';
@@ -339,11 +340,7 @@ export const ArticleMeta = ({
 	const podcast = getPodcast(tags);
 	const rssFeedUrl = getRssFeedUrl(tags);
 
-	const isFilterArticle = tags.some(
-		(tag) =>
-			tag.id === 'tracking/commissioningdesk/the-filter' ||
-			tag.id === 'tracking/commissioningdesk/filter-us',
-	);
+	const isFilterArticle = hasFilterTag(tags);
 
 	const mediaType:
 		| 'YouTubeVideo'
