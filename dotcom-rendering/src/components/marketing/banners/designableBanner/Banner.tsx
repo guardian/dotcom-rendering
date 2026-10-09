@@ -100,7 +100,7 @@ const styles = {
 			max-width: 1300px;
 			/* the vertical line aligns with that of standard article */
 			grid-template-columns:
-				219px 1px min(460px) min(${phabletContentMaxWidth})
+				219px 1px min(460px) min(400px)
 				auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:

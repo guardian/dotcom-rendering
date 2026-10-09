@@ -12,9 +12,9 @@ import { buttonStyles, buttonThemes } from '../styles/buttonStyles';
 const styles = {
 	closeButtonContainer: css`
 		grid-area: close-button;
+		justify-self: end;
 		${until.phablet} {
 			padding-bottom: ${space[4]}px;
-			justify-self: end;
 			position: sticky;
 			top: 10px;
 		}
@@ -25,10 +25,8 @@ const styles = {
 		}
 		${from.desktop} {
 			margin-top: ${space[6]}px;
-			justify-self: end;
 		}
 		${from.leftCol} {
-			justify-self: start;
 			padding-left: ${space[8]}px;
 		}
 	`,
