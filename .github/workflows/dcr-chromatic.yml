@@ -40,7 +40,7 @@ jobs:
       - name: Set up Node environment
         # Only needed for a full Chromatic run.
         if: |
-          github.event_name == 'push' ||
+          github.event_name == 'push' || github.event_name == 'merge_group' ||
           (github.event_name == 'pull_request' &&
             contains(github.event.pull_request.labels.*.name, 'run_chromatic'))
         uses: ./.github/actions/setup-node-env
