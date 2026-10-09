@@ -229,7 +229,9 @@ const isSupportingContent = (data: unknown): boolean =>
 			isString(data.newsletter.description) &&
 			data.newsletter.description.trim().length > 0 &&
 			(data.newsletter.illustrationSquare === undefined ||
-				isString(data.newsletter.illustrationSquare)))) &&
+				isString(data.newsletter.illustrationSquare)) &&
+			(data.newsletter.exampleUrl === undefined ||
+				isString(data.newsletter.exampleUrl)))) &&
 	isString(data.popularTitle) &&
 	data.popularTitle.trim().length > 0 &&
 	Array.isArray(data.popularGroups) &&

@@ -622,6 +622,63 @@
                     "type"
                 ]
             }
+        },
+        "puzzlesSupporting": {
+            "description": "Useful links and newsletter, only sent for crossword pages.",
+            "type": "object",
+            "properties": {
+                "usefulLinks": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string"
+                            },
+                            "url": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "title",
+                            "url"
+                        ]
+                    }
+                },
+                "newsletter": {
+                    "type": "object",
+                    "properties": {
+                        "identityName": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "frequency": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "illustrationSquare": {
+                            "type": "string"
+                        },
+                        "exampleUrl": {
+                            "description": "Link to a recent edition, from the newsletters tool.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "description",
+                        "frequency",
+                        "identityName",
+                        "name"
+                    ]
+                }
+            },
+            "required": [
+                "usefulLinks"
+            ]
         }
     },
     "required": [

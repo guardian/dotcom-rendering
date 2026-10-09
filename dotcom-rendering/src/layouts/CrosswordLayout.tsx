@@ -23,6 +23,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
+import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
 import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -551,6 +552,17 @@ export const CrosswordLayout = (props: Props) => {
 							display={format.display}
 						/>
 					</Section>
+				)}
+
+				{isPuzzlesHubV1 && article.puzzlesSupporting && (
+					<div data-print-layout="hide">
+						<PuzzlesUsefulLinks
+							id="crossword"
+							title="Useful links"
+							links={article.puzzlesSupporting.usefulLinks}
+							newsletter={article.puzzlesSupporting.newsletter}
+						/>
+					</div>
 				)}
 			</main>
 

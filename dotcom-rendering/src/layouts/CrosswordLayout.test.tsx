@@ -10,7 +10,7 @@ import {
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { enhanceArticleType } from '../types/article';
-import type { PuzzleItem } from '../types/puzzlesPage';
+import type { PuzzleGameSupporting, PuzzleItem } from '../types/puzzlesPage';
 import { CrosswordLayout } from './CrosswordLayout';
 
 jest.mock('../lib/bridgetApi', () => jest.fn());
@@ -67,10 +67,12 @@ const relatedPuzzles: PuzzleItem[] = [
 
 const renderCrosswordLayout = ({
 	moreFromPuzzlesAndGames,
+	puzzlesSupporting,
 	serverSideABTests = {},
 	withQuickSeries = false,
 }: {
 	moreFromPuzzlesAndGames?: PuzzleItem[];
+	puzzlesSupporting?: PuzzleGameSupporting;
 	serverSideABTests?: Record<string, string>;
 	withQuickSeries?: boolean;
 }) => {
@@ -78,6 +80,7 @@ const renderCrosswordLayout = ({
 		{
 			...StandardFixture,
 			moreFromPuzzlesAndGames,
+			puzzlesSupporting,
 			...(withQuickSeries && {
 				tags: [
 					{
@@ -117,6 +120,57 @@ const renderCrosswordLayout = ({
 		</ConfigProvider>,
 	);
 };
+
+describe('CrosswordLayout useful links', () => {
+	const puzzlesSupporting: PuzzleGameSupporting = {
+		usefulLinks: [
+			{
+				title: 'Crossword blog',
+				url: 'https://www.theguardian.com/crosswords/crossword-blog',
+			},
+		],
+		newsletter: {
+			identityName: 'cluesletter',
+			name: 'Cluesletter',
+			frequency: 'Weekly',
+			description: 'News and clues',
+		},
+	};
+
+	it('renders the links and newsletter when frontend sends them and v1 is enabled', () => {
+		renderCrosswordLayout({
+			puzzlesSupporting,
+			serverSideABTests: v1On,
+		});
+
+		expect(
+			screen.getByRole('heading', { name: 'Useful links' }),
+		).toBeInTheDocument();
+		expect(
+			screen.getByRole('link', { name: 'Crossword blog' }),
+		).toHaveAttribute(
+			'href',
+			'https://www.theguardian.com/crosswords/crossword-blog',
+		);
+		expect(screen.getByText('Cluesletter')).toBeInTheDocument();
+	});
+
+	it('does not render the section when frontend does not send it', () => {
+		renderCrosswordLayout({ serverSideABTests: v1On });
+
+		expect(
+			screen.queryByRole('heading', { name: 'Useful links' }),
+		).not.toBeInTheDocument();
+	});
+
+	it('does not render the section when v1 is disabled, even with data present', () => {
+		renderCrosswordLayout({ puzzlesSupporting });
+
+		expect(
+			screen.queryByRole('heading', { name: 'Useful links' }),
+		).not.toBeInTheDocument();
+	});
+});
 
 describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 	it('renders the rail when data is present and v1 is enabled', () => {
