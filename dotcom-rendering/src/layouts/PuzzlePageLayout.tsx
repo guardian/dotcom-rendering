@@ -603,10 +603,11 @@ export const PuzzlePageLayout = ({
 							<GridItem area="body" element="article">
 								<div css={frameContainerStyles}>
 									<ArticleContainer format={puzzlePageFormat}>
-										<Island
-											priority="critical"
-											defer={{ until: 'visible' }}
-										>
+										{/* Not deferred until visible: the iframe has no `src`
+										    until this island hydrates and the reader is known,
+										    so waiting for the island to be seen would delay
+										    the puzzle itself. */}
+										<Island priority="critical">
 											<PuzzleIframe
 												puzzleConfig={puzzleConfig}
 												title={instance.title}

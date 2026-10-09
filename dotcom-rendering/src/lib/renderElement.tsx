@@ -1111,6 +1111,7 @@ export const RenderArticleElement = ({
 			format={format}
 			isTimeline={isTimeline}
 			isInDeprecatedInteractiveLayout={isInDeprecatedInteractiveLayout}
+			articleArrangement={articleArrangement}
 		>
 			{el}
 		</Figure>

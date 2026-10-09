@@ -127,7 +127,6 @@ const badgeWrapperStyles = css`
 	height: auto;
 	top: 100%;
 	text-align: center;
-	z-index: 1;
 	background-color: ${sourcePalette.neutral[100]};
 	opacity: 1;
 	transition: opacity 2s ease-in-out;

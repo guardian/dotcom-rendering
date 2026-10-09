@@ -115,6 +115,12 @@ export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
 	// identity from `PUZZLE_LOAD` as a fallback.
 	let loaded: Identity | undefined;
 
+	// The puzzles seen completed since the iframe loaded. AmuseLabs sends
+	// `PUZZLE_COMPLETE` when a puzzle that was already finished is opened, and
+	// the reader's first click in it (closing the "well done" dialog) sends an
+	// `event`, which must not move the puzzle back to `in-progress`.
+	const completed = new Set<string>();
+
 	return {
 		start: (raw) => {
 			const message = parseAmuseLabsMessage(raw);
@@ -153,6 +159,7 @@ export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
 				// Finding every word completes the word wheel. The pangram is one
 				// of those words, so `isPangram` adds nothing to this decision.
 				if (wordsFound >= totalWords) {
+					completed.add(identity.puzzleId);
 					return {
 						...identity,
 						gameStatus: 'completed',
@@ -173,13 +180,15 @@ export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
 			// signal that the reader has started a sudoku, which sends no
 			// per-move or percentage message (verified on a real embed).
 			//
-			// It is reported every time it arrives, with no memory of what was
-			// reported before: a reader who restarts, or whose first click was
-			// ignored because they were signed out, must be able to move back to
-			// `in-progress`. The reporter drops an update that has not changed.
+			// It is reported every time it arrives, so a reader whose first
+			// click was ignored because they were signed out can still be
+			// reported as `in-progress`. The reporter drops an update that has
+			// not changed. It is not reported for a puzzle already seen
+			// completed on this page, which would undo that completion.
 			if (message.type === 'event') {
 				const identity = identityOf(message) ?? loaded;
 				if (!identity) return null;
+				if (completed.has(identity.puzzleId)) return null;
 
 				return {
 					...identity,
@@ -203,6 +212,7 @@ export const createAmuseLabsAdapter = (): PuzzleProgressAdapter => {
 			const identity = identityOf(message) ?? loaded;
 			if (!identity) return null;
 
+			completed.add(identity.puzzleId);
 			return {
 				...identity,
 				gameStatus: 'completed',
