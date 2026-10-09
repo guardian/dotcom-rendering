@@ -28,6 +28,7 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
+import { hasFilterSeriesTag } from '../lib/theFilter';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -109,6 +110,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
 
+	const isFilterSeries = hasFilterSeriesTag(article.tags);
+
 	const renderAds = canRenderAds(article);
 
 	return (
@@ -149,7 +152,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							}
 						}
 						showSlimNav={
-							format.display === ArticleDisplay.Immersive ||
+							(format.display === ArticleDisplay.Immersive &&
+								!isFilterSeries) ||
 							isInteractive
 						}
 						hasPageSkinContentSelfConstrain={true}
