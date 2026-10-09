@@ -6,8 +6,8 @@ import { createNodeResolver } from 'eslint-plugin-import-x';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import ssrFriendly from 'eslint-plugin-ssr-friendly';
-import unicorn from 'eslint-plugin-unicorn';
 import { noUnmanagedZIndex } from './scripts/eslint-rules/no-unmanaged-z-index.mjs';
+import { preferNodeProtocol } from './scripts/eslint-rules/prefer-node-protocol.mjs';
 
 const rulesToOverrideGuardianConfig = {
 	// use `string[]` for simple arrays, `Array<string>` for complex ones
@@ -95,14 +95,15 @@ export default defineConfig([
 			local: {
 				rules: {
 					'no-unmanaged-z-index': noUnmanagedZIndex,
+					'prefer-node-protocol': preferNodeProtocol,
 				},
 			},
-			unicorn,
 			'ssr-friendly': ssrFriendly,
 		},
 
 		rules: {
-			'local/no-unmanaged-z-index': 'warn',
+			'local/no-unmanaged-z-index': 'error',
+			'local/prefer-node-protocol': 'error',
 			// React, Hooks & JSX
 			'react-hooks/exhaustive-deps': 'error',
 			'react-hooks/rules-of-hooks': 'error',
@@ -199,8 +200,6 @@ export default defineConfig([
 					allowAny: true,
 				},
 			],
-
-			'unicorn/prefer-node-protocol': 'error',
 
 			'no-restricted-syntax': [
 				'error',
