@@ -53,6 +53,8 @@ export type PuzzlesNewsletter = {
 	frequency: string;
 	description: string;
 	illustrationSquare?: string;
+	/** Link to a recent edition, from the newsletters tool. */
+	exampleUrl?: string;
 };
 
 export type PuzzlePopularityGroup = {
@@ -66,6 +68,12 @@ export type PuzzlesSupportingContent = {
 	newsletter?: PuzzlesNewsletter;
 	popularTitle: string;
 	popularGroups: PuzzlePopularityGroup[];
+};
+
+/** Useful links and newsletter shown above the footer on individual game pages. */
+export type PuzzleGameSupporting = {
+	usefulLinks: PuzzleLink[];
+	newsletter?: PuzzlesNewsletter;
 };
 
 export type PuzzlesLayoutType = {

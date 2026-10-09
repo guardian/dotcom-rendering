@@ -21,6 +21,7 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { Logo } from '../components/Masthead/Titlepiece/Logo';
 import { PrintButton } from '../components/PrintButton.island';
 import { PuzzleIframe } from '../components/PuzzleIframe.island';
+import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
 import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -785,6 +786,17 @@ export const PuzzlePageLayout = ({
 							display={puzzlePageFormat.display}
 						/>
 					</Section>
+				)}
+
+				{isV1Enabled && instance.puzzlesSupporting && (
+					<div data-print-layout="hide">
+						<PuzzlesUsefulLinks
+							id="puzzle-page"
+							title="Useful links"
+							links={instance.puzzlesSupporting.usefulLinks}
+							newsletter={instance.puzzlesSupporting.newsletter}
+						/>
+					</div>
 				)}
 			</main>
 

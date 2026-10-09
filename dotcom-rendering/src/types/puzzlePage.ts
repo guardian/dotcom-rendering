@@ -2,7 +2,7 @@ import type { EditionId } from '../lib/edition';
 import type { ConfigType } from './config';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
-import type { PuzzleItem } from './puzzlesPage';
+import type { PuzzleGameSupporting, PuzzleItem } from './puzzlesPage';
 
 /**
  * The instance-specific data for a single Puzzle Page: the concrete content
@@ -34,6 +34,7 @@ export interface PuzzlePageInstance {
 	 */
 	puzzleDate?: string;
 	moreFromPuzzlesAndGames?: PuzzleItem[];
+	puzzlesSupporting?: PuzzleGameSupporting;
 }
 
 /**
