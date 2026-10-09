@@ -4301,7 +4301,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       ],
       "Properties": {
         "MaxCapacity": 30,
-        "MinCapacity": 3,
+        "MinCapacity": 12,
         "ResourceId": {
           "Fn::Join": [
             "",
