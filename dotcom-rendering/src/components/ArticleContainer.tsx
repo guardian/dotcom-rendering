@@ -55,11 +55,6 @@ const articleWrapper = css`
 	}
 
 	flex-grow: 1;
-
-	/* Due to MainMedia using position: relative, this seems to effect the rendering order
-		To mitigate we use z-index
-		TODO: find a cleaner solution */
-	z-index: 1;
 `;
 
 export const ArticleContainer = ({ children, format }: Props) => {

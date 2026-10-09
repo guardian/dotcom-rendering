@@ -7,13 +7,11 @@ import {
 	type ArticleFormat,
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
-import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 
 const mainMedia = css`
-	position: relative;
 	height: 100%;
 
 	${until.tablet} {
@@ -50,7 +48,6 @@ const immersiveWrapper = css`
         we use this grow here to ensure the content fills the available height
     */
 	flex-grow: 1;
-	z-index: ${getZIndex('mainMedia')};
 	/* Prevent the immersive image 100vh from spilling into main content */
 	overflow: hidden;
 `;
