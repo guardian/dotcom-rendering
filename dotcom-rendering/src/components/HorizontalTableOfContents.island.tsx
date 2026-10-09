@@ -221,14 +221,6 @@ const buttonStyles = css`
 	}
 `;
 
-const prevButtonStyles = css`
-	left: 0;
-`;
-
-const nextButtonStyles = css`
-	right: 0;
-`;
-
 /**
  * A table of contents shown as a sticky, horizontally scrolling bar of the
  * article's sections: the horizontal alternative to the "Jump to" list in
@@ -256,61 +248,68 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 
 		if (sections.length === 0) return;
 
-		const observer = new IntersectionObserver(
-			() => {
-				setCurrentSectionId(
-					getCurrentSectionId(
-						sections.map((section) => ({
-							id: section.id,
-							top: section.getBoundingClientRect().top,
-						})),
-						HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN,
-					),
-				);
-			},
-			{
-				rootMargin: `-${HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN}px 0px 0px 0px`,
-				threshold: 1,
-			},
-		);
+		let frame: number | undefined;
 
-		for (const section of sections) observer.observe(section);
+		const update = () => {
+			frame = undefined;
+			setCurrentSectionId(
+				getCurrentSectionId(
+					sections.map((section) => ({
+						id: section.id,
+						top: section.getBoundingClientRect().top,
+					})),
+					HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN,
+				),
+			);
+		};
 
-		return () => observer.disconnect();
+		const scheduleUpdate = () => {
+			frame ??= window.requestAnimationFrame(update);
+		};
+
+		update();
+		window.addEventListener('scroll', scheduleUpdate, { passive: true });
+		window.addEventListener('resize', scheduleUpdate);
+
+		return () => {
+			window.removeEventListener('scroll', scheduleUpdate);
+			window.removeEventListener('resize', scheduleUpdate);
+			if (frame !== undefined) window.cancelAnimationFrame(frame);
+		};
 	}, [tableOfContents]);
 
-	// Show the fades and arrows while the first or last item is out of view,
-	// so that they stay right however the nav was scrolled: swipe, trackpad,
-	// arrow or focus. The 1px margin absorbs subpixel rounding.
+	// Show the fades and arrows from the nav's real scroll position, so that
+	// they stay right however it was scrolled: swipe, trackpad, arrow or focus.
 	useEffect(() => {
 		const nav = navRef.current;
-		const first = nav?.querySelector('li:first-of-type');
-		const last = nav?.querySelector('li:last-of-type');
-		if (!nav || !first || !last) return;
+		if (!nav) return;
 
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					const isHidden = entry.intersectionRatio < 1;
-					if (entry.target === first) setCanScrollPrev(isHidden);
-					if (entry.target === last) setCanScrollNext(isHidden);
-				}
-			},
-			{ root: nav, rootMargin: '0px 1px', threshold: 1 },
-		);
+		const update = () => {
+			const maxScrollLeft = nav.scrollWidth - nav.clientWidth;
+			setCanScrollPrev(nav.scrollLeft > 1);
+			setCanScrollNext(nav.scrollLeft < maxScrollLeft - 1);
+		};
 
-		observer.observe(first);
-		observer.observe(last);
+		update();
+		nav.addEventListener('scroll', update, { passive: true });
+		window.addEventListener('resize', update);
 
-		return () => observer.disconnect();
-	}, [tableOfContents]);
+		return () => {
+			nav.removeEventListener('scroll', update);
+			window.removeEventListener('resize', update);
+		};
+	}, []);
 
 	// Keep the current section centred in the nav. This scrolls the nav only,
 	// unlike `scrollIntoView`, which would also scroll the page.
 	useEffect(() => {
 		const nav = navRef.current;
-		const link = nav?.querySelector('[aria-current="location"]');
-		if (!nav || !link) return;
+		if (!nav || currentSectionId === undefined) return;
+
+		const link = nav.querySelector<HTMLAnchorElement>(
+			`a[href="#${CSS.escape(currentSectionId)}"]`,
+		);
+		if (!link) return;
 
 		const navRect = nav.getBoundingClientRect();
 		const linkRect = link.getBoundingClientRect();
@@ -350,7 +349,12 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 				// through the links, so the arrows are mouse-only.
 				<button
 					type="button"
-					css={[buttonStyles, prevButtonStyles]}
+					css={[
+						buttonStyles,
+						css`
+							left: 0;
+						`,
+					]}
 					onClick={() => scrollByPage(-1)}
 					tabIndex={-1}
 					aria-hidden="true"
@@ -384,7 +388,12 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 			{canScrollNext && (
 				<button
 					type="button"
-					css={[buttonStyles, nextButtonStyles]}
+					css={[
+						buttonStyles,
+						css`
+							right: 0;
+						`,
+					]}
 					onClick={() => scrollByPage(1)}
 					tabIndex={-1}
 					aria-hidden="true"
