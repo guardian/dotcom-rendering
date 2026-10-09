@@ -5,7 +5,10 @@ import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { CSSProperties } from 'react';
 import type { FEArticle } from '../frontend/feArticle';
-import type { LayoutType } from '../layouts/lib/articleArrangements';
+import {
+	isWeekendRead,
+	type LayoutType,
+} from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -330,8 +333,6 @@ export const ArticleMeta = ({
 
 	const isPictureContent = format.design === ArticleDesign.Picture;
 
-	const isImmersive = format.display === ArticleDisplay.Immersive;
-
 	const isAudio = format.design === ArticleDesign.Audio;
 
 	const seriesTag = getSeriesTag(tags);
@@ -418,7 +419,11 @@ export const ArticleMeta = ({
 								/>
 							)}
 
-							{shouldShowContributor(format, isImmersiveGrid) && (
+							{shouldShowContributor(
+								format,
+								isImmersiveGrid,
+								isWeekendRead(tags),
+							) && (
 								<Contributor
 									byline={byline}
 									tags={tags}
@@ -593,27 +598,28 @@ export const ArticleMeta = ({
 						hidePreferredSourceOnPrint={hidePreferredSourceOnPrint}
 					/>
 				) : null}
-				{isImmersive && mainMediaElements?.[0] && (
-					<Hide until="leftCol">
-						<div
-							css={css`
-								margin-top: ${space[2]}px;
-							`}
-						>
-							<Caption
-								captionText={decideMainMediaCaption(
-									mainMediaElements[0],
-								)}
-								format={format}
-								shouldLimitWidth={false}
-								isLeftCol={true}
-								isMainMedia={true}
-								layoutType={layoutType}
-								mediaType={mediaType}
-							/>
-						</div>
-					</Hide>
-				)}
+				{layoutType === 'immersiveLandscape' &&
+					mainMediaElements?.[0] && (
+						<Hide until="leftCol">
+							<div
+								css={css`
+									margin-top: ${space[2]}px;
+								`}
+							>
+								<Caption
+									captionText={decideMainMediaCaption(
+										mainMediaElements[0],
+									)}
+									format={format}
+									shouldLimitWidth={false}
+									isLeftCol={true}
+									isMainMedia={true}
+									layoutType={layoutType}
+									mediaType={mediaType}
+								/>
+							</div>
+						</Hide>
+					)}
 			</div>
 		</div>
 	);

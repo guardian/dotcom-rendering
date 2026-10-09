@@ -18,7 +18,10 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
-import { type LayoutType } from '../layouts/lib/articleArrangements';
+import {
+	isWeekendRead,
+	type LayoutType,
+} from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
 import {
@@ -532,6 +535,40 @@ export const ArticleHeadline = ({
 }: Props) => {
 	const isInverted = layoutType === 'immersiveLandscape';
 	const isLegacyImmersive = layoutType == null;
+	if (isWeekendRead(tags)) {
+		return (
+			<div
+				css={decideBottomPadding({
+					format,
+					hasAvatar,
+				})}
+			>
+				<WithAgeWarning
+					tags={tags}
+					webPublicationDateDeprecated={webPublicationDateDeprecated}
+					format={format}
+				>
+					<h1
+						css={css`
+							${headlineMedium34}
+							${from.leftCol} {
+								${headlineMedium50}
+							}
+						`}
+					>
+						{headlineString}
+					</h1>
+				</WithAgeWarning>
+				{!!byline && (
+					<HeadlineByline
+						format={format}
+						byline={byline}
+						tags={tags}
+					/>
+				)}
+			</div>
+		);
+	}
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {

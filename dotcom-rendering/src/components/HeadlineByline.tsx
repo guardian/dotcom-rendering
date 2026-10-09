@@ -5,6 +5,8 @@ import {
 	headlineLight34,
 	headlineMedium20,
 	headlineMedium24,
+	headlineMedium34,
+	headlineMedium50,
 	palette,
 	space,
 	textSans20,
@@ -12,6 +14,7 @@ import {
 	textSans34,
 	until,
 } from '@guardian/source/foundations';
+import { isWeekendRead } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -68,6 +71,28 @@ const opinionStyles = (format: ArticleFormat) => css`
 	a {
 		color: inherit;
 		text-decoration: none;
+		:hover {
+			text-decoration: underline;
+		}
+	}
+`;
+
+const weekendReadStyles = css`
+	${headlineMedium34}
+	line-height: 38px;
+	color: ${schemedPalette('--byline-anchor')};
+	font-style: italic;
+
+	${from.leftCol} {
+		${headlineMedium50}
+		line-height: 54px;
+		font-style: italic;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+		font-style: normal;
 		:hover {
 			text-decoration: underline;
 		}
@@ -144,6 +169,26 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	}
 
 	const hasSingleContributor = !!getSoleContributor(tags, byline);
+
+	if (isWeekendRead(tags)) {
+		return (
+			<div
+				css={[
+					opinionWrapperStyles,
+					hasSingleContributor && authorBylineWithImage,
+				]}
+			>
+				<div css={weekendReadStyles}>
+					<BylineLink
+						byline={byline}
+						tags={tags}
+						format={format}
+						isHeadline={true}
+					/>
+				</div>
+			</div>
+		);
+	}
 
 	switch (format.display) {
 		case ArticleDisplay.Immersive:

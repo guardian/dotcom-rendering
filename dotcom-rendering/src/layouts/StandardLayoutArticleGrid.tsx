@@ -46,6 +46,7 @@ import {
 	type Area,
 	getLayoutType,
 	gridItemCss,
+	isWeekendRead,
 	type LayoutType,
 } from './lib/articleArrangements';
 
@@ -64,6 +65,7 @@ const immersiveMediaBelowDesktop = (
 	headlineBackground: string,
 	isMainMediaImage: boolean,
 	hasMinimumImageHeight: boolean,
+	isLandscape: boolean,
 ) => css`
 	${until.tablet} {
 		aspect-ratio: 4 / 5;
@@ -77,31 +79,38 @@ const immersiveMediaBelowDesktop = (
 
 		${!isMainMediaImage && 'overflow: hidden;'}
 
-		&::after {
-			content: '';
-			position: absolute;
-			left: 0;
-			right: 0;
-			bottom: ${hasMinimumImageHeight ? '-1px' : '0'};
-			height: ${hasMinimumImageHeight
-				? '180px'
-				: isMainMediaImage
-					? 'min(20%, calc(200% - 120vw + 30px))'
-					: 'min(60%, 144px)'};
-			z-index: ${getZIndex('mediaOverlay')};
-			background: linear-gradient(
-				to bottom,
-				rgba(0, 0, 0, ${hasMinimumImageHeight ? '0' : '0.08'}),
-				${headlineBackground} ${hasMinimumImageHeight ? '100%' : '72%'}
-			);
-			backdrop-filter: blur(12px);
-			mask-image: linear-gradient(
-				to bottom,
-				transparent ${hasMinimumImageHeight ? '0%' : '40%'},
-				black 60%
-			);
-			pointer-events: none;
-		}
+		${isLandscape &&
+		css`
+			${until.tablet} {
+				aspect-ratio: 4 / 5;
+			}
+			&::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: ${hasMinimumImageHeight ? '-1px' : '0'};
+				height: ${hasMinimumImageHeight
+					? '180px'
+					: isMainMediaImage
+						? 'min(60%, calc(200% - 120vw + 30px))'
+						: 'min(60%, 144px)'};
+				z-index: ${getZIndex('mediaOverlay')};
+				background: linear-gradient(
+					to bottom,
+					rgba(0, 0, 0, ${hasMinimumImageHeight ? '0' : '0.08'}),
+					${headlineBackground}
+						${hasMinimumImageHeight ? '100%' : '72%'}
+				);
+				backdrop-filter: blur(12px);
+				mask-image: linear-gradient(
+					to bottom,
+					transparent ${hasMinimumImageHeight ? '0%' : '40%'},
+					black 60%
+				);
+				pointer-events: none;
+			}
+		`}
 	}
 `;
 
@@ -204,7 +213,6 @@ export const StandardLayoutArticleGrid = ({
 			: undefined;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
-	const isImmersive = format.display === ArticleDisplay.Immersive;
 
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
@@ -224,8 +232,6 @@ export const StandardLayoutArticleGrid = ({
 		mainMediaType ===
 		'model.dotcomrendering.pageElements.MediaAtomBlockElement';
 
-	const hasMinimumImageHeight = isLabs && isImmersive && isMainMediaImage;
-
 	const mainMediaAspectRatio = isMainMediaImage
 		? mainMedia.media.allImages[0]?.fields.aspectRatio
 		: isMainMediaAtom
@@ -242,8 +248,20 @@ export const StandardLayoutArticleGrid = ({
 		? 'auto'
 		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
-	const layoutType = getLayoutType(format, mainMediaOrientation);
+	// If tags includes news/series/the-sunday-read then use immersivePortrait layout, else
+	// use getLayoutType function to determine the layout type based on the format and main media orientation.
+	const layoutType = isWeekendRead(article.tags)
+		? 'immersivePortrait'
+		: getLayoutType(format, mainMediaOrientation);
+
+	getLayoutType(format, mainMediaOrientation);
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
+
+	const isImmersive =
+		layoutType === 'immersivePortrait' ||
+		layoutType === 'immersiveLandscape';
+
+	const hasMinimumImageHeight = isLabs && isImmersive && isMainMediaImage;
 
 	const ageWarning = getAgeWarning(
 		article.tags,
@@ -266,11 +284,18 @@ export const StandardLayoutArticleGrid = ({
 		}
 	`;
 
+	const hideCaptionBeneathMainMedia =
+		layoutType === 'media' ||
+		layoutType === 'immersiveLandscape' ||
+		layoutType === 'immersivePortrait';
+
 	return (
 		<article
 			css={[
 				css`
-					background-color: ${themePalette('--article-background')};
+					background-color: ${isWeekendRead(article.tags)
+						? '#fff4f2'
+						: themePalette('--article-background')};
 				`,
 				grid.container,
 				grid.outerRules(),
@@ -334,13 +359,16 @@ export const StandardLayoutArticleGrid = ({
 
 								${layoutType === 'immersivePortrait' &&
 								css`
-									aspect-ratio: 4/5;
+									${from.desktop} {
+										aspect-ratio: 4/5;
+									}
 								`}
 
 								${immersiveMediaBelowDesktop(
 									headlineBackgroundImmersive,
 									isMainMediaImage,
 									hasMinimumImageHeight,
+									layoutType === 'immersiveLandscape',
 								)}
 
 								${hasMinimumImageHeight &&
@@ -370,39 +398,38 @@ export const StandardLayoutArticleGrid = ({
 						: undefined,
 				]}
 			>
-				<div>
-					<MainMedia
-						format={format}
-						elements={article.mainMediaElements}
-						host={host}
-						pageId={article.pageId}
-						webTitle={article.webTitle}
-						ajaxUrl={article.config.ajaxUrl}
-						switches={article.config.switches}
-						isAdFreeUser={article.isAdFreeUser}
-						isSensitive={article.config.isSensitive}
-						editionId={article.editionId}
-						hideCaption={layoutType === 'media'}
-						shouldHideAds={article.shouldHideAds}
-						contentType={article.contentType}
-						contentLayout={contentLayoutName}
-						articleArrangement={layoutType}
+				<MainMedia
+					format={format}
+					elements={article.mainMediaElements}
+					host={host}
+					pageId={article.pageId}
+					webTitle={article.webTitle}
+					ajaxUrl={article.config.ajaxUrl}
+					switches={article.config.switches}
+					isAdFreeUser={article.isAdFreeUser}
+					isSensitive={article.config.isSensitive}
+					editionId={article.editionId}
+					hideCaption={hideCaptionBeneathMainMedia}
+					shouldHideAds={article.shouldHideAds}
+					contentType={article.contentType}
+					contentLayout={contentLayoutName}
+					articleArrangement={layoutType}
+					tags={article.tags}
+				/>
+				{article.affiliateLinksDisclaimerRequired && (
+					<AffiliateDisclaimer
+						cssOverrides={css`
+							margin: ${space[4]}px 0;
+						`}
 					/>
-					{article.affiliateLinksDisclaimerRequired && (
-						<AffiliateDisclaimer
-							cssOverrides={css`
-								margin: ${space[4]}px 0;
-							`}
-						/>
-					)}
-				</div>
+				)}
 			</GridItem>
 			<GridItem
 				area="title"
 				layoutType={layoutType}
 				element="aside"
 				css={[
-					isImmersive &&
+					layoutType === 'immersiveLandscape' &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 
@@ -412,11 +439,16 @@ export const StandardLayoutArticleGrid = ({
 						`,
 					layoutType === 'immersivePortrait' &&
 						css`
-							align-self: end;
+							align-content: flex-start;
 							margin-bottom: 0;
 
+							${until.desktop} {
+								border-bottom: 1px solid
+									${themePalette('--article-border')};
+							}
+
 							${from.desktop} {
-								margin-bottom: 2px;
+								align-content: flex-end;
 							}
 						`,
 					layoutType === 'picture' &&
@@ -441,7 +473,7 @@ export const StandardLayoutArticleGrid = ({
 				area="headline"
 				layoutType={layoutType}
 				css={[
-					isImmersive &&
+					layoutType === 'immersiveLandscape' &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 
@@ -554,7 +586,7 @@ export const StandardLayoutArticleGrid = ({
 						padding-top: ${space[2]}px;
 					`}
 				>
-					<Hide from="leftCol">
+					{layoutType === 'immersivePortrait' ? (
 						<Caption
 							captionText={captionText}
 							format={format}
@@ -563,7 +595,18 @@ export const StandardLayoutArticleGrid = ({
 							isMainMedia={true}
 							showIconBelowLeftCol={true}
 						/>
-					</Hide>
+					) : (
+						<Hide from="leftCol">
+							<Caption
+								captionText={captionText}
+								format={format}
+								shouldLimitWidth={false}
+								isLeftCol={true}
+								isMainMedia={true}
+								showIconBelowLeftCol={true}
+							/>
+						</Hide>
+					)}
 				</GridItem>
 			)}
 			<GridItem
