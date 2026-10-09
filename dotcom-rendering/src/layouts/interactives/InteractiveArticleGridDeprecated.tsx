@@ -405,15 +405,6 @@ export const InteractiveArticleGridDeprecated = (
 				padSides={false}
 				backgroundColour={themePalette('--article-background')}
 			>
-				<StraightLines
-					count={4}
-					data-print-layout="hide"
-					color={themePalette('--straight-lines')}
-					cssOverrides={css`
-						display: block;
-					`}
-				/>
-
 				{showBodyEndSlot && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<SlotBodyEnd
@@ -433,9 +424,19 @@ export const InteractiveArticleGridDeprecated = (
 								!!article.config.switches.articleEndSlot
 							}
 							isSensitive={article.config.isSensitive}
+							isInInteractive={true}
 						/>
 					</Island>
 				)}
+				<StraightLines
+					count={4}
+					data-print-layout="hide"
+					color={themePalette('--straight-lines')}
+					cssOverrides={css`
+						display: block;
+					`}
+				/>
+
 				<SubMeta
 					format={format}
 					subMetaKeywordLinks={article.subMetaKeywordLinks}
