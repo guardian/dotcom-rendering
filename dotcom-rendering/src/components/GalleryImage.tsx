@@ -49,7 +49,7 @@ const styles = css`
 
 const hostedGalleryOverrides = css`
 	${between.desktop.and.leftCol} {
-		${grid.centreRule(2, 'transparent')}
+		${grid.centreRule(2, { color: 'transparent' })}
 	}
 `;
 

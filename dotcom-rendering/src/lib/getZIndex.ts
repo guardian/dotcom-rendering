@@ -82,6 +82,9 @@ const indices = [
 	// Sticky table of contents element
 	'tableOfContents',
 
+	// Furniture
+	'meta',
+
 	// Body
 	'bodyArea',
 	'rightColumnArea',

@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import { useConfig } from '../components/ConfigContext';
 import { FeastContextualNudge } from '../components/FeastContextualNudge.island';
 import { Island } from '../components/Island';
+import { grid } from '../grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { Switches } from '../types/config';
 import type { FEElement, RecipeBlockElement } from '../types/content';
@@ -66,6 +67,7 @@ type Props = {
 	contributionsServiceUrl: string;
 	shouldHideAds: boolean;
 	idApiUrl?: string;
+	isInDeprecatedInteractiveLayout?: boolean;
 };
 
 export const ArticleRenderer = ({
@@ -89,6 +91,7 @@ export const ArticleRenderer = ({
 	contributionsServiceUrl,
 	shouldHideAds,
 	idApiUrl,
+	isInDeprecatedInteractiveLayout = false,
 }: Props) => {
 	const isSectionedMiniProfilesArticle =
 		elements.filter(
@@ -117,6 +120,9 @@ export const ArticleRenderer = ({
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
 				shouldHideAds={shouldHideAds}
 				idApiUrl={idApiUrl}
+				isInDeprecatedInteractiveLayout={
+					isInDeprecatedInteractiveLayout
+				}
 			/>
 		);
 	});
@@ -240,6 +246,13 @@ export const ArticleRenderer = ({
 	// ^^ Until we decide where to do the "isomorphism split" in this this code is not safe here.
 	//    But should be soon.
 
+	const interactiveLayoutCSS = css`
+		${grid.container}
+		> * {
+			${grid.column.centre}
+		}
+	`;
+
 	return (
 		<div
 			className={[
@@ -248,11 +261,19 @@ export const ArticleRenderer = ({
 
 				// Note, this class MUST be on the *direct parent* of the
 				// elements for some legacy interactive styling to work.
-				format.design === ArticleDesign.Interactive
+				format.design === ArticleDesign.Interactive &&
+				isInDeprecatedInteractiveLayout
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}
-			css={[commercialPosition, spacefinderAdStyles]}
+			// TODO: Conditionally apply grid for interactives?
+			css={[
+				commercialPosition,
+				spacefinderAdStyles,
+				format.design === ArticleDesign.Interactive &&
+					!isInDeprecatedInteractiveLayout &&
+					interactiveLayoutCSS,
+			]}
 		>
 			{renderingTarget === 'Apps'
 				? augmentedElements

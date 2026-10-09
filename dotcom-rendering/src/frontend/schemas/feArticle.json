@@ -58,6 +58,9 @@
         "webPublicationSecondaryDateDisplay": {
             "type": "string"
         },
+        "firstPublicationDate": {
+            "type": "string"
+        },
         "editionLongForm": {
             "type": "string"
         },
