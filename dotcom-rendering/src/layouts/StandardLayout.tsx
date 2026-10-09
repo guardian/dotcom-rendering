@@ -137,6 +137,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={
 							!isLabs &&
+							!isInteractive &&
 							!isWorldCup2026 &&
 							!props.NAV.customSubNav
 						}
@@ -147,7 +148,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							}
 						}
 						showSlimNav={
-							format.display === ArticleDisplay.Immersive
+							format.display === ArticleDisplay.Immersive ||
+							isInteractive
 						}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
