@@ -412,6 +412,66 @@ describe('PuzzlesArchiveCalendar', () => {
 		).not.toBeInTheDocument();
 	});
 
+	it('keeps the latest cards while navigating historical months and returning from cache', async () => {
+		const recentItems = ['2026-10-07', '2026-10-06', '2026-10-05'].map(
+			(date) => ({
+				...archive.items[0]!,
+				date,
+				url: `/latest/${date}`,
+			}),
+		);
+		const initialArchive = { ...archive, recentItems };
+		const previous = {
+			...initialArchive,
+			month: 8,
+			items: [
+				{
+					...archive.items[0]!,
+					date: '2026-08-31',
+					url: '/historical',
+				},
+			],
+		};
+		const fetchMock = jest
+			.fn()
+			.mockResolvedValue({ ok: true, json: async () => previous });
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		const { container } = render(
+			<PuzzlesArchiveCalendar initialArchive={initialArchive} />,
+		);
+		const cardDates = () =>
+			Array.from(container.querySelectorAll('time')).map(
+				(time) => time.dateTime,
+			);
+		expect(cardDates()).toEqual(recentItems.map((item) => item.date));
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+		await screen.findByText('August 2026');
+		expect(screen.getByLabelText('2026-08-31, available')).toHaveAttribute(
+			'href',
+			'/historical',
+		);
+		expect(cardDates()).toEqual(recentItems.map((item) => item.date));
+		fireEvent.click(screen.getByRole('link', { name: 'Next month' }));
+		await screen.findByText('September 2026');
+		expect(cardDates()).toEqual(recentItems.map((item) => item.date));
+		expect(fetchMock).toHaveBeenCalledTimes(1);
+	});
+
+	it('does not replace explicitly empty recent cards with historical items', () => {
+		const { container } = render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{ ...archive, recentItems: [] }}
+			/>,
+		);
+		expect(container.querySelectorAll('time')).toHaveLength(0);
+		expect(
+			screen.getByLabelText('2026-09-02, available'),
+		).toBeInTheDocument();
+	});
+
 	it('loads the previous month without navigating or reloading', async () => {
 		const previous = { ...archive, year: 2026, month: 8, items: [] };
 		const fetchMock = jest.fn().mockResolvedValue({
@@ -509,6 +569,14 @@ describe('PuzzlesArchiveCalendar', () => {
 			...initialArchive,
 			selectedPuzzle: otherPuzzle,
 			items: [],
+			recentItems: [
+				{
+					...archive.items[0]!,
+					puzzleType: 'SUDOKU_MEDIUM',
+					date: '2026-10-07',
+					url: '/puzzles-and-games/logic-puzzles/sudoku-medium/2026-10-07',
+				},
+			],
 		};
 		const fetchMock = jest.fn().mockResolvedValue({
 			ok: true,
@@ -541,6 +609,12 @@ describe('PuzzlesArchiveCalendar', () => {
 			'',
 			expect.stringContaining('puzzle=sudoku-medium'),
 		);
+		expect(
+			screen.getByRole('link', { name: /Latest Medium sudoku/ }),
+		).toHaveAttribute('href', selectedArchive.recentItems[0]!.url);
+		expect(
+			screen.queryByRole('link', { name: /Latest Easy sudoku/ }),
+		).not.toBeInTheDocument();
 
 		pushState.mockRestore();
 		Reflect.deleteProperty(global, 'fetch');
