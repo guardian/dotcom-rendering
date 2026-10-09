@@ -350,6 +350,19 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "thefilter-live-pricing",
+		description:
+			"Testing the impact of enable live price updates on The Filter products buttons and elements",
+		owners: ["thefilter.dev@guardian.co.uk"],
+		// TBD
+		expirationDate: "2026-12-07",
+		type: "server",
+		status: "OFF",
+		audienceSize: 0,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");

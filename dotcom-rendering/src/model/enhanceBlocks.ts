@@ -23,6 +23,7 @@ import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceProductSummary } from './enhance-product-summary';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceGuVideos } from './enhance-videos';
+import { enhanceLinkBlock } from './enhanceLinkBlock';
 import { enhanceLists } from './enhanceLists';
 import { enhanceProductElement } from './enhanceProductElement';
 import { enhanceTimeline } from './enhanceTimeline';
@@ -77,6 +78,12 @@ export const enhanceElements =
 			enhanceTimeline(enhanceElements(format, blockId, options, true)),
 			enhanceProductElement(
 				enhanceElements(format, blockId, options, true),
+				options.serverSideABTests?.['thefilter-live-pricing'] ===
+					'variant',
+			),
+			enhanceLinkBlock(
+				options.serverSideABTests?.['thefilter-live-pricing'] ===
+					'variant',
 			),
 			enhanceDividers,
 			enhanceH2s,

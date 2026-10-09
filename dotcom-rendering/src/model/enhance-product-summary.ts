@@ -29,16 +29,16 @@ const getSummaryProducts = (
 
 export const enhanceProductSummary = (elements: FEElement[]): FEElement[] =>
 	elements.map<FEElement>((element) => {
-		switch (element._type) {
-			case 'model.dotcomrendering.pageElements.ProductSummaryBlockElement': {
-				return {
-					...element,
-					_type: 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement',
-					products: getSummaryProducts(elements, element.products),
-				};
-			}
-
-			default:
-				return element;
+		if (
+			element._type ===
+			'model.dotcomrendering.pageElements.ProductSummaryBlockElement'
+		) {
+			return {
+				...element,
+				_type: 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement',
+				products: getSummaryProducts(elements, element.products),
+			};
 		}
+
+		return element;
 	});
