@@ -106,6 +106,10 @@ const paddedContainer = `
  *     ${grid.centreRule(3)}
  *   }
  * `
+ *
+ * The clip option provides an alternative to paint as interactive atoms like scrollies
+ * don't work well with `contain: paint`. The CSS property anchor() looks like a long-term
+ * solution for this issue in the future once browser support is more widespread.
  */
 const centreRule = (
 	n: number,

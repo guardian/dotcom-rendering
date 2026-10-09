@@ -594,7 +594,7 @@ export const StandardLayoutArticleGrid = ({
 						`,
 					layoutType === 'interactive' &&
 						css`
-							z-index: 10;
+							z-index: ${getZIndex('meta')};
 						`,
 				]}
 			>

@@ -37,11 +37,9 @@ export type Props = WebProps | AppProps;
  * Guards the new grid-based immersive layout for all Guardian articles
  * behind a 0% a/b test
  */
-export const REVAMPED_IMMERSIVE_LAYOUT_AB_TEST =
-	'articles-and-publishing-revamped-immersive-layout';
 const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
 	article.frontendData.config.serverSideABTests[
-		REVAMPED_IMMERSIVE_LAYOUT_AB_TEST
+		'articles-and-publishing-revamped-immersive-layout'
 	] === 'enable';
 
 /**
