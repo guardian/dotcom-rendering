@@ -143,6 +143,13 @@ const headlineFont = (format: ArticleFormat) => {
 	`;
 };
 
+const weekendReadFont = css`
+	${headlineMedium34}
+	${from.leftCol} {
+		${headlineMedium50}
+	}
+`;
+
 const invertedFontLineHeight = css`
 	line-height: 2.1875rem;
 
@@ -537,27 +544,13 @@ export const ArticleHeadline = ({
 	const isLegacyImmersive = layoutType == null;
 	if (isWeekendRead(tags)) {
 		return (
-			<div
-				css={decideBottomPadding({
-					format,
-					hasAvatar,
-				})}
-			>
+			<div css={decideBottomPadding({ format, hasAvatar })}>
 				<WithAgeWarning
 					tags={tags}
 					webPublicationDateDeprecated={webPublicationDateDeprecated}
 					format={format}
 				>
-					<h1
-						css={css`
-							${headlineMedium34}
-							${from.leftCol} {
-								${headlineMedium50}
-							}
-						`}
-					>
-						{headlineString}
-					</h1>
+					<h1 css={weekendReadFont}>{headlineString}</h1>
 				</WithAgeWarning>
 				{!!byline && (
 					<HeadlineByline
