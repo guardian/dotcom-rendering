@@ -12,6 +12,7 @@ export interface CustomSubnavLink {
 
 export interface CustomSubnavHeader {
 	headerText: string;
+	showHeaderText: boolean;
 	dotcomPath?: string;
 	copy: string;
 }

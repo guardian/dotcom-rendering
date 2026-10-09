@@ -41,6 +41,7 @@ const subNavStyles = css`
 	${from.mobileMedium} {
 		margin-top: ${space[3]}px;
 	}
+
 	${from.tablet} {
 		min-height: 30px;
 	}
@@ -61,9 +62,11 @@ const articleContainerStyles = css`
 	${from.mobileMedium} {
 		min-height: 40px;
 	}
+
 	${from.tablet} {
 		min-height: 42px;
 	}
+
 	${from.leftCol} {
 		min-height: 44px;
 	}
@@ -80,6 +83,7 @@ const articleSubNavStyles = css`
 	${from.mobileMedium} {
 		margin-top: 0;
 	}
+
 	${from.leftCol} {
 		margin-top: 0;
 	}
@@ -152,6 +156,7 @@ const imageListStyles = css`
 	${from.mobileLandscape} {
 		padding: 0 ${space[5]}px;
 	}
+
 	${from.tablet} {
 		min-height: 30px;
 	}
@@ -283,6 +288,15 @@ const frontContainerStyles = css`
 	color: ${themePalette('--masthead-nav-link-text')};
 `;
 
+const CustomHeader = (
+	customSubNav: CustomSubnav,
+	cssOverrides: SerializedStyles | undefined,
+) => {
+	return customSubNav.header.showHeaderText ? (
+		<HeaderText header={customSubNav.header} cssOverrides={cssOverrides} />
+	) : undefined;
+};
+
 /**
  * Renders a custom subnav (header + links, images and further data to follow) assigned to fronts or articles.
  */
@@ -333,10 +347,7 @@ export const CustomSubNav = ({
 						images={webImages}
 						headerText={customSubNav.header.headerText}
 					/>
-					<HeaderText
-						header={customSubNav.header}
-						cssOverrides={imageHeaderTextStyles}
-					/>
+					{CustomHeader(customSubNav, imageHeaderTextStyles)}
 				</div>
 				<ul
 					css={[imageListStyles, scrollableSubNavStyles]}
@@ -358,10 +369,10 @@ export const CustomSubNav = ({
 			data-rendering-page={renderingPage}
 			css={isArticle ? articleContainerStyles : frontContainerStyles}
 		>
-			<HeaderText
-				header={customSubNav.header}
-				cssOverrides={isArticle ? articleHeaderStyles : undefined}
-			/>
+			{CustomHeader(
+				customSubNav,
+				isArticle ? articleHeaderStyles : undefined,
+			)}
 			<ul
 				css={[
 					subNavStyles,
