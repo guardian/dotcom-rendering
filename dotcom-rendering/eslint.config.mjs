@@ -5,7 +5,6 @@ import customElements from 'eslint-plugin-custom-elements';
 import { createNodeResolver } from 'eslint-plugin-import-x';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-import ssrFriendly from 'eslint-plugin-ssr-friendly';
 import unicorn from 'eslint-plugin-unicorn';
 import { noUnmanagedZIndex } from './scripts/eslint-rules/no-unmanaged-z-index.mjs';
 
@@ -98,7 +97,6 @@ export default defineConfig([
 				},
 			},
 			unicorn,
-			'ssr-friendly': ssrFriendly,
 		},
 
 		rules: {
@@ -320,14 +318,6 @@ export default defineConfig([
 		rules: {
 			'import/prefer-default-export': 'off',
 			'import/no-default-export': 'off',
-		},
-	},
-	{
-		files: ['src/client/**/*.ts'],
-
-		rules: {
-			// the modules in the src/client/ directory are meant to run in a browser
-			'ssr-friendly/no-dom-globals-in-module-scope': 'off',
 		},
 	},
 	globalIgnores([
