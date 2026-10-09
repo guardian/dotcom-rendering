@@ -66,34 +66,18 @@ describe('PuzzlesDirectory', () => {
 		).toBeInTheDocument();
 	});
 
-	it('keeps the crossword sidebar links hidden below leftCol and scoped to crosswords', () => {
+	it('does not render sidebar links in the crosswords container', () => {
 		const { container } = render(
 			<PuzzlesDirectory
 				layout={{
 					containers: [
 						section({ id: 'crosswords', title: 'Crosswords' }),
-						section({
-							id: 'logic-puzzles',
-							title: 'Logic puzzles',
-						}),
 					],
 				}}
 				renderAds={false}
 			/>,
 		);
-		const links = container.querySelector(
-			'nav[aria-label="Crossword links"]',
-		)!;
-		expect(links).not.toBeVisible();
-		expect(
-			links.querySelector('a[href="https://support.theguardian.com"]'),
-		).toHaveTextContent('Support the Guardian');
-		expect(
-			links.querySelector(
-				'a[href="https://www.theguardian.com/crosswords/crossword-blog"]',
-			),
-		).toHaveTextContent('Blog');
-		expect(container.querySelector('#logic-puzzles nav')).toBeNull();
+		expect(container.querySelector('#crosswords nav')).toBeNull();
 	});
 	it.each([
 		['crossword', '#fff4f2', '#ab0613'],

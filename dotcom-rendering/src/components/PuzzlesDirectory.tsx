@@ -4,14 +4,13 @@ import {
 	headlineBold24,
 	headlineBold28,
 	palette,
-	textSans14,
 } from '@guardian/source/foundations';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import type { PuzzleContainer, PuzzlesLayoutType } from '../types/puzzlesPage';
 import { AdSlot } from './AdSlot.web';
 import { Island } from './Island';
-import { externalProps, getPuzzleUrl, Rows } from './PuzzleCard';
+import { getPuzzleUrl, Rows } from './PuzzleCard';
 import { PuzzlesArchiveMenu } from './PuzzlesArchiveMenu.island';
 import { PuzzlesSupporting } from './PuzzlesSupporting';
 
@@ -78,6 +77,11 @@ const titleStyles = css`
 		${headlineBold28};
 	}
 
+	${from.desktop} {
+		/* Include the 1px side border in the 20px inset, as the cards do. */
+		padding-left: 19px;
+	}
+
 	${from.leftCol} {
 		padding-top: var(--puzzles-content-top);
 	}
@@ -98,34 +102,6 @@ const headingColumnStyles = css`
 			content: '';
 			pointer-events: none;
 		}
-	}
-`;
-
-const crosswordLinksStyles = css`
-	display: none;
-	${from.leftCol} {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-		margin-top: auto;
-		padding: 0 20px 24px;
-	}
-	a {
-		min-height: 24px;
-		padding: 4px 8px;
-		border-top: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
-		border-left: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
-		color: var(--puzzles-text-colour, ${palette.neutral[7]});
-		text-decoration: none;
-		${textSans14};
-	}
-	a:hover {
-		text-decoration: underline;
-	}
-	a:focus-visible {
-		outline: 3px solid ${palette.brand[500]};
 	}
 `;
 
@@ -260,29 +236,6 @@ const DirectorySection = ({ container }: { container: PuzzleContainer }) => {
 				<h2 css={titleStyles} id={`${container.id}-title`}>
 					{container.title}
 				</h2>
-				{container.id === 'crosswords' && (
-					<nav
-						css={crosswordLinksStyles}
-						aria-label="Crossword links"
-					>
-						<a
-							href="https://support.theguardian.com"
-							{...externalProps(
-								'https://support.theguardian.com',
-							)}
-						>
-							Support the Guardian
-						</a>
-						<a
-							href="https://www.theguardian.com/crosswords/crossword-blog"
-							{...externalProps(
-								'https://www.theguardian.com/crosswords/crossword-blog',
-							)}
-						>
-							Blog
-						</a>
-					</nav>
-				)}
 			</div>
 			<div css={contentStyles}>
 				<Rows

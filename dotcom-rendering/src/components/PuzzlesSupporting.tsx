@@ -66,6 +66,11 @@ const sectionTitleStyles = css`
 		${headlineBold28};
 	}
 
+	${from.desktop} {
+		/* Include the 1px side border in the 20px inset. */
+		padding-left: 19px;
+	}
+
 	${from.leftCol} {
 		padding-top: ${space[2]}px;
 		border-right: 1px solid ${borderColour};
@@ -100,6 +105,20 @@ const usefulLinkStyles = css`
 	color: var(--puzzles-text-colour, ${palette.neutral[7]});
 	text-decoration: none;
 	${headlineMedium20};
+
+	/* Align the first link with the container title and the cards above. */
+	:first-of-type {
+		padding-left: 10px;
+		${from.mobileMedium} {
+			padding-left: 20px;
+		}
+		${from.desktop} {
+			padding-left: 19px;
+		}
+		${from.leftCol} {
+			padding-left: 9px;
+		}
+	}
 
 	:hover {
 		text-decoration: underline;

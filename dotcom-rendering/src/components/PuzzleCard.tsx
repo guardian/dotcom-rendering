@@ -162,14 +162,12 @@ const hiddenCrosswordSuffixStyles = css`
 `;
 
 const cadenceStyles = css`
-	margin-top: ${space[1]}px;
 	color: var(--puzzles-card-cadence-colour, ${palette.neutral[7]});
 	${textSans14};
 	line-height: 1.3;
 `;
 
 const setterStyles = css`
-	margin-top: ${space[1]}px;
 	color: var(--puzzles-card-text-colour, ${palette.news[300]});
 	${textSans14};
 	line-height: 1.3;
