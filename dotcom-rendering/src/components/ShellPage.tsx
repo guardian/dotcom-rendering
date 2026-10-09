@@ -82,7 +82,6 @@ export const ShellPage = (props: Props) => {
 							commercialMetricsEnabled={
 								!!config.switches.commercialMetrics
 							}
-							tests={config.abTests}
 						/>
 					</Island>
 					<Island priority="critical">
