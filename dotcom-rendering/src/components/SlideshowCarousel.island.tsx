@@ -16,10 +16,43 @@ import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { takeFirst } from '../lib/tuple';
 import { palette } from '../palette';
-import type { DCRSlideshowImage } from '../types/front';
+import type { DCRSlideshowMedia } from '../types/front';
 import type { MediaSizeType } from './Card/components/MediaWrapper';
 import { CardPicture } from './CardPicture';
 import { SlideshowCarouselScrollingDots } from './SlideshowCarouselScrollingDots';
+
+/**
+ * TEMPORARY SPIKE HACK — remove before merging.
+ *
+ * A hardcoded video slide so we can see what mixed media feels like on a real
+ * front locally. It gets injected as the third slide in every slideshow (see
+ * where `SPIKE_VIDEO_SLIDE` is spliced into the slides array below).
+ *
+ * This is the same asset used in the Storybook stories.
+ */
+const SPIKE_VIDEO_SLIDE: DCRSlideshowMedia = {
+	type: 'video',
+	videoSrc:
+		'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+	posterSrc:
+		'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+	caption: 'A self-hosted looping video slide (spike)',
+};
+
+/**
+ * Spike helpers for supporting mixed media (images and videos) in a slideshow.
+ * A slide is treated as an image unless it is explicitly typed as a video.
+ */
+const isVideoSlide = (
+	slide: DCRSlideshowMedia,
+): slide is Extract<DCRSlideshowMedia, { type: 'video' }> =>
+	slide.type === 'video';
+
+const getSlideKey = (slide: DCRSlideshowMedia): string =>
+	isVideoSlide(slide) ? slide.videoSrc : slide.imageSrc;
+
+const getSlideCaption = (slide: DCRSlideshowMedia): string | undefined =>
+	isVideoSlide(slide) ? slide.caption : slide.imageCaption;
 
 const themeButton: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border'),
@@ -118,8 +151,19 @@ const mediaOverlayStyles = css`
 	width: 100%;
 `;
 
+const videoStyles = css`
+	display: block;
+	width: 100%;
+	aspect-ratio: 5 / 4;
+	object-fit: cover;
+`;
+
 type Props = {
-	images: readonly DCRSlideshowImage[];
+	/**
+	 * Slides may be images or videos. The prop retains the `images` name for
+	 * backwards compatibility while we spike mixed-media slideshows.
+	 */
+	images: readonly DCRSlideshowMedia[];
 	imageSize: MediaSizeType;
 	hasNavigationBackgroundColour: boolean;
 	linkTo: string;
@@ -212,10 +256,23 @@ export const SlideshowCarousel = ({
 	}, []);
 
 	/**
-	 * Restrict slideshow to a maximum of 10 images
+	 * Restrict slideshow to a maximum of 10 slides
 	 */
-	const slideshowImages = takeFirst(images, 10);
-	const slideshowImageCount = slideshowImages.length;
+	const passedSlides = takeFirst(images, 10);
+
+	/**
+	 * TEMPORARY SPIKE HACK — remove before merging.
+	 *
+	 * Inject the hardcoded video slide as the third slide (index 2) so we can
+	 * preview mixed media on a real front. Falls back to appending if there are
+	 * fewer than two passed slides.
+	 */
+	const slides: readonly DCRSlideshowMedia[] = [
+		...passedSlides.slice(0, 2),
+		SPIKE_VIDEO_SLIDE,
+		...passedSlides.slice(2),
+	];
+	const slideCount = slides.length;
 
 	return (
 		<div
@@ -235,28 +292,52 @@ export const SlideshowCarousel = ({
 					css={carouselStyles}
 					data-heatphan-type="carousel"
 				>
-					{slideshowImages.map((image, index) => {
+					{slides.map((slide, index) => {
 						const loading = index > 0 ? 'lazy' : 'eager';
+						const caption = getSlideCaption(slide);
 						return (
 							<li
 								css={carouselItemStyles}
-								key={image.imageSrc}
+								key={getSlideKey(slide)}
 								role="group"
 								aria-roledescription="slide"
-								aria-label={image.imageCaption}
+								aria-label={caption}
 								aria-hidden={index !== currentPage}
 							>
 								<figure>
-									<CardPicture
-										mainImage={image.imageSrc}
-										imageSize={imageSize}
-										aspectRatio="5:4"
-										alt={image.imageCaption}
-										loading={loading}
-									/>
-									{!!image.imageCaption && (
+									{isVideoSlide(slide) ? (
+										<video
+											css={videoStyles}
+											poster={slide.posterSrc}
+											autoPlay={true}
+											muted={true}
+											loop={true}
+											playsInline={true}
+											preload={
+												index > 0 ? 'none' : 'metadata'
+											}
+											aria-label={caption}
+										>
+											<source
+												src={slide.videoSrc}
+												type={
+													slide.mimeType ??
+													'video/mp4'
+												}
+											/>
+										</video>
+									) : (
+										<CardPicture
+											mainImage={slide.imageSrc}
+											imageSize={imageSize}
+											aspectRatio="5:4"
+											alt={caption}
+											loading={loading}
+										/>
+									)}
+									{!!caption && (
 										<figcaption css={captionStyles}>
-											{image.imageCaption}
+											{caption}
 										</figcaption>
 									)}
 								</figure>
@@ -270,7 +351,7 @@ export const SlideshowCarousel = ({
 				</ul>
 			</a>
 
-			{slideshowImageCount > 1 && (
+			{slideCount > 1 && (
 				<div
 					className="slideshow-carousel-footer"
 					css={navigationStyles(hasNavigationBackgroundColour)}
@@ -279,7 +360,7 @@ export const SlideshowCarousel = ({
 				>
 					<div css={scrollingDotStyles}>
 						<SlideshowCarouselScrollingDots
-							total={slideshowImageCount}
+							total={slideCount}
 							current={currentPage}
 						/>
 					</div>
@@ -297,7 +378,7 @@ export const SlideshowCarousel = ({
 							}
 							size="small"
 							disabled={!previousButtonEnabled}
-							aria-label="Previous image"
+							aria-label="Previous slide"
 							// TODO: data-link-name="slideshow carousel left chevron"
 						/>
 
@@ -314,7 +395,7 @@ export const SlideshowCarousel = ({
 							}
 							size="small"
 							disabled={!nextButtonEnabled}
-							aria-label="Next image"
+							aria-label="Next slide"
 							// TODO: data-link-name="slideshow carousel right chevron"
 						/>
 					</div>
