@@ -109,7 +109,7 @@ export const ArticleTitle = ({
 				isMatch={isMatch}
 			/>
 		</div>
-		{isWeekendRead(tags) && (
+		{layoutType === 'immersivePortrait' && isWeekendRead(tags) && (
 			<img
 				src="https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/book.gif"
 				alt="Book"

@@ -542,7 +542,7 @@ export const ArticleHeadline = ({
 }: Props) => {
 	const isInverted = layoutType === 'immersiveLandscape';
 	const isLegacyImmersive = layoutType == null;
-	if (isWeekendRead(tags)) {
+	if (layoutType === 'immersivePortrait' && isWeekendRead(tags)) {
 		return (
 			<div css={decideBottomPadding({ format, hasAvatar })}>
 				<WithAgeWarning
@@ -557,6 +557,7 @@ export const ArticleHeadline = ({
 						format={format}
 						byline={byline}
 						tags={tags}
+						layoutType={layoutType}
 					/>
 				)}
 			</div>

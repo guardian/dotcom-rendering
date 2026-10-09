@@ -40,7 +40,7 @@ export const shouldShowContributor = (
 ): boolean => {
 	if (
 		(format.display === ArticleDisplay.Immersive && !isImmersiveGrid) ||
-		isWeekendRead
+		(isWeekendRead && isImmersiveGrid)
 	) {
 		return false;
 	}

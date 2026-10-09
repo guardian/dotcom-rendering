@@ -422,7 +422,8 @@ export const ArticleMeta = ({
 							{shouldShowContributor(
 								format,
 								isImmersiveGrid,
-								isWeekendRead(tags),
+								layoutType === 'immersivePortrait' &&
+									isWeekendRead(tags),
 							) && (
 								<Contributor
 									byline={byline}

@@ -14,7 +14,10 @@ import {
 	textSans34,
 	until,
 } from '@guardian/source/foundations';
-import { isWeekendRead } from '../layouts/lib/articleArrangements';
+import {
+	isWeekendRead,
+	type LayoutType,
+} from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -160,16 +163,17 @@ type Props = {
 	format: ArticleFormat;
 	byline: string;
 	tags: TagType[];
+	layoutType?: LayoutType;
 };
 
-export const HeadlineByline = ({ format, byline, tags }: Props) => {
+export const HeadlineByline = ({ format, byline, tags, layoutType }: Props) => {
 	if (byline === '') {
 		return null;
 	}
 
 	const hasSingleContributor = !!getSoleContributor(tags, byline);
 
-	if (isWeekendRead(tags)) {
+	if (layoutType === 'immersivePortrait' && isWeekendRead(tags)) {
 		return (
 			<div
 				css={[

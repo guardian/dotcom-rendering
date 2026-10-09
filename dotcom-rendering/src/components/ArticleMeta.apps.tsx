@@ -338,7 +338,8 @@ export const ArticleMetaApps = ({
 					{shouldShowContributor(
 						format,
 						isImmersiveGrid,
-						isWeekendRead(tags),
+						layoutType === 'immersivePortrait' &&
+							isWeekendRead(tags),
 					) &&
 						!!byline && (
 							<Contributor
