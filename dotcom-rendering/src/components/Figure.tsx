@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
 import { breakpoints, from, space, until } from '@guardian/source/foundations';
-import type { LayoutType } from '../layouts/lib/articleArrangements';
+import {
+	isWeekendRead,
+	type LayoutType,
+} from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -8,6 +11,7 @@ import {
 } from '../lib/articleFormat';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import type { FEElement, RoleType } from '../types/content';
+import type { TagType } from '../types/tag';
 import { minHeaderHeightPx } from './Masthead/Titlepiece/constants';
 
 type Props = {
@@ -21,6 +25,7 @@ type Props = {
 	isTimeline?: boolean;
 	isInDeprecatedInteractiveLayout?: boolean;
 	articleArrangement?: LayoutType;
+	tags?: TagType[];
 };
 
 const roleCss = {
@@ -306,6 +311,7 @@ export const Figure = ({
 	isTimeline = false,
 	isInDeprecatedInteractiveLayout = false,
 	articleArrangement,
+	tags,
 }: Props) => {
 	if (isMainMedia && !isTimeline) {
 		// Don't add in-body styles for main media elements
@@ -317,10 +323,33 @@ export const Figure = ({
 			<figure
 				id={id}
 				key={id}
-				css={mainMediaFigureStyles(
-					articleArrangement === 'immersiveLandscape',
-					format.theme === ArticleSpecial.Labs,
-				)}
+				css={[
+					mainMediaFigureStyles(
+						articleArrangement === 'immersiveLandscape',
+						format.theme === ArticleSpecial.Labs,
+					),
+					articleArrangement === 'immersivePortrait' &&
+						tags &&
+						isWeekendRead(tags) &&
+						css`
+							position: relative;
+							padding: 10px;
+							${from.wide} {
+								padding: 15px;
+							}
+							::before {
+								content: '';
+								display: block;
+								background-image: url('https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/frame.png');
+								background-size: contain;
+								background-position: center;
+								background-repeat: no-repeat;
+								position: absolute;
+								inset: 0;
+								pointer-events: none;
+							}
+						`,
+				]}
 			>
 				{children}
 			</figure>

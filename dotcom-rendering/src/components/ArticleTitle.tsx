@@ -1,7 +1,10 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
-import type { LayoutType } from '../layouts/lib/articleArrangements';
+import {
+	isWeekendRead,
+	type LayoutType,
+} from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -79,6 +82,12 @@ export const ArticleTitle = ({
 				format.design,
 			) && galleryStyles,
 			sectionStyles,
+			layoutType === 'immersivePortrait' &&
+				isWeekendRead(tags) &&
+				css`
+					position: relative;
+					min-height: 71px;
+				`,
 		]}
 	>
 		<div
@@ -100,5 +109,22 @@ export const ArticleTitle = ({
 				isMatch={isMatch}
 			/>
 		</div>
+		{layoutType === 'immersivePortrait' && isWeekendRead(tags) && (
+			<img
+				src="https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/book.gif"
+				alt="Book"
+				css={css`
+					position: absolute;
+					right: 0;
+					bottom: 0;
+					width: 70px;
+					height: 70px;
+					${from.leftCol} {
+						width: 110px;
+						height: 110px;
+					}
+				`}
+			/>
+		)}
 	</div>
 );

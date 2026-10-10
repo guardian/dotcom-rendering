@@ -11,6 +11,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
+import type { TagType } from '../types/tag';
 
 const mainMedia = css`
 	position: relative;
@@ -105,6 +106,7 @@ type Props = {
 	contentType?: string;
 	contentLayout?: string;
 	articleArrangement?: LayoutType;
+	tags?: TagType[];
 };
 
 export const MainMedia = ({
@@ -123,6 +125,7 @@ export const MainMedia = ({
 	contentType,
 	contentLayout,
 	articleArrangement,
+	tags,
 }: Props) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
@@ -146,6 +149,7 @@ export const MainMedia = ({
 					contentType={contentType}
 					contentLayout={contentLayout}
 					articleArrangement={articleArrangement}
+					tags={tags}
 				/>
 			))}
 		</div>

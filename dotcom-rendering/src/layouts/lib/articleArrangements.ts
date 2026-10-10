@@ -278,18 +278,19 @@ const interactiveCss: LayoutCssMap = {
 
 const immersivePortraitCss: LayoutCssMap = {
 	title: {
-		belowDesktop: `${grid.column.all} grid-row: 2;`,
+		belowDesktop: 'grid-row: 1;',
 		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
-		leftCol: `grid-row: 1; ${grid.between('left-column-start', 9)};`,
+		leftCol: `${grid.between('left-column-start', 9)};`,
+		wide: `${grid.between('left-column-start', 10)};`,
 	},
 	headline: {
-		belowDesktop: `${grid.column.all} grid-row: 3;`,
+		belowDesktop: 'grid-row: 2;',
 		desktop: `grid-row: 2; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 2; ${grid.between('left-column-start', 9)};`,
 		wide: `grid-row: 2; ${grid.between('left-column-start', 10)};`,
 	},
 	media: {
-		belowDesktop: `${grid.column.all} grid-row: 1 / span 2;`,
+		belowDesktop: 'grid-row: 3;',
 		desktop: `grid-row: 1 / span 4; ${grid.between(8, 'right-column-end')};`,
 		leftCol: `grid-row: 1 / span 3; ${grid.between(9, 'right-column-end')};`,
 		wide: `grid-row: 1 / span 3; ${grid.between(10, 'right-column-end')};`,
@@ -303,6 +304,7 @@ const immersivePortraitCss: LayoutCssMap = {
 	caption: {
 		belowDesktop: 'grid-row: 5;',
 		desktop: `grid-row: 5;`,
+		leftCol: `grid-row: 4; ${grid.column.left};`,
 	},
 	meta: {
 		belowDesktop: 'grid-row: 6;',
@@ -440,3 +442,11 @@ export const getLayoutType = (
 	if (format.design === ArticleDesign.Interactive) return 'interactive';
 	return 'standard';
 };
+
+export const isWeekendRead = (tags: { id: string }[]): boolean =>
+	tags.some((tag) =>
+		[
+			'news/series/the-saturday-read',
+			'news/series/the-sunday-read',
+		].includes(tag.id),
+	);
