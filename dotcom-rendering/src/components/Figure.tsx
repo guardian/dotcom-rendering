@@ -284,7 +284,7 @@ const mainMediaFigureStyles = (
 		height: 100%;
 		${isImmersiveLandscape &&
 		css`
-			${from.desktop} {
+			${from.tablet} {
 				height: calc(100vh - ${navAndLabsHeaderHeight});
 				min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
 			}
