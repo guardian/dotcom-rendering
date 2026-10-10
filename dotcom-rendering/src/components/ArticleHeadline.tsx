@@ -271,21 +271,27 @@ const darkBackground = css`
 `;
 
 const immersiveDarkBackground = css`
-	background-color: ${themePalette('--headline-background-immersive')};
-	${from.desktop} {
+	${from.tablet} {
+		background-color: ${themePalette('--headline-background-immersive')};
+	}
+	${from.tablet} {
 		padding-bottom: ${space[6]}px;
 	}
 `;
 
 const invertedText = css`
 	color: white;
-	background-color: black;
 	white-space: pre-wrap;
 	padding-bottom: ${space[1]}px;
 	padding-left: 12px;
 	padding-right: 18px;
 
-	${from.desktop} {
+	${from.tablet} {
+		margin-left: -20px;
+		padding-left: 20px;
+	}
+
+	${from.leftCol} {
 		margin-left: -10px;
 		padding-left: 10px;
 		padding-right: ${space[1]}px;
@@ -427,7 +433,10 @@ const WithAgeWarning = ({
 							`,
 						snapToInverted && !isLegacyImmersive
 							? css`
-									${from.desktop} {
+									${from.tablet} {
+										margin-left: -20px;
+									}
+									${from.leftCol} {
 										margin-left: -10px;
 									}
 								`

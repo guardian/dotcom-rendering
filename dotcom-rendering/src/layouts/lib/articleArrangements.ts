@@ -321,34 +321,38 @@ const immersivePortraitCss: LayoutCssMap = {
 
 const immersiveLandscapeCss: LayoutCssMap = {
 	title: {
-		belowDesktop: `${grid.column.all} grid-row: 2; align-self: end;`,
+		mobile: `${grid.column.all} grid-row: 2; align-self: end;`,
+		tablet: `grid-row: 2; ${grid.between('centre-column-start', 'centre-column-end')};`,
 		desktop: 'grid-row: 2;',
 	},
 	headline: {
-		belowDesktop: `${grid.column.all} grid-row: 3;`,
+		mobile: `${grid.column.all} grid-row: 3;`,
+		tablet: `grid-row: 3 / span 2; ${grid.between('centre-column-start', 'centre-column-end')};`,
 		desktop: 'grid-row: 3 / span 2;',
 		wide: `${grid.between('centre-column-start', 14)};`,
 	},
 	media: {
-		belowDesktop: `${grid.column.all} grid-row: 1 / span 2;`,
+		mobile: `${grid.column.all} grid-row: 1 / span 3;`,
+		tablet: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'centre-column-end')};`,
 		desktop: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'right-column-end')};`,
 		leftCol: `grid-row: 1 / span 3; ${grid.between('left-column-start', 'right-column-end')};`,
 	},
 	standfirst: {
-		belowDesktop: 'grid-row: 4;',
-		desktop: 'grid-row: 5;',
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 5;',
 	},
 	caption: {
-		belowDesktop: 'grid-row: 5;',
-		desktop: 'grid-row: 6;',
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 6;',
 	},
 	meta: {
-		belowDesktop: 'grid-row: 6;',
-		desktop: `grid-row: 7;`,
+		mobile: 'grid-row: 6;',
+		tablet: `grid-row: 7;`,
 		leftCol: `grid-row: 5 / span 2; ${grid.column.left};`,
 	},
 	body: {
-		belowDesktop: 'grid-row: 7;',
+		mobile: 'grid-row: 7;',
+		tablet: 'grid-row: 8;',
 		leftCol: 'grid-row: 6;',
 	},
 	'right-column': {
