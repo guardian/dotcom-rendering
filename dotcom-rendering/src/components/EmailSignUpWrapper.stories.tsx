@@ -1,4 +1,4 @@
-import type { StoryObj } from '@storybook/react-webpack5';
+import type { StoryObj } from '@storybook/react-vite';
 import { mocked, within } from 'storybook/test';
 import preview from '../../.storybook/preview';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
