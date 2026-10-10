@@ -60,56 +60,40 @@ const stretchLines = css`
 	}
 `;
 
-const immersiveMediaBelowDesktop = (
-	headlineBackground: string,
-	isMainMediaImage: boolean,
-	hasMinimumImageHeight: boolean,
-	isLandscape: boolean,
-) => css`
+const immersiveMediaBelowDesktop = css`
 	${until.tablet} {
-		aspect-ratio: 4 / 5;
-	}
-	${until.desktop} {
 		position: relative;
+		aspect-ratio: 4 / 5;
+		overflow: hidden;
 
 		> div {
 			height: 100%;
 		}
 
-		${!isMainMediaImage && 'overflow: hidden;'}
-
-		${isLandscape &&
-		css`
-			${until.tablet} {
-				aspect-ratio: 4 / 5;
-			}
-			&::after {
-				content: '';
-				position: absolute;
-				left: 0;
-				right: 0;
-				bottom: ${hasMinimumImageHeight ? '-1px' : '0'};
-				height: ${hasMinimumImageHeight
-					? '180px'
-					: isMainMediaImage
-						? 'min(60%, calc(200% - 120vw + 30px))'
-						: 'min(60%, 144px)'};
-				z-index: ${getZIndex('mediaOverlay')};
-				background: linear-gradient(
-					to bottom,
-					rgba(0, 0, 0, ${hasMinimumImageHeight ? '0' : '0.08'}),
-					${headlineBackground}
-						${hasMinimumImageHeight ? '100%' : '72%'}
-				);
-				backdrop-filter: blur(12px);
-				mask-image: linear-gradient(
-					to bottom,
-					transparent ${hasMinimumImageHeight ? '0%' : '40%'},
-					black 60%
-				);
-				pointer-events: none;
-			}
-		`}
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			height: 250px;
+			z-index: ${getZIndex('mediaOverlay')};
+			background: linear-gradient(180deg, #1a1a1a00, #1a1a1a 120px 100%);
+			backdrop-filter: blur(12px);
+			mask-image: linear-gradient(
+				180deg,
+				#1a1a1a00,
+				#1a1a1a0a,
+				#1a1a1a25,
+				#1a1a1a4f,
+				#1a1a1a80,
+				#1a1a1ab0,
+				#1a1a1ada,
+				#1a1a1af5 56px,
+				#1a1a1a 70px
+			);
+			pointer-events: none;
+		}
 	}
 `;
 
@@ -343,7 +327,7 @@ export const StandardLayoutArticleGrid = ({
 				css={[
 					isImmersive
 						? css`
-								${from.desktop} {
+								${from.tablet} {
 									align-self: start;
 									${mainMediaAspectRatio != null &&
 									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
@@ -359,16 +343,11 @@ export const StandardLayoutArticleGrid = ({
 									}
 								`}
 
-								${immersiveMediaBelowDesktop(
-									headlineBackgroundImmersive,
-									isMainMediaImage,
-									hasMinimumImageHeight,
-									layoutType === 'immersiveLandscape',
-								)}
+								${immersiveMediaBelowDesktop}
 
 								${hasMinimumImageHeight &&
 								css`
-									${until.desktop} {
+									${until.tablet} {
 										position: relative;
 										width: 100%;
 										min-width: 0;
@@ -428,10 +407,6 @@ export const StandardLayoutArticleGrid = ({
 					layoutType === 'immersiveLandscape' &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
-
-							${until.desktop} {
-								padding-bottom: ${space[2]}px;
-							}
 						`,
 					layoutType === 'immersivePortrait' &&
 						css`
@@ -474,9 +449,6 @@ export const StandardLayoutArticleGrid = ({
 							z-index: ${getZIndex('articleHeadline')};
 
 							${until.desktop} {
-								margin-top: -3px;
-								background-color: ${headlineBackgroundImmersive};
-								padding-top: 1px;
 								padding-bottom: ${space[8]}px;
 							}
 						`,
@@ -552,7 +524,7 @@ export const StandardLayoutArticleGrid = ({
 				css={[
 					isImmersive &&
 						css`
-							${until.desktop} {
+							${until.tablet} {
 								padding-top: ${space[2]}px;
 							}
 						`,
