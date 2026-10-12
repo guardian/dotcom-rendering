@@ -9,9 +9,15 @@ export type FEAppsComponentConfig = Omit<
 	hasSurveyAd: boolean;
 };
 
+const eventGraphicNames = [
+	'election-tracker/us-general-2024/congress',
+] as const;
+
+type EventGraphicName = (typeof eventGraphicNames)[number];
 type EventGraphicKind = 'electionTracker';
-export const isEventGraphic = (name?: string): name is EventGraphicKind =>
-	name === 'election-tracker/us-general-2024/congress';
+
+export const isEventGraphic = (name?: string): name is EventGraphicName =>
+	eventGraphicNames.some((eventGraphicName) => eventGraphicName === name);
 
 export interface FEAppsComponentEventGraphic {
 	config: FEAppsComponentConfig;
