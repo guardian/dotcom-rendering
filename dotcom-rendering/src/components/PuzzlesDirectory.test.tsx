@@ -236,7 +236,7 @@ describe('PuzzlesDirectory', () => {
 		expect(screen.queryByText('Played')).not.toBeInTheDocument();
 	});
 
-	it('shows Played with an icon only when progress is complete', () => {
+	it('shows Played and In progress from the API state, not the progress value', () => {
 		render(
 			<PuzzlesDirectory
 				layout={{
@@ -244,8 +244,20 @@ describe('PuzzlesDirectory', () => {
 						section({
 							content: {
 								items: [
-									[item({ id: 'complete', progress: 100 })],
-									[item({ id: 'started', progress: 99 })],
+									[
+										item({
+											id: 'complete',
+											gameStatus: 'completed',
+											progress: 10,
+										}),
+									],
+									[
+										item({
+											id: 'started',
+											gameStatus: 'in-progress',
+											progress: 100,
+										}),
+									],
 								],
 								nestedContainers: [],
 							},
@@ -259,7 +271,38 @@ describe('PuzzlesDirectory', () => {
 		const played = screen.getByText('Played');
 		expect(played).toBeInTheDocument();
 		expect(played.querySelector('svg')).toBeInTheDocument();
+		expect(screen.getByText('In progress')).toBeInTheDocument();
 		expect(screen.getAllByText('Daily puzzle')).toHaveLength(2);
+	});
+
+	it('shows no state for a card the API reports nothing or not-started on', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							content: {
+								items: [
+									[item({ id: 'none' })],
+									[
+										item({
+											id: 'zero',
+											gameStatus: 'not-started',
+											progress: 50,
+										}),
+									],
+								],
+								nestedContainers: [],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+
+		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
+		expect(screen.queryByText('Played')).not.toBeInTheDocument();
 	});
 	it('renders unique desktop and mobile IDs for multiple blueprint slots', () => {
 		const layout: PuzzlesLayoutType = {

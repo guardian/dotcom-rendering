@@ -13,7 +13,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { PuzzlesArchiveCalendar } from '../components/PuzzlesArchiveCalendar.island';
 import { PuzzlesArchiveDescription } from '../components/PuzzlesArchiveDescription.island';
-import { RelatedPuzzlesRailCadence } from '../components/RelatedPuzzlesRailCadence.island';
+import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center } from '../lib/center';
@@ -260,7 +260,7 @@ export const PuzzlesArchiveLayout = ({
 								priority="enhancement"
 								defer={{ until: 'visible' }}
 							>
-								<RelatedPuzzlesRailCadence
+								<RelatedPuzzlesRailEnhanced
 									items={archive.moreFrom}
 								/>
 							</Island>

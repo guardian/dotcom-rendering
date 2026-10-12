@@ -8,6 +8,7 @@ import {
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
+import { SvgCheckmark } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { useConfig } from './ConfigContext';
@@ -213,6 +214,34 @@ const setterStyles = css`
 	line-height: 1.3;
 `;
 
+const progressStyles = css`
+	position: absolute;
+	z-index: 1;
+	bottom: ${space[2]}px;
+	left: ${space[2]}px;
+	display: inline-flex;
+	align-items: center;
+	gap: ${space[1]}px;
+	${textSans14};
+	font-weight: bold;
+	line-height: 1;
+	.completed-icon {
+		display: inline-flex;
+		width: 14px;
+		height: 14px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background: ${palette.success[400]};
+		color: ${palette.neutral[100]};
+	}
+	svg {
+		width: 11px;
+		height: 11px;
+		fill: currentColor;
+	}
+`;
+
 const cardImageStyles = css`
 	position: absolute;
 	right: 0;
@@ -260,6 +289,17 @@ const MorePuzzlesCard = ({ item }: { item: PuzzleItem }) => {
 					css={cardImageStyles}
 					src={item.image}
 				/>
+			)}
+			{item.gameStatus === 'in-progress' && (
+				<span css={progressStyles}>In progress</span>
+			)}
+			{item.gameStatus === 'completed' && (
+				<span css={progressStyles}>
+					Played
+					<span aria-hidden="true" className="completed-icon">
+						<SvgCheckmark />
+					</span>
+				</span>
 			)}
 		</>
 	);
