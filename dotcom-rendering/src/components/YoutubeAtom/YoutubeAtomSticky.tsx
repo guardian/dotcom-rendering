@@ -16,7 +16,6 @@ const buttonStyles = css`
 	position: absolute;
 	left: -36px;
 	top: 0;
-	z-index: 22;
 	background-color: ${sourcePalette.neutral[7]};
 	height: 32px;
 	width: 32px;
