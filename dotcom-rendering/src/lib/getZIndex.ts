@@ -109,9 +109,6 @@ const indices = [
 	'video-card-link',
 	'video-container',
 
-	// Main media
-	'mainMedia',
-
 	// The carousel buttons of the highlights container that sits above the header.
 	// Needs to be above 'card-link'.
 	'highlights-carousel-buttons',
