@@ -11,6 +11,16 @@ import {
 	renderHostedContent,
 } from './render.article.web';
 
+export const handleSite: RequestHandler = ({ body }, res) => {
+	const frontendData = validateAsFEArticle(body);
+	const article = enhanceArticleType(frontendData, 'Web');
+	const { html, prefetchScripts } = renderArticle({
+		article,
+	});
+
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Web');
