@@ -9,7 +9,8 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import { ElectionComponents } from './ElectionTrackers/electionComponent';
+import type { Graphic } from './EventGraphic';
+import { GraphicSchema } from './EventGraphic';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
@@ -35,23 +36,6 @@ type Props = {
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
 };
-
-export const ElectionComponentsJsonSchema = v.custom<
-	v.InferInput<typeof ElectionComponents>
->((input) => v.is(ElectionComponents, input));
-
-export const GraphicSchema = v.object({
-	kind: v.literal('electionTracker'),
-	electionDataUrl: v.pipe(
-		v.string(),
-		v.url(),
-		v.transform((url) => new URL(url)),
-	),
-	electionComponents: ElectionComponentsJsonSchema,
-	liveEffects: v.boolean(),
-});
-
-export type Graphic = v.InferOutput<typeof GraphicSchema>;
 
 const extractGraphic = (
 	groupedTrails: DCRGroupedTrails,
@@ -199,3 +183,4 @@ export const DecideContainer = ({
 			return null;
 	}
 };
+export { GraphicSchema };
