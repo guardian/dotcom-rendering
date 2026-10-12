@@ -174,7 +174,7 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 		taskCpu: 2048,
 		taskMemoryLimitMiB: 4096,
 		scaling: {
-			minimumTasks: 12,
+			minimumTasks: 3,
 			maximumTasks: 30,
 			cpuScaling: {
 				targetValue: 20,
@@ -185,10 +185,10 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 			},
 		},
 
-		// Route 100% traffic to ECS
+		// Route 100% traffic to EC2
 		targetGroupWeights: {
-			ec2: 0,
-			ecs: 1,
+			ec2: 1,
+			ecs: 0,
 		},
 	},
 };
