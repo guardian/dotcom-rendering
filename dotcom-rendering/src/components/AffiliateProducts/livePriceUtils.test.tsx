@@ -4,6 +4,7 @@ import {
 	createStrikeThroughProductLabel,
 	formatPrice,
 	rewriteLabelWithLatestPrice,
+	shouldPutOldPriceInStrikethrough,
 } from './livePriceUtils';
 
 describe('createStrikeThroughProductLabel', () => {
@@ -92,9 +93,9 @@ describe('rewriteLabelWithLatestPrice', () => {
 		expect(
 			rewriteLabelWithLatestPrice(
 				{ currencySymbol: '$', price: '5.5' },
-				'$10 at Shop',
+				'$15 at Shop',
 			),
-		).toBe('~$10~ $5.50 at Shop');
+		).toBe('~$15~ $5.50 at Shop');
 	});
 
 	it('returns the label unchanged when it has no supported price', () => {
@@ -137,5 +138,77 @@ describe('rewriteLabelWithLatestPrice', () => {
 				'£5.50 for 300 at Sainsburys (£1.83/100g)',
 			),
 		).toBe('£5.50 for 300 at Sainsburys (£1.83/100g)');
+	});
+});
+
+describe('shouldPutOldPriceInStrikethrough', () => {
+	it('returns false for price increase', () => {
+		const latestPrice = 45;
+		const articlePrice = 40;
+		const result = shouldPutOldPriceInStrikethrough(
+			latestPrice,
+			articlePrice,
+		);
+		expect(result).toBe(false);
+	});
+
+	it('returns false for a drop of 15% but less than £5', () => {
+		const latestPrice = 4;
+		const articlePrice = 5;
+		const result = shouldPutOldPriceInStrikethrough(
+			latestPrice,
+			articlePrice,
+		);
+		expect(result).toBe(false);
+	});
+
+	it('returns false for a drop of more than £5 but less than 10%', () => {
+		const latestPrice = 395;
+		const articlePrice = 400;
+		const result = shouldPutOldPriceInStrikethrough(
+			latestPrice,
+			articlePrice,
+		);
+		expect(result).toBe(false);
+	});
+
+	it('returns false for a drop of more than £5 but less than 10%', () => {
+		const latestPrice = 395;
+		const articlePrice = 400;
+		const result = shouldPutOldPriceInStrikethrough(
+			latestPrice,
+			articlePrice,
+		);
+		expect(result).toBe(false);
+	});
+
+	it('returns true for a drop of exactly 10% (and greater than £5)', () => {
+		const latestPrice = 90;
+		const articlePrice = 100;
+		const result = shouldPutOldPriceInStrikethrough(
+			latestPrice,
+			articlePrice,
+		);
+		expect(result).toBe(true);
+	});
+
+	it('returns true for a drop of exactly 10% and £5', () => {
+		const latestPrice = 45;
+		const articlePrice = 50;
+		const result = shouldPutOldPriceInStrikethrough(
+			latestPrice,
+			articlePrice,
+		);
+		expect(result).toBe(true);
+	});
+
+	it('returns true for a drop of more than 10% and £5', () => {
+		const latestPrice = 19.9;
+		const articlePrice = 34.9;
+		const result = shouldPutOldPriceInStrikethrough(
+			latestPrice,
+			articlePrice,
+		);
+		expect(result).toBe(true);
 	});
 });

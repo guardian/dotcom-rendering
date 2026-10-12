@@ -34,6 +34,38 @@ const section = (
 });
 
 describe('PuzzlesDirectory', () => {
+	it('renders puzzle tile titles as H3s with descriptive crossword text', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							content: {
+								items: [
+									[
+										item({
+											title: 'Mini',
+											type: 'crossword',
+										}),
+									],
+								],
+								nestedContainers: [],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+
+		expect(
+			screen.getByRole('heading', {
+				level: 3,
+				name: 'Mini crossword',
+			}),
+		).toBeInTheDocument();
+	});
+
 	it('keeps the crossword sidebar links hidden below leftCol and scoped to crosswords', () => {
 		const { container } = render(
 			<PuzzlesDirectory
@@ -94,10 +126,10 @@ describe('PuzzlesDirectory', () => {
 				/>,
 			);
 			expect(container.querySelector('article')).toHaveStyle({
-				backgroundColor: background,
+				backgroundColor: `var(--puzzles-card-background, ${background})`,
 			});
 			expect(container.querySelector('.puzzle-card-title')).toHaveStyle({
-				color: title,
+				color: `var(--puzzles-card-headline-colour, ${title})`,
 			});
 		},
 	);
@@ -219,6 +251,32 @@ describe('PuzzlesDirectory', () => {
 		expect(screen.queryByText('By:')).not.toBeInTheDocument();
 		expect(screen.queryByText('Played')).not.toBeInTheDocument();
 	});
+
+	it('shows Played with an icon only when progress is complete', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							content: {
+								items: [
+									[item({ id: 'complete', progress: 100 })],
+									[item({ id: 'started', progress: 99 })],
+								],
+								nestedContainers: [],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+
+		const played = screen.getByText('Played');
+		expect(played).toBeInTheDocument();
+		expect(played.querySelector('svg')).toBeInTheDocument();
+		expect(screen.getAllByText('Daily puzzle')).toHaveLength(2);
+	});
 	it('renders unique desktop and mobile IDs for multiple blueprint slots', () => {
 		const layout: PuzzlesLayoutType = {
 			containers: ['inline1', 'inline2'].map((adSlot) =>
@@ -257,7 +315,7 @@ describe('PuzzlesDirectory', () => {
 						section({
 							enabled: false,
 							id: 'featured',
-							title: 'Today’s featured puzzles',
+							title: 'Featured today',
 							variant: 'featured',
 						}),
 					],
@@ -267,7 +325,7 @@ describe('PuzzlesDirectory', () => {
 		);
 
 		expect(
-			screen.queryByRole('heading', { name: 'Today’s featured puzzles' }),
+			screen.queryByRole('heading', { name: 'Featured today' }),
 		).not.toBeInTheDocument();
 	});
 
@@ -489,5 +547,43 @@ describe('PuzzlesDirectory', () => {
 		expect(summary!.closest('details')).toHaveAttribute('open');
 		fireEvent.pointerDown(document.body);
 		expect(summary!.closest('details')).not.toHaveAttribute('open');
+	});
+
+	it('renders a single archive choice as a dropdown', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							content: {
+								items: [[item()]],
+								nestedContainers: [],
+								archiveChoices: [
+									item({
+										id: 'archive-word-games',
+										title: 'Word games',
+										cardVariant: 'archive',
+										url: '/puzzles-and-games/word-games/archive',
+									}),
+								],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+
+		const summary = screen
+			.getByText('Word games archive')
+			.closest('summary');
+		expect(summary).not.toBeNull();
+		expect(summary!.querySelector('svg')).toHaveAttribute(
+			'viewBox',
+			'0 0 9 5',
+		);
+		expect(
+			screen.getByRole('link', { name: 'Word games' }),
+		).toHaveAttribute('href', '/puzzles-and-games/word-games/archive');
 	});
 });

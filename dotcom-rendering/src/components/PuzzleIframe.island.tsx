@@ -1,8 +1,14 @@
 import { css } from '@emotion/react';
 import { until } from '@guardian/source/foundations';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import { resolvePuzzleIframeUrl } from '../lib/puzzleIframeUrl';
+import {
+	AMUSELABS_ORIGIN,
+	createAmuseLabsAdapter,
+	handleAmuseLabsMessage,
+} from '../lib/puzzleProgress/adapters/amuseLabs';
+import { reportPuzzleProgress } from '../lib/puzzleProgress/reporter';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { palette as themePalette } from '../palette';
@@ -205,13 +211,22 @@ export interface PuzzleContextMessage {
 
 /**
  * Reactively resolves the current signed-in user's Guardian identity ID (or
- * `undefined` if signed out/unknown), re-checking whenever the underlying
+ * `undefined` if signed out), re-checking whenever the underlying
  * identity-auth client reports an auth state change (e.g. the reader signs
  * in or out while already on this page, via a sign-in modal or another
  * tab) - not just once on mount.
+ *
+ * `isResolved` is `false` until the first auth check has finished, so that
+ * "not signed in" can be told apart from "not known yet": the iframe must
+ * not be given a `src` before that, or it would load once without the `uid`
+ * and then again with it.
  */
-const usePuzzleUserId = (): string | undefined => {
+const usePuzzleUserId = (): {
+	userId: string | undefined;
+	isResolved: boolean;
+} => {
 	const [userId, setUserId] = useState<string | undefined>(undefined);
+	const [isResolved, setIsResolved] = useState(false);
 
 	useEffect(() => {
 		let isMounted = true;
@@ -224,6 +239,7 @@ const usePuzzleUserId = (): string | undefined => {
 						? authStatus.idToken.claims.legacy_identity_id
 						: undefined,
 				);
+				setIsResolved(true);
 			});
 		};
 
@@ -236,7 +252,7 @@ const usePuzzleUserId = (): string | undefined => {
 		};
 	}, []);
 
-	return userId;
+	return { userId, isResolved };
 };
 
 /**
@@ -301,6 +317,36 @@ export const buildPuzzleIframeSrc = (
 	}
 };
 
+/**
+ * Reports the reader's progress to the Puzzles API (through the `frontend`
+ * proxy) from the messages an AmuseLabs iframe posts to this window. Only
+ * messages from the AmuseLabs origin AND from this component's own iframe are
+ * considered. Other providers have no adapter yet.
+ */
+const usePuzzleProgressReporting = (
+	puzzleConfig: PuzzleConfig,
+	iframeRef: React.RefObject<HTMLIFrameElement>,
+) => {
+	const isAmuseLabs = puzzleConfig.iframe.provider === 'amuselabs';
+
+	useEffect(() => {
+		if (!isAmuseLabs) return;
+
+		const adapter = createAmuseLabsAdapter();
+
+		const onMessage = (event: MessageEvent<unknown>) => {
+			if (event.origin !== AMUSELABS_ORIGIN) return;
+			if (event.source !== iframeRef.current?.contentWindow) return;
+
+			const progress = handleAmuseLabsMessage(adapter, event.data);
+			if (progress) void reportPuzzleProgress(progress);
+		};
+
+		window.addEventListener('message', onMessage);
+		return () => window.removeEventListener('message', onMessage);
+	}, [isAmuseLabs, iframeRef]);
+};
+
 const postContextMessage = (
 	iframe: HTMLIFrameElement,
 	context: PuzzleContext,
@@ -322,7 +368,8 @@ const postContextMessage = (
  * the puzzle provider two ways:
  * as a `guardian-puzzle-context` query parameter (JSON-encoded) on the
  * iframe `src` (so it is present from the very first request the iframe
- * makes), and via `postMessage` once the iframe has loaded (`{ type:
+ * makes: the iframe has no `src` until the first auth check has resolved,
+ * so it never loads without the reader's `uid` and then again with it), and via `postMessage` once the iframe has loaded (`{ type:
  * 'guardian-puzzle-context', context }` - see `PuzzleContextMessage`).
  * The provider-specific portion of the URL (e.g. AmuseLabs' `uid`/
  * `darkMode=0|1` query params) is resolved separately per provider, see
@@ -344,19 +391,37 @@ export const PuzzleIframe = ({
 	darkModeAvailable,
 	puzzleDate,
 }: Props) => {
-	const userId = usePuzzleUserId();
+	const { userId, isResolved } = usePuzzleUserId();
 	const darkMode = usePuzzleDarkMode(darkModeAvailable);
 	const context = buildPuzzleContext(userId, darkMode, puzzleDate);
 	const iframeSrc = buildPuzzleIframeSrc(puzzleConfig, context);
+	const iframeRef = useRef<HTMLIFrameElement>(null);
+
+	usePuzzleProgressReporting(puzzleConfig, iframeRef);
+
+	// In development the islands do not hydrate when the page is opened
+	// straight from the local `frontend` (its `/assets/` cannot serve this
+	// repo's chunks), so the server-rendered `src` is all there is. Waiting
+	// for the auth check there would leave the puzzle blank. The one extra
+	// load this allows is accepted locally: CODE and PROD wait as below.
+	const shouldLoad = isResolved || process.env.NODE_ENV === 'development';
 
 	return (
 		<iframe
+			ref={iframeRef}
 			css={buildFrameStyles(puzzleConfig.slug)}
-			src={iframeSrc}
+			// No `src` until the reader is known, so the puzzle loads once, with
+			// the right `uid`, instead of loading anonymously and then again.
+			// The frame keeps its `min-height`, so nothing shifts when it loads.
+			src={shouldLoad ? iframeSrc : undefined}
 			title={title}
 			loading="lazy"
 			sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-			onLoad={(event) => postContextMessage(event.currentTarget, context)}
+			onLoad={(event) => {
+				if (shouldLoad) {
+					postContextMessage(event.currentTarget, context);
+				}
+			}}
 		/>
 	);
 };

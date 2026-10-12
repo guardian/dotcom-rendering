@@ -6,7 +6,6 @@ import {
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { CommentLayout } from './CommentLayout';
 import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { GalleryLayout } from './GalleryLayout';
@@ -14,7 +13,6 @@ import { HostedArticleLayout } from './HostedArticleLayout';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { HostedVideoLayout } from './HostedVideoLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
-import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { StandardLayout } from './StandardLayout';
@@ -39,12 +37,19 @@ export type Props = WebProps | AppProps;
  * Guards the new grid-based immersive layout for all Guardian articles
  * behind a 0% a/b test
  */
-export const REVAMPED_IMMERSIVE_LAYOUT_AB_TEST =
-	'articles-and-publishing-revamped-immersive-layout';
-
 const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
 	article.frontendData.config.serverSideABTests[
-		REVAMPED_IMMERSIVE_LAYOUT_AB_TEST
+		'articles-and-publishing-revamped-immersive-layout'
+	] === 'enable';
+
+/**
+ * Guards grid-based interactive layout behind a 0% a/b test
+ */
+export const INTERACTIVE_LAYOUT_AB_TEST =
+	'articles-and-publishing-migrate-interactive-layout';
+const isInInteractiveLayoutTest = (article: Article): boolean =>
+	article.frontendData.config.serverSideABTests[
+		INTERACTIVE_LAYOUT_AB_TEST
 	] === 'enable';
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
@@ -102,17 +107,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							serverTime={serverTime}
 						/>
 					);
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return (
-						<CommentLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
 				default:
 					return (
 						<StandardLayout
@@ -127,16 +121,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 		case ArticleDisplay.Standard:
 		default: {
 			switch (article.design) {
-				case ArticleDesign.Interactive:
-					return (
-						<InteractiveLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
@@ -150,17 +134,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return (
-						<CommentLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -215,6 +188,9 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							format={format}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
+							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
+								article,
+							)}
 						/>
 					);
 			}
@@ -281,18 +257,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							serverTime={serverTime}
 						/>
 					);
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return (
-						<CommentLayout
-							article={article.frontendData}
-							NAV={NAV}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
 				default:
 					return (
 						<StandardLayout
@@ -308,16 +272,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 		case ArticleDisplay.Standard:
 		default: {
 			switch (article.design) {
-				case ArticleDesign.Interactive:
-					return (
-						<InteractiveLayout
-							article={article.frontendData}
-							NAV={NAV}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
@@ -332,18 +286,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
-							article={article.frontendData}
-							NAV={NAV}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return (
-						<CommentLayout
 							article={article.frontendData}
 							NAV={NAV}
 							format={format}
@@ -410,6 +352,9 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							format={format}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
+							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
+								article,
+							)}
 						/>
 					);
 			}

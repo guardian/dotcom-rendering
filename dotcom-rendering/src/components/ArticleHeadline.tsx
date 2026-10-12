@@ -272,6 +272,9 @@ const darkBackground = css`
 
 const immersiveDarkBackground = css`
 	background-color: ${themePalette('--headline-background-immersive')};
+	${from.desktop} {
+		padding-bottom: ${space[6]}px;
+	}
 `;
 
 const invertedText = css`
@@ -345,13 +348,6 @@ const invertedWrapper = css`
         shift everything back to the right
     */
 	margin-left: 6px;
-`;
-
-// Due to MainMedia using position: relative, this seems to effect the rendering order
-// To mitigate we use z-index
-// TODO: find a cleaner solution
-const zIndex = css`
-	z-index: 1;
 `;
 
 const ageWarningMargins = (
@@ -626,6 +622,7 @@ export const ArticleHeadline = ({
 									rating={starRating}
 									paddingSize={'large'}
 									size={'large'}
+									layoutType={layoutType}
 								/>
 							)}
 						</WithAgeWarning>
@@ -821,7 +818,6 @@ export const ArticleHeadline = ({
 											: headlineFont(format),
 										invertedWrapper,
 										invertedFontLineHeight,
-										zIndex,
 										css`
 											color: ${themePalette(
 												'--headline-colour',

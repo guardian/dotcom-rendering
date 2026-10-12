@@ -16,6 +16,7 @@ export type PuzzleItem = {
 	image?: string;
 	imageAlt?: string;
 	setter?: string;
+	progress?: number;
 	date?: string;
 	slug?: string;
 	index?: number;
@@ -95,6 +96,7 @@ export type PuzzlesArchive = {
 	year: number;
 	month: number;
 	items: PuzzlesArchiveItem[];
+	recentItems?: PuzzlesArchiveItem[];
 	hasError: boolean;
 	moreFrom: PuzzleItem[];
 };

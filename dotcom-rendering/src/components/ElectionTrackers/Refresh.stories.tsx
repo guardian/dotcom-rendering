@@ -35,7 +35,7 @@ export const Countdown = meta.story({
 	},
 	parameters: {
 		chromatic: {
-			disable: true,
+			disableSnapshot: true,
 		},
 	},
 });

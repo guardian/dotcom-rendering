@@ -338,6 +338,7 @@ export const ArticleMetaApps = ({
 								byline={byline}
 								tags={tags}
 								format={format}
+								layoutType={layoutType}
 							/>
 						)}
 					{shouldShowFollowButtons(
