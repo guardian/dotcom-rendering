@@ -65,6 +65,9 @@ const immersiveMediaBelowDesktop = (
 	isMainMediaImage: boolean,
 	hasMinimumImageHeight: boolean,
 ) => css`
+	${until.tablet} {
+		aspect-ratio: 4 / 5;
+	}
 	${until.desktop} {
 		position: relative;
 
@@ -83,7 +86,7 @@ const immersiveMediaBelowDesktop = (
 			height: ${hasMinimumImageHeight
 				? '180px'
 				: isMainMediaImage
-					? 'min(60%, calc(200% - 120vw + 30px))'
+					? 'min(20%, calc(200% - 120vw + 30px))'
 					: 'min(60%, 144px)'};
 			z-index: ${getZIndex('mediaOverlay')};
 			background: linear-gradient(
@@ -290,7 +293,12 @@ export const StandardLayoutArticleGrid = ({
 				!isLabs &&
 					css`
 						${from.leftCol} {
-							${grid.centreRule(isImmersive ? 4 : 3)}
+							${grid.centreRule(
+								isImmersive ? 4 : 3,
+								layoutType === 'interactive'
+									? { clip: false }
+									: {},
+							)}
 						}
 					`,
 				layoutType === 'immersivePortrait' &&
@@ -323,6 +331,11 @@ export const StandardLayoutArticleGrid = ({
 									`margin-left: -20px;
 									margin-right: -20px;`}
 								}
+
+								${layoutType === 'immersivePortrait' &&
+								css`
+									aspect-ratio: 4/5;
+								`}
 
 								${immersiveMediaBelowDesktop(
 									headlineBackgroundImmersive,
@@ -433,7 +446,7 @@ export const StandardLayoutArticleGrid = ({
 							z-index: ${getZIndex('articleHeadline')};
 
 							${until.desktop} {
-								margin-top: -1px;
+								margin-top: -3px;
 								background-color: ${headlineBackgroundImmersive};
 								padding-top: 1px;
 								padding-bottom: ${space[8]}px;
@@ -578,6 +591,10 @@ export const StandardLayoutArticleGrid = ({
 							${from.leftCol} {
 								padding-top: ${space[8]}px;
 							}
+						`,
+					layoutType === 'interactive' &&
+						css`
+							z-index: ${getZIndex('meta')};
 						`,
 				]}
 			>
@@ -779,6 +796,7 @@ export const StandardLayoutArticleGrid = ({
 									!!article.config.switches.articleEndSlot
 								}
 								isSensitive={article.config.isSensitive}
+								isInInteractive={layoutType === 'interactive'}
 							/>
 						</Island>
 					)}
@@ -834,7 +852,8 @@ export const StandardLayoutArticleGrid = ({
 									!!article.config.shouldHideReaderRevenue
 								}
 								shouldHideMostViewed={
-									format.design === ArticleDesign.Audio
+									format.design === ArticleDesign.Audio ||
+									format.design === ArticleDesign.Interactive
 								}
 							/>
 						</Island>

@@ -12,16 +12,15 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { PuzzlesDirectoryProgress } from '../components/PuzzlesDirectoryProgress.island';
 import { Section } from '../components/Section';
+import { puzzlesPageTheme } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
 import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import { Stuck } from './lib/stickiness';
 
-const mainStyles = css`
+const mainStyles = (darkModeAvailable: boolean) => css`
+	${puzzlesPageTheme(darkModeAvailable)};
 	overflow-x: clip;
 	padding-bottom: ${space[12]}px;
-	background: ${palette.neutral[100]};
-	color: ${palette.neutral[7]};
-	color-scheme: light;
 `;
 
 const brandStyles = css`
@@ -30,7 +29,7 @@ const brandStyles = css`
 	margin: 0 auto;
 	overflow: hidden;
 	/* The artwork is transparent and uses this illustrated-header background. */
-	background: ${palette.opinion[800]};
+	background: var(--puzzles-header-background, ${palette.opinion[800]});
 `;
 
 const brandImageStyles = css`
@@ -92,9 +91,11 @@ const headerSources = [
 ];
 
 export const PuzzlesLayout = ({
+	darkModeAvailable = false,
 	puzzlesPage,
 	NAV,
 }: {
+	darkModeAvailable?: boolean;
 	puzzlesPage: FEPuzzlesPageType;
 	NAV: NavType;
 }) => {
@@ -146,12 +147,12 @@ export const PuzzlesLayout = ({
 				/>
 			</div>
 			<main
-				css={mainStyles}
+				css={mainStyles(darkModeAvailable)}
 				data-layout="PuzzlesPageLayout"
 				id="maincontent"
 			>
 				<header css={brandStyles}>
-					<h1 css={visuallyHidden}>Puzzles and Games</h1>
+					<h1 css={visuallyHidden}>Puzzles &amp; games</h1>
 					<picture css={brandPictureStyles}>
 						{headerSources.map(({ breakpoint, filename }) => (
 							<source

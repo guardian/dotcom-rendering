@@ -48,6 +48,7 @@ export interface FEArticle {
 	webPublicationDate: string;
 	webPublicationDateDisplay: string;
 	webPublicationSecondaryDateDisplay: string;
+	firstPublicationDate?: string;
 	editionLongForm: string;
 	editionId: EditionId;
 	pageId: string;

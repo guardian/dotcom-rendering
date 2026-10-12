@@ -1,7 +1,14 @@
 import { css } from '@emotion/react';
 import { breakpoints, from, space, until } from '@guardian/source/foundations';
-import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/articleFormat';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import type { FEElement, RoleType } from '../types/content';
+import { minHeaderHeightPx } from './Masthead/Titlepiece/constants';
 
 type Props = {
 	children: React.ReactNode;
@@ -12,6 +19,8 @@ type Props = {
 	className?: string;
 	type?: FEElement['_type'];
 	isTimeline?: boolean;
+	isInDeprecatedInteractiveLayout?: boolean;
+	articleArrangement?: LayoutType;
 };
 
 const roleCss = {
@@ -71,6 +80,13 @@ const roleCss = {
 	`,
 
 	fullWidth: css`
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+
+		grid-column: 1 / -1;
+	`,
+
+	fullWidthDeprecated: css`
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[3]}px;
 
@@ -200,6 +216,7 @@ export const defaultRoleStyles = (
 	role: RoleType | 'richLink' | 'fullWidth',
 	format: ArticleFormat,
 	isTimeline = false,
+	isInDeprecatedInteractiveLayout = false,
 ) => {
 	switch (role) {
 		case 'inline':
@@ -209,6 +226,9 @@ export const defaultRoleStyles = (
 		case 'immersive':
 			return roleCss.immersive;
 		case 'fullWidth':
+			if (isInDeprecatedInteractiveLayout) {
+				return roleCss.fullWidthDeprecated;
+			}
 			return roleCss.fullWidth;
 		case 'showcase':
 			if (isTimeline) {
@@ -250,9 +270,30 @@ export const defaultRoleStyles = (
 	}
 };
 
-const mainMediaFigureStyles = css`
-	height: 100%;
-`;
+const mainMediaFigureStyles = (
+	isImmersiveLandscape: boolean,
+	isLabs: boolean,
+) => {
+	const labsHeaderHeight = LABS_HEADER_HEIGHT;
+	const combinedHeight = (minHeaderHeightPx + labsHeaderHeight).toString();
+
+	const navAndLabsHeaderHeight = isLabs
+		? `${combinedHeight}px`
+		: `${minHeaderHeightPx}px`;
+	return css`
+		height: 100%;
+		${isImmersiveLandscape &&
+		css`
+			${from.desktop} {
+				height: calc(100vh - ${navAndLabsHeaderHeight});
+				min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
+			}
+			${from.wide} {
+				min-height: calc(50rem - ${navAndLabsHeaderHeight});
+			}
+		`}
+	`;
+};
 
 export const Figure = ({
 	role = 'inline',
@@ -263,6 +304,8 @@ export const Figure = ({
 	className = '',
 	type,
 	isTimeline = false,
+	isInDeprecatedInteractiveLayout = false,
+	articleArrangement,
 }: Props) => {
 	if (isMainMedia && !isTimeline) {
 		// Don't add in-body styles for main media elements
@@ -271,7 +314,14 @@ export const Figure = ({
 		// currently lives in ImageComponent and hoist it up to here, the same as we're
 		// doing using decidePosition for in-body elements
 		return (
-			<figure id={id} key={id} css={mainMediaFigureStyles}>
+			<figure
+				id={id}
+				key={id}
+				css={mainMediaFigureStyles(
+					articleArrangement === 'immersiveLandscape',
+					format.theme === ArticleSpecial.Labs,
+				)}
+			>
 				{children}
 			</figure>
 		);
@@ -280,7 +330,12 @@ export const Figure = ({
 	return (
 		<figure
 			id={id}
-			css={defaultRoleStyles(role, format, isTimeline)}
+			css={defaultRoleStyles(
+				role,
+				format,
+				isTimeline,
+				isInDeprecatedInteractiveLayout,
+			)}
 			data-spacefinder-role={role}
 			data-spacefinder-type={type}
 			className={className}

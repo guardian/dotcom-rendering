@@ -21,7 +21,6 @@ import { Peer } from 'aws-cdk-lib/aws-ec2';
 import {
 	ContainerDependencyCondition,
 	ContainerImage,
-	FireLensLogDriver,
 } from 'aws-cdk-lib/aws-ecs';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
@@ -314,6 +313,8 @@ export class RenderingCDKStack extends CDKStack {
 
 		if (app.ecsService) {
 			const { taskDefinition } = app.ecsService;
+			const { fireLensLogDriver } = app;
+
 			const ecsEnvVars: Record<string, string> = {
 				// Custom environment variables needed by the application
 				NODE_ENV: 'production',
@@ -329,15 +330,6 @@ export class RenderingCDKStack extends CDKStack {
 			for (const [key, value] of Object.entries(ecsEnvVars)) {
 				taskDefinition.defaultContainer?.addEnvironment(key, value);
 			}
-
-			// Reuse the FireLens log options already wired by GuLoadBalancedAppExperimental,
-			// which registers GuLoggingStreamNameParameter as a singleton on this stack.
-			// This avoids re-introducing the parameter explicitly here.
-			const defaultContainerLogConfig =
-				taskDefinition.defaultContainer?.logDriverConfig;
-			const fireLensLogDriver = new FireLensLogDriver({
-				options: defaultContainerLogConfig?.options,
-			});
 
 			/**
 			 * The ADOT (AWS Distro for OpenTelemetry) Collector, run as a

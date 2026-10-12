@@ -55,7 +55,6 @@ const mainMediaStyles = css`
 	grid-row-start: 1;
 	background-color: ${palette.neutral[10]};
 
-	z-index: 1;
 	overflow: hidden;
 	max-height: 600px;
 `;

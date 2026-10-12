@@ -428,7 +428,9 @@ export const SelfHostedVideo = ({
 		videoStyleSettings.useInteractiveProgressBar === true &&
 		controlsPosition === 'bottom'
 			? 'bottom-elevated'
-			: controlsPosition;
+			: isMainMedia && format?.display === ArticleDisplay.Immersive
+				? 'top-on-mobile'
+				: 'bottom';
 
 	/**
 	 * Show the play icon when the video is not playing, except for when it is scrolled out of view,

@@ -361,6 +361,9 @@ const isPuzzlesArchive = (value: unknown): boolean =>
 	Number(value.month) <= 12 &&
 	Array.isArray(value.items) &&
 	value.items.every(isArchiveItem) &&
+	(value.recentItems === undefined ||
+		(Array.isArray(value.recentItems) &&
+			value.recentItems.every(isArchiveItem))) &&
 	typeof value.hasError === 'boolean' &&
 	Array.isArray(value.moreFrom) &&
 	value.moreFrom.every((item) => isPuzzleItem(item));

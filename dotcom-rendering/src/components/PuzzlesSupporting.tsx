@@ -31,12 +31,12 @@ type Props = {
 	supporting: PuzzlesSupportingContent;
 };
 
-const borderColour = palette.neutral[86];
+const borderColour = `var(--puzzles-border-colour, ${palette.neutral[86]})`;
 
 const sectionStyles = css`
 	display: grid;
 	${puzzlesContainerStyles};
-	background: ${palette.neutral[100]};
+	background: var(--puzzles-page-background, ${palette.neutral[100]});
 
 	${from.leftCol} {
 		grid-template-columns: 170px minmax(0, 1fr);
@@ -53,6 +53,7 @@ const sectionTitleStyles = css`
 	padding: 6px 10px 12px;
 	border-top: 1px solid ${borderColour};
 	${headlineBold24};
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
 	line-height: 1;
 	overflow-wrap: break-word;
 
@@ -96,7 +97,7 @@ const usefulLinkStyles = css`
 	min-height: 44px;
 	padding: ${space[2]}px ${space[3]}px;
 	border-right: 1px solid ${borderColour};
-	color: ${palette.neutral[7]};
+	color: var(--puzzles-text-colour, ${palette.neutral[7]});
 	text-decoration: none;
 	${headlineMedium20};
 
@@ -108,6 +109,11 @@ const usefulLinkStyles = css`
 		outline: 3px solid ${palette.brand[500]};
 		outline-offset: -3px;
 	}
+`;
+
+const usefulLinkTitleStyles = css`
+	margin: 0;
+	font: inherit;
 `;
 
 const newsletterStyles = css`
@@ -167,6 +173,7 @@ const popularGroupTitleStyles = css`
 	padding: ${space[2]}px ${space[3]}px;
 	border-bottom: 1px solid ${borderColour};
 	${textSansBold14};
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
 `;
 
 const popularListStyles = css`
@@ -196,7 +203,7 @@ const popularLinkStyles = css`
 	flex-direction: column;
 	justify-content: center;
 	padding: ${space[1]}px ${space[2]}px;
-	color: ${palette.neutral[7]};
+	color: var(--puzzles-text-colour, ${palette.neutral[7]});
 	text-decoration: none;
 
 	:hover strong {
@@ -302,7 +309,7 @@ export const PuzzlesSupporting = ({
 							key={`${link.title}-${link.url}`}
 							{...externalProps(link.url)}
 						>
-							{link.title}
+							<h3 css={usefulLinkTitleStyles}>{link.title}</h3>
 						</a>
 					))}
 					{showNewsletter && newsletter !== undefined && (
