@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { regions } from '../../fixtures/manual/footballData';
 import { WomensEuro2025 } from './DirectoryPageNav.stories';
 import { FootballTableList as TableListDefault } from './FootballTableList.stories';

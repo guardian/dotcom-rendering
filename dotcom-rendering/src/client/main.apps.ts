@@ -1,4 +1,3 @@
-import './webpackPublicPath';
 import { startup } from './startup';
 
 /*************************************************************
@@ -12,19 +11,8 @@ import { startup } from './startup';
 void startup(
 	'sentryLoader',
 	() =>
-		import(/* webpackMode: "eager" */ './sentryLoader/sentryLoader').then(
-			({ sentryLoader }) => sentryLoader(),
-		),
-	{
-		priority: 'critical',
-	},
-);
-
-void startup(
-	'dynamicImport',
-	() =>
-		import(/* webpackMode: "eager" */ './dynamicImport').then(
-			({ dynamicImport }) => dynamicImport(),
+		import('./sentryLoader/sentryLoader').then(({ sentryLoader }) =>
+			sentryLoader(),
 		),
 	{
 		priority: 'critical',
@@ -33,10 +21,7 @@ void startup(
 
 void startup(
 	'islands',
-	() =>
-		import(/* webpackMode: "eager" */ './islands/islands').then(
-			({ islands }) => islands(),
-		),
+	() => import('./islands/islands').then(({ islands }) => islands()),
 	{
 		priority: 'critical',
 	},
@@ -48,47 +33,31 @@ void startup(
  * because they are lower priority and do not want to block
  * the modules above on loading these.
  *
- * We are not assigning chunk name to allow Webpack
- * to optimise chunking based on its algorithm.
- *
  *************************************************************/
 
 void startup(
 	'atomIframe',
-	() =>
-		import(
-			/* webpackMode: 'lazy' */
-			'./atomIframe'
-		).then(({ atomIframe }) => atomIframe()),
+	() => import('./atomIframe').then(({ atomIframe }) => atomIframe()),
 	{ priority: 'feature' },
 );
 
 void startup(
 	'embedIframe',
-	() =>
-		import(
-			/* webpackMode: 'lazy' */
-			'./embedIframe'
-		).then(({ embedIframe }) => embedIframe()),
+	() => import('./embedIframe').then(({ embedIframe }) => embedIframe()),
 	{ priority: 'feature' },
 );
 
 void startup(
 	'newsletterEmbedIframe',
 	() =>
-		import(
-			/* webpackMode: 'lazy' */
-			'./newsletterEmbedIframe'
-		).then(({ newsletterEmbedIframe }) => newsletterEmbedIframe()),
+		import('./newsletterEmbedIframe').then(({ newsletterEmbedIframe }) =>
+			newsletterEmbedIframe(),
+		),
 	{ priority: 'feature' },
 );
 
 void startup(
 	'initDiscussion',
-	() =>
-		import(
-			/* webpackMode: 'lazy' */
-			'./discussion'
-		).then(({ discussion }) => discussion()),
+	() => import('./discussion').then(({ discussion }) => discussion()),
 	{ priority: 'feature' },
 );

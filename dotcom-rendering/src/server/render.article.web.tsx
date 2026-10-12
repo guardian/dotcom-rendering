@@ -116,7 +116,6 @@ export const renderArticle = ({
 	 */
 	const prefetchScripts = [
 		polyfillIO,
-		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ??
 			frontendData.config.commercialBundleUrl,

@@ -1,6 +1,6 @@
 import { palette } from '@guardian/source/foundations';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import {
 	choiceCardsSettings,

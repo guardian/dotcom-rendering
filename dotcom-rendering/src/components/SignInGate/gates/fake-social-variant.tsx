@@ -10,9 +10,7 @@ const SignInGateFakeSocial = React.lazy(() => {
 		'SignInGateFakeSocial',
 	);
 
-	return import(
-		/* webpackChunkName: "SignInGateFakeSocial" */ '../gateDesigns/SignInGateFakeSocial'
-	).then((module) => {
+	return import('../gateDesigns/SignInGateFakeSocial').then((module) => {
 		endPerformanceMeasure();
 		return { default: module.SignInGateFakeSocial };
 	});

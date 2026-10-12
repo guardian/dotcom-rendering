@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { StoryFn } from '@storybook/react-webpack5';
+import type { StoryFn } from '@storybook/react-vite';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import preview from '../../../.storybook/preview';
 import {

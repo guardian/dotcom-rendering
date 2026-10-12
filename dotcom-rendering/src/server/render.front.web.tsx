@@ -114,7 +114,6 @@ export const renderFront = ({
 	 */
 	const prefetchScripts = [
 		polyfillIO,
-		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ?? front.config.commercialBundleUrl,
 	].filter(isString);
@@ -211,7 +210,6 @@ export const renderTagPage = ({
 	 */
 	const prefetchScripts = [
 		polyfillIO,
-		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ?? tagPage.config.commercialBundleUrl,
 	].filter(isString);

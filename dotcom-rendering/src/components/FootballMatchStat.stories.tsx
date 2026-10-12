@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { footballTeams } from '../../fixtures/manual/footballTeams';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';

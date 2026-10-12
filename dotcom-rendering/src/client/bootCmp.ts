@@ -45,9 +45,7 @@ const initialiseCmp = async () => {
  * as a separate chunk. @see {PrivacySettingsLink.island.tsx}
  */
 const eagerlyImportPrivacySettingsLinkIsland = () =>
-	import(
-		/* webpackMode: 'eager' */ '../components/PrivacySettingsLink.island'
-	);
+	import('../components/PrivacySettingsLink.island');
 
 /**
  * Keep this file in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend

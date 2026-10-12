@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
 import { breakpoints, palette } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
 import { extractNAV } from '../model/extract-nav';
 import type { PuzzlesArchive } from '../types/puzzlesPage';

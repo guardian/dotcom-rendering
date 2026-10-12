@@ -189,9 +189,7 @@ export const BrazeBanner = ({ meta, idApiUrl }: Props) => {
 		useState<typeof BrazeBannerComponent>();
 
 	useEffect(() => {
-		import(
-			/* webpackChunkName: "guardian-braze-components-banner" */ '@guardian/braze-components/banner'
-		)
+		import('@guardian/braze-components/banner')
 			.then((module) => {
 				setBrazeComponent(() => module.BrazeBannerComponent);
 			})
