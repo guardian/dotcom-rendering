@@ -146,7 +146,7 @@ const imageListStyles = css`
 	display: flex;
 	align-items: center;
 	column-gap: ${space[2]}px;
-	min-height: 28px;
+	min-height: 36px;
 	padding: 0 ${space[3]}px;
 
 	${from.mobileLandscape} {
