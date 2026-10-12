@@ -42,7 +42,7 @@ const subNavStyles = css`
 		margin-top: ${space[3]}px;
 	}
 	${from.tablet} {
-		min-height: 44px;
+		min-height: 30px;
 	}
 `;
 
@@ -153,7 +153,7 @@ const imageListStyles = css`
 		padding: 0 ${space[5]}px;
 	}
 	${from.tablet} {
-		min-height: 30px;
+		min-height: 44px;
 	}
 `;
 
