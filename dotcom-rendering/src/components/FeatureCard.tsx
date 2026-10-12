@@ -179,15 +179,6 @@ const overlayStyles = css`
 	text-align: start;
 	gap: ${space[1]}px;
 	padding: ${space[9]}px ${space[2]}px ${space[2]}px;
-
-	/*
-	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
-	 * Links define their own z-index.
-	 */
-
-	> :not(.waveform):not(a) {
-		z-index: 1;
-	}
 `;
 
 const immersiveOverlayStyles = css`
@@ -258,7 +249,6 @@ const waveformStyles = css`
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	z-index: 0;
 	height: 40px;
 	max-width: 100%;
 	overflow: hidden;
@@ -800,11 +790,20 @@ export const FeatureCard = ({
 												</div>
 											)}
 
+										{!isImmersive &&
+											mainMedia?.type === 'Audio' &&
+											renderWaveform(
+												mainMedia.duration,
+												233,
+											)}
+
 										{/**
 										 * Without the wrapping div the headline and byline would have space
 										 * inserted between them due to being direct children of the flex container
+										 *
+										 * relative positioning ensures that the headline appears on top of the absolutely positioned waveform.
 										 */}
-										<div>
+										<div css={{ position: 'relative' }}>
 											<CardHeadline
 												headlineText={headlineText}
 												format={format}
@@ -888,13 +887,6 @@ export const FeatureCard = ({
 											isNewsletter={isNewsletter}
 											media={articleMedia}
 										/>
-
-										{!isImmersive &&
-											mainMedia?.type === 'Audio' &&
-											renderWaveform(
-												mainMedia.duration,
-												233,
-											)}
 									</div>
 								</div>
 
