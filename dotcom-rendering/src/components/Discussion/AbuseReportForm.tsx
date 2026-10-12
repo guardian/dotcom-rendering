@@ -23,7 +23,7 @@ type FormData = {
 };
 
 const formWrapper = css`
-	z-index: ${getZIndex('minimum')};
+	z-index: ${getZIndex('discussion')};
 
 	border: 1px solid ${schemedPalette('--discussion-border')};
 	position: absolute;

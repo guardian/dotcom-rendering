@@ -22,7 +22,7 @@ const containerStyles = css`
 `;
 
 const ulStyles = css`
-	z-index: ${getZIndex('minimum')};
+	z-index: ${getZIndex('discussion')};
 	list-style: none;
 	border: 1px solid ${schemedPalette('--discussion-border')};
 	margin-left: -8px;
