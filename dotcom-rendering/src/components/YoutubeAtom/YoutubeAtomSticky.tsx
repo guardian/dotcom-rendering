@@ -9,6 +9,7 @@ import { SvgCross } from '@guardian/source/react-components';
 import detectMobile from 'is-mobile';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
+import { getZIndex } from '../../lib/getZIndex';
 import { useConfig } from '../ConfigContext';
 import type { VideoEventKey } from './YoutubeAtom';
 
@@ -76,7 +77,7 @@ const stickyStyles = (showButton: boolean) => css`
 	position: fixed;
 	bottom: 20px;
 	width: 215px;
-	z-index: 21;
+	z-index: ${getZIndex('stickyYoutubePlayer')};
 	animation: fade-in-up 1s ease both;
 
 	${from.tablet} {
