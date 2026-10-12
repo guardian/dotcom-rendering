@@ -38,7 +38,7 @@ const gameStatuses: readonly string[] = [
 	'completed',
 ];
 
-const isGameStatus = (value: unknown): value is GameStatus =>
+export const isGameStatus = (value: unknown): value is GameStatus =>
 	typeof value === 'string' && gameStatuses.includes(value);
 
 export const parseProgressItems = (

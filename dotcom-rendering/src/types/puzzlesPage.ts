@@ -86,6 +86,8 @@ export type PuzzlesArchiveItem = {
 	puzzleType: string;
 	date: string;
 	progress: number;
+	/** The Puzzles API's state for the reader; absent when it reports none. */
+	gameStatus?: GameStatus;
 	setterName?: string;
 	url: string;
 };

@@ -17,6 +17,7 @@ import {
 } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getAuthStatus } from '../lib/identity';
+import { isGameStatus } from '../lib/puzzleCardProgress';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
 export type CalendarCell = {
@@ -94,7 +95,7 @@ export const archiveStatus = (
 ): 'completed' | 'available' | 'unavailable' =>
 	item === undefined
 		? 'unavailable'
-		: item.progress === 100
+		: item.gameStatus === 'completed'
 			? 'completed'
 			: 'available';
 
@@ -105,6 +106,9 @@ const isArchiveItem = (value: unknown): value is PuzzlesArchiveItem => {
 		typeof item.puzzleType === 'string' &&
 		typeof item.date === 'string' &&
 		typeof item.progress === 'number' &&
+		(item.gameStatus === undefined ||
+			item.gameStatus === null ||
+			isGameStatus(item.gameStatus)) &&
 		typeof item.url === 'string'
 	);
 };
@@ -820,7 +824,7 @@ export const PuzzlesArchiveCalendar = ({
 						{item.setterName && (
 							<span> · By: {item.setterName}</span>
 						)}
-						{item.progress === 100 && (
+						{item.gameStatus === 'completed' && (
 							<span className="played">
 								Played
 								<span

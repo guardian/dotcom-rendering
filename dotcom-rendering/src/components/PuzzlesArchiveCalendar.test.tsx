@@ -60,16 +60,26 @@ describe('archive calendar helpers', () => {
 		);
 	});
 
-	it('maps completed, available, in-progress and missing dates', () => {
-		expect(archiveStatus({ ...archive.items[0]!, progress: 100 })).toBe(
-			'completed',
-		);
-		expect(archiveStatus({ ...archive.items[0]!, progress: 0 })).toBe(
-			'available',
-		);
-		expect(archiveStatus({ ...archive.items[0]!, progress: 50 })).toBe(
-			'available',
-		);
+	it('maps the API status, not the progress value, to the day status', () => {
+		const item = archive.items[0]!;
+		expect(
+			archiveStatus({ ...item, progress: 10, gameStatus: 'completed' }),
+		).toBe('completed');
+		expect(
+			archiveStatus({
+				...item,
+				progress: 100,
+				gameStatus: 'in-progress',
+			}),
+		).toBe('available');
+		expect(
+			archiveStatus({
+				...item,
+				progress: 100,
+				gameStatus: 'not-started',
+			}),
+		).toBe('available');
+		expect(archiveStatus({ ...item, progress: 100 })).toBe('available');
 		expect(archiveStatus(undefined)).toBe('unavailable');
 	});
 
@@ -199,7 +209,13 @@ describe('PuzzlesArchiveCalendar', () => {
 		} as never);
 		const authenticatedArchive = {
 			...archive,
-			items: [{ ...archive.items[0]!, progress: 100 }],
+			items: [
+				{
+					...archive.items[0]!,
+					progress: 100,
+					gameStatus: 'completed',
+				},
+			],
 		};
 		const fetchMock = jest.fn().mockResolvedValue({
 			ok: true,
