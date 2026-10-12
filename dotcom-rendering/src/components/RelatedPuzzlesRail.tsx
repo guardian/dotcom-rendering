@@ -37,9 +37,12 @@ const relatedRailStyles = css`
  * `relatedRailStyles`), so it gets its own divider on its right edge to
  * separate it from them - the lateral equivalent of the vertical dividers
  * between the cards themselves (`MorePuzzlesCard.tsx`). Below "leftCol"
- * the heading stacks above the cards instead, and per explicit design
- * direction there is no horizontal divider anywhere in this rail, so no
- * divider is drawn there at all.
+ * the heading stacks above the cards instead. The horizontal divider the
+ * design draws between the heading and the cards there belongs to the cards
+ * list rather than to the heading, since it must span exactly from the
+ * first card to the last one, not the heading's own width (see
+ * `MorePuzzlesCard.tsx`'s `mobileScrollable` styles). Per explicit design
+ * direction there is no horizontal divider between rows of cards.
  *
  * `right: -10px` (half of `relatedRailStyles`'s own 20px column gap from
  * "leftCol" up) centres the line in that gap, the same distance from the
