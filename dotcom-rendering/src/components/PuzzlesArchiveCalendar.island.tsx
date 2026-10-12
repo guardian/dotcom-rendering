@@ -637,7 +637,7 @@ export const PuzzlesArchiveCalendar = ({
 			try {
 				// Query parameters are stripped by the CDN in CODE/PROD.
 				const url = new URL(
-					`/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
+					`${window.guardian.config.page.ajaxUrl}/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
 					window.location.origin,
 				);
 				const authStatus = await getAuthStatus();
