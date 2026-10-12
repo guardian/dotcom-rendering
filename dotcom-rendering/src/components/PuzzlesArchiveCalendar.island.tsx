@@ -296,9 +296,6 @@ const controlsStyles = css`
 	}
 `;
 
-const calendarAvailableDot = '#0a8ced';
-const calendarPlayedBackground = '#effbf5';
-
 const calendarStyles = css`
 	--calendar-gap: 8px;
 	--calendar-day-padding-block: 3px;
@@ -346,11 +343,15 @@ const calendarStyles = css`
 		width: 5px;
 		height: 5px;
 		border-radius: 50%;
-		background: ${calendarAvailableDot};
+		background: ${palette.notificationBlue[400]};
 		content: '';
 	}
 	.day[data-status='completed'] {
-		background: ${calendarPlayedBackground};
+		background: color-mix(
+			in srgb,
+			${palette.success[500]} 9%,
+			${palette.neutral[100]}
+		);
 	}
 	.setter-name {
 		position: absolute;
@@ -449,7 +450,7 @@ const legendStyles = css`
 		justify-content: center;
 		border-radius: 50%;
 		content: '';
-		background: ${calendarAvailableDot};
+		background: ${palette.notificationBlue[400]};
 	}
 	.completed svg {
 		display: block;
