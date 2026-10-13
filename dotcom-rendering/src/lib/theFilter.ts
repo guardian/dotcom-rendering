@@ -21,3 +21,10 @@ const FILTER_SERIES_TAG_IDS = [
 
 export const hasFilterSeriesTag = (tags: Array<Pick<TagType, 'id'>>): boolean =>
 	tags.some((tag) => FILTER_SERIES_TAG_IDS.includes(tag.id));
+
+export const isRepublished = (
+	firstPublicationDate: string | undefined,
+	webPublicationDate: string,
+): boolean =>
+	firstPublicationDate !== undefined &&
+	firstPublicationDate !== webPublicationDate;

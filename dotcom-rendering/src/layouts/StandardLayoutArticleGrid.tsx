@@ -708,6 +708,9 @@ export const StandardLayoutArticleGrid = ({
 									article.webPublicationSecondaryDateDisplay
 								}
 								webPublicationDate={article.webPublicationDate}
+								firstPublicationDate={
+									article.firstPublicationDate
+								}
 								isCommentable={article.isCommentable}
 								discussionApiUrl={
 									article.config.discussionApiUrl
@@ -733,6 +736,7 @@ export const StandardLayoutArticleGrid = ({
 								article.webPublicationSecondaryDateDisplay
 							}
 							webPublicationDate={article.webPublicationDate}
+							firstPublicationDate={article.firstPublicationDate}
 							isCommentable={article.isCommentable}
 							discussionApiUrl={article.config.discussionApiUrl}
 							shortUrlId={article.config.shortUrlId}
