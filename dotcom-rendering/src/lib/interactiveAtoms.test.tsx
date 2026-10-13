@@ -58,6 +58,7 @@ describe('Interactive atom custom data attributes', () => {
 				id="test-id"
 				customData={mockCustomData}
 				role="inline"
+				type="model.dotcomrendering.pageElements.InteractiveAtomBlockElement"
 				format={{
 					display: 0,
 					design: 0,

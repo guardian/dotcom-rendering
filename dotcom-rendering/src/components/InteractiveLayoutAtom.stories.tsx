@@ -15,6 +15,7 @@ export const InteractiveLayoutAtom = meta.story({
 		elementJs: interactiveLayoutAtom.js,
 		elementCss: interactiveLayoutAtom.css,
 		role: 'inline',
+		type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
 		format: {
 			display: 0,
 			design: 0,

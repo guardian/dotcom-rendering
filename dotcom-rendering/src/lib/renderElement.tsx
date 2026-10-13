@@ -438,6 +438,7 @@ export const renderElement = ({
 						elementCss={element.css}
 						customData={element.customData}
 						role={element.role ?? 'inline'}
+						type={element._type}
 						format={format}
 						articleArrangement={articleArrangement}
 					/>

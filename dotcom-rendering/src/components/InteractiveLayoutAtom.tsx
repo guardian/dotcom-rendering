@@ -11,6 +11,7 @@ export type InteractiveLayoutAtomType = {
 	elementCss?: string;
 	customData?: string;
 	role: RoleType | 'fullWidth';
+	type: string;
 	format: ArticleFormat;
 	articleArrangement?: LayoutType;
 };
@@ -22,6 +23,7 @@ export const InteractiveLayoutAtom = ({
 	elementCss,
 	customData,
 	role,
+	type,
 	format,
 	articleArrangement,
 }: InteractiveLayoutAtomType) => (
@@ -40,6 +42,12 @@ export const InteractiveLayoutAtom = ({
 		data-atom-id={id}
 		data-atom-type="interactive-layout"
 		{...(customData ? { 'data-atom-custom-data': customData } : {})}
+		{...(articleArrangement
+			? {
+					'data-spacefinder-role': role,
+					'data-spacefinder-type': type,
+				}
+			: {})}
 	>
 		{!!elementCss && (
 			<style
