@@ -46,6 +46,10 @@ const styles = {
 	hiddenChoiceCardsState: css`
 		visibility: hidden;
 		pointer-events: none;
+
+		${until.phablet} {
+			display: none;
+		}
 	`,
 	ctaContainer: (isCollapsed: boolean, backgroundColor: string) => css`
 		grid-area: cc_cta;
@@ -162,27 +166,25 @@ export const BannerChoiceCards = ({
 							bannerData.settings.choiceCardSettings
 						}
 					/>
-					{choices.map((choice, index) =>
-						choice === bannerData.selectedChoiceCard ? null : (
-							<div
-								// eslint-disable-next-line react/no-array-index-key -- static list
-								key={index}
-								aria-hidden="true"
-								css={styles.hiddenChoiceCardsState}
-							>
-								<ThreeTierChoiceCards
-									selectedChoiceCard={choice}
-									setSelectedChoiceCard={() => undefined}
-									choices={choices}
-									id={'banner'}
-									radioIdPrefix={`banner-ghost-${index}`}
-									choiceCardDesignSettings={
-										bannerData.settings.choiceCardSettings
-									}
-								/>
-							</div>
-						),
-					)}
+					{choices.map((choice, index) => (
+						<div
+							// eslint-disable-next-line react/no-array-index-key -- static list
+							key={index}
+							aria-hidden="true"
+							css={styles.hiddenChoiceCardsState}
+						>
+							<ThreeTierChoiceCards
+								selectedChoiceCard={choice}
+								setSelectedChoiceCard={() => undefined}
+								choices={choices}
+								id={'banner'}
+								radioIdPrefix={`banner-ghost-${index}`}
+								choiceCardDesignSettings={
+									bannerData.settings.choiceCardSettings
+								}
+							/>
+						</div>
+					))}
 				</div>
 			)}
 			<div
