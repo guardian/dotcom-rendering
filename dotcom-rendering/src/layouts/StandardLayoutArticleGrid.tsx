@@ -254,7 +254,6 @@ export const StandardLayoutArticleGrid = ({
 		? 'immersivePortrait'
 		: getLayoutType(format, mainMediaOrientation);
 
-	getLayoutType(format, mainMediaOrientation);
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
 	const isImmersive =
