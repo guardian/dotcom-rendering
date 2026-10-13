@@ -280,8 +280,6 @@ const darkBackground = css`
 const immersiveDarkBackground = css`
 	${from.tablet} {
 		background-color: ${themePalette('--headline-background-immersive')};
-	}
-	${from.tablet} {
 		padding-bottom: ${space[6]}px;
 	}
 `;
