@@ -41,6 +41,17 @@ const styles = {
 			width: 380px;
 		}
 	`,
+	choiceCardsStatesGrid: css`
+		display: grid;
+		> * {
+			grid-area: 1 / 1;
+			align-self: start;
+		}
+	`,
+	hiddenChoiceCardsState: css`
+		visibility: hidden;
+		pointer-events: none;
+	`,
 	ctaContainer: (isCollapsed: boolean, backgroundColor: string) => css`
 		grid-area: cc_cta;
 		display: flex;
@@ -141,15 +152,7 @@ export const BannerChoiceCards = ({
 			{showChoiceCardSelector && (
 				// All states share one grid cell so the container is as tall as the
 				// tallest state; the live group stays pinned to the top.
-				<div
-					css={css`
-						display: grid;
-						> * {
-							grid-area: 1 / 1;
-							align-self: start;
-						}
-					`}
-				>
+				<div css={styles.choiceCardsStatesGrid}>
 					<ThreeTierChoiceCards
 						selectedChoiceCard={bannerData.selectedChoiceCard}
 						setSelectedChoiceCard={
@@ -170,10 +173,7 @@ export const BannerChoiceCards = ({
 								// eslint-disable-next-line react/no-array-index-key -- static list
 								key={index}
 								aria-hidden="true"
-								css={css`
-									visibility: hidden;
-									pointer-events: none;
-								`}
+								css={styles.hiddenChoiceCardsState}
 							>
 								<ThreeTierChoiceCards
 									selectedChoiceCard={choice}
