@@ -1,9 +1,7 @@
-import { css } from '@emotion/react';
-
-const containerStyles = css`
-	margin: 0;
-	padding: 0;
-`;
+import type { LayoutType } from '../layouts/lib/articleArrangements';
+import type { ArticleFormat } from '../lib/articleFormat';
+import type { RoleType } from '../types/content';
+import { defaultRoleStyles } from './Figure';
 
 export type InteractiveLayoutAtomType = {
 	id: string;
@@ -11,6 +9,9 @@ export type InteractiveLayoutAtomType = {
 	elementJs?: string;
 	elementCss?: string;
 	customData?: string;
+	role: RoleType | 'fullWidth';
+	format: ArticleFormat;
+	articleArrangement?: LayoutType;
 };
 
 export const InteractiveLayoutAtom = ({
@@ -19,10 +20,13 @@ export const InteractiveLayoutAtom = ({
 	elementJs,
 	elementCss,
 	customData,
+	role,
+	format,
+	articleArrangement,
 }: InteractiveLayoutAtomType) => (
 	<div
 		className="interactive interactive-atom"
-		css={containerStyles}
+		css={articleArrangement ?? defaultRoleStyles(role, format)}
 		data-atom-id={id}
 		data-atom-type="interactive-layout"
 		{...(customData ? { 'data-atom-custom-data': customData } : {})}

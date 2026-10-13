@@ -9,6 +9,13 @@ describe('InteractiveLayoutAtom', () => {
 				elementHtml="<p>InteractiveLayoutAtomText</p>"
 				elementJs="var interactiveLayoutAtomVariable = 0"
 				elementCss=".interactive-layout-atom-class {}"
+				role="inline"
+				format={{
+					display: 0,
+					design: 0,
+					theme: 0,
+				}}
+				articleArrangement="interactive"
 			/>,
 		);
 
