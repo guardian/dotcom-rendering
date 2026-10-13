@@ -5,10 +5,7 @@ import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { CSSProperties } from 'react';
 import type { FEArticle } from '../frontend/feArticle';
-import {
-	isWeekendRead,
-	type LayoutType,
-} from '../layouts/lib/articleArrangements';
+import { type LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -419,12 +416,7 @@ export const ArticleMeta = ({
 								/>
 							)}
 
-							{shouldShowContributor(
-								format,
-								isImmersiveGrid,
-								layoutType === 'immersivePortrait' &&
-									isWeekendRead(tags),
-							) && (
+							{shouldShowContributor(format, isImmersiveGrid) && (
 								<Contributor
 									byline={byline}
 									tags={tags}

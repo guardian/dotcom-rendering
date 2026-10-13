@@ -4,10 +4,7 @@ import { from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
 import { grid } from '../grid';
-import {
-	isWeekendRead,
-	type LayoutType,
-} from '../layouts/lib/articleArrangements';
+import { type LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -335,12 +332,7 @@ export const ArticleMetaApps = ({
 					</MetaGridAvatar>
 				)}
 				<MetaGridByline isComment={isComment}>
-					{shouldShowContributor(
-						format,
-						isImmersiveGrid,
-						layoutType === 'immersivePortrait' &&
-							isWeekendRead(tags),
-					) &&
+					{shouldShowContributor(format, isImmersiveGrid) &&
 						!!byline && (
 							<Contributor
 								byline={byline}

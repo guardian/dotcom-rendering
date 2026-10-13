@@ -418,7 +418,10 @@ export const getLayoutType = (
 	mainMediaOrientation: 'portrait' | 'landscape' | 'square',
 ): LayoutType => {
 	if (format.display === ArticleDisplay.Immersive) {
-		if (mainMediaOrientation === 'portrait') {
+		if (
+			mainMediaOrientation === 'portrait' ||
+			format.design === ArticleDesign.WeekendEssay
+		) {
 			return 'immersivePortrait';
 		}
 		// Square images are treated the same as landscape for immersive layouts.
@@ -442,11 +445,3 @@ export const getLayoutType = (
 	if (format.design === ArticleDesign.Interactive) return 'interactive';
 	return 'standard';
 };
-
-export const isWeekendRead = (tags: { id: string }[]): boolean =>
-	tags.some((tag) =>
-		[
-			'news/series/the-saturday-read',
-			'news/series/the-sunday-read',
-		].includes(tag.id),
-	);

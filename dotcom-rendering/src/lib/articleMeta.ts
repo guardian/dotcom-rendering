@@ -36,11 +36,10 @@ export const shouldShowAvatar = (
 export const shouldShowContributor = (
 	format: ArticleFormat,
 	isImmersiveGrid = false,
-	isWeekendRead = false,
 ): boolean => {
 	if (
 		(format.display === ArticleDisplay.Immersive && !isImmersiveGrid) ||
-		(isWeekendRead && isImmersiveGrid)
+		(format.design === ArticleDesign.WeekendEssay && isImmersiveGrid)
 	) {
 		return false;
 	}

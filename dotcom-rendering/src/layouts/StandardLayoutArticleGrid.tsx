@@ -46,7 +46,6 @@ import {
 	type Area,
 	getLayoutType,
 	gridItemCss,
-	isWeekendRead,
 	type LayoutType,
 } from './lib/articleArrangements';
 
@@ -248,11 +247,7 @@ export const StandardLayoutArticleGrid = ({
 		? 'auto'
 		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
-	// If tags includes news/series/the-sunday-read then use immersivePortrait layout, else
-	// use getLayoutType function to determine the layout type based on the format and main media orientation.
-	const layoutType = isWeekendRead(article.tags)
-		? 'immersivePortrait'
-		: getLayoutType(format, mainMediaOrientation);
+	const layoutType = getLayoutType(format, mainMediaOrientation);
 
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
@@ -292,7 +287,8 @@ export const StandardLayoutArticleGrid = ({
 		<article
 			css={[
 				css`
-					background-color: ${isWeekendRead(article.tags)
+					background-color: ${format.design ===
+					ArticleDesign.WeekendEssay
 						? '#fff4f2'
 						: themePalette('--article-background')};
 				`,
@@ -414,7 +410,6 @@ export const StandardLayoutArticleGrid = ({
 						contentType={article.contentType}
 						contentLayout={contentLayoutName}
 						articleArrangement={layoutType}
-						tags={article.tags}
 					/>
 					{article.affiliateLinksDisclaimerRequired && (
 						<AffiliateDisclaimer

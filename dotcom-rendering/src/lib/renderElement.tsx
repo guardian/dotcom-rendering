@@ -75,7 +75,6 @@ import {
 } from '../layouts/lib/interactiveLegacyStyling';
 import type { Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
-import type { TagType } from '../types/tag';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -111,7 +110,6 @@ type Props = {
 	articleArrangement?: LayoutType;
 	idApiUrl?: string;
 	isInDeprecatedInteractiveLayout?: boolean;
-	tags?: TagType[];
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -1059,7 +1057,6 @@ export const RenderArticleElement = ({
 	articleArrangement,
 	idApiUrl,
 	isInDeprecatedInteractiveLayout,
-	tags,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -1115,7 +1112,6 @@ export const RenderArticleElement = ({
 			isTimeline={isTimeline}
 			isInDeprecatedInteractiveLayout={isInDeprecatedInteractiveLayout}
 			articleArrangement={articleArrangement}
-			tags={tags}
 		>
 			{el}
 		</Figure>

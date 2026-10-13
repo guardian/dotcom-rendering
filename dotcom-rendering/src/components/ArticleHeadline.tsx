@@ -18,10 +18,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
-import {
-	isWeekendRead,
-	type LayoutType,
-} from '../layouts/lib/articleArrangements';
+import { type LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
 import {
@@ -542,7 +539,10 @@ export const ArticleHeadline = ({
 }: Props) => {
 	const isInverted = layoutType === 'immersiveLandscape';
 	const isLegacyImmersive = layoutType == null;
-	if (layoutType === 'immersivePortrait' && isWeekendRead(tags)) {
+	if (
+		layoutType === 'immersivePortrait' &&
+		format.design === ArticleDesign.WeekendEssay
+	) {
 		return (
 			<div css={decideBottomPadding({ format, hasAvatar })}>
 				<WithAgeWarning

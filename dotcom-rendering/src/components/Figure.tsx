@@ -1,9 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints, from, space, until } from '@guardian/source/foundations';
-import {
-	isWeekendRead,
-	type LayoutType,
-} from '../layouts/lib/articleArrangements';
+import { type LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -11,7 +8,6 @@ import {
 } from '../lib/articleFormat';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import type { FEElement, RoleType } from '../types/content';
-import type { TagType } from '../types/tag';
 import { minHeaderHeightPx } from './Masthead/Titlepiece/constants';
 
 type Props = {
@@ -25,7 +21,6 @@ type Props = {
 	isTimeline?: boolean;
 	isInDeprecatedInteractiveLayout?: boolean;
 	articleArrangement?: LayoutType;
-	tags?: TagType[];
 };
 
 const roleCss = {
@@ -311,7 +306,6 @@ export const Figure = ({
 	isTimeline = false,
 	isInDeprecatedInteractiveLayout = false,
 	articleArrangement,
-	tags,
 }: Props) => {
 	if (isMainMedia && !isTimeline) {
 		// Don't add in-body styles for main media elements
@@ -329,8 +323,7 @@ export const Figure = ({
 						format.theme === ArticleSpecial.Labs,
 					),
 					articleArrangement === 'immersivePortrait' &&
-						tags &&
-						isWeekendRead(tags) &&
+						format.design === ArticleDesign.WeekendEssay &&
 						css`
 							position: relative;
 							padding: 10px;
