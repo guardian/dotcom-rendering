@@ -117,7 +117,7 @@ export const FrontWithImage = {
 	},
 } satisfies Story;
 
-export const FrontWithImageHiddenHeader = {
+export const FrontWithImageAndHiddenHeader = {
 	args: {
 		renderingPage: 'front',
 		customSubNav: {
