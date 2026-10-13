@@ -220,11 +220,14 @@ export const PuzzlesDirectoryProgress = ({ layout, renderAds }: Props) => {
 					headers.Authorization = `Bearer ${authStatus.accessToken.accessToken}`;
 				}
 
-				const response = await fetch('/puzzles-and-games/progress', {
-					cache: 'no-store',
-					credentials: 'same-origin',
-					headers,
-				});
+				const response = await fetch(
+					`${window.guardian.config.page.ajaxUrl}/puzzles-and-games/progress`,
+					{
+						cache: 'no-store',
+						credentials: 'same-origin',
+						headers,
+					},
+				);
 				if (!response.ok) return;
 				const items = progressItems(await response.json());
 				if (active && request === requests.current && items) {
