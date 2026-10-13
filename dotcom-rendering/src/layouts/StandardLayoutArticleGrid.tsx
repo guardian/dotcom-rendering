@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
+import { palette as sourcePalette } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
@@ -14,6 +15,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
+import { overlayMaskGradientStyles } from '../components/FeatureCard';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { Island } from '../components/Island';
@@ -76,22 +78,15 @@ const immersiveMediaBelowDesktop = css`
 			left: 0;
 			right: 0;
 			bottom: 0;
-			height: 250px;
+			height: 240px;
 			z-index: ${getZIndex('mediaOverlay')};
-			background: linear-gradient(180deg, #1a1a1a00, #1a1a1a 120px 100%);
-			backdrop-filter: blur(12px);
-			mask-image: linear-gradient(
+			background: linear-gradient(
 				180deg,
-				#1a1a1a00,
-				#1a1a1a0a,
-				#1a1a1a25,
-				#1a1a1a4f,
-				#1a1a1a80,
-				#1a1a1ab0,
-				#1a1a1ada,
-				#1a1a1af5 56px,
-				#1a1a1a 70px
+				${sourcePalette.neutral[10]},
+				${sourcePalette.neutral[10]} 120px 100%
 			);
+			backdrop-filter: blur(12px);
+			${overlayMaskGradientStyles('180deg')};
 			pointer-events: none;
 		}
 	}
