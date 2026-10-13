@@ -216,6 +216,29 @@ export class RenderingCDKStack extends CDKStack {
 		const { guApp, stage, instanceType, scaling, domainName, ecsProps } =
 			props;
 
+		// If a target is set to receive traffic, ensure it has some compute.
+		// TODO remove once GuCDK does this.
+		const maybeTargetGroupWeights = ecsProps?.targetGroupWeights;
+		if (maybeTargetGroupWeights) {
+			const { ec2: ec2Weight, ecs: ecsWeight } = maybeTargetGroupWeights;
+			const totalWeight = ec2Weight + ecsWeight;
+
+			const ec2Min = scaling.minimumInstances;
+			const ecsMin = ecsProps.scaling.minimumTasks;
+
+			if (ec2Weight > 0 && ec2Min <= 0) {
+				throw new Error(
+					`Invalid configuration: EC2 is set to serve traffic (${ec2Weight} of ${totalWeight} requests), but has ${ec2Min} instances.`,
+				);
+			}
+
+			if (ecsWeight > 0 && ecsMin <= 0) {
+				throw new Error(
+					`Invalid configuration: ECS is set to serve traffic (${ecsWeight} of ${totalWeight} requests), but has ${ecsMin} tasks.`,
+				);
+			}
+		}
+
 		super(scope, id, {
 			// Any version of this app should run in the eu-west-1 region
 			env: { region: 'eu-west-1' },
