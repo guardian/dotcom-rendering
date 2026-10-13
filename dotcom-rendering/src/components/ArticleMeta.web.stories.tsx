@@ -453,15 +453,3 @@ export const RepublishedFilterArticle = meta.story({
 		chromatic: { modes: republishedFilterChromaticModes },
 	},
 });
-
-export const RepublishedFilterArticleUS = meta.story({
-	...RepublishedFilterArticle.input,
-	args: {
-		...republishedFilterArgs,
-		primaryDateline: 'Thu 8 Oct 2026 10.36 EDT',
-	},
-	parameters: {
-		...RepublishedFilterArticle.input.parameters,
-		chromatic: { modes: republishedFilterChromaticModes },
-	},
-});
