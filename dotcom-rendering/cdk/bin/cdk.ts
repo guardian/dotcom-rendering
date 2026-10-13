@@ -109,15 +109,15 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 	guApp: 'tag-page-rendering',
 	stage: 'CODE',
 	domainName: 'tag-page-rendering.code.dev-guardianapis.com',
-	scaling: { minimumInstances: 1, maximumInstances: 3 },
+	scaling: { minimumInstances: 0, maximumInstances: 0 },
 	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
 		taskCpu: 1024,
 		taskMemoryLimitMiB: 2048,
 		scaling: {
-			minimumTasks: 0,
-			maximumTasks: 0,
+			minimumTasks: 1,
+			maximumTasks: 3,
 			cpuScaling: {
 				targetValue: 20,
 				scaleInCooldown: Duration.seconds(60),
