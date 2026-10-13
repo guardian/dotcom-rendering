@@ -140,6 +140,13 @@ const headlineFont = (format: ArticleFormat) => {
 	`;
 };
 
+const weekendReadFont = css`
+	${headlineMedium34}
+	${from.leftCol} {
+		${headlineMedium50}
+	}
+`;
+
 const invertedFontLineHeight = css`
 	line-height: 2.1875rem;
 
@@ -525,6 +532,30 @@ export const ArticleHeadline = ({
 }: Props) => {
 	const isInverted = layoutType === 'immersiveLandscape';
 	const isLegacyImmersive = layoutType == null;
+	if (
+		layoutType === 'immersivePortrait' &&
+		format.design === ArticleDesign.WeekendEssay
+	) {
+		return (
+			<div css={decideBottomPadding({ format, hasAvatar })}>
+				<WithAgeWarning
+					tags={tags}
+					webPublicationDateDeprecated={webPublicationDateDeprecated}
+					format={format}
+				>
+					<h1 css={weekendReadFont}>{headlineString}</h1>
+				</WithAgeWarning>
+				{!!byline && (
+					<HeadlineByline
+						format={format}
+						byline={byline}
+						tags={tags}
+						layoutType={layoutType}
+					/>
+				)}
+			</div>
+		);
+	}
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
