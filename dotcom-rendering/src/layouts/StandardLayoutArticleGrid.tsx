@@ -62,10 +62,10 @@ const stretchLines = css`
 	}
 `;
 
-const immersiveMediaBelowDesktop = css`
+const landscapeImmersiveMediaBelowDesktop = css`
 	${until.tablet} {
 		position: relative;
-		aspect-ratio: 4 / 5;
+
 		overflow: hidden;
 
 		> div {
@@ -338,7 +338,8 @@ export const StandardLayoutArticleGrid = ({
 									}
 								`}
 
-								${immersiveMediaBelowDesktop}
+								${layoutType === 'immersiveLandscape' &&
+								landscapeImmersiveMediaBelowDesktop}
 
 								${hasMinimumImageHeight &&
 								css`
