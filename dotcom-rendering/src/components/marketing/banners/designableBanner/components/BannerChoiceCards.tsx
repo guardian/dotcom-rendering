@@ -10,12 +10,23 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import { useEffect, useRef, useState } from 'react';
 import { enrichSupportUrl, getChoiceCardUrl } from '../../../lib/tracking';
 import { ThreeTierChoiceCards } from '../../../shared/ThreeTierChoiceCards';
 import type { BannerData } from '../BannerProps';
 import { buttonStyles, buttonThemes } from '../styles/buttonStyles';
 
 const phabletContentMaxWidth = '492px';
+
+export const getMaximumChoiceCardsHeight = (
+	stacks: readonly HTMLElement[],
+): number =>
+	Math.ceil(
+		Math.max(
+			0,
+			...stacks.map((stack) => stack.getBoundingClientRect().height),
+		),
+	);
 
 const styles = {
 	threeTierChoiceCardsContainer: css`
@@ -128,7 +139,49 @@ export const BannerChoiceCards = ({
 }: {
 	bannerData: BannerData;
 }): JSX.Element | null => {
-	if (!bannerData.selectors.showChoiceCardCtas || !bannerData.choices) {
+	const visibleCardsRef = useRef<HTMLDivElement>(null);
+	const measurementRef = useRef<HTMLDivElement>(null);
+	const [maximumHeight, setMaximumHeight] = useState(0);
+
+	useEffect(() => {
+		const measurementContainer = measurementRef.current;
+		const visibleCards = visibleCardsRef.current;
+		if (!measurementContainer || !visibleCards) {
+			setMaximumHeight(0);
+			return;
+		}
+		measurementContainer.setAttribute('inert', '');
+		const stacks = [
+			visibleCards,
+			...measurementContainer.querySelectorAll<HTMLElement>(
+				'[data-choice-cards-height-candidate]',
+			),
+		];
+		const measure = () =>
+			setMaximumHeight(getMaximumChoiceCardsHeight(stacks));
+		const observer =
+			typeof ResizeObserver === 'undefined'
+				? undefined
+				: new ResizeObserver(measure);
+		for (const stack of stacks) {
+			observer?.observe(stack);
+		}
+		window.addEventListener('resize', measure);
+		if ('fonts' in document) {
+			document.fonts.addEventListener('loadingdone', measure);
+		}
+		measure();
+		return () => {
+			observer?.disconnect();
+			window.removeEventListener('resize', measure);
+			if ('fonts' in document) {
+				document.fonts.removeEventListener('loadingdone', measure);
+			}
+		};
+	}, [bannerData]);
+
+	const choices = bannerData.choices;
+	if (!bannerData.selectors.showChoiceCardCtas || !choices) {
 		return null;
 	}
 
@@ -138,20 +191,81 @@ export const BannerChoiceCards = ({
 	return (
 		<div css={styles.threeTierChoiceCardsContainer}>
 			{showChoiceCardSelector && (
-				<ThreeTierChoiceCards
-					selectedChoiceCard={bannerData.selectedChoiceCard}
-					setSelectedChoiceCard={
-						bannerData.actions.onChoiceCardChange
-					}
-					choices={bannerData.choices}
-					id={'banner'}
-					submitComponentEvent={
-						bannerData.actions.submitComponentEvent
-					}
-					choiceCardDesignSettings={
-						bannerData.settings.choiceCardSettings
-					}
-				/>
+				<div
+					css={css`
+						position: relative;
+						min-height: ${maximumHeight}px;
+						display: flow-root;
+					`}
+				>
+					<div
+						ref={visibleCardsRef}
+						data-visible-choice-cards=""
+						css={css`
+							display: flow-root;
+						`}
+					>
+						<ThreeTierChoiceCards
+							selectedChoiceCard={bannerData.selectedChoiceCard}
+							setSelectedChoiceCard={
+								bannerData.actions.onChoiceCardChange
+							}
+							choices={choices}
+							id={'banner'}
+							submitComponentEvent={
+								bannerData.actions.submitComponentEvent
+							}
+							choiceCardDesignSettings={
+								bannerData.settings.choiceCardSettings
+							}
+						/>
+					</div>
+					<div
+						ref={measurementRef}
+						aria-hidden="true"
+						css={css`
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 0;
+							overflow: hidden;
+							visibility: hidden;
+							pointer-events: none;
+						`}
+					>
+						{choices.map((choice, index) => {
+							if (choice === bannerData.selectedChoiceCard) {
+								return null;
+							}
+							const measurementId = `banner-measurement-${index}`;
+							return (
+								<div
+									key={measurementId}
+									data-choice-cards-height-candidate=""
+									css={css`
+										display: flow-root;
+									`}
+								>
+									<ThreeTierChoiceCards
+										selectedChoiceCard={choice}
+										setSelectedChoiceCard={
+											bannerData.actions
+												.onChoiceCardChange
+										}
+										choices={choices}
+										id="banner"
+										radioIdPrefix={measurementId}
+										choiceCardDesignSettings={
+											bannerData.settings
+												.choiceCardSettings
+										}
+									/>
+								</div>
+							);
+						})}
+					</div>
+				</div>
 			)}
 			<div
 				css={styles.ctaContainer(

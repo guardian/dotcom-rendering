@@ -122,6 +122,7 @@ type ThreeTierChoiceCardsProps = {
 	setSelectedChoiceCard: Dispatch<SetStateAction<ChoiceCard | undefined>>;
 	choices: ChoiceCard[];
 	id: 'epic' | 'banner'; // uniquely identify this choice cards component to avoid conflicting with others
+	radioIdPrefix?: string;
 	submitComponentEvent?: (componentEvent: ComponentEvent) => Promise<void>;
 	choiceCardDesignSettings?: ChoiceCardDesignSettings;
 };
@@ -145,6 +146,7 @@ export const ThreeTierChoiceCards = ({
 	setSelectedChoiceCard,
 	choices,
 	id,
+	radioIdPrefix = id,
 	submitComponentEvent,
 	choiceCardDesignSettings,
 }: ThreeTierChoiceCardsProps) => {
@@ -321,7 +323,7 @@ export const ThreeTierChoiceCards = ({
 							// this, both OneOff cards produced
 							// id="choicecard-banner-OneOff", breaking <label
 							// htmlFor> association and React keys.
-							const radioId = `choicecard-${id}-${supportTier}${
+							const radioId = `choicecard-${radioIdPrefix}-${supportTier}${
 								supportTier !== 'OneOff'
 									? `-${product.ratePlan}`
 									: ''
@@ -356,7 +358,7 @@ export const ThreeTierChoiceCards = ({
 											}
 											id={radioId}
 											value={radioId}
-											name={`choice-cards-${id}`}
+											name={`choice-cards-${radioIdPrefix}`}
 											cssOverrides={labelOverrideStyles(
 												selected,
 											)}
