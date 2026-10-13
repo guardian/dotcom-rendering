@@ -196,6 +196,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					frontId={front.pressedPage.id}
 					collectionId={0}
+					hasPageSkin={hasPageSkin}
 				/>
 			)
 		);
