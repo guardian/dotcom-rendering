@@ -1889,13 +1889,13 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             ],
           },
         },
-        "MaxSize": "3",
+        "MaxSize": "0",
         "MetricsCollection": [
           {
             "Granularity": "1Minute",
           },
         ],
-        "MinSize": "1",
+        "MinSize": "0",
         "Tags": [
           {
             "Key": "App",
@@ -2109,7 +2109,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
-        "MaxCapacity": 9,
+        "MaxCapacity": 3,
         "MinCapacity": 1,
         "ResourceId": {
           "Fn::Join": [
@@ -3969,13 +3969,13 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
             ],
           },
         },
-        "MaxSize": "90",
+        "MaxSize": "0",
         "MetricsCollection": [
           {
             "Granularity": "1Minute",
           },
         ],
-        "MinSize": "9",
+        "MinSize": "0",
         "Tags": [
           {
             "Key": "App",
