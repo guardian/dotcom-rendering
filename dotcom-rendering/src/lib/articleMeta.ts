@@ -37,7 +37,10 @@ export const shouldShowContributor = (
 	format: ArticleFormat,
 	isImmersiveGrid = false,
 ): boolean => {
-	if (format.display === ArticleDisplay.Immersive && !isImmersiveGrid) {
+	if (
+		(format.display === ArticleDisplay.Immersive && !isImmersiveGrid) ||
+		(format.design === ArticleDesign.WeekendEssay && isImmersiveGrid)
+	) {
 		return false;
 	}
 
