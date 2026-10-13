@@ -5960,7 +5960,8 @@
                 "RecipeDesign",
                 "ReviewDesign",
                 "TimelineDesign",
-                "VideoDesign"
+                "VideoDesign",
+                "WeekendEssayDesign"
             ],
             "type": "string"
         },

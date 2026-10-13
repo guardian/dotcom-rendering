@@ -95,6 +95,12 @@ const articleHeaderStyles = css`
 	display: flex;
 	align-items: center;
 	white-space: nowrap;
+	/** Adding top padding to align with the subnav links
+	 * due to the different default layout models unordered lists and anchor tags use
+	 * even if they have the same min-height.
+	 * The 1.1px is selected based on the alignment visually with the subnav links.
+	 */
+	padding-top: 1.1px;
 	padding-right: ${space[2]}px;
 	margin-right: ${space[2]}px;
 	border-right: 1px solid ${themePalette('--masthead-nav-lines')};
@@ -150,7 +156,7 @@ const imageListStyles = css`
 	display: flex;
 	align-items: center;
 	column-gap: ${space[2]}px;
-	min-height: 28px;
+	min-height: 39px;
 	padding: 0 ${space[3]}px;
 
 	${from.mobileLandscape} {
@@ -158,7 +164,7 @@ const imageListStyles = css`
 	}
 
 	${from.tablet} {
-		min-height: 30px;
+		min-height: 44px;
 	}
 `;
 

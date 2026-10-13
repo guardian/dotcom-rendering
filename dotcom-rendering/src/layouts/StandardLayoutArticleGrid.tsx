@@ -64,6 +64,7 @@ const immersiveMediaBelowDesktop = (
 	headlineBackground: string,
 	isMainMediaImage: boolean,
 	hasMinimumImageHeight: boolean,
+	isLandscape: boolean,
 ) => css`
 	${until.tablet} {
 		aspect-ratio: 4 / 5;
@@ -77,31 +78,38 @@ const immersiveMediaBelowDesktop = (
 
 		${!isMainMediaImage && 'overflow: hidden;'}
 
-		&::after {
-			content: '';
-			position: absolute;
-			left: 0;
-			right: 0;
-			bottom: ${hasMinimumImageHeight ? '-1px' : '0'};
-			height: ${hasMinimumImageHeight
-				? '180px'
-				: isMainMediaImage
-					? 'min(20%, calc(200% - 120vw + 30px))'
-					: 'min(60%, 144px)'};
-			z-index: ${getZIndex('mediaOverlay')};
-			background: linear-gradient(
-				to bottom,
-				rgba(0, 0, 0, ${hasMinimumImageHeight ? '0' : '0.08'}),
-				${headlineBackground} ${hasMinimumImageHeight ? '100%' : '72%'}
-			);
-			backdrop-filter: blur(12px);
-			mask-image: linear-gradient(
-				to bottom,
-				transparent ${hasMinimumImageHeight ? '0%' : '40%'},
-				black 60%
-			);
-			pointer-events: none;
-		}
+		${isLandscape &&
+		css`
+			${until.tablet} {
+				aspect-ratio: 4 / 5;
+			}
+			&::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: ${hasMinimumImageHeight ? '-1px' : '0'};
+				height: ${hasMinimumImageHeight
+					? '180px'
+					: isMainMediaImage
+						? 'min(60%, calc(200% - 120vw + 30px))'
+						: 'min(60%, 144px)'};
+				z-index: ${getZIndex('mediaOverlay')};
+				background: linear-gradient(
+					to bottom,
+					rgba(0, 0, 0, ${hasMinimumImageHeight ? '0' : '0.08'}),
+					${headlineBackground}
+						${hasMinimumImageHeight ? '100%' : '72%'}
+				);
+				backdrop-filter: blur(12px);
+				mask-image: linear-gradient(
+					to bottom,
+					transparent ${hasMinimumImageHeight ? '0%' : '40%'},
+					black 60%
+				);
+				pointer-events: none;
+			}
+		`}
 	}
 `;
 
@@ -204,7 +212,6 @@ export const StandardLayoutArticleGrid = ({
 			: undefined;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
-	const isImmersive = format.display === ArticleDisplay.Immersive;
 
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
@@ -224,8 +231,6 @@ export const StandardLayoutArticleGrid = ({
 		mainMediaType ===
 		'model.dotcomrendering.pageElements.MediaAtomBlockElement';
 
-	const hasMinimumImageHeight = isLabs && isImmersive && isMainMediaImage;
-
 	const mainMediaAspectRatio = isMainMediaImage
 		? mainMedia.media.allImages[0]?.fields.aspectRatio
 		: isMainMediaAtom
@@ -243,7 +248,14 @@ export const StandardLayoutArticleGrid = ({
 		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
 	const layoutType = getLayoutType(format, mainMediaOrientation);
+
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
+
+	const isImmersive =
+		layoutType === 'immersivePortrait' ||
+		layoutType === 'immersiveLandscape';
+
+	const hasMinimumImageHeight = isLabs && isImmersive && isMainMediaImage;
 
 	const ageWarning = getAgeWarning(
 		article.tags,
@@ -266,11 +278,19 @@ export const StandardLayoutArticleGrid = ({
 		}
 	`;
 
+	const hideCaptionBeneathMainMedia =
+		layoutType === 'media' ||
+		layoutType === 'immersiveLandscape' ||
+		layoutType === 'immersivePortrait';
+
 	return (
 		<article
 			css={[
 				css`
-					background-color: ${themePalette('--article-background')};
+					background-color: ${format.design ===
+					ArticleDesign.WeekendEssay
+						? '#fff4f2'
+						: themePalette('--article-background')};
 				`,
 				grid.container,
 				grid.outerRules(),
@@ -334,13 +354,16 @@ export const StandardLayoutArticleGrid = ({
 
 								${layoutType === 'immersivePortrait' &&
 								css`
-									aspect-ratio: 4/5;
+									${from.desktop} {
+										aspect-ratio: 4/5;
+									}
 								`}
 
 								${immersiveMediaBelowDesktop(
 									headlineBackgroundImmersive,
 									isMainMediaImage,
 									hasMinimumImageHeight,
+									layoutType === 'immersiveLandscape',
 								)}
 
 								${hasMinimumImageHeight &&
@@ -382,7 +405,7 @@ export const StandardLayoutArticleGrid = ({
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
 						editionId={article.editionId}
-						hideCaption={layoutType === 'media'}
+						hideCaption={hideCaptionBeneathMainMedia}
 						shouldHideAds={article.shouldHideAds}
 						contentType={article.contentType}
 						contentLayout={contentLayoutName}
@@ -402,7 +425,7 @@ export const StandardLayoutArticleGrid = ({
 				layoutType={layoutType}
 				element="aside"
 				css={[
-					isImmersive &&
+					layoutType === 'immersiveLandscape' &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 
@@ -412,11 +435,16 @@ export const StandardLayoutArticleGrid = ({
 						`,
 					layoutType === 'immersivePortrait' &&
 						css`
-							align-self: end;
+							align-content: flex-start;
 							margin-bottom: 0;
 
+							${until.desktop} {
+								border-bottom: 1px solid
+									${themePalette('--article-border')};
+							}
+
 							${from.desktop} {
-								margin-bottom: 2px;
+								align-content: flex-end;
 							}
 						`,
 					layoutType === 'picture' &&
@@ -441,7 +469,7 @@ export const StandardLayoutArticleGrid = ({
 				area="headline"
 				layoutType={layoutType}
 				css={[
-					isImmersive &&
+					layoutType === 'immersiveLandscape' &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 
@@ -554,7 +582,7 @@ export const StandardLayoutArticleGrid = ({
 						padding-top: ${space[2]}px;
 					`}
 				>
-					<Hide from="leftCol">
+					{layoutType === 'immersivePortrait' ? (
 						<Caption
 							captionText={captionText}
 							format={format}
@@ -563,7 +591,18 @@ export const StandardLayoutArticleGrid = ({
 							isMainMedia={true}
 							showIconBelowLeftCol={true}
 						/>
-					</Hide>
+					) : (
+						<Hide from="leftCol">
+							<Caption
+								captionText={captionText}
+								format={format}
+								shouldLimitWidth={false}
+								isLeftCol={true}
+								isMainMedia={true}
+								showIconBelowLeftCol={true}
+							/>
+						</Hide>
+					)}
 				</GridItem>
 			)}
 			<GridItem
