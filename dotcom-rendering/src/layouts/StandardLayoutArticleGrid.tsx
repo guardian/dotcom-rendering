@@ -759,6 +759,7 @@ export const StandardLayoutArticleGrid = ({
 						isRightToLeftLang={article.isRightToLeftLang}
 						editionId={article.editionId}
 						shouldHideAds={article.shouldHideAds}
+						articleArrangement={layoutType}
 						idApiUrl={article.config.idApiUrl}
 					/>
 					<MatchInfoContainer

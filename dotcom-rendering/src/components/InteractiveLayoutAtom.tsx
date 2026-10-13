@@ -1,3 +1,4 @@
+import { css } from 'storybook/theming';
 import type { LayoutType } from '../layouts/lib/articleArrangements';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { RoleType } from '../types/content';
@@ -26,7 +27,16 @@ export const InteractiveLayoutAtom = ({
 }: InteractiveLayoutAtomType) => (
 	<div
 		className="interactive interactive-atom"
-		css={articleArrangement ?? defaultRoleStyles(role, format)}
+		css={
+			// Interactive atoms in the grid based layout (i.e. with an article arrangement)
+			// have default role styles applied as they no longer have a figure wrapper
+			articleArrangement
+				? defaultRoleStyles(role, format)
+				: css`
+						margin: 0;
+						padding: 0;
+					`
+		}
 		data-atom-id={id}
 		data-atom-type="interactive-layout"
 		{...(customData ? { 'data-atom-custom-data': customData } : {})}

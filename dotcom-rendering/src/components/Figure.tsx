@@ -19,7 +19,6 @@ type Props = {
 	className?: string;
 	type?: FEElement['_type'];
 	isTimeline?: boolean;
-	isInDeprecatedInteractiveLayout?: boolean;
 	articleArrangement?: LayoutType;
 };
 
@@ -304,7 +303,6 @@ export const Figure = ({
 	className = '',
 	type,
 	isTimeline = false,
-	isInDeprecatedInteractiveLayout = false,
 	articleArrangement,
 }: Props) => {
 	if (isMainMedia && !isTimeline) {
@@ -334,7 +332,8 @@ export const Figure = ({
 				role,
 				format,
 				isTimeline,
-				isInDeprecatedInteractiveLayout,
+				format.design === ArticleDesign.Interactive &&
+					articleArrangement === undefined,
 			)}
 			data-spacefinder-role={role}
 			data-spacefinder-type={type}

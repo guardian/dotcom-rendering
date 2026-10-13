@@ -109,7 +109,6 @@ type Props = {
 	contentLayout?: string;
 	articleArrangement?: LayoutType;
 	idApiUrl?: string;
-	isInDeprecatedInteractiveLayout?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -1060,7 +1059,6 @@ export const RenderArticleElement = ({
 	contentLayout,
 	articleArrangement,
 	idApiUrl,
-	isInDeprecatedInteractiveLayout,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -1090,10 +1088,14 @@ export const RenderArticleElement = ({
 		contentLayout,
 		articleArrangement,
 		idApiUrl,
-		isInDeprecatedInteractiveLayout,
 	});
 
-	const needsFigure = !bareElements.has(element._type);
+	const needsFigure =
+		!bareElements.has(element._type) ||
+		(format.design === ArticleDesign.Interactive &&
+			articleArrangement === undefined &&
+			element._type ===
+				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement');
 
 	const role =
 		'role' in element
@@ -1114,7 +1116,6 @@ export const RenderArticleElement = ({
 			type={element._type}
 			format={format}
 			isTimeline={isTimeline}
-			isInDeprecatedInteractiveLayout={isInDeprecatedInteractiveLayout}
 			articleArrangement={articleArrangement}
 		>
 			{el}
