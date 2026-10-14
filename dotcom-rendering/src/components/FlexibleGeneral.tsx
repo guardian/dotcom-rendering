@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
 import { isWithinTwelveHours } from '../lib/formatTime';
@@ -289,7 +290,7 @@ const SplashCardLayout = ({
 	collectionId,
 }: SplashCardLayoutProps) => {
 	const isSnapLink = card.snapData?.embedHtml;
-	if (isSnapLink != null) {
+	if (!isUndefined(isSnapLink)) {
 		return (
 			<SnapLinkLayout
 				snapData={card.snapData as DCRSnapType}
