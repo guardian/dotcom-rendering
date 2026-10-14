@@ -1,5 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { Fragment } from 'react';
 import { Accessibility } from '../components/Accessibility.island';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
@@ -195,20 +196,22 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									aspectRatio="5:4"
 								/>
 							</FrontSection>
-							{insertStorylinesSection &&
-								tagPage.storylinesContent && (
-									<Island priority="critical">
-										<StorylinesSectionContent
-											index={1}
-											editionId={tagPage.editionId}
-											storylinesContent={
-												tagPage.storylinesContent
-											}
-											containerId="storylines"
-											pagination={tagPagePagination}
-										/>
-									</Island>
-								)}
+							<Hide until="tablet">
+								{insertStorylinesSection &&
+									tagPage.storylinesContent && (
+										<Island priority="critical">
+											<StorylinesSectionContent
+												index={1}
+												editionId={tagPage.editionId}
+												storylinesContent={
+													tagPage.storylinesContent
+												}
+												containerId="storylines"
+												pagination={tagPagePagination}
+											/>
+										</Island>
+									)}
+							</Hide>
 							{mobileAdPositions.includes(index) && (
 								<MobileAdSlot
 									renderAds={renderAds}
