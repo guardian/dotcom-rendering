@@ -485,7 +485,7 @@ export const Dropdown = ({
 						htmlFor={checkboxID}
 						css={[buttonStyles, cssOverrides]}
 					>
-						{label}
+						{renderTrigger ? renderTrigger(false) : label}
 					</label>
 					<input
 						type="checkbox"

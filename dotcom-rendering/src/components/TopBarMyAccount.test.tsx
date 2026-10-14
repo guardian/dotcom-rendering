@@ -1,6 +1,7 @@
 import type { AccessToken, IDToken } from '@guardian/identity-auth';
 import { fireEvent, render } from '@testing-library/react';
 import type { ReactElement } from 'react';
+import { renderToString } from 'react-dom/server';
 import type { CustomIdTokenClaims, SignedIn } from '../lib/identity';
 import { ConfigProvider } from './ConfigContext';
 import { TopBarMyAccount } from './TopBarMyAccount';
@@ -11,19 +12,21 @@ jest.mock('../lib/useBraze', () => ({
 	}),
 }));
 
+const withConfig = (component: ReactElement) => (
+	<ConfigProvider
+		value={{
+			renderingTarget: 'Web',
+			darkModeAvailable: false,
+			assetOrigin: '/',
+			editionId: 'UK',
+		}}
+	>
+		{component}
+	</ConfigProvider>
+);
+
 const renderWithConfig = (component: ReactElement) =>
-	render(
-		<ConfigProvider
-			value={{
-				renderingTarget: 'Web',
-				darkModeAvailable: false,
-				assetOrigin: '/',
-				editionId: 'UK',
-			}}
-		>
-			{component}
-		</ConfigProvider>,
-	);
+	render(withConfig(component));
 
 const signedInAuthStatus: SignedIn = {
 	kind: 'SignedIn',
@@ -38,6 +41,31 @@ const signedInAuthStatus: SignedIn = {
 };
 
 describe('TopBarMyAccount', () => {
+	it('server-renders the responsive signed-in trigger before hydration', () => {
+		const container = document.createElement('div');
+		container.innerHTML = renderToString(
+			withConfig(
+				<TopBarMyAccount
+					mmaUrl="https://manage.example.com"
+					idUrl="https://profile.example.com"
+					discussionApiUrl="https://discussion.example.com"
+					idApiUrl="https://id.example.com"
+					authStatus={signedInAuthStatus}
+					showSignInTextOnMobile={false}
+				/>,
+			),
+		);
+
+		const accountLabel = container.querySelector(
+			'label[for="checkbox-id-topbar-my-account"]',
+		);
+
+		expect(accountLabel?.querySelector('span')).toHaveTextContent(
+			'My account',
+		);
+		expect(accountLabel?.querySelector('div svg')).not.toBeNull();
+	});
+
 	it('renders a signed-out control with an accessible sign-in name', () => {
 		const { getByRole } = renderWithConfig(
 			<TopBarMyAccount
