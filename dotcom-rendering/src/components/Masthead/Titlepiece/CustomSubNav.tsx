@@ -41,6 +41,7 @@ const subNavStyles = css`
 	${from.mobileMedium} {
 		margin-top: ${space[3]}px;
 	}
+
 	${from.tablet} {
 		min-height: 30px;
 	}
@@ -61,9 +62,11 @@ const articleContainerStyles = css`
 	${from.mobileMedium} {
 		min-height: 40px;
 	}
+
 	${from.tablet} {
 		min-height: 42px;
 	}
+
 	${from.leftCol} {
 		min-height: 44px;
 	}
@@ -80,6 +83,7 @@ const articleSubNavStyles = css`
 	${from.mobileMedium} {
 		margin-top: 0;
 	}
+
 	${from.leftCol} {
 		margin-top: 0;
 	}
@@ -91,6 +95,12 @@ const articleHeaderStyles = css`
 	display: flex;
 	align-items: center;
 	white-space: nowrap;
+	/** Adding top padding to align with the subnav links
+	 * due to the different default layout models unordered lists and anchor tags use
+	 * even if they have the same min-height.
+	 * The 1.1px is selected based on the alignment visually with the subnav links.
+	 */
+	padding-top: 1.1px;
 	padding-right: ${space[2]}px;
 	margin-right: ${space[2]}px;
 	border-right: 1px solid ${themePalette('--masthead-nav-lines')};
@@ -146,14 +156,15 @@ const imageListStyles = css`
 	display: flex;
 	align-items: center;
 	column-gap: ${space[2]}px;
-	min-height: 28px;
+	min-height: 39px;
 	padding: 0 ${space[3]}px;
 
 	${from.mobileLandscape} {
 		padding: 0 ${space[5]}px;
 	}
+
 	${from.tablet} {
-		min-height: 30px;
+		min-height: 44px;
 	}
 `;
 
@@ -283,6 +294,15 @@ const frontContainerStyles = css`
 	color: ${themePalette('--masthead-nav-link-text')};
 `;
 
+const CustomHeader = (
+	customSubNav: CustomSubnav,
+	cssOverrides: SerializedStyles | undefined,
+) => {
+	return customSubNav.header.showHeaderText ? (
+		<HeaderText header={customSubNav.header} cssOverrides={cssOverrides} />
+	) : undefined;
+};
+
 /**
  * Renders a custom subnav (header + links, images and further data to follow) assigned to fronts or articles.
  */
@@ -333,10 +353,7 @@ export const CustomSubNav = ({
 						images={webImages}
 						headerText={customSubNav.header.headerText}
 					/>
-					<HeaderText
-						header={customSubNav.header}
-						cssOverrides={imageHeaderTextStyles}
-					/>
+					{CustomHeader(customSubNav, imageHeaderTextStyles)}
 				</div>
 				<ul
 					css={[imageListStyles, scrollableSubNavStyles]}
@@ -358,10 +375,10 @@ export const CustomSubNav = ({
 			data-rendering-page={renderingPage}
 			css={isArticle ? articleContainerStyles : frontContainerStyles}
 		>
-			<HeaderText
-				header={customSubNav.header}
-				cssOverrides={isArticle ? articleHeaderStyles : undefined}
-			/>
+			{CustomHeader(
+				customSubNav,
+				isArticle ? articleHeaderStyles : undefined,
+			)}
 			<ul
 				css={[
 					subNavStyles,

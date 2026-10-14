@@ -101,7 +101,7 @@
 		"buffer": "6.0.3",
 		"clean-css": "5.3.3",
 		"compare-versions": "6.1.1",
-		"compression": "1.7.4",
+		"compression": "1.8.2",
 		"constructs": "catalog:",
 		"cpy": "11.0.0",
 		"css-loader": "7.1.5",
