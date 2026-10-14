@@ -340,6 +340,41 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(screen.getByText('Sat 3 Oct')).toBeInTheDocument();
 	});
 
+	it('shows the API state on the recent cards: Played, In progress or nothing', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const statuses = ['completed', 'in-progress', 'not-started'] as const;
+		const recentArchive: PuzzlesArchive = {
+			...archive,
+			year: 2026,
+			month: 10,
+			items: ['2026-10-07', '2026-10-06', '2026-10-03'].map(
+				(date, index) => ({
+					...archive.items[0]!,
+					date,
+					// The progress value is misleading on purpose: only the status counts.
+					progress: 50,
+					gameStatus: statuses[index],
+					url: `/puzzles-and-games/logic-puzzles/sudoku-easy/${date}`,
+				}),
+			),
+		};
+
+		render(<PuzzlesArchiveCalendar initialArchive={recentArchive} />);
+
+		const cards = Array.from(
+			document.querySelectorAll<HTMLElement>('a[href$="/2026-10-07"]'),
+		);
+		expect(
+			within(cards.find((card) => card.querySelector('time'))!).getByText(
+				'Played',
+			),
+		).toBeInTheDocument();
+		expect(screen.getAllByText('In progress')).toHaveLength(1);
+		expect(
+			screen.getAllByText('Played', { selector: '.played' }),
+		).toHaveLength(1);
+	});
+
 	it('keeps the calendar mounted and announces loading in the month controls', async () => {
 		let resolveResponse!: (value: unknown) => void;
 		const fetchMock = jest.fn().mockReturnValue(
