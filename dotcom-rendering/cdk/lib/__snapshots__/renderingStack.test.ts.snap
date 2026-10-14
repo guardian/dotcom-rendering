@@ -2109,8 +2109,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
-        "MaxCapacity": 3,
-        "MinCapacity": 1,
+        "MaxCapacity": 9,
+        "MinCapacity": 9,
         "ResourceId": {
           "Fn::Join": [
             "",
@@ -2351,7 +2351,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             "ReadonlyRootFilesystem": true,
           },
         ],
-        "Cpu": "1024",
+        "Cpu": "2048",
         "ExecutionRoleArn": {
           "Fn::GetAtt": [
             "EcsTaskDefinitionExecutionRoleBE450C73",
@@ -2359,7 +2359,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
           ],
         },
         "Family": "TagPageRenderingCODEEcsTaskDefinition616FF027",
-        "Memory": "2048",
+        "Memory": "4096",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "FARGATE",
