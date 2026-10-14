@@ -891,7 +891,6 @@ export const FeatureCard = ({
 											}
 											isNewsletter={isNewsletter}
 											media={articleMedia}
-											isStorylines={isStorylines}
 										/>
 									</div>
 								</div>
