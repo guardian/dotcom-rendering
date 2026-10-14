@@ -2,6 +2,7 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { until } from '@guardian/source/foundations';
 import { render } from '@testing-library/react';
+import { renderToString } from 'react-dom/server';
 import { useAB } from '../lib/useAB';
 import { ConfigProvider } from './ConfigContext';
 import { TopBar } from './TopBar.island';
@@ -20,7 +21,7 @@ jest.mock('./TopBarSupport.island', () => ({
 const renderTopBar = () => {
 	const cache = createCache({ key: 'topbar-test' });
 
-	const { container } = render(
+	const component = (
 		<CacheProvider value={cache}>
 			<ConfigProvider
 				value={{
@@ -37,8 +38,10 @@ const renderTopBar = () => {
 					contributionsServiceUrl="https://support.example.com"
 				/>
 			</ConfigProvider>
-		</CacheProvider>,
+		</CacheProvider>
 	);
+	const serverHtml = renderToString(component);
+	const { container } = render(component);
 	const css = cache.sheet.tags
 		.flatMap((tag) =>
 			Array.from(tag.sheet?.cssRules ?? [], (rule) => rule.cssText),
@@ -47,7 +50,7 @@ const renderTopBar = () => {
 		.replace(/\s/g, '');
 	cache.sheet.flush();
 
-	return { html: container.innerHTML, css };
+	return { html: container.innerHTML, serverHtml, css };
 };
 
 describe('TopBar mobile sign-in experiment', () => {
@@ -71,7 +74,7 @@ describe('TopBar mobile sign-in experiment', () => {
 	});
 
 	it.each([false, true])(
-		'shows the resolved account control when variant membership is %s',
+		'hides until hydration then shows the account control when variant membership is %s',
 		(isVariant) => {
 			jest.mocked(useAB).mockReturnValue({
 				getParticipations: jest.fn(),
@@ -80,14 +83,33 @@ describe('TopBar mobile sign-in experiment', () => {
 				trackABTests: jest.fn(),
 			});
 
-			const { html, css } = renderTopBar();
+			const { html, serverHtml, css } = renderTopBar();
 			const container = document.createElement('div');
+			container.innerHTML = serverHtml;
+			const serverAccountContainer = container.querySelector(
+				'a[data-link-name="header : topbar : signin"]',
+			)?.parentElement;
+
+			expect(serverAccountContainer).not.toBeNull();
+			expect(css).toContain(
+				`${until.tablet}{.${serverAccountContainer?.className}{visibility:hidden;}}`.replace(
+					/\s/g,
+					'',
+				),
+			);
+
 			container.innerHTML = html;
 			const signInLink = container.querySelector(
 				'a[data-link-name="header : topbar : signin"]',
 			);
 
-			expect(css).not.toContain('visibility:hidden');
+			expect(signInLink).not.toBeNull();
+			expect(css).not.toContain(
+				`${until.tablet}{.${signInLink?.parentElement?.className}{visibility:hidden;}}`.replace(
+					/\s/g,
+					'',
+				),
+			);
 			expect(signInLink?.querySelector('div svg') !== null).toBe(
 				isVariant,
 			);

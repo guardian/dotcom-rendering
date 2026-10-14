@@ -14,6 +14,7 @@ import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useAB } from '../lib/useAB';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useHydrated } from '../lib/useHydrated';
 import { usePageViewId } from '../lib/usePageViewId';
 import { palette as themePalette } from '../palette';
 import { useConfig } from './ConfigContext';
@@ -135,6 +136,7 @@ export const TopBar = ({
 	const pageViewId = usePageViewId(renderingTarget);
 
 	const [referrerUrl, setReferrerUrl] = useState('');
+	const hasHydrated = useHydrated();
 
 	const abTests = useAB();
 
@@ -228,7 +230,7 @@ export const TopBar = ({
 
 				<TopBarLinkContainer
 					isLastChild={true}
-					hideOnMobile={abTests === undefined}
+					hideOnMobile={!hasHydrated}
 				>
 					<TopBarMyAccount
 						mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}
