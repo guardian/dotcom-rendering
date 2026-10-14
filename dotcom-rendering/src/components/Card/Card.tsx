@@ -1234,7 +1234,6 @@ export const Card = ({
 											: undefined
 									}
 									isNewsletter={isNewsletter}
-									isStorylines={isStorylines}
 								/>
 							)}
 							{showLivePlayable &&
@@ -1327,7 +1326,6 @@ export const Card = ({
 							mobile: avatarPosition.mobile === 'bottom',
 							desktop: avatarPosition.desktop === 'bottom',
 						}}
-						isStorylines={isStorylines}
 					/>
 				)}
 			</div>
