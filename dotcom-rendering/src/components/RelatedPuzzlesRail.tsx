@@ -4,11 +4,8 @@ import {
 	headlineBold20,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
-import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { MorePuzzlesRows } from './MorePuzzlesCard';
-
-const PUZZLES_HUB_URL = '/puzzles-and-games';
 
 /**
  * The heading column's width matches `PuzzleGrid`'s own `title`/`meta`
@@ -77,13 +74,7 @@ const relatedRailHeading = css`
  * on one line there; `display: block` only kicks in from "leftCol" up,
  * where that column width forces them onto their own lines.
  */
-const relatedRailHeadingLink = css`
-	${headlineBold20};
-	color: ${themePalette('--article-section-link-text')};
-	text-decoration: none;
-	:hover {
-		text-decoration: underline;
-	}
+const relatedRailHeadingName = css`
 	${from.leftCol} {
 		display: block;
 	}
@@ -103,19 +94,14 @@ const relatedRailHeadingLink = css`
  * shares it - see `MorePuzzlesCard.tsx`'s own doc comment for what that
  * means for the two staying visually in sync.
  *
- * The heading itself ("More from" / "Puzzles & games") reuses
- * `--article-section-link-text` - the same pink/lifestyle-pillar token this
- * page's own `ArticleTitle` section link ("Logic puzzles" etc, see
- * `puzzleFamilyTag`) already resolves to - rather than a second, hardcoded
- * colour, so the two pink links on this page can never drift apart.
+ * The heading itself ("More from" / "Puzzles & games") is plain text in a
+ * single colour, not a link.
  */
 export const RelatedPuzzlesRail = ({ items }: { items: PuzzleItem[] }) => (
 	<div css={relatedRailStyles}>
 		<h2 css={relatedRailHeading}>
 			More from{' '}
-			<a css={relatedRailHeadingLink} href={PUZZLES_HUB_URL}>
-				Puzzles &amp; games
-			</a>
+			<span css={relatedRailHeadingName}>Puzzles &amp; games</span>
 		</h2>
 		<MorePuzzlesRows items={items} mobileScrollable={true} />
 	</div>
