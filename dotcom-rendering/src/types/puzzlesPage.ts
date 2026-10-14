@@ -101,6 +101,7 @@ export type PuzzlesArchive = {
 	year: number;
 	month: number;
 	items: PuzzlesArchiveItem[];
+	recentItems?: PuzzlesArchiveItem[];
 	hasError: boolean;
 	moreFrom: PuzzleItem[];
 };

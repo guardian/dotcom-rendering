@@ -53,15 +53,19 @@ type Props = {
 	isLabs: boolean;
 	articleEndSlot: boolean;
 	isSensitive: boolean;
+	isInInteractive?: boolean;
 };
 
-const slotStyles = css`
+const slotStyles = (isInInteractive: boolean) => css`
 	color: ${palette.neutral[7]};
 	margin: 12px auto;
-	${grid.container};
-	& > *:first-child {
-		${grid.column.centre};
-	}
+	${isInInteractive &&
+	css`
+		${grid.container};
+		& > *:first-child {
+			${grid.column.centre};
+		}
+	`}
 `;
 
 const buildReaderRevenueEpicConfig = (
@@ -124,6 +128,7 @@ export const SlotBodyEnd = ({
 	isLabs,
 	articleEndSlot,
 	isSensitive,
+	isInInteractive = false,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const { brazeMessages, braze } = useBraze(idApiUrl, renderingTarget);
@@ -267,7 +272,7 @@ export const SlotBodyEnd = ({
 	) {
 		const { SelectedMessage } = pickMessageResult;
 		return (
-			<div id="slot-body-end" css={slotStyles}>
+			<div id="slot-body-end" css={slotStyles(isInInteractive)}>
 				<SelectedMessage />
 			</div>
 		);
@@ -276,7 +281,7 @@ export const SlotBodyEnd = ({
 		showArticleEndSlot
 	) {
 		return (
-			<div id="slot-body-end" css={slotStyles}>
+			<div id="slot-body-end" css={slotStyles(isInInteractive)}>
 				<AdSlot data-print-layout="hide" position="article-end" />
 			</div>
 		);

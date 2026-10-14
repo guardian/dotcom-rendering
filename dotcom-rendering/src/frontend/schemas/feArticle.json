@@ -5960,7 +5960,8 @@
                 "RecipeDesign",
                 "ReviewDesign",
                 "TimelineDesign",
-                "VideoDesign"
+                "VideoDesign",
+                "WeekendEssayDesign"
             ],
             "type": "string"
         },
@@ -7440,6 +7441,9 @@
                 "headerText": {
                     "type": "string"
                 },
+                "showHeaderText": {
+                    "type": "boolean"
+                },
                 "dotcomPath": {
                     "type": "string"
                 },
@@ -7449,7 +7453,8 @@
             },
             "required": [
                 "copy",
-                "headerText"
+                "headerText",
+                "showHeaderText"
             ]
         },
         "CustomSubnavLink": {

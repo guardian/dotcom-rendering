@@ -86,11 +86,14 @@ const requestProgress = async (): Promise<PuzzleProgressItem[] | undefined> => {
 		headers.Authorization = `Bearer ${authStatus.accessToken.accessToken}`;
 	}
 
-	const response = await fetch('/puzzles-and-games/progress', {
-		cache: 'no-store',
-		credentials: 'same-origin',
-		headers,
-	});
+	const response = await fetch(
+		`${window.guardian.config.page.ajaxUrl}/puzzles-and-games/progress`,
+		{
+			cache: 'no-store',
+			credentials: 'same-origin',
+			headers,
+		},
+	);
 	if (!response.ok) return undefined;
 	return parseProgressItems(await response.json());
 };
