@@ -77,11 +77,6 @@ const titleStyles = css`
 		${headlineBold28};
 	}
 
-	${from.desktop} {
-		/* Include the 1px side border in the 20px inset, as the cards do. */
-		padding-left: 19px;
-	}
-
 	${from.leftCol} {
 		padding-top: var(--puzzles-content-top);
 	}
