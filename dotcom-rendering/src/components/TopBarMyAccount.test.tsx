@@ -11,21 +11,19 @@ jest.mock('../lib/useBraze', () => ({
 	}),
 }));
 
-const withConfig = (component: ReactElement) => (
-	<ConfigProvider
-		value={{
-			renderingTarget: 'Web',
-			darkModeAvailable: false,
-			assetOrigin: '/',
-			editionId: 'UK',
-		}}
-	>
-		{component}
-	</ConfigProvider>
-);
-
 const renderWithConfig = (component: ReactElement) =>
-	render(withConfig(component));
+	render(
+		<ConfigProvider
+			value={{
+				renderingTarget: 'Web',
+				darkModeAvailable: false,
+				assetOrigin: '/',
+				editionId: 'UK',
+			}}
+		>
+			{component}
+		</ConfigProvider>,
+	);
 
 const signedInAuthStatus: SignedIn = {
 	kind: 'SignedIn',

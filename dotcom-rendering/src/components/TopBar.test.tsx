@@ -1,7 +1,7 @@
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { until } from '@guardian/source/foundations';
-import { renderToString } from 'react-dom/server';
+import { render } from '@testing-library/react';
 import { useAB } from '../lib/useAB';
 import { ConfigProvider } from './ConfigContext';
 import { TopBar } from './TopBar.island';
@@ -17,9 +17,11 @@ jest.mock('./TopBarSupport.island', () => ({
 	TopBarSupport: () => null,
 }));
 
-const renderTopBar = () =>
-	renderToString(
-		<CacheProvider value={createCache({ key: 'topbar-test' })}>
+const renderTopBar = () => {
+	const cache = createCache({ key: 'topbar-test' });
+
+	const { container } = render(
+		<CacheProvider value={cache}>
 			<ConfigProvider
 				value={{
 					renderingTarget: 'Web',
@@ -37,12 +39,22 @@ const renderTopBar = () =>
 			</ConfigProvider>
 		</CacheProvider>,
 	);
+	const css = cache.sheet.tags
+		.flatMap((tag) =>
+			Array.from(tag.sheet?.cssRules ?? [], (rule) => rule.cssText),
+		)
+		.join('')
+		.replace(/\s/g, '');
+	cache.sheet.flush();
+
+	return { html: container.innerHTML, css };
+};
 
 describe('TopBar mobile sign-in experiment', () => {
 	it('hides the mobile account control before the experiment resolves', () => {
 		jest.mocked(useAB).mockReturnValue(undefined);
 
-		const html = renderTopBar();
+		const { html, css } = renderTopBar();
 		const container = document.createElement('div');
 		container.innerHTML = html;
 		const accountContainer = container.querySelector(
@@ -50,7 +62,7 @@ describe('TopBar mobile sign-in experiment', () => {
 		)?.parentElement;
 
 		expect(accountContainer).not.toBeNull();
-		expect(html.replace(/\s/g, '')).toContain(
+		expect(css).toContain(
 			`${until.tablet}{.${accountContainer?.className}{visibility:hidden;}}`.replace(
 				/\s/g,
 				'',
@@ -68,14 +80,14 @@ describe('TopBar mobile sign-in experiment', () => {
 				trackABTests: jest.fn(),
 			});
 
-			const html = renderTopBar();
+			const { html, css } = renderTopBar();
 			const container = document.createElement('div');
 			container.innerHTML = html;
 			const signInLink = container.querySelector(
 				'a[data-link-name="header : topbar : signin"]',
 			);
 
-			expect(html).not.toContain('visibility:hidden');
+			expect(css).not.toContain('visibility:hidden');
 			expect(signInLink?.querySelector('div svg') !== null).toBe(
 				isVariant,
 			);
