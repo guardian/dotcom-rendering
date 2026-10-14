@@ -340,7 +340,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(screen.getByText('Sat 3 Oct')).toBeInTheDocument();
 	});
 
-	it('shows the API state on the recent cards: Played, In progress or nothing', () => {
+	it('shows Played on the recent cards from the API state only', () => {
 		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
 		const statuses = ['completed', 'in-progress', 'not-started'] as const;
 		const recentArchive: PuzzlesArchive = {
@@ -369,7 +369,7 @@ describe('PuzzlesArchiveCalendar', () => {
 				'Played',
 			),
 		).toBeInTheDocument();
-		expect(screen.getAllByText('In progress')).toHaveLength(1);
+		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
 		expect(
 			screen.getAllByText('Played', { selector: '.played' }),
 		).toHaveLength(1);

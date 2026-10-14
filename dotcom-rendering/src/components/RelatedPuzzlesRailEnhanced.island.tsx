@@ -10,7 +10,7 @@ import { RelatedPuzzlesRail } from './RelatedPuzzlesRail';
  * - each card's "Today"/date label is confirmed against the card's own date
  *   (see `withValidatedCadence`), so a cached page served after midnight is
  *   corrected;
- * - cards show "In progress" / "Played" from the reader's progress, when the
+ * - cards show "Played" from the reader's progress, when the
  *   Puzzles API reports any.
  *
  * It first renders exactly what the server sent, so it hydrates without a

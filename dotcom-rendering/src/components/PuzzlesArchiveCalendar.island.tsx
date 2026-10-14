@@ -828,9 +828,6 @@ export const PuzzlesArchiveCalendar = ({
 						{item.setterName && (
 							<span> · By: {item.setterName}</span>
 						)}
-						{item.gameStatus === 'in-progress' && (
-							<span className="played">In progress</span>
-						)}
 						{item.gameStatus === 'completed' && (
 							<span className="played">
 								Played

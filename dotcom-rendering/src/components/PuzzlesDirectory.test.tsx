@@ -236,7 +236,7 @@ describe('PuzzlesDirectory', () => {
 		expect(screen.queryByText('Played')).not.toBeInTheDocument();
 	});
 
-	it('shows Played and In progress from the API state, not the progress value', () => {
+	it('shows Played from the API state, not the progress value', () => {
 		render(
 			<PuzzlesDirectory
 				layout={{
@@ -271,7 +271,7 @@ describe('PuzzlesDirectory', () => {
 		const played = screen.getByText('Played');
 		expect(played).toBeInTheDocument();
 		expect(played.querySelector('svg')).toBeInTheDocument();
-		expect(screen.getByText('In progress')).toBeInTheDocument();
+		expect(screen.getAllByText('Played')).toHaveLength(1);
 		expect(screen.getAllByText('Daily puzzle')).toHaveLength(2);
 	});
 
@@ -301,7 +301,6 @@ describe('PuzzlesDirectory', () => {
 			/>,
 		);
 
-		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
 		expect(screen.queryByText('Played')).not.toBeInTheDocument();
 	});
 	it('renders unique desktop and mobile IDs for multiple blueprint slots', () => {

@@ -118,25 +118,17 @@ describe('MorePuzzlesCard progress', () => {
 			</ConfigProvider>,
 		);
 
-	it('shows In progress for an in-progress puzzle', () => {
-		renderWithStatus('in-progress');
-		expect(screen.getAllByText('In progress')).toHaveLength(2);
-		expect(screen.queryByText('Played')).not.toBeInTheDocument();
-	});
-
 	it('shows Played with an icon for a completed puzzle', () => {
 		renderWithStatus('completed');
 		const played = screen.getAllByText('Played');
 		expect(played).toHaveLength(2);
 		expect(played[0]?.querySelector('svg')).toBeInTheDocument();
-		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
 	});
 
-	it.each([undefined, 'not-started' as const])(
+	it.each([undefined, 'not-started' as const, 'in-progress' as const])(
 		'shows nothing for status %s',
 		(status) => {
 			renderWithStatus(status);
-			expect(screen.queryByText('In progress')).not.toBeInTheDocument();
 			expect(screen.queryByText('Played')).not.toBeInTheDocument();
 		},
 	);

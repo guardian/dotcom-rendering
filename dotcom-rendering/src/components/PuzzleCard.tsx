@@ -271,9 +271,6 @@ export const PuzzleCard = ({
 					src={item.image}
 				/>
 			)}
-			{item.gameStatus === 'in-progress' && (
-				<span css={playedStyles}>In progress</span>
-			)}
 			{item.gameStatus === 'completed' && (
 				<span css={playedStyles}>
 					Played

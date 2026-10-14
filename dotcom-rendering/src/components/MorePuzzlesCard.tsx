@@ -290,9 +290,6 @@ const MorePuzzlesCard = ({ item }: { item: PuzzleItem }) => {
 					src={item.image}
 				/>
 			)}
-			{item.gameStatus === 'in-progress' && (
-				<span css={progressStyles}>In progress</span>
-			)}
 			{item.gameStatus === 'completed' && (
 				<span css={progressStyles}>
 					Played
