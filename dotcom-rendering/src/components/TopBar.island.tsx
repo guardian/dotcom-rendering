@@ -5,7 +5,7 @@
  * This is intended to replace the existing `HeaderTopBar` component after being AB tested.
  */
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
@@ -76,13 +76,13 @@ const TopBarLinkContainer = ({
 	alignLeft = false,
 	showVerticalDivider = true,
 	isLastChild = false,
-	hideOnMobile = false,
+	isHidden = false,
 	children,
 }: {
 	alignLeft?: boolean;
 	showVerticalDivider?: boolean;
 	isLastChild?: boolean;
-	hideOnMobile?: boolean;
+	isHidden?: boolean;
 	children: React.ReactNode;
 }) => (
 	<div
@@ -94,11 +94,9 @@ const TopBarLinkContainer = ({
 				: css`
 						align-items: center;
 					`,
-			hideOnMobile &&
+			isHidden &&
 				css`
-					${until.tablet} {
-						visibility: hidden;
-					}
+					visibility: hidden;
 				`,
 		]}
 		style={{ paddingRight: isLastChild ? 0 : `${space[3]}px` }}
@@ -228,10 +226,7 @@ export const TopBar = ({
 					</TopBarLinkContainer>
 				</Hide>
 
-				<TopBarLinkContainer
-					isLastChild={true}
-					hideOnMobile={!hasHydrated}
-				>
+				<TopBarLinkContainer isLastChild={true} isHidden={!hasHydrated}>
 					<TopBarMyAccount
 						mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}
 						idUrl={idUrl ?? 'https://profile.theguardian.com'}
