@@ -456,7 +456,9 @@ export const Card = ({
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const decideAge = () => {
-		if (!webPublicationDate || (!showAge && !isStorylines)) {
+		const shouldShowAgeIfKnown = showAge || isStorylines;
+
+		if (!webPublicationDate || !shouldShowAgeIfKnown) {
 			return undefined;
 		}
 
