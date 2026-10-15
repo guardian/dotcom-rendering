@@ -222,8 +222,8 @@ export const ThreeTierChoiceCards = ({
 			: (choiceCardDesignSettings?.buttonTextColour ?? 'inherit')};
 		border-radius: 10px;
 		padding: ${selected
-			? `6px ${space[5]}px 10px ${space[5]}px`
-			: `6px ${space[5]}px`};
+			? `8px ${space[5] + 2}px 12px ${space[5] + 2}px`
+			: `7px ${space[5] + 1}px`};
 		transition: ${choiceCardTransition};
 		transition-property: color, background-color, box-shadow, padding;
 
@@ -409,6 +409,7 @@ export const ThreeTierChoiceCards = ({
 														}}
 													/>
 													<span
+														aria-hidden="true"
 														css={[
 															styles.boldLabel,
 															styles.labelOpacity(
