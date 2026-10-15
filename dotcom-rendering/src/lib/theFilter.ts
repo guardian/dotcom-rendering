@@ -26,5 +26,5 @@ export const isRepublished = (
 	firstPublicationDate: string | undefined,
 	webPublicationDate: string,
 ): boolean =>
-firstPublicationDate !== undefined &&
+	firstPublicationDate !== undefined &&
 	Date.parse(firstPublicationDate) !== Date.parse(webPublicationDate);
