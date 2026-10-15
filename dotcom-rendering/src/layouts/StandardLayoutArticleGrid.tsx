@@ -15,7 +15,6 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
-import { overlayMaskGradientStyles } from '../components/FeatureCard';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { Island } from '../components/Island';
@@ -80,13 +79,9 @@ const landscapeImmersiveMediaBelowDesktop = css`
 			bottom: 0;
 			height: 240px;
 			z-index: ${getZIndex('mediaOverlay')};
-			background: linear-gradient(
-				180deg,
-				${sourcePalette.neutral[10]},
-				${sourcePalette.neutral[10]} 120px 100%
-			);
-			backdrop-filter: blur(12px);
-			${overlayMaskGradientStyles('180deg')};
+			background: ${themePalette('--headline-background-immersive')};
+			backdrop-filter: blur(8px);
+			mask-image: linear-gradient(180deg, transparent, black 90%);
 			pointer-events: none;
 		}
 	}
@@ -230,11 +225,12 @@ export const StandardLayoutArticleGrid = ({
 
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
-	const isImmersive =
-		layoutType === 'immersivePortrait' ||
-		layoutType === 'immersiveLandscape';
+	const isImmersivePortrait = layoutType === 'immersivePortrait';
+	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
+	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
 
-	const hasMinimumImageHeight = isLabs && isImmersive && isMainMediaImage;
+	const hasMinimumImageHeight =
+		isLabs && isImmersivePortrait && isMainMediaImage;
 
 	const ageWarning = getAgeWarning(
 		article.tags,
@@ -256,11 +252,8 @@ export const StandardLayoutArticleGrid = ({
 			${avatarDisplayed && `margin-top: -28px;`}
 		}
 	`;
-
 	const hideCaptionBeneathMainMedia =
-		layoutType === 'media' ||
-		layoutType === 'immersiveLandscape' ||
-		layoutType === 'immersivePortrait';
+		layoutType === 'media' || isImmersiveLandscape || isImmersivePortrait;
 
 	return (
 		<article
@@ -300,14 +293,20 @@ export const StandardLayoutArticleGrid = ({
 							)}
 						}
 					`,
-				layoutType === 'immersivePortrait' &&
+				isImmersivePortrait &&
 					css`
 						${from.desktop} {
 							grid-template-rows: 0.25fr 1fr auto;
 						}
 					`,
-				layoutType === 'immersiveLandscape' &&
+				isImmersiveLandscape &&
 					css`
+						${until.tablet} {
+							--immersive-headline-overlap: ${ageWarning != null
+								? '96px'
+								: '24px'};
+						}
+
 						${from.desktop} {
 							grid-template-rows: auto auto ${ageWarning != null
 									? '130px'
@@ -326,19 +325,19 @@ export const StandardLayoutArticleGrid = ({
 									align-self: start;
 									${mainMediaAspectRatio != null &&
 									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
-									${layoutType === 'immersiveLandscape' &&
+									${isImmersiveLandscape &&
 									`margin-left: -20px;
 									margin-right: -20px;`}
 								}
 
-								${layoutType === 'immersivePortrait' &&
+								${isImmersivePortrait &&
 								css`
 									${from.desktop} {
 										aspect-ratio: 4/5;
 									}
 								`}
 
-								${layoutType === 'immersiveLandscape' &&
+								${isImmersiveLandscape &&
 								landscapeImmersiveMediaBelowDesktop}
 
 								${hasMinimumImageHeight &&
@@ -400,11 +399,11 @@ export const StandardLayoutArticleGrid = ({
 				layoutType={layoutType}
 				element="aside"
 				css={[
-					layoutType === 'immersiveLandscape' &&
+					isImmersiveLandscape &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 						`,
-					layoutType === 'immersivePortrait' &&
+					isImmersivePortrait &&
 						css`
 							align-content: flex-start;
 							margin-bottom: 0;
@@ -440,15 +439,35 @@ export const StandardLayoutArticleGrid = ({
 				area="headline"
 				layoutType={layoutType}
 				css={[
-					layoutType === 'immersiveLandscape' &&
+					isImmersiveLandscape &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
+
+							${until.tablet} {
+								background: linear-gradient(
+									to bottom,
+									transparent
+										calc(
+											var(--immersive-headline-overlap) -
+												1px
+										),
+									${sourcePalette.neutral[10]}
+										calc(
+											var(--immersive-headline-overlap) -
+												1px
+										)
+								);
+
+								h1 {
+									background-color: transparent;
+								}
+							}
 
 							${until.desktop} {
 								padding-bottom: ${space[8]}px;
 							}
 						`,
-					layoutType === 'immersivePortrait' &&
+					isImmersivePortrait &&
 						css`
 							${from.desktop} {
 								border-bottom: 1px solid
@@ -524,7 +543,7 @@ export const StandardLayoutArticleGrid = ({
 								padding-top: ${space[2]}px;
 							}
 						`,
-					layoutType === 'immersiveLandscape' &&
+					isImmersiveLandscape &&
 						css`
 							${from.desktop} {
 								padding-top: ${space[8]}px;
@@ -550,7 +569,7 @@ export const StandardLayoutArticleGrid = ({
 						padding-top: ${space[2]}px;
 					`}
 				>
-					{layoutType === 'immersivePortrait' ? (
+					{isImmersivePortrait ? (
 						<Caption
 							captionText={captionText}
 							format={format}
@@ -586,14 +605,14 @@ export const StandardLayoutArticleGrid = ({
 								padding-top: ${space[3]}px;
 							}
 						`,
-					layoutType === 'immersivePortrait'
+					isImmersivePortrait
 						? css`
 								${from.leftCol} {
 									margin-right: -10px;
 								}
 							`
 						: undefined,
-					layoutType === 'immersiveLandscape' &&
+					isImmersiveLandscape &&
 						css`
 							${from.leftCol} {
 								padding-top: ${space[8]}px;

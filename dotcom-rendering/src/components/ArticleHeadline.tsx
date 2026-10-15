@@ -12,6 +12,7 @@ import {
 	headlineMedium28,
 	headlineMedium34,
 	headlineMedium50,
+	palette as sourcePalette,
 	space,
 	textSansBold28,
 	textSansBold34,
@@ -278,6 +279,8 @@ const darkBackground = css`
 `;
 
 const immersiveDarkBackground = css`
+	background-color: ${themePalette('--headline-background-immersive')};
+
 	${from.tablet} {
 		background-color: ${themePalette('--headline-background-immersive')};
 		padding-bottom: ${space[6]}px;
