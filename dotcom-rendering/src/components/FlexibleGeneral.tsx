@@ -164,13 +164,19 @@ type BoostedSplashProperties = {
  * Boosting a splash card will affect the layout and style of the card.
  * This function will determine the properties of the card based on the boost level.
  */
-const decideSplashCardProperties = (
-	boostLevel: BoostLevel,
-	supportingContentLength: number,
-	mediaCard: boolean,
-	useLargerHeadlineSizeDesktop: boolean,
-	avatarUrl: boolean,
-): BoostedSplashProperties => {
+const decideSplashCardProperties = ({
+	boostLevel,
+	supportingContentLength,
+	mediaCard,
+	useLargerHeadlineSizeDesktop,
+	hasAvatarUrl,
+}: {
+	boostLevel: BoostLevel;
+	supportingContentLength: number;
+	mediaCard: boolean;
+	useLargerHeadlineSizeDesktop: boolean;
+	hasAvatarUrl: boolean;
+}): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
@@ -198,7 +204,7 @@ const decideSplashCardProperties = (
 				},
 				mediaPositionOnDesktop: 'right',
 				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
-				mediaSize: avatarUrl ? 'large' : 'xlarge',
+				mediaSize: hasAvatarUrl ? 'large' : 'xlarge',
 				supportingContentAlignment:
 					supportingContentLength < 4 ? 'vertical' : 'horizontal',
 				liveUpdatesAlignment: 'vertical',
@@ -298,13 +304,13 @@ const SplashCardLayout = ({
 		liveUpdatesAlignment,
 		trailTextSize,
 		subtitleSize,
-	} = decideSplashCardProperties(
-		card.boostLevel ?? 'default',
-		card.supportingContent?.length ?? 0,
-		isMediaCard(card.format),
+	} = decideSplashCardProperties({
+		boostLevel: card.boostLevel ?? 'default',
+		supportingContentLength: card.supportingContent?.length ?? 0,
+		mediaCard: isMediaCard(card.format),
 		useLargerHeadlineSizeDesktop,
-		!!card.avatarUrl,
-	);
+		hasAvatarUrl: !!card.avatarUrl,
+	});
 
 	return (
 		<UL
