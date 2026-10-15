@@ -116,6 +116,10 @@ const SupportingBenefits = ({
 	benefitsTickColour?: string;
 	choiceCardDesignSettings?: ChoiceCardDesignSettings;
 }) => {
+	if (benefits.length === 0 && (benefitsLabel?.trim() ?? '') === '') {
+		return null;
+	}
+
 	const showTicks = benefits.length > 1;
 	return (
 		<div css={supportingTextStyles}>
