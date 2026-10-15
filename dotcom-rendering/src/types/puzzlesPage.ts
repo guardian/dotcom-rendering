@@ -1,4 +1,5 @@
 import type { EditionId } from '../lib/edition';
+import type { GameStatus } from '../lib/puzzleProgress/types';
 import type { ConfigType } from './config';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
@@ -17,6 +18,8 @@ export type PuzzleItem = {
 	imageAlt?: string;
 	setter?: string;
 	progress?: number;
+	/** The Puzzles API's state for the reader; absent when it reports nothing. */
+	gameStatus?: GameStatus;
 	date?: string;
 	slug?: string;
 	index?: number;
@@ -91,6 +94,8 @@ export type PuzzlesArchiveItem = {
 	puzzleType: string;
 	date: string;
 	progress: number;
+	/** The Puzzles API's state for the reader; absent when it reports none. */
+	gameStatus?: GameStatus;
 	setterName?: string;
 	url: string;
 };
@@ -104,6 +109,7 @@ export type PuzzlesArchive = {
 	year: number;
 	month: number;
 	items: PuzzlesArchiveItem[];
+	recentItems?: PuzzlesArchiveItem[];
 	hasError: boolean;
 	moreFrom: PuzzleItem[];
 };

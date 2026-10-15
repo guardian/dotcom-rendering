@@ -32,7 +32,6 @@ const linkStyles = css`
 		border-radius: 50%;
 		background-color: ${palette('--key-event-bullet')};
 		margin-bottom: ${space[1]}px;
-		z-index: 2;
 
 		${from.tablet} {
 			height: 15px;

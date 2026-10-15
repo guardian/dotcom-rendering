@@ -28,7 +28,7 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Pull Image
-        uses: guardian/actions-ecr/pull@v1.0.0
+        uses: guardian/actions-ecr/pull@v1.0.1
         id: pull-image
         with:
           app: dotcom-rendering
@@ -88,7 +88,7 @@ jobs:
 
       # All rendering apps deployment
       - name: Upload rendering apps to RiffRaff
-        uses: guardian/actions-riff-raff@v4.3.6
+        uses: guardian/actions-riff-raff@v4.3.7
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}

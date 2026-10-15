@@ -24,7 +24,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
-import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
+import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
@@ -465,9 +465,14 @@ export const CrosswordLayout = (props: Props) => {
 								'--article-background',
 							)}
 						>
-							<RelatedPuzzlesRail
-								items={article.moreFromPuzzlesAndGames}
-							/>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<RelatedPuzzlesRailEnhanced
+									items={article.moreFromPuzzlesAndGames}
+								/>
+							</Island>
 						</Section>
 					</div>
 				)}

@@ -17,6 +17,7 @@ import {
 } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getAuthStatus } from '../lib/identity';
+import { isGameStatus } from '../lib/puzzleCardProgress';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
 export type CalendarCell = {
@@ -94,7 +95,7 @@ export const archiveStatus = (
 ): 'completed' | 'available' | 'unavailable' =>
 	item === undefined
 		? 'unavailable'
-		: item.progress === 100
+		: item.gameStatus === 'completed'
 			? 'completed'
 			: 'available';
 
@@ -105,6 +106,9 @@ const isArchiveItem = (value: unknown): value is PuzzlesArchiveItem => {
 		typeof item.puzzleType === 'string' &&
 		typeof item.date === 'string' &&
 		typeof item.progress === 'number' &&
+		(item.gameStatus === undefined ||
+			item.gameStatus === null ||
+			isGameStatus(item.gameStatus)) &&
 		typeof item.url === 'string'
 	);
 };
@@ -122,7 +126,10 @@ const isArchive = (value: unknown): value is PuzzlesArchive => {
 		Array.isArray(archive.puzzles) &&
 		typeof archive.hasError === 'boolean' &&
 		Array.isArray(archive.items) &&
-		archive.items.every(isArchiveItem)
+		archive.items.every(isArchiveItem) &&
+		(archive.recentItems === undefined ||
+			(Array.isArray(archive.recentItems) &&
+				archive.recentItems.every(isArchiveItem)))
 	);
 };
 
@@ -597,7 +604,8 @@ export const PuzzlesArchiveCalendar = ({
 		!/\bcrosswords?\b/i.test(archive.selectedPuzzle.title)
 			? `${archive.selectedPuzzle.title} crossword`
 			: archive.selectedPuzzle.title;
-	const recent = [...archive.items]
+	// Fall back for Frontend versions that have not yet added recentItems.
+	const recent = [...(archive.recentItems ?? archive.items)]
 		.sort((left, right) => right.date.localeCompare(left.date))
 		.slice(0, 3);
 	const canSelectNextMonth = canNavigateToNextMonth(
@@ -633,7 +641,7 @@ export const PuzzlesArchiveCalendar = ({
 			try {
 				// Query parameters are stripped by the CDN in CODE/PROD.
 				const url = new URL(
-					`/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
+					`${window.guardian.config.page.ajaxUrl}/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
 					window.location.origin,
 				);
 				const authStatus = await getAuthStatus();
@@ -821,7 +829,7 @@ export const PuzzlesArchiveCalendar = ({
 						{item.setterName && (
 							<span> · By: {item.setterName}</span>
 						)}
-						{item.progress === 100 && (
+						{item.gameStatus === 'completed' && (
 							<span className="played">
 								Played
 								<span

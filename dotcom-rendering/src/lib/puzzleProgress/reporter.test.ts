@@ -60,7 +60,7 @@ describe('reportPuzzleProgress', () => {
 		expect(fetchMock).toHaveBeenCalledTimes(1);
 		const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
 		expect(url).toBe(PUZZLE_PROGRESS_ENDPOINT);
-		expect(init.method).toBe('PUT');
+		expect(init.method).toBe('POST');
 
 		const headers = init.headers as Headers;
 		expect(headers.get('Authorization')).toBe('Bearer reader-token');

@@ -13,6 +13,7 @@ export type LayoutType =
 	| 'media'
 	| 'picture'
 	| 'comment'
+	| 'interactive'
 	| 'immersiveLandscape'
 	| 'immersivePortrait';
 
@@ -243,20 +244,53 @@ const commentCss: LayoutCssMap = {
 	},
 };
 
-const immersivePortraitCss: LayoutCssMap = {
+const interactiveCss: LayoutCssMap = {
 	title: {
-		belowDesktop: `${grid.column.all} grid-row: 2;`,
-		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
-		leftCol: `grid-row: 1; ${grid.between('left-column-start', 9)};`,
+		tablet: 'grid-row: 1;',
+		leftCol: `grid-row: 1; ${grid.column.left}`,
 	},
 	headline: {
-		belowDesktop: `${grid.column.all} grid-row: 3;`,
+		tablet: 'grid-row: 2;',
+		leftCol: 'grid-row: 1;',
+	},
+	standfirst: {
+		tablet: 'grid-row: 3;',
+		leftCol: 'grid-row: 2;',
+	},
+	media: {
+		tablet: 'grid-row: 4;',
+		leftCol: 'grid-row: 3;',
+	},
+	meta: {
+		tablet: 'grid-row: 5;',
+		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		mobile: `${grid.column.all};`,
+		tablet: `grid-row: 6; ${grid.column.all};`,
+		leftCol: 'grid-row: 4;',
+	},
+	'right-column': {
+		desktop: `grid-row: 1 / span 6; ${grid.column.right};`,
+		leftCol: `grid-row: 1 / span 4; ${grid.column.right};`,
+	},
+};
+
+const immersivePortraitCss: LayoutCssMap = {
+	title: {
+		belowDesktop: 'grid-row: 1;',
+		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `${grid.between('left-column-start', 9)};`,
+		wide: `${grid.between('left-column-start', 10)};`,
+	},
+	headline: {
+		belowDesktop: 'grid-row: 2;',
 		desktop: `grid-row: 2; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 2; ${grid.between('left-column-start', 9)};`,
 		wide: `grid-row: 2; ${grid.between('left-column-start', 10)};`,
 	},
 	media: {
-		belowDesktop: `${grid.column.all} grid-row: 1 / span 2;`,
+		belowDesktop: 'grid-row: 3;',
 		desktop: `grid-row: 1 / span 4; ${grid.between(8, 'right-column-end')};`,
 		leftCol: `grid-row: 1 / span 3; ${grid.between(9, 'right-column-end')};`,
 		wide: `grid-row: 1 / span 3; ${grid.between(10, 'right-column-end')};`,
@@ -270,6 +304,7 @@ const immersivePortraitCss: LayoutCssMap = {
 	caption: {
 		belowDesktop: 'grid-row: 5;',
 		desktop: `grid-row: 5;`,
+		leftCol: `grid-row: 4; ${grid.column.left};`,
 	},
 	meta: {
 		belowDesktop: 'grid-row: 6;',
@@ -329,6 +364,7 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	media: mediaCss,
 	picture: pictureCss,
 	comment: commentCss,
+	interactive: interactiveCss,
 	immersiveLandscape: immersiveLandscapeCss,
 	immersivePortrait: immersivePortraitCss,
 };
@@ -382,7 +418,10 @@ export const getLayoutType = (
 	mainMediaOrientation: 'portrait' | 'landscape' | 'square',
 ): LayoutType => {
 	if (format.display === ArticleDisplay.Immersive) {
-		if (mainMediaOrientation === 'portrait') {
+		if (
+			mainMediaOrientation === 'portrait' ||
+			format.design === ArticleDesign.WeekendEssay
+		) {
 			return 'immersivePortrait';
 		}
 		// Square images are treated the same as landscape for immersive layouts.
@@ -403,5 +442,6 @@ export const getLayoutType = (
 	) {
 		return 'comment';
 	}
+	if (format.design === ArticleDesign.Interactive) return 'interactive';
 	return 'standard';
 };

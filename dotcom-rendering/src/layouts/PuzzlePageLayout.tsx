@@ -22,7 +22,7 @@ import { Logo } from '../components/Masthead/Titlepiece/Logo';
 import { PrintButton } from '../components/PrintButton.island';
 import { PuzzleIframe } from '../components/PuzzleIframe.island';
 import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
-import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
+import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
@@ -604,10 +604,11 @@ export const PuzzlePageLayout = ({
 							<GridItem area="body" element="article">
 								<div css={frameContainerStyles}>
 									<ArticleContainer format={puzzlePageFormat}>
-										<Island
-											priority="critical"
-											defer={{ until: 'visible' }}
-										>
+										{/* Not deferred until visible: the iframe has no `src`
+										    until this island hydrates and the reader is known,
+										    so waiting for the island to be seen would delay
+										    the puzzle itself. */}
+										<Island priority="critical">
 											<PuzzleIframe
 												puzzleConfig={puzzleConfig}
 												title={instance.title}
@@ -689,9 +690,16 @@ export const PuzzlePageLayout = ({
 								'--article-background',
 							)}
 						>
-							<RelatedPuzzlesRail
-								items={instance.moreFromPuzzlesAndGames ?? []}
-							/>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<RelatedPuzzlesRailEnhanced
+									items={
+										instance.moreFromPuzzlesAndGames ?? []
+									}
+								/>
+							</Island>
 						</Section>
 					</div>
 				)}

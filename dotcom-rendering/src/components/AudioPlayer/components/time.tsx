@@ -11,7 +11,6 @@ const timeCSS = css`
 	${textSans15};
 	color: ${palette.neutral[86]};
 	background-color: ${palette.neutral[20]};
-	z-index: 1;
 
 	${from.leftCol} {
 		padding-top: 0;
