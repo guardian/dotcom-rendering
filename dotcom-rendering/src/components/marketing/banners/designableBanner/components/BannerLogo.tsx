@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
 import { SvgGuardianLogo } from '@guardian/source/react-components';
 import { hexColourToString } from '@guardian/support-dotcom-components';
-import type { BannerLogoData } from '../BannerProps';
+import type { BannerData } from '../BannerProps';
 
 const styles = {
 	guardianLogoContainer: css`
@@ -24,7 +24,7 @@ const styles = {
 export const BannerLogo = ({
 	bannerData,
 }: {
-	bannerData: BannerLogoData;
+	bannerData: BannerData;
 }): JSX.Element | null => {
 	if (!bannerData.design) {
 		return null;
