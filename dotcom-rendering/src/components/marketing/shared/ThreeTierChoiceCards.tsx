@@ -200,7 +200,10 @@ export const ThreeTierChoiceCards = ({
 		threshold: 0,
 	});
 
-	const supportTierChoiceCardStyles = (selected: boolean) => css`
+	const supportTierChoiceCardStyles = (
+		selected: boolean,
+		isEmpty: boolean,
+	) => css`
 		display: block;
 		position: relative;
 		border: none;
@@ -221,7 +224,7 @@ export const ThreeTierChoiceCards = ({
 			? (choiceCardDesignSettings?.buttonSelectTextColour ?? 'inherit')
 			: (choiceCardDesignSettings?.buttonTextColour ?? 'inherit')};
 		border-radius: 10px;
-		padding: ${selected
+		padding: ${selected && !isEmpty
 			? `8px ${space[5] + 2}px 12px ${space[5] + 2}px`
 			: `7px ${space[5] + 1}px`};
 		transition: ${choiceCardTransition};
@@ -387,12 +390,16 @@ export const ThreeTierChoiceCards = ({
 							const isExpanded =
 								selected ||
 								(!selectedChoiceCard && card.defaultExpanded);
+							const isEmpty =
+								benefits.length === 0 &&
+								(benefitsLabel == null || benefitsLabel === '');
 
 							return (
 								<div key={radioId} css={styles.card}>
 									<div
 										css={supportTierChoiceCardStyles(
 											selected,
+											isEmpty,
 										)}
 									>
 										<Radio
