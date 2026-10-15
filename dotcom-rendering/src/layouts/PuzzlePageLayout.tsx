@@ -21,7 +21,8 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { Logo } from '../components/Masthead/Titlepiece/Logo';
 import { PrintButton } from '../components/PrintButton.island';
 import { PuzzleIframe } from '../components/PuzzleIframe.island';
-import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
+import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
+import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
@@ -689,9 +690,16 @@ export const PuzzlePageLayout = ({
 								'--article-background',
 							)}
 						>
-							<RelatedPuzzlesRail
-								items={instance.moreFromPuzzlesAndGames ?? []}
-							/>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<RelatedPuzzlesRailEnhanced
+									items={
+										instance.moreFromPuzzlesAndGames ?? []
+									}
+								/>
+							</Island>
 						</Section>
 					</div>
 				)}
@@ -785,6 +793,17 @@ export const PuzzlePageLayout = ({
 							display={puzzlePageFormat.display}
 						/>
 					</Section>
+				)}
+
+				{isV1Enabled && instance.puzzlesSupporting && (
+					<div data-print-layout="hide">
+						<PuzzlesUsefulLinks
+							id="puzzle-page"
+							title="Useful links"
+							links={instance.puzzlesSupporting.usefulLinks}
+							newsletter={instance.puzzlesSupporting.newsletter}
+						/>
+					</div>
 				)}
 			</main>
 
