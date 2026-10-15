@@ -198,6 +198,7 @@ export const ThreeTierChoiceCards = ({
 
 	const supportTierChoiceCardStyles = (selected: boolean) => css`
 		display: block;
+		position: relative;
 		border: none;
 		box-shadow: ${selected
 			? `inset 0 0 0 2px ${
@@ -221,6 +222,16 @@ export const ThreeTierChoiceCards = ({
 			: `6px ${space[5]}px`};
 		transition: ${choiceCardTransition};
 		transition-property: color, background-color, box-shadow, padding;
+
+		> div {
+			position: static;
+		}
+
+		> div > label::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+		}
 	`;
 
 	const labelOverrideStyles = (isSelected: boolean) => css`
@@ -280,6 +291,7 @@ export const ThreeTierChoiceCards = ({
 			${textSansBold14};
 			color: ${buildTextColour()};
 			position: absolute;
+			pointer-events: none;
 			top: -${space[2]}px;
 			${until.phablet} {
 				right: ${space[3]}px;
@@ -374,12 +386,10 @@ export const ThreeTierChoiceCards = ({
 
 							return (
 								<div key={radioId} css={styles.card}>
-									{pill && <ChoiceCardPill pill={pill} />}
-									<label
+									<div
 										css={supportTierChoiceCardStyles(
 											selected,
 										)}
-										htmlFor={radioId}
 									>
 										<Radio
 											label={
@@ -453,7 +463,8 @@ export const ThreeTierChoiceCards = ({
 											}}
 											theme={customRadioTheme}
 										/>
-									</label>
+									</div>
+									{pill && <ChoiceCardPill pill={pill} />}
 								</div>
 							);
 						});
