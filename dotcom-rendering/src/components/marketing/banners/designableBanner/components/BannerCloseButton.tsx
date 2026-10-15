@@ -6,7 +6,7 @@ import {
 	SvgChevronUpSingle,
 	SvgCross,
 } from '@guardian/source/react-components';
-import type { BannerCloseButtonData } from '../BannerProps';
+import type { BannerData } from '../BannerProps';
 import { buttonStyles, buttonThemes } from '../styles/buttonStyles';
 
 const styles = {
@@ -98,7 +98,7 @@ const styles = {
 export const BannerCloseButton = ({
 	bannerData,
 }: {
-	bannerData: BannerCloseButtonData;
+	bannerData: BannerData;
 }): JSX.Element => {
 	if (bannerData.isCollapsible) {
 		return (

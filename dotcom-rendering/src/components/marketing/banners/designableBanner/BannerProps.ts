@@ -61,18 +61,3 @@ export interface BannerData {
 	// --- Selectors ---
 	selectors: BannerSelectors;
 }
-
-export type BannerVisualData = Pick<BannerData, 'isCollapsed'> & {
-	settings: Pick<BannerData['settings'], 'imageSettings' | 'bannerId'>;
-	selectors: Pick<BannerData['selectors'], 'showBodyVisual'>;
-};
-
-export type BannerLogoData = Pick<BannerData, 'design'>;
-
-export type BannerCloseButtonData = Pick<
-	BannerData,
-	'isCollapsible' | 'isCollapsed'
-> & {
-	settings: Pick<BannerData['settings'], 'closeButtonSettings'>;
-	actions: Pick<BannerData['actions'], 'onClose' | 'onToggleCollapse'>;
-};

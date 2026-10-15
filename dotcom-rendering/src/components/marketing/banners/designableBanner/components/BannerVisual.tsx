@@ -3,10 +3,10 @@ import { between, from, space } from '@guardian/source/foundations';
 import type { Image as SupportImage } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ImageAttrs } from '../../../shared/ResponsiveImage';
 import { ResponsiveImage } from '../../../shared/ResponsiveImage';
-import type { BannerVisualData } from '../BannerProps';
+import type { BannerData } from '../BannerProps';
 
 interface BannerVisualProps {
-	bannerData: BannerVisualData;
+	bannerData: BannerData;
 	settings?: SupportImage;
 	isHeaderImage?: boolean;
 }

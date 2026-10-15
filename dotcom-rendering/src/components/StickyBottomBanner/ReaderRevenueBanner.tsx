@@ -382,11 +382,11 @@ export const canShowRRBanner: CanShowFunctionType<
 };
 
 export const ReaderRevenueBanner = ({
-	name,
+	//name,
 	props,
 }: ModuleData<BannerProps>) => {
 	const [Banner, setBanner] = useState<React.ElementType | null>(null);
-
+	const name = 'NewsletterBanner';
 	useEffect(() => {
 		(name === 'SignInPromptBanner'
 			? /* webpackChunkName: "sign-in-prompt-banner" */

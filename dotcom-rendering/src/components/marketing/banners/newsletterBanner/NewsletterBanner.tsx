@@ -2,13 +2,18 @@ import { css } from '@emotion/react';
 import { from, neutral, space, until } from '@guardian/source/foundations';
 import { hexColourToString } from '@guardian/support-dotcom-components';
 import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { NewsletterSignupForm } from '../../../NewsletterSignupForm.island';
 import { validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
+import type { BannerData } from '../designableBanner/BannerProps';
+import { BannerBody } from '../designableBanner/components/BannerBody';
 import { BannerCloseButton } from '../designableBanner/components/BannerCloseButton';
+import { BannerContent } from '../designableBanner/components/BannerContent';
+import { BannerHeader } from '../designableBanner/components/BannerHeader';
 import { BannerLogo } from '../designableBanner/components/BannerLogo';
 import { BannerVisual } from '../designableBanner/components/BannerVisual';
+import { useDesignableBannerModel } from '../designableBanner/useDesignableBannerModel';
 
 const prototypeNewsletter = {
 	newsletterId: 'saturday-edition',
@@ -77,18 +82,6 @@ const styles = {
 			grid-template-columns: 219px 1px minmax(0, 460px) 400px auto;
 		}
 	`,
-	form: css`
-		grid-area: copy-container;
-		min-width: 0;
-		align-self: start;
-
-		${from.desktop} {
-			padding-right: ${space[5]}px;
-		}
-		${from.leftCol} {
-			padding-left: ${space[3]}px;
-		}
-	`,
 	verticalLine: css`
 		grid-area: vert-line;
 		background-color: ${neutral[0]};
@@ -105,45 +98,49 @@ const NewsletterBannerComponent = (
 	props: BannerRenderProps,
 ): JSX.Element | null => {
 	const bannerRef = useRef<HTMLDivElement>(null);
-	const [isOpen, setIsOpen] = useState(true);
+	const { isOpen, bannerData: baseBannerData } = useDesignableBannerModel({
+		...props,
+		isCollapsible: false,
+	});
 
 	useEffect(() => {
 		bannerRef.current?.focus();
 	}, []);
 
-	if (!isOpen || !props.design) {
+	if (!isOpen || !baseBannerData || !props.design) {
 		return null;
 	}
 
-	const { basic, closeButton } = props.design.colours;
-	const bannerData = {
-		design: props.design,
-		isCollapsed: false,
-		isCollapsible: false,
-		settings: {
-			imageSettings: prototypeNewsletterImage,
-			closeButtonSettings: {
-				default: {
-					backgroundColour: hexColourToString(
-						closeButton.default.background,
-					),
-					textColour: hexColourToString(closeButton.default.text),
-					border: `1px solid ${
-						closeButton.default.border
-							? hexColourToString(closeButton.default.border)
-							: '#DCDCDC'
-					}`,
-				},
-			},
+	const { basic } = props.design.colours;
+	const newsletterCopy = {
+		...props.content.mainContent,
+		heading: <span>Sign up to The Stakes 2026</span>,
+		paragraphs: [
+			<span key="subheading">
+				From the races and candidates to watch to the issues shaping
+				American politics, The Stakes 2026 brings you expert analysis of
+				what really matters in the US midterms.
+			</span>,
+		],
+		highlightedText: null,
+	};
+	const bannerData: BannerData = {
+		...baseBannerData,
+		content: {
+			mainContent: newsletterCopy,
+			mobileContent: newsletterCopy,
 		},
-		selectors: { showBodyVisual: true },
-		actions: {
-			onClose: () => {
-				props.onCloseClick();
-				setIsOpen(false);
-				document.body.focus();
-			},
-			onToggleCollapse: props.onCollapseClick,
+		settings: {
+			...baseBannerData.settings,
+			imageSettings: prototypeNewsletterImage,
+		},
+		selectors: {
+			...baseBannerData.selectors,
+			headingCopy: newsletterCopy,
+			copyForViewport: newsletterCopy,
+			showHeaderImage: false,
+			showBody: true,
+			showBodyVisual: true,
 		},
 	};
 
@@ -160,7 +157,9 @@ const NewsletterBannerComponent = (
 			<div css={styles.layout}>
 				<BannerLogo bannerData={bannerData} />
 				<div css={styles.verticalLine} />
-				<div css={styles.form}>
+				<BannerContent bannerData={bannerData}>
+					<BannerHeader bannerData={bannerData} />
+					<BannerBody bannerData={bannerData} />
 					<NewsletterSignupForm
 						{...prototypeNewsletter}
 						componentId="newsletter_banner"
@@ -169,7 +168,7 @@ const NewsletterBannerComponent = (
 							variant: props.tracking.abTestVariant,
 						}}
 					/>
-				</div>
+				</BannerContent>
 				<BannerVisual bannerData={bannerData} />
 				<BannerCloseButton bannerData={bannerData} />
 			</div>
