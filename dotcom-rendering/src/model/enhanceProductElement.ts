@@ -10,12 +10,19 @@ type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
 const enhanceProductBlockElement = (
 	element: ProductBlockElement,
 	elementsEnhancer: ElementsEnhancer,
+	livePricingEnabled: boolean,
 ): ProductBlockElement => ({
 	...element,
 	content: elementsEnhancer(element.content),
 	lowestPrice: getLowestPrice(element.productCtas),
 	primaryHeadingText: extractHeadingText(element.primaryHeadingHtml),
 	secondaryHeadingText: extractHeadingText(element.secondaryHeadingHtml),
+	productCtas: element.productCtas.map((cta) => {
+		return {
+			...cta,
+			latestPrice: livePricingEnabled ? cta.latestPrice : undefined,
+		};
+	}),
 });
 
 const parsePrice = (price: string): number | undefined => {
@@ -63,21 +70,29 @@ const getLowestPrice = (ctas: ProductCta[]): string | undefined => {
 };
 
 const enhance =
-	(elementsEnhancer: ElementsEnhancer) =>
+	(elementsEnhancer: ElementsEnhancer, livePricingEnabled: boolean) =>
 	(element: FEElement): FEElement[] => {
 		if (
 			element._type ===
 			'model.dotcomrendering.pageElements.ProductBlockElement'
 		) {
-			return [enhanceProductBlockElement(element, elementsEnhancer)];
+			return [
+				enhanceProductBlockElement(
+					element,
+					elementsEnhancer,
+					livePricingEnabled,
+				),
+			];
 		}
 		return [element];
 	};
 
 export const enhanceProductElement =
-	(elementsEnhancer: ElementsEnhancer) =>
+	(elementsEnhancer: ElementsEnhancer, livePricingEnabled?: boolean) =>
 	(elements: FEElement[]): FEElement[] =>
-		elements.flatMap(enhance(elementsEnhancer));
+		elements.flatMap(
+			enhance(elementsEnhancer, livePricingEnabled ?? false),
+		);
 
 export const extractHeadingText = (headingHtml: string): string => {
 	return removeTrailingColon(extractText(headingHtml));
