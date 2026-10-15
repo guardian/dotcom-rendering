@@ -283,14 +283,10 @@ export const StandardLayoutArticleGrid = ({
 							);
 					`,
 				!isLabs &&
+					layoutType !== 'interactive' &&
 					css`
 						${from.leftCol} {
-							${grid.centreRule(
-								isImmersive ? 4 : 3,
-								layoutType === 'interactive'
-									? { clip: false }
-									: {},
-							)}
+							${grid.centreRule(isImmersive ? 4 : 3)}
 						}
 					`,
 				isImmersivePortrait &&
@@ -886,6 +882,33 @@ export const StandardLayoutArticleGrid = ({
 					</Hide>
 				)}
 			</GridItem>
+			{layoutType === 'interactive' && (
+				<div
+					aria-hidden="true"
+					data-gu-name="centre-rule"
+					css={css`
+						display: none;
+						${from.leftCol} {
+							display: block;
+							grid-column: centre-column-start;
+							grid-row: 1 / 5;
+							position: relative;
+
+							&::before {
+								position: absolute;
+								top: 0;
+								bottom: 0;
+								left: -10px;
+								width: 1px;
+								background-color: ${themePalette(
+									'--article-border',
+								)};
+								content: '';
+							}
+						}
+					`}
+				/>
+			)}
 		</article>
 	);
 };
