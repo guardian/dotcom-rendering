@@ -365,7 +365,7 @@ const ABTests: ABTest[] = [
 	{
 		name: "commercial-next-best-action",
 		description: "Next Best Action Features",
-		owners: ["commercial.dev@guardian.co.uk"],
+		owners: ["commercial.dev@guardian.co.uk", "martech.dev@guardian.co.uk"],
 		expirationDate: "2027-01-06",
 		type: "client",
 		status: "ON",
