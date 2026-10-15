@@ -67,8 +67,15 @@ describe('ThreeTierChoiceCards', () => {
 
 		// Initially, the SupporterPlus card should be expanded (defaultExpanded: true)
 		// but no card should be selected
-		const supporterPlusCard = screen.getByText('Support £12/month');
+		const supporterPlusCard = screen.getByRole('radio', {
+			name: /Support £12\/month/,
+		});
 		expect(supporterPlusCard).toBeInTheDocument();
+		expect(supporterPlusCard).not.toBeChecked();
+		expect(
+			screen.getByText('Unlock All-access digital benefits:')
+				.parentElement?.parentElement?.parentElement,
+		).toHaveStyle({ gridTemplateRows: '1fr' });
 
 		// Check that benefits are shown for the default expanded card
 		expect(
@@ -103,8 +110,11 @@ describe('ThreeTierChoiceCards', () => {
 		).toBeInTheDocument();
 
 		// Click on the first card (Contribution)
-		const contributionCard = screen.getByText('Support £5/month');
+		const contributionCard = screen.getByRole('radio', {
+			name: /Support £5\/month/,
+		});
 		fireEvent.click(contributionCard);
+		expect(contributionCard).toBeChecked();
 
 		// Now the Contribution card should be selected and expanded
 		// The previously expanded SupporterPlus card should collapse
@@ -112,10 +122,11 @@ describe('ThreeTierChoiceCards', () => {
 			screen.getByText('Give to the Guardian every month with Support'),
 		).toBeInTheDocument();
 
-		// The SupporterPlus benefits should no longer be visible
+		// Benefits stay mounted so their container can animate closed.
 		expect(
-			screen.queryByText('Unlock All-access digital benefits:'),
-		).not.toBeInTheDocument();
+			screen.getByText('Unlock All-access digital benefits:')
+				.parentElement?.parentElement?.parentElement,
+		).toHaveStyle({ gridTemplateRows: '0fr' });
 	});
 
 	it('should only have one card selected at any time', () => {
@@ -137,7 +148,9 @@ describe('ThreeTierChoiceCards', () => {
 		render(<TestComponent />);
 
 		// Click on the first card
-		const contributionCard = screen.getByText('Support £5/month');
+		const contributionCard = screen.getByRole('radio', {
+			name: /Support £5\/month/,
+		});
 		fireEvent.click(contributionCard);
 
 		// Only one card should have the checked state
@@ -145,7 +158,9 @@ describe('ThreeTierChoiceCards', () => {
 		expect(checkedRadios).toHaveLength(1);
 
 		// Click on the third card
-		const oneOffCard = screen.getByText('Support with another amount');
+		const oneOffCard = screen.getByRole('radio', {
+			name: /Support with another amount/,
+		});
 		fireEvent.click(oneOffCard);
 
 		// Still only one card should be checked
@@ -212,9 +227,10 @@ describe('ThreeTierChoiceCards', () => {
 
 		// Every label[for] points at a real radio id, and the set of
 		// labels' targets is exactly the set of radio ids (no cross-card
-		// association). Note: each card has two labels (outer card label +
-		// inner Radio label), so labelFors may repeat a valid id.
+		// association). Each card has one native Radio label.
 		const labels = document.querySelectorAll('label[for]');
+		expect(labels).toHaveLength(radios.length);
+		expect(document.querySelector('label label')).toBeNull();
 		const labelFors = Array.from(labels).map((l) => l.getAttribute('for'));
 		for (const forAttr of labelFors) {
 			expect(ids).toContain(forAttr);
@@ -226,7 +242,7 @@ describe('ThreeTierChoiceCards', () => {
 		expect(radios[1]).not.toBeChecked();
 
 		// Clicking card 2 selects only card 2
-		fireEvent.click(screen.getByText('One-time 2'));
+		fireEvent.click(screen.getByRole('radio', { name: /One-time 2/ }));
 		expect(radios[1]).toBeChecked();
 		expect(radios[0]).not.toBeChecked();
 	});
@@ -288,7 +304,7 @@ describe('ThreeTierChoiceCards', () => {
 		expect(radios[0]).toBeChecked();
 		expect(radios[1]).not.toBeChecked();
 
-		fireEvent.click(screen.getByText('One-time 2'));
+		fireEvent.click(screen.getByRole('radio', { name: /One-time 2/ }));
 		expect(radios[1]).toBeChecked();
 		expect(radios[0]).not.toBeChecked();
 	});
