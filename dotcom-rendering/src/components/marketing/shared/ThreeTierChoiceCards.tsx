@@ -30,6 +30,44 @@ export type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
 
 const choiceCardTransition = transitions.short;
 
+const styles = {
+	radioGroup: css`
+		margin-top: ${space[6]}px;
+	`,
+	card: css`
+		position: relative;
+		background-color: inherit;
+	`,
+	label: css`
+		display: grid;
+
+		/* Stack children in the same grid cell. */
+		& > span {
+			grid-area: 1 / 1;
+			transition: opacity ${choiceCardTransition};
+		}
+	`,
+	boldLabel: css`
+		font-weight: bold;
+	`,
+	labelOpacity: (isVisible: boolean) => css`
+		/* Regular weight fades out when selected; bold weight fades in. */
+		opacity: ${isVisible ? 1 : 0};
+	`,
+	benefitsContainer: (isExpanded: boolean | undefined) => css`
+		display: grid;
+		grid-template-rows: ${isExpanded === true ? '1fr' : '0fr'};
+		transition: ${choiceCardTransition};
+		transition-property: grid-template-rows;
+	`,
+	benefitsContent: css`
+		overflow: hidden;
+		/* Widen the hidden bounding box to prevent clipping negative margins. */
+		padding: 0 8px;
+		margin: 0 -8px;
+	`,
+};
+
 const benefitsStyles = css`
 	${textSans15};
 	color: ${palette.neutral[7]};
@@ -284,11 +322,7 @@ export const ThreeTierChoiceCards = ({
 
 	return (
 		<div ref={setNode}>
-			<RadioGroup
-				cssOverrides={css`
-					margin-top: ${space[6]}px;
-				`}
-			>
+			<RadioGroup cssOverrides={styles.radioGroup}>
 				<Stack space={3}>
 					{(() => {
 						// Identify the selected card by position so duplicate
@@ -339,13 +373,7 @@ export const ThreeTierChoiceCards = ({
 								(!selectedChoiceCard && card.defaultExpanded);
 
 							return (
-								<div
-									key={radioId}
-									css={css`
-										position: relative;
-										background-color: inherit;
-									`}
-								>
+								<div key={radioId} css={styles.card}>
 									{pill && <ChoiceCardPill pill={pill} />}
 									<label
 										css={supportTierChoiceCardStyles(
@@ -355,38 +383,24 @@ export const ThreeTierChoiceCards = ({
 									>
 										<Radio
 											label={
-												<span
-													css={css`
-														display: grid;
-														/* Stack children in the same grid cell */
-														& > span {
-															grid-area: 1 / 1;
-															transition: opacity
-																${choiceCardTransition};
-														}
-													`}
-												>
-													{/* Regular weight (fades out when selected) */}
+												<span css={styles.label}>
 													<span
-														css={css`
-															opacity: ${selected
-																? 0
-																: 1};
-														`}
+														css={styles.labelOpacity(
+															!selected,
+														)}
 														dangerouslySetInnerHTML={{
 															__html: sanitise(
 																label,
 															),
 														}}
 													/>
-													{/* Bold weight (fades in when selected) */}
 													<span
-														css={css`
-															font-weight: bold;
-															opacity: ${selected
-																? 1
-																: 0};
-														`}
+														css={[
+															styles.boldLabel,
+															styles.labelOpacity(
+																selected,
+															),
+														]}
 														dangerouslySetInnerHTML={{
 															__html: sanitise(
 																label,
@@ -403,22 +417,14 @@ export const ThreeTierChoiceCards = ({
 											)}
 											supporting={
 												<div
-													css={css`
-														display: grid;
-														grid-template-rows: ${isExpanded
-															? '1fr'
-															: '0fr'};
-														transition: ${choiceCardTransition};
-														transition-property: grid-template-rows;
-													`}
+													css={styles.benefitsContainer(
+														isExpanded,
+													)}
 												>
 													<div
-														css={css`
-															overflow: hidden;
-															/* Widen the hidden bounding box to prevent clipping negative margins */
-															padding: 0 8px;
-															margin: 0 -8px;
-														`}
+														css={
+															styles.benefitsContent
+														}
 													>
 														<SupportingBenefits
 															benefitsLabel={
