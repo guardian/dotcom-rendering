@@ -391,8 +391,13 @@ export const ReaderRevenueBanner = ({
 		(name === 'SignInPromptBanner'
 			? /* webpackChunkName: "sign-in-prompt-banner" */
 				import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
-			: /* webpackChunkName: "designable-banner" */
-				import(`../marketing/banners/designableBanner/Banner`)
+			: name === 'NewsletterBanner'
+				? /* webpackChunkName: "newsletter-banner" */
+					import(
+						`../marketing/banners/newsletterBanner/NewsletterBanner`
+					)
+				: /* webpackChunkName: "designable-banner" */
+					import(`../marketing/banners/designableBanner/Banner`)
 		)
 			.then((bannerModule: Record<string, React.ElementType>) => {
 				setBanner(() => bannerModule[name] ?? null);

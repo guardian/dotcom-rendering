@@ -17,7 +17,10 @@ import type {
 import type { ChoiceCardsSettings } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
 
-export type BannerId = 'designable-banner' | 'sign-in-prompt-banner';
+export type BannerId =
+	| 'designable-banner'
+	| 'sign-in-prompt-banner'
+	| 'newsletter-banner';
 
 export interface BannerEnrichedCta {
 	ctaUrl: string;
