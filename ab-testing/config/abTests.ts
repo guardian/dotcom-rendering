@@ -337,19 +337,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "webx-display-custom-subnavs",
-		description:
-			"Show the custom subnav in place of the standard subnav, opt-in only",
-		owners: ["dotcom.platform@guardian.co.uk"],
-		expirationDate: "2026-11-30",
-		type: "server",
-		status: "ON",
-		audienceSize: 0,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-spacefinder-highvalue-sections-aus-nz",
 		description:
 			"Test the impact on ad density of regionalising Spacefinder for high value sections in Australia and New Zealand",
