@@ -63,7 +63,7 @@ const roleCss = {
 		}
 		${from.tablet} {
 			margin-left: -20px;
-			margin-right: -100px;
+			margin-right: -20px;
 		}
 		${from.desktop} {
 			margin-left: -20px;
