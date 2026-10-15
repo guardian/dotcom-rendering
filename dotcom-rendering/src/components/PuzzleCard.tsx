@@ -299,10 +299,23 @@ export const rowsStyles = css`
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
-	gap: 16px;
+	/*
+	 * Below tablet, the separator between groups of cards sits 16px below the
+	 * cards above and 8px above the cards below, so the gap is 24px.
+	 */
+	gap: 24px;
+	> ul ~ ul::before {
+		position: absolute;
+		top: -8px;
+		right: 0;
+		left: 0;
+		border-top: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
+		content: '';
+		pointer-events: none;
+	}
 	${from.phablet} {
 		--puzzles-gap: 24px;
-		gap: 24px;
 	}
 
 	${from.tablet} {
@@ -316,20 +329,21 @@ export const rowsStyles = css`
 		> ul ~ ul {
 			margin-top: 6px;
 		}
-	}
-	> ul ~ ul::before {
-		position: absolute;
-		top: calc(var(--puzzles-gap) / -2);
-		right: 0;
-		left: 0;
-		border-top: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
-		content: '';
-		pointer-events: none;
+		> ul ~ ul::before {
+			top: calc(var(--puzzles-gap) / -2);
+		}
 	}
 `;
 
-const cardGridStyles = (columns: number, tracks = columns) => css`
+/**
+ * `separatorBelow` is the distance from a horizontal separator to the card
+ * below it. By default the separator sits in the middle of the gap.
+ */
+const cardGridStyles = (
+	columns: number,
+	tracks = columns,
+	separatorBelow?: number,
+) => css`
 	grid-template-columns: repeat(${tracks}, minmax(0, 1fr));
 	> li {
 		grid-column: auto;
@@ -342,7 +356,9 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 	}
 	> li:nth-child(n + ${columns + 1})::before {
 		position: absolute;
-		top: calc(var(--puzzles-gap) / -2);
+		top: ${separatorBelow === undefined
+			? 'calc(var(--puzzles-gap) / -2)'
+			: `-${separatorBelow}px`};
 		right: 0;
 		left: 0;
 		border-top: 1px solid
@@ -400,14 +416,22 @@ export const rowStyles = (
 		variant === 'compact' ? Math.min(count, 3) : Math.min(count, 2);
 	const desktopColumns =
 		variant === 'compact' ? Math.min(count, 5) : Math.min(count, 2);
+	const mobileRowGap = variant === 'compact' ? 14 : 24;
+	const mobileSeparatorBelow = variant === 'compact' ? 6 : 8;
 
 	return css`
 		position: relative;
 		display: grid;
-		${cardGridStyles(mobileColumns)};
-		gap: 16px;
+		/*
+		 * Below tablet the separator between rows of cards sits 16px below the
+		 * cards above and 8px above the cards below (standard cards), or 8px
+		 * below and 6px above (compact cards).
+		 */
+		${cardGridStyles(mobileColumns, mobileColumns, mobileSeparatorBelow)};
+		column-gap: 16px;
+		row-gap: ${mobileRowGap}px;
 		${from.phablet} {
-			gap: 24px;
+			column-gap: 24px;
 		}
 		margin: 0;
 		padding: 0;

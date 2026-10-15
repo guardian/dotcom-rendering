@@ -21,7 +21,7 @@ type Props = {
 	renderAds: boolean;
 };
 
-const sectionStyles = (isFeatured: boolean) => css`
+const sectionStyles = css`
 	--puzzles-content-top: 8px;
 	--puzzles-content-bottom: 32px;
 	position: relative;
@@ -40,7 +40,6 @@ const sectionStyles = (isFeatured: boolean) => css`
 	}
 
 	${from.leftCol} {
-		--puzzles-content-top: ${isFeatured ? 16 : 8}px;
 		grid-template-columns: 170px minmax(0, 1fr);
 	}
 
@@ -146,10 +145,10 @@ const nestedGridStyles = css`
 	--puzzles-gap: 16px;
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 16px;
+	/* The separator sits 16px below the container above and 8px above the one below. */
+	gap: 24px;
 	${from.phablet} {
 		--puzzles-gap: 24px;
-		gap: 24px;
 	}
 
 	${from.tablet} {
@@ -169,7 +168,7 @@ const nestedStyles = (span: number) => css`
 	min-width: 0;
 	& ~ &::before {
 		position: absolute;
-		top: calc(var(--puzzles-gap) / -2);
+		top: -8px;
 		right: 0;
 		left: 0;
 		border-top: 1px solid
@@ -180,6 +179,7 @@ const nestedStyles = (span: number) => css`
 	${from.tablet} {
 		grid-column: span ${Math.max(1, Math.min(12, span))};
 		& ~ &::before {
+			top: calc(var(--puzzles-gap) / -2);
 			${span < 12
 				? css`
 						top: 0;
@@ -229,7 +229,7 @@ const DirectorySection = ({ container }: { container: PuzzleContainer }) => {
 	return (
 		<section
 			aria-labelledby={`${container.id}-title`}
-			css={sectionStyles(container.variant === 'featured')}
+			css={sectionStyles}
 			id={container.id}
 		>
 			<div css={headingColumnStyles}>
