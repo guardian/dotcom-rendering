@@ -349,6 +349,16 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "commercial-next-best-action",
+		description: "Next Best Action Features",
+		owners: ["commercial.dev@guardian.co.uk", "martech.dev@guardian.co.uk"],
+		expirationDate: "2027-01-06",
+		type: "client",
+		status: "ON",
+		audienceSize: 0,
+		groups: ["enable"],
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
