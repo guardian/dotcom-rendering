@@ -12,7 +12,6 @@ import {
 	headlineMedium28,
 	headlineMedium34,
 	headlineMedium50,
-	palette as sourcePalette,
 	space,
 	textSansBold28,
 	textSansBold34,
