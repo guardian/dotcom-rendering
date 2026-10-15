@@ -3,6 +3,8 @@ name: DCR Chromatic 👓
 on:
   merge_group:
     types: [checks_requested]
+  push:
+    branches: [main]
   pull_request:
     types: [opened, labeled, synchronize]
 
@@ -31,14 +33,14 @@ jobs:
 
       - name: Checkout - On Push Event
         uses: actions/checkout@v7
-        if: ${{ github.event_name == 'merge_group' }}
+        if: ${{ github.event_name == 'push' || github.event_name == 'merge_group' }}
         with:
           fetch-depth: 0
 
       - name: Set up Node environment
         # Only needed for a full Chromatic run.
         if: |
-          github.event_name == 'merge_group' ||
+          github.event_name == 'push' || github.event_name == 'merge_group' ||
           (github.event_name == 'pull_request' &&
             contains(github.event.pull_request.labels.*.name, 'run_chromatic'))
         uses: ./.github/actions/setup-node-env
@@ -51,7 +53,7 @@ jobs:
           NODE_OPTIONS: '--max_old_space_size=4096'
         uses: chromaui/action@v18.11.0
         if: |
-          github.event_name == 'merge_group' ||
+          (github.event_name == 'push' || github.event_name == 'merge_group') ||
           (github.event_name == 'pull_request' &&
             contains(github.event.pull_request.labels.*.name, 'run_chromatic')) ||
           (github.event_name == 'pull_request' && needs.check-paths.outputs.relevant != 'true')

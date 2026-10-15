@@ -88,6 +88,32 @@ describe('validateAsPuzzlePageType', () => {
 		expectInvalid(page);
 	});
 
+	it('accepts a newsletter-only puzzlesSupporting', () => {
+		const page = clone(createPuzzlePage('sudoku-easy'));
+		page.instance.puzzlesSupporting = {
+			usefulLinks: [],
+			newsletter: {
+				identityName: 'cluesletter',
+				name: 'Cluesletter',
+				frequency: 'Weekly',
+				description: 'News and clues',
+			},
+		};
+		expect(
+			validateAsPuzzlePageType(page).instance.puzzlesSupporting
+				?.newsletter?.identityName,
+		).toBe('cluesletter');
+	});
+
+	it('rejects an incomplete newsletter in puzzlesSupporting', () => {
+		const page = clone(createPuzzlePage('sudoku-easy'));
+		page.instance.puzzlesSupporting = {
+			usefulLinks: [],
+			newsletter: { identityName: 'cluesletter' },
+		} as unknown as typeof page.instance.puzzlesSupporting;
+		expectInvalid(page);
+	});
+
 	it('accepts a payload with puzzleDate present', () => {
 		const page = createPuzzlePage('sudoku-easy', {
 			instance: {

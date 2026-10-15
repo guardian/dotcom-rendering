@@ -58,6 +58,9 @@ const indices = [
 	// Edition selector in nav - needs to be below stickyAdWrapper
 	'editionDropdown',
 
+	// Used liveblogs, needs to appear over other content
+	'stickyYoutubePlayer',
+
 	// Interscroller ads need their own stacking context to force the background image below the ad to stop it capturing mouse events
 	'interscrollerAd',
 
@@ -105,9 +108,6 @@ const indices = [
 	'video-controls-container',
 	'video-card-link',
 	'video-container',
-
-	// Main media
-	'mainMedia',
 
 	// The carousel buttons of the highlights container that sits above the header.
 	// Needs to be above 'card-link'.
