@@ -330,7 +330,7 @@ const calendarStyles = css`
 		min-width: 0;
 		padding: var(--calendar-day-padding-block)
 			var(--calendar-day-padding-inline);
-		border: 1px solid var(--puzzles-border-colour, ${palette.neutral[93]});
+		border: 1px solid transparent;
 		background: var(--puzzles-card-background, ${palette.neutral[97]});
 		color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
 		text-decoration: none;
@@ -350,15 +350,14 @@ const calendarStyles = css`
 		width: 5px;
 		height: 5px;
 		border-radius: 50%;
-		background: ${palette.brand[500]};
+		background: ${palette.notificationBlue[400]};
 		content: '';
 	}
 	.day[data-status='completed'] {
-		border: 1px solid ${palette.success[400]};
 		background: color-mix(
 			in srgb,
-			${palette.success[500]} 35%,
-			var(--puzzles-page-background, ${palette.neutral[100]})
+			${palette.success[500]} 9%,
+			${palette.neutral[100]}
 		);
 	}
 	.setter-name {
@@ -388,8 +387,8 @@ const calendarStyles = css`
 		}
 	}
 	.day[data-status='unavailable'] {
-		border-color: transparent;
-		background: transparent;
+		border-color: ${palette.neutral[97]};
+		background: var(--puzzles-page-background, ${palette.neutral[100]});
 		color: ${palette.neutral[60]};
 	}
 	${from.phablet} {
@@ -458,7 +457,7 @@ const legendStyles = css`
 		justify-content: center;
 		border-radius: 50%;
 		content: '';
-		background: ${palette.brand[500]};
+		background: ${palette.notificationBlue[400]};
 	}
 	.completed svg {
 		display: block;
