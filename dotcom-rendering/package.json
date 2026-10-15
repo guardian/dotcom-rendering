@@ -105,7 +105,7 @@
 		"constructs": "catalog:",
 		"cpy": "11.0.0",
 		"css-loader": "7.1.5",
-		"dompurify": "3.4.13",
+		"dompurify": "3.4.16",
 		"dynamic-import-polyfill": "0.1.1",
 		"eslint": "catalog:",
 		"eslint-import-resolver-typescript": "4.4.5",
